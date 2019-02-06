@@ -13,7 +13,7 @@ endif()
 
 if ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "GNU" )
 
-  set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -O3 -fno-aggressive-loop-optimizations " )
+  set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -O3 -fno-aggressive-loop-optimizations -ffixed-form -ffixed-line-length-80" )
   set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -g" )
 
 elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Intel" )
@@ -33,13 +33,13 @@ elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "PGI" )
 
 endif ()
 
-file(GLOB srcs src/*.f fnlib/*.f pchip/*.f fishfft/*.f lin/*.f err/*.f )
+file(GLOB srcs src/*.f90 fnlib/*.f90 pchip/*.f90 fishfft/*.f90 lin/*.f90 err/*.f90 )
 
 add_library(slatec SHARED ${srcs})
 
 add_subdirectory(chk)
 
-add_executable(spfuntest spfun.f spfunchk.f)
+add_executable(spfuntest spfun.f90 spfunchk.f90)
 target_link_libraries(spfuntest slatec)
 if (UNIX)
   add_test(NAME spfuntest COMMAND sh -c "./spfuntest <${CMAKE_SOURCE_DIR}/chk/kprint.txt" WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
@@ -48,8 +48,8 @@ elseif (WIN32)
 endif ()
 set_tests_properties(spfuntest PROPERTIES FAIL_REGULAR_EXPRESSION "[^a-z]Error;ERROR;Failed;FAILED")
 
-add_executable(slprep slprep.f subsid.f)
+add_executable(slprep slprep.f90 subsid.f90)
 target_link_libraries(slprep slatec)
 
-add_executable(sladoc sladoc.f subsid.f)
+add_executable(sladoc sladoc.f90 subsid.f90)
 target_link_libraries(sladoc slatec)
