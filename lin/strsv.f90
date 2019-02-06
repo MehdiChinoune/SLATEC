@@ -108,7 +108,7 @@
 !***END PROLOGUE  STRSV
 !     .. Scalar Arguments ..
       INTEGER Incx , Lda , N
-      CHARACTER*1 Diag , Trans , Uplo
+      CHARACTER :: Diag , Trans , Uplo
 !     .. Array Arguments ..
       REAL A(Lda,*) , X(*)
 !     .. Parameters ..

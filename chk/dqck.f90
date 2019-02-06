@@ -42,13 +42,13 @@
 !           including removing an illegal character from column 1, and
 !           editorial changes.  (RWC)
 !***END PROLOGUE  DQCK
-      DOUBLE PRECISION a(4,4) , at(5,4) , abe(5,7) , abet(5,7) , b(4) , bt(4) , 
+      DOUBLE PRECISION a(4,4) , at(5,4) , abe(5,7) , abet(5,7) , b(4) , bt(4) ,
      &                 c(4) , work(35) , sign , D1MACH
       REAL r , delx , delmax
-      CHARACTER*4 list(2)
-      INTEGER lda , n , ml , mu , ind , iwork(4) , Nerr , i , j , j1 , j2 , jd , 
+      CHARACTER(4) :: list(2)
+      INTEGER lda , n , ml , mu , ind , iwork(4) , Nerr , i , j , j1 , j2 , jd ,
      &        mlp , k , kcase , kprog
-      DATA a/5.0D0 , 4.0D0 , 1.0D0 , 1.0D0 , 4.0D0 , 5.0D0 , 1.0D0 , 1.0D0 , 
+      DATA a/5.0D0 , 4.0D0 , 1.0D0 , 1.0D0 , 4.0D0 , 5.0D0 , 1.0D0 , 1.0D0 ,
      &     1.0D0 , 1.0D0 , 4.0D0 , 2.0D0 , 1.0D0 , 1.0D0 , 2.0D0 , 4.0D0/
       DATA list/'POFS' , 'NBFS'/
 !***FIRST EXECUTABLE STATEMENT  DQCK

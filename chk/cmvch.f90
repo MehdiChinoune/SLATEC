@@ -31,7 +31,7 @@
       REAL Eps , Err
       INTEGER Incx , Incy , Kprint , M , N , Nmax , Nout
       LOGICAL Mv , Ftl
-      CHARACTER*1 Trans
+      CHARACTER :: Trans
 !     .. Array Arguments ..
       COMPLEX A(Nmax,*) , X(*) , Y(*) , Yt(*) , Yy(*)
       REAL G(*)

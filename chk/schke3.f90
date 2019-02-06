@@ -28,7 +28,7 @@
 !     .. Scalar Arguments ..
       LOGICAL Fatal
       INTEGER Isnum , Kprint , Nout
-      CHARACTER*6 Srnamt
+      CHARACTER(6) :: Srnamt
 !     .. Scalars in Common ..
       INTEGER infot
 !     .. Local Scalars ..

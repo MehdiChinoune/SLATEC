@@ -268,10 +268,10 @@
 !           comments to agree with WNNLS.  (RWC)
 !   920501  Reformatted the REFERENCES section.  (WRB)
 !***END PROLOGUE  DWNNLS
-      INTEGER Iwork(*) , L , l1 , l2 , l3 , l4 , l5 , liw , lw , Ma , Mdw , Me , 
+      INTEGER Iwork(*) , L , l1 , l2 , l3 , l4 , l5 , liw , lw , Ma , Mdw , Me ,
      &        Mode , N
       DOUBLE PRECISION Prgopt(*) , Rnorm , W(Mdw,*) , Work(*) , X(*)
-      CHARACTER*8 xern1
+      CHARACTER(8) :: xern1
 !***FIRST EXECUTABLE STATEMENT  DWNNLS
       Mode = 0
       IF ( Ma+Me<=0.OR.N<=0 ) RETURN

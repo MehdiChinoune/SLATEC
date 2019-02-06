@@ -5,7 +5,7 @@
 !*--SOS5
 !*** Start of declarations inserted by SPAG
       REAL Atolx , FNC , Rtolx , Rw , Tolf , X
-      INTEGER Iflag , inpflg , iprint , Iw , k1 , k2 , k3 , k4 , k5 , k6 , Liw , 
+      INTEGER Iflag , inpflg , iprint , Iw , k1 , k2 , k3 , k4 , k5 , k6 , Liw ,
      &        Lrw , mxit , nc , ncjs , Neq , nsri , nsrrc
 !*** End of declarations inserted by SPAG
 !***BEGIN PROLOGUE  SOS
@@ -188,8 +188,8 @@
 !   920501  Reformatted the REFERENCES section.  (WRB)
 !***END PROLOGUE  SOS
       DIMENSION X(*) , Rw(*) , Iw(*)
-      CHARACTER*8 xern1
-      CHARACTER*16 xern3 , xern4
+      CHARACTER(8) :: xern1
+      CHARACTER(16) :: xern3 , xern4
       EXTERNAL FNC
 !***FIRST EXECUTABLE STATEMENT  SOS
       inpflg = Iflag

@@ -27,7 +27,7 @@
 !     .. Scalar Arguments ..
       LOGICAL Fatal
       INTEGER Isnum , Kprint , Nout
-      CHARACTER*6 Srnamt
+      CHARACTER(6) :: Srnamt
 !     .. Scalars in Common ..
       INTEGER infot
 !     .. Local Scalars ..
@@ -37,7 +37,7 @@
 !     .. Local Arrays ..
       COMPLEX a(2,1) , b(2,1) , c(2,1)
 !     .. External Subroutines ..
-      EXTERNAL CGEMM , CHEMM , CHER2K , CHERK , CHKXER , CSYMM , CSYR2K , 
+      EXTERNAL CGEMM , CHEMM , CHER2K , CHERK , CHKXER , CSYMM , CSYR2K ,
      &         CSYRK , CTRMM , CTRSM
 !***FIRST EXECUTABLE STATEMENT  CCHKE3
       CALL XGETF(kontrl)

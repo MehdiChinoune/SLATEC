@@ -271,7 +271,7 @@
 !***END PROLOGUE  WNNLS
       REAL Prgopt(*) , Rnorm , W(Mdw,*) , Work(*) , X(*)
       INTEGER Iwork(*)
-      CHARACTER*8 xern1
+      CHARACTER(8) :: xern1
 !
 !
 !***FIRST EXECUTABLE STATEMENT  WNNLS

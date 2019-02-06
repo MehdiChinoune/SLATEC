@@ -52,7 +52,7 @@
 !   900510  Change call to XERRWV to XERMSG.  (RWC)
 !   920501  Reformatted the REFERENCES section.  (WRB)
 !***END PROLOGUE  XSETF
-      CHARACTER*8 xern1
+      CHARACTER(8) :: xern1
 !***FIRST EXECUTABLE STATEMENT  XSETF
       IF ( ABS(Kontrl)>2 ) THEN
         WRITE (xern1,'(I8)') Kontrl

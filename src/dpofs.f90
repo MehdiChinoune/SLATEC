@@ -107,7 +107,7 @@
       INTEGER Lda , N , Itask , Ind , info
       DOUBLE PRECISION A(Lda,*) , V(*) , Work(*) , D1MACH
       DOUBLE PRECISION rcond
-      CHARACTER*8 xern1 , xern2
+      CHARACTER(8) :: xern1 , xern2
 !***FIRST EXECUTABLE STATEMENT  DPOFS
       IF ( Lda<N ) THEN
         Ind = -1

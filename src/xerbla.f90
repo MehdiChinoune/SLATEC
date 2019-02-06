@@ -41,8 +41,8 @@
 !
 !     ..    Scalar Arguments ..
       INTEGER Info
-      CHARACTER*6 Srname
-      CHARACTER*2 xern1
+      CHARACTER(6) :: Srname
+      CHARACTER(2) :: xern1
 !
 !***FIRST EXECUTABLE STATEMENT  XERBLA
 !

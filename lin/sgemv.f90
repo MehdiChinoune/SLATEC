@@ -106,7 +106,7 @@
 !     .. Scalar Arguments ..
       REAL Alpha , Beta
       INTEGER Incx , Incy , Lda , M , N
-      CHARACTER*1 Trans
+      CHARACTER :: Trans
 !     .. Array Arguments ..
       REAL A(Lda,*) , X(*) , Y(*)
 !     .. Parameters ..

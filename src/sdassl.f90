@@ -942,19 +942,19 @@
 !
 !     Declare local variables.
 !
-      INTEGER i , itemp , LALPHA , LBETA , LCJ , LCJOLD , LCTF , LDELTA , 
-     &        leniw , lenpd , lenrw , le , LETF , LGAMMA , LH , LHMAX , LHOLD , 
-     &        LIPVT , LJCALC , LK , LKOLD , LIWM , LML , LMTYPE , LMU , LMXORD , 
-     &        LNJE , LNPD , LNRE , LNS , LNST , LNSTL , lpd , LPHASE , lphi , 
-     &        LPSI , LROUND , LS , LSIGMA , LTN , LTSTOP , lwm , lwt , mband , 
+      INTEGER i , itemp , LALPHA , LBETA , LCJ , LCJOLD , LCTF , LDELTA ,
+     &        leniw , lenpd , lenrw , le , LETF , LGAMMA , LH , LHMAX , LHOLD ,
+     &        LIPVT , LJCALC , LK , LKOLD , LIWM , LML , LMTYPE , LMU , LMXORD ,
+     &        LNJE , LNPD , LNRE , LNS , LNST , LNSTL , lpd , LPHASE , lphi ,
+     &        LPSI , LROUND , LS , LSIGMA , LTN , LTSTOP , lwm , lwt , mband ,
      &        msave , mxord , NPD , ntemp , nzflg
-      REAL atoli , h , hmax , hmin , ho , r , rh , rtoli , tdist , tn , tnext , 
+      REAL atoli , h , hmax , hmin , ho , r , rh , rtoli , tdist , tn , tnext ,
      &     tstop , uround , ypnorm
       LOGICAL done
 !       Auxiliary variables for conversion of values to be included in
 !       error messages.
-      CHARACTER*8 xern1 , xern2
-      CHARACTER*16 xern3 , xern4
+      CHARACTER(8) :: xern1 , xern2
+      CHARACTER(16) :: xern3 , xern4
 !
 !     SET POINTERS INTO IWORK
       PARAMETER (LML=1,LMU=2,LMXORD=3,LMTYPE=4,LNST=11,LNRE=12,LNJE=13,LETF=14,

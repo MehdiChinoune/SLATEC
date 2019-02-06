@@ -34,7 +34,7 @@
       REAL Eps , Err
       INTEGER Kk , Kprint , Lda , Ldb , Ldc , Ldcc , M , N , Nout
       LOGICAL Mv
-      CHARACTER*1 Transa , Transb
+      CHARACTER :: Transa , Transb
 !     .. Array Arguments ..
       COMPLEX A(Lda,*) , B(Ldb,*) , C(Ldc,*) , Cc(Ldcc,*) , Ct(*)
       REAL G(*)

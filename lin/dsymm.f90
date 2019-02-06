@@ -136,7 +136,7 @@
 !           lines were modified.  (BKS)
 !***END PROLOGUE  DSYMM
 !     .. Scalar Arguments ..
-      CHARACTER*1 Side , Uplo
+      CHARACTER :: Side , Uplo
       INTEGER M , N , Lda , Ldb , Ldc
       DOUBLE PRECISION Alpha , Beta
 !     .. Array Arguments ..

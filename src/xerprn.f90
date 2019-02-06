@@ -82,9 +82,9 @@
 !***END PROLOGUE  XERPRN
       CHARACTER*(*) Prefix , Messg
       INTEGER Npref , Nwrap
-      CHARACTER*148 cbuff
+      CHARACTER(148) :: cbuff
       INTEGER iu(5) , nunit
-      CHARACTER*2 NEWLIN
+      CHARACTER(2) :: NEWLIN
       PARAMETER (NEWLIN='$$')
 !***FIRST EXECUTABLE STATEMENT  XERPRN
       CALL XGETUA(iu,nunit)

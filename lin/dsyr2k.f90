@@ -138,7 +138,7 @@
 !           lines were modified.  (BKS)
 !***END PROLOGUE  DSYR2K
 !     .. Scalar Arguments ..
-      CHARACTER*1 Uplo , Trans
+      CHARACTER :: Uplo , Trans
       INTEGER N , K , Lda , Ldb , Ldc
       DOUBLE PRECISION Alpha , Beta
 !     .. Array Arguments ..

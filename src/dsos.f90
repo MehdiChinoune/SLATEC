@@ -183,11 +183,11 @@
 !           comments to agree with SOS.  (RWC)
 !   920501  Reformatted the REFERENCES section.  (WRB)
 !***END PROLOGUE  DSOS
-      INTEGER Iflag , inpflg , iprint , Iw(*) , k1 , k2 , k3 , k4 , k5 , k6 , 
+      INTEGER Iflag , inpflg , iprint , Iw(*) , k1 , k2 , k3 , k4 , k5 , k6 ,
      &        Liw , Lrw , mxit , nc , ncjs , Neq , nsri , nsrrc
       DOUBLE PRECISION Atolx , FNC , Rtolx , Rw(*) , Tolf , X(*)
-      CHARACTER*8 xern1
-      CHARACTER*16 xern3 , xern4
+      CHARACTER(8) :: xern1
+      CHARACTER(16) :: xern3 , xern4
       EXTERNAL FNC
 !***FIRST EXECUTABLE STATEMENT  DSOS
       inpflg = Iflag

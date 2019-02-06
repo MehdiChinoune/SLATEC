@@ -26,7 +26,7 @@
 !     .. Scalar Arguments ..
       INTEGER Isnum , Nout
       LOGICAL Fatal
-      CHARACTER*6 Srnamt
+      CHARACTER(6) :: Srnamt
       INTEGER infot , Kprint
 !     .. Local Scalars ..
       DOUBLE PRECISION alpha , beta
@@ -34,8 +34,8 @@
 !     .. Local Arrays ..
       DOUBLE PRECISION a(1,1) , x(1) , y(1)
 !     .. External Subroutines ..
-      EXTERNAL CHKXER , DGBMV , DGEMV , DGER , DSBMV , DSPMV , DSPR , DSPR2 , 
-     &         DSYMV , DSYR , DSYR2 , DTBMV , DTBSV , DTPMV , DTPSV , DTRMV , 
+      EXTERNAL CHKXER , DGBMV , DGEMV , DGER , DSBMV , DSPMV , DSPR , DSPR2 ,
+     &         DSYMV , DSYR , DSYR2 , DTBMV , DTBSV , DTPMV , DTPSV , DTRMV ,
      &         DTRSV
 !***FIRST EXECUTABLE STATEMENT  DCHKE2
       CALL XGETF(kontrl)

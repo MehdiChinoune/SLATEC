@@ -31,18 +31,18 @@
       LOGICAL Fatal
       REAL Eps , Thresh
       INTEGER Incmax , Kprint , Nalf , Nidim , Ninc , Nmax , Nout
-      CHARACTER*6 Sname
+      CHARACTER(6) :: Sname
 !     .. Array Arguments ..
       COMPLEX A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) , X(Nmax)
-     &        , Xs(Nmax*Incmax) , Xx(Nmax*Incmax) , Y(Nmax) , Ys(Nmax*Incmax) , 
+     &        , Xs(Nmax*Incmax) , Xx(Nmax*Incmax) , Y(Nmax) , Ys(Nmax*Incmax) ,
      &        Yt(Nmax) , Yy(Nmax*Incmax) , Z(Nmax)
       REAL G(Nmax)
       INTEGER Idim(Nidim) , Inc(Ninc)
 !     .. Local Scalars ..
       COMPLEX alpha , als , transl
       REAL err , errmax
-      INTEGER i , ia , im , in , incx , incxs , incy , incys , ix , iy , j , 
-     &        laa , lda , ldas , lx , ly , m , ms , n , nargs , nc , nd , nerr , 
+      INTEGER i , ia , im , in , incx , incxs , incy , incys , ix , iy , j ,
+     &        laa , lda , ldas , lx , ly , m , ms , n , nargs , nc , nd , nerr ,
      &        ns
       LOGICAL conj , ftl , null , reset
 !     .. Local Arrays ..
@@ -208,7 +208,7 @@
                     IF ( Kprint>=3 ) THEN
                       WRITE (Nout,FMT=99005) j
                       WRITE (Nout,FMT=99004) Sname
-                      WRITE (Nout,FMT=99006) nc , Sname , m , n , alpha , incx , 
+                      WRITE (Nout,FMT=99006) nc , Sname , m , n , alpha , incx ,
      &                       incy , lda
                     ENDIF
                   ENDIF

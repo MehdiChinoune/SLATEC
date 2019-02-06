@@ -106,7 +106,7 @@
 !     .. Scalar Arguments ..
       COMPLEX Alpha , Beta
       INTEGER Incx , Incy , Lda , N
-      CHARACTER*1 Uplo
+      CHARACTER :: Uplo
 !     .. Array Arguments ..
       COMPLEX A(Lda,*) , X(*) , Y(*)
 !     .. Parameters ..

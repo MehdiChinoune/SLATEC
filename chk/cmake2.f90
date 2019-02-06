@@ -38,8 +38,8 @@
       COMPLEX Transl
       INTEGER Kl , Ku , Lda , M , N , Nmax
       LOGICAL Reset
-      CHARACTER*1 Diag , Uplo
-      CHARACTER*2 Type
+      CHARACTER :: Diag , Uplo
+      CHARACTER(2) :: Type
 !     .. Array Arguments ..
       COMPLEX A(Nmax,*) , Aa(*)
 !     .. Local Scalars ..

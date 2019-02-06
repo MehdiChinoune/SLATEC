@@ -5,13 +5,13 @@
       IMPLICIT NONE
 !*--DEBDF6
 !*** Start of declarations inserted by SPAG
-      REAL Atol , EL0 , F , H , HMIn , HMXi , HU , ROWns , Rpar , Rtol , Rwork , 
+      REAL Atol , EL0 , F , H , HMIn , HMXi , HU , ROWns , Rpar , Rtol , Rwork ,
      &     T , TN , TOLd , Tout , UROund , Y
-      INTEGER IACor , IBAnd , IBEgin , icomi , icomr , idelsn , Idid , IER , 
-     &        IEWt , iinout , IINteg , IJAc , ilrw , Info , INIt , IOWns , 
+      INTEGER IACor , IBAnd , IBEgin , icomi , icomr , idelsn , Idid , IER ,
+     &        IEWt , iinout , IINteg , IJAc , ilrw , Info , INIt , IOWns ,
      &        Ipar , IQUit , ISAvf , ITOl
-      INTEGER itstar , ITStop , IWM , Iwork , IYH , iypout , JAC , JSTart , 
-     &        KFLag , KSTeps , L , Liw , Lrw , MAXord , METh , MITer , ml , mu , 
+      INTEGER itstar , ITStop , IWM , Iwork , IYH , iypout , JAC , JSTart ,
+     &        KFLag , KSTeps , L , Liw , Lrw , MAXord , METh , MITer , ml , mu ,
      &        N , Neq
       INTEGER NFE , NJE , NQ , NQU , NST
 !*** End of declarations inserted by SPAG
@@ -751,16 +751,16 @@
 !
 !
       LOGICAL intout
-      CHARACTER*8 xern1 , xern2
-      CHARACTER*16 xern3
+      CHARACTER(8) :: xern1 , xern2
+      CHARACTER(16) :: xern3
 !
-      DIMENSION Y(*) , Info(15) , Rtol(*) , Atol(*) , Rwork(*) , Iwork(*) , 
+      DIMENSION Y(*) , Info(15) , Rtol(*) , Atol(*) , Rwork(*) , Iwork(*) ,
      &          Rpar(*) , Ipar(*)
 !
-      COMMON /DEBDF1/ TOLd , ROWns(210) , EL0 , H , HMIn , HMXi , HU , TN , 
-     &                UROund , IQUit , INIt , IYH , IEWt , IACor , ISAvf , IWM , 
-     &                KSTeps , IBEgin , ITOl , IINteg , ITStop , IJAc , IBAnd , 
-     &                IOWns(6) , IER , JSTart , KFLag , L , METh , MITer , 
+      COMMON /DEBDF1/ TOLd , ROWns(210) , EL0 , H , HMIn , HMXi , HU , TN ,
+     &                UROund , IQUit , INIt , IYH , IEWt , IACor , ISAvf , IWM ,
+     &                KSTeps , IBEgin , ITOl , IINteg , ITStop , IJAc , IBAnd ,
+     &                IOWns(6) , IER , JSTart , KFLag , L , METh , MITer ,
      &                MAXord , N , NQ , NST , NFE , NJE , NQU
 !
       EXTERNAL F , JAC

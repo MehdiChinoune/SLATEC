@@ -27,7 +27,7 @@
 !     .. Scalar Arguments ..
       LOGICAL Fatal
       INTEGER Isnum , Nout
-      CHARACTER*6 Srnamt
+      CHARACTER(6) :: Srnamt
       INTEGER infot , Kprint
 !     .. Local Scalars ..
       DOUBLE PRECISION alpha , beta

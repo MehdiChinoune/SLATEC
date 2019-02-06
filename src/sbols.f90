@@ -4,8 +4,8 @@
       IMPLICIT NONE
 !*--SBOLS5
 !*** Start of declarations inserted by SPAG
-      INTEGER i , ibig , igo , inrows , ip , ISAMAX , iscale , j , jp , lds , 
-     &        lenx , liopt , llb , lliw , llrw , llx , lmdw , lndw , locacc , 
+      INTEGER i , ibig , igo , inrows , ip , ISAMAX , iscale , j , jp , lds ,
+     &        lenx , liopt , llb , lliw , llrw , llx , lmdw , lndw , locacc ,
      &        locdim
       INTEGER lopt , lp , Mdw , mnew , Mode , Mrows , Ncols , nerr
 !*** End of declarations inserted by SPAG
@@ -434,8 +434,8 @@
 !     THIS VARIABLE SHOULD REMAIN TYPE REAL.
       INTEGER Ind(*) , Iopt(*) , Iw(*)
       LOGICAL checkl
-      CHARACTER*8 xern1 , xern2
-      CHARACTER*16 xern3 , xern4
+      CHARACTER(8) :: xern1 , xern2
+      CHARACTER(16) :: xern3 , xern4
       SAVE igo , locacc , lopt , iscale
       DATA igo/0/
 !***FIRST EXECUTABLE STATEMENT  SBOLS

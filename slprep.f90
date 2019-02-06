@@ -111,9 +111,9 @@
 !
       INTEGER MXLFN
       PARAMETER (MXLFN=32)
-      CHARACTER*(MXLFN) finp , fclass , fcat , fdaf , fkwd , ftbl , FOUT , 
+      CHARACTER(MXLFN) :: finp , fclass , fcat , fdaf , fkwd , ftbl , FOUT ,
      &                  flog , FERR , FINPUT
-      CHARACTER*(MXLFN) DFINP , DFCLAS , DFCAT , DFDAF , DFKWD , DFTBL , DFLOG
+      CHARACTER(MXLFN) :: DFINP , DFCLAS , DFCAT , DFDAF , DFKWD , DFTBL , DFLOG
       PARAMETER (DFINP='slainp',DFCLAS='class',DFCAT='slacat',DFDAF='sladaf',
      &           DFKWD='slakwd',DFTBL='slatbl',DFLOG='slalog',FOUT='/dev/tty',
      &           FINPUT='/dev/tty',FERR='/dev/tty')
@@ -127,30 +127,30 @@
 !
 !     Other declarations.
 !
-      INTEGER i , ib , ic , ichng , icom , id , ientry , ifind , ilen , inext , 
-     &        info , ipe , ips , ird , iwr , j , jj , mncl , mxlkw , mxlr , 
-     &        mxnca , mxnkw , ncat , ncc , nclass , nerr , nextl , nkwd , 
+      INTEGER i , ib , ic , ichng , icom , id , ientry , ifind , ilen , inext ,
+     &        info , ipe , ips , ird , iwr , j , jj , mncl , mxlkw , mxlr ,
+     &        mxnca , mxnkw , ncat , ncc , nclass , nerr , nextl , nkwd ,
      &        nstmts , ntcat , ntkwd , numr , numrr
 !
       INTEGER LU5 , LU6 , LU12 , LU13 , LU14 , LU15 , LU17 , LU18 , LU19
       PARAMETER (LU12=12,LU13=13,LU14=14,LU15=15,LU6=6,LU17=17,LU18=18,LU19=19,
      &           LU5=5)
-      CHARACTER*(LLN) line
-      CHARACTER*80 clline
-      CHARACTER*80 msg
-      CHARACTER*(KMAXI) kwrds(KMAXJ) , tkwd(MXNKWD)
-      CHARACTER*(MXLRN) rtname
-      CHARACTER*(MXLCAT) tcat(MXNCAT) , etcat(MXNCAT) , categ(15) , 
+      CHARACTER(LLN) :: line
+      CHARACTER(80) :: clline
+      CHARACTER(80) :: msg
+      CHARACTER(KMAXI) :: kwrds(KMAXJ) , tkwd(MXNKWD)
+      CHARACTER(MXLRN) :: rtname
+      CHARACTER(MXLCAT) :: tcat(MXNCAT) , etcat(MXNCAT) , categ(15) ,
      &                   tclass(MXNCAT)
       INTEGER iptr(MXNCAT) , jptr(MXNCAT) , kptr(MXNCAT)
-      CHARACTER*80 class(MXNCL+1) , stmts(MXNCL)
+      CHARACTER(80) :: class(MXNCL+1) , stmts(MXNCL)
       INTEGER iptrl(7*MXNRN) , iptrr(7*MXNRN)
 !
 !     External functions.
 !
       INTEGER FIND , LENSTR
       LOGICAL IFDECK , IFIF , IFSID
-      CHARACTER*10 CVTCAT
+      CHARACTER(10) :: CVTCAT
       EXTERNAL CVTCAT , FIND , IFDECK , IFIF , IFSID , LENSTR
 !
 !     Intrinsic functions.
@@ -257,7 +257,7 @@
 !
 !     Write the names of all files to the transaction log file.
 !
-      WRITE (UNIT=LU12,FMT=99010) finp , FOUT , fclass , fcat , fdaf , ftbl , 
+      WRITE (UNIT=LU12,FMT=99010) finp , FOUT , fclass , fcat , fdaf , ftbl ,
      &                            fkwd
 !
 !     IRD is the "READ" line number and IWR is the "WRITE" line number.
@@ -709,15 +709,15 @@
 !
 !     Normal termination.
 !
-      WRITE (UNIT=LU6,FMT=99007) numr , ird , iwr , ntcat , ntkwd , mxlr , 
-     &                           mxnca , mxnkw , mxlkw , numrr , ntkwd , 
+      WRITE (UNIT=LU6,FMT=99007) numr , ird , iwr , ntcat , ntkwd , mxlr ,
+     &                           mxnca , mxnkw , mxlkw , numrr , ntkwd ,
      &                           inext - ichng
       WRITE (UNIT=LU6,FMT=99008) nclass , ncc , nstmts
 !
 !     Write summary information to the transaction log file also.
 !
-      WRITE (UNIT=LU12,FMT=99007) numr , ird , iwr , ntcat , ntkwd , mxlr , 
-     &                            mxnca , mxnkw , mxlkw , numrr , ntkwd , 
+      WRITE (UNIT=LU12,FMT=99007) numr , ird , iwr , ntcat , ntkwd , mxlr ,
+     &                            mxnca , mxnkw , mxlkw , numrr , ntkwd ,
      &                            inext - ichng
       WRITE (UNIT=LU12,FMT=99008) nclass , ncc , nstmts
       CLOSE (UNIT=LU14)
@@ -826,7 +826,7 @@
 !     .. Scalar Arguments ..
       CHARACTER*(*) Line
 !     .. Local Scalars ..
-      CHARACTER*6 temp
+      CHARACTER(6) :: temp
 !     .. External Subroutines ..
       EXTERNAL UPCASE
 !***FIRST EXECUTABLE STATEMENT  IFDECK
@@ -865,7 +865,7 @@
 !     .. Scalar Arguments ..
       CHARACTER*(*) Line
 !     .. Local Scalars ..
-      CHARACTER*3 temp
+      CHARACTER(3) :: temp
 !     .. External Subroutines ..
       EXTERNAL UPCASE
 !***FIRST EXECUTABLE STATEMENT  IFIF
@@ -905,7 +905,7 @@
       CHARACTER*(*) Line
 !     .. Local Scalars ..
       INTEGER i , id
-      CHARACTER*20 temp
+      CHARACTER(20) :: temp
 !     .. External Subroutines ..
       EXTERNAL UPCASE
 !     .. Intrinsic Functions ..
@@ -1134,14 +1134,14 @@
       CHARACTER*(*) Class(*) , Ecat(*) , Stmts(*) , Tclass(*)
 !     .. Local Scalars ..
       INTEGER i , iclass , ilen , iper , istart , j , k , nlen
-      CHARACTER*1 opart1 , opart3 , opart5 , opart7 , part1 , part3 , part5 , 
+      CHARACTER :: opart1 , opart3 , opart5 , opart7 , part1 , part3 , part5 ,
      &            part7
-      CHARACTER*2 opart2 , opart4 , opart6 , part2 , part4 , part6
+      CHARACTER(2) :: opart2 , opart4 , opart6 , part2 , part4 , part6
 !     .. Local Arrays ..
       INTEGER size(7)
 !     .. External Functions ..
       INTEGER LENSTR
-      CHARACTER*10 CVTCAT
+      CHARACTER(10) :: CVTCAT
       EXTERNAL LENSTR , CVTCAT
 !     .. Intrinsic Functions ..
       INTRINSIC INDEX
@@ -1383,7 +1383,7 @@
       CHARACTER*(*) Cr(*) , R(*)
 !     .. Local Scalars ..
       INTEGER i , j , k , m
-      CHARACTER*15 it
+      CHARACTER(15) :: it
 !     .. Intrinsic Functions ..
       INTRINSIC MOD
 !***FIRST EXECUTABLE STATEMENT  SORT

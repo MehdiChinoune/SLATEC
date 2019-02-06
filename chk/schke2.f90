@@ -26,7 +26,7 @@
 !     .. Scalar Arguments ..
       LOGICAL Fatal
       INTEGER Isnum , Kprint , Nout
-      CHARACTER*6 Srnamt
+      CHARACTER(6) :: Srnamt
 !     .. Scalars in Common ..
       INTEGER infot
 !     .. Local Scalars ..
@@ -35,8 +35,8 @@
 !     .. Local Arrays ..
       REAL a(1,1) , x(1) , y(1)
 !     .. External Subroutines ..
-      EXTERNAL CHKXER , SGBMV , SGEMV , SGER , SSBMV , SSPMV , SSPR , SSPR2 , 
-     &         SSYMV , SSYR , SSYR2 , STBMV , STBSV , STPMV , STPSV , STRMV , 
+      EXTERNAL CHKXER , SGBMV , SGEMV , SGER , SSBMV , SSPMV , SSPR , SSPR2 ,
+     &         SSYMV , SSYR , SSYR2 , STBMV , STBSV , STPMV , STPSV , STRMV ,
      &         STRSV
 !***FIRST EXECUTABLE STATEMENT  SCHKE2
       CALL XGETF(kontrl)

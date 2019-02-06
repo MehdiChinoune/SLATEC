@@ -116,7 +116,7 @@
       COMPLEX A(Lda,*) , V(*) , Work(N,*)
       REAL SCASUM , xnorm , dnorm , R1MACH
       DOUBLE PRECISION dr1 , di1 , dr2 , di2
-      CHARACTER*8 xern1 , xern2
+      CHARACTER(8) :: xern1 , xern2
 !***FIRST EXECUTABLE STATEMENT  CPOIR
       IF ( Lda<N ) THEN
         Ind = -1

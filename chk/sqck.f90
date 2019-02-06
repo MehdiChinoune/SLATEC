@@ -46,12 +46,12 @@
 !           including removing an illegal character from column 1, and
 !           fixed code to test all four routines.  (RWC)
 !***END PROLOGUE  SQCK
-      REAL a(4,4) , at(5,4) , abe(5,7) , abet(5,7) , b(4) , bt(4) , c(4) , 
+      REAL a(4,4) , at(5,4) , abe(5,7) , abet(5,7) , b(4) , bt(4) , c(4) ,
      &     work(35) , r , delx , delmax , sign , R1MACH
-      CHARACTER*4 list(4)
-      INTEGER lda , n , ml , mu , ind , iwork(4) , Nerr , i , j , j1 , j2 , jd , 
+      CHARACTER(4) :: list(4)
+      INTEGER lda , n , ml , mu , ind , iwork(4) , Nerr , i , j , j1 , j2 , jd ,
      &        mlp , k , kcase , kprog
-      DATA a/5.0E0 , 4.0E0 , 1.0E0 , 1.0E0 , 4.0E0 , 5.0E0 , 1.0E0 , 1.0E0 , 
+      DATA a/5.0E0 , 4.0E0 , 1.0E0 , 1.0E0 , 4.0E0 , 5.0E0 , 1.0E0 , 1.0E0 ,
      &     1.0E0 , 1.0E0 , 4.0E0 , 2.0E0 , 1.0E0 , 1.0E0 , 2.0E0 , 4.0E0/
       DATA list/'POFS' , 'POIR' , 'NBFS' , 'NBIR'/
 !***FIRST EXECUTABLE STATEMENT  SQCK

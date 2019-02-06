@@ -5,7 +5,7 @@
       IMPLICIT NONE
 !*--SPLPUP6
 !*** Start of declarations inserted by SPAG
-      INTEGER i , indcat , index , Info , iplace , itcnt , itmax , j , Mrelas , 
+      INTEGER i , indcat , index , Info , iplace , itcnt , itmax , j , Mrelas ,
      &        Nvars
 !*** End of declarations inserted by SPAG
 !***BEGIN PROLOGUE  SPLPUP
@@ -47,8 +47,8 @@
      &     , Prgopt(*) , xval , zero
       INTEGER iflag(10) , Imat(*) , Ind(*)
       LOGICAL Sizeup , first
-      CHARACTER*8 xern1 , xern2
-      CHARACTER*16 xern3 , xern4
+      CHARACTER(8) :: xern1 , xern2
+      CHARACTER(16) :: xern3 , xern4
 !
 !***FIRST EXECUTABLE STATEMENT  SPLPUP
       zero = 0.E0

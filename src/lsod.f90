@@ -5,15 +5,15 @@
       IMPLICIT NONE
 !*--LSOD6
 !*** Start of declarations inserted by SPAG
-      REAL absdel , Acor , Atol , big , del , Delsgn , dt , EL0 , Ewt , H , ha , 
+      REAL absdel , Acor , Atol , big , del , Delsgn , dt , EL0 , Ewt , H , ha ,
      &     HMIn , HMXi , HU , R1MACH , ROWns , Rpar , Rtol , Savf , T
-      REAL tol , TOLd , Tolfac , Tout , Tstop , U , VNWRMS , Wm , X , Y , Yh , 
+      REAL tol , TOLd , Tolfac , Tout , Tstop , U , VNWRMS , Wm , X , Y , Yh ,
      &     Yh1 , Ypout
-      INTEGER IBAnd , IBEgin , Idid , IER , IINteg , IJAc , INIt , intflg , 
-     &        IOWns , Ipar , IQUit , ITOl , ITStop , Iwm , JAC , JSTart , k , 
+      INTEGER IBAnd , IBEgin , Idid , IER , IINteg , IJAc , INIt , intflg ,
+     &        IOWns , Ipar , IQUit , ITOl , ITStop , Iwm , JAC , JSTart , k ,
      &        KFLag , KSTeps , l
-      INTEGER LACor , LDUm , LEWt , LSAvf , ltol , LWM , LYH , maxnum , MAXord , 
-     &        METh , MITer , N , natolp , Neq , NFE , NJE , NQ , NQU , nrtolp , 
+      INTEGER LACor , LDUm , LEWt , LSAvf , ltol , LWM , LYH , maxnum , MAXord ,
+     &        METh , MITer , N , natolp , Neq , NFE , NJE , NQ , NQU , nrtolp ,
      &        NST
 !*** End of declarations inserted by SPAG
 !***BEGIN PROLOGUE  LSOD
@@ -43,15 +43,15 @@
 !
       LOGICAL Intout
 !
-      DIMENSION Y(*) , Ypout(*) , Yh(Neq,6) , Yh1(*) , Ewt(*) , Savf(*) , 
+      DIMENSION Y(*) , Ypout(*) , Yh(Neq,6) , Yh1(*) , Ewt(*) , Savf(*) ,
      &          Acor(*) , Wm(*) , Iwm(*) , Rtol(*) , Atol(*) , Rpar(*) , Ipar(*)
-      CHARACTER*8 xern1
-      CHARACTER*16 xern3 , xern4
+      CHARACTER(8) :: xern1
+      CHARACTER(16) :: xern3 , xern4
 !
-      COMMON /DEBDF1/ TOLd , ROWns(210) , EL0 , H , HMIn , HMXi , HU , X , U , 
-     &                IQUit , INIt , LYH , LEWt , LACor , LSAvf , LWM , KSTeps , 
+      COMMON /DEBDF1/ TOLd , ROWns(210) , EL0 , H , HMIn , HMXi , HU , X , U ,
+     &                IQUit , INIt , LYH , LEWt , LACor , LSAvf , LWM , KSTeps ,
      &                IBEgin , ITOl , IINteg , ITStop , IJAc , IBAnd , IOWns(6)
-     &                , IER , JSTart , KFLag , LDUm , METh , MITer , MAXord , 
+     &                , IER , JSTart , KFLag , LDUm , METh , MITer , MAXord ,
      &                N , NQ , NST , NFE , NJE , NQU
 !
       EXTERNAL F , JAC

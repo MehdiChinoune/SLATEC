@@ -137,7 +137,7 @@
 !           lines were modified.  (BKS)
 !***END PROLOGUE  CSYMM
 !     .. Scalar Arguments ..
-      CHARACTER*1 Side , Uplo
+      CHARACTER :: Side , Uplo
       INTEGER M , N , Lda , Ldb , Ldc
       COMPLEX Alpha , Beta
 !     .. Array Arguments ..

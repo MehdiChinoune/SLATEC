@@ -31,22 +31,22 @@
       LOGICAL Fatal
       DOUBLE PRECISION Eps , Thresh
       INTEGER Kprint , Nalf , Nbet , Nidim , Nmax , Nout
-      CHARACTER*6 Sname
+      CHARACTER(6) :: Sname
 !     .. Array Arguments ..
       DOUBLE PRECISION A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax)
-     &                 , G(Nmax) , Bb(Nmax*Nmax) , Bet(Nbet) , Bs(Nmax*Nmax) , 
-     &                 C(Nmax,Nmax) , Cc(Nmax*Nmax) , Ct(Nmax) , B(Nmax,Nmax) , 
+     &                 , G(Nmax) , Bb(Nmax*Nmax) , Bet(Nbet) , Bs(Nmax*Nmax) ,
+     &                 C(Nmax,Nmax) , Cc(Nmax*Nmax) , Ct(Nmax) , B(Nmax,Nmax) ,
      &                 Cs(Nmax*Nmax)
       INTEGER Idim(Nidim)
 !     .. Local Scalars ..
       DOUBLE PRECISION alpha , als , beta , bets , err , errmax
-      INTEGER i , ia , ib , ict , icu , ik , in , j , jc , jj , k , ks , laa , 
-     &        lcc , lda , ldas , ldc , ldcs , lj , ma , n , na , nerr , ns , 
+      INTEGER i , ia , ib , ict , icu , ik , in , j , jc , jj , k , ks , laa ,
+     &        lcc , lda , ldas , ldc , ldcs , lj , ma , n , na , nerr , ns ,
      &        nargs , nc
       LOGICAL ftl , null , reset , tran , upper
-      CHARACTER*1 trans , transs , uplo , uplos
-      CHARACTER*2 ichu
-      CHARACTER*3 icht
+      CHARACTER :: trans , transs , uplo , uplos
+      CHARACTER(2) :: ichu
+      CHARACTER(3) :: icht
 !     .. Local Arrays ..
       LOGICAL isame(13)
 !     .. External Functions ..
@@ -205,7 +205,7 @@
                         Fatal = .TRUE.
                         IF ( Kprint>=3 ) THEN
                           WRITE (Nout,FMT=99004) Sname
-                          WRITE (Nout,FMT=99005) nc , Sname , uplo , trans , n , 
+                          WRITE (Nout,FMT=99005) nc , Sname , uplo , trans , n ,
      &                           k , alpha , lda , beta , ldc
                         ENDIF
                       ENDIF

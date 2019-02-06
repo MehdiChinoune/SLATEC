@@ -33,22 +33,22 @@
       LOGICAL Fatal
       REAL Eps , Thresh
       INTEGER Kprint , Nalf , Nbet , Nidim , Nmax , Nout
-      CHARACTER*6 Sname
+      CHARACTER(6) :: Sname
 !     .. Array Arguments ..
-      COMPLEX Aa(Nmax*Nmax) , Ab(2*Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) , 
-     &        Bb(Nmax*Nmax) , Bet(Nbet) , Bs(Nmax*Nmax) , C(Nmax,Nmax) , 
+      COMPLEX Aa(Nmax*Nmax) , Ab(2*Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) ,
+     &        Bb(Nmax*Nmax) , Bet(Nbet) , Bs(Nmax*Nmax) , C(Nmax,Nmax) ,
      &        Cc(Nmax*Nmax) , Cs(Nmax*Nmax) , Ct(Nmax) , W(2*Nmax)
       REAL G(Nmax)
       INTEGER Idim(Nidim)
 !     .. Local Scalars ..
       COMPLEX alpha , als , beta , bets
       REAL err , errmax , rbeta , rbets
-      INTEGER i , ia , ib , ict , icu , ik , in , j , jc , jj , jjab , k , ks , 
-     &        laa , lbb , lcc , lda , ldas , ldb , ldbs , ldc , ldcs , lj , ma , 
+      INTEGER i , ia , ib , ict , icu , ik , in , j , jc , jj , jjab , k , ks ,
+     &        laa , lbb , lcc , lda , ldas , ldb , ldbs , ldc , ldcs , lj , ma ,
      &        n , na , nargs , nc , nerr , ns
       LOGICAL conj , ftl , null , reset , tran , upper
-      CHARACTER*1 trans , transs , uplo , transt , uplos
-      CHARACTER*2 ichu , icht
+      CHARACTER :: trans , transs , uplo , transt , uplos
+      CHARACTER(2) :: ichu , icht
 !     .. Local Arrays ..
       LOGICAL isame(13)
 !     .. External Functions ..
@@ -133,7 +133,7 @@
                         beta = CMPLX(rbeta,RZERO)
                       ENDIF
                       null = n<=0
-                      IF ( conj ) null = null .OR. 
+                      IF ( conj ) null = null .OR.
      &                     ((k<=0.OR.alpha==ZERO).AND.rbeta==RONE)
 !
 !                       Generate the matrix C.
@@ -277,12 +277,12 @@
                             IF ( Kprint>=3 ) THEN
                               WRITE (Nout,FMT=99004) Sname
                               IF ( conj ) THEN
-                                WRITE (Nout,FMT=99005) nc , Sname , uplo , 
-     &                                 trans , n , k , alpha , lda , ldb , 
+                                WRITE (Nout,FMT=99005) nc , Sname , uplo ,
+     &                                 trans , n , k , alpha , lda , ldb ,
      &                                 rbeta , ldc
                               ELSE
-                                WRITE (Nout,FMT=99006) nc , Sname , uplo , 
-     &                                 trans , n , k , alpha , lda , ldb , 
+                                WRITE (Nout,FMT=99006) nc , Sname , uplo ,
+     &                                 trans , n , k , alpha , lda , ldb ,
      &                                 beta , ldc
                               ENDIF
                             ENDIF

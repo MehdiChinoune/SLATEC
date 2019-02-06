@@ -106,7 +106,7 @@
 !     .. Scalar Arguments ..
       DOUBLE PRECISION Alpha , Beta
       INTEGER Incx , Incy , Lda , M , N
-      CHARACTER*1 Trans
+      CHARACTER :: Trans
 !     .. Array Arguments ..
       DOUBLE PRECISION A(Lda,*) , X(*) , Y(*)
 !     .. Parameters ..

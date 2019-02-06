@@ -87,25 +87,25 @@
 !
       INTEGER i , ic(2) , ierr , ifail , N , nbad , nbadz , NWK
       PARAMETER (N=9,NWK=2*N)
-      DOUBLE PRECISION d(N) , dc(N) , dc5 , dc6 , dm(N) , ds(N) , err , f(N) , 
+      DOUBLE PRECISION d(N) , dc(N) , dc5 , dc6 , dm(N) , ds(N) , err , f(N) ,
      &                 MONE , tol , told , tolz , vc(2) , x(N) , wk(NWK) , ZERO
       PARAMETER (ZERO=0.0D0,MONE=-1.0D0)
-      CHARACTER*6 result
+      CHARACTER(6) :: result
 !
 !  Initialize.
 !
 !       Data.
       DATA ic/0 , 0/
-      DATA x/ - 2.2D0 , -1.2D0 , -1.0D0 , -0.5D0 , -0.01D0 , 0.5D0 , 1.0D0 , 
+      DATA x/ - 2.2D0 , -1.2D0 , -1.0D0 , -0.5D0 , -0.01D0 , 0.5D0 , 1.0D0 ,
      &     2.0D0 , 2.2D0/
 !
 !       Results generated on Cray X/MP (9 sign. figs.)
-      DATA dm/0. , 3.80027352D-01 , 7.17253009D-01 , 5.82014161D-01 , 0. , 
-     &     -5.68208031D-01 , -5.13501618D-01 , -7.77910977D-02 , 
+      DATA dm/0. , 3.80027352D-01 , 7.17253009D-01 , 5.82014161D-01 , 0. ,
+     &     -5.68208031D-01 , -5.13501618D-01 , -7.77910977D-02 ,
      &     -2.45611117D-03/
       DATA dc5 , dc6/1.76950158D-02 , -5.69579814D-01/
-      DATA ds/ - 5.16830792D-02 , 5.71455855D-01 , 7.40530225D-01 , 
-     &     7.63864934D-01 , 1.92614386D-02 , -7.65324380D-01 , -7.28209035D-01 , 
+      DATA ds/ - 5.16830792D-02 , 5.71455855D-01 , 7.40530225D-01 ,
+     &     7.63864934D-01 , 1.92614386D-02 , -7.65324380D-01 , -7.28209035D-01 ,
      &     -7.98445427D-02 , -2.85983446D-02/
 !
 !***FIRST EXECUTABLE STATEMENT  DPCHQ3

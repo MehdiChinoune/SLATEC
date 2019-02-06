@@ -1,6 +1,6 @@
 !*==CVTCAT.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK CVTCAT
-      CHARACTER*10 FUNCTION CVTCAT(Categ)
+      CHARACTER(10) FUNCTION CVTCAT(Categ)
       IMPLICIT NONE
 !*--CVTCAT5
 !***BEGIN PROLOGUE  CVTCAT
@@ -235,7 +235,7 @@
 !   920911  Declarations section restructured.  (WRB)
 !***END PROLOGUE  UPCASE
 !     .. Parameters ..
-      CHARACTER*41 MSG
+      CHARACTER(41) :: MSG
       PARAMETER (MSG='Input string is longer than output string')
 !     .. Scalar Arguments ..
       CHARACTER*(*) Str1 , Str2

@@ -132,14 +132,14 @@
 !     .. Scalar Arguments ..
       REAL Alpha , Beta
       INTEGER Incx , Incy , Kl , Ku , Lda , M , N
-      CHARACTER*1 Trans
+      CHARACTER :: Trans
 !     .. Array Arguments ..
       REAL A(Lda,*) , X(*) , Y(*)
       REAL ONE , ZERO
       PARAMETER (ONE=1.0E+0,ZERO=0.0E+0)
 !     .. Local Scalars ..
       REAL temp
-      INTEGER i , info , ix , iy , j , jx , jy , k , kup1 , kx , ky , lenx , 
+      INTEGER i , info , ix , iy , j , jx , jy , k , kup1 , kx , ky , lenx ,
      &        leny
 !     .. External Functions ..
       LOGICAL LSAME

@@ -178,7 +178,7 @@
       COMPLEX Abe(Lda,*) , V(*) , Work(*)
       REAL rcond
       REAL R1MACH
-      CHARACTER*8 xern1 , xern2
+      CHARACTER(8) :: xern1 , xern2
 !***FIRST EXECUTABLE STATEMENT  CNBFS
       IF ( Lda<N ) THEN
         Ind = -1

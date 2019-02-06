@@ -30,7 +30,7 @@
       REAL Alpha , Beta , Eps , Err
       INTEGER Kk , Kprint , Lda , Ldb , Ldc , Ldcc , M , N , Nout
       LOGICAL Mv , Ftl
-      CHARACTER*1 Transa , Transb
+      CHARACTER :: Transa , Transb
 !     .. Array Arguments ..
       REAL A(Lda,*) , B(Ldb,*) , C(Ldc,*) , Cc(Ldcc,*) , Ct(*) , G(*)
 !     .. Local Scalars ..

@@ -31,20 +31,20 @@
       LOGICAL Fatal
       REAL Eps , Thresh
       INTEGER Kprint , Nalf , Nidim , Nmax , Nout
-      CHARACTER*6 Sname
+      CHARACTER(6) :: Sname
 !     .. Array Arguments ..
-      REAL A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) , G(Nmax) , 
-     &     B(Nmax,Nmax) , Bb(Nmax*Nmax) , Bs(Nmax*Nmax) , C(Nmax,Nmax) , 
+      REAL A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) , G(Nmax) ,
+     &     B(Nmax,Nmax) , Bb(Nmax*Nmax) , Bs(Nmax*Nmax) , C(Nmax,Nmax) ,
      &     Ct(Nmax)
       INTEGER Idim(Nidim)
 !     .. Local Scalars ..
       REAL alpha , als , err , errmax
-      INTEGER i , ia , icd , ics , ict , icu , im , in , j , laa , lbb , lda , 
+      INTEGER i , ia , icd , ics , ict , icu , im , in , j , laa , lbb , lda ,
      &        ldas , ldb , ldbs , m , ms , n , na , nargs , nc , nerr , ns
       LOGICAL ftl , null , reset , left
-      CHARACTER*1 side , sides , uplo , uplos , tranas , transa , diag , diags
-      CHARACTER*2 ichs , ichu , ichd
-      CHARACTER*3 icht
+      CHARACTER :: side , sides , uplo , uplos , tranas , transa , diag , diags
+      CHARACTER(2) :: ichs , ichu , ichd
+      CHARACTER(3) :: icht
 !     .. Local Arrays ..
       LOGICAL isame(13)
 !     .. External Functions ..
@@ -228,7 +228,7 @@
                         Fatal = .TRUE.
                         IF ( Kprint>=3 ) THEN
                           WRITE (Nout,FMT=99004) Sname
-                          WRITE (Nout,FMT=99005) nc , Sname , side , uplo , 
+                          WRITE (Nout,FMT=99005) nc , Sname , side , uplo ,
      &                           transa , diag , m , n , alpha , lda , ldb
                         ENDIF
                       ENDIF

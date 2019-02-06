@@ -30,20 +30,20 @@
       LOGICAL Fatal
       REAL Eps , Thresh
       INTEGER Incmax , Kprint , Nalf , Nbet , Nidim , Ninc , Nkb , Nmax , Nout
-      CHARACTER*6 Sname
+      CHARACTER(6) :: Sname
 !     .. Array Arguments ..
       REAL A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) , Bet(Nbet)
-     &     , G(Nmax) , X(Nmax) , Xs(Nmax*Incmax) , Xx(Nmax*Incmax) , Y(Nmax) , 
+     &     , G(Nmax) , X(Nmax) , Xs(Nmax*Incmax) , Xx(Nmax*Incmax) , Y(Nmax) ,
      &     Ys(Nmax*Incmax) , Yt(Nmax) , Yy(Nmax*Incmax)
       INTEGER Idim(Nidim) , Inc(Ninc) , Kb(Nkb)
 !     .. Local Scalars ..
       REAL alpha , als , beta , bls , err , errmax , transl
-      INTEGER i , ia , ib , ic , iku , im , in , incx , incxs , incy , incys , 
-     &        ix , iy , kl , kls , ku , kus , laa , lda , ldas , lx , ly , m , 
+      INTEGER i , ia , ib , ic , iku , im , in , incx , incxs , incy , incys ,
+     &        ix , iy , kl , kls , ku , kus , laa , lda , ldas , lx , ly , m ,
      &        ml , ms , n , nargs , nc , nd , nk , nl , ns , nerr
       LOGICAL banded , ftl , full , null , reset , tran
-      CHARACTER*1 trans , transs
-      CHARACTER*3 ich
+      CHARACTER :: trans , transs
+      CHARACTER(3) :: ich
 !     .. Local Arrays ..
       LOGICAL isame(13)
 !     .. External Functions ..
@@ -252,11 +252,11 @@
                           IF ( Kprint>=3 ) THEN
                             WRITE (Nout,FMT=99004) Sname
                             IF ( full ) THEN
-                              WRITE (Nout,FMT=99006) nc , Sname , trans , m , 
+                              WRITE (Nout,FMT=99006) nc , Sname , trans , m ,
      &                               n , alpha , lda , incx , beta , incy
                             ELSEIF ( banded ) THEN
-                              WRITE (Nout,FMT=99005) nc , Sname , trans , m , 
-     &                               n , kl , ku , alpha , lda , incx , beta , 
+                              WRITE (Nout,FMT=99005) nc , Sname , trans , m ,
+     &                               n , kl , ku , alpha , lda , incx , beta ,
      &                               incy
                             ENDIF
                           ENDIF

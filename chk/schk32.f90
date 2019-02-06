@@ -31,19 +31,19 @@
       LOGICAL Fatal
       REAL Eps , Thresh
       INTEGER Incmax , Kprint , Nidim , Ninc , Nkb , Nmax , Nout
-      CHARACTER*6 Sname
+      CHARACTER(6) :: Sname
 !     .. Array Arguments ..
-      REAL A(Nmax,Nmax) , Aa(Nmax*Nmax) , As(Nmax*Nmax) , G(Nmax) , X(Nmax) , 
+      REAL A(Nmax,Nmax) , Aa(Nmax*Nmax) , As(Nmax*Nmax) , G(Nmax) , X(Nmax) ,
      &     Xs(Nmax*Incmax) , Xt(Nmax) , Xx(Nmax*Incmax) , Z(Nmax)
       INTEGER Idim(Nidim) , Inc(Ninc) , Kb(Nkb)
 !     .. Local Scalars ..
       REAL err , errmax , transl
-      INTEGER i , icd , ict , icu , ik , in , incx , incxs , ix , k , ks , laa , 
+      INTEGER i , icd , ict , icu , ik , in , incx , incxs , ix , k , ks , laa ,
      &        lda , ldas , lx , n , nargs , nc , nk , ns , nerr
       LOGICAL banded , ftl , full , null , packed , reset
-      CHARACTER*1 diag , diags , trans , transs , uplo , uplos
-      CHARACTER*2 ichd , ichu
-      CHARACTER*3 icht
+      CHARACTER :: diag , diags , trans , transs , uplo , uplos
+      CHARACTER(2) :: ichd , ichu
+      CHARACTER(3) :: icht
 !     .. Local Arrays ..
       LOGICAL isame(13)
 !     .. External Functions ..
@@ -252,13 +252,13 @@
                       IF ( Kprint>=3 ) THEN
                         WRITE (Nout,FMT=99004) Sname
                         IF ( full ) THEN
-                          WRITE (Nout,FMT=99007) nc , Sname , uplo , trans , 
+                          WRITE (Nout,FMT=99007) nc , Sname , uplo , trans ,
      &                           diag , n , lda , incx
                         ELSEIF ( banded ) THEN
-                          WRITE (Nout,FMT=99006) nc , Sname , uplo , trans , 
+                          WRITE (Nout,FMT=99006) nc , Sname , uplo , trans ,
      &                           diag , n , k , lda , incx
                         ELSEIF ( packed ) THEN
-                          WRITE (Nout,FMT=99005) nc , Sname , uplo , trans , 
+                          WRITE (Nout,FMT=99005) nc , Sname , uplo , trans ,
      &                           diag , n , incx
                         ENDIF
                       ENDIF

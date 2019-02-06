@@ -6,7 +6,7 @@
 !*--DERKF6
 !*** Start of declarations inserted by SPAG
       REAL Atol , F , Rpar , Rtol , Rwork , T , Tout , Y
-      INTEGER Idid , Info , Ipar , Iwork , kdi , kf1 , kf2 , kf3 , kf4 , kf5 , 
+      INTEGER Idid , Info , Ipar , Iwork , kdi , kf1 , kf2 , kf3 , kf4 , kf5 ,
      &        kh , krer , ktf , kto , ktstar , ku , kyp , kys , Liw , Lrw
       INTEGER Neq
 !*** End of declarations inserted by SPAG
@@ -605,10 +605,10 @@
 !***END PROLOGUE  DERKF
 !
       LOGICAL stiff , nonstf
-      CHARACTER*8 xern1
-      CHARACTER*16 xern3
+      CHARACTER(8) :: xern1
+      CHARACTER(16) :: xern3
 !
-      DIMENSION Y(*) , Info(15) , Rtol(*) , Atol(*) , Rwork(*) , Iwork(*) , 
+      DIMENSION Y(*) , Info(15) , Rtol(*) , Atol(*) , Rwork(*) , Iwork(*) ,
      &          Rpar(*) , Ipar(*)
 !
       EXTERNAL F

@@ -99,7 +99,7 @@
 !     .. Scalar Arguments ..
       REAL Alpha
       INTEGER Incx , Incy , N
-      CHARACTER*1 Uplo
+      CHARACTER :: Uplo
 !     .. Array Arguments ..
       REAL Ap(*) , X(*) , Y(*)
 !     .. Parameters ..

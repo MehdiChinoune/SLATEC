@@ -128,7 +128,7 @@
 !           lines were modified.  (BKS)
 !***END PROLOGUE  STRMM
 !     .. Scalar Arguments ..
-      CHARACTER*1 Side , Uplo , Transa , Diag
+      CHARACTER :: Side , Uplo , Transa , Diag
       INTEGER M , N , Lda , Ldb
       REAL Alpha
 !     .. Array Arguments ..

@@ -77,7 +77,7 @@
 !
 !     E X A M P L E  O F  U S E
 !
-!      CHARACTER*2 HX, W
+!      CHARACTER(2) :: HX, W
 !      INTEGER STRBEG, STREND
 !      DIMENSION HX(10), IPERM(10)
 !      DATA (HX(I),I=1,10)/ '05','I ',' I','  ','Rs','9R','R9','89',
@@ -116,7 +116,7 @@
       CHARACTER*(*) Hx(*)
 !     .. Local Scalars ..
       REAL r
-      INTEGER i , ij , indx , indx0 , ir , istrt , j , k , kk , l , lm , lmt , 
+      INTEGER i , ij , indx , indx0 , ir , istrt , j , k , kk , l , lm , lmt ,
      &        m , nn , nn2
 !     .. Local Arrays ..
       INTEGER il(21) , iu(21)

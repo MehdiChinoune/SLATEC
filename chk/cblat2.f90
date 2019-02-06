@@ -43,27 +43,27 @@
       INTEGER i , isnum , j , n , NALF , NBET , NIDIM , NINC , NKB , Nout
       PARAMETER (NIDIM=6,NKB=4,NINC=4,NALF=3,NBET=3)
       LOGICAL same , tsterr , ftl , ftl1 , ftl2
-      CHARACTER*1 trans
+      CHARACTER :: trans
 !     .. Local Arrays ..
-      COMPLEX a(NMAX,NMAX) , aa(NMAX*NMAX) , alf(NALF) , as(NMAX*NMAX) , 
+      COMPLEX a(NMAX,NMAX) , aa(NMAX*NMAX) , alf(NALF) , as(NMAX*NMAX) ,
      &        bet(NBET) , x(NMAX) , xs(NMAX*INCMAX) , xx(NMAX*INCMAX) , y(NMAX)
      &        , ys(NMAX*INCMAX) , yt(NMAX) , yy(NMAX*INCMAX) , z(2*NMAX)
       REAL g(NMAX)
       INTEGER idim(NIDIM) , inc(NINC) , kb(NKB)
       LOGICAL ltest(NSUBS)
-      CHARACTER*6 snames(NSUBS)
+      CHARACTER(6) :: snames(NSUBS)
 !     .. External Functions ..
       REAL R1MACH
       LOGICAL LCE
       EXTERNAL LCE , R1MACH
 !     .. External Subroutines ..
-      EXTERNAL CCHK12 , CCHK22 , CCHK32 , CCHK42 , CCHK52 , CCHK62 , CCHKE2 , 
+      EXTERNAL CCHK12 , CCHK22 , CCHK32 , CCHK42 , CCHK52 , CCHK62 , CCHKE2 ,
      &         CMVCH
 !     .. Intrinsic Functions ..
       INTRINSIC ABS , MAX , MIN
 !     .. Data statements ..
-      DATA snames/'CGEMV ' , 'CGBMV ' , 'CHEMV ' , 'CHBMV ' , 'CHPMV ' , 
-     &     'CTRMV ' , 'CTBMV ' , 'CTPMV ' , 'CTRSV ' , 'CTBSV ' , 'CTPSV ' , 
+      DATA snames/'CGEMV ' , 'CGBMV ' , 'CHEMV ' , 'CHBMV ' , 'CHPMV ' ,
+     &     'CTRMV ' , 'CTBMV ' , 'CTPMV ' , 'CTRSV ' , 'CTBSV ' , 'CTPSV ' ,
      &     'CGERC ' , 'CGERU ' , 'CHER  ' , 'CHPR  ' , 'CHER2 ' , 'CHPR2 '/
       DATA idim/0 , 1 , 2 , 3 , 5 , 9/
       DATA kb/0 , 1 , 2 , 4/

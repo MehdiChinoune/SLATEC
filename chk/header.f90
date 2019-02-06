@@ -19,7 +19,7 @@
 !***END PROLOGUE  HEADER
       COMMON /COMBLA/ NPRint , ICAse , N , INCx , INCy , MODe , PASs
       LOGICAL PASs
-      CHARACTER*6 l(38)
+      CHARACTER(6) :: l(38)
 !
       DATA l(1)/'  SDOT'/
       DATA l(2)/' DSDOT'/

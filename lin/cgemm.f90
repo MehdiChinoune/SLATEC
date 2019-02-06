@@ -133,7 +133,7 @@
 !           lines were modified.  (BKS)
 !***END PROLOGUE  CGEMM
 !     .. Scalar Arguments ..
-      CHARACTER*1 Transa , Transb
+      CHARACTER :: Transa , Transb
       INTEGER M , N , K , Lda , Ldb , Ldc
       COMPLEX Alpha , Beta
 !     .. Array Arguments ..

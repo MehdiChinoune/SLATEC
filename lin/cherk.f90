@@ -122,7 +122,7 @@
 !           lines were modified.  (BKS)
 !***END PROLOGUE  CHERK
 !     .. Scalar Arguments ..
-      CHARACTER*1 Uplo , Trans
+      CHARACTER :: Uplo , Trans
       INTEGER N , K , Lda , Ldc
       REAL Alpha , Beta
 !     .. Array Arguments ..

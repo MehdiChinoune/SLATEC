@@ -106,7 +106,7 @@
       INTEGER Lda , N , Itask , Ind , info
       REAL A(Lda,*) , V(*) , Work(*) , R1MACH
       REAL rcond
-      CHARACTER*8 xern1 , xern2
+      CHARACTER(8) :: xern1 , xern2
 !***FIRST EXECUTABLE STATEMENT  SPOFS
       IF ( Lda<N ) THEN
         Ind = -1

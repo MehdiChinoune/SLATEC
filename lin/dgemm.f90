@@ -132,7 +132,7 @@
 !           lines were modified.  (BKS)
 !***END PROLOGUE  DGEMM
 !     .. Scalar Arguments ..
-      CHARACTER*1 Transa , Transb
+      CHARACTER :: Transa , Transb
       INTEGER M , N , K , Lda , Ldb , Ldc
       DOUBLE PRECISION Alpha , Beta
 !     .. Array Arguments ..

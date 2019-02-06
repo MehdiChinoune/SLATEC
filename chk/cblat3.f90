@@ -44,15 +44,15 @@
       INTEGER i , isnum , j , n , NALF , NBET , NIDIM , Nout
       PARAMETER (NIDIM=6,NALF=3,NBET=3)
       LOGICAL same , tsterr , ftl , ftl1 , ftl2
-      CHARACTER*1 transa , transb
+      CHARACTER :: transa , transb
 !     .. Local Arrays ..
-      COMPLEX aa(NMAX*NMAX) , ab(NMAX,2*NMAX) , alf(NALF) , as(NMAX*NMAX) , 
-     &        bb(NMAX*NMAX) , bet(NBET) , bs(NMAX*NMAX) , c(NMAX,NMAX) , 
+      COMPLEX aa(NMAX*NMAX) , ab(NMAX,2*NMAX) , alf(NALF) , as(NMAX*NMAX) ,
+     &        bb(NMAX*NMAX) , bet(NBET) , bs(NMAX*NMAX) , c(NMAX,NMAX) ,
      &        cc(NMAX*NMAX) , cs(NMAX*NMAX) , ct(NMAX) , w(2*NMAX)
       REAL g(NMAX)
       INTEGER idim(NIDIM)
       LOGICAL ltest(NSUBS)
-      CHARACTER*6 snames(NSUBS)
+      CHARACTER(6) :: snames(NSUBS)
 !     .. External Functions ..
       REAL R1MACH
       LOGICAL LCE
@@ -62,7 +62,7 @@
 !     .. Intrinsic Functions ..
       INTRINSIC ABS , MAX , MIN
 !     .. Data statements ..
-      DATA snames/'CGEMM ' , 'CHEMM ' , 'CSYMM ' , 'CTRMM ' , 'CTRSM ' , 
+      DATA snames/'CGEMM ' , 'CHEMM ' , 'CSYMM ' , 'CTRMM ' , 'CTRSM ' ,
      &     'CHERK ' , 'CSYRK ' , 'CHER2K' , 'CSYR2K'/
       DATA idim/0 , 1 , 2 , 3 , 5 , 9/
       DATA alf/(0.0,0.0) , (1.0,0.0) , (0.7,-0.9)/

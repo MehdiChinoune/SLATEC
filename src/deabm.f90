@@ -6,8 +6,8 @@
 !*--DEABM6
 !*** Start of declarations inserted by SPAG
       REAL Atol , F , Rpar , Rtol , Rwork , T , Tout , Y
-      INTEGER ialpha , ibeta , idelsn , Idid , ifouru , ig , igi , ihold , 
-     &        Info , ip , Ipar , iphi , ipsi , isig , itold , itstar , itwou , 
+      INTEGER ialpha , ibeta , idelsn , Idid , ifouru , ig , igi , ihold ,
+     &        Info , ip , Ipar , iphi , ipsi , isig , itold , itstar , itwou ,
      &        iv , iw , Iwork
       INTEGER iwt , ixold , iyp , iypout , iyy , Liw , Lrw , Neq
 !*** End of declarations inserted by SPAG
@@ -576,11 +576,11 @@
 !
       LOGICAL start , phase1 , nornd , stiff , intout
 !
-      DIMENSION Y(*) , Info(15) , Rtol(*) , Atol(*) , Rwork(*) , Iwork(*) , 
+      DIMENSION Y(*) , Info(15) , Rtol(*) , Atol(*) , Rwork(*) , Iwork(*) ,
      &          Rpar(*) , Ipar(*)
 !
-      CHARACTER*8 xern1
-      CHARACTER*16 xern3
+      CHARACTER(8) :: xern1
+      CHARACTER(16) :: xern3
 !
       EXTERNAL F
 !

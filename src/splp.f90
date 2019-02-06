@@ -5,10 +5,10 @@
       IMPLICIT NONE
 !*--SPLP6
 !*** Start of declarations inserted by SPAG
-      INTEGER iadbig , ictmax , ictopt , Info , iopt , key , lamat , last , 
-     &        lbasma , lbm , lcolnr , lcsc , lerd , lerp , libb , librc , 
+      INTEGER iadbig , ictmax , ictopt , Info , iopt , key , lamat , last ,
+     &        lbasma , lbm , lcolnr , lcsc , lerd , lerp , libb , librc ,
      &        limat , lipr , Liw , liwork
-      INTEGER liwr , lmx , lrg , lrhs , lrprim , lrz , Lw , lwork , lwr , lww , 
+      INTEGER liwr , lmx , lrg , lrhs , lrprim , lrz , Lw , lwork , lwr , lww ,
      &        Mrelas , nerr , next , Nvars
       REAL USRMAT
 !*** End of declarations inserted by SPAG
@@ -1548,11 +1548,11 @@
 !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
 !   920501  Reformatted the REFERENCES section.  (WRB)
 !***END PROLOGUE  SPLP
-      REAL Bl(*) , Bu(*) , Costs(*) , Dattrv(*) , Duals(*) , Prgopt(*) , 
+      REAL Bl(*) , Bu(*) , Costs(*) , Dattrv(*) , Duals(*) , Prgopt(*) ,
      &     Primal(*) , Work(*) , zero
 !
       INTEGER Ibasis(*) , Ind(*) , Iwork(*)
-      CHARACTER*8 xern1 , xern2
+      CHARACTER(8) :: xern1 , xern2
 !
       EXTERNAL USRMAT
 !

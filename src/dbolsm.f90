@@ -5,8 +5,8 @@
       IMPLICIT NONE
 !*--DBOLSM6
 !*** Start of declarations inserted by SPAG
-      INTEGER i , idum , igopr , INEXT , ioff , ip , iprint , itemp , iter , 
-     &        itmax , j , jbig , jcol , jdrop , jdrop1 , jdrop2 , jlarge , 
+      INTEGER i , idum , igopr , INEXT , ioff , ip , iprint , itemp , iter ,
+     &        itmax , j , jbig , jcol , jdrop , jdrop1 , jdrop2 , jlarge ,
      &        jmag , jp , lds
       INTEGER lgopr , lp , Mdw , Minput , Mode , mrows , mval , Ncols , nsetb
 !*** End of declarations inserted by SPAG
@@ -437,8 +437,8 @@
       DOUBLE PRECISION D1MACH , tolsze
       INTEGER Ibasis(*) , Ibb(*) , Ind(*) , Iopt(*)
       LOGICAL found , constr
-      CHARACTER*8 xern1 , xern2
-      CHARACTER*16 xern3 , xern4
+      CHARACTER(8) :: xern1 , xern2
+      CHARACTER(16) :: xern3 , xern4
 !
       PARAMETER (ZERO=0.0D0,ONE=1.0D0,TWO=2.0D0)
 !

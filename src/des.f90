@@ -7,12 +7,12 @@
       IMPLICIT NONE
 !*--DES8
 !*** Start of declarations inserted by SPAG
-      REAL a , absdel , Alpha , Atol , Beta , del , Delsgn , dt , Eps , Fouru , 
+      REAL a , absdel , Alpha , Atol , Beta , del , Delsgn , dt , Eps , Fouru ,
      &     G , Gi , H , ha , Hold , P , Phi , Psi , R1MACH , Rpar
-      REAL Rtol , Sig , T , Told , Tout , Tstop , Twou , u , V , W , Wt , X , 
+      REAL Rtol , Sig , T , Told , Tout , Tstop , Twou , u , V , W , Wt , X ,
      &     Xold , Y , Yp , Ypout , Yy
-      INTEGER Idid , Info , Init , Ipar , Iquit , Iv , Ivc , k , Kgi , Kle4 , 
-     &        Kold , Kord , Kprev , Ksteps , l , ltol , maxnum , natolp , Neq , 
+      INTEGER Idid , Info , Init , Ipar , Iquit , Iv , Ivc , k , Kgi , Kle4 ,
+     &        Kold , Kord , Kprev , Ksteps , l , ltol , maxnum , natolp , Neq ,
      &        nrtolp
       INTEGER Ns
 !*** End of declarations inserted by SPAG
@@ -43,12 +43,12 @@
 !
       LOGICAL Stiff , crash , Start , Phase1 , Nornd , Intout
 !
-      DIMENSION Y(*) , Yy(*) , Wt(*) , Phi(Neq,16) , P(*) , Yp(*) , Ypout(*) , 
-     &          Psi(12) , Alpha(12) , Beta(12) , Sig(13) , V(12) , W(12) , 
+      DIMENSION Y(*) , Yy(*) , Wt(*) , Phi(Neq,16) , P(*) , Yp(*) , Ypout(*) ,
+     &          Psi(12) , Alpha(12) , Beta(12) , Sig(13) , V(12) , W(12) ,
      &          G(13) , Gi(11) , Iv(10) , Info(15) , Rtol(*) , Atol(*) , Rpar(*)
      &          , Ipar(*)
-      CHARACTER*8 xern1
-      CHARACTER*16 xern3 , xern4
+      CHARACTER(8) :: xern1
+      CHARACTER(16) :: xern3 , xern4
 !
       EXTERNAL F
 !

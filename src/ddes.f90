@@ -31,21 +31,21 @@
 !   910722  Updated AUTHOR section.  (ALS)
 !***END PROLOGUE  DDES
 !
-      INTEGER Idid , Info , Init , Ipar , Iquit , Iv , Ivc , k , Kgi , Kle4 , 
-     &        Kold , Kord , Kprev , Ksteps , l , ltol , maxnum , natolp , Neq , 
+      INTEGER Idid , Info , Init , Ipar , Iquit , Iv , Ivc , k , Kgi , Kle4 ,
+     &        Kold , Kord , Kprev , Ksteps , l , ltol , maxnum , natolp , Neq ,
      &        nrtolp , Ns
-      DOUBLE PRECISION a , absdel , Alpha , Atol , Beta , D1MACH , del , 
-     &                 Delsgn , dt , Eps , Fouru , G , Gi , H , ha , Hold , P , 
-     &                 Phi , Psi , Rpar , Rtol , Sig , T , Told , Tout , Tstop , 
+      DOUBLE PRECISION a , absdel , Alpha , Atol , Beta , D1MACH , del ,
+     &                 Delsgn , dt , Eps , Fouru , G , Gi , H , ha , Hold , P ,
+     &                 Phi , Psi , Rpar , Rtol , Sig , T , Told , Tout , Tstop ,
      &                 Twou , u , V , W , Wt , X , Xold , Y , Yp , Ypout , Yy
       LOGICAL Stiff , crash , Start , Phase1 , Nornd , Intout
 !
-      DIMENSION Y(*) , Yy(*) , Wt(*) , Phi(Neq,16) , P(*) , Yp(*) , Ypout(*) , 
-     &          Psi(12) , Alpha(12) , Beta(12) , Sig(13) , V(12) , W(12) , 
+      DIMENSION Y(*) , Yy(*) , Wt(*) , Phi(Neq,16) , P(*) , Yp(*) , Ypout(*) ,
+     &          Psi(12) , Alpha(12) , Beta(12) , Sig(13) , V(12) , W(12) ,
      &          G(13) , Gi(11) , Iv(10) , Info(15) , Rtol(*) , Atol(*) , Rpar(*)
      &          , Ipar(*)
-      CHARACTER*8 xern1
-      CHARACTER*16 xern3 , xern4
+      CHARACTER(8) :: xern1
+      CHARACTER(16) :: xern3 , xern4
 !
       EXTERNAL DF
 !

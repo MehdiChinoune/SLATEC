@@ -71,9 +71,9 @@
 !     INTEGER                ICIRFX
 !     PARAMETER            ( ICIRFX=62 )
 !     .. Scalar Arguments ..
-!     CHARACTER*1            CB
+!     CHARACTER ::            CB
 !     .. Array Arguments ..
-!     CHARACTER*1            CA(*)
+!     CHARACTER ::            CA(*)
 !     .. Local Scalars ..
 !     INTEGER                IVAL
 !     .. Intrinsic Functions ..

@@ -387,17 +387,17 @@
       INTEGER Ip(3) , Ma , Mdw , Me , Mg , Mode , N
       REAL Prgopt(*) , Rnorme , Rnorml , W(Mdw,*) , Ws(*) , X(*)
 !
-      EXTERNAL H12 , LSI , R1MACH , SASUM , SAXPY , SCOPY , SDOT , SNRM2 , 
+      EXTERNAL H12 , LSI , R1MACH , SASUM , SAXPY , SCOPY , SDOT , SNRM2 ,
      &         SSCAL , SSWAP , XERMSG
       REAL R1MACH , SASUM , SDOT , SNRM2
 !
-      REAL enorm , fnorm , gam , rb , rn , rnmax , size , sn , snmax , srelpr , 
+      REAL enorm , fnorm , gam , rb , rn , rnmax , size , sn , snmax , srelpr ,
      &     t , tau , uj , up , vj , xnorm , xnrme
-      INTEGER i , imax , j , jp1 , k , key , kranke , last , lchk , link , m , 
-     &        mapke1 , mdeqc , mend , mep1 , n1 , n2 , next , nlink , nopt , 
+      INTEGER i , imax , j , jp1 , k , key , kranke , last , lchk , link , m ,
+     &        mapke1 , mdeqc , mend , mep1 , n1 , n2 , next , nlink , nopt ,
      &        np1 , ntimes
       LOGICAL cov , first
-      CHARACTER*8 xern1 , xern2 , xern3 , xern4
+      CHARACTER(8) :: xern1 , xern2 , xern3 , xern4
       SAVE first , srelpr
 !
       DATA first/.TRUE./

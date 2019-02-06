@@ -4,9 +4,9 @@
       IMPLICIT NONE
 !*--LA05CS5
 !*** Start of declarations inserted by SPAG
-      INTEGER i , Ia , ii , ij , im , in , ins , ipp , ir , is , j , jm , jns , 
+      INTEGER i , Ia , ii , ij , im , in , ins , ipp , ir , is , j , jm , jns ,
      &        jp , k , kj , kk , kl , km , knp
-      INTEGER kp , kpl , kq , kr , krl , ks , l , last , last1 , last2 , LCOl , 
+      INTEGER kp , kpl , kq , kr , krl , ks , l , last , last1 , last2 , LCOl ,
      &        LENl , LENu , LP , LROw , m , m1 , mcp , Mm , N
       INTEGER NCP , nz
 !*** End of declarations inserted by SPAG
@@ -48,7 +48,7 @@
       REAL A(*) , G , U , am , W(*) , SMAll , au
       INTEGER Ind(Ia,2) , Iw(N,8)
       INTEGER Ip(N,2)
-      CHARACTER*8 xern1
+      CHARACTER(8) :: xern1
 !
       COMMON /LA05DS/ SMAll , LP , LENl , LENu , NCP , LROw , LCOl
 !***FIRST EXECUTABLE STATEMENT  LA05CS

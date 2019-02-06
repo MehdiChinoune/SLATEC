@@ -4,9 +4,9 @@
       IMPLICIT NONE
 !*--FCNQX25
 !*** Start of declarations inserted by SPAG
-      INTEGER i , I1MACH , ic1 , ic2 , id , ierr , ierror , ip , ipn , iq , ir , 
+      INTEGER i , I1MACH , ic1 , ic2 , id , ierr , ierror , ip , ipn , iq , ir ,
      &        irad , isig , isum , ix11 , ix12 , ix13 , ix21 , ix22 , ix23
-      INTEGER mu , mu1 , mu2 , n , nbits , ndec , nerr , nradpl , nu1 , nudiff , 
+      INTEGER mu , mu1 , mu2 , n , nbits , ndec , nerr , nradpl , nu1 , nudiff ,
      &        NUMXER
 !*** End of declarations inserted by SPAG
 !***BEGIN PROLOGUE  FCNQX2
@@ -31,9 +31,9 @@
 !   910104  Changed to print variable number of decimals. (DWL and JMS)
 !***END PROLOGUE  FCNQX2
 !
-      CHARACTER*34 fmt , fmtf , fmti
+      CHARACTER(34) :: fmt , fmtf , fmti
       INTEGER Lun , Kprint , Ipass
-      DIMENSION p(10) , q(10) , r(10) , c1(10) , c2(10) , ip(10) , iq(10) , 
+      DIMENSION p(10) , q(10) , r(10) , c1(10) , c2(10) , ip(10) , iq(10) ,
      &          ir(10)
       DIMENSION ic1(10) , ic2(10) , pn(10) , ipn(10)
       DOUBLE PRECISION p , q , r , c1 , c2 , pn

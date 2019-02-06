@@ -132,14 +132,14 @@
 !     .. Scalar Arguments ..
       DOUBLE PRECISION Alpha , Beta
       INTEGER Incx , Incy , Kl , Ku , Lda , M , N
-      CHARACTER*1 Trans
+      CHARACTER :: Trans
 !     .. Array Arguments ..
       DOUBLE PRECISION A(Lda,*) , X(*) , Y(*)
       DOUBLE PRECISION ONE , ZERO
       PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
 !     .. Local Scalars ..
       DOUBLE PRECISION temp
-      INTEGER i , info , ix , iy , j , jx , jy , k , kup1 , kx , ky , lenx , 
+      INTEGER i , info , ix , iy , j , jx , jy , k , kup1 , kx , ky , lenx ,
      &        leny
 !     .. External Functions ..
       LOGICAL LSAME

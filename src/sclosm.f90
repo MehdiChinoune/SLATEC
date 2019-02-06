@@ -25,7 +25,7 @@
 !   900402  Added TYPE section.  (WRB)
 !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
 !***END PROLOGUE  SCLOSM
-      CHARACTER*8 xern1
+      CHARACTER(8) :: xern1
 !
 !***FIRST EXECUTABLE STATEMENT  SCLOSM
       ipagef = Ipage

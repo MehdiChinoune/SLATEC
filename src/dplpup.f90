@@ -5,7 +5,7 @@
       IMPLICIT NONE
 !*--DPLPUP6
 !*** Start of declarations inserted by SPAG
-      INTEGER i , indcat , index , Info , iplace , itcnt , itmax , j , Mrelas , 
+      INTEGER i , indcat , index , Info , iplace , itcnt , itmax , j , Mrelas ,
      &        Nvars
 !*** End of declarations inserted by SPAG
 !***BEGIN PROLOGUE  DPLPUP
@@ -43,12 +43,12 @@
 !           DO loops to DO loops.  (RWC)
 !   900602  Get rid of ASSIGNed GOTOs.  (RWC)
 !***END PROLOGUE  DPLPUP
-      DOUBLE PRECISION Abig , aij , Amat(*) , amn , amx , Asmall , Bl(*) , 
+      DOUBLE PRECISION Abig , aij , Amat(*) , amn , amx , Asmall , Bl(*) ,
      &                 Bu(*) , Dattrv(*) , Prgopt(*) , xval , zero
       INTEGER iflag(10) , Imat(*) , Ind(*)
       LOGICAL Sizeup , first
-      CHARACTER*8 xern1 , xern2
-      CHARACTER*16 xern3 , xern4
+      CHARACTER(8) :: xern1 , xern2
+      CHARACTER(16) :: xern3 , xern4
 !
 !***FIRST EXECUTABLE STATEMENT  DPLPUP
       zero = 0.D0

@@ -105,7 +105,7 @@
 !***END PROLOGUE  DTRMV
 !     .. Scalar Arguments ..
       INTEGER Incx , Lda , N
-      CHARACTER*1 Diag , Trans , Uplo
+      CHARACTER :: Diag , Trans , Uplo
 !     .. Array Arguments ..
       DOUBLE PRECISION A(Lda,*) , X(*)
 !     .. Parameters ..

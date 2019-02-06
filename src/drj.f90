@@ -299,12 +299,12 @@
 !   920501  Reformatted the REFERENCES section.  (WRB)
 !***END PROLOGUE  DRJ
       INTEGER Ier
-      CHARACTER*16 xern3 , xern4 , xern5 , xern6 , xern7
+      CHARACTER(16) :: xern3 , xern4 , xern5 , xern6 , xern7
       DOUBLE PRECISION alfa , beta , c1 , c2 , c3 , c4 , ea , eb , ec , e2 , e3
       DOUBLE PRECISION lolim , uplim , epslon , errtol , D1MACH
       DOUBLE PRECISION lamda , mu , P , pn , pndev
       DOUBLE PRECISION power4 , DRC , sigma , s1 , s2 , s3 , X , xn , xndev
-      DOUBLE PRECISION xnroot , Y , yn , yndev , ynroot , Z , zn , zndev , 
+      DOUBLE PRECISION xnroot , Y , yn , yndev , ynroot , Z , zn , zndev ,
      &                 znroot
       LOGICAL first
       SAVE errtol , lolim , uplim , c1 , c2 , c3 , c4 , first

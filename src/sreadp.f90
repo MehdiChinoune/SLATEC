@@ -33,7 +33,7 @@
 !***END PROLOGUE  SREADP
       INTEGER List(*)
       REAL Rlist(*)
-      CHARACTER*8 xern1 , xern2
+      CHARACTER(8) :: xern1 , xern2
 !***FIRST EXECUTABLE STATEMENT  SREADP
       ipagef = Ipage
       lpg = Lpage

@@ -105,7 +105,7 @@
 !***END PROLOGUE  DTPSV
 !     .. Scalar Arguments ..
       INTEGER Incx , N
-      CHARACTER*1 Diag , Trans , Uplo
+      CHARACTER :: Diag , Trans , Uplo
 !     .. Array Arguments ..
       DOUBLE PRECISION Ap(*) , X(*)
 !     .. Parameters ..

@@ -105,7 +105,7 @@
 !***END PROLOGUE  CTPSV
 !     .. Scalar Arguments ..
       INTEGER Incx , N
-      CHARACTER*1 Diag , Trans , Uplo
+      CHARACTER :: Diag , Trans , Uplo
 !     .. Array Arguments ..
       COMPLEX Ap(*) , X(*)
 !     .. Parameters ..

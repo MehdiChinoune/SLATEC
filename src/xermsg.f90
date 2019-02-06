@@ -4,7 +4,7 @@
       IMPLICIT NONE
 !*--XERMSG5
 !*** Start of declarations inserted by SPAG
-      INTEGER i , J4SAVE , kdummy , kount , lerr , Level , lkntrl , llevel , 
+      INTEGER i , J4SAVE , kdummy , kount , lerr , Level , lkntrl , llevel ,
      &        ltemp , maxmes , mkntrl , Nerr
 !*** End of declarations inserted by SPAG
 !***BEGIN PROLOGUE  XERMSG
@@ -192,9 +192,9 @@
 !   920501  Reformatted the REFERENCES section.  (WRB)
 !***END PROLOGUE  XERMSG
       CHARACTER*(*) Librar , Subrou , Messg
-      CHARACTER*8 xlibr , xsubr
-      CHARACTER*72 temp
-      CHARACTER*20 lfirst
+      CHARACTER(8) :: xlibr , xsubr
+      CHARACTER(72) :: temp
+      CHARACTER(20) :: lfirst
 !***FIRST EXECUTABLE STATEMENT  XERMSG
       lkntrl = J4SAVE(2,0,.FALSE.)
       maxmes = J4SAVE(4,0,.FALSE.)

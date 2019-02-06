@@ -33,7 +33,7 @@
 !***END PROLOGUE  DREADP
       INTEGER List(*)
       DOUBLE PRECISION Rlist(*)
-      CHARACTER*8 xern1 , xern2
+      CHARACTER(8) :: xern1 , xern2
 !***FIRST EXECUTABLE STATEMENT  DREADP
       ipagef = Ipage
       lpg = Lpage

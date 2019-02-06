@@ -142,7 +142,7 @@
 !***END PROLOGUE  DTBMV
 !     .. Scalar Arguments ..
       INTEGER Incx , K , Lda , N
-      CHARACTER*1 Diag , Trans , Uplo
+      CHARACTER :: Diag , Trans , Uplo
 !     .. Array Arguments ..
       DOUBLE PRECISION A(Lda,*) , X(*)
 !     .. Parameters ..

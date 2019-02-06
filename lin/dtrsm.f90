@@ -130,7 +130,7 @@
 !           lines were modified.  (BKS)
 !***END PROLOGUE  DTRSM
 !     .. Scalar Arguments ..
-      CHARACTER*1 Side , Uplo , Transa , Diag
+      CHARACTER :: Side , Uplo , Transa , Diag
       INTEGER M , N , Lda , Ldb
       DOUBLE PRECISION Alpha
 !     .. Array Arguments ..

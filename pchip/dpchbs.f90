@@ -167,7 +167,7 @@
 !
       INTEGER k , kk
       DOUBLE PRECISION dov3 , hnew , hold
-      CHARACTER*8 libnam , subnam
+      CHARACTER(8) :: libnam , subnam
 !***FIRST EXECUTABLE STATEMENT  DPCHBS
 !
 !  Initialize.

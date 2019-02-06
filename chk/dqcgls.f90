@@ -41,25 +41,25 @@
       IMPLICIT NONE
 !*--DQCGLS42
 !*** Start of declarations inserted by SPAG
-      DOUBLE PRECISION a , aa , b , bb , D1MACH , delmax , delx , r , rnorm , 
+      DOUBLE PRECISION a , aa , b , bb , D1MACH , delmax , delx , r , rnorm ,
      &                 work , xx
       INTEGER i , Ipass , j , kk , Kprint
 !*** End of declarations inserted by SPAG
       DIMENSION aa(4,4,2) , a(4,4) , bb(4,2) , b(4) , xx(4,4)
       DIMENSION work(50)
-      CHARACTER*1 list(2)
+      CHARACTER :: list(2)
       INTEGER inf(4) , nerr , kprog , kcase
       INTEGER iwork(20) , info , Lun
-      DATA aa/1.D0 , .5D0 , 1.D0 , .25D0 , 0.D0 , 2.D0 , 0.D0 , 1.D0 , 2.D0 , 
-     &     -1.D0 , 1.D0 , 0.D0 , 0.D0 , 0.D0 , 0.D0 , 0.D0 , 1.D0 , 2.D0 , 
-     &     -1.D0 , 0.D0 , 0.D0 , 1.D0 , 2.D0 , 0.D0 , -1.D0 , 0.D0 , 1.D0 , 
+      DATA aa/1.D0 , .5D0 , 1.D0 , .25D0 , 0.D0 , 2.D0 , 0.D0 , 1.D0 , 2.D0 ,
+     &     -1.D0 , 1.D0 , 0.D0 , 0.D0 , 0.D0 , 0.D0 , 0.D0 , 1.D0 , 2.D0 ,
+     &     -1.D0 , 0.D0 , 0.D0 , 1.D0 , 2.D0 , 0.D0 , -1.D0 , 0.D0 , 1.D0 ,
      &     0.D0 , 1.D0 , 0.D0 , 1.D0 , 0.D0/
       DATA bb/3.D0 , 1.5D0 , 2.D0 , 1.25D0 , 1.D0 , 3.D0 , 3.D0 , 0.D0/
-      DATA xx/.9999999999999787D0 , 1.000000000000007D0 , 1.000000000000007D0 , 
-     &     0.D0 , .8095238095238102D0 , 1.047619047619044D0 , 
-     &     1.095238095238081D0 , 0.D0 , .7777777777777857D0 , 
-     &     1.444444444444429D0 , .3333333333333393D0 , .5555555555555500D0 , 
-     &     .3333333333333321D0 , 0.0D0 , -.3333333333333286D0 , 
+      DATA xx/.9999999999999787D0 , 1.000000000000007D0 , 1.000000000000007D0 ,
+     &     0.D0 , .8095238095238102D0 , 1.047619047619044D0 ,
+     &     1.095238095238081D0 , 0.D0 , .7777777777777857D0 ,
+     &     1.444444444444429D0 , .3333333333333393D0 , .5555555555555500D0 ,
+     &     .3333333333333321D0 , 0.0D0 , -.3333333333333286D0 ,
      &     .3333333333333286D0/
       DATA inf/0 , 1 , 0 , 2/
       DATA list/'L' , 'U'/
@@ -124,13 +124,13 @@
 99005       FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,
      &              '.  RNORM (TOO LARGE) IS',D11.4/)
           ENDIF
-          IF ( Kprint>=3 ) WRITE (Lun,99006) list(kprog) , kcase , info , 
+          IF ( Kprint>=3 ) WRITE (Lun,99006) list(kprog) , kcase , info ,
      &                            inf(kk)
 !
 99006     FORMAT (3X,A,'LSIA, CASE ',I1,'.  INFO=',I1,' (SHOULD = ',I1,')'/)
           IF ( info/=inf(kk) ) THEN
             nerr = nerr + 1
-            IF ( Kprint>=2 ) WRITE (Lun,99007) list(kprog) , kcase , info , 
+            IF ( Kprint>=2 ) WRITE (Lun,99007) list(kprog) , kcase , info ,
      &                              inf(kk)
 99007       FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,'.  INFO=',I1,
      &              ' (SHOULD = ',I1,')'/)

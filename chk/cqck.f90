@@ -43,12 +43,12 @@
 !           editorial changes.  (RWC)
 !***END PROLOGUE  CQCK
       REAL r , delx , delmax , R1MACH
-      COMPLEX a(4,4) , at(5,4) , abe(5,7) , abet(5,7) , b(4) , bt(4) , c(4) , 
+      COMPLEX a(4,4) , at(5,4) , abe(5,7) , abet(5,7) , b(4) , bt(4) , c(4) ,
      &        work(35)
-      CHARACTER*4 list(4)
-      INTEGER lda , n , ml , mu , ind , iwork(4) , Nerr , i , j , j1 , j2 , jd , 
+      CHARACTER(4) :: list(4)
+      INTEGER lda , n , ml , mu , ind , iwork(4) , Nerr , i , j , j1 , j2 , jd ,
      &        mlp , k , kcase , kprog
-      DATA a/(2.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0) , 
+      DATA a/(2.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,
      &     (0.E0,-1.E0) , (2.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0)
      &     , (0.E0,0.E0) , (3.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0)
      &     , (0.E0,-1.E0) , (4.E0,0.E0)/

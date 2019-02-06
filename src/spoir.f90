@@ -111,7 +111,7 @@
       INTEGER Lda , N , Itask , Ind , info , j
       REAL A(Lda,*) , V(*) , Work(N,*) , SASUM , xnorm , dnorm , R1MACH
       DOUBLE PRECISION DSDOT
-      CHARACTER*8 xern1 , xern2
+      CHARACTER(8) :: xern1 , xern2
 !***FIRST EXECUTABLE STATEMENT  SPOIR
       IF ( Lda<N ) THEN
         Ind = -1

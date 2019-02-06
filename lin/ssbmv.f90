@@ -135,7 +135,7 @@
 !     .. Scalar Arguments ..
       REAL Alpha , Beta
       INTEGER Incx , Incy , K , Lda , N
-      CHARACTER*1 Uplo
+      CHARACTER :: Uplo
 !     .. Array Arguments ..
       REAL A(Lda,*) , X(*) , Y(*)
 !     .. Parameters ..

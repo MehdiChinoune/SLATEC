@@ -4,7 +4,7 @@
       IMPLICIT NONE
 !*--XERSVE5
 !*** Start of declarations inserted by SPAG
-      INTEGER i , I1MACH , Icount , iunit , Kflag , kount , kountx , kunit , 
+      INTEGER i , I1MACH , Icount , iunit , Kflag , kount , kountx , kunit ,
      &        LENTAB , Level , levtab , Nerr , nertab , nmsg , nunit
 !*** End of declarations inserted by SPAG
 !***BEGIN PROLOGUE  XERSVE
@@ -66,8 +66,8 @@
       PARAMETER (LENTAB=10)
       INTEGER lun(5)
       CHARACTER*(*) Librar , Subrou , Messg
-      CHARACTER*8 libtab(LENTAB) , subtab(LENTAB) , lib , sub
-      CHARACTER*20 mestab(LENTAB) , mes
+      CHARACTER(8) :: libtab(LENTAB) , subtab(LENTAB) , lib , sub
+      CHARACTER(20) :: mestab(LENTAB) , mes
       DIMENSION nertab(LENTAB) , levtab(LENTAB) , kount(LENTAB)
       SAVE libtab , subtab , mestab , nertab , levtab , kount , kountx , nmsg
       DATA kountx/0/ , nmsg/0/
@@ -99,7 +99,7 @@
 !           Print body of table.
 !
           DO i = 1 , nmsg
-            WRITE (iunit,99002) libtab(i) , subtab(i) , mestab(i) , nertab(i) , 
+            WRITE (iunit,99002) libtab(i) , subtab(i) , mestab(i) , nertab(i) ,
      &                          levtab(i) , kount(i)
 99002       FORMAT (1X,A,3X,A,3X,A,3I10)
           ENDDO

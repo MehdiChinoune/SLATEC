@@ -31,19 +31,19 @@
       LOGICAL Fatal
       REAL Eps , Thresh
       INTEGER Kprint , Nalf , Nbet , Nidim , Nmax , Nout
-      CHARACTER*6 Sname
+      CHARACTER(6) :: Sname
 !     .. Array Arguments ..
       REAL A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) , Bet(Nbet)
-     &     , G(Nmax) , B(Nmax,Nmax) , Bb(Nmax*Nmax) , Bs(Nmax*Nmax) , 
+     &     , G(Nmax) , B(Nmax,Nmax) , Bb(Nmax*Nmax) , Bs(Nmax*Nmax) ,
      &     C(Nmax,Nmax) , Cc(Nmax*Nmax) , Cs(Nmax*Nmax) , Ct(Nmax)
       INTEGER Idim(Nidim)
 !     .. Local Scalars ..
       REAL alpha , als , beta , bls , err , errmax
-      INTEGER i , ia , ib , ics , icu , im , in , laa , lbb , lcc , lda , ldas , 
+      INTEGER i , ia , ib , ics , icu , im , in , laa , lbb , lcc , lda , ldas ,
      &        ldb , ldbs , ldc , ldcs , m , ms , n , na , nargs , nc , nerr , ns
       LOGICAL ftl , null , reset , left
-      CHARACTER*1 side , sides , uplo , uplos
-      CHARACTER*2 ichs , ichu
+      CHARACTER :: side , sides , uplo , uplos
+      CHARACTER(2) :: ichs , ichu
 !     .. Local Arrays ..
       LOGICAL isame(13)
 !     .. External Functions ..
@@ -205,7 +205,7 @@
                           Fatal = .TRUE.
                           IF ( Kprint>=3 ) THEN
                             WRITE (Nout,FMT=99004) Sname
-                            WRITE (Nout,FMT=99005) nc , Sname , side , uplo , 
+                            WRITE (Nout,FMT=99005) nc , Sname , side , uplo ,
      &                             m , n , alpha , lda , ldb , beta , ldc
                           ENDIF
                         ENDIF

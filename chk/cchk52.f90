@@ -31,21 +31,21 @@
       LOGICAL Fatal
       REAL Eps , Thresh
       INTEGER Incmax , Kprint , Nalf , Nidim , Ninc , Nmax , Nout
-      CHARACTER*6 Sname
+      CHARACTER(6) :: Sname
 !     .. Array Arguments ..
       COMPLEX A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) , X(Nmax)
-     &        , Xs(Nmax*Incmax) , Xx(Nmax*Incmax) , Y(Nmax) , Ys(Nmax*Incmax) , 
+     &        , Xs(Nmax*Incmax) , Xx(Nmax*Incmax) , Y(Nmax) , Ys(Nmax*Incmax) ,
      &        Yt(Nmax) , Yy(Nmax*Incmax) , Z(Nmax)
       REAL G(Nmax)
       INTEGER Idim(Nidim) , Inc(Ninc)
 !     .. Local Scalars ..
       COMPLEX alpha , transl
       REAL err , errmax , ralpha , rals
-      INTEGER i , ia , ic , in , incx , incxs , ix , j , ja , jj , laa , lda , 
+      INTEGER i , ia , ic , in , incx , incxs , ix , j , ja , jj , laa , lda ,
      &        ldas , lj , lx , n , nargs , nc , nerr , ns
       LOGICAL ftl , full , null , packed , reset , upper
-      CHARACTER*1 uplo , uplos
-      CHARACTER*2 ich
+      CHARACTER :: uplo , uplos
+      CHARACTER(2) :: ich
 !     .. Local Arrays ..
       COMPLEX w(1)
       LOGICAL isame(13)
@@ -209,10 +209,10 @@
                   IF ( Kprint>=3 ) THEN
                     WRITE (Nout,FMT=99004) Sname
                     IF ( full ) THEN
-                      WRITE (Nout,FMT=99006) nc , Sname , uplo , n , ralpha , 
+                      WRITE (Nout,FMT=99006) nc , Sname , uplo , n , ralpha ,
      &                       incx , lda
                     ELSEIF ( packed ) THEN
-                      WRITE (Nout,FMT=99005) nc , Sname , uplo , n , ralpha , 
+                      WRITE (Nout,FMT=99005) nc , Sname , uplo , n , ralpha ,
      &                       incx
                     ENDIF
                   ENDIF

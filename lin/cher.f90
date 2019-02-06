@@ -95,7 +95,7 @@
 !     .. Scalar Arguments ..
       REAL Alpha
       INTEGER Incx , Lda , N
-      CHARACTER*1 Uplo
+      CHARACTER :: Uplo
 !     .. Array Arguments ..
       COMPLEX A(Lda,*) , X(*)
 !     .. Parameters ..

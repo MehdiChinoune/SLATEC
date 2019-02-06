@@ -31,9 +31,9 @@
       DOUBLE PRECISION Alpha , Beta , Eps , Err
       INTEGER Kk , Kprint , Lda , Ldb , Ldc , Ldcc , M , N , Nout
       LOGICAL Mv
-      CHARACTER*1 Transa , Transb
+      CHARACTER :: Transa , Transb
 !     .. Array Arguments ..
-      DOUBLE PRECISION A(Lda,*) , B(Ldb,*) , C(Ldc,*) , Cc(Ldcc,*) , Ct(*) , 
+      DOUBLE PRECISION A(Lda,*) , B(Ldb,*) , C(Ldc,*) , Cc(Ldcc,*) , Ct(*) ,
      &                 G(*)
 !     .. Local Scalars ..
       DOUBLE PRECISION erri

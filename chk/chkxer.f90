@@ -23,7 +23,7 @@
 !     .. Scalar Arguments ..
       LOGICAL Fatal
       INTEGER Infot , Kprint , Nout
-      CHARACTER*6 Srnamt
+      CHARACTER(6) :: Srnamt
 !     .. Local Scalars ..
       INTEGER nerr
 !     .. External Functions ..

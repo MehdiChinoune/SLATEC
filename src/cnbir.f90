@@ -175,11 +175,11 @@
 !   920501  Reformatted the REFERENCES section.  (WRB)
 !***END PROLOGUE  CNBIR
 !
-      INTEGER Lda , N , Itask , Ind , Iwork(*) , info , j , k , kk , l , m , 
+      INTEGER Lda , N , Itask , Ind , Iwork(*) , info , j , k , kk , l , m ,
      &        Ml , Mu , nc
       COMPLEX Abe(Lda,*) , V(*) , Work(N,*) , CDCDOT
       REAL xnorm , dnorm , SCASUM , R1MACH
-      CHARACTER*8 xern1 , xern2
+      CHARACTER(8) :: xern1 , xern2
 !***FIRST EXECUTABLE STATEMENT  CNBIR
       IF ( Lda<N ) THEN
         Ind = -1

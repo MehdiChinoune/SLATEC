@@ -744,24 +744,24 @@
 !           consistent with DEBDF.  (RWC)
 !   920501  Reformatted the REFERENCES section.  (WRB)
 !***END PROLOGUE  DDEBDF
-      INTEGER IACor , IBAnd , IBEgin , icomi , icomr , idelsn , Idid , IER , 
-     &        IEWt , iinout , IINteg , IJAc , ilrw , Info , INIt , IOWns , 
-     &        Ipar , IQUit , ISAvf , ITOl , itstar , ITStop , IWM , Iwork , 
-     &        IYH , iypout , JSTart , KFLag , KSTeps , L , Liw , Lrw , MAXord , 
+      INTEGER IACor , IBAnd , IBEgin , icomi , icomr , idelsn , Idid , IER ,
+     &        IEWt , iinout , IINteg , IJAc , ilrw , Info , INIt , IOWns ,
+     &        Ipar , IQUit , ISAvf , ITOl , itstar , ITStop , IWM , Iwork ,
+     &        IYH , iypout , JSTart , KFLag , KSTeps , L , Liw , Lrw , MAXord ,
      &        METh , MITer , ml , mu , N , Neq , NFE , NJE , NQ , NQU , NST
-      DOUBLE PRECISION Atol , EL0 , H , HMIn , HMXi , HU , ROWns , Rpar , Rtol , 
+      DOUBLE PRECISION Atol , EL0 , H , HMIn , HMXi , HU , ROWns , Rpar , Rtol ,
      &                 Rwork , T , TN , TOLd , Tout , UROund , Y
       LOGICAL intout
-      CHARACTER*8 xern1 , xern2
-      CHARACTER*16 xern3
+      CHARACTER(8) :: xern1 , xern2
+      CHARACTER(16) :: xern3
 !
-      DIMENSION Y(*) , Info(15) , Rtol(*) , Atol(*) , Rwork(*) , Iwork(*) , 
+      DIMENSION Y(*) , Info(15) , Rtol(*) , Atol(*) , Rwork(*) , Iwork(*) ,
      &          Rpar(*) , Ipar(*)
 !
-      COMMON /DDEBD1/ TOLd , ROWns(210) , EL0 , H , HMIn , HMXi , HU , TN , 
-     &                UROund , IQUit , INIt , IYH , IEWt , IACor , ISAvf , IWM , 
-     &                KSTeps , IBEgin , ITOl , IINteg , ITStop , IJAc , IBAnd , 
-     &                IOWns(6) , IER , JSTart , KFLag , L , METh , MITer , 
+      COMMON /DDEBD1/ TOLd , ROWns(210) , EL0 , H , HMIn , HMXi , HU , TN ,
+     &                UROund , IQUit , INIt , IYH , IEWt , IACor , ISAvf , IWM ,
+     &                KSTeps , IBEgin , ITOl , IINteg , ITStop , IJAc , IBAnd ,
+     &                IOWns(6) , IER , JSTart , KFLag , L , METh , MITer ,
      &                MAXord , N , NQ , NST , NFE , NJE , NQU
 !
       EXTERNAL DF , DJAC

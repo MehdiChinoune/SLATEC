@@ -31,22 +31,22 @@
       LOGICAL Fatal
       REAL Eps , Thresh
       INTEGER Incmax , Kprint , Nalf , Nidim , Ninc , Nmax , Nout
-      CHARACTER*6 Sname
+      CHARACTER(6) :: Sname
 !     .. Array Arguments ..
       COMPLEX A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) , X(Nmax)
-     &        , Xs(Nmax*Incmax) , Xx(Nmax*Incmax) , Y(Nmax) , Ys(Nmax*Incmax) , 
+     &        , Xs(Nmax*Incmax) , Xx(Nmax*Incmax) , Y(Nmax) , Ys(Nmax*Incmax) ,
      &        Yt(Nmax) , Yy(Nmax*Incmax) , Z(Nmax,2)
       REAL G(Nmax)
       INTEGER Idim(Nidim) , Inc(Ninc)
 !     .. Local Scalars ..
       COMPLEX alpha , als , transl
       REAL err , errmax
-      INTEGER i , ia , ic , in , incx , incxs , incy , incys , ix , iy , j , 
-     &        ja , jj , laa , lda , ldas , lj , lx , ly , n , nargs , nc , 
+      INTEGER i , ia , ic , in , incx , incxs , incy , incys , ix , iy , j ,
+     &        ja , jj , laa , lda , ldas , lj , lx , ly , n , nargs , nc ,
      &        nerr , ns
       LOGICAL ftl , full , null , packed , reset , upper
-      CHARACTER*1 uplo , uplos
-      CHARACTER*2 ich
+      CHARACTER :: uplo , uplos
+      CHARACTER(2) :: ich
 !     .. Local Arrays ..
       COMPLEX w(2)
       LOGICAL isame(13)
@@ -240,10 +240,10 @@
                       WRITE (Nout,FMT=99005) j
                       WRITE (Nout,FMT=99004) Sname
                       IF ( full ) THEN
-                        WRITE (Nout,FMT=99007) nc , Sname , uplo , n , alpha , 
+                        WRITE (Nout,FMT=99007) nc , Sname , uplo , n , alpha ,
      &                         incx , incy , lda
                       ELSEIF ( packed ) THEN
-                        WRITE (Nout,FMT=99006) nc , Sname , uplo , n , alpha , 
+                        WRITE (Nout,FMT=99006) nc , Sname , uplo , n , alpha ,
      &                         incx , incy
                       ENDIF
                     ENDIF

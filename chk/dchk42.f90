@@ -29,17 +29,17 @@
       LOGICAL Fatal
       DOUBLE PRECISION Eps , Thresh
       INTEGER Incmax , Kprint , Nalf , Nidim , Ninc , Nmax , Nout
-      CHARACTER*6 Sname
+      CHARACTER(6) :: Sname
 !     .. Array Arguments ..
       DOUBLE PRECISION A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax)
-     &                 , G(Nmax) , X(Nmax) , Xs(Nmax*Incmax) , Xx(Nmax*Incmax) , 
-     &                 Y(Nmax) , Ys(Nmax*Incmax) , Yt(Nmax) , Yy(Nmax*Incmax) , 
+     &                 , G(Nmax) , X(Nmax) , Xs(Nmax*Incmax) , Xx(Nmax*Incmax) ,
+     &                 Y(Nmax) , Ys(Nmax*Incmax) , Yt(Nmax) , Yy(Nmax*Incmax) ,
      &                 Z(Nmax)
       INTEGER Idim(Nidim) , Inc(Ninc)
 !     .. Local Scalars ..
       DOUBLE PRECISION alpha , als , err , errmax , transl
-      INTEGER i , ia , im , in , incx , incxs , incy , incys , ix , iy , j , 
-     &        laa , lda , ldas , lx , ly , m , ms , n , nargs , nc , nd , ns , 
+      INTEGER i , ia , im , in , incx , incxs , incy , incys , ix , iy , j ,
+     &        laa , lda , ldas , lx , ly , m , ms , n , nargs , nc , nd , ns ,
      &        nerr
       LOGICAL ftl , null , reset
 !     .. Local Arrays ..
@@ -199,7 +199,7 @@
                     IF ( Kprint>=3 ) THEN
                       WRITE (Nout,FMT=99005) j
                       WRITE (Nout,FMT=99004) Sname
-                      WRITE (Nout,FMT=99006) nc , Sname , m , n , alpha , incx , 
+                      WRITE (Nout,FMT=99006) nc , Sname , m , n , alpha , incx ,
      &                       incy , lda
                     ENDIF
                   ENDIF

@@ -43,26 +43,26 @@
       INTEGER i , isnum , j , n , NALF , NBET , NIDIM , NINC , NKB , Nout
       PARAMETER (NIDIM=6,NKB=4,NINC=4,NALF=3,NBET=3)
       LOGICAL same , tsterr
-      CHARACTER*1 trans
+      CHARACTER :: trans
 !     .. Local Arrays ..
       REAL a(NMAX,NMAX) , aa(NMAX*NMAX) , alf(NALF) , as(NMAX*NMAX) , bet(NBET)
-     &     , g(NMAX) , x(NMAX) , xs(NMAX*INCMAX) , xx(NMAX*INCMAX) , y(NMAX) , 
+     &     , g(NMAX) , x(NMAX) , xs(NMAX*INCMAX) , xx(NMAX*INCMAX) , y(NMAX) ,
      &     ys(NMAX*INCMAX) , yt(NMAX) , yy(NMAX*INCMAX) , z(2*NMAX)
       INTEGER idim(NIDIM) , inc(NINC) , kb(NKB)
       LOGICAL ltest(NSUBS)
-      CHARACTER*6 snames(NSUBS)
+      CHARACTER(6) :: snames(NSUBS)
 !     .. External Functions ..
       REAL R1MACH
       LOGICAL LSE
       EXTERNAL LSE , R1MACH
 !     .. External Subroutines ..
-      EXTERNAL SCHK12 , SCHK22 , SCHK32 , SCHK42 , SCHK52 , SCHK62 , SCHKE2 , 
+      EXTERNAL SCHK12 , SCHK22 , SCHK32 , SCHK42 , SCHK52 , SCHK62 , SCHKE2 ,
      &         SMVCH
 !     .. Intrinsic Functions ..
       INTRINSIC ABS , MAX , MIN
 !     .. Data statements ..
-      DATA snames/'SGEMV ' , 'SGBMV ' , 'SSYMV ' , 'SSBMV ' , 'SSPMV ' , 
-     &     'STRMV ' , 'STBMV ' , 'STPMV ' , 'STRSV ' , 'STBSV ' , 'STPSV ' , 
+      DATA snames/'SGEMV ' , 'SGBMV ' , 'SSYMV ' , 'SSBMV ' , 'SSPMV ' ,
+     &     'STRMV ' , 'STBMV ' , 'STPMV ' , 'STRSV ' , 'STBSV ' , 'STPSV ' ,
      &     'SGER  ' , 'SSYR  ' , 'SSPR  ' , 'SSYR2 ' , 'SSPR2 '/
       DATA idim/0 , 1 , 2 , 3 , 5 , 9/
       DATA kb/0 , 1 , 2 , 4/

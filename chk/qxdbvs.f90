@@ -4,8 +4,8 @@
       IMPLICIT NONE
 !*--QXDBVS5
 !*** Start of declarations inserted by SPAG
-      INTEGER i , iflag , igofx , Ipass , ipss , j , kont , kount , Kprint , l , 
-     &        Lun , ncomp , ndiw , ndw , neqivp , nfc , nic , nrowa , nrowb , 
+      INTEGER i , iflag , igofx , Ipass , ipss , j , kont , kount , Kprint , l ,
+     &        Lun , ncomp , ndiw , ndw , neqivp , nfc , nic , nrowa , nrowb ,
      &        nrowy
       INTEGER numort , nxpts
 !*** End of declarations inserted by SPAG
@@ -27,28 +27,28 @@
       DOUBLE PRECISION work(1000) , ae , re , XSAve , sve , TERm , tol
       DOUBLE PRECISION y(4,15) , xpts(15) , a(2,4) , alpha(2) , b(2,4) , beta(2)
      &                 , yans(2,15) , reler , abser
-      CHARACTER*4 msg
+      CHARACTER(4) :: msg
       COMMON /DSAVEX/ XSAve , TERm
       DATA yans(1,1) , yans(2,1) , yans(1,2) , yans(2,2) , yans(1,3) , yans(2,3)
-     &     , yans(1,4) , yans(2,4) , yans(1,5) , yans(2,5) , yans(1,6) , 
+     &     , yans(1,4) , yans(2,4) , yans(1,5) , yans(2,5) , yans(1,6) ,
      &     yans(2,6) , yans(1,7) , yans(2,7) , yans(1,8) , yans(2,8) , yans(1,9)
-     &     , yans(2,9) , yans(1,10) , yans(2,10) , yans(1,11) , yans(2,11) , 
-     &     yans(1,12) , yans(2,12) , yans(1,13) , yans(2,13) , yans(1,14) , 
-     &     yans(2,14) , yans(1,15) , yans(2,15)/5.000000000D+00 , 
-     &     -6.888880126D-01 , 8.609248635D+00 , -1.083092311D+00 , 
-     &     1.674923836D+01 , -2.072210073D+00 , 3.351098494D+01 , 
-     &     -4.479263780D+00 , 6.601103894D+01 , -8.909222513D+00 , 
-     &     8.579580988D+01 , -1.098742758D+01 , 1.106536877D+02 , 
-     &     -1.402469444D+01 , 1.421228220D+02 , -1.742236546D+01 , 
-     &     1.803383474D+02 , -2.086465851D+01 , 2.017054332D+02 , 
-     &     -1.990879843D+01 , 2.051622475D+02 , -1.324886978D+01 , 
-     &     2.059197452D+02 , 1.051529813D+01 , 1.972191446D+02 , 
-     &     9.320592785D+01 , 1.556894846D+02 , 3.801682434D+02 , 
+     &     , yans(2,9) , yans(1,10) , yans(2,10) , yans(1,11) , yans(2,11) ,
+     &     yans(1,12) , yans(2,12) , yans(1,13) , yans(2,13) , yans(1,14) ,
+     &     yans(2,14) , yans(1,15) , yans(2,15)/5.000000000D+00 ,
+     &     -6.888880126D-01 , 8.609248635D+00 , -1.083092311D+00 ,
+     &     1.674923836D+01 , -2.072210073D+00 , 3.351098494D+01 ,
+     &     -4.479263780D+00 , 6.601103894D+01 , -8.909222513D+00 ,
+     &     8.579580988D+01 , -1.098742758D+01 , 1.106536877D+02 ,
+     &     -1.402469444D+01 , 1.421228220D+02 , -1.742236546D+01 ,
+     &     1.803383474D+02 , -2.086465851D+01 , 2.017054332D+02 ,
+     &     -1.990879843D+01 , 2.051622475D+02 , -1.324886978D+01 ,
+     &     2.059197452D+02 , 1.051529813D+01 , 1.972191446D+02 ,
+     &     9.320592785D+01 , 1.556894846D+02 , 3.801682434D+02 ,
      &     1.818989404D-12 , 1.379853993D+03/
-      DATA xpts(1) , xpts(2) , xpts(3) , xpts(4) , xpts(5) , xpts(6) , xpts(7) , 
-     &     xpts(8) , xpts(9) , xpts(10) , xpts(11) , xpts(12) , xpts(13) , 
-     &     xpts(14) , xpts(15)/60.0D+00 , 55.0D+00 , 50.0D+00 , 45.0D+00 , 
-     &     40.0D+00 , 38.0D+00 , 36.0D+00 , 34.0D+00 , 32.0D+00 , 31.0D+00 , 
+      DATA xpts(1) , xpts(2) , xpts(3) , xpts(4) , xpts(5) , xpts(6) , xpts(7) ,
+     &     xpts(8) , xpts(9) , xpts(10) , xpts(11) , xpts(12) , xpts(13) ,
+     &     xpts(14) , xpts(15)/60.0D+00 , 55.0D+00 , 50.0D+00 , 45.0D+00 ,
+     &     40.0D+00 , 38.0D+00 , 36.0D+00 , 34.0D+00 , 32.0D+00 , 31.0D+00 ,
      &     30.8D+00 , 30.6D+00 , 30.4D+00 , 30.2D+00 , 30.0D+00/
 !***FIRST EXECUTABLE STATEMENT  QXDBVS
       IF ( Kprint>=2 ) THEN

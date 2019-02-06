@@ -27,7 +27,7 @@
 !   900402  Added TYPE section.  (WRB)
 !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
 !***END PROLOGUE  SOPENM
-      CHARACTER*8 xern1
+      CHARACTER(8) :: xern1
 !
 !***FIRST EXECUTABLE STATEMENT  SOPENM
       ipagef = Ipage

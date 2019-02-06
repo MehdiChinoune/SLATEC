@@ -111,7 +111,7 @@
 !
       INTEGER Lda , N , Itask , Ind , Iwork(*) , info , j
       REAL A(Lda,*) , V(*) , Work(N,*) , xnorm , dnorm , SDSDOT , SASUM , R1MACH
-      CHARACTER*8 xern1 , xern2
+      CHARACTER(8) :: xern1 , xern2
 !***FIRST EXECUTABLE STATEMENT  SGEIR
       IF ( Lda<N ) THEN
         Ind = -1

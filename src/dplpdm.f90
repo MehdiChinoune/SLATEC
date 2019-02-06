@@ -6,7 +6,7 @@
       IMPLICIT NONE
 !*--DPLPDM7
 !*** Start of declarations inserted by SPAG
-      INTEGER i , Info , Iopt , iplace , j , k , Lbm , LCOl , LENl , LENu , 
+      INTEGER i , Info , Iopt , iplace , j , k , Lbm , LCOl , LENl , LENu ,
      &        Lmx , LP , LROw , Mrelas , NCP , Nredc , Nvars , nzbm
 !*** End of declarations inserted by SPAG
 !***BEGIN PROLOGUE  DPLPDM
@@ -36,12 +36,12 @@
 !   900510  Convert XERRWV calls to XERMSG calls, convert do-it-yourself
 !           DO loops to DO loops.  (RWC)
 !***END PROLOGUE  DPLPDM
-      INTEGER Ibasis(*) , Imat(*) , Ibrc(Lbm,2) , Ipr(*) , Iwr(*) , Ind(*) , 
+      INTEGER Ibasis(*) , Imat(*) , Ibrc(Lbm,2) , Ipr(*) , Iwr(*) , Ind(*) ,
      &        Ibb(*)
-      DOUBLE PRECISION aij , Amat(*) , Basmat(*) , Csc(*) , Wr(*) , Anorm , 
+      DOUBLE PRECISION aij , Amat(*) , Basmat(*) , Csc(*) , Wr(*) , Anorm ,
      &                 DASUM , Eps , Gg , one , SMAll , Uu , zero
       LOGICAL Singlr , Redbas
-      CHARACTER*16 xern3
+      CHARACTER(16) :: xern3
 !
 !     COMMON BLOCK USED BY LA05 () PACKAGE..
       COMMON /LA05DD/ SMAll , LP , LENl , LENu , NCP , LROw , LCOl

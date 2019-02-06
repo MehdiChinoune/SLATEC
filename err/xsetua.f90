@@ -45,7 +45,7 @@
 !   920501  Reformatted the REFERENCES section.  (WRB)
 !***END PROLOGUE  XSETUA
       DIMENSION Iunita(5)
-      CHARACTER*8 xern1
+      CHARACTER(8) :: xern1
 !***FIRST EXECUTABLE STATEMENT  XSETUA
 !
       IF ( N<1.OR.N>5 ) THEN

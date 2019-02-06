@@ -95,8 +95,8 @@
 !
       INTEGER MXLFN
       PARAMETER (MXLFN=32)
-      CHARACTER*(MXLFN) FIN , FCAT , FDAF , FKWD , FTBL , FLIS , FOUT , FERR
-      CHARACTER*(MXLFN) temp
+      CHARACTER(MXLFN) :: FIN , FCAT , FDAF , FKWD , FTBL , FLIS , FOUT , FERR
+      CHARACTER(MXLFN) :: temp
       PARAMETER (FIN='/dev/tty',FCAT='slacat',FDAF='sladaf',FKWD='slakwd',
      &           FTBL='slatbl',FLIS='slalis',FOUT='/dev/tty',FERR='/dev/tty')
 !
@@ -106,40 +106,40 @@
       PARAMETER (MXLKAT=7)
       PARAMETER (MXLCAT=10,MXLRN=6,MXNRN=1900)
       PARAMETER (MXNCAT=750,MXNCL=750)
-      CHARACTER*(MXLCAT) tclass(MXNCAT) , tcl
+      CHARACTER(MXLCAT) :: tclass(MXNCAT) , tcl
       INTEGER iptr(MXNCAT) , jptr(MXNCAT) , kptr(MXNCAT)
-      CHARACTER*80 stmts(MXNCL)
+      CHARACTER(80) :: stmts(MXNCL)
       INTEGER LUTIL , LLIB
       PARAMETER (LUTIL=6,LLIB=6)
-      CHARACTER*(LUTIL) UTIL
-      CHARACTER*(LLIB) LIB
+      CHARACTER(LUTIL) :: UTIL
+      CHARACTER(LLIB) :: LIB
       PARAMETER (UTIL='SLADOC',LIB='SLATEC')
       INTEGER LLN
       PARAMETER (LLN=72)
 !
 !     Other declarations.
 !
-      INTEGER ierror , ifind , ii , ij , il , ilen , in , inext , ir , irec , 
-     &        istart , istmt , itemp , jcl , jj , lb2 , leng , lftbl , lkats , 
-     &        ll , ls , lt2 , ltcl , ncc , nerr , nlines , npd , ntkwd , ntry , 
+      INTEGER ierror , ifind , ii , ij , il , ilen , in , inext , ir , irec ,
+     &        istart , istmt , itemp , jcl , jj , lb2 , leng , lftbl , lkats ,
+     &        ll , ls , lt2 , ltcl , ncc , nerr , nlines , npd , ntkwd , ntry ,
      &        num
-      CHARACTER*(LLN) line , linesv
+      CHARACTER(LLN) :: line , linesv
 !
-      CHARACTER*(MXLRN) rtname(MXNRN) , rtnin
-      CHARACTER*(MXLRN) cname(MXNRN/2)
+      CHARACTER(MXLRN) :: rtname(MXNRN) , rtnin
+      CHARACTER(MXLRN) :: cname(MXNRN/2)
 !
       INTEGER LCAT , LCATLS , MLCAT , SEVEN
       PARAMETER (LCAT=6,LCATLS=72,MLCAT=MXLCAT-LCAT,SEVEN=7)
-      CHARACTER*(MXLCAT) cat(MXNRN) , kat
-      CHARACTER*(MXLKAT) kats
+      CHARACTER(MXLCAT) :: cat(MXNRN) , kat
+      CHARACTER(MXLKAT) :: kats
 !
 !     KMAXI - maximum length of a keyword phrase.
 !     MXKWDS - maximum number of keyword phrases
 !
       INTEGER KMAXI , MXKWDS
       PARAMETER (KMAXI=60,MXKWDS=500)
-      CHARACTER*(KMAXI) kwrd
-      CHARACTER*(KMAXI) tkwd(MXKWDS)
+      CHARACTER(KMAXI) :: kwrd
+      CHARACTER(KMAXI) :: tkwd(MXKWDS)
 !
 !     IPTRL - table of pointers associated with the keyword phrases.
 !     IPTRR - table of pointers to the routines containing the
@@ -149,7 +149,7 @@
 !
       INTEGER LU13 , LU14 , LU5 , LU6 , LU17 , LU18 , LU19
       PARAMETER (LU13=13,LU14=14,LU5=5,LU6=6,LU17=17,LU18=18,LU19=19)
-      CHARACTER*(MXLFN) fname , fnamsv , fn
+      CHARACTER(MXLFN) :: fname , fnamsv , fn
       LOGICAL llu13 , llu18 , llu19 , llu14
       LOGICAL found , lexist
 !
@@ -165,16 +165,16 @@
       INTEGER is(MXNRN) , ie(MXNRN) , ips(MXNRN) , ipe(MXNRN)
       INTEGER i , info , j , lb , lt
 !
-      CHARACTER*1 input1
-      CHARACTER*24 fmt1
-      CHARACTER*(LUTIL+LLIB+54) fmt2
-      CHARACTER*80 msg
+      CHARACTER :: input1
+      CHARACTER(24) :: fmt1
+      CHARACTER(LUTIL+LLIB+54) :: fmt2
+      CHARACTER(80) :: msg
       CHARACTER form*25
       CHARACTER forma*60
       INTEGER IALPHA
       PARAMETER (IALPHA=26)
       INTEGER I1(IALPHA) , I2(IALPHA) , I3(IALPHA) , LMSg(IALPHA)
-      CHARACTER*7 CLAss(IALPHA)
+      CHARACTER(7) :: CLAss(IALPHA)
 !
 !     Variables used in the browsing mode.
 !
@@ -185,7 +185,7 @@
 !     External functions.
 !
       INTEGER FIND , LENSTR , MINOR
-      CHARACTER*10 CVTCAT
+      CHARACTER(10) :: CVTCAT
       EXTERNAL CVTCAT , FIND , LENSTR , MINOR
 !
 !     Intrinsic functions.
@@ -202,8 +202,8 @@
 !
       DATA llu18 , llu19 , llu14/.FALSE. , .FALSE. , .FALSE./
 !
-      DATA forma(1:60) /'(/, 1X, A  , '' category does not exist in this &
-     &library.'', /)'/
+      DATA forma(1:60) /'(/,1X,A,''category does not exist in this library.''&
+     &,/)'/
 !***FIRST EXECUTABLE STATEMENT  SLADOC
       WRITE (UNIT=msg,FMT=99039) LCAT , MLCAT
       fmt1 = '(1X, A'//msg(1:2)//', '//msg(3:4)//'X, A, 3I8)'
@@ -336,7 +336,7 @@
               ENDIF
               ncc = ncc - 1
               DO j = 1 , ncc
-                READ (UNIT=LU14,FMT=99040) iptr(j) , jptr(j) , kptr(j) , 
+                READ (UNIT=LU14,FMT=99040) iptr(j) , jptr(j) , kptr(j) ,
      &                tclass(j)
               ENDDO
               READ (UNIT=LU14,FMT=99038) kptr(ncc+1)
@@ -577,7 +577,7 @@
                   nerr = 2
                   GOTO 700
                 ENDIF
-                READ (UNIT=linesv,FMT=99017) cat(lftbl) , rtname(lftbl) , 
+                READ (UNIT=linesv,FMT=99017) cat(lftbl) , rtname(lftbl) ,
      &                is(lftbl) , ie(lftbl) , ips(lftbl) , ipe(lftbl)
               ENDDO
  515          lftbl = lftbl - 1
@@ -663,7 +663,7 @@
                   nerr = 2
                   GOTO 700
                 ENDIF
-                READ (UNIT=linesv,FMT=99017) cat(lftbl) , rtname(lftbl) , 
+                READ (UNIT=linesv,FMT=99017) cat(lftbl) , rtname(lftbl) ,
      &                is(lftbl) , ie(lftbl) , ips(lftbl) , ipe(lftbl)
               ENDDO
  535          lftbl = lftbl - 1
@@ -758,7 +758,7 @@
                 ENDIF
                 ncc = ncc - 1
                 DO j = 1 , ncc
-                  READ (UNIT=LU14,FMT=99040) iptr(j) , jptr(j) , kptr(j) , 
+                  READ (UNIT=LU14,FMT=99040) iptr(j) , jptr(j) , kptr(j) ,
      &                  tclass(j)
                 ENDDO
                 READ (UNIT=LU14,FMT=99038) kptr(ncc+1)
@@ -911,7 +911,7 @@
                       ii = kptr(irec)
                       tcl = ' '
                       CALL UNDOCL(tclass(irec),tcl)
-                      WRITE (UNIT=LU6,FMT=99044) ii , tcl(1:LENSTR(tcl)) , 
+                      WRITE (UNIT=LU6,FMT=99044) ii , tcl(1:LENSTR(tcl)) ,
      &                       stmts(ii)(1:LENSTR(stmts(ii)))
                       itemp = kptr(irec+1) - kptr(irec) - 1
                       ltcl = LENSTR(tcl) + 3
@@ -960,7 +960,7 @@
                       ii = kptr(irec)
                       tcl = ' '
                       CALL UNDOCL(tclass(irec),tcl)
-                      WRITE (UNIT=LU6,FMT=99044) ii , tcl(1:LENSTR(tcl)) , 
+                      WRITE (UNIT=LU6,FMT=99044) ii , tcl(1:LENSTR(tcl)) ,
      &                       stmts(ii)(1:LENSTR(stmts(ii)))
                       itemp = kptr(irec+1) - kptr(irec) - 1
                       ltcl = LENSTR(tcl) + 3
@@ -987,7 +987,7 @@
                       ii = kptr(irec)
                       tcl = ' '
                       CALL UNDOCL(tclass(irec),tcl)
-                      WRITE (UNIT=LU6,FMT=99044) ii , tcl(1:LENSTR(tcl)) , 
+                      WRITE (UNIT=LU6,FMT=99044) ii , tcl(1:LENSTR(tcl)) ,
      &                       stmts(ii)(1:LENSTR(stmts(ii)))
                       itemp = kptr(irec+1) - kptr(irec) - 1
                       ltcl = LENSTR(tcl) + 3
@@ -1014,7 +1014,7 @@
                       ii = kptr(irec)
                       tcl = ' '
                       CALL UNDOCL(tclass(irec),tcl)
-                      WRITE (UNIT=LU6,FMT=99044) ii , tcl(1:LENSTR(tcl)) , 
+                      WRITE (UNIT=LU6,FMT=99044) ii , tcl(1:LENSTR(tcl)) ,
      &                       stmts(ii)(1:LENSTR(stmts(ii)))
                       itemp = kptr(irec+1) - kptr(irec) - 1
                       ltcl = LENSTR(tcl) + 3
@@ -1040,7 +1040,7 @@
                       ii = kptr(irec)
                       tcl = ' '
                       CALL UNDOCL(tclass(irec),tcl)
-                      WRITE (UNIT=LU6,FMT=99044) ii , tcl(1:LENSTR(tcl)) , 
+                      WRITE (UNIT=LU6,FMT=99044) ii , tcl(1:LENSTR(tcl)) ,
      &                       stmts(ii)(1:LENSTR(stmts(ii)))
                       itemp = kptr(irec+1) - kptr(irec) - 1
                       ltcl = LENSTR(tcl) + 3
@@ -1193,7 +1193,7 @@
                   nerr = 2
                   GOTO 700
                 ENDIF
-                READ (UNIT=linesv,FMT=99017) cat(lftbl) , rtname(lftbl) , 
+                READ (UNIT=linesv,FMT=99017) cat(lftbl) , rtname(lftbl) ,
      &                is(lftbl) , ie(lftbl) , ips(lftbl) , ipe(lftbl)
               ENDDO
  580          lftbl = lftbl - 1
@@ -1655,7 +1655,7 @@
       CHARACTER*(*) Cardin
 !     .. Local Scalars ..
       INTEGER i , l , l1 , l2 , l3 , l9 , lbp1 , le , match
-      CHARACTER*2 specia
+      CHARACTER(2) :: specia
 !     .. Data statements ..
       DATA specia/' ,'/
 !***FIRST EXECUTABLE STATEMENT  CHARIN
@@ -1748,7 +1748,7 @@
       CHARACTER*(*) Tclass(Ncc)
 !     .. Arrays in Common ..
       INTEGER I1(IALPHA) , I2(IALPHA) , I3(IALPHA) , LMSg(IALPHA)
-      CHARACTER*7 CLAss(IALPHA)
+      CHARACTER(7) :: CLAss(IALPHA)
 !     .. Local Scalars ..
       INTEGER ifind
 !     .. External Functions ..
@@ -1807,7 +1807,7 @@
 !   920911  Declarations section restructured.  (WRB)
 !***END PROLOGUE  RBLNKS
 !     .. Scalar Arguments ..
-      CHARACTER*80 L1 , L2
+      CHARACTER(80) :: L1 , L2
 !     .. Local Scalars ..
       INTEGER i , j , k , leng
 !     .. External Functions ..

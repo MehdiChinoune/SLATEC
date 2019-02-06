@@ -131,7 +131,7 @@
 !           lines were modified.  (BKS)
 !***END PROLOGUE  CTRSM
 !     .. Scalar Arguments ..
-      CHARACTER*1 Side , Uplo , Transa , Diag
+      CHARACTER :: Side , Uplo , Transa , Diag
       INTEGER M , N , Lda , Ldb
       COMPLEX Alpha
 !     .. Array Arguments ..

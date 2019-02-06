@@ -33,7 +33,7 @@
 !***END PROLOGUE  SWRITP
       INTEGER List(*)
       REAL Rlist(*)
-      CHARACTER*8 xern1 , xern2
+      CHARACTER(8) :: xern1 , xern2
 !***FIRST EXECUTABLE STATEMENT  SWRITP
       ipagef = Ipage
       lpg = Lpage

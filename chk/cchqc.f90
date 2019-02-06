@@ -37,19 +37,19 @@
 !           FORMATs.  (RWC)
 !***END PROLOGUE  CCHQC
       COMPLEX a(4,4) , work(4) , at(5,4) , af(4,4)
-      INTEGER lda , p , jpvt(4) , job , info , jpvtt(4) , i , j , infoc , 
+      INTEGER lda , p , jpvt(4) , job , info , jpvtt(4) , i , j , infoc ,
      &        jpvtc(4)
-      CHARACTER*20 kfail
+      CHARACTER(20) :: kfail
       INTEGER indx
       REAL delx
-      DATA a/(2.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0) , 
+      DATA a/(2.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,
      &     (0.E0,-1.E0) , (2.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0)
      &     , (0.E0,0.E0) , (3.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0)
      &     , (0.E0,-1.E0) , (4.E0,0.E0)/
       DATA jpvt/0 , -1 , 1 , 0/
-      DATA af/(1.73205E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0) , 
-     &     (0.E0,-.57735E0) , (1.91485E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , 
-     &     (0.E0,0.E0) , (0.E0,0.E0) , (1.41421E0,0.E0) , (0.E0,1.E0) , 
+      DATA af/(1.73205E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,
+     &     (0.E0,-.57735E0) , (1.91485E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,
+     &     (0.E0,0.E0) , (0.E0,0.E0) , (1.41421E0,0.E0) , (0.E0,1.E0) ,
      &     (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,-.70711E0) , (1.22475E0,0.E0)/
       DATA infoc/4/
       DATA jpvtc/3 , 4 , 1 , 2/

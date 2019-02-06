@@ -24,8 +24,8 @@
 !***END PROLOGUE  LDERES
 !     .. Scalar Arguments ..
       INTEGER Lda , M , N
-      CHARACTER*1 Uplo
-      CHARACTER*2 Type
+      CHARACTER :: Uplo
+      CHARACTER(2) :: Type
 !     .. Array Arguments ..
       DOUBLE PRECISION Aa(Lda,*) , As(Lda,*)
 !     .. Local Scalars ..

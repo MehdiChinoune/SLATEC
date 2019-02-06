@@ -135,7 +135,7 @@
 !     .. Scalar Arguments ..
       DOUBLE PRECISION Alpha , Beta
       INTEGER Incx , Incy , K , Lda , N
-      CHARACTER*1 Uplo
+      CHARACTER :: Uplo
 !     .. Array Arguments ..
       DOUBLE PRECISION A(Lda,*) , X(*) , Y(*)
 !     .. Parameters ..

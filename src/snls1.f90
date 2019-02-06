@@ -605,7 +605,7 @@
 !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
 !   920501  Reformatted the REFERENCES section.  (WRB)
 !***END PROLOGUE  SNLS1
-      INTEGER Iopt , M , N , Ldfjac , Maxfev , Mode , Nprint , Info , Nfev , 
+      INTEGER Iopt , M , N , Ldfjac , Maxfev , Mode , Nprint , Info , Nfev ,
      &        Njev
       INTEGER ijunk , nrow , Ipvt(*)
       REAL Ftol , Xtol , Gtol , Factor , Epsfcn
@@ -614,16 +614,16 @@
       LOGICAL sing
       EXTERNAL FCN
       INTEGER i , iflag , iter , j , l , modech
-      REAL actred , delta , dirder , epsmch , fnorm , fnorm1 , gnorm , one , 
-     &     par , pnorm , prered , p1 , p5 , p25 , p75 , p0001 , ratio , sum , 
+      REAL actred , delta , dirder , epsmch , fnorm , fnorm1 , gnorm , one ,
+     &     par , pnorm , prered , p1 , p5 , p25 , p75 , p0001 , ratio , sum ,
      &     temp , temp1 , temp2 , xnorm , zero
       REAL R1MACH , ENORM , err , chklim
-      CHARACTER*8 xern1
-      CHARACTER*16 xern3
+      CHARACTER(8) :: xern1
+      CHARACTER(16) :: xern3
 !
       SAVE chklim , one , p1 , p5 , p25 , p75 , p0001 , zero
       DATA chklim/.1E0/
-      DATA one , p1 , p5 , p25 , p75 , p0001 , zero/1.0E0 , 1.0E-1 , 5.0E-1 , 
+      DATA one , p1 , p5 , p25 , p75 , p0001 , zero/1.0E0 , 1.0E-1 , 5.0E-1 ,
      &     2.5E-1 , 7.5E-1 , 1.0E-4 , 0.0E0/
 !
 !***FIRST EXECUTABLE STATEMENT  SNLS1

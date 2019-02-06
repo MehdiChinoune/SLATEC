@@ -4,9 +4,9 @@
       IMPLICIT NONE
 !*--LA05AD5
 !*** Start of declarations inserted by SPAG
-      INTEGER i , Ia , idummy , ii , il , in , ipp , ipv , ir , j , jcost , jp , 
+      INTEGER i , Ia , idummy , ii , il , in , ipp , ipv , ir , j , jcost , jp ,
      &        k , k1 , k2 , kc , kcost , kj , kk , kl
-      INTEGER klc , kn , knp , kp , kpc , kpl , kq , kr , krl , ks , l , LCOl , 
+      INTEGER klc , kn , knp , kp , kpc , kpl , kq , kr , krl , ks , l , LCOl ,
      &        LENl , LENu , LP , LROw , mcp , N , nc , NCP
       INTEGER Nz , nzc
 !*** End of declarations inserted by SPAG
@@ -63,10 +63,10 @@
 !***END PROLOGUE  LA05AD
       INTEGER Ip(N,2)
       INTEGER Ind(Ia,2) , Iw(N,8)
-      DOUBLE PRECISION A(*) , amax , au , am , D1MACH , eps , G , U , SMAll , 
+      DOUBLE PRECISION A(*) , amax , au , am , D1MACH , eps , G , U , SMAll ,
      &                 W(*)
       LOGICAL first
-      CHARACTER*8 xern0 , xern1 , xern2
+      CHARACTER(8) :: xern0 , xern1 , xern2
 !
       COMMON /LA05DD/ SMAll , LP , LENl , LENu , NCP , LROw , LCOl
 ! EPS IS THE RELATIVE ACCURACY OF FLOATING-POINT COMPUTATION

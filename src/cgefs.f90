@@ -110,7 +110,7 @@
       COMPLEX A(Lda,*) , V(*) , Work(*)
       REAL R1MACH
       REAL rcond
-      CHARACTER*8 xern1 , xern2
+      CHARACTER(8) :: xern1 , xern2
 !***FIRST EXECUTABLE STATEMENT  CGEFS
       IF ( Lda<N ) THEN
         Ind = -1

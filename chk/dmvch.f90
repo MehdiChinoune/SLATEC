@@ -28,7 +28,7 @@
       DOUBLE PRECISION Alpha , Beta , Eps , Err
       INTEGER Incx , Incy , Kprint , M , N , Nmax , Nout
       LOGICAL Mv , Ftl
-      CHARACTER*1 Trans
+      CHARACTER :: Trans
 !     .. Array Arguments ..
       DOUBLE PRECISION A(Nmax,*) , G(*) , X(*) , Y(*) , Yt(*) , Yy(*)
 !     .. Local Scalars ..

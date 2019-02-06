@@ -166,7 +166,7 @@
 !
       INTEGER k , kk
       REAL dov3 , hnew , hold
-      CHARACTER*8 libnam , subnam
+      CHARACTER(8) :: libnam , subnam
 !***FIRST EXECUTABLE STATEMENT  PCHBS
 !
 !  Initialize.

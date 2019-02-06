@@ -5,9 +5,9 @@
 !*--LA05AS5
 !*** Start of declarations inserted by SPAG
       REAL eps , R1MACH
-      INTEGER i , Ia , idummy , ii , il , in , ipp , ipv , ir , j , jcost , jp , 
+      INTEGER i , Ia , idummy , ii , il , in , ipp , ipv , ir , j , jcost , jp ,
      &        k , k1 , k2 , kc , kcost , kj , kk , kl
-      INTEGER klc , kn , knp , kp , kpc , kpl , kq , kr , krl , ks , l , LCOl , 
+      INTEGER klc , kn , knp , kp , kpc , kpl , kq , kr , krl , ks , l , LCOl ,
      &        LENl , LENu , LP , LROw , mcp , N , nc , NCP
       INTEGER Nz , nzc
 !*** End of declarations inserted by SPAG
@@ -64,7 +64,7 @@
       INTEGER Ind(Ia,2) , Iw(N,8)
       REAL A(*) , amax , au , am , G , U , SMAll , W(*)
       LOGICAL first
-      CHARACTER*8 xern0 , xern1 , xern2
+      CHARACTER(8) :: xern0 , xern1 , xern2
 !
       COMMON /LA05DS/ SMAll , LP , LENl , LENu , NCP , LROw , LCOl
 ! EPS IS THE RELATIVE ACCURACY OF FLOATING-POINT COMPUTATION

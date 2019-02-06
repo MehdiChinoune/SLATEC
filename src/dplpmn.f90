@@ -7,14 +7,14 @@
 !*--DPLPMN7
 !*** Start of declarations inserted by SPAG
       REAL DUSRMT
-      INTEGER i , ibas , idg , ienter , ileave , Info , iopt , ipage , ipagef , 
-     &        iplace , isave , itbrc , itlp , j , jstrt , k , key , kprint , 
+      INTEGER i , ibas , idg , ienter , ileave , Info , iopt , ipage , ipagef ,
+     &        iplace , isave , itbrc , itlp , j , jstrt , k , key , kprint ,
      &        Lbm , LCOl
-      INTEGER LENl , LENu , Lmx , LP , lpg , lpr , lpr1 , lprg , LROw , Mrelas , 
-     &        mxitlp , n20046 , n20058 , n20080 , n20098 , n20119 , n20172 , 
+      INTEGER LENl , LENu , Lmx , LP , lpg , lpr , lpr1 , lprg , LROw , Mrelas ,
+     &        mxitlp , n20046 , n20058 , n20080 , n20098 , n20119 , n20172 ,
      &        n20206 , n20247 , n20252
-      INTEGER n20271 , n20276 , n20283 , n20290 , NCP , nerr , np , nparm , 
-     &        npp , npr004 , npr005 , npr006 , npr007 , npr008 , npr009 , 
+      INTEGER n20271 , n20276 , n20283 , n20290 , NCP , nerr , np , nparm ,
+     &        npp , npr004 , npr005 , npr006 , npr007 , npr008 , npr009 ,
      &        npr010 , npr011 , npr012 , npr013 , npr014
       INTEGER npr015 , nredc , ntries , Nvars , nx0066 , nx0091 , nx0106
 !*** End of declarations inserted by SPAG
@@ -46,17 +46,17 @@
 !   900328  Added TYPE section.  (WRB)
 !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
 !***END PROLOGUE  DPLPMN
-      DOUBLE PRECISION abig , aij , Amat(*) , anorm , asmall , Basmat(*) , 
-     &                 Bl(*) , Bu(*) , Colnrm(*) , Costs(*) , costsc , Csc(*) , 
-     &                 Dattrv(*) , dirnrm , Duals(*) , dulnrm , eps , tune , 
+      DOUBLE PRECISION abig , aij , Amat(*) , anorm , asmall , Basmat(*) ,
+     &                 Bl(*) , Bu(*) , Colnrm(*) , Costs(*) , costsc , Csc(*) ,
+     &                 Dattrv(*) , dirnrm , Duals(*) , dulnrm , eps , tune ,
      &                 Erd(*) , erdnrm , Erp(*) , factor , gg , one , Prgopt(*)
      &                 , Primal(*) , resnrm , Rg(*) , Rhs(*) , rhsnrm , ropt(07)
-     &                 , Rprim(*) , rprnrm , Rz(*) , rzj , scalr , scosts , 
-     &                 size , SMAll , theta , tolls , upbnd , uu , Wr(*) , 
+     &                 , Rprim(*) , rprnrm , Rz(*) , rzj , scalr , scosts ,
+     &                 size , SMAll , theta , tolls , upbnd , uu , Wr(*) ,
      &                 Ww(*) , xlamda , xval , zero , rdum(01) , tolabs
       DOUBLE PRECISION DDOT , DASUM
 !
-      INTEGER Ibasis(*) , Ibb(*) , Ibrc(Lbm,2) , Imat(*) , Ind(*) , Ipr(*) , 
+      INTEGER Ibasis(*) , Ibb(*) , Ibrc(Lbm,2) , Imat(*) , Ind(*) , Ipr(*) ,
      &        Iwr(*) , intopt(08) , idum(01)
 !
 !     ARRAY LOCAL VARIABLES
@@ -152,10 +152,10 @@
 !                             IN PARTIAL PRICING
 !     JSTRT      INTEGER      STARTING PLACE FOR PARTIAL PRICING.
 !
-      LOGICAL colscp , savedt , contin , cstscp , unbnd , feas , finite , 
-     &        found , minprb , redbas , singlr , sizeup , stpedg , trans , 
+      LOGICAL colscp , savedt , contin , cstscp , unbnd , feas , finite ,
+     &        found , minprb , redbas , singlr , sizeup , stpedg , trans ,
      &        usrbas , zerolv , lopt(08)
-      CHARACTER*8 xern1 , xern2
+      CHARACTER(8) :: xern1 , xern2
       EQUIVALENCE (contin,lopt(1))
       EQUIVALENCE (usrbas,lopt(2))
       EQUIVALENCE (sizeup,lopt(3))

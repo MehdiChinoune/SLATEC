@@ -31,21 +31,21 @@
       LOGICAL Fatal
       REAL Eps , Thresh
       INTEGER Kprint , Nalf , Nbet , Nidim , Nmax , Nout
-      CHARACTER*6 Sname
+      CHARACTER(6) :: Sname
 !     .. Array Arguments ..
-      REAL Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) , Bet(Nbet) , G(Nmax) , 
-     &     Bb(Nmax*Nmax) , Bs(Nmax*Nmax) , C(Nmax,Nmax) , Cc(Nmax*Nmax) , 
+      REAL Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) , Bet(Nbet) , G(Nmax) ,
+     &     Bb(Nmax*Nmax) , Bs(Nmax*Nmax) , C(Nmax,Nmax) , Cc(Nmax*Nmax) ,
      &     Cs(Nmax*Nmax) , Ct(Nmax) , W(2*Nmax) , Ab(2*Nmax*Nmax)
       INTEGER Idim(Nidim)
 !     .. Local Scalars ..
       REAL alpha , als , beta , bets , err , errmax
-      INTEGER i , ia , ib , ict , icu , ik , in , j , jc , jj , k , laa , lbb , 
-     &        lcc , lda , ldas , ldb , ldbs , ldc , ldcs , n , na , nargs , nc , 
+      INTEGER i , ia , ib , ict , icu , ik , in , j , jc , jj , k , laa , lbb ,
+     &        lcc , lda , ldas , ldb , ldbs , ldc , ldcs , n , na , nargs , nc ,
      &        nerr , ns , ks , lj , ma , jjab
       LOGICAL ftl , null , reset , tran , upper
-      CHARACTER*1 uplo , uplos , trans , transs
-      CHARACTER*2 ichu
-      CHARACTER*3 icht
+      CHARACTER :: uplo , uplos , trans , transs
+      CHARACTER(2) :: ichu
+      CHARACTER(3) :: icht
 !     .. Local Arrays ..
       LOGICAL isame(13)
 !     .. External Functions ..
@@ -238,7 +238,7 @@
                             Fatal = .TRUE.
                             IF ( Kprint>=3 ) THEN
                               WRITE (Nout,FMT=99004) Sname
-                              WRITE (Nout,FMT=99005) nc , Sname , uplo , trans , 
+                              WRITE (Nout,FMT=99005) nc , Sname , uplo , trans ,
      &                               n , k , alpha , lda , ldb , beta , ldc
                             ENDIF
                           ENDIF

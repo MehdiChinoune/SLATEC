@@ -27,7 +27,7 @@
 !     .. Scalar Arguments ..
       LOGICAL Fatal
       INTEGER Isnum , Kprint , Nout
-      CHARACTER*6 Srnamt
+      CHARACTER(6) :: Srnamt
 !     .. Scalars in Common ..
       INTEGER infot
 !     .. Local Scalars ..
@@ -37,8 +37,8 @@
 !     .. Local Arrays ..
       COMPLEX a(1,1) , x(1) , y(1)
 !     .. External Subroutines ..
-      EXTERNAL CGBMV , CGEMV , CGERC , CGERU , CHBMV , CHEMV , CHER , CHER2 , 
-     &         CHKXER , CHPMV , CHPR , CHPR2 , CTBMV , CTBSV , CTPMV , CTPSV , 
+      EXTERNAL CGBMV , CGEMV , CGERC , CGERU , CHBMV , CHEMV , CHER , CHER2 ,
+     &         CHKXER , CHPMV , CHPR , CHPR2 , CTBMV , CTBSV , CTPMV , CTPSV ,
      &         CTRMV , CTRSV
 !***FIRST EXECUTABLE STATEMENT  CCHKE2
       CALL XGETF(kontrl)

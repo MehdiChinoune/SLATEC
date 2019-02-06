@@ -4,7 +4,7 @@
       IMPLICIT NONE
 !*--SBOCQX5
 !*** Start of declarations inserted by SPAG
-      INTEGER i , ib , Ipass , irhs , itest , j , Kprint , Lun , mcon , mdw , 
+      INTEGER i , ib , Ipass , irhs , itest , j , Kprint , Lun , mcon , mdw ,
      &        mode , mpass , mrows , ncols
       REAL R1MACH , rnorm , rnormc , SNRM2 , sr
 !*** End of declarations inserted by SPAG
@@ -35,19 +35,19 @@
       REAL bl1(10) , bu1(10)
       INTEGER ind(10) , iw(20) , iopt(40)
       REAL rhs(6,2)
-      CHARACTER*4 msg
+      CHARACTER(4) :: msg
 !
-      DATA ((c(i,j),i=1,5),j=1,5)/1. , 10. , 4. , 8. , 1. , 1. , 10. , 2. , 
-     &      -1. , 1. , 1. , -3. , -3. , 2. , 1. , 1. , 5. , 5. , 5. , 1. , 1. , 
+      DATA ((c(i,j),i=1,5),j=1,5)/1. , 10. , 4. , 8. , 1. , 1. , 10. , 2. ,
+     &      -1. , 1. , 1. , -3. , -3. , 2. , 1. , 1. , 5. , 5. , 5. , 1. , 1. ,
      &      4. , -1. , -3. , 1./
-      DATA ((d(i,j),i=1,6),j=1,5)/ - 74. , 14. , 66. , -12. , 3. , 4. , 80. , 
-     &      -69. , -72. , 66. , 8. , -12. , 18. , 21. , -5. , -30. , -7. , 4. , 
+      DATA ((d(i,j),i=1,6),j=1,5)/ - 74. , 14. , 66. , -12. , 3. , 4. , 80. ,
+     &      -69. , -72. , 66. , 8. , -12. , 18. , 21. , -5. , -30. , -7. , 4. ,
      &      -11. , 28. , 7. , -23. , -4. , 4. , -4. , 0. , 1. , 3. , 1. , 0./
-      DATA ((bl(i,j),i=1,5),j=1,2)/1. , 0. , -1. , 1. , -4. , -1. , 0. , -3. , 
+      DATA ((bl(i,j),i=1,5),j=1,2)/1. , 0. , -1. , 1. , -4. , -1. , 0. , -3. ,
      &      1. , -6./
-      DATA ((bu(i,j),i=1,5),j=1,2)/3. , 2. , 1. , 3. , -2. , 3. , 4. , 1. , 5. , 
+      DATA ((bu(i,j),i=1,5),j=1,2)/3. , 2. , 1. , 3. , -2. , 3. , 4. , 1. , 5. ,
      &      -2./
-      DATA ((rhs(i,j),i=1,6),j=1,2)/51. , -61. , -56. , 69. , 10. , -12. , -5. , 
+      DATA ((rhs(i,j),i=1,6),j=1,2)/51. , -61. , -56. , 69. , 10. , -12. , -5. ,
      &      -9. , 708. , 4165. , -13266. , 8409./
       DATA (xtrue(j),j=1,9)/1. , 2. , -1. , 3. , -4. , 1. , 32. , 30. , 31./
 !***FIRST EXECUTABLE STATEMENT  SBOCQX

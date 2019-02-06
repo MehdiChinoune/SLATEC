@@ -43,15 +43,15 @@
       INTEGER i , isnum , j , n , NALF , NBET , NIDIM , Nout
       PARAMETER (NIDIM=6,NALF=3,NBET=3)
       LOGICAL same , tsterr , ftl , ftl1 , ftl2
-      CHARACTER*1 transa , transb
+      CHARACTER :: transa , transb
 !     .. Local Arrays ..
-      DOUBLE PRECISION ab(NMAX,2*NMAX) , aa(NMAX*NMAX) , alf(NALF) , 
-     &                 as(NMAX*NMAX) , bet(NBET) , g(NMAX) , bb(NMAX*NMAX) , 
-     &                 bs(NMAX*NMAX) , c(NMAX,NMAX) , cc(NMAX*NMAX) , 
+      DOUBLE PRECISION ab(NMAX,2*NMAX) , aa(NMAX*NMAX) , alf(NALF) ,
+     &                 as(NMAX*NMAX) , bet(NBET) , g(NMAX) , bb(NMAX*NMAX) ,
+     &                 bs(NMAX*NMAX) , c(NMAX,NMAX) , cc(NMAX*NMAX) ,
      &                 cs(NMAX*NMAX) , ct(NMAX) , w(2*NMAX)
       INTEGER idim(NIDIM)
       LOGICAL ltest(NSUBS)
-      CHARACTER*6 snames(NSUBS)
+      CHARACTER(6) :: snames(NSUBS)
 !     .. External Functions ..
       REAL R1MACH
       LOGICAL LDE
@@ -61,7 +61,7 @@
 !     .. Intrinsic Functions ..
       INTRINSIC ABS , MAX , MIN
 !     .. Data statements ..
-      DATA snames/'DGEMM ' , 'DSYMM ' , 'DTRMM ' , 'DTRSM ' , 'DSYRK ' , 
+      DATA snames/'DGEMM ' , 'DSYMM ' , 'DTRMM ' , 'DTRSM ' , 'DSYRK ' ,
      &     'DSYR2K'/
       DATA idim/0 , 1 , 2 , 3 , 5 , 9/
       DATA alf/0.0 , 1.0 , 0.7/

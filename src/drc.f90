@@ -264,7 +264,7 @@
 !           editorial changes.  (RWC))
 !   920501  Reformatted the REFERENCES section.  (WRB)
 !***END PROLOGUE  DRC
-      CHARACTER*16 xern3 , xern4 , xern5
+      CHARACTER(16) :: xern3 , xern4 , xern5
       INTEGER Ier
       DOUBLE PRECISION c1 , c2 , errtol , lamda , lolim , D1MACH
       DOUBLE PRECISION mu , s , sn , uplim , X , xn , Y , yn

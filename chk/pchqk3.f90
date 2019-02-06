@@ -86,25 +86,25 @@
 !
       INTEGER i , ic(2) , ierr , ifail , N , nbad , nbadz , NWK
       PARAMETER (N=9,NWK=2*N)
-      REAL d(N) , dc(N) , dc5 , dc6 , dm(N) , ds(N) , err , f(N) , MONE , tol , 
+      REAL d(N) , dc(N) , dc5 , dc6 , dm(N) , ds(N) , err , f(N) , MONE , tol ,
      &     told , tolz , vc(2) , x(N) , wk(NWK) , ZERO
       PARAMETER (ZERO=0.0E0,MONE=-1.0E0)
-      CHARACTER*6 result
+      CHARACTER(6) :: result
 !
 !  Initialize.
 !
 !       Data.
       DATA ic/0 , 0/
-      DATA x/ - 2.2E0 , -1.2E0 , -1.0E0 , -0.5E0 , -0.01E0 , 0.5E0 , 1.0E0 , 
+      DATA x/ - 2.2E0 , -1.2E0 , -1.0E0 , -0.5E0 , -0.01E0 , 0.5E0 , 1.0E0 ,
      &     2.0E0 , 2.2E0/
 !
 !       Results generated on Cray X/MP (9 sign. figs.)
-      DATA dm/0. , 3.80027352E-01 , 7.17253009E-01 , 5.82014161E-01 , 0. , 
-     &     -5.68208031E-01 , -5.13501618E-01 , -7.77910977E-02 , 
+      DATA dm/0. , 3.80027352E-01 , 7.17253009E-01 , 5.82014161E-01 , 0. ,
+     &     -5.68208031E-01 , -5.13501618E-01 , -7.77910977E-02 ,
      &     -2.45611117E-03/
       DATA dc5 , dc6/1.76950158E-02 , -5.69579814E-01/
-      DATA ds/ - 5.16830792E-02 , 5.71455855E-01 , 7.40530225E-01 , 
-     &     7.63864934E-01 , 1.92614386E-02 , -7.65324380E-01 , -7.28209035E-01 , 
+      DATA ds/ - 5.16830792E-02 , 5.71455855E-01 , 7.40530225E-01 ,
+     &     7.63864934E-01 , 1.92614386E-02 , -7.65324380E-01 , -7.28209035E-01 ,
      &     -7.98445427E-02 , -2.85983446E-02/
 !
 !***FIRST EXECUTABLE STATEMENT  PCHQK3

@@ -305,7 +305,7 @@
 !           editorial changes.  (RWC)).
 !   920501  Reformatted the REFERENCES section.  (WRB)
 !***END PROLOGUE  RJ
-      CHARACTER*16 xern3 , xern4 , xern5 , xern6 , xern7
+      CHARACTER(16) :: xern3 , xern4 , xern5 , xern6 , xern7
       INTEGER Ier
       REAL alfa , beta , c1 , c2 , c3 , c4 , ea , eb , ec , e2 , e3
       REAL lolim , uplim , epslon , errtol
