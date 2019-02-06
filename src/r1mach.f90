@@ -314,11 +314,11 @@
 !
 !     MACHINE CONSTANTS FOR THE IBM PC
 !
-!     DATA SMALL(1) / 1.18E-38      /
-!     DATA LARGE(1) / 3.40E+38      /
-!     DATA RIGHT(1) / 0.595E-07     /
-!     DATA DIVER(1) / 1.19E-07      /
-!     DATA LOG10(1) / 0.30102999566 /
+      DATA rmach(1) / 1.18E-38      /
+      DATA rmach(2) / 3.40E+38      /
+      DATA rmach(3) / 0.595E-07     /
+      DATA rmach(4) / 1.19E-07      /
+      DATA rmach(5) / 0.30102999566 /
 !
 !     MACHINE CONSTANTS FOR THE IBM RS 6000
 !
@@ -330,11 +330,11 @@
 !
 !     MACHINE CONSTANTS FOR THE INTEL i860
 !
-      DATA rmach(1)/Z'00800000'/
-      DATA rmach(2)/Z'7F7FFFFF'/
-      DATA rmach(3)/Z'33800000'/
-      DATA rmach(4)/Z'34000000'/
-      DATA rmach(5)/Z'3E9A209B'/
+!     DATA rmach(1)/Z'00800000'/
+!     DATA rmach(2)/Z'7F7FFFFF'/
+!     DATA rmach(3)/Z'33800000'/
+!     DATA rmach(4)/Z'34000000'/
+!     DATA rmach(5)/Z'3E9A209B'/
 !
 !     MACHINE CONSTANTS FOR THE PDP-10 (KA OR KI PROCESSOR)
 !

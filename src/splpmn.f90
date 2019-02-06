@@ -277,10 +277,10 @@
       IF ( Info<0 ) GOTO 4600
 !
       nredc = 0
-      ASSIGN 200 TO npr004
+      npr004 = 200
       GOTO 2700
  200  IF ( .NOT.(singlr) ) THEN
-        ASSIGN 300 TO npr005
+        npr005 = 300
 ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 !     PROCEDURE (COMPUTE ERROR IN DUAL AND PRIMAL SYSTEMS)
         ntries = 1
@@ -293,12 +293,12 @@
         Info = -nerr
         GOTO 4600
       ENDIF
- 300  ASSIGN 400 TO npr006
+ 300  npr006 = 400
       GOTO 4000
- 400  ASSIGN 500 TO npr007
+ 400  npr007 = 500
       GOTO 2800
  500  IF ( .NOT.(usrbas) ) GOTO 700
-      ASSIGN 600 TO npr008
+      npr008 = 600
       GOTO 3100
  600  IF ( .NOT.feas ) THEN
         nerr = 24
@@ -311,15 +311,15 @@
  700  itlp = 0
 !
 !     LAMDA HAS BEEN SET TO A CONSTANT, PERFORM PENALTY METHOD.
-      ASSIGN 800 TO npr009
+      npr009 = 800
 !     PROCEDURE (PERFORM SIMPLEX STEPS)
-      ASSIGN 2000 TO npr013
+      npr013 = 2000
       GOTO 4100
- 800  ASSIGN 900 TO npr010
+ 800  npr010 = 900
       GOTO 1900
- 900  ASSIGN 1000 TO npr006
+ 900  npr006 = 1000
       GOTO 4000
- 1000 ASSIGN 1100 TO npr008
+ 1000 npr008 = 1100
       GOTO 3100
  1100 IF ( feas ) THEN
 !     CHECK IF ANY BASIC VARIABLES ARE STILL CLASSIFIED AS
@@ -331,8 +331,8 @@
         DO WHILE ( (n20046-i)>=0 )
           IF ( Primal(i+Nvars)/=zero ) THEN
             xlamda = zero
-            ASSIGN 1700 TO npr009
-            ASSIGN 2000 TO npr013
+            npr009 = 1700
+             npr013= 2000
             GOTO 4100
           ELSE
             i = i + 1
@@ -346,17 +346,17 @@
         IF ( kprint>=2 ) CALL IVOUT(0,idum,'('' ENTER STANDARD PHASE-1'')',idg)
         scosts = costsc
         costsc = zero
-        ASSIGN 1200 TO npr007
+        npr007 = 1200
         GOTO 2800
       ENDIF
- 1200 ASSIGN 1300 TO npr009
-      ASSIGN 2000 TO npr013
+ 1200 npr009 = 1300
+      npr013 = 2000
       GOTO 4100
- 1300 ASSIGN 1400 TO npr010
+ 1300 npr010 = 1400
       GOTO 1900
- 1400 ASSIGN 1500 TO npr006
+ 1400 npr006 = 1500
       GOTO 4000
- 1500 ASSIGN 1600 TO npr008
+ 1500 npr008 = 1600
       GOTO 3100
  1600 IF ( feas ) THEN
 !
@@ -364,17 +364,17 @@
         IF ( kprint>1 ) CALL IVOUT(0,idum,'('' ENTER STANDARD PHASE-2'')',idg)
         xlamda = zero
         costsc = scosts
-        ASSIGN 1700 TO npr009
-        ASSIGN 2000 TO npr013
+        npr009 = 1700
+        npr013 = 2000
         GOTO 4100
       ENDIF
 !
- 1700 ASSIGN 1800 TO npr011
+ 1700 npr011 = 1800
 ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 !     PROCEDURE(RESCALE AND REARRANGE VARIABLES)
 !
 !     RESCALE THE DUAL VARIABLES.
-      ASSIGN 4300 TO npr013
+      npr013 = 4300
       GOTO 4100
  1800 IF ( feas.AND.(.NOT.unbnd) ) THEN
         Info = 1
@@ -457,7 +457,7 @@
       ENDIF
 !++  CODE FOR OUTPUT=YES IS ACTIVE
       IF ( kprint<1 ) GOTO 4600
-      ASSIGN 4600 TO npr012
+      npr012 = 4600
 !++  CODE FOR OUTPUT=NO IS INACTIVE
 !++  END
       GOTO 4500
@@ -522,24 +522,36 @@
           ENDDO
         ENDIF
       ENDDO
-      GOTO npr010
- 2000 ASSIGN 2100 TO npr014
+      SELECT CASE(npr010)
+        CASE(900)
+          GOTO 900
+        CASE(1400)
+          GOTO 1400
+      END SELECT
+ 2000 npr014 = 2100
       GOTO 3200
  2100 IF ( kprint>2 ) THEN
         CALL SVOUT(Mrelas,Duals,'('' BASIC (INTERNAL) DUAL SOLN.'')',idg)
         CALL SVOUT(Nvars+Mrelas,Rz,'('' REDUCED COSTS'')',idg)
       ENDIF
-      ASSIGN 2200 TO npr015
+      npr015 = 2200
       GOTO 4200
  2200 IF ( .NOT.found ) THEN
 ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 !     PROCEDURE (REDECOMPOSE BASIS MATRIX AND TRY AGAIN)
         IF ( redbas ) GOTO 3900
-        ASSIGN 3500 TO npr004
+        npr004 = 3500
         GOTO 2700
       ENDIF
  2300 IF ( .NOT.(found) ) THEN
-        GOTO npr009
+        SELECT CASE(npr009)
+          CASE(800)
+            GOTO 800
+          CASE(1300)
+            GOTO 1300
+          CASE(1700)
+            GOTO 1700
+        END SELECT
       ELSE
         IF ( kprint>=3 ) CALL SVOUT(Mrelas,Ww,'('' SEARCH DIRECTION'')',idg)
 ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
@@ -585,7 +597,7 @@
 !++  CODE FOR OUTPUT=NO IS INACTIVE
 !++  END
           ENDIF
-          ASSIGN 2400 TO npr005
+          npr005 = 2400
           ntries = 1
           GOTO 3000
         ENDIF
@@ -594,12 +606,12 @@
 ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 !     PROCEDURE (CHECK AND RETURN WITH EXCESS ITERATIONS)
       IF ( itlp<=mxitlp ) THEN
-        ASSIGN 2200 TO npr015
+        npr015 = 2200
         GOTO 4200
       ELSE
         nerr = 25
-        ASSIGN 3300 TO npr011
-        ASSIGN 4300 TO npr013
+        npr011 = 3300
+        npr013 = 4300
         GOTO 4100
       ENDIF
  2500 lpr1 = lpr + 1
@@ -637,7 +649,14 @@
       CALL SPLPDM(Mrelas,Nvars,Lmx,Lbm,nredc,Info,iopt,Ibasis,Imat,Ibrc,Ipr,Iwr,
      &            Ind,Ibb,anorm,eps,uu,gg,Amat,Basmat,Csc,Wr,singlr,redbas)
       IF ( Info<0 ) GOTO 4600
-      GOTO npr004
+      SELECT CASE(npr004)
+        CASE(200)
+          GOTO 200
+        CASE(2900)
+          GOTO 2900
+        CASE(3500)
+          GOTO 3500
+      END SELECT
 ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 !     PROCEDURE (CLASSIFY VARIABLES)
 !
@@ -675,7 +694,12 @@
         ENDIF
         i = i + 1
       ENDDO
-      GOTO npr007
+      SELECT CASE(npr007)
+        CASE(500)
+          GOTO 500
+        CASE(1200)
+          GOTO 1200
+      END SELECT
  2900 ntries = ntries + 1
  3000 IF ( (2-ntries)>=0 ) THEN
         CALL SPLPCE(Mrelas,Nvars,Lmx,Lbm,itlp,itbrc,Ibasis,Imat,Ibrc,Ipr,Iwr,
@@ -689,9 +713,16 @@
 !++  END
             CALL SVOUT(Mrelas,Erd,'('' EST. ERROR IN DUAL COMPS.'')',idg)
           ENDIF
-          GOTO npr005
+          SELECT CASE(npr005)
+            CASE(300)
+              GOTO 300
+            CASE(2400)
+              GOTO 2400
+            CASE(3600)
+              GOTO 3600
+          END SELECT
         ELSEIF ( ntries/=2 ) THEN
-          ASSIGN 2900 TO npr004
+          npr004 = 2900
           GOTO 2700
         ENDIF
       ENDIF
@@ -759,17 +790,29 @@
         Primal(Nvars+1) = zero
         CALL SCOPY(Mrelas,Primal(Nvars+1),0,Primal(Nvars+1),1)
       ENDIF
-      GOTO npr008
+      SELECT CASE(npr008)
+        CASE(600)
+          GOTO 600
+        CASE(1100)
+          GOTO 1100
+        CASE(1600)
+          GOTO 1600
+      END SELECT
 ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 !     PROCEDURE (INITIALIZE REDUCED COSTS AND STEEPEST EDGE WEIGHTS)
  3200 CALL SPINCW(Mrelas,Nvars,Lmx,Lbm,npp,jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,Ind,
      &            Ibb,costsc,gg,erdnrm,dulnrm,Amat,Basmat,Csc,Wr,Ww,Rz,Rg,Costs,
      &            Colnrm,Duals,stpedg)
 !
-      GOTO npr014
+      SELECT CASE(npr014)
+        CASE(2100)
+          GOTO 2100
+        CASE(3900)
+          GOTO 3900
+      END SELECT
 !++  CODE FOR OUTPUT=YES IS ACTIVE
  3300 IF ( kprint>=1 ) THEN
-        ASSIGN 3400 TO npr012
+        npr012 = 3400
         GOTO 4500
       ENDIF
 !++  CODE FOR OUTPUT=NO IS INACTIVE
@@ -783,14 +826,14 @@
      &            '.  IF FILE NO. = 0, NO SAVE.',nerr,iopt)
       Info = -nerr
       GOTO 4600
- 3500 ASSIGN 3600 TO npr005
+ 3500 npr005 = 3600
       ntries = 1
       GOTO 3000
- 3600 ASSIGN 3700 TO npr006
+ 3600 npr006 = 3700
       GOTO 4000
- 3700 ASSIGN 3800 TO npr013
+ 3700 npr013 = 3800
       GOTO 4100
- 3800 ASSIGN 3900 TO npr014
+ 3800 npr014 = 3900
       GOTO 3200
 !
 !     ERASE NON-CYCLING MARKERS NEAR COMPLETION.
@@ -800,7 +843,7 @@
         Ibasis(i) = ABS(Ibasis(i))
         i = i + 1
       ENDDO
-      ASSIGN 2300 TO npr015
+      npr015 = 2300
       GOTO 4200
 ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 !     PROCEDURE (COMPUTE NEW PRIMAL)
@@ -811,7 +854,18 @@
       CALL LA05BS(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,gg,Ww,trans)
       CALL SCOPY(Mrelas,Ww,1,Rprim,1)
       rprnrm = SASUM(Mrelas,Rprim,1)
-      GOTO npr006
+      SELECT CASE(npr006)
+        CASE(400)
+          GOTO 400
+        CASE(1000)
+          GOTO 1000
+        CASE(1500)
+          GOTO 1500
+        CASE(3700)
+          GOTO 3700
+        CASE(4400)
+          GOTO 4400
+      END SELECT
 ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 !     PROCEDURE (COMPUTE NEW DUALS)
 !
@@ -831,15 +885,27 @@
       trans = .TRUE.
       CALL LA05BS(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,gg,Duals,trans)
       dulnrm = SASUM(Mrelas,Duals,1)
-      GOTO npr013
+      SELECT CASE(npr013)
+        CASE(2000)
+          GOTO 2000
+        CASE(3800)
+          GOTO 3800
+        CASE(4300)
+          GOTO 4300
+      END SELECT
 ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 !     PROCEDURE (FIND VARIABLE TO ENTER BASIS AND GET SEARCH DIRECTION)
  4200 CALL SPLPFE(Mrelas,Nvars,Lmx,Lbm,ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,Ind,Ibb,
      &            erdnrm,eps,gg,dulnrm,dirnrm,Amat,Basmat,Csc,Wr,Ww,Bl,Bu,Rz,Rg,
      &            Colnrm,Duals,found)
-      GOTO npr015
+      SELECT CASE(npr015)
+        CASE(2200)
+          GOTO 2200
+        CASE(2300)
+          GOTO 2300
+      END SELECT
  4300 IF ( costsc==zero ) THEN
-        ASSIGN 4400 TO npr006
+        npr006 = 4400
         GOTO 4000
       ELSE
         i = 1
@@ -848,7 +914,7 @@
           Duals(i) = Duals(i)/costsc
           i = i + 1
         ENDDO
-        ASSIGN 4400 TO npr006
+        npr006 = 4400
         GOTO 4000
       ENDIF
 !
@@ -902,7 +968,12 @@
         Duals(Mrelas+j) = rzj
         j = j + 1
       ENDDO
-      GOTO npr011
+      SELECT CASE(npr011)
+        CASE(1800)
+          GOTO 1800
+        CASE(3300)
+          GOTO 3300
+      END SELECT
 ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 !     PROCEDURE (PRINT SUMMARY)
  4500 idum(1) = Info
@@ -928,7 +999,12 @@
       CALL IVOUT(1,idum,'('' NO. OF ITERATIONS'')',idg)
       idum(1) = nredc
       CALL IVOUT(1,idum,'('' NO. OF FULL REDECOMPS'')',idg)
-      GOTO npr012
+      SELECT CASE(npr012)
+        CASE(3400)
+          GOTO 3400
+        CASE(4600)
+          GOTO 4600
+      END SELECT
 !++  CODE FOR OUTPUT=NO IS INACTIVE
 !++  END
 ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC

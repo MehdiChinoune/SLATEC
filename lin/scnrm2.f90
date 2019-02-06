@@ -90,7 +90,7 @@
 !***FIRST EXECUTABLE STATEMENT  SCNRM2
       IF ( N>0 ) THEN
 !
-        ASSIGN 20 TO next
+        next = 20
         sum = zero
         nn = N*Incx
 !
@@ -99,9 +99,20 @@
         DO i = 1 , nn , Incx
           absx = ABS(REAL(Cx(i)))
           imag = .FALSE.
-          GOTO next
+          SELECT CASE(next)
+            CASE(20)
+              GOTO 20
+            CASE(40)
+              GOTO 40
+            CASE(80)
+              GOTO 80
+            CASE(100)
+              GOTO 100
+            CASE(140)
+              GOTO 140
+          END SELECT
  20       IF ( absx>cutlo ) GOTO 120
-          ASSIGN 40 TO next
+          next = 40
           scale = .FALSE.
 !
 !                        PHASE 1.  SUM IS ZERO
@@ -111,7 +122,7 @@
 !
 !                                PREPARE FOR PHASE 2.
 !
-          ASSIGN 80 TO next
+          next = 80
  60       scale = .TRUE.
           xmax = absx
 !
@@ -140,7 +151,7 @@
           ENDIF
           GOTO 160
 !
- 120      ASSIGN 140 TO next
+ 120      next = 140
           scale = .FALSE.
 !
 !     FOR REAL OR D.P. SET HITEST = CUTHI/N
@@ -154,7 +165,7 @@
 !
 !                                PREPARE FOR PHASE 4.
 !
-            ASSIGN 100 TO next
+            next =100
             sum = (sum/absx)/absx
             GOTO 60
           ELSE
@@ -166,7 +177,18 @@
  160      IF ( .NOT.(imag) ) THEN
             absx = ABS(AIMAG(Cx(i)))
             imag = .TRUE.
-            GOTO next
+            SELECT CASE(next)
+              CASE(20)
+                GOTO 20
+              CASE(40)
+                GOTO 40
+              CASE(80)
+                GOTO 80
+              CASE(100)
+                GOTO 100
+              CASE(140)
+                GOTO 140
+            END SELECT
           ENDIF
 !
         ENDDO

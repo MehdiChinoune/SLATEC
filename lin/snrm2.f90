@@ -88,7 +88,7 @@
 !***FIRST EXECUTABLE STATEMENT  SNRM2
       IF ( N>0 ) THEN
 !
-        ASSIGN 200 TO next
+        next = 200
         sum = zero
         nn = N*Incx
 !
@@ -99,9 +99,18 @@
         SNRM2 = zero
         GOTO 99999
       ENDIF
- 100  GOTO next
+ 100  SELECT CASE(next)
+        CASE(200)
+          GOTO 200
+        CASE(300)
+          GOTO 300
+        CASE(600)
+          GOTO 600
+        CASE(700)
+          GOTO 700
+      END SELECT
  200  IF ( ABS(Sx(i))>cutlo ) GOTO 800
-      ASSIGN 300 TO next
+      next = 300
       xmax = zero
 !
 !                        PHASE 1.  SUM IS ZERO
@@ -111,13 +120,13 @@
 !
 !                                PREPARE FOR PHASE 2.
 !
-      ASSIGN 600 TO next
+      next = 600
       GOTO 500
 !
 !                                PREPARE FOR PHASE 4.
 !
  400  i = j
-      ASSIGN 700 TO next
+      next = 700
       sum = (sum/Sx(i))/Sx(i)
  500  xmax = ABS(Sx(i))
 !

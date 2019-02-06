@@ -136,8 +136,7 @@
       IF ( ier/=0 ) THEN
         ipass1 = 0
       ELSE
-        DO l1 = l1min , l1max
-          index = INT(l1-l1min) + 1
+        DO index = 1 , INT(l1max-l1min) + 1
           m1 = 1.0D0
           diff(index) = ABS(thrcof(index)-r3jj(index))
           IF ( diff(index)>ABS(r3jj(index))*tol ) ipass1 = 0
@@ -156,8 +155,8 @@
         ELSE
           WRITE (Lun,99002)
 99002     FORMAT ('    L1',T31,'DRC3JJ VALUE',T67,'FORMULA VALUE')
-          DO l1 = l1min , l1max
-            index = INT(l1-l1min) + 1
+          DO index = 1, INT(l1max-l1min) + 1
+            l1 = index+ l1min - 1
             WRITE (Lun,fmt) l1 , thrcof(index) , r3jj(index)
             IF ( diff(index)>ABS(r3jj(index))*tol ) WRITE (Lun,'(1X,A,F5.1)')
      &            'DIFFERENCE EXCEEDS ERROR '//'TOLERANCE FOR L1 =' , l1
@@ -184,8 +183,8 @@
       IF ( ier/=0 ) THEN
         ipass2 = 0
       ELSE
-        DO m2 = m2min , m2max
-          index = INT(m2-m2min) + 1
+        DO index = 1, INT(m2max-m2min) + 1
+          m2 = index+ m2min - 1
           m3 = -m1 - m2
           diff(index) = ABS(thrcof(index)-r3jm(index))
           IF ( diff(index)>ABS(r3jm(index))*tol ) ipass2 = 0
@@ -206,8 +205,8 @@
         ELSE
           WRITE (Lun,99005)
 99005     FORMAT ('    M2',T31,'DRC3JM VALUE',T67,'FORMULA VALUE')
-          DO m2 = m2min , m2max
-            index = INT(m2-m2min) + 1
+          DO index = 1, INT(m2max-m2min) + 1
+            m2 = index+ m2min - 1
             WRITE (Lun,fmt) m2 , thrcof(index) , r3jm(index)
             IF ( diff(index)>ABS(r3jm(index))*tol ) WRITE (Lun,'(1X,A,F5.1)')
      &            'DIFFERENCE EXCEEDS ERROR '//'TOLERANCE FOR M2 =' , m2
@@ -281,8 +280,7 @@
       IF ( ier/=0 ) THEN
         ipass4 = 0
       ELSE
-        DO l1 = l1min , l1max
-          index = INT(l1-l1min) + 1
+        DO index = 1, INT(l1max-l1min) + 1
           diff(index) = ABS(sixcof(index)-r6j(index))
           IF ( diff(index)>ABS(r6j(index))*tol ) ipass4 = 0
         ENDDO
@@ -300,8 +298,8 @@
         ELSE
           WRITE (Lun,99006)
 99006     FORMAT ('    L1',T32,'DRC6J VALUE',T67,'FORMULA VALUE')
-          DO l1 = l1min , l1max
-            index = INT(l1-l1min) + 1
+          DO index = 1, INT(l1max-l1min) + 1
+            l1 = index+ l1min - 1
             WRITE (Lun,fmt) l1 , sixcof(index) , r6j(index)
             IF ( diff(index)>ABS(r6j(index))*tol ) WRITE (Lun,'(1X,A,F5.1)')
      &            'DIFFERENCE EXCEEDS ERROR '//'TOLERANCE FOR L1 =' , l1

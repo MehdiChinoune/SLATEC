@@ -80,7 +80,7 @@
       IF ( Ileave>=0 ) GOTO 200
       ibas = Ibasis(ABS(Ileave))
       scalr = Rprim(ABS(Ileave))
-      ASSIGN 100 TO npr001
+      npr001 = 100
       GOTO 1800
  100  Ibb(ibas) = ABS(Ibb(ibas)) + 1
 !
@@ -95,13 +95,13 @@
         IF ( Ind(ibas)/=3.OR.MOD(Ibb(ibas),2)/=0 ) GOTO 500
         scalr = -(Bu(ibas)-Bl(ibas))
         IF ( ibas<=Nvars ) scalr = scalr/Csc(ibas)
-        ASSIGN 400 TO npr001
+        npr001 = 400
         GOTO 1800
       ELSE
         ibas = Ibasis(Ienter)
         scalr = Theta
         IF ( MOD(Ibb(ibas),2)==0 ) scalr = -scalr
-        ASSIGN 300 TO npr001
+        npr001 = 300
         GOTO 1800
       ENDIF
  300  Ibb(ibas) = Ibb(ibas) + 1
@@ -137,7 +137,7 @@
           ibas = Ibasis(k)
           scalr = -(Bu(ibas)-Bl(ibas))
           IF ( ibas<=Nvars ) scalr = scalr/Csc(ibas)
-          ASSIGN 800 TO npr001
+          npr001 = 800
           GOTO 1800
         ENDIF
       ENDDO
@@ -146,7 +146,7 @@
       IF ( Ienter==Ileave ) THEN
 !
 !     THIS IS NECESSARY ONLY FOR PRINTING OF INTERMEDIATE RESULTS.
-        ASSIGN 1700 TO npr003
+        npr003 = 1700
         GOTO 1900
       ELSE
 !
@@ -203,7 +203,7 @@
  1000 IF ( .NOT.(Stpedg) ) THEN
 !
 !     COMPUTE THE UPDATED DUALS IN DUALS(*).
-        ASSIGN 1300 TO npr003
+        npr003 = 1300
       ELSE
 !
 !     COMPUTE COL. ABS(ILEAVE) OF THE NEW INVERSE (TRANSPOSE) MATRIX
@@ -215,7 +215,7 @@
         CALL LA05BS(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Erd,trans)
 !
 !     COMPUTE UPDATED DUAL VARIABLES IN DUALS(*).
-        ASSIGN 1100 TO npr003
+        npr003 = 1100
       ENDIF
       GOTO 1900
 !
@@ -402,7 +402,16 @@
         ENDDO
       ENDIF
       Rhsnrm = MAX(Rhsnrm,SASUM(Mrelas,Rhs,1))
-      GOTO npr001
+      SELECT CASE(npr001)
+        CASE(100)
+          GOTO 100
+        CASE(300)
+          GOTO 300
+        CASE(400)
+          GOTO 400
+        CASE(800)
+          GOTO 800
+      END SELECT
 !     PROCEDURE (COMPUTE NEW DUALS)
 !
 !     SOLVE FOR DUAL VARIABLES. FIRST COPY COSTS INTO DUALS(*).
@@ -421,5 +430,12 @@
       trans = .TRUE.
       CALL LA05BS(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Duals,trans)
       Dulnrm = SASUM(Mrelas,Duals,1)
-      GOTO npr003
+      SELECT CASE(npr003)
+        CASE(1100)
+          GOTO 1100
+        CASE(1300)
+          GOTO 1300
+        CASE(1700)
+          GOTO 1700
+      END SELECT
       END SUBROUTINE SPLPMU

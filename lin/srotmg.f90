@@ -139,11 +139,20 @@
           sflag = -one
         ENDIF
       ENDIF
-      GOTO igo
+      SELECT CASE(igo)
+        CASE(300)
+          GOTO 300
+        CASE(500)
+          GOTO 500
+        CASE(700)
+          GOTO 700
+        CASE(900)
+          GOTO 900
+      END SELECT
 !     PROCEDURE..SCALE-CHECK
  200  IF ( .NOT.Sd1<=rgamsq ) GOTO 400
       IF ( Sd1==zero ) GOTO 600
-      ASSIGN 300 TO igo
+      igo = 300
 !              FIX-H..
       GOTO 100
  300  Sd1 = Sd1*gam**2
@@ -152,7 +161,7 @@
       sh12 = sh12/gam
       GOTO 200
  400  IF ( .NOT.Sd1>=gamsq ) GOTO 600
-      ASSIGN 500 TO igo
+      igo = 500
 !              FIX-H..
       GOTO 100
  500  Sd1 = Sd1/gam**2
@@ -162,7 +171,7 @@
       GOTO 400
  600  IF ( .NOT.ABS(Sd2)<=rgamsq ) GOTO 800
       IF ( Sd2==zero ) GOTO 1000
-      ASSIGN 700 TO igo
+      igo = 700
 !              FIX-H..
       GOTO 100
  700  Sd2 = Sd2*gam**2
@@ -170,7 +179,7 @@
       sh22 = sh22/gam
       GOTO 600
  800  IF ( .NOT.ABS(Sd2)>=gamsq ) GOTO 1000
-      ASSIGN 900 TO igo
+      igo = 900
 !              FIX-H..
       GOTO 100
  900  Sd2 = Sd2/gam**2

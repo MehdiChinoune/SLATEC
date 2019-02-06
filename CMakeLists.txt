@@ -13,7 +13,7 @@ endif()
 
 if ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "GNU" )
 
-  set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -O3 -fno-aggressive-loop-optimizations -ffixed-form -ffixed-line-length-80" )
+  set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -O3 -fno-aggressive-loop-optimizations -ffixed-form -ffixed-line-length-80 -std=f95" )
   set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -g" )
 
 elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Intel" )

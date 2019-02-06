@@ -649,22 +649,22 @@
 !
 !     MACHINE CONSTANTS FOR THE IBM PC
 !
-!     DATA IMACH( 1) /          5 /
-!     DATA IMACH( 2) /          6 /
-!     DATA IMACH( 3) /          0 /
-!     DATA IMACH( 4) /          0 /
-!     DATA IMACH( 5) /         32 /
-!     DATA IMACH( 6) /          4 /
-!     DATA IMACH( 7) /          2 /
-!     DATA IMACH( 8) /         31 /
-!     DATA IMACH( 9) / 2147483647 /
-!     DATA IMACH(10) /          2 /
-!     DATA IMACH(11) /         24 /
-!     DATA IMACH(12) /       -125 /
-!     DATA IMACH(13) /        127 /
-!     DATA IMACH(14) /         53 /
-!     DATA IMACH(15) /      -1021 /
-!     DATA IMACH(16) /       1023 /
+      DATA imach( 1) /          5 /
+      DATA imach( 2) /          6 /
+      DATA imach( 3) /          0 /
+      DATA imach( 4) /          0 /
+      DATA imach( 5) /         32 /
+      DATA imach( 6) /          4 /
+      DATA imach( 7) /          2 /
+      DATA imach( 8) /         31 /
+      DATA imach( 9) / 2147483647 /
+      DATA imach(10) /          2 /
+      DATA imach(11) /         24 /
+      DATA imach(12) /       -125 /
+      DATA imach(13) /        127 /
+      DATA imach(14) /         53 /
+      DATA imach(15) /      -1021 /
+      DATA imach(16) /       1023 /
 !
 !     MACHINE CONSTANTS FOR THE IBM RS 6000
 !
@@ -687,22 +687,22 @@
 !
 !     MACHINE CONSTANTS FOR THE INTEL i860
 !
-      DATA imach(1)/5/
-      DATA imach(2)/6/
-      DATA imach(3)/6/
-      DATA imach(4)/6/
-      DATA imach(5)/32/
-      DATA imach(6)/4/
-      DATA imach(7)/2/
-      DATA imach(8)/31/
-      DATA imach(9)/2147483647/
-      DATA imach(10)/2/
-      DATA imach(11)/24/
-      DATA imach(12)/ - 125/
-      DATA imach(13)/128/
-      DATA imach(14)/53/
-      DATA imach(15)/ - 1021/
-      DATA imach(16)/1024/
+!     DATA imach(1)/5/
+!     DATA imach(2)/6/
+!     DATA imach(3)/6/
+!     DATA imach(4)/6/
+!     DATA imach(5)/32/
+!     DATA imach(6)/4/
+!     DATA imach(7)/2/
+!     DATA imach(8)/31/
+!     DATA imach(9)/2147483647/
+!     DATA imach(10)/2/
+!     DATA imach(11)/24/
+!     DATA imach(12)/ - 125/
+!     DATA imach(13)/128/
+!     DATA imach(14)/53/
+!     DATA imach(15)/ - 1021/
+!     DATA imach(16)/1024/
 !
 !     MACHINE CONSTANTS FOR THE PDP-10 (KA PROCESSOR)
 !

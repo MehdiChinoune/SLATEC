@@ -202,8 +202,8 @@
 !
       DATA llu18 , llu19 , llu14/.FALSE. , .FALSE. , .FALSE./
 !
-      DATA forma(1:29) , forma(30:60)/'(/, 1X, A  , '' category does ' , 
-     &     'not exist in this library.'', /)'/
+      DATA forma(1:60) /'(/, 1X, A  , '' category does not exist in this &
+     &library.'', /)'/
 !***FIRST EXECUTABLE STATEMENT  SLADOC
       WRITE (UNIT=msg,FMT=99039) LCAT , MLCAT
       fmt1 = '(1X, A'//msg(1:2)//', '//msg(3:4)//'X, A, 3I8)'
