@@ -50,11 +50,10 @@
 !   900402  Added TYPE section.  (WRB)
 !***END PROLOGUE  CPEVL
 !
-      COMPLEX A(*) , C(*) , Z , ci , cim1 , B(*) , bi , bim1 , t , ZA , q
+      COMPLEX A(*) , C(*) , Z , ci , cim1 , B(*) , bi , bim1 , t
       LOGICAL Kbd
       SAVE d1
       DATA d1/0.0/
-      ZA(q) = CMPLX(ABS(REAL(q)),ABS(AIMAG(q)))
 !***FIRST EXECUTABLE STATEMENT  CPEVL
       IF ( d1==0.0 ) d1 = REAL(I1MACH(10))**(1-I1MACH(11))
       np1 = N + 1
@@ -79,4 +78,9 @@
           ENDIF
         ENDDO
       ENDDO
+      CONTAINS
+        COMPLEX FUNCTION ZA(q)
+          COMPLEX, INTENT(IN) :: q
+          ZA = CMPLX(ABS(REAL(q)),ABS(AIMAG(q)))
+        END FUNCTION ZA
       END SUBROUTINE CPEVL

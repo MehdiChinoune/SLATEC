@@ -66,9 +66,7 @@
 !
       COMPLEX t
       INTEGER ICAMAX , j , k , kp1 , l , nm1
-      COMPLEX zdum
-      REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
+      REAL, EXTERNAL :: CABS1
 !
 !     GAUSSIAN ELIMINATION WITH PARTIAL PIVOTING
 !

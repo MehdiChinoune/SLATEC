@@ -137,10 +137,8 @@
       COMPLEX CDOTC , ek , t , wk , wkm
       REAL anorm , s , SCASUM , sm , ynorm
       INTEGER is , info , j , ju , k , kb , kp1 , l , la , lm , lz , m , mm
-      COMPLEX zdum , zdum1 , zdum2 , CSIGN1
-      REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
-      CSIGN1(zdum1,zdum2) = CABS1(zdum1)*(zdum2/CABS1(zdum2))
+      REAL, EXTERNAL :: CABS1
+      COMPLEX, EXTERNAL :: CSIGN1
 !
 !     COMPUTE 1-NORM OF A
 !

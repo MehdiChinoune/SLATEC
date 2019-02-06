@@ -39,25 +39,23 @@
 !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
 !           FORMATs.  (RWC)
 !***END PROLOGUE  CSPQC
-      COMPLEX ap(10) , at(10) , b(4) , bt(4) , c(4) , ainv(10) , det(2) , 
+      COMPLEX ap(10) , at(10) , b(4) , bt(4) , c(4) , ainv(10) , det(2) ,
      &        dc(2) , z(4) , xa , xb
       REAL r , rcond , rcnd , DELX
       CHARACTER kprog*19 , kfail*39
       INTEGER n , ipvt(4) , info , i , j , indx , Nerr
-      DATA ap/(2.E0,0.E0) , (0.E0,-1.E0) , (2.E0,0.E0) , (0.E0,0.E0) , 
+      DATA ap/(2.E0,0.E0) , (0.E0,-1.E0) , (2.E0,0.E0) , (0.E0,0.E0) ,
      &     (0.E0,0.E0) , (3.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,-1.E0)
      &     , (4.E0,0.E0)/
       DATA b/(3.E0,2.E0) , (1.E0,1.E0) , (0.E0,-4.E0) , (3.E0,0.E0)/
       DATA c/(1.E0,1.E0) , (0.E0,1.E0) , (0.E0,-1.E0) , (1.E0,0.E0)/
-      DATA ainv/(.4E0,0.E0) , (0.E0,.2E0) , (.4E0,0.E0) , (0.E0,0.E0) , 
-     &     (0.E0,0.E0) , (.30769E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , 
+      DATA ainv/(.4E0,0.E0) , (0.E0,.2E0) , (.4E0,0.E0) , (0.E0,0.E0) ,
+     &     (0.E0,0.E0) , (.30769E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,
      &     (0.E0,.07692E0) , (.23077E0,0.E0)/
       DATA dc/(6.5E0,0.E0) , (1.0E0,0.E0)/
       DATA kprog/'SPFA SPCO SPSL SPDI'/
       DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
       DATA rcnd/.58692E0/
-!
-      DELX(xa,xb) = ABS(REAL(xa-xb)) + ABS(AIMAG(xa-xb))
 !***FIRST EXECUTABLE STATEMENT  CSPQC
       n = 4
       Nerr = 0

@@ -42,10 +42,7 @@
       LOGICAL ctran , tran
 !     .. Intrinsic Functions ..
       INTRINSIC ABS , AIMAG , CONJG , MAX , REAL , SQRT
-!     .. Statement Functions ..
-      REAL ABS1
-!     .. Statement Function definitions ..
-      ABS1(c) = ABS(REAL(c)) + ABS(AIMAG(c))
+      REAL CABS1
 !***FIRST EXECUTABLE STATEMENT  CMVCH
       tran = Trans=='T'
       ctran = Trans=='C'
@@ -82,24 +79,24 @@
         IF ( tran ) THEN
           DO j = 1 , nl
             Yt(iy) = Yt(iy) + A(j,i)*X(jx)
-            G(iy) = G(iy) + ABS1(A(j,i))*ABS1(X(jx))
+            G(iy) = G(iy) + CABS1(A(j,i))*CABS1(X(jx))
             jx = jx + incxl
           ENDDO
         ELSEIF ( ctran ) THEN
           DO j = 1 , nl
             Yt(iy) = Yt(iy) + CONJG(A(j,i))*X(jx)
-            G(iy) = G(iy) + ABS1(A(j,i))*ABS1(X(jx))
+            G(iy) = G(iy) + CABS1(A(j,i))*CABS1(X(jx))
             jx = jx + incxl
           ENDDO
         ELSE
           DO j = 1 , nl
             Yt(iy) = Yt(iy) + A(i,j)*X(jx)
-            G(iy) = G(iy) + ABS1(A(i,j))*ABS1(X(jx))
+            G(iy) = G(iy) + CABS1(A(i,j))*CABS1(X(jx))
             jx = jx + incxl
           ENDDO
         ENDIF
         Yt(iy) = Alpha*Yt(iy) + Beta*Y(iy)
-        G(iy) = ABS1(Alpha)*G(iy) + ABS1(Beta)*ABS1(Y(iy))
+        G(iy) = CABS1(Alpha)*G(iy) + CABS1(Beta)*CABS1(Y(iy))
         iy = iy + incyl
       ENDDO
 !

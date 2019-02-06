@@ -78,9 +78,7 @@
 !
       COMPLEX CDOTC , temp
       INTEGER case , j , jj
-      COMPLEX zdum
-      REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
+      REAL, EXTERNAL :: CABS1
 !***FIRST EXECUTABLE STATEMENT  CTRSL
 !
 !        CHECK FOR ZERO DIAGONAL ELEMENTS.

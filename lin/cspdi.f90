@@ -84,9 +84,7 @@
       INTEGER ij , ik , ikp1 , iks , j , jb , jk , jkp1
       INTEGER k , kk , kkp1 , km1 , ks , ksj , kskp1 , kstep
       LOGICAL noinv , nodet
-      COMPLEX zdum
-      REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
+      REAL, EXTERNAL :: CABS1
 !
 !***FIRST EXECUTABLE STATEMENT  CSPDI
       noinv = MOD(Job,10)==0

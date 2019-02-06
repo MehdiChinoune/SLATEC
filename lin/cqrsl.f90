@@ -158,15 +158,13 @@
 !   920501  Reformatted the REFERENCES section.  (WRB)
 !***END PROLOGUE  CQRSL
       INTEGER Ldx , N , K , Job , Info
-      COMPLEX X(Ldx,*) , Qraux(*) , Y(*) , Qy(*) , Qty(*) , B(*) , Rsd(*) , 
+      COMPLEX X(Ldx,*) , Qraux(*) , Y(*) , Qy(*) , Qty(*) , B(*) , Rsd(*) ,
      &        Xb(*)
 !
       INTEGER i , j , jj , ju , kp1
       COMPLEX CDOTC , t , temp
       LOGICAL cb , cqy , cqty , cr , cxb
-      COMPLEX zdum
-      REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
+      REAL, EXTERNAL :: CABS1
 !***FIRST EXECUTABLE STATEMENT  CQRSL
 !
 !     SET INFO FLAG.

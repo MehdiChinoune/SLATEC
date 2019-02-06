@@ -5,7 +5,7 @@
       IMPLICIT NONE
 !*--SBOLSM6
 !*** Start of declarations inserted by SPAG
-      INTEGER i , idum , igopr , INEXT , ioff , ip , iprint , itemp , iter ,
+      INTEGER i , igopr , ioff , ip , iprint , itemp , iter ,
      &        itmax , j , jbig , jcol , jdrop , jdrop1 , jdrop2 , jlarge ,
      &        jmag , jp , lds
       INTEGER lgopr , lp , Mdw , Minput , Mode , mrows , mval , Ncols , nsetb
@@ -439,7 +439,6 @@
 !
       PARAMETER (ZERO=0.0E0,ONE=1.0E0,TWO=2.0E0)
 !
-      INEXT(idum) = MIN(idum+1,mrows)
 !***FIRST EXECUTABLE STATEMENT  SBOLSM
 !
 !     Verify that the problem dimensions are defined properly.
@@ -1185,4 +1184,9 @@
       Rnorm = SNRM2(mrows-i,W(INEXT(i),Ncols+1),1)
 !
       IF ( igopr==2 ) Mode = nsetb
+      CONTAINS
+        INTEGER FUNCTION INEXT(idum)
+          INTEGER, INTENT(IN) :: idum
+          INEXT = MIN(idum+1,mrows)
+        END FUNCTION INEXT
       END SUBROUTINE SBOLSM

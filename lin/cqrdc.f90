@@ -110,10 +110,8 @@
       REAL maxnrm , SCNRM2 , tt
       COMPLEX CDOTC , nrmxl , t
       LOGICAL negj , swapj
-      COMPLEX CSIGN , zdum , zdum1 , zdum2
-      REAL CABS1
-      CSIGN(zdum1,zdum2) = ABS(zdum1)*(zdum2/ABS(zdum2))
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
+      REAL, EXTERNAL :: CABS1
+      COMPLEX, EXTERNAL :: CSIGN
 !
 !***FIRST EXECUTABLE STATEMENT  CQRDC
       pl = 1

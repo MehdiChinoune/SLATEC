@@ -74,10 +74,8 @@
       REAL tnorm , ynorm , s , sm , SCASUM
       INTEGER i1 , j , j1 , j2 , k , kk , l
       LOGICAL lower
-      COMPLEX zdum , zdum1 , zdum2 , CSIGN1
-      REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
-      CSIGN1(zdum1,zdum2) = CABS1(zdum1)*(zdum2/CABS1(zdum2))
+      REAL, EXTERNAL :: CABS1
+      COMPLEX, EXTERNAL :: CSIGN1
 !
 !***FIRST EXECUTABLE STATEMENT  CTRCO
       lower = Job==0

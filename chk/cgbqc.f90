@@ -39,17 +39,17 @@
 !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
 !           record and cleaned up FORMATs.  (RWC)
 !***END PROLOGUE  CGBQC
-      COMPLEX abd(6,4) , at(7,4) , b(4) , bt(4) , c(4) , det(2) , dc(2) , z(4) , 
+      COMPLEX abd(6,4) , at(7,4) , b(4) , bt(4) , c(4) , det(2) , dc(2) , z(4) ,
      &        xa , xb
       REAL r , rcond , rcnd , DELX
       CHARACTER kfail*39 , kprog*19
       INTEGER lda , n , ipvt(4) , info , i , j , indx , Nerr
       INTEGER ml , mu
-      DATA abd/(0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , 
-     &     (2.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , 
+      DATA abd/(0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,
+     &     (2.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,
      &     (0.E0,-1.E0) , (2.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0)
      &     , (0.E0,0.E0) , (0.E0,0.E0) , (3.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0)
-     &     , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,-1.E0) , (4.E0,0.E0) , 
+     &     , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,-1.E0) , (4.E0,0.E0) ,
      &     (0.E0,0.E0)/
       DATA b/(3.E0,2.E0) , (-1.E0,3.E0) , (0.E0,-4.E0) , (5.E0,0.E0)/
       DATA c/(1.E0,1.E0) , (0.E0,1.E0) , (0.E0,-1.E0) , (1.E0,0.E0)/
@@ -57,8 +57,6 @@
       DATA kprog/'GBFA GBCO GBSL GBDI'/
       DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
       DATA rcnd/.24099E0/
-!
-      DELX(xa,xb) = ABS(REAL(xa-xb)) + ABS(AIMAG(xa-xb))
 !***FIRST EXECUTABLE STATEMENT  CGBQC
       lda = 7
       n = 4

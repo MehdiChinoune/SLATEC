@@ -40,11 +40,11 @@ add_executable(test19 test19.f90 dblat2.f90 dblat3.f90 dmvch.f90 lde.f90 dchke2.
 
 add_executable(test20 test20.f90 cblat2.f90 cblat3.f90 cmvch.f90 lce.f90 cchke2.f90 cchk12.f90 cchk22.f90 cchk32.f90 cchk42.f90 cchk52.f90 cchk62.f90 cmmch.f90 cchke3.f90 cchk13.f90 cchk23.f90 cchk33.f90 cchk43.f90 cchk53.f90 chkxer.f90 cmake2.f90 lceres.f90 cmake3.f90 cbeg.f90)
 
-add_executable(test21 test21.f90 sgeqc.f90 dgeqc.f90 cgeqc.f90 )
+add_executable(test21 test21.f90 sgeqc.f90 dgeqc.f90 cgeqc.f90 delx.f90 )
 
 add_executable(test22 test22.f90 sqck.f90 dqck.f90 cqck.f90)
 
-add_executable(test23 test23.f90 cgeck.f90 cgbqc.f90 cpoqc.f90 cppqc.f90 cpbqc.f90 csiqc.f90 cspqc.f90 chiqc.f90 chpqc.f90 ctrqc.f90 cgtqc.f90 cptqc.f90 cchqc.f90 cqrqc.f90 csvqc.f90 )
+add_executable(test23 test23.f90 cgeck.f90 cgbqc.f90 cpoqc.f90 cppqc.f90 cpbqc.f90 csiqc.f90 cspqc.f90 chiqc.f90 chpqc.f90 ctrqc.f90 cgtqc.f90 cptqc.f90 cchqc.f90 cqrqc.f90 csvqc.f90 delx.f90 )
 
 add_executable(test24 test24.f90 eisqx1.f90 eisqx2.f90)
 

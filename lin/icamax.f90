@@ -50,9 +50,7 @@
       COMPLEX Cx(*)
       REAL smax , xmag
       INTEGER i , Incx , ix , N
-      COMPLEX zdum
-      REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
+      REAL, EXTERNAL :: CABS1
 !***FIRST EXECUTABLE STATEMENT  ICAMAX
       ICAMAX = 0
       IF ( N<=0 ) RETURN

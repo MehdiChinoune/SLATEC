@@ -39,27 +39,25 @@
 !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
 !           FORMATs.  (RWC)
 !***END PROLOGUE  CGECK
-      COMPLEX a(4,4) , at(5,4) , b(4) , bt(4) , c(4) , ainv(4,4) , det(2) , 
+      COMPLEX a(4,4) , at(5,4) , b(4) , bt(4) , c(4) , ainv(4,4) , det(2) ,
      &        dc(2) , z(4) , xa , xb
       REAL r , rcond , rcnd , DELX
       CHARACTER kprog*19 , kfail*39
       INTEGER lda , n , ipvt(4) , info , i , j , indx , Nerr
-      DATA a/(2.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0) , 
+      DATA a/(2.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,
      &     (0.E0,-1.E0) , (2.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0)
      &     , (0.E0,0.E0) , (3.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0)
      &     , (0.E0,-1.E0) , (4.E0,0.E0)/
       DATA b/(3.E0,2.E0) , (-1.E0,3.E0) , (0.E0,-4.E0) , (5.E0,0.E0)/
       DATA c/(1.E0,1.E0) , (0.E0,1.E0) , (0.E0,-1.E0) , (1.E0,0.E0)/
-      DATA ainv/(.66667E0,0.E0) , (0.E0,-.33333E0) , (0.E0,0.E0) , (0.E0,0.E0) , 
-     &     (0.E0,.33333E0) , (.66667E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , 
-     &     (0.E0,0.E0) , (0.E0,0.E0) , (.36364E0,0.E0) , (0.E0,-.09091E0) , 
+      DATA ainv/(.66667E0,0.E0) , (0.E0,-.33333E0) , (0.E0,0.E0) , (0.E0,0.E0) ,
+     &     (0.E0,.33333E0) , (.66667E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,
+     &     (0.E0,0.E0) , (0.E0,0.E0) , (.36364E0,0.E0) , (0.E0,-.09091E0) ,
      &     (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,.09091E0) , (.27273E0,0.E0)/
       DATA dc/(3.3E0,0.E0) , (1.0E0,0.E0)/
       DATA kprog/'GEFA GECO GESL GEDI'/
       DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
       DATA rcnd/.24099E0/
-!
-      DELX(xa,xb) = ABS(REAL(xa-xb)) + ABS(AIMAG(xa-xb))
 !***FIRST EXECUTABLE STATEMENT  CGECK
       lda = 5
       n = 4

@@ -101,11 +101,9 @@
       COMPLEX Abd(Lda,*)
 !
       COMPLEX t
-      INTEGER i , ICAMAX , i0 , j , ju , jz , j0 , j1 , k , kp1 , l , lm , m , 
+      INTEGER i , ICAMAX , i0 , j , ju , jz , j0 , j1 , k , kp1 , l , lm , m ,
      &        mm , nm1
-      COMPLEX zdum
-      REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
+      REAL, EXTERNAL :: CABS1
 !
 !***FIRST EXECUTABLE STATEMENT  CGBFA
       m = Ml + Mu + 1

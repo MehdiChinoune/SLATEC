@@ -116,17 +116,15 @@
       COMPLEX X(Ldx,*) , S(*) , E(*) , U(Ldu,*) , V(Ldv,*) , Work(*)
 !
 !
-      INTEGER i , iter , j , jobu , k , kase , kk , l , ll , lls , lm1 , lp1 , 
-     &        ls , lu , m , maxit , mm , mm1 , mp1 , nct , nctp1 , ncu , nrt , 
+      INTEGER i , iter , j , jobu , k , kase , kk , l , ll , lls , lm1 , lp1 ,
+     &        ls , lu , m , maxit , mm , mm1 , mp1 , nct , nctp1 , ncu , nrt ,
      &        nrtp1
       COMPLEX CDOTC , t , r
-      REAL b , c , cs , el , emm1 , f , g , SCNRM2 , scale , shift , sl , sm , 
+      REAL b , c , cs , el , emm1 , f , g , SCNRM2 , scale , shift , sl , sm ,
      &     sn , smm1 , t1 , test , ztest
       LOGICAL wantu , wantv
-      COMPLEX CSIGN , zdum , zdum1 , zdum2
-      REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
-      CSIGN(zdum1,zdum2) = ABS(zdum1)*(zdum2/ABS(zdum2))
+      REAL, EXTERNAL :: CABS1
+      COMPLEX, EXTERNAL :: CSIGN
 !***FIRST EXECUTABLE STATEMENT  CSVDC
 !
 !     SET THE MAXIMUM NUMBER OF ITERATIONS.

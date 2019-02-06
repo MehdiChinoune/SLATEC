@@ -36,7 +36,7 @@
 !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
 !           record and cleaned up FORMATs.  (RWC)
 !***END PROLOGUE  CQRQC
-      COMPLEX a(4,4) , qraux(4) , work(4) , y(4) , qy(4) , qty(4) , b(4) , 
+      COMPLEX a(4,4) , qraux(4) , work(4) , y(4) , qy(4) , qty(4) , b(4) ,
      &        rsd(4) , xb(4)
       COMPLEX at(5,4) , ac(4,4) , qrauxc(4) , qyc(4) , qtyc(4) , bc(4) , rsdc(4)
      &        , xbc(4) , x1 , x2
@@ -44,22 +44,22 @@
       INTEGER ldx , n , p , jpvt(4) , job , k , info
       INTEGER jpvtt(4) , jpvtc(4) , i , j , indx(5) , Nerr , l
       REAL DELX
-      DATA a/(2.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0) , 
+      DATA a/(2.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,
      &     (0.E0,-1.E0) , (2.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0)
      &     , (0.E0,0.E0) , (3.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0)
      &     , (0.E0,-1.E0) , (4.E0,0.E0)/
       DATA jpvt/0 , -1 , 1 , 0/
       DATA y/(3.E0,2.E0) , (-1.E0,3.E0) , (0.E0,-4.E0) , (5.E0,0.E0)/
-      DATA ac/(-3.16228E0,0.E0) , (0.E0,0.E0) , (.94868E0,0.E0) , 
-     &     (0.E0,.31623E0) , (0.E0,2.21359E0) , (-3.47851E0,0.E0) , 
-     &     (0.E0,.31623E0) , (.94868E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , 
-     &     (2.23607E0,0.E0) , (0.E0,.70711E0) , (0.E0,0.E0) , (0.E0,0.E0) , 
+      DATA ac/(-3.16228E0,0.E0) , (0.E0,0.E0) , (.94868E0,0.E0) ,
+     &     (0.E0,.31623E0) , (0.E0,2.21359E0) , (-3.47851E0,0.E0) ,
+     &     (0.E0,.31623E0) , (.94868E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,
+     &     (2.23607E0,0.E0) , (0.E0,.70711E0) , (0.E0,0.E0) , (0.E0,0.E0) ,
      &     (0.E0,-1.78885E0) , (-1.34164E0,0.E0)/
       DATA qrauxc/(1.E0,0.E0) , (1.E0,0.E0) , (1.70711E0,0.E0) , (0.E0,0.E0)/
       DATA jpvtc/3 , 4 , 1 , 2/
-      DATA qyc/(0.E0,-5.81378E0) , (-2.68328E0,0.E0) , (-1.89737E0,-1.58114E0) , 
+      DATA qyc/(0.E0,-5.81378E0) , (-2.68328E0,0.E0) , (-1.89737E0,-1.58114E0) ,
      &     (1.58114E0,-3.79473E0)/
-      DATA qtyc/(0.E0,5.37587E0) , (-3.47851E0,0.E0) , (4.02492E0,2.23607E0) , 
+      DATA qtyc/(0.E0,5.37587E0) , (-3.47851E0,0.E0) , (4.02492E0,2.23607E0) ,
      &     (0.E0,-1.34164E0)/
       DATA bc/(0.E0,-1.E0) , (1.E0,0.E0) , (1.E0,1.E0) , (0.E0,1.E0)/
       DATA rsdc/(0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0)/
@@ -68,8 +68,6 @@
       DATA kfail/
      &'FACTOR QRAUX  JPVT  QY        QTY       SOLUTION  RSD        XB        IN
      &FO'/
-!
-      DELX(x1,x2) = ABS(REAL(x1-x2)) + ABS(AIMAG(x1-x2))
 !***FIRST EXECUTABLE STATEMENT  CQRQC
       ldx = 5
       n = 4

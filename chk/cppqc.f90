@@ -43,20 +43,18 @@
       REAL r , rcond , rcnd , DELX , det(2) , dc(2)
       CHARACTER kprog*19 , kfail*39
       INTEGER n , info , i , j , indx , Nerr
-      DATA ap/(2.E0,0.E0) , (0.E0,-1.E0) , (2.E0,0.E0) , (0.E0,0.E0) , 
+      DATA ap/(2.E0,0.E0) , (0.E0,-1.E0) , (2.E0,0.E0) , (0.E0,0.E0) ,
      &     (0.E0,0.E0) , (3.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,-1.E0)
      &     , (4.E0,0.E0)/
       DATA b/(3.E0,2.E0) , (-1.E0,3.E0) , (0.E0,-4.E0) , (5.E0,0.E0)/
       DATA c/(1.E0,1.E0) , (0.E0,1.E0) , (0.E0,-1.E0) , (1.E0,0.E0)/
-      DATA ainv/(.66667E0,0.E0) , (0.E0,.33333E0) , (.66667E0,0.E0) , 
-     &     (0.E0,0.E0) , (0.E0,0.E0) , (.36364E0,0.E0) , (0.E0,0.E0) , 
+      DATA ainv/(.66667E0,0.E0) , (0.E0,.33333E0) , (.66667E0,0.E0) ,
+     &     (0.E0,0.E0) , (0.E0,0.E0) , (.36364E0,0.E0) , (0.E0,0.E0) ,
      &     (0.E0,0.E0) , (0.E0,.09091E0) , (.27273E0,0.E0)/
       DATA dc/3.3E0 , 1.0E0/
       DATA kprog/'PPFA PPCO PPSL PPDI'/
       DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
       DATA rcnd/.24099E0/
-!
-      DELX(xa,xb) = ABS(REAL(xa-xb)) + ABS(AIMAG(xa-xb))
 !***FIRST EXECUTABLE STATEMENT  CPPQC
       n = 4
       Nerr = 0

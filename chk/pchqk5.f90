@@ -69,24 +69,19 @@
 !
       INTEGER i , ierr , ifail , inbv , j , knotyp , k , N , ndim , nknots
       PARAMETER (N=9)
-      REAL bcoef(2*N) , d(N) , dcalc , derr , dermax , f(N) , fcalc , ferr , 
-     &     fermax , t(2*N+4) , terr , termax , tol , tolz , tsave(2*N+4) , 
+      REAL bcoef(2*N) , d(N) , dcalc , derr , dermax , f(N) , fcalc , ferr ,
+     &     fermax , t(2*N+4) , terr , termax , tol , tolz , tsave(2*N+4) ,
      &     work(16*N) , x(N) , ZERO
       PARAMETER (ZERO=0.0E0)
       LOGICAL fail
 !
-!  Define relative error function.
-!
-      REAL ans , err , RELERR
-      RELERR(err,ans) = ABS(err)/MAX(1.0E-5,ABS(ans))
-!
 !  Define test data.
 !
-      DATA x/ - 2.2E0 , -1.2E0 , -1.0E0 , -0.5E0 , -0.01E0 , 0.5E0 , 1.0E0 , 
+      DATA x/ - 2.2E0 , -1.2E0 , -1.0E0 , -0.5E0 , -0.01E0 , 0.5E0 , 1.0E0 ,
      &     2.0E0 , 2.2E0/
-      DATA f/0.0079E0 , 0.2369E0 , 0.3679E0 , 0.7788E0 , 0.9999E0 , 0.7788E0 , 
+      DATA f/0.0079E0 , 0.2369E0 , 0.3679E0 , 0.7788E0 , 0.9999E0 , 0.7788E0 ,
      &     0.3679E0 , 0.1083E0 , 0.0079E0/
-      DATA d/0.0000E0 , 0.3800E0 , 0.7173E0 , 0.5820E0 , 0.0177E0 , -0.5696E0 , 
+      DATA d/0.0000E0 , 0.3800E0 , 0.7173E0 , 0.5820E0 , 0.0177E0 , -0.5696E0 ,
      &     -0.5135E0 , -0.0778E0 , -0.0025E0/
 !
 !  Initialize.
@@ -149,7 +144,7 @@
           ENDIF
           fail = (fermax>tol) .OR. (dermax>tol)
           IF ( fail ) ifail = ifail + 1
-          IF ( (Kprint>=3).OR.(Kprint>=2).AND.fail ) WRITE (Lun,99008) fermax , 
+          IF ( (Kprint>=3).OR.(Kprint>=2).AND.fail ) WRITE (Lun,99008) fermax ,
      &         dermax , tol
 99008     FORMAT (/5X,'Maximum relative errors:'/15X,'F-error =',1P,E13.5,5X,
      &            'D-error =',E13.5/5X,'Both should be less than  TOL =',E13.5)
@@ -197,4 +192,12 @@
       RETURN
 99013 FORMAT (18X,2F8.2)
 !------------- LAST LINE OF PCHQK5 FOLLOWS -----------------------------
+      CONTAINS
+!
+!  Define relative error function.
+!
+        REAL FUNCTION RELERR(err,ans)
+          REAL, INTENT(IN) :: ans , err
+          RELERR = ABS(err)/MAX(1.0E-5,ABS(ans))
+        END FUNCTION RELERR
       END SUBROUTINE PCHQK5

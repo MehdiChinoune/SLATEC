@@ -64,9 +64,7 @@
 !
       INTEGER k , kb , kp1 , nm1 , nm2
       COMPLEX t
-      COMPLEX zdum
-      REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
+      REAL, EXTERNAL :: CABS1
 !***FIRST EXECUTABLE STATEMENT  CGTSL
       Info = 0
       C(1) = D(1)

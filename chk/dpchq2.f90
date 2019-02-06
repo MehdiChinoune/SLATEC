@@ -63,7 +63,7 @@
 !  DECLARE VARIABLES.
 !
       INTEGER i , ierexp(17) , ierr , ifail , n , npairs
-      DOUBLE PRECISION a(17) , b(17) , calc , d(7) , errmax , error , f(7) , 
+      DOUBLE PRECISION a(17) , b(17) , calc , d(7) , errmax , error , f(7) ,
      &                 machep , one , three , thrqtr , tol , true , two , x(7)
       LOGICAL fail , skip
 !
@@ -71,26 +71,19 @@
 !
       DOUBLE PRECISION DPCHIA , D1MACH
 !
-!  DEFINE TEST FUNCTIONS.
-!
-      DOUBLE PRECISION ax , FCN , DERIV , ANTDER
-      FCN(ax) = three*ax*ax*(ax-two)
-      DERIV(ax) = three*ax*(two*(ax-two)+ax)
-      ANTDER(ax) = ax**3*(thrqtr*ax-two)
-!
 !  INITIALIZE.
 !
       DATA thrqtr/0.75D0/ , one/1.D0/ , two/2.D0/ , three/3.D0/
       DATA n/7/
       DATA x/ - 4.D0 , -2.D0 , -0.9D0 , 0.D0 , 0.9D0 , 2.D0 , 4.D0/
       DATA npairs/17/
-      DATA a/ - 3.0D0 , 3.0D0 , -0.5D0 , -0.5D0 , -0.5D0 , -4.0D0 , -4.0D0 , 
-     &     3.0D0 , -5.0D0 , -5.0D0 , -6.0D0 , 6.0D0 , -1.5D0 , -1.5D0 , -3.0D0 , 
+      DATA a/ - 3.0D0 , 3.0D0 , -0.5D0 , -0.5D0 , -0.5D0 , -4.0D0 , -4.0D0 ,
+     &     3.0D0 , -5.0D0 , -5.0D0 , -6.0D0 , 6.0D0 , -1.5D0 , -1.5D0 , -3.0D0 ,
      &     3.0D0 , 0.5D0/
-      DATA b/3.0D0 , -3.0D0 , 1.0D0 , 2.0D0 , 5.0D0 , -0.5D0 , 4.0D0 , 5.0D0 , 
-     &     -3.0D0 , 5.0D0 , -5.0D0 , 5.0D0 , -0.5D0 , -1.0D0 , -2.5D0 , 3.5D0 , 
+      DATA b/3.0D0 , -3.0D0 , 1.0D0 , 2.0D0 , 5.0D0 , -0.5D0 , 4.0D0 , 5.0D0 ,
+     &     -3.0D0 , 5.0D0 , -5.0D0 , 5.0D0 , -0.5D0 , -1.0D0 , -2.5D0 , 3.5D0 ,
      &     0.5D0/
-      DATA ierexp/0 , 0 , 0 , 0 , 2 , 0 , 0 , 2 , 1 , 3 , 3 , 3 , 0 , 0 , 0 , 
+      DATA ierexp/0 , 0 , 0 , 0 , 2 , 0 , 0 , 2 , 1 , 3 , 3 , 3 , 0 , 0 , 0 ,
      &     0 , 0/
 !
 !  SET PASS/FAIL TOLERANCE.
@@ -135,7 +128,7 @@
           error = calc - true
           IF ( Kprint>=3 ) THEN
             IF ( fail ) THEN
-              WRITE (Lun,99005) a(i) , b(i) , ierr , true , calc , error , 
+              WRITE (Lun,99005) a(i) , b(i) , ierr , true , calc , error ,
      &                          ierexp(i)
 99005         FORMAT (2F6.1,I5,1P,2D20.10,D15.5,'  (',I1,') *****')
             ELSE
@@ -183,4 +176,21 @@
       RETURN
 99010 FORMAT (2F6.1,I5,1P,2D20.10,D15.5)
 !------------- LAST LINE OF DPCHQ2 FOLLOWS -----------------------------
+      CONTAINS
+
+!
+!  DEFINE TEST FUNCTIONS.
+!
+        REAL(8) FUNCTION FCN(ax)
+          REAL(8), INTENT(IN) :: ax
+          FCN = three*ax*ax*(ax-two)
+        END FUNCTION FCN
+        REAL(8) FUNCTION DERIV(ax)
+          REAL(8), INTENT(IN) :: ax
+          DERIV = three*ax*(two*(ax-two)+ax)
+        END FUNCTION DERIV
+        REAL(8) FUNCTION ANTDER(ax)
+          REAL(8), INTENT(IN) :: ax
+          ANTDER = ax**3*(thrqtr*ax-two)
+        END FUNCTION ANTDER
       END SUBROUTINE DPCHQ2

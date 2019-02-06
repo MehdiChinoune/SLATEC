@@ -88,10 +88,8 @@
       COMPLEX ak , akm1 , bk , bkm1 , CDOTC , denom , ek , t
       REAL anorm , s , SCASUM , ynorm
       INTEGER i , info , j , jm1 , k , kp , kps , ks
-      COMPLEX zdum , zdum2 , CSIGN1
-      REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
-      CSIGN1(zdum,zdum2) = CABS1(zdum)*(zdum2/CABS1(zdum2))
+      REAL, EXTERNAL :: CABS1
+      COMPLEX, EXTERNAL :: CSIGN1
 !
 !     FIND NORM OF A USING ONLY UPPER HALF
 !

@@ -42,7 +42,7 @@
       REAL r , rcond , rcnd , DELX , det(2) , dc(2)
       CHARACTER kprog*19 , kfail*39
       INTEGER lda , n , info , i , j , indx , Nerr , m
-      DATA abd/(0.E0,0.E0) , (2.E0,0.E0) , (0.E0,-1.E0) , (2.E0,0.E0) , 
+      DATA abd/(0.E0,0.E0) , (2.E0,0.E0) , (0.E0,-1.E0) , (2.E0,0.E0) ,
      &     (0.E0,0.E0) , (3.E0,0.E0) , (0.E0,-1.E0) , (4.E0,0.E0)/
       DATA b/(3.E0,2.E0) , (-1.E0,3.E0) , (0.E0,-4.E0) , (5.E0,0.E0)/
       DATA c/(1.E0,1.E0) , (0.E0,1.E0) , (0.E0,-1.E0) , (1.E0,0.E0)/
@@ -50,8 +50,6 @@
       DATA kprog/'PBFA PBCO PBSL PBDI'/
       DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
       DATA rcnd/.24099E0/
-!
-      DELX(xa,xb) = ABS(REAL(xa-xb)) + ABS(AIMAG(xa-xb))
 !***FIRST EXECUTABLE STATEMENT  CPBQC
       lda = 3
       n = 4

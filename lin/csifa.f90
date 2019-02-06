@@ -75,9 +75,7 @@
       REAL absakk , alpha , colmax , rowmax
       INTEGER imax , imaxp1 , j , jj , jmax , k , km1 , km2 , kstep , ICAMAX
       LOGICAL swap
-      COMPLEX zdum
-      REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
+      REAL, EXTERNAL :: CABS1
 !***FIRST EXECUTABLE STATEMENT  CSIFA
 !
 !     INITIALIZE

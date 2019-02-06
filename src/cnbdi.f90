@@ -61,9 +61,7 @@
 !
       REAL ten
       INTEGER i
-      COMPLEX zdum
       REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
 !
 !***FIRST EXECUTABLE STATEMENT  CNBDI
       Det(1) = (1.0E0,0.0E0)

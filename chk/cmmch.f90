@@ -45,10 +45,7 @@
       LOGICAL ctrana , ctranb , trana , tranb
 !     .. Intrinsic Functions ..
       INTRINSIC ABS , AIMAG , CONJG , MAX , REAL , SQRT
-!     .. Statement Functions ..
-      REAL ABS1
-!     .. Statement Function definitions ..
-      ABS1(cl) = ABS(REAL(cl)) + ABS(AIMAG(cl))
+      REAL CABS1
 !***FIRST EXECUTABLE STATEMENT  CMMCH
       trana = Transa=='T' .OR. Transa=='C'
       tranb = Transb=='T' .OR. Transb=='C'
@@ -69,7 +66,7 @@
           DO k = 1 , Kk
             DO i = 1 , M
               Ct(i) = Ct(i) + A(i,k)*B(k,j)
-              G(i) = G(i) + ABS1(A(i,k))*ABS1(B(k,j))
+              G(i) = G(i) + CABS1(A(i,k))*CABS1(B(k,j))
             ENDDO
           ENDDO
         ELSEIF ( trana.AND..NOT.tranb ) THEN
@@ -77,14 +74,14 @@
             DO k = 1 , Kk
               DO i = 1 , M
                 Ct(i) = Ct(i) + CONJG(A(k,i))*B(k,j)
-                G(i) = G(i) + ABS1(A(k,i))*ABS1(B(k,j))
+                G(i) = G(i) + CABS1(A(k,i))*CABS1(B(k,j))
               ENDDO
             ENDDO
           ELSE
             DO k = 1 , Kk
               DO i = 1 , M
                 Ct(i) = Ct(i) + A(k,i)*B(k,j)
-                G(i) = G(i) + ABS1(A(k,i))*ABS1(B(k,j))
+                G(i) = G(i) + CABS1(A(k,i))*CABS1(B(k,j))
               ENDDO
             ENDDO
           ENDIF
@@ -93,14 +90,14 @@
             DO k = 1 , Kk
               DO i = 1 , M
                 Ct(i) = Ct(i) + A(i,k)*CONJG(B(j,k))
-                G(i) = G(i) + ABS1(A(i,k))*ABS1(B(j,k))
+                G(i) = G(i) + CABS1(A(i,k))*CABS1(B(j,k))
               ENDDO
             ENDDO
           ELSE
             DO k = 1 , Kk
               DO i = 1 , M
                 Ct(i) = Ct(i) + A(i,k)*B(j,k)
-                G(i) = G(i) + ABS1(A(i,k))*ABS1(B(j,k))
+                G(i) = G(i) + CABS1(A(i,k))*CABS1(B(j,k))
               ENDDO
             ENDDO
           ENDIF
@@ -110,14 +107,14 @@
               DO k = 1 , Kk
                 DO i = 1 , M
                   Ct(i) = Ct(i) + CONJG(A(k,i))*CONJG(B(j,k))
-                  G(i) = G(i) + ABS1(A(k,i))*ABS1(B(j,k))
+                  G(i) = G(i) + CABS1(A(k,i))*CABS1(B(j,k))
                 ENDDO
               ENDDO
             ELSE
               DO k = 1 , Kk
                 DO i = 1 , M
                   Ct(i) = Ct(i) + CONJG(A(k,i))*B(j,k)
-                  G(i) = G(i) + ABS1(A(k,i))*ABS1(B(j,k))
+                  G(i) = G(i) + CABS1(A(k,i))*CABS1(B(j,k))
                 ENDDO
               ENDDO
             ENDIF
@@ -125,28 +122,28 @@
             DO k = 1 , Kk
               DO i = 1 , M
                 Ct(i) = Ct(i) + A(k,i)*CONJG(B(j,k))
-                G(i) = G(i) + ABS1(A(k,i))*ABS1(B(j,k))
+                G(i) = G(i) + CABS1(A(k,i))*CABS1(B(j,k))
               ENDDO
             ENDDO
           ELSE
             DO k = 1 , Kk
               DO i = 1 , M
                 Ct(i) = Ct(i) + A(k,i)*B(j,k)
-                G(i) = G(i) + ABS1(A(k,i))*ABS1(B(j,k))
+                G(i) = G(i) + CABS1(A(k,i))*CABS1(B(j,k))
               ENDDO
             ENDDO
           ENDIF
         ENDIF
         DO i = 1 , M
           Ct(i) = Alpha*Ct(i) + Beta*C(i,j)
-          G(i) = ABS1(Alpha)*G(i) + ABS1(Beta)*ABS1(C(i,j))
+          G(i) = CABS1(Alpha)*G(i) + CABS1(Beta)*CABS1(C(i,j))
         ENDDO
 !
 !        Compute the error ratio for this result.
 !
         Err = ZERO
         DO i = 1 , M
-          erri = ABS1(Ct(i)-Cc(i,j))/Eps
+          erri = CABS1(Ct(i)-Cc(i,j))/Eps
           IF ( G(i)/=RZERO ) erri = erri/G(i)
           Err = MAX(Err,erri)
           IF ( Err*SQRT(Eps)>=RONE ) THEN

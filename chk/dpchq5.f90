@@ -69,24 +69,19 @@
 !
       INTEGER i , ierr , ifail , inbv , j , knotyp , k , N , ndim , nknots
       PARAMETER (N=9)
-      DOUBLE PRECISION bcoef(2*N) , d(N) , dcalc , derr , dermax , f(N) , 
-     &                 fcalc , ferr , fermax , t(2*N+4) , terr , termax , tol , 
+      DOUBLE PRECISION bcoef(2*N) , d(N) , dcalc , derr , dermax , f(N) ,
+     &                 fcalc , ferr , fermax , t(2*N+4) , terr , termax , tol ,
      &                 tolz , tsave(2*N+4) , work(16*N) , x(N) , ZERO
       PARAMETER (ZERO=0.0D0)
       LOGICAL fail
 !
-!  Define relative error function.
-!
-      DOUBLE PRECISION ans , err , RELERR
-      RELERR(err,ans) = ABS(err)/MAX(1.0D-5,ABS(ans))
-!
 !  Define test data.
 !
-      DATA x/ - 2.2D0 , -1.2D0 , -1.0D0 , -0.5D0 , -0.01D0 , 0.5D0 , 1.0D0 , 
+      DATA x/ - 2.2D0 , -1.2D0 , -1.0D0 , -0.5D0 , -0.01D0 , 0.5D0 , 1.0D0 ,
      &     2.0D0 , 2.2D0/
-      DATA f/0.0079D0 , 0.2369D0 , 0.3679D0 , 0.7788D0 , 0.9999D0 , 0.7788D0 , 
+      DATA f/0.0079D0 , 0.2369D0 , 0.3679D0 , 0.7788D0 , 0.9999D0 , 0.7788D0 ,
      &     0.3679D0 , 0.1083D0 , 0.0079D0/
-      DATA d/0.0000D0 , 0.3800D0 , 0.7173D0 , 0.5820D0 , 0.0177D0 , -0.5696D0 , 
+      DATA d/0.0000D0 , 0.3800D0 , 0.7173D0 , 0.5820D0 , 0.0177D0 , -0.5696D0 ,
      &     -0.5135D0 , -0.0778D0 , -0.0025D0/
 !
 !  Initialize.
@@ -149,7 +144,7 @@
           ENDIF
           fail = (fermax>tol) .OR. (dermax>tol)
           IF ( fail ) ifail = ifail + 1
-          IF ( (Kprint>=3).OR.(Kprint>=2).AND.fail ) WRITE (Lun,99008) fermax , 
+          IF ( (Kprint>=3).OR.(Kprint>=2).AND.fail ) WRITE (Lun,99008) fermax ,
      &         dermax , tol
 99008     FORMAT (/5X,'Maximum relative errors:'/15X,'F-error =',1P,D13.5,5X,
      &            'D-error =',D13.5/5X,'Both should be less than  TOL =',D13.5)
@@ -197,4 +192,12 @@
       RETURN
 99013 FORMAT (18X,2F8.2)
 !------------- LAST LINE OF DPCHQ5 FOLLOWS -----------------------------
+      CONTAINS
+!
+!  Define relative error function.
+!
+        REAL(8) FUNCTION RELERR(err,ans)
+          REAL(8), INTENT(IN) :: ans , err
+          RELERR = ABS(err)/MAX(1.0D-5,ABS(ans))
+        END FUNCTION RELERR
       END SUBROUTINE DPCHQ5

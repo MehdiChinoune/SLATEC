@@ -68,12 +68,12 @@
 !  DECLARATIONS.
 !
       INTEGER i , ierr , iint , next(2) , next2(2) , nint
-      REAL aed , aed2 , aedmax , aedmin , aef , aef2 , aefmax , aefmin , 
-     &     check(2) , checkf(2) , checkd(2) , d1 , d2 , dermax , dtrue , dx , 
-     &     eps1 , eps2 , f1 , f2 , fact , fermax , floord , floorf , four , 
-     &     ftrue , left(3) , machep , one , red , red2 , redmax , redmin , ref , 
-     &     ref2 , refmax , refmin , right(3) , small , ten , tol1 , tol2 , x1 , 
-     &     x2 , xadmax , xadmin , xafmax , xafmin , xrdmax , xrdmin , xrfmax , 
+      REAL aed , aed2 , aedmax , aedmin , aef , aef2 , aefmax , aefmin ,
+     &     check(2) , checkf(2) , checkd(2) , d1 , d2 , dermax , dtrue , dx ,
+     &     eps1 , eps2 , f1 , f2 , fact , fermax , floord , floorf , four ,
+     &     ftrue , left(3) , machep , one , red , red2 , redmax , redmin , ref ,
+     &     ref2 , refmax , refmin , right(3) , small , ten , tol1 , tol2 , x1 ,
+     &     x2 , xadmax , xadmin , xafmax , xafmin , xrdmax , xrdmin , xrfmax ,
      &     xrfmin , zero
       LOGICAL failoc , failnx
 !
@@ -81,11 +81,6 @@
 !       The following should stay REAL (no D.P. equivalent).
       REAL RAND
       EXTERNAL RAND
-!
-!  DEFINE RELATIVE ERROR WITH FLOOR.
-!
-      REAL RERR , err , value , floor
-      RERR(err,value,floor) = err/MAX(ABS(value),floor)
 !
 !  INITIALIZE.
 !
@@ -342,4 +337,13 @@
 99020 FORMAT (/' ***** MAXIMUM RELATIVE ERROR IN ',A1,' =',1P,E12.5,','/17X,
      &        'EXCEEDS TOLERANCE =',E12.5)
 !------------- LAST LINE OF EVCHCK FOLLOWS -----------------------------
+      CONTAINS
+
+!
+!  DEFINE RELATIVE ERROR WITH FLOOR.
+!
+        REAL FUNCTION RERR(err,value,floor)
+          REAL, INTENT(IN) :: err , value , floor
+          RERR = err/MAX(ABS(value),floor)
+        END FUNCTION RERR
       END SUBROUTINE EVCHCK

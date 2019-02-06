@@ -45,17 +45,14 @@
       EXTERNAL CGEFS , CGEIR
 !     .. Intrinsic Functions ..
       INTRINSIC ABS , AIMAG , REAL
-!     .. Statement Functions ..
       REAL DELX
 !     .. Data statements ..
-      DATA a/(2.,3.) , (1.,1.) , (1.,2.) , (2.,0.) , (1.,-1.) , (0.,0.) , 
+      DATA a/(2.,3.) , (1.,1.) , (1.,2.) , (2.,0.) , (1.,-1.) , (0.,0.) ,
      &     (0.,0.) , (2.,5.) , (3.,2.)/
       DATA b/(-1.,1.) , (-5.,4.) , (-4.,7.)/
-      DATA bxex/(.21459E-01,.209012E+01) , (.261373E+01,-.162231E+01) , 
+      DATA bxex/(.21459E-01,.209012E+01) , (.261373E+01,-.162231E+01) ,
      &     (.785407E+00,.109871E+01)/
       DATA list/'GEFS' , 'GEIR'/
-!     .. Statement Function definitions ..
-      DELX(xa,xb) = ABS(REAL(xa-xb)) + ABS(AIMAG(xa-xb))
 !***FIRST EXECUTABLE STATEMENT  CGEQC
       n = 3
       lda = 5

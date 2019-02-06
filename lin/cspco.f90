@@ -103,10 +103,8 @@
       REAL anorm , s , SCASUM , ynorm
       INTEGER i , ij , ik , ikm1 , ikp1 , info , j , jm1 , j1
       INTEGER k , kk , km1k , km1km1 , kp , kps , ks
-      COMPLEX zdum , zdum2 , CSIGN1
-      REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
-      CSIGN1(zdum,zdum2) = CABS1(zdum)*(zdum2/CABS1(zdum2))
+      REAL, EXTERNAL :: CABS1
+      COMPLEX, EXTERNAL :: CSIGN1
 !
 !     FIND NORM OF A USING ONLY UPPER HALF
 !

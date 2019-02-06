@@ -71,17 +71,10 @@
 !
       INTEGER i , ier2 , ierr , inc , j , k , ne , nerr , nmax , nx , ny
       LOGICAL faild , faile , failoc , skip
-      DOUBLE PRECISION dermax , derr , dtrue , dx , fdiff , fdifmx , fermax , 
-     &                 ferr , ftrue , machep , tol , pdermx , pdifmx , pfermx , 
+      DOUBLE PRECISION dermax , derr , dtrue , dx , fdiff , fdifmx , fermax ,
+     &                 ferr , ftrue , machep , tol , pdermx , pdifmx , pfermx ,
      &                 zero
       DOUBLE PRECISION D1MACH
-!
-!  DEFINE TEST FUNCTION AND DERIVATIVES.
-!
-      DOUBLE PRECISION ax , ay , FCN , DFDX , DFDY
-      FCN(ax,ay) = ax*(ay*ay)*(ax*ax+1.D0)
-      DFDX(ax,ay) = (ay*ay)*(3.D0*ax*ax+1.D0)
-      DFDY(ax,ay) = 2.D0*ax*ay*(ax*ax+1.D0)
 !
       DATA nmax/10/ , nx/4/ , ny/6/
       DATA ne/51/
@@ -162,7 +155,7 @@
             ferr = Fe(k) - ftrue
             dtrue = DFDX(Xe(k),Y(j))
             derr = De(k) - dtrue
-            IF ( Kprint>3 ) WRITE (Lout,99005) Xe(k) , ftrue , Fe(k) , ferr , 
+            IF ( Kprint>3 ) WRITE (Lout,99005) Xe(k) , ftrue , Fe(k) , ferr ,
      &                             dtrue , De(k) , derr
             IF ( k==1 ) THEN
 !              INITIALIZE.
@@ -207,7 +200,7 @@
 !
           IF ( (ierr/=13).AND.(Kprint>=2) ) WRITE (Lout,99009) 'D' , ierr , 13
 !
-          IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E' , ier2 , 
+          IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E' , ier2 ,
      &         ierr
         ENDIF
 !
@@ -251,7 +244,7 @@
             ferr = Fe(k) - ftrue
             dtrue = DFDY(X(i),Ye(k))
             derr = De(k) - dtrue
-            IF ( Kprint>3 ) WRITE (Lout,99005) Ye(k) , ftrue , Fe(k) , ferr , 
+            IF ( Kprint>3 ) WRITE (Lout,99005) Ye(k) , ftrue , Fe(k) , ferr ,
      &                             dtrue , De(k) , derr
             IF ( k==1 ) THEN
 !              INITIALIZE.
@@ -296,7 +289,7 @@
 !
           IF ( (ierr/=20).AND.(Kprint>=2) ) WRITE (Lout,99009) 'D' , ierr , 20
 !
-          IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E' , ier2 , 
+          IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E' , ier2 ,
      &         ierr
         ENDIF
 !
@@ -332,4 +325,21 @@
      &        '-LINES.'//)
 99013 FORMAT (/' DPCHFD AND DPCHFE OK ON ',A1,'-LINES.')
 !------------- LAST LINE OF DEVPCK FOLLOWS -----------------------------
+      CONTAINS
+
+!
+!  DEFINE TEST FUNCTION AND DERIVATIVES.
+!
+        REAL(8) FUNCTION FCN(ax,ay)
+          REAL(8) ax , ay
+          FCN = ax*(ay*ay)*(ax*ax+1.E0)
+        END FUNCTION FCN
+        REAL(8) FUNCTION DFDX(ax,ay)
+          REAL(8) ax , ay
+          DFDX = (ay*ay)*(3.E0*ax*ax+1.E0)
+        END FUNCTION DFDX
+        REAL(8) FUNCTION DFDY(ax,ay)
+          REAL(8) ax , ay
+          DFDY = 2.E0*ax*ay*(ax*ax+1.E0)
+        END FUNCTION DFDY
       END SUBROUTINE DEVPCK

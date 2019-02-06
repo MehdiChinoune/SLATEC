@@ -84,9 +84,7 @@
       REAL ten
       INTEGER j , jb , k , km1 , ks , kstep
       LOGICAL noinv , nodet
-      COMPLEX zdum
-      REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
+      REAL, EXTERNAL :: CABS1
 !
 !***FIRST EXECUTABLE STATEMENT  CSIDI
       noinv = MOD(Job,10)==0

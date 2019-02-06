@@ -63,10 +63,7 @@
 !
       REAL ten
       INTEGER i , m
-      COMPLEX zdum
-      REAL CABS1
-!
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
+      REAL, EXTERNAL :: CABS1
 !***FIRST EXECUTABLE STATEMENT  CGBDI
       m = Ml + Mu + 1
       Det(1) = (1.0E0,0.0E0)

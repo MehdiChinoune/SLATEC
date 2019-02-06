@@ -63,7 +63,7 @@
 !  DECLARE VARIABLES.
 !
       INTEGER i , ierexp(17) , ierr , ifail , n , npairs
-      REAL a(17) , b(17) , calc , d(7) , errmax , error , f(7) , machep , one , 
+      REAL a(17) , b(17) , calc , d(7) , errmax , error , f(7) , machep , one ,
      &     three , thrqtr , tol , true , two , x(7)
       LOGICAL fail , skip
 !
@@ -71,26 +71,19 @@
 !
       REAL PCHIA , R1MACH
 !
-!  DEFINE TEST FUNCTIONS.
-!
-      REAL ax , FCN , DERIV , ANTDER
-      FCN(ax) = three*ax*ax*(ax-two)
-      DERIV(ax) = three*ax*(two*(ax-two)+ax)
-      ANTDER(ax) = ax**3*(thrqtr*ax-two)
-!
 !  INITIALIZE.
 !
       DATA thrqtr/0.75E0/ , one/1.E0/ , two/2.E0/ , three/3.E0/
       DATA n/7/
       DATA x/ - 4.E0 , -2.E0 , -0.9E0 , 0.E0 , 0.9E0 , 2.E0 , 4.E0/
       DATA npairs/17/
-      DATA a/ - 3.0E0 , 3.0E0 , -0.5E0 , -0.5E0 , -0.5E0 , -4.0E0 , -4.0E0 , 
-     &     3.0E0 , -5.0E0 , -5.0E0 , -6.0E0 , 6.0E0 , -1.5E0 , -1.5E0 , -3.0E0 , 
+      DATA a/ - 3.0E0 , 3.0E0 , -0.5E0 , -0.5E0 , -0.5E0 , -4.0E0 , -4.0E0 ,
+     &     3.0E0 , -5.0E0 , -5.0E0 , -6.0E0 , 6.0E0 , -1.5E0 , -1.5E0 , -3.0E0 ,
      &     3.0E0 , 0.5E0/
-      DATA b/3.0E0 , -3.0E0 , 1.0E0 , 2.0E0 , 5.0E0 , -0.5E0 , 4.0E0 , 5.0E0 , 
-     &     -3.0E0 , 5.0E0 , -5.0E0 , 5.0E0 , -0.5E0 , -1.0E0 , -2.5E0 , 3.5E0 , 
+      DATA b/3.0E0 , -3.0E0 , 1.0E0 , 2.0E0 , 5.0E0 , -0.5E0 , 4.0E0 , 5.0E0 ,
+     &     -3.0E0 , 5.0E0 , -5.0E0 , 5.0E0 , -0.5E0 , -1.0E0 , -2.5E0 , 3.5E0 ,
      &     0.5E0/
-      DATA ierexp/0 , 0 , 0 , 0 , 2 , 0 , 0 , 2 , 1 , 3 , 3 , 3 , 0 , 0 , 0 , 
+      DATA ierexp/0 , 0 , 0 , 0 , 2 , 0 , 0 , 2 , 1 , 3 , 3 , 3 , 0 , 0 , 0 ,
      &     0 , 0/
 !
 !  SET PASS/FAIL TOLERANCE.
@@ -135,7 +128,7 @@
           error = calc - true
           IF ( Kprint>=3 ) THEN
             IF ( fail ) THEN
-              WRITE (Lun,99005) a(i) , b(i) , ierr , true , calc , error , 
+              WRITE (Lun,99005) a(i) , b(i) , ierr , true , calc , error ,
      &                          ierexp(i)
 99005         FORMAT (2F6.1,I5,1P,2E20.10,E15.5,'  (',I1,') *****')
             ELSE
@@ -183,4 +176,21 @@
       RETURN
 99010 FORMAT (2F6.1,I5,1P,2E20.10,E15.5)
 !------------- LAST LINE OF PCHQK2 FOLLOWS -----------------------------
+      CONTAINS
+
+!
+!  DEFINE TEST FUNCTIONS.
+!
+        REAL FUNCTION FCN(ax)
+          REAL, INTENT(IN) :: ax
+          FCN = three*ax*ax*(ax-two)
+        END FUNCTION FCN
+        REAL FUNCTION DERIV(ax)
+          REAL, INTENT(IN) :: ax
+          DERIV = three*ax*(two*(ax-two)+ax)
+        END FUNCTION DERIV
+        REAL FUNCTION ANTDER(ax)
+          REAL, INTENT(IN) :: ax
+          ANTDER = ax**3*(thrqtr*ax-two)
+        END FUNCTION ANTDER
       END SUBROUTINE PCHQK2

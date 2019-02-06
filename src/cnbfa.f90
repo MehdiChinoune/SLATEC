@@ -117,12 +117,10 @@
       INTEGER Lda , N , Ml , Mu , Ipvt(*) , Info
       COMPLEX Abe(Lda,*)
 !
-      INTEGER ml1 , mb , m , n1 , ldb , i , j , k , l , lm , lm1 , lm2 , mp , 
+      INTEGER ml1 , mb , m , n1 , ldb , i , j , k , l , lm , lm1 , lm2 , mp ,
      &        ICAMAX
       COMPLEX t
-      COMPLEX zdum
       REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
 !
 !***FIRST EXECUTABLE STATEMENT  CNBFA
       ml1 = Ml + 1

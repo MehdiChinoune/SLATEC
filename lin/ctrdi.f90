@@ -74,9 +74,7 @@
       COMPLEX temp
       REAL ten
       INTEGER i , j , k , kb , km1 , kp1
-      COMPLEX zdum
-      REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
+      REAL, EXTERNAL :: CABS1
 !***FIRST EXECUTABLE STATEMENT  CTRDI
 !
 !        COMPUTE DETERMINANT

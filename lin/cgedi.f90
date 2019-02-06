@@ -76,9 +76,7 @@
       COMPLEX t
       REAL ten
       INTEGER i , j , k , kb , kp1 , l , nm1
-      COMPLEX zdum
-      REAL CABS1
-      CABS1(zdum) = ABS(REAL(zdum)) + ABS(AIMAG(zdum))
+      REAL, EXTERNAL :: CABS1
 !***FIRST EXECUTABLE STATEMENT  CGEDI
 !
 !     COMPUTE DETERMINANT

@@ -101,15 +101,10 @@
 !  DECLARE LOCAL VARIABLES.
 !
       INTEGER i , indx , k , nless1
-      DOUBLE PRECISION del(3) , dext , dfloc , dfmx , fact , fudge , one , 
+      DOUBLE PRECISION del(3) , dext , dfloc , dfmx , fact , fudge , one ,
      &                 slmax , wtave(2) , zero
       SAVE zero , one , fudge
       DOUBLE PRECISION DPCHST
-!
-!  DEFINE INLINE FUNCTION FOR WEIGHTED AVERAGE OF SLOPES.
-!
-      DOUBLE PRECISION DPCHSD , s1 , s2 , h1 , h2
-      DPCHSD(s1,s2,h1,h2) = (h2/(h1+h2))*s1 + (h1/(h1+h2))*s2
 !
 !  INITIALIZE.
 !
@@ -236,4 +231,15 @@
       ENDDO
 !
 !------------- LAST LINE OF DPCHCS FOLLOWS -----------------------------
+      CONTAINS
+
+!
+!  DEFINE INLINE FUNCTION FOR WEIGHTED AVERAGE OF SLOPES.
+!
+        REAL(8) FUNCTION DPCHSD(s1,s2,h1,h2)
+          REAL(8), INTENT(IN) :: s1 , s2 , h1 , h2
+
+          DPCHSD = (h2/(h1+h2))*s1 + (h1/(h1+h2))*s2
+
+        END FUNCTION DPCHSD
       END SUBROUTINE DPCHCS

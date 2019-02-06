@@ -104,11 +104,6 @@
       SAVE zero , one , fudge
       REAL PCHST
 !
-!  DEFINE INLINE FUNCTION FOR WEIGHTED AVERAGE OF SLOPES.
-!
-      REAL PCHSD , s1 , s2 , h1 , h2
-      PCHSD(s1,s2,h1,h2) = (h2/(h1+h2))*s1 + (h1/(h1+h2))*s2
-!
 !  INITIALIZE.
 !
       DATA zero/0./ , one/1./
@@ -234,4 +229,16 @@
       ENDDO
 !
 !------------- LAST LINE OF PCHCS FOLLOWS ------------------------------
+      CONTAINS
+
+!
+!  DEFINE INLINE FUNCTION FOR WEIGHTED AVERAGE OF SLOPES.
+!
+        REAL FUNCTION PCHSD(s1,s2,h1,h2)
+          REAL, INTENT(IN) :: s1 , s2 , h1 , h2
+
+          PCHSD = (h2/(h1+h2))*s1 + (h1/(h1+h2))*s2
+
+        END FUNCTION PCHSD
+
       END SUBROUTINE PCHCS
