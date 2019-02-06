@@ -1,0 +1,17 @@
+*DECK F2O
+      REAL FUNCTION F2O (X)
+C***BEGIN PROLOGUE  F2O
+C***PURPOSE  Subsidiary to
+C***LIBRARY   SLATEC
+C***AUTHOR  (UNKNOWN)
+C***ROUTINES CALLED  (NONE)
+C***REVISION HISTORY  (YYMMDD)
+C   ??????  DATE WRITTEN
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C***END PROLOGUE  F2O
+      REAL X
+C***FIRST EXECUTABLE STATEMENT  F2O
+      F2O = 0.0E+00
+      IF(X.NE.0.0E+00) F2O = 1.0/(X*X*SQRT(X))
+      RETURN
+      END

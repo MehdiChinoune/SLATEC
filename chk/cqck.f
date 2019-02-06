@@ -1,0 +1,158 @@
+*DECK CQCK
+      SUBROUTINE CQCK (LUN, KPRINT, NERR)
+C***BEGIN PROLOGUE  CQCK
+C***PURPOSE  Quick check for CPOFS, CPOIR, CNBFS and CNBIR.
+C***LIBRARY   SLATEC
+C***KEYWORDS  QUICK CHECK
+C***AUTHOR  Voorhees, E. A., (LANL)
+C***DESCRIPTION
+C
+C    QUICK CHECK SUBROUTINE CQCK TESTS THE EXECUTION OF THE
+C    SLATEC SUBROUTINES CPOFS, CPOIR, CNBFS AND CNBIR.
+C    A TITLE LINE AND A SUMMARY LINE ARE ALWAYS OUTPUTTED.
+C
+C    THE SUMMARY LINE GIVES A COUNT OF THE NUMBER OF
+C    PROBLEMS ENCOUNTERED IN THE TEST IF ANY EXIST.  CQCK
+C    CHECKS COMPUTED VS. EXACT SOLUTIONS TO AGREE TO
+C    WITHIN 0.8 TIMES THE WORD LENGTH OF THE COMPUTER
+C    (1.6 IF DOUBLE PRECISION) FOR CASE 1.  CQCK ALSO
+C    TESTS ERROR HANDLING BY THE SUBROUTINE (CALLS TO
+C    XERMSG (CQCK SETS IFLAG/KONTRL TO 0))
+C    USING A SINGULAR MATRIX FOR CASE 2.  EACH EXECUTION
+C    PROBLEM DETECTED BY CQCK RESULTS IN AN ADDITIONAL
+C    EXPLANATORY LINE OF OUTPUT.
+C
+C    CQCK REQUIRES NO INPUT ARGUMENTS.
+C    ON RETURN, NERR (INTEGER TYPE) CONTAINS THE TOTAL COUNT
+C    OF ALL PROBLEMS DETECTED BY CQCK.
+C
+C***ROUTINES CALLED  CNBFS, CNBIR, CPOFS, CPOIR, R1MACH
+C***REVISION HISTORY  (YYMMDD)
+C   801002  DATE WRITTEN
+C   891009  Removed unreferenced statement labels.  (WRB)
+C   891009  REVISION DATE from Version 3.2
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C   901009  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
+C           including removing an illegal character from column 1, and
+C           editorial changes.  (RWC)
+C***END PROLOGUE  CQCK
+      REAL R,DELX,DELMAX,R1MACH
+      COMPLEX A(4,4),AT(5,4),ABE(5,7),ABET(5,7),B(4),BT(4),C(4),WORK(35)
+      CHARACTER*4 LIST(4)
+      INTEGER LDA,N,ML,MU,IND,IWORK(4),NERR,I,J,J1,J2,JD,MLP,K,KCASE,
+     1 KPROG
+      DATA A/(2.E0,0.E0),(0.E0,1.E0),(0.E0,0.E0),(0.E0,0.E0),
+     1  (0.E0,-1.E0),(2.E0,0.E0),(0.E0,0.E0),(0.E0,0.E0),
+     2  (0.E0,0.E0),(0.E0,0.E0),(3.E0,0.E0),(0.E0,1.E0),
+     3  (0.E0,0.E0),(0.E0,0.E0),(0.E0,-1.E0),(4.E0,0.E0)/
+      DATA C/(1.E0,1.E0),(0.E0,1.E0),(0.E0,-1.E0),(1.E0,0.E0)/
+      DATA B/(3.E0,2.E0),(-1.E0,3.E0),(0.E0,-4.E0),(5.E0,0.E0)/
+      DATA LIST/'POFS', 'POIR', 'NBFS', 'NBIR'/
+C***FIRST EXECUTABLE STATEMENT  CQCK
+      IF (KPRINT.GE.3) WRITE (LUN,800)
+      LDA = 5
+      N = 4
+      ML = 2
+      MU = 1
+      JD = 2*ML+MU+1
+      NERR = 0
+      R = R1MACH(4)**0.8E0
+C
+C     FORM ABE(NB ARRAY) FROM MATRIX A.
+C
+      DO 30 J=1,JD
+         DO 20 I=1,N
+            ABE(I,J) = (0.0E0,0.0E0)
+   20    CONTINUE
+   30 CONTINUE
+C
+      MLP = ML+1
+      DO 50 I=1,N
+         J1 = MAX(1,I-ML)
+         J2 = MIN(N,I+MU)
+         DO 40 J=J1,J2
+            K = J-I+MLP
+            ABE(I,K) = A(I,J)
+   40    CONTINUE
+   50 CONTINUE
+C
+C     CASE 1 FOR WELL-CONDITIONED MATRIX, CASE 2 FOR SINGULAR MATRIX
+C
+      DO 170 KCASE=1,2
+         DO 140 KPROG=1,4
+C           FORM BT FROM B, AT FROM A, AND ABET FROM ABE.
+            DO 60 I=1,N
+               BT(I) = B(I)
+               DO 58 J=1,N
+                  AT(I,J) = A(I,J)
+   58          CONTINUE
+   60       CONTINUE
+C
+            DO 80 J=1,JD
+               DO 70 I=1,N
+                  ABET(I,J) = ABE(I,J)
+   70          CONTINUE
+   80       CONTINUE
+C
+C           MAKE AT AND ABET SINGULAR FOR CASE  =  2
+C
+            IF (KCASE.EQ.2) THEN
+               DO 88 J=1,N
+                  AT(1,J) = (0.0E0,0.0E0)
+   88          CONTINUE
+C
+               DO 90 J=1,JD
+                  ABET(1,J) = (0.0E0,0.0E0)
+   90          CONTINUE
+            ENDIF
+C
+C           SOLVE FOR X
+C
+            IF (KPROG.EQ.1) CALL CPOFS (AT,LDA,N,BT,1,IND,WORK)
+            IF (KPROG.EQ.2) CALL CPOIR (AT,LDA,N,BT,1,IND,WORK)
+            IF (KPROG.EQ.3) CALL CNBFS (ABET,LDA,N,ML,MU,BT,1,IND,WORK,
+     *         IWORK)
+            IF (KPROG.EQ.4) CALL CNBIR (ABET,LDA,N,ML,MU,BT,1,IND,WORK,
+     *         IWORK)
+C
+C           COMPARE EXACT AND COMPUTED SOLUTIONS FOR CASE 1
+C
+            IF (KCASE.EQ.1) THEN
+               DELMAX = 0.0E0
+               DO 110 I=1,N
+                  DELX = ABS(REAL(BT(I))-REAL(C(I)))
+                  DELMAX = MAX(DELMAX,DELX)
+                  DELX = ABS(AIMAG(BT(I))-AIMAG(C(I)))
+                  DELMAX = MAX(DELMAX,DELX)
+  110          CONTINUE
+C
+               IF (R.LE.DELMAX) THEN
+                  NERR = NERR+1
+                  WRITE (LUN,801) LIST(KPROG),KCASE,DELMAX
+               ENDIF
+            ELSE
+C              CHECK CONTROL FOR SINGULAR MATRIX FOR CASE 2
+C
+               IF (IND.NE.-4) THEN
+                  NERR = NERR+1
+                  WRITE (LUN,802) LIST(KPROG),KCASE,IND
+               ENDIF
+            ENDIF
+  140    CONTINUE
+  170 CONTINUE
+C
+C     SUMMARY PRINT
+C
+      IF (NERR.NE.0) WRITE (LUN,803) NERR
+      IF (KPRINT.GE.2 .AND. NERR.EQ.0) WRITE (LUN,804)
+      RETURN
+C
+  800 FORMAT (/' *    CQCK - QUICK CHECK FOR CPOFS, CPOIR, CNBFS AND ',
+     1   'CNBIR'/)
+  801 FORMAT ('   PROBLEM WITH C', A, ', CASE ', I1,
+     1   '.  MAX ABS ERROR OF', E11.4/)
+  802 FORMAT ('   PROBLEM WITH C', A, ', CASE ', I1, '.  IND = ', I2,
+     1   ' INSTEAD OF -4'/)
+  803 FORMAT (/' **** CQCK DETECTED A TOTAL OF ', I2,' PROBLEMS. ****'/)
+  804 FORMAT ('     CQCK DETECTED NO PROBLEMS.'/)
+      END

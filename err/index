@@ -1,0 +1,54 @@
+file	slatec/err/fdump.f
+for	Symbolic dump (should be locally written).
+gams	R3
+by	Jones, R. E., (SNLA)
+
+file	slatec/err/j4save.f
+for	Save or recall global variables needed by error
+by	Jones, R. E., (SNLA)
+
+file	slatec/err/xerclr.f
+for	Reset current error number to zero.
+gams	R3C
+by	Jones, R. E., (SNLA)
+
+file	slatec/err/xerdmp.f
+for	Print the error tables and then clear them.
+gams	R3C
+by	Jones, R. E., (SNLA)
+
+file	slatec/err/xermax.f
+for	Set maximum number of times any error message is to be
+gams	R3C
+by	Jones, R. E., (SNLA)
+
+file	slatec/err/xgetf.f
+for	Return the current value of the error control flag.
+gams	R3C
+by	Jones, R. E., (SNLA)
+
+file	slatec/err/xgetua.f
+for	Return unit number(s) to which error messages are being
+gams	R3C
+by	Jones, R. E., (SNLA)
+
+file	slatec/err/xgetun.f
+for	Return the (first) output file to which error messages
+gams	R3C
+by	Jones, R. E., (SNLA)
+
+file	slatec/err/xsetf.f
+for	Set the error control flag.
+gams	R3A
+by	Jones, R. E., (SNLA)
+
+file	slatec/err/xsetua.f
+for	Set logical unit numbers (up to 5) to which error
+gams	R3B
+by	Jones, R. E., (SNLA)
+
+file	slatec/err/xsetun.f
+for	Set output file to which error messages are to be sent.
+gams	R3B
+by	Jones, R. E., (SNLA)
+

@@ -1,0 +1,3259 @@
+file	slatec/src/aaaaaa.f
+for	SLATEC Common Mathematical Library disclaimer and version.
+gams	Z
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/src/asyik.f
+for	Subsidiary to BESI and BESK
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/asyjy.f
+for	Subsidiary to BESJ and BESY
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/avint.f
+for	Integrate a function tabulated at arbitrarily spaced
+gams	H2A1B2
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/bcrh.f
+for	Subsidiary to CBLKTR
+by	(UNKNOWN)
+
+file	slatec/src/bdiff.f
+for	Subsidiary to BSKIN
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/besi.f
+for	Compute an N member sequence of I Bessel functions
+gams	C10B3
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/besj.f
+for	Compute an N member sequence of J Bessel functions
+gams	C10A3
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/besk.f
+for	Implement forward recursion on the three term recursion
+gams	C10B3
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/besknu.f
+for	Subsidiary to BESK
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/besy.f
+for	Implement forward recursion on the three term recursion
+gams	C10A3
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/besynu.f
+for	Subsidiary to BESY
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/bfqad.f
+for	Compute the integral of a product of a function and a
+gams	H2A2A1, E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/bint4.f
+for	Compute the B-representation of a cubic spline
+gams	E1A
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/bintk.f
+for	Compute the B-representation of a spline which interpolates
+gams	E1A
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/bkias.f
+for	Subsidiary to BSKIN
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/bkisr.f
+for	Subsidiary to BSKIN
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/bksol.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/blktr1.f
+for	Subsidiary to BLKTRI
+by	(UNKNOWN)
+
+file	slatec/src/bndacc.f
+for	Compute the LU factorization of a banded matrices using
+gams	D9
+by	Lawson, C. L., (JPL)
+
+file	slatec/src/bndsol.f
+for	Solve the least squares problem for a banded matrix using
+gams	D9
+by	Lawson, C. L., (JPL)
+
+file	slatec/src/bnfac.f
+for	Subsidiary to BINT4 and BINTK
+by	(UNKNOWN)
+
+file	slatec/src/bnslv.f
+for	Subsidiary to BINT4 and BINTK
+by	(UNKNOWN)
+
+file	slatec/src/bsgq8.f
+for	Subsidiary to BFQAD
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/bskin.f
+for	Compute repeated integrals of the K-zero Bessel function.
+gams	C10F
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/bspdoc.f
+for	Documentation for BSPLINE, a package of subprograms for
+gams	E, E1A, K, Z
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/bspdr.f
+for	Use the B-representation to construct a divided difference
+gams	E3
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/bspev.f
+for	Calculate the value of the spline and its derivatives from
+gams	E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/bsplvd.f
+for	Subsidiary to FC
+by	(UNKNOWN)
+
+file	slatec/src/bsplvn.f
+for	Subsidiary to FC
+by	(UNKNOWN)
+
+file	slatec/src/bsppp.f
+for	Convert the B-representation of a B-spline to the piecewise
+gams	E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/bspvd.f
+for	Calculate the value and all derivatives of order less than
+gams	E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/bspvn.f
+for	Calculate the value of all (possibly) nonzero basis
+gams	E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/bsqad.f
+for	Compute the integral of a K-th order B-spline using the
+gams	H2A2A1, E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/bsrh.f
+for	Subsidiary to BLKTRI
+by	(UNKNOWN)
+
+file	slatec/src/bvalu.f
+for	Evaluate the B-representation of a B-spline at X for the
+gams	E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/bvder.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/bvpor.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/bvsup.f
+for	Solve a linear two-point boundary value problem using
+gams	I1B1
+by	Scott, M. R., (SNLA)
+
+file	slatec/src/c1merg.f
+for	Merge two strings of complex numbers.  Each string is
+by	(UNKNOWN)
+
+file	slatec/src/cacai.f
+for	Subsidiary to CAIRY
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cacon.f
+for	Subsidiary to CBESH and CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cairy.f
+for	Compute the Airy function Ai(z) or its derivative dAi/dz
+gams	C10D
+by	Amos, D. E., (SNL)
+
+file	slatec/src/casyi.f
+for	Subsidiary to CBESI and CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cbesh.f
+for	Compute a sequence of the Hankel functions H(m,a,z)
+gams	C10A4
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cbesi.f
+for	Compute a sequence of the Bessel functions I(a,z) for
+gams	C10B4
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cbesj.f
+for	Compute a sequence of the Bessel functions J(a,z) for
+gams	C10A4
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cbesk.f
+for	Compute a sequence of the Bessel functions K(a,z) for
+gams	C10B4
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cbesy.f
+for	Compute a sequence of the Bessel functions Y(a,z) for
+gams	C10A4
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cbinu.f
+for	Subsidiary to CAIRY, CBESH, CBESI, CBESJ, CBESK and CBIRY
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cbiry.f
+for	Compute the Airy function Bi(z) or its derivative dBi/dz
+gams	C10D
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cbknu.f
+for	Subsidiary to CAIRY, CBESH, CBESI and CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cblkt1.f
+for	Subsidiary to CBLKTR
+by	(UNKNOWN)
+
+file	slatec/src/cbuni.f
+for	Subsidiary to CBESI and CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cbunk.f
+for	Subsidiary to CBESH and CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/ccmpb.f
+for	Subsidiary to CBLKTR
+by	(UNKNOWN)
+
+file	slatec/src/cdcor.f
+for	Subroutine CDCOR computes corrections to the Y array.
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/cdcst.f
+for	CDCST sets coefficients used by the core integrator CDSTP.
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/cdiv.f
+for	Compute the complex quotient of two complex numbers.
+by	(UNKNOWN)
+
+file	slatec/src/cdntl.f
+for	Subroutine CDNTL is called to set parameters on the first
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/cdntp.f
+for	Subroutine CDNTP interpolates the K-th derivative of Y at
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/cdpsc.f
+for	Subroutine CDPSC computes the predicted YH values by
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/cdpst.f
+for	Subroutine CDPST evaluates the Jacobian matrix of the right
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/cdriv1.f
+for	The function of CDRIV1 is to solve N (200 or fewer)
+gams	I1A2, I1A1B
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/cdriv2.f
+for	The function of CDRIV2 is to solve N ordinary differential
+gams	I1A2, I1A1B
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/cdriv3.f
+for	The function of CDRIV3 is to solve N ordinary differential
+gams	I1A2, I1A1B
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/cdscl.f
+for	Subroutine CDSCL rescales the YH array whenever the step
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/cdstp.f
+for	CDSTP performs one step of the integration of an initial
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/cdzro.f
+for	CDZRO searches for a zero of a function F(N, T, Y, IROOT)
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/cfod.f
+for	Subsidiary to DEBDF
+by	(UNKNOWN)
+
+file	slatec/src/cgeev.f
+for	Compute the eigenvalues and, optionally, the eigenvectors
+gams	D4A4
+by	Kahaner, D. K., (NBS)
+
+file	slatec/src/cgefs.f
+for	Solve a general system of linear equations.
+gams	D2C1
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/cgeir.f
+for	Solve a general system of linear equations.  Iterative
+gams	D2C1
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/chiev.f
+for	Compute the eigenvalues and, optionally, the eigenvectors
+gams	D4A3
+by	Kahaner, D. K., (NBS)
+
+file	slatec/src/chkder.f
+for	Check the gradients of M nonlinear functions in N
+gams	F3, G4C
+by	Hiebert, K. L. (SNLA)
+
+file	slatec/src/chkpr4.f
+for	Subsidiary to SEPX4
+by	(UNKNOWN)
+
+file	slatec/src/chkprm.f
+for	Subsidiary to SEPELI
+by	(UNKNOWN)
+
+file	slatec/src/chksn4.f
+for	Subsidiary to SEPX4
+by	(UNKNOWN)
+
+file	slatec/src/chksng.f
+for	Subsidiary to SEPELI
+by	(UNKNOWN)
+
+file	slatec/src/ckscl.f
+for	Subsidiary to CBKNU, CUNK1 and CUNK2
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cmlri.f
+for	Subsidiary to CBESI and CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cmpcsg.f
+for	Subsidiary to CMGNBN
+by	(UNKNOWN)
+
+file	slatec/src/cmposd.f
+for	Subsidiary to CMGNBN
+by	(UNKNOWN)
+
+file	slatec/src/cmposn.f
+for	Subsidiary to CMGNBN
+by	(UNKNOWN)
+
+file	slatec/src/cmposp.f
+for	Subsidiary to CMGNBN
+by	(UNKNOWN)
+
+file	slatec/src/cmptr3.f
+for	Subsidiary to CMGNBN
+by	(UNKNOWN)
+
+file	slatec/src/cmptrx.f
+for	Subsidiary to CMGNBN
+by	(UNKNOWN)
+
+file	slatec/src/cnbco.f
+for	Factor a band matrix using Gaussian elimination and
+gams	D2C2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/cnbdi.f
+for	Compute the determinant of a band matrix using the factors
+gams	D3C2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/cnbfa.f
+for	Factor a band matrix by elimination.
+gams	D2C2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/cnbfs.f
+for	Solve a general nonsymmetric banded system of linear
+gams	D2C2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/cnbir.f
+for	Solve a general nonsymmetric banded system of linear
+gams	D2C2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/cnbsl.f
+for	Solve a complex band system using the factors computed by
+gams	D2C2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/compb.f
+for	Subsidiary to BLKTRI
+by	(UNKNOWN)
+
+file	slatec/src/cosgen.f
+for	Subsidiary to GENBUN
+by	(UNKNOWN)
+
+file	slatec/src/cpadd.f
+for	Subsidiary to CBLKTR
+by	(UNKNOWN)
+
+file	slatec/src/cpevl.f
+for	Subsidiary to CPZERO
+by	(UNKNOWN)
+
+file	slatec/src/cpevlr.f
+for	Subsidiary to CPZERO
+by	(UNKNOWN)
+
+file	slatec/src/cpofs.f
+for	Solve a positive definite symmetric complex system of
+gams	D2D1B
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/cpoir.f
+for	Solve a positive definite Hermitian system of linear
+gams	D2D1B
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/cpqr79.f
+for	Find the zeros of a polynomial with complex coefficients.
+gams	F1A1B
+by	Vandevender, W. H., (SNLA)
+
+file	slatec/src/cproc.f
+for	Subsidiary to CBLKTR
+by	(UNKNOWN)
+
+file	slatec/src/cprocp.f
+for	Subsidiary to CBLKTR
+by	(UNKNOWN)
+
+file	slatec/src/cprod.f
+for	Subsidiary to BLKTRI
+by	(UNKNOWN)
+
+file	slatec/src/cprodp.f
+for	Subsidiary to BLKTRI
+by	(UNKNOWN)
+
+file	slatec/src/cpzero.f
+for	Find the zeros of a polynomial with complex coefficients.
+gams	F1A1B
+by	Kahaner, D. K., (NBS)
+
+file	slatec/src/crati.f
+for	Subsidiary to CBESH, CBESI and CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cs1s2.f
+for	Subsidiary to CAIRY and CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cscale.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/cseri.f
+for	Subsidiary to CBESI and CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cshch.f
+for	Subsidiary to CBESH and CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/csroot.f
+for	Compute the complex square root of a complex number.
+by	(UNKNOWN)
+
+file	slatec/src/cuchk.f
+for	Subsidiary to SERI, CUOIK, CUNK1, CUNK2, CUNI1, CUNI2 and
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cunhj.f
+for	Subsidiary to CBESI and CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cuni1.f
+for	Subsidiary to CBESI and CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cuni2.f
+for	Subsidiary to CBESI and CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cunik.f
+for	Subsidiary to CBESI and CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cunk1.f
+for	Subsidiary to CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cunk2.f
+for	Subsidiary to CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cuoik.f
+for	Subsidiary to CBESH, CBESI and CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/cv.f
+for	Evaluate the variance function of the curve obtained
+gams	L7A3
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/cwrsk.f
+for	Subsidiary to CBESI and CBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/d1mach.f
+for	Return floating point machine dependent constants.
+gams	R1
+by	Fox, P. A., (Bell Labs)
+
+file	slatec/src/d1merg.f
+for	Merge two strings of ascending double precision numbers.
+by	Boland, W. Robert, (LANL)
+
+file	slatec/src/d1mpyq.f
+for	Subsidiary to DNSQ and DNSQE
+by	(UNKNOWN)
+
+file	slatec/src/d1updt.f
+for	Subsidiary to DNSQ and DNSQE
+by	(UNKNOWN)
+
+file	slatec/src/dasyik.f
+for	Subsidiary to DBESI and DBESK
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dasyjy.f
+for	Subsidiary to DBESJ and DBESY
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/davint.f
+for	Integrate a function tabulated at arbitrarily spaced
+gams	H2A1B2
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/dbdiff.f
+for	Subsidiary to DBSKIN
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbesi.f
+for	Compute an N member sequence of I Bessel functions
+gams	C10B3
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbesj.f
+for	Compute an N member sequence of J Bessel functions
+gams	C10A3
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbesk.f
+for	Implement forward recursion on the three term recursion
+gams	C10B3
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbesy.f
+for	Implement forward recursion on the three term recursion
+gams	C10A3
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbfqad.f
+for	Compute the integral of a product of a function and a
+gams	H2A2A1, E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbint4.f
+for	Compute the B-representation of a cubic spline
+gams	E1A
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbintk.f
+for	Compute the B-representation of a spline which interpolates
+gams	E1A
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbkias.f
+for	Subsidiary to DBSKIN
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbkisr.f
+for	Subsidiary to DBSKIN
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbksol.f
+for	Subsidiary to DBVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dbndac.f
+for	Compute the LU factorization of a  banded matrices using
+gams	D9
+by	Lawson, C. L., (JPL)
+
+file	slatec/src/dbndsl.f
+for	Solve the least squares problem for a banded matrix using
+gams	D9
+by	Lawson, C. L., (JPL)
+
+file	slatec/src/dbnfac.f
+for	Subsidiary to DBINT4 and DBINTK
+by	(UNKNOWN)
+
+file	slatec/src/dbnslv.f
+for	Subsidiary to DBINT4 and DBINTK
+by	(UNKNOWN)
+
+file	slatec/src/dbocls.f
+for	Solve the bounded and constrained least squares
+gams	K1A2A, G2E, G2H1, G2H2
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dbols.f
+for	Solve the problem
+gams	K1A2A, G2E, G2H1, G2H2
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dbolsm.f
+for	Subsidiary to SBOCLS and SBOLS
+by	(UNKNOWN)
+
+file	slatec/src/dbsgq8.f
+for	Subsidiary to DBFQAD
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/dbskin.f
+for	Compute repeated integrals of the K-zero Bessel function.
+gams	C10F
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbsknu.f
+for	Subsidiary to DBESK
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbspdr.f
+for	Use the B-representation to construct a divided difference
+gams	E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbspev.f
+for	Calculate the value of the spline and its derivatives from
+gams	E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbsppp.f
+for	Convert the B-representation of a B-spline to the piecewise
+gams	E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbspvd.f
+for	Calculate the value and all derivatives of order less than
+gams	E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbspvn.f
+for	Calculate the value of all (possibly) nonzero basis
+gams	E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbsqad.f
+for	Compute the integral of a K-th order B-spline using the
+gams	H2A2A1, E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbsynu.f
+for	Subsidiary to DBESY
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbvalu.f
+for	Evaluate the B-representation of a B-spline at X for the
+gams	E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dbvder.f
+for	Subsidiary to DBVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dbvpor.f
+for	Subsidiary to DBVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dbvsup.f
+for	Solve a linear two-point boundary value problem using
+gams	I1B1
+by	Scott, M. R., (SNLA)
+
+file	slatec/src/dcfod.f
+for	Subsidiary to DDEBDF
+by	(UNKNOWN)
+
+file	slatec/src/dckder.f
+for	Check the gradients of M nonlinear functions in N
+gams	F3, G4C
+by	Hiebert, K. L. (SNLA)
+
+file	slatec/src/dcoef.f
+for	Subsidiary to DBVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dcov.f
+for	Calculate the covariance matrix for a nonlinear data
+gams	K1B1
+by	Hiebert, K. L., (SNLA)
+
+file	slatec/src/dcscal.f
+for	Subsidiary to DBVSUP and DSUDS
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dcv.f
+for	Evaluate the variance function of the curve obtained
+gams	L7A3
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/ddaini.f
+for	Initialization routine for DDASSL.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/src/ddajac.f
+for	Compute the iteration matrix for DDASSL and form the
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/src/ddanrm.f
+for	Compute vector norm for DDASSL.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/src/ddaslv.f
+for	Linear system solver for DDASSL.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/src/ddassl.f
+for	This code solves a system of differential/algebraic
+gams	I1A2
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/src/ddastp.f
+for	Perform one step of the DDASSL integration.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/src/ddatrp.f
+for	Interpolation routine for DDASSL.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/src/ddawts.f
+for	Set error weight vector for DDASSL.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/src/ddcor.f
+for	Subroutine DDCOR computes corrections to the Y array.
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/ddcst.f
+for	DDCST sets coefficients used by the core integrator DDSTP.
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/ddeabm.f
+for	Solve an initial value problem in ordinary differential
+gams	I1A1B
+by	Shampine, L. F., (SNLA)
+
+file	slatec/src/ddebdf.f
+for	Solve an initial value problem in ordinary differential
+gams	I1A2
+by	Shampine, L. F., (SNLA)
+
+file	slatec/src/dderkf.f
+for	Solve an initial value problem in ordinary differential
+gams	I1A1A
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/ddes.f
+for	Subsidiary to DDEABM
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/ddntl.f
+for	Subroutine DDNTL is called to set parameters on the first
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/ddntp.f
+for	Subroutine DDNTP interpolates the K-th derivative of Y at
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/ddoglg.f
+for	Subsidiary to DNSQ and DNSQE
+by	(UNKNOWN)
+
+file	slatec/src/ddpsc.f
+for	Subroutine DDPSC computes the predicted YH values by
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/ddpst.f
+for	Subroutine DDPST evaluates the Jacobian matrix of the right
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/ddriv1.f
+for	The function of DDRIV1 is to solve N (200 or fewer)
+gams	I1A2, I1A1B
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/ddriv2.f
+for	The function of DDRIV2 is to solve N ordinary differential
+gams	I1A2, I1A1B
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/ddriv3.f
+for	The function of DDRIV3 is to solve N ordinary differential
+gams	I1A2, I1A1B
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/ddscl.f
+for	Subroutine DDSCL rescales the YH array whenever the step
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/ddstp.f
+for	DDSTP performs one step of the integration of an initial
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/ddzro.f
+for	DDZRO searches for a zero of a function F(N, T, Y, IROOT)
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/deabm.f
+for	Solve an initial value problem in ordinary differential
+gams	I1A1B
+by	Shampine, L. F., (SNLA)
+
+file	slatec/src/debdf.f
+for	Solve an initial value problem in ordinary differential
+gams	I1A2
+by	Shampine, L. F., (SNLA)
+
+file	slatec/src/defc.f
+for	Fit a piecewise polynomial curve to discrete data.
+gams	K1A1A1, K1A2A, L8A3
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/defcmn.f
+for	Subsidiary to DEFC
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/defe4.f
+for	Subsidiary to SEPX4
+by	(UNKNOWN)
+
+file	slatec/src/defehl.f
+for	Subsidiary to DERKF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/defer.f
+for	Subsidiary to SEPELI
+by	(UNKNOWN)
+
+file	slatec/src/denorm.f
+for	Subsidiary to DNSQ and DNSQE
+by	(UNKNOWN)
+
+file	slatec/src/derkf.f
+for	Solve an initial value problem in ordinary differential
+gams	I1A1A
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/derkfs.f
+for	Subsidiary to DERKF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/des.f
+for	Subsidiary to DEABM
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dexbvp.f
+for	Subsidiary to DBVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dexint.f
+for	Compute an M member sequence of exponential integrals
+gams	C5
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dfc.f
+for	Fit a piecewise polynomial curve to discrete data.
+gams	K1A1A1, K1A2A, L8A3
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dfcmn.f
+for	Subsidiary to FC
+by	(UNKNOWN)
+
+file	slatec/src/dfdjc1.f
+for	Subsidiary to DNSQ and DNSQE
+by	(UNKNOWN)
+
+file	slatec/src/dfdjc3.f
+for	Subsidiary to DNLS1 and DNLS1E
+by	(UNKNOWN)
+
+file	slatec/src/dfehl.f
+for	Subsidiary to DDERKF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dfspvd.f
+for	Subsidiary to DFC
+by	(UNKNOWN)
+
+file	slatec/src/dfspvn.f
+for	Subsidiary to DFC
+by	(UNKNOWN)
+
+file	slatec/src/dfulmt.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/dfzero.f
+for	Search for a zero of a function F(X) in a given interval
+gams	F1B
+by	Shampine, L. F., (SNLA)
+
+file	slatec/src/dgamln.f
+for	Compute the logarithm of the Gamma function
+gams	C7A
+by	Amos, D. E., (SNL)
+
+file	slatec/src/dgamrn.f
+for	Subsidiary to DBSKIN
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dgaus8.f
+for	Integrate a real function of one variable over a finite
+gams	H2A1A1
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/dgefs.f
+for	Solve a general system of linear equations.
+gams	D2A1
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/dglss.f
+for	Solve a linear least squares problems by performing a QR
+gams	D9, D5
+by	Manteuffel, T. A., (LANL)
+
+file	slatec/src/dh12.f
+for	Subsidiary to DHFTI, DLSEI and DWNNLS
+by	(UNKNOWN)
+
+file	slatec/src/dhfti.f
+for	Solve a least squares problem for banded matrices using
+gams	D9
+by	Lawson, C. L., (JPL)
+
+file	slatec/src/dhkseq.f
+for	Subsidiary to DBSKIN
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dhstrt.f
+for	Subsidiary to DDEABM, DDEBDF and DDERKF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dhvnrm.f
+for	Subsidiary to DDEABM, DDEBDF and DDERKF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dintp.f
+for	Approximate the solution at XOUT by evaluating the
+gams	I1A1B
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dintrv.f
+for	Compute the largest integer ILEFT in 1 .LE. ILEFT .LE. LXT
+gams	E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dintyd.f
+for	Subsidiary to DDEBDF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/djairy.f
+for	Subsidiary to DBESJ and DBESY
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dllsia.f
+for	Solve linear least squares problems by performing a QR
+gams	D9, D5
+by	Manteuffel, T. A., (LANL)
+
+file	slatec/src/dlpdp.f
+for	Subsidiary to DLSEI
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dlsei.f
+for	Solve a linearly constrained least squares problem with
+gams	K1A2A, D9
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dlsi.f
+for	Subsidiary to DLSEI
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dlsod.f
+for	Subsidiary to DDEBDF
+by	(UNKNOWN)
+
+file	slatec/src/dlssud.f
+for	Subsidiary to DBVSUP and DSUDS
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dmacon.f
+for	Subsidiary to DBVSUP
+by	(UNKNOWN)
+
+file	slatec/src/dmgsbv.f
+for	Subsidiary to DBVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dmout.f
+for	Subsidiary to DBOCLS and DFC
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dmpar.f
+for	Subsidiary to DNLS1 and DNLS1E
+by	(UNKNOWN)
+
+file	slatec/src/dnbco.f
+for	Factor a band matrix using Gaussian elimination and
+gams	D2A2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/dnbdi.f
+for	Compute the determinant of a band matrix using the factors
+gams	D3A2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/dnbfa.f
+for	Factor a band matrix by elimination.
+gams	D2A2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/dnbfs.f
+for	Solve a general nonsymmetric banded system of linear
+gams	D2A2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/dnbsl.f
+for	Solve a real band system using the factors computed by
+gams	D2A2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/dnls1.f
+for	Minimize the sum of the squares of M nonlinear functions
+gams	K1B1A1, K1B1A2
+by	Hiebert, K. L., (SNLA)
+
+file	slatec/src/dnls1e.f
+for	An easy-to-use code which minimizes the sum of the squares
+gams	K1B1A1, K1B1A2
+by	Hiebert, K. L., (SNLA)
+
+file	slatec/src/dnsq.f
+for	Find a zero of a system of a N nonlinear functions in N
+gams	F2A
+by	Hiebert, K. L. (SNLA)
+
+file	slatec/src/dnsqe.f
+for	An easy-to-use code to find a zero of a system of N
+gams	F2A
+by	Hiebert, K. L. (SNLA)
+
+file	slatec/src/dogleg.f
+for	Subsidiary to SNSQ and SNSQE
+by	(UNKNOWN)
+
+file	slatec/src/dohtrl.f
+for	Subsidiary to DBVSUP and DSUDS
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dorthr.f
+for	Subsidiary to DBVSUP and DSUDS
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dp1vlu.f
+for	Use the coefficients generated by DPOLFT to evaluate the
+gams	K6
+by	Shampine, L. F., (SNLA)
+
+file	slatec/src/dpchng.f
+for	Subsidiary to DSPLP
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dpcoef.f
+for	Convert the DPOLFT coefficients to Taylor series form.
+gams	K1A1A2
+by	Shampine, L. F., (SNLA)
+
+file	slatec/src/dpfqad.f
+for	Compute the integral on (X1,X2) of a product of a
+gams	H2A2A1, E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dpincw.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/dpinit.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/dpintm.f
+for	Subsidiary to DSPLP
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dpjac.f
+for	Subsidiary to DDEBDF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dplint.f
+for	Produce the polynomial which interpolates a set of discrete
+gams	E1B
+by	Huddleston, R. E., (SNLL)
+
+file	slatec/src/dplpce.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/dplpdm.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/dplpfe.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/dplpfl.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/dplpmn.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/dplpmu.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/dplpup.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/dpnnzr.f
+for	Subsidiary to DSPLP
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dpofs.f
+for	Solve a positive definite symmetric system of linear
+gams	D2B1B
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/dpolcf.f
+for	Compute the coefficients of the polynomial fit (including
+gams	E1B
+by	Huddleston, R. E., (SNLL)
+
+file	slatec/src/dpolft.f
+for	Fit discrete data in a least squares sense by polynomials
+gams	K1A1A2
+by	Shampine, L. F., (SNLA)
+
+file	slatec/src/dpolvl.f
+for	Calculate the value of a polynomial and its first NDER
+gams	E3
+by	Huddleston, R. E., (SNLL)
+
+file	slatec/src/dpopt.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/dpperm.f
+for	Rearrange a given array according to a prescribed
+gams	N8
+by	McClain, M. A., (NIST)
+
+file	slatec/src/dppgq8.f
+for	Subsidiary to DPFQAD
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/dppqad.f
+for	Compute the integral on (X1,X2) of a K-th order B-spline
+gams	H2A2A1, E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dppval.f
+for	Calculate the value of the IDERIV-th derivative of the
+gams	E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dprvec.f
+for	Subsidiary to DBVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dprwpg.f
+for	Subsidiary to DSPLP
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dprwvr.f
+for	Subsidiary to DSPLP
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dpsifn.f
+for	Compute derivatives of the Psi function.
+gams	C7C
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dpsixn.f
+for	Subsidiary to DEXINT
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/dpsort.f
+for	Return the permutation vector generated by sorting a given
+gams	N6A1B, N6A2B
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/dqag.f
+for	The routine calculates an approximation result to a given
+gams	H2A1A1
+by	Piessens, Robert
+
+file	slatec/src/dqage.f
+for	The routine calculates an approximation result to a given
+gams	H2A1A1
+by	Piessens, Robert
+
+file	slatec/src/dqagi.f
+for	The routine calculates an approximation result to a given
+gams	H2A3A1, H2A4A1
+by	Piessens, Robert
+
+file	slatec/src/dqagie.f
+for	The routine calculates an approximation result to a given
+gams	H2A3A1, H2A4A1
+by	Piessens, Robert
+
+file	slatec/src/dqagp.f
+for	The routine calculates an approximation result to a given
+gams	H2A2A1
+by	Piessens, Robert
+
+file	slatec/src/dqagpe.f
+for	Approximate a given definite integral I = Integral of F
+gams	H2A2A1
+by	Piessens, Robert
+
+file	slatec/src/dqags.f
+for	The routine calculates an approximation result to a given
+gams	H2A1A1
+by	Piessens, Robert
+
+file	slatec/src/dqagse.f
+for	The routine calculates an approximation result to a given
+gams	H2A1A1
+by	Piessens, Robert
+
+file	slatec/src/dqawc.f
+for	The routine calculates an approximation result to a
+gams	H2A2A1, J4
+by	Piessens, Robert
+
+file	slatec/src/dqawce.f
+for	The routine calculates an approximation result to a
+gams	H2A2A1, J4
+by	Piessens, Robert
+
+file	slatec/src/dqawf.f
+for	The routine calculates an approximation result to a given
+gams	H2A3A1
+by	Piessens, Robert
+
+file	slatec/src/dqawfe.f
+for	The routine calculates an approximation result to a
+gams	H2A3A1
+by	Piessens, Robert
+
+file	slatec/src/dqawo.f
+for	Calculate an approximation to a given definite integral
+gams	H2A2A1
+by	Piessens, Robert
+
+file	slatec/src/dqawoe.f
+for	Calculate an approximation to a given definite integral
+gams	H2A2A1
+by	Piessens, Robert
+
+file	slatec/src/dqaws.f
+for	The routine calculates an approximation result to a given
+gams	H2A2A1
+by	Piessens, Robert
+
+file	slatec/src/dqawse.f
+for	The routine calculates an approximation result to a given
+gams	H2A2A1
+by	Piessens, Robert
+
+file	slatec/src/dqc25c.f
+for	To compute I = Integral of F*W over (A,B) with
+gams	H2A2A2, J4
+by	Piessens, Robert
+
+file	slatec/src/dqc25f.f
+for	To compute the integral I=Integral of F(X) over (A,B)
+gams	H2A2A2
+by	Piessens, Robert
+
+file	slatec/src/dqc25s.f
+for	To compute I = Integral of F*W over (BL,BR), with error
+gams	H2A2A2
+by	Piessens, Robert
+
+file	slatec/src/dqcheb.f
+for	This routine computes the CHEBYSHEV series expansion
+by	Piessens, Robert
+
+file	slatec/src/dqdota.f
+for	Compute the inner product of two vectors with extended
+gams	D1A4
+by	Lawson, C. L., (JPL)
+
+file	slatec/src/dqdoti.f
+for	Compute the inner product of two vectors with extended
+gams	D1A4
+by	Lawson, C. L., (JPL)
+
+file	slatec/src/dqelg.f
+for	The routine determines the limit of a given sequence of
+by	Piessens, Robert
+
+file	slatec/src/dqform.f
+for	Subsidiary to DNSQ and DNSQE
+by	(UNKNOWN)
+
+file	slatec/src/dqk15.f
+for	To compute I = Integral of F over (A,B), with error
+gams	H2A1A2
+by	Piessens, Robert
+
+file	slatec/src/dqk15i.f
+for	The original (infinite integration range is mapped
+gams	H2A3A2, H2A4A2
+by	Piessens, Robert
+
+file	slatec/src/dqk15w.f
+for	To compute I = Integral of F*W over (A,B), with error
+gams	H2A2A2
+by	Piessens, Robert
+
+file	slatec/src/dqk21.f
+for	To compute I = Integral of F over (A,B), with error
+gams	H2A1A2
+by	Piessens, Robert
+
+file	slatec/src/dqk31.f
+for	To compute I = Integral of F over (A,B) with error
+gams	H2A1A2
+by	Piessens, Robert
+
+file	slatec/src/dqk41.f
+for	To compute I = Integral of F over (A,B), with error
+gams	H2A1A2
+by	Piessens, Robert
+
+file	slatec/src/dqk51.f
+for	To compute I = Integral of F over (A,B) with error
+gams	H2A1A2
+by	Piessens, Robert
+
+file	slatec/src/dqk61.f
+for	To compute I = Integral of F over (A,B) with error
+gams	H2A1A2
+by	Piessens, Robert
+
+file	slatec/src/dqmomo.f
+for	This routine computes modified Chebyshev moments.  The K-th
+gams	H2A2A1, C3A2
+by	Piessens, Robert
+
+file	slatec/src/dqnc79.f
+for	Integrate a function using a 7-point adaptive Newton-Cotes
+gams	H2A1A1
+by	Kahaner, D. K., (NBS)
+
+file	slatec/src/dqng.f
+for	The routine calculates an approximation result to a
+gams	H2A1A1
+by	Piessens, Robert
+
+file	slatec/src/dqpsrt.f
+for	This routine maintains the descending ordering in the
+by	Piessens, Robert
+
+file	slatec/src/dqrfac.f
+for	Subsidiary to DNLS1, DNLS1E, DNSQ and DNSQE
+by	(UNKNOWN)
+
+file	slatec/src/dqrslv.f
+for	Subsidiary to DNLS1 and DNLS1E
+by	(UNKNOWN)
+
+file	slatec/src/dqwgtc.f
+for	This function subprogram is used together with the
+by	Piessens, Robert
+
+file	slatec/src/dqwgtf.f
+for	This function subprogram is used together with the
+by	Piessens, Robert
+
+file	slatec/src/dqwgts.f
+for	This function subprogram is used together with the
+by	Piessens, Robert
+
+file	slatec/src/drc.f
+for	Calculate a double precision approximation to
+gams	C14
+by	Carlson, B. C.
+
+file	slatec/src/drc3jj.f
+for	Evaluate the 3j symbol f(L1) = (  L1   L2 L3)
+gams	C19
+by	GORDON, R. G., HARVARD UNIVERSITY
+
+file	slatec/src/drc3jm.f
+for	Evaluate the 3j symbol g(M2) = (L1 L2   L3  )
+gams	C19
+by	GORDON, R. G., HARVARD UNIVERSITY
+
+file	slatec/src/drc6j.f
+for	Evaluate the 6j symbol h(L1) = {L1 L2 L3}
+gams	C19
+by	GORDON, R. G., HARVARD UNIVERSITY
+
+file	slatec/src/drd.f
+for	Compute the incomplete or complete elliptic integral of
+gams	C14
+by	Carlson, B. C.
+
+file	slatec/src/dreadp.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/dreort.f
+for	Subsidiary to DBVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/drf.f
+for	Compute the incomplete or complete elliptic integral of the
+gams	C14
+by	Carlson, B. C.
+
+file	slatec/src/drj.f
+for	Compute the incomplete or complete (X or Y or Z is zero)
+gams	C14
+by	Carlson, B. C.
+
+file	slatec/src/drkfab.f
+for	Subsidiary to DBVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/drkfs.f
+for	Subsidiary to DDERKF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/drsco.f
+for	Subsidiary to DDEBDF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dslvs.f
+for	Subsidiary to DDEBDF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dsort.f
+for	Sort an array and optionally make the same interchanges in
+gams	N6A2B
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/dsos.f
+for	Solve a square system of nonlinear equations.
+gams	F2A
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dsoseq.f
+for	Subsidiary to DSOS
+by	(UNKNOWN)
+
+file	slatec/src/dsossl.f
+for	Subsidiary to DSOS
+by	(UNKNOWN)
+
+file	slatec/src/dsplp.f
+for	Solve linear programming problems involving at
+gams	G2A2
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dsteps.f
+for	Integrate a system of first order ordinary differential
+gams	I1A1B
+by	Shampine, L. F., (SNLA)
+
+file	slatec/src/dstod.f
+for	Subsidiary to DDEBDF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dstor1.f
+for	Subsidiary to DBVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dstway.f
+for	Subsidiary to DBVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dsuds.f
+for	Subsidiary to DBVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dsvco.f
+for	Subsidiary to DDEBDF
+by	(UNKNOWN)
+
+file	slatec/src/du11ls.f
+for	Subsidiary to DLLSIA
+by	(UNKNOWN)
+
+file	slatec/src/du11us.f
+for	Subsidiary to DULSIA
+by	(UNKNOWN)
+
+file	slatec/src/du12ls.f
+for	Subsidiary to DLLSIA
+by	(UNKNOWN)
+
+file	slatec/src/du12us.f
+for	Subsidiary to DULSIA
+by	(UNKNOWN)
+
+file	slatec/src/dulsia.f
+for	Solve an underdetermined linear system of equations by
+gams	D9
+by	Manteuffel, T. A., (LANL)
+
+file	slatec/src/dusrmt.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/dvecs.f
+for	Subsidiary to DBVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/dvnrms.f
+for	Subsidiary to DDEBDF
+by	(UNKNOWN)
+
+file	slatec/src/dvout.f
+for	Subsidiary to DSPLP
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dwnlit.f
+for	Subsidiary to DWNNLS
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dwnlsm.f
+for	Subsidiary to DWNNLS
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dwnlt1.f
+for	Subsidiary to WNLIT
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dwnlt2.f
+for	Subsidiary to WNLIT
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dwnlt3.f
+for	Subsidiary to WNLIT
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dwnnls.f
+for	Solve a linearly constrained least squares problem with
+gams	K1A2A
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/dwritp.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/dwupdt.f
+for	Subsidiary to DNLS1 and DNLS1E
+by	(UNKNOWN)
+
+file	slatec/src/dx.f
+for	Subsidiary to SEPELI
+by	(UNKNOWN)
+
+file	slatec/src/dx4.f
+for	Subsidiary to SEPX4
+by	(UNKNOWN)
+
+file	slatec/src/dxadd.f
+for	To provide double-precision floating-point arithmetic
+gams	A3D
+by	LOZIER, DANIEL W., (NATIONAL BUREAU OF STANDARDS)
+
+file	slatec/src/dxadj.f
+for	To provide double-precision floating-point arithmetic
+gams	A3D
+by	LOZIER, DANIEL W., (NATIONAL BUREAU OF STANDARDS)
+
+file	slatec/src/dxc210.f
+for	To provide double-precision floating-point arithmetic
+gams	A3D
+by	LOZIER, DANIEL W., (NATIONAL BUREAU OF STANDARDS)
+
+file	slatec/src/dxcon.f
+for	To provide double-precision floating-point arithmetic
+gams	A3D
+by	LOZIER, DANIEL W., (NATIONAL BUREAU OF STANDARDS)
+
+file	slatec/src/dxlegf.f
+for	Compute normalized Legendre polynomials and associated
+gams	C3A2, C9
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/src/dxnrmp.f
+for	Compute normalized Legendre polynomials.
+gams	C3A2, C9
+by	LOZIER, DANIEL W., (NATIONAL BUREAU OF STANDARDS)
+
+file	slatec/src/dxpmu.f
+for	To compute the values of Legendre functions for DXLEGF.
+gams	C3A2, C9
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/src/dxpmup.f
+for	To compute the values of Legendre functions for DXLEGF.
+gams	C3A2, C9
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/src/dxpnrm.f
+for	To compute the values of Legendre functions for DXLEGF.
+gams	C3A2, C9
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/src/dxpqnu.f
+for	To compute the values of Legendre functions for DXLEGF.
+gams	C3A2, C9
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/src/dxpsi.f
+for	To compute values of the Psi function for DXLEGF.
+gams	C7C
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/src/dxqmu.f
+for	To compute the values of Legendre functions for DXLEGF.
+gams	C3A2, C9
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/src/dxqnu.f
+for	To compute the values of Legendre functions for DXLEGF.
+gams	C3A2, C9
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/src/dxred.f
+for	To provide double-precision floating-point arithmetic
+gams	A3D
+by	LOZIER, DANIEL W., (NATIONAL BUREAU OF STANDARDS)
+
+file	slatec/src/dxset.f
+for	To provide double-precision floating-point arithmetic
+gams	A3D
+by	LOZIER, DANIEL W., (NATIONAL BUREAU OF STANDARDS)
+
+file	slatec/src/dy.f
+for	Subsidiary to SEPELI
+by	(UNKNOWN)
+
+file	slatec/src/dy4.f
+for	Subsidiary to SEPX4
+by	(UNKNOWN)
+
+file	slatec/src/dyairy.f
+for	Subsidiary to DBESJ and DBESY
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/efc.f
+for	Fit a piecewise polynomial curve to discrete data.
+gams	K1A1A1, K1A2A, L8A3
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/efcmn.f
+for	Subsidiary to EFC
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/enorm.f
+for	Subsidiary to SNLS1, SNLS1E, SNSQ and SNSQE
+by	(UNKNOWN)
+
+file	slatec/src/exbvp.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/exint.f
+for	Compute an M member sequence of exponential integrals
+gams	C5
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/fc.f
+for	Fit a piecewise polynomial curve to discrete data.
+gams	K1A1A1, K1A2A, L8A3
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/fcmn.f
+for	Subsidiary to FC
+by	(UNKNOWN)
+
+file	slatec/src/fdjac1.f
+for	Subsidiary to SNSQ and SNSQE
+by	(UNKNOWN)
+
+file	slatec/src/fdjac3.f
+for	Subsidiary to SNLS1 and SNLS1E
+by	(UNKNOWN)
+
+file	slatec/src/fdump.f
+for	Symbolic dump (should be locally written).
+gams	R3
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/fftdoc.f
+for	Documentation for FFTPACK, a collection of Fast Fourier
+gams	J1, Z
+by	Swarztrauber, P. N., (NCAR)
+
+file	slatec/src/fulmat.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/fundoc.f
+for	Documentation for FNLIB, a collection of routines for
+gams	C, Z
+by	Kahaner, D. K., (NBS)
+
+file	slatec/src/fzero.f
+for	Search for a zero of a function F(X) in a given interval
+gams	F1B
+by	Shampine, L. F., (SNLA)
+
+file	slatec/src/gamln.f
+for	Compute the logarithm of the Gamma function
+gams	C7A
+by	Amos, D. E., (SNL)
+
+file	slatec/src/gamrn.f
+for	Subsidiary to BSKIN
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/gaus8.f
+for	Integrate a real function of one variable over a finite
+gams	H2A1A1
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/h12.f
+for	Subsidiary to HFTI, LSEI and WNNLS
+by	(UNKNOWN)
+
+file	slatec/src/hfti.f
+for	Solve a linear least squares problems by performing a QR
+gams	D9
+by	Lawson, C. L., (JPL)
+
+file	slatec/src/hkseq.f
+for	Subsidiary to BSKIN
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/hpperm.f
+for	Rearrange a given array according to a prescribed
+gams	N8
+by	McClain, M. A., (NIST)
+
+file	slatec/src/hpsort.f
+for	Return the permutation vector generated by sorting a
+gams	N6A1C, N6A2C
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/hstart.f
+for	Subsidiary to DEABM, DEBDF and DERKF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/hstcs1.f
+for	Subsidiary to HSTCSP
+by	(UNKNOWN)
+
+file	slatec/src/hvnrm.f
+for	Subsidiary to DEABM, DEBDF and DERKF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/hwscs1.f
+for	Subsidiary to HWSCSP
+by	(UNKNOWN)
+
+file	slatec/src/hwsss1.f
+for	Subsidiary to HWSSSP
+by	(UNKNOWN)
+
+file	slatec/src/i1mach.f
+for	Return integer machine dependent constants.
+gams	R1
+by	Fox, P. A., (Bell Labs)
+
+file	slatec/src/i1merg.f
+for	Merge two strings of ascending integers.
+by	Boland, W. Robert, (LANL)
+
+file	slatec/src/idloc.f
+for	Subsidiary to DSPLP
+by	Boland, W. Robert, (LANL)
+
+file	slatec/src/indxa.f
+for	Subsidiary to BLKTRI
+by	(UNKNOWN)
+
+file	slatec/src/indxb.f
+for	Subsidiary to BLKTRI
+by	(UNKNOWN)
+
+file	slatec/src/indxc.f
+for	Subsidiary to BLKTRI
+by	(UNKNOWN)
+
+file	slatec/src/intrv.f
+for	Compute the largest integer ILEFT in 1 .LE. ILEFT .LE. LXT
+gams	E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/intyd.f
+for	Subsidiary to DEBDF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/inxca.f
+for	Subsidiary to CBLKTR
+by	(UNKNOWN)
+
+file	slatec/src/inxcb.f
+for	Subsidiary to CBLKTR
+by	(UNKNOWN)
+
+file	slatec/src/inxcc.f
+for	Subsidiary to CBLKTR
+by	(UNKNOWN)
+
+file	slatec/src/iploc.f
+for	Subsidiary to SPLP
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/ipperm.f
+for	Rearrange a given array according to a prescribed
+gams	N8
+by	McClain, M. A., (NIST)
+
+file	slatec/src/ipsort.f
+for	Return the permutation vector generated by sorting a given
+gams	N6A1A, N6A2A
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/isort.f
+for	Sort an array and optionally make the same interchanges in
+gams	N6A2A
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/ivout.f
+for	Subsidiary to SPLP
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/j4save.f
+for	Save or recall global variables needed by error
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/jairy.f
+for	Subsidiary to BESJ and BESY
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/la05ad.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/la05as.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/la05bd.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/la05bs.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/la05cd.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/la05cs.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/la05ed.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/la05es.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/llsia.f
+for	Solve a linear least squares problems by performing a QR
+gams	D9, D5
+by	Manteuffel, T. A., (LANL)
+
+file	slatec/src/lmpar.f
+for	Subsidiary to SNLS1 and SNLS1E
+by	(UNKNOWN)
+
+file	slatec/src/lpdp.f
+for	Subsidiary to LSEI
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/lsame.f
+for	Test two characters to determine if they are the same
+gams	R, N3
+by	Hanson, R., (SNLA)
+
+file	slatec/src/lsei.f
+for	Solve a linearly constrained least squares problem with
+gams	K1A2A, D9
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/lsi.f
+for	Subsidiary to LSEI
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/lsod.f
+for	Subsidiary to DEBDF
+by	(UNKNOWN)
+
+file	slatec/src/lssods.f
+for	Subsidiary to BVSUP
+by	(UNKNOWN)
+
+file	slatec/src/lssuds.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/macon.f
+for	Subsidiary to BVSUP
+by	(UNKNOWN)
+
+file	slatec/src/mc20ad.f
+for	Subsidiary to DSPLP
+by	(UNKNOWN)
+
+file	slatec/src/mc20as.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/mgsbv.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/minso4.f
+for	Subsidiary to SEPX4
+by	(UNKNOWN)
+
+file	slatec/src/minsol.f
+for	Subsidiary to SEPELI
+by	(UNKNOWN)
+
+file	slatec/src/mpadd.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mpadd2.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mpadd3.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mpblas.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mpcdm.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mpchk.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mpcmd.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mpdivi.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mperr.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mpmaxr.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mpmlp.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mpmul.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mpmul2.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mpmuli.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mpnzr.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mpovfl.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mpstr.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/mpunfl.f
+for	Subsidiary to DQDOTA and DQDOTI
+by	(UNKNOWN)
+
+file	slatec/src/numxer.f
+for	Return the most recent error number.
+gams	R3C
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/ohtrol.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/ohtror.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/ortho4.f
+for	Subsidiary to SEPX4
+by	(UNKNOWN)
+
+file	slatec/src/orthog.f
+for	Subsidiary to SEPELI
+by	(UNKNOWN)
+
+file	slatec/src/orthol.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/orthor.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/pchngs.f
+for	Subsidiary to SPLP
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/pcoef.f
+for	Convert the POLFIT coefficients to Taylor series form.
+gams	K1A1A2
+by	Shampine, L. F., (SNLA)
+
+file	slatec/src/pfqad.f
+for	Compute the integral on (X1,X2) of a product of a function
+gams	H2A2A1, E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/pgsf.f
+for	Subsidiary to CBLKTR
+by	(UNKNOWN)
+
+file	slatec/src/pimach.f
+for	Subsidiary to HSTCSP, HSTSSP and HWSCSP
+by	(UNKNOWN)
+
+file	slatec/src/pinitm.f
+for	Subsidiary to SPLP
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/pjac.f
+for	Subsidiary to DEBDF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/pnnzrs.f
+for	Subsidiary to SPLP
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/poisd2.f
+for	Subsidiary to GENBUN
+by	(UNKNOWN)
+
+file	slatec/src/poisn2.f
+for	Subsidiary to GENBUN
+by	(UNKNOWN)
+
+file	slatec/src/poisp2.f
+for	Subsidiary to GENBUN
+by	(UNKNOWN)
+
+file	slatec/src/polcof.f
+for	Compute the coefficients of the polynomial fit (including
+gams	E1B
+by	Huddleston, R. E., (SNLL)
+
+file	slatec/src/polfit.f
+for	Fit discrete data in a least squares sense by polynomials
+gams	K1A1A2
+by	Shampine, L. F., (SNLA)
+
+file	slatec/src/polint.f
+for	Produce the polynomial which interpolates a set of discrete
+gams	E1B
+by	Huddleston, R. E., (SNLL)
+
+file	slatec/src/polyvl.f
+for	Calculate the value of a polynomial and its first NDER
+gams	E3
+by	Huddleston, R. E., (SNLL)
+
+file	slatec/src/pos3d1.f
+for	Subsidiary to POIS3D
+by	(UNKNOWN)
+
+file	slatec/src/postg2.f
+for	Subsidiary to POISTG
+by	(UNKNOWN)
+
+file	slatec/src/ppadd.f
+for	Subsidiary to BLKTRI
+by	(UNKNOWN)
+
+file	slatec/src/ppgq8.f
+for	Subsidiary to PFQAD
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/ppgsf.f
+for	Subsidiary to CBLKTR
+by	(UNKNOWN)
+
+file	slatec/src/pppsf.f
+for	Subsidiary to CBLKTR
+by	(UNKNOWN)
+
+file	slatec/src/ppqad.f
+for	Compute the integral on (X1,X2) of a K-th order B-spline
+gams	H2A2A1, E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/ppsgf.f
+for	Subsidiary to BLKTRI
+by	(UNKNOWN)
+
+file	slatec/src/ppspf.f
+for	Subsidiary to BLKTRI
+by	(UNKNOWN)
+
+file	slatec/src/ppval.f
+for	Calculate the value of the IDERIV-th derivative of the
+gams	E3, K6
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/proc.f
+for	Subsidiary to CBLKTR
+by	(UNKNOWN)
+
+file	slatec/src/procp.f
+for	Subsidiary to CBLKTR
+by	(UNKNOWN)
+
+file	slatec/src/prod.f
+for	Subsidiary to BLKTRI
+by	(UNKNOWN)
+
+file	slatec/src/prodp.f
+for	Subsidiary to BLKTRI
+by	(UNKNOWN)
+
+file	slatec/src/prvec.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/prwpge.f
+for	Subsidiary to SPLP
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/prwvir.f
+for	Subsidiary to SPLP
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/psgf.f
+for	Subsidiary to BLKTRI
+by	(UNKNOWN)
+
+file	slatec/src/psifn.f
+for	Compute derivatives of the Psi function.
+gams	C7C
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/psixn.f
+for	Subsidiary to EXINT
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/pvalue.f
+for	Use the coefficients generated by POLFIT to evaluate the
+gams	K6
+by	Shampine, L. F., (SNLA)
+
+file	slatec/src/pythag.f
+for	Compute the complex square root of a complex number without
+by	(UNKNOWN)
+
+file	slatec/src/qag.f
+for	The routine calculates an approximation result to a given
+gams	H2A1A1
+by	Piessens, Robert
+
+file	slatec/src/qage.f
+for	The routine calculates an approximation result to a given
+gams	H2A1A1
+by	Piessens, Robert
+
+file	slatec/src/qagi.f
+for	The routine calculates an approximation result to a given
+gams	H2A3A1, H2A4A1
+by	Piessens, Robert
+
+file	slatec/src/qagie.f
+for	The routine calculates an approximation result to a given
+gams	H2A3A1, H2A4A1
+by	Piessens, Robert
+
+file	slatec/src/qagp.f
+for	The routine calculates an approximation result to a given
+gams	H2A2A1
+by	Piessens, Robert
+
+file	slatec/src/qagpe.f
+for	Approximate a given definite integral I = Integral of F
+gams	H2A2A1
+by	Piessens, Robert
+
+file	slatec/src/qags.f
+for	The routine calculates an approximation result to a given
+gams	H2A1A1
+by	Piessens, Robert
+
+file	slatec/src/qagse.f
+for	The routine calculates an approximation result to a given
+gams	H2A1A1
+by	Piessens, Robert
+
+file	slatec/src/qawc.f
+for	The routine calculates an approximation result to a
+gams	H2A2A1, J4
+by	Piessens, Robert
+
+file	slatec/src/qawce.f
+for	The routine calculates an approximation result to a
+gams	H2A2A1, J4
+by	Piessens, Robert
+
+file	slatec/src/qawf.f
+for	The routine calculates an approximation result to a given
+gams	H2A3A1
+by	Piessens, Robert
+
+file	slatec/src/qawfe.f
+for	The routine calculates an approximation result to a
+gams	H2A3A1
+by	Piessens, Robert
+
+file	slatec/src/qawo.f
+for	Calculate an approximation to a given definite integral
+gams	H2A2A1
+by	Piessens, Robert
+
+file	slatec/src/qawoe.f
+for	Calculate an approximation to a given definite integral
+gams	H2A2A1
+by	Piessens, Robert
+
+file	slatec/src/qaws.f
+for	The routine calculates an approximation result to a given
+gams	H2A2A1
+by	Piessens, Robert
+
+file	slatec/src/qawse.f
+for	The routine calculates an approximation result to a given
+gams	H2A2A1
+by	Piessens, Robert
+
+file	slatec/src/qc25c.f
+for	To compute I = Integral of F*W over (A,B) with
+gams	H2A2A2, J4
+by	Piessens, Robert
+
+file	slatec/src/qc25f.f
+for	To compute the integral I=Integral of F(X) over (A,B)
+gams	H2A2A2
+by	Piessens, Robert
+
+file	slatec/src/qc25s.f
+for	To compute I = Integral of F*W over (BL,BR), with error
+gams	H2A2A2
+by	Piessens, Robert
+
+file	slatec/src/qcheb.f
+for	This routine computes the CHEBYSHEV series expansion
+by	Piessens, Robert
+
+file	slatec/src/qelg.f
+for	The routine determines the limit of a given sequence of
+by	Piessens, Robert
+
+file	slatec/src/qform.f
+for	Subsidiary to SNSQ and SNSQE
+by	(UNKNOWN)
+
+file	slatec/src/qk15.f
+for	To compute I = Integral of F over (A,B), with error
+gams	H2A1A2
+by	Piessens, Robert
+
+file	slatec/src/qk15i.f
+for	The original (infinite integration range is mapped
+gams	H2A3A2, H2A4A2
+by	Piessens, Robert
+
+file	slatec/src/qk15w.f
+for	To compute I = Integral of F*W over (A,B), with error
+gams	H2A2A2
+by	Piessens, Robert
+
+file	slatec/src/qk21.f
+for	To compute I = Integral of F over (A,B), with error
+gams	H2A1A2
+by	Piessens, Robert
+
+file	slatec/src/qk31.f
+for	To compute I = Integral of F over (A,B) with error
+gams	H2A1A2
+by	Piessens, Robert
+
+file	slatec/src/qk41.f
+for	To compute I = Integral of F over (A,B), with error
+gams	H2A1A2
+by	Piessens, Robert
+
+file	slatec/src/qk51.f
+for	To compute I = Integral of F over (A,B) with error
+gams	H2A1A2
+by	Piessens, Robert
+
+file	slatec/src/qk61.f
+for	To compute I = Integral of F over (A,B) with error
+gams	H2A1A2
+by	Piessens, Robert
+
+file	slatec/src/qmomo.f
+for	This routine computes modified Chebyshev moments.  The K-th
+gams	H2A2A1, C3A2
+by	Piessens, Robert
+
+file	slatec/src/qnc79.f
+for	Integrate a function using a 7-point adaptive Newton-Cotes
+gams	H2A1A1
+by	Kahaner, D. K., (NBS)
+
+file	slatec/src/qng.f
+for	The routine calculates an approximation result to a
+gams	H2A1A1
+by	Piessens, Robert
+
+file	slatec/src/qpdoc.f
+for	Documentation for QUADPACK, a package of subprograms for
+gams	H2, Z
+by	Piessens, Robert
+
+file	slatec/src/qpsrt.f
+for	Subsidiary to QAGE, QAGIE, QAGPE, QAGSE, QAWCE, QAWOE and
+by	(UNKNOWN)
+
+file	slatec/src/qrfac.f
+for	Subsidiary to SNLS1, SNLS1E, SNSQ and SNSQE
+by	(UNKNOWN)
+
+file	slatec/src/qrsolv.f
+for	Subsidiary to SNLS1 and SNLS1E
+by	(UNKNOWN)
+
+file	slatec/src/qwgtc.f
+for	This function subprogram is used together with the
+by	Piessens, Robert
+
+file	slatec/src/qwgtf.f
+for	This function subprogram is used together with the
+by	Piessens, Robert
+
+file	slatec/src/qwgts.f
+for	This function subprogram is used together with the
+by	Piessens, Robert
+
+file	slatec/src/r1mach.f
+for	Return floating point machine dependent constants.
+gams	R1
+by	Fox, P. A., (Bell Labs)
+
+file	slatec/src/r1mpyq.f
+for	Subsidiary to SNSQ and SNSQE
+by	(UNKNOWN)
+
+file	slatec/src/r1updt.f
+for	Subsidiary to SNSQ and SNSQE
+by	(UNKNOWN)
+
+file	slatec/src/rc.f
+for	Calculate an approximation to
+gams	C14
+by	Carlson, B. C.
+
+file	slatec/src/rc3jj.f
+for	Evaluate the 3j symbol f(L1) = (  L1   L2 L3)
+gams	C19
+by	GORDON, R. G., HARVARD UNIVERSITY
+
+file	slatec/src/rc3jm.f
+for	Evaluate the 3j symbol g(M2) = (L1 L2   L3  )
+gams	C19
+by	GORDON, R. G., HARVARD UNIVERSITY
+
+file	slatec/src/rc6j.f
+for	Evaluate the 6j symbol h(L1) = {L1 L2 L3}
+gams	C19
+by	GORDON, R. G., HARVARD UNIVERSITY
+
+file	slatec/src/rd.f
+for	Compute the incomplete or complete elliptic integral of the
+gams	C14
+by	Carlson, B. C.
+
+file	slatec/src/reort.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/rf.f
+for	Compute the incomplete or complete elliptic integral of the
+gams	C14
+by	Carlson, B. C.
+
+file	slatec/src/rj.f
+for	Compute the incomplete or complete (X or Y or Z is zero)
+gams	C14
+by	Carlson, B. C.
+
+file	slatec/src/rkfab.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/rpqr79.f
+for	Find the zeros of a polynomial with real coefficients.
+gams	F1A1A
+by	Vandevender, W. H., (SNLA)
+
+file	slatec/src/rpzero.f
+for	Find the zeros of a polynomial with real coefficients.
+gams	F1A1A
+by	Kahaner, D. K., (NBS)
+
+file	slatec/src/rsco.f
+for	Subsidiary to DEBDF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/rwupdt.f
+for	Subsidiary to SNLS1 and SNLS1E
+by	(UNKNOWN)
+
+file	slatec/src/s1merg.f
+for	Merge two strings of ascending real numbers.
+by	(UNKNOWN)
+
+file	slatec/src/sbocls.f
+for	Solve the bounded and constrained least squares
+gams	K1A2A, G2E, G2H1, G2H2
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/sbols.f
+for	Solve the problem
+gams	K1A2A, G2E, G2H1, G2H2
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/sbolsm.f
+for	Subsidiary to SBOCLS and SBOLS
+by	(UNKNOWN)
+
+file	slatec/src/sclosm.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/scoef.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/scov.f
+for	Calculate the covariance matrix for a nonlinear data
+gams	K1B1
+by	Hiebert, K. L., (SNLA)
+
+file	slatec/src/sdaini.f
+for	Initialization routine for SDASSL.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/src/sdajac.f
+for	Compute the iteration matrix for SDASSL and form the
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/src/sdanrm.f
+for	Compute vector norm for SDASSL.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/src/sdaslv.f
+for	Linear system solver for SDASSL.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/src/sdassl.f
+for	This code solves a system of differential/algebraic
+gams	I1A2
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/src/sdastp.f
+for	Perform one step of the SDASSL integration.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/src/sdatrp.f
+for	Interpolation routine for SDASSL.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/src/sdawts.f
+for	Set error weight vector for SDASSL.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/src/sdcor.f
+for	Subroutine SDCOR computes corrections to the Y array.
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/sdcst.f
+for	SDCST sets coefficients used by the core integrator SDSTP.
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/sdntl.f
+for	Subroutine SDNTL is called to set parameters on the first
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/sdntp.f
+for	Subroutine SDNTP interpolates the K-th derivative of Y at
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/sdpsc.f
+for	Subroutine SDPSC computes the predicted YH values by
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/sdpst.f
+for	Subroutine SDPST evaluates the Jacobian matrix of the right
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/sdriv1.f
+for	The function of SDRIV1 is to solve N (200 or fewer)
+gams	I1A2, I1A1B
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/sdriv2.f
+for	The function of SDRIV2 is to solve N ordinary differential
+gams	I1A2, I1A1B
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/sdriv3.f
+for	The function of SDRIV3 is to solve N ordinary differential
+gams	I1A2, I1A1B
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/sdscl.f
+for	Subroutine SDSCL rescales the YH array whenever the step
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/sdstp.f
+for	SDSTP performs one step of the integration of an initial
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/sdzro.f
+for	SDZRO searches for a zero of a function F(N, T, Y, IROOT)
+by	Kahaner, D. K., (NIST)
+
+file	slatec/src/sgeev.f
+for	Compute the eigenvalues and, optionally, the eigenvectors
+gams	D4A2
+by	Kahaner, D. K., (NBS)
+
+file	slatec/src/sgefs.f
+for	Solve a general system of linear equations.
+gams	D2A1
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/sgeir.f
+for	Solve a general system of linear equations.  Iterative
+gams	D2A1
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/sglss.f
+for	Solve a linear least squares problems by performing a QR
+gams	D9, D5
+by	Manteuffel, T. A., (LANL)
+
+file	slatec/src/sintrp.f
+for	Approximate the solution at XOUT by evaluating the
+gams	I1A1B
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/slvs.f
+for	Subsidiary to DEBDF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/smout.f
+for	Subsidiary to FC and SBOCLS
+by	(UNKNOWN)
+
+file	slatec/src/snbco.f
+for	Factor a band matrix using Gaussian elimination and
+gams	D2A2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/snbdi.f
+for	Compute the determinant of a band matrix using the factors
+gams	D3A2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/snbfa.f
+for	Factor a real band matrix by elimination.
+gams	D2A2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/snbfs.f
+for	Solve a general nonsymmetric banded system of linear
+gams	D2A2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/snbir.f
+for	Solve a general nonsymmetric banded system of linear
+gams	D2A2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/snbsl.f
+for	Solve a real band system using the factors computed by
+gams	D2A2
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/snls1.f
+for	Minimize the sum of the squares of M nonlinear functions
+gams	K1B1A1, K1B1A2
+by	Hiebert, K. L., (SNLA)
+
+file	slatec/src/snls1e.f
+for	An easy-to-use code which minimizes the sum of the squares
+gams	K1B1A1, K1B1A2
+by	Hiebert, K. L., (SNLA)
+
+file	slatec/src/snsq.f
+for	Find a zero of a system of a N nonlinear functions in N
+gams	F2A
+by	Hiebert, K. L., (SNLA)
+
+file	slatec/src/snsqe.f
+for	An easy-to-use code to find a zero of a system of N
+gams	F2A
+by	Hiebert, K. L., (SNLA)
+
+file	slatec/src/sods.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/sopenm.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/sos.f
+for	Solve a square system of nonlinear equations.
+gams	F2A
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/soseqs.f
+for	Subsidiary to SOS
+by	(UNKNOWN)
+
+file	slatec/src/sossol.f
+for	Subsidiary to SOS
+by	(UNKNOWN)
+
+file	slatec/src/speli4.f
+for	Subsidiary to SEPX4
+by	(UNKNOWN)
+
+file	slatec/src/spelip.f
+for	Subsidiary to SEPELI
+by	(UNKNOWN)
+
+file	slatec/src/spincw.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/spinit.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/splp.f
+for	Solve linear programming problems involving at
+gams	G2A2
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/splpce.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/splpdm.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/splpfe.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/splpfl.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/splpmn.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/splpmu.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/splpup.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/spofs.f
+for	Solve a positive definite symmetric system of linear
+gams	D2B1B
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/spoir.f
+for	Solve a positive definite symmetric system of linear
+gams	D2B1B
+by	Voorhees, E. A., (LANL)
+
+file	slatec/src/spopt.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/spperm.f
+for	Rearrange a given array according to a prescribed
+gams	N8
+by	McClain, M. A., (NIST)
+
+file	slatec/src/spsort.f
+for	Return the permutation vector generated by sorting a given
+gams	N6A1B, N6A2B
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/sreadp.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/ssiev.f
+for	Compute the eigenvalues and, optionally, the eigenvectors
+gams	D4A1
+by	Kahaner, D. K., (NBS)
+
+file	slatec/src/ssort.f
+for	Sort an array and optionally make the same interchanges in
+gams	N6A2B
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/steps.f
+for	Integrate a system of first order ordinary differential
+gams	I1A1B
+by	Shampine, L. F., (SNLA)
+
+file	slatec/src/stod.f
+for	Subsidiary to DEBDF
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/stor1.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/stway.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/suds.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/svco.f
+for	Subsidiary to DEBDF
+by	(UNKNOWN)
+
+file	slatec/src/svd.f
+for	Perform the singular value decomposition of a rectangular
+by	(UNKNOWN)
+
+file	slatec/src/svecs.f
+for	Subsidiary to BVSUP
+by	Watts, H. A., (SNLA)
+
+file	slatec/src/svout.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/swritp.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/tevlc.f
+for	Subsidiary to CBLKTR
+by	(UNKNOWN)
+
+file	slatec/src/tevls.f
+for	Subsidiary to BLKTRI
+by	(UNKNOWN)
+
+file	slatec/src/tri3.f
+for	Subsidiary to GENBUN
+by	(UNKNOWN)
+
+file	slatec/src/tridq.f
+for	Subsidiary to POIS3D
+by	(UNKNOWN)
+
+file	slatec/src/tris4.f
+for	Subsidiary to SEPX4
+by	(UNKNOWN)
+
+file	slatec/src/trisp.f
+for	Subsidiary to SEPELI
+by	(UNKNOWN)
+
+file	slatec/src/trix.f
+for	Subsidiary to GENBUN
+by	(UNKNOWN)
+
+file	slatec/src/u11ls.f
+for	Subsidiary to LLSIA
+by	(UNKNOWN)
+
+file	slatec/src/u11us.f
+for	Subsidiary to ULSIA
+by	(UNKNOWN)
+
+file	slatec/src/u12ls.f
+for	Subsidiary to LLSIA
+by	(UNKNOWN)
+
+file	slatec/src/u12us.f
+for	Subsidiary to ULSIA
+by	(UNKNOWN)
+
+file	slatec/src/ulsia.f
+for	Solve an underdetermined linear system of equations by
+gams	D9
+by	Manteuffel, T. A., (LANL)
+
+file	slatec/src/usrmat.f
+for	Subsidiary to SPLP
+by	(UNKNOWN)
+
+file	slatec/src/vnwrms.f
+for	Subsidiary to DEBDF
+by	(UNKNOWN)
+
+file	slatec/src/wnlit.f
+for	Subsidiary to WNNLS
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/wnlsm.f
+for	Subsidiary to WNNLS
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/wnlt1.f
+for	Subsidiary to WNLIT
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/wnlt2.f
+for	Subsidiary to WNLIT
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/wnlt3.f
+for	Subsidiary to WNLIT
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/wnnls.f
+for	Solve a linearly constrained least squares problem with
+gams	K1A2A
+by	Hanson, R. J., (SNLA)
+
+file	slatec/src/xadd.f
+for	To provide single-precision floating-point arithmetic
+gams	A3D
+by	LOZIER, DANIEL W., (NATIONAL BUREAU OF STANDARDS)
+
+file	slatec/src/xadj.f
+for	To provide single-precision floating-point arithmetic
+gams	A3D
+by	LOZIER, DANIEL W., (NATIONAL BUREAU OF STANDARDS)
+
+file	slatec/src/xc210.f
+for	To provide single-precision floating-point arithmetic
+gams	A3D
+by	LOZIER, DANIEL W., (NATIONAL BUREAU OF STANDARDS)
+
+file	slatec/src/xcon.f
+for	To provide single-precision floating-point arithmetic
+gams	A3D
+by	LOZIER, DANIEL W., (NATIONAL BUREAU OF STANDARDS)
+
+file	slatec/src/xerbla.f
+for	Error handler for the Level 2 and Level 3 BLAS Routines.
+gams	R3
+by	Dongarra, J. J., (ANL)
+
+file	slatec/src/xerclr.f
+for	Reset current error number to zero.
+gams	R3C
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/xercnt.f
+for	Allow user control over handling of errors.
+gams	R3C
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/xerdmp.f
+for	Print the error tables and then clear them.
+gams	R3C
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/xerhlt.f
+for	Abort program execution and print error message.
+gams	R3C
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/xermax.f
+for	Set maximum number of times any error message is to be
+gams	R3C
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/xermsg.f
+for	Process error messages for SLATEC and other libraries.
+gams	R3C
+by	Fong, Kirby, (NMFECC at LLNL)
+
+file	slatec/src/xerprn.f
+for	Print error messages processed by XERMSG.
+gams	R3C
+by	Fong, Kirby, (NMFECC at LLNL)
+
+file	slatec/src/xersve.f
+for	Record that an error has occurred.
+gams	R3
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/xgetf.f
+for	Return the current value of the error control flag.
+gams	R3C
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/xgetua.f
+for	Return unit number(s) to which error messages are being
+gams	R3C
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/xgetun.f
+for	Return the (first) output file to which error messages
+gams	R3C
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/xlegf.f
+for	Compute normalized Legendre polynomials and associated
+gams	C3A2, C9
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/src/xnrmp.f
+for	Compute normalized Legendre polynomials.
+gams	C3A2, C9
+by	LOZIER, DANIEL W., (NATIONAL BUREAU OF STANDARDS)
+
+file	slatec/src/xpmu.f
+for	To compute the values of Legendre functions for XLEGF.
+gams	C3A2, C9
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/src/xpmup.f
+for	To compute the values of Legendre functions for XLEGF.
+gams	C3A2, C9
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/src/xpnrm.f
+for	To compute the values of Legendre functions for XLEGF.
+gams	C3A2, C9
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/src/xpqnu.f
+for	To compute the values of Legendre functions for XLEGF.
+gams	C3A2, C9
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/src/xpsi.f
+for	To compute values of the Psi function for XLEGF.
+gams	C7C
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/src/xqmu.f
+for	To compute the values of Legendre functions for XLEGF.
+gams	C3A2, C9
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/src/xqnu.f
+for	To compute the values of Legendre functions for XLEGF.
+gams	C3A2, C9
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/src/xred.f
+for	To provide single-precision floating-point arithmetic
+gams	A3D
+by	LOZIER, DANIEL W., (NATIONAL BUREAU OF STANDARDS)
+
+file	slatec/src/xset.f
+for	To provide single-precision floating-point arithmetic
+gams	A3D
+by	LOZIER, DANIEL W., (NATIONAL BUREAU OF STANDARDS)
+
+file	slatec/src/xsetf.f
+for	Set the error control flag.
+gams	R3A
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/xsetua.f
+for	Set logical unit numbers (up to 5) to which error
+gams	R3B
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/xsetun.f
+for	Set output file to which error messages are to be sent.
+gams	R3B
+by	Jones, R. E., (SNLA)
+
+file	slatec/src/yairy.f
+for	Subsidiary to BESJ and BESY
+by	Amos, D. E., (SNLA)
+
+file	slatec/src/zabs.f
+for	Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zacai.f
+for	Subsidiary to ZAIRY
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zacon.f
+for	Subsidiary to ZBESH and ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zairy.f
+for	Compute the Airy function Ai(z) or its derivative dAi/dz
+gams	C10D
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zasyi.f
+for	Subsidiary to ZBESI and ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zbesh.f
+for	Compute a sequence of the Hankel functions H(m,a,z)
+gams	C10A4
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zbesi.f
+for	Compute a sequence of the Bessel functions I(a,z) for
+gams	C10B4
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zbesj.f
+for	Compute a sequence of the Bessel functions J(a,z) for
+gams	C10A4
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zbesk.f
+for	Compute a sequence of the Bessel functions K(a,z) for
+gams	C10B4
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zbesy.f
+for	Compute a sequence of the Bessel functions Y(a,z) for
+gams	C10A4
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zbinu.f
+for	Subsidiary to ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK and ZBIRY
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zbiry.f
+for	Compute the Airy function Bi(z) or its derivative dBi/dz
+gams	C10D
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zbknu.f
+for	Subsidiary to ZAIRY, ZBESH, ZBESI and ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zbuni.f
+for	Subsidiary to ZBESI and ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zbunk.f
+for	Subsidiary to ZBESH and ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zdiv.f
+for	Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zexp.f
+for	Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zkscl.f
+for	Subsidiary to ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zlog.f
+for	Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zmlri.f
+for	Subsidiary to ZBESI and ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zmlt.f
+for	Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zrati.f
+for	Subsidiary to ZBESH, ZBESI and ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zs1s2.f
+for	Subsidiary to ZAIRY and ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zseri.f
+for	Subsidiary to ZBESI and ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zshch.f
+for	Subsidiary to ZBESH and ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zsqrt.f
+for	Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zuchk.f
+for	Subsidiary to SERI, ZUOIK, ZUNK1, ZUNK2, ZUNI1, ZUNI2 and
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zunhj.f
+for	Subsidiary to ZBESI and ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zuni1.f
+for	Subsidiary to ZBESI and ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zuni2.f
+for	Subsidiary to ZBESI and ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zunik.f
+for	Subsidiary to ZBESI and ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zunk1.f
+for	Subsidiary to ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zunk2.f
+for	Subsidiary to ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zuoik.f
+for	Subsidiary to ZBESH, ZBESI and ZBESK
+by	Amos, D. E., (SNL)
+
+file	slatec/src/zwrsk.f
+for	Subsidiary to ZBESI and ZBESK
+by	Amos, D. E., (SNL)
+

@@ -1,0 +1,133 @@
+*DECK DQCPSI
+      SUBROUTINE DQCPSI (LUN, KPRINT, IPASS)
+C***BEGIN PROLOGUE  DQCPSI
+C***PURPOSE  Quick check for DPSIFN.
+C***LIBRARY   SLATEC
+C***KEYWORDS  QUICK CHECK
+C***AUTHOR  Amos, D. E., (SNLA)
+C***DESCRIPTION
+C
+C     ABSTRACT  * A DOUBLE PRECISION ROUTINE *
+C     DQCPSI IS A QUICK CHECK ROUTINE WHICH EXERCISES THE MAJOR
+C     LOOPS IN SUBROUTINE DPSIFN(X,N,KODE,M,ANS,NZ,IERR) FOR DERIVATIVES
+C     OF THE PSI FUNCTION.  FOR N=0, THE PSI FUNCTIONS ARE CALCULATED
+C     EXPLICITLY AND CHECKED AGAINST EVALUATIONS FROM DPSIFN. FOR
+C     N.GT.0, CONSISTENCY CHECKS ARE MADE BY COMPARING A SEQUENCE
+C     AGAINST SINGLE EVALUATIONS OF DPSIFN, ONE AT A TIME.
+C     IF THE RELATIVE ERROR IS LESS THAN 1000 TIMES THE MAXIMUM OF
+C     UNIT ROUNDOFF AND 1.0D-18, THEN THE TEST IS PASSED--IF NOT,
+C     THEN X, THE VALUES TO BE COMPARED, THE RELATIVE ERROR AND
+C     PARAMETERS KODE AND N ARE WRITTEN ON LOGICAL UNIT 6 WHERE N IS
+C     THE ORDER OF THE DERIVATIVE AND KODE IS A SELECTION PARAMETER
+C     DEFINED IN THE PROLOGUE TO DPSIFN.
+C
+C     FUNCTIONS I1MACH AND D1MACH MUST BE INITIALIZED ACCORDING TO THE
+C     PROLOGUE IN EACH FUNCTION FOR THE MACHINE ENVIRONMENT BEFORE
+C     DQCPSI OR DPSIFN CAN BE EXECUTED.
+C
+C***ROUTINES CALLED  D1MACH, DPSIFN
+C***REVISION HISTORY  (YYMMDD)
+C   820601  DATE WRITTEN
+C   890911  Removed unnecessary intrinsics.  (WRB)
+C   890911  REVISION DATE from Version 3.2
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C***END PROLOGUE  DQCPSI
+      INTEGER I, IERR, IFLG, IX, KODE, LUN, M, N, NM, NN, NZ
+      DOUBLE PRECISION ER, EULER, PSI1, PSI2, R1M4, S, TOL, X
+      DOUBLE PRECISION D1MACH
+      DIMENSION PSI1(3), PSI2(20)
+      DATA EULER /0.5772156649015328606D0/
+C***FIRST EXECUTABLE STATEMENT  DQCPSI
+      R1M4 = D1MACH(4)
+      TOL = 1000.0D0*MAX(R1M4,1.0D-18)
+      IF(KPRINT.GE.3)WRITE (LUN,99999)
+99999 FORMAT (1H1//35H QUICK CHECK DIAGNOSTICS FOR DPSIFN//)
+C-----------------------------------------------------------------------
+C     CHECK PSI(I) AND PSI(I-0.5), I=1,2,...
+C-----------------------------------------------------------------------
+      IFLG = 0
+      N = 0
+      DO 50 KODE=1,2
+        DO 40 M=1,2
+          S = -EULER + (M-1)*(-2.0D0*LOG(2.0D0))
+          X = 1.0D0 - (M-1)*0.5D0
+          DO 30 I=1,20
+            CALL DPSIFN(X, N, KODE, 1, PSI2, NZ, IERR)
+            PSI1(1) = -S + (KODE-1)*LOG(X)
+            ER = ABS((PSI1(1)-PSI2(1))/PSI1(1))
+            IF (ER.LE.TOL) GO TO 20
+            IF (IFLG.NE.0) GO TO 10
+            IF(KPRINT.GE.2)WRITE (LUN,99998)
+99998       FORMAT (8X, 1HX, 13X, 4HPSI1, 11X, 4HPSI2, 9X, 7HREL ERR,
+     *       5X, 4HKODE, 3X, 1HN)
+   10       CONTINUE
+            IFLG = IFLG + 1
+            IF(KPRINT.GE.2)
+     *      WRITE (LUN,99997) X, PSI1(1), PSI2(I), ER, KODE, N
+99997       FORMAT (4E15.6, 2I5)
+            IF (IFLG.GT.200) GO TO 150
+   20       CONTINUE
+            S = S + 1.0D0/X
+            X = X + 1.0D0
+   30     CONTINUE
+   40   CONTINUE
+   50 CONTINUE
+C-----------------------------------------------------------------------
+C     CHECK SMALL X.LT.UNIT ROUNDOFF
+C-----------------------------------------------------------------------
+      KODE = 1
+      X = TOL/10000.0D0
+      N = 1
+      CALL DPSIFN(X, N, KODE, 1, PSI2, NZ, IERR)
+      PSI1(1) = X**(-N-1)
+      ER = ABS((PSI1(1)-PSI2(1))/PSI1(1))
+      IF (ER.LE.TOL) GO TO 70
+      IF (IFLG.NE.0) GO TO 60
+      IF(KPRINT.GE.2)WRITE (LUN,99998)
+   60 CONTINUE
+      IFLG = IFLG + 1
+      IF(KPRINT.GE.2)
+     * WRITE (LUN,99997) X, PSI1(1), PSI2(1), ER, KODE, N
+   70 CONTINUE
+C-----------------------------------------------------------------------
+C     CONSISTENCY TESTS FOR N.GE.0
+C-----------------------------------------------------------------------
+      DO 130 KODE=1,2
+        DO 120 M=1,5
+          DO 110 N=1,16,5
+            NN = N - 1
+            X = 0.1D0
+            DO 100 IX=1,25,2
+              X = X + 1.0D0
+              CALL DPSIFN(X, NN, KODE, M, PSI2, NZ, IERR)
+              DO 90 I=1,M
+                NM = NN + I - 1
+                CALL DPSIFN(X, NM, KODE, 1, PSI1, NZ, IERR)
+                ER = ABS((PSI2(I)-PSI1(1))/PSI1(1))
+                IF (ER.LT.TOL) GO TO 90
+                IF (IFLG.NE.0) GO TO 80
+                IF(KPRINT.GE.2)WRITE (LUN,99998)
+   80           CONTINUE
+                IFLG = IFLG + 1
+                IF(KPRINT.GE.2)
+     *          WRITE (LUN,99997) X, PSI1(1), PSI2(I), ER, KODE, NM
+   90         CONTINUE
+  100       CONTINUE
+  110     CONTINUE
+  120   CONTINUE
+  130 CONTINUE
+      IF (IFLG.NE.0.OR.KPRINT.LT.3) GO TO 140
+      WRITE (LUN,99996)
+99996 FORMAT (//16H QUICK CHECKS OK//)
+  140 CONTINUE
+      IPASS=0
+      IF(IFLG.EQ.0)IPASS=1
+      RETURN
+  150 CONTINUE
+      IF(KPRINT.GE.2)WRITE (LUN,99994)
+99994 FORMAT (//52H PROCESSING OF MAIN LOOPS TERMINATED BECAUSE THE NUM,
+     * 36HBER OF DIAGNOSTIC PRINTS EXCEEDS 200//)
+      IPASS=0
+      IF(IFLG.EQ.0)IPASS=1
+      RETURN
+      END

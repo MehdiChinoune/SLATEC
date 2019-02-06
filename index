@@ -1,0 +1,148 @@
+#	SLATEC Common Mathematical Library, Version 4.1, July 1993
+#	a comprehensive software library containing over
+#	1400 general purpose mathematical and statistical routines
+#	written in Fortran 77.
+
+file	slatec/readme
+for	overview of slatec
+
+file	slatec/slatec_src.tar.Z
+for	(FOR NON EMAIL USERS ONLY) Compressed tar file of complete
+,	SLATEC source. (4027585 bytes)
+,	Individual routines can be retrieved from src subdirectory.
+
+file	slatec/slatec_chk.tar.Z
+for	(FOR NON EMAIL USERS ONLY) Compressed tar file of SLATEC
+,	quick checks. (671029 bytes)
+,	Individual routines can be retrieved from chk subdirectory.
+
+lib	slatec/err
+for	xersav and other error handling from old version of SLATEC
+,	used by several other packages in netlib
+
+file	slatec/toc
+for	SLATEC table of contents
+size	227 kB
+
+file	slatec/gams
+for	GAMS classification
+
+file	slatec/guide
+for	Guide to the SLATEC Common Mathematical Library
+
+file	slatec/slatecm.shar
+for	browser for any library using SLATEC prologues
+by	David M Woodcock <dmw@engin.umich.edu>
+age	experimental
+
+lib	slatec/src
+#  This library contains the main SLATEC Fortran source.
+# 
+#  There are five (5) machine specific subprograms (D1MACH,
+#  I1MACH, R1MACH, FDUMP and XERHLT) in the source file.
+#  These are described further in the next two paragraphs.
+# 
+#  Machine constants, such as word length and maximum
+#  positive exponent, are supplied to routines in SLATEC
+#  source via the functions D1MACH, I1MACH and R1MACH.  Make
+#  sure that each machine type at your site returns the
+#  correct values for these functions.  In most cases, this
+#  only requires replacing a "C" with a blank in the first
+#  column of several lines of each function.  The copies of
+#  D1MACH, I1MACH and R1MACH included in the source have all
+#  the machine specific constants commented out with a "C" in
+#  column one.
+# 
+#  The standard error handler has two machine dependent
+#  subroutines in it: FDUMP and XERHLT.  The routine XERHLT
+#  is called via XERMSG when a fatal error is encountered and
+#  must terminate the job.  The copy of XERHLT included in
+#  this file contains a "STOP" and thus does stop execution.
+#  However, in most circumstances, this normal exit is
+#  unacceptable when an error has been detected and this
+#  subroutine should be replaced at each site.  The routine
+#  FDUMP is called via XERMSG when traceback information is
+#  desired.  This routine should provide the traceback
+#  information to appropriate output files.  The copy of
+#  FDUMP included in the source does not produce traceback
+#  information.  If this function is desired, it must be
+#  implemented at each site.
+# 
+#  It is assumed that all ANSI-77 standard intrinsic
+#  functions are vendor-supplied and, therefore, are not
+#  included in the main SLATEC source.  In the event that
+#  some of these subprograms are not resident on the system
+#  (e.g. DINT on CDC), many are included in the subsid. (See
+#  below.)     In some cases, the higher special
+#  functions (e.g. error functions, Bessel functions)
+#  anticipate that certain errors will be handled in the
+#  intrinsic functions.  This may not be done appropriately
+#  in vendor-supplied intrinsic functions and may cause
+#  difficulties.
+
+lib	slatec/lin
+for	the BLAS, LINPACK, EISPACK, SLAP subset of SLATEC
+# removed from slatec/src to make the main source more accessible
+# see also /netlib/blas, /netlib/linpack, /netlib/eispack, /netlib/slap
+
+lib	slatec/fishfft
+for	the FISHPACK, FFTPACK subset of SLATEC
+# removed from slatec/src to make the main source more accessible
+# see also /netlib/fishpack, /netlib/fftpack
+
+lib	slatec/fnlib
+for	the FNLIB subset of SLATEC
+# removed from slatec/src to make the main source more accessible
+# see also /netlib/fn, which is another version;  we don't really
+# know which one is more recent or bug-free.  If you figure it out
+# please send email to ehg@research.bell-labs.com.
+
+lib	slatec/pchip
+for	piecewise cubic hermite approximation
+# removed from slatec/src to make the main source more accessible
+# see also /netlib/pchip
+
+lib	slatec/chk
+for	54 quick check drivers
+#  If some of the quick checks fail on certain machines, it
+#  does not necessarily indicate a problem in the source, but
+#  possibly in the quick checks themselves, or the machine
+#  architecture or the operating system or the compiler or
+#  vendor or user supplied software.
+#  The main programs (quick check drivers) are test01.f,...,test54.f.
+#  On the VAX under VMS, the quick checks should be run with
+#  KPRINT = 0 or 1 (zero or one).
+
+file	slatec/docinstall
+for	installation note for the Los Alamos documentation program
+
+file	slatec/slprep
+for	Los Alamos on-line documentation
+#  generates four files which comprise the database for the on-line
+#  documentation program
+
+file	slatec/sladoc
+for	on-line documentation
+
+file	slatec/subsid
+for	subsidiary programs for slprep and sladoc
+
+file	slatec/spfun
+for	elementary special functions
+
+file	slatec/spfunchk
+for	quick checks for the elementary special functions
+
+file	slatec/install
+for	installation note
+
+file	slatec/list
+for	list of subprograms
+
+file	slatec/tree1
+for	list of routines directly referenced
+
+file	slatec/tree
+for	list of routines directly or indirectly referenced
+
+

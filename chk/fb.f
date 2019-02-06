@@ -1,0 +1,18 @@
+*DECK FB
+      REAL FUNCTION FB (X)
+C***BEGIN PROLOGUE  FB
+C***PURPOSE  Subsidiary to BSPCK.
+C***LIBRARY   SLATEC
+C***TYPE      SINGLE PRECISION (FB-S, DFB-D)
+C***AUTHOR  (UNKNOWN)
+C***ROUTINES CALLED  (NONE)
+C***REVISION HISTORY  (YYMMDD)
+C   ??????  DATE WRITTEN
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C   930214  Added TYPE statement.  (WRB)
+C***END PROLOGUE  FB
+      REAL X
+C***FIRST EXECUTABLE STATEMENT  FB
+      FB = 1.0E0
+      RETURN
+      END

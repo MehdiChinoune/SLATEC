@@ -1,0 +1,20 @@
+*DECK DT5
+      DOUBLE PRECISION FUNCTION DT5 (X)
+C***BEGIN PROLOGUE  DT5
+C***PURPOSE  Subsidiary to
+C***LIBRARY   SLATEC
+C***AUTHOR  (UNKNOWN)
+C***ROUTINES CALLED  DF5S
+C***REVISION HISTORY  (YYMMDD)
+C   ??????  DATE WRITTEN
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C***END PROLOGUE  DT5
+      DOUBLE PRECISION A,B,DF5S,X,X1,Y
+C***FIRST EXECUTABLE STATEMENT  DT5
+      A = 0.0D+00
+      B = 0.1D+01
+      X1 = X+0.1D+01
+      Y = (B-A)/X1+A
+      DT5 = (B-A)*DF5S(Y)/X1/X1
+      RETURN
+      END

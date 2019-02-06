@@ -1,0 +1,19 @@
+*DECK F1F
+      REAL FUNCTION F1F (X)
+C***BEGIN PROLOGUE  F1F
+C***PURPOSE  Subsidiary to
+C***LIBRARY   SLATEC
+C***AUTHOR  (UNKNOWN)
+C***ROUTINES CALLED  (NONE)
+C***REVISION HISTORY  (YYMMDD)
+C   ??????  DATE WRITTEN
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C***END PROLOGUE  F1F
+      REAL X,X1,Y
+C***FIRST EXECUTABLE STATEMENT  F1F
+      X1 = X+1.0
+      F1F = 5.0/X1/X1
+      Y = 5.0/X1
+      IF(Y.GT.3.1415926535897932) F1F = 0.0
+      RETURN
+      END

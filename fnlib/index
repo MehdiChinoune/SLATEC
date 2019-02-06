@@ -1,0 +1,805 @@
+file	slatec/fnlib/acosh.f
+for	Compute the arc hyperbolic cosine.
+gams	C4C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/ai.f
+for	Evaluate the Airy function.
+gams	C10D
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/aie.f
+for	Calculate the Airy function for a negative argument and an
+gams	C10D
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/albeta.f
+for	Compute the natural logarithm of the complete Beta
+gams	C7B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/algams.f
+for	Compute the logarithm of the absolute value of the Gamma
+gams	C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/ali.f
+for	Compute the logarithmic integral.
+gams	C5
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/alngam.f
+for	Compute the logarithm of the absolute value of the Gamma
+gams	C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/alnrel.f
+for	Evaluate ln(1+X) accurate in the sense of relative error.
+gams	C4B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/asinh.f
+for	Compute the arc hyperbolic sine.
+gams	C4C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/atanh.f
+for	Compute the arc hyperbolic tangent.
+gams	C4C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/besi0.f
+for	Compute the hyperbolic Bessel function of the first kind
+gams	C10B1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/besi0e.f
+for	Compute the exponentially scaled modified (hyperbolic)
+gams	C10B1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/besi1.f
+for	Compute the modified (hyperbolic) Bessel function of the
+gams	C10B1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/besi1e.f
+for	Compute the exponentially scaled modified (hyperbolic)
+gams	C10B1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/besj0.f
+for	Compute the Bessel function of the first kind of order
+gams	C10A1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/besj1.f
+for	Compute the Bessel function of the first kind of order one.
+gams	C10A1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/besk0.f
+for	Compute the modified (hyperbolic) Bessel function of the
+gams	C10B1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/besk0e.f
+for	Compute the exponentially scaled modified (hyperbolic)
+gams	C10B1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/besk1.f
+for	Compute the modified (hyperbolic) Bessel function of the
+gams	C10B1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/besk1e.f
+for	Compute the exponentially scaled modified (hyperbolic)
+gams	C10B1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/beskes.f
+for	Compute a sequence of exponentially scaled modified Bessel
+gams	C10B3
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/besks.f
+for	Compute a sequence of modified Bessel functions of the
+gams	C10B3
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/besy0.f
+for	Compute the Bessel function of the second kind of order
+gams	C10A1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/besy1.f
+for	Compute the Bessel function of the second kind of order
+gams	C10A1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/beta.f
+for	Compute the complete Beta function.
+gams	C7B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/betai.f
+for	Calculate the incomplete Beta function.
+gams	C7F
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/bi.f
+for	Evaluate the Bairy function (the Airy function of the
+gams	C10D
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/bie.f
+for	Calculate the Bairy function for a negative argument and an
+gams	C10D
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/binom.f
+for	Compute the binomial coefficients.
+gams	C1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/c0lgmc.f
+for	Evaluate (Z+0.5)*LOG((Z+1.)/Z) - 1.0 with relative
+gams	C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/c9lgmc.f
+for	Compute the log gamma correction factor so that
+gams	C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/c9ln2r.f
+for	Evaluate LOG(1+Z) from second order relative accuracy so
+gams	C4B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/cacos.f
+for	Compute the complex arc cosine.
+gams	C4A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/cacosh.f
+for	Compute the arc hyperbolic cosine.
+gams	C4C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/carg.f
+for	Compute the argument of a complex number.
+gams	A4A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/casin.f
+for	Compute the complex arc sine.
+gams	C4A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/casinh.f
+for	Compute the arc hyperbolic sine.
+gams	C4C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/catan.f
+for	Compute the complex arc tangent.
+gams	C4A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/catan2.f
+for	Compute the complex arc tangent in the proper quadrant.
+gams	C4A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/catanh.f
+for	Compute the arc hyperbolic tangent.
+gams	C4C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/cbeta.f
+for	Compute the complete Beta function.
+gams	C7B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/cbrt.f
+for	Compute the cube root.
+gams	C2
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/ccbrt.f
+for	Compute the cube root.
+gams	C2
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/ccosh.f
+for	Compute the complex hyperbolic cosine.
+gams	C4C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/ccot.f
+for	Compute the cotangent.
+gams	C4A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/cexprl.f
+for	Calculate the relative error exponential (EXP(X)-1)/X.
+gams	C4B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/cgamma.f
+for	Compute the complete Gamma function.
+gams	C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/cgamr.f
+for	Compute the reciprocal of the Gamma function.
+gams	C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/chu.f
+for	Compute the logarithmic confluent hypergeometric function.
+gams	C11
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/clbeta.f
+for	Compute the natural logarithm of the complete Beta
+gams	C7B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/clngam.f
+for	Compute the logarithm of the absolute value of the Gamma
+gams	C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/clnrel.f
+for	Evaluate ln(1+X) accurate in the sense of relative error.
+gams	C4B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/clog10.f
+for	Compute the principal value of the complex base 10
+gams	C4B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/cosdg.f
+for	Compute the cosine of an argument in degrees.
+gams	C4A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/cot.f
+for	Compute the cotangent.
+gams	C4A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/cpsi.f
+for	Compute the Psi (or Digamma) function.
+gams	C7C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/csevl.f
+for	Evaluate a Chebyshev series.
+gams	C3A2
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/csinh.f
+for	Compute the complex hyperbolic sine.
+gams	C4C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/ctan.f
+for	Compute the complex tangent.
+gams	C4A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/ctanh.f
+for	Compute the complex hyperbolic tangent.
+gams	C4C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/d9aimp.f
+for	Evaluate the Airy modulus and phase.
+gams	C10D
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/d9atn1.f
+for	Evaluate DATAN(X) from first order relative accuracy so
+gams	C4A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/d9b0mp.f
+for	Evaluate the modulus and phase for the J0 and Y0 Bessel
+gams	C10A1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/d9b1mp.f
+for	Evaluate the modulus and phase for the J1 and Y1 Bessel
+gams	C10A1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/d9chu.f
+for	Evaluate for large Z  Z**A * U(A,B,Z) where U is the
+gams	C11
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/d9gmic.f
+for	Compute the complementary incomplete Gamma function for A
+gams	C7E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/d9gmit.f
+for	Compute Tricomi's incomplete Gamma function for small
+gams	C7E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/d9knus.f
+for	Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*
+gams	C10B3
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/d9lgic.f
+for	Compute the log complementary incomplete Gamma function
+gams	C7E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/d9lgit.f
+for	Compute the logarithm of Tricomi's incomplete Gamma
+gams	C7E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/d9lgmc.f
+for	Compute the log Gamma correction factor so that
+gams	C7E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/d9ln2r.f
+for	Evaluate LOG(1+X) from second order relative accuracy so
+gams	C4B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/d9pak.f
+for	Pack a base 2 exponent into a floating point number.
+gams	A6B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/d9upak.f
+for	Unpack a floating point number X so that X = Y*2**N.
+gams	A6B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dacosh.f
+for	Compute the arc hyperbolic cosine.
+gams	C4C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dai.f
+for	Evaluate the Airy function.
+gams	C10D
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/daie.f
+for	Calculate the Airy function for a negative argument and an
+gams	C10D
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dasinh.f
+for	Compute the arc hyperbolic sine.
+gams	C4C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/datanh.f
+for	Compute the arc hyperbolic tangent.
+gams	C4C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/daws.f
+for	Compute Dawson's function.
+gams	C8C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbesi0.f
+for	Compute the hyperbolic Bessel function of the first kind
+gams	C10B1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbesi1.f
+for	Compute the modified (hyperbolic) Bessel function of the
+gams	C10B1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbesj0.f
+for	Compute the Bessel function of the first kind of order
+gams	C10A1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbesj1.f
+for	Compute the Bessel function of the first kind of order one.
+gams	C10A1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbesk0.f
+for	Compute the modified (hyperbolic) Bessel function of the
+gams	C10B1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbesk1.f
+for	Compute the modified (hyperbolic) Bessel function of the
+gams	C10B1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbesks.f
+for	Compute a sequence of modified Bessel functions of the
+gams	C10B3
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbesy0.f
+for	Compute the Bessel function of the second kind of order
+gams	C10A1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbesy1.f
+for	Compute the Bessel function of the second kind of order
+gams	C10A1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbeta.f
+for	Compute the complete Beta function.
+gams	C7B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbetai.f
+for	Calculate the incomplete Beta function.
+gams	C7F
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbi.f
+for	Evaluate the Bairy function (the Airy function of the
+gams	C10D
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbie.f
+for	Calculate the Bairy function for a negative argument and an
+gams	C10D
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbinom.f
+for	Compute the binomial coefficients.
+gams	C1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbsi0e.f
+for	Compute the exponentially scaled modified (hyperbolic)
+gams	C10B1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbsi1e.f
+for	Compute the exponentially scaled modified (hyperbolic)
+gams	C10B1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbsk0e.f
+for	Compute the exponentially scaled modified (hyperbolic)
+gams	C10B1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbsk1e.f
+for	Compute the exponentially scaled modified (hyperbolic)
+gams	C10B1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dbskes.f
+for	Compute a sequence of exponentially scaled modified Bessel
+gams	C10B3
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dcbrt.f
+for	Compute the cube root.
+gams	C2
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dchu.f
+for	Compute the logarithmic confluent hypergeometric function.
+gams	C11
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dcosdg.f
+for	Compute the cosine of an argument in degrees.
+gams	C4A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dcot.f
+for	Compute the cotangent.
+gams	C4A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dcsevl.f
+for	Evaluate a Chebyshev series.
+gams	C3A2
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/ddaws.f
+for	Compute Dawson's function.
+gams	C8C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/de1.f
+for	Compute the exponential integral E1(X).
+gams	C5
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dei.f
+for	Compute the exponential integral Ei(X).
+gams	C5
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/derf.f
+for	Compute the error function.
+gams	C8A, L5A1E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/derfc.f
+for	Compute the complementary error function.
+gams	C8A, L5A1E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dexprl.f
+for	Calculate the relative error exponential (EXP(X)-1)/X.
+gams	C4B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dfac.f
+for	Compute the factorial function.
+gams	C1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dgami.f
+for	Evaluate the incomplete Gamma function.
+gams	C7E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dgamic.f
+for	Calculate the complementary incomplete Gamma function.
+gams	C7E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dgamit.f
+for	Calculate Tricomi's form of the incomplete Gamma function.
+gams	C7E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dgamlm.f
+for	Compute the minimum and maximum bounds for the argument in
+gams	C7A, R2
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dgamma.f
+for	Compute the complete Gamma function.
+gams	C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dgamr.f
+for	Compute the reciprocal of the Gamma function.
+gams	C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dlbeta.f
+for	Compute the natural logarithm of the complete Beta
+gams	C7B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dlgams.f
+for	Compute the logarithm of the absolute value of the Gamma
+gams	C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dli.f
+for	Compute the logarithmic integral.
+gams	C5
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dlngam.f
+for	Compute the logarithm of the absolute value of the Gamma
+gams	C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dlnrel.f
+for	Evaluate ln(1+X) accurate in the sense of relative error.
+gams	C4B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dpoch.f
+for	Evaluate a generalization of Pochhammer's symbol.
+gams	C1, C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dpoch1.f
+for	Calculate a generalization of Pochhammer's symbol starting
+gams	C1, C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dpsi.f
+for	Compute the Psi (or Digamma) function.
+gams	C7C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dsindg.f
+for	Compute the sine of an argument in degrees.
+gams	C4A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/dspenc.f
+for	Compute a form of Spence's integral due to K. Mitchell.
+gams	C5
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/e1.f
+for	Compute the exponential integral E1(X).
+gams	C5
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/ei.f
+for	Compute the exponential integral Ei(X).
+gams	C5
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/erf.f
+for	Compute the error function.
+gams	C8A, L5A1E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/erfc.f
+for	Compute the complementary error function.
+gams	C8A, L5A1E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/exprel.f
+for	Calculate the relative error exponential (EXP(X)-1)/X.
+gams	C4B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/fac.f
+for	Compute the factorial function.
+gams	C1
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/gami.f
+for	Evaluate the incomplete Gamma function.
+gams	C7E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/gamic.f
+for	Calculate the complementary incomplete Gamma function.
+gams	C7E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/gamit.f
+for	Calculate Tricomi's form of the incomplete Gamma function.
+gams	C7E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/gamlim.f
+for	Compute the minimum and maximum bounds for the argument in
+gams	C7A, R2
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/gamma.f
+for	Compute the complete Gamma function.
+gams	C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/gamr.f
+for	Compute the reciprocal of the Gamma function.
+gams	C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/initds.f
+for	Determine the number of terms needed in an orthogonal
+gams	C3A2
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/inits.f
+for	Determine the number of terms needed in an orthogonal
+gams	C3A2
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/poch.f
+for	Evaluate a generalization of Pochhammer's symbol.
+gams	C1, C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/poch1.f
+for	Calculate a generalization of Pochhammer's symbol starting
+gams	C1, C7A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/psi.f
+for	Compute the Psi (or Digamma) function.
+gams	C7C
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/r9aimp.f
+for	Evaluate the Airy modulus and phase.
+gams	C10D
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/r9atn1.f
+for	Evaluate ATAN(X) from first order relative accuracy so that
+gams	C4A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/r9chu.f
+for	Evaluate for large Z  Z**A * U(A,B,Z) where U is the
+gams	C11
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/r9gmic.f
+for	Compute the complementary incomplete Gamma function for A
+gams	C7E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/r9gmit.f
+for	Compute Tricomi's incomplete Gamma function for small
+gams	C7E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/r9knus.f
+for	Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*
+gams	C10B3
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/r9lgic.f
+for	Compute the log complementary incomplete Gamma function
+gams	C7E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/r9lgit.f
+for	Compute the logarithm of Tricomi's incomplete Gamma
+gams	C7E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/r9lgmc.f
+for	Compute the log Gamma correction factor so that
+gams	C7E
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/r9ln2r.f
+for	Evaluate LOG(1+X) from second order relative accuracy so
+gams	C4B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/r9pak.f
+for	Pack a base 2 exponent into a floating point number.
+gams	A6B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/r9upak.f
+for	Unpack a floating point number X so that X = Y*2**N.
+gams	A6B
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/rand.f
+for	Generate a uniformly distributed random number.
+gams	L6A21
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/rgauss.f
+for	Generate a normally distributed (Gaussian) random number.
+gams	L6A14
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/runif.f
+for	Generate a uniformly distributed random number.
+gams	L6A21
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/sindg.f
+for	Compute the sine of an argument in degrees.
+gams	C4A
+by	Fullerton, W., (LANL)
+
+file	slatec/fnlib/spenc.f
+for	Compute a form of Spence's integral due to K. Mitchell.
+gams	C5
+by	Fullerton, W., (LANL)
+

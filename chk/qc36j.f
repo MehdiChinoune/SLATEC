@@ -1,0 +1,510 @@
+*DECK QC36J
+      SUBROUTINE QC36J (LUN, KPRINT, IPASS)
+C***BEGIN PROLOGUE  QC36J
+C***SUBSIDIARY
+C***PURPOSE  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES RC3JJ,
+C            RC3JM, AND RC6J, WHICH CALCULATE THE WIGNER COEFFICIENTS,
+C            3J AND 6J.
+C***LIBRARY   SLATEC
+C***CATEGORY  C19
+C***TYPE      SINGLE PRECISION (QC36J-S, DQC36J-D)
+C***KEYWORDS  3J COEFFICIENTS, 3J SYMBOLS, 6J COEFFICIENTS, 6J SYMBOLS,
+C             CLEBSCH-GORDAN COEFFICIENTS, QUICK CHECK,
+C             RACAH COEFFICIENTS, VECTOR ADDITION COEFFICIENTS,
+C             WIGNER COEFFICIENTS
+C***AUTHOR  LOZIER, DANIEL W., (NIST)
+C           MCCLAIN, MARJORIE A., (NIST)
+C           SMITH, JOHN M., (NIST AND GEORGE MASON UNIVERSITY)
+C***REFERENCES  MESSIAH, ALBERT., QUANTUM MECHANICS, VOLUME II,
+C               NORTH-HOLLAND PUBLISHING COMPANY, 1963.
+C***ROUTINES CALLED  NUMXER, R1MACH, RC3JJ, RC3JM, RC6J, XERCLR, XSETF
+C***REVISION HISTORY  (YYMMDD)
+C   891129  DATE WRITTEN
+C   910415  Mixed type expressions eliminated; precision of output
+C           formats made uniform for all tests; detail added to output
+C           when KPRINT=2 and a test fails; name of quick check added
+C           to output when KPRINT=3 or KPRINT=2 and a test fails; some
+C           output formats modified for clarity or adherence to SLATEC
+C           guidelines. These changes were done by D. W. Lozier.
+C   930115  Replaced direct calculation of 3j-6j symbols in tests 1, 2,
+C           and 4 with values stored in data statements.  This involved
+C           removing all calls to subroutine RACAH.  These changes were
+C           made by M. McClain.
+C***END PROLOGUE  QC36J
+C
+      INTEGER LUN, KPRINT, IPASS
+C
+      CHARACTER STRING*36, FMT*30, FMT2*13
+      INTEGER IPASS1, IPASS2, IPASS3, IPASS4, IPASS5, NDIM, IER, INDEX,
+     +        I, FIRST, LAST, NSIG, NUMXER, NERR, IERJJ, IERJM
+      PARAMETER(NDIM=15)
+      REAL TOL, L1, L2, L3, M1, M2, M3, L1MIN, L1MAX, M2MIN, M2MAX,
+     +     DIFF(NDIM), R1MACH, X, JJVAL, JMVAL, THRCOF(NDIM),
+     +     SIXCOF(NDIM), R3JJ(8), R3JM(14), R6J(15)
+C
+      DATA R3JJ / 2.78886675511358515993E-1,
+     +           -9.53462589245592315447E-2,
+     +           -6.74199862463242086246E-2,
+     +            1.53311035167966641297E-1,
+     +           -1.56446554693685969725E-1,
+     +            1.09945041215655051079E-1,
+     +           -5.53623569313171943334E-2,
+     +            1.79983545113778583298E-2/
+C
+      DATA R3JM / 2.09158973288615242614E-2,
+     +            8.53756555321524722127E-2,
+     +            9.08295370868692516943E-2,
+     +           -3.89054377846499391700E-2,
+     +           -6.63734970165680635691E-2,
+     +            6.49524040528389395031E-2,
+     +            2.15894310595403759392E-2,
+     +           -7.78912711785239219992E-2,
+     +            3.59764371059543401880E-2,
+     +            5.47301500021263423079E-2,
+     +           -7.59678665956761514629E-2,
+     +           -2.19224445539892113776E-2,
+     +            1.01167744280772202424E-1,
+     +            7.34825726244719704696E-2/
+C
+      DATA R6J / 3.49090513837329977746E-2,
+     +          -3.74302503965979160859E-2,
+     +           1.89086639095956018415E-2,
+     +           7.34244825492864345709E-3,
+     +          -2.35893518508179445858E-2,
+     +           1.91347695521543652000E-2,
+     +           1.28801739772417220844E-3,
+     +          -1.93001836629052653977E-2,
+     +           1.67730594938288876974E-2,
+     +           5.50114727485094871674E-3,
+     +          -2.13543979089683097421E-2,
+     +           3.46036445143538730828E-3,
+     +           2.52095005479558458604E-2,
+     +           1.48399056122171330285E-2,
+     +           2.70857768063318559724E-3/
+C
+C***FIRST EXECUTABLE STATEMENT  QC36J
+C
+C --- INITIALIZATION OF TESTS
+      TOL=100.0*R1MACH(3)
+      IF(KPRINT.GE.2)THEN
+         WRITE(LUN,*)' THIS IS QC36J, A TEST PROGRAM FOR THE ' //
+     +   'SINGLE PRECISION 3J6J PACKAGE.'
+         WRITE(LUN,*)' AN EXPLANATION OF THE VARIOUS ' //
+     +   'TESTS CAN BE FOUND IN THE PROGRAM COMMENTS.'
+         WRITE(LUN,*)
+      ENDIF
+C
+C --- FIND NUMBER OF SIGNIFICANT FIGURES FOR FORMATTING
+      X=1.0/3.0
+      WRITE(STRING,100)X
+  100 FORMAT(F35.25)
+      DO 200 I=1,35
+         IF(STRING(I:I).EQ.'3')THEN
+            FIRST=I
+            GOTO 300
+         ENDIF
+  200 CONTINUE
+  300 CONTINUE
+      DO 400 I=FIRST,35
+         IF(STRING(I:I).NE.'3')THEN
+            LAST=I-1
+            GOTO 500
+         ENDIF
+  400 CONTINUE
+      LAST=36
+  500 CONTINUE
+      NSIG=LAST-FIRST+1
+      FMT(1:16)='(1X,F5.1,T8,G35.'
+      WRITE(FMT(17:18),'(I2)')NSIG
+      FMT(19:27)=',T45,G35.'
+      WRITE(FMT(28:29),'(I2)')NSIG
+      FMT(30:30)=')'
+      FMT2(1:10)='(1X,A,G35.'
+      WRITE(FMT2(11:12),'(I2)')NSIG
+      FMT2(13:13)=')'
+C
+C --- TEST 1: COMPARE RC3JJ VALUES WITH FORMULA
+      IPASS1=1
+      L2=4.5
+      L3=3.5
+      M2=-3.5
+      M3=2.5
+      CALL RC3JJ(L2,L3,M2,M3,L1MIN,L1MAX,THRCOF,NDIM,IER)
+      IF(IER.NE.0)THEN
+         IPASS1=0
+      ELSE
+         DO 550 L1=L1MIN,L1MAX
+            INDEX=INT(L1-L1MIN)+1
+            M1=1.0
+            DIFF(INDEX)=ABS(THRCOF(INDEX)-R3JJ(INDEX))
+            IF(DIFF(INDEX).GT.ABS(R3JJ(INDEX))*TOL)IPASS1=0
+  550    CONTINUE
+      ENDIF
+      IF(KPRINT.GE.3 .OR. (KPRINT.EQ.2.AND.IPASS1.EQ.0))THEN
+         WRITE(LUN,*)' TEST 1, RECURRENCE IN L1, COMPARE VALUES OF 3J ',
+     +               'CALCULATED BY RC3JJ TO'
+         WRITE(LUN,*)' VALUES CALCULATED BY EXPLICIT FORMULA FROM ',
+     +               'MESSIAH''S QUANTUM MECHANICS'
+         WRITE(LUN,600)L2,L3
+  600    FORMAT('              L2 = ',F5.1,'   L3 = ',F5.1)
+         WRITE(LUN,700)M1,M2,M3
+  700    FORMAT(' M1 = ',F5.1,'   M2 = ',F5.1,'   M3 = ',F5.1)
+         IF(IER.NE.0)THEN
+            WRITE(LUN,*)' ERROR RETURNED FROM SUBROUTINE ',
+     +      'RC3JJ: IER =',IER
+         ELSE
+            WRITE(LUN,800)
+  800       FORMAT('    L1',T31,' RC3JJ VALUE',T67,'FORMULA VALUE')
+            DO 900 L1=L1MIN,L1MAX
+               INDEX=INT(L1-L1MIN)+1
+               WRITE(LUN,FMT)L1,THRCOF(INDEX),R3JJ(INDEX)
+               IF(DIFF(INDEX).GT.ABS(R3JJ(INDEX))*TOL)THEN
+                  WRITE(LUN,'(1X,A,F5.1)')'DIFFERENCE EXCEEDS ERROR '//
+     +            'TOLERANCE FOR L1 =',L1
+               ENDIF
+  900       CONTINUE
+         ENDIF
+      ENDIF
+      IF(IPASS1.EQ.0)THEN
+         IF(KPRINT.GE.1)THEN
+            WRITE(LUN,*)' ***** ***** TEST 1 FAILED ***** *****'
+            WRITE(LUN,*)
+         ENDIF
+      ELSE
+         IF(KPRINT.GE.2)THEN
+            WRITE(LUN,*)' ***** ***** TEST 1 PASSED ***** *****'
+            WRITE(LUN,*)
+         ENDIF
+      ENDIF
+C
+C --- TEST 2: COMPARE RC3JM VALUES WITH FORMULA
+      IPASS2=1
+      L1=8.0
+      L2=7.5
+      L3=6.5
+      M1=1.0
+      CALL RC3JM(L1,L2,L3,M1,M2MIN,M2MAX,THRCOF,NDIM,IER)
+      IF(IER.NE.0)THEN
+         IPASS2=0
+      ELSE
+         DO 950 M2=M2MIN,M2MAX
+            INDEX=INT(M2-M2MIN)+1
+            M3=-M1-M2
+            DIFF(INDEX)=ABS(THRCOF(INDEX)-R3JM(INDEX))
+            IF(DIFF(INDEX).GT.ABS(R3JM(INDEX))*TOL)IPASS2=0
+  950    CONTINUE
+      ENDIF
+      IF(KPRINT.GE.3 .OR. (KPRINT.EQ.2.AND.IPASS2.EQ.0))THEN
+         WRITE(LUN,*)' TEST 2, RECURRENCE IN M2, COMPARE VALUES OF 3J ',
+     +               'CALCULATED BY RC3JM TO'
+         WRITE(LUN,*)' VALUES CALCULATED BY EXPLICIT FORMULA FROM ',
+     +               'MESSIAH''S QUANTUM MECHANICS'
+         WRITE(LUN,1000)L1,L2,L3
+ 1000    FORMAT(' L1 = ',F5.1,'   L2 = ',F5.1,'   L3 = ',F5.1)
+         WRITE(LUN,1100)M1
+ 1100    FORMAT(' M1 = ',F5.1,'                M3 = -(M1+M2)')
+         IF(IER.NE.0)THEN
+            WRITE(LUN,*)' ERROR RETURNED FROM SUBROUTINE ',
+     +      'RC3JM: IER =',IER
+         ELSE
+            WRITE(LUN,1200)
+ 1200       FORMAT('    M2',T31,' RC3JM VALUE',T67,'FORMULA VALUE')
+            DO 1300 M2=M2MIN,M2MAX
+               INDEX=INT(M2-M2MIN)+1
+               WRITE(LUN,FMT)M2,THRCOF(INDEX),R3JM(INDEX)
+               IF(DIFF(INDEX).GT.ABS(R3JM(INDEX))*TOL)THEN
+                  WRITE(LUN,'(1X,A,F5.1)')'DIFFERENCE EXCEEDS ERROR '//
+     +            'TOLERANCE FOR M2 =',M2
+               ENDIF
+ 1300       CONTINUE
+         ENDIF
+      ENDIF
+      IF(IPASS2.EQ.0)THEN
+         IF(KPRINT.GE.1)THEN
+            WRITE(LUN,*)' ***** ***** TEST 2 FAILED ***** *****'
+            WRITE(LUN,*)
+         ENDIF
+      ELSE
+         IF(KPRINT.GE.2)THEN
+            WRITE(LUN,*)' ***** ***** TEST 2 PASSED ***** *****'
+            WRITE(LUN,*)
+         ENDIF
+      ENDIF
+C
+C --- TEST3: COMPARE COMMON VALUE OF RC3JJ AND RC3JM
+      IPASS3=1
+      L1=100.0
+      L2=2.0
+      L3=100.0
+      M1=-10.0
+      M2=0.0
+      M3=10.0
+      CALL RC3JJ(L2,L3,M2,M3,L1MIN,L1MAX,THRCOF,NDIM,IERJJ)
+      JJVAL=THRCOF(3)
+      CALL RC3JM(L1,L2,L3,M1,M2MIN,M2MAX,THRCOF,NDIM,IERJM)
+      JMVAL=THRCOF(3)
+      IF(IERJJ.NE.0 .OR. IERJM.NE.0)THEN
+        IPASS3=0
+      ELSE
+         DIFF(1)=ABS(JJVAL-JMVAL)
+         IF(DIFF(1).GT.0.5*ABS(JJVAL+JMVAL)*TOL)IPASS3=0
+      ENDIF
+      IF(KPRINT.GE.3 .OR. (KPRINT.EQ.2.AND.IPASS3.EQ.0))THEN
+         WRITE(LUN,*)' TEST 3, COMPARE A COMMON VALUE CALCULATED BY ',
+     +               'BOTH RC3JJ AND RC3JM'
+         WRITE(LUN,*)' L1 = 100.0   L2 =   2.0   L3 = 100.0'
+         WRITE(LUN,*)' M1 = -10.0   M2 =   0.0   M3 =  10.0'
+         IF(IERJJ.NE.0)THEN
+            WRITE(LUN,*)' ERROR RETURNED FROM SUBROUTINE ',
+     +      'RC3JJ: IER =',IERJJ
+         ELSEIF(IERJM.NE.0)THEN
+            WRITE(LUN,*)' ERROR RETURNED FROM SUBROUTINE ',
+     +      'RC3JM: IER =',IERJM
+         ELSE
+            WRITE(LUN,FMT2)'RC3JJ VALUE =',JJVAL
+            WRITE(LUN,FMT2)'RC3JM VALUE =',JMVAL
+            IF(DIFF(1).GT.0.5*ABS(JJVAL+JMVAL)*TOL)THEN
+               WRITE(LUN,'(1X,A)')'DIFFERENCE EXCEEDS ERROR TOLERANCE'
+            ENDIF
+         ENDIF
+      ENDIF
+      IF(IPASS3.EQ.0)THEN
+         IF(KPRINT.GE.1)THEN
+            WRITE(LUN,*)' ***** ***** TEST 3 FAILED ***** *****'
+            WRITE(LUN,*)
+         ENDIF
+      ELSE
+         IF(KPRINT.GE.2)THEN
+            WRITE(LUN,*)' ***** ***** TEST 3 PASSED ***** *****'
+            WRITE(LUN,*)
+         ENDIF
+      ENDIF
+C
+C --- TEST 4: COMPARE RC6J VALUES WITH FORMULA
+      IPASS4=1
+      L2=8.0
+      L3=7.0
+      M1=6.5
+      M2=7.5
+      M3=7.5
+      CALL RC6J(L2,L3,M1,M2,M3,L1MIN,L1MAX,SIXCOF,NDIM,IER)
+      IF(IER.NE.0)THEN
+         IPASS4=0
+      ELSE
+         DO 1310 L1=L1MIN,L1MAX
+            INDEX=INT(L1-L1MIN)+1
+            DIFF(INDEX)=ABS(SIXCOF(INDEX)-R6J(INDEX))
+            IF(DIFF(INDEX).GT.ABS(R6J(INDEX))*TOL)IPASS4=0
+ 1310    CONTINUE
+      ENDIF
+      IF(KPRINT.GE.3 .OR. (KPRINT.EQ.2.AND.IPASS4.EQ.0))THEN
+         WRITE(LUN,*)' TEST 4, RECURRENCE IN L1, COMPARE VALUES OF 6J ',
+     +               'CALCULATED BY RC6J TO'
+         WRITE(LUN,*)' VALUES CALCULATED BY EXPLICIT FORMULA FROM ',
+     +               'MESSIAH''S QUANTUM MECHANICS'
+         WRITE(LUN,600)L2,L3
+         WRITE(LUN,700)M1,M2,M3
+         IF(IER.NE.0)THEN
+            WRITE(LUN,*)' ERROR RETURNED FROM SUBROUTINE ',
+     +      'RC6J: IER =',IER
+         ELSE
+            WRITE(LUN,1320)
+ 1320       FORMAT('    L1',T32,' RC6J VALUE',T67,'FORMULA VALUE')
+            DO 1350 L1=L1MIN,L1MAX
+               INDEX=INT(L1-L1MIN)+1
+               WRITE(LUN,FMT)L1,SIXCOF(INDEX),R6J(INDEX)
+               IF(DIFF(INDEX).GT.ABS(R6J(INDEX))*TOL)THEN
+                  WRITE(LUN,'(1X,A,F5.1)')'DIFFERENCE EXCEEDS ERROR '//
+     +            'TOLERANCE FOR L1 =',L1
+               ENDIF
+ 1350       CONTINUE
+         ENDIF
+      ENDIF
+      IF(IPASS4.EQ.0)THEN
+         IF(KPRINT.GE.1)THEN
+            WRITE(LUN,*)' ***** ***** TEST 4 FAILED ***** *****'
+            WRITE(LUN,*)
+         ENDIF
+      ELSE
+         IF(KPRINT.GE.2)THEN
+            WRITE(LUN,*)' ***** ***** TEST 4 PASSED ***** *****'
+            WRITE(LUN,*)
+         ENDIF
+      ENDIF
+C
+C --- TEST 5: CHECK INVALID INPUT
+      IPASS5=1
+      IF(KPRINT.LE.2)THEN
+         CALL XSETF(0)
+      ELSE
+         CALL XSETF(-1)
+      ENDIF
+      IF(KPRINT.GE.3)WRITE(LUN,*)' TEST 5, CHECK FOR PROPER HANDLING ',
+     +   'OF INVALID INPUT'
+C --- RC3JJ: L2-ABS(M2) OR L3-ABS(M3) LESS THAN ZERO (IER=1)
+      L2=2.0
+      L3=100.0
+      M1=-6.0
+      M2=-4.0
+      M3=10.0
+      IF(KPRINT.GE.3)WRITE(LUN,*)
+      CALL XERCLR
+      CALL RC3JJ(L2,L3,M2,M3,L1MIN,L1MAX,THRCOF,NDIM,IER)
+      IF(NUMXER(NERR).NE.IER)IPASS5=0
+C --- RC3JJ: L2+ABS(M2) OR L3+ABS(M3) NOT INTEGER (IER=2)
+      L2=2.0
+      L3=99.5
+      M1=-10.0
+      M2=0.0
+      M3=10.0
+      IF(KPRINT.GE.3)WRITE(LUN,*)
+      CALL XERCLR
+      CALL RC3JJ(L2,L3,M2,M3,L1MIN,L1MAX,THRCOF,NDIM,IER)
+      IF(NUMXER(NERR).NE.IER)IPASS5=0
+C --- RC3JJ: L1MAX-L1MIN NOT INTEGER (IER=3)
+      L2=3.2
+      L3=4.5
+      M1=-1.3
+      M2=0.8
+      M3=0.5
+      IF(KPRINT.GE.3)WRITE(LUN,*)
+      CALL XERCLR
+      CALL RC3JJ(L2,L3,M2,M3,L1MIN,L1MAX,THRCOF,NDIM,IER)
+      IF(NUMXER(NERR).NE.IER)IPASS5=0
+C --- RC3JJ: L1MIN GREATER THAN L1MAX (IER=4)
+C            (NO TEST -- THIS ERROR SHOULD NEVER OCCUR)
+C --- RC3JJ: DIMENSION OF THRCOF TOO SMALL (IER=5)
+      L2=10.0
+      L3=150.0
+      M1=-10.0
+      M2=0.0
+      M3=10.0
+      IF(KPRINT.GE.3)WRITE(LUN,*)
+      CALL XERCLR
+      CALL RC3JJ(L2,L3,M2,M3,L1MIN,L1MAX,THRCOF,NDIM,IER)
+      IF(NUMXER(NERR).NE.IER)IPASS5=0
+C --- RC3JM: L1-ABS(M1) LESS THAN ZERO OR L1+ABS(M1) NOT INTEGER (IER=1)
+      L1=100.0
+      L2=2.0
+      L3=100.0
+      M1=150.0
+      IF(KPRINT.GE.3)WRITE(LUN,*)
+      CALL XERCLR
+      CALL RC3JM(L1,L2,L3,M1,M2MIN,M2MAX,THRCOF,NDIM,IER)
+      IF(NUMXER(NERR).NE.IER)IPASS5=0
+C --- RC3JM: L1, L2, L3 DO NOT SATISFY TRIANGULAR CONDITION (IER=2)
+      L1=20.0
+      L2=5.0
+      L3=10.0
+      M1=-10.0
+      IF(KPRINT.GE.3)WRITE(LUN,*)
+      CALL XERCLR
+      CALL RC3JM(L1,L2,L3,M1,M2MIN,M2MAX,THRCOF,NDIM,IER)
+      IF(NUMXER(NERR).NE.IER)IPASS5=0
+C --- RC3JM: L1+L2+L3 NOT INTEGER (IER=3)
+      L1=1.0
+      L2=1.3
+      L3=1.5
+      M1=0.0
+      IF(KPRINT.GE.3)WRITE(LUN,*)
+      CALL XERCLR
+      CALL RC3JM(L1,L2,L3,M1,M2MIN,M2MAX,THRCOF,NDIM,IER)
+      IF(NUMXER(NERR).NE.IER)IPASS5=0
+C --- RC3JM: M2MAX-M2MIN NOT INTEGER (IER=4)
+      L1=1.0
+      L2=1.3
+      L3=1.7
+      M1=0.0
+      IF(KPRINT.GE.3)WRITE(LUN,*)
+      CALL XERCLR
+      CALL RC3JM(L1,L2,L3,M1,M2MIN,M2MAX,THRCOF,NDIM,IER)
+      IF(NUMXER(NERR).NE.IER)IPASS5=0
+C --- RC3JM: M2MIN GREATER THAN M2MAX (IER=5)
+C            (NO TEST -- THIS ERROR SHOULD NEVER OCCUR)
+C --- RC3JM: DIMENSION OF THRCOF TOO SMALL (IER=6)
+      L1=100.0
+      L2=10.0
+      L3=110.0
+      M1=-10.0
+      IF(KPRINT.GE.3)WRITE(LUN,*)
+      CALL XERCLR
+      CALL RC3JM(L1,L2,L3,M1,M2MIN,M2MAX,THRCOF,NDIM,IER)
+      IF(NUMXER(NERR).NE.IER)IPASS5=0
+C --- RC6J: L2+L3+L5+L6 OR L4+L2+L6 NOT INTEGER (IER=1)
+      L2=0.5
+      L3=1.0
+      M1=0.5
+      M2=2.0
+      M3=3.0
+      IF(KPRINT.GE.3)WRITE(LUN,*)
+      CALL XERCLR
+      CALL RC6J(L2,L3,M1,M2,M3,L1MIN,L1MAX,SIXCOF,NDIM,IER)
+      IF(NUMXER(NERR).NE.IER)IPASS5=0
+C --- RC6J: L4, L2, L6 TRIANGULAR CONDITION NOT SATISFIED (IER=2)
+      L2=1.0
+      L3=3.0
+      M1=5.0
+      M2=6.0
+      M3=2.0
+      IF(KPRINT.GE.3)WRITE(LUN,*)
+      CALL XERCLR
+      CALL RC6J(L2,L3,M1,M2,M3,L1MIN,L1MAX,SIXCOF,NDIM,IER)
+      IF(NUMXER(NERR).NE.IER)IPASS5=0
+C --- RC6J: L4, L5, L3 TRIANGULAR CONDITION NOT SATISFIED (IER=3)
+      L2=4.0
+      L3=1.0
+      M1=5.0
+      M2=3.0
+      M3=2.0
+      IF(KPRINT.GE.3)WRITE(LUN,*)
+      CALL XERCLR
+      CALL RC6J(L2,L3,M1,M2,M3,L1MIN,L1MAX,SIXCOF,NDIM,IER)
+      IF(NUMXER(NERR).NE.IER)IPASS5=0
+C --- RC6J: L1MAX-L1MIN NOT INTEGER (IER=4)
+      L2=0.9
+      L3=0.5
+      M1=0.9
+      M2=0.4
+      M3=0.2
+      IF(KPRINT.GE.3)WRITE(LUN,*)
+      CALL XERCLR
+      CALL RC6J(L2,L3,M1,M2,M3,L1MIN,L1MAX,SIXCOF,NDIM,IER)
+      IF(NUMXER(NERR).NE.IER)IPASS5=0
+C --- RC6J: L1MIN GREATER THAN L1MAX (IER=5)
+C           (NO TEST -- THIS ERROR SHOULD NEVER OCCUR)
+C --- RC6J: DIMENSION OF SIXCOF TOO SMALL (IER=6)
+      L2=50.0
+      L3=25.0
+      M1=15.0
+      M2=30.0
+      M3=40.0
+      IF(KPRINT.GE.3)WRITE(LUN,*)
+      CALL XERCLR
+      CALL RC6J(L2,L3,M1,M2,M3,L1MIN,L1MAX,SIXCOF,NDIM,IER)
+      IF(NUMXER(NERR).NE.IER)IPASS5=0
+      IF(IPASS5.EQ.0)THEN
+         IF(KPRINT.GE.1)THEN
+            WRITE(LUN,*)' ***** ***** TEST 5 FAILED ***** *****'
+            WRITE(LUN,*)
+         ENDIF
+      ELSE
+         IF(KPRINT.GE.2)THEN
+            WRITE(LUN,*)' ***** ***** TEST 5 PASSED ***** *****'
+            WRITE(LUN,*)
+         ENDIF
+      ENDIF
+C
+C --- END OF TESTS
+      IF((IPASS1.EQ.0).OR.(IPASS2.EQ.0).OR.(IPASS3.EQ.0).OR.
+     +   (IPASS4.EQ.0).OR.(IPASS5.EQ.0))THEN
+         IPASS=0
+         IF(KPRINT.GE.1)WRITE(LUN,1500)
+      ELSE
+         IPASS=1
+         IF(KPRINT.GE.2)WRITE(LUN,1600)
+      ENDIF
+ 1500 FORMAT(' *****  QC36J  FAILED SOME TESTS *****')
+ 1600 FORMAT(' *****  QC36J  PASSED ALL TESTS  *****')
+C
+      RETURN
+      END

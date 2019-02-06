@@ -1,0 +1,189 @@
+file	slatec/pchip/chfcm.f
+for	Check a single cubic for monotonicity.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/chfdv.f
+for	Evaluate a cubic polynomial given in Hermite form and its
+gams	E3, H1
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/chfev.f
+for	Evaluate a cubic polynomial given in Hermite form at an
+gams	E3
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/chfie.f
+for	Subsidiary to PCHIA
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dchfcm.f
+for	Check a single cubic for monotonicity.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dchfdv.f
+for	Evaluate a cubic polynomial given in Hermite form and its
+gams	E3, H1
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dchfev.f
+for	Evaluate a cubic polynomial given in Hermite form at an
+gams	E3
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dchfie.f
+for	Subsidiary to DPCHIA
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dpchbs.f
+for	Piecewise Cubic Hermite to B-Spline converter.
+gams	E3
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dpchce.f
+for	Subsidiary to DPCHIC
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dpchci.f
+for	Subsidiary to DPCHIC
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dpchcm.f
+for	Check a cubic Hermite function for monotonicity.
+gams	E3
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dpchcs.f
+for	Subsidiary to DPCHIC
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dpchdf.f
+for	Subsidiary to DPCHCE and DPCHSP
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dpchfd.f
+for	Evaluate a piecewise cubic Hermite function and its first
+gams	E3, H1
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dpchfe.f
+for	Evaluate a piecewise cubic Hermite function at an array of
+gams	E3
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dpchia.f
+for	Evaluate the definite integral of a piecewise cubic
+gams	E3, H2A1B2
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dpchic.f
+for	Set derivatives needed to determine a piecewise monotone
+gams	E1A
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dpchid.f
+for	Evaluate the definite integral of a piecewise cubic
+gams	E3, H2A1B2
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dpchim.f
+for	Set derivatives needed to determine a monotone piecewise
+gams	E1A
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dpchkt.f
+for	Compute B-spline knot sequence for DPCHBS.
+gams	E3
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dpchsp.f
+for	Set derivatives needed to determine the Hermite represen-
+gams	E1A
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dpchst.f
+for	Subsidiary to DPCHCE, DPCHCI, DPCHCS and DPCHIM
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/dpchsw.f
+for	Subsidiary to DPCHCS
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchbs.f
+for	Piecewise Cubic Hermite to B-Spline converter.
+gams	E3
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchce.f
+for	Subsidiary to PCHIC
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchci.f
+for	Subsidiary to PCHIC
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchcm.f
+for	Check a cubic Hermite function for monotonicity.
+gams	E3
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchcs.f
+for	Subsidiary to PCHIC
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchdf.f
+for	Subsidiary to PCHCE and PCHSP
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchdoc.f
+for	Documentation for PCHIP, a Fortran package for piecewise
+gams	E1A, Z
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchfd.f
+for	Evaluate a piecewise cubic Hermite function and its first
+gams	E3, H1
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchfe.f
+for	Evaluate a piecewise cubic Hermite function at an array of
+gams	E3
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchia.f
+for	Evaluate the definite integral of a piecewise cubic
+gams	E3, H2A1B2
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchic.f
+for	Set derivatives needed to determine a piecewise monotone
+gams	E1A
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchid.f
+for	Evaluate the definite integral of a piecewise cubic
+gams	E3, H2A1B2
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchim.f
+for	Set derivatives needed to determine a monotone piecewise
+gams	E1A
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchkt.f
+for	Compute B-spline knot sequence for PCHBS.
+gams	E3
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchsp.f
+for	Set derivatives needed to determine the Hermite represen-
+gams	E1A
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchst.f
+for	Subsidiary to PCHCE, PCHCI, PCHCS and PCHIM
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/pchip/pchsw.f
+for	Subsidiary to PCHCS
+by	Fritsch, F. N., (LLNL)
+

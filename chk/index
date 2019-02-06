@@ -1,0 +1,1731 @@
+file	slatec/chk/avntst.f
+for	Quick check for AVINT.
+by	(UNKNOWN)
+
+file	slatec/chk/bikck.f
+for	Quick check for BESI and BESK.
+by	Amos, D. E., (SNLA)
+
+file	slatec/chk/bjyck.f
+for	Quick check for BESJ and BESY.
+by	Amos, D. E., (SNLA)
+
+file	slatec/chk/blachk.f
+for	Quick check for Basic Linear Algebra Subprograms.
+by	Lawson, C. L., (JPL)
+
+file	slatec/chk/bspck.f
+for	Quick check for the B-Spline package.
+by	(UNKNOWN)
+
+file	slatec/chk/cbeg.f
+for	Generate random numbers.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/cblat2.f
+for	Driver for testing Level 2 BLAS complex subroutines.
+gams	A4
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/cblat3.f
+for	Driver for testing Level 3 BLAS complex subroutines.
+gams	A4
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/cchk12.f
+for	Quick check for CGEMV and CGBMV.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/cchk13.f
+for	Quick check for CGEMM.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/cchk22.f
+for	Quick check for CHEMV, CHBMV, CHPMV.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/cchk23.f
+for	Quick check for CHEMM and CSYMM.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/cchk32.f
+for	Quick check for CTRMV, CTBMV, CTPMV, CTRSV, CTBSV and
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/cchk33.f
+for	Quick check for CTRMM and CTRSM.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/cchk42.f
+for	Quick check for CGERC and CGERU.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/cchk43.f
+for	Quick check for CHERK and CSYRK.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/cchk52.f
+for	Quick check for CHER and CHPR.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/cchk53.f
+for	Quick check for CHER2K and CSYR2K.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/cchk62.f
+for	Quick check for CHER2 and CHPR2.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/cchke2.f
+for	Test the error exits from the Level 2 Blas.
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/cchke3.f
+for	Test the error exits from the Level 3 Blas.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/cchqc.f
+for	Quick check for CCHDC.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/cdf.f
+for	Quick check for SLATEC routines CDRIV1, CDRIV2 and CDRIV3.
+gams	I1A2, I1A1B
+by	Kahaner, D. K., (NIST)
+
+file	slatec/chk/cdqag.f
+for	Quick check for DQAG.
+by	(UNKNOWN)
+
+file	slatec/chk/cdqagi.f
+for	Quick check for DQAGI.
+by	(UNKNOWN)
+
+file	slatec/chk/cdqagp.f
+for	Quick check for DQAGP.
+by	(UNKNOWN)
+
+file	slatec/chk/cdqags.f
+for	Quick check for DQAGS.
+by	(UNKNOWN)
+
+file	slatec/chk/cdqawc.f
+for	Quick check for DQAWC.
+by	(UNKNOWN)
+
+file	slatec/chk/cdqawf.f
+for	Quick check for DQAWF.
+by	(UNKNOWN)
+
+file	slatec/chk/cdqawo.f
+for	Quick check for DQAWO.
+by	(UNKNOWN)
+
+file	slatec/chk/cdqaws.f
+for	Quick check for DQAWS.
+by	(UNKNOWN)
+
+file	slatec/chk/cdqck.f
+for	Quick check for SLATEC routines CDRIV1, CDRIV2 and CDRIV3.
+gams	I1A2, I1A1B
+by	Kahaner, D. K., (NIST)
+
+file	slatec/chk/cdqng.f
+for	Quick check for DQNG.
+by	(UNKNOWN)
+
+file	slatec/chk/cfnck.f
+for	Quick check for the complex Fullerton special functions.
+by	Boland, W. Robert, (LANL)
+
+file	slatec/chk/cgbqc.f
+for	Quick check for CGBFA, CGBCO, CGBSL and CGBDI.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/cgeck.f
+for	Quick check for CGEFA, CGECO, CGESL and CGEDI.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/cgeqc.f
+for	Quick check for CGEFS and CGEIR.
+by	Jacobsen, Nancy, (LANL)
+
+file	slatec/chk/cgtqc.f
+for	Quick check for CGTSL.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/check0.f
+for	(UNKNOWN)
+by	Lawson, C. L., (JPL)
+
+file	slatec/chk/check1.f
+for	(UNKNOWN)
+by	Lawson, C. L., (JPL)
+
+file	slatec/chk/check2.f
+for	(UNKNOWN)
+by	Lawson, C. L., (JPL)
+
+file	slatec/chk/chiqc.f
+for	Quick check for CHIFA, CHICO, CHISL and CHIDI.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/chkxer.f
+for	Test whether an error has been detected.
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/chpqc.f
+for	Quick check for CHPFA, CHPCO, CHPSL and CHPDI.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/cmake2.f
+for	Generate values for an M by N matrix A.
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/cmake3.f
+for	Generate values for an M by N matrix A.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/cmmch.f
+for	Check the results of the computational tests.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/cmpare.f
+for	Compare values in COMMON block CHECK for quick check
+by	(UNKNOWN)
+
+file	slatec/chk/cmvch.f
+for	Check the results of the computational tests.
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/comp.f
+for	Compare actual and expected values of error flag.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/cpbqc.f
+for	Quick check for CPBFA, CPBCO, CPBSL and CPBDI.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/cpoqc.f
+for	Quick check for CPOFA, CPOCO, CPOSL and CPODI.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/cppqc.f
+for	Quick check for CPPFA, CPPCO, CPPSL and CPPDI.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/cprin.f
+for	Subsidiary to CQAG, CQAG, CQAGI, CQAGP, CQAGS, CQAWC,
+by	Piessens, Robert
+
+file	slatec/chk/cprpqx.f
+for	Quick check for CPZERO and RPZERO.
+by	Kahaner, D. K., (NBS)
+
+file	slatec/chk/cptqc.f
+for	Quick check for CPTSL.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/cqag.f
+for	Quick check for QAG.
+by	(UNKNOWN)
+
+file	slatec/chk/cqagi.f
+for	Quick check for QAGI.
+by	(UNKNOWN)
+
+file	slatec/chk/cqagp.f
+for	Quick check for QAGP.
+by	(UNKNOWN)
+
+file	slatec/chk/cqags.f
+for	Quick check for QAGS.
+by	(UNKNOWN)
+
+file	slatec/chk/cqawc.f
+for	Quick check for QAWC.
+by	(UNKNOWN)
+
+file	slatec/chk/cqawf.f
+for	Quick check for QAWF.
+by	(UNKNOWN)
+
+file	slatec/chk/cqawo.f
+for	Quick check for QAWO.
+by	(UNKNOWN)
+
+file	slatec/chk/cqaws.f
+for	Quick check for QAWS.
+by	(UNKNOWN)
+
+file	slatec/chk/cqcai.f
+for	Quick check for SLATEC subroutines
+gams	C10D
+by	Amos, Don, (SNL)
+
+file	slatec/chk/cqcbh.f
+for	Quick check for SLATEC subroutine
+gams	C10A4
+by	Amos, Don, (SNL)
+
+file	slatec/chk/cqcbi.f
+for	Quick check for SLATEC subroutine
+gams	C10B4
+by	Amos, Don, (SNL)
+
+file	slatec/chk/cqcbj.f
+for	Quick check for SLATEC subroutine
+gams	C10A4
+by	Amos, Don, (SNL)
+
+file	slatec/chk/cqcbk.f
+for	Quick check for SLATEC subroutine
+gams	C10B4
+by	Amos, Don, (SNL)
+
+file	slatec/chk/cqcby.f
+for	Quick check for SLATEC subroutine
+gams	C10A4
+by	Amos, Don, (SNL)
+
+file	slatec/chk/cqck.f
+for	Quick check for CPOFS, CPOIR, CNBFS and CNBIR.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/cqng.f
+for	Quick check for QNG.
+by	(UNKNOWN)
+
+file	slatec/chk/cqrqc.f
+for	Quick check for CQRDC and CQRSL.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/cqrtst.f
+for	Quick check for CPQR79.
+by	(UNKNOWN)
+
+file	slatec/chk/csiqc.f
+for	Quick check for CSIFA, CSICO, CSISL and CSIDI.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/cspqc.f
+for	Quick check for CSPFA, CSPCO, CSPSL and CSPDI.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/csvqc.f
+for	Quick check for CSVDC.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/ctrqc.f
+for	Quick check for CTRFA, CTRCO, CTRSL and CTRDI.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/davnts.f
+for	Quick check for DAVINT.
+by	(UNKNOWN)
+
+file	slatec/chk/dbeg.f
+for	Generate random numbers.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/dbikck.f
+for	Quick check for DBESI and DBESK.
+by	Amos, D. E., (SNLA)
+
+file	slatec/chk/dbjyck.f
+for	Quick check for DBESJ and DBESY.
+by	Amos, D. E., (SNLA)
+
+file	slatec/chk/dblat2.f
+for	Driver for testing Level 2 BLAS double precision
+gams	A3B
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/dblat3.f
+for	Driver for testing Level 3 BLAS double precision
+gams	A3B
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/dbocqx.f
+for	Quick check for DBOCLS.
+by	(UNKNOWN)
+
+file	slatec/chk/dbspck.f
+for	Quick check for the B-spline package.
+by	(UNKNOWN)
+
+file	slatec/chk/dchk12.f
+for	Test DGEMV and DGBMV.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/dchk13.f
+for	Test DGEMM.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/dchk22.f
+for	Test DSYMV, DSBMV and DSPMV.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/dchk23.f
+for	Test DSYMM.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/dchk32.f
+for	Test DTRMV, DTBMV, DTPMV, DTRSV, DTBSV and DTPSV.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/dchk33.f
+for	Test DTRMM and DTRSM.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/dchk42.f
+for	Test DGER.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/dchk43.f
+for	Test DSYRK.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/dchk52.f
+for	Test DSYR and DSPR.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/dchk53.f
+for	Test DSYR2K.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/dchk62.f
+for	Test DSYR2 and DSPR2.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/dchke2.f
+for	Test the error exits from the Level 2 Blas.
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/dchke3.f
+for	Test the error exits from the Level 3 Blas.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/dcmpar.f
+for	Compare values in COMMON block DCHECK for quick check
+by	(UNKNOWN)
+
+file	slatec/chk/ddasqc.f
+for	Quick check for SLATEC routine DDASSL.
+gams	I1A2
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/chk/ddf.f
+for	Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.
+gams	I1A2, I1A1B
+by	Kahaner, D. K., (NIST)
+
+file	slatec/chk/ddjac1.f
+for	First Jacobian evaluator for DDASQC.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/chk/ddjac2.f
+for	Second Jacobian evaluator for DDASQC.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/chk/ddqck.f
+for	Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.
+gams	I1A2, I1A1B
+by	Kahaner, D. K., (NIST)
+
+file	slatec/chk/ddres1.f
+for	First residual evaluator for DDASQC.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/chk/ddres2.f
+for	Second residual evaluator for DDASQC.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/chk/dedit2.f
+for	Subsidiary to DDASQC.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/chk/deg8ck.f
+for	Quick check for DEXINT and DGAUS8.
+by	Amos, D. E., (SNLA)
+
+file	slatec/chk/devchk.f
+for	Test evaluation accuracy of DCHFDV and DCHFEV for DPCHQ1.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/deverk.f
+for	Test error returns from DPCHIP evaluators for DPCHQ1.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/devpck.f
+for	Test usage of increment argument in DPCHFD and DPCHFE for
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/df0c.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df0f.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df0o.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df0s.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df0ws.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df1c.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df1f.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df1g.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df1n.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df1o.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df1p.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df1s.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df1ws.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df2g.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df2n.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df2o.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df2p.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df2s.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df3g.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df3p.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df3s.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df4p.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df4s.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/df5s.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/dfact.f
+for	THIS FUNCTION CALCULATES N FACTORIAL.  IT IS USED BY
+gams	C19
+by	LOZIER, DANIEL W., (NIST)
+
+file	slatec/chk/dfb.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/dfcn1.f
+for	(UNKNOWN)
+by	(UNKNOWN)
+
+file	slatec/chk/dfcn2.f
+for	(UNKNOWN)
+by	(UNKNOWN)
+
+file	slatec/chk/dfcn3.f
+for	(UNKNOWN)
+by	(UNKNOWN)
+
+file	slatec/chk/dfcqx.f
+for	Quick check for DFC.
+by	Hanson, R. J., (SNLA)
+
+file	slatec/chk/dfdeqc.f
+for	Derivative evaluator for DDEPAC quick checks.
+by	Chow, Jeff, (LANL)
+
+file	slatec/chk/dfdtru.f
+for	Compute exact function values for DEVCHK.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/dfein.f
+for	Subsidiary to DEG8CK.
+by	(UNKNOWN)
+
+file	slatec/chk/dfill.f
+for	Fill a vector with a value.
+by	Seager, Mark K., (LLNL)
+
+file	slatec/chk/dfmat.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/dfnck.f
+for	Quick check for the double precision Fullerton
+by	Boland, W. Robert, (LANL)
+
+file	slatec/chk/dfqd1.f
+for	Function evaluator for DQNC79 and DGAUS8 quick checks.
+by	Boland, W. Robert, (LANL)
+
+file	slatec/chk/dfqd2.f
+for	Function evaluator for DQNC79 and DGAUS8 quick checks.
+by	Boland, W. Robert, (LANL)
+
+file	slatec/chk/dfztst.f
+for	Quick check for DFZERO.
+by	Boland, W. Robert, (LANL)
+
+file	slatec/chk/dgeqc.f
+for	Quick check for DGEFS.
+by	Jacobsen, Nancy, (LANL)
+
+file	slatec/chk/dgvec.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/djac.f
+for	Evaluate Jacobian for DDEBDF quick check.
+by	Chow, Jeff (LANL)
+
+file	slatec/chk/dlapqc.f
+for	Quick check for testing Sparse Linear Algebra Package
+gams	D2A4, D2B4
+by	Mark K. Seager (LLNL)
+
+file	slatec/chk/dlseit.f
+for	Quick check for DLSEI.
+by	Hanson, R. J., (SNLA)
+
+file	slatec/chk/dmake2.f
+for	Generate values for an M by N matrix A.
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/dmake3.f
+for	Generate values for an M by N matrix A.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/dmmch.f
+for	Check the results of the computational tests.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/dmvch.f
+for	Check the results of the computational tests.
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/dnls1q.f
+for	Quick check for DNLS1E, DNLS1, and DCOV.
+by	(UNKNOWN)
+
+file	slatec/chk/dnsqqk.f
+for	Quick check for DNSQE and DNSQ.
+by	(UNKNOWN)
+
+file	slatec/chk/dpchq1.f
+for	Test the PCHIP evaluators DCHFDV, DCHFEV, DPCHFD, DPCHFE.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/dpchq2.f
+for	Test the PCHIP integrators DPCHIA and DPCHID.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/dpchq3.f
+for	Test the PCHIP interpolators DPCHIC, DPCHIM, DPCHSP.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/dpchq4.f
+for	Test the PCHIP monotonicity checker DPCHCM.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/dpchq5.f
+for	Test the PCH to B-spline conversion routine DPCHBS.
+by	FRITSCH, F. N., (LLNL)
+
+file	slatec/chk/dpfitt.f
+for	Quick check for DPOLFT, DPCOEF and DP1VLU.
+by	(UNKNOWN)
+
+file	slatec/chk/dplpqx.f
+for	Quick check for DSPLP.
+by	(UNKNOWN)
+
+file	slatec/chk/dpntck.f
+for	Quick check for DPLINT, DPOLCF and DPOLVL
+by	Boland, W. Robert, (LANL)
+
+file	slatec/chk/dprin.f
+for	Subsidiary to CDQAG, CDQAG, CDQAGI, CDQAGP, CDQAGS, CDQAWC,
+by	Piessens, Robert
+
+file	slatec/chk/dqc36j.f
+for	THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES DRC3JJ,
+gams	C19
+by	LOZIER, DANIEL W., (NIST)
+
+file	slatec/chk/dqcgls.f
+for	Quick check for DGLSS.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/dqck.f
+for	Quick check for DPOFS AND DNBFS.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/dqckin.f
+for	Quick check for DBSKIN.
+by	Amos, D. E., (SNLA)
+
+file	slatec/chk/dqcpsi.f
+for	Quick check for DPSIFN.
+by	Amos, D. E., (SNLA)
+
+file	slatec/chk/dqfcn2.f
+for	(UNKNOWN)
+by	(UNKNOWN)
+
+file	slatec/chk/dqg8ts.f
+for	Quick check for DGAUS8.
+by	(UNKNOWN)
+
+file	slatec/chk/dqjac2.f
+for	(UNKNOWN)
+by	(UNKNOWN)
+
+file	slatec/chk/dqn79q.f
+for	Quick check for DQNC79.
+by	(UNKNOWN)
+
+file	slatec/chk/dracah.f
+for	THIS PROGRAM CALCULATES 3J AND 6J COEFFICIENTS USING THE
+gams	C19
+by	LOZIER, DANIEL W., (NIST)
+
+file	slatec/chk/drmgen.f
+for	This routine generates a "Random" symmetric or
+by	Seager, Mark K., (LLNL)
+
+file	slatec/chk/dsosfn.f
+for	Function evaluator for DSOS quick check.
+by	Watts, H. A., (SNLA)
+
+file	slatec/chk/dsosqx.f
+for	Quick check for DSOS.
+by	Watts, H. A., (SNLA)
+
+file	slatec/chk/dsrtqc.f
+for	Quick check for SLATEC routines DSORT, DPSORT, DPPERM
+gams	N6A
+by	BOISVERT, RONALD, (NIST)
+
+file	slatec/chk/dt0.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/dt1.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/dt2.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/dt3.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/dt4.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/dt5.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/dtest.f
+for	Compare arrays DCOMP and DTRUE.
+by	Lawson, C. L., (JPL)
+
+file	slatec/chk/duivp.f
+for	Dummy routine for DBVSUP quick check.
+by	Watts, H. A., (SNLA)
+
+file	slatec/chk/duterr.f
+for	Output error messages for the SLAP Quick Check.
+by	Seager, Mark K., (LLNL)
+
+file	slatec/chk/duvec.f
+for	Dummy routine for DBVSUP quick check.
+by	Watts, H. A., (SNLA)
+
+file	slatec/chk/dxcsrt.f
+for	TO COMPUTE CHECK VALUES FOR LEGENDRE FUNCTIONS
+gams	C3A2, C9
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/chk/edit2.f
+for	Subsidiary to SDASQC.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/chk/eg8ck.f
+for	Quick check for EXINT and GAUS8.
+by	Amos, D. E., (SNLA)
+
+file	slatec/chk/eisqx1.f
+for	Quick check for SGEEV and CGEEV.
+by	(UNKNOWN)
+
+file	slatec/chk/eisqx2.f
+for	Quick check for SSIEV, CHIEV and SSPEV.
+by	Kahaner, D. K., (NBS)
+
+file	slatec/chk/evchck.f
+for	Test evaluation accuracy of CHFDV and CHFEV for PCHQK1.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/everck.f
+for	Test error returns from PCHIP evaluators for PCHQK1.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/evpcck.f
+for	Test usage of increment argument in PCHFD and PCHFE for
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/f0c.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f0f.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f0o.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f0s.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f0ws.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f1c.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f1f.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f1g.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f1n.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f1o.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f1p.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f1s.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f1ws.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f2g.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f2n.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f2o.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f2p.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f2s.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f3g.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f3p.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f3s.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f4p.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f4s.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/f5s.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/fb.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/fcn1.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/fcn2.f
+for	(UNKNOWN)
+by	(UNKNOWN)
+
+file	slatec/chk/fcn3.f
+for	(UNKNOWN)
+by	(UNKNOWN)
+
+file	slatec/chk/fcnqx1.f
+for	THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES XLEGF
+gams	C3A2, C9
+by	LOZIER, DANIEL W., (NIST)
+
+file	slatec/chk/fcnqx2.f
+for	THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES DXLEGF
+gams	C3A2, C9
+by	LOZIER, DANIEL W., (NIST)
+
+file	slatec/chk/fcqx.f
+for	Quick check for FC.
+by	Hanson, R. J., (SNLA)
+
+file	slatec/chk/fdeqc.f
+for	Derivative evaluator for DEPAC quick checks.
+by	Chow, Jeff, (LANL)
+
+file	slatec/chk/fdtrue.f
+for	Compute exact function values for EVCHCK.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/fein.f
+for	Subsidiary to EG8CK.
+by	(UNKNOWN)
+
+file	slatec/chk/fftqx.f
+for	Quick check for the NCAR FFT routines.
+by	Swarztrauber, P. N., (NCAR)
+
+file	slatec/chk/fmat.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/fqd1.f
+for	Function evaluator for QNC79 and GAUS8 quick checks.
+by	Boland, W. Robert, (LANL)
+
+file	slatec/chk/fqd2.f
+for	Function evaluator for QNC79 and GAUS8 quick checks.
+by	Boland, W. Robert, (LANL)
+
+file	slatec/chk/fztest.f
+for	Quick check for FZERO.
+by	(UNKNOWN)
+
+file	slatec/chk/gvec.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/header.f
+for	Print header for BLAS quick checks.
+by	Lawson, C. L., (JPL)
+
+file	slatec/chk/hsrtqc.f
+for	Quick check for SLATEC routine HPSORT, HPPERM
+gams	N6A
+by	BOISVERT, RONALD, (NIST)
+
+file	slatec/chk/ismpl.f
+for	Generate integer sample.
+by	Seager, Mark K., (LLNL)
+
+file	slatec/chk/isrtqc.f
+for	Quick check for SLATEC routines ISORT, IPSORT, IPPERM
+gams	N6A
+by	BOISVERT, RONALD, (NIST)
+
+file	slatec/chk/itest.f
+for	Compare arrays ICOMP and ITRUE.
+by	Lawson, C. L., (JPL)
+
+file	slatec/chk/jac.f
+for	Evaluate Jacobian for DEBDF quick check.
+by	Chow, Jeff (LANL)
+
+file	slatec/chk/lce.f
+for	Test if two arrays are identical.
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/lceres.f
+for	Test if selected elements in two arrays are equal.
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/lde.f
+for	Test if two arrays are identical.
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/lderes.f
+for	Test if selected elements in two arrays are equal.
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/lse.f
+for	Test if two arrays are identical.
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/lseiqx.f
+for	Quick check for LSEI.
+by	Hanson, R. J., (SNLA)
+
+file	slatec/chk/lseres.f
+for	Test if selected elements in two arrays are equal.
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/outerr.f
+for	Output error messages for the SLAP Quick Check.
+by	Seager, Mark K., (LLNL)
+
+file	slatec/chk/pass.f
+for	Print a PASS/FAIL message for a particular quick check
+by	(UNKNOWN)
+
+file	slatec/chk/pchqk1.f
+for	Test the PCHIP evaluators CHFDV, CHFEV, PCHFD and PCHFE.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/pchqk2.f
+for	Test the PCHIP integrators PCHIA and PCHID.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/pchqk3.f
+for	Test the PCHIP interpolators PCHIC, PCHIM, PCHSP.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/pchqk4.f
+for	Test the PCHIP monotonicity checker PCHCM.
+by	Fritsch, F. N., (LLNL)
+
+file	slatec/chk/pchqk5.f
+for	Test the PCH to B-spline conversion routine PCHBS.
+by	FRITSCH, F. N., (LLNL)
+
+file	slatec/chk/pfitqx.f
+for	Quick check for POLFIT, PCOEF and PVALUE.
+by	(UNKNOWN)
+
+file	slatec/chk/pntchk.f
+for	Quick check for POLINT, POLCOF and POLYVL
+by	(UNKNOWN)
+
+file	slatec/chk/qc36j.f
+for	THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES RC3JJ,
+gams	C19
+by	LOZIER, DANIEL W., (NIST)
+
+file	slatec/chk/qc6a.f
+for	Test subroutine AAAAAA.
+by	Boland, W. Robert, (LANL)
+
+file	slatec/chk/qcdrc.f
+for	Quick check for DRC.
+by	Pexton, R. L., (LLNL)
+
+file	slatec/chk/qcdrd.f
+for	Quick check for DRD.
+by	Pexton, R. L., (LLNL)
+
+file	slatec/chk/qcdrf.f
+for	Quick check for DRF.
+by	Pexton, R. L., (LLNL)
+
+file	slatec/chk/qcdrj.f
+for	Quick check for DRJ.
+by	Pexton, R. L., (LLNL)
+
+file	slatec/chk/qcglss.f
+for	Quick check for SGLSS.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/qckin.f
+for	Quick check for BSKIN.
+by	Amos, D. E., (SNLA)
+
+file	slatec/chk/qcpsi.f
+for	Quick check for PSIFN.
+by	Amos, D. E., (SNLA)
+
+file	slatec/chk/qcrc.f
+for	Quick check for RC.
+by	Pexton, R. L., (LLNL)
+
+file	slatec/chk/qcrd.f
+for	Quick check for RD.
+by	Pexton, R. L., (LLNL)
+
+file	slatec/chk/qcrf.f
+for	Quick check for RF.
+by	Pexton, R. L., (LLNL)
+
+file	slatec/chk/qcrj.f
+for	Quick check for RJ.
+by	Pexton, R. L., (LLNL)
+
+file	slatec/chk/qg8tst.f
+for	Quick check for GAUS8.
+by	(UNKNOWN)
+
+file	slatec/chk/qn79qx.f
+for	Quick check for QNC79.
+by	(UNKNOWN)
+
+file	slatec/chk/qxabm.f
+for	Test the DEPAC routine DEABM.
+by	Chow, Jeff, (LANL)
+
+file	slatec/chk/qxbdf.f
+for	Test the DEPAC routine DEBDF.
+by	Chow, Jeff, (LANL)
+
+file	slatec/chk/qxblkt.f
+for	(UNKNOWN)
+by	(UNKNOWN)
+
+file	slatec/chk/qxbvsp.f
+for	Quick check for BVSUP.
+by	(UNKNOWN)
+
+file	slatec/chk/qxcrt.f
+for	(UNKNOWN)
+by	(UNKNOWN)
+
+file	slatec/chk/qxcsp.f
+for	(UNKNOWN)
+by	(UNKNOWN)
+
+file	slatec/chk/qxcyl.f
+for	(UNKNOWN)
+by	(UNKNOWN)
+
+file	slatec/chk/qxdabm.f
+for	Test the DEPAC routine DDEABM.
+by	Chow, Jeff, (LANL)
+
+file	slatec/chk/qxdbdf.f
+for	Test the DEPAC routine DDEBDF.
+by	Chow, Jeff, (LANL)
+
+file	slatec/chk/qxdbvs.f
+for	Quick check for DBVSUP.
+by	(UNKNOWN)
+
+file	slatec/chk/qxdrkf.f
+for	Test the DEPAC routine DDERKF.
+by	Chow, Jeff, (LANL)
+
+file	slatec/chk/qxgbun.f
+for	(UNKNOWN)
+by	(UNKNOWN)
+
+file	slatec/chk/qxplr.f
+for	(UNKNOWN)
+by	(UNKNOWN)
+
+file	slatec/chk/qxrkf.f
+for	Test the DEPAC routine DERKF.
+by	Chow, Jeff, (LANL)
+
+file	slatec/chk/qxssp.f
+for	(UNKNOWN)
+by	(UNKNOWN)
+
+file	slatec/chk/racah.f
+for	THIS PROGRAM IS A SINGLE PRECISION SHELL THAT CALLS THE
+gams	C19
+by	LOZIER, DANIEL W., (NIST)
+
+file	slatec/chk/rqrtst.f
+for	Quick check for RPQR79.
+by	(UNKNOWN)
+
+file	slatec/chk/sbeg.f
+for	Generate random numbers.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/sblat2.f
+for	Driver for testing Level 2 BLAS single precision
+gams	A3A
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/sblat3.f
+for	Driver for testing Level 3 BLAS single precision
+gams	A3A
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/sbocqx.f
+for	Quick check for SBOCLS.
+by	(UNKNOWN)
+
+file	slatec/chk/schk12.f
+for	Quick check for SGEMV and SGBMV.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/schk13.f
+for	Quick check for SGEMM.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/schk22.f
+for	Quick check for SSYMV, SSBMV and SSPMV.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/schk23.f
+for	Quick check for SSYMM.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/schk32.f
+for	Quick check for STRMV, STBMV, STPMV, STRSV, STBSV and
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/schk33.f
+for	Quick check for STRMM and STRSM.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/schk42.f
+for	Quick check for SGER.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/schk43.f
+for	Quick check for SSYRK.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/schk52.f
+for	Quick check for SSYR and SSPR.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/schk53.f
+for	Quick check for SSYR2K.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/schk62.f
+for	Quick check for SSYR2 and SSPR2.
+by	Du Croz, J. (NAG)
+
+file	slatec/chk/schke2.f
+for	Test the error exits from the Level 2 Blas.
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/schke5.f
+for	Test the error exits from the Level 3 Blas.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/sdasqc.f
+for	Quick check for SLATEC routine SDASSL.
+gams	I1A2
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/chk/sdf.f
+for	Quick check for SLATEC routines SDRIV1, SDRIV2 and SDRIV3.
+gams	I1A2, I1A1B
+by	Kahaner, D. K., (NIST)
+
+file	slatec/chk/sdjac1.f
+for	First Jacobian evaluator for SDASQC.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/chk/sdjac2.f
+for	Second Jacobian evaluator for SDASQC.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/chk/sdqck.f
+for	Quick check for SLATEC routines SDRIV1, SDRIV2 and SDRIV3.
+gams	I1A2, I1A1B
+by	Kahaner, D. K., (NIST)
+
+file	slatec/chk/sdres1.f
+for	First residual evaluator for SDASQC.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/chk/sdres2.f
+for	Second residual evaluator for SDASQC.
+by	PETZOLD, LINDA R., (LLNL)
+
+file	slatec/chk/sfnck.f
+for	Quick check for the single precision Fullerton
+by	Boland, W. Robert, (LANL)
+
+file	slatec/chk/sgeqc.f
+for	Quick check for SGEFS and SGEIR.
+by	Jacobsen, Nancy, (LANL)
+
+file	slatec/chk/slapqc.f
+for	Quick check for testing Sparse Linear Algebra Package
+gams	D2A4, D2B4
+by	Mark K. Seager (LLNL)
+
+file	slatec/chk/smake2.f
+for	Generate values for an M by N matrix A.
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/smake3.f
+for	Generate values for an M by N matrix A.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/smmch.f
+for	Check the results of the computational tests.
+by	Dongarra, J. J., (ANL)
+
+file	slatec/chk/smvch.f
+for	Check the results of the computational tests.
+by	Du Croz, J. J., (NAG)
+
+file	slatec/chk/snls1q.f
+for	Quick check for SNLS1E, SNLS1 and SCOV.
+by	(UNKNOWN)
+
+file	slatec/chk/snsqqk.f
+for	Quick check for SNSQE and SNSQ.
+by	(UNKNOWN)
+
+file	slatec/chk/sosfnc.f
+for	Function evaluator for SOS quick check.
+by	Watts, H. A., (SNLA)
+
+file	slatec/chk/sosnqx.f
+for	Quick check for SOS.
+by	Watts, H. A., (SNLA)
+
+file	slatec/chk/splpqx.f
+for	Quick check for SPLP.
+by	(UNKNOWN)
+
+file	slatec/chk/sqck.f
+for	Quick check for SPOFS, SPOIR, SNBFS and SNBIR.
+by	Voorhees, E. A., (LANL)
+
+file	slatec/chk/sqfcn2.f
+for	Evaluate function used in SNSQE.
+by	(UNKNOWN)
+
+file	slatec/chk/sqjac2.f
+for	Evaluate full Jacobian for SNSQE test.
+by	(UNKNOWN)
+
+file	slatec/chk/srmgen.f
+for	This routine generates a "Random" symmetric or
+by	Seager, Mark K., (LLNL)
+
+file	slatec/chk/ssrtqc.f
+for	Quick check for SLATEC routines SSORT, SPSORT, SPPERM
+gams	N6A
+by	BOISVERT, RONALD, (NIST)
+
+file	slatec/chk/stest.f
+for	Compare arrays SCOMP and STRUE.
+by	Lawson, C. L., (JPL)
+
+file	slatec/chk/t0.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/t1.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/t2.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/t3.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/t4.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/t5.f
+for	Subsidiary to
+by	(UNKNOWN)
+
+file	slatec/chk/test01.f
+for	Driver for testing SLATEC subprogram
+gams	Z
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test02.f
+for	Driver for testing SLATEC subprograms
+gams	C
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test03.f
+for	Driver for testing SLATEC subprograms
+gams	C
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test04.f
+for	Driver for testing SLATEC subprograms
+gams	C
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test05.f
+for	Driver for testing SLATEC subprograms
+gams	C
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test06.f
+for	Driver for testing SLATEC subprograms
+gams	C
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test07.f
+for	Driver for testing SLATEC subprograms
+gams	C
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test08.f
+for	Driver for testing SLATEC subprograms
+gams	C
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test09.f
+for	Driver for testing SLATEC subprograms.
+gams	C7A, C10A4, C10B4, C10D
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test10.f
+for	Driver for testing SLATEC subprograms.
+gams	C7A, C10A4, C10B4, C10D
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test11.f
+for	Driver for testing SLATEC subprograms
+gams	A3D, C3A2, C7C, C9
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test12.f
+for	Driver for testing SLATEC subprograms
+gams	A3D, C3A2, C7C, C9
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test13.f
+for	Driver for testing SLATEC subprograms
+gams	C14
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test14.f
+for	Driver for testing SLATEC subprograms
+gams	C14
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test15.f
+for	Driver for testing SLATEC subprograms
+gams	C19
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test16.f
+for	Driver for testing SLATEC subprograms
+gams	C19
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test17.f
+for	Driver for testing SLATEC subprograms
+gams	D1
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test18.f
+for	Driver for testing SLATEC subprograms
+gams	D1B
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test19.f
+for	Driver for testing SLATEC subprograms
+gams	D1B
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test20.f
+for	Driver for testing SLATEC subprograms
+gams	D1B
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test21.f
+for	Driver for testing SLATEC subprograms
+gams	D2
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test22.f
+for	Driver for testing SLATEC subprograms
+gams	D2
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test23.f
+for	Driver for testing SLATEC subprograms
+gams	D2
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test24.f
+for	Driver for testing SLATEC subprograms
+gams	D2
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test25.f
+for	Driver for testing SLATEC subprograms.
+gams	D2A4, D2B4
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test26.f
+for	Driver for testing SLATEC subprograms.
+gams	D2A4, D2B4
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test27.f
+for	Driver for testing SLATEC subprograms
+gams	D5, D9
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test28.f
+for	Driver for testing SLATEC subprograms
+gams	D5, D9
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test29.f
+for	Driver for testing SLATEC subprograms
+gams	E1, E3
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test30.f
+for	Driver for testing SLATEC subprograms
+gams	E, E1A, E3
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test31.f
+for	Driver for testing SLATEC subprograms
+gams	E, E1A, E3
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test32.f
+for	Driver for testing SLATEC subprograms
+gams	E1A
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test33.f
+for	Driver for testing SLATEC subprograms
+gams	E1A
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test34.f
+for	Driver for testing SLATEC subprograms
+gams	F1A
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test35.f
+for	Driver for testing SLATEC subprograms
+gams	F2
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test36.f
+for	Driver for testing SLATEC subprograms
+gams	F2
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test37.f
+for	Driver for testing SLATEC subprograms
+gams	G2
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test38.f
+for	Driver for testing SLATEC subprograms
+gams	G2
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test39.f
+for	Driver for testing SLATEC subprograms
+gams	H2
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test40.f
+for	Driver for testing SLATEC subprograms
+gams	H2
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test41.f
+for	Driver for testing SLATEC subprograms
+gams	H2
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test42.f
+for	Driver for testing SLATEC subprograms
+gams	H2
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test43.f
+for	Driver for testing SLATEC subprograms
+gams	I1
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test44.f
+for	Driver for testing SLATEC subprograms
+gams	I1
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test45.f
+for	Driver for testing SLATEC subprograms
+gams	I1A2, I1A1B
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test46.f
+for	Driver for testing SLATEC subprograms
+gams	I1A2, I1A1B
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test47.f
+for	Driver for testing SLATEC subprograms
+gams	I1A2, I1A1B
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test48.f
+for	Driver for testing SLATEC subprograms
+gams	I1A2
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test49.f
+for	Driver for testing SLATEC subprograms
+gams	I1A2
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test50.f
+for	Driver for testing SLATEC subprograms
+gams	I2
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test51.f
+for	Driver for testing SLATEC subprograms
+gams	J1
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test52.f
+for	Driver for testing SLATEC subprograms
+gams	K1, E3, K6, L
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test53.f
+for	Driver for testing SLATEC subprograms
+gams	K1, E3, K6, L
+by	SLATEC Common Mathematical Library Committee
+
+file	slatec/chk/test54.f
+for	Driver for testing SLATEC subprograms
+gams	N6A
+by	BOISVERT, RONALD, (NIST)
+
+file	slatec/chk/uivp.f
+for	Dummy routine for BVSUP quick check.
+by	Watts, H. A., (SNLA)
+
+file	slatec/chk/uvec.f
+for	Dummy routine for BVSUP quick check.
+by	Watts, H. A., (SNLA)
+
+file	slatec/chk/vfill.f
+for	Fill a vector with a value.
+by	Seager, Mark K., (LLNL)
+
+file	slatec/chk/xcsrt.f
+for	TO COMPUTE CHECK VALUES FOR LEGENDRE FUNCTIONS
+gams	C3A2, C9
+by	SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+
+file	slatec/chk/zqcai.f
+for	Quick check for SLATEC subroutines
+gams	C10D
+by	Amos, Don, (SNL)
+
+file	slatec/chk/zqcbh.f
+for	Quick check for SLATEC subroutine
+gams	C10A4
+by	Amos, Don, (SNL)
+
+file	slatec/chk/zqcbi.f
+for	Quick check for SLATEC subroutine
+gams	C10B4
+by	Amos, Don, (SNL)
+
+file	slatec/chk/zqcbj.f
+for	Quick check for SLATEC subroutine
+gams	C10A4
+by	Amos, Don, (SNL)
+
+file	slatec/chk/zqcbk.f
+for	Quick check for SLATEC subroutine
+gams	C10B4
+by	Amos, Don, (SNL)
+
+file	slatec/chk/zqcby.f
+for	Quick check for SLATEC subroutine
+gams	C10A4
+by	Amos, Don, (SNL)
+

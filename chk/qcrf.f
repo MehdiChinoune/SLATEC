@@ -1,0 +1,112 @@
+*DECK QCRF
+      SUBROUTINE QCRF (LUN, KPRINT, IPASS)
+C***BEGIN PROLOGUE  QCRF
+C***PURPOSE  Quick check for RF.
+C***LIBRARY   SLATEC
+C***KEYWORDS  QUICK CHECK
+C***AUTHOR  Pexton, R. L., (LLNL)
+C***DESCRIPTION
+C
+C            QUICK TEST FOR CARLSON INTEGRAL RF
+C
+C***ROUTINES CALLED  NUMXER, R1MACH, RF, XERCLR, XGETF, XSETF
+C***REVISION HISTORY  (YYMMDD)
+C   790801  DATE WRITTEN
+C   890618  REVISION DATE from Version 3.2
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C   910708  Minor modifications in use of KPRINT.  (WRB)
+C***END PROLOGUE  QCRF
+      INTEGER KPRINT, IPASS, CONTRL, KONTRL, LUN, IER
+      INTEGER IPASS1, IPASS2, IPASS3, IPASS4, NUMXER
+      REAL ALEM, TRF, RF, DIF, R1MACH
+      EXTERNAL NUMXER, R1MACH, RF, XERCLR, XGETF, XSETF
+C***FIRST EXECUTABLE STATEMENT  QCRF
+      CALL XERCLR
+      CALL XGETF(CONTRL)
+      IF ( KPRINT .GE. 3 ) THEN
+         KONTRL = +1
+      ELSE
+         KONTRL = 0
+      ENDIF
+      CALL XSETF(KONTRL)
+C
+C  FORCE ERROR 1
+C
+      IF ( KPRINT .GE. 3 ) WRITE (LUN,101)
+  101 FORMAT(' RF - FORCE ERROR 1 TO OCCUR')
+      TRF = RF(-1.0E0,-1.0E0,-1.0E0,IER)
+      IER = NUMXER(IER)
+      IF ( IER .EQ. 1 ) THEN
+         IPASS1 = 1
+      ELSE
+         IPASS1 = 0
+      ENDIF
+      CALL XERCLR
+C
+C  FORCE ERROR 2
+C
+      IF ( KPRINT .GE. 3 ) WRITE (LUN,102)
+  102 FORMAT(' RF - FORCE ERROR 2 TO OCCUR')
+      TRF = RF(R1MACH(1),R1MACH(1),R1MACH(1),IER)
+      IER = NUMXER(IER)
+      IF ( IER .EQ. 2 ) THEN
+         IPASS2 = 1
+      ELSE
+         IPASS2 = 0
+      ENDIF
+      CALL XERCLR
+C
+C  FORCE ERROR 3
+C
+      IF ( KPRINT .GE. 3 ) WRITE (LUN,103)
+  103 FORMAT(' RF - FORCE ERROR 3 TO OCCUR')
+      TRF = RF(R1MACH(2),R1MACH(2),R1MACH(2),IER)
+      IER = NUMXER(IER)
+      IF ( IER .EQ. 3 ) THEN
+         IPASS3 = 1
+      ELSE
+         IPASS3 = 0
+      ENDIF
+      CALL XERCLR
+C
+C  ARGUMENTS IN RANGE
+C  ALEM=LEMNISCATE CONSTANT A
+C
+      ALEM = 1.311028777146059905E0
+      TRF  = RF(0.0E0,1.0E0,2.0E0,IER)
+      CALL XERCLR
+      DIF  = TRF - ALEM
+      IF ( (ABS(DIF/ALEM).LT.1000.0E0*R1MACH(4)).AND.(IER.EQ.0) ) THEN
+         IPASS4 = 1
+      ELSE
+         IPASS4 = 0
+      ENDIF
+      IPASS = MIN(IPASS1,IPASS2,IPASS3,IPASS4)
+      IF ( KPRINT .EQ. 0 ) THEN
+         GO TO 999
+      ELSEIF ( KPRINT .EQ. 1 ) THEN
+         IF ( IPASS .EQ. 1 ) THEN
+            GO TO 999
+         ELSE
+            WRITE (LUN,104)
+  104       FORMAT(' RF - FAILED')
+            GO TO 999
+         ENDIF
+      ELSE
+         IF ( IPASS .EQ. 1 ) THEN
+            WRITE (LUN,105)
+  105       FORMAT(' RF - PASSED')
+            GO TO 999
+         ELSE
+            WRITE (LUN,104)
+            IF ( IPASS4 .EQ. 0 ) WRITE (LUN,106) ALEM, TRF, DIF
+  106       FORMAT(' CORRECT ANSWER =', 1PE14.6 /
+     *             'COMPUTED ANSWER =',   E14.6 /
+     *             '     DIFFERENCE =',   E14.6 )
+            GO TO 999
+         ENDIF
+      ENDIF
+  999 CONTINUE
+      CALL XSETF(CONTRL)
+      RETURN
+      END

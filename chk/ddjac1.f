@@ -1,0 +1,24 @@
+*DECK DDJAC1
+      SUBROUTINE DDJAC1 (T, Y, YPRIME, PD, CJ, RPAR, IPAR)
+C***BEGIN PROLOGUE  DDJAC1
+C***SUBSIDIARY
+C***PURPOSE  First Jacobian evaluator for DDASQC.
+C***LIBRARY   SLATEC (DASSL)
+C***TYPE      DOUBLE PRECISION (SDJAC1-S, DDJAC1-D)
+C***AUTHOR  PETZOLD, LINDA R., (LLNL)
+C***SEE ALSO  DDASQC
+C***ROUTINES CALLED  (NONE)
+C***REVISION HISTORY  (YYMMDD)
+C   891013  DATE WRITTEN
+C   901001  Converted prologue to 4.0 format and made all argument
+C           declarations explicit.  (FNF)
+C***END PROLOGUE  DDJAC1
+      INTEGER  IPAR(*)
+      DOUBLE PRECISION  T, Y(*), YPRIME(*), PD(2,2), CJ, RPAR(*)
+C***FIRST EXECUTABLE STATEMENT  DDJAC1
+      PD(1,1) = CJ + 10.0D0
+      PD(1,2) = 0.0D0
+      PD(2,1) = 1.0D0
+      PD(2,2) = 1.0D0
+      RETURN
+      END

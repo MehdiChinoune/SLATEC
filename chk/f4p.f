@@ -1,0 +1,17 @@
+*DECK F4P
+      REAL FUNCTION F4P (X)
+C***BEGIN PROLOGUE  F4P
+C***PURPOSE  Subsidiary to
+C***LIBRARY   SLATEC
+C***AUTHOR  (UNKNOWN)
+C***ROUTINES CALLED  (NONE)
+C***REVISION HISTORY  (YYMMDD)
+C   ??????  DATE WRITTEN
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C***END PROLOGUE  F4P
+      REAL X
+C***FIRST EXECUTABLE STATEMENT  F4P
+      F4P = 0.0
+      IF(X.GT.0.0) F4P = 1.0/(X*SQRT(X))
+      RETURN
+      END

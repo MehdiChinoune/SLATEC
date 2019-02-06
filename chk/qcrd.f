@@ -1,0 +1,112 @@
+*DECK QCRD
+      SUBROUTINE QCRD (LUN, KPRINT, IPASS)
+C***BEGIN PROLOGUE  QCRD
+C***PURPOSE  Quick check for RD.
+C***LIBRARY   SLATEC
+C***KEYWORDS  QUICK CHECK
+C***AUTHOR  Pexton, R. L., (LLNL)
+C***DESCRIPTION
+C
+C            QUICK TEST FOR CARLSON INTEGRAL RD
+C
+C***ROUTINES CALLED  NUMXER, R1MACH, RD, XERCLR, XGETF, XSETF
+C***REVISION HISTORY  (YYMMDD)
+C   790801  DATE WRITTEN
+C   890618  REVISION DATE from Version 3.2
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C   910708  Minor modifications in use of KPRINT.  (WRB)
+C***END PROLOGUE  QCRD
+      INTEGER KPRINT, IPASS, CONTRL, KONTRL, LUN, IER
+      INTEGER IPASS1, IPASS2, IPASS3, IPASS4, NUMXER
+      REAL BLEM, TRD, RD, DIF, R1MACH
+      EXTERNAL NUMXER, R1MACH, RD, XERCLR, XGETF, XSETF
+C***FIRST EXECUTABLE STATEMENT  QCRD
+      CALL XERCLR
+      CALL XGETF(CONTRL)
+      IF ( KPRINT .GE. 3 ) THEN
+         KONTRL = +1
+      ELSE
+         KONTRL = 0
+      ENDIF
+      CALL XSETF(KONTRL)
+C
+C  FORCE ERROR 1
+C
+      IF ( KPRINT .GE. 3 ) WRITE (LUN,101)
+  101 FORMAT(' RD - FORCE ERROR 1 TO OCCUR')
+      TRD = RD(-1.0E0,-1.0E0,-1.0E0,IER)
+      IER = NUMXER(IER)
+      IF ( IER .EQ. 1 ) THEN
+         IPASS1 = 1
+      ELSE
+         IPASS1 = 0
+      ENDIF
+      CALL XERCLR
+C
+C  FORCE ERROR 2
+C
+      IF ( KPRINT .GE. 3 ) WRITE (LUN,102)
+  102 FORMAT(' RD - FORCE ERROR 2 TO OCCUR')
+      TRD = RD(1.0E0,1.0E0,-1.0E0,IER)
+      IER = NUMXER(IER)
+      IF ( IER .EQ. 2 ) THEN
+         IPASS2 = 1
+      ELSE
+         IPASS2 = 0
+      ENDIF
+      CALL XERCLR
+C
+C  FORCE ERROR 3
+C
+      IF ( KPRINT .GE. 3 ) WRITE (LUN,103)
+  103 FORMAT(' RD - FORCE ERROR 3 TO OCCUR')
+      TRD = RD(R1MACH(2),R1MACH(2),R1MACH(2),IER)
+      IER = NUMXER(IER)
+      IF ( IER .EQ. 3 ) THEN
+         IPASS3 = 1
+      ELSE
+         IPASS3 = 0
+      ENDIF
+      CALL XERCLR
+C
+C  ARGUMENTS IN RANGE
+C  BLEM=3 * LEMNISCATE CONSTANT B
+C
+      BLEM = 1.79721035210338831E0
+      TRD  = RD(0.0E0,2.0E0,1.0E0,IER)
+      CALL XERCLR
+      DIF  = TRD - BLEM
+      IF ( (ABS(DIF/BLEM).LT.1000.0E0*R1MACH(4)).AND.(IER.EQ.0) ) THEN
+         IPASS4 = 1
+      ELSE
+         IPASS = 0
+      ENDIF
+      IPASS = MIN(IPASS1,IPASS2,IPASS3,IPASS4)
+      IF ( KPRINT .LE. 0 ) THEN
+         GO TO 999
+      ELSEIF ( KPRINT .EQ. 1 ) THEN
+         IF ( IPASS .EQ. 1 ) THEN
+            GO TO 999
+         ELSE
+            WRITE (LUN,104)
+  104       FORMAT(' RD - FAILED')
+            GO TO 999
+         ENDIF
+      ELSE
+         IF ( IPASS .EQ. 1 ) THEN
+            WRITE (LUN,105)
+  105       FORMAT(' RD - PASSED')
+            GO TO 999
+         ELSE
+            WRITE (LUN,104)
+            IF ( IPASS4 .EQ. 0 ) WRITE (LUN,106) BLEM, TRD, DIF
+  106       FORMAT(' CORRECT ANSWER =', 1PE14.6 /
+     *             'COMPUTED ANSWER =',   E14.6 /
+     *             '     DIFFERENCE =',   E14.6 )
+            GO TO 999
+         ENDIF
+      ENDIF
+  999 CONTINUE
+      CALL XSETF(CONTRL)
+      RETURN
+      END

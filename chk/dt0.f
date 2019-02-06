@@ -1,0 +1,20 @@
+*DECK DT0
+      DOUBLE PRECISION FUNCTION DT0 (X)
+C***BEGIN PROLOGUE  DT0
+C***PURPOSE  Subsidiary to
+C***LIBRARY   SLATEC
+C***AUTHOR  (UNKNOWN)
+C***ROUTINES CALLED  DF0S
+C***REVISION HISTORY  (YYMMDD)
+C   ??????  DATE WRITTEN
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C***END PROLOGUE  DT0
+      DOUBLE PRECISION A,B,DF0S,X,X1,Y
+C***FIRST EXECUTABLE STATEMENT  DT0
+      A = 0.0D+00
+      B = 0.1D+01
+      X1 = X+0.1D+01
+      Y = (B-A)/X1+A
+      DT0 = (B-A)*DF0S(Y)/X1/X1
+      RETURN
+      END

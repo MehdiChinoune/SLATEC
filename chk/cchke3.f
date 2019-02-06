@@ -1,0 +1,1226 @@
+*DECK CCHKE3
+      SUBROUTINE CCHKE3 (ISNUM, SRNAMT, NOUT, KPRINT, FATAL)
+C***BEGIN PROLOGUE  CCHKE3
+C***SUBSIDIARY
+C***PURPOSE  Test the error exits from the Level 3 Blas.
+C***LIBRARY   SLATEC (BLAS)
+C***AUTHOR  Dongarra, J. J., (ANL)
+C           Duff, I., (AERE)
+C           Du Croz, J., (NAG)
+C           Hammarling, S., (NAG)
+C***DESCRIPTION
+C
+C  Tests the error exits from the Level 3 Blas.
+C  ALPHA, BETA, A, X and Y should not need to be defined.
+C
+C  Auxiliary routine for test program for Level 3 Blas.
+C***REFERENCES  (NONE)
+C***ROUTINES CALLED  CGEMM, CHEMM, CHER2K, CHERK, CHKXER, CSYMM, CSYR2K,
+C                    CSYRK, CTRMM, CTRSM, XERCLR, XERDMP, XGETF, XSETF
+C***REVISION HISTORY  (YYMMDD)
+C   890208  DATE WRITTEN
+C   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
+C***END PROLOGUE  CCHKE3
+C     .. Scalar Arguments ..
+      LOGICAL            FATAL
+      INTEGER            ISNUM, KPRINT, NOUT
+      CHARACTER*6        SRNAMT
+C     .. Scalars in Common ..
+      INTEGER            INFOT
+C     .. Local Scalars ..
+      COMPLEX            ALPHA, BETA
+      REAL               RALPHA, RBETA
+      INTEGER            KONTRL
+C     .. Local Arrays ..
+      COMPLEX            A( 2, 1), B( 2, 1), C( 2, 1)
+C     .. External Subroutines ..
+      EXTERNAL           CGEMM, CHEMM, CHER2K, CHERK, CHKXER, CSYMM,
+     $                   CSYR2K, CSYRK, CTRMM, CTRSM
+C***FIRST EXECUTABLE STATEMENT  CCHKE3
+      CALL XGETF (KONTRL)
+      IF (KPRINT .LE. 2) THEN
+        CALL XSETF(0)
+      ELSE
+        CALL XSETF(1)
+      ENDIF
+      GO TO ( 10, 20, 30, 40, 50, 60, 70, 80,
+     $        90 )ISNUM
+   10 INFOT = 1
+      CALL XERCLR
+      CALL CGEMM( '/', 'N', 0, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 1
+      CALL XERCLR
+      CALL CGEMM( '/', 'C', 0, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 1
+      CALL XERCLR
+      CALL CGEMM( '/', 'T', 0, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 2
+      CALL XERCLR
+      CALL CGEMM( 'N', '/', 0, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 2
+      CALL XERCLR
+      CALL CGEMM( 'C', '/', 0, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 2
+      CALL XERCLR
+      CALL CGEMM( 'T', '/', 0, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CGEMM( 'N', 'N', -1, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CGEMM( 'N', 'C', -1, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CGEMM( 'N', 'T', -1, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CGEMM( 'C', 'N', -1, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CGEMM( 'C', 'C', -1, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CGEMM( 'C', 'T', -1, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CGEMM( 'T', 'N', -1, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CGEMM( 'T', 'C', -1, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CGEMM( 'T', 'T', -1, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CGEMM( 'N', 'N', 0, -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CGEMM( 'N', 'C', 0, -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CGEMM( 'N', 'T', 0, -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CGEMM( 'C', 'N', 0, -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CGEMM( 'C', 'C', 0, -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CGEMM( 'C', 'T', 0, -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CGEMM( 'T', 'N', 0, -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CGEMM( 'T', 'C', 0, -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CGEMM( 'T', 'T', 0, -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CGEMM( 'N', 'N', 0, 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CGEMM( 'N', 'C', 0, 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CGEMM( 'N', 'T', 0, 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CGEMM( 'C', 'N', 0, 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CGEMM( 'C', 'C', 0, 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CGEMM( 'C', 'T', 0, 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CGEMM( 'T', 'N', 0, 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CGEMM( 'T', 'C', 0, 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CGEMM( 'T', 'T', 0, 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 8
+      CALL XERCLR
+      CALL CGEMM( 'N', 'N', 2, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 8
+      CALL XERCLR
+      CALL CGEMM( 'N', 'C', 2, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 8
+      CALL XERCLR
+      CALL CGEMM( 'N', 'T', 2, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 8
+      CALL XERCLR
+      CALL CGEMM( 'C', 'N', 0, 0, 2, ALPHA, A, 1, B, 2, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 8
+      CALL XERCLR
+      CALL CGEMM( 'C', 'C', 0, 0, 2, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 8
+      CALL XERCLR
+      CALL CGEMM( 'C', 'T', 0, 0, 2, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 8
+      CALL XERCLR
+      CALL CGEMM( 'T', 'N', 0, 0, 2, ALPHA, A, 1, B, 2, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 8
+      CALL XERCLR
+      CALL CGEMM( 'T', 'C', 0, 0, 2, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 8
+      CALL XERCLR
+      CALL CGEMM( 'T', 'T', 0, 0, 2, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CGEMM( 'N', 'N', 0, 0, 2, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CGEMM( 'C', 'N', 0, 0, 2, ALPHA, A, 2, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CGEMM( 'T', 'N', 0, 0, 2, ALPHA, A, 2, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CGEMM( 'N', 'C', 0, 2, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CGEMM( 'C', 'C', 0, 2, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CGEMM( 'T', 'C', 0, 2, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CGEMM( 'N', 'T', 0, 2, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CGEMM( 'C', 'T', 0, 2, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CGEMM( 'T', 'T', 0, 2, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 13
+      CALL XERCLR
+      CALL CGEMM( 'N', 'N', 2, 0, 0, ALPHA, A, 2, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 13
+      CALL XERCLR
+      CALL CGEMM( 'N', 'C', 2, 0, 0, ALPHA, A, 2, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 13
+      CALL XERCLR
+      CALL CGEMM( 'N', 'T', 2, 0, 0, ALPHA, A, 2, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 13
+      CALL XERCLR
+      CALL CGEMM( 'C', 'N', 2, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 13
+      CALL XERCLR
+      CALL CGEMM( 'C', 'C', 2, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 13
+      CALL XERCLR
+      CALL CGEMM( 'C', 'T', 2, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 13
+      CALL XERCLR
+      CALL CGEMM( 'T', 'N', 2, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 13
+      CALL XERCLR
+      CALL CGEMM( 'T', 'C', 2, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 13
+      CALL XERCLR
+      CALL CGEMM( 'T', 'T', 2, 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      GO TO 100
+   20 INFOT = 1
+      CALL XERCLR
+      CALL CHEMM( '/', 'U', 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 2
+      CALL XERCLR
+      CALL CHEMM( 'L', '/', 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CHEMM( 'L', 'U', -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CHEMM( 'R', 'U', -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CHEMM( 'L', 'L', -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CHEMM( 'R', 'L', -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CHEMM( 'L', 'U', 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CHEMM( 'R', 'U', 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CHEMM( 'L', 'L', 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CHEMM( 'R', 'L', 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CHEMM( 'L', 'U', 2, 0, ALPHA, A, 1, B, 2, BETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CHEMM( 'R', 'U', 0, 2, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CHEMM( 'L', 'L', 2, 0, ALPHA, A, 1, B, 2, BETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CHEMM( 'R', 'L', 0, 2, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CHEMM( 'L', 'U', 2, 0, ALPHA, A, 2, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CHEMM( 'R', 'U', 2, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CHEMM( 'L', 'L', 2, 0, ALPHA, A, 2, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CHEMM( 'R', 'L', 2, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 12
+      CALL XERCLR
+      CALL CHEMM( 'L', 'U', 2, 0, ALPHA, A, 2, B, 2, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 12
+      CALL XERCLR
+      CALL CHEMM( 'R', 'U', 2, 0, ALPHA, A, 1, B, 2, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 12
+      CALL XERCLR
+      CALL CHEMM( 'L', 'L', 2, 0, ALPHA, A, 2, B, 2, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 12
+      CALL XERCLR
+      CALL CHEMM( 'R', 'L', 2, 0, ALPHA, A, 1, B, 2, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      GO TO 100
+   30 INFOT = 1
+      CALL XERCLR
+      CALL CSYMM( '/', 'U', 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 2
+      CALL XERCLR
+      CALL CSYMM( 'L', '/', 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CSYMM( 'L', 'U', -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CSYMM( 'R', 'U', -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CSYMM( 'L', 'L', -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CSYMM( 'R', 'L', -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CSYMM( 'L', 'U', 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CSYMM( 'R', 'U', 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CSYMM( 'L', 'L', 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CSYMM( 'R', 'L', 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CSYMM( 'L', 'U', 2, 0, ALPHA, A, 1, B, 2, BETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CSYMM( 'R', 'U', 0, 2, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CSYMM( 'L', 'L', 2, 0, ALPHA, A, 1, B, 2, BETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CSYMM( 'R', 'L', 0, 2, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CSYMM( 'L', 'U', 2, 0, ALPHA, A, 2, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CSYMM( 'R', 'U', 2, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CSYMM( 'L', 'L', 2, 0, ALPHA, A, 2, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CSYMM( 'R', 'L', 2, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 12
+      CALL XERCLR
+      CALL CSYMM( 'L', 'U', 2, 0, ALPHA, A, 2, B, 2, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 12
+      CALL XERCLR
+      CALL CSYMM( 'R', 'U', 2, 0, ALPHA, A, 1, B, 2, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 12
+      CALL XERCLR
+      CALL CSYMM( 'L', 'L', 2, 0, ALPHA, A, 2, B, 2, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 12
+      CALL XERCLR
+      CALL CSYMM( 'R', 'L', 2, 0, ALPHA, A, 1, B, 2, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      GO TO 100
+   40 INFOT = 1
+      CALL XERCLR
+      CALL CTRMM( '/', 'U', 'N', 'N', 0, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 2
+      CALL XERCLR
+      CALL CTRMM( 'L', '/', 'N', 'N', 0, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CTRMM( 'L', 'U', '/', 'N', 0, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CTRMM( 'L', 'U', 'N', '/', 0, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRMM( 'L', 'U', 'N', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRMM( 'L', 'U', 'C', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRMM( 'L', 'U', 'T', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRMM( 'R', 'U', 'N', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRMM( 'R', 'U', 'C', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRMM( 'R', 'U', 'T', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRMM( 'L', 'L', 'N', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRMM( 'L', 'L', 'C', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRMM( 'L', 'L', 'T', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRMM( 'R', 'L', 'N', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRMM( 'R', 'L', 'C', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRMM( 'R', 'L', 'T', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRMM( 'L', 'U', 'N', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRMM( 'L', 'U', 'C', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRMM( 'L', 'U', 'T', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRMM( 'R', 'U', 'N', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRMM( 'R', 'U', 'C', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRMM( 'R', 'U', 'T', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRMM( 'L', 'L', 'N', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRMM( 'L', 'L', 'C', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRMM( 'L', 'L', 'T', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRMM( 'R', 'L', 'N', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRMM( 'R', 'L', 'C', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRMM( 'R', 'L', 'T', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRMM( 'L', 'U', 'N', 'N', 2, 0, ALPHA, A, 1, B, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRMM( 'L', 'U', 'C', 'N', 2, 0, ALPHA, A, 1, B, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRMM( 'L', 'U', 'T', 'N', 2, 0, ALPHA, A, 1, B, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRMM( 'R', 'U', 'N', 'N', 0, 2, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRMM( 'R', 'U', 'C', 'N', 0, 2, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRMM( 'R', 'U', 'T', 'N', 0, 2, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRMM( 'L', 'L', 'N', 'N', 2, 0, ALPHA, A, 1, B, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRMM( 'L', 'L', 'C', 'N', 2, 0, ALPHA, A, 1, B, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRMM( 'L', 'L', 'T', 'N', 2, 0, ALPHA, A, 1, B, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRMM( 'R', 'L', 'N', 'N', 0, 2, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRMM( 'R', 'L', 'C', 'N', 0, 2, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRMM( 'R', 'L', 'T', 'N', 0, 2, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRMM( 'L', 'U', 'N', 'N', 2, 0, ALPHA, A, 2, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRMM( 'L', 'U', 'C', 'N', 2, 0, ALPHA, A, 2, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRMM( 'L', 'U', 'T', 'N', 2, 0, ALPHA, A, 2, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRMM( 'R', 'U', 'N', 'N', 2, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRMM( 'R', 'U', 'C', 'N', 2, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRMM( 'R', 'U', 'T', 'N', 2, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRMM( 'L', 'L', 'N', 'N', 2, 0, ALPHA, A, 2, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRMM( 'L', 'L', 'C', 'N', 2, 0, ALPHA, A, 2, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRMM( 'L', 'L', 'T', 'N', 2, 0, ALPHA, A, 2, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRMM( 'R', 'L', 'N', 'N', 2, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRMM( 'R', 'L', 'C', 'N', 2, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRMM( 'R', 'L', 'T', 'N', 2, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      GO TO 100
+   50 INFOT = 1
+      CALL XERCLR
+      CALL CTRSM( '/', 'U', 'N', 'N', 0, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 2
+      CALL XERCLR
+      CALL CTRSM( 'L', '/', 'N', 'N', 0, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CTRSM( 'L', 'U', '/', 'N', 0, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CTRSM( 'L', 'U', 'N', '/', 0, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRSM( 'L', 'U', 'N', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRSM( 'L', 'U', 'C', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRSM( 'L', 'U', 'T', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRSM( 'R', 'U', 'N', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRSM( 'R', 'U', 'C', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRSM( 'R', 'U', 'T', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRSM( 'L', 'L', 'N', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRSM( 'L', 'L', 'C', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRSM( 'L', 'L', 'T', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRSM( 'R', 'L', 'N', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRSM( 'R', 'L', 'C', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 5
+      CALL XERCLR
+      CALL CTRSM( 'R', 'L', 'T', 'N', -1, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRSM( 'L', 'U', 'N', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRSM( 'L', 'U', 'C', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRSM( 'L', 'U', 'T', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRSM( 'R', 'U', 'N', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRSM( 'R', 'U', 'C', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRSM( 'R', 'U', 'T', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRSM( 'L', 'L', 'N', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRSM( 'L', 'L', 'C', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRSM( 'L', 'L', 'T', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRSM( 'R', 'L', 'N', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRSM( 'R', 'L', 'C', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 6
+      CALL XERCLR
+      CALL CTRSM( 'R', 'L', 'T', 'N', 0, -1, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRSM( 'L', 'U', 'N', 'N', 2, 0, ALPHA, A, 1, B, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRSM( 'L', 'U', 'C', 'N', 2, 0, ALPHA, A, 1, B, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRSM( 'L', 'U', 'T', 'N', 2, 0, ALPHA, A, 1, B, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRSM( 'R', 'U', 'N', 'N', 0, 2, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRSM( 'R', 'U', 'C', 'N', 0, 2, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRSM( 'R', 'U', 'T', 'N', 0, 2, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRSM( 'L', 'L', 'N', 'N', 2, 0, ALPHA, A, 1, B, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRSM( 'L', 'L', 'C', 'N', 2, 0, ALPHA, A, 1, B, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRSM( 'L', 'L', 'T', 'N', 2, 0, ALPHA, A, 1, B, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRSM( 'R', 'L', 'N', 'N', 0, 2, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRSM( 'R', 'L', 'C', 'N', 0, 2, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CTRSM( 'R', 'L', 'T', 'N', 0, 2, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRSM( 'L', 'U', 'N', 'N', 2, 0, ALPHA, A, 2, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRSM( 'L', 'U', 'C', 'N', 2, 0, ALPHA, A, 2, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRSM( 'L', 'U', 'T', 'N', 2, 0, ALPHA, A, 2, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRSM( 'R', 'U', 'N', 'N', 2, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRSM( 'R', 'U', 'C', 'N', 2, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRSM( 'R', 'U', 'T', 'N', 2, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRSM( 'L', 'L', 'N', 'N', 2, 0, ALPHA, A, 2, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRSM( 'L', 'L', 'C', 'N', 2, 0, ALPHA, A, 2, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRSM( 'L', 'L', 'T', 'N', 2, 0, ALPHA, A, 2, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRSM( 'R', 'L', 'N', 'N', 2, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRSM( 'R', 'L', 'C', 'N', 2, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 11
+      CALL XERCLR
+      CALL CTRSM( 'R', 'L', 'T', 'N', 2, 0, ALPHA, A, 1, B, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      GO TO 100
+   60 INFOT = 1
+      CALL XERCLR
+      CALL CHERK( '/', 'N', 0, 0, RALPHA, A, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 2
+      CALL XERCLR
+      CALL CHERK( 'U', 'T', 0, 0, RALPHA, A, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CHERK( 'U', 'N', -1, 0, RALPHA, A, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CHERK( 'U', 'C', -1, 0, RALPHA, A, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CHERK( 'L', 'N', -1, 0, RALPHA, A, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CHERK( 'L', 'C', -1, 0, RALPHA, A, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CHERK( 'U', 'N', 0, -1, RALPHA, A, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CHERK( 'U', 'C', 0, -1, RALPHA, A, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CHERK( 'L', 'N', 0, -1, RALPHA, A, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CHERK( 'L', 'C', 0, -1, RALPHA, A, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CHERK( 'U', 'N', 2, 0, RALPHA, A, 1, RBETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CHERK( 'U', 'C', 0, 2, RALPHA, A, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CHERK( 'L', 'N', 2, 0, RALPHA, A, 1, RBETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CHERK( 'L', 'C', 0, 2, RALPHA, A, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CHERK( 'U', 'N', 2, 0, RALPHA, A, 2, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CHERK( 'U', 'C', 2, 0, RALPHA, A, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CHERK( 'L', 'N', 2, 0, RALPHA, A, 2, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CHERK( 'L', 'C', 2, 0, RALPHA, A, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      GO TO 100
+   70 INFOT = 1
+      CALL XERCLR
+      CALL CSYRK( '/', 'N', 0, 0, ALPHA, A, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 2
+      CALL XERCLR
+      CALL CSYRK( 'U', 'C', 0, 0, ALPHA, A, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CSYRK( 'U', 'N', -1, 0, ALPHA, A, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CSYRK( 'U', 'T', -1, 0, ALPHA, A, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CSYRK( 'L', 'N', -1, 0, ALPHA, A, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CSYRK( 'L', 'T', -1, 0, ALPHA, A, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CSYRK( 'U', 'N', 0, -1, ALPHA, A, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CSYRK( 'U', 'T', 0, -1, ALPHA, A, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CSYRK( 'L', 'N', 0, -1, ALPHA, A, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CSYRK( 'L', 'T', 0, -1, ALPHA, A, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CSYRK( 'U', 'N', 2, 0, ALPHA, A, 1, BETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CSYRK( 'U', 'T', 0, 2, ALPHA, A, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CSYRK( 'L', 'N', 2, 0, ALPHA, A, 1, BETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CSYRK( 'L', 'T', 0, 2, ALPHA, A, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CSYRK( 'U', 'N', 2, 0, ALPHA, A, 2, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CSYRK( 'U', 'T', 2, 0, ALPHA, A, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CSYRK( 'L', 'N', 2, 0, ALPHA, A, 2, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 10
+      CALL XERCLR
+      CALL CSYRK( 'L', 'T', 2, 0, ALPHA, A, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      GO TO 100
+   80 INFOT = 1
+      CALL XERCLR
+      CALL CHER2K( '/', 'N', 0, 0, ALPHA, A, 1, B, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 2
+      CALL XERCLR
+      CALL CHER2K( 'U', 'T', 0, 0, ALPHA, A, 1, B, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CHER2K( 'U', 'N', -1, 0, ALPHA, A, 1, B, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CHER2K( 'U', 'C', -1, 0, ALPHA, A, 1, B, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CHER2K( 'L', 'N', -1, 0, ALPHA, A, 1, B, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CHER2K( 'L', 'C', -1, 0, ALPHA, A, 1, B, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CHER2K( 'U', 'N', 0, -1, ALPHA, A, 1, B, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CHER2K( 'U', 'C', 0, -1, ALPHA, A, 1, B, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CHER2K( 'L', 'N', 0, -1, ALPHA, A, 1, B, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CHER2K( 'L', 'C', 0, -1, ALPHA, A, 1, B, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CHER2K( 'U', 'N', 2, 0, ALPHA, A, 1, B, 1, RBETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CHER2K( 'U', 'C', 0, 2, ALPHA, A, 1, B, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CHER2K( 'L', 'N', 2, 0, ALPHA, A, 1, B, 1, RBETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CHER2K( 'L', 'C', 0, 2, ALPHA, A, 1, B, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CHER2K( 'U', 'N', 2, 0, ALPHA, A, 2, B, 1, RBETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CHER2K( 'U', 'C', 0, 2, ALPHA, A, 2, B, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CHER2K( 'L', 'N', 2, 0, ALPHA, A, 2, B, 1, RBETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CHER2K( 'L', 'C', 0, 2, ALPHA, A, 2, B, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 12
+      CALL XERCLR
+      CALL CHER2K( 'U', 'N', 2, 0, ALPHA, A, 2, B, 2, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 12
+      CALL XERCLR
+      CALL CHER2K( 'U', 'C', 2, 0, ALPHA, A, 1, B, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 12
+      CALL XERCLR
+      CALL CHER2K( 'L', 'N', 2, 0, ALPHA, A, 2, B, 2, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 12
+      CALL XERCLR
+      CALL CHER2K( 'L', 'C', 2, 0, ALPHA, A, 1, B, 1, RBETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      GO TO 100
+   90 INFOT = 1
+      CALL XERCLR
+      CALL CSYR2K( '/', 'N', 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 2
+      CALL XERCLR
+      CALL CSYR2K( 'U', 'C', 0, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CSYR2K( 'U', 'N', -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CSYR2K( 'U', 'T', -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CSYR2K( 'L', 'N', -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 3
+      CALL XERCLR
+      CALL CSYR2K( 'L', 'T', -1, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CSYR2K( 'U', 'N', 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CSYR2K( 'U', 'T', 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CSYR2K( 'L', 'N', 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 4
+      CALL XERCLR
+      CALL CSYR2K( 'L', 'T', 0, -1, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CSYR2K( 'U', 'N', 2, 0, ALPHA, A, 1, B, 1, BETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CSYR2K( 'U', 'T', 0, 2, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CSYR2K( 'L', 'N', 2, 0, ALPHA, A, 1, B, 1, BETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 7
+      CALL XERCLR
+      CALL CSYR2K( 'L', 'T', 0, 2, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CSYR2K( 'U', 'N', 2, 0, ALPHA, A, 2, B, 1, BETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CSYR2K( 'U', 'T', 0, 2, ALPHA, A, 2, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CSYR2K( 'L', 'N', 2, 0, ALPHA, A, 2, B, 1, BETA, C, 2 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 9
+      CALL XERCLR
+      CALL CSYR2K( 'L', 'T', 0, 2, ALPHA, A, 2, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 12
+      CALL XERCLR
+      CALL CSYR2K( 'U', 'N', 2, 0, ALPHA, A, 2, B, 2, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 12
+      CALL XERCLR
+      CALL CSYR2K( 'U', 'T', 2, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 12
+      CALL XERCLR
+      CALL CSYR2K( 'L', 'N', 2, 0, ALPHA, A, 2, B, 2, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+      INFOT = 12
+      CALL XERCLR
+      CALL CSYR2K( 'L', 'T', 2, 0, ALPHA, A, 1, B, 1, BETA, C, 1 )
+      CALL CHKXER( SRNAMT, INFOT, NOUT, FATAL, KPRINT )
+C
+  100 IF( KPRINT .GE. 2) THEN
+        CALL XERDMP
+        IF(.NOT.FATAL )THEN
+         WRITE( NOUT, FMT = 9999 )SRNAMT
+        ELSE
+         WRITE( NOUT, FMT = 9998 )SRNAMT
+        END IF
+      ENDIF
+      CALL XSETF (KONTRL)
+      RETURN
+C
+ 9999 FORMAT( ' ', A6, ' PASSED THE TESTS OF ERROR-EXITS' )
+ 9998 FORMAT( ' ******* ', A6, ' FAILED THE TESTS OF ERROR-EXITS *****',
+     $      '**' )
+C
+C     End of CCHKE3.
+C
+      END

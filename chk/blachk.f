@@ -1,0 +1,72 @@
+*DECK BLACHK
+      SUBROUTINE BLACHK (LUN, KPRINT, IPASS)
+C***BEGIN PROLOGUE  BLACHK
+C***PURPOSE  Quick check for Basic Linear Algebra Subprograms.
+C***LIBRARY   SLATEC
+C***KEYWORDS  QUICK CHECK
+C***AUTHOR  Lawson, C. L., (JPL)
+C***DESCRIPTION
+C
+C     ********************************* TBLA ***************************
+C     TEST DRIVER FOR BASIC LINEAR ALGEBRA SUBPROGRAMS.
+C     C. L. LAWSON, JPL, 1974 DEC 10, 1975 MAY 28
+C
+C     UPDATED BY K. HASKELL - JUNE 23,1980
+C
+C***ROUTINES CALLED  CHECK0, CHECK1, CHECK2, HEADER
+C***COMMON BLOCKS    COMBLA
+C***REVISION HISTORY  (YYMMDD)
+C   751210  DATE WRITTEN
+C   890618  REVISION DATE from Version 3.2
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C***END PROLOGUE  BLACHK
+      INTEGER IPASS, JTEST(38)
+      DOUBLE PRECISION DFAC,DQFAC
+      LOGICAL PASS
+      COMMON /COMBLA/ NPRINT, ICASE, N, INCX, INCY, MODE, PASS
+      DATA SFAC,SDFAC,DFAC,DQFAC / .625E-1, .50, .625D-1, 0.625D-1/
+      DATA JTEST /1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+     1            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1/
+C***FIRST EXECUTABLE STATEMENT  BLACHK
+      NPRINT = LUN
+      IPASS = 1
+C
+      IF (KPRINT.GE.2) WRITE (NPRINT,1005)
+ 1005 FORMAT(1H1,50HQUICK CHECK OF 38 BASIC LINEAR ALGEBRA SUBROUTINES/)
+          DO 60 ICASE=1,38
+          IF(JTEST(ICASE) .EQ. 0) GO TO 60
+          CALL HEADER (KPRINT)
+C
+C         INITIALIZE  PASS, INCX, INCY, AND MODE FOR A NEW CASE.
+C         THE VALUE 9999 FOR INCX, INCY OR MODE WILL APPEAR IN THE
+C         DETAILED  OUTPUT, IF ANY, FOR CASES THAT DO NOT INVOLVE
+C         THESE PARAMETERS.
+C
+          PASS=.TRUE.
+          INCX=9999
+          INCY=9999
+          MODE=9999
+              GO TO (12,12,12,12,12,12,12,12,12,12,
+     A               12,10,10,12,12,10,10,12,12,12,
+     B               12,12,12,12,12,11,11,11,11,11,
+     C               11,11,11,11,11,11,11,11),  ICASE
+C                                       ICASE = 12-13 OR 16-17
+   10         CALL CHECK0(SFAC,DFAC,KPRINT)
+              GO TO 50
+C                                       ICASE = 26-38
+   11         CALL CHECK1(SFAC,DFAC,KPRINT)
+              GO TO 50
+C                                       ICASE =  1-11, 14-15, OR 18-25
+   12         CALL CHECK2(SFAC,SDFAC,DFAC,DQFAC,KPRINT)
+   50         CONTINUE
+C                                                  PRINT
+          IF (KPRINT.GE.2 .AND. PASS) WRITE (NPRINT,1001)
+      IF (.NOT.PASS) IPASS = 0
+   60     CONTINUE
+      IF (KPRINT.GE.2 .AND. IPASS.EQ.1) WRITE (NPRINT,1006)
+      IF (KPRINT.GE.1 .AND. IPASS.EQ.0) WRITE (NPRINT,1007)
+      RETURN
+ 1001 FORMAT(1H+,39X,4HPASS)
+ 1006 FORMAT(/54H ****************BLAS PASSED ALL TESTS****************)
+ 1007 FORMAT(/54H ****************BLAS FAILED SOME TESTS***************)
+      END

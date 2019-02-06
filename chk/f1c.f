@@ -1,0 +1,17 @@
+*DECK F1C
+      REAL FUNCTION F1C (X)
+C***BEGIN PROLOGUE  F1C
+C***PURPOSE  Subsidiary to
+C***LIBRARY   SLATEC
+C***AUTHOR  (UNKNOWN)
+C***ROUTINES CALLED  (NONE)
+C***REVISION HISTORY  (YYMMDD)
+C   ??????  DATE WRITTEN
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C***END PROLOGUE  F1C
+      REAL X
+C***FIRST EXECUTABLE STATEMENT  F1C
+      F1C = 0.0
+      IF(X.NE.0.33) F1C = (X-0.5)*ABS(X-0.33)**(-0.9)
+      RETURN
+      END

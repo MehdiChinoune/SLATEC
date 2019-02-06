@@ -1,0 +1,20 @@
+*DECK DT4
+      DOUBLE PRECISION FUNCTION DT4 (X)
+C***BEGIN PROLOGUE  DT4
+C***PURPOSE  Subsidiary to
+C***LIBRARY   SLATEC
+C***AUTHOR  (UNKNOWN)
+C***ROUTINES CALLED  DF4S
+C***REVISION HISTORY  (YYMMDD)
+C   ??????  DATE WRITTEN
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C***END PROLOGUE  DT4
+      DOUBLE PRECISION A,B,DF4S,X,X1,Y
+C***FIRST EXECUTABLE STATEMENT  DT4
+      A = 0.0D+00
+      B = 0.1D+01
+      X1 = X+0.1D+01
+      Y = (B-A)/X1+A
+      DT4 = (B-A)*DF4S(Y)/X1/X1
+      RETURN
+      END

@@ -1,0 +1,17 @@
+*DECK F0S
+      REAL FUNCTION F0S (X)
+C***BEGIN PROLOGUE  F0S
+C***PURPOSE  Subsidiary to
+C***LIBRARY   SLATEC
+C***AUTHOR  (UNKNOWN)
+C***ROUTINES CALLED  (NONE)
+C***REVISION HISTORY  (YYMMDD)
+C   ??????  DATE WRITTEN
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C***END PROLOGUE  F0S
+      REAL X
+C***FIRST EXECUTABLE STATEMENT  F0S
+      F0S = 0.0
+      IF(X.NE.0.0) F0S = 1.0/SQRT(X)
+      RETURN
+      END

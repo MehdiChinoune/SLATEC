@@ -1,0 +1,18 @@
+ 
+  This note explains how to install the SLATEC Fortran 77 on-line
+  documentation program sladoc.  The version which is distributed
+  here assumes a Unix environment.  Those who wish to install
+  sladoc on other environments will find that a few modifications
+  are necessary.
+ 
+  The routines in files slprep and subsid are compiled and linked to
+  generate the SLPREP code.  SLPREP uses the SLATEC library source
+  (slatec_src) and the classification file (gams) to generate the
+  four documentation files slacat, sladaf, slakwd and slatbl.
+ 
+  Then compile and link the codes in files sladoc and subsid and call the
+  executable sladoc.  As structured, sladoc expects the four files
+  slacat, sladaf, slakwd and slatbl to be in the current working
+  directory.  These four files can be installed elsewhere and the
+  SLADOC source modified.
+ 

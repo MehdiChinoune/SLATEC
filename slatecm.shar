@@ -1,0 +1,3649 @@
+#!/bin/sh
+# This is slatecm, a shell archive (produced by shar 3.49)
+# To extract the files from this archive, save it to a file, remove
+# everything above the "!/bin/sh" line above, and type "sh file_name".
+#
+# made 07/07/1994 15:34 UTC by dmw@down
+# Source directory /l/lasc/dmw/slatec4/docs/export
+#
+# existing files will NOT be overwritten unless -c is specified
+#
+# This shar contains:
+# length  mode       name
+# ------ ---------- ------------------------------------------
+#   5032 -rw-r--r-- README
+#   1865 -rw-r--r-- colors
+#   6986 -rw-r--r-- doc.c
+#   3865 -rw-r--r-- fetch.c
+#  23126 -rw-r--r-- gams
+#   2824 -rwxr-xr-x getpk.c
+#   3100 -rwxr-xr-x main.c
+#  15066 -rwxr-xr-x maintxt.c
+#    780 -rwxr-xr-x slatecm
+#    752 -rw-r--r-- omakefile
+#   3657 -rw-r--r-- rd.c
+#   1295 -rwx------ COPYRIGHT
+#   2487 -rw-r--r-- sldoc.h
+#    209 -rw-r--r-- xgen.tips
+#   8124 -rw-r--r-- sltc.xgen
+#   9654 -rw-r--r-- util.c
+#
+# ============= README ==============
+if test -f 'README' -a X"$1" != X"-c"; then
+	echo 'x - skipping README (File already exists)'
+else
+echo 'x - extracting README (Text)'
+sed 's/^X//' << 'SHAR_EOF' > 'README' &&
+X
+SLATXT ,SLTC, SLPRP
+X 
+This directory includes the source and makefile required to build
+3 programs that facilitate exploring the routines of the SLATEC
+library ( or any library using the SLATEC prologue conventions )
+The code is ANSI C; it should run on any UNIX platform with an
+ANSI C compiler. It has been tested on the Sun Sparc under 
+SunOS 4.1.3 , IBM RS6000 under AIX 3.2, the DEC 5000 under 
+Ultrix 4.2a , and the HP9000 under hp-ux 9.01.
+X
+--------------------------------------------------------------------
+X
+INSTALLATION
+X
+1. Obtain xgen if you don't have it; compile it
+X   xgen can be obtained by anonymous ftp from ftp.cecer.army.mil
+X   in /grass/other/xgen1.2
+X
+X   If you are compiling xgen for the HP9000 look at the file
+X   xgen.tips enclosed with this package.
+X
+2. Examine slatecm script ; set $r to directory containing xgen
+X   set $s to directory containing colors,sltc.xgen files
+X   Alter PATH so your X11 directory is on it.
+X   If you do not use AFS delete lines  12-18 if you do make sure
+X   AFS bin directory is on PATH
+X   Look at colors file; replace directory at top #define by directory
+X    your SLATEC documents [guide,toc,etc] are in
+X
+3. Concatenate all the SLATEC files you wish in the database into
+X   a single file. Note that for SLATEC this file will be 
+X   15-30% larger than the documentation file required by SLADOC.
+X
+4. Look at sldoc.h ; alter filename defines at bottom to correspond to
+X   where you will put the data files.
+X   set NRTN to a number larger than the number of files in your
+X   library [but less than 32000]
+X
+X   Set the make macros for filenames at the top of omakefile to the same 
+X   values you used in sldoc.h
+X
+X   create the OS specific makefile for your system with:
+X
+X   /lib/cpp -P omakefile makefile
+X
+5. use makefile to compile programs and build database files with:
+X
+X   make dtbs
+X   make all
+X
+6. try out slatecm and slatxt.
+X
+---------------------------------------------------------------------
+SLPRP
+X
+This builds a file of keyword phrases and two files of indexes into 
+the documentation/ sourcefile. There are a number of limits built into 
+these data structures [see sldoc.h], but at least for SLATEC they are
+generous. So if the program is used for SLATEC none should need to
+be altered.
+X
+Limits on number of keyword phrases, gams classifications, and
+X SLATEC routines called per routine.
+----------------------------------
+Note that maximum number of SLATEC routines called by a single 
+routine is 49 [DFNCK] in present library. Maximum keys and gams per
+routine in library are much less.
+X
+#define MXKEY  63
+#define MXGAMS 63
+#define MXCALL 63
+X
+Limit on total number of phrases, gams, routines called: 32764
+In SLATEC 4. this is less than 14 000.
+X
+Limit on size of source file : 64M
+This can be readily changed by increasing size of a.rstart in
+sldoc.h
+X
+Limit on length of routine names : 8
+#define RTNLN 8
+SLATEC limit is 6; this limit of 8 can be enlarged by
+altering RTNLN .
+X
+Limit on length of category name : 12
+#define GAMLN 12
+X
+For the GAMS classification scheme which is used by the SLATEC
+Common Mathematical Library, the maximum length is 10.
+X
+---------------------------------------------------------------------
+SLTC
+X
+This database program is designed to be used with the files
+produced by SLPRP . It uses the same header file sldoc.h as
+well as several of the same functions as SLPRP.
+X
+Although it can be used separately it is designed to be used
+from an xgen script, sltc.xgen. xgen in turn is run from the
+shell script slatecm [slatec-motif]
+XXgen is a Motif X-Windows program which provides a GUI based
+on script file specifications.
+X
+XXgen can be obtained by anonymous ftp from ftp.cecer.army.mil
+in /grass/other/xgen1.2
+X
+If you are compiling xgen for the HP9000 look at the file
+xgen.tips included here.
+X
+---------------------------------------------------------------------
+SLATXT
+X
+This database program uses the same files as SLTC. It is designed
+to resemble SLADOC and SLADOC's predeccesor which was distributed
+with SLATEC 3.2 .
+X
+---------------------------------------------------------------------
+X
+NOTES
+X
+This packages handles .F files as well as .f files
+SLPRP assumes files with #s in the 1st column are .F files.
+X
+X
+---David M. Woodcock
+X   Computer Aided Engineering Network
+X   Laboratory for Scientific Computation
+X   University of Michigan
+---------------------------------------------------------------------
+X
+SLADOC authored by
+X Boland, W. Robert, C-8, Los Alamos National Laboratory
+X Bacon, Barbara A., C-10, Los Alamos National Laboratory
+X Available from netlib@ornl.gov
+X
+XXgen was developed by Kurt Buehler, while at the Center for Advanced 
+Decision Support for Water and Environmental Systems (CADSWES), 
+University of Colorado at Boulder and at the Indiana Water Resources 
+Research Center (IWRRC), Purdue University for the U.S. Army 
+Construction Engineering Research Laboratory in support of the 
+Geographical Resources Analysis Support System (GRASS) software. 
+---------------------------------------------------------------------
+SHAR_EOF
+chmod 0644 README ||
+echo 'restore of README failed'
+fi
+# ============= colors ==============
+if test -f 'colors' -a X"$1" != X"-c"; then
+	echo 'x - skipping colors (File already exists)'
+else
+echo 'x - extracting colors (Text)'
+sed 's/^X//' << 'SHAR_EOF' > 'colors' &&
+#define SETDOCDIR setDDIR:"/usr/caen/generic/doc/slatec/v4"
+#ifdef GREYSCALE
+#define white black
+#define gold black
+#define RoyalBlue black
+#define grey black
+#define maroon black
+#define ivory black
+/* background */
+#define LightGrey White
+#define deepskyblue White
+#define DarkSlateGrey White
+#define red White
+#define snow White
+#define steelblue White
+#define ForestGreen White
+#define blue White
+#define POFONT
+#endif
+#ifdef FOURPLANE
+#define black "#000000"
+#define white "#000000"
+/* ivory is white on blue background */
+#define ivory "#f0f0f0"
+#define gold  "#f0f0f0"
+#define RoyalBlue "#0000f0"
+#define grey "#f0f0f0"
+#define maroon "#f00000"
+/* background */
+#define LightGrey "#f0f0f0"
+#define deepskyblue "#f0f000"
+#define DarkSlateGrey "#f0f0f0"
+#define red "#f00000"
+#define snow "#f0f0f0"
+#define steelblue "#f0f0f0"
+#define ForestGreen "#f0f0f0"
+#define blue "#0000f0"
+#define POFONT
+#endif
+#ifdef POFONT
+#define FONT0 "*bitstream*charter*bold*r*normal*33*"
+#define FONT1 "*adobe*helv*r*normal*8*"
+#define FONT2 "*adobe*helv*r*normal*14*"
+#define FONT3 "*adobe*helv*r*normal*12*"
+#else
+#define FONT0 "*white*shadow*48*"
+#define FONT1 "*schumacher*clean*medium*r*normal*8*"
+#define FONT2 "*adobe*helv*r*normal*17*"
+#define FONT3 "*adobe*helv*r*normal*14*"
+#endif
+#define MSSLOOK background:blue foreground:ivory font:FONT3 columns:
+#define OPTLOOK font:FONT3 background:LightGrey foreground:maroon columns:
+#define TYPELOOK font:FONT3 background:LightGrey foreground:black columns:
+#define BDLOOK background:blue foreground:gold 
+#define SLIMBUTTON alignment:center height:26 width:
+#define THICKBUTTON alignment:center height:30 width:
+#define HMSS columns:60 foreground:RoyalBlue background:LightGrey
+#define HBUT alignment:center height:36 background:LightGrey foreground:black font:FONT3 width:
+font:FONT3
+foreground:white
+background:deepskyblue
+SHAR_EOF
+chmod 0644 colors ||
+echo 'restore of colors failed'
+fi
+# ============= doc.c ==============
+if test -f 'doc.c' -a X"$1" != X"-c"; then
+	echo 'x - skipping doc.c (File already exists)'
+else
+echo 'x - extracting doc.c (Text)'
+sed 's/^X//' << 'SHAR_EOF' > 'doc.c' &&
+/***********************************************************************
+X Copyright (C) 1994 by the Regents of the University of Michigan.
+X
+X User agrees to reproduce said copyright notice on all copies of the software
+X made by the recipient.  
+X
+X All Rights Reserved. Permission is hereby granted for the recipient to make
+X copies and use this software for its own internal purposes only. Recipient of
+X this software may re-distribute this software outside of their own 
+X institution. Permission to market this software commercially, to include this
+X product as part of a commercial product, or to make a derivative work for
+X commercial purposes, is explicitly prohibited.  All other uses are also
+X prohibited unless authorized in writing by the Regents of the University of
+X Michigan.
+X
+X This software is offered without warranty. The Regents of the University of
+X Michigan disclaim all warranties, express or implied, including but not
+X limited to the implied warranties of merchantability and fitness for any
+X particular purpose. In no event shall the Regents of the University of
+X Michigan be liable for loss or damage of any kind, including but not limited
+X to incidental, indirect, consequential, or special damages. 
+***********************************************************************/
+X
+/* PROGRAM to build files for sltc doc retrieval */
+/* data structs for slatec documentation */
+X
+#include "sldoc.h"
+X
+char **keys;
+struct gams *gamlist;
+X
+extern struct routine *r;
+extern unsigned short *Indices;
+X
+int totcalls =0;
+int Ndx= 0, Nrtn, Nkeys, Ngams;
+X
+/* strings found in SLATEC prologue */
+X
+static char kyend[]="C***";
+static char begin[]="*DECK";
+static char prbegin[]= "C***BEGIN PROLOGUE";
+static char purpose[]= "C***PURPOSE";
+static char library[]= "C***LIBRARY";
+static char category[]="C***CATEGORY";
+static char kywrd[]="C***KEYWORDS";
+static char author[]=  "C***AUTHOR";
+static char type[]=    "C***TYPE";
+static char called[]="C***ROUTINES CALLED";
+static char prend[]="C***END PROLOGUE";
+X
+main(int argc, char **argv)
+{
+X    int scompar();
+X    char **rdphrases();
+X    unsigned short *indices;
+X    void stowkey(), stowgam();
+X
+/* if o[ption] set output every keyphrase found only -- use
+X   with sort -A and uniq to generate keyword list
+*/
+X    if(argc>1)
+X    {
+X        if(argv[1][0]=='S')
+X	{
+X	    fdkeys(DAF);
+X            exit(0);
+X	}
+X
+X        if(argv[1][0]=='L')
+X	{
+X	    Indices= calloc( 32*1024, sizeof(short));
+X	    Nrtn= rd_binfl(RTBL,&r,sizeof(struct routine));
+X	    Ndx= rd_binfl(NDX,&indices,sizeof(short));
+X	    bcopy(indices,Indices,Ndx *sizeof(short));
+X	    free(indices);
+X	    getcalls(DAF);
+X	    wr_binfl(Nrtn,r,RTBL,sizeof(struct routine));
+X	    wr_binfl(Ndx,Indices,NDX,sizeof(short));
+X	    printf("CALLS=%d\n",totcalls);
+X            exit(0);
+X	}
+X    }
+X    else
+X    {
+X	 Indices= calloc( 32*1024, sizeof(short));
+X         r= calloc( NRTN, sizeof(struct routine));
+X	 keys= rdphrases(KYWDS,"keys",sizeof(char *),stowkey,&Nkeys);
+X	 gamlist= (struct gams *)rdphrases(GAMS,"gams",
+X			  sizeof(struct gams),stowgam,&Ngams);
+X	 Nrtn= rddoc(DAF);
+/* sort routines alphabetically */
+X         qsort( r, Nrtn, sizeof(struct routine), scompar);
+X	 wr_binfl(Nrtn,r,RTBL,sizeof(struct routine));
+X	 wr_binfl(Ndx,Indices,NDX,sizeof(short));
+X         exit(0);
+X    }
+}
+X
+rddoc(char *f)
+{
+X
+/* caution must be greater than 80 cols ! */
+X    char card[CDLN+9];
+X    FILE *fp;
+X    int i,j,jj,rdon,hit,g,start;
+X    int nbytes, total;
+X    int storekey(), stashgams();
+X
+X    fp= fopen( f,"r");
+X    bzero( card,CDLN+9);
+X    rdon= hit= total= start=0;
+X    for(j= -1,i=0; fgets(card,CDLN+8,fp) ;i++)
+X    {
+X	nbytes=strlen(card);
+X	if( card[nbytes-1]=='\n' ) card[nbytes-1]='\0';
+/* first line */
+X	if( !strncmp(begin,card,DCKLN) )
+X	{
+X	    if(j >-1) r[j].k.srclines= i -start -r[j].g.doclines;
+X	    start= i;
+X	    r[++j].a.rstart= total;
+X	    r[j].c.type= 0;
+X	    r[j].g.start= NOENTRY;
+X	    r[j].k.start= NOENTRY;
+X	    bcopy( card+DCKLN+1, r[j].name, RTNLN );
+X	    jj=0;
+X	}
+/* get purpose for routine */
+/* assumes purpose within 15 lines of top of routine */
+X	if( !strncmp(purpose,card,KYLN-1) )
+X	{
+X	    r[j].c.purpose = i-start;
+X	}
+/* detect line after purpose line */
+/* shoves no. of purpose lines in top 4 bits */
+X	if( !strncmp(library,card,KYLN-1))
+X	{
+X	    r[j].c.npurpose = i- start- r[j].c.purpose;
+X	}
+/* get category index */
+X	if( !strncmp(category,card,KYLN) )
+X	{
+X	    g=0;
+X 	    rdstuff(card,KYLN,j,&g,stashgams);
+X            stasher( &r[j].g, j,g);
+X	}
+/* get keyword indices */
+X	if( !strncmp(kywrd,card,KYLN) ) rdon= hit= 1;
+X
+/* detect line after last keyword line */
+X	if(rdon)
+X	{
+X	    if( !hit && !strncmp(author,card,KYLN-2))
+X	    {
+X		stasher(&r[j].k,j,jj);
+X	        rdon= 0;
+X	    }
+X	    else rdstuff( card,KYLN,j,&jj,storekey );
+X	    hit= 0;
+X	}
+/* last line in prologue */
+X	if( !strncmp(prend,card,ENDLN) )
+X	{
+X	    r[j].g.doclines = i - start +1;
+X	}
+X	if( card[0]=='#') r[j].c.type= 1;
+X	total += nbytes;
+X    }
+X    r[j].k.srclines = i- start -1 -r[j].g.doclines +1;
+X    fclose(fp);
+X    return(j+1);
+}
+X
+int rdstuff( char *card,int n,int j,int *jj, int (*store)() )
+{
+X    char *p, *pend;
+X    int m;
+X
+/* read in keywords */
+X    p= card + n +1;
+X    while ( *p == ' ') p++;	
+X    while( isupper(p[0]) || isdigit(p[0]))
+X    {
+X	pend = strchr(p,',');
+/* find end of keyword phrase */
+X	if(pend) *pend='\0';
+X	else
+X	{
+X	    m=strlen(p);
+/* zap any trailing blabks */
+X	    while( p[--m] == ' ' ) ;
+X	    p[m+1]='\0';
+X	 }
+X	 (*store)(p,j,jj);
+X	 if(!pend) return;
+X         p= ++pend;
+/* skip initial blanks */
+X	 while( p[0]==' ') p++;
+X     }
+}
+X
+fdkeys(char *f)
+{
+X
+X    char card[CDLN+9];
+X    FILE *fp;
+X    int i,j,jj,rdon,hit,n;
+X    int prkey();
+X
+X    fp= fopen( f,"r");
+X    bzero( card,CDLN+9);
+X    rdon= hit= 0;
+X    for(j= -1, i=0; fgets(card,CDLN+8,fp) ;i++)
+X    {
+X	n=strlen(card);
+X	if( card[n-1]=='\n' ) card[n-1]='\0';
+X	if( !strncmp(begin,card,DCKLN) ) ++j;
+/* get keyword indices */
+X	if( !strncmp(kywrd,card,KYLN) ) {rdon=1;hit=1;}
+X
+/* detect line after last keyword line */
+X	if(rdon)
+X	{
+X	    if( !hit && !strncmp(kyend,card,KELN)) rdon= 0;
+X	    else rdstuff( card,KYLN,j,&jj,prkey );
+X	    hit= 0;
+X	}
+X    }
+X    fclose(fp);
+}
+X
+prkey( char *p, int j, int *jj )
+{
+X    printf("%s\n",p);
+}
+X
+getcalls(char *f)
+{
+X    char card[CDLN+9];
+X    FILE *fp;
+X    int i,j,jj,rdon,hit,n;
+X    int storecalls();
+X
+X    fp= fopen( f,"r");
+X    bzero( card,CDLN+9);
+X    rdon= hit= 0;
+X    for(j=0; j<Nrtn ;j++)
+X    {
+X      SEEKRTN(fp,j)
+X      for(i=0; i< (int)(r[j].g.doclines) ;i++)
+X      {
+X        fgets(card,CDLN+8,fp) ;
+X	n=strlen(card);
+X	if( card[n-1]=='\n' ) card[n-1]='\0';
+/* first line */
+X	if( !strncmp(begin,card,DCKLN) )
+X	{
+X	    jj=0;
+X	    r[j].c.start= NOENTRY;
+X	}
+/* get routines called indices */
+X	if( !strncmp(called,card,CALLN) ) {rdon=1;hit=1;}
+X
+/* detect line after last called line */
+X	if(rdon)
+X	{
+X	    if( !hit && !strncmp(kyend,card,KELN))
+X	    {
+X		stasher(&r[j].c,j,jj);
+X	        rdon= 0;
+X		break;
+X	    }
+X	    else rdstuff( card,CALLN,j,&jj,storecalls );
+X	    hit= 0;
+X	}
+X      }
+X    }
+X    fclose(fp);
+}
+SHAR_EOF
+chmod 0644 doc.c ||
+echo 'restore of doc.c failed'
+fi
+# ============= fetch.c ==============
+if test -f 'fetch.c' -a X"$1" != X"-c"; then
+	echo 'x - skipping fetch.c (File already exists)'
+else
+echo 'x - extracting fetch.c (Text)'
+sed 's/^X//' << 'SHAR_EOF' > 'fetch.c' &&
+/***********************************************************************
+X Copyright (C) 1994 by the Regents of the University of Michigan.
+X
+X User agrees to reproduce said copyright notice on all copies of the software
+X made by the recipient.  
+X
+X All Rights Reserved. Permission is hereby granted for the recipient to make
+X copies and use this software for its own internal purposes only. Recipient of
+X this software may re-distribute this software outside of their own 
+X institution. Permission to market this software commercially, to include this
+X product as part of a commercial product, or to make a derivative work for
+X commercial purposes, is explicitly prohibited.  All other uses are also
+X prohibited unless authorized in writing by the Regents of the University of
+X Michigan.
+X
+X This software is offered without warranty. The Regents of the University of
+X Michigan disclaim all warranties, express or implied, including but not
+X limited to the implied warranties of merchantability and fitness for any
+X particular purpose. In no event shall the Regents of the University of
+X Michigan be liable for loss or damage of any kind, including but not limited
+X to incidental, indirect, consequential, or special damages. 
+***********************************************************************/
+#include "sldoc.h"
+X
+static short Base[64];
+X
+struct routine *r;
+unsigned short *Indices;
+X
+extern int Ndx, Nrtn, Nkeys, Ngams;
+extern struct gams *gamlist;
+extern char **keys;
+extern int totcalls;
+X
+/* fetch indexes from arcane data structure */
+X
+int fetcher(int n, int index, int *j)
+{
+X    int i;
+X
+/* indicates last call got last index */
+X
+X    if( *j == -1 ) return(-1);
+X
+/* case where 0 or 1 index for entry */
+X    if( n == 0 )
+X    {
+X	if( index == NOENTRY ) return(-1);
+X	else
+X	{
+X	    *j = -1;
+X	    return(index);
+X	}
+X    }
+X
+/* fetches indexes from unsigned short array */
+/* value of *j determines where we start,usually 0 */
+X    if( *j < n )
+X    {
+X	i= (int)Indices[index + *j];
+X        (*j)++;
+X	return(i);
+X    }
+X    return(-1);
+}
+X
+/* copy gams index into gams list */
+stashgams( char *p, int j, int *jj ) 
+{
+X    int k;
+X
+X        rtnerrck( j, jj, MXGAMS);
+X	for( k=0 ; k< Ngams; k++ )
+X	   if( !strcmp( gamlist[k].gam,p ) )
+X	   {
+X	       Base[(*jj)++]= k;
+X	       break;
+X	   }
+}
+X
+stasher( struct commn *p,int j,int jj)
+{
+X    char *fxname();
+X    int compar();
+X
+X    if(jj==0)
+X    {
+X	p->n= 0;
+X	p->start= NOENTRY;
+X    }
+X    if(jj==1)
+X    {
+X	p->n= 0;
+X	p->start= Base[0];
+X    }
+X    if(jj>1)
+X    {
+X	p->n= jj;
+X	p->start= Ndx;
+X        qsort(Base, jj, sizeof(short), compar);
+X        bcopy(Base,Indices+Ndx,sizeof(short)*jj);
+X	Ndx += jj;
+X    }
+X    fprintf(stderr,"stasher: %s %d %d\n",fxname(j),p->n,p->start);
+}
+X
+char *fxname(int j)
+{
+X    static char b[RTNLN+1];
+X
+X    bzero(b,RTNLN+1);
+X    bcopy( r[j].name,b,RTNLN);
+X    return(b);
+}
+X
+rtnerrck(int j, int *jj, int limit)
+{
+X    char *buf, *fxname();
+X	 
+X    if( *jj >= limit )
+X    {
+X	buf= fxname(j);
+X        fprintf( stderr,"Too many keys gams calls for %s\n",buf);
+X        exit(1);
+X     }
+}
+/* copy phrase index into keyphrase list */
+storecalls( char *p,int j, int *jj ) 
+{
+X    int k;
+X    char *p1, *fxname();
+X	 
+X        rtnerrck( j, jj, MXCALL);
+X
+X	if( !strcmp( "(NONE)",p ) ) return;
+X     
+/* if cannot find called function, eg BLAS in slatec nothing entered */
+X
+X	for( k= 0; k< Nrtn; k++ )
+X	{
+X	   p1= fxname(k);
+X	   if( !strcmp( p1,p ) )
+X	   {
+X	       Base[(*jj)++]= k;
+X	       totcalls++;
+X	       break;
+X	   }
+X	}
+}
+X
+clrstore(short *p,int n)
+{
+X    int k;
+X    for(k=0;k<n;k++) p[k]= Base[k]= -1;
+}
+X
+/* copy phrase index into keyphrase list */
+storekey( char *p,int j, int *jj ) 
+{
+X    int k;
+X	 
+X        rtnerrck( j, jj, MXKEY);
+X
+X	for( k= 0; k< Nkeys; k++ )
+X	   if( !strcmp( keys[k],p ) )
+X	   {
+X	       Base[(*jj)++]= k;
+X	       break;
+X	   }
+}
+X
+int ncompar(short *s1,short *s2)
+{
+X    return(strncmp(r[*s1].name, r[*s2].name,RTNLN));
+}
+SHAR_EOF
+chmod 0644 fetch.c ||
+echo 'restore of fetch.c failed'
+fi
+# ============= gams ==============
+if test -f 'gams' -a X"$1" != X"-c"; then
+	echo 'x - skipping gams (File already exists)'
+else
+echo 'x - extracting gams (Text)'
+sed 's/^X//' << 'SHAR_EOF' > 'gams' &&
+A.  Arithmetic, error analysis
+A1.  Integer
+A2.  Rational
+A3.  Real
+A3A.  Single precision
+A3B.  Double precision
+A3C.  Extended precision
+A3D.  Extended range
+A4.  Complex
+A4A.  Single precision
+A4B.  Double precision
+A4C.  Extended precision
+A4D.  Extended range
+A5.  Interval
+A5A.  Real
+A5B.  Complex
+A6.  Change of representation
+A6A.  Type conversion
+A6B.  Base conversion
+A6C.  Decomposition, construction
+A7.  Sequences (e.g., convergence acceleration)
+B.  Number theory
+C.  Elementary and special functions (search also class L5)
+C1.  Integer-valued functions (e.g., floor, ceiling, factorial, binomial coefficient) 
+C2.  Powers, roots, reciprocals
+C3.  Polynomials
+C3A.  Orthogonal
+C3A1.  Trigonometric
+C3A2.  Chebyshev, Legendre
+C3A3.  Laguerre
+C3A4.  Hermite
+C3B.  Non-orthogonal
+C4.  Elementary transcendental functions
+C4A.  Trigonometric, inverse trigonometric
+C4B.  Exponential, logarithmic
+C4C.  Hyperbolic, inverse hyperbolic
+C4D.  Integrals of elementary transcendental functions
+C5.  Exponential and logarithmic integrals
+C6.  Cosine and sine integrals
+C7.  Gamma
+C7A.  Gamma, log gamma, reciprocal gamma
+C7B.  Beta, log beta
+C7C.  Psi function
+C7D.  Polygamma function
+C7E.  Incomplete gamma
+C7F.  Incomplete beta
+C7G.  Riemann zeta
+C8.  Error functions
+C8A.  Error functions, their inverses, integrals, including the normal distribution function
+C8B.  Fresnel integrals
+C8C.  Dawson's integral
+C9.  Legendre functions
+C10.  Bessel functions
+C10A.  J, Y, H-(1), H-(2)
+C10A1.  Real argument, integer order
+C10A2.  Complex argument, integer order
+C10A3.  Real argument, real order
+C10A4.  Complex argument, real order
+C10A5.  Complex argument, complex order
+C10B.  I, K
+C10B1.  Real argument, integer order
+C10B2.  Complex argument, integer order
+C10B3.  Real argument, real order
+C10B4.  Complex argument, real order
+C10B5.  Complex argument, complex order
+C10C.  Kelvin functions
+C10D.  Airy and Scorer functions
+C10E.  Struve, Anger, and Weber functions
+C10F.  Integrals of Bessel functions
+C11.  Confluent hypergeometric functions
+C12.  Coulomb wave functions
+C13.  Jacobian elliptic functions, theta functions
+C14.  Elliptic integrals
+C15.  Weierstrass elliptic functions
+C16.  Parabolic cylinder functions
+C17.  Mathieu functions
+C18.  Spheroidal wave functions
+C19.  Other special functions
+D.  Linear Algebra
+D1.  Elementary vector and matrix operations
+D1A.  Elementary vector operations
+D1A1.  Set to constant
+D1A2.  Minimum and maximum components
+D1A3.  Norm
+D1A3A.  L-1 (sum of magnitudes)
+D1A3B.  L-2 (Euclidean norm)
+D1A3C.  L-infinity (maximum magnitude)
+D1A4.  Dot product (inner product)
+D1A5.  Copy or exchange (swap)
+D1A6.  Multiplication by scalar
+D1A7.  Triad (a*x+y for vectors x,y and scalar a)
+D1A8.  Elementary rotation (Givens transformation)
+D1A9.  Elementary reflection (Householder transformation)
+D1A10.  Convolutions
+D1B.  Elementary matrix operations
+D1B1.  Set to zero, to identity
+D1B2.  Norm
+D1B3.  Transpose
+D1B4.  Multiplication by vector
+D1B5.  Addition, subtraction
+D1B6.  Multiplication
+D1B7.  Matrix polynomial
+D1B8.  Copy
+D1B9.  Storage mode conversion
+D1B10.  Elementary rotation (Givens transformation)
+D1B11.  Elementary reflection (Householder transformation)
+D2.  Solution of systems of linear equations (including inversion, LU and related decompositions)
+D2A.  Real nonsymmetric matrices
+D2A1.  General
+D2A2.  Banded
+D2A2A.  Tridiagonal
+D2A3.  Triangular
+D2A4.  Sparse
+D2B.  Real symmetric matrices
+D2B1.  General
+D2B1A.  Indefinite
+D2B1B.  Positive definite
+D2B2.  Positive definite banded
+D2B2A.  Tridiagonal
+D2B4.  Sparse
+D2C.  Complex non-Hermitian matrices
+D2C1.  General
+D2C2.  Banded
+D2C2A.  Tridiagonal
+D2C3.  Triangular
+D2C4.  Sparse
+D2D.  Complex Hermitian matrices
+D2D1.  General
+D2D1A.  Indefinite
+D2D1B.  Positive definite
+D2D2.  Positive definite banded
+D2D2A.  Tridiagonal
+D2D4.  Sparse
+D2E.  Associated operations (e.g., matrix reorderings)
+D3.  Determinants
+D3A.  Real nonsymmetric matrices
+D3A1.  General
+D3A2.  Banded
+D3A2A.  Tridiagonal
+D3A3.  Triangular
+D3A4.  Sparse
+D3B.  Real symmetric matrices
+D3B1.  General
+D3B1A.  Indefinite
+D3B1B.  Positive definite
+D3B2.  Positive definite banded
+D3B2A.  Tridiagonal
+D3B4.  Sparse
+D3C.  Complex non-Hermitian matrices
+D3C1.  General
+D3C2.  Banded
+D3C2A.  Tridiagonal
+D3C3.  Triangular
+D3C4.  Sparse
+D3D.  Complex Hermitian matrices
+D3D1.  General
+D3D1A.  Indefinite
+D3D1B.  Positive definite
+D3D2.  Positive definite banded
+D3D2A.  Tridiagonal
+D3D4.  Sparse
+D4.  Eigenvalues, eigenvectors
+D4A.  Ordinary eigenvalue problems (Ax = (lambda) * x)
+D4A1.  Real symmetric
+D4A2.  Real nonsymmetric
+D4A3.  Complex Hermitian
+D4A4.  Complex non-Hermitian
+D4A5.  Tridiagonal
+D4A6.  Banded
+D4A7.  Sparse
+D4B.  Generalized eigenvalue problems (e.g., Ax = (lambda)*Bx)
+D4B1.  Real symmetric
+D4B2.  Real general
+D4B3.  Complex Hermitian
+D4B4.  Complex general
+D4B5.  Banded
+D4C.  Associated operations
+D4C1.  Transform problem
+D4C1A.  Balance matrix
+D4C1B.  Reduce to compact form
+D4C1B1.  Tridiagonal
+D4C1B2.  Hessenberg
+D4C1B3.  Other
+D4C1C.  Standardize problem
+D4C2.  Compute eigenvalues of matrix in compact form
+D4C2A.  Tridiagonal
+D4C2B.  Hessenberg
+D4C2C.  Other
+D4C3.  Form eigenvectors from eigenvalues
+D4C4.  Back transform eigenvectors
+D4C5.  Determine Jordan normal form
+D5.  QR decomposition, Gram-Schmidt orthogonalization
+D6.  Singular value decomposition
+D7.  Update matrix decompositions
+D7A.  LU
+D7B.  Cholesky
+D7C.  QR
+D7D.  Singular value
+D8.  Other matrix equations (e.g., AX+XB=C)
+D9.  Overdetermined or underdetermined systems of equations, singular systems, pseudo-inverses (search also classes D5, D6, K1a, L8a)
+E.  Interpolation
+E1.  Univariate data (curve fitting)
+E1A.  Polynomial splines (piecewise polynomials)
+E1B.  Polynomials
+E1C.  Other functions (e.g., rational, trigonometric)
+E2.  Multivariate data (surface fitting)
+E2A.  Gridded
+E2B.  Scattered
+E3.  Service routines (e.g., grid generation, evaluation of fitted functions) (search also class N5)
+F.  Solution of nonlinear equations
+F1.  Single equation
+F1A.  Smooth
+F1A1.  Polynomial
+F1A1A.  Real coefficients
+F1A1B.  Complex coefficients
+F1A2.  Nonpolynomial
+F1B.  General (no smoothness assumed)
+F2.  System of equations
+F2A.  Smooth
+F2B.  General (no smoothness assumed)
+F3.  Service routines (e.g., check user-supplied derivatives)
+G.  Optimization (search also classes K, L8)
+G1.  Unconstrained
+G1A.  Univariate
+G1A1.  Smooth function
+G1A1A.  User provides no derivatives
+G1A1B.  User provides first derivatives
+G1A1C.  User provides first and second derivatives
+G1A2.  General function (no smoothness assumed)
+G1B.  Multivariate
+G1B1.  Smooth function
+G1B1A.  User provides no derivatives
+G1B1B.  User provides first derivatives
+G1B1C.  User provides first and second derivatives
+G1B2.  General function (no smoothness assumed)
+G2.  Constrained
+G2A.  Linear programming
+G2A1.  Dense matrix of constraints
+G2A2.  Sparse matrix of constraints
+G2B.  Transportation and assignments problem
+G2C.  Integer programming
+G2C1.  Zero/one
+G2C2.  Covering and packing problems
+G2C3.  Knapsack problems
+G2C4.  Matching problems
+G2C5.  Routing, scheduling, location problems
+G2C6.  Pure integer programming
+G2C7.  Mixed integer programming
+G2D.  Network (for network reliability search class M)
+G2D1.  Shortest path
+G2D2.  Minimum spanning tree
+G2D3.  Maximum flow
+G2D3A.  Generalized networks
+G2D3B.  Networks with side constraints
+G2D4.  Test problem generation
+G2E.  Quadratic programming
+G2E1.  Positive definite Hessian (i.e. convex problem)
+G2E2.  Indefinite Hessian
+G2F.  Geometric programming
+G2G.  Dynamic programming
+G2H.  General nonlinear programming
+G2H1.  Simple bounds
+G2H1A.  Smooth function
+G2H1A1.  User provides no derivatives
+G2H1A2.  User provides first derivatives
+G2H1A3.  User provides first and second derivatives
+G2H1B.  General function (no smoothness assumed)
+G2H2.  Linear equality or inequality constraints
+G2H2A.  Smooth function
+G2H2A1.  User provides no derivatives
+G2H2A2.  User provides first derivatives
+G2H2A3.  User provides first and second derivatives
+G2H2B.  General function (no smoothness assumed)
+G2H3.  Nonlinear constraints
+G2H3A.  Equality constraints only
+G2H3A1.  Smooth function and constraints
+G2H3A1A.  User provides no derivatives
+G2H3A1B.  User provides first derivatives of function and constraints
+G2H3A1C.  User provides first and second derivatives of function and constraints
+G2H3A2.  General function and constraints (no smoothness assumed)
+G2H3B.  Equality and inequality constraints
+G2H3B1.  Smooth function and constraints
+G2H3B1A.  User provides no derivatives
+G2H3B1B.  User provides first derivatives of function and constraints
+G2H3B1C.  User provides first and second derivatives of function and constraints
+G2H3B2.  General function and constraints (no smoothness assumed)
+G2I.  Global solution to nonconvex problems
+G3.  Optimal control
+G4.  Service routines
+G4A.  Problem input (e.g., matrix generation)
+G4B.  Problem scaling
+G4C.  Check user-supplied derivatives
+G4D.  Find feasible point
+G4E.  Check for redundancy
+G4F.  Other
+H.  Differentiation, integration
+H1.  Numerical differentiation
+H2.  Quadrature (numerical evaluation of definite integrals)
+H2A.  One-dimensional integrals
+H2A1.  Finite interval (general integrand)
+H2A1A.  Integrand available via user-defined procedure
+H2A1A1.  Automatic (user need only specify required accuracy)
+H2A1A2.  Nonautomatic
+H2A1B.  Integrand available only on grid
+H2A1B1.  Automatic (user need only specify required accuracy)
+H2A1B2.  Nonautomatic
+H2A2.  Finite interval (specific or special type integrand including weight functions, oscillating and singular integrands, principal value integrals, splines, etc.)
+H2A2A.  Integrand available via user-defined procedure
+H2A2A1.  Automatic (user need only specify required accuracy)
+H2A2A2.  Nonautomatic
+H2A2B.  Integrand available only on grid
+H2A2B1.  Automatic (user need only specify required accuracy)
+H2A2B2.  Nonautomatic
+H2A3.  Semi-infinite interval (including e**(-x) weight function)
+H2A3A.  Integrand available via user-defined procedure
+H2A3A1.  Automatic (user need only specify required accuracy)
+H2A3A2.  Nonautomatic
+H2A4.  Infinite interval (including e**(-x**2)) weight function)
+H2A4A.  Integrand available via user-defined procedure
+H2A4A1.  Automatic (user need only specify required accuracy)
+H2A4A2.  Nonautomatic
+H2B.  Multidimensional integrals
+H2B1.  One or more hyper-rectangular regions
+H2B1A.  Integrand available via user-defined procedure
+H2B1A1.  Automatic (user need only specify required accuracy)
+H2B1A2.  Nonautomatic
+H2B1B.  Integrand available only on grid
+H2B1B1.  Automatic (user need only specify required accuracy)
+H2B1B2.  Nonautomatic
+H2B2.  Nonrectangular region, general region
+H2B2A.  Integrand available via user-defined procedure
+H2B2A1.  Automatic (user need only specify required accuracy)
+H2B2A2.  Nonautomatic
+H2B2B.  Integrand available only on grid
+H2B2B1.  Automatic (user need only specify required accuracy)
+H2B2B2.  Nonautomatic
+H2C.  Service routines (compute weight and nodes for quadrature formulas)
+I.  Differential and integral equations
+I1.  Ordinary differential equations
+I1A.  Initial value problems
+I1A1.  General, nonstiff or mildly stiff
+I1A1A.  One-step methods (e.g., Runge-Kutta)
+I1A1B.  Multistep methods (e.g., Adams' predictor-corrector)
+I1A1C.  Extrapolation methods (e.g., Bulirsch-Stoer)
+I1A2.  Stiff and mixed algebraic-differential equations
+I1B.  Multipoint boundary value problems
+I1B1.  Linear
+I1B2.  Nonlinear
+I1B3.  Eigenvalue (e.g., Sturm-Liouville)
+I1C.  Service routines (e.g., interpolation of solutions, error handling)
+I2.  Partial differential equations
+I2A.  Initial boundary value problems
+I2A1.  Parabolic
+I2A1A.  One spatial dimension
+I2A1B.  Two or more spatial dimensions
+I2A2.  Hyperbolic
+I2B.  Elliptic boundary value problems
+I2B1.  Linear
+I2B1A.  Second order
+I2B1A1.  Poisson (Laplace) or Helmholz equation
+I2B1A1A.  Rectangular domain (or topologically rectangular in the coordinate system)
+I2B1A1B.  Nonrectangular domain
+I2B1A2.  Other separable problems
+I2B1A3.  Nonseparable problems
+I2B1C.  Higher order equations (e.g., biharmonic)
+I2B2.  Nonlinear
+I2B3.  Eigenvalue
+I2B4.  Service routines
+I2B4A.  Domain triangulation (search also class P2a2c1)
+I2B4B.  Solution of discretized elliptic equations
+I3.  Integral equations
+J.  Integral transforms
+J1.  Fast Fourier transforms (search class L10 for time series analysis)
+J1A.  One-dimensional
+J1A1.  Real
+J1A2.  Complex
+J1A3.  Trigonometric (sine, cosine)
+J1B.  Multidimensional
+J2.  Convolutions
+J3.  Laplace transforms
+J4.  Hilbert transforms
+K.  Approximation (search also class L8)
+K1.  Least squares (L-2) approximation
+K1A.  Linear least squares (search also classes D5, D6, D9)
+K1A1.  Unconstrained
+K1A1A.  Univariate data (curve fitting)
+K1A1A1.  Polynomial splines (piecewise polynomials)
+K1A1A2.  Polynomials
+K1A1A3.  Other functions (e.g., rational, trigonometric, user-specified)
+K1A1B.  Multivariate data (surface fitting)
+K1A2.  Constrained
+K1A2A.  Linear constraints
+K1A2B.  Nonlinear constraints
+K1B.  Nonlinear least squares
+K1B1.  Unconstrained
+K1B1A.  Smooth functions
+K1B1A1.  User provides no derivatives
+K1B1A2.  User provides first derivatives
+K1B1A3.  User provides first and second derivatives
+K1B1B.  General functions
+K1B2.  Constrained
+K1B2A.  Linear constraints
+K1B2B.  Nonlinear constraints
+K2.  Minimax (L-infinity) approximation
+K3.  Least absolute value (L-1) approximation
+K4.  Other analytic approximations (e.g., Taylor polynomial, Pade)
+K5.  Smoothing
+K6.  Service routines (e.g., mesh generation, evaluation of fitted functions) (search also class N5)
+L.  Statistics, probability
+L1.  Data summarization
+L1A.  One univariate quantitative sample
+L1A1.  Ungrouped data
+L1A1A.  Location
+L1A1B.  Dispersion
+L1A1C.  Shape
+L1A1D.  Distribution, density
+L1A2.  Ungrouped data with missing values
+L1A3.  Grouped data
+L1A3A.  Location
+L1A3B.  Dispersion
+L1A3C.  Shape
+L1C.  One univariate qualitative (proportional) sample
+L1E.  Two or more univariate samples or one multivariate sample
+L1E1.  Ungrouped data
+L1E1A.  Location
+L1E1B.  Correlation
+L1E2.  Ungrouped data with missing values
+L1E3.  Grouped data
+L1F.  Two or more multivariate samples
+L2.  Data manipulation (search also class N)
+L2A.  Transform (search also class N6 for sorting, ranking)
+L2B.  Group
+L2C.  Sample
+L2D.  Subset
+L3.  Graphics (search also class Q)
+L3A.  Histograms
+L3B.  Distribution functions
+L3C.  Scatter diagrams
+L3C1.  Y vs. X
+L3C2.  Symbol plots
+L3C3.  Multiple plots
+L3C4.  Probability plots
+L3C4B.  Beta, binomial
+L3C4C.  Cauchy, chi-squared
+L3C4D.  Double exponential
+L3C4E.  Exponential, extreme value
+L3C4F.  F distribution
+L3C4G.  Gamma, geometric
+L3C4H.  Halfnormal
+L3C4L.  Lambda, logistic, lognormal
+L3C4N.  Negative binomial, normal
+L3C4P.  Pareto, Poisson
+L3C4T.  t distribution
+L3C4U.  Uniform
+L3C4W.  Weibull
+L3C5.  Time series plots (X(i) vs. i, vertical, lag)
+L3D.  EDA graphics
+L4.  Elementary statistical inference, hypothesis testing
+L4A.  One univariate quantitative sample
+L4A1.  Ungrouped data
+L4A1A.  Parameter estimation
+L4A1A2.  Binomial
+L4A1A5.  Extreme value
+L4A1A14.  Normal
+L4A1A16.  Poisson
+L4A1A21.  Uniform
+L4A1A23.  Weibull
+L4A1B.  Distribution-free (nonparametric) analysis
+L4A1C.  Goodness-of-fit tests
+L4A1D.  Tests on sequences of numbers
+L4A1E.  Density and distribution function estimation
+L4A1F.  Tolerance limits
+L4A2.  Ungrouped data with missing values
+L4A3.  Grouped data
+L4A3A.  Parameter estimation
+L4A3A14.  Normal
+L4B.  Two or more univariate quantitative samples
+L4B1.  Ungrouped data
+L4B1A.  Parameter estimation
+L4B1A14.  Normal
+L4B1B.  Distribution-free (nonparametric) analysis
+L4B2.  Ungrouped data with missing values
+L4B3.  Grouped data
+L4C.  One univariate qualitative (proportional) sample
+L4D.  Two or more univariate samples
+L4E.  One multivariate sample
+L4E1.  Ungrouped data
+L4E1A.  Parameter estimation
+L4E1A14.  Normal
+L4E1B.  Distribution-free (nonparametric) analysis
+L4E2.  Ungrouped data with missing values
+L4E2A.  Parameter estimation
+L4E2B.  Distribution-free (nonparametric) analysis
+L4E3.  Grouped data
+L4E3A.  Parameter estimation
+L4E3A14.  Normal
+L4E3B.  Distribution-free (nonparametric) analysis
+L4E4.  Two or more multivariate samples
+L4E4A.  Parameter estimation
+L4E4A14.  Normal
+L5.  Function evaluation (search also class C)
+L5A.  Univariate
+L5A1.  Cumulative distribution functions, probability density functions
+L5A1B.  Beta, binomial
+L5A1C.  Cauchy, chi-squared
+L5A1D.  Double exponential
+L5A1E.  Error function, exponential, extreme value
+L5A1F.  F distribution
+L5A1G.  Gamma, general, geometric
+L5A1H.  Halfnormal, hypergeometric
+L5A1K.  Kolmogorov-Smirnov
+L5A1L.  Lambda, logistic, lognormal
+L5A1N.  Negative binomial, normal
+L5A1P.  Pareto, Poisson
+L5A1T.  t distribution
+L5A1U.  Uniform
+L5A1W.  Weibull
+L5A2.  Inverse cumulative distribution functions, sparsity functions
+L5A2B.  Beta, binomial
+L5A2C.  Cauchy, chi-squared
+L5A2D.  Double exponential
+L5A2E.  Exponential, extreme value
+L5A2F.  F distribution
+L5A2G.  Gamma, general, geometric
+L5A2H.  Halfnormal
+L5A2L.  Lambda, logistic, lognormal
+L5A2N.  Negative binomial, normal, normal scores
+L5A2P.  Pareto, Poisson
+L5A2T.  t distribution
+L5A2U.  Uniform
+L5A2W.  Weibull
+L5B.  Multivariate
+L5B1.  Cumulative distribution functions, probability density functions
+L5B1N.  Normal
+L6.  Pseudo-random number generation
+L6A.  Univariate
+L6A2.  Beta, binomial, Boolean
+L6A3.  Cauchy, chi-squared
+L6A4.  Double exponential
+L6A5.  Exponential, extreme value
+L6A6.  F distribution
+L6A7.  Gamma, general (continuous, discrete) distributions, geometric
+L6A8.  Halfnormal, hypergeometric
+L6A9.  Integers
+L6A12.  Lambda, logical, logistic, lognormal
+L6A14.  Negative binomial, normal
+L6A15.  Order statistics
+L6A16.  Pareto, permutations, Poisson
+L6A19.  Samples, stable distribution
+L6A20.  t distribution, time series, triangular
+L6A21.  Uniform
+L6A22.  Von Mises
+L6A23.  Weibull
+L6B.  Multivariate
+L6B3.  Contingency table, correlation matrix
+L6B13.  Multinomial
+L6B14.  Normal
+L6B15.  Orthogonal matrix
+L6B21.  Uniform
+L6C.  Service routines (e.g., seed)
+L7.  Experimental design, including analysis of variance
+L7A.  Univariate
+L7A1.  One-way analysis of variance
+L7A1A.  Parametric analysis
+L7A1A1.  Contrasts, multiple comparisons
+L7A1A2.  Analysis of variance components
+L7A1B.  Distribution-free (nonparametric) analysis
+L7A2.  Balanced multiway design
+L7A2A.  Complete
+L7A2A1.  Parametric analysis
+L7A2A1A.  Two-way
+L7A2A1B.  Factorial
+L7A2A1C.  Nested
+L7A2A2.  Distribution-free (nonparametric) analysis
+L7A2B.  Incomplete
+L7A2B1.  Parametric analysis
+L7A2B1A.  Latin square
+L7A2B1B.  Lattice designs
+L7A2B2.  Distribution-free (nonparametric) analysis
+L7A3.  Analysis of covariance
+L7A4.  General linear model (unbalanced design)
+L7A4A.  Parametric analysis
+L7A4B.  Distribution-free (nonparametric) analysis
+L7B.  Multivariate
+L8.  Regression (search also classes G, K)
+L8A.  Linear least squares (L-2) (search also classes D5, D6, D9)
+L8A1.  Simple
+L8A1A.  Ordinary
+L8A1A1.  Unweighted
+L8A1A1A.  No missing values
+L8A1A1B.  Missing values
+L8A1A2.  Weighted
+L8A1B.  Through the origin
+L8A1C.  Errors in variables
+L8A1D.  Calibration (inverse regression)
+L8A2.  Polynomial
+L8A2A.  Not using orthogonal polynomials
+L8A2A1.  Unweighted
+L8A2A2.  Weighted
+L8A2B.  Using orthogonal polynomials
+L8A2B1.  Unweighted
+L8A2B2.  Weighted
+L8A3.  Piecewise polynomial (i.e. multiphase or spline)
+L8A4.  Multiple
+L8A4A.  Ordinary
+L8A4A1.  Unweighted
+L8A4A1A.  No missing values
+L8A4A1B.  Missing values
+L8A4A1C.  From correlation data
+L8A4A1D.  Using principal components
+L8A4A1E.  Using preference pairs
+L8A4A2.  Weighted
+L8A4B.  Errors in variables
+L8A4D.  Logistic
+L8A5.  Variable selection
+L8A6.  Regression design
+L8A7.  Several multiple regressions
+L8A8.  Multivariate
+L8A9.  Diagnostics
+L8A10.  Hypothesis testing, inference
+L8A10A.  Lack-of-fit tests
+L8A10B.  Analysis of residuals
+L8A10C.  Inference
+L8B.  Biased (ridge)
+L8C.  Linear least absolute value (L-1)
+L8D.  Linear minimax (L-infinity)
+L8E.  Robust
+L8F.  EDA
+L8G.  Nonlinear
+L8G1.  Unweighted
+L8G1A.  Derivatives not supplied
+L8G1B.  Derivatives supplied
+L8G2.  Weighted
+L8G2A.  Derivatives not supplied
+L8G2B.  Derivatives supplied
+L8H.  Service routines
+L9.  Categorical data analysis
+L9A.  2-by-2 tables
+L9B.  Two-way tables
+L9C.  Log-linear model
+L9D.  EDA (e.g., median polish)
+L10.  Time series analysis (search also class L3c5 for time series graphics)
+L10A.  Transformations, transforms (search also class J1)
+L10B.  Smoothing, filtering
+L10C.  Autocorrelation analysis
+L10D.  Complex demodulation
+L10E.  ARMA and ARIMA modeling and forecasting
+L10E1.  Model and parameter estimation
+L10E2.  Forecasting
+L10F.  Spectral analysis
+L10G.  Cross-correlation analysis
+L10G1.  Parameter estimation
+L10G2.  Forecasting
+L11.  Correlation analysis
+L12.  Discriminant analysis
+L13.  Factor analysis
+L13A.  Principal components analysis
+L14.  Cluster analysis
+L14A.  Unconstrained
+L14A1.  Nested
+L14A1A.  Joining (e.g., single link)
+L14A1B.  Divisive
+L14A2.  Non-nested
+L14B.  Constrained
+L14B1.  One-dimensional
+L14B2.  Two-dimensional
+L14C.  Display
+L15.  Life testing, survival analysis
+M.  Simulation, stochastic modeling (search also classes L6, L10)
+M1.  Simulation
+M1A.  Discrete
+M1B.  Continuous (Markov models)
+M2.  Queueing
+M3.  Reliability
+M3A.  Quality control
+M3B.  Electrical network
+M4.  Project optimization (e.g., PERT)
+N.  Data handling (search also class L2)
+N1.  Input, output
+N2.  Bit manipulation
+N3.  Character manipulation
+N4.  Storage management (e.g., stacks, heaps, trees)
+N5.  Searching
+N5A.  Extreme value
+N5B.  Insertion position
+N5C.  On a key
+N6.  Sorting
+N6A.  Internal
+N6A1.  Passive (i.e. construct pointer array, rank)
+N6A1A.  Integer
+N6A1B.  Real
+N6A1B1.  Single precision
+N6A1B2.  Double precision
+N6A1C.  Character
+N6A2.  Active
+N6A2A.  Integer
+N6A2B.  Real
+N6A2B1.  Single precision
+N6A2B2.  Double precision
+N6A2C.  Character
+N6B.  External
+N7.  Merging
+N8.  Permuting
+O.  Symbolic computation
+P.  Computational geometry (search also classes G, Q)
+P1.  One dimension
+P2.  Two dimensions
+P2A.  Points, lines
+P2A1.  Relationships
+P2A1A.  Closest and farthest points
+P2A1B.  Intersection
+P2A2.  Graph construction
+P2A2A.  Convex hull
+P2A2B.  Minimum spanning tree
+P2A2C.  Region partitioning
+P2A2C1.  Triangulation
+P2A2C2.  Voronoi diagram
+P2B.  Polygons (e.g., intersection, hidden line problems)
+P2C.  Circles
+P3.  Three dimensions
+P3A.  Points, lines, planes
+P3B.  Polytopes
+P3C.  Spheres
+P4.  More than three dimensions
+Q.  Graphics (search also classes L3, P)
+Q1.  Line printer plotting
+R.  Service routines
+R1.  Machine-dependent constants
+R2.  Error checking (e.g., check monotonicity)
+R3.  Error handling
+R3A.  Set criteria for fatal errors
+R3B.  Set unit number for error messages
+R3C.  Other utility programs
+R4.  Documentation retrieval
+S.  Software development tools
+S1.  Program transformation
+S2.  Static analysis
+S3.  Dynamic analysis
+Z.  Other
+SHAR_EOF
+chmod 0644 gams ||
+echo 'restore of gams failed'
+fi
+# ============= getpk.c ==============
+if test -f 'getpk.c' -a X"$1" != X"-c"; then
+	echo 'x - skipping getpk.c (File already exists)'
+else
+echo 'x - extracting getpk.c (Text)'
+sed 's/^X//' << 'SHAR_EOF' > 'getpk.c' &&
+X
+/***********************************************************************
+X Copyright (C) 1994 by the Regents of the University of Michigan.
+X
+X User agrees to reproduce said copyright notice on all copies of the software
+X made by the recipient.  
+X
+X All Rights Reserved. Permission is hereby granted for the recipient to make
+X copies and use this software for its own internal purposes only. Recipient of
+X this software may re-distribute this software outside of their own 
+X institution. Permission to market this software commercially, to include this
+X product as part of a commercial product, or to make a derivative work for
+X commercial purposes, is explicitly prohibited.  All other uses are also
+X prohibited unless authorized in writing by the Regents of the University of
+X Michigan.
+X
+X This software is offered without warranty. The Regents of the University of
+X Michigan disclaim all warranties, express or implied, including but not
+X limited to the implied warranties of merchantability and fitness for any
+X particular purpose. In no event shall the Regents of the University of
+X Michigan be liable for loss or damage of any kind, including but not limited
+X to incidental, indirect, consequential, or special damages. 
+***********************************************************************/
+#include "sldoc.h"
+extern struct routine *r;
+static FILE *FPs;
+static char *Tdir;
+static char *Tmp;
+extern int Nrtn;
+X
+/*  Simple functions for getting all slatec routines used directly
+X    or indirectly by a specified slatec routine 
+*/
+X
+X
+getpk(FILE *fpS, char *rtn, char *tdir, char file)
+{
+X    int i;
+/*
+X    rtn-- top routine in tree
+X    tdir-- directory routines should be written to
+*/
+X    if( !tdir ) tdir= ".";
+X    if( file=='D' && access(tdir,W_ACC) )
+X    {
+X	    printf("ERROR:Cannot write to directory\n");
+X	    return(-1);
+X    }
+X
+X    i= rtntoi( rtn );
+X    FPs= fpS;
+X    Tdir= tdir;
+X    wr_routine(i);
+X
+X    if( file=='D' )  /* recursive fdcalls */
+X    {
+X         Tmp= calloc(Nrtn,1);
+X         Tmp[i]= 1;   /* flagged written */
+X	 fdcalls(i);
+X         free(Tmp);
+X    }
+X    return(0);
+}
+X
+wr_routine(int j)
+{
+X    char lc[12], buf[128], *p, c;
+X    int i,numlines;
+X    FILE *fpout;
+X
+X     bzero( buf,128 );
+X     bzero( lc,12 );
+X     p= r[j].name;
+X     for(i=0; i<RTNLN && p[i]; i++) lc[i] = tolower(p[i]);
+X
+X    if(r[j].c.type ==1) c='F';
+X    else c='f';
+X    sprintf(buf,"%s/%s.%c",Tdir,lc,c);
+X    fpout= fopen( buf,"w");
+X
+X    bzero( buf,128 );
+X    numlines=   r[j].k.srclines + r[j].g.doclines;
+X    SEEKRTN( FPs,j )
+X    for(i=0; i< numlines ; i++)
+X    {
+X       fgets(buf,CDLN+8,FPs);
+X       fputs(buf,fpout);
+X    }
+X    fclose(fpout);
+}
+X
+fdcalls(int i)
+{
+X    int k,j;
+X
+X    j= 0;
+X    while( (k= fetcher(r[i].c.n,r[i].c.start,&j)) != -1)
+X    {
+X	if( Tmp[k] != 1) wr_routine(k);
+X	Tmp[k]= 1;
+X        fdcalls(k);
+X    }
+X    return;
+}
+SHAR_EOF
+chmod 0755 getpk.c ||
+echo 'restore of getpk.c failed'
+fi
+# ============= main.c ==============
+if test -f 'main.c' -a X"$1" != X"-c"; then
+	echo 'x - skipping main.c (File already exists)'
+else
+echo 'x - extracting main.c (Text)'
+sed 's/^X//' << 'SHAR_EOF' > 'main.c' &&
+/***********************************************************************
+X Copyright (C) 1994 by the Regents of the University of Michigan.
+X
+X User agrees to reproduce said copyright notice on all copies of the software
+X made by the recipient.  
+X
+X All Rights Reserved. Permission is hereby granted for the recipient to make
+X copies and use this software for its own internal purposes only. Recipient of
+X this software may re-distribute this software outside of their own 
+X institution. Permission to market this software commercially, to include this
+X product as part of a commercial product, or to make a derivative work for
+X commercial purposes, is explicitly prohibited.  All other uses are also
+X prohibited unless authorized in writing by the Regents of the University of
+X Michigan.
+X
+X This software is offered without warranty. The Regents of the University of
+X Michigan disclaim all warranties, express or implied, including but not
+X limited to the implied warranties of merchantability and fitness for any
+X particular purpose. In no event shall the Regents of the University of
+X Michigan be liable for loss or damage of any kind, including but not limited
+X to incidental, indirect, consequential, or special damages. 
+***********************************************************************/
+/* for xgen */
+X
+#include "sldoc.h"
+X
+char **keys;
+struct gams *gamlist;
+X
+extern struct routine *r;
+extern unsigned short *Indices;
+X
+int Nrtn, Ndx, Nkeys, Ngams; /* number of routines in library */
+int totcalls= 0;
+X
+main(int argc,char **argv)
+{
+X    char *fn, **rdphrases();
+X    FILE *fp;
+X    char buf[BFSZ];
+X    void stowkey(), stowgam();
+X
+X    fn= DAF;
+X    fp= fopen(fn,"r");
+X    if( !fp )
+X    {
+X	 bzero( buf,BFSZ );
+X	 sprintf( buf,"fopen %s",fn );
+X	 perror(buf);
+X	 exit(-1);
+X    }
+X    Nrtn= rd_binfl(RTBL,&r,sizeof(struct routine));
+X    Ndx= rd_binfl(NDX,&Indices,sizeof(short));
+X    switch(argv[1][0]){
+X        case 'C':		/* category */
+X	    gamlist= (struct gams *)rdphrases(GAMS,"gams",
+X			  sizeof(struct gams),stowgam,&Ngams);
+X	    getcat_x(argv[1]+1);
+X	    break;
+X        case 'D':		/* directory --package */
+X        case 'F':		/* file -- package */
+X	    if( !argv[1][1] ) 
+X	    {
+X		printf("No routine specified\n");
+X                exit(0);
+X	    }
+X	    getpk(fp,argv[1]+1,argv[2],argv[1][0]);
+X	    break;
+X        case 'K':
+X	    getkey(argv[1]+1);
+X	    break;
+X        case 'L':
+X	    gamlist= (struct gams *)rdphrases(GAMS,"gams",
+X			  sizeof(struct gams),stowgam,&Ngams);
+X	    listcat(argv[1]+1,0,0);
+X	    break;
+X        case 'X':
+X        case 'N':
+X        case 'R':  /* retrieve whole routine */
+X	    if( !argv[1][1] ) 
+X	    {
+X		printf("No routine specified\n");
+X		if(argv[1][0]=='N')
+X		{
+X                  printf("\nCLOSE Window to Return.");
+X                  getchar();
+X		}
+X                exit(0);
+X	    }
+X	    getroutine(fp,argv[1]+1,argv[1][0],(FILE *)0);
+X	    break;
+X        case 'S':
+X	    showroutines(argv[1]+1);
+X	    break;
+X        case 'Y':
+X	    keys= rdphrases(KYWDS,"keys",sizeof(char *),stowkey,&Nkeys);
+X	    showkeys();
+X	    break;
+X        default:
+X	    break;
+X     };
+X     exit(0);
+}
+SHAR_EOF
+chmod 0755 main.c ||
+echo 'restore of main.c failed'
+fi
+# ============= maintxt.c ==============
+if test -f 'maintxt.c' -a X"$1" != X"-c"; then
+	echo 'x - skipping maintxt.c (File already exists)'
+else
+echo 'x - extracting maintxt.c (Text)'
+sed 's/^X//' << 'SHAR_EOF' > 'maintxt.c' &&
+X
+/***********************************************************************
+X Copyright (C) 1994 by the Regents of the University of Michigan.
+X
+X User agrees to reproduce said copyright notice on all copies of the software
+X made by the recipient.  
+X
+X All Rights Reserved. Permission is hereby granted for the recipient to make
+X copies and use this software for its own internal purposes only. Recipient of
+X this software may re-distribute this software outside of their own 
+X institution. Permission to market this software commercially, to include this
+X product as part of a commercial product, or to make a derivative work for
+X commercial purposes, is explicitly prohibited.  All other uses are also
+X prohibited unless authorized in writing by the Regents of the University of
+X Michigan.
+X
+X This software is offered without warranty. The Regents of the University of
+X Michigan disclaim all warranties, express or implied, including but not
+X limited to the implied warranties of merchantability and fitness for any
+X particular purpose. In no event shall the Regents of the University of
+X Michigan be liable for loss or damage of any kind, including but not limited
+X to incidental, indirect, consequential, or special damages. 
+***********************************************************************/
+/* my implemtation of sladoc functionality --dmw */
+X
+#include "sldoc.h"
+X
+char **keys;
+struct gams *gamlist;
+X
+extern struct routine *r;
+extern unsigned short *Indices;
+X
+static int Currln= 0;
+static int Pgsz= 21;
+static FILE *Fp= 0;
+static int Ngams2;
+static int Ee;
+static short Pgln;
+X
+int Nkeys, Ngams;
+int Nrtn, Ndx; /* number of routines in library */
+int totcalls= 0;
+X
+main(int argc,char **argv)
+{
+X    char *fn, **rdphrases();
+X    int ret;
+X    char buf[BFSZ];
+X    char so[2];
+X    void stowkey(), stowgam();
+X
+X    fn= DAF;
+X    Fp= fopen(fn,"r");
+X    if( !Fp )
+X    {
+X	 bzero( buf,BFSZ );
+X	 sprintf( buf,"fopen %s",fn );
+X	 perror(buf);
+X	 exit(-1);
+X    }
+X    Nrtn= rd_binfl(RTBL,&r,sizeof(struct routine));
+X    Ndx= rd_binfl(NDX,&Indices,sizeof(short));
+X    puts(
+X    " Welcome to SLATXT the SLATEC on-line documentation program\n");
+X    keys= rdphrases(KYWDS,"keys",sizeof(char *),stowkey,&Nkeys);
+X    gamlist= (struct gams *)rdphrases(GAMS,"gams",
+X			  sizeof(struct gams),stowgam,&Ngams);
+X    help();
+X
+X    so[0]= 1;
+X    so[1]= '\0';
+X    Ngams2= listcat(so,0,0);
+X
+X    while(1)
+X    {
+X	ret= txtcmd();
+/* quitting */
+X	if( ret == -1 ) break;
+/* successful cmnd */
+X	if( ret != 0  ) 
+X           puts("\n Ready for your command {x, k, c, l, v, or q}");
+X    }
+X    exit(0);
+}
+X
+help()
+{
+static char *h[]=
+X    {" The first field of a command line is required, but",
+X     " the second field is optional.  For example, to view",
+X     " the main classification categories, just type 'l'.",
+X     " Other commands are:"," ",
+X     " x,abc  to extract the documentation by name, where",
+X     "           'abc' is a routine name",
+X     " k,...  to find routine names by keyword(s), where",
+X     "           '...' is a keyword or keyphrase",
+X     " c,xyz  to find routine names by classification category,",
+X     "           where 'xyz' is a classification category",
+X     " l,c    to list subcategories of a main category, where",
+X     "           'c' is a main classification category",
+X     " v,abc  to view the list of keywords or the classification",
+X     "           scheme, where 'abc' is K for the keywords or C",
+X     "           for the classification scheme",
+X     " q      to quit",NULL};
+X
+X    char **th;
+X
+X    th= h;
+X    while (*th) puts(*(th++));
+X    puts("\n Ready for your command");
+}
+X
+view(char c, int e)
+{
+static char v1[]= "If you wish to view these,";
+static char v2[]="     type  'b'          to browse through the list";
+static char l[]= "     type  'f'          to have it written on file 'slalis'";
+int n;
+char buf[BFSZ];
+X
+X    if( !e )
+X    {
+X        puts("\n Input C for classification scheme or K for keywords");
+X	gets(buf);
+X	c= buf[0];
+X    }
+X    switch(c){
+X        case 'K':
+X        case 'k':
+X	    n= Nkeys;
+X            printf("Keywords list    %d lines\n",n);
+X	    puts(v1); puts(v2);
+X            doc_choice(l);
+X            rdkeys_choice();
+X	    break;
+X        case 'C':
+X        case 'c':
+X            printf("Classification list    %d lines\n",Ngams);
+X	    puts(v1); puts(v2);
+X            doc_choice(l);
+X            rdgams_choice();
+X	    break;
+X        default:
+X	    printf(" Invalid command \n");
+X	    break;
+X     };
+}
+X
+rdgams_choice()
+{
+char buf[BFSZ];
+FILE *fp;
+void pageg();
+char so[2];
+char *name;
+X
+/* choose reading mode */
+X    so[0]= 2;
+X    so[1]= '\0';
+X    gets(buf);
+X    switch(buf[0]){
+X        case 'B':
+X        case 'b':
+X	    browse(pageg);
+X	    break;
+X        case 'T':
+X        case 't':
+X            listcat(so,0,0);
+X	    break;
+X        case 'F':
+X        case 'f':
+X	    if(buf[1]==',') name= buf+2;
+X	    else name = "clalis";
+X	    fp= fopen( name,"a+" );
+X	    if(!fp) 
+X		printf("File %s cannot be created\n",name);
+X	    else
+X	    {
+X               listcat(so,0,fp);
+X	       fclose(fp);
+X	    }
+X	    break;
+X        default:
+X	    return;
+X     }
+}
+X 
+rdkeys_choice()
+{
+char buf[BFSZ];
+FILE *fp;
+void pagek();
+int i;
+char *name;
+X
+/* choose reading mode */
+X    gets(buf);
+X    switch(buf[0]){
+X        case 'B':
+X        case 'b':
+X	    browse(pagek);
+X	    break;
+X        case 'T':
+X        case 't':
+X	    for(i=0; i<Nkeys; i++ ) puts(keys[i]);
+X	    break;
+X        case 'F':
+X        case 'f':
+X	    if(buf[1]==',') name= buf+2;
+X	    else name = "slalis";
+X	    fp= fopen( name,"a+" );
+X	    if(!fp) 
+X		printf("File %s cannot be created\n",name);
+X	    else
+X	    {
+X	        for(i=0; i<Nkeys; i++ ) fputs(keys[i],fp);
+X	        fclose(fp);
+X	    }
+X	    break;
+X        default:
+X	    return;
+X     }
+}
+X
+doc_choice(char *last)
+{
+X  static char *doc[]= {
+X   "     type  't'          to have it written on your terminal",
+X   "     type  'f,filename' to have it written on file 'filename'"
+X   };
+X static char brend[]=
+X " If you do not wish to view these,\n     type anything else";
+X
+X   puts(doc[0]);
+X   puts(doc[1]);
+X   puts(last);
+X   puts(brend);
+}
+X
+seedoc(char *st, int er)
+{
+X static char *brw[]= {"\n If you wish to see the full documentation,",
+X   "     type  'b'          to browse through the documentation" };
+X
+X  char buf[BFSZ], *fxname();
+X  int e, n, b, j;
+X  void pager();
+X  FILE *fp;
+X
+X    if(!er)
+X    {
+X       puts(" Input a routine name for its purpose");
+X       gets(st);
+X     }
+X
+X    if( (e= rtntoi(st))== -1)
+X    {
+X 	printf (" Routine name not found");
+X	return;
+X    }
+X    printf("  %s ... %d lines of documentation\n",
+X     fxname(e),r[e].g.doclines);
+X  
+/*write purpose of routine */
+X    SEEKRTN( Fp,e )
+X    n= r[e].c.npurpose;
+X    b= r[e].c.purpose;
+X    for( j=0; j< b; j++) fgets(buf,CDLN+8,Fp);
+X    for( j=0; j< n; j++) {fgets(buf,CDLN+8,Fp);fputs(buf,stdout);}
+X
+/* instructions */
+X     puts(brw[0]); puts(brw[1]);
+X     sprintf(buf,
+X	 "     type  'f'       to have it written on file %s\n",st);
+X     doc_choice(buf);
+X
+/* choose reading mode */
+X    gets(buf);
+X    switch(buf[0]){
+X        case 'B':
+X        case 'b':
+X	    Ee =e;
+X	    browse(pager);
+X	    break;
+X        case 'T':
+X        case 't':
+X	    e= getroutine(Fp,st,'X',(FILE *)0);
+X	    break;
+X        case 'F':
+X        case 'f':
+X	    fp= fopen( st,"a+" );
+X	    if(!fp) 
+X		printf("File %s cannot be created\n",st);
+X	    else
+X		e= getroutine(Fp,st,'R',fp);
+X	    break;
+X        default:
+X	    return;
+X     }
+}
+X
+browse( void (*page)() )
+{
+X
+X static char *br2[]= {" The browsing commands are:",
+X "     type  'p'            to display the current page", 
+X "     type  'pd'           to display the next page",
+X "     type  'pd {+-}[n]'   to display the {+-}[n]-th page down",
+X "     type  'pu'           to display the preceeding page",
+X "     type  'pu {+-}[n]'   to display the {+-}[n]-th page up",
+X "     type  'spgsz'        to show the current page size",
+X "     type  'spgsz [n]'    to set page size to [n] lines",
+X "     type  'hd'           to display one-half page down (forward)",
+X "     type  'hu'           to display one-half page up (backward)",
+X "     type  'e'            to exit browsing mode",
+X "     type  'q'            to quit browsing mode",NULL };
+X
+X static char *br3=
+X "\n Enter your next browsing command {spgsz p pd pu hd hu e q}";
+X
+X    char **br;
+X    char s[BFSZ];
+X
+X    br= br2;
+X    while (*br) puts(*(br++));
+X    puts(br3);
+X    Currln= 0;
+X    Pgsz= 21;
+X    Pgln= -1;
+X    while(1) { gets(s); if (dobrowse(s,page)) break; }
+}
+X
+void pager(int ii)
+{
+X    int j,topln;
+X    char buf[CDLN+9];
+X    short numln;
+X
+X    numln= r[Ee].k.srclines + r[Ee].g.doclines;
+X    topln= Currln + ii;
+X    if( topln > numln -Pgsz ) topln = numln -Pgsz;
+X
+X    if( ii != Pgsz || Pgln == -1 )
+X    {
+X	SEEKRTN( Fp,Ee )
+X	Pgln= 0;
+X    }
+X    if( ii != Pgsz )
+X    {
+X	if( topln <0 ) topln= 0;
+X        for( j=0; j< topln; j++) 
+X	{
+X	    fgets(buf,CDLN+8,Fp);
+X	    Pgln++;
+X        }
+X    }
+X    for( j=0; j< Pgsz && Pgln < numln ; j++)
+X    {
+X       fgets(buf,CDLN+8,Fp);
+X       fputs(buf,stdout);
+X       Pgln++;
+X    }
+X    Currln= topln;
+}
+X
+void pageg(int ii)
+{
+X    int i,topln,t;
+X    char *g;
+X
+X    topln= Currln + ii;
+X    if(topln>Ngams-Pgsz) topln= Ngams-Pgsz;
+X    if(topln<0) topln=0;
+X    for(t=0,i=topln; t< Pgsz && i< Ngams; i++)
+X    {
+X	g= gamlist[i].gam;
+X        if(mchkcat(g)>0){ t++; putcat(i,1,0);}
+X    }
+X    Currln = topln;
+}
+X
+void pagek(int ii)
+{
+X    int j,topln,end;
+X
+X    topln= Currln + ii;
+X    if(topln>Nkeys-Pgsz) topln=Nkeys-Pgsz;
+X    if(topln<0) topln=0;
+X    end= Pgsz + topln;
+X    if( end > Nkeys ) end= Nkeys;
+X    for( j=topln; j< end; j++) puts(keys[j]);
+X    Currln= topln;
+}
+X
+dobrowse( char *s, void (*page)() )
+{
+X    int fd, i,ln ;
+X    char s2[16];
+X
+X    fd= 0;
+X    switch(s[0]){
+X        case 'H':
+X        case 'h':
+X	    if( !strcmp( s,"hu" )) { (*page)(-Pgsz/2);fd= 1; }
+X	    if( !strcmp( s,"hd" )) { (*page)(Pgsz/2); fd= 1; }
+X	    if(!fd) goto err;
+X	    break;
+X        case 'P':
+X        case 'p':
+X	    switch( s[1] )
+X	    {
+X		case '\0':
+X		   (*page)(0); break;
+X		case 'd':
+X		case 'D':
+X		switch( s[2] )
+X		{
+X		    case '\0':
+X			(*page)(Pgsz); break;
+X		    case ' ':
+X			i= atoi(s+3); (*page)(i); break;
+X		    default:
+X			goto err;
+X		};
+X		break;
+X		case 'u':
+X		case 'U':
+X		switch( s[2] )
+X		{
+X		    case '\0':
+X			(*page)(-Pgsz); break;
+X		    case ' ':
+X			i= atoi(s+3); (*page)(-i); break;
+X		    default:
+X			goto err;
+X		};
+X		break;
+X		default:
+X		    goto err;
+X	    }
+X	    break;
+X        case 's':
+X        case 'S':
+X	    ln= strlen(s);
+X	    if(ln >15) goto err;
+X            for(i=0; i< ln+1; i++ ) s2[i]= toupper(s[i]);
+X	    if( !strcmp( s2,"SPGSZ" ))
+X	    {
+X 	       printf("\n The current value of PGSZ is: %d\n", Pgsz);
+X	       fd= 1;
+X	    }
+X	    if( !fd && !strncmp( s2,"SPGSZ",5 ))
+X	    {
+X		i= atoi( s2+6 );
+/* 9999 arbitrary --biggest routine <2000 anything bigger prob.typo */
+X		if( i <1 || i > 9999 ) goto err;
+X		Pgsz= i;
+X	        printf("\n The new value of PGSZ is: %d\n", Pgsz);
+X	       fd= 1;
+X	    }
+X	    if(!fd) goto err;
+X	    break;
+X        case 'E':
+X        case 'e':
+X        case 'Q':
+X        case 'q':
+X	    return(1);
+X        default:
+X	    goto err;
+X    };
+X    return(0);
+err:
+X    printf(" Invalid command : %s \n",s);
+X    return(0);
+}
+X
+parsecmd( char *c, char *s1 )
+{
+X    char buf[BFSZ];
+X
+X    bzero( buf,BFSZ);
+X    gets(buf);
+X
+X    switch(buf[0]){
+X      case 'x':
+X      case 'k':
+X      case 'c':
+X      case 'l':
+X      case 'v':
+X      case 'q':
+X      case 'X':
+X      case 'K':
+X      case 'C':
+X      case 'L':
+X      case 'V':
+X      case 'Q':
+X	break;
+X      default:
+X       puts(" Invalid Command");
+X       help();
+X       return(-1);
+X     }
+X
+/* interpreted as single letter command */
+X    if( buf[1] != ',' )
+X    {
+X	*c= buf[0];
+X	*s1= '\0';
+X        return(0);
+X    }
+X
+X    sscanf(buf,"%c, %s\n",c,s1);
+X
+/* treated like single letter command */
+X    if( !isalpha(s1[0]) ) return(0);
+X
+X    return(1);
+}
+X
+txtcmd()
+{
+X    int e;
+X    char str[BFSZ], c;
+X
+X    e= parsecmd( &c, str );
+X    if( e == -1 ) return(0);
+X    switch(c){
+X        case 'C':		/* category */
+X        case 'c':		/* category */
+X            getcat_txt(str,e);
+X	    return(1);
+X        case 'K':
+X        case 'k':
+X            return( getkey_txt(str,e) );
+X        case 'L':
+X        case 'l':
+X	    listcat_txt(str,e);
+X	    return(1);
+X        case 'X':
+X        case 'x':
+X	    seedoc(str,e);
+X	    return(1);
+X        case 'Q':
+X        case 'q':
+X	    return(-1);
+X        case 'v':
+X	case 'V':
+X	    view(str[0],e);
+X	    return(1);
+X        default:
+X	    puts(" Impossible point in txtcmd");
+X	    break;
+X     }
+}
+X
+int putinline(int j,int start)
+{
+X      char name[RTNLN+2];
+X      static short cnt;
+X
+X      if( start==0 )
+X      {
+X	  cnt= 0;
+X          return(0);
+X      }
+X
+X      bzero(name,RTNLN+1);     
+X      bcopy( r[j].name,name,RTNLN);
+X      printf("%-8s",name);
+X      if( cnt++ >4)
+X      {
+X	  cnt=0;
+X	  putchar('\n');
+X	  return(1);
+X      }
+X      return(0);
+}
+X
+int getkey_txt(char *s, int e)
+{
+X   int ln, hit,i,j,jj,pchr;
+X   short kk;
+X   char *s2;
+X   static char k1[]="This keyword was found in the keyword phrase:";
+X   static char k2[]=
+X	 "The routine names associated with the keyword(s) are";
+X
+X    if(!e)
+X    {
+X        puts(" Input keyword(s) for routine names");
+X	gets(s);
+X    }
+X    ln= strlen(s);
+X    if(!ln)
+X    {
+X	puts(" Keyword not found");
+X	help();
+X	return(0);
+X    }
+/* convert to upper case */
+X    s2= calloc(ln+1,1);
+X    for(i=0; i< ln+1; i++ ) s2[i]= toupper(s[i]);
+X
+/* find all phrases it was in and get routines for each */
+X    for( hit=i=0; i< Nkeys; i++)
+X    {
+X	if( strstr(keys[i],s2) ) 
+X	{
+X           printf("\n %s\n    %s\n\n %s\n",k1,keys[i],k2);
+X
+X  /* initialize count in putinline */
+X	   putinline(0,0);
+X           for( j=0; j< Nrtn; j++ )
+X	   {
+X	       jj= 0;
+X	       while( (kk= fetcher(r[j].k.n,r[j].k.start,&jj)) != -1)
+X		  if( kk==i) pchr= putinline( j,1 );
+X	   }
+X	   hit= 1;
+X	   if(!pchr) putchar('\n');
+X	}
+X     }
+X     if( !hit ) puts("\n Keyword not found");
+X     free(s2);
+X     return(1);
+}
+X
+getcat_txt(char *mycat, int e)
+{
+X    int tote,foundgam;
+X    int putinline();
+X    char buf[BFSZ];
+X    char *s;
+X
+X    if( !e )
+X    {
+X       puts("\n Input classification category for routine names");
+X       gets(buf);
+X       mycat= buf;
+X    }
+/* init putinline */
+X    putinline(0,0);
+X
+X    s= "The routine names classified under the category are";
+X    tote= getcat( mycat,putinline,s,&foundgam);
+X
+X    if(!foundgam )
+X    {
+X	 puts(" category not found");
+X	 return;
+X    }
+X    if( !tote )
+X    {
+X	 puts(" category not in library");
+X	 return;
+X    }
+}
+X
+listcat_txt(char *s, int e)
+{
+X    int ll;
+X
+X    if (!e) puts(" The major categories are:\n");
+X  while(1)
+X  {
+X    ll= listcat(s,1,0);
+X    switch(ll){
+X      case -2:
+X      case -1:
+X        printf("\n %s : category does not exist in this library.\n",s);
+X        return;
+X      case 0:
+X        printf("\n There are no subcategories of: %s\n",s);
+X        return;
+X      case 1:
+/* forces interpretation of any str as 1 letter category */
+X        puts("\n Input a MAJOR category you wish to explore");
+X	gets(s);
+X	if(strlen(s) > 1) s[1]= '\0';
+X	if( !s[0] ) return;
+X	break;
+X      case 2:
+X        puts("\n Type in the SUBCATEGORY you wish to explore, or <cr>");
+X	gets(s);
+X	if( !s[0] ) return;
+X	break;
+X     }
+X  }
+}
+SHAR_EOF
+chmod 0755 maintxt.c ||
+echo 'restore of maintxt.c failed'
+fi
+# ============= slatecm ==============
+if test -f 'slatecm' -a X"$1" != X"-c"; then
+	echo 'x - skipping slatecm (File already exists)'
+else
+echo 'x - extracting slatecm (Text)'
+sed 's/^X//' << 'SHAR_EOF' > 'slatecm' &&
+#!/bin/sh
+#
+# Slatec
+#
+r="../../../xgen/xgen/src"
+s="../bin"
+# find other annoying problems
+#
+export PATH
+PATH="$s:/usr/X11R5/bin:/usr/ucb:/bin:/usr/bin:/etc:$r"
+if tokens | grep Expires  > /dev/null
+then
+g=""
+else
+echo "You must klog before using SLATEC documentation"
+exit
+fi
+#
+x=`xdpyinfo | egrep 'class: | depth:'`
+if [ ! "$x" ] ;then echo "FATAL: try setenv DISPLAY `hostname`:0.0"; exit ;fi
+# 
+# ultrix sh has trouble setting global vars -- once
+# set they stay set? setting them in loops freq.fails?
+# so dont set global til very end-- once!
+#
+c="-DGREYSCALE"
+if echo $x | egrep 'Color.*depth.*8 planes' >/dev/null
+then 
+c=""
+fi
+if echo $x | egrep 'Color.*depth.*4 planes' >/dev/null
+then 
+c="-DFOURPLANE"
+fi
+#
+echo "Loading..."
+$r/xgen $c -I$s/bin $s/bin/sltc.xgen
+Xexit 0
+SHAR_EOF
+chmod 0755 slatecm ||
+echo 'restore of slatecm failed'
+fi
+# ============= omakefile ==============
+if test -f 'omakefile' -a X"$1" != X"-c"; then
+	echo 'x - skipping omakefile (File already exists)'
+else
+echo 'x - extracting omakefile (Text)'
+sed 's/^X//' << 'SHAR_EOF' > 'omakefile' &&
+#
+#  make databse and database programs for slatec code
+#  sltc supports xgen version
+#  slatxt is designed to look like sldoc
+#
+RTBL= ../rtbl
+NDX= ../ndx
+KYWDS= ../keywords
+X
+CC= cc
+CFLAGS= -O
+#ifdef sun
+CC= acc
+#endif
+#ifdef hpux
+CC= c89
+CFLAGS= -O -D_INCLUDE_POSIX_SOURCE
+#endif
+#ifdef _AIX
+CC= xlc
+#endif
+X
+SRC= fetch.c rd.c util.c
+X
+OBJ= fetch.o rd.o util.o
+X
+dtbs: slprp dbase
+X
+all: sltc slatxt
+X
+slprp: doc.o $(OBJ) 
+X	$(CC) -O -o slprp doc.o $(OBJ)
+X
+dbase:
+X	/bin/rm -f $(RTBL) $(NDX)
+X	slprp S | sort | uniq > $(KYWDS)
+X	slprp > /dev/null 2> /tmp/err1
+X	slprp L > /dev/null 2> /tmp/err2
+X
+sltc: main.o getpk.o $(OBJ) 
+X	$(CC) -O -o sltc main.o getpk.o $(OBJ)
+X
+slatxt: maintxt.o $(OBJ) 
+X	$(CC) -O -o sltxt maintxt.o $(OBJ)
+X
+clean:
+X	rm *.o sltxt slprp sltc
+SHAR_EOF
+chmod 0644 omakefile ||
+echo 'restore of omakefile failed'
+fi
+# ============= rd.c ==============
+if test -f 'rd.c' -a X"$1" != X"-c"; then
+	echo 'x - skipping rd.c (File already exists)'
+else
+echo 'x - extracting rd.c (Text)'
+sed 's/^X//' << 'SHAR_EOF' > 'rd.c' &&
+X
+/***********************************************************************
+X Copyright (C) 1994 by the Regents of the University of Michigan.
+X
+X User agrees to reproduce said copyright notice on all copies of the software
+X made by the recipient.  
+X
+X All Rights Reserved. Permission is hereby granted for the recipient to make
+X copies and use this software for its own internal purposes only. Recipient of
+X this software may re-distribute this software outside of their own 
+X institution. Permission to market this software commercially, to include this
+X product as part of a commercial product, or to make a derivative work for
+X commercial purposes, is explicitly prohibited.  All other uses are also
+X prohibited unless authorized in writing by the Regents of the University of
+X Michigan.
+X
+X This software is offered without warranty. The Regents of the University of
+X Michigan disclaim all warranties, express or implied, including but not
+X limited to the implied warranties of merchantability and fitness for any
+X particular purpose. In no event shall the Regents of the University of
+X Michigan be liable for loss or damage of any kind, including but not limited
+X to incidental, indirect, consequential, or special damages. 
+***********************************************************************/
+/* PROGRAM to build files for sltc doc retrieval */
+/* data structs for slatec documentation */
+X
+#include "sldoc.h"
+X
+/* read lines from ascii files */
+char **
+rdphrases(char *f,char *errstr,int elsz,void (*storeit)(),int *nstord)
+{
+X    int i,n,c;
+X    char buf[BFSZ];  /* BFSZ > KEYLN */
+X    FILE *fp;
+X    char **stored;
+X
+X    fp= fopen( f,"r");
+X    if( !fp )
+X     {
+X	 bzero( buf,BFSZ );
+X	 sprintf( buf,"rdphrases %s %s",errstr,f );
+X	 perror(buf);
+X	 exit(-1);
+X     }
+/* count number of lines */
+X     i= 0;
+X     while ( (c= getc(fp)) != EOF ) if( c=='\n' ) i++;
+X     stored= (char **)calloc( i+1, elsz);
+X     fseek( fp,0,0 );
+X
+/* store away data */
+X    for( i=0; fgets(buf,BFSZ, fp) ; i++ ) 
+X    {
+X        n= strlen(buf);
+X	buf[n-1]='\0';
+X	(*storeit)(stored,i,buf,n);
+X    }
+X    *nstord= i;
+X    fclose(fp);
+X    return(stored);
+}
+X
+stowkey( char **stored, int i, char *buf, int n )
+{
+X   stored[i]= malloc(n);
+X   bcopy( buf,stored[i],n);
+}
+X
+stowgam( char **stored, int i, char *buf, int n )
+{
+X    int lim, j,d;
+X    struct gams *g;
+X
+X        g= (struct gams *) stored;
+/* stow gams number */
+X	if( n > GAMLN +2 ) lim= GAMLN +2;
+X	else lim= n;
+X	for( j=0; j< lim; j++) if( buf[j] == '.') break;
+X        bcopy( buf, g[i].gam, j);
+X
+/* stow gams descrition */
+X	switch(j){
+X	  case 1:
+X	    d= 3; break;
+X	  case 2:
+X	    d= 2; break;
+X	  default:
+X	    d= 1; break;
+X	  };
+X	 
+X        g[i].describe= malloc(n-j-d+1);
+X	bcopy( buf+j+d, g[i].describe, n-j-d+1 );
+}
+X
+int compar(s1,s2)
+short *s1,*s2;
+{
+X    return(*s1 - *s2);
+}
+X
+int scompar(s1,s2)
+struct routine *s1,*s2;
+{
+X    return(strncmp(s1->name, s2->name,RTNLN));
+}
+X
+sortnames( short *bf, int n )
+{
+X    int ncompar();
+X
+X    qsort( bf, n, sizeof(short), ncompar);
+}
+X
+/* read binary file */
+rd_binfl(char *fn, int **rr, int entrysize)
+{
+X     int f,n;
+X     struct stat stb;
+X     char buf[128];
+X      
+X     f= open( fn,O_RDONLY,0 );
+X     if( f <0)
+X     {
+X	 bzero( buf,128 );
+X	 sprintf( buf,"rd_binfl %s",fn );
+X	 perror(buf);
+X	 exit(-1);
+X     }
+X     fstat(f,&stb);
+X     n= stb.st_size;
+X     *rr= (int *)calloc( n, 1);
+X
+X     read(f,*rr, n );
+X     close(f);
+X     return( n/entrysize);
+}
+X
+wr_binfl(int j, int *rr, char *fn, int entrysize)
+{
+X    int f,n,m;
+X
+X    f= open( fn,O_CREAT | O_WRONLY,0622 );
+X    n=  j* entrysize;
+printf("%d %d\n",j,n);
+X
+X     if( n != (m= write(f,rr,n)))
+X	 perror("wr_binfl");
+X     close(f);
+X
+printf("%d %d\n",m,n);
+}
+SHAR_EOF
+chmod 0644 rd.c ||
+echo 'restore of rd.c failed'
+fi
+# ============= COPYRIGHT ==============
+if test -f 'COPYRIGHT' -a X"$1" != X"-c"; then
+	echo 'x - skipping COPYRIGHT (File already exists)'
+else
+echo 'x - extracting COPYRIGHT (Text)'
+sed 's/^X//' << 'SHAR_EOF' > 'COPYRIGHT' &&
+/***********************************************************************
+X Copyright (C) 1994 by the Regents of the University of Michigan.
+X
+X User agrees to reproduce said copyright notice on all copies of the software
+X made by the recipient.  
+X
+X All Rights Reserved. Permission is hereby granted for the recipient to make
+X copies and use this software for its own internal purposes only. Recipient of
+X this software may re-distribute this software outside of their own 
+X institution. Permission to market this software commercially, to include this
+X product as part of a commercial product, or to make a derivative work for
+X commercial purposes, is explicitly prohibited.  All other uses are also
+X prohibited unless authorized in writing by the Regents of the University of
+X Michigan.
+X
+X This software is offered without warranty. The Regents of the University of
+X Michigan disclaim all warranties, express or implied, including but not
+X limited to the implied warranties of merchantability and fitness for any
+X particular purpose. In no event shall the Regents of the University of
+X Michigan be liable for loss or damage of any kind, including but not limited
+X to incidental, indirect, consequential, or special damages. 
+***********************************************************************/
+SHAR_EOF
+chmod 0700 COPYRIGHT ||
+echo 'restore of COPYRIGHT failed'
+fi
+# ============= sldoc.h ==============
+if test -f 'sldoc.h' -a X"$1" != X"-c"; then
+	echo 'x - skipping sldoc.h (File already exists)'
+else
+echo 'x - extracting sldoc.h (Text)'
+sed 's/^X//' << 'SHAR_EOF' > 'sldoc.h' &&
+/* PROGRAM to build files for sltc doc retrieval */
+/* data structs for slatec documentation */
+X
+#if defined ultrix || defined _AIX
+#include <sys/file.h>
+#else
+#include <sys/fcntl.h>
+#endif
+#include <sys/stat.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <errno.h>
+#include <ctype.h>
+#ifndef _AIX
+#include <unistd.h>
+#define W_ACC W_OK
+#else
+#include <sys/access.h>
+#endif
+#include <malloc.h>
+X
+#define SEEKRTN(fp,j) fseek( fp,(long)(r[j].a.rstart),0);
+#define KEYLN 56
+#define GAMLN 12
+#define NGAMS 739
+#define RTNLN 8
+#define BFSZ 256
+#define CDLN 72
+#define NRTN 2000
+X
+#define MXKEY  63
+#define MXGAMS 63
+#define MXCALL 63
+X
+#define DCKLN 5
+#define KYLN 12
+#define KELN 4
+#define ENDLN 16
+#define CALLN 19
+#define NOENTRY 32767
+X
+/*
+/* 4+4+4+4+8 = 24 */
+/* assumes start index into short array with <64k
+X  entries which are indexes to keys,calls,gams...
+X  gam entries at start of the array.
+X  key entries next.
+X  IF ngams,nkeys,or ncalls = 0 then index taken as direct
+X  index instead. If its set to 32k-1 taken to be NOENTRY
+X  u0,u1 reserved for future use.
+*/
+struct routine{
+X
+X  struct {
+X  unsigned int rstart: 26; /* max 64M */
+X  unsigned int u0: 6;      /* max 63  */
+X  }a;
+X
+X  struct {
+X  unsigned int start : 15;    /* max 32k  */
+X  unsigned int n:  6;         /* max 63   */
+X  unsigned int doclines: 11;  /* max 2047 */
+X  }g;
+X  
+X  struct {
+X  unsigned int start :  15;   /* max 32k  */
+X  unsigned int n :  6;        /* max 63   */
+X  unsigned int srclines: 11;  /* max 2047 */
+X  }k;
+X
+X  struct {
+X  unsigned int start : 15;    /* max 32k */
+X  unsigned int n : 6;         /* max 63  */
+X  unsigned int npurpose:  3;  /* max 7   */
+X  unsigned int purpose :  4;  /* max 15  */
+X  unsigned int type: 2;
+X  unsigned int u2: 1;
+X  }c;
+X   
+X  char name[RTNLN];   /* 8 bytes */
+};
+X
+struct gams{
+X  char gam[GAMLN];
+X  char* describe;
+};
+X
+struct commn{
+unsigned int start :  15;   /* max 32k */
+unsigned int n :  6;        /* max 63 */
+unsigned int srclines: 11;  /* max 2047 */
+};
+X
+/*
+X   DAF -- concatenated slatec doc and source
+X   GAMS - ascii database of GAMS categories
+X   RTBL - binary database containing array of routine structures
+X   KYWDS- ascii database of keyword phrases
+X   NDX -- binary database -- array of short indices
+*/
+X
+#define  DAF "/usr/um/generic/slatec/lib/slainp"
+#define GAMS "/usr/caen/doc/slatec/v4/gams"
+X
+#define KYWDS "/usr/caen/doc/slatec/v4/keywords"
+#define RTBL "/usr/um/generic/slatec/lib/rtbl"
+#define NDX "/usr/um/generic/slatec/lib/ndx"
+X
+SHAR_EOF
+chmod 0644 sldoc.h ||
+echo 'restore of sldoc.h failed'
+fi
+# ============= xgen.tips ==============
+if test -f 'xgen.tips' -a X"$1" != X"-c"; then
+	echo 'x - skipping xgen.tips (File already exists)'
+else
+echo 'x - extracting xgen.tips (Text)'
+sed 's/^X//' << 'SHAR_EOF' > 'xgen.tips' &&
+Compiling xgen:
+X
+X for HP9K HPUX 9.0
+X if using xgen's Setup  
+X   pick svr4 as OS
+X   pick cc as CC
+X
+X at end add 
+X -Wp,-H,256000 
+X to CFLAGS in Makefile
+X
+X in lex.c YYLMAX at 200 might be too small
+X change to 512
+SHAR_EOF
+chmod 0644 xgen.tips ||
+echo 'restore of xgen.tips failed'
+fi
+# ============= sltc.xgen ==============
+if test -f 'sltc.xgen' -a X"$1" != X"-c"; then
+	echo 'x - skipping sltc.xgen (File already exists)'
+else
+echo 'x - extracting sltc.xgen (Text)'
+sed 's/^X//' << 'SHAR_EOF' > 'sltc.xgen' &&
+#include "colors"
+environment s
+X  initialshells:Slatec
+{
+X  commandboard Slatec
+X     titlestring:"Slatec Interactive Documentation"
+X     x:20 y:10
+X  (
+X    label "Categories"
+X        x:0 y:10
+X	height:20 width:160
+X	foreground:RoyalBlue
+X	font:FONT2;
+X    list l1
+X        x:0 y:30
+X        foreground:white
+X	visibleitems:14
+X	updatefrom:"!sltc L";
+X    label "Slatec"
+X        alignment:center
+X        x:400 y:10
+X	height:50 width:200
+X	font:FONT0
+X	foreground:black;
+X    button  "Help"
+X	HBUT 200
+X        x:400 y:65
+X        setM1:"The SLATEC Common Mathematics Library is a set of numerical analysis FORTRAN routines (Also callable from C. See References)."
+X	setM2:"To explore the library click one of the buttons below to show keywords, categories of subroutines, lists of subroutines in alphabetic order, or online references."
+X        setM3:"To find routines by category select a category from the list on the left, then select the 'Contents of Category' button. To select routines by keyword start by selecting the 'List Keywords' button."
+X	popup:Help;
+X    button  "List Keywords"
+X	SLIMBUTTON 200
+X	BDLOOK
+X        x:400 y:102
+X	popup:Keywords;
+X    button  "Contents of Categories"
+X	SLIMBUTTON 200
+X	BDLOOK
+X	setSUB:"!echo '[l1] A' | cut -d'.' -f1"
+X        x:400 y:130
+X	popup:SubCategories;
+X    button  "List Subroutines A-C"
+X	SLIMBUTTON 200
+X	BDLOOK
+X        x:400 y:158
+X	setSUBR:"SA0CZ"
+X	popup:SubRoutines;
+X    button  "List Subroutines D"
+X	SLIMBUTTON 200
+X	BDLOOK
+X        x:400 y:186
+X	setSUBR:"SD0DZ"
+X	popup:SubRoutines;
+X    button  "List Subroutines E-R"
+X	SLIMBUTTON 200
+X	BDLOOK
+X        x:400 y:214
+X	setSUBR:"SE0RZ"
+X	popup:SubRoutines;
+X    button  "List Subroutines S-Z"
+X	SLIMBUTTON 200
+X	BDLOOK
+X        x:400 y:242
+X	setSUBR:"SS0ZZ"
+X	popup:SubRoutines;
+X    button  "References"
+X	SETDOCDIR
+X	SLIMBUTTON 200
+X	BDLOOK
+X        x:400 y:270
+X	popup:Documents;
+X    button "Exit"
+X	SLIMBUTTON 200
+X        x:400 y:298
+X        background:LightGrey
+X        foreground:white
+X	font:FONT2
+X	exit:0;
+X    label La0
+X        alignment:center
+X        x:0 y:354
+X	titlestring:"Brought to you by:"
+X	font:FONT1
+X	foreground:black;
+X    label La1
+X        alignment:center
+X        x:0 y:370
+X	titlestring:"The Laboratory for Scientific Computation"
+X	font:FONT1
+X	foreground:black;
+/*
+X    label La1
+X        alignment:center
+X        x:400 y:270
+X	titlestring:"Copyright 1991"
+X	font:FONT1
+X	foreground:black;
+X    label La2
+X	titlestring:"The Regents of the University of Michigan"
+X        x:400 y:284
+X	font:FONT1
+X	foreground:black;
+X    label La3
+X	titlestring:"All Rights Reserved"                       
+X        x:400 y:298
+X	font:FONT1
+X	foreground:black;
+*/
+X  )
+X  commandboard Keywords
+X     x:20 y:10
+X  (
+X    label "Keys <limited to 8 per selection>"
+X        x:0 y:10
+X	height:20 width:400
+X	foreground:RoyalBlue
+X	font:FONT2;
+X    list l3
+X        x:0 y:30
+X	listtype:multiple
+X	listseparator:","
+X        foreground:white
+X	visibleitems:40
+X	updatefrom:"!sltc Y";
+X    button  "Help"
+X	HBUT 200
+X        x:300 y:65
+X        setM1:"To find subroutines by keyword phrase select one or more phrases with the mouse and then the 'List Keyed Routine' button "
+X        setM2:"Routines will be selected that are classified by all the phrases selected."
+X        setM3:"So you must deselect phrases you no longer wish to guide your search by clicking on them sgain."
+X	popup:Help;
+X    button  "List Keyed Routines"
+X	SLIMBUTTON 200
+X	BDLOOK
+X        x:300 y:105
+X	setSUBR:"\"K[l3]\""
+X	popup:SubRoutines;
+X    button "Return"
+X        x:300 y:135
+X	SLIMBUTTON 200
+X	popdown:Keywords;
+X    button "Exit"
+X	SLIMBUTTON 200
+X        x:300 y:165
+X        background:LightGrey
+X        foreground:white
+X	font:FONT2
+X	exit:0;
+X  )
+X  commandboard SubCategories
+X     x:20 y:10
+X  (
+X    label "SubCategories"
+X        x:0 y:10
+X	height:20 width:160
+X	foreground:RoyalBlue
+X	font:FONT2;
+X    list l2
+X        x:0 y:30
+X        foreground:white
+X	visibleitems:20
+X	updatefrom:"!sltc L$SUB";
+X    button  "Help"
+X	HBUT 250
+X        x:560 y:30
+X        setM1:"To find all routines in the library that fall into a particular category, select a category, then the 'List Routines' button."
+X	setM2:"Deselect by returning to the category and clicking again."
+X	setM3:"Categories must be selected on the lines containing the alphanumeric category codes, e.g. H2A1."
+X	popup:Help;
+X    button  "List Routines in SubCategory"
+X	SLIMBUTTON 250
+X	BDLOOK
+X        x:560 y:70
+X	setSUBR:"!echo 'C[l2]' |cut -d'.' -f1"
+X	popup:SubRoutines;
+X    button "Return"
+X        x:560 y:100
+X	SLIMBUTTON 250
+X	popdown:SubCategories;
+X    button "Exit"
+X	SLIMBUTTON 250
+X        x:560 y:130
+X        background:LightGrey
+X        foreground:white
+X	font:FONT2
+X	exit:0;
+X  )
+X  commandboard SubRoutines
+X     x:20 y:10
+/*	runforeground:"echo $SUBR >/dev/tty" */
+X  (
+X    label "SubRoutines"
+X        x:0 y:10
+X	height:20 width:120
+X	foreground:RoyalBlue
+X	font:FONT2;
+X    list l4
+X        x:0 y:30
+X        foreground:white
+X	visibleitems:40
+X        updatefrom:"!sltc $SUBR";
+X    button  "Help"
+X	HBUT 200
+X        x:120 y:65
+X        setM1:"To examine a routine select one from the list with the mouse and then select one of the retrieval options."
+X        setM2:"To retrieve a routine select the 'Print Source File' button. To retrieve a routine and all the SLATEC routines it uses directly or indirectly select the 'Print Print Package Sources' button."
+X        setM3:"To choose the directory file(s) will be printed in click on the entry line and change the directory from the current directory to your choice."
+X	popup:Help;
+X    button  "Show Documentation"
+X	SLIMBUTTON 200
+X	BDLOOK
+X        x:120 y:105
+X	setLON:"[l4]" 
+X	runforeground:"xterm -geom 80x60+4+4 -xrm '*VT100.translations:<Key>b:scroll-back(80,page)' -sl 2047 -wf +ls -sb -s -e sltc N$LON";
+X    label "Directory to put Source"
+X        x:120 y:135
+X	height:20 width:200
+X	foreground:RoyalBlue
+X	font:FONT2;
+X    textentry t1
+X        x:120 y:165
+X	valuestring:".";
+X    button "Clear entry"
+X        x:120 y:195
+X	height:30 width:200
+X	alignment:center
+X	clear:t1;
+X    button  "Print Documentation to File"
+X	SLIMBUTTON 200
+X	BDLOOK
+X        x:120 y:225
+X	setLON:"[l4]"
+X	setT1:"[t1]"
+X        setER:"!if test \"$LON\" ;then echo 'sltc X$LON>$T1/$LON' ;else echo 'echo No_routine_specified';fi"
+X	runforeground:$ER;
+X    button  "Print Source File"
+X	SLIMBUTTON 200
+X	BDLOOK
+X        x:120 y:255
+X	setLON:"[l4]"
+X	runforeground:"sltc F$LON [t1]";
+X    button  "Print Package Sources"
+X	SLIMBUTTON 200
+X	BDLOOK
+X        x:120 y:285
+X	setLON:"[l4]"
+X	runforeground:"sltc D$LON [t1]";
+X    button "Return"
+X        x:120 y:315
+X	SLIMBUTTON 200
+X	popdown:SubRoutines;
+X    button "Exit"
+X        x:120 y:345
+X	SLIMBUTTON 200
+X        background:LightGrey
+X        foreground:white
+X	font:FONT2
+X	exit:0;
+X  )
+X  commandboard Documents
+X     x:20 y:10
+X  (
+X    label "References"
+X        x:0 y:10
+X	height:20 width:160
+X	foreground:RoyalBlue
+X	font:FONT2;
+X    list l5
+X        x:0 y:30
+X	listtype:multiple
+X	listseparator:" "
+X        foreground:white
+X	visibleitems:8
+X	updatefrom:"$DDIR";
+X    button  "Help"
+X	HBUT 210
+X        x:190 y:40
+X        setM1:"To browse through documents select -- click -- them from list on the left and select the 'Page'  button."
+X	setM2:"Deselect references by returning to them and clicking again."
+X	setM3:"To obtain Options for the more pager type 'h'. To exit the window type 'q'."
+X	popup:Help;
+X    button  "Page through Document"
+X	SLIMBUTTON 210
+X	BDLOOK
+X        x:190 y:80
+X	runbackground:"cd $DDIR;xterm -geom 80x60+4+4 +ls -e more [l5] \.END";
+X    button "Return"
+X        x:190 y:110
+X	SLIMBUTTON 210
+X	popdown:Documents;
+X    button "Exit"
+X	SLIMBUTTON 210
+X        x:190 y:140
+X        background:LightGrey
+X        foreground:white
+X	font:FONT2
+X	exit:0;
+X  )
+commandboard Help
+X     titlestring:"Help"
+X     x:220 y:10
+X     background:DarkSlateGrey
+X     pane: on
+X  (
+X     message mss1
+X        font:FONT3
+X	HMSS
+X        titlestring:$M1;
+X     message mss2
+X        font:FONT3
+X	HMSS
+X        titlestring:$M2;
+X     message mss3
+X        font:FONT3
+X	HMSS
+X        titlestring:$M3;
+X     button "Return to Menu."
+X	SLIMBUTTON 200
+X        background:red
+X	popdown:Help;
+X     button "Exit"
+X	SLIMBUTTON 200
+X        background:LightGrey
+X        foreground:white
+X	font:FONT2
+X	exit:0;
+X  )
+}
+SHAR_EOF
+chmod 0644 sltc.xgen ||
+echo 'restore of sltc.xgen failed'
+fi
+# ============= util.c ==============
+if test -f 'util.c' -a X"$1" != X"-c"; then
+	echo 'x - skipping util.c (File already exists)'
+else
+echo 'x - extracting util.c (Text)'
+sed 's/^X//' << 'SHAR_EOF' > 'util.c' &&
+X
+/***********************************************************************
+X Copyright (C) 1994 by the Regents of the University of Michigan.
+X
+X User agrees to reproduce said copyright notice on all copies of the software
+X made by the recipient.  
+X
+X All Rights Reserved. Permission is hereby granted for the recipient to make
+X copies and use this software for its own internal purposes only. Recipient of
+X this software may re-distribute this software outside of their own 
+X institution. Permission to market this software commercially, to include this
+X product as part of a commercial product, or to make a derivative work for
+X commercial purposes, is explicitly prohibited.  All other uses are also
+X prohibited unless authorized in writing by the Regents of the University of
+X Michigan.
+X
+X This software is offered without warranty. The Regents of the University of
+X Michigan disclaim all warranties, express or implied, including but not
+X limited to the implied warranties of merchantability and fitness for any
+X particular purpose. In no event shall the Regents of the University of
+X Michigan be liable for loss or damage of any kind, including but not limited
+X to incidental, indirect, consequential, or special damages. 
+***********************************************************************/
+/* for xgen */
+X
+#include "sldoc.h"
+X
+extern char **keys;
+extern struct gams *gamlist;
+extern struct routine *r;
+X
+extern int Nrtn, Nkeys, Ngams;
+X
+/* writes out names in range based on starting letter,eg AA-DC*/
+X
+showroutines(char *com)
+{
+X    char start,end;
+X    char starte,ende;  /*2nd letter of routine */
+X    char buf[8];
+X    int i,k,j;
+X
+/* parse command */
+X    start= *com;
+X    starte= com[1];
+X    end= com[2];
+X    ende= com[3];
+X
+X    i=j= 0;
+/* get 1st routine starting with 2 letters starting range */
+X    if(starte=='_') starte= 127;
+X    while( r[i].name[0] <start) i++;
+X    while( r[i].name[0] ==start && r[i].name[1] <starte) i++;
+X
+/* get 1st routine starting with 2 letters ending range */
+X    if(ende=='_') ende= 126;
+X    while( r[j].name[0] < end) j++;
+X    while( r[j].name[0] ==end && r[j].name[1] < ende) j++;
+X
+X    for( k=i; k<=j; k++)
+X    {
+X        bzero(buf,8);
+X        strncpy(buf,r[k].name,6);
+X        puts(buf);
+X    }
+}
+X
+int rtntoi(char *namin6)
+{
+X    int i;
+X    char buf[RTNLN+2];
+X
+X    for(i=0; i< Nrtn; i++)
+X        if( !strncmp(r[i].name,namin6,RTNLN)) break;
+X    if(i==Nrtn) 
+X    {
+X	bzero( buf, RTNLN +2);
+X	bcopy(namin6,buf,RTNLN+1);
+X        printf("rtntoi: unknown routine %s\n",buf);
+X	return(-1);
+X    }
+X    return(i);
+}
+X
+int getroutine(FILE *fp,char *namin6,char c,FILE *out)
+{
+X    int i,j,numlines;
+X    char buf[CDLN+9];
+X
+X    if( (i= rtntoi(namin6)) == -1) return(-1);
+X    SEEKRTN( fp,i )
+X
+X    if(c=='R') numlines= r[i].k.srclines + r[i].g.doclines;
+X    else  numlines= r[i].g.doclines;
+X    if(!out) out= stdout;
+X
+X    for(j=0; j< numlines ; j++)
+X    {
+X       fgets(buf,CDLN+8,fp);
+X       fputs(buf,out);
+X    }
+X    if(c=='N')
+X    {
+X        printf("\nType b to Begin; CLOSE Window to Return.");
+X        j=getchar();
+X    }
+X    return(i);
+}
+X
+#define LNLN 72
+X
+putcat(int i,int trim,FILE *out)
+{
+X        int n;
+X	char p[BFSZ];
+X
+X	if( !out ) out= stdout;
+X
+X        bzero(p,BFSZ);
+X	sprintf( p,"%s.%s",gamlist[i].gam,gamlist[i].describe);
+X
+/* cut off parenthetical references */
+X	if( trim )
+X	    for(n=0; p[n]; n++) if( p[n]=='(' ){ p[n]='\0';break;}
+X
+X	if( (n=strlen(p)) >= LNLN) linechop(p,n,out);
+X	else puts(p);
+}
+X
+linechop(char *p,int n,FILE *out)
+{
+X    int i,k,m,j,ii;
+X    int bottom,last,b[16],dashck;
+X    char sv;
+X
+X    if( !out ) out= stdout;
+X
+/* assumes nonblank starting str of <=4 */
+X
+X    for(i=4;i<n; i++)
+X	if(p[i] != ' ')break;
+X	
+/* find all blanks,hyphens after start */
+X    for(j=0,k=i+1;k<n; k++)
+X	if(p[k]==' '|| p[k]=='-') b[j++]= k;
+X	
+/* find 1st good cutting place */
+X    last= j-1;
+X    dashck=0;
+X    for(m= last; m > -1; m--)
+X	if( b[m] < LNLN )
+X	{
+X	    k= b[m];
+X	    if(p[k]=='-')dashck=1;
+X	    else p[k]='\n';
+X	    sv= p[k+1];
+X	    p[k+1]='\0';
+X	    fputs(p,out);
+X	    if(dashck){fputc('\n',out);dashck=0;}
+X	    p[k+1]= sv;
+X	    break;
+X	}
+X
+/*remainder */
+/* preface them with indent as long as start+8 on 1st */
+X    bottom =m;
+X    ii= i+8;
+X    for(k= last; k > bottom; k--)
+X	if( b[k]-b[bottom] < LNLN-ii && n- b[bottom] > LNLN-ii)
+X	{
+X	    m= b[k];
+X	    if(p[m]=='-')dashck=1;
+X	    else p[m]='\n';
+X	    sv= p[m+1];
+X	    p[m+1]='\0';
+X	    for(j=0;j<ii;j++)fputc(' ',out);
+X	    fputs( p+ b[bottom]+1,out);
+X	    if(dashck){fputc('\n',out);dashck=0;}
+X	    p[m+1]= sv;
+X	    bottom= k;
+X	    k= last+1;
+X	}
+X    for(j=0;j<ii;j++)fputc(' ',out);
+X    puts(p+b[bottom]+1);
+X    return;
+}
+X
+keytoi(char *t)
+{
+X    int i,m;
+X
+X    m=strlen(t);
+X    for(i=0;i<Nkeys;i++)
+X	if(!strncmp(t,keys[i],m)) break;
+X
+X    if(i==Nkeys) fprintf(stdout,"unknown key:%s\n",t);
+X    return(i);
+}
+X
+getkey(char *input)
+{
+#ifdef _AIX
+X    char *p,*po;
+#else
+X    char *p,*po, *index();
+#endif
+X    char **rdphrases();
+X    void stowkey();
+X    int kount,match,i,j,k,m,jj,failed;
+X    int compar();
+X    short ink[10];
+X
+/* grab keywords(s) from command line argument */
+/* convert them to indexes, order the indexes from least up */
+X
+X    m= strlen(input);
+X    if(m <=0)
+X    {
+X        printf("No\nKey\nword\n"); return;
+X    }
+X    keys= rdphrases(KYWDS,"keys",sizeof(char *),stowkey,&Nkeys);
+X
+X    kount=0;
+X    po=p=input;
+X    while(( p=index(p,',')) || isupper(po[0]) || isdigit(po[0]))
+X    {
+X	if(p) *p='\0';
+X	else
+X	{
+X	    m=strlen(po);
+X	    po[m+1]='\0';
+X	}
+X	if(kount > MXKEY-1)
+X	{
+X            printf("No\nMatch\n"); return;
+X	}
+X        ink[kount++]= keytoi(po);
+X
+/* if index failed to find a , exit loop */
+X	if(p) po= ++p;
+X	else break;
+X    }
+X    qsort(ink, kount, sizeof(short), compar);
+X
+/* compare set input against all known ones */
+X
+X    failed=1;
+X    for(i=0; i< Nrtn; i++)
+X    {
+X	for(match=j=0;j<kount;j++)
+X	{
+X	    jj= 0;
+X	    while( (k= fetcher( r[i].k.n,r[i].k.start,&jj)) != -1)
+X	        if(ink[j]==k ) { match++; break; }
+X	}
+X		 
+/* if input is subset of some routine's key set */
+X	if(match==kount) 
+X	{
+X	    putto_x(i,0);
+X	    failed= 0;
+X	}
+X    }
+X    if(failed) printf("No\nMatch\n");
+}
+X
+int getcat( char *mycat, int (*putout)(), char *s, int *fndgam)
+{
+X    int i,j,tote,jj,foundgam,pchr,gg;
+X    char *g;
+X    short bf[1024];
+X
+X    foundgam= 0;
+X    pchr= 1;
+X    for(tote=i=0; i<Ngams; i++)
+X    {
+/* if entry is start of gams on list get routines for them */
+X       g= gamlist[i].gam;
+X       if( *g==*mycat && strstr(g,mycat) )
+X       {
+X	   foundgam= 1;
+X	   for(j=0; j<Nrtn; j++)
+X	   {
+X	       jj= 0;
+X	       while( (gg= fetcher(r[j].g.n,r[j].g.start,&jj)) != -1)
+X		   if( gg == i)
+X		   {
+X                        if (!tote && s) puts(s); /* error mss */
+X			bf[tote++]= j;
+X		   }
+X	   }
+X       }
+X    }
+X    sortnames(bf,tote);
+X    for(i=0; i<tote; i++) pchr= (*putout)((int)bf[i],1);
+X    if(!pchr){ putchar('\n'); pchr=1; }
+X    *fndgam= foundgam;
+X    return(tote);
+}
+X
+putto_x(int j,int d)
+{
+X    char buf[RTNLN+2];
+X
+X    bzero(buf,RTNLN+2);
+X    strncpy(buf,r[j].name,RTNLN);
+X    puts(buf);
+}
+X
+getcat_x( char *mycat )
+{
+X    int foundgam,tote;
+X
+X    tote= getcat( mycat,putto_x,NULL,&foundgam);
+X    if(!foundgam)
+X    {
+X	 printf("A\nSubCategory\nNot\nSpecified\n");
+X	 return;
+X    }
+X    if(!tote)
+X	 printf("Look\nDown a\nLevel\n");
+}
+X
+/* find all subsets of the category then check each */
+int mchkcat(char *s)
+{
+X   int i,gotg,n;
+X   char *g;
+X    
+X   gotg= -1;
+X   n= strlen(s);
+X   for(i=0; i<Ngams; i++)
+X   {
+X      g= gamlist[i].gam;
+X      if( *g==*s && strstr(g,s) )
+X      {
+X	  if(strlen(g)==n)
+X	     gotg= 0;
+X	  if( chkcat(i) ) return(1);
+X      }
+X   }
+X   return(gotg);
+}
+X
+/* find at least one ref to the gams in the routines */
+int chkcat(int i)
+{
+X   int j,gg,jj;
+X   
+X   for(j=0; j<Nrtn; j++)
+X   {
+X       jj= 0;
+X       while( (gg= fetcher(r[j].g.n,r[j].g.start,&jj)) != -1)
+X	   if( gg == i) return(1);
+X   }
+X   return(0);
+}
+X
+int listcat(char *so,int num, FILE *out )
+{
+X    int i,t;
+X    char *g, bj,o;
+X
+X    if( !out ) out= stdout;
+X
+X    o= so[0];
+X    switch(o){
+X      case '\0':
+X	for(i=0; i< Ngams; i++)
+X	{
+X	    g= gamlist[i].gam;
+X	    if( strlen(g)==1 ) for(bj= 'A'; bj<='Z' ;bj++)
+X	            if( g[0]==bj && mchkcat(g)>0 ) putcat(i,1,out);
+X	}
+X        return(1);
+X
+X      case 1:
+/* only count gams with slatec routines somwhere underneath */
+X	for(t=i=0; i< Ngams; i++)
+X	{
+X	    g= gamlist[i].gam;
+X	    if(mchkcat(g)>0) t++;
+X	}
+X	return(t);
+X
+X      case 2:
+/* only displays gams with slatec routines */
+X	for(i=0; i< Ngams; i++)
+X	{
+X	    g= gamlist[i].gam;
+X	    if(mchkcat(g)>0) putcat(i,0,out);
+X	}
+X	return(1);
+X
+X      default:
+X      return( listsubcat( so,num,out ));
+X    }
+}
+X
+/* only displays gams with slatec routines */
+/* that start with so */
+/* -2 : string starts no known gam */
+/* -1 : string starts known gam  but no routines found for it */
+/*  0 : string starts known gam  with rutines but no subcats w/ routines
+X	found for it */
+/*  2 : string starts known gam  and routines found */
+X
+/* num == number of levels to descend 1,2,3,etc  0=all */
+X
+int listsubcat( char *so,int num, FILE *out)
+{
+X      int gotg,n,t,i,m,s;
+X      char *g;
+X
+X      gotg= -2;
+X      n= strlen(so);
+X      for(s=t=i=0; i<Ngams; i++)
+X      {
+X         g= gamlist[i].gam;
+X         if( *g==*so && strstr(g,so) )
+X         {
+/* found in total gams list */
+X	     if( (m=strlen(g))==n) gotg= -1;
+X	     if(num)
+X	     {
+X	        if( m <= n+num && mchkcat(g) )
+X		{ 
+X		    if( m != n ) s++;
+X		    t++;
+X		    putcat(i,0,out);
+X		}
+X	     }
+X             else
+X	     {
+X	        if( mchkcat(g) )
+X		{ 
+X		    if( m != n ) s++;
+X		    t++;
+X		    putcat(i,0,out);
+X		}
+X	     }
+X         }
+X      }
+X      if(s) return(2);
+X      if(t) return(0);
+X      return(gotg);
+}
+X
+showkeys()
+{
+X    int i;
+X    for(i=0; i<Nkeys; i++ ) puts(keys[i]);
+}
+SHAR_EOF
+chmod 0644 util.c ||
+echo 'restore of util.c failed'
+fi
+exit 0

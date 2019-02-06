@@ -1,0 +1,24 @@
+*DECK FQD1
+      REAL FUNCTION FQD1 (X)
+C***BEGIN PROLOGUE  FQD1
+C***SUBSIDIARY
+C***PURPOSE  Function evaluator for QNC79 and GAUS8 quick checks.
+C***LIBRARY   SLATEC
+C***TYPE      SINGLE PRECISION (FQD1-S, DFQD1-D)
+C***AUTHOR  Boland, W. Robert, (LANL)
+C***SEE ALSO  QG8TST, QN79QX
+C***ROUTINES CALLED  (NONE)
+C***REVISION HISTORY  (YYMMDD)
+C   920229  DATE WRITTEN
+C***END PROLOGUE  FQD1
+C     .. Scalar Arguments ..
+      REAL X
+C     .. Intrinsic Functions ..
+      INTRINSIC SQRT
+C***FIRST EXECUTABLE STATEMENT  FQD1
+      FQD1 = 0.0E0
+      IF (X .GT. 0.0E0) THEN
+        FQD1 = 1.0E0/SQRT(X)
+      ENDIF
+      RETURN
+      END
