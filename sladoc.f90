@@ -233,7 +233,7 @@ PROGRAM SLADOC
   DO i = ilen , 1 , -1
     IF ( temp(i:i)=='/' ) THEN
       INQUIRE (FILE=temp(i+1:ilen),EXIST=lexist)
-      IF ( lexist ) temp = temp(i+1:ilen)
+      IF ( lexist ) temp(1:ilen-i) = temp(i+1:ilen)
       EXIT
     ENDIF
   ENDDO
@@ -249,7 +249,7 @@ PROGRAM SLADOC
   DO i = ilen , 1 , -1
     IF ( temp(i:i)=='/' ) THEN
       INQUIRE (FILE=temp(i+1:ilen),EXIST=lexist)
-      IF ( lexist ) temp = temp(i+1:ilen)
+      IF ( lexist ) temp(1:ilen-i) = temp(i+1:ilen)
       EXIT
     ENDIF
   ENDDO
@@ -264,7 +264,7 @@ PROGRAM SLADOC
   DO i = ilen , 1 , -1
     IF ( temp(i:i)=='/' ) THEN
       INQUIRE (FILE=temp(i+1:ilen),EXIST=lexist)
-      IF ( lexist ) temp = temp(i+1:ilen)
+      IF ( lexist ) temp(1:ilen-i) = temp(i+1:ilen)
       EXIT
     ENDIF
   ENDDO
@@ -279,7 +279,7 @@ PROGRAM SLADOC
   DO i = ilen , 1 , -1
     IF ( temp(i:i)=='/' ) THEN
       INQUIRE (FILE=temp(i+1:ilen),EXIST=lexist)
-      IF ( lexist ) temp = temp(i+1:ilen)
+      IF ( lexist ) temp(1:ilen-i) = temp(i+1:ilen)
       EXIT
     ENDIF
   ENDDO
@@ -1802,7 +1802,7 @@ SUBROUTINE RBLNKS(L1,L2)
   !   920911  Declarations section restructured.  (WRB)
   !***END PROLOGUE  RBLNKS
   !     .. Scalar Arguments ..
-  CHARACTER(80) :: L1 , L2
+  CHARACTER(72) :: L1 , L2
   !     .. Local Scalars ..
   INTEGER i , j , k , leng
   !     .. External Functions ..
