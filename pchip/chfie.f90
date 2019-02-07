@@ -61,18 +61,18 @@ REAL FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !
   !  DECLARE ARGUMENTS.
   !
-  REAL X1 , X2 , F1 , F2 , D1 , D2 , A , B
+  REAL X1, X2, F1, F2, D1, D2, A, B
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL dterm , four , fterm , h , half , phia1 , phia2 , phib1 , phib2 , &
-    psia1 , psia2 , psib1 , psib2 , six , ta1 , ta2 , tb1 , tb2 , three , &
-    two , ua1 , ua2 , ub1 , ub2
-  SAVE half , two , three , four , six
+  REAL dterm, four, fterm, h, half, phia1, phia2, phib1, phib2, &
+    psia1, psia2, psib1, psib2, six, ta1, ta2, tb1, tb2, three, &
+    two, ua1, ua2, ub1, ub2
+  SAVE half, two, three, four, six
   !
   !  INITIALIZE.
   !
-  DATA half/0.5/ , two/2./ , three/3./ , four/4./ , six/6./
+  DATA half/0.5/, two/2./, three/3./, four/4./, six/6./
   !
   !  VALIDITY CHECK INPUT.
   !

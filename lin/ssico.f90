@@ -18,10 +18,10 @@ SUBROUTINE SSICO(A,Lda,N,Kpvt,Rcond,Z)
   !     symmetric pivoting and estimates the condition of the matrix.
   !
   !     If  RCOND  is not needed, SSIFA is slightly faster.
-  !     To solve  A*X = B , follow SSICO by SSISL.
-  !     To compute  INVERSE(A)*C , follow SSICO by SSISL.
-  !     To compute  INVERSE(A) , follow SSICO by SSIDI.
-  !     To compute  DETERMINANT(A) , follow SSICO by SSIDI.
+  !     To solve  A*X = B, follow SSICO by SSISL.
+  !     To compute  INVERSE(A)*C, follow SSICO by SSISL.
+  !     To compute  INVERSE(A), follow SSICO by SSIDI.
+  !     To compute  DETERMINANT(A), follow SSICO by SSIDI.
   !     To compute  INERTIA(A), follow SSICO by SSIDI.
   !
   !     On Entry
@@ -42,8 +42,8 @@ SUBROUTINE SSICO(A,Lda,N,Kpvt,Rcond,Z)
   !                were used to obtain it.
   !                The factorization can be written  A = U*D*TRANS(U)
   !                where  U  is a product of permutation and unit
-  !                upper triangular matrices , TRANS(U) is the
-  !                transpose of  U , and  D  is block diagonal
+  !                upper triangular matrices, TRANS(U) is the
+  !                transpose of  U, and  D  is block diagonal
   !                with 1 by 1 and 2 by 2 blocks.
   !
   !        KPVT    INTEGER(N)
@@ -51,7 +51,7 @@ SUBROUTINE SSICO(A,Lda,N,Kpvt,Rcond,Z)
   !
   !        RCOND   REAL
   !                an estimate of the reciprocal condition of  A .
-  !                For the system  A*X = B , relative perturbations
+  !                For the system  A*X = B, relative perturbations
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -81,28 +81,28 @@ SUBROUTINE SSICO(A,Lda,N,Kpvt,Rcond,Z)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SSICO
-  INTEGER Lda , N , Kpvt(*)
-  REAL A(Lda,*) , Z(*)
+  INTEGER Lda, N, Kpvt(*)
+  REAL A(Lda,*), Z(*)
   REAL Rcond
   !
-  REAL ak , akm1 , bk , bkm1 , SDOT , denom , ek , t
-  REAL anorm , s , SASUM , ynorm
-  INTEGER i , info , j , jm1 , k , kp , kps , ks
+  REAL ak, akm1, bk, bkm1, SDOT, denom, ek, t
+  REAL anorm, s, SASUM, ynorm
+  INTEGER i, info, j, jm1, k, kp, kps, ks
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !
   !***FIRST EXECUTABLE STATEMENT  SSICO
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = SASUM(j,A(1,j),1)
     jm1 = j - 1
     IF ( jm1>=1 ) THEN
-      DO i = 1 , jm1
+      DO i = 1, jm1
         Z(i) = Z(i) + ABS(A(i,j))
       ENDDO
     ENDIF
   ENDDO
   anorm = 0.0E0
-  DO j = 1 , N
+  DO j = 1, N
     anorm = MAX(anorm,Z(j))
   ENDDO
   !
@@ -119,7 +119,7 @@ SUBROUTINE SSICO(A,Lda,N,Kpvt,Rcond,Z)
   !     SOLVE U*D*W = E
   !
   ek = 1.0E0
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = 0.0E0
   ENDDO
   k = N

@@ -4,11 +4,11 @@ SUBROUTINE QXCSP(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--QXCSP5
   !*** Start of declarations inserted by SPAG
-  REAL bdrf , bdrs , bdtf , bdts , ci4 , dphi , dr , dtheta , dum , elmbda , &
-    ermax , err , f , pertrb , pi , PIMACH , r , rf , rs , si
-  REAL tf , theta , ts , w , z
-  INTEGER i , idimf , ierror , intl , Ipass , j , Kprint , Lun , m , &
-    mbdcnd , mp1 , n , nbdcnd , np1
+  REAL bdrf, bdrs, bdtf, bdts, ci4, dphi, dr, dtheta, dum, elmbda, &
+    ermax, err, f, pertrb, pi, PIMACH, r, rf, rs, si
+  REAL tf, theta, ts, w, z
+  INTEGER i, idimf, ierror, intl, Ipass, j, Kprint, Lun, m, &
+    mbdcnd, mp1, n, nbdcnd, np1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QXCSP
   !***PURPOSE
@@ -26,7 +26,7 @@ SUBROUTINE QXCSP(Lun,Kprint,Ipass)
   !     *                                                               *
   !     *      SEPARABLE ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS        *
   !     *                                                               *
-  !     *                  (VERSION  3 , JUNE 1979)                     *
+  !     *                  (VERSION  3, JUNE 1979)                     *
   !     *                                                               *
   !     *                             BY                                *
   !     *                                                               *
@@ -56,7 +56,7 @@ SUBROUTINE QXCSP(Lun,Kprint,Ipass)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
   !***END PROLOGUE  QXCSP
-  DIMENSION f(48,33) , bdtf(33) , w(1200) , r(33) , theta(48)
+  DIMENSION f(48,33), bdtf(33), w(1200), r(33), theta(48)
   !***FIRST EXECUTABLE STATEMENT  QXCSP
   !
   !     THE VALUE OF IDIMF IS THE FIRST DIMENSION OF F.  SINCE M=36, N=32,
@@ -82,32 +82,32 @@ SUBROUTINE QXCSP(Lun,Kprint,Ipass)
   !
   mp1 = m + 1
   dtheta = tf/m
-  DO i = 1 , mp1
+  DO i = 1, mp1
     theta(i) = (i-1)*dtheta
   ENDDO
   np1 = n + 1
   dr = 1.0E0/n
-  DO j = 1 , np1
+  DO j = 1, np1
     r(j) = (j-1)*dr
   ENDDO
   !
   !     GENERATE NORMAL DERIVATIVE DATA AT EQUATOR
   !
-  DO j = 1 , np1
+  DO j = 1, np1
     bdtf(j) = 0.
   ENDDO
   !
   !     COMPUTE BOUNDARY DATA ON THE SURFACE OF THE SPHERE
   !
-  DO i = 1 , mp1
+  DO i = 1, mp1
     f(i,n+1) = COS(theta(i))**4
   ENDDO
   !
   !     COMPUTE RIGHT SIDE OF EQUATION
   !
-  DO i = 1 , mp1
+  DO i = 1, mp1
     ci4 = 12.0E0*COS(theta(i))**2
-    DO j = 1 , n
+    DO j = 1, n
       f(i,j) = ci4*r(j)**2
     ENDDO
   ENDDO
@@ -118,9 +118,9 @@ SUBROUTINE QXCSP(Lun,Kprint,Ipass)
   !     COMPUTE DISCRETIZATION ERROR
   !
   err = 0.
-  DO i = 1 , mp1
+  DO i = 1, mp1
     ci4 = COS(theta(i))**4
-    DO j = 1 , n
+    DO j = 1, n
       z = ABS(f(i,j)-ci4*r(j)**4)
       IF ( z>err ) err = z
     ENDDO
@@ -130,7 +130,7 @@ SUBROUTINE QXCSP(Lun,Kprint,Ipass)
   IF ( err>ermax ) Ipass = 0
   IF ( Kprint/=0 ) THEN
     IF ( Kprint>=2.OR.Ipass==0 ) THEN
-      WRITE (Lun,99001) ierror , err , INT(w(1))
+      WRITE (Lun,99001) ierror, err, INT(w(1))
       !
       99001     FORMAT ('1',20X,'SUBROUTINE HWSCSP EXAMPLE 1'///10X,&
         'THE OUTPUT FROM THE NCAR CONTROL DATA 7600 WAS'//32X,&
@@ -157,14 +157,14 @@ SUBROUTINE QXCSP(Lun,Kprint,Ipass)
   !
   !     COMPUTE BOUNDARY DATA ON THE SURFACE OF THE SPHERE
   !
-  DO i = 1 , mp1
+  DO i = 1, mp1
     f(i,n+1) = SIN(theta(i))
   ENDDO
   !
   !     COMPUTE RIGHT SIDE OF THE EQUATION
   !
-  DO j = 1 , n
-    DO i = 1 , mp1
+  DO j = 1, n
+    DO i = 1, mp1
       f(i,j) = 0.
     ENDDO
   ENDDO
@@ -175,9 +175,9 @@ SUBROUTINE QXCSP(Lun,Kprint,Ipass)
   !     COMPUTE DISCRETIZATION ERROR   (FOURIER COEFFICIENTS)
   !
   err = 0.
-  DO i = 1 , mp1
+  DO i = 1, mp1
     si = SIN(theta(i))
-    DO j = 1 , np1
+    DO j = 1, np1
       z = ABS(f(i,j)-r(j)*si)
       IF ( z>err ) err = z
     ENDDO
@@ -186,7 +186,7 @@ SUBROUTINE QXCSP(Lun,Kprint,Ipass)
   IF ( err>ermax ) Ipass = 0
   IF ( Kprint==0 ) RETURN
   IF ( Kprint>=2.OR.Ipass==0 ) THEN
-    WRITE (Lun,99002) ierror , err , INT(w(1))
+    WRITE (Lun,99002) ierror, err, INT(w(1))
     99002   FORMAT ('1',20X,'SUBROUTINE HWSCSP EXAMPLE 2'///10X,&
       'THE OUTPUT FROM THE NCAR CONTROL DATA 7600 WAS'//32X,&
       'IERROR = 0'/18X,'DISCRETIZATION ERROR = 5.86824E-05'/12X,&

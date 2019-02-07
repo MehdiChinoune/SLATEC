@@ -16,9 +16,9 @@ SUBROUTINE DJAC(T,U,Pd,Nrowpd,Rpar,Ipar)
   !   900415  Minor clean-up of prologue and code and name changed from
   !           DDJAC to DJAC.  (WRB)
   !***END PROLOGUE  DJAC
-  INTEGER Ipar , Nrowpd
-  REAL(8) :: Pd , r , r5 , Rpar , rsq , T , U , u1sq , u2sq , u1u2
-  DIMENSION U(*) , Pd(Nrowpd,*) , Rpar(*) , Ipar(*)
+  INTEGER Ipar, Nrowpd
+  REAL(8) :: Pd, r, r5, Rpar, rsq, T, U, u1sq, u2sq, u1u2
+  DIMENSION U(*), Pd(Nrowpd,*), Rpar(*), Ipar(*)
   !***FIRST EXECUTABLE STATEMENT  DJAC
   u1sq = U(1)*U(1)
   u2sq = U(2)*U(2)

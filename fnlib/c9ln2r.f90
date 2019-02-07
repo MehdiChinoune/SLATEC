@@ -4,7 +4,7 @@ COMPLEX FUNCTION C9LN2R(Z)
   IMPLICIT NONE
   !*--C9LN2R5
   !*** Start of declarations inserted by SPAG
-  REAL aipart , arg , cabsz , R9ATN1 , R9LN2R , rpart , x , xz , y , y1x , &
+  REAL aipart, arg, cabsz, R9ATN1, R9LN2R, rpart, x, xz, y, y1x, &
     yz
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  C9LN2R
@@ -78,4 +78,5 @@ COMPLEX FUNCTION C9LN2R(Z)
   C9LN2R = CMPLX(xz,-yz)**3*CMPLX(rpart,aipart)
   RETURN
   !
-  99999 END FUNCTION C9LN2R
+  99999 CONTINUE
+  END FUNCTION C9LN2R

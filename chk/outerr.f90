@@ -23,7 +23,7 @@ SUBROUTINE OUTERR(Method,Ierr,Iout,Nfail,Istdo,Iter,Err)
   !***END PROLOGUE  OUTERR
   !     .. Scalar Arguments ..
   REAL Err
-  INTEGER Ierr , Iout , Istdo , Iter , Nfail
+  INTEGER Ierr, Iout, Istdo, Iter, Nfail
   CHARACTER Method*6
   !***FIRST EXECUTABLE STATEMENT  OUTERR
   IF ( Ierr/=0 ) Nfail = Nfail + 1
@@ -36,18 +36,18 @@ SUBROUTINE OUTERR(Method,Ierr,Iout,Nfail,Istdo,Iter,Err)
       WRITE (Istdo,99002) Method
       99002     FORMAT (1X,A6,' : **** PASSED  ****')
     ELSE
-      WRITE (Istdo,99004) Method , Ierr , Iter , Err
+      WRITE (Istdo,99004) Method, Ierr, Iter, Err
     ENDIF
   ENDIF
   IF ( Iout>=3 ) THEN
     IF ( Ierr==0 ) THEN
-      WRITE (Istdo,99003) Method , Ierr , Iter , Err
+      WRITE (Istdo,99003) Method, Ierr, Iter, Err
       99003     FORMAT (' ***************** PASSED ***********************'/' **** ',&
         A6,' Quick Test PASSED: IERR = ',I5,&
         ' ****'/' ***************** PASSED ***********************'/&
         ' Iteration Count = ',I3,' Stop Test = ',1P,E12.6)
     ELSE
-      WRITE (Istdo,99004) Method , Ierr , Iter , Err
+      WRITE (Istdo,99004) Method, Ierr, Iter, Err
     ENDIF
   ENDIF
   RETURN

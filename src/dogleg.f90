@@ -65,29 +65,29 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DOGLEG
-  INTEGER N , Lr
+  INTEGER N, Lr
   REAL Delta
-  REAL R(Lr) , Diag(*) , Qtb(*) , X(*) , Wa1(*) , Wa2(*)
-  INTEGER i , j , jj , jp1 , k , l
-  REAL alpha , bnorm , epsmch , gnorm , one , qnorm , sgnorm , sum , temp , &
+  REAL R(Lr), Diag(*), Qtb(*), X(*), Wa1(*), Wa2(*)
+  INTEGER i, j, jj, jp1, k, l
+  REAL alpha, bnorm, epsmch, gnorm, one, qnorm, sgnorm, sum, temp, &
     zero
-  REAL R1MACH , ENORM
-  SAVE one , zero
-  DATA one , zero/1.0E0 , 0.0E0/
+  REAL R1MACH, ENORM
+  SAVE one, zero
+  DATA one, zero/1.0E0, 0.0E0/
   !***FIRST EXECUTABLE STATEMENT  DOGLEG
   epsmch = R1MACH(4)
   !
   !     FIRST, CALCULATE THE GAUSS-NEWTON DIRECTION.
   !
   jj = (N*(N+1))/2 + 1
-  DO k = 1 , N
+  DO k = 1, N
     j = N - k + 1
     jp1 = j + 1
     jj = jj - k
     l = jj + 1
     sum = zero
     IF ( N>=jp1 ) THEN
-      DO i = jp1 , N
+      DO i = jp1, N
         sum = sum + R(l)*X(i)
         l = l + 1
       ENDDO
@@ -95,7 +95,7 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
     temp = R(jj)
     IF ( temp==zero ) THEN
       l = j
-      DO i = 1 , j
+      DO i = 1, j
         temp = MAX(temp,ABS(R(l)))
         l = l + N - i
       ENDDO
@@ -107,7 +107,7 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !
   !     TEST WHETHER THE GAUSS-NEWTON DIRECTION IS ACCEPTABLE.
   !
-  DO j = 1 , N
+  DO j = 1, N
     Wa1(j) = zero
     Wa2(j) = Diag(j)*X(j)
   ENDDO
@@ -118,9 +118,9 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
     !     NEXT, CALCULATE THE SCALED GRADIENT DIRECTION.
     !
     l = 1
-    DO j = 1 , N
+    DO j = 1, N
       temp = Qtb(j)
-      DO i = j , N
+      DO i = j, N
         Wa1(i) = Wa1(i) + R(l)*temp
         l = l + 1
       ENDDO
@@ -134,7 +134,7 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
     sgnorm = zero
     alpha = Delta/qnorm
     IF ( gnorm/=zero ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         Wa1(j) = (Wa1(j)/gnorm)/Diag(j)
       ENDDO
       !
@@ -142,9 +142,9 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
       !     AT WHICH THE QUADRATIC IS MINIMIZED.
       !
       l = 1
-      DO j = 1 , N
+      DO j = 1, N
         sum = zero
-        DO i = j , N
+        DO i = j, N
           sum = sum + R(l)*Wa1(i)
           l = l + 1
         ENDDO
@@ -175,7 +175,7 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
     !     DIRECTION AND THE SCALED GRADIENT DIRECTION.
     !
     temp = (one-alpha)*MIN(sgnorm,Delta)
-    DO j = 1 , N
+    DO j = 1, N
       X(j) = temp*Wa1(j) + alpha*X(j)
     ENDDO
   ENDIF

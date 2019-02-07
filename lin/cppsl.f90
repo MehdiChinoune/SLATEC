@@ -62,18 +62,18 @@ SUBROUTINE CPPSL(Ap,N,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CPPSL
   INTEGER N
-  COMPLEX Ap(*) , B(*)
+  COMPLEX Ap(*), B(*)
   !
-  COMPLEX CDOTC , t
-  INTEGER k , kb , kk
+  COMPLEX CDOTC, t
+  INTEGER k, kb, kk
   !***FIRST EXECUTABLE STATEMENT  CPPSL
   kk = 0
-  DO k = 1 , N
+  DO k = 1, N
     t = CDOTC(k-1,Ap(kk+1),1,B(1),1)
     kk = kk + k
     B(k) = (B(k)-t)/Ap(kk)
   ENDDO
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     B(k) = B(k)/Ap(kk)
     kk = kk - k

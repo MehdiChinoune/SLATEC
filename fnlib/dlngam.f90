@@ -28,11 +28,11 @@ REAL(8) FUNCTION DLNGAM(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DLNGAM
-  REAL(8) :: X , dxrel , pi , sinpiy , sqpi2l , sq2pil , xmax , y , &
-    DGAMMA , D9LGMC , D1MACH , temp
+  REAL(8) :: X, dxrel, pi, sinpiy, sqpi2l, sq2pil, xmax, y, &
+    DGAMMA, D9LGMC, D1MACH, temp
   LOGICAL first
   EXTERNAL DGAMMA
-  SAVE sq2pil , sqpi2l , pi , xmax , dxrel , first
+  SAVE sq2pil, sqpi2l, pi, xmax, dxrel, first
   DATA sq2pil/0.91893853320467274178032973640562D0/
   DATA sqpi2l/ + .225791352644727432363097614947441D+0/
   DATA pi/3.14159265358979323846264338327950D0/
@@ -72,4 +72,5 @@ REAL(8) FUNCTION DLNGAM(X)
   DLNGAM = LOG(ABS(DGAMMA(X)))
   RETURN
   !
-  99999 END FUNCTION DLNGAM
+  99999 CONTINUE
+  END FUNCTION DLNGAM

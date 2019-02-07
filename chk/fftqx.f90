@@ -78,31 +78,31 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
   !           PRECISION.  (WRB)
   !***END PROLOGUE  FFTQX
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
-  REAL(8) :: arg , arg1 , arg2 , dt , pi , sum , sum1 , sum2
-  REAL azero , azeroh , cf , cosqbt , cosqfb , cosqft , costfb , costt , &
-    dcfb , dcfftb , dcfftf , dezb1 , dezf1 , dezfb , errmax , rftb , &
-    rftf , rftfb , sign , sinqbt , sinqfb , sinqft , sintfb , sintt , &
-    sqrt2 , tpi
-  INTEGER i , j , k , modn , n , nm1 , nns , np1 , ns2 , ns2m , nz
+  REAL(8) :: arg, arg1, arg2, dt, pi, sum, sum1, sum2
+  REAL azero, azeroh, cf, cosqbt, cosqfb, cosqft, costfb, costt, &
+    dcfb, dcfftb, dcfftf, dezb1, dezf1, dezfb, errmax, rftb, &
+    rftf, rftfb, sign, sinqbt, sinqfb, sinqft, sintfb, sintt, &
+    sqrt2, tpi
+  INTEGER i, j, k, modn, n, nm1, nns, np1, ns2, ns2m, nz
   !     .. Local Arrays ..
-  COMPLEX cx(200) , cy(200)
-  REAL a(100) , ah(100) , b(100) , bh(100) , w(2000) , x(200) , xh(200) , &
+  COMPLEX cx(200), cy(200)
+  REAL a(100), ah(100), b(100), bh(100), w(2000), x(200), xh(200), &
     y(200)
   INTEGER nd(10)
   !     .. External Functions ..
   REAL R1MACH
   EXTERNAL R1MACH
   !     .. External Subroutines ..
-  EXTERNAL CFFTB , CFFTF , CFFTI , COSQB , COSQF , COSQI , COST , COSTI , &
-    EZFFTB , EZFFTF , EZFFTI , RFFTB , RFFTF , RFFTI , SINQB , &
-    SINQF , SINQI , SINT , SINTI
+  EXTERNAL CFFTB, CFFTF, CFFTI, COSQB, COSQF, COSQI, COST, COSTI, &
+    EZFFTB, EZFFTF, EZFFTI, RFFTB, RFFTF, RFFTI, SINQB, &
+    SINQF, SINQI, SINT, SINTI
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , CABS , CMPLX , COS , MAX , MOD , SIN , SQRT
+  INTRINSIC ABS, CABS, CMPLX, COS, MAX, MOD, SIN, SQRT
   !     .. Data statements ..
-  DATA nd(1) , nd(2) , nd(3) , nd(4) , nd(5) , nd(6) , nd(7)/120 , 54 , 49 , &
-    32 , 4 , 3 , 2/
+  DATA nd(1), nd(2), nd(3), nd(4), nd(5), nd(6), nd(7)/120, 54, 49, &
+    32, 4, 3, 2/
   !***FIRST EXECUTABLE STATEMENT  FFTQX
   sqrt2 = SQRT(2.0)
   errmax = 2.0*SQRT(R1MACH(4))
@@ -112,14 +112,14 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
   !
   99001 FORMAT ('1'/' FFT QUICK CHECK')
   Ipass = 1
-  DO nz = 1 , nns
+  DO nz = 1, nns
     n = nd(nz)
     IF ( Kprint>=2 ) WRITE (Lun,99002) n
     99002   FORMAT (/' Test FFT routines with a sequence of length ',I3)
     modn = MOD(n,2)
     np1 = n + 1
     nm1 = n - 1
-    DO j = 1 , np1
+    DO j = 1, np1
       x(j) = SIN(j*sqrt2)
       y(j) = x(j)
       xh(j) = x(j)
@@ -131,11 +131,11 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     dt = (pi+pi)/n
     ns2 = (n+1)/2
     IF ( ns2>=2 ) THEN
-      DO k = 2 , ns2
+      DO k = 2, ns2
         sum1 = 0.0D0
         sum2 = 0.0D0
         arg = (k-1)*dt
-        DO i = 1 , n
+        DO i = 1, n
           arg1 = (i-1)*arg
           sum1 = sum1 + x(i)*COS(arg1)
           sum2 = sum2 + x(i)*SIN(arg1)
@@ -146,7 +146,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     ENDIF
     sum1 = 0.0D0
     sum2 = 0.0D0
-    DO i = 1 , nm1 , 2
+    DO i = 1, nm1, 2
       sum1 = sum1 + x(i)
       sum2 = sum2 + x(i+1)
     ENDDO
@@ -155,7 +155,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     IF ( modn==0 ) y(n) = sum1 - sum2
     CALL RFFTF(n,x,w)
     rftf = 0.0
-    DO i = 1 , n
+    DO i = 1, n
       rftf = MAX(rftf,ABS(x(i)-y(i)))
       x(i) = xh(i)
     ENDDO
@@ -169,11 +169,11 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
       99004     FORMAT (' Test of RFFTF FAILED')
     ENDIF
     sign = 1.0
-    DO i = 1 , n
+    DO i = 1, n
       sum = 0.5D0*x(1)
       arg = (i-1)*dt
       IF ( ns2>=2 ) THEN
-        DO k = 2 , ns2
+        DO k = 2, ns2
           arg1 = (k-1)*arg
           sum = sum + x(2*k-2)*COS(arg1) - x(2*k-1)*SIN(arg1)
         ENDDO
@@ -184,7 +184,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     ENDDO
     CALL RFFTB(n,x,w)
     rftb = 0.0
-    DO i = 1 , n
+    DO i = 1, n
       rftb = MAX(rftb,ABS(x(i)-y(i)))
       x(i) = xh(i)
       y(i) = xh(i)
@@ -203,7 +203,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     CALL RFFTF(n,y,w)
     cf = 1.0/n
     rftfb = 0.0
-    DO i = 1 , n
+    DO i = 1, n
       rftfb = MAX(rftfb,ABS(cf*y(i)-x(i)))
     ENDDO
     IF ( rftfb<=errmax ) THEN
@@ -218,13 +218,13 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     !       Test Subroutines SINTI and SINT
     !
     dt = pi/n
-    DO i = 1 , nm1
+    DO i = 1, nm1
       x(i) = xh(i)
     ENDDO
-    DO i = 1 , nm1
+    DO i = 1, nm1
       y(i) = 0.0
       arg1 = i*dt
-      DO k = 1 , nm1
+      DO k = 1, nm1
         y(i) = y(i) + x(k)*SIN((k)*arg1)
       ENDDO
       y(i) = y(i) + y(i)
@@ -233,7 +233,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     CALL SINT(nm1,x,w)
     cf = 0.5/n
     sintt = 0.0
-    DO i = 1 , nm1
+    DO i = 1, nm1
       sintt = MAX(sintt,ABS(x(i)-y(i)))
       x(i) = xh(i)
       y(i) = x(i)
@@ -250,7 +250,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     CALL SINT(nm1,x,w)
     CALL SINT(nm1,x,w)
     sintfb = 0.0
-    DO i = 1 , nm1
+    DO i = 1, nm1
       sintfb = MAX(sintfb,ABS(cf*x(i)-y(i)))
     ENDDO
     IF ( sintfb<=errmax ) THEN
@@ -264,14 +264,14 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     !
     !       Test Subroutines COSTI and COST
     !
-    DO i = 1 , np1
+    DO i = 1, np1
       x(i) = xh(i)
     ENDDO
     sign = 1.0
-    DO i = 1 , np1
+    DO i = 1, np1
       y(i) = 0.5*(x(1)+sign*x(n+1))
       arg = (i-1)*dt
-      DO k = 2 , n
+      DO k = 2, n
         y(i) = y(i) + x(k)*COS((k-1)*arg)
       ENDDO
       y(i) = y(i) + y(i)
@@ -280,7 +280,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     CALL COSTI(np1,w)
     CALL COST(np1,x,w)
     costt = 0.0
-    DO i = 1 , np1
+    DO i = 1, np1
       costt = MAX(costt,ABS(x(i)-y(i)))
       x(i) = xh(i)
       y(i) = xh(i)
@@ -298,7 +298,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     CALL COST(np1,x,w)
     CALL COST(np1,x,w)
     costfb = 0.0
-    DO i = 1 , np1
+    DO i = 1, np1
       costfb = MAX(costfb,ABS(cf*x(i)-y(i)))
     ENDDO
     IF ( costfb<=errmax ) THEN
@@ -313,14 +313,14 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     !       Test Subroutines SINQI, SINQF and SINQB
     !
     cf = 0.25/n
-    DO i = 1 , n
+    DO i = 1, n
       y(i) = xh(i)
     ENDDO
     dt = pi/(n+n)
-    DO i = 1 , n
+    DO i = 1, n
       x(i) = 0.0
       arg = i*dt
-      DO k = 1 , n
+      DO k = 1, n
         x(i) = x(i) + y(k)*SIN((k+k-1)*arg)
       ENDDO
       x(i) = 4.0*x(i)
@@ -328,7 +328,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     CALL SINQI(n,w)
     CALL SINQB(n,y,w)
     sinqbt = 0.0
-    DO i = 1 , n
+    DO i = 1, n
       sinqbt = MAX(sinqbt,ABS(y(i)-x(i)))
       x(i) = xh(i)
     ENDDO
@@ -343,10 +343,10 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     ENDIF
     !
     sign = 1.0
-    DO i = 1 , n
+    DO i = 1, n
       arg = (i+i-1)*dt
       y(i) = 0.5*sign*x(n)
-      DO k = 1 , nm1
+      DO k = 1, nm1
         y(i) = y(i) + x(k)*SIN((k)*arg)
       ENDDO
       y(i) = y(i) + y(i)
@@ -354,7 +354,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     ENDDO
     CALL SINQF(n,x,w)
     sinqft = 0.0
-    DO i = 1 , n
+    DO i = 1, n
       sinqft = MAX(sinqft,ABS(x(i)-y(i)))
       y(i) = xh(i)
       x(i) = xh(i)
@@ -371,7 +371,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     CALL SINQF(n,y,w)
     CALL SINQB(n,y,w)
     sinqfb = 0.0
-    DO i = 1 , n
+    DO i = 1, n
       sinqfb = MAX(sinqfb,ABS(cf*y(i)-x(i)))
     ENDDO
     IF ( sinqfb<=errmax ) THEN
@@ -385,13 +385,13 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     !
     !       Test Subroutines COSQI, COSQF and COSQB
     !
-    DO i = 1 , n
+    DO i = 1, n
       y(i) = xh(i)
     ENDDO
-    DO i = 1 , n
+    DO i = 1, n
       x(i) = 0.0
       arg = (i-1)*dt
-      DO k = 1 , n
+      DO k = 1, n
         x(i) = x(i) + y(k)*COS((k+k-1)*arg)
       ENDDO
       x(i) = 4.0*x(i)
@@ -399,7 +399,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     CALL COSQI(n,w)
     CALL COSQB(n,y,w)
     cosqbt = 0.0
-    DO i = 1 , n
+    DO i = 1, n
       cosqbt = MAX(cosqbt,ABS(x(i)-y(i)))
       x(i) = xh(i)
     ENDDO
@@ -413,17 +413,17 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
       99024     FORMAT (' Test of COSQB FAILED')
     ENDIF
     !
-    DO i = 1 , n
+    DO i = 1, n
       y(i) = 0.5*x(1)
       arg = (i+i-1)*dt
-      DO k = 2 , n
+      DO k = 2, n
         y(i) = y(i) + x(k)*COS((k-1)*arg)
       ENDDO
       y(i) = y(i) + y(i)
     ENDDO
     CALL COSQF(n,x,w)
     cosqft = 0.0
-    DO i = 1 , n
+    DO i = 1, n
       cosqft = MAX(cosqft,ABS(y(i)-x(i)))
       x(i) = xh(i)
       y(i) = xh(i)
@@ -441,7 +441,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     CALL COSQB(n,x,w)
     CALL COSQF(n,x,w)
     cosqfb = 0.0
-    DO i = 1 , n
+    DO i = 1, n
       cosqfb = MAX(cosqfb,ABS(cf*x(i)-y(i)))
     ENDDO
     IF ( cosqfb<=errmax ) THEN
@@ -456,7 +456,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     !       Test Subroutines EZFFTI, EZFFTF and EZFFTB
     !
     CALL EZFFTI(n,w)
-    DO i = 1 , n
+    DO i = 1, n
       x(i) = xh(i)
     ENDDO
     tpi = 2.0*pi
@@ -465,11 +465,11 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     cf = 2.0/n
     ns2m = ns2 - 1
     IF ( ns2m>0 ) THEN
-      DO k = 1 , ns2m
+      DO k = 1, ns2m
         sum1 = 0.0D0
         sum2 = 0.0D0
         arg = k*dt
-        DO i = 1 , n
+        DO i = 1, n
           arg1 = (i-1)*arg
           sum1 = sum1 + x(i)*COS(arg1)
           sum2 = sum2 + x(i)*SIN(arg1)
@@ -481,7 +481,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     nm1 = n - 1
     sum1 = 0.0D0
     sum2 = 0.0D0
-    DO i = 1 , nm1 , 2
+    DO i = 1, nm1, 2
       sum1 = sum1 + x(i)
       sum2 = sum2 + x(i+1)
     ENDDO
@@ -492,7 +492,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     dezf1 = ABS(azeroh-azero)
     IF ( modn==0 ) dezf1 = MAX(dezf1,ABS(a(ns2)-ah(ns2)))
     IF ( ns2m>0 ) THEN
-      DO i = 1 , ns2m
+      DO i = 1, ns2m
         dezf1 = MAX(dezf1,ABS(ah(i)-a(i)),ABS(bh(i)-b(i)))
       ENDDO
       IF ( dezf1<=errmax ) THEN
@@ -507,10 +507,10 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     !
     ns2 = n/2
     IF ( modn==0 ) b(ns2) = 0.0
-    DO i = 1 , n
+    DO i = 1, n
       sum = azero
       arg1 = (i-1)*dt
-      DO k = 1 , ns2
+      DO k = 1, ns2
         arg2 = k*arg1
         sum = sum + a(k)*COS(arg2) + b(k)*SIN(arg2)
       ENDDO
@@ -518,7 +518,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     ENDDO
     CALL EZFFTB(n,y,azero,a,b,w)
     dezb1 = 0.0
-    DO i = 1 , n
+    DO i = 1, n
       dezb1 = MAX(dezb1,ABS(x(i)-y(i)))
       x(i) = xh(i)
     ENDDO
@@ -534,7 +534,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     CALL EZFFTF(n,x,azero,a,b,w)
     CALL EZFFTB(n,y,azero,a,b,w)
     dezfb = 0.0
-    DO i = 1 , n
+    DO i = 1, n
       dezfb = MAX(dezfb,ABS(x(i)-y(i)))
     ENDDO
     IF ( dezfb<=errmax ) THEN
@@ -548,14 +548,14 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     !
     !       Test Subroutines CFFTI, CFFTF and CFFTB
     !
-    DO i = 1 , n
+    DO i = 1, n
       cx(i) = CMPLX(COS(sqrt2*i),SIN(sqrt2*(i*i)))
     ENDDO
     dt = (pi+pi)/n
-    DO i = 1 , n
+    DO i = 1, n
       arg1 = -(i-1)*dt
       cy(i) = (0.0,0.0)
-      DO k = 1 , n
+      DO k = 1, n
         arg2 = (k-1)*arg1
         cy(i) = cy(i) + CMPLX(COS(arg2),SIN(arg2))*cx(k)
       ENDDO
@@ -563,7 +563,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     CALL CFFTI(n,w)
     CALL CFFTF(n,cx,w)
     dcfftf = 0.0
-    DO i = 1 , n
+    DO i = 1, n
       dcfftf = MAX(dcfftf,CABS(cx(i)-cy(i)))
       cx(i) = cx(i)/n
     ENDDO
@@ -577,17 +577,17 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
       99036     FORMAT (' Test of CFFTF FAILED')
     ENDIF
     !
-    DO i = 1 , n
+    DO i = 1, n
       arg1 = (i-1)*dt
       cy(i) = (0.0,0.0)
-      DO k = 1 , n
+      DO k = 1, n
         arg2 = (k-1)*arg1
         cy(i) = cy(i) + CMPLX(COS(arg2),SIN(arg2))*cx(k)
       ENDDO
     ENDDO
     CALL CFFTB(n,cx,w)
     dcfftb = 0.0
-    DO i = 1 , n
+    DO i = 1, n
       dcfftb = MAX(dcfftb,CABS(cx(i)-cy(i)))
       cx(i) = cy(i)
     ENDDO
@@ -604,7 +604,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     CALL CFFTF(n,cx,w)
     CALL CFFTB(n,cx,w)
     dcfb = 0.0
-    DO i = 1 , n
+    DO i = 1, n
       dcfb = MAX(dcfb,CABS(cf*cx(i)-cy(i)))
     ENDDO
     IF ( dcfb<=errmax ) THEN
@@ -616,10 +616,10 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
       99040     FORMAT (' Test of CFFTF and CFFTB FAILED')
     ENDIF
     IF ( Kprint>=3 ) THEN
-      WRITE (Lun,99041) n , rftf , rftb , rftfb , sintt , sintfb , costt , &
-        costfb , sinqft , sinqbt , sinqfb , cosqft , &
-        cosqbt , cosqfb , dezf1 , dezb1 , dezfb , dcfftf , &
-        dcfftb , dcfb
+      WRITE (Lun,99041) n, rftf, rftb, rftfb, sintt, sintfb, costt, &
+        costfb, sinqft, sinqbt, sinqfb, cosqft, &
+        cosqbt, cosqfb, dezf1, dezb1, dezfb, dcfftf, &
+        dcfftb, dcfb
       99041     FORMAT ('0N',I5,'  RFFTF  ',E9.3,'  RFFTB  ',E9.3,'  RFFTFB ',E9.3/7X,&
         '  SINT   ',E9.3,'  SINTFB ',E9.3/7X,'  COST   ',E9.3,&
         '  COSTFB ',E9.3/7X,'  SINQF  ',E9.3,'  SINQB  ',E9.3,&

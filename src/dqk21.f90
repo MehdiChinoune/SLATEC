@@ -63,14 +63,14 @@ SUBROUTINE DQK21(F,A,B,Result,Abserr,Resabs,Resasc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQK21
   !
-  REAL(8) :: A , absc , Abserr , B , centr , dhlgth , D1MACH , &
-    epmach , F , fc , fsum , fval1 , fval2 , fv1 , fv2 , &
-    hlgth , Resabs , Resasc , resg , resk , reskh , Result , &
-    uflow , wg , wgk , xgk
-  INTEGER j , jtw , jtwm1
+  REAL(8) :: A, absc, Abserr, B, centr, dhlgth, D1MACH, &
+    epmach, F, fc, fsum, fval1, fval2, fv1, fv2, &
+    hlgth, Resabs, Resasc, resg, resk, reskh, Result, &
+    uflow, wg, wgk, xgk
+  INTEGER j, jtw, jtwm1
   EXTERNAL F
   !
-  DIMENSION fv1(10) , fv2(10) , wg(5) , wgk(11) , xgk(11)
+  DIMENSION fv1(10), fv2(10), wg(5), wgk(11), xgk(11)
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE INTERVAL (-1,1).
   !           BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND THEIR
@@ -91,7 +91,7 @@ SUBROUTINE DQK21(F,A,B,Result,Abserr,Resabs,Resasc)
   ! AS EVALUATED WITH 80 DECIMAL DIGIT ARITHMETIC BY L. W. FULLERTON,
   ! BELL LABS, NOV. 1981.
   !
-  SAVE wg , xgk , wgk
+  SAVE wg, xgk, wgk
   DATA wg(1)/0.066671344308688137593568809893332D0/
   DATA wg(2)/0.149451349150580593145776339657697D0/
   DATA wg(3)/0.219086362515982043995534934228163D0/
@@ -157,7 +157,7 @@ SUBROUTINE DQK21(F,A,B,Result,Abserr,Resabs,Resasc)
   fc = F(centr)
   resk = wgk(11)*fc
   Resabs = ABS(resk)
-  DO j = 1 , 5
+  DO j = 1, 5
     jtw = 2*j
     absc = hlgth*xgk(jtw)
     fval1 = F(centr-absc)
@@ -169,7 +169,7 @@ SUBROUTINE DQK21(F,A,B,Result,Abserr,Resabs,Resasc)
     resk = resk + wgk(jtw)*fsum
     Resabs = Resabs + wgk(jtw)*(ABS(fval1)+ABS(fval2))
   ENDDO
-  DO j = 1 , 5
+  DO j = 1, 5
     jtwm1 = 2*j - 1
     absc = hlgth*xgk(jtwm1)
     fval1 = F(centr-absc)
@@ -182,7 +182,7 @@ SUBROUTINE DQK21(F,A,B,Result,Abserr,Resabs,Resasc)
   ENDDO
   reskh = resk*0.5D+00
   Resasc = wgk(11)*ABS(fc-reskh)
-  DO j = 1 , 10
+  DO j = 1, 10
     Resasc = Resasc + wgk(j)*(ABS(fv1(j)-reskh)+ABS(fv2(j)-reskh))
   ENDDO
   Result = resk*hlgth

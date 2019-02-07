@@ -12,7 +12,7 @@ REAL FUNCTION T2(X)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  T2
-  REAL a , b , F2S , X , x1 , y
+  REAL a, b, F2S, X, x1, y
   !***FIRST EXECUTABLE STATEMENT  T2
   a = 0.1E+00
   b = 0.1E+01

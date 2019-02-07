@@ -4,7 +4,7 @@ SUBROUTINE SQCK(Lun,Kprint,Nerr)
   IMPLICIT NONE
   !*--SQCK5
   !*** Start of declarations inserted by SPAG
-  INTEGER Kprint , Lun
+  INTEGER Kprint, Lun
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SQCK
   !***PURPOSE  Quick check for SPOFS, SPOIR, SNBFS and SNBIR.
@@ -46,14 +46,14 @@ SUBROUTINE SQCK(Lun,Kprint,Nerr)
   !           including removing an illegal character from column 1, and
   !           fixed code to test all four routines.  (RWC)
   !***END PROLOGUE  SQCK
-  REAL a(4,4) , at(5,4) , abe(5,7) , abet(5,7) , b(4) , bt(4) , c(4) ,&
-    work(35) , r , delx , delmax , sign , R1MACH
+  REAL a(4,4), at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4) ,&
+    work(35), r, delx, delmax, sign, R1MACH
   CHARACTER(4) :: list(4)
-  INTEGER lda , n , ml , mu , ind , iwork(4) , Nerr , i , j , j1 , j2 , jd ,&
-    mlp , k , kcase , kprog
-  DATA a/5.0E0 , 4.0E0 , 1.0E0 , 1.0E0 , 4.0E0 , 5.0E0 , 1.0E0 , 1.0E0 ,&
-    1.0E0 , 1.0E0 , 4.0E0 , 2.0E0 , 1.0E0 , 1.0E0 , 2.0E0 , 4.0E0/
-  DATA list/'POFS' , 'POIR' , 'NBFS' , 'NBIR'/
+  INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd ,&
+    mlp, k, kcase, kprog
+  DATA a/5.0E0, 4.0E0, 1.0E0, 1.0E0, 4.0E0, 5.0E0, 1.0E0, 1.0E0 ,&
+    1.0E0, 1.0E0, 4.0E0, 2.0E0, 1.0E0, 1.0E0, 2.0E0, 4.0E0/
+  DATA list/'POFS', 'POIR', 'NBFS', 'NBIR'/
   !***FIRST EXECUTABLE STATEMENT  SQCK
   IF ( Kprint>=3 ) WRITE (Lun,99001)
   !
@@ -69,25 +69,25 @@ SUBROUTINE SQCK(Lun,Kprint,Nerr)
   !     COMPUTE C VECTOR.
   !
   sign = 1.0E0
-  DO i = 1 , n
+  DO i = 1, n
     c(i) = sign/i
     sign = -sign
   ENDDO
   !
   !     CASE 1 FOR WELL-CONDITIONED MATRIX, CASE 2 FOR SINGULAR MATRIX.
   !
-  DO kcase = 1 , 2
-    DO kprog = 1 , 4
+  DO kcase = 1, 2
+    DO kprog = 1, 4
       !           SET VECTOR B TO ZERO.
-      DO i = 1 , n
+      DO i = 1, n
         b(i) = 0.0E0
       ENDDO
       !
       !           FORM VECTOR B FOR NON-BANDED.
       !
       IF ( kprog<=2 ) THEN
-        DO i = 1 , n
-          DO j = 1 , n
+        DO i = 1, n
+          DO j = 1, n
             b(i) = b(i) + a(i,j)*c(j)
           ENDDO
         ENDDO
@@ -96,17 +96,17 @@ SUBROUTINE SQCK(Lun,Kprint,Nerr)
         !              FORM ABE(NB ARRAY) FROM MATRIX A
         !              AND FORM VECTOR B FOR BANDED.
         !
-        DO j = 1 , jd
-          DO i = 1 , n
+        DO j = 1, jd
+          DO i = 1, n
             abe(i,j) = 0.0E0
           ENDDO
         ENDDO
         !
         mlp = ml + 1
-        DO i = 1 , n
+        DO i = 1, n
           j1 = MAX(1,i-ml)
           j2 = MIN(n,i+mu)
-          DO j = j1 , j2
+          DO j = j1, j2
             k = j - i + mlp
             abe(i,k) = a(i,j)
             b(i) = b(i) + (a(i,j)*c(j))
@@ -116,15 +116,15 @@ SUBROUTINE SQCK(Lun,Kprint,Nerr)
       !
       !           FORM BT FROM B, AT FROM A, AND ABET FROM ABE.
       !
-      DO i = 1 , n
+      DO i = 1, n
         bt(i) = b(i)
-        DO j = 1 , n
+        DO j = 1, n
           at(i,j) = a(i,j)
         ENDDO
       ENDDO
       !
-      DO j = 1 , jd
-        DO i = 1 , n
+      DO j = 1, jd
+        DO i = 1, n
           abet(i,j) = abe(i,j)
         ENDDO
       ENDDO
@@ -132,11 +132,11 @@ SUBROUTINE SQCK(Lun,Kprint,Nerr)
       !           MAKE AT AND ABET SINGULAR FOR CASE  =  2
       !
       IF ( kcase==2 ) THEN
-        DO j = 1 , n
+        DO j = 1, n
           at(1,j) = 0.0E0
         ENDDO
         !
-        DO j = 1 , jd
+        DO j = 1, jd
           abet(1,j) = 0.0E0
         ENDDO
       ENDIF
@@ -152,14 +152,14 @@ SUBROUTINE SQCK(Lun,Kprint,Nerr)
       !
       IF ( kcase==1 ) THEN
         delmax = 0.0E0
-        DO i = 1 , n
+        DO i = 1, n
           delx = ABS(bt(i)-c(i))
           delmax = MAX(delmax,delx)
         ENDDO
         !
         IF ( r<=delmax ) THEN
           Nerr = Nerr + 1
-          WRITE (Lun,99002) list(kprog) , kcase , delmax
+          WRITE (Lun,99002) list(kprog), kcase, delmax
           99002         FORMAT ('   PROBLEM WITH S',A,', CASE ',I1,'.  MAX ABS ERROR OF',&
             E11.4/)
         ENDIF
@@ -168,7 +168,7 @@ SUBROUTINE SQCK(Lun,Kprint,Nerr)
         !
       ELSEIF ( ind/=-4 ) THEN
         Nerr = Nerr + 1
-        WRITE (Lun,99003) list(kprog) , kcase , ind
+        WRITE (Lun,99003) list(kprog), kcase, ind
         99003       FORMAT ('   PROBLEM WITH S',A,', CASE ',I1,'.  IND = ',I2,&
           ' INSTEAD OF -4'/)
       ENDIF

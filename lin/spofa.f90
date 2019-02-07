@@ -36,7 +36,7 @@ SUBROUTINE SPOFA(A,Lda,N,Info)
   !        A       an upper triangular matrix  R  so that  A = TRANS(R)*R
   !                where  TRANS(R)  is the transpose.
   !                The strict lower triangle is unaltered.
-  !                If  INFO .NE. 0 , the factorization is not complete.
+  !                If  INFO .NE. 0, the factorization is not complete.
   !
   !        INFO    INTEGER
   !                = 0  for normal return.
@@ -55,19 +55,19 @@ SUBROUTINE SPOFA(A,Lda,N,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SPOFA
-  INTEGER Lda , N , Info
+  INTEGER Lda, N, Info
   REAL A(Lda,*)
   !
-  REAL SDOT , t
+  REAL SDOT, t
   REAL s
-  INTEGER j , jm1 , k
+  INTEGER j, jm1, k
   !***FIRST EXECUTABLE STATEMENT  SPOFA
-  DO j = 1 , N
+  DO j = 1, N
     Info = j
     s = 0.0E0
     jm1 = j - 1
     IF ( jm1>=1 ) THEN
-      DO k = 1 , jm1
+      DO k = 1, jm1
         t = A(k,j) - SDOT(k-1,A(1,k),1,A(1,j),1)
         t = t/A(k,k)
         A(k,j) = t
@@ -79,4 +79,5 @@ SUBROUTINE SPOFA(A,Lda,N,Info)
     A(j,j) = SQRT(s)
   ENDDO
   Info = 0
-  99999 END SUBROUTINE SPOFA
+  99999 CONTINUE
+  END SUBROUTINE SPOFA

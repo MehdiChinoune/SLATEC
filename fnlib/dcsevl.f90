@@ -4,7 +4,7 @@ REAL(8) FUNCTION DCSEVL(X,Cs,N)
   IMPLICIT NONE
   !*--DCSEVL5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , N , ni
+  INTEGER i, N, ni
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DCSEVL
   !***PURPOSE  Evaluate a Chebyshev series.
@@ -41,9 +41,9 @@ REAL(8) FUNCTION DCSEVL(X,Cs,N)
   !           X to be slightly outside interval (-1,+1).  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DCSEVL
-  REAL(8) :: b0 , b1 , b2 , Cs(*) , onepl , twox , X , D1MACH
+  REAL(8) :: b0, b1, b2, Cs(*), onepl, twox, X, D1MACH
   LOGICAL first
-  SAVE first , onepl
+  SAVE first, onepl
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  DCSEVL
   IF ( first ) onepl = 1.0D0 + D1MACH(4)
@@ -57,7 +57,7 @@ REAL(8) FUNCTION DCSEVL(X,Cs,N)
   b1 = 0.0D0
   b0 = 0.0D0
   twox = 2.0D0*X
-  DO i = 1 , N
+  DO i = 1, N
     b2 = b1
     b1 = b0
     ni = N + 1 - i

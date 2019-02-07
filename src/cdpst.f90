@@ -29,12 +29,12 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  CDPST
-  INTEGER i , iflag , imax , Impl , info , Iswflg , j , j2 , Jstate , k , &
-    Matdim , Miter , Ml , Mu , mw , N , Nde , Nfe , Nje , Nq
-  COMPLEX A(Matdim,*) , cfctr , Dfdy(Matdim,*) , dy , Fac(*) , Save1(*) , &
-    Save2(*) , Y(*) , Yh(N,*) , yj , ys , Ywt(*)
-  REAL bl , Bnd , bp , br , BU , dfdymx , diff , El(13,12) , FACMAX , &
-    facmin , factor , H , scale , SCNRM2 , T , Uround , zmax , zmin
+  INTEGER i, iflag, imax, Impl, info, Iswflg, j, j2, Jstate, k, &
+    Matdim, Miter, Ml, Mu, mw, N, Nde, Nfe, Nje, Nq
+  COMPLEX A(Matdim,*), cfctr, Dfdy(Matdim,*), dy, Fac(*), Save1(*), &
+    Save2(*), Y(*), Yh(N,*), yj, ys, Ywt(*)
+  REAL bl, Bnd, bp, br, BU, dfdymx, diff, El(13,12), FACMAX, &
+    facmin, factor, H, scale, SCNRM2, T, Uround, zmax, zmin
   INTEGER Ipvt(*)
   LOGICAL Ier
   PARAMETER (FACMAX=.5E0,BU=0.5E0)
@@ -50,8 +50,8 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       ENDIF
       IF ( Iswflg==3 ) Bnd = SCNRM2(N*N,Dfdy,1)
       factor = -El(1,Nq)*H
-      DO j = 1 , N
-        DO i = 1 , N
+      DO j = 1, N
+        DO i = 1, N
           Dfdy(i,j) = factor*Dfdy(i,j)
         ENDDO
       ENDDO
@@ -60,7 +60,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       bl = Uround**(.75E0)
       bp = Uround**(-.15E0)
       facmin = Uround**(.78E0)
-      DO j = 1 , N
+      DO j = 1, N
         IF ( ABS(Y(j))>ABS(Ywt(j)) ) THEN
           ys = Y(j)
         ELSE
@@ -86,13 +86,13 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           ENDIF
           Y(j) = yj
           cfctr = -El(1,Nq)*H/dy
-          DO i = 1 , N
+          DO i = 1, N
             Dfdy(i,j) = (Save1(i)-Save2(i))*cfctr
           ENDDO
           !                                                                 Step 1
           diff = ABS(Save2(1)-Save1(1))
           imax = 1
-          DO i = 2 , N
+          DO i = 2, N
             IF ( ABS(Save2(i)-Save1(i))>diff ) THEN
               imax = i
               diff = ABS(Save2(i)-Save1(i))
@@ -118,7 +118,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       Nfe = Nfe + N
     ENDIF
     IF ( Impl==0 ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         Dfdy(i,i) = Dfdy(i,i) + 1.E0
       ENDDO
     ELSEIF ( Impl==1 ) THEN
@@ -127,8 +127,8 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Jstate = 9
         RETURN
       ENDIF
-      DO j = 1 , N
-        DO i = 1 , N
+      DO j = 1, N
+        DO i = 1, N
           Dfdy(i,j) = Dfdy(i,j) + A(i,j)
         ENDDO
       ENDDO
@@ -138,7 +138,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Jstate = 9
         RETURN
       ENDIF
-      DO i = 1 , Nde
+      DO i = 1, Nde
         Dfdy(i,i) = Dfdy(i,i) + A(i,1)
       ENDDO
     ELSEIF ( Impl==3 ) THEN
@@ -147,8 +147,8 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Jstate = 9
         RETURN
       ENDIF
-      DO j = 1 , Nde
-        DO i = 1 , Nde
+      DO j = 1, Nde
+        DO i = 1, Nde
           Dfdy(i,j) = Dfdy(i,j) + A(i,j)
         ENDDO
       ENDDO
@@ -164,8 +164,8 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       ENDIF
       factor = -El(1,Nq)*H
       mw = Ml + Mu + 1
-      DO j = 1 , N
-        DO i = MAX(Ml+1,mw+1-j) , MIN(mw+N-j,mw+Ml)
+      DO j = 1, N
+        DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
           Dfdy(i,j) = factor*Dfdy(i,j)
         ENDDO
       ENDDO
@@ -176,8 +176,8 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       facmin = Uround**(.78E0)
       mw = Ml + Mu + 1
       j2 = MIN(mw,N)
-      DO j = 1 , j2
-        DO k = j , N , mw
+      DO j = 1, j2
+        DO k = j, N, mw
           IF ( ABS(Y(k))>ABS(Ywt(k)) ) THEN
             ys = Y(k)
           ELSE
@@ -204,17 +204,17 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           Jstate = 6
           RETURN
         ENDIF
-        DO k = j , N , mw
+        DO k = j, N, mw
           dy = Y(k) - Dfdy(mw,k)
           Y(k) = Dfdy(mw,k)
           cfctr = -El(1,Nq)*H/dy
-          DO i = MAX(Ml+1,mw+1-k) , MIN(mw+N-k,mw+Ml)
+          DO i = MAX(Ml+1,mw+1-k), MIN(mw+N-k,mw+Ml)
             Dfdy(i,k) = cfctr*(Save1(i+k-mw)-Save2(i+k-mw))
           ENDDO
           !                                                                 Step 1
           imax = MAX(1,k-Mu)
           diff = ABS(Save2(imax)-Save1(imax))
-          DO i = MAX(1,k-Mu) + 1 , MIN(k+Ml,N)
+          DO i = MAX(1,k-Mu) + 1, MIN(k+Ml,N)
             IF ( ABS(Save2(i)-Save1(i))>diff ) THEN
               imax = i
               diff = ABS(Save2(i)-Save1(i))
@@ -239,8 +239,8 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     ENDIF
     IF ( Iswflg==3 ) THEN
       dfdymx = 0.E0
-      DO j = 1 , N
-        DO i = MAX(Ml+1,mw+1-j) , MIN(mw+N-j,mw+Ml)
+      DO j = 1, N
+        DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
           zmax = MAX(ABS(REAL(Dfdy(i,j))),ABS(AIMAG(Dfdy(i,j))))
           zmin = MIN(ABS(REAL(Dfdy(i,j))),ABS(AIMAG(Dfdy(i,j))))
           IF ( zmax/=0.E0 )&
@@ -249,8 +249,8 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       ENDDO
       Bnd = 0.E0
       IF ( dfdymx/=0.E0 ) THEN
-        DO j = 1 , N
-          DO i = MAX(Ml+1,mw+1-j) , MIN(mw+N-j,mw+Ml)
+        DO j = 1, N
+          DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
             Bnd = Bnd + (REAL(Dfdy(i,j))/dfdymx)&
               **2 + (AIMAG(Dfdy(i,j))/dfdymx)**2
           ENDDO
@@ -259,7 +259,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       ENDIF
     ENDIF
     IF ( Impl==0 ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         Dfdy(mw,j) = Dfdy(mw,j) + 1.E0
       ENDDO
     ELSEIF ( Impl==1 ) THEN
@@ -268,8 +268,8 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Jstate = 9
         RETURN
       ENDIF
-      DO j = 1 , N
-        DO i = MAX(Ml+1,mw+1-j) , MIN(mw+N-j,mw+Ml)
+      DO j = 1, N
+        DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
           Dfdy(i,j) = Dfdy(i,j) + A(i,j)
         ENDDO
       ENDDO
@@ -279,7 +279,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Jstate = 9
         RETURN
       ENDIF
-      DO j = 1 , Nde
+      DO j = 1, Nde
         Dfdy(mw,j) = Dfdy(mw,j) + A(j,1)
       ENDDO
     ELSEIF ( Impl==3 ) THEN
@@ -288,8 +288,8 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Jstate = 9
         RETURN
       ENDIF
-      DO j = 1 , Nde
-        DO i = MAX(Ml+1,mw+1-j) , MIN(mw+Nde-j,mw+Ml)
+      DO j = 1, Nde
+        DO i = MAX(Ml+1,mw+1-j), MIN(mw+Nde-j,mw+Ml)
           Dfdy(i,j) = Dfdy(i,j) + A(i,j)
         ENDDO
       ENDDO

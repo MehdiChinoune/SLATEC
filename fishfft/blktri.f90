@@ -4,11 +4,11 @@ SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   IMPLICIT NONE
   !*--BLKTRI5
   !*** Start of declarations inserted by SPAG
-  REAL Am , An , Bm , Bn , Cm , Cn , CNV , CPROD , CPRODP , EPS , PROD , &
-    PRODP , W , Y
-  INTEGER Idimy , Ierror , Iflg , IK , iw1 , iw2 , iw3 , iwah , iwbh , iwd , &
-    iwu , iww , K , M , Mp , N , NCMplx , nh , nl , NM
-  INTEGER Np , NPP
+  REAL Am, An, Bm, Bn, Cm, Cn, CNV, CPROD, CPRODP, EPS, PROD, &
+    PRODP, W, Y
+  INTEGER Idimy, Ierror, Iflg, IK, iw1, iw2, iw3, iwah, iwbh, iwd, &
+    iwu, iww, K, M, Mp, N, NCMplx, nh, nl, NM
+  INTEGER Np, NPP
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BLKTRI
   !***PURPOSE  Solve a block tridiagonal system of linear equations
@@ -205,10 +205,10 @@ SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BLKTRI
   !
-  DIMENSION An(*) , Bn(*) , Cn(*) , Am(*) , Bm(*) , Cm(*) , Y(Idimy,*) , &
+  DIMENSION An(*), Bn(*), Cn(*), Am(*), Bm(*), Cm(*), Y(Idimy,*), &
     W(*)
-  EXTERNAL PROD , PRODP , CPROD , CPRODP
-  COMMON /CBLKT / NPP , K , EPS , CNV , NM , NCMplx , IK
+  EXTERNAL PROD, PRODP, CPROD, CPRODP
+  COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  BLKTRI
   NM = N
   Ierror = 0

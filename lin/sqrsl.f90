@@ -157,12 +157,12 @@ SUBROUTINE SQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SQRSL
-  INTEGER Ldx , N , K , Job , Info
-  REAL X(Ldx,*) , Qraux(*) , Y(*) , Qy(*) , Qty(*) , B(*) , Rsd(*) , Xb(*)
+  INTEGER Ldx, N, K, Job, Info
+  REAL X(Ldx,*), Qraux(*), Y(*), Qy(*), Qty(*), B(*), Rsd(*), Xb(*)
   !
-  INTEGER i , j , jj , ju , kp1
-  REAL SDOT , t , temp
-  LOGICAL cb , cqy , cqty , cr , cxb
+  INTEGER i, j, jj, ju, kp1
+  REAL SDOT, t, temp
+  LOGICAL cb, cqy, cqty, cr, cxb
   !***FIRST EXECUTABLE STATEMENT  SQRSL
   !
   !     SET INFO FLAG.
@@ -190,7 +190,7 @@ SUBROUTINE SQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
       !
       !           COMPUTE QY.
       !
-      DO jj = 1 , ju
+      DO jj = 1, ju
         j = ju - jj + 1
         IF ( Qraux(j)/=0.0E0 ) THEN
           temp = X(j,j)
@@ -205,7 +205,7 @@ SUBROUTINE SQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
       !
       !           COMPUTE TRANS(Q)*Y.
       !
-      DO j = 1 , ju
+      DO j = 1, ju
         IF ( Qraux(j)/=0.0E0 ) THEN
           temp = X(j,j)
           X(j,j) = Qraux(j)
@@ -223,12 +223,12 @@ SUBROUTINE SQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
     IF ( cxb ) CALL SCOPY(K,Qty,1,Xb,1)
     IF ( cr.AND.K<N ) CALL SCOPY(N-K,Qty(kp1),1,Rsd(kp1),1)
     IF ( .NOT.(.NOT.cxb.OR.kp1>N) ) THEN
-      DO i = kp1 , N
+      DO i = kp1, N
         Xb(i) = 0.0E0
       ENDDO
     ENDIF
     IF ( cr ) THEN
-      DO i = 1 , K
+      DO i = 1, K
         Rsd(i) = 0.0E0
       ENDDO
     ENDIF
@@ -236,7 +236,7 @@ SUBROUTINE SQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
       !
       !           COMPUTE B.
       !
-      DO jj = 1 , K
+      DO jj = 1, K
         j = K - jj + 1
         IF ( X(j,j)/=0.0E0 ) THEN
           B(j) = B(j)/X(j,j)
@@ -254,7 +254,7 @@ SUBROUTINE SQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
       !
       !           COMPUTE RSD OR XB AS REQUIRED.
       !
-      DO jj = 1 , ju
+      DO jj = 1, ju
         j = ju - jj + 1
         IF ( Qraux(j)/=0.0E0 ) THEN
           temp = X(j,j)

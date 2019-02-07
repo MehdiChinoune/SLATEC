@@ -26,14 +26,14 @@ SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
   !   920422  Changed DIMENSION statement.  (WRB)
   !***END PROLOGUE  DSLVS
   !
-  INTEGER i , IER , IOWnd , IOWns , Iwm , JSTart , KFLag , L , MAXord , &
-    meband , METh , MITer , ml , mu , N , NFE , NJE , NQ , NQU , NST
-  REAL(8) :: di , EL0 , H , hl0 , HMIn , HMXi , HU , phl0 , r , &
-    ROWnd , ROWns , Tem , TN , UROund , Wm , X
-  DIMENSION Wm(*) , Iwm(*) , X(*) , Tem(*)
-  COMMON /DDEBD1/ ROWnd , ROWns(210) , EL0 , H , HMIn , HMXi , HU , TN , &
-    UROund , IOWnd(14) , IOWns(6) , IER , JSTart , KFLag , L , &
-    METh , MITer , MAXord , N , NQ , NST , NFE , NJE , NQU
+  INTEGER i, IER, IOWnd, IOWns, Iwm, JSTart, KFLag, L, MAXord, &
+    meband, METh, MITer, ml, mu, N, NFE, NJE, NQ, NQU, NST
+  REAL(8) :: di, EL0, H, hl0, HMIn, HMXi, HU, phl0, r, &
+    ROWnd, ROWns, Tem, TN, UROund, Wm, X
+  DIMENSION Wm(*), Iwm(*), X(*), Tem(*)
+  COMMON /DDEBD1/ ROWnd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
+    UROund, IOWnd(14), IOWns(6), IER, JSTart, KFLag, L, &
+    METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
   !     ------------------------------------------------------------------
   !      THIS ROUTINE MANAGES THE SOLUTION OF THE LINEAR SYSTEM ARISING
   !      FROM A CHORD ITERATION.  IT IS CALLED BY DSTOD  IF MITER .NE. 0.
@@ -73,14 +73,14 @@ SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
       Wm(2) = hl0
       IF ( hl0/=phl0 ) THEN
         r = hl0/phl0
-        DO i = 1 , N
+        DO i = 1, N
           di = 1.0D0 - r*(1.0D0-1.0D0/Wm(i+2))
           !        .........EXIT
           IF ( ABS(di)==0.0D0 ) GOTO 100
           Wm(i+2) = 1.0D0/di
         ENDDO
       ENDIF
-      DO i = 1 , N
+      DO i = 1, N
         X(i) = Wm(i+2)*X(i)
         !     ......EXIT
       ENDDO
@@ -99,4 +99,5 @@ SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
   100  IER = -1
   !     ----------------------- END OF SUBROUTINE DSLVS
   !     -----------------------
-  99999 END SUBROUTINE DSLVS
+  99999 CONTINUE
+  END SUBROUTINE DSLVS

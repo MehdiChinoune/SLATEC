@@ -68,11 +68,11 @@ SUBROUTINE DQMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQMOMO
   !
-  REAL(8) :: Alfa , alfp1 , alfp2 , an , anm1 , Beta , betp1 , betp2 , &
-    ralf , rbet , Rg , Rh , Ri , Rj
-  INTEGER i , im1 , Integr
+  REAL(8) :: Alfa, alfp1, alfp2, an, anm1, Beta, betp1, betp2, &
+    ralf, rbet, Rg, Rh, Ri, Rj
+  INTEGER i, im1, Integr
   !
-  DIMENSION Rg(25) , Rh(25) , Ri(25) , Rj(25)
+  DIMENSION Rg(25), Rh(25), Ri(25), Rj(25)
   !
   !
   !***FIRST EXECUTABLE STATEMENT  DQMOMO
@@ -91,7 +91,7 @@ SUBROUTINE DQMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
   Rj(2) = Rj(1)*Beta/betp2
   an = 0.2D+01
   anm1 = 0.1D+01
-  DO i = 3 , 25
+  DO i = 3, 25
     Ri(i) = -(ralf+an*(an-alfp2)*Ri(i-1))/(anm1*(an+alfp1))
     Rj(i) = -(rbet+an*(an-betp2)*Rj(i-1))/(anm1*(an+betp1))
     anm1 = an
@@ -107,7 +107,7 @@ SUBROUTINE DQMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
       an = 0.2D+01
       anm1 = 0.1D+01
       im1 = 2
-      DO i = 3 , 25
+      DO i = 3, 25
         Rg(i) = -(an*(an-alfp2)*Rg(im1)-an*Ri(im1)+anm1*Ri(i))&
           /(anm1*(an+alfp1))
         anm1 = an
@@ -124,18 +124,19 @@ SUBROUTINE DQMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
     an = 0.2D+01
     anm1 = 0.1D+01
     im1 = 2
-    DO i = 3 , 25
+    DO i = 3, 25
       Rh(i) = -(an*(an-betp2)*Rh(im1)-an*Rj(im1)+anm1*Rj(i))&
         /(anm1*(an+betp1))
       anm1 = an
       an = an + 0.1D+01
       im1 = i
     ENDDO
-    DO i = 2 , 25 , 2
+    DO i = 2, 25, 2
       Rh(i) = -Rh(i)
     ENDDO
   ENDIF
-  100  DO i = 2 , 25 , 2
-  Rj(i) = -Rj(i)
-ENDDO
+  100 CONTINUE
+  DO i = 2, 25, 2
+    Rj(i) = -Rj(i)
+  ENDDO
 END SUBROUTINE DQMOMO

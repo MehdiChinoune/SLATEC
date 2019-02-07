@@ -102,17 +102,17 @@ SUBROUTINE DSYMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  DSYMV
   !     .. Scalar Arguments ..
-  REAL(8) :: Alpha , Beta
-  INTEGER Incx , Incy , Lda , N
+  REAL(8) :: Alpha, Beta
+  INTEGER Incx, Incy, Lda, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*) , X(*) , Y(*)
+  REAL(8) :: A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
-  REAL(8) :: ONE , ZERO
+  REAL(8) :: ONE, ZERO
   PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
   !     .. Local Scalars ..
-  REAL(8) :: temp1 , temp2
-  INTEGER i , info , ix , iy , j , jx , jy , kx , ky
+  REAL(8) :: temp1, temp2
+  INTEGER i, info, ix, iy, j, jx, jy, kx, ky
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
@@ -168,22 +168,22 @@ SUBROUTINE DSYMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     IF ( Incy/=1 ) THEN
       iy = ky
       IF ( Beta==ZERO ) THEN
-        DO i = 1 , N
+        DO i = 1, N
           Y(iy) = ZERO
           iy = iy + Incy
         ENDDO
       ELSE
-        DO i = 1 , N
+        DO i = 1, N
           Y(iy) = Beta*Y(iy)
           iy = iy + Incy
         ENDDO
       ENDIF
     ELSEIF ( Beta==ZERO ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         Y(i) = ZERO
       ENDDO
     ELSE
-      DO i = 1 , N
+      DO i = 1, N
         Y(i) = Beta*Y(i)
       ENDDO
     ENDIF
@@ -194,10 +194,10 @@ SUBROUTINE DSYMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     !        Form  y  when A is stored in upper triangle.
     !
     IF ( (Incx==1).AND.(Incy==1) ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         temp1 = Alpha*X(j)
         temp2 = ZERO
-        DO i = 1 , j - 1
+        DO i = 1, j - 1
           Y(i) = Y(i) + temp1*A(i,j)
           temp2 = temp2 + A(i,j)*X(i)
         ENDDO
@@ -206,12 +206,12 @@ SUBROUTINE DSYMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     ELSE
       jx = kx
       jy = ky
-      DO j = 1 , N
+      DO j = 1, N
         temp1 = Alpha*X(jx)
         temp2 = ZERO
         ix = kx
         iy = ky
-        DO i = 1 , j - 1
+        DO i = 1, j - 1
           Y(iy) = Y(iy) + temp1*A(i,j)
           temp2 = temp2 + A(i,j)*X(ix)
           ix = ix + Incx
@@ -226,11 +226,11 @@ SUBROUTINE DSYMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     !        Form  y  when A is stored in lower triangle.
     !
   ELSEIF ( (Incx==1).AND.(Incy==1) ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       temp1 = Alpha*X(j)
       temp2 = ZERO
       Y(j) = Y(j) + temp1*A(j,j)
-      DO i = j + 1 , N
+      DO i = j + 1, N
         Y(i) = Y(i) + temp1*A(i,j)
         temp2 = temp2 + A(i,j)*X(i)
       ENDDO
@@ -239,13 +239,13 @@ SUBROUTINE DSYMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   ELSE
     jx = kx
     jy = ky
-    DO j = 1 , N
+    DO j = 1, N
       temp1 = Alpha*X(jx)
       temp2 = ZERO
       Y(jy) = Y(jy) + temp1*A(j,j)
       ix = jx
       iy = jy
-      DO i = j + 1 , N
+      DO i = j + 1, N
         ix = ix + Incx
         iy = iy + Incy
         Y(iy) = Y(iy) + temp1*A(i,j)

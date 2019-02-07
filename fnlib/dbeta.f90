@@ -25,10 +25,10 @@ REAL(8) FUNCTION DBETA(A,B)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DBETA
-  REAL(8) :: A , B , alnsml , xmax , xmin , DLBETA , DGAMMA , D1MACH
+  REAL(8) :: A, B, alnsml, xmax, xmin, DLBETA, DGAMMA, D1MACH
   LOGICAL first
   EXTERNAL DGAMMA
-  SAVE xmax , alnsml , first
+  SAVE xmax, alnsml, first
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  DBETA
   IF ( first ) THEN
@@ -53,4 +53,5 @@ REAL(8) FUNCTION DBETA(A,B)
   DBETA = EXP(DBETA)
   RETURN
   !
-  99999 END FUNCTION DBETA
+  99999 CONTINUE
+  END FUNCTION DBETA

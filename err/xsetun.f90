@@ -4,7 +4,7 @@ SUBROUTINE XSETUN(Iunit)
   IMPLICIT NONE
   !*--XSETUN5
   !*** Start of declarations inserted by SPAG
-  INTEGER Iunit , J4SAVE , junk
+  INTEGER Iunit, J4SAVE, junk
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XSETUN
   !***PURPOSE  Set output file to which error messages are to be sent.

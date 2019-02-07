@@ -5,7 +5,7 @@ SUBROUTINE D9B1MP(X,Ampl,Theta)
   !*--D9B1MP5
   !*** Start of declarations inserted by SPAG
   REAL eta
-  INTEGER INITDS , nbm1 , nbm12 , nbt12 , nbth1
+  INTEGER INITDS, nbm1, nbm12, nbt12, nbth1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9B1MP
   !***SUBSIDIARY
@@ -57,11 +57,11 @@ SUBROUTINE D9B1MP(X,Ampl,Theta)
   !   920618  Removed space from variable name and code restructured to
   !           use IF-THEN-ELSE.  (RWC, WRB)
   !***END PROLOGUE  D9B1MP
-  REAL(8) :: X , Ampl , Theta , bm1cs(37) , bt12cs(39) , bm12cs(40) , &
-    bth1cs(44) , xmax , pi4 , z , D1MACH , DCSEVL
+  REAL(8) :: X, Ampl, Theta, bm1cs(37), bt12cs(39), bm12cs(40), &
+    bth1cs(44), xmax, pi4, z, D1MACH, DCSEVL
   LOGICAL first
-  SAVE bm1cs , bt12cs , bth1cs , bm12cs , pi4 , nbm1 , nbt12 , nbm12 , &
-    nbth1 , xmax , first
+  SAVE bm1cs, bt12cs, bth1cs, bm12cs, pi4, nbm1, nbt12, nbm12, &
+    nbth1, xmax, first
   DATA bm1cs(1)/ + .1069845452618063014969985308538D+0/
   DATA bm1cs(2)/ + .3274915039715964900729055143445D-2/
   DATA bm1cs(3)/ - .2987783266831698592030445777938D-4/

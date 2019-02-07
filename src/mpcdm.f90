@@ -4,7 +4,7 @@ SUBROUTINE MPCDM(Dx,Z)
   IMPLICIT NONE
   !*--MPCDM5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , i2 , ib , ie , k , LUN , M , MXR
+  INTEGER i, i2, ib, ie, k, LUN, M, MXR
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPCDM
   !***SUBSIDIARY
@@ -37,9 +37,9 @@ SUBROUTINE MPCDM(Dx,Z)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPCDM
-  REAL(8) :: db , dj , Dx
-  COMMON /MPCOM / B , T , M , LUN , MXR , R(30)
-  INTEGER B , T , R , Z(*) , rs , re , tp
+  REAL(8) :: db, dj, Dx
+  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
+  INTEGER B, T, R, Z(*), rs, re, tp
   !***FIRST EXECUTABLE STATEMENT  MPCDM
   CALL MPCHK(1,4)
   i2 = T + 4
@@ -73,7 +73,7 @@ SUBROUTINE MPCDM(Dx,Z)
   re = 0
   db = REAL(B, 8)
   ! CONVERSION LOOP (ASSUME DOUBLE-PRECISION OPS. EXACT)
-  DO i = 1 , i2
+  DO i = 1, i2
     dj = db*dj
     R(i) = INT(dj)
     dj = dj - REAL(R(i), 8)
@@ -85,7 +85,7 @@ SUBROUTINE MPCDM(Dx,Z)
   ! NOW MULTIPLY BY 16**IE
   IF ( ie<0 ) THEN
     k = -ie
-    DO i = 1 , k
+    DO i = 1, k
       tp = 16*tp
       IF ( (tp>ib).OR.(tp==B).OR.(i>=k) ) THEN
         CALL MPDIVI(Z,tp,Z)
@@ -94,7 +94,7 @@ SUBROUTINE MPCDM(Dx,Z)
     ENDDO
     RETURN
   ELSEIF ( ie/=0 ) THEN
-    DO i = 1 , ie
+    DO i = 1, ie
       tp = 16*tp
       IF ( (tp>ib).OR.(tp==B).OR.(i>=ie) ) THEN
         CALL MPMULI(Z,tp,Z)

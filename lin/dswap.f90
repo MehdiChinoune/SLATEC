@@ -4,7 +4,7 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
   !*--DSWAP5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , Incy , ix , iy , m , mp1 , N , ns
+  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSWAP
   !***PURPOSE  Interchange two vectors.
@@ -50,7 +50,7 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSWAP
-  REAL(8) :: Dx(*) , Dy(*) , dtemp1 , dtemp2 , dtemp3
+  REAL(8) :: Dx(*), Dy(*), dtemp1, dtemp2, dtemp3
   !***FIRST EXECUTABLE STATEMENT  DSWAP
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy ) THEN
@@ -63,7 +63,7 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
       !
       m = MOD(N,3)
       IF ( m/=0 ) THEN
-        DO i = 1 , m
+        DO i = 1, m
           dtemp1 = Dx(i)
           Dx(i) = Dy(i)
           Dy(i) = dtemp1
@@ -76,7 +76,7 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
       !     Code for equal, positive, non-unit increments.
       !
       ns = N*Incx
-      DO i = 1 , ns , Incx
+      DO i = 1, ns, Incx
         dtemp1 = Dx(i)
         Dx(i) = Dy(i)
         Dy(i) = dtemp1
@@ -91,7 +91,7 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
   iy = 1
   IF ( Incx<0 ) ix = (-N+1)*Incx + 1
   IF ( Incy<0 ) iy = (-N+1)*Incy + 1
-  DO i = 1 , N
+  DO i = 1, N
     dtemp1 = Dx(ix)
     Dx(ix) = Dy(iy)
     Dy(iy) = dtemp1
@@ -100,7 +100,7 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
   ENDDO
   RETURN
   100  mp1 = m + 1
-  DO i = mp1 , N , 3
+  DO i = mp1, N, 3
     dtemp1 = Dx(i)
     dtemp2 = Dx(i+1)
     dtemp3 = Dx(i+2)
@@ -112,4 +112,5 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
     Dy(i+2) = dtemp3
   ENDDO
   RETURN
-  99999 END SUBROUTINE DSWAP
+  99999 CONTINUE
+  END SUBROUTINE DSWAP

@@ -157,13 +157,13 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !***END PROLOGUE  ZBESJ
   !
   !     COMPLEX CI,CSGN,CY,Z,ZN
-  REAL(8) :: aa , alim , arg , cii , csgni , csgnr , Cyi , Cyr , dig , &
-    elim , Fnu , fnul , hpi , rl , r1m5 , str , tol , Zi , &
-    zni , znr , Zr , D1MACH , bb , fn , az , ZABS , ascle , &
-    rtol , atol , sti
-  INTEGER i , Ierr , inu , inuh , ir , k , Kode , k1 , k2 , N , nl , Nz , &
+  REAL(8) :: aa, alim, arg, cii, csgni, csgnr, Cyi, Cyr, dig, &
+    elim, Fnu, fnul, hpi, rl, r1m5, str, tol, Zi, &
+    zni, znr, Zr, D1MACH, bb, fn, az, ZABS, ascle, &
+    rtol, atol, sti
+  INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, N, nl, Nz, &
     I1MACH
-  DIMENSION Cyr(N) , Cyi(N)
+  DIMENSION Cyr(N), Cyi(N)
   EXTERNAL ZABS
   DATA hpi/1.57079632679489662D0/
   !
@@ -243,7 +243,7 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
         IF ( nl==0 ) RETURN
         rtol = 1.0D0/tol
         ascle = D1MACH(1)*rtol*1.0D+3
-        DO i = 1 , nl
+        DO i = 1, nl
           !       STR = CYR(I)*CSGNR - CYI(I)*CSGNI
           !       CYI(I) = CYR(I)*CSGNI + CYI(I)*CSGNR
           !       CYR(I) = STR

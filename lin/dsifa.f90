@@ -16,11 +16,11 @@ SUBROUTINE DSIFA(A,Lda,N,Kpvt,Info)
   !     DSIFA factors a double precision symmetric matrix by elimination
   !     with symmetric pivoting.
   !
-  !     To solve  A*X = B , follow DSIFA by DSISL.
-  !     To compute  INVERSE(A)*C , follow DSIFA by DSISL.
-  !     To compute  DETERMINANT(A) , follow DSIFA by DSIDI.
-  !     To compute  INERTIA(A) , follow DSIFA by DSIDI.
-  !     To compute  INVERSE(A) , follow DSIFA by DSIDI.
+  !     To solve  A*X = B, follow DSIFA by DSISL.
+  !     To compute  INVERSE(A)*C, follow DSIFA by DSISL.
+  !     To compute  DETERMINANT(A), follow DSIFA by DSIDI.
+  !     To compute  INERTIA(A), follow DSIFA by DSIDI.
+  !     To compute  INVERSE(A), follow DSIFA by DSIDI.
   !
   !     On Entry
   !
@@ -41,7 +41,7 @@ SUBROUTINE DSIFA(A,Lda,N,Kpvt,Info)
   !                The factorization can be written  A = U*D*TRANS(U)
   !                where  U  is a product of permutation and unit
   !                upper triangular matrices, TRANS(U) is the
-  !                transpose of  U , and  D  is block diagonal
+  !                transpose of  U, and  D  is block diagonal
   !                with 1 by 1 and 2 by 2 blocks.
   !
   !        KPVT    INTEGER(N)
@@ -68,12 +68,12 @@ SUBROUTINE DSIFA(A,Lda,N,Kpvt,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSIFA
-  INTEGER Lda , N , Kpvt(*) , Info
+  INTEGER Lda, N, Kpvt(*), Info
   REAL(8) :: A(Lda,*)
   !
-  REAL(8) :: ak , akm1 , bk , bkm1 , denom , mulk , mulkm1 , t
-  REAL(8) :: absakk , alpha , colmax , rowmax
-  INTEGER imax , imaxp1 , j , jj , jmax , k , km1 , km2 , kstep , IDAMAX
+  REAL(8) :: ak, akm1, bk, bkm1, denom, mulk, mulkm1, t
+  REAL(8) :: absakk, alpha, colmax, rowmax
+  INTEGER imax, imaxp1, j, jj, jmax, k, km1, km2, kstep, IDAMAX
   LOGICAL swap
   !***FIRST EXECUTABLE STATEMENT  DSIFA
   !
@@ -115,7 +115,7 @@ SUBROUTINE DSIFA(A,Lda,N,Kpvt,Info)
         !
         rowmax = 0.0D0
         imaxp1 = imax + 1
-        DO j = imaxp1 , k
+        DO j = imaxp1, k
           rowmax = MAX(rowmax,ABS(A(imax,j)))
         ENDDO
         IF ( imax/=1 ) THEN
@@ -151,7 +151,7 @@ SUBROUTINE DSIFA(A,Lda,N,Kpvt,Info)
           !              PERFORM AN INTERCHANGE.
           !
           CALL DSWAP(imax,A(1,imax),1,A(1,k-1),1)
-          DO jj = imax , km1
+          DO jj = imax, km1
             j = km1 + imax - jj
             t = A(j,k-1)
             A(j,k-1) = A(imax,j)
@@ -169,7 +169,7 @@ SUBROUTINE DSIFA(A,Lda,N,Kpvt,Info)
           ak = A(k,k)/A(k-1,k)
           akm1 = A(k-1,k-1)/A(k-1,k)
           denom = 1.0D0 - ak*akm1
-          DO jj = 1 , km2
+          DO jj = 1, km2
             j = km1 - jj
             bk = A(j,k)/A(k-1,k)
             bkm1 = A(j,k-1)/A(k-1,k)
@@ -198,7 +198,7 @@ SUBROUTINE DSIFA(A,Lda,N,Kpvt,Info)
           !              PERFORM AN INTERCHANGE.
           !
           CALL DSWAP(imax,A(1,imax),1,A(1,k),1)
-          DO jj = imax , k
+          DO jj = imax, k
             j = k + imax - jj
             t = A(j,k)
             A(j,k) = A(imax,j)
@@ -208,7 +208,7 @@ SUBROUTINE DSIFA(A,Lda,N,Kpvt,Info)
         !
         !           PERFORM THE ELIMINATION.
         !
-        DO jj = 1 , km1
+        DO jj = 1, km1
           j = k - jj
           mulk = -A(j,k)/A(k,k)
           t = mulk

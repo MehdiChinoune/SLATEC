@@ -5,9 +5,9 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   IMPLICIT NONE
   !*--HWSSSP6
   !*** Start of declarations inserted by SPAG
-  REAL Bdpf , Bdps , Bdtf , Bdts , dum , Elmbda , F , Pertrb , Pf , pi , &
-    PIMACH , Ps , Tf , tpi , Ts , W
-  INTEGER Idimf , Ierror , M , Mbdcnd , N , Nbdcnd
+  REAL Bdpf, Bdps, Bdtf, Bdts, dum, Elmbda, F, Pertrb, Pf, pi, &
+    PIMACH, Ps, Tf, tpi, Ts, W
+  INTEGER Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HWSSSP
   !***PURPOSE  Solve a finite difference approximation to the Helmholtz
@@ -243,7 +243,7 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !       exists.  HWSSSP then computes this solution, which is a least
   !       squares solution to the original approximation.  This solution
   !       is not unique and is unnormalized. The value of PERTRB should
-  !       be small compared to the right side F. Otherwise , a solution
+  !       be small compared to the right side F. Otherwise, a solution
   !       is obtained to an essentially different problem. This comparison
   !       should always be made to insure that a meaningful solution has
   !       been obtained.
@@ -374,7 +374,7 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  HWSSSP
   !
-  DIMENSION F(Idimf,*) , Bdts(*) , Bdtf(*) , Bdps(*) , Bdpf(*) , W(*)
+  DIMENSION F(Idimf,*), Bdts(*), Bdtf(*), Bdps(*), Bdpf(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HWSSSP
   pi = PIMACH(dum)
   tpi = 2.*pi

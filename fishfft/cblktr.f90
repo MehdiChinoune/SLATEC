@@ -4,10 +4,10 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   IMPLICIT NONE
   !*--CBLKTR5
   !*** Start of declarations inserted by SPAG
-  REAL An , Bn , Cn , CNV , CPROC , CPROCP , EPS , PROC , PROCP , W
-  INTEGER Idimy , Ierror , Iflg , IK , iw1 , iw2 , iw3 , iwah , iwbh , iwd , &
-    iwu , iww , K , M , m2 , Mp , N , NCMplx , nh , nl
-  INTEGER NM , Np , NPP
+  REAL An, Bn, Cn, CNV, CPROC, CPROCP, EPS, PROC, PROCP, W
+  INTEGER Idimy, Ierror, Iflg, IK, iw1, iw2, iw3, iwah, iwbh, iwd, &
+    iwu, iww, K, M, m2, Mp, N, NCMplx, nh, nl
+  INTEGER NM, Np, NPP
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CBLKTR
   !***PURPOSE  Solve a block tridiagonal system of linear equations
@@ -205,11 +205,11 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CBLKTR
   !
-  DIMENSION An(*) , Bn(*) , Cn(*) , Am(*) , Bm(*) , Cm(*) , Y(Idimy,*) , &
+  DIMENSION An(*), Bn(*), Cn(*), Am(*), Bm(*), Cm(*), Y(Idimy,*), &
     W(*)
-  EXTERNAL PROC , PROCP , CPROC , CPROCP
-  COMMON /CCBLK / NPP , K , EPS , CNV , NM , NCMplx , IK
-  COMPLEX Am , Bm , Cm , Y
+  EXTERNAL PROC, PROCP, CPROC, CPROCP
+  COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
+  COMPLEX Am, Bm, Cm, Y
   !***FIRST EXECUTABLE STATEMENT  CBLKTR
   NM = N
   m2 = M + M

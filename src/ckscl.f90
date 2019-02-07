@@ -21,18 +21,18 @@ SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   !   ??????  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CKSCL
-  COMPLEX ck , cs , cy , czero , Rz , s1 , s2 , Y , Zr , zd , celm
-  REAL aa , Ascle , acs , as , csi , csr , Elim , fn , Fnu , Tol , xx , &
-    zri , elm , alas , helim
-  INTEGER i , ic , k , kk , N , nn , nw , Nz
-  DIMENSION Y(N) , cy(2)
+  COMPLEX ck, cs, cy, czero, Rz, s1, s2, Y, Zr, zd, celm
+  REAL aa, Ascle, acs, as, csi, csr, Elim, fn, Fnu, Tol, xx, &
+    zri, elm, alas, helim
+  INTEGER i, ic, k, kk, N, nn, nw, Nz
+  DIMENSION Y(N), cy(2)
   DATA czero/(0.0E0,0.0E0)/
   !***FIRST EXECUTABLE STATEMENT  CUCHK
   Nz = 0
   ic = 0
   xx = REAL(Zr)
   nn = MIN(2,N)
-  DO i = 1 , nn
+  DO i = 1, nn
     s1 = Y(i)
     cy(i) = s1
     as = ABS(s1)
@@ -73,7 +73,7 @@ SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   !     FIND TWO CONSECUTIVE Y VALUES ON SCALE. SCALE RECURRENCE IF
   !     S2 GETS LARGER THAN EXP(ELIM/2)
   !
-  DO i = 3 , N
+  DO i = 3, N
     kk = i
     cs = s2
     s2 = ck*s2 + s1
@@ -110,7 +110,8 @@ SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   IF ( ic==N ) Nz = N - 1
   GOTO 200
   100  Nz = kk - 2
-  200  DO k = 1 , Nz
-  Y(k) = czero
-ENDDO
+  200 CONTINUE
+  DO k = 1, Nz
+    Y(k) = czero
+  ENDDO
 END SUBROUTINE CKSCL

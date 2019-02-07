@@ -17,7 +17,7 @@ REAL(8) FUNCTION DFQD2(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Intrinsic Functions ..
-  INTRINSIC COS , EXP
+  INTRINSIC COS, EXP
   !***FIRST EXECUTABLE STATEMENT  DFQD2
   DFQD2 = EXP(X)*COS(10.0D0*X)
 END FUNCTION DFQD2

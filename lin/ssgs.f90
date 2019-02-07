@@ -5,7 +5,7 @@ SUBROUTINE SSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   IMPLICIT NONE
   !*--SSGS6
   !*** Start of declarations inserted by SPAG
-  REAL SSLI , SSMV
+  REAL SSLI, SSMV
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSGS
   !***PURPOSE  Gauss-Seidel Method Iterative Sparse Ax = b Solver.
@@ -214,20 +214,20 @@ SUBROUTINE SSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   921019  Corrected NEL to NL.  (FNF)
   !***END PROLOGUE  SSGS
   !     .. Parameters ..
-  INTEGER LOCRB , LOCIB
+  INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  REAL Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
+  REAL Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
     Nelt
   !     .. Array Arguments ..
-  REAL A(N) , B(N) , Rwork(*) , X(N)
-  INTEGER Ia(Nelt) , Iwork(10) , Ja(Nelt)
+  REAL A(N), B(N), Rwork(*), X(N)
+  INTEGER Ia(Nelt), Iwork(10), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER icol , j , jbgn , jend , locdz , locel , lociel , lociw , locjel , &
-    locr , locw , locz , nl
+  INTEGER icol, j, jbgn, jend, locdz, locel, lociel, lociw, locjel, &
+    locr, locw, locz, nl
   !     .. External Subroutines ..
-  EXTERNAL SCHKW , SIR , SS2LT , SS2Y , SSLI , SSMV
+  EXTERNAL SCHKW, SIR, SS2LT, SS2Y, SSLI, SSMV
   !***FIRST EXECUTABLE STATEMENT  SSGS
   !
   IF ( N<1.OR.Nelt<1 ) THEN
@@ -241,10 +241,10 @@ SUBROUTINE SSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !         Count number of elements in lower triangle of the matrix.
   IF ( Isym==0 ) THEN
     nl = 0
-    DO icol = 1 , N
+    DO icol = 1, N
       jbgn = Ja(icol)
       jend = Ja(icol+1) - 1
-      DO j = jbgn , jend
+      DO j = jbgn, jend
         IF ( Ia(j)>=icol ) nl = nl + 1
       ENDDO
     ENDDO

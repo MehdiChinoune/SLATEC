@@ -43,13 +43,13 @@ REAL(8) FUNCTION DPCHST(Arg1,Arg2)
   !
   !  DECLARE ARGUMENTS.
   !
-  REAL(8) :: Arg1 , Arg2
+  REAL(8) :: Arg1, Arg2
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL(8) :: one , zero
-  SAVE zero , one
-  DATA zero/0.D0/ , one/1.D0/
+  REAL(8) :: one, zero
+  SAVE zero, one
+  DATA zero/0.D0/, one/1.D0/
   !
   !  PERFORM THE TEST.
   !

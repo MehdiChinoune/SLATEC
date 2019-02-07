@@ -118,12 +118,12 @@ SUBROUTINE DTOUT(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  DTOUT
   !     .. Scalar Arguments ..
-  INTEGER Isym , Iunit , Job , N , Nelt
+  INTEGER Isym, Iunit, Job, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , Rhs(N) , Soln(N)
-  INTEGER Ia(Nelt) , Ja(Nelt)
+  REAL(8) :: A(Nelt), Rhs(N), Soln(N)
+  INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER i , irhs , isoln
+  INTEGER i, irhs, isoln
   !***FIRST EXECUTABLE STATEMENT  DTOUT
   !
   !         If RHS and SOLN are to be printed also.
@@ -133,12 +133,12 @@ SUBROUTINE DTOUT(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   isoln = 0
   IF ( Job==1.OR.Job==3 ) irhs = 1
   IF ( Job>1 ) isoln = 1
-  WRITE (Iunit,99001) N , Nelt , Isym , irhs , isoln
+  WRITE (Iunit,99001) N, Nelt, Isym, irhs, isoln
   99001 FORMAT (5I10)
   !
   !         Write out the matrix non-zeros in Triad format.
-  DO i = 1 , Nelt
-    WRITE (Iunit,99002) Ia(i) , Ja(i) , A(i)
+  DO i = 1, Nelt
+    WRITE (Iunit,99002) Ia(i), Ja(i), A(i)
     99002   FORMAT (1X,I5,1X,I5,1X,D16.7)
   ENDDO
   !

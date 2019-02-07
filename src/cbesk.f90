@@ -153,10 +153,10 @@ SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   !***END PROLOGUE  CBESK
   !
-  COMPLEX Cy , Z
-  REAL aa , alim , aln , arg , az , dig , elim , fn , Fnu , fnul , rl , &
-    r1m5 , tol , ufl , xx , yy , R1MACH , bb
-  INTEGER Ierr , k , Kode , k1 , k2 , mr , N , nn , nuf , nw , Nz , I1MACH
+  COMPLEX Cy, Z
+  REAL aa, alim, aln, arg, az, dig, elim, fn, Fnu, fnul, rl, &
+    r1m5, tol, ufl, xx, yy, R1MACH, bb
+  INTEGER Ierr, k, Kode, k1, k2, mr, N, nn, nuf, nw, Nz, I1MACH
   DIMENSION Cy(N)
   !***FIRST EXECUTABLE STATEMENT  CBESK
   Ierr = 0
@@ -271,7 +271,8 @@ SUBROUTINE CBESK(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   100  Nz = 0
   Ierr = 2
   RETURN
-  200  IF ( nw==(-1) ) GOTO 100
+  200 CONTINUE
+  IF ( nw==(-1) ) GOTO 100
   Nz = 0
   Ierr = 5
   RETURN

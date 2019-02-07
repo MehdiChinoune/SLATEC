@@ -115,11 +115,11 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CINVIT
   !
-  INTEGER i , j , k , M , N , s , ii , Mm , mp , Nm , uk , ip1 , its , km1 , &
+  INTEGER i, j, k, M, N, s, ii, Mm, mp, Nm, uk, ip1, its, km1, &
     Ierr
-  REAL Ar(Nm,*) , Ai(Nm,*) , Wr(*) , Wi(*) , Zr(Nm,*) , Zi(Nm,*)
-  REAL Rm1(N,*) , Rm2(N,*) , Rv1(*) , Rv2(*)
-  REAL x , y , eps3 , norm , normv , growto , ilambd , rlambd , ukroot
+  REAL Ar(Nm,*), Ai(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
+  REAL Rm1(N,*), Rm2(N,*), Rv1(*), Rv2(*)
+  REAL x, y, eps3, norm, normv, growto, ilambd, rlambd, ukroot
   REAL PYTHAG
   LOGICAL Select(N)
   !
@@ -128,12 +128,12 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
   uk = 0
   s = 1
   !
-  DO k = 1 , N
+  DO k = 1, N
     IF ( .NOT.Select(k) ) CYCLE
     IF ( s>Mm ) GOTO 300
     IF ( uk<k ) THEN
       !     .......... CHECK FOR POSSIBLE SPLITTING ..........
-      DO uk = k , N
+      DO uk = k, N
         IF ( uk==N ) EXIT
         IF ( Ar(uk+1,uk)==0.0E0.AND.Ai(uk+1,uk)==0.0E0 ) EXIT
       ENDDO
@@ -142,10 +142,10 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
       norm = 0.0E0
       mp = 1
       !
-      DO i = 1 , uk
+      DO i = 1, uk
         x = 0.0E0
         !
-        DO j = mp , uk
+        DO j = mp, uk
           x = x + PYTHAG(Ar(i,j),Ai(i,j))
         ENDDO
         !
@@ -176,7 +176,7 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
     !                TO ANY PREVIOUS EIGENVALUE ..........
     50     rlambd = rlambd + eps3
     !     .......... FOR I=K-1 STEP -1 UNTIL 1 DO -- ..........
-    100    DO ii = 1 , km1
+    100    DO ii = 1, km1
     i = k - ii
     IF ( Select(i).AND.ABS(Wr(i)-rlambd)<eps3.AND.ABS(Wi(i)-ilambd)<eps3 )&
       GOTO 50
@@ -187,9 +187,9 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
   !                AND INITIAL COMPLEX VECTOR ..........
   150    mp = 1
   !
-  DO i = 1 , uk
+  DO i = 1, uk
     !
-    DO j = mp , uk
+    DO j = mp, uk
       Rm1(i,j) = Ar(i,j)
       Rm2(i,j) = Ai(i,j)
     ENDDO
@@ -203,12 +203,12 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
   !                REPLACING ZERO PIVOTS BY EPS3 ..........
   IF ( uk/=1 ) THEN
     !
-    DO i = 2 , uk
+    DO i = 2, uk
       mp = i - 1
       IF ( PYTHAG(Rm1(i,mp),Rm2(i,mp))>PYTHAG(Rm1(mp,mp),Rm2(mp,mp)) )&
           THEN
         !
-        DO j = mp , uk
+        DO j = mp, uk
           y = Rm1(i,j)
           Rm1(i,j) = Rm1(mp,j)
           Rm1(mp,j) = y
@@ -222,7 +222,7 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
       CALL CDIV(Rm1(i,mp),Rm2(i,mp),Rm1(mp,mp),Rm2(mp,mp),x,y)
       IF ( x/=0.0E0.OR.y/=0.0E0 ) THEN
         !
-        DO j = i , uk
+        DO j = i, uk
           Rm1(i,j) = Rm1(i,j) - x*Rm1(mp,j) + y*Rm2(mp,j)
           Rm2(i,j) = Rm2(i,j) - x*Rm2(mp,j) - y*Rm1(mp,j)
         ENDDO
@@ -236,14 +236,14 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
   DO
     !     .......... BACK SUBSTITUTION
     !                FOR I=UK STEP -1 UNTIL 1 DO -- ..........
-    DO ii = 1 , uk
+    DO ii = 1, uk
       i = uk + 1 - ii
       x = Rv1(i)
       y = 0.0E0
       IF ( i/=uk ) THEN
         ip1 = i + 1
         !
-        DO j = ip1 , uk
+        DO j = ip1, uk
           x = x - Rm1(i,j)*Rv1(j) + Rm2(i,j)*Rv2(j)
           y = y - Rm1(i,j)*Rv2(j) - Rm2(i,j)*Rv1(j)
         ENDDO
@@ -257,7 +257,7 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
     norm = 0.0E0
     normv = 0.0E0
     !
-    DO i = 1 , uk
+    DO i = 1, uk
       x = PYTHAG(Rv1(i),Rv2(i))
       IF ( normv<x ) THEN
         normv = x
@@ -271,7 +271,7 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
       x = Rv1(j)
       y = Rv2(j)
       !
-      DO i = 1 , uk
+      DO i = 1, uk
         CALL CDIV(Rv1(i),Rv2(i),x,y,Zr(i,s),Zi(i,s))
       ENDDO
       !
@@ -290,7 +290,7 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
       y = eps3/(x+1.0E0)
       Rv1(1) = eps3
       !
-      DO i = 2 , uk
+      DO i = 2, uk
         Rv1(i) = y
       ENDDO
       !
@@ -299,7 +299,7 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
     ENDIF
   ENDDO
   !     .......... SET REMAINING VECTOR COMPONENTS TO ZERO ..........
-  DO i = j , N
+  DO i = j, N
     Zr(i,s) = 0.0E0
     Zi(i,s) = 0.0E0
   ENDDO
@@ -310,7 +310,8 @@ ENDDO
 GOTO 400
 !     .......... SET ERROR -- UNDERESTIMATE OF EIGENVECTOR
 !                SPACE REQUIRED ..........
-300  IF ( Ierr/=0 ) Ierr = Ierr - N
+300 CONTINUE
+IF ( Ierr/=0 ) Ierr = Ierr - N
 IF ( Ierr==0 ) Ierr = -(2*N+1)
 400  M = s - 1
 END SUBROUTINE CINVIT

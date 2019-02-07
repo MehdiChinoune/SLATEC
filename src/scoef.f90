@@ -5,11 +5,11 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   IMPLICIT NONE
   !*--SCOEF6
   !*** Start of declarations inserted by SPAG
-  REAL Ae , B , bbn , Beta , bn , brn , By , bykl , bys , Coef , cons , &
-    Cvec , EPS , FOUru , gam , Re , SDOT , SQOvfl , SRU , TWOu
-  REAL un , URO , Work , Yh , Yp , ypn
-  INTEGER i , Iflag , Inhomo , Iwork , j , k , kflag , ki , l , LPAr , &
-    mlso , Ncomp , ncomp2 , nf , Nfc , Nfcc , nfccm1 , Nic , Nrowb
+  REAL Ae, B, bbn, Beta, bn, brn, By, bykl, bys, Coef, cons, &
+    Cvec, EPS, FOUru, gam, Re, SDOT, SQOvfl, SRU, TWOu
+  REAL un, URO, Work, Yh, Yp, ypn
+  INTEGER i, Iflag, Inhomo, Iwork, j, k, kflag, ki, l, LPAr, &
+    mlso, Ncomp, ncomp2, nf, Nfc, Nfcc, nfccm1, Nic, Nrowb
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SCOEF
   !***SUBSIDIARY
@@ -81,23 +81,23 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  SCOEF
   !
-  DIMENSION Yh(Ncomp,*) , Yp(*) , B(Nrowb,*) , Beta(*) , Coef(*) , &
-    By(Nfcc,*) , Cvec(*) , Work(*) , Iwork(*)
+  DIMENSION Yh(Ncomp,*), Yp(*), B(Nrowb,*), Beta(*), Coef(*), &
+    By(Nfcc,*), Cvec(*), Work(*), Iwork(*)
   !
-  COMMON /ML5MCO/ URO , SRU , EPS , SQOvfl , TWOu , FOUru , LPAr
+  COMMON /ML5MCO/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
   !
   !     SET UP MATRIX  B*YH  AND VECTOR  BETA - B*YP
   !
   !***FIRST EXECUTABLE STATEMENT  SCOEF
   ncomp2 = Ncomp/2
-  DO k = 1 , Nfcc
-    DO j = 1 , Nfc
+  DO k = 1, Nfcc
+    DO j = 1, Nfc
       l = j
       IF ( Nfc/=Nfcc ) l = 2*j - 1
       By(k,l) = SDOT(Ncomp,B(k,1),Nrowb,Yh(1,j),1)
     ENDDO
     IF ( Nfc/=Nfcc ) THEN
-      DO j = 1 , Nfc
+      DO j = 1, Nfc
         l = 2*j
         bykl = SDOT(ncomp2,B(k,1),Nrowb,Yh(ncomp2+1,j),1)
         By(k,l) = SDOT(ncomp2,B(k,ncomp2+1),Nrowb,Yh(1,j),1) - bykl
@@ -141,7 +141,7 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
         bn = 0.
         un = 0.
         ypn = 0.
-        DO k = 1 , Ncomp
+        DO k = 1, Ncomp
           un = MAX(un,ABS(Yh(k,1)))
           ypn = MAX(ypn,ABS(Yp(k)))
           bn = MAX(bn,ABS(B(1,k)))
@@ -155,23 +155,23 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
       ELSE
         IF ( Inhomo/=3 ) RETURN
         IF ( Iwork(1)<Nfcc ) THEN
-          DO k = 1 , Nfcc
+          DO k = 1, Nfcc
             ki = 4*Nfcc + k
             Coef(k) = Work(ki)
           ENDDO
           RETURN
         ELSE
           Iflag = 3
-          DO k = 1 , Nfcc
+          DO k = 1, Nfcc
             Coef(k) = 0.
           ENDDO
           Coef(Nfcc) = 1.
           nfccm1 = Nfcc - 1
-          DO k = 1 , nfccm1
+          DO k = 1, nfccm1
             j = Nfcc - k
             l = Nfcc - j + 1
             gam = SDOT(l,By(j,j),Nfcc,Coef(j),1)/(Work(j)*By(j,j))
-            DO i = j , Nfcc
+            DO i = j, Nfcc
               Coef(i) = Coef(i) + gam*By(j,i)
             ENDDO
           ENDDO
@@ -189,4 +189,5 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   IF ( cons<=Re*ABS(Beta(1))+Ae+(Re*ypn+Ae)*bn ) Iflag = 1
   IF ( Inhomo==3 ) Coef(1) = 1.
   RETURN
-  99999 END SUBROUTINE SCOEF
+  99999 CONTINUE
+  END SUBROUTINE SCOEF

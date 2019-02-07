@@ -4,8 +4,8 @@ SUBROUTINE INDXB(I,Ir,Idx,Idp)
   IMPLICIT NONE
   !*--INDXB5
   !*** Start of declarations inserted by SPAG
-  REAL CNV , EPS
-  INTEGER I , id , Idp , Idx , IK , ipl , Ir , izh , K , NCMplx , NM , NPP
+  REAL CNV, EPS
+  INTEGER I, id, Idp, Idx, IK, ipl, Ir, izh, K, NCMplx, NM, NPP
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  INDXB
   !***SUBSIDIARY
@@ -23,7 +23,7 @@ SUBROUTINE INDXB(I,Ir,Idx,Idp)
   !   920422  Added statement so IDX would always be defined.  (WRB)
   !***END PROLOGUE  INDXB
   !
-  COMMON /CBLKT / NPP , K , EPS , CNV , NM , NCMplx , IK
+  COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  INDXB
   Idx = I
   Idp = 0
@@ -46,4 +46,5 @@ SUBROUTINE INDXB(I,Ir,Idx,Idp)
   ENDIF
   Idp = 0
   RETURN
-  99999 END SUBROUTINE INDXB
+  99999 CONTINUE
+  END SUBROUTINE INDXB

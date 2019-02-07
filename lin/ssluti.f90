@@ -45,12 +45,12 @@ SUBROUTINE SSLUTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  SSLUTI
   !     .. Scalar Arguments ..
-  INTEGER Isym , N , Nelt
+  INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
-  REAL A(N) , B(N) , Rwork(*) , X(N)
-  INTEGER Ia(Nelt) , Iwork(10) , Ja(Nelt)
+  REAL A(N), B(N), Rwork(*), X(N)
+  INTEGER Ia(Nelt), Iwork(10), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin , locil , lociu , locjl , locju , locl , locu
+  INTEGER locdin, locil, lociu, locjl, locju, locl, locu
   !     .. External Subroutines ..
   EXTERNAL SSLUI4
   !***FIRST EXECUTABLE STATEMENT  SSLUTI

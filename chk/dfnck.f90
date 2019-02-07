@@ -40,17 +40,17 @@ SUBROUTINE DFNCK(Lun,Kprint,Ipass)
   !   900330  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DFNCK
-  INTEGER i , Lun , Kprint , Ipass
-  REAL(8) :: D1MACH , y(105) , v(105) , errmax , errtol , abserr , &
-    relerr , D9ATN1 , D9LN2R , DACOSH , DAI , DAIE , DASINH , &
-    DATANH , DBESI0 , DBESI1 , DBESJ0 , DBESJ1 , DBESK0 , &
-    DBESK1 , DBESY0 , DBESY1 , DBETA , DBETAI , DBI , DBIE , &
-    DBINOM , DBSI0E , DBSI1E , DBSK0E , DBSK1E , DCBRT , &
-    DCHU , DCOSDG , DCOT , DDAWS , DE1 , DEI , DERF , &
-    DEXPRL , DFAC , DGAMI , DGAMIC , DGAMIT , DGAMMA , &
-    DGAMR , DLI , DLNREL , DPOCH , DPOCH1 , DPSI , DSINDG , &
+  INTEGER i, Lun, Kprint, Ipass
+  REAL(8) :: D1MACH, y(105), v(105), errmax, errtol, abserr, &
+    relerr, D9ATN1, D9LN2R, DACOSH, DAI, DAIE, DASINH, &
+    DATANH, DBESI0, DBESI1, DBESJ0, DBESJ1, DBESK0, &
+    DBESK1, DBESY0, DBESY1, DBETA, DBETAI, DBI, DBIE, &
+    DBINOM, DBSI0E, DBSI1E, DBSK0E, DBSK1E, DCBRT, &
+    DCHU, DCOSDG, DCOT, DDAWS, DE1, DEI, DERF, &
+    DEXPRL, DFAC, DGAMI, DGAMIC, DGAMIT, DGAMMA, &
+    DGAMR, DLI, DLNREL, DPOCH, DPOCH1, DPSI, DSINDG, &
     DSPENC
-  EXTERNAL DCOT , DERF , DGAMMA
+  EXTERNAL DCOT, DERF, DGAMMA
   !
   !     Correct values through different calculations are stored in V(*)
   !
@@ -321,11 +321,11 @@ SUBROUTINE DFNCK(Lun,Kprint,Ipass)
   !
   errmax = D1MACH(4)
   errtol = SQRT(errmax)
-  DO i = 1 , 105
+  DO i = 1, 105
     abserr = ABS(v(i)-y(i))
     relerr = abserr/ABS(v(i))
     errmax = MAX(relerr,errmax)
-    IF ( relerr>errtol.AND.Kprint>=2 ) WRITE (Lun,99001) i , relerr , abserr
+    IF ( relerr>errtol.AND.Kprint>=2 ) WRITE (Lun,99001) i, relerr, abserr
     99001   FORMAT (' For I  = ',I3,'  test fails with RELERR  = ',D38.30,&
       '  and ABSERR  = ',D38.30)
   ENDDO

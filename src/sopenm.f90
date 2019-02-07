@@ -4,7 +4,7 @@ SUBROUTINE SOPENM(Ipage,Lpage)
   IMPLICIT NONE
   !*--SOPENM5
   !*** Start of declarations inserted by SPAG
-  INTEGER ios , Ipage , ipagef , Lpage , lpg
+  INTEGER ios, Ipage, ipagef, Lpage, lpg
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SOPENM
   !***SUBSIDIARY

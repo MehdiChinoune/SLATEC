@@ -5,7 +5,7 @@ SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   IMPLICIT NONE
   !*--SSDCGS6
   !*** Start of declarations inserted by SPAG
-  REAL SSDI , SSMV
+  REAL SSDI, SSMV
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSDCGS
   !***PURPOSE  Diagonally Scaled CGS Sparse Ax=b Solver.
@@ -231,20 +231,20 @@ SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  SSDCGS
   !     .. Parameters ..
-  INTEGER LOCRB , LOCIB
+  INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  REAL Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
+  REAL Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
     Nelt
   !     .. Array Arguments ..
-  REAL A(N) , B(N) , Rwork(Lenw) , X(N)
-  INTEGER Ia(Nelt) , Iwork(Leniw) , Ja(Nelt)
+  REAL A(N), B(N), Rwork(Lenw), X(N)
+  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin , lociw , locp , locq , locr , locr0 , locu , locv1 , &
-    locv2 , locw
+  INTEGER locdin, lociw, locp, locq, locr, locr0, locu, locv1, &
+    locv2, locw
   !     .. External Subroutines ..
-  EXTERNAL SCGS , SCHKW , SS2Y , SSDI , SSDS , SSMV
+  EXTERNAL SCGS, SCHKW, SS2Y, SSDI, SSDS, SSMV
   !***FIRST EXECUTABLE STATEMENT  SSDCGS
   !
   Ierr = 0

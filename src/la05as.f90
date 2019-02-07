@@ -4,12 +4,12 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   IMPLICIT NONE
   !*--LA05AS5
   !*** Start of declarations inserted by SPAG
-  REAL eps , R1MACH
-  INTEGER i , Ia , idummy , ii , il , in , ipp , ipv , ir , j , jcost , jp ,&
-    k , k1 , k2 , kc , kcost , kj , kk , kl
-  INTEGER klc , kn , knp , kp , kpc , kpl , kq , kr , krl , ks , l , LCOl ,&
-    LENl , LENu , LP , LROw , mcp , N , nc , NCP
-  INTEGER Nz , nzc
+  REAL eps, R1MACH
+  INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp ,&
+    k, k1, k2, kc, kcost, kj, kk, kl
+  INTEGER klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, LCOl ,&
+    LENl, LENu, LP, LROw, mcp, N, nc, NCP
+  INTEGER Nz, nzc
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  LA05AS
   !***SUBSIDIARY
@@ -61,14 +61,14 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !***END PROLOGUE  LA05AS
   INTEGER Ip(N,2)
-  INTEGER Ind(Ia,2) , Iw(N,8)
-  REAL A(*) , amax , au , am , G , U , SMAll , W(*)
+  INTEGER Ind(Ia,2), Iw(N,8)
+  REAL A(*), amax, au, am, G, U, SMAll, W(*)
   LOGICAL first
-  CHARACTER(8) :: xern0 , xern1 , xern2
+  CHARACTER(8) :: xern0, xern1, xern2
   !
-  COMMON /LA05DS/ SMAll , LP , LENl , LENu , NCP , LROw , LCOl
+  COMMON /LA05DS/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
   ! EPS IS THE RELATIVE ACCURACY OF FLOATING-POINT COMPUTATION
-  SAVE eps , first
+  SAVE eps, first
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  LA05AS
   IF ( first ) eps = 2.0E0*R1MACH(4)
@@ -89,9 +89,9 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
     RETURN
   ELSE
     G = 0.
-    DO i = 1 , N
+    DO i = 1, N
       W(i) = 0.
-      DO j = 1 , 5
+      DO j = 1, 5
         Iw(i,j) = 0
       ENDDO
     ENDDO
@@ -99,9 +99,9 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
     ! FLUSH OUT SMALL ENTRIES, COUNT ELEMENTS IN ROWS AND COLUMNS
     l = 1
     LENu = Nz
-    DO idummy = 1 , Nz
+    DO idummy = 1, Nz
       IF ( l<=LENu ) THEN
-        DO k = l , LENu
+        DO k = l, LENu
           IF ( ABS(A(k))<=SMAll ) GOTO 20
           i = Ind(k,1)
           j = Ind(k,2)
@@ -131,10 +131,10 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
     !     JUST BEYOND WHERE THE LAST COMPONENT OF COLUMN I OF A WILL
     !     BE STORED.
     k = 1
-    DO ir = 1 , N
+    DO ir = 1, N
       k = k + Iw(ir,2)
       Ip(ir,2) = k
-      DO l = 1 , 2
+      DO l = 1, 2
         IF ( Iw(ir,l)<=0 ) GOTO 300
       ENDDO
     ENDDO
@@ -145,10 +145,10 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
     !     IS USED WE AUTOMATICALLY LEAVE IT POINTING TO THE FIRST ELEMENT.
     CALL MC20AS(N,LENu,A,Ind(1,2),Ip,Ind(1,1),0)
     kl = LENu
-    DO ii = 1 , N
+    DO ii = 1, N
       ir = N + 1 - ii
       kp = Ip(ir,1)
-      DO k = kp , kl
+      DO k = kp, kl
         j = Ind(k,2)
         IF ( Iw(j,5)==ir ) GOTO 100
         Iw(j,5) = ir
@@ -160,8 +160,8 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
     ENDDO
     !
     ! SET UP LINKED LISTS OF ROWS AND COLS WITH EQUAL NUMBERS OF NON-ZEROS.
-    DO l = 1 , 2
-      DO i = 1 , N
+    DO l = 1, 2
+      DO i = 1, N
         Nz = Iw(i,l)
         in = Iw(Nz,l+2)
         Iw(Nz,l+2) = i
@@ -173,20 +173,20 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
     !
     !
     ! START OF MAIN ELIMINATION LOOP.
-    DO ipv = 1 , N
+    DO ipv = 1, N
       ! FIND PIVOT. JCOST IS MARKOWITZ COST OF CHEAPEST PIVOT FOUND SO FAR,
       !     WHICH IS IN ROW IPP AND COLUMN JP.
       jcost = N*N
       ! LOOP ON LENGTH OF COLUMN TO BE SEARCHED
-      DO Nz = 1 , N
+      DO Nz = 1, N
         IF ( jcost<=(Nz-1)**2 ) EXIT
         j = Iw(Nz,4)
         ! SEARCH COLUMNS WITH NZ NON-ZEROS.
-        DO idummy = 1 , N
+        DO idummy = 1, N
           IF ( j<=0 ) EXIT
           kp = Ip(j,2)
           kl = kp + Iw(j,2) - 1
-          DO k = kp , kl
+          DO k = kp, kl
             i = Ind(k,1)
             kcost = (Nz-1)*(Iw(i,1)-1)
             IF ( kcost<jcost ) THEN
@@ -195,7 +195,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
                 amax = 0.
                 k1 = Ip(i,1)
                 k2 = Iw(i,1) + k1 - 1
-                DO kk = k1 , k2
+                DO kk = k1, k2
                   amax = MAX(amax,ABS(A(kk)))
                   IF ( Ind(kk,2)==j ) kj = kk
                 ENDDO
@@ -212,17 +212,17 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
         ENDDO
         ! SEARCH ROWS WITH NZ NON-ZEROS.
         i = Iw(Nz,3)
-        DO idummy = 1 , N
+        DO idummy = 1, N
           IF ( i<=0 ) EXIT
           amax = 0.
           kp = Ip(i,1)
           kl = kp + Iw(i,1) - 1
           ! FIND LARGEST ELEMENT IN THE ROW
-          DO k = kp , kl
+          DO k = kp, kl
             amax = MAX(ABS(A(k)),amax)
           ENDDO
           au = amax*U
-          DO k = kp , kl
+          DO k = kp, kl
             ! PERFORM STABILITY TEST.
             IF ( ABS(A(k))>=au ) THEN
               j = Ind(k,2)
@@ -243,8 +243,8 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
       ! REMOVE ROWS AND COLUMNS INVOLVED IN ELIMINATION FROM ORDERING VECTORS.
       40       kp = Ip(jp,2)
       kl = Iw(jp,2) + kp - 1
-      DO l = 1 , 2
-        DO k = kp , kl
+      DO l = 1, 2
+        DO k = kp, kl
           i = Ind(k,l)
           il = Iw(i,l+4)
           in = Iw(i,l+6)
@@ -263,12 +263,12 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
       Iw(ipp,5) = -ipv
       Iw(jp,6) = -ipv
       ! ELIMINATE PIVOTAL ROW FROM COLUMN FILE AND FIND PIVOT IN ROW FILE.
-      DO k = kp , kl
+      DO k = kp, kl
         j = Ind(k,2)
         kpc = Ip(j,2)
         Iw(j,2) = Iw(j,2) - 1
         klc = kpc + Iw(j,2)
-        DO kc = kpc , klc
+        DO kc = kpc, klc
           IF ( ipp==Ind(kc,1) ) EXIT
         ENDDO
         Ind(kc,1) = Ind(klc,1)
@@ -285,13 +285,13 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
       ! PERFORM ELIMINATION ITSELF, LOOPING ON NON-ZEROS IN PIVOT COLUMN.
       nzc = Iw(jp,2)
       IF ( nzc/=0 ) THEN
-        DO nc = 1 , nzc
+        DO nc = 1, nzc
           kc = Ip(jp,2) + nc - 1
           ir = Ind(kc,1)
           ! SEARCH NON-PIVOT ROW FOR ELEMENT TO BE ELIMINATED.
           kr = Ip(ir,1)
           krl = kr + Iw(ir,1) - 1
-          DO knp = kr , krl
+          DO knp = kr, krl
             IF ( jp==Ind(knp,2) ) EXIT
           ENDDO
           ! BRING ELEMENT TO BE ELIMINATED TO FRONT OF ITS ROW.
@@ -313,7 +313,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
           kpl = kp + Iw(ipp,1) - 1
           ! PLACE PIVOT ROW (EXCLUDING PIVOT ITSELF) IN W.
           IF ( kq<=kpl ) THEN
-            DO k = kq , kpl
+            DO k = kq, kpl
               j = Ind(k,2)
               W(j) = A(k)
             ENDDO
@@ -324,7 +324,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
           Ind(kr,2) = 0
           kr = kr + 1
           IF ( kr<=krl ) THEN
-            DO ks = kr , krl
+            DO ks = kr, krl
               j = Ind(ks,2)
               au = A(ks) + am*W(j)
               Ind(ks,2) = 0
@@ -335,7 +335,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
                 k = Ip(j,2)
                 kl = k + Iw(j,2) - 1
                 Iw(j,2) = kl - k
-                DO kk = k , kl
+                DO kk = k, kl
                   IF ( Ind(kk,1)==ir ) EXIT
                 ENDDO
                 Ind(kk,1) = Ind(kl,1)
@@ -352,7 +352,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
           !
           ! SCAN PIVOT ROW FOR FILLS.
           IF ( kq<=kpl ) THEN
-            DO ks = kq , kpl
+            DO ks = kq, kpl
               j = Ind(ks,2)
               au = am*W(j)
               IF ( ABS(au)<=SMAll ) GOTO 44
@@ -389,7 +389,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
               ! TRANSFER OLD ENTRY INTO NEW.
               Ip(j,2) = LCOl + 1
               IF ( kl>=k ) THEN
-                DO kk = k , kl
+                DO kk = k, kl
                   LCOl = LCOl + 1
                   Ind(LCOl,1) = Ind(kk,1)
                   Ind(kk,1) = 0
@@ -425,9 +425,9 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
       k1 = Ip(jp,2)
       k2 = Iw(jp,2) + k1 - 1
       Iw(jp,2) = 0
-      DO l = 1 , 2
+      DO l = 1, 2
         IF ( k2>=k1 ) THEN
-          DO k = k1 , k2
+          DO k = k1, k2
             ir = Ind(k,l)
             IF ( l==1 ) Ind(k,l) = 0
             Nz = Iw(ir,l)
@@ -446,32 +446,32 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
     !
     ! RESET COLUMN FILE TO REFER TO U AND STORE ROW/COL NUMBERS IN
     !     PIVOTAL ORDER IN IW(.,3),IW(.,4)
-    DO i = 1 , N
+    DO i = 1, N
       j = -Iw(i,5)
       Iw(j,3) = i
       j = -Iw(i,6)
       Iw(j,4) = i
       Iw(i,2) = 0
     ENDDO
-    DO i = 1 , N
+    DO i = 1, N
       kp = Ip(i,1)
       kl = Iw(i,1) + kp - 1
-      DO k = kp , kl
+      DO k = kp, kl
         j = Ind(k,2)
         Iw(j,2) = Iw(j,2) + 1
       ENDDO
     ENDDO
     k = 1
-    DO i = 1 , N
+    DO i = 1, N
       k = k + Iw(i,2)
       Ip(i,2) = k
     ENDDO
     LCOl = k - 1
-    DO ii = 1 , N
+    DO ii = 1, N
       i = Iw(ii,3)
       kp = Ip(i,1)
       kl = Iw(i,1) + kp - 1
-      DO k = kp , kl
+      DO k = kp, kl
         j = Ind(k,2)
         kn = Ip(j,2) - 1
         Ip(j,2) = kn
@@ -483,61 +483,65 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !
   !     THE FOLLOWING INSTRUCTIONS IMPLEMENT THE FAILURE EXITS.
   !
-  100  IF ( LP>0 ) THEN
-  WRITE (xern1,'(I8)') ir
-  WRITE (xern2,'(I8)') j
-  CALL XERMSG('SLATEC','LA05AS','MORE THAN ONE MATRIX '//&
-    'ENTRY.  HERE ROW = '//xern1//' AND COL = '//xern2,-4,1)
-ENDIF
-G = -4.
-RETURN
-!
-200  IF ( LP>0 ) THEN
-WRITE (xern0,'(I8)') k
-WRITE (xern1,'(I8)') i
-WRITE (xern2,'(I8)') j
-CALL XERMSG('SLATEC','LA05AS','ELEMENT K = '//xern0//&
-  ' IS OUT OF BOUNDS.$$HERE ROW = '//xern1//' AND COL = '//&
-  xern2,-3,1)
-ENDIF
-G = -3.
-RETURN
-!
-300  IF ( LP>0 ) THEN
-WRITE (xern1,'(I8)') l
-CALL XERMSG('SLATEC','LA05AS','ROW OR COLUMN HAS NO '//&
-'ELEMENTS.  HERE INDEX = '//xern1,-2,1)
-ENDIF
-G = -2.
-RETURN
-!
-400  IF ( LP>0 ) CALL XERMSG('SLATEC','LA05AS',&
-'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.'&
-,-7,1)
-G = -7.
-RETURN
-!
-500  ipv = ipv + 1
-Iw(ipv,1) = ir
-DO i = 1 , N
-ii = -Iw(i,l+4)
-IF ( ii>0 ) Iw(ii,1) = i
-ENDDO
-!
-IF ( LP>0 ) THEN
-xern1 = 'ROWS'
-IF ( l==2 ) xern1 = 'COLUMNS'
-CALL XERMSG('SLATEC','LA05AS','DEPENDANT '//xern1,-5,1)
-DO
-!
-WRITE (xern1,'(I8)') Iw(i,1)
-xern2 = ' '
-IF ( i+1<=ipv ) WRITE (xern2,'(I8)') Iw(i+1,1)
-CALL XERMSG('SLATEC','LA05AS','DEPENDENT VECTOR INDICES ARE '//xern1//&
-  ' AND '//xern2,-5,1)
-i = i + 2
-IF ( i>ipv ) EXIT
-ENDDO
-ENDIF
-G = -5.
+  100 CONTINUE
+  IF ( LP>0 ) THEN
+    WRITE (xern1,'(I8)') ir
+    WRITE (xern2,'(I8)') j
+    CALL XERMSG('SLATEC','LA05AS','MORE THAN ONE MATRIX '//&
+      'ENTRY.  HERE ROW = '//xern1//' AND COL = '//xern2,-4,1)
+  ENDIF
+  G = -4.
+  RETURN
+  !
+  200 CONTINUE
+  IF ( LP>0 ) THEN
+    WRITE (xern0,'(I8)') k
+    WRITE (xern1,'(I8)') i
+    WRITE (xern2,'(I8)') j
+    CALL XERMSG('SLATEC','LA05AS','ELEMENT K = '//xern0//&
+      ' IS OUT OF BOUNDS.$$HERE ROW = '//xern1//' AND COL = '//&
+      xern2,-3,1)
+  ENDIF
+  G = -3.
+  RETURN
+  !
+  300 CONTINUE
+  IF ( LP>0 ) THEN
+    WRITE (xern1,'(I8)') l
+    CALL XERMSG('SLATEC','LA05AS','ROW OR COLUMN HAS NO '//&
+      'ELEMENTS.  HERE INDEX = '//xern1,-2,1)
+  ENDIF
+  G = -2.
+  RETURN
+  !
+  400 CONTINUE
+  IF ( LP>0 ) CALL XERMSG('SLATEC','LA05AS',&
+    'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.'&
+    ,-7,1)
+  G = -7.
+  RETURN
+  !
+  500  ipv = ipv + 1
+  Iw(ipv,1) = ir
+  DO i = 1, N
+    ii = -Iw(i,l+4)
+    IF ( ii>0 ) Iw(ii,1) = i
+  ENDDO
+  !
+  IF ( LP>0 ) THEN
+    xern1 = 'ROWS'
+    IF ( l==2 ) xern1 = 'COLUMNS'
+    CALL XERMSG('SLATEC','LA05AS','DEPENDANT '//xern1,-5,1)
+    DO
+      !
+      WRITE (xern1,'(I8)') Iw(i,1)
+      xern2 = ' '
+      IF ( i+1<=ipv ) WRITE (xern2,'(I8)') Iw(i+1,1)
+      CALL XERMSG('SLATEC','LA05AS','DEPENDENT VECTOR INDICES ARE '//xern1//&
+        ' AND '//xern2,-5,1)
+      i = i + 2
+      IF ( i>ipv ) EXIT
+    ENDDO
+  ENDIF
+  G = -5.
 END SUBROUTINE LA05AS

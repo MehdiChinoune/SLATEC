@@ -30,7 +30,7 @@ REAL(8) FUNCTION DEI(X)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DEI
-  REAL(8) :: X , DE1
+  REAL(8) :: X, DE1
   !***FIRST EXECUTABLE STATEMENT  DEI
   DEI = -DE1(-X)
   !

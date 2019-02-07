@@ -29,25 +29,25 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !***END PROLOGUE  ZUNI2
   !     COMPLEX AI,ARG,ASUM,BSUM,CFN,CI,CID,CIP,CONE,CRSC,CSCL,CSR,CSS,
   !    *CZERO,C1,C2,DAI,PHI,RZ,S1,S2,Y,Z,ZB,ZETA1,ZETA2,ZN
-  REAL(8) :: aarg , aic , aii , air , Alim , ang , aphi , argi , &
-    argr , ascle , asumi , asumr , bry , bsumi , bsumr , &
-    cidi , cipi , cipr , coner , crsc , cscl , csrr , cssr , &
-    c1r , c2i , c2m , c2r , daii , dair , Elim , fn , Fnu , &
-    Fnul , hpi , phii , phir , rast , raz , rs1 , rzi , rzr , &
-    sti , str , s1i , s1r , s2i , s2r , Tol , Yi , Yr , zbi , &
-    zbr , zeroi , zeror , zeta1i , zeta1r , zeta2i , zeta2r , &
-    Zi , zni , znr , Zr , cyr , cyi , D1MACH , ZABS , car , &
+  REAL(8) :: aarg, aic, aii, air, Alim, ang, aphi, argi, &
+    argr, ascle, asumi, asumr, bry, bsumi, bsumr, &
+    cidi, cipi, cipr, coner, crsc, cscl, csrr, cssr, &
+    c1r, c2i, c2m, c2r, daii, dair, Elim, fn, Fnu, &
+    Fnul, hpi, phii, phir, rast, raz, rs1, rzi, rzr, &
+    sti, str, s1i, s1r, s2i, s2r, Tol, Yi, Yr, zbi, &
+    zbr, zeroi, zeror, zeta1i, zeta1r, zeta2i, zeta2r, &
+    Zi, zni, znr, Zr, cyr, cyi, D1MACH, ZABS, car, &
     sar
-  INTEGER i , iflag , in , inu , j , k , Kode , N , nai , nd , ndai , &
-    Nlast , nn , nuf , nw , Nz , idum
-  DIMENSION bry(3) , Yr(N) , Yi(N) , cipr(4) , cipi(4) , cssr(3) , csrr(3) , &
-    cyr(2) , cyi(2)
+  INTEGER i, iflag, in, inu, j, k, Kode, N, nai, nd, ndai, &
+    Nlast, nn, nuf, nw, Nz, idum
+  DIMENSION bry(3), Yr(N), Yi(N), cipr(4), cipi(4), cssr(3), csrr(3), &
+    cyr(2), cyi(2)
   EXTERNAL ZABS
-  DATA zeror , zeroi , coner/0.0D0 , 0.0D0 , 1.0D0/
-  DATA cipr(1) , cipi(1) , cipr(2) , cipi(2) , cipr(3) , cipi(3) , cipr(4) , &
-    cipi(4)/1.0D0 , 0.0D0 , 0.0D0 , 1.0D0 , -1.0D0 , 0.0D0 , 0.0D0 , &
+  DATA zeror, zeroi, coner/0.0D0, 0.0D0, 1.0D0/
+  DATA cipr(1), cipi(1), cipr(2), cipi(2), cipr(3), cipi(3), cipr(4), &
+    cipi(4)/1.0D0, 0.0D0, 0.0D0, 1.0D0, -1.0D0, 0.0D0, 0.0D0, &
     -1.0D0/
-  DATA hpi , aic/1.57079632679489662D+00 , 1.265512123484645396D+00/
+  DATA hpi, aic/1.57079632679489662D+00, 1.265512123484645396D+00/
   !***FIRST EXECUTABLE STATEMENT  ZUNI2
   Nz = 0
   nd = N
@@ -113,14 +113,14 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   IF ( ABS(rs1)>Elim ) THEN
     IF ( rs1>0.0D0 ) GOTO 400
     Nz = N
-    DO i = 1 , N
+    DO i = 1, N
       Yr(i) = zeror
       Yi(i) = zeroi
     ENDDO
     GOTO 99999
   ENDIF
   100  nn = MIN(2,nd)
-  DO i = 1 , nn
+  DO i = 1, nn
     fn = Fnu + (nd-i)
     CALL ZUNHJ(znr,zni,fn,0,Tol,phir,phii,argr,argi,zeta1r,zeta1i,zeta2r,&
       zeta2i,asumr,asumi,bsumr,bsumi)
@@ -207,7 +207,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     ascle = bry(iflag)
     k = nd - 2
     fn = k
-    DO i = 3 , nd
+    DO i = 3, nd
       c2r = s2r
       c2i = s2i
       s2r = s1r + (Fnu+fn)*(rzr*c2r-rzi*c2i)
@@ -241,43 +241,45 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     ENDDO
   ENDIF
   200  RETURN
-  300  IF ( rs1<=0.0D0 ) THEN
-  !-----------------------------------------------------------------------
-  !     SET UNDERFLOW AND UPDATE PARAMETERS
-  !-----------------------------------------------------------------------
-  Yr(nd) = zeror
-  Yi(nd) = zeroi
-  Nz = Nz + 1
-  nd = nd - 1
-  IF ( nd==0 ) GOTO 200
-  CALL ZUOIK(Zr,Zi,Fnu,Kode,1,nd,Yr,Yi,nuf,Tol,Elim,Alim)
-  IF ( nuf>=0 ) THEN
-    nd = nd - nuf
-    Nz = Nz + nuf
+  300 CONTINUE
+  IF ( rs1<=0.0D0 ) THEN
+    !-----------------------------------------------------------------------
+    !     SET UNDERFLOW AND UPDATE PARAMETERS
+    !-----------------------------------------------------------------------
+    Yr(nd) = zeror
+    Yi(nd) = zeroi
+    Nz = Nz + 1
+    nd = nd - 1
     IF ( nd==0 ) GOTO 200
-    fn = Fnu + (nd-1)
-    IF ( fn<Fnul ) THEN
-      Nlast = nd
-      RETURN
-    ELSE
-      !      FN = CIDI
-      !      J = NUF + 1
-      !      K = MOD(J,4) + 1
-      !      S1R = CIPR(K)
-      !      S1I = CIPI(K)
-      !      IF (FN.LT.0.0D0) S1I = -S1I
-      !      STR = C2R*S1R - C2I*S1I
-      !      C2I = C2R*S1I + C2I*S1R
-      !      C2R = STR
-      in = inu + nd - 1
-      in = MOD(in,4) + 1
-      c2r = car*cipr(in) - sar*cipi(in)
-      c2i = car*cipi(in) + sar*cipr(in)
-      IF ( Zi<=0.0D0 ) c2i = -c2i
-      GOTO 100
+    CALL ZUOIK(Zr,Zi,Fnu,Kode,1,nd,Yr,Yi,nuf,Tol,Elim,Alim)
+    IF ( nuf>=0 ) THEN
+      nd = nd - nuf
+      Nz = Nz + nuf
+      IF ( nd==0 ) GOTO 200
+      fn = Fnu + (nd-1)
+      IF ( fn<Fnul ) THEN
+        Nlast = nd
+        RETURN
+      ELSE
+        !      FN = CIDI
+        !      J = NUF + 1
+        !      K = MOD(J,4) + 1
+        !      S1R = CIPR(K)
+        !      S1I = CIPI(K)
+        !      IF (FN.LT.0.0D0) S1I = -S1I
+        !      STR = C2R*S1R - C2I*S1I
+        !      C2I = C2R*S1I + C2I*S1R
+        !      C2R = STR
+        in = inu + nd - 1
+        in = MOD(in,4) + 1
+        c2r = car*cipr(in) - sar*cipi(in)
+        c2i = car*cipi(in) + sar*cipr(in)
+        IF ( Zi<=0.0D0 ) c2i = -c2i
+        GOTO 100
+      ENDIF
     ENDIF
   ENDIF
-ENDIF
-400  Nz = -1
-RETURN
-99999 END SUBROUTINE ZUNI2
+  400  Nz = -1
+  RETURN
+  99999 CONTINUE
+  END SUBROUTINE ZUNI2

@@ -5,7 +5,7 @@ SUBROUTINE SSJAC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   IMPLICIT NONE
   !*--SSJAC6
   !*** Start of declarations inserted by SPAG
-  REAL SSDI , SSMV
+  REAL SSDI, SSMV
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSJAC
   !***PURPOSE  Jacobi's Method Iterative Sparse Ax = b Solver.
@@ -219,19 +219,19 @@ SUBROUTINE SSJAC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   920511  Added complete declaration section.  (WRB)
   !***END PROLOGUE  SSJAC
   !     .. Parameters ..
-  INTEGER LOCRB , LOCIB
+  INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  REAL Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
+  REAL Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
     Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt) , B(N) , Rwork(Lenw) , X(N)
-  INTEGER Ia(Nelt) , Iwork(Leniw) , Ja(Nelt)
+  REAL A(Nelt), B(N), Rwork(Lenw), X(N)
+  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locd , locdz , lociw , locr , locw , locz
+  INTEGER locd, locdz, lociw, locr, locw, locz
   !     .. External Subroutines ..
-  EXTERNAL SCHKW , SIR , SS2Y , SSDI , SSDS , SSMV
+  EXTERNAL SCHKW, SIR, SS2Y, SSDI, SSDS, SSMV
   !***FIRST EXECUTABLE STATEMENT  SSJAC
   !
   Ierr = 0

@@ -4,8 +4,8 @@ FUNCTION BESI1(X)
   IMPLICIT NONE
   !*--BESI15
   !*** Start of declarations inserted by SPAG
-  REAL BESI1 , BESI1E , bi1cs , CSEVL , R1MACH , X , xmax , xmin , xsml , y
-  INTEGER INITS , nti1
+  REAL BESI1, BESI1E, bi1cs, CSEVL, R1MACH, X, xmax, xmin, xsml, y
+  INTEGER INITS, nti1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESI1
   !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
@@ -40,7 +40,7 @@ FUNCTION BESI1(X)
   !***END PROLOGUE  BESI1
   DIMENSION bi1cs(11)
   LOGICAL first
-  SAVE bi1cs , nti1 , xmin , xsml , xmax , first
+  SAVE bi1cs, nti1, xmin, xsml, xmax, first
   DATA bi1cs(1)/ - .001971713261099859E0/
   DATA bi1cs(2)/.40734887667546481E0/
   DATA bi1cs(3)/.034838994299959456E0/
@@ -81,4 +81,5 @@ FUNCTION BESI1(X)
   IF ( y>xsml ) BESI1 = X*(.875+CSEVL(y*y/4.5-1.,bi1cs,nti1))
   RETURN
   !
-  99999 END FUNCTION BESI1
+  99999 CONTINUE
+  END FUNCTION BESI1

@@ -83,28 +83,28 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
   !     PARAMETER (MAXN=69, MXNELT=5000, MAXIW=5000, MAXRW=5000)
   !
   !     .. Parameters ..
-  INTEGER MAXN , MXNELT , MAXIW , MAXRW
+  INTEGER MAXN, MXNELT, MAXIW, MAXRW
   PARAMETER (MAXN=25,MXNELT=500,MAXIW=1000,MAXRW=1000)
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Arrays in Common ..
   REAL(8) :: SOLn(MAXN)
   !     .. Local Scalars ..
-  REAL(8) :: dens , err , factor , tol
-  INTEGER ierr , isym , iter , itmax , itol , itolgm , iunit , k , kase , &
-    leniw , lenw , n , nelt , neltmx , nfail , nmax , nsave
+  REAL(8) :: dens, err, factor, tol
+  INTEGER ierr, isym, iter, itmax, itol, itolgm, iunit, k, kase, &
+    leniw, lenw, n, nelt, neltmx, nfail, nmax, nsave
   !     .. Local Arrays ..
-  REAL(8) :: a(MXNELT) , f(MAXN) , rwork(MAXRW) , xiter(MAXN)
-  INTEGER ia(MXNELT) , iwork(MAXIW) , ja(MXNELT)
+  REAL(8) :: a(MXNELT), f(MAXN), rwork(MAXRW), xiter(MAXN)
+  INTEGER ia(MXNELT), iwork(MAXIW), ja(MXNELT)
   !     .. External Functions ..
   REAL(8) :: D1MACH
   EXTERNAL D1MACH
   !     .. External Subroutines ..
-  EXTERNAL DCPPLT , DFILL , DRMGEN , DS2Y , DSDBCG , DSDCG , DSDCGN , &
-    DSDCGS , DSDGMR , DSDOMN , DSGS , DSICCG , DSILUR , DSJAC , &
-    DSLUBC , DSLUCN , DSLUCS , DSLUGM , DSLUOM , DUTERR
+  EXTERNAL DCPPLT, DFILL, DRMGEN, DS2Y, DSDBCG, DSDCG, DSDCGN, &
+    DSDCGS, DSDGMR, DSDOMN, DSGS, DSICCG, DSILUR, DSJAC, &
+    DSLUBC, DSLUCN, DSLUCS, DSLUGM, DSLUOM, DUTERR
   !     .. Intrinsic Functions ..
-  INTRINSIC MAX , REAL
+  INTRINSIC MAX, REAL
   !     .. Common blocks ..
   COMMON /DSLBLK/ SOLn
   !
@@ -142,7 +142,7 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
   !
   !     Test routines using various convergence criteria.
   !
-  DO kase = 1 , 3
+  DO kase = 1, 3
     IF ( kase==1.OR.kase==2 ) itol = kase
     IF ( kase==3 ) itol = 11
     !
@@ -151,8 +151,8 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
     !         is generated.  The amount of non-symmetry is controlled by
     !         user.
     !
-    DO isym = 0 , 1
-      IF ( Kprint>=2 ) WRITE (Lun,99001) n , kase , isym
+    DO isym = 0, 1
+      IF ( Kprint>=2 ) WRITE (Lun,99001) n, kase, isym
       99001     FORMAT ('1'/' Running tests with  N =',I3,',  KASE =',I2,',  ISYM =',&
         I2)
       !
@@ -174,7 +174,7 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
         dens = REAL(2*nelt)/(n*n)
       ENDIF
       IF ( Kprint>=2 ) THEN
-        WRITE (Lun,99003) n , nelt , dens
+        WRITE (Lun,99003) n, nelt, dens
         99003       FORMAT (/'                * RANDOM Matrix of size',I5,&
           '*'/'                ','Number of non-zeros & Density = ',&
           I5,1P,D16.7)
@@ -199,7 +199,7 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * * *   DSJAC   * * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSJAC ' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSJAC ', itol, isym
       CALL DFILL(n,xiter,0.0D0)
       !
       CALL DSJAC(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,2*itmax,iter,err,ierr,&
@@ -209,7 +209,7 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * *  DSGS  * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSGS  ' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSGS  ', itol, isym
       CALL DFILL(n,xiter,0.0D0)
       !
       CALL DSGS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -219,7 +219,7 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * * *   DSILUR   * * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSILUR' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSILUR', itol, isym
       CALL DFILL(n,xiter,0.0D0)
       !
       CALL DSILUR(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -230,7 +230,7 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
       !         * * * * * *   DSDCG    * * * * * *
       !
       IF ( isym==1 ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSDCG' , itol , isym
+        IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSDCG', itol, isym
         CALL DFILL(n,xiter,0.0D0)
         !
         CALL DSDCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -242,7 +242,7 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
       !         * * * * * *    DSICCG    * * * * * *
       !
       IF ( isym==1 ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSICCG' , itol , isym
+        IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSICCG', itol, isym
         CALL DFILL(n,xiter,0.0D0)
         !
         CALL DSICCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,&
@@ -253,7 +253,7 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * * *    DSDCGN   * * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSDCGN' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSDCGN', itol, isym
       CALL DFILL(n,xiter,0.0D0)
       !
       CALL DSDCGN(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -263,7 +263,7 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * * *   DSLUCN   * * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSLUCN' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSLUCN', itol, isym
       CALL DFILL(n,xiter,0.0D0)
       !
       CALL DSLUCN(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -273,7 +273,7 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * * *    DSDBCG   * * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSDBCG' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSDBCG', itol, isym
       CALL DFILL(n,xiter,0.0D0)
       !
       CALL DSDBCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -283,7 +283,7 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * * *   DSLUBC   * * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSLUBC' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSLUBC', itol, isym
       CALL DFILL(n,xiter,0.0D0)
       !
       CALL DSLUBC(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -293,7 +293,7 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * * *    DSDCGS   * * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSDCGS' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSDCGS', itol, isym
       CALL DFILL(n,xiter,0.0D0)
       !
       CALL DSDCGS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -303,7 +303,7 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * * *   DSLUCS   * * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSLUCS' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'DSLUCS', itol, isym
       CALL DFILL(n,xiter,0.0D0)
       !
       CALL DSLUCS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -314,8 +314,8 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
       !         * * * * * *    DSDOMN   * * * * * *
       !
       !VD$ NOVECTOR
-      DO nsave = 0 , 3
-        IF ( Kprint>=3 ) WRITE (Lun,99009) 'DSDOMN' , itol , isym , nsave
+      DO nsave = 0, 3
+        IF ( Kprint>=3 ) WRITE (Lun,99009) 'DSDOMN', itol, isym, nsave
         CALL DFILL(n,xiter,0.0D0)
         !
         CALL DSDOMN(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&
@@ -327,8 +327,8 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
       !         * * * * * *   DSLUOM   * * * * * *
       !
       !VD$ NOVECTOR
-      DO nsave = 0 , 3
-        IF ( Kprint>=3 ) WRITE (Lun,99009) 'DSLUOM' , itol , isym , nsave
+      DO nsave = 0, 3
+        IF ( Kprint>=3 ) WRITE (Lun,99009) 'DSLUOM', itol, isym, nsave
         CALL DFILL(n,xiter,0.0D0)
         !
         CALL DSLUOM(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&
@@ -340,8 +340,8 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
       !         * * * * * *   DSDGMR   * * * * * *
       !
       !VD$ NOVECTOR
-      DO nsave = 5 , 12
-        IF ( Kprint>=3 ) WRITE (Lun,99009) 'DSDGMR' , itol , isym , nsave
+      DO nsave = 5, 12
+        IF ( Kprint>=3 ) WRITE (Lun,99009) 'DSDGMR', itol, isym, nsave
         CALL DFILL(n,xiter,0.0D0)
         itolgm = 0
         !
@@ -354,8 +354,8 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
       !         * * * * * *   DSLUGM   * * * * * *
       !
       !VD$ NOVECTOR
-      DO nsave = 5 , 12
-        IF ( Kprint>=3 ) WRITE (Lun,99009) 'DSLUGM' , itol , isym , nsave
+      DO nsave = 5, 12
+        IF ( Kprint>=3 ) WRITE (Lun,99009) 'DSLUGM', itol, isym, nsave
         CALL DFILL(n,xiter,0.0D0)
         !
         CALL DSLUGM(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&

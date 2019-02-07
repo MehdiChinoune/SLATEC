@@ -4,7 +4,7 @@ FUNCTION COSDG(X)
   IMPLICIT NONE
   !*--COSDG5
   !*** Start of declarations inserted by SPAG
-  REAL COSDG , raddeg , X
+  REAL COSDG, raddeg, X
   INTEGER n
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  COSDG

@@ -122,31 +122,31 @@ SUBROUTINE DCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  DCPPLT
   !     .. Scalar Arguments ..
-  INTEGER Isym , Iunit , N , Nelt
+  INTEGER Isym, Iunit, N, Nelt
   !     .. Array Arguments ..
   REAL(8) :: A(Nelt)
-  INTEGER Ia(Nelt) , Ja(Nelt)
+  INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Parameters ..
   INTEGER MAXORD
   PARAMETER (MAXORD=225)
   !     .. Local Scalars ..
-  INTEGER i , icol , irow , j , jbgn , jend , nmax
+  INTEGER i, icol, irow, j, jbgn, jend, nmax
   !     .. Local Arrays ..
   CHARACTER chmat(MAXORD)*(MAXORD)
   !     .. Intrinsic Functions ..
-  INTRINSIC MIN , MOD , REAL
+  INTRINSIC MIN, MOD, REAL
   !***FIRST EXECUTABLE STATEMENT  DCPPLT
   !
   !         Set up the character matrix...
   !
   nmax = MIN(MAXORD,N)
-  DO i = 1 , nmax
+  DO i = 1, nmax
     chmat(i)(1:nmax) = ' '
   ENDDO
-  DO icol = 1 , nmax
+  DO icol = 1, nmax
     jbgn = Ja(icol)
     jend = Ja(icol+1) - 1
-    DO j = jbgn , jend
+    DO j = jbgn, jend
       irow = Ia(j)
       IF ( irow<=nmax ) THEN
         IF ( Isym/=0 ) THEN
@@ -181,7 +181,7 @@ SUBROUTINE DCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   ENDDO
   !
   !         Write out the heading.
-  WRITE (Iunit,99001) N , Nelt , REAL(Nelt)/(N*N)
+  WRITE (Iunit,99001) N, Nelt, REAL(Nelt)/(N*N)
   !
   99001 FORMAT (/'**** Picture of Column SLAP matrix follows ****'/&
     ' N, NELT and Density = ',2I10,D16.7)
@@ -190,8 +190,8 @@ SUBROUTINE DCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   99002 FORMAT (4X,225(I1))
   !
   !         Write out the character representations matrix elements.
-  DO irow = 1 , nmax
-    WRITE (Iunit,99003) irow , chmat(irow)(1:nmax)
+  DO irow = 1, nmax
+    WRITE (Iunit,99003) irow, chmat(irow)(1:nmax)
     99003   FORMAT (1X,I3,A)
   ENDDO
   RETURN

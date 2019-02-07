@@ -101,23 +101,23 @@ SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
   !***END PROLOGUE  CHPR2
   !     .. Scalar Arguments ..
   COMPLEX Alpha
-  INTEGER Incx , Incy , N
+  INTEGER Incx, Incy, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  COMPLEX Ap(*) , X(*) , Y(*)
+  COMPLEX Ap(*), X(*), Y(*)
   !     .. Parameters ..
   COMPLEX ZERO
   PARAMETER (ZERO=(0.0E+0,0.0E+0))
   !     .. Local Scalars ..
-  COMPLEX temp1 , temp2
-  INTEGER i , info , ix , iy , j , jx , jy , k , kk , kx , ky
+  COMPLEX temp1, temp2
+  INTEGER i, info, ix, iy, j, jx, jy, k, kk, kx, ky
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
-  INTRINSIC CONJG , REAL
+  INTRINSIC CONJG, REAL
   !***FIRST EXECUTABLE STATEMENT  CHPR2
   !
   !     Test the input parameters.
@@ -168,12 +168,12 @@ SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
     !        Form  A  when upper triangle is stored in AP.
     !
     IF ( (Incx==1).AND.(Incy==1) ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( (X(j)/=ZERO).OR.(Y(j)/=ZERO) ) THEN
           temp1 = Alpha*CONJG(Y(j))
           temp2 = CONJG(Alpha*X(j))
           k = kk
-          DO i = 1 , j - 1
+          DO i = 1, j - 1
             Ap(k) = Ap(k) + X(i)*temp1 + Y(i)*temp2
             k = k + 1
           ENDDO
@@ -184,13 +184,13 @@ SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
         kk = kk + j
       ENDDO
     ELSE
-      DO j = 1 , N
+      DO j = 1, N
         IF ( (X(jx)/=ZERO).OR.(Y(jy)/=ZERO) ) THEN
           temp1 = Alpha*CONJG(Y(jy))
           temp2 = CONJG(Alpha*X(jx))
           ix = kx
           iy = ky
-          DO k = kk , kk + j - 2
+          DO k = kk, kk + j - 2
             Ap(k) = Ap(k) + X(ix)*temp1 + Y(iy)*temp2
             ix = ix + Incx
             iy = iy + Incy
@@ -208,13 +208,13 @@ SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
     !        Form  A  when lower triangle is stored in AP.
     !
   ELSEIF ( (Incx==1).AND.(Incy==1) ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       IF ( (X(j)/=ZERO).OR.(Y(j)/=ZERO) ) THEN
         temp1 = Alpha*CONJG(Y(j))
         temp2 = CONJG(Alpha*X(j))
         Ap(kk) = REAL(Ap(kk)) + REAL(X(j)*temp1+Y(j)*temp2)
         k = kk + 1
-        DO i = j + 1 , N
+        DO i = j + 1, N
           Ap(k) = Ap(k) + X(i)*temp1 + Y(i)*temp2
           k = k + 1
         ENDDO
@@ -224,14 +224,14 @@ SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
       kk = kk + N - j + 1
     ENDDO
   ELSE
-    DO j = 1 , N
+    DO j = 1, N
       IF ( (X(jx)/=ZERO).OR.(Y(jy)/=ZERO) ) THEN
         temp1 = Alpha*CONJG(Y(jy))
         temp2 = CONJG(Alpha*X(jx))
         Ap(kk) = REAL(Ap(kk)) + REAL(X(jx)*temp1+Y(jy)*temp2)
         ix = jx
         iy = jy
-        DO k = kk + 1 , kk + N - j
+        DO k = kk + 1, kk + N - j
           ix = ix + Incx
           iy = iy + Incy
           Ap(k) = Ap(k) + X(ix)*temp1 + Y(iy)*temp2

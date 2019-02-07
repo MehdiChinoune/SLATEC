@@ -4,9 +4,9 @@ FUNCTION BESI1E(X)
   IMPLICIT NONE
   !*--BESI1E5
   !*** Start of declarations inserted by SPAG
-  REAL ai12cs , ai1cs , BESI1E , bi1cs , CSEVL , R1MACH , X , xmin , xsml , &
+  REAL ai12cs, ai1cs, BESI1E, bi1cs, CSEVL, R1MACH, X, xmin, xsml, &
     y
-  INTEGER INITS , ntai1 , ntai12 , nti1
+  INTEGER INITS, ntai1, ntai12, nti1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESI1E
   !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
@@ -53,9 +53,9 @@ FUNCTION BESI1E(X)
   !           (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  BESI1E
-  DIMENSION bi1cs(11) , ai1cs(21) , ai12cs(22)
+  DIMENSION bi1cs(11), ai1cs(21), ai12cs(22)
   LOGICAL first
-  SAVE bi1cs , ai1cs , ai12cs , nti1 , ntai1 , ntai12 , xmin , xsml , first
+  SAVE bi1cs, ai1cs, ai12cs, nti1, ntai1, ntai12, xmin, xsml, first
   DATA bi1cs(1)/ - .001971713261099859E0/
   DATA bi1cs(2)/.40734887667546481E0/
   DATA bi1cs(3)/.034838994299959456E0/
@@ -141,4 +141,5 @@ FUNCTION BESI1E(X)
   BESI1E = EXP(-y)*BESI1E
   RETURN
   !
-  99999 END FUNCTION BESI1E
+  99999 CONTINUE
+  END FUNCTION BESI1E

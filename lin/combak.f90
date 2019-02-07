@@ -73,9 +73,9 @@ SUBROUTINE COMBAK(Nm,Low,Igh,Ar,Ai,Int,M,Zr,Zi)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  COMBAK
   !
-  INTEGER i , j , M , la , mm , mp , Nm , Igh , kp1 , Low , mp1
-  REAL Ar(Nm,*) , Ai(Nm,*) , Zr(Nm,*) , Zi(Nm,*)
-  REAL xr , xi
+  INTEGER i, j, M, la, mm, mp, Nm, Igh, kp1, Low, mp1
+  REAL Ar(Nm,*), Ai(Nm,*), Zr(Nm,*), Zi(Nm,*)
+  REAL xr, xi
   INTEGER Int(*)
   !
   !***FIRST EXECUTABLE STATEMENT  COMBAK
@@ -84,16 +84,16 @@ SUBROUTINE COMBAK(Nm,Low,Igh,Ar,Ai,Int,M,Zr,Zi)
     kp1 = Low + 1
     IF ( la>=kp1 ) THEN
       !     .......... FOR MP=IGH-1 STEP -1 UNTIL LOW+1 DO -- ..........
-      DO mm = kp1 , la
+      DO mm = kp1, la
         mp = Low + Igh - mm
         mp1 = mp + 1
         !
-        DO i = mp1 , Igh
+        DO i = mp1, Igh
           xr = Ar(i,mp-1)
           xi = Ai(i,mp-1)
           IF ( xr/=0.0E0.OR.xi/=0.0E0 ) THEN
             !
-            DO j = 1 , M
+            DO j = 1, M
               Zr(i,j) = Zr(i,j) + xr*Zr(mp,j) - xi*Zi(mp,j)
               Zi(i,j) = Zi(i,j) + xr*Zi(mp,j) + xi*Zr(mp,j)
             ENDDO
@@ -104,7 +104,7 @@ SUBROUTINE COMBAK(Nm,Low,Igh,Ar,Ai,Int,M,Zr,Zi)
         i = Int(mp)
         IF ( i/=mp ) THEN
           !
-          DO j = 1 , M
+          DO j = 1, M
             xr = Zr(i,j)
             Zr(i,j) = Zr(mp,j)
             Zr(mp,j) = xr

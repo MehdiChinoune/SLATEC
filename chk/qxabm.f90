@@ -53,13 +53,13 @@ SUBROUTINE QXABM(Lun,Kprint,Ipass)
   !
   !     Declare arguments.
   !
-  INTEGER Lun , Kprint , Ipass
+  INTEGER Lun, Kprint, Ipass
   !
   !     Declare local variables.
   !
-  INTEGER idid , info(15) , ipar , iwork(51) , n , liw , lrw
-  REAL abserr , r , R1MACH , relerr , reltol , rpar , rwork(214) , t , &
-    tout , u(4)
+  INTEGER idid, info(15), ipar, iwork(51), n, liw, lrw
+  REAL abserr, r, R1MACH, relerr, reltol, rpar, rwork(214), t, &
+    tout, u(4)
   EXTERNAL FDEQC
   !***FIRST EXECUTABLE STATEMENT  QXABM
   IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -87,7 +87,7 @@ SUBROUTINE QXABM(Lun,Kprint,Ipass)
   info(2) = 0
   info(3) = 1
   info(4) = 0
-  IF ( Kprint>2 ) WRITE (Lun,99002) relerr , abserr , t , (1.0E0)
+  IF ( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0E0)
   99002 FORMAT (/' RELERR = ',E16.8,'   ABSERR =',E16.8/12X,'T',19X,'R'/2E20.8)
   DO
     !
@@ -95,7 +95,7 @@ SUBROUTINE QXABM(Lun,Kprint,Ipass)
       rpar,ipar)
     r = SQRT(u(1)*u(1)+u(2)*u(2))
     IF ( ABS(r-1.0E0)>reltol ) Ipass = 0
-    IF ( Kprint>2 ) WRITE (Lun,99003) t , r
+    IF ( Kprint>2 ) WRITE (Lun,99003) t, r
     99003   FORMAT (2E20.8)
     info(1) = 1
     IF ( idid/=1 ) THEN

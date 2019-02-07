@@ -140,20 +140,20 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
   !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
   !***END PROLOGUE  ZAIRY
   !     COMPLEX AI,CONE,CSQ,CY,S1,S2,TRM1,TRM2,Z,ZTA,Z3
-  REAL(8) :: aa , ad , Aii , Air , ak , alim , atrm , az , az3 , bk , &
-    cc , ck , coef , conei , coner , csqi , csqr , cyi , &
-    cyr , c1 , c2 , dig , dk , d1 , d2 , elim , fid , fnu , &
-    ptr , rl , r1m5 , sfac , sti , str , s1i , s1r , s2i , &
-    s2r , tol , trm1i , trm1r , trm2i , trm2r , tth , zeroi , &
-    zeror , Zi , Zr , ztai , ztar , z3i , z3r , D1MACH , &
-    ZABS , alaz , bb
-  INTEGER Id , Ierr , iflag , k , Kode , k1 , k2 , mr , nn , Nz , I1MACH
-  DIMENSION cyr(1) , cyi(1)
-  EXTERNAL ZABS , ZEXP , ZSQRT
-  DATA tth , c1 , c2 , coef/6.66666666666666667D-01 , &
-    3.55028053887817240D-01 , 2.58819403792806799D-01 , &
+  REAL(8) :: aa, ad, Aii, Air, ak, alim, atrm, az, az3, bk, &
+    cc, ck, coef, conei, coner, csqi, csqr, cyi, &
+    cyr, c1, c2, dig, dk, d1, d2, elim, fid, fnu, &
+    ptr, rl, r1m5, sfac, sti, str, s1i, s1r, s2i, &
+    s2r, tol, trm1i, trm1r, trm2i, trm2r, tth, zeroi, &
+    zeror, Zi, Zr, ztai, ztar, z3i, z3r, D1MACH, &
+    ZABS, alaz, bb
+  INTEGER Id, Ierr, iflag, k, Kode, k1, k2, mr, nn, Nz, I1MACH
+  DIMENSION cyr(1), cyi(1)
+  EXTERNAL ZABS, ZEXP, ZSQRT
+  DATA tth, c1, c2, coef/6.66666666666666667D-01, &
+    3.55028053887817240D-01, 2.58819403792806799D-01, &
     1.83776298473930683D-01/
-  DATA zeror , zeroi , coner , conei/0.0D0 , 0.0D0 , 1.0D0 , 0.0D0/
+  DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
   !***FIRST EXECUTABLE STATEMENT  ZAIRY
   Ierr = 0
   Nz = 0
@@ -357,7 +357,7 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
         ad = MIN(d1,d2)
         ak = 24.0D0 + 9.0D0*fid
         bk = 30.0D0 - 9.0D0*fid
-        DO k = 1 , 25
+        DO k = 1, 25
           str = (trm1r*z3r-trm1i*z3i)/d1
           trm1i = (trm1r*z3i+trm1i*z3r)/d1
           trm1r = str
@@ -414,4 +414,5 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
   100  Nz = 0
   Ierr = 5
   RETURN
-  99999 END SUBROUTINE ZAIRY
+  99999 CONTINUE
+  END SUBROUTINE ZAIRY

@@ -5,8 +5,8 @@ SUBROUTINE XCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,&
   IMPLICIT NONE
   !*--XCSRT6
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Ic1 , Ic2 , Ierror , Ip , Iq , Ir , ix1 , ix2 , j , k , l , &
-    lm1 , mu , Mu1 , Mu2 , Nudiff
+  INTEGER i, Ic1, Ic2, Ierror, Ip, Iq, Ir, ix1, ix2, j, k, l, &
+    lm1, mu, Mu1, Mu2, Nudiff
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XCSRT
   !***PURPOSE  TO COMPUTE CHECK VALUES FOR LEGENDRE FUNCTIONS
@@ -34,9 +34,9 @@ SUBROUTINE XCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,&
   !   901019  Revisions to prologue.  (DWL and WRB)
   !   901106  Changed all specific intrinsics to generic.  (WRB)
   !***END PROLOGUE  XCSRT
-  REAL C1 , C2 , dmu , dmu1 , nu , Dnu1 , P , Q , R , Theta , sx , x1 , x2
-  DIMENSION P(*) , Ip(*) , Q(*) , Iq(*) , R(*) , Ir(*)
-  DIMENSION C1(*) , Ic1(*) , C2(*) , Ic2(*)
+  REAL C1, C2, dmu, dmu1, nu, Dnu1, P, Q, R, Theta, sx, x1, x2
+  DIMENSION P(*), Ip(*), Q(*), Iq(*), R(*), Ir(*)
+  DIMENSION C1(*), Ic1(*), C2(*), Ic2(*)
   !
   !         PLACE ALL INPUT IN ADJUSTED FORM.
   !
@@ -44,7 +44,7 @@ SUBROUTINE XCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,&
   Ierror = 0
   l = Nudiff + (Mu2-Mu1) + 1
   lm1 = l - 1
-  DO i = 1 , l
+  DO i = 1, l
     CALL XADJ(P(i),Ip(i),Ierror)
     IF ( Ierror/=0 ) RETURN
     CALL XADJ(Q(i),Iq(i),Ierror)
@@ -60,7 +60,7 @@ SUBROUTINE XCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,&
     !         CHECKS FOR FIXED NU, VARIABLE MU
     !
     sx = SIN(Theta)
-    DO i = 1 , lm1
+    DO i = 1, lm1
       C1(i) = 0.
       C2(i) = 0.
       !
@@ -113,7 +113,7 @@ SUBROUTINE XCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,&
         C2(i) = C2(i)*sx
         k = 2*mu
         IF ( k>0 ) THEN
-          DO j = 1 , k
+          DO j = 1, k
             C2(i) = C2(i)/(Dnu1+dmu+1.-j)
             CALL XADJ(C2(i),Ic2(i),Ierror)
           ENDDO
@@ -123,7 +123,7 @@ SUBROUTINE XCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,&
     ENDDO
   ELSE
     dmu1 = Mu1
-    DO i = 1 , lm1
+    DO i = 1, lm1
       C1(i) = 0.
       C2(i) = 0.
       nu = Dnu1 + i - 1.
@@ -176,7 +176,7 @@ SUBROUTINE XCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,&
         !         SO THAT CHECK VALUE IS 1.
         !
         k = 2*Mu1 - 1
-        DO j = 1 , k
+        DO j = 1, k
           IF ( k>0 ) C2(i) = C2(i)/(nu+dmu1+1.-j)
           CALL XADJ(C2(i),Ic2(i),Ierror)
         ENDDO
@@ -188,7 +188,7 @@ SUBROUTINE XCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,&
   !
   !         PLACE RESULTS IN REDUCED FORM.
   !
-  DO i = 1 , lm1
+  DO i = 1, lm1
     CALL XRED(C1(i),Ic1(i),Ierror)
     IF ( Ierror/=0 ) RETURN
     CALL XRED(C2(i),Ic2(i),Ierror)

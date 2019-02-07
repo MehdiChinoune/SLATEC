@@ -112,19 +112,19 @@ SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER Ic(2) , N , Incfd , Ierr
-  REAL Vc(2) , X(*) , H(*) , Slope(*) , D(Incfd,*)
+  INTEGER Ic(2), N, Incfd, Ierr
+  REAL Vc(2), X(*), H(*), Slope(*), D(Incfd,*)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER ibeg , iend , ierf , index , j , k
-  REAL half , stemp(3) , three , two , xtemp(4) , zero
-  SAVE zero , half , two , three
-  REAL PCHDF , PCHST
+  INTEGER ibeg, iend, ierf, index, j, k
+  REAL half, stemp(3), three, two, xtemp(4), zero
+  SAVE zero, half, two, three
+  REAL PCHDF, PCHST
   !
   !  INITIALIZE.
   !
-  DATA zero/0./ , half/0.5/ , two/2./ , three/3./
+  DATA zero/0./, half/0.5/, two/2./, three/3./
   !
   !***FIRST EXECUTABLE STATEMENT  PCHCE
   ibeg = Ic(1)
@@ -149,7 +149,7 @@ SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
     ELSEIF ( k<5 ) THEN
       !        USE K-POINT DERIVATIVE FORMULA.
       !        PICK UP FIRST K POINTS, IN REVERSE ORDER.
-      DO j = 1 , k
+      DO j = 1, k
         index = k - j + 1
         !           INDEX RUNS FROM K DOWN TO 1.
         xtemp(j) = X(index)
@@ -197,7 +197,7 @@ SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
     ELSEIF ( k<5 ) THEN
       !        USE K-POINT DERIVATIVE FORMULA.
       !        PICK UP LAST K POINTS.
-      DO j = 1 , k
+      DO j = 1, k
         index = N - k + j
         !           INDEX RUNS FROM N+1-K UP TO N.
         xtemp(j) = X(index)

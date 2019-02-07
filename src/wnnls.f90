@@ -4,7 +4,7 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   IMPLICIT NONE
   !*--WNNLS5
   !*** Start of declarations inserted by SPAG
-  INTEGER L , l1 , l2 , l3 , l4 , l5 , liw , lw , Ma , Mdw , Me , Mode , N
+  INTEGER L, l1, l2, l3, l4, l5, liw, lw, Ma, Mdw, Me, Mode, N
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  WNNLS
   !***PURPOSE  Solve a linearly constrained least squares problem with
@@ -269,7 +269,7 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  WNNLS
-  REAL Prgopt(*) , Rnorm , W(Mdw,*) , Work(*) , X(*)
+  REAL Prgopt(*), Rnorm, W(Mdw,*), Work(*), X(*)
   INTEGER Iwork(*)
   CHARACTER(8) :: xern1
   !

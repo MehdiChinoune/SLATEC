@@ -127,13 +127,13 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  DS2Y
   !     .. Scalar Arguments ..
-  INTEGER Isym , N , Nelt
+  INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
   REAL(8) :: A(Nelt)
-  INTEGER Ia(Nelt) , Ja(Nelt)
+  INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
   REAL(8) :: temp
-  INTEGER i , ibgn , icol , iend , itemp , j
+  INTEGER i, ibgn, icol, iend, itemp, j
   !     .. External Subroutines ..
   EXTERNAL QS2I1D
   !***FIRST EXECUTABLE STATEMENT  DS2Y
@@ -154,8 +154,8 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
   !
   !VD$R NOVECTOR
   Ja(1) = 1
-  DO icol = 1 , N - 1
-    DO j = Ja(icol) + 1 , Nelt
+  DO icol = 1, N - 1
+    DO j = Ja(icol) + 1, Nelt
       IF ( Ja(j)/=icol ) THEN
         Ja(icol+1) = j
         EXIT
@@ -173,10 +173,10 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
   !         matrix element appears first in the column.  Then sort the
   !         rest of the column in ascending order.
   !
-  DO icol = 1 , N
+  DO icol = 1, N
     ibgn = Ja(icol)
     iend = Ja(icol+1) - 1
-    DO i = ibgn , iend
+    DO i = ibgn, iend
       IF ( Ia(i)==icol ) THEN
         !
         !              Swap the diagonal element with the first element in the
@@ -193,8 +193,8 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
     ENDDO
     ibgn = ibgn + 1
     IF ( ibgn<iend ) THEN
-      DO i = ibgn , iend
-        DO j = i + 1 , iend
+      DO i = ibgn, iend
+        DO j = i + 1, iend
           IF ( Ia(i)>Ia(j) ) THEN
             itemp = Ia(i)
             Ia(i) = Ia(j)

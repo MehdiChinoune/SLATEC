@@ -56,7 +56,7 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   !                    values for J/sub(ALPHA+K-1)/(X), K=1,...,N
   !           NZ     - number of components of Y set to zero due to
   !                    underflow,
-  !                    NZ=0   , normal return, computation completed
+  !                    NZ=0  , normal return, computation completed
   !                    NZ .NE. 0, last NZ components of Y set to zero,
   !                             Y(K)=0.0D0, K=N-NZ+1,...,N.
   !
@@ -85,25 +85,25 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DBESJ
   EXTERNAL DJAIRY
-  INTEGER i , ialp , idalp , iflw , in , inlim , is , i1 , i2 , k , kk , &
-    km , kt , N , nn , ns , Nz
+  INTEGER i, ialp, idalp, iflw, in, inlim, is, i1, i2, k, kk, &
+    km, kt, N, nn, ns, Nz
   INTEGER I1MACH
-  REAL(8) :: ak , akm , Alpha , ans , ap , arg , coef , dalpha , dfn , &
-    dtm , earg , elim1 , etx , fidal , flgjy , fn , fnf , &
-    fni , fnp1 , fnu , fnulim , gln , pdf , pidt , pp , &
-    rden , relb , rttp , rtwo , rtx , rzden , s , sa , sb , &
-    sxo2 , s1 , s2 , t , ta , tau , tb , temp , tfn , tm , &
-    tol , tolln , trx , tx , t1 , t2 , wk , X , xo2 , xo2l , &
-    Y , slim , rtol
-  SAVE rtwo , pdf , rttp , pidt , pp , inlim , fnulim
-  REAL(8) :: D1MACH , DLNGAM
-  DIMENSION Y(*) , temp(3) , fnulim(2) , pp(4) , wk(7)
-  DATA rtwo , pdf , rttp , pidt/1.34839972492648D+00 , &
-    7.85398163397448D-01 , 7.97884560802865D-01 , 1.57079632679490D+00/
-  DATA pp(1) , pp(2) , pp(3) , pp(4)/8.72909153935547D+00 , &
-    2.65693932265030D-01 , 1.24578576865586D-01 , 7.70133747430388D-04/
+  REAL(8) :: ak, akm, Alpha, ans, ap, arg, coef, dalpha, dfn, &
+    dtm, earg, elim1, etx, fidal, flgjy, fn, fnf, &
+    fni, fnp1, fnu, fnulim, gln, pdf, pidt, pp, &
+    rden, relb, rttp, rtwo, rtx, rzden, s, sa, sb, &
+    sxo2, s1, s2, t, ta, tau, tb, temp, tfn, tm, &
+    tol, tolln, trx, tx, t1, t2, wk, X, xo2, xo2l, &
+    Y, slim, rtol
+  SAVE rtwo, pdf, rttp, pidt, pp, inlim, fnulim
+  REAL(8) :: D1MACH, DLNGAM
+  DIMENSION Y(*), temp(3), fnulim(2), pp(4), wk(7)
+  DATA rtwo, pdf, rttp, pidt/1.34839972492648D+00, &
+    7.85398163397448D-01, 7.97884560802865D-01, 1.57079632679490D+00/
+  DATA pp(1), pp(2), pp(3), pp(4)/8.72909153935547D+00, &
+    2.65693932265030D-01, 1.24578576865586D-01, 7.70133747430388D-04/
   DATA inlim/150/
-  DATA fnulim(1) , fnulim(2)/100.0D0 , 60.0D0/
+  DATA fnulim(1), fnulim(2)/100.0D0, 60.0D0/
   !***FIRST EXECUTABLE STATEMENT  DBESJ
   Nz = 0
   kt = 1
@@ -140,7 +140,7 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
     ELSE
       i1 = 1
     ENDIF
-    DO i = i1 , N
+    DO i = i1, N
       Y(i) = 0.0D0
     ENDDO
     RETURN
@@ -222,293 +222,295 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
     IF ( N-1+ns>0 ) is = 3
     GOTO 200
   ENDIF
-  100  DO
-  !
-  !     UNIFORM ASYMPTOTIC EXPANSION FOR NU TO INFINITY
-  !
-  i1 = ABS(3-is)
-  i1 = MAX(i1,1)
-  flgjy = 1.0D0
-  CALL DASYJY(DJAIRY,X,fn,flgjy,i1,temp(is),wk,iflw)
-  IF ( iflw/=0 ) THEN
+  100 CONTINUE
+  DO
     !
-    !     SET UNDERFLOW VALUE AND UPDATE PARAMETERS
-    !     UNDERFLOW CAN ONLY OCCUR FOR NS=0 SINCE THE ORDER MUST BE LARGER
-    !     THAN 36. THEREFORE, NS NEE NOT BE TESTED.
+    !     UNIFORM ASYMPTOTIC EXPANSION FOR NU TO INFINITY
     !
-    Y(nn) = 0.0D0
-    nn = nn - 1
-    fni = fni - 1.0D0
-    dfn = fni + fnf
-    fn = dfn
-    IF ( nn<1 ) GOTO 500
-    IF ( nn==1 ) THEN
-      kt = 2
-      is = 2
+    i1 = ABS(3-is)
+    i1 = MAX(i1,1)
+    flgjy = 1.0D0
+    CALL DASYJY(DJAIRY,X,fn,flgjy,i1,temp(is),wk,iflw)
+    IF ( iflw/=0 ) THEN
+      !
+      !     SET UNDERFLOW VALUE AND UPDATE PARAMETERS
+      !     UNDERFLOW CAN ONLY OCCUR FOR NS=0 SINCE THE ORDER MUST BE LARGER
+      !     THAN 36. THEREFORE, NS NEE NOT BE TESTED.
+      !
+      Y(nn) = 0.0D0
+      nn = nn - 1
+      fni = fni - 1.0D0
+      dfn = fni + fnf
+      fn = dfn
+      IF ( nn<1 ) GOTO 500
+      IF ( nn==1 ) THEN
+        kt = 2
+        is = 2
+      ENDIF
+    ELSE
+      SELECT CASE (is)
+        CASE (1)
+          EXIT
+        CASE (2)
+          GOTO 600
+        CASE (3)
+          !     COMPUTATION OF LAST ORDER FOR ASYMPTOTIC EXPANSION NORMALIZATION
+          gln = wk(3) + wk(2)
+          IF ( wk(6)>30.0D0 ) THEN
+            ta = 0.5D0*tolln/wk(4)
+            ta = ((0.0493827160D0*ta-0.1111111111D0)*ta+0.6666666667D0)&
+              *ta*wk(6)
+            IF ( wk(1)<0.10D0 ) THEN
+              tb = (1.259921049D0+(0.1679894730D0+0.0887944358D0*wk(1))*wk(1))&
+                /wk(7)
+            ELSE
+              tb = gln/wk(5)
+            ENDIF
+          ELSE
+            rden = (pp(4)*wk(6)+pp(3))*wk(6) + 1.0D0
+            rzden = pp(1) + pp(2)*wk(6)
+            ta = rzden/rden
+            IF ( wk(1)<0.10D0 ) THEN
+              tb = (1.259921049D0+(0.1679894730D0+0.0887944358D0*wk(1))*wk(1))&
+                /wk(7)
+            ELSE
+              tb = gln/wk(5)
+            ENDIF
+          ENDIF
+          in = INT(ta/tb+1.5D0)
+          IF ( in<=inlim ) GOTO 900
+        CASE DEFAULT
+      END SELECT
+      temp(1) = temp(3)
+      kt = 1
+      EXIT
     ENDIF
-  ELSE
-    SELECT CASE (is)
-      CASE (1)
-        EXIT
-      CASE (2)
-        GOTO 600
-      CASE (3)
-        !     COMPUTATION OF LAST ORDER FOR ASYMPTOTIC EXPANSION NORMALIZATION
-        gln = wk(3) + wk(2)
-        IF ( wk(6)>30.0D0 ) THEN
-          ta = 0.5D0*tolln/wk(4)
-          ta = ((0.0493827160D0*ta-0.1111111111D0)*ta+0.6666666667D0)&
-            *ta*wk(6)
-          IF ( wk(1)<0.10D0 ) THEN
-            tb = (1.259921049D0+(0.1679894730D0+0.0887944358D0*wk(1))*wk(1))&
-              /wk(7)
-          ELSE
-            tb = gln/wk(5)
-          ENDIF
-        ELSE
-          rden = (pp(4)*wk(6)+pp(3))*wk(6) + 1.0D0
-          rzden = pp(1) + pp(2)*wk(6)
-          ta = rzden/rden
-          IF ( wk(1)<0.10D0 ) THEN
-            tb = (1.259921049D0+(0.1679894730D0+0.0887944358D0*wk(1))*wk(1))&
-              /wk(7)
-          ELSE
-            tb = gln/wk(5)
-          ENDIF
-        ENDIF
-        in = INT(ta/tb+1.5D0)
-        IF ( in<=inlim ) GOTO 900
-      CASE DEFAULT
-    END SELECT
-    temp(1) = temp(3)
-    kt = 1
-    EXIT
-  ENDIF
-ENDDO
-is = 2
-fni = fni - 1.0D0
-dfn = fni + fnf
-fn = dfn
-IF ( i1/=2 ) GOTO 100
-GOTO 600
-!
-!     SERIES FOR (X/2)**2.LE.NU+1
-!
-200  gln = DLNGAM(fnp1)
-arg = fn*xo2l - gln
-IF ( arg<(-elim1) ) GOTO 400
-earg = EXP(arg)
-300  s = 1.0D0
-IF ( X>=tol ) THEN
-  ak = 3.0D0
-  t2 = 1.0D0
-  t = 1.0D0
-  s1 = fn
-  DO k = 1 , 17
-    s2 = t2 + s1
-    t = -t*sxo2/s2
-    s = s + t
-    IF ( ABS(t)<tol ) EXIT
-    t2 = t2 + ak
-    ak = ak + 2.0D0
-    s1 = s1 + fn
   ENDDO
-ENDIF
-temp(is) = s*earg
-SELECT CASE (is)
-  CASE (2)
-    GOTO 600
-  CASE (3)
-    !
-    !     BACKWARD RECURSION WITH NORMALIZATION BY
-    !     ASYMPTOTIC EXPANSION FOR NU TO INFINITY OR POWER SERIES.
-    !
-    !     COMPUTATION OF LAST ORDER FOR SERIES NORMALIZATION
-    akm = MAX(3.0D0-fn,0.0D0)
-    km = INT(akm)
-    tfn = fn + km
-    ta = (gln+tfn-0.9189385332D0-0.0833333333D0/tfn)/(tfn+0.5D0)
-    ta = xo2l - ta
-    tb = -(1.0D0-1.5D0/tfn)/tfn
-    akm = tolln/(-ta+SQRT(ta*ta-tolln*tb)) + 1.5D0
-    in = km + INT(akm)
-    GOTO 900
-  CASE DEFAULT
-    earg = earg*fn/xo2
-    fni = fni - 1.0D0
-    dfn = fni + fnf
-    fn = dfn
-    is = 2
-    GOTO 300
-END SELECT
-400  Y(nn) = 0.0D0
-nn = nn - 1
-fnp1 = fn
-fni = fni - 1.0D0
-dfn = fni + fnf
-fn = dfn
-IF ( nn<1 ) GOTO 500
-IF ( nn==1 ) THEN
-  kt = 2
   is = 2
-ENDIF
-IF ( sxo2>fnp1 ) GOTO 100
-arg = arg - xo2l + LOG(fnp1)
-IF ( arg>=(-elim1) ) GOTO 200
-GOTO 400
-500  Nz = N - nn
-RETURN
-!
-!     BACKWARD RECURSION SECTION
-!
-600  IF ( ns==0 ) THEN
-Nz = N - nn
-IF ( kt==2 ) GOTO 700
-!     BACKWARD RECUR FROM INDEX ALPHA+NN-1 TO ALPHA
-Y(nn) = temp(1)
-Y(nn-1) = temp(2)
-IF ( nn==2 ) RETURN
-ENDIF
-trx = 2.0D0/X
-dtm = fni
-tm = (dtm+fnf)*trx
-ak = 1.0D0
-ta = temp(1)
-tb = temp(2)
-IF ( ABS(ta)<=slim ) THEN
-ta = ta*rtol
-tb = tb*rtol
-ak = tol
-ENDIF
-kk = 2
-in = ns - 1
-IF ( in==0 ) GOTO 1100
-IF ( ns/=0 ) GOTO 1000
-k = nn - 2
-DO i = 3 , nn
-s = tb
-tb = tm*tb - ta
-ta = s
-Y(k) = tb*ak
-dtm = dtm - 1.0D0
-tm = (dtm+fnf)*trx
-k = k - 1
-ENDDO
-RETURN
-700  Y(1) = temp(2)
-RETURN
-800  dtm = fidal + fidal
-dtm = dtm*dtm
-tm = 0.0D0
-IF ( fidal/=0.0D0.OR.ABS(fnf)>=tol ) tm = 4.0D0*fnf*(fidal+fidal+fnf)
-trx = dtm - 1.0D0
-t2 = (trx+tm)/etx
-s2 = t2
-relb = tol*ABS(t2)
-t1 = etx
-s1 = 1.0D0
-fn = 1.0D0
-ak = 8.0D0
-DO k = 1 , 13
-t1 = t1 + etx
-fn = fn + ak
-trx = dtm - fn
-ap = trx + tm
-t2 = -t2*ap/t1
-s1 = s1 + t2
-t1 = t1 + etx
-ak = ak + 8.0D0
-fn = fn + ak
-trx = dtm - fn
-ap = trx + tm
-t2 = t2*ap/t1
-s2 = s2 + t2
-IF ( ABS(t2)<=relb ) EXIT
-ak = ak + 8.0D0
-ENDDO
-temp(is) = coef*(s1*sb-s2*sa)
-IF ( is==2 ) THEN
-!
-!     FORWARD RECURSION SECTION
-!
-IF ( kt==2 ) GOTO 700
-s1 = temp(1)
-s2 = temp(2)
-tx = 2.0D0/X
-tm = dalpha*tx
-IF ( in/=0 ) THEN
+  fni = fni - 1.0D0
+  dfn = fni + fnf
+  fn = dfn
+  IF ( i1/=2 ) GOTO 100
+  GOTO 600
   !
-  !     FORWARD RECUR TO INDEX ALPHA
+  !     SERIES FOR (X/2)**2.LE.NU+1
   !
-  DO i = 1 , in
-    s = s2
-    s2 = tm*s2 - s1
-    tm = tm + tx
-    s1 = s
-  ENDDO
+  200  gln = DLNGAM(fnp1)
+  arg = fn*xo2l - gln
+  IF ( arg<(-elim1) ) GOTO 400
+  earg = EXP(arg)
+  300  s = 1.0D0
+  IF ( X>=tol ) THEN
+    ak = 3.0D0
+    t2 = 1.0D0
+    t = 1.0D0
+    s1 = fn
+    DO k = 1, 17
+      s2 = t2 + s1
+      t = -t*sxo2/s2
+      s = s + t
+      IF ( ABS(t)<tol ) EXIT
+      t2 = t2 + ak
+      ak = ak + 2.0D0
+      s1 = s1 + fn
+    ENDDO
+  ENDIF
+  temp(is) = s*earg
+  SELECT CASE (is)
+    CASE (2)
+      GOTO 600
+    CASE (3)
+      !
+      !     BACKWARD RECURSION WITH NORMALIZATION BY
+      !     ASYMPTOTIC EXPANSION FOR NU TO INFINITY OR POWER SERIES.
+      !
+      !     COMPUTATION OF LAST ORDER FOR SERIES NORMALIZATION
+      akm = MAX(3.0D0-fn,0.0D0)
+      km = INT(akm)
+      tfn = fn + km
+      ta = (gln+tfn-0.9189385332D0-0.0833333333D0/tfn)/(tfn+0.5D0)
+      ta = xo2l - ta
+      tb = -(1.0D0-1.5D0/tfn)/tfn
+      akm = tolln/(-ta+SQRT(ta*ta-tolln*tb)) + 1.5D0
+      in = km + INT(akm)
+      GOTO 900
+    CASE DEFAULT
+      earg = earg*fn/xo2
+      fni = fni - 1.0D0
+      dfn = fni + fnf
+      fn = dfn
+      is = 2
+      GOTO 300
+  END SELECT
+  400  Y(nn) = 0.0D0
+  nn = nn - 1
+  fnp1 = fn
+  fni = fni - 1.0D0
+  dfn = fni + fnf
+  fn = dfn
+  IF ( nn<1 ) GOTO 500
   IF ( nn==1 ) THEN
-    Y(1) = s2
+    kt = 2
+    is = 2
+  ENDIF
+  IF ( sxo2>fnp1 ) GOTO 100
+  arg = arg - xo2l + LOG(fnp1)
+  IF ( arg>=(-elim1) ) GOTO 200
+  GOTO 400
+  500  Nz = N - nn
+  RETURN
+  !
+  !     BACKWARD RECURSION SECTION
+  !
+  600 CONTINUE
+  IF ( ns==0 ) THEN
+    Nz = N - nn
+    IF ( kt==2 ) GOTO 700
+    !     BACKWARD RECUR FROM INDEX ALPHA+NN-1 TO ALPHA
+    Y(nn) = temp(1)
+    Y(nn-1) = temp(2)
+    IF ( nn==2 ) RETURN
+  ENDIF
+  trx = 2.0D0/X
+  dtm = fni
+  tm = (dtm+fnf)*trx
+  ak = 1.0D0
+  ta = temp(1)
+  tb = temp(2)
+  IF ( ABS(ta)<=slim ) THEN
+    ta = ta*rtol
+    tb = tb*rtol
+    ak = tol
+  ENDIF
+  kk = 2
+  in = ns - 1
+  IF ( in==0 ) GOTO 1100
+  IF ( ns/=0 ) GOTO 1000
+  k = nn - 2
+  DO i = 3, nn
+    s = tb
+    tb = tm*tb - ta
+    ta = s
+    Y(k) = tb*ak
+    dtm = dtm - 1.0D0
+    tm = (dtm+fnf)*trx
+    k = k - 1
+  ENDDO
+  RETURN
+  700  Y(1) = temp(2)
+  RETURN
+  800  dtm = fidal + fidal
+  dtm = dtm*dtm
+  tm = 0.0D0
+  IF ( fidal/=0.0D0.OR.ABS(fnf)>=tol ) tm = 4.0D0*fnf*(fidal+fidal+fnf)
+  trx = dtm - 1.0D0
+  t2 = (trx+tm)/etx
+  s2 = t2
+  relb = tol*ABS(t2)
+  t1 = etx
+  s1 = 1.0D0
+  fn = 1.0D0
+  ak = 8.0D0
+  DO k = 1, 13
+    t1 = t1 + etx
+    fn = fn + ak
+    trx = dtm - fn
+    ap = trx + tm
+    t2 = -t2*ap/t1
+    s1 = s1 + t2
+    t1 = t1 + etx
+    ak = ak + 8.0D0
+    fn = fn + ak
+    trx = dtm - fn
+    ap = trx + tm
+    t2 = t2*ap/t1
+    s2 = s2 + t2
+    IF ( ABS(t2)<=relb ) EXIT
+    ak = ak + 8.0D0
+  ENDDO
+  temp(is) = coef*(s1*sb-s2*sa)
+  IF ( is==2 ) THEN
+    !
+    !     FORWARD RECURSION SECTION
+    !
+    IF ( kt==2 ) GOTO 700
+    s1 = temp(1)
+    s2 = temp(2)
+    tx = 2.0D0/X
+    tm = dalpha*tx
+    IF ( in/=0 ) THEN
+      !
+      !     FORWARD RECUR TO INDEX ALPHA
+      !
+      DO i = 1, in
+        s = s2
+        s2 = tm*s2 - s1
+        tm = tm + tx
+        s1 = s
+      ENDDO
+      IF ( nn==1 ) THEN
+        Y(1) = s2
+        RETURN
+      ELSE
+        s = s2
+        s2 = tm*s2 - s1
+        tm = tm + tx
+        s1 = s
+      ENDIF
+    ENDIF
+    !
+    !     FORWARD RECUR FROM INDEX ALPHA TO ALPHA+N-1
+    !
+    Y(1) = s1
+    Y(2) = s2
+    IF ( nn==2 ) RETURN
+    DO i = 3, nn
+      Y(i) = tm*Y(i-1) - Y(i-2)
+      tm = tm + tx
+    ENDDO
     RETURN
   ELSE
-    s = s2
-    s2 = tm*s2 - s1
-    tm = tm + tx
-    s1 = s
+    fidal = fidal + 1.0D0
+    dalpha = fidal + fnf
+    is = 2
+    tb = sa
+    sa = -sb
+    sb = tb
+    GOTO 800
   ENDIF
-ENDIF
-!
-!     FORWARD RECUR FROM INDEX ALPHA TO ALPHA+N-1
-!
-Y(1) = s1
-Y(2) = s2
-IF ( nn==2 ) RETURN
-DO i = 3 , nn
-  Y(i) = tm*Y(i-1) - Y(i-2)
-  tm = tm + tx
-ENDDO
-RETURN
-ELSE
-fidal = fidal + 1.0D0
-dalpha = fidal + fnf
-is = 2
-tb = sa
-sa = -sb
-sb = tb
-GOTO 800
-ENDIF
-900  dtm = fni + in
-trx = 2.0D0/X
-tm = (dtm+fnf)*trx
-ta = 0.0D0
-tb = tol
-kk = 1
-ak = 1.0D0
-1000 DO
-!
-!     BACKWARD RECUR UNINDEXED
-!
-DO i = 1 , in
-s = tb
-tb = tm*tb - ta
-ta = s
-dtm = dtm - 1.0D0
-tm = (dtm+fnf)*trx
-ENDDO
-!     NORMALIZATION
-IF ( kk/=1 ) EXIT
-s = temp(3)
-sa = ta/tb
-ta = s
-tb = s
-IF ( ABS(s)<=slim ) THEN
-ta = ta*rtol
-tb = tb*rtol
-ak = tol
-ENDIF
-ta = ta*sa
-kk = 2
-in = ns
-IF ( ns==0 ) EXIT
+  900  dtm = fni + in
+  trx = 2.0D0/X
+  tm = (dtm+fnf)*trx
+  ta = 0.0D0
+  tb = tol
+  kk = 1
+  ak = 1.0D0
+  1000 DO
+  !
+  !     BACKWARD RECUR UNINDEXED
+  !
+  DO i = 1, in
+    s = tb
+    tb = tm*tb - ta
+    ta = s
+    dtm = dtm - 1.0D0
+    tm = (dtm+fnf)*trx
+  ENDDO
+  !     NORMALIZATION
+  IF ( kk/=1 ) EXIT
+  s = temp(3)
+  sa = ta/tb
+  ta = s
+  tb = s
+  IF ( ABS(s)<=slim ) THEN
+    ta = ta*rtol
+    tb = tb*rtol
+    ak = tol
+  ENDIF
+  ta = ta*sa
+  kk = 2
+  in = ns
+  IF ( ns==0 ) EXIT
 ENDDO
 1100 Y(nn) = tb*ak
 Nz = N - nn
@@ -525,14 +527,14 @@ k = nn - 2
 !
 !     BACKWARD RECUR INDEXED
 !
-DO i = 3 , nn
-s = tb
-tb = tm*tb - ta
-ta = s
-Y(k) = tb*ak
-dtm = dtm - 1.0D0
-tm = (dtm+fnf)*trx
-k = k - 1
+DO i = 3, nn
+  s = tb
+  tb = tm*tb - ta
+  ta = s
+  Y(k) = tb*ak
+  dtm = dtm - 1.0D0
+  tm = (dtm+fnf)*trx
+  k = k - 1
 ENDDO
 RETURN
 !
@@ -540,4 +542,5 @@ RETURN
 !
 1200 CALL XERMSG('SLATEC','DBESJ','ORDER, ALPHA, LESS THAN ZERO.',2,1)
 RETURN
-99999 END SUBROUTINE DBESJ
+  99999 CONTINUE
+  END SUBROUTINE DBESJ

@@ -143,33 +143,33 @@ SUBROUTINE DXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
   REAL(8) :: R0nrm
-  INTEGER Isym , Jpre , Jscal , Lgmr , Maxlp1 , N , Nelt , Nmsl
+  INTEGER Isym, Jpre, Jscal, Lgmr, Maxlp1, N, Nelt, Nmsl
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , Hes(Maxlp1,*) , Q(*) , Rpar(*) , Sz(*) , V(N,*)&
-    , Wk(N) , X(N) , Xl(N) , Zl(N)
-  INTEGER Ia(Nelt) , Ipar(*) , Ja(Nelt)
+  REAL(8) :: A(Nelt), Hes(Maxlp1,*), Q(*), Rpar(*), Sz(*), V(N,*)&
+    , Wk(N), X(N), Xl(N), Zl(N)
+  INTEGER Ia(Nelt), Ipar(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL MSOLVE
   !     .. Local Scalars ..
-  INTEGER i , k , ll , llp1
+  INTEGER i, k, ll, llp1
   !     .. External Subroutines ..
-  EXTERNAL DAXPY , DCOPY , DHELS
+  EXTERNAL DAXPY, DCOPY, DHELS
   !***FIRST EXECUTABLE STATEMENT  DXLCAL
   ll = Lgmr
   llp1 = ll + 1
-  DO k = 1 , llp1
+  DO k = 1, llp1
     Wk(k) = 0
   ENDDO
   Wk(1) = R0nrm
   CALL DHELS(Hes,Maxlp1,ll,Q,Wk)
-  DO k = 1 , N
+  DO k = 1, N
     Zl(k) = 0
   ENDDO
-  DO i = 1 , ll
+  DO i = 1, ll
     CALL DAXPY(N,Wk(i),V(1,i),1,Zl,1)
   ENDDO
   IF ( (Jscal==1).OR.(Jscal==3) ) THEN
-    DO k = 1 , N
+    DO k = 1, N
       Zl(k) = Zl(k)/Sz(k)
     ENDDO
   ENDIF
@@ -179,7 +179,7 @@ SUBROUTINE DXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
     Nmsl = Nmsl + 1
   ENDIF
   !         calculate XL from X and ZL.
-  DO k = 1 , N
+  DO k = 1, N
     Xl(k) = X(k) + Zl(k)
   ENDDO
   !------------- LAST LINE OF DXLCAL FOLLOWS ----------------------------

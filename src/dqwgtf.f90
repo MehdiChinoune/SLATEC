@@ -26,7 +26,7 @@ REAL(8) FUNCTION DQWGTF(X,Omega,P2,P3,P4,Integr)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DQWGTF
   !
-  REAL(8) :: Omega , omx , P2 , P3 , P4 , X
+  REAL(8) :: Omega, omx, P2, P3, P4, X
   INTEGER Integr
   !***FIRST EXECUTABLE STATEMENT  DQWGTF
   omx = Omega*X

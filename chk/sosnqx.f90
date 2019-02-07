@@ -21,18 +21,18 @@ SUBROUTINE SOSNQX(Lun,Kprint,Ipass)
   !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
   !***END PROLOGUE  SOSNQX
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
-  REAL aer , fnorm , fnorms , rer , tolf
-  INTEGER icnt , iflag , iflags , liw , lwa , n
+  REAL aer, fnorm, fnorms, rer, tolf
+  INTEGER icnt, iflag, iflags, liw, lwa, n
   !     .. Local Arrays ..
-  REAL fvec(2) , wa(17) , x(2)
-  INTEGER itest(2) , iw(6)
+  REAL fvec(2), wa(17), x(2)
+  INTEGER itest(2), iw(6)
   !     .. External Functions ..
-  REAL R1MACH , SNRM2 , SOSFNC
-  EXTERNAL R1MACH , SNRM2 , SOSFNC
+  REAL R1MACH, SNRM2, SOSFNC
+  EXTERNAL R1MACH, SNRM2, SOSFNC
   !     .. External Subroutines ..
-  EXTERNAL PASS , SOS
+  EXTERNAL PASS, SOS
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
   !***FIRST EXECUTABLE STATEMENT  SOSNQX
@@ -62,7 +62,7 @@ SUBROUTINE SOSNQX(Lun,Kprint,Ipass)
   !
   IF ( Kprint/=0 ) THEN
     IF ( Kprint>=3.OR.(Kprint>=2.AND.itest(icnt)/=1) ) WRITE (Lun,99002)&
-      iflags , fnorms , iflag , fnorm
+      iflags, fnorms, iflag, fnorm
     99002   FORMAT (' EXPECTED VALUE OF IFLAG AND RESIDUAL NORM',I5,&
       E20.5/' RETURNED VALUE OF IFLAG AND RESIDUAL NORM',I5,E20.5/)
     IF ( Kprint>=2.OR.(Kprint==1.AND.itest(icnt)/=1) )&

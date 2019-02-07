@@ -141,16 +141,16 @@ SUBROUTINE DTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  DTBMV
   !     .. Scalar Arguments ..
-  INTEGER Incx , K , Lda , N
-  CHARACTER :: Diag , Trans , Uplo
+  INTEGER Incx, K, Lda, N
+  CHARACTER :: Diag, Trans, Uplo
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*) , X(*)
+  REAL(8) :: A(Lda,*), X(*)
   !     .. Parameters ..
   REAL(8) :: ZERO
   PARAMETER (ZERO=0.0D+0)
   !     .. Local Scalars ..
   REAL(8) :: temp
-  INTEGER i , info , ix , j , jx , kplus1 , kx , l
+  INTEGER i, info, ix, j, jx, kplus1, kx, l
   LOGICAL nounit
   !     .. External Functions ..
   LOGICAL LSAME
@@ -158,7 +158,7 @@ SUBROUTINE DTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
-  INTRINSIC MAX , MIN
+  INTRINSIC MAX, MIN
   !***FIRST EXECUTABLE STATEMENT  DTBMV
   !
   !     Test the input parameters.
@@ -210,11 +210,11 @@ SUBROUTINE DTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
     IF ( LSAME(Uplo,'U') ) THEN
       kplus1 = K + 1
       IF ( Incx==1 ) THEN
-        DO j = 1 , N
+        DO j = 1, N
           IF ( X(j)/=ZERO ) THEN
             temp = X(j)
             l = kplus1 - j
-            DO i = MAX(1,j-K) , j - 1
+            DO i = MAX(1,j-K), j - 1
               X(i) = X(i) + temp*A(l+i,j)
             ENDDO
             IF ( nounit ) X(j) = X(j)*A(kplus1,j)
@@ -222,12 +222,12 @@ SUBROUTINE DTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
         ENDDO
       ELSE
         jx = kx
-        DO j = 1 , N
+        DO j = 1, N
           IF ( X(jx)/=ZERO ) THEN
             temp = X(jx)
             ix = kx
             l = kplus1 - j
-            DO i = MAX(1,j-K) , j - 1
+            DO i = MAX(1,j-K), j - 1
               X(ix) = X(ix) + temp*A(l+i,j)
               ix = ix + Incx
             ENDDO
@@ -238,11 +238,11 @@ SUBROUTINE DTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
         ENDDO
       ENDIF
     ELSEIF ( Incx==1 ) THEN
-      DO j = N , 1 , -1
+      DO j = N, 1, -1
         IF ( X(j)/=ZERO ) THEN
           temp = X(j)
           l = 1 - j
-          DO i = MIN(N,j+K) , j + 1 , -1
+          DO i = MIN(N,j+K), j + 1, -1
             X(i) = X(i) + temp*A(l+i,j)
           ENDDO
           IF ( nounit ) X(j) = X(j)*A(1,j)
@@ -251,12 +251,12 @@ SUBROUTINE DTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
     ELSE
       kx = kx + (N-1)*Incx
       jx = kx
-      DO j = N , 1 , -1
+      DO j = N, 1, -1
         IF ( X(jx)/=ZERO ) THEN
           temp = X(jx)
           ix = kx
           l = 1 - j
-          DO i = MIN(N,j+K) , j + 1 , -1
+          DO i = MIN(N,j+K), j + 1, -1
             X(ix) = X(ix) + temp*A(l+i,j)
             ix = ix - Incx
           ENDDO
@@ -272,11 +272,11 @@ SUBROUTINE DTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   ELSEIF ( LSAME(Uplo,'U') ) THEN
     kplus1 = K + 1
     IF ( Incx==1 ) THEN
-      DO j = N , 1 , -1
+      DO j = N, 1, -1
         temp = X(j)
         l = kplus1 - j
         IF ( nounit ) temp = temp*A(kplus1,j)
-        DO i = j - 1 , MAX(1,j-K) , -1
+        DO i = j - 1, MAX(1,j-K), -1
           temp = temp + A(l+i,j)*X(i)
         ENDDO
         X(j) = temp
@@ -284,13 +284,13 @@ SUBROUTINE DTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
     ELSE
       kx = kx + (N-1)*Incx
       jx = kx
-      DO j = N , 1 , -1
+      DO j = N, 1, -1
         temp = X(jx)
         kx = kx - Incx
         ix = kx
         l = kplus1 - j
         IF ( nounit ) temp = temp*A(kplus1,j)
-        DO i = j - 1 , MAX(1,j-K) , -1
+        DO i = j - 1, MAX(1,j-K), -1
           temp = temp + A(l+i,j)*X(ix)
           ix = ix - Incx
         ENDDO
@@ -299,24 +299,24 @@ SUBROUTINE DTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
       ENDDO
     ENDIF
   ELSEIF ( Incx==1 ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       temp = X(j)
       l = 1 - j
       IF ( nounit ) temp = temp*A(1,j)
-      DO i = j + 1 , MIN(N,j+K)
+      DO i = j + 1, MIN(N,j+K)
         temp = temp + A(l+i,j)*X(i)
       ENDDO
       X(j) = temp
     ENDDO
   ELSE
     jx = kx
-    DO j = 1 , N
+    DO j = 1, N
       temp = X(jx)
       kx = kx + Incx
       ix = kx
       l = 1 - j
       IF ( nounit ) temp = temp*A(1,j)
-      DO i = j + 1 , MIN(N,j+K)
+      DO i = j + 1, MIN(N,j+K)
         temp = temp + A(l+i,j)*X(ix)
         ix = ix + Incx
       ENDDO

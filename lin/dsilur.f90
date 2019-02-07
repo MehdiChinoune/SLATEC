@@ -5,7 +5,7 @@ SUBROUTINE DSILUR(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   IMPLICIT NONE
   !*--DSILUR6
   !*** Start of declarations inserted by SPAG
-  REAL DSLUI , DSMV
+  REAL DSLUI, DSMV
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSILUR
   !***PURPOSE  Incomplete LU Iterative Refinement Sparse Ax = b Solver.
@@ -223,21 +223,21 @@ SUBROUTINE DSILUR(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   921019  Corrected NEL to NL.  (FNF)
   !***END PROLOGUE  DSILUR
   !     .. Parameters ..
-  INTEGER LOCRB , LOCIB
+  INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  REAL(8) :: Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
+  REAL(8) :: Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
     Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , B(N) , Rwork(Lenw) , X(N)
-  INTEGER Ia(Nelt) , Iwork(Leniw) , Ja(Nelt)
+  REAL(8) :: A(Nelt), B(N), Rwork(Lenw), X(N)
+  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER icol , j , jbgn , jend , locdin , locdz , locil , lociu , lociw , &
-    locjl , locju , locl , locnc , locnr , locr , locu , locw , locz , &
-    nl , nu
+  INTEGER icol, j, jbgn, jend, locdin, locdz, locil, lociu, lociw, &
+    locjl, locju, locl, locnc, locnr, locr, locu, locw, locz, &
+    nl, nu
   !     .. External Subroutines ..
-  EXTERNAL DCHKW , DIR , DS2Y , DSILUS , DSLUI , DSMV
+  EXTERNAL DCHKW, DIR, DS2Y, DSILUS, DSLUI, DSMV
   !***FIRST EXECUTABLE STATEMENT  DSILUR
   !
   Ierr = 0
@@ -253,13 +253,13 @@ SUBROUTINE DSILUR(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !         matrix.  Then set up the work arrays.
   nl = 0
   nu = 0
-  DO icol = 1 , N
+  DO icol = 1, N
     !         Don't count diagonal.
     jbgn = Ja(icol) + 1
     jend = Ja(icol+1) - 1
     IF ( jbgn<=jend ) THEN
       !VD$ NOVECTOR
-      DO j = jbgn , jend
+      DO j = jbgn, jend
         IF ( Ia(j)>icol ) THEN
           nl = nl + 1
           IF ( Isym/=0 ) nu = nu + 1

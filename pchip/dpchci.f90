@@ -93,20 +93,20 @@ SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N , Incfd
-  REAL(8) :: H(*) , Slope(*) , D(Incfd,*)
+  INTEGER N, Incfd
+  REAL(8) :: H(*), Slope(*), D(Incfd,*)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i , nless1
-  REAL(8) :: del1 , del2 , dmax , dmin , drat1 , drat2 , hsum , &
-    hsumt3 , three , w1 , w2 , zero
-  SAVE zero , three
+  INTEGER i, nless1
+  REAL(8) :: del1, del2, dmax, dmin, drat1, drat2, hsum, &
+    hsumt3, three, w1, w2, zero
+  SAVE zero, three
   REAL(8) :: DPCHST
   !
   !  INITIALIZE.
   !
-  DATA zero/0.D0/ , three/3.D0/
+  DATA zero/0.D0/, three/3.D0/
   !***FIRST EXECUTABLE STATEMENT  DPCHCI
   nless1 = N - 1
   del1 = Slope(1)
@@ -136,7 +136,7 @@ SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
     !
     !  LOOP THROUGH INTERIOR POINTS.
     !
-    DO i = 2 , nless1
+    DO i = 2, nless1
       IF ( i/=2 ) THEN
         !
         hsum = H(i-1) + H(i)

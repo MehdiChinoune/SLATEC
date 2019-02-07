@@ -20,10 +20,10 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
   !     and estimates the condition of the matrix.
   !
   !     If  RCOND  is not needed, DPPFA is slightly faster.
-  !     To solve  A*X = B , follow DPPCO by DPPSL.
-  !     To compute  INVERSE(A)*C , follow DPPCO by DPPSL.
-  !     To compute  DETERMINANT(A) , follow DPPCO by DPPDI.
-  !     To compute  INVERSE(A) , follow DPPCO by DPPDI.
+  !     To solve  A*X = B, follow DPPCO by DPPSL.
+  !     To compute  INVERSE(A)*C, follow DPPCO by DPPSL.
+  !     To compute  DETERMINANT(A), follow DPPCO by DPPDI.
+  !     To compute  INVERSE(A), follow DPPCO by DPPDI.
   !
   !     On Entry
   !
@@ -38,13 +38,13 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
   !
   !     On Return
   !
-  !        AP      an upper triangular matrix  R , stored in packed
+  !        AP      an upper triangular matrix  R, stored in packed
   !                form, so that  A = TRANS(R)*R .
-  !                If  INFO .NE. 0 , the factorization is not complete.
+  !                If  INFO .NE. 0, the factorization is not complete.
   !
   !        RCOND   DOUBLE PRECISION
   !                an estimate of the reciprocal condition of  A .
-  !                For the system  A*X = B , relative perturbations
+  !                For the system  A*X = B, relative perturbations
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -52,14 +52,14 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
   !                is true, then  A  may be singular to working
   !                precision.  In particular,  RCOND  is zero  if
   !                exact singularity is detected or the estimate
-  !                underflows.  If INFO .NE. 0 , RCOND is unchanged.
+  !                underflows.  If INFO .NE. 0, RCOND is unchanged.
   !
   !        Z       DOUBLE PRECISION(N)
   !                a work vector whose contents are usually unimportant.
   !                If  A  is singular to working precision, then  Z  is
   !                an approximate null vector in the sense that
   !                NORM(A*Z) = RCOND*NORM(A)*NORM(Z) .
-  !                If  INFO .NE. 0 , Z  is unchanged.
+  !                If  INFO .NE. 0, Z  is unchanged.
   !
   !        INFO    INTEGER
   !                = 0  for normal return.
@@ -92,32 +92,32 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPPCO
-  INTEGER N , Info
-  REAL(8) :: Ap(*) , Z(*)
+  INTEGER N, Info
+  REAL(8) :: Ap(*), Z(*)
   REAL(8) :: Rcond
   !
-  REAL(8) :: DDOT , ek , t , wk , wkm
-  REAL(8) :: anorm , s , DASUM , sm , ynorm
-  INTEGER i , ij , j , jm1 , j1 , k , kb , kj , kk , kp1
+  REAL(8) :: DDOT, ek, t, wk, wkm
+  REAL(8) :: anorm, s, DASUM, sm, ynorm
+  INTEGER i, ij, j, jm1, j1, k, kb, kj, kk, kp1
   !
   !     FIND NORM OF A
   !
   !***FIRST EXECUTABLE STATEMENT  DPPCO
   j1 = 1
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = DASUM(j,Ap(j1),1)
     ij = j1
     j1 = j1 + j
     jm1 = j - 1
     IF ( jm1>=1 ) THEN
-      DO i = 1 , jm1
+      DO i = 1, jm1
         Z(i) = Z(i) + ABS(Ap(ij))
         ij = ij + 1
       ENDDO
     ENDIF
   ENDDO
   anorm = 0.0D0
-  DO j = 1 , N
+  DO j = 1, N
     anorm = MAX(anorm,Z(j))
   ENDDO
   !
@@ -135,11 +135,11 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
     !        SOLVE TRANS(R)*W = E
     !
     ek = 1.0D0
-    DO j = 1 , N
+    DO j = 1, N
       Z(j) = 0.0D0
     ENDDO
     kk = 0
-    DO k = 1 , N
+    DO k = 1, N
       kk = kk + k
       IF ( Z(k)/=0.0D0 ) ek = SIGN(ek,-Z(k))
       IF ( ABS(ek-Z(k))>Ap(kk) ) THEN
@@ -156,7 +156,7 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
       kp1 = k + 1
       kj = kk + k
       IF ( kp1<=N ) THEN
-        DO j = kp1 , N
+        DO j = kp1, N
           sm = sm + ABS(Z(j)+wkm*Ap(kj))
           Z(j) = Z(j) + wk*Ap(kj)
           s = s + ABS(Z(j))
@@ -166,7 +166,7 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
           t = wkm - wk
           wk = wkm
           kj = kk + k
-          DO j = kp1 , N
+          DO j = kp1, N
             Z(j) = Z(j) + t*Ap(kj)
             kj = kj + j
           ENDDO
@@ -179,7 +179,7 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
     !
     !        SOLVE R*Y = W
     !
-    DO kb = 1 , N
+    DO kb = 1, N
       k = N + 1 - kb
       IF ( ABS(Z(k))>Ap(kk) ) THEN
         s = Ap(kk)/ABS(Z(k))
@@ -197,7 +197,7 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
     !
     !        SOLVE TRANS(R)*V = Y
     !
-    DO k = 1 , N
+    DO k = 1, N
       Z(k) = Z(k) - DDOT(k-1,Ap(kk+1),1,Z(1),1)
       kk = kk + k
       IF ( ABS(Z(k))>Ap(kk) ) THEN
@@ -213,7 +213,7 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
     !
     !        SOLVE R*Z = V
     !
-    DO kb = 1 , N
+    DO kb = 1, N
       k = N + 1 - kb
       IF ( ABS(Z(k))>Ap(kk) ) THEN
         s = Ap(kk)/ABS(Z(k))

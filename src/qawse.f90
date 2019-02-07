@@ -172,18 +172,18 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  QAWSE
   !
-  REAL A , Abserr , Alfa , Alist , area , area1 , area12 , area2 , a1 , a2 , &
-    B , Beta , Blist , b1 , b2 , centre , R1MACH , Elist , epmach , &
-    Epsabs , Epsrel , errbnd , errmax , error1 , erro12 , error2 , &
-    errsum , F , resas1 , resas2 , Result , rg , rh , ri , rj , Rlist , &
+  REAL A, Abserr, Alfa, Alist, area, area1, area12, area2, a1, a2, &
+    B, Beta, Blist, b1, b2, centre, R1MACH, Elist, epmach, &
+    Epsabs, Epsrel, errbnd, errmax, error1, erro12, error2, &
+    errsum, F, resas1, resas2, Result, rg, rh, ri, rj, Rlist, &
     uflow
-  INTEGER Ier , Integr , Iord , iroff1 , iroff2 , k , Last , Limit , &
-    maxerr , nev , Neval , nrmax
+  INTEGER Ier, Integr, Iord, iroff1, iroff2, k, Last, Limit, &
+    maxerr, nev, Neval, nrmax
   !
   EXTERNAL F
   !
-  DIMENSION Alist(*) , Blist(*) , Rlist(*) , Elist(*) , Iord(*) , ri(25) , &
-    rj(25) , rh(25) , rg(25)
+  DIMENSION Alist(*), Blist(*), Rlist(*), Elist(*), Iord(*), ri(25), &
+    rj(25), rh(25), rg(25)
   !
   !            LIST OF MAJOR VARIABLES
   !            -----------------------
@@ -292,7 +292,7 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
       !            MAIN DO-LOOP
       !            ------------
       !
-      DO Last = 3 , Limit
+      DO Last = 3, Limit
         !
         !           BISECT THE SUBINTERVAL WITH LARGEST ERROR ESTIMATE.
         !
@@ -382,7 +382,7 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
       !           ---------------------
       !
       Result = 0.0E+00
-      DO k = 1 , Last
+      DO k = 1, Last
         Result = Result + Rlist(k)
       ENDDO
       Abserr = errsum

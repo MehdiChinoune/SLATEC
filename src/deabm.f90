@@ -5,11 +5,11 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   IMPLICIT NONE
   !*--DEABM6
   !*** Start of declarations inserted by SPAG
-  REAL Atol , F , Rpar , Rtol , Rwork , T , Tout , Y
-  INTEGER ialpha , ibeta , idelsn , Idid , ifouru , ig , igi , ihold ,&
-    Info , ip , Ipar , iphi , ipsi , isig , itold , itstar , itwou ,&
-    iv , iw , Iwork
-  INTEGER iwt , ixold , iyp , iypout , iyy , Liw , Lrw , Neq
+  REAL Atol, F, Rpar, Rtol, Rwork, T, Tout, Y
+  INTEGER ialpha, ibeta, idelsn, Idid, ifouru, ig, igi, ihold ,&
+    Info, ip, Ipar, iphi, ipsi, isig, itold, itstar, itwou ,&
+    iv, iw, Iwork
+  INTEGER iwt, ixold, iyp, iypout, iyy, Liw, Lrw, Neq
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DEABM
   !***PURPOSE  Solve an initial value problem in ordinary differential
@@ -27,7 +27,7 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   solvers DEPAC, consisting of the codes DERKF, DEABM, and DEBDF.
   !   Design of the package was by L. F. Shampine and H. A. Watts.
   !   It is documented in
-  !        SAND79-2374 , DEPAC - Design of a User Oriented Package of ODE
+  !        SAND79-2374, DEPAC - Design of a User Oriented Package of ODE
   !                              Solvers.
   !   DEABM is a driver for a modification of the code ODE written by
   !             L. F. Shampine and M. K. Gordon
@@ -165,7 +165,7 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !                               F(X,U,UPRIME,RPAR,IPAR)
   !             to define the system of first order differential equations
   !             which is to be solved.  For the given values of X and the
-  !             vector  U(*)=(U(1),U(2),...,U(NEQ)) , the subroutine must
+  !             vector  U(*)=(U(1),U(2),...,U(NEQ)), the subroutine must
   !             evaluate the NEQ components of the system of differential
   !             equations  DU/DX = F(X,U)  and store the derivatives in
   !             array UPRIME(*), that is,  UPRIME(I) = * DU(I)/DX *  for
@@ -448,7 +448,7 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !                        attempted on the next step.
   !
   !             RWORK(12)--If the tolerances have been increased by the
-  !                        code (IDID = -2) , they were multiplied by the
+  !                        code (IDID = -2), they were multiplied by the
   !                        value in RWORK(12).
   !
   !             RWORK(13)--Which contains the current value of the
@@ -574,10 +574,10 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DEABM
   !
-  LOGICAL start , phase1 , nornd , stiff , intout
+  LOGICAL start, phase1, nornd, stiff, intout
   !
-  DIMENSION Y(*) , Info(15) , Rtol(*) , Atol(*) , Rwork(*) , Iwork(*) ,&
-    Rpar(*) , Ipar(*)
+  DIMENSION Y(*), Info(15), Rtol(*), Atol(*), Rwork(*), Iwork(*) ,&
+    Rpar(*), Ipar(*)
   !
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3

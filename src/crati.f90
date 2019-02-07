@@ -24,12 +24,12 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CRATI
-  COMPLEX cdfnu , cone , Cy , czero , pt , p1 , p2 , rz , t1 , Z
-  REAL ak , amagz , ap1 , ap2 , arg , az , dfnu , fdnu , flam , Fnu , fnup , &
-    rap1 , rho , test , test1 , Tol
-  INTEGER i , id , idnu , inu , itime , k , kk , magz , N
+  COMPLEX cdfnu, cone, Cy, czero, pt, p1, p2, rz, t1, Z
+  REAL ak, amagz, ap1, ap2, arg, az, dfnu, fdnu, flam, Fnu, fnup, &
+    rap1, rho, test, test1, Tol
+  INTEGER i, id, idnu, inu, itime, k, kk, magz, N
   DIMENSION Cy(N)
-  DATA czero , cone/(0.0E0,0.0E0) , (1.0E0,0.0E0)/
+  DATA czero, cone/(0.0E0,0.0E0), (1.0E0,0.0E0)/
   !***FIRST EXECUTABLE STATEMENT  CRATI
   az = ABS(Z)
   inu = Fnu
@@ -79,7 +79,7 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
         t1 = CMPLX(ak,0.0E0)
         p1 = CMPLX(1.0E0/ap2,0.0E0)
         p2 = czero
-        DO i = 1 , kk
+        DO i = 1, kk
           pt = p1
           p1 = rz*(cdfnu+t1)*p1 + p2
           p2 = pt
@@ -92,7 +92,7 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
         ak = k
         t1 = CMPLX(ak,0.0E0)
         cdfnu = CMPLX(Fnu,0.0E0)*rz
-        DO i = 2 , N
+        DO i = 2, N
           pt = cdfnu + t1*rz + Cy(k+1)
           IF ( REAL(pt)==0.0E0.AND.AIMAG(pt)==0.0E0 ) pt = CMPLX(Tol,Tol)
           Cy(k) = cone/pt

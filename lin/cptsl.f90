@@ -49,10 +49,10 @@ SUBROUTINE CPTSL(N,D,E,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CPTSL
   INTEGER N
-  COMPLEX D(*) , E(*) , B(*)
+  COMPLEX D(*), E(*), B(*)
   !
-  INTEGER k , kbm1 , ke , kf , kp1 , nm1 , nm1d2
-  COMPLEX t1 , t2
+  INTEGER k, kbm1, ke, kf, kp1, nm1, nm1d2
+  COMPLEX t1, t2
   !
   !     CHECK FOR 1 X 1 CASE
   !
@@ -66,7 +66,7 @@ SUBROUTINE CPTSL(N,D,E,B)
       !           ZERO TOP HALF OF SUBDIAGONAL AND BOTTOM HALF OF
       !           SUPERDIAGONAL
       !
-      DO k = 1 , nm1d2
+      DO k = 1, nm1d2
         t1 = CONJG(E(k))/D(k)
         D(k+1) = D(k+1) - t1*E(k)
         B(k+1) = B(k+1) - t1*B(k)
@@ -94,7 +94,7 @@ SUBROUTINE CPTSL(N,D,E,B)
     IF ( N/=2 ) THEN
       k = kp1 - 1
       ke = kp1 + nm1d2 - 1
-      DO kf = kp1 , ke
+      DO kf = kp1, ke
         B(k) = (B(k)-E(k)*B(k+1))/D(k)
         B(kf+1) = (B(kf+1)-CONJG(E(kf))*B(kf))/D(kf+1)
         k = k - 1

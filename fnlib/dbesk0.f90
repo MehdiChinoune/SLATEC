@@ -4,7 +4,7 @@ REAL(8) FUNCTION DBESK0(X)
   IMPLICIT NONE
   !*--DBESK05
   !*** Start of declarations inserted by SPAG
-  INTEGER INITDS , ntk0
+  INTEGER INITDS, ntk0
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBESK0
   !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
@@ -38,10 +38,10 @@ REAL(8) FUNCTION DBESK0(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBESK0
-  REAL(8) :: X , bk0cs(16) , xmax , xmaxt , xsml , y , D1MACH , &
-    DCSEVL , DBESI0 , DBSK0E
+  REAL(8) :: X, bk0cs(16), xmax, xmaxt, xsml, y, D1MACH, &
+    DCSEVL, DBESI0, DBSK0E
   LOGICAL first
-  SAVE bk0cs , ntk0 , xsml , xmax , first
+  SAVE bk0cs, ntk0, xsml, xmax, first
   DATA bk0cs(1)/ - .353273932339027687201140060063153D-1/
   DATA bk0cs(2)/ + .344289899924628486886344927529213D+0/
   DATA bk0cs(3)/ + .359799365153615016265721303687231D-1/
@@ -85,4 +85,5 @@ REAL(8) FUNCTION DBESK0(X)
   DBESK0 = -LOG(0.5D0*X)*DBESI0(X) - 0.25D0 + DCSEVL(.5D0*y-1.D0,bk0cs,ntk0)
   RETURN
   !
-  99999 END FUNCTION DBESK0
+  99999 CONTINUE
+  END FUNCTION DBESK0

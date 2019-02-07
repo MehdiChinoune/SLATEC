@@ -16,7 +16,7 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !     the problem is to determine a value for the parameter
   !     PAR such that if X solves the system
   !
-  !           A*X = B ,     SQRT(PAR)*D*X = 0 ,
+  !           A*X = B,     SQRT(PAR)*D*X = 0 ,
   !
   !     in the least squares sense, and DXNORM is the Euclidean
   !     norm of D*X, then either PAR is zero and
@@ -102,16 +102,16 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  LMPAR
-  INTEGER N , Ldr
+  INTEGER N, Ldr
   INTEGER Ipvt(*)
-  REAL Delta , Par
-  REAL R(Ldr,*) , Diag(*) , Qtb(*) , X(*) , Sigma(*) , Wa1(*) , Wa2(*)
-  INTEGER i , iter , j , jm1 , jp1 , k , l , nsing
-  REAL dxnorm , dwarf , fp , gnorm , parc , parl , paru , p1 , p001 , sum , &
-    temp , zero
-  REAL R1MACH , ENORM
-  SAVE p1 , p001 , zero
-  DATA p1 , p001 , zero/1.0E-1 , 1.0E-3 , 0.0E0/
+  REAL Delta, Par
+  REAL R(Ldr,*), Diag(*), Qtb(*), X(*), Sigma(*), Wa1(*), Wa2(*)
+  INTEGER i, iter, j, jm1, jp1, k, l, nsing
+  REAL dxnorm, dwarf, fp, gnorm, parc, parl, paru, p1, p001, sum, &
+    temp, zero
+  REAL R1MACH, ENORM
+  SAVE p1, p001, zero
+  DATA p1, p001, zero/1.0E-1, 1.0E-3, 0.0E0/
   !***FIRST EXECUTABLE STATEMENT  LMPAR
   dwarf = R1MACH(1)
   !
@@ -119,25 +119,25 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !     JACOBIAN IS RANK-DEFICIENT, OBTAIN A LEAST SQUARES SOLUTION.
   !
   nsing = N
-  DO j = 1 , N
+  DO j = 1, N
     Wa1(j) = Qtb(j)
     IF ( R(j,j)==zero.AND.nsing==N ) nsing = j - 1
     IF ( nsing<N ) Wa1(j) = zero
   ENDDO
   IF ( nsing>=1 ) THEN
-    DO k = 1 , nsing
+    DO k = 1, nsing
       j = nsing - k + 1
       Wa1(j) = Wa1(j)/R(j,j)
       temp = Wa1(j)
       jm1 = j - 1
       IF ( jm1>=1 ) THEN
-        DO i = 1 , jm1
+        DO i = 1, jm1
           Wa1(i) = Wa1(i) - R(i,j)*temp
         ENDDO
       ENDIF
     ENDDO
   ENDIF
-  DO j = 1 , N
+  DO j = 1, N
     l = Ipvt(j)
     X(l) = Wa1(j)
   ENDDO
@@ -147,7 +147,7 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !     FOR ACCEPTANCE OF THE GAUSS-NEWTON DIRECTION.
   !
   iter = 0
-  DO j = 1 , N
+  DO j = 1, N
     Wa2(j) = Diag(j)*X(j)
   ENDDO
   dxnorm = ENORM(N,Wa2)
@@ -165,15 +165,15 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
     !
     parl = zero
     IF ( nsing>=N ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         l = Ipvt(j)
         Wa1(j) = Diag(l)*(Wa2(l)/dxnorm)
       ENDDO
-      DO j = 1 , N
+      DO j = 1, N
         sum = zero
         jm1 = j - 1
         IF ( jm1>=1 ) THEN
-          DO i = 1 , jm1
+          DO i = 1, jm1
             sum = sum + R(i,j)*Wa1(i)
           ENDDO
         ENDIF
@@ -185,9 +185,9 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
     !
     !     CALCULATE AN UPPER BOUND, PARU, FOR THE ZERO OF THE FUNCTION.
     !
-    DO j = 1 , N
+    DO j = 1, N
       sum = zero
-      DO i = 1 , j
+      DO i = 1, j
         sum = sum + R(i,j)*Qtb(i)
       ENDDO
       l = Ipvt(j)
@@ -213,11 +213,11 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
       !
       IF ( Par==zero ) Par = MAX(dwarf,p001*paru)
       temp = SQRT(Par)
-      DO j = 1 , N
+      DO j = 1, N
         Wa1(j) = temp*Diag(j)
       ENDDO
       CALL QRSOLV(N,R,Ldr,Ipvt,Wa1,Qtb,X,Sigma,Wa2)
-      DO j = 1 , N
+      DO j = 1, N
         Wa2(j) = Diag(j)*X(j)
       ENDDO
       dxnorm = ENORM(N,Wa2)
@@ -236,16 +236,16 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
         !
         !        COMPUTE THE NEWTON CORRECTION.
         !
-        DO j = 1 , N
+        DO j = 1, N
           l = Ipvt(j)
           Wa1(j) = Diag(l)*(Wa2(l)/dxnorm)
         ENDDO
-        DO j = 1 , N
+        DO j = 1, N
           Wa1(j) = Wa1(j)/Sigma(j)
           temp = Wa1(j)
           jp1 = j + 1
           IF ( N>=jp1 ) THEN
-            DO i = jp1 , N
+            DO i = jp1, N
               Wa1(i) = Wa1(i) - R(i,j)*temp
             ENDDO
           ENDIF

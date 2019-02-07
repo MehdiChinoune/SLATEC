@@ -111,51 +111,51 @@ PROGRAM SLPREP
   !
   INTEGER MXLFN
   PARAMETER (MXLFN=32)
-  CHARACTER(MXLFN) :: finp , fclass , fcat , fdaf , fkwd , ftbl , FOUT ,&
-    flog , FERR , FINPUT
-  CHARACTER(MXLFN) :: DFINP , DFCLAS , DFCAT , DFDAF , DFKWD , DFTBL , DFLOG
+  CHARACTER(MXLFN) :: finp, fclass, fcat, fdaf, fkwd, ftbl, FOUT ,&
+    flog, FERR, FINPUT
+  CHARACTER(MXLFN) :: DFINP, DFCLAS, DFCAT, DFDAF, DFKWD, DFTBL, DFLOG
   PARAMETER (DFINP='slainp',DFCLAS='class',DFCAT='slacat',DFDAF='sladaf',&
     DFKWD='slakwd',DFTBL='slatbl',DFLOG='slalog',FOUT='/dev/tty',&
     FINPUT='/dev/tty',FERR='/dev/tty')
   !
   !     Library dependent parameter definitions.
   !
-  INTEGER MXLRN , MXNRN , MXLCAT , MXNCAT , MXNKWD , MXNCL
+  INTEGER MXLRN, MXNRN, MXLCAT, MXNCAT, MXNKWD, MXNCL
   PARAMETER (MXLRN=6,MXNRN=1600,MXLCAT=10,MXNCAT=750,MXNKWD=500,MXNCL=751)
-  INTEGER KMAXI , KMAXJ , LLN
+  INTEGER KMAXI, KMAXJ, LLN
   PARAMETER (KMAXI=60,KMAXJ=40,LLN=72)
   !
   !     Other declarations.
   !
-  INTEGER i , ib , ic , ichng , icom , id , ientry , ifind , ilen , inext ,&
-    info , ipe , ips , ird , iwr , j , jj , mncl , mxlkw , mxlr ,&
-    mxnca , mxnkw , ncat , ncc , nclass , nerr , nextl , nkwd ,&
-    nstmts , ntcat , ntkwd , numr , numrr
+  INTEGER i, ib, ic, ichng, icom, id, ientry, ifind, ilen, inext ,&
+    info, ipe, ips, ird, iwr, j, jj, mncl, mxlkw, mxlr ,&
+    mxnca, mxnkw, ncat, ncc, nclass, nerr, nextl, nkwd ,&
+    nstmts, ntcat, ntkwd, numr, numrr
   !
-  INTEGER LU5 , LU6 , LU12 , LU13 , LU14 , LU15 , LU17 , LU18 , LU19
+  INTEGER LU5, LU6, LU12, LU13, LU14, LU15, LU17, LU18, LU19
   PARAMETER (LU12=12,LU13=13,LU14=14,LU15=15,LU6=6,LU17=17,LU18=18,LU19=19,&
     LU5=5)
   CHARACTER(LLN) :: line
   CHARACTER(80) :: clline
   CHARACTER(80) :: msg
-  CHARACTER(KMAXI) :: kwrds(KMAXJ) , tkwd(MXNKWD)
+  CHARACTER(KMAXI) :: kwrds(KMAXJ), tkwd(MXNKWD)
   CHARACTER(MXLRN) :: rtname
-  CHARACTER(MXLCAT) :: tcat(MXNCAT) , etcat(MXNCAT) , categ(15) ,&
+  CHARACTER(MXLCAT) :: tcat(MXNCAT), etcat(MXNCAT), categ(15) ,&
     tclass(MXNCAT)
-  INTEGER iptr(MXNCAT) , jptr(MXNCAT) , kptr(MXNCAT)
-  CHARACTER(80) :: class(MXNCL+1) , stmts(MXNCL)
-  INTEGER iptrl(7*MXNRN) , iptrr(7*MXNRN)
+  INTEGER iptr(MXNCAT), jptr(MXNCAT), kptr(MXNCAT)
+  CHARACTER(80) :: class(MXNCL+1), stmts(MXNCL)
+  INTEGER iptrl(7*MXNRN), iptrr(7*MXNRN)
   !
   !     External functions.
   !
-  INTEGER FIND , LENSTR
-  LOGICAL IFDECK , IFIF , IFSID
+  INTEGER FIND, LENSTR
+  LOGICAL IFDECK, IFIF, IFSID
   CHARACTER(10) :: CVTCAT
-  EXTERNAL CVTCAT , FIND , IFDECK , IFIF , IFSID , LENSTR
+  EXTERNAL CVTCAT, FIND, IFDECK, IFIF, IFSID, LENSTR
   !
   !     Intrinsic functions.
   !
-  INTRINSIC ABS , INDEX , MAX , MOD
+  INTRINSIC ABS, INDEX, MAX, MOD
   !***FIRST EXECUTABLE STATEMENT  SLPREP
   !     OPEN (UNIT=LU6, FILE=FOUT, STATUS='UNKNOWN', FORM='FORMATTED',
   !    +      IOSTAT = INFO)
@@ -176,7 +176,8 @@ PROGRAM SLPREP
   finp = ' '
   WRITE (UNIT=LU6,FMT=99015) DFINP
   READ (UNIT=LU5,FMT=99001,END=100) finp
-  100  IF ( LENSTR(finp)==0 ) finp = DFINP
+  100 CONTINUE
+  IF ( LENSTR(finp)==0 ) finp = DFINP
   OPEN (UNIT=LU15,FILE=finp,STATUS='OLD',FORM='FORMATTED',IOSTAT=info)
   IF ( info/=0 ) THEN
     msg = 'Failure in attempting to open '//finp
@@ -187,7 +188,8 @@ PROGRAM SLPREP
   fclass = ' '
   WRITE (UNIT=LU6,FMT=99013) DFCLAS
   READ (UNIT=LU5,FMT=99001,END=200) fclass
-  200  IF ( LENSTR(fclass)==0 ) fclass = DFCLAS
+  200 CONTINUE
+  IF ( LENSTR(fclass)==0 ) fclass = DFCLAS
   OPEN (UNIT=LU13,FILE=fclass,STATUS='OLD',FORM='FORMATTED',IOSTAT=info)
   IF ( info/=0 ) THEN
     msg = 'Failure in attempting to open '//fclass
@@ -198,7 +200,8 @@ PROGRAM SLPREP
   fcat = ' '
   WRITE (UNIT=LU6,FMT=99014) DFCAT
   READ (UNIT=LU5,FMT=99001,END=300) fcat
-  300  IF ( LENSTR(fcat)==0 ) fcat = DFCAT
+  300 CONTINUE
+  IF ( LENSTR(fcat)==0 ) fcat = DFCAT
   OPEN (UNIT=LU14,FILE=fcat,STATUS='NEW',FORM='FORMATTED',IOSTAT=info)
   IF ( info/=0 ) THEN
     msg = 'Failure in attempting to open '//fcat
@@ -209,7 +212,8 @@ PROGRAM SLPREP
   fdaf = ' '
   WRITE (UNIT=LU6,FMT=99016) DFDAF
   READ (UNIT=LU5,FMT=99001,END=400) fdaf
-  400  IF ( LENSTR(fdaf)==0 ) fdaf = DFDAF
+  400 CONTINUE
+  IF ( LENSTR(fdaf)==0 ) fdaf = DFDAF
   OPEN (UNIT=LU17,FILE=fdaf,STATUS='NEW',ACCESS='DIRECT',FORM='FORMATTED',&
     RECL=LLN,IOSTAT=info)
   IF ( info/=0 ) THEN
@@ -221,7 +225,8 @@ PROGRAM SLPREP
   ftbl = ' '
   WRITE (UNIT=LU6,FMT=99017) DFTBL
   READ (UNIT=LU5,FMT=99001,END=500) ftbl
-  500  IF ( LENSTR(ftbl)==0 ) ftbl = DFTBL
+  500 CONTINUE
+  IF ( LENSTR(ftbl)==0 ) ftbl = DFTBL
   OPEN (UNIT=LU18,FILE=ftbl,STATUS='NEW',FORM='FORMATTED',IOSTAT=info)
   IF ( info/=0 ) THEN
     msg = 'Failure in attempting to open '//ftbl
@@ -232,7 +237,8 @@ PROGRAM SLPREP
   fkwd = ' '
   WRITE (UNIT=LU6,FMT=99018) DFKWD
   READ (UNIT=LU5,FMT=99001,END=600) fkwd
-  600  IF ( LENSTR(fkwd)==0 ) fkwd = DFKWD
+  600 CONTINUE
+  IF ( LENSTR(fkwd)==0 ) fkwd = DFKWD
   OPEN (UNIT=LU19,FILE=fkwd,STATUS='NEW',FORM='FORMATTED',IOSTAT=info)
   IF ( info/=0 ) THEN
     msg = 'Failure in attempting to open '//fkwd
@@ -245,7 +251,8 @@ PROGRAM SLPREP
   flog = ' '
   WRITE (UNIT=LU6,FMT=99012) DFLOG
   READ (UNIT=LU5,FMT=99001,END=700) flog
-  700  IF ( LENSTR(flog)==0 ) flog = DFLOG
+  700 CONTINUE
+  IF ( LENSTR(flog)==0 ) flog = DFLOG
   OPEN (UNIT=LU12,FILE=flog,STATUS='NEW',FORM='FORMATTED',IOSTAT=info)
   IF ( info/=0 ) THEN
     msg = 'Failure in attempting to open '//flog
@@ -257,7 +264,7 @@ PROGRAM SLPREP
   !
   !     Write the names of all files to the transaction log file.
   !
-  WRITE (UNIT=LU12,FMT=99010) finp , FOUT , fclass , fcat , fdaf , ftbl ,&
+  WRITE (UNIT=LU12,FMT=99010) finp, FOUT, fclass, fcat, fdaf, ftbl ,&
     fkwd
   !
   !     IRD is the "READ" line number and IWR is the "WRITE" line number.
@@ -318,7 +325,7 @@ PROGRAM SLPREP
         !
         !       Write every 10th routine name to standard output.
         !
-        IF ( MOD(numr,10)==0 ) WRITE (UNIT=LU6,FMT=99006) rtname , numr
+        IF ( MOD(numr,10)==0 ) WRITE (UNIT=LU6,FMT=99006) rtname, numr
       ENDIF
       !
       !     Effective with version 4.0, every routine MUST have a PURPOSE.
@@ -405,7 +412,7 @@ PROGRAM SLPREP
             !         Put category in table and check case.  If not UPPER case,
             !         terminate.
             !
-            DO i = ntcat - 1 , ABS(ifind) + 1 , -1
+            DO i = ntcat - 1, ABS(ifind) + 1, -1
               tcat(i+1) = tcat(i)
             ENDDO
             tcat(ABS(ifind)+1) = categ(ncat)
@@ -552,7 +559,7 @@ PROGRAM SLPREP
           !
           IF ( nkwd>0 ) THEN
             mxnkw = MAX(mxnkw,nkwd)
-            DO j = nkwd , 1 , -1
+            DO j = nkwd, 1, -1
               ifind = FIND(tkwd(1),ntkwd,kwrds(j))
               IF ( ifind<=0 ) THEN
                 ntkwd = ntkwd + 1
@@ -562,7 +569,7 @@ PROGRAM SLPREP
                   nerr = 2
                   GOTO 800
                 ENDIF
-                DO i = ntkwd - 1 , ABS(ifind) + 1 , -1
+                DO i = ntkwd - 1, ABS(ifind) + 1, -1
                   tkwd(i+1) = tkwd(i)
                   iptrr(i+1) = iptrr(i)
                   iptrl(i+1) = iptrl(i)
@@ -620,176 +627,177 @@ PROGRAM SLPREP
   !     Abnormal termination.
   !
   800  CALL XERMSG(' ','SLPREP',msg,nerr,1)
-  WRITE (UNIT=LU6,FMT=99009) rtname , ird , line
+  WRITE (UNIT=LU6,FMT=99009) rtname, ird, line
   !
   !     Write the job abort message to the transaction log file also.
   !
-  WRITE (UNIT=LU12,FMT=99009) rtname , ird , line
+  WRITE (UNIT=LU12,FMT=99009) rtname, ird, line
   CLOSE (UNIT=LU14,STATUS='DELETE')
   CLOSE (UNIT=LU17,STATUS='DELETE')
   CLOSE (UNIT=LU18,STATUS='DELETE')
   CLOSE (UNIT=LU19,STATUS='DELETE')
   GOTO 1100
   !
-  900  DO j = 1 , ntcat
-  etcat(j) = CVTCAT(tcat(j))
-ENDDO
-CALL SORT(etcat,ntcat,1,tcat)
-!
-!     Read in the GAMS classification file.
-!
-i = 0
-DO
-  READ (UNIT=LU13,FMT=99001,END=1000) clline
-  IF ( i>=MXNCL ) THEN
-    msg = 'Too many lines in file '//fclass
-    nerr = 6
+  900 CONTINUE
+  DO j = 1, ntcat
+    etcat(j) = CVTCAT(tcat(j))
+  ENDDO
+  CALL SORT(etcat,ntcat,1,tcat)
+  !
+  !     Read in the GAMS classification file.
+  !
+  i = 0
+  DO
+    READ (UNIT=LU13,FMT=99001,END=1000) clline
+    IF ( i>=MXNCL ) THEN
+      msg = 'Too many lines in file '//fclass
+      nerr = 6
+      GOTO 800
+    ENDIF
+    i = i + 1
+    class(i) = clline
+  ENDDO
+  1000 nclass = i
+  class(i+1) = '@'
+  mncl = MXNCL
+  CALL PSCAT(etcat,ntcat,class,mncl,ncc,tclass,iptr,jptr,kptr,nstmts,stmts,&
+    nerr)
+  IF ( nerr/=0 ) THEN
+    msg = 'Could not locate '//tclass(nerr)//' in GAMS file.'
+    line = 'Input file completely read.'
+    nerr = 7
     GOTO 800
   ENDIF
-  i = i + 1
-  class(i) = clline
-ENDDO
-1000 nclass = i
-class(i+1) = '@'
-mncl = MXNCL
-CALL PSCAT(etcat,ntcat,class,mncl,ncc,tclass,iptr,jptr,kptr,nstmts,stmts,&
-  nerr)
-IF ( nerr/=0 ) THEN
-  msg = 'Could not locate '//tclass(nerr)//' in GAMS file.'
-  line = 'Input file completely read.'
-  nerr = 7
-  GOTO 800
-ENDIF
-!
-!     The reason NCC+1 is being written is to call attention to
-!     the fact that an extra line is included in the KPTR array
-!     which gives the line beyond the last line of the STMTS array.
-!
-WRITE (UNIT=LU14,FMT=99002) ncc + 1
-WRITE (UNIT=LU14,FMT=99003) (iptr(i),jptr(i),kptr(i),tclass(i)(1:LENSTR(&
-  tclass(i))),i=1,ncc)
-WRITE (UNIT=LU14,FMT=99004) kptr(ncc+1)
-WRITE (UNIT=LU14,FMT=99001) (stmts(i)(1:LENSTR(stmts(i))),i=1,nstmts)
-!
-WRITE (UNIT=LU19,FMT=99002) ntkwd
-DO j = 1 , ntkwd
-  ilen = LENSTR(tkwd(j))
-  WRITE (UNIT=LU19,FMT=99001) tkwd(j)(1:ilen)
-ENDDO
-!
-!     We now need to compress the IPTRL and IPTRR tables and remove
-!     any unneeded cells between the original allocated cells (MXNKWD)
-!     and the final number (NTKWD) of pointer cells.
-!
-ichng = MXNKWD - ntkwd
-IF ( ichng>0 ) THEN
-  DO j = 1 , ntkwd
-    IF ( iptrl(j)/=0 ) iptrl(j) = iptrl(j) - ichng
+  !
+  !     The reason NCC+1 is being written is to call attention to
+  !     the fact that an extra line is included in the KPTR array
+  !     which gives the line beyond the last line of the STMTS array.
+  !
+  WRITE (UNIT=LU14,FMT=99002) ncc + 1
+  WRITE (UNIT=LU14,FMT=99003) (iptr(i),jptr(i),kptr(i),tclass(i)(1:LENSTR(&
+    tclass(i))),i=1,ncc)
+  WRITE (UNIT=LU14,FMT=99004) kptr(ncc+1)
+  WRITE (UNIT=LU14,FMT=99001) (stmts(i)(1:LENSTR(stmts(i))),i=1,nstmts)
+  !
+  WRITE (UNIT=LU19,FMT=99002) ntkwd
+  DO j = 1, ntkwd
+    ilen = LENSTR(tkwd(j))
+    WRITE (UNIT=LU19,FMT=99001) tkwd(j)(1:ilen)
   ENDDO
-  jj = ntkwd + 1
-  DO j = MXNKWD + 1 , inext - 1
-    IF ( iptrl(j)/=0 ) THEN
-      iptrl(jj) = iptrl(j) - ichng
-    ELSE
-      !           IPTRL(JJ)=IPTRL(J)
-      iptrl(jj) = 0
-    ENDIF
-    iptrr(jj) = iptrr(j)
-    jj = jj + 1
+  !
+  !     We now need to compress the IPTRL and IPTRR tables and remove
+  !     any unneeded cells between the original allocated cells (MXNKWD)
+  !     and the final number (NTKWD) of pointer cells.
+  !
+  ichng = MXNKWD - ntkwd
+  IF ( ichng>0 ) THEN
+    DO j = 1, ntkwd
+      IF ( iptrl(j)/=0 ) iptrl(j) = iptrl(j) - ichng
+    ENDDO
+    jj = ntkwd + 1
+    DO j = MXNKWD + 1, inext - 1
+      IF ( iptrl(j)/=0 ) THEN
+        iptrl(jj) = iptrl(j) - ichng
+      ELSE
+        !           IPTRL(JJ)=IPTRL(J)
+        iptrl(jj) = 0
+      ENDIF
+      iptrr(jj) = iptrr(j)
+      jj = jj + 1
+    ENDDO
+  ENDIF
+  !
+  !     Set last set of pointers to 0.
+  !
+  iptrl(inext-ichng) = 0
+  iptrr(inext-ichng) = 0
+  DO j = 1, inext - ichng
+    WRITE (UNIT=LU19,FMT=99002) iptrl(j), iptrr(j)
   ENDDO
-ENDIF
-!
-!     Set last set of pointers to 0.
-!
-iptrl(inext-ichng) = 0
-iptrr(inext-ichng) = 0
-DO j = 1 , inext - ichng
-  WRITE (UNIT=LU19,FMT=99002) iptrl(j) , iptrr(j)
-ENDDO
-!
-!     Normal termination.
-!
-WRITE (UNIT=LU6,FMT=99007) numr , ird , iwr , ntcat , ntkwd , mxlr ,&
-  mxnca , mxnkw , mxlkw , numrr , ntkwd ,&
-  inext - ichng
-WRITE (UNIT=LU6,FMT=99008) nclass , ncc , nstmts
-!
-!     Write summary information to the transaction log file also.
-!
-WRITE (UNIT=LU12,FMT=99007) numr , ird , iwr , ntcat , ntkwd , mxlr ,&
-  mxnca , mxnkw , mxlkw , numrr , ntkwd ,&
-  inext - ichng
-WRITE (UNIT=LU12,FMT=99008) nclass , ncc , nstmts
-CLOSE (UNIT=LU14)
-!
-!     Call to FTRUN for CTSS/CFTLIB systems only.
-!
-CLOSE (UNIT=LU17)
-CLOSE (UNIT=LU18)
-CLOSE (UNIT=LU19)
-!
-1100 CLOSE (UNIT=LU12)
-CLOSE (UNIT=LU13)
-CLOSE (UNIT=LU15)
-!     CLOSE (UNIT=LU5)
-!     CLOSE (UNIT=LU6)
-STOP
-!
-99001 FORMAT (A)
-99002 FORMAT (I5,2X,I5)
-99003 FORMAT (3I5,3X,A)
-99004 FORMAT (I15)
-99005 FORMAT (1X,2A,4I8)
-99006 FORMAT (' Processing routine ',A,',  number ',I4)
-99007 FORMAT (//' S U M M A R Y'//' There were ',I4,&
-  ' documentation modules and a total ','of ',I6,&
-  ' lines read '/' from the sequential input file and a total of ',&
-  I6,' lines written '/' to the direct access documentation file.'/&
-  ' The library has a total of ',I3,' distinct ','categories and ',&
-  I3,' distinct keywords.'/' At least one module has ',I4,&
-  ' lines, one module ','has ',I2,' categories,'/' one module has ',&
-  I2,' keyword phrases and ','the longest keyword phrase is '/1X,I2,&
-  ' characters.'/' There were ',I4,&
-  ' category/routine lines written to ',&
-  'the category file.'/' There were ',I3,&
-  ' distinct keyword phrases written ',&
-  'to the keyword file, and '/1X,I4,&
-  ' keyword pointers written to the file.')
-99008 FORMAT (' There were ',I3,' lines read from the GAMS ',&
-  'classification scheme file.'/' There were ',I3,&
-  ' classification categories written ',&
-  'to the classification file'/' and a total of ',I3,&
-  ' classification descriptors ','written to the file.'//)
-99009 FORMAT (//' J O B   A B O R T'//' The job aborted in routine ',A,&
-  ' after processing ','approximately ',I6,&
-  ' lines'/' of the input file.'/&
-  ' The last line read from the input file was '/1X,A//)
-99010 FORMAT (//5X,'T R A N S A C T I O N   L O G'//2X,'Input source file: ',&
-  A/2X,'Output source file: ',A/2X,'GAMS classification file: ',&
-  A/2X,'Sequential file containing linked list of all ',&
-  'classifications used: ',A/2X,&
-  'Direct access file containing the documentation: ',A/2X,&
-  'Sequential file containing the deck names and ',&
-  'prologue line numbers: ',A/2X,&
-  'Sequential file of keyword phrases and pointer ','arrays: ',A/)
-99011 FORMAT (2X,'Transaction log file: ',A/)
-99012 FORMAT (//,' Enter the name of your transaction log file or',' <cr>',/,&
-  ' (The default is ''',A,''')')
-99013 FORMAT (//,' Enter the name of the GAMS (SLATEC) classification',&
-  ' file or <cr>',/,' (The default is ''',A,''')')
-99014 FORMAT (//,' Enter the name of the output file to contain the',&
-  ' classifications used ',/,' or <cr>',/,' (The default is ''',A,''')')
-99015 FORMAT (//,' Enter the name of your input source file or <cr>',/,&
-  ' (The default is ''',A,''')')
-99016 FORMAT (//,' Enter the name of the output direct access file',&
-  ' which will contain the ',/,' documentation or',' <cr>',/,&
-  ' (The default is ''',A,''')')
-99017 FORMAT (//,' Enter the name of the output file which will',&
-  ' contain the line numbers',/,' of data in the',&
-  ' documentation file or <cr>',/,' (The default is ''',A,''')')
-99018 FORMAT (//,' Enter the name of the output file which will',&
-  ' contain the keyword phrases ',/,' and their',&
-  ' pointers or <cr>',/,' (The default is ''',A,''')')
+  !
+  !     Normal termination.
+  !
+  WRITE (UNIT=LU6,FMT=99007) numr, ird, iwr, ntcat, ntkwd, mxlr ,&
+    mxnca, mxnkw, mxlkw, numrr, ntkwd ,&
+    inext - ichng
+  WRITE (UNIT=LU6,FMT=99008) nclass, ncc, nstmts
+  !
+  !     Write summary information to the transaction log file also.
+  !
+  WRITE (UNIT=LU12,FMT=99007) numr, ird, iwr, ntcat, ntkwd, mxlr ,&
+    mxnca, mxnkw, mxlkw, numrr, ntkwd ,&
+    inext - ichng
+  WRITE (UNIT=LU12,FMT=99008) nclass, ncc, nstmts
+  CLOSE (UNIT=LU14)
+  !
+  !     Call to FTRUN for CTSS/CFTLIB systems only.
+  !
+  CLOSE (UNIT=LU17)
+  CLOSE (UNIT=LU18)
+  CLOSE (UNIT=LU19)
+  !
+  1100 CLOSE (UNIT=LU12)
+  CLOSE (UNIT=LU13)
+  CLOSE (UNIT=LU15)
+  !     CLOSE (UNIT=LU5)
+  !     CLOSE (UNIT=LU6)
+  STOP
+  !
+  99001 FORMAT (A)
+  99002 FORMAT (I5,2X,I5)
+  99003 FORMAT (3I5,3X,A)
+  99004 FORMAT (I15)
+  99005 FORMAT (1X,2A,4I8)
+  99006 FORMAT (' Processing routine ',A,',  number ',I4)
+  99007 FORMAT (//' S U M M A R Y'//' There were ',I4,&
+    ' documentation modules and a total ','of ',I6,&
+    ' lines read '/' from the sequential input file and a total of ',&
+    I6,' lines written '/' to the direct access documentation file.'/&
+    ' The library has a total of ',I3,' distinct ','categories and ',&
+    I3,' distinct keywords.'/' At least one module has ',I4,&
+    ' lines, one module ','has ',I2,' categories,'/' one module has ',&
+    I2,' keyword phrases and ','the longest keyword phrase is '/1X,I2,&
+    ' characters.'/' There were ',I4,&
+    ' category/routine lines written to ',&
+    'the category file.'/' There were ',I3,&
+    ' distinct keyword phrases written ',&
+    'to the keyword file, and '/1X,I4,&
+    ' keyword pointers written to the file.')
+  99008 FORMAT (' There were ',I3,' lines read from the GAMS ',&
+    'classification scheme file.'/' There were ',I3,&
+    ' classification categories written ',&
+    'to the classification file'/' and a total of ',I3,&
+    ' classification descriptors ','written to the file.'//)
+  99009 FORMAT (//' J O B   A B O R T'//' The job aborted in routine ',A,&
+    ' after processing ','approximately ',I6,&
+    ' lines'/' of the input file.'/&
+    ' The last line read from the input file was '/1X,A//)
+  99010 FORMAT (//5X,'T R A N S A C T I O N   L O G'//2X,'Input source file: ',&
+    A/2X,'Output source file: ',A/2X,'GAMS classification file: ',&
+    A/2X,'Sequential file containing linked list of all ',&
+    'classifications used: ',A/2X,&
+    'Direct access file containing the documentation: ',A/2X,&
+    'Sequential file containing the deck names and ',&
+    'prologue line numbers: ',A/2X,&
+    'Sequential file of keyword phrases and pointer ','arrays: ',A/)
+  99011 FORMAT (2X,'Transaction log file: ',A/)
+  99012 FORMAT (//,' Enter the name of your transaction log file or',' <cr>',/,&
+    ' (The default is ''',A,''')')
+  99013 FORMAT (//,' Enter the name of the GAMS (SLATEC) classification',&
+    ' file or <cr>',/,' (The default is ''',A,''')')
+  99014 FORMAT (//,' Enter the name of the output file to contain the',&
+    ' classifications used ',/,' or <cr>',/,' (The default is ''',A,''')')
+  99015 FORMAT (//,' Enter the name of your input source file or <cr>',/,&
+    ' (The default is ''',A,''')')
+  99016 FORMAT (//,' Enter the name of the output direct access file',&
+    ' which will contain the ',/,' documentation or',' <cr>',/,&
+    ' (The default is ''',A,''')')
+  99017 FORMAT (//,' Enter the name of the output file which will',&
+    ' contain the line numbers',/,' of data in the',&
+    ' documentation file or <cr>',/,' (The default is ''',A,''')')
+  99018 FORMAT (//,' Enter the name of the output file which will',&
+    ' contain the keyword phrases ',/,' and their',&
+    ' pointers or <cr>',/,' (The default is ''',A,''')')
 END PROGRAM SLPREP
 !*==IFDECK.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK IFDECK
@@ -903,7 +911,7 @@ LOGICAL FUNCTION IFSID(Line)
   !     .. Scalar Arguments ..
   CHARACTER*(*) Line
   !     .. Local Scalars ..
-  INTEGER i , id
+  INTEGER i, id
   CHARACTER(20) :: temp
   !     .. External Subroutines ..
   EXTERNAL UPCASE
@@ -916,7 +924,7 @@ LOGICAL FUNCTION IFSID(Line)
     id = INDEX(Line,'IDENT')
     IF ( id/=0 ) THEN
       !         IF (LINE(2:ID-1) .EQ. ' ') IFSID = .TRUE.
-      DO i = 2 , id - 1
+      DO i = 2, id - 1
         IF ( Line(i:i)/=' ' ) GOTO 99999
       ENDDO
       !
@@ -925,7 +933,8 @@ LOGICAL FUNCTION IFSID(Line)
       IFSID = .TRUE.
     ENDIF
   ENDIF
-  99999 END FUNCTION IFSID
+  99999 CONTINUE
+  END FUNCTION IFSID
   !*==PSCAT.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
   !DECK PSCAT
   SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,&
@@ -1127,25 +1136,25 @@ LOGICAL FUNCTION IFSID(Line)
     !   920911  Declarations section restructured.  (WRB)
     !***END PROLOGUE  PSCAT
     !     .. Scalar Arguments ..
-    INTEGER Istmt , Mncl , Ncat , Ncc , Nerr
+    INTEGER Istmt, Mncl, Ncat, Ncc, Nerr
     !     .. Array Arguments ..
-    INTEGER Iptr(*) , Jptr(*) , Kptr(*)
-    CHARACTER*(*) Class(*) , Ecat(*) , Stmts(*) , Tclass(*)
+    INTEGER Iptr(*), Jptr(*), Kptr(*)
+    CHARACTER*(*) Class(*), Ecat(*), Stmts(*), Tclass(*)
     !     .. Local Scalars ..
-    INTEGER i , iclass , ilen , iper , istart , j , k , nlen
-    CHARACTER :: opart1 , opart3 , opart5 , opart7 , part1 , part3 , part5 ,&
+    INTEGER i, iclass, ilen, iper, istart, j, k, nlen
+    CHARACTER :: opart1, opart3, opart5, opart7, part1, part3, part5 ,&
       part7
-    CHARACTER(2) :: opart2 , opart4 , opart6 , part2 , part4 , part6
+    CHARACTER(2) :: opart2, opart4, opart6, part2, part4, part6
     !     .. Local Arrays ..
     INTEGER size(7)
     !     .. External Functions ..
     INTEGER LENSTR
     CHARACTER(10) :: CVTCAT
-    EXTERNAL LENSTR , CVTCAT
+    EXTERNAL LENSTR, CVTCAT
     !     .. Intrinsic Functions ..
     INTRINSIC INDEX
     !     .. Data statements ..
-    DATA size/1 , 3 , 4 , 6 , 7 , 9 , 10/
+    DATA size/1, 3, 4, 6, 7, 9, 10/
     !***FIRST EXECUTABLE STATEMENT  PSCAT
     Nerr = 0
     Ncc = 0
@@ -1156,7 +1165,7 @@ LOGICAL FUNCTION IFSID(Line)
     opart5 = ' '
     opart6 = ' '
     opart7 = ' '
-    DO i = 1 , Ncat
+    DO i = 1, Ncat
       part1 = Ecat(i)(1:1)
       part2 = Ecat(i)(2:3)
       part3 = Ecat(i)(4:4)
@@ -1266,17 +1275,17 @@ LOGICAL FUNCTION IFSID(Line)
         EXIT
       ENDDO
     ENDDO
-    DO i = 1 , Ncc
+    DO i = 1, Ncc
       Iptr(i) = 0
       Jptr(i) = 0
     ENDDO
-    DO j = 1 , 7
+    DO j = 1, 7
       istart = 1
       DO
-        DO i = istart , Ncc
+        DO i = istart, Ncc
           ilen = LENSTR(Tclass(i))
           IF ( ilen==size(j) ) THEN
-            DO k = i + 1 , Ncc
+            DO k = i + 1, Ncc
               nlen = LENSTR(Tclass(k))
               IF ( ilen==nlen ) THEN
                 IF ( j==1 ) THEN
@@ -1295,8 +1304,8 @@ LOGICAL FUNCTION IFSID(Line)
         EXIT
         50     ENDDO
       ENDDO
-      DO j = 1 , 7
-        DO i = 1 , Ncc
+      DO j = 1, 7
+        DO i = 1, Ncc
           ilen = LENSTR(Tclass(i))
           IF ( ilen==size(j) ) THEN
             nlen = LENSTR(Tclass(i+1))
@@ -1307,13 +1316,13 @@ LOGICAL FUNCTION IFSID(Line)
           ENDIF
         ENDDO
       ENDDO
-      DO i = 1 , Ncc
+      DO i = 1, Ncc
         Kptr(i) = 0
       ENDDO
       !
       iclass = 1
       Istmt = 1
-      DO i = 1 , Ncc
+      DO i = 1, Ncc
         DO
           !
           iper = INDEX(Class(iclass)(1:8),'.')
@@ -1377,11 +1386,11 @@ LOGICAL FUNCTION IFSID(Line)
     !   920911  Declarations section restructured.  (WRB)
     !***END PROLOGUE  SORT
     !     .. Scalar Arguments ..
-    INTEGER N , Nr
+    INTEGER N, Nr
     !     .. Array Arguments ..
-    CHARACTER*(*) Cr(*) , R(*)
+    CHARACTER*(*) Cr(*), R(*)
     !     .. Local Scalars ..
-    INTEGER i , j , k , m
+    INTEGER i, j, k, m
     CHARACTER(15) :: it
     !     .. Intrinsic Functions ..
     INTRINSIC MOD
@@ -1390,30 +1399,32 @@ LOGICAL FUNCTION IFSID(Line)
     !     DO 5 I = 1,N
     !       IR(I) = I
     !   5 CONTINUE
-    100  IF ( m>15 ) THEN
-    m = m/4
-  ELSE
-    m = m/2
-    IF ( m==0 ) RETURN
-  ENDIF
-  IF ( MOD(m,2)==0 ) m = m + 1
-  k = N - m
-  j = 1
-  i = j
-  200  DO WHILE ( R(i)>R(i+m) )
-    it = R(i)
-    R(i) = R(i+m)
-    R(i+m) = it
-    IF ( Nr>0 ) THEN
-      it = Cr(i)
-      Cr(i) = Cr(i+m)
-      Cr(i+m) = it
+    100 CONTINUE
+    IF ( m>15 ) THEN
+      m = m/4
+    ELSE
+      m = m/2
+      IF ( m==0 ) RETURN
     ENDIF
-    i = i - m
-    IF ( i<1 ) EXIT
-  ENDDO
-  j = j + 1
-  IF ( j>k ) GOTO 100
-  i = j
-  GOTO 200
+    IF ( MOD(m,2)==0 ) m = m + 1
+    k = N - m
+    j = 1
+    i = j
+    200 CONTINUE
+    DO WHILE ( R(i)>R(i+m) )
+      it = R(i)
+      R(i) = R(i+m)
+      R(i+m) = it
+      IF ( Nr>0 ) THEN
+        it = Cr(i)
+        Cr(i) = Cr(i+m)
+        Cr(i+m) = it
+      ENDIF
+      i = i - m
+      IF ( i<1 ) EXIT
+    ENDDO
+    j = j + 1
+    IF ( j>k ) GOTO 100
+    i = j
+    GOTO 200
   END SUBROUTINE SORT

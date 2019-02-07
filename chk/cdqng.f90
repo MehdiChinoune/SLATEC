@@ -22,11 +22,11 @@ SUBROUTINE CDQNG(Lun,Kprint,Ipass)
   !
   ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
   !
-  REAL(8) :: a , abserr , b , D1MACH , epmach , epsabs , epsrel , &
-    exact1 , error , exact2 , DF1N , DF2N , result , uflow
-  INTEGER ier , ierv , ip , Ipass , Kprint , neval
+  REAL(8) :: a, abserr, b, D1MACH, epmach, epsabs, epsrel, &
+    exact1, error, exact2, DF1N, DF2N, result, uflow
+  INTEGER ier, ierv, ip, Ipass, Kprint, neval
   DIMENSION ierv(1)
-  EXTERNAL DF1N , DF2N
+  EXTERNAL DF1N, DF2N
   DATA exact1/0.7281029132255818D+00/
   DATA exact2/0.1D+02/
   !***FIRST EXECUTABLE STATEMENT  CDQNG

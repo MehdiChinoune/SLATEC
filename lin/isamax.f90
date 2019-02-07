@@ -45,8 +45,8 @@ INTEGER FUNCTION ISAMAX(N,Sx,Incx)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920618  Slight restructuring of code.  (RWC, WRB)
   !***END PROLOGUE  ISAMAX
-  REAL Sx(*) , smax , xmag
-  INTEGER i , Incx , ix , N
+  REAL Sx(*), smax, xmag
+  INTEGER i, Incx, ix, N
   !***FIRST EXECUTABLE STATEMENT  ISAMAX
   ISAMAX = 0
   IF ( N<=0 ) RETURN
@@ -58,7 +58,7 @@ INTEGER FUNCTION ISAMAX(N,Sx,Incx)
     !     Code for increments equal to 1.
     !
     smax = ABS(Sx(1))
-    DO i = 2 , N
+    DO i = 2, N
       xmag = ABS(Sx(i))
       IF ( xmag>smax ) THEN
         ISAMAX = i
@@ -74,7 +74,7 @@ INTEGER FUNCTION ISAMAX(N,Sx,Incx)
   IF ( Incx<0 ) ix = (-N+1)*Incx + 1
   smax = ABS(Sx(ix))
   ix = ix + Incx
-  DO i = 2 , N
+  DO i = 2, N
     xmag = ABS(Sx(ix))
     IF ( xmag>smax ) THEN
       ISAMAX = i
@@ -83,4 +83,5 @@ INTEGER FUNCTION ISAMAX(N,Sx,Incx)
     ix = ix + Incx
   ENDDO
   RETURN
-  99999 END FUNCTION ISAMAX
+  99999 CONTINUE
+  END FUNCTION ISAMAX

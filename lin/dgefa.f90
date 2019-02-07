@@ -61,11 +61,11 @@ SUBROUTINE DGEFA(A,Lda,N,Ipvt,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGEFA
-  INTEGER Lda , N , Ipvt(*) , Info
+  INTEGER Lda, N, Ipvt(*), Info
   REAL(8) :: A(Lda,*)
   !
   REAL(8) :: t
-  INTEGER IDAMAX , j , k , kp1 , l , nm1
+  INTEGER IDAMAX, j, k, kp1, l, nm1
   !
   !     GAUSSIAN ELIMINATION WITH PARTIAL PIVOTING
   !
@@ -73,7 +73,7 @@ SUBROUTINE DGEFA(A,Lda,N,Ipvt,Info)
   Info = 0
   nm1 = N - 1
   IF ( nm1>=1 ) THEN
-    DO k = 1 , nm1
+    DO k = 1, nm1
       kp1 = k + 1
       !
       !        FIND L = PIVOT INDEX
@@ -102,7 +102,7 @@ SUBROUTINE DGEFA(A,Lda,N,Ipvt,Info)
         !
         !           ROW ELIMINATION WITH COLUMN INDEXING
         !
-        DO j = kp1 , N
+        DO j = kp1, N
           t = A(l,j)
           IF ( l/=k ) THEN
             A(l,j) = A(k,j)

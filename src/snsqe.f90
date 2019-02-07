@@ -342,14 +342,14 @@ SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SNSQE
-  INTEGER Iopt , N , Nprint , Info , Lwa
+  INTEGER Iopt, N, Nprint, Info, Lwa
   REAL Tol
-  REAL X(*) , Fvec(*) , Wa(Lwa)
-  EXTERNAL FCN , JAC
-  INTEGER index , j , lr , maxfev , ml , mode , mu , nfev , njev
-  REAL epsfcn , factor , one , xtol , zero
-  SAVE factor , one , zero
-  DATA factor , one , zero/1.0E2 , 1.0E0 , 0.0E0/
+  REAL X(*), Fvec(*), Wa(Lwa)
+  EXTERNAL FCN, JAC
+  INTEGER index, j, lr, maxfev, ml, mode, mu, nfev, njev
+  REAL epsfcn, factor, one, xtol, zero
+  SAVE factor, one, zero
+  DATA factor, one, zero/1.0E2, 1.0E0, 0.0E0/
   !***FIRST EXECUTABLE STATEMENT  SNSQE
   Info = 0
   !
@@ -367,7 +367,7 @@ SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
     mu = N - 1
     epsfcn = zero
     mode = 2
-    DO j = 1 , N
+    DO j = 1, N
       Wa(j) = one
     ENDDO
     lr = (N*(N+1))/2

@@ -4,7 +4,7 @@ SUBROUTINE XERCLR
   IMPLICIT NONE
   !*--XERCLR5
   !*** Start of declarations inserted by SPAG
-  INTEGER J4SAVE , junk
+  INTEGER J4SAVE, junk
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XERCLR
   !***PURPOSE  Reset current error number to zero.

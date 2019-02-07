@@ -4,9 +4,9 @@ REAL FUNCTION GAMIT(A,X)
   IMPLICIT NONE
   !*--GAMIT5
   !*** Start of declarations inserted by SPAG
-  REAL A , aeps , ainta , algap1 , alneps , alng , ALNGAM , alx , bot , &
-    GAMR , h , R1MACH , R9GMIT , R9LGIC , R9LGIT , sga , sgngam , sqeps , &
-    t , X
+  REAL A, aeps, ainta, algap1, alneps, alng, ALNGAM, alx, bot, &
+    GAMR, h, R1MACH, R9GMIT, R9LGIC, R9LGIT, sga, sgngam, sqeps, &
+    t, X
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  GAMIT
   !***PURPOSE  Calculate Tricomi's form of the incomplete Gamma function.
@@ -57,7 +57,7 @@ REAL FUNCTION GAMIT(A,X)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   !***END PROLOGUE  GAMIT
   LOGICAL first
-  SAVE alneps , sqeps , bot , first
+  SAVE alneps, sqeps, bot, first
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  GAMIT
   IF ( first ) THEN
@@ -121,4 +121,5 @@ REAL FUNCTION GAMIT(A,X)
   GAMIT = SIGN(EXP(t),h)
   RETURN
   !
-  99999 END FUNCTION GAMIT
+  99999 CONTINUE
+  END FUNCTION GAMIT

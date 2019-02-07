@@ -4,7 +4,7 @@ SUBROUTINE XERCNT(Librar,Subrou,Messg,Nerr,Level,Kontrl)
   IMPLICIT NONE
   !*--XERCNT5
   !*** Start of declarations inserted by SPAG
-  INTEGER Kontrl , Level , Nerr
+  INTEGER Kontrl, Level, Nerr
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XERCNT
   !***SUBSIDIARY
@@ -60,6 +60,6 @@ SUBROUTINE XERCNT(Librar,Subrou,Messg,Nerr,Level,Kontrl)
   !           names, changed routine name from XERCTL to XERCNT.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  XERCNT
-  CHARACTER*(*) Librar , Subrou , Messg
+  CHARACTER*(*) Librar, Subrou, Messg
   !***FIRST EXECUTABLE STATEMENT  XERCNT
 END SUBROUTINE XERCNT

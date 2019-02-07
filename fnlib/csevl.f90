@@ -4,8 +4,8 @@ FUNCTION CSEVL(X,Cs,N)
   IMPLICIT NONE
   !*--CSEVL5
   !*** Start of declarations inserted by SPAG
-  REAL CSEVL , R1MACH
-  INTEGER i , N , ni
+  REAL CSEVL, R1MACH
+  INTEGER i, N, ni
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CSEVL
   !***PURPOSE  Evaluate a Chebyshev series.
@@ -42,9 +42,9 @@ FUNCTION CSEVL(X,Cs,N)
   !           X to be slightly outside interval (-1,+1).  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CSEVL
-  REAL b0 , b1 , b2 , Cs(*) , onepl , twox , X
+  REAL b0, b1, b2, Cs(*), onepl, twox, X
   LOGICAL first
-  SAVE first , onepl
+  SAVE first, onepl
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  CSEVL
   IF ( first ) onepl = 1.0E0 + R1MACH(4)
@@ -58,7 +58,7 @@ FUNCTION CSEVL(X,Cs,N)
   b1 = 0.0E0
   b0 = 0.0E0
   twox = 2.0*X
-  DO i = 1 , N
+  DO i = 1, N
     b2 = b1
     b1 = b0
     ni = N + 1 - i

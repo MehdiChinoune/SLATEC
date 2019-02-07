@@ -7,7 +7,7 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !*--QAWFE7
   !*** Start of declarations inserted by SPAG
   REAL F
-  INTEGER last , Limlst , momcom
+  INTEGER last, Limlst, momcom
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QAWFE
   !***PURPOSE  The routine calculates an approximation result to a
@@ -214,15 +214,15 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  QAWFE
   !
-  REAL A , abseps , Abserr , Alist , Blist , Chebmo , correc , cycle , c1 , &
-    c2 , dl , drl , Elist , ep , eps , epsa , Epsabs , Erlst , errsum , &
-    fact , Omega , p , pi , p1 , psum , reseps , Result , res3la , &
-    Rlist , Rslst , R1MACH , uflow
-  INTEGER Ier , Ierlst , Integr , Iord , ktmin , l , Lst , Limit , ll , &
-    Maxp1 , nev , Neval , Nnlog , nres , numrl2
+  REAL A, abseps, Abserr, Alist, Blist, Chebmo, correc, cycle, c1, &
+    c2, dl, drl, Elist, ep, eps, epsa, Epsabs, Erlst, errsum, &
+    fact, Omega, p, pi, p1, psum, reseps, Result, res3la, &
+    Rlist, Rslst, R1MACH, uflow
+  INTEGER Ier, Ierlst, Integr, Iord, ktmin, l, Lst, Limit, ll, &
+    Maxp1, nev, Neval, Nnlog, nres, numrl2
   !
-  DIMENSION Alist(*) , Blist(*) , Chebmo(Maxp1,25) , Elist(*) , Erlst(*) , &
-    Ierlst(*) , Iord(*) , Nnlog(*) , psum(52) , res3la(3) , Rlist(*)&
+  DIMENSION Alist(*), Blist(*), Chebmo(Maxp1,25), Elist(*), Erlst(*), &
+    Ierlst(*), Iord(*), Nnlog(*), psum(52), res3la(3), Rlist(*)&
     , Rslst(*)
   !
   EXTERNAL F
@@ -253,8 +253,8 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !           CHEBMO    - ARRAY CONTAINING THE MODIFIED CHEBYSHEV
   !                       MOMENTS (SEE ALSO ROUTINE QC25F)
   !
-  SAVE p , pi
-  DATA p/0.9E+00/ , pi/0.31415926535897932E+01/
+  SAVE p, pi
+  DATA p/0.9E+00/, pi/0.31415926535897932E+01/
   !
   !           TEST ON VALIDITY OF PARAMETERS
   !           ------------------------------
@@ -295,7 +295,7 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
       !           MAIN DO-LOOP
       !           ------------
       !
-      DO Lst = 1 , Limlst
+      DO Lst = 1, Limlst
         !
         !           INTEGRATE OVER CURRENT SUBINTERVAL.
         !
@@ -385,4 +385,5 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
     50     Result = psum(numrl2)
     Abserr = errsum + drl
   ENDIF
-  99999 END SUBROUTINE QAWFE
+  99999 CONTINUE
+  END SUBROUTINE QAWFE

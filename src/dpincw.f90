@@ -6,8 +6,8 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   IMPLICIT NONE
   !*--DPINCW7
   !*** Start of declarations inserted by SPAG
-  INTEGER i , IDLOC , ihi , il1 , ilow , ipage , iu1 , j , Jstrt , key , &
-    Lbm , Lmx , lpg , Mrelas , nnegrc , Npp , Nvars
+  INTEGER i, IDLOC, ihi, il1, ilow, ipage, iu1, j, Jstrt, key, &
+    Lbm, Lmx, lpg, Mrelas, nnegrc, Npp, Nvars
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPINCW
   !***SUBSIDIARY
@@ -37,14 +37,14 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DPINCW
-  INTEGER Ibasis(*) , Imat(*) , Ibrc(Lbm,2) , Ipr(*) , Iwr(*) , Ind(*) , &
+  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), &
     Ibb(*)
-  REAL(8) :: Amat(*) , Basmat(*) , Csc(*) , Wr(*) , Ww(*) , Rz(*) , &
-    Rg(*) , Costs(*) , Colnrm(*) , Duals(*) , Costsc , &
-    Erdnrm , Dulnrm , Gg , one , rzj , scalr , zero , rcost , &
+  REAL(8) :: Amat(*), Basmat(*), Csc(*), Wr(*), Ww(*), Rz(*), &
+    Rg(*), Costs(*), Colnrm(*), Duals(*), Costsc, &
+    Erdnrm, Dulnrm, Gg, one, rzj, scalr, zero, rcost, &
     cnorm
   REAL(8) :: DDOT
-  LOGICAL Stpedg , pagepl , trans
+  LOGICAL Stpedg, pagepl, trans
   !***FIRST EXECUTABLE STATEMENT  DPINCW
   lpg = Lmx - (Nvars+4)
   zero = 0.D0
@@ -58,78 +58,79 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   CALL DCOPY(Nvars+Mrelas,Rg,0,Rg,1)
   nnegrc = 0
   j = Jstrt
-  100  IF ( Ibb(j)<=0 ) THEN
-  pagepl = .TRUE.
-  !
-  !     THESE ARE NONBASIC INDEPENDENT VARIABLES. THE COLS. ARE IN SPARSE
-  !     MATRIX FORMAT.
-ELSEIF ( j>Nvars ) THEN
-  pagepl = .TRUE.
-  Ww(1) = zero
-  CALL DCOPY(Mrelas,Ww,0,Ww,1)
-  scalr = -one
-  IF ( Ind(j)==2 ) scalr = one
-  i = j - Nvars
-  Rz(j) = -scalr*Duals(i)
-  Ww(i) = scalr
-  IF ( Stpedg ) THEN
-    trans = .FALSE.
-    CALL LA05BD(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Ww,trans)
-    Rg(j) = DDOT(Mrelas,Ww,1,Ww,1) + one
-  ENDIF
-ELSE
-  rzj = Costsc*Costs(j)
-  Ww(1) = zero
-  CALL DCOPY(Mrelas,Ww,0,Ww,1)
-  IF ( j/=1 ) THEN
-    ilow = Imat(j+3) + 1
-  ELSE
-    ilow = Nvars + 5
-  ENDIF
-  IF ( .NOT.(pagepl) ) THEN
-    il1 = ihi + 1
-  ELSE
-    il1 = IDLOC(ilow,Amat,Imat)
-    IF ( il1>=Lmx-1 ) THEN
-      ilow = ilow + 2
-      il1 = IDLOC(ilow,Amat,Imat)
-    ENDIF
-    ipage = ABS(Imat(Lmx-1))
-  ENDIF
-  ihi = Imat(j+4) - (ilow-il1)
-  DO
-    iu1 = MIN(Lmx-2,ihi)
-    IF ( il1>iu1 ) EXIT
-    DO i = il1 , iu1
-      rzj = rzj - Amat(i)*Duals(Imat(i))
-      Ww(Imat(i)) = Amat(i)*Csc(j)
-    ENDDO
-    IF ( ihi<=Lmx-2 ) EXIT
-    ipage = ipage + 1
-    key = 1
-    CALL DPRWPG(key,ipage,lpg,Amat,Imat)
-    il1 = Nvars + 5
-    ihi = ihi - lpg
-  ENDDO
-  pagepl = ihi==(Lmx-2)
-  Rz(j) = rzj*Csc(j)
-  IF ( Stpedg ) THEN
-    trans = .FALSE.
-    CALL LA05BD(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Ww,trans)
+  100 CONTINUE
+  IF ( Ibb(j)<=0 ) THEN
+    pagepl = .TRUE.
     !
-    !     THESE ARE NONBASIC DEPENDENT VARIABLES. THE COLS. ARE IMPLICITLY
-    !     DEFINED.
-    Rg(j) = DDOT(Mrelas,Ww,1,Ww,1) + one
+    !     THESE ARE NONBASIC INDEPENDENT VARIABLES. THE COLS. ARE IN SPARSE
+    !     MATRIX FORMAT.
+  ELSEIF ( j>Nvars ) THEN
+    pagepl = .TRUE.
+    Ww(1) = zero
+    CALL DCOPY(Mrelas,Ww,0,Ww,1)
+    scalr = -one
+    IF ( Ind(j)==2 ) scalr = one
+    i = j - Nvars
+    Rz(j) = -scalr*Duals(i)
+    Ww(i) = scalr
+    IF ( Stpedg ) THEN
+      trans = .FALSE.
+      CALL LA05BD(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Ww,trans)
+      Rg(j) = DDOT(Mrelas,Ww,1,Ww,1) + one
+    ENDIF
+  ELSE
+    rzj = Costsc*Costs(j)
+    Ww(1) = zero
+    CALL DCOPY(Mrelas,Ww,0,Ww,1)
+    IF ( j/=1 ) THEN
+      ilow = Imat(j+3) + 1
+    ELSE
+      ilow = Nvars + 5
+    ENDIF
+    IF ( .NOT.(pagepl) ) THEN
+      il1 = ihi + 1
+    ELSE
+      il1 = IDLOC(ilow,Amat,Imat)
+      IF ( il1>=Lmx-1 ) THEN
+        ilow = ilow + 2
+        il1 = IDLOC(ilow,Amat,Imat)
+      ENDIF
+      ipage = ABS(Imat(Lmx-1))
+    ENDIF
+    ihi = Imat(j+4) - (ilow-il1)
+    DO
+      iu1 = MIN(Lmx-2,ihi)
+      IF ( il1>iu1 ) EXIT
+      DO i = il1, iu1
+        rzj = rzj - Amat(i)*Duals(Imat(i))
+        Ww(Imat(i)) = Amat(i)*Csc(j)
+      ENDDO
+      IF ( ihi<=Lmx-2 ) EXIT
+      ipage = ipage + 1
+      key = 1
+      CALL DPRWPG(key,ipage,lpg,Amat,Imat)
+      il1 = Nvars + 5
+      ihi = ihi - lpg
+    ENDDO
+    pagepl = ihi==(Lmx-2)
+    Rz(j) = rzj*Csc(j)
+    IF ( Stpedg ) THEN
+      trans = .FALSE.
+      CALL LA05BD(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Ww,trans)
+      !
+      !     THESE ARE NONBASIC DEPENDENT VARIABLES. THE COLS. ARE IMPLICITLY
+      !     DEFINED.
+      Rg(j) = DDOT(Mrelas,Ww,1,Ww,1) + one
+    ENDIF
   ENDIF
-ENDIF
-!
-rcost = Rz(j)
-IF ( MOD(Ibb(j),2)==0 ) rcost = -rcost
-IF ( Ind(j)==4 ) rcost = -ABS(rcost)
-cnorm = one
-IF ( j<=Nvars ) cnorm = Colnrm(j)
-IF ( rcost+Erdnrm*Dulnrm*cnorm<zero ) nnegrc = nnegrc + 1
-j = MOD(j,Mrelas+Nvars) + 1
-IF ( nnegrc<Npp.AND.j/=Jstrt ) GOTO 100
-Jstrt = j
+  !
+  rcost = Rz(j)
+  IF ( MOD(Ibb(j),2)==0 ) rcost = -rcost
+  IF ( Ind(j)==4 ) rcost = -ABS(rcost)
+  cnorm = one
+  IF ( j<=Nvars ) cnorm = Colnrm(j)
+  IF ( rcost+Erdnrm*Dulnrm*cnorm<zero ) nnegrc = nnegrc + 1
+  j = MOD(j,Mrelas+Nvars) + 1
+  IF ( nnegrc<Npp.AND.j/=Jstrt ) GOTO 100
+  Jstrt = j
 END SUBROUTINE DPINCW

@@ -98,16 +98,16 @@ SUBROUTINE DSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
   !***END PROLOGUE  DSPR2
   !     .. Scalar Arguments ..
   REAL(8) :: Alpha
-  INTEGER Incx , Incy , N
+  INTEGER Incx, Incy, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  REAL(8) :: Ap(*) , X(*) , Y(*)
+  REAL(8) :: Ap(*), X(*), Y(*)
   !     .. Parameters ..
   REAL(8) :: ZERO
   PARAMETER (ZERO=0.0D+0)
   !     .. Local Scalars ..
-  REAL(8) :: temp1 , temp2
-  INTEGER i , info , ix , iy , j , jx , jy , k , kk , kx , ky
+  REAL(8) :: temp1, temp2
+  INTEGER i, info, ix, iy, j, jx, jy, k, kk, kx, ky
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
@@ -163,12 +163,12 @@ SUBROUTINE DSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
     !        Form  A  when upper triangle is stored in AP.
     !
     IF ( (Incx==1).AND.(Incy==1) ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( (X(j)/=ZERO).OR.(Y(j)/=ZERO) ) THEN
           temp1 = Alpha*Y(j)
           temp2 = Alpha*X(j)
           k = kk
-          DO i = 1 , j
+          DO i = 1, j
             Ap(k) = Ap(k) + X(i)*temp1 + Y(i)*temp2
             k = k + 1
           ENDDO
@@ -176,13 +176,13 @@ SUBROUTINE DSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
         kk = kk + j
       ENDDO
     ELSE
-      DO j = 1 , N
+      DO j = 1, N
         IF ( (X(jx)/=ZERO).OR.(Y(jy)/=ZERO) ) THEN
           temp1 = Alpha*Y(jy)
           temp2 = Alpha*X(jx)
           ix = kx
           iy = ky
-          DO k = kk , kk + j - 1
+          DO k = kk, kk + j - 1
             Ap(k) = Ap(k) + X(ix)*temp1 + Y(iy)*temp2
             ix = ix + Incx
             iy = iy + Incy
@@ -197,12 +197,12 @@ SUBROUTINE DSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
     !        Form  A  when lower triangle is stored in AP.
     !
   ELSEIF ( (Incx==1).AND.(Incy==1) ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       IF ( (X(j)/=ZERO).OR.(Y(j)/=ZERO) ) THEN
         temp1 = Alpha*Y(j)
         temp2 = Alpha*X(j)
         k = kk
-        DO i = j , N
+        DO i = j, N
           Ap(k) = Ap(k) + X(i)*temp1 + Y(i)*temp2
           k = k + 1
         ENDDO
@@ -210,13 +210,13 @@ SUBROUTINE DSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
       kk = kk + N - j + 1
     ENDDO
   ELSE
-    DO j = 1 , N
+    DO j = 1, N
       IF ( (X(jx)/=ZERO).OR.(Y(jy)/=ZERO) ) THEN
         temp1 = Alpha*Y(jy)
         temp2 = Alpha*X(jx)
         ix = jx
         iy = jy
-        DO k = kk , kk + N - j
+        DO k = kk, kk + N - j
           Ap(k) = Ap(k) + X(ix)*temp1 + Y(iy)*temp2
           ix = ix + Incx
           iy = iy + Incy

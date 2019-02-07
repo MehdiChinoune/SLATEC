@@ -23,11 +23,11 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CBUNI
-  COMPLEX cscl , cscr , cy , rz , st , s1 , s2 , Y , Z
-  REAL Alim , ax , ay , dfnu , Elim , Fnu , fnui , Fnul , gnu , Tol , xx , &
-    yy , ascle , bry , str , sti , stm , R1MACH
-  INTEGER i , iflag , iform , k , Kode , N , nl , Nlast , Nui , nw , Nz
-  DIMENSION Y(N) , cy(2) , bry(3)
+  COMPLEX cscl, cscr, cy, rz, st, s1, s2, Y, Z
+  REAL Alim, ax, ay, dfnu, Elim, Fnu, fnui, Fnul, gnu, Tol, xx, &
+    yy, ascle, bry, str, sti, stm, R1MACH
+  INTEGER i, iflag, iform, k, Kode, N, nl, Nlast, Nui, nw, Nz
+  DIMENSION Y(N), cy(2), bry(3)
   !***FIRST EXECUTABLE STATEMENT  CBUNI
   Nz = 0
   xx = REAL(Z)
@@ -102,7 +102,7 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
         s1 = cy(2)*cscl
         s2 = cy(1)*cscl
         rz = CMPLX(2.0E0,0.0E0)/Z
-        DO i = 1 , Nui
+        DO i = 1, Nui
           st = s2
           s2 = CMPLX(dfnu+fnui,0.0E0)*rz*s2 + s1
           s1 = st
@@ -133,7 +133,7 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
         nl = N - 1
         fnui = nl
         k = nl
-        DO i = 1 , nl
+        DO i = 1, nl
           st = s2
           s2 = CMPLX(Fnu+fnui,0.0E0)*rz*s2 + s1
           s1 = st
@@ -170,4 +170,5 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   RETURN
   100  Nz = nw
   RETURN
-  99999 END SUBROUTINE CBUNI
+  99999 CONTINUE
+  END SUBROUTINE CBUNI

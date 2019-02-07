@@ -23,9 +23,9 @@ COMPLEX FUNCTION CBEG(Reset)
   !     .. Scalar Arguments ..
   LOGICAL Reset
   !     .. Local Scalars ..
-  INTEGER i , ic , j , mi , mj
+  INTEGER i, ic, j, mi, mj
   !     .. Save statement ..
-  SAVE i , ic , j , mi , mj
+  SAVE i, ic, j, mi, mj
   !     .. Intrinsic Functions ..
   INTRINSIC CMPLX
   !***FIRST EXECUTABLE STATEMENT  CBEG

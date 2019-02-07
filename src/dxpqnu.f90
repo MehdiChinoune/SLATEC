@@ -4,8 +4,8 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
   !*--DXPQNU5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , ia , Id , Ierror , if , ipq , ipq1 , ipq2 , Ipqa , ipsik , &
-    ipsix , ix1 , ixs , j , j0 , k , Mu , NBItsf
+  INTEGER i, ia, Id, Ierror, if, ipq, ipq1, ipq2, Ipqa, ipsik, &
+    ipsix, ix1, ixs, j, j0, k, Mu, NBItsf
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXPQNU
   !***SUBSIDIARY
@@ -30,10 +30,10 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXPQNU
-  REAL(8) :: a , nu , Nu1 , Nu2 , pq , Pqa , DXPSI , r , Theta , w , &
-    x , x1 , x2 , xs , y , z
-  REAL(8) :: di , dmu , pq1 , pq2 , factmu , flok
-  DIMENSION Pqa(*) , Ipqa(*)
+  REAL(8) :: a, nu, Nu1, Nu2, pq, Pqa, DXPSI, r, Theta, w, &
+    x, x1, x2, xs, y, z
+  REAL(8) :: di, dmu, pq1, pq2, factmu, flok
+  DIMENSION Pqa(*), Ipqa(*)
   COMMON /DXBLK1/ NBItsf
   SAVE /DXBLK1/
   !
@@ -60,7 +60,7 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   IF ( Mu>0 ) THEN
     factmu = 1.D0
     if = 0
-    DO i = 1 , k
+    DO i = 1, k
       factmu = factmu*i
       CALL DXADJ(factmu,if,Ierror)
     ENDDO
@@ -81,7 +81,7 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !        FOR USE AS STARTING VALUES IN RECURRENCE RELATION.
   !
   pq2 = 0.0D0
-  DO j = 1 , 2
+  DO j = 1, 2
     ipq1 = 0
     IF ( Id==2 ) THEN
       !
@@ -106,7 +106,7 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
       ipq = 0
       ia = 0
       a = 1.D0
-      DO k = 1 , j0
+      DO k = 1, j0
         flok = k
         IF ( k/=1 ) THEN
           a = a*y*(flok-2.D0-nu)*(flok-1.D0+nu)&
@@ -143,7 +143,7 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
       pq = 1.D0
       a = 1.D0
       ia = 0
-      DO i = 2 , j0
+      DO i = 2, j0
         di = i
         a = a*y*(di-2.D0-nu)*(di-1.D0+nu)/((di-1.D0+dmu)*(di-1.D0))
         CALL DXADJ(a,ia,Ierror)
@@ -156,7 +156,7 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
         x2 = r
         x1 = pq
         k = Mu
-        DO i = 1 , k
+        DO i = 1, k
           x1 = x1*x2
           CALL DXADJ(x1,ipq,Ierror)
         ENDDO

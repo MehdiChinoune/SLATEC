@@ -29,43 +29,43 @@ SUBROUTINE DCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   PARAMETER (ZERO=0.0D0)
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  REAL(8) :: Eps , Thresh
-  INTEGER Kprint , Nalf , Nbet , Nidim , Nmax , Nout
+  REAL(8) :: Eps, Thresh
+  INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
   CHARACTER(6) :: Sname
   !     .. Array Arguments ..
-  REAL(8) :: Aa(Nmax*Nmax) , Ab(2*Nmax*Nmax) , Alf(Nalf) ,&
-    As(Nmax*Nmax) , Bb(Nmax*Nmax) , Bet(Nbet) , Bs(Nmax*Nmax)&
-    , C(Nmax,Nmax) , Cc(Nmax*Nmax) , Cs(Nmax*Nmax) , Ct(Nmax)&
-    , G(Nmax) , W(2*Nmax)
+  REAL(8) :: Aa(Nmax*Nmax), Ab(2*Nmax*Nmax), Alf(Nalf) ,&
+    As(Nmax*Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax)&
+    , C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax)&
+    , G(Nmax), W(2*Nmax)
   INTEGER Idim(Nidim)
   !     .. Local Scalars ..
-  REAL(8) :: alpha , als , beta , bets , err , errmax
-  INTEGER i , ia , ib , ict , icu , ik , in , j , jc , jj , jjab , k , ks ,&
-    laa , lbb , lcc , lda , ldas , ldb , ldbs , ldc , ldcs , lj , ma ,&
-    n , na , nargs , nc , nerr , ns
-  LOGICAL ftl , null , reset , tran , upper
-  CHARACTER :: trans , transs , uplo , uplos
+  REAL(8) :: alpha, als, beta, bets, err, errmax
+  INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, jjab, k, ks ,&
+    laa, lbb, lcc, lda, ldas, ldb, ldbs, ldc, ldcs, lj, ma ,&
+    n, na, nargs, nc, nerr, ns
+  LOGICAL ftl, null, reset, tran, upper
+  CHARACTER :: trans, transs, uplo, uplos
   CHARACTER(2) :: ichu
   CHARACTER(3) :: icht
   !     .. Local Arrays ..
   LOGICAL isame(13)
   !     .. External Functions ..
   INTEGER NUMXER
-  LOGICAL LDE , LDERES
-  EXTERNAL LDE , LDERES , NUMXER
+  LOGICAL LDE, LDERES
+  EXTERNAL LDE, LDERES, NUMXER
   !     .. External Subroutines ..
-  EXTERNAL DSYR2K , DMAKE3 , DMMCH
+  EXTERNAL DSYR2K, DMAKE3, DMMCH
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MAX , MIN
+  INTRINSIC ABS, MAX, MIN
   !     .. Data statements ..
-  DATA ichu/'UL'/ , icht/'NTC'/
+  DATA ichu/'UL'/, icht/'NTC'/
   !***FIRST EXECUTABLE STATEMENT  DCHK53
   nargs = 12
   nc = 0
   reset = .TRUE.
   errmax = ZERO
   !
-  DO in = 1 , Nidim
+  DO in = 1, Nidim
     n = Idim(in)
     !        Set LDC to 1 more than minimum value if room.
     ldc = n
@@ -75,10 +75,10 @@ SUBROUTINE DCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
       lcc = ldc*n
       null = n<=0
       !
-      DO ik = 1 , Nidim
+      DO ik = 1, Nidim
         k = Idim(ik)
         !
-        DO ict = 1 , 3
+        DO ict = 1, 3
           trans = icht(ict:ict)
           tran = trans=='T' .OR. trans=='C'
           IF ( tran ) THEN
@@ -115,14 +115,14 @@ SUBROUTINE DCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                 ZERO)
             ENDIF
             !
-            DO icu = 1 , 2
+            DO icu = 1, 2
               uplo = ichu(icu:icu)
               upper = uplo=='U'
               !
-              DO ia = 1 , Nalf
+              DO ia = 1, Nalf
                 alpha = Alf(ia)
                 !
-                DO ib = 1 , Nbet
+                DO ib = 1, Nbet
                   beta = Bet(ib)
                   !
                   !                       Generate the matrix C.
@@ -138,16 +138,16 @@ SUBROUTINE DCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                   ns = n
                   ks = k
                   als = alpha
-                  DO i = 1 , laa
+                  DO i = 1, laa
                     As(i) = Aa(i)
                   ENDDO
                   ldas = lda
-                  DO i = 1 , lbb
+                  DO i = 1, lbb
                     Bs(i) = Bb(i)
                   ENDDO
                   ldbs = ldb
                   bets = beta
-                  DO i = 1 , lcc
+                  DO i = 1, lcc
                     Cs(i) = Cc(i)
                   ENDDO
                   ldcs = ldc
@@ -186,7 +186,7 @@ SUBROUTINE DCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                   !                       If data was incorrectly changed, report and
                   !                       return.
                   !
-                  DO i = 1 , nargs
+                  DO i = 1, nargs
                     IF ( .NOT.isame(i) ) THEN
                       Fatal = .TRUE.
                       IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
@@ -200,7 +200,7 @@ SUBROUTINE DCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                     !
                     jjab = 1
                     jc = 1
-                    DO j = 1 , n
+                    DO j = 1, n
                       IF ( upper ) THEN
                         jj = 1
                         lj = j
@@ -209,7 +209,7 @@ SUBROUTINE DCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                         lj = n - j + 1
                       ENDIF
                       IF ( tran ) THEN
-                        DO i = 1 , k
+                        DO i = 1, k
                           W(i) = Ab((j-1)*2*Nmax+k+i)
                           W(k+i) = Ab((j-1)*2*Nmax+i)
                         ENDDO
@@ -217,7 +217,7 @@ SUBROUTINE DCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                           2*Nmax,beta,C(jj,j),Nmax,Ct,G,Cc(jc),ldc,&
                           Eps,err,ftl,Nout,.TRUE.,Kprint)
                       ELSE
-                        DO i = 1 , k
+                        DO i = 1, k
                           W(i) = Ab((k+i-1)*Nmax+j)
                           W(k+i) = Ab((i-1)*Nmax+j)
                         ENDDO
@@ -238,8 +238,8 @@ SUBROUTINE DCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                     Fatal = .TRUE.
                     IF ( Kprint>=3 ) THEN
                       WRITE (Nout,FMT=99004) Sname
-                      WRITE (Nout,FMT=99005) nc , Sname , uplo , trans , n ,&
-                        k , alpha , lda , ldb , beta , ldc
+                      WRITE (Nout,FMT=99005) nc, Sname, uplo, trans, n ,&
+                        k, alpha, lda, ldb, beta, ldc
                     ENDIF
                   ENDIF
                   !
@@ -262,9 +262,9 @@ SUBROUTINE DCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   IF ( .NOT.Fatal ) THEN
     IF ( Kprint>=3 ) THEN
       IF ( errmax<Thresh ) THEN
-        WRITE (Nout,FMT=99001) Sname , nc
+        WRITE (Nout,FMT=99001) Sname, nc
       ELSE
-        WRITE (Nout,FMT=99003) Sname , nc , errmax
+        WRITE (Nout,FMT=99003) Sname, nc, errmax
       ENDIF
     ENDIF
   ENDIF

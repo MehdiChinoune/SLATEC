@@ -4,9 +4,9 @@ SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
   IMPLICIT NONE
   !*--DY45
   !*** Start of declarations inserted by SPAG
-  REAL AIT , BIT , CIT , DIT , DLX , DLX4 , DLY , DLY4 , TDLx3 , TDLy3 , U , &
-    Uyyy , Uyyyy
-  INTEGER I , Idmn , IS , J , JS , K , KSWx , KSWy , L , MIT , MS , NIT , NS
+  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, TDLx3, TDLy3, U, &
+    Uyyy, Uyyyy
+  INTEGER I, Idmn, IS, J, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DY4
   !***SUBSIDIARY
@@ -29,8 +29,8 @@ SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  DY4
   !
-  COMMON /SPL4  / KSWx , KSWy , K , L , AIT , BIT , CIT , DIT , MIT , NIT , &
-    IS , MS , JS , NS , DLX , DLY , TDLx3 , TDLy3 , DLX4 , &
+  COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
+    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
     DLY4
   DIMENSION U(Idmn,*)
   !***FIRST EXECUTABLE STATEMENT  DY4
@@ -108,4 +108,5 @@ SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
   Uyyy = (-U(I,L-2)+2.0*U(I,L-1)-2.0*U(I,2)+U(I,3))/TDLy3
   Uyyyy = (U(I,L-2)-4.0*U(I,L-1)+6.0*U(I,1)-4.0*U(I,2)+U(I,3))/DLY4
   RETURN
-  99999 END SUBROUTINE DY4
+  99999 CONTINUE
+  END SUBROUTINE DY4

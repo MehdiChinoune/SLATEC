@@ -4,7 +4,7 @@ SUBROUTINE STEST(Len,Scomp,Strue,Ssize,Sfac,Kprint)
   IMPLICIT NONE
   !*--STEST5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , ICAse , INCx , INCy , Kprint , Len , MODe , N , NPRint
+  INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  STEST
   !***PURPOSE  Compare arrays SCOMP and STRUE.
@@ -33,14 +33,14 @@ SUBROUTINE STEST(Len,Scomp,Strue,Ssize,Sfac,Kprint)
   !   920211  Code restructured and information added to the DESCRIPTION
   !           section.  (WRB)
   !***END PROLOGUE  STEST
-  REAL Scomp(*) , Strue(*) , Ssize(*) , Sfac , sd , releps , R1MACH
+  REAL Scomp(*), Strue(*), Ssize(*), Sfac, sd, releps, R1MACH
   LOGICAL PASs
-  COMMON /COMBLA/ NPRint , ICAse , N , INCx , INCy , MODe , PASs
+  COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
   SAVE releps
   DATA releps/0.0E0/
   !***FIRST EXECUTABLE STATEMENT  STEST
   IF ( releps==0.0E0 ) releps = R1MACH(4)
-  DO i = 1 , Len
+  DO i = 1, Len
     sd = ABS(Scomp(i)-Strue(i))
     IF ( Sfac*sd>ABS(Ssize(i))*releps ) THEN
       !
@@ -59,8 +59,8 @@ SUBROUTINE STEST(Len,Scomp,Strue,Ssize,Sfac,Kprint)
             2X,'DIFFERENCE',5X,'SIZE(I)'/1X)
         ENDIF
       ENDIF
-      IF ( Kprint>=3 ) WRITE (NPRint,99003) ICAse , N , INCx , INCy , MODe , &
-        i , Scomp(i) , Strue(i) , sd , Ssize(i)
+      IF ( Kprint>=3 ) WRITE (NPRint,99003) ICAse, N, INCx, INCy, MODe, &
+        i, Scomp(i), Strue(i), sd, Ssize(i)
       99003     FORMAT (1X,I4,I3,3I5,I3,2E36.8,2E12.4)
     ENDIF
   ENDDO

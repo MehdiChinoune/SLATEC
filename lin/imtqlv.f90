@@ -90,9 +90,9 @@ SUBROUTINE IMTQLV(N,D,E,E2,W,Ind,Ierr,Rv1)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  IMTQLV
   !
-  INTEGER i , j , k , l , m , N , ii , mml , tag , Ierr
-  REAL D(*) , E(*) , E2(*) , W(*) , Rv1(*)
-  REAL b , c , f , g , p , r , s , s1 , s2
+  INTEGER i, j, k, l, m, N, ii, mml, tag, Ierr
+  REAL D(*), E(*), E2(*), W(*), Rv1(*)
+  REAL b, c, f, g, p, r, s, s1, s2
   REAL PYTHAG
   INTEGER Ind(*)
   !
@@ -101,7 +101,7 @@ SUBROUTINE IMTQLV(N,D,E,E2,W,Ind,Ierr,Rv1)
   k = 0
   tag = 0
   !
-  DO i = 1 , N
+  DO i = 1, N
     W(i) = D(i)
     IF ( i/=1 ) Rv1(i-1) = E(i)
   ENDDO
@@ -109,10 +109,10 @@ SUBROUTINE IMTQLV(N,D,E,E2,W,Ind,Ierr,Rv1)
   E2(1) = 0.0E0
   Rv1(N) = 0.0E0
   !
-  DO l = 1 , N
+  DO l = 1, N
     j = 0
     !     .......... LOOK FOR SMALL SUB-DIAGONAL ELEMENT ..........
-    50     DO m = l , N
+    50     DO m = l, N
     IF ( m==N ) EXIT
     s1 = ABS(W(m)) + ABS(W(m+1))
     s2 = s1 + ABS(Rv1(m))
@@ -130,7 +130,7 @@ SUBROUTINE IMTQLV(N,D,E,E2,W,Ind,Ierr,Rv1)
     !     .......... ORDER EIGENVALUES ..........
     IF ( l/=1 ) THEN
       !     .......... FOR I=L STEP -1 UNTIL 2 DO -- ..........
-      DO ii = 2 , l
+      DO ii = 2, l
         i = l + 2 - ii
         IF ( p>=W(i-1) ) GOTO 160
         W(i) = W(i-1)
@@ -153,7 +153,7 @@ SUBROUTINE IMTQLV(N,D,E,E2,W,Ind,Ierr,Rv1)
     p = 0.0E0
     mml = m - l
     !     .......... FOR I=M-1 STEP -1 UNTIL L DO -- ..........
-    DO ii = 1 , mml
+    DO ii = 1, mml
       i = m - ii
       f = s*Rv1(i)
       b = c*Rv1(i)
@@ -188,4 +188,5 @@ GOTO 99999
 !     .......... SET ERROR -- NO CONVERGENCE TO AN
 !                EIGENVALUE AFTER 30 ITERATIONS ..........
 200  Ierr = l
-99999 END SUBROUTINE IMTQLV
+  99999 CONTINUE
+  END SUBROUTINE IMTQLV

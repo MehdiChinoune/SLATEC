@@ -4,10 +4,10 @@ FUNCTION BIE(X)
   IMPLICIT NONE
   !*--BIE5
   !*** Start of declarations inserted by SPAG
-  REAL atr , BIE , bif2cs , bifcs , big2cs , bigcs , bip2cs , bipcs , btr , &
-    CSEVL , eta , R1MACH , sqrtx , theta , X , x32sml , x3sml , xbig , &
-    xm , z
-  INTEGER INITS , nbif , nbif2 , nbig , nbig2 , nbip , nbip2
+  REAL atr, BIE, bif2cs, bifcs, big2cs, bigcs, bip2cs, bipcs, btr, &
+    CSEVL, eta, R1MACH, sqrtx, theta, X, x32sml, x3sml, xbig, &
+    xm, z
+  INTEGER INITS, nbif, nbif2, nbig, nbig2, nbip, nbip2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BIE
   !***PURPOSE  Calculate the Bairy function for a negative argument and an
@@ -68,10 +68,10 @@ FUNCTION BIE(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  BIE
   LOGICAL first
-  DIMENSION bifcs(9) , bigcs(8) , bif2cs(10) , big2cs(10) , bipcs(24) , &
+  DIMENSION bifcs(9), bigcs(8), bif2cs(10), big2cs(10), bipcs(24), &
     bip2cs(29)
-  SAVE bifcs , bigcs , bif2cs , big2cs , bipcs , bip2cs , atr , btr , nbif , &
-    nbig , nbif2 , nbig2 , nbip , nbip2 , x3sml , x32sml , xbig , first
+  SAVE bifcs, bigcs, bif2cs, big2cs, bipcs, bip2cs, atr, btr, nbif, &
+    nbig, nbif2, nbig2, nbip, nbip2, x3sml, x32sml, xbig, first
   DATA bifcs(1)/ - .01673021647198664948E0/
   DATA bifcs(2)/.1025233583424944561E0/
   DATA bifcs(3)/.00170830925073815165E0/
@@ -212,4 +212,5 @@ FUNCTION BIE(X)
   BIE = (0.625+CSEVL(z,bipcs,nbip))/SQRT(sqrtx)
   RETURN
   !
-  99999 END FUNCTION BIE
+  99999 CONTINUE
+  END FUNCTION BIE

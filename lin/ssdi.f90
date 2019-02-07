@@ -71,19 +71,19 @@ SUBROUTINE SSDI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  SSDI
   !     .. Scalar Arguments ..
-  INTEGER Isym , N , Nelt
+  INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt) , B(N) , Rwork(*) , X(N)
-  INTEGER Ia(Nelt) , Iwork(10) , Ja(Nelt)
+  REAL A(Nelt), B(N), Rwork(*), X(N)
+  INTEGER Ia(Nelt), Iwork(10), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER i , locd
+  INTEGER i, locd
   !***FIRST EXECUTABLE STATEMENT  SSDI
   !
   !         Determine where the inverse of the diagonal
   !         is in the work array and then scale by it.
   !
   locd = Iwork(4) - 1
-  DO i = 1 , N
+  DO i = 1, N
     X(i) = Rwork(locd+i)*B(i)
   ENDDO
   !------------- LAST LINE OF SSDI FOLLOWS ----------------------------

@@ -20,10 +20,10 @@ SUBROUTINE ZSQRT(Ar,Ai,Br,Bi)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  ZSQRT
-  REAL(8) :: Ar , Ai , Br , Bi , zm , dtheta , dpi , drt
+  REAL(8) :: Ar, Ai, Br, Bi, zm, dtheta, dpi, drt
   REAL(8) :: ZABS
   EXTERNAL ZABS
-  DATA drt , dpi/7.071067811865475244008443621D-1 , &
+  DATA drt, dpi/7.071067811865475244008443621D-1, &
     3.141592653589793238462643383D+0/
   !***FIRST EXECUTABLE STATEMENT  ZSQRT
   zm = ZABS(Ar,Ai)
@@ -64,4 +64,5 @@ SUBROUTINE ZSQRT(Ar,Ai,Br,Bi)
   Br = zm*COS(dtheta)
   Bi = zm*SIN(dtheta)
   RETURN
-  99999 END SUBROUTINE ZSQRT
+  99999 CONTINUE
+  END SUBROUTINE ZSQRT

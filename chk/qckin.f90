@@ -4,7 +4,7 @@ SUBROUTINE QCKIN(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--QCKIN5
   !*** Start of declarations inserted by SPAG
-  INTEGER Ipass , Kprint
+  INTEGER Ipass, Kprint
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QCKIN
   !***PURPOSE  Quick check for BSKIN.
@@ -39,27 +39,27 @@ SUBROUTINE QCKIN(Lun,Kprint,Ipass)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  QCKIN
-  INTEGER i , ierr , iflg , ix , i1m12 , j , k , kode , Lun , m , mdel , &
-    mm , n , ndel , nn , nz
+  INTEGER i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, &
+    mm, n, ndel, nn, nz
   INTEGER I1MACH
-  REAL aix , er , tol , v , x , xinc , y
+  REAL aix, er, tol, v, x, xinc, y
   REAL R1MACH
-  DIMENSION v(1) , y(10)
+  DIMENSION v(1), y(10)
   !***FIRST EXECUTABLE STATEMENT  QCKIN
   tol = 1000.0E0*MAX(R1MACH(4),1.0E-18)
   iflg = 0
   IF ( Kprint>=3 ) WRITE (Lun,99001)
   99001 FORMAT ('1'//' QUICK CHECK DIAGNOSTICS FOR BSKIN'//)
-  DO kode = 1 , 2
+  DO kode = 1, 2
     n = 0
-    DO nn = 1 , 7
+    DO nn = 1, 7
       m = 1
-      DO mm = 1 , 4
+      DO mm = 1, 4
         x = 0.0E0
-        DO ix = 1 , 6
+        DO ix = 1, 6
           IF ( n/=0.OR.ix/=1 ) THEN
             CALL BSKIN(x,n,kode,m,y,nz,ierr)
-            DO k = 1 , m , 2
+            DO k = 1, m, 2
               j = n + k - 1
               CALL BSKIN(x,j,kode,1,v,nz,ierr)
               er = ABS((v(1)-y(k))/v(1))
@@ -70,8 +70,8 @@ SUBROUTINE QCKIN(Lun,Kprint,Ipass)
                     'KODE',3X,'N',4X,'M',4X,'K')
                 ENDIF
                 iflg = iflg + 1
-                IF ( Kprint>=2 ) WRITE (Lun,99003) x , v(1) , y(k) , er , &
-                  kode , n , m , k
+                IF ( Kprint>=2 ) WRITE (Lun,99003) x, v(1), y(k), er, &
+                  kode, n, m, k
                 99003               FORMAT (4E15.6,4I5)
                 IF ( iflg>200 ) GOTO 300
               ENDIF
@@ -98,7 +98,7 @@ SUBROUTINE QCKIN(Lun,Kprint,Ipass)
   x = -2.302E0*R1MACH(5)*i1m12
   CALL BSKIN(x,n,kode,m,y,nz,ierr)
   IF ( nz==m ) THEN
-    DO i = 1 , m
+    DO i = 1, m
       IF ( y(i)/=0.0E0 ) GOTO 100
     ENDDO
   ELSE
@@ -107,19 +107,22 @@ SUBROUTINE QCKIN(Lun,Kprint,Ipass)
     iflg = iflg + 1
   ENDIF
   GOTO 200
-  100  iflg = iflg + 1
+  100 CONTINUE
+  IFlg = iflg + 1
   IF ( Kprint>=2 ) WRITE (Lun,99005)
   99005 FORMAT (//' SOME Y VALUE IN UNDERFLOW TEST IS NOT ZERO'//)
-  200  IF ( iflg==0.AND.Kprint>=3 ) THEN
-  WRITE (Lun,99006)
-  99006   FORMAT (//' QUICK CHECKS OK'//)
-ENDIF
-Ipass = 0
-IF ( iflg==0 ) Ipass = 1
-RETURN
-300  IF ( Kprint>=2 ) WRITE (Lun,99007)
-99007 FORMAT (//' PROCESSING OF MAIN LOOPS TERMINATED BECAUSE THE NUM',&
-  'BER OF DIAGNOSTIC PRINTS EXCEEDS 200'//)
-Ipass = 0
-IF ( iflg==0 ) Ipass = 1
+  200 CONTINUE
+  IF ( iflg==0.AND.Kprint>=3 ) THEN
+    WRITE (Lun,99006)
+    99006   FORMAT (//' QUICK CHECKS OK'//)
+  ENDIF
+  Ipass = 0
+  IF ( iflg==0 ) Ipass = 1
+  RETURN
+  300 CONTINUE
+  IF ( Kprint>=2 ) WRITE (Lun,99007)
+  99007 FORMAT (//' PROCESSING OF MAIN LOOPS TERMINATED BECAUSE THE NUM',&
+    'BER OF DIAGNOSTIC PRINTS EXCEEDS 200'//)
+  Ipass = 0
+  IF ( iflg==0 ) Ipass = 1
 END SUBROUTINE QCKIN

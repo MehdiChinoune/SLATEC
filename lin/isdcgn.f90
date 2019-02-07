@@ -200,21 +200,21 @@ INTEGER FUNCTION ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  ISDCGN
   !     .. Scalar Arguments ..
-  REAL(8) :: Ak , Bk , Bnrm , Err , Solnrm , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
+  REAL(8) :: Ak, Bk, Bnrm, Err, Solnrm, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(N) , Atdz(N) , Atp(N) , Atz(N) , B(N) , Dz(N) , P(N) , &
-    R(N) , Rwork(*) , X(N) , Z(N)
-  INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
+  REAL(8) :: A(N), Atdz(N), Atp(N), Atz(N), B(N), Dz(N), P(N), &
+    R(N), Rwork(*), X(N), Z(N)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC , MSOLVE , MTTVEC
+  EXTERNAL MATVEC, MSOLVE, MTTVEC
   !     .. Arrays in Common ..
   REAL(8) :: SOLn(1)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DNRM2
-  EXTERNAL D1MACH , DNRM2
+  REAL(8) :: D1MACH, DNRM2
+  EXTERNAL D1MACH, DNRM2
   !     .. Common blocks ..
   COMMON /DSLBLK/ SOLn
   !***FIRST EXECUTABLE STATEMENT  ISDCGN
@@ -236,7 +236,7 @@ INTEGER FUNCTION ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
     IF ( Iter==0 ) Solnrm = DNRM2(N,SOLn,1)
-    DO i = 1 , N
+    DO i = 1, N
       Dz(i) = X(i) - SOLn(i)
     ENDDO
     Err = DNRM2(N,Dz,1)/Solnrm
@@ -249,13 +249,13 @@ INTEGER FUNCTION ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
   !
   IF ( Iunit/=0 ) THEN
     IF ( Iter==0 ) THEN
-      WRITE (Iunit,99001) N , Itol
+      WRITE (Iunit,99001) N, Itol
       99001     FORMAT (' PCG Applied to the Normal Equations for ','N, ITOL = ',I5,&
         I5,/' ITER','   Error Estimate','            Alpha',&
         '             Beta')
-      WRITE (Iunit,99002) Iter , Err
+      WRITE (Iunit,99002) Iter, Err
     ELSE
-      WRITE (Iunit,99002) Iter , Err , Ak , Bk
+      WRITE (Iunit,99002) Iter, Err, Ak, Bk
     ENDIF
   ENDIF
   IF ( Err<=Tol ) ISDCGN = 1

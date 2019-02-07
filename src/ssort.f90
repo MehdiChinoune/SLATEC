@@ -51,18 +51,18 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   !           IF-THEN-ELSE-ENDIF.  (RWC, WRB)
   !***END PROLOGUE  SSORT
   !     .. Scalar Arguments ..
-  INTEGER Kflag , N
+  INTEGER Kflag, N
   !     .. Array Arguments ..
-  REAL X(*) , Y(*)
+  REAL X(*), Y(*)
   !     .. Local Scalars ..
-  REAL r , t , tt , tty , ty
-  INTEGER i , ij , j , k , kk , l , m , nn
+  REAL r, t, tt, tty, ty
+  INTEGER i, ij, j, k, kk, l, m, nn
   !     .. Local Arrays ..
-  INTEGER il(21) , iu(21)
+  INTEGER il(21), iu(21)
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , INT
+  INTRINSIC ABS, INT
   !***FIRST EXECUTABLE STATEMENT  SSORT
   nn = N
   IF ( nn<1 ) THEN
@@ -82,7 +82,7 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   !     Alter array X to get decreasing order if needed
   !
   IF ( Kflag<=-1 ) THEN
-    DO i = 1 , nn
+    DO i = 1, nn
       X(i) = -X(i)
     ENDDO
   ENDIF
@@ -106,7 +106,8 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
     r = 0.375E0
   ENDIF
   !
-  100  IF ( i==j ) GOTO 300
+  100 CONTINUE
+  IF ( i==j ) GOTO 300
   IF ( r<=0.5898437E0 ) THEN
     r = r + 3.90625E-2
   ELSE
@@ -194,7 +195,8 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   i = il(m)
   j = iu(m)
   !
-  400  IF ( j-i>=1 ) GOTO 200
+  400 CONTINUE
+  IF ( j-i>=1 ) GOTO 200
   IF ( i==1 ) GOTO 100
   i = i - 1
   DO
@@ -216,7 +218,8 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
     ENDIF
   ENDDO
   !
-  500  IF ( i==j ) GOTO 700
+  500 CONTINUE
+  IF ( i==j ) GOTO 700
   IF ( r<=0.5898437E0 ) THEN
     r = r + 3.90625E-2
   ELSE
@@ -317,7 +320,8 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   i = il(m)
   j = iu(m)
   !
-  800  IF ( j-i>=1 ) GOTO 600
+  800 CONTINUE
+  IF ( j-i>=1 ) GOTO 600
   IF ( i==1 ) GOTO 500
   i = i - 1
   DO
@@ -344,9 +348,10 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   !
   !     Clean up
   !
-  900  IF ( Kflag<=-1 ) THEN
-  DO i = 1 , nn
-    X(i) = -X(i)
-  ENDDO
-ENDIF
+  900 CONTINUE
+  IF ( Kflag<=-1 ) THEN
+    DO i = 1, nn
+      X(i) = -X(i)
+    ENDDO
+  ENDIF
 END SUBROUTINE SSORT

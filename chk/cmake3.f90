@@ -28,7 +28,7 @@ SUBROUTINE CMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
   !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  CMAKE3
   !     .. Parameters ..
-  COMPLEX ZERO , ONE
+  COMPLEX ZERO, ONE
   PARAMETER (ZERO=(0.0,0.0),ONE=(1.0,0.0))
   COMPLEX ROGUE
   PARAMETER (ROGUE=(-1.0E10,1.0E10))
@@ -38,20 +38,20 @@ SUBROUTINE CMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
   PARAMETER (RROGUE=-1.0E10)
   !     .. Scalar Arguments ..
   COMPLEX Transl
-  INTEGER Lda , M , N , Nmax
+  INTEGER Lda, M, N, Nmax
   LOGICAL Reset
-  CHARACTER :: Diag , Uplo
+  CHARACTER :: Diag, Uplo
   CHARACTER(2) :: Type
   !     .. Array Arguments ..
-  COMPLEX A(Nmax,*) , Aa(*)
+  COMPLEX A(Nmax,*), Aa(*)
   !     .. Local Scalars ..
-  INTEGER i , ibeg , iend , j , jj
-  LOGICAL gen , lower , sym , tri , unit , upper , her
+  INTEGER i, ibeg, iend, j, jj
+  LOGICAL gen, lower, sym, tri, unit, upper, her
   !     .. External Functions ..
   COMPLEX CBEG
   EXTERNAL CBEG
   !     .. Intrinsic Functions ..
-  INTRINSIC CMPLX , CONJG , REAL
+  INTRINSIC CMPLX, CONJG, REAL
   !***FIRST EXECUTABLE STATEMENT  CMAKE3
   gen = Type=='GE'
   her = Type=='HE'
@@ -63,8 +63,8 @@ SUBROUTINE CMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
   !
   !     Generate data in array A.
   !
-  DO j = 1 , N
-    DO i = 1 , M
+  DO j = 1, N
+    DO i = 1, M
       IF ( gen.OR.(upper.AND.i<=j).OR.(lower.AND.i>=j) ) THEN
         A(i,j) = CBEG(Reset) + Transl
         IF ( i/=j ) THEN
@@ -88,16 +88,16 @@ SUBROUTINE CMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
   !     Store elements in array AS in data structure required by routine.
   !
   IF ( Type=='GE' ) THEN
-    DO j = 1 , N
-      DO i = 1 , M
+    DO j = 1, N
+      DO i = 1, M
         Aa(i+(j-1)*Lda) = A(i,j)
       ENDDO
-      DO i = M + 1 , Lda
+      DO i = M + 1, Lda
         Aa(i+(j-1)*Lda) = ROGUE
       ENDDO
     ENDDO
   ELSEIF ( Type=='HE'.OR.Type=='SY'.OR.Type=='TR' ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       IF ( upper ) THEN
         ibeg = 1
         IF ( unit ) THEN
@@ -113,13 +113,13 @@ SUBROUTINE CMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
         ENDIF
         iend = N
       ENDIF
-      DO i = 1 , ibeg - 1
+      DO i = 1, ibeg - 1
         Aa(i+(j-1)*Lda) = ROGUE
       ENDDO
-      DO i = ibeg , iend
+      DO i = ibeg, iend
         Aa(i+(j-1)*Lda) = A(i,j)
       ENDDO
-      DO i = iend + 1 , Lda
+      DO i = iend + 1, Lda
         Aa(i+(j-1)*Lda) = ROGUE
       ENDDO
       IF ( her ) THEN

@@ -17,7 +17,7 @@ REAL FUNCTION FQD2(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Intrinsic Functions ..
-  INTRINSIC COS , EXP
+  INTRINSIC COS, EXP
   !***FIRST EXECUTABLE STATEMENT  FQD2
   FQD2 = EXP(X)*COS(10.0E0*X)
 END FUNCTION FQD2

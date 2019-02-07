@@ -5,21 +5,21 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   IMPLICIT NONE
   !*--BVSUP6
   !*** Start of declarations inserted by SPAG
-  REAL A , Ae , AED , Alpha , B , Beta , C , EPS , FOUru , PWCnd , PX , Re ,&
-    RED , SQOvfl , SRU , TND , TOL , TWOu , URO , Work
-  REAL X , XBEg , XENd , XOP , XOT , Xpts , XSAv , Y
-  INTEGER ICOco , Iflag , Igofx , IGOfxd , INDpvt , INFo , INHomo , INTeg ,&
-    is , ISTkop , IVP , Iwork , j , k , K1 , K10 , K11 , K2 , K3 , K4
-  INTEGER K5 , K6 , K7 , K8 , K9 , kkkcoe , kkkcof , kkkg , KKKint , kkks ,&
-    kkksto , kkksud , kkksvc , kkku , kkkv , kkkws , kkkyhp , KKKzpw ,&
-    KNSwot , KOP
-  INTEGER kpts , L1 , L2 , lllcof , LLLint , lllip , llliws , lllsud ,&
-    lllsvc , LOTjp , LPAr , MNSwot , MXNon , mxnoni , mxnonr , Ncomp ,&
-    NCOmpd , ndeq , NDIsk , Ndiw
-  INTEGER Ndw , NEEdiw , NEEdw , NEQ , NEQivd , Neqivp , Nfc , NFCc , NFCd ,&
-    Nic , NICd , nitemp , non , NOPg , NPS , Nrowa , Nrowb , Nrowy ,&
-    nrtemp , NSWot
-  INTEGER NTApe , NTP , NUMort , Nxpts , NXPtsd , nxptsm
+  REAL A, Ae, AED, Alpha, B, Beta, C, EPS, FOUru, PWCnd, PX, Re ,&
+    RED, SQOvfl, SRU, TND, TOL, TWOu, URO, Work
+  REAL X, XBEg, XENd, XOP, XOT, Xpts, XSAv, Y
+  INTEGER ICOco, Iflag, Igofx, IGOfxd, INDpvt, INFo, INHomo, INTeg ,&
+    is, ISTkop, IVP, Iwork, j, k, K1, K10, K11, K2, K3, K4
+  INTEGER K5, K6, K7, K8, K9, kkkcoe, kkkcof, kkkg, KKKint, kkks ,&
+    kkksto, kkksud, kkksvc, kkku, kkkv, kkkws, kkkyhp, KKKzpw ,&
+    KNSwot, KOP
+  INTEGER kpts, L1, L2, lllcof, LLLint, lllip, llliws, lllsud ,&
+    lllsvc, LOTjp, LPAr, MNSwot, MXNon, mxnoni, mxnonr, Ncomp ,&
+    NCOmpd, ndeq, NDIsk, Ndiw
+  INTEGER Ndw, NEEdiw, NEEdw, NEQ, NEQivd, Neqivp, Nfc, NFCc, NFCd ,&
+    Nic, NICd, nitemp, non, NOPg, NPS, Nrowa, Nrowb, Nrowy ,&
+    nrtemp, NSWot
+  INTEGER NTApe, NTP, NUMort, Nxpts, NXPtsd, nxptsm
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BVSUP
   !***PURPOSE  Solve a linear two-point boundary value problem using
@@ -38,7 +38,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     Subroutine BVSUP solves a LINEAR two-point boundary-value problem
   !     of the form
   !                        dY/dX = MATRIX(X,U)*Y(X) + G(X,U)
-  !                A*Y(Xinitial) = ALPHA ,  B*Y(Xfinal) = BETA
+  !                A*Y(Xinitial) = ALPHA,  B*Y(Xfinal) = BETA
   !
   !     Coupled with the solution of the initial value problem
   !
@@ -128,7 +128,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !  However, when the ADAMS integrator is to be used, the estimates are
   !            NDW = 130 + NCOMP**2 * (13 + NXPTS/2 + expected number of
   !                                                orthonormalizations/8)
-  !    and     NDW = 13 * NCOMP**2 + 22 * NCOMP + 130   , respectively.
+  !    and     NDW = 13 * NCOMP**2 + 22 * NCOMP + 130  , respectively.
   !
   !     IWORK(NDIW) = Integer array used for internal storage.
   !
@@ -169,7 +169,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !              YP = dY/dX = Derivative vector (output from FMAT)
   !
   !            Compute the derivatives for the HOMOGENEOUS problem
-  !              YP(I) = dY(I)/dX = MATRIX(X) * Y(I)  , I = 1,...,NCOMP
+  !              YP(I) = dY(I)/dX = MATRIX(X) * Y(I) , I = 1,...,NCOMP
   !
   !            When (NEQIVP .GT. 0) and  MATRIX  is dependent on  U  as
   !            well as on  X, the following common statement must be
@@ -193,7 +193,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !            computed if X is unequal to XS, whereupon XS is reset to X.
   !
   !
-  !        B. If  NEQIVP .GT. 0 ,  UIVP must also be supplied.
+  !        B. If  NEQIVP .GT. 0,  UIVP must also be supplied.
   !
   !              SUBROUTINE UIVP(X,U,UP)
   !              X = Independent variable (input to UIVP)
@@ -207,7 +207,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !            derivatives for the auxiliary initial value equations.
   !
   !
-  !        C. If  NEQIVP = 0  and  IGOFX = 1 ,  GVEC must be supplied.
+  !        C. If  NEQIVP = 0  and  IGOFX = 1,  GVEC must be supplied.
   !
   !              SUBROUTINE GVEC(X,G)
   !              X = Independent variable (input to GVEC)
@@ -224,7 +224,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !            via the BVDER subroutine.
   !
   !
-  !        D. If  NEQIVP .GT. 0  and  IGOFX = 1 ,  UVEC must be supplied.
+  !        D. If  NEQIVP .GT. 0  and  IGOFX = 1,  UVEC must be supplied.
   !
   !              SUBROUTINE UVEC(X,U,G)
   !              X = Independent variable (input to UVEC)
@@ -242,7 +242,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !
   !
   !     The following is optional input to BVSUP to give the user more
-  !     flexibility in use of the code.  See SAND75-0198 , SAND77-1328 ,
+  !     flexibility in use of the code.  See SAND75-0198, SAND77-1328 ,
   !     SAND77-1690,SAND78-0522, and SAND78-1501 for more information.
   !
   ! ****CAUTION -- The user MUST zero out IWORK(1),...,IWORK(15)
@@ -285,7 +285,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !       Suppose the original boundary value problem is NC equations
   !     of the form
   !                   dW/dX = MAT(X,U)*W(X) + H(X,U)
-  !                 R*W(Xinitial)=GAMMA , S*W(Xfinal)=DELTA
+  !                 R*W(Xinitial)=GAMMA, S*W(Xfinal)=DELTA
   !
   !     where all variables are complex valued. The BVSUP code can be
   !     used by converting to a real system of size 2*NC. To solve the
@@ -422,26 +422,26 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   ! **********************************************************************
   !
   !
-  DIMENSION Y(Nrowy,*) , A(Nrowa,*) , Alpha(*) , B(Nrowb,*) , Beta(*) ,&
-    Work(*) , Iwork(*) , Xpts(*)
-  CHARACTER(8) :: xern1 , xern2 , xern3 , xern4
+  DIMENSION Y(Nrowy,*), A(Nrowa,*), Alpha(*), B(Nrowb,*), Beta(*) ,&
+    Work(*), Iwork(*), Xpts(*)
+  CHARACTER(8) :: xern1, xern2, xern3, xern4
   !
   ! **********************************************************************
   !     THE COMMON BLOCK BELOW IS USED TO COMMUNICATE WITH SUBROUTINE
   !     BVDER.  THE USER SHOULD NOT ALTER OR USE THIS COMMON BLOCK IN THE
   !     CALLING PROGRAM.
   !
-  COMMON /ML8SZ / C , XSAv , IGOfxd , INHomo , IVP , NCOmpd , NFCd
+  COMMON /ML8SZ / C, XSAv, IGOfxd, INHomo, IVP, NCOmpd, NFCd
   !
   ! **********************************************************************
   !     THESE COMMON BLOCKS AID IN REDUCING THE NUMBER OF SUBROUTINE
   !     ARGUMENTS PREVALENT IN THIS MODULAR STRUCTURE
   !
-  COMMON /ML18JR/ AED , RED , TOL , NXPtsd , NICd , NOPg , MXNon , NDIsk ,&
-    NTApe , NEQ , INDpvt , INTeg , NPS , NTP , NEQivd ,&
-    NUMort , NFCc , ICOco
-  COMMON /ML17BW/ KKKzpw , NEEdw , NEEdiw , K1 , K2 , K3 , K4 , K5 , K6 ,&
-    K7 , K8 , K9 , K10 , K11 , L1 , L2 , KKKint , LLLint
+  COMMON /ML18JR/ AED, RED, TOL, NXPtsd, NICd, NOPg, MXNon, NDIsk ,&
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivd ,&
+    NUMort, NFCc, ICOco
+  COMMON /ML17BW/ KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6 ,&
+    K7, K8, K9, K10, K11, L1, L2, KKKint, LLLint
   !
   ! **********************************************************************
   !     THIS COMMON BLOCK IS USED IN SUBROUTINES BVSUP,BVPOR,RKFAB,
@@ -449,14 +449,14 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     FOR THE ORTHONORMALIZATION TESTING PROCEDURE AND A BACKUP
   !     RESTARTING CAPABILITY.
   !
-  COMMON /ML15TO/ PX , PWCnd , TND , X , XBEg , XENd , XOT , XOP , INFo(15)&
-    , ISTkop , KNSwot , KOP , LOTjp , MNSwot , NSWot
+  COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
+    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
   !
   ! **********************************************************************
   !     THIS COMMON BLOCK CONTAINS THE MACHINE DEPENDENT PARAMETERS
   !     USED BY THE CODE
   !
-  COMMON /ML5MCO/ URO , SRU , EPS , SQOvfl , TWOu , FOUru , LPAr
+  COMMON /ML5MCO/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
   !
   ! **********************************************************************
   !     SET UP MACHINE DEPENDENT CONSTANTS.
@@ -481,7 +481,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                         is = 1
                         IF ( Xpts(Nxpts)<Xpts(1) ) is = 2
                         nxptsm = Nxpts - 1
-                        DO k = 1 , nxptsm
+                        DO k = 1, nxptsm
                           IF ( is==2 ) THEN
                             IF ( Xpts(k)<=Xpts(k+1) ) GOTO 100
                           ELSEIF ( Xpts(k+1)<=Xpts(k) ) THEN
@@ -510,10 +510,10 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                         !     COMPUTE INHOMO
                         !
                         IF ( Igofx==1 ) GOTO 300
-                        DO j = 1 , Nic
+                        DO j = 1, Nic
                           IF ( Alpha(j)/=0.0 ) GOTO 300
                         ENDDO
-                        DO j = 1 , Nfc
+                        DO j = 1, Nfc
                           IF ( Beta(j)/=0.0 ) GOTO 200
                         ENDDO
                         INHomo = 3
@@ -529,7 +529,8 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       ENDIF
     ENDIF
   ENDIF
-  100  Iflag = -2
+  100 CONTINUE
+  IFlag = -2
   RETURN
   200  INHomo = 2
   GOTO 400

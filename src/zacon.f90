@@ -27,19 +27,19 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
   !***END PROLOGUE  ZACON
   !     COMPLEX CK,CONE,CSCL,CSCR,CSGN,CSPN,CY,CZERO,C1,C2,RZ,SC1,SC2,ST,
   !    *S1,S2,Y,Z,ZN
-  REAL(8) :: Alim , arg , ascle , as2 , azn , bry , bscle , cki , &
-    ckr , coner , cpn , cscl , cscr , csgni , csgnr , cspni , &
-    cspnr , csr , csrr , cssr , cyi , cyr , c1i , c1m , c1r , &
-    c2i , c2r , Elim , fmr , fn , Fnu , Fnul , pi , pti , &
-    ptr , razn , Rl , rzi , rzr , sc1i , sc1r , sc2i , sc2r , &
-    sgn , spn , sti , str , s1i , s1r , s2i , s2r , Tol , &
-    Yi , Yr , yy , zeror , Zi , zni , znr , Zr , D1MACH , &
+  REAL(8) :: Alim, arg, ascle, as2, azn, bry, bscle, cki, &
+    ckr, coner, cpn, cscl, cscr, csgni, csgnr, cspni, &
+    cspnr, csr, csrr, cssr, cyi, cyr, c1i, c1m, c1r, &
+    c2i, c2r, Elim, fmr, fn, Fnu, Fnul, pi, pti, &
+    ptr, razn, Rl, rzi, rzr, sc1i, sc1r, sc2i, sc2r, &
+    sgn, spn, sti, str, s1i, s1r, s2i, s2r, Tol, &
+    Yi, Yr, yy, zeror, Zi, zni, znr, Zr, D1MACH, &
     ZABS
-  INTEGER i , inu , iuf , kflag , Kode , Mr , N , nn , nw , Nz
-  DIMENSION Yr(N) , Yi(N) , cyr(2) , cyi(2) , cssr(3) , csrr(3) , bry(3)
+  INTEGER i, inu, iuf, kflag, Kode, Mr, N, nn, nw, Nz
+  DIMENSION Yr(N), Yi(N), cyr(2), cyi(2), cssr(3), csrr(3), bry(3)
   EXTERNAL ZABS
   DATA pi/3.14159265358979324D0/
-  DATA zeror , coner/0.0D0 , 1.0D0/
+  DATA zeror, coner/0.0D0, 1.0D0/
   !***FIRST EXECUTABLE STATEMENT  ZACON
   Nz = 0
   znr = -Zr
@@ -153,7 +153,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
       s2r = s2r*cssr(kflag)
       s2i = s2i*cssr(kflag)
       csr = csrr(kflag)
-      DO i = 3 , N
+      DO i = 3, N
         str = s2r
         sti = s2i
         s2r = ckr*str - cki*sti + s1r

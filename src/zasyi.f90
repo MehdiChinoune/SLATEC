@@ -24,18 +24,18 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
   !***END PROLOGUE  ZASYI
   !     COMPLEX AK1,CK,CONE,CS1,CS2,CZ,CZERO,DK,EZ,P1,RZ,S2,Y,Z
-  REAL(8) :: aa , aez , ak , ak1i , ak1r , Alim , arg , arm , atol , &
-    az , bb , bk , cki , ckr , conei , coner , cs1i , cs1r , &
-    cs2i , cs2r , czi , czr , dfnu , dki , dkr , dnu2 , &
-    Elim , ezi , ezr , fdn , Fnu , pi , p1i , p1r , raz , &
-    Rl , rtpi , rtr1 , rzi , rzr , s , sgn , sqk , sti , &
-    str , s2i , s2r , Tol , tzi , tzr , Yi , Yr , zeroi , &
-    zeror , Zi , Zr , D1MACH , ZABS
-  INTEGER i , ib , il , inu , j , jl , k , Kode , koded , m , N , nn , Nz
-  DIMENSION Yr(N) , Yi(N)
-  EXTERNAL ZABS , ZEXP , ZSQRT
-  DATA pi , rtpi/3.14159265358979324D0 , 0.159154943091895336D0/
-  DATA zeror , zeroi , coner , conei/0.0D0 , 0.0D0 , 1.0D0 , 0.0D0/
+  REAL(8) :: aa, aez, ak, ak1i, ak1r, Alim, arg, arm, atol, &
+    az, bb, bk, cki, ckr, conei, coner, cs1i, cs1r, &
+    cs2i, cs2r, czi, czr, dfnu, dki, dkr, dnu2, &
+    Elim, ezi, ezr, fdn, Fnu, pi, p1i, p1r, raz, &
+    Rl, rtpi, rtr1, rzi, rzr, s, sgn, sqk, sti, &
+    str, s2i, s2r, Tol, tzi, tzr, Yi, Yr, zeroi, &
+    zeror, Zi, Zr, D1MACH, ZABS
+  INTEGER i, ib, il, inu, j, jl, k, Kode, koded, m, N, nn, Nz
+  DIMENSION Yr(N), Yi(N)
+  EXTERNAL ZABS, ZEXP, ZSQRT
+  DATA pi, rtpi/3.14159265358979324D0, 0.159154943091895336D0/
+  DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
   !***FIRST EXECUTABLE STATEMENT  ZASYI
   Nz = 0
   az = ZABS(Zr,Zi)
@@ -101,7 +101,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
         p1i = -p1i
       ENDIF
     ENDIF
-    DO k = 1 , il
+    DO k = 1, il
       sqk = fdn - 1.0D0
       atol = s*ABS(sqk)
       sgn = 1.0D0
@@ -116,7 +116,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
       bb = aez
       dkr = ezr
       dki = ezi
-      DO j = 1 , jl
+      DO j = 1, jl
         CALL ZDIV(ckr,cki,dkr,dki,str,sti)
         ckr = str*sqk
         cki = sti*sqk
@@ -161,7 +161,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     rzr = (str+str)*raz
     rzi = (sti+sti)*raz
     ib = 3
-    DO i = ib , nn
+    DO i = ib, nn
       Yr(k) = (ak+Fnu)*(rzr*Yr(k+1)-rzi*Yi(k+1)) + Yr(k+2)
       Yi(k) = (ak+Fnu)*(rzr*Yi(k+1)+rzi*Yr(k+1)) + Yi(k+2)
       ak = ak - 1.0D0
@@ -169,7 +169,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     ENDDO
     IF ( koded==0 ) RETURN
     CALL ZEXP(czr,czi,ckr,cki)
-    DO i = 1 , nn
+    DO i = 1, nn
       str = Yr(i)*ckr - Yi(i)*cki
       Yi(i) = Yr(i)*cki + Yi(i)*ckr
       Yr(i) = str

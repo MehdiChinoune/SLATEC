@@ -5,12 +5,12 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   IMPLICIT NONE
   !*--HWSCYL6
   !*** Start of declarations inserted by SPAG
-  REAL A , a1 , a2 , B , Bda , Bdb , Bdc , Bdd , C , D , deltar , deltht , &
-    dlrby2 , dlrsq , dlthsq , Elmbda , F , Pertrb , r , s
-  REAL s1 , s2 , W
-  INTEGER i , id2 , id3 , id4 , id5 , id6 , Idimf , ierr1 , Ierror , ij , &
-    istart , j , k , l , M , Mbdcnd , mp1 , mstart , mstop , munk
-  INTEGER N , Nbdcnd , np , np1 , nsp1 , nstart , nstm1 , nstop , nunk
+  REAL A, a1, a2, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, deltht, &
+    dlrby2, dlrsq, dlthsq, Elmbda, F, Pertrb, r, s
+  REAL s1, s2, W
+  INTEGER i, id2, id3, id4, id5, id6, Idimf, ierr1, Ierror, ij, &
+    istart, j, k, l, M, Mbdcnd, mp1, mstart, mstop, munk
+  INTEGER N, Nbdcnd, np, np1, nsp1, nstart, nstm1, nstop, nunk
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HWSCYL
   !***PURPOSE  Solve a standard finite difference approximation
@@ -312,7 +312,7 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !
   DIMENSION F(Idimf,*)
-  DIMENSION Bda(*) , Bdb(*) , Bdc(*) , Bdd(*) , W(*)
+  DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HWSCYL
   Ierror = 0
   IF ( A<0. ) Ierror = 1
@@ -383,7 +383,7 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     istart = 2
     ij = 1
   ENDIF
-  DO i = istart , munk
+  DO i = istart, munk
     r = A + (i-ij)*deltar
     j = id5 + i
     W(j) = r
@@ -412,25 +412,25 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   SELECT CASE (Mbdcnd)
     CASE (3,4)
       a1 = 2.*deltar*W(1)
-      DO j = nstart , nstop
+      DO j = nstart, nstop
         F(1,j) = F(1,j) + a1*Bda(j)
       ENDDO
     CASE (5,6)
     CASE DEFAULT
       a1 = W(1)
-      DO j = nstart , nstop
+      DO j = nstart, nstop
         F(2,j) = F(2,j) - a1*F(1,j)
       ENDDO
   END SELECT
   SELECT CASE (Mbdcnd)
     CASE (2,3,6)
       a1 = 2.*deltar*W(id4)
-      DO j = nstart , nstop
+      DO j = nstart, nstop
         F(mp1,j) = F(mp1,j) - a1*Bdb(j)
       ENDDO
     CASE DEFAULT
       a1 = W(id4)
-      DO j = nstart , nstop
+      DO j = nstart, nstop
         F(M,j) = F(M,j) - a1*F(mp1,j)
       ENDDO
   END SELECT
@@ -444,11 +444,11 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       GOTO 100
     CASE (4,5)
       a1 = 2./deltht
-      DO i = mstart , mstop
+      DO i = mstart, mstop
         F(i,1) = F(i,1) + a1*Bdc(i)
       ENDDO
     CASE DEFAULT
-      DO i = mstart , mstop
+      DO i = mstart, mstop
         F(i,2) = F(i,2) - a1*F(i,1)
       ENDDO
   END SELECT
@@ -457,11 +457,11 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE (1)
     CASE (3,4)
       a1 = 2./deltht
-      DO i = mstart , mstop
+      DO i = mstart, mstop
         F(i,np1) = F(i,np1) - a1*Bdd(i)
       ENDDO
     CASE DEFAULT
-      DO i = mstart , mstop
+      DO i = mstart, mstop
         F(i,N) = F(i,N) - a1*F(i,np1)
       ENDDO
   END SELECT
@@ -491,11 +491,11 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     k = id5 + munk
     W(k) = .5*(W(k-1)+dlrby2)
     s = 0.
-    DO i = mstart , mstop
+    DO i = mstart, mstop
       s1 = 0.
       nsp1 = nstart + 1
       nstm1 = nstop - 1
-      DO j = nsp1 , nstm1
+      DO j = nsp1, nstm1
         s1 = s1 + F(i,j)
       ENDDO
       k = i + l
@@ -505,8 +505,8 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     IF ( Mbdcnd==3 ) s2 = s2 + .25*dlrby2
     s1 = (2.+a2*(nunk-2))*s2
     Pertrb = s/s1
-    DO i = mstart , mstop
-      DO j = nstart , nstop
+    DO i = mstart, mstop
+      DO j = nstart, nstop
         F(i,j) = F(i,j) - Pertrb
       ENDDO
     ENDDO
@@ -517,28 +517,29 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     MULTIPLY I-TH EQUATION THROUGH BY DELTHT**2 TO PUT EQUATION INTO
   !     CORRECT FORM FOR SUBROUTINE GENBUN.
   !
-  200  DO i = mstart , mstop
-  k = i - mstart + 1
-  W(k) = W(k)*dlthsq
-  j = id2 + k
-  W(j) = W(j)*dlthsq
-  j = id3 + k
-  W(j) = W(j)*dlthsq
-  DO j = nstart , nstop
-    F(i,j) = F(i,j)*dlthsq
+  200 CONTINUE
+  DO i = mstart, mstop
+    k = i - mstart + 1
+    W(k) = W(k)*dlthsq
+    j = id2 + k
+    W(j) = W(j)*dlthsq
+    j = id3 + k
+    W(j) = W(j)*dlthsq
+    DO j = nstart, nstop
+      F(i,j) = F(i,j)*dlthsq
+    ENDDO
   ENDDO
-ENDDO
-W(1) = 0.
-W(id4) = 0.
-!
-!     CALL GENBUN TO SOLVE THE SYSTEM OF EQUATIONS.
-!
-CALL GENBUN(Nbdcnd,nunk,1,munk,W(1),W(id2+1),W(id3+1),Idimf,&
-  F(mstart,nstart),ierr1,W(id4+1))
-W(1) = W(id4+1) + 3*munk
-IF ( Nbdcnd==0 ) THEN
-  DO i = mstart , mstop
-    F(i,np1) = F(i,1)
-  ENDDO
-ENDIF
+  W(1) = 0.
+  W(id4) = 0.
+  !
+  !     CALL GENBUN TO SOLVE THE SYSTEM OF EQUATIONS.
+  !
+  CALL GENBUN(Nbdcnd,nunk,1,munk,W(1),W(id2+1),W(id3+1),Idimf,&
+    F(mstart,nstart),ierr1,W(id4+1))
+  W(1) = W(id4+1) + 3*munk
+  IF ( Nbdcnd==0 ) THEN
+    DO i = mstart, mstop
+      F(i,np1) = F(i,1)
+    ENDDO
+  ENDIF
 END SUBROUTINE HWSCYL

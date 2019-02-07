@@ -4,7 +4,7 @@ SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
   IMPLICIT NONE
   !*--SSIEV5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , j
+  INTEGER i, j
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSIEV
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
@@ -81,8 +81,8 @@ SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  SSIEV
-  INTEGER Info , Job , Lda , N
-  REAL A(Lda,*) , E(*) , Work(*)
+  INTEGER Info, Job, Lda, N
+  REAL A(Lda,*), E(*), Work(*)
   !***FIRST EXECUTABLE STATEMENT  SSIEV
   IF ( N>Lda ) CALL XERMSG('SLATEC','SSIEV','N .GT. LDA.',1,1)
   IF ( N>Lda ) RETURN
@@ -97,8 +97,8 @@ SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
   !
   !     COPY UPPER TRIANGLE TO LOWER
   !
-  DO j = 1 , N
-    DO i = 1 , j
+  DO j = 1, N
+    DO i = 1, j
       A(j,i) = A(i,j)
     ENDDO
   ENDDO
@@ -117,4 +117,5 @@ SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
   CALL TRED1(Lda,N,A,E,Work(1),Work(N+1))
   CALL TQLRAT(N,E,Work(N+1),Info)
   RETURN
-  99999 END SUBROUTINE SSIEV
+  99999 CONTINUE
+  END SUBROUTINE SSIEV

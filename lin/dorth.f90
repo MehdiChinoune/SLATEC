@@ -73,19 +73,19 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
   REAL(8) :: Snormw
-  INTEGER Kmp , Ldhes , Ll , N
+  INTEGER Kmp, Ldhes, Ll, N
   !     .. Array Arguments ..
-  REAL(8) :: Hes(Ldhes,*) , V(N,*) , Vnew(*)
+  REAL(8) :: Hes(Ldhes,*), V(N,*), Vnew(*)
   !     .. Local Scalars ..
-  REAL(8) :: arg , sumdsq , tem , vnrm
-  INTEGER i , i0
+  REAL(8) :: arg, sumdsq, tem, vnrm
+  INTEGER i, i0
   !     .. External Functions ..
-  REAL(8) :: DDOT , DNRM2
-  EXTERNAL DDOT , DNRM2
+  REAL(8) :: DDOT, DNRM2
+  EXTERNAL DDOT, DNRM2
   !     .. External Subroutines ..
   EXTERNAL DAXPY
   !     .. Intrinsic Functions ..
-  INTRINSIC MAX , SQRT
+  INTRINSIC MAX, SQRT
   !***FIRST EXECUTABLE STATEMENT  DORTH
   !
   !         Get norm of unaltered VNEW for later use.
@@ -97,7 +97,7 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !         Projections of earlier vectors are subtracted from VNEW.
   !   -------------------------------------------------------------------
   i0 = MAX(1,Ll-Kmp+1)
-  DO i = i0 , Ll
+  DO i = i0, Ll
     Hes(i,Ll) = DDOT(N,V(1,i),1,Vnew,1)
     tem = -Hes(i,Ll)
     CALL DAXPY(N,tem,V(1,i),1,Vnew,1)
@@ -112,7 +112,7 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   Snormw = DNRM2(N,Vnew,1)
   IF ( vnrm+0.001D0*Snormw/=vnrm ) RETURN
   sumdsq = 0
-  DO i = i0 , Ll
+  DO i = i0, Ll
     tem = -DDOT(N,V(1,i),1,Vnew,1)
     IF ( Hes(i,Ll)+0.001D0*tem/=Hes(i,Ll) ) THEN
       Hes(i,Ll) = Hes(i,Ll) - tem

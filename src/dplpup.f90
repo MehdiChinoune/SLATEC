@@ -5,7 +5,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
   IMPLICIT NONE
   !*--DPLPUP6
   !*** Start of declarations inserted by SPAG
-  INTEGER i , indcat , index , Info , iplace , itcnt , itmax , j , Mrelas ,&
+  INTEGER i, indcat, index, Info, iplace, itcnt, itmax, j, Mrelas ,&
     Nvars
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPLPUP
@@ -43,12 +43,12 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
   !           DO loops to DO loops.  (RWC)
   !   900602  Get rid of ASSIGNed GOTOs.  (RWC)
   !***END PROLOGUE  DPLPUP
-  REAL(8) :: Abig , aij , Amat(*) , amn , amx , Asmall , Bl(*) ,&
-    Bu(*) , Dattrv(*) , Prgopt(*) , xval , zero
-  INTEGER iflag(10) , Imat(*) , Ind(*)
-  LOGICAL Sizeup , first
-  CHARACTER(8) :: xern1 , xern2
-  CHARACTER(16) :: xern3 , xern4
+  REAL(8) :: Abig, aij, Amat(*), amn, amx, Asmall, Bl(*) ,&
+    Bu(*), Dattrv(*), Prgopt(*), xval, zero
+  INTEGER iflag(10), Imat(*), Ind(*)
+  LOGICAL Sizeup, first
+  CHARACTER(8) :: xern1, xern2
+  CHARACTER(16) :: xern3, xern4
   !
   !***FIRST EXECUTABLE STATEMENT  DPLPUP
   zero = 0.D0
@@ -58,7 +58,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
   !     CHECK THAT IND(*) VALUES ARE 1,2,3 OR 4.
   !     ALSO CHECK CONSISTENCY OF UPPER AND LOWER BOUNDS.
   !
-  DO j = 1 , Nvars
+  DO j = 1, Nvars
     IF ( Ind(j)<1.OR.Ind(j)>4 ) THEN
       WRITE (xern1,'(I8)') j
       CALL XERMSG('SLATEC','DPLPUP','IN DSPLP, INDEPENDENT VARIABLE = '//&
@@ -81,7 +81,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
     ENDIF
   ENDDO
   !
-  DO i = Nvars + 1 , Nvars + Mrelas
+  DO i = Nvars + 1, Nvars + Mrelas
     IF ( Ind(i)<1.OR.Ind(i)>4 ) THEN
       WRITE (xern1,'(I8)') i - Nvars
       CALL XERMSG('SLATEC','DPLPUP','IN DSPLP, DEPENDENT VARIABLE = '//&

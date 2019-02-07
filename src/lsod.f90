@@ -5,15 +5,15 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   IMPLICIT NONE
   !*--LSOD6
   !*** Start of declarations inserted by SPAG
-  REAL absdel , Acor , Atol , big , del , Delsgn , dt , EL0 , Ewt , H , ha ,&
-    HMIn , HMXi , HU , R1MACH , ROWns , Rpar , Rtol , Savf , T
-  REAL tol , TOLd , Tolfac , Tout , Tstop , U , VNWRMS , Wm , X , Y , Yh ,&
-    Yh1 , Ypout
-  INTEGER IBAnd , IBEgin , Idid , IER , IINteg , IJAc , INIt , intflg ,&
-    IOWns , Ipar , IQUit , ITOl , ITStop , Iwm , JAC , JSTart , k ,&
-    KFLag , KSTeps , l
-  INTEGER LACor , LDUm , LEWt , LSAvf , ltol , LWM , LYH , maxnum , MAXord ,&
-    METh , MITer , N , natolp , Neq , NFE , NJE , NQ , NQU , nrtolp ,&
+  REAL absdel, Acor, Atol, big, del, Delsgn, dt, EL0, Ewt, H, ha ,&
+    HMIn, HMXi, HU, R1MACH, ROWns, Rpar, Rtol, Savf, T
+  REAL tol, TOLd, Tolfac, Tout, Tstop, U, VNWRMS, Wm, X, Y, Yh ,&
+    Yh1, Ypout
+  INTEGER IBAnd, IBEgin, Idid, IER, IINteg, IJAc, INIt, intflg ,&
+    IOWns, Ipar, IQUit, ITOl, ITStop, Iwm, JAC, JSTart, k ,&
+    KFLag, KSTeps, l
+  INTEGER LACor, LDUm, LEWt, LSAvf, ltol, LWM, LYH, maxnum, MAXord ,&
+    METh, MITer, N, natolp, Neq, NFE, NJE, NQ, NQU, nrtolp ,&
     NST
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  LSOD
@@ -43,18 +43,18 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !
   LOGICAL Intout
   !
-  DIMENSION Y(*) , Ypout(*) , Yh(Neq,6) , Yh1(*) , Ewt(*) , Savf(*) ,&
-    Acor(*) , Wm(*) , Iwm(*) , Rtol(*) , Atol(*) , Rpar(*) , Ipar(*)
+  DIMENSION Y(*), Ypout(*), Yh(Neq,6), Yh1(*), Ewt(*), Savf(*) ,&
+    Acor(*), Wm(*), Iwm(*), Rtol(*), Atol(*), Rpar(*), Ipar(*)
   CHARACTER(8) :: xern1
-  CHARACTER(16) :: xern3 , xern4
+  CHARACTER(16) :: xern3, xern4
   !
-  COMMON /DEBDF1/ TOLd , ROWns(210) , EL0 , H , HMIn , HMXi , HU , X , U ,&
-    IQUit , INIt , LYH , LEWt , LACor , LSAvf , LWM , KSTeps ,&
-    IBEgin , ITOl , IINteg , ITStop , IJAc , IBAnd , IOWns(6)&
-    , IER , JSTart , KFLag , LDUm , METh , MITer , MAXord ,&
-    N , NQ , NST , NFE , NJE , NQU
+  COMMON /DEBDF1/ TOLd, ROWns(210), EL0, H, HMIn, HMXi, HU, X, U ,&
+    IQUit, INIt, LYH, LEWt, LACor, LSAvf, LWM, KSTeps ,&
+    IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, IOWns(6)&
+    , IER, JSTart, KFLag, LDUm, METh, MITer, MAXord ,&
+    N, NQ, NST, NFE, NJE, NQU
   !
-  EXTERNAL F , JAC
+  EXTERNAL F, JAC
   !
   !.......................................................................
   !
@@ -71,7 +71,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !***FIRST EXECUTABLE STATEMENT  LSOD
   IF ( IBEgin==0 ) THEN
     !
-    !        ON THE FIRST CALL , PERFORM INITIALIZATION --
+    !        ON THE FIRST CALL, PERFORM INITIALIZATION --
     !        DEFINE THE MACHINE UNIT ROUNDOFF QUANTITY  U  BY CALLING THE
     !        FUNCTION ROUTINE R1MACH. THE USER MUST MAKE SURE THAT THE
     !        VALUES SET IN R1MACH ARE RELEVANT TO THE COMPUTER BEING USED.
@@ -125,7 +125,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !
   nrtolp = 0
   natolp = 0
-  DO k = 1 , Neq
+  DO k = 1, Neq
     IF ( nrtolp<=0 ) THEN
       IF ( Rtol(k)<0. ) THEN
         WRITE (xern1,'(I8)') k
@@ -228,7 +228,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !     THE RELATIVE ERROR TOLERANCE RTOL IS RESET TO THE SMALLEST VALUE
   !     100*U WHICH IS LIKELY TO BE REASONABLE FOR THIS METHOD AND MACHINE
   !
-  DO k = 1 , Neq
+  DO k = 1, Neq
     IF ( Rtol(k)+Atol(k)<=0. ) THEN
       Rtol(k) = 100.*U
       Idid = -2
@@ -256,7 +256,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
       NFE = 1
       IF ( T==Tout ) THEN
         Idid = 2
-        DO l = 1 , Neq
+        DO l = 1, Neq
           Ypout(l) = Yh(l,2)
         ENDDO
         TOLd = T
@@ -272,7 +272,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     !                                              X AND YH(*) FOR STOD
     !
     ltol = 1
-    DO l = 1 , Neq
+    DO l = 1, Neq
       IF ( ITOl==1 ) ltol = l
       tol = Rtol(ltol)*ABS(Y(l)) + Atol(ltol)
       IF ( tol==0. ) GOTO 200
@@ -285,7 +285,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     !
     Delsgn = SIGN(1.0,Tout-T)
     X = T
-    DO l = 1 , Neq
+    DO l = 1, Neq
       Yh(l,1) = Y(l)
       Yh(l,2) = H*Yh(l,2)
     ENDDO
@@ -317,7 +317,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     IF ( ITStop==1 ) THEN
       IF ( ABS(Tstop-X)<100.*U*ABS(X) ) THEN
         dt = Tout - X
-        DO l = 1 , Neq
+        DO l = 1, Neq
           Y(l) = Yh(l,1) + (dt/H)*Yh(l,2)
         ENDDO
         CALL F(Tout,Y,Ypout,Rpar,Ipar)
@@ -351,7 +351,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
       IF ( ITStop==1 ) ha = MIN(ha,ABS(Tstop-X))
       H = SIGN(ha,H)
       ltol = 1
-      DO l = 1 , Neq
+      DO l = 1, Neq
         IF ( ITOl==1 ) ltol = l
         Ewt(l) = Rtol(ltol)*ABS(Yh(l,1)) + Atol(ltol)
         IF ( Ewt(l)<=0.0 ) GOTO 200
@@ -392,7 +392,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
         Rtol(1) = Tolfac*Rtol(1)
         Atol(1) = Tolfac*Atol(1)
         IF ( ITOl/=0 ) THEN
-          DO l = 2 , Neq
+          DO l = 2, Neq
             Rtol(l) = Tolfac*Rtol(l)
             Atol(l) = Tolfac*Atol(l)
           ENDDO
@@ -427,11 +427,12 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !.......................................................................
   !
   !                       STORE VALUES BEFORE RETURNING TO DEBDF
-  300  DO l = 1 , Neq
-  Y(l) = Yh(l,1)
-  Ypout(l) = Yh(l,2)/H
-ENDDO
-T = X
-TOLd = T
-Intout = .FALSE.
+  300 CONTINUE
+  DO l = 1, Neq
+    Y(l) = Yh(l,1)
+    Ypout(l) = Yh(l,2)/H
+  ENDDO
+  T = X
+  TOLd = T
+  Intout = .FALSE.
 END SUBROUTINE LSOD

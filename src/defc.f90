@@ -232,13 +232,13 @@ SUBROUTINE DEFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,&
   !                         WRITTEN BY R. HANSON, SANDIA NATL. LABS.,
   !                         ALB., N. M., AUGUST-SEPTEMBER, 1980.
   !
-  REAL(8) :: Bkpt(*) , Coeff(*) , W(*) , Sddata(*) , Xdata(*) , &
+  REAL(8) :: Bkpt(*), Coeff(*), W(*), Sddata(*), Xdata(*), &
     Ydata(*)
-  INTEGER Lw , Mdein , Mdeout , Nbkpt , Ndata , Nord
+  INTEGER Lw, Mdein, Mdeout, Nbkpt, Ndata, Nord
   !
   EXTERNAL DEFCMN
   !
-  INTEGER lbf , lbkpt , lg , lptemp , lww , lxtemp , mdg , mdw
+  INTEGER lbf, lbkpt, lg, lptemp, lww, lxtemp, mdg, mdw
   !
   !***FIRST EXECUTABLE STATEMENT  DEFC
   !     LWW=1               USAGE IN DEFCMN( ) OF W(*)..

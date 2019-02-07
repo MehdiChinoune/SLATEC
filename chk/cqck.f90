@@ -4,7 +4,7 @@ SUBROUTINE CQCK(Lun,Kprint,Nerr)
   IMPLICIT NONE
   !*--CQCK5
   !*** Start of declarations inserted by SPAG
-  INTEGER Kprint , Lun
+  INTEGER Kprint, Lun
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CQCK
   !***PURPOSE  Quick check for CPOFS, CPOIR, CNBFS and CNBIR.
@@ -42,19 +42,19 @@ SUBROUTINE CQCK(Lun,Kprint,Nerr)
   !           including removing an illegal character from column 1, and
   !           editorial changes.  (RWC)
   !***END PROLOGUE  CQCK
-  REAL r , delx , delmax , R1MACH
-  COMPLEX a(4,4) , at(5,4) , abe(5,7) , abet(5,7) , b(4) , bt(4) , c(4) ,&
+  REAL r, delx, delmax, R1MACH
+  COMPLEX a(4,4), at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4) ,&
     work(35)
   CHARACTER(4) :: list(4)
-  INTEGER lda , n , ml , mu , ind , iwork(4) , Nerr , i , j , j1 , j2 , jd ,&
-    mlp , k , kcase , kprog
-  DATA a/(2.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,&
-    (0.E0,-1.E0) , (2.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0)&
-    , (0.E0,0.E0) , (3.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0)&
-    , (0.E0,-1.E0) , (4.E0,0.E0)/
-  DATA c/(1.E0,1.E0) , (0.E0,1.E0) , (0.E0,-1.E0) , (1.E0,0.E0)/
-  DATA b/(3.E0,2.E0) , (-1.E0,3.E0) , (0.E0,-4.E0) , (5.E0,0.E0)/
-  DATA list/'POFS' , 'POIR' , 'NBFS' , 'NBIR'/
+  INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd ,&
+    mlp, k, kcase, kprog
+  DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
+    , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
+    , (0.E0,-1.E0), (4.E0,0.E0)/
+  DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
+  DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
+  DATA list/'POFS', 'POIR', 'NBFS', 'NBIR'/
   !***FIRST EXECUTABLE STATEMENT  CQCK
   IF ( Kprint>=3 ) WRITE (Lun,99001)
   !
@@ -69,17 +69,17 @@ SUBROUTINE CQCK(Lun,Kprint,Nerr)
   !
   !     FORM ABE(NB ARRAY) FROM MATRIX A.
   !
-  DO j = 1 , jd
-    DO i = 1 , n
+  DO j = 1, jd
+    DO i = 1, n
       abe(i,j) = (0.0E0,0.0E0)
     ENDDO
   ENDDO
   !
   mlp = ml + 1
-  DO i = 1 , n
+  DO i = 1, n
     j1 = MAX(1,i-ml)
     j2 = MIN(n,i+mu)
-    DO j = j1 , j2
+    DO j = j1, j2
       k = j - i + mlp
       abe(i,k) = a(i,j)
     ENDDO
@@ -87,18 +87,18 @@ SUBROUTINE CQCK(Lun,Kprint,Nerr)
   !
   !     CASE 1 FOR WELL-CONDITIONED MATRIX, CASE 2 FOR SINGULAR MATRIX
   !
-  DO kcase = 1 , 2
-    DO kprog = 1 , 4
+  DO kcase = 1, 2
+    DO kprog = 1, 4
       !           FORM BT FROM B, AT FROM A, AND ABET FROM ABE.
-      DO i = 1 , n
+      DO i = 1, n
         bt(i) = b(i)
-        DO j = 1 , n
+        DO j = 1, n
           at(i,j) = a(i,j)
         ENDDO
       ENDDO
       !
-      DO j = 1 , jd
-        DO i = 1 , n
+      DO j = 1, jd
+        DO i = 1, n
           abet(i,j) = abe(i,j)
         ENDDO
       ENDDO
@@ -106,11 +106,11 @@ SUBROUTINE CQCK(Lun,Kprint,Nerr)
       !           MAKE AT AND ABET SINGULAR FOR CASE  =  2
       !
       IF ( kcase==2 ) THEN
-        DO j = 1 , n
+        DO j = 1, n
           at(1,j) = (0.0E0,0.0E0)
         ENDDO
         !
-        DO j = 1 , jd
+        DO j = 1, jd
           abet(1,j) = (0.0E0,0.0E0)
         ENDDO
       ENDIF
@@ -126,7 +126,7 @@ SUBROUTINE CQCK(Lun,Kprint,Nerr)
       !
       IF ( kcase==1 ) THEN
         delmax = 0.0E0
-        DO i = 1 , n
+        DO i = 1, n
           delx = ABS(REAL(bt(i))-REAL(c(i)))
           delmax = MAX(delmax,delx)
           delx = ABS(AIMAG(bt(i))-AIMAG(c(i)))
@@ -135,7 +135,7 @@ SUBROUTINE CQCK(Lun,Kprint,Nerr)
         !
         IF ( r<=delmax ) THEN
           Nerr = Nerr + 1
-          WRITE (Lun,99002) list(kprog) , kcase , delmax
+          WRITE (Lun,99002) list(kprog), kcase, delmax
           99002         FORMAT ('   PROBLEM WITH C',A,', CASE ',I1,'.  MAX ABS ERROR OF',&
             E11.4/)
         ENDIF
@@ -143,7 +143,7 @@ SUBROUTINE CQCK(Lun,Kprint,Nerr)
         !
       ELSEIF ( ind/=-4 ) THEN
         Nerr = Nerr + 1
-        WRITE (Lun,99003) list(kprog) , kcase , ind
+        WRITE (Lun,99003) list(kprog), kcase, ind
         99003       FORMAT ('   PROBLEM WITH C',A,', CASE ',I1,'.  IND = ',I2,&
           ' INSTEAD OF -4'/)
       ENDIF

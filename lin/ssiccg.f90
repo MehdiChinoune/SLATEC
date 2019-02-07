@@ -5,7 +5,7 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   IMPLICIT NONE
   !*--SSICCG6
   !*** Start of declarations inserted by SPAG
-  REAL SSLLTI , SSMV
+  REAL SSLLTI, SSMV
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSICCG
   !***PURPOSE  Incomplete Cholesky Conjugate Gradient Sparse Ax=b Solver.
@@ -238,21 +238,21 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   921019  Corrected NEL to NL.  (FNF)
   !***END PROLOGUE  SSICCG
   !     .. Parameters ..
-  INTEGER LOCRB , LOCIB
+  INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  REAL Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
+  REAL Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
     Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt) , B(N) , Rwork(Lenw) , X(N)
-  INTEGER Ia(Nelt) , Iwork(Leniw) , Ja(Nelt)
+  REAL A(Nelt), B(N), Rwork(Lenw), X(N)
+  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin , locdz , locel , lociel , lociw , locjel , locp , locr , &
-    locw , locz , nl
+  INTEGER locdin, locdz, locel, lociel, lociw, locjel, locp, locr, &
+    locw, locz, nl
   CHARACTER xern1*8
   !     .. External Subroutines ..
-  EXTERNAL SCG , SCHKW , SS2Y , SSICS , SSLLTI , SSMV , XERMSG
+  EXTERNAL SCG, SCHKW, SS2Y, SSICS, SSLLTI, SSMV, XERMSG
   !***FIRST EXECUTABLE STATEMENT  SSICCG
   !
   Ierr = 0

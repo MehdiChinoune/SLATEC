@@ -69,24 +69,24 @@ SUBROUTINE CQCBK(Lun,Kprint,Ipass)
   !
   !  Declare arguments.
   !
-  INTEGER Lun , Kprint , Ipass
+  INTEGER Lun, Kprint, Ipass
   !
   !  Declare external functions.
   !
   INTEGER I1MACH
   REAL R1MACH
-  EXTERNAL I1MACH , R1MACH
+  EXTERNAL I1MACH, R1MACH
   !
   !  Declare local variables.
   !
-  COMPLEX cone , csgn , cv , cw , cy , w , y , z , zn
-  REAL aa , ab , aer , alim , arg , atol , axx , ct , dig , elim , eps , &
-    er , ertol , ffnu , film , fnu , fnul , hpi , pi , r , rl , rm , &
-    r1m4 , r1m5 , r2 , slak , st , t , tol , ts , xnu , xx
-  INTEGER i , icase , ierr , ifnu , il , ir , irb , it , itl , k , kdo , &
-    keps , kk , kode , k1 , k2 , lflg , mflg , n , nl , nu , nul , &
-    nz1 , nz2 , n1
-  DIMENSION aer(20) , kdo(20) , keps(20) , t(20) , w(20) , xnu(20) , y(20)
+  COMPLEX cone, csgn, cv, cw, cy, w, y, z, zn
+  REAL aa, ab, aer, alim, arg, atol, axx, ct, dig, elim, eps, &
+    er, ertol, ffnu, film, fnu, fnul, hpi, pi, r, rl, rm, &
+    r1m4, r1m5, r2, slak, st, t, tol, ts, xnu, xx
+  INTEGER i, icase, ierr, ifnu, il, ir, irb, it, itl, k, kdo, &
+    keps, kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, &
+    nz1, nz2, n1
+  DIMENSION aer(20), kdo(20), keps(20), t(20), w(20), xnu(20), y(20)
   !
   !***FIRST EXECUTABLE STATEMENT  CQCBK
   IF ( Kprint>=2 ) THEN
@@ -129,7 +129,7 @@ SUBROUTINE CQCBK(Lun,Kprint,Ipass)
     WRITE (Lun,99002)
     99002   FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
       8X,'DIG')
-    WRITE (Lun,99003) tol , elim , alim , rl , fnul , dig
+    WRITE (Lun,99003) tol, elim, alim, rl, fnul, dig
     99003   FORMAT (1X,6E12.4/)
   ENDIF
   !-----------------------------------------------------------------------
@@ -158,7 +158,7 @@ SUBROUTINE CQCBK(Lun,Kprint,Ipass)
   IF ( MQC/=2 ) THEN
     nl = 2
     il = 5
-    DO i = 1 , il
+    DO i = 1, il
       keps(i) = 0
       kdo(i) = 0
     ENDDO
@@ -171,7 +171,7 @@ SUBROUTINE CQCBK(Lun,Kprint,Ipass)
   ELSE
     nl = 4
     il = 13
-    DO i = 1 , il
+    DO i = 1, il
       kdo(i) = 0
       keps(i) = 0
     ENDDO
@@ -197,7 +197,7 @@ SUBROUTINE CQCBK(Lun,Kprint,Ipass)
   eps = 0.01E0
   film = il - 1
   t(1) = -pi + eps
-  DO k = 2 , il
+  DO k = 2, il
     IF ( kdo(k)==0 ) THEN
       t(i) = pi*(-il+2*k-1)/film
       IF ( keps(k)/=0 ) THEN
@@ -219,19 +219,19 @@ SUBROUTINE CQCBK(Lun,Kprint,Ipass)
     99004   FORMAT (' CHECKS IN THE (Z,FNU) SPACE')
   ENDIF
   lflg = 0
-  DO kode = 1 , 2
-    DO n = 1 , nl
+  DO kode = 1, 2
+    DO n = 1, nl
       n1 = n + 1
-      DO nu = 1 , nul
+      DO nu = 1, nul
         fnu = xnu(nu)
         ifnu = INT(fnu)
         ffnu = fnu - ifnu
         arg = pi*ffnu
         csgn = CMPLX(COS(arg),SIN(arg))
         IF ( MOD(ifnu,2)==1 ) csgn = -csgn
-        DO icase = 1 , 3
+        DO icase = 1, 3
           irb = MIN(2,icase)
-          DO ir = irb , 4
+          DO ir = irb, 4
             !-------------- switch (icase)
             SELECT CASE (icase)
               CASE (2)
@@ -243,7 +243,7 @@ SUBROUTINE CQCBK(Lun,Kprint,Ipass)
                 r = (eps*(4-ir)+2.0E0*(ir-1))/3.0E0
             END SELECT
             !-------------- end switch
-            DO it = 1 , itl
+            DO it = 1, itl
               ct = COS(t(it))
               st = SIN(t(it))
               IF ( ABS(ct)<atol ) ct = 0.0E0
@@ -278,7 +278,7 @@ SUBROUTINE CQCBK(Lun,Kprint,Ipass)
                   zn = csgn
                   !------------------ CSGN set near top of DO 180 loop
                   IF ( st>0.0E0.OR.(st==0.0E0.AND.ct<0.0E0) ) zn = CONJG(zn)
-                  DO kk = 1 , n1
+                  DO kk = 1, n1
                     y(kk) = y(kk)*zn
                     zn = -zn
                   ENDDO
@@ -293,7 +293,7 @@ SUBROUTINE CQCBK(Lun,Kprint,Ipass)
                   ENDIF
                 ENDIF
                 mflg = 0
-                DO i = 1 , n
+                DO i = 1, n
                   cw = w(i)*y(i+1)
                   cy = w(i+1)*y(i)
                   cy = cy + cw - cv
@@ -323,7 +323,7 @@ SUBROUTINE CQCBK(Lun,Kprint,Ipass)
                   ENDIF
                   lflg = lflg + 1
                   IF ( Kprint>=2 ) THEN
-                    WRITE (Lun,99010) z , fnu , kode , n
+                    WRITE (Lun,99010) z, fnu, kode, n
                     99010                   FORMAT ('   INPUT:    Z=',2E12.4,4X,'FNU=',E12.4,4X,&
                       'KODE=',I3,4X,'N=',I3)
                   ENDIF
@@ -332,10 +332,10 @@ SUBROUTINE CQCBK(Lun,Kprint,Ipass)
                     99011                   FORMAT ('   ERROR:  AER(K)=',4E12.4)
                     kk = MAX(nz1,nz2) + 1
                     kk = MIN(n,kk)
-                    WRITE (Lun,99012) nz1 , y(kk) , nz2 , w(kk)
+                    WRITE (Lun,99012) nz1, y(kk), nz2, w(kk)
                     99012                   FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2E12.4,/11X,&
                       'NZ2=',I3,4X,'W(KK)=',2E12.4)
-                    WRITE (Lun,99013) it , ir , icase
+                    WRITE (Lun,99013) it, ir, icase
                     99013                   FORMAT ('    CASE:   IT=',I3,4X,'IR=',I3,4X,'ICASE=',&
                       I3/)
                   ENDIF

@@ -12,7 +12,7 @@ REAL(8) FUNCTION DT2(X)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DT2
-  REAL(8) :: a , b , DF2S , X , x1 , y
+  REAL(8) :: a, b, DF2S, X, x1, y
   !***FIRST EXECUTABLE STATEMENT  DT2
   a = 0.1D+00
   b = 0.1D+01

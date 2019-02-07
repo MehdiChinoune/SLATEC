@@ -4,7 +4,7 @@ SUBROUTINE MPCMD(X,Dz)
   IMPLICIT NONE
   !*--MPCMD5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , LUN , M , MXR
+  INTEGER i, LUN, M, MXR
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPCMD
   !***SUBSIDIARY
@@ -33,15 +33,15 @@ SUBROUTINE MPCMD(X,Dz)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPCMD
-  REAL(8) :: db , Dz , dz2
-  COMMON /MPCOM / B , T , M , LUN , MXR , R(30)
-  INTEGER B , T , R , X(*) , tm
+  REAL(8) :: db, Dz, dz2
+  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
+  INTEGER B, T, R, X(*), tm
   !***FIRST EXECUTABLE STATEMENT  MPCMD
   CALL MPCHK(1,4)
   Dz = 0D0
   IF ( X(1)==0 ) RETURN
   db = REAL(B, 8)
-  DO i = 1 , T
+  DO i = 1, T
     Dz = db*Dz + REAL(X(i+2), 8)
     tm = i
     ! CHECK IF FULL DOUBLE-PRECISION ACCURACY ATTAINED

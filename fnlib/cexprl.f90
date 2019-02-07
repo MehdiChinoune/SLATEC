@@ -4,8 +4,8 @@ COMPLEX FUNCTION CEXPRL(Z)
   IMPLICIT NONE
   !*--CEXPRL5
   !*** Start of declarations inserted by SPAG
-  REAL alneps , r , R1MACH , rbnd , xln , xn
-  INTEGER i , nterms
+  REAL alneps, r, R1MACH, rbnd, xln, xn
+  INTEGER i, nterms
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CEXPRL
   !***PURPOSE  Calculate the relative error exponential (EXP(X)-1)/X.
@@ -32,7 +32,7 @@ COMPLEX FUNCTION CEXPRL(Z)
   !***END PROLOGUE  CEXPRL
   COMPLEX Z
   LOGICAL first
-  SAVE nterms , rbnd , first
+  SAVE nterms, rbnd, first
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  CEXPRL
   IF ( first ) THEN
@@ -52,7 +52,7 @@ COMPLEX FUNCTION CEXPRL(Z)
   IF ( r<rbnd ) RETURN
   !
   CEXPRL = (0.0,0.0)
-  DO i = 1 , nterms
+  DO i = 1, nterms
     CEXPRL = 1.0 + CEXPRL*Z/(nterms+2-i)
   ENDDO
   !

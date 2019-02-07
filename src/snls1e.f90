@@ -65,9 +65,9 @@ SUBROUTINE SNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !         INTEGER IFLAG,LDFJAC,M,N
   !         REAL X(N),FVEC(M)
   !         ----------
-  !         FJAC and LDFJAC may be ignored     , if IOPT=1.
-  !         REAL FJAC(LDFJAC,N)                , if IOPT=2.
-  !         REAL FJAC(N)                       , if IOPT=3.
+  !         FJAC and LDFJAC may be ignored    , if IOPT=1.
+  !         REAL FJAC(LDFJAC,N)               , if IOPT=2.
+  !         REAL FJAC(N)                      , if IOPT=3.
   !         ----------
   !           If IFLAG=0, the values in X and FVEC are available
   !           for printing.  See the explanation of NPRINT below.
@@ -506,15 +506,15 @@ SUBROUTINE SNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SNLS1E
-  INTEGER M , N , Nprint , Info , Lwa , Iopt
-  INTEGER index , Iw(*)
+  INTEGER M, N, Nprint, Info, Lwa, Iopt
+  INTEGER index, Iw(*)
   REAL Tol
-  REAL X(*) , Fvec(*) , Wa(*)
+  REAL X(*), Fvec(*), Wa(*)
   EXTERNAL FCN
-  INTEGER maxfev , mode , nfev , njev
-  REAL factor , ftol , gtol , xtol , zero , epsfcn
-  SAVE factor , zero
-  DATA factor , zero/1.0E2 , 0.0E0/
+  INTEGER maxfev, mode, nfev, njev
+  REAL factor, ftol, gtol, xtol, zero, epsfcn
+  SAVE factor, zero
+  DATA factor, zero/1.0E2, 0.0E0/
   !***FIRST EXECUTABLE STATEMENT  SNLS1E
   Info = 0
   !

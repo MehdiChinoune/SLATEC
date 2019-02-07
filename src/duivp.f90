@@ -24,7 +24,7 @@ SUBROUTINE DUIVP(X,Y,Yp)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Array Arguments ..
-  REAL(8) :: Y(*) , Yp(*)
+  REAL(8) :: Y(*), Yp(*)
   !***FIRST EXECUTABLE STATEMENT  DUIVP
   STOP
 END SUBROUTINE DUIVP

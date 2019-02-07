@@ -4,8 +4,8 @@ SUBROUTINE CQRTST(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--CQRTST5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , ierr , Ipass , j , kontrl , Kprint , Lun , nerr , NUMXER
-  REAL R1MACH , tol
+  INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr, NUMXER
+  REAL R1MACH, tol
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CQRTST
   !***PURPOSE  Quick check for CPQR79.
@@ -19,17 +19,17 @@ SUBROUTINE CQRTST(Lun,Kprint,Ipass)
   !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
   !   911010  Code reworked and simplified.  (RWC and WRB)
   !***END PROLOGUE  CQRTST
-  INTEGER itest(2) , itmp(7)
+  INTEGER itest(2), itmp(7)
   REAL work(144)
-  COMPLEX coeff1(9) , coeff2(2) , coeff3(2) , root(8) , chk1(8) , chk2
+  COMPLEX coeff1(9), coeff2(2), coeff3(2), root(8), chk1(8), chk2
   LOGICAL fatal
   !
-  DATA coeff1/(1.0,0.0) , (-7.0,-2.0) , (8.0,6.0) , (28.0,8.0) , &
-    (-49.0,-24.0) , (7.0,2.0) , (-8.0,-6.0) , (-28.0,-8.0) , (48.0,24.0)/
-  DATA coeff2/(1.0,1.0) , (1.0,3.0)/
-  DATA coeff3/(0.0,0.0) , (1.0,3.0)/
-  DATA chk1/(4.0,2.0) , (3.0,0.0) , (-2.0,0.0) , (2.0,0.0) , (0.0,-1.0) , &
-    (-1.0,0.0) , (0.0,1.0) , (1.0,0.0)/
+  DATA coeff1/(1.0,0.0), (-7.0,-2.0), (8.0,6.0), (28.0,8.0), &
+    (-49.0,-24.0), (7.0,2.0), (-8.0,-6.0), (-28.0,-8.0), (48.0,24.0)/
+  DATA coeff2/(1.0,1.0), (1.0,3.0)/
+  DATA coeff3/(0.0,0.0), (1.0,3.0)/
+  DATA chk1/(4.0,2.0), (3.0,0.0), (-2.0,0.0), (2.0,0.0), (0.0,-1.0), &
+    (-1.0,0.0), (0.0,1.0), (1.0,0.0)/
   DATA chk2/(-2.0,-1.0)/
   !***FIRST EXECUTABLE STATEMENT  CQRTST
   IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -44,14 +44,14 @@ SUBROUTINE CQRTST(Lun,Kprint,Ipass)
   !
   !     Check to see if test passed.
   !
-  DO i = 1 , 7
+  DO i = 1, 7
     itmp(i) = 0
   ENDDO
   !
   !     Check for roots in any order.
   !
-  DO i = 1 , 7
-    DO j = 1 , 7
+  DO i = 1, 7
+    DO j = 1, 7
       IF ( ABS(root(i)-chk1(j))<=tol ) THEN
         itmp(j) = 1
         EXIT
@@ -62,7 +62,7 @@ SUBROUTINE CQRTST(Lun,Kprint,Ipass)
   !     Check that we found all 7 roots.
   !
   itest(1) = 1
-  DO i = 1 , 7
+  DO i = 1, 7
     itest(1) = itest(1)*itmp(i)
   ENDDO
   !

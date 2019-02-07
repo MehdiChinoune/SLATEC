@@ -113,12 +113,12 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BQR
   !
-  INTEGER i , j , k , l , m , N , ii , ik , jk , jm , kj , kk , km , ll , &
-    Mb , mk , mn , mz
-  INTEGER m1 , m2 , m3 , m4 , ni , Nm , Nv , its , kj1 , m21 , m31 , Ierr , &
+  INTEGER i, j, k, l, m, N, ii, ik, jk, jm, kj, kk, km, ll, &
+    Mb, mk, mn, mz
+  INTEGER m1, m2, m3, m4, ni, Nm, Nv, its, kj1, m21, m31, Ierr, &
     imult
-  REAL A(Nm,*) , Rv(*)
-  REAL f , g , q , R , s , T , scale
+  REAL A(Nm,*), Rv(*)
+  REAL f, g, q, R, s, T, scale
   REAL PYTHAG
   !
   !***FIRST EXECUTABLE STATEMENT  BQR
@@ -139,7 +139,7 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
     IF ( m==0 ) EXIT
     f = 0.0E0
     !
-    DO k = 1 , m
+    DO k = 1, m
       mk = k + mz
       f = f + ABS(A(N,mk))
     ENDDO
@@ -163,27 +163,27 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
         ENDIF
         T = T + g
         !
-        DO i = 1 , N
+        DO i = 1, N
           A(i,Mb) = A(i,Mb) - g
         ENDDO
       ENDIF
       !
-      DO k = m31 , m4
+      DO k = m31, m4
         Rv(k) = 0.0E0
       ENDDO
       !
-      DO ii = 1 , mn
+      DO ii = 1, mn
         i = ii - m
         ni = N - ii
         IF ( ni<0 ) GOTO 20
         !     .......... FORM COLUMN OF SHIFTED MATRIX A-G*I ..........
         l = MAX(1,2-i)
         !
-        DO k = 1 , m3
+        DO k = 1, m3
           Rv(k) = 0.0E0
         ENDDO
         !
-        DO k = l , m1
+        DO k = l, m1
           km = k + m
           mk = k + mz
           Rv(km) = A(ii,mk)
@@ -192,7 +192,7 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
         ll = MIN(m,ni)
         IF ( ll/=0 ) THEN
           !
-          DO k = 1 , ll
+          DO k = 1, ll
             km = k + m21
             ik = ii + k
             mk = Mb - k
@@ -205,13 +205,13 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
         !     .......... MULTIPLICATION PROCEDURE ..........
         10         kj = m4 - m1
         !
-        DO j = 1 , ll
+        DO j = 1, ll
           kj = kj + m1
           jm = j + m3
           IF ( Rv(jm)/=0.0E0 ) THEN
             f = 0.0E0
             !
-            DO k = 1 , m1
+            DO k = 1, m1
               kj = kj + 1
               jk = j + k - 1
               f = f + Rv(kj)*Rv(jk)
@@ -220,7 +220,7 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
             f = f/Rv(jm)
             kj = kj - m1
             !
-            DO k = 1 , m1
+            DO k = 1, m1
               kj = kj + 1
               jk = j + k - 1
               Rv(jk) = Rv(jk) - Rv(kj)*f
@@ -232,7 +232,7 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
         !
         IF ( imult/=0 ) THEN
           !     .......... STORE COLUMN OF NEW A MATRIX ..........
-          DO k = l , m1
+          DO k = l, m1
             mk = k + mz
             A(i,mk) = Rv(k)
           ENDDO
@@ -244,13 +244,13 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
           Rv(m4) = 0.0E0
           scale = 0.0E0
           !
-          DO k = m21 , m3
+          DO k = m21, m3
             scale = scale + ABS(Rv(k))
           ENDDO
           !
           IF ( scale/=0.0E0 ) THEN
             !
-            DO k = m21 , m3
+            DO k = m21, m3
               s = s + (Rv(k)/scale)**2
             ENDDO
             !
@@ -261,14 +261,14 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
             kj = m4 + m2*m1 + 1
             Rv(kj) = f - g
             !
-            DO k = 2 , m1
+            DO k = 2, m1
               kj = kj + 1
               km = k + m2
               Rv(kj) = Rv(km)
             ENDDO
           ENDIF
           !     .......... SAVE COLUMN OF TRIANGULAR FACTOR R ..........
-          DO k = l , m1
+          DO k = l, m1
             km = k + m
             mk = k + mz
             A(ii,mk) = Rv(km)
@@ -278,13 +278,13 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
         20         l = MAX(1,m1+1-i)
         IF ( i>0 ) THEN
           !     .......... PERFORM ADDITIONAL STEPS ..........
-          DO k = 1 , m21
+          DO k = 1, m21
             Rv(k) = 0.0E0
           ENDDO
           !
           ll = MIN(m1,ni+m1)
           !     .......... GET ROW OF TRIANGULAR FACTOR R ..........
-          DO kk = 1 , ll
+          DO kk = 1, ll
             k = kk - 1
             km = k + m1
             ik = i + k
@@ -300,11 +300,11 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
         30         IF ( l>1 ) l = l - 1
         kj1 = m4 + l*m1
         !
-        DO j = l , m2
+        DO j = l, m2
           jm = j + m3
           Rv(jm) = Rv(jm+1)
           !
-          DO k = 1 , m1
+          DO k = 1, m1
             kj1 = kj1 + 1
             kj = kj1 - m1
             Rv(kj) = Rv(kj1)
@@ -318,13 +318,14 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
   !     .......... CONVERGENCE ..........
   T = T + g
   !
-  DO i = 1 , N
+  DO i = 1, N
     A(i,Mb) = A(i,Mb) - g
   ENDDO
   !
-  DO k = 1 , m1
+  DO k = 1, m1
     mk = k + mz
     A(N,mk) = 0.0E0
     !
   ENDDO
-  99999 END SUBROUTINE BQR
+  99999 CONTINUE
+  END SUBROUTINE BQR

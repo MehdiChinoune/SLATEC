@@ -4,7 +4,7 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
   IMPLICIT NONE
   !*--MPMUL25
   !*** Start of declarations inserted by SPAG
-  INTEGER i , ij , is , ix , Iy , j , j1 , j2 , LUN , M , MXR
+  INTEGER i, ij, is, ix, Iy, j, j1, j2, LUN, M, MXR
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPMUL2
   !***SUBSIDIARY
@@ -35,9 +35,9 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPMUL2
-  COMMON /MPCOM / B , T , M , LUN , MXR , R(30)
-  INTEGER B , T , R , X(*) , Z(*) , Trunc , re , rs
-  INTEGER c , c1 , c2 , ri , t1 , t3 , t4
+  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
+  INTEGER B, T, R, X(*), Z(*), Trunc, re, rs
+  INTEGER c, c1, c2, ri, t1, t3, t4
   !***FIRST EXECUTABLE STATEMENT  MPMUL2
   rs = X(1)
   IF ( rs/=0 ) THEN
@@ -80,7 +80,7 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
     j1 = j/B
     j2 = j - j1*B
     ! FORM PRODUCT
-    DO ij = 1 , t4
+    DO ij = 1, t4
       c1 = c/B
       c2 = c - B*c1
       i = t1 - ij
@@ -94,7 +94,7 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
     IF ( c<0 ) GOTO 400
     IF ( c==0 ) GOTO 300
   ELSE
-    DO ij = 1 , T
+    DO ij = 1, T
       i = t1 - ij
       ri = j*X(i+2) + c
       c = ri/B
@@ -103,7 +103,7 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
     ! CHECK FOR INTEGER OVERFLOW
     IF ( ri<0 ) GOTO 400
     ! HAVE TO TREAT FIRST FOUR WORDS OF R SEPARATELY
-    DO ij = 1 , 4
+    DO ij = 1, 4
       i = 5 - ij
       ri = c
       c = ri/B
@@ -113,7 +113,7 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
   ENDIF
   DO
     ! HAVE TO SHIFT RIGHT HERE AS CARRY OFF END
-    DO ij = 1 , t3
+    DO ij = 1, t3
       i = t4 - ij
       R(i+1) = R(i)
     ENDDO

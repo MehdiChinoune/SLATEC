@@ -17,17 +17,17 @@ SUBROUTINE DPLPQX(Lun,Kprint,Ipass)
   !*--DPLPQX17
   !*** Start of declarations inserted by SPAG
   REAL(8) :: DUSRMT
-  INTEGER i , ic , iv , ivv , j , kk , kount , Kprint , Lun , mm
+  INTEGER i, ic, iv, ivv, j, kk, kount, Kprint, Lun, mm
   !*** End of declarations inserted by SPAG
   EXTERNAL DUSRMT
-  INTEGER icnt , ind(60) , ibasis(60) , Ipass , iwork(900) , isoln(14)
+  INTEGER icnt, ind(60), ibasis(60), Ipass, iwork(900), isoln(14)
   REAL(8) :: costs(37)
-  REAL(8) :: prgopt(50) , dattrv(210) , bl(60) , bu(60)
-  REAL(8) :: primal(60) , duals(60)
+  REAL(8) :: prgopt(50), dattrv(210), bl(60), bu(60)
+  REAL(8) :: primal(60), duals(60)
   REAL(8) :: work(800)
   REAL(8) :: d(14,37)
   REAL(8) :: zero
-  INTEGER mrelas , nvars , info , lw , liw
+  INTEGER mrelas, nvars, info, lw, liw
   !***FIRST EXECUTABLE STATEMENT  DPLPQX
   IF ( Kprint>=2 ) WRITE (Lun,99001)
   99001 FORMAT ('1 DSPLP QUICK CHECK')
@@ -166,9 +166,9 @@ SUBROUTINE DPLPQX(Lun,Kprint,Ipass)
   d(14,36) = 1.00000D0
   d(14,37) = -1.00000D0
   kount = 1
-  DO mm = 1 , nvars
+  DO mm = 1, nvars
     dattrv(kount) = -mm
-    DO kk = 1 , mrelas
+    DO kk = 1, mrelas
       IF ( d(kk,mm)/=zero ) THEN
         kount = kount + 1
         dattrv(kount) = kk
@@ -180,13 +180,13 @@ SUBROUTINE DPLPQX(Lun,Kprint,Ipass)
   ENDDO
   dattrv(kount) = zero
   !     NON-NEGATIVITY CONSTRAINT
-  DO ic = 1 , nvars
+  DO ic = 1, nvars
     bl(ic) = zero
     ind(ic) = 3
     bu(ic) = 10000000.000D0
   ENDDO
   !     LE CONSTRAINTS
-  DO iv = 1 , mrelas
+  DO iv = 1, mrelas
     ivv = iv + nvars
     ind(ivv) = 3
     bl(ivv) = 100.00000D0
@@ -218,13 +218,13 @@ SUBROUTINE DPLPQX(Lun,Kprint,Ipass)
   !
   !     LOOK FOR THE KNOWN BASIS AT THE SOLN., NOW IS ISOLN(*).
   !
-  DO i = 1 , mrelas
+  DO i = 1, mrelas
     isoln(i) = prgopt(i+3)
   ENDDO
   !
   Ipass = 1
-  DO j = 1 , mrelas
-    DO i = 1 , mrelas
+  DO j = 1, mrelas
+    DO i = 1, mrelas
       IF ( isoln(i)==ibasis(j) ) GOTO 100
     ENDDO
     Ipass = 0

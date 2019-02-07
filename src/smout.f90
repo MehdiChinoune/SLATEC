@@ -5,7 +5,7 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
   !*--SMOUT5
   !*** Start of declarations inserted by SPAG
   REAL A
-  INTEGER i , I1MACH , Idigit , j , k1 , k2 , Lda , lout , M , N , ndigit
+  INTEGER i, I1MACH, Idigit, j, k1, k2, Lda, lout, M, N, ndigit
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SMOUT
   !***SUBSIDIARY
@@ -63,7 +63,7 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  SMOUT
   DIMENSION A(Lda,*)
-  CHARACTER Ifmt*(*) , icol*3
+  CHARACTER Ifmt*(*), icol*3
   SAVE icol
   DATA icol/'COL'/
   !***FIRST EXECUTABLE STATEMENT  SMOUT
@@ -77,43 +77,43 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
     ndigit = -Idigit
     IF ( ndigit<=4 ) THEN
       !
-      DO k1 = 1 , N , 5
+      DO k1 = 1, N, 5
         k2 = MIN(N,k1+4)
         WRITE (lout,99001) (icol,i,i=k1,k2)
-        DO i = 1 , M
-          WRITE (lout,99005) i , (A(i,j),j=k1,k2)
+        DO i = 1, M
+          WRITE (lout,99005) i, (A(i,j),j=k1,k2)
         ENDDO
       ENDDO
       RETURN
       !
     ELSEIF ( ndigit<=6 ) THEN
       !
-      DO k1 = 1 , N , 4
+      DO k1 = 1, N, 4
         k2 = MIN(N,k1+3)
         WRITE (lout,99002) (icol,i,i=k1,k2)
-        DO i = 1 , M
-          WRITE (lout,99006) i , (A(i,j),j=k1,k2)
+        DO i = 1, M
+          WRITE (lout,99006) i, (A(i,j),j=k1,k2)
         ENDDO
       ENDDO
       RETURN
       !
     ELSEIF ( ndigit>10 ) THEN
       !
-      DO k1 = 1 , N , 2
+      DO k1 = 1, N, 2
         k2 = MIN(N,k1+1)
         WRITE (lout,99004) (icol,i,i=k1,k2)
-        DO i = 1 , M
-          WRITE (lout,99008) i , (A(i,j),j=k1,k2)
+        DO i = 1, M
+          WRITE (lout,99008) i, (A(i,j),j=k1,k2)
         ENDDO
       ENDDO
       RETURN
     ELSE
       !
-      DO k1 = 1 , N , 3
+      DO k1 = 1, N, 3
         k2 = MIN(N,k1+2)
         WRITE (lout,99003) (icol,i,i=k1,k2)
-        DO i = 1 , M
-          WRITE (lout,99007) i , (A(i,j),j=k1,k2)
+        DO i = 1, M
+          WRITE (lout,99007) i, (A(i,j),j=k1,k2)
         ENDDO
       ENDDO
       RETURN
@@ -121,43 +121,43 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
     !
   ELSEIF ( ndigit<=4 ) THEN
     !
-    DO k1 = 1 , N , 10
+    DO k1 = 1, N, 10
       k2 = MIN(N,k1+9)
       WRITE (lout,99001) (icol,i,i=k1,k2)
-      DO i = 1 , M
-        WRITE (lout,99005) i , (A(i,j),j=k1,k2)
+      DO i = 1, M
+        WRITE (lout,99005) i, (A(i,j),j=k1,k2)
       ENDDO
     ENDDO
     RETURN
     !
   ELSEIF ( ndigit<=6 ) THEN
     !
-    DO k1 = 1 , N , 8
+    DO k1 = 1, N, 8
       k2 = MIN(N,k1+7)
       WRITE (lout,99002) (icol,i,i=k1,k2)
-      DO i = 1 , M
-        WRITE (lout,99006) i , (A(i,j),j=k1,k2)
+      DO i = 1, M
+        WRITE (lout,99006) i, (A(i,j),j=k1,k2)
       ENDDO
     ENDDO
     RETURN
     !
   ELSEIF ( ndigit>10 ) THEN
     !
-    DO k1 = 1 , N , 5
+    DO k1 = 1, N, 5
       k2 = MIN(N,k1+4)
       WRITE (lout,99004) (icol,i,i=k1,k2)
-      DO i = 1 , M
-        WRITE (lout,99008) i , (A(i,j),j=k1,k2)
+      DO i = 1, M
+        WRITE (lout,99008) i, (A(i,j),j=k1,k2)
       ENDDO
     ENDDO
     RETURN
   ENDIF
   !
-  DO k1 = 1 , N , 6
+  DO k1 = 1, N, 6
     k2 = MIN(N,k1+5)
     WRITE (lout,99003) (icol,i,i=k1,k2)
-    DO i = 1 , M
-      WRITE (lout,99007) i , (A(i,j),j=k1,k2)
+    DO i = 1, M
+      WRITE (lout,99007) i, (A(i,j),j=k1,k2)
     ENDDO
   ENDDO
   RETURN

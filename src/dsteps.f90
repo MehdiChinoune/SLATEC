@@ -6,7 +6,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   IMPLICIT NONE
   !*--DSTEPS7
   !*** Start of declarations inserted by SPAG
-  INTEGER Iv , Ivc , jv , Kgi , Kprev
+  INTEGER Iv, Ivc, jv, Kgi, Kprev
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSTEPS
   !***PURPOSE  Integrate a system of first order ordinary differential
@@ -89,7 +89,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !
   !    **Note**
   !
-  !   The user must also declare  START ,  CRASH ,  PHASE1  and  NORND
+  !   The user must also declare  START,  CRASH,  PHASE1  and  NORND
   !   logical variables and  DF  an EXTERNAL subroutine, supply the
   !   subroutine  DF(X,Y,YP)  to evaluate
   !      DY(I)/DX = YP(I) = DF(X,Y(1),Y(2),...,Y(NEQN))
@@ -131,7 +131,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !
   !   Subroutine  DSTEPS  is designed so that all information needed to
   !   continue the integration, including the step size  H  and the order
-  !   K , is returned with each step.  With the exception of the step
+  !   K, is returned with each step.  With the exception of the step
   !   size, the error tolerance, and the weights, none of the parameters
   !   should be altered.  The array  WT  must be updated after each step
   !   to maintain relative error tests like those above.  Normally the
@@ -140,7 +140,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !   impossible to integrate beyond the endpoint, the step size may be
   !   reduced to hit the endpoint since the code will not take a step
   !   larger than the  H  input.  Changing the direction of integration,
-  !   i.e., the sign of  H , requires the user set  START = .TRUE. before
+  !   i.e., the sign of  H, requires the user set  START = .TRUE. before
   !   calling  DSTEPS  again.  This is the only situation in which  START
   !   should be altered.
   !
@@ -178,31 +178,31 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSTEPS
   !
-  INTEGER i , ifail , im1 , ip1 , Ipar , iq , j , K , km1 , km2 , knew , &
-    Kold , kp1 , kp2 , Ksteps , l , limit1 , limit2 , Neqn , Ns , &
-    nsm2 , nsp1 , nsp2
-  REAL(8) :: absh , Alpha , Beta , big , D1MACH , Eps , erk , erkm1 , &
-    erkm2 , erkp1 , err , Fouru , G , Gi , gstr , H , hnew , &
-    Hold , P , p5eps , Phi , Psi , r , reali , realns , rho , &
-    round , Rpar , Sig , tau , temp1 , temp2 , temp3 , &
-    temp4 , temp5 , temp6 , two , Twou , u , V , W , Wt , X , &
-    Xold , Y , Yp
-  LOGICAL Start , Crash , Phase1 , Nornd
-  DIMENSION Y(*) , Wt(*) , Phi(Neqn,16) , P(*) , Yp(*) , Psi(12) , Alpha(12)&
-    , Beta(12) , Sig(13) , V(12) , W(12) , G(13) , Gi(11) , Iv(10) , &
-    Rpar(*) , Ipar(*)
-  DIMENSION two(13) , gstr(13)
+  INTEGER i, ifail, im1, ip1, Ipar, iq, j, K, km1, km2, knew, &
+    Kold, kp1, kp2, Ksteps, l, limit1, limit2, Neqn, Ns, &
+    nsm2, nsp1, nsp2
+  REAL(8) :: absh, Alpha, Beta, big, D1MACH, Eps, erk, erkm1, &
+    erkm2, erkp1, err, Fouru, G, Gi, gstr, H, hnew, &
+    Hold, P, p5eps, Phi, Psi, r, reali, realns, rho, &
+    round, Rpar, Sig, tau, temp1, temp2, temp3, &
+    temp4, temp5, temp6, two, Twou, u, V, W, Wt, X, &
+    Xold, Y, Yp
+  LOGICAL Start, Crash, Phase1, Nornd
+  DIMENSION Y(*), Wt(*), Phi(Neqn,16), P(*), Yp(*), Psi(12), Alpha(12)&
+    , Beta(12), Sig(13), V(12), W(12), G(13), Gi(11), Iv(10), &
+    Rpar(*), Ipar(*)
+  DIMENSION two(13), gstr(13)
   EXTERNAL DF
-  SAVE two , gstr
+  SAVE two, gstr
   !
-  DATA two(1) , two(2) , two(3) , two(4) , two(5) , two(6) , two(7) , two(8)&
-    , two(9) , two(10) , two(11) , two(12) , two(13)/2.0D0 , 4.0D0 , &
-    8.0D0 , 16.0D0 , 32.0D0 , 64.0D0 , 128.0D0 , 256.0D0 , 512.0D0 , &
-    1024.0D0 , 2048.0D0 , 4096.0D0 , 8192.0D0/
-  DATA gstr(1) , gstr(2) , gstr(3) , gstr(4) , gstr(5) , gstr(6) , gstr(7) , &
-    gstr(8) , gstr(9) , gstr(10) , gstr(11) , gstr(12) , gstr(13)/0.5D0 , &
-    0.0833D0 , 0.0417D0 , 0.0264D0 , 0.0188D0 , 0.0143D0 , 0.0114D0 , &
-    0.00936D0 , 0.00789D0 , 0.00679D0 , 0.00592D0 , 0.00524D0 , &
+  DATA two(1), two(2), two(3), two(4), two(5), two(6), two(7), two(8)&
+    , two(9), two(10), two(11), two(12), two(13)/2.0D0, 4.0D0, &
+    8.0D0, 16.0D0, 32.0D0, 64.0D0, 128.0D0, 256.0D0, 512.0D0, &
+    1024.0D0, 2048.0D0, 4096.0D0, 8192.0D0/
+  DATA gstr(1), gstr(2), gstr(3), gstr(4), gstr(5), gstr(6), gstr(7), &
+    gstr(8), gstr(9), gstr(10), gstr(11), gstr(12), gstr(13)/0.5D0, &
+    0.0833D0, 0.0417D0, 0.0264D0, 0.0188D0, 0.0143D0, 0.0114D0, &
+    0.00936D0, 0.00789D0, 0.00679D0, 0.00592D0, 0.00524D0, &
     0.00468D0/
   !
   !       ***     BEGIN BLOCK 0     ***
@@ -221,7 +221,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     !   IF ERROR TOLERANCE IS TOO SMALL, INCREASE IT TO AN ACCEPTABLE VALUE
     !
     round = 0.0D0
-    DO l = 1 , Neqn
+    DO l = 1, Neqn
       round = round + (Y(l)/Wt(l))**2
     ENDDO
     round = Twou*SQRT(round)
@@ -236,7 +236,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
         !
         !     CALL DF(X,Y,YP,RPAR,IPAR)
         !     SUM = 0.0
-        DO l = 1 , Neqn
+        DO l = 1, Neqn
           Phi(l,1) = Yp(l)
           Phi(l,2) = 0.0D0
         ENDDO
@@ -260,7 +260,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
         Nornd = .TRUE.
         IF ( p5eps<=100.0D0*round ) THEN
           Nornd = .FALSE.
-          DO l = 1 , Neqn
+          DO l = 1, Neqn
             Phi(l,15) = 0.0D0
           ENDDO
         ENDIF
@@ -303,7 +303,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     temp1 = H*realns
     Sig(nsp1) = 1.0D0
     IF ( K>=nsp1 ) THEN
-      DO i = nsp1 , K
+      DO i = nsp1, K
         im1 = i - 1
         temp2 = Psi(im1)
         Psi(im1) = temp1
@@ -340,7 +340,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
         ENDIF
         nsm2 = Ns - 2
         IF ( nsm2>=jv ) THEN
-          DO j = jv , nsm2
+          DO j = jv, nsm2
             i = K - j
             V(i) = V(i) - Alpha(j+1)*V(i+1)
             W(i) = V(i)
@@ -356,7 +356,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
       !
       limit1 = kp1 - Ns
       temp5 = Alpha(Ns)
-      DO iq = 1 , limit1
+      DO iq = 1, limit1
         V(iq) = V(iq) - temp5*V(iq+1)
         W(iq) = V(iq)
       ENDDO
@@ -371,7 +371,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
         Iv(Ivc) = limit1 + 2
       ENDIF
     ELSE
-      DO iq = 1 , K
+      DO iq = 1, K
         temp3 = iq*(iq+1)
         V(iq) = 1.0D0/temp3
         W(iq) = V(iq)
@@ -389,10 +389,10 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     nsp2 = Ns + 2
     Kprev = K
     IF ( kp1>=nsp2 ) THEN
-      DO i = nsp2 , kp1
+      DO i = nsp2, kp1
         limit2 = kp2 - i
         temp6 = Alpha(i-1)
-        DO iq = 1 , limit2
+        DO iq = 1, limit2
           W(iq) = W(iq) - temp6*W(iq+1)
         ENDDO
         G(i) = W(1)
@@ -414,9 +414,9 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !   CHANGE PHI TO PHI STAR
   !
   IF ( K>=nsp1 ) THEN
-    DO i = nsp1 , K
+    DO i = nsp1, K
       temp1 = Beta(i)
-      DO l = 1 , Neqn
+      DO l = 1, Neqn
         Phi(l,i) = temp1*Phi(l,i)
       ENDDO
     ENDDO
@@ -424,26 +424,26 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !
   !   PREDICT SOLUTION AND DIFFERENCES
   !
-  DO l = 1 , Neqn
+  DO l = 1, Neqn
     Phi(l,kp2) = Phi(l,kp1)
     Phi(l,kp1) = 0.0D0
     P(l) = 0.0D0
   ENDDO
-  DO j = 1 , K
+  DO j = 1, K
     i = kp1 - j
     ip1 = i + 1
     temp2 = G(i)
-    DO l = 1 , Neqn
+    DO l = 1, Neqn
       P(l) = P(l) + temp2*Phi(l,i)
       Phi(l,i) = Phi(l,i) + Phi(l,ip1)
     ENDDO
   ENDDO
   IF ( Nornd ) THEN
-    DO l = 1 , Neqn
+    DO l = 1, Neqn
       P(l) = Y(l) + H*P(l)
     ENDDO
   ELSE
-    DO l = 1 , Neqn
+    DO l = 1, Neqn
       tau = H*P(l) - Phi(l,15)
       P(l) = Y(l) + tau
       Phi(l,16) = (P(l)-Y(l)) - tau
@@ -459,7 +459,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   erkm2 = 0.0D0
   erkm1 = 0.0D0
   erk = 0.0D0
-  DO l = 1 , Neqn
+  DO l = 1, Neqn
     temp3 = 1.0D0/Wt(l)
     temp4 = Yp(l) - Phi(l,1)
     IF ( km2<0 ) GOTO 150
@@ -501,13 +501,13 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     !
     temp1 = H*G(kp1)
     IF ( Nornd ) THEN
-      DO l = 1 , Neqn
+      DO l = 1, Neqn
         temp3 = Y(l)
         Y(l) = P(l) + temp1*(Yp(l)-Phi(l,1))
         P(l) = temp3
       ENDDO
     ELSE
-      DO l = 1 , Neqn
+      DO l = 1, Neqn
         temp3 = Y(l)
         rho = temp1*(Yp(l)-Phi(l,1)) - Phi(l,16)
         Y(l) = P(l) + rho
@@ -519,12 +519,12 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     !
     !   UPDATE DIFFERENCES FOR NEXT STEP
     !
-    DO l = 1 , Neqn
+    DO l = 1, Neqn
       Phi(l,kp1) = Yp(l) - Phi(l,1)
       Phi(l,kp2) = Phi(l,kp1) - Phi(l,kp2)
     ENDDO
-    DO i = 1 , K
-      DO l = 1 , Neqn
+    DO i = 1, K
+      DO l = 1, Neqn
         Phi(l,i) = Phi(l,i) + Phi(l,kp1)
       ENDDO
     ENDDO
@@ -539,7 +539,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     IF ( .NOT.(Phase1) ) THEN
       IF ( knew==km1 ) GOTO 300
       IF ( kp1>Ns ) GOTO 400
-      DO l = 1 , Neqn
+      DO l = 1, Neqn
         erkp1 = erkp1 + (Phi(l,kp2)/Wt(l))**2
       ENDDO
       erkp1 = absh*gstr(kp1)*SQRT(erkp1)
@@ -578,15 +578,15 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     !
     Phase1 = .FALSE.
     X = Xold
-    DO i = 1 , K
+    DO i = 1, K
       temp1 = 1.0D0/Beta(i)
       ip1 = i + 1
-      DO l = 1 , Neqn
+      DO l = 1, Neqn
         Phi(l,i) = temp1*(Phi(l,i)-Phi(l,ip1))
       ENDDO
     ENDDO
     IF ( K>=2 ) THEN
-      DO i = 2 , K
+      DO i = 2, K
         Psi(i-1) = Psi(i) - H
       ENDDO
     ENDIF

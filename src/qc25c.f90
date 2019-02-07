@@ -66,26 +66,26 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  QC25C
   !
-  REAL A , Abserr , ak22 , amom0 , amom1 , amom2 , B , C , cc , centr , &
-    cheb12 , cheb24 , QWGTC , F , fval , hlgth , p2 , p3 , p4 , resabs , &
-    resasc , Result , res12 , res24 , u , x
-  INTEGER i , isym , k , kp , Krul , Neval
+  REAL A, Abserr, ak22, amom0, amom1, amom2, B, C, cc, centr, &
+    cheb12, cheb24, QWGTC, F, fval, hlgth, p2, p3, p4, resabs, &
+    resasc, Result, res12, res24, u, x
+  INTEGER i, isym, k, kp, Krul, Neval
   !
-  DIMENSION x(11) , fval(25) , cheb12(13) , cheb24(25)
+  DIMENSION x(11), fval(25), cheb12(13), cheb24(25)
   !
-  EXTERNAL F , QWGTC
+  EXTERNAL F, QWGTC
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24),
   !           K = 1, ..., 11, TO BE USED FOR THE CHEBYSHEV SERIES
   !           EXPANSION OF F
   !
   SAVE x
-  DATA x(1) , x(2) , x(3) , x(4) , x(5) , x(6) , x(7) , x(8) , x(9) , &
-    x(10) , x(11)/0.9914448613738104E+00 , 0.9659258262890683E+00 , &
-    0.9238795325112868E+00 , 0.8660254037844386E+00 , &
-    0.7933533402912352E+00 , 0.7071067811865475E+00 , &
-    0.6087614290087206E+00 , 0.5000000000000000E+00 , &
-    0.3826834323650898E+00 , 0.2588190451025208E+00 , &
+  DATA x(1), x(2), x(3), x(4), x(5), x(6), x(7), x(8), x(9), &
+    x(10), x(11)/0.9914448613738104E+00, 0.9659258262890683E+00, &
+    0.9238795325112868E+00, 0.8660254037844386E+00, &
+    0.7933533402912352E+00, 0.7071067811865475E+00, &
+    0.6087614290087206E+00, 0.5000000000000000E+00, &
+    0.3826834323650898E+00, 0.2588190451025208E+00, &
     0.1305261922200516E+00/
   !
   !           LIST OF MAJOR VARIABLES
@@ -120,7 +120,7 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
     fval(1) = 0.5E+00*F(hlgth+centr)
     fval(13) = F(centr)
     fval(25) = 0.5E+00*F(centr-hlgth)
-    DO i = 2 , 12
+    DO i = 2, 12
       u = hlgth*x(i-1)
       isym = 26 - i
       fval(i) = F(u+centr)
@@ -139,7 +139,7 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
     amom1 = 0.2E+01 + cc*amom0
     res12 = cheb12(1)*amom0 + cheb12(2)*amom1
     res24 = cheb24(1)*amom0 + cheb24(2)*amom1
-    DO k = 3 , 13
+    DO k = 3, 13
       amom2 = 0.2E+01*cc*amom1 - amom0
       ak22 = (k-2)*(k-2)
       IF ( (k/2)*2==k ) amom2 = amom2 - 0.4E+01/(ak22-0.1E+01)
@@ -148,7 +148,7 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
       amom0 = amom1
       amom1 = amom2
     ENDDO
-    DO k = 14 , 25
+    DO k = 14, 25
       amom2 = 0.2E+01*cc*amom1 - amom0
       ak22 = (k-2)*(k-2)
       IF ( (k/2)*2==k ) amom2 = amom2 - 0.4E+01/(ak22-0.1E+01)

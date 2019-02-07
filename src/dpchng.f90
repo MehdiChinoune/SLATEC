@@ -4,9 +4,9 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   IMPLICIT NONE
   !*--DPCHNG5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , iend , Ii , il , ilast , iopt , ipl , Iplace , Ircx , istart , &
-    Ix , ixlast , j , jj , jstart , k , key , ll , lmx , lpg
-  INTEGER n20055 , nerr , np
+  INTEGER i, iend, Ii, il, ilast, iopt, ipl, Iplace, Ircx, istart, &
+    Ix, ixlast, j, jj, jstart, k, key, ll, lmx, lpg
+  INTEGER n20055, nerr, np
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPCHNG
   !***SUBSIDIARY
@@ -62,9 +62,9 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !***END PROLOGUE  DPCHNG
   DIMENSION Ix(*)
   INTEGER IDLOC
-  REAL(8) :: Sx(*) , Xval , zero , one , sxlast , sxval
-  SAVE zero , one
-  DATA zero , one/0.D0 , 1.D0/
+  REAL(8) :: Sx(*), Xval, zero, one, sxlast, sxval
+  SAVE zero, one
+  DATA zero, one/0.D0, 1.D0/
   !***FIRST EXECUTABLE STATEMENT  DPCHNG
   iopt = 1
   !
@@ -196,7 +196,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   istart = ipl + 1
   IF ( istart<=il ) THEN
     k = istart + il
-    DO jj = istart , il
+    DO jj = istart, il
       Sx(k-jj) = Sx(k-jj-1)
       Ix(k-jj) = Ix(k-jj-1)
     ENDDO

@@ -4,7 +4,7 @@ SUBROUTINE SFNCK(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--SFNCK5
   !*** Start of declarations inserted by SPAG
-  REAL ACOSH , AI , AIE , ALI , ALNREL , ASINH , ATANH , BESI0 , BESI0E
+  REAL ACOSH, AI, AIE, ALI, ALNREL, ASINH, ATANH, BESI0, BESI0E
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SFNCK
   !***PURPOSE  Quick check for the single precision Fullerton
@@ -42,14 +42,14 @@ SUBROUTINE SFNCK(Lun,Kprint,Ipass)
   !   900330  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  SFNCK
-  INTEGER i , Lun , Kprint , Ipass
-  REAL R1MACH , y(105) , v(105) , errmax , errtol , abserr , relerr , &
-    BESI1 , BESI1E , BESJ0 , BESJ1 , BESK0 , BESK0E , BESK1 , BESK1E , &
-    BESY0 , BESY1 , BETA , BETAI , BI , BIE , BINOM , CBRT , CHU , &
-    COSDG , COT , DAWS , E1 , EI , ERF , EXPREL , FAC , GAMI , GAMIC , &
-    GAMIT , GAMMA , GAMR , POCH , POCH1 , PSI , R9ATN1 , R9LN2R , SINDG , &
+  INTEGER i, Lun, Kprint, Ipass
+  REAL R1MACH, y(105), v(105), errmax, errtol, abserr, relerr, &
+    BESI1, BESI1E, BESJ0, BESJ1, BESK0, BESK0E, BESK1, BESK1E, &
+    BESY0, BESY1, BETA, BETAI, BI, BIE, BINOM, CBRT, CHU, &
+    COSDG, COT, DAWS, E1, EI, ERF, EXPREL, FAC, GAMI, GAMIC, &
+    GAMIT, GAMMA, GAMR, POCH, POCH1, PSI, R9ATN1, R9LN2R, SINDG, &
     SPENC
-  EXTERNAL COT , ERF , GAMMA
+  EXTERNAL COT, ERF, GAMMA
   !
   !     Correct values through different calculations are stored in V(*)
   !
@@ -318,11 +318,11 @@ SUBROUTINE SFNCK(Lun,Kprint,Ipass)
   !
   errmax = R1MACH(4)
   errtol = SQRT(errmax)
-  DO i = 1 , 105
+  DO i = 1, 105
     abserr = ABS(v(i)-y(i))
     relerr = abserr/ABS(v(i))
     errmax = MAX(relerr,errmax)
-    IF ( relerr>errtol.AND.Kprint>=2 ) WRITE (Lun,99001) i , relerr , abserr
+    IF ( relerr>errtol.AND.Kprint>=2 ) WRITE (Lun,99001) i, relerr, abserr
     99001   FORMAT (' For I  = ',I3,'  test fails with RELERR  = ',E38.30,&
       '  and ABSERR  = ',E38.30)
   ENDDO

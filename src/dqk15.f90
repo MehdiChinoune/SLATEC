@@ -63,14 +63,14 @@ SUBROUTINE DQK15(F,A,B,Result,Abserr,Resabs,Resasc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQK15
   !
-  REAL(8) :: A , absc , Abserr , B , centr , dhlgth , D1MACH , &
-    epmach , F , fc , fsum , fval1 , fval2 , fv1 , fv2 , &
-    hlgth , Resabs , Resasc , resg , resk , reskh , Result , &
-    uflow , wg , wgk , xgk
-  INTEGER j , jtw , jtwm1
+  REAL(8) :: A, absc, Abserr, B, centr, dhlgth, D1MACH, &
+    epmach, F, fc, fsum, fval1, fval2, fv1, fv2, &
+    hlgth, Resabs, Resasc, resg, resk, reskh, Result, &
+    uflow, wg, wgk, xgk
+  INTEGER j, jtw, jtwm1
   EXTERNAL F
   !
-  DIMENSION fv1(7) , fv2(7) , wg(4) , wgk(8) , xgk(8)
+  DIMENSION fv1(7), fv2(7), wg(4), wgk(8), xgk(8)
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE INTERVAL (-1,1).
   !           BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND THEIR
@@ -91,7 +91,7 @@ SUBROUTINE DQK15(F,A,B,Result,Abserr,Resabs,Resasc)
   ! AS EVALUATED WITH 80 DECIMAL DIGIT ARITHMETIC BY L. W. FULLERTON,
   ! BELL LABS, NOV. 1981.
   !
-  SAVE wg , xgk , wgk
+  SAVE wg, xgk, wgk
   DATA wg(1)/0.129484966168869693270611432679082D0/
   DATA wg(2)/0.279705391489276667901467771423780D0/
   DATA wg(3)/0.381830050505118944950369775488975D0/
@@ -149,7 +149,7 @@ SUBROUTINE DQK15(F,A,B,Result,Abserr,Resabs,Resasc)
   resg = fc*wg(4)
   resk = fc*wgk(8)
   Resabs = ABS(resk)
-  DO j = 1 , 3
+  DO j = 1, 3
     jtw = j*2
     absc = hlgth*xgk(jtw)
     fval1 = F(centr-absc)
@@ -161,7 +161,7 @@ SUBROUTINE DQK15(F,A,B,Result,Abserr,Resabs,Resasc)
     resk = resk + wgk(jtw)*fsum
     Resabs = Resabs + wgk(jtw)*(ABS(fval1)+ABS(fval2))
   ENDDO
-  DO j = 1 , 4
+  DO j = 1, 4
     jtwm1 = j*2 - 1
     absc = hlgth*xgk(jtwm1)
     fval1 = F(centr-absc)
@@ -174,7 +174,7 @@ SUBROUTINE DQK15(F,A,B,Result,Abserr,Resabs,Resasc)
   ENDDO
   reskh = resk*0.5D+00
   Resasc = wgk(8)*ABS(fc-reskh)
-  DO j = 1 , 7
+  DO j = 1, 7
     Resasc = Resasc + wgk(j)*(ABS(fv1(j)-reskh)+ABS(fv2(j)-reskh))
   ENDDO
   Result = resk*hlgth

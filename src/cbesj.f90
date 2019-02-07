@@ -151,11 +151,11 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   !***END PROLOGUE  CBESJ
   !
-  COMPLEX ci , csgn , Cy , Z , zn
-  REAL aa , alim , arg , dig , elim , Fnu , fnul , hpi , rl , r1 , r1m5 , &
-    r2 , tol , yy , R1MACH , az , fn , bb , ascle , rtol , atol
-  INTEGER i , Ierr , inu , inuh , ir , Kode , k1 , k2 , N , nl , Nz , &
-    I1MACH , k
+  COMPLEX ci, csgn, Cy, Z, zn
+  REAL aa, alim, arg, dig, elim, Fnu, fnul, hpi, rl, r1, r1m5, &
+    r2, tol, yy, R1MACH, az, fn, bb, ascle, rtol, atol
+  INTEGER i, Ierr, inu, inuh, ir, Kode, k1, k2, N, nl, Nz, &
+    I1MACH, k
   DIMENSION Cy(N)
   DATA hpi/1.57079632679489662E0/
   !
@@ -232,7 +232,7 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
         IF ( nl==0 ) RETURN
         rtol = 1.0E0/tol
         ascle = R1MACH(1)*rtol*1.0E+3
-        DO i = 1 , nl
+        DO i = 1, nl
           !       CY(I)=CY(I)*CSGN
           zn = Cy(i)
           aa = REAL(zn)

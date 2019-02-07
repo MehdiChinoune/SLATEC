@@ -78,34 +78,34 @@ SUBROUTINE PCHQK3(Lun,Kprint,Ipass)
   !
   !  Declare arguments.
   !
-  INTEGER Lun , Kprint , Ipass
+  INTEGER Lun, Kprint, Ipass
   LOGICAL COMP
   REAL R1MACH
   !
   !  Declare variables.
   !
-  INTEGER i , ic(2) , ierr , ifail , N , nbad , nbadz , NWK
+  INTEGER i, ic(2), ierr, ifail, N, nbad, nbadz, NWK
   PARAMETER (N=9,NWK=2*N)
-  REAL d(N) , dc(N) , dc5 , dc6 , dm(N) , ds(N) , err , f(N) , MONE , tol ,&
-    told , tolz , vc(2) , x(N) , wk(NWK) , ZERO
+  REAL d(N), dc(N), dc5, dc6, dm(N), ds(N), err, f(N), MONE, tol ,&
+    told, tolz, vc(2), x(N), wk(NWK), ZERO
   PARAMETER (ZERO=0.0E0,MONE=-1.0E0)
   CHARACTER(6) :: result
   !
   !  Initialize.
   !
   !       Data.
-  DATA ic/0 , 0/
-  DATA x/ - 2.2E0 , -1.2E0 , -1.0E0 , -0.5E0 , -0.01E0 , 0.5E0 , 1.0E0 ,&
-    2.0E0 , 2.2E0/
+  DATA ic/0, 0/
+  DATA x/ - 2.2E0, -1.2E0, -1.0E0, -0.5E0, -0.01E0, 0.5E0, 1.0E0 ,&
+    2.0E0, 2.2E0/
   !
   !       Results generated on Cray X/MP (9 sign. figs.)
-  DATA dm/0. , 3.80027352E-01 , 7.17253009E-01 , 5.82014161E-01 , 0. ,&
-    -5.68208031E-01 , -5.13501618E-01 , -7.77910977E-02 ,&
+  DATA dm/0., 3.80027352E-01, 7.17253009E-01, 5.82014161E-01, 0. ,&
+    -5.68208031E-01, -5.13501618E-01, -7.77910977E-02 ,&
     -2.45611117E-03/
-  DATA dc5 , dc6/1.76950158E-02 , -5.69579814E-01/
-  DATA ds/ - 5.16830792E-02 , 5.71455855E-01 , 7.40530225E-01 ,&
-    7.63864934E-01 , 1.92614386E-02 , -7.65324380E-01 , -7.28209035E-01 ,&
-    -7.98445427E-02 , -2.85983446E-02/
+  DATA dc5, dc6/1.76950158E-02, -5.69579814E-01/
+  DATA ds/ - 5.16830792E-02, 5.71455855E-01, 7.40530225E-01 ,&
+    7.63864934E-01, 1.92614386E-02, -7.65324380E-01, -7.28209035E-01 ,&
+    -7.98445427E-02, -2.85983446E-02/
   !
   !***FIRST EXECUTABLE STATEMENT  PCHQK3
   ifail = 0
@@ -125,7 +125,7 @@ SUBROUTINE PCHQK3(Lun,Kprint,Ipass)
   !
   !  Set up data.
   !
-  DO i = 1 , N
+  DO i = 1, N
     f(i) = EXP(-x(i)**2)
   ENDDO
   !
@@ -133,13 +133,13 @@ SUBROUTINE PCHQK3(Lun,Kprint,Ipass)
     WRITE (Lun,99003)
     99003   FORMAT (//5X,'DATA:'/39X,'---------- EXPECTED D-VALUES ----------'/12X,&
       'X',9X,'F',18X,'DM',13X,'DC',13X,'DS')
-    DO i = 1 , 4
-      WRITE (Lun,99009) x(i) , f(i) , dm(i) , ds(i)
+    DO i = 1, 4
+      WRITE (Lun,99009) x(i), f(i), dm(i), ds(i)
     ENDDO
-    WRITE (Lun,99010) x(5) , f(5) , dm(5) , dc5 , ds(5)
-    WRITE (Lun,99010) x(6) , f(6) , dm(6) , dc6 , ds(6)
-    DO i = 7 , N
-      WRITE (Lun,99009) x(i) , f(i) , dm(i) , ds(i)
+    WRITE (Lun,99010) x(5), f(5), dm(5), dc5, ds(5)
+    WRITE (Lun,99010) x(6), f(6), dm(6), dc6, ds(6)
+    DO i = 7, N
+      WRITE (Lun,99009) x(i), f(i), dm(i), ds(i)
     ENDDO
   ENDIF
   !
@@ -157,7 +157,7 @@ SUBROUTINE PCHQK3(Lun,Kprint,Ipass)
     IF ( Kprint>=3 ) WRITE (Lun,99013)
     nbad = 0
     nbadz = 0
-    DO i = 1 , N
+    DO i = 1, N
       result = '  OK'
       !             D-values should agree with stored values.
       !               (Zero values should agree exactly.)
@@ -174,13 +174,13 @@ SUBROUTINE PCHQK3(Lun,Kprint,Ipass)
           result = '**BAD'
         ENDIF
       ENDIF
-      IF ( Kprint>=3 ) WRITE (Lun,99014) i , x(i) , d(i) , err , result
+      IF ( Kprint>=3 ) WRITE (Lun,99014) i, x(i), d(i), err, result
     ENDDO
     IF ( (nbadz/=0).OR.(nbad/=0) ) THEN
       ifail = ifail + 1
       IF ( (nbadz/=0).AND.(Kprint>=2) ) WRITE (Lun,99004) nbad
       99004     FORMAT (/'    **',I5,'  PCHIM RESULTS FAILED TO BE EXACTLY ZERO.')
-      IF ( (nbad/=0).AND.(Kprint>=2) ) WRITE (Lun,99015) nbad , 'IM' , told
+      IF ( (nbad/=0).AND.(Kprint>=2) ) WRITE (Lun,99015) nbad, 'IM', told
     ELSE
       IF ( Kprint>=2 ) WRITE (Lun,99016) 'IM'
     ENDIF
@@ -199,7 +199,7 @@ SUBROUTINE PCHQK3(Lun,Kprint,Ipass)
   ELSE
     IF ( Kprint>=3 ) WRITE (Lun,99013)
     nbad = 0
-    DO i = 1 , N
+    DO i = 1, N
       result = '  OK'
       !           D-values should agree exactly with those computed by PCHIM.
       !            (To be generous, will only test to machine precision.)
@@ -208,11 +208,11 @@ SUBROUTINE PCHQK3(Lun,Kprint,Ipass)
         nbad = nbad + 1
         result = '**BAD'
       ENDIF
-      IF ( Kprint>=3 ) WRITE (Lun,99014) i , x(i) , dc(i) , err , result
+      IF ( Kprint>=3 ) WRITE (Lun,99014) i, x(i), dc(i), err, result
     ENDDO
     IF ( nbad/=0 ) THEN
       ifail = ifail + 1
-      IF ( Kprint>=2 ) WRITE (Lun,99015) nbad , 'IC' , tol
+      IF ( Kprint>=2 ) WRITE (Lun,99015) nbad, 'IC', tol
     ELSE
       IF ( Kprint>=2 ) WRITE (Lun,99016) 'IC'
     ENDIF
@@ -232,7 +232,7 @@ SUBROUTINE PCHQK3(Lun,Kprint,Ipass)
     IF ( Kprint>=3 ) WRITE (Lun,99013)
     nbad = 0
     nbadz = 0
-    DO i = 1 , N
+    DO i = 1, N
       result = '  OK'
       !            D-values should agree exactly with those computed in
       !            previous call, except at points 5 and 6.
@@ -253,14 +253,14 @@ SUBROUTINE PCHQK3(Lun,Kprint,Ipass)
           result = '**BAD'
         ENDIF
       ENDIF
-      IF ( Kprint>=3 ) WRITE (Lun,99014) i , x(i) , d(i) , err , result
+      IF ( Kprint>=3 ) WRITE (Lun,99014) i, x(i), d(i), err, result
     ENDDO
     IF ( (nbadz/=0).OR.(nbad/=0) ) THEN
       ifail = ifail + 1
       IF ( (nbadz/=0).AND.(Kprint>=2) ) WRITE (Lun,99005) nbad
       99005     FORMAT (/'    **',I5,'  PCHIC RESULTS FAILED TO AGREE WITH',&
         ' PREVIOUS CALL.')
-      IF ( (nbad/=0).AND.(Kprint>=2) ) WRITE (Lun,99015) nbad , 'IC' , told
+      IF ( (nbad/=0).AND.(Kprint>=2) ) WRITE (Lun,99015) nbad, 'IC', told
     ELSE
       IF ( Kprint>=2 ) WRITE (Lun,99016) 'IC'
     ENDIF
@@ -279,7 +279,7 @@ SUBROUTINE PCHQK3(Lun,Kprint,Ipass)
   ELSE
     IF ( Kprint>=3 ) WRITE (Lun,99013)
     nbad = 0
-    DO i = 1 , N
+    DO i = 1, N
       result = '  OK'
       !             D-values should agree with stored values.
       err = ABS((d(i)-ds(i))/ds(i))
@@ -287,11 +287,11 @@ SUBROUTINE PCHQK3(Lun,Kprint,Ipass)
         nbad = nbad + 1
         result = '**BAD'
       ENDIF
-      IF ( Kprint>=3 ) WRITE (Lun,99014) i , x(i) , d(i) , err , result
+      IF ( Kprint>=3 ) WRITE (Lun,99014) i, x(i), d(i), err, result
     ENDDO
     IF ( nbad/=0 ) THEN
       ifail = ifail + 1
-      IF ( Kprint>=2 ) WRITE (Lun,99015) nbad , 'SP' , told
+      IF ( Kprint>=2 ) WRITE (Lun,99015) nbad, 'SP', told
     ELSE
       IF ( Kprint>=2 ) WRITE (Lun,99016) 'SP'
     ENDIF

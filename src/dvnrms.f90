@@ -24,12 +24,12 @@ REAL(8) FUNCTION DVNRMS(N,V,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DVNRMS
-  INTEGER i , N
-  REAL(8) :: sum , V , W
-  DIMENSION V(*) , W(*)
+  INTEGER i, N
+  REAL(8) :: sum, V, W
+  DIMENSION V(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  DVNRMS
   sum = 0.0D0
-  DO i = 1 , N
+  DO i = 1, N
     sum = sum + (V(i)/W(i))**2
   ENDDO
   DVNRMS = SQRT(sum/N)

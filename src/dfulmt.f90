@@ -4,7 +4,7 @@ SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   IMPLICIT NONE
   !*--DFULMT5
   !*** Start of declarations inserted by SPAG
-  INTEGER I , Indcat , J , key , level , lp , nerr , next
+  INTEGER I, Indcat, J, key, level, lp, nerr, next
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DFULMT
   !***SUBSIDIARY
@@ -40,7 +40,7 @@ SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DFULMT
-  REAL(8) :: Aij , zero , Dattrv(*) , Prgopt(*)
+  REAL(8) :: Aij, zero, Dattrv(*), Prgopt(*)
   INTEGER Iflag(10)
   SAVE zero
   !***FIRST EXECUTABLE STATEMENT  DFULMT

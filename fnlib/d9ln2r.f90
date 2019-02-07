@@ -4,8 +4,8 @@ REAL(8) FUNCTION D9LN2R(X)
   IMPLICIT NONE
   !*--D9LN2R5
   !*** Start of declarations inserted by SPAG
-  REAL eps , sqeps
-  INTEGER INITDS , ntln21 , ntln22
+  REAL eps, sqeps
+  INTEGER INITDS, ntln21, ntln22
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9LN2R
   !***SUBSIDIARY
@@ -44,10 +44,10 @@ REAL(8) FUNCTION D9LN2R(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9LN2R
-  REAL(8) :: X , xbig , txbig , xmax , txmax , xmin , ln21cs(50) , &
-    ln22cs(37) , DCSEVL , D1MACH
+  REAL(8) :: X, xbig, txbig, xmax, txmax, xmin, ln21cs(50), &
+    ln22cs(37), DCSEVL, D1MACH
   LOGICAL first
-  SAVE ln21cs , ln22cs , ntln21 , ntln22 , xmin , xbig , xmax , first
+  SAVE ln21cs, ln22cs, ntln21, ntln22, xmin, xbig, xmax, first
   DATA ln21cs(1)/ + .18111962513478809875894953043071D+0/
   DATA ln21cs(2)/ - .15627123192872462669625155541078D+0/
   DATA ln21cs(3)/ + .28676305361557275209540627102051D-1/
@@ -172,4 +172,5 @@ REAL(8) FUNCTION D9LN2R(X)
     ntln22)
   RETURN
   !
-  99999 END FUNCTION D9LN2R
+  99999 CONTINUE
+  END FUNCTION D9LN2R

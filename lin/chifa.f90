@@ -16,11 +16,11 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
   !     CHIFA factors a complex Hermitian matrix by elimination
   !     with symmetric pivoting.
   !
-  !     To solve  A*X = B , follow CHIFA by CHISL.
-  !     To compute  INVERSE(A)*C , follow CHIFA by CHISL.
-  !     To compute  DETERMINANT(A) , follow CHIFA by CHIDI.
-  !     To compute  INERTIA(A) , follow CHIFA by CHIDI.
-  !     To compute  INVERSE(A) , follow CHIFA by CHIDI.
+  !     To solve  A*X = B, follow CHIFA by CHISL.
+  !     To compute  INVERSE(A)*C, follow CHIFA by CHISL.
+  !     To compute  DETERMINANT(A), follow CHIFA by CHIDI.
+  !     To compute  INERTIA(A), follow CHIFA by CHIDI.
+  !     To compute  INVERSE(A), follow CHIFA by CHIDI.
   !
   !     On Entry
   !
@@ -40,8 +40,8 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
   !                were used to obtain it.
   !                The factorization can be written  A = U*D*CTRANS(U)
   !                where  U  is a product of permutation and unit
-  !                upper triangular matrices , CTRANS(U) is the
-  !                conjugate transpose of  U , and  D  is block diagonal
+  !                upper triangular matrices, CTRANS(U) is the
+  !                conjugate transpose of  U, and  D  is block diagonal
   !                with 1 by 1 and 2 by 2 blocks.
   !
   !        KVPT    INTEGER(N)
@@ -68,12 +68,12 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CHIFA
-  INTEGER Lda , N , Kpvt(*) , Info
+  INTEGER Lda, N, Kpvt(*), Info
   COMPLEX A(Lda,*)
   !
-  COMPLEX ak , akm1 , bk , bkm1 , denom , mulk , mulkm1 , t
-  REAL absakk , alpha , colmax , rowmax
-  INTEGER imax , imaxp1 , j , jj , jmax , k , km1 , km2 , kstep , ICAMAX
+  COMPLEX ak, akm1, bk, bkm1, denom, mulk, mulkm1, t
+  REAL absakk, alpha, colmax, rowmax
+  INTEGER imax, imaxp1, j, jj, jmax, k, km1, km2, kstep, ICAMAX
   LOGICAL swap
   REAL, EXTERNAL :: CABS1
   !***FIRST EXECUTABLE STATEMENT  CHIFA
@@ -116,7 +116,7 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
         !
         rowmax = 0.0E0
         imaxp1 = imax + 1
-        DO j = imaxp1 , k
+        DO j = imaxp1, k
           rowmax = MAX(rowmax,CABS1(A(imax,j)))
         ENDDO
         IF ( imax/=1 ) THEN
@@ -152,7 +152,7 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
           !              PERFORM AN INTERCHANGE.
           !
           CALL CSWAP(imax,A(1,imax),1,A(1,k-1),1)
-          DO jj = imax , km1
+          DO jj = imax, km1
             j = km1 + imax - jj
             t = CONJG(A(j,k-1))
             A(j,k-1) = CONJG(A(imax,j))
@@ -170,7 +170,7 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
           ak = A(k,k)/A(k-1,k)
           akm1 = A(k-1,k-1)/CONJG(A(k-1,k))
           denom = 1.0E0 - ak*akm1
-          DO jj = 1 , km2
+          DO jj = 1, km2
             j = km1 - jj
             bk = A(j,k)/A(k-1,k)
             bkm1 = A(j,k-1)/CONJG(A(k-1,k))
@@ -200,7 +200,7 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
           !              PERFORM AN INTERCHANGE.
           !
           CALL CSWAP(imax,A(1,imax),1,A(1,k),1)
-          DO jj = imax , k
+          DO jj = imax, k
             j = k + imax - jj
             t = CONJG(A(j,k))
             A(j,k) = CONJG(A(imax,j))
@@ -210,7 +210,7 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
         !
         !           PERFORM THE ELIMINATION.
         !
-        DO jj = 1 , km1
+        DO jj = 1, km1
           j = k - jj
           mulk = -A(j,k)/A(k,k)
           t = CONJG(mulk)

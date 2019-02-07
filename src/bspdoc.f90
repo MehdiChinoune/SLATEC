@@ -74,7 +74,7 @@ SUBROUTINE BSPDOC
   !     multiplicity of at most K.  A B-spline is commonly written in the
   !     B-representation
   !
-  !               Y(X) = sum( A(I)*B(I,X), I=1 , N)
+  !               Y(X) = sum( A(I)*B(I,X), I=1, N)
   !
   !     to show the explicit dependence of the spline on the free
   !     parameters or coefficients A(I)=BCOEF(I) and basis functions

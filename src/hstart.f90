@@ -5,11 +5,11 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   IMPLICIT NONE
   !*--HSTART6
   !*** Start of declarations inserted by SPAG
-  REAL A , absdx , B , Big , da , delf , delx , delxb , dely , dfdub , &
-    dfdxb , dx , dy , Etol , fbnd , H , HVNRM , power , Pv , relper
-  REAL Rpar , Sf , Small , Spy , srydpb , wtj , Y , ydpb , ynorm , Yp , &
-    ypnorm , Yprime
-  INTEGER icase , Ipar , j , k , lk , Morder , Neq
+  REAL A, absdx, B, Big, da, delf, delx, delxb, dely, dfdub, &
+    dfdxb, dx, dy, Etol, fbnd, H, HVNRM, power, Pv, relper
+  REAL Rpar, Sf, Small, Spy, srydpb, wtj, Y, ydpb, ynorm, Yp, &
+    ypnorm, Yprime
+  INTEGER icase, Ipar, j, k, lk, Morder, Neq
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HSTART
   !***SUBSIDIARY
@@ -47,7 +47,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !                               F(X,U,UPRIME,RPAR,IPAR)
   !             which defines the system of first order differential
   !             equations to be solved.  For the given values of X and the
-  !             vector  U(*)=(U(1),U(2),...,U(NEQ)) , the subroutine must
+  !             vector  U(*)=(U(1),U(2),...,U(NEQ)), the subroutine must
   !             evaluate the NEQ components of the system of differential
   !             equations  dU/DX=F(X,U)  and store the derivatives in the
   !             array UPRIME(*), that is,  UPRIME(I) = * dU(I)/DX *  for
@@ -147,8 +147,8 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  HSTART
   !
-  DIMENSION Y(*) , Yprime(*) , Etol(*) , Spy(*) , Pv(*) , Yp(*) , Sf(*) , &
-    Rpar(*) , Ipar(*)
+  DIMENSION Y(*), Yprime(*), Etol(*), Spy(*), Pv(*), Yp(*), Sf(*), &
+    Rpar(*), Ipar(*)
   EXTERNAL F
   !
   !.......................................................................
@@ -172,14 +172,14 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !
   IF ( Morder==1 ) THEN
     !
-    DO j = 1 , Neq
+    DO j = 1, Neq
       Spy(j) = Sf(j)/Etol(j)
       Yp(j) = Yprime(j)/Etol(j)
       Pv(j) = Spy(j) - Yp(j)
     ENDDO
   ELSE
     power = 2./(Morder+1)
-    DO j = 1 , Neq
+    DO j = 1, Neq
       wtj = Etol(j)**power
       Spy(j) = Sf(j)/wtj
       Yp(j) = Yprime(j)/wtj
@@ -215,14 +215,14 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   IF ( ypnorm==0. ) THEN
     !                       CANNOT HAVE A NULL PERTURBATION VECTOR
     icase = 2
-    DO j = 1 , Neq
+    DO j = 1, Neq
       Spy(j) = Yprime(j)
       Yp(j) = Etol(j)
     ENDDO
   ELSE
     !                       USE INITIAL DERIVATIVES FOR FIRST PERTURBATION
     icase = 1
-    DO j = 1 , Neq
+    DO j = 1, Neq
       Spy(j) = Yprime(j)
       Yp(j) = Yprime(j)
     ENDDO
@@ -230,7 +230,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !
   dfdub = 0.
   lk = MIN(Neq+1,3)
-  DO k = 1 , lk
+  DO k = 1, lk
     !                       SET YPNORM AND DELX
     ypnorm = HVNRM(Yp,Neq)
     IF ( icase==1.OR.icase==3 ) THEN
@@ -241,39 +241,39 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
         IF ( relper*ynorm<Big*ypnorm ) delxb = relper*ynorm/ypnorm
         delx = SIGN(delxb,dx)
       ENDIF
-      DO j = 1 , Neq
+      DO j = 1, Neq
         IF ( ABS(delx*Yp(j))>Etol(j) ) delx = SIGN(Etol(j)/Yp(j),dx)
       ENDDO
     ELSE
       delx = SIGN(1.0,dx)
     ENDIF
     !                       DEFINE PERTURBED VECTOR OF INITIAL VALUES
-    DO j = 1 , Neq
+    DO j = 1, Neq
       Pv(j) = Y(j) + delx*Yp(j)
     ENDDO
     IF ( k==2 ) THEN
       !                       USE A SHIFTED VALUE OF THE INDEPENDENT VARIABLE
       !                                             IN COMPUTING ONE ESTIMATE
       CALL F(A+da,Pv,Yp,Rpar,Ipar)
-      DO j = 1 , Neq
+      DO j = 1, Neq
         Pv(j) = Yp(j) - Sf(j)
       ENDDO
     ELSE
       !                       EVALUATE DERIVATIVES ASSOCIATED WITH PERTURBED
       !                       VECTOR  AND  COMPUTE CORRESPONDING DIFFERENCES
       CALL F(A,Pv,Yp,Rpar,Ipar)
-      DO j = 1 , Neq
+      DO j = 1, Neq
         Pv(j) = Yp(j) - Yprime(j)
       ENDDO
     ENDIF
     !                       CHOOSE LARGEST BOUND ON THE WEIGHTED FIRST
     !                                                   DERIVATIVE
     IF ( Morder==1 ) THEN
-      DO j = 1 , Neq
+      DO j = 1, Neq
         Yp(j) = Yp(j)/Etol(j)
       ENDDO
     ELSE
-      DO j = 1 , Neq
+      DO j = 1, Neq
         Yp(j) = Yp(j)/Etol(j)**power
       ENDDO
     ENDIF
@@ -288,7 +288,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     !
     IF ( k==lk ) GOTO 100
     !                       CHOOSE NEXT PERTURBATION VECTOR
-    DO j = 1 , Neq
+    DO j = 1, Neq
       IF ( k==lk-1 ) THEN
         icase = 4
         dy = MAX(relper*ABS(Y(j)),Etol(j))

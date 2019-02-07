@@ -4,7 +4,7 @@ REAL(8) FUNCTION DPSI(X)
   IMPLICIT NONE
   !*--DPSI5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , INITDS , n , ntapsi , ntpsi
+  INTEGER i, INITDS, n, ntapsi, ntpsi
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPSI
   !***PURPOSE  Compute the Psi (or Digamma) function.
@@ -44,11 +44,11 @@ REAL(8) FUNCTION DPSI(X)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable name.  (RWC, WRB)
   !***END PROLOGUE  DPSI
-  REAL(8) :: X , psics(42) , apsics(16) , aux , dxrel , pi , xbig , &
-    y , DCOT , DCSEVL , D1MACH
+  REAL(8) :: X, psics(42), apsics(16), aux, dxrel, pi, xbig, &
+    y, DCOT, DCSEVL, D1MACH
   LOGICAL first
   EXTERNAL DCOT
-  SAVE psics , apsics , pi , ntpsi , ntapsi , xbig , dxrel , first
+  SAVE psics, apsics, pi, ntpsi, ntapsi, xbig, dxrel, first
   DATA psics(1)/ - .38057080835217921520437677667039D-1/
   DATA psics(2)/ + .49141539302938712748204699654277D+0/
   DATA psics(3)/ - .56815747821244730242892064734081D-1/
@@ -153,7 +153,7 @@ REAL(8) FUNCTION DPSI(X)
         'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR NEGATIVE INTEGER',1,&
         1)
       !
-      DO i = 1 , n
+      DO i = 1, n
         DPSI = DPSI - 1.D0/(X+i-1)
       ENDDO
       RETURN
@@ -162,9 +162,10 @@ REAL(8) FUNCTION DPSI(X)
   !
   ! DPSI(X) FOR X .GE. 2.0 AND X .LE. 10.0
   !
-  DO i = 1 , n
+  DO i = 1, n
     DPSI = DPSI + 1.0D0/(y+i)
   ENDDO
   RETURN
   !
-  99999 END FUNCTION DPSI
+  99999 CONTINUE
+  END FUNCTION DPSI

@@ -4,7 +4,7 @@ REAL(8) FUNCTION DASINH(X)
   IMPLICIT NONE
   !*--DASINH5
   !*** Start of declarations inserted by SPAG
-  INTEGER INITDS , nterms
+  INTEGER INITDS, nterms
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DASINH
   !***PURPOSE  Compute the arc hyperbolic sine.
@@ -27,10 +27,10 @@ REAL(8) FUNCTION DASINH(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DASINH
-  REAL(8) :: X , asnhcs(39) , aln2 , sqeps , xmax , y , DCSEVL , &
+  REAL(8) :: X, asnhcs(39), aln2, sqeps, xmax, y, DCSEVL, &
     D1MACH
   LOGICAL first
-  SAVE asnhcs , aln2 , nterms , xmax , sqeps , first
+  SAVE asnhcs, aln2, nterms, xmax, sqeps, first
   DATA asnhcs(1)/ - .12820039911738186343372127359268D+0/
   DATA asnhcs(2)/ - .58811761189951767565211757138362D-1/
   DATA asnhcs(3)/ + .47274654322124815640725249756029D-2/
@@ -92,4 +92,5 @@ REAL(8) FUNCTION DASINH(X)
   IF ( y>sqeps ) DASINH = X*(1.0D0+DCSEVL(2.D0*X*X-1.D0,asnhcs,nterms))
   RETURN
   !
-  99999 END FUNCTION DASINH
+  99999 CONTINUE
+  END FUNCTION DASINH

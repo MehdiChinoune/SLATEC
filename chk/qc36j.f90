@@ -35,36 +35,36 @@ SUBROUTINE QC36J(Lun,Kprint,Ipass)
   !           made by M. McClain.
   !***END PROLOGUE  QC36J
   !
-  INTEGER Lun , Kprint , Ipass
+  INTEGER Lun, Kprint, Ipass
   !
-  CHARACTER string*36 , fmt*30 , fmt2*13
-  INTEGER ipass1 , ipass2 , ipass3 , ipass4 , ipass5 , NDIM , ier , index , &
-    i , first , last , nsig , NUMXER , nerr , ierjj , ierjm
+  CHARACTER string*36, fmt*30, fmt2*13
+  INTEGER ipass1, ipass2, ipass3, ipass4, ipass5, NDIM, ier, index, &
+    i, first, last, nsig, NUMXER, nerr, ierjj, ierjm
   PARAMETER (NDIM=15)
-  REAL tol , l1 , l2 , l3 , m1 , m2 , m3 , l1min , l1max , m2min , m2max , &
-    diff(NDIM) , R1MACH , x , jjval , jmval , thrcof(NDIM) , sixcof(NDIM)&
-    , r3jj(8) , r3jm(14) , r6j(15)
+  REAL tol, l1, l2, l3, m1, m2, m3, l1min, l1max, m2min, m2max, &
+    diff(NDIM), R1MACH, x, jjval, jmval, thrcof(NDIM), sixcof(NDIM)&
+    , r3jj(8), r3jm(14), r6j(15)
   !
-  DATA r3jj/2.78886675511358515993E-1 , -9.53462589245592315447E-2 , &
-    -6.74199862463242086246E-2 , 1.53311035167966641297E-1 , &
-    -1.56446554693685969725E-1 , 1.09945041215655051079E-1 , &
-    -5.53623569313171943334E-2 , 1.79983545113778583298E-2/
+  DATA r3jj/2.78886675511358515993E-1, -9.53462589245592315447E-2, &
+    -6.74199862463242086246E-2, 1.53311035167966641297E-1, &
+    -1.56446554693685969725E-1, 1.09945041215655051079E-1, &
+    -5.53623569313171943334E-2, 1.79983545113778583298E-2/
   !
-  DATA r3jm/2.09158973288615242614E-2 , 8.53756555321524722127E-2 , &
-    9.08295370868692516943E-2 , -3.89054377846499391700E-2 , &
-    -6.63734970165680635691E-2 , 6.49524040528389395031E-2 , &
-    2.15894310595403759392E-2 , -7.78912711785239219992E-2 , &
-    3.59764371059543401880E-2 , 5.47301500021263423079E-2 , &
-    -7.59678665956761514629E-2 , -2.19224445539892113776E-2 , &
-    1.01167744280772202424E-1 , 7.34825726244719704696E-2/
+  DATA r3jm/2.09158973288615242614E-2, 8.53756555321524722127E-2, &
+    9.08295370868692516943E-2, -3.89054377846499391700E-2, &
+    -6.63734970165680635691E-2, 6.49524040528389395031E-2, &
+    2.15894310595403759392E-2, -7.78912711785239219992E-2, &
+    3.59764371059543401880E-2, 5.47301500021263423079E-2, &
+    -7.59678665956761514629E-2, -2.19224445539892113776E-2, &
+    1.01167744280772202424E-1, 7.34825726244719704696E-2/
   !
-  DATA r6j/3.49090513837329977746E-2 , -3.74302503965979160859E-2 , &
-    1.89086639095956018415E-2 , 7.34244825492864345709E-3 , &
-    -2.35893518508179445858E-2 , 1.91347695521543652000E-2 , &
-    1.28801739772417220844E-3 , -1.93001836629052653977E-2 , &
-    1.67730594938288876974E-2 , 5.50114727485094871674E-3 , &
-    -2.13543979089683097421E-2 , 3.46036445143538730828E-3 , &
-    2.52095005479558458604E-2 , 1.48399056122171330285E-2 , &
+  DATA r6j/3.49090513837329977746E-2, -3.74302503965979160859E-2, &
+    1.89086639095956018415E-2, 7.34244825492864345709E-3, &
+    -2.35893518508179445858E-2, 1.91347695521543652000E-2, &
+    1.28801739772417220844E-3, -1.93001836629052653977E-2, &
+    1.67730594938288876974E-2, 5.50114727485094871674E-3, &
+    -2.13543979089683097421E-2, 3.46036445143538730828E-3, &
+    2.52095005479558458604E-2, 1.48399056122171330285E-2, &
     2.70857768063318559724E-3/
   !
   !***FIRST EXECUTABLE STATEMENT  QC36J
@@ -83,13 +83,13 @@ SUBROUTINE QC36J(Lun,Kprint,Ipass)
   x = 1.0/3.0
   WRITE (string,99001) x
   99001 FORMAT (F35.25)
-  DO i = 1 , 35
+  DO i = 1, 35
     IF ( string(i:i)=='3' ) THEN
       first = i
       EXIT
     ENDIF
   ENDDO
-  DO i = first , 35
+  DO i = first, 35
     IF ( string(i:i)/='3' ) THEN
       last = i - 1
       GOTO 100
@@ -123,23 +123,23 @@ SUBROUTINE QC36J(Lun,Kprint,Ipass)
     ENDDO
   ENDIF
   IF ( Kprint>=3.OR.(Kprint==2.AND.ipass1==0) ) THEN
-    WRITE (Lun,*) ' TEST 1, RECURRENCE IN L1, COMPARE VALUES OF 3J ' , &
+    WRITE (Lun,*) ' TEST 1, RECURRENCE IN L1, COMPARE VALUES OF 3J ', &
       'CALCULATED BY RC3JJ TO'
-    WRITE (Lun,*) ' VALUES CALCULATED BY EXPLICIT FORMULA FROM ' , &
+    WRITE (Lun,*) ' VALUES CALCULATED BY EXPLICIT FORMULA FROM ', &
       'MESSIAH''S QUANTUM MECHANICS'
-    WRITE (Lun,99009) l2 , l3
-    WRITE (Lun,99010) m1 , m2 , m3
+    WRITE (Lun,99009) l2, l3
+    WRITE (Lun,99010) m1, m2, m3
     IF ( ier/=0 ) THEN
-      WRITE (Lun,*) ' ERROR RETURNED FROM SUBROUTINE ' , 'RC3JJ: IER =' , &
+      WRITE (Lun,*) ' ERROR RETURNED FROM SUBROUTINE ', 'RC3JJ: IER =', &
         ier
     ELSE
       WRITE (Lun,99002)
       99002     FORMAT ('    L1',T31,' RC3JJ VALUE',T67,'FORMULA VALUE')
       DO index = 1, INT(l1max-l1min) + 1
         l1 = index+ l1min - 1
-        WRITE (Lun,fmt) l1 , thrcof(index) , r3jj(index)
+        WRITE (Lun,fmt) l1, thrcof(index), r3jj(index)
         IF ( diff(index)>ABS(r3jj(index))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
-          'DIFFERENCE EXCEEDS ERROR '//'TOLERANCE FOR L1 =' , l1
+          'DIFFERENCE EXCEEDS ERROR '//'TOLERANCE FOR L1 =', l1
       ENDDO
     ENDIF
   ENDIF
@@ -171,25 +171,25 @@ SUBROUTINE QC36J(Lun,Kprint,Ipass)
     ENDDO
   ENDIF
   IF ( Kprint>=3.OR.(Kprint==2.AND.ipass2==0) ) THEN
-    WRITE (Lun,*) ' TEST 2, RECURRENCE IN M2, COMPARE VALUES OF 3J ' , &
+    WRITE (Lun,*) ' TEST 2, RECURRENCE IN M2, COMPARE VALUES OF 3J ', &
       'CALCULATED BY RC3JM TO'
-    WRITE (Lun,*) ' VALUES CALCULATED BY EXPLICIT FORMULA FROM ' , &
+    WRITE (Lun,*) ' VALUES CALCULATED BY EXPLICIT FORMULA FROM ', &
       'MESSIAH''S QUANTUM MECHANICS'
-    WRITE (Lun,99003) l1 , l2 , l3
+    WRITE (Lun,99003) l1, l2, l3
     99003   FORMAT (' L1 = ',F5.1,'   L2 = ',F5.1,'   L3 = ',F5.1)
     WRITE (Lun,99004) m1
     99004   FORMAT (' M1 = ',F5.1,'                M3 = -(M1+M2)')
     IF ( ier/=0 ) THEN
-      WRITE (Lun,*) ' ERROR RETURNED FROM SUBROUTINE ' , 'RC3JM: IER =' , &
+      WRITE (Lun,*) ' ERROR RETURNED FROM SUBROUTINE ', 'RC3JM: IER =', &
         ier
     ELSE
       WRITE (Lun,99005)
       99005     FORMAT ('    M2',T31,' RC3JM VALUE',T67,'FORMULA VALUE')
       DO index = 1, INT(m2max-m2min) + 1
         m2 = index+ m2min - 1
-        WRITE (Lun,fmt) m2 , thrcof(index) , r3jm(index)
+        WRITE (Lun,fmt) m2, thrcof(index), r3jm(index)
         IF ( diff(index)>ABS(r3jm(index))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
-          'DIFFERENCE EXCEEDS ERROR '//'TOLERANCE FOR M2 =' , m2
+          'DIFFERENCE EXCEEDS ERROR '//'TOLERANCE FOR M2 =', m2
       ENDDO
     ENDIF
   ENDIF
@@ -222,19 +222,19 @@ SUBROUTINE QC36J(Lun,Kprint,Ipass)
     IF ( diff(1)>0.5*ABS(jjval+jmval)*tol ) ipass3 = 0
   ENDIF
   IF ( Kprint>=3.OR.(Kprint==2.AND.ipass3==0) ) THEN
-    WRITE (Lun,*) ' TEST 3, COMPARE A COMMON VALUE CALCULATED BY ' , &
+    WRITE (Lun,*) ' TEST 3, COMPARE A COMMON VALUE CALCULATED BY ', &
       'BOTH RC3JJ AND RC3JM'
     WRITE (Lun,*) ' L1 = 100.0   L2 =   2.0   L3 = 100.0'
     WRITE (Lun,*) ' M1 = -10.0   M2 =   0.0   M3 =  10.0'
     IF ( ierjj/=0 ) THEN
-      WRITE (Lun,*) ' ERROR RETURNED FROM SUBROUTINE ' , 'RC3JJ: IER =' , &
+      WRITE (Lun,*) ' ERROR RETURNED FROM SUBROUTINE ', 'RC3JJ: IER =', &
         ierjj
     ELSEIF ( ierjm/=0 ) THEN
-      WRITE (Lun,*) ' ERROR RETURNED FROM SUBROUTINE ' , 'RC3JM: IER =' , &
+      WRITE (Lun,*) ' ERROR RETURNED FROM SUBROUTINE ', 'RC3JM: IER =', &
         ierjm
     ELSE
-      WRITE (Lun,fmt2) 'RC3JJ VALUE =' , jjval
-      WRITE (Lun,fmt2) 'RC3JM VALUE =' , jmval
+      WRITE (Lun,fmt2) 'RC3JJ VALUE =', jjval
+      WRITE (Lun,fmt2) 'RC3JM VALUE =', jmval
       IF ( diff(1)>0.5*ABS(jjval+jmval)*tol ) WRITE (Lun,'(1X,A)')&
         'DIFFERENCE EXCEEDS ERROR TOLERANCE'
     ENDIF
@@ -266,22 +266,22 @@ SUBROUTINE QC36J(Lun,Kprint,Ipass)
     ENDDO
   ENDIF
   IF ( Kprint>=3.OR.(Kprint==2.AND.ipass4==0) ) THEN
-    WRITE (Lun,*) ' TEST 4, RECURRENCE IN L1, COMPARE VALUES OF 6J ' , &
+    WRITE (Lun,*) ' TEST 4, RECURRENCE IN L1, COMPARE VALUES OF 6J ', &
       'CALCULATED BY RC6J TO'
-    WRITE (Lun,*) ' VALUES CALCULATED BY EXPLICIT FORMULA FROM ' , &
+    WRITE (Lun,*) ' VALUES CALCULATED BY EXPLICIT FORMULA FROM ', &
       'MESSIAH''S QUANTUM MECHANICS'
-    WRITE (Lun,99009) l2 , l3
-    WRITE (Lun,99010) m1 , m2 , m3
+    WRITE (Lun,99009) l2, l3
+    WRITE (Lun,99010) m1, m2, m3
     IF ( ier/=0 ) THEN
-      WRITE (Lun,*) ' ERROR RETURNED FROM SUBROUTINE ' , 'RC6J: IER =' , ier
+      WRITE (Lun,*) ' ERROR RETURNED FROM SUBROUTINE ', 'RC6J: IER =', ier
     ELSE
       WRITE (Lun,99006)
       99006     FORMAT ('    L1',T32,' RC6J VALUE',T67,'FORMULA VALUE')
       DO index = 1, INT(l1max-l1min) + 1
         l1 = index+ l1min - 1
-        WRITE (Lun,fmt) l1 , sixcof(index) , r6j(index)
+        WRITE (Lun,fmt) l1, sixcof(index), r6j(index)
         IF ( diff(index)>ABS(r6j(index))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
-          'DIFFERENCE EXCEEDS ERROR '//'TOLERANCE FOR L1 =' , l1
+          'DIFFERENCE EXCEEDS ERROR '//'TOLERANCE FOR L1 =', l1
       ENDDO
     ENDIF
   ENDIF
@@ -302,7 +302,7 @@ SUBROUTINE QC36J(Lun,Kprint,Ipass)
   ELSE
     CALL XSETF(-1)
   ENDIF
-  IF ( Kprint>=3 ) WRITE (Lun,*) ' TEST 5, CHECK FOR PROPER HANDLING ' , &
+  IF ( Kprint>=3 ) WRITE (Lun,*) ' TEST 5, CHECK FOR PROPER HANDLING ', &
     'OF INVALID INPUT'
   ! --- RC3JJ: L2-ABS(M2) OR L3-ABS(M3) LESS THAN ZERO (IER=1)
   l2 = 2.0

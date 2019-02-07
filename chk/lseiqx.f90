@@ -28,22 +28,22 @@ SUBROUTINE LSEIQX(Lun,Kprint,Ipass)
   !           returns for all values of KPRINT and code polished.  (WRB)
   !***END PROLOGUE  LSEIQX
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
-  REAL cnorm , relerr , relnrm , resnrm , rnorme , rnorml , tnorm
-  INTEGER i , idigit , jdigit , kontrl , ma , mdd , me , meap1 , mep1 , mg , &
-    mode , n , nerr , np1
+  REAL cnorm, relerr, relnrm, resnrm, rnorme, rnorml, tnorm
+  INTEGER i, idigit, jdigit, kontrl, ma, mdd, me, meap1, mep1, mg, &
+    mode, n, nerr, np1
   LOGICAL fatal
   !     .. Local Arrays ..
-  REAL a(6,5) , d(11,6) , err(5) , f(6) , g(5,5) , h(5) , prgopt(4) , sol(5)&
-    , work(105) , x(5)
+  REAL a(6,5), d(11,6), err(5), f(6), g(5,5), h(5), prgopt(4), sol(5)&
+    , work(105), x(5)
   INTEGER ip(17)
   !     .. External Functions ..
-  REAL R1MACH , SDOT , SNRM2
+  REAL R1MACH, SDOT, SNRM2
   INTEGER NUMXER
-  EXTERNAL NUMXER , R1MACH , SDOT , SNRM2
+  EXTERNAL NUMXER, R1MACH, SDOT, SNRM2
   !     .. External Subroutines ..
-  EXTERNAL LSEI , SAXPY , SCOPY , SVOUT , XGETF , XSETF
+  EXTERNAL LSEI, SAXPY, SCOPY, SVOUT, XGETF, XSETF
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
   !     .. Data statements ..
@@ -52,42 +52,42 @@ SUBROUTINE LSEIQX(Lun,Kprint,Ipass)
   !     the least squares equations.  (There are no equality constraints
   !     in this example).
   !
-  DATA a(1,1) , a(1,2) , a(1,3) , a(1,4) , a(1,5)/ - 74. , 80. , 18. , &
-    -11. , -4./
-  DATA a(2,1) , a(2,2) , a(2,3) , a(2,4) , a(2,5)/14. , -69. , 21. , 28. , &
+  DATA a(1,1), a(1,2), a(1,3), a(1,4), a(1,5)/ - 74., 80., 18., &
+    -11., -4./
+  DATA a(2,1), a(2,2), a(2,3), a(2,4), a(2,5)/14., -69., 21., 28., &
     0./
-  DATA a(3,1) , a(3,2) , a(3,3) , a(3,4) , a(3,5)/66. , -72. , -5. , 7. , &
+  DATA a(3,1), a(3,2), a(3,3), a(3,4), a(3,5)/66., -72., -5., 7., &
     1./
-  DATA a(4,1) , a(4,2) , a(4,3) , a(4,4) , a(4,5)/ - 12. , 66. , -30. , &
-    -23. , 3./
-  DATA a(5,1) , a(5,2) , a(5,3) , a(5,4) , a(5,5)/3. , 8. , -7. , -4. , 1./
-  DATA a(6,1) , a(6,2) , a(6,3) , a(6,4) , a(6,5)/4. , -12. , 4. , 4. , 0./
+  DATA a(4,1), a(4,2), a(4,3), a(4,4), a(4,5)/ - 12., 66., -30., &
+    -23., 3./
+  DATA a(5,1), a(5,2), a(5,3), a(5,4), a(5,5)/3., 8., -7., -4., 1./
+  DATA a(6,1), a(6,2), a(6,3), a(6,4), a(6,5)/4., -12., 4., 4., 0./
   !
   !     The array G contains the inequality constraint equations,
   !     written in the sense
   !     (row vector)*(solution vector) .GE. (given value).
   !
-  DATA g(1,1) , g(1,2) , g(1,3) , g(1,4) , g(1,5)/ - 1. , -1. , -1. , -1. , &
+  DATA g(1,1), g(1,2), g(1,3), g(1,4), g(1,5)/ - 1., -1., -1., -1., &
     -1./
-  DATA g(2,1) , g(2,2) , g(2,3) , g(2,4) , g(2,5)/10. , 10. , -3. , 5. , 4./
-  DATA g(3,1) , g(3,2) , g(3,3) , g(3,4) , g(3,5)/ - 8. , 1. , -2. , -5. , &
+  DATA g(2,1), g(2,2), g(2,3), g(2,4), g(2,5)/10., 10., -3., 5., 4./
+  DATA g(3,1), g(3,2), g(3,3), g(3,4), g(3,5)/ - 8., 1., -2., -5., &
     3./
-  DATA g(4,1) , g(4,2) , g(4,3) , g(4,4) , g(4,5)/8. , -1. , 2. , 5. , -3./
-  DATA g(5,1) , g(5,2) , g(5,3) , g(5,4) , g(5,5)/ - 4. , -2. , 3. , -5. , &
+  DATA g(4,1), g(4,2), g(4,3), g(4,4), g(4,5)/8., -1., 2., 5., -3./
+  DATA g(5,1), g(5,2), g(5,3), g(5,4), g(5,5)/ - 4., -2., 3., -5., &
     1./
   !
   !     Define the least squares right-side vector.
   !
-  DATA f(1) , f(2) , f(3) , f(4) , f(5) , f(6)/ - 5. , -9. , 708. , 4165. , &
-    -13266. , 8409./
+  DATA f(1), f(2), f(3), f(4), f(5), f(6)/ - 5., -9., 708., 4165., &
+    -13266., 8409./
   !
   !     Define the inequality constraint right-side vector.
   !
-  DATA h(1) , h(2) , h(3) , h(4) , h(5)/ - 5. , 20. , -40. , 11. , -30./
+  DATA h(1), h(2), h(3), h(4), h(5)/ - 5., 20., -40., 11., -30./
   !
   !     Define the vector that is the known solution.
   !
-  DATA sol(1) , sol(2) , sol(3) , sol(4) , sol(5)/1. , 2. , -1. , 3. , -4./
+  DATA sol(1), sol(2), sol(3), sol(4), sol(5)/1., 2., -1., 3., -4./
   !***FIRST EXECUTABLE STATEMENT  LSEIQX
   IF ( Kprint>=2 ) WRITE (Lun,99001)
   !
@@ -113,7 +113,7 @@ SUBROUTINE LSEIQX(Lun,Kprint,Ipass)
   !
   !     Copy the problem matrices.
   !
-  DO i = 1 , n
+  DO i = 1, n
     !
     !        Copy the i-th column of the inequality constraint matrix into
     !        the work array.
@@ -142,7 +142,7 @@ SUBROUTINE LSEIQX(Lun,Kprint,Ipass)
   !     Compute residual norm of known least squares solution.
   !     (to be used to check computed residual norm = RNORML.)
   !
-  DO i = 1 , ma
+  DO i = 1, ma
     work(i) = SDOT(n,d(i,1),mdd,sol,1) - f(i)
   ENDDO
   resnrm = SNRM2(ma,work,1)
@@ -168,7 +168,7 @@ SUBROUTINE LSEIQX(Lun,Kprint,Ipass)
     99002   FORMAT (/' LSEI PASSED TEST')
   ELSE
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Lun,99003) relerr , relnrm
+    IF ( Kprint>=2 ) WRITE (Lun,99003) relerr, relnrm
     99003   FORMAT (/' LSEI FAILED TEST'/' RELERR = ',1P,E20.6/' RELNRM = ',E20.6)
   ENDIF
   !

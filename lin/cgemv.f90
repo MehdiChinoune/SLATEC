@@ -106,11 +106,11 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  CGEMV
   !     .. Scalar Arguments ..
-  COMPLEX Alpha , Beta
-  INTEGER Incx , Incy , Lda , M , N
+  COMPLEX Alpha, Beta
+  INTEGER Incx, Incy, Lda, M, N
   CHARACTER :: Trans
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*) , X(*) , Y(*)
+  COMPLEX A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
   COMPLEX ONE
   PARAMETER (ONE=(1.0E+0,0.0E+0))
@@ -118,7 +118,7 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   PARAMETER (ZERO=(0.0E+0,0.0E+0))
   !     .. Local Scalars ..
   COMPLEX temp
-  INTEGER i , info , ix , iy , j , jx , jy , kx , ky , lenx , leny
+  INTEGER i, info, ix, iy, j, jx, jy, kx, ky, lenx, leny
   LOGICAL noconj
   !     .. External Functions ..
   LOGICAL LSAME
@@ -126,7 +126,7 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
-  INTRINSIC CONJG , MAX
+  INTRINSIC CONJG, MAX
   !***FIRST EXECUTABLE STATEMENT  CGEMV
   !
   !     Test the input parameters.
@@ -187,22 +187,22 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     IF ( Incy/=1 ) THEN
       iy = ky
       IF ( Beta==ZERO ) THEN
-        DO i = 1 , leny
+        DO i = 1, leny
           Y(iy) = ZERO
           iy = iy + Incy
         ENDDO
       ELSE
-        DO i = 1 , leny
+        DO i = 1, leny
           Y(iy) = Beta*Y(iy)
           iy = iy + Incy
         ENDDO
       ENDIF
     ELSEIF ( Beta==ZERO ) THEN
-      DO i = 1 , leny
+      DO i = 1, leny
         Y(i) = ZERO
       ENDDO
     ELSE
-      DO i = 1 , leny
+      DO i = 1, leny
         Y(i) = Beta*Y(i)
       ENDDO
     ENDIF
@@ -214,21 +214,21 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     !
     jx = kx
     IF ( Incy==1 ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( X(jx)/=ZERO ) THEN
           temp = Alpha*X(jx)
-          DO i = 1 , M
+          DO i = 1, M
             Y(i) = Y(i) + temp*A(i,j)
           ENDDO
         ENDIF
         jx = jx + Incx
       ENDDO
     ELSE
-      DO j = 1 , N
+      DO j = 1, N
         IF ( X(jx)/=ZERO ) THEN
           temp = Alpha*X(jx)
           iy = ky
-          DO i = 1 , M
+          DO i = 1, M
             Y(iy) = Y(iy) + temp*A(i,j)
             iy = iy + Incy
           ENDDO
@@ -242,14 +242,14 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     !
     jy = ky
     IF ( Incx==1 ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         temp = ZERO
         IF ( noconj ) THEN
-          DO i = 1 , M
+          DO i = 1, M
             temp = temp + A(i,j)*X(i)
           ENDDO
         ELSE
-          DO i = 1 , M
+          DO i = 1, M
             temp = temp + CONJG(A(i,j))*X(i)
           ENDDO
         ENDIF
@@ -257,16 +257,16 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
         jy = jy + Incy
       ENDDO
     ELSE
-      DO j = 1 , N
+      DO j = 1, N
         temp = ZERO
         ix = kx
         IF ( noconj ) THEN
-          DO i = 1 , M
+          DO i = 1, M
             temp = temp + A(i,j)*X(ix)
             ix = ix + Incx
           ENDDO
         ELSE
-          DO i = 1 , M
+          DO i = 1, M
             temp = temp + CONJG(A(i,j))*X(ix)
             ix = ix + Incx
           ENDDO

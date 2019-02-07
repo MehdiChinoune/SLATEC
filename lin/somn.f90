@@ -246,25 +246,25 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !   930326  Removed unused variable.  (FNF)
   !***END PROLOGUE  SOMN
   !     .. Scalar Arguments ..
-  REAL Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt , Nsave
+  REAL Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt, Nsave
   !     .. Array Arguments ..
-  REAL A(Nelt) , Ap(N,0:Nsave) , B(N) , Csav(Nsave) , Dz(N) , &
-    Emap(N,0:Nsave) , P(N,0:Nsave) , R(N) , Rwork(*) , X(N) , Z(N)
-  INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
+  REAL A(Nelt), Ap(N,0:Nsave), B(N), Csav(Nsave), Dz(N), &
+    Emap(N,0:Nsave), P(N,0:Nsave), R(N), Rwork(*), X(N), Z(N)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC , MSOLVE
+  EXTERNAL MATVEC, MSOLVE
   !     .. Local Scalars ..
-  REAL ak , akden , aknum , bkl , bnrm , fuzz , solnrm
-  INTEGER i , ip , ipo , k , l , lmax
+  REAL ak, akden, aknum, bkl, bnrm, fuzz, solnrm
+  INTEGER i, ip, ipo, k, l, lmax
   !     .. External Functions ..
-  REAL R1MACH , SDOT
+  REAL R1MACH, SDOT
   INTEGER ISSOMN
-  EXTERNAL R1MACH , SDOT , ISSOMN
+  EXTERNAL R1MACH, SDOT, ISSOMN
   !     .. External Subroutines ..
-  EXTERNAL SAXPY , SCOPY
+  EXTERNAL SAXPY, SCOPY
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MIN , MOD
+  INTRINSIC ABS, MIN, MOD
   !***FIRST EXECUTABLE STATEMENT  SOMN
   !
   !         Check some of the input data.
@@ -285,7 +285,7 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !         Calculate initial residual and pseudo-residual, and check
   !         stopping criterion.
   CALL MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
-  DO i = 1 , N
+  DO i = 1, N
     R(i) = B(i) - R(i)
   ENDDO
   CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
@@ -300,7 +300,7 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
     !
     !VD$R NOVECTOR
     !VD$R NOCONCUR
-    DO k = 1 , Itmax
+    DO k = 1, Itmax
       Iter = k
       ip = MOD(Iter-1,Nsave+1)
       !
@@ -314,7 +314,7 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
       ELSE
         IF ( Iter>1 ) THEN
           lmax = MIN(Nsave,Iter-1)
-          DO l = 1 , lmax
+          DO l = 1, lmax
             ipo = MOD(ip+(Nsave+1-l),Nsave+1)
             bkl = SDOT(N,Emap(1,ip),1,Emap(1,ipo),1)
             bkl = bkl*Csav(l)
@@ -323,7 +323,7 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
             CALL SAXPY(N,-bkl,Emap(1,ipo),1,Emap(1,ip),1)
           ENDDO
           IF ( Nsave>1 ) THEN
-            DO l = Nsave - 1 , 1 , -1
+            DO l = Nsave - 1, 1, -1
               Csav(l+1) = Csav(l)
             ENDDO
           ENDIF
@@ -359,4 +359,5 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   ENDIF
   !
   !------------- LAST LINE OF SOMN FOLLOWS ----------------------------
-  99999 END SUBROUTINE SOMN
+  99999 CONTINUE
+  END SUBROUTINE SOMN

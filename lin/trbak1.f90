@@ -72,29 +72,29 @@ SUBROUTINE TRBAK1(Nm,N,A,E,M,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  TRBAK1
   !
-  INTEGER i , j , k , l , M , N , Nm
-  REAL A(Nm,*) , E(*) , Z(Nm,*)
+  INTEGER i, j, k, l, M, N, Nm
+  REAL A(Nm,*), E(*), Z(Nm,*)
   REAL s
   !
   !***FIRST EXECUTABLE STATEMENT  TRBAK1
   IF ( M/=0 ) THEN
     IF ( N/=1 ) THEN
       !
-      DO i = 2 , N
+      DO i = 2, N
         l = i - 1
         IF ( E(i)/=0.0E0 ) THEN
           !
-          DO j = 1 , M
+          DO j = 1, M
             s = 0.0E0
             !
-            DO k = 1 , l
+            DO k = 1, l
               s = s + A(i,k)*Z(k,j)
             ENDDO
             !     .......... DIVISOR BELOW IS NEGATIVE OF H FORMED IN TRED1.
             !                DOUBLE DIVISION AVOIDS POSSIBLE UNDERFLOW ..........
             s = (s/A(i,l))/E(i)
             !
-            DO k = 1 , l
+            DO k = 1, l
               Z(k,j) = Z(k,j) + s*A(i,k)
             ENDDO
             !

@@ -4,9 +4,9 @@ SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
   IMPLICIT NONE
   !*--RFFTB15
   !*** Start of declarations inserted by SPAG
-  REAL C , Ch , Wa
-  INTEGER i , idl1 , ido , Ifac , ip , iw , ix2 , ix3 , ix4 , k1 , l1 , l2 , &
-    N , na , nf
+  REAL C, Ch, Wa
+  INTEGER i, idl1, ido, Ifac, ip, iw, ix2, ix3, ix4, k1, l1, l2, &
+    N, na, nf
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RFFTB1
   !***PURPOSE  Compute the backward fast Fourier transform of a real
@@ -90,13 +90,13 @@ SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RFFTB1
-  DIMENSION Ch(*) , C(*) , Wa(*) , Ifac(*)
+  DIMENSION Ch(*), C(*), Wa(*), Ifac(*)
   !***FIRST EXECUTABLE STATEMENT  RFFTB1
   nf = Ifac(2)
   na = 0
   l1 = 1
   iw = 1
-  DO k1 = 1 , nf
+  DO k1 = 1, nf
     ip = Ifac(k1+2)
     l2 = ip*l1
     ido = N/l2
@@ -147,7 +147,7 @@ SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
     iw = iw + (ip-1)*ido
   ENDDO
   IF ( na==0 ) RETURN
-  DO i = 1 , N
+  DO i = 1, N
     C(i) = Ch(i)
   ENDDO
 END SUBROUTINE RFFTB1

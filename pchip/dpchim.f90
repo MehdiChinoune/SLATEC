@@ -140,17 +140,17 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N , Incfd , Ierr
-  REAL(8) :: X(*) , F(Incfd,*) , D(Incfd,*)
+  INTEGER N, Incfd, Ierr
+  REAL(8) :: X(*), F(Incfd,*), D(Incfd,*)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i , nless1
-  REAL(8) :: del1 , del2 , dmax , dmin , drat1 , drat2 , dsave , h1 , &
-    h2 , hsum , hsumt3 , three , w1 , w2 , zero
-  SAVE zero , three
+  INTEGER i, nless1
+  REAL(8) :: del1, del2, dmax, dmin, drat1, drat2, dsave, h1, &
+    h2, hsum, hsumt3, three, w1, w2, zero
+  SAVE zero, three
   REAL(8) :: DPCHST
-  DATA zero/0.D0/ , three/3.D0/
+  DATA zero/0.D0/, three/3.D0/
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
@@ -172,7 +172,7 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
       CALL XERMSG('SLATEC','DPCHIM','INCREMENT LESS THAN ONE',Ierr,1)
       RETURN
     ELSE
-      DO i = 2 , N
+      DO i = 2, N
         IF ( X(i)<=X(i-1) ) GOTO 50
       ENDDO
       !
@@ -210,7 +210,7 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
         !
         !  LOOP THROUGH INTERIOR POINTS.
         !
-        DO i = 2 , nless1
+        DO i = 2, nless1
           IF ( i/=2 ) THEN
             !
             h1 = h2

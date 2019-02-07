@@ -32,40 +32,40 @@ SUBROUTINE DBLAT3(Nout,Kprint,Ipass)
   !     .. Parameters ..
   INTEGER NSUBS
   PARAMETER (NSUBS=6)
-  REAL(8) :: ZERO , ONE
+  REAL(8) :: ZERO, ONE
   PARAMETER (ZERO=0.0D0,ONE=1.0D0)
   INTEGER NMAX
   PARAMETER (NMAX=65)
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint
+  INTEGER Ipass, Kprint
   !     .. Local Scalars ..
-  REAL(8) :: eps , err , thresh
-  INTEGER i , isnum , j , n , NALF , NBET , NIDIM , Nout
+  REAL(8) :: eps, err, thresh
+  INTEGER i, isnum, j, n, NALF, NBET, NIDIM, Nout
   PARAMETER (NIDIM=6,NALF=3,NBET=3)
-  LOGICAL same , tsterr , ftl , ftl1 , ftl2
-  CHARACTER :: transa , transb
+  LOGICAL same, tsterr, ftl, ftl1, ftl2
+  CHARACTER :: transa, transb
   !     .. Local Arrays ..
-  REAL(8) :: ab(NMAX,2*NMAX) , aa(NMAX*NMAX) , alf(NALF) ,&
-    as(NMAX*NMAX) , bet(NBET) , g(NMAX) , bb(NMAX*NMAX) ,&
-    bs(NMAX*NMAX) , c(NMAX,NMAX) , cc(NMAX*NMAX) ,&
-    cs(NMAX*NMAX) , ct(NMAX) , w(2*NMAX)
+  REAL(8) :: ab(NMAX,2*NMAX), aa(NMAX*NMAX), alf(NALF) ,&
+    as(NMAX*NMAX), bet(NBET), g(NMAX), bb(NMAX*NMAX) ,&
+    bs(NMAX*NMAX), c(NMAX,NMAX), cc(NMAX*NMAX) ,&
+    cs(NMAX*NMAX), ct(NMAX), w(2*NMAX)
   INTEGER idim(NIDIM)
   LOGICAL ltest(NSUBS)
   CHARACTER(6) :: snames(NSUBS)
   !     .. External Functions ..
   REAL R1MACH
   LOGICAL LDE
-  EXTERNAL LDE , R1MACH
+  EXTERNAL LDE, R1MACH
   !     .. External Subroutines ..
-  EXTERNAL DCHK13 , DCHK23 , DCHK33 , DCHK43 , DCHK53 , DCHKE3 , DMMCH
+  EXTERNAL DCHK13, DCHK23, DCHK33, DCHK43, DCHK53, DCHKE3, DMMCH
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MAX , MIN
+  INTRINSIC ABS, MAX, MIN
   !     .. Data statements ..
-  DATA snames/'DGEMM ' , 'DSYMM ' , 'DTRMM ' , 'DTRSM ' , 'DSYRK ' ,&
+  DATA snames/'DGEMM ', 'DSYMM ', 'DTRMM ', 'DTRSM ', 'DSYRK ' ,&
     'DSYR2K'/
-  DATA idim/0 , 1 , 2 , 3 , 5 , 9/
-  DATA alf/0.0 , 1.0 , 0.7/
-  DATA bet/0.0 , 1.0 , 1.3/
+  DATA idim/0, 1, 2, 3, 5, 9/
+  DATA alf/0.0, 1.0, 0.7/
+  DATA bet/0.0, 1.0, 1.3/
   !***FIRST EXECUTABLE STATEMENT  DBLAT3
   !     Set the flag that indicates whether error exits are to be tested.
   tsterr = .TRUE.
@@ -90,7 +90,7 @@ SUBROUTINE DBLAT3(Nout,Kprint,Ipass)
   !     Set names of subroutines and flags which indicate
   !     whether they are to be tested.
   !
-  DO i = 1 , NSUBS
+  DO i = 1, NSUBS
     ltest(i) = .TRUE.
   ENDDO
   !
@@ -101,15 +101,15 @@ SUBROUTINE DBLAT3(Nout,Kprint,Ipass)
   !     Check the reliability of DMMCH using exact data.
   !
   n = MIN(32,NMAX)
-  DO j = 1 , n
-    DO i = 1 , n
+  DO j = 1, n
+    DO i = 1, n
       ab(i,j) = MAX(i-j+1,0)
     ENDDO
     ab(j,NMAX+1) = j
     ab(1,NMAX+j) = j
     c(j,1) = ZERO
   ENDDO
-  DO j = 1 , n
+  DO j = 1, n
     cc(j) = j*((j+1)*j)/2 - ((j+1)*j*(j-1))/3
   ENDDO
   !     CC holds the exact result. On exit from DMMCH CT holds
@@ -122,7 +122,7 @@ SUBROUTINE DBLAT3(Nout,Kprint,Ipass)
   same = LDE(cc,ct,n)
   IF ( .NOT.same.OR.err/=ZERO ) THEN
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Nout,FMT=99006) transa , transb , same , err
+    IF ( Kprint>=2 ) WRITE (Nout,FMT=99006) transa, transb, same, err
   ENDIF
   transb = 'T'
   ftl = .FALSE.
@@ -131,13 +131,13 @@ SUBROUTINE DBLAT3(Nout,Kprint,Ipass)
   same = LDE(cc,ct,n)
   IF ( .NOT.same.OR.err/=ZERO ) THEN
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Nout,FMT=99006) transa , transb , same , err
+    IF ( Kprint>=2 ) WRITE (Nout,FMT=99006) transa, transb, same, err
   ENDIF
-  DO j = 1 , n
+  DO j = 1, n
     ab(j,NMAX+1) = n - j + 1
     ab(1,NMAX+j) = n - j + 1
   ENDDO
-  DO j = 1 , n
+  DO j = 1, n
     cc(n-j+1) = j*((j+1)*j)/2 - ((j+1)*j*(j-1))/3
   ENDDO
   transa = 'T'
@@ -148,7 +148,7 @@ SUBROUTINE DBLAT3(Nout,Kprint,Ipass)
   same = LDE(cc,ct,n)
   IF ( .NOT.same.OR.err/=ZERO ) THEN
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Nout,FMT=99006) transa , transb , same , err
+    IF ( Kprint>=2 ) WRITE (Nout,FMT=99006) transa, transb, same, err
   ENDIF
   transb = 'T'
   ftl = .FALSE.
@@ -157,12 +157,12 @@ SUBROUTINE DBLAT3(Nout,Kprint,Ipass)
   same = LDE(cc,ct,n)
   IF ( .NOT.same.OR.err/=ZERO ) THEN
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Nout,FMT=99006) transa , transb , same , err
+    IF ( Kprint>=2 ) WRITE (Nout,FMT=99006) transa, transb, same, err
   ENDIF
   !
   !     Test each subroutine in turn.
   !
-  DO isnum = 1 , NSUBS
+  DO isnum = 1, NSUBS
     IF ( .NOT.ltest(isnum) ) THEN
       !           Subprogram is not to be tested.
       WRITE (Nout,FMT=99007) snames(isnum)

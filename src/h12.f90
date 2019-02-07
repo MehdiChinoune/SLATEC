@@ -4,9 +4,9 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   IMPLICIT NONE
   !*--H125
   !*** Start of declarations inserted by SPAG
-  REAL b , C , cl , clinv , one , SDOT , sm , U , ul1m1 , Up
-  INTEGER i , i2 , i3 , i4 , Ice , Icv , incr , Iue , j , kl1 , kl2 , klp , &
-    L1 , l1m1 , Lpivot , M , mml1p2 , Mode , Ncv
+  REAL b, C, cl, clinv, one, SDOT, sm, U, ul1m1, Up
+  INTEGER i, i2, i3, i4, Ice, Icv, incr, Iue, j, kl1, kl2, klp, &
+    L1, l1m1, Lpivot, M, mml1p2, Mode, Ncv
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  H12
   !***SUBSIDIARY
@@ -52,7 +52,7 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  H12
-  DIMENSION U(Iue,*) , C(*)
+  DIMENSION U(Iue,*), C(*)
   !***FIRST EXECUTABLE STATEMENT  H12
   one = 1.
   !
@@ -60,13 +60,13 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   cl = ABS(U(1,Lpivot))
   IF ( Mode/=2 ) THEN
     !                            ****** CONSTRUCT THE TRANSFORMATION. ******
-    DO j = L1 , M
+    DO j = L1, M
       cl = MAX(ABS(U(1,j)),cl)
     ENDDO
     IF ( cl<=0 ) GOTO 100
     clinv = one/cl
     sm = (U(1,Lpivot)*clinv)**2
-    DO j = L1 , M
+    DO j = L1, M
       sm = sm + (U(1,j)*clinv)**2
     ENDDO
     cl = cl*SQRT(sm)
@@ -93,7 +93,7 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
       ul1m1 = U(1,l1m1)
       U(1,l1m1) = Up
       IF ( Lpivot/=l1m1 ) CALL SSWAP(Ncv,C(kl1),Icv,C(klp),Icv)
-      DO j = 1 , Ncv
+      DO j = 1, Ncv
         sm = SDOT(mml1p2,U(1,l1m1),Iue,C(kl1),Ice)
         sm = sm*b
         CALL SAXPY(mml1p2,sm,U(1,l1m1),Iue,C(kl1),Ice)
@@ -107,19 +107,19 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
     ELSE
       i2 = 1 - Icv + Ice*(Lpivot-1)
       incr = Ice*(L1-Lpivot)
-      DO j = 1 , Ncv
+      DO j = 1, Ncv
         i2 = i2 + Icv
         i3 = i2 + incr
         i4 = i3
         sm = C(i2)*Up
-        DO i = L1 , M
+        DO i = L1, M
           sm = sm + C(i3)*U(1,i)
           i3 = i3 + Ice
         ENDDO
         IF ( sm/=0 ) THEN
           sm = sm*b
           C(i2) = C(i2) + sm*Up
-          DO i = L1 , M
+          DO i = L1, M
             C(i4) = C(i4) + sm*U(1,i)
             i4 = i4 + Ice
           ENDDO
@@ -128,4 +128,5 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
     ENDIF
   ENDIF
   100  RETURN
-  99999 END SUBROUTINE H12
+  99999 CONTINUE
+  END SUBROUTINE H12

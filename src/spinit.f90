@@ -6,8 +6,8 @@ SUBROUTINE SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
   IMPLICIT NONE
   !*--SPINIT7
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Info , ip , iplace , j , Mrelas , n20007 , n20019 , n20028 , &
-    n20041 , n20056 , n20066 , n20070 , n20074 , n20078 , Nvars
+  INTEGER i, Info, ip, iplace, j, Mrelas, n20007, n20019, n20028, &
+    n20041, n20056, n20066, n20070, n20074, n20078, Nvars
   REAL SASUM
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPINIT
@@ -37,11 +37,11 @@ SUBROUTINE SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  SPINIT
-  REAL aij , Amat(*) , Anorm , Bl(*) , Bu(*) , cmax , Colnrm(*) , Costs(*) , &
-    Costsc , Csc(*) , csum , one , Primal(*) , Rhs(*) , Rhsnrm , scalr , &
-    testsc , Xlamda , zero
-  INTEGER Ibasis(*) , Ibb(*) , Imat(*) , Ind(*)
-  LOGICAL contin , usrbas , colscp , cstscp , minprb , Lopt(8)
+  REAL aij, Amat(*), Anorm, Bl(*), Bu(*), cmax, Colnrm(*), Costs(*), &
+    Costsc, Csc(*), csum, one, Primal(*), Rhs(*), Rhsnrm, scalr, &
+    testsc, Xlamda, zero
+  INTEGER Ibasis(*), Ibb(*), Imat(*), Ind(*)
+  LOGICAL contin, usrbas, colscp, cstscp, minprb, Lopt(8)
   !
   !***FIRST EXECUTABLE STATEMENT  SPINIT
   zero = 0.

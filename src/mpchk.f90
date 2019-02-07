@@ -4,7 +4,7 @@ SUBROUTINE MPCHK(I,J)
   IMPLICIT NONE
   !*--MPCHK5
   !*** Start of declarations inserted by SPAG
-  INTEGER I , I1MACH , ib , J , LUN , M , mx , MXR
+  INTEGER I, I1MACH, ib, J, LUN, M, mx, MXR
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPCHK
   !***SUBSIDIARY
@@ -31,8 +31,8 @@ SUBROUTINE MPCHK(I,J)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPCHK
-  COMMON /MPCOM / B , T , M , LUN , MXR , R(30)
-  INTEGER B , T , R
+  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
+  INTEGER B, T, R
   !***FIRST EXECUTABLE STATEMENT  MPCHK
   LUN = I1MACH(4)
   ! NOW CHECK LEGALITY OF B, T AND M
@@ -66,7 +66,7 @@ SUBROUTINE MPCHK(I,J)
   mx = I*T + J
   IF ( MXR>=mx ) RETURN
   ! HERE COMMON IS TOO SMALL, SO GIVE ERROR MESSAGE.
-  WRITE (LUN,99005) I , J , mx , MXR , T
+  WRITE (LUN,99005) I, J, mx, MXR, T
   99005 FORMAT (' *** MXR TOO SMALL OR NOT SET TO DIM(R) BEFORE CALL',&
     ' TO AN MP ROUTINE *** '/' *** MXR SHOULD BE AT LEAST',I3,'*T +',&
     I4,' =',I6,'  ***'/' *** ACTUALLY MXR =',I10,', AND T =',I10,&

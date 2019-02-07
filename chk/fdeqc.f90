@@ -19,11 +19,11 @@ SUBROUTINE FDEQC(T,U,Uprime,Rpar,Ipar)
   !     Declare arguments.
   !
   INTEGER Ipar(*)
-  REAL Rpar(*) , T , U(*) , Uprime(*)
+  REAL Rpar(*), T, U(*), Uprime(*)
   !
   !     Declare local variables.
   !
-  REAL r , rsq , r3
+  REAL r, rsq, r3
   !***FIRST EXECUTABLE STATEMENT  FDEQC
   rsq = U(1)*U(1) + U(2)*U(2)
   r = SQRT(rsq)

@@ -4,9 +4,9 @@ FUNCTION BESY1(X)
   IMPLICIT NONE
   !*--BESY15
   !*** Start of declarations inserted by SPAG
-  REAL ampl , BESJ1 , BESY1 , bm1cs , bth1cs , by1cs , CSEVL , pi4 , &
-    R1MACH , theta , twodpi , X , xmax , xmin , xsml , y , z
-  INTEGER INITS , ntm1 , ntth1 , nty1
+  REAL ampl, BESJ1, BESY1, bm1cs, bth1cs, by1cs, CSEVL, pi4, &
+    R1MACH, theta, twodpi, X, xmax, xmin, xsml, y, z
+  INTEGER INITS, ntm1, ntth1, nty1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESY1
   !***PURPOSE  Compute the Bessel function of the second kind of order
@@ -51,10 +51,10 @@ FUNCTION BESY1(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BESY1
-  DIMENSION by1cs(14) , bm1cs(21) , bth1cs(24)
+  DIMENSION by1cs(14), bm1cs(21), bth1cs(24)
   LOGICAL first
-  SAVE by1cs , bm1cs , bth1cs , twodpi , pi4 , nty1 , ntm1 , ntth1 , xmin , &
-    xsml , xmax , first
+  SAVE by1cs, bm1cs, bth1cs, twodpi, pi4, nty1, ntm1, ntth1, xmin, &
+    xsml, xmax, first
   DATA by1cs(1)/.03208047100611908629E0/
   DATA by1cs(2)/1.262707897433500450E0/
   DATA by1cs(3)/.00649996189992317500E0/
@@ -148,4 +148,5 @@ FUNCTION BESY1(X)
   BESY1 = twodpi*LOG(0.5*X)*BESJ1(X) + (0.5+CSEVL(.125*y-1.,by1cs,nty1))/X
   RETURN
   !
-  99999 END FUNCTION BESY1
+  99999 CONTINUE
+  END FUNCTION BESY1

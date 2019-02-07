@@ -32,31 +32,31 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,&
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DEXBVP
   !
-  INTEGER ICOco , iexp , Iflag , IGOfx , inc , INDpvt , INFo , INHomo ,&
-    INTeg , ISTkop , IVP , Iwork(*) , K1 , K10 , K11 , K2 , K3 , K4 ,&
-    K5 , K6 , K7 , K8 , K9 , KKKint , KKKzpw , KNSwot , KOP , kotc ,&
-    L1 , L2 , LLLint , LOTjp , LPAr , MNSwot , MXNon , NCOmp , NDIsk ,&
-    NEEdiw , NEEdw , NEQ , NEQivp , NFC , NFCc , NIC , NOPg , NPS ,&
-    Nrowa , Nrowb , Nrowy , nsafiw , nsafw , NSWot , NTApe , NTP ,&
-    NUMort , NXPts
-  REAL(8) :: A(Nrowa,*) , AE , Alpha(*) , B(Nrowb,*) , Beta(*) , C ,&
-    EPS , FOUru , PWCnd , PX , RE , SQOvfl , SRU , TND ,&
-    TOL , TWOu , URO , Work(*) , X , XBEg , XENd , xl , XOP ,&
-    XOT , Xpts(*) , XSAv , Y(Nrowy,*) , zquit
-  CHARACTER(8) :: xern1 , xern2
+  INTEGER ICOco, iexp, Iflag, IGOfx, inc, INDpvt, INFo, INHomo ,&
+    INTeg, ISTkop, IVP, Iwork(*), K1, K10, K11, K2, K3, K4 ,&
+    K5, K6, K7, K8, K9, KKKint, KKKzpw, KNSwot, KOP, kotc ,&
+    L1, L2, LLLint, LOTjp, LPAr, MNSwot, MXNon, NCOmp, NDIsk ,&
+    NEEdiw, NEEdw, NEQ, NEQivp, NFC, NFCc, NIC, NOPg, NPS ,&
+    Nrowa, Nrowb, Nrowy, nsafiw, nsafw, NSWot, NTApe, NTP ,&
+    NUMort, NXPts
+  REAL(8) :: A(Nrowa,*), AE, Alpha(*), B(Nrowb,*), Beta(*), C ,&
+    EPS, FOUru, PWCnd, PX, RE, SQOvfl, SRU, TND ,&
+    TOL, TWOu, URO, Work(*), X, XBEg, XENd, xl, XOP ,&
+    XOT, Xpts(*), XSAv, Y(Nrowy,*), zquit
+  CHARACTER(8) :: xern1, xern2
   !
   !     ******************************************************************
   !
-  COMMON /DML8SZ/ C , XSAv , IGOfx , INHomo , IVP , NCOmp , NFC
-  COMMON /DML18J/ AE , RE , TOL , NXPts , NIC , NOPg , MXNon , NDIsk ,&
-    NTApe , NEQ , INDpvt , INTeg , NPS , NTP , NEQivp ,&
-    NUMort , NFCc , ICOco
-  COMMON /DML15T/ PX , PWCnd , TND , X , XBEg , XENd , XOT , XOP , INFo(15)&
-    , ISTkop , KNSwot , KOP , LOTjp , MNSwot , NSWot
-  COMMON /DML17B/ KKKzpw , NEEdw , NEEdiw , K1 , K2 , K3 , K4 , K5 , K6 ,&
-    K7 , K8 , K9 , K10 , K11 , L1 , L2 , KKKint , LLLint
+  COMMON /DML8SZ/ C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
+  COMMON /DML18J/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk ,&
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp ,&
+    NUMort, NFCc, ICOco
+  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
+    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
+  COMMON /DML17B/ KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6 ,&
+    K7, K8, K9, K10, K11, L1, L2, KKKint, LLLint
   !
-  COMMON /DML5MC/ URO , SRU , EPS , SQOvfl , TWOu , FOUru , LPAr
+  COMMON /DML5MC/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
   !
   !***FIRST EXECUTABLE STATEMENT  DEXBVP
   kotc = 1

@@ -73,8 +73,8 @@ SUBROUTINE RST(Nm,N,W,E,Matz,Z,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RST
   !
-  INTEGER i , j , N , Nm , Ierr , Matz
-  REAL W(*) , E(*) , Z(Nm,*)
+  INTEGER i, j, N, Nm, Ierr, Matz
+  REAL W(*), E(*), Z(Nm,*)
   !
   !***FIRST EXECUTABLE STATEMENT  RST
   IF ( N>Nm ) THEN
@@ -82,9 +82,9 @@ SUBROUTINE RST(Nm,N,W,E,Matz,Z,Ierr)
     !
   ELSEIF ( Matz/=0 ) THEN
     !     .......... FIND BOTH EIGENVALUES AND EIGENVECTORS ..........
-    DO i = 1 , N
+    DO i = 1, N
       !
-      DO j = 1 , N
+      DO j = 1, N
         Z(j,i) = 0.0E0
       ENDDO
       !

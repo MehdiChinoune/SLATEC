@@ -45,7 +45,7 @@ PROGRAM TEST02
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
   !***END PROLOGUE  TEST02
-  INTEGER ipass , kprint , lin , lun , nfail
+  INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST02
   lun = I1MACH(2)
   lin = I1MACH(1)

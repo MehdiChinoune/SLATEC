@@ -107,24 +107,24 @@ SUBROUTINE CTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  CTRSV
   !     .. Scalar Arguments ..
-  INTEGER Incx , Lda , N
-  CHARACTER :: Diag , Trans , Uplo
+  INTEGER Incx, Lda, N
+  CHARACTER :: Diag, Trans, Uplo
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*) , X(*)
+  COMPLEX A(Lda,*), X(*)
   !     .. Parameters ..
   COMPLEX ZERO
   PARAMETER (ZERO=(0.0E+0,0.0E+0))
   !     .. Local Scalars ..
   COMPLEX temp
-  INTEGER i , info , ix , j , jx , kx
-  LOGICAL noconj , nounit
+  INTEGER i, info, ix, j, jx, kx
+  LOGICAL noconj, nounit
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
-  INTRINSIC CONJG , MAX
+  INTRINSIC CONJG, MAX
   !***FIRST EXECUTABLE STATEMENT  CTRSV
   !
   !     Test the input parameters.
@@ -174,23 +174,23 @@ SUBROUTINE CTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
     !
     IF ( LSAME(Uplo,'U') ) THEN
       IF ( Incx==1 ) THEN
-        DO j = N , 1 , -1
+        DO j = N, 1, -1
           IF ( X(j)/=ZERO ) THEN
             IF ( nounit ) X(j) = X(j)/A(j,j)
             temp = X(j)
-            DO i = j - 1 , 1 , -1
+            DO i = j - 1, 1, -1
               X(i) = X(i) - temp*A(i,j)
             ENDDO
           ENDIF
         ENDDO
       ELSE
         jx = kx + (N-1)*Incx
-        DO j = N , 1 , -1
+        DO j = N, 1, -1
           IF ( X(jx)/=ZERO ) THEN
             IF ( nounit ) X(jx) = X(jx)/A(j,j)
             temp = X(jx)
             ix = jx
-            DO i = j - 1 , 1 , -1
+            DO i = j - 1, 1, -1
               ix = ix - Incx
               X(ix) = X(ix) - temp*A(i,j)
             ENDDO
@@ -199,23 +199,23 @@ SUBROUTINE CTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
         ENDDO
       ENDIF
     ELSEIF ( Incx==1 ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( X(j)/=ZERO ) THEN
           IF ( nounit ) X(j) = X(j)/A(j,j)
           temp = X(j)
-          DO i = j + 1 , N
+          DO i = j + 1, N
             X(i) = X(i) - temp*A(i,j)
           ENDDO
         ENDIF
       ENDDO
     ELSE
       jx = kx
-      DO j = 1 , N
+      DO j = 1, N
         IF ( X(jx)/=ZERO ) THEN
           IF ( nounit ) X(jx) = X(jx)/A(j,j)
           temp = X(jx)
           ix = jx
-          DO i = j + 1 , N
+          DO i = j + 1, N
             ix = ix + Incx
             X(ix) = X(ix) - temp*A(i,j)
           ENDDO
@@ -228,15 +228,15 @@ SUBROUTINE CTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
     !
   ELSEIF ( LSAME(Uplo,'U') ) THEN
     IF ( Incx==1 ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         temp = X(j)
         IF ( noconj ) THEN
-          DO i = 1 , j - 1
+          DO i = 1, j - 1
             temp = temp - A(i,j)*X(i)
           ENDDO
           IF ( nounit ) temp = temp/A(j,j)
         ELSE
-          DO i = 1 , j - 1
+          DO i = 1, j - 1
             temp = temp - CONJG(A(i,j))*X(i)
           ENDDO
           IF ( nounit ) temp = temp/CONJG(A(j,j))
@@ -245,17 +245,17 @@ SUBROUTINE CTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
       ENDDO
     ELSE
       jx = kx
-      DO j = 1 , N
+      DO j = 1, N
         ix = kx
         temp = X(jx)
         IF ( noconj ) THEN
-          DO i = 1 , j - 1
+          DO i = 1, j - 1
             temp = temp - A(i,j)*X(ix)
             ix = ix + Incx
           ENDDO
           IF ( nounit ) temp = temp/A(j,j)
         ELSE
-          DO i = 1 , j - 1
+          DO i = 1, j - 1
             temp = temp - CONJG(A(i,j))*X(ix)
             ix = ix + Incx
           ENDDO
@@ -266,15 +266,15 @@ SUBROUTINE CTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
       ENDDO
     ENDIF
   ELSEIF ( Incx==1 ) THEN
-    DO j = N , 1 , -1
+    DO j = N, 1, -1
       temp = X(j)
       IF ( noconj ) THEN
-        DO i = N , j + 1 , -1
+        DO i = N, j + 1, -1
           temp = temp - A(i,j)*X(i)
         ENDDO
         IF ( nounit ) temp = temp/A(j,j)
       ELSE
-        DO i = N , j + 1 , -1
+        DO i = N, j + 1, -1
           temp = temp - CONJG(A(i,j))*X(i)
         ENDDO
         IF ( nounit ) temp = temp/CONJG(A(j,j))
@@ -284,17 +284,17 @@ SUBROUTINE CTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   ELSE
     kx = kx + (N-1)*Incx
     jx = kx
-    DO j = N , 1 , -1
+    DO j = N, 1, -1
       ix = kx
       temp = X(jx)
       IF ( noconj ) THEN
-        DO i = N , j + 1 , -1
+        DO i = N, j + 1, -1
           temp = temp - A(i,j)*X(ix)
           ix = ix - Incx
         ENDDO
         IF ( nounit ) temp = temp/A(j,j)
       ELSE
-        DO i = N , j + 1 , -1
+        DO i = N, j + 1, -1
           temp = temp - CONJG(A(i,j))*X(ix)
           ix = ix - Incx
         ENDDO

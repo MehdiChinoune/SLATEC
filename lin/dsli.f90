@@ -42,12 +42,12 @@ SUBROUTINE DSLI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  DSLI
   !     .. Scalar Arguments ..
-  INTEGER Isym , N , Nelt
+  INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , B(N) , Rwork(*) , X(N)
-  INTEGER Ia(Nelt) , Iwork(10) , Ja(Nelt)
+  REAL(8) :: A(Nelt), B(N), Rwork(*), X(N)
+  INTEGER Ia(Nelt), Iwork(10), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locel , lociel , locjel , nel
+  INTEGER locel, lociel, locjel, nel
   !     .. External Subroutines ..
   EXTERNAL DSLI2
   !***FIRST EXECUTABLE STATEMENT  DSLI

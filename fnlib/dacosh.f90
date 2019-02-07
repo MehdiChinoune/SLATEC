@@ -26,8 +26,8 @@ REAL(8) FUNCTION DACOSH(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DACOSH
-  REAL(8) :: X , dln2 , xmax , D1MACH
-  SAVE dln2 , xmax
+  REAL(8) :: X, dln2, xmax, D1MACH
+  SAVE dln2, xmax
   DATA dln2/0.69314718055994530941723212145818D0/
   DATA xmax/0.D0/
   !***FIRST EXECUTABLE STATEMENT  DACOSH

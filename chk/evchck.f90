@@ -61,21 +61,21 @@ SUBROUTINE EVCHCK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
   !
   !  Declare arguments.
   !
-  INTEGER Lout , Kprint , Npts
-  REAL Xev(*) , Fev(*) , Dev(*) , Fev2(*)
+  INTEGER Lout, Kprint, Npts
+  REAL Xev(*), Fev(*), Dev(*), Fev2(*)
   LOGICAL Fail
   !
   !  DECLARATIONS.
   !
-  INTEGER i , ierr , iint , next(2) , next2(2) , nint
-  REAL aed , aed2 , aedmax , aedmin , aef , aef2 , aefmax , aefmin ,&
-    check(2) , checkf(2) , checkd(2) , d1 , d2 , dermax , dtrue , dx ,&
-    eps1 , eps2 , f1 , f2 , fact , fermax , floord , floorf , four ,&
-    ftrue , left(3) , machep , one , red , red2 , redmax , redmin , ref ,&
-    ref2 , refmax , refmin , right(3) , small , ten , tol1 , tol2 , x1 ,&
-    x2 , xadmax , xadmin , xafmax , xafmin , xrdmax , xrdmin , xrfmax ,&
-    xrfmin , zero
-  LOGICAL failoc , failnx
+  INTEGER i, ierr, iint, next(2), next2(2), nint
+  REAL aed, aed2, aedmax, aedmin, aef, aef2, aefmax, aefmin ,&
+    check(2), checkf(2), checkd(2), d1, d2, dermax, dtrue, dx ,&
+    eps1, eps2, f1, f2, fact, fermax, floord, floorf, four ,&
+    ftrue, left(3), machep, one, red, red2, redmax, redmin, ref ,&
+    ref2, refmax, refmin, right(3), small, ten, tol1, tol2, x1 ,&
+    x2, xadmax, xadmin, xafmax, xafmin, xrdmax, xrdmin, xrfmax ,&
+    xrfmin, zero
+  LOGICAL failoc, failnx
   !
   REAL R1MACH
   !       The following should stay REAL (no D.P. equivalent).
@@ -84,11 +84,11 @@ SUBROUTINE EVCHCK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
   !
   !  INITIALIZE.
   !
-  DATA zero/0.E0/ , one/1.E0/ , four/4.E0/ , ten/10.E0/
+  DATA zero/0.E0/, one/1.E0/, four/4.E0/, ten/10.E0/
   DATA small/1.0E-10/
   DATA nint/3/
-  DATA left/ - 1.5E0 , 2.0E-10 , 1.0E0/
-  DATA right/2.5E0 , 3.0E-10 , 1.0E+8/
+  DATA left/ - 1.5E0, 2.0E-10, 1.0E0/
+  DATA right/2.5E0, 3.0E-10, 1.0E+8/
   !
   !***FIRST EXECUTABLE STATEMENT  EVCHCK
   machep = R1MACH(4)
@@ -102,7 +102,7 @@ SUBROUTINE EVCHCK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
   !
   !  CYCLE OVER INTERVALS.
   !
-  DO iint = 1 , nint
+  DO iint = 1, nint
     x1 = left(iint)
     x2 = right(iint)
     !
@@ -122,12 +122,12 @@ SUBROUTINE EVCHCK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
       !
       99002     FORMAT (/10X,'CHFDV ACCURACY TEST')
       WRITE (Lout,'(/)')
-      WRITE (Lout,99017) 'X1' , x1 , 'X2' , x2
-      WRITE (Lout,99017) 'F1' , f1 , 'F2' , f2
-      WRITE (Lout,99017) 'D1' , d1 , 'D2' , d2
+      WRITE (Lout,99017) 'X1', x1, 'X2', x2
+      WRITE (Lout,99017) 'F1', f1, 'F2', f2
+      WRITE (Lout,99017) 'D1', d1, 'D2', d2
     ENDIF
     !
-    IF ( Kprint>=2 ) WRITE (Lout,99003) x1 , x2
+    IF ( Kprint>=2 ) WRITE (Lout,99003) x1, x2
     99003   FORMAT (/10X,'INTERVAL = (',1P,E12.5,',',E12.5,' ):')
     !
     !  COMPUTE FLOORS FOR RELATIVE ERRORS.
@@ -155,10 +155,10 @@ SUBROUTINE EVCHCK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
     Fail = Fail .OR. failoc
     !
     IF ( Kprint>=3 ) THEN
-      WRITE (Lout,99004) next , aef , aef2 , aed , aed2
+      WRITE (Lout,99004) next, aef, aef2, aed, aed2
       99004     FORMAT (/' ERRORS AT ENDPOINTS:',40X,'(NEXT =',2I3,')'//1P,4X,'F1:',&
         E13.5,4X,'F2:',E13.5,4X,'D1:',E13.5,4X,'D2:',E13.5)
-      WRITE (Lout,99005) ref , ref2 , red , red2
+      WRITE (Lout,99005) ref, ref2, red, red2
       99005     FORMAT (1P,4(7X,E13.5))
     ENDIF
     !
@@ -181,7 +181,7 @@ SUBROUTINE EVCHCK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
     !     TO LEFT AND 6 TO RIGHT OF [X1,X2].
     !
     dx = (x2-x1)/(Npts-10)
-    DO i = 1 , Npts
+    DO i = 1, Npts
       Xev(i) = (x1+(i-5)*dx) + dx*RAND(zero)
     ENDDO
     !     --------------------------------------------------------
@@ -195,7 +195,7 @@ SUBROUTINE EVCHCK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
       !
       !     CUMULATE LARGEST AND SMALLEST ERRORS FOR SUMMARY.
       !
-      DO i = 1 , Npts
+      DO i = 1, Npts
         CALL FDTRUE(Xev(i),ftrue,dtrue)
         aef = Fev(i) - ftrue
         ref = RERR(aef,ftrue,floorf)
@@ -264,21 +264,21 @@ SUBROUTINE EVCHCK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
     !  PRINT SUMMARY.
     !
     IF ( Kprint>=3 ) THEN
-      WRITE (Lout,99009) Npts - 10 , next
+      WRITE (Lout,99009) Npts - 10, next
       99009     FORMAT (/' ERRORS AT ',I5,' INTERIOR POINTS + 10 OUTSIDE:',15X,&
         '(NEXT =',2I3,')'//30X,'FUNCTION',17X,'DERIVATIVE'/15X,&
         2(11X,'ABS',9X,'REL'))
       !
-      WRITE (Lout,99018) 'MIN' , aefmin , refmin , aedmin , redmin
-      WRITE (Lout,99019) xafmin , xrfmin , xadmin , xrdmin
-      WRITE (Lout,99018) 'MAX' , aefmax , refmax , aedmax , redmax
-      WRITE (Lout,99019) xafmax , xrfmax , xadmax , xrdmax
+      WRITE (Lout,99018) 'MIN', aefmin, refmin, aedmin, redmin
+      WRITE (Lout,99019) xafmin, xrfmin, xadmin, xrdmin
+      WRITE (Lout,99018) 'MAX', aefmax, refmax, aedmax, redmax
+      WRITE (Lout,99019) xafmax, xrfmax, xadmax, xrdmax
     ENDIF
     !
     IF ( Kprint>=2 ) THEN
       IF ( failoc ) THEN
-        IF ( fermax>tol2 ) WRITE (Lout,99020) 'F' , fermax , tol2
-        IF ( dermax>tol2 ) WRITE (Lout,99020) 'D' , dermax , tol2
+        IF ( fermax>tol2 ) WRITE (Lout,99020) 'F', fermax, tol2
+        IF ( dermax>tol2 ) WRITE (Lout,99020) 'D', dermax, tol2
         IF ( failnx ) WRITE (Lout,99010) next
         99010       FORMAT (/' ***** REPORTED NEXT =',2I5,'   RATHER THAN    4    6')
       ELSE
@@ -299,7 +299,7 @@ SUBROUTINE EVCHCK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
     ELSE
       aefmax = ABS(Fev2(1)-Fev(1))
       xafmax = Xev(1)
-      DO i = 2 , Npts
+      DO i = 2, Npts
         aef = ABS(Fev2(i)-Fev(i))
         IF ( aef>aefmax ) THEN
           aefmax = aef
@@ -312,10 +312,10 @@ SUBROUTINE EVCHCK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
         IF ( failoc ) THEN
           WRITE (Lout,99013)
           99013         FORMAT (/' ***** CHFEV DID NOT AGREE WITH CHFDV:')
-          IF ( aefmax/=zero ) WRITE (Lout,99014) aefmax , xafmax
+          IF ( aefmax/=zero ) WRITE (Lout,99014) aefmax, xafmax
           99014         FORMAT (7X,'MAXIMUM DIFFERENCE ',1P,E12.5,'; OCCURRED AT X =',&
             E12.5)
-          IF ( failnx ) WRITE (Lout,99015) next2 , next
+          IF ( failnx ) WRITE (Lout,99015) next2, next
           99015         FORMAT (7X,'REPORTED NEXT =',2I3,'   RATHER THAN ',2I3)
         ELSE
           WRITE (Lout,99016)
@@ -343,7 +343,7 @@ CONTAINS
   !  DEFINE RELATIVE ERROR WITH FLOOR.
   !
   REAL FUNCTION RERR(err,value,floor)
-    REAL, INTENT(IN) :: err , value , floor
+    REAL, INTENT(IN) :: err, value, floor
     RERR = err/MAX(ABS(value),floor)
   END FUNCTION RERR
 END SUBROUTINE EVCHCK

@@ -62,7 +62,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !                    K=1,...,N depending on KODE
   !           NZ     - number of components of Y set to zero due to
   !                    underflow,
-  !                    NZ=0   , normal return, computation completed
+  !                    NZ=0  , normal return, computation completed
   !                    NZ .NE. 0, last NZ components of Y set to zero,
   !                             Y(K)=0.0D0, K=N-NZ+1,...,N.
   !
@@ -92,17 +92,17 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DBESI
   !
-  INTEGER i , ialp , in , inlim , is , i1 , k , kk , km , Kode , kt , N , &
-    nn , ns , Nz
+  INTEGER i, ialp, in, inlim, is, i1, k, kk, km, Kode, kt, N, &
+    nn, ns, Nz
   INTEGER I1MACH
-  REAL(8) :: ain , ak , akm , Alpha , ans , ap , arg , atol , tolln , &
-    dfn , dtm , dx , earg , elim , etx , flgik , fn , fnf , &
-    fni , fnp1 , fnu , gln , ra , rttpi , s , sx , sxo2 , &
-    s1 , s2 , t , ta , tb , temp , tfn , tm , tol , trx , &
-    t2 , X , xo2 , xo2l , Y , z
-  REAL(8) :: D1MACH , DLNGAM
-  DIMENSION Y(*) , temp(3)
-  SAVE rttpi , inlim
+  REAL(8) :: ain, ak, akm, Alpha, ans, ap, arg, atol, tolln, &
+    dfn, dtm, dx, earg, elim, etx, flgik, fn, fnf, &
+    fni, fnp1, fnu, gln, ra, rttpi, s, sx, sxo2, &
+    s1, s2, t, ta, tb, temp, tfn, tm, tol, trx, &
+    t2, X, xo2, xo2l, Y, z
+  REAL(8) :: D1MACH, DLNGAM
+  DIMENSION Y(*), temp(3)
+  SAVE rttpi, inlim
   DATA rttpi/3.98942280401433D-01/
   DATA inlim/80/
   !***FIRST EXECUTABLE STATEMENT  DBESI
@@ -144,7 +144,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     ELSE
       i1 = 1
     ENDIF
-    DO i = i1 , N
+    DO i = i1, N
       Y(i) = 0.0D0
     ENDDO
     RETURN
@@ -244,7 +244,8 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   gln = LOG((1.0D0+ra)/z)
   t = ra*(1.0D0-etx) + etx/(z+ra)
   arg = fn*(t-gln)
-  200  IF ( arg>=(-elim) ) GOTO 400
+  200 CONTINUE
+  IF ( arg>=(-elim) ) GOTO 400
   !
   !     SET UNDERFLOW VALUE AND UPDATE PARAMETERS
   !
@@ -320,7 +321,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
     t2 = 1.0D0
     t = 1.0D0
     s1 = fn
-    DO k = 1 , 17
+    DO k = 1, 17
       s2 = t2 + s1
       t = t*sxo2/s2
       s = s + t
@@ -376,121 +377,123 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   GOTO 700
   800  Nz = N - nn
   RETURN
-  900  IF ( kt==2 ) THEN
-  Y(1) = temp(2)
-  RETURN
-ELSE
-  s1 = temp(1)
-  s2 = temp(2)
-  trx = 2.0D0/X
-  dtm = fni
-  tm = (dtm+fnf)*trx
-  IF ( in==0 ) THEN
-    !     BACKWARD RECUR FROM INDEX ALPHA+NN-1 TO ALPHA
-    Y(nn) = s1
-    Y(nn-1) = s2
-    IF ( nn==2 ) RETURN
+  900 CONTINUE
+  IF ( kt==2 ) THEN
+    Y(1) = temp(2)
+    RETURN
   ELSE
-    !     BACKWARD RECUR TO INDEX ALPHA+NN-1
-    DO i = 1 , in
-      s = s2
-      s2 = tm*s2 + s1
-      s1 = s
+    s1 = temp(1)
+    s2 = temp(2)
+    trx = 2.0D0/X
+    dtm = fni
+    tm = (dtm+fnf)*trx
+    IF ( in==0 ) THEN
+      !     BACKWARD RECUR FROM INDEX ALPHA+NN-1 TO ALPHA
+      Y(nn) = s1
+      Y(nn-1) = s2
+      IF ( nn==2 ) RETURN
+    ELSE
+      !     BACKWARD RECUR TO INDEX ALPHA+NN-1
+      DO i = 1, in
+        s = s2
+        s2 = tm*s2 + s1
+        s1 = s
+        dtm = dtm - 1.0D0
+        tm = (dtm+fnf)*trx
+      ENDDO
+      Y(nn) = s1
+      IF ( nn==1 ) RETURN
+      Y(nn-1) = s2
+      IF ( nn==2 ) RETURN
+    ENDIF
+    k = nn + 1
+    DO i = 3, nn
+      k = k - 1
+      Y(k-2) = tm*Y(k-1) + Y(k)
       dtm = dtm - 1.0D0
       tm = (dtm+fnf)*trx
     ENDDO
-    Y(nn) = s1
-    IF ( nn==1 ) RETURN
-    Y(nn-1) = s2
-    IF ( nn==2 ) RETURN
+    RETURN
   ENDIF
-  k = nn + 1
-  DO i = 3 , nn
-    k = k - 1
-    Y(k-2) = tm*Y(k-1) + Y(k)
-    dtm = dtm - 1.0D0
-    tm = (dtm+fnf)*trx
+  1000 etx = 8.0D0*X
+  is = kt
+  in = 0
+  fn = fnu
+  1100 dx = fni + fni
+  tm = 0.0D0
+  IF ( fni/=0.0D0.OR.ABS(fnf)>=tol ) tm = 4.0D0*fnf*(fni+fni+fnf)
+  dtm = dx*dx
+  s1 = etx
+  trx = dtm - 1.0D0
+  dx = -(trx+tm)/etx
+  t = dx
+  s = 1.0D0 + dx
+  atol = tol*ABS(s)
+  s2 = 1.0D0
+  ak = 8.0D0
+  DO k = 1, 25
+    s1 = s1 + etx
+    s2 = s2 + ak
+    dx = dtm - s2
+    ap = dx + tm
+    t = -t*ap/s1
+    s = s + t
+    IF ( ABS(t)<=atol ) EXIT
+    ak = ak + 8.0D0
   ENDDO
-  RETURN
-ENDIF
-1000 etx = 8.0D0*X
-is = kt
-in = 0
-fn = fnu
-1100 dx = fni + fni
-tm = 0.0D0
-IF ( fni/=0.0D0.OR.ABS(fnf)>=tol ) tm = 4.0D0*fnf*(fni+fni+fnf)
-dtm = dx*dx
-s1 = etx
-trx = dtm - 1.0D0
-dx = -(trx+tm)/etx
-t = dx
-s = 1.0D0 + dx
-atol = tol*ABS(s)
-s2 = 1.0D0
-ak = 8.0D0
-DO k = 1 , 25
-  s1 = s1 + etx
-  s2 = s2 + ak
-  dx = dtm - s2
-  ap = dx + tm
-  t = -t*ap/s1
-  s = s + t
-  IF ( ABS(t)<=atol ) EXIT
-  ak = ak + 8.0D0
-ENDDO
-temp(is) = s*earg
-IF ( is==2 ) GOTO 900
-is = 2
-fni = fni - 1.0D0
-dfn = fni + fnf
-fn = dfn
-GOTO 1100
-1200 trx = 2.0D0/X
-dtm = fni + in
-tm = (dtm+fnf)*trx
-ta = 0.0D0
-tb = tol
-kk = 1
-DO
-  !
-  !     BACKWARD RECUR UNINDEXED
-  !
-  DO i = 1 , in
-    s = tb
-    tb = tm*tb + ta
-    ta = s
-    dtm = dtm - 1.0D0
-    tm = (dtm+fnf)*trx
+  temp(is) = s*earg
+  IF ( is==2 ) GOTO 900
+  is = 2
+  fni = fni - 1.0D0
+  dfn = fni + fnf
+  fn = dfn
+  GOTO 1100
+  1200 trx = 2.0D0/X
+  dtm = fni + in
+  tm = (dtm+fnf)*trx
+  ta = 0.0D0
+  tb = tol
+  kk = 1
+  DO
+    !
+    !     BACKWARD RECUR UNINDEXED
+    !
+    DO i = 1, in
+      s = tb
+      tb = tm*tb + ta
+      ta = s
+      dtm = dtm - 1.0D0
+      tm = (dtm+fnf)*trx
+    ENDDO
+    !     NORMALIZATION
+    IF ( kk/=1 ) EXIT
+    ta = (ta/tb)*temp(3)
+    tb = temp(3)
+    kk = 2
+    in = ns
+    IF ( ns==0 ) EXIT
   ENDDO
-  !     NORMALIZATION
-  IF ( kk/=1 ) EXIT
-  ta = (ta/tb)*temp(3)
-  tb = temp(3)
-  kk = 2
-  in = ns
-  IF ( ns==0 ) EXIT
-ENDDO
-Y(nn) = tb
-Nz = N - nn
-IF ( nn==1 ) RETURN
-tb = tm*tb + ta
-k = nn - 1
-Y(k) = tb
-IF ( nn==2 ) RETURN
-dtm = dtm - 1.0D0
-tm = (dtm+fnf)*trx
-km = k - 1
-!
-!     BACKWARD RECUR INDEXED
-!
-DO i = 1 , km
-  Y(k-1) = tm*Y(k) + Y(k+1)
+  Y(nn) = tb
+  Nz = N - nn
+  IF ( nn==1 ) RETURN
+  tb = tm*tb + ta
+  k = nn - 1
+  Y(k) = tb
+  IF ( nn==2 ) RETURN
   dtm = dtm - 1.0D0
   tm = (dtm+fnf)*trx
-  k = k - 1
-ENDDO
-RETURN
-1300 CALL XERMSG('SLATEC','DBESI','ORDER, ALPHA, LESS THAN ZERO.',2,1)
-RETURN
-99999 END SUBROUTINE DBESI
+  km = k - 1
+  !
+  !     BACKWARD RECUR INDEXED
+  !
+  DO i = 1, km
+    Y(k-1) = tm*Y(k) + Y(k+1)
+    dtm = dtm - 1.0D0
+    tm = (dtm+fnf)*trx
+    k = k - 1
+  ENDDO
+  RETURN
+  1300 CALL XERMSG('SLATEC','DBESI','ORDER, ALPHA, LESS THAN ZERO.',2,1)
+  RETURN
+  99999 CONTINUE
+  END SUBROUTINE DBESI

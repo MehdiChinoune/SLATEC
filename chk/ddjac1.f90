@@ -17,7 +17,7 @@ SUBROUTINE DDJAC1(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
   !           declarations explicit.  (FNF)
   !***END PROLOGUE  DDJAC1
   INTEGER Ipar(*)
-  REAL(8) :: T , Y(*) , Yprime(*) , Pd(2,2) , Cj , Rpar(*)
+  REAL(8) :: T, Y(*), Yprime(*), Pd(2,2), Cj, Rpar(*)
   !***FIRST EXECUTABLE STATEMENT  DDJAC1
   Pd(1,1) = Cj + 10.0D0
   Pd(1,2) = 0.0D0

@@ -20,9 +20,9 @@ SUBROUTINE CDIV(Ar,Ai,Br,Bi,Cr,Ci)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CDIV
-  REAL Ar , Ai , Br , Bi , Cr , Ci
+  REAL Ar, Ai, Br, Bi, Cr, Ci
   !
-  REAL s , ars , ais , brs , bis
+  REAL s, ars, ais, brs, bis
   !***FIRST EXECUTABLE STATEMENT  CDIV
   s = ABS(Br) + ABS(Bi)
   ars = Ar/s

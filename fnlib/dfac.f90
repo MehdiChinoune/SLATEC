@@ -4,7 +4,7 @@ REAL(8) FUNCTION DFAC(N)
   IMPLICIT NONE
   !*--DFAC5
   !*** Start of declarations inserted by SPAG
-  INTEGER N , nmax
+  INTEGER N, nmax
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DFAC
   !***PURPOSE  Compute the factorial function.
@@ -27,8 +27,8 @@ REAL(8) FUNCTION DFAC(N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DFAC
-  REAL(8) :: facn(31) , sq2pil , x , xmax , xmin , D9LGMC
-  SAVE facn , sq2pil , nmax
+  REAL(8) :: facn(31), sq2pil, x, xmax, xmin, D9LGMC
+  SAVE facn, sq2pil, nmax
   DATA facn(1)/ + .100000000000000000000000000000000D+1/
   DATA facn(2)/ + .100000000000000000000000000000000D+1/
   DATA facn(3)/ + .200000000000000000000000000000000D+1/

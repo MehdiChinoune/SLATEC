@@ -23,36 +23,36 @@ SUBROUTINE SCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  SCHK52
   !     .. Parameters ..
-  REAL ZERO , HALF , ONE
+  REAL ZERO, HALF, ONE
   PARAMETER (ZERO=0.0,HALF=0.5,ONE=1.0)
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  REAL Eps , Thresh
-  INTEGER Incmax , Kprint , Nalf , Nidim , Ninc , Nmax , Nout
+  REAL Eps, Thresh
+  INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
   CHARACTER(6) :: Sname
   !     .. Array Arguments ..
-  REAL A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) , G(Nmax) ,&
-    X(Nmax) , Xs(Nmax*Incmax) , Xx(Nmax*Incmax) , Y(Nmax) ,&
-    Ys(Nmax*Incmax) , Yt(Nmax) , Yy(Nmax*Incmax) , Z(Nmax)
-  INTEGER Idim(Nidim) , Inc(Ninc)
+  REAL A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), G(Nmax) ,&
+    X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax) ,&
+    Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
+  INTEGER Idim(Nidim), Inc(Ninc)
   !     .. Local Scalars ..
-  REAL alpha , als , err , errmax , transl
-  INTEGER i , ia , ic , in , incx , incxs , ix , j , ja , jj , laa , lda ,&
-    ldas , lj , lx , n , nargs , nc , ns , nerr
-  LOGICAL ftl , full , null , packed , reset , upper
-  CHARACTER :: uplo , uplos
+  REAL alpha, als, err, errmax, transl
+  INTEGER i, ia, ic, in, incx, incxs, ix, j, ja, jj, laa, lda ,&
+    ldas, lj, lx, n, nargs, nc, ns, nerr
+  LOGICAL ftl, full, null, packed, reset, upper
+  CHARACTER :: uplo, uplos
   CHARACTER(2) :: ich
   !     .. Local Arrays ..
   REAL w(1)
   LOGICAL isame(13)
   !     .. External Functions ..
   INTEGER NUMXER
-  LOGICAL LSE , LSERES
-  EXTERNAL LSE , LSERES , NUMXER
+  LOGICAL LSE, LSERES
+  EXTERNAL LSE, LSERES, NUMXER
   !     .. External Subroutines ..
-  EXTERNAL SMAKE2 , SMVCH , SSPR , SSYR
+  EXTERNAL SMAKE2, SMVCH, SSPR, SSYR
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MAX
+  INTRINSIC ABS, MAX
   !     .. Data statements ..
   DATA ich/'UL'/
   !***FIRST EXECUTABLE STATEMENT  SCHK52
@@ -69,7 +69,7 @@ SUBROUTINE SCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   reset = .TRUE.
   errmax = ZERO
   !
-  DO in = 1 , Nidim
+  DO in = 1, Nidim
     n = Idim(in)
     !        Set LDA to 1 more than minimum value if room.
     lda = n
@@ -82,11 +82,11 @@ SUBROUTINE SCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
         laa = lda*n
       ENDIF
       !
-      DO ic = 1 , 2
+      DO ic = 1, 2
         uplo = ich(ic:ic)
         upper = uplo=='U'
         !
-        DO ix = 1 , Ninc
+        DO ix = 1, Ninc
           incx = Inc(ix)
           lx = ABS(incx)*n
           !
@@ -99,7 +99,7 @@ SUBROUTINE SCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
             Xx(1+ABS(incx)*(n/2-1)) = ZERO
           ENDIF
           !
-          DO ia = 1 , Nalf
+          DO ia = 1, Nalf
             alpha = Alf(ia)
             null = n<=0 .OR. alpha==ZERO
             !
@@ -116,11 +116,11 @@ SUBROUTINE SCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
             uplos = uplo
             ns = n
             als = alpha
-            DO i = 1 , laa
+            DO i = 1, laa
               As(i) = Aa(i)
             ENDDO
             ldas = lda
-            DO i = 1 , lx
+            DO i = 1, lx
               Xs(i) = Xx(i)
             ENDDO
             incxs = incx
@@ -156,7 +156,7 @@ SUBROUTINE SCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
             !
             !                 If data was incorrectly changed, report and return.
             !
-            DO i = 1 , nargs
+            DO i = 1, nargs
               IF ( .NOT.isame(i) ) THEN
                 Fatal = .TRUE.
                 IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
@@ -168,16 +168,16 @@ SUBROUTINE SCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
               !                    Check the result column by column.
               !
               IF ( incx>0 ) THEN
-                DO i = 1 , n
+                DO i = 1, n
                   Z(i) = X(i)
                 ENDDO
               ELSE
-                DO i = 1 , n
+                DO i = 1, n
                   Z(i) = X(n-i+1)
                 ENDDO
               ENDIF
               ja = 1
-              DO j = 1 , n
+              DO j = 1, n
                 w(1) = Z(j)
                 IF ( upper ) THEN
                   jj = 1
@@ -203,10 +203,10 @@ SUBROUTINE SCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                     WRITE (Nout,FMT=99005) j
                     WRITE (Nout,FMT=99004) Sname
                     IF ( full ) THEN
-                      WRITE (Nout,FMT=99007) nc , Sname , uplo , n , alpha ,&
-                        incx , lda
+                      WRITE (Nout,FMT=99007) nc, Sname, uplo, n, alpha ,&
+                        incx, lda
                     ELSEIF ( packed ) THEN
-                      WRITE (Nout,FMT=99006) nc , Sname , uplo , n , alpha ,&
+                      WRITE (Nout,FMT=99006) nc, Sname, uplo, n, alpha ,&
                         incx
                     ENDIF
                   ENDIF
@@ -228,9 +228,9 @@ SUBROUTINE SCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   IF ( .NOT.(Fatal) ) THEN
     IF ( Kprint>=3 ) THEN
       IF ( errmax<Thresh ) THEN
-        WRITE (Nout,FMT=99001) Sname , nc
+        WRITE (Nout,FMT=99001) Sname, nc
       ELSE
-        WRITE (Nout,FMT=99003) Sname , nc , errmax
+        WRITE (Nout,FMT=99003) Sname, nc, errmax
       ENDIF
     ENDIF
   ENDIF

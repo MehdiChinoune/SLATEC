@@ -4,7 +4,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   IMPLICIT NONE
   !*--LPDP5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , iw , ix , j , l , M , Mda , Mode , modew , n , N1 , N2 , np1
+  INTEGER i, iw, ix, j, l, M, Mda, Mode, modew, n, N1, N2, np1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  LPDP
   !***SUBSIDIARY
@@ -63,12 +63,12 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !     SSCAL,SNRM2,  SEE TRANS. MATH. SOFT., VOL. 5, NO. 3, P. 308.
   !     SCOPY
   !
-  REAL A(Mda,*) , Prgopt(*) , Ws(*) , Wnorm , X(*)
+  REAL A(Mda,*), Prgopt(*), Ws(*), Wnorm, X(*)
   INTEGER Is(*)
-  REAL fac , one , rnorm , sc , ynorm , zero
-  REAL SDOT , SNRM2
-  SAVE zero , one , fac
-  DATA zero , one/0.E0 , 1.E0/ , fac/0.1E0/
+  REAL fac, one, rnorm, sc, ynorm, zero
+  REAL SDOT, SNRM2
+  SAVE zero, one, fac
+  DATA zero, one/0.E0, 1.E0/, fac/0.1E0/
   !***FIRST EXECUTABLE STATEMENT  LPDP
   n = N1 + N2
   Mode = 1
@@ -76,7 +76,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
     np1 = n + 1
     !
     !     SCALE NONZERO ROWS OF INEQUALITY MATRIX TO HAVE LENGTH ONE.
-    DO i = 1 , M
+    DO i = 1, M
       sc = SNRM2(n,A(i,1),Mda)
       IF ( sc/=zero ) THEN
         sc = one/sc
@@ -104,7 +104,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       !
       !     COPY TRANSPOSE OF (H G Y) TO WORK ARRAY WS(*).
       iw = 0
-      DO i = 1 , M
+      DO i = 1, M
         !
         !     MOVE COL OF TRANSPOSE OF H INTO WORK ARRAY.
         CALL SCOPY(N2,A(i,N1+1),Mda,Ws(iw+1),1)
@@ -142,12 +142,12 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
         RETURN
       ELSE
         sc = one/sc
-        DO j = 1 , N1
+        DO j = 1, N1
           X(j) = sc*SDOT(M,A(1,j),1,Ws(ix),1)
         ENDDO
         !
         !     COMPUTE THE VECTOR Q=Y-GW.  OVERWRITE Y WITH THIS VECTOR.
-        DO i = 1 , M
+        DO i = 1, M
           A(i,np1) = A(i,np1) - SDOT(N1,A(i,1),Mda,X,1)
         ENDDO
       ENDIF
@@ -156,7 +156,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       !
       !     COPY TRANSPOSE OF (H Q) TO WORK ARRAY WS(*).
       iw = 0
-      DO i = 1 , M
+      DO i = 1, M
         CALL SCOPY(N2,A(i,N1+1),Mda,Ws(iw+1),1)
         iw = iw + N2
         Ws(iw+1) = A(i,np1)
@@ -186,7 +186,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
         RETURN
       ELSE
         sc = one/sc
-        DO j = 1 , N2
+        DO j = 1, N2
           l = N1 + j
           X(l) = sc*SDOT(M,A(1,l),1,Ws(ix),1)*X(l)
         ENDDO

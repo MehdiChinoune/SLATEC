@@ -5,7 +5,7 @@ REAL(8) FUNCTION DBSI1E(X)
   !*--DBSI1E5
   !*** Start of declarations inserted by SPAG
   REAL eta
-  INTEGER INITDS , ntai1 , ntai12 , nti1
+  INTEGER INITDS, ntai1, ntai12, nti1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBSI1E
   !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
@@ -51,10 +51,10 @@ REAL(8) FUNCTION DBSI1E(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBSI1E
-  REAL(8) :: X , bi1cs(17) , ai1cs(46) , ai12cs(69) , xmin , xsml , &
-    y , D1MACH , DCSEVL
+  REAL(8) :: X, bi1cs(17), ai1cs(46), ai12cs(69), xmin, xsml, &
+    y, D1MACH, DCSEVL
   LOGICAL first
-  SAVE bi1cs , ai1cs , ai12cs , nti1 , ntai1 , ntai12 , xmin , xsml , first
+  SAVE bi1cs, ai1cs, ai12cs, nti1, ntai1, ntai12, xmin, xsml, first
   DATA bi1cs(1)/ - .19717132610998597316138503218149D-2/
   DATA bi1cs(2)/ + .40734887667546480608155393652014D+0/
   DATA bi1cs(3)/ + .34838994299959455866245037783787D-1/
@@ -221,4 +221,5 @@ REAL(8) FUNCTION DBSI1E(X)
   DBSI1E = EXP(-y)*DBSI1E
   RETURN
   !
-  99999 END FUNCTION DBSI1E
+  99999 CONTINUE
+  END FUNCTION DBSI1E

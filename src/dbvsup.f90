@@ -22,7 +22,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     Subroutine DBVSUP solves a linear two-point boundary-value problem
   !     of the form
   !                        DY/DX = MATRIX(X,U)*Y(X) + G(X,U)
-  !                A*Y(XINITIAL) = ALPHA ,  B*Y(XFINAL) = BETA
+  !                A*Y(XINITIAL) = ALPHA,  B*Y(XFINAL) = BETA
   !
   !     coupled with the solution of the initial value problem
   !
@@ -112,7 +112,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !  However, when the ADAMS integrator is to be used, the estimates are
   !            NDW = 130 + NCOMP**2 * (13 + NXPTS/2 + expected number of
   !                                           orthonormalizations/8)
-  !    and     NDW = 13 * NCOMP**2 + 22 * NCOMP + 130   , respectively.
+  !    and     NDW = 13 * NCOMP**2 + 22 * NCOMP + 130  , respectively.
   !
   !     IWORK(NDIW) = integer array used for internal storage.
   !
@@ -153,7 +153,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !              YP = DY/DX = derivative vector (output from DFMAT)
   !
   !            Compute the derivatives for the homogeneous problem
-  !              YP(I) = DY(I)/DX = MATRIX(X) * Y(I)  , I = 1,...,NCOMP
+  !              YP(I) = DY(I)/DX = MATRIX(X) * Y(I) , I = 1,...,NCOMP
   !
   !            When (NEQIVP .GT. 0) and  matrix  is dependent on  U  as
   !            well as on  X, the following common statement must be
@@ -177,7 +177,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !            computed if X is unequal to XS, whereupon XS is reset to X.
   !
   !
-  !        B. If  NEQIVP .GT. 0 ,  DUIVP must also be supplied.
+  !        B. If  NEQIVP .GT. 0,  DUIVP must also be supplied.
   !
   !              SUBROUTINE DUIVP(X,U,UP)
   !              X = independent variable (input to DUIVP)
@@ -191,7 +191,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !            derivatives for the auxiliary initial value equations.
   !
   !
-  !        C. If  NEQIVP = 0  and  IGOFX = 1 ,  DGVEC must be supplied.
+  !        C. If  NEQIVP = 0  and  IGOFX = 1,  DGVEC must be supplied.
   !
   !              SUBROUTINE DGVEC(X,G)
   !              X = independent variable (input to DGVEC)
@@ -209,7 +209,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !            via the DBVDER subroutine.
   !
   !
-  !        D. If  NEQIVP .GT. 0  and  IGOFX = 1 ,  DUVEC must be supplied.
+  !        D. If  NEQIVP .GT. 0  and  IGOFX = 1,  DUVEC must be supplied.
   !
   !             SUBROUTINE DUVEC(X,U,G)
   !             X = independent variable (input to DUVEC)
@@ -270,7 +270,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !       Suppose the original boundary value problem is NC equations
   !     of the form
   !                   DW/DX = MAT(X,U)*W(X) + H(X,U)
-  !                 R*W(XINITIAL)=GAMMA , S*W(XFINAL)=DELTA
+  !                 R*W(XINITIAL)=GAMMA, S*W(XFINAL)=DELTA
   !     where all variables are COMPLEX*16 valued. The DBVSUP code can be
   !     used by converting to a double precision system of size 2*NC. To
   !     solve the larger dimensioned problem efficiently, the user must
@@ -408,38 +408,38 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !***END PROLOGUE  DBVSUP
   ! **********************************************************************
   !
-  INTEGER ICOco , Iflag , Igofx , IGOfxd , INDpvt , INFo , INHomo , INTeg ,&
-    is , ISTkop , IVP , Iwork(*) , j , k , K1 , K10 , K11 , K2 , K3 ,&
-    K4 , K5 , K6 , K7 , K8 , K9 , kkkcoe , kkkcof , kkkg , KKKint ,&
-    kkks , kkksto , kkksud , kkksvc , kkku , kkkv , kkkws , kkkyhp ,&
-    KKKzpw , KNSwot , KOP , kpts , L1 , L2 , lllcof , LLLint , lllip ,&
-    llliws , lllsud , lllsvc , LOTjp , LPAr , MNSwot , MXNon ,&
-    mxnoni , mxnonr , Ncomp , NCOmpd , ndeq , NDIsk , Ndiw , Ndw ,&
-    NEEdiw , NEEdw , NEQ , NEQivd , Neqivp , Nfc , NFCc , NFCd , Nic ,&
-    NICd , nitemp , non , NOPg , NPS , Nrowa , Nrowb , Nrowy ,&
-    nrtemp , NSWot , NTApe , NTP , NUMort , Nxpts , NXPtsd , nxptsm
-  REAL(8) :: A(Nrowa,*) , Ae , AED , Alpha(*) , B(Nrowb,*) , Beta(*) ,&
-    C , EPS , FOUru , PWCnd , PX , Re , RED , SQOvfl , SRU ,&
-    TND , TOL , TWOu , URO , Work(Ndw) , X , XBEg , XENd ,&
-    XOP , XOT , Xpts(*) , XSAv , Y(Nrowy,*)
-  CHARACTER(8) :: xern1 , xern2 , xern3 , xern4
+  INTEGER ICOco, Iflag, Igofx, IGOfxd, INDpvt, INFo, INHomo, INTeg ,&
+    is, ISTkop, IVP, Iwork(*), j, k, K1, K10, K11, K2, K3 ,&
+    K4, K5, K6, K7, K8, K9, kkkcoe, kkkcof, kkkg, KKKint ,&
+    kkks, kkksto, kkksud, kkksvc, kkku, kkkv, kkkws, kkkyhp ,&
+    KKKzpw, KNSwot, KOP, kpts, L1, L2, lllcof, LLLint, lllip ,&
+    llliws, lllsud, lllsvc, LOTjp, LPAr, MNSwot, MXNon ,&
+    mxnoni, mxnonr, Ncomp, NCOmpd, ndeq, NDIsk, Ndiw, Ndw ,&
+    NEEdiw, NEEdw, NEQ, NEQivd, Neqivp, Nfc, NFCc, NFCd, Nic ,&
+    NICd, nitemp, non, NOPg, NPS, Nrowa, Nrowb, Nrowy ,&
+    nrtemp, NSWot, NTApe, NTP, NUMort, Nxpts, NXPtsd, nxptsm
+  REAL(8) :: A(Nrowa,*), Ae, AED, Alpha(*), B(Nrowb,*), Beta(*) ,&
+    C, EPS, FOUru, PWCnd, PX, Re, RED, SQOvfl, SRU ,&
+    TND, TOL, TWOu, URO, Work(Ndw), X, XBEg, XENd ,&
+    XOP, XOT, Xpts(*), XSAv, Y(Nrowy,*)
+  CHARACTER(8) :: xern1, xern2, xern3, xern4
   !
   !     ******************************************************************
   !         THE COMMON BLOCK BELOW IS USED TO COMMUNICATE WITH SUBROUTINE
   !         DBVDER.  THE USER SHOULD NOT ALTER OR USE THIS COMMON BLOCK IN
   !         THE CALLING PROGRAM.
   !
-  COMMON /DML8SZ/ C , XSAv , IGOfxd , INHomo , IVP , NCOmpd , NFCd
+  COMMON /DML8SZ/ C, XSAv, IGOfxd, INHomo, IVP, NCOmpd, NFCd
   !
   !     ******************************************************************
   !         THESE COMMON BLOCKS AID IN REDUCING THE NUMBER OF SUBROUTINE
   !         ARGUMENTS PREVALENT IN THIS MODULAR STRUCTURE
   !
-  COMMON /DML18J/ AED , RED , TOL , NXPtsd , NICd , NOPg , MXNon , NDIsk ,&
-    NTApe , NEQ , INDpvt , INTeg , NPS , NTP , NEQivd ,&
-    NUMort , NFCc , ICOco
-  COMMON /DML17B/ KKKzpw , NEEdw , NEEdiw , K1 , K2 , K3 , K4 , K5 , K6 ,&
-    K7 , K8 , K9 , K10 , K11 , L1 , L2 , KKKint , LLLint
+  COMMON /DML18J/ AED, RED, TOL, NXPtsd, NICd, NOPg, MXNon, NDIsk ,&
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivd ,&
+    NUMort, NFCc, ICOco
+  COMMON /DML17B/ KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6 ,&
+    K7, K8, K9, K10, K11, L1, L2, KKKint, LLLint
   !
   !     ******************************************************************
   !         THIS COMMON BLOCK IS USED IN SUBROUTINES DBVSUP,DBVPOR,DRKFAB,
@@ -447,14 +447,14 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !         FOR THE ORTHONORMALIZATION TESTING PROCEDURE AND A BACKUP
   !         RESTARTING CAPABILITY.
   !
-  COMMON /DML15T/ PX , PWCnd , TND , X , XBEg , XENd , XOT , XOP , INFo(15)&
-    , ISTkop , KNSwot , KOP , LOTjp , MNSwot , NSWot
+  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
+    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
   !
   !     ******************************************************************
   !         THIS COMMON BLOCK CONTAINS THE MACHINE DEPENDENT PARAMETERS
   !         USED BY THE CODE
   !
-  COMMON /DML5MC/ URO , SRU , EPS , SQOvfl , TWOu , FOUru , LPAr
+  COMMON /DML5MC/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
   !
   !      *****************************************************************
   !          SET UP MACHINE DEPENDENT CONSTANTS.
@@ -480,7 +480,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                         is = 1
                         IF ( Xpts(Nxpts)<Xpts(1) ) is = 2
                         nxptsm = Nxpts - 1
-                        DO k = 1 , nxptsm
+                        DO k = 1, nxptsm
                           IF ( is==2 ) THEN
                             !                          .........EXIT
                             IF ( Xpts(k)<=Xpts(k+1) ) GOTO 100
@@ -513,11 +513,11 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                         !
                         !                 ............EXIT
                         IF ( Igofx==1 ) GOTO 300
-                        DO j = 1 , Nic
+                        DO j = 1, Nic
                           !                 ...............EXIT
                           IF ( Alpha(j)/=0.0D0 ) GOTO 300
                         ENDDO
-                        DO j = 1 , Nfc
+                        DO j = 1, Nfc
                           !                    ............EXIT
                           IF ( Beta(j)/=0.0D0 ) GOTO 200
                         ENDDO
@@ -535,7 +535,8 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       ENDIF
     ENDIF
   ENDIF
-  100  Iflag = -2
+  100 CONTINUE
+  IFlag = -2
   !     ..................EXIT
   GOTO 99999
   200  INHomo = 2
@@ -733,4 +734,5 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   CALL DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
   Nfc = NFCc
   Iwork(17) = Iwork(L1)
-  99999 END SUBROUTINE DBVSUP
+  99999 CONTINUE
+  END SUBROUTINE DBVSUP

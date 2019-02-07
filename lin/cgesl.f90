@@ -72,11 +72,11 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CGESL
-  INTEGER Lda , N , Ipvt(*) , Job
-  COMPLEX A(Lda,*) , B(*)
+  INTEGER Lda, N, Ipvt(*), Job
+  COMPLEX A(Lda,*), B(*)
   !
-  COMPLEX CDOTC , t
-  INTEGER k , kb , l , nm1
+  COMPLEX CDOTC, t
+  INTEGER k, kb, l, nm1
   !***FIRST EXECUTABLE STATEMENT  CGESL
   nm1 = N - 1
   IF ( Job/=0 ) THEN
@@ -84,7 +84,7 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
     !        JOB = NONZERO, SOLVE  CTRANS(A) * X = B
     !        FIRST SOLVE  CTRANS(U)*Y = B
     !
-    DO k = 1 , N
+    DO k = 1, N
       t = CDOTC(k-1,A(1,k),1,B(1),1)
       B(k) = (B(k)-t)/CONJG(A(k,k))
     ENDDO
@@ -92,7 +92,7 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
     !        NOW SOLVE CTRANS(L)*X = Y
     !
     IF ( nm1>=1 ) THEN
-      DO kb = 1 , nm1
+      DO kb = 1, nm1
         k = N - kb
         B(k) = B(k) + CDOTC(N-k,A(k+1,k),1,B(k+1),1)
         l = Ipvt(k)
@@ -105,11 +105,11 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
     ENDIF
   ELSE
     !
-    !        JOB = 0 , SOLVE  A * X = B
+    !        JOB = 0, SOLVE  A * X = B
     !        FIRST SOLVE  L*Y = B
     !
     IF ( nm1>=1 ) THEN
-      DO k = 1 , nm1
+      DO k = 1, nm1
         l = Ipvt(k)
         t = B(l)
         IF ( l/=k ) THEN
@@ -122,7 +122,7 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
     !
     !        NOW SOLVE  U*X = Y
     !
-    DO kb = 1 , N
+    DO kb = 1, N
       k = N + 1 - kb
       B(k) = B(k)/A(k,k)
       t = -B(k)

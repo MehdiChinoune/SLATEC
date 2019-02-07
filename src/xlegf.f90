@@ -4,7 +4,7 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
   !*--XLEGF5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Id , Ierror , Ipqa , l , Mu1 , Mu2 , Nudiff
+  INTEGER i, Id, Ierror, Ipqa, l, Mu1, Mu2, Nudiff
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XLEGF
   !***PURPOSE  Compute normalized Legendre polynomials and associated
@@ -129,8 +129,8 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  XLEGF
-  REAL Pqa , Dnu1 , dnu2 , sx , Theta , x , pi2
-  DIMENSION Pqa(*) , Ipqa(*)
+  REAL Pqa, Dnu1, dnu2, sx, Theta, x, pi2
+  DIMENSION Pqa(*), Ipqa(*)
   !
   !***FIRST EXECUTABLE STATEMENT  XLEGF
   Ierror = 0
@@ -141,7 +141,7 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !        ZERO OUTPUT ARRAYS
   !
   l = (Mu2-Mu1) + Nudiff + 1
-  DO i = 1 , l
+  DO i = 1, l
     Pqa(i) = 0.
     Ipqa(i) = 0
   ENDDO
@@ -220,7 +220,7 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
               !        PLACE RESULTS IN REDUCED FORM IF POSSIBLE
               !        AND RETURN TO MAIN PROGRAM.
               !
-              DO i = 1 , l
+              DO i = 1, l
                 CALL XRED(Pqa(i),Ipqa(i),Ierror)
                 IF ( Ierror/=0 ) RETURN
               ENDDO
@@ -238,4 +238,5 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
     110,1)
   Ierror = 110
   RETURN
-  99999 END SUBROUTINE XLEGF
+  99999 CONTINUE
+  END SUBROUTINE XLEGF

@@ -101,16 +101,16 @@ SUBROUTINE SSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !***END PROLOGUE  SSYR2
   !     .. Scalar Arguments ..
   REAL Alpha
-  INTEGER Incx , Incy , Lda , N
+  INTEGER Incx, Incy, Lda, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  REAL A(Lda,*) , X(*) , Y(*)
+  REAL A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
   REAL ZERO
   PARAMETER (ZERO=0.0E+0)
   !     .. Local Scalars ..
-  REAL temp1 , temp2
-  INTEGER i , info , ix , iy , j , jx , jy , kx , ky
+  REAL temp1, temp2
+  INTEGER i, info, ix, iy, j, jx, jy, kx, ky
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
@@ -170,23 +170,23 @@ SUBROUTINE SSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
     !        Form  A  when A is stored in the upper triangle.
     !
     IF ( (Incx==1).AND.(Incy==1) ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( (X(j)/=ZERO).OR.(Y(j)/=ZERO) ) THEN
           temp1 = Alpha*Y(j)
           temp2 = Alpha*X(j)
-          DO i = 1 , j
+          DO i = 1, j
             A(i,j) = A(i,j) + X(i)*temp1 + Y(i)*temp2
           ENDDO
         ENDIF
       ENDDO
     ELSE
-      DO j = 1 , N
+      DO j = 1, N
         IF ( (X(jx)/=ZERO).OR.(Y(jy)/=ZERO) ) THEN
           temp1 = Alpha*Y(jy)
           temp2 = Alpha*X(jx)
           ix = kx
           iy = ky
-          DO i = 1 , j
+          DO i = 1, j
             A(i,j) = A(i,j) + X(ix)*temp1 + Y(iy)*temp2
             ix = ix + Incx
             iy = iy + Incy
@@ -200,23 +200,23 @@ SUBROUTINE SSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
     !        Form  A  when A is stored in the lower triangle.
     !
   ELSEIF ( (Incx==1).AND.(Incy==1) ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       IF ( (X(j)/=ZERO).OR.(Y(j)/=ZERO) ) THEN
         temp1 = Alpha*Y(j)
         temp2 = Alpha*X(j)
-        DO i = j , N
+        DO i = j, N
           A(i,j) = A(i,j) + X(i)*temp1 + Y(i)*temp2
         ENDDO
       ENDIF
     ENDDO
   ELSE
-    DO j = 1 , N
+    DO j = 1, N
       IF ( (X(jx)/=ZERO).OR.(Y(jy)/=ZERO) ) THEN
         temp1 = Alpha*Y(jy)
         temp2 = Alpha*X(jx)
         ix = jx
         iy = jy
-        DO i = j , N
+        DO i = j, N
           A(i,j) = A(i,j) + X(ix)*temp1 + Y(iy)*temp2
           ix = ix + Incx
           iy = iy + Incy

@@ -100,12 +100,12 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BINT4
   !
-  INTEGER i , Ibcl , Ibcr , iflag , ilb , ileft , it , iub , iw , iwp , j , &
-    jw , K , Kntopt , N , Ndata , ndm , np , nwrow
-  REAL Bcoef , Fbcl , Fbcr , T , tol , txn , tx1 , vnikx , W , wdtol , &
-    work , X , xl , Y
+  INTEGER i, Ibcl, Ibcr, iflag, ilb, ileft, it, iub, iw, iwp, j, &
+    jw, K, Kntopt, N, Ndata, ndm, np, nwrow
+  REAL Bcoef, Fbcl, Fbcr, T, tol, txn, tx1, vnikx, W, wdtol, &
+    work, X, xl, Y
   REAL R1MACH
-  DIMENSION X(*) , Y(*) , T(*) , Bcoef(*) , W(5,*) , vnikx(4,4) , work(15)
+  DIMENSION X(*), Y(*), T(*), Bcoef(*), W(5,*), vnikx(4,4), work(15)
   !***FIRST EXECUTABLE STATEMENT  BINT4
   wdtol = R1MACH(4)
   tol = SQRT(wdtol)
@@ -114,7 +114,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
     RETURN
   ELSE
     ndm = Ndata - 1
-    DO i = 1 , ndm
+    DO i = 1, ndm
       IF ( X(i)>=X(i+1) ) GOTO 50
     ENDDO
     IF ( Ibcl<1.OR.Ibcl>2 ) THEN
@@ -130,7 +130,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       K = 4
       N = Ndata + 2
       np = N + 1
-      DO i = 1 , Ndata
+      DO i = 1, Ndata
         T(i+3) = X(i)
       ENDDO
       SELECT CASE (Kntopt)
@@ -139,13 +139,13 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
           IF ( Ndata>3 ) THEN
             tx1 = X(1) + X(1)
             txn = X(Ndata) + X(Ndata)
-            DO i = 1 , 3
+            DO i = 1, 3
               T(4-i) = tx1 - X(i+1)
               T(np+i) = txn - X(Ndata-i)
             ENDDO
           ELSE
             xl = (X(Ndata)-X(1))/3.0E0
-            DO i = 1 , 3
+            DO i = 1, 3
               T(4-i) = T(5-i) - xl
               T(np+i) = T(np+i-1) + xl
             ENDDO
@@ -153,7 +153,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
         CASE (3)
           !     SET UP KNOT ARRAY LESS THAN X(1) AND GREATER THAN X(NDATA) TO BE
           !     SUPPLIED BY USER IN WORK LOCATIONS W(1) THROUGH W(6) WHEN KNTOPT=3
-          DO i = 1 , 3
+          DO i = 1, 3
             T(4-i) = W(4-i,1)
             jw = MAX(1,i-1)
             iw = MOD(i+2,5) + 1
@@ -163,14 +163,14 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
           ENDDO
         CASE DEFAULT
           !     SET UP KNOT ARRAY WITH MULTIPLICITY 4 AT X(1) AND X(NDATA)
-          DO i = 1 , 3
+          DO i = 1, 3
             T(4-i) = X(1)
             T(np+i) = X(Ndata)
           ENDDO
       END SELECT
       !
-      DO i = 1 , 5
-        DO j = 1 , N
+      DO i = 1, 5
+        DO j = 1, N
           W(i,j) = 0.0E0
         ENDDO
       ENDDO
@@ -180,7 +180,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       CALL BSPVD(T,K,it,X(1),K,4,vnikx,work)
       iw = 0
       IF ( ABS(vnikx(3,1))<tol ) iw = 1
-      DO j = 1 , 3
+      DO j = 1, 3
         W(j+1,4-j) = vnikx(4-j,it)
         W(j,4-j) = vnikx(4-j,1)
       ENDDO
@@ -189,10 +189,10 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       !     SET UP INTERPOLATION EQUATIONS FOR POINTS I=2 TO I=NDATA-1
       ileft = 4
       IF ( ndm>=2 ) THEN
-        DO i = 2 , ndm
+        DO i = 2, ndm
           ileft = ileft + 1
           CALL BSPVD(T,K,1,X(i),ileft,4,vnikx,work)
-          DO j = 1 , 3
+          DO j = 1, 3
             W(j+1,3+i-j) = vnikx(4-j,1)
           ENDDO
           Bcoef(i+1) = Y(i)
@@ -204,7 +204,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       CALL BSPVD(T,K,it,X(Ndata),ileft,4,vnikx,work)
       jw = 0
       IF ( ABS(vnikx(2,1))<tol ) jw = 1
-      DO j = 1 , 3
+      DO j = 1, 3
         W(j+1,3+Ndata-j) = vnikx(5-j,it)
         W(j+2,3+Ndata-j) = vnikx(5-j,1)
       ENDDO

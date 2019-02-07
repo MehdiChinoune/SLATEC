@@ -23,19 +23,19 @@ SUBROUTINE CMPARE(Icnt,Itest)
   !     .. Array Arguments ..
   INTEGER Itest(9)
   !     .. Scalars in Common ..
-  REAL EPS , RP , SVEps , TOL
-  INTEGER IERp , IERr , NORd , NORdp
+  REAL EPS, RP, SVEps, TOL
+  INTEGER IERp, IERr, NORd, NORdp
   !     .. Arrays in Common ..
   REAL R(11)
   !     .. Local Scalars ..
-  REAL rpp , ss
-  INTEGER ierpp , nrdp
+  REAL rpp, ss
+  INTEGER ierpp, nrdp
   !     .. Local Arrays ..
   INTEGER itemp(4)
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !     .. Common blocks ..
-  COMMON /CHECK / EPS , R , RP , SVEps , TOL , NORdp , NORd , IERp , IERr
+  COMMON /CHECK / EPS, R, RP, SVEps, TOL, NORdp, NORd, IERp, IERr
   !***FIRST EXECUTABLE STATEMENT  CMPARE
   Icnt = Icnt + 1
   itemp(1) = 0

@@ -64,14 +64,14 @@ SUBROUTINE DQK41(F,A,B,Result,Abserr,Resabs,Resasc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQK41
   !
-  REAL(8) :: A , absc , Abserr , B , centr , dhlgth , D1MACH , &
-    epmach , F , fc , fsum , fval1 , fval2 , fv1 , fv2 , &
-    hlgth , Resabs , Resasc , resg , resk , reskh , Result , &
-    uflow , wg , wgk , xgk
-  INTEGER j , jtw , jtwm1
+  REAL(8) :: A, absc, Abserr, B, centr, dhlgth, D1MACH, &
+    epmach, F, fc, fsum, fval1, fval2, fv1, fv2, &
+    hlgth, Resabs, Resasc, resg, resk, reskh, Result, &
+    uflow, wg, wgk, xgk
+  INTEGER j, jtw, jtwm1
   EXTERNAL F
   !
-  DIMENSION fv1(20) , fv2(20) , xgk(21) , wgk(21) , wg(10)
+  DIMENSION fv1(20), fv2(20), xgk(21), wgk(21), wg(10)
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE INTERVAL (-1,1).
   !           BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND THEIR
@@ -92,7 +92,7 @@ SUBROUTINE DQK41(F,A,B,Result,Abserr,Resabs,Resasc)
   ! AS EVALUATED WITH 80 DECIMAL DIGIT ARITHMETIC BY L. W. FULLERTON,
   ! BELL LABS, NOV. 1981.
   !
-  SAVE wg , xgk , wgk
+  SAVE wg, xgk, wgk
   DATA wg(1)/0.017614007139152118311861962351853D0/
   DATA wg(2)/0.040601429800386941331039952274932D0/
   DATA wg(3)/0.062672048334109063569506535187042D0/
@@ -182,7 +182,7 @@ SUBROUTINE DQK41(F,A,B,Result,Abserr,Resabs,Resasc)
   fc = F(centr)
   resk = wgk(21)*fc
   Resabs = ABS(resk)
-  DO j = 1 , 10
+  DO j = 1, 10
     jtw = j*2
     absc = hlgth*xgk(jtw)
     fval1 = F(centr-absc)
@@ -194,7 +194,7 @@ SUBROUTINE DQK41(F,A,B,Result,Abserr,Resabs,Resasc)
     resk = resk + wgk(jtw)*fsum
     Resabs = Resabs + wgk(jtw)*(ABS(fval1)+ABS(fval2))
   ENDDO
-  DO j = 1 , 10
+  DO j = 1, 10
     jtwm1 = j*2 - 1
     absc = hlgth*xgk(jtwm1)
     fval1 = F(centr-absc)
@@ -207,7 +207,7 @@ SUBROUTINE DQK41(F,A,B,Result,Abserr,Resabs,Resasc)
   ENDDO
   reskh = resk*0.5D+00
   Resasc = wgk(21)*ABS(fc-reskh)
-  DO j = 1 , 20
+  DO j = 1, 20
     Resasc = Resasc + wgk(j)*(ABS(fv1(j)-reskh)+ABS(fv2(j)-reskh))
   ENDDO
   Result = resk*hlgth

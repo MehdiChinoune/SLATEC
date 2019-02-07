@@ -344,12 +344,12 @@ SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  CDRIV2
-  EXTERNAL F , G
-  COMPLEX Work(*) , Y(*)
-  REAL Eps , Ewt , ewtcom(1) , G , hmax , T , Tout
+  EXTERNAL F, G
+  COMPLEX Work(*), Y(*)
+  REAL Eps, Ewt, ewtcom(1), G, hmax, T, Tout
   INTEGER Iwork(*)
-  INTEGER Ierflg , ierror , IMPL , Leniw , Lenw , Mint , miter , ml , &
-    Mstate , mu , mxord , MXSTEP , N , nde , Nroot , nstate , ntask
+  INTEGER Ierflg, ierror, IMPL, Leniw, Lenw, Mint, miter, ml, &
+    Mstate, mu, mxord, MXSTEP, N, nde, Nroot, nstate, ntask
   CHARACTER intgr1*8
   PARAMETER (IMPL=0,MXSTEP=1000)
   !***FIRST EXECUTABLE STATEMENT  CDRIV2

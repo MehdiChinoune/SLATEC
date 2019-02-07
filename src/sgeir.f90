@@ -109,9 +109,9 @@ SUBROUTINE SGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SGEIR
   !
-  INTEGER Lda , N , Itask , Ind , Iwork(*) , info , j
-  REAL A(Lda,*) , V(*) , Work(N,*) , xnorm , dnorm , SDSDOT , SASUM , R1MACH
-  CHARACTER(8) :: xern1 , xern2
+  INTEGER Lda, N, Itask, Ind, Iwork(*), info, j
+  REAL A(Lda,*), V(*), Work(N,*), xnorm, dnorm, SDSDOT, SASUM, R1MACH
+  CHARACTER(8) :: xern1, xern2
   !***FIRST EXECUTABLE STATEMENT  SGEIR
   IF ( Lda<N ) THEN
     Ind = -1
@@ -140,7 +140,7 @@ SUBROUTINE SGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
     !
     !        MOVE MATRIX A TO WORK
     !
-    DO j = 1 , N
+    DO j = 1, N
       CALL SCOPY(N,A(1,j),1,Work(1,j),1)
     ENDDO
     !
@@ -173,7 +173,7 @@ SUBROUTINE SGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !
   !     COMPUTE  RESIDUAL
   !
-  DO j = 1 , N
+  DO j = 1, N
     Work(j,N+1) = SDSDOT(N,-Work(j,N+1),A(j,1),Lda,V,1)
   ENDDO
   !

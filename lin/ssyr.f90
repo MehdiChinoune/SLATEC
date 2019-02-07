@@ -90,16 +90,16 @@ SUBROUTINE SSYR(Uplo,N,Alpha,X,Incx,A,Lda)
   !***END PROLOGUE  SSYR
   !     .. Scalar Arguments ..
   REAL Alpha
-  INTEGER Incx , Lda , N
+  INTEGER Incx, Lda, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  REAL A(Lda,*) , X(*)
+  REAL A(Lda,*), X(*)
   !     .. Parameters ..
   REAL ZERO
   PARAMETER (ZERO=0.0E+0)
   !     .. Local Scalars ..
   REAL temp
-  INTEGER i , info , ix , j , jx , kx
+  INTEGER i, info, ix, j, jx, kx
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
@@ -147,21 +147,21 @@ SUBROUTINE SSYR(Uplo,N,Alpha,X,Incx,A,Lda)
     !        Form  A  when A is stored in upper triangle.
     !
     IF ( Incx==1 ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( X(j)/=ZERO ) THEN
           temp = Alpha*X(j)
-          DO i = 1 , j
+          DO i = 1, j
             A(i,j) = A(i,j) + X(i)*temp
           ENDDO
         ENDIF
       ENDDO
     ELSE
       jx = kx
-      DO j = 1 , N
+      DO j = 1, N
         IF ( X(jx)/=ZERO ) THEN
           temp = Alpha*X(jx)
           ix = kx
-          DO i = 1 , j
+          DO i = 1, j
             A(i,j) = A(i,j) + X(ix)*temp
             ix = ix + Incx
           ENDDO
@@ -173,21 +173,21 @@ SUBROUTINE SSYR(Uplo,N,Alpha,X,Incx,A,Lda)
     !        Form  A  when A is stored in lower triangle.
     !
   ELSEIF ( Incx==1 ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       IF ( X(j)/=ZERO ) THEN
         temp = Alpha*X(j)
-        DO i = j , N
+        DO i = j, N
           A(i,j) = A(i,j) + X(i)*temp
         ENDDO
       ENDIF
     ENDDO
   ELSE
     jx = kx
-    DO j = 1 , N
+    DO j = 1, N
       IF ( X(jx)/=ZERO ) THEN
         temp = Alpha*X(jx)
         ix = jx
-        DO i = j , N
+        DO i = j, N
           A(i,j) = A(i,j) + X(ix)*temp
           ix = ix + Incx
         ENDDO

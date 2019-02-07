@@ -96,7 +96,7 @@ INTEGER FUNCTION I1MACH(I)
   !           options.  (DWL, RWC and WRB).
   !***END PROLOGUE  I1MACH
   !
-  INTEGER imach(16) , output
+  INTEGER imach(16), output
   SAVE imach
   EQUIVALENCE (imach(4),output)
   !

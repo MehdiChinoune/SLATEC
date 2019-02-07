@@ -4,8 +4,8 @@ SUBROUTINE SQJAC2(N,X,Fvec,Fjac,Ldfjac,Iflag)
   IMPLICIT NONE
   !*--SQJAC25
   !*** Start of declarations inserted by SPAG
-  REAL Fjac , Fvec , X
-  INTEGER Iflag , Ldfjac , N
+  REAL Fjac, Fvec, X
+  INTEGER Iflag, Ldfjac, N
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SQJAC2
   !***PURPOSE  Evaluate full Jacobian for SNSQE test.
@@ -24,7 +24,7 @@ SUBROUTINE SQJAC2(N,X,Fvec,Fjac,Ldfjac,Iflag)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  SQJAC2
-  DIMENSION X(*) , Fvec(*) , Fjac(Ldfjac,*)
+  DIMENSION X(*), Fvec(*), Fjac(Ldfjac,*)
   !***FIRST EXECUTABLE STATEMENT  SQJAC2
   Fjac(1,1) = -1.E0
   Fjac(1,2) = 0.E0

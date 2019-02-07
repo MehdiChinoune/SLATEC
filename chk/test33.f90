@@ -50,7 +50,7 @@ PROGRAM TEST33
   !   900524  Cosmetic changes to code.  (WRB)
   !   930318  Added new quick check DPCHQ5.  (WRB,FNF)
   !***END PROLOGUE  TEST33
-  INTEGER ipass , kprint , lin , lun , nfail
+  INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST33
   lun = I1MACH(2)
   lin = I1MACH(1)

@@ -61,13 +61,13 @@ REAL FUNCTION PCHDF(K,X,S,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER K , Ierr
-  REAL X(K) , S(K)
+  INTEGER K, Ierr
+  REAL X(K), S(K)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i , j
-  REAL value , zero
+  INTEGER i, j
+  REAL value, zero
   SAVE zero
   DATA zero/0./
   !
@@ -87,8 +87,8 @@ REAL FUNCTION PCHDF(K,X,S,Ierr)
   !
   !  COMPUTE COEFFICIENTS OF INTERPOLATING POLYNOMIAL.
   !
-  DO j = 2 , K - 1
-    DO i = 1 , K - j
+  DO j = 2, K - 1
+    DO i = 1, K - j
       S(i) = (S(i+1)-S(i))/(X(i+j)-X(i))
     ENDDO
   ENDDO
@@ -96,7 +96,7 @@ REAL FUNCTION PCHDF(K,X,S,Ierr)
   !  EVALUATE DERIVATIVE AT X(K).
   !
   value = S(1)
-  DO i = 2 , K - 1
+  DO i = 2, K - 1
     value = S(i) + value*(X(K)-X(i))
   ENDDO
   !
@@ -106,4 +106,5 @@ REAL FUNCTION PCHDF(K,X,S,Ierr)
   PCHDF = value
   RETURN
   !------------- LAST LINE OF PCHDF FOLLOWS ------------------------------
-  99999 END FUNCTION PCHDF
+  99999 CONTINUE
+  END FUNCTION PCHDF

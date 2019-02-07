@@ -19,9 +19,9 @@ SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !     stored in band form and estimates the condition of the matrix.
   !
   !     If  RCOND  is not needed, CPBFA is slightly faster.
-  !     To solve  A*X = B , follow CPBCO by CPBSL.
-  !     To compute  INVERSE(A)*C , follow CPBCO by CPBSL.
-  !     To compute  DETERMINANT(A) , follow CPBCO by CPBDI.
+  !     To solve  A*X = B, follow CPBCO by CPBSL.
+  !     To compute  INVERSE(A)*C, follow CPBCO by CPBSL.
+  !     To compute  DETERMINANT(A), follow CPBCO by CPBDI.
   !
   !     On Entry
   !
@@ -44,13 +44,13 @@ SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !
   !     On Return
   !
-  !        ABD     an upper triangular matrix  R , stored in band
+  !        ABD     an upper triangular matrix  R, stored in band
   !                form, so that  A = CTRANS(R)*R .
-  !                If  INFO .NE. 0 , the factorization is not complete.
+  !                If  INFO .NE. 0, the factorization is not complete.
   !
   !        RCOND   REAL
   !                an estimate of the reciprocal condition of  A .
-  !                For the system  A*X = B , relative perturbations
+  !                For the system  A*X = B, relative perturbations
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -58,14 +58,14 @@ SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !                is true, then  A  may be singular to working
   !                precision.  In particular,  RCOND  is zero  if
   !                exact singularity is detected or the estimate
-  !                underflows.  If INFO .NE. 0 , RCOND is unchanged.
+  !                underflows.  If INFO .NE. 0, RCOND is unchanged.
   !
   !        Z       COMPLEX(N)
   !                a work vector whose contents are usually unimportant.
   !                If  A  is singular to working precision, then  Z  is
   !                an approximate null vector in the sense that
   !                NORM(A*Z) = RCOND*NORM(A)*NORM(Z) .
-  !                If  INFO .NE. 0 , Z  is unchanged.
+  !                If  INFO .NE. 0, Z  is unchanged.
   !
   !        INFO    INTEGER
   !                = 0  for normal return.
@@ -86,7 +86,7 @@ SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !                10    CONTINUE
   !                20 CONTINUE
   !
-  !           This uses  M + 1  rows of  A , except for the  M by M
+  !           This uses  M + 1  rows of  A, except for the  M by M
   !           upper left triangle, which is ignored.
   !
   !     Example:  If the original matrix is
@@ -98,7 +98,7 @@ SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !            0  0 35 45 55 56
   !            0  0  0 46 56 66
   !
-  !     then  N = 6 , M = 2  and  ABD  should contain
+  !     then  N = 6, M = 2  and  ABD  should contain
   !
   !            *  * 13 24 35 46
   !            * 12 23 34 45 56
@@ -117,33 +117,33 @@ SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CPBCO
-  INTEGER Lda , N , M , Info
-  COMPLEX Abd(Lda,*) , Z(*)
+  INTEGER Lda, N, M, Info
+  COMPLEX Abd(Lda,*), Z(*)
   REAL Rcond
   !
-  COMPLEX CDOTC , ek , t , wk , wkm
-  REAL anorm , s , SCASUM , sm , ynorm
-  INTEGER i , j , j2 , k , kb , kp1 , l , la , lb , lm , mu
+  COMPLEX CDOTC, ek, t, wk, wkm
+  REAL anorm, s, SCASUM, sm, ynorm
+  INTEGER i, j, j2, k, kb, kp1, l, la, lb, lm, mu
   REAL, EXTERNAL :: CABS1
   COMPLEX, EXTERNAL :: CSIGN1
   !
   !     FIND NORM OF A
   !
   !***FIRST EXECUTABLE STATEMENT  CPBCO
-  DO j = 1 , N
+  DO j = 1, N
     l = MIN(j,M+1)
     mu = MAX(M+2-j,1)
     Z(j) = CMPLX(SCASUM(l,Abd(mu,j),1),0.0E0)
     k = j - l
     IF ( M>=mu ) THEN
-      DO i = mu , M
+      DO i = mu, M
         k = k + 1
         Z(k) = CMPLX(REAL(Z(k))+CABS1(Abd(i,j)),0.0E0)
       ENDDO
     ENDIF
   ENDDO
   anorm = 0.0E0
-  DO j = 1 , N
+  DO j = 1, N
     anorm = MAX(anorm,REAL(Z(j)))
   ENDDO
   !
@@ -161,10 +161,10 @@ SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
     !        SOLVE CTRANS(R)*W = E
     !
     ek = (1.0E0,0.0E0)
-    DO j = 1 , N
+    DO j = 1, N
       Z(j) = (0.0E0,0.0E0)
     ENDDO
-    DO k = 1 , N
+    DO k = 1, N
       IF ( CABS1(Z(k))/=0.0E0 ) ek = CSIGN1(ek,-Z(k))
       IF ( CABS1(ek-Z(k))>REAL(Abd(M+1,k)) ) THEN
         s = REAL(Abd(M+1,k))/CABS1(ek-Z(k))
@@ -181,7 +181,7 @@ SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
       j2 = MIN(k+M,N)
       i = M + 1
       IF ( kp1<=j2 ) THEN
-        DO j = kp1 , j2
+        DO j = kp1, j2
           i = i - 1
           sm = sm + CABS1(Z(j)+wkm*CONJG(Abd(i,j)))
           Z(j) = Z(j) + wk*CONJG(Abd(i,j))
@@ -191,7 +191,7 @@ SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
           t = wkm - wk
           wk = wkm
           i = M + 1
-          DO j = kp1 , j2
+          DO j = kp1, j2
             i = i - 1
             Z(j) = Z(j) + t*CONJG(Abd(i,j))
           ENDDO
@@ -204,7 +204,7 @@ SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
     !
     !        SOLVE  R*Y = W
     !
-    DO kb = 1 , N
+    DO kb = 1, N
       k = N + 1 - kb
       IF ( CABS1(Z(k))>REAL(Abd(M+1,k)) ) THEN
         s = REAL(Abd(M+1,k))/CABS1(Z(k))
@@ -224,7 +224,7 @@ SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
     !
     !        SOLVE CTRANS(R)*V = Y
     !
-    DO k = 1 , N
+    DO k = 1, N
       lm = MIN(k-1,M)
       la = M + 1 - lm
       lb = k - lm
@@ -242,7 +242,7 @@ SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
     !
     !        SOLVE  R*Z = W
     !
-    DO kb = 1 , N
+    DO kb = 1, N
       k = N + 1 - kb
       IF ( CABS1(Z(k))>REAL(Abd(M+1,k)) ) THEN
         s = REAL(Abd(M+1,k))/CABS1(Z(k))

@@ -24,12 +24,12 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  ZBUNI
   !     COMPLEX CSCL,CSCR,CY,RZ,ST,S1,S2,Y,Z
-  REAL(8) :: Alim , ax , ay , csclr , cscrr , cyi , cyr , dfnu , &
-    Elim , Fnu , fnui , Fnul , gnu , raz , rzi , rzr , sti , &
-    str , s1i , s1r , s2i , s2r , Tol , Yi , Yr , Zi , Zr , &
-    ZABS , ascle , bry , c1r , c1i , c1m , D1MACH
-  INTEGER i , iflag , iform , k , Kode , N , nl , Nlast , Nui , nw , Nz
-  DIMENSION Yr(N) , Yi(N) , cyr(2) , cyi(2) , bry(3)
+  REAL(8) :: Alim, ax, ay, csclr, cscrr, cyi, cyr, dfnu, &
+    Elim, Fnu, fnui, Fnul, gnu, raz, rzi, rzr, sti, &
+    str, s1i, s1r, s2i, s2r, Tol, Yi, Yr, Zi, Zr, &
+    ZABS, ascle, bry, c1r, c1i, c1m, D1MACH
+  INTEGER i, iflag, iform, k, Kode, N, nl, Nlast, Nui, nw, Nz
+  DIMENSION Yr(N), Yi(N), cyr(2), cyi(2), bry(3)
   EXTERNAL ZABS
   !***FIRST EXECUTABLE STATEMENT  ZBUNI
   Nz = 0
@@ -105,7 +105,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
         sti = -Zi*raz
         rzr = (str+str)*raz
         rzi = (sti+sti)*raz
-        DO i = 1 , Nui
+        DO i = 1, Nui
           str = s2r
           sti = s2i
           s2r = (dfnu+fnui)*(rzr*str-rzi*sti) + s1r
@@ -141,7 +141,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
         nl = N - 1
         fnui = nl
         k = nl
-        DO i = 1 , nl
+        DO i = 1, nl
           str = s2r
           sti = s2i
           s2r = (Fnu+fnui)*(rzr*str-rzi*sti) + s1r
@@ -183,4 +183,5 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   RETURN
   100  Nz = nw
   RETURN
-  99999 END SUBROUTINE ZBUNI
+  99999 CONTINUE
+  END SUBROUTINE ZBUNI

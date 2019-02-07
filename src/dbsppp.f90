@@ -61,11 +61,11 @@ SUBROUTINE DBSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DBSPPP
   !
-  INTEGER ileft , inev , K , Ldc , Lxi , N , nk
-  REAL(8) :: A , C , T , Work , Xi
+  INTEGER ileft, inev, K, Ldc, Lxi, N, nk
+  REAL(8) :: A, C, T, Work, Xi
   !     DIMENSION T(N+K),XI(LXI+1),C(LDC,*)
   !     HERE, * = THE FINAL VALUE OF THE OUTPUT PARAMETER LXI.
-  DIMENSION T(*) , A(*) , Work(*) , Xi(*) , C(Ldc,*)
+  DIMENSION T(*), A(*), Work(*), Xi(*), C(Ldc,*)
   !***FIRST EXECUTABLE STATEMENT  DBSPPP
   IF ( K<1 ) THEN
     CALL XERMSG('SLATEC','DBSPPP','K DOES NOT SATISFY K.GE.1',2,1)
@@ -82,7 +82,7 @@ SUBROUTINE DBSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   Xi(1) = T(K)
   inev = 1
   nk = N*K + 1
-  DO ileft = K , N
+  DO ileft = K, N
     IF ( T(ileft+1)/=T(ileft) ) THEN
       Lxi = Lxi + 1
       Xi(Lxi+1) = T(ileft+1)
@@ -90,4 +90,5 @@ SUBROUTINE DBSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
     ENDIF
   ENDDO
   RETURN
-  99999 END SUBROUTINE DBSPPP
+  99999 CONTINUE
+  END SUBROUTINE DBSPPP

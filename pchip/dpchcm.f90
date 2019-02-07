@@ -141,13 +141,13 @@ SUBROUTINE DPCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N , Incfd , Ismon(N) , Ierr
-  REAL(8) :: X(N) , F(Incfd,N) , D(Incfd,N)
+  INTEGER N, Incfd, Ismon(N), Ierr
+  REAL(8) :: X(N), F(Incfd,N), D(Incfd,N)
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i , nseg
+  INTEGER i, nseg
   REAL(8) :: delta
   INTEGER DCHFCM
   !
@@ -172,7 +172,7 @@ SUBROUTINE DPCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
       CALL XERMSG('SLATEC','DPCHCM','INCREMENT LESS THAN ONE',Ierr,1)
       RETURN
     ELSE
-      DO i = 2 , N
+      DO i = 2, N
         IF ( X(i)<=X(i-1) ) GOTO 100
       ENDDO
       Skip = .TRUE.
@@ -182,7 +182,7 @@ SUBROUTINE DPCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !  FUNCTION DEFINITION IS OK -- GO ON.
   !
   nseg = N - 1
-  DO i = 1 , nseg
+  DO i = 1, nseg
     delta = (F(1,i+1)-F(1,i))/(X(i+1)-X(i))
     !                   -------------------------------
     Ismon(i) = DCHFCM(D(1,i),D(1,i+1),delta)

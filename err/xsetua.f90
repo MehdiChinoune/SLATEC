@@ -4,7 +4,7 @@ SUBROUTINE XSETUA(Iunita,N)
   IMPLICIT NONE
   !*--XSETUA5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , index , Iunita , J4SAVE , junk , N
+  INTEGER i, index, Iunita, J4SAVE, junk, N
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XSETUA
   !***PURPOSE  Set logical unit numbers (up to 5) to which error
@@ -55,7 +55,7 @@ SUBROUTINE XSETUA(Iunita,N)
     RETURN
   ENDIF
   !
-  DO i = 1 , N
+  DO i = 1, N
     index = i + 4
     IF ( i==1 ) index = 3
     junk = J4SAVE(index,Iunita(i),.TRUE.)

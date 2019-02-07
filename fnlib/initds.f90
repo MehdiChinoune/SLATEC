@@ -4,8 +4,8 @@ FUNCTION INITDS(Os,Nos,Eta)
   IMPLICIT NONE
   !*--INITDS5
   !*** Start of declarations inserted by SPAG
-  REAL err , Eta
-  INTEGER i , ii , INITDS , Nos
+  REAL err, Eta
+  INTEGER i, ii, INITDS, Nos
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  INITDS
   !***PURPOSE  Determine the number of terms needed in an orthogonal
@@ -47,7 +47,7 @@ FUNCTION INITDS(Os,Nos,Eta)
     'Number of coefficients is less than 1',2,1)
   !
   err = 0.
-  DO ii = 1 , Nos
+  DO ii = 1, Nos
     i = Nos + 1 - ii
     err = err + ABS(REAL(Os(i)))
     IF ( err>Eta ) EXIT

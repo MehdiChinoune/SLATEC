@@ -136,11 +136,11 @@ SUBROUTINE DSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  DSYMM
   !     .. Scalar Arguments ..
-  CHARACTER :: Side , Uplo
-  INTEGER M , N , Lda , Ldb , Ldc
-  REAL(8) :: Alpha , Beta
+  CHARACTER :: Side, Uplo
+  INTEGER M, N, Lda, Ldb, Ldc
+  REAL(8) :: Alpha, Beta
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*) , B(Ldb,*) , C(Ldc,*)
+  REAL(8) :: A(Lda,*), B(Ldb,*), C(Ldc,*)
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
@@ -150,10 +150,10 @@ SUBROUTINE DSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   INTRINSIC MAX
   !     .. Local Scalars ..
   LOGICAL upper
-  INTEGER i , info , j , k , nrowa
-  REAL(8) :: temp1 , temp2
+  INTEGER i, info, j, k, nrowa
+  REAL(8) :: temp1, temp2
   !     .. Parameters ..
-  REAL(8) :: ONE , ZERO
+  REAL(8) :: ONE, ZERO
   PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
   !***FIRST EXECUTABLE STATEMENT  DSYMM
   !
@@ -197,14 +197,14 @@ SUBROUTINE DSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !
   IF ( Alpha==ZERO ) THEN
     IF ( Beta==ZERO ) THEN
-      DO j = 1 , N
-        DO i = 1 , M
+      DO j = 1, N
+        DO i = 1, M
           C(i,j) = ZERO
         ENDDO
       ENDDO
     ELSE
-      DO j = 1 , N
-        DO i = 1 , M
+      DO j = 1, N
+        DO i = 1, M
           C(i,j) = Beta*C(i,j)
         ENDDO
       ENDDO
@@ -218,34 +218,34 @@ SUBROUTINE DSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     !
     !        Form  C := alpha*B*A + beta*C.
     !
-    DO j = 1 , N
+    DO j = 1, N
       temp1 = Alpha*A(j,j)
       IF ( Beta==ZERO ) THEN
-        DO i = 1 , M
+        DO i = 1, M
           C(i,j) = temp1*B(i,j)
         ENDDO
       ELSE
-        DO i = 1 , M
+        DO i = 1, M
           C(i,j) = Beta*C(i,j) + temp1*B(i,j)
         ENDDO
       ENDIF
-      DO k = 1 , j - 1
+      DO k = 1, j - 1
         IF ( upper ) THEN
           temp1 = Alpha*A(k,j)
         ELSE
           temp1 = Alpha*A(j,k)
         ENDIF
-        DO i = 1 , M
+        DO i = 1, M
           C(i,j) = C(i,j) + temp1*B(i,k)
         ENDDO
       ENDDO
-      DO k = j + 1 , N
+      DO k = j + 1, N
         IF ( upper ) THEN
           temp1 = Alpha*A(j,k)
         ELSE
           temp1 = Alpha*A(k,j)
         ENDIF
-        DO i = 1 , M
+        DO i = 1, M
           C(i,j) = C(i,j) + temp1*B(i,k)
         ENDDO
       ENDDO
@@ -254,11 +254,11 @@ SUBROUTINE DSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     !        Form  C := alpha*A*B + beta*C.
     !
   ELSEIF ( upper ) THEN
-    DO j = 1 , N
-      DO i = 1 , M
+    DO j = 1, N
+      DO i = 1, M
         temp1 = Alpha*B(i,j)
         temp2 = ZERO
-        DO k = 1 , i - 1
+        DO k = 1, i - 1
           C(k,j) = C(k,j) + temp1*A(k,i)
           temp2 = temp2 + B(k,j)*A(k,i)
         ENDDO
@@ -270,11 +270,11 @@ SUBROUTINE DSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
       ENDDO
     ENDDO
   ELSE
-    DO j = 1 , N
-      DO i = M , 1 , -1
+    DO j = 1, N
+      DO i = M, 1, -1
         temp1 = Alpha*B(i,j)
         temp2 = ZERO
-        DO k = i + 1 , M
+        DO k = i + 1, M
           C(k,j) = C(k,j) + temp1*A(k,i)
           temp2 = temp2 + B(k,j)*A(k,i)
         ENDDO

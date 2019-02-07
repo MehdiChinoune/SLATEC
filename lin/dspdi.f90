@@ -82,16 +82,16 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSPDI
-  INTEGER N , Job
-  REAL(8) :: Ap(*) , Work(*)
+  INTEGER N, Job
+  REAL(8) :: Ap(*), Work(*)
   REAL(8) :: Det(2)
-  INTEGER Kpvt(*) , Inert(3)
+  INTEGER Kpvt(*), Inert(3)
   !
-  REAL(8) :: akkp1 , DDOT , temp
-  REAL(8) :: ten , d , t , ak , akp1
-  INTEGER ij , ik , ikp1 , iks , j , jb , jk , jkp1
-  INTEGER k , kk , kkp1 , km1 , ks , ksj , kskp1 , kstep
-  LOGICAL noinv , nodet , noert
+  REAL(8) :: akkp1, DDOT, temp
+  REAL(8) :: ten, d, t, ak, akp1
+  INTEGER ij, ik, ikp1, iks, j, jb, jk, jkp1
+  INTEGER k, kk, kkp1, km1, ks, ksj, kskp1, kstep
+  LOGICAL noinv, nodet, noert
   !***FIRST EXECUTABLE STATEMENT  DSPDI
   noinv = MOD(Job,10)==0
   nodet = MOD(Job,100)/10==0
@@ -110,7 +110,7 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
     ENDIF
     t = 0.0D0
     ik = 0
-    DO k = 1 , N
+    DO k = 1, N
       kk = ik + k
       d = Ap(kk)
       !
@@ -119,7 +119,7 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
       IF ( Kpvt(k)<=0 ) THEN
         !
         !              2 BY 2 BLOCK
-        !              USE DET (D  S)  =  (D/T * C - T) * T  ,  T = ABS(S)
+        !              USE DET (D  S)  =  (D/T * C - T) * T ,  T = ABS(S)
         !                      (S  C)
         !              TO AVOID UNDERFLOW/OVERFLOW TROUBLES.
         !              TAKE TWO PASSES THROUGH SCALING.  USE  T  FOR FLAG.
@@ -183,7 +183,7 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
         IF ( km1>=1 ) THEN
           CALL DCOPY(km1,Ap(ikp1+1),1,Work,1)
           ij = 0
-          DO j = 1 , km1
+          DO j = 1, km1
             jkp1 = ikp1 + j
             Ap(jkp1) = DDOT(j,Ap(ij+1),1,Work,1)
             CALL DAXPY(j-1,Work(j),Ap(ij+1),1,Ap(ikp1+1),1)
@@ -193,7 +193,7 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
           Ap(kkp1) = Ap(kkp1) + DDOT(km1,Ap(ik+1),1,Ap(ikp1+1),1)
           CALL DCOPY(km1,Ap(ik+1),1,Work,1)
           ij = 0
-          DO j = 1 , km1
+          DO j = 1, km1
             jk = ik + j
             Ap(jk) = DDOT(j,Ap(ij+1),1,Work,1)
             CALL DAXPY(j-1,Work(j),Ap(ij+1),1,Ap(ik+1),1)
@@ -210,7 +210,7 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
         IF ( km1>=1 ) THEN
           CALL DCOPY(km1,Ap(ik+1),1,Work,1)
           ij = 0
-          DO j = 1 , km1
+          DO j = 1, km1
             jk = ik + j
             Ap(jk) = DDOT(j,Ap(ij+1),1,Work,1)
             CALL DAXPY(j-1,Work(j),Ap(ij+1),1,Ap(ik+1),1)
@@ -228,7 +228,7 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
         iks = (ks*(ks-1))/2
         CALL DSWAP(ks,Ap(iks+1),1,Ap(ik+1),1)
         ksj = ik + ks
-        DO jb = ks , k
+        DO jb = ks, k
           j = k + ks - jb
           jk = ik + j
           temp = Ap(jk)

@@ -68,20 +68,20 @@ SUBROUTINE CBABK2(Nm,N,Low,Igh,Scale,M,Zr,Zi)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CBABK2
   !
-  INTEGER i , j , k , M , N , ii , Nm , Igh , Low
-  REAL Scale(*) , Zr(Nm,*) , Zi(Nm,*)
+  INTEGER i, j, k, M, N, ii, Nm, Igh, Low
+  REAL Scale(*), Zr(Nm,*), Zi(Nm,*)
   REAL s
   !
   !***FIRST EXECUTABLE STATEMENT  CBABK2
   IF ( M/=0 ) THEN
     IF ( Igh/=Low ) THEN
       !
-      DO i = Low , Igh
+      DO i = Low, Igh
         s = Scale(i)
         !     .......... LEFT HAND EIGENVECTORS ARE BACK TRANSFORMED
         !                IF THE FOREGOING STATEMENT IS REPLACED BY
         !                S=1.0E0/SCALE(I). ..........
-        DO j = 1 , M
+        DO j = 1, M
           Zr(i,j) = Zr(i,j)*s
           Zi(i,j) = Zi(i,j)*s
         ENDDO
@@ -90,14 +90,14 @@ SUBROUTINE CBABK2(Nm,N,Low,Igh,Scale,M,Zr,Zi)
     ENDIF
     !     .......... FOR I=LOW-1 STEP -1 UNTIL 1,
     !                IGH+1 STEP 1 UNTIL N DO -- ..........
-    DO ii = 1 , N
+    DO ii = 1, N
       i = ii
       IF ( i<Low.OR.i>Igh ) THEN
         IF ( i<Low ) i = Low - ii
         k = Scale(i)
         IF ( k/=i ) THEN
           !
-          DO j = 1 , M
+          DO j = 1, M
             s = Zr(i,j)
             Zr(i,j) = Zr(k,j)
             Zr(k,j) = s

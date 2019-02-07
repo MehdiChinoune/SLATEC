@@ -4,7 +4,7 @@ SUBROUTINE MPBLAS(I1)
   IMPLICIT NONE
   !*--MPBLAS5
   !*** Start of declarations inserted by SPAG
-  INTEGER I1 , I1MACH , MPB , mpbexp , MPLun , MPM , MPMxr , MPR , MPT
+  INTEGER I1, I1MACH, MPB, mpbexp, MPLun, MPM, MPMxr, MPR, MPT
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPBLAS
   !***SUBSIDIARY
@@ -44,7 +44,7 @@ SUBROUTINE MPBLAS(I1)
   !   930124  Increased Array size in MPCON for SUN -r8, and calculate
   !               size for Quad Precision for 2x DP.  (RWC)
   !***END PROLOGUE  MPBLAS
-  COMMON /MPCOM / MPB , MPT , MPM , MPLun , MPMxr , MPR(30)
+  COMMON /MPCOM / MPB, MPT, MPM, MPLun, MPMxr, MPR(30)
   !***FIRST EXECUTABLE STATEMENT  MPBLAS
   I1 = 1
   !

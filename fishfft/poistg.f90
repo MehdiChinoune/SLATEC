@@ -4,10 +4,10 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   IMPLICIT NONE
   !*--POISTG5
   !*** Start of declarations inserted by SPAG
-  REAL A , a1 , B , C , W , Y
-  INTEGER i , Idimy , Ierror , ipstor , irev , iwb2 , iwb3 , iwba , iwbb , &
-    iwbc , iwd , iwp , iwtcos , iww1 , iww2 , iww3 , j , k , M , mh
-  INTEGER mhm1 , mhmi , mhpi , modd , mp , Mperod , mskip , N , nby2 , np , &
+  REAL A, a1, B, C, W, Y
+  INTEGER i, Idimy, Ierror, ipstor, irev, iwb2, iwb3, iwba, iwbb, &
+    iwbc, iwd, iwp, iwtcos, iww1, iww2, iww3, j, k, M, mh
+  INTEGER mhm1, mhmi, mhpi, modd, mp, Mperod, mskip, N, nby2, np, &
     Nperod
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POISTG
@@ -230,7 +230,7 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !
   !
   DIMENSION Y(Idimy,*)
-  DIMENSION W(*) , B(*) , A(*) , C(*)
+  DIMENSION W(*), B(*), A(*), C(*)
   !***FIRST EXECUTABLE STATEMENT  POISTG
   Ierror = 0
   IF ( M<=2 ) Ierror = 1
@@ -241,7 +241,7 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   IF ( Mperod==1 ) THEN
     IF ( A(1)/=0..OR.C(M)/=0. ) Ierror = 7
   ELSE
-    DO i = 1 , M
+    DO i = 1, M
       IF ( A(i)/=C(1) ) GOTO 100
       IF ( C(i)/=C(1) ) GOTO 100
       IF ( B(i)/=B(1) ) GOTO 100
@@ -259,14 +259,14 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   iwd = iww3 + M
   iwtcos = iwd + M
   iwp = iwtcos + 4*N
-  DO i = 1 , M
+  DO i = 1, M
     k = iwba + i - 1
     W(k) = -A(i)
     k = iwbc + i - 1
     W(k) = -C(i)
     k = iwbb + i - 1
     W(k) = 2. - B(i)
-    DO j = 1 , N
+    DO j = 1, N
       Y(i,j) = -Y(i,j)
     ENDDO
   ENDDO
@@ -276,82 +276,86 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   GOTO 500
   100  Ierror = 6
   RETURN
-  200  SELECT CASE (Nperod)
-CASE (4)
+  200 CONTINUE
+  SELECT CASE (Nperod)
+    CASE (4)
+      !
+      !     REVERSE COLUMNS WHEN NPEROD = 4.
+      !
+      irev = 1
+      nby2 = N/2
+      np = 2
+      GOTO 600
+    CASE DEFAULT
+  END SELECT
+  300  CALL POSTG2(np,N,M,W(iwba),W(iwbb),W(iwbc),Idimy,Y,W,W(iwb2),W(iwb3),&
+    W(iww1),W(iww2),W(iww3),W(iwd),W(iwtcos),W(iwp))
+  ipstor = W(iww1)
+  irev = 2
+  IF ( Nperod==4 ) GOTO 600
+  400 CONTINUE
+  IF ( mp==1 ) GOTO 700
+  IF ( mp==2 ) GOTO 800
   !
-  !     REVERSE COLUMNS WHEN NPEROD = 4.
+  !     REORDER UNKNOWNS WHEN MP =0
   !
-  irev = 1
-  nby2 = N/2
-  np = 2
-  GOTO 600
-CASE DEFAULT
-END SELECT
-300  CALL POSTG2(np,N,M,W(iwba),W(iwbb),W(iwbc),Idimy,Y,W,W(iwb2),W(iwb3),&
-W(iww1),W(iww2),W(iww3),W(iwd),W(iwtcos),W(iwp))
-ipstor = W(iww1)
-irev = 2
-IF ( Nperod==4 ) GOTO 600
-400  IF ( mp==1 ) GOTO 700
-IF ( mp==2 ) GOTO 800
-!
-!     REORDER UNKNOWNS WHEN MP =0
-!
-500  mh = (M+1)/2
-mhm1 = mh - 1
-modd = 1
-IF ( mh*2==M ) modd = 2
-DO j = 1 , N
-DO i = 1 , mhm1
-  mhpi = mh + i
-  mhmi = mh - i
-  W(i) = Y(mhmi,j) - Y(mhpi,j)
-  W(mhpi) = Y(mhmi,j) + Y(mhpi,j)
-ENDDO
-W(mh) = 2.*Y(mh,j)
-IF ( modd/=1 ) W(M) = 2.*Y(M,j)
-DO i = 1 , M
-  Y(i,j) = W(i)
-ENDDO
-ENDDO
-k = iwbc + mhm1 - 1
-i = iwba + mhm1
-W(k) = 0.
-W(i) = 0.
-W(k+1) = 2.*W(k+1)
-IF ( modd==2 ) THEN
-W(iwbb-1) = W(k+1)
-ELSE
-k = iwbb + mhm1 - 1
-W(k) = W(k) - W(i-1)
-W(iwbc-1) = W(iwbc-1) + W(iwbb-1)
-ENDIF
-GOTO 200
-600  DO j = 1 , nby2
-mskip = N + 1 - j
-DO i = 1 , M
-a1 = Y(i,j)
-Y(i,j) = Y(i,mskip)
-Y(i,mskip) = a1
-ENDDO
-ENDDO
-IF ( irev==1 ) GOTO 300
-IF ( irev==2 ) GOTO 400
-700  DO j = 1 , N
-DO i = 1 , mhm1
-mhmi = mh - i
-mhpi = mh + i
-W(mhmi) = .5*(Y(mhpi,j)+Y(i,j))
-W(mhpi) = .5*(Y(mhpi,j)-Y(i,j))
-ENDDO
-W(mh) = .5*Y(mh,j)
-IF ( modd/=1 ) W(M) = .5*Y(M,j)
-DO i = 1 , M
-Y(i,j) = W(i)
-ENDDO
-ENDDO
-!
-!     RETURN STORAGE REQUIREMENTS FOR W ARRAY.
-!
-800  W(1) = ipstor + iwp - 1
+  500  mh = (M+1)/2
+  mhm1 = mh - 1
+  modd = 1
+  IF ( mh*2==M ) modd = 2
+  DO j = 1, N
+    DO i = 1, mhm1
+      mhpi = mh + i
+      mhmi = mh - i
+      W(i) = Y(mhmi,j) - Y(mhpi,j)
+      W(mhpi) = Y(mhmi,j) + Y(mhpi,j)
+    ENDDO
+    W(mh) = 2.*Y(mh,j)
+    IF ( modd/=1 ) W(M) = 2.*Y(M,j)
+    DO i = 1, M
+      Y(i,j) = W(i)
+    ENDDO
+  ENDDO
+  k = iwbc + mhm1 - 1
+  i = iwba + mhm1
+  W(k) = 0.
+  W(i) = 0.
+  W(k+1) = 2.*W(k+1)
+  IF ( modd==2 ) THEN
+    W(iwbb-1) = W(k+1)
+  ELSE
+    k = iwbb + mhm1 - 1
+    W(k) = W(k) - W(i-1)
+    W(iwbc-1) = W(iwbc-1) + W(iwbb-1)
+  ENDIF
+  GOTO 200
+  600 CONTINUE
+  DO j = 1, nby2
+    mskip = N + 1 - j
+    DO i = 1, M
+      a1 = Y(i,j)
+      Y(i,j) = Y(i,mskip)
+      Y(i,mskip) = a1
+    ENDDO
+  ENDDO
+  IF ( irev==1 ) GOTO 300
+  IF ( irev==2 ) GOTO 400
+  700 CONTINUE
+  DO j = 1, N
+    DO i = 1, mhm1
+      mhmi = mh - i
+      mhpi = mh + i
+      W(mhmi) = .5*(Y(mhpi,j)+Y(i,j))
+      W(mhpi) = .5*(Y(mhpi,j)-Y(i,j))
+    ENDDO
+    W(mh) = .5*Y(mh,j)
+    IF ( modd/=1 ) W(M) = .5*Y(M,j)
+    DO i = 1, M
+      Y(i,j) = W(i)
+    ENDDO
+  ENDDO
+  !
+  !     RETURN STORAGE REQUIREMENTS FOR W ARRAY.
+  !
+  800  W(1) = ipstor + iwp - 1
 END SUBROUTINE POISTG

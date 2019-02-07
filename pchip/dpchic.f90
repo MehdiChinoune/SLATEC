@@ -218,12 +218,12 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER Ic(2) , N , Incfd , Nwk , Ierr
-  REAL(8) :: Vc(2) , Switch , X(*) , F(Incfd,*) , D(Incfd,*) , Wk(Nwk)
+  INTEGER Ic(2), N, Incfd, Nwk, Ierr
+  REAL(8) :: Vc(2), Switch, X(*), F(Incfd,*), D(Incfd,*), Wk(Nwk)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i , ibeg , iend , nless1
+  INTEGER i, ibeg, iend, nless1
   REAL(8) :: zero
   SAVE zero
   DATA zero/0.D0/
@@ -247,7 +247,7 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
     CALL XERMSG('SLATEC','DPCHIC','INCREMENT LESS THAN ONE',Ierr,1)
     RETURN
   ELSE
-    DO i = 2 , N
+    DO i = 2, N
       IF ( X(i)<=X(i-1) ) GOTO 100
     ENDDO
     !
@@ -277,7 +277,7 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !
         !  SET UP H AND SLOPE ARRAYS.
         !
-        DO i = 1 , nless1
+        DO i = 1, nless1
           Wk(i) = X(i+1) - X(i)
           Wk(nless1+i) = (F(1,i+1)-F(1,i))/Wk(i)
         ENDDO
@@ -343,4 +343,5 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   CALL XERMSG('SLATEC','DPCHIC','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
   RETURN
   !------------- LAST LINE OF DPCHIC FOLLOWS -----------------------------
-  99999 END SUBROUTINE DPCHIC
+  99999 CONTINUE
+  END SUBROUTINE DPCHIC

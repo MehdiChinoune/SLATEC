@@ -51,11 +51,11 @@ REAL(8) FUNCTION DGAMIT(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   !***END PROLOGUE  DGAMIT
-  REAL(8) :: A , X , aeps , ainta , algap1 , alneps , alng , alx , &
-    bot , h , sga , sgngam , sqeps , t , D1MACH , DGAMR , &
-    D9GMIT , D9LGIT , DLNGAM , D9LGIC
+  REAL(8) :: A, X, aeps, ainta, algap1, alneps, alng, alx, &
+    bot, h, sga, sgngam, sqeps, t, D1MACH, DGAMR, &
+    D9GMIT, D9LGIT, DLNGAM, D9LGIC
   LOGICAL first
-  SAVE alneps , sqeps , bot , first
+  SAVE alneps, sqeps, bot, first
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  DGAMIT
   IF ( first ) THEN
@@ -122,4 +122,5 @@ REAL(8) FUNCTION DGAMIT(A,X)
   DGAMIT = SIGN(EXP(t),h)
   RETURN
   !
-  99999 END FUNCTION DGAMIT
+  99999 CONTINUE
+  END FUNCTION DGAMIT

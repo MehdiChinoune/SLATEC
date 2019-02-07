@@ -49,10 +49,10 @@ REAL FUNCTION ENORM(N,X)
   INTEGER N
   REAL X(*)
   INTEGER i
-  REAL agiant , floatn , one , rdwarf , rgiant , s1 , s2 , s3 , xabs , &
-    x1max , x3max , zero
-  SAVE one , zero , rdwarf , rgiant
-  DATA one , zero , rdwarf , rgiant/1.0E0 , 0.0E0 , 3.834E-20 , 1.304E19/
+  REAL agiant, floatn, one, rdwarf, rgiant, s1, s2, s3, xabs, &
+    x1max, x3max, zero
+  SAVE one, zero, rdwarf, rgiant
+  DATA one, zero, rdwarf, rgiant/1.0E0, 0.0E0, 3.834E-20, 1.304E19/
   !***FIRST EXECUTABLE STATEMENT  ENORM
   s1 = zero
   s2 = zero
@@ -61,7 +61,7 @@ REAL FUNCTION ENORM(N,X)
   x3max = zero
   floatn = N
   agiant = rgiant/floatn
-  DO i = 1 , N
+  DO i = 1, N
     xabs = ABS(X(i))
     IF ( xabs>rdwarf.AND.xabs<agiant ) THEN
       !

@@ -5,10 +5,10 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
   IMPLICIT NONE
   !*--ORTHOR6
   !*** Start of declarations inserted by SPAG
-  REAL A , acc , akk , anorm , as , asave , Diag , diagk , dum , R1MACH , &
-    Rows , Rs , rss , sad , Scales , SDOT , sig , sigma , sruro , uro
-  INTEGER Iflag , Irank , Iscale , j , jrow , k , kp , Kpivot , l , M , mk , &
-    N , Nrda
+  REAL A, acc, akk, anorm, as, asave, Diag, diagk, dum, R1MACH, &
+    Rows, Rs, rss, sad, Scales, SDOT, sig, sigma, sruro, uro
+  INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot, l, M, mk, &
+    N, Nrda
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ORTHOR
   !***SUBSIDIARY
@@ -82,7 +82,7 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  ORTHOR
-  DIMENSION A(Nrda,*) , Diag(*) , Kpivot(*) , Rows(*) , Rs(*) , Scales(*)
+  DIMENSION A(Nrda,*), Diag(*), Kpivot(*), Rows(*), Rs(*), Scales(*)
   !
   ! END OF ABSTRACT
   !
@@ -106,7 +106,7 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
     !     COMPUTE NORM**2 OF JTH ROW AND A MATRIX NORM
     !
     anorm = 0.
-    DO j = 1 , N
+    DO j = 1, N
       Kpivot(j) = j
       Rows(j) = SDOT(M,A(j,1),Nrda,A(j,1),Nrda)
       Rs(j) = Rows(j)
@@ -124,14 +124,14 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
     !     ORTHOGONAL TRANSFORMATIONS
     !
     !
-    DO k = 1 , N
+    DO k = 1, N
       mk = M - k + 1
       IF ( k/=N ) THEN
         kp = k + 1
         !
         !        SEARCHING FOR PIVOTAL ROW
         !
-        DO j = k , N
+        DO j = k, N
           IF ( Rows(j)<sruro*Rs(j) ) THEN
             Rows(j) = SDOT(mk,A(j,k),Nrda,A(j,k),Nrda)
             Rs(j) = Rows(j)
@@ -154,7 +154,7 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
           rss = Rs(k)
           Rs(k) = Rs(jrow)
           Rs(jrow) = rss
-          DO l = 1 , M
+          DO l = 1, M
             asave = A(k,l)
             A(k,l) = A(jrow,l)
             A(jrow,l) = asave
@@ -176,9 +176,9 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
         A(k,k) = akk - diagk
         IF ( k/=N ) THEN
           sad = diagk*akk - sig
-          DO j = kp , N
+          DO j = kp, N
             as = SDOT(mk,A(k,k),Nrda,A(j,k),Nrda)/sad
-            DO l = k , M
+            DO l = k, M
               A(j,l) = A(j,l) + as*A(k,l)
             ENDDO
             Rows(j) = Rows(j) - A(j,k)**2
@@ -201,4 +201,5 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
   RETURN
   !
   !
-  99999 END SUBROUTINE ORTHOR
+  99999 CONTINUE
+  END SUBROUTINE ORTHOR

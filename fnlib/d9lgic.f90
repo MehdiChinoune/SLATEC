@@ -31,7 +31,7 @@ REAL(8) FUNCTION D9LGIC(A,X,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9LGIC
-  REAL(8) :: A , X , Alx , eps , fk , p , r , s , t , xma , xpa , &
+  REAL(8) :: A, X, Alx, eps, fk, p, r, s, t, xma, xpa, &
     D1MACH
   SAVE eps
   DATA eps/0.D0/
@@ -44,7 +44,7 @@ REAL(8) FUNCTION D9LGIC(A,X,Alx)
   r = 0.D0
   p = 1.D0
   s = p
-  DO k = 1 , 300
+  DO k = 1, 300
     fk = k
     t = fk*(A-fk)*(1.D0+r)
     r = -t/((xma+2.D0*fk)*(xpa+2.D0*fk)+t)

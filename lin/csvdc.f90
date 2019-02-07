@@ -112,17 +112,17 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CSVDC
-  INTEGER Ldx , N , P , Ldu , Ldv , Job , Info
-  COMPLEX X(Ldx,*) , S(*) , E(*) , U(Ldu,*) , V(Ldv,*) , Work(*)
+  INTEGER Ldx, N, P, Ldu, Ldv, Job, Info
+  COMPLEX X(Ldx,*), S(*), E(*), U(Ldu,*), V(Ldv,*), Work(*)
   !
   !
-  INTEGER i , iter , j , jobu , k , kase , kk , l , ll , lls , lm1 , lp1 ,&
-    ls , lu , m , maxit , mm , mm1 , mp1 , nct , nctp1 , ncu , nrt ,&
+  INTEGER i, iter, j, jobu, k, kase, kk, l, ll, lls, lm1, lp1 ,&
+    ls, lu, m, maxit, mm, mm1, mp1, nct, nctp1, ncu, nrt ,&
     nrtp1
-  COMPLEX CDOTC , t , r
-  REAL b , c , cs , el , emm1 , f , g , SCNRM2 , scale , shift , sl , sm ,&
-    sn , smm1 , t1 , test , ztest
-  LOGICAL wantu , wantv
+  COMPLEX CDOTC, t, r
+  REAL b, c, cs, el, emm1, f, g, SCNRM2, scale, shift, sl, sm ,&
+    sn, smm1, t1, test, ztest
+  LOGICAL wantu, wantv
   REAL, EXTERNAL :: CABS1
   COMPLEX, EXTERNAL :: CSIGN
   !***FIRST EXECUTABLE STATEMENT  CSVDC
@@ -149,7 +149,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   nrt = MAX(0,MIN(P-2,N))
   lu = MAX(nct,nrt)
   IF ( lu>=1 ) THEN
-    DO l = 1 , lu
+    DO l = 1, lu
       lp1 = l + 1
       IF ( l<=nct ) THEN
         !
@@ -165,7 +165,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
         S(l) = -S(l)
       ENDIF
       IF ( P>=lp1 ) THEN
-        DO j = lp1 , P
+        DO j = lp1, P
           IF ( l<=nct ) THEN
             IF ( CABS1(S(l))/=0.0E0 ) THEN
               !
@@ -187,7 +187,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
         !           PLACE THE TRANSFORMATION IN U FOR SUBSEQUENT BACK
         !           MULTIPLICATION.
         !
-        DO i = l , N
+        DO i = l, N
           U(i,l) = X(i,l)
         ENDDO
       ENDIF
@@ -207,13 +207,13 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           !
           !              APPLY THE TRANSFORMATION.
           !
-          DO i = lp1 , N
+          DO i = lp1, N
             Work(i) = (0.0E0,0.0E0)
           ENDDO
-          DO j = lp1 , P
+          DO j = lp1, P
             CALL CAXPY(N-l,E(j),X(lp1,j),1,Work(lp1),1)
           ENDDO
-          DO j = lp1 , P
+          DO j = lp1, P
             CALL CAXPY(N-l,CONJG(-E(j)/E(lp1)),Work(lp1),1,X(lp1,j),1)
           ENDDO
         ENDIF
@@ -222,7 +222,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           !              PLACE THE TRANSFORMATION IN V FOR SUBSEQUENT
           !              BACK MULTIPLICATION.
           !
-          DO i = lp1 , P
+          DO i = lp1, P
             V(i,l) = E(i)
           ENDDO
         ENDIF
@@ -244,25 +244,25 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !
   IF ( wantu ) THEN
     IF ( ncu>=nctp1 ) THEN
-      DO j = nctp1 , ncu
-        DO i = 1 , N
+      DO j = nctp1, ncu
+        DO i = 1, N
           U(i,j) = (0.0E0,0.0E0)
         ENDDO
         U(j,j) = (1.0E0,0.0E0)
       ENDDO
     ENDIF
     IF ( nct>=1 ) THEN
-      DO ll = 1 , nct
+      DO ll = 1, nct
         l = nct - ll + 1
         IF ( CABS1(S(l))==0.0E0 ) THEN
-          DO i = 1 , N
+          DO i = 1, N
             U(i,l) = (0.0E0,0.0E0)
           ENDDO
           U(l,l) = (1.0E0,0.0E0)
         ELSE
           lp1 = l + 1
           IF ( ncu>=lp1 ) THEN
-            DO j = lp1 , ncu
+            DO j = lp1, ncu
               t = -CDOTC(N-l+1,U(l,l),1,U(l,j),1)/U(l,l)
               CALL CAXPY(N-l+1,t,U(l,l),1,U(l,j),1)
             ENDDO
@@ -271,7 +271,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           U(l,l) = (1.0E0,0.0E0) + U(l,l)
           lm1 = l - 1
           IF ( lm1>=1 ) THEN
-            DO i = 1 , lm1
+            DO i = 1, lm1
               U(i,l) = (0.0E0,0.0E0)
             ENDDO
           ENDIF
@@ -283,18 +283,18 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !     IF IT IS REQUIRED, GENERATE V.
   !
   IF ( wantv ) THEN
-    DO ll = 1 , P
+    DO ll = 1, P
       l = P - ll + 1
       lp1 = l + 1
       IF ( l<=nrt ) THEN
         IF ( CABS1(E(l))/=0.0E0 ) THEN
-          DO j = lp1 , P
+          DO j = lp1, P
             t = -CDOTC(P-l,V(lp1,l),1,V(lp1,j),1)/V(lp1,l)
             CALL CAXPY(P-l,t,V(lp1,l),1,V(lp1,j),1)
           ENDDO
         ENDIF
       ENDIF
-      DO i = 1 , P
+      DO i = 1, P
         V(i,l) = (0.0E0,0.0E0)
       ENDDO
       V(l,l) = (1.0E0,0.0E0)
@@ -303,7 +303,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !
   !     TRANSFORM S AND E SO THAT THEY ARE REAL.
   !
-  DO i = 1 , m
+  DO i = 1, m
     IF ( CABS1(S(i))/=0.0E0 ) THEN
       t = CMPLX(ABS(S(i)),0.0E0)
       r = S(i)/t
@@ -345,7 +345,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
       !                        S(L), ..., S(M) ARE NOT NEGLIGIBLE (QR STEP).
       !           KASE = 4     IF E(M-1) IS NEGLIGIBLE (CONVERGENCE).
       !
-      DO ll = 1 , m
+      DO ll = 1, m
         l = m - ll
         IF ( l==0 ) EXIT
         test = ABS(S(l)) + ABS(S(l+1))
@@ -358,7 +358,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
       IF ( l/=m-1 ) THEN
         lp1 = l + 1
         mp1 = m + 1
-        DO lls = lp1 , mp1
+        DO lls = lp1, mp1
           ls = m - lls + lp1
           IF ( ls==l ) EXIT
           test = 0.0E0
@@ -392,7 +392,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           !
           f = REAL(E(l-1))
           E(l-1) = (0.0E0,0.0E0)
-          DO k = l , m
+          DO k = l, m
             t1 = REAL(S(k))
             CALL SROTG(t1,f,cs,sn)
             S(k) = CMPLX(t1,0.0E0)
@@ -427,7 +427,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           !           CHASE ZEROS.
           !
           mm1 = m - 1
-          DO k = l , mm1
+          DO k = l, mm1
             CALL SROTG(f,g,cs,sn)
             IF ( k/=l ) E(k-1) = CMPLX(f,0.0E0)
             f = cs*REAL(S(k)) + sn*REAL(E(k))
@@ -476,7 +476,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           mm1 = m - 1
           f = REAL(E(m-1))
           E(m-1) = (0.0E0,0.0E0)
-          DO kk = l , mm1
+          DO kk = l, mm1
             k = mm1 - kk + l
             t1 = REAL(S(k))
             CALL SROTG(t1,f,cs,sn)

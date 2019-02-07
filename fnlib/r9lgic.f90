@@ -4,7 +4,7 @@ FUNCTION R9LGIC(A,X,Alx)
   IMPLICIT NONE
   !*--R9LGIC5
   !*** Start of declarations inserted by SPAG
-  REAL A , Alx , eps , fk , p , r , R1MACH , R9LGIC , s , t , X , xma , xpa
+  REAL A, Alx, eps, fk, p, r, R1MACH, R9LGIC, s, t, X, xma, xpa
   INTEGER k
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9LGIC
@@ -43,7 +43,7 @@ FUNCTION R9LGIC(A,X,Alx)
   r = 0.0
   p = 1.0
   s = p
-  DO k = 1 , 200
+  DO k = 1, 200
     fk = k
     t = fk*(A-fk)*(1.0+r)
     r = -t/((xma+2.0*fk)*(xpa+2.0*fk)+t)

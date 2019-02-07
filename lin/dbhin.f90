@@ -154,15 +154,15 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  DBHIN
   !     .. Scalar Arguments ..
-  INTEGER Isym , Iunit , Job , N , Nelt
+  INTEGER Isym, Iunit, Job, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , Rhs(N) , Soln(N)
-  INTEGER Ia(Nelt) , Ja(Nelt)
+  REAL(8) :: A(Nelt), Rhs(N), Soln(N)
+  INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
   REAL(8) :: temp
-  INTEGER i , ibgn , icol , iend , itemp , j , jobret , ncol , nele , nind , &
-    nline , nnvls , npls , nrhsls , nrils , nrow
-  CHARACTER code*3 , pntfmt*16 , rinfmt*16 , nvlfmt*20 , rhsfmt*20 , &
+  INTEGER i, ibgn, icol, iend, itemp, j, jobret, ncol, nele, nind, &
+    nline, nnvls, npls, nrhsls, nrils, nrow
+  CHARACTER code*3, pntfmt*16, rinfmt*16, nvlfmt*20, rhsfmt*20, &
     title*80
   !     .. Intrinsic Functions ..
   INTRINSIC MOD
@@ -180,11 +180,11 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !
   READ (Iunit,99001) title
   99001 FORMAT (A80)
-  READ (Iunit,99002) nline , npls , nrils , nnvls , nrhsls
+  READ (Iunit,99002) nline, npls, nrils, nnvls, nrhsls
   99002 FORMAT (5I14)
-  READ (Iunit,99003) code , nrow , ncol , nind , nele
+  READ (Iunit,99003) code, nrow, ncol, nind, nele
   99003 FORMAT (A3,11X,4I14)
-  READ (Iunit,99004) pntfmt , rinfmt , nvlfmt , rhsfmt
+  READ (Iunit,99004) pntfmt, rinfmt, nvlfmt, rhsfmt
   99004 FORMAT (2A16,2A20)
   !
   IF ( nrow>N ) THEN
@@ -226,7 +226,7 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
       READ (5,rhsfmt) (Rhs(i),i=1,N)
       jobret = jobret + 1
     ELSE
-      DO i = 1 , N
+      DO i = 1, N
         Rhs(i) = 0
       ENDDO
     ENDIF
@@ -236,7 +236,7 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
     !         User requests that the SOLN be read in.
     !         Just zero out the array.
     !
-    DO i = 1 , N
+    DO i = 1, N
       Soln(i) = 0
     ENDDO
   ENDIF
@@ -247,10 +247,10 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !
   !VD$R NOCONCUR
   !VD$R NOVECTOR
-  DO icol = 1 , N
+  DO icol = 1, N
     ibgn = Ja(icol)
     iend = Ja(icol+1) - 1
-    DO i = ibgn , iend
+    DO i = ibgn, iend
       IF ( Ia(i)==icol ) THEN
         !
         !              Swap the diagonal element with the first element in the
@@ -267,8 +267,8 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
     ENDDO
     ibgn = ibgn + 1
     IF ( ibgn<iend ) THEN
-      DO i = ibgn , iend
-        DO j = i + 1 , iend
+      DO i = ibgn, iend
+        DO j = i + 1, iend
           IF ( Ia(i)>Ia(j) ) THEN
             itemp = Ia(i)
             Ia(i) = Ia(j)

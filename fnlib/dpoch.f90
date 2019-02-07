@@ -4,7 +4,7 @@ REAL(8) FUNCTION DPOCH(A,X)
   IMPLICIT NONE
   !*--DPOCH5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , ia , n
+  INTEGER i, ia, n
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPOCH
   !***PURPOSE  Evaluate a generalization of Pochhammer's symbol.
@@ -33,9 +33,9 @@ REAL(8) FUNCTION DPOCH(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DPOCH
-  REAL(8) :: A , X , absa , absax , alnga , alngax , ax , b , pi , &
-    sgnga , sgngax , DFAC , DLNREL , D9LGMC , DGAMMA , &
-    DGAMR , DCOT
+  REAL(8) :: A, X, absa, absax, alnga, alngax, ax, b, pi, &
+    sgnga, sgngax, DFAC, DLNREL, D9LGMC, DGAMMA, &
+    DGAMR, DCOT
   EXTERNAL DGAMMA
   SAVE pi
   DATA pi/3.141592653589793238462643383279503D0/
@@ -95,7 +95,7 @@ REAL(8) FUNCTION DPOCH(A,X)
     !
     DPOCH = 1.0D0
     IF ( n==0 ) RETURN
-    DO i = 1 , n
+    DO i = 1, n
       DPOCH = DPOCH*(A+i-1)
     ENDDO
     RETURN
@@ -113,4 +113,5 @@ REAL(8) FUNCTION DPOCH(A,X)
     DPOCH = DPOCH/(COS(pi*X)+DCOT(pi*A)*SIN(pi*X))
   RETURN
   !
-  99999 END FUNCTION DPOCH
+  99999 CONTINUE
+  END FUNCTION DPOCH

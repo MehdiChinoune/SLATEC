@@ -23,12 +23,12 @@ LOGICAL FUNCTION LCE(Ri,Rj,Lr)
   !     .. Scalar Arguments ..
   INTEGER Lr
   !     .. Array Arguments ..
-  COMPLEX Ri(*) , Rj(*)
+  COMPLEX Ri(*), Rj(*)
   !     .. Local Scalars ..
   INTEGER i
   !***FIRST EXECUTABLE STATEMENT  LCE
   LCE = .TRUE.
-  DO i = 1 , Lr
+  DO i = 1, Lr
     IF ( Ri(i)/=Rj(i) ) THEN
       LCE = .FALSE.
       EXIT

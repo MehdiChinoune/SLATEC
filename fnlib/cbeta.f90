@@ -4,7 +4,7 @@ COMPLEX FUNCTION CBETA(A,B)
   IMPLICIT NONE
   !*--CBETA5
   !*** Start of declarations inserted by SPAG
-  REAL xmax , xmaxt , xmin
+  REAL xmax, xmaxt, xmin
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CBETA
   !***PURPOSE  Compute the complete Beta function.
@@ -32,7 +32,7 @@ COMPLEX FUNCTION CBETA(A,B)
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  CBETA
-  COMPLEX A , B , CGAMMA , CLBETA
+  COMPLEX A, B, CGAMMA, CLBETA
   EXTERNAL CGAMMA
   SAVE xmax
   DATA xmax/0.0/

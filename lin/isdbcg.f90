@@ -177,12 +177,12 @@ INTEGER FUNCTION ISDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  ISDBCG
   !     .. Scalar Arguments ..
-  REAL(8) :: Ak , Bk , Bnrm , Err , Solnrm , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
+  REAL(8) :: Ak, Bk, Bnrm, Err, Solnrm, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , B(N) , Dz(N) , P(N) , Pp(N) , R(N) , Rr(N) , &
-    Rwork(*) , X(N) , Z(N) , Zz(N)
-  INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
+  REAL(8) :: A(Nelt), B(N), Dz(N), P(N), Pp(N), R(N), Rr(N), &
+    Rwork(*), X(N), Z(N), Zz(N)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL MSOLVE
   !     .. Arrays in Common ..
@@ -190,8 +190,8 @@ INTEGER FUNCTION ISDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DNRM2
-  EXTERNAL D1MACH , DNRM2
+  REAL(8) :: D1MACH, DNRM2
+  EXTERNAL D1MACH, DNRM2
   !     .. Common blocks ..
   COMMON /DSLBLK/ SOLn
   !***FIRST EXECUTABLE STATEMENT  ISDBCG
@@ -212,7 +212,7 @@ INTEGER FUNCTION ISDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
     IF ( Iter==0 ) Solnrm = DNRM2(N,SOLn,1)
-    DO i = 1 , N
+    DO i = 1, N
       Dz(i) = X(i) - SOLn(i)
     ENDDO
     Err = DNRM2(N,Dz,1)/Solnrm
@@ -225,13 +225,13 @@ INTEGER FUNCTION ISDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
   !
   IF ( Iunit/=0 ) THEN
     IF ( Iter==0 ) THEN
-      WRITE (Iunit,99001) N , Itol
+      WRITE (Iunit,99001) N, Itol
       99001     FORMAT (' Preconditioned BiConjugate Gradient for N, ITOL = ',I5,I5,&
         /' ITER','   Error Estimate','            Alpha',&
         '             Beta')
-      WRITE (Iunit,99002) Iter , Err
+      WRITE (Iunit,99002) Iter, Err
     ELSE
-      WRITE (Iunit,99002) Iter , Err , Ak , Bk
+      WRITE (Iunit,99002) Iter, Err, Ak, Bk
     ENDIF
   ENDIF
   IF ( Err<=Tol ) ISDBCG = 1

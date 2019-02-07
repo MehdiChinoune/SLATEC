@@ -4,8 +4,8 @@ SUBROUTINE BKSOL(N,A,X)
   IMPLICIT NONE
   !*--BKSOL5
   !*** Start of declarations inserted by SPAG
-  REAL A , SDOT , X
-  INTEGER j , k , m , N , nm1
+  REAL A, SDOT, X
+  INTEGER j, k, m, N, nm1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BKSOL
   !***SUBSIDIARY
@@ -36,14 +36,14 @@ SUBROUTINE BKSOL(N,A,X)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  BKSOL
   !
-  DIMENSION A(*) , X(*)
+  DIMENSION A(*), X(*)
   !
   !***FIRST EXECUTABLE STATEMENT  BKSOL
   m = (N*(N+1))/2
   X(N) = X(N)*A(m)
   IF ( N/=1 ) THEN
     nm1 = N - 1
-    DO k = 1 , nm1
+    DO k = 1, nm1
       j = N - k
       m = m - k - 1
       X(j) = X(j)*A(m) - SDOT(k,A(m+1),1,X(j+1),1)

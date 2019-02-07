@@ -94,14 +94,14 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !
   INTEGER I1MACH
   REAL(8) :: D1MACH
-  INTEGER ic , icr , Iflag , Iprint , Is(*) , isj , isv , it , item , itry , &
-    j , jk , js , k , kd , kj , kk , km1 , kn , ksv , l , loun , ls , &
-    m , mit , mm , Mxit , N , Nc , Ncjs , np1 , Nsri , Nsrrc
-  REAL(8) :: Atolx , B(*) , C(*) , csv , f , Fac(*) , fact , fdif , &
-    Fmax , fmin , fmxs , fn1 , fn2 , FNC , fp , h , hx , &
-    P(*) , pmax , re , Rtolx , S(*) , sruro , Temp(*) , &
-    test , Tolf , uro , X(*) , xnorm , Y(*) , yj , yn1 , &
-    yn2 , yn3 , ynorm , yns , zero
+  INTEGER ic, icr, Iflag, Iprint, Is(*), isj, isv, it, item, itry, &
+    j, jk, js, k, kd, kj, kk, km1, kn, ksv, l, loun, ls, &
+    m, mit, mm, Mxit, N, Nc, Ncjs, np1, Nsri, Nsrrc
+  REAL(8) :: Atolx, B(*), C(*), csv, f, Fac(*), fact, fdif, &
+    Fmax, fmin, fmxs, fn1, fn2, FNC, fp, h, hx, &
+    P(*), pmax, re, Rtolx, S(*), sruro, Temp(*), &
+    test, Tolf, uro, X(*), xnorm, Y(*), yj, yn1, &
+    yn2, yn3, ynorm, yns, zero
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 430
   !        BEGIN BLOCK PERMITTING ...EXITS TO 410
@@ -130,7 +130,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !              INITIALIZE THE INTERCHANGE (PIVOTING) VECTOR AND
   !              SAVE THE CURRENT SOLUTION APPROXIMATION FOR FUTURE USE.
   !
-  DO k = 1 , N
+  DO k = 1, N
     Is(k) = k
     X(k) = S(k)
     Temp(k) = X(k)
@@ -141,11 +141,11 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !              **** BEGIN PRINCIPAL ITERATION LOOP  ****
   !              *********************************************************
   !
-  DO m = 1 , Mxit
+  DO m = 1, Mxit
     !                 BEGIN BLOCK PERMITTING ...EXITS TO 350
     !                    BEGIN BLOCK PERMITTING ...EXITS TO 240
     !
-    DO k = 1 , N
+    DO k = 1, N
       Fac(k) = sruro
     ENDDO
     DO
@@ -163,7 +163,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       !                             TRIANGULARIZATION OF THE FULL JACOBIAN
       !                             MATRIX
       !
-      DO k = 1 , N
+      DO k = 1, N
         !                                BEGIN BLOCK PERMITTING ...EXITS TO 160
         km1 = k - 1
         !
@@ -176,7 +176,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
         !
         IF ( km1/=0 ) THEN
           CALL DSOSSL(k,N,km1,Y,C,B,kn)
-          DO j = 1 , km1
+          DO j = 1, km1
             js = Is(j)
             X(js) = Temp(js) + Y(j)
           ENDDO
@@ -206,7 +206,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
           !                                   REQUIRED IN THE LINEARIZATION OF THE
           !                                   K-TH REDUCED EQUATION
           !
-          DO j = k , N
+          DO j = k, N
             item = Is(j)
             hx = X(item)
             h = Fac(item)*hx
@@ -215,7 +215,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             IF ( km1/=0 ) THEN
               Y(j) = h
               CALL DSOSSL(k,N,j,Y,C,B,kn)
-              DO l = 1 , km1
+              DO l = 1, km1
                 ls = Is(l)
                 X(ls) = Temp(ls) + Y(l)
               ENDDO
@@ -238,7 +238,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             !                                      PERTURBATIONS OF THE INDEPENDENT
             !                                      VARIABLES.
             !
-            DO j = k , N
+            DO j = k, N
               isj = Is(j)
               fact = 100.0D0*Fac(isj)
               !           ..............................EXIT
@@ -256,7 +256,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             !                                   ELEMENT
             !
             pmax = 0.0D0
-            DO j = k , N
+            DO j = k, N
               test = ABS(P(j))
               IF ( test>pmax ) THEN
                 pmax = test
@@ -273,7 +273,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             !
             pmax = P(isv)
             kk = kn
-            DO j = k , N
+            DO j = k, N
               IF ( j/=isv ) C(kk) = -P(j)/pmax
               kk = kk + 1
             ENDDO
@@ -292,7 +292,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
               !
               kd = isv - k
               kj = k
-              DO j = 1 , k
+              DO j = 1, k
                 csv = C(kj)
                 jk = kj + kd
                 C(kj) = C(jk)
@@ -328,7 +328,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       IF ( N>1 ) CALL DSOSSL(N,N,N,Y,C,B,kn)
       xnorm = 0.0D0
       ynorm = 0.0D0
-      DO j = 1 , N
+      DO j = 1, N
         yj = Y(j)
         ynorm = MAX(ynorm,ABS(yj))
         js = Is(j)
@@ -342,7 +342,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       !
       IF ( Iprint==(-1) ) THEN
         mm = m - 1
-        WRITE (loun,99001) Fmax , mm , (X(j),j=1,N)
+        WRITE (loun,99001) Fmax, mm, (X(j),j=1,N)
         99001       FORMAT ('0RESIDUAL NORM =',D9.2,/1X,'SOLUTION ITERATE (',I3,')',&
           /(1X,5D26.14))
       ENDIF
@@ -351,7 +351,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       !                       AND/OR ABSOLUTE ERROR COMPARISON ON SUCCESSIVE
       !                       APPROXIMATIONS OF EACH SOLUTION VARIABLE)
       !
-      DO j = 1 , N
+      DO j = 1, N
         js = Is(j)
         !                    ......EXIT
         IF ( ABS(Y(j))>re*ABS(X(js))+Atolx ) GOTO 100
@@ -379,7 +379,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
           yn2 = yns
           fn1 = fmxs
           fmin = Fmax
-          DO j = 1 , N
+          DO j = 1, N
             S(j) = X(j)
           ENDDO
           ic = 0
@@ -444,7 +444,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       !                 RESIDUAL AND SOLUTION INCREMENT NORMS FOR USE IN THE
       !                 NEXT ITERATION.
       !
-      DO j = 1 , N
+      DO j = 1, N
         Temp(j) = X(j)
       ENDDO
       IF ( m==mit ) THEN
@@ -471,19 +471,21 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     IF ( Fmax>5.0D0*fmin ) Iflag = 6
     !
     !
-    200  DO j = 1 , N
-    S(j) = X(j)
-  ENDDO
-  GOTO 400
-  !
-  !
-  !           A JACOBIAN-RELATED MATRIX IS EFFECTIVELY SINGULAR.
-  300  Iflag = 8
-  DO j = 1 , N
-    S(j) = Temp(j)
-    !     ......EXIT
-  ENDDO
-  !
-  !
-  400  Mxit = m
+    200 CONTINUE
+    DO j = 1, N
+      S(j) = X(j)
+    ENDDO
+    GOTO 400
+    !
+    !
+    !           A JACOBIAN-RELATED MATRIX IS EFFECTIVELY SINGULAR.
+    300 CONTINUE
+    IFlag = 8
+    DO j = 1, N
+      S(j) = Temp(j)
+      !     ......EXIT
+    ENDDO
+    !
+    !
+    400  Mxit = m
 END SUBROUTINE DSOSEQ

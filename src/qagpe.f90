@@ -201,21 +201,21 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  QAGPE
-  REAL A , abseps , Abserr , Alist , area , area1 , area12 , area2 , a1 , &
-    a2 , B , Blist , b1 , b2 , correc , defabs , defab1 , defab2 , dres , &
-    R1MACH , Elist , epmach , Epsabs , Epsrel , erlarg , erlast , &
-    errbnd , errmax , error1 , erro12 , error2 , errsum , ertest , F , &
-    oflow , Points , Pts , resa , resabs , reseps , Result , res3la , &
-    Rlist , rlist2 , sign , temp , uflow
-  INTEGER i , id , Ier , ierro , ind1 , ind2 , Iord , ip1 , iroff1 , &
-    iroff2 , iroff3 , j , jlow , jupbnd , k , ksgn , ktmin , Last , &
-    levcur , Level , levmax , Limit , maxerr , Ndin , Neval , nint , &
-    nintp1 , npts , Npts2 , nres , nrmax , numrl2
-  LOGICAL extrap , noext
+  REAL A, abseps, Abserr, Alist, area, area1, area12, area2, a1, &
+    a2, B, Blist, b1, b2, correc, defabs, defab1, defab2, dres, &
+    R1MACH, Elist, epmach, Epsabs, Epsrel, erlarg, erlast, &
+    errbnd, errmax, error1, erro12, error2, errsum, ertest, F, &
+    oflow, Points, Pts, resa, resabs, reseps, Result, res3la, &
+    Rlist, rlist2, sign, temp, uflow
+  INTEGER i, id, Ier, ierro, ind1, ind2, Iord, ip1, iroff1, &
+    iroff2, iroff3, j, jlow, jupbnd, k, ksgn, ktmin, Last, &
+    levcur, Level, levmax, Limit, maxerr, Ndin, Neval, nint, &
+    nintp1, npts, Npts2, nres, nrmax, numrl2
+  LOGICAL extrap, noext
   !
   !
-  DIMENSION Alist(*) , Blist(*) , Elist(*) , Iord(*) , Level(*) , Ndin(*) , &
-    Points(*) , Pts(*) , res3la(3) , Rlist(*) , rlist2(52)
+  DIMENSION Alist(*), Blist(*), Elist(*), Iord(*), Level(*), Ndin(*), &
+    Points(*), Pts(*), res3la(3), Rlist(*), rlist2(52)
   !
   EXTERNAL F
   !
@@ -300,7 +300,7 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   IF ( A>B ) sign = -1.0E+00
   Pts(1) = MIN(A,B)
   IF ( npts/=0 ) THEN
-    DO i = 1 , npts
+    DO i = 1, npts
       Pts(i+1) = Points(i)
     ENDDO
   ENDIF
@@ -309,9 +309,9 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   a1 = Pts(1)
   IF ( npts/=0 ) THEN
     nintp1 = nint + 1
-    DO i = 1 , nint
+    DO i = 1, nint
       ip1 = i + 1
-      DO j = ip1 , nintp1
+      DO j = ip1, nintp1
         IF ( Pts(i)>Pts(j) ) THEN
           temp = Pts(i)
           Pts(i) = Pts(j)
@@ -327,7 +327,7 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !            ------------------------------------------------
   !
   resabs = 0.0E+00
-  DO i = 1 , nint
+  DO i = 1, nint
     b1 = Pts(i+1)
     CALL QK21(F,a1,b1,area1,error1,defabs,resa)
     Abserr = Abserr + error1
@@ -344,7 +344,7 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     a1 = b1
   ENDDO
   errsum = 0.0E+00
-  DO i = 1 , nint
+  DO i = 1, nint
     IF ( Ndin(i)==1 ) Elist(i) = Abserr
     errsum = errsum + Elist(i)
   ENDDO
@@ -357,10 +357,10 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   errbnd = MAX(Epsabs,Epsrel*dres)
   IF ( Abserr<=0.1E+03*epmach*resabs.AND.Abserr>errbnd ) Ier = 2
   IF ( nint/=1 ) THEN
-    DO i = 1 , npts
+    DO i = 1, npts
       jlow = i + 1
       ind1 = Iord(i)
-      DO j = jlow , nint
+      DO j = jlow, nint
         ind2 = Iord(j)
         IF ( Elist(ind1)<=Elist(ind2) ) THEN
           ind1 = ind2
@@ -405,7 +405,7 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !           MAIN DO-LOOP
   !           ------------
   !
-  DO Last = Npts2 , Limit
+  DO Last = Npts2, Limit
     !
     !           BISECT THE SUBINTERVAL WITH THE NRMAX-TH LARGEST
     !           ERROR ESTIMATE.
@@ -508,7 +508,7 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
         id = nrmax
         jupbnd = Last
         IF ( Last>(2+Limit/2) ) jupbnd = Limit + 3 - Last
-        DO k = id , jupbnd
+        DO k = id, jupbnd
           maxerr = Iord(nrmax)
           errmax = Elist(maxerr)
           ! ***JUMP OUT OF DO-LOOP
@@ -577,10 +577,12 @@ SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     !           COMPUTE GLOBAL INTEGRAL SUM.
     !
     200  Result = 0.0E+00
-    DO k = 1 , Last
+    DO k = 1, Last
       Result = Result + Rlist(k)
     ENDDO
     Abserr = errsum
-    300  IF ( Ier>2 ) Ier = Ier - 1
+    300 CONTINUE
+    IF ( Ier>2 ) Ier = Ier - 1
     Result = Result*sign
-    99999 END SUBROUTINE QAGPE
+      99999 CONTINUE
+  END SUBROUTINE QAGPE

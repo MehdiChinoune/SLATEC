@@ -164,12 +164,12 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   IMPLICIT NONE
   !*--DLLSIA165
   !*** Start of declarations inserted by SPAG
-  REAL(8) :: A , Ae , B , eps , Re , Rnorm , W
-  INTEGER i , Info , it , Key , Krank , Ksure , Liw , Lw , M , Mda , Mdb , &
-    Mode , N , n1 , n2 , n3 , n4 , n5 , Nb , Np
+  REAL(8) :: A, Ae, B, eps, Re, Rnorm, W
+  INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
+    Mode, N, n1, n2, n3, n4, n5, Nb, Np
   !*** End of declarations inserted by SPAG
   REAL(8) :: D1MACH
-  DIMENSION A(Mda,*) , B(Mdb,*) , Re(*) , Ae(*) , Rnorm(*) , W(*)
+  DIMENSION A(Mda,*), B(Mdb,*), Re(*), Ae(*), Rnorm(*), W(*)
   INTEGER Iwork(*)
   !
   !***FIRST EXECUTABLE STATEMENT  DLLSIA
@@ -244,7 +244,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                   IF ( Key==1 ) THEN
                     !
                     IF ( Ae(1)<0.0D0 ) GOTO 100
-                    DO i = 1 , N
+                    DO i = 1, N
                       IF ( Re(i)<0.0D0 ) GOTO 10
                       IF ( Re(i)>1.0D0 ) GOTO 20
                       IF ( Re(i)<eps ) Re(i) = eps
@@ -257,7 +257,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                     IF ( Re(1)<0.0D0 ) GOTO 10
                     IF ( Re(1)>1.0D0 ) GOTO 20
                     IF ( Re(1)<eps ) Re(1) = eps
-                    DO i = 1 , N
+                    DO i = 1, N
                       W(n4-1+i) = Re(1)
                       IF ( Ae(i)<0.0D0 ) GOTO 100
                     ENDDO
@@ -265,7 +265,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                       W(n1),W(n2),W(n3),Iwork(n1),Iwork(n2))
                   ELSEIF ( Key==3 ) THEN
                     !
-                    DO i = 1 , N
+                    DO i = 1, N
                       IF ( Re(i)<0.0D0 ) GOTO 10
                       IF ( Re(i)>1.0D0 ) GOTO 20
                       IF ( Re(i)<eps ) Re(i) = eps
@@ -279,7 +279,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                     IF ( Re(1)>1.0D0 ) GOTO 20
                     IF ( Re(1)<eps ) Re(1) = eps
                     IF ( Ae(1)<0.0D0 ) GOTO 100
-                    DO i = 1 , N
+                    DO i = 1, N
                       W(n4-1+i) = Re(1)
                       W(n5-1+i) = Ae(1)
                     ENDDO
@@ -336,4 +336,5 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
 ENDIF
 100  CALL XERMSG('SLATEC','DLLSIA','AE(I) .LT. 0',2,1)
 RETURN
-99999 END SUBROUTINE DLLSIA
+  99999 CONTINUE
+  END SUBROUTINE DLLSIA

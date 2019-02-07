@@ -31,34 +31,34 @@ SUBROUTINE CCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   PARAMETER (RZERO=0.0)
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  REAL Eps , Thresh
-  INTEGER Kprint , Nalf , Nbet , Nidim , Nmax , Nout
+  REAL Eps, Thresh
+  INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
   CHARACTER(6) :: Sname
   !     .. Array Arguments ..
-  COMPLEX A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) ,&
-    B(Nmax,Nmax) , Bb(Nmax*Nmax) , Bet(Nbet) , Bs(Nmax*Nmax) ,&
-    C(Nmax,Nmax) , Cc(Nmax*Nmax) , Cs(Nmax*Nmax) , Ct(Nmax)
+  COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax) ,&
+    B(Nmax,Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax) ,&
+    C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax)
   REAL G(Nmax)
   INTEGER Idim(Nidim)
   !     .. Local Scalars ..
-  COMPLEX alpha , als , beta , bls
-  REAL err , errmax
-  INTEGER i , ia , ib , ica , icb , ik , im , in , k , ks , laa , lbb ,&
-    lcc , lda , ldas , ldb , ldbs , ldc , ldcs , m , ma , mb , ms ,&
-    n , na , nargs , nb , nc , nerr , ns
-  LOGICAL ftl , null , reset , trana , tranb
-  CHARACTER :: tranas , tranbs , transa , transb
+  COMPLEX alpha, als, beta, bls
+  REAL err, errmax
+  INTEGER i, ia, ib, ica, icb, ik, im, in, k, ks, laa, lbb ,&
+    lcc, lda, ldas, ldb, ldbs, ldc, ldcs, m, ma, mb, ms ,&
+    n, na, nargs, nb, nc, nerr, ns
+  LOGICAL ftl, null, reset, trana, tranb
+  CHARACTER :: tranas, tranbs, transa, transb
   CHARACTER(3) :: ich
   !     .. Local Arrays ..
   LOGICAL isame(13)
   !     .. External Functions ..
   INTEGER NUMXER
-  LOGICAL LCE , LCERES
-  EXTERNAL LCE , LCERES , NUMXER
+  LOGICAL LCE, LCERES
+  EXTERNAL LCE, LCERES, NUMXER
   !     .. External Subroutines ..
-  EXTERNAL CGEMM , CMAKE3 , CMMCH
+  EXTERNAL CGEMM, CMAKE3, CMMCH
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MAX , MIN
+  INTRINSIC ABS, MAX, MIN
   !     .. Data statements ..
   DATA ich/'NTC'/
   !***FIRST EXECUTABLE STATEMENT  CCHK13
@@ -67,10 +67,10 @@ SUBROUTINE CCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   reset = .TRUE.
   errmax = RZERO
   !
-  DO im = 1 , Nidim
+  DO im = 1, Nidim
     m = Idim(im)
     !
-    DO in = 1 , Nidim
+    DO in = 1, Nidim
       n = Idim(in)
       !           Set LDC to 1 more than minimum value if room.
       ldc = m
@@ -80,10 +80,10 @@ SUBROUTINE CCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
         lcc = ldc*n
         null = n<=0 .OR. m<=0
         !
-        DO ik = 1 , Nidim
+        DO ik = 1, Nidim
           k = Idim(ik)
           !
-          DO ica = 1 , 3
+          DO ica = 1, 3
             transa = ich(ica:ica)
             trana = transa=='T' .OR. transa=='C'
             !
@@ -105,7 +105,7 @@ SUBROUTINE CCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
               !
               CALL CMAKE3('GE',' ',' ',ma,na,A,Nmax,Aa,lda,reset,ZERO)
               !
-              DO icb = 1 , 3
+              DO icb = 1, 3
                 transb = ich(icb:icb)
                 tranb = transb=='T' .OR. transb=='C'
                 !
@@ -127,10 +127,10 @@ SUBROUTINE CCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                   !
                   CALL CMAKE3('GE',' ',' ',mb,nb,B,Nmax,Bb,ldb,reset,ZERO)
                   !
-                  DO ia = 1 , Nalf
+                  DO ia = 1, Nalf
                     alpha = Alf(ia)
                     !
-                    DO ib = 1 , Nbet
+                    DO ib = 1, Nbet
                       beta = Bet(ib)
                       !
                       !                          Generate the matrix C.
@@ -148,16 +148,16 @@ SUBROUTINE CCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                       ns = n
                       ks = k
                       als = alpha
-                      DO i = 1 , laa
+                      DO i = 1, laa
                         As(i) = Aa(i)
                       ENDDO
                       ldas = lda
-                      DO i = 1 , lbb
+                      DO i = 1, lbb
                         Bs(i) = Bb(i)
                       ENDDO
                       ldbs = ldb
                       bls = beta
-                      DO i = 1 , lcc
+                      DO i = 1, lcc
                         Cs(i) = Cc(i)
                       ENDDO
                       ldcs = ldc
@@ -196,7 +196,7 @@ SUBROUTINE CCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                       !
                       !                          If data was incorrectly changed, report
                       !
-                      DO i = 1 , nargs
+                      DO i = 1, nargs
                         IF ( .NOT.isame(i) ) THEN
                           Fatal = .TRUE.
                           IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
@@ -217,9 +217,9 @@ SUBROUTINE CCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                         Fatal = .TRUE.
                         IF ( Kprint>=3 ) THEN
                           WRITE (Nout,FMT=99004) Sname
-                          WRITE (Nout,FMT=99005) nc , Sname , transa ,&
-                            transb , m , n , k , alpha , lda , ldb ,&
-                            beta , ldc
+                          WRITE (Nout,FMT=99005) nc, Sname, transa ,&
+                            transb, m, n, k, alpha, lda, ldb ,&
+                            beta, ldc
                         ENDIF
                       ENDIF
                     ENDDO
@@ -244,9 +244,9 @@ SUBROUTINE CCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   IF ( .NOT.Fatal ) THEN
     IF ( Kprint>=3 ) THEN
       IF ( errmax<Thresh ) THEN
-        WRITE (Nout,FMT=99001) Sname , nc
+        WRITE (Nout,FMT=99001) Sname, nc
       ELSE
-        WRITE (Nout,FMT=99003) Sname , nc , errmax
+        WRITE (Nout,FMT=99003) Sname, nc, errmax
       ENDIF
     ENDIF
   ENDIF

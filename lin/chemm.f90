@@ -139,22 +139,22 @@ SUBROUTINE CHEMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  CHEMM
   !     .. Scalar Arguments ..
-  CHARACTER :: Side , Uplo
-  INTEGER M , N , Lda , Ldb , Ldc
-  COMPLEX Alpha , Beta
+  CHARACTER :: Side, Uplo
+  INTEGER M, N, Lda, Ldb, Ldc
+  COMPLEX Alpha, Beta
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*) , B(Ldb,*) , C(Ldc,*)
+  COMPLEX A(Lda,*), B(Ldb,*), C(Ldc,*)
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
-  INTRINSIC CONJG , MAX , REAL
+  INTRINSIC CONJG, MAX, REAL
   !     .. Local Scalars ..
   LOGICAL upper
-  INTEGER i , info , j , k , nrowa
-  COMPLEX temp1 , temp2
+  INTEGER i, info, j, k, nrowa
+  COMPLEX temp1, temp2
   !     .. Parameters ..
   COMPLEX ONE
   PARAMETER (ONE=(1.0E+0,0.0E+0))
@@ -202,14 +202,14 @@ SUBROUTINE CHEMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !
   IF ( Alpha==ZERO ) THEN
     IF ( Beta==ZERO ) THEN
-      DO j = 1 , N
-        DO i = 1 , M
+      DO j = 1, N
+        DO i = 1, M
           C(i,j) = ZERO
         ENDDO
       ENDDO
     ELSE
-      DO j = 1 , N
-        DO i = 1 , M
+      DO j = 1, N
+        DO i = 1, M
           C(i,j) = Beta*C(i,j)
         ENDDO
       ENDDO
@@ -223,34 +223,34 @@ SUBROUTINE CHEMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     !
     !        Form  C := alpha*B*A + beta*C.
     !
-    DO j = 1 , N
+    DO j = 1, N
       temp1 = Alpha*REAL(A(j,j))
       IF ( Beta==ZERO ) THEN
-        DO i = 1 , M
+        DO i = 1, M
           C(i,j) = temp1*B(i,j)
         ENDDO
       ELSE
-        DO i = 1 , M
+        DO i = 1, M
           C(i,j) = Beta*C(i,j) + temp1*B(i,j)
         ENDDO
       ENDIF
-      DO k = 1 , j - 1
+      DO k = 1, j - 1
         IF ( upper ) THEN
           temp1 = Alpha*A(k,j)
         ELSE
           temp1 = Alpha*CONJG(A(j,k))
         ENDIF
-        DO i = 1 , M
+        DO i = 1, M
           C(i,j) = C(i,j) + temp1*B(i,k)
         ENDDO
       ENDDO
-      DO k = j + 1 , N
+      DO k = j + 1, N
         IF ( upper ) THEN
           temp1 = Alpha*CONJG(A(j,k))
         ELSE
           temp1 = Alpha*A(k,j)
         ENDIF
-        DO i = 1 , M
+        DO i = 1, M
           C(i,j) = C(i,j) + temp1*B(i,k)
         ENDDO
       ENDDO
@@ -259,11 +259,11 @@ SUBROUTINE CHEMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     !        Form  C := alpha*A*B + beta*C.
     !
   ELSEIF ( upper ) THEN
-    DO j = 1 , N
-      DO i = 1 , M
+    DO j = 1, N
+      DO i = 1, M
         temp1 = Alpha*B(i,j)
         temp2 = ZERO
-        DO k = 1 , i - 1
+        DO k = 1, i - 1
           C(k,j) = C(k,j) + temp1*A(k,i)
           temp2 = temp2 + B(k,j)*CONJG(A(k,i))
         ENDDO
@@ -275,11 +275,11 @@ SUBROUTINE CHEMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
       ENDDO
     ENDDO
   ELSE
-    DO j = 1 , N
-      DO i = M , 1 , -1
+    DO j = 1, N
+      DO i = M, 1, -1
         temp1 = Alpha*B(i,j)
         temp2 = ZERO
-        DO k = i + 1 , M
+        DO k = i + 1, M
           C(k,j) = C(k,j) + temp1*A(k,i)
           temp2 = temp2 + B(k,j)*CONJG(A(k,i))
         ENDDO

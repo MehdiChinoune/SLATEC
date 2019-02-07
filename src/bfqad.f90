@@ -72,12 +72,12 @@ SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   !***END PROLOGUE  BFQAD
   !
   !
-  INTEGER Id , Ierr , iflg , ilo , il1 , il2 , K , left , mflag , N , npk , &
+  INTEGER Id, Ierr, iflg, ilo, il1, il2, K, left, mflag, N, npk, &
     np1
-  REAL a , aa , ans , b , bb , Bcoef , q , Quad , T , ta , tb , Tol , Work , &
-    wtol , X1 , X2
-  REAL R1MACH , F
-  DIMENSION T(*) , Bcoef(*) , Work(*)
+  REAL a, aa, ans, b, bb, Bcoef, q, Quad, T, ta, tb, Tol, Work, &
+    wtol, X1, X2
+  REAL R1MACH, F
+  DIMENSION T(*), Bcoef(*), Work(*)
   EXTERNAL F
   !***FIRST EXECUTABLE STATEMENT  BFQAD
   Ierr = 1
@@ -108,7 +108,7 @@ SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
           IF ( il2>=np1 ) il2 = N
           inbv = 1
           q = 0.0E0
-          DO left = il1 , il2
+          DO left = il1, il2
             ta = T(left)
             tb = T(left+1)
             IF ( ta/=tb ) THEN
@@ -135,4 +135,5 @@ SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
     'TOL IS LESS THAN THE SINGLE PRECISION TOLERANCE OR '//&
     'GREATER THAN 0.1',2,1)
   RETURN
-  99999 END SUBROUTINE BFQAD
+  99999 CONTINUE
+  END SUBROUTINE BFQAD

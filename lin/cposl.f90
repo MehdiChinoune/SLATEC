@@ -63,23 +63,23 @@ SUBROUTINE CPOSL(A,Lda,N,B)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CPOSL
-  INTEGER Lda , N
-  COMPLEX A(Lda,*) , B(*)
+  INTEGER Lda, N
+  COMPLEX A(Lda,*), B(*)
   !
-  COMPLEX CDOTC , t
-  INTEGER k , kb
+  COMPLEX CDOTC, t
+  INTEGER k, kb
   !
   !     SOLVE CTRANS(R)*Y = B
   !
   !***FIRST EXECUTABLE STATEMENT  CPOSL
-  DO k = 1 , N
+  DO k = 1, N
     t = CDOTC(k-1,A(1,k),1,B(1),1)
     B(k) = (B(k)-t)/A(k,k)
   ENDDO
   !
   !     SOLVE R*X = Y
   !
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     B(k) = B(k)/A(k,k)
     t = -B(k)

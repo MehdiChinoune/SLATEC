@@ -68,7 +68,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !           NZ      underflow indicator
   !                   NZ=0   a normal return
   !                   NZ=M   X exceeds XLIM and an underflow occurs.
-  !                          EN(K)=0.0E0 , K=1,M returned on KODE=1
+  !                          EN(K)=0.0E0, K=1,M returned on KODE=1
   !           IERR    error flag
   !                   IERR=0, normal return, computation completed
   !                   IERR=1, input error,   no computation
@@ -95,14 +95,14 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !           D. Amos.  Included correction of argument list.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  EXINT
-  REAL a , aa , aams , ah , ak , at , b , bk , bt , cc , cnorm , ct , em , &
-    emx , En , etol , fnm , fx , pt , p1 , p2 , s , Tol , tx , X , xcut , &
-    xlim , xtol , y , yt , y1 , y2
-  REAL R1MACH , PSIXN
-  INTEGER i , ic , icase , ict , Ierr , ik , ind , ix , i1m , jset , k , &
-    kk , kn , Kode , ks , M , ml , mu , N , nd , nm , Nz
+  REAL a, aa, aams, ah, ak, at, b, bk, bt, cc, cnorm, ct, em, &
+    emx, En, etol, fnm, fx, pt, p1, p2, s, Tol, tx, X, xcut, &
+    xlim, xtol, y, yt, y1, y2
+  REAL R1MACH, PSIXN
+  INTEGER i, ic, icase, ict, Ierr, ik, ind, ix, i1m, jset, k, &
+    kk, kn, Kode, ks, M, ml, mu, N, nd, nm, Nz
   INTEGER I1MACH
-  DIMENSION En(*) , a(99) , b(99) , y(2)
+  DIMENSION En(*), a(99), b(99), y(2)
   !***FIRST EXECUTABLE STATEMENT  EXINT
   Ierr = 0
   Nz = 0
@@ -135,7 +135,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
         emx = EXP(-X)
       ELSE
         Nz = M
-        DO i = 1 , M
+        DO i = 1, M
           En(i) = 0.0E0
         ENDDO
         RETURN
@@ -171,7 +171,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     icase = 3
     GOTO 200
   ELSEIF ( X==0.0E0.AND.N>1 ) THEN
-    DO i = 1 , M
+    DO i = 1, M
       En(i) = 1.0E0/(N+i-2)
     ENDDO
     RETURN
@@ -204,7 +204,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     ak = 1.0E0
     ic = 35
     IF ( X<etol ) ic = 1
-    DO i = 1 , ic
+    DO i = 1, ic
       aa = -aa*X/ak
       IF ( i==nm ) THEN
         s = s + aa*(-LOG(X)+PSIXN(nd))
@@ -252,7 +252,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   jset = 1 + ks - (ik+ik)
   !-----------------------------------------------------------------------
   !     START COMPUTATION FOR
-  !              EN(IND) = C*U( A , A ,X)    JSET=1
+  !              EN(IND) = C*U( A, A ,X)    JSET=1
   !              EN(IND) = C*U(A+1,A+1,X)    JSET=2
   !     FOR AN EVEN INTEGER A.
   !-----------------------------------------------------------------------
@@ -299,7 +299,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
       !              Y1=             C*U( A ,A,X)
       !              Y2= C*(A/(1+A/2))*U(A+1,A,X)
       !-----------------------------------------------------------------------
-      DO k = 1 , ict
+      DO k = 1, ict
         kk = kk - 1
         yt = y1
         y1 = (b(kk)*y1-y2)/a(kk)
@@ -308,7 +308,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
       !-----------------------------------------------------------------------
       !     THE CONTIGUOUS RELATION
       !              X*U(B,C+1,X)=(C-B)*U(B,C,X)+U(B-1,C,X)
-      !     WITH  B=A+1 , C=A IS USED FOR
+      !     WITH  B=A+1, C=A IS USED FOR
       !              Y(2) = C * U(A+1,A+1,X)
       !     X IS INCORPORATED INTO THE NORMALIZING RELATION
       !-----------------------------------------------------------------------
@@ -333,7 +333,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   Ierr = 2
   GOTO 99999
   300  k = ind - 1
-  DO i = 1 , ml
+  DO i = 1, ml
     aa = aa - 1.0E0
     En(k) = (emx-aa*En(k+1))/X
     k = k - 1
@@ -341,10 +341,11 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   IF ( mu<=0 ) RETURN
   aa = ks
   400  k = ind
-  DO i = 1 , mu
+  DO i = 1, mu
     En(k+1) = (emx-X*En(k))/aa
     aa = aa + 1.0E0
     k = k + 1
   ENDDO
   RETURN
-  99999 END SUBROUTINE EXINT
+  99999 CONTINUE
+  END SUBROUTINE EXINT

@@ -110,14 +110,14 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  TRIDIB
   !
-  INTEGER i , j , k , l , M , N , p , q , r , s , ii , m1 , m2 , M11 , m22 , &
-    tag , Ierr , isturm
-  REAL D(*) , E(*) , E2(*) , W(*) , Rv4(*) , Rv5(*)
-  REAL u , v , Lb , t1 , t2 , Ub , xu , x0 , x1 , Eps1 , machep , s1 , s2
+  INTEGER i, j, k, l, M, N, p, q, r, s, ii, m1, m2, M11, m22, &
+    tag, Ierr, isturm
+  REAL D(*), E(*), E2(*), W(*), Rv4(*), Rv5(*)
+  REAL u, v, Lb, t1, t2, Ub, xu, x0, x1, Eps1, machep, s1, s2
   INTEGER Ind(*)
   LOGICAL first
   !
-  SAVE first , machep
+  SAVE first, machep
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  TRIDIB
   IF ( first ) machep = R1MACH(4)
@@ -130,7 +130,7 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
   u = 0.0E0
   !     .......... LOOK FOR SMALL SUB-DIAGONAL ENTRIES AND DETERMINE AN
   !                INTERVAL CONTAINING ALL THE EIGENVALUES ..........
-  DO i = 1 , N
+  DO i = 1, N
     x1 = u
     u = 0.0E0
     IF ( i/=N ) u = ABS(E(i+1))
@@ -173,14 +173,15 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
   r = 0
   !     .......... ESTABLISH AND PROCESS NEXT SUBMATRIX, REFINING
   !                INTERVAL BY THE GERSCHGORIN BOUNDS ..........
-  400  IF ( r==M ) GOTO 1000
+  400 CONTINUE
+  IF ( r==M ) GOTO 1000
   tag = tag + 1
   p = q + 1
   xu = D(p)
   x0 = D(p)
   u = 0.0E0
   !
-  DO q = p , N
+  DO q = p, N
     x1 = u
     u = 0.0E0
     v = 0.0E0
@@ -212,7 +213,7 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
   ENDIF
   500  xu = Lb
   !     .......... FOR I=K STEP -1 UNTIL M1 DO -- ..........
-  DO ii = m1 , k
+  DO ii = m1, k
     i = m1 + k - ii
     IF ( xu<Rv4(i) ) THEN
       xu = Rv4(i)
@@ -232,109 +233,111 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
     IF ( k<m1 ) GOTO 800
     GOTO 500
   ENDIF
-  700  DO
-  !     .......... IN-LINE PROCEDURE FOR STURM SEQUENCE ..........
-  s = p - 1
-  u = 1.0E0
+  700 CONTINUE
+  DO
+    !     .......... IN-LINE PROCEDURE FOR STURM SEQUENCE ..........
+    s = p - 1
+    u = 1.0E0
+    !
+    DO i = p, q
+      IF ( u/=0.0E0 ) THEN
+        v = E2(i)/u
+      ELSE
+        v = ABS(E(i))/machep
+        IF ( E2(i)==0.0E0 ) v = 0.0E0
+      ENDIF
+      u = D(i) - x1 - v
+      IF ( u<0.0E0 ) s = s + 1
+    ENDDO
+    !
+    SELECT CASE (isturm)
+      CASE (1)
+        IF ( s<m1 ) THEN
+          xu = x1
+        ELSEIF ( s==m1 ) THEN
+          xu = x1
+          t1 = x1
+          GOTO 200
+        ELSE
+          x0 = x1
+        ENDIF
+        GOTO 100
+      CASE (2)
+        IF ( s<m22 ) THEN
+          xu = x1
+        ELSEIF ( s==m22 ) THEN
+          t2 = x1
+          GOTO 300
+        ELSE
+          x0 = x1
+        ENDIF
+        GOTO 100
+      CASE (3)
+        m1 = s + 1
+        x1 = Ub
+        isturm = 4
+      CASE (4)
+        m2 = s
+        IF ( m1>m2 ) GOTO 900
+        !     .......... FIND ROOTS BY BISECTION ..........
+        x0 = Ub
+        isturm = 5
+        !
+        DO i = m1, m2
+          Rv5(i) = Ub
+          Rv4(i) = Lb
+        ENDDO
+        !     .......... LOOP FOR K-TH EIGENVALUE
+        !                FOR K=M2 STEP -1 UNTIL M1 DO --
+        !                (-DO- NOT USED TO LEGALIZE -COMPUTED GO TO-) ..........
+        k = m2
+        GOTO 500
+      CASE DEFAULT
+        !     .......... REFINE INTERVALS ..........
+        IF ( s>=k ) THEN
+          x0 = x1
+        ELSE
+          xu = x1
+          IF ( s>=m1 ) THEN
+            Rv4(s+1) = x1
+            IF ( Rv5(s)>x1 ) Rv5(s) = x1
+          ELSE
+            Rv4(m1) = x1
+          ENDIF
+        ENDIF
+        GOTO 600
+    END SELECT
+  ENDDO
+  !     .......... ORDER EIGENVALUES TAGGED WITH THEIR
+  !                SUBMATRIX ASSOCIATIONS ..........
+  800  s = r
+  r = r + m2 - m1 + 1
+  j = 1
+  k = m1
   !
-  DO i = p , q
-    IF ( u/=0.0E0 ) THEN
-      v = E2(i)/u
-    ELSE
-      v = ABS(E(i))/machep
-      IF ( E2(i)==0.0E0 ) v = 0.0E0
+  DO l = 1, r
+    IF ( j<=s ) THEN
+      IF ( k>m2 ) EXIT
+      IF ( Rv5(k)>=W(l) ) THEN
+        j = j + 1
+        CYCLE
+      ELSE
+        !
+        DO ii = j, s
+          i = l + s - ii
+          W(i+1) = W(i)
+          Ind(i+1) = Ind(i)
+        ENDDO
+      ENDIF
     ENDIF
-    u = D(i) - x1 - v
-    IF ( u<0.0E0 ) s = s + 1
+    !
+    W(l) = Rv5(k)
+    Ind(l) = tag
+    k = k + 1
   ENDDO
   !
-  SELECT CASE (isturm)
-    CASE (1)
-      IF ( s<m1 ) THEN
-        xu = x1
-      ELSEIF ( s==m1 ) THEN
-        xu = x1
-        t1 = x1
-        GOTO 200
-      ELSE
-        x0 = x1
-      ENDIF
-      GOTO 100
-    CASE (2)
-      IF ( s<m22 ) THEN
-        xu = x1
-      ELSEIF ( s==m22 ) THEN
-        t2 = x1
-        GOTO 300
-      ELSE
-        x0 = x1
-      ENDIF
-      GOTO 100
-    CASE (3)
-      m1 = s + 1
-      x1 = Ub
-      isturm = 4
-    CASE (4)
-      m2 = s
-      IF ( m1>m2 ) GOTO 900
-      !     .......... FIND ROOTS BY BISECTION ..........
-      x0 = Ub
-      isturm = 5
-      !
-      DO i = m1 , m2
-        Rv5(i) = Ub
-        Rv4(i) = Lb
-      ENDDO
-      !     .......... LOOP FOR K-TH EIGENVALUE
-      !                FOR K=M2 STEP -1 UNTIL M1 DO --
-      !                (-DO- NOT USED TO LEGALIZE -COMPUTED GO TO-) ..........
-      k = m2
-      GOTO 500
-    CASE DEFAULT
-      !     .......... REFINE INTERVALS ..........
-      IF ( s>=k ) THEN
-        x0 = x1
-      ELSE
-        xu = x1
-        IF ( s>=m1 ) THEN
-          Rv4(s+1) = x1
-          IF ( Rv5(s)>x1 ) Rv5(s) = x1
-        ELSE
-          Rv4(m1) = x1
-        ENDIF
-      ENDIF
-      GOTO 600
-  END SELECT
-ENDDO
-!     .......... ORDER EIGENVALUES TAGGED WITH THEIR
-!                SUBMATRIX ASSOCIATIONS ..........
-800  s = r
-r = r + m2 - m1 + 1
-j = 1
-k = m1
-!
-DO l = 1 , r
-  IF ( j<=s ) THEN
-    IF ( k>m2 ) EXIT
-    IF ( Rv5(k)>=W(l) ) THEN
-      j = j + 1
-      CYCLE
-    ELSE
-      !
-      DO ii = j , s
-        i = l + s - ii
-        W(i+1) = W(i)
-        Ind(i+1) = Ind(i)
-      ENDDO
-    ENDIF
-  ENDIF
-  !
-  W(l) = Rv5(k)
-  Ind(l) = tag
-  k = k + 1
-ENDDO
-!
-900  IF ( q<N ) GOTO 400
-1000 Lb = t1
-Ub = t2
+  900 CONTINUE
+  IF ( q<N ) GOTO 400
+  1000 Lb = t1
+  Ub = t2
 END SUBROUTINE TRIDIB

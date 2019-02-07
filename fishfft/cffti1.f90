@@ -4,9 +4,9 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
   IMPLICIT NONE
   !*--CFFTI15
   !*** Start of declarations inserted by SPAG
-  REAL arg , argh , argld , fi , tpi , Wa
-  INTEGER i , i1 , ib , ido , idot , Ifac , ii , ip , ipm , j , k1 , l1 , &
-    l2 , ld , N , nf , nl , nq , nr , ntry
+  REAL arg, argh, argld, fi, tpi, Wa
+  INTEGER i, i1, ib, ido, idot, Ifac, ii, ip, ipm, j, k1, l1, &
+    l2, ld, N, nf, nl, nq, nr, ntry
   INTEGER ntryh
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CFFTI1
@@ -60,9 +60,9 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CFFTI1
-  DIMENSION Wa(*) , Ifac(*) , ntryh(4)
+  DIMENSION Wa(*), Ifac(*), ntryh(4)
   SAVE ntryh
-  DATA ntryh(1) , ntryh(2) , ntryh(3) , ntryh(4)/3 , 4 , 2 , 5/
+  DATA ntryh(1), ntryh(2), ntryh(3), ntryh(4)/3, 4, 2, 5/
   !***FIRST EXECUTABLE STATEMENT  CFFTI1
   nl = N
   nf = 0
@@ -82,7 +82,7 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
     nl = nq
     IF ( ntry==2 ) THEN
       IF ( nf/=1 ) THEN
-        DO i = 2 , nf
+        DO i = 2, nf
           ib = nf - i + 2
           Ifac(ib+2) = Ifac(ib+1)
         ENDDO
@@ -96,21 +96,21 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
       argh = tpi/N
       i = 2
       l1 = 1
-      DO k1 = 1 , nf
+      DO k1 = 1, nf
         ip = Ifac(k1+2)
         ld = 0
         l2 = l1*ip
         ido = N/l2
         idot = ido + ido + 2
         ipm = ip - 1
-        DO j = 1 , ipm
+        DO j = 1, ipm
           i1 = i
           Wa(i-1) = 1.
           Wa(i) = 0.
           ld = ld + l1
           fi = 0.
           argld = ld*argh
-          DO ii = 4 , idot , 2
+          DO ii = 4, idot, 2
             i = i + 2
             fi = fi + 1.
             arg = fi*argld

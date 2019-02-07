@@ -95,17 +95,17 @@ SUBROUTINE QZVEC(Nm,N,A,B,Alfr,Alfi,Beta,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  QZVEC
   !
-  INTEGER i , j , k , m , N , en , ii , jj , na , Nm , nn , isw , enm2
-  REAL A(Nm,*) , B(Nm,*) , Alfr(*) , Alfi(*) , Beta(*) , Z(Nm,*)
-  REAL d , q , r , s , t , w , x , y , di , dr , ra , rr , sa , ti , tr , &
-    t1 , t2
-  REAL w1 , x1 , zz , z1 , alfm , almi , almr , betm , epsb
+  INTEGER i, j, k, m, N, en, ii, jj, na, Nm, nn, isw, enm2
+  REAL A(Nm,*), B(Nm,*), Alfr(*), Alfi(*), Beta(*), Z(Nm,*)
+  REAL d, q, r, s, t, w, x, y, di, dr, ra, rr, sa, ti, tr, &
+    t1, t2
+  REAL w1, x1, zz, z1, alfm, almi, almr, betm, epsb
   !
   !***FIRST EXECUTABLE STATEMENT  QZVEC
   epsb = B(N,1)
   isw = 1
   !     .......... FOR EN=N STEP -1 UNTIL 1 DO -- ..........
-  DO nn = 1 , N
+  DO nn = 1, N
     en = N + 1 - nn
     na = en - 1
     IF ( isw/=2 ) THEN
@@ -125,14 +125,14 @@ SUBROUTINE QZVEC(Nm,N,A,B,Alfr,Alfi,Beta,Z)
         enm2 = na - 1
         IF ( enm2/=0 ) THEN
           !     .......... FOR I=EN-2 STEP -1 UNTIL 1 DO -- ..........
-          DO ii = 1 , enm2
+          DO ii = 1, enm2
             i = na - ii
             w = betm*A(i,i) - almr*B(i,i)
             w1 = -almi*B(i,i)
             ra = 0.0E0
             sa = 0.0E0
             !
-            DO j = m , en
+            DO j = m, en
               x = betm*A(i,j) - almr*B(i,j)
               x1 = -almi*B(i,j)
               ra = ra + x*B(j,na) - x1*B(j,en)
@@ -204,12 +204,12 @@ IF ( na/=0 ) THEN
   alfm = Alfr(m)
   betm = Beta(m)
   !     .......... FOR I=EN-1 STEP -1 UNTIL 1 DO -- ..........
-  DO ii = 1 , na
+  DO ii = 1, na
     i = en - ii
     w = betm*A(i,i) - alfm*B(i,i)
     r = 0.0E0
     !
-    DO j = m , en
+    DO j = m, en
       r = r + (betm*A(i,j)-alfm*B(i,j))*B(j,en)
     ENDDO
     !
@@ -253,13 +253,13 @@ ENDDO
 !     .......... END BACK SUBSTITUTION.
 !                TRANSFORM TO ORIGINAL COORDINATE SYSTEM.
 !                FOR J=N STEP -1 UNTIL 1 DO -- ..........
-DO jj = 1 , N
+DO jj = 1, N
 j = N + 1 - jj
 !
-DO i = 1 , N
+DO i = 1, N
 zz = 0.0E0
 !
-DO k = 1 , j
+DO k = 1, j
 zz = zz + Z(i,k)*B(k,j)
 ENDDO
 !
@@ -269,27 +269,27 @@ ENDDO
 !     .......... NORMALIZE SO THAT MODULUS OF LARGEST
 !                COMPONENT OF EACH VECTOR IS 1.
 !                (ISW IS 1 INITIALLY FROM BEFORE) ..........
-DO j = 1 , N
+DO j = 1, N
 d = 0.0E0
 IF ( isw==2 ) THEN
 !
-DO i = 1 , N
+DO i = 1, N
 r = ABS(Z(i,j-1)) + ABS(Z(i,j))
 IF ( r/=0.0E0 ) r = r*SQRT((Z(i,j-1)/r)**2+(Z(i,j)/r)**2)
 IF ( r>d ) d = r
 ENDDO
 !
-DO i = 1 , N
+DO i = 1, N
 Z(i,j-1) = Z(i,j-1)/d
 Z(i,j) = Z(i,j)/d
 ENDDO
 ELSEIF ( Alfi(j)==0.0E0 ) THEN
 !
-DO i = 1 , N
+DO i = 1, N
 IF ( ABS(Z(i,j))>d ) d = ABS(Z(i,j))
 ENDDO
 !
-DO i = 1 , N
+DO i = 1, N
 Z(i,j) = Z(i,j)/d
 ENDDO
 !

@@ -68,12 +68,12 @@ SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CTRDI
-  INTEGER Ldt , N , Job , Info
-  COMPLEX T(Ldt,*) , Det(2)
+  INTEGER Ldt, N, Job, Info
+  COMPLEX T(Ldt,*), Det(2)
   !
   COMPLEX temp
   REAL ten
-  INTEGER i , j , k , kb , km1 , kp1
+  INTEGER i, j, k, kb, km1, kp1
   REAL, EXTERNAL :: CABS1
   !***FIRST EXECUTABLE STATEMENT  CTRDI
   !
@@ -83,7 +83,7 @@ SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
     Det(1) = (1.0E0,0.0E0)
     Det(2) = (0.0E0,0.0E0)
     ten = 10.0E0
-    DO i = 1 , N
+    DO i = 1, N
       Det(1) = T(i,i)*Det(1)
       IF ( CABS1(Det(1))==0.0E0 ) EXIT
       DO WHILE ( CABS1(Det(1))<1.0E0 )
@@ -104,7 +104,7 @@ SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
       !
       !              COMPUTE INVERSE OF LOWER TRIANGULAR
       !
-      DO kb = 1 , N
+      DO kb = 1, N
         k = N + 1 - kb
         Info = k
         IF ( CABS1(T(k,k))==0.0E0 ) GOTO 99999
@@ -113,7 +113,7 @@ SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
         IF ( k/=N ) CALL CSCAL(N-k,temp,T(k+1,k),1)
         km1 = k - 1
         IF ( km1>=1 ) THEN
-          DO j = 1 , km1
+          DO j = 1, km1
             temp = T(k,j)
             T(k,j) = (0.0E0,0.0E0)
             CALL CAXPY(N-k+1,temp,T(k,k),1,T(k,j),1)
@@ -122,7 +122,7 @@ SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
       ENDDO
       Info = 0
     ELSE
-      DO k = 1 , N
+      DO k = 1, N
         Info = k
         IF ( CABS1(T(k,k))==0.0E0 ) GOTO 99999
         T(k,k) = (1.0E0,0.0E0)/T(k,k)
@@ -130,7 +130,7 @@ SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
         CALL CSCAL(k-1,temp,T(1,k),1)
         kp1 = k + 1
         IF ( N>=kp1 ) THEN
-          DO j = kp1 , N
+          DO j = kp1, N
             temp = T(k,j)
             T(k,j) = (0.0E0,0.0E0)
             CALL CAXPY(k,temp,T(1,k),1,T(1,j),1)
@@ -140,4 +140,5 @@ SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
       Info = 0
     ENDIF
   ENDIF
-  99999 END SUBROUTINE CTRDI
+  99999 CONTINUE
+  END SUBROUTINE CTRDI

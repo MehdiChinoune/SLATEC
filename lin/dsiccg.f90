@@ -5,7 +5,7 @@ SUBROUTINE DSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   IMPLICIT NONE
   !*--DSICCG6
   !*** Start of declarations inserted by SPAG
-  REAL DSLLTI , DSMV
+  REAL DSLLTI, DSMV
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSICCG
   !***PURPOSE  Incomplete Cholesky Conjugate Gradient Sparse Ax=b Solver.
@@ -240,21 +240,21 @@ SUBROUTINE DSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   921019  Corrected NEL to NL.  (FNF)
   !***END PROLOGUE  DSICCG
   !     .. Parameters ..
-  INTEGER LOCRB , LOCIB
+  INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  REAL(8) :: Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
+  REAL(8) :: Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
     Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , B(N) , Rwork(Lenw) , X(N)
-  INTEGER Ia(Nelt) , Iwork(Leniw) , Ja(Nelt)
+  REAL(8) :: A(Nelt), B(N), Rwork(Lenw), X(N)
+  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin , locdz , locel , lociel , lociw , locjel , locp , locr , &
-    locw , locz , nl
+  INTEGER locdin, locdz, locel, lociel, lociw, locjel, locp, locr, &
+    locw, locz, nl
   CHARACTER xern1*8
   !     .. External Subroutines ..
-  EXTERNAL DCG , DCHKW , DS2Y , DSICS , DSLLTI , DSMV , XERMSG
+  EXTERNAL DCG, DCHKW, DS2Y, DSICS, DSLLTI, DSMV, XERMSG
   !***FIRST EXECUTABLE STATEMENT  DSICCG
   !
   Ierr = 0

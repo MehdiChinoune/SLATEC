@@ -63,14 +63,14 @@ SUBROUTINE DQK61(F,A,B,Result,Abserr,Resabs,Resasc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQK61
   !
-  REAL(8) :: A , dabsc , Abserr , B , centr , dhlgth , D1MACH , &
-    epmach , F , fc , fsum , fval1 , fval2 , fv1 , fv2 , &
-    hlgth , Resabs , Resasc , resg , resk , reskh , Result , &
-    uflow , wg , wgk , xgk
-  INTEGER j , jtw , jtwm1
+  REAL(8) :: A, dabsc, Abserr, B, centr, dhlgth, D1MACH, &
+    epmach, F, fc, fsum, fval1, fval2, fv1, fv2, &
+    hlgth, Resabs, Resasc, resg, resk, reskh, Result, &
+    uflow, wg, wgk, xgk
+  INTEGER j, jtw, jtwm1
   EXTERNAL F
   !
-  DIMENSION fv1(30) , fv2(30) , xgk(31) , wgk(31) , wg(15)
+  DIMENSION fv1(30), fv2(30), xgk(31), wgk(31), wg(15)
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE
   !           INTERVAL (-1,1). BECAUSE OF SYMMETRY ONLY THE POSITIVE
@@ -91,7 +91,7 @@ SUBROUTINE DQK61(F,A,B,Result,Abserr,Resabs,Resasc)
   ! AS EVALUATED WITH 80 DECIMAL DIGIT ARITHMETIC BY L. W. FULLERTON,
   ! BELL LABS, NOV. 1981.
   !
-  SAVE wg , xgk , wgk
+  SAVE wg, xgk, wgk
   DATA wg(1)/0.007968192496166605615465883474674D0/
   DATA wg(2)/0.018466468311090959142302131912047D0/
   DATA wg(3)/0.028784707883323369349719179611292D0/
@@ -205,7 +205,7 @@ SUBROUTINE DQK61(F,A,B,Result,Abserr,Resabs,Resasc)
   fc = F(centr)
   resk = wgk(31)*fc
   Resabs = ABS(resk)
-  DO j = 1 , 15
+  DO j = 1, 15
     jtw = j*2
     dabsc = hlgth*xgk(jtw)
     fval1 = F(centr-dabsc)
@@ -217,7 +217,7 @@ SUBROUTINE DQK61(F,A,B,Result,Abserr,Resabs,Resasc)
     resk = resk + wgk(jtw)*fsum
     Resabs = Resabs + wgk(jtw)*(ABS(fval1)+ABS(fval2))
   ENDDO
-  DO j = 1 , 15
+  DO j = 1, 15
     jtwm1 = j*2 - 1
     dabsc = hlgth*xgk(jtwm1)
     fval1 = F(centr-dabsc)
@@ -230,7 +230,7 @@ SUBROUTINE DQK61(F,A,B,Result,Abserr,Resabs,Resasc)
   ENDDO
   reskh = resk*0.5D+00
   Resasc = wgk(31)*ABS(fc-reskh)
-  DO j = 1 , 30
+  DO j = 1, 30
     Resasc = Resasc + wgk(j)*(ABS(fv1(j)-reskh)+ABS(fv2(j)-reskh))
   ENDDO
   Result = resk*hlgth

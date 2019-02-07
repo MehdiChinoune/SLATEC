@@ -12,7 +12,7 @@ REAL(8) FUNCTION DF1F(X)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DF1F
-  REAL(8) :: X , x1 , y
+  REAL(8) :: X, x1, y
   !***FIRST EXECUTABLE STATEMENT  DF1F
   x1 = X + 0.1D+01
   DF1F = 0.5D+01/x1/x1

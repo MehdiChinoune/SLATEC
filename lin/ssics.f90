@@ -158,14 +158,14 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  SSICS
   !     .. Scalar Arguments ..
-  INTEGER Isym , Iwarn , N , Nel , Nelt
+  INTEGER Isym, Iwarn, N, Nel, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt) , D(N) , El(Nel) , R(N)
-  INTEGER Ia(Nelt) , Iel(Nel) , Ja(Nelt) , Jel(Nel)
+  REAL A(Nelt), D(N), El(Nel), R(N)
+  INTEGER Ia(Nelt), Iel(Nel), Ja(Nelt), Jel(Nel)
   !     .. Local Scalars ..
   REAL eltmp
-  INTEGER i , ibgn , ic , icbgn , icend , icol , iend , ir , irbgn , irend , &
-    irow , irr , j , jbgn , jeltmp , jend
+  INTEGER i, ibgn, ic, icbgn, icend, icol, iend, ir, irbgn, irend, &
+    irow, irr, j, jbgn, jeltmp, jend
   CHARACTER xern1*8
   !     .. External Subroutines ..
   EXTERNAL XERMSG
@@ -185,7 +185,7 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   El(1) = 1
   D(1) = A(1)
   !VD$R NOCONCUR
-  DO irow = 2 , N
+  DO irow = 2, N
     !         Put in the Diagonal.
     Nel = Nel + 1
     Iel(irow) = Nel
@@ -204,7 +204,7 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
       icbgn = 1
       icend = irow - 1
     ENDIF
-    DO ic = icbgn , icend
+    DO ic = icbgn, icend
       IF ( Isym==0 ) THEN
         icol = Ia(ic)
         IF ( icol>=irow ) CYCLE
@@ -215,7 +215,7 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
       jend = Ja(icol+1) - 1
       IF ( jbgn<=jend.AND.Ia(jend)>=irow ) THEN
         !VD$ NOVECTOR
-        DO j = jbgn , jend
+        DO j = jbgn, jend
           IF ( Ia(j)==irow ) THEN
             Nel = Nel + 1
             Jel(Nel) = icol
@@ -231,13 +231,13 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !         Sort ROWS of lower triangle into descending order (count out
   !         along rows out from Diagonal).
   !
-  DO irow = 2 , N
+  DO irow = 2, N
     ibgn = Iel(irow) + 1
     iend = Iel(irow+1) - 1
     IF ( ibgn<iend ) THEN
-      DO i = ibgn , iend - 1
+      DO i = ibgn, iend - 1
         !VD$ NOVECTOR
-        DO j = i + 1 , iend
+        DO j = i + 1, iend
           IF ( Jel(i)>Jel(j) ) THEN
             jeltmp = Jel(j)
             Jel(j) = Jel(i)
@@ -258,7 +258,7 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !
   irbgn = Ja(1) + 1
   irend = Ja(2) - 1
-  DO irr = irbgn , irend
+  DO irr = irbgn, irend
     ir = Ia(irr)
     !         Find the index into EL for EL(1,IR).
     !         Hint: it's the second entry.
@@ -266,11 +266,11 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
     El(i) = El(i)/D(1)
   ENDDO
   !
-  DO irow = 2 , N
+  DO irow = 2, N
     !
     !         Update the IROW-th diagonal.
     !
-    DO i = 1 , irow - 1
+    DO i = 1, irow - 1
       R(i) = 0
     ENDDO
     ibgn = Iel(irow) + 1
@@ -279,7 +279,7 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
       !LLL. OPTION ASSERT (NOHAZARD)
       !DIR$ IVDEP
       !VD$ NODEPCHK
-      DO i = ibgn , iend
+      DO i = ibgn, iend
         R(Jel(i)) = El(i)*D(Jel(i))
         D(irow) = D(irow) - El(i)*R(Jel(i))
       ENDDO
@@ -298,14 +298,14 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
     !
     irbgn = Ja(irow)
     irend = Ja(irow+1) - 1
-    DO irr = irbgn , irend
+    DO irr = irbgn, irend
       ir = Ia(irr)
       IF ( ir>irow ) THEN
         !         Find the index into EL for EL(IR,IROW)
         ibgn = Iel(ir) + 1
         iend = Iel(ir+1) - 1
         IF ( Jel(ibgn)<=irow ) THEN
-          DO i = ibgn , iend
+          DO i = ibgn, iend
             IF ( Jel(i)==irow ) THEN
               icend = iend
               DO
@@ -317,7 +317,7 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
                 !LLL. OPTION ASSERT (NOHAZARD)
                 !DIR$ IVDEP
                 !VD$ NODEPCHK
-                DO ic = ibgn , icend
+                DO ic = ibgn, icend
                   El(i) = El(i) - El(ic)*R(Jel(ic))
                 ENDDO
                 El(i) = El(i)/D(irow)
@@ -338,7 +338,7 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
     !         Replace diagonals by their inverses.
     !
     !VD$ CONCUR
-    DO i = 1 , N
+    DO i = 1, N
       D(i) = 1.0E0/D(i)
     ENDDO
     !------------- LAST LINE OF SSICS FOLLOWS ----------------------------

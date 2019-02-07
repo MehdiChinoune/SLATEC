@@ -73,14 +73,14 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
-  INTEGER Ijob , Info , Lda , N
+  INTEGER Ijob, Info, Lda, N
   !     .. Array Arguments ..
-  REAL A(Lda,*) , Q(*)
+  REAL A(Lda,*), Q(*)
   !     .. Local Scalars ..
-  REAL c , s , t , t1 , t2
-  INTEGER i , iq , j , k , km1 , kp1 , nm1
+  REAL c, s, t, t1, t2
+  INTEGER i, iq, j, k, km1, kp1, nm1
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , SQRT
+  INTRINSIC ABS, SQRT
   !***FIRST EXECUTABLE STATEMENT  SHEQR
   IF ( Ijob>1 ) THEN
     !   -------------------------------------------------------------------
@@ -92,7 +92,7 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
     !   -------------------------------------------------------------------
     !         Multiply the new column by the N previous Givens rotations.
     !   -------------------------------------------------------------------
-    DO k = 1 , nm1
+    DO k = 1, nm1
       i = 2*(k-1) + 1
       t1 = A(k,N)
       t2 = A(k+1,N)
@@ -134,7 +134,7 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
   !         QR decomposition without pivoting.
   !
   Info = 0
-  DO k = 1 , N
+  DO k = 1, N
     km1 = k - 1
     kp1 = k + 1
     !
@@ -143,7 +143,7 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
     !           K-1 Givens rotations.
     !
     IF ( km1>=1 ) THEN
-      DO j = 1 , km1
+      DO j = 1, km1
         i = 2*(j-1) + 1
         t1 = A(j,k)
         t2 = A(j+1,k)
@@ -178,4 +178,5 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
   ENDDO
   RETURN
   !------------- LAST LINE OF SHEQR FOLLOWS ----------------------------
-  99999 END SUBROUTINE SHEQR
+  99999 CONTINUE
+  END SUBROUTINE SHEQR

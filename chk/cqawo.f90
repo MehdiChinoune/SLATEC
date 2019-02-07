@@ -22,12 +22,12 @@ SUBROUTINE CQAWO(Lun,Kprint,Ipass)
   !
   ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
   !
-  REAL a , abserr , b , epmach , epsabs , epsrel , error , exact0 , F0O , &
-    F1O , F2O , oflow , omega , pi , result , R1MACH , uflow , work
-  INTEGER ier , ierv , integr , ip , Ipass , iwork , Kprint , last , lenw , &
-    Lun , maxp1 , neval
-  DIMENSION work(1325) , iwork(400) , ierv(4)
-  EXTERNAL F0O , F1O , F2O
+  REAL a, abserr, b, epmach, epsabs, epsrel, error, exact0, F0O, &
+    F1O, F2O, oflow, omega, pi, result, R1MACH, uflow, work
+  INTEGER ier, ierv, integr, ip, Ipass, iwork, Kprint, last, lenw, &
+    Lun, maxp1, neval
+  DIMENSION work(1325), iwork(400), ierv(4)
+  EXTERNAL F0O, F1O, F2O
   DATA exact0/0.1042872789432789E+05/
   DATA pi/0.31415926535897932E+01/
   !***FIRST EXECUTABLE STATEMENT  CQAWO

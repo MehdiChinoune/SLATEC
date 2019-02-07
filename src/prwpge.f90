@@ -4,7 +4,7 @@ SUBROUTINE PRWPGE(Key,Ipage,Lpg,Sx,Ix)
   IMPLICIT NONE
   !*--PRWPGE5
   !*** Start of declarations inserted by SPAG
-  INTEGER Ipage , Ix , Key , Lpg
+  INTEGER Ipage, Ix, Key, Lpg
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PRWPGE
   !***SUBSIDIARY

@@ -49,7 +49,7 @@ PROGRAM TEST32
   !   900524  Cosmetic changes to code.  (WRB)
   !   930318  Added new quick check PCHQK5.  (WRB,FNF)
   !***END PROLOGUE  TEST32
-  INTEGER ipass , kprint , lin , lun , nfail
+  INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST32
   lun = I1MACH(2)
   lin = I1MACH(1)

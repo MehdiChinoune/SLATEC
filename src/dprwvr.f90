@@ -4,7 +4,7 @@ SUBROUTINE DPRWVR(Key,Ipage,Lpg,Sx,Ix)
   IMPLICIT NONE
   !*--DPRWVR5
   !*** Start of declarations inserted by SPAG
-  INTEGER iaddr , Ipage , ipagef , istart , Ix , Key , Lpg
+  INTEGER iaddr, Ipage, ipagef, istart, Ix, Key, Lpg
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPRWVR
   !***SUBSIDIARY
@@ -40,10 +40,10 @@ SUBROUTINE DPRWVR(Key,Ipage,Lpg,Sx,Ix)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   !***END PROLOGUE  DPRWVR
   DIMENSION Ix(*)
-  REAL(8) :: Sx(*) , zero , one
+  REAL(8) :: Sx(*), zero, one
   LOGICAL first
-  SAVE zero , one
-  DATA zero , one/0.D0 , 1.D0/
+  SAVE zero, one
+  DATA zero, one/0.D0, 1.D0/
   !***FIRST EXECUTABLE STATEMENT  DPRWVR
   !
   !     COMPUTE STARTING ADDRESS OF PAGE.

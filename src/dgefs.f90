@@ -105,10 +105,10 @@ SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGEFS
   !
-  INTEGER Lda , N , Itask , Ind , Iwork(*)
-  REAL(8) :: A(Lda,*) , V(*) , Work(*) , D1MACH
+  INTEGER Lda, N, Itask, Ind, Iwork(*)
+  REAL(8) :: A(Lda,*), V(*), Work(*), D1MACH
   REAL(8) :: rcond
-  CHARACTER(8) :: xern1 , xern2
+  CHARACTER(8) :: xern1, xern2
   !***FIRST EXECUTABLE STATEMENT  DGEFS
   IF ( Lda<N ) THEN
     Ind = -1

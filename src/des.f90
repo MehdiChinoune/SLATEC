@@ -7,12 +7,12 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   IMPLICIT NONE
   !*--DES8
   !*** Start of declarations inserted by SPAG
-  REAL a , absdel , Alpha , Atol , Beta , del , Delsgn , dt , Eps , Fouru ,&
-    G , Gi , H , ha , Hold , P , Phi , Psi , R1MACH , Rpar
-  REAL Rtol , Sig , T , Told , Tout , Tstop , Twou , u , V , W , Wt , X ,&
-    Xold , Y , Yp , Ypout , Yy
-  INTEGER Idid , Info , Init , Ipar , Iquit , Iv , Ivc , k , Kgi , Kle4 ,&
-    Kold , Kord , Kprev , Ksteps , l , ltol , maxnum , natolp , Neq ,&
+  REAL a, absdel, Alpha, Atol, Beta, del, Delsgn, dt, Eps, Fouru ,&
+    G, Gi, H, ha, Hold, P, Phi, Psi, R1MACH, Rpar
+  REAL Rtol, Sig, T, Told, Tout, Tstop, Twou, u, V, W, Wt, X ,&
+    Xold, Y, Yp, Ypout, Yy
+  INTEGER Idid, Info, Init, Ipar, Iquit, Iv, Ivc, k, Kgi, Kle4 ,&
+    Kold, Kord, Kprev, Ksteps, l, ltol, maxnum, natolp, Neq ,&
     nrtolp
   INTEGER Ns
   !*** End of declarations inserted by SPAG
@@ -41,14 +41,14 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DES
   !
-  LOGICAL Stiff , crash , Start , Phase1 , Nornd , Intout
+  LOGICAL Stiff, crash, Start, Phase1, Nornd, Intout
   !
-  DIMENSION Y(*) , Yy(*) , Wt(*) , Phi(Neq,16) , P(*) , Yp(*) , Ypout(*) ,&
-    Psi(12) , Alpha(12) , Beta(12) , Sig(13) , V(12) , W(12) ,&
-    G(13) , Gi(11) , Iv(10) , Info(15) , Rtol(*) , Atol(*) , Rpar(*)&
+  DIMENSION Y(*), Yy(*), Wt(*), Phi(Neq,16), P(*), Yp(*), Ypout(*) ,&
+    Psi(12), Alpha(12), Beta(12), Sig(13), V(12), W(12) ,&
+    G(13), Gi(11), Iv(10), Info(15), Rtol(*), Atol(*), Rpar(*)&
     , Ipar(*)
   CHARACTER(8) :: xern1
-  CHARACTER(16) :: xern3 , xern4
+  CHARACTER(16) :: xern3, xern4
   !
   EXTERNAL F
   !
@@ -67,7 +67,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !***FIRST EXECUTABLE STATEMENT  DES
   IF ( Info(1)==0 ) THEN
     !
-    ! ON THE FIRST CALL , PERFORM INITIALIZATION --
+    ! ON THE FIRST CALL, PERFORM INITIALIZATION --
     !        DEFINE THE MACHINE UNIT ROUNDOFF QUANTITY  U  BY CALLING THE
     !        FUNCTION ROUTINE  R1MACH. THE USER MUST MAKE SURE THAT THE
     !        VALUES SET IN R1MACH ARE RELEVANT TO THE COMPUTER BEING USED.
@@ -147,7 +147,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !
   nrtolp = 0
   natolp = 0
-  DO k = 1 , Neq
+  DO k = 1, Neq
     IF ( nrtolp==0.AND.Rtol(k)<0. ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Rtol(k)
@@ -245,7 +245,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !     THE RELATIVE ERROR TOLERANCE RTOL IS RESET TO THE SMALLEST VALUE
   !     FOURU WHICH IS LIKELY TO BE REASONABLE FOR THIS METHOD AND MACHINE
   !
-  DO k = 1 , Neq
+  DO k = 1, Neq
     IF ( Rtol(k)+Atol(k)<=0. ) THEN
       Rtol(k) = Fouru
       Idid = -2
@@ -273,7 +273,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       CALL F(a,Y,Yp,Rpar,Ipar)
       IF ( T==Tout ) THEN
         Idid = 2
-        DO l = 1 , Neq
+        DO l = 1, Neq
           Ypout(l) = Yp(l)
         ENDDO
         Told = T
@@ -290,7 +290,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     !
     Init = 2
     X = T
-    DO l = 1 , Neq
+    DO l = 1, Neq
       Yy(l) = Y(l)
     ENDDO
     Delsgn = SIGN(1.0,Tout-T)
@@ -322,7 +322,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     IF ( Info(4)==1 ) THEN
       IF ( ABS(Tstop-X)<Fouru*ABS(X) ) THEN
         dt = Tout - X
-        DO l = 1 , Neq
+        DO l = 1, Neq
           Y(l) = Yy(l) + dt*Yp(l)
         ENDDO
         CALL F(Tout,Y,Ypout,Rpar,Ipar)
@@ -338,7 +338,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       !   INTERMEDIATE-OUTPUT MODE
       !
       Idid = 1
-      DO l = 1 , Neq
+      DO l = 1, Neq
         Y(l) = Yy(l)
         Ypout(l) = Yp(l)
       ENDDO
@@ -362,7 +362,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       H = SIGN(ha,H)
       Eps = 1.0
       ltol = 1
-      DO l = 1 , Neq
+      DO l = 1, Neq
         IF ( Info(2)==1 ) ltol = l
         Wt(l) = Rtol(ltol)*ABS(Yy(l)) + Atol(ltol)
         IF ( Wt(l)<=0.0 ) GOTO 120
@@ -391,7 +391,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
         Rtol(1) = Eps*Rtol(1)
         Atol(1) = Eps*Atol(1)
         IF ( Info(2)/=0 ) THEN
-          DO l = 2 , Neq
+          DO l = 2, Neq
             Rtol(l) = Eps*Rtol(l)
             Atol(l) = Eps*Atol(l)
           ENDDO
@@ -401,7 +401,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
       !
       !                       RELATIVE ERROR CRITERION INAPPROPRIATE
       120      Idid = -3
-      DO l = 1 , Neq
+      DO l = 1, Neq
         Y(l) = Yy(l)
         Ypout(l) = Yp(l)
       ENDDO
@@ -423,7 +423,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
         Kle4 = 0
       ENDIF
       !
-      DO l = 1 , Neq
+      DO l = 1, Neq
         Y(l) = Yy(l)
         Ypout(l) = Yp(l)
       ENDDO
@@ -443,13 +443,14 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   T = Tout
   Told = T
   RETURN
-  200  DO l = 1 , Neq
-  Y(l) = Yy(l)
-  Ypout(l) = Yp(l)
-ENDDO
-T = X
-Told = T
-Info(1) = -1
-Intout = .FALSE.
-RETURN
+  200 CONTINUE
+  DO l = 1, Neq
+    Y(l) = Yy(l)
+    Ypout(l) = Yp(l)
+  ENDDO
+  T = X
+  Told = T
+  Info(1) = -1
+  Intout = .FALSE.
+  RETURN
 END SUBROUTINE DES

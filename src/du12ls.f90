@@ -28,13 +28,13 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   IMPLICIT NONE
   !*--DU12LS29
   !*** Start of declarations inserted by SPAG
-  REAL(8) :: A , B , bb , H , Rnorm , tt , W
-  INTEGER i , ij , im1 , j , jb , k , kp1 , Krank , M , Mda , Mdb , Mode , &
-    N , Nb , nmk
+  REAL(8) :: A, B, bb, H, Rnorm, tt, W
+  INTEGER i, ij, im1, j, jb, k, kp1, Krank, M, Mda, Mdb, Mode, &
+    N, Nb, nmk
   !*** End of declarations inserted by SPAG
-  REAL(8) :: DDOT , DNRM2
-  DIMENSION A(Mda,*) , B(Mdb,*) , Rnorm(*) , H(*) , W(*)
-  INTEGER Ic(*) , Ir(*)
+  REAL(8) :: DDOT, DNRM2
+  DIMENSION A(Mda,*), B(Mdb,*), Rnorm(*), H(*), W(*)
+  INTEGER Ic(*), Ir(*)
   !***FIRST EXECUTABLE STATEMENT  DU12LS
   k = Krank
   kp1 = k + 1
@@ -49,16 +49,16 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
     DO
       i = i + 1
       IF ( i==M ) THEN
-        DO i = 1 , M
+        DO i = 1, M
           Ir(i) = ABS(Ir(i))
         ENDDO
         !
         !     APPLY HOUSEHOLDER TRANSFORMATIONS TO B
         !
-        DO j = 1 , k
+        DO j = 1, k
           tt = A(j,j)
           A(j,j) = H(j)
-          DO i = 1 , Nb
+          DO i = 1, Nb
             bb = -DDOT(M-j+1,A(j,j),1,B(j,i),1)/H(j)
             CALL DAXPY(M-j+1,bb,A(j,j),1,B(j,i),1)
           ENDDO
@@ -67,7 +67,7 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
         !
         !        FIND NORMS OF RESIDUAL VECTOR(S)..(BEFORE OVERWRITE B)
         !
-        DO jb = 1 , Nb
+        DO jb = 1, Nb
           Rnorm(jb) = DNRM2((M-k),B(kp1,jb),1)
         ENDDO
         !
@@ -75,7 +75,7 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
         !
         i = k
         DO
-          DO jb = 1 , Nb
+          DO jb = 1, Nb
             B(i,jb) = B(i,jb)/A(i,i)
           ENDDO
           IF ( i==1 ) THEN
@@ -85,8 +85,8 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
             !      TRUNCATED SOLUTION
             !
             IF ( k/=N ) THEN
-              DO jb = 1 , Nb
-                DO i = kp1 , N
+              DO jb = 1, Nb
+                DO i = kp1, N
                   B(i,jb) = 0.0D0
                 ENDDO
               ENDDO
@@ -95,8 +95,8 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
                 !      MINIMAL LENGTH SOLUTION
                 !
                 nmk = N - k
-                DO jb = 1 , Nb
-                  DO i = 1 , k
+                DO jb = 1, Nb
+                  DO i = 1, k
                     tt = -DDOT(nmk,A(i,kp1),Mda,B(kp1,jb),1)/W(i)
                     tt = tt - B(i,jb)
                     CALL DAXPY(nmk,tt,A(i,kp1),Mda,B(kp1,jb),1)
@@ -113,7 +113,7 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
             DO
               i = i + 1
               IF ( i==N ) THEN
-                DO i = 1 , N
+                DO i = 1, N
                   Ic(i) = ABS(Ic(i))
                 ENDDO
                 GOTO 99999
@@ -135,7 +135,7 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
             ENDDO
           ELSE
             im1 = i - 1
-            DO jb = 1 , Nb
+            DO jb = 1, Nb
               CALL DAXPY(im1,-B(i,jb),A(1,i),1,B(1,jb),1)
             ENDDO
             i = im1
@@ -146,19 +146,19 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
         IF ( j/=i ) THEN
           IF ( j>=0 ) THEN
             Ir(i) = -Ir(i)
-            DO jb = 1 , Nb
+            DO jb = 1, Nb
               Rnorm(jb) = B(i,jb)
             ENDDO
             ij = i
             DO
-              DO jb = 1 , Nb
+              DO jb = 1, Nb
                 B(ij,jb) = B(j,jb)
               ENDDO
               ij = j
               j = Ir(ij)
               Ir(ij) = -Ir(ij)
               IF ( j==i ) THEN
-                DO jb = 1 , Nb
+                DO jb = 1, Nb
                   B(ij,jb) = Rnorm(jb)
                 ENDDO
                 EXIT
@@ -169,11 +169,11 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
       ENDIF
     ENDDO
   ELSE
-    DO jb = 1 , Nb
+    DO jb = 1, Nb
       Rnorm(jb) = DNRM2(M,B(1,jb),1)
     ENDDO
-    DO jb = 1 , Nb
-      DO i = 1 , N
+    DO jb = 1, Nb
+      DO i = 1, N
         B(i,jb) = 0.0D0
       ENDDO
     ENDDO
@@ -182,4 +182,5 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   !
   !        SOLUTION VECTORS ARE IN FIRST N ROWS OF B(,)
   !
-  99999 END SUBROUTINE DU12LS
+  99999 CONTINUE
+  END SUBROUTINE DU12LS

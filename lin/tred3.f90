@@ -68,13 +68,13 @@ SUBROUTINE TRED3(N,Nv,A,D,E,E2)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  TRED3
   !
-  INTEGER i , j , k , l , N , ii , iz , jk , Nv
-  REAL A(*) , D(*) , E(*) , E2(*)
-  REAL f , g , h , hh , scale
+  INTEGER i, j, k, l, N, ii, iz, jk, Nv
+  REAL A(*), D(*), E(*), E2(*)
+  REAL f, g, h, hh, scale
   !
   !     .......... FOR I=N STEP -1 UNTIL 1 DO -- ..........
   !***FIRST EXECUTABLE STATEMENT  TRED3
-  DO ii = 1 , N
+  DO ii = 1, N
     i = N + 1 - ii
     l = i - 1
     iz = (i*l)/2
@@ -82,7 +82,7 @@ SUBROUTINE TRED3(N,Nv,A,D,E,E2)
     scale = 0.0E0
     IF ( l>=1 ) THEN
       !     .......... SCALE ROW (ALGOL TOL THEN NOT NEEDED) ..........
-      DO k = 1 , l
+      DO k = 1, l
         iz = iz + 1
         D(k) = A(iz)
         scale = scale + ABS(D(k))
@@ -90,7 +90,7 @@ SUBROUTINE TRED3(N,Nv,A,D,E,E2)
       !
       IF ( scale/=0.0E0 ) THEN
         !
-        DO k = 1 , l
+        DO k = 1, l
           D(k) = D(k)/scale
           h = h + D(k)*D(k)
         ENDDO
@@ -105,11 +105,11 @@ SUBROUTINE TRED3(N,Nv,A,D,E,E2)
         IF ( l/=1 ) THEN
           f = 0.0E0
           !
-          DO j = 1 , l
+          DO j = 1, l
             g = 0.0E0
             jk = (j*(j-1))/2
             !     .......... FORM ELEMENT OF A*U ..........
-            DO k = 1 , l
+            DO k = 1, l
               jk = jk + 1
               IF ( k>j ) jk = jk + k - 2
               g = g + A(jk)*D(k)
@@ -122,12 +122,12 @@ SUBROUTINE TRED3(N,Nv,A,D,E,E2)
           hh = f/(h+h)
           jk = 0
           !     .......... FORM REDUCED A ..........
-          DO j = 1 , l
+          DO j = 1, l
             f = D(j)
             g = E(j) - hh*f
             E(j) = g
             !
-            DO k = 1 , j
+            DO k = 1, j
               jk = jk + 1
               A(jk) = A(jk) - f*E(k) - g*D(k)
             ENDDO

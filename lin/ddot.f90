@@ -4,7 +4,7 @@ REAL(8) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
   !*--DDOT5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , Incy , ix , iy , m , mp1 , N , ns
+  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DDOT
   !***PURPOSE  Compute the inner product of two vectors.
@@ -49,7 +49,7 @@ REAL(8) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DDOT
-  REAL(8) :: Dx(*) , Dy(*)
+  REAL(8) :: Dx(*), Dy(*)
   !***FIRST EXECUTABLE STATEMENT  DDOT
   DDOT = 0.0D0
   IF ( N<=0 ) RETURN
@@ -63,7 +63,7 @@ REAL(8) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
       !
       m = MOD(N,5)
       IF ( m/=0 ) THEN
-        DO i = 1 , m
+        DO i = 1, m
           DDOT = DDOT + Dx(i)*Dy(i)
         ENDDO
         IF ( N<5 ) RETURN
@@ -74,7 +74,7 @@ REAL(8) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
       !     Code for equal, positive, non-unit increments.
       !
       ns = N*Incx
-      DO i = 1 , ns , Incx
+      DO i = 1, ns, Incx
         DDOT = DDOT + Dx(i)*Dy(i)
       ENDDO
       GOTO 99999
@@ -87,16 +87,17 @@ REAL(8) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
   iy = 1
   IF ( Incx<0 ) ix = (-N+1)*Incx + 1
   IF ( Incy<0 ) iy = (-N+1)*Incy + 1
-  DO i = 1 , N
+  DO i = 1, N
     DDOT = DDOT + Dx(ix)*Dy(iy)
     ix = ix + Incx
     iy = iy + Incy
   ENDDO
   RETURN
   100  mp1 = m + 1
-  DO i = mp1 , N , 5
+  DO i = mp1, N, 5
     DDOT = DDOT + Dx(i)*Dy(i) + Dx(i+1)*Dy(i+1) + Dx(i+2)*Dy(i+2) + Dx(i+3)&
       *Dy(i+3) + Dx(i+4)*Dy(i+4)
   ENDDO
   RETURN
-  99999 END FUNCTION DDOT
+  99999 CONTINUE
+  END FUNCTION DDOT

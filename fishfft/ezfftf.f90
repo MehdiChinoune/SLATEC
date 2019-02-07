@@ -4,8 +4,8 @@ SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
   IMPLICIT NONE
   !*--EZFFTF5
   !*** Start of declarations inserted by SPAG
-  REAL A , Azero , B , cf , cfm , R , Wsave
-  INTEGER i , N , ns2 , ns2m
+  REAL A, Azero, B, cf, cfm, R, Wsave
+  INTEGER i, N, ns2, ns2m
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  EZFFTF
   !***PURPOSE  Compute a simplified real, periodic, fast Fourier forward
@@ -77,7 +77,7 @@ SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  EZFFTF
-  DIMENSION R(*) , A(*) , B(*) , Wsave(*)
+  DIMENSION R(*), A(*), B(*), Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  EZFFTF
   IF ( N<2 ) THEN
     Azero = R(1)
@@ -87,7 +87,7 @@ SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
     A(1) = .5*(R(1)-R(2))
     RETURN
   ELSE
-    DO i = 1 , N
+    DO i = 1, N
       Wsave(i) = R(i)
     ENDDO
     CALL RFFTF(N,Wsave,Wsave(N+1))
@@ -96,7 +96,7 @@ SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
     Azero = .5*cf*Wsave(1)
     ns2 = (N+1)/2
     ns2m = ns2 - 1
-    DO i = 1 , ns2m
+    DO i = 1, ns2m
       A(i) = cf*Wsave(2*i)
       B(i) = cfm*Wsave(2*i+1)
     ENDDO

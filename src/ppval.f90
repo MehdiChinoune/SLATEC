@@ -69,9 +69,9 @@ FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  PPVAL
   !
-  INTEGER i , Ideriv , Inppv , j , K , Ldc , Lxi , ndummy
-  REAL C , dx , fltk , X , Xi
-  DIMENSION Xi(*) , C(Ldc,*)
+  INTEGER i, Ideriv, Inppv, j, K, Ldc, Lxi, ndummy
+  REAL C, dx, fltk, X, Xi
+  DIMENSION Xi(*), C(Ldc,*)
   !***FIRST EXECUTABLE STATEMENT  PPVAL
   PPVAL = 0.0E0
   IF ( K<1 ) THEN
@@ -103,4 +103,5 @@ FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
     ENDDO
   ENDIF
   RETURN
-  99999 END FUNCTION PPVAL
+  99999 CONTINUE
+  END FUNCTION PPVAL

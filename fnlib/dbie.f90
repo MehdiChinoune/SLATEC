@@ -5,7 +5,7 @@ REAL(8) FUNCTION DBIE(X)
   !*--DBIE5
   !*** Start of declarations inserted by SPAG
   REAL eta
-  INTEGER INITDS , nbif , nbif2 , nbig , nbig2 , nbip1 , nbip2
+  INTEGER INITDS, nbif, nbif2, nbig, nbig2, nbip1, nbip2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBIE
   !***PURPOSE  Calculate the Bairy function for a negative argument and an
@@ -77,12 +77,12 @@ REAL(8) FUNCTION DBIE(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DBIE
-  REAL(8) :: X , bifcs(13) , bigcs(13) , bif2cs(15) , big2cs(15) , &
-    bip1cs(47) , bip2cs(88) , atr , btr , sqrtx , theta , &
-    xbig , xm , x3sml , x32sml , z , D1MACH , DCSEVL
+  REAL(8) :: X, bifcs(13), bigcs(13), bif2cs(15), big2cs(15), &
+    bip1cs(47), bip2cs(88), atr, btr, sqrtx, theta, &
+    xbig, xm, x3sml, x32sml, z, D1MACH, DCSEVL
   LOGICAL first
-  SAVE bifcs , bigcs , bif2cs , big2cs , bip1cs , bip2cs , atr , btr , &
-    nbif , nbig , nbif2 , nbig2 , nbip1 , nbip2 , x3sml , x32sml , xbig , &
+  SAVE bifcs, bigcs, bif2cs, big2cs, bip1cs, bip2cs, atr, btr, &
+    nbif, nbig, nbif2, nbig2, nbip1, nbip2, x3sml, x32sml, xbig, &
     first
   DATA bifcs(1)/ - .16730216471986649483537423928176D-1/
   DATA bifcs(2)/ + .10252335834249445611426362777757D+0/
@@ -327,4 +327,5 @@ REAL(8) FUNCTION DBIE(X)
   DBIE = (0.625D0+DCSEVL(z,bip1cs,nbip1))/SQRT(sqrtx)
   RETURN
   !
-  99999 END FUNCTION DBIE
+  99999 CONTINUE
+  END FUNCTION DBIE

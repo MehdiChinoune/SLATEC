@@ -27,40 +27,40 @@ SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   !     .. Parameters ..
   COMPLEX ZERO
   PARAMETER (ZERO=(0.0,0.0))
-  REAL RZERO , RONE
+  REAL RZERO, RONE
   PARAMETER (RZERO=0.0,RONE=1.0)
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  REAL Eps , Thresh
-  INTEGER Kprint , Nalf , Nbet , Nidim , Nmax , Nout
+  REAL Eps, Thresh
+  INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
   CHARACTER(6) :: Sname
   !     .. Array Arguments ..
-  COMPLEX A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) ,&
-    B(Nmax,Nmax) , Bb(Nmax*Nmax) , Bs(Nmax*Nmax) , Bet(Nbet) ,&
-    C(Nmax,Nmax) , Cc(Nmax*Nmax) , Ct(Nmax) , Cs(Nmax*Nmax)
+  COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax) ,&
+    B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), Bet(Nbet) ,&
+    C(Nmax,Nmax), Cc(Nmax*Nmax), Ct(Nmax), Cs(Nmax*Nmax)
   REAL G(Nmax)
   INTEGER Idim(Nidim)
   !     .. Local Scalars ..
-  COMPLEX alpha , als , beta , bets
-  REAL err , errmax , ralpha , rals , rbeta , rbets
-  INTEGER i , ia , ib , ict , icu , ik , in , j , jc , jj , k , ks , laa ,&
-    lcc , lda , ldas , ldc , ldcs , lj , ma , n , na , nargs , nc ,&
-    nerr , ns
-  LOGICAL conj , ftl , null , reset , tran , upper
-  CHARACTER :: trans , transs , uplo , transt , uplos
-  CHARACTER(2) :: ichu , icht
+  COMPLEX alpha, als, beta, bets
+  REAL err, errmax, ralpha, rals, rbeta, rbets
+  INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, k, ks, laa ,&
+    lcc, lda, ldas, ldc, ldcs, lj, ma, n, na, nargs, nc ,&
+    nerr, ns
+  LOGICAL conj, ftl, null, reset, tran, upper
+  CHARACTER :: trans, transs, uplo, transt, uplos
+  CHARACTER(2) :: ichu, icht
   !     .. Local Arrays ..
   LOGICAL isame(13)
   !     .. External Functions ..
   INTEGER NUMXER
-  LOGICAL LCE , LCERES
-  EXTERNAL LCE , LCERES , NUMXER
+  LOGICAL LCE, LCERES
+  EXTERNAL LCE, LCERES, NUMXER
   !     .. External Subroutines ..
-  EXTERNAL CHERK , CSYRK , CMAKE3 , CMMCH
+  EXTERNAL CHERK, CSYRK, CMAKE3, CMMCH
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MAX , MIN
+  INTRINSIC ABS, MAX, MIN
   !     .. Data statements ..
-  DATA ichu/'UL'/ , icht/'NC'/
+  DATA ichu/'UL'/, icht/'NC'/
   !***FIRST EXECUTABLE STATEMENT  CCHK43
   conj = Sname(2:3)=='HE'
   !
@@ -69,7 +69,7 @@ SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   reset = .TRUE.
   errmax = RZERO
   !
-  DO in = 1 , Nidim
+  DO in = 1, Nidim
     n = Idim(in)
     !        Set LDC to 1 more than minimum value if room.
     ldc = n
@@ -78,10 +78,10 @@ SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
     IF ( ldc<=Nmax ) THEN
       lcc = ldc*n
       !
-      DO ik = 1 , Nidim
+      DO ik = 1, Nidim
         k = Idim(ik)
         !
-        DO ict = 1 , 2
+        DO ict = 1, 2
           trans = icht(ict:ict)
           tran = trans=='C'
           IF ( tran.AND..NOT.conj ) trans = 'T'
@@ -103,18 +103,18 @@ SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
             !
             CALL CMAKE3('GE',' ',' ',ma,na,A,Nmax,Aa,lda,reset,ZERO)
             !
-            DO icu = 1 , 2
+            DO icu = 1, 2
               uplo = ichu(icu:icu)
               upper = uplo=='U'
               !
-              DO ia = 1 , Nalf
+              DO ia = 1, Nalf
                 alpha = Alf(ia)
                 IF ( conj ) THEN
                   ralpha = REAL(alpha)
                   alpha = CMPLX(ralpha,RZERO)
                 ENDIF
                 !
-                DO ib = 1 , Nbet
+                DO ib = 1, Nbet
                   beta = Bet(ib)
                   IF ( conj ) THEN
                     rbeta = REAL(beta)
@@ -142,7 +142,7 @@ SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                   ELSE
                     als = alpha
                   ENDIF
-                  DO i = 1 , laa
+                  DO i = 1, laa
                     As(i) = Aa(i)
                   ENDDO
                   ldas = lda
@@ -151,7 +151,7 @@ SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                   ELSE
                     bets = beta
                   ENDIF
-                  DO i = 1 , lcc
+                  DO i = 1, lcc
                     Cs(i) = Cc(i)
                   ENDDO
                   ldcs = ldc
@@ -199,7 +199,7 @@ SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                   !                       If data was incorrectly changed, report and
                   !                       return.
                   !
-                  DO i = 1 , nargs
+                  DO i = 1, nargs
                     IF ( .NOT.isame(i) ) THEN
                       Fatal = .TRUE.
                       IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
@@ -216,7 +216,7 @@ SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                       transt = 'T'
                     ENDIF
                     jc = 1
-                    DO j = 1 , n
+                    DO j = 1, n
                       IF ( upper ) THEN
                         jj = 1
                         lj = j
@@ -246,12 +246,12 @@ SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                         IF ( Kprint>=3 ) THEN
                           WRITE (Nout,FMT=99004) Sname
                           IF ( conj ) THEN
-                            WRITE (Nout,FMT=99005) nc , Sname , uplo ,&
-                              trans , n , k , ralpha , lda , rbeta ,&
+                            WRITE (Nout,FMT=99005) nc, Sname, uplo ,&
+                              trans, n, k, ralpha, lda, rbeta ,&
                               ldc
                           ELSE
-                            WRITE (Nout,FMT=99006) nc , Sname , uplo ,&
-                              trans , n , k , alpha , lda , beta , ldc
+                            WRITE (Nout,FMT=99006) nc, Sname, uplo ,&
+                              trans, n, k, alpha, lda, beta, ldc
                           ENDIF
                         ENDIF
                       ENDIF
@@ -277,9 +277,9 @@ SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   IF ( .NOT.Fatal ) THEN
     IF ( Kprint>=3 ) THEN
       IF ( errmax<Thresh ) THEN
-        WRITE (Nout,FMT=99001) Sname , nc
+        WRITE (Nout,FMT=99001) Sname, nc
       ELSE
-        WRITE (Nout,FMT=99003) Sname , nc , errmax
+        WRITE (Nout,FMT=99003) Sname, nc, errmax
       ENDIF
     ENDIF
   ENDIF
@@ -294,7 +294,7 @@ SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   99005 FORMAT (1X,I6,': ',A6,'(',2('''',A1,''','),2(I3,','),F4.1,', A,',I3,',',&
     F4.1,', C,',I3,')               ','          .')
   99006 FORMAT (1X,I6,': ',A6,'(',2('''',A1,''','),2(I3,','),'(',F4.1,',',F4.1,&
-    ') , A,',I3,',(',F4.1,',',F4.1,'), C,',I3,')          .')
+    '), A,',I3,',(',F4.1,',',F4.1,'), C,',I3,')          .')
   99007 FORMAT (' ******* FATAL ERROR - ERROR-EXIT TAKEN ON VALID CALL *',&
     '******')
   !

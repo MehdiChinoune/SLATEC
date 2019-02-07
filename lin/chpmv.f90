@@ -101,26 +101,26 @@ SUBROUTINE CHPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  CHPMV
   !     .. Scalar Arguments ..
-  COMPLEX Alpha , Beta
-  INTEGER Incx , Incy , N
+  COMPLEX Alpha, Beta
+  INTEGER Incx, Incy, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  COMPLEX Ap(*) , X(*) , Y(*)
+  COMPLEX Ap(*), X(*), Y(*)
   !     .. Parameters ..
   COMPLEX ONE
   PARAMETER (ONE=(1.0E+0,0.0E+0))
   COMPLEX ZERO
   PARAMETER (ZERO=(0.0E+0,0.0E+0))
   !     .. Local Scalars ..
-  COMPLEX temp1 , temp2
-  INTEGER i , info , ix , iy , j , jx , jy , k , kk , kx , ky
+  COMPLEX temp1, temp2
+  INTEGER i, info, ix, iy, j, jx, jy, k, kk, kx, ky
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
-  INTRINSIC CONJG , REAL
+  INTRINSIC CONJG, REAL
   !***FIRST EXECUTABLE STATEMENT  CHPMV
   !
   !     Test the input parameters.
@@ -166,22 +166,22 @@ SUBROUTINE CHPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
     IF ( Incy/=1 ) THEN
       iy = ky
       IF ( Beta==ZERO ) THEN
-        DO i = 1 , N
+        DO i = 1, N
           Y(iy) = ZERO
           iy = iy + Incy
         ENDDO
       ELSE
-        DO i = 1 , N
+        DO i = 1, N
           Y(iy) = Beta*Y(iy)
           iy = iy + Incy
         ENDDO
       ENDIF
     ELSEIF ( Beta==ZERO ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         Y(i) = ZERO
       ENDDO
     ELSE
-      DO i = 1 , N
+      DO i = 1, N
         Y(i) = Beta*Y(i)
       ENDDO
     ENDIF
@@ -193,11 +193,11 @@ SUBROUTINE CHPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
     !        Form  y  when AP contains the upper triangle.
     !
     IF ( (Incx==1).AND.(Incy==1) ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         temp1 = Alpha*X(j)
         temp2 = ZERO
         k = kk
-        DO i = 1 , j - 1
+        DO i = 1, j - 1
           Y(i) = Y(i) + temp1*Ap(k)
           temp2 = temp2 + CONJG(Ap(k))*X(i)
           k = k + 1
@@ -208,12 +208,12 @@ SUBROUTINE CHPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
     ELSE
       jx = kx
       jy = ky
-      DO j = 1 , N
+      DO j = 1, N
         temp1 = Alpha*X(jx)
         temp2 = ZERO
         ix = kx
         iy = ky
-        DO k = kk , kk + j - 2
+        DO k = kk, kk + j - 2
           Y(iy) = Y(iy) + temp1*Ap(k)
           temp2 = temp2 + CONJG(Ap(k))*X(ix)
           ix = ix + Incx
@@ -229,12 +229,12 @@ SUBROUTINE CHPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
     !        Form  y  when AP contains the lower triangle.
     !
   ELSEIF ( (Incx==1).AND.(Incy==1) ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       temp1 = Alpha*X(j)
       temp2 = ZERO
       Y(j) = Y(j) + temp1*REAL(Ap(kk))
       k = kk + 1
-      DO i = j + 1 , N
+      DO i = j + 1, N
         Y(i) = Y(i) + temp1*Ap(k)
         temp2 = temp2 + CONJG(Ap(k))*X(i)
         k = k + 1
@@ -245,13 +245,13 @@ SUBROUTINE CHPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   ELSE
     jx = kx
     jy = ky
-    DO j = 1 , N
+    DO j = 1, N
       temp1 = Alpha*X(jx)
       temp2 = ZERO
       Y(jy) = Y(jy) + temp1*REAL(Ap(kk))
       ix = jx
       iy = jy
-      DO k = kk + 1 , kk + N - j
+      DO k = kk + 1, kk + N - j
         ix = ix + Incx
         iy = iy + Incy
         Y(iy) = Y(iy) + temp1*Ap(k)

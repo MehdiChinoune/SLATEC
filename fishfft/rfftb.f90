@@ -5,7 +5,7 @@ SUBROUTINE RFFTB(N,R,Wsave)
   !*--RFFTB5
   !*** Start of declarations inserted by SPAG
   INTEGER N
-  REAL R , Wsave
+  REAL R, Wsave
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RFFTB
   !***SUBSIDIARY
@@ -95,7 +95,7 @@ SUBROUTINE RFFTB(N,R,Wsave)
   !           call to CFFTB1.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RFFTB
-  DIMENSION R(*) , Wsave(*)
+  DIMENSION R(*), Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  RFFTB
   IF ( N==1 ) RETURN
   CALL RFFTB1(N,R,Wsave,Wsave(N+1),Wsave(2*N+1))

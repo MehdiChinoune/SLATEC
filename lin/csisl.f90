@@ -66,11 +66,11 @@ SUBROUTINE CSISL(A,Lda,N,Kpvt,B)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CSISL
-  INTEGER Lda , N , Kpvt(*)
-  COMPLEX A(Lda,*) , B(*)
+  INTEGER Lda, N, Kpvt(*)
+  COMPLEX A(Lda,*), B(*)
   !
-  COMPLEX ak , akm1 , bk , bkm1 , CDOTU , denom , temp
-  INTEGER k , kp
+  COMPLEX ak, akm1, bk, bkm1, CDOTU, denom, temp
+  INTEGER k, kp
   !
   !     LOOP BACKWARD APPLYING THE TRANSFORMATIONS AND
   !     D INVERSE TO B.

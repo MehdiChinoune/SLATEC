@@ -116,16 +116,16 @@ REAL FUNCTION ALOG(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL aln2 , t , t2 , xn , y
-  INTEGER n , nterms , ntrval
+  REAL aln2, t, t2, xn, y
+  INTEGER n, nterms, ntrval
   !     .. Local Arrays ..
-  REAL alncen(5) , alncs(6) , center(4)
+  REAL alncen(5), alncs(6), center(4)
   !     .. External Functions ..
-  REAL CSEVL , R1MACH
+  REAL CSEVL, R1MACH
   INTEGER INITS
-  EXTERNAL CSEVL , R1MACH , INITS
+  EXTERNAL CSEVL, R1MACH, INITS
   !     .. External Subroutines ..
-  EXTERNAL R9UPAK , XERMSG
+  EXTERNAL R9UPAK, XERMSG
   !     .. Save statement ..
   SAVE nterms
   !     .. Data statements ..
@@ -274,21 +274,21 @@ REAL FUNCTION ASIN(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL pi2 , sqeps , y , z
+  REAL pi2, sqeps, y, z
   INTEGER nterms
   LOGICAL first
   !     .. Local Arrays ..
   REAL asincs(20)
   !     .. External Functions ..
-  REAL CSEVL , R1MACH , SQRT
+  REAL CSEVL, R1MACH, SQRT
   INTEGER INITS
-  EXTERNAL CSEVL , R1MACH , SQRT , INITS
+  EXTERNAL CSEVL, R1MACH, SQRT, INITS
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , SIGN
+  INTRINSIC ABS, SIGN
   !     .. Save statement ..
-  SAVE first , nterms , sqeps
+  SAVE first, nterms, sqeps
   !     .. Data statements ..
   DATA asincs(1)/.10246391753227159E0/
   DATA asincs(2)/.054946487221245833E0/
@@ -387,19 +387,19 @@ REAL FUNCTION ATAN(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL sqeps , t , xbig , xbnd1 , xbnd2 , xbnd3 , xbnd4 , y
-  INTEGER n , nterms
+  REAL sqeps, t, xbig, xbnd1, xbnd2, xbnd3, xbnd4, y
+  INTEGER n, nterms
   LOGICAL first
   !     .. Local Arrays ..
-  REAL atancs(9) , conpi8(4) , pi8(4) , tanp8(3)
+  REAL atancs(9), conpi8(4), pi8(4), tanp8(3)
   !     .. External Functions ..
-  REAL CSEVL , R1MACH , SQRT
+  REAL CSEVL, R1MACH, SQRT
   INTEGER INITS
-  EXTERNAL CSEVL , R1MACH , SQRT , INITS
+  EXTERNAL CSEVL, R1MACH, SQRT, INITS
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , SIGN
+  INTRINSIC ABS, SIGN
   !     .. Save statement ..
-  SAVE first , nterms , sqeps , xbig
+  SAVE first, nterms, sqeps, xbig
   !     .. Data statements ..
   DATA atancs(1)/.48690110349241406E0/
   DATA atancs(2)/ - .006510831636717464E0/
@@ -505,7 +505,7 @@ REAL FUNCTION ATAN2(Sn,Cs)
   !           standards.  (SMR)
   !***END PROLOGUE  ATAN2
   !     .. Scalar Arguments ..
-  REAL Cs , Sn
+  REAL Cs, Sn
   !     .. Local Scalars ..
   REAL pi
   !     .. External Functions ..
@@ -576,15 +576,15 @@ REAL FUNCTION CABS(Z)
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. Local Scalars ..
-  REAL r1 , r2 , sqeps , x , y
+  REAL r1, r2, sqeps, x, y
   LOGICAL first
   !     .. External Functions ..
-  REAL R1MACH , SQRT
-  EXTERNAL R1MACH , SQRT
+  REAL R1MACH, SQRT
+  EXTERNAL R1MACH, SQRT
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , AIMAG , MAX , MIN , REAL
+  INTRINSIC ABS, AIMAG, MAX, MIN, REAL
   !     .. Save statement ..
-  SAVE first , sqeps
+  SAVE first, sqeps
   !     .. Data statements ..
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  CABS
@@ -644,14 +644,14 @@ COMPLEX FUNCTION CCOS(Z)
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. Local Scalars ..
-  REAL cs , x , y
+  REAL cs, x, y
   !     .. External Functions ..
-  REAL COS , COSH , SIN , SINH
-  EXTERNAL COS , COSH , SIN , SINH
+  REAL COS, COSH, SIN, SINH
+  EXTERNAL COS, COSH, SIN, SINH
   !     .. External Subroutines ..
   EXTERNAL XERCLR
   !     .. Intrinsic Functions ..
-  INTRINSIC AIMAG , CMPLX , REAL
+  INTRINSIC AIMAG, CMPLX, REAL
   !***FIRST EXECUTABLE STATEMENT  CCOS
   x = REAL(Z)
   y = AIMAG(Z)
@@ -706,12 +706,12 @@ COMPLEX FUNCTION CEXP(Z)
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. Local Scalars ..
-  REAL r , y
+  REAL r, y
   !     .. External Functions ..
-  REAL COS , EXP , SIN
-  EXTERNAL COS , EXP , SIN
+  REAL COS, EXP, SIN
+  EXTERNAL COS, EXP, SIN
   !     .. Intrinsic Functions ..
-  INTRINSIC AIMAG , CMPLX , REAL
+  INTRINSIC AIMAG, CMPLX, REAL
   !***FIRST EXECUTABLE STATEMENT  CEXP
   r = EXP(REAL(Z))
   IF ( r==0.0E0 ) THEN
@@ -766,8 +766,8 @@ COMPLEX FUNCTION CLOG(Z)
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. External Functions ..
-  REAL ALOG , CABS , CARG
-  EXTERNAL ALOG , CABS , CARG
+  REAL ALOG, CABS, CARG
+  EXTERNAL ALOG, CABS, CARG
   !     .. Intrinsic Functions ..
   INTRINSIC CMPLX
   !***FIRST EXECUTABLE STATEMENT  CLOG
@@ -834,21 +834,21 @@ REAL FUNCTION COS(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL ainty , ainty2 , eta , pi4rec , xmax , xsml , xwarn , y , yrem , z
-  INTEGER ifn , noctnt , ntcs , ntsn
+  REAL ainty, ainty2, eta, pi4rec, xmax, xsml, xwarn, y, yrem, z
+  INTEGER ifn, noctnt, ntcs, ntsn
   LOGICAL first
   !     .. Local Arrays ..
-  REAL coscs(8) , sincs(8)
+  REAL coscs(8), sincs(8)
   !     .. External Functions ..
-  REAL CSEVL , R1MACH , SQRT
+  REAL CSEVL, R1MACH, SQRT
   INTEGER INITS
-  EXTERNAL CSEVL , R1MACH , SQRT , INITS
+  EXTERNAL CSEVL, R1MACH, SQRT, INITS
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , AINT , AMOD , MOD
+  INTRINSIC ABS, AINT, AMOD, MOD
   !     .. Save statement ..
-  SAVE first , ntcs , ntsn , xmax , xsml , xwarn
+  SAVE first, ntcs, ntsn, xmax, xsml, xwarn
   !     .. Data statements ..
   DATA sincs(1)/ - .008104079085448715E0/
   DATA sincs(2)/ - .039144567527081957E0/
@@ -960,10 +960,10 @@ REAL FUNCTION COSH(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL y , ymax
+  REAL y, ymax
   !     .. External Functions ..
-  REAL EXP , R1MACH , SQRT
-  EXTERNAL EXP , R1MACH , SQRT
+  REAL EXP, R1MACH, SQRT
+  EXTERNAL EXP, R1MACH, SQRT
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !     .. Data statements ..
@@ -1019,14 +1019,14 @@ COMPLEX FUNCTION CSIN(Z)
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. Local Scalars ..
-  REAL sn , x , y
+  REAL sn, x, y
   !     .. External Functions ..
-  REAL COS , COSH , SIN , SINH
-  EXTERNAL COS , COSH , SIN , SINH
+  REAL COS, COSH, SIN, SINH
+  EXTERNAL COS, COSH, SIN, SINH
   !     .. External Subroutines ..
   EXTERNAL XERCLR
   !     .. Intrinsic Functions ..
-  INTRINSIC AIMAG , CMPLX , REAL
+  INTRINSIC AIMAG, CMPLX, REAL
   !***FIRST EXECUTABLE STATEMENT  CSIN
   x = REAL(Z)
   y = AIMAG(Z)
@@ -1081,12 +1081,12 @@ COMPLEX FUNCTION CSQRT(Z)
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. Local Scalars ..
-  REAL r , x , xtmp , y , ytmp
+  REAL r, x, xtmp, y, ytmp
   !     .. External Functions ..
-  REAL CABS , SQRT
-  EXTERNAL CABS , SQRT
+  REAL CABS, SQRT
+  EXTERNAL CABS, SQRT
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , AIMAG , CMPLX , REAL , SIGN
+  INTRINSIC ABS, AIMAG, CMPLX, REAL, SIGN
   !***FIRST EXECUTABLE STATEMENT  CSQRT
   x = REAL(Z)
   y = AIMAG(Z)
@@ -1227,21 +1227,21 @@ REAL(8) FUNCTION DASIN(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: pi2 , sqeps , y , z
+  REAL(8) :: pi2, sqeps, y, z
   INTEGER nterms
   LOGICAL first
   !     .. Local Arrays ..
   REAL(8) :: asincs(39)
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DCSEVL , DSQRT
+  REAL(8) :: D1MACH, DCSEVL, DSQRT
   INTEGER INITDS
-  EXTERNAL D1MACH , DCSEVL , DSQRT , INITDS
+  EXTERNAL D1MACH, DCSEVL, DSQRT, INITDS
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
-  INTRINSIC DABS , DSIGN , SNGL
+  INTRINSIC DABS, DSIGN, SNGL
   !     .. Save statement ..
-  SAVE first , nterms , sqeps
+  SAVE first, nterms, sqeps
   !     .. Data statements ..
   DATA asincs(1)/ + .10246391753227159336573148305785D+0/
   DATA asincs(2)/ + .54946487221245833306011195902924D-1/
@@ -1360,19 +1360,19 @@ REAL(8) FUNCTION DATAN(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: sqeps , t , xbig , xbnd1 , xbnd2 , xbnd3 , xbnd4 , y
-  INTEGER n , nterms
+  REAL(8) :: sqeps, t, xbig, xbnd1, xbnd2, xbnd3, xbnd4, y
+  INTEGER n, nterms
   LOGICAL first
   !     .. Local Arrays ..
-  REAL(8) :: atancs(16) , conpi8(4) , pi8(4) , tanp8(3)
+  REAL(8) :: atancs(16), conpi8(4), pi8(4), tanp8(3)
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DCSEVL , DSQRT
+  REAL(8) :: D1MACH, DCSEVL, DSQRT
   INTEGER INITDS
-  EXTERNAL D1MACH , DCSEVL , DSQRT , INITDS
+  EXTERNAL D1MACH, DCSEVL, DSQRT, INITDS
   !     .. Intrinsic Functions ..
-  INTRINSIC DABS , DSIGN , SNGL
+  INTRINSIC DABS, DSIGN, SNGL
   !     .. Save statement ..
-  SAVE first , nterms , sqeps , xbig
+  SAVE first, nterms, sqeps, xbig
   !     .. Data statements ..
   DATA atancs(1)/ + .48690110349241406474636915902891D+0/
   DATA atancs(2)/ - .65108316367174641818869794945974D-2/
@@ -1488,7 +1488,7 @@ REAL(8) FUNCTION DATAN2(Sn,Cs)
   !           standards.  (SMR)
   !***END PROLOGUE  DATAN2
   !     .. Scalar Arguments ..
-  REAL(8) :: Cs , Sn
+  REAL(8) :: Cs, Sn
   !     .. Local Scalars ..
   REAL(8) :: pi
   !     .. External Functions ..
@@ -1575,23 +1575,23 @@ REAL(8) FUNCTION DCOS(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: ainty , ainty2 , pi4rec , xmax , xsml , xwarn , y , &
-    yrem , z
+  REAL(8) :: ainty, ainty2, pi4rec, xmax, xsml, xwarn, y, &
+    yrem, z
   REAL eta
-  INTEGER ifn , noctnt , ntcs , ntsn
+  INTEGER ifn, noctnt, ntcs, ntsn
   LOGICAL first
   !     .. Local Arrays ..
-  REAL(8) :: coscs(13) , sincs(12)
+  REAL(8) :: coscs(13), sincs(12)
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DCSEVL , DINT , DSQRT
+  REAL(8) :: D1MACH, DCSEVL, DINT, DSQRT
   INTEGER INITDS
-  EXTERNAL D1MACH , DCSEVL , DINT , DSQRT , INITDS
+  EXTERNAL D1MACH, DCSEVL, DINT, DSQRT, INITDS
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
-  INTRINSIC DABS , DMOD , MOD
+  INTRINSIC DABS, DMOD, MOD
   !     .. Save statement ..
-  SAVE first , ntcs , ntsn , xsml , xmax , xwarn
+  SAVE first, ntcs, ntsn, xsml, xmax, xwarn
   !     .. Data statements ..
   DATA sincs(1)/ - .8104079085448715800196469943559D-2/
   DATA sincs(2)/ - .3914456752708195701742853890074D-1/
@@ -1715,10 +1715,10 @@ REAL(8) FUNCTION DCOSH(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: y , ymax
+  REAL(8) :: y, ymax
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DEXP , DSQRT
-  EXTERNAL D1MACH , DEXP , DSQRT
+  REAL(8) :: D1MACH, DEXP, DSQRT
+  EXTERNAL D1MACH, DEXP, DSQRT
   !     .. Intrinsic Functions ..
   INTRINSIC DABS
   !     .. Save statement ..
@@ -1790,21 +1790,21 @@ REAL(8) FUNCTION DEXP(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: aln216 , f , xint , xmax , xmin , y
-  INTEGER n , n16 , ndx , nterms
+  REAL(8) :: aln216, f, xint, xmax, xmin, y
+  INTEGER n, n16, ndx, nterms
   LOGICAL first
   !     .. Local Arrays ..
-  REAL(8) :: expcs(14) , twon16(17)
+  REAL(8) :: expcs(14), twon16(17)
   !     .. External Functions ..
-  REAL(8) :: D1MACH , D9PAK , DCSEVL , DINT , DLOG
+  REAL(8) :: D1MACH, D9PAK, DCSEVL, DINT, DLOG
   INTEGER INITDS
-  EXTERNAL D1MACH , D9PAK , DCSEVL , DINT , DLOG , INITDS
+  EXTERNAL D1MACH, D9PAK, DCSEVL, DINT, DLOG, INITDS
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC SNGL
   !     .. Save statement ..
-  SAVE first , nterms , xmin , xmax
+  SAVE first, nterms, xmin, xmax
   !     .. Data statements ..
   DATA expcs(1)/ + .866569493314985712733404647266231D-1/
   DATA expcs(2)/ + .938494869299839561896336579701203D-3/
@@ -1920,20 +1920,20 @@ REAL(8) FUNCTION DINT(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: part , scale , xbig , xmax , xscl
-  INTEGER i , ibase , ipart , ndigd , ndigi , npart
+  REAL(8) :: part, scale, xbig, xmax, xscl
+  INTEGER i, ibase, ipart, ndigd, ndigi, npart
   LOGICAL first
   !     .. External Functions ..
   REAL(8) :: D1MACH
   REAL R1MACH
   INTEGER I1MACH
-  EXTERNAL D1MACH , R1MACH , I1MACH
+  EXTERNAL D1MACH, R1MACH, I1MACH
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
-  INTRINSIC AMIN1 , DABS , INT , MIN0 , REAL , SNGL
+  INTRINSIC AMIN1, DABS, INT, MIN0, REAL, SNGL
   !     .. Save statement ..
-  SAVE first , npart , scale , xbig , xmax
+  SAVE first, npart, scale, xbig, xmax
   !     .. Data statements ..
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT    DINT
@@ -1955,11 +1955,11 @@ REAL(8) FUNCTION DINT(X)
   ELSE
     xscl = DABS(X)
     IF ( xscl<=xmax ) THEN
-      DO i = 1 , npart
+      DO i = 1, npart
         xscl = xscl/scale
       ENDDO
       !
-      DO i = 1 , npart
+      DO i = 1, npart
         xscl = xscl*scale
         ipart = xscl
         part = ipart
@@ -2032,16 +2032,16 @@ REAL(8) FUNCTION DLOG(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: aln2 , t , t2 , xn , y
-  INTEGER n , nterms , ntrval
+  REAL(8) :: aln2, t, t2, xn, y
+  INTEGER n, nterms, ntrval
   !     .. Local Arrays ..
-  REAL(8) :: alncen(5) , alncs(11) , center(4)
+  REAL(8) :: alncen(5), alncs(11), center(4)
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DCSEVL
+  REAL(8) :: D1MACH, DCSEVL
   INTEGER INITDS
-  EXTERNAL D1MACH , DCSEVL , INITDS
+  EXTERNAL D1MACH, DCSEVL, INITDS
   !     .. External Subroutines ..
-  EXTERNAL D9UPAK , XERMSG
+  EXTERNAL D9UPAK, XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC SNGL
   !     .. Save statement ..
@@ -2208,23 +2208,23 @@ REAL(8) FUNCTION DSIN(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: ainty , ainty2 , pi4rec , xmax , xsml , xwarn , y , &
-    yrem , z
+  REAL(8) :: ainty, ainty2, pi4rec, xmax, xsml, xwarn, y, &
+    yrem, z
   REAL eta
-  INTEGER ifn , noctnt , ntcs , ntsn
+  INTEGER ifn, noctnt, ntcs, ntsn
   LOGICAL first
   !     .. Local Arrays ..
-  REAL(8) :: coscs(13) , sincs(12)
+  REAL(8) :: coscs(13), sincs(12)
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DCSEVL , DINT , DSQRT
+  REAL(8) :: D1MACH, DCSEVL, DINT, DSQRT
   INTEGER INITDS
-  EXTERNAL D1MACH , DCSEVL , DINT , DSQRT , INITDS
+  EXTERNAL D1MACH, DCSEVL, DINT, DSQRT, INITDS
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , DMOD , MOD
+  INTRINSIC ABS, DMOD, MOD
   !     .. Save statement ..
-  SAVE first , ntsn , ntcs , xmax , xsml , xwarn
+  SAVE first, ntsn, ntcs, xmax, xsml, xwarn
   !     .. Data statements ..
   DATA sincs(1)/ - .8104079085448715800196469943559D-2/
   DATA sincs(2)/ - .3914456752708195701742853890074D-1/
@@ -2355,19 +2355,19 @@ REAL(8) FUNCTION DSINH(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: sqeps , y , ymax
+  REAL(8) :: sqeps, y, ymax
   INTEGER nterms
   LOGICAL first
   !     .. Local Arrays ..
   REAL(8) :: sinhcs(13)
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DCSEVL , DEXP , DSQRT
+  REAL(8) :: D1MACH, DCSEVL, DEXP, DSQRT
   INTEGER INITDS
-  EXTERNAL D1MACH , DCSEVL , DEXP , DSQRT , INITDS
+  EXTERNAL D1MACH, DCSEVL, DEXP, DSQRT, INITDS
   !     .. Intrinsic Functions ..
-  INTRINSIC DABS , DSIGN , SNGL
+  INTRINSIC DABS, DSIGN, SNGL
   !     .. Save statement ..
-  SAVE first , nterms , sqeps , ymax
+  SAVE first, nterms, sqeps, ymax
   !     .. Data statements ..
   DATA sinhcs(1)/ + .17304219404717963167588384698501D+0/
   DATA sinhcs(2)/ + .87594221922760477154900263454440D-1/
@@ -2452,15 +2452,15 @@ REAL(8) FUNCTION DSQRT(X)
   !     .. Local Scalars ..
   REAL(8) :: y
   REAL z
-  INTEGER irem , iter , ixpnt , n , niter
+  INTEGER irem, iter, ixpnt, n, niter
   !     .. Local Arrays ..
   REAL(8) :: sqrt2(3)
   !     .. External Functions ..
-  REAL(8) :: D1MACH , D9PAK
+  REAL(8) :: D1MACH, D9PAK
   REAL ALOG
-  EXTERNAL D1MACH , D9PAK , ALOG
+  EXTERNAL D1MACH, D9PAK, ALOG
   !     .. External Subroutines ..
-  EXTERNAL D9UPAK , XERMSG
+  EXTERNAL D9UPAK, XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC SNGL
   !     .. Save statement ..
@@ -2484,7 +2484,7 @@ REAL(8) FUNCTION DSQRT(X)
     z = y
     DSQRT = 0.261599E0 + z*(1.114292E0+z*(-0.516888E0+z*0.141067E0))
     !
-    DO iter = 1 , niter
+    DO iter = 1, niter
       DSQRT = DSQRT + 0.5D0*(y-DSQRT*DSQRT)/DSQRT
     ENDDO
     !
@@ -2550,22 +2550,22 @@ REAL(8) FUNCTION DTAN(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: ainty , ainty2 , pi2rec , prodbg , sqeps , xmax , xsml , &
-    y , yrem
-  INTEGER ifn , nterms
+  REAL(8) :: ainty, ainty2, pi2rec, prodbg, sqeps, xmax, xsml, &
+    y, yrem
+  INTEGER ifn, nterms
   LOGICAL first
   !     .. Local Arrays ..
   REAL(8) :: tancs(19)
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DCSEVL , DINT , DSQRT
+  REAL(8) :: D1MACH, DCSEVL, DINT, DSQRT
   INTEGER INITDS
-  EXTERNAL D1MACH , DCSEVL , DINT , DSQRT , INITDS
+  EXTERNAL D1MACH, DCSEVL, DINT, DSQRT, INITDS
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
-  INTRINSIC DABS , DMOD , DSIGN , SNGL
+  INTRINSIC DABS, DMOD, DSIGN, SNGL
   !     .. Save statement ..
-  SAVE first , nterms , sqeps , xmax , xsml
+  SAVE first, nterms, sqeps, xmax, xsml
   !     .. Data statements ..
   DATA tancs(1)/ + .22627932763129357846578636531752D+0/
   DATA tancs(2)/ + .43017913146548961775583410748067D-1/
@@ -2691,19 +2691,19 @@ REAL(8) FUNCTION DTANH(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: sqeps , xmax , y
+  REAL(8) :: sqeps, xmax, y
   INTEGER nterms
   LOGICAL first
   !     .. Local Arrays ..
   REAL(8) :: tanhcs(31)
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DCSEVL , DEXP , DLOG , DSQRT
+  REAL(8) :: D1MACH, DCSEVL, DEXP, DLOG, DSQRT
   INTEGER INITDS
-  EXTERNAL D1MACH , DCSEVL , DEXP , DLOG , DSQRT , INITDS
+  EXTERNAL D1MACH, DCSEVL, DEXP, DLOG, DSQRT, INITDS
   !     .. Intrinsic Functions ..
-  INTRINSIC DABS , DSIGN , SNGL
+  INTRINSIC DABS, DSIGN, SNGL
   !     .. Save statement ..
-  SAVE first , nterms , sqeps , xmax
+  SAVE first, nterms, sqeps, xmax
   !     .. Data statements ..
   DATA tanhcs(1)/ - .25828756643634710438338151450605D+0/
   DATA tanhcs(2)/ - .11836106330053496535383671940204D+0/
@@ -2810,21 +2810,21 @@ REAL FUNCTION EXP(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL aln216 , f , xint , xmax , xmin , y
-  INTEGER n , n16 , ndx , nterms
+  REAL aln216, f, xint, xmax, xmin, y
+  INTEGER n, n16, ndx, nterms
   LOGICAL first
   !     .. Local Arrays ..
-  REAL expcs(8) , twon16(17)
+  REAL expcs(8), twon16(17)
   !     .. External Functions ..
-  REAL ALOG , CSEVL , R1MACH , R9PAK
+  REAL ALOG, CSEVL, R1MACH, R9PAK
   INTEGER INITS
-  EXTERNAL ALOG , CSEVL , R1MACH , R9PAK , INITS
+  EXTERNAL ALOG, CSEVL, R1MACH, R9PAK, INITS
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC AINT
   !     .. Save statement ..
-  SAVE first , nterms , xmin , xmax
+  SAVE first, nterms, xmin, xmax
   !     .. Data statements ..
   DATA expcs(1)/.086656949331498571E0/
   DATA expcs(2)/.000938494869299839E0/
@@ -2944,21 +2944,21 @@ REAL FUNCTION SIN(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL ainty , ainty2 , pi4rec , xmax , xsml , xwarn , y , yrem , z
-  INTEGER ifn , noctnt , ntcs , ntsn
+  REAL ainty, ainty2, pi4rec, xmax, xsml, xwarn, y, yrem, z
+  INTEGER ifn, noctnt, ntcs, ntsn
   LOGICAL first
   !     .. Local Arrays ..
-  REAL coscs(8) , sincs(8)
+  REAL coscs(8), sincs(8)
   !     .. External Functions ..
-  REAL CSEVL , R1MACH , SQRT
+  REAL CSEVL, R1MACH, SQRT
   INTEGER INITS
-  EXTERNAL CSEVL , R1MACH , SQRT , INITS
+  EXTERNAL CSEVL, R1MACH, SQRT, INITS
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , AINT , AMOD , MOD
+  INTRINSIC ABS, AINT, AMOD, MOD
   !     .. Save statement ..
-  SAVE first , ntsn , ntcs , xmax , xsml , xwarn
+  SAVE first, ntsn, ntcs, xmax, xsml, xwarn
   !     .. Data statements ..
   DATA sincs(1)/ - .008104079085448715E0/
   DATA sincs(2)/ - .039144567527081957E0/
@@ -3076,19 +3076,19 @@ REAL FUNCTION SINH(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL sqeps , y , ymax
+  REAL sqeps, y, ymax
   INTEGER nterms
   LOGICAL first
   !     .. Local Arrays ..
   REAL sinhcs(8)
   !     .. External Functions ..
-  REAL CSEVL , EXP , R1MACH , SQRT
+  REAL CSEVL, EXP, R1MACH, SQRT
   INTEGER INITS
-  EXTERNAL CSEVL , EXP , R1MACH , SQRT , INITS
+  EXTERNAL CSEVL, EXP, R1MACH, SQRT, INITS
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , SIGN
+  INTRINSIC ABS, SIGN
   !     .. Save statement ..
-  SAVE first , nterms , sqeps , ymax
+  SAVE first, nterms, sqeps, ymax
   !     .. Data statements ..
   DATA sinhcs(1)/.1730421940471796E0/
   DATA sinhcs(2)/.08759422192276048E0/
@@ -3166,14 +3166,14 @@ REAL FUNCTION SQRT(X)
   REAL X
   !     .. Local Scalars ..
   REAL y
-  INTEGER irem , iter , ixpnt , n , niter
+  INTEGER irem, iter, ixpnt, n, niter
   !     .. Local Arrays ..
   REAL sqrt2(3)
   !     .. External Functions ..
-  REAL ALOG , R1MACH , R9PAK
-  EXTERNAL ALOG , R1MACH , R9PAK
+  REAL ALOG, R1MACH, R9PAK
+  EXTERNAL ALOG, R1MACH, R9PAK
   !     .. External Subroutines ..
-  EXTERNAL R9UPAK , XERMSG
+  EXTERNAL R9UPAK, XERMSG
   !     .. Save statement ..
   SAVE niter
   !     .. Data statements ..
@@ -3194,7 +3194,7 @@ REAL FUNCTION SQRT(X)
     !
     SQRT = .261599E0 + y*(1.114292E0+y*(-.516888E0+y*.141067E0))
     !
-    DO iter = 1 , niter
+    DO iter = 1, niter
       SQRT = SQRT + 0.5E0*(y-SQRT**2)/SQRT
     ENDDO
     !
@@ -3259,21 +3259,21 @@ REAL FUNCTION TAN(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL ainty , ainty2 , pi2rec , prodbg , sqeps , xmax , xsml , y , yrem
-  INTEGER ifn , nterms
+  REAL ainty, ainty2, pi2rec, prodbg, sqeps, xmax, xsml, y, yrem
+  INTEGER ifn, nterms
   LOGICAL first
   !     .. Local Arrays ..
   REAL tancs(11)
   !     .. External Functions ..
-  REAL CSEVL , R1MACH , SQRT
+  REAL CSEVL, R1MACH, SQRT
   INTEGER INITS
-  EXTERNAL CSEVL , R1MACH , SQRT , INITS
+  EXTERNAL CSEVL, R1MACH, SQRT, INITS
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , AINT , AMOD , SIGN
+  INTRINSIC ABS, AINT, AMOD, SIGN
   !     .. Save statement ..
-  SAVE first , nterms , sqeps , xmax , xsml
+  SAVE first, nterms, sqeps, xmax, xsml
   !     .. Data statements ..
   DATA tancs(1)/.226279327631293578E0/
   DATA tancs(2)/.0430179131465489618E0/
@@ -3390,19 +3390,19 @@ REAL FUNCTION TANH(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL sqeps , xmax , y
+  REAL sqeps, xmax, y
   INTEGER nterms
   LOGICAL first
   !     .. Local Arrays ..
   REAL tanhcs(17)
   !     .. External Functions ..
-  REAL ALOG , CSEVL , EXP , R1MACH , SQRT
+  REAL ALOG, CSEVL, EXP, R1MACH, SQRT
   INTEGER INITS
-  EXTERNAL ALOG , CSEVL , EXP , R1MACH , SQRT , INITS
+  EXTERNAL ALOG, CSEVL, EXP, R1MACH, SQRT, INITS
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , SIGN
+  INTRINSIC ABS, SIGN
   !     .. Save statement ..
-  SAVE first , nterms , sqeps , xmax
+  SAVE first, nterms, sqeps, xmax
   !     .. Data statements ..
   DATA tanhcs(1)/ - .25828756643634710E0/
   DATA tanhcs(2)/ - .11836106330053497E0/

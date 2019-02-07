@@ -4,8 +4,8 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   IMPLICIT NONE
   !*--CPEVL5
   !*** Start of declarations inserted by SPAG
-  REAL d1 , r , s
-  INTEGER i , I1MACH , j , M , mini , N , np1
+  REAL d1, r, s
+  INTEGER i, I1MACH, j, M, mini, N, np1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CPEVL
   !***SUBSIDIARY
@@ -50,20 +50,20 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CPEVL
   !
-  COMPLEX A(*) , C(*) , Z , ci , cim1 , B(*) , bi , bim1 , t
+  COMPLEX A(*), C(*), Z, ci, cim1, B(*), bi, bim1, t
   LOGICAL Kbd
   SAVE d1
   DATA d1/0.0/
   !***FIRST EXECUTABLE STATEMENT  CPEVL
   IF ( d1==0.0 ) d1 = REAL(I1MACH(10))**(1-I1MACH(11))
   np1 = N + 1
-  DO j = 1 , np1
+  DO j = 1, np1
     ci = 0.0
     cim1 = A(j)
     bi = 0.0
     bim1 = 0.0
     mini = MIN(M+1,N+2-j)
-    DO i = 1 , mini
+    DO i = 1, mini
       IF ( j/=1 ) ci = C(i)
       IF ( i/=1 ) cim1 = C(i-1)
       C(i) = cim1 + Z*ci

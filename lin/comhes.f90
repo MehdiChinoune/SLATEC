@@ -71,9 +71,9 @@ SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  COMHES
   !
-  INTEGER i , j , m , N , la , Nm , Igh , kp1 , Low , mm1 , mp1
-  REAL Ar(Nm,*) , Ai(Nm,*)
-  REAL xr , xi , yr , yi
+  INTEGER i, j, m, N, la, Nm, Igh, kp1, Low, mm1, mp1
+  REAL Ar(Nm,*), Ai(Nm,*)
+  REAL xr, xi, yr, yi
   INTEGER Int(*)
   !
   !***FIRST EXECUTABLE STATEMENT  COMHES
@@ -81,13 +81,13 @@ SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
   kp1 = Low + 1
   IF ( la>=kp1 ) THEN
     !
-    DO m = kp1 , la
+    DO m = kp1, la
       mm1 = m - 1
       xr = 0.0E0
       xi = 0.0E0
       i = m
       !
-      DO j = m , Igh
+      DO j = m, Igh
         IF ( ABS(Ar(j,mm1))+ABS(Ai(j,mm1))>ABS(xr)+ABS(xi) ) THEN
           xr = Ar(j,mm1)
           xi = Ai(j,mm1)
@@ -98,7 +98,7 @@ SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
       Int(m) = i
       IF ( i/=m ) THEN
         !     .......... INTERCHANGE ROWS AND COLUMNS OF AR AND AI ..........
-        DO j = mm1 , N
+        DO j = mm1, N
           yr = Ar(i,j)
           Ar(i,j) = Ar(m,j)
           Ar(m,j) = yr
@@ -107,7 +107,7 @@ SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
           Ai(m,j) = yi
         ENDDO
         !
-        DO j = 1 , Igh
+        DO j = 1, Igh
           yr = Ar(j,i)
           Ar(j,i) = Ar(j,m)
           Ar(j,m) = yr
@@ -120,7 +120,7 @@ SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
       IF ( xr/=0.0E0.OR.xi/=0.0E0 ) THEN
         mp1 = m + 1
         !
-        DO i = mp1 , Igh
+        DO i = mp1, Igh
           yr = Ar(i,mm1)
           yi = Ai(i,mm1)
           IF ( yr/=0.0E0.OR.yi/=0.0E0 ) THEN
@@ -128,12 +128,12 @@ SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
             Ar(i,mm1) = yr
             Ai(i,mm1) = yi
             !
-            DO j = m , N
+            DO j = m, N
               Ar(i,j) = Ar(i,j) - yr*Ar(m,j) + yi*Ai(m,j)
               Ai(i,j) = Ai(i,j) - yr*Ai(m,j) - yi*Ar(m,j)
             ENDDO
             !
-            DO j = 1 , Igh
+            DO j = 1, Igh
               Ar(j,m) = Ar(j,m) + yr*Ar(j,i) - yi*Ai(j,i)
               Ai(j,m) = Ai(j,m) + yr*Ai(j,i) + yi*Ar(j,i)
             ENDDO

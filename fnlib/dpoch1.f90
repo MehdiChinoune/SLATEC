@@ -4,7 +4,7 @@ REAL(8) FUNCTION DPOCH1(A,X)
   IMPLICIT NONE
   !*--DPOCH15
   !*** Start of declarations inserted by SPAG
-  INTEGER i , ii , incr , j , k , ndx , nterms
+  INTEGER i, ii, incr, j, k, ndx, nterms
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPOCH1
   !***PURPOSE  Calculate a generalization of Pochhammer's symbol starting
@@ -54,13 +54,13 @@ REAL(8) FUNCTION DPOCH1(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DPOCH1
-  REAL(8) :: A , X , absa , absx , alneps , alnvar , b , bern(20) , &
-    binv , bp , gbern(21) , gbk , pi , poly1 , q , rho , &
-    sinpxx , sinpx2 , sqtbig , term , trig , var , var2 , &
-    D1MACH , DPSI , DEXPRL , DCOT , DPOCH
+  REAL(8) :: A, X, absa, absx, alneps, alnvar, b, bern(20), &
+    binv, bp, gbern(21), gbk, pi, poly1, q, rho, &
+    sinpxx, sinpx2, sqtbig, term, trig, var, var2, &
+    D1MACH, DPSI, DEXPRL, DCOT, DPOCH
   LOGICAL first
   EXTERNAL DCOT
-  SAVE bern , pi , sqtbig , alneps , first
+  SAVE bern, pi, sqtbig, alneps, first
   DATA bern(1)/ + .833333333333333333333333333333333D-1/
   DATA bern(2)/ - .138888888888888888888888888888888D-2/
   DATA bern(3)/ + .330687830687830687830687830687830D-4/
@@ -128,9 +128,9 @@ REAL(8) FUNCTION DPOCH1(A,X)
         ,1,2)
       IF ( nterms>=2 ) THEN
         !
-        DO k = 2 , nterms
+        DO k = 2, nterms
           gbk = 0.0D0
-          DO j = 1 , k
+          DO j = 1, k
             ndx = k - j + 1
             gbk = gbk + bern(ndx)*gbern(j)
           ENDDO
@@ -150,7 +150,7 @@ REAL(8) FUNCTION DPOCH1(A,X)
       ! WE HAVE DPOCH1(B,X), BUT BP IS SMALL, SO WE USE BACKWARDS RECURSION
       ! TO OBTAIN DPOCH1(BP,X).
       !
-      DO ii = 1 , incr
+      DO ii = 1, incr
         i = incr - ii
         binv = 1.0D0/(bp+i)
         DPOCH1 = (DPOCH1-binv)/(1.0D0+X*binv)

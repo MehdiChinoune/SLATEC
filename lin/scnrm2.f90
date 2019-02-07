@@ -4,7 +4,7 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
   IMPLICIT NONE
   !*--SCNRM25
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , N , nn
+  INTEGER i, Incx, N, nn
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SCNRM2
   !***PURPOSE  Compute the unitary norm of a complex vector.
@@ -79,14 +79,14 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SCNRM2
-  LOGICAL imag , scale
+  LOGICAL imag, scale
   INTEGER next
-  REAL cutlo , cuthi , hitest , sum , xmax , absx , zero , one
+  REAL cutlo, cuthi, hitest, sum, xmax, absx, zero, one
   COMPLEX Cx(*)
-  SAVE cutlo , cuthi , zero , one
-  DATA zero , one/0.0E0 , 1.0E0/
+  SAVE cutlo, cuthi, zero, one
+  DATA zero, one/0.0E0, 1.0E0/
   !
-  DATA cutlo , cuthi/4.441E-16 , 1.304E19/
+  DATA cutlo, cuthi/4.441E-16, 1.304E19/
   !***FIRST EXECUTABLE STATEMENT  SCNRM2
   IF ( N>0 ) THEN
     !
@@ -96,7 +96,7 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
     !
     !                                                 BEGIN MAIN LOOP
     !
-    DO i = 1 , nn , Incx
+    DO i = 1, nn, Incx
       absx = ABS(REAL(Cx(i)))
       imag = .FALSE.
       SELECT CASE(next)

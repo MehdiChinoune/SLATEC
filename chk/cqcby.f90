@@ -42,7 +42,7 @@ SUBROUTINE CQCBY(Lun,Kprint,Ipass)
   !
   !    Y(FNU,Z*ROT) = C(FNU+1)*I(FNU,Z)-(2/PI)*CONJG(C(FNU))*K(FNU,Z)
   !
-  !    where ROT = EXP(PI*I/2) , C(FNU)=EXP(PI*FNU*I/2) , I**2=-1
+  !    where ROT = EXP(PI*I/2), C(FNU)=EXP(PI*FNU*I/2), I**2=-1
   !
   !    and -PI.LT.ARG(Z).LE.PI/2, in the (Z,FNU) space.
   !
@@ -74,29 +74,29 @@ SUBROUTINE CQCBY(Lun,Kprint,Ipass)
   !
   !  Declare arguments.
   !
-  INTEGER Lun , Kprint , Ipass
+  INTEGER Lun, Kprint, Ipass
   !
   !  Declare external functions.
   !
   INTEGER I1MACH
   REAL R1MACH
-  EXTERNAL I1MACH , R1MACH
+  EXTERNAL I1MACH, R1MACH
   !
   !  Declare local variables.
   !
-  COMPLEX ci , cip , coe1 , coe2 , csgn , cspn , cw , cwrk , v , w , y , z , &
+  COMPLEX ci, cip, coe1, coe2, csgn, cspn, cw, cwrk, v, w, y, z, &
     zn
-  REAL aa , ab , aer , alim , arg , atol , av , cc , ct , dig , elim , eps , &
-    er , ertol , ffnu , film , fnu , fnul , hpi , pi , r , rhpi , rl , &
-    rm , r1m4 , r1m5 , r2 , slak , st , t , tol , ts , xn , xnu , xx , &
-    yn , yy
-  INTEGER i , icase , ierr , ifnu , il , ir , irb , it , itl , i4 , k , &
-    kdo , keps , kk , kode , k1 , k2 , lflg , mflg , n , nl , nu , &
-    nul , nz , nz1 , nz2
-  DIMENSION aer(20) , cip(4) , cwrk(20) , kdo(20) , keps(20) , t(20) , &
-    v(20) , w(20) , xnu(20) , y(20)
-  DATA cip(1) , cip(2) , cip(3) , cip(4)/(1.0E0,0.0E0) , (0.0E0,1.0E0) , &
-    (-1.0E0,0.0E0) , (0.0E0,-1.0E0)/
+  REAL aa, ab, aer, alim, arg, atol, av, cc, ct, dig, elim, eps, &
+    er, ertol, ffnu, film, fnu, fnul, hpi, pi, r, rhpi, rl, &
+    rm, r1m4, r1m5, r2, slak, st, t, tol, ts, xn, xnu, xx, &
+    yn, yy
+  INTEGER i, icase, ierr, ifnu, il, ir, irb, it, itl, i4, k, &
+    kdo, keps, kk, kode, k1, k2, lflg, mflg, n, nl, nu, &
+    nul, nz, nz1, nz2
+  DIMENSION aer(20), cip(4), cwrk(20), kdo(20), keps(20), t(20), &
+    v(20), w(20), xnu(20), y(20)
+  DATA cip(1), cip(2), cip(3), cip(4)/(1.0E0,0.0E0), (0.0E0,1.0E0), &
+    (-1.0E0,0.0E0), (0.0E0,-1.0E0)/
   !
   !***FIRST EXECUTABLE STATEMENT  CQCBY
   IF ( Kprint>=2 ) THEN
@@ -139,7 +139,7 @@ SUBROUTINE CQCBY(Lun,Kprint,Ipass)
     WRITE (Lun,99002)
     99002   FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
       8X,'DIG')
-    WRITE (Lun,99003) tol , elim , alim , rl , fnul , dig
+    WRITE (Lun,99003) tol, elim, alim, rl, fnul, dig
     99003   FORMAT (1X,6E12.4/)
   ENDIF
   !-----------------------------------------------------------------------
@@ -169,7 +169,7 @@ SUBROUTINE CQCBY(Lun,Kprint,Ipass)
   IF ( MQC/=2 ) THEN
     nl = 2
     il = 5
-    DO i = 1 , il
+    DO i = 1, il
       keps(i) = 0
       kdo(i) = 0
     ENDDO
@@ -183,7 +183,7 @@ SUBROUTINE CQCBY(Lun,Kprint,Ipass)
   ELSE
     nl = 4
     il = 13
-    DO i = 1 , il
+    DO i = 1, il
       kdo(i) = 0
       keps(i) = 0
     ENDDO
@@ -209,7 +209,7 @@ SUBROUTINE CQCBY(Lun,Kprint,Ipass)
   eps = 0.01E0
   film = il - 1
   t(1) = -pi + eps
-  DO k = 2 , il
+  DO k = 2, il
     IF ( kdo(k)==0 ) THEN
       t(i) = pi*(-il+2*k-1)/film
       IF ( keps(k)/=0 ) THEN
@@ -231,9 +231,9 @@ SUBROUTINE CQCBY(Lun,Kprint,Ipass)
     99004   FORMAT (' CHECKS IN THE (Z,FNU) SPACE')
   ENDIF
   lflg = 0
-  DO kode = 1 , 2
-    DO n = 1 , nl
-      DO nu = 1 , nul
+  DO kode = 1, 2
+    DO n = 1, nl
+      DO nu = 1, nul
         !-----------------------------------------------------------------------
         !     Construct values which will be used to set
         !           COE1 = exp(i*(FNU+1)*PI/2) and
@@ -248,9 +248,9 @@ SUBROUTINE CQCBY(Lun,Kprint,Ipass)
         csgn = csgn*cip(i4)
         cspn = CONJG(csgn)*CMPLX(rhpi,0.0E0)
         csgn = csgn*ci
-        DO icase = 1 , 3
+        DO icase = 1, 3
           irb = MIN(2,icase)
-          DO ir = irb , 4
+          DO ir = irb, 4
             !-------------- switch (icase)
             SELECT CASE (icase)
               CASE (2)
@@ -262,7 +262,7 @@ SUBROUTINE CQCBY(Lun,Kprint,Ipass)
                 r = (eps*(4-ir)+2.0E0*(ir-1))/3.0E0
             END SELECT
             !-------------- end switch
-            DO it = 1 , itl
+            DO it = 1, itl
               ct = COS(t(it))
               st = SIN(t(it))
               IF ( ABS(ct)<atol ) ct = 0.0E0
@@ -296,7 +296,7 @@ SUBROUTINE CQCBY(Lun,Kprint,Ipass)
                         CYCLE
                       ENDIF
                     ENDIF
-                    DO kk = 1 , n
+                    DO kk = 1, n
                       y(kk) = y(kk)*coe2
                       w(kk) = w(kk)*coe1
                       coe1 = coe1*ci
@@ -306,7 +306,7 @@ SUBROUTINE CQCBY(Lun,Kprint,Ipass)
                     !     Compare Y(ZN,FNU) with COE1*I(Z,FNU)-COE2*K(Z,FNU).
                     !-----------------------------------------------------------------------
                     mflg = 0
-                    DO i = 1 , n
+                    DO i = 1, n
                       ab = fnu + i - 1
                       aa = MAX(0.5E0,ab)
                       cw = w(i) - y(i)
@@ -353,22 +353,22 @@ SUBROUTINE CQCBY(Lun,Kprint,Ipass)
                       ENDIF
                       lflg = lflg + 1
                       IF ( Kprint>=2 ) THEN
-                        WRITE (Lun,99011) zn , fnu , kode , n
+                        WRITE (Lun,99011) zn, fnu, kode, n
                         99011                       FORMAT ('   INPUT:   ZN=',2E12.4,3X,'FNU=',E12.4,3X,&
                           'KODE=',I3,3X,'N=',I3)
                       ENDIF
                       IF ( Kprint>=3 ) THEN
                         WRITE (Lun,99012) (aer(k),k=1,n)
                         99012                       FORMAT ('   ERROR:   AER(K)=',4E12.4)
-                        WRITE (Lun,99013) z , coe1 , coe2
+                        WRITE (Lun,99013) z, coe1, coe2
                         99013                       FORMAT (12X,'Z=',2E12.4/12X,'COE1=',2E12.4,3X,&
                           'COE2=',2E12.4)
                         kk = MAX(nz1,nz2) + 1
                         kk = MIN(n,kk)
-                        WRITE (Lun,99014) v(kk) , w(kk) , y(kk)
+                        WRITE (Lun,99014) v(kk), w(kk), y(kk)
                         99014                       FORMAT (' RESULTS:   V(KK)=',2E12.4/12X,'W(KK)=',&
                           2E12.4/12X,'Y(KK)=',2E12.4)
-                        WRITE (Lun,99015) ir , it , icase
+                        WRITE (Lun,99015) ir, it, icase
                         99015                       FORMAT ('    CASE:   IR=',I3,3X,'IT=',I3,3X,&
                           'ICASE=',I3/)
                       ENDIF

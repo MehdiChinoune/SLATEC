@@ -4,7 +4,7 @@ SUBROUTINE DAXPY(N,Da,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
   !*--DAXPY5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , Incy , ix , iy , m , mp1 , N , ns
+  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DAXPY
   !***PURPOSE  Compute a constant times a vector plus a vector.
@@ -51,7 +51,7 @@ SUBROUTINE DAXPY(N,Da,Dx,Incx,Dy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DAXPY
-  REAL(8) :: Dx(*) , Dy(*) , Da
+  REAL(8) :: Dx(*), Dy(*), Da
   !***FIRST EXECUTABLE STATEMENT  DAXPY
   IF ( N<=0.OR.Da==0.0D0 ) RETURN
   IF ( Incx==Incy ) THEN
@@ -64,7 +64,7 @@ SUBROUTINE DAXPY(N,Da,Dx,Incx,Dy,Incy)
       !
       m = MOD(N,4)
       IF ( m/=0 ) THEN
-        DO i = 1 , m
+        DO i = 1, m
           Dy(i) = Dy(i) + Da*Dx(i)
         ENDDO
         IF ( N<4 ) RETURN
@@ -75,7 +75,7 @@ SUBROUTINE DAXPY(N,Da,Dx,Incx,Dy,Incy)
       !     Code for equal, positive, non-unit increments.
       !
       ns = N*Incx
-      DO i = 1 , ns , Incx
+      DO i = 1, ns, Incx
         Dy(i) = Da*Dx(i) + Dy(i)
       ENDDO
       GOTO 99999
@@ -88,18 +88,19 @@ SUBROUTINE DAXPY(N,Da,Dx,Incx,Dy,Incy)
   iy = 1
   IF ( Incx<0 ) ix = (-N+1)*Incx + 1
   IF ( Incy<0 ) iy = (-N+1)*Incy + 1
-  DO i = 1 , N
+  DO i = 1, N
     Dy(iy) = Dy(iy) + Da*Dx(ix)
     ix = ix + Incx
     iy = iy + Incy
   ENDDO
   RETURN
   100  mp1 = m + 1
-  DO i = mp1 , N , 4
+  DO i = mp1, N, 4
     Dy(i) = Dy(i) + Da*Dx(i)
     Dy(i+1) = Dy(i+1) + Da*Dx(i+1)
     Dy(i+2) = Dy(i+2) + Da*Dx(i+2)
     Dy(i+3) = Dy(i+3) + Da*Dx(i+3)
   ENDDO
   RETURN
-  99999 END SUBROUTINE DAXPY
+  99999 CONTINUE
+  END SUBROUTINE DAXPY

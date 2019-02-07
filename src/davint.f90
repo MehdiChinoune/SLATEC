@@ -73,12 +73,12 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DAVINT
   !
-  INTEGER i , Ierr , inlft , inrt , istart , istop , N
-  REAL(8) :: a , Ans , b , c , ca , cb , cc , fl , fr , r3 , rp5 , &
-    slope , sum , syl , syl2 , syl3 , syu , syu2 , syu3 , &
-    term1 , term2 , term3 , X , x1 , x12 , x13 , x2 , x23 , &
-    x3 , Xlo , Xup , Y
-  DIMENSION X(*) , Y(*)
+  INTEGER i, Ierr, inlft, inrt, istart, istop, N
+  REAL(8) :: a, Ans, b, c, ca, cb, cc, fl, fr, r3, rp5, &
+    slope, sum, syl, syl2, syl3, syu, syu2, syu3, &
+    term1, term2, term3, X, x1, x12, x13, x2, x23, &
+    x3, Xlo, Xup, Y
+  DIMENSION X(*), Y(*)
   !     BEGIN BLOCK PERMITTING ...EXITS TO 190
   !        BEGIN BLOCK PERMITTING ...EXITS TO 180
   !***FIRST EXECUTABLE STATEMENT  DAVINT
@@ -92,7 +92,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
       'THAN THE LOWER LIMIT.',4,1)
   ELSEIF ( Xlo/=Xup ) THEN
     IF ( N>=2 ) THEN
-      DO i = 2 , N
+      DO i = 2, N
         !        ............EXIT
         IF ( X(i)<=X(i-1) ) GOTO 50
         !                 ...EXIT
@@ -138,7 +138,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
           syl2 = syl*syl
           syl3 = syl2*syl
           !
-          DO i = istart , istop
+          DO i = istart, istop
             x1 = X(i-1)
             x2 = X(i)
             x3 = X(i+1)
@@ -203,4 +203,5 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
       'THE ABSCISSAS WERE NOT STRICTLY INCREASING.  MUST HAVE '//&
       'X(I-1) .LT. X(I) FOR ALL I.',4,1)
   ENDIF
-  99999 END SUBROUTINE DAVINT
+  99999 CONTINUE
+  END SUBROUTINE DAVINT

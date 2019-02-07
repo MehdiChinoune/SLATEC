@@ -106,19 +106,19 @@ REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N , Incfd , Ia , Ib , Ierr
-  REAL X(*) , F(Incfd,*) , D(Incfd,*)
+  INTEGER N, Incfd, Ia, Ib, Ierr
+  REAL X(*), F(Incfd,*), D(Incfd,*)
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i , iup , low
-  REAL h , half , six , sum , value , zero
-  SAVE zero , half , six
+  INTEGER i, iup, low
+  REAL h, half, six, sum, value, zero
+  SAVE zero, half, six
   !
   !  INITIALIZE.
   !
-  DATA zero/0./ , half/0.5/ , six/6./
+  DATA zero/0./, half/0.5/, six/6./
   !***FIRST EXECUTABLE STATEMENT  PCHID
   value = zero
   !
@@ -142,7 +142,7 @@ REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
       CALL XERMSG('SLATEC','PCHID','INCREMENT LESS THAN ONE',Ierr,1)
       GOTO 100
     ELSE
-      DO i = 2 , N
+      DO i = 2, N
         IF ( X(i)<=X(i-1) ) GOTO 200
       ENDDO
     ENDIF
@@ -161,7 +161,7 @@ REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
     low = MIN(Ia,Ib)
     iup = MAX(Ia,Ib) - 1
     sum = zero
-    DO i = low , iup
+    DO i = low, iup
       h = X(i+1) - X(i)
       sum = sum + h*((F(1,i)+F(1,i+1))+(D(1,i)-D(1,i+1))*(h/six))
     ENDDO

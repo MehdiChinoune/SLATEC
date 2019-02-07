@@ -65,9 +65,9 @@ SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Int)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  ELMHES
   !
-  INTEGER i , j , m , N , la , Nm , Igh , kp1 , Low , mm1 , mp1
+  INTEGER i, j, m, N, la, Nm, Igh, kp1, Low, mm1, mp1
   REAL A(Nm,*)
-  REAL x , y
+  REAL x, y
   INTEGER Int(*)
   !
   !***FIRST EXECUTABLE STATEMENT  ELMHES
@@ -75,12 +75,12 @@ SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Int)
   kp1 = Low + 1
   IF ( la>=kp1 ) THEN
     !
-    DO m = kp1 , la
+    DO m = kp1, la
       mm1 = m - 1
       x = 0.0E0
       i = m
       !
-      DO j = m , Igh
+      DO j = m, Igh
         IF ( ABS(A(j,mm1))>ABS(x) ) THEN
           x = A(j,mm1)
           i = j
@@ -90,13 +90,13 @@ SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Int)
       Int(m) = i
       IF ( i/=m ) THEN
         !    .......... INTERCHANGE ROWS AND COLUMNS OF A ..........
-        DO j = mm1 , N
+        DO j = mm1, N
           y = A(i,j)
           A(i,j) = A(m,j)
           A(m,j) = y
         ENDDO
         !
-        DO j = 1 , Igh
+        DO j = 1, Igh
           y = A(j,i)
           A(j,i) = A(j,m)
           A(j,m) = y
@@ -106,17 +106,17 @@ SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Int)
       IF ( x/=0.0E0 ) THEN
         mp1 = m + 1
         !
-        DO i = mp1 , Igh
+        DO i = mp1, Igh
           y = A(i,mm1)
           IF ( y/=0.0E0 ) THEN
             y = y/x
             A(i,mm1) = y
             !
-            DO j = m , N
+            DO j = m, N
               A(i,j) = A(i,j) - y*A(m,j)
             ENDDO
             !
-            DO j = 1 , Igh
+            DO j = 1, Igh
               A(j,m) = A(j,m) + y*A(j,i)
             ENDDO
           ENDIF

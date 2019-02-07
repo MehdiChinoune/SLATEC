@@ -4,8 +4,8 @@ SUBROUTINE CHECK0(Sfac,Dfac,Kprint)
   IMPLICIT NONE
   !*--CHECK05
   !*** Start of declarations inserted by SPAG
-  INTEGER i , ICAse , INCx , INCy , jump , k , Kprint , MODe , N , NPRint
-  REAL sa , sb , sc , Sfac , ss , zero
+  INTEGER i, ICAse, INCx, INCy, jump, k, Kprint, MODe, N, NPRint
+  REAL sa, sb, sc, Sfac, ss, zero
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CHECK0
   !***PURPOSE  (UNKNOWN)
@@ -29,35 +29,35 @@ SUBROUTINE CHECK0(Sfac,Dfac,Kprint)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CHECK0
-  COMMON /COMBLA/ NPRint , ICAse , N , INCx , INCy , MODe , PASs
+  COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
   LOGICAL PASs
-  REAL strue(9) , stemp(9)
-  REAL(8) :: dc , ds , da1(8) , db1(8) , dc1(8) , ds1(8)
-  REAL(8) :: da , datrue(8) , dbtrue(8) , dzero , Dfac , db
-  REAL(8) :: dab(4,9) , dtemp(9) , dtrue(9,9) , d12
-  DATA zero , dzero/0. , 0.D0/
-  DATA da1/.3D0 , .4D0 , -.3D0 , -.4D0 , -.3D0 , 0.D0 , 0.D0 , 1.D0/
-  DATA db1/.4D0 , .3D0 , .4D0 , .3D0 , -.4D0 , 0.D0 , 1.D0 , 0.D0/
-  DATA dc1/.6D0 , .8D0 , -.6D0 , .8D0 , .6D0 , 1.D0 , 0.D0 , 1.D0/
-  DATA ds1/.8D0 , .6D0 , .8D0 , -.6D0 , .8D0 , 0.D0 , 1.D0 , 0.D0/
-  DATA datrue/.5D0 , .5D0 , .5D0 , -.5D0 , -.5D0 , 0.D0 , 1.D0 , 1.D0/
-  DATA dbtrue/0.D0 , .6D0 , 0.D0 , -.6D0 , 0.D0 , 0.D0 , 1.D0 , 0.D0/
+  REAL strue(9), stemp(9)
+  REAL(8) :: dc, ds, da1(8), db1(8), dc1(8), ds1(8)
+  REAL(8) :: da, datrue(8), dbtrue(8), dzero, Dfac, db
+  REAL(8) :: dab(4,9), dtemp(9), dtrue(9,9), d12
+  DATA zero, dzero/0., 0.D0/
+  DATA da1/.3D0, .4D0, -.3D0, -.4D0, -.3D0, 0.D0, 0.D0, 1.D0/
+  DATA db1/.4D0, .3D0, .4D0, .3D0, -.4D0, 0.D0, 1.D0, 0.D0/
+  DATA dc1/.6D0, .8D0, -.6D0, .8D0, .6D0, 1.D0, 0.D0, 1.D0/
+  DATA ds1/.8D0, .6D0, .8D0, -.6D0, .8D0, 0.D0, 1.D0, 0.D0/
+  DATA datrue/.5D0, .5D0, .5D0, -.5D0, -.5D0, 0.D0, 1.D0, 1.D0/
+  DATA dbtrue/0.D0, .6D0, 0.D0, -.6D0, 0.D0, 0.D0, 1.D0, 0.D0/
   !                                              INPUT FOR MODIFIED GIVENS
-  DATA dab/.1D0 , .3D0 , 1.2D0 , .2D0 , .7D0 , .2D0 , .6D0 , 4.2D0 , 0.D0 , &
-    0.D0 , 0.D0 , 0.D0 , 4.D0 , -1.D0 , 2.D0 , 4.D0 , 6.D-10 , 2.D-2 , &
-    1.D5 , 10.D0 , 4.D10 , 2.D-2 , 1.D-5 , 10.D0 , 2.D-10 , 4.D-2 , &
-    1.D5 , 10.D0 , 2.D10 , 4.D-2 , 1.D-5 , 10.D0 , 4.D0 , -2.D0 , 8.D0 , &
+  DATA dab/.1D0, .3D0, 1.2D0, .2D0, .7D0, .2D0, .6D0, 4.2D0, 0.D0, &
+    0.D0, 0.D0, 0.D0, 4.D0, -1.D0, 2.D0, 4.D0, 6.D-10, 2.D-2, &
+    1.D5, 10.D0, 4.D10, 2.D-2, 1.D-5, 10.D0, 2.D-10, 4.D-2, &
+    1.D5, 10.D0, 2.D10, 4.D-2, 1.D-5, 10.D0, 4.D0, -2.D0, 8.D0, &
     4.D0/
   !                                       TRUE RESULTS FOR MODIFIED GIVENS
-  DATA dtrue/0.D0 , 0.D0 , 1.3D0 , .2D0 , 0.D0 , 0.D0 , 0.D0 , .5D0 , 0.D0 , &
-    0.D0 , 0.D0 , 4.5D0 , 4.2D0 , 1.D0 , .5D0 , 0.D0 , 0.D0 , 0.D0 , &
-    0.D0 , 0.D0 , 0.D0 , 0.D0 , -2.D0 , 0.D0 , 0.D0 , 0.D0 , 0.D0 , &
-    0.D0 , 0.D0 , 0.D0 , 4.D0 , -1.D0 , 0.D0 , 0.D0 , 0.D0 , 0.D0 , &
-    0.D0 , 15.D-3 , 0.D0 , 10.D0 , -1.D0 , 0.D0 , -1.D-4 , 0.D0 , 1.D0 , &
-    0.D0 , 0.D0 , 6144.D-5 , 10.D0 , -1.D0 , 4096.D0 , -1.D6 , 0.D0 , &
-    1.D0 , 0.D0 , 0.D0 , 15.D0 , 10.D0 , -1.D0 , 5.D-5 , 0.D0 , 1.D0 , &
-    0.D0 , 0.D0 , 0.D0 , 15.D0 , 10.D0 , -1.D0 , 5.D5 , -4096.D0 , 1.D0 , &
-    4096.D-6 , 0.D0 , 0.D0 , 7.D0 , 4.D0 , 0.D0 , 0.D0 , -.5D0 , -.25D0 , &
+  DATA dtrue/0.D0, 0.D0, 1.3D0, .2D0, 0.D0, 0.D0, 0.D0, .5D0, 0.D0, &
+    0.D0, 0.D0, 4.5D0, 4.2D0, 1.D0, .5D0, 0.D0, 0.D0, 0.D0, &
+    0.D0, 0.D0, 0.D0, 0.D0, -2.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
+    0.D0, 0.D0, 0.D0, 4.D0, -1.D0, 0.D0, 0.D0, 0.D0, 0.D0, &
+    0.D0, 15.D-3, 0.D0, 10.D0, -1.D0, 0.D0, -1.D-4, 0.D0, 1.D0, &
+    0.D0, 0.D0, 6144.D-5, 10.D0, -1.D0, 4096.D0, -1.D6, 0.D0, &
+    1.D0, 0.D0, 0.D0, 15.D0, 10.D0, -1.D0, 5.D-5, 0.D0, 1.D0, &
+    0.D0, 0.D0, 0.D0, 15.D0, 10.D0, -1.D0, 5.D5, -4096.D0, 1.D0, &
+    4096.D-6, 0.D0, 0.D0, 7.D0, 4.D0, 0.D0, 0.D0, -.5D0, -.25D0, &
     0.D0/
   !                   4096 = 2 ** 12
   DATA d12/4096.D0/
@@ -91,7 +91,7 @@ SUBROUTINE CHECK0(Sfac,Dfac,Kprint)
   dbtrue(5) = 1.D0/.6D0
   !
   jump = ICAse - 11
-  DO k = 1 , 9
+  DO k = 1, 9
     !                        SET N=K FOR IDENTIFICATION IN OUTPUT IF ANY.
     N = k
     !                             BRANCH TO SELECT SUBPROGRAM TO BE TESTED.
@@ -111,20 +111,20 @@ SUBROUTINE CHECK0(Sfac,Dfac,Kprint)
         GOTO 100
       CASE (5)
         !                                                             16. SROTMG
-        DO i = 1 , 4
+        DO i = 1, 4
           stemp(i) = dab(i,k)
           stemp(i+4) = zero
         ENDDO
         stemp(9) = zero
         CALL SROTMG(stemp(1),stemp(2),stemp(3),stemp(4),stemp(5))
         !
-        DO i = 1 , 9
+        DO i = 1, 9
           strue(i) = dtrue(i,k)
         ENDDO
         CALL STEST(9,stemp,strue,strue,Sfac,Kprint)
       CASE (6)
         !                                                             17. DROTMG
-        DO i = 1 , 4
+        DO i = 1, 4
           dtemp(i) = dab(i,k)
           dtemp(i+4) = dzero
         ENDDO

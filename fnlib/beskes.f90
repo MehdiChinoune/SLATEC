@@ -4,8 +4,8 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   IMPLICIT NONE
   !*--BESKES5
   !*** Start of declarations inserted by SPAG
-  REAL alnbig , Bke , bknu1 , direct , R1MACH , v , vend , vincr , X , Xnu
-  INTEGER i , iswtch , n , Nin
+  REAL alnbig, Bke, bknu1, direct, R1MACH, v, vend, vincr, X, Xnu
+  INTEGER i, iswtch, n, Nin
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESKES
   !***PURPOSE  Compute a sequence of exponentially scaled modified Bessel
@@ -22,8 +22,8 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   ! BESKES computes a sequence of exponentially scaled
   ! (i.e., multipled by EXP(X)) modified Bessel
   ! functions of the third kind of order XNU + I at X, where X .GT. 0,
-  ! XNU lies in (-1,1), and I = 0, 1, ... , NIN - 1, if NIN is positive
-  ! and I = 0, -1, ... , NIN + 1, if NIN is negative.  On return, the
+  ! XNU lies in (-1,1), and I = 0, 1, ..., NIN - 1, if NIN is positive
+  ! and I = 0, -1, ..., NIN + 1, if NIN is negative.  On return, the
   ! vector BKE(.) contains the results at X for order starting at XNU.
   !
   !***REFERENCES  (NONE)
@@ -71,7 +71,7 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
     'X SO SMALL OR ABS(NU) SO BIG THAT BESSEL K-SUB-NU OVERFLOWS',5,2)
   !
   v = Xnu
-  DO i = 3 , n
+  DO i = 3, n
     v = v + vincr
     Bke(i) = 2.0*v*Bke(i-1)/X + Bke(i-2)
   ENDDO

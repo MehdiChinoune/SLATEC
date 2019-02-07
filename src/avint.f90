@@ -4,8 +4,8 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   IMPLICIT NONE
   !*--AVINT5
   !*** Start of declarations inserted by SPAG
-  REAL Ans , fl , fr , slope , X , Xlo , Xup , Y
-  INTEGER i , Ierr , inlft , inrt , istart , istop , N
+  REAL Ans, fl, fr, slope, X, Xlo, Xup, Y
+  INTEGER i, Ierr, inlft, inrt, istart, istop, N
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  AVINT
   !***PURPOSE  Integrate a function tabulated at arbitrarily spaced
@@ -80,10 +80,10 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  AVINT
   !
-  REAL(8) :: r3 , rp5 , sum , syl , syl2 , syl3 , syu , syu2 , syu3 , &
-    x1 , x2 , x3 , x12 , x13 , x23 , term1 , term2 , term3 , &
-    a , b , c , ca , cb , cc
-  DIMENSION X(*) , Y(*)
+  REAL(8) :: r3, rp5, sum, syl, syl2, syl3, syu, syu2, syu3, &
+    x1, x2, x3, x12, x13, x23, term1, term2, term3, &
+    a, b, c, ca, cb, cc
+  DIMENSION X(*), Y(*)
   !***FIRST EXECUTABLE STATEMENT  AVINT
   Ierr = 1
   Ans = 0.0
@@ -94,7 +94,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
         'LESS THAN TWO FUNCTION VALUES WERE SUPPLIED.',4,1)
       GOTO 99999
     ELSE
-      DO i = 2 , N
+      DO i = 2, N
         IF ( X(i)<=X(i-1) ) GOTO 200
         IF ( X(i)>Xup ) EXIT
       ENDDO
@@ -124,7 +124,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
         syl2 = syl*syl
         syl3 = syl2*syl
         !
-        DO i = istart , istop
+        DO i = istart, istop
           x1 = X(i-1)
           x2 = X(i)
           x3 = X(i+1)
@@ -188,4 +188,5 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
     'THE ABSCISSAS WERE NOT STRICTLY INCREASING.  MUST HAVE '//&
     'X(I-1) .LT. X(I) FOR ALL I.',4,1)
   RETURN
-  99999 END SUBROUTINE AVINT
+  99999 CONTINUE
+  END SUBROUTINE AVINT

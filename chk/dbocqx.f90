@@ -26,34 +26,34 @@ SUBROUTINE DBOCQX(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--DBOCQX27
   !*** Start of declarations inserted by SPAG
-  REAL(8) :: D1MACH , DNRM2 , rnorm , rnormc , sr
-  INTEGER i , ib , Ipass , irhs , itest , j , Kprint , Lun , mcon , mdw ,&
-    mode , mpass , mrows , ncols
+  REAL(8) :: D1MACH, DNRM2, rnorm, rnormc, sr
+  INTEGER i, ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw ,&
+    mode, mpass, mrows, ncols
   !*** End of declarations inserted by SPAG
-  REAL(8) :: d(6,5) , w(11,11) , bl(5,2) , bu(5,2) , x(30) , rw(55) ,&
+  REAL(8) :: d(6,5), w(11,11), bl(5,2), bu(5,2), x(30), rw(55) ,&
     xtrue(9)
   REAL(8) :: c(5,5)
-  REAL(8) :: bl1(10) , bu1(10)
-  INTEGER ind(10) , iw(20) , iopt(40)
+  REAL(8) :: bl1(10), bu1(10)
+  INTEGER ind(10), iw(20), iopt(40)
   REAL(8) :: rhs(6,2)
   CHARACTER(4) :: msg
   !
-  DATA ((c(i,j),i=1,5),j=1,5)/1.D0 , 10.D0 , 4.D0 , 8.D0 , 1.D0 , 1.D0 ,&
-    10.D0 , 2.D0 , -1.D0 , 1.D0 , 1.D0 , -3.D0 , -3.D0 , 2.D0 , 1.D0 ,&
-    1.D0 , 5.D0 , 5.D0 , 5.D0 , 1.D0 , 1.D0 , 4.D0 , -1.D0 , -3.D0 ,&
+  DATA ((c(i,j),i=1,5),j=1,5)/1.D0, 10.D0, 4.D0, 8.D0, 1.D0, 1.D0 ,&
+    10.D0, 2.D0, -1.D0, 1.D0, 1.D0, -3.D0, -3.D0, 2.D0, 1.D0 ,&
+    1.D0, 5.D0, 5.D0, 5.D0, 1.D0, 1.D0, 4.D0, -1.D0, -3.D0 ,&
     1.D0/
-  DATA ((d(i,j),i=1,6),j=1,5)/ - 74.D0 , 14.D0 , 66.D0 , -12.D0 , 3.D0 ,&
-    4.D0 , 80.D0 , -69.D0 , -72.D0 , 66.D0 , 8.D0 , -12.D0 , 18.D0 ,&
-    21.D0 , -5.D0 , -30.D0 , -7.D0 , 4.D0 , -11.D0 , 28.D0 , 7.D0 ,&
-    -23.D0 , -4.D0 , 4.D0 , -4.D0 , 0.D0 , 1.D0 , 3.D0 , 1.D0 , 0.D0/
-  DATA ((bl(i,j),i=1,5),j=1,2)/1.D0 , 0.D0 , -1.D0 , 1.D0 , -4.D0 , -1.D0 ,&
-    0.D0 , -3.D0 , 1.D0 , -6.D0/
-  DATA ((bu(i,j),i=1,5),j=1,2)/3.D0 , 2.D0 , 1.D0 , 3.D0 , -2.D0 , 3.D0 ,&
-    4.D0 , 1.D0 , 5.D0 , -2.D0/
-  DATA ((rhs(i,j),i=1,6),j=1,2)/51.D0 , -61.D0 , -56.D0 , 69.D0 , 10.D0 ,&
-    -12.D0 , -5.D0 , -9.D0 , 708.D0 , 4165.D0 , -13266.D0 , 8409.D0/
-  DATA (xtrue(j),j=1,9)/1.D0 , 2.D0 , -1.D0 , 3.D0 , -4.D0 , 1.D0 , 32.D0 ,&
-    30.D0 , 31.D0/
+  DATA ((d(i,j),i=1,6),j=1,5)/ - 74.D0, 14.D0, 66.D0, -12.D0, 3.D0 ,&
+    4.D0, 80.D0, -69.D0, -72.D0, 66.D0, 8.D0, -12.D0, 18.D0 ,&
+    21.D0, -5.D0, -30.D0, -7.D0, 4.D0, -11.D0, 28.D0, 7.D0 ,&
+    -23.D0, -4.D0, 4.D0, -4.D0, 0.D0, 1.D0, 3.D0, 1.D0, 0.D0/
+  DATA ((bl(i,j),i=1,5),j=1,2)/1.D0, 0.D0, -1.D0, 1.D0, -4.D0, -1.D0 ,&
+    0.D0, -3.D0, 1.D0, -6.D0/
+  DATA ((bu(i,j),i=1,5),j=1,2)/3.D0, 2.D0, 1.D0, 3.D0, -2.D0, 3.D0 ,&
+    4.D0, 1.D0, 5.D0, -2.D0/
+  DATA ((rhs(i,j),i=1,6),j=1,2)/51.D0, -61.D0, -56.D0, 69.D0, 10.D0 ,&
+    -12.D0, -5.D0, -9.D0, 708.D0, 4165.D0, -13266.D0, 8409.D0/
+  DATA (xtrue(j),j=1,9)/1.D0, 2.D0, -1.D0, 3.D0, -4.D0, 1.D0, 32.D0 ,&
+    30.D0, 31.D0/
   !***FIRST EXECUTABLE STATEMENT  DBOCQX
   mdw = 11
   mrows = 6
@@ -66,12 +66,12 @@ SUBROUTINE DBOCQX(Lun,Kprint,Ipass)
   IF ( Kprint>=2 ) WRITE (Lun,99001)
   99001 FORMAT (' TEST   IB IRHS             SR')
   !
-  DO ib = 1 , 2
-    DO irhs = 1 , 2
+  DO ib = 1, 2
+    DO irhs = 1, 2
       !
       !           TRANSFER DATA TO WORKING ARRAY W(*,*).
       !
-      DO j = 1 , ncols
+      DO j = 1, ncols
         CALL DCOPY(mrows,d(1,j),1,w(1,j),1)
       ENDDO
       !
@@ -79,13 +79,13 @@ SUBROUTINE DBOCQX(Lun,Kprint,Ipass)
       !
       !             SET BOUND INDICATOR FLAGS.
       !
-      DO j = 1 , ncols
+      DO j = 1, ncols
         ind(j) = 3
       ENDDO
       !
       CALL DBOLS(w,mdw,mrows,ncols,bl(1,ib),bu(1,ib),ind,iopt,x,rnorm,mode,&
         rw,iw)
-      DO j = 1 , ncols
+      DO j = 1, ncols
         x(j) = x(j) - xtrue(j)
       ENDDO
       !
@@ -97,15 +97,15 @@ SUBROUTINE DBOCQX(Lun,Kprint,Ipass)
         msg = 'PASS'
         IF ( mpass==0 ) msg = 'FAIL'
         itest = itest + 1
-        WRITE (Lun,99003) itest , ib , irhs , sr , msg
+        WRITE (Lun,99003) itest, ib, irhs, sr, msg
       ENDIF
     ENDDO
   ENDDO
   !
   !     RUN STOER'S PROBLEM FROM 1971 SIAM J. N. ANAL. PAPER.
   !
-  DO ib = 1 , 2
-    DO irhs = 1 , 2
+  DO ib = 1, 2
+    DO irhs = 1, 2
       CALL DCOPY(11*10,0.D0,0,w,1)
       CALL DCOPY(ncols,bl(1,ib),1,bl1,1)
       CALL DCOPY(ncols,bu(1,ib),1,bu1,1)
@@ -118,7 +118,7 @@ SUBROUTINE DBOCQX(Lun,Kprint,Ipass)
       bu1(ncols+3) = 30.
       bl1(ncols+4) = 11.
       bu1(ncols+4) = 40.
-      DO j = 1 , ncols
+      DO j = 1, ncols
         CALL DCOPY(mcon,c(1,j),1,w(1,j),1)
         CALL DCOPY(mrows,d(1,j),1,w(mcon+1,j),1)
       ENDDO
@@ -138,7 +138,7 @@ SUBROUTINE DBOCQX(Lun,Kprint,Ipass)
       iopt(09) = 99
       CALL DBOCLS(w,mdw,mcon,mrows,ncols,bl1,bu1,ind,iopt,x,rnormc,rnorm,&
         mode,rw,iw)
-      DO j = 1 , ncols + mcon
+      DO j = 1, ncols + mcon
         x(j) = x(j) - xtrue(j)
       ENDDO
       !
@@ -150,7 +150,7 @@ SUBROUTINE DBOCQX(Lun,Kprint,Ipass)
         msg = 'PASS'
         IF ( mpass==0 ) msg = 'FAIL'
         itest = itest + 1
-        WRITE (Lun,99003) itest , ib , irhs , sr , msg
+        WRITE (Lun,99003) itest, ib, irhs, sr, msg
       ENDIF
     ENDDO
   ENDDO

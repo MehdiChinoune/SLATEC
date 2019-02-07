@@ -4,8 +4,8 @@ FUNCTION R9ATN1(X)
   IMPLICIT NONE
   !*--R9ATN15
   !*** Start of declarations inserted by SPAG
-  REAL atn1cs , CSEVL , eps , R1MACH , R9ATN1 , X , xbig , xmax , xsml , y
-  INTEGER INITS , ntatn1
+  REAL atn1cs, CSEVL, eps, R1MACH, R9ATN1, X, xbig, xmax, xsml, y
+  INTEGER INITS, ntatn1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9ATN1
   !***SUBSIDIARY
@@ -40,7 +40,7 @@ FUNCTION R9ATN1(X)
   !***END PROLOGUE  R9ATN1
   DIMENSION atn1cs(21)
   LOGICAL first
-  SAVE atn1cs , ntatn1 , xsml , xbig , xmax , first
+  SAVE atn1cs, ntatn1, xsml, xbig, xmax, first
   DATA atn1cs(1)/ - .03283997535355202E0/
   DATA atn1cs(2)/.05833432343172412E0/
   DATA atn1cs(3)/ - .00740036969671964E0/
@@ -94,4 +94,5 @@ FUNCTION R9ATN1(X)
   R9ATN1 = -0.25 + CSEVL(2.0*y*y-1.,atn1cs,ntatn1)
   RETURN
   !
-  99999 END FUNCTION R9ATN1
+  99999 CONTINUE
+  END FUNCTION R9ATN1

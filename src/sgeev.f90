@@ -101,9 +101,9 @@ SUBROUTINE SGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  SGEEV
-  INTEGER i , ihi , ilo , Info , j , jb , Job , k , km , kp , l , Lda , &
-    Ldv , mdim , N
-  REAL A(*) , E(*) , Work(*) , V(*)
+  INTEGER i, ihi, ilo, Info, j, jb, Job, k, km, kp, l, Lda, &
+    Ldv, mdim, N
+  REAL A(*), E(*), Work(*), V(*)
   !***FIRST EXECUTABLE STATEMENT  SGEEV
   IF ( N>Lda ) CALL XERMSG('SLATEC','SGEEV','N .GT. LDA.',1,1)
   IF ( N>Lda ) RETURN
@@ -128,7 +128,7 @@ SUBROUTINE SGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
           'LDA.GT.LDV, ELEMENTS OF A OTHER THAN THE N BY N INPUT '&
           //'ELEMENTS HAVE BEEN CHANGED.',4,0)
         l = N - 1
-        DO j = 1 , l
+        DO j = 1, l
           m = 1 + j*Ldv
           k = 1 + j*Lda
           CALL SCOPY(N,A(k),1,A(m),1)
@@ -151,7 +151,7 @@ SUBROUTINE SGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
         !
         !     CONVERT EIGENVECTORS TO COMPLEX STORAGE.
         !
-        DO jb = 1 , N
+        DO jb = 1, N
           j = N + 1 - jb
           i = N + j
           k = (j-1)*mdim + 1

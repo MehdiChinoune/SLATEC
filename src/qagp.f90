@@ -5,7 +5,7 @@ SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   IMPLICIT NONE
   !*--QAGP6
   !*** Start of declarations inserted by SPAG
-  INTEGER l4 , Last
+  INTEGER l4, Last
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QAGP
   !***PURPOSE  The routine calculates an approximation result to a given
@@ -202,11 +202,11 @@ SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  QAGP
   !
-  REAL A , Abserr , B , Epsabs , Epsrel , F , Points , Result , Work
-  INTEGER Ier , Iwork , Leniw , Lenw , limit , lvl , l1 , l2 , l3 , Neval , &
+  REAL A, Abserr, B, Epsabs, Epsrel, F, Points, Result, Work
+  INTEGER Ier, Iwork, Leniw, Lenw, limit, lvl, l1, l2, l3, Neval, &
     Npts2
   !
-  DIMENSION Iwork(*) , Points(*) , Work(*)
+  DIMENSION Iwork(*), Points(*), Work(*)
   !
   EXTERNAL F
   !

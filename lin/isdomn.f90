@@ -176,13 +176,13 @@ INTEGER FUNCTION ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  ISDOMN
   !     .. Scalar Arguments ..
-  REAL(8) :: Ak , Bnrm , Err , Solnrm , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt , Nsave
+  REAL(8) :: Ak, Bnrm, Err, Solnrm, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt, Nsave
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , Ap(N,0:Nsave) , B(N) , Csav(Nsave) , Dz(N) , &
-    Emap(N,0:Nsave) , P(N,0:Nsave) , R(N) , Rwork(*) , X(N) , &
+  REAL(8) :: A(Nelt), Ap(N,0:Nsave), B(N), Csav(Nsave), Dz(N), &
+    Emap(N,0:Nsave), P(N,0:Nsave), R(N), Rwork(*), X(N), &
     Z(N)
-  INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL MSOLVE
   !     .. Arrays in Common ..
@@ -190,8 +190,8 @@ INTEGER FUNCTION ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DNRM2
-  EXTERNAL D1MACH , DNRM2
+  REAL(8) :: D1MACH, DNRM2
+  EXTERNAL D1MACH, DNRM2
   !     .. Common blocks ..
   COMMON /DSLBLK/ SOLn
   !***FIRST EXECUTABLE STATEMENT  ISDOMN
@@ -212,7 +212,7 @@ INTEGER FUNCTION ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
     IF ( Iter==0 ) Solnrm = DNRM2(N,SOLn,1)
-    DO i = 1 , N
+    DO i = 1, N
       Dz(i) = X(i) - SOLn(i)
     ENDDO
     Err = DNRM2(N,Dz,1)/Solnrm
@@ -225,12 +225,12 @@ INTEGER FUNCTION ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   !
   IF ( Iunit/=0 ) THEN
     IF ( Iter==0 ) THEN
-      WRITE (Iunit,99001) Nsave , N , Itol
+      WRITE (Iunit,99001) Nsave, N, Itol
       99001     FORMAT (' Preconditioned Orthomin(',I3,') for ','N, ITOL = ',I5,I5,&
         /' ITER','   Error Estimate','            Alpha')
-      WRITE (Iunit,99002) Iter , Err
+      WRITE (Iunit,99002) Iter, Err
     ELSE
-      WRITE (Iunit,99002) Iter , Err , Ak
+      WRITE (Iunit,99002) Iter, Err, Ak
     ENDIF
   ENDIF
   IF ( Err<=Tol ) ISDOMN = 1

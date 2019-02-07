@@ -4,7 +4,7 @@ SUBROUTINE DROT(N,Dx,Incx,Dy,Incy,Dc,Ds)
   IMPLICIT NONE
   !*--DROT5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , Incy , kx , ky , N , nsteps
+  INTEGER i, Incx, Incy, kx, ky, N, nsteps
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DROT
   !***PURPOSE  Apply a plane Givens rotation.
@@ -53,10 +53,10 @@ SUBROUTINE DROT(N,Dx,Incx,Dy,Incy,Dc,Ds)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DROT
-  REAL(8) :: Dx , Dy , Dc , Ds , zero , one , w , z
-  DIMENSION Dx(*) , Dy(*)
-  SAVE zero , one
-  DATA zero , one/0.0D0 , 1.0D0/
+  REAL(8) :: Dx, Dy, Dc, Ds, zero, one, w, z
+  DIMENSION Dx(*), Dy(*)
+  SAVE zero, one
+  DATA zero, one/0.0D0, 1.0D0/
   !***FIRST EXECUTABLE STATEMENT  DROT
   IF ( .NOT.(N<=0.OR.(Ds==zero.AND.Dc==one)) ) THEN
     IF ( Incx/=Incy.OR.Incx<=0 ) THEN
@@ -69,7 +69,7 @@ SUBROUTINE DROT(N,Dx,Incx,Dy,Incy,Dc,Ds)
       IF ( Incx<0 ) kx = 1 - (N-1)*Incx
       IF ( Incy<0 ) ky = 1 - (N-1)*Incy
       !
-      DO i = 1 , N
+      DO i = 1, N
         w = Dx(kx)
         z = Dy(ky)
         Dx(kx) = Dc*w + Ds*z
@@ -82,7 +82,7 @@ SUBROUTINE DROT(N,Dx,Incx,Dy,Incy,Dc,Ds)
       !          Code for equal and positive increments.
       !
       nsteps = Incx*N
-      DO i = 1 , nsteps , Incx
+      DO i = 1, nsteps, Incx
         w = Dx(i)
         z = Dy(i)
         Dx(i) = Dc*w + Ds*z

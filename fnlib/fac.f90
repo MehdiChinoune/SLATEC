@@ -4,8 +4,8 @@ FUNCTION FAC(N)
   IMPLICIT NONE
   !*--FAC5
   !*** Start of declarations inserted by SPAG
-  REAL FAC , facn , R9LGMC , sq2pil , x , xmax , xmin
-  INTEGER N , nmax
+  REAL FAC, facn, R9LGMC, sq2pil, x, xmax, xmin
+  INTEGER N, nmax
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  FAC
   !***PURPOSE  Compute the factorial function.
@@ -29,7 +29,7 @@ FUNCTION FAC(N)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  FAC
   DIMENSION facn(26)
-  SAVE facn , sq2pil , nmax
+  SAVE facn, sq2pil, nmax
   DATA facn(1)/1.0E0/
   DATA facn(2)/1.0E0/
   DATA facn(3)/2.0E0/

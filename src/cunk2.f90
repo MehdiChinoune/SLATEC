@@ -26,24 +26,24 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CUNK2
-  COMPLEX ai , arg , asum , bsum , cfn , ci , cip , ck , cone , crsc , cr1 , &
-    cr2 , cs , cscl , csgn , cspn , csr , css , cy , czero , c1 , c2 , &
-    dai , phi , rz , s1 , s2 , Y , Z , zb , zeta1 , zeta2 , zn , zr , &
-    phid , argd , zeta1d , zeta2d , asumd , bsumd
-  REAL aarg , aic , Alim , ang , aphi , asc , ascle , bry , car , cpn , &
-    c2i , c2m , c2r , Elim , fmr , fn , fnf , Fnu , hpi , pi , rs1 , &
-    sar , sgn , spn , Tol , x , yy , R1MACH
-  INTEGER i , ib , iflag , ifn , il , in , inu , iuf , k , kdflg , kflag , &
-    kk , Kode , Mr , N , nai , ndai , nw , Nz , idum , j , ipard , ic
-  DIMENSION bry(3) , Y(N) , asum(2) , bsum(2) , phi(2) , arg(2) , zeta1(2) , &
-    zeta2(2) , cy(2) , cip(4) , css(3) , csr(3)
-  DATA czero , cone , ci , cr1 , cr2/(0.0E0,0.0E0) , (1.0E0,0.0E0) , &
-    (0.0E0,1.0E0) , (1.0E0,1.73205080756887729E0) , &
+  COMPLEX ai, arg, asum, bsum, cfn, ci, cip, ck, cone, crsc, cr1, &
+    cr2, cs, cscl, csgn, cspn, csr, css, cy, czero, c1, c2, &
+    dai, phi, rz, s1, s2, Y, Z, zb, zeta1, zeta2, zn, zr, &
+    phid, argd, zeta1d, zeta2d, asumd, bsumd
+  REAL aarg, aic, Alim, ang, aphi, asc, ascle, bry, car, cpn, &
+    c2i, c2m, c2r, Elim, fmr, fn, fnf, Fnu, hpi, pi, rs1, &
+    sar, sgn, spn, Tol, x, yy, R1MACH
+  INTEGER i, ib, iflag, ifn, il, in, inu, iuf, k, kdflg, kflag, &
+    kk, Kode, Mr, N, nai, ndai, nw, Nz, idum, j, ipard, ic
+  DIMENSION bry(3), Y(N), asum(2), bsum(2), phi(2), arg(2), zeta1(2), &
+    zeta2(2), cy(2), cip(4), css(3), csr(3)
+  DATA czero, cone, ci, cr1, cr2/(0.0E0,0.0E0), (1.0E0,0.0E0), &
+    (0.0E0,1.0E0), (1.0E0,1.73205080756887729E0), &
     (-0.5E0,-8.66025403784438647E-01)/
-  DATA hpi , pi , aic/1.57079632679489662E+00 , 3.14159265358979324E+00 , &
+  DATA hpi, pi, aic/1.57079632679489662E+00, 3.14159265358979324E+00, &
     1.26551212348464539E+00/
-  DATA cip(1) , cip(2) , cip(3) , cip(4)/(1.0E0,0.0E0) , (0.0E0,-1.0E0) , &
-    (-1.0E0,0.0E0) , (0.0E0,1.0E0)/
+  DATA cip(1), cip(2), cip(3), cip(4)/(1.0E0,0.0E0), (0.0E0,-1.0E0), &
+    (-1.0E0,0.0E0), (0.0E0,1.0E0)/
   !***FIRST EXECUTABLE STATEMENT  CUNK2
   kdflg = 1
   Nz = 0
@@ -88,7 +88,7 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !     CONJUGATION SINCE THE K FUNCTION IS REAL ON THE POSITIVE REAL AXIS
   !-----------------------------------------------------------------------
   j = 2
-  DO i = 1 , N
+  DO i = 1, N
     !-----------------------------------------------------------------------
     !     J FLIP FLOPS BETWEEN 1 AND 2 IN J = 3 - J
     !-----------------------------------------------------------------------
@@ -197,7 +197,7 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   IF ( x<0.0E0 ) GOTO 600
   Nz = N
-  DO i = 1 , N
+  DO i = 1, N
     Y(i) = czero
   ENDDO
   RETURN
@@ -208,7 +208,7 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   s2 = cy(2)
   c1 = csr(kflag)
   ascle = bry(kflag)
-  DO i = ib , N
+  DO i = ib, N
     c2 = s2
     s2 = ck*s2 + s1
     s1 = c2
@@ -232,7 +232,8 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       ENDIF
     ENDIF
   ENDDO
-  300  IF ( Mr==0 ) RETURN
+  300 CONTINUE
+  IF ( Mr==0 ) RETURN
   !-----------------------------------------------------------------------
   !     ANALYTIC CONTINUATION FOR RE(Z).LT.0.0E0
   !-----------------------------------------------------------------------
@@ -266,7 +267,7 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   ib = ib - 1
   ic = ib - 1
   iuf = 0
-  DO k = 1 , N
+  DO k = 1, N
     !-----------------------------------------------------------------------
     !     LOGIC TO SORT OUT CASES WHOSE PARAMETERS WERE SET FOR THE K
     !     FUNCTION ABOVE
@@ -364,7 +365,7 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   cs = csr(iflag)
   ascle = bry(iflag)
   fn = inu + il
-  DO i = 1 , il
+  DO i = 1, il
     c2 = s2
     s2 = s1 + CMPLX(fn+fnf,0.0E0)*rz*s2
     s1 = c2

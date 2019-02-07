@@ -75,14 +75,14 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
   !***END PROLOGUE  DBESY
   !
   EXTERNAL DYAIRY
-  INTEGER i , iflw , j , N , nb , nd , nn , nud , nulim
+  INTEGER i, iflw, j, N, nb, nd, nn, nud, nulim
   INTEGER I1MACH
-  REAL(8) :: azn , cn , dnu , elim , flgjy , fn , Fnu , ran , s , s1 , &
-    s2 , tm , trx , w , wk , w2n , X , xlim , xxn , Y
-  REAL(8) :: DBESY0 , DBESY1 , D1MACH
-  DIMENSION w(2) , nulim(2) , Y(*) , wk(7)
+  REAL(8) :: azn, cn, dnu, elim, flgjy, fn, Fnu, ran, s, s1, &
+    s2, tm, trx, w, wk, w2n, X, xlim, xxn, Y
+  REAL(8) :: DBESY0, DBESY1, D1MACH
+  DIMENSION w(2), nulim(2), Y(*), wk(7)
   SAVE nulim
-  DATA nulim(1) , nulim(2)/70 , 100/
+  DATA nulim(1), nulim(2)/70, 100/
   !***FIRST EXECUTABLE STATEMENT  DBESY
   nn = -I1MACH(15)
   elim = 2.303D0*(nn*D1MACH(5)-3.0D0)
@@ -156,7 +156,7 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
         !     FORWARD RECUR FROM DNU TO FNU+1 TO GET Y(1) AND Y(2)
         IF ( nd==1 ) nud = nud - 1
         IF ( nud>0 ) THEN
-          DO i = 1 , nud
+          DO i = 1, nud
             s = s2
             s2 = tm*s2 - s1
             s1 = s
@@ -188,28 +188,31 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
       Y(2) = s2
     ENDIF
   ENDIF
-  100  IF ( nd==2 ) RETURN
+  100 CONTINUE
+  IF ( nd==2 ) RETURN
   !     FORWARD RECUR FROM FNU+2 TO FNU+N-1
-  DO i = 3 , nd
+  DO i = 3, nd
     Y(i) = tm*Y(i-1) - Y(i-2)
     tm = tm + trx
   ENDDO
   RETURN
-  200  IF ( dnu==0.0D0 ) THEN
-  j = nud
-  IF ( j/=1 ) THEN
-    j = j + 1
-    Y(j) = DBESY0(X)
+  200 CONTINUE
+  IF ( dnu==0.0D0 ) THEN
+    j = nud
+    IF ( j/=1 ) THEN
+      j = j + 1
+      Y(j) = DBESY0(X)
+      IF ( nd==1 ) RETURN
+      j = j + 1
+    ENDIF
+    Y(j) = DBESY1(X)
     IF ( nd==1 ) RETURN
-    j = j + 1
+    trx = 2.0D0/X
+    tm = trx
+    GOTO 100
+  ELSE
+    CALL DBSYNU(X,Fnu,nd,Y)
+    RETURN
   ENDIF
-  Y(j) = DBESY1(X)
-  IF ( nd==1 ) RETURN
-  trx = 2.0D0/X
-  tm = trx
-  GOTO 100
-ELSE
-  CALL DBSYNU(X,Fnu,nd,Y)
-  RETURN
-ENDIF
-99999 END SUBROUTINE DBESY
+  99999 CONTINUE
+  END SUBROUTINE DBESY

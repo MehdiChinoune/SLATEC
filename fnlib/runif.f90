@@ -4,8 +4,8 @@ FUNCTION RUNIF(T,N)
   IMPLICIT NONE
   !*--RUNIF5
   !*** Start of declarations inserted by SPAG
-  REAL dummy , floatn , RAND , RUNIF , T
-  INTEGER i , j , N , nold
+  REAL dummy, floatn, RAND, RUNIF, T
+  INTEGER i, j, N, nold
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RUNIF
   !***PURPOSE  Generate a uniformly distributed random number.
@@ -62,7 +62,7 @@ FUNCTION RUNIF(T,N)
   !***END PROLOGUE  RUNIF
   DIMENSION T(*)
   EXTERNAL RAND
-  SAVE nold , floatn
+  SAVE nold, floatn
   DATA nold/ - 1/
   !***FIRST EXECUTABLE STATEMENT  RUNIF
   IF ( N/=nold ) THEN
@@ -72,7 +72,7 @@ FUNCTION RUNIF(T,N)
     IF ( N<0 ) dummy = RAND(T(nold+1))
     IF ( N>=0 ) THEN
       !
-      DO i = 1 , nold
+      DO i = 1, nold
         T(i) = RAND(0.)
       ENDDO
       T(nold+1) = RAND(0.)

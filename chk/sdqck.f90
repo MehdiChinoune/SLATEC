@@ -32,14 +32,14 @@ SUBROUTINE SDQCK(Lun,Kprint,Ipass)
   !   890405  Revised to meet SLATEC standards.
   !***END PROLOGUE  SDQCK
   EXTERNAL SDF
-  REAL ALFA , eps , ewt(1) , HMAX , R1MACH , t , tout
-  INTEGER ierflg , IERROR , IMPL , Ipass , Kprint , leniw , leniwx , lenw , &
-    LENWMX , lenwx , LIWMX , Lun , mint , MITER , ML , mstate , MU , &
-    MXORD , MXSTEP , N , nde , nfe , nje , NROOT , nstate , nstep , &
-    NTASK , nx
+  REAL ALFA, eps, ewt(1), HMAX, R1MACH, t, tout
+  INTEGER ierflg, IERROR, IMPL, Ipass, Kprint, leniw, leniwx, lenw, &
+    LENWMX, lenwx, LIWMX, Lun, mint, MITER, ML, mstate, MU, &
+    MXORD, MXSTEP, N, nde, nfe, nje, NROOT, nstate, nstep, &
+    NTASK, nx
   PARAMETER (ALFA=1.E0,HMAX=15.E0,IERROR=3,IMPL=0,LENWMX=342,LIWMX=53,&
     MITER=5,ML=2,MU=2,MXORD=5,MXSTEP=1000,N=3,NROOT=0,NTASK=1)
-  REAL work(LENWMX) , y(N+1)
+  REAL work(LENWMX), y(N+1)
   INTEGER iwork(LIWMX)
   DATA ewt(1)/.00001E0/
   !***FIRST EXECUTABLE STATEMENT  SDQCK
@@ -68,16 +68,16 @@ SUBROUTINE SDQCK(Lun,Kprint,Ipass)
         '('' While using SDRIV1, a solution was not obtained.'')' )
       WRITE (Lun,&
         '('' The values of parameters, results, and statistical quantities are:'')')
-      WRITE (Lun,*) ' MSTATE = ' , mstate , ', Error number = ' , ierflg
-      WRITE (Lun,*) ' N ' , N , ', EPS ' , eps , ', LENW ' , lenw
-      WRITE (Lun,*) ' T ' , t
-      WRITE (Lun,*) ' Y(1) ' , y(1)
-      WRITE (Lun,*) ' Y(2) ' , y(2)
-      WRITE (Lun,*) ' Y(3) ' , y(3)
-      WRITE (Lun,*) ' Number of steps taken is  ' , nstep
-      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ' , &
+      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
+      WRITE (Lun,*) ' N ', N, ', EPS ', eps, ', LENW ', lenw
+      WRITE (Lun,*) ' T ', t
+      WRITE (Lun,*) ' Y(1) ', y(1)
+      WRITE (Lun,*) ' Y(2) ', y(2)
+      WRITE (Lun,*) ' Y(3) ', y(3)
+      WRITE (Lun,*) ' Number of steps taken is  ', nstep
+      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
         nfe
-      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ' , &
+      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
         nje
       WRITE (Lun,'(//)')
     ENDIF
@@ -92,15 +92,15 @@ SUBROUTINE SDQCK(Lun,Kprint,Ipass)
         '('' SDRIV1:The solution determined is not accurate enough.'')')
       WRITE (Lun,&
         '('' The values of parameters, results, and statistical quantities are:'')')
-      WRITE (Lun,*) ' EPS = ' , eps
-      WRITE (Lun,*) ' T ' , t
-      WRITE (Lun,*) ' Y(1) ' , y(1)
-      WRITE (Lun,*) ' Y(2) ' , y(2)
-      WRITE (Lun,*) ' Y(3) ' , y(3)
-      WRITE (Lun,*) ' Number of steps taken is  ' , nstep
-      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ' , &
+      WRITE (Lun,*) ' EPS = ', eps
+      WRITE (Lun,*) ' T ', t
+      WRITE (Lun,*) ' Y(1) ', y(1)
+      WRITE (Lun,*) ' Y(2) ', y(2)
+      WRITE (Lun,*) ' Y(3) ', y(3)
+      WRITE (Lun,*) ' Number of steps taken is  ', nstep
+      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
         nfe
-      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ' , &
+      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
         nje
       WRITE (Lun,'(//)')
     ENDIF
@@ -112,10 +112,10 @@ SUBROUTINE SDQCK(Lun,Kprint,Ipass)
     WRITE (Lun,&
       '('' SDRIV1:The solution determined met the expected values.'')')
     WRITE (Lun,'('' The values of results are '')')
-    WRITE (Lun,*) ' T ' , t
-    WRITE (Lun,*) ' Y(1) ' , y(1)
-    WRITE (Lun,*) ' Y(2) ' , y(2)
-    WRITE (Lun,*) ' Y(3) ' , y(3)
+    WRITE (Lun,*) ' T ', t
+    WRITE (Lun,*) ' Y(1) ', y(1)
+    WRITE (Lun,*) ' Y(2) ', y(2)
+    WRITE (Lun,*) ' Y(3) ', y(3)
     WRITE (Lun,'(/)')
   ENDIF
   CALL XERCLR
@@ -137,19 +137,19 @@ SUBROUTINE SDQCK(Lun,Kprint,Ipass)
     ELSEIF ( Kprint>=2 ) THEN
       WRITE (Lun,&
         '('' SDRIV1:An invalid parameter has not been correctly detected.'')')
-      WRITE (Lun,*) ' The value of N was set to ' , nx
-      WRITE (Lun,*) ' MSTATE = ' , mstate , ', Error number = ' , ierflg
+      WRITE (Lun,*) ' The value of N was set to ', nx
+      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
       WRITE (Lun,&
         '('' The values of parameters, results, and statistical quantities are:'')')
-      WRITE (Lun,*) ' EPS ' , eps , ', LENW ' , lenw
-      WRITE (Lun,*) ' T ' , t
-      WRITE (Lun,*) ' Y(1) ' , y(1)
-      WRITE (Lun,*) ' Y(2) ' , y(2)
-      WRITE (Lun,*) ' Y(3) ' , y(3)
-      WRITE (Lun,*) ' Number of steps taken is  ' , nstep
-      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ' , &
+      WRITE (Lun,*) ' EPS ', eps, ', LENW ', lenw
+      WRITE (Lun,*) ' T ', t
+      WRITE (Lun,*) ' Y(1) ', y(1)
+      WRITE (Lun,*) ' Y(2) ', y(2)
+      WRITE (Lun,*) ' Y(3) ', y(3)
+      WRITE (Lun,*) ' Number of steps taken is  ', nstep
+      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
         nfe
-      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ' , &
+      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
         nje
       WRITE (Lun,'(//)')
     ENDIF
@@ -160,8 +160,8 @@ SUBROUTINE SDQCK(Lun,Kprint,Ipass)
   ELSEIF ( Kprint==3 ) THEN
     WRITE (Lun,&
       '('' SDRIV1:An invalid parameter has been correctly detected.'')')
-    WRITE (Lun,*) ' The value of N was set to ' , nx
-    WRITE (Lun,*) ' MSTATE = ' , mstate , ', Error number = ' , ierflg
+    WRITE (Lun,*) ' The value of N was set to ', nx
+    WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
     WRITE (Lun,'(/)')
   ENDIF
   CALL XERCLR
@@ -191,20 +191,20 @@ SUBROUTINE SDQCK(Lun,Kprint,Ipass)
       WRITE (Lun,&
         '('' While using SDRIV2, a solution was not obtained.'')'&
         )
-      WRITE (Lun,*) ' MSTATE = ' , mstate , ', Error number = ' , ierflg
+      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
       WRITE (Lun,&
         '('' The values of parameters, results, and statistical quantities are:'')')
-      WRITE (Lun,*) ' EPS = ' , eps , ', EWT ' , ewt
-      WRITE (Lun,*) ' MINT = ' , mint , ', LENW ' , lenw , ', LENIW ' , &
+      WRITE (Lun,*) ' EPS = ', eps, ', EWT ', ewt
+      WRITE (Lun,*) ' MINT = ', mint, ', LENW ', lenw, ', LENIW ', &
         leniw
-      WRITE (Lun,*) ' T ' , t
-      WRITE (Lun,*) ' Y(1) ' , y(1)
-      WRITE (Lun,*) ' Y(2) ' , y(2)
-      WRITE (Lun,*) ' Y(3) ' , y(3)
-      WRITE (Lun,*) ' Number of steps taken is  ' , nstep
-      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ' , &
+      WRITE (Lun,*) ' T ', t
+      WRITE (Lun,*) ' Y(1) ', y(1)
+      WRITE (Lun,*) ' Y(2) ', y(2)
+      WRITE (Lun,*) ' Y(3) ', y(3)
+      WRITE (Lun,*) ' Number of steps taken is  ', nstep
+      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
         nfe
-      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ' , &
+      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
         nje
       WRITE (Lun,'(//)')
     ENDIF
@@ -219,15 +219,15 @@ SUBROUTINE SDQCK(Lun,Kprint,Ipass)
         '('' SDRIV2:The solution determined is not accurate enough.'')')
       WRITE (Lun,&
         '('' The values of parameters, results, and statistical quantities are:'')')
-      WRITE (Lun,*) ' EPS = ' , eps , ', EWT = ' , ewt
-      WRITE (Lun,*) ' T ' , t
-      WRITE (Lun,*) ' Y(1) ' , y(1)
-      WRITE (Lun,*) ' Y(2) ' , y(2)
-      WRITE (Lun,*) ' Y(3) ' , y(3)
-      WRITE (Lun,*) ' Number of steps taken is  ' , nstep
-      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ' , &
+      WRITE (Lun,*) ' EPS = ', eps, ', EWT = ', ewt
+      WRITE (Lun,*) ' T ', t
+      WRITE (Lun,*) ' Y(1) ', y(1)
+      WRITE (Lun,*) ' Y(2) ', y(2)
+      WRITE (Lun,*) ' Y(3) ', y(3)
+      WRITE (Lun,*) ' Number of steps taken is  ', nstep
+      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
         nfe
-      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ' , &
+      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
         nje
       WRITE (Lun,'(//)')
     ENDIF
@@ -239,10 +239,10 @@ SUBROUTINE SDQCK(Lun,Kprint,Ipass)
     WRITE (Lun,&
       '('' SDRIV2:The solution determined met the expected values.'')')
     WRITE (Lun,'('' The values of results are '')')
-    WRITE (Lun,*) ' T ' , t
-    WRITE (Lun,*) ' Y(1) ' , y(1)
-    WRITE (Lun,*) ' Y(2) ' , y(2)
-    WRITE (Lun,*) ' Y(3) ' , y(3)
+    WRITE (Lun,*) ' T ', t
+    WRITE (Lun,*) ' Y(1) ', y(1)
+    WRITE (Lun,*) ' Y(2) ', y(2)
+    WRITE (Lun,*) ' Y(3) ', y(3)
     WRITE (Lun,'(/)')
   ENDIF
   CALL XERCLR
@@ -266,20 +266,20 @@ SUBROUTINE SDQCK(Lun,Kprint,Ipass)
     ELSEIF ( Kprint>=2 ) THEN
       WRITE (Lun,&
         '('' SDRIV2:An invalid parameter has not been correctly detected.'')')
-      WRITE (Lun,*) ' The value of LENW was set to ' , lenwx
-      WRITE (Lun,*) ' MSTATE = ' , mstate , ', Error number = ' , ierflg
+      WRITE (Lun,*) ' The value of LENW was set to ', lenwx
+      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
       WRITE (Lun,&
         '('' The values of parameters, results, and statistical quantities are:'')')
-      WRITE (Lun,*) ' EPS ' , eps , ', MINT ' , mint , ', LENW ' , lenw , &
-        ', LENIW ' , leniw
-      WRITE (Lun,*) ' T ' , t
-      WRITE (Lun,*) ' Y(1) ' , y(1)
-      WRITE (Lun,*) ' Y(2) ' , y(2)
-      WRITE (Lun,*) ' Y(3) ' , y(3)
-      WRITE (Lun,*) ' Number of steps taken is  ' , nstep
-      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ' , &
+      WRITE (Lun,*) ' EPS ', eps, ', MINT ', mint, ', LENW ', lenw, &
+        ', LENIW ', leniw
+      WRITE (Lun,*) ' T ', t
+      WRITE (Lun,*) ' Y(1) ', y(1)
+      WRITE (Lun,*) ' Y(2) ', y(2)
+      WRITE (Lun,*) ' Y(3) ', y(3)
+      WRITE (Lun,*) ' Number of steps taken is  ', nstep
+      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
         nfe
-      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ' , &
+      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
         nje
       WRITE (Lun,'(//)')
     ENDIF
@@ -290,8 +290,8 @@ SUBROUTINE SDQCK(Lun,Kprint,Ipass)
   ELSEIF ( Kprint==3 ) THEN
     WRITE (Lun,&
       '('' SDRIV2:An invalid parameter has been correctly detected.'')')
-    WRITE (Lun,*) ' The value of LENW was set to ' , lenwx
-    WRITE (Lun,*) ' MSTATE = ' , mstate , ', Error number = ' , ierflg
+    WRITE (Lun,*) ' The value of LENW was set to ', lenwx
+    WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
     WRITE (Lun,'(/)')
   ENDIF
   CALL XERCLR
@@ -322,21 +322,21 @@ SUBROUTINE SDQCK(Lun,Kprint,Ipass)
       WRITE (Lun,&
         '('' While using SDRIV3, a solution was not obtained.'')'&
         )
-      WRITE (Lun,*) ' MSTATE = ' , mstate , ', Error number = ' , ierflg
+      WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
       WRITE (Lun,&
         '('' The values of parameters, results, and statistical quantities are:'')')
-      WRITE (Lun,*) ' EPS = ' , eps , ', EWT = ' , ewt , ', IERROR = ' , &
+      WRITE (Lun,*) ' EPS = ', eps, ', EWT = ', ewt, ', IERROR = ', &
         IERROR
-      WRITE (Lun,*) ' MINT = ' , mint , ', MITER = ' , MITER , ', IMPL = ' , &
+      WRITE (Lun,*) ' MINT = ', mint, ', MITER = ', MITER, ', IMPL = ', &
         IMPL
-      WRITE (Lun,*) ' T ' , t
-      WRITE (Lun,*) ' Y(1) ' , y(1)
-      WRITE (Lun,*) ' Y(2) ' , y(2)
-      WRITE (Lun,*) ' Y(3) ' , y(3)
-      WRITE (Lun,*) ' Number of steps taken is  ' , nstep
-      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ' , &
+      WRITE (Lun,*) ' T ', t
+      WRITE (Lun,*) ' Y(1) ', y(1)
+      WRITE (Lun,*) ' Y(2) ', y(2)
+      WRITE (Lun,*) ' Y(3) ', y(3)
+      WRITE (Lun,*) ' Number of steps taken is  ', nstep
+      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
         nfe
-      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ' , &
+      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
         nje
       WRITE (Lun,'(//)')
     ENDIF
@@ -351,18 +351,18 @@ SUBROUTINE SDQCK(Lun,Kprint,Ipass)
         '('' SDRIV3:The solution determined is not accurate enough.'')')
       WRITE (Lun,&
         '('' The values of parameters, results, and statistical quantities are:'')')
-      WRITE (Lun,*) ' EPS = ' , eps , ', EWT = ' , ewt , ', IERROR = ' , &
+      WRITE (Lun,*) ' EPS = ', eps, ', EWT = ', ewt, ', IERROR = ', &
         IERROR
-      WRITE (Lun,*) ' MINT = ' , mint , ', MITER = ' , MITER , ', IMPL = ' , &
+      WRITE (Lun,*) ' MINT = ', mint, ', MITER = ', MITER, ', IMPL = ', &
         IMPL
-      WRITE (Lun,*) ' T ' , t
-      WRITE (Lun,*) ' Y(1) ' , y(1)
-      WRITE (Lun,*) ' Y(2) ' , y(2)
-      WRITE (Lun,*) ' Y(3) ' , y(3)
-      WRITE (Lun,*) ' Number of steps taken is  ' , nstep
-      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ' , &
+      WRITE (Lun,*) ' T ', t
+      WRITE (Lun,*) ' Y(1) ', y(1)
+      WRITE (Lun,*) ' Y(2) ', y(2)
+      WRITE (Lun,*) ' Y(3) ', y(3)
+      WRITE (Lun,*) ' Number of steps taken is  ', nstep
+      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
         nfe
-      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ' , &
+      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
         nje
       WRITE (Lun,'(//)')
     ENDIF
@@ -374,10 +374,10 @@ SUBROUTINE SDQCK(Lun,Kprint,Ipass)
     WRITE (Lun,&
       '('' SDRIV3:The solution determined met the expected values.'')')
     WRITE (Lun,'('' The values of results are '')')
-    WRITE (Lun,*) ' T ' , t
-    WRITE (Lun,*) ' Y(1) ' , y(1)
-    WRITE (Lun,*) ' Y(2) ' , y(2)
-    WRITE (Lun,*) ' Y(3) ' , y(3)
+    WRITE (Lun,*) ' T ', t
+    WRITE (Lun,*) ' Y(1) ', y(1)
+    WRITE (Lun,*) ' Y(2) ', y(2)
+    WRITE (Lun,*) ' Y(3) ', y(3)
     WRITE (Lun,'(/)')
   ENDIF
   CALL XERCLR
@@ -402,22 +402,22 @@ SUBROUTINE SDQCK(Lun,Kprint,Ipass)
     ELSEIF ( Kprint>=2 ) THEN
       WRITE (Lun,&
         '('' SDRIV3:An invalid parameter has not been correctly detected.'')')
-      WRITE (Lun,*) ' The value of LENIW was set to ' , leniwx
-      WRITE (Lun,*) ' NSTATE = ' , nstate , ', Error number = ' , ierflg
+      WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
+      WRITE (Lun,*) ' NSTATE = ', nstate, ', Error number = ', ierflg
       WRITE (Lun,&
         '('' The values of parameters, results, and statistical quantities are:'')')
-      WRITE (Lun,*) ' EPS = ' , eps , ', EWT = ' , ewt , ', IERROR = ' , &
+      WRITE (Lun,*) ' EPS = ', eps, ', EWT = ', ewt, ', IERROR = ', &
         IERROR
-      WRITE (Lun,*) ' MINT = ' , mint , ', MITER = ' , MITER , ', IMPL = ' , &
+      WRITE (Lun,*) ' MINT = ', mint, ', MITER = ', MITER, ', IMPL = ', &
         IMPL
-      WRITE (Lun,*) ' T ' , t
-      WRITE (Lun,*) ' Y(1) ' , y(1)
-      WRITE (Lun,*) ' Y(2) ' , y(2)
-      WRITE (Lun,*) ' Y(3) ' , y(3)
-      WRITE (Lun,*) ' Number of steps taken is  ' , nstep
-      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ' , &
+      WRITE (Lun,*) ' T ', t
+      WRITE (Lun,*) ' Y(1) ', y(1)
+      WRITE (Lun,*) ' Y(2) ', y(2)
+      WRITE (Lun,*) ' Y(3) ', y(3)
+      WRITE (Lun,*) ' Number of steps taken is  ', nstep
+      WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
         nfe
-      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ' , &
+      WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
         nje
       WRITE (Lun,'(//)')
     ENDIF
@@ -428,8 +428,8 @@ SUBROUTINE SDQCK(Lun,Kprint,Ipass)
   ELSEIF ( Kprint==3 ) THEN
     WRITE (Lun,&
       '('' SDRIV3:An invalid parameter has been correctly detected.'')')
-    WRITE (Lun,*) ' The value of LENIW was set to ' , leniwx
-    WRITE (Lun,*) ' NSTATE = ' , nstate , ', Error number = ' , ierflg
+    WRITE (Lun,*) ' The value of LENIW was set to ', leniwx
+    WRITE (Lun,*) ' NSTATE = ', nstate, ', Error number = ', ierflg
     WRITE (Lun,'(/)')
   ENDIF
   CALL XERCLR

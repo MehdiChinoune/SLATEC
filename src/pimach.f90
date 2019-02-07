@@ -4,7 +4,7 @@ FUNCTION PIMACH(Dum)
   IMPLICIT NONE
   !*--PIMACH5
   !*** Start of declarations inserted by SPAG
-  REAL Dum , PIMACH
+  REAL Dum, PIMACH
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PIMACH
   !***SUBSIDIARY

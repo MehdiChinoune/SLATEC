@@ -70,8 +70,8 @@ SUBROUTINE ELMBAK(Nm,Low,Igh,A,Int,M,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  ELMBAK
   !
-  INTEGER i , j , M , la , mm , mp , Nm , Igh , kp1 , Low , mp1
-  REAL A(Nm,*) , Z(Nm,*)
+  INTEGER i, j, M, la, mm, mp, Nm, Igh, kp1, Low, mp1
+  REAL A(Nm,*), Z(Nm,*)
   REAL x
   INTEGER Int(*)
   !
@@ -81,15 +81,15 @@ SUBROUTINE ELMBAK(Nm,Low,Igh,A,Int,M,Z)
     kp1 = Low + 1
     IF ( la>=kp1 ) THEN
       !     .......... FOR MP=IGH-1 STEP -1 UNTIL LOW+1 DO -- ..........
-      DO mm = kp1 , la
+      DO mm = kp1, la
         mp = Low + Igh - mm
         mp1 = mp + 1
         !
-        DO i = mp1 , Igh
+        DO i = mp1, Igh
           x = A(i,mp-1)
           IF ( x/=0.0E0 ) THEN
             !
-            DO j = 1 , M
+            DO j = 1, M
               Z(i,j) = Z(i,j) + x*Z(mp,j)
             ENDDO
           ENDIF
@@ -99,7 +99,7 @@ SUBROUTINE ELMBAK(Nm,Low,Igh,A,Int,M,Z)
         i = Int(mp)
         IF ( i/=mp ) THEN
           !
-          DO j = 1 , M
+          DO j = 1, M
             x = Z(i,j)
             Z(i,j) = Z(mp,j)
             Z(mp,j) = x

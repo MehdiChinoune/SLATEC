@@ -23,9 +23,9 @@ SUBROUTINE DQFCN2(N,X,Fvec,Iflag)
   !   930214  TYPE and declarations sections added.  (WRB)
   !***END PROLOGUE  DQFCN2
   !     .. Scalar Arguments ..
-  INTEGER Iflag , N
+  INTEGER Iflag, N
   !     .. Array Arguments ..
-  REAL(8) :: Fvec(*) , X(*)
+  REAL(8) :: Fvec(*), X(*)
   !***FIRST EXECUTABLE STATEMENT  DQFCN2
   Fvec(1) = 1.0D0 - X(1)
   Fvec(2) = 10.0D0*(X(2)-X(1)**2)

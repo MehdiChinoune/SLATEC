@@ -117,20 +117,20 @@ SUBROUTINE DLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  DLLTI2
   !     .. Scalar Arguments ..
-  INTEGER N , Nel
+  INTEGER N, Nel
   !     .. Array Arguments ..
-  REAL(8) :: B(N) , Dinv(N) , El(Nel) , X(N)
-  INTEGER Iel(Nel) , Jel(Nel)
+  REAL(8) :: B(N), Dinv(N), El(Nel), X(N)
+  INTEGER Iel(Nel), Jel(Nel)
   !     .. Local Scalars ..
-  INTEGER i , ibgn , iend , irow
+  INTEGER i, ibgn, iend, irow
   !***FIRST EXECUTABLE STATEMENT  DLLTI2
   !
   !         Solve  L*y = b,  storing result in x.
   !
-  DO i = 1 , N
+  DO i = 1, N
     X(i) = B(i)
   ENDDO
-  DO irow = 1 , N
+  DO irow = 1, N
     ibgn = Iel(irow) + 1
     iend = Iel(irow+1) - 1
     IF ( ibgn<=iend ) THEN
@@ -138,7 +138,7 @@ SUBROUTINE DLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
       !DIR$ IVDEP
       !VD$ NOCONCUR
       !VD$ NODEPCHK
-      DO i = ibgn , iend
+      DO i = ibgn, iend
         X(irow) = X(irow) - El(i)*X(Jel(i))
       ENDDO
     ENDIF
@@ -146,13 +146,13 @@ SUBROUTINE DLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
   !
   !         Solve  D*Z = Y,  storing result in X.
   !
-  DO i = 1 , N
+  DO i = 1, N
     X(i) = X(i)*Dinv(i)
   ENDDO
   !
   !         Solve  L-trans*X = Z.
   !
-  DO irow = N , 2 , -1
+  DO irow = N, 2, -1
     ibgn = Iel(irow) + 1
     iend = Iel(irow+1) - 1
     IF ( ibgn<=iend ) THEN
@@ -160,7 +160,7 @@ SUBROUTINE DLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
       !DIR$ IVDEP
       !VD$ NOCONCUR
       !VD$ NODEPCHK
-      DO i = ibgn , iend
+      DO i = ibgn, iend
         X(Jel(i)) = X(Jel(i)) - El(i)*X(irow)
       ENDDO
     ENDIF

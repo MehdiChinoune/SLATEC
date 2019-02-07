@@ -4,9 +4,9 @@ SUBROUTINE SPLPQX(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--SPLPQX5
   !*** Start of declarations inserted by SPAG
-  REAL bl , bu , d , dattrv , duals , prgopt , primal , USRMAT , work , zero
-  INTEGER i , ibasis , ic , icnt , ind , info , Ipass , isoln , iv , ivv , &
-    iwork , j , kk , kount , Kprint , liw , Lun , lw , mm , mrelas
+  REAL bl, bu, d, dattrv, duals, prgopt, primal, USRMAT, work, zero
+  INTEGER i, ibasis, ic, icnt, ind, info, Ipass, isoln, iv, ivv, &
+    iwork, j, kk, kount, Kprint, liw, Lun, lw, mm, mrelas
   INTEGER nvars
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPLPQX
@@ -23,9 +23,9 @@ SUBROUTINE SPLPQX(Lun,Kprint,Ipass)
   !***END PROLOGUE  SPLPQX
   EXTERNAL USRMAT
   REAL costs(37)
-  DIMENSION prgopt(50) , dattrv(210) , bl(60) , bu(60)
-  DIMENSION ind(60) , primal(60) , duals(60) , ibasis(60)
-  DIMENSION work(800) , iwork(900) , isoln(14)
+  DIMENSION prgopt(50), dattrv(210), bl(60), bu(60)
+  DIMENSION ind(60), primal(60), duals(60), ibasis(60)
+  DIMENSION work(800), iwork(900), isoln(14)
   DIMENSION d(14,37)
   !***FIRST EXECUTABLE STATEMENT  SPLPQX
   IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -170,9 +170,9 @@ SUBROUTINE SPLPQX(Lun,Kprint,Ipass)
   d(14,36) = 1.00000
   d(14,37) = -1.00000
   kount = 1
-  DO mm = 1 , nvars
+  DO mm = 1, nvars
     dattrv(kount) = -mm
-    DO kk = 1 , mrelas
+    DO kk = 1, mrelas
       IF ( d(kk,mm)/=zero ) THEN
         kount = kount + 1
         dattrv(kount) = kk
@@ -186,7 +186,7 @@ SUBROUTINE SPLPQX(Lun,Kprint,Ipass)
   !
   !     NON-NEGATIVITY CONSTRAINT
   !
-  DO ic = 1 , nvars
+  DO ic = 1, nvars
     bl(ic) = zero
     ind(ic) = 3
     bu(ic) = 10000000.000
@@ -194,7 +194,7 @@ SUBROUTINE SPLPQX(Lun,Kprint,Ipass)
   !
   !     LE CONSTRAINTS
   !
-  DO iv = 1 , mrelas
+  DO iv = 1, mrelas
     ivv = iv + nvars
     ind(ivv) = 3
     bl(ivv) = 100.00000
@@ -226,13 +226,13 @@ SUBROUTINE SPLPQX(Lun,Kprint,Ipass)
   !
   !     LOOK FOR THE KNOWN BASIS AT THE SOLN., NOW IS ISOLN(*).
   !
-  DO i = 1 , mrelas
+  DO i = 1, mrelas
     isoln(i) = prgopt(i+3)
   ENDDO
   !
   Ipass = 1
-  DO j = 1 , mrelas
-    DO i = 1 , mrelas
+  DO j = 1, mrelas
+    DO i = 1, mrelas
       IF ( isoln(i)==ibasis(j) ) GOTO 100
     ENDDO
     Ipass = 0

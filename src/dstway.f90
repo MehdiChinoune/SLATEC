@@ -28,19 +28,19 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DSTWAY
   !
-  INTEGER ICOco , IGOfx , INDpvt , INFo , INHomo , Inout , INTeg , ISTkop , &
-    IVP , j , k , KNSwot , ko , KOP , ks , ksj , LOTjp , MNSwot , &
-    MXNon , NCOmp , NDIsk , NEQ , NEQivp , NFC , NFCc , NIC , NOPg , &
-    NPS , NSWot , NTApe , NTP , NUMort , NXPts
-  REAL(8) :: AE , C , PWCnd , PX , RE , Stowa(*) , TND , TOL , U(*) , &
-    V(*) , X , XBEg , XENd , XOP , XOT , XSAv , Yhp(*)
+  INTEGER ICOco, IGOfx, INDpvt, INFo, INHomo, Inout, INTeg, ISTkop, &
+    IVP, j, k, KNSwot, ko, KOP, ks, ksj, LOTjp, MNSwot, &
+    MXNon, NCOmp, NDIsk, NEQ, NEQivp, NFC, NFCc, NIC, NOPg, &
+    NPS, NSWot, NTApe, NTP, NUMort, NXPts
+  REAL(8) :: AE, C, PWCnd, PX, RE, Stowa(*), TND, TOL, U(*), &
+    V(*), X, XBEg, XENd, XOP, XOT, XSAv, Yhp(*)
   !
-  COMMON /DML8SZ/ C , XSAv , IGOfx , INHomo , IVP , NCOmp , NFC
-  COMMON /DML15T/ PX , PWCnd , TND , X , XBEg , XENd , XOT , XOP , INFo(15)&
-    , ISTkop , KNSwot , KOP , LOTjp , MNSwot , NSWot
-  COMMON /DML18J/ AE , RE , TOL , NXPts , NIC , NOPg , MXNon , NDIsk , &
-    NTApe , NEQ , INDpvt , INTeg , NPS , NTP , NEQivp , &
-    NUMort , NFCc , ICOco
+  COMMON /DML8SZ/ C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
+  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
+    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
+  COMMON /DML18J/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
+    NUMort, NFCc, ICOco
   !
   !***FIRST EXECUTABLE STATEMENT  DSTWAY
   IF ( Inout==1 ) THEN
@@ -51,7 +51,7 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
     CALL DSTOR1(Yhp,Stowa,Yhp(ks+1),Stowa(ks+1),1,0,0)
     ks = ks + NCOmp
     IF ( NEQivp>=1 ) THEN
-      DO j = 1 , NEQivp
+      DO j = 1, NEQivp
         ksj = ks + j
         Yhp(ksj) = Stowa(ksj)
       ENDDO
@@ -62,7 +62,7 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
     ko = KOP - ISTkop
     KOP = ISTkop
     IF ( NDIsk/=0.AND.ko/=0 ) THEN
-      DO k = 1 , ko
+      DO k = 1, ko
         BACKSPACE NTApe
       ENDDO
     ENDIF
@@ -74,7 +74,7 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
     CALL DSTOR1(Stowa,U,Stowa(ks+1),V,1,0,0)
     ks = ks + NCOmp
     IF ( NEQivp>=1 ) THEN
-      DO j = 1 , NEQivp
+      DO j = 1, NEQivp
         ksj = ks + j
         Stowa(ksj) = Yhp(ksj)
       ENDDO

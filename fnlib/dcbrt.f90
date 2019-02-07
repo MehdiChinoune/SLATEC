@@ -4,7 +4,7 @@ REAL(8) FUNCTION DCBRT(X)
   IMPLICIT NONE
   !*--DCBRT5
   !*** Start of declarations inserted by SPAG
-  INTEGER irem , iter , ixpnt , n , niter
+  INTEGER irem, iter, ixpnt, n, niter
   REAL z
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DCBRT
@@ -27,8 +27,8 @@ REAL(8) FUNCTION DCBRT(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DCBRT
-  REAL(8) :: X , cbrt2(5) , y , cbrtsq , D9PAK , D1MACH
-  SAVE cbrt2 , niter
+  REAL(8) :: X, cbrt2(5), y, cbrtsq, D9PAK, D1MACH
+  SAVE cbrt2, niter
   DATA cbrt2(1)/0.62996052494743658238360530363911D0/
   DATA cbrt2(2)/0.79370052598409973737585281963615D0/
   DATA cbrt2(3)/1.0D0/
@@ -52,7 +52,7 @@ REAL(8) FUNCTION DCBRT(X)
   z = y
   DCBRT = .439581E0 + z*(.928549E0+z*(-.512653E0+z*.144586E0))
   !
-  DO iter = 1 , niter
+  DO iter = 1, niter
     cbrtsq = DCBRT*DCBRT
     DCBRT = DCBRT + (y-DCBRT*cbrtsq)/(3.D0*cbrtsq)
   ENDDO

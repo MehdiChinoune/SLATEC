@@ -4,10 +4,10 @@ FUNCTION POCH1(A,X)
   IMPLICIT NONE
   !*--POCH15
   !*** Start of declarations inserted by SPAG
-  REAL A , absa , absx , alneps , alnvar , b , bern , binv , bp , COT , &
-    EXPREL , gbern , gbk , pi , POCH , POCH1 , poly1 , PSI , q , R1MACH
-  REAL rho , sinpx2 , sinpxx , sqtbig , term , trig , var , var2 , X
-  INTEGER i , ii , incr , j , k , ndx , nterms
+  REAL A, absa, absx, alneps, alnvar, b, bern, binv, bp, COT, &
+    EXPREL, gbern, gbk, pi, POCH, POCH1, poly1, PSI, q, R1MACH
+  REAL rho, sinpx2, sinpxx, sqtbig, term, trig, var, var2, X
+  INTEGER i, ii, incr, j, k, ndx, nterms
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POCH1
   !***PURPOSE  Calculate a generalization of Pochhammer's symbol starting
@@ -55,10 +55,10 @@ FUNCTION POCH1(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  POCH1
-  DIMENSION bern(9) , gbern(10)
+  DIMENSION bern(9), gbern(10)
   LOGICAL first
   EXTERNAL COT
-  SAVE bern , pi , sqtbig , alneps , first
+  SAVE bern, pi, sqtbig, alneps, first
   DATA bern(1)/.83333333333333333E-01/
   DATA bern(2)/ - .13888888888888889E-02/
   DATA bern(3)/.33068783068783069E-04/
@@ -115,9 +115,9 @@ FUNCTION POCH1(A,X)
         ,1,2)
       IF ( nterms>=2 ) THEN
         !
-        DO k = 2 , nterms
+        DO k = 2, nterms
           gbk = 0.0
-          DO j = 1 , k
+          DO j = 1, k
             ndx = k - j + 1
             gbk = gbk + bern(ndx)*gbern(j)
           ENDDO
@@ -137,7 +137,7 @@ FUNCTION POCH1(A,X)
       ! WE HAVE POCH1(B,X).  BUT BP IS SMALL, SO WE USE BACKWARDS RECURSION
       ! TO OBTAIN POCH1(BP,X).
       !
-      DO ii = 1 , incr
+      DO ii = 1, incr
         i = incr - ii
         binv = 1.0/(bp+i)
         POCH1 = (POCH1-binv)/(1.0+X*binv)

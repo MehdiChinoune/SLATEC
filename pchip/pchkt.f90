@@ -47,13 +47,13 @@ SUBROUTINE PCHKT(N,X,Knotyp,T)
   !
   !  Declare arguments.
   !
-  INTEGER N , Knotyp
-  REAL X(*) , T(*)
+  INTEGER N, Knotyp
+  REAL X(*), T(*)
   !
   !  Declare local variables.
   !
-  INTEGER j , k , ndim
-  REAL hbeg , hend
+  INTEGER j, k, ndim
+  REAL hbeg, hend
   !***FIRST EXECUTABLE STATEMENT  PCHKT
   !
   !  Initialize.
@@ -63,7 +63,7 @@ SUBROUTINE PCHKT(N,X,Knotyp,T)
   !  Set interior knots.
   !
   j = 1
-  DO k = 1 , N
+  DO k = 1, N
     j = j + 2
     T(j) = X(k)
     T(j+1) = T(j)

@@ -42,7 +42,7 @@ PROGRAM TEST11
   !***REVISION HISTORY  (YYMMDD)
   !   901204  DATE WRITTEN
   !***END PROLOGUE  TEST11
-  INTEGER ipass , kprint , lin , lun , nfail
+  INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST11
   lun = I1MACH(2)
   lin = I1MACH(1)

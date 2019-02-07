@@ -4,10 +4,10 @@ SUBROUTINE QXPLR(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--QXPLR5
   !*** Start of declarations inserted by SPAG
-  REAL a , b , bda , bdb , bdc , bdd , c , d , dum , elmbda , ermax , err , &
-    f , pertrb , pi , PIMACH , r , theta , w , z
-  INTEGER i , idimf , ierror , Ipass , j , Kprint , Lun , m , mbdcnd , mp1 , &
-    n , nbdcnd , np1
+  REAL a, b, bda, bdb, bdc, bdd, c, d, dum, elmbda, ermax, err, &
+    f, pertrb, pi, PIMACH, r, theta, w, z
+  INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
+    n, nbdcnd, np1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QXPLR
   !***PURPOSE
@@ -25,7 +25,7 @@ SUBROUTINE QXPLR(Lun,Kprint,Ipass)
   !     *                                                               *
   !     *      SEPARABLE ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS        *
   !     *                                                               *
-  !     *                  (VERSION  3 , JUNE 1979)                     *
+  !     *                  (VERSION  3, JUNE 1979)                     *
   !     *                                                               *
   !     *                             BY                                *
   !     *                                                               *
@@ -71,7 +71,7 @@ SUBROUTINE QXPLR(Lun,Kprint,Ipass)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
   !***END PROLOGUE  QXPLR
-  DIMENSION f(100,50) , bdc(51) , bdd(51) , w(1200) , r(51) , theta(49)
+  DIMENSION f(100,50), bdc(51), bdd(51), w(1200), r(51), theta(49)
   !***FIRST EXECUTABLE STATEMENT  QXPLR
   !
   !     FROM DIMENSION STATEMENT WE GET VALUE OF IDIMF.  ALSO NOTE THAT W
@@ -98,30 +98,30 @@ SUBROUTINE QXPLR(Lun,Kprint,Ipass)
   !     GENERATE AND STORE GRID POINTS FOR THE PURPOSE OF COMPUTING
   !     BOUNDARY DATA AND THE RIGHT SIDE OF THE POISSON EQUATION.
   !
-  DO i = 1 , mp1
+  DO i = 1, mp1
     r(i) = (i-1)/50.0E0
   ENDDO
-  DO j = 1 , np1
+  DO j = 1, np1
     theta(j) = (j-1)*pi/96.0E0
   ENDDO
   !
   !     GENERATE BOUNDARY DATA.
   !
-  DO i = 1 , mp1
+  DO i = 1, mp1
     bdc(i) = 0.
     bdd(i) = 0.
   ENDDO
   !
   !     BDA AND BDB ARE DUMMY VARIABLES.
   !
-  DO j = 1 , np1
+  DO j = 1, np1
     f(mp1,j) = 1. - COS(4.*theta(j))
   ENDDO
   !
   !     GENERATE RIGHT SIDE OF EQUATION.
   !
-  DO i = 1 , m
-    DO j = 1 , np1
+  DO i = 1, m
+    DO j = 1, np1
       f(i,j) = 16.*r(i)**2
     ENDDO
   ENDDO
@@ -132,8 +132,8 @@ SUBROUTINE QXPLR(Lun,Kprint,Ipass)
   !                U(R,THETA) = R**4*(1 - COS(4*THETA))
   !
   err = 0.
-  DO i = 1 , mp1
-    DO j = 1 , np1
+  DO i = 1, mp1
+    DO j = 1, np1
       z = ABS(f(i,j)-r(i)**4*(1.-COS(4.*theta(j))))
       IF ( z>err ) err = z
     ENDDO
@@ -143,7 +143,7 @@ SUBROUTINE QXPLR(Lun,Kprint,Ipass)
   IF ( err>ermax ) Ipass = 0
   IF ( Kprint==0 ) RETURN
   IF ( Kprint>=2.OR.Ipass==0 ) THEN
-    WRITE (Lun,99001) ierror , err , INT(w(1))
+    WRITE (Lun,99001) ierror, err, INT(w(1))
     !
     99001   FORMAT ('1',20X,'SUBROUTINE HWSPLR EXAMPLE'///10X,&
       'THE OUTPUT FROM THE NCAR CONTROL DATA 7600 WAS'//32X,&

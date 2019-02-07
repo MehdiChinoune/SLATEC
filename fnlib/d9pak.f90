@@ -4,7 +4,7 @@ REAL(8) FUNCTION D9PAK(Y,N)
   IMPLICIT NONE
   !*--D9PAK5
   !*** Start of declarations inserted by SPAG
-  INTEGER I1MACH , N , nmax , nmin , nsum , ny
+  INTEGER I1MACH, N, nmax, nmin, nsum, ny
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9PAK
   !***PURPOSE  Pack a base 2 exponent into a floating point number.
@@ -34,9 +34,9 @@ REAL(8) FUNCTION D9PAK(Y,N)
   !   901009  Routine used I1MACH(7) where it should use I1MACH(10),
   !           Corrected (RWC)
   !***END PROLOGUE  D9PAK
-  REAL(8) :: Y , a1n2b , a1n210 , D1MACH
+  REAL(8) :: Y, a1n2b, a1n210, D1MACH
   LOGICAL first
-  SAVE nmin , nmax , a1n210 , first
+  SAVE nmin, nmax, a1n210, first
   DATA a1n210/3.321928094887362347870319429489D0/
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  D9PAK
@@ -79,4 +79,5 @@ REAL(8) FUNCTION D9PAK(Y,N)
   ENDIF
   RETURN
   !
-  99999 END FUNCTION D9PAK
+  99999 CONTINUE
+  END FUNCTION D9PAK

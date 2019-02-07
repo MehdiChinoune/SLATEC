@@ -4,9 +4,9 @@ REAL FUNCTION BETAI(X,Pin,Qin)
   IMPLICIT NONE
   !*--BETAI5
   !*** Start of declarations inserted by SPAG
-  REAL ALBETA , alneps , alnsml , c , eps , finsum , p , p1 , Pin , ps , q , &
-    Qin , R1MACH , sml , term , X , xb , y
-  INTEGER i , ib , n
+  REAL ALBETA, alneps, alnsml, c, eps, finsum, p, p1, Pin, ps, q, &
+    Qin, R1MACH, sml, term, X, xb, y
+  INTEGER i, ib, n
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BETAI
   !***PURPOSE  Calculate the incomplete Beta function.
@@ -43,7 +43,7 @@ REAL FUNCTION BETAI(X,Pin,Qin)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   !***END PROLOGUE  BETAI
   LOGICAL first
-  SAVE eps , alneps , sml , alnsml , first
+  SAVE eps, alneps, sml, alnsml, first
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  BETAI
   IF ( first ) THEN
@@ -93,7 +93,7 @@ REAL FUNCTION BETAI(X,Pin,Qin)
       IF ( ps/=1.0 ) THEN
         !
         n = MAX(alneps/LOG(y),4.0E0)
-        DO i = 1 , n
+        DO i = 1, n
           term = term*(i-ps)*y/i
           BETAI = BETAI + term/(p+i)
         ENDDO
@@ -113,7 +113,7 @@ REAL FUNCTION BETAI(X,Pin,Qin)
       finsum = 0.0
       n = q
       IF ( q==REAL(n) ) n = n - 1
-      DO i = 1 , n
+      DO i = 1, n
         IF ( p1<=1.0.AND.term/eps<=finsum ) EXIT
         term = (q-i+1)*c*term/(p+q-i)
         !
@@ -130,4 +130,5 @@ REAL FUNCTION BETAI(X,Pin,Qin)
   BETAI = MAX(MIN(BETAI,1.0),0.0)
   RETURN
   !
-  99999 END FUNCTION BETAI
+  99999 CONTINUE
+  END FUNCTION BETAI

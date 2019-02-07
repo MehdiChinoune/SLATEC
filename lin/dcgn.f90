@@ -273,23 +273,23 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  DCGN
   !     .. Scalar Arguments ..
-  REAL(8) :: Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
+  REAL(8) :: Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(N) , Atdz(N) , Atp(N) , Atz(N) , B(N) , Dz(N) , P(N) , &
-    R(N) , Rwork(*) , X(N) , Z(N)
-  INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
+  REAL(8) :: A(N), Atdz(N), Atp(N), Atz(N), B(N), Dz(N), P(N), &
+    R(N), Rwork(*), X(N), Z(N)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC , MSOLVE , MTTVEC
+  EXTERNAL MATVEC, MSOLVE, MTTVEC
   !     .. Local Scalars ..
-  REAL(8) :: ak , akden , bk , bkden , bknum , bnrm , solnrm , tolmin
-  INTEGER i , k
+  REAL(8) :: ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
+  INTEGER i, k
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DDOT
+  REAL(8) :: D1MACH, DDOT
   INTEGER ISDCGN
-  EXTERNAL D1MACH , DDOT , ISDCGN
+  EXTERNAL D1MACH, DDOT, ISDCGN
   !     .. External Subroutines ..
-  EXTERNAL DAXPY , DCOPY
+  EXTERNAL DAXPY, DCOPY
   !***FIRST EXECUTABLE STATEMENT  DCGN
   !
   !         Check user input.
@@ -308,7 +308,7 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   !         Calculate initial residual and pseudo-residual, and check
   !         stopping criterion.
   CALL MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
-  DO i = 1 , N
+  DO i = 1, N
     R(i) = B(i) - R(i)
   ENDDO
   CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
@@ -321,7 +321,7 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
     !
     !         ***** iteration loop *****
     !
-    DO k = 1 , Itmax
+    DO k = 1, Itmax
       Iter = k
       !
       !         Calculate coefficient BK and direction vector P.
@@ -334,7 +334,7 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
         CALL DCOPY(N,Z,1,P,1)
       ELSE
         bk = bknum/bkden
-        DO i = 1 , N
+        DO i = 1, N
           P(i) = Z(i) + bk*P(i)
         ENDDO
       ENDIF
@@ -370,4 +370,5 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   ENDIF
   !
   !------------- LAST LINE OF DCGN FOLLOWS ----------------------------
-  99999 END SUBROUTINE DCGN
+  99999 CONTINUE
+  END SUBROUTINE DCGN

@@ -26,14 +26,14 @@ SUBROUTINE SLVS(Wm,Iwm,X,Tem)
   !***END PROLOGUE  SLVS
   !
   !LLL. OPTIMIZE
-  INTEGER Iwm , i , IER , IOWnd , IOWns , JSTart , KFLag , L , MAXord , &
-    meband , METh , MITer , ml , mu , N , NFE , NJE , NQ , NQU , NST
-  REAL Wm , X , Tem , ROWnd , ROWns , EL0 , H , HMIn , HMXi , HU , TN , &
-    UROund , di , hl0 , phl0 , r
-  DIMENSION Wm(*) , Iwm(*) , X(*) , Tem(*)
-  COMMON /DEBDF1/ ROWnd , ROWns(210) , EL0 , H , HMIn , HMXi , HU , TN , &
-    UROund , IOWnd(14) , IOWns(6) , IER , JSTart , KFLag , L , &
-    METh , MITer , MAXord , N , NQ , NST , NFE , NJE , NQU
+  INTEGER Iwm, i, IER, IOWnd, IOWns, JSTart, KFLag, L, MAXord, &
+    meband, METh, MITer, ml, mu, N, NFE, NJE, NQ, NQU, NST
+  REAL Wm, X, Tem, ROWnd, ROWns, EL0, H, HMIn, HMXi, HU, TN, &
+    UROund, di, hl0, phl0, r
+  DIMENSION Wm(*), Iwm(*), X(*), Tem(*)
+  COMMON /DEBDF1/ ROWnd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
+    UROund, IOWnd(14), IOWns(6), IER, JSTart, KFLag, L, &
+    METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
   !-----------------------------------------------------------------------
   ! THIS ROUTINE MANAGES THE SOLUTION OF THE LINEAR SYSTEM ARISING FROM
   ! A CHORD ITERATION.  IT IS CALLED BY STOD  IF MITER .NE. 0.
@@ -68,13 +68,13 @@ SUBROUTINE SLVS(Wm,Iwm,X,Tem)
       Wm(2) = hl0
       IF ( hl0/=phl0 ) THEN
         r = hl0/phl0
-        DO i = 1 , N
+        DO i = 1, N
           di = 1.0E0 - r*(1.0E0-1.0E0/Wm(i+2))
           IF ( ABS(di)==0.0E0 ) GOTO 100
           Wm(i+2) = 1.0E0/di
         ENDDO
       ENDIF
-      DO i = 1 , N
+      DO i = 1, N
         X(i) = Wm(i+2)*X(i)
       ENDDO
       RETURN
@@ -92,4 +92,5 @@ SUBROUTINE SLVS(Wm,Iwm,X,Tem)
   100  IER = -1
   RETURN
   !----------------------- END OF SUBROUTINE SLVS -----------------------
-  99999 END SUBROUTINE SLVS
+  99999 CONTINUE
+  END SUBROUTINE SLVS

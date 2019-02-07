@@ -47,18 +47,18 @@ SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  QFORM
-  INTEGER M , N , Ldq
-  REAL Q(Ldq,*) , Wa(*)
-  INTEGER i , j , jm1 , k , l , minmn , np1
-  REAL one , sum , temp , zero
-  SAVE one , zero
-  DATA one , zero/1.0E0 , 0.0E0/
+  INTEGER M, N, Ldq
+  REAL Q(Ldq,*), Wa(*)
+  INTEGER i, j, jm1, k, l, minmn, np1
+  REAL one, sum, temp, zero
+  SAVE one, zero
+  DATA one, zero/1.0E0, 0.0E0/
   !***FIRST EXECUTABLE STATEMENT  QFORM
   minmn = MIN(M,N)
   IF ( minmn>=2 ) THEN
-    DO j = 2 , minmn
+    DO j = 2, minmn
       jm1 = j - 1
-      DO i = 1 , jm1
+      DO i = 1, jm1
         Q(i,j) = zero
       ENDDO
     ENDDO
@@ -68,8 +68,8 @@ SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
   !
   np1 = N + 1
   IF ( M>=np1 ) THEN
-    DO j = np1 , M
-      DO i = 1 , M
+    DO j = np1, M
+      DO i = 1, M
         Q(i,j) = zero
       ENDDO
       Q(j,j) = one
@@ -78,21 +78,21 @@ SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
   !
   !     ACCUMULATE Q FROM ITS FACTORED FORM.
   !
-  DO l = 1 , minmn
+  DO l = 1, minmn
     k = minmn - l + 1
-    DO i = k , M
+    DO i = k, M
       Wa(i) = Q(i,k)
       Q(i,k) = zero
     ENDDO
     Q(k,k) = one
     IF ( Wa(k)/=zero ) THEN
-      DO j = k , M
+      DO j = k, M
         sum = zero
-        DO i = k , M
+        DO i = k, M
           sum = sum + Q(i,j)*Wa(i)
         ENDDO
         temp = sum/Wa(k)
-        DO i = k , M
+        DO i = k, M
           Q(i,j) = Q(i,j) - temp*Wa(i)
         ENDDO
       ENDDO

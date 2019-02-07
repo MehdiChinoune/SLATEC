@@ -137,17 +137,17 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N , Incfd , Ierr
-  REAL X(*) , F(Incfd,*) , D(Incfd,*)
+  INTEGER N, Incfd, Ierr
+  REAL X(*), F(Incfd,*), D(Incfd,*)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i , nless1
-  REAL del1 , del2 , dmax , dmin , drat1 , drat2 , dsave , h1 , h2 , hsum , &
-    hsumt3 , three , w1 , w2 , zero
-  SAVE zero , three
+  INTEGER i, nless1
+  REAL del1, del2, dmax, dmin, drat1, drat2, dsave, h1, h2, hsum, &
+    hsumt3, three, w1, w2, zero
+  SAVE zero, three
   REAL PCHST
-  DATA zero/0./ , three/3./
+  DATA zero/0./, three/3./
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
@@ -169,7 +169,7 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
       CALL XERMSG('SLATEC','PCHIM','INCREMENT LESS THAN ONE',Ierr,1)
       RETURN
     ELSE
-      DO i = 2 , N
+      DO i = 2, N
         IF ( X(i)<=X(i-1) ) GOTO 50
       ENDDO
       !
@@ -207,7 +207,7 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
         !
         !  LOOP THROUGH INTERIOR POINTS.
         !
-        DO i = 2 , nless1
+        DO i = 2, nless1
           IF ( i/=2 ) THEN
             !
             h1 = h2

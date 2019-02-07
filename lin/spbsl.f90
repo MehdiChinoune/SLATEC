@@ -68,16 +68,16 @@ SUBROUTINE SPBSL(Abd,Lda,N,M,B)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SPBSL
-  INTEGER Lda , N , M
-  REAL Abd(Lda,*) , B(*)
+  INTEGER Lda, N, M
+  REAL Abd(Lda,*), B(*)
   !
-  REAL SDOT , t
-  INTEGER k , kb , la , lb , lm
+  REAL SDOT, t
+  INTEGER k, kb, la, lb, lm
   !
   !     SOLVE TRANS(R)*Y = B
   !
   !***FIRST EXECUTABLE STATEMENT  SPBSL
-  DO k = 1 , N
+  DO k = 1, N
     lm = MIN(k-1,M)
     la = M + 1 - lm
     lb = k - lm
@@ -87,7 +87,7 @@ SUBROUTINE SPBSL(Abd,Lda,N,M,B)
   !
   !     SOLVE R*X = Y
   !
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     lm = MIN(k-1,M)
     la = M + 1 - lm

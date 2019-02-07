@@ -5,7 +5,7 @@ SUBROUTINE SSLI2(N,B,X,Nel,Iel,Jel,El)
   !*--SSLI25
   !***BEGIN PROLOGUE  SSLI2
   !***PURPOSE  SLAP Lower Triangle Matrix Backsolve.
-  !            Routine to solve a system of the form  Lx = b , where L
+  !            Routine to solve a system of the form  Lx = b, where L
   !            is a lower triangular matrix.
   !***LIBRARY   SLATEC (SLAP)
   !***CATEGORY  D2A3
@@ -106,23 +106,23 @@ SUBROUTINE SSLI2(N,B,X,Nel,Iel,Jel,El)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  SSLI2
   !     .. Scalar Arguments ..
-  INTEGER N , Nel
+  INTEGER N, Nel
   !     .. Array Arguments ..
-  REAL B(N) , El(Nel) , X(N)
-  INTEGER Iel(Nel) , Jel(Nel)
+  REAL B(N), El(Nel), X(N)
+  INTEGER Iel(Nel), Jel(Nel)
   !     .. Local Scalars ..
-  INTEGER i , icol , j , jbgn , jend
+  INTEGER i, icol, j, jbgn, jend
   !***FIRST EXECUTABLE STATEMENT  SSLI2
   !
   !         Initialize the solution by copying the right hands side
   !         into it.
   !
-  DO i = 1 , N
+  DO i = 1, N
     X(i) = B(i)
   ENDDO
   !
   !VD$ NOCONCUR
-  DO icol = 1 , N
+  DO icol = 1, N
     X(icol) = X(icol)/El(Jel(icol))
     jbgn = Jel(icol) + 1
     jend = Jel(icol+1) - 1
@@ -131,7 +131,7 @@ SUBROUTINE SSLI2(N,B,X,Nel,Iel,Jel,El)
       !DIR$ IVDEP
       !VD$ NOCONCUR
       !VD$ NODEPCHK
-      DO j = jbgn , jend
+      DO j = jbgn, jend
         X(Iel(j)) = X(Iel(j)) - El(j)*X(icol)
       ENDDO
     ENDIF

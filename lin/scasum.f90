@@ -51,7 +51,7 @@ FUNCTION SCASUM(N,Cx,Incx)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SCASUM
   COMPLEX Cx(*)
-  INTEGER i , Incx , ix , N
+  INTEGER i, Incx, ix, N
   !***FIRST EXECUTABLE STATEMENT  SCASUM
   SCASUM = 0.0E0
   IF ( N<=0 ) RETURN
@@ -60,7 +60,7 @@ FUNCTION SCASUM(N,Cx,Incx)
     !
     !     Code for increment equal to 1.
     !
-    DO i = 1 , N
+    DO i = 1, N
       SCASUM = SCASUM + ABS(REAL(Cx(i))) + ABS(AIMAG(Cx(i)))
     ENDDO
     GOTO 99999
@@ -70,9 +70,10 @@ FUNCTION SCASUM(N,Cx,Incx)
   !
   ix = 1
   IF ( Incx<0 ) ix = (-N+1)*Incx + 1
-  DO i = 1 , N
+  DO i = 1, N
     SCASUM = SCASUM + ABS(REAL(Cx(ix))) + ABS(AIMAG(Cx(ix)))
     ix = ix + Incx
   ENDDO
   RETURN
-  99999 END FUNCTION SCASUM
+  99999 CONTINUE
+  END FUNCTION SCASUM

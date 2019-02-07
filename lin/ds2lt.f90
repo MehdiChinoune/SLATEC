@@ -96,12 +96,12 @@ SUBROUTINE DS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  DS2LT
   !     .. Scalar Arguments ..
-  INTEGER Isym , N , Nel , Nelt
+  INTEGER Isym, N, Nel, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , El(Nelt)
-  INTEGER Ia(Nelt) , Iel(Nel) , Ja(Nelt) , Jel(Nel)
+  REAL(8) :: A(Nelt), El(Nelt)
+  INTEGER Ia(Nelt), Iel(Nel), Ja(Nelt), Jel(Nel)
   !     .. Local Scalars ..
-  INTEGER i , icol , j , jbgn , jend
+  INTEGER i, icol, j, jbgn, jend
   !***FIRST EXECUTABLE STATEMENT  DS2LT
   IF ( Isym==0 ) THEN
     !
@@ -109,12 +109,12 @@ SUBROUTINE DS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
     !         triangle.
     !
     Nel = 0
-    DO icol = 1 , N
+    DO icol = 1, N
       Jel(icol) = Nel + 1
       jbgn = Ja(icol)
       jend = Ja(icol+1) - 1
       !VD$ NOVECTOR
-      DO j = jbgn , jend
+      DO j = jbgn, jend
         IF ( Ia(j)>=icol ) THEN
           Nel = Nel + 1
           Iel(Nel) = Ia(j)
@@ -129,11 +129,11 @@ SUBROUTINE DS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
     !         stored.  Copy it to IEL, JEL, EL.
     !
     Nel = Nelt
-    DO i = 1 , Nelt
+    DO i = 1, Nelt
       Iel(i) = Ia(i)
       El(i) = A(i)
     ENDDO
-    DO i = 1 , N + 1
+    DO i = 1, N + 1
       Jel(i) = Ja(i)
     ENDDO
   ENDIF

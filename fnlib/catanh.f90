@@ -22,7 +22,7 @@ COMPLEX FUNCTION CATANH(Z)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CATANH
-  COMPLEX Z , ci , CATAN
+  COMPLEX Z, ci, CATAN
   SAVE ci
   DATA ci/(0.,1.)/
   !***FIRST EXECUTABLE STATEMENT  CATANH

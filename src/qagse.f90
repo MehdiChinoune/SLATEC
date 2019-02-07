@@ -160,18 +160,18 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  QAGSE
   !
-  REAL A , abseps , Abserr , Alist , area , area1 , area12 , area2 , a1 , &
-    a2 , B , Blist , b1 , b2 , correc , defabs , defab1 , defab2 , &
-    R1MACH , dres , Elist , epmach , Epsabs , Epsrel , erlarg , erlast , &
-    errbnd , errmax , error1 , error2 , erro12 , errsum , ertest , F , &
-    oflow , resabs , reseps , Result , res3la , Rlist , rlist2 , small , &
+  REAL A, abseps, Abserr, Alist, area, area1, area12, area2, a1, &
+    a2, B, Blist, b1, b2, correc, defabs, defab1, defab2, &
+    R1MACH, dres, Elist, epmach, Epsabs, Epsrel, erlarg, erlast, &
+    errbnd, errmax, error1, error2, erro12, errsum, ertest, F, &
+    oflow, resabs, reseps, Result, res3la, Rlist, rlist2, small, &
     uflow
-  INTEGER id , Ier , ierro , Iord , iroff1 , iroff2 , iroff3 , jupbnd , k , &
-    ksgn , ktmin , Last , Limit , maxerr , Neval , nres , nrmax , &
+  INTEGER id, Ier, ierro, Iord, iroff1, iroff2, iroff3, jupbnd, k, &
+    ksgn, ktmin, Last, Limit, maxerr, Neval, nres, nrmax, &
     numrl2
-  LOGICAL extrap , noext
+  LOGICAL extrap, noext
   !
-  DIMENSION Alist(*) , Blist(*) , Elist(*) , Iord(*) , res3la(3) , Rlist(*)&
+  DIMENSION Alist(*), Blist(*), Elist(*), Iord(*), res3la(3), Rlist(*)&
     , rlist2(52)
   !
   EXTERNAL F
@@ -294,7 +294,7 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
       !           MAIN DO-LOOP
       !           ------------
       !
-      DO Last = 2 , Limit
+      DO Last = 2, Limit
         !
         !           BISECT THE SUBINTERVAL WITH THE NRMAX-TH LARGEST
         !           ERROR ESTIMATE.
@@ -398,7 +398,7 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
             id = nrmax
             jupbnd = Last
             IF ( Last>(2+Limit/2) ) jupbnd = Limit + 3 - Last
-            DO k = id , jupbnd
+            DO k = id, jupbnd
               maxerr = Iord(nrmax)
               errmax = Elist(maxerr)
               ! ***JUMP OUT OF DO-LOOP
@@ -471,11 +471,12 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     !           COMPUTE GLOBAL INTEGRAL SUM.
     !
     50     Result = 0.0E+00
-    DO k = 1 , Last
+    DO k = 1, Last
       Result = Result + Rlist(k)
     ENDDO
     Abserr = errsum
     IF ( Ier>2 ) Ier = Ier - 1
     Neval = 42*Last - 21
   ENDIF
-  99999 END SUBROUTINE QAGSE
+  99999 CONTINUE
+  END SUBROUTINE QAGSE

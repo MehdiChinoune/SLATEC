@@ -5,10 +5,10 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   IMPLICIT NONE
   !*--SBOLSM6
   !*** Start of declarations inserted by SPAG
-  INTEGER i , igopr , ioff , ip , iprint , itemp , iter ,&
-    itmax , j , jbig , jcol , jdrop , jdrop1 , jdrop2 , jlarge ,&
-    jmag , jp , lds
-  INTEGER lgopr , lp , Mdw , Minput , Mode , mrows , mval , Ncols , nsetb
+  INTEGER i, igopr, ioff, ip, iprint, itemp, iter ,&
+    itmax, j, jbig, jcol, jdrop, jdrop1, jdrop2, jlarge ,&
+    jmag, jp, lds
+  INTEGER lgopr, lp, Mdw, Minput, Mode, mrows, mval, Ncols, nsetb
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SBOLSM
   !***SUBSIDIARY
@@ -424,18 +424,18 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     /REAL            / TO /DOUBLE PRECISION/.
   !++
   !
-  REAL W(Mdw,*) , Bl(*) , Bu(*)
-  REAL X(*) , Rw(*) , Ww(*) , Scl(*)
-  REAL alpha , beta , bou , colabv , colblo
-  REAL cl1 , cl2 , cl3 , ONE , big
-  REAL fac , Rnorm , sc , ss , t , tolind , wt
-  REAL TWO , t1 , t2 , wbig , wlarge , wmag , xnew
-  REAL ZERO , SDOT , SNRM2
-  REAL R1MACH , tolsze
-  INTEGER Ibasis(*) , Ibb(*) , Ind(*) , Iopt(*)
-  LOGICAL found , constr
-  CHARACTER(8) :: xern1 , xern2
-  CHARACTER(16) :: xern3 , xern4
+  REAL W(Mdw,*), Bl(*), Bu(*)
+  REAL X(*), Rw(*), Ww(*), Scl(*)
+  REAL alpha, beta, bou, colabv, colblo
+  REAL cl1, cl2, cl3, ONE, big
+  REAL fac, Rnorm, sc, ss, t, tolind, wt
+  REAL TWO, t1, t2, wbig, wlarge, wmag, xnew
+  REAL ZERO, SDOT, SNRM2
+  REAL R1MACH, tolsze
+  INTEGER Ibasis(*), Ibb(*), Ind(*), Iopt(*)
+  LOGICAL found, constr
+  CHARACTER(8) :: xern1, xern2
+  CHARACTER(16) :: xern3, xern4
   !
   PARAMETER (ZERO=0.0E0,ONE=1.0E0,TWO=2.0E0)
   !
@@ -470,7 +470,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   !     Verify that bound information is correct.
   !
-  DO j = 1 , Ncols
+  DO j = 1, Ncols
     IF ( Ind(j)<1.OR.Ind(j)>4 ) THEN
       WRITE (xern1,'(I8)') j
       WRITE (xern2,'(I8)') Ind(j)
@@ -481,7 +481,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     ENDIF
   ENDDO
   !
-  DO j = 1 , Ncols
+  DO j = 1, Ncols
     IF ( Ind(j)==3 ) THEN
       IF ( Bu(j)<Bl(j) ) THEN
         WRITE (xern1,'(I8)') j
@@ -498,7 +498,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   !     Check that permutation and polarity arrays have been set.
   !
-  DO j = 1 , Ncols
+  DO j = 1, Ncols
     IF ( Ibasis(j)<1.OR.Ibasis(j)>Ncols ) THEN
       WRITE (xern1,'(I8)') Ibasis(j)
       WRITE (xern2,'(I8)') Ncols
@@ -548,8 +548,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       !     increased efficiency.
       !
       IF ( fac*Minput>Ncols ) THEN
-        DO j = 1 , Ncols + 1
-          DO i = Minput , j + mval + 1 , -1
+        DO j = 1, Ncols + 1
+          DO i = Minput, j + mval + 1, -1
             CALL SROTG(W(i-1,j),W(i,j),sc,ss)
             W(i,j) = ZERO
             CALL SROT(Ncols-j+1,W(i-1,j+1),Mdw,W(i,j+1),Mdw,sc,ss)
@@ -569,7 +569,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       !     'BIG' is plus infinity on this machine.
       !
       big = R1MACH(2)
-      DO j = 1 , Ncols
+      DO j = 1, Ncols
         IF ( Ind(j)==1 ) THEN
           Bu(j) = big
         ELSEIF ( Ind(j)==2 ) THEN
@@ -580,14 +580,14 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         ENDIF
       ENDDO
       !
-      DO j = 1 , Ncols
+      DO j = 1, Ncols
         IF ( (Bl(j)<=ZERO.AND.ZERO<=Bu(j).AND.ABS(Bu(j))<ABS(Bl(j))).OR.&
             Bu(j)<ZERO ) THEN
           t = Bu(j)
           Bu(j) = -Bl(j)
           Bl(j) = -t
           Scl(j) = -Scl(j)
-          DO i = 1 , mrows
+          DO i = 1, mrows
             W(i,j) = -W(i,j)
           ENDDO
         ENDIF
@@ -781,7 +781,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     Compute (negative) of gradient vector, W = E *(F-E*X).
   !
   CALL SCOPY(Ncols,ZERO,0,Ww,1)
-  DO j = nsetb + 1 , Ncols
+  DO j = nsetb + 1, Ncols
     jcol = ABS(Ibasis(j))
     Ww(j) = SDOT(mrows-nsetb,W(INEXT(nsetb),j),1,W(INEXT(nsetb),Ncols+1),1)&
       *ABS(Scl(jcol))
@@ -806,7 +806,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     !
     wlarge = -big
     wmag = -big
-    DO j = nsetb + 1 , Ncols
+    DO j = nsetb + 1, Ncols
       t = Ww(j)
       IF ( t/=big ) THEN
         itemp = Ibasis(j)
@@ -895,7 +895,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     !     Eliminate entries below the pivot line in column NSETB.
     !
     IF ( mrows>nsetb ) THEN
-      DO i = mrows , nsetb + 1 , -1
+      DO i = mrows, nsetb + 1, -1
         IF ( i/=mval+1 ) THEN
           CALL SROTG(W(i-1,nsetb),W(i,nsetb),sc,ss)
           W(i,nsetb) = ZERO
@@ -947,7 +947,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     Solve the triangular system.
   !
   200  CALL SCOPY(nsetb,W(1,Ncols+1),1,Rw,1)
-  DO j = nsetb , 1 , -1
+  DO j = nsetb, 1, -1
     Rw(j) = Rw(j)/W(j,j)
     jcol = ABS(Ibasis(j))
     t = Rw(j)
@@ -963,7 +963,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   IF ( lgopr==2 ) THEN
     CALL SCOPY(nsetb,Rw,1,X,1)
-    DO j = 1 , nsetb
+    DO j = 1, nsetb
       itemp = Ibasis(j)
       jcol = ABS(itemp)
       IF ( itemp<0 ) THEN
@@ -994,7 +994,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   alpha = TWO
   beta = TWO
   X(nsetb) = ZERO
-  DO j = 1 , nsetb
+  DO j = 1, nsetb
     itemp = Ibasis(j)
     jcol = ABS(itemp)
     t1 = TWO
@@ -1037,7 +1037,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     Take a step that is as large as possible with all variables
   !     remaining feasible.
   !
-  DO j = 1 , nsetb
+  DO j = 1, nsetb
     X(j) = X(j) + MIN(alpha,beta)*(Rw(j)-X(j))
   ENDDO
   !
@@ -1047,7 +1047,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     jdrop1 = 0
   ENDIF
   !
-  300  IF ( jdrop1+jdrop2<=0.OR.nsetb<=0 ) GOTO 100
+  300 CONTINUE
+  IF ( jdrop1+jdrop2<=0.OR.nsetb<=0 ) GOTO 100
   jdrop = jdrop1 + jdrop2
   itemp = Ibasis(jdrop)
   jcol = ABS(itemp)
@@ -1062,7 +1063,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       Bl(jcol) = -t
       itemp = -itemp
       Scl(jcol) = -Scl(jcol)
-      DO i = 1 , jdrop
+      DO i = 1, jdrop
         W(i,jdrop) = -W(i,jdrop)
       ENDDO
     ELSE
@@ -1085,7 +1086,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     Move certain columns left to achieve upper Hessenberg form.
   !
   CALL SCOPY(jdrop,W(1,jdrop),1,Rw,1)
-  DO j = jdrop + 1 , nsetb
+  DO j = jdrop + 1, nsetb
     Ibasis(j-1) = Ibasis(j)
     X(j-1) = X(j)
     CALL SCOPY(j,W(1,j),1,W(1,j-1),1)
@@ -1100,14 +1101,14 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     triangular form.
   !
   nsetb = nsetb - 1
-  DO i = jdrop , nsetb
+  DO i = jdrop, nsetb
     !
     !         Look for small pivots and avoid mixing weighted and
     !         nonweighted rows.
     !
     IF ( i==mval ) THEN
       t = ZERO
-      DO j = i , nsetb
+      DO j = i, nsetb
         jcol = ABS(Ibasis(j))
         t1 = ABS(W(i,j)*Scl(jcol))
         IF ( t1>t ) THEN
@@ -1133,8 +1134,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   Ibasis(i) = Ibasis(jbig)
   Ibasis(jbig) = itemp
   jbig = i
-  DO j = jbig , nsetb
-    DO i = j + 1 , mrows
+  DO j = jbig, nsetb
+    DO i = j + 1, mrows
       CALL SROTG(W(j,j),W(i,j),sc,ss)
       W(i,j) = ZERO
       CALL SROT(Ncols-j+1,W(j,j+1),Mdw,W(i,j+1),Mdw,sc,ss)
@@ -1152,41 +1153,42 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   !     Find a variable to become non-active.
   !
-  600  IF ( found ) THEN
-  lgopr = 1
-  GOTO 200
-ENDIF
-!
-!     Rescale and translate variables.
-!
-igopr = 2
-700  CALL SCOPY(nsetb,X,1,Rw,1)
-CALL SCOPY(Ncols,ZERO,0,X,1)
-DO j = 1 , nsetb
-  jcol = ABS(Ibasis(j))
-  X(jcol) = Rw(j)*ABS(Scl(jcol))
-ENDDO
-!
-DO j = 1 , Ncols
-  IF ( MOD(Ibb(j),2)==0 ) X(j) = Bu(j) - X(j)
-ENDDO
-!
-DO j = 1 , Ncols
-  jcol = Ibasis(j)
-  IF ( jcol<0 ) X(-jcol) = Bl(-jcol) + X(-jcol)
-ENDDO
-!
-DO j = 1 , Ncols
-  IF ( Scl(j)<ZERO ) X(j) = -X(j)
-ENDDO
-!
-i = MAX(nsetb,mval)
-Rnorm = SNRM2(mrows-i,W(INEXT(i),Ncols+1),1)
-!
-IF ( igopr==2 ) Mode = nsetb
+  600 CONTINUE
+  IF ( found ) THEN
+    lgopr = 1
+    GOTO 200
+  ENDIF
+  !
+  !     Rescale and translate variables.
+  !
+  igopr = 2
+  700  CALL SCOPY(nsetb,X,1,Rw,1)
+  CALL SCOPY(Ncols,ZERO,0,X,1)
+  DO j = 1, nsetb
+    jcol = ABS(Ibasis(j))
+    X(jcol) = Rw(j)*ABS(Scl(jcol))
+  ENDDO
+  !
+  DO j = 1, Ncols
+    IF ( MOD(Ibb(j),2)==0 ) X(j) = Bu(j) - X(j)
+  ENDDO
+  !
+  DO j = 1, Ncols
+    jcol = Ibasis(j)
+    IF ( jcol<0 ) X(-jcol) = Bl(-jcol) + X(-jcol)
+  ENDDO
+  !
+  DO j = 1, Ncols
+    IF ( Scl(j)<ZERO ) X(j) = -X(j)
+  ENDDO
+  !
+  i = MAX(nsetb,mval)
+  Rnorm = SNRM2(mrows-i,W(INEXT(i),Ncols+1),1)
+  !
+  IF ( igopr==2 ) Mode = nsetb
 CONTAINS
-INTEGER FUNCTION INEXT(idum)
-  INTEGER, INTENT(IN) :: idum
-  INEXT = MIN(idum+1,mrows)
-END FUNCTION INEXT
+  INTEGER FUNCTION INEXT(idum)
+    INTEGER, INTENT(IN) :: idum
+    INEXT = MIN(idum+1,mrows)
+  END FUNCTION INEXT
 END SUBROUTINE SBOLSM

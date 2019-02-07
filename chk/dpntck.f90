@@ -15,26 +15,26 @@ SUBROUTINE DPNTCK(Lun,Kprint,Ipass)
   !   920212  DATE WRITTEN
   !***END PROLOGUE  DPNTCK
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
-  REAL(8) :: tol , yf
-  INTEGER i , ierr , kontrl , n , nerr
+  REAL(8) :: tol, yf
+  INTEGER i, ierr, kontrl, n, nerr
   LOGICAL fatal
   !     .. Local Arrays ..
-  REAL(8) :: c(6) , d(6) , dchk(6) , w(12) , x(6) , xchk(6) , y(6)
+  REAL(8) :: c(6), d(6), dchk(6), w(12), x(6), xchk(6), y(6)
   !     .. External Functions ..
   REAL(8) :: D1MACH
   INTEGER NUMXER
-  EXTERNAL D1MACH , NUMXER
+  EXTERNAL D1MACH, NUMXER
   !     .. External Subroutines ..
-  EXTERNAL DPOLCF , DPLINT , DPOLVL , XERCLR , XGETF , XSETF
+  EXTERNAL DPOLCF, DPLINT, DPOLVL, XERCLR, XGETF, XSETF
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , SQRT
+  INTRINSIC ABS, SQRT
   !     .. Data statements ..
-  DATA x/1.0D0 , 2.0D0 , 3.0D0 , -1.0D0 , -2.0D0 , -3.0D0/
-  DATA y/0.0D0 , 9.0D0 , 64.0D0 , 0.0D0 , 9.0D0 , 64.0D0/
-  DATA xchk/1.0D0 , 0.0D0 , -2.0D0 , 0.0D0 , 1.0D0 , 0.0D0/
-  DATA dchk/1.0D0 , 0.0D0 , -4.0D0 , 0.0D0 , 24.0D0 , 0.0D0/
+  DATA x/1.0D0, 2.0D0, 3.0D0, -1.0D0, -2.0D0, -3.0D0/
+  DATA y/0.0D0, 9.0D0, 64.0D0, 0.0D0, 9.0D0, 64.0D0/
+  DATA xchk/1.0D0, 0.0D0, -2.0D0, 0.0D0, 1.0D0, 0.0D0/
+  DATA dchk/1.0D0, 0.0D0, -4.0D0, 0.0D0, 24.0D0, 0.0D0/
   !***FIRST EXECUTABLE STATEMENT  DPNTCK
   IF ( Kprint>=2 ) WRITE (Lun,99001)
   !
@@ -54,30 +54,30 @@ SUBROUTINE DPNTCK(Lun,Kprint,Ipass)
   !     Check to see if DPOLCF test passed.
   !
   fatal = .FALSE.
-  DO i = 1 , n
+  DO i = 1, n
     IF ( ABS(d(i)-xchk(i))>tol ) THEN
       Ipass = 0
       fatal = .TRUE.
     ENDIF
   ENDDO
   IF ( fatal ) THEN
-    IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED' , (d(i),i=1,n)
+    IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED', (d(i),i=1,n)
   ELSE
-    IF ( Kprint>=3 ) WRITE (Lun,99007) 'PASSED' , (d(i),i=1,n)
+    IF ( Kprint>=3 ) WRITE (Lun,99007) 'PASSED', (d(i),i=1,n)
   ENDIF
   !
   !     Test DPOLVL.
   !
   CALL DPOLVL(5,0.0D0,yf,d,n,x,c,w,ierr)
   IF ( ABS(dchk(1)-yf)<=tol ) THEN
-    IF ( Kprint>=3 ) WRITE (Lun,99008) 'PASSED' , yf , (d(i),i=1,5)
+    IF ( Kprint>=3 ) WRITE (Lun,99008) 'PASSED', yf, (d(i),i=1,5)
   ELSE
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Lun,99008) 'FAILED' , yf , (d(i),i=1,5)
+    IF ( Kprint>=2 ) WRITE (Lun,99008) 'FAILED', yf, (d(i),i=1,5)
   ENDIF
   !
   fatal = .FALSE.
-  DO i = 1 , 5
+  DO i = 1, 5
     IF ( ABS(dchk(i+1)-d(i))>tol ) THEN
       Ipass = 0
       fatal = .TRUE.

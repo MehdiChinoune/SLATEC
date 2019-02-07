@@ -18,9 +18,9 @@ SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !     elimination and estimates the condition of the matrix.
   !
   !     If  RCOND  is not needed, CGBFA is slightly faster.
-  !     To solve  A*X = B , follow CGBCO by CGBSL.
-  !     To compute  INVERSE(A)*C , follow CGBCO by CGBSL.
-  !     To compute  DETERMINANT(A) , follow CGBCO by CGBDI.
+  !     To solve  A*X = B, follow CGBCO by CGBSL.
+  !     To compute  INVERSE(A)*C, follow CGBCO by CGBSL.
+  !     To compute  DETERMINANT(A), follow CGBCO by CGBDI.
   !
   !     On Entry
   !
@@ -60,7 +60,7 @@ SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !        RCOND   REAL
   !                an estimate of the reciprocal condition of  A .
-  !                For the system  A*X = B , relative perturbations
+  !                For the system  A*X = B, relative perturbations
   !                in  A  And  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -111,8 +111,8 @@ SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !      then  N = 6, ML = 1, MU = 2, LDA .GE. 5  and ABD should contain
   !
-  !            *  *  *  +  +  +  , * = not used
-  !            *  * 13 24 35 46  , + = used for pivoting
+  !            *  *  *  +  +  + , * = not used
+  !            *  * 13 24 35 46 , + = used for pivoting
   !            * 12 23 34 45 56
   !           11 22 33 44 55 66
   !           21 32 43 54 65  *
@@ -130,13 +130,13 @@ SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CGBCO
-  INTEGER Lda , N , Ml , Mu , Ipvt(*)
-  COMPLEX Abd(Lda,*) , Z(*)
+  INTEGER Lda, N, Ml, Mu, Ipvt(*)
+  COMPLEX Abd(Lda,*), Z(*)
   REAL Rcond
   !
-  COMPLEX CDOTC , ek , t , wk , wkm
-  REAL anorm , s , SCASUM , sm , ynorm
-  INTEGER is , info , j , ju , k , kb , kp1 , l , la , lm , lz , m , mm
+  COMPLEX CDOTC, ek, t, wk, wkm
+  REAL anorm, s, SCASUM, sm, ynorm
+  INTEGER is, info, j, ju, k, kb, kp1, l, la, lm, lz, m, mm
   REAL, EXTERNAL :: CABS1
   COMPLEX, EXTERNAL :: CSIGN1
   !
@@ -146,7 +146,7 @@ SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   anorm = 0.0E0
   l = Ml + 1
   is = l + Mu
-  DO j = 1 , N
+  DO j = 1, N
     anorm = MAX(anorm,SCASUM(l,Abd(is,j),1))
     IF ( is>Ml+1 ) is = is - 1
     IF ( j<=Mu ) l = l + 1
@@ -167,12 +167,12 @@ SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !     SOLVE CTRANS(U)*W = E
   !
   ek = (1.0E0,0.0E0)
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = (0.0E0,0.0E0)
   ENDDO
   m = Ml + Mu + 1
   ju = 0
-  DO k = 1 , N
+  DO k = 1, N
     IF ( CABS1(Z(k))/=0.0E0 ) ek = CSIGN1(ek,-Z(k))
     IF ( CABS1(ek-Z(k))>CABS1(Abd(m,k)) ) THEN
       s = CABS1(Abd(m,k))/CABS1(ek-Z(k))
@@ -194,7 +194,7 @@ SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     ju = MIN(MAX(ju,Mu+Ipvt(k)),N)
     mm = m
     IF ( kp1<=ju ) THEN
-      DO j = kp1 , ju
+      DO j = kp1, ju
         mm = mm - 1
         sm = sm + CABS1(Z(j)+wkm*CONJG(Abd(mm,j)))
         Z(j) = Z(j) + wk*CONJG(Abd(mm,j))
@@ -204,7 +204,7 @@ SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
         t = wkm - wk
         wk = wkm
         mm = m
-        DO j = kp1 , ju
+        DO j = kp1, ju
           mm = mm - 1
           Z(j) = Z(j) + t*CONJG(Abd(mm,j))
         ENDDO
@@ -217,7 +217,7 @@ SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !     SOLVE CTRANS(L)*Y = W
   !
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     lm = MIN(Ml,N-k)
     IF ( k<N ) Z(k) = Z(k) + CDOTC(lm,Abd(m+1,k),1,Z(k+1),1)
@@ -237,7 +237,7 @@ SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !     SOLVE L*V = Y
   !
-  DO k = 1 , N
+  DO k = 1, N
     l = Ipvt(k)
     t = Z(l)
     Z(l) = Z(k)
@@ -256,7 +256,7 @@ SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !     SOLVE  U*Z = W
   !
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     IF ( CABS1(Z(k))>CABS1(Abd(m,k)) ) THEN
       s = CABS1(Abd(m,k))/CABS1(Z(k))

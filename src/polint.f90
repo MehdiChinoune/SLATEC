@@ -4,8 +4,8 @@ SUBROUTINE POLINT(N,X,Y,C)
   IMPLICIT NONE
   !*--POLINT5
   !*** Start of declarations inserted by SPAG
-  REAL C , dif , X , Y
-  INTEGER i , k , km1 , N
+  REAL C, dif, X, Y
+  INTEGER i, k, km1, N
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POLINT
   !***PURPOSE  Produce the polynomial which interpolates a set of discrete
@@ -46,7 +46,7 @@ SUBROUTINE POLINT(N,X,Y,C)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  POLINT
-  DIMENSION X(*) , Y(*) , C(*)
+  DIMENSION X(*), Y(*), C(*)
   !***FIRST EXECUTABLE STATEMENT  POLINT
   IF ( N<=0 ) THEN
     CALL XERMSG('SLATEC','POLINT','N IS ZERO OR NEGATIVE.',2,1)
@@ -54,10 +54,10 @@ SUBROUTINE POLINT(N,X,Y,C)
   ELSE
     C(1) = Y(1)
     IF ( N==1 ) RETURN
-    DO k = 2 , N
+    DO k = 2, N
       C(k) = Y(k)
       km1 = k - 1
-      DO i = 1 , km1
+      DO i = 1, km1
         !     CHECK FOR DISTINCT X VALUES
         dif = X(i) - X(k)
         IF ( dif==0.0 ) GOTO 100

@@ -4,7 +4,7 @@ SUBROUTINE SCLOSM(Ipage)
   IMPLICIT NONE
   !*--SCLOSM5
   !*** Start of declarations inserted by SPAG
-  INTEGER ios , Ipage , ipagef
+  INTEGER ios, Ipage, ipagef
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SCLOSM
   !***SUBSIDIARY

@@ -45,12 +45,12 @@ SUBROUTINE DSMMTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  DSMMTI
   !     .. Scalar Arguments ..
-  INTEGER Isym , N , Nelt
+  INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , B(N) , Rwork(*) , X(N)
-  INTEGER Ia(Nelt) , Iwork(10) , Ja(Nelt)
+  REAL(8) :: A(Nelt), B(N), Rwork(*), X(N)
+  INTEGER Ia(Nelt), Iwork(10), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin , locil , lociu , locjl , locju , locl , locu
+  INTEGER locdin, locil, lociu, locjl, locju, locl, locu
   !     .. External Subroutines ..
   EXTERNAL DSMMI2
   !***FIRST EXECUTABLE STATEMENT  DSMMTI

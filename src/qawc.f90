@@ -161,10 +161,10 @@ SUBROUTINE QAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  QAWC
   !
-  REAL A , Abserr , B , C , Epsabs , Epsrel , F , Result , Work
-  INTEGER Ier , Iwork , Lenw , Limit , lvl , l1 , l2 , l3 , Neval
+  REAL A, Abserr, B, C, Epsabs, Epsrel, F, Result, Work
+  INTEGER Ier, Iwork, Lenw, Limit, lvl, l1, l2, l3, Neval
   !
-  DIMENSION Iwork(*) , Work(*)
+  DIMENSION Iwork(*), Work(*)
   !
   EXTERNAL F
   !

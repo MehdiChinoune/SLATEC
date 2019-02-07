@@ -19,10 +19,10 @@ SUBROUTINE QCRF(Lun,Kprint,Ipass)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   910708  Minor modifications in use of KPRINT.  (WRB)
   !***END PROLOGUE  QCRF
-  INTEGER Kprint , Ipass , contrl , kontrl , Lun , ier
-  INTEGER ipass1 , ipass2 , ipass3 , ipass4 , NUMXER
-  REAL alem , trf , RF , dif , R1MACH
-  EXTERNAL NUMXER , R1MACH , RF , XERCLR , XGETF , XSETF
+  INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
+  INTEGER ipass1, ipass2, ipass3, ipass4, NUMXER
+  REAL alem, trf, RF, dif, R1MACH
+  EXTERNAL NUMXER, R1MACH, RF, XERCLR, XGETF, XSETF
   !***FIRST EXECUTABLE STATEMENT  QCRF
   CALL XERCLR
   CALL XGETF(contrl)
@@ -93,7 +93,7 @@ SUBROUTINE QCRF(Lun,Kprint,Ipass)
     99004   FORMAT (' RF - PASSED')
   ELSE
     WRITE (Lun,99006)
-    IF ( ipass4==0 ) WRITE (Lun,99005) alem , trf , dif
+    IF ( ipass4==0 ) WRITE (Lun,99005) alem, trf, dif
     99005   FORMAT (' CORRECT ANSWER =',1PE14.6/'COMPUTED ANSWER =',&
       E14.6/'     DIFFERENCE =',E14.6)
   ENDIF

@@ -27,7 +27,7 @@ REAL FUNCTION QWGTS(X,A,B,Alfa,Beta,Integr)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  QWGTS
   !
-  REAL A , Alfa , B , Beta , bmx , X , xma
+  REAL A, Alfa, B, Beta, bmx, X, xma
   INTEGER Integr
   !***FIRST EXECUTABLE STATEMENT  QWGTS
   xma = X - A

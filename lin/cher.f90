@@ -94,23 +94,23 @@ SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
   !***END PROLOGUE  CHER
   !     .. Scalar Arguments ..
   REAL Alpha
-  INTEGER Incx , Lda , N
+  INTEGER Incx, Lda, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*) , X(*)
+  COMPLEX A(Lda,*), X(*)
   !     .. Parameters ..
   COMPLEX ZERO
   PARAMETER (ZERO=(0.0E+0,0.0E+0))
   !     .. Local Scalars ..
   COMPLEX temp
-  INTEGER i , info , ix , j , jx , kx
+  INTEGER i, info, ix, j, jx, kx
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
-  INTRINSIC CONJG , MAX , REAL
+  INTRINSIC CONJG, MAX, REAL
   !***FIRST EXECUTABLE STATEMENT  CHER
   !
   !     Test the input parameters.
@@ -151,10 +151,10 @@ SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
     !        Form  A  when A is stored in upper triangle.
     !
     IF ( Incx==1 ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( X(j)/=ZERO ) THEN
           temp = Alpha*CONJG(X(j))
-          DO i = 1 , j - 1
+          DO i = 1, j - 1
             A(i,j) = A(i,j) + X(i)*temp
           ENDDO
           A(j,j) = REAL(A(j,j)) + REAL(X(j)*temp)
@@ -164,11 +164,11 @@ SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
       ENDDO
     ELSE
       jx = kx
-      DO j = 1 , N
+      DO j = 1, N
         IF ( X(jx)/=ZERO ) THEN
           temp = Alpha*CONJG(X(jx))
           ix = kx
-          DO i = 1 , j - 1
+          DO i = 1, j - 1
             A(i,j) = A(i,j) + X(ix)*temp
             ix = ix + Incx
           ENDDO
@@ -183,11 +183,11 @@ SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
     !        Form  A  when A is stored in lower triangle.
     !
   ELSEIF ( Incx==1 ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       IF ( X(j)/=ZERO ) THEN
         temp = Alpha*CONJG(X(j))
         A(j,j) = REAL(A(j,j)) + REAL(temp*X(j))
-        DO i = j + 1 , N
+        DO i = j + 1, N
           A(i,j) = A(i,j) + X(i)*temp
         ENDDO
       ELSE
@@ -196,12 +196,12 @@ SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
     ENDDO
   ELSE
     jx = kx
-    DO j = 1 , N
+    DO j = 1, N
       IF ( X(jx)/=ZERO ) THEN
         temp = Alpha*CONJG(X(jx))
         A(j,j) = REAL(A(j,j)) + REAL(temp*X(jx))
         ix = jx
-        DO i = j + 1 , N
+        DO i = j + 1, N
           ix = ix + Incx
           A(i,j) = A(i,j) + X(ix)*temp
         ENDDO

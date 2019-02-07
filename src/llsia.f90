@@ -5,9 +5,9 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   IMPLICIT NONE
   !*--LLSIA6
   !*** Start of declarations inserted by SPAG
-  REAL A , Ae , B , eps , R1MACH , Re , Rnorm , W
-  INTEGER i , Info , it , Key , Krank , Ksure , Liw , Lw , M , Mda , Mdb , &
-    Mode , N , n1 , n2 , n3 , n4 , n5 , Nb , Np
+  REAL A, Ae, B, eps, R1MACH, Re, Rnorm, W
+  INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
+    Mode, N, n1, n2, n3, n4, n5, Nb, Np
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  LLSIA
   !***PURPOSE  Solve a linear least squares problems by performing a QR
@@ -167,7 +167,7 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  LLSIA
-  DIMENSION A(Mda,*) , B(Mdb,*) , Re(*) , Ae(*) , Rnorm(*) , W(*)
+  DIMENSION A(Mda,*), B(Mdb,*), Re(*), Ae(*), Rnorm(*), W(*)
   INTEGER Iwork(*)
   !
   !***FIRST EXECUTABLE STATEMENT  LLSIA
@@ -242,7 +242,7 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
                   IF ( Key==1 ) THEN
                     !
                     IF ( Ae(1)<0.0 ) GOTO 100
-                    DO i = 1 , N
+                    DO i = 1, N
                       IF ( Re(i)<0.0 ) GOTO 10
                       IF ( Re(i)>1.0 ) GOTO 20
                       IF ( Re(i)<eps ) Re(i) = eps
@@ -255,7 +255,7 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
                     IF ( Re(1)<0.0 ) GOTO 10
                     IF ( Re(1)>1.0 ) GOTO 20
                     IF ( Re(1)<eps ) Re(1) = eps
-                    DO i = 1 , N
+                    DO i = 1, N
                       W(n4-1+i) = Re(1)
                       IF ( Ae(i)<0.0 ) GOTO 100
                     ENDDO
@@ -263,7 +263,7 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
                       W(n2),W(n3),Iwork(n1),Iwork(n2))
                   ELSEIF ( Key==3 ) THEN
                     !
-                    DO i = 1 , N
+                    DO i = 1, N
                       IF ( Re(i)<0.0 ) GOTO 10
                       IF ( Re(i)>1.0 ) GOTO 20
                       IF ( Re(i)<eps ) Re(i) = eps
@@ -277,7 +277,7 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
                     IF ( Re(1)>1.0 ) GOTO 20
                     IF ( Re(1)<eps ) Re(1) = eps
                     IF ( Ae(1)<0.0 ) GOTO 100
-                    DO i = 1 , N
+                    DO i = 1, N
                       W(n4-1+i) = Re(1)
                       W(n5-1+i) = Ae(1)
                     ENDDO
@@ -334,4 +334,5 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
 ENDIF
 100  CALL XERMSG('SLATEC','LLSIA','AE(I) .LT. 0',2,1)
 RETURN
-99999 END SUBROUTINE LLSIA
+  99999 CONTINUE
+  END SUBROUTINE LLSIA

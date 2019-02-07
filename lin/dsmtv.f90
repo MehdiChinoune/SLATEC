@@ -107,28 +107,28 @@ SUBROUTINE DSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  DSMTV
   !     .. Scalar Arguments ..
-  INTEGER Isym , N , Nelt
+  INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , X(N) , Y(N)
-  INTEGER Ia(Nelt) , Ja(Nelt)
+  REAL(8) :: A(Nelt), X(N), Y(N)
+  INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER i , ibgn , icol , iend , irow , j , jbgn , jend
+  INTEGER i, ibgn, icol, iend, irow, j, jbgn, jend
   !***FIRST EXECUTABLE STATEMENT  DSMTV
   !
   !         Zero out the result vector.
   !
-  DO i = 1 , N
+  DO i = 1, N
     Y(i) = 0
   ENDDO
   !
   !         Multiply by A-Transpose.
   !         A-Transpose is stored by rows...
   !VD$R NOCONCUR
-  DO irow = 1 , N
+  DO irow = 1, N
     ibgn = Ja(irow)
     iend = Ja(irow+1) - 1
     !VD$ ASSOC
-    DO i = ibgn , iend
+    DO i = ibgn, iend
       Y(irow) = Y(irow) + A(i)*X(Ia(i))
     ENDDO
   ENDDO
@@ -139,14 +139,14 @@ SUBROUTINE DSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
     !         This loops assumes that the diagonal is the first entry in
     !         each column.
     !
-    DO icol = 1 , N
+    DO icol = 1, N
       jbgn = Ja(icol) + 1
       jend = Ja(icol+1) - 1
       IF ( jbgn<=jend ) THEN
         !LLL. OPTION ASSERT (NOHAZARD)
         !DIR$ IVDEP
         !VD$ NODEPCHK
-        DO j = jbgn , jend
+        DO j = jbgn, jend
           Y(Ia(j)) = Y(Ia(j)) + A(j)*X(icol)
         ENDDO
       ENDIF

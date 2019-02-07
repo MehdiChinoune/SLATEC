@@ -22,38 +22,38 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   930122  Added ZEXP, ZLOG and ZSQRT to EXTERNAL statement.  (RWC)
   !***END PROLOGUE  ZBKNU
   !
-  REAL(8) :: aa , ak , Alim , ascle , a1 , a2 , bb , bk , bry , caz , &
-    cbi , cbr , cc , cchi , cchr , cki , ckr , coefi , &
-    coefr , conei , coner , crscr , csclr , cshi , cshr , &
-    csi , csr , csrr , cssr , ctwor , czeroi , czeror , czi , &
-    czr , dnu , dnu2 , dpi , Elim , etest , fc , fhs , fi , &
-    fk , fks , fmui , fmur , Fnu , fpi , fr , g1 , g2 , hpi , &
-    pi , pr , pti , ptr , p1i , p1r , p2i , p2m , p2r , qi , &
-    qr , rak , rcaz , rthpi , rzi , rzr , r1 , s , smui , &
-    smur , spi , sti , str , s1i , s1r , s2i , s2r , tm , &
-    Tol , tth , t1 , t2 , Yi , Yr , Zi , Zr , DGAMLN , &
-    D1MACH , ZABS , elm , celmr , zdr , zdi , as , alas , &
-    helim , cyr , cyi
-  INTEGER i , iflag , inu , k , kflag , kk , kmax , Kode , koded , N , Nz , &
-    idum , I1MACH , j , ic , inub , nw
-  DIMENSION Yr(N) , Yi(N) , cc(8) , cssr(3) , csrr(3) , bry(3) , cyr(2) , &
+  REAL(8) :: aa, ak, Alim, ascle, a1, a2, bb, bk, bry, caz, &
+    cbi, cbr, cc, cchi, cchr, cki, ckr, coefi, &
+    coefr, conei, coner, crscr, csclr, cshi, cshr, &
+    csi, csr, csrr, cssr, ctwor, czeroi, czeror, czi, &
+    czr, dnu, dnu2, dpi, Elim, etest, fc, fhs, fi, &
+    fk, fks, fmui, fmur, Fnu, fpi, fr, g1, g2, hpi, &
+    pi, pr, pti, ptr, p1i, p1r, p2i, p2m, p2r, qi, &
+    qr, rak, rcaz, rthpi, rzi, rzr, r1, s, smui, &
+    smur, spi, sti, str, s1i, s1r, s2i, s2r, tm, &
+    Tol, tth, t1, t2, Yi, Yr, Zi, Zr, DGAMLN, &
+    D1MACH, ZABS, elm, celmr, zdr, zdi, as, alas, &
+    helim, cyr, cyi
+  INTEGER i, iflag, inu, k, kflag, kk, kmax, Kode, koded, N, Nz, &
+    idum, I1MACH, j, ic, inub, nw
+  DIMENSION Yr(N), Yi(N), cc(8), cssr(3), csrr(3), bry(3), cyr(2), &
     cyi(2)
-  EXTERNAL ZABS , ZEXP , ZLOG , ZSQRT
+  EXTERNAL ZABS, ZEXP, ZLOG, ZSQRT
   !     COMPLEX Z,Y,A,B,RZ,SMU,FU,FMU,F,FLRZ,CZ,S1,S2,CSH,CCH
   !     COMPLEX CK,P,Q,COEF,P1,P2,CBK,PT,CZERO,CONE,CTWO,ST,EZ,CS,DK
   !
   DATA kmax/30/
-  DATA czeror , czeroi , coner , conei , ctwor , r1/0.0D0 , 0.0D0 , 1.0D0 , &
-    0.0D0 , 2.0D0 , 2.0D0/
-  DATA dpi , rthpi , spi , hpi , fpi , tth/3.14159265358979324D0 , &
-    1.25331413731550025D0 , 1.90985931710274403D0 , &
-    1.57079632679489662D0 , 1.89769999331517738D0 , &
+  DATA czeror, czeroi, coner, conei, ctwor, r1/0.0D0, 0.0D0, 1.0D0, &
+    0.0D0, 2.0D0, 2.0D0/
+  DATA dpi, rthpi, spi, hpi, fpi, tth/3.14159265358979324D0, &
+    1.25331413731550025D0, 1.90985931710274403D0, &
+    1.57079632679489662D0, 1.89769999331517738D0, &
     6.66666666666666666D-01/
-  DATA cc(1) , cc(2) , cc(3) , cc(4) , cc(5) , cc(6) , cc(7) , &
-    cc(8)/5.77215664901532861D-01 , -4.20026350340952355D-02 , &
-    -4.21977345555443367D-02 , 7.21894324666309954D-03 , &
-    -2.15241674114950973D-04 , -2.01348547807882387D-05 , &
-    1.13302723198169588D-06 , 6.11609510448141582D-09/
+  DATA cc(1), cc(2), cc(3), cc(4), cc(5), cc(6), cc(7), &
+    cc(8)/5.77215664901532861D-01, -4.20026350340952355D-02, &
+    -4.21977345555443367D-02, 7.21894324666309954D-03, &
+    -2.15241674114950973D-04, -2.01348547807882387D-05, &
+    1.13302723198169588D-06, 6.11609510448141582D-09/
   !***FIRST EXECUTABLE STATEMENT  ZBKNU
   caz = ZABS(Zr,Zi)
   csclr = 1.0D0/Tol
@@ -109,7 +109,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
         !-----------------------------------------------------------------------
         ak = 1.0D0
         s = cc(1)
-        DO k = 2 , 8
+        DO k = 2, 8
           ak = ak*dnu2
           tm = cc(k)*ak
           s = s + tm
@@ -296,7 +296,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     ckr = caz + caz + ctwor
     p1r = czeror
     p2r = coner
-    DO i = 1 , kmax
+    DO i = 1, kmax
       ak = fhs/fks
       cbr = ckr/(fk+coner)
       ptr = p2r
@@ -328,7 +328,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   p2i = czeroi
   csr = p2r
   csi = p2i
-  DO i = 1 , k
+  DO i = 1, k
     a1 = fks - fk
     ak = (fks+fk)/(a1+fhs)
     rak = 2.0D0/(fk+coner)
@@ -401,7 +401,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
       zdi = Zi
       ic = -1
       j = 2
-      DO i = 1 , inu
+      DO i = 1, inu
         str = s2r
         sti = s2i
         s2r = str*ckr - sti*cki + s1r
@@ -456,7 +456,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   ENDIF
   300  p1r = csrr(kflag)
   ascle = bry(kflag)
-  DO i = inub , inu
+  DO i = inub, inu
     str = s2r
     sti = s2i
     s2r = ckr*str - cki*sti + s1r
@@ -503,7 +503,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   IF ( kk>N ) RETURN
   p1r = csrr(kflag)
   ascle = bry(kflag)
-  DO i = kk , N
+  DO i = kk, N
     p2r = s2r
     p2i = s2i
     s2r = ckr*p2r - cki*p2i + s1r
@@ -585,4 +585,5 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   s2r = coefr
   s2i = coefi
   GOTO 200
-  99999 END SUBROUTINE ZBKNU
+  99999 CONTINUE
+  END SUBROUTINE ZBKNU

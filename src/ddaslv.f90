@@ -31,12 +31,12 @@ SUBROUTINE DDASLV(Neq,Delta,Wm,Iwm)
   !           cosmetic changes to prologue.  (FNF)
   !***END PROLOGUE  DDASLV
   !
-  INTEGER Neq , Iwm(*)
-  REAL(8) :: Delta(*) , Wm(*)
+  INTEGER Neq, Iwm(*)
+  REAL(8) :: Delta(*), Wm(*)
   !
-  EXTERNAL DGBSL , DGESL
+  EXTERNAL DGBSL, DGESL
   !
-  INTEGER LIPVT , LML , LMU , LMTYPE , meband , mtype , NPD
+  INTEGER LIPVT, LML, LMU, LMTYPE, meband, mtype, NPD
   PARAMETER (NPD=1)
   PARAMETER (LML=1)
   PARAMETER (LMU=2)
@@ -63,4 +63,5 @@ SUBROUTINE DDASLV(Neq,Delta,Wm,Iwm)
   CALL DGESL(Wm(NPD),Neq,Neq,Iwm(LIPVT),Delta,0)
   RETURN
   !------END OF SUBROUTINE DDASLV------
-  99999 END SUBROUTINE DDASLV
+  99999 CONTINUE
+  END SUBROUTINE DDASLV

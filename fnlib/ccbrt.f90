@@ -4,7 +4,7 @@ COMPLEX FUNCTION CCBRT(Z)
   IMPLICIT NONE
   !*--CCBRT5
   !*** Start of declarations inserted by SPAG
-  REAL CARG , CBRT , r , theta
+  REAL CARG, CBRT, r, theta
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CCBRT
   !***PURPOSE  Compute the cube root.

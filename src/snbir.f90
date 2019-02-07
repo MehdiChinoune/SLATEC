@@ -81,7 +81,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !
   !     then  N = 6, ML = 1, MU = 2, LDA .GE. 5  and ABE should contain
   !
-  !           * 11 12 13        , * = not used
+  !           * 11 12 13       , * = not used
   !          21 22 23 24
   !          32 33 34 35
   !          43 44 45 46
@@ -174,11 +174,11 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SNBIR
   !
-  INTEGER Lda , N , Itask , Ind , Iwork(*) , info , j , k , kk , l , m ,&
-    Ml , Mu , nc
-  REAL Abe(Lda,*) , V(*) , Work(N,*) , xnorm , dnorm , SDSDOT , SASUM ,&
+  INTEGER Lda, N, Itask, Ind, Iwork(*), info, j, k, kk, l, m ,&
+    Ml, Mu, nc
+  REAL Abe(Lda,*), V(*), Work(N,*), xnorm, dnorm, SDSDOT, SASUM ,&
     R1MACH
-  CHARACTER(8) :: xern1 , xern2
+  CHARACTER(8) :: xern1, xern2
   !***FIRST EXECUTABLE STATEMENT  SNBIR
   IF ( Lda<N ) THEN
     Ind = -1
@@ -223,7 +223,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     !        MOVE MATRIX ABE TO WORK
     !
     m = Ml + Mu + 1
-    DO j = 1 , m
+    DO j = 1, m
       CALL SCOPY(N,Abe(1,j),1,Work(1,j),1)
     ENDDO
     !
@@ -256,7 +256,7 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !
   !     COMPUTE  RESIDUAL
   !
-  DO j = 1 , N
+  DO j = 1, N
     k = MAX(1,Ml+2-j)
     kk = MAX(1,j-Ml)
     l = MIN(j-1,Ml) + MIN(N-j,Mu) + 1

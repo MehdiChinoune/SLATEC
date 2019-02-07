@@ -5,11 +5,11 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   IMPLICIT NONE
   !*--HSTCRT6
   !*** Start of declarations inserted by SPAG
-  REAL A , B , Bda , Bdb , Bdc , Bdd , C , D , deltax , deltay , delxsq , &
-    delysq , Elmbda , F , Pertrb , s , st2 , twdelx , twdely , twdysq
+  REAL A, B, Bda, Bdb, Bdc, Bdd, C, D, deltax, deltay, delxsq, &
+    delysq, Elmbda, F, Pertrb, s, st2, twdelx, twdely, twdysq
   REAL W
-  INTEGER i , id2 , id3 , id4 , Idimf , ierr1 , Ierror , j , M , Mbdcnd , &
-    mp , mperod , N , Nbdcnd , np , nperod
+  INTEGER i, id2, id3, id4, Idimf, ierr1, Ierror, j, M, Mbdcnd, &
+    mp, mperod, N, Nbdcnd, np, nperod
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HSTCRT
   !***PURPOSE  Solve the standard five-point finite difference
@@ -65,21 +65,21 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !      A one-dimensional array of length N that specifies the boundary
   !      values (if any) of the solution at X = A.  When MBDCND = 1 or 2,
   !
-  !               BDA(J) = U(A,Y(J)) ,          J=1,2,...,N.
+  !               BDA(J) = U(A,Y(J)),          J=1,2,...,N.
   !
   !      When MBDCND = 3 or 4,
   !
-  !               BDA(J) = (d/dX)U(A,Y(J)) ,    J=1,2,...,N.
+  !               BDA(J) = (d/dX)U(A,Y(J)),    J=1,2,...,N.
   !
   !    BDB
   !      A one-dimensional array of length N that specifies the boundary
   !      values of the solution at X = B.  When MBDCND = 1 or 4
   !
-  !               BDB(J) = U(B,Y(J)) ,          J=1,2,...,N.
+  !               BDB(J) = U(B,Y(J)),          J=1,2,...,N.
   !
   !      When MBDCND = 2 or 3
   !
-  !               BDB(J) = (d/dX)U(B,Y(J)) ,    J=1,2,...,N.
+  !               BDB(J) = (d/dX)U(B,Y(J)),    J=1,2,...,N.
   !
   !    C,D
   !      The range of Y, i.e. C .LE. Y .LE. D.  C must be less
@@ -112,7 +112,7 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !      A one dimensional array of length M that specifies the boundary
   !      values of the solution at Y = C.   When NBDCND = 1 or 2,
   !
-  !               BDC(I) = U(X(I),C) ,              I=1,2,...,M.
+  !               BDC(I) = U(X(I),C),              I=1,2,...,M.
   !
   !      When NBDCND = 3 or 4,
   !
@@ -124,11 +124,11 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !      A one-dimensional array of length M that specifies the boundary
   !      values of the solution at Y = D.  When NBDCND = 1 or 4,
   !
-  !               BDD(I) = U(X(I),D) ,              I=1,2,...,M.
+  !               BDD(I) = U(X(I),D),              I=1,2,...,M.
   !
   !      When NBDCND = 2 or 3,
   !
-  !               BDD(I) = (d/dY)U(X(I),D) ,    I=1,2,...,M.
+  !               BDD(I) = (d/dY)U(X(I),D),    I=1,2,...,M.
   !
   !      When NBDCND = 0, BDD is a dummy variable.
   !
@@ -233,7 +233,7 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     Language       FORTRAN
   !
-  !     History        Written by Roland Sweet at NCAR in January , 1977
+  !     History        Written by Roland Sweet at NCAR in January, 1977
   !
   !     Algorithm      This subroutine defines the finite-difference
   !                    equations, incorporates boundary data, adjusts the
@@ -293,7 +293,7 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !***END PROLOGUE  HSTCRT
   !
   !
-  DIMENSION F(Idimf,*) , Bda(*) , Bdb(*) , Bdc(*) , Bdd(*) , W(*)
+  DIMENSION F(Idimf,*), Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HSTCRT
   Ierror = 0
   IF ( A>=B ) Ierror = 1
@@ -324,7 +324,7 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   id4 = id3 + M
   s = (deltay/deltax)**2
   st2 = 2.*s
-  DO i = 1 , M
+  DO i = 1, M
     W(i) = s
     j = id2 + i
     W(j) = -st2 + Elmbda*delysq
@@ -338,12 +338,12 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE (1)
       GOTO 100
     CASE (4,5)
-      DO j = 1 , N
+      DO j = 1, N
         F(1,j) = F(1,j) + Bda(j)*twdelx
       ENDDO
       W(id2+1) = W(id2+1) + W(1)
     CASE DEFAULT
-      DO j = 1 , N
+      DO j = 1, N
         F(1,j) = F(1,j) - Bda(j)*delxsq
       ENDDO
       W(id2+1) = W(id2+1) - W(1)
@@ -351,12 +351,12 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   SELECT CASE (mp)
     CASE (1)
     CASE (3,4)
-      DO j = 1 , N
+      DO j = 1, N
         F(M,j) = F(M,j) - Bdb(j)*twdelx
       ENDDO
       W(id3) = W(id3) + W(1)
     CASE DEFAULT
-      DO j = 1 , N
+      DO j = 1, N
         F(M,j) = F(M,j) - Bdb(j)*delxsq
       ENDDO
       W(id3) = W(id3) - W(1)
@@ -364,78 +364,80 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     ENTER BOUNDARY DATA FOR Y-BOUNDARIES.
   !
-  100  SELECT CASE (np)
-CASE (1)
-  GOTO 200
-CASE (4,5)
-  DO i = 1 , M
-    F(i,1) = F(i,1) + Bdc(i)*twdely
-  ENDDO
-CASE DEFAULT
-  DO i = 1 , M
-    F(i,1) = F(i,1) - Bdc(i)*twdysq
-  ENDDO
-END SELECT
-SELECT CASE (np)
-CASE (1)
-CASE (3,4)
-  DO i = 1 , M
-    F(i,N) = F(i,N) - Bdd(i)*twdely
-  ENDDO
-CASE DEFAULT
-  DO i = 1 , M
-    F(i,N) = F(i,N) - Bdd(i)*twdysq
-  ENDDO
-END SELECT
-200  DO i = 1 , M
-DO j = 1 , N
-F(i,j) = F(i,j)*delysq
-ENDDO
-ENDDO
-IF ( mperod/=0 ) THEN
-W(1) = 0.
-W(id4) = 0.
-ENDIF
-Pertrb = 0.
-IF ( Elmbda<0 ) THEN
-ELSEIF ( Elmbda==0 ) THEN
-SELECT CASE (mp)
-CASE (2,3,5)
-CASE DEFAULT
+  100 CONTINUE
   SELECT CASE (np)
-    CASE (2,3,5)
+    CASE (1)
+      GOTO 200
+    CASE (4,5)
+      DO i = 1, M
+        F(i,1) = F(i,1) + Bdc(i)*twdely
+      ENDDO
     CASE DEFAULT
-      !
-      !     FOR SINGULAR PROBLEMS MUST ADJUST DATA TO INSURE THAT A SOLUTION
-      !     WILL EXIST.
-      !
-      s = 0.
-      DO j = 1 , N
-        DO i = 1 , M
-          s = s + F(i,j)
-        ENDDO
+      DO i = 1, M
+        F(i,1) = F(i,1) - Bdc(i)*twdysq
       ENDDO
-      Pertrb = s/(M*N)
-      DO j = 1 , N
-        DO i = 1 , M
-          F(i,j) = F(i,j) - Pertrb
-        ENDDO
-      ENDDO
-      Pertrb = Pertrb/delysq
   END SELECT
-END SELECT
-ELSE
-Ierror = 6
-ENDIF
-!
-!     SOLVE THE EQUATION.
-!
-IF ( nperod==0 ) THEN
-CALL GENBUN(nperod,N,mperod,M,W(1),W(id2+1),W(id3+1),Idimf,F,ierr1,&
-W(id4+1))
-ELSE
-CALL POISTG(nperod,N,mperod,M,W(1),W(id2+1),W(id3+1),Idimf,F,ierr1,&
-W(id4+1))
-ENDIF
-W(1) = W(id4+1) + 3*M
+  SELECT CASE (np)
+    CASE (1)
+    CASE (3,4)
+      DO i = 1, M
+        F(i,N) = F(i,N) - Bdd(i)*twdely
+      ENDDO
+    CASE DEFAULT
+      DO i = 1, M
+        F(i,N) = F(i,N) - Bdd(i)*twdysq
+      ENDDO
+  END SELECT
+  200 CONTINUE
+  DO i = 1, M
+    DO j = 1, N
+      F(i,j) = F(i,j)*delysq
+    ENDDO
+  ENDDO
+  IF ( mperod/=0 ) THEN
+    W(1) = 0.
+    W(id4) = 0.
+  ENDIF
+  Pertrb = 0.
+  IF ( Elmbda<0 ) THEN
+  ELSEIF ( Elmbda==0 ) THEN
+    SELECT CASE (mp)
+      CASE (2,3,5)
+      CASE DEFAULT
+        SELECT CASE (np)
+          CASE (2,3,5)
+          CASE DEFAULT
+            !
+            !     FOR SINGULAR PROBLEMS MUST ADJUST DATA TO INSURE THAT A SOLUTION
+            !     WILL EXIST.
+            !
+            s = 0.
+            DO j = 1, N
+              DO i = 1, M
+                s = s + F(i,j)
+              ENDDO
+            ENDDO
+            Pertrb = s/(M*N)
+            DO j = 1, N
+              DO i = 1, M
+                F(i,j) = F(i,j) - Pertrb
+              ENDDO
+            ENDDO
+            Pertrb = Pertrb/delysq
+        END SELECT
+    END SELECT
+  ELSE
+    Ierror = 6
+  ENDIF
+  !
+  !     SOLVE THE EQUATION.
+  !
+  IF ( nperod==0 ) THEN
+    CALL GENBUN(nperod,N,mperod,M,W(1),W(id2+1),W(id3+1),Idimf,F,ierr1,&
+      W(id4+1))
+  ELSE
+    CALL POISTG(nperod,N,mperod,M,W(1),W(id2+1),W(id3+1),Idimf,F,ierr1,&
+      W(id4+1))
+  ENDIF
+  W(1) = W(id4+1) + 3*M
 END SUBROUTINE HSTCRT

@@ -160,14 +160,14 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !
   !  Declare arguments.
   !
-  INTEGER N , Incfd , Knotyp , Nknots , Ndim , Kord , Ierr
-  REAL(8) :: X(*) , F(Incfd,*) , D(Incfd,*) , T(*) , Bcoef(*)
+  INTEGER N, Incfd, Knotyp, Nknots, Ndim, Kord, Ierr
+  REAL(8) :: X(*), F(Incfd,*), D(Incfd,*), T(*), Bcoef(*)
   !
   !  Declare local variables.
   !
-  INTEGER k , kk
-  REAL(8) :: dov3 , hnew , hold
-  CHARACTER(8) :: libnam , subnam
+  INTEGER k, kk
+  REAL(8) :: dov3, hnew, hold
+  CHARACTER(8) :: libnam, subnam
   !***FIRST EXECUTABLE STATEMENT  DPCHBS
   !
   !  Initialize.
@@ -198,7 +198,7 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !  Compute B-spline coefficients.
   !
   hnew = T(3) - T(1)
-  DO k = 1 , N
+  DO k = 1, N
     kk = 2*k
     hold = hnew
     !          The following requires mixed mode arithmetic.

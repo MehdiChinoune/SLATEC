@@ -54,7 +54,7 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !                       Vector of dimension LAST, the first K
   !                       elements of which contain pointers
   !                       to the error estimates, such that
-  !                       ELIST(IORD(1)),... , ELIST(IORD(K))
+  !                       ELIST(IORD(1)),..., ELIST(IORD(K))
   !                       form a decreasing sequence, with
   !                       K = LAST if LAST.LE.(LIMIT/2+2), and
   !                       K = LIMIT+1-LAST otherwise
@@ -71,10 +71,10 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  QPSRT
   !
-  REAL Elist , Ermax , errmax , errmin
-  INTEGER i , ibeg , ido , Iord , isucc , j , jbnd , jupbn , k , Last , &
-    Limit , Maxerr , Nrmax
-  DIMENSION Elist(*) , Iord(*)
+  REAL Elist, Ermax, errmax, errmin
+  INTEGER i, ibeg, ido, Iord, isucc, j, jbnd, jupbn, k, Last, &
+    Limit, Maxerr, Nrmax
+  DIMENSION Elist(*), Iord(*)
   !
   !           CHECK WHETHER THE LIST CONTAINS MORE THAN
   !           TWO ERROR ESTIMATES.
@@ -91,7 +91,7 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
     errmax = Elist(Maxerr)
     IF ( Nrmax/=1 ) THEN
       ido = Nrmax - 1
-      DO i = 1 , ido
+      DO i = 1, ido
         isucc = Iord(Nrmax-1)
         ! ***JUMP OUT OF DO-LOOP
         IF ( errmax<=Elist(isucc) ) EXIT
@@ -115,7 +115,7 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
     jbnd = jupbn - 1
     ibeg = Nrmax + 1
     IF ( ibeg<=jbnd ) THEN
-      DO i = ibeg , jbnd
+      DO i = ibeg, jbnd
         isucc = Iord(i)
         ! ***JUMP OUT OF DO-LOOP
         IF ( errmax>=Elist(isucc) ) GOTO 100
@@ -134,7 +134,7 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !
   100  Iord(i-1) = Maxerr
   k = jbnd
-  DO j = i , jbnd
+  DO j = i, jbnd
     isucc = Iord(k)
     ! ***JUMP OUT OF DO-LOOP
     IF ( errmin<Elist(isucc) ) GOTO 200

@@ -27,7 +27,7 @@ REAL(8) FUNCTION DQWGTS(X,A,B,Alfa,Beta,Integr)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DQWGTS
   !
-  REAL(8) :: A , Alfa , B , Beta , bmx , X , xma
+  REAL(8) :: A, Alfa, B, Beta, bmx, X, xma
   INTEGER Integr
   !***FIRST EXECUTABLE STATEMENT  DQWGTS
   xma = X - A

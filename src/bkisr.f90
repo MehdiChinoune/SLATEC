@@ -23,14 +23,14 @@ SUBROUTINE BKISR(X,N,Sum,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  BKISR
-  INTEGER i , Ierr , k , kk , kkn , k1 , N , np
-  REAL ak , atol , bk , c , fk , fn , hx , hxs , pol , pr , Sum , tkp , &
-    tol , trm , X , xln
-  REAL PSIXN , R1MACH
+  INTEGER i, Ierr, k, kk, kkn, k1, N, np
+  REAL ak, atol, bk, c, fk, fn, hx, hxs, pol, pr, Sum, tkp, &
+    tol, trm, X, xln
+  REAL PSIXN, R1MACH
   DIMENSION c(2)
   SAVE c
   !
-  DATA c(1) , c(2)/1.57079632679489662E+00 , 1.0E0/
+  DATA c(1), c(2)/1.57079632679489662E+00, 1.0E0/
   !***FIRST EXECUTABLE STATEMENT  BKISR
   Ierr = 0
   tol = MAX(R1MACH(4),1.0E-18)
@@ -38,7 +38,7 @@ SUBROUTINE BKISR(X,N,Sum,Ierr)
     pr = 1.0E0
     pol = 0.0E0
     IF ( N/=0 ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         pol = -pol*X + c(i)
         pr = pr*X/i
       ENDDO
@@ -54,7 +54,7 @@ SUBROUTINE BKISR(X,N,Sum,Ierr)
     ak = 2.0E0/((fn+1.0E0)*(fn+2.0E0))
     Sum = ak*(PSIXN(N+3)-PSIXN(3)+PSIXN(2)-xln)
     atol = Sum*tol*0.75E0
-    DO k = 2 , 20
+    DO k = 2, 20
       ak = ak*(hxs/bk)*((tkp+1.0E0)/(tkp+fn+1.0E0))*(tkp/(tkp+fn))
       k1 = k + 1
       kk = k1 + k
@@ -83,4 +83,5 @@ SUBROUTINE BKISR(X,N,Sum,Ierr)
   IF ( N==1 ) Sum = -Sum
   Sum = pol + Sum
   RETURN
-  99999 END SUBROUTINE BKISR
+  99999 CONTINUE
+  END SUBROUTINE BKISR

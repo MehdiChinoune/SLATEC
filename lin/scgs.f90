@@ -247,21 +247,21 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  SCGS
   !     .. Scalar Arguments ..
-  REAL Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
+  REAL Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt) , B(N) , P(N) , Q(N) , R(N) , R0(N) , Rwork(*) , U(N) , &
-    V1(N) , V2(N) , X(N)
-  INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
+  REAL A(Nelt), B(N), P(N), Q(N), R(N), R0(N), Rwork(*), U(N), &
+    V1(N), V2(N), X(N)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC , MSOLVE
+  EXTERNAL MATVEC, MSOLVE
   !     .. Local Scalars ..
-  REAL ak , akm , bk , bnrm , fuzz , rhon , rhonm1 , sigma , solnrm , tolmin
-  INTEGER i , k
+  REAL ak, akm, bk, bnrm, fuzz, rhon, rhonm1, sigma, solnrm, tolmin
+  INTEGER i, k
   !     .. External Functions ..
-  REAL R1MACH , SDOT
+  REAL R1MACH, SDOT
   INTEGER ISSCGS
-  EXTERNAL R1MACH , SDOT , ISSCGS
+  EXTERNAL R1MACH, SDOT, ISSCGS
   !     .. External Subroutines ..
   EXTERNAL SAXPY
   !     .. Intrinsic Functions ..
@@ -285,7 +285,7 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !         Calculate initial residual and pseudo-residual, and check
   !         stopping criterion.
   CALL MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
-  DO i = 1 , N
+  DO i = 1, N
     V1(i) = R(i) - B(i)
   ENDDO
   CALL MSOLVE(N,V1,R,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
@@ -297,14 +297,14 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     !         Set initial values.
     !
     fuzz = R1MACH(3)**2
-    DO i = 1 , N
+    DO i = 1, N
       R0(i) = R(i)
     ENDDO
     rhonm1 = 1
     !
     !         ***** ITERATION LOOP *****
     !
-    DO k = 1 , Itmax
+    DO k = 1, Itmax
       Iter = k
       !
       !         Calculate coefficient BK and direction vectors U, V and P.
@@ -312,16 +312,16 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       IF ( ABS(rhonm1)<fuzz ) GOTO 200
       bk = rhon/rhonm1
       IF ( Iter==1 ) THEN
-        DO i = 1 , N
+        DO i = 1, N
           U(i) = R(i)
           P(i) = R(i)
         ENDDO
       ELSE
-        DO i = 1 , N
+        DO i = 1, N
           U(i) = R(i) + bk*Q(i)
           V1(i) = Q(i) + bk*P(i)
         ENDDO
-        DO i = 1 , N
+        DO i = 1, N
           P(i) = U(i) + bk*V1(i)
         ENDDO
       ENDIF
@@ -333,10 +333,10 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       IF ( ABS(sigma)<fuzz ) GOTO 300
       ak = rhon/sigma
       akm = -ak
-      DO i = 1 , N
+      DO i = 1, N
         Q(i) = U(i) + akm*V1(i)
       ENDDO
-      DO i = 1 , N
+      DO i = 1, N
         V1(i) = U(i) + Q(i)
       ENDDO
       !         X = X - ak*V1.

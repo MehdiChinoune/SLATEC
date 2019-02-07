@@ -4,8 +4,8 @@ SUBROUTINE MPDIVI(X,Iy,Z)
   IMPLICIT NONE
   !*--MPDIVI5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , i2 , iq , iqj , ir , Iy , j , j1 , j11 , j2 , k , kh , LUN , &
-    M , MXR
+  INTEGER i, i2, iq, iqj, ir, Iy, j, j1, j11, j2, k, kh, LUN, &
+    M, MXR
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPDIVI
   !***SUBSIDIARY
@@ -34,8 +34,8 @@ SUBROUTINE MPDIVI(X,Iy,Z)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPDIVI
-  COMMON /MPCOM / B , T , M , LUN , MXR , R(30)
-  INTEGER B , T , R , X(*) , Z(*) , rs , re , r1 , c , c2 , b2
+  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
+  INTEGER B, T, R, X(*), Z(*), rs, re, r1, c, c2, b2
   !***FIRST EXECUTABLE STATEMENT  MPDIVI
   rs = X(1)
   j = Iy
@@ -105,7 +105,7 @@ SUBROUTINE MPDIVI(X,Iy,Z)
             kh = 2
             IF ( i<T ) THEN
               kh = 1 + T - i
-              DO k = 2 , kh
+              DO k = 2, kh
                 i = i + 1
                 c = c + X(i+2)
                 R(k) = c/j
@@ -114,7 +114,7 @@ SUBROUTINE MPDIVI(X,Iy,Z)
               IF ( c<0 ) GOTO 400
               kh = kh + 1
             ENDIF
-            DO k = kh , i2
+            DO k = kh, i2
               R(k) = c/j
               c = B*(c-j*R(k))
             ENDDO
@@ -169,4 +169,5 @@ SUBROUTINE MPDIVI(X,Iy,Z)
   500  CALL MPERR
   Z(1) = 0
   RETURN
-  99999 END SUBROUTINE MPDIVI
+  99999 CONTINUE
+  END SUBROUTINE MPDIVI

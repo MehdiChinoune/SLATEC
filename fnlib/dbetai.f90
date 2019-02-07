@@ -4,7 +4,7 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   IMPLICIT NONE
   !*--DBETAI5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , ib , n
+  INTEGER i, ib, n
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBETAI
   !***PURPOSE  Calculate the incomplete Beta function.
@@ -39,10 +39,10 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   !***END PROLOGUE  DBETAI
-  REAL(8) :: X , Pin , Qin , alneps , alnsml , c , eps , finsum , p , &
-    ps , q , sml , term , xb , xi , y , D1MACH , DLBETA , p1
+  REAL(8) :: X, Pin, Qin, alneps, alnsml, c, eps, finsum, p, &
+    ps, q, sml, term, xb, xi, y, D1MACH, DLBETA, p1
   LOGICAL first
-  SAVE eps , alneps , sml , alnsml , first
+  SAVE eps, alneps, sml, alnsml, first
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  DBETAI
   IF ( first ) THEN
@@ -91,7 +91,7 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
       term = DBETAI*p
       IF ( ps/=1.0D0 ) THEN
         n = MAX(alneps/LOG(y),4.0D0)
-        DO i = 1 , n
+        DO i = 1, n
           xi = i
           term = term*(xi-ps)*y/xi
           DBETAI = DBETAI + term/(p+xi)
@@ -112,7 +112,7 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
       finsum = 0.0D0
       n = q
       IF ( q==REAL(n, 8) ) n = n - 1
-      DO i = 1 , n
+      DO i = 1, n
         IF ( p1<=1.0D0.AND.term/eps<=finsum ) EXIT
         xi = i
         term = (q-xi+1.0D0)*c*term/(p+q-xi)
@@ -130,4 +130,5 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   DBETAI = MAX(MIN(DBETAI,1.0D0),0.0D0)
   RETURN
   !
-  99999 END FUNCTION DBETAI
+  99999 CONTINUE
+  END FUNCTION DBETAI

@@ -71,17 +71,17 @@ SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  STRSL
-  INTEGER Ldt , N , Job , Info
-  REAL T(Ldt,*) , B(*)
+  INTEGER Ldt, N, Job, Info
+  REAL T(Ldt,*), B(*)
   !
   !
-  REAL SDOT , temp
-  INTEGER case , j , jj
+  REAL SDOT, temp
+  INTEGER case, j, jj
   !***FIRST EXECUTABLE STATEMENT  STRSL
   !
   !        CHECK FOR ZERO DIAGONAL ELEMENTS.
   !
-  DO Info = 1 , N
+  DO Info = 1, N
     IF ( T(Info,Info)==0.0E0 ) GOTO 99999
   ENDDO
   Info = 0
@@ -98,7 +98,7 @@ SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
       !
       B(N) = B(N)/T(N,N)
       IF ( N>=2 ) THEN
-        DO jj = 2 , N
+        DO jj = 2, N
           j = N - jj + 1
           temp = -B(j+1)
           CALL SAXPY(j,temp,T(1,j+1),1,B(1),1)
@@ -111,7 +111,7 @@ SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
       !
       B(N) = B(N)/T(N,N)
       IF ( N>=2 ) THEN
-        DO jj = 2 , N
+        DO jj = 2, N
           j = N - jj + 1
           B(j) = B(j) - SDOT(jj-1,T(j+1,j),1,B(j+1),1)
           B(j) = B(j)/T(j,j)
@@ -123,7 +123,7 @@ SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
       !
       B(1) = B(1)/T(1,1)
       IF ( N>=2 ) THEN
-        DO j = 2 , N
+        DO j = 2, N
           B(j) = B(j) - SDOT(j-1,T(1,j),1,B(1),1)
           B(j) = B(j)/T(j,j)
         ENDDO
@@ -134,11 +134,12 @@ SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
       !
       B(1) = B(1)/T(1,1)
       IF ( N>=2 ) THEN
-        DO j = 2 , N
+        DO j = 2, N
           temp = -B(j-1)
           CALL SAXPY(N-j+1,temp,T(j,j-1),1,B(j),1)
           B(j) = B(j)/T(j,j)
         ENDDO
       ENDIF
   END SELECT
-  99999 END SUBROUTINE STRSL
+  99999 CONTINUE
+  END SUBROUTINE STRSL

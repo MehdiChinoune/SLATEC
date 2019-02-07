@@ -80,8 +80,8 @@ SUBROUTINE CNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !
   !     then  N = 6, ML = 1, MU = 2, LDA .GE. 5  and ABE should contain
   !
-  !           * 11 12 13  +     , * = not used
-  !          21 22 23 24  +     , + = used for pivoting
+  !           * 11 12 13  +    , * = not used
+  !          21 22 23 24  +    , + = used for pivoting
   !          32 33 34 35  +
   !          43 44 45 46  +
   !          54 55 56  *  +
@@ -174,11 +174,11 @@ SUBROUTINE CNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CNBFS
   !
-  INTEGER Lda , N , Itask , Ind , Iwork(*) , Ml , Mu
-  COMPLEX Abe(Lda,*) , V(*) , Work(*)
+  INTEGER Lda, N, Itask, Ind, Iwork(*), Ml, Mu
+  COMPLEX Abe(Lda,*), V(*), Work(*)
   REAL rcond
   REAL R1MACH
-  CHARACTER(8) :: xern1 , xern2
+  CHARACTER(8) :: xern1, xern2
   !***FIRST EXECUTABLE STATEMENT  CNBFS
   IF ( Lda<N ) THEN
     Ind = -1

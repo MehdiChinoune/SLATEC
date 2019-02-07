@@ -31,12 +31,12 @@ SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
   !           cosmetic changes to prologue.  (FNF)
   !***END PROLOGUE  SDASLV
   !
-  INTEGER Neq , Iwm(*)
-  REAL Delta(*) , Wm(*)
+  INTEGER Neq, Iwm(*)
+  REAL Delta(*), Wm(*)
   !
-  EXTERNAL SGBSL , SGESL
+  EXTERNAL SGBSL, SGESL
   !
-  INTEGER LIPVT , LML , LMU , LMTYPE , meband , mtype , NPD
+  INTEGER LIPVT, LML, LMU, LMTYPE, meband, mtype, NPD
   PARAMETER (NPD=1)
   PARAMETER (LML=1)
   PARAMETER (LMU=2)
@@ -63,4 +63,5 @@ SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
   CALL SGESL(Wm(NPD),Neq,Neq,Iwm(LIPVT),Delta,0)
   RETURN
   !------END OF SUBROUTINE SDASLV------
-  99999 END SUBROUTINE SDASLV
+  99999 CONTINUE
+  END SUBROUTINE SDASLV

@@ -58,12 +58,12 @@ SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920618  Minor restructuring of code.  (RWC, WRB)
   !***END PROLOGUE  DBVDER
-  INTEGER IGOfx , INHomo , Ipar , IVP , j , k , l , na , NCOmp , NFC , NOFst
-  REAL(8) :: C , G(*) , X , XSAv , Y(*) , Yp(*)
+  INTEGER IGOfx, INHomo, Ipar, IVP, j, k, l, na, NCOmp, NFC, NOFst
+  REAL(8) :: C, G(*), X, XSAv, Y(*), Yp(*)
   !
   ! **********************************************************************
   !
-  COMMON /DML8SZ/ C , XSAv , IGOfx , INHomo , IVP , NCOmp , NFC
+  COMMON /DML8SZ/ C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
   !
   ! **********************************************************************
   !     The COMMON block below is used to communicate with the user
@@ -77,7 +77,7 @@ SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
   IF ( IVP>0 ) CALL DUIVP(X,Y(IVP+1),Yp(IVP+1))
   NOFst = IVP
   na = 1
-  DO k = 1 , NFC
+  DO k = 1, NFC
     CALL DFMAT(X,Y(na),Yp(na))
     NOFst = NOFst - NCOmp
     na = na + NCOmp
@@ -99,7 +99,7 @@ SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
   !     The following loop is just
   !     CALL DAXPY (NCOMP, 1.0D0/C, G, 1, YP(NA), 1)
   !
-  DO j = 1 , NCOmp
+  DO j = 1, NCOmp
     l = na + j - 1
     Yp(l) = Yp(l) + G(j)/C
   ENDDO

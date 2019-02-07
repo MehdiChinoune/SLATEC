@@ -93,9 +93,9 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DFDJC1
   REAL(8) :: D1MACH
-  INTEGER i , Iflag , j , k , Ldfjac , Ml , msum , Mu , N
-  REAL(8) :: eps , Epsfcn , epsmch , Fjac(Ldfjac,*) , Fvec(*) , h , &
-    temp , Wa1(*) , Wa2(*) , X(*) , zero
+  INTEGER i, Iflag, j, k, Ldfjac, Ml, msum, Mu, N
+  REAL(8) :: eps, Epsfcn, epsmch, Fjac(Ldfjac,*), Fvec(*), h, &
+    temp, Wa1(*), Wa2(*), X(*), zero
   SAVE zero
   DATA zero/0.0D0/
   !
@@ -110,8 +110,8 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
     !
     !        COMPUTATION OF BANDED APPROXIMATE JACOBIAN.
     !
-    DO k = 1 , msum
-      DO j = k , N , msum
+    DO k = 1, msum
+      DO j = k, N, msum
         Wa2(j) = X(j)
         h = eps*ABS(Wa2(j))
         IF ( h==zero ) h = eps
@@ -119,11 +119,11 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
       ENDDO
       CALL FCN(N,X,Wa1,Iflag)
       IF ( Iflag<0 ) EXIT
-      DO j = k , N , msum
+      DO j = k, N, msum
         X(j) = Wa2(j)
         h = eps*ABS(Wa2(j))
         IF ( h==zero ) h = eps
-        DO i = 1 , N
+        DO i = 1, N
           Fjac(i,j) = zero
           IF ( i>=j-Mu.AND.i<=j+Ml ) Fjac(i,j) = (Wa1(i)-Fvec(i))/h
         ENDDO
@@ -133,7 +133,7 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
     !
     !        COMPUTATION OF DENSE APPROXIMATE JACOBIAN.
     !
-    DO j = 1 , N
+    DO j = 1, N
       temp = X(j)
       h = eps*ABS(temp)
       IF ( h==zero ) h = eps
@@ -141,7 +141,7 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
       CALL FCN(N,X,Wa1,Iflag)
       IF ( Iflag<0 ) EXIT
       X(j) = temp
-      DO i = 1 , N
+      DO i = 1, N
         Fjac(i,j) = (Wa1(i)-Fvec(i))/h
       ENDDO
     ENDDO

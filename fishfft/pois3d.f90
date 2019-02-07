@@ -5,10 +5,10 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,&
   IMPLICIT NONE
   !*--POIS3D6
   !*** Start of declarations inserted by SPAG
-  REAL A , B , C , C1 , C2 , F , save , W
-  INTEGER i , Ierror , iwbb , iwd , iwt , iwx , iwy , iwyrt , j , k , L , &
-    Ldimf , lp , Lperod , M , Mdimf , mp , Mperod , N , nh
-  INTEGER nhm1 , nhmk , nhpk , nodd , np , Nperod
+  REAL A, B, C, C1, C2, F, save, W
+  INTEGER i, Ierror, iwbb, iwd, iwt, iwx, iwy, iwyrt, j, k, L, &
+    Ldimf, lp, Lperod, M, Mdimf, mp, Mperod, N, nh
+  INTEGER nhm1, nhmk, nhpk, nodd, np, Nperod
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POIS3D
   !***PURPOSE  Solve a three-dimensional block tridiagonal linear system
@@ -30,7 +30,7 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,&
   !     + C2*(X(I,J-1,K)-2.*X(I,J,K)+X(I,J+1,K))
   !     + A(K)*X(I,J,K-1)+B(K)*X(I,J,K)+C(K)*X(I,J,K+1) = F(I,J,K)
   !
-  !     for  I=1,2,...,L , J=1,2,...,M , and K=1,2,...,N .
+  !     for  I=1,2,...,L, J=1,2,...,M, and K=1,2,...,N .
   !
   !     The indices K-1 and K+1 are evaluated modulo N, i.e.
   !     X(I,J,0) = X(I,J,N) and X(I,J,N+1) = X(I,J,1). The unknowns
@@ -239,7 +239,7 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,&
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  POIS3D
-  DIMENSION A(*) , B(*) , C(*) , F(Ldimf,Mdimf,*) , W(*) , save(6)
+  DIMENSION A(*), B(*), C(*), F(Ldimf,Mdimf,*), W(*), save(6)
   !***FIRST EXECUTABLE STATEMENT  POIS3D
   lp = Lperod + 1
   mp = Mperod + 1
@@ -257,84 +257,86 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,&
   IF ( Ldimf<L ) Ierror = 7
   IF ( Mdimf<M ) Ierror = 8
   IF ( np/=1 ) GOTO 200
-  DO k = 1 , N
+  DO k = 1, N
     IF ( A(k)/=C(1) ) GOTO 100
     IF ( C(k)/=C(1) ) GOTO 100
     IF ( B(k)/=B(1) ) GOTO 100
   ENDDO
   GOTO 300
   100  Ierror = 9
-  200  IF ( Nperod==1.AND.(A(1)/=0..OR.C(N)/=0.) ) Ierror = 10
-  300  IF ( Ierror==0 ) THEN
-  iwyrt = L + 1
-  iwt = iwyrt + M
-  iwd = iwt + MAX(L,M,N) + 1
-  iwbb = iwd + N
-  iwx = iwbb + N
-  iwy = iwx + 7*((L+1)/2) + 15
-  IF ( np/=2 ) THEN
-    !
-    !     REORDER UNKNOWNS WHEN NPEROD = 0.
-    !
-    nh = (N+1)/2
-    nhm1 = nh - 1
-    nodd = 1
-    IF ( 2*nh==N ) nodd = 2
-    DO i = 1 , L
-      DO j = 1 , M
-        DO k = 1 , nhm1
-          nhpk = nh + k
-          nhmk = nh - k
-          W(k) = F(i,j,nhmk) - F(i,j,nhpk)
-          W(nhpk) = F(i,j,nhmk) + F(i,j,nhpk)
-        ENDDO
-        W(nh) = 2.*F(i,j,nh)
-        IF ( nodd/=1 ) W(N) = 2.*F(i,j,N)
-        DO k = 1 , N
-          F(i,j,k) = W(k)
+  200 CONTINUE
+  IF ( Nperod==1.AND.(A(1)/=0..OR.C(N)/=0.) ) Ierror = 10
+  300 CONTINUE
+  IF ( Ierror==0 ) THEN
+    iwyrt = L + 1
+    iwt = iwyrt + M
+    iwd = iwt + MAX(L,M,N) + 1
+    iwbb = iwd + N
+    iwx = iwbb + N
+    iwy = iwx + 7*((L+1)/2) + 15
+    IF ( np/=2 ) THEN
+      !
+      !     REORDER UNKNOWNS WHEN NPEROD = 0.
+      !
+      nh = (N+1)/2
+      nhm1 = nh - 1
+      nodd = 1
+      IF ( 2*nh==N ) nodd = 2
+      DO i = 1, L
+        DO j = 1, M
+          DO k = 1, nhm1
+            nhpk = nh + k
+            nhmk = nh - k
+            W(k) = F(i,j,nhmk) - F(i,j,nhpk)
+            W(nhpk) = F(i,j,nhmk) + F(i,j,nhpk)
+          ENDDO
+          W(nh) = 2.*F(i,j,nh)
+          IF ( nodd/=1 ) W(N) = 2.*F(i,j,N)
+          DO k = 1, N
+            F(i,j,k) = W(k)
+          ENDDO
         ENDDO
       ENDDO
-    ENDDO
-    save(1) = C(nhm1)
-    save(2) = A(nh)
-    save(3) = C(nh)
-    save(4) = B(nhm1)
-    save(5) = B(N)
-    save(6) = A(N)
-    C(nhm1) = 0.
-    A(nh) = 0.
-    C(nh) = 2.*C(nh)
-    IF ( nodd==2 ) THEN
-      A(N) = C(nh)
-    ELSE
-      B(nhm1) = B(nhm1) - A(nh-1)
-      B(N) = B(N) + A(N)
+      save(1) = C(nhm1)
+      save(2) = A(nh)
+      save(3) = C(nh)
+      save(4) = B(nhm1)
+      save(5) = B(N)
+      save(6) = A(N)
+      C(nhm1) = 0.
+      A(nh) = 0.
+      C(nh) = 2.*C(nh)
+      IF ( nodd==2 ) THEN
+        A(N) = C(nh)
+      ELSE
+        B(nhm1) = B(nhm1) - A(nh-1)
+        B(N) = B(N) + A(N)
+      ENDIF
+    ENDIF
+    CALL POS3D1(lp,L,mp,M,N,A,B,C,Ldimf,Mdimf,F,W,W(iwyrt),W(iwt),W(iwd),&
+      W(iwx),W(iwy),C1,C2,W(iwbb))
+    IF ( np/=2 ) THEN
+      DO i = 1, L
+        DO j = 1, M
+          DO k = 1, nhm1
+            nhmk = nh - k
+            nhpk = nh + k
+            W(nhmk) = .5*(F(i,j,nhpk)+F(i,j,k))
+            W(nhpk) = .5*(F(i,j,nhpk)-F(i,j,k))
+          ENDDO
+          W(nh) = .5*F(i,j,nh)
+          IF ( nodd/=1 ) W(N) = .5*F(i,j,N)
+          DO k = 1, N
+            F(i,j,k) = W(k)
+          ENDDO
+        ENDDO
+      ENDDO
+      C(nhm1) = save(1)
+      A(nh) = save(2)
+      C(nh) = save(3)
+      B(nhm1) = save(4)
+      B(N) = save(5)
+      A(N) = save(6)
     ENDIF
   ENDIF
-  CALL POS3D1(lp,L,mp,M,N,A,B,C,Ldimf,Mdimf,F,W,W(iwyrt),W(iwt),W(iwd),&
-    W(iwx),W(iwy),C1,C2,W(iwbb))
-  IF ( np/=2 ) THEN
-    DO i = 1 , L
-      DO j = 1 , M
-        DO k = 1 , nhm1
-          nhmk = nh - k
-          nhpk = nh + k
-          W(nhmk) = .5*(F(i,j,nhpk)+F(i,j,k))
-          W(nhpk) = .5*(F(i,j,nhpk)-F(i,j,k))
-        ENDDO
-        W(nh) = .5*F(i,j,nh)
-        IF ( nodd/=1 ) W(N) = .5*F(i,j,N)
-        DO k = 1 , N
-          F(i,j,k) = W(k)
-        ENDDO
-      ENDDO
-    ENDDO
-    C(nhm1) = save(1)
-    A(nh) = save(2)
-    C(nh) = save(3)
-    B(nhm1) = save(4)
-    B(N) = save(5)
-    A(N) = save(6)
-  ENDIF
-ENDIF
 END SUBROUTINE POIS3D

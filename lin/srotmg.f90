@@ -4,9 +4,9 @@ SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
   IMPLICIT NONE
   !*--SROTMG5
   !*** Start of declarations inserted by SPAG
-  REAL gam , gamsq , one , rgamsq , Sd1 , Sd2 , sflag , sh11 , sh12 , sh21 , &
-    sh22 , sp1 , sp2 , Sparam , sq1 , sq2 , stemp , su , Sx1 , Sy1
-  REAL two , zero
+  REAL gam, gamsq, one, rgamsq, Sd1, Sd2, sflag, sh11, sh12, sh21, &
+    sh22, sp1, sp2, Sparam, sq1, sq2, stemp, su, Sx1, Sy1
+  REAL two, zero
   INTEGER igo
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SROTMG
@@ -66,9 +66,9 @@ SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SROTMG
   DIMENSION Sparam(5)
-  SAVE zero , one , two , gam , gamsq , rgamsq
-  DATA zero , one , two/0.0E0 , 1.0E0 , 2.0E0/
-  DATA gam , gamsq , rgamsq/4096.0E0 , 1.67772E7 , 5.96046E-8/
+  SAVE zero, one, two, gam, gamsq, rgamsq
+  DATA zero, one, two/0.0E0, 1.0E0, 2.0E0/
+  DATA gam, gamsq, rgamsq/4096.0E0, 1.67772E7, 5.96046E-8/
   !***FIRST EXECUTABLE STATEMENT  SROTMG
   IF ( .NOT.Sd1<zero ) THEN
     !     CASE-SD1-NONNEGATIVE
@@ -127,76 +127,83 @@ SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
   !         RETURN..
   GOTO 1000
   !     PROCEDURE..FIX-H..
-  100  IF ( .NOT.(.NOT.sflag>=zero) ) THEN
-  !
-  IF ( .NOT.sflag==zero ) THEN
-    sh21 = -one
-    sh12 = one
-    sflag = -one
-  ELSE
-    sh11 = one
-    sh22 = one
-    sflag = -one
+  100 CONTINUE
+  IF ( .NOT.(.NOT.sflag>=zero) ) THEN
+    !
+    IF ( .NOT.sflag==zero ) THEN
+      sh21 = -one
+      sh12 = one
+      sflag = -one
+    ELSE
+      sh11 = one
+      sh22 = one
+      sflag = -one
+    ENDIF
   ENDIF
-ENDIF
-SELECT CASE(igo)
-  CASE(300)
-    GOTO 300
-  CASE(500)
-    GOTO 500
-  CASE(700)
-    GOTO 700
-  CASE(900)
-    GOTO 900
-END SELECT
-!     PROCEDURE..SCALE-CHECK
-200  IF ( .NOT.Sd1<=rgamsq ) GOTO 400
-IF ( Sd1==zero ) GOTO 600
-igo = 300
-!              FIX-H..
-GOTO 100
-300  Sd1 = Sd1*gam**2
-Sx1 = Sx1/gam
-sh11 = sh11/gam
-sh12 = sh12/gam
-GOTO 200
-400  IF ( .NOT.Sd1>=gamsq ) GOTO 600
-igo = 500
-!              FIX-H..
-GOTO 100
-500  Sd1 = Sd1/gam**2
-Sx1 = Sx1*gam
-sh11 = sh11*gam
-sh12 = sh12*gam
-GOTO 400
-600  IF ( .NOT.ABS(Sd2)<=rgamsq ) GOTO 800
-IF ( Sd2==zero ) GOTO 1000
-igo = 700
-!              FIX-H..
-GOTO 100
-700  Sd2 = Sd2*gam**2
-sh21 = sh21/gam
-sh22 = sh22/gam
-GOTO 600
-800  IF ( .NOT.ABS(Sd2)>=gamsq ) GOTO 1000
-igo = 900
-!              FIX-H..
-GOTO 100
-900  Sd2 = Sd2/gam**2
-sh21 = sh21*gam
-sh22 = sh22*gam
-GOTO 800
-1000 IF ( sflag<0 ) THEN
-Sparam(2) = sh11
-Sparam(3) = sh21
-Sparam(4) = sh12
-Sparam(5) = sh22
-ELSEIF ( sflag==0 ) THEN
-Sparam(3) = sh21
-Sparam(4) = sh12
-ELSE
-Sparam(2) = sh11
-Sparam(5) = sh22
-ENDIF
-Sparam(1) = sflag
-99999 END SUBROUTINE SROTMG
+  SELECT CASE(igo)
+    CASE(300)
+      GOTO 300
+    CASE(500)
+      GOTO 500
+    CASE(700)
+      GOTO 700
+    CASE(900)
+      GOTO 900
+  END SELECT
+  !     PROCEDURE..SCALE-CHECK
+  200 CONTINUE
+  IF ( .NOT.Sd1<=rgamsq ) GOTO 400
+  IF ( Sd1==zero ) GOTO 600
+  igo = 300
+  !              FIX-H..
+  GOTO 100
+  300  Sd1 = Sd1*gam**2
+  Sx1 = Sx1/gam
+  sh11 = sh11/gam
+  sh12 = sh12/gam
+  GOTO 200
+  400 CONTINUE
+  IF ( .NOT.Sd1>=gamsq ) GOTO 600
+  igo = 500
+  !              FIX-H..
+  GOTO 100
+  500  Sd1 = Sd1/gam**2
+  Sx1 = Sx1*gam
+  sh11 = sh11*gam
+  sh12 = sh12*gam
+  GOTO 400
+  600 CONTINUE
+  IF ( .NOT.ABS(Sd2)<=rgamsq ) GOTO 800
+  IF ( Sd2==zero ) GOTO 1000
+  igo = 700
+  !              FIX-H..
+  GOTO 100
+  700  Sd2 = Sd2*gam**2
+  sh21 = sh21/gam
+  sh22 = sh22/gam
+  GOTO 600
+  800 CONTINUE
+  IF ( .NOT.ABS(Sd2)>=gamsq ) GOTO 1000
+  igo = 900
+  !              FIX-H..
+  GOTO 100
+  900  Sd2 = Sd2/gam**2
+  sh21 = sh21*gam
+  sh22 = sh22*gam
+  GOTO 800
+  1000 CONTINUE
+  IF ( sflag<0 ) THEN
+    Sparam(2) = sh11
+    Sparam(3) = sh21
+    Sparam(4) = sh12
+    Sparam(5) = sh22
+  ELSEIF ( sflag==0 ) THEN
+    Sparam(3) = sh21
+    Sparam(4) = sh12
+  ELSE
+    Sparam(2) = sh11
+    Sparam(5) = sh22
+  ENDIF
+  Sparam(1) = sflag
+  99999 CONTINUE
+  END SUBROUTINE SROTMG

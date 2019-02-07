@@ -6,10 +6,10 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   IMPLICIT NONE
   !*--SPLPCE7
   !*** Start of declarations inserted by SPAG
-  INTEGER i , ihi , il1 , ilow , ipage , IPLOC , Itbrc , Itlp , iu1 , j , &
-    key , l , Lbm , Lmx , lpg , Mrelas , n20002 , n20012 , n20016 , &
+  INTEGER i, ihi, il1, ilow, ipage, IPLOC, Itbrc, Itlp, iu1, j, &
+    key, l, Lbm, Lmx, lpg, Mrelas, n20002, n20012, n20016, &
     n20023
-  INTEGER n20047 , n20057 , n20061 , Nvars
+  INTEGER n20047, n20057, n20061, Nvars
   REAL SASUM
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPLPCE
@@ -44,11 +44,11 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  SPLPCE
-  INTEGER Ibasis(*) , Imat(*) , Ibrc(Lbm,2) , Ipr(*) , Iwr(*) , Ind(*) , &
+  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), &
     Ibb(*)
-  REAL Amat(*) , Basmat(*) , Csc(*) , Wr(*) , Ww(*) , Primal(*) , Erd(*) , &
-    Erp(*) , Eps , Erdnrm , factor , Gg , one , zero , ten , Tune
-  LOGICAL Singlr , Redbas , trans , pagepl
+  REAL Amat(*), Basmat(*), Csc(*), Wr(*), Ww(*), Primal(*), Erd(*), &
+    Erp(*), Eps, Erdnrm, factor, Gg, one, zero, ten, Tune
+  LOGICAL Singlr, Redbas, trans, pagepl
   !***FIRST EXECUTABLE STATEMENT  SPLPCE
   zero = 0.E0
   one = 1.E0
@@ -125,7 +125,7 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
         DO
           iu1 = MIN(Lmx-2,ihi)
           IF ( il1>iu1 ) EXIT
-          DO i = il1 , iu1
+          DO i = il1, iu1
             Ww(Imat(i)) = Ww(Imat(i)) + Amat(i)*Csc(j)
           ENDDO
           IF ( ihi<=Lmx-2 ) EXIT

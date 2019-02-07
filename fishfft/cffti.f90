@@ -4,7 +4,7 @@ SUBROUTINE CFFTI(N,Wsave)
   IMPLICIT NONE
   !*--CFFTI5
   !*** Start of declarations inserted by SPAG
-  INTEGER iw1 , iw2 , N
+  INTEGER iw1, iw2, N
   REAL Wsave
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CFFTI

@@ -15,7 +15,7 @@ SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   !        * A Practical Guide to Splines *  by C. de Boor
   !
   !  Companion routine to  BNFAC . It returns the solution  X  of the
-  !  linear system  A*X = B  in place of  B , given the LU-factorization
+  !  linear system  A*X = B  in place of  B, given the LU-factorization
   !  for  A  in the work array  W from BNFAC.
   !
   ! *****  I N P U T  ******
@@ -25,7 +25,7 @@ SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   !  B.....Right side of the system to be solved .
   !
   ! *****  O U T P U T  ******
-  !  B.....Contains the solution  X , of order  NROW .
+  !  B.....Contains the solution  X, of order  NROW .
   !
   ! *****  M E T H O D  ******
   !     (With  A = L*U, as stored in  W,) the unit lower triangular system
@@ -43,8 +43,8 @@ SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  BNSLV
   !
-  INTEGER Nbandl , Nbandu , Nrow , Nroww , i , j , jmax , middle , nrowm1
-  REAL W(Nroww,*) , B(*)
+  INTEGER Nbandl, Nbandu, Nrow, Nroww, i, j, jmax, middle, nrowm1
+  REAL W(Nroww,*), B(*)
   !***FIRST EXECUTABLE STATEMENT  BNSLV
   middle = Nbandu + 1
   IF ( Nrow==1 ) THEN
@@ -55,9 +55,9 @@ SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
       !                                 FORWARD PASS
       !            FOR I=1,2,...,NROW-1, SUBTRACT  RIGHT SIDE(I)*(I-TH COLUMN
       !            OF  L )  FROM RIGHT SIDE  (BELOW I-TH ROW) .
-      DO i = 1 , nrowm1
+      DO i = 1, nrowm1
         jmax = MIN(Nbandl,Nrow-i)
-        DO j = 1 , jmax
+        DO j = 1, jmax
           B(i+j) = B(i+j) - B(i)*W(middle+j,i)
         ENDDO
       ENDDO
@@ -71,7 +71,7 @@ SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
       DO
         B(i) = B(i)/W(middle,i)
         jmax = MIN(Nbandu,i-1)
-        DO j = 1 , jmax
+        DO j = 1, jmax
           B(i-j) = B(i-j) - B(i)*W(middle-j,i)
         ENDDO
         i = i - 1
@@ -82,7 +82,7 @@ SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
       ENDDO
     ELSE
       !                                A  IS LOWER TRIANGULAR .
-      DO i = 1 , Nrow
+      DO i = 1, Nrow
         B(i) = B(i)/W(1,i)
       ENDDO
       RETURN

@@ -4,8 +4,8 @@ FUNCTION ERF(X)
   IMPLICIT NONE
   !*--ERF5
   !*** Start of declarations inserted by SPAG
-  REAL CSEVL , ERF , ERFC , erfcs , R1MACH , sqeps , sqrtpi , X , xbig , y
-  INTEGER INITS , nterf
+  REAL CSEVL, ERF, ERFC, erfcs, R1MACH, sqeps, sqrtpi, X, xbig, y
+  INTEGER INITS, nterf
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ERF
   !***PURPOSE  Compute the error function.
@@ -38,7 +38,7 @@ FUNCTION ERF(X)
   DIMENSION erfcs(13)
   LOGICAL first
   EXTERNAL ERFC
-  SAVE erfcs , sqrtpi , nterf , xbig , sqeps , first
+  SAVE erfcs, sqrtpi, nterf, xbig, sqeps, first
   DATA erfcs(1)/ - .049046121234691808E0/
   DATA erfcs(2)/ - .14226120510371364E0/
   DATA erfcs(3)/.010035582187599796E0/
@@ -78,4 +78,5 @@ FUNCTION ERF(X)
   IF ( y>sqeps ) ERF = X*(1.0+CSEVL(2.*X**2-1.,erfcs,nterf))
   RETURN
   !
-  99999 END FUNCTION ERF
+  99999 CONTINUE
+  END FUNCTION ERF

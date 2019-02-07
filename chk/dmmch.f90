@@ -24,23 +24,23 @@ SUBROUTINE DMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
   !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  DMMCH
   !     .. Parameters ..
-  REAL(8) :: ZERO , ONE
+  REAL(8) :: ZERO, ONE
   PARAMETER (ZERO=0.0D0,ONE=1.0D0)
   !     .. Scalar Arguments ..
   LOGICAL Ftl
-  REAL(8) :: Alpha , Beta , Eps , Err
-  INTEGER Kk , Kprint , Lda , Ldb , Ldc , Ldcc , M , N , Nout
+  REAL(8) :: Alpha, Beta, Eps, Err
+  INTEGER Kk, Kprint, Lda, Ldb, Ldc, Ldcc, M, N, Nout
   LOGICAL Mv
-  CHARACTER :: Transa , Transb
+  CHARACTER :: Transa, Transb
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*) , B(Ldb,*) , C(Ldc,*) , Cc(Ldcc,*) , Ct(*) ,&
+  REAL(8) :: A(Lda,*), B(Ldb,*), C(Ldc,*), Cc(Ldcc,*), Ct(*) ,&
     G(*)
   !     .. Local Scalars ..
   REAL(8) :: erri
-  INTEGER i , j , k
-  LOGICAL trana , tranb
+  INTEGER i, j, k
+  LOGICAL trana, tranb
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MAX , SQRT
+  INTRINSIC ABS, MAX, SQRT
   !***FIRST EXECUTABLE STATEMENT  DMMCH
   trana = Transa=='T' .OR. Transa=='C'
   tranb = Transb=='T' .OR. Transb=='C'
@@ -49,42 +49,42 @@ SUBROUTINE DMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
   !     in A, B and C.
   !     Compute gauges in G.
   !
-  DO j = 1 , N
+  DO j = 1, N
     !
-    DO i = 1 , M
+    DO i = 1, M
       Ct(i) = ZERO
       G(i) = ZERO
     ENDDO
     IF ( .NOT.trana.AND..NOT.tranb ) THEN
-      DO k = 1 , Kk
-        DO i = 1 , M
+      DO k = 1, Kk
+        DO i = 1, M
           Ct(i) = Ct(i) + A(i,k)*B(k,j)
           G(i) = G(i) + ABS(A(i,k))*ABS(B(k,j))
         ENDDO
       ENDDO
     ELSEIF ( trana.AND..NOT.tranb ) THEN
-      DO k = 1 , Kk
-        DO i = 1 , M
+      DO k = 1, Kk
+        DO i = 1, M
           Ct(i) = Ct(i) + A(k,i)*B(k,j)
           G(i) = G(i) + ABS(A(k,i))*ABS(B(k,j))
         ENDDO
       ENDDO
     ELSEIF ( .NOT.trana.AND.tranb ) THEN
-      DO k = 1 , Kk
-        DO i = 1 , M
+      DO k = 1, Kk
+        DO i = 1, M
           Ct(i) = Ct(i) + A(i,k)*B(j,k)
           G(i) = G(i) + ABS(A(i,k))*ABS(B(j,k))
         ENDDO
       ENDDO
     ELSEIF ( trana.AND.tranb ) THEN
-      DO k = 1 , Kk
-        DO i = 1 , M
+      DO k = 1, Kk
+        DO i = 1, M
           Ct(i) = Ct(i) + A(k,i)*B(j,k)
           G(i) = G(i) + ABS(A(k,i))*ABS(B(j,k))
         ENDDO
       ENDDO
     ENDIF
-    DO i = 1 , M
+    DO i = 1, M
       Ct(i) = Alpha*Ct(i) + Beta*C(i,j)
       G(i) = ABS(Alpha)*G(i) + ABS(Beta)*ABS(C(i,j))
     ENDDO
@@ -92,7 +92,7 @@ SUBROUTINE DMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
     !        Compute the error ratio for this result.
     !
     Err = ZERO
-    DO i = 1 , M
+    DO i = 1, M
       erri = ABS(Ct(i)-Cc(i,j))/Eps
       IF ( G(i)/=ZERO ) erri = erri/G(i)
       Err = MAX(Err,erri)
@@ -100,11 +100,11 @@ SUBROUTINE DMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
         Ftl = .TRUE.
         IF ( Kprint>=2 ) THEN
           WRITE (Nout,FMT=99001)
-          DO k = 1 , M
+          DO k = 1, M
             IF ( Mv ) THEN
-              WRITE (Nout,FMT=99002) k , Ct(k) , Cc(k,j)
+              WRITE (Nout,FMT=99002) k, Ct(k), Cc(k,j)
             ELSE
-              WRITE (Nout,FMT=99002) k , Cc(k,j) , Ct(k)
+              WRITE (Nout,FMT=99002) k, Cc(k,j), Ct(k)
             ENDIF
           ENDDO
         ENDIF

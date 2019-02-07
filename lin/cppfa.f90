@@ -34,7 +34,7 @@ SUBROUTINE CPPFA(Ap,N,Info)
   !
   !     On Return
   !
-  !        AP      an upper triangular matrix  R , stored in packed
+  !        AP      an upper triangular matrix  R, stored in packed
   !                form, so that  A = CTRANS(R)*R .
   !
   !        INFO    INTEGER
@@ -68,22 +68,22 @@ SUBROUTINE CPPFA(Ap,N,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CPPFA
-  INTEGER N , Info
+  INTEGER N, Info
   COMPLEX Ap(*)
   !
-  COMPLEX CDOTC , t
+  COMPLEX CDOTC, t
   REAL s
-  INTEGER j , jj , jm1 , k , kj , kk
+  INTEGER j, jj, jm1, k, kj, kk
   !***FIRST EXECUTABLE STATEMENT  CPPFA
   jj = 0
-  DO j = 1 , N
+  DO j = 1, N
     Info = j
     s = 0.0E0
     jm1 = j - 1
     kj = jj
     kk = 0
     IF ( jm1>=1 ) THEN
-      DO k = 1 , jm1
+      DO k = 1, jm1
         kj = kj + 1
         t = Ap(kj) - CDOTC(k-1,Ap(kk+1),1,Ap(jj+1),1)
         kk = kk + k
@@ -98,4 +98,5 @@ SUBROUTINE CPPFA(Ap,N,Info)
     Ap(jj) = CMPLX(SQRT(s),0.0E0)
   ENDDO
   Info = 0
-  99999 END SUBROUTINE CPPFA
+  99999 CONTINUE
+  END SUBROUTINE CPPFA

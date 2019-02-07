@@ -4,7 +4,7 @@ SUBROUTINE CDQAGS(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--CDQAGS5
   !*** Start of declarations inserted by SPAG
-  INTEGER ierv , Lun
+  INTEGER ierv, Lun
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CDQAGS
   !***PURPOSE  Quick check for DQAGS.
@@ -24,13 +24,13 @@ SUBROUTINE CDQAGS(Lun,Kprint,Ipass)
   !
   ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
   !
-  REAL(8) :: a , abserr , b , D1MACH , epmach , epsabs , epsrel , &
-    error , exact0 , exact1 , exact2 , exact3 , exact4 , &
-    DF0S , DF1S , DF2S , DF3S , DF4S , DF5S , oflow , &
-    result , uflow , work
-  INTEGER ier , ip , Ipass , iwork , Kprint , last , lenw , limit , neval
-  DIMENSION ierv(5) , iwork(200) , work(800)
-  EXTERNAL DF0S , DF1S , DF2S , DF3S , DF4S , DF5S
+  REAL(8) :: a, abserr, b, D1MACH, epmach, epsabs, epsrel, &
+    error, exact0, exact1, exact2, exact3, exact4, &
+    DF0S, DF1S, DF2S, DF3S, DF4S, DF5S, oflow, &
+    result, uflow, work
+  INTEGER ier, ip, Ipass, iwork, Kprint, last, lenw, limit, neval
+  DIMENSION ierv(5), iwork(200), work(800)
+  EXTERNAL DF0S, DF1S, DF2S, DF3S, DF4S, DF5S
   DATA exact0/0.2D+01/
   DATA exact1/0.115470066904D+01/
   DATA exact2/0.909864525656D-02/

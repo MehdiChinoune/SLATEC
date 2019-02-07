@@ -22,7 +22,7 @@ SUBROUTINE CHKXER(Srnamt,Infot,Nout,Fatal,Kprint)
   !***END PROLOGUE  CHKXER
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  INTEGER Infot , Kprint , Nout
+  INTEGER Infot, Kprint, Nout
   CHARACTER(6) :: Srnamt
   !     .. Local Scalars ..
   INTEGER nerr
@@ -32,7 +32,7 @@ SUBROUTINE CHKXER(Srnamt,Infot,Nout,Fatal,Kprint)
   !***FIRST EXECUTABLE STATEMENT  CHKXER
   IF ( NUMXER(nerr)/=Infot ) THEN
     Fatal = .TRUE.
-    IF ( Kprint>=3 ) WRITE (Nout,FMT=99001) Infot , Srnamt
+    IF ( Kprint>=3 ) WRITE (Nout,FMT=99001) Infot, Srnamt
   ENDIF
   RETURN
   !

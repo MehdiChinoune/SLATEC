@@ -86,8 +86,8 @@ SUBROUTINE RSB(Nm,N,Mb,A,W,Matz,Z,Fv1,Fv2,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RSB
   !
-  INTEGER N , Mb , Nm , Ierr , Matz
-  REAL A(Nm,*) , W(*) , Z(Nm,*) , Fv1(*) , Fv2(*)
+  INTEGER N, Mb, Nm, Ierr, Matz
+  REAL A(Nm,*), W(*), Z(Nm,*), Fv1(*), Fv2(*)
   LOGICAL tf
   !
   !***FIRST EXECUTABLE STATEMENT  RSB

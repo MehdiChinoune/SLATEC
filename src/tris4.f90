@@ -4,8 +4,8 @@ SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
   IMPLICIT NONE
   !*--TRIS45
   !*** Start of declarations inserted by SPAG
-  REAL A , an , B , bn , C , D , den , U , v , Z
-  INTEGER j , k , N , nm1 , nm2
+  REAL A, an, B, bn, C, D, den, U, v, Z
+  INTEGER j, k, N, nm1, nm2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TRIS4
   !***SUBSIDIARY
@@ -18,7 +18,7 @@ SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
   !     This subroutine solves for a non-zero eigenvector corresponding
   !     to the zero eigenvalue of the transpose of the rank
   !     deficient ONE matrix with subdiagonal A, diagonal B, and
-  !     superdiagonal C , with A(1) in the (1,N) position, with
+  !     superdiagonal C, with A(1) in the (1,N) position, with
   !     C(N) in the (N,1) position, AND all other elements zero.
   !
   !***SEE ALSO  SEPX4
@@ -30,14 +30,14 @@ SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  TRIS4
   !
-  DIMENSION A(*) , B(*) , C(*) , D(*) , U(*) , Z(*)
+  DIMENSION A(*), B(*), C(*), D(*), U(*), Z(*)
   !***FIRST EXECUTABLE STATEMENT  TRIS4
   bn = B(N)
   D(1) = A(2)/B(1)
   v = A(1)
   U(1) = C(N)/B(1)
   nm2 = N - 2
-  DO j = 2 , nm2
+  DO j = 2, nm2
     den = B(j) - C(j-1)*D(j-1)
     D(j) = A(j+1)/den
     U(j) = -C(j-1)*U(j-1)/den
@@ -55,7 +55,7 @@ SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
   Z(N) = 1.0
   Z(N-1) = -D(N-1)
   nm1 = N - 1
-  DO j = 2 , nm1
+  DO j = 2, nm1
     k = N - j
     Z(k) = -D(k)*Z(k+1) - U(k)*Z(N)
   ENDDO

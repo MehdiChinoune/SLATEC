@@ -41,7 +41,7 @@ SUBROUTINE CPBFA(Abd,Lda,N,M,Info)
   !
   !     On Return
   !
-  !        ABD     an upper triangular matrix  R , stored in band
+  !        ABD     an upper triangular matrix  R, stored in band
   !                form, so that  A = CTRANS(R)*R .
   !
   !        INFO    INTEGER
@@ -76,21 +76,21 @@ SUBROUTINE CPBFA(Abd,Lda,N,M,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CPBFA
-  INTEGER Lda , N , M , Info
+  INTEGER Lda, N, M, Info
   COMPLEX Abd(Lda,*)
   !
-  COMPLEX CDOTC , t
+  COMPLEX CDOTC, t
   REAL s
-  INTEGER ik , j , jk , k , mu
+  INTEGER ik, j, jk, k, mu
   !***FIRST EXECUTABLE STATEMENT  CPBFA
-  DO j = 1 , N
+  DO j = 1, N
     Info = j
     s = 0.0E0
     ik = M + 1
     jk = MAX(j-M,1)
     mu = MAX(M+2-j,1)
     IF ( M>=mu ) THEN
-      DO k = mu , M
+      DO k = mu, M
         t = Abd(k,j) - CDOTC(k-mu,Abd(ik,jk),1,Abd(mu,j),1)
         t = t/Abd(M+1,jk)
         Abd(k,j) = t
@@ -104,4 +104,5 @@ SUBROUTINE CPBFA(Abd,Lda,N,M,Info)
     Abd(M+1,j) = CMPLX(SQRT(s),0.0E0)
   ENDDO
   Info = 0
-  99999 END SUBROUTINE CPBFA
+  99999 CONTINUE
+  END SUBROUTINE CPBFA

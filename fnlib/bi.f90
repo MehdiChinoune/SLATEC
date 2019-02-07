@@ -4,9 +4,9 @@ FUNCTION BI(X)
   IMPLICIT NONE
   !*--BI5
   !*** Start of declarations inserted by SPAG
-  REAL BI , BIE , bif2cs , bifcs , big2cs , bigcs , CSEVL , eta , R1MACH , &
-    theta , X , x3sml , xm , xmax , z
-  INTEGER INITS , nbif , nbif2 , nbig , nbig2
+  REAL BI, BIE, bif2cs, bifcs, big2cs, bigcs, CSEVL, eta, R1MACH, &
+    theta, X, x3sml, xm, xmax, z
+  INTEGER INITS, nbif, nbif2, nbig, nbig2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BI
   !***PURPOSE  Evaluate the Bairy function (the Airy function of the
@@ -56,10 +56,10 @@ FUNCTION BI(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BI
-  DIMENSION bifcs(9) , bigcs(8) , bif2cs(10) , big2cs(10)
+  DIMENSION bifcs(9), bigcs(8), bif2cs(10), big2cs(10)
   LOGICAL first
-  SAVE bifcs , bigcs , bif2cs , big2cs , nbif , nbig , nbif2 , nbig2 , &
-    x3sml , xmax , first
+  SAVE bifcs, bigcs, bif2cs, big2cs, nbif, nbig, nbif2, nbig2, &
+    x3sml, xmax, first
   DATA bifcs(1)/ - .01673021647198664948E0/
   DATA bifcs(2)/.1025233583424944561E0/
   DATA bifcs(3)/.00170830925073815165E0/
@@ -134,4 +134,5 @@ FUNCTION BI(X)
   BI = 1.125 + CSEVL(z,bif2cs,nbif2) + X*(0.625+CSEVL(z,big2cs,nbig2))
   RETURN
   !
-  99999 END FUNCTION BI
+  99999 CONTINUE
+  END FUNCTION BI

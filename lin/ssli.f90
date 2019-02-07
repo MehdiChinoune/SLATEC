@@ -42,12 +42,12 @@ SUBROUTINE SSLI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  SSLI
   !     .. Scalar Arguments ..
-  INTEGER Isym , N , Nelt
+  INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt) , B(N) , Rwork(*) , X(N)
-  INTEGER Ia(Nelt) , Iwork(10) , Ja(Nelt)
+  REAL A(Nelt), B(N), Rwork(*), X(N)
+  INTEGER Ia(Nelt), Iwork(10), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locel , lociel , locjel , nel
+  INTEGER locel, lociel, locjel, nel
   !     .. External Subroutines ..
   EXTERNAL SSLI2
   !***FIRST EXECUTABLE STATEMENT  SSLI

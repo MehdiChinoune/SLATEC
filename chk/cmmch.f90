@@ -26,25 +26,25 @@ SUBROUTINE CMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
   !     .. Parameters ..
   COMPLEX ZERO
   PARAMETER (ZERO=(0.0,0.0))
-  REAL RZERO , RONE
+  REAL RZERO, RONE
   PARAMETER (RZERO=0.0,RONE=1.0)
   !     .. Scalar Arguments ..
   LOGICAL Ftl
-  COMPLEX Alpha , Beta
-  REAL Eps , Err
-  INTEGER Kk , Kprint , Lda , Ldb , Ldc , Ldcc , M , N , Nout
+  COMPLEX Alpha, Beta
+  REAL Eps, Err
+  INTEGER Kk, Kprint, Lda, Ldb, Ldc, Ldcc, M, N, Nout
   LOGICAL Mv
-  CHARACTER :: Transa , Transb
+  CHARACTER :: Transa, Transb
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*) , B(Ldb,*) , C(Ldc,*) , Cc(Ldcc,*) , Ct(*)
+  COMPLEX A(Lda,*), B(Ldb,*), C(Ldc,*), Cc(Ldcc,*), Ct(*)
   REAL G(*)
   !     .. Local Scalars ..
   COMPLEX cl
   REAL erri
-  INTEGER i , j , k
-  LOGICAL ctrana , ctranb , trana , tranb
+  INTEGER i, j, k
+  LOGICAL ctrana, ctranb, trana, tranb
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , AIMAG , CONJG , MAX , REAL , SQRT
+  INTRINSIC ABS, AIMAG, CONJG, MAX, REAL, SQRT
   REAL CABS1
   !***FIRST EXECUTABLE STATEMENT  CMMCH
   trana = Transa=='T' .OR. Transa=='C'
@@ -56,30 +56,30 @@ SUBROUTINE CMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
   !     in A, B and C.
   !     Compute gauges in G.
   !
-  DO j = 1 , N
+  DO j = 1, N
     !
-    DO i = 1 , M
+    DO i = 1, M
       Ct(i) = ZERO
       G(i) = RZERO
     ENDDO
     IF ( .NOT.trana.AND..NOT.tranb ) THEN
-      DO k = 1 , Kk
-        DO i = 1 , M
+      DO k = 1, Kk
+        DO i = 1, M
           Ct(i) = Ct(i) + A(i,k)*B(k,j)
           G(i) = G(i) + CABS1(A(i,k))*CABS1(B(k,j))
         ENDDO
       ENDDO
     ELSEIF ( trana.AND..NOT.tranb ) THEN
       IF ( ctrana ) THEN
-        DO k = 1 , Kk
-          DO i = 1 , M
+        DO k = 1, Kk
+          DO i = 1, M
             Ct(i) = Ct(i) + CONJG(A(k,i))*B(k,j)
             G(i) = G(i) + CABS1(A(k,i))*CABS1(B(k,j))
           ENDDO
         ENDDO
       ELSE
-        DO k = 1 , Kk
-          DO i = 1 , M
+        DO k = 1, Kk
+          DO i = 1, M
             Ct(i) = Ct(i) + A(k,i)*B(k,j)
             G(i) = G(i) + CABS1(A(k,i))*CABS1(B(k,j))
           ENDDO
@@ -87,15 +87,15 @@ SUBROUTINE CMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
       ENDIF
     ELSEIF ( .NOT.trana.AND.tranb ) THEN
       IF ( ctranb ) THEN
-        DO k = 1 , Kk
-          DO i = 1 , M
+        DO k = 1, Kk
+          DO i = 1, M
             Ct(i) = Ct(i) + A(i,k)*CONJG(B(j,k))
             G(i) = G(i) + CABS1(A(i,k))*CABS1(B(j,k))
           ENDDO
         ENDDO
       ELSE
-        DO k = 1 , Kk
-          DO i = 1 , M
+        DO k = 1, Kk
+          DO i = 1, M
             Ct(i) = Ct(i) + A(i,k)*B(j,k)
             G(i) = G(i) + CABS1(A(i,k))*CABS1(B(j,k))
           ENDDO
@@ -104,37 +104,37 @@ SUBROUTINE CMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
     ELSEIF ( trana.AND.tranb ) THEN
       IF ( ctrana ) THEN
         IF ( ctranb ) THEN
-          DO k = 1 , Kk
-            DO i = 1 , M
+          DO k = 1, Kk
+            DO i = 1, M
               Ct(i) = Ct(i) + CONJG(A(k,i))*CONJG(B(j,k))
               G(i) = G(i) + CABS1(A(k,i))*CABS1(B(j,k))
             ENDDO
           ENDDO
         ELSE
-          DO k = 1 , Kk
-            DO i = 1 , M
+          DO k = 1, Kk
+            DO i = 1, M
               Ct(i) = Ct(i) + CONJG(A(k,i))*B(j,k)
               G(i) = G(i) + CABS1(A(k,i))*CABS1(B(j,k))
             ENDDO
           ENDDO
         ENDIF
       ELSEIF ( ctranb ) THEN
-        DO k = 1 , Kk
-          DO i = 1 , M
+        DO k = 1, Kk
+          DO i = 1, M
             Ct(i) = Ct(i) + A(k,i)*CONJG(B(j,k))
             G(i) = G(i) + CABS1(A(k,i))*CABS1(B(j,k))
           ENDDO
         ENDDO
       ELSE
-        DO k = 1 , Kk
-          DO i = 1 , M
+        DO k = 1, Kk
+          DO i = 1, M
             Ct(i) = Ct(i) + A(k,i)*B(j,k)
             G(i) = G(i) + CABS1(A(k,i))*CABS1(B(j,k))
           ENDDO
         ENDDO
       ENDIF
     ENDIF
-    DO i = 1 , M
+    DO i = 1, M
       Ct(i) = Alpha*Ct(i) + Beta*C(i,j)
       G(i) = CABS1(Alpha)*G(i) + CABS1(Beta)*CABS1(C(i,j))
     ENDDO
@@ -142,7 +142,7 @@ SUBROUTINE CMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
     !        Compute the error ratio for this result.
     !
     Err = ZERO
-    DO i = 1 , M
+    DO i = 1, M
       erri = CABS1(Ct(i)-Cc(i,j))/Eps
       IF ( G(i)/=RZERO ) erri = erri/G(i)
       Err = MAX(Err,erri)
@@ -150,11 +150,11 @@ SUBROUTINE CMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
         Ftl = .TRUE.
         IF ( Kprint>=2 ) THEN
           WRITE (Nout,FMT=99001)
-          DO k = 1 , M
+          DO k = 1, M
             IF ( Mv ) THEN
-              WRITE (Nout,FMT=99002) k , Ct(k) , Cc(k,j)
+              WRITE (Nout,FMT=99002) k, Ct(k), Cc(k,j)
             ELSE
-              WRITE (Nout,FMT=99002) k , Cc(k,j) , Ct(k)
+              WRITE (Nout,FMT=99002) k, Cc(k,j), Ct(k)
             ENDIF
           ENDDO
         ENDIF

@@ -5,14 +5,14 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   IMPLICIT NONE
   !*--SOSEQS6
   !*** Start of declarations inserted by SPAG
-  REAL Atolx , B , C , csv , f , Fac , fact , fdif , Fmax , fmin , fmxs , &
-    fn1 , fn2 , FNC , fp , h , hx , P , pmax , R1MACH
-  REAL re , Rtolx , S , sruro , Temp , test , Tolf , uro , X , xnorm , Y , &
-    yj , yn1 , yn2 , yn3 , ynorm , yns , zero
-  INTEGER I1MACH , ic , icr , Iflag , Iprint , Is , isj , isv , it , item , &
-    itry , j , jk , js , k , kd , kj , kk , km1 , kn
-  INTEGER ksv , l , loun , ls , m , mit , mm , Mxit , N , Nc , Ncjs , np1 , &
-    Nsri , Nsrrc
+  REAL Atolx, B, C, csv, f, Fac, fact, fdif, Fmax, fmin, fmxs, &
+    fn1, fn2, FNC, fp, h, hx, P, pmax, R1MACH
+  REAL re, Rtolx, S, sruro, Temp, test, Tolf, uro, X, xnorm, Y, &
+    yj, yn1, yn2, yn3, ynorm, yns, zero
+  INTEGER I1MACH, ic, icr, Iflag, Iprint, Is, isj, isv, it, item, &
+    itry, j, jk, js, k, kd, kj, kk, km1, kn
+  INTEGER ksv, l, loun, ls, m, mit, mm, Mxit, N, Nc, Ncjs, np1, &
+    Nsri, Nsrrc
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SOSEQS
   !***SUBSIDIARY
@@ -103,7 +103,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !***END PROLOGUE  SOSEQS
   !
   !
-  DIMENSION S(*) , C(Nc) , B(*) , Is(*) , P(*) , Temp(*) , X(*) , Y(*) , &
+  DIMENSION S(*), C(Nc), B(*), Is(*), P(*), Temp(*), X(*), Y(*), &
     Fac(*)
   !
   !***FIRST EXECUTABLE STATEMENT  SOSEQS
@@ -130,7 +130,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !     INITIALIZE THE INTERCHANGE (PIVOTING) VECTOR AND
   !     SAVE THE CURRENT SOLUTION APPROXIMATION FOR FUTURE USE.
   !
-  DO k = 1 , N
+  DO k = 1, N
     Is(k) = k
     X(k) = S(k)
     Temp(k) = X(k)
@@ -141,9 +141,9 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !    **** BEGIN PRINCIPAL ITERATION LOOP  ****
   !    *****************************************
   !
-  DO m = 1 , Mxit
+  DO m = 1, Mxit
     !
-    DO k = 1 , N
+    DO k = 1, N
       Fac(k) = sruro
     ENDDO
     DO
@@ -157,7 +157,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       !    ******** TRIANGULAR MATRIX APPROXIMATING THE FORWARD
       !    ******** TRIANGULARIZATION OF THE FULL JACOBIAN MATRIX
       !
-      DO k = 1 , N
+      DO k = 1, N
         km1 = k - 1
         !
         !     BACK-SOLVE A TRIANGULAR LINEAR SYSTEM OBTAINING
@@ -167,7 +167,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
         !
         IF ( km1/=0 ) THEN
           CALL SOSSOL(k,N,km1,Y,C,B,kn)
-          DO j = 1 , km1
+          DO j = 1, km1
             js = Is(j)
             X(js) = Temp(js) + Y(j)
           ENDDO
@@ -192,7 +192,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
           !     COMPUTE PARTIAL DERIVATIVES THAT ARE REQUIRED IN THE LINEARIZATION
           !     OF THE K-TH REDUCED EQUATION
           !
-          DO j = k , N
+          DO j = k, N
             item = Is(j)
             hx = X(item)
             h = Fac(item)*hx
@@ -201,7 +201,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             IF ( km1/=0 ) THEN
               Y(j) = h
               CALL SOSSOL(k,N,j,Y,C,B,kn)
-              DO l = 1 , km1
+              DO l = 1, km1
                 ls = Is(l)
                 X(ls) = Temp(ls) + Y(l)
               ENDDO
@@ -222,7 +222,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             !     ARE EFFECTIVELY ZERO.TRY LARGER PERTURBATIONS OF THE
             !     INDEPENDENT VARIABLES.
             !
-            DO j = k , N
+            DO j = k, N
               isj = Is(j)
               fact = 100.*Fac(isj)
               IF ( fact>1.E+10 ) GOTO 300
@@ -236,7 +236,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             !     ELEMENT
             !
             pmax = 0.
-            DO j = k , N
+            DO j = k, N
               test = ABS(P(j))
               IF ( test>pmax ) THEN
                 pmax = test
@@ -251,7 +251,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
             !
             pmax = P(isv)
             kk = kn
-            DO j = k , N
+            DO j = k, N
               IF ( j/=isv ) C(kk) = -P(j)/pmax
               kk = kk + 1
             ENDDO
@@ -269,7 +269,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
               !
               kd = isv - k
               kj = k
-              DO j = 1 , k
+              DO j = 1, k
                 csv = C(kj)
                 jk = kj + kd
                 C(kj) = C(jk)
@@ -301,7 +301,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       IF ( N>1 ) CALL SOSSOL(N,N,N,Y,C,B,kn)
       xnorm = 0.
       ynorm = 0.
-      DO j = 1 , N
+      DO j = 1, N
         yj = Y(j)
         ynorm = MAX(ynorm,ABS(yj))
         js = Is(j)
@@ -314,7 +314,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       !
       IF ( Iprint==(-1) ) THEN
         mm = m - 1
-        WRITE (loun,99001) Fmax , mm , (X(j),j=1,N)
+        WRITE (loun,99001) Fmax, mm, (X(j),j=1,N)
         99001       FORMAT ('0RESIDUAL NORM =',E9.2,/1X,'SOLUTION ITERATE',' (',I3,')',&
           /(1X,5E26.14))
       ENDIF
@@ -322,123 +322,126 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       !     TEST FOR CONVERGENCE TO A SOLUTION (RELATIVE AND/OR ABSOLUTE ERROR
       !     COMPARISON ON SUCCESSIVE APPROXIMATIONS OF EACH SOLUTION VARIABLE)
       !
-      DO j = 1 , N
+      DO j = 1, N
         js = Is(j)
         IF ( ABS(Y(j))>re*ABS(X(js))+Atolx ) GOTO 100
       ENDDO
       IF ( Fmax<=fmxs ) Iflag = 1
       EXIT
-      50     ENDDO
+      50 CONTINUE
+    ENDDO
+    !
+    !     TEST FOR CONVERGENCE TO A SOLUTION BASED ON RESIDUALS
+    !
+    100    IF ( Fmax<=Tolf ) Iflag = Iflag + 2
+    IF ( Iflag>0 ) GOTO 200
+    !
+    !
+    IF ( m>1 ) THEN
       !
-      !     TEST FOR CONVERGENCE TO A SOLUTION BASED ON RESIDUALS
+      !     SAVE SOLUTION HAVING MINIMUM RESIDUAL NORM.
       !
-      100    IF ( Fmax<=Tolf ) Iflag = Iflag + 2
-      IF ( Iflag>0 ) GOTO 200
+      IF ( Fmax<fmin ) THEN
+        mit = m + 1
+        yn1 = ynorm
+        yn2 = yns
+        fn1 = fmxs
+        fmin = Fmax
+        DO j = 1, N
+          S(j) = X(j)
+        ENDDO
+        ic = 0
+      ENDIF
       !
+      !     TEST FOR LIMITING PRECISION CONVERGENCE.  VERY SLOWLY CONVERGENT
+      !     PROBLEMS MAY ALSO BE DETECTED.
       !
-      IF ( m>1 ) THEN
-        !
-        !     SAVE SOLUTION HAVING MINIMUM RESIDUAL NORM.
-        !
-        IF ( Fmax<fmin ) THEN
-          mit = m + 1
-          yn1 = ynorm
-          yn2 = yns
-          fn1 = fmxs
-          fmin = Fmax
-          DO j = 1 , N
-            S(j) = X(j)
-          ENDDO
-          ic = 0
-        ENDIF
-        !
-        !     TEST FOR LIMITING PRECISION CONVERGENCE.  VERY SLOWLY CONVERGENT
-        !     PROBLEMS MAY ALSO BE DETECTED.
-        !
-        IF ( ynorm<=sruro*xnorm ) THEN
-          IF ( (Fmax>=0.2*fmxs).AND.(Fmax<=5.*fmxs) ) THEN
-            IF ( (ynorm>=0.2*yns).AND.(ynorm<=5.*yns) ) THEN
-              icr = icr + 1
-              IF ( icr<Nsrrc ) THEN
-                ic = 0
-                GOTO 150
-              ELSE
-                Iflag = 4
-                Fmax = fmin
-                GOTO 400
-              ENDIF
+      IF ( ynorm<=sruro*xnorm ) THEN
+        IF ( (Fmax>=0.2*fmxs).AND.(Fmax<=5.*fmxs) ) THEN
+          IF ( (ynorm>=0.2*yns).AND.(ynorm<=5.*yns) ) THEN
+            icr = icr + 1
+            IF ( icr<Nsrrc ) THEN
+              ic = 0
+              GOTO 150
+            ELSE
+              Iflag = 4
+              Fmax = fmin
+              GOTO 400
             ENDIF
           ENDIF
         ENDIF
-        icr = 0
-        !
-        !     TEST FOR DIVERGENCE OF THE ITERATIVE SCHEME.
-        !
-        IF ( (ynorm<=2.*yns).AND.(Fmax<=2.*fmxs) ) THEN
-          ic = 0
-        ELSE
-          ic = ic + 1
-          IF ( ic>=Nsri ) THEN
-            Iflag = 7
-            GOTO 200
-          ENDIF
-        ENDIF
+      ENDIF
+      icr = 0
+      !
+      !     TEST FOR DIVERGENCE OF THE ITERATIVE SCHEME.
+      !
+      IF ( (ynorm<=2.*yns).AND.(Fmax<=2.*fmxs) ) THEN
+        ic = 0
       ELSE
-        fmin = Fmax
+        ic = ic + 1
+        IF ( ic>=Nsri ) THEN
+          Iflag = 7
+          GOTO 200
+        ENDIF
       ENDIF
-      !
-      !     CHECK TO SEE IF NEXT ITERATION CAN USE THE OLD JACOBIAN
-      !     FACTORIZATION
-      !
-      150    itry = itry - 1
-      IF ( itry==0 ) THEN
-        itry = Ncjs
-      ELSEIF ( 20.*ynorm>xnorm ) THEN
-        itry = Ncjs
-      ELSEIF ( ynorm>2.*yns ) THEN
-        itry = Ncjs
-      ELSEIF ( Fmax>=2.*fmxs ) THEN
-        itry = Ncjs
-      ENDIF
-      !
-      !     SAVE THE CURRENT SOLUTION APPROXIMATION AND THE RESIDUAL AND
-      !     SOLUTION INCREMENT NORMS FOR USE IN THE NEXT ITERATION.
-      !
-      DO j = 1 , N
-        Temp(j) = X(j)
-      ENDDO
-      IF ( m==mit ) THEN
-        fn2 = Fmax
-        yn3 = ynorm
-      ENDIF
-      fmxs = Fmax
-      yns = ynorm
-      !
-      !
+    ELSE
+      fmin = Fmax
+    ENDIF
+    !
+    !     CHECK TO SEE IF NEXT ITERATION CAN USE THE OLD JACOBIAN
+    !     FACTORIZATION
+    !
+    150    itry = itry - 1
+    IF ( itry==0 ) THEN
+      itry = Ncjs
+    ELSEIF ( 20.*ynorm>xnorm ) THEN
+      itry = Ncjs
+    ELSEIF ( ynorm>2.*yns ) THEN
+      itry = Ncjs
+    ELSEIF ( Fmax>=2.*fmxs ) THEN
+      itry = Ncjs
+    ENDIF
+    !
+    !     SAVE THE CURRENT SOLUTION APPROXIMATION AND THE RESIDUAL AND
+    !     SOLUTION INCREMENT NORMS FOR USE IN THE NEXT ITERATION.
+    !
+    DO j = 1, N
+      Temp(j) = X(j)
     ENDDO
-    !
-    !    *****************************************
-    !    **** END OF PRINCIPAL ITERATION LOOP ****
-    !    *****************************************
-    !
-    !
-    !     TOO MANY ITERATIONS, CONVERGENCE WAS NOT ACHIEVED.
-    m = Mxit
-    Iflag = 5
-    IF ( yn1>10.0*yn2.OR.yn3>10.0*yn1 ) Iflag = 6
-    IF ( fn1>5.0*fmin.OR.fn2>5.0*fmin ) Iflag = 6
-    IF ( Fmax>5.0*fmin ) Iflag = 6
+    IF ( m==mit ) THEN
+      fn2 = Fmax
+      yn3 = ynorm
+    ENDIF
+    fmxs = Fmax
+    yns = ynorm
     !
     !
-    200  DO j = 1 , N
+  ENDDO
+  !
+  !    *****************************************
+  !    **** END OF PRINCIPAL ITERATION LOOP ****
+  !    *****************************************
+  !
+  !
+  !     TOO MANY ITERATIONS, CONVERGENCE WAS NOT ACHIEVED.
+  m = Mxit
+  Iflag = 5
+  IF ( yn1>10.0*yn2.OR.yn3>10.0*yn1 ) Iflag = 6
+  IF ( fn1>5.0*fmin.OR.fn2>5.0*fmin ) Iflag = 6
+  IF ( Fmax>5.0*fmin ) Iflag = 6
+  !
+  !
+  200 CONTINUE
+  DO j = 1, N
     S(j) = X(j)
   ENDDO
   GOTO 400
   !
   !
   !     A JACOBIAN-RELATED MATRIX IS EFFECTIVELY SINGULAR.
-  300  Iflag = 8
-  DO j = 1 , N
+  300 CONTINUE
+  IFlag = 8
+  DO j = 1, N
     S(j) = Temp(j)
   ENDDO
   !

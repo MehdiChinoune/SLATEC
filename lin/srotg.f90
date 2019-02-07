@@ -4,7 +4,7 @@ SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
   IMPLICIT NONE
   !*--SROTG5
   !*** Start of declarations inserted by SPAG
-  REAL r , Sa , Sb , Sc , Ss , u , v
+  REAL r, Sa, Sb, Sc, Ss, u, v
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SROTG
   !***PURPOSE  Construct a plane Givens rotation.
@@ -35,7 +35,7 @@ SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
   !     Construct the Givens transformation
   !
   !         ( SC  SS )
-  !     G = (        ) ,    SC**2 + SS**2 = 1 ,
+  !     G = (        ),    SC**2 + SS**2 = 1 ,
   !         (-SS  SC )
   !
   !     which zeros the second entry of the 2-vector  (SA,SB)**T.
@@ -112,4 +112,5 @@ SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
   Sb = 1.0E0
   RETURN
   !
-  99999 END SUBROUTINE SROTG
+  99999 CONTINUE
+  END SUBROUTINE SROTG

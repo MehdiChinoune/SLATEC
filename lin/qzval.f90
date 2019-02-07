@@ -99,14 +99,14 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  QZVAL
   !
-  INTEGER i , j , N , en , na , Nm , nn , isw
-  REAL A(Nm,*) , B(Nm,*) , Alfr(*) , Alfi(*) , Beta(*) , Z(Nm,*)
-  REAL c , d , e , r , s , t , an , a1 , a2 , bn , cq , cz , di , dr , ei , &
-    ti , tr
-  REAL u1 , u2 , v1 , v2 , a1i , a11 , a12 , a2i , a21 , a22 , b11 , b12 , &
+  INTEGER i, j, N, en, na, Nm, nn, isw
+  REAL A(Nm,*), B(Nm,*), Alfr(*), Alfi(*), Beta(*), Z(Nm,*)
+  REAL c, d, e, r, s, t, an, a1, a2, bn, cq, cz, di, dr, ei, &
+    ti, tr
+  REAL u1, u2, v1, v2, a1i, a11, a12, a2i, a21, a22, b11, b12, &
     b22
-  REAL sqi , sqr , ssi , ssr , szi , szr , a11i , a11r , a12i , a12r
-  REAL a22i , a22r , epsb
+  REAL sqi, sqr, ssi, ssr, szi, szr, a11i, a11r, a12i, a12r
+  REAL a22i, a22r, epsb
   LOGICAL Matz
   !
   !***FIRST EXECUTABLE STATEMENT  QZVAL
@@ -114,7 +114,7 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
   isw = 1
   !     .......... FIND EIGENVALUES OF QUASI-TRIANGULAR MATRICES.
   !                FOR EN=N STEP -1 UNTIL 1 DO -- ..........
-  DO nn = 1 , N
+  DO nn = 1, N
     en = N + 1 - nn
     na = en - 1
     IF ( isw==2 ) GOTO 250
@@ -264,7 +264,7 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
     v2 = -u2/r
     u2 = v2/v1
     !
-    DO i = 1 , en
+    DO i = 1, en
       t = A(i,en) + u2*A(i,na)
       A(i,en) = A(i,en) + t*v1
       A(i,na) = A(i,na) + t*v2
@@ -275,7 +275,7 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
     !
     IF ( Matz ) THEN
       !
-      DO i = 1 , N
+      DO i = 1, N
         t = Z(i,en) + u2*Z(i,na)
         Z(i,en) = Z(i,en) + t*v1
         Z(i,na) = Z(i,na) + t*v2
@@ -300,7 +300,7 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
       v2 = -u2/r
       u2 = v2/v1
       !
-      DO j = na , N
+      DO j = na, N
         t = A(na,j) + u2*A(en,j)
         A(na,j) = A(na,j) + t*v1
         A(en,j) = A(en,j) + t*v2

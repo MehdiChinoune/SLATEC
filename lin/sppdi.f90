@@ -62,13 +62,13 @@ SUBROUTINE SPPDI(Ap,N,Det,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SPPDI
-  INTEGER N , Job
+  INTEGER N, Job
   REAL Ap(*)
   REAL Det(2)
   !
   REAL t
   REAL s
-  INTEGER i , ii , j , jj , jm1 , j1 , k , kj , kk , kp1 , k1
+  INTEGER i, ii, j, jj, jm1, j1, k, kj, kk, kp1, k1
   !***FIRST EXECUTABLE STATEMENT  SPPDI
   !
   !     COMPUTE DETERMINANT
@@ -78,7 +78,7 @@ SUBROUTINE SPPDI(Ap,N,Det,Job)
     Det(2) = 0.0E0
     s = 10.0E0
     ii = 0
-    DO i = 1 , N
+    DO i = 1, N
       ii = ii + i
       Det(1) = Ap(ii)**2*Det(1)
       IF ( Det(1)==0.0E0 ) EXIT
@@ -97,7 +97,7 @@ SUBROUTINE SPPDI(Ap,N,Det,Job)
   !
   IF ( MOD(Job,10)/=0 ) THEN
     kk = 0
-    DO k = 1 , N
+    DO k = 1, N
       k1 = kk + 1
       kk = kk + k
       Ap(kk) = 1.0E0/Ap(kk)
@@ -107,7 +107,7 @@ SUBROUTINE SPPDI(Ap,N,Det,Job)
       j1 = kk + 1
       kj = kk + k
       IF ( N>=kp1 ) THEN
-        DO j = kp1 , N
+        DO j = kp1, N
           t = Ap(kj)
           Ap(kj) = 0.0E0
           CALL SAXPY(k,t,Ap(k1),1,Ap(j1),1)
@@ -120,14 +120,14 @@ SUBROUTINE SPPDI(Ap,N,Det,Job)
     !        FORM  INVERSE(R) * TRANS(INVERSE(R))
     !
     jj = 0
-    DO j = 1 , N
+    DO j = 1, N
       j1 = jj + 1
       jj = jj + j
       jm1 = j - 1
       k1 = 1
       kj = j1
       IF ( jm1>=1 ) THEN
-        DO k = 1 , jm1
+        DO k = 1, jm1
           t = Ap(kj)
           CALL SAXPY(k,t,Ap(j1),1,Ap(k1),1)
           k1 = k1 + k

@@ -23,10 +23,10 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
   !***END PROLOGUE  DCFOD
   !
   !
-  INTEGER i , ib , Meth , nq , nqm1 , nqp1
-  REAL(8) :: agamq , Elco , fnq , fnqm1 , pc , pint , ragq , rq1fac , &
-    rqfac , Tesco , tsign , xpin
-  DIMENSION Elco(13,12) , Tesco(3,12)
+  INTEGER i, ib, Meth, nq, nqm1, nqp1
+  REAL(8) :: agamq, Elco, fnq, fnqm1, pc, pint, ragq, rq1fac, &
+    rqfac, Tesco, tsign, xpin
+  DIMENSION Elco(13,12), Tesco(3,12)
   !     ------------------------------------------------------------------
   !      DCFOD  IS CALLED BY THE INTEGRATOR ROUTINE TO SET COEFFICIENTS
   !      NEEDED THERE.  THE COEFFICIENTS FOR THE CURRENT METHOD, AS
@@ -60,7 +60,7 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
     !
     pc(1) = 1.0D0
     rq1fac = 1.0D0
-    DO nq = 1 , 5
+    DO nq = 1, 5
       !           ------------------------------------------------------------
       !            THE PC ARRAY WILL CONTAIN THE COEFFICIENTS OF THE
       !                POLYNOMIAL P(X) = (X+1)*(X+2)*...*(X+NQ).
@@ -71,14 +71,14 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
       !           FORM COEFFICIENTS OF P(X)*(X+NQ).
       !           ------------------------------------
       pc(nqp1) = 0.0D0
-      DO ib = 1 , nq
+      DO ib = 1, nq
         i = nq + 2 - ib
         pc(i) = pc(i-1) + fnq*pc(i)
       ENDDO
       pc(1) = fnq*pc(1)
       !           STORE COEFFICIENTS IN ELCO AND TESCO.
       !           --------------------------------
-      DO i = 1 , nqp1
+      DO i = 1, nqp1
         Elco(i,nq) = pc(i)/pc(2)
       ENDDO
       Elco(2,nq) = 1.0D0
@@ -97,7 +97,7 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
     Tesco(3,12) = 0.0D0
     pc(1) = 1.0D0
     rqfac = 1.0D0
-    DO nq = 2 , 12
+    DO nq = 2, 12
       !           ------------------------------------------------------------
       !            THE PC ARRAY WILL CONTAIN THE COEFFICIENTS OF THE
       !                POLYNOMIAL P(X) = (X+1)*(X+2)*...*(X+NQ-1).
@@ -111,7 +111,7 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
       !           FORM COEFFICIENTS OF P(X)*(X+NQ-1).
       !           ----------------------------------
       pc(nq) = 0.0D0
-      DO ib = 1 , nqm1
+      DO ib = 1, nqm1
         i = nqp1 - ib
         pc(i) = pc(i-1) + fnqm1*pc(i)
       ENDDO
@@ -121,7 +121,7 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
       pint = pc(1)
       xpin = pc(1)/2.0D0
       tsign = 1.0D0
-      DO i = 2 , nq
+      DO i = 2, nq
         tsign = -tsign
         pint = pint + tsign*pc(i)/i
         xpin = xpin + tsign*pc(i)/(i+1)
@@ -130,7 +130,7 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
       !           --------------------------------
       Elco(1,nq) = pint*rq1fac
       Elco(2,nq) = 1.0D0
-      DO i = 2 , nq
+      DO i = 2, nq
         Elco(i+1,nq) = rq1fac*pc(i)/i
       ENDDO
       agamq = rqfac*xpin

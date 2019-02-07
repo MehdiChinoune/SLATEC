@@ -105,23 +105,23 @@ SUBROUTINE CHER2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !***END PROLOGUE  CHER2
   !     .. Scalar Arguments ..
   COMPLEX Alpha
-  INTEGER Incx , Incy , Lda , N
+  INTEGER Incx, Incy, Lda, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*) , X(*) , Y(*)
+  COMPLEX A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
   COMPLEX ZERO
   PARAMETER (ZERO=(0.0E+0,0.0E+0))
   !     .. Local Scalars ..
-  COMPLEX temp1 , temp2
-  INTEGER i , info , ix , iy , j , jx , jy , kx , ky
+  COMPLEX temp1, temp2
+  INTEGER i, info, ix, iy, j, jx, jy, kx, ky
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
-  INTRINSIC CONJG , MAX , REAL
+  INTRINSIC CONJG, MAX, REAL
   !***FIRST EXECUTABLE STATEMENT  CHER2
   !
   !     Test the input parameters.
@@ -174,11 +174,11 @@ SUBROUTINE CHER2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
     !        Form  A  when A is stored in the upper triangle.
     !
     IF ( (Incx==1).AND.(Incy==1) ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( (X(j)/=ZERO).OR.(Y(j)/=ZERO) ) THEN
           temp1 = Alpha*CONJG(Y(j))
           temp2 = CONJG(Alpha*X(j))
-          DO i = 1 , j - 1
+          DO i = 1, j - 1
             A(i,j) = A(i,j) + X(i)*temp1 + Y(i)*temp2
           ENDDO
           A(j,j) = REAL(A(j,j)) + REAL(X(j)*temp1+Y(j)*temp2)
@@ -187,13 +187,13 @@ SUBROUTINE CHER2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
         ENDIF
       ENDDO
     ELSE
-      DO j = 1 , N
+      DO j = 1, N
         IF ( (X(jx)/=ZERO).OR.(Y(jy)/=ZERO) ) THEN
           temp1 = Alpha*CONJG(Y(jy))
           temp2 = CONJG(Alpha*X(jx))
           ix = kx
           iy = ky
-          DO i = 1 , j - 1
+          DO i = 1, j - 1
             A(i,j) = A(i,j) + X(ix)*temp1 + Y(iy)*temp2
             ix = ix + Incx
             iy = iy + Incy
@@ -210,12 +210,12 @@ SUBROUTINE CHER2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
     !        Form  A  when A is stored in the lower triangle.
     !
   ELSEIF ( (Incx==1).AND.(Incy==1) ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       IF ( (X(j)/=ZERO).OR.(Y(j)/=ZERO) ) THEN
         temp1 = Alpha*CONJG(Y(j))
         temp2 = CONJG(Alpha*X(j))
         A(j,j) = REAL(A(j,j)) + REAL(X(j)*temp1+Y(j)*temp2)
-        DO i = j + 1 , N
+        DO i = j + 1, N
           A(i,j) = A(i,j) + X(i)*temp1 + Y(i)*temp2
         ENDDO
       ELSE
@@ -223,14 +223,14 @@ SUBROUTINE CHER2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
       ENDIF
     ENDDO
   ELSE
-    DO j = 1 , N
+    DO j = 1, N
       IF ( (X(jx)/=ZERO).OR.(Y(jy)/=ZERO) ) THEN
         temp1 = Alpha*CONJG(Y(jy))
         temp2 = CONJG(Alpha*X(jx))
         A(j,j) = REAL(A(j,j)) + REAL(X(jx)*temp1+Y(jy)*temp2)
         ix = jx
         iy = jy
-        DO i = j + 1 , N
+        DO i = j + 1, N
           ix = ix + Incx
           iy = iy + Incy
           A(i,j) = A(i,j) + X(ix)*temp1 + Y(iy)*temp2

@@ -27,7 +27,7 @@ REAL(8) FUNCTION DCOSDG(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DCOSDG
-  REAL(8) :: X , raddeg
+  REAL(8) :: X, raddeg
   SAVE raddeg
   DATA raddeg/0.017453292519943295769236907684886D0/
   !***FIRST EXECUTABLE STATEMENT  DCOSDG

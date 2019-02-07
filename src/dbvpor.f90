@@ -133,28 +133,28 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !***END PROLOGUE  DBVPOR
   !
   REAL(8) :: DDOT
-  INTEGER i , i1 , i2 , ic , ICOco , Iflag , IGOfx , INDpvt , INFo , &
-    INHomo , INTeg , ira , isflg , ISTkop , IVP , j , k , KNSwot , &
-    kod , KOP , kpts , kwc , kwd , kws , kwt , l , LOTjp , m , &
-    MNSwot , Mxnon , MXNond , n , Ncomp , ncomp2 , NCOmpd , NDIsk , &
-    ndw , NEQ , NEQivp , Nfc , Nfcc , NFCcd , NFCd , nfcp1 , nfcp2 , &
-    Nic , NICd , Niv , nn , non , NOPg , NPS , Nrowa , Nrowb , Nrowy , &
-    NSWot , NTApe , Ntp , NTPd , NUMort , Nxpts , NXPtsd , Ip(Nfcc,*)&
+  INTEGER i, i1, i2, ic, ICOco, Iflag, IGOfx, INDpvt, INFo, &
+    INHomo, INTeg, ira, isflg, ISTkop, IVP, j, k, KNSwot, &
+    kod, KOP, kpts, kwc, kwd, kws, kwt, l, LOTjp, m, &
+    MNSwot, Mxnon, MXNond, n, Ncomp, ncomp2, NCOmpd, NDIsk, &
+    ndw, NEQ, NEQivp, Nfc, Nfcc, NFCcd, NFCd, nfcp1, nfcp2, &
+    Nic, NICd, Niv, nn, non, NOPg, NPS, Nrowa, Nrowb, Nrowy, &
+    NSWot, NTApe, Ntp, NTPd, NUMort, Nxpts, NXPtsd, Ip(Nfcc,*)&
     , Iwork(*)
-  REAL(8) :: A(Nrowa,*) , AE , Alpha(*) , B(Nrowb,*) , Beta(*) , C , &
-    Coef(*) , G(*) , P(Ntp,*) , PWCnd , PX , RE , S(*) , &
-    Stowa(*) , TND , TOL , U(Ncomp,Nfc,*) , V(Ncomp,*) , &
-    W(Nfcc,*) , Work(*) , X , XBEg , XENd , XOP , XOT , &
-    Xpts(*) , XSAv , Y(Nrowy,*) , Yhp(Ncomp,*) , Z(*)
+  REAL(8) :: A(Nrowa,*), AE, Alpha(*), B(Nrowb,*), Beta(*), C, &
+    Coef(*), G(*), P(Ntp,*), PWCnd, PX, RE, S(*), &
+    Stowa(*), TND, TOL, U(Ncomp,Nfc,*), V(Ncomp,*), &
+    W(Nfcc,*), Work(*), X, XBEg, XENd, XOP, XOT, &
+    Xpts(*), XSAv, Y(Nrowy,*), Yhp(Ncomp,*), Z(*)
   !
   !     ******************************************************************
   !
-  COMMON /DML8SZ/ C , XSAv , IGOfx , INHomo , IVP , NCOmpd , NFCd
-  COMMON /DML15T/ PX , PWCnd , TND , X , XBEg , XENd , XOT , XOP , INFo(15)&
-    , ISTkop , KNSwot , KOP , LOTjp , MNSwot , NSWot
-  COMMON /DML18J/ AE , RE , TOL , NXPtsd , NICd , NOPg , MXNond , NDIsk , &
-    NTApe , NEQ , INDpvt , INTeg , NPS , NTPd , NEQivp , &
-    NUMort , NFCcd , ICOco
+  COMMON /DML8SZ/ C, XSAv, IGOfx, INHomo, IVP, NCOmpd, NFCd
+  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
+    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
+  COMMON /DML18J/ AE, RE, TOL, NXPtsd, NICd, NOPg, MXNond, NDIsk, &
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTPd, NEQivp, &
+    NUMort, NFCcd, ICOco
   !
   !      *****************************************************************
   !
@@ -198,7 +198,7 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
         NEQ = NEQ + NEQivp
         nfcp2 = nfcp1
         IF ( INHomo==1 ) nfcp2 = nfcp1 + 1
-        DO k = 1 , NEQivp
+        DO k = 1, NEQivp
           Yhp(k,nfcp2) = Alpha(Nic+k)
         ENDDO
       ENDIF
@@ -259,7 +259,7 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
         ncomp2 = Ncomp/2
         ic = 1
         IF ( Nfc/=Nfcc ) ic = 2
-        DO j = 1 , Nxpts
+        DO j = 1, Nxpts
           kpts = Nxpts - j + 1
           kod = kpts
           IF ( NDIsk==1 ) kod = 1
@@ -273,7 +273,7 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
             IF ( NDIsk/=0 ) THEN
               non = 1
               BACKSPACE NTApe
-              READ (NTApe) (Ip(i,1),i=1,Nfcc) , (P(i,1),i=1,Ntp)
+              READ (NTApe) (Ip(i,1),i=1,Nfcc), (P(i,1),i=1,Ntp)
               BACKSPACE NTApe
             ENDIF
             IF ( INHomo==1 ) THEN
@@ -282,15 +282,15 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                 READ (NTApe) (W(i,1),i=1,Nfcc)
                 BACKSPACE NTApe
               ENDIF
-              DO n = 1 , Nfcc
+              DO n = 1, Nfcc
                 Coef(n) = Coef(n) - W(n,non)
               ENDDO
             ENDIF
             CALL DBKSOL(Nfcc,P(1,non),Coef)
-            DO m = 1 , Nfcc
+            DO m = 1, Nfcc
               Work(m) = Coef(m)
             ENDDO
-            DO m = 1 , Nfcc
+            DO m = 1, Nfcc
               l = Ip(m,non)
               Coef(l) = Work(m)
             ENDDO
@@ -298,14 +298,14 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
           ENDDO
           IF ( NDIsk/=0 ) THEN
             BACKSPACE NTApe
-            READ (NTApe) (V(i,1),i=1,Ncomp) , ((U(i,m,1),i=1,Ncomp),m=1,Nfc)
+            READ (NTApe) (V(i,1),i=1,Ncomp), ((U(i,m,1),i=1,Ncomp),m=1,Nfc)
             BACKSPACE NTApe
           ENDIF
-          DO n = 1 , Ncomp
+          DO n = 1, Ncomp
             Y(n,kpts) = V(n,kod) + DDOT(Nfc,U(n,1,kod),Ncomp,Coef,ic)
           ENDDO
           IF ( Nfc/=Nfcc ) THEN
-            DO n = 1 , ncomp2
+            DO n = 1, ncomp2
               nn = ncomp2 + n
               Y(n,kpts) = Y(n,kpts) - DDOT(Nfc,U(nn,1,kod),Ncomp,Coef(2),2)
               Y(nn,kpts) = Y(nn,kpts) + DDOT(Nfc,U(n,1,kod),Ncomp,Coef(2),2)

@@ -114,13 +114,13 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DLSSUD
   INTEGER J4SAVE
-  REAL(8) :: DDOT , D1MACH
-  INTEGER i , Iflag , Irank , irp , Iscale , Isflg , j , jr , k , kp , &
-    Kpivot(*) , l , M , maxmes , mj , Mlso , N , nfat , nfatal , &
-    nmir , Nrda , Nrdu , nu
-  REAL(8) :: A(Nrda,*) , B(*) , Diag(*) , Div(*) , gam , gamma , &
-    Q(Nrda,*) , res , S(*) , Scales(*) , ss , Td(*) , &
-    U(Nrdu,*) , uro , X(*)
+  REAL(8) :: DDOT, D1MACH
+  INTEGER i, Iflag, Irank, irp, Iscale, Isflg, j, jr, k, kp, &
+    Kpivot(*), l, M, maxmes, mj, Mlso, N, nfat, nfatal, &
+    nmir, Nrda, Nrdu, nu
+  REAL(8) :: A(Nrda,*), B(*), Diag(*), Div(*), gam, gamma, &
+    Q(Nrda,*), res, S(*), Scales(*), ss, Td(*), &
+    U(Nrdu,*), uro, X(*)
   !
   !     ******************************************************************
   !
@@ -151,8 +151,8 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
         !
         !                 COPY MATRIX A INTO MATRIX Q
         !
-        DO k = 1 , M
-          DO j = 1 , N
+        DO k = 1, M
+          DO j = 1, N
             Q(j,k) = A(j,k)
           ENDDO
         ENDDO
@@ -168,7 +168,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
           !
           !                 STORE DIVISORS FOR THE TRIANGULAR SOLUTION
           !
-          DO k = 1 , N
+          DO k = 1, N
             Div(k) = Diag(k)
           ENDDO
           !        .........EXIT
@@ -196,119 +196,121 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   GOTO 99999
   !
   !
-  100  IF ( Irank>0 ) THEN
-  !           BEGIN BLOCK PERMITTING ...EXITS TO 180
-  !
-  !              COPY CONSTANT VECTOR INTO S AFTER FIRST INTERCHANGING
-  !              THE ELEMENTS ACCORDING TO THE PIVOTAL SEQUENCE
-  !
-  DO k = 1 , N
-    kp = Kpivot(k)
-    X(k) = B(kp)
-  ENDDO
-  DO k = 1 , N
-    S(k) = X(k)
-  ENDDO
-  !
-  irp = Irank + 1
-  nu = 1
-  IF ( Mlso==0 ) nu = 0
-  !           ...EXIT
-  IF ( Irank/=N ) THEN
+  100 CONTINUE
+  IF ( Irank>0 ) THEN
+    !           BEGIN BLOCK PERMITTING ...EXITS TO 180
     !
-    !              FOR RANK DEFICIENT PROBLEMS WE MUST APPLY THE
-    !              ORTHOGONAL TRANSFORMATION TO S
-    !              WE ALSO CHECK TO SEE IF THE SYSTEM APPEARS TO BE
-    !              INCONSISTENT
+    !              COPY CONSTANT VECTOR INTO S AFTER FIRST INTERCHANGING
+    !              THE ELEMENTS ACCORDING TO THE PIVOTAL SEQUENCE
     !
-    nmir = N - Irank
-    ss = DDOT(N,S(1),1,S(1),1)
-    DO l = 1 , Irank
-      k = irp - l
-      gam = ((Td(k)*S(k))+DDOT(nmir,Q(irp,k),1,S(irp),1))/(Td(k)*Div(k))
-      S(k) = S(k) + gam*Td(k)
-      DO j = irp , N
-        S(j) = S(j) + gam*Q(j,k)
-      ENDDO
+    DO k = 1, N
+      kp = Kpivot(k)
+      X(k) = B(kp)
     ENDDO
-    res = DDOT(nmir,S(irp),1,S(irp),1)
+    DO k = 1, N
+      S(k) = X(k)
+    ENDDO
+    !
+    irp = Irank + 1
+    nu = 1
+    IF ( Mlso==0 ) nu = 0
     !           ...EXIT
-    IF ( res>ss*(10.0D0*MAX(10.0D0**Isflg,10.0D0*uro))**2 ) THEN
+    IF ( Irank/=N ) THEN
       !
-      !              INCONSISTENT SYSTEM
-      Iflag = 4
-      nu = 0
-    ENDIF
-  ENDIF
-  !
-  !           APPLY FORWARD SUBSTITUTION TO SOLVE LOWER TRIANGULAR SYSTEM
-  !
-  S(1) = S(1)/Div(1)
-  IF ( Irank>=2 ) THEN
-    DO k = 2 , Irank
-      S(k) = (S(k)-DDOT(k-1,Q(k,1),Nrda,S(1),1))/Div(k)
-    ENDDO
-  ENDIF
-  !
-  !           INITIALIZE X VECTOR AND THEN APPLY ORTHOGONAL TRANSFORMATION
-  !
-  DO k = 1 , M
-    X(k) = 0.0D0
-    IF ( k<=Irank ) X(k) = S(k)
-  ENDDO
-  !
-  DO jr = 1 , Irank
-    j = irp - jr
-    mj = M - j + 1
-    gamma = DDOT(mj,Q(j,j),Nrda,X(j),1)/(Diag(j)*Q(j,j))
-    DO k = j , M
-      X(k) = X(k) + gamma*Q(j,k)
-    ENDDO
-  ENDDO
-  !
-  !           RESCALE ANSWERS AS DICTATED
-  !
-  DO k = 1 , M
-    X(k) = X(k)*Scales(k)
-  ENDDO
-  !
-  IF ( nu/=0.AND.M/=Irank ) THEN
-    !
-    !              INITIALIZE U MATRIX AND THEN APPLY ORTHOGONAL
-    !              TRANSFORMATION
-    !
-    l = M - Irank
-    DO k = 1 , l
-      DO i = 1 , M
-        U(i,k) = 0.0D0
-        IF ( i==Irank+k ) U(i,k) = 1.0D0
-      ENDDO
+      !              FOR RANK DEFICIENT PROBLEMS WE MUST APPLY THE
+      !              ORTHOGONAL TRANSFORMATION TO S
+      !              WE ALSO CHECK TO SEE IF THE SYSTEM APPEARS TO BE
+      !              INCONSISTENT
       !
-      DO jr = 1 , Irank
-        j = irp - jr
-        mj = M - j + 1
-        gamma = DDOT(mj,Q(j,j),Nrda,U(j,k),1)/(Diag(j)*Q(j,j))
-        DO i = j , M
-          U(i,k) = U(i,k) + gamma*Q(j,i)
+      nmir = N - Irank
+      ss = DDOT(N,S(1),1,S(1),1)
+      DO l = 1, Irank
+        k = irp - l
+        gam = ((Td(k)*S(k))+DDOT(nmir,Q(irp,k),1,S(irp),1))/(Td(k)*Div(k))
+        S(k) = S(k) + gam*Td(k)
+        DO j = irp, N
+          S(j) = S(j) + gam*Q(j,k)
         ENDDO
       ENDDO
-    ENDDO
-  ENDIF
-ELSE
-  !
-  !           SPECIAL CASE FOR THE NULL MATRIX
-  DO k = 1 , M
-    X(k) = 0.0D0
-    IF ( Mlso/=0 ) THEN
-      U(k,k) = 1.0D0
-      DO j = 1 , M
-        IF ( j/=k ) U(j,k) = 0.0D0
+      res = DDOT(nmir,S(irp),1,S(irp),1)
+      !           ...EXIT
+      IF ( res>ss*(10.0D0*MAX(10.0D0**Isflg,10.0D0*uro))**2 ) THEN
+        !
+        !              INCONSISTENT SYSTEM
+        Iflag = 4
+        nu = 0
+      ENDIF
+    ENDIF
+    !
+    !           APPLY FORWARD SUBSTITUTION TO SOLVE LOWER TRIANGULAR SYSTEM
+    !
+    S(1) = S(1)/Div(1)
+    IF ( Irank>=2 ) THEN
+      DO k = 2, Irank
+        S(k) = (S(k)-DDOT(k-1,Q(k,1),Nrda,S(1),1))/Div(k)
       ENDDO
     ENDIF
-  ENDDO
-  DO k = 1 , N
-    IF ( B(k)>0.0D0 ) Iflag = 4
-  ENDDO
-ENDIF
-!
-99999 END SUBROUTINE DLSSUD
+    !
+    !           INITIALIZE X VECTOR AND THEN APPLY ORTHOGONAL TRANSFORMATION
+    !
+    DO k = 1, M
+      X(k) = 0.0D0
+      IF ( k<=Irank ) X(k) = S(k)
+    ENDDO
+    !
+    DO jr = 1, Irank
+      j = irp - jr
+      mj = M - j + 1
+      gamma = DDOT(mj,Q(j,j),Nrda,X(j),1)/(Diag(j)*Q(j,j))
+      DO k = j, M
+        X(k) = X(k) + gamma*Q(j,k)
+      ENDDO
+    ENDDO
+    !
+    !           RESCALE ANSWERS AS DICTATED
+    !
+    DO k = 1, M
+      X(k) = X(k)*Scales(k)
+    ENDDO
+    !
+    IF ( nu/=0.AND.M/=Irank ) THEN
+      !
+      !              INITIALIZE U MATRIX AND THEN APPLY ORTHOGONAL
+      !              TRANSFORMATION
+      !
+      l = M - Irank
+      DO k = 1, l
+        DO i = 1, M
+          U(i,k) = 0.0D0
+          IF ( i==Irank+k ) U(i,k) = 1.0D0
+        ENDDO
+        !
+        DO jr = 1, Irank
+          j = irp - jr
+          mj = M - j + 1
+          gamma = DDOT(mj,Q(j,j),Nrda,U(j,k),1)/(Diag(j)*Q(j,j))
+          DO i = j, M
+            U(i,k) = U(i,k) + gamma*Q(j,i)
+          ENDDO
+        ENDDO
+      ENDDO
+    ENDIF
+  ELSE
+    !
+    !           SPECIAL CASE FOR THE NULL MATRIX
+    DO k = 1, M
+      X(k) = 0.0D0
+      IF ( Mlso/=0 ) THEN
+        U(k,k) = 1.0D0
+        DO j = 1, M
+          IF ( j/=k ) U(j,k) = 0.0D0
+        ENDDO
+      ENDIF
+    ENDDO
+    DO k = 1, N
+      IF ( B(k)>0.0D0 ) Iflag = 4
+    ENDDO
+  ENDIF
+  !
+  99999 CONTINUE
+  END SUBROUTINE DLSSUD

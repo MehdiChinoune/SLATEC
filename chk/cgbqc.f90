@@ -4,7 +4,7 @@ SUBROUTINE CGBQC(Lun,Kprint,Nerr)
   IMPLICIT NONE
   !*--CGBQC5
   !*** Start of declarations inserted by SPAG
-  INTEGER Kprint , Lun
+  INTEGER Kprint, Lun
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CGBQC
   !***PURPOSE  Quick check for CGBFA, CGBCO, CGBSL and CGBDI.
@@ -39,21 +39,21 @@ SUBROUTINE CGBQC(Lun,Kprint,Nerr)
   !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
   !           record and cleaned up FORMATs.  (RWC)
   !***END PROLOGUE  CGBQC
-  COMPLEX abd(6,4) , at(7,4) , b(4) , bt(4) , c(4) , det(2) , dc(2) , z(4) ,&
-    xa , xb
-  REAL r , rcond , rcnd , DELX
-  CHARACTER kfail*39 , kprog*19
-  INTEGER lda , n , ipvt(4) , info , i , j , indx , Nerr
-  INTEGER ml , mu
-  DATA abd/(0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,&
-    (2.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,&
-    (0.E0,-1.E0) , (2.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0)&
-    , (0.E0,0.E0) , (0.E0,0.E0) , (3.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0)&
-    , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,-1.E0) , (4.E0,0.E0) ,&
+  COMPLEX abd(6,4), at(7,4), b(4), bt(4), c(4), det(2), dc(2), z(4) ,&
+    xa, xb
+  REAL r, rcond, rcnd, DELX
+  CHARACTER kfail*39, kprog*19
+  INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
+  INTEGER ml, mu
+  DATA abd/(0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
+    , (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0)&
+    , (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ,&
     (0.E0,0.E0)/
-  DATA b/(3.E0,2.E0) , (-1.E0,3.E0) , (0.E0,-4.E0) , (5.E0,0.E0)/
-  DATA c/(1.E0,1.E0) , (0.E0,1.E0) , (0.E0,-1.E0) , (1.E0,0.E0)/
-  DATA dc/(3.3E0,0.E0) , (1.0E0,0.E0)/
+  DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
+  DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
+  DATA dc/(3.3E0,0.E0), (1.0E0,0.E0)/
   DATA kprog/'GBFA GBCO GBSL GBDI'/
   DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
   DATA rcnd/.24099E0/
@@ -66,16 +66,16 @@ SUBROUTINE CGBQC(Lun,Kprint,Nerr)
   !
   !     FORM AT FOR CGBFA AND BT FOR CGBSL, TEST CGBFA
   !
-  DO j = 1 , n
+  DO j = 1, n
     bt(j) = b(j)
-    DO i = 1 , 6
+    DO i = 1, 6
       at(i,j) = abd(i,j)
     ENDDO
   ENDDO
   !
   CALL CGBFA(at,lda,n,ml,mu,ipvt,info)
   IF ( info/=0 ) THEN
-    WRITE (Lun,99002) kprog(1:4) , kfail(1:4)
+    WRITE (Lun,99002) kprog(1:4), kfail(1:4)
     Nerr = Nerr + 1
   ENDIF
   !
@@ -83,20 +83,20 @@ SUBROUTINE CGBQC(Lun,Kprint,Nerr)
   !
   CALL CGBSL(at,lda,n,ml,mu,ipvt,bt,0)
   indx = 0
-  DO i = 1 , n
+  DO i = 1, n
     IF ( DELX(c(i),bt(i))>.0001 ) indx = indx + 1
   ENDDO
   !
   IF ( indx/=0 ) THEN
-    WRITE (Lun,99002) kprog(11:14) , kfail(12:19)
+    WRITE (Lun,99002) kprog(11:14), kfail(12:19)
     Nerr = Nerr + 1
   ENDIF
   !
   !     FORM AT FOR CGBCO AND BT FOR CGBSL, TEST CGBCO
   !
-  DO j = 1 , n
+  DO j = 1, n
     bt(j) = b(j)
-    DO i = 1 , 6
+    DO i = 1, 6
       at(i,j) = abd(i,j)
     ENDDO
   ENDDO
@@ -104,7 +104,7 @@ SUBROUTINE CGBQC(Lun,Kprint,Nerr)
   CALL CGBCO(at,lda,n,ml,mu,ipvt,rcond,z)
   r = ABS(rcnd-rcond)
   IF ( r>=.0001 ) THEN
-    WRITE (Lun,99002) kprog(6:9) , kfail(6:10)
+    WRITE (Lun,99002) kprog(6:9), kfail(6:10)
     Nerr = Nerr + 1
   ENDIF
   !
@@ -112,12 +112,12 @@ SUBROUTINE CGBQC(Lun,Kprint,Nerr)
   !
   CALL CGBSL(at,lda,n,ml,mu,ipvt,bt,1)
   indx = 0
-  DO i = 1 , n
+  DO i = 1, n
     IF ( DELX(c(i),bt(i))>.0001 ) indx = indx + 1
   ENDDO
   !
   IF ( indx/=0 ) THEN
-    WRITE (Lun,99002) kprog(11:14) , kfail(12:19)
+    WRITE (Lun,99002) kprog(11:14), kfail(12:19)
     Nerr = Nerr + 1
   ENDIF
   !
@@ -125,12 +125,12 @@ SUBROUTINE CGBQC(Lun,Kprint,Nerr)
   !
   CALL CGBDI(at,lda,n,ml,mu,ipvt,det)
   indx = 0
-  DO i = 1 , 2
+  DO i = 1, 2
     IF ( DELX(dc(i),det(i))>.0001 ) indx = indx + 1
   ENDDO
   !
   IF ( indx/=0 ) THEN
-    WRITE (Lun,99002) kprog(16:19) , kfail(21:31)
+    WRITE (Lun,99002) kprog(16:19), kfail(21:31)
     Nerr = Nerr + 1
   ENDIF
   !

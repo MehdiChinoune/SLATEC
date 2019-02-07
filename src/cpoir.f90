@@ -112,11 +112,11 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CPOIR
   !
-  INTEGER Lda , N , Itask , Ind , info , j
-  COMPLEX A(Lda,*) , V(*) , Work(N,*)
-  REAL SCASUM , xnorm , dnorm , R1MACH
-  REAL(8) :: dr1 , di1 , dr2 , di2
-  CHARACTER(8) :: xern1 , xern2
+  INTEGER Lda, N, Itask, Ind, info, j
+  COMPLEX A(Lda,*), V(*), Work(N,*)
+  REAL SCASUM, xnorm, dnorm, R1MACH
+  REAL(8) :: dr1, di1, dr2, di2
+  CHARACTER(8) :: xern1, xern2
   !***FIRST EXECUTABLE STATEMENT  CPOIR
   IF ( Lda<N ) THEN
     Ind = -1
@@ -145,7 +145,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
     !
     !        MOVE MATRIX A TO WORK
     !
-    DO j = 1 , N
+    DO j = 1, N
       CALL CCOPY(N,A(1,j),1,Work(1,j),1)
     ENDDO
     !
@@ -179,7 +179,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !
   !     COMPUTE  RESIDUAL
   !
-  DO j = 1 , N
+  DO j = 1, N
     CALL DCDOT(j-1,-1.D0,A(1,j),1,V(1),1,dr1,di1)
     CALL DCDOT(N-j+1,1.D0,A(j,j),Lda,V(j),1,dr2,di2)
     dr1 = dr1 + dr2 - REAL(REAL(Work(j,N+1)), 8)

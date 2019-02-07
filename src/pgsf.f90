@@ -4,8 +4,8 @@ FUNCTION PGSF(X,Iz,C,A,Bh)
   IMPLICIT NONE
   !*--PGSF5
   !*** Start of declarations inserted by SPAG
-  REAL A , Bh , C , dd , fsg , hsg , PGSF , X
-  INTEGER Iz , j
+  REAL A, Bh, C, dd, fsg, hsg, PGSF, X
+  INTEGER Iz, j
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PGSF
   !***SUBSIDIARY
@@ -20,11 +20,11 @@ FUNCTION PGSF(X,Iz,C,A,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  PGSF
-  DIMENSION A(*) , C(*) , Bh(*)
+  DIMENSION A(*), C(*), Bh(*)
   !***FIRST EXECUTABLE STATEMENT  PGSF
   fsg = 1.
   hsg = 1.
-  DO j = 1 , Iz
+  DO j = 1, Iz
     dd = 1./(X-Bh(j))
     fsg = fsg*A(j)*dd
     hsg = hsg*C(j)*dd
@@ -35,4 +35,5 @@ FUNCTION PGSF(X,Iz,C,A,Bh)
   ENDIF
   PGSF = 1. - fsg - hsg
   RETURN
-  99999 END FUNCTION PGSF
+  99999 CONTINUE
+  END FUNCTION PGSF

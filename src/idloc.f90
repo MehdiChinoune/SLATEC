@@ -4,7 +4,7 @@ INTEGER FUNCTION IDLOC(Loc,Sx,Ix)
   IMPLICIT NONE
   !*--IDLOC5
   !*** Start of declarations inserted by SPAG
-  INTEGER ipage , itemp , k , key , lmx , lmxm1 , Loc , lpg , np
+  INTEGER ipage, itemp, k, key, lmx, lmxm1, Loc, lpg, np
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  IDLOC
   !***SUBSIDIARY

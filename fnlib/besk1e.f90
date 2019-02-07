@@ -4,9 +4,9 @@ FUNCTION BESK1E(X)
   IMPLICIT NONE
   !*--BESK1E5
   !*** Start of declarations inserted by SPAG
-  REAL ak12cs , ak1cs , BESI1 , BESK1E , bk1cs , CSEVL , R1MACH , X , xmin , &
-    xsml , y
-  INTEGER INITS , ntak1 , ntak12 , ntk1
+  REAL ak12cs, ak1cs, BESI1, BESK1E, bk1cs, CSEVL, R1MACH, X, xmin, &
+    xsml, y
+  INTEGER INITS, ntak1, ntak12, ntk1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESK1E
   !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
@@ -53,9 +53,9 @@ FUNCTION BESK1E(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BESK1E
-  DIMENSION bk1cs(11) , ak1cs(17) , ak12cs(14)
+  DIMENSION bk1cs(11), ak1cs(17), ak12cs(14)
   LOGICAL first
-  SAVE bk1cs , ak1cs , ak12cs , ntk1 , ntak1 , ntak12 , xmin , xsml , first
+  SAVE bk1cs, ak1cs, ak12cs, ntk1, ntak1, ntak12, xmin, xsml, first
   DATA bk1cs(1)/.0253002273389477705E0/
   DATA bk1cs(2)/ - .353155960776544876E0/
   DATA bk1cs(3)/ - .122611180822657148E0/
@@ -124,4 +124,5 @@ FUNCTION BESK1E(X)
   BESK1E = EXP(X)*(LOG(0.5*X)*BESI1(X)+(0.75+CSEVL(.5*y-1.,bk1cs,ntk1))/X)
   RETURN
   !
-  99999 END FUNCTION BESK1E
+  99999 CONTINUE
+  END FUNCTION BESK1E

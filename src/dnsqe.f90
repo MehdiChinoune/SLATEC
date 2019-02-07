@@ -339,13 +339,13 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DNSQE
-  INTEGER index , Info , Iopt , j , lr , Lwa , maxfev , ml , mode , mu , N , &
-    nfev , njev , Nprint
-  REAL(8) :: epsfcn , factor , Fvec(*) , one , Tol , Wa(*) , X(*) , &
-    xtol , zero
-  EXTERNAL FCN , JAC
-  SAVE factor , one , zero
-  DATA factor , one , zero/1.0D2 , 1.0D0 , 0.0D0/
+  INTEGER index, Info, Iopt, j, lr, Lwa, maxfev, ml, mode, mu, N, &
+    nfev, njev, Nprint
+  REAL(8) :: epsfcn, factor, Fvec(*), one, Tol, Wa(*), X(*), &
+    xtol, zero
+  EXTERNAL FCN, JAC
+  SAVE factor, one, zero
+  DATA factor, one, zero/1.0D2, 1.0D0, 0.0D0/
   !     BEGIN BLOCK PERMITTING ...EXITS TO 20
   !***FIRST EXECUTABLE STATEMENT  DNSQE
   Info = 0
@@ -365,7 +365,7 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
     mu = N - 1
     epsfcn = zero
     mode = 2
-    DO j = 1 , N
+    DO j = 1, N
       Wa(j) = one
     ENDDO
     lr = (N*(N+1))/2

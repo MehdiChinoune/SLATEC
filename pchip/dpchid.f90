@@ -109,19 +109,19 @@ REAL(8) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N , Incfd , Ia , Ib , Ierr
-  REAL(8) :: X(*) , F(Incfd,*) , D(Incfd,*)
+  INTEGER N, Incfd, Ia, Ib, Ierr
+  REAL(8) :: X(*), F(Incfd,*), D(Incfd,*)
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i , iup , low
-  REAL(8) :: h , half , six , sum , value , zero
-  SAVE zero , half , six
+  INTEGER i, iup, low
+  REAL(8) :: h, half, six, sum, value, zero
+  SAVE zero, half, six
   !
   !  INITIALIZE.
   !
-  DATA zero/0.D0/ , half/.5D0/ , six/6.D0/
+  DATA zero/0.D0/, half/.5D0/, six/6.D0/
   !***FIRST EXECUTABLE STATEMENT  DPCHID
   value = zero
   !
@@ -145,7 +145,7 @@ REAL(8) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
       CALL XERMSG('SLATEC','DPCHID','INCREMENT LESS THAN ONE',Ierr,1)
       GOTO 100
     ELSE
-      DO i = 2 , N
+      DO i = 2, N
         IF ( X(i)<=X(i-1) ) GOTO 200
       ENDDO
     ENDIF
@@ -164,7 +164,7 @@ REAL(8) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
     low = MIN(Ia,Ib)
     iup = MAX(Ia,Ib) - 1
     sum = zero
-    DO i = low , iup
+    DO i = low, iup
       h = X(i+1) - X(i)
       sum = sum + h*((F(1,i)+F(1,i+1))+(D(1,i)-D(1,i+1))*(h/six))
     ENDDO

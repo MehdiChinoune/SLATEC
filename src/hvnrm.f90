@@ -4,8 +4,8 @@ FUNCTION HVNRM(V,Ncomp)
   IMPLICIT NONE
   !*--HVNRM5
   !*** Start of declarations inserted by SPAG
-  REAL HVNRM , V
-  INTEGER k , Ncomp
+  REAL HVNRM, V
+  INTEGER k, Ncomp
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HVNRM
   !***SUBSIDIARY
@@ -32,7 +32,7 @@ FUNCTION HVNRM(V,Ncomp)
   DIMENSION V(*)
   !***FIRST EXECUTABLE STATEMENT  HVNRM
   HVNRM = 0.
-  DO k = 1 , Ncomp
+  DO k = 1, Ncomp
     HVNRM = MAX(HVNRM,ABS(V(k)))
   ENDDO
 END FUNCTION HVNRM

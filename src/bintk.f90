@@ -92,9 +92,9 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BINTK
   !
-  INTEGER iflag , iwork , K , N , i , ilp1mx , j , jj , km1 , kpkm2 , left , &
-    lenq , np1
-  REAL Bcoef(*) , Y(*) , Q(*) , T(*) , X(*) , xi , Work(*)
+  INTEGER iflag, iwork, K, N, i, ilp1mx, j, jj, km1, kpkm2, left, &
+    lenq, np1
+  REAL Bcoef(*), Y(*), Q(*), T(*), X(*), xi, Work(*)
   !     DIMENSION Q(2*K-1,N), T(N+K)
   !***FIRST EXECUTABLE STATEMENT  BINTK
   IF ( K<1 ) THEN
@@ -107,7 +107,7 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
     ELSE
       jj = N - 1
       IF ( jj/=0 ) THEN
-        DO i = 1 , jj
+        DO i = 1, jj
           IF ( X(i)>=X(i+1) ) GOTO 50
         ENDDO
       ENDIF
@@ -117,12 +117,12 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
       left = K
       !                ZERO OUT ALL ENTRIES OF Q
       lenq = N*(K+km1)
-      DO i = 1 , lenq
+      DO i = 1, lenq
         Q(i) = 0.0E0
       ENDDO
       !
       !  ***   LOOP OVER I TO CONSTRUCT THE  N  INTERPOLATION EQUATIONS
-      DO i = 1 , N
+      DO i = 1, N
         xi = X(i)
         ilp1mx = MIN(i+K,np1)
         !        *** FIND  LEFT  IN THE CLOSED INTERVAL (I,I+K-1) SUCH THAT
@@ -147,7 +147,7 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
         !        WE THEREFORE WANT  BCOEF(J) = B(LEFT-K+J)(XI) TO GO INTO
         !        A(I,LEFT-K+J), I.E., INTO  Q(I-(LEFT+J)+2*K,(LEFT+J)-K) SINCE
         !        A(I+J,J)  IS TO GO INTO  Q(I+K,J), ALL I,J,  IF WE CONSIDER  Q
-        !        AS A TWO-DIM. ARRAY , WITH  2*K-1  ROWS (SEE COMMENTS IN
+        !        AS A TWO-DIM. ARRAY, WITH  2*K-1  ROWS (SEE COMMENTS IN
         !        BNFAC). IN THE PRESENT PROGRAM, WE TREAT  Q  AS AN EQUIVALENT
         !        ONE-DIMENSIONAL ARRAY (BECAUSE OF FORTRAN RESTRICTIONS ON
         !        DIMENSION STATEMENTS) . WE THEREFORE WANT  BCOEF(J) TO GO INTO
@@ -156,13 +156,13 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
         !                   =  I-LEFT+1 + (LEFT -K)*(2*K-1) + (2*K-2)*J
         !        OF  Q .
         jj = i - left + 1 + (left-K)*(K+km1)
-        DO j = 1 , K
+        DO j = 1, K
           jj = jj + kpkm2
           Q(jj) = Bcoef(j)
         ENDDO
       ENDDO
       !
-      !     ***OBTAIN FACTORIZATION OF  A  , STORED AGAIN IN  Q.
+      !     ***OBTAIN FACTORIZATION OF  A , STORED AGAIN IN  Q.
       CALL BNFAC(Q,K+km1,N,km1,km1,iflag)
       IF ( iflag==2 ) THEN
         CALL XERMSG('SLATEC','BINTK',&
@@ -173,7 +173,7 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
         RETURN
       ELSE
         !     *** SOLVE  A*BCOEF = Y  BY BACKSUBSTITUTION
-        DO i = 1 , N
+        DO i = 1, N
           Bcoef(i) = Y(i)
         ENDDO
         CALL BNSLV(Q,K+km1,N,km1,km1,Bcoef)

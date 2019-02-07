@@ -5,7 +5,7 @@ SUBROUTINE DSLUCN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   IMPLICIT NONE
   !*--DSLUCN6
   !*** Start of declarations inserted by SPAG
-  REAL DSMMTI , DSMTV , DSMV
+  REAL DSMMTI, DSMTV, DSMV
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSLUCN
   !***PURPOSE  Incomplete LU CG Sparse Ax=b Solver for Normal Equations.
@@ -231,21 +231,21 @@ SUBROUTINE DSLUCN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  DSLUCN
   !     .. Parameters ..
-  INTEGER LOCRB , LOCIB
+  INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  REAL(8) :: Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
+  REAL(8) :: Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
     Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , B(N) , Rwork(Lenw) , X(N)
-  INTEGER Ia(Nelt) , Iwork(Leniw) , Ja(Nelt)
+  REAL(8) :: A(Nelt), B(N), Rwork(Lenw), X(N)
+  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER icol , j , jbgn , jend , locatd , locatp , locatz , locdin , &
-    locdz , locil , lociu , lociw , locjl , locju , locl , locnc , &
-    locnr , locp , locr , locu , locw , locz , nl , nu
+  INTEGER icol, j, jbgn, jend, locatd, locatp, locatz, locdin, &
+    locdz, locil, lociu, lociw, locjl, locju, locl, locnc, &
+    locnr, locp, locr, locu, locw, locz, nl, nu
   !     .. External Subroutines ..
-  EXTERNAL DCGN , DCHKW , DS2Y , DSILUS , DSMMTI , DSMTV , DSMV
+  EXTERNAL DCGN, DCHKW, DS2Y, DSILUS, DSMMTI, DSMTV, DSMV
   !***FIRST EXECUTABLE STATEMENT  DSLUCN
   !
   Ierr = 0
@@ -261,13 +261,13 @@ SUBROUTINE DSLUCN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !         Then set up the work arrays.
   nl = 0
   nu = 0
-  DO icol = 1 , N
+  DO icol = 1, N
     !         Don't count diagonal.
     jbgn = Ja(icol) + 1
     jend = Ja(icol+1) - 1
     IF ( jbgn<=jend ) THEN
       !VD$ NOVECTOR
-      DO j = jbgn , jend
+      DO j = jbgn, jend
         IF ( Ia(j)>icol ) THEN
           nl = nl + 1
           IF ( Isym/=0 ) nu = nu + 1

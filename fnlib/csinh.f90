@@ -23,7 +23,7 @@ COMPLEX FUNCTION CSINH(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CSINH
-  COMPLEX Z , ci
+  COMPLEX Z, ci
   SAVE ci
   DATA ci/(0.,1.)/
   !***FIRST EXECUTABLE STATEMENT  CSINH

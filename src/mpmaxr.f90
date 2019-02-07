@@ -4,7 +4,7 @@ SUBROUTINE MPMAXR(X)
   IMPLICIT NONE
   !*--MPMAXR5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , it , LUN , M , MXR
+  INTEGER i, it, LUN, M, MXR
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPMAXR
   !***SUBSIDIARY
@@ -30,13 +30,13 @@ SUBROUTINE MPMAXR(X)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPMAXR
-  COMMON /MPCOM / B , T , M , LUN , MXR , R(30)
-  INTEGER B , T , R , X(*)
+  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
+  INTEGER B, T, R, X(*)
   !***FIRST EXECUTABLE STATEMENT  MPMAXR
   CALL MPCHK(1,4)
   it = B - 1
   ! SET FRACTION DIGITS TO B-1
-  DO i = 1 , T
+  DO i = 1, T
     X(i+2) = it
   ENDDO
   ! SET SIGN AND EXPONENT

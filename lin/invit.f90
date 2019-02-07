@@ -126,12 +126,12 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  INVIT
   !
-  INTEGER i , j , k , l , M , N , s , ii , ip , Mm , mp , Nm , ns , n1 , &
-    uk , ip1 , its , km1 , Ierr
-  REAL A(Nm,*) , Wr(*) , Wi(*) , Z(Nm,*)
-  REAL Rm1(N,*) , Rv1(*) , Rv2(*)
-  REAL t , w , x , y , eps3
-  REAL norm , normv , growto , ilambd , rlambd , ukroot
+  INTEGER i, j, k, l, M, N, s, ii, ip, Mm, mp, Nm, ns, n1, &
+    uk, ip1, its, km1, Ierr
+  REAL A(Nm,*), Wr(*), Wi(*), Z(Nm,*)
+  REAL Rm1(N,*), Rv1(*), Rv2(*)
+  REAL t, w, x, y, eps3
+  REAL norm, normv, growto, ilambd, rlambd, ukroot
   REAL PYTHAG
   LOGICAL Select(N)
   !
@@ -145,7 +145,7 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
   ip = 0
   n1 = N - 1
   !
-  DO k = 1 , N
+  DO k = 1, N
     IF ( Wi(k)/=0.0E0.AND.ip>=0 ) THEN
       ip = 1
       IF ( Select(k).AND.Select(k+1) ) Select(k+1) = .FALSE.
@@ -155,7 +155,7 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
     IF ( s>Mm ) GOTO 500
     IF ( uk<k ) THEN
       !     .......... CHECK FOR POSSIBLE SPLITTING ..........
-      DO uk = k , N
+      DO uk = k, N
         IF ( uk==N ) EXIT
         IF ( A(uk+1,uk)==0.0E0 ) EXIT
       ENDDO
@@ -164,10 +164,10 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
       norm = 0.0E0
       mp = 1
       !
-      DO i = 1 , uk
+      DO i = 1, uk
         x = 0.0E0
         !
-        DO j = mp , uk
+        DO j = mp, uk
           x = x + ABS(A(i,j))
         ENDDO
         !
@@ -198,7 +198,7 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
     !                TO ANY PREVIOUS EIGENVALUE ..........
     50     rlambd = rlambd + eps3
     !     .......... FOR I=K-1 STEP -1 UNTIL 1 DO -- ..........
-    100    DO ii = 1 , km1
+    100    DO ii = 1, km1
     i = k - ii
     IF ( Select(i).AND.ABS(Wr(i)-rlambd)<eps3.AND.ABS(Wi(i)-ilambd)<eps3 )&
       GOTO 50
@@ -212,9 +212,9 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
   !                AND INITIAL REAL VECTOR ..........
   150    mp = 1
   !
-  DO i = 1 , uk
+  DO i = 1, uk
     !
-    DO j = mp , uk
+    DO j = mp, uk
       Rm1(j,i) = A(i,j)
     ENDDO
     !
@@ -237,13 +237,13 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
       Z(1,s-1) = 0.0E0
       IF ( N/=3 ) THEN
         !
-        DO i = 4 , N
+        DO i = 4, N
           Rm1(1,i) = 0.0E0
         ENDDO
       ENDIF
     ENDIF
     !
-    DO i = 2 , uk
+    DO i = 2, uk
       mp = i - 1
       w = Rm1(mp,i)
       IF ( i<N ) t = Rm1(mp,i+1)
@@ -261,7 +261,7 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
         x = Rm1(mp,mp)*w
         y = -t*w
         !
-        DO j = i , uk
+        DO j = i, uk
           IF ( j<n1 ) THEN
             t = Rm1(mp,j+2)
             Rm1(i,j+2) = -x*t - y*Rm1(j,mp)
@@ -286,7 +286,7 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
         IF ( i<N ) Rm1(mp,i+1) = 0.0E0
         IF ( i==N ) Z(mp,s-1) = 0.0E0
         !
-        DO j = i , uk
+        DO j = i, uk
           w = Rm1(j,i)
           Rm1(j,i) = Rm1(j,mp) - x*w
           Rm1(j,mp) = w
@@ -326,11 +326,11 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
     !                REPLACING ZERO PIVOTS BY EPS3 ..........
     IF ( uk/=1 ) THEN
       !
-      DO i = 2 , uk
+      DO i = 2, uk
         mp = i - 1
         IF ( ABS(Rm1(mp,i))>ABS(Rm1(mp,mp)) ) THEN
           !
-          DO j = mp , uk
+          DO j = mp, uk
             y = Rm1(j,i)
             Rm1(j,i) = Rm1(j,mp)
             Rm1(j,mp) = y
@@ -341,7 +341,7 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
         x = Rm1(mp,i)/Rm1(mp,mp)
         IF ( x/=0.0E0 ) THEN
           !
-          DO j = i , uk
+          DO j = i, uk
             Rm1(j,i) = Rm1(j,i) - x*Rm1(j,mp)
           ENDDO
         ENDIF
@@ -353,13 +353,13 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
   ENDIF
   !     .......... BACK SUBSTITUTION FOR REAL VECTOR
   !                FOR I=UK STEP -1 UNTIL 1 DO -- ..........
-  200    DO ii = 1 , uk
+  200    DO ii = 1, uk
   i = uk + 1 - ii
   y = Rv1(i)
   IF ( i/=uk ) THEN
     ip1 = i + 1
     !
-    DO j = ip1 , uk
+    DO j = ip1, uk
       y = y - Rm1(j,i)*Rv1(j)
     ENDDO
   ENDIF
@@ -370,14 +370,14 @@ ENDDO
 GOTO 300
 !     .......... BACK SUBSTITUTION FOR COMPLEX VECTOR
 !                FOR I=UK STEP -1 UNTIL 1 DO -- ..........
-250    DO ii = 1 , uk
+250    DO ii = 1, uk
 i = uk + 1 - ii
 x = Rv1(i)
 y = 0.0E0
 IF ( i/=uk ) THEN
   ip1 = i + 1
   !
-  DO j = ip1 , uk
+  DO j = ip1, uk
     IF ( j<n1 ) THEN
       t = Rm1(i,j+2)
     ELSE
@@ -403,7 +403,7 @@ ENDDO
 norm = 0.0E0
 normv = 0.0E0
 !
-DO i = 1 , uk
+DO i = 1, uk
 IF ( ilambd==0.0E0 ) x = ABS(Rv1(i))
 IF ( ilambd/=0.0E0 ) x = PYTHAG(Rv1(i),Rv2(i))
 IF ( normv<x ) THEN
@@ -419,7 +419,7 @@ x = Rv1(j)
 IF ( ilambd==0.0E0 ) x = 1.0E0/x
 IF ( ilambd/=0.0E0 ) y = Rv2(j)
 !
-DO i = 1 , uk
+DO i = 1, uk
   IF ( ilambd/=0.0E0 ) THEN
     CALL CDIV(Rv1(i),Rv2(i),x,y,Z(i,s-1),Z(i,s))
   ELSE
@@ -440,7 +440,7 @@ x = ukroot
 y = eps3/(x+1.0E0)
 Rv1(1) = eps3
 !
-DO i = 2 , uk
+DO i = 2, uk
   Rv1(i) = y
 ENDDO
 !
@@ -450,7 +450,7 @@ IF ( ilambd/=0.0E0 ) GOTO 250
 GOTO 200
 ENDIF
 !     .......... SET REMAINING VECTOR COMPONENTS TO ZERO ..........
-DO i = j , N
+DO i = j, N
 Z(i,s) = 0.0E0
 IF ( ilambd/=0.0E0 ) Z(i,s-1) = 0.0E0
 ENDDO
@@ -463,7 +463,8 @@ ENDDO
 GOTO 600
 !     .......... SET ERROR -- UNDERESTIMATE OF EIGENVECTOR
 !                SPACE REQUIRED ..........
-500  IF ( Ierr/=0 ) Ierr = Ierr - N
+500 CONTINUE
+IF ( Ierr/=0 ) Ierr = Ierr - N
 IF ( Ierr==0 ) Ierr = -(2*N+1)
 600  M = s - 1 - ABS(ip)
 END SUBROUTINE INVIT

@@ -25,40 +25,40 @@ SUBROUTINE CCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
   !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  CCHK22
   !     .. Parameters ..
-  COMPLEX ZERO , HALF
+  COMPLEX ZERO, HALF
   PARAMETER (ZERO=(0.0,0.0),HALF=(0.5,0.0))
   REAL RZERO
   PARAMETER (RZERO=0.0)
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  REAL Eps , Thresh
-  INTEGER Incmax , Kprint , Nalf , Nbet , Nidim , Ninc , Nkb , Nmax , Nout
+  REAL Eps, Thresh
+  INTEGER Incmax, Kprint, Nalf, Nbet, Nidim, Ninc, Nkb, Nmax, Nout
   CHARACTER(6) :: Sname
   !     .. Array Arguments ..
-  COMPLEX A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) ,&
-    Bet(Nbet) , X(Nmax) , Xs(Nmax*Incmax) , Xx(Nmax*Incmax) , Y(Nmax)&
-    , Ys(Nmax*Incmax) , Yt(Nmax) , Yy(Nmax*Incmax)
+  COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax) ,&
+    Bet(Nbet), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax)&
+    , Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
   REAL G(Nmax)
-  INTEGER Idim(Nidim) , Inc(Ninc) , Kb(Nkb)
+  INTEGER Idim(Nidim), Inc(Ninc), Kb(Nkb)
   !     .. Local Scalars ..
-  COMPLEX alpha , als , beta , bls , transl
-  REAL err , errmax
-  INTEGER i , ia , ib , ic , ik , in , incx , incxs , incy , incys , ix ,&
-    iy , k , ks , laa , lda , ldas , lx , ly , n , nargs , nc , nerr ,&
-    nk , ns
-  LOGICAL banded , ftl , full , null , packed , reset
-  CHARACTER :: uplo , uplos
+  COMPLEX alpha, als, beta, bls, transl
+  REAL err, errmax
+  INTEGER i, ia, ib, ic, ik, in, incx, incxs, incy, incys, ix ,&
+    iy, k, ks, laa, lda, ldas, lx, ly, n, nargs, nc, nerr ,&
+    nk, ns
+  LOGICAL banded, ftl, full, null, packed, reset
+  CHARACTER :: uplo, uplos
   CHARACTER(2) :: ich
   !     .. Local Arrays ..
   LOGICAL isame(13)
   !     .. External Functions ..
   INTEGER NUMXER
-  LOGICAL LCE , LCERES
-  EXTERNAL LCE , LCERES , NUMXER
+  LOGICAL LCE, LCERES
+  EXTERNAL LCE, LCERES, NUMXER
   !     .. External Subroutines ..
-  EXTERNAL CHBMV , CHEMV , CHPMV , CMAKE2 , CMVCH
+  EXTERNAL CHBMV, CHEMV, CHPMV, CMAKE2, CMVCH
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MAX
+  INTRINSIC ABS, MAX
   !     .. Data statements ..
   DATA ich/'UL'/
   !***FIRST EXECUTABLE STATEMENT  CCHK22
@@ -78,7 +78,7 @@ SUBROUTINE CCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
   reset = .TRUE.
   errmax = RZERO
   !
-  DO in = 1 , Nidim
+  DO in = 1, Nidim
     n = Idim(in)
     !
     IF ( banded ) THEN
@@ -86,7 +86,7 @@ SUBROUTINE CCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
     ELSE
       nk = 1
     ENDIF
-    DO ik = 1 , nk
+    DO ik = 1, nk
       IF ( banded ) THEN
         k = Kb(ik)
       ELSE
@@ -108,7 +108,7 @@ SUBROUTINE CCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
         ENDIF
         null = n<=0
         !
-        DO ic = 1 , 2
+        DO ic = 1, 2
           uplo = ich(ic:ic)
           !
           !              Generate the matrix A.
@@ -117,7 +117,7 @@ SUBROUTINE CCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
           CALL CMAKE2(Sname(2:3),uplo,' ',n,n,A,Nmax,Aa,lda,k,k,reset,&
             transl)
           !
-          DO ix = 1 , Ninc
+          DO ix = 1, Ninc
             incx = Inc(ix)
             lx = ABS(incx)*n
             !
@@ -131,14 +131,14 @@ SUBROUTINE CCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
               Xx(1+ABS(incx)*(n/2-1)) = ZERO
             ENDIF
             !
-            DO iy = 1 , Ninc
+            DO iy = 1, Ninc
               incy = Inc(iy)
               ly = ABS(incy)*n
               !
-              DO ia = 1 , Nalf
+              DO ia = 1, Nalf
                 alpha = Alf(ia)
                 !
-                DO ib = 1 , Nbet
+                DO ib = 1, Nbet
                   beta = Bet(ib)
                   !
                   !                          Generate the vector Y.
@@ -156,16 +156,16 @@ SUBROUTINE CCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
                   ns = n
                   ks = k
                   als = alpha
-                  DO i = 1 , laa
+                  DO i = 1, laa
                     As(i) = Aa(i)
                   ENDDO
                   ldas = lda
-                  DO i = 1 , lx
+                  DO i = 1, lx
                     Xs(i) = Xx(i)
                   ENDDO
                   incxs = incx
                   bls = beta
-                  DO i = 1 , ly
+                  DO i = 1, ly
                     Ys(i) = Yy(i)
                   ENDDO
                   incys = incy
@@ -235,7 +235,7 @@ SUBROUTINE CCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
                   !                          If data was incorrectly changed, report and
                   !                          return.
                   !
-                  DO i = 1 , nargs
+                  DO i = 1, nargs
                     IF ( .NOT.isame(i) ) THEN
                       Fatal = .TRUE.
                       IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
@@ -256,14 +256,14 @@ SUBROUTINE CCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
                     IF ( Kprint>=3 ) THEN
                       WRITE (Nout,FMT=99004) Sname
                       IF ( full ) THEN
-                        WRITE (Nout,FMT=99006) nc , Sname , uplo , n ,&
-                          alpha , lda , incx , beta , incy
+                        WRITE (Nout,FMT=99006) nc, Sname, uplo, n ,&
+                          alpha, lda, incx, beta, incy
                       ELSEIF ( banded ) THEN
-                        WRITE (Nout,FMT=99005) nc , Sname , uplo , n ,&
-                          alpha , lda , incx , beta , incy
+                        WRITE (Nout,FMT=99005) nc, Sname, uplo, n ,&
+                          alpha, lda, incx, beta, incy
                       ELSEIF ( packed ) THEN
-                        WRITE (Nout,FMT=99005) nc , Sname , uplo , n ,&
-                          alpha , incx , beta , incy
+                        WRITE (Nout,FMT=99005) nc, Sname, uplo, n ,&
+                          alpha, incx, beta, incy
                       ENDIF
                     ENDIF
                   ENDIF
@@ -288,9 +288,9 @@ SUBROUTINE CCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
   IF ( .NOT.Fatal ) THEN
     IF ( Kprint>=3 ) THEN
       IF ( errmax<Thresh ) THEN
-        WRITE (Nout,FMT=99001) Sname , nc
+        WRITE (Nout,FMT=99001) Sname, nc
       ELSE
-        WRITE (Nout,FMT=99003) Sname , nc , errmax
+        WRITE (Nout,FMT=99003) Sname, nc, errmax
       ENDIF
     ENDIF
   ENDIF

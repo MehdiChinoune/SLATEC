@@ -4,7 +4,7 @@ SUBROUTINE DCOPY(N,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
   !*--DCOPY5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , Incy , ix , iy , m , mp1 , N , ns
+  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DCOPY
   !***PURPOSE  Copy a vector.
@@ -49,7 +49,7 @@ SUBROUTINE DCOPY(N,Dx,Incx,Dy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DCOPY
-  REAL(8) :: Dx(*) , Dy(*)
+  REAL(8) :: Dx(*), Dy(*)
   !***FIRST EXECUTABLE STATEMENT  DCOPY
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy ) THEN
@@ -62,7 +62,7 @@ SUBROUTINE DCOPY(N,Dx,Incx,Dy,Incy)
       !
       m = MOD(N,7)
       IF ( m/=0 ) THEN
-        DO i = 1 , m
+        DO i = 1, m
           Dy(i) = Dx(i)
         ENDDO
         IF ( N<7 ) RETURN
@@ -73,7 +73,7 @@ SUBROUTINE DCOPY(N,Dx,Incx,Dy,Incy)
       !     Code for equal, positive, non-unit increments.
       !
       ns = N*Incx
-      DO i = 1 , ns , Incx
+      DO i = 1, ns, Incx
         Dy(i) = Dx(i)
       ENDDO
       GOTO 99999
@@ -86,14 +86,14 @@ SUBROUTINE DCOPY(N,Dx,Incx,Dy,Incy)
   iy = 1
   IF ( Incx<0 ) ix = (-N+1)*Incx + 1
   IF ( Incy<0 ) iy = (-N+1)*Incy + 1
-  DO i = 1 , N
+  DO i = 1, N
     Dy(iy) = Dx(ix)
     ix = ix + Incx
     iy = iy + Incy
   ENDDO
   RETURN
   100  mp1 = m + 1
-  DO i = mp1 , N , 7
+  DO i = mp1, N, 7
     Dy(i) = Dx(i)
     Dy(i+1) = Dx(i+1)
     Dy(i+2) = Dx(i+2)
@@ -103,4 +103,5 @@ SUBROUTINE DCOPY(N,Dx,Incx,Dy,Incy)
     Dy(i+6) = Dx(i+6)
   ENDDO
   RETURN
-  99999 END SUBROUTINE DCOPY
+  99999 CONTINUE
+  END SUBROUTINE DCOPY

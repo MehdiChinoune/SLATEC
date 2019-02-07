@@ -104,19 +104,19 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  COMQR2
   !
-  INTEGER i , j , k , l , m , N , en , ii , jj , ll , Nm , nn , Igh , ip1
-  INTEGER itn , its , Low , lp1 , enm1 , iend , Ierr
-  REAL Hr(Nm,*) , Hi(Nm,*) , Wr(*) , Wi(*) , Zr(Nm,*) , Zi(Nm,*)
-  REAL Ortr(*) , Orti(*)
-  REAL si , sr , ti , tr , xi , xr , yi , yr , zzi , zzr , norm , s1 , s2
+  INTEGER i, j, k, l, m, N, en, ii, jj, ll, Nm, nn, Igh, ip1
+  INTEGER itn, its, Low, lp1, enm1, iend, Ierr
+  REAL Hr(Nm,*), Hi(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
+  REAL Ortr(*), Orti(*)
+  REAL si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, norm, s1, s2
   REAL PYTHAG
   !
   !***FIRST EXECUTABLE STATEMENT  COMQR2
   Ierr = 0
   !     .......... INITIALIZE EIGENVECTOR MATRIX ..........
-  DO i = 1 , N
+  DO i = 1, N
     !
-    DO j = 1 , N
+    DO j = 1, N
       Zr(i,j) = 0.0E0
       Zi(i,j) = 0.0E0
       IF ( i==j ) Zr(i,j) = 1.0E0
@@ -128,7 +128,7 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   IF ( iend<0 ) GOTO 100
   IF ( iend/=0 ) THEN
     !     .......... FOR I=IGH-1 STEP -1 UNTIL LOW+1 DO -- ..........
-    DO ii = 1 , iend
+    DO ii = 1, iend
       i = Igh - ii
       IF ( Ortr(i)/=0.0E0.OR.Orti(i)/=0.0E0 ) THEN
         IF ( Hr(i,i-1)/=0.0E0.OR.Hi(i,i-1)/=0.0E0 ) THEN
@@ -136,16 +136,16 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
           norm = Hr(i,i-1)*Ortr(i) + Hi(i,i-1)*Orti(i)
           ip1 = i + 1
           !
-          DO k = ip1 , Igh
+          DO k = ip1, Igh
             Ortr(k) = Hr(k,i-1)
             Orti(k) = Hi(k,i-1)
           ENDDO
           !
-          DO j = i , Igh
+          DO j = i, Igh
             sr = 0.0E0
             si = 0.0E0
             !
-            DO k = i , Igh
+            DO k = i, Igh
               sr = sr + Ortr(k)*Zr(k,j) + Orti(k)*Zi(k,j)
               si = si + Ortr(k)*Zi(k,j) - Orti(k)*Zr(k,j)
             ENDDO
@@ -153,7 +153,7 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
             sr = sr/norm
             si = si/norm
             !
-            DO k = i , Igh
+            DO k = i, Igh
               Zr(k,j) = Zr(k,j) + sr*Ortr(k) - si*Orti(k)
               Zi(k,j) = Zi(k,j) + sr*Orti(k) + si*Ortr(k)
             ENDDO
@@ -167,7 +167,7 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   !     .......... CREATE REAL SUBDIAGONAL ELEMENTS ..........
   l = Low + 1
   !
-  DO i = l , Igh
+  DO i = l, Igh
     ll = MIN(i+1,Igh)
     IF ( Hi(i,i-1)/=0.0E0 ) THEN
       norm = PYTHAG(Hr(i,i-1),Hi(i,i-1))
@@ -176,19 +176,19 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
       Hr(i,i-1) = norm
       Hi(i,i-1) = 0.0E0
       !
-      DO j = i , N
+      DO j = i, N
         si = yr*Hi(i,j) - yi*Hr(i,j)
         Hr(i,j) = yr*Hr(i,j) + yi*Hi(i,j)
         Hi(i,j) = si
       ENDDO
       !
-      DO j = 1 , ll
+      DO j = 1, ll
         si = yr*Hi(j,i) + yi*Hr(j,i)
         Hr(j,i) = yr*Hr(j,i) - yi*Hi(j,i)
         Hi(j,i) = si
       ENDDO
       !
-      DO j = Low , Igh
+      DO j = Low, Igh
         si = yr*Zi(j,i) + yi*Zr(j,i)
         Zr(j,i) = yr*Zr(j,i) - yi*Zi(j,i)
         Zi(j,i) = si
@@ -197,258 +197,262 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
     !
   ENDDO
   !     .......... STORE ROOTS ISOLATED BY CBAL ..........
-  100  DO i = 1 , N
-  IF ( i<Low.OR.i>Igh ) THEN
-    Wr(i) = Hr(i,i)
-    Wi(i) = Hi(i,i)
-  ENDIF
-ENDDO
-!
-en = Igh
-tr = 0.0E0
-ti = 0.0E0
-itn = 30*N
-!     .......... SEARCH FOR NEXT EIGENVALUE ..........
-200  IF ( en<Low ) THEN
-!     .......... ALL ROOTS FOUND.  BACKSUBSTITUTE TO FIND
-!                VECTORS OF UPPER TRIANGULAR FORM ..........
-norm = 0.0E0
-!
-DO i = 1 , N
-  !
-  DO j = i , N
-    norm = norm + ABS(Hr(i,j)) + ABS(Hi(i,j))
+  100 CONTINUE
+  DO i = 1, N
+    IF ( i<Low.OR.i>Igh ) THEN
+      Wr(i) = Hr(i,i)
+      Wi(i) = Hi(i,i)
+    ENDIF
   ENDDO
-ENDDO
-!
-IF ( N/=1.AND.norm/=0.0E0 ) THEN
-  !     .......... FOR EN=N STEP -1 UNTIL 2 DO -- ..........
-  DO nn = 2 , N
-    en = N + 2 - nn
-    xr = Wr(en)
-    xi = Wi(en)
-    enm1 = en - 1
-    !     .......... FOR I=EN-1 STEP -1 UNTIL 1 DO -- ..........
-    DO ii = 1 , enm1
-      i = en - ii
-      zzr = Hr(i,en)
-      zzi = Hi(i,en)
-      IF ( i/=enm1 ) THEN
-        ip1 = i + 1
-        !
-        DO j = ip1 , enm1
-          zzr = zzr + Hr(i,j)*Hr(j,en) - Hi(i,j)*Hi(j,en)
-          zzi = zzi + Hr(i,j)*Hi(j,en) + Hi(i,j)*Hr(j,en)
-        ENDDO
-      ENDIF
+  !
+  en = Igh
+  tr = 0.0E0
+  ti = 0.0E0
+  itn = 30*N
+  !     .......... SEARCH FOR NEXT EIGENVALUE ..........
+  200 CONTINUE
+  IF ( en<Low ) THEN
+    !     .......... ALL ROOTS FOUND.  BACKSUBSTITUTE TO FIND
+    !                VECTORS OF UPPER TRIANGULAR FORM ..........
+    norm = 0.0E0
+    !
+    DO i = 1, N
       !
-      yr = xr - Wr(i)
-      yi = xi - Wi(i)
-      IF ( yr==0.0E0.AND.yi==0.0E0 ) THEN
-        yr = norm
-        DO
-          yr = 0.5E0*yr
-          IF ( norm+yr<=norm ) THEN
-            yr = 2.0E0*yr
-            EXIT
-          ENDIF
-        ENDDO
-      ENDIF
-      CALL CDIV(zzr,zzi,yr,yi,Hr(i,en),Hi(i,en))
+      DO j = i, N
+        norm = norm + ABS(Hr(i,j)) + ABS(Hi(i,j))
+      ENDDO
     ENDDO
     !
-  ENDDO
-  !     .......... END BACKSUBSTITUTION ..........
-  enm1 = N - 1
-  !     .......... VECTORS OF ISOLATED ROOTS ..........
-  DO i = 1 , enm1
-    IF ( i<Low.OR.i>Igh ) THEN
-      ip1 = i + 1
-      !
-      DO j = ip1 , N
-        Zr(i,j) = Hr(i,j)
-        Zi(i,j) = Hi(i,j)
+    IF ( N/=1.AND.norm/=0.0E0 ) THEN
+      !     .......... FOR EN=N STEP -1 UNTIL 2 DO -- ..........
+      DO nn = 2, N
+        en = N + 2 - nn
+        xr = Wr(en)
+        xi = Wi(en)
+        enm1 = en - 1
+        !     .......... FOR I=EN-1 STEP -1 UNTIL 1 DO -- ..........
+        DO ii = 1, enm1
+          i = en - ii
+          zzr = Hr(i,en)
+          zzi = Hi(i,en)
+          IF ( i/=enm1 ) THEN
+            ip1 = i + 1
+            !
+            DO j = ip1, enm1
+              zzr = zzr + Hr(i,j)*Hr(j,en) - Hi(i,j)*Hi(j,en)
+              zzi = zzi + Hr(i,j)*Hi(j,en) + Hi(i,j)*Hr(j,en)
+            ENDDO
+          ENDIF
+          !
+          yr = xr - Wr(i)
+          yi = xi - Wi(i)
+          IF ( yr==0.0E0.AND.yi==0.0E0 ) THEN
+            yr = norm
+            DO
+              yr = 0.5E0*yr
+              IF ( norm+yr<=norm ) THEN
+                yr = 2.0E0*yr
+                EXIT
+              ENDIF
+            ENDDO
+          ENDIF
+          CALL CDIV(zzr,zzi,yr,yi,Hr(i,en),Hi(i,en))
+        ENDDO
+        !
+      ENDDO
+      !     .......... END BACKSUBSTITUTION ..........
+      enm1 = N - 1
+      !     .......... VECTORS OF ISOLATED ROOTS ..........
+      DO i = 1, enm1
+        IF ( i<Low.OR.i>Igh ) THEN
+          ip1 = i + 1
+          !
+          DO j = ip1, N
+            Zr(i,j) = Hr(i,j)
+            Zi(i,j) = Hi(i,j)
+          ENDDO
+        ENDIF
+        !
+      ENDDO
+      !     .......... MULTIPLY BY TRANSFORMATION MATRIX TO GIVE
+      !                VECTORS OF ORIGINAL FULL MATRIX.
+      !                FOR J=N STEP -1 UNTIL LOW+1 DO -- ..........
+      DO jj = Low, enm1
+        j = N + Low - jj
+        m = MIN(j-1,Igh)
+        !
+        DO i = Low, Igh
+          zzr = Zr(i,j)
+          zzi = Zi(i,j)
+          !
+          DO k = Low, m
+            zzr = zzr + Zr(i,k)*Hr(k,j) - Zi(i,k)*Hi(k,j)
+            zzi = zzi + Zr(i,k)*Hi(k,j) + Zi(i,k)*Hr(k,j)
+          ENDDO
+          !
+          Zr(i,j) = zzr
+          Zi(i,j) = zzi
+        ENDDO
+        !
       ENDDO
     ENDIF
-    !
+    GOTO 99999
+  ELSE
+    its = 0
+    enm1 = en - 1
+  ENDIF
+  !     .......... LOOK FOR SINGLE SMALL SUB-DIAGONAL ELEMENT
+  !                FOR L=EN STEP -1 UNTIL LOW DO -- ..........
+  300 CONTINUE
+  DO ll = Low, en
+    l = en + Low - ll
+    IF ( l==Low ) EXIT
+    s1 = ABS(Hr(l-1,l-1)) + ABS(Hi(l-1,l-1)) + ABS(Hr(l,l)) + ABS(Hi(l,l))
+    s2 = s1 + ABS(Hr(l,l-1))
+    IF ( s2==s1 ) EXIT
   ENDDO
-  !     .......... MULTIPLY BY TRANSFORMATION MATRIX TO GIVE
-  !                VECTORS OF ORIGINAL FULL MATRIX.
-  !                FOR J=N STEP -1 UNTIL LOW+1 DO -- ..........
-  DO jj = Low , enm1
-    j = N + Low - jj
-    m = MIN(j-1,Igh)
+  !     .......... FORM SHIFT ..........
+  IF ( l==en ) THEN
+    !     .......... A ROOT FOUND ..........
+    Hr(en,en) = Hr(en,en) + tr
+    Wr(en) = Hr(en,en)
+    Hi(en,en) = Hi(en,en) + ti
+    Wi(en) = Hi(en,en)
+    en = enm1
+    GOTO 200
+  ELSEIF ( itn==0 ) THEN
+    !     .......... SET ERROR -- NO CONVERGENCE TO AN
+    !                EIGENVALUE AFTER 30*N ITERATIONS ..........
+    Ierr = en
+  ELSE
+    IF ( its==10.OR.its==20 ) THEN
+      !     .......... FORM EXCEPTIONAL SHIFT ..........
+      sr = ABS(Hr(en,enm1)) + ABS(Hr(enm1,en-2))
+      si = 0.0E0
+    ELSE
+      sr = Hr(en,en)
+      si = Hi(en,en)
+      xr = Hr(enm1,en)*Hr(en,enm1)
+      xi = Hi(enm1,en)*Hr(en,enm1)
+      IF ( xr/=0.0E0.OR.xi/=0.0E0 ) THEN
+        yr = (Hr(enm1,enm1)-sr)/2.0E0
+        yi = (Hi(enm1,enm1)-si)/2.0E0
+        CALL CSROOT(yr**2-yi**2+xr,2.0E0*yr*yi+xi,zzr,zzi)
+        IF ( yr*zzr+yi*zzi<0.0E0 ) THEN
+          zzr = -zzr
+          zzi = -zzi
+        ENDIF
+        CALL CDIV(xr,xi,yr+zzr,yi+zzi,xr,xi)
+        sr = sr - xr
+        si = si - xi
+      ENDIF
+    ENDIF
     !
-    DO i = Low , Igh
-      zzr = Zr(i,j)
-      zzi = Zi(i,j)
-      !
-      DO k = Low , m
-        zzr = zzr + Zr(i,k)*Hr(k,j) - Zi(i,k)*Hi(k,j)
-        zzi = zzi + Zr(i,k)*Hi(k,j) + Zi(i,k)*Hr(k,j)
-      ENDDO
-      !
-      Zr(i,j) = zzr
-      Zi(i,j) = zzi
+    DO i = Low, en
+      Hr(i,i) = Hr(i,i) - sr
+      Hi(i,i) = Hi(i,i) - si
     ENDDO
     !
-  ENDDO
-ENDIF
-GOTO 99999
-ELSE
-its = 0
-enm1 = en - 1
-ENDIF
-!     .......... LOOK FOR SINGLE SMALL SUB-DIAGONAL ELEMENT
-!                FOR L=EN STEP -1 UNTIL LOW DO -- ..........
-300  DO ll = Low , en
-l = en + Low - ll
-IF ( l==Low ) EXIT
-s1 = ABS(Hr(l-1,l-1)) + ABS(Hi(l-1,l-1)) + ABS(Hr(l,l)) + ABS(Hi(l,l))
-s2 = s1 + ABS(Hr(l,l-1))
-IF ( s2==s1 ) EXIT
-ENDDO
-!     .......... FORM SHIFT ..........
-IF ( l==en ) THEN
-!     .......... A ROOT FOUND ..........
-Hr(en,en) = Hr(en,en) + tr
-Wr(en) = Hr(en,en)
-Hi(en,en) = Hi(en,en) + ti
-Wi(en) = Hi(en,en)
-en = enm1
-GOTO 200
-ELSEIF ( itn==0 ) THEN
-!     .......... SET ERROR -- NO CONVERGENCE TO AN
-!                EIGENVALUE AFTER 30*N ITERATIONS ..........
-Ierr = en
-ELSE
-IF ( its==10.OR.its==20 ) THEN
-!     .......... FORM EXCEPTIONAL SHIFT ..........
-sr = ABS(Hr(en,enm1)) + ABS(Hr(enm1,en-2))
-si = 0.0E0
-ELSE
-sr = Hr(en,en)
-si = Hi(en,en)
-xr = Hr(enm1,en)*Hr(en,enm1)
-xi = Hi(enm1,en)*Hr(en,enm1)
-IF ( xr/=0.0E0.OR.xi/=0.0E0 ) THEN
-  yr = (Hr(enm1,enm1)-sr)/2.0E0
-  yi = (Hi(enm1,enm1)-si)/2.0E0
-  CALL CSROOT(yr**2-yi**2+xr,2.0E0*yr*yi+xi,zzr,zzi)
-  IF ( yr*zzr+yi*zzi<0.0E0 ) THEN
-    zzr = -zzr
-    zzi = -zzi
+    tr = tr + sr
+    ti = ti + si
+    its = its + 1
+    itn = itn - 1
+    !     .......... REDUCE TO TRIANGLE (ROWS) ..........
+    lp1 = l + 1
+    !
+    DO i = lp1, en
+      sr = Hr(i,i-1)
+      Hr(i,i-1) = 0.0E0
+      norm = PYTHAG(PYTHAG(Hr(i-1,i-1),Hi(i-1,i-1)),sr)
+      xr = Hr(i-1,i-1)/norm
+      Wr(i-1) = xr
+      xi = Hi(i-1,i-1)/norm
+      Wi(i-1) = xi
+      Hr(i-1,i-1) = norm
+      Hi(i-1,i-1) = 0.0E0
+      Hi(i,i-1) = sr/norm
+      !
+      DO j = i, N
+        yr = Hr(i-1,j)
+        yi = Hi(i-1,j)
+        zzr = Hr(i,j)
+        zzi = Hi(i,j)
+        Hr(i-1,j) = xr*yr + xi*yi + Hi(i,i-1)*zzr
+        Hi(i-1,j) = xr*yi - xi*yr + Hi(i,i-1)*zzi
+        Hr(i,j) = xr*zzr - xi*zzi - Hi(i,i-1)*yr
+        Hi(i,j) = xr*zzi + xi*zzr - Hi(i,i-1)*yi
+      ENDDO
+      !
+    ENDDO
+    !
+    si = Hi(en,en)
+    IF ( si/=0.0E0 ) THEN
+      norm = PYTHAG(Hr(en,en),si)
+      sr = Hr(en,en)/norm
+      si = si/norm
+      Hr(en,en) = norm
+      Hi(en,en) = 0.0E0
+      IF ( en/=N ) THEN
+        ip1 = en + 1
+        !
+        DO j = ip1, N
+          yr = Hr(en,j)
+          yi = Hi(en,j)
+          Hr(en,j) = sr*yr + si*yi
+          Hi(en,j) = sr*yi - si*yr
+        ENDDO
+      ENDIF
+    ENDIF
+    !     .......... INVERSE OPERATION (COLUMNS) ..........
+    DO j = lp1, en
+      xr = Wr(j-1)
+      xi = Wi(j-1)
+      !
+      DO i = 1, j
+        yr = Hr(i,j-1)
+        yi = 0.0E0
+        zzr = Hr(i,j)
+        zzi = Hi(i,j)
+        IF ( i/=j ) THEN
+          yi = Hi(i,j-1)
+          Hi(i,j-1) = xr*yi + xi*yr + Hi(j,j-1)*zzi
+        ENDIF
+        Hr(i,j-1) = xr*yr - xi*yi + Hi(j,j-1)*zzr
+        Hr(i,j) = xr*zzr + xi*zzi - Hi(j,j-1)*yr
+        Hi(i,j) = xr*zzi - xi*zzr - Hi(j,j-1)*yi
+      ENDDO
+      !
+      DO i = Low, Igh
+        yr = Zr(i,j-1)
+        yi = Zi(i,j-1)
+        zzr = Zr(i,j)
+        zzi = Zi(i,j)
+        Zr(i,j-1) = xr*yr - xi*yi + Hi(j,j-1)*zzr
+        Zi(i,j-1) = xr*yi + xi*yr + Hi(j,j-1)*zzi
+        Zr(i,j) = xr*zzr + xi*zzi - Hi(j,j-1)*yr
+        Zi(i,j) = xr*zzi - xi*zzr - Hi(j,j-1)*yi
+      ENDDO
+      !
+    ENDDO
+    !
+    IF ( si/=0.0E0 ) THEN
+      !
+      DO i = 1, en
+        yr = Hr(i,en)
+        yi = Hi(i,en)
+        Hr(i,en) = sr*yr - si*yi
+        Hi(i,en) = sr*yi + si*yr
+      ENDDO
+      !
+      DO i = Low, Igh
+        yr = Zr(i,en)
+        yi = Zi(i,en)
+        Zr(i,en) = sr*yr - si*yi
+        Zi(i,en) = sr*yi + si*yr
+        !
+      ENDDO
+    ENDIF
+    GOTO 300
   ENDIF
-  CALL CDIV(xr,xi,yr+zzr,yi+zzi,xr,xi)
-  sr = sr - xr
-  si = si - xi
-ENDIF
-ENDIF
-!
-DO i = Low , en
-Hr(i,i) = Hr(i,i) - sr
-Hi(i,i) = Hi(i,i) - si
-ENDDO
-!
-tr = tr + sr
-ti = ti + si
-its = its + 1
-itn = itn - 1
-!     .......... REDUCE TO TRIANGLE (ROWS) ..........
-lp1 = l + 1
-!
-DO i = lp1 , en
-sr = Hr(i,i-1)
-Hr(i,i-1) = 0.0E0
-norm = PYTHAG(PYTHAG(Hr(i-1,i-1),Hi(i-1,i-1)),sr)
-xr = Hr(i-1,i-1)/norm
-Wr(i-1) = xr
-xi = Hi(i-1,i-1)/norm
-Wi(i-1) = xi
-Hr(i-1,i-1) = norm
-Hi(i-1,i-1) = 0.0E0
-Hi(i,i-1) = sr/norm
-!
-DO j = i , N
-  yr = Hr(i-1,j)
-  yi = Hi(i-1,j)
-  zzr = Hr(i,j)
-  zzi = Hi(i,j)
-  Hr(i-1,j) = xr*yr + xi*yi + Hi(i,i-1)*zzr
-  Hi(i-1,j) = xr*yi - xi*yr + Hi(i,i-1)*zzi
-  Hr(i,j) = xr*zzr - xi*zzi - Hi(i,i-1)*yr
-  Hi(i,j) = xr*zzi + xi*zzr - Hi(i,i-1)*yi
-ENDDO
-!
-ENDDO
-!
-si = Hi(en,en)
-IF ( si/=0.0E0 ) THEN
-norm = PYTHAG(Hr(en,en),si)
-sr = Hr(en,en)/norm
-si = si/norm
-Hr(en,en) = norm
-Hi(en,en) = 0.0E0
-IF ( en/=N ) THEN
-  ip1 = en + 1
-  !
-  DO j = ip1 , N
-    yr = Hr(en,j)
-    yi = Hi(en,j)
-    Hr(en,j) = sr*yr + si*yi
-    Hi(en,j) = sr*yi - si*yr
-  ENDDO
-ENDIF
-ENDIF
-!     .......... INVERSE OPERATION (COLUMNS) ..........
-DO j = lp1 , en
-xr = Wr(j-1)
-xi = Wi(j-1)
-!
-DO i = 1 , j
-  yr = Hr(i,j-1)
-  yi = 0.0E0
-  zzr = Hr(i,j)
-  zzi = Hi(i,j)
-  IF ( i/=j ) THEN
-    yi = Hi(i,j-1)
-    Hi(i,j-1) = xr*yi + xi*yr + Hi(j,j-1)*zzi
-  ENDIF
-  Hr(i,j-1) = xr*yr - xi*yi + Hi(j,j-1)*zzr
-  Hr(i,j) = xr*zzr + xi*zzi - Hi(j,j-1)*yr
-  Hi(i,j) = xr*zzi - xi*zzr - Hi(j,j-1)*yi
-ENDDO
-!
-DO i = Low , Igh
-  yr = Zr(i,j-1)
-  yi = Zi(i,j-1)
-  zzr = Zr(i,j)
-  zzi = Zi(i,j)
-  Zr(i,j-1) = xr*yr - xi*yi + Hi(j,j-1)*zzr
-  Zi(i,j-1) = xr*yi + xi*yr + Hi(j,j-1)*zzi
-  Zr(i,j) = xr*zzr + xi*zzi - Hi(j,j-1)*yr
-  Zi(i,j) = xr*zzi - xi*zzr - Hi(j,j-1)*yi
-ENDDO
-!
-ENDDO
-!
-IF ( si/=0.0E0 ) THEN
-!
-DO i = 1 , en
-  yr = Hr(i,en)
-  yi = Hi(i,en)
-  Hr(i,en) = sr*yr - si*yi
-  Hi(i,en) = sr*yi + si*yr
-ENDDO
-!
-DO i = Low , Igh
-  yr = Zr(i,en)
-  yi = Zi(i,en)
-  Zr(i,en) = sr*yr - si*yi
-  Zi(i,en) = sr*yi + si*yr
-  !
-ENDDO
-ENDIF
-GOTO 300
-ENDIF
-99999 END SUBROUTINE COMQR2
+  99999 CONTINUE
+  END SUBROUTINE COMQR2

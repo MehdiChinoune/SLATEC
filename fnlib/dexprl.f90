@@ -4,7 +4,7 @@ REAL(8) FUNCTION DEXPRL(X)
   IMPLICIT NONE
   !*--DEXPRL5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , nterms
+  INTEGER i, nterms
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DEXPRL
   !***PURPOSE  Calculate the relative error exponential (EXP(X)-1)/X.
@@ -31,9 +31,9 @@ REAL(8) FUNCTION DEXPRL(X)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DEXPRL
-  REAL(8) :: X , absx , alneps , xbnd , xln , xn , D1MACH
+  REAL(8) :: X, absx, alneps, xbnd, xln, xn, D1MACH
   LOGICAL first
-  SAVE nterms , xbnd , first
+  SAVE nterms, xbnd, first
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  DEXPRL
   IF ( first ) THEN
@@ -53,7 +53,7 @@ REAL(8) FUNCTION DEXPRL(X)
   IF ( absx<xbnd ) RETURN
   !
   DEXPRL = 0.0D0
-  DO i = 1 , nterms
+  DO i = 1, nterms
     DEXPRL = 1.0D0 + DEXPRL*X/(nterms+2-i)
   ENDDO
   !

@@ -79,9 +79,9 @@ SUBROUTINE CH(Nm,N,Ar,Ai,W,Matz,Zr,Zi,Fv1,Fv2,Fm1,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CH
   !
-  INTEGER i , j , N , Nm , Ierr , Matz
-  REAL Ar(Nm,*) , Ai(Nm,*) , W(*) , Zr(Nm,*) , Zi(Nm,*)
-  REAL Fv1(*) , Fv2(*) , Fm1(2,*)
+  INTEGER i, j, N, Nm, Ierr, Matz
+  REAL Ar(Nm,*), Ai(Nm,*), W(*), Zr(Nm,*), Zi(Nm,*)
+  REAL Fv1(*), Fv2(*), Fm1(2,*)
   !
   !***FIRST EXECUTABLE STATEMENT  CH
   IF ( N<=Nm ) THEN
@@ -89,9 +89,9 @@ SUBROUTINE CH(Nm,N,Ar,Ai,W,Matz,Zr,Zi,Fv1,Fv2,Fm1,Ierr)
     CALL HTRIDI(Nm,N,Ar,Ai,W,Fv1,Fv2,Fm1)
     IF ( Matz/=0 ) THEN
       !     .......... FIND BOTH EIGENVALUES AND EIGENVECTORS ..........
-      DO i = 1 , N
+      DO i = 1, N
         !
-        DO j = 1 , N
+        DO j = 1, N
           Zr(j,i) = 0.0E0
         ENDDO
         !

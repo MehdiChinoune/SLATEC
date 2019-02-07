@@ -17,11 +17,11 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
   !     CHPFA factors a complex Hermitian matrix stored in
   !     packed form by elimination with symmetric pivoting.
   !
-  !     To solve  A*X = B , follow CHPFA by CHPSL.
-  !     To compute  INVERSE(A)*C , follow CHPFA by CHPSL.
-  !     To compute  DETERMINANT(A) , follow CHPFA by CHPDI.
-  !     To compute  INERTIA(A) , follow CHPFA by CHPDI.
-  !     To compute  INVERSE(A) , follow CHPFA by CHPDI.
+  !     To solve  A*X = B, follow CHPFA by CHPSL.
+  !     To compute  INVERSE(A)*C, follow CHPFA by CHPSL.
+  !     To compute  DETERMINANT(A), follow CHPFA by CHPDI.
+  !     To compute  INERTIA(A), follow CHPFA by CHPDI.
+  !     To compute  INVERSE(A), follow CHPFA by CHPDI.
   !
   !     On Entry
   !
@@ -40,8 +40,8 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
   !                were used to obtain it stored in packed form.
   !                The factorization can be written  A = U*D*CTRANS(U)
   !                where  U  is a product of permutation and unit
-  !                upper triangular matrices , CTRANS(U) is the
-  !                conjugate transpose of  U , and  D  is block diagonal
+  !                upper triangular matrices, CTRANS(U) is the
+  !                conjugate transpose of  U, and  D  is block diagonal
   !                with 1 by 1 and 2 by 2 blocks.
   !
   !        KVPT    INTEGER(N)
@@ -81,15 +81,15 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CHPFA
-  INTEGER N , Kpvt(*) , Info
+  INTEGER N, Kpvt(*), Info
   COMPLEX Ap(*)
   !
-  COMPLEX ak , akm1 , bk , bkm1 , denom , mulk , mulkm1 , t
-  REAL absakk , alpha , colmax , rowmax
-  INTEGER ICAMAX , ij , ijj , ik , ikm1 , im , imax , imaxp1 , imim , imj ,&
+  COMPLEX ak, akm1, bk, bkm1, denom, mulk, mulkm1, t
+  REAL absakk, alpha, colmax, rowmax
+  INTEGER ICAMAX, ij, ijj, ik, ikm1, im, imax, imaxp1, imim, imj ,&
     imk
-  INTEGER j , jj , jk , jkm1 , jmax , jmim , k , kk , km1 , km1k , km1km1 ,&
-    km2 , kstep
+  INTEGER j, jj, jk, jkm1, jmax, jmim, k, kk, km1, km1k, km1km1 ,&
+    km2, kstep
   LOGICAL swap
   REAL, EXTERNAL :: CABS1
   !***FIRST EXECUTABLE STATEMENT  CHPFA
@@ -137,7 +137,7 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
         imaxp1 = imax + 1
         im = imax*(imax-1)/2
         imj = im + 2*imax
-        DO j = imaxp1 , k
+        DO j = imaxp1, k
           rowmax = MAX(rowmax,CABS1(Ap(imj)))
           imj = imj + j
         ENDDO
@@ -179,7 +179,7 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
           !
           CALL CSWAP(imax,Ap(im+1),1,Ap(ikm1+1),1)
           imj = ikm1 + imax
-          DO jj = imax , km1
+          DO jj = imax, km1
             j = km1 + imax - jj
             jkm1 = ikm1 + j
             t = CONJG(Ap(jkm1))
@@ -201,7 +201,7 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
           akm1 = Ap(km1km1)/CONJG(Ap(km1k))
           denom = 1.0E0 - ak*akm1
           ij = ik - (k-1) - (k-2)
-          DO jj = 1 , km2
+          DO jj = 1, km2
             j = km1 - jj
             jk = ik + j
             bk = Ap(jk)/Ap(km1k)
@@ -236,7 +236,7 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
           !
           CALL CSWAP(imax,Ap(im+1),1,Ap(ik+1),1)
           imj = ik + imax
-          DO jj = imax , k
+          DO jj = imax, k
             j = k + imax - jj
             jk = ik + j
             t = CONJG(Ap(jk))
@@ -249,7 +249,7 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
         !           PERFORM THE ELIMINATION.
         !
         ij = ik - (k-1)
-        DO jj = 1 , km1
+        DO jj = 1, km1
           j = k - jj
           jk = ik + j
           mulk = -Ap(jk)/Ap(kk)

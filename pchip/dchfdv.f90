@@ -99,14 +99,14 @@ SUBROUTINE DCHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER Ne , Next(2) , Ierr
-  REAL(8) :: X1 , X2 , F1 , F2 , D1 , D2 , Xe(*) , Fe(*) , De(*)
+  INTEGER Ne, Next(2), Ierr
+  REAL(8) :: X1, X2, F1, F2, D1, D2, Xe(*), Fe(*), De(*)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i
-  REAL(8) :: c2 , c2t2 , c3 , c3t3 , del1 , del2 , delta , h , x , &
-    xmi , xma , zero
+  REAL(8) :: c2, c2t2, c3, c3t3, del1, del2, delta, h, x, &
+    xmi, xma, zero
   SAVE zero
   DATA zero/0.D0/
   !
@@ -155,7 +155,7 @@ SUBROUTINE DCHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !
   !  EVALUATION LOOP.
   !
-  DO i = 1 , Ne
+  DO i = 1, Ne
     x = Xe(i) - X1
     Fe(i) = F1 + x*(D1+x*(c2+x*c3))
     De(i) = D1 + x*(c2t2+x*c3t3)
@@ -169,4 +169,5 @@ SUBROUTINE DCHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !
   RETURN
   !------------- LAST LINE OF DCHFDV FOLLOWS -----------------------------
-  99999 END SUBROUTINE DCHFDV
+  99999 CONTINUE
+  END SUBROUTINE DCHFDV

@@ -47,11 +47,11 @@ REAL(8) FUNCTION DENORM(N,X)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DENORM
-  INTEGER i , N
-  REAL(8) :: agiant , floatn , one , rdwarf , rgiant , s1 , s2 , s3 , &
-    X(*) , x1max , x3max , xabs , zero
-  SAVE one , zero , rdwarf , rgiant
-  DATA one , zero , rdwarf , rgiant/1.0D0 , 0.0D0 , 3.834D-20 , 1.304D19/
+  INTEGER i, N
+  REAL(8) :: agiant, floatn, one, rdwarf, rgiant, s1, s2, s3, &
+    X(*), x1max, x3max, xabs, zero
+  SAVE one, zero, rdwarf, rgiant
+  DATA one, zero, rdwarf, rgiant/1.0D0, 0.0D0, 3.834D-20, 1.304D19/
   !***FIRST EXECUTABLE STATEMENT  DENORM
   s1 = zero
   s2 = zero
@@ -60,7 +60,7 @@ REAL(8) FUNCTION DENORM(N,X)
   x3max = zero
   floatn = N
   agiant = rgiant/floatn
-  DO i = 1 , N
+  DO i = 1, N
     xabs = ABS(X(i))
     IF ( xabs>rdwarf.AND.xabs<agiant ) THEN
       !

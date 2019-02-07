@@ -4,14 +4,14 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   IMPLICIT NONE
   !*--REORT5
   !*** Start of declarations inserted by SPAG
-  REAL AE , C , dnd , dndt , dx , P , PWCnd , PX , RE , S , SDOT , srp , &
-    Stowa , TND , TOL , vnorm , W , wcnd , X , XBEg
-  REAL XENd , XOP , XOT , XSAv , Y , Yhp , Yp , ypnm
-  INTEGER ICOco , Iflag , IGOfx , ijk , INDpvt , INFo , INHomo , INTeg , &
-    Ip , ISTkop , IVP , j , k , kk , KNSwot , KOP , l , LOTjp , &
-    mflag , MNSwot
-  INTEGER MXNon , Ncomp , NCOmpd , NDIsk , NEQ , NEQivp , NFC , NFCc , &
-    nfcp , NIC , Niv , NOPg , NPS , NSWot , NTApe , NTP , NUMort , &
+  REAL AE, C, dnd, dndt, dx, P, PWCnd, PX, RE, S, SDOT, srp, &
+    Stowa, TND, TOL, vnorm, W, wcnd, X, XBEg
+  REAL XENd, XOP, XOT, XSAv, Y, Yhp, Yp, ypnm
+  INTEGER ICOco, Iflag, IGOfx, ijk, INDpvt, INFo, INHomo, INTeg, &
+    Ip, ISTkop, IVP, j, k, kk, KNSwot, KOP, l, LOTjp, &
+    mflag, MNSwot
+  INTEGER MXNon, Ncomp, NCOmpd, NDIsk, NEQ, NEQivp, NFC, NFCc, &
+    nfcp, NIC, Niv, NOPg, NPS, NSWot, NTApe, NTP, NUMort, &
     NXPts
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  REORT
@@ -62,17 +62,17 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  REORT
   !
-  DIMENSION Y(Ncomp,*) , Yp(*) , W(*) , S(*) , P(*) , Ip(*) , Stowa(*) , &
+  DIMENSION Y(Ncomp,*), Yp(*), W(*), S(*), P(*), Ip(*), Stowa(*), &
     Yhp(Ncomp,*)
   !
   ! **********************************************************************
   !
-  COMMON /ML8SZ / C , XSAv , IGOfx , INHomo , IVP , NCOmpd , NFC
-  COMMON /ML15TO/ PX , PWCnd , TND , X , XBEg , XENd , XOT , XOP , INFo(15)&
-    , ISTkop , KNSwot , KOP , LOTjp , MNSwot , NSWot
-  COMMON /ML18JR/ AE , RE , TOL , NXPts , NIC , NOPg , MXNon , NDIsk , &
-    NTApe , NEQ , INDpvt , INTeg , NPS , NTP , NEQivp , &
-    NUMort , NFCc , ICOco
+  COMMON /ML8SZ / C, XSAv, IGOfx, INHomo, IVP, NCOmpd, NFC
+  COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
+    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
+  COMMON /ML18JR/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
+    NUMort, NFCc, ICOco
   !
   ! **********************************************************************
   !***FIRST EXECUTABLE STATEMENT  REORT
@@ -109,7 +109,7 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       !     TEST FOR ORTHONORMALIZATION
       !
       IF ( wcnd>=50.*TOL ) THEN
-        DO ijk = 1 , nfcp
+        DO ijk = 1, nfcp
           IF ( S(ijk)>1.0E+20 ) GOTO 50
         ENDDO
         !
@@ -153,7 +153,7 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     LOTjp = 1
     kk = 1
     l = 1
-    DO k = 1 , NFCc
+    DO k = 1, NFCc
       srp = SQRT(P(kk))
       IF ( INHomo==1 ) W(k) = srp*W(k)
       vnorm = 1./srp
@@ -162,7 +162,7 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       IF ( NFC/=NFCc ) THEN
         IF ( l/=k/2 ) CYCLE
       ENDIF
-      DO j = 1 , Ncomp
+      DO j = 1, Ncomp
         Y(j,l) = Y(j,l)*vnorm
       ENDDO
       l = l + 1
@@ -176,10 +176,10 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       IF ( ypnm==0.0 ) ypnm = 1.0
       ypnm = SQRT(ypnm)
       S(nfcp) = ypnm
-      DO j = 1 , Ncomp
+      DO j = 1, Ncomp
         Yp(j) = Yp(j)/ypnm
       ENDDO
-      DO j = 1 , NFCc
+      DO j = 1, NFCc
         W(j) = C*W(j)
       ENDDO
     ENDIF

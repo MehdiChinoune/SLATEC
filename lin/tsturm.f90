@@ -121,17 +121,17 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  TSTURM
   !
-  INTEGER i , j , k , M , N , p , q , r , s , ii , ip , jj , Mm , m1 , m2 , &
-    Nm , its
-  INTEGER Ierr , group , isturm
-  REAL D(*) , E(*) , E2(*) , W(*) , Z(Nm,*)
-  REAL Rv1(*) , Rv2(*) , Rv3(*) , Rv4(*) , Rv5(*) , Rv6(*)
-  REAL u , v , Lb , t1 , t2 , Ub , uk , xu , x0 , x1 , Eps1 , eps2 , eps3 , &
+  INTEGER i, j, k, M, N, p, q, r, s, ii, ip, jj, Mm, m1, m2, &
+    Nm, its
+  INTEGER Ierr, group, isturm
+  REAL D(*), E(*), E2(*), W(*), Z(Nm,*)
+  REAL Rv1(*), Rv2(*), Rv3(*), Rv4(*), Rv5(*), Rv6(*)
+  REAL u, v, Lb, t1, t2, Ub, uk, xu, x0, x1, Eps1, eps2, eps3, &
     eps4
-  REAL norm , machep , s1 , s2
+  REAL norm, machep, s1, s2
   LOGICAL first
   !
-  SAVE first , machep
+  SAVE first, machep
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  TSTURM
   IF ( first ) machep = R1MACH(4)
@@ -141,7 +141,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
   t1 = Lb
   t2 = Ub
   !     .......... LOOK FOR SMALL SUB-DIAGONAL ENTRIES ..........
-  DO i = 1 , N
+  DO i = 1, N
     IF ( i/=1 ) THEN
       s1 = ABS(D(i)) + ABS(D(i-1))
       s2 = s1 + ABS(E(i))
@@ -158,13 +158,14 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
   GOTO 400
   !     .......... ESTABLISH AND PROCESS NEXT SUBMATRIX, REFINING
   !                INTERVAL BY THE GERSCHGORIN BOUNDS ..........
-  100  IF ( r==M ) GOTO 700
+  100 CONTINUE
+  IF ( r==M ) GOTO 700
   p = q + 1
   xu = D(p)
   x0 = D(p)
   u = 0.0E0
   !
-  DO q = p , N
+  DO q = p, N
     x1 = u
     u = 0.0E0
     v = 0.0E0
@@ -191,7 +192,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
     IF ( t1<=D(p).AND.D(p)<t2 ) THEN
       r = r + 1
       !
-      DO i = 1 , N
+      DO i = 1, N
         Z(i,r) = 0.0E0
       ENDDO
       !
@@ -202,7 +203,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
   ENDIF
   200  xu = Lb
   !     .......... FOR I=K STEP -1 UNTIL M1 DO -- ..........
-  DO ii = m1 , k
+  DO ii = m1, k
     i = m1 + k - ii
     IF ( xu<Rv4(i) ) THEN
       xu = Rv4(i)
@@ -224,7 +225,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
     norm = ABS(D(p))
     ip = p + 1
     !
-    DO i = ip , q
+    DO i = ip, q
       norm = MAX(norm,ABS(D(i))+ABS(E(i)))
     ENDDO
     !     .......... EPS2 IS THE CRITERION FOR GROUPING,
@@ -239,7 +240,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
     group = 0
     s = p
     !
-    DO k = m1 , m2
+    DO k = m1, m2
       r = r + 1
       its = 1
       W(r) = Rv5(k)
@@ -254,7 +255,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
       !                INITIALIZATION OF VECTOR ..........
       v = 0.0E0
       !
-      DO i = p , q
+      DO i = p, q
         Rv6(i) = uk
         IF ( i/=p ) THEN
           IF ( ABS(E(i))<ABS(u) ) THEN
@@ -286,7 +287,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
       DO
         !     .......... BACK SUBSTITUTION
         !                FOR I=Q STEP -1 UNTIL P DO -- ..........
-        DO ii = p , q
+        DO ii = p, q
           i = p + q - ii
           Rv6(i) = (Rv6(i)-u*Rv2(i)-v*Rv3(i))/Rv1(i)
           v = u
@@ -296,15 +297,15 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
         !                MEMBERS OF GROUP ..........
         IF ( group/=0 ) THEN
           !
-          DO jj = 1 , group
+          DO jj = 1, group
             j = r - group - 1 + jj
             xu = 0.0E0
             !
-            DO i = p , q
+            DO i = p, q
               xu = xu + Rv6(i)*Z(i,j)
             ENDDO
             !
-            DO i = p , q
+            DO i = p, q
               Rv6(i) = Rv6(i) - xu*Z(i,j)
             ENDDO
             !
@@ -313,7 +314,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
         !
         norm = 0.0E0
         !
-        DO i = p , q
+        DO i = p, q
           norm = norm + ABS(Rv6(i))
         ENDDO
         !
@@ -322,17 +323,17 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
           !                1 AND EXPAND TO FULL ORDER ..........
           u = 0.0E0
           !
-          DO i = p , q
+          DO i = p, q
             u = u + Rv6(i)**2
           ENDDO
           !
           xu = 1.0E0/SQRT(u)
           !
-          DO i = 1 , N
+          DO i = 1, N
             Z(i,r) = 0.0E0
           ENDDO
           !
-          DO i = p , q
+          DO i = p, q
             Z(i,r) = Rv6(i)*xu
           ENDDO
           !
@@ -344,7 +345,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
           IF ( norm/=0.0E0 ) THEN
             xu = eps4/norm
             !
-            DO i = p , q
+            DO i = p, q
               Rv6(i) = Rv6(i)*xu
             ENDDO
           ELSE
@@ -354,7 +355,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
           ENDIF
           !     .......... ELIMINATION OPERATIONS ON NEXT VECTOR
           !                ITERATE ..........
-          DO i = ip , q
+          DO i = ip, q
             u = Rv6(i)
             !     .......... IF RV1(I-1) .EQ. E(I), A ROW INTERCHANGE
             !                WAS PERFORMED EARLIER IN THE
@@ -372,80 +373,82 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
     ENDDO
     GOTO 500
   ENDIF
-  400  DO
-  !     .......... IN-LINE PROCEDURE FOR STURM SEQUENCE ..........
-  s = p - 1
-  u = 1.0E0
-  !
-  DO i = p , q
-    IF ( u/=0.0E0 ) THEN
-      v = E2(i)/u
-    ELSE
-      v = ABS(E(i))/machep
-      IF ( E2(i)==0.0E0 ) v = 0.0E0
-    ENDIF
-    u = D(i) - x1 - v
-    IF ( u<0.0E0 ) s = s + 1
+  400 CONTINUE
+  DO
+    !     .......... IN-LINE PROCEDURE FOR STURM SEQUENCE ..........
+    s = p - 1
+    u = 1.0E0
+    !
+    DO i = p, q
+      IF ( u/=0.0E0 ) THEN
+        v = E2(i)/u
+      ELSE
+        v = ABS(E(i))/machep
+        IF ( E2(i)==0.0E0 ) v = 0.0E0
+      ENDIF
+      u = D(i) - x1 - v
+      IF ( u<0.0E0 ) s = s + 1
+    ENDDO
+    !
+    SELECT CASE (isturm)
+      CASE (1)
+        M = s
+        x1 = Lb
+        isturm = 2
+      CASE (2)
+        M = M - s
+        IF ( M>Mm ) THEN
+          !     .......... SET ERROR -- UNDERESTIMATE OF NUMBER OF
+          !                EIGENVALUES IN INTERVAL ..........
+          Ierr = 3*N + 1
+          GOTO 700
+        ELSE
+          q = 0
+          r = 0
+          GOTO 100
+        ENDIF
+      CASE (3)
+        m1 = s + 1
+        x1 = Ub
+        isturm = 4
+      CASE (4)
+        m2 = s
+        IF ( m1>m2 ) EXIT
+        !     .......... FIND ROOTS BY BISECTION ..........
+        x0 = Ub
+        isturm = 5
+        !
+        DO i = m1, m2
+          Rv5(i) = Ub
+          Rv4(i) = Lb
+        ENDDO
+        !     .......... LOOP FOR K-TH EIGENVALUE
+        !                FOR K=M2 STEP -1 UNTIL M1 DO --
+        !                (-DO- NOT USED TO LEGALIZE -COMPUTED GO TO-) ..........
+        k = m2
+        GOTO 200
+      CASE DEFAULT
+        !     .......... REFINE INTERVALS ..........
+        IF ( s>=k ) THEN
+          x0 = x1
+        ELSE
+          xu = x1
+          IF ( s>=m1 ) THEN
+            Rv4(s+1) = x1
+            IF ( Rv5(s)>x1 ) Rv5(s) = x1
+          ELSE
+            Rv4(m1) = x1
+          ENDIF
+        ENDIF
+        GOTO 300
+    END SELECT
   ENDDO
   !
-  SELECT CASE (isturm)
-    CASE (1)
-      M = s
-      x1 = Lb
-      isturm = 2
-    CASE (2)
-      M = M - s
-      IF ( M>Mm ) THEN
-        !     .......... SET ERROR -- UNDERESTIMATE OF NUMBER OF
-        !                EIGENVALUES IN INTERVAL ..........
-        Ierr = 3*N + 1
-        GOTO 700
-      ELSE
-        q = 0
-        r = 0
-        GOTO 100
-      ENDIF
-    CASE (3)
-      m1 = s + 1
-      x1 = Ub
-      isturm = 4
-    CASE (4)
-      m2 = s
-      IF ( m1>m2 ) EXIT
-      !     .......... FIND ROOTS BY BISECTION ..........
-      x0 = Ub
-      isturm = 5
-      !
-      DO i = m1 , m2
-        Rv5(i) = Ub
-        Rv4(i) = Lb
-      ENDDO
-      !     .......... LOOP FOR K-TH EIGENVALUE
-      !                FOR K=M2 STEP -1 UNTIL M1 DO --
-      !                (-DO- NOT USED TO LEGALIZE -COMPUTED GO TO-) ..........
-      k = m2
-      GOTO 200
-    CASE DEFAULT
-      !     .......... REFINE INTERVALS ..........
-      IF ( s>=k ) THEN
-        x0 = x1
-      ELSE
-        xu = x1
-        IF ( s>=m1 ) THEN
-          Rv4(s+1) = x1
-          IF ( Rv5(s)>x1 ) Rv5(s) = x1
-        ELSE
-          Rv4(m1) = x1
-        ENDIF
-      ENDIF
-      GOTO 300
-  END SELECT
-ENDDO
-!
-500  IF ( q>=N ) GOTO 700
-GOTO 100
-!     .......... SET ERROR -- NON-CONVERGED EIGENVECTOR ..........
-600  Ierr = 4*N + r
-700  Lb = t1
-Ub = t2
+  500 CONTINUE
+  IF ( q>=N ) GOTO 700
+  GOTO 100
+  !     .......... SET ERROR -- NON-CONVERGED EIGENVECTOR ..........
+  600  Ierr = 4*N + r
+  700  Lb = t1
+  Ub = t2
 END SUBROUTINE TSTURM

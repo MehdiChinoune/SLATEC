@@ -4,7 +4,7 @@ SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
   IMPLICIT NONE
   !*--SSWAP5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , Incy , ix , iy , m , mp1 , N , ns
+  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSWAP
   !***PURPOSE  Interchange two vectors.
@@ -50,7 +50,7 @@ SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SSWAP
-  REAL Sx(*) , Sy(*) , stemp1 , stemp2 , stemp3
+  REAL Sx(*), Sy(*), stemp1, stemp2, stemp3
   !***FIRST EXECUTABLE STATEMENT  SSWAP
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy ) THEN
@@ -63,7 +63,7 @@ SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
       !
       m = MOD(N,3)
       IF ( m/=0 ) THEN
-        DO i = 1 , m
+        DO i = 1, m
           stemp1 = Sx(i)
           Sx(i) = Sy(i)
           Sy(i) = stemp1
@@ -76,7 +76,7 @@ SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
       !     Code for equal, positive, non-unit increments.
       !
       ns = N*Incx
-      DO i = 1 , ns , Incx
+      DO i = 1, ns, Incx
         stemp1 = Sx(i)
         Sx(i) = Sy(i)
         Sy(i) = stemp1
@@ -91,7 +91,7 @@ SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
   iy = 1
   IF ( Incx<0 ) ix = (-N+1)*Incx + 1
   IF ( Incy<0 ) iy = (-N+1)*Incy + 1
-  DO i = 1 , N
+  DO i = 1, N
     stemp1 = Sx(ix)
     Sx(ix) = Sy(iy)
     Sy(iy) = stemp1
@@ -100,7 +100,7 @@ SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
   ENDDO
   RETURN
   100  mp1 = m + 1
-  DO i = mp1 , N , 3
+  DO i = mp1, N, 3
     stemp1 = Sx(i)
     stemp2 = Sx(i+1)
     stemp3 = Sx(i+2)
@@ -112,4 +112,5 @@ SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
     Sy(i+2) = stemp3
   ENDDO
   RETURN
-  99999 END SUBROUTINE SSWAP
+  99999 CONTINUE
+  END SUBROUTINE SSWAP

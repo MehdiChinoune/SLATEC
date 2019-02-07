@@ -96,8 +96,8 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !
   !      then  N = 6, ML = 1, MU = 2, LDA .GE. 5  and ABE should contain
   !
-  !            * 11 12 13  +     , * = not used
-  !           21 22 23 24  +     , + = used for pivoting
+  !            * 11 12 13  +    , * = not used
+  !           21 22 23 24  +    , + = used for pivoting
   !           32 33 34 35  +
   !           43 44 45 46  +
   !           54 55 56  *  +
@@ -114,10 +114,10 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DNBFA
-  INTEGER Lda , N , Ml , Mu , Ipvt(*) , Info
+  INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
   REAL(8) :: Abe(Lda,*)
   !
-  INTEGER ml1 , mb , m , n1 , ldb , i , j , k , l , lm , lm1 , lm2 , mp , &
+  INTEGER ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp, &
     IDAMAX
   REAL(8) :: t
   !***FIRST EXECUTABLE STATEMENT  DNBFA
@@ -132,8 +132,8 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !
   IF ( N>1 ) THEN
     IF ( Ml>0 ) THEN
-      DO j = 1 , Ml
-        DO i = 1 , N
+      DO j = 1, Ml
+        DO i = 1, N
           Abe(i,m+j) = 0.0D0
         ENDDO
       ENDDO
@@ -141,7 +141,7 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
     !
     !     GAUSSIAN ELIMINATION WITH PARTIAL ELIMINATION
     !
-    DO k = 1 , n1
+    DO k = 1, n1
       lm = MIN(N-k,Ml)
       lm1 = lm + 1
       lm2 = ml1 - lm
@@ -169,7 +169,7 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
         !
         !     ROW ELIMINATION WITH COLUMN INDEXING
         !
-        DO j = 1 , mp
+        DO j = 1, mp
           CALL DAXPY(lm,Abe(k,ml1+j),Abe(lm+k,lm2),ldb,Abe(lm+k,lm2+j),ldb)
         ENDDO
       ENDIF

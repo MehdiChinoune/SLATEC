@@ -5,7 +5,7 @@ REAL(8) FUNCTION DBSK0E(X)
   !*--DBSK0E5
   !*** Start of declarations inserted by SPAG
   REAL eta
-  INTEGER INITDS , ntak0 , ntak02 , ntk0
+  INTEGER INITDS, ntak0, ntak02, ntk0
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBSK0E
   !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
@@ -50,10 +50,10 @@ REAL(8) FUNCTION DBSK0E(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBSK0E
-  REAL(8) :: X , bk0cs(16) , ak0cs(38) , ak02cs(33) , xsml , y , &
-    D1MACH , DCSEVL , DBESI0
+  REAL(8) :: X, bk0cs(16), ak0cs(38), ak02cs(33), xsml, y, &
+    D1MACH, DCSEVL, DBESI0
   LOGICAL first
-  SAVE bk0cs , ak0cs , ak02cs , ntk0 , ntak0 , ntak02 , xsml , first
+  SAVE bk0cs, ak0cs, ak02cs, ntk0, ntak0, ntak02, xsml, first
   DATA bk0cs(1)/ - .353273932339027687201140060063153D-1/
   DATA bk0cs(2)/ + .344289899924628486886344927529213D+0/
   DATA bk0cs(3)/ + .359799365153615016265721303687231D-1/
@@ -168,4 +168,5 @@ REAL(8) FUNCTION DBSK0E(X)
     *(-LOG(0.5D0*X)*DBESI0(X)-0.25D0+DCSEVL(.5D0*y-1.D0,bk0cs,ntk0))
   RETURN
   !
-  99999 END FUNCTION DBSK0E
+  99999 CONTINUE
+  END FUNCTION DBSK0E

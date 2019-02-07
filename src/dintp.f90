@@ -55,15 +55,15 @@ SUBROUTINE DINTP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,Og,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DINTP
   !
-  INTEGER i , iq , Iv , Ivc , iw , j , jq , Kgi , Kold , kp1 , kp2 , l , m , &
+  INTEGER i, iq, Iv, Ivc, iw, j, jq, Kgi, Kold, kp1, kp2, l, m, &
     Neqn
-  REAL(8) :: alp , Alpha , c , g , gdi , gdif , Gi , gamma , h , hi , &
-    hmu , Og , Ow , Ox , Oy , Phi , rmu , sigma , temp1 , &
-    temp2 , temp3 , w , X , xi , xim1 , xiq , Xout , Y , &
-    Yout , Ypout
+  REAL(8) :: alp, Alpha, c, g, gdi, gdif, Gi, gamma, h, hi, &
+    hmu, Og, Ow, Ox, Oy, Phi, rmu, sigma, temp1, &
+    temp2, temp3, w, X, xi, xim1, xiq, Xout, Y, &
+    Yout, Ypout
   !
-  DIMENSION Y(*) , Yout(*) , Ypout(*) , Phi(Neqn,16) , Oy(*)
-  DIMENSION g(13) , c(13) , w(13) , Og(13) , Ow(12) , Alpha(12) , Gi(11) , &
+  DIMENSION Y(*), Yout(*), Ypout(*), Phi(Neqn,16), Oy(*)
+  DIMENSION g(13), c(13), w(13), Og(13), Ow(12), Alpha(12), Gi(11), &
     Iv(10)
   !
   !***FIRST EXECUTABLE STATEMENT  DINTP
@@ -78,7 +78,7 @@ SUBROUTINE DINTP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,Og,&
   !   INITIALIZE W(*) FOR COMPUTING G(*)
   !
   xiq = xi
-  DO iq = 1 , kp1
+  DO iq = 1, kp1
     xiq = xi*xiq
     temp1 = iq*(iq+1)
     w(iq) = xiq/temp1
@@ -98,7 +98,7 @@ SUBROUTINE DINTP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,Og,&
       m = 2
     ENDIF
     IF ( m<=Kold ) THEN
-      DO i = m , Kold
+      DO i = m, Kold
         gdi = Ow(kp2-i) - Alpha(i)*gdi
       ENDDO
     ENDIF
@@ -111,11 +111,11 @@ SUBROUTINE DINTP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,Og,&
   c(1) = 1.0D0
   c(2) = xi
   IF ( Kold>=2 ) THEN
-    DO i = 2 , Kold
+    DO i = 2, Kold
       alp = Alpha(i)
       gamma = 1.0D0 + xim1*alp
       l = kp2 - i
-      DO jq = 1 , l
+      DO jq = 1, l
         w(jq) = gamma*w(jq) - alp*w(jq+1)
       ENDDO
       g(i+1) = w(1)
@@ -132,21 +132,21 @@ SUBROUTINE DINTP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,Og,&
   !   INTERPOLATE FOR THE SOLUTION -- YOUT
   !   AND FOR THE DERIVATIVE OF THE SOLUTION -- YPOUT
   !
-  DO l = 1 , Neqn
+  DO l = 1, Neqn
     Yout(l) = 0.0D0
     Ypout(l) = 0.0D0
   ENDDO
-  DO j = 1 , Kold
+  DO j = 1, Kold
     i = kp2 - j
     gdif = Og(i) - Og(i-1)
     temp2 = (g(i)-g(i-1)) - sigma*gdif
     temp3 = (c(i)-c(i-1)) + rmu*gdif
-    DO l = 1 , Neqn
+    DO l = 1, Neqn
       Yout(l) = Yout(l) + temp2*Phi(l,i)
       Ypout(l) = Ypout(l) + temp3*Phi(l,i)
     ENDDO
   ENDDO
-  DO l = 1 , Neqn
+  DO l = 1, Neqn
     Yout(l) = ((1.0D0-sigma)*Oy(l)+sigma*Y(l))&
       + h*(Yout(l)+(g(1)-sigma*Og(1))*Phi(l,1))
     Ypout(l) = hmu*(Oy(l)-Y(l)) + (Ypout(l)+(c(1)+rmu*Og(1))*Phi(l,1))

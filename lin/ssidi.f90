@@ -82,15 +82,15 @@ SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SSIDI
-  INTEGER Lda , N , Job
-  REAL A(Lda,*) , Work(*)
+  INTEGER Lda, N, Job
+  REAL A(Lda,*), Work(*)
   REAL Det(2)
-  INTEGER Kpvt(*) , Inert(3)
+  INTEGER Kpvt(*), Inert(3)
   !
-  REAL akkp1 , SDOT , temp
-  REAL ten , d , t , ak , akp1
-  INTEGER j , jb , k , km1 , ks , kstep
-  LOGICAL noinv , nodet , noert
+  REAL akkp1, SDOT, temp
+  REAL ten, d, t, ak, akp1
+  INTEGER j, jb, k, km1, ks, kstep
+  LOGICAL noinv, nodet, noert
   !***FIRST EXECUTABLE STATEMENT  SSIDI
   noinv = MOD(Job,10)==0
   nodet = MOD(Job,100)/10==0
@@ -108,7 +108,7 @@ SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
       ten = 10.0E0
     ENDIF
     t = 0.0E0
-    DO k = 1 , N
+    DO k = 1, N
       d = A(k,k)
       !
       !           CHECK IF 1 BY 1
@@ -116,7 +116,7 @@ SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
       IF ( Kpvt(k)<=0 ) THEN
         !
         !              2 BY 2 BLOCK
-        !              USE DET (D  S)  =  (D/T * C - T) * T  ,  T = ABS(S)
+        !              USE DET (D  S)  =  (D/T * C - T) * T ,  T = ABS(S)
         !                      (S  C)
         !              TO AVOID UNDERFLOW/OVERFLOW TROUBLES.
         !              TAKE TWO PASSES THROUGH SCALING.  USE  T  FOR FLAG.
@@ -172,14 +172,14 @@ SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
         A(k,k+1) = -akkp1/d
         IF ( km1>=1 ) THEN
           CALL SCOPY(km1,A(1,k+1),1,Work,1)
-          DO j = 1 , km1
+          DO j = 1, km1
             A(j,k+1) = SDOT(j,A(1,j),1,Work,1)
             CALL SAXPY(j-1,Work(j),A(1,j),1,A(1,k+1),1)
           ENDDO
           A(k+1,k+1) = A(k+1,k+1) + SDOT(km1,Work,1,A(1,k+1),1)
           A(k,k+1) = A(k,k+1) + SDOT(km1,A(1,k),1,A(1,k+1),1)
           CALL SCOPY(km1,A(1,k),1,Work,1)
-          DO j = 1 , km1
+          DO j = 1, km1
             A(j,k) = SDOT(j,A(1,j),1,Work,1)
             CALL SAXPY(j-1,Work(j),A(1,j),1,A(1,k),1)
           ENDDO
@@ -193,7 +193,7 @@ SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
         A(k,k) = 1.0E0/A(k,k)
         IF ( km1>=1 ) THEN
           CALL SCOPY(km1,A(1,k),1,Work,1)
-          DO j = 1 , km1
+          DO j = 1, km1
             A(j,k) = SDOT(j,A(1,j),1,Work,1)
             CALL SAXPY(j-1,Work(j),A(1,j),1,A(1,k),1)
           ENDDO
@@ -207,7 +207,7 @@ SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
       ks = ABS(Kpvt(k))
       IF ( ks/=k ) THEN
         CALL SSWAP(ks,A(1,ks),1,A(1,k),1)
-        DO jb = ks , k
+        DO jb = ks, k
           j = k + ks - jb
           temp = A(j,k)
           A(j,k) = A(ks,j)

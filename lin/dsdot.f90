@@ -4,7 +4,7 @@ REAL(8) FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
   IMPLICIT NONE
   !*--DSDOT5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , Incy , kx , ky , N , ns
+  INTEGER i, Incx, Incy, kx, ky, N, ns
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSDOT
   !***PURPOSE  Compute the inner product of two vectors with extended
@@ -51,7 +51,7 @@ REAL(8) FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSDOT
-  REAL Sx(*) , Sy(*)
+  REAL Sx(*), Sy(*)
   !***FIRST EXECUTABLE STATEMENT  DSDOT
   DSDOT = 0.0D0
   IF ( N<=0 ) RETURN
@@ -60,7 +60,7 @@ REAL(8) FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
     !     Code for equal, positive, non-unit increments.
     !
     ns = N*Incx
-    DO i = 1 , ns , Incx
+    DO i = 1, ns, Incx
       DSDOT = DSDOT + REAL(Sx(i), 8)*REAL(Sy(i), 8)
     ENDDO
     GOTO 99999
@@ -72,10 +72,11 @@ REAL(8) FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
   ky = 1
   IF ( Incx<0 ) kx = 1 + (1-N)*Incx
   IF ( Incy<0 ) ky = 1 + (1-N)*Incy
-  DO i = 1 , N
+  DO i = 1, N
     DSDOT = DSDOT + REAL(Sx(kx), 8)*REAL(Sy(ky), 8)
     kx = kx + Incx
     ky = ky + Incy
   ENDDO
   RETURN
-  99999 END FUNCTION DSDOT
+  99999 CONTINUE
+  END FUNCTION DSDOT

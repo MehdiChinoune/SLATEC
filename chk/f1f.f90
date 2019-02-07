@@ -12,7 +12,7 @@ REAL FUNCTION F1F(X)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  F1F
-  REAL X , x1 , y
+  REAL X, x1, y
   !***FIRST EXECUTABLE STATEMENT  F1F
   x1 = X + 1.0
   F1F = 5.0/x1/x1

@@ -25,38 +25,38 @@ SUBROUTINE SCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  SCHK33
   !     .. Parameters ..
-  REAL ZERO , ONE
+  REAL ZERO, ONE
   PARAMETER (ZERO=0.0,ONE=1.0)
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  REAL Eps , Thresh
-  INTEGER Kprint , Nalf , Nidim , Nmax , Nout
+  REAL Eps, Thresh
+  INTEGER Kprint, Nalf, Nidim, Nmax, Nout
   CHARACTER(6) :: Sname
   !     .. Array Arguments ..
-  REAL A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) , G(Nmax) ,&
-    B(Nmax,Nmax) , Bb(Nmax*Nmax) , Bs(Nmax*Nmax) , C(Nmax,Nmax) ,&
+  REAL A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), G(Nmax) ,&
+    B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), C(Nmax,Nmax) ,&
     Ct(Nmax)
   INTEGER Idim(Nidim)
   !     .. Local Scalars ..
-  REAL alpha , als , err , errmax
-  INTEGER i , ia , icd , ics , ict , icu , im , in , j , laa , lbb , lda ,&
-    ldas , ldb , ldbs , m , ms , n , na , nargs , nc , nerr , ns
-  LOGICAL ftl , null , reset , left
-  CHARACTER :: side , sides , uplo , uplos , tranas , transa , diag , diags
-  CHARACTER(2) :: ichs , ichu , ichd
+  REAL alpha, als, err, errmax
+  INTEGER i, ia, icd, ics, ict, icu, im, in, j, laa, lbb, lda ,&
+    ldas, ldb, ldbs, m, ms, n, na, nargs, nc, nerr, ns
+  LOGICAL ftl, null, reset, left
+  CHARACTER :: side, sides, uplo, uplos, tranas, transa, diag, diags
+  CHARACTER(2) :: ichs, ichu, ichd
   CHARACTER(3) :: icht
   !     .. Local Arrays ..
   LOGICAL isame(13)
   !     .. External Functions ..
   INTEGER NUMXER
-  LOGICAL LSE , LSERES
-  EXTERNAL LSE , LSERES , NUMXER
+  LOGICAL LSE, LSERES
+  EXTERNAL LSE, LSERES, NUMXER
   !     .. External Subroutines ..
-  EXTERNAL STRMM , STRSM , SMAKE3 , SMMCH
+  EXTERNAL STRMM, STRSM, SMAKE3, SMMCH
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Data statements ..
-  DATA icht/'NTC'/ , ichu/'UL'/ , ichd/'UN'/ , ichs/'LR'/
+  DATA icht/'NTC'/, ichu/'UL'/, ichd/'UN'/, ichs/'LR'/
   !***FIRST EXECUTABLE STATEMENT  SCHK33
   nargs = 11
   !
@@ -65,16 +65,16 @@ SUBROUTINE SCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   errmax = ZERO
   !
   !     Set up zero matrix for SMMCH.
-  DO j = 1 , Nmax
-    DO i = 1 , Nmax
+  DO j = 1, Nmax
+    DO i = 1, Nmax
       C(i,j) = ZERO
     ENDDO
   ENDDO
   !
-  DO im = 1 , Nidim
+  DO im = 1, Nidim
     m = Idim(im)
     !
-    DO in = 1 , Nidim
+    DO in = 1, Nidim
       n = Idim(in)
       !           Set LDB to 1 more than minimum value if room.
       ldb = m
@@ -84,7 +84,7 @@ SUBROUTINE SCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
         lbb = ldb*n
         null = m<=0 .OR. n<=0
         !
-        DO ics = 1 , 2
+        DO ics = 1, 2
           side = ichs(ics:ics)
           left = side=='L'
           IF ( left ) THEN
@@ -99,16 +99,16 @@ SUBROUTINE SCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
           IF ( lda>Nmax ) EXIT
           laa = lda*na
           !
-          DO icu = 1 , 2
+          DO icu = 1, 2
             uplo = ichu(icu:icu)
             !
-            DO ict = 1 , 3
+            DO ict = 1, 3
               transa = icht(ict:ict)
               !
-              DO icd = 1 , 2
+              DO icd = 1, 2
                 diag = ichd(icd:icd)
                 !
-                DO ia = 1 , Nalf
+                DO ia = 1, Nalf
                   alpha = Alf(ia)
                   !
                   !                          Generate the matrix A.
@@ -131,11 +131,11 @@ SUBROUTINE SCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                   ms = m
                   ns = n
                   als = alpha
-                  DO i = 1 , laa
+                  DO i = 1, laa
                     As(i) = Aa(i)
                   ENDDO
                   ldas = lda
-                  DO i = 1 , lbb
+                  DO i = 1, lbb
                     Bs(i) = Bb(i)
                   ENDDO
                   ldbs = ldb
@@ -178,7 +178,7 @@ SUBROUTINE SCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                   !                          If data was incorrectly changed, report and
                   !                          return.
                   !
-                  DO i = 1 , nargs
+                  DO i = 1, nargs
                     IF ( .NOT.isame(i) ) THEN
                       Fatal = .TRUE.
                       IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
@@ -205,8 +205,8 @@ SUBROUTINE SCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                       !                                Compute approximation to original
                       !                                matrix.
                       !
-                      DO j = 1 , n
-                        DO i = 1 , m
+                      DO j = 1, n
+                        DO i = 1, m
                           C(i,j) = Bb(i+(j-1)*ldb)
                           Bb(i+(j-1)*ldb) = alpha*B(i,j)
                         ENDDO
@@ -228,8 +228,8 @@ SUBROUTINE SCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                     Fatal = .TRUE.
                     IF ( Kprint>=3 ) THEN
                       WRITE (Nout,FMT=99004) Sname
-                      WRITE (Nout,FMT=99005) nc , Sname , side , uplo ,&
-                        transa , diag , m , n , alpha , lda , ldb
+                      WRITE (Nout,FMT=99005) nc, Sname, side, uplo ,&
+                        transa, diag, m, n, alpha, lda, ldb
                     ENDIF
                   ENDIF
                   !
@@ -253,9 +253,9 @@ SUBROUTINE SCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   IF ( .NOT.(Fatal) ) THEN
     IF ( Kprint>=3 ) THEN
       IF ( errmax<Thresh ) THEN
-        WRITE (Nout,FMT=99001) Sname , nc
+        WRITE (Nout,FMT=99001) Sname, nc
       ELSE
-        WRITE (Nout,FMT=99003) Sname , nc , errmax
+        WRITE (Nout,FMT=99003) Sname, nc, errmax
       ENDIF
     ENDIF
   ENDIF

@@ -4,7 +4,7 @@ SUBROUTINE GAMLIM(Xmin,Xmax)
   IMPLICIT NONE
   !*--GAMLIM5
   !*** Start of declarations inserted by SPAG
-  REAL alnbig , alnsml , R1MACH , xln , Xmax , Xmin , xold
+  REAL alnbig, alnsml, R1MACH, xln, Xmax, Xmin, xold
   INTEGER i
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  GAMLIM
@@ -39,7 +39,7 @@ SUBROUTINE GAMLIM(Xmin,Xmax)
   !***FIRST EXECUTABLE STATEMENT  GAMLIM
   alnsml = LOG(R1MACH(1))
   Xmin = -alnsml
-  DO i = 1 , 10
+  DO i = 1, 10
     xold = Xmin
     xln = LOG(Xmin)
     Xmin = Xmin - Xmin*((Xmin+0.5)*xln-Xmin-0.2258+alnsml)/(Xmin*xln+0.5)
@@ -51,7 +51,7 @@ SUBROUTINE GAMLIM(Xmin,Xmax)
   !
   alnbig = LOG(R1MACH(2))
   Xmax = alnbig
-  DO i = 1 , 10
+  DO i = 1, 10
     xold = Xmax
     xln = LOG(Xmax)
     Xmax = Xmax - Xmax*((Xmax-0.5)*xln-Xmax+0.9189-alnbig)/(Xmax*xln-0.5)

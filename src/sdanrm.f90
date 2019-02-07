@@ -26,21 +26,21 @@ REAL FUNCTION SDANRM(Neq,V,Wt,Rpar,Ipar)
   !           cosmetic changes to prologue.  (FNF)
   !***END PROLOGUE  SDANRM
   !
-  INTEGER Neq , Ipar(*)
-  REAL V(Neq) , Wt(Neq) , Rpar(*)
+  INTEGER Neq, Ipar(*)
+  REAL V(Neq), Wt(Neq), Rpar(*)
   !
   INTEGER i
-  REAL sum , vmax
+  REAL sum, vmax
   !
   !***FIRST EXECUTABLE STATEMENT  SDANRM
   SDANRM = 0.0E0
   vmax = 0.0E0
-  DO i = 1 , Neq
+  DO i = 1, Neq
     IF ( ABS(V(i)/Wt(i))>vmax ) vmax = ABS(V(i)/Wt(i))
   ENDDO
   IF ( vmax>0.0E0 ) THEN
     sum = 0.0E0
-    DO i = 1 , Neq
+    DO i = 1, Neq
       sum = sum + ((V(i)/Wt(i))/vmax)**2
     ENDDO
     SDANRM = vmax*SQRT(sum/Neq)

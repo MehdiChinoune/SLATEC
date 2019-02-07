@@ -25,23 +25,23 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !***END PROLOGUE  ZUNK1
   !     COMPLEX CFN,CK,CONE,CRSC,CS,CSCL,CSGN,CSPN,CSR,CSS,CWRK,CY,CZERO,
   !    *C1,C2,PHI,PHID,RZ,SUM,SUMD,S1,S2,Y,Z,ZETA1,ZETA1D,ZETA2,ZETA2D,ZR
-  REAL(8) :: Alim , ang , aphi , asc , ascle , bry , cki , ckr , &
-    coner , crsc , cscl , csgni , cspni , cspnr , csr , &
-    csrr , cssr , cwrki , cwrkr , cyi , cyr , c1i , c1r , &
-    c2i , c2m , c2r , Elim , fmr , fn , fnf , Fnu , phidi , &
-    phidr , phii , phir , pi , rast , razr , rs1 , rzi , &
-    rzr , sgn , sti , str , sumdi , sumdr , sumi , sumr , &
-    s1i , s1r , s2i , s2r , Tol , Yi , Yr , zeroi , zeror , &
-    zeta1i , zeta1r , zeta2i , zeta2r , zet1di , zet1dr , &
-    zet2di , zet2dr , Zi , Zr , zri , zrr , D1MACH , ZABS
-  INTEGER i , ib , iflag , ifn , il , init , inu , iuf , k , kdflg , kflag , &
-    kk , Kode , Mr , N , nw , Nz , initd , ic , ipard , j , m
-  DIMENSION bry(3) , init(2) , Yr(N) , Yi(N) , sumr(2) , sumi(2) , zeta1r(2)&
-    , zeta1i(2) , zeta2r(2) , zeta2i(2) , cyr(2) , cyi(2) , &
-    cwrkr(16,3) , cwrki(16,3) , cssr(3) , csrr(3) , phir(2) , &
+  REAL(8) :: Alim, ang, aphi, asc, ascle, bry, cki, ckr, &
+    coner, crsc, cscl, csgni, cspni, cspnr, csr, &
+    csrr, cssr, cwrki, cwrkr, cyi, cyr, c1i, c1r, &
+    c2i, c2m, c2r, Elim, fmr, fn, fnf, Fnu, phidi, &
+    phidr, phii, phir, pi, rast, razr, rs1, rzi, &
+    rzr, sgn, sti, str, sumdi, sumdr, sumi, sumr, &
+    s1i, s1r, s2i, s2r, Tol, Yi, Yr, zeroi, zeror, &
+    zeta1i, zeta1r, zeta2i, zeta2r, zet1di, zet1dr, &
+    zet2di, zet2dr, Zi, Zr, zri, zrr, D1MACH, ZABS
+  INTEGER i, ib, iflag, ifn, il, init, inu, iuf, k, kdflg, kflag, &
+    kk, Kode, Mr, N, nw, Nz, initd, ic, ipard, j, m
+  DIMENSION bry(3), init(2), Yr(N), Yi(N), sumr(2), sumi(2), zeta1r(2)&
+    , zeta1i(2), zeta2r(2), zeta2i(2), cyr(2), cyi(2), &
+    cwrkr(16,3), cwrki(16,3), cssr(3), csrr(3), phir(2), &
     phii(2)
   EXTERNAL ZABS
-  DATA zeror , zeroi , coner/0.0D0 , 0.0D0 , 1.0D0/
+  DATA zeror, zeroi, coner/0.0D0, 0.0D0, 1.0D0/
   DATA pi/3.14159265358979324D0/
   !***FIRST EXECUTABLE STATEMENT  ZUNK1
   kdflg = 1
@@ -68,7 +68,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     zri = -Zi
   ENDIF
   j = 2
-  DO i = 1 , N
+  DO i = 1, N
     !-----------------------------------------------------------------------
     !     J FLIP FLOPS BETWEEN 1 AND 2 IN J = 3 - J
     !-----------------------------------------------------------------------
@@ -197,7 +197,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   IF ( Zr<0.0D0 ) GOTO 600
   Nz = N
-  DO i = 1 , N
+  DO i = 1, N
     Yr(i) = zeror
     Yi(i) = zeroi
   ENDDO
@@ -211,7 +211,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   s2i = cyi(2)
   c1r = csrr(kflag)
   ascle = bry(kflag)
-  DO i = ib , N
+  DO i = ib, N
     c2r = s2r
     c2i = s2i
     s2r = ckr*c2r - cki*c2i + s1r
@@ -243,7 +243,8 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
       ENDIF
     ENDIF
   ENDDO
-  300  IF ( Mr==0 ) RETURN
+  300 CONTINUE
+  IF ( Mr==0 ) RETURN
   !-----------------------------------------------------------------------
   !     ANALYTIC CONTINUATION FOR RE(Z).LT.0.0D0
   !-----------------------------------------------------------------------
@@ -270,7 +271,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   kdflg = 1
   ib = ib - 1
   ic = ib - 1
-  DO k = 1 , N
+  DO k = 1, N
     fn = Fnu + (kk-1)
     !-----------------------------------------------------------------------
     !     LOGIC TO SORT OUT CASES WHOSE PARAMETERS WERE SET FOR THE K
@@ -392,7 +393,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   csr = csrr(iflag)
   ascle = bry(iflag)
   fn = inu + il
-  DO i = 1 , il
+  DO i = 1, il
     c2r = s2r
     c2i = s2i
     s2r = s1r + (fn+fnf)*(rzr*c2r-rzi*c2i)

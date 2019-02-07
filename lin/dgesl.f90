@@ -72,11 +72,11 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGESL
-  INTEGER Lda , N , Ipvt(*) , Job
-  REAL(8) :: A(Lda,*) , B(*)
+  INTEGER Lda, N, Ipvt(*), Job
+  REAL(8) :: A(Lda,*), B(*)
   !
-  REAL(8) :: DDOT , t
-  INTEGER k , kb , l , nm1
+  REAL(8) :: DDOT, t
+  INTEGER k, kb, l, nm1
   !***FIRST EXECUTABLE STATEMENT  DGESL
   nm1 = N - 1
   IF ( Job/=0 ) THEN
@@ -84,7 +84,7 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
     !        JOB = NONZERO, SOLVE  TRANS(A) * X = B
     !        FIRST SOLVE  TRANS(U)*Y = B
     !
-    DO k = 1 , N
+    DO k = 1, N
       t = DDOT(k-1,A(1,k),1,B(1),1)
       B(k) = (B(k)-t)/A(k,k)
     ENDDO
@@ -92,7 +92,7 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
     !        NOW SOLVE TRANS(L)*X = Y
     !
     IF ( nm1>=1 ) THEN
-      DO kb = 1 , nm1
+      DO kb = 1, nm1
         k = N - kb
         B(k) = B(k) + DDOT(N-k,A(k+1,k),1,B(k+1),1)
         l = Ipvt(k)
@@ -105,11 +105,11 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
     ENDIF
   ELSE
     !
-    !        JOB = 0 , SOLVE  A * X = B
+    !        JOB = 0, SOLVE  A * X = B
     !        FIRST SOLVE  L*Y = B
     !
     IF ( nm1>=1 ) THEN
-      DO k = 1 , nm1
+      DO k = 1, nm1
         l = Ipvt(k)
         t = B(l)
         IF ( l/=k ) THEN
@@ -122,7 +122,7 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
     !
     !        NOW SOLVE  U*X = Y
     !
-    DO kb = 1 , N
+    DO kb = 1, N
       k = N + 1 - kb
       B(k) = B(k)/A(k,k)
       t = -B(k)

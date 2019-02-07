@@ -4,7 +4,7 @@ FUNCTION ALI(X)
   IMPLICIT NONE
   !*--ALI5
   !*** Start of declarations inserted by SPAG
-  REAL ALI , EI , X
+  REAL ALI, EI, X
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ALI
   !***PURPOSE  Compute the logarithmic integral.

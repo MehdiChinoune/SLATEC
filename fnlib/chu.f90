@@ -4,11 +4,11 @@ FUNCTION CHU(A,B,X)
   IMPLICIT NONE
   !*--CHU5
   !*** Start of declarations inserted by SPAG
-  REAL A , a0 , aintb , alnx , B , b0 , beps , c0 , CHU , eps , EXPREL , &
-    factor , GAMMA , GAMR , gamri1 , gamrni , pch1ai , pch1i , pi , POCH
-  REAL POCH1 , pochai , R1MACH , R9CHU , sum , t , X , xeps1 , xi , xi1 , &
-    xn , xtoeps
-  INTEGER i , istrt , m , n
+  REAL A, a0, aintb, alnx, B, b0, beps, c0, CHU, eps, EXPREL, &
+    factor, GAMMA, GAMR, gamri1, gamrni, pch1ai, pch1i, pi, POCH
+  REAL POCH1, pochai, R1MACH, R9CHU, sum, t, X, xeps1, xi, xi1, &
+    xn, xtoeps
+  INTEGER i, istrt, m, n
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CHU
   !***PURPOSE  Compute the logarithmic confluent hypergeometric function.
@@ -42,7 +42,7 @@ FUNCTION CHU(A,B,X)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  CHU
   EXTERNAL GAMMA
-  SAVE pi , eps
+  SAVE pi, eps
   DATA pi/3.14159265358979324E0/
   DATA eps/0.0/
   !***FIRST EXECUTABLE STATEMENT  CHU
@@ -81,7 +81,7 @@ FUNCTION CHU(A,B,X)
         sum = 1.0
         IF ( m/=0 ) THEN
           !
-          DO i = 1 , m
+          DO i = 1, m
             xi = i
             t = t*(A-B+xi)*X/((1.0-B+xi)*xi)
             sum = sum + t
@@ -99,7 +99,7 @@ FUNCTION CHU(A,B,X)
         !
         t = 1.0
         m = -n
-        DO i = 1 , m
+        DO i = 1, m
           xi1 = i - 1
           t = t*(A+xi1)*X/((B+xi1)*(xi1+1.0))
           sum = sum + t
@@ -138,7 +138,7 @@ FUNCTION CHU(A,B,X)
       !
       CHU = sum + c0 + xeps1*b0
       xn = n
-      DO i = 1 , 1000
+      DO i = 1, 1000
         xi = istrt + i
         xi1 = istrt + i - 1
         b0 = (A+xi1-beps)*b0*X/((xn+xi1)*(xi-beps))
@@ -161,7 +161,7 @@ FUNCTION CHU(A,B,X)
     b0 = xtoeps*b0/beps
     !
     CHU = sum + a0 - b0
-    DO i = 1 , 1000
+    DO i = 1, 1000
       xi = istrt + i
       xi1 = istrt + i - 1
       a0 = (A+xi1)*a0*X/((B+xi1)*xi)
@@ -178,4 +178,5 @@ FUNCTION CHU(A,B,X)
   !
   CHU = X**(-A)*R9CHU(A,B,X)
   !
-  99999 END FUNCTION CHU
+  99999 CONTINUE
+  END FUNCTION CHU

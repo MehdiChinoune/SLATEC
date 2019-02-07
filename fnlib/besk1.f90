@@ -4,9 +4,9 @@ FUNCTION BESK1(X)
   IMPLICIT NONE
   !*--BESK15
   !*** Start of declarations inserted by SPAG
-  REAL BESI1 , BESK1 , BESK1E , bk1cs , CSEVL , R1MACH , X , xmax , xmaxt , &
-    xmin , xsml , y
-  INTEGER INITS , ntk1
+  REAL BESI1, BESK1, BESK1E, bk1cs, CSEVL, R1MACH, X, xmax, xmaxt, &
+    xmin, xsml, y
+  INTEGER INITS, ntk1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESK1
   !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
@@ -42,7 +42,7 @@ FUNCTION BESK1(X)
   !***END PROLOGUE  BESK1
   DIMENSION bk1cs(11)
   LOGICAL first
-  SAVE bk1cs , ntk1 , xmin , xsml , xmax , first
+  SAVE bk1cs, ntk1, xmin, xsml, xmax, first
   DATA bk1cs(1)/.0253002273389477705E0/
   DATA bk1cs(2)/ - .353155960776544876E0/
   DATA bk1cs(3)/ - .122611180822657148E0/
@@ -82,4 +82,5 @@ FUNCTION BESK1(X)
   BESK1 = LOG(0.5*X)*BESI1(X) + (0.75+CSEVL(.5*y-1.,bk1cs,ntk1))/X
   RETURN
   !
-  99999 END FUNCTION BESK1
+  99999 CONTINUE
+  END FUNCTION BESK1

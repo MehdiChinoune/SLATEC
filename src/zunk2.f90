@@ -29,33 +29,33 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     COMPLEX AI,ARG,ARGD,ASUM,ASUMD,BSUM,BSUMD,CFN,CI,CIP,CK,CONE,CRSC,
   !    *CR1,CR2,CS,CSCL,CSGN,CSPN,CSR,CSS,CY,CZERO,C1,C2,DAI,PHI,PHID,RZ,
   !    *S1,S2,Y,Z,ZB,ZETA1,ZETA1D,ZETA2,ZETA2D,ZN,ZR
-  REAL(8) :: aarg , aic , aii , air , Alim , ang , aphi , argdi , &
-    argdr , argi , argr , asc , ascle , asumdi , asumdr , &
-    asumi , asumr , bry , bsumdi , bsumdr , bsumi , bsumr , &
-    car , cipi , cipr , cki , ckr , coner , crsc , cr1i , &
-    cr1r , cr2i , cr2r , cscl , csgni , csi , cspni , cspnr , &
-    csr , csrr , cssr , cyi , cyr , c1i , c1r , c2i , c2m , &
-    c2r , daii , dair , Elim , fmr , fn , fnf , Fnu , hpi , &
-    phidi , phidr , phii , phir , pi , pti , ptr , rast , &
-    razr , rs1 , rzi , rzr , sar , sgn , sti , str , s1i , &
-    s1r , s2i , s2r , Tol , Yi , Yr , yy , zbi , zbr , &
-    zeroi , zeror , zeta1i , zeta1r , zeta2i , zeta2r , &
-    zet1di , zet1dr , zet2di , zet2dr , Zi , zni , znr , Zr , &
-    zri , zrr , D1MACH , ZABS
-  INTEGER i , ib , iflag , ifn , il , in , inu , iuf , k , kdflg , kflag , &
-    kk , Kode , Mr , N , nai , ndai , nw , Nz , idum , j , ipard , ic
-  DIMENSION bry(3) , Yr(N) , Yi(N) , asumr(2) , asumi(2) , bsumr(2) , &
-    bsumi(2) , phir(2) , phii(2) , argr(2) , argi(2) , zeta1r(2) , &
-    zeta1i(2) , zeta2r(2) , zeta2i(2) , cyr(2) , cyi(2) , cipr(4) , &
-    cipi(4) , cssr(3) , csrr(3)
+  REAL(8) :: aarg, aic, aii, air, Alim, ang, aphi, argdi, &
+    argdr, argi, argr, asc, ascle, asumdi, asumdr, &
+    asumi, asumr, bry, bsumdi, bsumdr, bsumi, bsumr, &
+    car, cipi, cipr, cki, ckr, coner, crsc, cr1i, &
+    cr1r, cr2i, cr2r, cscl, csgni, csi, cspni, cspnr, &
+    csr, csrr, cssr, cyi, cyr, c1i, c1r, c2i, c2m, &
+    c2r, daii, dair, Elim, fmr, fn, fnf, Fnu, hpi, &
+    phidi, phidr, phii, phir, pi, pti, ptr, rast, &
+    razr, rs1, rzi, rzr, sar, sgn, sti, str, s1i, &
+    s1r, s2i, s2r, Tol, Yi, Yr, yy, zbi, zbr, &
+    zeroi, zeror, zeta1i, zeta1r, zeta2i, zeta2r, &
+    zet1di, zet1dr, zet2di, zet2dr, Zi, zni, znr, Zr, &
+    zri, zrr, D1MACH, ZABS
+  INTEGER i, ib, iflag, ifn, il, in, inu, iuf, k, kdflg, kflag, &
+    kk, Kode, Mr, N, nai, ndai, nw, Nz, idum, j, ipard, ic
+  DIMENSION bry(3), Yr(N), Yi(N), asumr(2), asumi(2), bsumr(2), &
+    bsumi(2), phir(2), phii(2), argr(2), argi(2), zeta1r(2), &
+    zeta1i(2), zeta2r(2), zeta2i(2), cyr(2), cyi(2), cipr(4), &
+    cipi(4), cssr(3), csrr(3)
   EXTERNAL ZABS
-  DATA zeror , zeroi , coner , cr1r , cr1i , cr2r , cr2i/0.0D0 , 0.0D0 , &
-    1.0D0 , 1.0D0 , 1.73205080756887729D0 , -0.5D0 , &
+  DATA zeror, zeroi, coner, cr1r, cr1i, cr2r, cr2i/0.0D0, 0.0D0, &
+    1.0D0, 1.0D0, 1.73205080756887729D0, -0.5D0, &
     -8.66025403784438647D-01/
-  DATA hpi , pi , aic/1.57079632679489662D+00 , 3.14159265358979324D+00 , &
+  DATA hpi, pi, aic/1.57079632679489662D+00, 3.14159265358979324D+00, &
     1.26551212348464539D+00/
-  DATA cipr(1) , cipi(1) , cipr(2) , cipi(2) , cipr(3) , cipi(3) , cipr(4) , &
-    cipi(4)/1.0D0 , 0.0D0 , 0.0D0 , -1.0D0 , -1.0D0 , 0.0D0 , 0.0D0 , &
+  DATA cipr(1), cipi(1), cipr(2), cipi(2), cipr(3), cipi(3), cipr(4), &
+    cipi(4)/1.0D0, 0.0D0, 0.0D0, -1.0D0, -1.0D0, 0.0D0, 0.0D0, &
     1.0D0/
   !***FIRST EXECUTABLE STATEMENT  ZUNK2
   kdflg = 1
@@ -108,7 +108,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     CONJUGATION SINCE THE K FUNCTION IS REAL ON THE POSITIVE REAL AXIS
   !-----------------------------------------------------------------------
   j = 2
-  DO i = 1 , N
+  DO i = 1, N
     !-----------------------------------------------------------------------
     !     J FLIP FLOPS BETWEEN 1 AND 2 IN J = 3 - J
     !-----------------------------------------------------------------------
@@ -255,7 +255,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   IF ( Zr<0.0D0 ) GOTO 600
   Nz = N
-  DO i = 1 , N
+  DO i = 1, N
     Yr(i) = zeror
     Yi(i) = zeroi
   ENDDO
@@ -266,7 +266,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   s2i = cyi(2)
   c1r = csrr(kflag)
   ascle = bry(kflag)
-  DO i = ib , N
+  DO i = ib, N
     c2r = s2r
     c2i = s2i
     s2r = ckr*c2r - cki*c2i + s1r
@@ -298,7 +298,8 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
       ENDIF
     ENDIF
   ENDDO
-  300  IF ( Mr==0 ) RETURN
+  300 CONTINUE
+  IF ( Mr==0 ) RETURN
   !-----------------------------------------------------------------------
   !     ANALYTIC CONTINUATION FOR RE(Z).LT.0.0D0
   !-----------------------------------------------------------------------
@@ -338,7 +339,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   kdflg = 1
   ib = ib - 1
   ic = ib - 1
-  DO k = 1 , N
+  DO k = 1, N
     fn = Fnu + (kk-1)
     !-----------------------------------------------------------------------
     !     LOGIC TO SORT OUT CASES WHOSE PARAMETERS WERE SET FOR THE K
@@ -471,7 +472,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   csr = csrr(iflag)
   ascle = bry(iflag)
   fn = inu + il
-  DO i = 1 , il
+  DO i = 1, il
     c2r = s2r
     c2i = s2i
     s2r = s1r + (fn+fnf)*(rzr*c2r-rzi*c2i)

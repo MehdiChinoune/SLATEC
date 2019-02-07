@@ -4,10 +4,10 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   IMPLICIT NONE
   !*--SBOLS5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , ibig , igo , inrows , ip , ISAMAX , iscale , j , jp , lds ,&
-    lenx , liopt , llb , lliw , llrw , llx , lmdw , lndw , locacc ,&
+  INTEGER i, ibig, igo, inrows, ip, ISAMAX, iscale, j, jp, lds ,&
+    lenx, liopt, llb, lliw, llrw, llx, lmdw, lndw, locacc ,&
     locdim
-  INTEGER lopt , lp , Mdw , mnew , Mode , Mrows , Ncols , nerr
+  INTEGER lopt, lp, Mdw, mnew, Mode, Mrows, Ncols, nerr
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SBOLS
   !***PURPOSE  Solve the problem
@@ -428,15 +428,15 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !     /SROTG/ TO /DROTG/, /SROT/ TO /DROT/, /E0/ TO /D0/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
-  REAL W(Mdw,*) , Bl(*) , Bu(*) , X(*) , Rw(*)
-  REAL sc , ss , one , SNRM2 , Rnorm , zero
+  REAL W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*)
+  REAL sc, ss, one, SNRM2, Rnorm, zero
   !
   !     THIS VARIABLE SHOULD REMAIN TYPE REAL.
-  INTEGER Ind(*) , Iopt(*) , Iw(*)
+  INTEGER Ind(*), Iopt(*), Iw(*)
   LOGICAL checkl
-  CHARACTER(8) :: xern1 , xern2
-  CHARACTER(16) :: xern3 , xern4
-  SAVE igo , locacc , lopt , iscale
+  CHARACTER(8) :: xern1, xern2
+  CHARACTER(16) :: xern3, xern4
+  SAVE igo, locacc, lopt, iscale
   DATA igo/0/
   !***FIRST EXECUTABLE STATEMENT  SBOLS
   nerr = 0
@@ -464,7 +464,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     ENDIF
     !
     !     SEE THAT CONSTRAINT INDICATORS ARE ALL WELL-DEFINED.
-    DO j = 1 , Ncols
+    DO j = 1, Ncols
       IF ( Ind(j)<1.OR.Ind(j)>4 ) THEN
         WRITE (xern1,'(I8)') j
         WRITE (xern2,'(I8)') Ind(j)
@@ -476,7 +476,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     ENDDO
     !
     !     SEE THAT BOUNDS ARE CONSISTENT.
-    DO j = 1 , Ncols
+    DO j = 1, Ncols
       IF ( Ind(j)==3 ) THEN
         IF ( Bl(j)>Bu(j) ) THEN
           WRITE (xern1,'(I8)') j
@@ -670,7 +670,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           ENDIF
           CALL SCOPY(Ncols,X(Ncols+Iopt(lp+2)),1,Rw,1)
           lenx = lenx + Ncols
-          DO j = 1 , Ncols
+          DO j = 1, Ncols
             IF ( Rw(j)<=zero ) THEN
               WRITE (xern1,'(I8)') j
               WRITE (xern3,'(1PE15.6)') Rw(j)
@@ -731,8 +731,8 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
     ENDIF
-    DO j = 1 , MIN(Ncols+1,mnew)
-      DO i = mnew , MAX(Mrows,j) + 1 , -1
+    DO j = 1, MIN(Ncols+1,mnew)
+      DO i = mnew, MAX(Mrows,j) + 1, -1
         ibig = ISAMAX(i-j,W(j,j),1) + j - 1
         !
         !     PIVOT FOR INCREASED STABILITY.
@@ -750,7 +750,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     !     CASE 2
     !     DO(INITIALIZE VARIABLES AND DATA VALUES)
     !     PROCEDURE(INITIALIZE VARIABLES AND DATA VALUES)
-    DO j = 1 , Ncols
+    DO j = 1, Ncols
       SELECT CASE (iscale)
         CASE (1)
           !     CASE 1
@@ -795,7 +795,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     !
     !     INITIALIZE IBASIS(*), J=1,NCOLS, AND IBB(*), J=1,NCOLS,
     !     TO =J,AND =1, FOR USE IN SBOLSM( ).
-    DO j = 1 , Ncols
+    DO j = 1, Ncols
       Iw(j) = j
       Iw(j+Ncols) = 1
       Rw(3*Ncols+j) = Bl(j)
@@ -808,7 +808,8 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   ENDIF
   RETURN
   !     PROCEDURE(RETURN TO USER PROGRAM UNIT)
-  100  IF ( Mode>=0 ) Mode = -nerr
+  100 CONTINUE
+  IF ( Mode>=0 ) Mode = -nerr
   igo = 0
   !     END PROCEDURE
 END SUBROUTINE SBOLS

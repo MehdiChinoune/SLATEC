@@ -4,8 +4,8 @@ REAL(8) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
   !*--DQDOTA5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , i1 , Incx , Incy , ix , iy , MPB , MPLun , MPM , MPMxr , MPR , &
-    MPT , N
+  INTEGER i, i1, Incx, Incy, ix, iy, MPB, MPLun, MPM, MPMxr, MPR, &
+    MPT, N
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DQDOTA
   !***PURPOSE  Compute the inner product of two vectors with extended
@@ -68,9 +68,9 @@ REAL(8) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   930124  Increased Array sizes for SUN -r8.  (RWC)
   !***END PROLOGUE  DQDOTA
-  REAL(8) :: Dx(*) , Dy(*) , Db
-  INTEGER Qc(30) , qx(30) , qy(30)
-  COMMON /MPCOM / MPB , MPT , MPM , MPLun , MPMxr , MPR(30)
+  REAL(8) :: Dx(*), Dy(*), Db
+  INTEGER Qc(30), qx(30), qy(30)
+  COMMON /MPCOM / MPB, MPT, MPM, MPLun, MPMxr, MPR(30)
   SAVE i1
   DATA i1/0/
   !***FIRST EXECUTABLE STATEMENT  DQDOTA
@@ -84,7 +84,7 @@ REAL(8) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
     iy = 1
     IF ( Incx<0 ) ix = (-N+1)*Incx + 1
     IF ( Incy<0 ) iy = (-N+1)*Incy + 1
-    DO i = 1 , N
+    DO i = 1, N
       CALL MPCDM(Dx(ix),qx)
       CALL MPCDM(Dy(iy),qy)
       CALL MPMUL(qx,qy,qx)

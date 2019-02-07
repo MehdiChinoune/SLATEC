@@ -154,14 +154,14 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  QAWCE
   !
-  REAL A , aa , Abserr , Alist , area , area1 , area12 , area2 , a1 , a2 , &
-    B , bb , Blist , b1 , b2 , C , R1MACH , Elist , epmach , Epsabs , &
-    Epsrel , errbnd , errmax , error1 , error2 , errsum , F , Result , &
-    Rlist , uflow
-  INTEGER Ier , Iord , iroff1 , iroff2 , k , krule , Last , Limit , maxerr , &
-    nev , Neval , nrmax
+  REAL A, aa, Abserr, Alist, area, area1, area12, area2, a1, a2, &
+    B, bb, Blist, b1, b2, C, R1MACH, Elist, epmach, Epsabs, &
+    Epsrel, errbnd, errmax, error1, error2, errsum, F, Result, &
+    Rlist, uflow
+  INTEGER Ier, Iord, iroff1, iroff2, k, krule, Last, Limit, maxerr, &
+    nev, Neval, nrmax
   !
-  DIMENSION Alist(*) , Blist(*) , Rlist(*) , Elist(*) , Iord(*)
+  DIMENSION Alist(*), Blist(*), Rlist(*), Elist(*), Iord(*)
   !
   EXTERNAL F
   !
@@ -256,7 +256,7 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
       !           MAIN DO-LOOP
       !           ------------
       !
-      DO Last = 2 , Limit
+      DO Last = 2, Limit
         !
         !           BISECT THE SUBINTERVAL WITH NRMAX-TH LARGEST
         !           ERROR ESTIMATE.
@@ -337,7 +337,7 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
       !           ---------------------
       !
       Result = 0.0E+00
-      DO k = 1 , Last
+      DO k = 1, Last
         Result = Result + Rlist(k)
       ENDDO
       Abserr = errsum

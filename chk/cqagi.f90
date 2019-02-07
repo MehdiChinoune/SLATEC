@@ -4,7 +4,7 @@ SUBROUTINE CQAGI(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--CQAGI5
   !*** Start of declarations inserted by SPAG
-  INTEGER ierv , inf
+  INTEGER ierv, inf
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CQAGI
   !***PURPOSE  Quick check for QAGI.
@@ -23,14 +23,14 @@ SUBROUTINE CQAGI(Lun,Kprint,Ipass)
   !
   ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
   !
-  REAL abserr , bound , R1MACH , epmach , epsabs , epsrel , error , exact0 , &
-    exact1 , exact2 , exact3 , exact4 , oflow , result , T0 , T1 , T2 , &
-    T3 , T4 , T5 , uflow , work
-  INTEGER ier , ip , Ipass , iwork , Kprint , last , lenw , limit , Lun , &
+  REAL abserr, bound, R1MACH, epmach, epsabs, epsrel, error, exact0, &
+    exact1, exact2, exact3, exact4, oflow, result, T0, T1, T2, &
+    T3, T4, T5, uflow, work
+  INTEGER ier, ip, Ipass, iwork, Kprint, last, lenw, limit, Lun, &
     neval
-  DIMENSION work(800) , iwork(200) , ierv(4)
-  EXTERNAL T0 , T1 , T2 , T3 , T4 , T5
-  DATA exact0/2.0E+00/ , exact1/0.115470066904E1/
+  DIMENSION work(800), iwork(200), ierv(4)
+  EXTERNAL T0, T1, T2, T3, T4, T5
+  DATA exact0/2.0E+00/, exact1/0.115470066904E1/
   DATA exact2/0.909864525656E-02/
   DATA exact3/0.31415926535897932E+01/
   DATA exact4/0.19984914554328673E+04/

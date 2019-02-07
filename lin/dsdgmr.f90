@@ -5,7 +5,7 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   IMPLICIT NONE
   !*--DSDGMR6
   !*** Start of declarations inserted by SPAG
-  REAL DSDI , DSMV
+  REAL DSDI, DSMV
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSDGMR
   !***PURPOSE  Diagonally scaled GMRES iterative sparse Ax=b solver.
@@ -326,19 +326,19 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Parameters ..
-  INTEGER LOCRB , LOCIB
+  INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  REAL(8) :: Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
-    Nelt , Nsave
+  REAL(8) :: Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
+    Nelt, Nsave
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , B(N) , Rwork(Lenw) , X(N)
-  INTEGER Ia(Nelt) , Iwork(Leniw) , Ja(Nelt)
+  REAL(8) :: A(Nelt), B(N), Rwork(Lenw), X(N)
+  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin , locigw , lociw , locrgw , locw , myitol
+  INTEGER locdin, locigw, lociw, locrgw, locw, myitol
   !     .. External Subroutines ..
-  EXTERNAL DCHKW , DGMRES , DS2Y , DSDI , DSDS , DSMV
+  EXTERNAL DCHKW, DGMRES, DS2Y, DSDI, DSDS, DSMV
   !***FIRST EXECUTABLE STATEMENT  DSDGMR
   !
   Ierr = 0

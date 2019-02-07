@@ -4,7 +4,7 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   IMPLICIT NONE
   !*--RPQR795
   !*** Start of declarations inserted by SPAG
-  INTEGER km1 , kwend
+  INTEGER km1, kwend
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RPQR79
   !***PURPOSE  Find the zeros of a polynomial with real coefficients.
@@ -53,9 +53,9 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   911010  Code reworked and simplified.  (RWC and WRB)
   !***END PROLOGUE  RPQR79
-  REAL Coeff(*) , Work(*) , scale
+  REAL Coeff(*), Work(*), scale
   COMPLEX Root(*)
-  INTEGER Ndeg , Ierr , k , kh , kwr , kwi , kcol
+  INTEGER Ndeg, Ierr, k, kh, kwr, kwi, kcol
   !***FIRST EXECUTABLE STATEMENT  RPQR79
   Ierr = 0
   IF ( ABS(Coeff(1))==0.0 ) THEN
@@ -81,11 +81,11 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   kwi = kwr + Ndeg
   kwend = kwi + Ndeg - 1
   !
-  DO k = 1 , kwend
+  DO k = 1, kwend
     Work(k) = 0.0E0
   ENDDO
   !
-  DO k = 1 , Ndeg
+  DO k = 1, Ndeg
     kcol = (k-1)*Ndeg + 1
     Work(kcol) = -Coeff(k+1)*scale
     IF ( k/=Ndeg ) Work(kcol+k) = 1.0E0
@@ -99,7 +99,7 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
     RETURN
   ENDIF
   !
-  DO k = 1 , Ndeg
+  DO k = 1, Ndeg
     km1 = k - 1
     Root(k) = CMPLX(Work(kwr+km1),Work(kwi+km1))
   ENDDO

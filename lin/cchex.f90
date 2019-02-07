@@ -131,11 +131,11 @@ SUBROUTINE CCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CCHEX
-  INTEGER Ldr , P , K , L , Ldz , Nz , Job
-  COMPLEX R(Ldr,*) , Z(Ldz,*) , S(*)
+  INTEGER Ldr, P, K, L, Ldz, Nz, Job
+  COMPLEX R(Ldr,*), Z(Ldz,*), S(*)
   REAL C(*)
   !
-  INTEGER i , ii , il , iu , j , jj , km1 , kp1 , lmk , lm1
+  INTEGER i, ii, il, iu, j, jj, km1, kp1, lmk, lm1
   COMPLEX t
   !
   !     INITIALIZE
@@ -155,34 +155,34 @@ SUBROUTINE CCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
     !
     !        REORDER THE COLUMNS
     !
-    DO i = 1 , K
+    DO i = 1, K
       ii = lmk + i
       S(ii) = R(i,K)
     ENDDO
-    DO j = K , lm1
-      DO i = 1 , j
+    DO j = K, lm1
+      DO i = 1, j
         R(i,j) = R(i,j+1)
       ENDDO
       jj = j - km1
       S(jj) = R(j+1,j+1)
     ENDDO
-    DO i = 1 , K
+    DO i = 1, K
       ii = lmk + i
       R(i,L) = S(ii)
     ENDDO
-    DO i = kp1 , L
+    DO i = kp1, L
       R(i,L) = (0.0E0,0.0E0)
     ENDDO
     !
     !        REDUCTION LOOP.
     !
-    DO j = K , P
+    DO j = K, P
       IF ( j/=K ) THEN
         !
         !              APPLY THE ROTATIONS.
         !
         iu = MIN(j-1,L-1)
-        DO i = K , iu
+        DO i = K, iu
           ii = i - K + 1
           t = C(ii)*R(i,j) + S(ii)*R(i+1,j)
           R(i+1,j) = C(ii)*R(i+1,j) - CONJG(S(ii))*R(i,j)
@@ -199,8 +199,8 @@ SUBROUTINE CCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
     !        APPLY THE ROTATIONS TO Z.
     !
     IF ( Nz>=1 ) THEN
-      DO j = 1 , Nz
-        DO i = K , lm1
+      DO j = 1, Nz
+        DO i = K, lm1
           ii = i - km1
           t = C(ii)*Z(i,j) + S(ii)*Z(i+1,j)
           Z(i+1,j) = C(ii)*Z(i+1,j) - CONJG(S(ii))*Z(i,j)
@@ -215,19 +215,19 @@ SUBROUTINE CCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
     !
     !        REORDER THE COLUMNS.
     !
-    DO i = 1 , L
+    DO i = 1, L
       ii = L - i + 1
       S(i) = R(ii,L)
     ENDDO
-    DO jj = K , lm1
+    DO jj = K, lm1
       j = lm1 - jj + K
-      DO i = 1 , j
+      DO i = 1, j
         R(i,j+1) = R(i,j)
       ENDDO
       R(j+1,j+1) = (0.0E0,0.0E0)
     ENDDO
     IF ( K/=1 ) THEN
-      DO i = 1 , km1
+      DO i = 1, km1
         ii = L - i + 1
         R(i,K) = S(ii)
       ENDDO
@@ -236,14 +236,14 @@ SUBROUTINE CCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
     !        CALCULATE THE ROTATIONS.
     !
     t = S(1)
-    DO i = 1 , lmk
+    DO i = 1, lmk
       CALL CROTG(S(i+1),t,C(i),S(i))
       t = S(i+1)
     ENDDO
     R(K,K) = t
-    DO j = kp1 , P
+    DO j = kp1, P
       il = MAX(1,L-j+1)
-      DO ii = il , lmk
+      DO ii = il, lmk
         i = L - ii
         t = C(ii)*R(i,j) + S(ii)*R(i+1,j)
         R(i+1,j) = C(ii)*R(i+1,j) - CONJG(S(ii))*R(i,j)
@@ -254,8 +254,8 @@ SUBROUTINE CCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
     !        IF REQUIRED, APPLY THE TRANSFORMATIONS TO Z.
     !
     IF ( Nz>=1 ) THEN
-      DO j = 1 , Nz
-        DO ii = 1 , lmk
+      DO j = 1, Nz
+        DO ii = 1, lmk
           i = L - ii
           t = C(ii)*Z(i,j) + S(ii)*Z(i+1,j)
           Z(i+1,j) = C(ii)*Z(i+1,j) - CONJG(S(ii))*Z(i,j)

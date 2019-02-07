@@ -4,11 +4,11 @@ SUBROUTINE CCMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
   IMPLICIT NONE
   !*--CCMPB5
   !*** Start of declarations inserted by SPAG
-  REAL Ah , An , arg , B , Bh , Bn , bnorm , Cn , CNV , d1 , d2 , d3 , EPS , &
+  REAL Ah, An, arg, B, Bh, Bn, bnorm, Cn, CNV, d1, d2, d3, EPS, &
     R1MACH
-  INTEGER i , i2 , i4 , ib , Ierror , if , ifd , IK , ipl , ir , j , j1 , &
-    j2 , jf , js , K , kdo , l , l1 , l2
-  INTEGER lh , ls , N , n2m2 , nb , NCMplx , NM , nmp , NPP
+  INTEGER i, i2, i4, ib, Ierror, if, ifd, IK, ipl, ir, j, j1, &
+    j2, jf, js, K, kdo, l, l1, l2
+  INTEGER lh, ls, N, n2m2, nb, NCMplx, NM, nmp, NPP
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CCMPB
   !***SUBSIDIARY
@@ -33,12 +33,12 @@ SUBROUTINE CCMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CCMPB
   !
-  DIMENSION An(*) , Bn(*) , Cn(*) , B(*) , Ah(*) , Bh(*)
-  COMMON /CCBLK / NPP , K , EPS , CNV , NM , NCMplx , IK
+  DIMENSION An(*), Bn(*), Cn(*), B(*), Ah(*), Bh(*)
+  COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  CCMPB
   EPS = R1MACH(4)
   bnorm = ABS(Bn(1))
-  DO j = 2 , NM
+  DO j = 2, NM
     bnorm = MAX(bnorm,ABS(Bn(j)))
     arg = An(j)*Cn(j-1)
     IF ( arg<0 ) GOTO 200
@@ -47,19 +47,19 @@ SUBROUTINE CCMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
   CNV = EPS*bnorm
   if = 2**K
   kdo = K - 1
-  DO l = 1 , kdo
+  DO l = 1, kdo
     ir = l - 1
     i2 = 2**ir
     i4 = i2 + i2
     ipl = i4 - 1
     ifd = if - i4
-    DO i = i4 , ifd , i4
+    DO i = i4, ifd, i4
       CALL INXCB(i,l,ib,nb)
       IF ( nb<=0 ) EXIT
       js = i - ipl
       jf = js + nb - 1
       ls = 0
-      DO j = js , jf
+      DO j = js, jf
         ls = ls + 1
         Bh(ls) = Bn(j)
         Ah(ls) = B(j)
@@ -67,19 +67,19 @@ SUBROUTINE CCMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
       CALL TEVLC(nb,Bh,Ah,Ierror)
       IF ( Ierror/=0 ) GOTO 100
       lh = ib - 1
-      DO j = 1 , nb
+      DO j = 1, nb
         lh = lh + 1
         B(lh) = -Bh(j)
       ENDDO
     ENDDO
   ENDDO
-  DO j = 1 , NM
+  DO j = 1, NM
     B(j) = -Bn(j)
   ENDDO
   IF ( NPP==0 ) THEN
     nmp = NM + 1
     nb = NM + nmp
-    DO j = 1 , nb
+    DO j = 1, nb
       l1 = MOD(j-1,nmp) + 1
       l2 = MOD(j+NM-1,nmp) + 1
       arg = An(l1)*Cn(l2)

@@ -19,10 +19,10 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
   !     matrix.
   !
   !     If  RCOND  is not needed, DSIFA is slightly faster.
-  !     To solve  A*X = B , follow DSICO by DSISL.
-  !     To compute  INVERSE(A)*C , follow DSICO by DSISL.
-  !     To compute  INVERSE(A) , follow DSICO by DSIDI.
-  !     To compute  DETERMINANT(A) , follow DSICO by DSIDI.
+  !     To solve  A*X = B, follow DSICO by DSISL.
+  !     To compute  INVERSE(A)*C, follow DSICO by DSISL.
+  !     To compute  INVERSE(A), follow DSICO by DSIDI.
+  !     To compute  DETERMINANT(A), follow DSICO by DSIDI.
   !     To compute  INERTIA(A), follow DSICO by DSIDI.
   !
   !     On Entry
@@ -44,7 +44,7 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
   !                The factorization can be written  A = U*D*TRANS(U)
   !                where  U  is a product of permutation and unit
   !                upper triangular matrices, TRANS(U) is the
-  !                transpose of  U , and  D  is block diagonal
+  !                transpose of  U, and  D  is block diagonal
   !                with 1 by 1 and 2 by 2 blocks.
   !
   !        KPVT    INTEGER(N)
@@ -52,7 +52,7 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
   !
   !        RCOND   DOUBLE PRECISION
   !                an estimate of the reciprocal condition of  A .
-  !                For the system  A*X = B , relative perturbations
+  !                For the system  A*X = B, relative perturbations
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -82,28 +82,28 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSICO
-  INTEGER Lda , N , Kpvt(*)
-  REAL(8) :: A(Lda,*) , Z(*)
+  INTEGER Lda, N, Kpvt(*)
+  REAL(8) :: A(Lda,*), Z(*)
   REAL(8) :: Rcond
   !
-  REAL(8) :: ak , akm1 , bk , bkm1 , DDOT , denom , ek , t
-  REAL(8) :: anorm , s , DASUM , ynorm
-  INTEGER i , info , j , jm1 , k , kp , kps , ks
+  REAL(8) :: ak, akm1, bk, bkm1, DDOT, denom, ek, t
+  REAL(8) :: anorm, s, DASUM, ynorm
+  INTEGER i, info, j, jm1, k, kp, kps, ks
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !
   !***FIRST EXECUTABLE STATEMENT  DSICO
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = DASUM(j,A(1,j),1)
     jm1 = j - 1
     IF ( jm1>=1 ) THEN
-      DO i = 1 , jm1
+      DO i = 1, jm1
         Z(i) = Z(i) + ABS(A(i,j))
       ENDDO
     ENDIF
   ENDDO
   anorm = 0.0D0
-  DO j = 1 , N
+  DO j = 1, N
     anorm = MAX(anorm,Z(j))
   ENDDO
   !
@@ -120,7 +120,7 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
   !     SOLVE U*D*W = E
   !
   ek = 1.0D0
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = 0.0D0
   ENDDO
   k = N

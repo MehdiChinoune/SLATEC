@@ -20,13 +20,13 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CMLRI
-  COMPLEX ck , cnorm , cone , ctwo , czero , pt , p1 , p2 , rz , sum , Y , Z
-  REAL ack , ak , ap , at , az , bk , fkap , fkk , flam , fnf , Fnu , rho , &
-    rho2 , scle , tfnf , Tol , tst , x , GAMLN , R1MACH
-  INTEGER i , iaz , idum , ifnu , inu , itime , k , kk , km , Kode , m , N , &
+  COMPLEX ck, cnorm, cone, ctwo, czero, pt, p1, p2, rz, sum, Y, Z
+  REAL ack, ak, ap, at, az, bk, fkap, fkk, flam, fnf, Fnu, rho, &
+    rho2, scle, tfnf, Tol, tst, x, GAMLN, R1MACH
+  INTEGER i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, &
     Nz
   DIMENSION Y(N)
-  DATA czero , cone , ctwo/(0.0E0,0.0E0) , (1.0E0,0.0E0) , (2.0E0,0.0E0)/
+  DATA czero, cone, ctwo/(0.0E0,0.0E0), (1.0E0,0.0E0), (2.0E0,0.0E0)/
   scle = 1.0E+3*R1MACH(1)/Tol
   !***FIRST EXECUTABLE STATEMENT  CMLRI
   Nz = 0
@@ -49,7 +49,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   !     COMPUTE RELATIVE TRUNCATION ERROR INDEX FOR SERIES
   !-----------------------------------------------------------------------
   ak = at
-  DO i = 1 , 80
+  DO i = 1, 80
     pt = p2
     p2 = p1 - ck*p2
     p1 = pt
@@ -73,7 +73,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
     ack = at/az
     tst = SQRT(ack/Tol)
     itime = 1
-    DO k = 1 , 80
+    DO k = 1, 80
       pt = p2
       p2 = p1 - ck*p2
       p1 = pt
@@ -110,7 +110,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   bk = EXP(bk)
   sum = czero
   km = kk - inu
-  DO i = 1 , km
+  DO i = 1, km
     pt = p2
     p2 = p1 + CMPLX(fkk+fnf,0.0E0)*rz*p2
     p1 = pt
@@ -122,7 +122,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   ENDDO
   Y(N) = p2
   IF ( N/=1 ) THEN
-    DO i = 2 , N
+    DO i = 2, N
       pt = p2
       p2 = p1 + CMPLX(fkk+fnf,0.0E0)*rz*p2
       p1 = pt
@@ -136,7 +136,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
     ENDDO
   ENDIF
   IF ( ifnu>0 ) THEN
-    DO i = 1 , ifnu
+    DO i = 1, ifnu
       pt = p2
       p2 = p1 + CMPLX(fkk+fnf,0.0E0)*rz*p2
       p1 = pt
@@ -162,8 +162,9 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   ck = CEXP(pt)*p1
   pt = CONJG(p2)*p1
   cnorm = ck*pt
-  DO i = 1 , N
+  DO i = 1, N
     Y(i) = Y(i)*cnorm
   ENDDO
   RETURN
-  99999 END SUBROUTINE CMLRI
+  99999 CONTINUE
+  END SUBROUTINE CMLRI

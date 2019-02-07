@@ -35,8 +35,8 @@ SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
   !   901004  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text.
   !***END PROLOGUE  DPPERM
-  INTEGER N , Iperm(*) , i , Ier , indx , indx0 , istrt
-  REAL(8) :: Dx(*) , dtemp
+  INTEGER N, Iperm(*), i, Ier, indx, indx0, istrt
+  REAL(8) :: Dx(*), dtemp
   !***FIRST EXECUTABLE STATEMENT  DPPERM
   Ier = 0
   IF ( N<1 ) THEN
@@ -49,7 +49,7 @@ SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
   !
   !     CHECK WHETHER IPERM IS A VALID PERMUTATION
   !
-  DO i = 1 , N
+  DO i = 1, N
     indx = ABS(Iperm(i))
     IF ( (indx>=1).AND.(indx<=N) ) THEN
       IF ( Iperm(indx)>0 ) THEN
@@ -68,7 +68,7 @@ SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
   !     USE THE IPERM VECTOR AS A FLAG.
   !     IF IPERM(I) > 0, THEN THE I-TH VALUE IS IN CORRECT LOCATION
   !
-  DO istrt = 1 , N
+  DO istrt = 1, N
     IF ( Iperm(istrt)<=0 ) THEN
       indx = istrt
       indx0 = indx

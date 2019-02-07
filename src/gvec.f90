@@ -4,7 +4,7 @@ SUBROUTINE GVEC(X,G)
   IMPLICIT NONE
   !*--GVEC5
   !*** Start of declarations inserted by SPAG
-  REAL G , X
+  REAL G, X
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  GVEC
   !***PURPOSE  Subsidiary to

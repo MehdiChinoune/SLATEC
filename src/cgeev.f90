@@ -4,7 +4,7 @@ SUBROUTINE CGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   IMPLICIT NONE
   !*--CGEEV5
   !*** Start of declarations inserted by SPAG
-  INTEGER Job , m
+  INTEGER Job, m
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CGEEV
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
@@ -100,8 +100,8 @@ SUBROUTINE CGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  CGEEV
-  INTEGER i , ihi , ilo , Info , j , k , l , Lda , Ldv , mdim , N
-  REAL A(*) , E(*) , Work(*) , V(*)
+  INTEGER i, ihi, ilo, Info, j, k, l, Lda, Ldv, mdim, N
+  REAL A(*), E(*), Work(*), V(*)
   !***FIRST EXECUTABLE STATEMENT  CGEEV
   IF ( N>Lda ) CALL XERMSG('SLATEC','CGEEV','N .GT. LDA.',1,1)
   IF ( N>Lda ) RETURN
@@ -126,7 +126,7 @@ SUBROUTINE CGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
           'LDA.GT.LDV, ELEMENTS OF A OTHER THAN THE N BY N INPUT '&
           //'ELEMENTS HAVE BEEN CHANGED.',4,0)
         l = N - 1
-        DO j = 1 , l
+        DO j = 1, l
           i = 2*N
           m = 1 + j*2*Ldv
           k = 1 + j*2*Lda
@@ -137,7 +137,7 @@ SUBROUTINE CGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
     !
     !     SEPARATE REAL AND IMAGINARY PARTS
     !
-    DO j = 1 , N
+    DO j = 1, N
       k = (j-1)*mdim + 1
       l = k + N
       CALL SCOPY(N,A(k+1),2,Work(1),1)
@@ -160,7 +160,7 @@ SUBROUTINE CGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
         !
         !     CONVERT EIGENVECTORS TO COMPLEX STORAGE.
         !
-        DO j = 1 , N
+        DO j = 1, N
           k = (j-1)*mdim + 1
           i = (j-1)*2*Ldv + 1
           l = k + N

@@ -93,24 +93,24 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   !   920422  Changed DIMENSION statement.  (WRB)
   !***END PROLOGUE  DSTOD
   !
-  INTEGER i , i1 , IALth , IER , IOD , IOWnd , Ipar , IPUp , iredo , iret , &
-    Iwm , j , jb , JSTart , KFLag , KSTeps , L , LMAx , m , MAXord , &
-    MEO , METh , MITer , N , ncf , Neq , newq , NFE , NJE , NQ , &
-    NQNyh , NQU , NST , NSTepj , Nyh
-  REAL(8) :: Acor , CONit , CRAte , dcon , ddn , del , delp , dsm , &
-    dup , DVNRMS , EL , EL0 , ELCo , Ewt , exdn , exsm , &
-    exup , H , HMIn , HMXi , HOLd , HU , r , RC , rh , rhdn , &
-    rhsm , rhup , RMAx , ROWnd , Rpar , Savf , TESco , TN , &
-    told , UROund , Wm , Y , Yh , Yh1
-  EXTERNAL DF , DJAC
+  INTEGER i, i1, IALth, IER, IOD, IOWnd, Ipar, IPUp, iredo, iret, &
+    Iwm, j, jb, JSTart, KFLag, KSTeps, L, LMAx, m, MAXord, &
+    MEO, METh, MITer, N, ncf, Neq, newq, NFE, NJE, NQ, &
+    NQNyh, NQU, NST, NSTepj, Nyh
+  REAL(8) :: Acor, CONit, CRAte, dcon, ddn, del, delp, dsm, &
+    dup, DVNRMS, EL, EL0, ELCo, Ewt, exdn, exsm, &
+    exup, H, HMIn, HMXi, HOLd, HU, r, RC, rh, rhdn, &
+    rhsm, rhup, RMAx, ROWnd, Rpar, Savf, TESco, TN, &
+    told, UROund, Wm, Y, Yh, Yh1
+  EXTERNAL DF, DJAC
   !
-  DIMENSION Y(*) , Yh(Nyh,*) , Yh1(*) , Ewt(*) , Savf(*) , Acor(*) , Wm(*) , &
-    Iwm(*) , Rpar(*) , Ipar(*)
-  COMMON /DDEBD1/ ROWnd , CONit , CRAte , EL(13) , ELCo(13,12) , HOLd , RC , &
-    RMAx , TESco(3,12) , EL0 , H , HMIn , HMXi , HU , TN , &
-    UROund , IOWnd(7) , KSTeps , IOD(6) , IALth , IPUp , &
-    LMAx , MEO , NQNyh , NSTepj , IER , JSTart , KFLag , L , &
-    METh , MITer , MAXord , N , NQ , NST , NFE , NJE , NQU
+  DIMENSION Y(*), Yh(Nyh,*), Yh1(*), Ewt(*), Savf(*), Acor(*), Wm(*), &
+    Iwm(*), Rpar(*), Ipar(*)
+  COMMON /DDEBD1/ ROWnd, CONit, CRAte, EL(13), ELCo(13,12), HOLd, RC, &
+    RMAx, TESco(3,12), EL0, H, HMIn, HMXi, HU, TN, &
+    UROund, IOWnd(7), KSTeps, IOD(6), IALth, IPUp, &
+    LMAx, MEO, NQNyh, NSTepj, IER, JSTart, KFLag, L, &
+    METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
   !
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 690
@@ -155,7 +155,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     ENDIF
     NQ = MAXord
     L = LMAx
-    DO i = 1 , L
+    DO i = 1, L
       EL(i) = ELCo(i,NQ)
     ENDDO
     NQNyh = NQ*Nyh
@@ -207,483 +207,488 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     CALL DCFOD(METh,ELCo,TESco)
   ENDIF
   !           BEGIN BLOCK PERMITTING ...EXITS TO 680
-  100  DO i = 1 , L
-  EL(i) = ELCo(i,NQ)
-ENDDO
-NQNyh = NQ*Nyh
-RC = RC*EL(1)/EL0
-EL0 = EL(1)
-CONit = 0.5D0/(NQ+2)
-SELECT CASE (iret)
-  CASE (2)
-    rh = MAX(rh,HMIn/ABS(H))
-    GOTO 300
-  CASE (3)
-    GOTO 400
-  CASE DEFAULT
-END SELECT
-!              ---------------------------------------------------------
-!               IF H IS BEING CHANGED, THE H RATIO RH IS CHECKED AGAINST
-!               RMAX, HMIN, AND HMXI, AND THE YH ARRAY RESCALED.  IALTH
-!               IS SET TO L = NQ + 1 TO PREVENT A CHANGE OF H FOR THAT
-!               MANY STEPS, UNLESS FORCED BY A CONVERGENCE OR ERROR TEST
-!               FAILURE.
-!              ---------------------------------------------------------
-200  IF ( H==HOLd ) GOTO 400
-rh = H/HOLd
-H = HOLd
-iredo = 3
-300  rh = MIN(rh,RMAx)
-rh = rh/MAX(1.0D0,ABS(H)*HMXi*rh)
-r = 1.0D0
-DO j = 2 , L
-  r = r*rh
-  DO i = 1 , N
-    Yh(i,j) = Yh(i,j)*r
+  100 CONTINUE
+  DO i = 1, L
+    EL(i) = ELCo(i,NQ)
   ENDDO
-ENDDO
-H = H*rh
-RC = RC*rh
-IALth = L
-IF ( iredo==0 ) THEN
-  RMAx = 10.0D0
-  r = 1.0D0/TESco(2,NQU)
-  DO i = 1 , N
-    Acor(i) = Acor(i)*r
+  NQNyh = NQ*Nyh
+  RC = RC*EL(1)/EL0
+  EL0 = EL(1)
+  CONit = 0.5D0/(NQ+2)
+  SELECT CASE (iret)
+    CASE (2)
+      rh = MAX(rh,HMIn/ABS(H))
+      GOTO 300
+    CASE (3)
+      GOTO 400
+    CASE DEFAULT
+  END SELECT
+  !              ---------------------------------------------------------
+  !               IF H IS BEING CHANGED, THE H RATIO RH IS CHECKED AGAINST
+  !               RMAX, HMIN, AND HMXI, AND THE YH ARRAY RESCALED.  IALTH
+  !               IS SET TO L = NQ + 1 TO PREVENT A CHANGE OF H FOR THAT
+  !               MANY STEPS, UNLESS FORCED BY A CONVERGENCE OR ERROR TEST
+  !               FAILURE.
+  !              ---------------------------------------------------------
+  200 CONTINUE
+  IF ( H==HOLd ) GOTO 400
+  rh = H/HOLd
+  H = HOLd
+  iredo = 3
+  300  rh = MIN(rh,RMAx)
+  rh = rh/MAX(1.0D0,ABS(H)*HMXi*rh)
+  r = 1.0D0
+  DO j = 2, L
+    r = r*rh
+    DO i = 1, N
+      Yh(i,j) = Yh(i,j)*r
+    ENDDO
   ENDDO
-  !     ...............EXIT
-  GOTO 1000
-ENDIF
-!                 ------------------------------------------------------
-!                  THIS SECTION COMPUTES THE PREDICTED VALUES BY
-!                  EFFECTIVELY MULTIPLYING THE YH ARRAY BY THE PASCAL
-!                  TRIANGLE MATRIX.  RC IS THE RATIO OF NEW TO OLD
-!                  VALUES OF THE COEFFICIENT  H*EL(1).  WHEN RC DIFFERS
-!                  FROM 1 BY MORE THAN 30 PERCENT, IPUP IS SET TO MITER
-!                  TO FORCE DPJAC TO BE CALLED, IF A JACOBIAN IS
-!                  INVOLVED.  IN ANY CASE, DPJAC IS CALLED AT LEAST
-!                  EVERY 20-TH STEP.
-!                 ------------------------------------------------------
-!                    BEGIN BLOCK PERMITTING ...EXITS TO 610
-!                       BEGIN BLOCK PERMITTING ...EXITS TO 490
-400  IF ( ABS(RC-1.0D0)>0.3D0 ) IPUp = MITer
-IF ( NST>=NSTepj+20 ) IPUp = MITer
-TN = TN + H
-i1 = NQNyh + 1
-DO jb = 1 , NQ
-  i1 = i1 - Nyh
-  DO i = i1 , NQNyh
-    Yh1(i) = Yh1(i) + Yh1(i+Nyh)
-  ENDDO
-ENDDO
-KSTeps = KSTeps + 1
-!                          ---------------------------------------------
-!                           UP TO 3 CORRECTOR ITERATIONS ARE TAKEN.  A
-!                           CONVERGENCE TEST IS MADE ON THE R.M.S. NORM
-!                           OF EACH CORRECTION, WEIGHTED BY THE ERROR
-!                           WEIGHT VECTOR EWT.  THE SUM OF THE
-!                           CORRECTIONS IS ACCUMULATED IN THE VECTOR
-!                           ACOR(I).  THE YH ARRAY IS NOT ALTERED IN THE
-!                           CORRECTOR LOOP.
-!                          ---------------------------------------------
-500  m = 0
-DO i = 1 , N
-  Y(i) = Yh(i,1)
-ENDDO
-CALL DF(TN,Y,Savf,Rpar,Ipar)
-NFE = NFE + 1
-IF ( IPUp>0 ) THEN
-  !                                ---------------------------------------
-  !                                 IF INDICATED, THE MATRIX P = I -
-  !                                 H*EL(1)*J IS REEVALUATED AND
-  !                                 PREPROCESSED BEFORE STARTING THE
-  !                                 CORRECTOR ITERATION.  IPUP IS SET TO 0
-  !                                 AS AN INDICATOR THAT THIS HAS BEEN
-  !                                 DONE.
-  !                                ---------------------------------------
-  IPUp = 0
-  RC = 1.0D0
-  NSTepj = NST
-  CRAte = 0.7D0
-  CALL DPJAC(Neq,Y,Yh,Nyh,Ewt,Acor,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
-  !                          ......EXIT
-  IF ( IER/=0 ) GOTO 800
-ENDIF
-DO i = 1 , N
-  Acor(i) = 0.0D0
-ENDDO
-600  IF ( MITer/=0 ) THEN
-!                                   ------------------------------------
-!                                    IN THE CASE OF THE CHORD METHOD,
-!                                    COMPUTE THE CORRECTOR ERROR, AND
-!                                    SOLVE THE LINEAR SYSTEM WITH THAT
-!                                    AS RIGHT-HAND SIDE AND P AS
-!                                    COEFFICIENT MATRIX.
-!                                   ------------------------------------
-DO i = 1 , N
-  Y(i) = H*Savf(i) - (Yh(i,2)+Acor(i))
-ENDDO
-CALL DSLVS(Wm,Iwm,Y,Savf)
-!                             ......EXIT
-IF ( IER/=0 ) GOTO 700
-del = DVNRMS(N,Y,Ewt)
-DO i = 1 , N
-  Acor(i) = Acor(i) + Y(i)
-  Y(i) = Yh(i,1) + EL(1)*Acor(i)
-ENDDO
-ELSE
-!                                   ------------------------------------
-!                                    IN THE CASE OF FUNCTIONAL
-!                                    ITERATION, UPDATE Y DIRECTLY FROM
-!                                    THE RESULT OF THE LAST FUNCTION
-!                                    EVALUATION.
-!                                   ------------------------------------
-DO i = 1 , N
-  Savf(i) = H*Savf(i) - Yh(i,2)
-  Y(i) = Savf(i) - Acor(i)
-ENDDO
-del = DVNRMS(N,Y,Ewt)
-DO i = 1 , N
-  Y(i) = Yh(i,1) + EL(1)*Savf(i)
-  Acor(i) = Savf(i)
-ENDDO
-ENDIF
-!                                ---------------------------------------
-!                                 TEST FOR CONVERGENCE.  IF M.GT.0, AN
-!                                 ESTIMATE OF THE CONVERGENCE RATE
-!                                 CONSTANT IS STORED IN CRATE, AND THIS
-!                                 IS USED IN THE TEST.
-!                                ---------------------------------------
-IF ( m/=0 ) CRAte = MAX(0.2D0*CRAte,del/delp)
-dcon = del*MIN(1.0D0,1.5D0*CRAte)/(TESco(2,NQ)*CONit)
-IF ( dcon>1.0D0 ) THEN
-m = m + 1
-!                             ...EXIT
-IF ( m/=3 ) THEN
-  !                             ...EXIT
-  IF ( m<2.OR.del<=2.0D0*delp ) THEN
-    delp = del
-    CALL DF(TN,Y,Savf,Rpar,Ipar)
-    NFE = NFE + 1
-    GOTO 600
+  H = H*rh
+  RC = RC*rh
+  IALth = L
+  IF ( iredo==0 ) THEN
+    RMAx = 10.0D0
+    r = 1.0D0/TESco(2,NQU)
+    DO i = 1, N
+      Acor(i) = Acor(i)*r
+    ENDDO
+    !     ...............EXIT
+    GOTO 1000
   ENDIF
-ENDIF
-ELSE
-!                                   ------------------------------------
-!                                    THE CORRECTOR HAS CONVERGED.  IPUP
-!                                    IS SET TO -1 IF MITER .NE. 0, TO
-!                                    SIGNAL THAT THE JACOBIAN INVOLVED
-!                                    MAY NEED UPDATING LATER.  THE LOCAL
-!                                    ERROR TEST IS MADE AND CONTROL
-!                                    PASSES TO STATEMENT 500 IF IT
-!                                    FAILS.
-!                                   ------------------------------------
-IF ( MITer/=0 ) IPUp = -1
-IF ( m==0 ) dsm = del/TESco(2,NQ)
-IF ( m>0 ) dsm = DVNRMS(N,Acor,Ewt)/TESco(2,NQ)
-IF ( dsm>1.0D0 ) THEN
-  !                                   ------------------------------------
-  !                                    THE ERROR TEST FAILED.  KFLAG KEEPS
-  !                                    TRACK OF MULTIPLE FAILURES.
-  !                                    RESTORE TN AND THE YH ARRAY TO
-  !                                    THEIR PREVIOUS VALUES, AND PREPARE
-  !                                    TO TRY THE STEP AGAIN.  COMPUTE THE
-  !                                    OPTIMUM STEP SIZE FOR THIS OR ONE
-  !                                    LOWER ORDER.  AFTER 2 OR MORE
-  !                                    FAILURES, H IS FORCED TO DECREASE
-  !                                    BY A FACTOR OF 0.2 OR LESS.
-  !                                   ------------------------------------
-  KFLag = KFLag - 1
-  TN = told
+  !                 ------------------------------------------------------
+  !                  THIS SECTION COMPUTES THE PREDICTED VALUES BY
+  !                  EFFECTIVELY MULTIPLYING THE YH ARRAY BY THE PASCAL
+  !                  TRIANGLE MATRIX.  RC IS THE RATIO OF NEW TO OLD
+  !                  VALUES OF THE COEFFICIENT  H*EL(1).  WHEN RC DIFFERS
+  !                  FROM 1 BY MORE THAN 30 PERCENT, IPUP IS SET TO MITER
+  !                  TO FORCE DPJAC TO BE CALLED, IF A JACOBIAN IS
+  !                  INVOLVED.  IN ANY CASE, DPJAC IS CALLED AT LEAST
+  !                  EVERY 20-TH STEP.
+  !                 ------------------------------------------------------
+  !                    BEGIN BLOCK PERMITTING ...EXITS TO 610
+  !                       BEGIN BLOCK PERMITTING ...EXITS TO 490
+  400 CONTINUE
+  IF ( ABS(RC-1.0D0)>0.3D0 ) IPUp = MITer
+  IF ( NST>=NSTepj+20 ) IPUp = MITer
+  TN = TN + H
   i1 = NQNyh + 1
-  DO jb = 1 , NQ
+  DO jb = 1, NQ
     i1 = i1 - Nyh
-    DO i = i1 , NQNyh
+    DO i = i1, NQNyh
+      Yh1(i) = Yh1(i) + Yh1(i+Nyh)
+    ENDDO
+  ENDDO
+  KSTeps = KSTeps + 1
+  !                          ---------------------------------------------
+  !                           UP TO 3 CORRECTOR ITERATIONS ARE TAKEN.  A
+  !                           CONVERGENCE TEST IS MADE ON THE R.M.S. NORM
+  !                           OF EACH CORRECTION, WEIGHTED BY THE ERROR
+  !                           WEIGHT VECTOR EWT.  THE SUM OF THE
+  !                           CORRECTIONS IS ACCUMULATED IN THE VECTOR
+  !                           ACOR(I).  THE YH ARRAY IS NOT ALTERED IN THE
+  !                           CORRECTOR LOOP.
+  !                          ---------------------------------------------
+  500  m = 0
+  DO i = 1, N
+    Y(i) = Yh(i,1)
+  ENDDO
+  CALL DF(TN,Y,Savf,Rpar,Ipar)
+  NFE = NFE + 1
+  IF ( IPUp>0 ) THEN
+    !                                ---------------------------------------
+    !                                 IF INDICATED, THE MATRIX P = I -
+    !                                 H*EL(1)*J IS REEVALUATED AND
+    !                                 PREPROCESSED BEFORE STARTING THE
+    !                                 CORRECTOR ITERATION.  IPUP IS SET TO 0
+    !                                 AS AN INDICATOR THAT THIS HAS BEEN
+    !                                 DONE.
+    !                                ---------------------------------------
+    IPUp = 0
+    RC = 1.0D0
+    NSTepj = NST
+    CRAte = 0.7D0
+    CALL DPJAC(Neq,Y,Yh,Nyh,Ewt,Acor,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
+    !                          ......EXIT
+    IF ( IER/=0 ) GOTO 800
+  ENDIF
+  DO i = 1, N
+    Acor(i) = 0.0D0
+  ENDDO
+  600 CONTINUE
+  IF ( MITer/=0 ) THEN
+    !                                   ------------------------------------
+    !                                    IN THE CASE OF THE CHORD METHOD,
+    !                                    COMPUTE THE CORRECTOR ERROR, AND
+    !                                    SOLVE THE LINEAR SYSTEM WITH THAT
+    !                                    AS RIGHT-HAND SIDE AND P AS
+    !                                    COEFFICIENT MATRIX.
+    !                                   ------------------------------------
+    DO i = 1, N
+      Y(i) = H*Savf(i) - (Yh(i,2)+Acor(i))
+    ENDDO
+    CALL DSLVS(Wm,Iwm,Y,Savf)
+    !                             ......EXIT
+    IF ( IER/=0 ) GOTO 700
+    del = DVNRMS(N,Y,Ewt)
+    DO i = 1, N
+      Acor(i) = Acor(i) + Y(i)
+      Y(i) = Yh(i,1) + EL(1)*Acor(i)
+    ENDDO
+  ELSE
+    !                                   ------------------------------------
+    !                                    IN THE CASE OF FUNCTIONAL
+    !                                    ITERATION, UPDATE Y DIRECTLY FROM
+    !                                    THE RESULT OF THE LAST FUNCTION
+    !                                    EVALUATION.
+    !                                   ------------------------------------
+    DO i = 1, N
+      Savf(i) = H*Savf(i) - Yh(i,2)
+      Y(i) = Savf(i) - Acor(i)
+    ENDDO
+    del = DVNRMS(N,Y,Ewt)
+    DO i = 1, N
+      Y(i) = Yh(i,1) + EL(1)*Savf(i)
+      Acor(i) = Savf(i)
+    ENDDO
+  ENDIF
+  !                                ---------------------------------------
+  !                                 TEST FOR CONVERGENCE.  IF M.GT.0, AN
+  !                                 ESTIMATE OF THE CONVERGENCE RATE
+  !                                 CONSTANT IS STORED IN CRATE, AND THIS
+  !                                 IS USED IN THE TEST.
+  !                                ---------------------------------------
+  IF ( m/=0 ) CRAte = MAX(0.2D0*CRAte,del/delp)
+  dcon = del*MIN(1.0D0,1.5D0*CRAte)/(TESco(2,NQ)*CONit)
+  IF ( dcon>1.0D0 ) THEN
+    m = m + 1
+    !                             ...EXIT
+    IF ( m/=3 ) THEN
+      !                             ...EXIT
+      IF ( m<2.OR.del<=2.0D0*delp ) THEN
+        delp = del
+        CALL DF(TN,Y,Savf,Rpar,Ipar)
+        NFE = NFE + 1
+        GOTO 600
+      ENDIF
+    ENDIF
+  ELSE
+    !                                   ------------------------------------
+    !                                    THE CORRECTOR HAS CONVERGED.  IPUP
+    !                                    IS SET TO -1 IF MITER .NE. 0, TO
+    !                                    SIGNAL THAT THE JACOBIAN INVOLVED
+    !                                    MAY NEED UPDATING LATER.  THE LOCAL
+    !                                    ERROR TEST IS MADE AND CONTROL
+    !                                    PASSES TO STATEMENT 500 IF IT
+    !                                    FAILS.
+    !                                   ------------------------------------
+    IF ( MITer/=0 ) IPUp = -1
+    IF ( m==0 ) dsm = del/TESco(2,NQ)
+    IF ( m>0 ) dsm = DVNRMS(N,Acor,Ewt)/TESco(2,NQ)
+    IF ( dsm>1.0D0 ) THEN
+      !                                   ------------------------------------
+      !                                    THE ERROR TEST FAILED.  KFLAG KEEPS
+      !                                    TRACK OF MULTIPLE FAILURES.
+      !                                    RESTORE TN AND THE YH ARRAY TO
+      !                                    THEIR PREVIOUS VALUES, AND PREPARE
+      !                                    TO TRY THE STEP AGAIN.  COMPUTE THE
+      !                                    OPTIMUM STEP SIZE FOR THIS OR ONE
+      !                                    LOWER ORDER.  AFTER 2 OR MORE
+      !                                    FAILURES, H IS FORCED TO DECREASE
+      !                                    BY A FACTOR OF 0.2 OR LESS.
+      !                                   ------------------------------------
+      KFLag = KFLag - 1
+      TN = told
+      i1 = NQNyh + 1
+      DO jb = 1, NQ
+        i1 = i1 - Nyh
+        DO i = i1, NQNyh
+          Yh1(i) = Yh1(i) - Yh1(i+Nyh)
+        ENDDO
+      ENDDO
+      RMAx = 2.0D0
+      IF ( ABS(H)<=HMIn*1.00001D0 ) THEN
+        !                                      ---------------------------------
+        !                                       ALL RETURNS ARE MADE THROUGH
+        !                                       THIS SECTION.  H IS SAVED IN
+        !                                       HOLD TO ALLOW THE CALLER TO
+        !                                       CHANGE H ON THE NEXT STEP.
+        !                                      ---------------------------------
+        KFLag = -1
+        !     .................................EXIT
+        GOTO 1000
+        !                    ...............EXIT
+      ELSEIF ( KFLag>-3 ) THEN
+        iredo = 2
+        rhup = 0.0D0
+        !                       ............EXIT
+        GOTO 900
+        !                    ---------------------------------------------------
+        !                     CONTROL REACHES THIS SECTION IF 3 OR MORE FAILURES
+        !                     HAVE OCCURRED.  IF 10 FAILURES HAVE OCCURRED, EXIT
+        !                     WITH KFLAG = -1.  IT IS ASSUMED THAT THE
+        !                     DERIVATIVES THAT HAVE ACCUMULATED IN THE YH ARRAY
+        !                     HAVE ERRORS OF THE WRONG ORDER.  HENCE THE FIRST
+        !                     DERIVATIVE IS RECOMPUTED, AND THE ORDER IS SET TO
+        !                     1.  THEN H IS REDUCED BY A FACTOR OF 10, AND THE
+        !                     STEP IS RETRIED, UNTIL IT SUCCEEDS OR H REACHES
+        !                     HMIN.
+        !                    ---------------------------------------------------
+      ELSEIF ( KFLag/=-10 ) THEN
+        rh = 0.1D0
+        rh = MAX(HMIn/ABS(H),rh)
+        H = H*rh
+        DO i = 1, N
+          Y(i) = Yh(i,1)
+        ENDDO
+        CALL DF(TN,Y,Savf,Rpar,Ipar)
+        NFE = NFE + 1
+        DO i = 1, N
+          Yh(i,2) = H*Savf(i)
+        ENDDO
+        IPUp = MITer
+        IALth = 5
+        !              ......EXIT
+        IF ( NQ==1 ) GOTO 400
+        NQ = 1
+        L = 2
+        iret = 3
+        GOTO 100
+      ELSE
+        !                       ------------------------------------------------
+        !                        ALL RETURNS ARE MADE THROUGH THIS SECTION.  H
+        !                        IS SAVED IN HOLD TO ALLOW THE CALLER TO CHANGE
+        !                        H ON THE NEXT STEP.
+        !                       ------------------------------------------------
+        KFLag = -1
+        !     ..................EXIT
+        GOTO 1000
+      ENDIF
+    ELSE
+      !                                      BEGIN BLOCK
+      !                                      PERMITTING ...EXITS TO 360
+      !                                         ------------------------------
+      !                                          AFTER A SUCCESSFUL STEP,
+      !                                          UPDATE THE YH ARRAY.
+      !                                          CONSIDER CHANGING H IF IALTH
+      !                                          = 1.  OTHERWISE DECREASE
+      !                                          IALTH BY 1.  IF IALTH IS THEN
+      !                                          1 AND NQ .LT. MAXORD, THEN
+      !                                          ACOR IS SAVED FOR USE IN A
+      !                                          POSSIBLE ORDER INCREASE ON
+      !                                          THE NEXT STEP.  IF A CHANGE
+      !                                          IN H IS CONSIDERED, AN
+      !                                          INCREASE OR DECREASE IN ORDER
+      !                                          BY ONE IS CONSIDERED ALSO.  A
+      !                                          CHANGE IN H IS MADE ONLY IF
+      !                                          IT IS BY A FACTOR OF AT LEAST
+      !                                          1.1.  IF NOT, IALTH IS SET TO
+      !                                          3 TO PREVENT TESTING FOR THAT
+      !                                          MANY STEPS.
+      !                                         ------------------------------
+      KFLag = 0
+      iredo = 0
+      NST = NST + 1
+      HU = H
+      NQU = NQ
+      DO j = 1, L
+        DO i = 1, N
+          Yh(i,j) = Yh(i,j) + EL(j)*Acor(i)
+        ENDDO
+      ENDDO
+      IALth = IALth - 1
+      IF ( IALth/=0 ) THEN
+        !                                      ...EXIT
+        IF ( IALth<=1 ) THEN
+          !                                      ...EXIT
+          IF ( L/=LMAx ) THEN
+            DO i = 1, N
+              Yh(i,LMAx) = Acor(i)
+            ENDDO
+          ENDIF
+        ENDIF
+        r = 1.0D0/TESco(2,NQU)
+        DO i = 1, N
+          Acor(i) = Acor(i)*r
+        ENDDO
+        !     .................................EXIT
+        GOTO 1000
+      ELSE
+        !                                            ---------------------------
+        !                                             REGARDLESS OF THE SUCCESS
+        !                                             OR FAILURE OF THE STEP,
+        !                                             FACTORS RHDN, RHSM, AND
+        !                                             RHUP ARE COMPUTED, BY
+        !                                             WHICH H COULD BE
+        !                                             MULTIPLIED AT ORDER NQ -
+        !                                             1, ORDER NQ, OR ORDER NQ +
+        !                                             1, RESPECTIVELY.  IN THE
+        !                                             CASE OF FAILURE, RHUP =
+        !                                             0.0 TO AVOID AN ORDER
+        !                                             INCREASE.  THE LARGEST OF
+        !                                             THESE IS DETERMINED AND
+        !                                             THE NEW ORDER CHOSEN
+        !                                             ACCORDINGLY.  IF THE ORDER
+        !                                             IS TO BE INCREASED, WE
+        !                                             COMPUTE ONE ADDITIONAL
+        !                                             SCALED DERIVATIVE.
+        !                                            ---------------------------
+        rhup = 0.0D0
+        !                       .....................EXIT
+        IF ( L/=LMAx ) THEN
+          DO i = 1, N
+            Savf(i) = Acor(i) - Yh(i,LMAx)
+          ENDDO
+          dup = DVNRMS(N,Savf,Ewt)/TESco(3,NQ)
+          exup = 1.0D0/(L+1)
+          !                       .....................EXIT
+          rhup = 1.0D0/(1.4D0*dup**exup+0.0000014D0)
+        ENDIF
+        GOTO 900
+      ENDIF
+    ENDIF
+  ENDIF
+  !                             ------------------------------------------
+  !                              THE CORRECTOR ITERATION FAILED TO
+  !                              CONVERGE IN 3 TRIES.  IF MITER .NE. 0 AND
+  !                              THE JACOBIAN IS OUT OF DATE, DPJAC IS
+  !                              CALLED FOR THE NEXT TRY.  OTHERWISE THE
+  !                              YH ARRAY IS RETRACTED TO ITS VALUES
+  !                              BEFORE PREDICTION, AND H IS REDUCED, IF
+  !                              POSSIBLE.  IF H CANNOT BE REDUCED OR 10
+  !                              FAILURES HAVE OCCURRED, EXIT WITH KFLAG =
+  !                              -2.
+  !                             ------------------------------------------
+  !                          ...EXIT
+  700 CONTINUE
+  IF ( IPUp/=0 ) THEN
+    IPUp = MITer
+    GOTO 500
+  ENDIF
+  800  TN = told
+  ncf = ncf + 1
+  RMAx = 2.0D0
+  i1 = NQNyh + 1
+  DO jb = 1, NQ
+    i1 = i1 - Nyh
+    DO i = i1, NQNyh
       Yh1(i) = Yh1(i) - Yh1(i+Nyh)
     ENDDO
   ENDDO
-  RMAx = 2.0D0
   IF ( ABS(H)<=HMIn*1.00001D0 ) THEN
-    !                                      ---------------------------------
-    !                                       ALL RETURNS ARE MADE THROUGH
-    !                                       THIS SECTION.  H IS SAVED IN
-    !                                       HOLD TO ALLOW THE CALLER TO
-    !                                       CHANGE H ON THE NEXT STEP.
-    !                                      ---------------------------------
-    KFLag = -1
-    !     .................................EXIT
+    KFLag = -2
+    !     ........................EXIT
     GOTO 1000
-    !                    ...............EXIT
-  ELSEIF ( KFLag>-3 ) THEN
-    iredo = 2
-    rhup = 0.0D0
-    !                       ............EXIT
-    GOTO 900
-    !                    ---------------------------------------------------
-    !                     CONTROL REACHES THIS SECTION IF 3 OR MORE FAILURES
-    !                     HAVE OCCURRED.  IF 10 FAILURES HAVE OCCURRED, EXIT
-    !                     WITH KFLAG = -1.  IT IS ASSUMED THAT THE
-    !                     DERIVATIVES THAT HAVE ACCUMULATED IN THE YH ARRAY
-    !                     HAVE ERRORS OF THE WRONG ORDER.  HENCE THE FIRST
-    !                     DERIVATIVE IS RECOMPUTED, AND THE ORDER IS SET TO
-    !                     1.  THEN H IS REDUCED BY A FACTOR OF 10, AND THE
-    !                     STEP IS RETRIED, UNTIL IT SUCCEEDS OR H REACHES
-    !                     HMIN.
-    !                    ---------------------------------------------------
-  ELSEIF ( KFLag/=-10 ) THEN
-    rh = 0.1D0
-    rh = MAX(HMIn/ABS(H),rh)
-    H = H*rh
-    DO i = 1 , N
-      Y(i) = Yh(i,1)
-    ENDDO
-    CALL DF(TN,Y,Savf,Rpar,Ipar)
-    NFE = NFE + 1
-    DO i = 1 , N
-      Yh(i,2) = H*Savf(i)
-    ENDDO
+  ELSEIF ( ncf/=10 ) THEN
+    rh = 0.25D0
     IPUp = MITer
-    IALth = 5
-    !              ......EXIT
-    IF ( NQ==1 ) GOTO 400
-    NQ = 1
-    L = 2
-    iret = 3
-    GOTO 100
-  ELSE
-    !                       ------------------------------------------------
-    !                        ALL RETURNS ARE MADE THROUGH THIS SECTION.  H
-    !                        IS SAVED IN HOLD TO ALLOW THE CALLER TO CHANGE
-    !                        H ON THE NEXT STEP.
-    !                       ------------------------------------------------
-    KFLag = -1
-    !     ..................EXIT
-    GOTO 1000
-  ENDIF
-ELSE
-  !                                      BEGIN BLOCK
-  !                                      PERMITTING ...EXITS TO 360
-  !                                         ------------------------------
-  !                                          AFTER A SUCCESSFUL STEP,
-  !                                          UPDATE THE YH ARRAY.
-  !                                          CONSIDER CHANGING H IF IALTH
-  !                                          = 1.  OTHERWISE DECREASE
-  !                                          IALTH BY 1.  IF IALTH IS THEN
-  !                                          1 AND NQ .LT. MAXORD, THEN
-  !                                          ACOR IS SAVED FOR USE IN A
-  !                                          POSSIBLE ORDER INCREASE ON
-  !                                          THE NEXT STEP.  IF A CHANGE
-  !                                          IN H IS CONSIDERED, AN
-  !                                          INCREASE OR DECREASE IN ORDER
-  !                                          BY ONE IS CONSIDERED ALSO.  A
-  !                                          CHANGE IN H IS MADE ONLY IF
-  !                                          IT IS BY A FACTOR OF AT LEAST
-  !                                          1.1.  IF NOT, IALTH IS SET TO
-  !                                          3 TO PREVENT TESTING FOR THAT
-  !                                          MANY STEPS.
-  !                                         ------------------------------
-  KFLag = 0
-  iredo = 0
-  NST = NST + 1
-  HU = H
-  NQU = NQ
-  DO j = 1 , L
-    DO i = 1 , N
-      Yh(i,j) = Yh(i,j) + EL(j)*Acor(i)
-    ENDDO
-  ENDDO
-  IALth = IALth - 1
-  IF ( IALth/=0 ) THEN
-    !                                      ...EXIT
-    IF ( IALth<=1 ) THEN
-      !                                      ...EXIT
-      IF ( L/=LMAx ) THEN
-        DO i = 1 , N
-          Yh(i,LMAx) = Acor(i)
-        ENDDO
-      ENDIF
-    ENDIF
-    r = 1.0D0/TESco(2,NQU)
-    DO i = 1 , N
-      Acor(i) = Acor(i)*r
-    ENDDO
-    !     .................................EXIT
-    GOTO 1000
-  ELSE
-    !                                            ---------------------------
-    !                                             REGARDLESS OF THE SUCCESS
-    !                                             OR FAILURE OF THE STEP,
-    !                                             FACTORS RHDN, RHSM, AND
-    !                                             RHUP ARE COMPUTED, BY
-    !                                             WHICH H COULD BE
-    !                                             MULTIPLIED AT ORDER NQ -
-    !                                             1, ORDER NQ, OR ORDER NQ +
-    !                                             1, RESPECTIVELY.  IN THE
-    !                                             CASE OF FAILURE, RHUP =
-    !                                             0.0 TO AVOID AN ORDER
-    !                                             INCREASE.  THE LARGEST OF
-    !                                             THESE IS DETERMINED AND
-    !                                             THE NEW ORDER CHOSEN
-    !                                             ACCORDINGLY.  IF THE ORDER
-    !                                             IS TO BE INCREASED, WE
-    !                                             COMPUTE ONE ADDITIONAL
-    !                                             SCALED DERIVATIVE.
-    !                                            ---------------------------
-    rhup = 0.0D0
-    !                       .....................EXIT
-    IF ( L/=LMAx ) THEN
-      DO i = 1 , N
-        Savf(i) = Acor(i) - Yh(i,LMAx)
-      ENDDO
-      dup = DVNRMS(N,Savf,Ewt)/TESco(3,NQ)
-      exup = 1.0D0/(L+1)
-      !                       .....................EXIT
-      rhup = 1.0D0/(1.4D0*dup**exup+0.0000014D0)
-    ENDIF
-    GOTO 900
-  ENDIF
-ENDIF
-ENDIF
-!                             ------------------------------------------
-!                              THE CORRECTOR ITERATION FAILED TO
-!                              CONVERGE IN 3 TRIES.  IF MITER .NE. 0 AND
-!                              THE JACOBIAN IS OUT OF DATE, DPJAC IS
-!                              CALLED FOR THE NEXT TRY.  OTHERWISE THE
-!                              YH ARRAY IS RETRACTED TO ITS VALUES
-!                              BEFORE PREDICTION, AND H IS REDUCED, IF
-!                              POSSIBLE.  IF H CANNOT BE REDUCED OR 10
-!                              FAILURES HAVE OCCURRED, EXIT WITH KFLAG =
-!                              -2.
-!                             ------------------------------------------
-!                          ...EXIT
-700  IF ( IPUp/=0 ) THEN
-IPUp = MITer
-GOTO 500
-ENDIF
-800  TN = told
-ncf = ncf + 1
-RMAx = 2.0D0
-i1 = NQNyh + 1
-DO jb = 1 , NQ
-i1 = i1 - Nyh
-DO i = i1 , NQNyh
-Yh1(i) = Yh1(i) - Yh1(i+Nyh)
-ENDDO
-ENDDO
-IF ( ABS(H)<=HMIn*1.00001D0 ) THEN
-KFLag = -2
-!     ........................EXIT
-GOTO 1000
-ELSEIF ( ncf/=10 ) THEN
-rh = 0.25D0
-IPUp = MITer
-iredo = 1
-!                 .........EXIT
-rh = MAX(rh,HMIn/ABS(H))
-GOTO 300
-ELSE
-KFLag = -2
-!     ........................EXIT
-GOTO 1000
-ENDIF
-900  exsm = 1.0D0/L
-rhsm = 1.0D0/(1.2D0*dsm**exsm+0.0000012D0)
-rhdn = 0.0D0
-IF ( NQ/=1 ) THEN
-ddn = DVNRMS(N,Yh(1,L),Ewt)/TESco(1,NQ)
-exdn = 1.0D0/NQ
-rhdn = 1.0D0/(1.3D0*ddn**exdn+0.0000013D0)
-ENDIF
-IF ( rhsm>=rhup ) THEN
-IF ( rhsm>=rhdn ) THEN
-newq = NQ
-rh = rhsm
-IF ( KFLag==0.AND.rh<1.1D0 ) THEN
-  IALth = 3
-  r = 1.0D0/TESco(2,NQU)
-  DO i = 1 , N
-    Acor(i) = Acor(i)*r
-  ENDDO
-  !     .....................EXIT
-  GOTO 1000
-ELSE
-  IF ( KFLag<=-2 ) rh = MIN(rh,0.2D0)
-  !                             ------------------------------------------
-  !                              IF THERE IS A CHANGE OF ORDER, RESET NQ,
-  !                              L, AND THE COEFFICIENTS.  IN ANY CASE H
-  !                              IS RESET ACCORDING TO RH AND THE YH ARRAY
-  !                              IS RESCALED.  THEN EXIT FROM 680 IF THE
-  !                              STEP WAS OK, OR REDO THE STEP OTHERWISE.
-  !                             ------------------------------------------
-  !                 ............EXIT
-  IF ( newq==NQ ) THEN
+    iredo = 1
+    !                 .........EXIT
     rh = MAX(rh,HMIn/ABS(H))
     GOTO 300
   ELSE
-    NQ = newq
-    L = NQ + 1
-    iret = 2
-    !           ..................EXIT
-    GOTO 100
+    KFLag = -2
+    !     ........................EXIT
+    GOTO 1000
   ENDIF
-ENDIF
-ENDIF
-ELSEIF ( rhup>rhdn ) THEN
-newq = L
-rh = rhup
-IF ( rh>=1.1D0 ) THEN
-r = EL(L)/L
-DO i = 1 , N
-  Yh(i,newq+1) = Acor(i)*r
-ENDDO
-NQ = newq
-L = NQ + 1
-iret = 2
-!           ..................EXIT
-GOTO 100
-ELSE
-IALth = 3
-r = 1.0D0/TESco(2,NQU)
-DO i = 1 , N
-  Acor(i) = Acor(i)*r
-ENDDO
-!     ...........................EXIT
-GOTO 1000
-ENDIF
-ENDIF
-newq = NQ - 1
-rh = rhdn
-IF ( KFLag<0.AND.rh>1.0D0 ) rh = 1.0D0
-IF ( KFLag==0.AND.rh<1.1D0 ) THEN
-IALth = 3
-r = 1.0D0/TESco(2,NQU)
-DO i = 1 , N
-Acor(i) = Acor(i)*r
-!     ..................EXIT
-ENDDO
-ELSE
-IF ( KFLag<=-2 ) rh = MIN(rh,0.2D0)
-!                          ---------------------------------------------
-!                           IF THERE IS A CHANGE OF ORDER, RESET NQ, L,
-!                           AND THE COEFFICIENTS.  IN ANY CASE H IS
-!                           RESET ACCORDING TO RH AND THE YH ARRAY IS
-!                           RESCALED.  THEN EXIT FROM 680 IF THE STEP
-!                           WAS OK, OR REDO THE STEP OTHERWISE.
-!                          ---------------------------------------------
-!                 .........EXIT
-IF ( newq==NQ ) THEN
-rh = MAX(rh,HMIn/ABS(H))
-GOTO 300
-ELSE
-NQ = newq
-L = NQ + 1
-iret = 2
-!           ...............EXIT
-GOTO 100
-ENDIF
-ENDIF
-1000 HOLd = H
-JSTart = 1
-!     ----------------------- END OF SUBROUTINE DSTOD
-!     -----------------------
+  900  exsm = 1.0D0/L
+  rhsm = 1.0D0/(1.2D0*dsm**exsm+0.0000012D0)
+  rhdn = 0.0D0
+  IF ( NQ/=1 ) THEN
+    ddn = DVNRMS(N,Yh(1,L),Ewt)/TESco(1,NQ)
+    exdn = 1.0D0/NQ
+    rhdn = 1.0D0/(1.3D0*ddn**exdn+0.0000013D0)
+  ENDIF
+  IF ( rhsm>=rhup ) THEN
+    IF ( rhsm>=rhdn ) THEN
+      newq = NQ
+      rh = rhsm
+      IF ( KFLag==0.AND.rh<1.1D0 ) THEN
+        IALth = 3
+        r = 1.0D0/TESco(2,NQU)
+        DO i = 1, N
+          Acor(i) = Acor(i)*r
+        ENDDO
+        !     .....................EXIT
+        GOTO 1000
+      ELSE
+        IF ( KFLag<=-2 ) rh = MIN(rh,0.2D0)
+        !                             ------------------------------------------
+        !                              IF THERE IS A CHANGE OF ORDER, RESET NQ,
+        !                              L, AND THE COEFFICIENTS.  IN ANY CASE H
+        !                              IS RESET ACCORDING TO RH AND THE YH ARRAY
+        !                              IS RESCALED.  THEN EXIT FROM 680 IF THE
+        !                              STEP WAS OK, OR REDO THE STEP OTHERWISE.
+        !                             ------------------------------------------
+        !                 ............EXIT
+        IF ( newq==NQ ) THEN
+          rh = MAX(rh,HMIn/ABS(H))
+          GOTO 300
+        ELSE
+          NQ = newq
+          L = NQ + 1
+          iret = 2
+          !           ..................EXIT
+          GOTO 100
+        ENDIF
+      ENDIF
+    ENDIF
+  ELSEIF ( rhup>rhdn ) THEN
+    newq = L
+    rh = rhup
+    IF ( rh>=1.1D0 ) THEN
+      r = EL(L)/L
+      DO i = 1, N
+        Yh(i,newq+1) = Acor(i)*r
+      ENDDO
+      NQ = newq
+      L = NQ + 1
+      iret = 2
+      !           ..................EXIT
+      GOTO 100
+    ELSE
+      IALth = 3
+      r = 1.0D0/TESco(2,NQU)
+      DO i = 1, N
+        Acor(i) = Acor(i)*r
+      ENDDO
+      !     ...........................EXIT
+      GOTO 1000
+    ENDIF
+  ENDIF
+  newq = NQ - 1
+  rh = rhdn
+  IF ( KFLag<0.AND.rh>1.0D0 ) rh = 1.0D0
+  IF ( KFLag==0.AND.rh<1.1D0 ) THEN
+    IALth = 3
+    r = 1.0D0/TESco(2,NQU)
+    DO i = 1, N
+      Acor(i) = Acor(i)*r
+      !     ..................EXIT
+    ENDDO
+  ELSE
+    IF ( KFLag<=-2 ) rh = MIN(rh,0.2D0)
+    !                          ---------------------------------------------
+    !                           IF THERE IS A CHANGE OF ORDER, RESET NQ, L,
+    !                           AND THE COEFFICIENTS.  IN ANY CASE H IS
+    !                           RESET ACCORDING TO RH AND THE YH ARRAY IS
+    !                           RESCALED.  THEN EXIT FROM 680 IF THE STEP
+    !                           WAS OK, OR REDO THE STEP OTHERWISE.
+    !                          ---------------------------------------------
+    !                 .........EXIT
+    IF ( newq==NQ ) THEN
+      rh = MAX(rh,HMIn/ABS(H))
+      GOTO 300
+    ELSE
+      NQ = newq
+      L = NQ + 1
+      iret = 2
+      !           ...............EXIT
+      GOTO 100
+    ENDIF
+  ENDIF
+  1000 HOLd = H
+  JSTart = 1
+  !     ----------------------- END OF SUBROUTINE DSTOD
+  !     -----------------------
 END SUBROUTINE DSTOD

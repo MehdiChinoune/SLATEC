@@ -4,8 +4,8 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   IMPLICIT NONE
   !*--D9KNUS5
   !*** Start of declarations inserted by SPAG
-  REAL an , bn , eta
-  INTEGER i , ii , INITDS , inu , Iswtch , n , ntc0k , nterms , ntznu1
+  REAL an, bn, eta
+  INTEGER i, ii, INITDS, inu, Iswtch, n, ntc0k, nterms, ntznu1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9KNUS
   !***SUBSIDIARY
@@ -46,17 +46,17 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  D9KNUS
-  REAL(8) :: Xnu , X , Bknu , Bknu1 , alpha(32) , beta(32) , a(32) , &
-    c0kcs(29) , znu1cs(20) , alnz , aln2 , a0 , bknud , &
-    bknu0 , b0 , c0 , euler , expx , p1 , p2 , p3 , qq , &
-    result , sqpi2 , sqrtx , v , vlnz , xi , xmu , xnusml , &
-    xsml , x2n , x2tov , z , ztov , alnsml , alnbig
+  REAL(8) :: Xnu, X, Bknu, Bknu1, alpha(32), beta(32), a(32), &
+    c0kcs(29), znu1cs(20), alnz, aln2, a0, bknud, &
+    bknu0, b0, c0, euler, expx, p1, p2, p3, qq, &
+    result, sqpi2, sqrtx, v, vlnz, xi, xmu, xnusml, &
+    xsml, x2n, x2tov, z, ztov, alnsml, alnbig
   REAL alneps
-  REAL(8) :: D1MACH , DCSEVL , DGAMMA
+  REAL(8) :: D1MACH, DCSEVL, DGAMMA
   LOGICAL first
   EXTERNAL DGAMMA
-  SAVE c0kcs , znu1cs , euler , sqpi2 , aln2 , ntc0k , ntznu1 , xnusml , &
-    xsml , alnsml , alnbig , alneps , first
+  SAVE c0kcs, znu1cs, euler, sqpi2, aln2, ntc0k, ntznu1, xnusml, &
+    xsml, alnsml, alnbig, alneps, first
   DATA c0kcs(1)/ + .60183057242626108387577445180329D-1/
   DATA c0kcs(2)/ - .15364871433017286092959755943124D+0/
   DATA c0kcs(3)/ - .11751176008210492040068229226213D-1/
@@ -179,7 +179,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     z = 0.0D0
     IF ( X>xsml ) z = 0.25D0*X*X
     nterms = MAX(2.0,11.0+(8.*REAL(alnz)-25.19-alneps)/(4.28-REAL(alnz)))
-    DO i = 2 , nterms
+    DO i = 2, nterms
       xi = i - 1
       a0 = a0/(xi*(xi-v))
       b0 = b0/(xi*(xi+v))
@@ -189,7 +189,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     !
     Bknu = alpha(nterms)
     bknud = beta(nterms)
-    DO ii = 2 , nterms
+    DO ii = 2, nterms
       i = nterms + 1 - ii
       Bknu = alpha(i) + Bknu*z
       bknud = beta(i) + bknud*z
@@ -214,7 +214,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   bn = -0.27 - 0.53/REAL(X)
   nterms = MIN(32,MAX1(3.0,an+bn*alneps))
   !
-  DO inu = 1 , 2
+  DO inu = 1, 2
     xmu = 0.D0
     IF ( inu==1.AND.Xnu>xnusml ) xmu = (4.0D0*Xnu)*Xnu
     IF ( inu==2 ) xmu = 4.0D0*(ABS(Xnu)+1.D0)**2
@@ -235,7 +235,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
         /(a(2)*a(3))
       !
       IF ( nterms>=4 ) THEN
-        DO i = 4 , nterms
+        DO i = 4, nterms
           n = i - 1
           x2n = 2*n - 1
           !
@@ -258,4 +258,5 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   ENDDO
   RETURN
   !
-  99999 END SUBROUTINE D9KNUS
+  99999 CONTINUE
+  END SUBROUTINE D9KNUS

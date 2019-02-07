@@ -4,7 +4,7 @@ SUBROUTINE CQAG(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--CQAG5
   !*** Start of declarations inserted by SPAG
-  INTEGER ierv , Lun
+  INTEGER ierv, Lun
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CQAG
   !***PURPOSE  Quick check for QAG.
@@ -22,12 +22,12 @@ SUBROUTINE CQAG(Lun,Kprint,Ipass)
   !
   ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
   !
-  REAL a , abserr , b , R1MACH , epmach , epsabs , epsrel , error , exact1 , &
-    exact2 , exact3 , F1G , F2G , F3G , pi , result , uflow , work
-  INTEGER ier , ip , Ipass , iwork , key , Kprint , last , lenw , limit , &
+  REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, exact1, &
+    exact2, exact3, F1G, F2G, F3G, pi, result, uflow, work
+  INTEGER ier, ip, Ipass, iwork, key, Kprint, last, lenw, limit, &
     neval
-  DIMENSION ierv(2) , iwork(100) , work(400)
-  EXTERNAL F1G , F2G , F3G
+  DIMENSION ierv(2), iwork(100), work(400)
+  EXTERNAL F1G, F2G, F3G
   DATA pi/0.31415926535897932E+01/
   DATA exact1/0.1154700538379252E+01/
   DATA exact2/0.11780972450996172E+00/

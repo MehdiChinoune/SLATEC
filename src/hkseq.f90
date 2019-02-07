@@ -30,30 +30,30 @@ SUBROUTINE HKSEQ(X,M,H,Ierr)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   !***END PROLOGUE  HKSEQ
-  INTEGER i , Ierr , j , k , M , mx , nx
+  INTEGER i, Ierr, j, k, M, mx, nx
   INTEGER I1MACH
-  REAL b , fk , fln , fn , fnp , H , hrx , rln , rxsq , r1m5 , s , slope , &
-    t , tk , trm , trmh , trmr , tst , u , v , wdtol , X , xdmy , xh , &
-    xinc , xm , xmin , yint
+  REAL b, fk, fln, fn, fnp, H, hrx, rln, rxsq, r1m5, s, slope, &
+    t, tk, trm, trmh, trmr, tst, u, v, wdtol, X, xdmy, xh, &
+    xinc, xm, xmin, yint
   REAL R1MACH
-  DIMENSION b(22) , trm(22) , trmr(25) , trmh(25) , u(25) , v(25) , H(*)
+  DIMENSION b(22), trm(22), trmr(25), trmh(25), u(25), v(25), H(*)
   SAVE b
   !-----------------------------------------------------------------------
   !             SCALED BERNOULLI NUMBERS 2.0*B(2K)*(1-2**(-2K))
   !-----------------------------------------------------------------------
-  DATA b(1) , b(2) , b(3) , b(4) , b(5) , b(6) , b(7) , b(8) , b(9) , &
-    b(10) , b(11) , b(12) , b(13) , b(14) , b(15) , b(16) , b(17) , &
-    b(18) , b(19) , b(20) , b(21) , b(22)/1.00000000000000000E+00 , &
-    -5.00000000000000000E-01 , 2.50000000000000000E-01 , &
-    -6.25000000000000000E-02 , 4.68750000000000000E-02 , &
-    -6.64062500000000000E-02 , 1.51367187500000000E-01 , &
-    -5.06103515625000000E-01 , 2.33319091796875000E+00 , &
-    -1.41840972900390625E+01 , 1.09941936492919922E+02 , &
-    -1.05824747562408447E+03 , 1.23842434241771698E+04 , &
-    -1.73160495905935764E+05 , 2.85103429084961116E+06 , &
-    -5.45964619322445132E+07 , 1.20316174668075304E+09 , &
-    -3.02326315271452307E+10 , 8.59229286072319606E+11 , &
-    -2.74233104097776039E+13 , 9.76664637943633248E+14 , &
+  DATA b(1), b(2), b(3), b(4), b(5), b(6), b(7), b(8), b(9), &
+    b(10), b(11), b(12), b(13), b(14), b(15), b(16), b(17), &
+    b(18), b(19), b(20), b(21), b(22)/1.00000000000000000E+00, &
+    -5.00000000000000000E-01, 2.50000000000000000E-01, &
+    -6.25000000000000000E-02, 4.68750000000000000E-02, &
+    -6.64062500000000000E-02, 1.51367187500000000E-01, &
+    -5.06103515625000000E-01, 2.33319091796875000E+00, &
+    -1.41840972900390625E+01, 1.09941936492919922E+02, &
+    -1.05824747562408447E+03, 1.23842434241771698E+04, &
+    -1.73160495905935764E+05, 2.85103429084961116E+06, &
+    -5.45964619322445132E+07, 1.20316174668075304E+09, &
+    -3.02326315271452307E+10, 8.59229286072319606E+11, &
+    -2.74233104097776039E+13, 9.76664637943633248E+14, &
     -3.85931586838450360E+16/
   !
   !***FIRST EXECUTABLE STATEMENT  HKSEQ
@@ -93,7 +93,7 @@ SUBROUTINE HKSEQ(X,M,H,Ierr)
   s = t*b(3)
   IF ( ABS(s)>=tst ) THEN
     tk = 2.0E0
-    DO k = 4 , 22
+    DO k = 4, 22
       t = t*((tk+fn+1.0E0)/(tk+1.0E0))*((tk+fn)/(tk+2.0E0))*rxsq
       trm(k) = t*b(k)
       IF ( ABS(trm(k))<tst ) GOTO 100
@@ -107,13 +107,13 @@ SUBROUTINE HKSEQ(X,M,H,Ierr)
     !-----------------------------------------------------------------------
     !     GENERATE LOWER DERIVATIVES, I.LT.M-1
     !-----------------------------------------------------------------------
-    DO i = 2 , M
+    DO i = 2, M
       fnp = fn
       fn = fn - 1.0E0
       s = fnp*hrx*b(3)
       IF ( ABS(s)>=tst ) THEN
         fk = fnp + 3.0E0
-        DO k = 4 , 22
+        DO k = 4, 22
           trm(k) = trm(k)*fnp/fk
           IF ( ABS(trm(k))<tst ) GOTO 120
           s = s + trm(k)
@@ -132,7 +132,7 @@ SUBROUTINE HKSEQ(X,M,H,Ierr)
   xh = X + 0.5E0
   s = 0.0E0
   nx = INT(xinc)
-  DO i = 1 , nx
+  DO i = 1, nx
     trmr(i) = X/(X+nx-i)
     u(i) = trmr(i)
     trmh(i) = X/(xh+nx-i)
@@ -144,9 +144,9 @@ SUBROUTINE HKSEQ(X,M,H,Ierr)
   u(mx) = trmr(mx)
   H(1) = H(1)*trmr(mx) + s
   IF ( M==1 ) RETURN
-  DO j = 2 , M
+  DO j = 2, M
     s = 0.0E0
-    DO i = 1 , nx
+    DO i = 1, nx
       trmr(i) = trmr(i)*u(i)
       trmh(i) = trmh(i)*v(i)
       s = s + trmr(i) - trmh(i)

@@ -63,14 +63,14 @@ SUBROUTINE DQK31(F,A,B,Result,Abserr,Resabs,Resasc)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQK31
-  REAL(8) :: A , absc , Abserr , B , centr , dhlgth , D1MACH , &
-    epmach , F , fc , fsum , fval1 , fval2 , fv1 , fv2 , &
-    hlgth , Resabs , Resasc , resg , resk , reskh , Result , &
-    uflow , wg , wgk , xgk
-  INTEGER j , jtw , jtwm1
+  REAL(8) :: A, absc, Abserr, B, centr, dhlgth, D1MACH, &
+    epmach, F, fc, fsum, fval1, fval2, fv1, fv2, &
+    hlgth, Resabs, Resasc, resg, resk, reskh, Result, &
+    uflow, wg, wgk, xgk
+  INTEGER j, jtw, jtwm1
   EXTERNAL F
   !
-  DIMENSION fv1(15) , fv2(15) , xgk(16) , wgk(16) , wg(8)
+  DIMENSION fv1(15), fv2(15), xgk(16), wgk(16), wg(8)
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE INTERVAL (-1,1).
   !           BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND THEIR
@@ -91,7 +91,7 @@ SUBROUTINE DQK31(F,A,B,Result,Abserr,Resabs,Resasc)
   ! AS EVALUATED WITH 80 DECIMAL DIGIT ARITHMETIC BY L. W. FULLERTON,
   ! BELL LABS, NOV. 1981.
   !
-  SAVE wg , xgk , wgk
+  SAVE wg, xgk, wgk
   DATA wg(1)/0.030753241996117268354628393577204D0/
   DATA wg(2)/0.070366047488108124709267416450667D0/
   DATA wg(3)/0.107159220467171935011869546685869D0/
@@ -166,7 +166,7 @@ SUBROUTINE DQK31(F,A,B,Result,Abserr,Resabs,Resasc)
   resg = wg(8)*fc
   resk = wgk(16)*fc
   Resabs = ABS(resk)
-  DO j = 1 , 7
+  DO j = 1, 7
     jtw = j*2
     absc = hlgth*xgk(jtw)
     fval1 = F(centr-absc)
@@ -178,7 +178,7 @@ SUBROUTINE DQK31(F,A,B,Result,Abserr,Resabs,Resasc)
     resk = resk + wgk(jtw)*fsum
     Resabs = Resabs + wgk(jtw)*(ABS(fval1)+ABS(fval2))
   ENDDO
-  DO j = 1 , 8
+  DO j = 1, 8
     jtwm1 = j*2 - 1
     absc = hlgth*xgk(jtwm1)
     fval1 = F(centr-absc)
@@ -191,7 +191,7 @@ SUBROUTINE DQK31(F,A,B,Result,Abserr,Resabs,Resasc)
   ENDDO
   reskh = resk*0.5D+00
   Resasc = wgk(16)*ABS(fc-reskh)
-  DO j = 1 , 15
+  DO j = 1, 15
     Resasc = Resasc + wgk(j)*(ABS(fv1(j)-reskh)+ABS(fv2(j)-reskh))
   ENDDO
   Result = resk*hlgth

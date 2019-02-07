@@ -70,12 +70,12 @@ SUBROUTINE CGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CGEDI
-  INTEGER Lda , N , Ipvt(*) , Job
-  COMPLEX A(Lda,*) , Det(2) , Work(*)
+  INTEGER Lda, N, Ipvt(*), Job
+  COMPLEX A(Lda,*), Det(2), Work(*)
   !
   COMPLEX t
   REAL ten
-  INTEGER i , j , k , kb , kp1 , l , nm1
+  INTEGER i, j, k, kb, kp1, l, nm1
   REAL, EXTERNAL :: CABS1
   !***FIRST EXECUTABLE STATEMENT  CGEDI
   !
@@ -85,7 +85,7 @@ SUBROUTINE CGEDI(A,Lda,N,Ipvt,Det,Work,Job)
     Det(1) = (1.0E0,0.0E0)
     Det(2) = (0.0E0,0.0E0)
     ten = 10.0E0
-    DO i = 1 , N
+    DO i = 1, N
       IF ( Ipvt(i)/=i ) Det(1) = -Det(1)
       Det(1) = A(i,i)*Det(1)
       IF ( CABS1(Det(1))==0.0E0 ) EXIT
@@ -103,13 +103,13 @@ SUBROUTINE CGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   !     COMPUTE INVERSE(U)
   !
   IF ( MOD(Job,10)/=0 ) THEN
-    DO k = 1 , N
+    DO k = 1, N
       A(k,k) = (1.0E0,0.0E0)/A(k,k)
       t = -A(k,k)
       CALL CSCAL(k-1,t,A(1,k),1)
       kp1 = k + 1
       IF ( N>=kp1 ) THEN
-        DO j = kp1 , N
+        DO j = kp1, N
           t = A(k,j)
           A(k,j) = (0.0E0,0.0E0)
           CALL CAXPY(k,t,A(1,k),1,A(1,j),1)
@@ -121,14 +121,14 @@ SUBROUTINE CGEDI(A,Lda,N,Ipvt,Det,Work,Job)
     !
     nm1 = N - 1
     IF ( nm1>=1 ) THEN
-      DO kb = 1 , nm1
+      DO kb = 1, nm1
         k = N - kb
         kp1 = k + 1
-        DO i = kp1 , N
+        DO i = kp1, N
           Work(i) = A(i,k)
           A(i,k) = (0.0E0,0.0E0)
         ENDDO
-        DO j = kp1 , N
+        DO j = kp1, N
           t = Work(j)
           CALL CAXPY(N,t,A(1,j),1,A(1,k),1)
         ENDDO

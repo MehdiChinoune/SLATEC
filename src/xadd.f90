@@ -4,8 +4,8 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   IMPLICIT NONE
   !*--XADD5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , i1 , i2 , Ierror , is , j
-  REAL s , t
+  INTEGER i, i1, i2, Ierror, is, j
+  REAL s, t
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XADD
   !***PURPOSE  To provide single-precision floating-point arithmetic
@@ -41,11 +41,11 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  XADD
-  REAL X , Y , Z
-  INTEGER Ix , Iy , Iz
-  REAL RADix , RADixl , RAD2l , DLG10r
-  INTEGER L , L2 , KMAx
-  COMMON /XBLK2 / RADix , RADixl , RAD2l , DLG10r , L , L2 , KMAx
+  REAL X, Y, Z
+  INTEGER Ix, Iy, Iz
+  REAL RADix, RADixl, RAD2l, DLG10r
+  INTEGER L, L2, KMAx
+  COMMON /XBLK2 / RADix, RADixl, RAD2l, DLG10r, L, L2, KMAx
   SAVE /XBLK2 /
   !
   !
@@ -151,71 +151,74 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !
   ! AND, IF J=0, NO FURTHER SHIFTING REMAINS TO BE DONE.
   !
-  300  IF ( j/=0 ) THEN
-  IF ( ABS(s)<RADixl.AND.j<=3 ) THEN
-    IF ( ABS(s)>=1.0 ) THEN
-      SELECT CASE (j)
-        CASE (1)
-          s = s*RADixl
-          GOTO 400
-        CASE (2,3)
-          GOTO 350
-        CASE DEFAULT
-      END SELECT
-    ENDIF
-    IF ( RADixl*ABS(s)>=1.0 ) THEN
-      SELECT CASE (j)
-        CASE (1)
-          s = s*RADixl
-        CASE (2)
-          s = s*RADixl
-          s = s*RADixl
-        CASE (3)
-          GOTO 350
-        CASE DEFAULT
-          GOTO 320
-      END SELECT
+  300 CONTINUE
+  IF ( j/=0 ) THEN
+    IF ( ABS(s)<RADixl.AND.j<=3 ) THEN
+      IF ( ABS(s)>=1.0 ) THEN
+        SELECT CASE (j)
+          CASE (1)
+            s = s*RADixl
+            GOTO 400
+          CASE (2,3)
+            GOTO 350
+          CASE DEFAULT
+        END SELECT
+      ENDIF
+      IF ( RADixl*ABS(s)>=1.0 ) THEN
+        SELECT CASE (j)
+          CASE (1)
+            s = s*RADixl
+          CASE (2)
+            s = s*RADixl
+            s = s*RADixl
+          CASE (3)
+            GOTO 350
+          CASE DEFAULT
+            GOTO 320
+        END SELECT
+        GOTO 400
+      ENDIF
+      320      SELECT CASE (j)
+    CASE (1)
+      s = s*RADixl
       GOTO 400
+    CASE (2)
+    CASE (3)
+      s = s*RADixl
+    CASE DEFAULT
+      GOTO 350
+  END SELECT
+  s = s*RADixl
+  s = s*RADixl
+  GOTO 400
     ENDIF
-    320      SELECT CASE (j)
-  CASE (1)
-    s = s*RADixl
-    GOTO 400
-  CASE (2)
-  CASE (3)
-    s = s*RADixl
-  CASE DEFAULT
-    GOTO 350
-END SELECT
-s = s*RADixl
-s = s*RADixl
-GOTO 400
+    350    Z = s
+    Iz = is
+    CALL XADJ(Z,Iz,Ierror)
+    GOTO 99999
   ENDIF
-  350    Z = s
-  Iz = is
+  !
+  !   AT THIS POINT, THE REMAINING DIFFERENCE IN THE
+  ! AUXILIARY INDICES HAS BEEN USED TO EFFECT A RIGHT SHIFT
+  ! OF S.  IF THE SHIFTED VALUE OF S WOULD HAVE EXCEEDED
+  ! RADIX**L, THEN (S,IS) IS RETURNED AS THE VALUE OF THE
+  ! SUM.
+  !
+  400 CONTINUE
+  IF ( ABS(s)>1.0.AND.ABS(t)>1.0 ) THEN
+    s = s/RADixl
+    t = t/RADixl
+    Z = s + t
+    Iz = is - j*L + L
+  ELSEIF ( ABS(s)<1.0.AND.ABS(t)<1.0 ) THEN
+    s = s*RADixl
+    t = t*RADixl
+    Z = s + t
+    Iz = is - j*L - L
+  ELSE
+    Z = s + t
+    Iz = is - j*L
+  ENDIF
   CALL XADJ(Z,Iz,Ierror)
-  GOTO 99999
-ENDIF
-!
-!   AT THIS POINT, THE REMAINING DIFFERENCE IN THE
-! AUXILIARY INDICES HAS BEEN USED TO EFFECT A RIGHT SHIFT
-! OF S.  IF THE SHIFTED VALUE OF S WOULD HAVE EXCEEDED
-! RADIX**L, THEN (S,IS) IS RETURNED AS THE VALUE OF THE
-! SUM.
-!
-400  IF ( ABS(s)>1.0.AND.ABS(t)>1.0 ) THEN
-s = s/RADixl
-t = t/RADixl
-Z = s + t
-Iz = is - j*L + L
-ELSEIF ( ABS(s)<1.0.AND.ABS(t)<1.0 ) THEN
-s = s*RADixl
-t = t*RADixl
-Z = s + t
-Iz = is - j*L - L
-ELSE
-Z = s + t
-Iz = is - j*L
-ENDIF
-CALL XADJ(Z,Iz,Ierror)
-99999 END SUBROUTINE XADD
+  99999 CONTINUE
+  END SUBROUTINE XADD

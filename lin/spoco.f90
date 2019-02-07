@@ -18,10 +18,10 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
   !     and estimates the condition of the matrix.
   !
   !     If  RCOND  is not needed, SPOFA is slightly faster.
-  !     To solve  A*X = B , follow SPOCO by SPOSL.
-  !     To compute  INVERSE(A)*C , follow SPOCO by SPOSL.
-  !     To compute  DETERMINANT(A) , follow SPOCO by SPODI.
-  !     To compute  INVERSE(A) , follow SPOCO by SPODI.
+  !     To solve  A*X = B, follow SPOCO by SPOSL.
+  !     To compute  INVERSE(A)*C, follow SPOCO by SPOSL.
+  !     To compute  DETERMINANT(A), follow SPOCO by SPODI.
+  !     To compute  INVERSE(A), follow SPOCO by SPODI.
   !
   !     On Entry
   !
@@ -40,11 +40,11 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
   !        A       an upper triangular matrix  R  so that  A = TRANS(R)*R
   !                where  TRANS(R)  is the transpose.
   !                The strict lower triangle is unaltered.
-  !                If  INFO .NE. 0 , the factorization is not complete.
+  !                If  INFO .NE. 0, the factorization is not complete.
   !
   !        RCOND   REAL
   !                an estimate of the reciprocal condition of  A .
-  !                For the system  A*X = B , relative perturbations
+  !                For the system  A*X = B, relative perturbations
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -52,14 +52,14 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
   !                is true, then  A  may be singular to working
   !                precision.  In particular,  RCOND  is zero  if
   !                exact singularity is detected or the estimate
-  !                underflows.  If INFO .NE. 0 , RCOND is unchanged.
+  !                underflows.  If INFO .NE. 0, RCOND is unchanged.
   !
   !        Z       REAL(N)
   !                a work vector whose contents are usually unimportant.
   !                If  A  is close to a singular matrix, then  Z  is
   !                an approximate null vector in the sense that
   !                NORM(A*Z) = RCOND*NORM(A)*NORM(Z) .
-  !                If  INFO .NE. 0 , Z  is unchanged.
+  !                If  INFO .NE. 0, Z  is unchanged.
   !
   !        INFO    INTEGER
   !                = 0  for normal return.
@@ -79,28 +79,28 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SPOCO
-  INTEGER Lda , N , Info
-  REAL A(Lda,*) , Z(*)
+  INTEGER Lda, N, Info
+  REAL A(Lda,*), Z(*)
   REAL Rcond
   !
-  REAL SDOT , ek , t , wk , wkm
-  REAL anorm , s , SASUM , sm , ynorm
-  INTEGER i , j , jm1 , k , kb , kp1
+  REAL SDOT, ek, t, wk, wkm
+  REAL anorm, s, SASUM, sm, ynorm
+  INTEGER i, j, jm1, k, kb, kp1
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !
   !***FIRST EXECUTABLE STATEMENT  SPOCO
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = SASUM(j,A(1,j),1)
     jm1 = j - 1
     IF ( jm1>=1 ) THEN
-      DO i = 1 , jm1
+      DO i = 1, jm1
         Z(i) = Z(i) + ABS(A(i,j))
       ENDDO
     ENDIF
   ENDDO
   anorm = 0.0E0
-  DO j = 1 , N
+  DO j = 1, N
     anorm = MAX(anorm,Z(j))
   ENDDO
   !
@@ -118,10 +118,10 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
     !        SOLVE TRANS(R)*W = E
     !
     ek = 1.0E0
-    DO j = 1 , N
+    DO j = 1, N
       Z(j) = 0.0E0
     ENDDO
-    DO k = 1 , N
+    DO k = 1, N
       IF ( Z(k)/=0.0E0 ) ek = SIGN(ek,-Z(k))
       IF ( ABS(ek-Z(k))>A(k,k) ) THEN
         s = A(k,k)/ABS(ek-Z(k))
@@ -136,7 +136,7 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
       wkm = wkm/A(k,k)
       kp1 = k + 1
       IF ( kp1<=N ) THEN
-        DO j = kp1 , N
+        DO j = kp1, N
           sm = sm + ABS(Z(j)+wkm*A(k,j))
           Z(j) = Z(j) + wk*A(k,j)
           s = s + ABS(Z(j))
@@ -144,7 +144,7 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
         IF ( s<sm ) THEN
           t = wkm - wk
           wk = wkm
-          DO j = kp1 , N
+          DO j = kp1, N
             Z(j) = Z(j) + t*A(k,j)
           ENDDO
         ENDIF
@@ -156,7 +156,7 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
     !
     !        SOLVE R*Y = W
     !
-    DO kb = 1 , N
+    DO kb = 1, N
       k = N + 1 - kb
       IF ( ABS(Z(k))>A(k,k) ) THEN
         s = A(k,k)/ABS(Z(k))
@@ -173,7 +173,7 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
     !
     !        SOLVE TRANS(R)*V = Y
     !
-    DO k = 1 , N
+    DO k = 1, N
       Z(k) = Z(k) - SDOT(k-1,A(1,k),1,Z(1),1)
       IF ( ABS(Z(k))>A(k,k) ) THEN
         s = A(k,k)/ABS(Z(k))
@@ -188,7 +188,7 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
     !
     !        SOLVE R*Z = V
     !
-    DO kb = 1 , N
+    DO kb = 1, N
       k = N + 1 - kb
       IF ( ABS(Z(k))>A(k,k) ) THEN
         s = A(k,k)/ABS(Z(k))

@@ -12,7 +12,7 @@ REAL FUNCTION F1P(X)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  F1P
-  REAL alfa1 , alfa2 , p1 , p2 , X , d1 , d2
+  REAL alfa1, alfa2, p1, p2, X, d1, d2
   !  P1 = 1/7, P2 = 2/3
   DATA p1/0.1428571428571428E+00/
   DATA p2/0.6666666666666667E+00/

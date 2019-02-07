@@ -45,8 +45,8 @@ SUBROUTINE DSCAL(N,Da,Dx,Incx)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSCAL
-  REAL(8) :: Da , Dx(*)
-  INTEGER i , Incx , ix , m , mp1 , N
+  REAL(8) :: Da, Dx(*)
+  INTEGER i, Incx, ix, m, mp1, N
   !***FIRST EXECUTABLE STATEMENT  DSCAL
   IF ( N<=0 ) RETURN
   IF ( Incx==1 ) THEN
@@ -57,13 +57,13 @@ SUBROUTINE DSCAL(N,Da,Dx,Incx)
     !
     m = MOD(N,5)
     IF ( m/=0 ) THEN
-      DO i = 1 , m
+      DO i = 1, m
         Dx(i) = Da*Dx(i)
       ENDDO
       IF ( N<5 ) RETURN
     ENDIF
     mp1 = m + 1
-    DO i = mp1 , N , 5
+    DO i = mp1, N, 5
       Dx(i) = Da*Dx(i)
       Dx(i+1) = Da*Dx(i+1)
       Dx(i+2) = Da*Dx(i+2)
@@ -76,7 +76,7 @@ SUBROUTINE DSCAL(N,Da,Dx,Incx)
     !
     ix = 1
     IF ( Incx<0 ) ix = (-N+1)*Incx + 1
-    DO i = 1 , N
+    DO i = 1, N
       Dx(ix) = Da*Dx(ix)
       ix = ix + Incx
     ENDDO

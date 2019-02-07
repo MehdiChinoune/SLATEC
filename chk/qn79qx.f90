@@ -23,18 +23,18 @@ SUBROUTINE QN79QX(Lun,Kprint,Ipass)
   !           revised.  (WRB)
   !***END PROLOGUE  QN79QX
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
-  INTEGER ierr , nfct
-  REAL a , ans , b , cor , err , req , tol
+  INTEGER ierr, nfct
+  REAL a, ans, b, cor, err, req, tol
   LOGICAL fatal
   !     .. External Functions ..
-  REAL FQD1 , FQD2 , R1MACH
-  EXTERNAL FQD1 , FQD2 , R1MACH
+  REAL FQD1, FQD2, R1MACH
+  EXTERNAL FQD1, FQD2, R1MACH
   !     .. External Subroutines ..
-  EXTERNAL QNC79 , XGETF , XSETF
+  EXTERNAL QNC79, XGETF, XSETF
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MAX , SQRT
+  INTRINSIC ABS, MAX, SQRT
   !***FIRST EXECUTABLE STATEMENT  QN79QX
   IF ( Kprint>=2 ) WRITE (Lun,FMT=99003)
   !
@@ -51,12 +51,12 @@ SUBROUTINE QN79QX(Lun,Kprint,Ipass)
   CALL QNC79(FQD1,a,b,err,ans,ierr,nfct)
   cor = 2.0E0
   IF ( ABS(ans-cor)<=tol.AND.ierr==1 ) THEN
-    IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED' , a , b , ans , cor , err , &
-      ierr , nfct
+    IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, &
+      ierr, nfct
   ELSE
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED' , a , b , ans , cor , err , &
-      ierr , nfct
+    IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, &
+      ierr, nfct
   ENDIF
   !
   !     Second accuracy test.
@@ -67,12 +67,12 @@ SUBROUTINE QN79QX(Lun,Kprint,Ipass)
   CALL QNC79(FQD2,a,b,err,ans,ierr,nfct)
   cor = (EXP(b)-1.0E0)/101.0E0
   IF ( ABS(ans-cor)<=tol.AND.ierr==1 ) THEN
-    IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED' , a , b , ans , cor , err , &
-      ierr , nfct
+    IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, &
+      ierr, nfct
   ELSE
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED' , a , b , ans , cor , err , &
-      ierr , nfct
+    IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, &
+      ierr, nfct
   ENDIF
   !
   !     Test error returns.
@@ -99,11 +99,11 @@ SUBROUTINE QN79QX(Lun,Kprint,Ipass)
   !     See if test passed.
   !
   IF ( ierr==2 ) THEN
-    IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED' , req , ans , ierr , &
-      err , cor
+    IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, &
+      err, cor
   ELSE
-    IF ( Kprint>=2 ) WRITE (Lun,FMT=99006) 'FAILED' , req , ans , ierr , &
-      err , cor
+    IF ( Kprint>=2 ) WRITE (Lun,FMT=99006) 'FAILED', req, ans, ierr, &
+      err, cor
     Ipass = 0
     fatal = .TRUE.
   ENDIF

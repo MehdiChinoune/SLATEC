@@ -69,29 +69,29 @@ SUBROUTINE TRED1(Nm,N,A,D,E,E2)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  TRED1
   !
-  INTEGER i , j , k , l , N , ii , Nm , jp1
-  REAL A(Nm,*) , D(*) , E(*) , E2(*)
-  REAL f , g , h , scale
+  INTEGER i, j, k, l, N, ii, Nm, jp1
+  REAL A(Nm,*), D(*), E(*), E2(*)
+  REAL f, g, h, scale
   !
   !***FIRST EXECUTABLE STATEMENT  TRED1
-  DO i = 1 , N
+  DO i = 1, N
     D(i) = A(i,i)
   ENDDO
   !     .......... FOR I=N STEP -1 UNTIL 1 DO -- ..........
-  DO ii = 1 , N
+  DO ii = 1, N
     i = N + 1 - ii
     l = i - 1
     h = 0.0E0
     scale = 0.0E0
     IF ( l>=1 ) THEN
       !     .......... SCALE ROW (ALGOL TOL THEN NOT NEEDED) ..........
-      DO k = 1 , l
+      DO k = 1, l
         scale = scale + ABS(A(i,k))
       ENDDO
       !
       IF ( scale/=0.0E0 ) THEN
         !
-        DO k = 1 , l
+        DO k = 1, l
           A(i,k) = A(i,k)/scale
           h = h + A(i,k)*A(i,k)
         ENDDO
@@ -105,17 +105,17 @@ SUBROUTINE TRED1(Nm,N,A,D,E,E2)
         IF ( l/=1 ) THEN
           f = 0.0E0
           !
-          DO j = 1 , l
+          DO j = 1, l
             g = 0.0E0
             !     .......... FORM ELEMENT OF A*U ..........
-            DO k = 1 , j
+            DO k = 1, j
               g = g + A(j,k)*A(i,k)
             ENDDO
             !
             jp1 = j + 1
             IF ( l>=jp1 ) THEN
               !
-              DO k = jp1 , l
+              DO k = jp1, l
                 g = g + A(k,j)*A(i,k)
               ENDDO
             ENDIF
@@ -126,18 +126,18 @@ SUBROUTINE TRED1(Nm,N,A,D,E,E2)
           !
           h = f/(h+h)
           !     .......... FORM REDUCED A ..........
-          DO j = 1 , l
+          DO j = 1, l
             f = A(i,j)
             g = E(j) - h*f
             E(j) = g
             !
-            DO k = 1 , j
+            DO k = 1, j
               A(j,k) = A(j,k) - f*E(k) - g*A(i,k)
             ENDDO
           ENDDO
         ENDIF
         !
-        DO k = 1 , l
+        DO k = 1, l
           A(i,k) = scale*A(i,k)
         ENDDO
         GOTO 50

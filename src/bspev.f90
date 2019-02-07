@@ -74,11 +74,11 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BSPEV
   !
-  INTEGER i , id , Inev , iwork , jj , K , kp1 , kp1mn , l , left , ll , &
-    mflag , N , Nderiv
-  REAL Ad , Svalue , sum , T , Work , X
+  INTEGER i, id, Inev, iwork, jj, K, kp1, kp1mn, l, left, ll, &
+    mflag, N, Nderiv
+  REAL Ad, Svalue, sum, T, Work, X
   !     DIMENSION T(N+K)
-  DIMENSION T(*) , Ad(*) , Svalue(*) , Work(*)
+  DIMENSION T(*), Ad(*), Svalue(*), Work(*)
   !***FIRST EXECUTABLE STATEMENT  BSPEV
   IF ( K<1 ) THEN
     !
@@ -119,7 +119,7 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
         left = i - kp1mn
         sum = 0.0E0
         ll = left + jj + 2 - id
-        DO l = 1 , kp1mn
+        DO l = 1, kp1mn
           sum = sum + Work(l)*Ad(ll)
           ll = ll + 1
         ENDDO
@@ -138,4 +138,5 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   ENDIF
   100  CALL XERMSG('SLATEC','BSPEV','X IS NOT IN T(K).LE.X.LE.T(N+1)',2,1)
   RETURN
-  99999 END SUBROUTINE BSPEV
+  99999 CONTINUE
+  END SUBROUTINE BSPEV

@@ -4,8 +4,8 @@ FUNCTION BESI0(X)
   IMPLICIT NONE
   !*--BESI05
   !*** Start of declarations inserted by SPAG
-  REAL BESI0 , BESI0E , bi0cs , CSEVL , R1MACH , X , xmax , xsml , y
-  INTEGER INITS , nti0
+  REAL BESI0, BESI0E, bi0cs, CSEVL, R1MACH, X, xmax, xsml, y
+  INTEGER INITS, nti0
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESI0
   !***PURPOSE  Compute the hyperbolic Bessel function of the first kind
@@ -40,7 +40,7 @@ FUNCTION BESI0(X)
   !***END PROLOGUE  BESI0
   DIMENSION bi0cs(12)
   LOGICAL first
-  SAVE bi0cs , nti0 , xsml , xmax , first
+  SAVE bi0cs, nti0, xsml, xmax, first
   DATA bi0cs(1)/ - .07660547252839144951E0/
   DATA bi0cs(2)/1.927337953993808270E0/
   DATA bi0cs(3)/.2282644586920301339E0/
@@ -76,4 +76,5 @@ FUNCTION BESI0(X)
   IF ( y>xsml ) BESI0 = 2.75 + CSEVL(y*y/4.5-1.0,bi0cs,nti0)
   RETURN
   !
-  99999 END FUNCTION BESI0
+  99999 CONTINUE
+  END FUNCTION BESI0

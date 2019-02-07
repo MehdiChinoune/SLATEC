@@ -64,18 +64,18 @@ SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DPOLCF
   !
-  INTEGER i , im1 , k , km1 , km1pi , km2n , km2npi , N , nm1 , nmkp1 , &
+  INTEGER i, im1, k, km1, km1pi, km2n, km2npi, N, nm1, nmkp1, &
     npkm1
-  REAL(8) :: C(*) , D(*) , pone , ptwo , X(*) , Xx , Work(*)
+  REAL(8) :: C(*), D(*), pone, ptwo, X(*), Xx, Work(*)
   !***FIRST EXECUTABLE STATEMENT  DPOLCF
-  DO k = 1 , N
+  DO k = 1, N
     D(k) = C(k)
   ENDDO
   IF ( N==1 ) RETURN
   Work(1) = 1.0D0
   pone = C(1)
   nm1 = N - 1
-  DO k = 2 , N
+  DO k = 2, N
     km1 = k - 1
     npkm1 = N + k - 1
     Work(npkm1) = Xx - X(km1)
@@ -85,11 +85,11 @@ SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
   ENDDO
   D(1) = ptwo
   IF ( N==2 ) RETURN
-  DO k = 2 , nm1
+  DO k = 2, nm1
     km1 = k - 1
     km2n = k - 2 + N
     nmkp1 = N - k + 1
-    DO i = 2 , nmkp1
+    DO i = 2, nmkp1
       km2npi = km2n + i
       im1 = i - 1
       km1pi = km1 + i

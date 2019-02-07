@@ -4,8 +4,8 @@ COMPLEX FUNCTION CASIN(Zinp)
   IMPLICIT NONE
   !*--CASIN5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , nterms
-  REAL pi , pi2 , r , R1MACH , rmin , twoi
+  INTEGER i, nterms
+  REAL pi, pi2, r, R1MACH, rmin, twoi
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CASIN
   !***PURPOSE  Compute the complex arc sine.
@@ -28,9 +28,9 @@ COMPLEX FUNCTION CASIN(Zinp)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CASIN
-  COMPLEX Zinp , z , z2 , sqzp1 , ci
+  COMPLEX Zinp, z, z2, sqzp1, ci
   LOGICAL first
-  SAVE pi2 , pi , ci , nterms , rmin , first
+  SAVE pi2, pi, ci, nterms, rmin, first
   DATA pi2/1.57079632679489661923E0/
   DATA pi/3.14159265358979324E0/
   DATA ci/(0.,1.)/
@@ -64,11 +64,12 @@ COMPLEX FUNCTION CASIN(Zinp)
   !
   CASIN = (0.0,0.0)
   z2 = z*z
-  DO i = 1 , nterms
+  DO i = 1, nterms
     twoi = 2*(nterms-i) + 1
     CASIN = 1.0/twoi + twoi*CASIN*z2/(twoi+1.0)
   ENDDO
   CASIN = z*CASIN
   RETURN
   !
-  99999 END FUNCTION CASIN
+  99999 CONTINUE
+  END FUNCTION CASIN

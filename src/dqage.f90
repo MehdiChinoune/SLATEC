@@ -159,15 +159,15 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQAGE
   !
-  REAL(8) :: A , Abserr , Alist , area , area1 , area12 , area2 , a1 , &
-    a2 , B , Blist , b1 , b2 , defabs , defab1 , defab2 , &
-    D1MACH , Elist , epmach , Epsabs , Epsrel , errbnd , &
-    errmax , error1 , error2 , erro12 , errsum , F , resabs , &
-    Result , Rlist , uflow
-  INTEGER Ier , Iord , iroff1 , iroff2 , k , Key , keyf , Last , Limit , &
-    maxerr , Neval , nrmax
+  REAL(8) :: A, Abserr, Alist, area, area1, area12, area2, a1, &
+    a2, B, Blist, b1, b2, defabs, defab1, defab2, &
+    D1MACH, Elist, epmach, Epsabs, Epsrel, errbnd, &
+    errmax, error1, error2, erro12, errsum, F, resabs, &
+    Result, Rlist, uflow
+  INTEGER Ier, Iord, iroff1, iroff2, k, Key, keyf, Last, Limit, &
+    maxerr, Neval, nrmax
   !
-  DIMENSION Alist(*) , Blist(*) , Elist(*) , Iord(*) , Rlist(*)
+  DIMENSION Alist(*), Blist(*), Elist(*), Iord(*), Rlist(*)
   !
   EXTERNAL F
   !
@@ -260,7 +260,7 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
       !           MAIN DO-LOOP
       !           ------------
       !
-      DO Last = 2 , Limit
+      DO Last = 2, Limit
         !
         !           BISECT THE SUBINTERVAL WITH THE LARGEST ERROR ESTIMATE.
         !
@@ -346,7 +346,7 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
       !           ---------------------
       !
       Result = 0.0D+00
-      DO k = 1 , Last
+      DO k = 1, Last
         Result = Result + Rlist(k)
       ENDDO
       Abserr = errsum

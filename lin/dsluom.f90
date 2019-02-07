@@ -5,7 +5,7 @@ SUBROUTINE DSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   IMPLICIT NONE
   !*--DSLUOM6
   !*** Start of declarations inserted by SPAG
-  REAL DSLUI , DSMV
+  REAL DSLUI, DSMV
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSLUOM
   !***PURPOSE  Incomplete LU Orthomin Sparse Iterative Ax=b Solver.
@@ -233,21 +233,21 @@ SUBROUTINE DSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  DSLUOM
   !     .. Parameters ..
-  INTEGER LOCRB , LOCIB
+  INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  REAL(8) :: Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
-    Nelt , Nsave
+  REAL(8) :: Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
+    Nelt, Nsave
   !     .. Array Arguments ..
-  REAL(8) :: A(N) , B(N) , Rwork(Lenw) , X(N)
-  INTEGER Ia(Nelt) , Iwork(Leniw) , Ja(Nelt)
+  REAL(8) :: A(N), B(N), Rwork(Lenw), X(N)
+  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER icol , j , jbgn , jend , locap , loccsa , locdin , locdz , &
-    locema , locil , lociu , lociw , locjl , locju , locl , locnc , &
-    locnr , locp , locr , locu , locw , locz , nl , nu
+  INTEGER icol, j, jbgn, jend, locap, loccsa, locdin, locdz, &
+    locema, locil, lociu, lociw, locjl, locju, locl, locnc, &
+    locnr, locp, locr, locu, locw, locz, nl, nu
   !     .. External Subroutines ..
-  EXTERNAL DCHKW , DOMN , DS2Y , DSILUS , DSLUI , DSMV
+  EXTERNAL DCHKW, DOMN, DS2Y, DSILUS, DSLUI, DSMV
   !***FIRST EXECUTABLE STATEMENT  DSLUOM
   !
   Ierr = 0
@@ -263,13 +263,13 @@ SUBROUTINE DSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !         Then set up the work arrays.
   nl = 0
   nu = 0
-  DO icol = 1 , N
+  DO icol = 1, N
     !         Don't count diagonal.
     jbgn = Ja(icol) + 1
     jend = Ja(icol+1) - 1
     IF ( jbgn<=jend ) THEN
       !VD$ NOVECTOR
-      DO j = jbgn , jend
+      DO j = jbgn, jend
         IF ( Ia(j)>icol ) THEN
           nl = nl + 1
           IF ( Isym/=0 ) nu = nu + 1

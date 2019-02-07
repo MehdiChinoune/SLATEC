@@ -4,9 +4,9 @@ FUNCTION DAWS(X)
   IMPLICIT NONE
   !*--DAWS5
   !*** Start of declarations inserted by SPAG
-  REAL CSEVL , daw2cs , dawacs , dawcs , DAWS , eps , R1MACH , X , xbig , &
-    xmax , xsml , y
-  INTEGER INITS , ntdaw , ntdaw2 , ntdawa
+  REAL CSEVL, daw2cs, dawacs, dawcs, DAWS, eps, R1MACH, X, xbig, &
+    xmax, xsml, y
+  INTEGER INITS, ntdaw, ntdaw2, ntdawa
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DAWS
   !***PURPOSE  Compute Dawson's function.
@@ -47,10 +47,10 @@ FUNCTION DAWS(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DAWS
-  DIMENSION dawcs(13) , daw2cs(29) , dawacs(26)
+  DIMENSION dawcs(13), daw2cs(29), dawacs(26)
   LOGICAL first
-  SAVE dawcs , daw2cs , dawacs , ntdaw , ntdaw2 , ntdawa , xsml , xbig , &
-    xmax , first
+  SAVE dawcs, daw2cs, dawacs, ntdaw, ntdaw2, ntdawa, xsml, xbig, &
+    xmax, first
   DATA dawcs(1)/ - .006351734375145949E0/
   DATA dawcs(2)/ - .22940714796773869E0/
   DATA dawcs(3)/.022130500939084764E0/
@@ -158,4 +158,5 @@ FUNCTION DAWS(X)
   DAWS = (0.5+CSEVL(32.0/y**2-1.0,dawacs,ntdawa))/X
   RETURN
   !
-  99999 END FUNCTION DAWS
+  99999 CONTINUE
+  END FUNCTION DAWS

@@ -4,7 +4,7 @@ REAL(8) FUNCTION DATANH(X)
   IMPLICIT NONE
   !*--DATANH5
   !*** Start of declarations inserted by SPAG
-  INTEGER INITDS , nterms
+  INTEGER INITDS, nterms
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DATANH
   !***PURPOSE  Compute the arc hyperbolic tangent.
@@ -34,9 +34,9 @@ REAL(8) FUNCTION DATANH(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DATANH
-  REAL(8) :: X , atnhcs(27) , dxrel , sqeps , y , DCSEVL , D1MACH
+  REAL(8) :: X, atnhcs(27), dxrel, sqeps, y, DCSEVL, D1MACH
   LOGICAL first
-  SAVE atnhcs , nterms , dxrel , sqeps , first
+  SAVE atnhcs, nterms, dxrel, sqeps, first
   DATA atnhcs(1)/ + .9439510239319549230842892218633D-1/
   DATA atnhcs(2)/ + .4919843705578615947200034576668D-1/
   DATA atnhcs(3)/ + .2102593522455432763479327331752D-2/

@@ -204,11 +204,11 @@ SUBROUTINE DQAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DQAWF
   !
-  REAL(8) :: A , Abserr , Epsabs , F , Omega , Result , Work
-  INTEGER Ier , Integr , Iwork , Leniw , Lenw , limit , Limlst , ll2 , lvl , &
-    Lst , l1 , l2 , l3 , l4 , l5 , l6 , Maxp1 , Neval
+  REAL(8) :: A, Abserr, Epsabs, F, Omega, Result, Work
+  INTEGER Ier, Integr, Iwork, Leniw, Lenw, limit, Limlst, ll2, lvl, &
+    Lst, l1, l2, l3, l4, l5, l6, Maxp1, Neval
   !
-  DIMENSION Iwork(*) , Work(*)
+  DIMENSION Iwork(*), Work(*)
   !
   EXTERNAL F
   !

@@ -4,9 +4,9 @@ FUNCTION R9LN2R(X)
   IMPLICIT NONE
   !*--R9LN2R5
   !*** Start of declarations inserted by SPAG
-  REAL CSEVL , eps , R1MACH , R9LN2R , sqeps , txbig , txmax , X , xbig , &
-    xmax , xmin
-  INTEGER INITS , ntln21 , ntln22
+  REAL CSEVL, eps, R1MACH, R9LN2R, sqeps, txbig, txmax, X, xbig, &
+    xmax, xmin
+  INTEGER INITS, ntln21, ntln22
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9LN2R
   !***SUBSIDIARY
@@ -44,9 +44,9 @@ FUNCTION R9LN2R(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  R9LN2R
-  REAL ln21cs(26) , ln22cs(20)
+  REAL ln21cs(26), ln22cs(20)
   LOGICAL first
-  SAVE ln21cs , ln22cs , ntln21 , ntln22 , xmin , xbig , xmax , first
+  SAVE ln21cs, ln22cs, ntln21, ntln22, xmin, xbig, xmax, first
   DATA ln21cs(1)/.18111962513478810E0/
   DATA ln21cs(2)/ - .15627123192872463E0/
   DATA ln21cs(3)/.028676305361557275E0/
@@ -129,4 +129,5 @@ FUNCTION R9LN2R(X)
   IF ( X>=0.0 ) R9LN2R = 0.375 + CSEVL(32.*X/13.-1.0,ln22cs,ntln22)
   RETURN
   !
-  99999 END FUNCTION R9LN2R
+  99999 CONTINUE
+  END FUNCTION R9LN2R

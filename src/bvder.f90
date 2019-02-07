@@ -4,8 +4,8 @@ SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
   IMPLICIT NONE
   !*--BVDER5
   !*** Start of declarations inserted by SPAG
-  REAL C , G , X , XSAv , Y , Yp
-  INTEGER IGOfx , INHomo , Ipar , IVP , j , k , l , na , NCOmp , NFC , NOFst
+  REAL C, G, X, XSAv, Y, Yp
+  INTEGER IGOfx, INHomo, Ipar, IVP, j, k, l, na, NCOmp, NFC, NOFst
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BVDER
   !***SUBSIDIARY
@@ -61,11 +61,11 @@ SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920618  Minor restructuring of code.  (RWC, WRB)
   !***END PROLOGUE  BVDER
-  DIMENSION Y(*) , Yp(*) , G(*)
+  DIMENSION Y(*), Yp(*), G(*)
   !
   ! **********************************************************************
   !
-  COMMON /ML8SZ / C , XSAv , IGOfx , INHomo , IVP , NCOmp , NFC
+  COMMON /ML8SZ / C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
   !
   ! **********************************************************************
   !     The COMMON block below is used to communicate with the user
@@ -79,7 +79,7 @@ SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
   IF ( IVP>0 ) CALL UIVP(X,Y(IVP+1),Yp(IVP+1))
   NOFst = IVP
   na = 1
-  DO k = 1 , NFC
+  DO k = 1, NFC
     CALL FMAT(X,Y(na),Yp(na))
     NOFst = NOFst - NCOmp
     na = na + NCOmp
@@ -101,7 +101,7 @@ SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
   !     The following loop is just
   !     CALL SAXPY (NCOMP, 1.0E0/C, G, 1, YP(NA), 1)
   !
-  DO j = 1 , NCOmp
+  DO j = 1, NCOmp
     l = na + j - 1
     Yp(l) = Yp(l) + G(j)/C
   ENDDO

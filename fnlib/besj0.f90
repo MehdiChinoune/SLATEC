@@ -4,9 +4,9 @@ FUNCTION BESJ0(X)
   IMPLICIT NONE
   !*--BESJ05
   !*** Start of declarations inserted by SPAG
-  REAL ampl , BESJ0 , bj0cs , bm0cs , bth0cs , CSEVL , pi4 , R1MACH , &
-    theta , X , xmax , xsml , y , z
-  INTEGER INITS , ntj0 , ntm0 , ntth0
+  REAL ampl, BESJ0, bj0cs, bm0cs, bth0cs, CSEVL, pi4, R1MACH, &
+    theta, X, xmax, xsml, y, z
+  INTEGER INITS, ntj0, ntm0, ntth0
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESJ0
   !***PURPOSE  Compute the Bessel function of the first kind of order
@@ -50,9 +50,9 @@ FUNCTION BESJ0(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BESJ0
-  DIMENSION bj0cs(13) , bm0cs(21) , bth0cs(24)
+  DIMENSION bj0cs(13), bm0cs(21), bth0cs(24)
   LOGICAL first
-  SAVE bj0cs , bm0cs , bth0cs , pi4 , ntj0 , ntm0 , ntth0 , xsml , xmax , &
+  SAVE bj0cs, bm0cs, bth0cs, pi4, ntj0, ntm0, ntth0, xsml, xmax, &
     first
   DATA bj0cs(1)/.100254161968939137E0/
   DATA bj0cs(2)/ - .665223007764405132E0/
@@ -142,4 +142,5 @@ FUNCTION BESJ0(X)
   IF ( y>xsml ) BESJ0 = CSEVL(.125*y*y-1.,bj0cs,ntj0)
   RETURN
   !
-  99999 END FUNCTION BESJ0
+  99999 CONTINUE
+  END FUNCTION BESJ0

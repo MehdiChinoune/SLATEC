@@ -139,15 +139,15 @@ SUBROUTINE SSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  SSDSCL
   !     .. Scalar Arguments ..
-  INTEGER Isym , Itol , Job , N , Nelt
+  INTEGER Isym, Itol, Job, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt) , B(N) , Dinv(N) , X(N)
-  INTEGER Ia(Nelt) , Ja(Nelt)
+  REAL A(Nelt), B(N), Dinv(N), X(N)
+  INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Arrays in Common ..
   REAL SOLn(1)
   !     .. Local Scalars ..
   REAL di
-  INTEGER icol , j , jbgn , jend
+  INTEGER icol, j, jbgn, jend
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
   !     .. Common blocks ..
@@ -157,28 +157,28 @@ SUBROUTINE SSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   !         SCALING...
   !
   IF ( Job/=0 ) THEN
-    DO icol = 1 , N
+    DO icol = 1, N
       Dinv(icol) = 1.0E0/SQRT(A(Ja(icol)))
     ENDDO
   ELSE
     !
     !         UNSCALING...
     !
-    DO icol = 1 , N
+    DO icol = 1, N
       Dinv(icol) = 1.0E0/Dinv(icol)
     ENDDO
   ENDIF
   !
-  DO icol = 1 , N
+  DO icol = 1, N
     jbgn = Ja(icol)
     jend = Ja(icol+1) - 1
     di = Dinv(icol)
-    DO j = jbgn , jend
+    DO j = jbgn, jend
       A(j) = Dinv(Ia(j))*A(j)*di
     ENDDO
   ENDDO
   !
-  DO icol = 1 , N
+  DO icol = 1, N
     B(icol) = B(icol)*Dinv(icol)
     X(icol) = X(icol)/Dinv(icol)
   ENDDO
@@ -186,7 +186,7 @@ SUBROUTINE SSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   !         Check to see if we need to scale the "true solution" as well.
   !
   IF ( Itol==11 ) THEN
-    DO icol = 1 , N
+    DO icol = 1, N
       SOLn(icol) = SOLn(icol)/Dinv(icol)
     ENDDO
   ENDIF

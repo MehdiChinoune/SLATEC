@@ -4,10 +4,10 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   IMPLICIT NONE
   !*--CHKSN45
   !*** Start of declarations inserted by SPAG
-  REAL ai , AIT , Alpha , Beta , bi , BIT , ci , CIT , DIT , DLX , DLX4 , &
-    DLY , DLY4 , TDLx3 , TDLy3 , xi
-  INTEGER i , IS , JS , K , KSWx , KSWy , L , Mbdcnd , MIT , MS , Nbdcnd , &
-    NIT , NS
+  REAL ai, AIT, Alpha, Beta, bi, BIT, ci, CIT, DIT, DLX, DLX4, &
+    DLY, DLY4, TDLx3, TDLy3, xi
+  INTEGER i, IS, JS, K, KSWx, KSWy, L, Mbdcnd, MIT, MS, Nbdcnd, &
+    NIT, NS
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CHKSN4
   !***SUBSIDIARY
@@ -30,8 +30,8 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CHKSN4
   !
-  COMMON /SPL4  / KSWx , KSWy , K , L , AIT , BIT , CIT , DIT , MIT , NIT , &
-    IS , MS , JS , NS , DLX , DLY , TDLx3 , TDLy3 , DLX4 , &
+  COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
+    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
     DLY4
   LOGICAL Singlr
   EXTERNAL COFX
@@ -52,7 +52,7 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   !     CHECK THAT NON-DERIVATIVE COEFFICIENT FUNCTIONS
   !     ARE ZERO
   !
-  DO i = IS , MS
+  DO i = IS, MS
     xi = AIT + (i-1)*DLX
     CALL COFX(xi,ai,bi,ci)
     IF ( ci/=0.0 ) RETURN

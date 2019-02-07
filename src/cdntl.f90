@@ -41,15 +41,15 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  CDNTL
-  INTEGER i , iflag , Impl , info , Iswflg , Jstate , Jtask , Matdim , &
-    Maxord , Mint , Miter , Ml , Mntold , Mtrold , Mu , N , Nde , &
-    Nfe , Nq , Nwait
-  COMPLEX A(Matdim,*) , Fac(*) , Save1(*) , Save2(*) , Y(*) , Yh(N,*) , &
+  INTEGER i, iflag, Impl, info, Iswflg, Jstate, Jtask, Matdim, &
+    Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mu, N, Nde, &
+    Nfe, Nq, Nwait
+  COMPLEX A(Matdim,*), Fac(*), Save1(*), Save2(*), Y(*), Yh(N,*), &
     Ywt(*)
-  REAL El(13,12) , Eps , H , Hmax , Hold , oldl0 , Rc , Rh , Rmax , RMINIT , &
-    SCNRM2 , sum , T , Tq(3,12) , Trend , Uround
+  REAL El(13,12), Eps, H, Hmax, Hold, oldl0, Rc, Rh, Rmax, RMINIT, &
+    SCNRM2, sum, T, Tq(3,12), Trend, Uround
   INTEGER Ipvt(*)
-  LOGICAL Convrg , Ier
+  LOGICAL Convrg, Ier
   PARAMETER (RMINIT=10000.E0)
   !***FIRST EXECUTABLE STATEMENT  CDNTL
   Ier = .FALSE.
@@ -113,7 +113,7 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
           Jstate = 9
           RETURN
         ENDIF
-        DO i = 1 , Nde
+        DO i = 1, Nde
           IF ( A(i,1)==0.E0 ) THEN
             Ier = .TRUE.
             RETURN
@@ -121,7 +121,7 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
             Save2(i) = Save2(i)/A(i,1)
           ENDIF
         ENDDO
-        DO i = Nde + 1 , N
+        DO i = Nde + 1, N
           A(i,1) = 0.E0
         ENDDO
       ELSEIF ( Impl==3 ) THEN
@@ -152,16 +152,16 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
         ENDIF
       ENDIF
     ENDIF
-    DO i = 1 , Nde
+    DO i = 1, Nde
       Save1(i) = Save2(i)/MAX(1.E0,ABS(Ywt(i)))
     ENDDO
     sum = SCNRM2(Nde,Save1,1)/SQRT(REAL(Nde))
     IF ( sum>Eps/ABS(H) ) H = SIGN(Eps/sum,H)
-    DO i = 1 , N
+    DO i = 1, N
       Yh(i,2) = H*Save2(i)
     ENDDO
     IF ( Miter==2.OR.Miter==5.OR.Iswflg==3 ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         Fac(i) = SQRT(Uround)
       ENDDO
     ENDIF

@@ -26,11 +26,11 @@ SUBROUTINE DFCN1(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
   !***END PROLOGUE  DFCN1
   !     .. Scalar Arguments ..
   REAL(8) :: Fjac
-  INTEGER Iflag , Ldfjac , M , N
+  INTEGER Iflag, Ldfjac, M, N
   !     .. Array Arguments ..
-  REAL(8) :: Fvec(*) , X(*)
+  REAL(8) :: Fvec(*), X(*)
   !     .. Local Scalars ..
-  REAL(8) :: temp , two
+  REAL(8) :: temp, two
   INTEGER i
   !     .. Intrinsic Functions ..
   INTRINSIC EXP
@@ -38,7 +38,7 @@ SUBROUTINE DFCN1(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
   DATA two/2.0D0/
   !***FIRST EXECUTABLE STATEMENT  DFCN1
   IF ( Iflag/=1 ) RETURN
-  DO i = 1 , M
+  DO i = 1, M
     temp = i
     Fvec(i) = two + two*temp - EXP(temp*X(1)) - EXP(temp*X(2))
   ENDDO

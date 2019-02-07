@@ -4,7 +4,7 @@ SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
   IMPLICIT NONE
   !*--CSWAP5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , Incy , kx , ky , N , ns
+  INTEGER i, Incx, Incy, kx, ky, N, ns
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CSWAP
   !***PURPOSE  Interchange two vectors.
@@ -50,7 +50,7 @@ SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CSWAP
-  COMPLEX Cx(*) , Cy(*) , ctemp
+  COMPLEX Cx(*), Cy(*), ctemp
   !***FIRST EXECUTABLE STATEMENT  CSWAP
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy.AND.Incx>0 ) THEN
@@ -58,7 +58,7 @@ SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
     !     Code for equal, positive, non-unit increments.
     !
     ns = N*Incx
-    DO i = 1 , ns , Incx
+    DO i = 1, ns, Incx
       ctemp = Cx(i)
       Cx(i) = Cy(i)
       Cy(i) = ctemp
@@ -72,7 +72,7 @@ SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
   ky = 1
   IF ( Incx<0 ) kx = 1 + (1-N)*Incx
   IF ( Incy<0 ) ky = 1 + (1-N)*Incy
-  DO i = 1 , N
+  DO i = 1, N
     ctemp = Cx(kx)
     Cx(kx) = Cy(ky)
     Cy(ky) = ctemp
@@ -80,4 +80,5 @@ SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
     ky = ky + Incy
   ENDDO
   RETURN
-  99999 END SUBROUTINE CSWAP
+  99999 CONTINUE
+  END SUBROUTINE CSWAP

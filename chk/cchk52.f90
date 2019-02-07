@@ -23,40 +23,40 @@ SUBROUTINE CCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  CCHK52
   !     .. Parameters ..
-  COMPLEX ZERO , HALF , ONE
+  COMPLEX ZERO, HALF, ONE
   PARAMETER (ZERO=(0.0,0.0),HALF=(0.5,0.0),ONE=(1.0,0.0))
   REAL RZERO
   PARAMETER (RZERO=0.0)
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  REAL Eps , Thresh
-  INTEGER Incmax , Kprint , Nalf , Nidim , Ninc , Nmax , Nout
+  REAL Eps, Thresh
+  INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
   CHARACTER(6) :: Sname
   !     .. Array Arguments ..
-  COMPLEX A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) , X(Nmax)&
-    , Xs(Nmax*Incmax) , Xx(Nmax*Incmax) , Y(Nmax) , Ys(Nmax*Incmax) ,&
-    Yt(Nmax) , Yy(Nmax*Incmax) , Z(Nmax)
+  COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax)&
+    , Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax) ,&
+    Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
   REAL G(Nmax)
-  INTEGER Idim(Nidim) , Inc(Ninc)
+  INTEGER Idim(Nidim), Inc(Ninc)
   !     .. Local Scalars ..
-  COMPLEX alpha , transl
-  REAL err , errmax , ralpha , rals
-  INTEGER i , ia , ic , in , incx , incxs , ix , j , ja , jj , laa , lda ,&
-    ldas , lj , lx , n , nargs , nc , nerr , ns
-  LOGICAL ftl , full , null , packed , reset , upper
-  CHARACTER :: uplo , uplos
+  COMPLEX alpha, transl
+  REAL err, errmax, ralpha, rals
+  INTEGER i, ia, ic, in, incx, incxs, ix, j, ja, jj, laa, lda ,&
+    ldas, lj, lx, n, nargs, nc, nerr, ns
+  LOGICAL ftl, full, null, packed, reset, upper
+  CHARACTER :: uplo, uplos
   CHARACTER(2) :: ich
   !     .. Local Arrays ..
   COMPLEX w(1)
   LOGICAL isame(13)
   !     .. External Functions ..
   INTEGER NUMXER
-  LOGICAL LCE , LCERES
-  EXTERNAL LCE , LCERES
+  LOGICAL LCE, LCERES
+  EXTERNAL LCE, LCERES
   !     .. External Subroutines ..
-  EXTERNAL CHER , CHPR , CMAKE2 , CMVCH
+  EXTERNAL CHER, CHPR, CMAKE2, CMVCH
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , CMPLX , CONJG , MAX , REAL
+  INTRINSIC ABS, CMPLX, CONJG, MAX, REAL
   !     .. Data statements ..
   DATA ich/'UL'/
   !***FIRST EXECUTABLE STATEMENT  CCHK52
@@ -73,7 +73,7 @@ SUBROUTINE CCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   reset = .TRUE.
   errmax = RZERO
   !
-  DO in = 1 , Nidim
+  DO in = 1, Nidim
     n = Idim(in)
     !        Set LDA to 1 more than minimum value if room.
     lda = n
@@ -86,11 +86,11 @@ SUBROUTINE CCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
         laa = lda*n
       ENDIF
       !
-      DO ic = 1 , 2
+      DO ic = 1, 2
         uplo = ich(ic:ic)
         upper = uplo=='U'
         !
-        DO ix = 1 , Ninc
+        DO ix = 1, Ninc
           incx = Inc(ix)
           lx = ABS(incx)*n
           !
@@ -103,7 +103,7 @@ SUBROUTINE CCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
             Xx(1+ABS(incx)*(n/2-1)) = ZERO
           ENDIF
           !
-          DO ia = 1 , Nalf
+          DO ia = 1, Nalf
             ralpha = REAL(Alf(ia))
             alpha = CMPLX(ralpha,RZERO)
             null = n<=0 .OR. ralpha==RZERO
@@ -121,11 +121,11 @@ SUBROUTINE CCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
             uplos = uplo
             ns = n
             rals = ralpha
-            DO i = 1 , laa
+            DO i = 1, laa
               As(i) = Aa(i)
             ENDDO
             ldas = lda
-            DO i = 1 , lx
+            DO i = 1, lx
               Xs(i) = Xx(i)
             ENDDO
             incxs = incx
@@ -161,7 +161,7 @@ SUBROUTINE CCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
             !
             !                 If data was incorrectly changed, report and return.
             !
-            DO i = 1 , nargs
+            DO i = 1, nargs
               IF ( .NOT.isame(i) ) THEN
                 Fatal = .TRUE.
                 IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
@@ -174,16 +174,16 @@ SUBROUTINE CCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
               !                    Check the result column by column.
               !
               IF ( incx>0 ) THEN
-                DO i = 1 , n
+                DO i = 1, n
                   Z(i) = X(i)
                 ENDDO
               ELSE
-                DO i = 1 , n
+                DO i = 1, n
                   Z(i) = X(n-i+1)
                 ENDDO
               ENDIF
               ja = 1
-              DO j = 1 , n
+              DO j = 1, n
                 w(1) = CONJG(Z(j))
                 IF ( upper ) THEN
                   jj = 1
@@ -209,10 +209,10 @@ SUBROUTINE CCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
               IF ( Kprint>=3 ) THEN
                 WRITE (Nout,FMT=99004) Sname
                 IF ( full ) THEN
-                  WRITE (Nout,FMT=99006) nc , Sname , uplo , n , ralpha ,&
-                    incx , lda
+                  WRITE (Nout,FMT=99006) nc, Sname, uplo, n, ralpha ,&
+                    incx, lda
                 ELSEIF ( packed ) THEN
-                  WRITE (Nout,FMT=99005) nc , Sname , uplo , n , ralpha ,&
+                  WRITE (Nout,FMT=99005) nc, Sname, uplo, n, ralpha ,&
                     incx
                 ENDIF
               ENDIF
@@ -232,9 +232,9 @@ SUBROUTINE CCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   IF ( .NOT.Fatal ) THEN
     IF ( Kprint>=3 ) THEN
       IF ( errmax<Thresh ) THEN
-        WRITE (Nout,FMT=99001) Sname , nc
+        WRITE (Nout,FMT=99001) Sname, nc
       ELSE
-        WRITE (Nout,FMT=99003) Sname , nc , errmax
+        WRITE (Nout,FMT=99003) Sname, nc, errmax
       ENDIF
     ENDIF
   ENDIF

@@ -58,33 +58,33 @@ SUBROUTINE DPCHQ2(Lun,Kprint,Ipass)
   !
   !  Declare arguments.
   !
-  INTEGER Lun , Kprint , Ipass
+  INTEGER Lun, Kprint, Ipass
   !
   !  DECLARE VARIABLES.
   !
-  INTEGER i , ierexp(17) , ierr , ifail , n , npairs
-  REAL(8) :: a(17) , b(17) , calc , d(7) , errmax , error , f(7) ,&
-    machep , one , three , thrqtr , tol , true , two , x(7)
-  LOGICAL fail , skip
+  INTEGER i, ierexp(17), ierr, ifail, n, npairs
+  REAL(8) :: a(17), b(17), calc, d(7), errmax, error, f(7) ,&
+    machep, one, three, thrqtr, tol, true, two, x(7)
+  LOGICAL fail, skip
   !
   !  DECLARE EXTERNALS.
   !
-  REAL(8) :: DPCHIA , D1MACH
+  REAL(8) :: DPCHIA, D1MACH
   !
   !  INITIALIZE.
   !
-  DATA thrqtr/0.75D0/ , one/1.D0/ , two/2.D0/ , three/3.D0/
+  DATA thrqtr/0.75D0/, one/1.D0/, two/2.D0/, three/3.D0/
   DATA n/7/
-  DATA x/ - 4.D0 , -2.D0 , -0.9D0 , 0.D0 , 0.9D0 , 2.D0 , 4.D0/
+  DATA x/ - 4.D0, -2.D0, -0.9D0, 0.D0, 0.9D0, 2.D0, 4.D0/
   DATA npairs/17/
-  DATA a/ - 3.0D0 , 3.0D0 , -0.5D0 , -0.5D0 , -0.5D0 , -4.0D0 , -4.0D0 ,&
-    3.0D0 , -5.0D0 , -5.0D0 , -6.0D0 , 6.0D0 , -1.5D0 , -1.5D0 , -3.0D0 ,&
-    3.0D0 , 0.5D0/
-  DATA b/3.0D0 , -3.0D0 , 1.0D0 , 2.0D0 , 5.0D0 , -0.5D0 , 4.0D0 , 5.0D0 ,&
-    -3.0D0 , 5.0D0 , -5.0D0 , 5.0D0 , -0.5D0 , -1.0D0 , -2.5D0 , 3.5D0 ,&
+  DATA a/ - 3.0D0, 3.0D0, -0.5D0, -0.5D0, -0.5D0, -4.0D0, -4.0D0 ,&
+    3.0D0, -5.0D0, -5.0D0, -6.0D0, 6.0D0, -1.5D0, -1.5D0, -3.0D0 ,&
+    3.0D0, 0.5D0/
+  DATA b/3.0D0, -3.0D0, 1.0D0, 2.0D0, 5.0D0, -0.5D0, 4.0D0, 5.0D0 ,&
+    -3.0D0, 5.0D0, -5.0D0, 5.0D0, -0.5D0, -1.0D0, -2.5D0, 3.5D0 ,&
     0.5D0/
-  DATA ierexp/0 , 0 , 0 , 0 , 2 , 0 , 0 , 2 , 1 , 3 , 3 , 3 , 0 , 0 , 0 ,&
-    0 , 0/
+  DATA ierexp/0, 0, 0, 0, 2, 0, 0, 2, 1, 3, 3, 3, 0, 0, 0 ,&
+    0, 0/
   !
   !  SET PASS/FAIL TOLERANCE.
   !
@@ -94,7 +94,7 @@ SUBROUTINE DPCHQ2(Lun,Kprint,Ipass)
   !
   !  SET UP PCH FUNCTION DEFINITION.
   !
-  DO i = 1 , n
+  DO i = 1, n
     f(i) = FCN(x(i))
     d(i) = DERIV(x(i))
   ENDDO
@@ -118,7 +118,7 @@ SUBROUTINE DPCHQ2(Lun,Kprint,Ipass)
   ifail = 0
   !
   skip = .FALSE.
-  DO i = 1 , npairs
+  DO i = 1, npairs
     !               ---------------------------------------------
     calc = DPCHIA(n,x,f,d,1,skip,a(i),b(i),ierr)
     !               ---------------------------------------------
@@ -128,11 +128,11 @@ SUBROUTINE DPCHQ2(Lun,Kprint,Ipass)
       error = calc - true
       IF ( Kprint>=3 ) THEN
         IF ( fail ) THEN
-          WRITE (Lun,99005) a(i) , b(i) , ierr , true , calc , error ,&
+          WRITE (Lun,99005) a(i), b(i), ierr, true, calc, error ,&
             ierexp(i)
           99005         FORMAT (2F6.1,I5,1P,2D20.10,D15.5,'  (',I1,') *****')
         ELSE
-          WRITE (Lun,99010) a(i) , b(i) , ierr , true , calc , error
+          WRITE (Lun,99010) a(i), b(i), ierr, true, calc, error
         ENDIF
       ENDIF
       !
@@ -144,7 +144,7 @@ SUBROUTINE DPCHQ2(Lun,Kprint,Ipass)
         errmax = MAX(errmax,error)
       ENDIF
     ELSE
-      IF ( Kprint>=3 ) WRITE (Lun,99010) a(i) , b(i) , ierr
+      IF ( Kprint>=3 ) WRITE (Lun,99010) a(i), b(i), ierr
       ifail = ifail + 1
     ENDIF
   ENDDO
@@ -152,7 +152,7 @@ SUBROUTINE DPCHQ2(Lun,Kprint,Ipass)
   !  PRINT SUMMARY.
   !
   IF ( Kprint>=2 ) THEN
-    WRITE (Lun,99006) errmax , tol
+    WRITE (Lun,99006) errmax, tol
     99006   FORMAT (/'  MAXIMUM RELATIVE ERROR IS:',1P,D15.5,',   TOLERANCE:',1P,&
       D15.5)
     IF ( ifail/=0 ) WRITE (Lun,99007) ifail

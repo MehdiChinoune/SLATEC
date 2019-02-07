@@ -164,7 +164,7 @@ SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !                     pointers to the error estimates over the
   !                     subintervals, such that WORK(LIMIT*3+IWORK(1)), ..
   !                     WORK(LIMIT*3+IWORK(K)) form a decreasing
-  !                     sequence, with LIMIT = LENW/2 , and K = LAST
+  !                     sequence, with LIMIT = LENW/2, and K = LAST
   !                     if LAST.LE.(LIMIT/2+2), and K = LIMIT+1-LAST
   !                     otherwise.
   !                     Furthermore, IWORK(LIMIT+1), ..., IWORK(LIMIT+
@@ -200,12 +200,12 @@ SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DQAWO
   !
-  REAL(8) :: A , Abserr , B , Epsabs , Epsrel , F , Omega , Result , &
+  REAL(8) :: A, Abserr, B, Epsabs, Epsrel, F, Omega, Result, &
     Work
-  INTEGER Ier , Integr , Iwork , Last , limit , Lenw , Leniw , lvl , l1 , &
-    l2 , l3 , l4 , Maxp1 , momcom , Neval
+  INTEGER Ier, Integr, Iwork, Last, limit, Lenw, Leniw, lvl, l1, &
+    l2, l3, l4, Maxp1, momcom, Neval
   !
-  DIMENSION Iwork(*) , Work(*)
+  DIMENSION Iwork(*), Work(*)
   !
   EXTERNAL F
   !

@@ -99,8 +99,8 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  CHIEV
-  INTEGER i , Info , j , Job , k , l , Lda , Ldv , m , mdim , N
-  REAL A(*) , E(*) , Work(*) , V(*)
+  INTEGER i, Info, j, Job, k, l, Lda, Ldv, m, mdim, N
+  REAL A(*), E(*), Work(*), V(*)
   !***FIRST EXECUTABLE STATEMENT  CHIEV
   IF ( N>Lda ) CALL XERMSG('SLATEC','CHIEV','N .GT. LDA.',1,1)
   IF ( N>Lda ) RETURN
@@ -125,7 +125,7 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
           'LDA.GT.LDV, ELEMENTS OF A OTHER THAN THE N BY N INPUT '&
           //'ELEMENTS HAVE BEEN CHANGED.',4,0)
         l = N - 1
-        DO j = 1 , l
+        DO j = 1, l
           m = 1 + j*2*Ldv
           k = 1 + j*2*Lda
           CALL SCOPY(2*N,A(k),1,A(m),1)
@@ -135,7 +135,7 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
     !
     !     FILL IN LOWER TRIANGLE OF A, COLUMN BY COLUMN.
     !
-    DO j = 1 , N
+    DO j = 1, N
       k = (j-1)*(mdim+2) + 1
       IF ( A(k+1)/=0.0 )&
         CALL XERMSG('SLATEC','CHIEV','NONREAL ELEMENT ON DIAGONAL OF A',&
@@ -147,7 +147,7 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
     !
     !     SEPARATE REAL AND IMAGINARY PARTS
     !
-    DO j = 1 , N
+    DO j = 1, N
       k = (j-1)*mdim + 1
       l = k + N
       CALL SCOPY(N,A(k+1),2,Work(1),1)
@@ -162,10 +162,10 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
       !
       !     EIGENVALUES AND EIGENVECTORS.
       !
-      DO j = 1 , N
+      DO j = 1, N
         k = (j-1)*mdim + 1
         m = k + N - 1
-        DO i = k , m
+        DO i = k, m
           V(i) = 0.
         ENDDO
         i = k + j - 1
@@ -177,7 +177,7 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
       !
       !    CONVERT EIGENVECTORS TO COMPLEX STORAGE.
       !
-      DO j = 1 , N
+      DO j = 1, N
         k = (j-1)*mdim + 1
         i = (j-1)*2*Ldv + 1
         l = k + N
@@ -197,7 +197,8 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !
   !     TAKE CARE OF N=1 CASE.
   !
-  100  IF ( A(2)/=0. ) CALL XERMSG('SLATEC','CHIEV',&
+  100 CONTINUE
+  IF ( A(2)/=0. ) CALL XERMSG('SLATEC','CHIEV',&
     'NONREAL ELEMENT ON DIAGONAL OF A',6,1)
   IF ( A(2)/=0. ) RETURN
   E(1) = A(1)

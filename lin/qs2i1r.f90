@@ -73,19 +73,19 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
   !VD$R NOVECTOR
   !VD$R NOCONCUR
   !     .. Scalar Arguments ..
-  INTEGER Kflag , N
+  INTEGER Kflag, N
   !     .. Array Arguments ..
   REAL A(N)
-  INTEGER Ia(N) , Ja(N)
+  INTEGER Ia(N), Ja(N)
   !     .. Local Scalars ..
-  REAL r , ta , tta
-  INTEGER i , iit , ij , it , j , jjt , jt , k , kk , l , m , nn
+  REAL r, ta, tta
+  INTEGER i, iit, ij, it, j, jjt, jt, k, kk, l, m, nn
   !     .. Local Arrays ..
-  INTEGER il(21) , iu(21)
+  INTEGER il(21), iu(21)
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , INT
+  INTRINSIC ABS, INT
   !***FIRST EXECUTABLE STATEMENT  QS2I1R
   nn = N
   IF ( nn<1 ) THEN
@@ -104,7 +104,7 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
   !     Alter array IA to get decreasing order if needed.
   !
   IF ( Kflag<1 ) THEN
-    DO i = 1 , nn
+    DO i = 1, nn
       Ia(i) = -Ia(i)
     ENDDO
   ENDIF
@@ -115,50 +115,23 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
   i = 1
   j = nn
   r = .375E0
-  100  IF ( r<=0.5898437E0 ) THEN
-  r = r + 3.90625E-2
-ELSE
-  r = r - .21875E0
-ENDIF
-200  k = i
-!
-!     Select a central element of the array and save it in location
-!     it, jt, at.
-!
-ij = i + INT((j-i)*r)
-it = Ia(ij)
-jt = Ja(ij)
-ta = A(ij)
-!
-!     If first element of array is greater than it, interchange with it.
-!
-IF ( Ia(i)>it ) THEN
-  Ia(ij) = Ia(i)
-  Ia(i) = it
+  100 CONTINUE
+  IF ( r<=0.5898437E0 ) THEN
+    r = r + 3.90625E-2
+  ELSE
+    r = r - .21875E0
+  ENDIF
+  200  k = i
+  !
+  !     Select a central element of the array and save it in location
+  !     it, jt, at.
+  !
+  ij = i + INT((j-i)*r)
   it = Ia(ij)
-  Ja(ij) = Ja(i)
-  Ja(i) = jt
   jt = Ja(ij)
-  A(ij) = A(i)
-  A(i) = ta
-  ta = A(ij)
-ENDIF
-l = j
-!
-!     If last element of array is less than it, swap with it.
-!
-IF ( Ia(j)<it ) THEN
-  Ia(ij) = Ia(j)
-  Ia(j) = it
-  it = Ia(ij)
-  Ja(ij) = Ja(j)
-  Ja(j) = jt
-  jt = Ja(ij)
-  A(ij) = A(j)
-  A(j) = ta
   ta = A(ij)
   !
-  !     If first element of array is greater than it, swap with it.
+  !     If first element of array is greater than it, interchange with it.
   !
   IF ( Ia(i)>it ) THEN
     Ia(ij) = Ia(i)
@@ -171,98 +144,128 @@ IF ( Ia(j)<it ) THEN
     A(i) = ta
     ta = A(ij)
   ENDIF
-ENDIF
-DO
+  l = j
   !
-  !     Find an element in the second half of the array which is
-  !     smaller than it.
+  !     If last element of array is less than it, swap with it.
   !
-  l = l - 1
-  IF ( Ia(l)<=it ) THEN
-    DO
-      !
-      !     Find an element in the first half of the array which is
-      !     greater than it.
-      !
-      k = k + 1
-      IF ( Ia(k)>=it ) THEN
+  IF ( Ia(j)<it ) THEN
+    Ia(ij) = Ia(j)
+    Ia(j) = it
+    it = Ia(ij)
+    Ja(ij) = Ja(j)
+    Ja(j) = jt
+    jt = Ja(ij)
+    A(ij) = A(j)
+    A(j) = ta
+    ta = A(ij)
+    !
+    !     If first element of array is greater than it, swap with it.
+    !
+    IF ( Ia(i)>it ) THEN
+      Ia(ij) = Ia(i)
+      Ia(i) = it
+      it = Ia(ij)
+      Ja(ij) = Ja(i)
+      Ja(i) = jt
+      jt = Ja(ij)
+      A(ij) = A(i)
+      A(i) = ta
+      ta = A(ij)
+    ENDIF
+  ENDIF
+  DO
+    !
+    !     Find an element in the second half of the array which is
+    !     smaller than it.
+    !
+    l = l - 1
+    IF ( Ia(l)<=it ) THEN
+      DO
         !
-        !     Interchange these elements.
+        !     Find an element in the first half of the array which is
+        !     greater than it.
         !
-        IF ( k<=l ) THEN
-          iit = Ia(l)
-          Ia(l) = Ia(k)
-          Ia(k) = iit
-          jjt = Ja(l)
-          Ja(l) = Ja(k)
-          Ja(k) = jjt
-          tta = A(l)
-          A(l) = A(k)
-          A(k) = tta
+        k = k + 1
+        IF ( Ia(k)>=it ) THEN
+          !
+          !     Interchange these elements.
+          !
+          IF ( k<=l ) THEN
+            iit = Ia(l)
+            Ia(l) = Ia(k)
+            Ia(k) = iit
+            jjt = Ja(l)
+            Ja(l) = Ja(k)
+            Ja(k) = jjt
+            tta = A(l)
+            A(l) = A(k)
+            A(k) = tta
+            EXIT
+          ENDIF
+          !
+          !     Save upper and lower subscripts of the array yet to be sorted.
+          !
+          IF ( l-i>j-k ) THEN
+            il(m) = i
+            iu(m) = l
+            i = k
+            m = m + 1
+          ELSE
+            il(m) = k
+            iu(m) = j
+            j = l
+            m = m + 1
+          ENDIF
+          GOTO 400
+        ENDIF
+      ENDDO
+    ENDIF
+  ENDDO
+  !
+  !     Begin again on another portion of the unsorted array.
+  !
+  300  m = m - 1
+  IF ( m==0 ) THEN
+    !
+    !     Clean up, if necessary.
+    !
+    IF ( Kflag<1 ) THEN
+      DO i = 1, nn
+        Ia(i) = -Ia(i)
+      ENDDO
+    ENDIF
+    GOTO 99999
+  ELSE
+    i = il(m)
+    j = iu(m)
+  ENDIF
+  400 CONTINUE
+  IF ( j-i>=1 ) GOTO 200
+  IF ( i==j ) GOTO 300
+  IF ( i==1 ) GOTO 100
+  i = i - 1
+  DO
+    i = i + 1
+    IF ( i==j ) GOTO 300
+    it = Ia(i+1)
+    jt = Ja(i+1)
+    ta = A(i+1)
+    IF ( Ia(i)>it ) THEN
+      k = i
+      DO
+        Ia(k+1) = Ia(k)
+        Ja(k+1) = Ja(k)
+        A(k+1) = A(k)
+        k = k - 1
+        IF ( it>=Ia(k) ) THEN
+          Ia(k+1) = it
+          Ja(k+1) = jt
+          A(k+1) = ta
           EXIT
         ENDIF
-        !
-        !     Save upper and lower subscripts of the array yet to be sorted.
-        !
-        IF ( l-i>j-k ) THEN
-          il(m) = i
-          iu(m) = l
-          i = k
-          m = m + 1
-        ELSE
-          il(m) = k
-          iu(m) = j
-          j = l
-          m = m + 1
-        ENDIF
-        GOTO 400
-      ENDIF
-    ENDDO
-  ENDIF
-ENDDO
-!
-!     Begin again on another portion of the unsorted array.
-!
-300  m = m - 1
-IF ( m==0 ) THEN
-  !
-  !     Clean up, if necessary.
-  !
-  IF ( Kflag<1 ) THEN
-    DO i = 1 , nn
-      Ia(i) = -Ia(i)
-    ENDDO
-  ENDIF
-  GOTO 99999
-ELSE
-  i = il(m)
-  j = iu(m)
-ENDIF
-400  IF ( j-i>=1 ) GOTO 200
-IF ( i==j ) GOTO 300
-IF ( i==1 ) GOTO 100
-i = i - 1
-DO
-  i = i + 1
-  IF ( i==j ) GOTO 300
-  it = Ia(i+1)
-  jt = Ja(i+1)
-  ta = A(i+1)
-  IF ( Ia(i)>it ) THEN
-    k = i
-    DO
-      Ia(k+1) = Ia(k)
-      Ja(k+1) = Ja(k)
-      A(k+1) = A(k)
-      k = k - 1
-      IF ( it>=Ia(k) ) THEN
-        Ia(k+1) = it
-        Ja(k+1) = jt
-        A(k+1) = ta
-        EXIT
-      ENDIF
-    ENDDO
-  ENDIF
-ENDDO
-!------------- LAST LINE OF QS2I1R FOLLOWS ----------------------------
-99999 END SUBROUTINE QS2I1R
+      ENDDO
+    ENDIF
+  ENDDO
+  !------------- LAST LINE OF QS2I1R FOLLOWS ----------------------------
+  99999 CONTINUE
+  END SUBROUTINE QS2I1R

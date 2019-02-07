@@ -4,7 +4,7 @@ SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   IMPLICIT NONE
   !*--DBESKS5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , n , Nin
+  INTEGER i, n, Nin
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBESKS
   !***PURPOSE  Compute a sequence of modified Bessel functions of the
@@ -20,7 +20,7 @@ SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   !
   ! DBESKS computes a sequence of modified Bessel functions of the third
   ! kind of order XNU + I at X, where X .GT. 0, XNU lies in (-1,1),
-  ! and I = 0, 1, ... , NIN - 1, if NIN is positive and I = 0, 1, ... ,
+  ! and I = 0, 1, ..., NIN - 1, if NIN is positive and I = 0, 1, ... ,
   ! NIN + 1, if NIN is negative.  On return, the vector BK(.) contains
   ! the results at X for order starting at XNU.  XNU, X, and BK are
   ! double precision.  NIN is an integer.
@@ -35,7 +35,7 @@ SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBESKS
-  REAL(8) :: Xnu , X , Bk(*) , expxi , xmax , D1MACH
+  REAL(8) :: Xnu, X, Bk(*), expxi, xmax, D1MACH
   SAVE xmax
   DATA xmax/0.D0/
   !***FIRST EXECUTABLE STATEMENT  DBESKS
@@ -48,7 +48,7 @@ SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   !
   expxi = EXP(-X)
   n = ABS(Nin)
-  DO i = 1 , n
+  DO i = 1, n
     Bk(i) = expxi*Bk(i)
   ENDDO
   !

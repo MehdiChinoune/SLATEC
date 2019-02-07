@@ -89,25 +89,25 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BANDR
   !
-  INTEGER j , k , l , N , r , i1 , i2 , j1 , j2 , kr , Mb , mr , m1 , Nm , &
-    n2 , r1 , ugl , maxl , maxr
-  REAL A(Nm,*) , D(*) , E(*) , E2(*) , Z(Nm,*)
-  REAL g , u , b1 , b2 , c2 , f1 , f2 , s2 , dmin , dminrt
+  INTEGER j, k, l, N, r, i1, i2, j1, j2, kr, Mb, mr, m1, Nm, &
+    n2, r1, ugl, maxl, maxr
+  REAL A(Nm,*), D(*), E(*), E2(*), Z(Nm,*)
+  REAL g, u, b1, b2, c2, f1, f2, s2, dmin, dminrt
   LOGICAL Matz
   !
   !***FIRST EXECUTABLE STATEMENT  BANDR
   dmin = 2.0E0**(-64)
   dminrt = 2.0E0**(-32)
   !     .......... INITIALIZE DIAGONAL SCALING MATRIX ..........
-  DO j = 1 , N
+  DO j = 1, N
     D(j) = 1.0E0
   ENDDO
   !
   IF ( Matz ) THEN
     !
-    DO j = 1 , N
+    DO j = 1, N
       !
-      DO k = 1 , N
+      DO k = 1, N
         Z(j,k) = 0.0E0
       ENDDO
       !
@@ -118,7 +118,7 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
   m1 = Mb - 1
   IF ( m1<1 ) THEN
     !
-    DO j = 1 , N
+    DO j = 1, N
       D(j) = A(j,Mb)
       E(j) = 0.0E0
       E2(j) = 0.0E0
@@ -127,10 +127,10 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
   ELSEIF ( m1/=1 ) THEN
     n2 = N - 2
     !
-    DO k = 1 , n2
+    DO k = 1, n2
       maxr = MIN(m1,N-k)
       !     .......... FOR R=MAXR STEP -1 UNTIL 2 DO -- ..........
-      DO r1 = 2 , maxr
+      DO r1 = 2, maxr
         r = maxr + 2 - r1
         kr = k + r
         mr = Mb - r
@@ -138,7 +138,7 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
         A(kr-1,1) = A(kr-1,mr+1)
         ugl = k
         !
-        DO j = kr , N , m1
+        DO j = kr, N, m1
           j1 = j - 1
           j2 = j1 - 1
           IF ( g==0.0E0 ) EXIT
@@ -157,7 +157,7 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
             A(j1,Mb) = b2*(b2*A(j1,Mb)+f1) + A(j,Mb)
             A(j,Mb) = u
             !
-            DO l = ugl , j2
+            DO l = ugl, j2
               i2 = Mb - j + l
               u = b2*A(j1,i2+1) + A(j,i2)
               A(j,i2) = -A(j1,i2+1) + b1*A(j,i2)
@@ -169,7 +169,7 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
             IF ( j/=N ) THEN
               maxl = MIN(m1,N-j1)
               !
-              DO l = 2 , maxl
+              DO l = 2, maxl
                 i1 = j1 + l
                 i2 = Mb - l
                 u = b2*A(i1,i2) + A(i1,i2+1)
@@ -185,7 +185,7 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
             ENDIF
             IF ( Matz ) THEN
               !
-              DO l = 1 , N
+              DO l = 1, N
                 u = b2*Z(l,j1) + Z(l,j)
                 Z(l,j) = -Z(l,j1) + b1*Z(l,j)
                 Z(l,j1) = u
@@ -203,7 +203,7 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
             A(j1,Mb) = b2*(b2*A(j,Mb)+f1) + A(j1,Mb)
             A(j,Mb) = b1*(f2-f1) + A(j,Mb)
             !
-            DO l = ugl , j2
+            DO l = ugl, j2
               i2 = Mb - j + l
               u = A(j1,i2+1) + b2*A(j,i2)
               A(j,i2) = -b1*A(j1,i2+1) + A(j,i2)
@@ -215,7 +215,7 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
             IF ( j/=N ) THEN
               maxl = MIN(m1,N-j1)
               !
-              DO l = 2 , maxl
+              DO l = 2, maxl
                 i1 = j1 + l
                 i2 = Mb - l
                 u = A(i1,i2) + b2*A(i1,i2+1)
@@ -228,7 +228,7 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
             ENDIF
             IF ( Matz ) THEN
               !
-              DO l = 1 , N
+              DO l = 1, N
                 u = Z(l,j1) + b2*Z(l,j)
                 Z(l,j) = -b1*Z(l,j1) + Z(l,j)
                 Z(l,j1) = u
@@ -243,18 +243,18 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
       !
       IF ( MOD(k,64)==0 ) THEN
         !     .......... RESCALE TO AVOID UNDERFLOW OR OVERFLOW ..........
-        DO j = k , N
+        DO j = k, N
           IF ( D(j)<dmin ) THEN
             maxl = MAX(1,Mb+1-j)
             !
-            DO l = maxl , m1
+            DO l = maxl, m1
               A(j,l) = dminrt*A(j,l)
             ENDDO
             !
             IF ( j/=N ) THEN
               maxl = MIN(m1,N-j)
               !
-              DO l = 1 , maxl
+              DO l = 1, maxl
                 i1 = j + l
                 i2 = Mb - l
                 A(i1,i2) = dminrt*A(i1,i2)
@@ -263,7 +263,7 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
             !
             IF ( Matz ) THEN
               !
-              DO l = 1 , N
+              DO l = 1, N
                 Z(l,j) = dminrt*Z(l,j)
               ENDDO
             ENDIF
@@ -277,15 +277,15 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
     ENDDO
   ENDIF
   !     .......... FORM SQUARE ROOT OF SCALING MATRIX ..........
-  DO j = 2 , N
+  DO j = 2, N
     E(j) = SQRT(D(j))
   ENDDO
   !
   IF ( Matz ) THEN
     !
-    DO j = 1 , N
+    DO j = 1, N
       !
-      DO k = 2 , N
+      DO k = 2, N
         Z(j,k) = E(k)*Z(j,k)
       ENDDO
       !
@@ -294,7 +294,7 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
   !
   u = 1.0E0
   !
-  DO j = 2 , N
+  DO j = 2, N
     A(j,m1) = u*E(j)*A(j,m1)
     u = E(j)
     E2(j) = A(j,m1)**2
@@ -307,4 +307,5 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
   E(1) = 0.0E0
   E2(1) = 0.0E0
   !
-  99999 END SUBROUTINE BANDR
+  99999 CONTINUE
+  END SUBROUTINE BANDR

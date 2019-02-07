@@ -4,11 +4,11 @@ SUBROUTINE QXSSP(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--QXSSP5
   !*** Start of declarations inserted by SPAG
-  REAL bdpf , bdps , bdtf , bdts , dphi , dtheta , dum , elmbda , ermax , &
-    err , f , pertrb , pf , pi , PIMACH , ps , sinp , sint , tf , ts
-  REAL w , z
-  INTEGER i , idimf , ierror , Ipass , j , Kprint , Lun , m , mbdcnd , mp1 , &
-    n , nbdcnd , np1
+  REAL bdpf, bdps, bdtf, bdts, dphi, dtheta, dum, elmbda, ermax, &
+    err, f, pertrb, pf, pi, PIMACH, ps, sinp, sint, tf, ts
+  REAL w, z
+  INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
+    n, nbdcnd, np1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QXSSP
   !***PURPOSE
@@ -26,7 +26,7 @@ SUBROUTINE QXSSP(Lun,Kprint,Ipass)
   !     *                                                               *
   !     *      SEPARABLE ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS        *
   !     *                                                               *
-  !     *                  (VERSION  3 , JUNE 1979)                     *
+  !     *                  (VERSION  3, JUNE 1979)                     *
   !     *                                                               *
   !     *                             BY                                *
   !     *                                                               *
@@ -57,7 +57,7 @@ SUBROUTINE QXSSP(Lun,Kprint,Ipass)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
   !***END PROLOGUE  QXSSP
-  DIMENSION f(19,73) , bdtf(73) , sint(19) , sinp(73) , w(1200)
+  DIMENSION f(19,73), bdtf(73), sint(19), sinp(73), w(1200)
   !***FIRST EXECUTABLE STATEMENT  QXSSP
   !
   !     THE VALUE OF IDIMF IS THE FIRST DIMENSION OF F.  W IS
@@ -80,26 +80,26 @@ SUBROUTINE QXSSP(Lun,Kprint,Ipass)
   !
   dtheta = tf/m
   mp1 = m + 1
-  DO i = 1 , mp1
+  DO i = 1, mp1
     sint(i) = SIN((i-1)*dtheta)
   ENDDO
   dphi = (pi+pi)/n
   np1 = n + 1
-  DO j = 1 , np1
+  DO j = 1, np1
     sinp(j) = SIN((j-1)*dphi)
   ENDDO
   !
   !     COMPUTE RIGHT SIDE OF EQUATION AND STORE IN F
   !
-  DO j = 1 , np1
-    DO i = 1 , mp1
+  DO j = 1, np1
+    DO i = 1, mp1
       f(i,j) = 2. - 6.*(sint(i)*sinp(j))**2
     ENDDO
   ENDDO
   !
   !     STORE DERIVATIVE DATA AT THE EQUATOR
   !
-  DO j = 1 , np1
+  DO j = 1, np1
     bdtf(j) = 0.
   ENDDO
   !
@@ -110,8 +110,8 @@ SUBROUTINE QXSSP(Lun,Kprint,Ipass)
   !     SOLUTION MUST BE NORMALIZED.
   !
   err = 0.0
-  DO j = 1 , np1
-    DO i = 1 , mp1
+  DO j = 1, np1
+    DO i = 1, mp1
       z = ABS(f(i,j)-(sint(i)*sinp(j))**2-f(1,1))
       IF ( z>err ) err = z
     ENDDO
@@ -121,7 +121,7 @@ SUBROUTINE QXSSP(Lun,Kprint,Ipass)
   IF ( err>ermax ) Ipass = 0
   IF ( Kprint==0 ) RETURN
   IF ( Kprint>=2.OR.Ipass==0 ) THEN
-    WRITE (Lun,99001) ierror , err , INT(w(1))
+    WRITE (Lun,99001) ierror, err, INT(w(1))
     !
     99001   FORMAT ('1',20X,'SUBROUTINE HWSSSP EXAMPLE'///10X,&
       'THE OUTPUT FROM THE NCAR CONTROL DATA 7600 WAS'//32X,&

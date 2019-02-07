@@ -4,8 +4,8 @@ SUBROUTINE RADF2(Ido,L1,Cc,Ch,Wa1)
   IMPLICIT NONE
   !*--RADF25
   !*** Start of declarations inserted by SPAG
-  REAL Cc , Ch , ti2 , tr2 , Wa1
-  INTEGER i , ic , Ido , idp2 , k , L1
+  REAL Cc, Ch, ti2, tr2, Wa1
+  INTEGER i, ic, Ido, idp2, k, L1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RADF2
   !***SUBSIDIARY
@@ -25,9 +25,9 @@ SUBROUTINE RADF2(Ido,L1,Cc,Ch,Wa1)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  RADF2
-  DIMENSION Ch(Ido,2,*) , Cc(Ido,L1,2) , Wa1(*)
+  DIMENSION Ch(Ido,2,*), Cc(Ido,L1,2), Wa1(*)
   !***FIRST EXECUTABLE STATEMENT  RADF2
-  DO k = 1 , L1
+  DO k = 1, L1
     Ch(1,1,k) = Cc(1,k,1) + Cc(1,k,2)
     Ch(Ido,2,k) = Cc(1,k,1) - Cc(1,k,2)
   ENDDO
@@ -35,10 +35,10 @@ SUBROUTINE RADF2(Ido,L1,Cc,Ch,Wa1)
   IF ( Ido/=2 ) THEN
     idp2 = Ido + 2
     IF ( (Ido-1)/2<L1 ) THEN
-      DO i = 3 , Ido , 2
+      DO i = 3, Ido, 2
         ic = idp2 - i
         !DIR$ IVDEP
-        DO k = 1 , L1
+        DO k = 1, L1
           tr2 = Wa1(i-2)*Cc(i-1,k,2) + Wa1(i-1)*Cc(i,k,2)
           ti2 = Wa1(i-2)*Cc(i,k,2) - Wa1(i-1)*Cc(i-1,k,2)
           Ch(i,1,k) = Cc(i,k,1) + ti2
@@ -48,9 +48,9 @@ SUBROUTINE RADF2(Ido,L1,Cc,Ch,Wa1)
         ENDDO
       ENDDO
     ELSE
-      DO k = 1 , L1
+      DO k = 1, L1
         !DIR$ IVDEP
-        DO i = 3 , Ido , 2
+        DO i = 3, Ido, 2
           ic = idp2 - i
           tr2 = Wa1(i-2)*Cc(i-1,k,2) + Wa1(i-1)*Cc(i,k,2)
           ti2 = Wa1(i-2)*Cc(i,k,2) - Wa1(i-1)*Cc(i-1,k,2)
@@ -63,8 +63,9 @@ SUBROUTINE RADF2(Ido,L1,Cc,Ch,Wa1)
     ENDIF
     IF ( MOD(Ido,2)==1 ) RETURN
   ENDIF
-  DO k = 1 , L1
+  DO k = 1, L1
     Ch(1,2,k) = -Cc(Ido,k,2)
     Ch(Ido,1,k) = Cc(Ido,k,1)
   ENDDO
-  99999 END SUBROUTINE RADF2
+  99999 CONTINUE
+  END SUBROUTINE RADF2

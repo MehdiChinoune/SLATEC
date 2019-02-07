@@ -62,11 +62,11 @@ SUBROUTINE SSPSL(Ap,N,Kpvt,B)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SSPSL
-  INTEGER N , Kpvt(*)
-  REAL Ap(*) , B(*)
+  INTEGER N, Kpvt(*)
+  REAL Ap(*), B(*)
   !
-  REAL ak , akm1 , bk , bkm1 , SDOT , denom , temp
-  INTEGER ik , ikm1 , ikp1 , k , kk , km1k , km1km1 , kp
+  REAL ak, akm1, bk, bkm1, SDOT, denom, temp
+  INTEGER ik, ikm1, ikp1, k, kk, km1k, km1km1, kp
   !
   !     LOOP BACKWARD APPLYING THE TRANSFORMATIONS AND
   !     D INVERSE TO B.

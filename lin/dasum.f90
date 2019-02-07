@@ -47,7 +47,7 @@ REAL(8) FUNCTION DASUM(N,Dx,Incx)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DASUM
   REAL(8) :: Dx(*)
-  INTEGER i , Incx , ix , m , mp1 , N
+  INTEGER i, Incx, ix, m, mp1, N
   !***FIRST EXECUTABLE STATEMENT  DASUM
   DASUM = 0.0D0
   IF ( N<=0 ) RETURN
@@ -60,13 +60,13 @@ REAL(8) FUNCTION DASUM(N,Dx,Incx)
     !
     m = MOD(N,6)
     IF ( m/=0 ) THEN
-      DO i = 1 , m
+      DO i = 1, m
         DASUM = DASUM + ABS(Dx(i))
       ENDDO
       IF ( N<6 ) RETURN
     ENDIF
     mp1 = m + 1
-    DO i = mp1 , N , 6
+    DO i = mp1, N, 6
       DASUM = DASUM + ABS(Dx(i)) + ABS(Dx(i+1)) + ABS(Dx(i+2))&
         + ABS(Dx(i+3)) + ABS(Dx(i+4)) + ABS(Dx(i+5))
     ENDDO
@@ -76,7 +76,7 @@ REAL(8) FUNCTION DASUM(N,Dx,Incx)
     !
     ix = 1
     IF ( Incx<0 ) ix = (-N+1)*Incx + 1
-    DO i = 1 , N
+    DO i = 1, N
       DASUM = DASUM + ABS(Dx(ix))
       ix = ix + Incx
     ENDDO

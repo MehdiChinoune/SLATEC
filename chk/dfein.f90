@@ -13,8 +13,8 @@ REAL(8) FUNCTION DFEIN(T)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DFEIN
-  COMMON /DFEINX/ X , A , FKM
-  REAL(8) :: X , A , FKM , T , aln
+  COMMON /DFEINX/ X, A, FKM
+  REAL(8) :: X, A, FKM, T, aln
   !***FIRST EXECUTABLE STATEMENT  DFEIN
   aln = (FKM-T)*X - A*LOG(T)
   DFEIN = EXP(aln)

@@ -4,7 +4,7 @@ SUBROUTINE CDQAGI(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--CDQAGI5
   !*** Start of declarations inserted by SPAG
-  INTEGER ierv , inf
+  INTEGER ierv, inf
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CDQAGI
   !***PURPOSE  Quick check for DQAGI.
@@ -23,15 +23,15 @@ SUBROUTINE CDQAGI(Lun,Kprint,Ipass)
   !
   ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
   !
-  REAL(8) :: abserr , bound , D1MACH , epmach , epsabs , epsrel , &
-    error , exact0 , exact1 , exact2 , exact3 , exact4 , &
-    oflow , result , DT0 , DT1 , DT2 , DT3 , DT4 , DT5 , &
-    uflow , work
-  INTEGER ier , ip , Ipass , iwork , Kprint , last , lenw , limit , Lun , &
+  REAL(8) :: abserr, bound, D1MACH, epmach, epsabs, epsrel, &
+    error, exact0, exact1, exact2, exact3, exact4, &
+    oflow, result, DT0, DT1, DT2, DT3, DT4, DT5, &
+    uflow, work
+  INTEGER ier, ip, Ipass, iwork, Kprint, last, lenw, limit, Lun, &
     neval
-  DIMENSION work(800) , iwork(200) , ierv(4)
-  EXTERNAL DT0 , DT1 , DT2 , DT3 , DT4 , DT5
-  DATA exact0/2.0D+00/ , exact1/0.115470066904D1/
+  DIMENSION work(800), iwork(200), ierv(4)
+  EXTERNAL DT0, DT1, DT2, DT3, DT4, DT5
+  DATA exact0/2.0D+00/, exact1/0.115470066904D1/
   DATA exact2/0.909864525656D-02/
   DATA exact3/0.31415926535897932D+01/
   DATA exact4/0.19984914554328673D+04/

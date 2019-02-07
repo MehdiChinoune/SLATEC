@@ -4,8 +4,8 @@ FUNCTION EXPREL(X)
   IMPLICIT NONE
   !*--EXPREL5
   !*** Start of declarations inserted by SPAG
-  REAL absx , alneps , EXPREL , R1MACH , X , xbnd , xln , xn
-  INTEGER i , nterms
+  REAL absx, alneps, EXPREL, R1MACH, X, xbnd, xln, xn
+  INTEGER i, nterms
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  EXPREL
   !***PURPOSE  Calculate the relative error exponential (EXP(X)-1)/X.
@@ -32,7 +32,7 @@ FUNCTION EXPREL(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  EXPREL
   LOGICAL first
-  SAVE nterms , xbnd , first
+  SAVE nterms, xbnd, first
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  EXPREL
   IF ( first ) THEN
@@ -52,7 +52,7 @@ FUNCTION EXPREL(X)
   IF ( absx<xbnd ) RETURN
   !
   EXPREL = 0.0
-  DO i = 1 , nterms
+  DO i = 1, nterms
     EXPREL = 1.0 + EXPREL*X/(nterms+2-i)
   ENDDO
   !

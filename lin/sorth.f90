@@ -73,19 +73,19 @@ SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
   REAL Snormw
-  INTEGER Kmp , Ldhes , Ll , N
+  INTEGER Kmp, Ldhes, Ll, N
   !     .. Array Arguments ..
-  REAL Hes(Ldhes,*) , V(N,*) , Vnew(*)
+  REAL Hes(Ldhes,*), V(N,*), Vnew(*)
   !     .. Local Scalars ..
-  REAL arg , sumdsq , tem , vnrm
-  INTEGER i , i0
+  REAL arg, sumdsq, tem, vnrm
+  INTEGER i, i0
   !     .. External Functions ..
-  REAL SDOT , SNRM2
-  EXTERNAL SDOT , SNRM2
+  REAL SDOT, SNRM2
+  EXTERNAL SDOT, SNRM2
   !     .. External Subroutines ..
   EXTERNAL SAXPY
   !     .. Intrinsic Functions ..
-  INTRINSIC MAX , SQRT
+  INTRINSIC MAX, SQRT
   !***FIRST EXECUTABLE STATEMENT  SORTH
   !
   !         Get norm of unaltered VNEW for later use.
@@ -97,7 +97,7 @@ SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !         Projections of earlier vectors are subtracted from VNEW.
   !   -------------------------------------------------------------------
   i0 = MAX(1,Ll-Kmp+1)
-  DO i = i0 , Ll
+  DO i = i0, Ll
     Hes(i,Ll) = SDOT(N,V(1,i),1,Vnew,1)
     tem = -Hes(i,Ll)
     CALL SAXPY(N,tem,V(1,i),1,Vnew,1)
@@ -112,7 +112,7 @@ SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   Snormw = SNRM2(N,Vnew,1)
   IF ( vnrm+0.001E0*Snormw/=vnrm ) RETURN
   sumdsq = 0
-  DO i = i0 , Ll
+  DO i = i0, Ll
     tem = -SDOT(N,V(1,i),1,Vnew,1)
     IF ( Hes(i,Ll)+0.001E0*tem/=Hes(i,Ll) ) THEN
       Hes(i,Ll) = Hes(i,Ll) - tem

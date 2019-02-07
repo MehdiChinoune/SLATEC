@@ -4,8 +4,8 @@ SUBROUTINE SINQF(N,X,Wsave)
   IMPLICIT NONE
   !*--SINQF5
   !*** Start of declarations inserted by SPAG
-  INTEGER k , kc , N , ns2
-  REAL Wsave , X , xhold
+  INTEGER k, kc, N, ns2
+  REAL Wsave, X, xhold
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SINQF
   !***PURPOSE  Compute the forward sine transform with odd wave numbers.
@@ -75,18 +75,18 @@ SUBROUTINE SINQF(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SINQF
-  DIMENSION X(*) , Wsave(*)
+  DIMENSION X(*), Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  SINQF
   IF ( N==1 ) RETURN
   ns2 = N/2
-  DO k = 1 , ns2
+  DO k = 1, ns2
     kc = N - k
     xhold = X(k)
     X(k) = X(kc+1)
     X(kc+1) = xhold
   ENDDO
   CALL COSQF(N,X,Wsave)
-  DO k = 2 , N , 2
+  DO k = 2, N, 2
     X(k) = -X(k)
   ENDDO
 END SUBROUTINE SINQF

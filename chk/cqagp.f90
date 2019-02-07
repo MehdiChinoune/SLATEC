@@ -22,13 +22,13 @@ SUBROUTINE CQAGP(Lun,Kprint,Ipass)
   !
   ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
   !
-  REAL a , abserr , b , R1MACH , epmach , epsabs , epsrel , error , exact1 , &
-    exact2 , exact3 , F1P , F2P , F3P , F4P , oflow , points , p1 , p2 , &
-    result , uflow , work
-  INTEGER ier , ip , Ipass , iwork , Kprint , last , leniw , lenw , limit , &
-    Lun , neval , npts2
-  DIMENSION ierv(4) , iwork(205) , points(5) , work(405)
-  EXTERNAL F1P , F2P , F3P , F4P
+  REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, exact1, &
+    exact2, exact3, F1P, F2P, F3P, F4P, oflow, points, p1, p2, &
+    result, uflow, work
+  INTEGER ier, ip, Ipass, iwork, Kprint, last, leniw, lenw, limit, &
+    Lun, neval, npts2
+  DIMENSION ierv(4), iwork(205), points(5), work(405)
+  EXTERNAL F1P, F2P, F3P, F4P
   DATA exact1/0.4285277667368085E+01/
   DATA exact2/0.909864525656E-2/
   DATA exact3/0.31415926535897932E+01/

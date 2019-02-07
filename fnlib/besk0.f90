@@ -4,9 +4,9 @@ FUNCTION BESK0(X)
   IMPLICIT NONE
   !*--BESK05
   !*** Start of declarations inserted by SPAG
-  REAL BESI0 , BESK0 , BESK0E , bk0cs , CSEVL , R1MACH , X , xmax , xmaxt , &
-    xsml , y
-  INTEGER INITS , ntk0
+  REAL BESI0, BESK0, BESK0E, bk0cs, CSEVL, R1MACH, X, xmax, xmaxt, &
+    xsml, y
+  INTEGER INITS, ntk0
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESK0
   !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
@@ -42,7 +42,7 @@ FUNCTION BESK0(X)
   !***END PROLOGUE  BESK0
   DIMENSION bk0cs(11)
   LOGICAL first
-  SAVE bk0cs , ntk0 , xsml , xmax , first
+  SAVE bk0cs, ntk0, xsml, xmax, first
   DATA bk0cs(1)/ - .03532739323390276872E0/
   DATA bk0cs(2)/.3442898999246284869E0/
   DATA bk0cs(3)/.03597993651536150163E0/
@@ -80,4 +80,5 @@ FUNCTION BESK0(X)
   BESK0 = -LOG(0.5*X)*BESI0(X) - .25 + CSEVL(.5*y-1.,bk0cs,ntk0)
   RETURN
   !
-  99999 END FUNCTION BESK0
+  99999 CONTINUE
+  END FUNCTION BESK0

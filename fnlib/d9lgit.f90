@@ -32,10 +32,10 @@ REAL(8) FUNCTION D9LGIT(A,X,Algap1)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9LGIT
-  REAL(8) :: A , X , Algap1 , ax , a1x , eps , fk , hstar , p , r , &
-    s , sqeps , t , D1MACH
+  REAL(8) :: A, X, Algap1, ax, a1x, eps, fk, hstar, p, r, &
+    s, sqeps, t, D1MACH
   LOGICAL first
-  SAVE eps , sqeps , first
+  SAVE eps, sqeps, first
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  D9LGIT
   IF ( first ) THEN
@@ -52,7 +52,7 @@ REAL(8) FUNCTION D9LGIT(A,X,Algap1)
   r = 0.D0
   p = 1.D0
   s = p
-  DO k = 1 , 200
+  DO k = 1, 200
     fk = k
     t = (A+fk)*X*(1.D0+r)
     r = t/((ax+fk)*(a1x+fk)-t)

@@ -41,12 +41,12 @@ PROGRAM TEST26
   !   920511  Added complete declaration section.  (WRB)
   !***END PROLOGUE  TEST26
   !     .. Local Scalars ..
-  INTEGER ipass , kprint , lin , lun , nfail
+  INTEGER ipass, kprint, lin, lun, nfail
   !     .. External Functions ..
   INTEGER I1MACH
   EXTERNAL I1MACH
   !     .. External Subroutines ..
-  EXTERNAL DLAPQC , XERMAX , XSETF , XSETUN
+  EXTERNAL DLAPQC, XERMAX, XSETF, XSETUN
   !***FIRST EXECUTABLE STATEMENT  TEST26
   lun = I1MACH(2)
   lin = I1MACH(1)

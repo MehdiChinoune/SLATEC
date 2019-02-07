@@ -4,7 +4,7 @@ REAL(8) FUNCTION DCOT(X)
   IMPLICIT NONE
   !*--DCOT5
   !*** Start of declarations inserted by SPAG
-  INTEGER ifn , INITDS , nterms
+  INTEGER ifn, INITDS, nterms
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DCOT
   !***PURPOSE  Compute the cotangent.
@@ -34,10 +34,10 @@ REAL(8) FUNCTION DCOT(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DCOT
-  REAL(8) :: X , cotcs(15) , ainty , ainty2 , pi2rec , sqeps , xmax , &
-    xmin , xsml , y , yrem , prodbg , DCSEVL , D1MACH
+  REAL(8) :: X, cotcs(15), ainty, ainty2, pi2rec, sqeps, xmax, &
+    xmin, xsml, y, yrem, prodbg, DCSEVL, D1MACH
   LOGICAL first
-  SAVE cotcs , pi2rec , nterms , xmax , xsml , xmin , sqeps , first
+  SAVE cotcs, pi2rec, nterms, xmax, xsml, xmin, sqeps, first
   DATA cotcs(1)/ + .240259160982956302509553617744970D+0/
   DATA cotcs(2)/ - .165330316015002278454746025255758D-1/
   DATA cotcs(3)/ - .429983919317240189356476228239895D-4/

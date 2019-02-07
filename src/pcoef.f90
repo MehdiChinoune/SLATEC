@@ -4,8 +4,8 @@ SUBROUTINE PCOEF(L,C,Tc,A)
   IMPLICIT NONE
   !*--PCOEF5
   !*** Start of declarations inserted by SPAG
-  REAL A , C , fac , save , Tc
-  INTEGER i , L , ll , llp1 , llp2 , new , nr
+  REAL A, C, fac, save, Tc
+  INTEGER i, L, ll, llp1, llp2, new, nr
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PCOEF
   !***PURPOSE  Convert the POLFIT coefficients to Taylor series form.
@@ -23,7 +23,7 @@ SUBROUTINE PCOEF(L,C,Tc,A)
   !
   !     POLFIT  computes the least squares polynomial fit of degree  L  as
   !     a sum of orthogonal polynomials.  PCOEF  changes this fit to its
-  !     Taylor expansion about any point  C , i.e. writes the polynomial
+  !     Taylor expansion about any point  C, i.e. writes the polynomial
   !     as a sum of powers of (X-C).  Taking  C=0.  gives the polynomial
   !     in powers of X, but a suitable non-zero  C  often leads to
   !     polynomials which are better scaled and more accurately evaluated.
@@ -44,7 +44,7 @@ SUBROUTINE PCOEF(L,C,Tc,A)
   !
   !     OUTPUT --
   !         TC -     Vector containing the first LL+1 Taylor coefficients
-  !                  where LL=ABS(L).  If  L.GT.0 , the coefficients are
+  !                  where LL=ABS(L).  If  L.GT.0, the coefficients are
   !                  in the usual Taylor series order, i.e.
   !                    P(X) = TC(1) + TC(2)*(X-C) + ... + TC(N+1)*(X-C)**N
   !                  If L .LT. 0, the coefficients are in reverse order,
@@ -63,14 +63,14 @@ SUBROUTINE PCOEF(L,C,Tc,A)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  PCOEF
   !
-  DIMENSION A(*) , Tc(*)
+  DIMENSION A(*), Tc(*)
   !***FIRST EXECUTABLE STATEMENT  PCOEF
   ll = ABS(L)
   llp1 = ll + 1
   CALL PVALUE(ll,ll,C,Tc(1),Tc(2),A)
   IF ( ll>=2 ) THEN
     fac = 1.0
-    DO i = 3 , llp1
+    DO i = 3, llp1
       fac = fac*(i-1)
       Tc(i) = Tc(i)/fac
     ENDDO
@@ -78,7 +78,7 @@ SUBROUTINE PCOEF(L,C,Tc,A)
   IF ( L<0 ) THEN
     nr = llp1/2
     llp2 = ll + 2
-    DO i = 1 , nr
+    DO i = 1, nr
       save = Tc(i)
       new = llp2 - i
       Tc(i) = Tc(new)

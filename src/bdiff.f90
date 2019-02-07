@@ -23,14 +23,14 @@ SUBROUTINE BDIFF(L,V)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  BDIFF
-  INTEGER i , j , k , L
+  INTEGER i, j, k, L
   REAL V
   DIMENSION V(*)
   !***FIRST EXECUTABLE STATEMENT  BDIFF
   IF ( L==1 ) RETURN
-  DO j = 2 , L
+  DO j = 2, L
     k = L
-    DO i = j , L
+    DO i = j, L
       V(k) = V(k-1) - V(k)
       k = k - 1
     ENDDO

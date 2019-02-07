@@ -4,8 +4,8 @@ SUBROUTINE COSTI(N,Wsave)
   IMPLICIT NONE
   !*--COSTI5
   !*** Start of declarations inserted by SPAG
-  REAL dt , fk , pi , Wsave
-  INTEGER k , kc , N , nm1 , np1 , ns2
+  REAL dt, fk, pi, Wsave
+  INTEGER k, kc, N, nm1, np1, ns2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  COSTI
   !***PURPOSE  Initialize a work array for COST.
@@ -62,7 +62,7 @@ SUBROUTINE COSTI(N,Wsave)
   ns2 = N/2
   dt = pi/nm1
   fk = 0.
-  DO k = 2 , ns2
+  DO k = 2, ns2
     kc = np1 - k
     fk = fk + 1.
     Wsave(k) = 2.*SIN(fk*dt)

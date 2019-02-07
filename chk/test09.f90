@@ -44,7 +44,7 @@ PROGRAM TEST09
   !   910411  DATE WRITTEN
   !   920128  Category corrected.  (WRB)
   !***END PROLOGUE  TEST09
-  INTEGER ipass , kprint , lin , lun , nfail
+  INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST09
   lun = I1MACH(2)
   lin = I1MACH(1)

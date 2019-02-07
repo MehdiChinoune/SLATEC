@@ -4,7 +4,7 @@ COMPLEX FUNCTION CDOTC(N,Cx,Incx,Cy,Incy)
   IMPLICIT NONE
   !*--CDOTC5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , Incy , kx , ky , N , ns
+  INTEGER i, Incx, Incy, kx, ky, N, ns
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CDOTC
   !***PURPOSE  Dot product of two complex vectors using the complex
@@ -50,7 +50,7 @@ COMPLEX FUNCTION CDOTC(N,Cx,Incx,Cy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CDOTC
-  COMPLEX Cx(*) , Cy(*)
+  COMPLEX Cx(*), Cy(*)
   !***FIRST EXECUTABLE STATEMENT  CDOTC
   CDOTC = (0.0,0.0)
   IF ( N<=0 ) RETURN
@@ -59,7 +59,7 @@ COMPLEX FUNCTION CDOTC(N,Cx,Incx,Cy,Incy)
     !     Code for equal, positive increments.
     !
     ns = N*Incx
-    DO i = 1 , ns , Incx
+    DO i = 1, ns, Incx
       CDOTC = CDOTC + CONJG(Cx(i))*Cy(i)
     ENDDO
     GOTO 99999
@@ -71,10 +71,11 @@ COMPLEX FUNCTION CDOTC(N,Cx,Incx,Cy,Incy)
   ky = 1
   IF ( Incx<0 ) kx = 1 + (1-N)*Incx
   IF ( Incy<0 ) ky = 1 + (1-N)*Incy
-  DO i = 1 , N
+  DO i = 1, N
     CDOTC = CDOTC + CONJG(Cx(kx))*Cy(ky)
     kx = kx + Incx
     ky = ky + Incy
   ENDDO
   RETURN
-  99999 END FUNCTION CDOTC
+  99999 CONTINUE
+  END FUNCTION CDOTC

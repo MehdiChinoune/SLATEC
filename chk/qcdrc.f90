@@ -19,10 +19,10 @@ SUBROUTINE QCDRC(Lun,Kprint,Ipass)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   910708  Minor modifications in use of KPRINT.  (WRB)
   !***END PROLOGUE  QCDRC
-  INTEGER Kprint , Ipass , contrl , kontrl , Lun , ier
-  INTEGER ipass1 , ipass2 , ipass3 , ipass4 , NUMXER
-  REAL(8) :: pi , trc , DRC , dif , D1MACH
-  EXTERNAL D1MACH , DRC , NUMXER , XERCLR , XGETF , XSETF
+  INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
+  INTEGER ipass1, ipass2, ipass3, ipass4, NUMXER
+  REAL(8) :: pi, trc, DRC, dif, D1MACH
+  EXTERNAL D1MACH, DRC, NUMXER, XERCLR, XGETF, XSETF
   !***FIRST EXECUTABLE STATEMENT  QCDRC
   CALL XERCLR
   CALL XGETF(contrl)
@@ -92,7 +92,7 @@ SUBROUTINE QCDRC(Lun,Kprint,Ipass)
     99004   FORMAT (' DRC - PASSED')
   ELSE
     WRITE (Lun,99006)
-    IF ( ipass4==0 ) WRITE (Lun,99005) pi , trc , dif
+    IF ( ipass4==0 ) WRITE (Lun,99005) pi, trc, dif
     99005   FORMAT (' CORRECT ANSWER =',1PD20.14/'COMPUTED ANSWER =',&
       D20.14/'     DIFFERENCE =',D20.14)
   ENDIF

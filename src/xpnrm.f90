@@ -4,7 +4,7 @@ SUBROUTINE XPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
   !*--XPNRM5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Ierror , Ipqa , iprod , j , k , l , mu , Mu1 , Mu2
+  INTEGER i, Ierror, Ipqa, iprod, j, k, l, mu, Mu1, Mu2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XPNRM
   !***SUBSIDIARY
@@ -28,8 +28,8 @@ SUBROUTINE XPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  XPNRM
-  REAL c1 , dmu , nu , Nu1 , Nu2 , Pqa , prod
-  DIMENSION Pqa(*) , Ipqa(*)
+  REAL c1, dmu, nu, Nu1, Nu2, Pqa, prod
+  DIMENSION Pqa(*), Ipqa(*)
   !***FIRST EXECUTABLE STATEMENT  XPNRM
   Ierror = 0
   l = (Mu2-Mu1) + (Nu2-Nu1+1.5)
@@ -61,13 +61,13 @@ SUBROUTINE XPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   iprod = 0
   k = 2*mu
   IF ( k>0 ) THEN
-    DO i = 1 , k
+    DO i = 1, k
       prod = prod*SQRT(nu+dmu+1.-i)
       CALL XADJ(prod,iprod,Ierror)
     ENDDO
     IF ( Ierror/=0 ) RETURN
   ENDIF
-  DO i = j , l
+  DO i = j, l
     c1 = prod*SQRT(nu+.5)
     Pqa(i) = Pqa(i)*c1
     Ipqa(i) = Ipqa(i) + iprod

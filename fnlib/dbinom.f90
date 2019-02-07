@@ -4,7 +4,7 @@ REAL(8) FUNCTION DBINOM(N,M)
   IMPLICIT NONE
   !*--DBINOM5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , k , M , N
+  INTEGER i, k, M, N
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBINOM
   !***PURPOSE  Compute the binomial coefficients.
@@ -27,10 +27,10 @@ REAL(8) FUNCTION DBINOM(N,M)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBINOM
-  REAL(8) :: corr , fintmx , sq2pil , xk , xn , xnk , D9LGMC , &
-    DLNREL , D1MACH , bilnmx
+  REAL(8) :: corr, fintmx, sq2pil, xk, xn, xnk, D9LGMC, &
+    DLNREL, D1MACH, bilnmx
   LOGICAL first
-  SAVE sq2pil , bilnmx , fintmx , first
+  SAVE sq2pil, bilnmx, fintmx, first
   DATA sq2pil/0.91893853320467274178032973640562D0/
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  DBINOM
@@ -49,7 +49,7 @@ REAL(8) FUNCTION DBINOM(N,M)
       !
       DBINOM = 1.0D0
       IF ( k==0 ) RETURN
-      DO i = 1 , k
+      DO i = 1, k
         xn = N - i + 1
         xk = i
         DBINOM = DBINOM*(xn/xk)

@@ -73,19 +73,19 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
   !           IF-THEN-ELSE-ENDIF.  (SMR, WRB)
   !***END PROLOGUE  DPSORT
   !     .. Scalar Arguments ..
-  INTEGER Ier , Kflag , N
+  INTEGER Ier, Kflag, N
   !     .. Array Arguments ..
   REAL(8) :: Dx(*)
   INTEGER Iperm(*)
   !     .. Local Scalars ..
-  REAL(8) :: r , temp
-  INTEGER i , ij , indx , indx0 , istrt , j , k , kk , l , lm , lmt , m , nn
+  REAL(8) :: r, temp
+  INTEGER i, ij, indx, indx0, istrt, j, k, kk, l, lm, lmt, m, nn
   !     .. Local Arrays ..
-  INTEGER il(21) , iu(21)
+  INTEGER il(21), iu(21)
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , INT
+  INTRINSIC ABS, INT
   !***FIRST EXECUTABLE STATEMENT  DPSORT
   Ier = 0
   nn = N
@@ -108,7 +108,7 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
   !
   !     Initialize permutation vector
   !
-  DO i = 1 , nn
+  DO i = 1, nn
     Iperm(i) = i
   ENDDO
   !
@@ -119,7 +119,7 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
   !     Alter array DX to get decreasing order if needed
   !
   IF ( Kflag<=-1 ) THEN
-    DO i = 1 , nn
+    DO i = 1, nn
       Dx(i) = -Dx(i)
     ENDDO
   ENDIF
@@ -131,7 +131,8 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
   j = nn
   r = .375D0
   !
-  100  IF ( i==j ) GOTO 300
+  100 CONTINUE
+  IF ( i==j ) GOTO 300
   IF ( r<=0.5898437D0 ) THEN
     r = r + 3.90625D-2
   ELSE
@@ -222,7 +223,7 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
     !     Clean up
     !
     IF ( Kflag<=-1 ) THEN
-      DO i = 1 , nn
+      DO i = 1, nn
         Dx(i) = -Dx(i)
       ENDDO
     ENDIF
@@ -234,7 +235,7 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
       !        Use the IPERM vector as a flag.
       !        If IPERM(I) < 0, then the I-th value is in correct location
       !
-      DO istrt = 1 , nn
+      DO istrt = 1, nn
         IF ( Iperm(istrt)>=0 ) THEN
           indx = istrt
           indx0 = indx
@@ -255,7 +256,7 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
       !
       !        Revert the signs of the IPERM values
       !
-      DO i = 1 , nn
+      DO i = 1, nn
         Iperm(i) = -Iperm(i)
       ENDDO
       !
@@ -266,7 +267,8 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
     j = iu(m)
   ENDIF
   !
-  400  IF ( j-i>=1 ) GOTO 200
+  400 CONTINUE
+  IF ( j-i>=1 ) GOTO 200
   IF ( i==1 ) GOTO 100
   i = i - 1
   DO
@@ -288,4 +290,5 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
     ENDIF
   ENDDO
   !
-  99999 END SUBROUTINE DPSORT
+  99999 CONTINUE
+  END SUBROUTINE DPSORT

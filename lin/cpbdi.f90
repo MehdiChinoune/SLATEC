@@ -54,7 +54,7 @@ SUBROUTINE CPBDI(Abd,Lda,N,M,Det)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CPBDI
-  INTEGER Lda , N , M
+  INTEGER Lda, N, M
   COMPLEX Abd(Lda,*)
   REAL Det(2)
   !
@@ -67,7 +67,7 @@ SUBROUTINE CPBDI(Abd,Lda,N,M,Det)
   Det(1) = 1.0E0
   Det(2) = 0.0E0
   s = 10.0E0
-  DO i = 1 , N
+  DO i = 1, N
     Det(1) = REAL(Abd(M+1,i))**2*Det(1)
     IF ( Det(1)==0.0E0 ) EXIT
     DO WHILE ( Det(1)<1.0E0 )

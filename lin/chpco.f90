@@ -20,10 +20,10 @@ SUBROUTINE CHPCO(Ap,N,Kpvt,Rcond,Z)
   !     the condition of the matrix.
   !
   !     if  RCOND  is not needed, CHPFA is slightly faster.
-  !     To solve  A*X = B , follow CHPCO by CHPSL.
-  !     To compute  INVERSE(A)*C , follow CHPCO by CHPSL.
-  !     To compute  INVERSE(A) , follow CHPCO by CHPDI.
-  !     To compute  DETERMINANT(A) , follow CHPCO by CHPDI.
+  !     To solve  A*X = B, follow CHPCO by CHPSL.
+  !     To compute  INVERSE(A)*C, follow CHPCO by CHPSL.
+  !     To compute  INVERSE(A), follow CHPCO by CHPDI.
+  !     To compute  DETERMINANT(A), follow CHPCO by CHPDI.
   !     To compute  INERTIA(A), follow CHPCO by CHPDI.
   !
   !     On Entry
@@ -43,8 +43,8 @@ SUBROUTINE CHPCO(Ap,N,Kpvt,Rcond,Z)
   !                were used to obtain it stored in packed form.
   !                The factorization can be written  A = U*D*CTRANS(U)
   !                where  U  is a product of permutation and unit
-  !                upper triangular matrices , CTRANS(U) is the
-  !                conjugate transpose of  U , and  D  is block diagonal
+  !                upper triangular matrices, CTRANS(U) is the
+  !                conjugate transpose of  U, and  D  is block diagonal
   !                with 1 by 1 and 2 by 2 blocks.
   !
   !        KVPT    INTEGER(N)
@@ -52,7 +52,7 @@ SUBROUTINE CHPCO(Ap,N,Kpvt,Rcond,Z)
   !
   !        RCOND   REAL
   !                an estimate of the reciprocal condition of  A .
-  !                For the system  A*X = B , relative perturbations
+  !                For the system  A*X = B, relative perturbations
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -95,14 +95,14 @@ SUBROUTINE CHPCO(Ap,N,Kpvt,Rcond,Z)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CHPCO
-  INTEGER N , Kpvt(*)
-  COMPLEX Ap(*) , Z(*)
+  INTEGER N, Kpvt(*)
+  COMPLEX Ap(*), Z(*)
   REAL Rcond
   !
-  COMPLEX ak , akm1 , bk , bkm1 , CDOTC , denom , ek , t
-  REAL anorm , s , SCASUM , ynorm
-  INTEGER i , ij , ik , ikm1 , ikp1 , info , j , jm1 , j1
-  INTEGER k , kk , km1k , km1km1 , kp , kps , ks
+  COMPLEX ak, akm1, bk, bkm1, CDOTC, denom, ek, t
+  REAL anorm, s, SCASUM, ynorm
+  INTEGER i, ij, ik, ikm1, ikp1, info, j, jm1, j1
+  INTEGER k, kk, km1k, km1km1, kp, kps, ks
   REAL, EXTERNAL :: CABS1
   COMPLEX, EXTERNAL :: CSIGN1
   !
@@ -110,20 +110,20 @@ SUBROUTINE CHPCO(Ap,N,Kpvt,Rcond,Z)
   !
   !***FIRST EXECUTABLE STATEMENT  CHPCO
   j1 = 1
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = CMPLX(SCASUM(j,Ap(j1),1),0.0E0)
     ij = j1
     j1 = j1 + j
     jm1 = j - 1
     IF ( jm1>=1 ) THEN
-      DO i = 1 , jm1
+      DO i = 1, jm1
         Z(i) = CMPLX(REAL(Z(i))+CABS1(Ap(ij)),0.0E0)
         ij = ij + 1
       ENDDO
     ENDIF
   ENDDO
   anorm = 0.0E0
-  DO j = 1 , N
+  DO j = 1, N
     anorm = MAX(anorm,REAL(Z(j)))
   ENDDO
   !
@@ -140,7 +140,7 @@ SUBROUTINE CHPCO(Ap,N,Kpvt,Rcond,Z)
   !     SOLVE U*D*W = E
   !
   ek = (1.0E0,0.0E0)
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = (0.0E0,0.0E0)
   ENDDO
   k = N

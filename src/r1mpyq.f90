@@ -58,22 +58,22 @@ SUBROUTINE R1MPYQ(M,N,A,Lda,V,W)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  R1MPYQ
-  INTEGER M , N , Lda
-  REAL A(Lda,*) , V(*) , W(*)
-  INTEGER i , j , nmj , nm1
-  REAL cos , one , sin , temp
+  INTEGER M, N, Lda
+  REAL A(Lda,*), V(*), W(*)
+  INTEGER i, j, nmj, nm1
+  REAL cos, one, sin, temp
   SAVE one
   DATA one/1.0E0/
   !***FIRST EXECUTABLE STATEMENT  R1MPYQ
   nm1 = N - 1
   IF ( nm1>=1 ) THEN
-    DO nmj = 1 , nm1
+    DO nmj = 1, nm1
       j = N - nmj
       IF ( ABS(V(j))>one ) cos = one/V(j)
       IF ( ABS(V(j))>one ) sin = SQRT(one-cos**2)
       IF ( ABS(V(j))<=one ) sin = V(j)
       IF ( ABS(V(j))<=one ) cos = SQRT(one-sin**2)
-      DO i = 1 , M
+      DO i = 1, M
         temp = cos*A(i,j) - sin*A(i,N)
         A(i,N) = sin*A(i,j) + cos*A(i,N)
         A(i,j) = temp
@@ -82,12 +82,12 @@ SUBROUTINE R1MPYQ(M,N,A,Lda,V,W)
     !
     !     APPLY THE SECOND SET OF GIVENS ROTATIONS TO A.
     !
-    DO j = 1 , nm1
+    DO j = 1, nm1
       IF ( ABS(W(j))>one ) cos = one/W(j)
       IF ( ABS(W(j))>one ) sin = SQRT(one-cos**2)
       IF ( ABS(W(j))<=one ) sin = W(j)
       IF ( ABS(W(j))<=one ) cos = SQRT(one-sin**2)
-      DO i = 1 , M
+      DO i = 1, M
         temp = cos*A(i,j) + sin*A(i,N)
         A(i,N) = -sin*A(i,j) + cos*A(i,N)
         A(i,j) = temp

@@ -57,7 +57,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !                       degree based on a statistical F test of
   !                       significance.  One of three possible
   !                       significance levels will be used:  .01, .05 or
-  !                       .10.  If  EPS=-1.0 , the routine will
+  !                       .10.  If  EPS=-1.0, the routine will
   !                       automatically select one of these levels based
   !                       on the number of data points and the maximum
   !                       degree to be considered.  If  EPS  is input as
@@ -129,20 +129,20 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920527  Corrected erroneous statements in DESCRIPTION.  (WRB)
   !***END PROLOGUE  DPOLFT
-  INTEGER i , idegf , Ierr , j , jp1 , jpas , k1 , k1pj , k2 , k2pj , k3 , &
-    k3pi , k4 , k4pi , k5 , k5pi , ksig , m , Maxdeg , mop1 , Ndeg , &
-    nder , nfail
-  REAL(8) :: temd1 , temd2
-  REAL(8) :: A(*) , degf , den , Eps , etst , f , fcrit , R(*) , sig , &
-    sigj , sigjm1 , sigpas , temp , X(*) , xm , Y(*) , yp , &
-    W(*) , w1 , w11
+  INTEGER i, idegf, Ierr, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, &
+    k3pi, k4, k4pi, k5, k5pi, ksig, m, Maxdeg, mop1, Ndeg, &
+    nder, nfail
+  REAL(8) :: temd1, temd2
+  REAL(8) :: A(*), degf, den, Eps, etst, f, fcrit, R(*), sig, &
+    sigj, sigjm1, sigpas, temp, X(*), xm, Y(*), yp, &
+    W(*), w1, w11
   REAL(8) :: co(4,3)
   SAVE co
-  DATA co(1,1) , co(2,1) , co(3,1) , co(4,1) , co(1,2) , co(2,2) , co(3,2) , &
-    co(4,2) , co(1,3) , co(2,3) , co(3,3) , co(4,3)/ - 13.086850D0 , &
-    -2.4648165D0 , -3.3846535D0 , -1.2973162D0 , -3.3381146D0 , &
-    -1.7812271D0 , -3.2578406D0 , -1.6589279D0 , -1.6282703D0 , &
-    -1.3152745D0 , -3.2640179D0 , -1.9829776D0/
+  DATA co(1,1), co(2,1), co(3,1), co(4,1), co(1,2), co(2,2), co(3,2), &
+    co(4,2), co(1,3), co(2,3), co(3,3), co(4,3)/ - 13.086850D0, &
+    -2.4648165D0, -3.3846535D0, -1.2973162D0, -3.3381146D0, &
+    -1.7812271D0, -3.2578406D0, -1.6589279D0, -1.6282703D0, &
+    -1.3152745D0, -3.2640179D0, -1.9829776D0/
   !***FIRST EXECUTABLE STATEMENT  DPOLFT
   m = ABS(N)
   IF ( m==0 ) GOTO 700
@@ -154,11 +154,11 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   xm = m
   etst = Eps*Eps*xm
   IF ( W(1)<0.0D0 ) THEN
-    DO i = 1 , m
+    DO i = 1, m
       W(i) = 1.0D0
     ENDDO
   ELSE
-    DO i = 1 , m
+    DO i = 1, m
       IF ( W(i)<=0.0D0 ) GOTO 700
     ENDDO
   ENDIF
@@ -186,7 +186,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   k3 = k2 + Maxdeg + 2
   k4 = k3 + m
   k5 = k4 + m
-  DO i = 2 , k4
+  DO i = 2, k4
     A(i) = 0.0D0
   ENDDO
   w11 = 0.0D0
@@ -194,7 +194,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     !
     ! CONSTRAINED CASE
     !
-    DO i = 1 , m
+    DO i = 1, m
       k4pi = k4 + i
       w11 = w11 + W(i)*A(k4pi)**2
     ENDDO
@@ -202,7 +202,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     !
     ! UNCONSTRAINED CASE
     !
-    DO i = 1 , m
+    DO i = 1, m
       k4pi = k4 + i
       A(k4pi) = 1.0D0
       w11 = w11 + W(i)
@@ -212,14 +212,14 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   ! COMPUTE FIT OF DEGREE ZERO
   !
   temd1 = 0.0D0
-  DO i = 1 , m
+  DO i = 1, m
     k4pi = k4 + i
     temd1 = temd1 + W(i)*Y(i)*A(k4pi)
   ENDDO
   temd1 = temd1/w11
   A(k2+1) = temd1
   sigj = 0.0D0
-  DO i = 1 , m
+  DO i = 1, m
     k4pi = k4 + i
     k5pi = k5 + i
     temd2 = temd1*A(k4pi)
@@ -234,151 +234,155 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   IF ( Eps<0 ) GOTO 200
   IF ( Eps==0 ) GOTO 300
   GOTO 400
-  100  DO
-  !
-  ! INCREMENT DEGREE
-  !
-  j = j + 1
-  jp1 = j + 1
-  k1pj = k1 + j
-  k2pj = k2 + j
-  sigjm1 = sigj
-  !
-  ! COMPUTE NEW B COEFFICIENT EXCEPT WHEN J = 1
-  !
-  IF ( j>1 ) A(k1pj) = w11/w1
-  !
-  ! COMPUTE NEW A COEFFICIENT
-  !
-  temd1 = 0.0D0
-  DO i = 1 , m
-    k4pi = k4 + i
-    temd2 = A(k4pi)
-    temd1 = temd1 + X(i)*W(i)*temd2*temd2
-  ENDDO
-  A(jp1) = temd1/w11
-  !
-  ! EVALUATE ORTHOGONAL POLYNOMIAL AT DATA POINTS
-  !
-  w1 = w11
-  w11 = 0.0D0
-  DO i = 1 , m
-    k3pi = k3 + i
-    k4pi = k4 + i
-    temp = A(k3pi)
-    A(k3pi) = A(k4pi)
-    A(k4pi) = (X(i)-A(jp1))*A(k3pi) - A(k1pj)*temp
-    w11 = w11 + W(i)*A(k4pi)**2
-  ENDDO
-  !
-  ! GET NEW ORTHOGONAL POLYNOMIAL COEFFICIENT USING PARTIAL DOUBLE
-  ! PRECISION
-  !
-  temd1 = 0.0D0
-  DO i = 1 , m
-    k4pi = k4 + i
-    k5pi = k5 + i
-    temd2 = W(i)*((Y(i)-R(i))-A(k5pi))*A(k4pi)
-    temd1 = temd1 + temd2
-  ENDDO
-  temd1 = temd1/w11
-  A(k2pj+1) = temd1
-  !
-  ! UPDATE POLYNOMIAL EVALUATIONS AT EACH OF THE DATA POINTS, AND
-  ! ACCUMULATE SUM OF SQUARES OF ERRORS.  THE POLYNOMIAL EVALUATIONS ARE
-  ! COMPUTED AND STORED IN EXTENDED PRECISION.  FOR THE I-TH DATA POINT,
-  ! THE MOST SIGNIFICANT BITS ARE STORED IN  R(I) , AND THE LEAST
-  ! SIGNIFICANT BITS ARE IN  A(K5PI) .
-  !
-  sigj = 0.0D0
-  DO i = 1 , m
-    k4pi = k4 + i
-    k5pi = k5 + i
-    temd2 = R(i) + A(k5pi) + temd1*A(k4pi)
-    R(i) = temd2
-    A(k5pi) = temd2 - R(i)
-    sigj = sigj + W(i)*((Y(i)-R(i))-A(k5pi))**2
-  ENDDO
-  !
-  ! SEE IF DEGREE SELECTION CRITERION HAS BEEN SATISFIED OR IF DEGREE
-  ! MAXDEG  HAS BEEN REACHED
-  !
-  IF ( Eps<0 ) THEN
+  100 CONTINUE
+  DO
     !
-    ! COMPUTE F STATISTICS  (INPUT EPS .LT. 0.)
+    ! INCREMENT DEGREE
     !
-    IF ( sigj==0.0D0 ) GOTO 600
-    degf = m - j - 1
-    den = (co(4,ksig)*degf+1.0D0)*degf
-    fcrit = (((co(3,ksig)*degf)+co(2,ksig))*degf+co(1,ksig))/den
-    fcrit = fcrit*fcrit
-    f = (sigjm1-sigj)*degf/sigj
-    IF ( f>=fcrit ) EXIT
+    j = j + 1
+    jp1 = j + 1
+    k1pj = k1 + j
+    k2pj = k2 + j
+    sigjm1 = sigj
     !
-    ! POLYNOMIAL OF DEGREE J FAILS F TEST.  IF THERE HAVE BEEN THREE
-    ! SUCCESSIVE FAILURES, A STATISTICALLY BEST DEGREE HAS BEEN FOUND.
+    ! COMPUTE NEW B COEFFICIENT EXCEPT WHEN J = 1
     !
-    nfail = nfail + 1
-    IF ( nfail>=3 ) GOTO 600
-    IF ( Maxdeg==j ) GOTO 800
-  ELSEIF ( Eps==0 ) THEN
-    GOTO 300
-  ELSE
-    GOTO 400
+    IF ( j>1 ) A(k1pj) = w11/w1
+    !
+    ! COMPUTE NEW A COEFFICIENT
+    !
+    temd1 = 0.0D0
+    DO i = 1, m
+      k4pi = k4 + i
+      temd2 = A(k4pi)
+      temd1 = temd1 + X(i)*W(i)*temd2*temd2
+    ENDDO
+    A(jp1) = temd1/w11
+    !
+    ! EVALUATE ORTHOGONAL POLYNOMIAL AT DATA POINTS
+    !
+    w1 = w11
+    w11 = 0.0D0
+    DO i = 1, m
+      k3pi = k3 + i
+      k4pi = k4 + i
+      temp = A(k3pi)
+      A(k3pi) = A(k4pi)
+      A(k4pi) = (X(i)-A(jp1))*A(k3pi) - A(k1pj)*temp
+      w11 = w11 + W(i)*A(k4pi)**2
+    ENDDO
+    !
+    ! GET NEW ORTHOGONAL POLYNOMIAL COEFFICIENT USING PARTIAL DOUBLE
+    ! PRECISION
+    !
+    temd1 = 0.0D0
+    DO i = 1, m
+      k4pi = k4 + i
+      k5pi = k5 + i
+      temd2 = W(i)*((Y(i)-R(i))-A(k5pi))*A(k4pi)
+      temd1 = temd1 + temd2
+    ENDDO
+    temd1 = temd1/w11
+    A(k2pj+1) = temd1
+    !
+    ! UPDATE POLYNOMIAL EVALUATIONS AT EACH OF THE DATA POINTS, AND
+    ! ACCUMULATE SUM OF SQUARES OF ERRORS.  THE POLYNOMIAL EVALUATIONS ARE
+    ! COMPUTED AND STORED IN EXTENDED PRECISION.  FOR THE I-TH DATA POINT,
+    ! THE MOST SIGNIFICANT BITS ARE STORED IN  R(I), AND THE LEAST
+    ! SIGNIFICANT BITS ARE IN  A(K5PI) .
+    !
+    sigj = 0.0D0
+    DO i = 1, m
+      k4pi = k4 + i
+      k5pi = k5 + i
+      temd2 = R(i) + A(k5pi) + temd1*A(k4pi)
+      R(i) = temd2
+      A(k5pi) = temd2 - R(i)
+      sigj = sigj + W(i)*((Y(i)-R(i))-A(k5pi))**2
+    ENDDO
+    !
+    ! SEE IF DEGREE SELECTION CRITERION HAS BEEN SATISFIED OR IF DEGREE
+    ! MAXDEG  HAS BEEN REACHED
+    !
+    IF ( Eps<0 ) THEN
+      !
+      ! COMPUTE F STATISTICS  (INPUT EPS .LT. 0.)
+      !
+      IF ( sigj==0.0D0 ) GOTO 600
+      degf = m - j - 1
+      den = (co(4,ksig)*degf+1.0D0)*degf
+      fcrit = (((co(3,ksig)*degf)+co(2,ksig))*degf+co(1,ksig))/den
+      fcrit = fcrit*fcrit
+      f = (sigjm1-sigj)*degf/sigj
+      IF ( f>=fcrit ) EXIT
+      !
+      ! POLYNOMIAL OF DEGREE J FAILS F TEST.  IF THERE HAVE BEEN THREE
+      ! SUCCESSIVE FAILURES, A STATISTICALLY BEST DEGREE HAS BEEN FOUND.
+      !
+      nfail = nfail + 1
+      IF ( nfail>=3 ) GOTO 600
+      IF ( Maxdeg==j ) GOTO 800
+    ELSEIF ( Eps==0 ) THEN
+      GOTO 300
+    ELSE
+      GOTO 400
+    ENDIF
+  ENDDO
+  !
+  ! POLYNOMIAL OF DEGREE J SATISFIES F TEST
+  !
+  200  sigpas = sigj
+  jpas = j
+  nfail = 0
+  IF ( Maxdeg/=j ) GOTO 100
+  GOTO 800
+  !
+  ! RAISE THE DEGREE IF DEGREE  MAXDEG  HAS NOT YET BEEN REACHED  (INPUT
+  ! EPS = 0.)
+  !
+  300 CONTINUE
+  IF ( Maxdeg/=j ) GOTO 100
+  GOTO 500
+  !
+  ! SEE IF RMS ERROR CRITERION IS SATISFIED  (INPUT EPS .GT. 0.)
+  !
+  400 CONTINUE
+  IF ( sigj>etst ) THEN
+    IF ( Maxdeg/=j ) GOTO 100
+    Ierr = 3
+    Ndeg = Maxdeg
+    sig = sigj
+    GOTO 900
   ENDIF
-ENDDO
-!
-! POLYNOMIAL OF DEGREE J SATISFIES F TEST
-!
-200  sigpas = sigj
-jpas = j
-nfail = 0
-IF ( Maxdeg/=j ) GOTO 100
-GOTO 800
-!
-! RAISE THE DEGREE IF DEGREE  MAXDEG  HAS NOT YET BEEN REACHED  (INPUT
-! EPS = 0.)
-!
-300  IF ( Maxdeg/=j ) GOTO 100
-GOTO 500
-!
-! SEE IF RMS ERROR CRITERION IS SATISFIED  (INPUT EPS .GT. 0.)
-!
-400  IF ( sigj>etst ) THEN
-IF ( Maxdeg/=j ) GOTO 100
-Ierr = 3
-Ndeg = Maxdeg
-sig = sigj
-GOTO 900
-ENDIF
-!
-! RETURNS
-!
-500  Ierr = 1
-Ndeg = j
-sig = sigj
-GOTO 900
-600  Ierr = 1
-Ndeg = jpas
-sig = sigpas
-GOTO 900
-700  Ierr = 2
-CALL XERMSG('SLATEC','DPOLFT','INVALID INPUT PARAMETER.',2,1)
-GOTO 99999
-800  Ierr = 4
-Ndeg = jpas
-sig = sigpas
-!
-900  A(k3) = Ndeg
-!
-! WHEN STATISTICAL TEST HAS BEEN USED, EVALUATE THE BEST POLYNOMIAL AT
-! ALL THE DATA POINTS IF  R  DOES NOT ALREADY CONTAIN THESE VALUES
-!
-IF ( Eps<0.0.AND.Ndeg/=Maxdeg ) THEN
-nder = 0
-DO i = 1 , m
-  CALL DP1VLU(Ndeg,nder,X(i),R(i),yp,A)
-ENDDO
-ENDIF
-Eps = SQRT(sig/xm)
-99999 END SUBROUTINE DPOLFT
+  !
+  ! RETURNS
+  !
+  500  Ierr = 1
+  Ndeg = j
+  sig = sigj
+  GOTO 900
+  600  Ierr = 1
+  Ndeg = jpas
+  sig = sigpas
+  GOTO 900
+  700  Ierr = 2
+  CALL XERMSG('SLATEC','DPOLFT','INVALID INPUT PARAMETER.',2,1)
+  GOTO 99999
+  800  Ierr = 4
+  Ndeg = jpas
+  sig = sigpas
+  !
+  900  A(k3) = Ndeg
+  !
+  ! WHEN STATISTICAL TEST HAS BEEN USED, EVALUATE THE BEST POLYNOMIAL AT
+  ! ALL THE DATA POINTS IF  R  DOES NOT ALREADY CONTAIN THESE VALUES
+  !
+  IF ( Eps<0.0.AND.Ndeg/=Maxdeg ) THEN
+    nder = 0
+    DO i = 1, m
+      CALL DP1VLU(Ndeg,nder,X(i),R(i),yp,A)
+    ENDDO
+  ENDIF
+  Eps = SQRT(sig/xm)
+  99999 CONTINUE
+  END SUBROUTINE DPOLFT

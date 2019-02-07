@@ -20,14 +20,14 @@ SUBROUTINE DDJAC2(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
   !   901030  Made all local declarations explicit.  (FNF)
   !***END PROLOGUE  DDJAC2
   INTEGER Ipar(*)
-  REAL(8) :: T , Y(*) , Yprime(*) , Pd(11,25) , Cj , Rpar(*)
-  INTEGER j , mband , ml , mu , neq , ng
-  REAL(8) :: alph1 , alph2
-  DATA alph1/1.0D0/ , alph2/1.0D0/ , ng/5/
-  DATA ml/5/ , mu/0/ , neq/25/
+  REAL(8) :: T, Y(*), Yprime(*), Pd(11,25), Cj, Rpar(*)
+  INTEGER j, mband, ml, mu, neq, ng
+  REAL(8) :: alph1, alph2
+  DATA alph1/1.0D0/, alph2/1.0D0/, ng/5/
+  DATA ml/5/, mu/0/, neq/25/
   !***FIRST EXECUTABLE STATEMENT  DDJAC2
   mband = ml + mu + 1
-  DO j = 1 , neq
+  DO j = 1, neq
     Pd(mband,j) = -2.0D0 - Cj
     Pd(mband+1,j) = alph1
     Pd(mband+2,j) = 0.0D0
@@ -35,7 +35,7 @@ SUBROUTINE DDJAC2(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
     Pd(mband+4,j) = 0.0D0
     Pd(mband+5,j) = alph2
   ENDDO
-  DO j = 1 , neq , ng
+  DO j = 1, neq, ng
     Pd(mband+1,j) = 0.0D0
   ENDDO
 END SUBROUTINE DDJAC2

@@ -25,23 +25,23 @@ SUBROUTINE DRSCO(Rsav,Isav)
   !***END PROLOGUE  DRSCO
   !-----------------------------------------------------------------------
   ! THIS ROUTINE RESTORES FROM RSAV AND ISAV THE CONTENTS OF COMMON
-  ! BLOCK DDEBD1  , WHICH IS USED INTERNALLY IN THE DDEBDF
+  ! BLOCK DDEBD1 , WHICH IS USED INTERNALLY IN THE DDEBDF
   ! PACKAGE.  THIS PRESUMES THAT RSAV AND ISAV WERE LOADED BY MEANS
   ! OF SUBROUTINE DSVCO OR THE EQUIVALENT.
   !-----------------------------------------------------------------------
   !
-  INTEGER i , ILS , Isav , lenils , lenrls
-  REAL(8) :: RLS , Rsav
-  DIMENSION Rsav(*) , Isav(*)
-  SAVE lenrls , lenils
-  COMMON /DDEBD1/ RLS(218) , ILS(33)
-  DATA lenrls/218/ , lenils/33/
+  INTEGER i, ILS, Isav, lenils, lenrls
+  REAL(8) :: RLS, Rsav
+  DIMENSION Rsav(*), Isav(*)
+  SAVE lenrls, lenils
+  COMMON /DDEBD1/ RLS(218), ILS(33)
+  DATA lenrls/218/, lenils/33/
   !
   !***FIRST EXECUTABLE STATEMENT  DRSCO
-  DO i = 1 , lenrls
+  DO i = 1, lenrls
     RLS(i) = Rsav(i)
   ENDDO
-  DO i = 1 , lenils
+  DO i = 1, lenils
     ILS(i) = Isav(i)
   ENDDO
   !     ----------------------- END OF SUBROUTINE DRSCO

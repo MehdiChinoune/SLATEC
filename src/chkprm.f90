@@ -5,8 +5,8 @@ SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,&
   IMPLICIT NONE
   !*--CHKPRM6
   !*** Start of declarations inserted by SPAG
-  REAL A , ai , B , bi , C , ci , D , dj , dlx , dly , ej , fj , xi , yj
-  INTEGER i , Idmn , Ierror , Intl , Iorder , j , M , Mbdcnd , N , Nbdcnd
+  REAL A, ai, B, bi, C, ci, D, dj, dlx, dly, ej, fj, xi, yj
+  INTEGER i, Idmn, Ierror, Intl, Iorder, j, M, Mbdcnd, N, Nbdcnd
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CHKPRM
   !***SUBSIDIARY
@@ -27,7 +27,7 @@ SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,&
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CHKPRM
   !
-  EXTERNAL COFX , COFY
+  EXTERNAL COFX, COFY
   !***FIRST EXECUTABLE STATEMENT  CHKPRM
   Ierror = 1
   IF ( A>=B.OR.C>=D ) RETURN
@@ -68,10 +68,10 @@ SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,&
   !
   dlx = (B-A)/M
   dly = (D-C)/N
-  DO i = 2 , M
+  DO i = 2, M
     xi = A + (i-1)*dlx
     CALL COFX(xi,ai,bi,ci)
-    DO j = 2 , N
+    DO j = 2, N
       yj = C + (j-1)*dly
       CALL COFY(yj,dj,ej,fj)
       IF ( ai*dj<=0.0 ) THEN

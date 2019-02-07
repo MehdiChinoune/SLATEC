@@ -46,15 +46,15 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DINTYD
   !
-  INTEGER i , ic , IER , Iflag , IOWnd , IOWns , j , jb , jb2 , jj , jj1 , &
-    jp1 , JSTart , K , KFLag , L , MAXord , METh , MITer , N , NFE , &
-    NJE , NQ , NQU , NST , Nyh
-  REAL(8) :: c , Dky , EL0 , H , HMIn , HMXi , HU , r , ROWnd , &
-    ROWns , s , T , TN , tp , UROund , Yh
-  DIMENSION Yh(Nyh,*) , Dky(*)
-  COMMON /DDEBD1/ ROWnd , ROWns(210) , EL0 , H , HMIn , HMXi , HU , TN , &
-    UROund , IOWnd(14) , IOWns(6) , IER , JSTart , KFLag , L , &
-    METh , MITer , MAXord , N , NQ , NST , NFE , NJE , NQU
+  INTEGER i, ic, IER, Iflag, IOWnd, IOWns, j, jb, jb2, jj, jj1, &
+    jp1, JSTart, K, KFLag, L, MAXord, METh, MITer, N, NFE, &
+    NJE, NQ, NQU, NST, Nyh
+  REAL(8) :: c, Dky, EL0, H, HMIn, HMXi, HU, r, ROWnd, &
+    ROWns, s, T, TN, tp, UROund, Yh
+  DIMENSION Yh(Nyh,*), Dky(*)
+  COMMON /DDEBD1/ ROWnd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
+    UROund, IOWnd(14), IOWns(6), IER, JSTart, KFLag, L, &
+    METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 130
   !***FIRST EXECUTABLE STATEMENT  DINTYD
@@ -70,28 +70,28 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
       ic = 1
       IF ( K/=0 ) THEN
         jj1 = L - K
-        DO jj = jj1 , NQ
+        DO jj = jj1, NQ
           ic = ic*jj
         ENDDO
       ENDIF
       c = ic
-      DO i = 1 , N
+      DO i = 1, N
         Dky(i) = c*Yh(i,L)
       ENDDO
       IF ( K/=NQ ) THEN
         jb2 = NQ - K
-        DO jb = 1 , jb2
+        DO jb = 1, jb2
           j = NQ - jb
           jp1 = j + 1
           ic = 1
           IF ( K/=0 ) THEN
             jj1 = jp1 - K
-            DO jj = jj1 , j
+            DO jj = jj1, j
               ic = ic*jj
             ENDDO
           ENDIF
           c = ic
-          DO i = 1 , N
+          DO i = 1, N
             Dky(i) = c*Yh(i,jp1) + s*Dky(i)
           ENDDO
         ENDDO
@@ -99,7 +99,7 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
         IF ( K==0 ) GOTO 99999
       ENDIF
       r = H**(-K)
-      DO i = 1 , N
+      DO i = 1, N
         Dky(i) = r*Dky(i)
       ENDDO
     ELSE
@@ -109,4 +109,5 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   ENDIF
   !     ----------------------- END OF SUBROUTINE DINTYD
   !     -----------------------
-  99999 END SUBROUTINE DINTYD
+  99999 CONTINUE
+  END SUBROUTINE DINTYD

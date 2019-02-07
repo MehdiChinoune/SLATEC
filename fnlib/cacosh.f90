@@ -22,7 +22,7 @@ COMPLEX FUNCTION CACOSH(Z)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CACOSH
-  COMPLEX Z , ci , CACOS
+  COMPLEX Z, ci, CACOS
   SAVE ci
   DATA ci/(0.,1.)/
   !***FIRST EXECUTABLE STATEMENT  CACOSH

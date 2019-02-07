@@ -232,12 +232,12 @@ SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,&
   !                         WRITTEN BY R. HANSON, SANDIA NATL. LABS.,
   !                         ALB., N. M., AUGUST-SEPTEMBER, 1980.
   !
-  REAL Bkpt(*) , Coeff(*) , Sddata(*) , W(*) , Xdata(*) , Ydata(*)
-  INTEGER Lw , Mdein , Mdeout , Nbkpt , Ndata , Nord
+  REAL Bkpt(*), Coeff(*), Sddata(*), W(*), Xdata(*), Ydata(*)
+  INTEGER Lw, Mdein, Mdeout, Nbkpt, Ndata, Nord
   !
   EXTERNAL EFCMN
   !
-  INTEGER lbf , lbkpt , lg , lptemp , lww , lxtemp , mdg , mdw
+  INTEGER lbf, lbkpt, lg, lptemp, lww, lxtemp, mdg, mdw
   !
   !***FIRST EXECUTABLE STATEMENT  EFC
   !     LWW=1               USAGE IN EFCMN( ) OF W(*)..

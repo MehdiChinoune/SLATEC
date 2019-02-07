@@ -935,31 +935,31 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !
   !     Declare arguments.
   !
-  INTEGER Neq , Info(15) , Idid , Lrw , Iwork(*) , Liw , Ipar(*)
-  REAL(8) :: T , Y(*) , Yprime(*) , Tout , Rtol(*) , Atol(*) ,&
-    Rwork(*) , Rpar(*)
-  EXTERNAL RES , JAC
+  INTEGER Neq, Info(15), Idid, Lrw, Iwork(*), Liw, Ipar(*)
+  REAL(8) :: T, Y(*), Yprime(*), Tout, Rtol(*), Atol(*) ,&
+    Rwork(*), Rpar(*)
+  EXTERNAL RES, JAC
   !
   !     Declare externals.
   !
-  EXTERNAL D1MACH , DDAINI , DDANRM , DDASTP , DDATRP , DDAWTS , XERMSG
-  REAL(8) :: D1MACH , DDANRM
+  EXTERNAL D1MACH, DDAINI, DDANRM, DDASTP, DDATRP, DDAWTS, XERMSG
+  REAL(8) :: D1MACH, DDANRM
   !
   !     Declare local variables.
   !
-  INTEGER i , itemp , LALPHA , LBETA , LCJ , LCJOLD , LCTF , LDELTA ,&
-    leniw , lenpd , lenrw , le , LETF , LGAMMA , LH , LHMAX , LHOLD ,&
-    LIPVT , LJCALC , LK , LKOLD , LIWM , LML , LMTYPE , LMU , LMXORD ,&
-    LNJE , LNPD , LNRE , LNS , LNST , LNSTL , lpd , LPHASE , lphi ,&
-    LPSI , LROUND , LS , LSIGMA , LTN , LTSTOP , lwm , lwt , mband ,&
-    msave , mxord , NPD , ntemp , nzflg
-  REAL(8) :: atoli , h , hmax , hmin , ho , r , rh , rtoli , tdist ,&
-    tn , tnext , tstop , uround , ypnorm
+  INTEGER i, itemp, LALPHA, LBETA, LCJ, LCJOLD, LCTF, LDELTA ,&
+    leniw, lenpd, lenrw, le, LETF, LGAMMA, LH, LHMAX, LHOLD ,&
+    LIPVT, LJCALC, LK, LKOLD, LIWM, LML, LMTYPE, LMU, LMXORD ,&
+    LNJE, LNPD, LNRE, LNS, LNST, LNSTL, lpd, LPHASE, lphi ,&
+    LPSI, LROUND, LS, LSIGMA, LTN, LTSTOP, lwm, lwt, mband ,&
+    msave, mxord, NPD, ntemp, nzflg
+  REAL(8) :: atoli, h, hmax, hmin, ho, r, rh, rtoli, tdist ,&
+    tn, tnext, tstop, uround, ypnorm
   LOGICAL done
   !       Auxiliary variables for conversion of values to be included in
   !       error messages.
-  CHARACTER(8) :: xern1 , xern2
-  CHARACTER(16) :: xern3 , xern4
+  CHARACTER(8) :: xern1, xern2
+  CHARACTER(16) :: xern3, xern4
   !
   !     SET POINTERS INTO IWORK
   PARAMETER (LML=1,LMU=2,LMXORD=3,LMTYPE=4,LNST=11,LNRE=12,LNJE=13,LETF=14,&
@@ -984,7 +984,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     !
     !     FIRST CHECK INFO ARRAY TO MAKE SURE ALL ELEMENTS OF INFO
     !     ARE EITHER ZERO OR ONE.
-    DO i = 2 , 11
+    DO i = 2, 11
       IF ( Info(i)/=0.AND.Info(i)/=1 ) GOTO 400
     ENDDO
     !
@@ -1122,7 +1122,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   nzflg = 0
   rtoli = Rtol(1)
   atoli = Atol(1)
-  DO i = 1 , Neq
+  DO i = 1, Neq
     IF ( Info(2)==1 ) rtoli = Rtol(i)
     IF ( Info(2)==1 ) atoli = Atol(i)
     IF ( rtoli>0.0D0.OR.atoli>0.0D0 ) nzflg = 1
@@ -1250,7 +1250,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       !
       !     SET ERROR WEIGHT VECTOR WT
       CALL DDAWTS(Neq,Info(2),Rtol,Atol,Y,Rwork(lwt),Rpar,Ipar)
-      DO i = 1 , Neq
+      DO i = 1, Neq
         IF ( Rwork(lwt+i-1)<=0.0D0 ) GOTO 900
       ENDDO
       !
@@ -1316,7 +1316,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !
         !     LOAD Y AND H*YPRIME INTO PHI(*,1) AND PHI(*,2)
         itemp = lphi + Neq
-        DO i = 1 , Neq
+        DO i = 1, Neq
           Rwork(lphi+i-1) = Y(i)
           Rwork(itemp+i-1) = h*Yprime(i)
           !
@@ -1336,263 +1336,265 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !-------------------------------------------------------
   !
   !     CHECK FOR FAILURE TO COMPUTE INITIAL YPRIME
-  100  IF ( Idid/=-12 ) THEN
-  !
-  !     CHECK FOR TOO MANY STEPS
-  IF ( (Iwork(LNST)-Iwork(LNSTL))<500 ) THEN
+  100 CONTINUE
+  IF ( Idid/=-12 ) THEN
     !
-    !     UPDATE WT
-    CALL DDAWTS(Neq,Info(2),Rtol,Atol,Rwork(lphi),Rwork(lwt),Rpar,Ipar)
-    DO i = 1 , Neq
-      IF ( Rwork(i+lwt-1)<=0.0D0 ) THEN
-        Idid = -3
-        GOTO 200
-      ENDIF
-    ENDDO
-    !
-    !     TEST FOR TOO MUCH ACCURACY REQUESTED.
-    r = DDANRM(Neq,Rwork(lphi),Rwork(lwt),Rpar,Ipar)*100.0D0*uround
-    IF ( r<=1.0D0 ) THEN
+    !     CHECK FOR TOO MANY STEPS
+    IF ( (Iwork(LNST)-Iwork(LNSTL))<500 ) THEN
       !
-      !     COMPUTE MINIMUM STEPSIZE
-      hmin = 4.0D0*uround*MAX(ABS(tn),ABS(Tout))
-      !
-      !     TEST H VS. HMAX
-      IF ( Info(7)/=0 ) THEN
-        rh = ABS(h)/Rwork(LHMAX)
-        IF ( rh>1.0D0 ) h = h/rh
-      ENDIF
-      !
-      CALL DDASTP(tn,Y,Yprime,Neq,RES,JAC,h,Rwork(lwt),Info(1),Idid,Rpar,&
-        Ipar,Rwork(lphi),Rwork(LDELTA),Rwork(le),Rwork(lwm),&
-        Iwork(LIWM),Rwork(LALPHA),Rwork(LBETA),Rwork(LGAMMA),&
-        Rwork(LPSI),Rwork(LSIGMA),Rwork(LCJ),Rwork(LCJOLD),&
-        Rwork(LHOLD),Rwork(LS),hmin,Rwork(LROUND),Iwork(LPHASE),&
-        Iwork(LJCALC),Iwork(LK),Iwork(LKOLD),Iwork(LNS),Info(10)&
-        ,ntemp)
-      !     MULTIPLY RTOL AND ATOL BY R AND RETURN
-    ELSEIF ( Info(2)==1 ) THEN
-      DO i = 1 , Neq
-        Rtol(i) = r*Rtol(i)
-        Atol(i) = r*Atol(i)
+      !     UPDATE WT
+      CALL DDAWTS(Neq,Info(2),Rtol,Atol,Rwork(lphi),Rwork(lwt),Rpar,Ipar)
+      DO i = 1, Neq
+        IF ( Rwork(i+lwt-1)<=0.0D0 ) THEN
+          Idid = -3
+          GOTO 200
+        ENDIF
       ENDDO
-      Idid = -2
+      !
+      !     TEST FOR TOO MUCH ACCURACY REQUESTED.
+      r = DDANRM(Neq,Rwork(lphi),Rwork(lwt),Rpar,Ipar)*100.0D0*uround
+      IF ( r<=1.0D0 ) THEN
+        !
+        !     COMPUTE MINIMUM STEPSIZE
+        hmin = 4.0D0*uround*MAX(ABS(tn),ABS(Tout))
+        !
+        !     TEST H VS. HMAX
+        IF ( Info(7)/=0 ) THEN
+          rh = ABS(h)/Rwork(LHMAX)
+          IF ( rh>1.0D0 ) h = h/rh
+        ENDIF
+        !
+        CALL DDASTP(tn,Y,Yprime,Neq,RES,JAC,h,Rwork(lwt),Info(1),Idid,Rpar,&
+          Ipar,Rwork(lphi),Rwork(LDELTA),Rwork(le),Rwork(lwm),&
+          Iwork(LIWM),Rwork(LALPHA),Rwork(LBETA),Rwork(LGAMMA),&
+          Rwork(LPSI),Rwork(LSIGMA),Rwork(LCJ),Rwork(LCJOLD),&
+          Rwork(LHOLD),Rwork(LS),hmin,Rwork(LROUND),Iwork(LPHASE),&
+          Iwork(LJCALC),Iwork(LK),Iwork(LKOLD),Iwork(LNS),Info(10)&
+          ,ntemp)
+        !     MULTIPLY RTOL AND ATOL BY R AND RETURN
+      ELSEIF ( Info(2)==1 ) THEN
+        DO i = 1, Neq
+          Rtol(i) = r*Rtol(i)
+          Atol(i) = r*Atol(i)
+        ENDDO
+        Idid = -2
+      ELSE
+        Rtol(1) = r*Rtol(1)
+        Atol(1) = r*Atol(1)
+        Idid = -2
+      ENDIF
     ELSE
-      Rtol(1) = r*Rtol(1)
-      Atol(1) = r*Atol(1)
-      Idid = -2
+      Idid = -1
+    ENDIF
+  ENDIF
+  200 CONTINUE
+  IF ( Idid<0 ) THEN
+    !
+    !-----------------------------------------------------------------------
+    !     THIS BLOCK HANDLES ALL UNSUCCESSFUL
+    !     RETURNS OTHER THAN FOR ILLEGAL INPUT.
+    !-----------------------------------------------------------------------
+    !
+    itemp = -Idid
+    SELECT CASE (itemp)
+      CASE (2)
+        !
+        !     TOO MUCH ACCURACY FOR MACHINE PRECISION
+        WRITE (xern3,'(1P,D15.6)') tn
+        CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//&
+          ' TOO MUCH ACCURACY REQUESTED FOR '//&
+          'PRECISION OF MACHINE. RTOL AND ATOL WERE INCREASED TO '//&
+          'APPROPRIATE VALUES',Idid,1)
+      CASE (3)
+        !
+        !     WT(I) .LE. 0.0 FOR SOME I (NOT AT START OF PROBLEM)
+        WRITE (xern3,'(1P,D15.6)') tn
+        CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//&
+          ' SOME ELEMENT OF WT HAS BECOME .LE. '//'0.0',Idid,1)
+      CASE (4,5)
+      CASE (6)
+        !
+        !     ERROR TEST FAILED REPEATEDLY OR WITH H=HMIN
+        WRITE (xern3,'(1P,D15.6)') tn
+        WRITE (xern4,'(1P,D15.6)') h
+        CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
+          xern4//&
+          ' THE ERROR TEST FAILED REPEATEDLY OR WITH ABS(H)=HMIN',&
+          Idid,1)
+      CASE (7)
+        !
+        !     CORRECTOR CONVERGENCE FAILED REPEATEDLY OR WITH H=HMIN
+        WRITE (xern3,'(1P,D15.6)') tn
+        WRITE (xern4,'(1P,D15.6)') h
+        CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
+          xern4//&
+          ' THE CORRECTOR FAILED TO CONVERGE REPEATEDLY OR WITH '//&
+          'ABS(H)=HMIN',Idid,1)
+      CASE (8)
+        !
+        !     THE ITERATION MATRIX IS SINGULAR
+        WRITE (xern3,'(1P,D15.6)') tn
+        WRITE (xern4,'(1P,D15.6)') h
+        CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
+          xern4//' THE ITERATION MATRIX IS SINGULAR',Idid,1)
+      CASE (9)
+        !
+        !     CORRECTOR FAILURE PRECEDED BY ERROR TEST FAILURES.
+        WRITE (xern3,'(1P,D15.6)') tn
+        WRITE (xern4,'(1P,D15.6)') h
+        CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
+          xern4//&
+          ' THE CORRECTOR COULD NOT CONVERGE.  ALSO, THE ERROR TEST '&
+          //'FAILED REPEATEDLY.',Idid,1)
+      CASE (10)
+        !
+        !     CORRECTOR FAILURE BECAUSE IRES = -1
+        WRITE (xern3,'(1P,D15.6)') tn
+        WRITE (xern4,'(1P,D15.6)') h
+        CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
+          xern4//&
+          ' THE CORRECTOR COULD NOT CONVERGE BECAUSE IRES WAS EQUAL '&
+          //'TO MINUS ONE',Idid,1)
+      CASE (11)
+        !
+        !     FAILURE BECAUSE IRES = -2
+        WRITE (xern3,'(1P,D15.6)') tn
+        WRITE (xern4,'(1P,D15.6)') h
+        CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
+          xern4//' IRES WAS EQUAL TO MINUS TWO',Idid,1)
+      CASE (12)
+        !
+        !     FAILED TO COMPUTE INITIAL YPRIME
+        WRITE (xern3,'(1P,D15.6)') tn
+        WRITE (xern4,'(1P,D15.6)') ho
+        CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
+          xern4//' THE INITIAL YPRIME COULD NOT BE COMPUTED',Idid,1)
+      CASE DEFAULT
+        !
+        !     THE MAXIMUM NUMBER OF STEPS WAS TAKEN BEFORE
+        !     REACHING TOUT
+        WRITE (xern3,'(1P,D15.6)') tn
+        CALL XERMSG('SLATEC','DDASSL','AT CURRENT T = '//xern3//&
+          ' 500 STEPS TAKEN ON THIS '//'CALL BEFORE REACHING TOUT',&
+          Idid,1)
+    END SELECT
+    !
+    Info(1) = -1
+    T = tn
+    Rwork(LTN) = tn
+    Rwork(LH) = h
+    RETURN
+    !
+    !--------------------------------------------------------
+    !     THIS BLOCK HANDLES THE CASE OF A SUCCESSFUL RETURN
+    !     FROM DDASTP (IDID=1).  TEST FOR STOP CONDITIONS.
+    !--------------------------------------------------------
+    !
+  ELSEIF ( Info(4)/=0 ) THEN
+    IF ( Info(3)/=0 ) THEN
+      IF ( (tn-Tout)*h>=0.0D0 ) THEN
+        CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
+          Rwork(LPSI))
+        T = Tout
+        Idid = 3
+      ELSEIF ( ABS(tn-tstop)<=100.0D0*uround*(ABS(tn)+ABS(h)) ) THEN
+        CALL DDATRP(tn,tstop,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
+          Rwork(LPSI))
+        Idid = 2
+        T = tstop
+      ELSE
+        T = tn
+        Idid = 1
+      ENDIF
+    ELSEIF ( (tn-Tout)*h<0.0D0 ) THEN
+      IF ( ABS(tn-tstop)<=100.0D0*uround*(ABS(tn)+ABS(h)) ) THEN
+        CALL DDATRP(tn,tstop,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
+          Rwork(LPSI))
+        Idid = 2
+        T = tstop
+      ELSE
+        tnext = tn + h
+        IF ( (tnext-tstop)*h>0.0D0 ) h = tstop - tn
+        GOTO 100
+      ENDIF
+    ELSE
+      CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
+      T = Tout
+      Idid = 3
+    ENDIF
+  ELSEIF ( Info(3)/=0 ) THEN
+    IF ( (tn-Tout)*h>=0.0D0 ) THEN
+      CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
+      Idid = 3
+      T = Tout
+    ELSE
+      T = tn
+      Idid = 1
     ENDIF
   ELSE
-    Idid = -1
-  ENDIF
-ENDIF
-200  IF ( Idid<0 ) THEN
-!
-!-----------------------------------------------------------------------
-!     THIS BLOCK HANDLES ALL UNSUCCESSFUL
-!     RETURNS OTHER THAN FOR ILLEGAL INPUT.
-!-----------------------------------------------------------------------
-!
-itemp = -Idid
-SELECT CASE (itemp)
-  CASE (2)
-    !
-    !     TOO MUCH ACCURACY FOR MACHINE PRECISION
-    WRITE (xern3,'(1P,D15.6)') tn
-    CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//&
-      ' TOO MUCH ACCURACY REQUESTED FOR '//&
-      'PRECISION OF MACHINE. RTOL AND ATOL WERE INCREASED TO '//&
-      'APPROPRIATE VALUES',Idid,1)
-  CASE (3)
-    !
-    !     WT(I) .LE. 0.0 FOR SOME I (NOT AT START OF PROBLEM)
-    WRITE (xern3,'(1P,D15.6)') tn
-    CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//&
-      ' SOME ELEMENT OF WT HAS BECOME .LE. '//'0.0',Idid,1)
-  CASE (4,5)
-  CASE (6)
-    !
-    !     ERROR TEST FAILED REPEATEDLY OR WITH H=HMIN
-    WRITE (xern3,'(1P,D15.6)') tn
-    WRITE (xern4,'(1P,D15.6)') h
-    CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
-      xern4//&
-      ' THE ERROR TEST FAILED REPEATEDLY OR WITH ABS(H)=HMIN',&
-      Idid,1)
-  CASE (7)
-    !
-    !     CORRECTOR CONVERGENCE FAILED REPEATEDLY OR WITH H=HMIN
-    WRITE (xern3,'(1P,D15.6)') tn
-    WRITE (xern4,'(1P,D15.6)') h
-    CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
-      xern4//&
-      ' THE CORRECTOR FAILED TO CONVERGE REPEATEDLY OR WITH '//&
-      'ABS(H)=HMIN',Idid,1)
-  CASE (8)
-    !
-    !     THE ITERATION MATRIX IS SINGULAR
-    WRITE (xern3,'(1P,D15.6)') tn
-    WRITE (xern4,'(1P,D15.6)') h
-    CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
-      xern4//' THE ITERATION MATRIX IS SINGULAR',Idid,1)
-  CASE (9)
-    !
-    !     CORRECTOR FAILURE PRECEDED BY ERROR TEST FAILURES.
-    WRITE (xern3,'(1P,D15.6)') tn
-    WRITE (xern4,'(1P,D15.6)') h
-    CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
-      xern4//&
-      ' THE CORRECTOR COULD NOT CONVERGE.  ALSO, THE ERROR TEST '&
-      //'FAILED REPEATEDLY.',Idid,1)
-  CASE (10)
-    !
-    !     CORRECTOR FAILURE BECAUSE IRES = -1
-    WRITE (xern3,'(1P,D15.6)') tn
-    WRITE (xern4,'(1P,D15.6)') h
-    CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
-      xern4//&
-      ' THE CORRECTOR COULD NOT CONVERGE BECAUSE IRES WAS EQUAL '&
-      //'TO MINUS ONE',Idid,1)
-  CASE (11)
-    !
-    !     FAILURE BECAUSE IRES = -2
-    WRITE (xern3,'(1P,D15.6)') tn
-    WRITE (xern4,'(1P,D15.6)') h
-    CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
-      xern4//' IRES WAS EQUAL TO MINUS TWO',Idid,1)
-  CASE (12)
-    !
-    !     FAILED TO COMPUTE INITIAL YPRIME
-    WRITE (xern3,'(1P,D15.6)') tn
-    WRITE (xern4,'(1P,D15.6)') ho
-    CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
-      xern4//' THE INITIAL YPRIME COULD NOT BE COMPUTED',Idid,1)
-  CASE DEFAULT
-    !
-    !     THE MAXIMUM NUMBER OF STEPS WAS TAKEN BEFORE
-    !     REACHING TOUT
-    WRITE (xern3,'(1P,D15.6)') tn
-    CALL XERMSG('SLATEC','DDASSL','AT CURRENT T = '//xern3//&
-      ' 500 STEPS TAKEN ON THIS '//'CALL BEFORE REACHING TOUT',&
-      Idid,1)
-END SELECT
-!
-Info(1) = -1
-T = tn
-Rwork(LTN) = tn
-Rwork(LH) = h
-RETURN
-!
-!--------------------------------------------------------
-!     THIS BLOCK HANDLES THE CASE OF A SUCCESSFUL RETURN
-!     FROM DDASTP (IDID=1).  TEST FOR STOP CONDITIONS.
-!--------------------------------------------------------
-!
-ELSEIF ( Info(4)/=0 ) THEN
-IF ( Info(3)/=0 ) THEN
-  IF ( (tn-Tout)*h>=0.0D0 ) THEN
-    CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
-      Rwork(LPSI))
-    T = Tout
+    IF ( (tn-Tout)*h<0.0D0 ) GOTO 100
+    CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
     Idid = 3
-  ELSEIF ( ABS(tn-tstop)<=100.0D0*uround*(ABS(tn)+ABS(h)) ) THEN
-    CALL DDATRP(tn,tstop,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
-      Rwork(LPSI))
-    Idid = 2
-    T = tstop
-  ELSE
-    T = tn
-    Idid = 1
+    T = Tout
   ENDIF
-ELSEIF ( (tn-Tout)*h<0.0D0 ) THEN
-  IF ( ABS(tn-tstop)<=100.0D0*uround*(ABS(tn)+ABS(h)) ) THEN
-    CALL DDATRP(tn,tstop,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
-      Rwork(LPSI))
-    Idid = 2
-    T = tstop
-  ELSE
-    tnext = tn + h
-    IF ( (tnext-tstop)*h>0.0D0 ) h = tstop - tn
-    GOTO 100
-  ENDIF
-ELSE
-  CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
-  T = Tout
-  Idid = 3
-ENDIF
-ELSEIF ( Info(3)/=0 ) THEN
-IF ( (tn-Tout)*h>=0.0D0 ) THEN
-  CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
-  Idid = 3
-  T = Tout
-ELSE
-  T = tn
-  Idid = 1
-ENDIF
-ELSE
-IF ( (tn-Tout)*h<0.0D0 ) GOTO 100
-CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
-Idid = 3
-T = Tout
-ENDIF
-!
-!--------------------------------------------------------
-!     ALL SUCCESSFUL RETURNS FROM DDASSL ARE MADE FROM
-!     THIS BLOCK.
-!--------------------------------------------------------
-!
-300  Rwork(LTN) = tn
-Rwork(LH) = h
-RETURN
-!
-!-----------------------------------------------------------------------
-!     THIS BLOCK HANDLES ALL ERROR RETURNS DUE
-!     TO ILLEGAL INPUT, AS DETECTED BEFORE CALLING
-!     DDASTP. FIRST THE ERROR MESSAGE ROUTINE IS
-!     CALLED. IF THIS HAPPENS TWICE IN
-!     SUCCESSION, EXECUTION IS TERMINATED
-!
-!-----------------------------------------------------------------------
-400  CALL XERMSG('SLATEC','DDASSL',&
-'SOME ELEMENT OF INFO VECTOR IS NOT ZERO OR ONE',1,1)
-GOTO 1200
-!
-500  CALL XERMSG('SLATEC','DDASSL','SOME ELEMENT OF RTOL IS .LT. 0',6,1)
-GOTO 1200
-!
-600  CALL XERMSG('SLATEC','DDASSL','SOME ELEMENT OF ATOL IS .LT. 0',7,1)
-GOTO 1200
-!
-700  WRITE (xern3,'(1P,D15.6)') tstop
-WRITE (xern4,'(1P,D15.6)') Tout
-CALL XERMSG('SLATEC','DDASSL','INFO(4) = 1 AND TSTOP = '//xern3//&
-' BEHIND TOUT = '//xern4,9,1)
-GOTO 1200
-!
-800  WRITE (xern3,'(1P,D15.6)') Tout
-WRITE (xern4,'(1P,D15.6)') T
-CALL XERMSG('SLATEC','DDASSL','TOUT = '//xern3//' BEHIND T = '//xern4,11,&
-1)
-GOTO 1200
-!
-900  CALL XERMSG('SLATEC','DDASSL','SOME ELEMENT OF WT IS .LE. 0.0',13,1)
-GOTO 1200
-!
-1000 WRITE (xern3,'(1P,D15.6)') tstop
-WRITE (xern4,'(1P,D15.6)') T
-CALL XERMSG('SLATEC','DDASSL','INFO(4)=1 AND TSTOP = '//xern3//&
-' BEHIND T = '//xern4,15,1)
-GOTO 1200
-!
-1100 WRITE (xern3,'(1P,D15.6)') Tout
-CALL XERMSG('SLATEC','DDASSL','TOUT = T = '//xern3,19,1)
-!
-1200 Idid = -33
-IF ( Info(1)==-1 ) CALL XERMSG('SLATEC','DDASSL',&
-'REPEATED OCCURRENCES OF ILLEGAL INPUT$$'//&
-'RUN TERMINATED. APPARENT INFINITE LOOP',&
--999,2)
-!
-Info(1) = -1
-!-----------END OF SUBROUTINE DDASSL------------------------------------
+  !
+  !--------------------------------------------------------
+  !     ALL SUCCESSFUL RETURNS FROM DDASSL ARE MADE FROM
+  !     THIS BLOCK.
+  !--------------------------------------------------------
+  !
+  300  Rwork(LTN) = tn
+  Rwork(LH) = h
+  RETURN
+  !
+  !-----------------------------------------------------------------------
+  !     THIS BLOCK HANDLES ALL ERROR RETURNS DUE
+  !     TO ILLEGAL INPUT, AS DETECTED BEFORE CALLING
+  !     DDASTP. FIRST THE ERROR MESSAGE ROUTINE IS
+  !     CALLED. IF THIS HAPPENS TWICE IN
+  !     SUCCESSION, EXECUTION IS TERMINATED
+  !
+  !-----------------------------------------------------------------------
+  400  CALL XERMSG('SLATEC','DDASSL',&
+    'SOME ELEMENT OF INFO VECTOR IS NOT ZERO OR ONE',1,1)
+  GOTO 1200
+  !
+  500  CALL XERMSG('SLATEC','DDASSL','SOME ELEMENT OF RTOL IS .LT. 0',6,1)
+  GOTO 1200
+  !
+  600  CALL XERMSG('SLATEC','DDASSL','SOME ELEMENT OF ATOL IS .LT. 0',7,1)
+  GOTO 1200
+  !
+  700  WRITE (xern3,'(1P,D15.6)') tstop
+  WRITE (xern4,'(1P,D15.6)') Tout
+  CALL XERMSG('SLATEC','DDASSL','INFO(4) = 1 AND TSTOP = '//xern3//&
+    ' BEHIND TOUT = '//xern4,9,1)
+  GOTO 1200
+  !
+  800  WRITE (xern3,'(1P,D15.6)') Tout
+  WRITE (xern4,'(1P,D15.6)') T
+  CALL XERMSG('SLATEC','DDASSL','TOUT = '//xern3//' BEHIND T = '//xern4,11,&
+    1)
+  GOTO 1200
+  !
+  900  CALL XERMSG('SLATEC','DDASSL','SOME ELEMENT OF WT IS .LE. 0.0',13,1)
+  GOTO 1200
+  !
+  1000 WRITE (xern3,'(1P,D15.6)') tstop
+  WRITE (xern4,'(1P,D15.6)') T
+  CALL XERMSG('SLATEC','DDASSL','INFO(4)=1 AND TSTOP = '//xern3//&
+    ' BEHIND T = '//xern4,15,1)
+  GOTO 1200
+  !
+  1100 WRITE (xern3,'(1P,D15.6)') Tout
+  CALL XERMSG('SLATEC','DDASSL','TOUT = T = '//xern3,19,1)
+  !
+  1200 Idid = -33
+  IF ( Info(1)==-1 ) CALL XERMSG('SLATEC','DDASSL',&
+    'REPEATED OCCURRENCES OF ILLEGAL INPUT$$'//&
+    'RUN TERMINATED. APPARENT INFINITE LOOP',&
+    -999,2)
+  !
+  Info(1) = -1
+  !-----------END OF SUBROUTINE DDASSL------------------------------------
 END SUBROUTINE DDASSL

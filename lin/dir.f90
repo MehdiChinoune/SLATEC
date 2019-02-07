@@ -258,20 +258,20 @@ SUBROUTINE DIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !***END PROLOGUE  DIR
   !     .. Scalar Arguments ..
-  REAL(8) :: Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
+  REAL(8) :: Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , B(N) , Dz(N) , R(N) , Rwork(*) , X(N) , Z(N)
-  INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
+  REAL(8) :: A(Nelt), B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC , MSOLVE
+  EXTERNAL MATVEC, MSOLVE
   !     .. Local Scalars ..
-  REAL(8) :: bnrm , solnrm , tolmin
-  INTEGER i , k
+  REAL(8) :: bnrm, solnrm, tolmin
+  INTEGER i, k
   !     .. External Functions ..
   REAL(8) :: D1MACH
   INTEGER ISDIR
-  EXTERNAL D1MACH , ISDIR
+  EXTERNAL D1MACH, ISDIR
   !***FIRST EXECUTABLE STATEMENT  DIR
   !
   !         Check some of the input data.
@@ -291,7 +291,7 @@ SUBROUTINE DIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !         Calculate initial residual and pseudo-residual, and check
   !         stopping criterion.
   CALL MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
-  DO i = 1 , N
+  DO i = 1, N
     R(i) = B(i) - R(i)
   ENDDO
   CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
@@ -302,16 +302,16 @@ SUBROUTINE DIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     !
     !         ***** iteration loop *****
     !
-    DO k = 1 , Itmax
+    DO k = 1, Itmax
       Iter = k
       !
       !         Calculate new iterate x, new residual r, and new
       !         pseudo-residual z.
-      DO i = 1 , N
+      DO i = 1, N
         X(i) = X(i) + Z(i)
       ENDDO
       CALL MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
-      DO i = 1 , N
+      DO i = 1, N
         R(i) = B(i) - R(i)
       ENDDO
       CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
@@ -329,4 +329,5 @@ SUBROUTINE DIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   ENDIF
   !
   !------------- LAST LINE OF DIR FOLLOWS -------------------------------
-  99999 END SUBROUTINE DIR
+  99999 CONTINUE
+  END SUBROUTINE DIR

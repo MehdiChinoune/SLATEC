@@ -4,9 +4,9 @@ FUNCTION ERFC(X)
   IMPLICIT NONE
   !*--ERFC5
   !*** Start of declarations inserted by SPAG
-  REAL CSEVL , erc2cs , ERFC , erfccs , erfcs , eta , R1MACH , sqeps , &
-    sqrtpi , txmax , X , xmax , xsml , y
-  INTEGER INITS , nterc2 , nterf , nterfc
+  REAL CSEVL, erc2cs, ERFC, erfccs, erfcs, eta, R1MACH, sqeps, &
+    sqrtpi, txmax, X, xmax, xsml, y
+  INTEGER INITS, nterc2, nterf, nterfc
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ERFC
   !***PURPOSE  Compute the complementary error function.
@@ -49,10 +49,10 @@ FUNCTION ERFC(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  ERFC
-  DIMENSION erfcs(13) , erfccs(24) , erc2cs(23)
+  DIMENSION erfcs(13), erfccs(24), erc2cs(23)
   LOGICAL first
-  SAVE erfcs , erc2cs , erfccs , sqrtpi , nterf , nterfc , nterc2 , xsml , &
-    xmax , sqeps , first
+  SAVE erfcs, erc2cs, erfccs, sqrtpi, nterf, nterfc, nterc2, xsml, &
+    xmax, sqeps, first
   DATA erfcs(1)/ - .049046121234691808E0/
   DATA erfcs(2)/ - .14226120510371364E0/
   DATA erfcs(3)/.010035582187599796E0/
@@ -161,4 +161,5 @@ FUNCTION ERFC(X)
   IF ( X<0. ) ERFC = 2.0 - ERFC
   RETURN
   !
-  99999 END FUNCTION ERFC
+  99999 CONTINUE
+  END FUNCTION ERFC

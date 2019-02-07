@@ -30,46 +30,46 @@ SUBROUTINE CBLAT2(Nout,Kprint,Ipass)
   !     .. Parameters ..
   INTEGER NSUBS
   PARAMETER (NSUBS=17)
-  COMPLEX ZERO , ONE
+  COMPLEX ZERO, ONE
   PARAMETER (ZERO=(0.0,0.0),ONE=(1.0,0.0))
   REAL RZERO
   PARAMETER (RZERO=0.0)
-  INTEGER NMAX , INCMAX
+  INTEGER NMAX, INCMAX
   PARAMETER (NMAX=65,INCMAX=2)
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint
+  INTEGER Ipass, Kprint
   !     .. Local Scalars ..
-  REAL eps , err , thresh
-  INTEGER i , isnum , j , n , NALF , NBET , NIDIM , NINC , NKB , Nout
+  REAL eps, err, thresh
+  INTEGER i, isnum, j, n, NALF, NBET, NIDIM, NINC, NKB, Nout
   PARAMETER (NIDIM=6,NKB=4,NINC=4,NALF=3,NBET=3)
-  LOGICAL same , tsterr , ftl , ftl1 , ftl2
+  LOGICAL same, tsterr, ftl, ftl1, ftl2
   CHARACTER :: trans
   !     .. Local Arrays ..
-  COMPLEX a(NMAX,NMAX) , aa(NMAX*NMAX) , alf(NALF) , as(NMAX*NMAX) ,&
-    bet(NBET) , x(NMAX) , xs(NMAX*INCMAX) , xx(NMAX*INCMAX) , y(NMAX)&
-    , ys(NMAX*INCMAX) , yt(NMAX) , yy(NMAX*INCMAX) , z(2*NMAX)
+  COMPLEX a(NMAX,NMAX), aa(NMAX*NMAX), alf(NALF), as(NMAX*NMAX) ,&
+    bet(NBET), x(NMAX), xs(NMAX*INCMAX), xx(NMAX*INCMAX), y(NMAX)&
+    , ys(NMAX*INCMAX), yt(NMAX), yy(NMAX*INCMAX), z(2*NMAX)
   REAL g(NMAX)
-  INTEGER idim(NIDIM) , inc(NINC) , kb(NKB)
+  INTEGER idim(NIDIM), inc(NINC), kb(NKB)
   LOGICAL ltest(NSUBS)
   CHARACTER(6) :: snames(NSUBS)
   !     .. External Functions ..
   REAL R1MACH
   LOGICAL LCE
-  EXTERNAL LCE , R1MACH
+  EXTERNAL LCE, R1MACH
   !     .. External Subroutines ..
-  EXTERNAL CCHK12 , CCHK22 , CCHK32 , CCHK42 , CCHK52 , CCHK62 , CCHKE2 ,&
+  EXTERNAL CCHK12, CCHK22, CCHK32, CCHK42, CCHK52, CCHK62, CCHKE2 ,&
     CMVCH
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MAX , MIN
+  INTRINSIC ABS, MAX, MIN
   !     .. Data statements ..
-  DATA snames/'CGEMV ' , 'CGBMV ' , 'CHEMV ' , 'CHBMV ' , 'CHPMV ' ,&
-    'CTRMV ' , 'CTBMV ' , 'CTPMV ' , 'CTRSV ' , 'CTBSV ' , 'CTPSV ' ,&
-    'CGERC ' , 'CGERU ' , 'CHER  ' , 'CHPR  ' , 'CHER2 ' , 'CHPR2 '/
-  DATA idim/0 , 1 , 2 , 3 , 5 , 9/
-  DATA kb/0 , 1 , 2 , 4/
-  DATA inc/1 , 2 , -1 , -2/
-  DATA alf/(0.0,0.0) , (1.0,0.0) , (0.7,-0.9)/
-  DATA bet/(0.0,0.0) , (1.0,0.0) , (1.3,-1.1)/
+  DATA snames/'CGEMV ', 'CGBMV ', 'CHEMV ', 'CHBMV ', 'CHPMV ' ,&
+    'CTRMV ', 'CTBMV ', 'CTPMV ', 'CTRSV ', 'CTBSV ', 'CTPSV ' ,&
+    'CGERC ', 'CGERU ', 'CHER  ', 'CHPR  ', 'CHER2 ', 'CHPR2 '/
+  DATA idim/0, 1, 2, 3, 5, 9/
+  DATA kb/0, 1, 2, 4/
+  DATA inc/1, 2, -1, -2/
+  DATA alf/(0.0,0.0), (1.0,0.0), (0.7,-0.9)/
+  DATA bet/(0.0,0.0), (1.0,0.0), (1.3,-1.1)/
   !***FIRST EXECUTABLE STATEMENT  CBLAT2
   !
   !     Set the flag that indicates whether error exits are to be tested.
@@ -97,7 +97,7 @@ SUBROUTINE CBLAT2(Nout,Kprint,Ipass)
   !     Set names of subroutines and flags which indicate
   !     whether they are to be tested.
   !
-  DO i = 1 , NSUBS
+  DO i = 1, NSUBS
     ltest(i) = .TRUE.
   ENDDO
   !
@@ -108,14 +108,14 @@ SUBROUTINE CBLAT2(Nout,Kprint,Ipass)
   !     Check the reliability of CMVCH using exact data.
   !
   n = MIN(32,NMAX)
-  DO j = 1 , n
-    DO i = 1 , n
+  DO j = 1, n
+    DO i = 1, n
       a(i,j) = MAX(i-j+1,0)
     ENDDO
     x(j) = j
     y(j) = ZERO
   ENDDO
-  DO j = 1 , n
+  DO j = 1, n
     yy(j) = j*((j+1)*j)/2 - ((j+1)*j*(j-1))/3
   ENDDO
   !     YY holds the exact result. On exit from CMVCH YT holds
@@ -127,7 +127,7 @@ SUBROUTINE CBLAT2(Nout,Kprint,Ipass)
   same = LCE(yy,yt,n)
   IF ( .NOT.same.OR.err/=RZERO ) THEN
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Nout,FMT=99008) trans , same , err
+    IF ( Kprint>=2 ) WRITE (Nout,FMT=99008) trans, same, err
   ENDIF
   trans = 'T'
   ftl = .FALSE.
@@ -136,12 +136,12 @@ SUBROUTINE CBLAT2(Nout,Kprint,Ipass)
   same = LCE(yy,yt,n)
   IF ( .NOT.same.OR.err/=RZERO ) THEN
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Nout,FMT=99008) trans , same , err
+    IF ( Kprint>=2 ) WRITE (Nout,FMT=99008) trans, same, err
   ENDIF
   !
   !     Test each subroutine in turn.
   !
-  DO isnum = 1 , NSUBS
+  DO isnum = 1, NSUBS
     IF ( .NOT.ltest(isnum) ) THEN
       !           Subprogram is not to be tested.
       WRITE (Nout,FMT=99009) snames(isnum)

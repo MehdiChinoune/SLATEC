@@ -77,23 +77,23 @@ SUBROUTINE REDUC2(Nm,N,A,B,Dl,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  REDUC2
   !
-  INTEGER i , j , k , N , i1 , j1 , Nm , nn , Ierr
-  REAL A(Nm,*) , B(Nm,*) , Dl(*)
-  REAL x , y
+  INTEGER i, j, k, N, i1, j1, Nm, nn, Ierr
+  REAL A(Nm,*), B(Nm,*), Dl(*)
+  REAL x, y
   !
   !***FIRST EXECUTABLE STATEMENT  REDUC2
   Ierr = 0
   nn = ABS(N)
   IF ( N>=0 ) THEN
     !     .......... FORM L IN THE ARRAYS B AND DL ..........
-    DO i = 1 , N
+    DO i = 1, N
       i1 = i - 1
       !
-      DO j = i , N
+      DO j = i, N
         x = B(i,j)
         IF ( i/=1 ) THEN
           !
-          DO k = 1 , i1
+          DO k = 1, i1
             x = x - B(i,k)*B(j,k)
           ENDDO
         ENDIF
@@ -110,22 +110,22 @@ SUBROUTINE REDUC2(Nm,N,A,B,Dl,Ierr)
   ENDIF
   !     .......... FORM THE LOWER TRIANGLE OF A*L
   !                IN THE LOWER TRIANGLE OF THE ARRAY A ..........
-  DO i = 1 , nn
+  DO i = 1, nn
     i1 = i + 1
     !
-    DO j = 1 , i
+    DO j = 1, i
       x = A(j,i)*Dl(j)
       IF ( j/=i ) THEN
         j1 = j + 1
         !
-        DO k = j1 , i
+        DO k = j1, i
           x = x + A(k,i)*B(k,j)
         ENDDO
       ENDIF
       !
       IF ( i/=nn ) THEN
         !
-        DO k = i1 , nn
+        DO k = i1, nn
           x = x + A(i,k)*B(k,j)
         ENDDO
       ENDIF
@@ -134,15 +134,15 @@ SUBROUTINE REDUC2(Nm,N,A,B,Dl,Ierr)
     ENDDO
   ENDDO
   !     .......... PRE-MULTIPLY BY TRANSPOSE(L) AND OVERWRITE ..........
-  DO i = 1 , nn
+  DO i = 1, nn
     i1 = i + 1
     y = Dl(i)
     !
-    DO j = 1 , i
+    DO j = 1, i
       x = y*A(i,j)
       IF ( i/=nn ) THEN
         !
-        DO k = i1 , nn
+        DO k = i1, nn
           x = x + A(k,j)*B(k,i)
         ENDDO
       ENDIF
@@ -154,4 +154,5 @@ SUBROUTINE REDUC2(Nm,N,A,B,Dl,Ierr)
   GOTO 99999
   !     .......... SET ERROR -- B IS NOT POSITIVE DEFINITE ..........
   100  Ierr = 7*N + 1
-  99999 END SUBROUTINE REDUC2
+  99999 CONTINUE
+  END SUBROUTINE REDUC2

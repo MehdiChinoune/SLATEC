@@ -35,11 +35,11 @@ SUBROUTINE DGAMLM(Xmin,Xmax)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DGAMLM
-  REAL(8) :: Xmin , Xmax , alnbig , alnsml , xln , xold , D1MACH
+  REAL(8) :: Xmin, Xmax, alnbig, alnsml, xln, xold, D1MACH
   !***FIRST EXECUTABLE STATEMENT  DGAMLM
   alnsml = LOG(D1MACH(1))
   Xmin = -alnsml
-  DO i = 1 , 10
+  DO i = 1, 10
     xold = Xmin
     xln = LOG(Xmin)
     Xmin = Xmin - Xmin*((Xmin+0.5D0)*xln-Xmin-0.2258D0+alnsml)&
@@ -52,7 +52,7 @@ SUBROUTINE DGAMLM(Xmin,Xmax)
   !
   alnbig = LOG(D1MACH(2))
   Xmax = alnbig
-  DO i = 1 , 10
+  DO i = 1, 10
     xold = Xmax
     xln = LOG(Xmax)
     Xmax = Xmax - Xmax*((Xmax-0.5D0)*xln-Xmax+0.9189D0-alnbig)&

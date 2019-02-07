@@ -4,10 +4,10 @@ SUBROUTINE QXCYL(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--QXCYL5
   !*** Start of declarations inserted by SPAG
-  REAL a , b , bda , bdb , bdc , bdd , c , d , elmbda , ermax , err , f , &
-    pertrb , r , w , x , z
-  INTEGER i , idimf , ierror , Ipass , j , Kprint , Lun , m , mbdcnd , mp1 , &
-    n , nbdcnd , np1
+  REAL a, b, bda, bdb, bdc, bdd, c, d, elmbda, ermax, err, f, &
+    pertrb, r, w, x, z
+  INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
+    n, nbdcnd, np1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QXCYL
   !***PURPOSE
@@ -25,7 +25,7 @@ SUBROUTINE QXCYL(Lun,Kprint,Ipass)
   !     *                                                               *
   !     *      SEPARABLE ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS        *
   !     *                                                               *
-  !     *                  (VERSION  3 , JUNE 1979)                     *
+  !     *                  (VERSION  3, JUNE 1979)                     *
   !     *                                                               *
   !     *                             BY                                *
   !     *                                                               *
@@ -76,8 +76,8 @@ SUBROUTINE QXCYL(Lun,Kprint,Ipass)
   !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
   !   930415  Test modified to use a 64 by 128 grid.  (WRB)
   !***END PROLOGUE  QXCYL
-  DIMENSION f(65,129) , bda(129) , bdb(129) , bdc(65) , bdd(65) , w(1400) , &
-    r(65) , z(129)
+  DIMENSION f(65,129), bda(129), bdb(129), bdc(65), bdd(65), w(1400), &
+    r(65), z(129)
   !***FIRST EXECUTABLE STATEMENT  QXCYL
   IF ( Kprint>=2 ) WRITE (Lun,99001)
   !
@@ -105,19 +105,19 @@ SUBROUTINE QXCYL(Lun,Kprint,Ipass)
   !     GENERATE AND STORE GRID POINTS FOR THE PURPOSE OF COMPUTING
   !     BOUNDARY DATA AND THE RIGHT SIDE OF THE POISSON EQUATION.
   !
-  DO i = 1 , mp1
+  DO i = 1, mp1
     r(i) = (i-1)/64.0E0
   ENDDO
-  DO j = 1 , np1
+  DO j = 1, np1
     z(j) = (j-1)/128.0E0
   ENDDO
   !
   !     GENERATE BOUNDARY DATA.
   !
-  DO j = 1 , np1
+  DO j = 1, np1
     bdb(j) = 4.0*z(j)**4
   ENDDO
-  DO i = 1 , mp1
+  DO i = 1, mp1
     bdc(i) = 0.0
     bdd(i) = 4.0*r(i)**4
   ENDDO
@@ -126,8 +126,8 @@ SUBROUTINE QXCYL(Lun,Kprint,Ipass)
   !
   !     GENERATE RIGHT SIDE OF EQUATION.
   !
-  DO i = 1 , mp1
-    DO j = 1 , np1
+  DO i = 1, mp1
+    DO j = 1, np1
       f(i,j) = 4.0*r(i)**2*z(j)**2*(4.0*z(j)**2+3.0*r(i)**2)
     ENDDO
   ENDDO
@@ -139,20 +139,20 @@ SUBROUTINE QXCYL(Lun,Kprint,Ipass)
   !     U(R,Z) = (R*Z)**4 + ARBITRARY CONSTANT.
   !
   x = 0.0
-  DO i = 1 , mp1
-    DO j = 1 , np1
+  DO i = 1, mp1
+    DO j = 1, np1
       x = x + f(i,j) - (r(i)*z(j))**4
     ENDDO
   ENDDO
   x = x/(np1*mp1)
-  DO i = 1 , mp1
-    DO j = 1 , np1
+  DO i = 1, mp1
+    DO j = 1, np1
       f(i,j) = f(i,j) - x
     ENDDO
   ENDDO
   err = 0.0
-  DO i = 1 , mp1
-    DO j = 1 , np1
+  DO i = 1, mp1
+    DO j = 1, np1
       x = ABS(f(i,j)-(r(i)*z(j))**4)
       IF ( x>err ) err = x
     ENDDO
@@ -160,8 +160,8 @@ SUBROUTINE QXCYL(Lun,Kprint,Ipass)
   !
   Ipass = 1
   IF ( err>ermax ) Ipass = 0
-  IF ( Kprint>=3.OR.(Kprint>=2.AND.Ipass==0) ) WRITE (Lun,99002) ierror , &
-    pertrb , err , INT(w(1))
+  IF ( Kprint>=3.OR.(Kprint>=2.AND.Ipass==0) ) WRITE (Lun,99002) ierror, &
+    pertrb, err, INT(w(1))
   99002 FORMAT (10X,'THE OUTPUT FROM YOUR COMPUTER IS'//32X,'IERROR =',I2/32X,&
     'PERTRB =',E12.5/18X,'DISCRETIZATION ERROR =',1PE12.5/12X,&
     'REQUIRED LENGTH OF W ARRAY = ',I4)

@@ -138,7 +138,7 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                    Vector of dimension at least limit, the first K
   !                    elements of which contain pointers to the error
   !                    estimates over the subintervals, such that
-  !                    WORK(LIMIT*3+IWORK(1)),... , WORK(LIMIT*3+IWORK(K))
+  !                    WORK(LIMIT*3+IWORK(1)),..., WORK(LIMIT*3+IWORK(K))
   !                    form a decreasing sequence with K = LAST If
   !                    LAST.LE.(LIMIT/2+2), and K = LIMIT+1-LAST otherwise
   !
@@ -164,10 +164,10 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  QAG
-  REAL A , Abserr , B , Epsabs , Epsrel , F , Result , Work
-  INTEGER Ier , Iwork , Key , Lenw , Limit , lvl , l1 , l2 , l3 , Neval
+  REAL A, Abserr, B, Epsabs, Epsrel, F, Result, Work
+  INTEGER Ier, Iwork, Key, Lenw, Limit, lvl, l1, l2, l3, Neval
   !
-  DIMENSION Iwork(*) , Work(*)
+  DIMENSION Iwork(*), Work(*)
   !
   EXTERNAL F
   !***FIRST EXECUTABLE STATEMENT  QAG

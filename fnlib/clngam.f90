@@ -4,8 +4,8 @@ COMPLEX FUNCTION CLNGAM(Zin)
   IMPLICIT NONE
   !*--CLNGAM5
   !*** Start of declarations inserted by SPAG
-  REAL argsum , bound , cabsz , CARG , dxrel , pi , R1MACH , sq2pil , x , y
-  INTEGER i , n
+  REAL argsum, bound, cabsz, CARG, dxrel, pi, R1MACH, sq2pil, x, y
+  INTEGER i, n
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CLNGAM
   !***PURPOSE  Compute the logarithm of the absolute value of the Gamma
@@ -31,9 +31,9 @@ COMPLEX FUNCTION CLNGAM(Zin)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  CLNGAM
-  COMPLEX Zin , z , corr , CLNREL , C9LGMC
+  COMPLEX Zin, z, corr, CLNREL, C9LGMC
   LOGICAL first
-  SAVE pi , sq2pil , bound , dxrel , first
+  SAVE pi, sq2pil, bound, dxrel, first
   DATA pi/3.14159265358979324E0/
   DATA sq2pil/0.91893853320467274E0/
   DATA first/.TRUE./
@@ -68,7 +68,7 @@ COMPLEX FUNCTION CLNGAM(Zin)
         n = SQRT(bound**2-y**2) - x + 1.0
         argsum = 0.0
         corr = (1.0,0.0)
-        DO i = 1 , n
+        DO i = 1, n
           argsum = argsum + CARG(z)
           corr = z*corr
           z = 1.0 + z

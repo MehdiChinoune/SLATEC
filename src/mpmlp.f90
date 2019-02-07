@@ -4,7 +4,7 @@ SUBROUTINE MPMLP(U,V,W,J)
   IMPLICIT NONE
   !*--MPMLP5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , J
+  INTEGER i, J
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPMLP
   !***SUBSIDIARY
@@ -25,9 +25,9 @@ SUBROUTINE MPMLP(U,V,W,J)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  MPMLP
-  INTEGER U(*) , V(*) , W
+  INTEGER U(*), V(*), W
   !***FIRST EXECUTABLE STATEMENT  MPMLP
-  DO i = 1 , J
+  DO i = 1, J
     U(i) = U(i) + W*V(i)
   ENDDO
 END SUBROUTINE MPMLP

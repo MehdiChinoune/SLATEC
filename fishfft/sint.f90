@@ -4,8 +4,8 @@ SUBROUTINE SINT(N,X,Wsave)
   IMPLICIT NONE
   !*--SINT5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , k , kc , kw , modn , N , nf , np1 , ns2
-  REAL sqrt3 , t1 , t2 , Wsave , X , xh
+  INTEGER i, k, kc, kw, modn, N, nf, np1, ns2
+  REAL sqrt3, t1, t2, Wsave, X, xh
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SINT
   !***PURPOSE  Compute the sine transform of a real, odd sequence.
@@ -77,7 +77,7 @@ SUBROUTINE SINT(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SINT
-  DIMENSION X(*) , Wsave(*)
+  DIMENSION X(*), Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  SINT
   sqrt3 = SQRT(3.)
   IF ( N<2 ) THEN
@@ -93,7 +93,7 @@ SUBROUTINE SINT(N,X,Wsave)
     ns2 = N/2
     Wsave(1) = 0.
     kw = np1
-    DO k = 1 , ns2
+    DO k = 1, ns2
       kw = kw + 1
       kc = np1 - k
       t1 = X(k) - X(kc)
@@ -106,7 +106,7 @@ SUBROUTINE SINT(N,X,Wsave)
     nf = np1 + ns2 + 1
     CALL RFFTF(np1,Wsave,Wsave(nf))
     X(1) = .5*Wsave(1)
-    DO i = 3 , N , 2
+    DO i = 3, N, 2
       X(i-1) = -Wsave(i)
       X(i) = X(i-2) + Wsave(i-1)
     ENDDO

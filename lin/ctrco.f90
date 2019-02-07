@@ -37,7 +37,7 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
   !
   !        RCOND   REAL
   !                an estimate of the reciprocal condition of  T .
-  !                For the system  T*X = B , relative perturbations
+  !                For the system  T*X = B, relative perturbations
   !                in  T  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -66,13 +66,13 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CTRCO
-  INTEGER Ldt , N , Job
-  COMPLEX T(Ldt,*) , Z(*)
+  INTEGER Ldt, N, Job
+  COMPLEX T(Ldt,*), Z(*)
   REAL Rcond
   !
-  COMPLEX w , wk , wkm , ek
-  REAL tnorm , ynorm , s , sm , SCASUM
-  INTEGER i1 , j , j1 , j2 , k , kk , l
+  COMPLEX w, wk, wkm, ek
+  REAL tnorm, ynorm, s, sm, SCASUM
+  INTEGER i1, j, j1, j2, k, kk, l
   LOGICAL lower
   REAL, EXTERNAL :: CABS1
   COMPLEX, EXTERNAL :: CSIGN1
@@ -83,7 +83,7 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
   !     COMPUTE 1-NORM OF T
   !
   tnorm = 0.0E0
-  DO j = 1 , N
+  DO j = 1, N
     l = j
     IF ( lower ) l = N + 1 - j
     i1 = 1
@@ -101,10 +101,10 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
   !     SOLVE CTRANS(T)*Y = E
   !
   ek = (1.0E0,0.0E0)
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = (0.0E0,0.0E0)
   ENDDO
-  DO kk = 1 , N
+  DO kk = 1, N
     k = kk
     IF ( lower ) k = N + 1 - kk
     IF ( CABS1(Z(k))/=0.0E0 ) ek = CSIGN1(ek,-Z(k))
@@ -129,7 +129,7 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
       IF ( lower ) j1 = 1
       j2 = N
       IF ( lower ) j2 = k - 1
-      DO j = j1 , j2
+      DO j = j1, j2
         sm = sm + CABS1(Z(j)+wkm*CONJG(T(k,j)))
         Z(j) = Z(j) + wk*CONJG(T(k,j))
         s = s + CABS1(Z(j))
@@ -137,7 +137,7 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
       IF ( s<sm ) THEN
         w = wkm - wk
         wk = wkm
-        DO j = j1 , j2
+        DO j = j1, j2
           Z(j) = Z(j) + w*CONJG(T(k,j))
         ENDDO
       ENDIF
@@ -151,7 +151,7 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
   !
   !     SOLVE T*Z = Y
   !
-  DO kk = 1 , N
+  DO kk = 1, N
     k = N + 1 - kk
     IF ( lower ) k = kk
     IF ( CABS1(Z(k))>CABS1(T(k,k)) ) THEN

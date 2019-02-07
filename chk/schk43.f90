@@ -25,39 +25,39 @@ SUBROUTINE SCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  SCHK43
   !     .. Parameters ..
-  REAL ZERO , ONE
+  REAL ZERO, ONE
   PARAMETER (ZERO=0.0,ONE=1.0)
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  REAL Eps , Thresh
-  INTEGER Kprint , Nalf , Nbet , Nidim , Nmax , Nout
+  REAL Eps, Thresh
+  INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
   CHARACTER(6) :: Sname
   !     .. Array Arguments ..
-  REAL A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) , Bet(Nbet)&
-    , G(Nmax) , B(Nmax,Nmax) , Bb(Nmax*Nmax) , Bs(Nmax*Nmax) ,&
-    C(Nmax,Nmax) , Cc(Nmax*Nmax) , Cs(Nmax*Nmax) , Ct(Nmax)
+  REAL A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), Bet(Nbet)&
+    , G(Nmax), B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax) ,&
+    C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax)
   INTEGER Idim(Nidim)
   !     .. Local Scalars ..
-  REAL alpha , als , beta , bets , err , errmax
-  INTEGER i , ia , ib , ict , icu , ik , in , j , jc , jj , k , laa , lcc ,&
-    lda , ldas , ldc , ldcs , n , na , nargs , nc , nerr , ns , ks ,&
-    lj , ma
-  LOGICAL ftl , null , reset , tran , upper
-  CHARACTER :: uplo , uplos , trans , transs
+  REAL alpha, als, beta, bets, err, errmax
+  INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, k, laa, lcc ,&
+    lda, ldas, ldc, ldcs, n, na, nargs, nc, nerr, ns, ks ,&
+    lj, ma
+  LOGICAL ftl, null, reset, tran, upper
+  CHARACTER :: uplo, uplos, trans, transs
   CHARACTER(2) :: ichu
   CHARACTER(3) :: icht
   !     .. Local Arrays ..
   LOGICAL isame(13)
   !     .. External Functions ..
   INTEGER NUMXER
-  LOGICAL LSE , LSERES
-  EXTERNAL LSE , LSERES , NUMXER
+  LOGICAL LSE, LSERES
+  EXTERNAL LSE, LSERES, NUMXER
   !     .. External Subroutines ..
-  EXTERNAL SSYRK , SMAKE3 , SMMCH
+  EXTERNAL SSYRK, SMAKE3, SMMCH
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Data statements ..
-  DATA icht/'NTC'/ , ichu/'UL'/
+  DATA icht/'NTC'/, ichu/'UL'/
   !***FIRST EXECUTABLE STATEMENT  SCHK43
   nargs = 10
   !
@@ -66,7 +66,7 @@ SUBROUTINE SCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   errmax = ZERO
   !
   !
-  DO in = 1 , Nidim
+  DO in = 1, Nidim
     n = Idim(in)
     !        Set LDC to 1 more than minimum value if room.
     ldc = n
@@ -76,10 +76,10 @@ SUBROUTINE SCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
       lcc = ldc*n
       null = n<=0
       !
-      DO ik = 1 , Nidim
+      DO ik = 1, Nidim
         k = Idim(ik)
         !
-        DO ict = 1 , 3
+        DO ict = 1, 3
           trans = icht(ict:ict)
           tran = trans=='T' .OR. trans=='C'
           IF ( tran ) THEN
@@ -100,14 +100,14 @@ SUBROUTINE SCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
             !
             CALL SMAKE3('GE',' ',' ',ma,na,A,Nmax,Aa,lda,reset,ZERO)
             !
-            DO icu = 1 , 2
+            DO icu = 1, 2
               uplo = ichu(icu:icu)
               upper = uplo=='U'
               !
-              DO ia = 1 , Nalf
+              DO ia = 1, Nalf
                 alpha = Alf(ia)
                 !
-                DO ib = 1 , Nbet
+                DO ib = 1, Nbet
                   beta = Bet(ib)
                   !
                   !                       Generate the matrix C.
@@ -123,12 +123,12 @@ SUBROUTINE SCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                   ns = n
                   ks = k
                   als = alpha
-                  DO i = 1 , laa
+                  DO i = 1, laa
                     As(i) = Aa(i)
                   ENDDO
                   ldas = lda
                   bets = beta
-                  DO i = 1 , lcc
+                  DO i = 1, lcc
                     Cs(i) = Cc(i)
                   ENDDO
                   ldcs = ldc
@@ -164,7 +164,7 @@ SUBROUTINE SCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                   !                       If data was incorrectly changed, report and
                   !                       return.
                   !
-                  DO i = 1 , nargs
+                  DO i = 1, nargs
                     IF ( .NOT.isame(i) ) THEN
                       Fatal = .TRUE.
                       IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
@@ -177,7 +177,7 @@ SUBROUTINE SCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                     !                          Check the result column by column.
                     !
                     jc = 1
-                    DO j = 1 , n
+                    DO j = 1, n
                       IF ( upper ) THEN
                         jj = 1
                         lj = j
@@ -206,8 +206,8 @@ SUBROUTINE SCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                     Fatal = .TRUE.
                     IF ( Kprint>=3 ) THEN
                       WRITE (Nout,FMT=99004) Sname
-                      WRITE (Nout,FMT=99005) nc , Sname , uplo , trans , n ,&
-                        k , alpha , lda , beta , ldc
+                      WRITE (Nout,FMT=99005) nc, Sname, uplo, trans, n ,&
+                        k, alpha, lda, beta, ldc
                     ENDIF
                   ENDIF
                   !
@@ -230,9 +230,9 @@ SUBROUTINE SCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   IF ( .NOT.(Fatal) ) THEN
     IF ( Kprint>=3 ) THEN
       IF ( errmax<Thresh ) THEN
-        WRITE (Nout,FMT=99001) Sname , nc
+        WRITE (Nout,FMT=99001) Sname, nc
       ELSE
-        WRITE (Nout,FMT=99003) Sname , nc , errmax
+        WRITE (Nout,FMT=99003) Sname, nc, errmax
       ENDIF
     ENDIF
   ENDIF

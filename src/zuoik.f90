@@ -40,16 +40,16 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   !***END PROLOGUE  ZUOIK
   !     COMPLEX ARG,ASUM,BSUM,CWRK,CZ,CZERO,PHI,SUM,Y,Z,ZB,ZETA1,ZETA2,ZN,
   !    *ZR
-  REAL(8) :: aarg , aic , Alim , aphi , argi , argr , asumi , asumr , &
-    ascle , ax , ay , bsumi , bsumr , cwrki , cwrkr , czi , &
-    czr , Elim , fnn , Fnu , gnn , gnu , phii , phir , rcz , &
-    str , sti , sumi , sumr , Tol , Yi , Yr , zbi , zbr , &
-    zeroi , zeror , zeta1i , zeta1r , zeta2i , zeta2r , Zi , &
-    zni , znr , Zr , zri , zrr , D1MACH , ZABS
-  INTEGER i , idum , iform , Ikflg , init , Kode , N , nn , Nuf , nw
-  DIMENSION Yr(N) , Yi(N) , cwrkr(16) , cwrki(16)
-  EXTERNAL ZABS , ZLOG
-  DATA zeror , zeroi/0.0D0 , 0.0D0/
+  REAL(8) :: aarg, aic, Alim, aphi, argi, argr, asumi, asumr, &
+    ascle, ax, ay, bsumi, bsumr, cwrki, cwrkr, czi, &
+    czr, Elim, fnn, Fnu, gnn, gnu, phii, phir, rcz, &
+    str, sti, sumi, sumr, Tol, Yi, Yr, zbi, zbr, &
+    zeroi, zeror, zeta1i, zeta1r, zeta2i, zeta2r, Zi, &
+    zni, znr, Zr, zri, zrr, D1MACH, ZABS
+  INTEGER i, idum, iform, Ikflg, init, Kode, N, nn, Nuf, nw
+  DIMENSION Yr(N), Yi(N), cwrkr(16), cwrki(16)
+  EXTERNAL ZABS, ZLOG
+  DATA zeror, zeroi/0.0D0, 0.0D0/
   DATA aic/1.265512123484645396D+00/
   !***FIRST EXECUTABLE STATEMENT  ZUOIK
   Nuf = 0
@@ -136,7 +136,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
           IF ( nw==0 ) GOTO 50
         ENDIF
       ENDIF
-      DO i = 1 , nn
+      DO i = 1, nn
         Yr(i) = zeror
         Yi(i) = zeroi
       ENDDO
@@ -204,4 +204,5 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   Nuf = Nuf + 1
   IF ( nn==0 ) RETURN
   GOTO 100
-  99999 END SUBROUTINE ZUOIK
+  99999 CONTINUE
+  END SUBROUTINE ZUOIK

@@ -4,7 +4,7 @@ REAL(8) FUNCTION DBESY0(X)
   IMPLICIT NONE
   !*--DBESY05
   !*** Start of declarations inserted by SPAG
-  INTEGER INITDS , nty0
+  INTEGER INITDS, nty0
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBESY0
   !***PURPOSE  Compute the Bessel function of the second kind of order
@@ -35,10 +35,10 @@ REAL(8) FUNCTION DBESY0(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBESY0
-  REAL(8) :: X , by0cs(19) , ampl , theta , twodpi , xsml , y , &
-    D1MACH , DCSEVL , DBESJ0
+  REAL(8) :: X, by0cs(19), ampl, theta, twodpi, xsml, y, &
+    D1MACH, DCSEVL, DBESJ0
   LOGICAL first
-  SAVE by0cs , twodpi , nty0 , xsml , first
+  SAVE by0cs, twodpi, nty0, xsml, first
   DATA by0cs(1)/ - .1127783939286557321793980546028D-1/
   DATA by0cs(2)/ - .1283452375604203460480884531838D+0/
   DATA by0cs(3)/ - .1043788479979424936581762276618D+0/
@@ -81,4 +81,5 @@ REAL(8) FUNCTION DBESY0(X)
     DCSEVL(.125D0*y-1.D0,by0cs,nty0)
   RETURN
   !
-  99999 END FUNCTION DBESY0
+  99999 CONTINUE
+  END FUNCTION DBESY0

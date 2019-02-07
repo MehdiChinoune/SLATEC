@@ -34,7 +34,7 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !                    integrand PF(X)=F(X)*DPPVAL(LDC,C,XI,LXI,K,ID,X,
   !                    INPPV)
   !           LDC    - leading dimension of matrix C, LDC .GE. K
-  !           C(I,J) - right Taylor derivatives at XI(J), I=1,K , J=1,LXI
+  !           C(I,J) - right Taylor derivatives at XI(J), I=1,K, J=1,LXI
   !           XI(*)  - break point array of length LXI+1
   !           LXI    - number of polynomial pieces
   !           K      - order of B-spline, K .GE. 1
@@ -73,12 +73,12 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPFQAD
   !
-  INTEGER Id , Ierr , iflg , ilo , il1 , il2 , inppv , K , Ldc , left , &
-    Lxi , mf1 , mf2
-  REAL(8) :: a , aa , ans , b , bb , C , q , Quad , ta , tb , Tol , &
-    wtol , Xi , X1 , X2
-  REAL(8) :: D1MACH , F
-  DIMENSION Xi(*) , C(Ldc,*)
+  INTEGER Id, Ierr, iflg, ilo, il1, il2, inppv, K, Ldc, left, &
+    Lxi, mf1, mf2
+  REAL(8) :: a, aa, ans, b, bb, C, q, Quad, ta, tb, Tol, &
+    wtol, Xi, X1, X2
+  REAL(8) :: D1MACH, F
+  DIMENSION Xi(*), C(Ldc,*)
   EXTERNAL F
   !
   !***FIRST EXECUTABLE STATEMENT  DPFQAD
@@ -108,7 +108,7 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
       CALL DINTRV(Xi,Lxi,bb,ilo,il2,mf2)
       q = 0.0D0
       inppv = 1
-      DO left = il1 , il2
+      DO left = il1, il2
         ta = Xi(left)
         a = MAX(aa,ta)
         IF ( left==1 ) a = aa
@@ -127,4 +127,5 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !
   CALL XERMSG('SLATEC','DPFQAD','TOL IS LESS DTOL OR GREATER THAN 0.1',2,1)
   RETURN
-  99999 END SUBROUTINE DPFQAD
+  99999 CONTINUE
+  END SUBROUTINE DPFQAD

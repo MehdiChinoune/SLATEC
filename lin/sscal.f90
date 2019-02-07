@@ -45,8 +45,8 @@ SUBROUTINE SSCAL(N,Sa,Sx,Incx)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SSCAL
-  REAL Sa , Sx(*)
-  INTEGER i , Incx , ix , m , mp1 , N
+  REAL Sa, Sx(*)
+  INTEGER i, Incx, ix, m, mp1, N
   !***FIRST EXECUTABLE STATEMENT  SSCAL
   IF ( N<=0 ) RETURN
   IF ( Incx==1 ) THEN
@@ -57,13 +57,13 @@ SUBROUTINE SSCAL(N,Sa,Sx,Incx)
     !
     m = MOD(N,5)
     IF ( m/=0 ) THEN
-      DO i = 1 , m
+      DO i = 1, m
         Sx(i) = Sa*Sx(i)
       ENDDO
       IF ( N<5 ) RETURN
     ENDIF
     mp1 = m + 1
-    DO i = mp1 , N , 5
+    DO i = mp1, N, 5
       Sx(i) = Sa*Sx(i)
       Sx(i+1) = Sa*Sx(i+1)
       Sx(i+2) = Sa*Sx(i+2)
@@ -76,7 +76,7 @@ SUBROUTINE SSCAL(N,Sa,Sx,Incx)
     !
     ix = 1
     IF ( Incx<0 ) ix = (-N+1)*Incx + 1
-    DO i = 1 , N
+    DO i = 1, N
       Sx(ix) = Sa*Sx(ix)
       ix = ix + Incx
     ENDDO

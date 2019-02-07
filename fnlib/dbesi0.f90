@@ -4,7 +4,7 @@ REAL(8) FUNCTION DBESI0(X)
   IMPLICIT NONE
   !*--DBESI05
   !*** Start of declarations inserted by SPAG
-  INTEGER INITDS , nti0
+  INTEGER INITDS, nti0
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBESI0
   !***PURPOSE  Compute the hyperbolic Bessel function of the first kind
@@ -36,10 +36,10 @@ REAL(8) FUNCTION DBESI0(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBESI0
-  REAL(8) :: X , bi0cs(18) , xmax , xsml , y , D1MACH , DCSEVL , &
+  REAL(8) :: X, bi0cs(18), xmax, xsml, y, D1MACH, DCSEVL, &
     DBSI0E
   LOGICAL first
-  SAVE bi0cs , nti0 , xsml , xmax , first
+  SAVE bi0cs, nti0, xsml, xmax, first
   DATA bi0cs(1)/ - .7660547252839144951081894976243285D-1/
   DATA bi0cs(2)/ + .1927337953993808269952408750881196D+1/
   DATA bi0cs(3)/ + .2282644586920301338937029292330415D+0/
@@ -81,4 +81,5 @@ REAL(8) FUNCTION DBESI0(X)
   IF ( y>xsml ) DBESI0 = 2.75D0 + DCSEVL(y*y/4.5D0-1.D0,bi0cs,nti0)
   RETURN
   !
-  99999 END FUNCTION DBESI0
+  99999 CONTINUE
+  END FUNCTION DBESI0

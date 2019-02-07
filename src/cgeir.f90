@@ -110,10 +110,10 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CGEIR
   !
-  INTEGER Lda , N , Itask , Ind , Iwork(*) , info , j
-  COMPLEX A(Lda,*) , V(*) , Work(N,*) , CDCDOT
-  REAL SCASUM , xnorm , dnorm , R1MACH
-  CHARACTER(8) :: xern1 , xern2
+  INTEGER Lda, N, Itask, Ind, Iwork(*), info, j
+  COMPLEX A(Lda,*), V(*), Work(N,*), CDCDOT
+  REAL SCASUM, xnorm, dnorm, R1MACH
+  CHARACTER(8) :: xern1, xern2
   !***FIRST EXECUTABLE STATEMENT  CGEIR
   IF ( Lda<N ) THEN
     Ind = -1
@@ -140,7 +140,7 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !
   IF ( Itask==1 ) THEN
     !        MOVE MATRIX A TO WORK
-    DO j = 1 , N
+    DO j = 1, N
       CALL CCOPY(N,A(1,j),1,Work(1,j),1)
     ENDDO
     !
@@ -173,7 +173,7 @@ SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !
   !     COMPUTE  RESIDUAL
   !
-  DO j = 1 , N
+  DO j = 1, N
     Work(j,N+1) = CDCDOT(N,-Work(j,N+1),A(j,1),Lda,V,1)
   ENDDO
   !

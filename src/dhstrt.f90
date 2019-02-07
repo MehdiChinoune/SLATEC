@@ -22,7 +22,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !     initial value method in solving ordinary differential equations.
   !     It is based on an estimate of the local Lipschitz constant for the
   !     differential equation   (lower bound on a norm of the Jacobian) ,
-  !     a bound on the differential equation  (first derivative) , and
+  !     a bound on the differential equation  (first derivative), and
   !     a bound on the partial derivative of the equation with respect to
   !     the independent variable.
   !     (all approximated near the initial point A)
@@ -41,7 +41,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !                               DF(X,U,UPRIME,RPAR,IPAR)
   !             which defines the system of first order differential
   !             equations to be solved. For the given values of X and the
-  !             vector  U(*)=(U(1),U(2),...,U(NEQ)) , the subroutine must
+  !             vector  U(*)=(U(1),U(2),...,U(NEQ)), the subroutine must
   !             evaluate the NEQ components of the system of differential
   !             equations  DU/DX=DF(X,U)  and store the derivatives in the
   !             array UPRIME(*), that is,  UPRIME(I) = * DU(I)/DX *  for
@@ -145,13 +145,13 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DHSTRT
   !
-  INTEGER Ipar , j , k , lk , Morder , Neq
-  REAL(8) :: A , absdx , B , Big , da , delf , dely , dfdub , dfdxb , &
-    DHVNRM , dx , dy , Etol , fbnd , H , Pv , relper , Rpar , &
-    Sf , Small , Spy , srydpb , tolexp , tolmin , tolp , &
-    tolsum , Y , ydpb , Yp , Yprime
-  DIMENSION Y(*) , Yprime(*) , Etol(*) , Spy(*) , Pv(*) , Yp(*) , Sf(*) , &
-    Rpar(*) , Ipar(*)
+  INTEGER Ipar, j, k, lk, Morder, Neq
+  REAL(8) :: A, absdx, B, Big, da, delf, dely, dfdub, dfdxb, &
+    DHVNRM, dx, dy, Etol, fbnd, H, Pv, relper, Rpar, &
+    Sf, Small, Spy, srydpb, tolexp, tolmin, tolp, &
+    tolsum, Y, ydpb, Yp, Yprime
+  DIMENSION Y(*), Yprime(*), Etol(*), Spy(*), Pv(*), Yp(*), Sf(*), &
+    Rpar(*), Ipar(*)
   EXTERNAL DF
   !
   !     ..................................................................
@@ -173,7 +173,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   da = SIGN(MAX(MIN(relper*ABS(A),absdx),100.0D0*Small*ABS(A)),dx)
   IF ( da==0.0D0 ) da = relper*dx
   CALL DF(A+da,Y,Sf,Rpar,Ipar)
-  DO j = 1 , Neq
+  DO j = 1, Neq
     Yp(j) = Sf(j) - Yprime(j)
   ENDDO
   delf = DHVNRM(Yp,Neq)
@@ -213,14 +213,14 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   fbnd = MAX(fbnd,delf)
   IF ( delf==0.0D0 ) THEN
     !           CANNOT HAVE A NULL PERTURBATION VECTOR
-    DO j = 1 , Neq
+    DO j = 1, Neq
       Spy(j) = 0.0D0
       Yp(j) = 1.0D0
     ENDDO
     delf = DHVNRM(Yp,Neq)
   ELSE
     !           USE INITIAL DERIVATIVES FOR FIRST PERTURBATION
-    DO j = 1 , Neq
+    DO j = 1, Neq
       Spy(j) = Yprime(j)
       Yp(j) = Yprime(j)
     ENDDO
@@ -228,23 +228,23 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !
   dfdub = 0.0D0
   lk = MIN(Neq+1,3)
-  DO k = 1 , lk
+  DO k = 1, lk
     !           DEFINE PERTURBED VECTOR OF INITIAL VALUES
-    DO j = 1 , Neq
+    DO j = 1, Neq
       Pv(j) = Y(j) + dely*(Yp(j)/delf)
     ENDDO
     IF ( k==2 ) THEN
       !              USE A SHIFTED VALUE OF THE INDEPENDENT VARIABLE
       !                                    IN COMPUTING ONE ESTIMATE
       CALL DF(A+da,Pv,Yp,Rpar,Ipar)
-      DO j = 1 , Neq
+      DO j = 1, Neq
         Pv(j) = Yp(j) - Sf(j)
       ENDDO
     ELSE
       !              EVALUATE DERIVATIVES ASSOCIATED WITH PERTURBED
       !              VECTOR  AND  COMPUTE CORRESPONDING DIFFERENCES
       CALL DF(A,Pv,Yp,Rpar,Ipar)
-      DO j = 1 , Neq
+      DO j = 1, Neq
         Pv(j) = Yp(j) - Yprime(j)
       ENDDO
     ENDIF
@@ -259,7 +259,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     IF ( k==lk ) GOTO 100
     !           CHOOSE NEXT PERTURBATION VECTOR
     IF ( delf==0.0D0 ) delf = 1.0D0
-    DO j = 1 , Neq
+    DO j = 1, Neq
       IF ( k==2 ) THEN
         dy = Y(j)
         IF ( dy==0.0D0 ) dy = dely/relper
@@ -291,7 +291,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !
   tolmin = Big
   tolsum = 0.0D0
-  DO k = 1 , Neq
+  DO k = 1, Neq
     tolexp = LOG10(Etol(k))
     tolmin = MIN(tolmin,tolexp)
     tolsum = tolsum + tolexp

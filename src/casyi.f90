@@ -22,15 +22,15 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CASYI
-  COMPLEX ak1 , ck , cone , cs1 , cs2 , cz , czero , dk , ez , p1 , rz , &
-    s2 , Y , Z
-  REAL aa , acz , aez , ak , Alim , arg , arm , atol , az , bb , bk , dfnu , &
-    dnu2 , Elim , fdn , Fnu , pi , Rl , rtpi , rtr1 , s , sgn , sqk , &
-    Tol , x , yy , R1MACH
-  INTEGER i , ib , il , inu , j , jl , k , Kode , koded , m , N , nn , Nz
+  COMPLEX ak1, ck, cone, cs1, cs2, cz, czero, dk, ez, p1, rz, &
+    s2, Y, Z
+  REAL aa, acz, aez, ak, Alim, arg, arm, atol, az, bb, bk, dfnu, &
+    dnu2, Elim, fdn, Fnu, pi, Rl, rtpi, rtr1, s, sgn, sqk, &
+    Tol, x, yy, R1MACH
+  INTEGER i, ib, il, inu, j, jl, k, Kode, koded, m, N, nn, Nz
   DIMENSION Y(N)
-  DATA pi , rtpi/3.14159265358979324E0 , 0.159154943091895336E0/
-  DATA czero , cone/(0.0E0,0.0E0) , (1.0E0,0.0E0)/
+  DATA pi, rtpi/3.14159265358979324E0, 0.159154943091895336E0/
+  DATA czero, cone/(0.0E0,0.0E0), (1.0E0,0.0E0)/
   !***FIRST EXECUTABLE STATEMENT  CASYI
   Nz = 0
   az = ABS(Z)
@@ -84,7 +84,7 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
       p1 = CMPLX(ak,bk)
       IF ( MOD(inu,2)==1 ) p1 = -p1
     ENDIF
-    DO k = 1 , il
+    DO k = 1, il
       sqk = fdn - 1.0E0
       atol = s*ABS(sqk)
       sgn = 1.0E0
@@ -95,7 +95,7 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
       aa = 1.0E0
       bb = aez
       dk = ez
-      DO j = 1 , jl
+      DO j = 1, jl
         ck = ck*CMPLX(sqk,0.0E0)/dk
         cs2 = cs2 + ck
         sgn = -sgn
@@ -121,14 +121,14 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
     ak = k
     rz = (cone+cone)/Z
     ib = 3
-    DO i = ib , nn
+    DO i = ib, nn
       Y(k) = CMPLX(ak+Fnu,0.0E0)*rz*Y(k+1) + Y(k+2)
       ak = ak - 1.0E0
       k = k - 1
     ENDDO
     IF ( koded==0 ) RETURN
     ck = CEXP(cz)
-    DO i = 1 , nn
+    DO i = 1, nn
       Y(i) = Y(i)*ck
     ENDDO
     RETURN

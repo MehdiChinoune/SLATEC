@@ -4,7 +4,7 @@ FUNCTION J4SAVE(Iwhich,Ivalue,Iset)
   IMPLICIT NONE
   !*--J4SAVE5
   !*** Start of declarations inserted by SPAG
-  INTEGER Ivalue , Iwhich , J4SAVE
+  INTEGER Ivalue, Iwhich, J4SAVE
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  J4SAVE
   !***SUBSIDIARY
@@ -61,9 +61,9 @@ FUNCTION J4SAVE(Iwhich,Ivalue,Iset)
   LOGICAL Iset
   INTEGER iparam(9)
   SAVE iparam
-  DATA iparam(1) , iparam(2) , iparam(3) , iparam(4)/0 , 2 , 0 , 10/
+  DATA iparam(1), iparam(2), iparam(3), iparam(4)/0, 2, 0, 10/
   DATA iparam(5)/1/
-  DATA iparam(6) , iparam(7) , iparam(8) , iparam(9)/0 , 0 , 0 , 0/
+  DATA iparam(6), iparam(7), iparam(8), iparam(9)/0, 0, 0, 0/
   !***FIRST EXECUTABLE STATEMENT  J4SAVE
   J4SAVE = iparam(Iwhich)
   IF ( Iset ) iparam(Iwhich) = Ivalue

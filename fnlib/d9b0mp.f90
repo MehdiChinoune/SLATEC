@@ -5,7 +5,7 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
   !*--D9B0MP5
   !*** Start of declarations inserted by SPAG
   REAL eta
-  INTEGER INITDS , nbm0 , nbm02 , nbt02 , nbth0
+  INTEGER INITDS, nbm0, nbm02, nbt02, nbth0
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9B0MP
   !***SUBSIDIARY
@@ -55,11 +55,11 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  D9B0MP
-  REAL(8) :: X , Ampl , Theta , bm0cs(37) , bt02cs(39) , bm02cs(40) , &
-    bth0cs(44) , xmax , pi4 , z , D1MACH , DCSEVL
+  REAL(8) :: X, Ampl, Theta, bm0cs(37), bt02cs(39), bm02cs(40), &
+    bth0cs(44), xmax, pi4, z, D1MACH, DCSEVL
   LOGICAL first
-  SAVE bm0cs , bth0cs , bm02cs , bt02cs , pi4 , nbm0 , nbt02 , nbm02 , &
-    nbth0 , xmax , first
+  SAVE bm0cs, bth0cs, bm02cs, bt02cs, pi4, nbm0, nbt02, nbm02, &
+    nbth0, xmax, first
   DATA bm0cs(1)/ + .9211656246827742712573767730182D-1/
   DATA bm0cs(2)/ - .1050590997271905102480716371755D-2/
   DATA bm0cs(3)/ + .1470159840768759754056392850952D-4/
@@ -251,4 +251,5 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
   Theta = X - pi4 + DCSEVL(z,bt02cs,nbt02)/X
   RETURN
   !
-  99999 END SUBROUTINE D9B0MP
+  99999 CONTINUE
+  END SUBROUTINE D9B0MP

@@ -4,9 +4,9 @@ FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
   IMPLICIT NONE
   !*--R9GMIT5
   !*** Start of declarations inserted by SPAG
-  REAL A , ae , aeps , alg2 , Algap1 , algs , ALNGAM , Alx , bot , eps , &
-    fk , R1MACH , R9GMIT , s , sgng2 , Sgngam , t , te , X
-  INTEGER k , m , ma
+  REAL A, ae, aeps, alg2, Algap1, algs, ALNGAM, Alx, bot, eps, &
+    fk, R1MACH, R9GMIT, s, sgng2, Sgngam, t, te, X
+  INTEGER k, m, ma
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9GMIT
   !***SUBSIDIARY
@@ -32,8 +32,8 @@ FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  R9GMIT
-  SAVE eps , bot
-  DATA eps , bot/2*0.0/
+  SAVE eps, bot
+  DATA eps, bot/2*0.0/
   !***FIRST EXECUTABLE STATEMENT  R9GMIT
   IF ( eps==0.0 ) eps = 0.5*R1MACH(3)
   IF ( bot==0.0 ) bot = LOG(R1MACH(1))
@@ -50,7 +50,7 @@ FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
   t = 1.0
   te = ae
   s = t
-  DO k = 1 , 200
+  DO k = 1, 200
     fk = k
     te = -X*te/fk
     t = te/(ae+fk)
@@ -60,7 +60,8 @@ FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
   CALL XERMSG('SLATEC','R9GMIT',&
     'NO CONVERGENCE IN 200 TERMS OF TAYLOR-S SERIES',2,2)
   !
-  100  IF ( A>=(-0.5) ) algs = -Algap1 + LOG(s)
+  100 CONTINUE
+  IF ( A>=(-0.5) ) algs = -Algap1 + LOG(s)
   IF ( A>=(-0.5) ) THEN
     !
     R9GMIT = EXP(algs)
@@ -71,7 +72,7 @@ FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
     m = -ma - 1
     IF ( m/=0 ) THEN
       t = 1.0
-      DO k = 1 , m
+      DO k = 1, m
         t = X*t/(aeps-m-1+k)
         s = s + t
         IF ( ABS(t)<eps*ABS(s) ) EXIT

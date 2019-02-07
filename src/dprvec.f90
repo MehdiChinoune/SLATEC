@@ -26,8 +26,8 @@ REAL(8) FUNCTION DPRVEC(M,U,V)
   !***END PROLOGUE  DPRVEC
   !
   REAL(8) :: DDOT
-  INTEGER M , n , np
-  REAL(8) :: U(*) , V(*) , vp
+  INTEGER M, n, np
+  REAL(8) :: U(*), V(*), vp
   !***FIRST EXECUTABLE STATEMENT  DPRVEC
   n = M/2
   np = n + 1

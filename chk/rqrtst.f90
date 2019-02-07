@@ -4,8 +4,8 @@ SUBROUTINE RQRTST(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--RQRTST5
   !*** Start of declarations inserted by SPAG
-  REAL beta , R1MACH , tol , work
-  INTEGER i , ierr , Ipass , j , kontrl , Kprint , Lun , nerr , NUMXER
+  REAL beta, R1MACH, tol, work
+  INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr, NUMXER
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RQRTST
   !***PURPOSE  Quick check for RPQR79.
@@ -22,14 +22,14 @@ SUBROUTINE RQRTST(Lun,Kprint,Ipass)
   !   911010  Code reworked and simplified.  (RWC and WRB)
   !***END PROLOGUE  RQRTST
   INTEGER itmp(7)
-  COMPLEX root(7) , chk(7)
+  COMPLEX root(7), chk(7)
   DIMENSION work(63)
   REAL coef(8)
   LOGICAL fatal
   !
-  DATA chk/(1.4142135623731,1.4142135623731) , &
-    (1.4142135623731,-1.4142135623731) , (0.0,2.0) , (0.0,-2.0) , &
-    (-2.0,0.0) , (-1.4142135623731,1.4142135623731) , &
+  DATA chk/(1.4142135623731,1.4142135623731), &
+    (1.4142135623731,-1.4142135623731), (0.0,2.0), (0.0,-2.0), &
+    (-2.0,0.0), (-1.4142135623731,1.4142135623731), &
     (-1.4142135623731,-1.4142135623731)/
   !***FIRST EXECUTABLE STATEMENT  RQRTST
   IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -41,7 +41,7 @@ SUBROUTINE RQRTST(Lun,Kprint,Ipass)
   !     Initialize variables for testing.
   !
   beta = 0.0078125
-  DO j = 1 , 8
+  DO j = 1, 8
     coef(j) = beta
     beta = 2.0*beta
   ENDDO
@@ -50,14 +50,14 @@ SUBROUTINE RQRTST(Lun,Kprint,Ipass)
   !
   !     Check to see if test passed.
   !
-  DO i = 1 , 7
+  DO i = 1, 7
     itmp(i) = 0
   ENDDO
   !
   !     Check for roots in any order.
   !
-  DO i = 1 , 7
-    DO j = 1 , 7
+  DO i = 1, 7
+    DO j = 1, 7
       IF ( ABS(root(i)-chk(j))<=tol ) THEN
         itmp(j) = 1
         EXIT
@@ -68,7 +68,7 @@ SUBROUTINE RQRTST(Lun,Kprint,Ipass)
   !     Check that we found all 7 roots.
   !
   Ipass = 1
-  DO i = 1 , 7
+  DO i = 1, 7
     Ipass = Ipass*itmp(i)
   ENDDO
   !

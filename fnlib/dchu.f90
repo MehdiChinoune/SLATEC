@@ -4,7 +4,7 @@ REAL(8) FUNCTION DCHU(A,B,X)
   IMPLICIT NONE
   !*--DCHU5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , istrt , m , n
+  INTEGER i, istrt, m, n
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DCHU
   !***PURPOSE  Compute the logarithmic confluent hypergeometric function.
@@ -33,12 +33,12 @@ REAL(8) FUNCTION DCHU(A,B,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DCHU
-  REAL(8) :: A , B , X , aintb , alnx , a0 , beps , b0 , c0 , eps , &
-    factor , gamri1 , gamrni , pch1ai , pch1i , pi , pochai , &
-    sum , t , xeps1 , xi , xi1 , xn , xtoeps , D1MACH , &
-    DPOCH , DGAMMA , DGAMR , DPOCH1 , DEXPRL , D9CHU
+  REAL(8) :: A, B, X, aintb, alnx, a0, beps, b0, c0, eps, &
+    factor, gamri1, gamrni, pch1ai, pch1i, pi, pochai, &
+    sum, t, xeps1, xi, xi1, xn, xtoeps, D1MACH, &
+    DPOCH, DGAMMA, DGAMR, DPOCH1, DEXPRL, D9CHU
   EXTERNAL DGAMMA
-  SAVE pi , eps
+  SAVE pi, eps
   DATA pi/3.141592653589793238462643383279503D0/
   DATA eps/0.0D0/
   !***FIRST EXECUTABLE STATEMENT  DCHU
@@ -77,7 +77,7 @@ REAL(8) FUNCTION DCHU(A,B,X)
         sum = 1.0D0
         IF ( m/=0 ) THEN
           !
-          DO i = 1 , m
+          DO i = 1, m
             xi = i
             t = t*(A-B+xi)*X/((1.0D0-B+xi)*xi)
             sum = sum + t
@@ -95,7 +95,7 @@ REAL(8) FUNCTION DCHU(A,B,X)
         !
         t = 1.0D0
         m = -n
-        DO i = 1 , m
+        DO i = 1, m
           xi1 = i - 1
           t = t*(A+xi1)*X/((B+xi1)*(xi1+1.0D0))
           sum = sum + t
@@ -134,7 +134,7 @@ REAL(8) FUNCTION DCHU(A,B,X)
       !
       DCHU = sum + c0 + xeps1*b0
       xn = n
-      DO i = 1 , 1000
+      DO i = 1, 1000
         xi = istrt + i
         xi1 = istrt + i - 1
         b0 = (A+xi1-beps)*b0*X/((xn+xi1)*(xi-beps))
@@ -157,7 +157,7 @@ REAL(8) FUNCTION DCHU(A,B,X)
     b0 = xtoeps*b0/beps
     !
     DCHU = sum + a0 - b0
-    DO i = 1 , 1000
+    DO i = 1, 1000
       xi = istrt + i
       xi1 = istrt + i - 1
       a0 = (A+xi1)*a0*X/((B+xi1)*xi)
@@ -174,4 +174,5 @@ REAL(8) FUNCTION DCHU(A,B,X)
   !
   DCHU = X**(-A)*D9CHU(A,B,X)
   !
-  99999 END FUNCTION DCHU
+  99999 CONTINUE
+  END FUNCTION DCHU

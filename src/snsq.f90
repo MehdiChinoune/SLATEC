@@ -422,21 +422,21 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SNSQ
-  INTEGER Iopt , N , Maxfev , Ml , Mu , Mode , Nprint , Info , Nfev , &
-    Ldfjac , Lr , Njev
-  REAL Xtol , Epsfcn , Factor
-  REAL X(*) , Fvec(*) , Diag(*) , Fjac(Ldfjac,*) , R(Lr) , Qtf(*) , Wa1(*) , &
-    Wa2(*) , Wa3(*) , Wa4(*)
+  INTEGER Iopt, N, Maxfev, Ml, Mu, Mode, Nprint, Info, Nfev, &
+    Ldfjac, Lr, Njev
+  REAL Xtol, Epsfcn, Factor
+  REAL X(*), Fvec(*), Diag(*), Fjac(Ldfjac,*), R(Lr), Qtf(*), Wa1(*), &
+    Wa2(*), Wa3(*), Wa4(*)
   EXTERNAL FCN
-  INTEGER i , iflag , iter , j , jm1 , l , ncfail , ncsuc , nslow1 , nslow2
+  INTEGER i, iflag, iter, j, jm1, l, ncfail, ncsuc, nslow1, nslow2
   INTEGER iwa(1)
-  LOGICAL jeval , sing
-  REAL actred , delta , epsmch , fnorm , fnorm1 , one , pnorm , prered , &
-    p1 , p5 , p001 , p0001 , ratio , sum , temp , xnorm , zero
-  REAL R1MACH , ENORM
-  SAVE one , p1 , p5 , p001 , p0001 , zero
-  DATA one , p1 , p5 , p001 , p0001 , zero/1.0E0 , 1.0E-1 , 5.0E-1 , &
-    1.0E-3 , 1.0E-4 , 0.0E0/
+  LOGICAL jeval, sing
+  REAL actred, delta, epsmch, fnorm, fnorm1, one, pnorm, prered, &
+    p1, p5, p001, p0001, ratio, sum, temp, xnorm, zero
+  REAL R1MACH, ENORM
+  SAVE one, p1, p5, p001, p0001, zero
+  DATA one, p1, p5, p001, p0001, zero/1.0E0, 1.0E-1, 5.0E-1, &
+    1.0E-3, 1.0E-4, 0.0E0/
   !
   !***FIRST EXECUTABLE STATEMENT  SNSQ
   epsmch = R1MACH(4)
@@ -451,7 +451,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   IF ( Iopt<1.OR.Iopt>2.OR.N<=0.OR.Xtol<zero.OR.Maxfev<=0.OR.Ml<0.OR.&
     Mu<0.OR.Factor<=zero.OR.Ldfjac<N.OR.Lr<(N*(N+1))/2 ) GOTO 300
   IF ( Mode==2 ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       IF ( Diag(j)<=zero ) GOTO 300
     ENDDO
   ENDIF
@@ -505,7 +505,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !
   IF ( iter==1 ) THEN
     IF ( Mode/=2 ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         Diag(j) = Wa2(j)
         IF ( Wa2(j)==zero ) Diag(j) = one
       ENDDO
@@ -514,7 +514,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     !        ON THE FIRST ITERATION, CALCULATE THE NORM OF THE SCALED X
     !        AND INITIALIZE THE STEP BOUND DELTA.
     !
-    DO j = 1 , N
+    DO j = 1, N
       Wa3(j) = Diag(j)*X(j)
     ENDDO
     xnorm = ENORM(N,Wa3)
@@ -524,17 +524,17 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !
   !        FORM (Q TRANSPOSE)*FVEC AND STORE IN QTF.
   !
-  DO i = 1 , N
+  DO i = 1, N
     Qtf(i) = Fvec(i)
   ENDDO
-  DO j = 1 , N
+  DO j = 1, N
     IF ( Fjac(j,j)/=zero ) THEN
       sum = zero
-      DO i = j , N
+      DO i = j, N
         sum = sum + Fjac(i,j)*Qtf(i)
       ENDDO
       temp = -sum/Fjac(j,j)
-      DO i = j , N
+      DO i = j, N
         Qtf(i) = Qtf(i) + Fjac(i,j)*temp
       ENDDO
     ENDIF
@@ -543,11 +543,11 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !        COPY THE TRIANGULAR FACTOR OF THE QR FACTORIZATION INTO R.
   !
   sing = .FALSE.
-  DO j = 1 , N
+  DO j = 1, N
     l = j
     jm1 = j - 1
     IF ( jm1>=1 ) THEN
-      DO i = 1 , jm1
+      DO i = 1, jm1
         R(l) = Fjac(i,j)
         l = l + N - i
       ENDDO
@@ -563,7 +563,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !        RESCALE IF NECESSARY.
   !
   IF ( Mode/=2 ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       Diag(j) = MAX(Diag(j),Wa2(j))
     ENDDO
   ENDIF
@@ -573,163 +573,165 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !
   !           IF REQUESTED, CALL FCN TO ENABLE PRINTING OF ITERATES.
   !
-  200  IF ( Nprint>0 ) THEN
-  iflag = 0
-  IF ( MOD(iter-1,Nprint)==0 ) CALL FCN(N,X,Fvec,iflag)
-  IF ( iflag<0 ) GOTO 300
-ENDIF
-!
-!           DETERMINE THE DIRECTION P.
-!
-CALL DOGLEG(N,R,Lr,Diag,Qtf,delta,Wa1,Wa2,Wa3)
-!
-!           STORE THE DIRECTION P AND X + P. CALCULATE THE NORM OF P.
-!
-DO j = 1 , N
-  Wa1(j) = -Wa1(j)
-  Wa2(j) = X(j) + Wa1(j)
-  Wa3(j) = Diag(j)*Wa1(j)
-ENDDO
-pnorm = ENORM(N,Wa3)
-!
-!           ON THE FIRST ITERATION, ADJUST THE INITIAL STEP BOUND.
-!
-IF ( iter==1 ) delta = MIN(delta,pnorm)
-!
-!           EVALUATE THE FUNCTION AT X + P AND CALCULATE ITS NORM.
-!
-iflag = 1
-CALL FCN(N,Wa2,Wa4,iflag)
-Nfev = Nfev + 1
-IF ( iflag>=0 ) THEN
-  fnorm1 = ENORM(N,Wa4)
+  200 CONTINUE
+  IF ( Nprint>0 ) THEN
+    iflag = 0
+    IF ( MOD(iter-1,Nprint)==0 ) CALL FCN(N,X,Fvec,iflag)
+    IF ( iflag<0 ) GOTO 300
+  ENDIF
   !
-  !           COMPUTE THE SCALED ACTUAL REDUCTION.
+  !           DETERMINE THE DIRECTION P.
   !
-  actred = -one
-  IF ( fnorm1<fnorm ) actred = one - (fnorm1/fnorm)**2
+  CALL DOGLEG(N,R,Lr,Diag,Qtf,delta,Wa1,Wa2,Wa3)
   !
-  !           COMPUTE THE SCALED PREDICTED REDUCTION.
+  !           STORE THE DIRECTION P AND X + P. CALCULATE THE NORM OF P.
   !
-  l = 1
-  DO i = 1 , N
-    sum = zero
-    DO j = i , N
-      sum = sum + R(l)*Wa1(j)
-      l = l + 1
-    ENDDO
-    Wa3(i) = Qtf(i) + sum
+  DO j = 1, N
+    Wa1(j) = -Wa1(j)
+    Wa2(j) = X(j) + Wa1(j)
+    Wa3(j) = Diag(j)*Wa1(j)
   ENDDO
-  temp = ENORM(N,Wa3)
-  prered = zero
-  IF ( temp<fnorm ) prered = one - (temp/fnorm)**2
+  pnorm = ENORM(N,Wa3)
   !
-  !           COMPUTE THE RATIO OF THE ACTUAL TO THE PREDICTED
-  !           REDUCTION.
+  !           ON THE FIRST ITERATION, ADJUST THE INITIAL STEP BOUND.
   !
-  ratio = zero
-  IF ( prered>zero ) ratio = actred/prered
+  IF ( iter==1 ) delta = MIN(delta,pnorm)
   !
-  !           UPDATE THE STEP BOUND.
+  !           EVALUATE THE FUNCTION AT X + P AND CALCULATE ITS NORM.
   !
-  IF ( ratio>=p1 ) THEN
-    ncfail = 0
-    ncsuc = ncsuc + 1
-    IF ( ratio>=p5.OR.ncsuc>1 ) delta = MAX(delta,pnorm/p5)
-    IF ( ABS(ratio-one)<=p1 ) delta = pnorm/p5
-  ELSE
-    ncsuc = 0
-    ncfail = ncfail + 1
-    delta = p5*delta
-  ENDIF
-  !
-  !           TEST FOR SUCCESSFUL ITERATION.
-  !
-  IF ( ratio>=p0001 ) THEN
+  iflag = 1
+  CALL FCN(N,Wa2,Wa4,iflag)
+  Nfev = Nfev + 1
+  IF ( iflag>=0 ) THEN
+    fnorm1 = ENORM(N,Wa4)
     !
-    !           SUCCESSFUL ITERATION. UPDATE X, FVEC, AND THEIR NORMS.
+    !           COMPUTE THE SCALED ACTUAL REDUCTION.
     !
-    DO j = 1 , N
-      X(j) = Wa2(j)
-      Wa2(j) = Diag(j)*X(j)
-      Fvec(j) = Wa4(j)
+    actred = -one
+    IF ( fnorm1<fnorm ) actred = one - (fnorm1/fnorm)**2
+    !
+    !           COMPUTE THE SCALED PREDICTED REDUCTION.
+    !
+    l = 1
+    DO i = 1, N
+      sum = zero
+      DO j = i, N
+        sum = sum + R(l)*Wa1(j)
+        l = l + 1
+      ENDDO
+      Wa3(i) = Qtf(i) + sum
     ENDDO
-    xnorm = ENORM(N,Wa2)
-    fnorm = fnorm1
-    iter = iter + 1
-  ENDIF
-  !
-  !           DETERMINE THE PROGRESS OF THE ITERATION.
-  !
-  nslow1 = nslow1 + 1
-  IF ( actred>=p001 ) nslow1 = 0
-  IF ( jeval ) nslow2 = nslow2 + 1
-  IF ( actred>=p1 ) nslow2 = 0
-  !
-  !           TEST FOR CONVERGENCE.
-  !
-  IF ( delta<=Xtol*xnorm.OR.fnorm==zero ) Info = 1
-  IF ( Info==0 ) THEN
+    temp = ENORM(N,Wa3)
+    prered = zero
+    IF ( temp<fnorm ) prered = one - (temp/fnorm)**2
     !
-    !           TESTS FOR TERMINATION AND STRINGENT TOLERANCES.
+    !           COMPUTE THE RATIO OF THE ACTUAL TO THE PREDICTED
+    !           REDUCTION.
     !
-    IF ( Nfev>=Maxfev ) Info = 2
-    IF ( p1*MAX(p1*delta,pnorm)<=epsmch*xnorm ) Info = 3
-    IF ( nslow2==5 ) Info = 4
-    IF ( nslow1==10 ) Info = 5
+    ratio = zero
+    IF ( prered>zero ) ratio = actred/prered
+    !
+    !           UPDATE THE STEP BOUND.
+    !
+    IF ( ratio>=p1 ) THEN
+      ncfail = 0
+      ncsuc = ncsuc + 1
+      IF ( ratio>=p5.OR.ncsuc>1 ) delta = MAX(delta,pnorm/p5)
+      IF ( ABS(ratio-one)<=p1 ) delta = pnorm/p5
+    ELSE
+      ncsuc = 0
+      ncfail = ncfail + 1
+      delta = p5*delta
+    ENDIF
+    !
+    !           TEST FOR SUCCESSFUL ITERATION.
+    !
+    IF ( ratio>=p0001 ) THEN
+      !
+      !           SUCCESSFUL ITERATION. UPDATE X, FVEC, AND THEIR NORMS.
+      !
+      DO j = 1, N
+        X(j) = Wa2(j)
+        Wa2(j) = Diag(j)*X(j)
+        Fvec(j) = Wa4(j)
+      ENDDO
+      xnorm = ENORM(N,Wa2)
+      fnorm = fnorm1
+      iter = iter + 1
+    ENDIF
+    !
+    !           DETERMINE THE PROGRESS OF THE ITERATION.
+    !
+    nslow1 = nslow1 + 1
+    IF ( actred>=p001 ) nslow1 = 0
+    IF ( jeval ) nslow2 = nslow2 + 1
+    IF ( actred>=p1 ) nslow2 = 0
+    !
+    !           TEST FOR CONVERGENCE.
+    !
+    IF ( delta<=Xtol*xnorm.OR.fnorm==zero ) Info = 1
     IF ( Info==0 ) THEN
       !
-      !           CRITERION FOR RECALCULATING JACOBIAN
+      !           TESTS FOR TERMINATION AND STRINGENT TOLERANCES.
       !
-      IF ( ncfail==2 ) GOTO 100
-      !
-      !           CALCULATE THE RANK ONE MODIFICATION TO THE JACOBIAN
-      !           AND UPDATE QTF IF NECESSARY.
-      !
-      DO j = 1 , N
-        sum = zero
-        DO i = 1 , N
-          sum = sum + Fjac(i,j)*Wa4(i)
+      IF ( Nfev>=Maxfev ) Info = 2
+      IF ( p1*MAX(p1*delta,pnorm)<=epsmch*xnorm ) Info = 3
+      IF ( nslow2==5 ) Info = 4
+      IF ( nslow1==10 ) Info = 5
+      IF ( Info==0 ) THEN
+        !
+        !           CRITERION FOR RECALCULATING JACOBIAN
+        !
+        IF ( ncfail==2 ) GOTO 100
+        !
+        !           CALCULATE THE RANK ONE MODIFICATION TO THE JACOBIAN
+        !           AND UPDATE QTF IF NECESSARY.
+        !
+        DO j = 1, N
+          sum = zero
+          DO i = 1, N
+            sum = sum + Fjac(i,j)*Wa4(i)
+          ENDDO
+          Wa2(j) = (sum-Wa3(j))/pnorm
+          Wa1(j) = Diag(j)*((Diag(j)*Wa1(j))/pnorm)
+          IF ( ratio>=p0001 ) Qtf(j) = sum
         ENDDO
-        Wa2(j) = (sum-Wa3(j))/pnorm
-        Wa1(j) = Diag(j)*((Diag(j)*Wa1(j))/pnorm)
-        IF ( ratio>=p0001 ) Qtf(j) = sum
-      ENDDO
-      !
-      !           COMPUTE THE QR FACTORIZATION OF THE UPDATED JACOBIAN.
-      !
-      CALL R1UPDT(N,N,R,Lr,Wa1,Wa2,Wa3,sing)
-      CALL R1MPYQ(N,N,Fjac,Ldfjac,Wa2,Wa3)
-      CALL R1MPYQ(1,N,Qtf,1,Wa2,Wa3)
-      !
-      !           END OF THE INNER LOOP.
-      !
-      jeval = .FALSE.
-      !
-      !        END OF THE OUTER LOOP.
-      !
-      GOTO 200
+        !
+        !           COMPUTE THE QR FACTORIZATION OF THE UPDATED JACOBIAN.
+        !
+        CALL R1UPDT(N,N,R,Lr,Wa1,Wa2,Wa3,sing)
+        CALL R1MPYQ(N,N,Fjac,Ldfjac,Wa2,Wa3)
+        CALL R1MPYQ(1,N,Qtf,1,Wa2,Wa3)
+        !
+        !           END OF THE INNER LOOP.
+        !
+        jeval = .FALSE.
+        !
+        !        END OF THE OUTER LOOP.
+        !
+        GOTO 200
+      ENDIF
     ENDIF
   ENDIF
-ENDIF
-!
-!     TERMINATION, EITHER NORMAL OR USER IMPOSED.
-!
-300  IF ( iflag<0 ) Info = iflag
-iflag = 0
-IF ( Nprint>0 ) CALL FCN(N,X,Fvec,iflag)
-IF ( Info<0 ) CALL XERMSG('SLATEC','SNSQ',&
-  'EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.'&
-  ,1,1)
-IF ( Info==0 ) CALL XERMSG('SLATEC','SNSQ','INVALID INPUT PARAMETER.',2,1)
-IF ( Info==2 ) CALL XERMSG('SLATEC','SNSQ',&
-  'TOO MANY FUNCTION EVALUATIONS.',9,1)
-IF ( Info==3 ) CALL XERMSG('SLATEC','SNSQ',&
-  'XTOL TOO SMALL. NO FURTHER IMPROVEMENT POSSIBLE.'&
-  ,3,1)
-IF ( Info>4 ) CALL XERMSG('SLATEC','SNSQ',&
-  'ITERATION NOT MAKING GOOD PROGRESS.',1,1)
-!
-!     LAST CARD OF SUBROUTINE SNSQ.
-!
+  !
+  !     TERMINATION, EITHER NORMAL OR USER IMPOSED.
+  !
+  300 CONTINUE
+  IF ( iflag<0 ) Info = iflag
+  iflag = 0
+  IF ( Nprint>0 ) CALL FCN(N,X,Fvec,iflag)
+  IF ( Info<0 ) CALL XERMSG('SLATEC','SNSQ',&
+    'EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.'&
+    ,1,1)
+  IF ( Info==0 ) CALL XERMSG('SLATEC','SNSQ','INVALID INPUT PARAMETER.',2,1)
+  IF ( Info==2 ) CALL XERMSG('SLATEC','SNSQ',&
+    'TOO MANY FUNCTION EVALUATIONS.',9,1)
+  IF ( Info==3 ) CALL XERMSG('SLATEC','SNSQ',&
+    'XTOL TOO SMALL. NO FURTHER IMPROVEMENT POSSIBLE.'&
+    ,3,1)
+  IF ( Info>4 ) CALL XERMSG('SLATEC','SNSQ',&
+    'ITERATION NOT MAKING GOOD PROGRESS.',1,1)
+  !
+  !     LAST CARD OF SUBROUTINE SNSQ.
+  !
 END SUBROUTINE SNSQ

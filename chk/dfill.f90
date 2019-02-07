@@ -41,7 +41,7 @@ SUBROUTINE DFILL(N,V,Val)
   !     .. Array Arguments ..
   REAL(8) :: V(*)
   !     .. Local Scalars ..
-  INTEGER i , is , nr
+  INTEGER i, is, nr
   !     .. Intrinsic Functions ..
   INTRINSIC MOD
   !***FIRST EXECUTABLE STATEMENT  DFILL
@@ -66,7 +66,7 @@ SUBROUTINE DFILL(N,V,Val)
       V(2) = Val
       V(3) = Val
   END SELECT
-  DO i = is , N , 4
+  DO i = is, N, 4
     V(i) = Val
     V(i+1) = Val
     V(i+2) = Val

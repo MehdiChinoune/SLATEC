@@ -19,10 +19,10 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
   !     stored in packed form and estimates the condition of the matrix.
   !
   !     If  RCOND  is not needed, CPPFA is slightly faster.
-  !     To solve  A*X = B , follow CPPCO by CPPSL.
-  !     To compute  INVERSE(A)*C , follow CPPCO by CPPSL.
-  !     To compute  DETERMINANT(A) , follow CPPCO by CPPDI.
-  !     To compute  INVERSE(A) , follow CPPCO by CPPDI.
+  !     To solve  A*X = B, follow CPPCO by CPPSL.
+  !     To compute  INVERSE(A)*C, follow CPPCO by CPPSL.
+  !     To compute  DETERMINANT(A), follow CPPCO by CPPDI.
+  !     To compute  INVERSE(A), follow CPPCO by CPPDI.
   !
   !     On Entry
   !
@@ -37,13 +37,13 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
   !
   !     On Return
   !
-  !        AP      an upper triangular matrix  R , stored in packed
+  !        AP      an upper triangular matrix  R, stored in packed
   !                form, so that  A = CTRANS(R)*R .
-  !                If  INFO .NE. 0 , the factorization is not complete.
+  !                If  INFO .NE. 0, the factorization is not complete.
   !
   !        RCOND   REAL
   !                an estimate of the reciprocal condition of  A .
-  !                For the system  A*X = B , relative perturbations
+  !                For the system  A*X = B, relative perturbations
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -51,14 +51,14 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
   !                is true, then  A  may be singular to working
   !                precision.  In particular,  RCOND  is zero  if
   !                exact singularity is detected or the estimate
-  !                underflows.  If INFO .NE. 0 , RCOND is unchanged.
+  !                underflows.  If INFO .NE. 0, RCOND is unchanged.
   !
   !        Z       COMPLEX(N)
   !                a work vector whose contents are usually unimportant.
   !                If  A  is singular to working precision, then  Z  is
   !                an approximate null vector in the sense that
   !                NORM(A*Z) = RCOND*NORM(A)*NORM(Z) .
-  !                If  INFO .NE. 0 , Z  is unchanged.
+  !                If  INFO .NE. 0, Z  is unchanged.
   !
   !        INFO    INTEGER
   !                = 0  for normal return.
@@ -91,13 +91,13 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CPPCO
-  INTEGER N , Info
-  COMPLEX Ap(*) , Z(*)
+  INTEGER N, Info
+  COMPLEX Ap(*), Z(*)
   REAL Rcond
   !
-  COMPLEX CDOTC , ek , t , wk , wkm
-  REAL anorm , s , SCASUM , sm , ynorm
-  INTEGER i , ij , j , jm1 , j1 , k , kb , kj , kk , kp1
+  COMPLEX CDOTC, ek, t, wk, wkm
+  REAL anorm, s, SCASUM, sm, ynorm
+  INTEGER i, ij, j, jm1, j1, k, kb, kj, kk, kp1
   REAL, EXTERNAL :: CABS1
   COMPLEX, EXTERNAL :: CSIGN1
   !
@@ -105,20 +105,20 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
   !
   !***FIRST EXECUTABLE STATEMENT  CPPCO
   j1 = 1
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = CMPLX(SCASUM(j,Ap(j1),1),0.0E0)
     ij = j1
     j1 = j1 + j
     jm1 = j - 1
     IF ( jm1>=1 ) THEN
-      DO i = 1 , jm1
+      DO i = 1, jm1
         Z(i) = CMPLX(REAL(Z(i))+CABS1(Ap(ij)),0.0E0)
         ij = ij + 1
       ENDDO
     ENDIF
   ENDDO
   anorm = 0.0E0
-  DO j = 1 , N
+  DO j = 1, N
     anorm = MAX(anorm,REAL(Z(j)))
   ENDDO
   !
@@ -136,11 +136,11 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
     !        SOLVE CTRANS(R)*W = E
     !
     ek = (1.0E0,0.0E0)
-    DO j = 1 , N
+    DO j = 1, N
       Z(j) = (0.0E0,0.0E0)
     ENDDO
     kk = 0
-    DO k = 1 , N
+    DO k = 1, N
       kk = kk + k
       IF ( CABS1(Z(k))/=0.0E0 ) ek = CSIGN1(ek,-Z(k))
       IF ( CABS1(ek-Z(k))>REAL(Ap(kk)) ) THEN
@@ -157,7 +157,7 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
       kp1 = k + 1
       kj = kk + k
       IF ( kp1<=N ) THEN
-        DO j = kp1 , N
+        DO j = kp1, N
           sm = sm + CABS1(Z(j)+wkm*CONJG(Ap(kj)))
           Z(j) = Z(j) + wk*CONJG(Ap(kj))
           s = s + CABS1(Z(j))
@@ -167,7 +167,7 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
           t = wkm - wk
           wk = wkm
           kj = kk + k
-          DO j = kp1 , N
+          DO j = kp1, N
             Z(j) = Z(j) + t*CONJG(Ap(kj))
             kj = kj + j
           ENDDO
@@ -180,7 +180,7 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
     !
     !        SOLVE R*Y = W
     !
-    DO kb = 1 , N
+    DO kb = 1, N
       k = N + 1 - kb
       IF ( CABS1(Z(k))>REAL(Ap(kk)) ) THEN
         s = REAL(Ap(kk))/CABS1(Z(k))
@@ -198,7 +198,7 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
     !
     !        SOLVE CTRANS(R)*V = Y
     !
-    DO k = 1 , N
+    DO k = 1, N
       Z(k) = Z(k) - CDOTC(k-1,Ap(kk+1),1,Z(1),1)
       kk = kk + k
       IF ( CABS1(Z(k))>REAL(Ap(kk)) ) THEN
@@ -214,7 +214,7 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
     !
     !        SOLVE R*Z = V
     !
-    DO kb = 1 , N
+    DO kb = 1, N
       k = N + 1 - kb
       IF ( CABS1(Z(k))>REAL(Ap(kk)) ) THEN
         s = REAL(Ap(kk))/CABS1(Z(k))

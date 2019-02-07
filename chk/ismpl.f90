@@ -24,12 +24,12 @@ SUBROUTINE ISMPL(N,M,Indx)
   !   920511  Added complete declaration section.  (WRB)
   !***END PROLOGUE  ISMPL
   !     .. Scalar Arguments ..
-  INTEGER M , N
+  INTEGER M, N
   !     .. Array Arguments ..
   INTEGER Indx(M)
   !     .. Local Scalars ..
   REAL dummy
-  INTEGER i , id , j
+  INTEGER i, id, j
   !     .. External Functions ..
   REAL RAND
   EXTERNAL RAND
@@ -45,14 +45,14 @@ SUBROUTINE ISMPL(N,M,Indx)
   !     Set the indices.
   Indx(1) = INT(RAND(dummy)*N) + 1
   !VD$ NOCONCUR
-  DO i = 2 , M
+  DO i = 2, M
     DO
       id = INT(RAND(dummy)*N) + 1
       !
       !        Check to see if ID has already been chosen.
       !VD$ NOVECTOR
       !VD$ NOCONCUR
-      DO j = 1 , i - 1
+      DO j = 1, i - 1
         IF ( id==Indx(j) ) GOTO 50
       ENDDO
       Indx(i) = id

@@ -106,9 +106,9 @@ SUBROUTINE DSUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSUDS
-  INTEGER Iflag , il , ip , is , Iwork(*) , ks , kt , ku , kv , Mlso , Neq , &
-    Nrda , Nuk
-  REAL(8) :: A(Nrda,*) , B(*) , Work(*) , X(*)
+  INTEGER Iflag, il, ip, is, Iwork(*), ks, kt, ku, kv, Mlso, Neq, &
+    Nrda, Nuk
+  REAL(8) :: A(Nrda,*), B(*), Work(*), X(*)
   !
   !***FIRST EXECUTABLE STATEMENT  DSUDS
   is = 2

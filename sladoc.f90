@@ -95,21 +95,21 @@ PROGRAM SLADOC
   !
   INTEGER MXLFN
   PARAMETER (MXLFN=32)
-  CHARACTER(MXLFN) :: FIN , FCAT , FDAF , FKWD , FTBL , FLIS , FOUT , FERR
+  CHARACTER(MXLFN) :: FIN, FCAT, FDAF, FKWD, FTBL, FLIS, FOUT, FERR
   CHARACTER(MXLFN) :: temp
   PARAMETER (FIN='/dev/tty',FCAT='slacat',FDAF='sladaf',FKWD='slakwd',&
     FTBL='slatbl',FLIS='slalis',FOUT='/dev/tty',FERR='/dev/tty')
   !
   !     Library dependent parameter definitions.
   !
-  INTEGER MXLCAT , MXNCAT , MXLRN , MXNCL , MXNRN , MXLKAT
+  INTEGER MXLCAT, MXNCAT, MXLRN, MXNCL, MXNRN, MXLKAT
   PARAMETER (MXLKAT=7)
   PARAMETER (MXLCAT=10,MXLRN=6,MXNRN=1900)
   PARAMETER (MXNCAT=750,MXNCL=750)
-  CHARACTER(MXLCAT) :: tclass(MXNCAT) , tcl
-  INTEGER iptr(MXNCAT) , jptr(MXNCAT) , kptr(MXNCAT)
+  CHARACTER(MXLCAT) :: tclass(MXNCAT), tcl
+  INTEGER iptr(MXNCAT), jptr(MXNCAT), kptr(MXNCAT)
   CHARACTER(80) :: stmts(MXNCL)
-  INTEGER LUTIL , LLIB
+  INTEGER LUTIL, LLIB
   PARAMETER (LUTIL=6,LLIB=6)
   CHARACTER(LUTIL) :: UTIL
   CHARACTER(LLIB) :: LIB
@@ -119,24 +119,24 @@ PROGRAM SLADOC
   !
   !     Other declarations.
   !
-  INTEGER ierror , ifind , ii , ij , il , ilen , in , inext , ir , irec ,&
-    istart , istmt , itemp , jcl , jj , lb2 , leng , lftbl , lkats ,&
-    ll , ls , lt2 , ltcl , ncc , nerr , nlines , npd , ntkwd , ntry ,&
+  INTEGER ierror, ifind, ii, ij, il, ilen, in, inext, ir, irec ,&
+    istart, istmt, itemp, jcl, jj, lb2, leng, lftbl, lkats ,&
+    ll, ls, lt2, ltcl, ncc, nerr, nlines, npd, ntkwd, ntry ,&
     num
-  CHARACTER(LLN) :: line , linesv
+  CHARACTER(LLN) :: line, linesv
   !
-  CHARACTER(MXLRN) :: rtname(MXNRN) , rtnin
+  CHARACTER(MXLRN) :: rtname(MXNRN), rtnin
   CHARACTER(MXLRN) :: cname(MXNRN/2)
   !
-  INTEGER LCAT , LCATLS , MLCAT , SEVEN
+  INTEGER LCAT, LCATLS, MLCAT, SEVEN
   PARAMETER (LCAT=6,LCATLS=72,MLCAT=MXLCAT-LCAT,SEVEN=7)
-  CHARACTER(MXLCAT) :: cat(MXNRN) , kat
+  CHARACTER(MXLCAT) :: cat(MXNRN), kat
   CHARACTER(MXLKAT) :: kats
   !
   !     KMAXI - maximum length of a keyword phrase.
   !     MXKWDS - maximum number of keyword phrases
   !
-  INTEGER KMAXI , MXKWDS
+  INTEGER KMAXI, MXKWDS
   PARAMETER (KMAXI=60,MXKWDS=500)
   CHARACTER(KMAXI) :: kwrd
   CHARACTER(KMAXI) :: tkwd(MXKWDS)
@@ -145,13 +145,13 @@ PROGRAM SLADOC
   !     IPTRR - table of pointers to the routines containing the
   !             keyword phrases.
   !
-  INTEGER iptrl(10*MXKWDS) , iptrr(10*MXKWDS)
+  INTEGER iptrl(10*MXKWDS), iptrr(10*MXKWDS)
   !
-  INTEGER LU13 , LU14 , LU5 , LU6 , LU17 , LU18 , LU19
+  INTEGER LU13, LU14, LU5, LU6, LU17, LU18, LU19
   PARAMETER (LU13=13,LU14=14,LU5=5,LU6=6,LU17=17,LU18=18,LU19=19)
-  CHARACTER(MXLFN) :: fname , fnamsv , fn
-  LOGICAL llu13 , llu18 , llu19 , llu14
-  LOGICAL found , lexist
+  CHARACTER(MXLFN) :: fname, fnamsv, fn
+  LOGICAL llu13, llu18, llu19, llu14
+  LOGICAL found, lexist
   !
   !     IS  - table of pointers to the record in file FDAF containing
   !           the subprogram statement.
@@ -162,8 +162,8 @@ PROGRAM SLADOC
   !     IPE - table of pointers to the record in file FDAF containing
   !           ending line of the "PURPOSE" section.
   !
-  INTEGER is(MXNRN) , ie(MXNRN) , ips(MXNRN) , ipe(MXNRN)
-  INTEGER i , info , j , lb , lt
+  INTEGER is(MXNRN), ie(MXNRN), ips(MXNRN), ipe(MXNRN)
+  INTEGER i, info, j, lb, lt
   !
   CHARACTER :: input1
   CHARACTER(24) :: fmt1
@@ -173,38 +173,38 @@ PROGRAM SLADOC
   CHARACTER forma*60
   INTEGER IALPHA
   PARAMETER (IALPHA=26)
-  INTEGER I1(IALPHA) , I2(IALPHA) , I3(IALPHA) , LMSg(IALPHA)
+  INTEGER I1(IALPHA), I2(IALPHA), I3(IALPHA), LMSg(IALPHA)
   CHARACTER(7) :: CLAss(IALPHA)
   !
   !     Variables used in the browsing mode.
   !
-  INTEGER pgsz , low , high
-  COMMON /CATGRY/ I1 , I2 , I3 , LMSg
+  INTEGER pgsz, low, high
+  COMMON /CATGRY/ I1, I2, I3, LMSg
   COMMON /KLASS / CLAss
   !
   !     External functions.
   !
-  INTEGER FIND , LENSTR , MINOR
+  INTEGER FIND, LENSTR, MINOR
   CHARACTER(10) :: CVTCAT
-  EXTERNAL CVTCAT , FIND , LENSTR , MINOR
+  EXTERNAL CVTCAT, FIND, LENSTR, MINOR
   !
   !     Intrinsic functions.
   !
-  INTRINSIC ABS , INDEX , MAX , MIN
+  INTRINSIC ABS, INDEX, MAX, MIN
   !
   !     DATA statement definitions.
   !
-  DATA llu13/.FALSE./ , fnamsv/' '/
+  DATA llu13/.FALSE./, fnamsv/' '/
   !
   !     These three variables indicate whether the information from
   !     the files FCAT, FTBL and FKWD have been read in.  The files
   !     are read only once and then only if the information is needed.
   !
-  DATA llu18 , llu19 , llu14/.FALSE. , .FALSE. , .FALSE./
+  DATA llu18, llu19, llu14/.FALSE., .FALSE., .FALSE./
   !
   DATA forma(1:60) /'(/,1X,A,''category does not exist in this library.'',/)'/
   !***FIRST EXECUTABLE STATEMENT  SLADOC
-  WRITE (UNIT=msg,FMT=99039) LCAT , MLCAT
+  WRITE (UNIT=msg,FMT=99039) LCAT, MLCAT
   fmt1 = '(1X, A'//msg(1:2)//', '//msg(3:4)//'X, A, 3I8)'
   fname = FLIS
   !
@@ -230,7 +230,7 @@ PROGRAM SLADOC
   !
   temp = FDAF
   ilen = LENSTR(temp)
-  DO i = ilen , 1 , -1
+  DO i = ilen, 1, -1
     IF ( temp(i:i)=='/' ) THEN
       INQUIRE (FILE=temp(i+1:ilen),EXIST=lexist)
       IF ( lexist ) temp(1:ilen-i) = temp(i+1:ilen)
@@ -246,7 +246,7 @@ PROGRAM SLADOC
   ENDIF
   temp = FCAT
   ilen = LENSTR(temp)
-  DO i = ilen , 1 , -1
+  DO i = ilen, 1, -1
     IF ( temp(i:i)=='/' ) THEN
       INQUIRE (FILE=temp(i+1:ilen),EXIST=lexist)
       IF ( lexist ) temp(1:ilen-i) = temp(i+1:ilen)
@@ -261,7 +261,7 @@ PROGRAM SLADOC
   ENDIF
   temp = FKWD
   ilen = LENSTR(temp)
-  DO i = ilen , 1 , -1
+  DO i = ilen, 1, -1
     IF ( temp(i:i)=='/' ) THEN
       INQUIRE (FILE=temp(i+1:ilen),EXIST=lexist)
       IF ( lexist ) temp(1:ilen-i) = temp(i+1:ilen)
@@ -276,7 +276,7 @@ PROGRAM SLADOC
   ENDIF
   temp = FTBL
   ilen = LENSTR(temp)
-  DO i = ilen , 1 , -1
+  DO i = ilen, 1, -1
     IF ( temp(i:i)=='/' ) THEN
       INQUIRE (FILE=temp(i+1:ilen),EXIST=lexist)
       IF ( lexist ) temp(1:ilen-i) = temp(i+1:ilen)
@@ -334,8 +334,8 @@ PROGRAM SLADOC
             EXIT
           ENDIF
           ncc = ncc - 1
-          DO j = 1 , ncc
-            READ (UNIT=LU14,FMT=99040) iptr(j) , jptr(j) , kptr(j) ,&
+          DO j = 1, ncc
+            READ (UNIT=LU14,FMT=99040) iptr(j), jptr(j), kptr(j) ,&
               tclass(j)
           ENDDO
           READ (UNIT=LU14,FMT=99038) kptr(ncc+1)
@@ -373,8 +373,8 @@ PROGRAM SLADOC
               ltcl = LENSTR(tcl)
               WRITE (UNIT=form,FMT=99041) ltcl
               istart = I3(1)
-              DO jcl = 1 , LMSg(1)
-                WRITE (UNIT=LU6,FMT=form) tcl(1:ltcl) , stmts(istart)&
+              DO jcl = 1, LMSg(1)
+                WRITE (UNIT=LU6,FMT=form) tcl(1:ltcl), stmts(istart)&
                   (1:LENSTR(stmts(istart)))
                 istart = istart + 1
                 tcl = ' '
@@ -416,21 +416,21 @@ PROGRAM SLADOC
               WRITE (UNIT=form,FMT=99041) lkats
               istart = I3(1)
               tcl = kats
-              DO jcl = 1 , LMSg(1)
-                WRITE (UNIT=LU6,FMT=form) tcl(1:lkats) , stmts(istart)&
+              DO jcl = 1, LMSg(1)
+                WRITE (UNIT=LU6,FMT=form) tcl(1:lkats), stmts(istart)&
                   (1:LENSTR(stmts(istart)))
                 istart = istart + 1
                 tcl = ' '
               ENDDO
             ENDIF
             IF ( ntry>1 ) THEN
-              DO in = 2 , ntry
+              DO in = 2, ntry
                 tcl = CLAss(in)
                 ltcl = LENSTR(tcl)
                 WRITE (UNIT=form,FMT=99041) ltcl
                 istart = I3(in)
-                DO jcl = 1 , LMSg(in)
-                  WRITE (UNIT=LU6,FMT=form) tcl(1:ltcl) , stmts(istart)&
+                DO jcl = 1, LMSg(in)
+                  WRITE (UNIT=LU6,FMT=form) tcl(1:ltcl), stmts(istart)&
                     (1:LENSTR(stmts(istart)))
                   istart = istart + 1
                   tcl = ' '
@@ -491,21 +491,21 @@ PROGRAM SLADOC
               WRITE (UNIT=form,FMT=99041) lkats
               istart = I3(1)
               tcl = kats
-              DO jcl = 1 , LMSg(1)
-                WRITE (UNIT=LU6,FMT=form) tcl(1:lkats) , stmts(istart)&
+              DO jcl = 1, LMSg(1)
+                WRITE (UNIT=LU6,FMT=form) tcl(1:lkats), stmts(istart)&
                   (1:LENSTR(stmts(istart)))
                 istart = istart + 1
                 tcl = ' '
               ENDDO
             ENDIF
             IF ( ntry>1 ) THEN
-              DO in = 2 , ntry
+              DO in = 2, ntry
                 tcl = CLAss(in)
                 ltcl = LENSTR(tcl)
                 WRITE (UNIT=form,FMT=99041) ltcl
                 istart = I3(in)
-                DO jcl = 1 , LMSg(in)
-                  WRITE (UNIT=LU6,FMT=form) tcl(1:ltcl) , stmts(istart)&
+                DO jcl = 1, LMSg(in)
+                  WRITE (UNIT=LU6,FMT=form) tcl(1:ltcl), stmts(istart)&
                     (1:LENSTR(stmts(istart)))
                   istart = istart + 1
                   tcl = ' '
@@ -556,7 +556,7 @@ PROGRAM SLADOC
               nerr = 6
               GOTO 700
             ENDIF
-            READ (UNIT=linesv,FMT=99037) iptrl(inext+1) , iptrr(inext+1)
+            READ (UNIT=linesv,FMT=99037) iptrl(inext+1), iptrr(inext+1)
             inext = inext + 1
           ENDDO
           510          llu19 = .TRUE.
@@ -576,8 +576,8 @@ PROGRAM SLADOC
               nerr = 2
               GOTO 700
             ENDIF
-            READ (UNIT=linesv,FMT=99017) cat(lftbl) , rtname(lftbl) ,&
-              is(lftbl) , ie(lftbl) , ips(lftbl) , ipe(lftbl)
+            READ (UNIT=linesv,FMT=99017) cat(lftbl), rtname(lftbl) ,&
+              is(lftbl), ie(lftbl), ips(lftbl), ipe(lftbl)
           ENDDO
           515          lftbl = lftbl - 1
           llu18 = .TRUE.
@@ -611,7 +611,7 @@ PROGRAM SLADOC
         !
         ilen = LENSTR(kwrd)
         found = .FALSE.
-        DO i = 1 , ntkwd
+        DO i = 1, ntkwd
           ij = INDEX(tkwd(i),kwrd(1:ilen))
           IF ( ij/=0 ) THEN
             found = .TRUE.
@@ -662,8 +662,8 @@ PROGRAM SLADOC
               nerr = 2
               GOTO 700
             ENDIF
-            READ (UNIT=linesv,FMT=99017) cat(lftbl) , rtname(lftbl) ,&
-              is(lftbl) , ie(lftbl) , ips(lftbl) , ipe(lftbl)
+            READ (UNIT=linesv,FMT=99017) cat(lftbl), rtname(lftbl) ,&
+              is(lftbl), ie(lftbl), ips(lftbl), ipe(lftbl)
           ENDDO
           535          lftbl = lftbl - 1
           llu18 = .TRUE.
@@ -697,7 +697,7 @@ PROGRAM SLADOC
         ENDIF
         ij = 0
         ilen = LENSTR(kat)
-        DO i = 1 , lftbl
+        DO i = 1, lftbl
           IF ( kat==cat(i)(1:ilen) ) THEN
             ij = ij + 1
             !
@@ -756,8 +756,8 @@ PROGRAM SLADOC
               EXIT
             ENDIF
             ncc = ncc - 1
-            DO j = 1 , ncc
-              READ (UNIT=LU14,FMT=99040) iptr(j) , jptr(j) , kptr(j) ,&
+            DO j = 1, ncc
+              READ (UNIT=LU14,FMT=99040) iptr(j), jptr(j), kptr(j) ,&
                 tclass(j)
             ENDDO
             READ (UNIT=LU14,FMT=99038) kptr(ncc+1)
@@ -799,7 +799,7 @@ PROGRAM SLADOC
                 nerr = 6
                 GOTO 700
               ENDIF
-              READ (UNIT=linesv,FMT=99037) iptrl(inext+1) , iptrr(inext+1)
+              READ (UNIT=linesv,FMT=99037) iptrl(inext+1), iptrr(inext+1)
               inext = inext + 1
             ENDDO
             566            llu19 = .TRUE.
@@ -811,10 +811,10 @@ PROGRAM SLADOC
         ENDIF
         IF ( kat(1:1)=='C' ) THEN
           fname = 'classlis'
-          WRITE (UNIT=LU6,FMT=99033) 'Classification' , ncc
+          WRITE (UNIT=LU6,FMT=99033) 'Classification', ncc
         ELSE
           fname = 'keylis'
-          WRITE (UNIT=LU6,FMT=99033) 'Keyword' , ntkwd
+          WRITE (UNIT=LU6,FMT=99033) 'Keyword', ntkwd
         ENDIF
         ilen = LENSTR(fname)
         WRITE (UNIT=LU6,FMT=99034) fname(1:ilen)
@@ -905,23 +905,23 @@ PROGRAM SLADOC
               low = MAX(high+(npd-1)*pgsz+1,1)
               high = MIN(low+pgsz-1,nlines)
               IF ( low>high.OR.high-low+1<pgsz ) low = MAX(high-pgsz,1)
-              DO irec = low , MIN(high,nlines)
+              DO irec = low, MIN(high,nlines)
                 IF ( kat(1:1)=='C' ) THEN
                   ii = kptr(irec)
                   tcl = ' '
                   CALL UNDOCL(tclass(irec),tcl)
-                  WRITE (UNIT=LU6,FMT=99044) ii , tcl(1:LENSTR(tcl)) ,&
+                  WRITE (UNIT=LU6,FMT=99044) ii, tcl(1:LENSTR(tcl)) ,&
                     stmts(ii)(1:LENSTR(stmts(ii)))
                   itemp = kptr(irec+1) - kptr(irec) - 1
                   ltcl = LENSTR(tcl) + 3
                   WRITE (UNIT=form,FMT=99045) ltcl
-                  DO jj = 1 , itemp
+                  DO jj = 1, itemp
                     ii = ii + 1
-                    WRITE (UNIT=LU6,FMT=form) ii , stmts(ii)&
+                    WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)&
                       (1:LENSTR(stmts(ii)))
                   ENDDO
                 ELSE
-                  WRITE (UNIT=LU6,FMT=99036) irec , tkwd(irec)
+                  WRITE (UNIT=LU6,FMT=99036) irec, tkwd(irec)
                 ENDIF
               ENDDO
               WRITE (UNIT=LU6,FMT=99028)
@@ -954,23 +954,23 @@ PROGRAM SLADOC
               low = MAX(low+npd*pgsz,1)
               high = MIN(low+pgsz-1,nlines)
               IF ( low>high.OR.high-low+1<pgsz ) low = MAX(high-pgsz,1)
-              DO irec = low , MIN(high,nlines)
+              DO irec = low, MIN(high,nlines)
                 IF ( kat(1:1)=='C' ) THEN
                   ii = kptr(irec)
                   tcl = ' '
                   CALL UNDOCL(tclass(irec),tcl)
-                  WRITE (UNIT=LU6,FMT=99044) ii , tcl(1:LENSTR(tcl)) ,&
+                  WRITE (UNIT=LU6,FMT=99044) ii, tcl(1:LENSTR(tcl)) ,&
                     stmts(ii)(1:LENSTR(stmts(ii)))
                   itemp = kptr(irec+1) - kptr(irec) - 1
                   ltcl = LENSTR(tcl) + 3
                   WRITE (UNIT=form,FMT=99045) ltcl
-                  DO jj = 1 , itemp
+                  DO jj = 1, itemp
                     ii = ii + 1
-                    WRITE (UNIT=LU6,FMT=form) ii , stmts(ii)&
+                    WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)&
                       (1:LENSTR(stmts(ii)))
                   ENDDO
                 ELSE
-                  WRITE (UNIT=LU6,FMT=99036) irec , tkwd(irec)
+                  WRITE (UNIT=LU6,FMT=99036) irec, tkwd(irec)
                 ENDIF
               ENDDO
               WRITE (UNIT=LU6,FMT=99028)
@@ -981,23 +981,23 @@ PROGRAM SLADOC
               low = MAX(low+pgsz/2,1)
               high = MIN(low+pgsz-1,nlines)
               IF ( low>high.OR.high-low+1<pgsz ) low = MAX(high-pgsz,1)
-              DO irec = low , MIN(high,nlines)
+              DO irec = low, MIN(high,nlines)
                 IF ( kat(1:1)=='C' ) THEN
                   ii = kptr(irec)
                   tcl = ' '
                   CALL UNDOCL(tclass(irec),tcl)
-                  WRITE (UNIT=LU6,FMT=99044) ii , tcl(1:LENSTR(tcl)) ,&
+                  WRITE (UNIT=LU6,FMT=99044) ii, tcl(1:LENSTR(tcl)) ,&
                     stmts(ii)(1:LENSTR(stmts(ii)))
                   itemp = kptr(irec+1) - kptr(irec) - 1
                   ltcl = LENSTR(tcl) + 3
                   WRITE (UNIT=form,FMT=99045) ltcl
-                  DO jj = 1 , itemp
+                  DO jj = 1, itemp
                     ii = ii + 1
-                    WRITE (UNIT=LU6,FMT=form) ii , stmts(ii)&
+                    WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)&
                       (1:LENSTR(stmts(ii)))
                   ENDDO
                 ELSE
-                  WRITE (UNIT=LU6,FMT=99036) irec , tkwd(irec)
+                  WRITE (UNIT=LU6,FMT=99036) irec, tkwd(irec)
                 ENDIF
               ENDDO
               WRITE (UNIT=LU6,FMT=99028)
@@ -1008,23 +1008,23 @@ PROGRAM SLADOC
               low = MAX(low-pgsz/2,1)
               high = MIN(low+pgsz-1,nlines)
               IF ( low>high.OR.high-low+1<pgsz ) low = MAX(high-pgsz,1)
-              DO irec = low , MIN(high,nlines)
+              DO irec = low, MIN(high,nlines)
                 IF ( kat(1:1)=='C' ) THEN
                   ii = kptr(irec)
                   tcl = ' '
                   CALL UNDOCL(tclass(irec),tcl)
-                  WRITE (UNIT=LU6,FMT=99044) ii , tcl(1:LENSTR(tcl)) ,&
+                  WRITE (UNIT=LU6,FMT=99044) ii, tcl(1:LENSTR(tcl)) ,&
                     stmts(ii)(1:LENSTR(stmts(ii)))
                   itemp = kptr(irec+1) - kptr(irec) - 1
                   ltcl = LENSTR(tcl) + 3
                   WRITE (UNIT=form,FMT=99045) ltcl
-                  DO jj = 1 , itemp
+                  DO jj = 1, itemp
                     ii = ii + 1
-                    WRITE (UNIT=LU6,FMT=form) ii , stmts(ii)&
+                    WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)&
                       (1:LENSTR(stmts(ii)))
                   ENDDO
                 ELSE
-                  WRITE (UNIT=LU6,FMT=99036) irec , tkwd(irec)
+                  WRITE (UNIT=LU6,FMT=99036) irec, tkwd(irec)
                 ENDIF
               ENDDO
               WRITE (UNIT=LU6,FMT=99028)
@@ -1034,23 +1034,23 @@ PROGRAM SLADOC
             ELSEIF ( line(lb:lb)=='P'.AND.lt==1 ) THEN
               high = MIN(low+pgsz-1,nlines)
               IF ( low>high.OR.high-low+1<pgsz ) low = MAX(high-pgsz,1)
-              DO irec = low , MIN(high,nlines)
+              DO irec = low, MIN(high,nlines)
                 IF ( kat(1:1)=='C' ) THEN
                   ii = kptr(irec)
                   tcl = ' '
                   CALL UNDOCL(tclass(irec),tcl)
-                  WRITE (UNIT=LU6,FMT=99044) ii , tcl(1:LENSTR(tcl)) ,&
+                  WRITE (UNIT=LU6,FMT=99044) ii, tcl(1:LENSTR(tcl)) ,&
                     stmts(ii)(1:LENSTR(stmts(ii)))
                   itemp = kptr(irec+1) - kptr(irec) - 1
                   ltcl = LENSTR(tcl) + 3
                   WRITE (UNIT=form,FMT=99045) ltcl
-                  DO jj = 1 , itemp
+                  DO jj = 1, itemp
                     ii = ii + 1
-                    WRITE (UNIT=LU6,FMT=form) ii , stmts(ii)&
+                    WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)&
                       (1:LENSTR(stmts(ii)))
                   ENDDO
                 ELSE
-                  WRITE (UNIT=LU6,FMT=99036) irec , tkwd(irec)
+                  WRITE (UNIT=LU6,FMT=99036) irec, tkwd(irec)
                 ENDIF
               ENDDO
               WRITE (UNIT=LU6,FMT=99028)
@@ -1082,22 +1082,22 @@ PROGRAM SLADOC
           !           Write it to the standard output file.
           !
           IF ( kat(1:1)=='C' ) THEN
-            DO j = 1 , ncc
+            DO j = 1, ncc
               i = kptr(j)
               tcl = ' '
               CALL UNDOCL(tclass(j),tcl)
-              WRITE (UNIT=LU6,FMT=99046) tcl(1:LENSTR(tcl)) , stmts(i)&
+              WRITE (UNIT=LU6,FMT=99046) tcl(1:LENSTR(tcl)), stmts(i)&
                 (1:LENSTR(stmts(i)))
               itemp = kptr(j+1) - kptr(j) - 1
               ltcl = LENSTR(tcl) + 1
               WRITE (UNIT=form,FMT=99047) ltcl
-              DO jj = 1 , itemp
+              DO jj = 1, itemp
                 i = i + 1
                 WRITE (UNIT=LU6,FMT=form) stmts(i)(1:LENSTR(stmts(i)))
               ENDDO
             ENDDO
           ELSE
-            DO i = 1 , ntkwd
+            DO i = 1, ntkwd
               WRITE (UNIT=LU6,FMT=99002) tkwd(i)
             ENDDO
           ENDIF
@@ -1130,22 +1130,22 @@ PROGRAM SLADOC
           !           Write the list to the file specified by the user.
           !
           IF ( kat(1:1)=='C' ) THEN
-            DO j = 1 , ncc
+            DO j = 1, ncc
               i = kptr(j)
               tcl = ' '
               CALL UNDOCL(tclass(j),tcl)
-              WRITE (UNIT=LU13,FMT=99046) tcl(1:LENSTR(tcl)) , stmts(i)&
+              WRITE (UNIT=LU13,FMT=99046) tcl(1:LENSTR(tcl)), stmts(i)&
                 (1:LENSTR(stmts(i)))
               itemp = kptr(j+1) - kptr(j) - 1
               ltcl = LENSTR(tcl) + 1
               WRITE (UNIT=form,FMT=99047) ltcl
-              DO jj = 1 , itemp
+              DO jj = 1, itemp
                 i = i + 1
                 WRITE (UNIT=LU13,FMT=form) stmts(i)(1:LENSTR(stmts(i)))
               ENDDO
             ENDDO
           ELSE
-            DO i = 1 , ntkwd
+            DO i = 1, ntkwd
               WRITE (UNIT=LU13,FMT=99002) tkwd(i)
             ENDDO
           ENDIF
@@ -1192,8 +1192,8 @@ PROGRAM SLADOC
               nerr = 2
               GOTO 700
             ENDIF
-            READ (UNIT=linesv,FMT=99017) cat(lftbl) , rtname(lftbl) ,&
-              is(lftbl) , ie(lftbl) , ips(lftbl) , ipe(lftbl)
+            READ (UNIT=linesv,FMT=99017) cat(lftbl), rtname(lftbl) ,&
+              is(lftbl), ie(lftbl), ips(lftbl), ipe(lftbl)
           ENDDO
           580          lftbl = lftbl - 1
           llu18 = .TRUE.
@@ -1222,7 +1222,7 @@ PROGRAM SLADOC
           temp = line(ls-1+lb:ls-1+lb+lt-1)
         ENDIF
         rtnin = temp
-        DO i = 1 , lftbl
+        DO i = 1, lftbl
           IF ( rtnin==rtname(i) ) GOTO 610
         ENDDO
         600        WRITE (UNIT=LU6,FMT=99025)
@@ -1241,11 +1241,11 @@ PROGRAM SLADOC
         !         Write the name of the routine and the number of lines of
         !         documentation.
         !
-        WRITE (UNIT=LU6,FMT=99022) rtnin , num
+        WRITE (UNIT=LU6,FMT=99022) rtnin, num
         !
         !         Write the purpose of the subprogram.
         !
-        DO irec = ips(i) , ipe(i)
+        DO irec = ips(i), ipe(i)
           READ (UNIT=LU17,FMT=99001,REC=irec) line
           WRITE (UNIT=LU6,FMT=99002) line
         ENDDO
@@ -1336,9 +1336,9 @@ PROGRAM SLADOC
               nlines = ie(i) - is(i) + 1
               high = MIN(low+pgsz-1,nlines)
               IF ( low>high.OR.high-low+1<pgsz ) low = MAX(high-pgsz+1,1)
-              DO irec = is(i) + low - 1 , MIN(is(i)+high-1,ie(i))
+              DO irec = is(i) + low - 1, MIN(is(i)+high-1,ie(i))
                 READ (UNIT=LU17,FMT=99001,REC=irec) line
-                WRITE (UNIT=LU6,FMT=99029) irec - is(i) + 1 , line
+                WRITE (UNIT=LU6,FMT=99029) irec - is(i) + 1, line
               ENDDO
               WRITE (UNIT=LU6,FMT=99028)
               !
@@ -1371,9 +1371,9 @@ PROGRAM SLADOC
               nlines = ie(i) - is(i) + 1
               high = MIN(low+pgsz-1,nlines)
               IF ( low>high.OR.high-low+1<pgsz ) low = MAX(high-pgsz+1,1)
-              DO irec = is(i) + low - 1 , MIN(is(i)+high-1,ie(i))
+              DO irec = is(i) + low - 1, MIN(is(i)+high-1,ie(i))
                 READ (UNIT=LU17,FMT=99001,REC=irec) line
-                WRITE (UNIT=LU6,FMT=99029) irec - is(i) + 1 , line
+                WRITE (UNIT=LU6,FMT=99029) irec - is(i) + 1, line
               ENDDO
               WRITE (UNIT=LU6,FMT=99028)
               !
@@ -1384,9 +1384,9 @@ PROGRAM SLADOC
               nlines = ie(i) - is(i) + 1
               high = MIN(low+pgsz-1,nlines)
               IF ( low>high.OR.high-low+1<pgsz ) low = MAX(high-pgsz+1,1)
-              DO irec = is(i) + low - 1 , MIN(is(i)+high-1,ie(i))
+              DO irec = is(i) + low - 1, MIN(is(i)+high-1,ie(i))
                 READ (UNIT=LU17,FMT=99001,REC=irec) line
-                WRITE (UNIT=LU6,FMT=99029) irec - is(i) + 1 , line
+                WRITE (UNIT=LU6,FMT=99029) irec - is(i) + 1, line
               ENDDO
               WRITE (UNIT=LU6,FMT=99028)
               !
@@ -1397,9 +1397,9 @@ PROGRAM SLADOC
               nlines = ie(i) - is(i) + 1
               high = MIN(low+pgsz-1,nlines)
               IF ( low>high.OR.high-low+1<pgsz ) low = MAX(high-pgsz+1,1)
-              DO irec = is(i) + low - 1 , MIN(is(i)+high-1,ie(i))
+              DO irec = is(i) + low - 1, MIN(is(i)+high-1,ie(i))
                 READ (UNIT=LU17,FMT=99001,REC=irec) line
-                WRITE (UNIT=LU6,FMT=99029) irec - is(i) + 1 , line
+                WRITE (UNIT=LU6,FMT=99029) irec - is(i) + 1, line
               ENDDO
               WRITE (UNIT=LU6,FMT=99028)
               !
@@ -1409,9 +1409,9 @@ PROGRAM SLADOC
               nlines = ie(i) - is(i) + 1
               high = MIN(low+pgsz-1,nlines)
               IF ( low>high.OR.high-low+1<pgsz ) low = MAX(high-pgsz+1,1)
-              DO irec = is(i) + low - 1 , MIN(is(i)+high-1,ie(i))
+              DO irec = is(i) + low - 1, MIN(is(i)+high-1,ie(i))
                 READ (UNIT=LU17,FMT=99001,REC=irec) line
-                WRITE (UNIT=LU6,FMT=99029) irec - is(i) + 1 , line
+                WRITE (UNIT=LU6,FMT=99029) irec - is(i) + 1, line
               ENDDO
               WRITE (UNIT=LU6,FMT=99028)
               !
@@ -1441,7 +1441,7 @@ PROGRAM SLADOC
           !
           !           Write it to the standard output file.
           !
-          DO irec = is(i) , ie(i)
+          DO irec = is(i), ie(i)
             READ (UNIT=LU17,FMT=99001,REC=irec) line
             WRITE (UNIT=LU6,FMT=99002) line
           ENDDO
@@ -1473,7 +1473,7 @@ PROGRAM SLADOC
           !
           !           Write the documentation to the file specified by the user.
           !
-          DO irec = is(i) , ie(i)
+          DO irec = is(i), ie(i)
             READ (UNIT=LU17,FMT=99001,REC=irec) line
             WRITE (UNIT=LU13,FMT=99002) line
           ENDDO
@@ -1578,7 +1578,7 @@ PROGRAM SLADOC
     'terminal'/'     type''f,filename'' to have it written on file '&
     ,'''filename'''/&
     '     type''f       '' to have it written on file ','''',A,&
-  '''')
+    '''')
   99024 FORMAT (' If you do not wish to see the full documentation,'/&
     '     type anything else')
   99025 FORMAT (' Routine name not found')
@@ -1646,10 +1646,10 @@ SUBROUTINE CHARIN(Cardin,Lcard,Iopt,Lb,Lt)
   INTEGER LAST
   PARAMETER (LAST=2)
   !     .. Scalar Arguments ..
-  INTEGER Iopt , Lb , Lcard , Lt
+  INTEGER Iopt, Lb, Lcard, Lt
   CHARACTER*(*) Cardin
   !     .. Local Scalars ..
-  INTEGER i , l , l1 , l2 , l3 , l9 , lbp1 , le , match
+  INTEGER i, l, l1, l2, l3, l9, lbp1, le, match
   CHARACTER(2) :: specia
   !     .. Data statements ..
   DATA specia/' ,'/
@@ -1666,9 +1666,9 @@ SUBROUTINE CHARIN(Cardin,Lcard,Iopt,Lb,Lt)
     l9 = LAST
   ENDIF
   Lb = 0
-  DO i = l1 , l2 , l3
+  DO i = l1, l2, l3
     match = 0
-    DO l = 1 , l9
+    DO l = 1, l9
       IF ( Cardin(i:i)==specia(l:l) ) THEN
         match = l
         EXIT
@@ -1694,9 +1694,9 @@ SUBROUTINE CHARIN(Cardin,Lcard,Iopt,Lb,Lt)
   ELSE
     le = Lcard
     lbp1 = Lb + 1
-    DO i = lbp1 , Lcard
+    DO i = lbp1, Lcard
       match = 0
-      DO l = 1 , l9
+      DO l = 1, l9
         IF ( Cardin(i:i)==specia(l:l) ) THEN
           match = l
           EXIT
@@ -1736,13 +1736,13 @@ INTEGER FUNCTION MINOR(Kat,Kats,Ncc,Tclass,Iptr,Jptr,Kptr,Ntry)
   INTEGER IALPHA
   PARAMETER (IALPHA=26)
   !     .. Scalar Arguments ..
-  INTEGER Ncc , Ntry
-  CHARACTER*(*) Kat , Kats
+  INTEGER Ncc, Ntry
+  CHARACTER*(*) Kat, Kats
   !     .. Array Arguments ..
-  INTEGER Iptr(Ncc) , Jptr(Ncc) , Kptr(Ncc)
+  INTEGER Iptr(Ncc), Jptr(Ncc), Kptr(Ncc)
   CHARACTER*(*) Tclass(Ncc)
   !     .. Arrays in Common ..
-  INTEGER I1(IALPHA) , I2(IALPHA) , I3(IALPHA) , LMSg(IALPHA)
+  INTEGER I1(IALPHA), I2(IALPHA), I3(IALPHA), LMSg(IALPHA)
   CHARACTER(7) :: CLAss(IALPHA)
   !     .. Local Scalars ..
   INTEGER ifind
@@ -1752,7 +1752,7 @@ INTEGER FUNCTION MINOR(Kat,Kats,Ncc,Tclass,Iptr,Jptr,Kptr,Ntry)
   !     .. External Subroutines ..
   EXTERNAL UNDOCL
   !     .. Common blocks ..
-  COMMON /CATGRY/ I1 , I2 , I3 , LMSg
+  COMMON /CATGRY/ I1, I2, I3, LMSg
   COMMON /KLASS / CLAss
   !***FIRST EXECUTABLE STATEMENT  MINOR
   MINOR = 0
@@ -1802,15 +1802,15 @@ SUBROUTINE RBLNKS(L1,L2)
   !   920911  Declarations section restructured.  (WRB)
   !***END PROLOGUE  RBLNKS
   !     .. Scalar Arguments ..
-  CHARACTER(72) :: L1 , L2
+  CHARACTER(72) :: L1, L2
   !     .. Local Scalars ..
-  INTEGER i , j , k , leng
+  INTEGER i, j, k, leng
   !     .. External Functions ..
   INTEGER LENSTR
   EXTERNAL LENSTR
   !***FIRST EXECUTABLE STATEMENT  RBLNKS
   leng = LENSTR(L1)
-  DO i = 1 , leng
+  DO i = 1, leng
     IF ( L1(i:i)/=' ' ) GOTO 100
   ENDDO
   !
@@ -1823,7 +1823,7 @@ SUBROUTINE RBLNKS(L1,L2)
   !
   !     Remove leading blanks in the line.
   !
-  DO j = i , leng
+  DO j = i, leng
     L2(k:k) = L1(j:j)
     k = k + 1
   ENDDO
@@ -1852,9 +1852,9 @@ SUBROUTINE UNDOCL(Kat,Cat)
   !   920911  Declarations section restructured.  (WRB)
   !***END PROLOGUE  UNDOCL
   !     .. Scalar Arguments ..
-  CHARACTER*(*) Cat , Kat
+  CHARACTER*(*) Cat, Kat
   !     .. Local Scalars ..
-  INTEGER ic , ik , leng , weny
+  INTEGER ic, ik, leng, weny
   !     .. External Functions ..
   INTEGER LENSTR
   EXTERNAL LENSTR

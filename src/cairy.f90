@@ -134,14 +134,14 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
   !***END PROLOGUE  CAIRY
-  COMPLEX Ai , cone , csq , cy , s1 , s2 , trm1 , trm2 , Z , zta , z3
-  REAL aa , ad , ak , alim , atrm , az , az3 , bk , ck , coef , c1 , c2 , &
-    dig , dk , d1 , d2 , elim , fid , fnu , rl , r1m5 , sfac , tol , &
-    tth , zi , zr , z3i , z3r , R1MACH , bb , alaz
-  INTEGER Id , Ierr , iflag , k , Kode , k1 , k2 , mr , nn , Nz , I1MACH
+  COMPLEX Ai, cone, csq, cy, s1, s2, trm1, trm2, Z, zta, z3
+  REAL aa, ad, ak, alim, atrm, az, az3, bk, ck, coef, c1, c2, &
+    dig, dk, d1, d2, elim, fid, fnu, rl, r1m5, sfac, tol, &
+    tth, zi, zr, z3i, z3r, R1MACH, bb, alaz
+  INTEGER Id, Ierr, iflag, k, Kode, k1, k2, mr, nn, Nz, I1MACH
   DIMENSION cy(1)
-  DATA tth , c1 , c2 , coef/6.66666666666666667E-01 , &
-    3.55028053887817240E-01 , 2.58819403792806799E-01 , &
+  DATA tth, c1, c2, coef/6.66666666666666667E-01, &
+    3.55028053887817240E-01, 2.58819403792806799E-01, &
     1.83776298473930683E-01/
   DATA cone/(1.0E0,0.0E0)/
   !***FIRST EXECUTABLE STATEMENT  CAIRY
@@ -318,7 +318,7 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
         bk = 30.0E0 - 9.0E0*fid
         z3r = REAL(z3)
         z3i = AIMAG(z3)
-        DO k = 1 , 25
+        DO k = 1, 25
           trm1 = trm1*CMPLX(z3r/d1,z3i/d1)
           s1 = s1 + trm1
           trm2 = trm2*CMPLX(z3r/d2,z3i/d2)
@@ -351,4 +351,5 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   100  Nz = 0
   Ierr = 5
   RETURN
-  99999 END SUBROUTINE CAIRY
+  99999 CONTINUE
+  END SUBROUTINE CAIRY

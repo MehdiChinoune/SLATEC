@@ -4,8 +4,8 @@ COMPLEX FUNCTION CATAN(Z)
   IMPLICIT NONE
   !*--CATAN5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , nterms
-  REAL pi2 , r , R1MACH , r2 , rmax , rmin , sqeps , twoi , x , xans , y , &
+  INTEGER i, nterms
+  REAL pi2, r, R1MACH, r2, rmax, rmin, sqeps, twoi, x, xans, y, &
     yans
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CATAN
@@ -32,9 +32,9 @@ COMPLEX FUNCTION CATAN(Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  CATAN
-  COMPLEX Z , z2
+  COMPLEX Z, z2
   LOGICAL first
-  SAVE pi2 , nterms , sqeps , rmin , rmax , first
+  SAVE pi2, nterms, sqeps, rmin, rmax, first
   DATA pi2/1.57079632679489661923E0/
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  CATAN
@@ -55,7 +55,7 @@ COMPLEX FUNCTION CATAN(Z)
     !
     CATAN = (0.0,0.0)
     z2 = Z*Z
-    DO i = 1 , nterms
+    DO i = 1, nterms
       twoi = 2*(nterms-i) + 1
       CATAN = 1.0/twoi - z2*CATAN
     ENDDO
@@ -84,4 +84,5 @@ COMPLEX FUNCTION CATAN(Z)
   CATAN = CMPLX(xans,yans)
   RETURN
   !
-  99999 END FUNCTION CATAN
+  99999 CONTINUE
+  END FUNCTION CATAN

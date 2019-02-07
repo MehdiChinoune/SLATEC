@@ -26,23 +26,23 @@ SUBROUTINE SVCO(Rsav,Isav)
   !
   !-----------------------------------------------------------------------
   ! THIS ROUTINE STORES IN RSAV AND ISAV THE CONTENTS OF COMMON BLOCK
-  ! DEBDF1  , WHICH IS USED INTERNALLY IN THE DEBDF PACKAGE.
+  ! DEBDF1 , WHICH IS USED INTERNALLY IN THE DEBDF PACKAGE.
   !
   ! RSAV = REAL ARRAY OF LENGTH 218 OR MORE.
   ! ISAV = INTEGER ARRAY OF LENGTH 33 OR MORE.
   !-----------------------------------------------------------------------
-  INTEGER Isav , i , ILS , lenils , lenrls
-  REAL Rsav , RLS
-  DIMENSION Rsav(*) , Isav(*)
-  COMMON /DEBDF1/ RLS(218) , ILS(33)
-  SAVE lenrls , lenils
-  DATA lenrls/218/ , lenils/33/
+  INTEGER Isav, i, ILS, lenils, lenrls
+  REAL Rsav, RLS
+  DIMENSION Rsav(*), Isav(*)
+  COMMON /DEBDF1/ RLS(218), ILS(33)
+  SAVE lenrls, lenils
+  DATA lenrls/218/, lenils/33/
   !
   !***FIRST EXECUTABLE STATEMENT  SVCO
-  DO i = 1 , lenrls
+  DO i = 1, lenrls
     Rsav(i) = RLS(i)
   ENDDO
-  DO i = 1 , lenils
+  DO i = 1, lenils
     Isav(i) = ILS(i)
   ENDDO
   !----------------------- END OF SUBROUTINE SVCO -----------------------

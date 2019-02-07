@@ -4,7 +4,7 @@ SUBROUTINE XRED(X,Ix,Ierror)
   IMPLICIT NONE
   !*--XRED5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Ierror , ixa , ixa1 , ixa2
+  INTEGER i, Ierror, ixa, ixa1, ixa2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XRED
   !***PURPOSE  To provide single-precision floating-point arithmetic
@@ -44,9 +44,9 @@ SUBROUTINE XRED(X,Ix,Ierror)
   !***END PROLOGUE  XRED
   REAL X
   INTEGER Ix
-  REAL RADix , RADixl , RAD2l , DLG10r , xa
-  INTEGER L , L2 , KMAx
-  COMMON /XBLK2 / RADix , RADixl , RAD2l , DLG10r , L , L2 , KMAx
+  REAL RADix, RADixl, RAD2l, DLG10r, xa
+  INTEGER L, L2, KMAx
+  COMMON /XBLK2 / RADix, RADixl, RAD2l, DLG10r, L, L2, KMAx
   SAVE /XBLK2 /
   !
   !***FIRST EXECUTABLE STATEMENT  XRED
@@ -67,7 +67,7 @@ SUBROUTINE XRED(X,Ix,Ierror)
         ENDDO
         xa = xa*RADix**ixa2
         IF ( ixa1/=0 ) THEN
-          DO i = 1 , ixa1
+          DO i = 1, ixa1
             IF ( xa>1.0 ) GOTO 99999
             xa = xa*RAD2l
           ENDDO
@@ -79,7 +79,7 @@ SUBROUTINE XRED(X,Ix,Ierror)
         ENDDO
         xa = xa/RADix**ixa2
         IF ( ixa1/=0 ) THEN
-          DO i = 1 , ixa1
+          DO i = 1, ixa1
             IF ( xa<1.0 ) GOTO 99999
             xa = xa/RAD2l
           ENDDO
@@ -96,4 +96,5 @@ SUBROUTINE XRED(X,Ix,Ierror)
       ENDIF
     ENDIF
   ENDIF
-  99999 END SUBROUTINE XRED
+  99999 CONTINUE
+  END SUBROUTINE XRED

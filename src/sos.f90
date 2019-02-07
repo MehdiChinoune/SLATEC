@@ -4,9 +4,9 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   IMPLICIT NONE
   !*--SOS5
   !*** Start of declarations inserted by SPAG
-  REAL Atolx , FNC , Rtolx , Rw , Tolf , X
-  INTEGER Iflag , inpflg , iprint , Iw , k1 , k2 , k3 , k4 , k5 , k6 , Liw ,&
-    Lrw , mxit , nc , ncjs , Neq , nsri , nsrrc
+  REAL Atolx, FNC, Rtolx, Rw, Tolf, X
+  INTEGER Iflag, inpflg, iprint, Iw, k1, k2, k3, k4, k5, k6, Liw ,&
+    Lrw, mxit, nc, ncjs, Neq, nsri, nsrrc
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SOS
   !***PURPOSE  Solve a square system of nonlinear equations.
@@ -187,9 +187,9 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !           comments to agree with DSOS.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SOS
-  DIMENSION X(*) , Rw(*) , Iw(*)
+  DIMENSION X(*), Rw(*), Iw(*)
   CHARACTER(8) :: xern1
-  CHARACTER(16) :: xern3 , xern4
+  CHARACTER(16) :: xern3, xern4
   EXTERNAL FNC
   !***FIRST EXECUTABLE STATEMENT  SOS
   inpflg = Iflag

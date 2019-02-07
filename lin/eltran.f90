@@ -67,14 +67,14 @@ SUBROUTINE ELTRAN(Nm,N,Low,Igh,A,Int,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  ELTRAN
   !
-  INTEGER i , j , N , kl , mm , mp , Nm , Igh , Low , mp1
-  REAL A(Nm,*) , Z(Nm,*)
+  INTEGER i, j, N, kl, mm, mp, Nm, Igh, Low, mp1
+  REAL A(Nm,*), Z(Nm,*)
   INTEGER Int(*)
   !
   !***FIRST EXECUTABLE STATEMENT  ELTRAN
-  DO i = 1 , N
+  DO i = 1, N
     !
-    DO j = 1 , N
+    DO j = 1, N
       Z(i,j) = 0.0E0
     ENDDO
     !
@@ -84,18 +84,18 @@ SUBROUTINE ELTRAN(Nm,N,Low,Igh,A,Int,Z)
   kl = Igh - Low - 1
   IF ( kl>=1 ) THEN
     !     .......... FOR MP=IGH-1 STEP -1 UNTIL LOW+1 DO -- ..........
-    DO mm = 1 , kl
+    DO mm = 1, kl
       mp = Igh - mm
       mp1 = mp + 1
       !
-      DO i = mp1 , Igh
+      DO i = mp1, Igh
         Z(i,mp) = A(i,mp-1)
       ENDDO
       !
       i = Int(mp)
       IF ( i/=mp ) THEN
         !
-        DO j = mp , Igh
+        DO j = mp, Igh
           Z(mp,j) = Z(i,j)
           Z(i,j) = 0.0E0
         ENDDO

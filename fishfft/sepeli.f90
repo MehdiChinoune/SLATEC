@@ -6,11 +6,11 @@ SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   IMPLICIT NONE
   !*--SEPELI7
   !*** Start of declarations inserted by SPAG
-  REAL A , Alpha , B , Bda , Bdb , Bdc , Bdd , Beta , C , COFX , COFY , D , &
-    Gama , Grhs , Pertrb , Usol , W , Xnu
-  INTEGER i1 , i10 , i11 , i12 , i13 , i2 , i3 , i4 , i5 , i6 , i7 , i8 , &
-    i9 , Idmn , Ierror , Intl , Iorder , k , l , length
-  INTEGER linput , ll , logb2n , loutpt , M , Mbdcnd , N , Nbdcnd
+  REAL A, Alpha, B, Bda, Bdb, Bdc, Bdd, Beta, C, COFX, COFY, D, &
+    Gama, Grhs, Pertrb, Usol, W, Xnu
+  INTEGER i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
+    i9, Idmn, Ierror, Intl, Iorder, k, l, length
+  INTEGER linput, ll, logb2n, loutpt, M, Mbdcnd, N, Nbdcnd
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SEPELI
   !***PURPOSE  Discretize and solve a second and, optionally, a fourth
@@ -477,9 +477,9 @@ SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SEPELI
   !
-  DIMENSION Grhs(Idmn,*) , Usol(Idmn,*)
-  DIMENSION Bda(*) , Bdb(*) , Bdc(*) , Bdd(*) , W(*)
-  EXTERNAL COFX , COFY
+  DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
+  DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
+  EXTERNAL COFX, COFY
   !***FIRST EXECUTABLE STATEMENT  SEPELI
   CALL CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
   IF ( Ierror/=0 ) RETURN

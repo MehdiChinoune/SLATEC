@@ -4,8 +4,8 @@ SUBROUTINE MACON
   IMPLICIT NONE
   !*--MACON5
   !*** Start of declarations inserted by SPAG
-  REAL dd , EPS , FOUru , R1MACH , SQOvfl , SRU , TWOu , URO
-  INTEGER ke , LPAr
+  REAL dd, EPS, FOUru, R1MACH, SQOvfl, SRU, TWOu, URO
+  INTEGER ke, LPAr
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MACON
   !***SUBSIDIARY
@@ -28,7 +28,7 @@ SUBROUTINE MACON
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  MACON
-  COMMON /ML5MCO/ URO , SRU , EPS , SQOvfl , TWOu , FOUru , LPAr
+  COMMON /ML5MCO/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
   !***FIRST EXECUTABLE STATEMENT  MACON
   URO = R1MACH(4)
   SRU = SQRT(URO)

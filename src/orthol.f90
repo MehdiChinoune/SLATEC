@@ -5,11 +5,11 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,&
   IMPLICIT NONE
   !*--ORTHOL6
   !*** Start of declarations inserted by SPAG
-  REAL A , acc , akk , anorm , as , asave , Cols , Cs , css , Diag , diagk , &
-    dum , R1MACH , sad , sc , Scales , SDOT , sig , sigma , sruro
+  REAL A, acc, akk, anorm, as, asave, Cols, Cs, css, Diag, diagk, &
+    dum, R1MACH, sad, sc, Scales, SDOT, sig, sigma, sruro
   REAL uro
-  INTEGER Iflag , Irank , Iscale , j , jcol , k , kp , Kpivot , l , M , mk , &
-    N , Nrda
+  INTEGER Iflag, Irank, Iscale, j, jcol, k, kp, Kpivot, l, M, mk, &
+    N, Nrda
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ORTHOL
   !***SUBSIDIARY
@@ -83,7 +83,7 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,&
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  ORTHOL
-  DIMENSION A(Nrda,*) , Diag(*) , Kpivot(*) , Cols(*) , Cs(*) , Scales(*)
+  DIMENSION A(Nrda,*), Diag(*), Kpivot(*), Cols(*), Cs(*), Scales(*)
   !
   ! **********************************************************************
   !
@@ -106,7 +106,7 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,&
     !     COMPUTE NORM**2 OF JTH COLUMN AND A MATRIX NORM
     !
     anorm = 0.
-    DO j = 1 , N
+    DO j = 1, N
       Kpivot(j) = j
       Cols(j) = SDOT(M,A(1,j),1,A(1,j),1)
       Cs(j) = Cols(j)
@@ -124,14 +124,14 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,&
     !     ORTHOGONAL TRANSFORMATIONS
     !
     !
-    DO k = 1 , N
+    DO k = 1, N
       mk = M - k + 1
       IF ( k/=N ) THEN
         kp = k + 1
         !
         !        SEARCHING FOR PIVOTAL COLUMN
         !
-        DO j = k , N
+        DO j = k, N
           IF ( Cols(j)<sruro*Cs(j) ) THEN
             Cols(j) = SDOT(mk,A(k,j),1,A(k,j),1)
             Cs(j) = Cols(j)
@@ -157,7 +157,7 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,&
           sc = Scales(k)
           Scales(k) = Scales(jcol)
           Scales(jcol) = sc
-          DO l = 1 , M
+          DO l = 1, M
             asave = A(l,k)
             A(l,k) = A(l,jcol)
             A(l,jcol) = asave
@@ -179,9 +179,9 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,&
         A(k,k) = akk - diagk
         IF ( k/=N ) THEN
           sad = diagk*akk - sig
-          DO j = kp , N
+          DO j = kp, N
             as = SDOT(mk,A(k,k),1,A(k,j),1)/sad
-            DO l = k , M
+            DO l = k, M
               A(l,j) = A(l,j) + as*A(l,k)
             ENDDO
             Cols(j) = Cols(j) - A(k,j)**2
@@ -205,4 +205,5 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,&
   RETURN
   !
   !
-  99999 END SUBROUTINE ORTHOL
+  99999 CONTINUE
+  END SUBROUTINE ORTHOL

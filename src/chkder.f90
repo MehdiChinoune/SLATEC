@@ -101,14 +101,14 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CHKDER
-  INTEGER M , N , Ldfjac , Mode
-  REAL X(*) , Fvec(*) , Fjac(Ldfjac,*) , Xp(*) , Fvecp(*) , Err(*)
-  INTEGER i , j
-  REAL eps , epsf , epslog , epsmch , factor , one , temp , zero
+  INTEGER M, N, Ldfjac, Mode
+  REAL X(*), Fvec(*), Fjac(Ldfjac,*), Xp(*), Fvecp(*), Err(*)
+  INTEGER i, j
+  REAL eps, epsf, epslog, epsmch, factor, one, temp, zero
   REAL R1MACH
-  SAVE factor , one , zero
+  SAVE factor, one, zero
   !
-  DATA factor , one , zero/1.0E2 , 1.0E0 , 0.0E0/
+  DATA factor, one, zero/1.0E2, 1.0E0, 0.0E0/
   !***FIRST EXECUTABLE STATEMENT  CHKDER
   epsmch = R1MACH(4)
   !
@@ -120,17 +120,17 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
     !
     epsf = factor*epsmch
     epslog = LOG10(eps)
-    DO i = 1 , M
+    DO i = 1, M
       Err(i) = zero
     ENDDO
-    DO j = 1 , N
+    DO j = 1, N
       temp = ABS(X(j))
       IF ( temp==zero ) temp = one
-      DO i = 1 , M
+      DO i = 1, M
         Err(i) = Err(i) + temp*Fjac(i,j)
       ENDDO
     ENDDO
-    DO i = 1 , M
+    DO i = 1, M
       temp = one
       IF ( Fvec(i)/=zero.AND.Fvecp(i)/=zero.AND.ABS(Fvecp(i)-Fvec(i))&
         >=epsf*ABS(Fvec(i)) )&
@@ -144,7 +144,7 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
     !
     !        MODE = 1.
     !
-    DO j = 1 , N
+    DO j = 1, N
       temp = eps*ABS(X(j))
       IF ( temp==zero ) temp = eps
       Xp(j) = X(j) + temp

@@ -55,16 +55,16 @@ SUBROUTINE CSROT(N,Cx,Incx,Cy,Incy,C,S)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CSROT
-  COMPLEX Cx(*) , Cy(*) , ctemp
-  REAL C , S
-  INTEGER i , Incx , Incy , ix , iy , N
+  COMPLEX Cx(*), Cy(*), ctemp
+  REAL C, S
+  INTEGER i, Incx, Incy, ix, iy, N
   !***FIRST EXECUTABLE STATEMENT  CSROT
   IF ( N<=0 ) RETURN
   IF ( Incx==1.AND.Incy==1 ) THEN
     !
     !     Code for both increments equal to 1.
     !
-    DO i = 1 , N
+    DO i = 1, N
       ctemp = C*Cx(i) + S*Cy(i)
       Cy(i) = C*Cy(i) - S*Cx(i)
       Cx(i) = ctemp
@@ -78,7 +78,7 @@ SUBROUTINE CSROT(N,Cx,Incx,Cy,Incy,C,S)
   iy = 1
   IF ( Incx<0 ) ix = (-N+1)*Incx + 1
   IF ( Incy<0 ) iy = (-N+1)*Incy + 1
-  DO i = 1 , N
+  DO i = 1, N
     ctemp = C*Cx(ix) + S*Cy(iy)
     Cy(iy) = C*Cy(iy) - S*Cx(ix)
     Cx(ix) = ctemp
@@ -86,4 +86,5 @@ SUBROUTINE CSROT(N,Cx,Incx,Cy,Incy,C,S)
     iy = iy + Incy
   ENDDO
   RETURN
-  99999 END SUBROUTINE CSROT
+  99999 CONTINUE
+  END SUBROUTINE CSROT

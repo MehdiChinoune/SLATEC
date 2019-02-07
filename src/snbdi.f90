@@ -56,8 +56,8 @@ SUBROUTINE SNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SNBDI
-  INTEGER Lda , N , Ml , Mu , Ipvt(*)
-  REAL Abe(Lda,*) , Det(2)
+  INTEGER Lda, N, Ml, Mu, Ipvt(*)
+  REAL Abe(Lda,*), Det(2)
   !
   REAL ten
   INTEGER i
@@ -65,7 +65,7 @@ SUBROUTINE SNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   Det(1) = 1.0E0
   Det(2) = 0.0E0
   ten = 10.0E0
-  DO i = 1 , N
+  DO i = 1, N
     IF ( Ipvt(i)/=i ) Det(1) = -Det(1)
     Det(1) = Abe(i,Ml+1)*Det(1)
     IF ( Det(1)==0.0E0 ) EXIT

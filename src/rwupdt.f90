@@ -69,15 +69,15 @@ SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  RWUPDT
-  INTEGER N , Ldr
+  INTEGER N, Ldr
   REAL Alpha
-  REAL R(Ldr,*) , W(*) , B(*) , Cos(*) , Sin(*)
-  INTEGER i , j , jm1
-  REAL cotan , one , p5 , p25 , rowj , tan , temp , zero
-  SAVE one , p5 , p25 , zero
-  DATA one , p5 , p25 , zero/1.0E0 , 5.0E-1 , 2.5E-1 , 0.0E0/
+  REAL R(Ldr,*), W(*), B(*), Cos(*), Sin(*)
+  INTEGER i, j, jm1
+  REAL cotan, one, p5, p25, rowj, tan, temp, zero
+  SAVE one, p5, p25, zero
+  DATA one, p5, p25, zero/1.0E0, 5.0E-1, 2.5E-1, 0.0E0/
   !***FIRST EXECUTABLE STATEMENT  RWUPDT
-  DO j = 1 , N
+  DO j = 1, N
     rowj = W(j)
     jm1 = j - 1
     !
@@ -85,7 +85,7 @@ SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
     !        R(I,J), I=1,2,...,J-1, AND TO W(J).
     !
     IF ( jm1>=1 ) THEN
-      DO i = 1 , jm1
+      DO i = 1, jm1
         temp = Cos(i)*R(i,j) + Sin(i)*rowj
         rowj = -Sin(i)*R(i,j) + Cos(i)*rowj
         R(i,j) = temp

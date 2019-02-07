@@ -4,8 +4,8 @@ SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   IMPLICIT NONE
   !*--BESKS5
   !*** Start of declarations inserted by SPAG
-  REAL Bk , expxi , R1MACH , X , xmax , Xnu
-  INTEGER i , n , Nin
+  REAL Bk, expxi, R1MACH, X, xmax, Xnu
+  INTEGER i, n, Nin
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESKS
   !***PURPOSE  Compute a sequence of modified Bessel functions of the
@@ -21,7 +21,7 @@ SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   !
   ! BESKS computes a sequence of modified Bessel functions of the third
   ! kind of order XNU + I at X, where X .GT. 0, XNU lies in (-1,1),
-  ! and I = 0, 1, ... , NIN - 1, if NIN is positive and I = 0, 1, ... ,
+  ! and I = 0, 1, ..., NIN - 1, if NIN is positive and I = 0, 1, ... ,
   ! NIN + 1, if NIN is negative.  On return, the vector BK(.) Contains
   ! the results at X for order starting at XNU.
   !
@@ -49,7 +49,7 @@ SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   !
   expxi = EXP(-X)
   n = ABS(Nin)
-  DO i = 1 , n
+  DO i = 1, n
     Bk(i) = expxi*Bk(i)
   ENDDO
   !

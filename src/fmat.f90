@@ -4,7 +4,7 @@ SUBROUTINE FMAT(X,Y,Yp)
   IMPLICIT NONE
   !*--FMAT5
   !*** Start of declarations inserted by SPAG
-  REAL tanx , TERm , X , XSAve , Y , Yp
+  REAL tanx, TERm, X, XSAve, Y, Yp
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  FMAT
   !***PURPOSE  Subsidiary to
@@ -16,8 +16,8 @@ SUBROUTINE FMAT(X,Y,Yp)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  FMAT
-  DIMENSION Y(*) , Yp(*)
-  COMMON /SAVEX / XSAve , TERm
+  DIMENSION Y(*), Yp(*)
+  COMMON /SAVEX / XSAve, TERm
   !***FIRST EXECUTABLE STATEMENT  FMAT
   Yp(1) = Y(2)
   IF ( X/=XSAve ) THEN

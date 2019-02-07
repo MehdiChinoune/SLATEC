@@ -68,28 +68,28 @@ SUBROUTINE ORTHES(Nm,N,Low,Igh,A,Ort)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  ORTHES
   !
-  INTEGER i , j , m , N , ii , jj , la , mp , Nm , Igh , kp1 , Low
-  REAL A(Nm,*) , Ort(*)
-  REAL f , g , h , scale
+  INTEGER i, j, m, N, ii, jj, la, mp, Nm, Igh, kp1, Low
+  REAL A(Nm,*), Ort(*)
+  REAL f, g, h, scale
   !
   !***FIRST EXECUTABLE STATEMENT  ORTHES
   la = Igh - 1
   kp1 = Low + 1
   IF ( la>=kp1 ) THEN
     !
-    DO m = kp1 , la
+    DO m = kp1, la
       h = 0.0E0
       Ort(m) = 0.0E0
       scale = 0.0E0
       !     .......... SCALE COLUMN (ALGOL TOL THEN NOT NEEDED) ..........
-      DO i = m , Igh
+      DO i = m, Igh
         scale = scale + ABS(A(i,m-1))
       ENDDO
       !
       IF ( scale/=0.0E0 ) THEN
         mp = m + Igh
         !     .......... FOR I=IGH STEP -1 UNTIL M DO -- ..........
-        DO ii = m , Igh
+        DO ii = m, Igh
           i = mp - ii
           Ort(i) = A(i,m-1)/scale
           h = h + Ort(i)*Ort(i)
@@ -99,33 +99,33 @@ SUBROUTINE ORTHES(Nm,N,Low,Igh,A,Ort)
         h = h - Ort(m)*g
         Ort(m) = Ort(m) - g
         !     .......... FORM (I-(U*UT)/H) * A ..........
-        DO j = m , N
+        DO j = m, N
           f = 0.0E0
           !     .......... FOR I=IGH STEP -1 UNTIL M DO -- ..........
-          DO ii = m , Igh
+          DO ii = m, Igh
             i = mp - ii
             f = f + Ort(i)*A(i,j)
           ENDDO
           !
           f = f/h
           !
-          DO i = m , Igh
+          DO i = m, Igh
             A(i,j) = A(i,j) - f*Ort(i)
           ENDDO
           !
         ENDDO
         !     .......... FORM (I-(U*UT)/H)*A*(I-(U*UT)/H) ..........
-        DO i = 1 , Igh
+        DO i = 1, Igh
           f = 0.0E0
           !     .......... FOR J=IGH STEP -1 UNTIL M DO -- ..........
-          DO jj = m , Igh
+          DO jj = m, Igh
             j = mp - jj
             f = f + Ort(j)*A(i,j)
           ENDDO
           !
           f = f/h
           !
-          DO j = m , Igh
+          DO j = m, Igh
             A(i,j) = A(i,j) - f*Ort(j)
           ENDDO
           !

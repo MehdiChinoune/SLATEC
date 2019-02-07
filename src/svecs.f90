@@ -4,11 +4,11 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   IMPLICIT NONE
   !*--SVECS5
   !*** Start of declarations inserted by SPAG
-  REAL AE , dum , RE , TOL , Work , Yhp
-  INTEGER ICOco , idp , Iflag , INDpvt , Inhomo , INTeg , Iwork , k , kp , &
-    Lnfc , LNFcc , MXNon , Ncomp , NDIsk , NEQ , NEQivp , NIC , niv , &
-    NOPg , NPS
-  INTEGER NTApe , NTP , NUMort , NXPts
+  REAL AE, dum, RE, TOL, Work, Yhp
+  INTEGER ICOco, idp, Iflag, INDpvt, Inhomo, INTeg, Iwork, k, kp, &
+    Lnfc, LNFcc, MXNon, Ncomp, NDIsk, NEQ, NEQivp, NIC, niv, &
+    NOPg, NPS
+  INTEGER NTApe, NTP, NUMort, NXPts
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SVECS
   !***SUBSIDIARY
@@ -36,10 +36,10 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  SVECS
   !
-  DIMENSION Yhp(Ncomp,*) , Work(*) , Iwork(*)
-  COMMON /ML18JR/ AE , RE , TOL , NXPts , NIC , NOPg , MXNon , NDIsk , &
-    NTApe , NEQ , INDpvt , INTeg , NPS , NTP , NEQivp , &
-    NUMort , LNFcc , ICOco
+  DIMENSION Yhp(Ncomp,*), Work(*), Iwork(*)
+  COMMON /ML18JR/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
+    NUMort, LNFcc, ICOco
   !***FIRST EXECUTABLE STATEMENT  SVECS
   IF ( Lnfc/=1 ) THEN
     niv = Lnfc
@@ -58,7 +58,7 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
       RETURN
     ENDIF
   ENDIF
-  DO k = 1 , Ncomp
+  DO k = 1, Ncomp
     Yhp(k,Lnfc+1) = Yhp(k,LNFcc+1)
   ENDDO
   Iflag = 1

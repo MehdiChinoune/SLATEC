@@ -130,13 +130,13 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RATQR
   !
-  INTEGER i , j , k , M , N , ii , jj , k1 , Idef , Ierr , jdef
-  REAL D(*) , E(*) , E2(*) , W(*) , Bd(*)
-  REAL f , p , q , r , s , ep , qp , err , tot , Eps1 , delta , machep
+  INTEGER i, j, k, M, N, ii, jj, k1, Idef, Ierr, jdef
+  REAL D(*), E(*), E2(*), W(*), Bd(*)
+  REAL f, p, q, r, s, ep, qp, err, tot, Eps1, delta, machep
   INTEGER Ind(*)
-  LOGICAL first , Type
+  LOGICAL first, Type
   !
-  SAVE first , machep
+  SAVE first, machep
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  RATQR
   IF ( first ) machep = R1MACH(4)
@@ -145,7 +145,7 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
   Ierr = 0
   jdef = Idef
   !     .......... COPY D ARRAY INTO W ..........
-  DO i = 1 , N
+  DO i = 1, N
     W(i) = D(i)
   ENDDO
   !
@@ -162,7 +162,7 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
   q = 0.0E0
   j = 0
   !
-  DO i = 1 , N
+  DO i = 1, N
     p = q
     IF ( i==1 ) THEN
       E2(i) = 0.0E0
@@ -182,13 +182,13 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
     tot = 0.0E0
   ELSE
     !
-    DO i = 1 , N
+    DO i = 1, N
       W(i) = W(i) - tot
       !
     ENDDO
   ENDIF
   !
-  DO k = 1 , M
+  DO k = 1, M
     DO
       !     .......... NEXT QR TRANSFORMATION ..........
       tot = tot + s
@@ -201,7 +201,7 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
         !                TO REDUCE THE INCIDENCE OF UNDERFLOWS ..........
         IF ( k/=N ) THEN
           k1 = k + 1
-          DO j = k1 , N
+          DO j = k1, N
             IF ( Bd(j)<=(machep*(W(j)+W(j-1)))**2 ) Bd(j) = 0.0E0
           ENDDO
         ENDIF
@@ -212,7 +212,7 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
         IF ( k/=N ) THEN
           k1 = N - k
           !     .......... FOR I=N-1 STEP -1 UNTIL K DO -- ..........
-          DO ii = 1 , k1
+          DO ii = 1, k1
             i = N - ii
             q = W(i) - s - f
             r = q/qp
@@ -240,7 +240,7 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
           s = 0.0E0
           delta = qp
           !
-          DO j = k , N
+          DO j = k, N
             IF ( W(j)<=delta ) THEN
               i = j
               delta = W(j)
@@ -259,7 +259,7 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
     IF ( i/=k ) THEN
       k1 = i - k
       !     .......... FOR J=I-1 STEP -1 UNTIL K DO -- ..........
-      DO jj = 1 , k1
+      DO jj = 1, k1
         j = i - jj
         W(j+1) = W(j) - s
         Bd(j+1) = Bd(j)
@@ -279,13 +279,15 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
   Bd(1) = f
   j = 2
   !     .......... NEGATE ELEMENTS OF W FOR LARGEST VALUES ..........
-  200  DO i = 1 , N
-  W(i) = -W(i)
-ENDDO
-!
-jdef = -jdef
-IF ( j==1 ) GOTO 100
-IF ( j==2 ) GOTO 99999
-!     .......... SET ERROR -- IDEF SPECIFIED INCORRECTLY ..........
-300  Ierr = 6*N + 1
-99999 END SUBROUTINE RATQR
+  200 CONTINUE
+  DO i = 1, N
+    W(i) = -W(i)
+  ENDDO
+  !
+  jdef = -jdef
+  IF ( j==1 ) GOTO 100
+  IF ( j==2 ) GOTO 99999
+  !     .......... SET ERROR -- IDEF SPECIFIED INCORRECTLY ..........
+  300  Ierr = 6*N + 1
+  99999 CONTINUE
+  END SUBROUTINE RATQR

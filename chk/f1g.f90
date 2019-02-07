@@ -12,7 +12,7 @@ REAL FUNCTION F1G(X)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  F1G
-  REAL pi , X
+  REAL pi, X
   DATA pi/3.1415926535897932/
   !***FIRST EXECUTABLE STATEMENT  F1G
   F1G = 2.0/(2.0+SIN(10.0*pi*X))

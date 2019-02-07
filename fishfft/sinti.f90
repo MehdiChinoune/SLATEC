@@ -4,8 +4,8 @@ SUBROUTINE SINTI(N,Wsave)
   IMPLICIT NONE
   !*--SINTI5
   !*** Start of declarations inserted by SPAG
-  REAL dt , fk , pi , Wsave
-  INTEGER k , kf , ks , N , np1 , ns2
+  REAL dt, fk, pi, Wsave
+  INTEGER k, kf, ks, N, np1, ns2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SINTI
   !***PURPOSE  Initialize a work array for SINT.
@@ -63,7 +63,7 @@ SUBROUTINE SINTI(N,Wsave)
   ks = N + 2
   kf = ks + ns2 - 1
   fk = 0.
-  DO k = ks , kf
+  DO k = ks, kf
     fk = fk + 1.
     Wsave(k) = 2.*SIN(fk*dt)
   ENDDO

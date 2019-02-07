@@ -62,20 +62,20 @@ SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
   !
   !  Declare arguments.
   !
-  INTEGER Lout , Kprint
+  INTEGER Lout, Kprint
   LOGICAL Fail
-  REAL X(10) , Y(10) , F(10,10) , Fx(10,10) , Fy(10,10) , Xe(51) , Ye(51) ,&
-    Fe(51) , De(51) , Fe2(51)
+  REAL X(10), Y(10), F(10,10), Fx(10,10), Fy(10,10), Xe(51), Ye(51) ,&
+    Fe(51), De(51), Fe2(51)
   !
   !  DECLARATIONS.
   !
-  INTEGER i , ier2 , ierr , inc , j , k , ne , nerr , nmax , nx , ny
-  LOGICAL faild , faile , failoc , skip
-  REAL dermax , derr , dtrue , dx , fdiff , fdifmx , fermax , ferr , ftrue ,&
-    machep , tol , pdermx , pdifmx , pfermx , zero
+  INTEGER i, ier2, ierr, inc, j, k, ne, nerr, nmax, nx, ny
+  LOGICAL faild, faile, failoc, skip
+  REAL dermax, derr, dtrue, dx, fdiff, fdifmx, fermax, ferr, ftrue ,&
+    machep, tol, pdermx, pdifmx, pfermx, zero
   REAL R1MACH
   !
-  DATA nmax/10/ , nx/4/ , ny/6/
+  DATA nmax/10/, nx/4/, ny/6/
   DATA ne/51/
   DATA zero/0.E0/
   !
@@ -91,13 +91,13 @@ SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
   !     X =  0.25(0.25)1.   ;
   !     Y = -0.75(0.5 )1.75 .
   !
-  DO i = 1 , nx - 1
+  DO i = 1, nx - 1
     X(i) = 0.25E0*i
   ENDDO
   X(nx) = 1.E0
-  DO j = 1 , ny
+  DO j = 1, ny
     Y(j) = 0.5E0*j - 1.25E0
-    DO i = 1 , nx
+    DO i = 1, nx
       F(i,j) = FCN(X(i),Y(j))
       Fx(i,j) = DFDX(X(i),Y(j))
       Fy(i,j) = DFDY(X(i),Y(j))
@@ -109,7 +109,7 @@ SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
   !     YE = -2.(0.08)2. .
   !
   dx = 1.E0/(ne-1)
-  DO k = 1 , ne - 1
+  DO k = 1, ne - 1
     Xe(k) = dx*(k-1)
     Ye(k) = 4.E0*Xe(k) - 2.E0
   ENDDO
@@ -129,11 +129,11 @@ SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
   nerr = 0
   inc = 1
   skip = .FALSE.
-  DO j = 1 , ny
+  DO j = 1, ny
     !        --------------------------------------------------------------
     CALL PCHFD(nx,X,F(1,j),Fx(1,j),inc,skip,ne,Xe,Fe,De,ierr)
     !        --------------------------------------------------------------
-    IF ( Kprint>=3 ) WRITE (Lout,99003) inc , 'J' , j , 'Y' , Y(j) , ierr
+    IF ( Kprint>=3 ) WRITE (Lout,99003) inc, 'J', j, 'Y', Y(j), ierr
     IF ( ierr<0 ) THEN
       !
       failoc = .TRUE.
@@ -147,13 +147,13 @@ SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
       CALL PCHFE(nx,X,F(1,j),Fx(1,j),inc,skip,ne,Xe,Fe2,ier2)
       !        -----------------------------------------------------------
       !
-      DO k = 1 , ne
+      DO k = 1, ne
         ftrue = FCN(Xe(k),Y(j))
         ferr = Fe(k) - ftrue
         dtrue = DFDX(Xe(k),Y(j))
         derr = De(k) - dtrue
-        IF ( Kprint>3 ) WRITE (Lout,99005) Xe(k) , ftrue , Fe(k) , ferr ,&
-          dtrue , De(k) , derr
+        IF ( Kprint>3 ) WRITE (Lout,99005) Xe(k), ftrue, Fe(k), ferr ,&
+          dtrue, De(k), derr
         IF ( k==1 ) THEN
           !              INITIALIZE.
           fermax = ABS(ferr)
@@ -186,18 +186,18 @@ SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
       faile = fdifmx/=zero
       failoc = faild .OR. faile .OR. (ierr/=13) .OR. (ier2/=ierr)
       !
-      IF ( failoc.AND.(Kprint>=2) ) WRITE (Lout,99006) 'J' , j , 'Y' , Y(j)
+      IF ( failoc.AND.(Kprint>=2) ) WRITE (Lout,99006) 'J', j, 'Y', Y(j)
       !
       IF ( (Kprint>=3).OR.(faild.AND.(Kprint==2)) ) WRITE (Lout,99007)&
-        fermax , pfermx , dermax , pdermx
+        fermax, pfermx, dermax, pdermx
       IF ( faild.AND.(Kprint>=2) ) WRITE (Lout,99010) tol
       !
       IF ( (Kprint>=3).OR.(faile.AND.(Kprint==2)) ) WRITE (Lout,99008)&
-        fdifmx , pdifmx
+        fdifmx, pdifmx
       !
-      IF ( (ierr/=13).AND.(Kprint>=2) ) WRITE (Lout,99009) 'D' , ierr , 13
+      IF ( (ierr/=13).AND.(Kprint>=2) ) WRITE (Lout,99009) 'D', ierr, 13
       !
-      IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E' , ier2 ,&
+      IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E', ier2 ,&
         ierr
     ENDIF
     !
@@ -207,7 +207,7 @@ SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
   !
   IF ( Kprint>=2 ) THEN
     IF ( nerr>0 ) THEN
-      WRITE (Lout,99012) nerr , 'J'
+      WRITE (Lout,99012) nerr, 'J'
     ELSE
       WRITE (Lout,99013) 'J'
     ENDIF
@@ -218,11 +218,11 @@ SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
   nerr = 0
   inc = nmax
   skip = .FALSE.
-  DO i = 1 , nx
+  DO i = 1, nx
     !        --------------------------------------------------------------
     CALL PCHFD(ny,Y,F(i,1),Fy(i,1),inc,skip,ne,Ye,Fe,De,ierr)
     !        --------------------------------------------------------------
-    IF ( Kprint>=3 ) WRITE (Lout,99003) inc , 'I' , i , 'X' , X(i) , ierr
+    IF ( Kprint>=3 ) WRITE (Lout,99003) inc, 'I', i, 'X', X(i), ierr
     IF ( ierr<0 ) THEN
       !
       failoc = .TRUE.
@@ -236,13 +236,13 @@ SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
       CALL PCHFE(ny,Y,F(i,1),Fy(i,1),inc,skip,ne,Ye,Fe2,ier2)
       !        -----------------------------------------------------------
       !
-      DO k = 1 , ne
+      DO k = 1, ne
         ftrue = FCN(X(i),Ye(k))
         ferr = Fe(k) - ftrue
         dtrue = DFDY(X(i),Ye(k))
         derr = De(k) - dtrue
-        IF ( Kprint>3 ) WRITE (Lout,99005) Ye(k) , ftrue , Fe(k) , ferr ,&
-          dtrue , De(k) , derr
+        IF ( Kprint>3 ) WRITE (Lout,99005) Ye(k), ftrue, Fe(k), ferr ,&
+          dtrue, De(k), derr
         IF ( k==1 ) THEN
           !              INITIALIZE.
           fermax = ABS(ferr)
@@ -275,18 +275,18 @@ SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
       faile = fdifmx/=zero
       failoc = faild .OR. faile .OR. (ierr/=20) .OR. (ier2/=ierr)
       !
-      IF ( failoc.AND.(Kprint>=2) ) WRITE (Lout,99006) 'I' , i , 'X' , X(i)
+      IF ( failoc.AND.(Kprint>=2) ) WRITE (Lout,99006) 'I', i, 'X', X(i)
       !
       IF ( (Kprint>=3).OR.(faild.AND.(Kprint==2)) ) WRITE (Lout,99007)&
-        fermax , pfermx , dermax , pdermx
+        fermax, pfermx, dermax, pdermx
       IF ( faild.AND.(Kprint>=2) ) WRITE (Lout,99010) tol
       !
       IF ( (Kprint>=3).OR.(faile.AND.(Kprint==2)) ) WRITE (Lout,99008)&
-        fdifmx , pdifmx
+        fdifmx, pdifmx
       !
-      IF ( (ierr/=20).AND.(Kprint>=2) ) WRITE (Lout,99009) 'D' , ierr , 20
+      IF ( (ierr/=20).AND.(Kprint>=2) ) WRITE (Lout,99009) 'D', ierr, 20
       !
-      IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E' , ier2 ,&
+      IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E', ier2 ,&
         ierr
     ENDIF
     !
@@ -296,7 +296,7 @@ SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
   !
   IF ( Kprint>=2 ) THEN
     IF ( nerr>0 ) THEN
-      WRITE (Lout,99012) nerr , 'I'
+      WRITE (Lout,99012) nerr, 'I'
     ELSE
       WRITE (Lout,99013) 'I'
     ENDIF
@@ -328,15 +328,15 @@ CONTAINS
   !  DEFINE TEST FUNCTION AND DERIVATIVES.
   !
   REAL FUNCTION FCN(ax,ay)
-    REAL ax , ay
+    REAL ax, ay
     FCN = ax*(ay*ay)*(ax*ax+1.E0)
   END FUNCTION FCN
   REAL FUNCTION DFDX(ax,ay)
-    REAL ax , ay
+    REAL ax, ay
     DFDX = (ay*ay)*(3.E0*ax*ax+1.E0)
   END FUNCTION DFDX
   REAL FUNCTION DFDY(ax,ay)
-    REAL ax , ay
+    REAL ax, ay
     DFDY = 2.E0*ax*ay*(ax*ax+1.E0)
   END FUNCTION DFDY
 END SUBROUTINE EVPCCK

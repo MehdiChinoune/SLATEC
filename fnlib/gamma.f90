@@ -4,9 +4,9 @@ FUNCTION GAMMA(X)
   IMPLICIT NONE
   !*--GAMMA5
   !*** Start of declarations inserted by SPAG
-  REAL CSEVL , dxrel , GAMMA , gcs , pi , R1MACH , R9LGMC , sinpiy , &
-    sq2pil , X , xmax , xmin , y
-  INTEGER i , INITS , n , ngcs
+  REAL CSEVL, dxrel, GAMMA, gcs, pi, R1MACH, R9LGMC, sinpiy, &
+    sq2pil, X, xmax, xmin, y
+  INTEGER i, INITS, n, ngcs
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  GAMMA
   !***PURPOSE  Compute the complete Gamma function.
@@ -31,7 +31,7 @@ FUNCTION GAMMA(X)
   !***END PROLOGUE  GAMMA
   DIMENSION gcs(23)
   LOGICAL first
-  SAVE gcs , pi , sq2pil , ngcs , xmin , xmax , dxrel , first
+  SAVE gcs, pi, sq2pil, ngcs, xmin, xmax, dxrel, first
   DATA gcs(1)/.008571195590989331E0/
   DATA gcs(2)/.004415381324841007E0/
   DATA gcs(3)/.05685043681599363E0/
@@ -131,7 +131,7 @@ FUNCTION GAMMA(X)
         'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR NEGATIVE INTEGER',1,&
         1)
       !
-      DO i = 1 , n
+      DO i = 1, n
         GAMMA = GAMMA/(X+i-1)
       ENDDO
       RETURN
@@ -140,9 +140,10 @@ FUNCTION GAMMA(X)
   !
   ! GAMMA(X) FOR X .GE. 2.
   !
-  DO i = 1 , n
+  DO i = 1, n
     GAMMA = (y+i)*GAMMA
   ENDDO
   RETURN
   !
-  99999 END FUNCTION GAMMA
+  99999 CONTINUE
+  END FUNCTION GAMMA

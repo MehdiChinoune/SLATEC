@@ -41,13 +41,13 @@ REAL FUNCTION PCHST(Arg1,Arg2)
   !
   !  DECLARE ARGUMENTS.
   !
-  REAL Arg1 , Arg2
+  REAL Arg1, Arg2
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL one , zero
-  SAVE zero , one
-  DATA zero/0./ , one/1./
+  REAL one, zero
+  SAVE zero, one
+  DATA zero/0./, one/1./
   !
   !  PERFORM THE TEST.
   !

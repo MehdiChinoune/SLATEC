@@ -393,24 +393,24 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
-  REAL(8) :: Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Ligw , Lrgw , N , Nelt
+  REAL(8) :: Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Ligw, Lrgw, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , B(N) , Rgwk(Lrgw) , Rwork(*) , Sb(N) , Sx(N) , &
+  REAL(8) :: A(Nelt), B(N), Rgwk(Lrgw), Rwork(*), Sb(N), Sx(N), &
     X(N)
-  INTEGER Ia(Nelt) , Igwk(Ligw) , Iwork(*) , Ja(Nelt)
+  INTEGER Ia(Nelt), Igwk(Ligw), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC , MSOLVE
+  EXTERNAL MATVEC, MSOLVE
   !     .. Local Scalars ..
-  REAL(8) :: bnrm , rhol , sum
-  INTEGER i , iflag , jpre , jscal , kmp , ldl , lgmr , lhes , lq , lr , &
-    lv , lw , lxl , lz , lzm1 , maxl , maxlp1 , nms , nmsl , nrmax , &
+  REAL(8) :: bnrm, rhol, sum
+  INTEGER i, iflag, jpre, jscal, kmp, ldl, lgmr, lhes, lq, lr, &
+    lv, lw, lxl, lz, lzm1, maxl, maxlp1, nms, nmsl, nrmax, &
     nrsts
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DNRM2
-  EXTERNAL D1MACH , DNRM2
+  REAL(8) :: D1MACH, DNRM2
+  EXTERNAL D1MACH, DNRM2
   !     .. External Subroutines ..
-  EXTERNAL DCOPY , DPIGMR
+  EXTERNAL DCOPY, DPIGMR
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
   !***FIRST EXECUTABLE STATEMENT  DGMRES
@@ -474,7 +474,7 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
           ENDIF
           IF ( jscal==2.OR.jscal==3 ) THEN
             sum = 0
-            DO i = 1 , N
+            DO i = 1, N
               sum = sum + (Rgwk(lr-1+i)*Sb(i))**2
             ENDDO
             bnrm = SQRT(sum)
@@ -485,7 +485,7 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
           !         Calculate initial residual.
           !   ------------------------------------------------------------------
           CALL MATVEC(N,X,Rgwk(lr),Nelt,Ia,Ja,A,Isym)
-          DO i = 1 , N
+          DO i = 1, N
             Rgwk(lr-1+i) = B(i) - Rgwk(lr-1+i)
           ENDDO
           !   ------------------------------------------------------------------
@@ -510,7 +510,7 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
             !         Increment X by the current approximate solution Z of A*Z = R.
             !
             lzm1 = lz - 1
-            DO i = 1 , N
+            DO i = 1, N
               X(i) = X(i) + Rgwk(lzm1+i)
             ENDDO
             IF ( iflag/=0 ) THEN

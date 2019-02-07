@@ -84,16 +84,16 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  TQL2
   !
-  INTEGER i , j , k , l , m , N , ii , l1 , l2 , Nm , mml , Ierr
-  REAL D(*) , E(*) , Z(Nm,*)
-  REAL b , c , c2 , c3 , dl1 , el1 , f , g , h , p , r , s , s2
+  INTEGER i, j, k, l, m, N, ii, l1, l2, Nm, mml, Ierr
+  REAL D(*), E(*), Z(Nm,*)
+  REAL b, c, c2, c3, dl1, el1, f, g, h, p, r, s, s2
   REAL PYTHAG
   !
   !***FIRST EXECUTABLE STATEMENT  TQL2
   Ierr = 0
   IF ( N/=1 ) THEN
     !
-    DO i = 2 , N
+    DO i = 2, N
       E(i-1) = E(i)
     ENDDO
     !
@@ -101,12 +101,12 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
     b = 0.0E0
     E(N) = 0.0E0
     !
-    DO l = 1 , N
+    DO l = 1, N
       j = 0
       h = ABS(D(l)) + ABS(E(l))
       IF ( b<h ) b = h
       !     .......... LOOK FOR SMALL SUB-DIAGONAL ELEMENT ..........
-      DO m = l , N
+      DO m = l, N
         IF ( b+ABS(E(m))==b ) EXIT
         !     .......... E(N) IS ALWAYS ZERO, SO THERE IS NO EXIT
         !                THROUGH THE BOTTOM OF THE LOOP ..........
@@ -127,7 +127,7 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
           h = g - D(l)
           IF ( l2<=N ) THEN
             !
-            DO i = l2 , N
+            DO i = l2, N
               D(i) = D(i) - h
             ENDDO
           ENDIF
@@ -141,7 +141,7 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
           s = 0.0E0
           mml = m - l
           !     .......... FOR I=M-1 STEP -1 UNTIL L DO -- ..........
-          DO ii = 1 , mml
+          DO ii = 1, mml
             c3 = c2
             c2 = c
             s2 = s
@@ -164,7 +164,7 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
             p = c*D(i) - s*g
             D(i+1) = h + s*(c*g+s*D(i))
             !     .......... FORM VECTOR ..........
-            DO k = 1 , N
+            DO k = 1, N
               h = Z(k,i+1)
               Z(k,i+1) = s*Z(k,i) + c*h
               Z(k,i) = c*Z(k,i) - s*h
@@ -182,12 +182,12 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
       20       D(l) = D(l) + f
     ENDDO
     !     .......... ORDER EIGENVALUES AND EIGENVECTORS ..........
-    DO ii = 2 , N
+    DO ii = 2, N
       i = ii - 1
       k = i
       p = D(i)
       !
-      DO j = ii , N
+      DO j = ii, N
         IF ( D(j)<p ) THEN
           k = j
           p = D(j)
@@ -198,7 +198,7 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
         D(k) = D(i)
         D(i) = p
         !
-        DO j = 1 , N
+        DO j = 1, N
           p = Z(j,i)
           Z(j,i) = Z(j,k)
           Z(j,k) = p
@@ -212,4 +212,5 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
   !     .......... SET ERROR -- NO CONVERGENCE TO AN
   !                EIGENVALUE AFTER 30 ITERATIONS ..........
   100  Ierr = l
-  99999 END SUBROUTINE TQL2
+  99999 CONTINUE
+  END SUBROUTINE TQL2

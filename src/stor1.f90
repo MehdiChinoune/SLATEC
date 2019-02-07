@@ -4,8 +4,8 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   IMPLICIT NONE
   !*--STOR15
   !*** Start of declarations inserted by SPAG
-  REAL C , U , V , XSAv , Yh , Yp
-  INTEGER IGOfx , INHomo , IVP , j , NCOmp , nctnf , Ndisk , NFC , Ntape , &
+  REAL C, U, V, XSAv, Yh, Yp
+  INTEGER IGOfx, INHomo, IVP, j, NCOmp, nctnf, Ndisk, NFC, Ntape, &
     Ntemp
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  STOR1
@@ -33,17 +33,17 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  STOR1
-  DIMENSION U(*) , Yh(*) , V(*) , Yp(*)
+  DIMENSION U(*), Yh(*), V(*), Yp(*)
   !
   ! **********************************************************************
   !
-  COMMON /ML8SZ / C , XSAv , IGOfx , INHomo , IVP , NCOmp , NFC
+  COMMON /ML8SZ / C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
   !
   ! **********************************************************************
   !
   !***FIRST EXECUTABLE STATEMENT  STOR1
   nctnf = NCOmp*NFC
-  DO j = 1 , nctnf
+  DO j = 1, nctnf
     U(j) = Yh(j)
   ENDDO
   IF ( INHomo/=1 ) THEN
@@ -51,25 +51,25 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
     !   ZERO PARTICULAR SOLUTION
     !
     IF ( Ntemp==1 ) RETURN
-    DO j = 1 , NCOmp
+    DO j = 1, NCOmp
       V(j) = 0.
     ENDDO
-    IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,NCOmp) , (U(j),j=1,nctnf)
+    IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,NCOmp), (U(j),j=1,nctnf)
     !
     !   NONZERO PARTICULAR SOLUTION
     !
   ELSEIF ( Ntemp==0 ) THEN
     !
-    DO j = 1 , NCOmp
+    DO j = 1, NCOmp
       V(j) = C*Yp(j)
     ENDDO
     !
     !  IS OUTPUT INFORMATION TO BE WRITTEN TO DISK
     !
-    IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,NCOmp) , (U(j),j=1,nctnf)
+    IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,NCOmp), (U(j),j=1,nctnf)
   ELSE
     !
-    DO j = 1 , NCOmp
+    DO j = 1, NCOmp
       V(j) = Yp(j)
     ENDDO
     RETURN

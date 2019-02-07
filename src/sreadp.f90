@@ -4,7 +4,7 @@ SUBROUTINE SREADP(Ipage,List,Rlist,Lpage,Irec)
   IMPLICIT NONE
   !*--SREADP5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Ipage , ipagef , Irec , irecn , Lpage , lpg
+  INTEGER i, Ipage, ipagef, Irec, irecn, Lpage, lpg
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SREADP
   !***SUBSIDIARY
@@ -33,7 +33,7 @@ SUBROUTINE SREADP(Ipage,List,Rlist,Lpage,Irec)
   !***END PROLOGUE  SREADP
   INTEGER List(*)
   REAL Rlist(*)
-  CHARACTER(8) :: xern1 , xern2
+  CHARACTER(8) :: xern1, xern2
   !***FIRST EXECUTABLE STATEMENT  SREADP
   ipagef = Ipage
   lpg = Lpage

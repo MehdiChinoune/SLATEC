@@ -4,8 +4,8 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
   IMPLICIT NONE
   !*--TEVLC5
   !*** Start of declarations inserted by SPAG
-  REAL CNV , dhold
-  INTEGER IK , K , NCMplx , nhalf , NM , NPP , ntop
+  REAL CNV, dhold
+  INTEGER IK, K, NCMplx, nhalf, NM, NPP, ntop
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TEVLC
   !***SUBSIDIARY
@@ -55,16 +55,16 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
   !   920528  DESCRIPTION revised and REFERENCES section added.  (WRB)
   !***END PROLOGUE  TEVLC
   !
-  INTEGER i , j , l , m , N , ii , l1 , mml , Ierr
-  REAL D(*) , E2(*)
-  REAL b , c , f , g , h , p , r , s , MAChep
+  INTEGER i, j, l, m, N, ii, l1, mml, Ierr
+  REAL D(*), E2(*)
+  REAL b, c, f, g, h, p, r, s, MAChep
   !
-  COMMON /CCBLK / NPP , K , MAChep , CNV , NM , NCMplx , IK
+  COMMON /CCBLK / NPP, K, MAChep, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  TEVLC
   Ierr = 0
   IF ( N/=1 ) THEN
     !
-    DO i = 2 , N
+    DO i = 2, N
       E2(i-1) = E2(i)*E2(i)
     ENDDO
     !
@@ -72,7 +72,7 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
     b = 0.0
     E2(N) = 0.0
     !
-    DO l = 1 , N
+    DO l = 1, N
       j = 0
       h = MAChep*(ABS(D(l))+SQRT(E2(l)))
       IF ( b<=h ) THEN
@@ -82,7 +82,7 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
       !
       !     ********** LOOK FOR SMALL SQUARED SUB-DIAGONAL ELEMENT **********
       !
-      DO m = l , N
+      DO m = l, N
         IF ( E2(m)<=c ) EXIT
         !
         !     ********** E2(N) IS ALWAYS ZERO, SO THERE IS NO EXIT
@@ -104,7 +104,7 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
           D(l) = s/(p+SIGN(r,p))
           h = g - D(l)
           !
-          DO i = l1 , N
+          DO i = l1, N
             D(i) = D(i) - h
           ENDDO
           !
@@ -120,7 +120,7 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
           !
           !     ********** FOR I=M-1 STEP -1 UNTIL L DO -- **********
           !
-          DO ii = 1 , mml
+          DO ii = 1, mml
             i = m - ii
             p = g*h
             r = p + E2(i)
@@ -152,7 +152,7 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
         !
         !     ********** FOR I=L STEP -1 UNTIL 2 DO -- **********
         !
-        DO ii = 2 , l
+        DO ii = 2, l
           i = l + 2 - ii
           IF ( p>=D(i-1) ) GOTO 40
           D(i) = D(i-1)
@@ -165,7 +165,7 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
     !
     IF ( ABS(D(N))<ABS(D(1)) ) THEN
       nhalf = N/2
-      DO i = 1 , nhalf
+      DO i = 1, nhalf
         ntop = N - i
         dhold = D(i)
         D(i) = D(ntop+1)
@@ -182,4 +182,5 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
   !
   !     ********** LAST CARD OF TQLRAT **********
   !
-  99999 END SUBROUTINE TEVLC
+  99999 CONTINUE
+  END SUBROUTINE TEVLC

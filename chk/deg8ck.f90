@@ -28,13 +28,13 @@ SUBROUTINE DEG8CK(Lun,Kprint,Ipass)
   !           KPRINT.  (WRB)
   !   920206  Corrected argument list in CALL to DEXINT.  (WRB)
   !***END PROLOGUE  DEG8CK
-  COMMON /DFEINX/ X , A , FKM
-  INTEGER i , icase , ie , ierr , ii , ik , Ipass , ix , iy , k , ke , kk , &
-    kode , kx , Lun , m , n , nm , nz
-  REAL(8) :: A , ans , atol , bb , en , er , ex , FKM , sig , sum , &
-    tol , t1 , t2 , X , xx , y
-  REAL(8) :: D1MACH , DFEIN
-  DIMENSION en(4) , y(4) , xx(5)
+  COMMON /DFEINX/ X, A, FKM
+  INTEGER i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
+    kode, kx, Lun, m, n, nm, nz
+  REAL(8) :: A, ans, atol, bb, en, er, ex, FKM, sig, sum, &
+    tol, t1, t2, X, xx, y
+  REAL(8) :: D1MACH, DFEIN
+  DIMENSION en(4), y(4), xx(5)
   LOGICAL fatal
   EXTERNAL DFEIN
   !***FIRST EXECUTABLE STATEMENT  DEG8CK
@@ -43,13 +43,13 @@ SUBROUTINE DEG8CK(Lun,Kprint,Ipass)
   99001 FORMAT ('1'/' QUICK CHECK FOR DEXINT AND DGAUS8'/)
   Ipass = 1
   tol = SQRT(MAX(D1MACH(4),1.0D-18))
-  DO kode = 1 , 2
+  DO kode = 1, 2
     ik = kode - 1
     FKM = ik
-    DO n = 1 , 25 , 8
-      DO m = 1 , 4
+    DO n = 1, 25, 8
+      DO m = 1, 4
         nm = n + m - 1
-        DO ix = 1 , 25 , 8
+        DO ix = 1, 25, 8
           X = ix - 0.20D0
           CALL DEXINT(X,n,kode,m,tol,en,nz,ierr)
           kx = X + 0.5D0
@@ -99,7 +99,7 @@ SUBROUTINE DEG8CK(Lun,Kprint,Ipass)
               !
               !             Forward recur
               !
-              DO k = 1 , ke
+              DO k = 1, ke
                 y(kk+1) = (ex-X*y(kk))/bb
                 bb = bb + 1.0D0
                 kk = kk + 1
@@ -112,12 +112,12 @@ SUBROUTINE DEG8CK(Lun,Kprint,Ipass)
           !
           !             Backward recur
           !
-          DO i = 1 , ie
+          DO i = 1, ie
             y(ii-1) = (ex-bb*y(ii))/X
             bb = bb - 1.0D0
             ii = ii - 1
           ENDDO
-          5            DO i = 1 , m
+          5            DO i = 1, m
           er = ABS((y(i)-en(i))/y(i))
           IF ( er>tol ) THEN
             WRITE (Lun,99002)
@@ -142,7 +142,7 @@ xx(2) = 1.0D0
 xx(3) = 1.0D0
 xx(4) = 1.0D0
 xx(5) = 0.01D0
-DO i = 1 , 5
+DO i = 1, 5
   xx(i) = -xx(i)
   k = xx(2)
   n = xx(3)

@@ -140,23 +140,23 @@ SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  CHER2K
   !     .. Scalar Arguments ..
-  CHARACTER :: Uplo , Trans
-  INTEGER N , K , Lda , Ldb , Ldc
+  CHARACTER :: Uplo, Trans
+  INTEGER N, K, Lda, Ldb, Ldc
   REAL Beta
   COMPLEX Alpha
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*) , B(Ldb,*) , C(Ldc,*)
+  COMPLEX A(Lda,*), B(Ldb,*), C(Ldc,*)
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
-  INTRINSIC CONJG , MAX , REAL
+  INTRINSIC CONJG, MAX, REAL
   !     .. Local Scalars ..
   LOGICAL upper
-  INTEGER i , info , j , l , nrowa
-  COMPLEX temp1 , temp2
+  INTEGER i, info, j, l, nrowa
+  COMPLEX temp1, temp2
   !     .. Parameters ..
   REAL ONE
   PARAMETER (ONE=1.0E+0)
@@ -203,29 +203,29 @@ SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   IF ( Alpha==ZERO ) THEN
     IF ( upper ) THEN
       IF ( Beta==REAL(ZERO) ) THEN
-        DO j = 1 , N
-          DO i = 1 , j
+        DO j = 1, N
+          DO i = 1, j
             C(i,j) = ZERO
           ENDDO
         ENDDO
       ELSE
-        DO j = 1 , N
-          DO i = 1 , j - 1
+        DO j = 1, N
+          DO i = 1, j - 1
             C(i,j) = Beta*C(i,j)
           ENDDO
           C(j,j) = Beta*REAL(C(j,j))
         ENDDO
       ENDIF
     ELSEIF ( Beta==REAL(ZERO) ) THEN
-      DO j = 1 , N
-        DO i = j , N
+      DO j = 1, N
+        DO i = j, N
           C(i,j) = ZERO
         ENDDO
       ENDDO
     ELSE
-      DO j = 1 , N
+      DO j = 1, N
         C(j,j) = Beta*REAL(C(j,j))
-        DO i = j + 1 , N
+        DO i = j + 1, N
           C(i,j) = Beta*C(i,j)
         ENDDO
       ENDDO
@@ -241,22 +241,22 @@ SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     !                   C.
     !
     IF ( upper ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( Beta==REAL(ZERO) ) THEN
-          DO i = 1 , j
+          DO i = 1, j
             C(i,j) = ZERO
           ENDDO
         ELSEIF ( Beta/=ONE ) THEN
-          DO i = 1 , j - 1
+          DO i = 1, j - 1
             C(i,j) = Beta*C(i,j)
           ENDDO
           C(j,j) = Beta*REAL(C(j,j))
         ENDIF
-        DO l = 1 , K
+        DO l = 1, K
           IF ( (A(j,l)/=ZERO).OR.(B(j,l)/=ZERO) ) THEN
             temp1 = Alpha*CONJG(B(j,l))
             temp2 = CONJG(Alpha*A(j,l))
-            DO i = 1 , j - 1
+            DO i = 1, j - 1
               C(i,j) = C(i,j) + A(i,l)*temp1 + B(i,l)*temp2
             ENDDO
             C(j,j) = REAL(C(j,j)) + REAL(A(j,l)*temp1+B(j,l)*temp2)
@@ -264,22 +264,22 @@ SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
         ENDDO
       ENDDO
     ELSE
-      DO j = 1 , N
+      DO j = 1, N
         IF ( Beta==REAL(ZERO) ) THEN
-          DO i = j , N
+          DO i = j, N
             C(i,j) = ZERO
           ENDDO
         ELSEIF ( Beta/=ONE ) THEN
-          DO i = j + 1 , N
+          DO i = j + 1, N
             C(i,j) = Beta*C(i,j)
           ENDDO
           C(j,j) = Beta*REAL(C(j,j))
         ENDIF
-        DO l = 1 , K
+        DO l = 1, K
           IF ( (A(j,l)/=ZERO).OR.(B(j,l)/=ZERO) ) THEN
             temp1 = Alpha*CONJG(B(j,l))
             temp2 = CONJG(Alpha*A(j,l))
-            DO i = j + 1 , N
+            DO i = j + 1, N
               C(i,j) = C(i,j) + A(i,l)*temp1 + B(i,l)*temp2
             ENDDO
             C(j,j) = REAL(C(j,j)) + REAL(A(j,l)*temp1+B(j,l)*temp2)
@@ -292,11 +292,11 @@ SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     !                   C.
     !
   ELSEIF ( upper ) THEN
-    DO j = 1 , N
-      DO i = 1 , j
+    DO j = 1, N
+      DO i = 1, j
         temp1 = ZERO
         temp2 = ZERO
-        DO l = 1 , K
+        DO l = 1, K
           temp1 = temp1 + CONJG(A(l,i))*B(l,j)
           temp2 = temp2 + CONJG(B(l,i))*A(l,j)
         ENDDO
@@ -315,11 +315,11 @@ SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
       ENDDO
     ENDDO
   ELSE
-    DO j = 1 , N
-      DO i = j , N
+    DO j = 1, N
+      DO i = j, N
         temp1 = ZERO
         temp2 = ZERO
-        DO l = 1 , K
+        DO l = 1, K
           temp1 = temp1 + CONJG(A(l,i))*B(l,j)
           temp2 = temp2 + CONJG(B(l,i))*A(l,j)
         ENDDO

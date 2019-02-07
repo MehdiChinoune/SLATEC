@@ -108,10 +108,10 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SPOIR
   !
-  INTEGER Lda , N , Itask , Ind , info , j
-  REAL A(Lda,*) , V(*) , Work(N,*) , SASUM , xnorm , dnorm , R1MACH
+  INTEGER Lda, N, Itask, Ind, info, j
+  REAL A(Lda,*), V(*), Work(N,*), SASUM, xnorm, dnorm, R1MACH
   REAL(8) :: DSDOT
-  CHARACTER(8) :: xern1 , xern2
+  CHARACTER(8) :: xern1, xern2
   !***FIRST EXECUTABLE STATEMENT  SPOIR
   IF ( Lda<N ) THEN
     Ind = -1
@@ -140,7 +140,7 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
     !
     !        MOVE MATRIX A TO WORK
     !
-    DO j = 1 , N
+    DO j = 1, N
       CALL SCOPY(N,A(1,j),1,Work(1,j),1)
     ENDDO
     !
@@ -172,7 +172,7 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   !
   !     COMPUTE  RESIDUAL
   !
-  DO j = 1 , N
+  DO j = 1, N
     Work(j,N+1) = -Work(j,N+1) + DSDOT(j-1,A(1,j),1,V(1),1)&
       + DSDOT(N-j+1,A(j,j),Lda,V(j),1)
   ENDDO

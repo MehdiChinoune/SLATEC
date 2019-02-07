@@ -17,7 +17,7 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !     and an M-vector B, the problem is to determine an X which
   !     solves the system
   !
-  !           A*X = B ,     D*X = 0 ,
+  !           A*X = B,     D*X = 0 ,
   !
   !     in the least squares sense.
   !
@@ -32,7 +32,7 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !     A*X = B, D*X = 0, is then equivalent to
   !
   !                  T       T
-  !           R*Z = Q *B ,  P *D*P*Z = 0 ,
+  !           R*Z = Q *B,  P *D*P*Z = 0 ,
   !
   !     where X = P*Z. If this system does not have full rank,
   !     then a least squares solution is obtained. On output DQRSLV
@@ -89,17 +89,17 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DQRSLV
-  INTEGER N , Ldr
+  INTEGER N, Ldr
   INTEGER Ipvt(*)
-  REAL(8) :: R(Ldr,*) , Diag(*) , Qtb(*) , X(*) , Sigma(*) , Wa(*)
-  INTEGER i , j , jp1 , k , kp1 , l , nsing
-  REAL(8) :: cos , cotan , p5 , p25 , qtbpj , sin , sum , tan , temp , &
+  REAL(8) :: R(Ldr,*), Diag(*), Qtb(*), X(*), Sigma(*), Wa(*)
+  INTEGER i, j, jp1, k, kp1, l, nsing
+  REAL(8) :: cos, cotan, p5, p25, qtbpj, sin, sum, tan, temp, &
     zero
-  SAVE p5 , p25 , zero
-  DATA p5 , p25 , zero/5.0D-1 , 2.5D-1 , 0.0D0/
+  SAVE p5, p25, zero
+  DATA p5, p25, zero/5.0D-1, 2.5D-1, 0.0D0/
   !***FIRST EXECUTABLE STATEMENT  DQRSLV
-  DO j = 1 , N
-    DO i = j , N
+  DO j = 1, N
+    DO i = j, N
       R(i,j) = R(j,i)
     ENDDO
     X(j) = R(j,j)
@@ -108,14 +108,14 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !
   !     ELIMINATE THE DIAGONAL MATRIX D USING A GIVENS ROTATION.
   !
-  DO j = 1 , N
+  DO j = 1, N
     !
     !        PREPARE THE ROW OF D TO BE ELIMINATED, LOCATING THE
     !        DIAGONAL ELEMENT USING P FROM THE QR FACTORIZATION.
     !
     l = Ipvt(j)
     IF ( Diag(l)/=zero ) THEN
-      DO k = j , N
+      DO k = j, N
         Sigma(k) = zero
       ENDDO
       Sigma(j) = Diag(l)
@@ -125,7 +125,7 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
       !        BEYOND THE FIRST N, WHICH IS INITIALLY ZERO.
       !
       qtbpj = zero
-      DO k = j , N
+      DO k = j, N
         !
         !           DETERMINE A GIVENS ROTATION WHICH ELIMINATES THE
         !           APPROPRIATE ELEMENT IN THE CURRENT ROW OF D.
@@ -153,7 +153,7 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
           !
           kp1 = k + 1
           IF ( N>=kp1 ) THEN
-            DO i = kp1 , N
+            DO i = kp1, N
               temp = cos*R(i,k) + sin*Sigma(i)
               Sigma(i) = -sin*R(i,k) + cos*Sigma(i)
               R(i,k) = temp
@@ -174,17 +174,17 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !     SINGULAR, THEN OBTAIN A LEAST SQUARES SOLUTION.
   !
   nsing = N
-  DO j = 1 , N
+  DO j = 1, N
     IF ( Sigma(j)==zero.AND.nsing==N ) nsing = j - 1
     IF ( nsing<N ) Wa(j) = zero
   ENDDO
   IF ( nsing>=1 ) THEN
-    DO k = 1 , nsing
+    DO k = 1, nsing
       j = nsing - k + 1
       sum = zero
       jp1 = j + 1
       IF ( nsing>=jp1 ) THEN
-        DO i = jp1 , nsing
+        DO i = jp1, nsing
           sum = sum + R(i,j)*Wa(i)
         ENDDO
       ENDIF
@@ -194,7 +194,7 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !
   !     PERMUTE THE COMPONENTS OF Z BACK TO COMPONENTS OF X.
   !
-  DO j = 1 , N
+  DO j = 1, N
     l = Ipvt(j)
     X(l) = Wa(j)
   ENDDO

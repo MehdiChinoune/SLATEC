@@ -17,14 +17,14 @@ SUBROUTINE SDRES2(T,Y,Yprime,Delta,Ires,Rpar,Ipar)
   !           declarations explicit.  (FNF)
   !   901030  Made all local declarations explicit.  (FNF)
   !***END PROLOGUE  SDRES2
-  INTEGER Ires , Ipar(*)
-  REAL T , Y(*) , Yprime(*) , Delta(*) , Rpar(*)
-  INTEGER i , j , k , ng
-  REAL alph1 , alph2 , d
-  DATA alph1/1.0E0/ , alph2/1.0E0/ , ng/5/
+  INTEGER Ires, Ipar(*)
+  REAL T, Y(*), Yprime(*), Delta(*), Rpar(*)
+  INTEGER i, j, k, ng
+  REAL alph1, alph2, d
+  DATA alph1/1.0E0/, alph2/1.0E0/, ng/5/
   !***FIRST EXECUTABLE STATEMENT  SDRES2
-  DO j = 1 , ng
-    DO i = 1 , ng
+  DO j = 1, ng
+    DO i = 1, ng
       k = i + (j-1)*ng
       d = -2.0E0*Y(k)
       IF ( i/=1 ) d = d + Y(k-1)*alph1

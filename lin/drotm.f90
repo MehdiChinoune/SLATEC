@@ -4,7 +4,7 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
   IMPLICIT NONE
   !*--DROTM5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , Incy , kx , ky , N , nsteps
+  INTEGER i, Incx, Incy, kx, ky, N, nsteps
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DROTM
   !***PURPOSE  Apply a modified Givens transformation.
@@ -37,7 +37,7 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
   !
   !     Apply the modified Givens transformation, H, to the 2 by N matrix
   !     (DX**T)
-  !     (DY**T) , where **T indicates transpose.  The elements of DX are
+  !     (DY**T), where **T indicates transpose.  The elements of DX are
   !     in DX(LX+I*INCX), I = 0 to N-1, where LX = 1 if INCX .GE. 0, else
   !     LX = 1+(1-N)*INCX, and similarly for DY using LY and INCY.
   !
@@ -63,11 +63,11 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DROTM
-  REAL(8) :: dflag , dh12 , dh22 , Dx , two , z , dh11 , dh21 , &
-    Dparam , Dy , w , zero
-  DIMENSION Dx(*) , Dy(*) , Dparam(5)
-  SAVE zero , two
-  DATA zero , two/0.0D0 , 2.0D0/
+  REAL(8) :: dflag, dh12, dh22, Dx, two, z, dh11, dh21, &
+    Dparam, Dy, w, zero
+  DIMENSION Dx(*), Dy(*), Dparam(5)
+  SAVE zero, two
+  DATA zero, two/0.0D0, 2.0D0/
   !***FIRST EXECUTABLE STATEMENT  DROTM
   dflag = Dparam(1)
   IF ( N>0.AND.(dflag+two/=zero) ) THEN
@@ -82,7 +82,7 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
         dh12 = Dparam(4)
         dh21 = Dparam(3)
         dh22 = Dparam(5)
-        DO i = 1 , N
+        DO i = 1, N
           w = Dx(kx)
           z = Dy(ky)
           Dx(kx) = w*dh11 + z*dh12
@@ -93,7 +93,7 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
       ELSEIF ( dflag==0 ) THEN
         dh12 = Dparam(4)
         dh21 = Dparam(3)
-        DO i = 1 , N
+        DO i = 1, N
           w = Dx(kx)
           z = Dy(ky)
           Dx(kx) = w + z*dh12
@@ -104,7 +104,7 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
       ELSE
         dh11 = Dparam(2)
         dh22 = Dparam(5)
-        DO i = 1 , N
+        DO i = 1, N
           w = Dx(kx)
           z = Dy(ky)
           Dx(kx) = w*dh11 + z
@@ -121,7 +121,7 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
         dh12 = Dparam(4)
         dh21 = Dparam(3)
         dh22 = Dparam(5)
-        DO i = 1 , nsteps , Incx
+        DO i = 1, nsteps, Incx
           w = Dx(i)
           z = Dy(i)
           Dx(i) = w*dh11 + z*dh12
@@ -130,7 +130,7 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
       ELSEIF ( dflag==0 ) THEN
         dh12 = Dparam(4)
         dh21 = Dparam(3)
-        DO i = 1 , nsteps , Incx
+        DO i = 1, nsteps, Incx
           w = Dx(i)
           z = Dy(i)
           Dx(i) = w + z*dh12
@@ -139,7 +139,7 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
       ELSE
         dh11 = Dparam(2)
         dh22 = Dparam(5)
-        DO i = 1 , nsteps , Incx
+        DO i = 1, nsteps, Incx
           w = Dx(i)
           z = Dy(i)
           Dx(i) = w*dh11 + z

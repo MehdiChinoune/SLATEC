@@ -249,14 +249,14 @@ REAL FUNCTION RF(X,Y,Z,Ier)
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RF
-  CHARACTER(16) :: xern3 , xern4 , xern5 , xern6
+  CHARACTER(16) :: xern3, xern4, xern5, xern6
   INTEGER Ier
-  REAL lolim , uplim , epslon , errtol
-  REAL c1 , c2 , c3 , e2 , e3 , lamda
-  REAL mu , s , X , xn , xndev
-  REAL xnroot , Y , yn , yndev , ynroot , Z , zn , zndev , znroot
+  REAL lolim, uplim, epslon, errtol
+  REAL c1, c2, c3, e2, e3, lamda
+  REAL mu, s, X, xn, xndev
+  REAL xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, znroot
   LOGICAL first
-  SAVE errtol , lolim , uplim , c1 , c2 , c3 , first
+  SAVE errtol, lolim, uplim, c1, c2, c3, first
   DATA first/.TRUE./
   !
   !***FIRST EXECUTABLE STATEMENT  RF

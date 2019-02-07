@@ -20,26 +20,26 @@ SUBROUTINE PNTCHK(Lun,Kprint,Ipass)
   !           of KPRINT.  (WRB)
   !***END PROLOGUE  PNTCHK
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
-  REAL tol , yf
-  INTEGER i , ierr , kontrl , n , nerr
+  REAL tol, yf
+  INTEGER i, ierr, kontrl, n, nerr
   LOGICAL fatal
   !     .. Local Arrays ..
-  REAL c(6) , d(6) , dchk(6) , w(12) , x(6) , xchk(6) , y(6)
+  REAL c(6), d(6), dchk(6), w(12), x(6), xchk(6), y(6)
   !     .. External Functions ..
   REAL R1MACH
   INTEGER NUMXER
-  EXTERNAL R1MACH , NUMXER
+  EXTERNAL R1MACH, NUMXER
   !     .. External Subroutines ..
-  EXTERNAL POLCOF , POLINT , POLYVL , XERCLR , XGETF , XSETF
+  EXTERNAL POLCOF, POLINT, POLYVL, XERCLR, XGETF, XSETF
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , SQRT
+  INTRINSIC ABS, SQRT
   !     .. Data statements ..
-  DATA x/1.0E0 , 2.0E0 , 3.0E0 , -1.0E0 , -2.0E0 , -3.0E0/
-  DATA y/0.0E0 , 9.0E0 , 64.0E0 , 0.0E0 , 9.0E0 , 64.0E0/
-  DATA xchk/1.0E0 , 0.0E0 , -2.0E0 , 0.0E0 , 1.0E0 , 0.0E0/
-  DATA dchk/1.0E0 , 0.0E0 , -4.0E0 , 0.0E0 , 24.0E0 , 0.0E0/
+  DATA x/1.0E0, 2.0E0, 3.0E0, -1.0E0, -2.0E0, -3.0E0/
+  DATA y/0.0E0, 9.0E0, 64.0E0, 0.0E0, 9.0E0, 64.0E0/
+  DATA xchk/1.0E0, 0.0E0, -2.0E0, 0.0E0, 1.0E0, 0.0E0/
+  DATA dchk/1.0E0, 0.0E0, -4.0E0, 0.0E0, 24.0E0, 0.0E0/
   !***FIRST EXECUTABLE STATEMENT  PNTCHK
   IF ( Kprint>=2 ) WRITE (Lun,99001)
   !
@@ -59,30 +59,30 @@ SUBROUTINE PNTCHK(Lun,Kprint,Ipass)
   !     Check to see if POLCOF test passed.
   !
   fatal = .FALSE.
-  DO i = 1 , n
+  DO i = 1, n
     IF ( ABS(d(i)-xchk(i))>tol ) THEN
       Ipass = 0
       fatal = .TRUE.
     ENDIF
   ENDDO
   IF ( fatal ) THEN
-    IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED' , (d(i),i=1,n)
+    IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED', (d(i),i=1,n)
   ELSE
-    IF ( Kprint>=3 ) WRITE (Lun,99007) 'PASSED' , (d(i),i=1,n)
+    IF ( Kprint>=3 ) WRITE (Lun,99007) 'PASSED', (d(i),i=1,n)
   ENDIF
   !
   !     Test POLYVL.
   !
   CALL POLYVL(5,0.0E0,yf,d,n,x,c,w,ierr)
   IF ( ABS(dchk(1)-yf)<=tol ) THEN
-    IF ( Kprint>=3 ) WRITE (Lun,99008) 'PASSED' , yf , (d(i),i=1,5)
+    IF ( Kprint>=3 ) WRITE (Lun,99008) 'PASSED', yf, (d(i),i=1,5)
   ELSE
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Lun,99008) 'FAILED' , yf , (d(i),i=1,5)
+    IF ( Kprint>=2 ) WRITE (Lun,99008) 'FAILED', yf, (d(i),i=1,5)
   ENDIF
   !
   fatal = .FALSE.
-  DO i = 1 , 5
+  DO i = 1, 5
     IF ( ABS(dchk(i+1)-d(i))>tol ) THEN
       Ipass = 0
       fatal = .TRUE.

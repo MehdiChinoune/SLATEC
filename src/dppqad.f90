@@ -25,7 +25,7 @@ SUBROUTINE DPPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   !     Description of Arguments
   !         Input      C,XI,X1,X2 are double precision
   !           LDC    - leading dimension of matrix C, LDC .GE. K
-  !           C(I,J) - right Taylor derivatives at XI(J), I=1,K , J=1,LXI
+  !           C(I,J) - right Taylor derivatives at XI(J), I=1,K, J=1,LXI
   !           XI(*)  - break point array of length LXI+1
   !           LXI    - number of polynomial pieces
   !           K      - order of B-spline, K .GE. 1
@@ -52,11 +52,11 @@ SUBROUTINE DPPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPPQAD
   !
-  INTEGER i , ii , il , ilo , il1 , il2 , im , K , Ldc , left , Lxi , mf1 , &
+  INTEGER i, ii, il, ilo, il1, il2, im, K, Ldc, left, Lxi, mf1, &
     mf2
-  REAL(8) :: a , aa , bb , C , dx , flk , Pquad , q , s , ss , ta , &
-    tb , x , Xi , X1 , X2
-  DIMENSION Xi(*) , C(Ldc,*) , ss(2)
+  REAL(8) :: a, aa, bb, C, dx, flk, Pquad, q, s, ss, ta, &
+    tb, x, Xi, X1, X2
+  DIMENSION Xi(*), C(Ldc,*), ss(2)
   !
   !***FIRST EXECUTABLE STATEMENT  DPPQAD
   Pquad = 0.0D0
@@ -79,14 +79,14 @@ SUBROUTINE DPPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   CALL DINTRV(Xi,Lxi,aa,ilo,il1,mf1)
   CALL DINTRV(Xi,Lxi,bb,ilo,il2,mf2)
   q = 0.0D0
-  DO left = il1 , il2
+  DO left = il1, il2
     ta = Xi(left)
     a = MAX(aa,ta)
     IF ( left==1 ) a = aa
     tb = bb
     IF ( left<Lxi ) tb = Xi(left+1)
     x = MIN(bb,tb)
-    DO ii = 1 , 2
+    DO ii = 1, 2
       ss(ii) = 0.0D0
       dx = x - Xi(left)
       IF ( dx/=0.0D0 ) THEN
@@ -94,7 +94,7 @@ SUBROUTINE DPPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
         flk = K
         im = K - 1
         il = im
-        DO i = 1 , il
+        DO i = 1, il
           s = s*dx/flk + C(im,left)
           im = im - 1
           flk = flk - 1.0D0
@@ -108,4 +108,5 @@ SUBROUTINE DPPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   IF ( X1>X2 ) q = -q
   Pquad = q
   RETURN
-  99999 END SUBROUTINE DPPQAD
+  99999 CONTINUE
+  END SUBROUTINE DPPQAD

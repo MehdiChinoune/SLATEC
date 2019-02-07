@@ -158,18 +158,18 @@ SUBROUTINE SSLUI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   !     .. Scalar Arguments ..
   INTEGER N
   !     .. Array Arguments ..
-  REAL B(N) , Dinv(N) , L(*) , U(*) , X(N)
-  INTEGER Il(*) , Iu(*) , Jl(*) , Ju(*)
+  REAL B(N), Dinv(N), L(*), U(*), X(N)
+  INTEGER Il(*), Iu(*), Jl(*), Ju(*)
   !     .. Local Scalars ..
-  INTEGER i , icol , irow , j , jbgn , jend
+  INTEGER i, icol, irow, j, jbgn, jend
   !***FIRST EXECUTABLE STATEMENT  SSLUI2
   !
   !         Solve  L*Y = B,  storing result in X, L stored by rows.
   !
-  DO i = 1 , N
+  DO i = 1, N
     X(i) = B(i)
   ENDDO
-  DO irow = 2 , N
+  DO irow = 2, N
     jbgn = Il(irow)
     jend = Il(irow+1) - 1
     IF ( jbgn<=jend ) THEN
@@ -177,26 +177,26 @@ SUBROUTINE SSLUI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
       !DIR$ IVDEP
       !VD$ ASSOC
       !VD$ NODEPCHK
-      DO j = jbgn , jend
+      DO j = jbgn, jend
         X(irow) = X(irow) - L(j)*X(Jl(j))
       ENDDO
     ENDIF
   ENDDO
   !
   !         Solve  D*Z = Y,  storing result in X.
-  DO i = 1 , N
+  DO i = 1, N
     X(i) = X(i)*Dinv(i)
   ENDDO
   !
   !         Solve  U*X = Z, U stored by columns.
-  DO icol = N , 2 , -1
+  DO icol = N, 2, -1
     jbgn = Ju(icol)
     jend = Ju(icol+1) - 1
     IF ( jbgn<=jend ) THEN
       !LLL. OPTION ASSERT (NOHAZARD)
       !DIR$ IVDEP
       !VD$ NODEPCHK
-      DO j = jbgn , jend
+      DO j = jbgn, jend
         X(Iu(j)) = X(Iu(j)) - U(j)*X(icol)
       ENDDO
     ENDIF

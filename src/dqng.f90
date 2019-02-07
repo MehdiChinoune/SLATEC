@@ -88,18 +88,18 @@ SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DQNG
   !
-  REAL(8) :: A , absc , Abserr , B , centr , dhlgth , D1MACH , &
-    epmach , Epsabs , Epsrel , F , fcentr , fval , fval1 , &
-    fval2 , fv1 , fv2 , fv3 , fv4 , hlgth , Result , res10 , &
-    res21 , res43 , res87 , resabs , resasc , reskh , &
-    savfun , uflow , w10 , w21a , w21b , w43a , w43b , w87a , &
-    w87b , x1 , x2 , x3 , x4
-  INTEGER Ier , ipx , k , l , Neval
+  REAL(8) :: A, absc, Abserr, B, centr, dhlgth, D1MACH, &
+    epmach, Epsabs, Epsrel, F, fcentr, fval, fval1, &
+    fval2, fv1, fv2, fv3, fv4, hlgth, Result, res10, &
+    res21, res43, res87, resabs, resasc, reskh, &
+    savfun, uflow, w10, w21a, w21b, w43a, w43b, w87a, &
+    w87b, x1, x2, x3, x4
+  INTEGER Ier, ipx, k, l, Neval
   EXTERNAL F
   !
-  DIMENSION fv1(5) , fv2(5) , fv3(5) , fv4(5) , x1(5) , x2(5) , x3(11) , &
-    x4(22) , w10(5) , w21a(5) , w21b(6) , w43a(10) , w43b(12) , &
-    w87a(21) , w87b(23) , savfun(21)
+  DIMENSION fv1(5), fv2(5), fv3(5), fv4(5), x1(5), x2(5), x3(11), &
+    x4(22), w10(5), w21a(5), w21b(6), w43a(10), w43b(12), &
+    w87a(21), w87b(23), savfun(21)
   !
   !           THE FOLLOWING DATA STATEMENTS CONTAIN THE
   !           ABSCISSAE AND WEIGHTS OF THE INTEGRATION RULES USED.
@@ -123,7 +123,7 @@ SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   ! QUADPACK ROUTINE QNG.  THESE COEFFICIENTS WERE CALCULATED WITH
   ! 101 DECIMAL DIGIT ARITHMETIC BY L. W. FULLERTON, BELL LABS, NOV 1981.
   !
-  SAVE x1 , w10 , x2 , w21a , w21b , x3 , w43a , w43b , x4 , w87a , w87b
+  SAVE x1, w10, x2, w21a, w21b, x3, w43a, w43b, x4, w87a, w87b
   DATA x1(1)/0.973906528517171720077964012084452D0/
   DATA x1(2)/0.865063366688984510732096688423493D0/
   DATA x1(3)/0.679409568299024406234327365114874D0/
@@ -297,7 +297,7 @@ SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
     !
     !          COMPUTE THE INTEGRAL USING THE 10- AND 21-POINT FORMULA.
     !
-    DO l = 1 , 3
+    DO l = 1, 3
       SELECT CASE (l)
         CASE (2)
           !
@@ -305,10 +305,10 @@ SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
           !
           res43 = w43b(12)*fcentr
           Neval = 43
-          DO k = 1 , 10
+          DO k = 1, 10
             res43 = res43 + savfun(k)*w43a(k)
           ENDDO
-          DO k = 1 , 11
+          DO k = 1, 11
             ipx = ipx + 1
             absc = hlgth*x3(k)
             fval = F(absc+centr) + F(centr-absc)
@@ -326,10 +326,10 @@ SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
           !
           res87 = w87b(23)*fcentr
           Neval = 87
-          DO k = 1 , 21
+          DO k = 1, 21
             res87 = res87 + savfun(k)*w87a(k)
           ENDDO
-          DO k = 1 , 22
+          DO k = 1, 22
             absc = hlgth*x4(k)
             res87 = res87 + w87b(k)*(F(absc+centr)+F(centr-absc))
           ENDDO
@@ -339,7 +339,7 @@ SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
           res10 = 0.0D+00
           res21 = w21b(6)*fcentr
           resabs = w21b(6)*ABS(fcentr)
-          DO k = 1 , 5
+          DO k = 1, 5
             absc = hlgth*x1(k)
             fval1 = F(centr+absc)
             fval2 = F(centr-absc)
@@ -352,7 +352,7 @@ SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
             fv2(k) = fval2
           ENDDO
           ipx = 5
-          DO k = 1 , 5
+          DO k = 1, 5
             ipx = ipx + 1
             absc = hlgth*x2(k)
             fval1 = F(centr+absc)
@@ -371,7 +371,7 @@ SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
           resabs = resabs*dhlgth
           reskh = 0.5D+00*res21
           resasc = w21b(6)*ABS(fcentr-reskh)
-          DO k = 1 , 5
+          DO k = 1, 5
             resasc = resasc + w21a(k)*(ABS(fv1(k)-reskh)+ABS(fv2(k)-reskh))&
               + w21b(k)*(ABS(fv3(k)-reskh)+ABS(fv4(k)-reskh))
           ENDDO
@@ -388,4 +388,5 @@ SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
     ENDDO
   ENDIF
   CALL XERMSG('SLATEC','DQNG','ABNORMAL RETURN',Ier,0)
-  99999 END SUBROUTINE DQNG
+  99999 CONTINUE
+  END SUBROUTINE DQNG

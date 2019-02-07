@@ -45,8 +45,8 @@ INTEGER FUNCTION IDAMAX(N,Dx,Incx)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  IDAMAX
-  REAL(8) :: Dx(*) , dmax , xmag
-  INTEGER i , Incx , ix , N
+  REAL(8) :: Dx(*), dmax, xmag
+  INTEGER i, Incx, ix, N
   !***FIRST EXECUTABLE STATEMENT  IDAMAX
   IDAMAX = 0
   IF ( N<=0 ) RETURN
@@ -58,7 +58,7 @@ INTEGER FUNCTION IDAMAX(N,Dx,Incx)
     !     Code for increments equal to 1.
     !
     dmax = ABS(Dx(1))
-    DO i = 2 , N
+    DO i = 2, N
       xmag = ABS(Dx(i))
       IF ( xmag>dmax ) THEN
         IDAMAX = i
@@ -74,7 +74,7 @@ INTEGER FUNCTION IDAMAX(N,Dx,Incx)
   IF ( Incx<0 ) ix = (-N+1)*Incx + 1
   dmax = ABS(Dx(ix))
   ix = ix + Incx
-  DO i = 2 , N
+  DO i = 2, N
     xmag = ABS(Dx(ix))
     IF ( xmag>dmax ) THEN
       IDAMAX = i
@@ -83,4 +83,5 @@ INTEGER FUNCTION IDAMAX(N,Dx,Incx)
     ix = ix + Incx
   ENDDO
   RETURN
-  99999 END FUNCTION IDAMAX
+  99999 CONTINUE
+  END FUNCTION IDAMAX

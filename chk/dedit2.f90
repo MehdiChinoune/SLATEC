@@ -18,19 +18,19 @@ SUBROUTINE DEDIT2(Y,T,Erm)
   !   901009  Changed AMAX1 to MAX.  (FNF)
   !   901030  Removed FLOAT's; made all local declarations explicit. (FNF)
   !***END PROLOGUE  DEDIT2
-  REAL(8) :: Y(*) , T , Erm
-  INTEGER i , j , k , ng
-  REAL(8) :: alph1 , alph2 , a1 , a2 , er , ex , yt
-  DATA alph1/1.0D0/ , alph2/1.0D0/ , ng/5/
+  REAL(8) :: Y(*), T, Erm
+  INTEGER i, j, k, ng
+  REAL(8) :: alph1, alph2, a1, a2, er, ex, yt
+  DATA alph1/1.0D0/, alph2/1.0D0/, ng/5/
   !***FIRST EXECUTABLE STATEMENT  DEDIT2
   Erm = 0.0D0
   IF ( T==0.0D0 ) RETURN
   ex = 0.0D0
   IF ( T<=30.0D0 ) ex = EXP(-2.0D0*T)
   a2 = 1.0D0
-  DO j = 1 , ng
+  DO j = 1, ng
     a1 = 1.0D0
-    DO i = 1 , ng
+    DO i = 1, ng
       k = i + (j-1)*ng
       yt = T**(i+j-2)*ex*a1*a2
       er = ABS(Y(k)-yt)

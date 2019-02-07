@@ -58,19 +58,19 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !   900328  Added TYPE section.  (WRB)
   !   920422  Changed CALL to HFTI to include variable MA.  (WRB)
   !***END PROLOGUE  LSI
-  INTEGER Ip(*) , Ma , Mdw , Mg , Mode , N
-  REAL Prgopt(*) , Rnorm , W(Mdw,*) , Ws(*) , X(*)
+  INTEGER Ip(*), Ma, Mdw, Mg, Mode, N
+  REAL Prgopt(*), Rnorm, W(Mdw,*), Ws(*), X(*)
   !
-  EXTERNAL H12 , HFTI , LPDP , R1MACH , SASUM , SAXPY , SCOPY , SDOT , &
-    SSCAL , SSWAP
-  REAL R1MACH , SASUM , SDOT
+  EXTERNAL H12, HFTI, LPDP, R1MACH, SASUM, SAXPY, SCOPY, SDOT, &
+    SSCAL, SSWAP
+  REAL R1MACH, SASUM, SDOT
   !
-  REAL anorm , fac , gam , rb , srelpr , tau , tol , xnorm
-  INTEGER i , j , k , key , krank , krm1 , krp1 , l , last , link , m , &
-    map1 , mdlpdp , minman , n1 , n2 , n3 , next , np1
-  LOGICAL cov , first , sclcov
+  REAL anorm, fac, gam, rb, srelpr, tau, tol, xnorm
+  INTEGER i, j, k, key, krank, krm1, krp1, l, last, link, m, &
+    map1, mdlpdp, minman, n1, n2, n3, next, np1
+  LOGICAL cov, first, sclcov
   !
-  SAVE srelpr , first
+  SAVE srelpr, first
   DATA first/.TRUE./
   !
   !***FIRST EXECUTABLE STATEMENT  LSI
@@ -110,7 +110,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       !     Compute matrix norm of least squares equations.
       !
       anorm = 0.E0
-      DO j = 1 , N
+      DO j = 1, N
         anorm = MAX(anorm,SASUM(Ma,W(1,j),1))
       ENDDO
       !
@@ -139,20 +139,20 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       !
       IF ( Ma<m ) THEN
         IF ( minman>0 ) THEN
-          DO i = map1 , m
+          DO i = map1, m
             W(i,np1) = W(i,np1) - SDOT(N,W(i,1),Mdw,Ws,1)
           ENDDO
           !
           !           Apply permutations to col. of inequality constraint matrix.
           !
-          DO i = 1 , minman
+          DO i = 1, minman
             CALL SSWAP(Mg,W(map1,i),1,W(map1,Ip(i)),1)
           ENDDO
           !
           !           Apply Householder transformations to constraint matrix.
           !
           IF ( krank>0.AND.krank<N ) THEN
-            DO i = krank , 1 , -1
+            DO i = krank, 1, -1
               CALL H12(2,i,krank+1,N,W(i,1),Mdw,Ws(n1+i-1),W(map1,1),Mdw,1,&
                 Mg)
             ENDDO
@@ -160,8 +160,8 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
           !
           !           Compute permuted inequality constraint matrix times r-inv.
           !
-          DO i = map1 , m
-            DO j = 1 , krank
+          DO i = map1, m
+            DO j = 1, krank
               W(i,j) = (W(i,j)-SDOT(j-1,W(1,j),1,W(i,1),Mdw))/W(j,j)
             ENDDO
           ENDDO
@@ -176,14 +176,14 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !        Compute solution in original coordinates.
         !
         IF ( mdlpdp==1 ) THEN
-          DO i = krank , 1 , -1
+          DO i = krank, 1, -1
             X(i) = (X(i)-SDOT(krank-i,W(i,i+1),Mdw,X(i+1),1))/W(i,i)
           ENDDO
           !
           !           Apply Householder transformation to solution vector.
           !
           IF ( krank<N ) THEN
-            DO i = 1 , krank
+            DO i = 1, krank
               CALL H12(2,i,krank+1,N,W(i,1),Mdw,Ws(n1+i-1),X,1,1,1)
             ENDDO
           ENDIF
@@ -191,14 +191,14 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
           !           Repermute variables to their input order.
           !
           IF ( minman>0 ) THEN
-            DO i = minman , 1 , -1
+            DO i = minman, 1, -1
               CALL SSWAP(1,X(i),1,X(Ip(i)),1)
             ENDDO
             !
             !              Variables are now in original coordinates.
             !              Add solution of unconstrained problem.
             !
-            DO i = 1 , N
+            DO i = 1, N
               X(i) = X(i) + Ws(i)
             ENDDO
             !
@@ -226,15 +226,15 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !
         !     Reciprocate diagonal terms.
         !
-        DO j = 1 , krank
+        DO j = 1, krank
           W(j,j) = 1.E0/W(j,j)
         ENDDO
         !
         !     Invert the upper triangular QR factor on itself.
         !
         IF ( krank>1 ) THEN
-          DO i = 1 , krm1
-            DO j = i + 1 , krank
+          DO i = 1, krm1
+            DO j = i + 1, krank
               W(i,j) = -SDOT(j-i,W(i,i),Mdw,W(i,j),1)*W(j,j)
             ENDDO
           ENDDO
@@ -242,8 +242,8 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !
         !     Compute the inverted factor times its transpose.
         !
-        DO i = 1 , krank
-          DO j = i , krank
+        DO i = 1, krank
+          DO j = i, krank
             W(i,j) = SDOT(krank+1-j,W(i,j),Mdw,W(j,j),Mdw)
           ENDDO
         ENDDO
@@ -252,18 +252,18 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !     Copy upper triangular to lower triangular part.
         !
         IF ( krank<N ) THEN
-          DO j = 1 , krank
+          DO j = 1, krank
             CALL SCOPY(j,W(1,j),1,W(j,1),Mdw)
           ENDDO
           !
-          DO i = krp1 , N
+          DO i = krp1, N
             CALL SCOPY(i,0.E0,0,W(i,1),Mdw)
           ENDDO
           !
           !        Apply right side transformations to lower triangle.
           !
           n3 = n2 + krp1
-          DO i = 1 , krank
+          DO i = 1, krank
             l = n1 + i
             k = n2 + i
             rb = Ws(l-1)*Ws(k-1)
@@ -280,11 +280,11 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
               k = n3 + i
               Ws(k-1) = Ws(l-1)
               !
-              DO j = krp1 , N
+              DO j = krp1, N
                 Ws(n3+j-1) = W(i,j)
               ENDDO
               !
-              DO j = 1 , N
+              DO j = 1, N
                 Ws(j) = rb*(SDOT(j-i,W(j,i),Mdw,Ws(n3+i-1),1)+SDOT(N-j+1,W(j&
                   ,j),1,Ws(n3+j-1),1))
               ENDDO
@@ -292,12 +292,12 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
               l = n3 + i
               gam = 0.5E0*rb*SDOT(N-i+1,Ws(l-1),1,Ws(i),1)
               CALL SAXPY(N-i+1,gam,Ws(l-1),1,Ws(i),1)
-              DO j = i , N
-                DO l = 1 , i - 1
+              DO j = i, N
+                DO l = 1, i - 1
                   W(j,l) = W(j,l) + Ws(n3+j-1)*Ws(l)
                 ENDDO
                 !
-                DO l = i , j
+                DO l = i, j
                   W(j,l) = W(j,l) + Ws(j)*Ws(n3+l-1) + Ws(l)*Ws(n3+j-1)
                 ENDDO
               ENDDO
@@ -307,14 +307,14 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
           !        Copy lower triangle to upper triangle to symmetrize the
           !        covariance matrix.
           !
-          DO i = 1 , N
+          DO i = 1, N
             CALL SCOPY(i,W(i,1),Mdw,W(1,i),1)
           ENDDO
         ENDIF
         !
         !     Repermute rows and columns.
         !
-        DO i = minman , 1 , -1
+        DO i = minman, 1, -1
           k = Ip(i)
           IF ( i/=k ) THEN
             CALL SSWAP(1,W(i,i),1,W(k,k),1)
@@ -327,7 +327,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
         !     Put in normalized residual sum of squares scale factor
         !     and symmetrize the resulting covariance matrix.
         !
-        DO j = 1 , N
+        DO j = 1, N
           CALL SSCAL(j,fac,W(1,j),1)
           CALL SCOPY(j,W(1,j),1,W(j,1),Mdw)
         ENDDO

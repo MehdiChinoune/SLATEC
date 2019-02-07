@@ -68,23 +68,23 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Fixed an error message.  (RWC)
   !***END PROLOGUE  WNLSM
-  INTEGER Ipivot(*) , Itype(*) , L , Ma , Mdw , Mme , Mode , N
-  REAL D(*) , H(*) , Prgopt(*) , Rnorm , Scale(*) , Temp(*) , W(Mdw,*) , &
-    Wd(*) , X(*) , Z(*)
+  INTEGER Ipivot(*), Itype(*), L, Ma, Mdw, Mme, Mode, N
+  REAL D(*), H(*), Prgopt(*), Rnorm, Scale(*), Temp(*), W(Mdw,*), &
+    Wd(*), X(*), Z(*)
   !
-  EXTERNAL H12 , ISAMAX , R1MACH , SASUM , SAXPY , SCOPY , SNRM2 , SROTM , &
-    SROTMG , SSCAL , SSWAP , WNLIT , XERMSG
-  REAL R1MACH , SASUM , SNRM2
+  EXTERNAL H12, ISAMAX, R1MACH, SASUM, SAXPY, SCOPY, SNRM2, SROTM, &
+    SROTMG, SSCAL, SSWAP, WNLIT, XERMSG
+  REAL R1MACH, SASUM, SNRM2
   INTEGER ISAMAX
   !
-  REAL alamda , alpha , alsq , amax , blowup , bnorm , dope(3) , eanorm , &
-    fac , sm , sparam(5) , srelpr , t , tau , wmax , z2 , zz
-  INTEGER i , idope(3) , imax , isol , itemp , iter , itmax , iwmax , j , &
-    jcon , jp , key , krank , l1 , last , link , m , me , next , niv , &
-    nlink , nopt , nsoln , ntimes
-  LOGICAL done , feasbl , first , hitcon , pos
+  REAL alamda, alpha, alsq, amax, blowup, bnorm, dope(3), eanorm, &
+    fac, sm, sparam(5), srelpr, t, tau, wmax, z2, zz
+  INTEGER i, idope(3), imax, isol, itemp, iter, itmax, iwmax, j, &
+    jcon, jp, key, krank, l1, last, link, m, me, next, niv, &
+    nlink, nopt, nsoln, ntimes
+  LOGICAL done, feasbl, first, hitcon, pos
   !
-  SAVE srelpr , first
+  SAVE srelpr, first
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  WNLSM
   !
@@ -144,7 +144,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       !
       key = Prgopt(last+1)
       IF ( key==6.AND.Prgopt(last+2)/=0.E0 ) THEN
-        DO j = 1 , N
+        DO j = 1, N
           t = SNRM2(m,W(1,j),1)
           IF ( t/=0.E0 ) t = 1.E0/t
           D(j) = t
@@ -167,7 +167,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       CYCLE
     ENDIF
     !
-    DO j = 1 , N
+    DO j = 1, N
       CALL SSCAL(m,D(j),W(1,j),1)
     ENDDO
     !
@@ -182,7 +182,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     !
     !     Compute scale factor to apply to equality constraint equations.
     !
-    DO j = 1 , N
+    DO j = 1, N
       Wd(j) = SASUM(m,W(1,j),1)
     ENDDO
     !
@@ -195,7 +195,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     !     classify equation types.
     !
     alsq = alamda**2
-    DO i = 1 , m
+    DO i = 1, m
       !
       !        When equation I is heavily weighted ITYPE(I)=0,
       !        else ITYPE(I)=1.
@@ -215,7 +215,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     !     matrix to the identity.
     !
     CALL SCOPY(N,0.E0,0,X,1)
-    DO i = 1 , N
+    DO i = 1, N
       Ipivot(i) = i
     ENDDO
     !
@@ -264,7 +264,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     isol = L + 1
     IF ( nsoln>=isol ) THEN
       CALL SCOPY(niv,W(1,N+1),1,Temp,1)
-      DO j = nsoln , isol , -1
+      DO j = nsoln, isol, -1
         IF ( j>krank ) THEN
           i = niv - nsoln + j
         ELSE
@@ -295,7 +295,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     !
     alpha = 2.E0
     hitcon = .FALSE.
-    DO j = L + 1 , nsoln
+    DO j = L + 1, nsoln
       zz = Z(j)
       IF ( zz<=0.E0 ) THEN
         t = X(j)/(X(j)-zz)
@@ -315,7 +315,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       !        last feasible solution X(*) and current unconstrained (and
       !        infeasible) solution Z(*).
       !
-      DO j = L + 1 , nsoln
+      DO j = L + 1, nsoln
         X(j) = X(j) + alpha*(Z(j)-X(j))
       ENDDO
       feasbl = .FALSE.
@@ -325,7 +325,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       !        upper Hessenberg form for the nonactive constraints and
       !        leaves an upper Hessenberg matrix to retriangularize.
       !
-      20       DO i = 1 , m
+      20       DO i = 1, m
       t = W(i,jcon)
       CALL SCOPY(N-jcon,W(i,jcon+1),Mdw,W(i,jcon),Mdw)
       W(i,N) = t
@@ -334,7 +334,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !        Update permuted index vector to reflect this shift and swap.
   !
   itemp = Ipivot(jcon)
-  DO i = jcon , N - 1
+  DO i = jcon, N - 1
     Ipivot(i) = Ipivot(i+1)
   ENDDO
   Ipivot(N) = itemp
@@ -350,7 +350,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !        constraints.
   !
   i = krank + jcon - L
-  DO j = jcon , nsoln
+  DO j = jcon, nsoln
     IF ( Itype(i)==0.AND.Itype(i+1)==0 ) THEN
       !
       !              Zero IP1 to I in column J
@@ -411,7 +411,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !        error.  Any that are non-positive will be set to zero and
   !        removed from the solution set.
   !
-  DO jcon = L + 1 , nsoln
+  DO jcon = L + 1, nsoln
     IF ( X(jcon)<=0.E0 ) GOTO 40
   ENDDO
   feasbl = .TRUE.
@@ -443,9 +443,9 @@ ELSE
     !
     !        Form inner product vector WD(*) of dual coefficients.
     !
-    DO j = nsoln + 1 , N
+    DO j = nsoln + 1, N
       sm = 0.E0
-      DO i = nsoln + 1 , m
+      DO i = nsoln + 1, m
         sm = sm + Scale(i)*W(i,j)*W(i,N+1)
       ENDDO
       Wd(j) = sm
@@ -460,7 +460,7 @@ ELSE
     !
     wmax = 0.E0
     iwmax = nsoln + 1
-    DO j = nsoln + 1 , N
+    DO j = nsoln + 1, N
       IF ( Wd(j)>wmax ) THEN
         wmax = Wd(j)
         iwmax = j
@@ -494,7 +494,7 @@ ELSE
     !        Reduce column NSOLN so that the matrix of nonactive constraints
     !        variables is triangular.
     !
-    DO j = m , niv + 1 , -1
+    DO j = m, niv + 1, -1
       jp = j - 1
       !
       !           When operating near the ME line, test to see if the pivot
@@ -505,7 +505,7 @@ ELSE
       IF ( j==me+1 ) THEN
         imax = me
         amax = Scale(me)*W(me,nsoln)**2
-        DO jp = j - 1 , niv , -1
+        DO jp = j - 1, niv, -1
           t = Scale(jp)*W(jp,nsoln)**2
           IF ( t>amax ) THEN
             imax = jp
@@ -572,7 +572,7 @@ ENDDO
 100  isol = 1
 IF ( nsoln>=isol ) THEN
 CALL SCOPY(niv,W(1,N+1),1,Temp,1)
-DO j = nsoln , isol , -1
+DO j = nsoln, isol, -1
   IF ( j>krank ) THEN
     i = niv - nsoln + j
   ELSE
@@ -595,7 +595,7 @@ CALL SCOPY(nsoln,Z,1,X,1)
 !     Apply Householder transformations to X(*) if KRANK.LT.L
 !
 IF ( krank<L ) THEN
-DO i = 1 , krank
+DO i = 1, krank
   CALL H12(2,i,krank+1,L,W(i,1),Mdw,H(i),X,1,1,1)
 ENDDO
 ENDIF
@@ -606,7 +606,7 @@ IF ( nsoln<N ) CALL SCOPY(N-nsoln,0.E0,0,X(nsoln+1),1)
 !
 !     Permute solution vector to natural order.
 !
-DO i = 1 , N
+DO i = 1, N
 j = i
 DO WHILE ( Ipivot(j)/=i )
   j = j + 1
@@ -619,11 +619,11 @@ ENDDO
 !
 !     Rescale the solution using the column scaling.
 !
-DO j = 1 , N
+DO j = 1, N
 X(j) = X(j)*D(j)
 ENDDO
 !
-DO i = nsoln + 1 , m
+DO i = nsoln + 1, m
 t = W(i,N+1)
 IF ( i<=me ) t = t/alamda
 t = (Scale(i)*t)*t

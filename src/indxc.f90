@@ -4,8 +4,8 @@ SUBROUTINE INDXC(I,Ir,Idxc,Nc)
   IMPLICIT NONE
   !*--INDXC5
   !*** Start of declarations inserted by SPAG
-  REAL CNV , EPS
-  INTEGER I , Idxc , IK , Ir , K , Nc , NCMplx , NM , NPP
+  REAL CNV, EPS
+  INTEGER I, Idxc, IK, Ir, K, Nc, NCMplx, NM, NPP
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  INDXC
   !***SUBSIDIARY
@@ -21,7 +21,7 @@ SUBROUTINE INDXC(I,Ir,Idxc,Nc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  INDXC
-  COMMON /CBLKT / NPP , K , EPS , CNV , NM , NCMplx , IK
+  COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  INDXC
   Nc = 2**Ir
   Idxc = I

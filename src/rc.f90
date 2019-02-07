@@ -185,7 +185,7 @@ REAL FUNCTION RC(X,Y,Ier)
   !                  LN X                X .GT. 0
   !
   !                                            2
-  !                  LN(X) = (X-1) RC(((1+X)/2)  , X )
+  !                  LN(X) = (X-1) RC(((1+X)/2) , X )
   !
   !
   !   --------------------------------------------------------------------
@@ -270,12 +270,12 @@ REAL FUNCTION RC(X,Y,Ier)
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RC
-  CHARACTER(16) :: xern3 , xern4 , xern5
+  CHARACTER(16) :: xern3, xern4, xern5
   INTEGER Ier
-  REAL c1 , c2 , errtol , lamda , lolim
-  REAL mu , s , sn , uplim , X , xn , Y , yn
+  REAL c1, c2, errtol, lamda, lolim
+  REAL mu, s, sn, uplim, X, xn, Y, yn
   LOGICAL first
-  SAVE errtol , lolim , uplim , c1 , c2 , first
+  SAVE errtol, lolim, uplim, c1, c2, first
   DATA first/.TRUE./
   !
   !***FIRST EXECUTABLE STATEMENT  RC

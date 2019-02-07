@@ -15,9 +15,9 @@ SUBROUTINE JAC(T,U,Pd,Nrowpd,Rpar,Ipar)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900415  Minor clean-up of prologue and code.  (WRB)
   !***END PROLOGUE  JAC
-  INTEGER Ipar , Nrowpd
-  REAL Pd , r , r5 , Rpar , rsq , T , U , u1sq , u2sq , u1u2
-  DIMENSION U(*) , Pd(Nrowpd,*) , Rpar(*) , Ipar(*)
+  INTEGER Ipar, Nrowpd
+  REAL Pd, r, r5, Rpar, rsq, T, U, u1sq, u2sq, u1u2
+  DIMENSION U(*), Pd(Nrowpd,*), Rpar(*), Ipar(*)
   !***FIRST EXECUTABLE STATEMENT  JAC
   u1sq = U(1)*U(1)
   u2sq = U(2)*U(2)

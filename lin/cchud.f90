@@ -112,25 +112,25 @@ SUBROUTINE CCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CCHUD
-  INTEGER Ldr , P , Ldz , Nz
-  REAL Rho(*) , C(*)
-  COMPLEX R(Ldr,*) , X(*) , Z(Ldz,*) , Y(*) , S(*)
+  INTEGER Ldr, P, Ldz, Nz
+  REAL Rho(*), C(*)
+  COMPLEX R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
   !
-  INTEGER i , j , jm1
-  REAL azeta , scale
-  COMPLEX t , xj , zeta
+  INTEGER i, j, jm1
+  REAL azeta, scale
+  COMPLEX t, xj, zeta
   !
   !     UPDATE R.
   !
   !***FIRST EXECUTABLE STATEMENT  CCHUD
-  DO j = 1 , P
+  DO j = 1, P
     xj = X(j)
     !
     !        APPLY THE PREVIOUS ROTATIONS.
     !
     jm1 = j - 1
     IF ( jm1>=1 ) THEN
-      DO i = 1 , jm1
+      DO i = 1, jm1
         t = C(i)*R(i,j) + S(i)*xj
         xj = C(i)*xj - CONJG(S(i))*R(i,j)
         R(i,j) = t
@@ -145,9 +145,9 @@ SUBROUTINE CCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   !     IF REQUIRED, UPDATE Z AND RHO.
   !
   IF ( Nz>=1 ) THEN
-    DO j = 1 , Nz
+    DO j = 1, Nz
       zeta = Y(j)
-      DO i = 1 , P
+      DO i = 1, P
         t = C(i)*Z(i,j) + S(i)*zeta
         zeta = C(i)*zeta - CONJG(S(i))*Z(i,j)
         Z(i,j) = t

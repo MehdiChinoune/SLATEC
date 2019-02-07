@@ -84,15 +84,15 @@ SUBROUTINE DGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !***END PROLOGUE  DGER
   !     .. Scalar Arguments ..
   REAL(8) :: Alpha
-  INTEGER Incx , Incy , Lda , M , N
+  INTEGER Incx, Incy, Lda, M, N
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*) , X(*) , Y(*)
+  REAL(8) :: A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
   REAL(8) :: ZERO
   PARAMETER (ZERO=0.0D+0)
   !     .. Local Scalars ..
   REAL(8) :: temp
-  INTEGER i , info , ix , j , jy , kx
+  INTEGER i, info, ix, j, jy, kx
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
@@ -131,10 +131,10 @@ SUBROUTINE DGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
     jy = 1 - (N-1)*Incy
   ENDIF
   IF ( Incx==1 ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       IF ( Y(jy)/=ZERO ) THEN
         temp = Alpha*Y(jy)
-        DO i = 1 , M
+        DO i = 1, M
           A(i,j) = A(i,j) + X(i)*temp
         ENDDO
       ENDIF
@@ -146,11 +146,11 @@ SUBROUTINE DGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
     ELSE
       kx = 1 - (M-1)*Incx
     ENDIF
-    DO j = 1 , N
+    DO j = 1, N
       IF ( Y(jy)/=ZERO ) THEN
         temp = Alpha*Y(jy)
         ix = kx
-        DO i = 1 , M
+        DO i = 1, M
           A(i,j) = A(i,j) + X(ix)*temp
           ix = ix + Incx
         ENDDO

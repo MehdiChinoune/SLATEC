@@ -4,7 +4,7 @@ FUNCTION ACOSH(X)
   IMPLICIT NONE
   !*--ACOSH5
   !*** Start of declarations inserted by SPAG
-  REAL ACOSH , aln2 , R1MACH , X , xmax
+  REAL ACOSH, aln2, R1MACH, X, xmax
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ACOSH
   !***PURPOSE  Compute the arc hyperbolic cosine.
@@ -29,7 +29,7 @@ FUNCTION ACOSH(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  ACOSH
-  SAVE aln2 , xmax
+  SAVE aln2, xmax
   DATA aln2/0.69314718055994530942E0/
   DATA xmax/0./
   !***FIRST EXECUTABLE STATEMENT  ACOSH

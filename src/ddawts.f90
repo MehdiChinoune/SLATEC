@@ -26,16 +26,16 @@ SUBROUTINE DDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt,Rpar,Ipar)
   !           cosmetic changes to prologue.  (FNF)
   !***END PROLOGUE  DDAWTS
   !
-  INTEGER Neq , Iwt , Ipar(*)
-  REAL(8) :: Rtol(*) , Atol(*) , Y(*) , Wt(*) , Rpar(*)
+  INTEGER Neq, Iwt, Ipar(*)
+  REAL(8) :: Rtol(*), Atol(*), Y(*), Wt(*), Rpar(*)
   !
   INTEGER i
-  REAL(8) :: atoli , rtoli
+  REAL(8) :: atoli, rtoli
   !
   !***FIRST EXECUTABLE STATEMENT  DDAWTS
   rtoli = Rtol(1)
   atoli = Atol(1)
-  DO i = 1 , Neq
+  DO i = 1, Neq
     IF ( Iwt/=0 ) THEN
       rtoli = Rtol(i)
       atoli = Atol(i)

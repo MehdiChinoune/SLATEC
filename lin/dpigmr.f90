@@ -216,32 +216,32 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
-  REAL(8) :: Bnrm , Err , Rhol , Tol
-  INTEGER Iflag , Isym , Itol , Iunit , Jpre , Jscal , Kmp , Lgmr , Maxl , &
-    Maxlp1 , N , Nelt , Nmsl , Nrmax , Nrsts
+  REAL(8) :: Bnrm, Err, Rhol, Tol
+  INTEGER Iflag, Isym, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, Maxl, &
+    Maxlp1, N, Nelt, Nmsl, Nrmax, Nrsts
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , B(*) , Dl(*) , Hes(Maxlp1,*) , Q(*) , R0(*) , &
-    Rpar(*) , Sr(*) , Sz(*) , V(N,*) , Wk(*) , X(*) , Xl(*) , &
+  REAL(8) :: A(Nelt), B(*), Dl(*), Hes(Maxlp1,*), Q(*), R0(*), &
+    Rpar(*), Sr(*), Sz(*), V(N,*), Wk(*), X(*), Xl(*), &
     Z(*)
-  INTEGER Ia(Nelt) , Ipar(*) , Ja(Nelt)
+  INTEGER Ia(Nelt), Ipar(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC , MSOLVE
+  EXTERNAL MATVEC, MSOLVE
   !     .. Local Scalars ..
-  REAL(8) :: c , dlnrm , prod , r0nrm , rho , s , snormw , tem
-  INTEGER i , i2 , info , ip1 , iter , itmax , j , k , ll , llp1
+  REAL(8) :: c, dlnrm, prod, r0nrm, rho, s, snormw, tem
+  INTEGER i, i2, info, ip1, iter, itmax, j, k, ll, llp1
   !     .. External Functions ..
   REAL(8) :: DNRM2
   INTEGER ISDGMR
-  EXTERNAL DNRM2 , ISDGMR
+  EXTERNAL DNRM2, ISDGMR
   !     .. External Subroutines ..
-  EXTERNAL DAXPY , DCOPY , DHELS , DHEQR , DORTH , DRLCAL , DSCAL
+  EXTERNAL DAXPY, DCOPY, DHELS, DHEQR, DORTH, DRLCAL, DSCAL
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !***FIRST EXECUTABLE STATEMENT  DPIGMR
   !
   !         Zero out the Z array.
   !
-  DO i = 1 , N
+  DO i = 1, N
     Z(i) = 0
   ENDDO
   !
@@ -261,11 +261,11 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     Nmsl = Nmsl + 1
   ENDIF
   IF ( ((Jscal==2).OR.(Jscal==3)).AND.(Nrsts==0) ) THEN
-    DO i = 1 , N
+    DO i = 1, N
       V(i,1) = R0(i)*Sr(i)
     ENDDO
   ELSE
-    DO i = 1 , N
+    DO i = 1, N
       V(i,1) = R0(i)
     ENDDO
   ENDIF
@@ -282,8 +282,8 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !
   !         Zero out the HES array.
   !
-  DO j = 1 , Maxl
-    DO i = 1 , Maxlp1
+  DO j = 1, Maxl
+    DO i = 1, Maxlp1
       Hes(i,j) = 0
     ENDDO
   ENDDO
@@ -292,7 +292,7 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !         The running product PROD is needed for the convergence test.
   !   -------------------------------------------------------------------
   prod = 1
-  DO ll = 1 , Maxl
+  DO ll = 1, Maxl
     Lgmr = ll
     !   -------------------------------------------------------------------
     !        Unscale  the  current V(LL)  and store  in WK.  Call routine
@@ -304,7 +304,7 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     !        V(*,LL+1).  Call routine DHEQR to update the factors of HES.
     !   -------------------------------------------------------------------
     IF ( (Jscal==1).OR.(Jscal==3) ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         Wk(i) = V(i,ll)/Sz(i)
       ENDDO
     ELSE
@@ -323,7 +323,7 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
       Nmsl = Nmsl + 1
     ENDIF
     IF ( (Jscal==2).OR.(Jscal==3) ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         V(i,ll+1) = V(i,ll+1)*Sr(i)
       ENDDO
     ENDIF
@@ -342,12 +342,12 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     IF ( (ll>Kmp).AND.(Kmp<Maxl) ) THEN
       IF ( ll==Kmp+1 ) THEN
         CALL DCOPY(N,V(1,1),1,Dl,1)
-        DO i = 1 , Kmp
+        DO i = 1, Kmp
           ip1 = i + 1
           i2 = i*2
           s = Q(i2)
           c = Q(i2-1)
-          DO k = 1 , N
+          DO k = 1, N
             Dl(k) = s*Dl(k) + c*V(k,ip1)
           ENDDO
         ENDDO
@@ -355,7 +355,7 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
       s = Q(2*ll)
       c = Q(2*ll-1)/snormw
       llp1 = ll + 1
-      DO k = 1 , N
+      DO k = 1, N
         Dl(k) = s*Dl(k) + c*V(k,llp1)
       ENDDO
       dlnrm = DNRM2(N,Dl,1)
@@ -392,11 +392,12 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     IF ( Nrmax>0 ) CALL DRLCAL(N,Kmp,Maxl,Maxl,V,Q,Dl,snormw,prod,r0nrm)
     GOTO 200
   ENDIF
-  100  Iflag = 2
+  100 CONTINUE
+  IFlag = 2
   !
   !         Load approximate solution with zero.
   !
-  DO i = 1 , N
+  DO i = 1, N
     Z(i) = 0
   ENDDO
   RETURN
@@ -407,19 +408,19 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !   -------------------------------------------------------------------
   200  ll = Lgmr
   llp1 = ll + 1
-  DO k = 1 , llp1
+  DO k = 1, llp1
     R0(k) = 0
   ENDDO
   R0(1) = r0nrm
   CALL DHELS(Hes,Maxlp1,ll,Q,R0)
-  DO k = 1 , N
+  DO k = 1, N
     Z(k) = 0
   ENDDO
-  DO i = 1 , ll
+  DO i = 1, ll
     CALL DAXPY(N,R0(i),V(1,i),1,Z,1)
   ENDDO
   IF ( (Jscal==1).OR.(Jscal==3) ) THEN
-    DO i = 1 , N
+    DO i = 1, N
       Z(i) = Z(i)/Sz(i)
     ENDDO
   ENDIF

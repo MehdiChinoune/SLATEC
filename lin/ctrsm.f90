@@ -131,21 +131,21 @@ SUBROUTINE CTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  CTRSM
   !     .. Scalar Arguments ..
-  CHARACTER :: Side , Uplo , Transa , Diag
-  INTEGER M , N , Lda , Ldb
+  CHARACTER :: Side, Uplo, Transa, Diag
+  INTEGER M, N, Lda, Ldb
   COMPLEX Alpha
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*) , B(Ldb,*)
+  COMPLEX A(Lda,*), B(Ldb,*)
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
-  INTRINSIC CONJG , MAX
+  INTRINSIC CONJG, MAX
   !     .. Local Scalars ..
-  LOGICAL lside , noconj , nounit , upper
-  INTEGER i , info , j , k , nrowa
+  LOGICAL lside, noconj, nounit, upper
+  INTEGER i, info, j, k, nrowa
   COMPLEX temp
   !     .. Parameters ..
   COMPLEX ONE
@@ -197,8 +197,8 @@ SUBROUTINE CTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !     And when  alpha.eq.zero.
   !
   IF ( Alpha==ZERO ) THEN
-    DO j = 1 , N
-      DO i = 1 , M
+    DO j = 1, N
+      DO i = 1, M
         B(i,j) = ZERO
       ENDDO
     ENDDO
@@ -213,32 +213,32 @@ SUBROUTINE CTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
       !           Form  B := alpha*inv( A )*B.
       !
       IF ( upper ) THEN
-        DO j = 1 , N
+        DO j = 1, N
           IF ( Alpha/=ONE ) THEN
-            DO i = 1 , M
+            DO i = 1, M
               B(i,j) = Alpha*B(i,j)
             ENDDO
           ENDIF
-          DO k = M , 1 , -1
+          DO k = M, 1, -1
             IF ( B(k,j)/=ZERO ) THEN
               IF ( nounit ) B(k,j) = B(k,j)/A(k,k)
-              DO i = 1 , k - 1
+              DO i = 1, k - 1
                 B(i,j) = B(i,j) - B(k,j)*A(i,k)
               ENDDO
             ENDIF
           ENDDO
         ENDDO
       ELSE
-        DO j = 1 , N
+        DO j = 1, N
           IF ( Alpha/=ONE ) THEN
-            DO i = 1 , M
+            DO i = 1, M
               B(i,j) = Alpha*B(i,j)
             ENDDO
           ENDIF
-          DO k = 1 , M
+          DO k = 1, M
             IF ( B(k,j)/=ZERO ) THEN
               IF ( nounit ) B(k,j) = B(k,j)/A(k,k)
-              DO i = k + 1 , M
+              DO i = k + 1, M
                 B(i,j) = B(i,j) - B(k,j)*A(i,k)
               ENDDO
             ENDIF
@@ -250,16 +250,16 @@ SUBROUTINE CTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
       !           or    B := alpha*inv( conjg( A' ) )*B.
       !
     ELSEIF ( upper ) THEN
-      DO j = 1 , N
-        DO i = 1 , M
+      DO j = 1, N
+        DO i = 1, M
           temp = Alpha*B(i,j)
           IF ( noconj ) THEN
-            DO k = 1 , i - 1
+            DO k = 1, i - 1
               temp = temp - A(k,i)*B(k,j)
             ENDDO
             IF ( nounit ) temp = temp/A(i,i)
           ELSE
-            DO k = 1 , i - 1
+            DO k = 1, i - 1
               temp = temp - CONJG(A(k,i))*B(k,j)
             ENDDO
             IF ( nounit ) temp = temp/CONJG(A(i,i))
@@ -268,16 +268,16 @@ SUBROUTINE CTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
         ENDDO
       ENDDO
     ELSE
-      DO j = 1 , N
-        DO i = M , 1 , -1
+      DO j = 1, N
+        DO i = M, 1, -1
           temp = Alpha*B(i,j)
           IF ( noconj ) THEN
-            DO k = i + 1 , M
+            DO k = i + 1, M
               temp = temp - A(k,i)*B(k,j)
             ENDDO
             IF ( nounit ) temp = temp/A(i,i)
           ELSE
-            DO k = i + 1 , M
+            DO k = i + 1, M
               temp = temp - CONJG(A(k,i))*B(k,j)
             ENDDO
             IF ( nounit ) temp = temp/CONJG(A(i,i))
@@ -291,43 +291,43 @@ SUBROUTINE CTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
     !           Form  B := alpha*B*inv( A ).
     !
     IF ( upper ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( Alpha/=ONE ) THEN
-          DO i = 1 , M
+          DO i = 1, M
             B(i,j) = Alpha*B(i,j)
           ENDDO
         ENDIF
-        DO k = 1 , j - 1
+        DO k = 1, j - 1
           IF ( A(k,j)/=ZERO ) THEN
-            DO i = 1 , M
+            DO i = 1, M
               B(i,j) = B(i,j) - A(k,j)*B(i,k)
             ENDDO
           ENDIF
         ENDDO
         IF ( nounit ) THEN
           temp = ONE/A(j,j)
-          DO i = 1 , M
+          DO i = 1, M
             B(i,j) = temp*B(i,j)
           ENDDO
         ENDIF
       ENDDO
     ELSE
-      DO j = N , 1 , -1
+      DO j = N, 1, -1
         IF ( Alpha/=ONE ) THEN
-          DO i = 1 , M
+          DO i = 1, M
             B(i,j) = Alpha*B(i,j)
           ENDDO
         ENDIF
-        DO k = j + 1 , N
+        DO k = j + 1, N
           IF ( A(k,j)/=ZERO ) THEN
-            DO i = 1 , M
+            DO i = 1, M
               B(i,j) = B(i,j) - A(k,j)*B(i,k)
             ENDDO
           ENDIF
         ENDDO
         IF ( nounit ) THEN
           temp = ONE/A(j,j)
-          DO i = 1 , M
+          DO i = 1, M
             B(i,j) = temp*B(i,j)
           ENDDO
         ENDIF
@@ -338,61 +338,61 @@ SUBROUTINE CTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
     !           or    B := alpha*B*inv( conjg( A' ) ).
     !
   ELSEIF ( upper ) THEN
-    DO k = N , 1 , -1
+    DO k = N, 1, -1
       IF ( nounit ) THEN
         IF ( noconj ) THEN
           temp = ONE/A(k,k)
         ELSE
           temp = ONE/CONJG(A(k,k))
         ENDIF
-        DO i = 1 , M
+        DO i = 1, M
           B(i,k) = temp*B(i,k)
         ENDDO
       ENDIF
-      DO j = 1 , k - 1
+      DO j = 1, k - 1
         IF ( A(j,k)/=ZERO ) THEN
           IF ( noconj ) THEN
             temp = A(j,k)
           ELSE
             temp = CONJG(A(j,k))
           ENDIF
-          DO i = 1 , M
+          DO i = 1, M
             B(i,j) = B(i,j) - temp*B(i,k)
           ENDDO
         ENDIF
       ENDDO
       IF ( Alpha/=ONE ) THEN
-        DO i = 1 , M
+        DO i = 1, M
           B(i,k) = Alpha*B(i,k)
         ENDDO
       ENDIF
     ENDDO
   ELSE
-    DO k = 1 , N
+    DO k = 1, N
       IF ( nounit ) THEN
         IF ( noconj ) THEN
           temp = ONE/A(k,k)
         ELSE
           temp = ONE/CONJG(A(k,k))
         ENDIF
-        DO i = 1 , M
+        DO i = 1, M
           B(i,k) = temp*B(i,k)
         ENDDO
       ENDIF
-      DO j = k + 1 , N
+      DO j = k + 1, N
         IF ( A(j,k)/=ZERO ) THEN
           IF ( noconj ) THEN
             temp = A(j,k)
           ELSE
             temp = CONJG(A(j,k))
           ENDIF
-          DO i = 1 , M
+          DO i = 1, M
             B(i,j) = B(i,j) - temp*B(i,k)
           ENDDO
         ENDIF
       ENDDO
       IF ( Alpha/=ONE ) THEN
-        DO i = 1 , M
+        DO i = 1, M
           B(i,k) = Alpha*B(i,k)
         ENDDO
       ENDIF

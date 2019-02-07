@@ -30,7 +30,7 @@ SUBROUTINE DLGAMS(X,Dlgam,Sgngam)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DLGAMS
-  REAL(8) :: X , Dlgam , Sgngam , DLNGAM
+  REAL(8) :: X, Dlgam, Sgngam, DLNGAM
   !***FIRST EXECUTABLE STATEMENT  DLGAMS
   Dlgam = DLNGAM(X)
   Sgngam = 1.0D0

@@ -4,14 +4,14 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   IMPLICIT NONE
   !*--MGSBV5
   !*** Start of declarations inserted by SPAG
-  REAL A , AE , dot , EPS , FOUru , P , pjp , PRVEC , psave , RE , ry , S , &
-    SDOT , SQOvfl , SRU , sv , t , TOL , TWOu , URO
-  REAL V , vl , vnorm , W , Wcnd , y
-  INTEGER i , Ia , ICOco , Iflag , INDpvt , Inhomo , INTeg , Ip , ip1 , ix , &
-    iz , j , jk , jp , jq , jy , jz , k , kd , kj
-  INTEGER kp , l , lix , LPAr , lr , M , m2 , MXNon , N , NDIsk , NEQ , &
-    NEQivp , NFCc , NIC , Niv , nivn , nmnr , nn , NOPg , np1
-  INTEGER NPS , nr , nrm1 , NTApe , NTP , NUMort , NXPts
+  REAL A, AE, dot, EPS, FOUru, P, pjp, PRVEC, psave, RE, ry, S, &
+    SDOT, SQOvfl, SRU, sv, t, TOL, TWOu, URO
+  REAL V, vl, vnorm, W, Wcnd, y
+  INTEGER i, Ia, ICOco, Iflag, INDpvt, Inhomo, INTeg, Ip, ip1, ix, &
+    iz, j, jk, jp, jq, jy, jz, k, kd, kj
+  INTEGER kp, l, lix, LPAr, lr, M, m2, MXNon, N, NDIsk, NEQ, &
+    NEQivp, NFCc, NIC, Niv, nivn, nmnr, nn, NOPg, np1
+  INTEGER NPS, nr, nrm1, NTApe, NTP, NUMort, NXPts
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MGSBV
   !***SUBSIDIARY
@@ -75,14 +75,14 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  MGSBV
   !
-  DIMENSION A(Ia,*) , V(*) , W(*) , P(*) , Ip(*) , S(*)
+  DIMENSION A(Ia,*), V(*), W(*), P(*), Ip(*), S(*)
   !
   !
-  COMMON /ML18JR/ AE , RE , TOL , NXPts , NIC , NOPg , MXNon , NDIsk , &
-    NTApe , NEQ , INDpvt , INTeg , NPS , NTP , NEQivp , &
-    NUMort , NFCc , ICOco
+  COMMON /ML18JR/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
+    NUMort, NFCc, ICOco
   !
-  COMMON /ML5MCO/ URO , SRU , EPS , SQOvfl , TWOu , FOUru , LPAr
+  COMMON /ML5MCO/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
   !
   !***FIRST EXECUTABLE STATEMENT  MGSBV
   IF ( M>0.AND.N>0.AND.Ia>=M ) THEN
@@ -97,7 +97,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
     !     VECTOR WITH LARGEST MAGNITUDE
     !
     j = 0
-    DO i = 1 , N
+    DO i = 1, N
       vl = SDOT(M,A(1,i),1,A(1,i),1)
       S(i) = vl
       IF ( N/=NFCc ) THEN
@@ -128,7 +128,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
     !
     IF ( y/=0.0 ) THEN
       ! **********************************************************************
-      DO nr = 1 , N
+      DO nr = 1, N
         IF ( nivn==Niv ) EXIT
         Niv = nr
         IF ( ix/=nr ) THEN
@@ -147,7 +147,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
             kd = lix - lr
             kj = lr
             nrm1 = lr - 1
-            DO j = 1 , nrm1
+            DO j = 1, nrm1
               psave = P(kj)
               jk = kj + kd
               P(kj) = P(jk)
@@ -167,7 +167,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
           IF ( N/=NFCc ) THEN
             IF ( nr/=1 ) THEN
               kj = lr + 1
-              DO k = 1 , nrm1
+              DO k = 1, nrm1
                 psave = P(kj)
                 jk = kj + kd
                 P(kj) = P(jk)
@@ -182,7 +182,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
           !
           !     PIVOTING OF COLUMNS OF VECTORS
           !
-          DO l = 1 , M
+          DO l = 1, M
             t = A(l,ix)
             A(l,ix) = A(l,nr)
             A(l,nr) = t
@@ -210,14 +210,14 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
           ip1 = nr + 1
           ix = ip1
           !     ****************************************
-          DO j = ip1 , N
+          DO j = ip1, N
             dot = SDOT(M,A(1,nr),1,A(1,j),1)
             jp = jp + 1
             jq = jp + nmnr
             IF ( N/=NFCc ) jq = jq + nmnr - 1
             P(jq) = P(jp) - dot*(dot*ry)
             P(jp) = dot*ry
-            DO i = 1 , M
+            DO i = 1, M
               A(i,j) = A(i,j) - P(jp)*A(i,nr)
             ENDDO
             IF ( N/=NFCc ) THEN
@@ -228,7 +228,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
               P(kp) = -pjp
               kp = kp + 1
               P(kp) = ry*dot
-              DO k = 1 , m2
+              DO k = 1, m2
                 l = m2 + k
                 A(k,j) = A(k,j) - pjp*A(l,nr)
                 A(l,j) = A(l,j) + pjp*A(k,nr)
@@ -261,13 +261,13 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
           lr = nr
           IF ( N/=NFCc ) lr = 2*nr - 1
           W(lr) = SDOT(M,A(1,nr),1,V,1)*ry
-          DO i = 1 , M
+          DO i = 1, M
             V(i) = V(i) - W(lr)*A(i,nr)
           ENDDO
           IF ( N/=NFCc ) THEN
             lr = 2*nr
             W(lr) = ry*PRVEC(M,V,A(1,nr))
-            DO k = 1 , m2
+            DO k = 1, m2
               l = m2 + k
               V(k) = V(k) + W(lr)*A(l,nr)
               V(l) = V(l) - W(lr)*A(k,nr)

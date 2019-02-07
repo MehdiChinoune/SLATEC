@@ -4,10 +4,10 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   IMPLICIT NONE
   !*--DPOPT5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , iadbig , ictmax , ictopt , idg , Info , iopt , ipagef , &
-    isave , itbrc , itest , j , key , kprint , last , lds , lprg , &
-    Mrelas , mxitlp , n20043
-  INTEGER n20053 , n20096 , nerr , next , npp , Nvars
+  INTEGER i, iadbig, ictmax, ictopt, idg, Info, iopt, ipagef, &
+    isave, itbrc, itest, j, key, kprint, last, lds, lprg, &
+    Mrelas, mxitlp, n20043
+  INTEGER n20053, n20096, nerr, next, npp, Nvars
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPOPT
   !***SUBSIDIARY
@@ -40,11 +40,11 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Fixed an error message.  (RWC)
   !***END PROLOGUE  DPOPT
-  REAL(8) :: abig , asmall , costsc , Csc(*) , eps , one , Prgopt(*) , &
-    Ropt(07) , tolls , tune , zero , D1MACH , tolabs
-  INTEGER Ibasis(*) , Intopt(08)
-  LOGICAL contin , usrbas , sizeup , savedt , colscp , cstscp , minprb , &
-    stpedg , Lopt(8)
+  REAL(8) :: abig, asmall, costsc, Csc(*), eps, one, Prgopt(*), &
+    Ropt(07), tolls, tune, zero, D1MACH, tolabs
+  INTEGER Ibasis(*), Intopt(08)
+  LOGICAL contin, usrbas, sizeup, savedt, colscp, cstscp, minprb, &
+    stpedg, Lopt(8)
   !
   !***FIRST EXECUTABLE STATEMENT  DPOPT
   iopt = 1

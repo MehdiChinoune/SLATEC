@@ -56,9 +56,9 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !           (WRB)
   !   911010  Code reworked and simplified.  (RWC and WRB)
   !***END PROLOGUE  CPQR79
-  COMPLEX Coeff(*) , Root(*) , scale , c
+  COMPLEX Coeff(*), Root(*), scale, c
   REAL Work(*)
-  INTEGER Ndeg , Ierr , k , khr , khi , kwr , kwi , kad , kj
+  INTEGER Ndeg, Ierr, k, khr, khi, kwr, kwi, kad, kj
   !***FIRST EXECUTABLE STATEMENT  CPQR79
   Ierr = 0
   IF ( ABS(Coeff(1))==0.0 ) THEN
@@ -84,11 +84,11 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   kwr = khi + khi - khr
   kwi = kwr + Ndeg
   !
-  DO k = 1 , kwr
+  DO k = 1, kwr
     Work(k) = 0.0E0
   ENDDO
   !
-  DO k = 1 , Ndeg
+  DO k = 1, Ndeg
     kad = (k-1)*Ndeg + 1
     c = scale*Coeff(k+1)
     Work(kad) = -REAL(c)
@@ -105,7 +105,7 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
     RETURN
   ENDIF
   !
-  DO k = 1 , Ndeg
+  DO k = 1, Ndeg
     km1 = k - 1
     Root(k) = CMPLX(Work(kwr+km1),Work(kwi+km1))
   ENDDO

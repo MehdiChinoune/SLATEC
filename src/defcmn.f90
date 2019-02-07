@@ -29,17 +29,17 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
   !***END PROLOGUE  DEFCMN
-  INTEGER Lw , Mdein , Mdeout , Mdg , Mdw , Nbkpt , Ndata , Nord
-  REAL(8) :: Bf(Nord,*) , Bkpt(*) , Bkptin(*) , Coeff(*) , G(Mdg,*) ,&
-    Ptemp(*) , Sddata(*) , W(Mdw,*) , Xdata(*) , Xtemp(*) ,&
+  INTEGER Lw, Mdein, Mdeout, Mdg, Mdw, Nbkpt, Ndata, Nord
+  REAL(8) :: Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*) ,&
+    Ptemp(*), Sddata(*), W(Mdw,*), Xdata(*), Xtemp(*) ,&
     Ydata(*)
   !
-  EXTERNAL DBNDAC , DBNDSL , DCOPY , DFSPVN , DSCAL , DSORT , XERMSG
+  EXTERNAL DBNDAC, DBNDSL, DCOPY, DFSPVN, DSCAL, DSORT, XERMSG
   !
-  REAL(8) :: dummy , rnorm , xmax , xmin , xval
-  INTEGER i , idata , ileft , intseq , ip , ir , irow , l , mt , n , nb ,&
-    nordm1 , nordp1 , np1
-  CHARACTER(8) :: xern1 , xern2
+  REAL(8) :: dummy, rnorm, xmax, xmin, xval
+  INTEGER i, idata, ileft, intseq, ip, ir, irow, l, mt, n, nb ,&
+    nordm1, nordp1, np1
+  CHARACTER(8) :: xern1, xern2
   !
   !***FIRST EXECUTABLE STATEMENT  DEFCMN
   !
@@ -108,7 +108,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !     Sort data and an array of pointers.
   !
   CALL DCOPY(Ndata,Xdata,1,Xtemp,1)
-  DO i = 1 , Ndata
+  DO i = 1, Ndata
     Ptemp(i) = i
   ENDDO
   !
@@ -121,11 +121,11 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !     Fix breakpoint array if needed. This should only involve very
   !     minor differences with the input array of breakpoints.
   !
-  DO i = 1 , Nord
+  DO i = 1, Nord
     Bkpt(i) = MIN(Bkpt(i),xmin)
   ENDDO
   !
-  DO i = np1 , Nbkpt
+  DO i = np1, Nbkpt
     Bkpt(i) = MAX(Bkpt(i),xmax)
   ENDDO
   !
@@ -136,7 +136,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   ir = 1
   ileft = Nord
   intseq = 1
-  DO idata = 1 , Ndata
+  DO idata = 1, Ndata
     !
     !        Sorted indices are in PTEMP(*).
     !
@@ -151,7 +151,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
       !
       !           Move pointer up to have BKPT(ILEFT).LE.XVAL, ILEFT.LE.N.
       !
-      DO ileft = ileft , n
+      DO ileft = ileft, n
         IF ( xval<Bkpt(ileft+1) ) EXIT
         IF ( Mdein==2 ) THEN
           !
@@ -197,7 +197,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !     to G(*,*).
   !
   IF ( Mdein==2 ) THEN
-    DO i = intseq , np1
+    DO i = intseq, np1
       CALL DCOPY(nordp1,W(i,1),Mdw,G(ir,1),Mdg)
       CALL DBNDAC(G,Mdg,Nord,ip,ir,1,MIN(n,i))
     ENDDO
@@ -211,13 +211,13 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !     Transfer accumulated rows from G(*,*) to W(*,*) for
   !     possible later sequential accumulation.
   !
-  DO i = 1 , np1
+  DO i = 1, np1
     CALL DCOPY(nordp1,G(i,1),Mdg,W(i,1),Mdw)
   ENDDO
   !
   !     Solve for coefficients when possible.
   !
-  DO i = 1 , n
+  DO i = 1, n
     IF ( G(i,1)==0.D0 ) THEN
       Mdeout = 2
       RETURN

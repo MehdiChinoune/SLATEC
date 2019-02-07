@@ -49,9 +49,9 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !         INTEGER IFLAG,LDFJAC,M,N
   !         DOUBLE PRECISION X(N),FVEC(M)
   !         ----------
-  !         FJAC and LDFJAC may be ignored       , if IOPT=1.
-  !         DOUBLE PRECISION FJAC(LDFJAC,N)      , if IOPT=2.
-  !         DOUBLE PRECISION FJAC(N)             , if IOPT=3.
+  !         FJAC and LDFJAC may be ignored      , if IOPT=1.
+  !         DOUBLE PRECISION FJAC(LDFJAC,N)     , if IOPT=2.
+  !         DOUBLE PRECISION FJAC(N)            , if IOPT=3.
   !         ----------
   !           If IFLAG=0, the values in X and FVEC are available
   !           for printing in DNLS1 or DNLS1E.
@@ -154,15 +154,15 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !     REVISED 850601-1100
   !     REVISED YYMMDD HHMM
   !
-  INTEGER i , idum , iflag , Info , Iopt , j , k , kp1 , Ldr , M , N , nm1 , &
+  INTEGER i, idum, iflag, Info, Iopt, j, k, kp1, Ldr, M, N, nm1, &
     nrow
-  REAL(8) :: X(*) , R(Ldr,*) , Fvec(*) , Wa1(*) , Wa2(*) , Wa3(*) , &
+  REAL(8) :: X(*), R(Ldr,*), Fvec(*), Wa1(*), Wa2(*), Wa3(*), &
     Wa4(*)
   EXTERNAL FCN
-  REAL(8) :: one , sigma , temp , zero , DENORM
+  REAL(8) :: one, sigma, temp, zero, DENORM
   LOGICAL sing
-  SAVE zero , one
-  DATA zero/0.D0/ , one/1.D0/
+  SAVE zero, one
+  DATA zero/0.D0/, one/1.D0/
   !***FIRST EXECUTABLE STATEMENT  DCOV
   sing = .FALSE.
   iflag = 0
@@ -182,14 +182,14 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
         !     COMPUTE THE QR FACTORIZATION OF THE JACOBIAN MATRIX CALCULATED ONE
         !     ROW AT A TIME AND STORED IN THE UPPER TRIANGLE OF R.
         !     ( (Q TRANSPOSE)*FVEC IS ALSO CALCULATED BUT NOT USED.)
-        DO j = 1 , N
+        DO j = 1, N
           Wa2(j) = zero
-          DO i = 1 , N
+          DO i = 1, N
             R(i,j) = zero
           ENDDO
         ENDDO
         iflag = 3
-        DO i = 1 , M
+        DO i = 1, M
           nrow = i
           CALL FCN(iflag,M,N,X,Fvec,Wa1,nrow)
           IF ( iflag<0 ) GOTO 100
@@ -213,13 +213,13 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
         !
         !     COMPUTE THE QR DECOMPOSITION
         CALL DQRFAC(M,N,R,Ldr,.FALSE.,idum,1,Wa1,Wa1,Wa1)
-        DO i = 1 , N
+        DO i = 1, N
           R(i,i) = Wa1(i)
         ENDDO
       ENDIF
       !
       !     CHECK IF R IS SINGULAR.
-      DO i = 1 , N
+      DO i = 1, N
         IF ( R(i,i)==zero ) sing = .TRUE.
       ENDDO
       IF ( .NOT.(sing) ) THEN
@@ -228,21 +228,21 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
         !     IN THE UPPER TRIANGLE OF R.
         IF ( N/=1 ) THEN
           nm1 = N - 1
-          DO k = 1 , nm1
+          DO k = 1, nm1
             !
             !     INITIALIZE THE RIGHT-HAND SIDE (WA1(*)) AS THE K-TH COLUMN OF THE
             !     IDENTITY MATRIX.
-            DO i = 1 , N
+            DO i = 1, N
               Wa1(i) = zero
             ENDDO
             Wa1(k) = one
             !
             R(k,k) = Wa1(k)/R(k,k)
             kp1 = k + 1
-            DO i = kp1 , N
+            DO i = kp1, N
               !
               !     SUBTRACT R(K,I-1)*R(I-1,*) FROM THE RIGHT-HAND SIDE, WA1(*).
-              DO j = i , N
+              DO j = i, N
                 Wa1(j) = Wa1(j) - R(k,i-1)*R(i-1,j)
               ENDDO
               R(k,i) = Wa1(i)/R(i,i)
@@ -253,10 +253,10 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
         !
         !     CALCULATE R-INVERSE * (R TRANSPOSE) INVERSE AND STORE IN THE UPPER
         !     TRIANGLE OF R.
-        DO i = 1 , N
-          DO j = i , N
+        DO i = 1, N
+          DO j = i, N
             temp = zero
-            DO k = j , N
+            DO k = j, N
               temp = temp + R(i,k)*R(j,k)
             ENDDO
             R(i,j) = temp*sigma
@@ -267,7 +267,8 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
     ENDIF
   ENDIF
   !
-  100  IF ( M<=0.OR.N<=0 ) Info = 0
+  100 CONTINUE
+  IF ( M<=0.OR.N<=0 ) Info = 0
   IF ( iflag<0 ) Info = iflag
   IF ( sing ) Info = 2
   IF ( Info<0 ) CALL XERMSG('SLATEC','DCOV',&

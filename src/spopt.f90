@@ -4,10 +4,10 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   IMPLICIT NONE
   !*--SPOPT5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , iadbig , ictmax , ictopt , idg , Info , iopt , ipagef , &
-    isave , itbrc , itest , j , key , kprint , last , lds , lprg , &
-    Mrelas , mxitlp , n20043
-  INTEGER n20053 , n20096 , nerr , next , npp , Nvars
+  INTEGER i, iadbig, ictmax, ictopt, idg, Info, iopt, ipagef, &
+    isave, itbrc, itest, j, key, kprint, last, lds, lprg, &
+    Mrelas, mxitlp, n20043
+  INTEGER n20053, n20096, nerr, next, npp, Nvars
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPOPT
   !***SUBSIDIARY
@@ -40,11 +40,11 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  SPOPT
-  REAL abig , asmall , costsc , Csc(*) , eps , one , Prgopt(*) , Ropt(07) , &
-    tolls , tune , zero , R1MACH , tolabs
-  INTEGER Ibasis(*) , Intopt(08)
-  LOGICAL contin , usrbas , sizeup , savedt , colscp , cstscp , minprb , &
-    stpedg , Lopt(8)
+  REAL abig, asmall, costsc, Csc(*), eps, one, Prgopt(*), Ropt(07), &
+    tolls, tune, zero, R1MACH, tolabs
+  INTEGER Ibasis(*), Intopt(08)
+  LOGICAL contin, usrbas, sizeup, savedt, colscp, cstscp, minprb, &
+    stpedg, Lopt(8)
   !
   !***FIRST EXECUTABLE STATEMENT  SPOPT
   iopt = 1

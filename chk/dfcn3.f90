@@ -24,11 +24,11 @@ SUBROUTINE DFCN3(Iflag,M,N,X,Fvec,Fjrow,Nrow)
   !           (WRB)
   !***END PROLOGUE  DFCN3
   !     .. Scalar Arguments ..
-  INTEGER Iflag , M , N , Nrow
+  INTEGER Iflag, M, N, Nrow
   !     .. Array Arguments ..
-  REAL(8) :: Fjrow(*) , Fvec(*) , X(*)
+  REAL(8) :: Fjrow(*), Fvec(*), X(*)
   !     .. Local Scalars ..
-  REAL(8) :: temp , two
+  REAL(8) :: temp, two
   INTEGER i
   !     .. Intrinsic Functions ..
   INTRINSIC EXP
@@ -43,7 +43,7 @@ SUBROUTINE DFCN3(Iflag,M,N,X,Fvec,Fjrow,Nrow)
     !
     !       Evaluate functions.
     !
-    DO i = 1 , M
+    DO i = 1, M
       temp = i
       Fvec(i) = two + two*temp - EXP(temp*X(1)) - EXP(temp*X(2))
     ENDDO

@@ -28,8 +28,8 @@ REAL(8) FUNCTION DLBETA(A,B)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DLBETA
-  REAL(8) :: A , B , p , q , corr , sq2pil , D9LGMC , DGAMMA , &
-    DLNGAM , DLNREL
+  REAL(8) :: A, B, p, q, corr, sq2pil, D9LGMC, DGAMMA, &
+    DLNGAM, DLNREL
   EXTERNAL DGAMMA
   SAVE sq2pil
   DATA sq2pil/0.91893853320467274178032973640562D0/
@@ -62,4 +62,5 @@ REAL(8) FUNCTION DLBETA(A,B)
   DLBETA = DLNGAM(p) + corr + p - p*LOG(p+q) + (q-0.5D0)*DLNREL(-p/(p+q))
   RETURN
   !
-  99999 END FUNCTION DLBETA
+  99999 CONTINUE
+  END FUNCTION DLBETA

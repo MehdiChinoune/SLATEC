@@ -5,7 +5,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   IMPLICIT NONE
   !*--DDEBDF6
   !*** Start of declarations inserted by SPAG
-  REAL DF , DJAC
+  REAL DF, DJAC
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DDEBDF
   !***PURPOSE  Solve an initial value problem in ordinary differential
@@ -25,7 +25,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   differential equation solvers DEPAC, consisting of the codes
   !   DDERKF, DDEABM, and DDEBDF.  Design of the package was by
   !   L. F. Shampine and H. A. Watts.  It is documented in
-  !        SAND-79-2374 , DEPAC - Design of a User Oriented Package of ODE
+  !        SAND-79-2374, DEPAC - Design of a User Oriented Package of ODE
   !                              Solvers.
   !   DDEBDF is a driver for a modification of the code LSODE written by
   !             A. C. Hindmarsh
@@ -169,7 +169,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !                               DF(X,U,UPRIME,RPAR,IPAR)
   !             to define the system of first order differential equations
   !             which is to be solved. For the given values of X and the
-  !             vector  U(*)=(U(1),U(2),...,U(NEQ)) , the subroutine must
+  !             vector  U(*)=(U(1),U(2),...,U(NEQ)), the subroutine must
   !             evaluate the NEQ components of the system of differential
   !             equations  DU/DX=DF(X,U)  and store the derivatives in the
   !             array UPRIME(*), that is,  UPRIME(I) = * DU(I)/DX *  for
@@ -463,7 +463,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !             U(*)=(U(1),U(2),...,U(NEQ)), the subroutine must evaluate
   !             the non-zero partial derivatives  DF(I)/DU(J)  for each
   !             differential equation I=1,...,NEQ and each solution
-  !             component J=1,...,NEQ , and store these values in the
+  !             component J=1,...,NEQ, and store these values in the
   !             matrix PD.  The elements of PD are set to zero before each
   !             call to DJAC so only non-zero elements need to be defined.
   !
@@ -587,7 +587,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !                        attempted on the next step.
   !
   !             RWORK(12)--If the tolerances have been increased by the
-  !                        code (IDID = -2) , they were multiplied by the
+  !                        code (IDID = -2), they were multiplied by the
   !                        value in RWORK(12).
   !
   !             RWORK(13)--which contains the current value of the
@@ -744,27 +744,27 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !           consistent with DEBDF.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DDEBDF
-  INTEGER IACor , IBAnd , IBEgin , icomi , icomr , idelsn , Idid , IER ,&
-    IEWt , iinout , IINteg , IJAc , ilrw , Info , INIt , IOWns ,&
-    Ipar , IQUit , ISAvf , ITOl , itstar , ITStop , IWM , Iwork ,&
-    IYH , iypout , JSTart , KFLag , KSTeps , L , Liw , Lrw , MAXord ,&
-    METh , MITer , ml , mu , N , Neq , NFE , NJE , NQ , NQU , NST
-  REAL(8) :: Atol , EL0 , H , HMIn , HMXi , HU , ROWns , Rpar , Rtol ,&
-    Rwork , T , TN , TOLd , Tout , UROund , Y
+  INTEGER IACor, IBAnd, IBEgin, icomi, icomr, idelsn, Idid, IER ,&
+    IEWt, iinout, IINteg, IJAc, ilrw, Info, INIt, IOWns ,&
+    Ipar, IQUit, ISAvf, ITOl, itstar, ITStop, IWM, Iwork ,&
+    IYH, iypout, JSTart, KFLag, KSTeps, L, Liw, Lrw, MAXord ,&
+    METh, MITer, ml, mu, N, Neq, NFE, NJE, NQ, NQU, NST
+  REAL(8) :: Atol, EL0, H, HMIn, HMXi, HU, ROWns, Rpar, Rtol ,&
+    Rwork, T, TN, TOLd, Tout, UROund, Y
   LOGICAL intout
-  CHARACTER(8) :: xern1 , xern2
+  CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3
   !
-  DIMENSION Y(*) , Info(15) , Rtol(*) , Atol(*) , Rwork(*) , Iwork(*) ,&
-    Rpar(*) , Ipar(*)
+  DIMENSION Y(*), Info(15), Rtol(*), Atol(*), Rwork(*), Iwork(*) ,&
+    Rpar(*), Ipar(*)
   !
-  COMMON /DDEBD1/ TOLd , ROWns(210) , EL0 , H , HMIn , HMXi , HU , TN ,&
-    UROund , IQUit , INIt , IYH , IEWt , IACor , ISAvf , IWM ,&
-    KSTeps , IBEgin , ITOl , IINteg , ITStop , IJAc , IBAnd ,&
-    IOWns(6) , IER , JSTart , KFLag , L , METh , MITer ,&
-    MAXord , N , NQ , NST , NFE , NJE , NQU
+  COMMON /DDEBD1/ TOLd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN ,&
+    UROund, IQUit, INIt, IYH, IEWt, IACor, ISAvf, IWM ,&
+    KSTeps, IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd ,&
+    IOWns(6), IER, JSTart, KFLag, L, METh, MITer ,&
+    MAXord, N, NQ, NST, NFE, NJE, NQU
   !
-  EXTERNAL DF , DJAC
+  EXTERNAL DF, DJAC
   !
   !        CHECK FOR AN APPARENT INFINITE LOOP
   !

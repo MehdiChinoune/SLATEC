@@ -4,8 +4,8 @@ FUNCTION ALNGAM(X)
   IMPLICIT NONE
   !*--ALNGAM5
   !*** Start of declarations inserted by SPAG
-  REAL ALNGAM , dxrel , GAMMA , pi , R1MACH , R9LGMC , sinpiy , sq2pil , &
-    sqpi2l , X , xmax , y
+  REAL ALNGAM, dxrel, GAMMA, pi, R1MACH, R9LGMC, sinpiy, sq2pil, &
+    sqpi2l, X, xmax, y
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ALNGAM
   !***PURPOSE  Compute the logarithm of the absolute value of the Gamma
@@ -35,7 +35,7 @@ FUNCTION ALNGAM(X)
   !***END PROLOGUE  ALNGAM
   LOGICAL first
   EXTERNAL GAMMA
-  SAVE sq2pil , sqpi2l , pi , xmax , dxrel , first
+  SAVE sq2pil, sqpi2l, pi, xmax, dxrel, first
   DATA sq2pil/0.91893853320467274E0/
   DATA sqpi2l/0.22579135264472743E0/
   DATA pi/3.14159265358979324E0/
@@ -75,4 +75,5 @@ FUNCTION ALNGAM(X)
   ALNGAM = LOG(ABS(GAMMA(X)))
   RETURN
   !
-  99999 END FUNCTION ALNGAM
+  99999 CONTINUE
+  END FUNCTION ALNGAM

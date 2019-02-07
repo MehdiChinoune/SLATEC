@@ -5,7 +5,7 @@ SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   IMPLICIT NONE
   !*--QAWF6
   !*** Start of declarations inserted by SPAG
-  INTEGER Iwork , Lenw , ll2
+  INTEGER Iwork, Lenw, ll2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QAWF
   !***PURPOSE  The routine calculates an approximation result to a given
@@ -208,11 +208,11 @@ SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  QAWF
   !
-  REAL A , Abserr , Epsabs , F , Omega , Result , Work
-  INTEGER Ier , Integr , Leniw , limit , Limlst , lvl , Lst , l1 , l2 , l3 , &
-    l4 , l5 , l6 , Maxp1 , Neval
+  REAL A, Abserr, Epsabs, F, Omega, Result, Work
+  INTEGER Ier, Integr, Leniw, limit, Limlst, lvl, Lst, l1, l2, l3, &
+    l4, l5, l6, Maxp1, Neval
   !
-  DIMENSION Iwork(*) , Work(*)
+  DIMENSION Iwork(*), Work(*)
   !
   EXTERNAL F
   !

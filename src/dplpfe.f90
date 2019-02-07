@@ -6,8 +6,8 @@ SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   IMPLICIT NONE
   !*--DPLPFE7
   !*** Start of declarations inserted by SPAG
-  INTEGER i , IDLOC , Ienter , ihi , il1 , ilow , ipage , iu1 , j , key , &
-    Lbm , Lmx , lpg , Mrelas , n20002 , n20050 , Nvars
+  INTEGER i, IDLOC, Ienter, ihi, il1, ilow, ipage, iu1, j, key, &
+    Lbm, Lmx, lpg, Mrelas, n20002, n20050, Nvars
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPLPFE
   !***SUBSIDIARY
@@ -40,14 +40,14 @@ SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DPLPFE
-  INTEGER Ibasis(*) , Imat(*) , Ibrc(Lbm,2) , Ipr(*) , Iwr(*) , Ind(*) , &
+  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), &
     Ibb(*)
-  REAL(8) :: Amat(*) , Basmat(*) , Csc(*) , Wr(*) , Ww(*) , Bl(*) , &
-    Bu(*) , Rz(*) , Rg(*) , Colnrm(*) , Duals(*) , cnorm , &
-    Dirnrm , Dulnrm , Eps , Erdnrm , Gg , one , ratio , &
-    rcost , rmax , zero
+  REAL(8) :: Amat(*), Basmat(*), Csc(*), Wr(*), Ww(*), Bl(*), &
+    Bu(*), Rz(*), Rg(*), Colnrm(*), Duals(*), cnorm, &
+    Dirnrm, Dulnrm, Eps, Erdnrm, Gg, one, ratio, &
+    rcost, rmax, zero
   REAL(8) :: DASUM
-  LOGICAL Found , trans
+  LOGICAL Found, trans
   !***FIRST EXECUTABLE STATEMENT  DPLPFE
   lpg = Lmx - (Nvars+4)
   zero = 0.D0
@@ -118,7 +118,7 @@ SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
       DO
         iu1 = MIN(Lmx-2,ihi)
         IF ( il1>iu1 ) EXIT
-        DO i = il1 , iu1
+        DO i = il1, iu1
           Ww(Imat(i)) = Amat(i)*Csc(j)
         ENDDO
         IF ( ihi<=Lmx-2 ) EXIT

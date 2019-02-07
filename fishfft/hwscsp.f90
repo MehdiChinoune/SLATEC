@@ -5,11 +5,11 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   IMPLICIT NONE
   !*--HWSCSP6
   !*** Start of declarations inserted by SPAG
-  REAL Bdrf , Bdrs , Bdtf , Bdts , dum , Elmbda , F , Pertrb , pi , PIMACH , &
-    Rf , Rs , Tf , Ts , W
-  INTEGER i1 , i10 , i2 , i3 , i4 , i5 , i6 , i7 , i8 , i9 , Idimf , &
-    Ierror , Intl , k , l , M , Mbdcnd , mp1 , N , Nbdcnd
-  INTEGER nck , np1
+  REAL Bdrf, Bdrs, Bdtf, Bdts, dum, Elmbda, F, Pertrb, pi, PIMACH, &
+    Rf, Rs, Tf, Ts, W
+  INTEGER i1, i10, i2, i3, i4, i5, i6, i7, i8, i9, Idimf, &
+    Ierror, Intl, k, l, M, Mbdcnd, mp1, N, Nbdcnd
+  INTEGER nck, np1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HWSCSP
   !***PURPOSE  Solve a finite difference approximation to the modified
@@ -255,7 +255,7 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   !       this solution, which is a least squares solution to the original
   !       approximation. This solution is not unique and is unnormalized.
   !       The value of PERTRB should be small compared to the right side
-  !       F. Otherwise , a solution is obtained to an essentially
+  !       F. Otherwise, a solution is obtained to an essentially
   !       different problem. This comparison should always be made to
   !       insure that a meaningful solution has been obtained.
   !
@@ -355,7 +355,7 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  HWSCSP
   !
-  DIMENSION F(Idimf,*) , Bdts(*) , Bdtf(*) , Bdrs(*) , Bdrf(*) , W(*)
+  DIMENSION F(Idimf,*), Bdts(*), Bdtf(*), Bdrs(*), Bdrf(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HWSCSP
   pi = PIMACH(dum)
   Ierror = 0

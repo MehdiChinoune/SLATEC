@@ -36,16 +36,16 @@ LOGICAL FUNCTION WNLT2(Me,Mend,Ir,Factor,Tau,Scale,Wic)
   !   790701  DATE WRITTEN
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
   !***END PROLOGUE  WNLT2
-  REAL Factor , Scale(*) , Tau , Wic(*)
-  INTEGER Ir , Me , Mend
+  REAL Factor, Scale(*), Tau, Wic(*)
+  INTEGER Ir, Me, Mend
   !
-  REAL rn , sn , t
+  REAL rn, sn, t
   INTEGER j
   !
   !***FIRST EXECUTABLE STATEMENT  WNLT2
   sn = 0.E0
   rn = 0.E0
-  DO j = 1 , Mend
+  DO j = 1, Mend
     t = Scale(j)
     IF ( j<=Me ) t = t/Factor
     t = t*Wic(j)**2

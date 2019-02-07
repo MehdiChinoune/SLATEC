@@ -24,14 +24,14 @@ SUBROUTINE DBDIFF(L,V)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DBDIFF
   !
-  INTEGER i , j , k , L
+  INTEGER i, j, k, L
   REAL(8) :: V
   DIMENSION V(*)
   !***FIRST EXECUTABLE STATEMENT  DBDIFF
   IF ( L==1 ) RETURN
-  DO j = 2 , L
+  DO j = 2, L
     k = L
-    DO i = j , L
+    DO i = j, L
       V(k) = V(k-1) - V(k)
       k = k - 1
     ENDDO

@@ -166,11 +166,11 @@ INTEGER FUNCTION ISSCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   921026  Changed 1.0E10 to R1MACH(2).  (FNF)
   !***END PROLOGUE  ISSCG
   !     .. Scalar Arguments ..
-  REAL Ak , Bk , Bnrm , Err , Solnrm , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
+  REAL Ak, Bk, Bnrm, Err, Solnrm, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt) , B(N) , Dz(N) , P(N) , R(N) , Rwork(*) , X(N) , Z(N)
-  INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
+  REAL A(Nelt), B(N), Dz(N), P(N), R(N), Rwork(*), X(N), Z(N)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL MSOLVE
   !     .. Arrays in Common ..
@@ -178,8 +178,8 @@ INTEGER FUNCTION ISSCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
-  REAL R1MACH , SNRM2
-  EXTERNAL R1MACH , SNRM2
+  REAL R1MACH, SNRM2
+  EXTERNAL R1MACH, SNRM2
   !     .. Common blocks ..
   COMMON /SSLBLK/ SOLn
   !***FIRST EXECUTABLE STATEMENT  ISSCG
@@ -200,7 +200,7 @@ INTEGER FUNCTION ISSCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
     IF ( Iter==0 ) Solnrm = SNRM2(N,SOLn,1)
-    DO i = 1 , N
+    DO i = 1, N
       Dz(i) = X(i) - SOLn(i)
     ENDDO
     Err = SNRM2(N,Dz,1)/Solnrm
@@ -213,13 +213,13 @@ INTEGER FUNCTION ISSCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !
   IF ( Iunit/=0 ) THEN
     IF ( Iter==0 ) THEN
-      WRITE (Iunit,99001) N , Itol
+      WRITE (Iunit,99001) N, Itol
       99001     FORMAT (' Preconditioned Conjugate Gradient for ','N, ITOL = ',I5,I5,&
         /' ITER','   Error Estimate','            Alpha',&
         '             Beta')
-      WRITE (Iunit,99002) Iter , Err
+      WRITE (Iunit,99002) Iter, Err
     ELSE
-      WRITE (Iunit,99002) Iter , Err , Ak , Bk
+      WRITE (Iunit,99002) Iter, Err, Ak, Bk
     ENDIF
   ENDIF
   IF ( Err<=Tol ) ISSCG = 1

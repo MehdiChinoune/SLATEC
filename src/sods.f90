@@ -4,9 +4,9 @@ SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   IMPLICIT NONE
   !*--SODS5
   !*** Start of declarations inserted by SPAG
-  REAL A , B , Work , X
-  INTEGER Iflag , ip , is , iter , Iwork , kc , kd , ks , kt , kv , kz , &
-    Neq , Nrda , Nuk
+  REAL A, B, Work, X
+  INTEGER Iflag, ip, is, iter, Iwork, kc, kd, ks, kt, kv, kz, &
+    Neq, Nrda, Nuk
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SODS
   !***SUBSIDIARY
@@ -21,7 +21,7 @@ SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   !     X is the UNIQUE least squares solution vector. That is,
   !              R(1)**2 + ..... + R(NEQ)**2 = minimum
   !     where R is the residual vector  R = B - A X.
-  !     If rank A .LT. NUK , the least squares solution of minimal
+  !     If rank A .LT. NUK, the least squares solution of minimal
   !     length can be provided.
   !     SODS is an interfacing routine which calls subroutine LSSODS
   !     for the solution. LSSODS in turn calls subroutine ORTHOL and
@@ -104,7 +104,7 @@ SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SODS
-  DIMENSION A(Nrda,*) , X(*) , B(*) , Work(*) , Iwork(*)
+  DIMENSION A(Nrda,*), X(*), B(*), Work(*), Iwork(*)
   !
   !***FIRST EXECUTABLE STATEMENT  SODS
   iter = 0

@@ -27,18 +27,18 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CUNI2
-  COMPLEX ai , arg , asum , bsum , cfn , ci , cid , cip , cone , crsc , &
-    cscl , csr , css , cy , czero , c1 , c2 , dai , phi , rz , s1 , &
-    s2 , Y , Z , zb , zeta1 , zeta2 , zn , zar
-  REAL aarg , aic , Alim , ang , aphi , ascle , ay , bry , car , c2i , c2m , &
-    c2r , Elim , fn , Fnu , Fnul , hpi , rs1 , sar , Tol , yy , R1MACH
-  INTEGER i , iflag , in , inu , j , k , Kode , N , nai , nd , ndai , &
-    Nlast , nn , nuf , nw , Nz , idum
-  DIMENSION bry(3) , Y(N) , cip(4) , css(3) , csr(3) , cy(2)
-  DATA czero , cone , ci/(0.0E0,0.0E0) , (1.0E0,0.0E0) , (0.0E0,1.0E0)/
-  DATA cip(1) , cip(2) , cip(3) , cip(4)/(1.0E0,0.0E0) , (0.0E0,1.0E0) , &
-    (-1.0E0,0.0E0) , (0.0E0,-1.0E0)/
-  DATA hpi , aic/1.57079632679489662E+00 , 1.265512123484645396E+00/
+  COMPLEX ai, arg, asum, bsum, cfn, ci, cid, cip, cone, crsc, &
+    cscl, csr, css, cy, czero, c1, c2, dai, phi, rz, s1, &
+    s2, Y, Z, zb, zeta1, zeta2, zn, zar
+  REAL aarg, aic, Alim, ang, aphi, ascle, ay, bry, car, c2i, c2m, &
+    c2r, Elim, fn, Fnu, Fnul, hpi, rs1, sar, Tol, yy, R1MACH
+  INTEGER i, iflag, in, inu, j, k, Kode, N, nai, nd, ndai, &
+    Nlast, nn, nuf, nw, Nz, idum
+  DIMENSION bry(3), Y(N), cip(4), css(3), csr(3), cy(2)
+  DATA czero, cone, ci/(0.0E0,0.0E0), (1.0E0,0.0E0), (0.0E0,1.0E0)/
+  DATA cip(1), cip(2), cip(3), cip(4)/(1.0E0,0.0E0), (0.0E0,1.0E0), &
+    (-1.0E0,0.0E0), (0.0E0,-1.0E0)/
+  DATA hpi, aic/1.57079632679489662E+00, 1.265512123484645396E+00/
   !***FIRST EXECUTABLE STATEMENT  CUNI2
   Nz = 0
   nd = N
@@ -94,13 +94,13 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   IF ( ABS(rs1)>Elim ) THEN
     IF ( rs1>0.0E0 ) GOTO 400
     Nz = N
-    DO i = 1 , N
+    DO i = 1, N
       Y(i) = czero
     ENDDO
     GOTO 99999
   ENDIF
   100  nn = MIN(2,nd)
-  DO i = 1 , nn
+  DO i = 1, nn
     fn = Fnu + (nd-i)
     CALL CUNHJ(zn,fn,0,Tol,phi,arg,zeta1,zeta2,asum,bsum)
     IF ( Kode==1 ) THEN
@@ -163,7 +163,7 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     ascle = bry(iflag)
     k = nd - 2
     fn = k
-    DO i = 3 , nd
+    DO i = 3, nd
       c2 = s2
       s2 = s1 + CMPLX(Fnu+fn,0.0E0)*rz*s2
       s1 = c2
@@ -190,38 +190,40 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     ENDDO
   ENDIF
   200  RETURN
-  300  IF ( rs1<=0.0E0 ) THEN
-  !-----------------------------------------------------------------------
-  !     SET UNDERFLOW AND UPDATE PARAMETERS
-  !-----------------------------------------------------------------------
-  Y(nd) = czero
-  Nz = Nz + 1
-  nd = nd - 1
-  IF ( nd==0 ) GOTO 200
-  CALL CUOIK(Z,Fnu,Kode,1,nd,Y,nuf,Tol,Elim,Alim)
-  IF ( nuf>=0 ) THEN
-    nd = nd - nuf
-    Nz = Nz + nuf
+  300 CONTINUE
+  IF ( rs1<=0.0E0 ) THEN
+    !-----------------------------------------------------------------------
+    !     SET UNDERFLOW AND UPDATE PARAMETERS
+    !-----------------------------------------------------------------------
+    Y(nd) = czero
+    Nz = Nz + 1
+    nd = nd - 1
     IF ( nd==0 ) GOTO 200
-    fn = Fnu + (nd-1)
-    IF ( fn<Fnul ) THEN
-      Nlast = nd
-      RETURN
-    ELSE
-      !      FN = AIMAG(CID)
-      !      J = NUF + 1
-      !      K = MOD(J,4) + 1
-      !      S1 = CIP(K)
-      !      IF (FN.LT.0.0E0) S1 = CONJG(S1)
-      !      C2 = C2*S1
-      in = inu + nd - 1
-      in = MOD(in,4) + 1
-      c2 = zar*cip(in)
-      IF ( yy<=0.0E0 ) c2 = CONJG(c2)
-      GOTO 100
+    CALL CUOIK(Z,Fnu,Kode,1,nd,Y,nuf,Tol,Elim,Alim)
+    IF ( nuf>=0 ) THEN
+      nd = nd - nuf
+      Nz = Nz + nuf
+      IF ( nd==0 ) GOTO 200
+      fn = Fnu + (nd-1)
+      IF ( fn<Fnul ) THEN
+        Nlast = nd
+        RETURN
+      ELSE
+        !      FN = AIMAG(CID)
+        !      J = NUF + 1
+        !      K = MOD(J,4) + 1
+        !      S1 = CIP(K)
+        !      IF (FN.LT.0.0E0) S1 = CONJG(S1)
+        !      C2 = C2*S1
+        in = inu + nd - 1
+        in = MOD(in,4) + 1
+        c2 = zar*cip(in)
+        IF ( yy<=0.0E0 ) c2 = CONJG(c2)
+        GOTO 100
+      ENDIF
     ENDIF
   ENDIF
-ENDIF
-400  Nz = -1
-RETURN
-99999 END SUBROUTINE CUNI2
+  400  Nz = -1
+  RETURN
+  99999 CONTINUE
+  END SUBROUTINE CUNI2

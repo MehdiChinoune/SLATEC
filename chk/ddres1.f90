@@ -16,8 +16,8 @@ SUBROUTINE DDRES1(T,Y,Yprime,Delta,Ires,Rpar,Ipar)
   !   901001  Converted prologue to 4.0 format and made all argument
   !           declarations explicit.  (FNF)
   !***END PROLOGUE  DDRES1
-  INTEGER Ires , Ipar(*)
-  REAL(8) :: T , Y(*) , Yprime(*) , Delta(*) , Rpar(*)
+  INTEGER Ires, Ipar(*)
+  REAL(8) :: T, Y(*), Yprime(*), Delta(*), Rpar(*)
   !***FIRST EXECUTABLE STATEMENT  DDRES1
   Delta(1) = Yprime(1) + 10.0D0*Y(1)
   Delta(2) = Y(2) + Y(1) - 1.0D0

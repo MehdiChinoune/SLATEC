@@ -137,11 +137,11 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !   901005  Replace usage of DDIFF with usage of D1MACH.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DHFTI
-  INTEGER i , ii , iopt , Ip(*) , ip1 , j , jb , jj , k , kp1 , Krank , l , &
-    ldiag , lmax , M , Mda , Mdb , N , Nb , nerr
-  REAL(8) :: A , B , D1MACH , dzero , factor , G , H , hmax , releps , &
-    Rnorm , sm , sm1 , szero , Tau , tmp
-  DIMENSION A(Mda,*) , B(Mdb,*) , H(*) , G(*) , Rnorm(*)
+  INTEGER i, ii, iopt, Ip(*), ip1, j, jb, jj, k, kp1, Krank, l, &
+    ldiag, lmax, M, Mda, Mdb, N, Nb, nerr
+  REAL(8) :: A, B, D1MACH, dzero, factor, G, H, hmax, releps, &
+    Rnorm, sm, sm1, szero, Tau, tmp
+  DIMENSION A(Mda,*), B(Mdb,*), H(*), G(*), Rnorm(*)
   SAVE releps
   DATA releps/0.D0/
   !     BEGIN BLOCK PERMITTING ...EXITS TO 360
@@ -160,14 +160,14 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
       !
       IF ( Nb<=1.OR.MAX(M,N)<=Mdb ) THEN
         !
-        DO j = 1 , ldiag
+        DO j = 1, ldiag
           !                    BEGIN BLOCK PERMITTING ...EXITS TO 70
           IF ( j/=1 ) THEN
             !
             !                           UPDATE SQUARED COLUMN LENGTHS AND FIND LMAX
             !                          ..
             lmax = j
-            DO l = j , N
+            DO l = j, N
               H(l) = H(l) - A(j-1,l)**2
               IF ( H(l)>H(lmax) ) lmax = l
             ENDDO
@@ -178,9 +178,9 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
           !                        COMPUTE SQUARED COLUMN LENGTHS AND FIND LMAX
           !                       ..
           lmax = j
-          DO l = j , N
+          DO l = j, N
             H(l) = 0.0D0
-            DO i = j , M
+            DO i = j, M
               H(l) = H(l) + A(i,l)**2
             ENDDO
             IF ( H(l)>H(lmax) ) lmax = l
@@ -193,7 +193,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
           !                    ..
           5            Ip(j) = lmax
           IF ( Ip(j)/=j ) THEN
-            DO i = 1 , M
+            DO i = 1, M
               tmp = A(i,j)
               A(i,j) = A(i,lmax)
               A(i,lmax) = tmp
@@ -211,7 +211,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
         !                  DETERMINE THE PSEUDORANK, K, USING THE TOLERANCE,
         !                  TAU.
         !                 ..
-        DO j = 1 , ldiag
+        DO j = 1, ldiag
           !              ......EXIT
           IF ( ABS(A(j,j))<=Tau ) GOTO 20
         ENDDO
@@ -240,10 +240,10 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
     !           COMPUTE THE NORMS OF THE RESIDUAL VECTORS.
     !
     IF ( Nb>=1 ) THEN
-      DO jb = 1 , Nb
+      DO jb = 1, Nb
         tmp = szero
         IF ( M>=kp1 ) THEN
-          DO i = kp1 , M
+          DO i = kp1, M
             tmp = tmp + B(i,jb)**2
           ENDDO
         ENDIF
@@ -257,7 +257,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
       !               DECOMPOSITION OF FIRST K ROWS.
       !              ..
       IF ( k/=N ) THEN
-        DO ii = 1 , k
+        DO ii = 1, k
           i = kp1 - ii
           CALL DH12(1,i,kp1,N,A(i,1),Mda,G(i),A,Mda,1,i-1)
         ENDDO
@@ -265,16 +265,16 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
       !
       !
       IF ( Nb>=1 ) THEN
-        DO jb = 1 , Nb
+        DO jb = 1, Nb
           !
           !                  SOLVE THE K BY K TRIANGULAR SYSTEM.
           !                 ..
-          DO l = 1 , k
+          DO l = 1, k
             sm = dzero
             i = kp1 - l
             ip1 = i + 1
             IF ( k>=ip1 ) THEN
-              DO j = ip1 , k
+              DO j = ip1, k
                 sm = sm + A(i,j)*B(j,jb)
               ENDDO
             ENDIF
@@ -285,10 +285,10 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
           !                  COMPLETE COMPUTATION OF SOLUTION VECTOR.
           !                 ..
           IF ( k/=N ) THEN
-            DO j = kp1 , N
+            DO j = kp1, N
               B(j,jb) = szero
             ENDDO
-            DO i = 1 , k
+            DO i = 1, k
               CALL DH12(2,i,kp1,N,A(i,1),Mda,G(i),B(1,jb),1,Mdb,1)
             ENDDO
           ENDIF
@@ -296,7 +296,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
           !                   RE-ORDER THE SOLUTION VECTOR TO COMPENSATE FOR THE
           !                   COLUMN INTERCHANGES.
           !                 ..
-          DO jj = 1 , ldiag
+          DO jj = 1, ldiag
             j = ldiag + 1 - jj
             IF ( Ip(j)/=j ) THEN
               l = Ip(j)
@@ -308,8 +308,8 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
         ENDDO
       ENDIF
     ELSEIF ( Nb>=1 ) THEN
-      DO jb = 1 , Nb
-        DO i = 1 , N
+      DO jb = 1, Nb
+        DO i = 1, N
           B(i,jb) = szero
         ENDDO
       ENDDO
@@ -320,4 +320,5 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !         IN THE FIRST  N  ROWS OF THE ARRAY B(,).
   !
   Krank = k
-  99999 END SUBROUTINE DHFTI
+  99999 CONTINUE
+  END SUBROUTINE DHFTI

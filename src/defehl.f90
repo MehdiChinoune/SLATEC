@@ -4,8 +4,8 @@ SUBROUTINE DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   IMPLICIT NONE
   !*--DEFEHL5
   !*** Start of declarations inserted by SPAG
-  REAL ch , F1 , F2 , F3 , F4 , F5 , H , Rpar , T , Y , Yp , Ys
-  INTEGER Ipar , k , Neq
+  REAL ch, F1, F2, F3, F4, F5, H, Rpar, T, Y, Yp, Ys
+  INTEGER Ipar, k, Neq
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DEFEHL
   !***SUBSIDIARY
@@ -55,36 +55,36 @@ SUBROUTINE DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   !***END PROLOGUE  DEFEHL
   !
   !
-  DIMENSION Y(*) , Yp(*) , F1(*) , F2(*) , F3(*) , F4(*) , F5(*) , Ys(*) , &
-    Rpar(*) , Ipar(*)
+  DIMENSION Y(*), Yp(*), F1(*), F2(*), F3(*), F4(*), F5(*), Ys(*), &
+    Rpar(*), Ipar(*)
   !
   !***FIRST EXECUTABLE STATEMENT  DEFEHL
   ch = H/4.
-  DO k = 1 , Neq
+  DO k = 1, Neq
     Ys(k) = Y(k) + ch*Yp(k)
   ENDDO
   CALL F(T+ch,Ys,F1,Rpar,Ipar)
   !
   ch = 3.*H/32.
-  DO k = 1 , Neq
+  DO k = 1, Neq
     Ys(k) = Y(k) + ch*(Yp(k)+3.*F1(k))
   ENDDO
   CALL F(T+3.*H/8.,Ys,F2,Rpar,Ipar)
   !
   ch = H/2197.
-  DO k = 1 , Neq
+  DO k = 1, Neq
     Ys(k) = Y(k) + ch*(1932.*Yp(k)+(7296.*F2(k)-7200.*F1(k)))
   ENDDO
   CALL F(T+12.*H/13.,Ys,F3,Rpar,Ipar)
   !
   ch = H/4104.
-  DO k = 1 , Neq
+  DO k = 1, Neq
     Ys(k) = Y(k) + ch*((8341.*Yp(k)-845.*F3(k))+(29440.*F2(k)-32832.*F1(k)))
   ENDDO
   CALL F(T+H,Ys,F4,Rpar,Ipar)
   !
   ch = H/20520.
-  DO k = 1 , Neq
+  DO k = 1, Neq
     Ys(k) = Y(k) + ch*((-6080.*Yp(k)+(9295.*F3(k)-5643.*F4(k)))&
       +(41040.*F1(k)-28352.*F2(k)))
   ENDDO
@@ -93,7 +93,7 @@ SUBROUTINE DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   !     COMPUTE APPROXIMATE SOLUTION AT T+H
   !
   ch = H/7618050.
-  DO k = 1 , Neq
+  DO k = 1, Neq
     Ys(k) = Y(k) + ch*((902880.*Yp(k)+(3855735.*F3(k)-1371249.*F4(k)))&
       +(3953664.*F2(k)+277020.*F5(k)))
   ENDDO

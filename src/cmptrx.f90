@@ -4,7 +4,7 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   IMPLICIT NONE
   !*--CMPTRX5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Idegbr , Idegcr , ip , k , l , lint , M , mm1
+  INTEGER i, Idegbr, Idegcr, ip, k, l, lint, M, mm1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CMPTRX
   !***SUBSIDIARY
@@ -16,7 +16,7 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !
   !     Subroutine to solve a system of linear equations where the
   !     coefficient matrix is a rational function in the matrix given by
-  !     tridiagonal  ( . . . , A(I), B(I), C(I), . . . ).
+  !     tridiagonal  ( . . ., A(I), B(I), C(I), . . . ).
   !
   !***SEE ALSO  CMGNBN
   !***ROUTINES CALLED  (NONE)
@@ -28,21 +28,21 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CMPTRX
   !
-  COMPLEX A , B , C , Y , Tcos , D , W , x , xx , z
-  DIMENSION A(*) , B(*) , C(*) , Y(*) , Tcos(*) , D(*) , W(*)
-  INTEGER kb , kc
+  COMPLEX A, B, C, Y, Tcos, D, W, x, xx, z
+  DIMENSION A(*), B(*), C(*), Y(*), Tcos(*), D(*), W(*)
+  INTEGER kb, kc
   !***FIRST EXECUTABLE STATEMENT  CMPTRX
   mm1 = M - 1
   kb = Idegbr + 1
   kc = Idegcr + 1
   l = kb/kc
   lint = 1
-  DO k = 1 , Idegbr
+  DO k = 1, Idegbr
     x = Tcos(k)
     IF ( k==l ) THEN
       i = Idegbr + lint
       xx = x - Tcos(i)
-      DO i = 1 , M
+      DO i = 1, M
         W(i) = Y(i)
         Y(i) = xx*Y(i)
       ENDDO
@@ -50,7 +50,7 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
     z = 1./(B(1)-x)
     D(1) = C(1)*z
     Y(1) = Y(1)*z
-    DO i = 2 , mm1
+    DO i = 2, mm1
       z = 1./(B(i)-x-A(i)*D(i-1))
       D(i) = C(i)*z
       Y(i) = (Y(i)-A(i)*Y(i-1))*z
@@ -61,12 +61,12 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
     ELSE
       Y(M) = (0.,0.)
     ENDIF
-    DO ip = 1 , mm1
+    DO ip = 1, mm1
       i = M - ip
       Y(i) = Y(i) - D(i)*Y(i+1)
     ENDDO
     IF ( k==l ) THEN
-      DO i = 1 , M
+      DO i = 1, M
         Y(i) = Y(i) + W(i)
       ENDDO
       lint = lint + 1

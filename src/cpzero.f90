@@ -4,8 +4,8 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   IMPLICIT NONE
   !*--CPZERO5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Iflg , imax , In , j , n , n1 , nit , nmax , nr
-  REAL u , v , x
+  INTEGER i, Iflg, imax, In, j, n, n1, nit, nmax, nr
+  REAL u, v, x
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CPZERO
   !***PURPOSE  Find the zeros of a polynomial with complex coefficients.
@@ -57,7 +57,7 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   !***END PROLOGUE  CPZERO
   !
   REAL S(*)
-  COMPLEX R(*) , T(*) , A(*) , pn , temp
+  COMPLEX R(*), T(*), A(*), pn, temp
   !***FIRST EXECUTABLE STATEMENT  CPZERO
   IF ( In<=0.OR.ABS(A(1))==0.0 ) THEN
     Iflg = 1
@@ -83,7 +83,7 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
           CALL CPEVL(n,n,A,temp,T,T,.FALSE.)
           imax = n + 2
           T(n1) = ABS(T(n1))
-          DO i = 2 , n1
+          DO i = 2, n1
             T(n+i) = -ABS(T(n+2-i))
             IF ( REAL(T(n+i))<REAL(T(imax)) ) imax = n + i
           ENDDO
@@ -100,7 +100,7 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
                 IF ( REAL(pn)>0. ) v = x
                 IF ( REAL(pn)<=0. ) u = x
                 IF ( (v-u)<=.001*(1.+v) ) THEN
-                  DO i = 1 , n
+                  DO i = 1, n
                     u = (3.14159265/n)*(2*i-1.5)
                     R(i) = MAX(x,.001*ABS(temp))*CMPLX(COS(u),SIN(u)) + temp
                   ENDDO
@@ -121,13 +121,13 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
     !
     50     nr = 0
     nmax = 25*n
-    DO nit = 1 , nmax
-      DO i = 1 , n
+    DO nit = 1, nmax
+      DO i = 1, n
         IF ( nit==1.OR.ABS(T(i))/=0. ) THEN
           CALL CPEVL(n,0,A,R(i),pn,temp,.TRUE.)
           IF ( ABS(REAL(pn))+ABS(AIMAG(pn))>REAL(temp)+AIMAG(temp) ) THEN
             temp = A(1)
-            DO j = 1 , n
+            DO j = 1, n
               IF ( j/=i ) temp = temp*(R(i)-R(j))
             ENDDO
             T(i) = pn/temp
@@ -137,7 +137,7 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
           ENDIF
         ENDIF
       ENDDO
-      DO i = 1 , n
+      DO i = 1, n
         R(i) = R(i) - T(i)
       ENDDO
       IF ( nr==n ) GOTO 100
@@ -147,20 +147,23 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   !
   !          CALCULATE ERROR BOUNDS FOR ZEROS
   !
-  100  DO nr = 1 , n
-  CALL CPEVL(n,n,A,R(nr),T,T(n+2),.TRUE.)
-  x = ABS(CMPLX(ABS(REAL(T(1))),ABS(AIMAG(T(1))))+T(n+2))
-  S(nr) = 0.0
-  DO i = 1 , n
-    x = x*REAL(n1-i)/i
-    temp = CMPLX(MAX(ABS(REAL(T(i+1)))-REAL(T(n1+i)),0.0),&
-      MAX(ABS(AIMAG(T(i+1)))-AIMAG(T(n1+i)),0.0))
-    S(nr) = MAX(S(nr),(ABS(temp)/x)**(1./i))
+  100 CONTINUE
+  DO nr = 1, n
+    CALL CPEVL(n,n,A,R(nr),T,T(n+2),.TRUE.)
+    x = ABS(CMPLX(ABS(REAL(T(1))),ABS(AIMAG(T(1))))+T(n+2))
+    S(nr) = 0.0
+    DO i = 1, n
+      x = x*REAL(n1-i)/i
+      temp = CMPLX(MAX(ABS(REAL(T(i+1)))-REAL(T(n1+i)),0.0),&
+        MAX(ABS(AIMAG(T(i+1)))-AIMAG(T(n1+i)),0.0))
+      S(nr) = MAX(S(nr),(ABS(temp)/x)**(1./i))
+    ENDDO
+    S(nr) = 1./S(nr)
   ENDDO
-  S(nr) = 1./S(nr)
-ENDDO
-RETURN
-!        ERROR EXITS
-200  Iflg = 2
-RETURN
-99999 END SUBROUTINE CPZERO
+  RETURN
+  !        ERROR EXITS
+  200 CONTINUE
+  IFlg = 2
+  RETURN
+  99999 CONTINUE
+  END SUBROUTINE CPZERO

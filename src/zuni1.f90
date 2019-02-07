@@ -28,18 +28,18 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !***END PROLOGUE  ZUNI1
   !     COMPLEX CFN,CONE,CRSC,CSCL,CSR,CSS,CWRK,CZERO,C1,C2,PHI,RZ,SUM,S1,
   !    *S2,Y,Z,ZETA1,ZETA2
-  REAL(8) :: Alim , aphi , ascle , bry , coner , crsc , cscl , csrr , &
-    cssr , cwrki , cwrkr , c1r , c2i , c2m , c2r , Elim , &
-    fn , Fnu , Fnul , phii , phir , rast , rs1 , rzi , rzr , &
-    sti , str , sumi , sumr , s1i , s1r , s2i , s2r , Tol , &
-    Yi , Yr , zeroi , zeror , zeta1i , zeta1r , zeta2i , &
-    zeta2r , Zi , Zr , cyr , cyi , D1MACH , ZABS
-  INTEGER i , iflag , init , k , Kode , m , N , nd , Nlast , nn , nuf , nw , &
+  REAL(8) :: Alim, aphi, ascle, bry, coner, crsc, cscl, csrr, &
+    cssr, cwrki, cwrkr, c1r, c2i, c2m, c2r, Elim, &
+    fn, Fnu, Fnul, phii, phir, rast, rs1, rzi, rzr, &
+    sti, str, sumi, sumr, s1i, s1r, s2i, s2r, Tol, &
+    Yi, Yr, zeroi, zeror, zeta1i, zeta1r, zeta2i, &
+    zeta2r, Zi, Zr, cyr, cyi, D1MACH, ZABS
+  INTEGER i, iflag, init, k, Kode, m, N, nd, Nlast, nn, nuf, nw, &
     Nz
-  DIMENSION bry(3) , Yr(N) , Yi(N) , cwrkr(16) , cwrki(16) , cssr(3) , &
-    csrr(3) , cyr(2) , cyi(2)
+  DIMENSION bry(3), Yr(N), Yi(N), cwrkr(16), cwrki(16), cssr(3), &
+    csrr(3), cyr(2), cyi(2)
   EXTERNAL ZABS
-  DATA zeror , zeroi , coner/0.0D0 , 0.0D0 , 1.0D0/
+  DATA zeror, zeroi, coner/0.0D0, 0.0D0, 1.0D0/
   !***FIRST EXECUTABLE STATEMENT  ZUNI1
   Nz = 0
   nd = N
@@ -81,14 +81,14 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   IF ( ABS(rs1)>Elim ) THEN
     IF ( rs1>0.0D0 ) GOTO 400
     Nz = N
-    DO i = 1 , N
+    DO i = 1, N
       Yr(i) = zeror
       Yi(i) = zeroi
     ENDDO
     GOTO 99999
   ENDIF
   100  nn = MIN(2,nd)
-  DO i = 1 , nn
+  DO i = 1, nn
     fn = Fnu + (nd-i)
     init = 0
     CALL ZUNIK(Zr,Zi,fn,1,0,Tol,init,phir,phii,zeta1r,zeta1i,zeta2r,zeta2i,&
@@ -160,7 +160,7 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     ascle = bry(iflag)
     k = nd - 2
     fn = k
-    DO i = 3 , nd
+    DO i = 3, nd
       c2r = s2r
       c2i = s2i
       s2r = s1r + (Fnu+fn)*(rzr*c2r-rzi*c2i)
@@ -197,23 +197,25 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   !     SET UNDERFLOW AND UPDATE PARAMETERS
   !-----------------------------------------------------------------------
-  300  IF ( rs1<=0.0D0 ) THEN
-  Yr(nd) = zeror
-  Yi(nd) = zeroi
-  Nz = Nz + 1
-  nd = nd - 1
-  IF ( nd==0 ) GOTO 200
-  CALL ZUOIK(Zr,Zi,Fnu,Kode,1,nd,Yr,Yi,nuf,Tol,Elim,Alim)
-  IF ( nuf>=0 ) THEN
-    nd = nd - nuf
-    Nz = Nz + nuf
+  300 CONTINUE
+  IF ( rs1<=0.0D0 ) THEN
+    Yr(nd) = zeror
+    Yi(nd) = zeroi
+    Nz = Nz + 1
+    nd = nd - 1
     IF ( nd==0 ) GOTO 200
-    fn = Fnu + (nd-1)
-    IF ( fn>=Fnul ) GOTO 100
-    Nlast = nd
-    RETURN
+    CALL ZUOIK(Zr,Zi,Fnu,Kode,1,nd,Yr,Yi,nuf,Tol,Elim,Alim)
+    IF ( nuf>=0 ) THEN
+      nd = nd - nuf
+      Nz = Nz + nuf
+      IF ( nd==0 ) GOTO 200
+      fn = Fnu + (nd-1)
+      IF ( fn>=Fnul ) GOTO 100
+      Nlast = nd
+      RETURN
+    ENDIF
   ENDIF
-ENDIF
-400  Nz = -1
-RETURN
-99999 END SUBROUTINE ZUNI1
+  400  Nz = -1
+  RETURN
+  99999 CONTINUE
+  END SUBROUTINE ZUNI1

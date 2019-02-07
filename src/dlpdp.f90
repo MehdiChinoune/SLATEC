@@ -51,12 +51,12 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !   910408  Updated the AUTHOR section.  (WRB)
   !***END PROLOGUE  DLPDP
   !
-  INTEGER i , Is(*) , iw , ix , j , l , M , Mda , Mode , modew , n , N1 , &
-    N2 , np1
-  REAL(8) :: A(Mda,*) , DDOT , DNRM2 , fac , one , Prgopt(*) , rnorm , &
-    sc , Wnorm , Ws(*) , X(*) , ynorm , zero
-  SAVE zero , one , fac
-  DATA zero , one/0.0D0 , 1.0D0/ , fac/0.1D0/
+  INTEGER i, Is(*), iw, ix, j, l, M, Mda, Mode, modew, n, N1, &
+    N2, np1
+  REAL(8) :: A(Mda,*), DDOT, DNRM2, fac, one, Prgopt(*), rnorm, &
+    sc, Wnorm, Ws(*), X(*), ynorm, zero
+  SAVE zero, one, fac
+  DATA zero, one/0.0D0, 1.0D0/, fac/0.1D0/
   !***FIRST EXECUTABLE STATEMENT  DLPDP
   n = N1 + N2
   Mode = 1
@@ -65,7 +65,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
     np1 = n + 1
     !
     !           SCALE NONZERO ROWS OF INEQUALITY MATRIX TO HAVE LENGTH ONE.
-    DO i = 1 , M
+    DO i = 1, M
       sc = DNRM2(n,A(i,1),Mda)
       IF ( sc/=zero ) THEN
         sc = one/sc
@@ -93,7 +93,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       !
       !              COPY TRANSPOSE OF (H G Y) TO WORK ARRAY WS(*).
       iw = 0
-      DO i = 1 , M
+      DO i = 1, M
         !
         !                 MOVE COL OF TRANSPOSE OF H INTO WORK ARRAY.
         CALL DCOPY(N2,A(i,N1+1),Mda,Ws(iw+1),1)
@@ -134,13 +134,13 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
         GOTO 99999
       ELSE
         sc = one/sc
-        DO j = 1 , N1
+        DO j = 1, N1
           X(j) = sc*DDOT(M,A(1,j),1,Ws(ix),1)
         ENDDO
         !
         !                 COMPUTE THE VECTOR Q=Y-GW.  OVERWRITE Y WITH THIS
         !                 VECTOR.
-        DO i = 1 , M
+        DO i = 1, M
           A(i,np1) = A(i,np1) - DDOT(N1,A(i,1),Mda,X,1)
         ENDDO
       ENDIF
@@ -149,7 +149,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       !
       !              COPY TRANSPOSE OF (H Q) TO WORK ARRAY WS(*).
       iw = 0
-      DO i = 1 , M
+      DO i = 1, M
         CALL DCOPY(N2,A(i,N1+1),Mda,Ws(iw+1),1)
         iw = iw + N2
         Ws(iw+1) = A(i,np1)
@@ -181,7 +181,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
         GOTO 99999
       ELSE
         sc = one/sc
-        DO j = 1 , N2
+        DO j = 1, N2
           l = N1 + j
           X(l) = sc*DDOT(M,A(1,l),1,Ws(ix),1)*X(l)
         ENDDO
@@ -198,4 +198,5 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
     ENDIF
     Wnorm = zero
   ENDIF
-  99999 END SUBROUTINE DLPDP
+  99999 CONTINUE
+  END SUBROUTINE DLPDP

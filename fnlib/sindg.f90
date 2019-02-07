@@ -5,7 +5,7 @@ FUNCTION SINDG(X)
   !*--SINDG5
   !*** Start of declarations inserted by SPAG
   INTEGER n
-  REAL raddeg , SINDG , X
+  REAL raddeg, SINDG, X
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SINDG
   !***PURPOSE  Compute the sine of an argument in degrees.

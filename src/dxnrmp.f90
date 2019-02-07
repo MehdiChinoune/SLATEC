@@ -4,7 +4,7 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   IMPLICIT NONE
   !*--DXNRMP5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Ierror , ip , ip1 , ip2 , j , k , mu
+  INTEGER i, Ierror, ip, ip1, ip2, j, k, mu
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXNRMP
   !***PURPOSE  Compute normalized Legendre polynomials.
@@ -91,7 +91,7 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !              CALL DXCON(DPN(I), IPN(I),IERROR)
   !              IF (IERROR.NE.0) RETURN
   !              PRINT 10, DPN(I), IPN(I)
-  !           10 FORMAT(1X, D30.18 , I15)
+  !           10 FORMAT(1X, D30.18, I15)
   !              IF ((IPN(I) .EQ. 0) .OR. (J .LT. K)) GO TO 20
   !              J = I - 1
   !           20 CONTINUE
@@ -132,10 +132,10 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXNRMP
-  INTEGER Nu , Mu1 , Mu2 , Mode , Ipn , Isig
-  REAL(8) :: Darg , Dpn
-  DIMENSION Dpn(*) , Ipn(*)
-  REAL(8) :: c1 , c2 , p , p1 , p2 , p3 , s , sx , t , tx , x , dk
+  INTEGER Nu, Mu1, Mu2, Mode, Ipn, Isig
+  REAL(8) :: Darg, Dpn
+  DIMENSION Dpn(*), Ipn(*)
+  REAL(8) :: c1, c2, p, p1, p2, p3, s, sx, t, tx, x, dk
   ! CALL DXSET TO INITIALIZE EXTENDED-RANGE ARITHMETIC (SEE DXSET
   ! LISTING FOR DETAILS)
   !***FIRST EXECUTABLE STATEMENT  DXNRMP
@@ -196,7 +196,7 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   ip2 = 0
   p3 = 0.5D0
   dk = 2.0D0
-  DO j = 1 , Nu
+  DO j = 1, Nu
     p3 = ((dk+1.0D0)/dk)*p3
     p2 = p2*sx
     CALL DXADJ(p2,ip2,Ierror)
@@ -243,7 +243,7 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !        SPECIAL CASE WHEN X=-1 OR +1, OR NU=0.
   !
   200  k = Mu2 - Mu1 + 1
-  DO i = 1 , k
+  DO i = 1, k
     Dpn(i) = 0.0D0
     Ipn(i) = 0
   ENDDO
@@ -272,8 +272,9 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !        RETURN TO CALLING PROGRAM
   !
   500  k = Mu2 - Mu1 + 1
-  DO i = 1 , k
+  DO i = 1, k
     CALL DXRED(Dpn(i),Ipn(i),Ierror)
     IF ( Ierror/=0 ) RETURN
   ENDDO
-  99999 END SUBROUTINE DXNRMP
+  99999 CONTINUE
+  END SUBROUTINE DXNRMP

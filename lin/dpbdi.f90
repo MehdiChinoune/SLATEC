@@ -53,7 +53,7 @@ SUBROUTINE DPBDI(Abd,Lda,N,M,Det)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPBDI
-  INTEGER Lda , N , M
+  INTEGER Lda, N, M
   REAL(8) :: Abd(Lda,*)
   REAL(8) :: Det(2)
   !
@@ -66,7 +66,7 @@ SUBROUTINE DPBDI(Abd,Lda,N,M,Det)
   Det(1) = 1.0D0
   Det(2) = 0.0D0
   s = 10.0D0
-  DO i = 1 , N
+  DO i = 1, N
     Det(1) = Abd(M+1,i)**2*Det(1)
     IF ( Det(1)==0.0D0 ) EXIT
     DO WHILE ( Det(1)<1.0D0 )

@@ -72,12 +72,12 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DORTHR
-  REAL(8) :: DDOT , D1MACH
-  INTEGER Iflag , Irank , Iscale , j , jrow , k , kp , Kpivot(*) , l , M , &
-    mk , N , Nrda
-  REAL(8) :: A(Nrda,*) , acc , akk , anorm , as , asave , Diag(*) , &
-    diagk , dum , Rows(*) , Rs(*) , rss , sad , Scales(*) , &
-    sig , sigma , sruro , uro
+  REAL(8) :: DDOT, D1MACH
+  INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot(*), l, M, &
+    mk, N, Nrda
+  REAL(8) :: A(Nrda,*), acc, akk, anorm, as, asave, Diag(*), &
+    diagk, dum, Rows(*), Rs(*), rss, sad, Scales(*), &
+    sig, sigma, sruro, uro
   !
   !     ******************************************************************
   !
@@ -99,7 +99,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
     !        COMPUTE NORM**2 OF JTH ROW AND A MATRIX NORM
     !
     anorm = 0.0D0
-    DO j = 1 , N
+    DO j = 1, N
       Kpivot(j) = j
       Rows(j) = DDOT(M,A(j,1),Nrda,A(j,1),Nrda)
       Rs(j) = Rows(j)
@@ -117,7 +117,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
     !        ORTHOGONAL TRANSFORMATIONS
     !
     !
-    DO k = 1 , N
+    DO k = 1, N
       !           BEGIN BLOCK PERMITTING ...EXITS TO 80
       mk = M - k + 1
       !           ...EXIT
@@ -126,7 +126,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
         !
         !              SEARCHING FOR PIVOTAL ROW
         !
-        DO j = k , N
+        DO j = k, N
           !                 BEGIN BLOCK PERMITTING ...EXITS TO 50
           IF ( Rows(j)<sruro*Rs(j) ) THEN
             Rows(j) = DDOT(mk,A(j,k),Nrda,A(j,k),Nrda)
@@ -152,7 +152,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
           rss = Rs(k)
           Rs(k) = Rs(jrow)
           Rs(jrow) = rss
-          DO l = 1 , M
+          DO l = 1, M
             asave = A(k,l)
             A(k,l) = A(jrow,l)
             A(jrow,l) = asave
@@ -174,9 +174,9 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
         A(k,k) = akk - diagk
         IF ( k/=N ) THEN
           sad = diagk*akk - sig
-          DO j = kp , N
+          DO j = kp, N
             as = DDOT(mk,A(k,k),Nrda,A(j,k),Nrda)/sad
-            DO l = k , M
+            DO l = k, M
               A(j,l) = A(j,l) + as*A(k,l)
             ENDDO
             Rows(j) = Rows(j) - A(j,k)**2

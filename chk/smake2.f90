@@ -26,26 +26,26 @@ SUBROUTINE SMAKE2(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Kl,Ku,Reset,Transl)
   !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  SMAKE2
   !     .. Parameters ..
-  REAL ZERO , ONE
+  REAL ZERO, ONE
   PARAMETER (ZERO=0.0,ONE=1.0)
   REAL ROGUE
   PARAMETER (ROGUE=-1.0E10)
   !     .. Scalar Arguments ..
   REAL Transl
-  INTEGER Kl , Ku , Lda , M , N , Nmax
+  INTEGER Kl, Ku, Lda, M, N, Nmax
   LOGICAL Reset
-  CHARACTER :: Diag , Uplo
+  CHARACTER :: Diag, Uplo
   CHARACTER(2) :: Type
   !     .. Array Arguments ..
-  REAL A(Nmax,*) , Aa(*)
+  REAL A(Nmax,*), Aa(*)
   !     .. Local Scalars ..
-  INTEGER i , i1 , i2 , i3 , ibeg , iend , ioff , j , kk
-  LOGICAL gen , lower , sym , tri , unit , upper
+  INTEGER i, i1, i2, i3, ibeg, iend, ioff, j, kk
+  LOGICAL gen, lower, sym, tri, unit, upper
   !     .. External Functions ..
   REAL SBEG
   EXTERNAL SBEG
   !     .. Intrinsic Functions ..
-  INTRINSIC MAX , MIN
+  INTRINSIC MAX, MIN
   !***FIRST EXECUTABLE STATEMENT  SMAKE2
   gen = Type(1:1)=='G'
   sym = Type(1:1)=='S'
@@ -56,8 +56,8 @@ SUBROUTINE SMAKE2(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Kl,Ku,Reset,Transl)
   !
   !     Generate data in array A.
   !
-  DO j = 1 , N
-    DO i = 1 , M
+  DO j = 1, N
+    DO i = 1, M
       IF ( gen.OR.(upper.AND.i<=j).OR.(lower.AND.i>=j) ) THEN
         IF ( (i<=j.AND.j-i<=Ku).OR.(i>=j.AND.i-j<=Kl) ) THEN
           A(i,j) = SBEG(Reset) + Transl
@@ -80,28 +80,28 @@ SUBROUTINE SMAKE2(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Kl,Ku,Reset,Transl)
   !     Store elements in array AS in data structure required by routine.
   !
   IF ( Type=='GE' ) THEN
-    DO j = 1 , N
-      DO i = 1 , M
+    DO j = 1, N
+      DO i = 1, M
         Aa(i+(j-1)*Lda) = A(i,j)
       ENDDO
-      DO i = M + 1 , Lda
+      DO i = M + 1, Lda
         Aa(i+(j-1)*Lda) = ROGUE
       ENDDO
     ENDDO
   ELSEIF ( Type=='GB' ) THEN
-    DO j = 1 , N
-      DO i1 = 1 , Ku + 1 - j
+    DO j = 1, N
+      DO i1 = 1, Ku + 1 - j
         Aa(i1+(j-1)*Lda) = ROGUE
       ENDDO
-      DO i2 = i1 , MIN(Kl+Ku+1,Ku+1+M-j)
+      DO i2 = i1, MIN(Kl+Ku+1,Ku+1+M-j)
         Aa(i2+(j-1)*Lda) = A(i2+j-Ku-1,j)
       ENDDO
-      DO i3 = i2 , Lda
+      DO i3 = i2, Lda
         Aa(i3+(j-1)*Lda) = ROGUE
       ENDDO
     ENDDO
   ELSEIF ( Type=='SY'.OR.Type=='TR' ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       IF ( upper ) THEN
         ibeg = 1
         IF ( unit ) THEN
@@ -117,18 +117,18 @@ SUBROUTINE SMAKE2(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Kl,Ku,Reset,Transl)
         ENDIF
         iend = N
       ENDIF
-      DO i = 1 , ibeg - 1
+      DO i = 1, ibeg - 1
         Aa(i+(j-1)*Lda) = ROGUE
       ENDDO
-      DO i = ibeg , iend
+      DO i = ibeg, iend
         Aa(i+(j-1)*Lda) = A(i,j)
       ENDDO
-      DO i = iend + 1 , Lda
+      DO i = iend + 1, Lda
         Aa(i+(j-1)*Lda) = ROGUE
       ENDDO
     ENDDO
   ELSEIF ( Type=='SB'.OR.Type=='TB' ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       IF ( upper ) THEN
         kk = Kl + 1
         ibeg = MAX(1,Kl+2-j)
@@ -146,19 +146,19 @@ SUBROUTINE SMAKE2(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Kl,Ku,Reset,Transl)
         ENDIF
         iend = MIN(Kl+1,1+M-j)
       ENDIF
-      DO i = 1 , ibeg - 1
+      DO i = 1, ibeg - 1
         Aa(i+(j-1)*Lda) = ROGUE
       ENDDO
-      DO i = ibeg , iend
+      DO i = ibeg, iend
         Aa(i+(j-1)*Lda) = A(i+j-kk,j)
       ENDDO
-      DO i = iend + 1 , Lda
+      DO i = iend + 1, Lda
         Aa(i+(j-1)*Lda) = ROGUE
       ENDDO
     ENDDO
   ELSEIF ( Type=='SP'.OR.Type=='TP' ) THEN
     ioff = 0
-    DO j = 1 , N
+    DO j = 1, N
       IF ( upper ) THEN
         ibeg = 1
         iend = j
@@ -166,7 +166,7 @@ SUBROUTINE SMAKE2(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Kl,Ku,Reset,Transl)
         ibeg = j
         iend = N
       ENDIF
-      DO i = ibeg , iend
+      DO i = ibeg, iend
         ioff = ioff + 1
         Aa(ioff) = A(i,j)
         IF ( i==j ) THEN

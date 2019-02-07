@@ -63,13 +63,13 @@ REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER K , Ierr
-  REAL(8) :: X(K) , S(K)
+  INTEGER K, Ierr
+  REAL(8) :: X(K), S(K)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i , j
-  REAL(8) :: value , zero
+  INTEGER i, j
+  REAL(8) :: value, zero
   SAVE zero
   DATA zero/0.D0/
   !
@@ -89,8 +89,8 @@ REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
   !
   !  COMPUTE COEFFICIENTS OF INTERPOLATING POLYNOMIAL.
   !
-  DO j = 2 , K - 1
-    DO i = 1 , K - j
+  DO j = 2, K - 1
+    DO i = 1, K - j
       S(i) = (S(i+1)-S(i))/(X(i+j)-X(i))
     ENDDO
   ENDDO
@@ -98,7 +98,7 @@ REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
   !  EVALUATE DERIVATIVE AT X(K).
   !
   value = S(1)
-  DO i = 2 , K - 1
+  DO i = 2, K - 1
     value = S(i) + value*(X(K)-X(i))
   ENDDO
   !
@@ -108,4 +108,5 @@ REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
   DPCHDF = value
   RETURN
   !------------- LAST LINE OF DPCHDF FOLLOWS -----------------------------
-  99999 END FUNCTION DPCHDF
+  99999 CONTINUE
+  END FUNCTION DPCHDF

@@ -4,10 +4,10 @@ SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
   IMPLICIT NONE
   !*--DEFER5
   !*** Start of declarations inserted by SPAG
-  REAL ai , AIT , bi , BIT , ci , CIT , DIT , dj , DLX , DLX4 , DLY , DLY4 , &
-    ej , fj , Grhs , TDLx3 , TDLy3 , tx , ty , Usol
-  REAL uxxx , uxxxx , uyyy , uyyyy , xi , yj
-  INTEGER i , Idmn , IS , j , JS , K , KSWx , KSWy , L , MIT , MS , NIT , NS
+  REAL ai, AIT, bi, BIT, ci, CIT, DIT, dj, DLX, DLX4, DLY, DLY4, &
+    ej, fj, Grhs, TDLx3, TDLy3, tx, ty, Usol
+  REAL uxxx, uxxxx, uyyy, uyyyy, xi, yj
+  INTEGER i, Idmn, IS, j, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DEFER
   !***SUBSIDIARY
@@ -42,16 +42,16 @@ SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  DEFER
   !
-  COMMON /SPLPCM/ KSWx , KSWy , K , L , AIT , BIT , CIT , DIT , MIT , NIT , &
-    IS , MS , JS , NS , DLX , DLY , TDLx3 , TDLy3 , DLX4 , &
+  COMMON /SPLPCM/ KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
+    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
     DLY4
-  DIMENSION Grhs(Idmn,*) , Usol(Idmn,*)
-  EXTERNAL COFX , COFY
+  DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
+  EXTERNAL COFX, COFY
   !***FIRST EXECUTABLE STATEMENT  DEFER
-  DO j = JS , NS
+  DO j = JS, NS
     yj = CIT + (j-1)*DLY
     CALL COFY(yj,dj,ej,fj)
-    DO i = IS , MS
+    DO i = IS, MS
       xi = AIT + (i-1)*DLX
       CALL COFX(xi,ai,bi,ci)
       !
@@ -74,8 +74,8 @@ SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
   !
   !     RESET THE RIGHT HAND SIDE IN USOL
   !
-  DO i = IS , MS
-    DO j = JS , NS
+  DO i = IS, MS
+    DO j = JS, NS
       Usol(i,j) = Grhs(i,j)
     ENDDO
   ENDDO

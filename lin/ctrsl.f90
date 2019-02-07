@@ -72,18 +72,18 @@ SUBROUTINE CTRSL(T,Ldt,N,B,Job,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CTRSL
-  INTEGER Ldt , N , Job , Info
-  COMPLEX T(Ldt,*) , B(*)
+  INTEGER Ldt, N, Job, Info
+  COMPLEX T(Ldt,*), B(*)
   !
   !
-  COMPLEX CDOTC , temp
-  INTEGER case , j , jj
+  COMPLEX CDOTC, temp
+  INTEGER case, j, jj
   REAL, EXTERNAL :: CABS1
   !***FIRST EXECUTABLE STATEMENT  CTRSL
   !
   !        CHECK FOR ZERO DIAGONAL ELEMENTS.
   !
-  DO Info = 1 , N
+  DO Info = 1, N
     IF ( CABS1(T(Info,Info))==0.0E0 ) GOTO 99999
   ENDDO
   Info = 0
@@ -100,7 +100,7 @@ SUBROUTINE CTRSL(T,Ldt,N,B,Job,Info)
       !
       B(N) = B(N)/T(N,N)
       IF ( N>=2 ) THEN
-        DO jj = 2 , N
+        DO jj = 2, N
           j = N - jj + 1
           temp = -B(j+1)
           CALL CAXPY(j,temp,T(1,j+1),1,B(1),1)
@@ -113,7 +113,7 @@ SUBROUTINE CTRSL(T,Ldt,N,B,Job,Info)
       !
       B(N) = B(N)/CONJG(T(N,N))
       IF ( N>=2 ) THEN
-        DO jj = 2 , N
+        DO jj = 2, N
           j = N - jj + 1
           B(j) = B(j) - CDOTC(jj-1,T(j+1,j),1,B(j+1),1)
           B(j) = B(j)/CONJG(T(j,j))
@@ -125,7 +125,7 @@ SUBROUTINE CTRSL(T,Ldt,N,B,Job,Info)
       !
       B(1) = B(1)/CONJG(T(1,1))
       IF ( N>=2 ) THEN
-        DO j = 2 , N
+        DO j = 2, N
           B(j) = B(j) - CDOTC(j-1,T(1,j),1,B(1),1)
           B(j) = B(j)/CONJG(T(j,j))
         ENDDO
@@ -136,11 +136,12 @@ SUBROUTINE CTRSL(T,Ldt,N,B,Job,Info)
       !
       B(1) = B(1)/T(1,1)
       IF ( N>=2 ) THEN
-        DO j = 2 , N
+        DO j = 2, N
           temp = -B(j-1)
           CALL CAXPY(N-j+1,temp,T(j,j-1),1,B(j),1)
           B(j) = B(j)/T(j,j)
         ENDDO
       ENDIF
   END SELECT
-  99999 END SUBROUTINE CTRSL
+  99999 CONTINUE
+  END SUBROUTINE CTRSL

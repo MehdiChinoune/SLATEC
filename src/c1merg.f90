@@ -29,10 +29,10 @@ SUBROUTINE C1MERG(Tcos,I1,M1,I2,M2,I3)
   !           the IBM RS6000.  (RWC)
   !   920130  Code name changed from CMPMRG to C1MERG.  (WRB)
   !***END PROLOGUE  C1MERG
-  INTEGER I1 , I2 , I3 , M1 , M2
+  INTEGER I1, I2, I3, M1, M2
   COMPLEX Tcos(*)
   !
-  INTEGER j1 , j2 , j3
+  INTEGER j1, j2, j3
   !
   !***FIRST EXECUTABLE STATEMENT  C1MERG
   IF ( M1==0.AND.M2==0 ) RETURN

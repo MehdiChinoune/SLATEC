@@ -4,7 +4,7 @@ SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
   !*--DXQMU5
   !*** Start of declarations inserted by SPAG
-  INTEGER Id , Ierror , ipq , ipq1 , ipq2 , Ipqa , k , mu , Mu1 , Mu2
+  INTEGER Id, Ierror, ipq, ipq1, ipq2, Ipqa, k, mu, Mu1, Mu2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXQMU
   !***SUBSIDIARY
@@ -25,9 +25,9 @@ SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXQMU
-  DIMENSION Pqa(*) , Ipqa(*)
-  REAL(8) :: dmu , nu , Nu1 , Nu2 , pq , Pqa , pq1 , pq2 , Sx , X , &
-    x1 , x2
+  DIMENSION Pqa(*), Ipqa(*)
+  REAL(8) :: dmu, nu, Nu1, Nu2, pq, Pqa, pq1, pq2, Sx, X, &
+    x1, x2
   REAL(8) :: Theta
   !***FIRST EXECUTABLE STATEMENT  DXQMU
   Ierror = 0
@@ -89,4 +89,5 @@ SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
       IF ( Mu2<=mu ) EXIT
     ENDIF
   ENDDO
-  99999 END SUBROUTINE DXQMU
+  99999 CONTINUE
+  END SUBROUTINE DXQMU

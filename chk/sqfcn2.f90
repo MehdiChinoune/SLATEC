@@ -22,9 +22,9 @@ SUBROUTINE SQFCN2(N,X,Fvec,Iflag)
   !   930214  TYPE and declarations sections added.  (WRB)
   !***END PROLOGUE  SQFCN2
   !     .. Scalar Arguments ..
-  INTEGER Iflag , N
+  INTEGER Iflag, N
   !     .. Array Arguments ..
-  REAL Fvec(*) , X(*)
+  REAL Fvec(*), X(*)
   !***FIRST EXECUTABLE STATEMENT  SQFCN2
   Fvec(1) = 1.0E0 - X(1)
   Fvec(2) = 10.0E0*(X(2)-X(1)**2)

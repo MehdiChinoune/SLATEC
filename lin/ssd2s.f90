@@ -106,20 +106,20 @@ SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  SSD2S
   !     .. Scalar Arguments ..
-  INTEGER Isym , N , Nelt
+  INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt) , Dinv(N)
-  INTEGER Ia(Nelt) , Ja(Nelt)
+  REAL A(Nelt), Dinv(N)
+  INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER i , k , kbgn , kend
+  INTEGER i, k, kbgn, kend
   !***FIRST EXECUTABLE STATEMENT  SSD2S
-  DO i = 1 , N
+  DO i = 1, N
     Dinv(i) = 0
   ENDDO
   !
   !         Loop over each column.
   !VD$R NOCONCUR
-  DO i = 1 , N
+  DO i = 1, N
     kbgn = Ja(i)
     kend = Ja(i+1) - 1
     !
@@ -128,7 +128,7 @@ SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
     !LLL. OPTION ASSERT (NOHAZARD)
     !DIR$ IVDEP
     !VD$ NODEPCHK
-    DO k = kbgn , kend
+    DO k = kbgn, kend
       Dinv(Ia(k)) = Dinv(Ia(k)) + A(k)**2
     ENDDO
     IF ( Isym==1 ) THEN
@@ -138,13 +138,13 @@ SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
       !         rest of the row.
       kbgn = kbgn + 1
       IF ( kbgn<=kend ) THEN
-        DO k = kbgn , kend
+        DO k = kbgn, kend
           Dinv(i) = Dinv(i) + A(k)**2
         ENDDO
       ENDIF
     ENDIF
   ENDDO
-  DO i = 1 , N
+  DO i = 1, N
     Dinv(i) = 1.0E0/Dinv(i)
   ENDDO
   !

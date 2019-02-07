@@ -5,15 +5,15 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   IMPLICIT NONE
   !*--HWSCS16
   !*** Start of declarations inserted by SPAG
-  REAL Am , An , ar , at , Bdrf , Bdrs , Bdtf , Bdts , Bm , Bmh , Bn , Cm , &
-    Cn , cr , ct , czr , dr , dr2 , dth , Elmbda
-  REAL F , hdr , hdth , hne , Pertrb , R , r2 , Rf , rf2 , Rs , rs2 , rsq , &
-    S , sdts , Sint , sum , t1 , tdr , tdt , Tf
-  REAL theta , Ts , W , wrf , wrs , wrz , wtf , wtnm , wts , xp , xps , &
-    yhld , yph , yps
-  INTEGER i , ictr , Idimf , ierror , iflg , Intl , ising , itf , itfm , &
-    its , itsp , j , jrf , jrfm , jrs , jrsp , l , M , Mbdcnd , mp
-  INTEGER mp1 , munk , N , Nbdcnd , np , np1 , nunk
+  REAL Am, An, ar, at, Bdrf, Bdrs, Bdtf, Bdts, Bm, Bmh, Bn, Cm, &
+    Cn, cr, ct, czr, dr, dr2, dth, Elmbda
+  REAL F, hdr, hdth, hne, Pertrb, R, r2, Rf, rf2, Rs, rs2, rsq, &
+    S, sdts, Sint, sum, t1, tdr, tdt, Tf
+  REAL theta, Ts, W, wrf, wrs, wrz, wtf, wtnm, wts, xp, xps, &
+    yhld, yph, yps
+  INTEGER i, ictr, Idimf, ierror, iflg, Intl, ising, itf, itfm, &
+    its, itsp, j, jrf, jrfm, jrs, jrsp, l, M, Mbdcnd, mp
+  INTEGER mp1, munk, N, Nbdcnd, np, np1, nunk
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HWSCS1
   !***SUBSIDIARY
@@ -30,16 +30,16 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  HWSCS1
-  DIMENSION F(Idimf,*) , Bdrs(*) , Bdrf(*) , Bdts(*) , Bdtf(*) , Am(*) , &
-    Bm(*) , Cm(*) , An(*) , Bn(*) , Cn(*) , S(*) , R(*) , Sint(*) , &
-    Bmh(*) , W(*)
+  DIMENSION F(Idimf,*), Bdrs(*), Bdrf(*), Bdts(*), Bdtf(*), Am(*), &
+    Bm(*), Cm(*), An(*), Bn(*), Cn(*), S(*), R(*), Sint(*), &
+    Bmh(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HWSCS1
   mp1 = M + 1
   dth = (Tf-Ts)/M
   tdt = dth + dth
   hdth = dth/2.
   sdts = 1./(dth*dth)
-  DO i = 1 , mp1
+  DO i = 1, mp1
     theta = Ts + (i-1)*dth
     Sint(i) = SIN(theta)
     IF ( Sint(i)/=0 ) THEN
@@ -55,7 +55,7 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   tdr = dr + dr
   dr2 = dr*dr
   czr = 6.*dth/(dr2*(COS(Ts)-COS(Tf)))
-  DO j = 1 , np1
+  DO j = 1, np1
     R(j) = Rs + (j-1)*dr
     An(j) = (R(j)-hdr)**2/dr2
     Cn(j) = (R(j)+hdr)**2/dr2
@@ -112,16 +112,16 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
       jrs = 2
       ictr = 1
       S(N) = An(N)/Bn(N)
-      DO j = 3 , N
+      DO j = 3, N
         l = N - j + 2
         S(l) = An(l)/(Bn(l)-Cn(l)*S(l+1))
       ENDDO
       S(2) = -S(2)
-      DO j = 3 , N
+      DO j = 3, N
         S(j) = -S(j)*S(j-1)
       ENDDO
       wtnm = wts + wtf
-      DO i = itsp , itfm
+      DO i = itsp, itfm
         wtnm = wtnm + Sint(i)
       ENDDO
       yps = czr*wtnm*(S(2)-1.)
@@ -148,7 +148,7 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   jrfm = jrf - 1
   munk = itf - its + 1
   nunk = jrf - jrs + 1
-  DO i = its , itf
+  DO i = its, itf
     Bmh(i) = Bm(i)
   ENDDO
   ising = 0
@@ -162,16 +162,16 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
             ising = 1
             sum = wts*wrs + wts*wrf + wtf*wrs + wtf*wrf
             IF ( ictr/=0 ) sum = sum + wrz
-            DO j = jrsp , jrfm
+            DO j = jrsp, jrfm
               r2 = R(j)**2
-              DO i = itsp , itfm
+              DO i = itsp, itfm
                 sum = sum + r2*Sint(i)
               ENDDO
             ENDDO
-            DO j = jrsp , jrfm
+            DO j = jrsp, jrfm
               sum = sum + (wts+wtf)*R(j)**2
             ENDDO
-            DO i = itsp , itfm
+            DO i = itsp, itfm
               sum = sum + (wrs+wrf)*Sint(i)
             ENDDO
             hne = sum
@@ -188,57 +188,57 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
     CASE DEFAULT
       Bm(itf) = Bmh(itf) + Elmbda/Sint(itf)**2
   END SELECT
-  DO i = itsp , itfm
+  DO i = itsp, itfm
     Bm(i) = Bmh(i) + Elmbda/Sint(i)**2
   ENDDO
   SELECT CASE (Mbdcnd)
     CASE (3,4,8)
-      DO j = jrs , jrf
+      DO j = jrs, jrf
         F(1,j) = F(1,j) + tdt*Bdts(j)*at/R(j)**2
       ENDDO
     CASE (5,6,9)
     CASE DEFAULT
-      DO j = jrs , jrf
+      DO j = jrs, jrf
         F(2,j) = F(2,j) - at*F(1,j)/R(j)**2
       ENDDO
   END SELECT
   SELECT CASE (Mbdcnd)
     CASE (2,3,6)
-      DO j = jrs , jrf
+      DO j = jrs, jrf
         F(M+1,j) = F(M+1,j) - tdt*Bdtf(j)*ct/R(j)**2
       ENDDO
     CASE (7,8,9)
     CASE DEFAULT
-      DO j = jrs , jrf
+      DO j = jrs, jrf
         F(M,j) = F(M,j) - ct*F(M+1,j)/R(j)**2
       ENDDO
   END SELECT
   SELECT CASE (Nbdcnd)
     CASE (1,2)
       rs2 = (Rs+dr)**2
-      DO i = its , itf
+      DO i = its, itf
         F(i,2) = F(i,2) - ar*F(i,1)/rs2
       ENDDO
     CASE (3,4)
-      DO i = its , itf
+      DO i = its, itf
         F(i,1) = F(i,1) + tdr*Bdrs(i)*ar/Rs**2
       ENDDO
     CASE DEFAULT
       IF ( Mbdcnd==3 ) THEN
         yhld = F(its,1) - czr/tdt*(SIN(Tf)*Bdtf(2)-SIN(Ts)*Bdts(2))
-        DO i = 1 , mp1
+        DO i = 1, mp1
           F(i,1) = yhld
         ENDDO
       ENDIF
   END SELECT
   SELECT CASE (Nbdcnd)
     CASE (2,3,6)
-      DO i = its , itf
+      DO i = its, itf
         F(i,N+1) = F(i,N+1) - tdr*Bdrf(i)*cr/Rf**2
       ENDDO
     CASE DEFAULT
       rf2 = (Rf-dr)**2
-      DO i = its , itf
+      DO i = its, itf
         F(i,N) = F(i,N) - cr*F(i,N+1)/rf2
       ENDDO
   END SELECT
@@ -247,28 +247,28 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
     sum = wts*wrs*F(its,jrs) + wts*wrf*F(its,jrf) + wtf*wrs*F(itf,jrs)&
       + wtf*wrf*F(itf,jrf)
     IF ( ictr/=0 ) sum = sum + wrz*F(its,1)
-    DO j = jrsp , jrfm
+    DO j = jrsp, jrfm
       r2 = R(j)**2
-      DO i = itsp , itfm
+      DO i = itsp, itfm
         sum = sum + r2*Sint(i)*F(i,j)
       ENDDO
     ENDDO
-    DO j = jrsp , jrfm
+    DO j = jrsp, jrfm
       sum = sum + R(j)**2*(wts*F(its,j)+wtf*F(itf,j))
     ENDDO
-    DO i = itsp , itfm
+    DO i = itsp, itfm
       sum = sum + Sint(i)*(wrs*F(i,jrs)+wrf*F(i,jrf))
     ENDDO
     Pertrb = sum/hne
-    DO j = 1 , np1
-      DO i = 1 , mp1
+    DO j = 1, np1
+      DO i = 1, mp1
         F(i,j) = F(i,j) - Pertrb
       ENDDO
     ENDDO
   ENDIF
-  DO j = jrs , jrf
+  DO j = jrs, jrf
     rsq = R(j)**2
-    DO i = its , itf
+    DO i = its, itf
       F(i,j) = rsq*F(i,j)
     ENDDO
   ENDDO
@@ -279,12 +279,12 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
     iflg = iflg + 1
     IF ( iflg/=1 ) THEN
       IF ( Nbdcnd==0 ) THEN
-        DO i = 1 , mp1
+        DO i = 1, mp1
           F(i,jrf+1) = F(i,jrs)
         ENDDO
       ENDIF
       IF ( Mbdcnd==0 ) THEN
-        DO j = 1 , np1
+        DO j = 1, np1
           F(itf+1,j) = F(its,j)
         ENDDO
       ENDIF
@@ -292,19 +292,19 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
       IF ( ictr/=0 ) THEN
         IF ( ising==0 ) THEN
           sum = wts*F(its,2) + wtf*F(itf,2)
-          DO i = itsp , itfm
+          DO i = itsp, itfm
             sum = sum + Sint(i)*F(i,2)
           ENDDO
           yph = czr*sum
           xp = (F(its,1)-yph)/yps
-          DO j = jrs , jrf
+          DO j = jrs, jrf
             xps = xp*S(j)
-            DO i = its , itf
+            DO i = its, itf
               F(i,j) = F(i,j) + xps
             ENDDO
           ENDDO
         ENDIF
-        DO i = 1 , mp1
+        DO i = 1, mp1
           F(i,1) = xp
         ENDDO
       ENDIF

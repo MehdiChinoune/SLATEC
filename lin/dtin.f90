@@ -131,12 +131,12 @@ SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  DTIN
   !     .. Scalar Arguments ..
-  INTEGER Isym , Iunit , Job , N , Nelt
+  INTEGER Isym, Iunit, Job, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , Rhs(N) , Soln(N)
-  INTEGER Ia(Nelt) , Ja(Nelt)
+  REAL(8) :: A(Nelt), Rhs(N), Soln(N)
+  INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER i , irhs , isoln , jobret , neltmx
+  INTEGER i, irhs, isoln, jobret, neltmx
   !     .. Intrinsic Functions ..
   INTRINSIC MIN
   !***FIRST EXECUTABLE STATEMENT  DTIN
@@ -144,13 +144,13 @@ SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !         Read in the information heading.
   !
   neltmx = Nelt
-  READ (Iunit,99001) N , Nelt , Isym , irhs , isoln
+  READ (Iunit,99001) N, Nelt, Isym, irhs, isoln
   99001 FORMAT (5I10)
   Nelt = MIN(Nelt,neltmx)
   !
   !         Read in the matrix non-zeros in Triad format.
-  DO i = 1 , Nelt
-    READ (Iunit,99002) Ia(i) , Ja(i) , A(i)
+  DO i = 1, Nelt
+    READ (Iunit,99002) Ia(i), Ja(i), A(i)
     99002   FORMAT (1X,I5,1X,I5,1X,D16.7)
   ENDDO
   !
@@ -163,7 +163,7 @@ SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
       jobret = 1
       READ (Iunit,99003) (Rhs(i),i=1,N)
     ELSE
-      DO i = 1 , N
+      DO i = 1, N
         Rhs(i) = 0
       ENDDO
     ENDIF
@@ -177,7 +177,7 @@ SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
       jobret = jobret + 2
       READ (Iunit,99003) (Soln(i),i=1,N)
     ELSE
-      DO i = 1 , N
+      DO i = 1, N
         Soln(i) = 0
       ENDDO
     ENDIF

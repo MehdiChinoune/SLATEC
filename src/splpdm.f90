@@ -6,9 +6,9 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   IMPLICIT NONE
   !*--SPLPDM7
   !*** Start of declarations inserted by SPAG
-  REAL aij , SASUM
-  INTEGER i , Info , Iopt , iplace , j , k , Lbm , LCOl , LENl , LENu ,&
-    Lmx , LP , LROw , Mrelas , NCP , Nredc , Nvars , nzbm
+  REAL aij, SASUM
+  INTEGER i, Info, Iopt, iplace, j, k, Lbm, LCOl, LENl, LENu ,&
+    Lmx, LP, LROw, Mrelas, NCP, Nredc, Nvars, nzbm
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPLPDM
   !***SUBSIDIARY
@@ -36,15 +36,15 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !   900510  Convert XERRWV calls to XERMSG calls, changed do-it-yourself
   !           DO loops to DO loops.  (RWC)
   !***END PROLOGUE  SPLPDM
-  INTEGER Ibasis(*) , Imat(*) , Ibrc(Lbm,2) , Ipr(*) , Iwr(*) , Ind(*) ,&
+  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*) ,&
     Ibb(*)
-  REAL Amat(*) , Basmat(*) , Csc(*) , Wr(*) , Anorm , Eps , Gg , one ,&
-    SMAll , Uu , zero
-  LOGICAL Singlr , Redbas
+  REAL Amat(*), Basmat(*), Csc(*), Wr(*), Anorm, Eps, Gg, one ,&
+    SMAll, Uu, zero
+  LOGICAL Singlr, Redbas
   CHARACTER(16) :: xern3
   !
   !     COMMON BLOCK USED BY LA05 () PACKAGE..
-  COMMON /LA05DS/ SMAll , LP , LENl , LENu , NCP , LROw , LCOl
+  COMMON /LA05DS/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
   !
   !***FIRST EXECUTABLE STATEMENT  SPLPDM
   zero = 0.E0
@@ -59,7 +59,7 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !     DEFINE DEPENDENT VARIABLE COLUMNS. THESE ARE
   !     COLS. OF THE IDENTITY MATRIX AND IMPLICITLY GENERATED.
   !
-  DO k = 1 , Mrelas
+  DO k = 1, Mrelas
     j = Ibasis(k)
     IF ( j>Nvars ) THEN
       nzbm = nzbm + 1

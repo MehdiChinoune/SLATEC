@@ -4,10 +4,10 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   IMPLICIT NONE
   !*--POLYVL5
   !*** Start of declarations inserted by SPAG
-  REAL C , fac , pione , pitwo , pone , ptwo , Work , X , xk , Xx , Yfit , &
+  REAL C, fac, pione, pitwo, pone, ptwo, Work, X, xk, Xx, Yfit, &
     Yp
-  INTEGER i , Ierr , im1 , izero , k , km1 , km1pi , km2pn , km2pni , m , &
-    mm , N , Nder , ndr , nmkp1 , npkm1
+  INTEGER i, Ierr, im1, izero, k, km1, km1pi, km2pn, km2pni, m, &
+    mm, N, Nder, ndr, nmkp1, npkm1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POLYVL
   !***PURPOSE  Calculate the value of a polynomial and its first NDER
@@ -59,7 +59,7 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   !     YFIT - the value of the polynomial at XX
   !
   !     YP   - the derivatives of the polynomial at XX.  The derivative of
-  !            order J at XX is stored in  YP(J) , J = 1,...,NDER.
+  !            order J at XX is stored in  YP(J), J = 1,...,NDER.
   !
   !     IERR - Output error flag with the following possible values.
   !          = 1  indicates normal execution
@@ -82,7 +82,7 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  POLYVL
-  DIMENSION Yp(*) , X(*) , C(*) , Work(*)
+  DIMENSION Yp(*), X(*), C(*), Work(*)
   !***FIRST EXECUTABLE STATEMENT  POLYVL
   Ierr = 1
   IF ( Nder<=0 ) THEN
@@ -93,7 +93,7 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     pone = C(1)
     Yfit = pone
     IF ( N==1 ) RETURN
-    DO k = 2 , N
+    DO k = 2, N
       pitwo = (Xx-X(k-1))*pione
       pione = pitwo
       ptwo = pone + pitwo*C(k)
@@ -125,7 +125,7 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     !     *****  START OF THE CASE NDER .GT. 0  AND N .GT. 1
     !     *****  THE POLYNOMIAL AND ITS DERIVATIVES WILL BE EVALUATED AT XX
     !
-    DO k = 1 , ndr
+    DO k = 1, ndr
       Yp(k) = C(k+1)
     ENDDO
     !
@@ -144,7 +144,7 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     !
     Work(1) = 1.0
     pone = C(1)
-    DO k = 2 , N
+    DO k = 2, N
       km1 = k - 1
       npkm1 = N + k - 1
       Work(npkm1) = Xx - X(km1)
@@ -168,11 +168,11 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
       !                  *  *       YP(K-1) = YP(K-1) + W(I)*C(K-1+I)
       !                  ******  CONTINUE
       !
-      DO k = 2 , mm
+      DO k = 2, mm
         nmkp1 = N - k + 1
         km1 = k - 1
         km2pn = k - 2 + N
-        DO i = 2 , nmkp1
+        DO i = 2, nmkp1
           km2pni = km2pn + i
           im1 = i - 1
           km1pi = km1 + i
@@ -182,7 +182,7 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
       ENDDO
       IF ( ndr/=1 ) THEN
         fac = 1.0
-        DO k = 2 , ndr
+        DO k = 2, ndr
           xk = k
           fac = xk*fac
           Yp(k) = fac*Yp(k)
@@ -196,7 +196,7 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     !
     !     *****  SET EXCESS DERIVATIVES TO ZERO.
     !
-    DO k = N , Nder
+    DO k = N, Nder
       Yp(k) = 0.0
     ENDDO
   ELSE
@@ -204,7 +204,7 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
     !
     !     *****  CODING FOR THE CASE  N=1 AND NDER .GT. 0
     !
-    DO k = 1 , Nder
+    DO k = 1, Nder
       Yp(k) = 0.0
     ENDDO
     RETURN

@@ -4,8 +4,8 @@ FUNCTION ATANH(X)
   IMPLICIT NONE
   !*--ATANH5
   !*** Start of declarations inserted by SPAG
-  REAL ATANH , atnhcs , CSEVL , dxrel , R1MACH , sqeps , X , y
-  INTEGER INITS , nterms
+  REAL ATANH, atnhcs, CSEVL, dxrel, R1MACH, sqeps, X, y
+  INTEGER INITS, nterms
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ATANH
   !***PURPOSE  Compute the arc hyperbolic tangent.
@@ -38,7 +38,7 @@ FUNCTION ATANH(X)
   !***END PROLOGUE  ATANH
   DIMENSION atnhcs(15)
   LOGICAL first
-  SAVE atnhcs , nterms , dxrel , sqeps , first
+  SAVE atnhcs, nterms, dxrel, sqeps, first
   DATA atnhcs(1)/.094395102393195492E0/
   DATA atnhcs(2)/.049198437055786159E0/
   DATA atnhcs(3)/.002102593522455432E0/

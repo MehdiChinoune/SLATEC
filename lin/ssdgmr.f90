@@ -5,7 +5,7 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   IMPLICIT NONE
   !*--SSDGMR6
   !*** Start of declarations inserted by SPAG
-  REAL SSDI , SSMV
+  REAL SSDI, SSMV
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSDGMR
   !***PURPOSE  Diagonally Scaled GMRES Iterative Sparse Ax=b Solver.
@@ -325,19 +325,19 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Parameters ..
-  INTEGER LOCRB , LOCIB
+  INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  REAL Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
-    Nelt , Nsave
+  REAL Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
+    Nelt, Nsave
   !     .. Array Arguments ..
-  REAL A(Nelt) , B(N) , Rwork(Lenw) , X(N)
-  INTEGER Ia(Nelt) , Iwork(Leniw) , Ja(Nelt)
+  REAL A(Nelt), B(N), Rwork(Lenw), X(N)
+  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin , locigw , lociw , locrgw , locw , myitol
+  INTEGER locdin, locigw, lociw, locrgw, locw, myitol
   !     .. External Subroutines ..
-  EXTERNAL SCHKW , SGMRES , SS2Y , SSDI , SSDS , SSMV
+  EXTERNAL SCHKW, SGMRES, SS2Y, SSDI, SSDS, SSMV
   !***FIRST EXECUTABLE STATEMENT  SSDGMR
   !
   Ierr = 0

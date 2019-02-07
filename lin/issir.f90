@@ -157,11 +157,11 @@ INTEGER FUNCTION ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   921026  Changed 1.0E10 to R1MACH(2).  (FNF)
   !***END PROLOGUE  ISSIR
   !     .. Scalar Arguments ..
-  REAL Bnrm , Err , Solnrm , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
+  REAL Bnrm, Err, Solnrm, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt) , B(N) , Dz(N) , R(N) , Rwork(*) , X(N) , Z(N)
-  INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
+  REAL A(Nelt), B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL MSOLVE
   !     .. Arrays in Common ..
@@ -169,8 +169,8 @@ INTEGER FUNCTION ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
-  REAL R1MACH , SNRM2
-  EXTERNAL R1MACH , SNRM2
+  REAL R1MACH, SNRM2
+  EXTERNAL R1MACH, SNRM2
   !     .. Common blocks ..
   COMMON /SSLBLK/ SOLn
   !***FIRST EXECUTABLE STATEMENT  ISSIR
@@ -190,7 +190,7 @@ INTEGER FUNCTION ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
     IF ( Iter==0 ) Solnrm = SNRM2(N,SOLn,1)
-    DO i = 1 , N
+    DO i = 1, N
       Dz(i) = X(i) - SOLn(i)
     ENDDO
     Err = SNRM2(N,Dz,1)/Solnrm
@@ -202,7 +202,7 @@ INTEGER FUNCTION ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   ENDIF
   !
   IF ( Iunit/=0 ) THEN
-    WRITE (Iunit,99001) Iter , Err
+    WRITE (Iunit,99001) Iter, Err
     99001   FORMAT (5X,'ITER = ',I4,' Error Estimate = ',E16.7)
   ENDIF
   !

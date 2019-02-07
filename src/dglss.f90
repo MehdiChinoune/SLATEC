@@ -121,11 +121,11 @@ SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   IMPLICIT NONE
   !*--DGLSS122
   !*** Start of declarations inserted by SPAG
-  REAL(8) :: A , ae , B , re , Rnorm , Work
-  INTEGER Info , key , krank , ksure , Liw , Lw , M , Mda , Mdb , mode , N , &
-    Nb , np
+  REAL(8) :: A, ae, B, re, Rnorm, Work
+  INTEGER Info, key, krank, ksure, Liw, Lw, M, Mda, Mdb, mode, N, &
+    Nb, np
   !*** End of declarations inserted by SPAG
-  DIMENSION A(Mda,*) , B(Mdb,*) , Rnorm(*) , Work(*)
+  DIMENSION A(Mda,*), B(Mdb,*), Rnorm(*), Work(*)
   INTEGER Iwork(*)
   !
   !***FIRST EXECUTABLE STATEMENT  DGLSS
@@ -150,4 +150,5 @@ SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   IF ( Info==-1 ) RETURN
   Info = N - krank
   RETURN
-  99999 END SUBROUTINE DGLSS
+  99999 CONTINUE
+  END SUBROUTINE DGLSS

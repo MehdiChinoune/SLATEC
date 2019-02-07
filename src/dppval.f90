@@ -66,9 +66,9 @@ REAL(8) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPPVAL
   !
-  INTEGER i , Ideriv , Inppv , j , K , Ldc , Lxi , ndummy , kk
-  REAL(8) :: C , dx , X , Xi
-  DIMENSION Xi(*) , C(Ldc,*)
+  INTEGER i, Ideriv, Inppv, j, K, Ldc, Lxi, ndummy, kk
+  REAL(8) :: C, dx, X, Xi
+  DIMENSION Xi(*), C(Ldc,*)
   !***FIRST EXECUTABLE STATEMENT  DPPVAL
   DPPVAL = 0.0D0
   IF ( K<1 ) THEN
@@ -100,4 +100,5 @@ REAL(8) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
     ENDDO
   ENDIF
   RETURN
-  99999 END FUNCTION DPPVAL
+  99999 CONTINUE
+  END FUNCTION DPPVAL

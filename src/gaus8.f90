@@ -78,21 +78,21 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
       REAL, INTENT(IN) :: X
     END FUNCTION
   END INTERFACE
-  INTEGER Ierr , k , kml , kmx , l , lmn , lmx , lr , mxl , nbits , nib ,&
-    nlmn , nlmx
+  INTEGER Ierr, k, kml, kmx, l, lmn, lmx, lr, mxl, nbits, nib ,&
+    nlmn, nlmx
   INTEGER I1MACH
-  REAL A , aa , ae , anib , Ans , area , B , c , ce , ee , ef , eps , Err ,&
-    est , gl , glr , gr , hh , sq2 , tol , vl , vr , w1 , w2 , w3 , w4 ,&
-    x1 , x2 , x3 , x4 , x , h
+  REAL A, aa, ae, anib, Ans, area, B, c, ce, ee, ef, eps, Err ,&
+    est, gl, glr, gr, hh, sq2, tol, vl, vr, w1, w2, w3, w4 ,&
+    x1, x2, x3, x4, x, h
   REAL R1MACH
-  DIMENSION aa(30) , hh(30) , lr(30) , vl(30) , gr(30)
-  SAVE x1 , x2 , x3 , x4 , w1 , w2 , w3 , w4 , sq2 , nlmn , kmx , kml
-  DATA x1 , x2 , x3 , x4/1.83434642495649805E-01 , 5.25532409916328986E-01 ,&
-    7.96666477413626740E-01 , 9.60289856497536232E-01/
-  DATA w1 , w2 , w3 , w4/3.62683783378361983E-01 , 3.13706645877887287E-01 ,&
-    2.22381034453374471E-01 , 1.01228536290376259E-01/
+  DIMENSION aa(30), hh(30), lr(30), vl(30), gr(30)
+  SAVE x1, x2, x3, x4, w1, w2, w3, w4, sq2, nlmn, kmx, kml
+  DATA x1, x2, x3, x4/1.83434642495649805E-01, 5.25532409916328986E-01 ,&
+    7.96666477413626740E-01, 9.60289856497536232E-01/
+  DATA w1, w2, w3, w4/3.62683783378361983E-01, 3.13706645877887287E-01 ,&
+    2.22381034453374471E-01, 1.01228536290376259E-01/
   DATA sq2/1.41421356E0/
-  DATA nlmn/1/ , kmx/5000/ , kml/6/
+  DATA nlmn/1/, kmx/5000/, kml/6/
   !***FIRST EXECUTABLE STATEMENT  GAUS8
   !
   !     Initialize
@@ -148,79 +148,80 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
     ef = 0.5E0
     mxl = 0
   ENDIF
-  100  DO
-  !
-  !     Compute refined estimates, estimate the error, etc.
-  !
-  gl = G8(aa(l)+hh(l),hh(l))
-  gr(l) = G8(aa(l)+3.0E0*hh(l),hh(l))
-  k = k + 16
-  area = area + (ABS(gl)+ABS(gr(l))-ABS(est))
-  !     IF (L .LT. LMN) GO TO 11
-  glr = gl + gr(l)
-  ee = ABS(est-glr)*ef
-  ae = MAX(eps*area,tol*ABS(glr))
-  IF ( ee<=ae ) EXIT
-  !
-  !     Consider the left half of this level
-  !
-  IF ( k>kmx ) lmx = kml
-  IF ( l>=lmx ) THEN
-    mxl = 1
-    EXIT
-  ELSE
-    l = l + 1
-    eps = eps*0.5E0
-    ef = ef/sq2
-    hh(l) = hh(l-1)*0.5E0
-    lr(l) = -1
-    aa(l) = aa(l-1)
-    est = gl
-  ENDIF
-ENDDO
-ce = ce + (est-glr)
-IF ( lr(l)<=0 ) THEN
-  !
-  !     Proceed to right half at this level
-  !
-  vl(l) = glr
-ELSE
-  !
-  !     Return one level
-  !
-  vr = glr
-  DO WHILE ( l>1 )
-    l = l - 1
-    eps = eps*2.0E0
-    ef = ef*sq2
-    IF ( lr(l)<=0 ) THEN
-      vl(l) = vl(l+1) + vr
-      GOTO 200
+  100 CONTINUE
+  DO
+    !
+    !     Compute refined estimates, estimate the error, etc.
+    !
+    gl = G8(aa(l)+hh(l),hh(l))
+    gr(l) = G8(aa(l)+3.0E0*hh(l),hh(l))
+    k = k + 16
+    area = area + (ABS(gl)+ABS(gr(l))-ABS(est))
+    !     IF (L .LT. LMN) GO TO 11
+    glr = gl + gr(l)
+    ee = ABS(est-glr)*ef
+    ae = MAX(eps*area,tol*ABS(glr))
+    IF ( ee<=ae ) EXIT
+    !
+    !     Consider the left half of this level
+    !
+    IF ( k>kmx ) lmx = kml
+    IF ( l>=lmx ) THEN
+      mxl = 1
+      EXIT
     ELSE
-      vr = vl(l+1) + vr
+      l = l + 1
+      eps = eps*0.5E0
+      ef = ef/sq2
+      hh(l) = hh(l-1)*0.5E0
+      lr(l) = -1
+      aa(l) = aa(l-1)
+      est = gl
     ENDIF
   ENDDO
-  !
-  !     Exit
-  !
-  Ans = vr
-  IF ( (mxl/=0).AND.(ABS(ce)>2.0E0*tol*area) ) THEN
-    Ierr = 2
-    CALL XERMSG('SLATEC','GAUS8',&
-      'ANS is probably insufficiently accurate.',3,1)
+  ce = ce + (est-glr)
+  IF ( lr(l)<=0 ) THEN
+    !
+    !     Proceed to right half at this level
+    !
+    vl(l) = glr
+  ELSE
+    !
+    !     Return one level
+    !
+    vr = glr
+    DO WHILE ( l>1 )
+      l = l - 1
+      eps = eps*2.0E0
+      ef = ef*sq2
+      IF ( lr(l)<=0 ) THEN
+        vl(l) = vl(l+1) + vr
+        GOTO 200
+      ELSE
+        vr = vl(l+1) + vr
+      ENDIF
+    ENDDO
+    !
+    !     Exit
+    !
+    Ans = vr
+    IF ( (mxl/=0).AND.(ABS(ce)>2.0E0*tol*area) ) THEN
+      Ierr = 2
+      CALL XERMSG('SLATEC','GAUS8',&
+        'ANS is probably insufficiently accurate.',3,1)
+    ENDIF
+    IF ( Err<0.0E0 ) Err = ce
+    GOTO 99999
   ENDIF
-  IF ( Err<0.0E0 ) Err = ce
-  GOTO 99999
-ENDIF
-200  est = gr(l-1)
-lr(l) = 1
-aa(l) = aa(l) + 4.0E0*hh(l)
-GOTO 100
-99999 RETURN
+  200  est = gr(l-1)
+  lr(l) = 1
+  aa(l) = aa(l) + 4.0E0*hh(l)
+  GOTO 100
+  99999 RETURN
 CONTAINS
-REAL FUNCTION G8(x,h)
-  REAL, INTENT(IN) :: x, h
-  G8 = h*((w1*(FUN(x-x1*h)+FUN(x+x1*h))+w2*(FUN(x-x2*h)+FUN(x+x2*h)))&
-    +(w3*(FUN(x-x3*h)+FUN(x+x3*h))+w4*(FUN(x-x4*h)+FUN(x+x4*h))))
-END FUNCTION G8
+  REAL FUNCTION G8(x,h)
+    REAL, INTENT(IN) :: x, h
+    G8 = h*((w1*(FUN(x-x1*h)+FUN(x+x1*h))+w2*(FUN(x-x2*h)+FUN(x+x2*h)))&
+      +(w3*(FUN(x-x3*h)+FUN(x+x3*h))+w4*(FUN(x-x4*h)+FUN(x+x4*h))))
+  END FUNCTION G8
 END SUBROUTINE GAUS8

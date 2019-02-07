@@ -128,17 +128,17 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !           D. W. Lozier.
   !***END PROLOGUE  RC6J
   !
-  INTEGER Ndim , Ier
-  REAL L2 , L3 , L4 , L5 , L6 , L1min , L1max , Sixcof(Ndim)
+  INTEGER Ndim, Ier
+  REAL L2, L3, L4, L5, L6, L1min, L1max, Sixcof(Ndim)
   !
-  INTEGER i , index , lstep , n , nfin , nfinp1 , nfinp2 , nfinp3 , nlim , &
+  INTEGER i, index, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, &
     nstep2
-  REAL a1 , a1s , a2 , a2s , c1 , c1old , c2 , cnorm , R1MACH , denom , dv , &
-    eps , huge , l1 , newfac , oldfac , one , ratio , sign1 , sign2 , &
-    srhuge , srtiny , sum1 , sum2 , sumbac , sumfor , sumuni , three , &
-    thresh , tiny , two , x , x1 , x2 , x3 , y , y1 , y2 , y3 , zero
+  REAL a1, a1s, a2, a2s, c1, c1old, c2, cnorm, R1MACH, denom, dv, &
+    eps, huge, l1, newfac, oldfac, one, ratio, sign1, sign2, &
+    srhuge, srtiny, sum1, sum2, sumbac, sumfor, sumuni, three, &
+    thresh, tiny, two, x, x1, x2, x3, y, y1, y2, y3, zero
   !
-  DATA zero , eps , one , two , three/0.0 , 0.01 , 1.0 , 2.0 , 3.0/
+  DATA zero, eps, one, two, three/0.0, 0.01, 1.0, 2.0, 3.0/
   !
   !***FIRST EXECUTABLE STATEMENT  RC6J
   Ier = 0
@@ -273,7 +273,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
         !  has to be rescaled to prevent overflow
         !
         !     LSCALE = LSCALE + 1
-        DO i = 1 , lstep
+        DO i = 1, lstep
           IF ( ABS(Sixcof(i))<srtiny ) Sixcof(i) = zero
           Sixcof(i) = Sixcof(i)/srhuge
         ENDDO
@@ -355,7 +355,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
           !  has to be rescaled to prevent overflow
           !
           !     LSCALE = LSCALE + 1
-          DO i = 1 , lstep
+          DO i = 1, lstep
             index = nfin - i + 1
             IF ( ABS(Sixcof(index))<srtiny ) Sixcof(index) = zero
             Sixcof(index) = Sixcof(index)/srhuge
@@ -395,13 +395,13 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
       !
       nlim = nlim + 1
       ratio = one/ratio
-      DO n = nlim , nfin
+      DO n = nlim, nfin
         Sixcof(n) = ratio*Sixcof(n)
       ENDDO
       sumuni = sumfor + ratio*ratio*sumbac
     ELSE
       !
-      DO n = 1 , nlim
+      DO n = 1, nlim
         Sixcof(n) = ratio*Sixcof(n)
       ENDDO
       sumuni = ratio*ratio*sumfor + sumbac
@@ -433,16 +433,17 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   IF ( ABS(cnorm)<one ) THEN
     !
     thresh = tiny/ABS(cnorm)
-    DO n = 1 , nfin
+    DO n = 1, nfin
       IF ( ABS(Sixcof(n))<thresh ) Sixcof(n) = zero
       Sixcof(n) = cnorm*Sixcof(n)
     ENDDO
     GOTO 99999
   ENDIF
   !
-  DO n = 1 , nfin
+  DO n = 1, nfin
     Sixcof(n) = cnorm*Sixcof(n)
   ENDDO
   RETURN
   !
-  99999 END SUBROUTINE RC6J
+  99999 CONTINUE
+  END SUBROUTINE RC6J

@@ -384,21 +384,21 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  LSEI
-  INTEGER Ip(3) , Ma , Mdw , Me , Mg , Mode , N
-  REAL Prgopt(*) , Rnorme , Rnorml , W(Mdw,*) , Ws(*) , X(*)
+  INTEGER Ip(3), Ma, Mdw, Me, Mg, Mode, N
+  REAL Prgopt(*), Rnorme, Rnorml, W(Mdw,*), Ws(*), X(*)
   !
-  EXTERNAL H12 , LSI , R1MACH , SASUM , SAXPY , SCOPY , SDOT , SNRM2 ,&
-    SSCAL , SSWAP , XERMSG
-  REAL R1MACH , SASUM , SDOT , SNRM2
+  EXTERNAL H12, LSI, R1MACH, SASUM, SAXPY, SCOPY, SDOT, SNRM2 ,&
+    SSCAL, SSWAP, XERMSG
+  REAL R1MACH, SASUM, SDOT, SNRM2
   !
-  REAL enorm , fnorm , gam , rb , rn , rnmax , size , sn , snmax , srelpr ,&
-    t , tau , uj , up , vj , xnorm , xnrme
-  INTEGER i , imax , j , jp1 , k , key , kranke , last , lchk , link , m ,&
-    mapke1 , mdeqc , mend , mep1 , n1 , n2 , next , nlink , nopt ,&
-    np1 , ntimes
-  LOGICAL cov , first
-  CHARACTER(8) :: xern1 , xern2 , xern3 , xern4
-  SAVE first , srelpr
+  REAL enorm, fnorm, gam, rb, rn, rnmax, size, sn, snmax, srelpr ,&
+    t, tau, uj, up, vj, xnorm, xnrme
+  INTEGER i, imax, j, jp1, k, key, kranke, last, lchk, link, m ,&
+    mapke1, mdeqc, mend, mep1, n1, n2, next, nlink, nopt ,&
+    np1, ntimes
+  LOGICAL cov, first
+  CHARACTER(8) :: xern1, xern2, xern3, xern4
+  SAVE first, srelpr
   !
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  LSEI
@@ -506,7 +506,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       IF ( key==1 ) THEN
         cov = Prgopt(last+2)/=0.E0
       ELSEIF ( key==2.AND.Prgopt(last+2)/=0.E0 ) THEN
-        DO j = 1 , N
+        DO j = 1, N
           t = SNRM2(m,W(1,j),1)
           IF ( t/=0.E0 ) t = 1.E0/t
           Ws(j+n1-1) = t
@@ -528,7 +528,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       CYCLE
     ENDIF
     !
-    DO j = 1 , N
+    DO j = 1, N
       CALL SSCAL(m,Ws(n1+j-1),W(1,j),1)
     ENDDO
     !
@@ -545,19 +545,19 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     !     Compute norm of equality constraint matrix and right side.
     !
     enorm = 0.E0
-    DO j = 1 , N
+    DO j = 1, N
       enorm = MAX(enorm,SASUM(Me,W(1,j),1))
     ENDDO
     !
     fnorm = SASUM(Me,W(1,np1),1)
     snmax = 0.E0
     rnmax = 0.E0
-    DO i = 1 , kranke
+    DO i = 1, kranke
       !
       !        Compute maximum ratio of vector lengths. Partition is at
       !        column I.
       !
-      DO k = i , Me
+      DO k = i, Me
         sn = SDOT(N-i+1,W(k,i),Mdw,W(k,i),Mdw)
         rn = SDOT(i-1,W(k,1),Mdw,W(k,1),Mdw)
         IF ( rn==0.E0.AND.sn>snmax ) THEN
@@ -594,7 +594,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !     KRANKE by KRANKE upper triangular form.
   !
   IF ( kranke<Me ) THEN
-    DO k = kranke , 1 , -1
+    DO k = kranke, 1, -1
       !
       !           Apply transformation to matrix cols. 1,...,K-1.
       !
@@ -609,7 +609,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !     Solve for variables 1,...,KRANKE in new coordinates.
   !
   CALL SCOPY(kranke,W(1,np1),1,X,1)
-  DO i = 1 , kranke
+  DO i = 1, kranke
     X(i) = (X(i)-SDOT(i-1,W(i,1),Mdw,X,1))/W(i,i)
   ENDDO
   !
@@ -617,7 +617,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !
   mep1 = Me + 1
   Rnorml = 0.E0
-  DO i = mep1 , m
+  DO i = mep1, m
     W(i,np1) = W(i,np1) - SDOT(kranke,W(i,1),Mdw,X,1)
     sn = SDOT(kranke,W(i,1),Mdw,W(i,1),Mdw)
     rn = SDOT(N-kranke,W(i,kranke+1),Mdw,W(i,kranke+1),Mdw)
@@ -632,7 +632,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !     Move reduced problem data upward if KRANKE.LT.ME.
   !
   IF ( kranke<Me ) THEN
-    DO j = 1 , np1
+    DO j = 1, np1
       CALL SCOPY(m-Me,W(Me+1,j),1,W(kranke+1,j),1)
     ENDDO
   ENDIF
@@ -657,7 +657,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
       xnorm = SASUM(N,X,1)
       mapke1 = Ma + kranke + 1
       mend = Ma + kranke + Mg
-      DO i = mapke1 , mend
+      DO i = mapke1, mend
         size = SASUM(N,W(i,1),Mdw)*xnorm + ABS(W(i,np1))
         IF ( W(i,np1)>tau*size ) THEN
           Mode = Mode + 2
@@ -674,25 +674,25 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     !
     !        Reapply transformation to put solution in original coordinates.
     !
-    DO i = kranke , 1 , -1
+    DO i = kranke, 1, -1
       CALL H12(2,i,i+1,N,W(i,1),Mdw,Ws(i),X,1,1,1)
     ENDDO
     !
     !        Compute covariance matrix of equality constrained problem.
     !
     IF ( cov ) THEN
-      DO j = MIN(kranke,N-1) , 1 , -1
+      DO j = MIN(kranke,N-1), 1, -1
         rb = Ws(j)*W(j,j)
         IF ( rb/=0.E0 ) rb = 1.E0/rb
         jp1 = j + 1
-        DO i = jp1 , N
+        DO i = jp1, N
           W(i,j) = rb*SDOT(N-j,W(i,jp1),Mdw,W(j,jp1),Mdw)
         ENDDO
         !
         gam = 0.5E0*rb*SDOT(N-j,W(jp1,j),1,W(j,jp1),Mdw)
         CALL SAXPY(N-j,gam,W(j,jp1),Mdw,W(jp1,j),1)
-        DO i = jp1 , N
-          DO k = i , N
+        DO i = jp1, N
+          DO k = i, N
             W(i,k) = W(i,k) + W(j,i)*W(k,j) + W(i,j)*W(j,k)
             W(k,i) = W(i,k)
           ENDDO
@@ -700,7 +700,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
         uj = Ws(j)
         vj = gam*uj
         W(j,j) = uj*vj + uj*vj
-        DO i = jp1 , N
+        DO i = jp1, N
           W(j,i) = uj*W(i,j) + vj*W(j,i)
         ENDDO
         CALL SCOPY(N-j,W(j,jp1),Mdw,W(jp1,j),1)
@@ -711,7 +711,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !     Apply the scaling to the covariance matrix.
   !
   IF ( cov ) THEN
-    DO i = 1 , N
+    DO i = 1, N
       CALL SSCAL(N,Ws(i+n1-1),W(i,1),Mdw)
       CALL SSCAL(N,Ws(i+n1-1),W(1,i),1)
     ENDDO
@@ -719,12 +719,13 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !
   !     Rescale solution vector.
   !
-  100  IF ( Mode<=1 ) THEN
-  DO j = 1 , N
-    X(j) = X(j)*Ws(n1+j-1)
-  ENDDO
-ENDIF
-!
-Ip(1) = kranke
-Ip(3) = Ip(3) + 2*kranke + N
+  100 CONTINUE
+  IF ( Mode<=1 ) THEN
+    DO j = 1, N
+      X(j) = X(j)*Ws(n1+j-1)
+    ENDDO
+  ENDIF
+  !
+  Ip(1) = kranke
+  Ip(3) = Ip(3) + 2*kranke + N
 END SUBROUTINE LSEI

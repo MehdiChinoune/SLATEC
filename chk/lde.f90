@@ -23,12 +23,12 @@ LOGICAL FUNCTION LDE(Ri,Rj,Lr)
   !     .. Scalar Arguments ..
   INTEGER Lr
   !     .. Array Arguments ..
-  REAL(8) :: Ri(*) , Rj(*)
+  REAL(8) :: Ri(*), Rj(*)
   !     .. Local Scalars ..
   INTEGER i
   !***FIRST EXECUTABLE STATEMENT  LDE
   LDE = .TRUE.
-  DO i = 1 , Lr
+  DO i = 1, Lr
     IF ( Ri(i)/=Rj(i) ) THEN
       LDE = .FALSE.
       EXIT

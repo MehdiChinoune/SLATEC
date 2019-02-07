@@ -4,7 +4,7 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   IMPLICIT NONE
   !*--DNRM25
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , j , N , nn
+  INTEGER i, Incx, j, N, nn
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DNRM2
   !***PURPOSE  Compute the Euclidean length (L2 norm) of a vector.
@@ -80,11 +80,11 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DNRM2
   INTEGER next
-  REAL(8) :: Dx(*) , cutlo , cuthi , hitest , sum , xmax , zero , one
-  SAVE cutlo , cuthi , zero , one
-  DATA zero , one/0.0D0 , 1.0D0/
+  REAL(8) :: Dx(*), cutlo, cuthi, hitest, sum, xmax, zero, one
+  SAVE cutlo, cuthi, zero, one
+  DATA zero, one/0.0D0, 1.0D0/
   !
-  DATA cutlo , cuthi/8.232D-11 , 1.304D19/
+  DATA cutlo, cuthi/8.232D-11, 1.304D19/
   !***FIRST EXECUTABLE STATEMENT  DNRM2
   IF ( N>0 ) THEN
     !
@@ -110,13 +110,15 @@ CASE(700)
   GOTO 700
 END SELECT
 
-200  IF ( ABS(Dx(i))>cutlo ) GOTO 800
+200 CONTINUE
+IF ( ABS(Dx(i))>cutlo ) GOTO 800
 next = 300
 xmax = zero
 !
 !                        PHASE 1.  SUM IS ZERO
 !
-300  IF ( Dx(i)==zero ) GOTO 900
+300 CONTINUE
+IF ( Dx(i)==zero ) GOTO 900
 IF ( ABS(Dx(i))>cutlo ) GOTO 800
 !
 !                                PREPARE FOR PHASE 2.
@@ -137,7 +139,8 @@ GOTO 900
 !                   PHASE 2.  SUM IS SMALL.
 !                             SCALE TO AVOID DESTRUCTIVE UNDERFLOW.
 !
-600  IF ( ABS(Dx(i))>cutlo ) THEN
+600 CONTINUE
+IF ( ABS(Dx(i))>cutlo ) THEN
 !
 !                  PREPARE FOR PHASE 3.
 !
@@ -148,7 +151,8 @@ ENDIF
 !                     COMMON CODE FOR PHASES 2 AND 4.
 !                     IN PHASE 4 SUM IS LARGE.  SCALE TO AVOID OVERFLOW.
 !
-700  IF ( ABS(Dx(i))<=xmax ) THEN
+700 CONTINUE
+IF ( ABS(Dx(i))<=xmax ) THEN
 sum = sum + (Dx(i)/xmax)**2
 ELSE
 sum = one + sum*(xmax/Dx(i))**2
@@ -163,7 +167,7 @@ GOTO 900
 !
 !                   PHASE 3.  SUM IS MID-RANGE.  NO SCALING.
 !
-DO j = i , nn , Incx
+DO j = i, nn, Incx
 IF ( ABS(Dx(j))>=hitest ) GOTO 400
 sum = sum + Dx(j)**2
 ENDDO
@@ -178,4 +182,5 @@ IF ( i<=nn ) GOTO 100
 !              COMPUTE SQUARE ROOT AND ADJUST FOR SCALING.
 !
 DNRM2 = xmax*SQRT(sum)
-99999 END FUNCTION DNRM2
+  99999 CONTINUE
+  END FUNCTION DNRM2

@@ -34,7 +34,7 @@ SUBROUTINE SPPFA(Ap,N,Info)
   !
   !     On Return
   !
-  !        AP      an upper triangular matrix  R , stored in packed
+  !        AP      an upper triangular matrix  R, stored in packed
   !                form, so that  A = TRANS(R)*R .
   !
   !        INFO    INTEGER
@@ -68,22 +68,22 @@ SUBROUTINE SPPFA(Ap,N,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SPPFA
-  INTEGER N , Info
+  INTEGER N, Info
   REAL Ap(*)
   !
-  REAL SDOT , t
+  REAL SDOT, t
   REAL s
-  INTEGER j , jj , jm1 , k , kj , kk
+  INTEGER j, jj, jm1, k, kj, kk
   !***FIRST EXECUTABLE STATEMENT  SPPFA
   jj = 0
-  DO j = 1 , N
+  DO j = 1, N
     Info = j
     s = 0.0E0
     jm1 = j - 1
     kj = jj
     kk = 0
     IF ( jm1>=1 ) THEN
-      DO k = 1 , jm1
+      DO k = 1, jm1
         kj = kj + 1
         t = Ap(kj) - SDOT(k-1,Ap(kk+1),1,Ap(jj+1),1)
         kk = kk + k
@@ -98,4 +98,5 @@ SUBROUTINE SPPFA(Ap,N,Info)
     Ap(jj) = SQRT(s)
   ENDDO
   Info = 0
-  99999 END SUBROUTINE SPPFA
+  99999 CONTINUE
+  END SUBROUTINE SPPFA

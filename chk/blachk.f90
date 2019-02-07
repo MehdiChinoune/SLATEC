@@ -4,8 +4,8 @@ SUBROUTINE BLACHK(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--BLACHK5
   !*** Start of declarations inserted by SPAG
-  INTEGER ICAse , INCx , INCy , Kprint , Lun , MODe , N , NPRint
-  REAL sdfac , sfac
+  INTEGER ICAse, INCx, INCy, Kprint, Lun, MODe, N, NPRint
+  REAL sdfac, sfac
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BLACHK
   !***PURPOSE  Quick check for Basic Linear Algebra Subprograms.
@@ -27,21 +27,21 @@ SUBROUTINE BLACHK(Lun,Kprint,Ipass)
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  BLACHK
-  INTEGER Ipass , jtest(38)
-  REAL(8) :: dfac , dqfac
+  INTEGER Ipass, jtest(38)
+  REAL(8) :: dfac, dqfac
   LOGICAL PASs
-  COMMON /COMBLA/ NPRint , ICAse , N , INCx , INCy , MODe , PASs
-  DATA sfac , sdfac , dfac , dqfac/.625E-1 , .50 , .625D-1 , 0.625D-1/
-  DATA jtest/1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , &
-    1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , &
-    1 , 1 , 1 , 1 , 1/
+  COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
+  DATA sfac, sdfac, dfac, dqfac/.625E-1, .50, .625D-1, 0.625D-1/
+  DATA jtest/1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, &
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, &
+    1, 1, 1, 1, 1/
   !***FIRST EXECUTABLE STATEMENT  BLACHK
   NPRint = Lun
   Ipass = 1
   !
   IF ( Kprint>=2 ) WRITE (NPRint,99001)
   99001 FORMAT ('1','QUICK CHECK OF 38 BASIC LINEAR ALGEBRA SUBROUTINES'/)
-  DO ICAse = 1 , 38
+  DO ICAse = 1, 38
     IF ( jtest(ICAse)/=0 ) THEN
       CALL HEADER(Kprint)
       !

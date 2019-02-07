@@ -90,23 +90,23 @@ SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
   !***END PROLOGUE  CHPR
   !     .. Scalar Arguments ..
   REAL Alpha
-  INTEGER Incx , N
+  INTEGER Incx, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  COMPLEX Ap(*) , X(*)
+  COMPLEX Ap(*), X(*)
   !     .. Parameters ..
   COMPLEX ZERO
   PARAMETER (ZERO=(0.0E+0,0.0E+0))
   !     .. Local Scalars ..
   COMPLEX temp
-  INTEGER i , info , ix , j , jx , k , kk , kx
+  INTEGER i, info, ix, j, jx, k, kk, kx
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
-  INTRINSIC CONJG , REAL
+  INTRINSIC CONJG, REAL
   !***FIRST EXECUTABLE STATEMENT  CHPR
   !
   !     Test the input parameters.
@@ -145,11 +145,11 @@ SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
     !        Form  A  when upper triangle is stored in AP.
     !
     IF ( Incx==1 ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( X(j)/=ZERO ) THEN
           temp = Alpha*CONJG(X(j))
           k = kk
-          DO i = 1 , j - 1
+          DO i = 1, j - 1
             Ap(k) = Ap(k) + X(i)*temp
             k = k + 1
           ENDDO
@@ -161,11 +161,11 @@ SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
       ENDDO
     ELSE
       jx = kx
-      DO j = 1 , N
+      DO j = 1, N
         IF ( X(jx)/=ZERO ) THEN
           temp = Alpha*CONJG(X(jx))
           ix = kx
-          DO k = kk , kk + j - 2
+          DO k = kk, kk + j - 2
             Ap(k) = Ap(k) + X(ix)*temp
             ix = ix + Incx
           ENDDO
@@ -181,12 +181,12 @@ SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
     !        Form  A  when lower triangle is stored in AP.
     !
   ELSEIF ( Incx==1 ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       IF ( X(j)/=ZERO ) THEN
         temp = Alpha*CONJG(X(j))
         Ap(kk) = REAL(Ap(kk)) + REAL(temp*X(j))
         k = kk + 1
-        DO i = j + 1 , N
+        DO i = j + 1, N
           Ap(k) = Ap(k) + X(i)*temp
           k = k + 1
         ENDDO
@@ -197,12 +197,12 @@ SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
     ENDDO
   ELSE
     jx = kx
-    DO j = 1 , N
+    DO j = 1, N
       IF ( X(jx)/=ZERO ) THEN
         temp = Alpha*CONJG(X(jx))
         Ap(kk) = REAL(Ap(kk)) + REAL(temp*X(jx))
         ix = jx
-        DO k = kk + 1 , kk + N - j
+        DO k = kk + 1, kk + N - j
           ix = ix + Incx
           Ap(k) = Ap(k) + X(ix)*temp
         ENDDO

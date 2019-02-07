@@ -4,8 +4,8 @@ SUBROUTINE MC20AD(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   IMPLICIT NONE
   !*--MC20AD5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , ice , icep , j , ja , jb , jce , jcep , Jdisp , Jptr , k , &
-    kr , loc , Maxa , Nc , null
+  INTEGER i, ice, icep, j, ja, jb, jce, jcep, Jdisp, Jptr, k, &
+    kr, loc, Maxa, Nc, null
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MC20AD
   !***SUBSIDIARY
@@ -35,23 +35,23 @@ SUBROUTINE MC20AD(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  MC20AD
-  INTEGER Inum(*) , Jnum(*)
-  REAL(8) :: A(*) , ace , acep
+  INTEGER Inum(*), Jnum(*)
+  REAL(8) :: A(*), ace, acep
   DIMENSION Jptr(Nc)
   !***FIRST EXECUTABLE STATEMENT  MC20AD
   null = -Jdisp
   !**      CLEAR JPTR
-  DO j = 1 , Nc
+  DO j = 1, Nc
     Jptr(j) = 0
   ENDDO
   !**      COUNT THE NUMBER OF ELEMENTS IN EACH COLUMN.
-  DO k = 1 , Maxa
+  DO k = 1, Maxa
     j = Jnum(k) + Jdisp
     Jptr(j) = Jptr(j) + 1
   ENDDO
   !**      SET THE JPTR ARRAY
   k = 1
-  DO j = 1 , Nc
+  DO j = 1, Nc
     kr = k + Jptr(j)
     Jptr(j) = k
     k = kr
@@ -59,7 +59,7 @@ SUBROUTINE MC20AD(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   !
   !**      REORDER THE ELEMENTS INTO COLUMN ORDER.  THE ALGORITHM IS AN
   !        IN-PLACE SORT AND IS OF ORDER MAXA.
-  DO i = 1 , Maxa
+  DO i = 1, Maxa
     !        ESTABLISH THE CURRENT ENTRY.
     jce = Jnum(i) + Jdisp
     IF ( jce/=0 ) THEN
@@ -68,7 +68,7 @@ SUBROUTINE MC20AD(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
       !        CLEAR THE LOCATION VACATED.
       Jnum(i) = null
       !        CHAIN FROM CURRENT ENTRY TO STORE ITEMS.
-      DO j = 1 , Maxa
+      DO j = 1, Maxa
         !        CURRENT ENTRY NOT IN CORRECT POSITION.  DETERMINE CORRECT
         !        POSITION TO STORE ENTRY.
         loc = Jptr(jce)
@@ -94,7 +94,7 @@ SUBROUTINE MC20AD(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   !
   !**      RESET JPTR VECTOR.
   ja = 1
-  DO j = 1 , Nc
+  DO j = 1, Nc
     jb = Jptr(j)
     Jptr(j) = ja
     ja = jb

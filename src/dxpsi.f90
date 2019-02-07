@@ -4,7 +4,7 @@ REAL(8) FUNCTION DXPSI(A,Ipsik,Ipsix)
   IMPLICIT NONE
   !*--DXPSI5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Ipsik , Ipsix , k , k1 , m , n
+  INTEGER i, Ipsik, Ipsix, k, k1, m, n
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXPSI
   !***SUBSIDIARY
@@ -24,22 +24,22 @@ REAL(8) FUNCTION DXPSI(A,Ipsik,Ipsix)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXPSI
-  REAL(8) :: A , b , c , cnum , cdenom
-  DIMENSION cnum(12) , cdenom(12)
-  SAVE cnum , cdenom
+  REAL(8) :: A, b, c, cnum, cdenom
+  DIMENSION cnum(12), cdenom(12)
+  SAVE cnum, cdenom
   !
   !        CNUM(I) AND CDENOM(I) ARE THE ( REDUCED ) NUMERATOR
   !        AND 2*I*DENOMINATOR RESPECTIVELY OF THE 2*I TH BERNOULLI
   !        NUMBER.
   !
-  DATA cnum(1) , cnum(2) , cnum(3) , cnum(4) , cnum(5) , cnum(6) , cnum(7) , &
-    cnum(8) , cnum(9) , cnum(10) , cnum(11) , cnum(12)/1.D0 , -1.D0 , &
-    1.D0 , -1.D0 , 1.D0 , -691.D0 , 1.D0 , -3617.D0 , 43867.D0 , &
-    -174611.D0 , 77683.D0 , -236364091.D0/
-  DATA cdenom(1) , cdenom(2) , cdenom(3) , cdenom(4) , cdenom(5) , cdenom(6)&
-    , cdenom(7) , cdenom(8) , cdenom(9) , cdenom(10) , cdenom(11) , &
-    cdenom(12)/12.D0 , 120.D0 , 252.D0 , 240.D0 , 132.D0 , 32760.D0 , &
-    12.D0 , 8160.D0 , 14364.D0 , 6600.D0 , 276.D0 , 65520.D0/
+  DATA cnum(1), cnum(2), cnum(3), cnum(4), cnum(5), cnum(6), cnum(7), &
+    cnum(8), cnum(9), cnum(10), cnum(11), cnum(12)/1.D0, -1.D0, &
+    1.D0, -1.D0, 1.D0, -691.D0, 1.D0, -3617.D0, 43867.D0, &
+    -174611.D0, 77683.D0, -236364091.D0/
+  DATA cdenom(1), cdenom(2), cdenom(3), cdenom(4), cdenom(5), cdenom(6)&
+    , cdenom(7), cdenom(8), cdenom(9), cdenom(10), cdenom(11), &
+    cdenom(12)/12.D0, 120.D0, 252.D0, 240.D0, 132.D0, 32760.D0, &
+    12.D0, 8160.D0, 14364.D0, 6600.D0, 276.D0, 65520.D0/
   !***FIRST EXECUTABLE STATEMENT  DXPSI
   n = MAX(0,Ipsix-INT(A))
   b = n + A
@@ -48,7 +48,7 @@ REAL(8) FUNCTION DXPSI(A,Ipsik,Ipsix)
   !        SERIES EXPANSION FOR A .GT. IPSIX USING IPSIK-1 TERMS.
   !
   c = 0.D0
-  DO i = 1 , k1
+  DO i = 1, k1
     k = Ipsik - i
     c = (c+cnum(k)/cdenom(k))/b**2
   ENDDO
@@ -58,7 +58,7 @@ REAL(8) FUNCTION DXPSI(A,Ipsik,Ipsix)
     !
     !        RECURRENCE FOR A .LE. IPSIX.
     !
-    DO m = 1 , n
+    DO m = 1, n
       b = b + 1.D0/(n-m+A)
     ENDDO
     DXPSI = DXPSI - b

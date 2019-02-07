@@ -249,23 +249,23 @@ SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !***END PROLOGUE  DCG
   !     .. Scalar Arguments ..
-  REAL(8) :: Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
+  REAL(8) :: Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , B(N) , Dz(N) , P(N) , R(N) , Rwork(*) , X(N) , &
+  REAL(8) :: A(Nelt), B(N), Dz(N), P(N), R(N), Rwork(*), X(N), &
     Z(N)
-  INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC , MSOLVE
+  EXTERNAL MATVEC, MSOLVE
   !     .. Local Scalars ..
-  REAL(8) :: ak , akden , bk , bkden , bknum , bnrm , solnrm , tolmin
-  INTEGER i , k
+  REAL(8) :: ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
+  INTEGER i, k
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DDOT
+  REAL(8) :: D1MACH, DDOT
   INTEGER ISDCG
-  EXTERNAL D1MACH , DDOT , ISDCG
+  EXTERNAL D1MACH, DDOT, ISDCG
   !     .. External Subroutines ..
-  EXTERNAL DAXPY , DCOPY
+  EXTERNAL DAXPY, DCOPY
   !***FIRST EXECUTABLE STATEMENT  DCG
   !
   !         Check some of the input data.
@@ -285,7 +285,7 @@ SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !         Calculate initial residual and pseudo-residual, and check
   !         stopping criterion.
   CALL MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
-  DO i = 1 , N
+  DO i = 1, N
     R(i) = B(i) - R(i)
   ENDDO
   CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
@@ -296,7 +296,7 @@ SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     !
     !         ***** Iteration loop *****
     !
-    DO k = 1 , Itmax
+    DO k = 1, Itmax
       Iter = k
       !
       !         Calculate coefficient bk and direction vector p.
@@ -309,7 +309,7 @@ SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
         CALL DCOPY(N,Z,1,P,1)
       ELSE
         bk = bknum/bkden
-        DO i = 1 , N
+        DO i = 1, N
           P(i) = Z(i) + bk*P(i)
         ENDDO
       ENDIF
@@ -343,4 +343,5 @@ SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   ENDIF
   !
   !------------- LAST LINE OF DCG FOLLOWS -----------------------------
-  99999 END SUBROUTINE DCG
+  99999 CONTINUE
+  END SUBROUTINE DCG

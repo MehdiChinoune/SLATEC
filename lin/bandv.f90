@@ -124,11 +124,11 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BANDV
   !
-  INTEGER i , j , k , M , N , r , ii , ij , jj , kj , mb , m1 , Nm , Nv , &
-    ij1 , its , kj1 , Mbw , m21
-  INTEGER Ierr , maxj , maxk , group
-  REAL A(Nm,*) , W(*) , Z(Nm,*) , Rv(*) , Rv6(*)
-  REAL u , v , uk , xu , x0 , x1 , E21 , eps2 , eps3 , eps4 , norm , order , &
+  INTEGER i, j, k, M, N, r, ii, ij, jj, kj, mb, m1, Nm, Nv, &
+    ij1, its, kj1, Mbw, m21
+  INTEGER Ierr, maxj, maxk, group
+  REAL A(Nm,*), W(*), Z(Nm,*), Rv(*), Rv6(*)
+  REAL u, v, uk, xu, x0, x1, E21, eps2, eps3, eps4, norm, order, &
     s
   !
   !***FIRST EXECUTABLE STATEMENT  BANDV
@@ -140,20 +140,20 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
     m21 = m1 + mb
     order = 1.0E0 - ABS(E21)
     !     .......... FIND VECTORS BY INVERSE ITERATION ..........
-    DO r = 1 , M
+    DO r = 1, M
       its = 1
       x1 = W(r)
       IF ( r==1 ) THEN
         !     .......... COMPUTE NORM OF MATRIX ..........
         norm = 0.0E0
         !
-        DO j = 1 , mb
+        DO j = 1, mb
           jj = mb + 1 - j
           kj = jj + m1
           ij = 1
           s = 0.0E0
           !
-          DO i = jj , N
+          DO i = jj, N
             s = s + ABS(A(i,j))
             IF ( E21<0.0E0 ) THEN
               s = s + ABS(A(ij,kj))
@@ -191,13 +191,13 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
       ENDIF
       !     .......... EXPAND MATRIX, SUBTRACT EIGENVALUE,
       !                AND INITIALIZE VECTOR ..........
-      DO i = 1 , N
+      DO i = 1, N
         ij = i + MIN(0,i-m1)*N
         kj = ij + mb*N
         ij1 = kj + m1*N
         IF ( m1/=0 ) THEN
           !
-          DO j = 1 , m1
+          DO j = 1, m1
             IF ( ij>m1 ) THEN
               Rv(ij) = A(i,j)
             ELSEIF ( ij<=0 ) THEN
@@ -225,17 +225,17 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
       !
       IF ( m1/=0 ) THEN
         !     .......... ELIMINATION WITH INTERCHANGES ..........
-        DO i = 1 , N
+        DO i = 1, N
           ii = i + 1
           maxk = MIN(i+m1-1,N)
           maxj = MIN(N-i,m21-2)*N
           !
-          DO k = i , maxk
+          DO k = i, maxk
             kj1 = k
             j = kj1 + N
             jj = j + maxj
             !
-            DO kj = j , jj , N
+            DO kj = j, jj, N
               Rv(kj1) = Rv(kj)
               kj1 = kj
             ENDDO
@@ -248,7 +248,7 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
             maxk = MIN(i+m1,N)
             maxj = MIN(N-ii,m21-2)*N
             !
-            DO j = i , maxk
+            DO j = i, maxk
               IF ( ABS(Rv(j))>=ABS(u) ) THEN
                 u = Rv(j)
                 k = j
@@ -260,7 +260,7 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
             IF ( k/=i ) THEN
               kj = k
               !
-              DO ij = i , jj , N
+              DO ij = i, jj, N
                 v = Rv(ij)
                 Rv(ij) = Rv(kj)
                 Rv(kj) = v
@@ -275,11 +275,11 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
             ENDIF
             IF ( u/=0.0E0 ) THEN
               !
-              DO k = ii , maxk
+              DO k = ii, maxk
                 v = Rv(k)/u
                 kj = k
                 !
-                DO ij = j , jj , N
+                DO ij = j, jj, N
                   kj = kj + N
                   Rv(kj) = Rv(kj) - v*Rv(ij)
                 ENDDO
@@ -294,7 +294,7 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
       DO
         !     .......... BACK SUBSTITUTION
         !                FOR I=N STEP -1 UNTIL 1 DO -- ..........
-        DO ii = 1 , N
+        DO ii = 1, N
           i = N + 1 - ii
           maxj = MIN(ii,m21)
           IF ( maxj/=1 ) THEN
@@ -302,7 +302,7 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
             j = ij1 + N
             jj = j + (maxj-2)*N
             !
-            DO ij = j , jj , N
+            DO ij = j, jj, N
               ij1 = ij1 + 1
               Rv6(i) = Rv6(i) - Rv(ij)*Rv6(ij1)
             ENDDO
@@ -323,15 +323,15 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
         !                MEMBERS OF GROUP ..........
         IF ( group/=0 ) THEN
           !
-          DO jj = 1 , group
+          DO jj = 1, group
             j = r - group - 1 + jj
             xu = 0.0E0
             !
-            DO i = 1 , N
+            DO i = 1, N
               xu = xu + Rv6(i)*Z(i,j)
             ENDDO
             !
-            DO i = 1 , N
+            DO i = 1, N
               Rv6(i) = Rv6(i) - xu*Z(i,j)
             ENDDO
             !
@@ -340,7 +340,7 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
         !
         norm = 0.0E0
         !
-        DO i = 1 , N
+        DO i = 1, N
           norm = norm + ABS(Rv6(i))
         ENDDO
         !
@@ -349,7 +349,7 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
           !                1 AND EXPAND TO FULL ORDER ..........
           u = 0.0E0
           !
-          DO i = 1 , N
+          DO i = 1, N
             u = u + Rv6(i)**2
           ENDDO
           !
@@ -367,7 +367,7 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
           xu = eps4/(uk+1.0E0)
           Rv6(1) = eps4
           !
-          DO i = 2 , N
+          DO i = 2, N
             Rv6(i) = xu
           ENDDO
           !
@@ -375,7 +375,7 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
         ENDIF
       ENDDO
       !
-      DO i = 1 , N
+      DO i = 1, N
         Z(i,r) = Rv6(i)*xu
       ENDDO
       !

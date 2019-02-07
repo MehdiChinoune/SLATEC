@@ -42,14 +42,14 @@ SUBROUTINE DEVERK(Lout,Kprint,Fail)
   !
   !  Declare arguments.
   !
-  INTEGER Lout , Kprint
+  INTEGER Lout, Kprint
   LOGICAL Fail
   !
   !  DECLARATIONS.
   !
-  INTEGER i , ierr , kontrl , N , nerr , next(2)
-  REAL(8) :: d(10) , dum , f(10) , temp , x(10)
-  LOGICAL COMP , skip
+  INTEGER i, ierr, kontrl, N, nerr, next(2)
+  REAL(8) :: d(10), dum, f(10), temp, x(10)
+  LOGICAL COMP, skip
   !
   !  INITIALIZE.
   !
@@ -92,7 +92,7 @@ SUBROUTINE DEVERK(Lout,Kprint,Fail)
   !
   !  SET UP PCH DEFINITION.
   !
-  DO i = 1 , N
+  DO i = 1, N
     x(i) = i
     f(i) = i + 2
     d(i) = 1.D0

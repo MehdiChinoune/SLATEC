@@ -67,21 +67,21 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  TRED2
   !
-  INTEGER i , j , k , l , N , ii , Nm , jp1
-  REAL A(Nm,*) , D(*) , E(*) , Z(Nm,*)
-  REAL f , g , h , hh , scale
+  INTEGER i, j, k, l, N, ii, Nm, jp1
+  REAL A(Nm,*), D(*), E(*), Z(Nm,*)
+  REAL f, g, h, hh, scale
   !
   !***FIRST EXECUTABLE STATEMENT  TRED2
-  DO i = 1 , N
+  DO i = 1, N
     !
-    DO j = 1 , i
+    DO j = 1, i
       Z(i,j) = A(i,j)
     ENDDO
   ENDDO
   !
   IF ( N/=1 ) THEN
     !     .......... FOR I=N STEP -1 UNTIL 2 DO -- ..........
-    DO ii = 2 , N
+    DO ii = 2, N
       i = N + 2 - ii
       l = i - 1
       h = 0.0E0
@@ -90,13 +90,13 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
         E(i) = Z(i,l)
       ELSE
         !     .......... SCALE ROW (ALGOL TOL THEN NOT NEEDED) ..........
-        DO k = 1 , l
+        DO k = 1, l
           scale = scale + ABS(Z(i,k))
         ENDDO
         !
         IF ( scale/=0.0E0 ) THEN
           !
-          DO k = 1 , l
+          DO k = 1, l
             Z(i,k) = Z(i,k)/scale
             h = h + Z(i,k)*Z(i,k)
           ENDDO
@@ -108,18 +108,18 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
           Z(i,l) = f - g
           f = 0.0E0
           !
-          DO j = 1 , l
+          DO j = 1, l
             Z(j,i) = Z(i,j)/h
             g = 0.0E0
             !     .......... FORM ELEMENT OF A*U ..........
-            DO k = 1 , j
+            DO k = 1, j
               g = g + Z(j,k)*Z(i,k)
             ENDDO
             !
             jp1 = j + 1
             IF ( l>=jp1 ) THEN
               !
-              DO k = jp1 , l
+              DO k = jp1, l
                 g = g + Z(k,j)*Z(i,k)
               ENDDO
             ENDIF
@@ -130,12 +130,12 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
           !
           hh = f/(h+h)
           !     .......... FORM REDUCED A ..........
-          DO j = 1 , l
+          DO j = 1, l
             f = Z(i,j)
             g = E(j) - hh*f
             E(j) = g
             !
-            DO k = 1 , j
+            DO k = 1, j
               Z(j,k) = Z(j,k) - f*E(k) - g*Z(i,k)
             ENDDO
           ENDDO
@@ -151,18 +151,18 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
   D(1) = 0.0E0
   E(1) = 0.0E0
   !     .......... ACCUMULATION OF TRANSFORMATION MATRICES ..........
-  DO i = 1 , N
+  DO i = 1, N
     l = i - 1
     IF ( D(i)/=0.0E0 ) THEN
       !
-      DO j = 1 , l
+      DO j = 1, l
         g = 0.0E0
         !
-        DO k = 1 , l
+        DO k = 1, l
           g = g + Z(i,k)*Z(k,j)
         ENDDO
         !
-        DO k = 1 , l
+        DO k = 1, l
           Z(k,j) = Z(k,j) - g*Z(k,i)
         ENDDO
       ENDDO
@@ -172,7 +172,7 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
     Z(i,i) = 1.0E0
     IF ( l>=1 ) THEN
       !
-      DO j = 1 , l
+      DO j = 1, l
         Z(i,j) = 0.0E0
         Z(j,i) = 0.0E0
       ENDDO

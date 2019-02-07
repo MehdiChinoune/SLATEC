@@ -47,11 +47,11 @@ SUBROUTINE QC6A(Lun,Kprint,Ipass)
   !
   !  Declare arguments.
   !
-  INTEGER Lun , Kprint , Ipass
+  INTEGER Lun, Kprint, Ipass
   !
   !  DECLARE VARIABLES.
   !
-  CHARACTER(16) :: ver , VERSN
+  CHARACTER(16) :: ver, VERSN
   PARAMETER (VERSN=' 4.1')
   !
   !***FIRST EXECUTABLE STATEMENT  QC6A
@@ -71,7 +71,7 @@ SUBROUTINE QC6A(Lun,Kprint,Ipass)
   ELSE
     Ipass = 0
     IF ( Kprint>=3 ) WRITE (Lun,99006)
-    IF ( Kprint>=2 ) WRITE (Lun,99003) ver , VERSN
+    IF ( Kprint>=2 ) WRITE (Lun,99003) ver, VERSN
     99003   FORMAT (' *** Failed -- version number from AAAAAA = ',A16,&
       ' but expected version number = ',A16)
   ENDIF

@@ -27,13 +27,13 @@ SUBROUTINE CPRIN(Lun,Num1,Kprint,Ip,Exact,Result,Abserr,Neval,Ierv,Lierv)
   !   910627  Code completely rewritten.  (WRB)
   !***END PROLOGUE  CPRIN
   !     .. Scalar Arguments ..
-  REAL Abserr , Exact , Result
-  INTEGER Ip , Kprint , Lierv , Lun , Neval , Num1
+  REAL Abserr, Exact, Result
+  INTEGER Ip, Kprint, Lierv, Lun, Neval, Num1
   !     .. Array Arguments ..
   INTEGER Ierv(*)
   !     .. Local Scalars ..
   REAL error
-  INTEGER ier , k
+  INTEGER ier, k
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !***FIRST EXECUTABLE STATEMENT  CPRIN
@@ -53,10 +53,10 @@ SUBROUTINE CPRIN(Lun,Num1,Kprint,Ip,Exact,Result,Abserr,Neval,Ierv,Lierv)
       WRITE (UNIT=Lun,FMT=99007)
       WRITE (UNIT=Lun,FMT=99008)
       IF ( Num1/=5 ) THEN
-        WRITE (UNIT=Lun,FMT=99009) Exact , Result , error , Abserr , ier , &
+        WRITE (UNIT=Lun,FMT=99009) Exact, Result, error, Abserr, ier, &
           Neval
       ELSE
-        WRITE (Lun,FMT=99010) Result , Abserr , ier , Neval
+        WRITE (Lun,FMT=99010) Result, Abserr, ier, Neval
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       !

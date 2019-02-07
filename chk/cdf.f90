@@ -24,7 +24,7 @@ SUBROUTINE CDF(N,T,Y,Yp)
   !   890405  Revised to meet SLATEC standards.
   !***END PROLOGUE  CDF
   REAL T
-  COMPLEX alfa , Y(*) , Yp(*)
+  COMPLEX alfa, Y(*), Yp(*)
   INTEGER N
   !***FIRST EXECUTABLE STATEMENT  CDF
   alfa = Y(N+1)

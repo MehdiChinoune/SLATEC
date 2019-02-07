@@ -97,22 +97,22 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   !           cosmetic changes to prologue.  (FNF)
   !***END PROLOGUE  SDASTP
   !
-  INTEGER Neq , Jstart , Idid , Ipar(*) , Iwm(*) , Iphase , Jcalc , K , &
-    Kold , Ns , Nonneg , Ntemp
-  REAL X , Y(*) , Yprime(*) , H , Wt(*) , Rpar(*) , Phi(Neq,*) , Delta(*) , &
-    E(*) , Wm(*) , Alpha(*) , Beta(*) , Gamma(*) , Psi(*) , Sigma(*) , &
-    Cj , Cjold , Hold , S , Hmin , Uround
-  EXTERNAL RES , JAC
+  INTEGER Neq, Jstart, Idid, Ipar(*), Iwm(*), Iphase, Jcalc, K, &
+    Kold, Ns, Nonneg, Ntemp
+  REAL X, Y(*), Yprime(*), H, Wt(*), Rpar(*), Phi(Neq,*), Delta(*), &
+    E(*), Wm(*), Alpha(*), Beta(*), Gamma(*), Psi(*), Sigma(*), &
+    Cj, Cjold, Hold, S, Hmin, Uround
+  EXTERNAL RES, JAC
   !
-  EXTERNAL SDAJAC , SDANRM , SDASLV , SDATRP
+  EXTERNAL SDAJAC, SDANRM, SDASLV, SDATRP
   REAL SDANRM
   !
-  INTEGER i , ier , ires , j , j1 , kdiff , km1 , knew , kp1 , kp2 , LCTF , &
-    LETF , LMXORD , LNJE , LNRE , LNST , m , maxit , ncf , nef , nsf , &
+  INTEGER i, ier, ires, j, j1, kdiff, km1, knew, kp1, kp2, LCTF, &
+    LETF, LMXORD, LNJE, LNRE, LNST, m, maxit, ncf, nef, nsf, &
     nsp1
-  REAL alpha0 , alphas , cjlast , ck , delnrm , enorm , erk , erkm1 , &
-    erkm2 , erkp1 , err , est , hnew , oldnrm , pnorm , r , rate , &
-    temp1 , temp2 , terk , terkm1 , terkm2 , terkp1 , xold , xrate
+  REAL alpha0, alphas, cjlast, ck, delnrm, enorm, erk, erkm1, &
+    erkm2, erkp1, err, est, hnew, oldnrm, pnorm, r, rate, &
+    temp1, temp2, terk, terkm1, terkm2, terkp1, xold, xrate
   LOGICAL convgd
   !
   PARAMETER (LMXORD=3)
@@ -186,7 +186,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     temp1 = H
     Gamma(1) = 0.0E0
     Sigma(1) = 1.0E0
-    DO i = 2 , kp1
+    DO i = 2, kp1
       temp2 = Psi(i-1)
       Psi(i-1) = temp1
       Beta(i) = Beta(i-1)*Psi(i-1)/temp2
@@ -201,7 +201,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   !     COMPUTE ALPHAS, ALPHA0
   alphas = 0.0E0
   alpha0 = 0.0E0
-  DO i = 1 , K
+  DO i = 1, K
     alphas = alphas - 1.0E0/i
     alpha0 = alpha0 - Alpha(i)
   ENDDO
@@ -222,8 +222,8 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   !
   !     CHANGE PHI TO PHI STAR
   IF ( kp1>=nsp1 ) THEN
-    DO j = nsp1 , kp1
-      DO i = 1 , Neq
+    DO j = nsp1, kp1
+      DO i = 1, Neq
         Phi(i,j) = Beta(j)*Phi(i,j)
       ENDDO
     ENDDO
@@ -244,12 +244,12 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     !-----------------------------------------------------------------------
     !
     !     FIRST,PREDICT THE SOLUTION AND DERIVATIVE
-    DO i = 1 , Neq
+    DO i = 1, Neq
       Y(i) = Phi(i,1)
       Yprime(i) = 0.0E0
     ENDDO
-    DO j = 2 , kp1
-      DO i = 1 , Neq
+    DO j = 2, kp1
+      DO i = 1, Neq
         Y(i) = Y(i) + Phi(i,j)
         Yprime(i) = Yprime(i) + Gamma(j)*Phi(i,j)
       ENDDO
@@ -301,7 +301,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
       !
       !
       !     INITIALIZE THE ERROR ACCUMULATION VECTOR E.
-      DO i = 1 , Neq
+      DO i = 1, Neq
         E(i) = 0.0E0
       ENDDO
       DO
@@ -311,7 +311,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
         !
         !     MULTIPLY RESIDUAL BY TEMP1 TO ACCELERATE CONVERGENCE
         temp1 = 2.0E0/(1.0E0+Cj/Cjold)
-        DO i = 1 , Neq
+        DO i = 1, Neq
           Delta(i) = Delta(i)*temp1
         ENDDO
         !
@@ -320,7 +320,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
         CALL SDASLV(Neq,Delta,Wm,Iwm)
         !
         !     UPDATE Y, E, AND YPRIME
-        DO i = 1 , Neq
+        DO i = 1, Neq
           Y(i) = Y(i) - Delta(i)
           E(i) = E(i) - Delta(i)
           Yprime(i) = Yprime(i) - Cj*Delta(i)
@@ -375,159 +375,160 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   !     REQUIRED, SET THE SOLUTION NONNEGATIVE, IF THE PERTURBATION
   !     TO DO IT IS SMALL ENOUGH.  IF THE CHANGE IS TOO LARGE, THEN
   !     CONSIDER THE CORRECTOR ITERATION TO HAVE FAILED.
-  200  IF ( Nonneg/=0 ) THEN
-  DO i = 1 , Neq
-    Delta(i) = MIN(Y(i),0.0E0)
-  ENDDO
-  delnrm = SDANRM(Neq,Delta,Wt,Rpar,Ipar)
-  IF ( delnrm>0.33E0 ) THEN
-    convgd = .FALSE.
-  ELSE
-    DO i = 1 , Neq
-      E(i) = E(i) - Delta(i)
+  200 CONTINUE
+  IF ( Nonneg/=0 ) THEN
+    DO i = 1, Neq
+      Delta(i) = MIN(Y(i),0.0E0)
     ENDDO
-  ENDIF
-ENDIF
-300  Jcalc = 1
-IF ( convgd ) THEN
-  !
-  !
-  !
-  !
-  !
-  !-----------------------------------------------------------------------
-  !     BLOCK 4
-  !     ESTIMATE THE ERRORS AT ORDERS K,K-1,K-2
-  !     AS IF CONSTANT STEPSIZE WAS USED. ESTIMATE
-  !     THE LOCAL ERROR AT ORDER K AND TEST
-  !     WHETHER THE CURRENT STEP IS SUCCESSFUL.
-  !-----------------------------------------------------------------------
-  !
-  !     ESTIMATE ERRORS AT ORDERS K,K-1,K-2
-  enorm = SDANRM(Neq,E,Wt,Rpar,Ipar)
-  erk = Sigma(K+1)*enorm
-  terk = (K+1)*erk
-  est = erk
-  knew = K
-  IF ( K/=1 ) THEN
-    DO i = 1 , Neq
-      Delta(i) = Phi(i,kp1) + E(i)
-    ENDDO
-    erkm1 = Sigma(K)*SDANRM(Neq,Delta,Wt,Rpar,Ipar)
-    terkm1 = K*erkm1
-    IF ( K>2 ) THEN
-      DO i = 1 , Neq
-        Delta(i) = Phi(i,K) + Delta(i)
+    delnrm = SDANRM(Neq,Delta,Wt,Rpar,Ipar)
+    IF ( delnrm>0.33E0 ) THEN
+      convgd = .FALSE.
+    ELSE
+      DO i = 1, Neq
+        E(i) = E(i) - Delta(i)
       ENDDO
-      erkm2 = Sigma(K-1)*SDANRM(Neq,Delta,Wt,Rpar,Ipar)
-      terkm2 = (K-1)*erkm2
-      IF ( MAX(terkm1,terkm2)>terk ) GOTO 350
-    ELSEIF ( terkm1>0.5E0*terk ) THEN
-      GOTO 350
     ENDIF
-    !     LOWER THE ORDER
-    knew = K - 1
-    est = erkm1
   ENDIF
-  !
-  !
-  !     CALCULATE THE LOCAL ERROR FOR THE CURRENT STEP
-  !     TO SEE IF THE STEP WAS SUCCESSFUL
-  350    err = ck*enorm
-  IF ( err>1.0E0 ) GOTO 500
-  !
-  !
-  !
-  !
-  !
-  !-----------------------------------------------------------------------
-  !     BLOCK 5
-  !     THE STEP IS SUCCESSFUL. DETERMINE
-  !     THE BEST ORDER AND STEPSIZE FOR
-  !     THE NEXT STEP. UPDATE THE DIFFERENCES
-  !     FOR THE NEXT STEP.
-  !-----------------------------------------------------------------------
-  Idid = 1
-  Iwm(LNST) = Iwm(LNST) + 1
-  kdiff = K - Kold
-  Kold = K
-  Hold = H
-  !
-  !
-  !     ESTIMATE THE ERROR AT ORDER K+1 UNLESS:
-  !        ALREADY DECIDED TO LOWER ORDER, OR
-  !        ALREADY USING MAXIMUM ORDER, OR
-  !        STEPSIZE NOT CONSTANT, OR
-  !        ORDER RAISED IN PREVIOUS STEP
-  IF ( knew==km1.OR.K==Iwm(LMXORD) ) Iphase = 1
-  IF ( Iphase==0 ) THEN
+  300  Jcalc = 1
+  IF ( convgd ) THEN
     !
-    !     IF IPHASE = 0, INCREASE ORDER BY ONE AND MULTIPLY STEPSIZE BY
-    !     FACTOR TWO
-    K = kp1
-    hnew = H*2.0E0
-    H = hnew
-    GOTO 450
-  ELSE
-    IF ( knew/=km1 ) THEN
-      IF ( K/=Iwm(LMXORD) ) THEN
-        IF ( kp1<Ns.AND.kdiff/=1 ) THEN
-          DO i = 1 , Neq
-            Delta(i) = E(i) - Phi(i,kp2)
-          ENDDO
-          erkp1 = (1.0E0/(K+2))*SDANRM(Neq,Delta,Wt,Rpar,Ipar)
-          terkp1 = (K+2)*erkp1
-          IF ( K>1 ) THEN
-            IF ( terkm1<=MIN(terk,terkp1) ) GOTO 360
-            IF ( terkp1>=terk.OR.K==Iwm(LMXORD) ) GOTO 400
-          ELSEIF ( terkp1>=0.5E0*terk ) THEN
-            GOTO 400
-          ENDIF
-          !
-          !     RAISE ORDER
-          K = kp1
-          est = erkp1
-        ENDIF
+    !
+    !
+    !
+    !
+    !-----------------------------------------------------------------------
+    !     BLOCK 4
+    !     ESTIMATE THE ERRORS AT ORDERS K,K-1,K-2
+    !     AS IF CONSTANT STEPSIZE WAS USED. ESTIMATE
+    !     THE LOCAL ERROR AT ORDER K AND TEST
+    !     WHETHER THE CURRENT STEP IS SUCCESSFUL.
+    !-----------------------------------------------------------------------
+    !
+    !     ESTIMATE ERRORS AT ORDERS K,K-1,K-2
+    enorm = SDANRM(Neq,E,Wt,Rpar,Ipar)
+    erk = Sigma(K+1)*enorm
+    terk = (K+1)*erk
+    est = erk
+    knew = K
+    IF ( K/=1 ) THEN
+      DO i = 1, Neq
+        Delta(i) = Phi(i,kp1) + E(i)
+      ENDDO
+      erkm1 = Sigma(K)*SDANRM(Neq,Delta,Wt,Rpar,Ipar)
+      terkm1 = K*erkm1
+      IF ( K>2 ) THEN
+        DO i = 1, Neq
+          Delta(i) = Phi(i,K) + Delta(i)
+        ENDDO
+        erkm2 = Sigma(K-1)*SDANRM(Neq,Delta,Wt,Rpar,Ipar)
+        terkm2 = (K-1)*erkm2
+        IF ( MAX(terkm1,terkm2)>terk ) GOTO 350
+      ELSEIF ( terkm1>0.5E0*terk ) THEN
+        GOTO 350
       ENDIF
-      GOTO 400
+      !     LOWER THE ORDER
+      knew = K - 1
+      est = erkm1
     ENDIF
     !
-    !     LOWER ORDER
-    360      K = km1
-    est = erkm1
+    !
+    !     CALCULATE THE LOCAL ERROR FOR THE CURRENT STEP
+    !     TO SEE IF THE STEP WAS SUCCESSFUL
+    350    err = ck*enorm
+    IF ( err>1.0E0 ) GOTO 500
+    !
+    !
+    !
+    !
+    !
+    !-----------------------------------------------------------------------
+    !     BLOCK 5
+    !     THE STEP IS SUCCESSFUL. DETERMINE
+    !     THE BEST ORDER AND STEPSIZE FOR
+    !     THE NEXT STEP. UPDATE THE DIFFERENCES
+    !     FOR THE NEXT STEP.
+    !-----------------------------------------------------------------------
+    Idid = 1
+    Iwm(LNST) = Iwm(LNST) + 1
+    kdiff = K - Kold
+    Kold = K
+    Hold = H
+    !
+    !
+    !     ESTIMATE THE ERROR AT ORDER K+1 UNLESS:
+    !        ALREADY DECIDED TO LOWER ORDER, OR
+    !        ALREADY USING MAXIMUM ORDER, OR
+    !        STEPSIZE NOT CONSTANT, OR
+    !        ORDER RAISED IN PREVIOUS STEP
+    IF ( knew==km1.OR.K==Iwm(LMXORD) ) Iphase = 1
+    IF ( Iphase==0 ) THEN
+      !
+      !     IF IPHASE = 0, INCREASE ORDER BY ONE AND MULTIPLY STEPSIZE BY
+      !     FACTOR TWO
+      K = kp1
+      hnew = H*2.0E0
+      H = hnew
+      GOTO 450
+    ELSE
+      IF ( knew/=km1 ) THEN
+        IF ( K/=Iwm(LMXORD) ) THEN
+          IF ( kp1<Ns.AND.kdiff/=1 ) THEN
+            DO i = 1, Neq
+              Delta(i) = E(i) - Phi(i,kp2)
+            ENDDO
+            erkp1 = (1.0E0/(K+2))*SDANRM(Neq,Delta,Wt,Rpar,Ipar)
+            terkp1 = (K+2)*erkp1
+            IF ( K>1 ) THEN
+              IF ( terkm1<=MIN(terk,terkp1) ) GOTO 360
+              IF ( terkp1>=terk.OR.K==Iwm(LMXORD) ) GOTO 400
+            ELSEIF ( terkp1>=0.5E0*terk ) THEN
+              GOTO 400
+            ENDIF
+            !
+            !     RAISE ORDER
+            K = kp1
+            est = erkp1
+          ENDIF
+        ENDIF
+        GOTO 400
+      ENDIF
+      !
+      !     LOWER ORDER
+      360      K = km1
+      est = erkm1
+    ENDIF
+    !
+    !
+    !     DETERMINE THE APPROPRIATE STEPSIZE FOR
+    !     THE NEXT STEP.
+    400    hnew = H
+    temp2 = K + 1
+    r = (2.0E0*est+0.0001E0)**(-1.0E0/temp2)
+    IF ( r>=2.0E0 ) THEN
+      hnew = 2.0E0*H
+    ELSEIF ( r<=1.0E0 ) THEN
+      r = MAX(0.5E0,MIN(0.9E0,r))
+      hnew = H*r
+    ENDIF
+    H = hnew
+    !
+    !
+    !     UPDATE DIFFERENCES FOR NEXT STEP
+    450    IF ( Kold/=Iwm(LMXORD) ) THEN
+    DO i = 1, Neq
+      Phi(i,kp2) = E(i)
+    ENDDO
   ENDIF
-  !
-  !
-  !     DETERMINE THE APPROPRIATE STEPSIZE FOR
-  !     THE NEXT STEP.
-  400    hnew = H
-  temp2 = K + 1
-  r = (2.0E0*est+0.0001E0)**(-1.0E0/temp2)
-  IF ( r>=2.0E0 ) THEN
-    hnew = 2.0E0*H
-  ELSEIF ( r<=1.0E0 ) THEN
-    r = MAX(0.5E0,MIN(0.9E0,r))
-    hnew = H*r
-  ENDIF
-  H = hnew
-  !
-  !
-  !     UPDATE DIFFERENCES FOR NEXT STEP
-  450    IF ( Kold/=Iwm(LMXORD) ) THEN
-  DO i = 1 , Neq
-    Phi(i,kp2) = E(i)
+  DO i = 1, Neq
+    Phi(i,kp1) = Phi(i,kp1) + E(i)
   ENDDO
-ENDIF
-DO i = 1 , Neq
-  Phi(i,kp1) = Phi(i,kp1) + E(i)
-ENDDO
-DO j1 = 2 , kp1
-  j = kp1 - j1 + 1
-  DO i = 1 , Neq
-    Phi(i,j) = Phi(i,j) + Phi(i,j+1)
+  DO j1 = 2, kp1
+    j = kp1 - j1 + 1
+    DO i = 1, Neq
+      Phi(i,j) = Phi(i,j) + Phi(i,j+1)
+    ENDDO
   ENDDO
-ENDDO
-RETURN
+  RETURN
 ENDIF
 !
 !
@@ -547,93 +548,93 @@ ENDIF
 !     RESTORE X,PHI,PSI
 X = xold
 IF ( kp1>=nsp1 ) THEN
-DO j = nsp1 , kp1
-  temp1 = 1.0E0/Beta(j)
-  DO i = 1 , Neq
-    Phi(i,j) = temp1*Phi(i,j)
+  DO j = nsp1, kp1
+    temp1 = 1.0E0/Beta(j)
+    DO i = 1, Neq
+      Phi(i,j) = temp1*Phi(i,j)
+    ENDDO
   ENDDO
-ENDDO
 ENDIF
-DO i = 2 , kp1
-Psi(i-1) = Psi(i) - H
+DO i = 2, kp1
+  Psi(i-1) = Psi(i) - H
 ENDDO
 !
 !
 !     TEST WHETHER FAILURE IS DUE TO CORRECTOR ITERATION
 !     OR ERROR TEST
 IF ( convgd ) THEN
-!
-!
-!     THE NEWTON SCHEME CONVERGED, AND THE CAUSE
-!     OF THE FAILURE WAS THE ERROR ESTIMATE
-!     EXCEEDING THE TOLERANCE.
-nef = nef + 1
-Iwm(LETF) = Iwm(LETF) + 1
-IF ( nef<=1 ) THEN
   !
-  !     ON FIRST ERROR TEST FAILURE, KEEP CURRENT ORDER OR LOWER
-  !     ORDER BY ONE.  COMPUTE NEW STEPSIZE BASED ON DIFFERENCES
-  !     OF THE SOLUTION.
-  K = knew
-  temp2 = K + 1
-  r = 0.90E0*(2.0E0*est+0.0001E0)**(-1.0E0/temp2)
-  r = MAX(0.25E0,MIN(0.9E0,r))
-  H = H*r
-  IF ( ABS(H)>=Hmin ) GOTO 100
-  Idid = -6
   !
-  !     ON SECOND ERROR TEST FAILURE, USE THE CURRENT ORDER OR
-  !     DECREASE ORDER BY ONE.  REDUCE THE STEPSIZE BY A FACTOR OF
-  !     FOUR.
-ELSEIF ( nef>2 ) THEN
-  !
-  !     ON THIRD AND SUBSEQUENT ERROR TEST FAILURES, SET THE ORDER TO
-  !     ONE AND REDUCE THE STEPSIZE BY A FACTOR OF FOUR.
-  K = 1
-  H = 0.25E0*H
-  IF ( ABS(H)>=Hmin ) GOTO 100
-  Idid = -6
+  !     THE NEWTON SCHEME CONVERGED, AND THE CAUSE
+  !     OF THE FAILURE WAS THE ERROR ESTIMATE
+  !     EXCEEDING THE TOLERANCE.
+  nef = nef + 1
+  Iwm(LETF) = Iwm(LETF) + 1
+  IF ( nef<=1 ) THEN
+    !
+    !     ON FIRST ERROR TEST FAILURE, KEEP CURRENT ORDER OR LOWER
+    !     ORDER BY ONE.  COMPUTE NEW STEPSIZE BASED ON DIFFERENCES
+    !     OF THE SOLUTION.
+    K = knew
+    temp2 = K + 1
+    r = 0.90E0*(2.0E0*est+0.0001E0)**(-1.0E0/temp2)
+    r = MAX(0.25E0,MIN(0.9E0,r))
+    H = H*r
+    IF ( ABS(H)>=Hmin ) GOTO 100
+    Idid = -6
+    !
+    !     ON SECOND ERROR TEST FAILURE, USE THE CURRENT ORDER OR
+    !     DECREASE ORDER BY ONE.  REDUCE THE STEPSIZE BY A FACTOR OF
+    !     FOUR.
+  ELSEIF ( nef>2 ) THEN
+    !
+    !     ON THIRD AND SUBSEQUENT ERROR TEST FAILURES, SET THE ORDER TO
+    !     ONE AND REDUCE THE STEPSIZE BY A FACTOR OF FOUR.
+    K = 1
+    H = 0.25E0*H
+    IF ( ABS(H)>=Hmin ) GOTO 100
+    Idid = -6
+  ELSE
+    K = knew
+    H = 0.25E0*H
+    IF ( ABS(H)>=Hmin ) GOTO 100
+    Idid = -6
+  ENDIF
 ELSE
-  K = knew
-  H = 0.25E0*H
-  IF ( ABS(H)>=Hmin ) GOTO 100
-  Idid = -6
-ENDIF
-ELSE
-Iwm(LCTF) = Iwm(LCTF) + 1
-!
-!
-!     THE NEWTON ITERATION FAILED TO CONVERGE WITH
-!     A CURRENT ITERATION MATRIX.  DETERMINE THE CAUSE
-!     OF THE FAILURE AND TAKE APPROPRIATE ACTION.
-IF ( ier/=0 ) THEN
-  !
-  !     THE ITERATION MATRIX IS SINGULAR. REDUCE
-  !     THE STEPSIZE BY A FACTOR OF 4. IF
-  !     THIS HAPPENS THREE TIMES IN A ROW ON
-  !     THE SAME STEP, RETURN WITH AN ERROR FLAG
-  nsf = nsf + 1
-  r = 0.25E0
-  H = H*r
-  IF ( nsf<3.AND.ABS(H)>=Hmin ) GOTO 100
-  Idid = -8
+  Iwm(LCTF) = Iwm(LCTF) + 1
   !
   !
-  !     THE NEWTON ITERATION FAILED TO CONVERGE FOR A REASON
-  !     OTHER THAN A SINGULAR ITERATION MATRIX.  IF IRES = -2, THEN
-  !     RETURN.  OTHERWISE, REDUCE THE STEPSIZE AND TRY AGAIN, UNLESS
-  !     TOO MANY FAILURES HAVE OCCURRED.
-ELSEIF ( ires>-2 ) THEN
-  ncf = ncf + 1
-  r = 0.25E0
-  H = H*r
-  IF ( ncf<10.AND.ABS(H)>=Hmin ) GOTO 100
-  Idid = -7
-  IF ( ires<0 ) Idid = -10
-  IF ( nef>=3 ) Idid = -9
-ELSE
-  Idid = -11
-ENDIF
+  !     THE NEWTON ITERATION FAILED TO CONVERGE WITH
+  !     A CURRENT ITERATION MATRIX.  DETERMINE THE CAUSE
+  !     OF THE FAILURE AND TAKE APPROPRIATE ACTION.
+  IF ( ier/=0 ) THEN
+    !
+    !     THE ITERATION MATRIX IS SINGULAR. REDUCE
+    !     THE STEPSIZE BY A FACTOR OF 4. IF
+    !     THIS HAPPENS THREE TIMES IN A ROW ON
+    !     THE SAME STEP, RETURN WITH AN ERROR FLAG
+    nsf = nsf + 1
+    r = 0.25E0
+    H = H*r
+    IF ( nsf<3.AND.ABS(H)>=Hmin ) GOTO 100
+    Idid = -8
+    !
+    !
+    !     THE NEWTON ITERATION FAILED TO CONVERGE FOR A REASON
+    !     OTHER THAN A SINGULAR ITERATION MATRIX.  IF IRES = -2, THEN
+    !     RETURN.  OTHERWISE, REDUCE THE STEPSIZE AND TRY AGAIN, UNLESS
+    !     TOO MANY FAILURES HAVE OCCURRED.
+  ELSEIF ( ires>-2 ) THEN
+    ncf = ncf + 1
+    r = 0.25E0
+    H = H*r
+    IF ( ncf<10.AND.ABS(H)>=Hmin ) GOTO 100
+    Idid = -7
+    IF ( ires<0 ) Idid = -10
+    IF ( nef>=3 ) Idid = -9
+  ELSE
+    Idid = -11
+  ENDIF
 ENDIF
 !
 !

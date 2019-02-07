@@ -4,7 +4,7 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   IMPLICIT NONE
   !*--DBSPVD5
   !*** Start of declarations inserted by SPAG
-  INTEGER iwork , Ldvnik
+  INTEGER iwork, Ldvnik
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBSPVD
   !***PURPOSE  Calculate the value and all derivatives of order less than
@@ -78,14 +78,14 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DBSPVD
   !
-  INTEGER i , ideriv , Ileft , ipkmd , j , jj , jlow , jm , jp1mid , K , &
-    kmd , kp1 , l , ldummy , m , mhigh , Nderiv
-  REAL(8) :: factor , fkmd , T , v , Vnikx , Work , X
+  INTEGER i, ideriv, Ileft, ipkmd, j, jj, jlow, jm, jp1mid, K, &
+    kmd, kp1, l, ldummy, m, mhigh, Nderiv
+  REAL(8) :: factor, fkmd, T, v, Vnikx, Work, X
   !     DIMENSION T(ILEFT+K), WORK((K+1)*(K+2)/2)
   !     A(I,J) = WORK(I+J*(J+1)/2),  I=1,J+1  J=1,K-1
   !     A(I,K) = W0RK(I+K*(K-1)/2)  I=1.K
   !     WORK(1) AND WORK((K+1)*(K+2)/2) ARE NOT USED.
-  DIMENSION T(*) , Vnikx(Ldvnik,*) , Work(*)
+  DIMENSION T(*), Vnikx(Ldvnik,*), Work(*)
   !***FIRST EXECUTABLE STATEMENT  DBSPVD
   IF ( K<1 ) THEN
     !
@@ -106,9 +106,9 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
     CALL DBSPVN(T,jj,K,1,X,Ileft,Vnikx,Work,iwork)
     IF ( ideriv/=1 ) THEN
       mhigh = ideriv
-      DO m = 2 , mhigh
+      DO m = 2, mhigh
         jp1mid = 1
-        DO j = ideriv , K
+        DO j = ideriv, K
           Vnikx(j,ideriv) = Vnikx(jp1mid,1)
           jp1mid = jp1mid + 1
         ENDDO
@@ -118,29 +118,29 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
       ENDDO
       !
       jm = kp1*(kp1+1)/2
-      DO l = 1 , jm
+      DO l = 1, jm
         Work(l) = 0.0D0
       ENDDO
       !     A(I,I) = WORK(I*(I+3)/2) = 1.0       I = 1,K
       l = 2
       j = 0
-      DO i = 1 , K
+      DO i = 1, K
         j = j + l
         Work(j) = 1.0D0
         l = l + 1
       ENDDO
       kmd = K
-      DO m = 2 , mhigh
+      DO m = 2, mhigh
         kmd = kmd - 1
         fkmd = kmd
         i = Ileft
         j = K
         jj = j*(j+1)/2
         jm = jj - j
-        DO ldummy = 1 , kmd
+        DO ldummy = 1, kmd
           ipkmd = i + kmd
           factor = fkmd/(T(ipkmd)-T(i))
-          DO l = 1 , j
+          DO l = 1, j
             Work(l+jj) = (Work(l+jj)-Work(l+jm))*factor
           ENDDO
           i = i - 1
@@ -149,11 +149,11 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
           jm = jm - j
         ENDDO
         !
-        DO i = 1 , K
+        DO i = 1, K
           v = 0.0D0
           jlow = MAX(i,m)
           jj = jlow*(jlow+1)/2
-          DO j = jlow , K
+          DO j = jlow, K
             v = Work(i+jj)*Vnikx(j,m) + v
             jj = jj + j + 1
           ENDDO
@@ -163,4 +163,5 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
     ENDIF
   ENDIF
   RETURN
-  99999 END SUBROUTINE DBSPVD
+  99999 CONTINUE
+  END SUBROUTINE DBSPVD

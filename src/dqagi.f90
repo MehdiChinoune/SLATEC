@@ -171,11 +171,11 @@ SUBROUTINE DQAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DQAGI
   !
-  REAL(8) :: Abserr , Bound , Epsabs , Epsrel , F , Result , Work
-  INTEGER Ier , Inf , Iwork , Last , Lenw , Limit , lvl , l1 , l2 , l3 , &
+  REAL(8) :: Abserr, Bound, Epsabs, Epsrel, F, Result, Work
+  INTEGER Ier, Inf, Iwork, Last, Lenw, Limit, lvl, l1, l2, l3, &
     Neval
   !
-  DIMENSION Iwork(*) , Work(*)
+  DIMENSION Iwork(*), Work(*)
   !
   EXTERNAL F
   !

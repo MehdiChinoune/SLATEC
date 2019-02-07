@@ -53,7 +53,7 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   !                    depending on KODE
   !           NZ     - number of components of Y set to zero due to
   !                    underflow with KODE=1,
-  !                    NZ=0   , normal return, computation completed
+  !                    NZ=0  , normal return, computation completed
   !                    NZ .NE. 0, first NZ components of Y set to zero
   !                             due to underflow, Y(I)=0.0D0, I=1,...,NZ
   !
@@ -80,15 +80,15 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DBESK
   !
-  INTEGER i , j , k , Kode , mz , N , nb , nd , nn , nud , nulim , Nz
+  INTEGER i, j, k, Kode, mz, N, nb, nd, nn, nud, nulim, Nz
   INTEGER I1MACH
-  REAL(8) :: cn , dnu , elim , etx , flgik , fn , fnn , Fnu , gln , &
-    gnu , rtz , s , s1 , s2 , t , tm , trx , w , X , xlim , &
-    Y , zn
-  REAL(8) :: DBESK0 , DBESK1 , DBSK1E , DBSK0E , D1MACH
-  DIMENSION w(2) , nulim(2) , Y(*)
+  REAL(8) :: cn, dnu, elim, etx, flgik, fn, fnn, Fnu, gln, &
+    gnu, rtz, s, s1, s2, t, tm, trx, w, X, xlim, &
+    Y, zn
+  REAL(8) :: DBESK0, DBESK1, DBSK1E, DBSK0E, D1MACH
+  DIMENSION w(2), nulim(2), Y(*)
   SAVE nulim
-  DATA nulim(1) , nulim(2)/35 , 70/
+  DATA nulim(1), nulim(2)/35, 70/
   !***FIRST EXECUTABLE STATEMENT  DBESK
   nn = -I1MACH(15)
   elim = 2.303D0*(nn*D1MACH(5)-3.0D0)
@@ -177,7 +177,8 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   gln = LOG((1.0D0+rtz)/zn)
   t = rtz*(1.0D0-etx) + etx/(zn+rtz)
   cn = -fn*(t-gln)
-  200  IF ( cn<-elim ) GOTO 700
+  200 CONTINUE
+  IF ( cn<-elim ) GOTO 700
   !
   !     ASYMPTOTIC EXPANSION FOR ORDERS FNU AND FNU+1.GE.NULIM
   !
@@ -187,105 +188,110 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   trx = 2.0D0/X
   tm = (gnu+gnu+2.0D0)/X
   GOTO 500
-  300  IF ( dnu/=0.0D0 ) THEN
-  nb = 2
-  IF ( nud==0.AND.nd==1 ) nb = 1
-  CALL DBSKNU(X,dnu,Kode,nb,w,Nz)
-  s1 = w(1)
-  IF ( nb==1 ) GOTO 400
-  s2 = w(2)
-ELSE
-  IF ( Kode==2 ) THEN
-    s1 = DBSK0E(X)
+  300 CONTINUE
+  IF ( dnu/=0.0D0 ) THEN
+    nb = 2
+    IF ( nud==0.AND.nd==1 ) nb = 1
+    CALL DBSKNU(X,dnu,Kode,nb,w,Nz)
+    s1 = w(1)
+    IF ( nb==1 ) GOTO 400
+    s2 = w(2)
   ELSE
-    s1 = DBESK0(X)
+    IF ( Kode==2 ) THEN
+      s1 = DBSK0E(X)
+    ELSE
+      s1 = DBESK0(X)
+    ENDIF
+    IF ( nud==0.AND.nd==1 ) GOTO 400
+    IF ( Kode==2 ) THEN
+      s2 = DBSK1E(X)
+    ELSE
+      s2 = DBESK1(X)
+    ENDIF
   ENDIF
-  IF ( nud==0.AND.nd==1 ) GOTO 400
-  IF ( Kode==2 ) THEN
-    s2 = DBSK1E(X)
+  trx = 2.0D0/X
+  tm = (dnu+dnu+2.0D0)/X
+  !     FORWARD RECUR FROM DNU TO FNU+1 TO GET Y(1) AND Y(2)
+  IF ( nd==1 ) nud = nud - 1
+  IF ( nud>0 ) THEN
+    DO i = 1, nud
+      s = s2
+      s2 = tm*s2 + s1
+      s1 = s
+      tm = tm + trx
+    ENDDO
+    IF ( nd==1 ) s1 = s2
+  ELSEIF ( nd<=1 ) THEN
+    s1 = s2
+  ENDIF
+  400  Y(1) = s1
+  IF ( nd==1 ) GOTO 800
+  Y(2) = s2
+  500 CONTINUE
+  IF ( nd/=2 ) THEN
+    !     FORWARD RECUR FROM FNU+2 TO FNU+N-1
+    DO i = 3, nd
+      Y(i) = tm*Y(i-1) + Y(i-2)
+      tm = tm + trx
+    ENDDO
+  ENDIF
+  GOTO 800
+  !     OVERFLOW TEST
+  600 CONTINUE
+  IF ( fn>1.0D0 ) THEN
+    IF ( -fn*(LOG(X)-0.693D0)>elim ) THEN
+      CALL XERMSG('SLATEC','DBESK',&
+        'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
+      GOTO 99999
+    ENDIF
+  ENDIF
+  IF ( dnu==0.0D0 ) THEN
+    j = nud
+    IF ( j/=1 ) THEN
+      j = j + 1
+      IF ( Kode==2 ) THEN
+        Y(j) = DBSK0E(X)
+      ELSE
+        Y(j) = DBESK0(X)
+      ENDIF
+      IF ( nd==1 ) GOTO 800
+      j = j + 1
+    ENDIF
+    IF ( Kode==2 ) THEN
+      Y(j) = DBSK1E(X)
+    ELSE
+      Y(j) = DBESK1(X)
+    ENDIF
   ELSE
-    s2 = DBESK1(X)
+    CALL DBSKNU(X,Fnu,Kode,nd,Y,mz)
   ENDIF
-ENDIF
-trx = 2.0D0/X
-tm = (dnu+dnu+2.0D0)/X
-!     FORWARD RECUR FROM DNU TO FNU+1 TO GET Y(1) AND Y(2)
-IF ( nd==1 ) nud = nud - 1
-IF ( nud>0 ) THEN
-  DO i = 1 , nud
-    s = s2
-    s2 = tm*s2 + s1
-    s1 = s
-    tm = tm + trx
+  GOTO 800
+  700 CONTINUE
+  DO
+    !
+    !     UPDATE PARAMETERS ON UNDERFLOW
+    !
+    nud = nud + 1
+    nd = nd - 1
+    IF ( nd==0 ) EXIT
+    nn = MIN(2,nd)
+    gnu = gnu + 1.0D0
+    IF ( fnn>=2.0D0 ) THEN
+      IF ( nud>=nulim(nn) ) GOTO 100
+    ENDIF
   ENDDO
-  IF ( nd==1 ) s1 = s2
-ELSEIF ( nd<=1 ) THEN
-  s1 = s2
-ENDIF
-400  Y(1) = s1
-IF ( nd==1 ) GOTO 800
-Y(2) = s2
-500  IF ( nd/=2 ) THEN
-!     FORWARD RECUR FROM FNU+2 TO FNU+N-1
-DO i = 3 , nd
-  Y(i) = tm*Y(i-1) + Y(i-2)
-  tm = tm + trx
-ENDDO
-ENDIF
-GOTO 800
-!     OVERFLOW TEST
-600  IF ( fn>1.0D0 ) THEN
-IF ( -fn*(LOG(X)-0.693D0)>elim ) THEN
-CALL XERMSG('SLATEC','DBESK',&
-  'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-GOTO 99999
-ENDIF
-ENDIF
-IF ( dnu==0.0D0 ) THEN
-j = nud
-IF ( j/=1 ) THEN
-j = j + 1
-IF ( Kode==2 ) THEN
-  Y(j) = DBSK0E(X)
-ELSE
-  Y(j) = DBESK0(X)
-ENDIF
-IF ( nd==1 ) GOTO 800
-j = j + 1
-ENDIF
-IF ( Kode==2 ) THEN
-Y(j) = DBSK1E(X)
-ELSE
-Y(j) = DBESK1(X)
-ENDIF
-ELSE
-CALL DBSKNU(X,Fnu,Kode,nd,Y,mz)
-ENDIF
-GOTO 800
-700  DO
-!
-!     UPDATE PARAMETERS ON UNDERFLOW
-!
-nud = nud + 1
-nd = nd - 1
-IF ( nd==0 ) EXIT
-nn = MIN(2,nd)
-gnu = gnu + 1.0D0
-IF ( fnn>=2.0D0 ) THEN
-IF ( nud>=nulim(nn) ) GOTO 100
-ENDIF
-ENDDO
-800  Nz = N - nd
-IF ( Nz==0 ) RETURN
-IF ( nd/=0 ) THEN
-DO i = 1 , nd
-j = N - i + 1
-k = nd - i + 1
-Y(j) = Y(k)
-ENDDO
-ENDIF
-DO i = 1 , Nz
-Y(i) = 0.0D0
-ENDDO
-RETURN
-99999 END SUBROUTINE DBESK
+  800  Nz = N - nd
+  IF ( Nz==0 ) RETURN
+  IF ( nd/=0 ) THEN
+    DO i = 1, nd
+      j = N - i + 1
+      k = nd - i + 1
+      Y(j) = Y(k)
+    ENDDO
+  ENDIF
+  DO i = 1, Nz
+    Y(i) = 0.0D0
+  ENDDO
+  RETURN
+  99999 CONTINUE
+  END SUBROUTINE DBESK

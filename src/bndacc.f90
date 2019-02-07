@@ -4,10 +4,10 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   IMPLICIT NONE
   !*--BNDACC5
   !*** Start of declarations inserted by SPAG
-  REAL G , rho , zero
-  INTEGER i , ie , ig , ig1 , ig2 , iopt , Ip , Ir , j , jg , Jt , k , kh , &
-    l , lp1 , Mdg , mh , Mt , mu , Nb
-  INTEGER nbp1 , nerr
+  REAL G, rho, zero
+  INTEGER i, ie, ig, ig1, ig2, iopt, Ip, Ir, j, jg, Jt, k, kh, &
+    l, lp1, Mdg, mh, Mt, mu, Nb
+  INTEGER nbp1, nerr
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BNDACC
   !***PURPOSE  Compute the LU factorization of a banded matrices using
@@ -215,18 +215,18 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
       !                                             ALG. STEPS 6-7
       IF ( Jt>Ir ) THEN
         !                                             ALG. STEPS 8-9
-        DO i = 1 , Mt
+        DO i = 1, Mt
           ig1 = Jt + Mt - i
           ig2 = Ir + Mt - i
-          DO j = 1 , nbp1
+          DO j = 1, nbp1
             G(ig1,j) = G(ig2,j)
           ENDDO
         ENDDO
         !                                             ALG. STEP 10
         ie = Jt - Ir
-        DO i = 1 , ie
+        DO i = 1, ie
           ig = Ir + i - 1
-          DO j = 1 , nbp1
+          DO j = 1, nbp1
             G(ig,j) = zero
           ENDDO
         ENDDO
@@ -237,18 +237,18 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
       mu = MIN(Nb-1,Ir-Ip-1)
       IF ( mu/=0 ) THEN
         !                                             ALG. STEP 13
-        DO l = 1 , mu
+        DO l = 1, mu
           !                                             ALG. STEP 14
           k = MIN(l,Jt-Ip)
           !                                             ALG. STEP 15
           lp1 = l + 1
           ig = Ip + l
-          DO i = lp1 , Nb
+          DO i = lp1, Nb
             jg = i - k
             G(ig,jg) = G(ig,i)
           ENDDO
           !                                             ALG. STEP 16
-          DO i = 1 , k
+          DO i = 1, k
             jg = nbp1 - i
             G(ig,jg) = zero
           ENDDO
@@ -261,7 +261,7 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
     mh = Ir + Mt - Ip
     kh = MIN(nbp1,mh)
     !                                             ALG. STEP 20
-    DO i = 1 , kh
+    DO i = 1, kh
       CALL H12(1,i,MAX(i+1,Ir-Ip+1),mh,G(Ip,i),1,rho,G(Ip,i+1),1,Mdg,nbp1-i)
     ENDDO
     !                                             ALG. STEP 21
@@ -269,7 +269,7 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
     !                                             ALG. STEP 22
     IF ( kh>=nbp1 ) THEN
       !                                             ALG. STEP 23
-      DO i = 1 , Nb
+      DO i = 1, Nb
         G(Ir-1,i) = zero
       ENDDO
     ENDIF

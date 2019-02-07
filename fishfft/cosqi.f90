@@ -4,8 +4,8 @@ SUBROUTINE COSQI(N,Wsave)
   IMPLICIT NONE
   !*--COSQI5
   !*** Start of declarations inserted by SPAG
-  REAL dt , fk , pih , Wsave
-  INTEGER k , N
+  REAL dt, fk, pih, Wsave
+  INTEGER k, N
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  COSQI
   !***PURPOSE  Initialize a work array for COSQF and COSQB.
@@ -59,7 +59,7 @@ SUBROUTINE COSQI(N,Wsave)
   pih = 2.*ATAN(1.)
   dt = pih/N
   fk = 0.
-  DO k = 1 , N
+  DO k = 1, N
     fk = fk + 1.
     Wsave(k) = COS(fk*dt)
   ENDDO

@@ -73,23 +73,23 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
       REAL(8), INTENT(IN) :: X
     END FUNCTION
   END INTERFACE
-  INTEGER Id , Ierr , Inbv , k , Kk , kml , kmx , l , lmn , lmx , lr , mxl ,&
-    N , nbits , nib , nlmn , nlmx
+  INTEGER Id, Ierr, Inbv, k, Kk, kml, kmx, l, lmn, lmx, lr, mxl ,&
+    N, nbits, nib, nlmn, nlmx
   INTEGER I1MACH
-  REAL(8) :: A , aa , ae , anib , Ans , area , B , Bc , c , ce , ee ,&
-    ef , eps , Err , est , gl , glr , gr , hh , sq2 , tol ,&
-    vl , vr , Work , w1 , w2 , w3 , w4 , Xt , x1 , x2 , x3 ,&
-    x4 , x , h
-  REAL(8) :: D1MACH , DBVALU
-  DIMENSION Xt(*) , Bc(*) , Work(*)
-  DIMENSION aa(60) , hh(60) , lr(60) , vl(60) , gr(60)
-  SAVE x1 , x2 , x3 , x4 , w1 , w2 , w3 , w4 , sq2 , nlmn , kmx , kml
-  DATA x1 , x2 , x3 , x4/1.83434642495649805D-01 , 5.25532409916328986D-01 ,&
-    7.96666477413626740D-01 , 9.60289856497536232D-01/
-  DATA w1 , w2 , w3 , w4/3.62683783378361983D-01 , 3.13706645877887287D-01 ,&
-    2.22381034453374471D-01 , 1.01228536290376259D-01/
+  REAL(8) :: A, aa, ae, anib, Ans, area, B, Bc, c, ce, ee ,&
+    ef, eps, Err, est, gl, glr, gr, hh, sq2, tol ,&
+    vl, vr, Work, w1, w2, w3, w4, Xt, x1, x2, x3 ,&
+    x4, x, h
+  REAL(8) :: D1MACH, DBVALU
+  DIMENSION Xt(*), Bc(*), Work(*)
+  DIMENSION aa(60), hh(60), lr(60), vl(60), gr(60)
+  SAVE x1, x2, x3, x4, w1, w2, w3, w4, sq2, nlmn, kmx, kml
+  DATA x1, x2, x3, x4/1.83434642495649805D-01, 5.25532409916328986D-01 ,&
+    7.96666477413626740D-01, 9.60289856497536232D-01/
+  DATA w1, w2, w3, w4/3.62683783378361983D-01, 3.13706645877887287D-01 ,&
+    2.22381034453374471D-01, 1.01228536290376259D-01/
   DATA sq2/1.41421356D0/
-  DATA nlmn/1/ , kmx/5000/ , kml/6/
+  DATA nlmn/1/, kmx/5000/, kml/6/
   !
   !     INITIALIZE
   !
@@ -145,85 +145,86 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
     ef = 0.5D0
     mxl = 0
   ENDIF
-  100  DO
-  !
-  !     COMPUTE REFINED ESTIMATES, ESTIMATE THE ERROR, ETC.
-  !
-  gl = G8(aa(l)+hh(l),hh(l))
-  gr(l) = G8(aa(l)+3.0D0*hh(l),hh(l))
-  k = k + 16
-  area = area + (ABS(gl)+ABS(gr(l))-ABS(est))
-  glr = gl + gr(l)
-  ee = ABS(est-glr)*ef
-  ae = MAX(eps*area,tol*ABS(glr))
-  IF ( ee<=ae ) EXIT
-  !
-  !     CONSIDER THE LEFT HALF OF THIS LEVEL
-  !
-  IF ( k>kmx ) lmx = kml
-  IF ( l>=lmx ) THEN
-    mxl = 1
-    EXIT
-  ELSE
-    l = l + 1
-    eps = eps*0.5D0
-    ef = ef/sq2
-    hh(l) = hh(l-1)*0.5D0
-    lr(l) = -1
-    aa(l) = aa(l-1)
-    est = gl
-  ENDIF
-ENDDO
-ce = ce + (est-glr)
-IF ( lr(l)<=0 ) THEN
-  !
-  !     PROCEED TO RIGHT HALF AT THIS LEVEL
-  !
-  vl(l) = glr
-ELSE
-  !
-  !     RETURN ONE LEVEL
-  !
-  vr = glr
-  DO WHILE ( l>1 )
-    l = l - 1
-    eps = eps*2.0D0
-    ef = ef*sq2
-    IF ( lr(l)<=0 ) THEN
-      vl(l) = vl(l+1) + vr
-      GOTO 200
+  100 CONTINUE
+  DO
+    !
+    !     COMPUTE REFINED ESTIMATES, ESTIMATE THE ERROR, ETC.
+    !
+    gl = G8(aa(l)+hh(l),hh(l))
+    gr(l) = G8(aa(l)+3.0D0*hh(l),hh(l))
+    k = k + 16
+    area = area + (ABS(gl)+ABS(gr(l))-ABS(est))
+    glr = gl + gr(l)
+    ee = ABS(est-glr)*ef
+    ae = MAX(eps*area,tol*ABS(glr))
+    IF ( ee<=ae ) EXIT
+    !
+    !     CONSIDER THE LEFT HALF OF THIS LEVEL
+    !
+    IF ( k>kmx ) lmx = kml
+    IF ( l>=lmx ) THEN
+      mxl = 1
+      EXIT
     ELSE
-      vr = vl(l+1) + vr
+      l = l + 1
+      eps = eps*0.5D0
+      ef = ef/sq2
+      hh(l) = hh(l-1)*0.5D0
+      lr(l) = -1
+      aa(l) = aa(l-1)
+      est = gl
     ENDIF
   ENDDO
-  !
-  !      EXIT
-  !
-  Ans = vr
-  IF ( (mxl/=0).AND.(ABS(ce)>2.0D0*tol*area) ) THEN
-    Ierr = 2
-    CALL XERMSG('SLATEC','DBSGQ8',&
-      'ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
+  ce = ce + (est-glr)
+  IF ( lr(l)<=0 ) THEN
+    !
+    !     PROCEED TO RIGHT HALF AT THIS LEVEL
+    !
+    vl(l) = glr
+  ELSE
+    !
+    !     RETURN ONE LEVEL
+    !
+    vr = glr
+    DO WHILE ( l>1 )
+      l = l - 1
+      eps = eps*2.0D0
+      ef = ef*sq2
+      IF ( lr(l)<=0 ) THEN
+        vl(l) = vl(l+1) + vr
+        GOTO 200
+      ELSE
+        vr = vl(l+1) + vr
+      ENDIF
+    ENDDO
+    !
+    !      EXIT
+    !
+    Ans = vr
+    IF ( (mxl/=0).AND.(ABS(ce)>2.0D0*tol*area) ) THEN
+      Ierr = 2
+      CALL XERMSG('SLATEC','DBSGQ8',&
+        'ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
+    ENDIF
+    IF ( Err<0.0D0 ) Err = ce
+    GOTO 99999
   ENDIF
-  IF ( Err<0.0D0 ) Err = ce
-  GOTO 99999
-ENDIF
-200  est = gr(l-1)
-lr(l) = 1
-aa(l) = aa(l) + 4.0D0*hh(l)
-GOTO 100
-99999 RETURN
+  200  est = gr(l-1)
+  lr(l) = 1
+  aa(l) = aa(l) + 4.0D0*hh(l)
+  GOTO 100
+  99999 RETURN
 CONTAINS
-REAL(8) FUNCTION G8(x,h)
-  REAL(8), INTENT(IN) :: x, h
-  REAL(8), EXTERNAL :: DBVALU
-  G8 = h*((w1*(FUN(x-x1*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x1*h,Inbv,Work)+FUN(x+&
-    x1*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x1*h,Inbv,Work))&
-    +w2*(FUN(x-x2*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x2*h,Inbv,Work)&
-    +FUN(x+x2*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x2*h,Inbv,Work)))&
-    +(w3*(FUN(x-x3*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x3*h,Inbv,Work)&
-    +FUN(x+x3*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x3*h,Inbv,Work))&
-    +w4*(FUN(x-x4*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x4*h,Inbv,Work)&
-    +FUN(x+x4*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x4*h,Inbv,Work))))
-END FUNCTION G8
+  REAL(8) FUNCTION G8(x,h)
+    REAL(8), INTENT(IN) :: x, h
+    REAL(8), EXTERNAL :: DBVALU
+    G8 = h*((w1*(FUN(x-x1*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x1*h,Inbv,Work)+FUN(x+&
+      x1*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x1*h,Inbv,Work))&
+      +w2*(FUN(x-x2*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x2*h,Inbv,Work)&
+      +FUN(x+x2*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x2*h,Inbv,Work)))&
+      +(w3*(FUN(x-x3*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x3*h,Inbv,Work)&
+      +FUN(x+x3*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x3*h,Inbv,Work))&
+      +w4*(FUN(x-x4*h)*DBVALU(Xt,Bc,N,Kk,Id,x-x4*h,Inbv,Work)&
+      +FUN(x+x4*h)*DBVALU(Xt,Bc,N,Kk,Id,x+x4*h,Inbv,Work))))
+  END FUNCTION G8
 END SUBROUTINE DBSGQ8

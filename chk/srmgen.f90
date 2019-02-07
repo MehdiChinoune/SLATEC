@@ -84,13 +84,13 @@ SUBROUTINE SRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Soln,Dsum,Itmp,&
   !***END PROLOGUE  SRMGEN
   !     .. Scalar Arguments ..
   REAL Factor
-  INTEGER Ierr , Isym , N , Nelt , Neltmx
+  INTEGER Ierr, Isym, N, Nelt, Neltmx
   !     .. Array Arguments ..
-  REAL A(Neltmx) , Dsum(N) , F(N) , Soln(N)
-  INTEGER Ia(Neltmx) , Idiag(N) , Itmp(N) , Ja(Neltmx)
+  REAL A(Neltmx), Dsum(N), F(N), Soln(N)
+  INTEGER Ia(Neltmx), Idiag(N), Itmp(N), Ja(Neltmx)
   !     .. Local Scalars ..
   REAL dummy
-  INTEGER i , icol , inum , irow , iseed , k , nl
+  INTEGER i, icol, inum, irow, iseed, k, nl
   !     .. External Functions ..
   REAL RAND
   EXTERNAL RAND
@@ -111,7 +111,7 @@ SUBROUTINE SRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Soln,Dsum,Itmp,&
   dummy = 16381.0
   iseed = RAND(dummy)
   Ierr = 0
-  DO i = 1 , N
+  DO i = 1, N
     Idiag(i) = 0
     Dsum(i) = -1.0E0
   ENDDO
@@ -122,7 +122,7 @@ SUBROUTINE SRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Soln,Dsum,Itmp,&
   !     Loop over the columns.
   !
   !VD$ NOCONCUR
-  DO icol = 1 , N
+  DO icol = 1, N
     nl = N + 1 - icol
     !
     !         To keep things sparse divide by two, three or four or ...
@@ -133,7 +133,7 @@ SUBROUTINE SRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Soln,Dsum,Itmp,&
     !         Set up this column (and row, if non-symmetric structure).
     !VD$ NOVECTOR
     !VD$ NOCONCUR
-    DO irow = 1 , inum
+    DO irow = 1, inum
       Nelt = Nelt + 1
       IF ( Nelt>Neltmx ) THEN
         Ierr = 1
@@ -185,7 +185,7 @@ SUBROUTINE SRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Soln,Dsum,Itmp,&
   !VD$ NODEPCHK
   !LLL. OPTION ASSERT (NOHAZARD)
   !DIR$ IVDEP
-  DO i = 1 , N
+  DO i = 1, N
     A(Idiag(i)) = -1.0001E0*Dsum(i)
   ENDDO
   !
@@ -193,14 +193,14 @@ SUBROUTINE SRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Soln,Dsum,Itmp,&
   !
   !VD$ NOVECTOR
   !VD$ NOCONCUR
-  DO i = 1 , N
+  DO i = 1, N
     Soln(i) = RAND(dummy)
     F(i) = 0.0E0
   ENDDO
   !
   !VD$ NOVECTOR
   !VD$ NOCONCUR
-  DO k = 1 , Nelt
+  DO k = 1, Nelt
     F(Ia(k)) = F(Ia(k)) + A(k)*Soln(Ja(k))
     IF ( Isym/=0.AND.Ia(k)/=Ja(k) ) F(Ja(k)) = F(Ja(k)) + A(k)*Soln(Ia(k))
   ENDDO

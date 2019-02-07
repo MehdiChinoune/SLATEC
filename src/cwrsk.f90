@@ -20,10 +20,10 @@ SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CWRSK
-  COMPLEX cinu , cscl , ct , Cw , c1 , c2 , rct , st , Y , Zr
-  REAL act , acw , Alim , ascle , Elim , Fnu , s1 , s2 , Tol , yy , R1MACH
-  INTEGER i , Kode , N , nw , Nz
-  DIMENSION Y(N) , Cw(2)
+  COMPLEX cinu, cscl, ct, Cw, c1, c2, rct, st, Y, Zr
+  REAL act, acw, Alim, ascle, Elim, Fnu, s1, s2, Tol, yy, R1MACH
+  INTEGER i, Kode, N, nw, Nz
+  DIMENSION Y(N), Cw(2)
   !***FIRST EXECUTABLE STATEMENT  CWRSK
   !-----------------------------------------------------------------------
   !     I(FNU+I-1,Z) BY BACKWARD RECURRENCE FOR RATIOS
@@ -79,10 +79,11 @@ SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
   cinu = cinu*rct*ct
   Y(1) = cinu*cscl
   IF ( N==1 ) RETURN
-  DO i = 2 , N
+  DO i = 2, N
     cinu = st*cinu
     st = Y(i)
     Y(i) = cinu*cscl
   ENDDO
   RETURN
-  99999 END SUBROUTINE CWRSK
+  99999 CONTINUE
+  END SUBROUTINE CWRSK

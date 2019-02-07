@@ -28,26 +28,26 @@ SUBROUTINE DMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
   !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  DMAKE3
   !     .. Parameters ..
-  REAL(8) :: ZERO , ONE
+  REAL(8) :: ZERO, ONE
   PARAMETER (ZERO=0.0D0,ONE=1.0D0)
   REAL(8) :: ROGUE
   PARAMETER (ROGUE=-1.0D10)
   !     .. Scalar Arguments ..
   REAL(8) :: Transl
-  INTEGER Lda , M , N , Nmax
+  INTEGER Lda, M, N, Nmax
   LOGICAL Reset
-  CHARACTER :: Diag , Uplo
+  CHARACTER :: Diag, Uplo
   CHARACTER(2) :: Type
   !     .. Array Arguments ..
-  REAL(8) :: A(Nmax,*) , Aa(*)
+  REAL(8) :: A(Nmax,*), Aa(*)
   !     .. Local Scalars ..
-  INTEGER i , ibeg , iend , j
-  LOGICAL gen , lower , sym , tri , unit , upper
+  INTEGER i, ibeg, iend, j
+  LOGICAL gen, lower, sym, tri, unit, upper
   !     .. External Functions ..
   REAL(8) :: DBEG
   EXTERNAL DBEG
   !     .. Intrinsic Functions ..
-  INTRINSIC MAX , MIN
+  INTRINSIC MAX, MIN
   !***FIRST EXECUTABLE STATEMENT  DMAKE3
   gen = Type=='GE'
   sym = Type=='SY'
@@ -58,8 +58,8 @@ SUBROUTINE DMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
   !
   !     Generate data in array A.
   !
-  DO j = 1 , N
-    DO i = 1 , M
+  DO j = 1, N
+    DO i = 1, M
       IF ( gen.OR.(upper.AND.i<=j).OR.(lower.AND.i>=j) ) THEN
         A(i,j) = DBEG(Reset) + Transl
         IF ( i/=j ) THEN
@@ -80,16 +80,16 @@ SUBROUTINE DMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
   !     Store elements in array AS in data structure required by routine.
   !
   IF ( Type=='GE' ) THEN
-    DO j = 1 , N
-      DO i = 1 , M
+    DO j = 1, N
+      DO i = 1, M
         Aa(i+(j-1)*Lda) = A(i,j)
       ENDDO
-      DO i = M + 1 , Lda
+      DO i = M + 1, Lda
         Aa(i+(j-1)*Lda) = ROGUE
       ENDDO
     ENDDO
   ELSEIF ( Type=='SY'.OR.Type=='TR' ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       IF ( upper ) THEN
         ibeg = 1
         IF ( unit ) THEN
@@ -105,13 +105,13 @@ SUBROUTINE DMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
         ENDIF
         iend = N
       ENDIF
-      DO i = 1 , ibeg - 1
+      DO i = 1, ibeg - 1
         Aa(i+(j-1)*Lda) = ROGUE
       ENDDO
-      DO i = ibeg , iend
+      DO i = ibeg, iend
         Aa(i+(j-1)*Lda) = A(i,j)
       ENDDO
-      DO i = iend + 1 , Lda
+      DO i = iend + 1, Lda
         Aa(i+(j-1)*Lda) = ROGUE
       ENDDO
     ENDDO

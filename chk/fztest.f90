@@ -19,18 +19,18 @@ SUBROUTINE FZTEST(Lun,Kprint,Ipass)
   !           of KPRINT.  (WRB)
   !***END PROLOGUE  FZTEST
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
-  INTEGER iflag , kontrl
-  REAL ae , b , c , pi , r , re , tol
+  INTEGER iflag, kontrl
+  REAL ae, b, c, pi, r, re, tol
   LOGICAL fatal
   !     .. External Functions ..
   REAL R1MACH
   EXTERNAL R1MACH
   !     .. External Subroutines ..
-  EXTERNAL FZERO , XERCLR , XGETF , XSETF
+  EXTERNAL FZERO, XERCLR, XGETF, XSETF
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , ATAN , MAX , SIN , SQRT , TAN
+  INTRINSIC ABS, ATAN, MAX, SIN, SQRT, TAN
   !***FIRST EXECUTABLE STATEMENT  FZTEST
   IF ( Kprint>=2 ) WRITE (Lun,99001)
   99001 FORMAT ('1'/' FZERO QUICK CHECK')
@@ -50,10 +50,10 @@ SUBROUTINE FZTEST(Lun,Kprint,Ipass)
   !     See if test was passed.
   !
   IF ( ABS(b-pi)<=tol.AND.ABS(c-pi)<=tol ) THEN
-    IF ( Kprint>=3 ) WRITE (Lun,99007) 'PASSED' , b , c , iflag
+    IF ( Kprint>=3 ) WRITE (Lun,99007) 'PASSED', b, c, iflag
   ELSE
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED' , b , c , iflag
+    IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED', b, c, iflag
   ENDIF
   !
   !     Trigger 2 error conditions
@@ -79,7 +79,7 @@ SUBROUTINE FZTEST(Lun,Kprint,Ipass)
   IF ( iflag/=3 ) THEN
     Ipass = 0
     fatal = .TRUE.
-    IF ( Kprint>=2 ) WRITE (Lun,99008) iflag , 2
+    IF ( Kprint>=2 ) WRITE (Lun,99008) iflag, 2
   ENDIF
   !
   !     IFLAG=4 (No sign change)
@@ -91,7 +91,7 @@ SUBROUTINE FZTEST(Lun,Kprint,Ipass)
   IF ( iflag/=4 ) THEN
     Ipass = 0
     fatal = .TRUE.
-    IF ( Kprint>=2 ) WRITE (Lun,99008) iflag , 4
+    IF ( Kprint>=2 ) WRITE (Lun,99008) iflag, 4
   ENDIF
   !
   CALL XERCLR

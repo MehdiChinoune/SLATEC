@@ -4,7 +4,7 @@ SUBROUTINE SNSQQK(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--SNSQQK5
   !*** Start of declarations inserted by SPAG
-  REAL SQFCN2 , SQJAC2
+  REAL SQFCN2, SQJAC2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SNSQQK
   !***PURPOSE  Quick check for SNSQE and SNSQ.
@@ -26,18 +26,18 @@ SUBROUTINE SNSQQK(Lun,Kprint,Ipass)
   !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
   !***END PROLOGUE  SNSQQK
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
-  REAL fnorm , fnorms , tol
-  INTEGER icnt , info , infos , iopt , lwa , n , nprint
+  REAL fnorm, fnorms, tol
+  INTEGER icnt, info, infos, iopt, lwa, n, nprint
   !     .. Local Arrays ..
-  REAL fvec(2) , wa(19) , x(2)
+  REAL fvec(2), wa(19), x(2)
   INTEGER itest(3)
   !     .. External Functions ..
-  REAL ENORM , R1MACH
-  EXTERNAL ENORM , R1MACH
+  REAL ENORM, R1MACH
+  EXTERNAL ENORM, R1MACH
   !     .. External Subroutines ..
-  EXTERNAL PASS , SNSQE , SQFCN2 , SQJAC2
+  EXTERNAL PASS, SNSQE, SQFCN2, SQJAC2
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
   !***FIRST EXECUTABLE STATEMENT  SNSQQK
@@ -63,7 +63,7 @@ SUBROUTINE SNSQQK(Lun,Kprint,Ipass)
   !
   IF ( Kprint/=0 ) THEN
     IF ( (Kprint>=2.AND.itest(icnt)/=1).OR.Kprint>=3 ) WRITE (Lun,99004)&
-      infos , fnorms , info , fnorm
+      infos, fnorms, info, fnorm
     IF ( (Kprint>=2).OR.(Kprint==1.AND.itest(icnt)/=1) )&
       CALL PASS(Lun,icnt,itest(icnt))
   ENDIF
@@ -81,7 +81,7 @@ SUBROUTINE SNSQQK(Lun,Kprint,Ipass)
   !
   IF ( Kprint/=0 ) THEN
     IF ( Kprint>=3.OR.(Kprint>=2.AND.itest(icnt)/=1) ) WRITE (Lun,99004)&
-      infos , fnorms , info , fnorm
+      infos, fnorms, info, fnorm
     IF ( Kprint>=2.OR.(Kprint==1.AND.itest(icnt)/=1) )&
       CALL PASS(Lun,icnt,itest(icnt))
   ENDIF

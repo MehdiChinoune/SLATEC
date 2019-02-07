@@ -107,16 +107,16 @@ SUBROUTINE DTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  DTRSV
   !     .. Scalar Arguments ..
-  INTEGER Incx , Lda , N
-  CHARACTER :: Diag , Trans , Uplo
+  INTEGER Incx, Lda, N
+  CHARACTER :: Diag, Trans, Uplo
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*) , X(*)
+  REAL(8) :: A(Lda,*), X(*)
   !     .. Parameters ..
   REAL(8) :: ZERO
   PARAMETER (ZERO=0.0D+0)
   !     .. Local Scalars ..
   REAL(8) :: temp
-  INTEGER i , info , ix , j , jx , kx
+  INTEGER i, info, ix, j, jx, kx
   LOGICAL nounit
   !     .. External Functions ..
   LOGICAL LSAME
@@ -173,23 +173,23 @@ SUBROUTINE DTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
     !
     IF ( LSAME(Uplo,'U') ) THEN
       IF ( Incx==1 ) THEN
-        DO j = N , 1 , -1
+        DO j = N, 1, -1
           IF ( X(j)/=ZERO ) THEN
             IF ( nounit ) X(j) = X(j)/A(j,j)
             temp = X(j)
-            DO i = j - 1 , 1 , -1
+            DO i = j - 1, 1, -1
               X(i) = X(i) - temp*A(i,j)
             ENDDO
           ENDIF
         ENDDO
       ELSE
         jx = kx + (N-1)*Incx
-        DO j = N , 1 , -1
+        DO j = N, 1, -1
           IF ( X(jx)/=ZERO ) THEN
             IF ( nounit ) X(jx) = X(jx)/A(j,j)
             temp = X(jx)
             ix = jx
-            DO i = j - 1 , 1 , -1
+            DO i = j - 1, 1, -1
               ix = ix - Incx
               X(ix) = X(ix) - temp*A(i,j)
             ENDDO
@@ -198,23 +198,23 @@ SUBROUTINE DTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
         ENDDO
       ENDIF
     ELSEIF ( Incx==1 ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( X(j)/=ZERO ) THEN
           IF ( nounit ) X(j) = X(j)/A(j,j)
           temp = X(j)
-          DO i = j + 1 , N
+          DO i = j + 1, N
             X(i) = X(i) - temp*A(i,j)
           ENDDO
         ENDIF
       ENDDO
     ELSE
       jx = kx
-      DO j = 1 , N
+      DO j = 1, N
         IF ( X(jx)/=ZERO ) THEN
           IF ( nounit ) X(jx) = X(jx)/A(j,j)
           temp = X(jx)
           ix = jx
-          DO i = j + 1 , N
+          DO i = j + 1, N
             ix = ix + Incx
             X(ix) = X(ix) - temp*A(i,j)
           ENDDO
@@ -227,9 +227,9 @@ SUBROUTINE DTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
     !
   ELSEIF ( LSAME(Uplo,'U') ) THEN
     IF ( Incx==1 ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         temp = X(j)
-        DO i = 1 , j - 1
+        DO i = 1, j - 1
           temp = temp - A(i,j)*X(i)
         ENDDO
         IF ( nounit ) temp = temp/A(j,j)
@@ -237,10 +237,10 @@ SUBROUTINE DTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
       ENDDO
     ELSE
       jx = kx
-      DO j = 1 , N
+      DO j = 1, N
         temp = X(jx)
         ix = kx
-        DO i = 1 , j - 1
+        DO i = 1, j - 1
           temp = temp - A(i,j)*X(ix)
           ix = ix + Incx
         ENDDO
@@ -250,9 +250,9 @@ SUBROUTINE DTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
       ENDDO
     ENDIF
   ELSEIF ( Incx==1 ) THEN
-    DO j = N , 1 , -1
+    DO j = N, 1, -1
       temp = X(j)
-      DO i = N , j + 1 , -1
+      DO i = N, j + 1, -1
         temp = temp - A(i,j)*X(i)
       ENDDO
       IF ( nounit ) temp = temp/A(j,j)
@@ -261,10 +261,10 @@ SUBROUTINE DTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   ELSE
     kx = kx + (N-1)*Incx
     jx = kx
-    DO j = N , 1 , -1
+    DO j = N, 1, -1
       temp = X(jx)
       ix = kx
-      DO i = N , j + 1 , -1
+      DO i = N, j + 1, -1
         temp = temp - A(i,j)*X(ix)
         ix = ix - Incx
       ENDDO

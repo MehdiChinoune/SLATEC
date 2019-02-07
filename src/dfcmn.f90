@@ -29,21 +29,21 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
   !***END PROLOGUE  DFCMN
-  INTEGER Iwork(*) , Mdg , Mdw , Mode , Nbkpt , Nconst , Ndata , Nderiv(*) ,&
+  INTEGER Iwork(*), Mdg, Mdw, Mode, Nbkpt, Nconst, Ndata, Nderiv(*) ,&
     Nord
-  REAL(8) :: Bf(Nord,*) , Bkpt(*) , Bkptin(*) , Coeff(*) , G(Mdg,*) ,&
-    Ptemp(*) , Sddata(*) , W(Mdw,*) , Work(*) , Xconst(*) ,&
-    Xdata(*) , Xtemp(*) , Yconst(*) , Ydata(*)
+  REAL(8) :: Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*) ,&
+    Ptemp(*), Sddata(*), W(Mdw,*), Work(*), Xconst(*) ,&
+    Xdata(*), Xtemp(*), Yconst(*), Ydata(*)
   !
-  EXTERNAL DAXPY , DBNDAC , DBNDSL , DCOPY , DFSPVD , DFSPVN , DLSEI ,&
-    DSCAL , DSORT , XERMSG
+  EXTERNAL DAXPY, DBNDAC, DBNDSL, DCOPY, DFSPVD, DFSPVN, DLSEI ,&
+    DSCAL, DSORT, XERMSG
   !
-  REAL(8) :: dummy , prgopt(10) , rnorm , rnorme , rnorml , xmax ,&
-    xmin , xval , yval
-  INTEGER i , idata , ideriv , ileft , intrvl , intw1 , ip , ir , irow ,&
-    itype , iw1 , iw2 , l , lw , mt , n , nb , neqcon , nincon ,&
-    nordm1 , nordp1 , np1
-  LOGICAL band , new , var
+  REAL(8) :: dummy, prgopt(10), rnorm, rnorme, rnorml, xmax ,&
+    xmin, xval, yval
+  INTEGER i, idata, ideriv, ileft, intrvl, intw1, ip, ir, irow ,&
+    itype, iw1, iw2, l, lw, mt, n, nb, neqcon, nincon ,&
+    nordm1, nordp1, np1
+  LOGICAL band, new, var
   CHARACTER(8) :: xern1
   !
   !***FIRST EXECUTABLE STATEMENT  DFCMN
@@ -122,7 +122,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   neqcon = 0
   nincon = 0
-  DO i = 1 , Nconst
+  DO i = 1, Nconst
     l = Nderiv(i)
     itype = MOD(l,4)
     IF ( itype<2 ) THEN
@@ -148,7 +148,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !     Find the smallest referenced independent variable value in any
   !     constraint.
   !
-  DO i = 1 , Nconst
+  DO i = 1, Nconst
     xmin = MIN(xmin,Xconst(i))
     xmax = MAX(xmax,Xconst(i))
   ENDDO
@@ -194,7 +194,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     !        pointers.
     !
     CALL DCOPY(Ndata,Xdata,1,Xtemp,1)
-    DO i = 1 , Ndata
+    DO i = 1, Ndata
       Ptemp(i) = i
     ENDDO
     !
@@ -206,11 +206,11 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     !
     !        Fix breakpoint array if needed.
     !
-    DO i = 1 , Nord
+    DO i = 1, Nord
       Bkpt(i) = MIN(Bkpt(i),xmin)
     ENDDO
     !
-    DO i = np1 , Nbkpt
+    DO i = np1, Nbkpt
       Bkpt(i) = MAX(Bkpt(i),xmax)
     ENDDO
     !
@@ -220,7 +220,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     ip = 1
     ir = 1
     ileft = Nord
-    DO idata = 1 , Ndata
+    DO idata = 1, Ndata
       !
       !           Sorted indices are in PTEMP(*).
       !
@@ -275,7 +275,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   ENDIF
   !
   band = band .AND. Nconst==0
-  DO i = 1 , n
+  DO i = 1, n
     band = band .AND. G(i,1)/=0.D0
   ENDDO
   !
@@ -310,7 +310,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !     Analyze constraint indicators for an equality constraint.
   !
   neqcon = 0
-  DO idata = 1 , Nconst
+  DO idata = 1, Nconst
     l = Nderiv(idata)
     itype = MOD(l,4)
     IF ( itype>1 ) THEN
@@ -345,7 +345,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   !     Transfer least squares data.
   !
-  DO i = 1 , np1
+  DO i = 1, np1
     irow = i + neqcon
     CALL DCOPY(n,0.D0,0,W(irow,1),Mdw)
     CALL DCOPY(MIN(np1-i,Nord),G(i,1),Mdg,W(irow,i),Mdw)
@@ -356,7 +356,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !     Analyze constraint indicators for inequality constraints.
   !
   nincon = 0
-  DO idata = 1 , Nconst
+  DO idata = 1, Nconst
     l = Nderiv(idata)
     itype = MOD(l,4)
     IF ( itype<2 ) THEN

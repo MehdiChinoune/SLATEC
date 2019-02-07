@@ -391,23 +391,23 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
-  REAL Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Ligw , Lrgw , N , Nelt
+  REAL Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Ligw, Lrgw, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt) , B(N) , Rgwk(Lrgw) , Rwork(*) , Sb(N) , Sx(N) , X(N)
-  INTEGER Ia(Nelt) , Igwk(Ligw) , Iwork(*) , Ja(Nelt)
+  REAL A(Nelt), B(N), Rgwk(Lrgw), Rwork(*), Sb(N), Sx(N), X(N)
+  INTEGER Ia(Nelt), Igwk(Ligw), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC , MSOLVE
+  EXTERNAL MATVEC, MSOLVE
   !     .. Local Scalars ..
-  REAL bnrm , rhol , sum
-  INTEGER i , iflag , jpre , jscal , kmp , ldl , lgmr , lhes , lq , lr , &
-    lv , lw , lxl , lz , lzm1 , maxl , maxlp1 , nms , nmsl , nrmax , &
+  REAL bnrm, rhol, sum
+  INTEGER i, iflag, jpre, jscal, kmp, ldl, lgmr, lhes, lq, lr, &
+    lv, lw, lxl, lz, lzm1, maxl, maxlp1, nms, nmsl, nrmax, &
     nrsts
   !     .. External Functions ..
-  REAL R1MACH , SNRM2
-  EXTERNAL R1MACH , SNRM2
+  REAL R1MACH, SNRM2
+  EXTERNAL R1MACH, SNRM2
   !     .. External Subroutines ..
-  EXTERNAL SCOPY , SPIGMR
+  EXTERNAL SCOPY, SPIGMR
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
   !***FIRST EXECUTABLE STATEMENT  SGMRES
@@ -471,7 +471,7 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
           ENDIF
           IF ( jscal==2.OR.jscal==3 ) THEN
             sum = 0
-            DO i = 1 , N
+            DO i = 1, N
               sum = sum + (Rgwk(lr-1+i)*Sb(i))**2
             ENDDO
             bnrm = SQRT(sum)
@@ -482,7 +482,7 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
           !         Calculate initial residual.
           !   ------------------------------------------------------------------
           CALL MATVEC(N,X,Rgwk(lr),Nelt,Ia,Ja,A,Isym)
-          DO i = 1 , N
+          DO i = 1, N
             Rgwk(lr-1+i) = B(i) - Rgwk(lr-1+i)
           ENDDO
           !   ------------------------------------------------------------------
@@ -507,7 +507,7 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
             !         Increment X by the current approximate solution Z of A*Z = R.
             !
             lzm1 = lz - 1
-            DO i = 1 , N
+            DO i = 1, N
               X(i) = X(i) + Rgwk(lzm1+i)
             ENDDO
             IF ( iflag/=0 ) THEN

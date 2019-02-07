@@ -4,8 +4,8 @@ SUBROUTINE OHTROL(Q,N,Nrda,Diag,Irank,Div,Td)
   IMPLICIT NONE
   !*--OHTROL5
   !*** Start of declarations inserted by SPAG
-  REAL dd , Diag , diagk , Div , Q , qs , SDOT , sig , sqd , Td , tdv
-  INTEGER Irank , irp , j , k , kir , kirm , l , N , nmir , Nrda
+  REAL dd, Diag, diagk, Div, Q, qs, SDOT, sig, sqd, Td, tdv
+  INTEGER Irank, irp, j, k, kir, kirm, l, N, nmir, Nrda
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  OHTROL
   !***SUBSIDIARY
@@ -32,11 +32,11 @@ SUBROUTINE OHTROL(Q,N,Nrda,Diag,Irank,Div,Td)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  OHTROL
-  DIMENSION Q(Nrda,*) , Diag(*) , Div(*) , Td(*)
+  DIMENSION Q(Nrda,*), Diag(*), Div(*), Td(*)
   !***FIRST EXECUTABLE STATEMENT  OHTROL
   nmir = N - Irank
   irp = Irank + 1
-  DO k = 1 , Irank
+  DO k = 1, Irank
     kir = irp - k
     diagk = Diag(kir)
     sig = (diagk*diagk) + SDOT(nmir,Q(irp,kir),1,Q(irp,kir),1)
@@ -47,10 +47,10 @@ SUBROUTINE OHTROL(Q,N,Nrda,Diag,Irank,Div,Td)
     IF ( k/=Irank ) THEN
       kirm = kir - 1
       sqd = dd*diagk - sig
-      DO j = 1 , kirm
+      DO j = 1, kirm
         qs = ((tdv*Q(kir,j))+SDOT(nmir,Q(irp,j),1,Q(irp,kir),1))/sqd
         Q(kir,j) = Q(kir,j) + qs*tdv
-        DO l = irp , N
+        DO l = irp, N
           Q(l,j) = Q(l,j) + qs*Q(l,kir)
         ENDDO
       ENDDO

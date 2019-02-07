@@ -109,21 +109,21 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
   !           IF-THEN-ELSE-ENDIF.  (SMR, WRB)
   !***END PROLOGUE  HPSORT
   !     .. Scalar Arguments ..
-  INTEGER Ier , Kflag , N , Strbeg , Strend
+  INTEGER Ier, Kflag, N, Strbeg, Strend
   CHARACTER*(*) Work
   !     .. Array Arguments ..
   INTEGER Iperm(*)
   CHARACTER*(*) Hx(*)
   !     .. Local Scalars ..
   REAL r
-  INTEGER i , ij , indx , indx0 , ir , istrt , j , k , kk , l , lm , lmt ,&
-    m , nn , nn2
+  INTEGER i, ij, indx, indx0, ir, istrt, j, k, kk, l, lm, lmt ,&
+    m, nn, nn2
   !     .. Local Arrays ..
-  INTEGER il(21) , iu(21)
+  INTEGER il(21), iu(21)
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , INT , LEN
+  INTRINSIC ABS, INT, LEN
   !***FIRST EXECUTABLE STATEMENT  HPSORT
   Ier = 0
   nn = N
@@ -172,7 +172,7 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
   !
   !     Initialize permutation vector
   !
-  DO i = 1 , nn
+  DO i = 1, nn
     Iperm(i) = i
   ENDDO
   !
@@ -187,7 +187,8 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
   j = nn
   r = .375E0
   !
-  100  IF ( i==j ) GOTO 300
+  100 CONTINUE
+  IF ( i==j ) GOTO 300
   IF ( r<=0.5898437E0 ) THEN
     r = r + 3.90625E-2
   ELSE
@@ -282,7 +283,7 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
       !        Alter array to get reverse order, if necessary
       !
       nn2 = nn/2
-      DO i = 1 , nn2
+      DO i = 1, nn2
         ir = nn - i + 1
         lm = Iperm(i)
         Iperm(i) = Iperm(ir)
@@ -297,7 +298,7 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
       !        Use the IPERM vector as a flag.
       !        If IPERM(I) < 0, then the I-th value is in correct location
       !
-      DO istrt = 1 , nn
+      DO istrt = 1, nn
         IF ( Iperm(istrt)>=0 ) THEN
           indx = istrt
           indx0 = indx
@@ -318,7 +319,7 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
       !
       !        Revert the signs of the IPERM values
       !
-      DO i = 1 , nn
+      DO i = 1, nn
         Iperm(i) = -Iperm(i)
       ENDDO
       !
@@ -329,7 +330,8 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
     j = iu(m)
   ENDIF
   !
-  400  IF ( j-i>=1 ) GOTO 200
+  400 CONTINUE
+  IF ( j-i>=1 ) GOTO 200
   IF ( i==1 ) GOTO 100
   i = i - 1
   DO
@@ -352,4 +354,5 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
     ENDIF
   ENDDO
   !
-  99999 END SUBROUTINE HPSORT
+  99999 CONTINUE
+  END SUBROUTINE HPSORT

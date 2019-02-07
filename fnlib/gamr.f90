@@ -4,7 +4,7 @@ FUNCTION GAMR(X)
   IMPLICIT NONE
   !*--GAMR5
   !*** Start of declarations inserted by SPAG
-  REAL alngx , GAMMA , GAMR , sgngx , X
+  REAL alngx, GAMMA, GAMR, sgngx, X
   INTEGER irold
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  GAMR
@@ -47,4 +47,5 @@ FUNCTION GAMR(X)
   CALL XSETF(irold)
   RETURN
   !
-  99999 END FUNCTION GAMR
+  99999 CONTINUE
+  END FUNCTION GAMR

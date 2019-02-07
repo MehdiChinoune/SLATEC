@@ -5,12 +5,12 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
   IMPLICIT NONE
   !*--CBLKT16
   !*** Start of declarations inserted by SPAG
-  REAL An , B , Bn , Cn , CNV , dum , EPS
-  INTEGER i , i1 , i2 , i3 , i4 , Idimy , idxa , idxc , if , ifd , IK , &
-    im1 , im2 , im3 , imi1 , imi2 , ip , ip1 , ip2 , ip3
-  INTEGER ipi1 , ipi2 , ipi3 , ir , irm1 , iz , izr , j , K , kdo , l , ll , &
-    M , N , na , nc , NCMplx , NM , nm1 , nm2
-  INTEGER nm3 , np , np1 , np2 , np3 , NPP , nz
+  REAL An, B, Bn, Cn, CNV, dum, EPS
+  INTEGER i, i1, i2, i3, i4, Idimy, idxa, idxc, if, ifd, IK, &
+    im1, im2, im3, imi1, imi2, ip, ip1, ip2, ip3
+  INTEGER ipi1, ipi2, ipi3, ir, irm1, iz, izr, j, K, kdo, l, ll, &
+    M, N, na, nc, NCMplx, NM, nm1, nm2
+  INTEGER nm3, np, np1, np2, np3, NPP, nz
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CBLKT1
   !***SUBSIDIARY
@@ -38,13 +38,13 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CBLKT1
   !
-  DIMENSION An(*) , Bn(*) , Cn(*) , Am(*) , Bm(*) , Cm(*) , B(*) , W1(*) , &
-    W2(*) , W3(*) , Wd(*) , Ww(*) , Wu(*) , Y(Idimy,*)
-  COMMON /CCBLK / NPP , K , EPS , CNV , NM , NCMplx , IK
-  COMPLEX Am , Bm , Cm , Y , W1 , W2 , W3 , Wd , Ww , Wu
+  DIMENSION An(*), Bn(*), Cn(*), Am(*), Bm(*), Cm(*), B(*), W1(*), &
+    W2(*), W3(*), Wd(*), Ww(*), Wu(*), Y(Idimy,*)
+  COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
+  COMPLEX Am, Bm, Cm, Y, W1, W2, W3, Wd, Ww, Wu
   !***FIRST EXECUTABLE STATEMENT  CBLKT1
   kdo = K - 1
-  DO l = 1 , kdo
+  DO l = 1, kdo
     ir = l - 1
     i2 = 2**ir
     i1 = i2/2
@@ -57,7 +57,7 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
     CALL PRDCT(nm2,B(im2),nm3,B(im3),nm1,B(im1),0,dum,Y(1,i2),W3,M,Am,Bm,Cm,&
       Wd,Ww,Wu)
     if = 2**K
-    DO i = i4 , if , i4
+    DO i = i4, if, i4
       IF ( i<=NM ) THEN
         ipi1 = i + i1
         ipi2 = i + i2
@@ -77,12 +77,12 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
             CALL PRDCT(np1,B(ip1),0,dum,0,dum,nc,Cn(idxc),W3,W2,M,Am,Bm,Cm,&
               Wd,Ww,Wu)
           ELSE
-            DO j = 1 , M
+            DO j = 1, M
               W3(j) = (0.,0.)
               W2(j) = (0.,0.)
             ENDDO
           ENDIF
-          DO j = 1 , M
+          DO j = 1, M
             Y(j,i) = W1(j) + W2(j) + Y(j,i)
           ENDDO
         ENDIF
@@ -102,10 +102,10 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
     CALL PRDCT(nz,B(iz),nm1,B(im1),np1,B(ip1),0,dum,Y(1,i),W1,M,Am,Bm,Cm,Wd,&
       Ww,Wu)
     izr = i
-    DO j = 1 , M
+    DO j = 1, M
       W2(j) = W1(j)
     ENDDO
-    DO ll = 2 , K
+    DO ll = 2, K
       l = K - ll + 1
       ir = l - 1
       i2 = 2**ir
@@ -117,20 +117,20 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
       CALL INXCB(i+i1,ir-1,ip1,np1)
       CALL PRDCT(np1,B(ip1),0,dum,0,dum,nc,Cn(idxc),W1,W1,M,Am,Bm,Cm,Wd,Ww,&
         Wu)
-      DO j = 1 , M
+      DO j = 1, M
         W1(j) = Y(j,i) + W1(j)
       ENDDO
       CALL PRDCT(nz,B(iz),nm1,B(im1),np1,B(ip1),0,dum,W1,W1,M,Am,Bm,Cm,Wd,&
         Ww,Wu)
     ENDDO
-    DO ll = 2 , K
+    DO ll = 2, K
       l = K - ll + 1
       ir = l - 1
       i2 = 2**ir
       i1 = i2/2
       i4 = i2 + i2
       ifd = if - i2
-      DO i = i2 , ifd , i4
+      DO i = i2, ifd, i4
         IF ( i-i2==izr ) THEN
           IF ( i>NM ) EXIT
           CALL INXCA(i,ir,idxa,na)
@@ -139,7 +139,7 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
           CALL INXCB(i+i1,ir-1,ip1,np1)
           CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),W2,W2,M,Am,Bm,Cm,Wd,&
             Ww,Wu)
-          DO j = 1 , M
+          DO j = 1, M
             W2(j) = Y(j,i) + W2(j)
           ENDDO
           CALL PRDCT(nz,B(iz),nm1,B(im1),np1,B(ip1),0,dum,W2,W2,M,Am,Bm,Cm,&
@@ -149,7 +149,7 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
         ENDIF
       ENDDO
     ENDDO
-    50     DO j = 1 , M
+    50     DO j = 1, M
     Y(j,NM+1) = Y(j,NM+1) - Cn(NM+1)*W1(j) - An(NM+1)*W2(j)
   ENDDO
   CALL INXCB(if/2,K-1,im1,nm1)
@@ -161,13 +161,13 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
     CALL PRDCT(NM+1,B(ip),nm1,B(im1),0,dum,0,dum,Y(1,NM+1),Y(1,NM+1),M,Am,&
       Bm,Cm,Wd,Ww,Wu)
   ENDIF
-  DO j = 1 , M
+  DO j = 1, M
     W1(j) = An(1)*Y(j,NM+1)
     W2(j) = Cn(NM)*Y(j,NM+1)
     Y(j,1) = Y(j,1) - W1(j)
     Y(j,NM) = Y(j,NM) - W2(j)
   ENDDO
-  DO l = 1 , kdo
+  DO l = 1, kdo
     ir = l - 1
     i2 = 2**ir
     i4 = i2 + i2
@@ -181,20 +181,20 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
       Ww,Wu)
     CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),W1,W1,M,Am,Bm,Cm,Wd,Ww,&
       Wu)
-    DO j = 1 , M
+    DO j = 1, M
       Y(j,i) = Y(j,i) - W1(j)
     ENDDO
   ENDDO
   !
   izr = NM
-  DO l = 1 , kdo
+  DO l = 1, kdo
     ir = l - 1
     i2 = 2**ir
     i1 = i2/2
     i3 = i2 + i1
     i4 = i2 + i2
     irm1 = ir - 1
-    DO i = i4 , if , i4
+    DO i = i4, if, i4
       ipi1 = i + i1
       ipi2 = i + i2
       ipi3 = i + i3
@@ -207,7 +207,7 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
           Cm,Wd,Ww,Wu)
         CALL PRDCT(np1,B(ip1),0,dum,0,dum,nc,Cn(idxc),W2,W2,M,Am,Bm,Cm,Wd,&
           Ww,Wu)
-        DO j = 1 , M
+        DO j = 1, M
           Y(j,i) = Y(j,i) - W2(j)
         ENDDO
         izr = i
@@ -221,7 +221,7 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
   !
   ! BEGIN BACK SUBSTITUTION PHASE
   !
-  DO ll = 1 , K
+  DO ll = 1, K
     l = K - ll + 1
     ir = l - 1
     irm1 = ir - 1
@@ -229,7 +229,7 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
     i1 = i2/2
     i4 = i2 + i2
     ifd = if - i2
-    DO i = i2 , ifd , i4
+    DO i = i2, ifd, i4
       IF ( i<=NM ) THEN
         imi1 = i - i1
         imi2 = i - i2
@@ -241,7 +241,7 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
         CALL INXCB(imi1,irm1,im1,nm1)
         CALL INXCB(ipi1,irm1,ip1,np1)
         IF ( i<=i2 ) THEN
-          DO j = 1 , M
+          DO j = 1, M
             W1(j) = (0.,0.)
           ENDDO
         ELSE
@@ -252,11 +252,11 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
           CALL PRDCT(np1,B(ip1),0,dum,0,dum,nc,Cn(idxc),Y(1,ipi2),W2,M,Am,&
             Bm,Cm,Wd,Ww,Wu)
         ELSE
-          DO j = 1 , M
+          DO j = 1, M
             W2(j) = (0.,0.)
           ENDDO
         ENDIF
-        DO j = 1 , M
+        DO j = 1, M
           W1(j) = Y(j,i) + W1(j) + W2(j)
         ENDDO
         CALL PRDCT(nz,B(iz),nm1,B(im1),np1,B(ip1),0,dum,W1,Y(1,i),M,Am,Bm,&

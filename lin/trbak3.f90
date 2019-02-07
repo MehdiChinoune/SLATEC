@@ -70,26 +70,26 @@ SUBROUTINE TRBAK3(Nm,N,Nv,A,M,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  TRBAK3
   !
-  INTEGER i , j , k , l , M , N , ik , iz , Nm , Nv
-  REAL A(*) , Z(Nm,*)
-  REAL h , s
+  INTEGER i, j, k, l, M, N, ik, iz, Nm, Nv
+  REAL A(*), Z(Nm,*)
+  REAL h, s
   !
   !***FIRST EXECUTABLE STATEMENT  TRBAK3
   IF ( M/=0 ) THEN
     IF ( N/=1 ) THEN
       !
-      DO i = 2 , N
+      DO i = 2, N
         l = i - 1
         iz = (i*l)/2
         ik = iz + i
         h = A(ik)
         IF ( h/=0.0E0 ) THEN
           !
-          DO j = 1 , M
+          DO j = 1, M
             s = 0.0E0
             ik = iz
             !
-            DO k = 1 , l
+            DO k = 1, l
               ik = ik + 1
               s = s + A(ik)*Z(k,j)
             ENDDO
@@ -97,7 +97,7 @@ SUBROUTINE TRBAK3(Nm,N,Nv,A,M,Z)
             s = (s/h)/h
             ik = iz
             !
-            DO k = 1 , l
+            DO k = 1, l
               ik = ik + 1
               Z(k,j) = Z(k,j) - s*A(ik)
             ENDDO

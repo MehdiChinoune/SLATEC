@@ -4,10 +4,10 @@ SUBROUTINE QXGBUN(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--QXGBUN5
   !*** Start of declarations inserted by SPAG
-  REAL a , b , c , deltax , deltay , dum , dysq , ermax , err , f , pi , &
-    PIMACH , s , t , w , x , y , z
-  INTEGER i , idimy , ierror , Ipass , j , Kprint , Lun , m , mm1 , mperod , &
-    n , nperod
+  REAL a, b, c, deltax, deltay, dum, dysq, ermax, err, f, pi, &
+    PIMACH, s, t, w, x, y, z
+  INTEGER i, idimy, ierror, Ipass, j, Kprint, Lun, m, mm1, mperod, &
+    n, nperod
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QXGBUN
   !***PURPOSE
@@ -25,7 +25,7 @@ SUBROUTINE QXGBUN(Lun,Kprint,Ipass)
   !     *                                                               *
   !     *      SEPARABLE ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS        *
   !     *                                                               *
-  !     *                  (VERSION  3 , JUNE 1979)                     *
+  !     *                  (VERSION  3, JUNE 1979)                     *
   !     *                                                               *
   !     *                             BY                                *
   !     *                                                               *
@@ -55,7 +55,7 @@ SUBROUTINE QXGBUN(Lun,Kprint,Ipass)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
   !***END PROLOGUE  QXGBUN
-  DIMENSION f(25,130) , a(20) , b(20) , c(20) , w(1200) , x(20) , y(120)
+  DIMENSION f(25,130), a(20), b(20), c(20), w(1200), x(20), y(120)
   !***FIRST EXECUTABLE STATEMENT  QXGBUN
   !
   !     FROM DIMENSION STATEMENT WE GET VALUE OF IDIMY.  ALSO NOTE THAT
@@ -74,10 +74,10 @@ SUBROUTINE QXGBUN(Lun,Kprint,Ipass)
   !     GENERATE AND STORE GRID POINTS FOR THE PURPOSE OF COMPUTING
   !     COEFFICIENTS AND RIGHT SIDE OF EQUATION.
   !
-  DO i = 1 , m
+  DO i = 1, m
     x(i) = (i-1)*deltax
   ENDDO
-  DO j = 1 , n
+  DO j = 1, n
     y(j) = -pi + (j-1)*deltay
   ENDDO
   !
@@ -88,7 +88,7 @@ SUBROUTINE QXGBUN(Lun,Kprint,Ipass)
   a(1) = 0.
   b(1) = -2.0E0*s
   c(1) = 2.0E0*s
-  DO i = 2 , m
+  DO i = 2, m
     a(i) = (1.+x(i))**2*s + (1.+x(i))*t
     c(i) = (1.+x(i))**2*s - (1.+x(i))*t
     b(i) = -2.0E0*(1.0E0+x(i))**2*s
@@ -99,15 +99,15 @@ SUBROUTINE QXGBUN(Lun,Kprint,Ipass)
   !     BOUNDARY DATA.
   !
   dysq = deltay**2
-  DO j = 1 , n
+  DO j = 1, n
     f(1,j) = dysq*(11.+8./deltax)*SIN(y(j))
   ENDDO
   !
   !     GENERATE RIGHT SIDE.
   !
   mm1 = m - 1
-  DO i = 2 , mm1
-    DO j = 1 , n
+  DO i = 2, mm1
+    DO j = 1, n
       f(i,j) = dysq*3.*(1.+x(i))**4*SIN(y(j))
     ENDDO
   ENDDO
@@ -115,7 +115,7 @@ SUBROUTINE QXGBUN(Lun,Kprint,Ipass)
   !     GENERATE RIGHT SIDE FOR I = M SHOWING INTRODUCTION OF
   !     BOUNDARY DATA.
   !
-  DO j = 1 , n
+  DO j = 1, n
     f(m,j) = dysq*(3.*(1.+x(m))**4-16.*((1.+x(m))/deltax)**2+16.*(1.+x(m))&
       /deltax)*SIN(y(j))
   ENDDO
@@ -125,8 +125,8 @@ SUBROUTINE QXGBUN(Lun,Kprint,Ipass)
   !                   U(X,Y) = (1+X)**4*SIN(Y)
   !
   err = 0.
-  DO i = 1 , m
-    DO j = 1 , n
+  DO i = 1, m
+    DO j = 1, n
       z = ABS(f(i,j)-(1.+x(i))**4*SIN(y(j)))
       IF ( z>err ) err = z
     ENDDO
@@ -136,7 +136,7 @@ SUBROUTINE QXGBUN(Lun,Kprint,Ipass)
   IF ( err>ermax ) Ipass = 0
   IF ( Kprint==0 ) RETURN
   IF ( Kprint>=2.OR.Ipass==0 ) THEN
-    WRITE (Lun,99001) ierror , err , INT(w(1))
+    WRITE (Lun,99001) ierror, err, INT(w(1))
     !
     99001   FORMAT ('1',20X,'SUBROUTINE GENBUN EXAMPLE'///10X,&
       'THE OUTPUT FROM THE NCAR CONTROL DATA 7600 WAS'//32X,&

@@ -82,15 +82,15 @@ SUBROUTINE CHIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CHIDI
-  INTEGER Lda , N , Job
-  COMPLEX A(Lda,*) , Work(*)
+  INTEGER Lda, N, Job
+  COMPLEX A(Lda,*), Work(*)
   REAL Det(2)
-  INTEGER Kpvt(*) , Inert(3)
+  INTEGER Kpvt(*), Inert(3)
   !
-  COMPLEX akkp1 , CDOTC , temp
-  REAL ten , d , t , ak , akp1
-  INTEGER j , jb , k , km1 , ks , kstep
-  LOGICAL noinv , nodet , noert
+  COMPLEX akkp1, CDOTC, temp
+  REAL ten, d, t, ak, akp1
+  INTEGER j, jb, k, km1, ks, kstep
+  LOGICAL noinv, nodet, noert
   !***FIRST EXECUTABLE STATEMENT  CHIDI
   noinv = MOD(Job,10)==0
   nodet = MOD(Job,100)/10==0
@@ -108,7 +108,7 @@ SUBROUTINE CHIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
       ten = 10.0E0
     ENDIF
     t = 0.0E0
-    DO k = 1 , N
+    DO k = 1, N
       d = REAL(A(k,k))
       !
       !           CHECK IF 1 BY 1
@@ -116,7 +116,7 @@ SUBROUTINE CHIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
       IF ( Kpvt(k)<=0 ) THEN
         !
         !              2 BY 2 BLOCK
-        !              USE DET (D  S)  =  (D/T * C - T) * T  ,  T = ABS(S)
+        !              USE DET (D  S)  =  (D/T * C - T) * T ,  T = ABS(S)
         !                      (S  C)
         !              TO AVOID UNDERFLOW/OVERFLOW TROUBLES.
         !              TAKE TWO PASSES THROUGH SCALING.  USE  T  FOR FLAG.
@@ -172,7 +172,7 @@ SUBROUTINE CHIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
         A(k,k+1) = -akkp1/d
         IF ( km1>=1 ) THEN
           CALL CCOPY(km1,A(1,k+1),1,Work,1)
-          DO j = 1 , km1
+          DO j = 1, km1
             A(j,k+1) = CDOTC(j,A(1,j),1,Work,1)
             CALL CAXPY(j-1,Work(j),A(1,j),1,A(1,k+1),1)
           ENDDO
@@ -180,7 +180,7 @@ SUBROUTINE CHIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
             ,0.0E0)
           A(k,k+1) = A(k,k+1) + CDOTC(km1,A(1,k),1,A(1,k+1),1)
           CALL CCOPY(km1,A(1,k),1,Work,1)
-          DO j = 1 , km1
+          DO j = 1, km1
             A(j,k) = CDOTC(j,A(1,j),1,Work,1)
             CALL CAXPY(j-1,Work(j),A(1,j),1,A(1,k),1)
           ENDDO
@@ -194,7 +194,7 @@ SUBROUTINE CHIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
         A(k,k) = CMPLX(1.0E0/REAL(A(k,k)),0.0E0)
         IF ( km1>=1 ) THEN
           CALL CCOPY(km1,A(1,k),1,Work,1)
-          DO j = 1 , km1
+          DO j = 1, km1
             A(j,k) = CDOTC(j,A(1,j),1,Work,1)
             CALL CAXPY(j-1,Work(j),A(1,j),1,A(1,k),1)
           ENDDO
@@ -208,7 +208,7 @@ SUBROUTINE CHIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
       ks = ABS(Kpvt(k))
       IF ( ks/=k ) THEN
         CALL CSWAP(ks,A(1,ks),1,A(1,k),1)
-        DO jb = ks , k
+        DO jb = ks, k
           j = k + ks - jb
           temp = CONJG(A(j,k))
           A(j,k) = CONJG(A(ks,j))

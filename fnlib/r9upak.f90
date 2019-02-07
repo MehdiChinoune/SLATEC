@@ -4,7 +4,7 @@ SUBROUTINE R9UPAK(X,Y,N)
   IMPLICIT NONE
   !*--R9UPAK5
   !*** Start of declarations inserted by SPAG
-  REAL absx , X , Y
+  REAL absx, X, Y
   INTEGER N
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9UPAK

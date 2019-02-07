@@ -12,7 +12,7 @@ REAL(8) FUNCTION DT3(X)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DT3
-  REAL(8) :: a , b , DF3S , X , x1 , y
+  REAL(8) :: a, b, DF3S, X, x1, y
   !***FIRST EXECUTABLE STATEMENT  DT3
   a = 0.0D+00
   b = 0.5D+01

@@ -5,7 +5,7 @@ SUBROUTINE SSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   IMPLICIT NONE
   !*--SSDCG6
   !*** Start of declarations inserted by SPAG
-  REAL SSDI , SSMV
+  REAL SSDI, SSMV
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSDCG
   !***PURPOSE  Diagonally Scaled Conjugate Gradient Sparse Ax=b Solver.
@@ -228,19 +228,19 @@ SUBROUTINE SSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   920929  Corrected format of references.  (FNF)
   !***END PROLOGUE  SSDCG
   !     .. Parameters ..
-  INTEGER LOCRB , LOCIB
+  INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  REAL Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
+  REAL Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
     Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt) , B(N) , Rwork(Lenw) , X(N)
-  INTEGER Ia(Nelt) , Iwork(Leniw) , Ja(Nelt)
+  REAL A(Nelt), B(N), Rwork(Lenw), X(N)
+  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locd , locdz , lociw , locp , locr , locw , locz
+  INTEGER locd, locdz, lociw, locp, locr, locw, locz
   !     .. External Subroutines ..
-  EXTERNAL SCG , SCHKW , SS2Y , SSDI , SSDS , SSMV
+  EXTERNAL SCG, SCHKW, SS2Y, SSDI, SSDS, SSMV
   !***FIRST EXECUTABLE STATEMENT  SSDCG
   !
   Ierr = 0

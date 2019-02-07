@@ -4,7 +4,7 @@ SUBROUTINE CGTQC(Lun,Kprint,Nerr)
   IMPLICIT NONE
   !*--CGTQC5
   !*** Start of declarations inserted by SPAG
-  INTEGER Kprint , Lun
+  INTEGER Kprint, Lun
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CGTQC
   !***PURPOSE  Quick check for CGTSL.
@@ -36,20 +36,20 @@ SUBROUTINE CGTQC(Lun,Kprint,Nerr)
   !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
   !           record and cleaned up FORMATs.  (RWC)
   !***END PROLOGUE  CGTQC
-  COMPLEX c(4) , d(4) , e(4) , b(4) , cx(4) , ct(4) , dt(4) , et(4) , bt(4)
+  COMPLEX c(4), d(4), e(4), b(4), cx(4), ct(4), dt(4), et(4), bt(4)
   CHARACTER kfail*13
-  INTEGER n , info , i , indx , Nerr
+  INTEGER n, info, i, indx, Nerr
   REAL delx
-  DATA c/(0.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,1.E0)/
-  DATA d/(2.E0,0.E0) , (2.E0,0.E0) , (3.E0,0.E0) , (4.E0,0.E0)/
-  DATA e/(0.E0,-1.E0) , (0.E0,0.E0) , (0.E0,-1.E0) , (0.E0,0.E0)/
-  DATA b/(3.E0,2.E0) , (-1.E0,3.E0) , (0.E0,-4.E0) , (5.E0,0.E0)/
-  DATA cx/(1.E0,1.E0) , (0.E0,1.E0) , (0.E0,-1.E0) , (1.E0,0.E0)/
+  DATA c/(0.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,1.E0)/
+  DATA d/(2.E0,0.E0), (2.E0,0.E0), (3.E0,0.E0), (4.E0,0.E0)/
+  DATA e/(0.E0,-1.E0), (0.E0,0.E0), (0.E0,-1.E0), (0.E0,0.E0)/
+  DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
+  DATA cx/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
   DATA kfail/'INFO SOLUTION'/
   !***FIRST EXECUTABLE STATEMENT  CGTQC
   n = 4
   Nerr = 0
-  DO i = 1 , n
+  DO i = 1, n
     ct(i) = c(i)
     dt(i) = d(i)
     et(i) = e(i)
@@ -63,7 +63,7 @@ SUBROUTINE CGTQC(Lun,Kprint,Nerr)
   ENDIF
   !
   indx = 0
-  DO i = 1 , n
+  DO i = 1, n
     delx = ABS(REAL(bt(i)-cx(i))) + ABS(AIMAG(bt(i)-cx(i)))
     IF ( delx>.0001 ) indx = indx + 1
   ENDDO

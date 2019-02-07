@@ -23,16 +23,16 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CUNK1
-  COMPLEX cfn , ck , cone , crsc , cs , cscl , csgn , cspn , csr , css , &
-    cwrk , cy , czero , c1 , c2 , phi , rz , sum , s1 , s2 , Y , Z , &
-    zeta1 , zeta2 , zr , phid , zeta1d , zeta2d , sumd
-  REAL Alim , ang , aphi , asc , ascle , bry , cpn , c2i , c2m , c2r , &
-    Elim , fmr , fn , fnf , Fnu , pi , rs1 , sgn , spn , Tol , x , R1MACH
-  INTEGER i , ib , iflag , ifn , il , init , inu , iuf , k , kdflg , kflag , &
-    kk , Kode , Mr , N , nw , Nz , j , ipard , initd , ic , m
-  DIMENSION bry(3) , init(2) , Y(N) , sum(2) , phi(2) , zeta1(2) , zeta2(2)&
-    , cy(2) , cwrk(16,3) , css(3) , csr(3)
-  DATA czero , cone/(0.0E0,0.0E0) , (1.0E0,0.0E0)/
+  COMPLEX cfn, ck, cone, crsc, cs, cscl, csgn, cspn, csr, css, &
+    cwrk, cy, czero, c1, c2, phi, rz, sum, s1, s2, Y, Z, &
+    zeta1, zeta2, zr, phid, zeta1d, zeta2d, sumd
+  REAL Alim, ang, aphi, asc, ascle, bry, cpn, c2i, c2m, c2r, &
+    Elim, fmr, fn, fnf, Fnu, pi, rs1, sgn, spn, Tol, x, R1MACH
+  INTEGER i, ib, iflag, ifn, il, init, inu, iuf, k, kdflg, kflag, &
+    kk, Kode, Mr, N, nw, Nz, j, ipard, initd, ic, m
+  DIMENSION bry(3), init(2), Y(N), sum(2), phi(2), zeta1(2), zeta2(2)&
+    , cy(2), cwrk(16,3), css(3), csr(3)
+  DATA czero, cone/(0.0E0,0.0E0), (1.0E0,0.0E0)/
   DATA pi/3.14159265358979324E0/
   !***FIRST EXECUTABLE STATEMENT  CUNK1
   kdflg = 1
@@ -56,7 +56,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   zr = Z
   IF ( x<0.0E0 ) zr = -Z
   j = 2
-  DO i = 1 , N
+  DO i = 1, N
     !-----------------------------------------------------------------------
     !     J FLIP FLOPS BETWEEN 1 AND 2 IN J = 3 - J
     !-----------------------------------------------------------------------
@@ -160,7 +160,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   IF ( x<0.0E0 ) GOTO 600
   Nz = N
-  DO i = 1 , N
+  DO i = 1, N
     Y(i) = czero
   ENDDO
   RETURN
@@ -171,7 +171,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   s2 = cy(2)
   c1 = csr(kflag)
   ascle = bry(kflag)
-  DO i = ib , N
+  DO i = ib, N
     c2 = s2
     s2 = ck*s2 + s1
     s1 = c2
@@ -195,7 +195,8 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
       ENDIF
     ENDIF
   ENDDO
-  300  IF ( Mr==0 ) RETURN
+  300 CONTINUE
+  IF ( Mr==0 ) RETURN
   !-----------------------------------------------------------------------
   !     ANALYTIC CONTINUATION FOR RE(Z).LT.0.0E0
   !-----------------------------------------------------------------------
@@ -220,7 +221,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   kdflg = 1
   ib = ib - 1
   ic = ib - 1
-  DO k = 1 , N
+  DO k = 1, N
     fn = Fnu + (kk-1)
     !-----------------------------------------------------------------------
     !     LOGIC TO SORT OUT CASES WHOSE PARAMETERS WERE SET FOR THE K
@@ -315,7 +316,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   cs = csr(iflag)
   ascle = bry(iflag)
   fn = (inu+il)
-  DO i = 1 , il
+  DO i = 1, il
     c2 = s2
     s2 = s1 + CMPLX(fn+fnf,0.0E0)*rz*s2
     s1 = c2

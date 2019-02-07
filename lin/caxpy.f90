@@ -4,7 +4,7 @@ SUBROUTINE CAXPY(N,Ca,Cx,Incx,Cy,Incy)
   IMPLICIT NONE
   !*--CAXPY5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , Incy , kx , ky , N , ns
+  INTEGER i, Incx, Incy, kx, ky, N, ns
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CAXPY
   !***PURPOSE  Compute a constant times a vector plus a vector.
@@ -51,7 +51,7 @@ SUBROUTINE CAXPY(N,Ca,Cx,Incx,Cy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920801  Removed variable CANORM.  (RWC, WRB)
   !***END PROLOGUE  CAXPY
-  COMPLEX Cx(*) , Cy(*) , Ca
+  COMPLEX Cx(*), Cy(*), Ca
   !***FIRST EXECUTABLE STATEMENT  CAXPY
   IF ( N<=0.OR.Ca==(0.0E0,0.0E0) ) RETURN
   IF ( Incx==Incy.AND.Incx>0 ) THEN
@@ -59,7 +59,7 @@ SUBROUTINE CAXPY(N,Ca,Cx,Incx,Cy,Incy)
     !     Code for equal, positive, non-unit increments.
     !
     ns = N*Incx
-    DO i = 1 , ns , Incx
+    DO i = 1, ns, Incx
       Cy(i) = Ca*Cx(i) + Cy(i)
     ENDDO
     GOTO 99999
@@ -71,10 +71,11 @@ SUBROUTINE CAXPY(N,Ca,Cx,Incx,Cy,Incy)
   ky = 1
   IF ( Incx<0 ) kx = 1 + (1-N)*Incx
   IF ( Incy<0 ) ky = 1 + (1-N)*Incy
-  DO i = 1 , N
+  DO i = 1, N
     Cy(ky) = Cy(ky) + Ca*Cx(kx)
     kx = kx + Incx
     ky = ky + Incy
   ENDDO
   RETURN
-  99999 END SUBROUTINE CAXPY
+  99999 CONTINUE
+  END SUBROUTINE CAXPY

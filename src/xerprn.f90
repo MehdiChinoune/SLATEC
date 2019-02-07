@@ -4,7 +4,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   IMPLICIT NONE
   !*--XERPRN5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , I1MACH , idelta , lenmsg , lpiece , lpref , lwrap , n , nextc
+  INTEGER i, I1MACH, idelta, lenmsg, lpiece, lpref, lwrap, n, nextc
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XERPRN
   !***SUBSIDIARY
@@ -80,10 +80,10 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   !   900510  Added code to break messages between words.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  XERPRN
-  CHARACTER*(*) Prefix , Messg
-  INTEGER Npref , Nwrap
+  CHARACTER*(*) Prefix, Messg
+  INTEGER Npref, Nwrap
   CHARACTER(148) :: cbuff
-  INTEGER iu(5) , nunit
+  INTEGER iu(5), nunit
   CHARACTER(2) :: NEWLIN
   PARAMETER (NEWLIN='$$')
   !***FIRST EXECUTABLE STATEMENT  XERPRN
@@ -94,7 +94,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   !       ERROR MESSAGE UNIT.
   !
   n = I1MACH(4)
-  DO i = 1 , nunit
+  DO i = 1, nunit
     IF ( iu(i)==0 ) iu(i) = n
   ENDDO
   !
@@ -119,7 +119,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   !
   lenmsg = LEN(Messg)
   n = lenmsg
-  DO i = 1 , n
+  DO i = 1, n
     IF ( Messg(lenmsg:lenmsg)/=' ' ) EXIT
     lenmsg = lenmsg - 1
   ENDDO
@@ -128,7 +128,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   !
   IF ( lenmsg==0 ) THEN
     cbuff(lpref+1:lpref+1) = ' '
-    DO i = 1 , nunit
+    DO i = 1, nunit
       WRITE (iu(i),'(A)') cbuff(1:lpref+1)
     ENDDO
     RETURN
@@ -181,7 +181,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
       idelta = 0
       lpiece = MIN(lwrap,lenmsg+1-nextc)
       IF ( lpiece<lenmsg+1-nextc ) THEN
-        DO i = lpiece + 1 , 2 , -1
+        DO i = lpiece + 1, 2, -1
           IF ( Messg(nextc+i-1:nextc+i-1)==' ' ) THEN
             lpiece = i - 1
             idelta = 1
@@ -204,7 +204,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
       !
       idelta = 0
       lpiece = lwrap
-      DO i = lpiece + 1 , 2 , -1
+      DO i = lpiece + 1, 2, -1
         IF ( Messg(nextc+i-1:nextc+i-1)==' ' ) THEN
           lpiece = i - 1
           idelta = 1
@@ -225,7 +225,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
     !
     !       PRINT
     !
-    DO i = 1 , nunit
+    DO i = 1, nunit
       WRITE (iu(i),'(A)') cbuff(1:lpref+lpiece)
     ENDDO
     !

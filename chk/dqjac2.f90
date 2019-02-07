@@ -20,8 +20,8 @@ SUBROUTINE DQJAC2(N,X,Fvec,Fjac,Ldfjac,Iflag)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQJAC2
-  INTEGER Iflag , Ldfjac , N
-  REAL(8) :: Fjac(Ldfjac,*) , Fvec(*) , X(*)
+  INTEGER Iflag, Ldfjac, N
+  REAL(8) :: Fjac(Ldfjac,*), Fvec(*), X(*)
   !***FIRST EXECUTABLE STATEMENT  DQJAC2
   Fjac(1,1) = -1.0D0
   Fjac(1,2) = 0.0D0

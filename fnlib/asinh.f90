@@ -4,8 +4,8 @@ FUNCTION ASINH(X)
   IMPLICIT NONE
   !*--ASINH5
   !*** Start of declarations inserted by SPAG
-  REAL aln2 , ASINH , asnhcs , CSEVL , R1MACH , sqeps , X , xmax , y
-  INTEGER INITS , nterms
+  REAL aln2, ASINH, asnhcs, CSEVL, R1MACH, sqeps, X, xmax, y
+  INTEGER INITS, nterms
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ASINH
   !***PURPOSE  Compute the arc hyperbolic sine.
@@ -35,7 +35,7 @@ FUNCTION ASINH(X)
   !***END PROLOGUE  ASINH
   DIMENSION asnhcs(20)
   LOGICAL first
-  SAVE aln2 , asnhcs , nterms , xmax , sqeps , first
+  SAVE aln2, asnhcs, nterms, xmax, sqeps, first
   DATA aln2/0.69314718055994530942E0/
   DATA asnhcs(1)/ - .12820039911738186E0/
   DATA asnhcs(2)/ - .058811761189951768E0/
@@ -79,4 +79,5 @@ FUNCTION ASINH(X)
   IF ( y>sqeps ) ASINH = X*(1.0+CSEVL(2.*X*X-1.,asnhcs,nterms))
   RETURN
   !
-  99999 END FUNCTION ASINH
+  99999 CONTINUE
+  END FUNCTION ASINH

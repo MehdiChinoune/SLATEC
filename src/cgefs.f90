@@ -106,11 +106,11 @@ SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CGEFS
   !
-  INTEGER Lda , N , Itask , Ind , Iwork(*)
-  COMPLEX A(Lda,*) , V(*) , Work(*)
+  INTEGER Lda, N, Itask, Ind, Iwork(*)
+  COMPLEX A(Lda,*), V(*), Work(*)
   REAL R1MACH
   REAL rcond
-  CHARACTER(8) :: xern1 , xern2
+  CHARACTER(8) :: xern1, xern2
   !***FIRST EXECUTABLE STATEMENT  CGEFS
   IF ( Lda<N ) THEN
     Ind = -1

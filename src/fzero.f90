@@ -4,7 +4,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   IMPLICIT NONE
   !*--FZERO5
   !*** Start of declarations inserted by SPAG
-  REAL F , R1MACH
+  REAL F, R1MACH
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  FZERO
   !***PURPOSE  Search for a zero of a function F(X) in a given interval
@@ -98,9 +98,9 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  FZERO
-  REAL a , acbs , acmb , Ae , aw , B , C , cmb , er , fa , fb , fc , fx , &
-    fz , p , q , R , Re , rw , t , tol , z
-  INTEGER ic , Iflag , kount
+  REAL a, acbs, acmb, Ae, aw, B, C, cmb, er, fa, fb, fc, fx, &
+    fz, p, q, R, Re, rw, t, tol, z
+  INTEGER ic, Iflag, kount
   !***FIRST EXECUTABLE STATEMENT  FZERO
   !
   !   ER is two times the computer unit roundoff value which is defined

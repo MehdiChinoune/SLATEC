@@ -87,8 +87,8 @@ SUBROUTINE RGG(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RGG
   !
-  INTEGER N , Nm , Ierr , Matz
-  REAL A(Nm,*) , B(Nm,*) , Alfr(*) , Alfi(*) , Beta(*) , Z(Nm,*)
+  INTEGER N, Nm, Ierr, Matz
+  REAL A(Nm,*), B(Nm,*), Alfr(*), Alfi(*), Beta(*), Z(Nm,*)
   LOGICAL tf
   !
   !***FIRST EXECUTABLE STATEMENT  RGG

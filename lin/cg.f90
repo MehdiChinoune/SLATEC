@@ -76,9 +76,9 @@ SUBROUTINE CG(Nm,N,Ar,Ai,Wr,Wi,Matz,Zr,Zi,Fv1,Fv2,Fv3,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CG
   !
-  INTEGER N , Nm , is1 , is2 , Ierr , Matz
-  REAL Ar(Nm,*) , Ai(Nm,*) , Wr(*) , Wi(*) , Zr(Nm,*) , Zi(Nm,*)
-  REAL Fv1(*) , Fv2(*) , Fv3(*)
+  INTEGER N, Nm, is1, is2, Ierr, Matz
+  REAL Ar(Nm,*), Ai(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
+  REAL Fv1(*), Fv2(*), Fv3(*)
   !
   !***FIRST EXECUTABLE STATEMENT  CG
   IF ( N<=Nm ) THEN

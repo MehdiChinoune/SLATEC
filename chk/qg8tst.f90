@@ -20,18 +20,18 @@ SUBROUTINE QG8TST(Lun,Kprint,Ipass)
   !           revised.  (WRB)
   !***END PROLOGUE  QG8TST
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
-  INTEGER ierr , kontrl
-  REAL a , ans , b , cor , err , req , tol
+  INTEGER ierr, kontrl
+  REAL a, ans, b, cor, err, req, tol
   LOGICAL fatal
   !     .. External Functions ..
-  REAL FQD1 , FQD2 , R1MACH
-  EXTERNAL FQD1 , FQD2 , R1MACH
+  REAL FQD1, FQD2, R1MACH
+  EXTERNAL FQD1, FQD2, R1MACH
   !     .. External Subroutines ..
-  EXTERNAL GAUS8 , XGETF , XSETF
+  EXTERNAL GAUS8, XGETF, XSETF
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , ATAN , EXP , SQRT
+  INTRINSIC ABS, ATAN, EXP, SQRT
   !***FIRST EXECUTABLE STATEMENT  QG8TST
   IF ( Kprint>=2 ) WRITE (Lun,FMT=99003)
   !
@@ -48,11 +48,11 @@ SUBROUTINE QG8TST(Lun,Kprint,Ipass)
   CALL GAUS8(FQD1,a,b,err,ans,ierr)
   cor = 2.0E0
   IF ( ABS(ans-cor)<=tol.AND.ierr==1 ) THEN
-    IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED' , a , b , ans , cor , err , &
+    IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, &
       ierr
   ELSE
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED' , a , b , ans , cor , err , &
+    IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, &
       ierr
   ENDIF
   !
@@ -64,11 +64,11 @@ SUBROUTINE QG8TST(Lun,Kprint,Ipass)
   CALL GAUS8(FQD2,a,b,err,ans,ierr)
   cor = (EXP(b)-1.0E0)/101.0E0
   IF ( ABS(ans-cor)<=tol.AND.ierr==1 ) THEN
-    IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED' , a , b , ans , cor , err , &
+    IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, &
       ierr
   ELSE
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED' , a , b , ans , cor , err , &
+    IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, &
       ierr
   ENDIF
   !
@@ -96,11 +96,11 @@ SUBROUTINE QG8TST(Lun,Kprint,Ipass)
   !     See if test passed.
   !
   IF ( ierr==2 ) THEN
-    IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED' , req , ans , ierr , &
-      err , cor
+    IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, &
+      err, cor
   ELSE
-    IF ( Kprint>=2 ) WRITE (Lun,FMT=99006) 'PASSED' , req , ans , ierr , &
-      err , cor
+    IF ( Kprint>=2 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, &
+      err, cor
     Ipass = 0
     fatal = .TRUE.
   ENDIF

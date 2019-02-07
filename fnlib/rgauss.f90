@@ -5,7 +5,7 @@ FUNCTION RGAUSS(Xmean,Sd)
   !*--RGAUSS5
   !*** Start of declarations inserted by SPAG
   INTEGER i
-  REAL RAND , RGAUSS , Sd , Xmean
+  REAL RAND, RGAUSS, Sd, Xmean
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RGAUSS
   !***PURPOSE  Generate a normally distributed (Gaussian) random number.
@@ -40,7 +40,7 @@ FUNCTION RGAUSS(Xmean,Sd)
   EXTERNAL RAND
   !***FIRST EXECUTABLE STATEMENT  RGAUSS
   RGAUSS = -6.0
-  DO i = 1 , 12
+  DO i = 1, 12
     RGAUSS = RGAUSS + RAND(0.0)
   ENDDO
   !

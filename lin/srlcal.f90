@@ -74,15 +74,15 @@ SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
-  REAL Prod , R0nrm , Snormw
-  INTEGER Kmp , Ll , Maxl , N
+  REAL Prod, R0nrm, Snormw
+  INTEGER Kmp, Ll, Maxl, N
   !     .. Array Arguments ..
-  REAL Q(*) , Rl(N) , V(N,*)
+  REAL Q(*), Rl(N), V(N,*)
   !     .. Local Scalars ..
-  REAL c , s , tem
-  INTEGER i , i2 , ip1 , k , llm1 , llp1
+  REAL c, s, tem
+  INTEGER i, i2, ip1, k, llm1, llp1
   !     .. External Subroutines ..
-  EXTERNAL SCOPY , SSCAL
+  EXTERNAL SCOPY, SSCAL
   !***FIRST EXECUTABLE STATEMENT  SRLCAL
   IF ( Kmp==Maxl ) THEN
     !
@@ -90,19 +90,19 @@ SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
     !
     CALL SCOPY(N,V(1,1),1,Rl,1)
     llm1 = Ll - 1
-    DO i = 1 , llm1
+    DO i = 1, llm1
       ip1 = i + 1
       i2 = i*2
       s = Q(i2)
       c = Q(i2-1)
-      DO k = 1 , N
+      DO k = 1, N
         Rl(k) = s*Rl(k) + c*V(k,ip1)
       ENDDO
     ENDDO
     s = Q(2*Ll)
     c = Q(2*Ll-1)/Snormw
     llp1 = Ll + 1
-    DO k = 1 , N
+    DO k = 1, N
       Rl(k) = s*Rl(k) + c*V(k,llp1)
     ENDDO
   ENDIF

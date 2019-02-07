@@ -73,10 +73,10 @@ SUBROUTINE BSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BSPVN
   !
-  INTEGER Ileft , imjp1 , Index , ipj , Iwork , Jhigh , jp1 , jp1ml , K , l
-  REAL T , vm , vmprev , Vnikx , Work , X
+  INTEGER Ileft, imjp1, Index, ipj, Iwork, Jhigh, jp1, jp1ml, K, l
+  REAL T, vm, vmprev, Vnikx, Work, X
   !     DIMENSION T(ILEFT+JHIGH)
-  DIMENSION T(*) , Vnikx(*) , Work(*)
+  DIMENSION T(*), Vnikx(*), Work(*)
   !     CONTENT OF J, DELTAM, DELTAP IS EXPECTED UNCHANGED BETWEEN CALLS.
   !     WORK(I) = DELTAP(I), WORK(K+I) = DELTAM(I), I = 1,K
   !***FIRST EXECUTABLE STATEMENT  BSPVN
@@ -110,7 +110,7 @@ SUBROUTINE BSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
       Work(K+Iwork) = X - T(imjp1)
       vmprev = 0.0E0
       jp1 = Iwork + 1
-      DO l = 1 , Iwork
+      DO l = 1, Iwork
         jp1ml = jp1 - l
         vm = Vnikx(l)/(Work(l)+Work(K+jp1ml))
         Vnikx(l) = vm*Work(l) + vmprev
@@ -123,4 +123,5 @@ SUBROUTINE BSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
   ENDIF
   !
   100  RETURN
-  99999 END SUBROUTINE BSPVN
+  99999 CONTINUE
+  END SUBROUTINE BSPVN

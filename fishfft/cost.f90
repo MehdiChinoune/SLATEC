@@ -4,8 +4,8 @@ SUBROUTINE COST(N,X,Wsave)
   IMPLICIT NONE
   !*--COST5
   !*** Start of declarations inserted by SPAG
-  REAL c1 , t1 , t2 , tx2 , Wsave , X , x1h , x1p3 , xi , xim2
-  INTEGER i , k , kc , modn , N , nm1 , np1 , ns2
+  REAL c1, t1, t2, tx2, Wsave, X, x1h, x1p3, xi, xim2
+  INTEGER i, k, kc, modn, N, nm1, np1, ns2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  COST
   !***PURPOSE  Compute the cosine transform of a real, even sequence.
@@ -75,7 +75,7 @@ SUBROUTINE COST(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  COST
-  DIMENSION X(*) , Wsave(*)
+  DIMENSION X(*), Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  COST
   nm1 = N - 1
   np1 = N + 1
@@ -89,7 +89,7 @@ SUBROUTINE COST(N,X,Wsave)
   ELSEIF ( N>3 ) THEN
     c1 = X(1) - X(N)
     X(1) = X(1) + X(N)
-    DO k = 2 , ns2
+    DO k = 2, ns2
       kc = np1 - k
       t1 = X(k) + X(kc)
       t2 = X(k) - X(kc)
@@ -103,7 +103,7 @@ SUBROUTINE COST(N,X,Wsave)
     CALL RFFTF(nm1,X,Wsave(N+1))
     xim2 = X(2)
     X(2) = c1
-    DO i = 4 , N , 2
+    DO i = 4, N, 2
       xi = X(i)
       X(i) = X(i-2) - X(i-1)
       X(i-1) = xim2
@@ -118,4 +118,5 @@ SUBROUTINE COST(N,X,Wsave)
   X(1) = x1p3 + tx2
   X(3) = x1p3 - tx2
   RETURN
-  99999 END SUBROUTINE COST
+  99999 CONTINUE
+  END SUBROUTINE COST

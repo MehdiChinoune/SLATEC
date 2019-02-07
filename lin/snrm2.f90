@@ -4,7 +4,7 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
   IMPLICIT NONE
   !*--SNRM25
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , j , N , nn
+  INTEGER i, Incx, j, N, nn
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SNRM2
   !***PURPOSE  Compute the Euclidean length (L2 norm) of a vector.
@@ -80,11 +80,11 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SNRM2
   INTEGER next
-  REAL Sx(*) , cutlo , cuthi , hitest , sum , xmax , zero , one
-  SAVE cutlo , cuthi , zero , one
-  DATA zero , one/0.0E0 , 1.0E0/
+  REAL Sx(*), cutlo, cuthi, hitest, sum, xmax, zero, one
+  SAVE cutlo, cuthi, zero, one
+  DATA zero, one/0.0E0, 1.0E0/
   !
-  DATA cutlo , cuthi/4.441E-16 , 1.304E19/
+  DATA cutlo, cuthi/4.441E-16, 1.304E19/
   !***FIRST EXECUTABLE STATEMENT  SNRM2
   IF ( N>0 ) THEN
     !
@@ -109,13 +109,15 @@ CASE(600)
 CASE(700)
   GOTO 700
 END SELECT
-200  IF ( ABS(Sx(i))>cutlo ) GOTO 800
+200 CONTINUE
+IF ( ABS(Sx(i))>cutlo ) GOTO 800
 next = 300
 xmax = zero
 !
 !                        PHASE 1.  SUM IS ZERO
 !
-300  IF ( Sx(i)==zero ) GOTO 900
+300 CONTINUE
+IF ( Sx(i)==zero ) GOTO 900
 IF ( ABS(Sx(i))>cutlo ) GOTO 800
 !
 !                                PREPARE FOR PHASE 2.
@@ -136,7 +138,8 @@ GOTO 900
 !                   PHASE 2.  SUM IS SMALL.
 !                             SCALE TO AVOID DESTRUCTIVE UNDERFLOW.
 !
-600  IF ( ABS(Sx(i))>cutlo ) THEN
+600 CONTINUE
+IF ( ABS(Sx(i))>cutlo ) THEN
 !
 !                  PREPARE FOR PHASE 3.
 !
@@ -147,7 +150,8 @@ ENDIF
 !                     COMMON CODE FOR PHASES 2 AND 4.
 !                     IN PHASE 4 SUM IS LARGE.  SCALE TO AVOID OVERFLOW.
 !
-700  IF ( ABS(Sx(i))<=xmax ) THEN
+700 CONTINUE
+IF ( ABS(Sx(i))<=xmax ) THEN
 sum = sum + (Sx(i)/xmax)**2
 ELSE
 sum = one + sum*(xmax/Sx(i))**2
@@ -162,7 +166,7 @@ GOTO 900
 !
 !                   PHASE 3.  SUM IS MID-RANGE.  NO SCALING.
 !
-DO j = i , nn , Incx
+DO j = i, nn, Incx
 IF ( ABS(Sx(j))>=hitest ) GOTO 400
 sum = sum + Sx(j)**2
 ENDDO
@@ -177,4 +181,5 @@ IF ( i<=nn ) GOTO 100
 !              COMPUTE SQUARE ROOT AND ADJUST FOR SCALING.
 !
 SNRM2 = xmax*SQRT(sum)
-99999 END FUNCTION SNRM2
+  99999 CONTINUE
+  END FUNCTION SNRM2

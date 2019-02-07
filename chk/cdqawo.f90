@@ -22,13 +22,13 @@ SUBROUTINE CDQAWO(Lun,Kprint,Ipass)
   !
   ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
   !
-  REAL(8) :: a , abserr , b , epmach , epsabs , epsrel , error , &
-    exact0 , DF0O , DF1O , DF2O , oflow , omega , pi , &
-    result , D1MACH , uflow , work
-  INTEGER ier , ierv , integr , ip , Ipass , iwork , Kprint , last , lenw , &
-    Lun , maxp1 , neval
-  DIMENSION work(1325) , iwork(400) , ierv(4)
-  EXTERNAL DF0O , DF1O , DF2O
+  REAL(8) :: a, abserr, b, epmach, epsabs, epsrel, error, &
+    exact0, DF0O, DF1O, DF2O, oflow, omega, pi, &
+    result, D1MACH, uflow, work
+  INTEGER ier, ierv, integr, ip, Ipass, iwork, Kprint, last, lenw, &
+    Lun, maxp1, neval
+  DIMENSION work(1325), iwork(400), ierv(4)
+  EXTERNAL DF0O, DF1O, DF2O
   DATA exact0/0.1042872789432789D+05/
   DATA pi/0.31415926535897932D+01/
   !***FIRST EXECUTABLE STATEMENT  CDQAWO

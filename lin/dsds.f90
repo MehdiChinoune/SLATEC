@@ -104,10 +104,10 @@ SUBROUTINE DSDS(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  DSDS
   !     .. Scalar Arguments ..
-  INTEGER Isym , N , Nelt
+  INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , Dinv(N)
-  INTEGER Ia(Nelt) , Ja(Nelt)
+  REAL(8) :: A(Nelt), Dinv(N)
+  INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER icol
   !***FIRST EXECUTABLE STATEMENT  DSDS
@@ -119,7 +119,7 @@ SUBROUTINE DSDS(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !         with vectorization.  If this makes you nervous put a check
   !         in!  It will run much slower.
   !
-  DO icol = 1 , N
+  DO icol = 1, N
     Dinv(icol) = 1.0D0/A(Ja(icol))
   ENDDO
   !

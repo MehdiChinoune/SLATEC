@@ -81,11 +81,11 @@ SUBROUTINE FDJAC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  FDJAC3
-  INTEGER M , N , Ldfjac , Iflag
+  INTEGER M, N, Ldfjac, Iflag
   REAL Epsfcn
-  REAL X(*) , Fvec(*) , Fjac(Ldfjac,*) , Wa(*)
-  INTEGER i , j
-  REAL eps , epsmch , h , temp , zero
+  REAL X(*), Fvec(*), Fjac(Ldfjac,*), Wa(*)
+  INTEGER i, j
+  REAL eps, epsmch, h, temp, zero
   REAL R1MACH
   SAVE zero
   DATA zero/0.0E0/
@@ -96,7 +96,7 @@ SUBROUTINE FDJAC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   !      SET IFLAG=1 TO INDICATE THAT FUNCTION VALUES
   !           ARE TO BE RETURNED BY FCN.
   Iflag = 1
-  DO j = 1 , N
+  DO j = 1, N
     temp = X(j)
     h = eps*ABS(temp)
     IF ( h==zero ) h = eps
@@ -104,7 +104,7 @@ SUBROUTINE FDJAC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
     CALL FCN(Iflag,M,N,X,Wa,Fjac,Ldfjac)
     IF ( Iflag<0 ) EXIT
     X(j) = temp
-    DO i = 1 , M
+    DO i = 1, M
       Fjac(i,j) = (Wa(i)-Fvec(i))/h
     ENDDO
   ENDDO

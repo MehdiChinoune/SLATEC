@@ -153,10 +153,10 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
   !***END PROLOGUE  CBESI
-  COMPLEX cone , csgn , Cy , Z , zn
-  REAL aa , alim , arg , dig , elim , Fnu , fnul , pi , rl , r1m5 , s1 , &
-    s2 , tol , xx , yy , R1MACH , az , fn , bb , ascle , rtol , atol
-  INTEGER i , Ierr , inu , k , Kode , k1 , k2 , N , nn , Nz , I1MACH
+  COMPLEX cone, csgn, Cy, Z, zn
+  REAL aa, alim, arg, dig, elim, Fnu, fnul, pi, rl, r1m5, s1, &
+    s2, tol, xx, yy, R1MACH, az, fn, bb, ascle, rtol, atol
+  INTEGER i, Ierr, inu, k, Kode, k1, k2, N, nn, Nz, I1MACH
   DIMENSION Cy(N)
   DATA pi/3.14159265358979324E0/
   DATA cone/(1.0E0,0.0E0)/
@@ -233,7 +233,7 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
         IF ( nn==0 ) RETURN
         rtol = 1.0E0/tol
         ascle = R1MACH(1)*rtol*1.0E+3
-        DO i = 1 , nn
+        DO i = 1, nn
           !       CY(I) = CY(I)*CSGN
           zn = Cy(i)
           aa = REAL(zn)

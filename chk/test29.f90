@@ -47,7 +47,7 @@ PROGRAM TEST29
   !   900524  Cosmetic changes to code.  (WRB)
   !   920225  Added CALL to DPNTCK.  (WRB)
   !***END PROLOGUE  TEST29
-  INTEGER ipass , kprint , lin , lun , nfail
+  INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST29
   lun = I1MACH(2)
   lin = I1MACH(1)

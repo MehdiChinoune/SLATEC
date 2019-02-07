@@ -26,8 +26,8 @@ SUBROUTINE FDTRUE(X,F,D)
   !   900316  Deleted variables ONE and TWO.  (FNF)
   !   900321  Changed name of d.p. version from DFTRUE to DFDTRU.
   !***END PROLOGUE  FDTRUE
-  REAL X , F , D
-  REAL(8) :: fact1 , fact2 , xx
+  REAL X, F, D
+  REAL(8) :: fact1, fact2, xx
   !
   !***FIRST EXECUTABLE STATEMENT  FDTRUE
   xx = X

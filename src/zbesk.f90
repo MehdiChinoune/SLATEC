@@ -158,11 +158,11 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !***END PROLOGUE  ZBESK
   !
   !     COMPLEX CY,Z
-  REAL(8) :: aa , alim , aln , arg , az , Cyi , Cyr , dig , elim , &
-    fn , Fnu , fnul , rl , r1m5 , tol , ufl , Zi , Zr , &
-    D1MACH , ZABS , bb
-  INTEGER Ierr , k , Kode , k1 , k2 , mr , N , nn , nuf , nw , Nz , I1MACH
-  DIMENSION Cyr(N) , Cyi(N)
+  REAL(8) :: aa, alim, aln, arg, az, Cyi, Cyr, dig, elim, &
+    fn, Fnu, fnul, rl, r1m5, tol, ufl, Zi, Zr, &
+    D1MACH, ZABS, bb
+  INTEGER Ierr, k, Kode, k1, k2, mr, N, nn, nuf, nw, Nz, I1MACH
+  DIMENSION Cyr(N), Cyi(N)
   EXTERNAL ZABS
   !***FIRST EXECUTABLE STATEMENT  ZBESK
   Ierr = 0
@@ -275,7 +275,8 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   100  Nz = 0
   Ierr = 2
   RETURN
-  200  IF ( nw==(-1) ) GOTO 100
+  200 CONTINUE
+  IF ( nw==(-1) ) GOTO 100
   Nz = 0
   Ierr = 5
   RETURN

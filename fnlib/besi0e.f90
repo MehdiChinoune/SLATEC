@@ -4,8 +4,8 @@ FUNCTION BESI0E(X)
   IMPLICIT NONE
   !*--BESI0E5
   !*** Start of declarations inserted by SPAG
-  REAL ai02cs , ai0cs , BESI0E , bi0cs , CSEVL , R1MACH , X , xsml , y
-  INTEGER INITS , ntai0 , ntai02 , nti0
+  REAL ai02cs, ai0cs, BESI0E, bi0cs, CSEVL, R1MACH, X, xsml, y
+  INTEGER INITS, ntai0, ntai02, nti0
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESI0E
   !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
@@ -51,9 +51,9 @@ FUNCTION BESI0E(X)
   !   890313  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  BESI0E
-  DIMENSION bi0cs(12) , ai0cs(21) , ai02cs(22)
+  DIMENSION bi0cs(12), ai0cs(21), ai02cs(22)
   LOGICAL first
-  SAVE bi0cs , ai0cs , ai02cs , nti0 , ntai0 , ntai02 , xsml , first
+  SAVE bi0cs, ai0cs, ai02cs, nti0, ntai0, ntai02, xsml, first
   DATA bi0cs(1)/ - .07660547252839144951E0/
   DATA bi0cs(2)/1.927337953993808270E0/
   DATA bi0cs(3)/.2282644586920301339E0/
@@ -131,4 +131,5 @@ FUNCTION BESI0E(X)
   IF ( y>xsml ) BESI0E = EXP(-y)*(2.75+CSEVL(y*y/4.5-1.0,bi0cs,nti0))
   RETURN
   !
-  99999 END FUNCTION BESI0E
+  99999 CONTINUE
+  END FUNCTION BESI0E

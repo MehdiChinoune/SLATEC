@@ -114,16 +114,16 @@ REAL FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N , Incfd , Ierr
-  REAL X(*) , F(Incfd,*) , D(Incfd,*) , A , B
+  INTEGER N, Incfd, Ierr
+  REAL X(*), F(Incfd,*), D(Incfd,*), A, B
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i , ia , ib , ierd , il , ir
-  REAL value , xa , xb , zero
+  INTEGER i, ia, ib, ierd, il, ir
+  REAL value, xa, xb, zero
   SAVE zero
-  REAL CHFIE , PCHID
+  REAL CHFIE, PCHID
   !
   !  INITIALIZE.
   !
@@ -151,7 +151,7 @@ REAL FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
       CALL XERMSG('SLATEC','PCHIA','INCREMENT LESS THAN ONE',Ierr,1)
       GOTO 100
     ELSE
-      DO i = 2 , N
+      DO i = 2, N
         IF ( X(i)<=X(i-1) ) GOTO 200
       ENDDO
     ENDIF
@@ -184,14 +184,14 @@ REAL FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
       !      ......LOCATE IA AND IB SUCH THAT
       !               X(IA-1).LT.XA.LE.X(IA).LE.X(IB).LE.XB.LE.X(IB+1)
       ia = 1
-      DO i = 1 , N - 1
+      DO i = 1, N - 1
         IF ( xa>X(i) ) ia = i + 1
       ENDDO
       !             IA = 1 IMPLIES XA.LT.X(1) .  OTHERWISE,
       !             IA IS LARGEST INDEX SUCH THAT X(IA-1).LT.XA,.
       !
       ib = N
-      DO i = N , ia , -1
+      DO i = N, ia, -1
         IF ( xb<X(i) ) ib = i - 1
       ENDDO
       !             IB = N IMPLIES XB.GT.X(N) .  OTHERWISE,

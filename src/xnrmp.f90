@@ -4,7 +4,7 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   IMPLICIT NONE
   !*--XNRMP5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Ierror , ip , ip1 , ip2 , j , k , mu
+  INTEGER i, Ierror, ip, ip1, ip2, j, k, mu
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XNRMP
   !***PURPOSE  Compute normalized Legendre polynomials.
@@ -91,7 +91,7 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !              CALL XCON(SPN(I), IPN(I),IERROR)
   !              IF (IERROR.NE.0) RETURN
   !              PRINT 10, SPN(I), IPN(I)
-  !           10 FORMAT(1X, E30.8 , I15)
+  !           10 FORMAT(1X, E30.8, I15)
   !              IF ((IPN(I) .EQ. 0) .OR. (J .LT. K)) GO TO 20
   !              J = I - 1
   !           20 CONTINUE
@@ -132,10 +132,10 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  XNRMP
-  INTEGER Nu , Mu1 , Mu2 , Mode , Ipn , Isig
-  REAL Sarg , Spn
-  DIMENSION Spn(*) , Ipn(*)
-  REAL c1 , c2 , p , p1 , p2 , p3 , s , sx , t , tx , x , rk
+  INTEGER Nu, Mu1, Mu2, Mode, Ipn, Isig
+  REAL Sarg, Spn
+  DIMENSION Spn(*), Ipn(*)
+  REAL c1, c2, p, p1, p2, p3, s, sx, t, tx, x, rk
   ! CALL XSET TO INITIALIZE EXTENDED-RANGE ARITHMETIC (SEE XSET
   ! LISTING FOR DETAILS)
   !***FIRST EXECUTABLE STATEMENT  XNRMP
@@ -196,7 +196,7 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   ip2 = 0
   p3 = 0.5
   rk = 2.0
-  DO j = 1 , Nu
+  DO j = 1, Nu
     p3 = ((rk+1.0)/rk)*p3
     p2 = p2*sx
     CALL XADJ(p2,ip2,Ierror)
@@ -243,7 +243,7 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !        SPECIAL CASE WHEN X=-1 OR +1, OR NU=0.
   !
   200  k = Mu2 - Mu1 + 1
-  DO i = 1 , k
+  DO i = 1, k
     Spn(i) = 0.0
     Ipn(i) = 0
   ENDDO
@@ -272,8 +272,9 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !        RETURN TO CALLING PROGRAM
   !
   500  k = Mu2 - Mu1 + 1
-  DO i = 1 , k
+  DO i = 1, k
     CALL XRED(Spn(i),Ipn(i),Ierror)
     IF ( Ierror/=0 ) RETURN
   ENDDO
-  99999 END SUBROUTINE XNRMP
+  99999 CONTINUE
+  END SUBROUTINE XNRMP

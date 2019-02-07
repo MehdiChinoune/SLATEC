@@ -104,10 +104,10 @@ SUBROUTINE SGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SGEFS
   !
-  INTEGER Lda , N , Itask , Ind , Iwork(*)
-  REAL A(Lda,*) , V(*) , Work(*) , R1MACH
+  INTEGER Lda, N, Itask, Ind, Iwork(*)
+  REAL A(Lda,*), V(*), Work(*), R1MACH
   REAL rcond
-  CHARACTER(8) :: xern1 , xern2
+  CHARACTER(8) :: xern1, xern2
   !***FIRST EXECUTABLE STATEMENT  SGEFS
   IF ( Lda<N ) THEN
     Ind = -1

@@ -4,7 +4,7 @@ REAL(8) FUNCTION DLNREL(X)
   IMPLICIT NONE
   !*--DLNREL5
   !*** Start of declarations inserted by SPAG
-  INTEGER INITDS , nlnrel
+  INTEGER INITDS, nlnrel
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DLNREL
   !***PURPOSE  Evaluate ln(1+X) accurate in the sense of relative error.
@@ -36,9 +36,9 @@ REAL(8) FUNCTION DLNREL(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DLNREL
-  REAL(8) :: alnrcs(43) , X , xmin , DCSEVL , D1MACH
+  REAL(8) :: alnrcs(43), X, xmin, DCSEVL, D1MACH
   LOGICAL first
-  SAVE alnrcs , nlnrel , xmin , first
+  SAVE alnrcs, nlnrel, xmin, first
   DATA alnrcs(1)/ + .10378693562743769800686267719098D+1/
   DATA alnrcs(2)/ - .13364301504908918098766041553133D+0/
   DATA alnrcs(3)/ + .19408249135520563357926199374750D-1/

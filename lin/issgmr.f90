@@ -261,27 +261,27 @@ INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  ISSGMR
   !     .. Scalar Arguments ..
-  REAL Bnrm , Err , Prod , R0nrm , Rnrm , Snormw , Tol
-  INTEGER Isym , Iter , Itmax , Itol , Iunit , Jpre , Jscal , Kmp , Lgmr , &
-    Maxl , Maxlp1 , N , Nelt , Nmsl
+  REAL Bnrm, Err, Prod, R0nrm, Rnrm, Snormw, Tol
+  INTEGER Isym, Iter, Itmax, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, &
+    Maxl, Maxlp1, N, Nelt, Nmsl
   !     .. Array Arguments ..
-  REAL A(*) , B(*) , Dz(*) , Hes(Maxlp1,Maxl) , Q(*) , R(*) , Rwork(*) , &
-    Sb(*) , Sx(*) , V(N,*) , X(*) , Xl(*) , Z(*)
-  INTEGER Ia(*) , Iwork(*) , Ja(*)
+  REAL A(*), B(*), Dz(*), Hes(Maxlp1,Maxl), Q(*), R(*), Rwork(*), &
+    Sb(*), Sx(*), V(N,*), X(*), Xl(*), Z(*)
+  INTEGER Ia(*), Iwork(*), Ja(*)
   !     .. Subroutine Arguments ..
   EXTERNAL MSOLVE
   !     .. Arrays in Common ..
   REAL SOLn(1)
   !     .. Local Scalars ..
-  REAL dxnrm , fuzz , rat , ratmax , solnrm , tem
-  INTEGER i , ielmax
+  REAL dxnrm, fuzz, rat, ratmax, solnrm, tem
+  INTEGER i, ielmax
   !     .. External Functions ..
-  REAL R1MACH , SNRM2
-  EXTERNAL R1MACH , SNRM2
+  REAL R1MACH, SNRM2
+  EXTERNAL R1MACH, SNRM2
   !     .. External Subroutines ..
-  EXTERNAL SCOPY , SRLCAL , SSCAL , SXLCAL
+  EXTERNAL SCOPY, SRLCAL, SSCAL, SXLCAL
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MAX , SQRT
+  INTRINSIC ABS, MAX, SQRT
   !     .. Common blocks ..
   COMMON /SSLBLK/ SOLn
   !     .. Save statement ..
@@ -326,7 +326,7 @@ INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
       fuzz = R1MACH(1)
       ielmax = 1
       ratmax = ABS(Dz(1))/MAX(ABS(X(1)),fuzz)
-      DO i = 2 , N
+      DO i = 2, N
         rat = ABS(Dz(i))/MAX(ABS(X(i)),fuzz)
         IF ( rat>ratmax ) THEN
           ielmax = i
@@ -335,7 +335,7 @@ INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
       ENDDO
       Err = ratmax
       IF ( ratmax<=Tol ) ISSGMR = 1
-      IF ( Iunit>0 ) WRITE (Iunit,99001) Iter , ielmax , ratmax
+      IF ( Iunit>0 ) WRITE (Iunit,99001) Iter, ielmax, ratmax
       99001     FORMAT (1X,' ITER = ',I5,' IELMAX = ',I5,' |R(IELMAX)/X(IELMAX)| = ',&
         E12.5)
       RETURN
@@ -359,20 +359,20 @@ INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
     IF ( (Jscal==0).OR.(Jscal==2) ) THEN
       !         err = ||x-TrueSolution||/||TrueSolution||(2-Norms).
       IF ( Iter==0 ) solnrm = SNRM2(N,SOLn,1)
-      DO i = 1 , N
+      DO i = 1, N
         Dz(i) = Xl(i) - SOLn(i)
       ENDDO
       Err = SNRM2(N,Dz,1)/solnrm
     ELSE
       IF ( Iter==0 ) THEN
         solnrm = 0
-        DO i = 1 , N
+        DO i = 1, N
           solnrm = solnrm + (Sx(i)*SOLn(i))**2
         ENDDO
         solnrm = SQRT(solnrm)
       ENDIF
       dxnrm = 0
-      DO i = 1 , N
+      DO i = 1, N
         dxnrm = dxnrm + (Sx(i)*(Xl(i)-SOLn(i)))**2
       ENDDO
       dxnrm = SQRT(dxnrm)
@@ -383,11 +383,11 @@ INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   !
   IF ( Iunit/=0 ) THEN
     IF ( Iter==0 ) THEN
-      WRITE (Iunit,99002) N , Itol , Maxl , Kmp
+      WRITE (Iunit,99002) N, Itol, Maxl, Kmp
       99002     FORMAT (' Generalized Minimum Residual(',I3,I3,') for ','N, ITOL = ',&
         I5,I5,/' ITER','   Natural Err Est','   Error Estimate')
     ENDIF
-    WRITE (Iunit,99003) Iter , Rnrm/Bnrm , Err
+    WRITE (Iunit,99003) Iter, Rnrm/Bnrm, Err
     99003   FORMAT (1X,I4,1X,E16.7,1X,E16.7)
   ENDIF
   IF ( Err<=Tol ) ISSGMR = 1

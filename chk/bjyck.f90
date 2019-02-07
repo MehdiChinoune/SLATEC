@@ -4,7 +4,7 @@ SUBROUTINE BJYCK(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--BJYCK5
   !*** Start of declarations inserted by SPAG
-  INTEGER Ipass , Kprint , NUMXER
+  INTEGER Ipass, Kprint, NUMXER
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BJYCK
   !***PURPOSE  Quick check for BESJ and BESY.
@@ -32,9 +32,9 @@ SUBROUTINE BJYCK(Lun,Kprint,Ipass)
   !   910708  Code revised to test error returns for all values of
   !           KPRINT.  (WRB)
   !***END PROLOGUE  BJYCK
-  INTEGER i , ix , k , kontrl , Lun , m , n , nerr , nu , ny
-  REAL alp , del , er , fnu , fnup , rhpi , rx , tol , x
-  REAL fn(3) , w(5) , xx(5) , y(5)
+  INTEGER i, ix, k, kontrl, Lun, m, n, nerr, nu, ny
+  REAL alp, del, er, fnu, fnup, rhpi, rx, tol, x
+  REAL fn(3), w(5), xx(5), y(5)
   REAL R1MACH
   LOGICAL fatal
   !***FIRST EXECUTABLE STATEMENT  BJYCK
@@ -53,11 +53,11 @@ SUBROUTINE BJYCK(Lun,Kprint,Ipass)
   fn(2) = 0.70E0
   fn(3) = 0.0E0
   tol = 500.0E0*MAX(R1MACH(4),7.1E-15)
-  DO m = 1 , 3
-    DO n = 1 , 4
-      DO nu = 1 , 4
+  DO m = 1, 3
+    DO n = 1, 4
+      DO nu = 1, 4
         fnu = fn(m) + 12*(nu-1)
-        DO ix = 1 , 5
+        DO ix = 1, 5
           IF ( ix>=2.OR.nu<=3 ) THEN
             x = xx(ix)
             rx = rhpi/x
@@ -68,13 +68,13 @@ SUBROUTINE BJYCK(Lun,Kprint,Ipass)
               CALL BESJ(x,fnup,1,y(n+1),ny)
               IF ( ny==0 ) THEN
                 CALL BESY(x,fnup,1,w(n+1))
-                DO i = 1 , n
+                DO i = 1, n
                   er = y(i+1)*w(i) - w(i+1)*y(i) - rx
                   er = ABS(er)/rx
                   IF ( er>tol ) THEN
                     Ipass = 0
-                    IF ( Kprint>=2 ) WRITE (Lun,99002) m , n , nu , ix , i , &
-                      x , er , tol , y(i) , y(i+1) , w(i) , w(i+1)
+                    IF ( Kprint>=2 ) WRITE (Lun,99002) m, n, nu, ix, i, &
+                      x, er, tol, y(i), y(i+1), w(i), w(i+1)
                     99002                   FORMAT (/' ERROR IN QUICK CHECK OF WRONSKIAN',&
                       1P/' M = ',I1,', N = ',I1,', NU = ',I1,&
                       ', IX = ',I1,', I = ',I1,/' X = ',E14.7,&
@@ -97,15 +97,15 @@ SUBROUTINE BJYCK(Lun,Kprint,Ipass)
   fnu = 1.0E0
   x = R1MACH(4)/100.0E0
   rx = rhpi/x
-  DO i = 1 , 3
+  DO i = 1, 3
     CALL BESJ(x,fnu,n,y,ny)
     CALL BESY(x,fnu,n,w)
     er = y(2)*w(1) - w(2)*y(1) - rx
     er = ABS(er)/rx
     IF ( er>tol ) THEN
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99003) i , fnu , x , er , tol , y(i) , &
-        y(i+1) , w(i) , w(i+1)
+      IF ( Kprint>=2 ) WRITE (Lun,99003) i, fnu, x, er, tol, y(i), &
+        y(i+1), w(i), w(i+1)
       99003     FORMAT (/' ERROR IN QUICK CHECK OF SMALL X AND ORDER',1P/' I = ',I1,&
         ',  FNU = ',E14.7/' X = ',E14.7,', ER = ',E14.7,', TOL = ',&
         E14.7/' Y(1) = ',E14.7,', Y(2) = ',E14.7/' W(1) = ',E14.7,&
@@ -120,12 +120,12 @@ SUBROUTINE BJYCK(Lun,Kprint,Ipass)
   !
   !     Check large values of X and order
   !
-  DO k = 1 , 2
+  DO k = 1, 2
     del = 30*(k-1)
     fnu = 70.0E0 + del
-    DO n = 1 , 2
+    DO n = 1, 2
       x = 50.0E0 + del
-      DO i = 1 , 5
+      DO i = 1, 5
         rx = rhpi/x
         CALL BESJ(x,fnu,n,y,ny)
         IF ( ny==0 ) THEN
@@ -140,8 +140,8 @@ SUBROUTINE BJYCK(Lun,Kprint,Ipass)
           er = ABS(er)/rx
           IF ( er>tol ) THEN
             Ipass = 0
-            IF ( Kprint>=2 ) WRITE (Lun,99004) k , n , i , x , er , tol , &
-              y(1) , y(2) , w(1) , w(2)
+            IF ( Kprint>=2 ) WRITE (Lun,99004) k, n, i, x, er, tol, &
+              y(1), y(2), w(1), w(2)
             99004           FORMAT (/' ERROR IN QUICK CHECK OF LARGE X AND ORDER',&
               1P/' K = ',I1,', N = ',I1,', I = ',I1/' X = ',E14.7,&
               ', ER = ',E14.7,', TOL = ',E14.7/' Y(1) = ',E14.7,&
@@ -185,7 +185,7 @@ SUBROUTINE BJYCK(Lun,Kprint,Ipass)
   !
   !     Illegal arguments
   !
-  DO i = 1 , 3
+  DO i = 1, 3
     xx(i) = -xx(i)
     n = INT(xx(3))
     CALL BESJ(xx(1),xx(2),n,y,ny)

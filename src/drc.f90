@@ -179,7 +179,7 @@ REAL(8) FUNCTION DRC(X,Y,Ier)
   !                  LN X                X .GT. 0
   !
   !                                             2
-  !                  LN(X) = (X-1) DRC(((1+X)/2)  , X )
+  !                  LN(X) = (X-1) DRC(((1+X)/2) , X )
   !
   !
   !   --------------------------------------------------------------------
@@ -264,12 +264,12 @@ REAL(8) FUNCTION DRC(X,Y,Ier)
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DRC
-  CHARACTER(16) :: xern3 , xern4 , xern5
+  CHARACTER(16) :: xern3, xern4, xern5
   INTEGER Ier
-  REAL(8) :: c1 , c2 , errtol , lamda , lolim , D1MACH
-  REAL(8) :: mu , s , sn , uplim , X , xn , Y , yn
+  REAL(8) :: c1, c2, errtol, lamda, lolim, D1MACH
+  REAL(8) :: mu, s, sn, uplim, X, xn, Y, yn
   LOGICAL first
-  SAVE errtol , lolim , uplim , c1 , c2 , first
+  SAVE errtol, lolim, uplim, c1, c2, first
   DATA first/.TRUE./
   !
   !***FIRST EXECUTABLE STATEMENT  DRC

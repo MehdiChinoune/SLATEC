@@ -161,13 +161,13 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   !***END PROLOGUE  ZBESH
   !
   !     COMPLEX CY,Z,ZN,ZT,CSGN
-  REAL(8) :: aa , alim , aln , arg , az , Cyi , Cyr , dig , elim , &
-    fmm , fn , Fnu , fnul , hpi , rhpi , rl , r1m5 , sgn , &
-    str , tol , ufl , Zi , zni , znr , Zr , zti , D1MACH , &
-    ZABS , bb , ascle , rtol , atol , sti , csgnr , csgni
-  INTEGER i , Ierr , inu , inuh , ir , k , Kode , k1 , k2 , M , mm , mr , &
-    N , nn , nuf , nw , Nz , I1MACH
-  DIMENSION Cyr(N) , Cyi(N)
+  REAL(8) :: aa, alim, aln, arg, az, Cyi, Cyr, dig, elim, &
+    fmm, fn, Fnu, fnul, hpi, rhpi, rl, r1m5, sgn, &
+    str, tol, ufl, Zi, zni, znr, Zr, zti, D1MACH, &
+    ZABS, bb, ascle, rtol, atol, sti, csgnr, csgni
+  INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, M, mm, mr, &
+    N, nn, nuf, nw, Nz, I1MACH
+  DIMENSION Cyr(N), Cyi(N)
   EXTERNAL ZABS
   !
   DATA hpi/1.57079632679489662D0/
@@ -308,7 +308,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
     zti = -fmm
     rtol = 1.0D0/tol
     ascle = ufl*rtol
-    DO i = 1 , nn
+    DO i = 1, nn
       !       STR = CYR(I)*ZNR - CYI(I)*ZNI
       !       CYI(I) = CYR(I)*ZNI + CYI(I)*ZNR
       !       CYR(I) = STR
@@ -336,7 +336,8 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   100  Nz = 0
   Ierr = 2
   RETURN
-  200  IF ( nw==(-1) ) GOTO 100
+  200 CONTINUE
+  IF ( nw==(-1) ) GOTO 100
   Nz = 0
   Ierr = 5
   RETURN

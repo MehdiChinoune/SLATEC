@@ -20,8 +20,8 @@ SUBROUTINE CSHCH(Z,Csh,Cch)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CSHCH
-  COMPLEX Cch , Csh , Z
-  REAL cchi , cchr , ch , cn , cshi , cshr , sh , sn , x , y
+  COMPLEX Cch, Csh, Z
+  REAL cchi, cchr, ch, cn, cshi, cshr, sh, sn, x, y
   !***FIRST EXECUTABLE STATEMENT  CSHCH
   x = REAL(Z)
   y = AIMAG(Z)

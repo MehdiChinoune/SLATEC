@@ -72,13 +72,13 @@ SUBROUTINE CPODI(A,Lda,N,Det,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CPODI
-  INTEGER Lda , N , Job
+  INTEGER Lda, N, Job
   COMPLEX A(Lda,*)
   REAL Det(2)
   !
   COMPLEX t
   REAL s
-  INTEGER i , j , jm1 , k , kp1
+  INTEGER i, j, jm1, k, kp1
   !***FIRST EXECUTABLE STATEMENT  CPODI
   !
   !     COMPUTE DETERMINANT
@@ -87,7 +87,7 @@ SUBROUTINE CPODI(A,Lda,N,Det,Job)
     Det(1) = 1.0E0
     Det(2) = 0.0E0
     s = 10.0E0
-    DO i = 1 , N
+    DO i = 1, N
       Det(1) = REAL(A(i,i))**2*Det(1)
       IF ( Det(1)==0.0E0 ) EXIT
       DO WHILE ( Det(1)<1.0E0 )
@@ -104,13 +104,13 @@ SUBROUTINE CPODI(A,Lda,N,Det,Job)
   !     COMPUTE INVERSE(R)
   !
   IF ( MOD(Job,10)/=0 ) THEN
-    DO k = 1 , N
+    DO k = 1, N
       A(k,k) = (1.0E0,0.0E0)/A(k,k)
       t = -A(k,k)
       CALL CSCAL(k-1,t,A(1,k),1)
       kp1 = k + 1
       IF ( N>=kp1 ) THEN
-        DO j = kp1 , N
+        DO j = kp1, N
           t = A(k,j)
           A(k,j) = (0.0E0,0.0E0)
           CALL CAXPY(k,t,A(1,k),1,A(1,j),1)
@@ -120,10 +120,10 @@ SUBROUTINE CPODI(A,Lda,N,Det,Job)
     !
     !        FORM  INVERSE(R) * CTRANS(INVERSE(R))
     !
-    DO j = 1 , N
+    DO j = 1, N
       jm1 = j - 1
       IF ( jm1>=1 ) THEN
-        DO k = 1 , jm1
+        DO k = 1, jm1
           t = CONJG(A(k,j))
           CALL CAXPY(k,t,A(1,j),1,A(1,k),1)
         ENDDO

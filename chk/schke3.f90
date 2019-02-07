@@ -27,17 +27,17 @@ SUBROUTINE SCHKE3(Isnum,Srnamt,Nout,Kprint,Fatal)
   !***END PROLOGUE  SCHKE3
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  INTEGER Isnum , Kprint , Nout
+  INTEGER Isnum, Kprint, Nout
   CHARACTER(6) :: Srnamt
   !     .. Scalars in Common ..
   INTEGER infot
   !     .. Local Scalars ..
-  REAL alpha , beta
+  REAL alpha, beta
   INTEGER kontrl
   !     .. Local Arrays ..
-  REAL a(1,1) , b(1,1) , c(1,1)
+  REAL a(1,1), b(1,1), c(1,1)
   !     .. External Subroutines ..
-  EXTERNAL CHKXER , SGEMM , SSYMM , SSYR2K , SSYRK , STRMM , STRSM
+  EXTERNAL CHKXER, SGEMM, SSYMM, SSYR2K, SSYRK, STRMM, STRSM
   !***FIRST EXECUTABLE STATEMENT  SCHKE3
   CALL XGETF(kontrl)
   IF ( Kprint<=2 ) THEN

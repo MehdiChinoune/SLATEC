@@ -42,7 +42,7 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !
   !        JOB     INTEGER
   !                = 0         to solve  A*X = B ,
-  !                = nonzero   to solve  TRANS(A)*X = B , where
+  !                = nonzero   to solve  TRANS(A)*X = B, where
   !                            TRANS(A)  is the transpose.
   !
   !     On Return
@@ -79,11 +79,11 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SGBSL
-  INTEGER Lda , N , Ml , Mu , Ipvt(*) , Job
-  REAL Abd(Lda,*) , B(*)
+  INTEGER Lda, N, Ml, Mu, Ipvt(*), Job
+  REAL Abd(Lda,*), B(*)
   !
-  REAL SDOT , t
-  INTEGER k , kb , l , la , lb , lm , m , nm1
+  REAL SDOT, t
+  INTEGER k, kb, l, la, lb, lm, m, nm1
   !***FIRST EXECUTABLE STATEMENT  SGBSL
   m = Mu + Ml + 1
   nm1 = N - 1
@@ -92,7 +92,7 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
     !        JOB = NONZERO, SOLVE  TRANS(A) * X = B
     !        FIRST SOLVE  TRANS(U)*Y = B
     !
-    DO k = 1 , N
+    DO k = 1, N
       lm = MIN(k,m) - 1
       la = m - lm
       lb = k - lm
@@ -104,7 +104,7 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
     !
     IF ( Ml/=0 ) THEN
       IF ( nm1>=1 ) THEN
-        DO kb = 1 , nm1
+        DO kb = 1, nm1
           k = N - kb
           lm = MIN(Ml,N-k)
           B(k) = B(k) + SDOT(lm,Abd(m+1,k),1,B(k+1),1)
@@ -119,12 +119,12 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
     ENDIF
   ELSE
     !
-    !        JOB = 0 , SOLVE  A * X = B
+    !        JOB = 0, SOLVE  A * X = B
     !        FIRST SOLVE L*Y = B
     !
     IF ( Ml/=0 ) THEN
       IF ( nm1>=1 ) THEN
-        DO k = 1 , nm1
+        DO k = 1, nm1
           lm = MIN(Ml,N-k)
           l = Ipvt(k)
           t = B(l)
@@ -139,7 +139,7 @@ SUBROUTINE SGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
     !
     !        NOW SOLVE  U*X = Y
     !
-    DO kb = 1 , N
+    DO kb = 1, N
       k = N + 1 - kb
       B(k) = B(k)/Abd(m,k)
       lm = MIN(k,m) - 1

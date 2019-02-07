@@ -27,7 +27,7 @@ SUBROUTINE BSPDR(T,A,N,K,Nderiv,Ad)
   !
   !           ADIF(I,J) = AD(I-J+1 + (2*N-J+2)*(J-1)/2)
   !
-  !         I = J,N , J = 1,NDERIV .
+  !         I = J,N, J = 1,NDERIV .
   !
   !     Description of Arguments
   !         Input
@@ -62,10 +62,10 @@ SUBROUTINE BSPDR(T,A,N,K,Nderiv,Ad)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BSPDR
   !
-  INTEGER i , id , ii , ipkmid , jj , jm , K , kmid , N , Nderiv
-  REAL A , Ad , diff , fkmid , T
+  INTEGER i, id, ii, ipkmid, jj, jm, K, kmid, N, Nderiv
+  REAL A, Ad, diff, fkmid, T
   !     DIMENSION T(N+K), AD((2*N-NDERIV+1)*NDERIV/2)
-  DIMENSION T(*) , A(*) , Ad(*)
+  DIMENSION T(*), A(*), Ad(*)
   !***FIRST EXECUTABLE STATEMENT  BSPDR
   IF ( K<1 ) THEN
     !
@@ -80,18 +80,18 @@ SUBROUTINE BSPDR(T,A,N,K,Nderiv,Ad)
       2,1)
     GOTO 99999
   ENDIF
-  DO i = 1 , N
+  DO i = 1, N
     Ad(i) = A(i)
   ENDDO
   IF ( Nderiv==1 ) RETURN
   kmid = K
   jj = N
   jm = 0
-  DO id = 2 , Nderiv
+  DO id = 2, Nderiv
     kmid = kmid - 1
     fkmid = kmid
     ii = 1
-    DO i = id , N
+    DO i = id, N
       ipkmid = i + kmid
       diff = T(ipkmid) - T(i)
       IF ( diff/=0.0E0 ) Ad(ii+jj) = (Ad(ii+jm+1)-Ad(ii+jm))/diff*fkmid
@@ -101,4 +101,5 @@ SUBROUTINE BSPDR(T,A,N,K,Nderiv,Ad)
     jj = jj + N - id + 1
   ENDDO
   RETURN
-  99999 END SUBROUTINE BSPDR
+  99999 CONTINUE
+  END SUBROUTINE BSPDR

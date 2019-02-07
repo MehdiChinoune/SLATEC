@@ -4,7 +4,7 @@ REAL(8) FUNCTION DGAMMA(X)
   IMPLICIT NONE
   !*--DGAMMA5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , INITDS , n , ngam
+  INTEGER i, INITDS, n, ngam
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DGAMMA
   !***PURPOSE  Compute the complete Gamma function.
@@ -35,11 +35,11 @@ REAL(8) FUNCTION DGAMMA(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable name.  (RWC, WRB)
   !***END PROLOGUE  DGAMMA
-  REAL(8) :: X , gamcs(42) , dxrel , pi , sinpiy , sq2pil , xmax , &
-    xmin , y , D9LGMC , DCSEVL , D1MACH
+  REAL(8) :: X, gamcs(42), dxrel, pi, sinpiy, sq2pil, xmax, &
+    xmin, y, D9LGMC, DCSEVL, D1MACH
   LOGICAL first
   !
-  SAVE gamcs , pi , sq2pil , ngam , xmin , xmax , dxrel , first
+  SAVE gamcs, pi, sq2pil, ngam, xmin, xmax, dxrel, first
   DATA gamcs(1)/ + .8571195590989331421920062399942D-2/
   DATA gamcs(2)/ + .4415381324841006757191315771652D-2/
   DATA gamcs(3)/ + .5685043681599363378632664588789D-1/
@@ -144,7 +144,7 @@ REAL(8) FUNCTION DGAMMA(X)
         'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR NEGATIVE INTEGER',1,&
         1)
       !
-      DO i = 1 , n
+      DO i = 1, n
         DGAMMA = DGAMMA/(X+i-1)
       ENDDO
       RETURN
@@ -153,9 +153,10 @@ REAL(8) FUNCTION DGAMMA(X)
   !
   ! GAMMA(X) FOR X .GE. 2.0 AND X .LE. 10.0
   !
-  DO i = 1 , n
+  DO i = 1, n
     DGAMMA = (y+i)*DGAMMA
   ENDDO
   RETURN
   !
-  99999 END FUNCTION DGAMMA
+  99999 CONTINUE
+  END FUNCTION DGAMMA

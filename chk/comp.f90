@@ -24,7 +24,7 @@ LOGICAL FUNCTION COMP(Ieract,Ierexp,Lout,Kprint)
   !   900316  Minor modification to format 5010.  (FNF)
   !   910708  Minor modifications in use of KPRINT.  (WRB)
   !***END PROLOGUE  COMP
-  INTEGER Ieract , Ierexp , Lout , Kprint
+  INTEGER Ieract, Ierexp, Lout, Kprint
   !***FIRST EXECUTABLE STATEMENT  COMP
   IF ( Ieract==Ierexp ) THEN
     COMP = .TRUE.

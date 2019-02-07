@@ -4,8 +4,8 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Ia,Reals)
   IMPLICIT NONE
   !*--LA05ED5
   !*** Start of declarations inserted by SPAG
-  INTEGER Ia , ipi , j , k , kl , kn , LCOl , LENl , LENu , LP , LROw , N , &
-    NCP , nz
+  INTEGER Ia, ipi, j, k, kl, kn, LCOl, LENl, LENu, LP, LROw, N, &
+    NCP, nz
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  LA05ED
   !***SUBSIDIARY
@@ -37,10 +37,10 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Ia,Reals)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  LA05ED
   LOGICAL Reals
-  REAL(8) :: A(*) , SMAll
-  INTEGER Irn(*) , Iw(*)
+  REAL(8) :: A(*), SMAll
+  INTEGER Irn(*), Iw(*)
   INTEGER Ip(*)
-  COMMON /LA05DD/ SMAll , LP , LENl , LENu , NCP , LROw , LCOl
+  COMMON /LA05DD/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
   !***FIRST EXECUTABLE STATEMENT  LA05ED
   NCP = NCP + 1
   !     COMPRESS FILE OF POSITIVE INTEGERS. ENTRY J STARTS AT IRN(IP(J))
@@ -52,7 +52,7 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Ia,Reals)
   !  A,IRN,IP,IW,IA ARE INPUT/OUTPUT VARIABLES.
   !  N,REALS ARE INPUT/UNCHANGED VARIABLES.
   !
-  DO j = 1 , N
+  DO j = 1, N
     ! STORE THE LAST ELEMENT OF ENTRY J IN IW(J) THEN OVERWRITE IT BY -J.
     nz = Iw(j)
     IF ( nz>0 ) THEN
@@ -70,7 +70,7 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Ia,Reals)
   !     MOVING GENUINE ELEMENTS FORWARD. THE ENTRY NUMBER BECOMES
   !     KNOWN ONLY WHEN ITS END IS DETECTED BY THE PRESENCE OF A NEGATIVE
   !     INTEGER.
-  DO k = 1 , kl
+  DO k = 1, kl
     IF ( Irn(k)/=0 ) THEN
       kn = kn + 1
       IF ( Reals ) A(kn) = A(k)

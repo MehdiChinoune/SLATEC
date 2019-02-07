@@ -68,25 +68,25 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BESYNU
   !
-  INTEGER i , inu , j , k , kk , N , nn
-  REAL a , ak , arg , a1 , a2 , bk , cb , cbk , cc , cck , ck , coef , cpt , &
-    cp1 , cp2 , cs , cs1 , cs2 , cx , dnu , dnu2 , etest , etx , f , fc , &
-    fhs , fk , fks , flrx , fmu , fn , Fnu , fx , g , g1 , g2 , hpi , p , &
-    pi , pt , q , rb , rbk , rck , relb , rpt , rp1 , rp2 , rs , rs1 , &
-    rs2 , rthpi , rx , s , sa , sb , smu , ss , st , s1 , s2 , tb , tm , &
-    tol , t1 , t2 , X , x1 , x2 , Y
-  DIMENSION a(120) , rb(120) , cb(120) , Y(*) , cc(8)
-  REAL GAMMA , R1MACH
+  INTEGER i, inu, j, k, kk, N, nn
+  REAL a, ak, arg, a1, a2, bk, cb, cbk, cc, cck, ck, coef, cpt, &
+    cp1, cp2, cs, cs1, cs2, cx, dnu, dnu2, etest, etx, f, fc, &
+    fhs, fk, fks, flrx, fmu, fn, Fnu, fx, g, g1, g2, hpi, p, &
+    pi, pt, q, rb, rbk, rck, relb, rpt, rp1, rp2, rs, rs1, &
+    rs2, rthpi, rx, s, sa, sb, smu, ss, st, s1, s2, tb, tm, &
+    tol, t1, t2, X, x1, x2, Y
+  DIMENSION a(120), rb(120), cb(120), Y(*), cc(8)
+  REAL GAMMA, R1MACH
   EXTERNAL GAMMA
-  SAVE x1 , x2 , pi , rthpi , hpi , cc
-  DATA x1 , x2/3.0E0 , 20.0E0/
-  DATA pi , rthpi/3.14159265358979E+00 , 7.97884560802865E-01/
+  SAVE x1, x2, pi, rthpi, hpi, cc
+  DATA x1, x2/3.0E0, 20.0E0/
+  DATA pi, rthpi/3.14159265358979E+00, 7.97884560802865E-01/
   DATA hpi/1.57079632679490E+00/
-  DATA cc(1) , cc(2) , cc(3) , cc(4) , cc(5) , cc(6) , cc(7) , &
-    cc(8)/5.77215664901533E-01 , -4.20026350340952E-02 , &
-    -4.21977345555443E-02 , 7.21894324666300E-03 , &
-    -2.15241674114900E-04 , -2.01348547807000E-05 , &
-    1.13302723200000E-06 , 6.11609500000000E-09/
+  DATA cc(1), cc(2), cc(3), cc(4), cc(5), cc(6), cc(7), &
+    cc(8)/5.77215664901533E-01, -4.20026350340952E-02, &
+    -4.21977345555443E-02, 7.21894324666300E-03, &
+    -2.15241674114900E-04, -2.01348547807000E-05, &
+    1.13302723200000E-06, 6.11609500000000E-09/
   !***FIRST EXECUTABLE STATEMENT  BESYNU
   ak = R1MACH(3)
   tol = MAX(ak,1.0E-15)
@@ -130,7 +130,7 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
           sa = SIN(arg)
           sb = COS(arg)
           etx = 8.0E0*X
-          DO k = 1 , nn
+          DO k = 1, nn
             s1 = s2
             t2 = (fmu-1.0E0)/etx
             ss = t2
@@ -139,7 +139,7 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
             s = 1.0E0
             fn = 1.0E0
             ak = 0.0E0
-            DO j = 1 , 13
+            DO j = 1, 13
               t1 = t1 + etx
               ak = ak + 8.0E0
               fn = fn + ak
@@ -207,7 +207,7 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
               cp1 = 0.0E0
               rp2 = 1.0E0
               cp2 = 0.0E0
-              DO i = 1 , k
+              DO i = 1, k
                 rpt = rp2
                 cpt = cp2
                 rp2 = (rb(kk)*rpt-cb(kk)*cpt-rp1)/a(kk)
@@ -258,7 +258,7 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
           !     SERIES FOR F0 TO RESOLVE INDETERMINACY FOR SMALL ABS(DNU)
           s = cc(1)
           ak = 1.0E0
-          DO k = 2 , 8
+          DO k = 2, 8
             ak = ak*dnu2
             tm = cc(k)*ak
             s = s + tm
@@ -337,7 +337,7 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
     ck = (dnu+dnu+2.0E0)/X
     IF ( N==1 ) inu = inu - 1
     IF ( inu>0 ) THEN
-      DO i = 1 , inu
+      DO i = 1, inu
         st = s2
         s2 = ck*s2 - s1
         s1 = st
@@ -352,9 +352,10 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
   IF ( N==1 ) RETURN
   Y(2) = s2
   IF ( N==2 ) RETURN
-  DO i = 3 , N
+  DO i = 3, N
     Y(i) = ck*Y(i-1) - Y(i-2)
     ck = ck + rx
   ENDDO
   RETURN
-  99999 END SUBROUTINE BESYNU
+  99999 CONTINUE
+  END SUBROUTINE BESYNU

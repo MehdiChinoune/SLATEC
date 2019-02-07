@@ -293,10 +293,10 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  DDRIV1
   EXTERNAL F
-  REAL(8) :: Eps , ewtcom(1) , hmax , T , Tout , Work(*) , Y(*)
-  INTEGER i , IDLIW , Ierflg , IERROR , IMPL , leniw , Lenw , lenwcm , &
-    lnwchk , MINT , MITER , ml , Mstate , mu , MXN , MXORD , MXSTEP , &
-    N , nde , NROOT , nstate , ntask
+  REAL(8) :: Eps, ewtcom(1), hmax, T, Tout, Work(*), Y(*)
+  INTEGER i, IDLIW, Ierflg, IERROR, IMPL, leniw, Lenw, lenwcm, &
+    lnwchk, MINT, MITER, ml, Mstate, mu, MXN, MXORD, MXSTEP, &
+    N, nde, NROOT, nstate, ntask
   PARAMETER (MXN=200,IDLIW=50)
   INTEGER iwork(IDLIW+MXN)
   CHARACTER intgr1*8
@@ -347,14 +347,14 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
     RETURN
   ENDIF
   IF ( nstate/=1 ) THEN
-    DO i = 1 , leniw
+    DO i = 1, leniw
       iwork(i) = Work(i+lenwcm)
     ENDDO
   ENDIF
   CALL DDRIV3(N,T,Y,F,nstate,Tout,ntask,NROOT,Eps,ewtcom,IERROR,MINT,MITER,&
     IMPL,ml,mu,MXORD,hmax,Work,lenwcm,iwork,leniw,F,F,nde,MXSTEP,&
     F,F,Ierflg)
-  DO i = 1 , leniw
+  DO i = 1, leniw
     Work(i+lenwcm) = iwork(i)
   ENDDO
   IF ( nstate<=4 ) THEN

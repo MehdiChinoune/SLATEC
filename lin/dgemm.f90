@@ -132,11 +132,11 @@ SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  DGEMM
   !     .. Scalar Arguments ..
-  CHARACTER :: Transa , Transb
-  INTEGER M , N , K , Lda , Ldb , Ldc
-  REAL(8) :: Alpha , Beta
+  CHARACTER :: Transa, Transb
+  INTEGER M, N, K, Lda, Ldb, Ldc
+  REAL(8) :: Alpha, Beta
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*) , B(Ldb,*) , C(Ldc,*)
+  REAL(8) :: A(Lda,*), B(Ldb,*), C(Ldc,*)
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
@@ -145,11 +145,11 @@ SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..
-  LOGICAL nota , notb
-  INTEGER i , info , j , l , ncola , nrowa , nrowb
+  LOGICAL nota, notb
+  INTEGER i, info, j, l, ncola, nrowa, nrowb
   REAL(8) :: temp
   !     .. Parameters ..
-  REAL(8) :: ONE , ZERO
+  REAL(8) :: ONE, ZERO
   PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
   !***FIRST EXECUTABLE STATEMENT  DGEMM
   !
@@ -208,14 +208,14 @@ SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !
   IF ( Alpha==ZERO ) THEN
     IF ( Beta==ZERO ) THEN
-      DO j = 1 , N
-        DO i = 1 , M
+      DO j = 1, N
+        DO i = 1, M
           C(i,j) = ZERO
         ENDDO
       ENDDO
     ELSE
-      DO j = 1 , N
-        DO i = 1 , M
+      DO j = 1, N
+        DO i = 1, M
           C(i,j) = Beta*C(i,j)
         ENDDO
       ENDDO
@@ -230,20 +230,20 @@ SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
       !
       !           Form  C := alpha*A*B + beta*C.
       !
-      DO j = 1 , N
+      DO j = 1, N
         IF ( Beta==ZERO ) THEN
-          DO i = 1 , M
+          DO i = 1, M
             C(i,j) = ZERO
           ENDDO
         ELSEIF ( Beta/=ONE ) THEN
-          DO i = 1 , M
+          DO i = 1, M
             C(i,j) = Beta*C(i,j)
           ENDDO
         ENDIF
-        DO l = 1 , K
+        DO l = 1, K
           IF ( B(l,j)/=ZERO ) THEN
             temp = Alpha*B(l,j)
-            DO i = 1 , M
+            DO i = 1, M
               C(i,j) = C(i,j) + temp*A(i,l)
             ENDDO
           ENDIF
@@ -253,10 +253,10 @@ SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
       !
       !           Form  C := alpha*A'*B + beta*C
       !
-      DO j = 1 , N
-        DO i = 1 , M
+      DO j = 1, N
+        DO i = 1, M
           temp = ZERO
-          DO l = 1 , K
+          DO l = 1, K
             temp = temp + A(l,i)*B(l,j)
           ENDDO
           IF ( Beta==ZERO ) THEN
@@ -271,20 +271,20 @@ SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     !
     !           Form  C := alpha*A*B' + beta*C
     !
-    DO j = 1 , N
+    DO j = 1, N
       IF ( Beta==ZERO ) THEN
-        DO i = 1 , M
+        DO i = 1, M
           C(i,j) = ZERO
         ENDDO
       ELSEIF ( Beta/=ONE ) THEN
-        DO i = 1 , M
+        DO i = 1, M
           C(i,j) = Beta*C(i,j)
         ENDDO
       ENDIF
-      DO l = 1 , K
+      DO l = 1, K
         IF ( B(j,l)/=ZERO ) THEN
           temp = Alpha*B(j,l)
-          DO i = 1 , M
+          DO i = 1, M
             C(i,j) = C(i,j) + temp*A(i,l)
           ENDDO
         ENDIF
@@ -294,10 +294,10 @@ SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     !
     !           Form  C := alpha*A'*B' + beta*C
     !
-    DO j = 1 , N
-      DO i = 1 , M
+    DO j = 1, N
+      DO i = 1, M
         temp = ZERO
-        DO l = 1 , K
+        DO l = 1, K
           temp = temp + A(l,i)*B(j,l)
         ENDDO
         IF ( Beta==ZERO ) THEN

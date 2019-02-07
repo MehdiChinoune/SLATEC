@@ -55,8 +55,8 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
   !                    depending on KODE
   !           NZ     - Number of components set to zero due to
   !                    underflow,
-  !                    NZ= 0   , Normal return
-  !                    NZ.NE.0 , First NZ components of Y set to zero
+  !                    NZ= 0  , Normal return
+  !                    NZ.NE.0, First NZ components of Y set to zero
   !                              due to underflow, Y(I)=0.0E0,I=1,...,NZ
   !
   !     Error Conditions
@@ -82,23 +82,23 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BESKNU
   !
-  INTEGER i , iflag , inu , j , k , kk , Kode , koded , N , nn , Nz
+  INTEGER i, iflag, inu, j, k, kk, Kode, koded, N, nn, Nz
   INTEGER I1MACH
-  REAL a , ak , a1 , a2 , b , bk , cc , ck , coef , cx , dk , dnu , dnu2 , &
-    elim , etest , ex , f , fc , fhs , fk , fks , flrx , fmu , Fnu , g1 , &
-    g2 , p , pi , pt , p1 , p2 , q , rthpi , rx , s , smu , sqk , st , &
-    s1 , s2 , tm , tol , t1 , t2 , X , x1 , x2 , Y
-  REAL GAMMA , R1MACH
-  DIMENSION a(160) , b(160) , Y(*) , cc(8)
+  REAL a, ak, a1, a2, b, bk, cc, ck, coef, cx, dk, dnu, dnu2, &
+    elim, etest, ex, f, fc, fhs, fk, fks, flrx, fmu, Fnu, g1, &
+    g2, p, pi, pt, p1, p2, q, rthpi, rx, s, smu, sqk, st, &
+    s1, s2, tm, tol, t1, t2, X, x1, x2, Y
+  REAL GAMMA, R1MACH
+  DIMENSION a(160), b(160), Y(*), cc(8)
   EXTERNAL GAMMA
-  SAVE x1 , x2 , pi , rthpi , cc
-  DATA x1 , x2/2.0E0 , 17.0E0/
-  DATA pi , rthpi/3.14159265358979E+00 , 1.25331413731550E+00/
-  DATA cc(1) , cc(2) , cc(3) , cc(4) , cc(5) , cc(6) , cc(7) , &
-    cc(8)/5.77215664901533E-01 , -4.20026350340952E-02 , &
-    -4.21977345555443E-02 , 7.21894324666300E-03 , &
-    -2.15241674114900E-04 , -2.01348547807000E-05 , &
-    1.13302723200000E-06 , 6.11609500000000E-09/
+  SAVE x1, x2, pi, rthpi, cc
+  DATA x1, x2/2.0E0, 17.0E0/
+  DATA pi, rthpi/3.14159265358979E+00, 1.25331413731550E+00/
+  DATA cc(1), cc(2), cc(3), cc(4), cc(5), cc(6), cc(7), &
+    cc(8)/5.77215664901533E-01, -4.20026350340952E-02, &
+    -4.21977345555443E-02, 7.21894324666300E-03, &
+    -2.15241674114900E-04, -2.01348547807000E-05, &
+    1.13302723200000E-06, 6.11609500000000E-09/
   !***FIRST EXECUTABLE STATEMENT  BESKNU
   kk = -I1MACH(12)
   elim = 2.303E0*(kk*R1MACH(5)-3.0E0)
@@ -144,7 +144,7 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
               !     SERIES FOR F0 TO RESOLVE INDETERMINACY FOR SMALL ABS(DNU)
               s = cc(1)
               ak = 1.0E0
-              DO k = 2 , 8
+              DO k = 2, 8
                 ak = ak*dnu2
                 tm = cc(k)*ak
                 s = s + tm
@@ -251,14 +251,14 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
           IF ( ABS(dnu2)>=tol ) fmu = dnu2*dnu2
           ex = X*8.0E0
           s2 = 0.0E0
-          DO k = 1 , nn
+          DO k = 1, nn
             s1 = s2
             s = 1.0E0
             ak = 0.0E0
             ck = 1.0E0
             sqk = 1.0E0
             dk = ex
-            DO j = 1 , 30
+            DO j = 1, 30
               ck = ck*(fmu-sqk)/dk
               s = s + ck
               dk = dk + ex
@@ -303,7 +303,7 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
               s = 1.0E0
               p1 = 0.0E0
               p2 = 1.0E0
-              DO i = 1 , k
+              DO i = 1, k
                 pt = p2
                 p2 = (b(kk)*p2-p1)/a(kk)
                 p1 = pt
@@ -324,7 +324,7 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
       20       ck = (dnu+dnu+2.0E0)/X
       IF ( N==1 ) inu = inu - 1
       IF ( inu>0 ) THEN
-        DO i = 1 , inu
+        DO i = 1, inu
           st = s2
           s2 = ck*s2 + s1
           s1 = st
@@ -355,7 +355,7 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
     IF ( N==2 ) RETURN
     kk = 2
     IF ( Nz>=2 ) THEN
-      DO i = 3 , N
+      DO i = 3, N
         kk = i
         st = s2
         s2 = ck*s2 + s1
@@ -377,23 +377,25 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
     IF ( N==1 ) RETURN
     Y(2) = s2
     IF ( N==2 ) RETURN
-    DO i = 3 , N
+    DO i = 3, N
       Y(i) = ck*Y(i-1) + Y(i-2)
       ck = ck + rx
     ENDDO
     RETURN
   ENDIF
 ENDIF
-100  IF ( kk==N ) RETURN
+100 CONTINUE
+IF ( kk==N ) RETURN
 s2 = s2*ck + s1
 ck = ck + rx
 kk = kk + 1
 Y(kk) = EXP(-X+LOG(s2))
 IF ( kk==N ) RETURN
 kk = kk + 1
-DO i = kk , N
+DO i = kk, N
   Y(i) = ck*Y(i-1) + Y(i-2)
   ck = ck + rx
 ENDDO
 RETURN
-99999 END SUBROUTINE BESKNU
+  99999 CONTINUE
+  END SUBROUTINE BESKNU

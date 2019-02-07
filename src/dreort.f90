@@ -52,24 +52,24 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !***END PROLOGUE  DREORT
   !
   REAL(8) :: DDOT
-  INTEGER ICOco , Iflag , IGOfx , ijk , INDpvt , INFo , INHomo , INTeg , &
-    Ip(*) , ISTkop , IVP , j , k , kk , KNSwot , KOP , l , LOTjp , &
-    mflag , MNSwot , MXNon , Ncomp , NCOmpd , NDIsk , NEQ , NEQivp , &
-    NFC , NFCc , nfcp , NIC , Niv , NOPg , NPS , NSWot , NTApe , NTP , &
-    NUMort , NXPts
-  REAL(8) :: AE , C , dnd , dndt , dx , P(*) , PWCnd , PX , RE , &
-    S(*) , srp , Stowa(*) , TND , TOL , vnorm , W(*) , wcnd , &
-    X , XBEg , XENd , XOP , XOT , XSAv , Y(Ncomp,*) , &
-    Yhp(Ncomp,*) , Yp(*) , ypnm
+  INTEGER ICOco, Iflag, IGOfx, ijk, INDpvt, INFo, INHomo, INTeg, &
+    Ip(*), ISTkop, IVP, j, k, kk, KNSwot, KOP, l, LOTjp, &
+    mflag, MNSwot, MXNon, Ncomp, NCOmpd, NDIsk, NEQ, NEQivp, &
+    NFC, NFCc, nfcp, NIC, Niv, NOPg, NPS, NSWot, NTApe, NTP, &
+    NUMort, NXPts
+  REAL(8) :: AE, C, dnd, dndt, dx, P(*), PWCnd, PX, RE, &
+    S(*), srp, Stowa(*), TND, TOL, vnorm, W(*), wcnd, &
+    X, XBEg, XENd, XOP, XOT, XSAv, Y(Ncomp,*), &
+    Yhp(Ncomp,*), Yp(*), ypnm
   !
   !     ******************************************************************
   !
-  COMMON /DML8SZ/ C , XSAv , IGOfx , INHomo , IVP , NCOmpd , NFC
-  COMMON /DML15T/ PX , PWCnd , TND , X , XBEg , XENd , XOT , XOP , INFo(15)&
-    , ISTkop , KNSwot , KOP , LOTjp , MNSwot , NSWot
-  COMMON /DML18J/ AE , RE , TOL , NXPts , NIC , NOPg , MXNon , NDIsk , &
-    NTApe , NEQ , INDpvt , INTeg , NPS , NTP , NEQivp , &
-    NUMort , NFCc , ICOco
+  COMMON /DML8SZ/ C, XSAv, IGOfx, INHomo, IVP, NCOmpd, NFC
+  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
+    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
+  COMMON /DML18J/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
+    NUMort, NFCc, ICOco
   !
   ! **********************************************************************
   !     BEGIN BLOCK PERMITTING ...EXITS TO 210
@@ -115,7 +115,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       !
       !              ...EXIT
       IF ( wcnd>=50.0D0*TOL ) THEN
-        DO ijk = 1 , nfcp
+        DO ijk = 1, nfcp
           !              ......EXIT
           IF ( S(ijk)>1.0D20 ) GOTO 50
         ENDDO
@@ -167,7 +167,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     LOTjp = 1
     kk = 1
     l = 1
-    DO k = 1 , NFCc
+    DO k = 1, NFCc
       !                 BEGIN BLOCK PERMITTING ...EXITS TO 140
       srp = SQRT(P(kk))
       IF ( INHomo==1 ) W(k) = srp*W(k)
@@ -178,7 +178,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
         !                 ......EXIT
         IF ( l/=k/2 ) CYCLE
       ENDIF
-      DO j = 1 , Ncomp
+      DO j = 1, Ncomp
         Y(j,l) = Y(j,l)*vnorm
       ENDDO
       l = l + 1
@@ -192,10 +192,10 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
       IF ( ypnm==0.0D0 ) ypnm = 1.0D0
       ypnm = SQRT(ypnm)
       S(nfcp) = ypnm
-      DO j = 1 , Ncomp
+      DO j = 1, Ncomp
         Yp(j) = Yp(j)/ypnm
       ENDDO
-      DO j = 1 , NFCc
+      DO j = 1, NFCc
         W(j) = C*W(j)
       ENDDO
     ENDIF
@@ -221,4 +221,5 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     !           .........EXIT
     Iflag = 10
   ENDIF
-  99999 END SUBROUTINE DREORT
+  99999 CONTINUE
+  END SUBROUTINE DREORT

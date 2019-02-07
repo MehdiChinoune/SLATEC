@@ -42,8 +42,8 @@ SUBROUTINE DPLINT(N,X,Y,C)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPLINT
-  INTEGER i , k , km1 , N
-  REAL(8) :: dif , C(*) , X(*) , Y(*)
+  INTEGER i, k, km1, N
+  REAL(8) :: dif, C(*), X(*), Y(*)
   !***FIRST EXECUTABLE STATEMENT  DPLINT
   IF ( N<=0 ) THEN
     CALL XERMSG('SLATEC','DPLINT','N IS ZERO OR NEGATIVE.',2,1)
@@ -51,10 +51,10 @@ SUBROUTINE DPLINT(N,X,Y,C)
   ELSE
     C(1) = Y(1)
     IF ( N==1 ) RETURN
-    DO k = 2 , N
+    DO k = 2, N
       C(k) = Y(k)
       km1 = k - 1
-      DO i = 1 , km1
+      DO i = 1, km1
         !     CHECK FOR DISTINCT X VALUES
         dif = X(i) - X(k)
         IF ( dif==0.0 ) GOTO 100

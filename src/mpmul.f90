@@ -4,7 +4,7 @@ SUBROUTINE MPMUL(X,Y,Z)
   IMPLICIT NONE
   !*--MPMUL5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , i2 , i2p , j , j1 , LUN , M , MXR
+  INTEGER i, i2, i2p, j, j1, LUN, M, MXR
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPMUL
   !***SUBSIDIARY
@@ -40,8 +40,8 @@ SUBROUTINE MPMUL(X,Y,Z)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPMUL
-  COMMON /MPCOM / B , T , M , LUN , MXR , R(30)
-  INTEGER B , T , R , X(*) , Y(*) , Z(*) , rs , re , xi , c , ri
+  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
+  INTEGER B, T, R, X(*), Y(*), Z(*), rs, re, xi, c, ri
   !***FIRST EXECUTABLE STATEMENT  MPMUL
   CALL MPCHK(1,4)
   i2 = T + 4
@@ -52,12 +52,12 @@ SUBROUTINE MPMUL(X,Y,Z)
     ! FORM EXPONENT OF PRODUCT
     re = X(2) + Y(2)
     ! CLEAR ACCUMULATOR
-    DO i = 1 , i2
+    DO i = 1, i2
       R(i) = 0
     ENDDO
     ! PERFORM MULTIPLICATION
     c = 8
-    DO i = 1 , T
+    DO i = 1, T
       xi = X(i+2)
       ! FOR SPEED, PUT THE NUMBER WITH MANY ZEROS FIRST
       IF ( xi/=0 ) THEN
@@ -68,7 +68,7 @@ SUBROUTINE MPMUL(X,Y,Z)
           IF ( (xi<0).OR.(xi>=B) ) GOTO 200
           ! PROPAGATE CARRIES AT END AND EVERY EIGHTH TIME,
           ! FASTER THAN DOING IT EVERY TIME.
-          DO j = 1 , i2
+          DO j = 1, i2
             j1 = i2p - j
             ri = R(j1) + c
             IF ( ri<0 ) GOTO 100
@@ -83,7 +83,7 @@ SUBROUTINE MPMUL(X,Y,Z)
     IF ( c/=8 ) THEN
       IF ( (xi<0).OR.(xi>=B) ) GOTO 200
       c = 0
-      DO j = 1 , i2
+      DO j = 1, i2
         j1 = i2p - j
         ri = R(j1) + c
         IF ( ri<0 ) GOTO 100

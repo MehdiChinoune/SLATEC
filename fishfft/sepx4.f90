@@ -5,11 +5,11 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   IMPLICIT NONE
   !*--SEPX46
   !*** Start of declarations inserted by SPAG
-  REAL A , Alpha , B , Bda , Bdb , Bdc , Bdd , Beta , C , COFX , D , Grhs , &
-    Pertrb , Usol , W
-  INTEGER i1 , i10 , i11 , i12 , i13 , i2 , i3 , i4 , i5 , i6 , i7 , i8 , &
-    i9 , Idmn , Ierror , Iorder , k , l , length , linput
-  INTEGER log2n , loutpt , M , Mbdcnd , N , Nbdcnd
+  REAL A, Alpha, B, Bda, Bdb, Bdc, Bdd, Beta, C, COFX, D, Grhs, &
+    Pertrb, Usol, W
+  INTEGER i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
+    i9, Idmn, Ierror, Iorder, k, l, length, linput
+  INTEGER log2n, loutpt, M, Mbdcnd, N, Nbdcnd
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SEPX4
   !***PURPOSE  Solve for either the second or fourth order finite
@@ -413,8 +413,8 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SEPX4
   !
-  DIMENSION Grhs(Idmn,*) , Usol(Idmn,*)
-  DIMENSION Bda(*) , Bdb(*) , Bdc(*) , Bdd(*) , W(*)
+  DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
+  DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   EXTERNAL COFX
   !***FIRST EXECUTABLE STATEMENT  SEPX4
   CALL CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)

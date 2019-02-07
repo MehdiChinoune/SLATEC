@@ -59,10 +59,10 @@ SUBROUTINE SGTSL(N,C,D,E,B,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SGTSL
-  INTEGER N , Info
-  REAL C(*) , D(*) , E(*) , B(*)
+  INTEGER N, Info
+  REAL C(*), D(*), E(*), B(*)
   !
-  INTEGER k , kb , kp1 , nm1 , nm2
+  INTEGER k, kb, kp1, nm1, nm2
   REAL t
   !***FIRST EXECUTABLE STATEMENT  SGTSL
   Info = 0
@@ -73,7 +73,7 @@ SUBROUTINE SGTSL(N,C,D,E,B,Info)
     E(1) = 0.0E0
     E(N) = 0.0E0
     !
-    DO k = 1 , nm1
+    DO k = 1, nm1
       kp1 = k + 1
       !
       !              FIND THE LARGEST OF THE TWO ROWS
@@ -119,7 +119,7 @@ SUBROUTINE SGTSL(N,C,D,E,B,Info)
     IF ( N/=1 ) THEN
       B(nm1) = (B(nm1)-D(nm1)*B(N))/C(nm1)
       IF ( nm2>=1 ) THEN
-        DO kb = 1 , nm2
+        DO kb = 1, nm2
           k = nm2 - kb + 1
           B(k) = (B(k)-D(k)*B(k+1)-E(k)*B(k+2))/C(k)
         ENDDO
@@ -129,4 +129,5 @@ SUBROUTINE SGTSL(N,C,D,E,B,Info)
     Info = N
   ENDIF
   !
-  99999 END SUBROUTINE SGTSL
+  99999 CONTINUE
+  END SUBROUTINE SGTSL

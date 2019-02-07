@@ -60,10 +60,10 @@ SUBROUTINE DGTSL(N,C,D,E,B,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGTSL
-  INTEGER N , Info
-  REAL(8) :: C(*) , D(*) , E(*) , B(*)
+  INTEGER N, Info
+  REAL(8) :: C(*), D(*), E(*), B(*)
   !
-  INTEGER k , kb , kp1 , nm1 , nm2
+  INTEGER k, kb, kp1, nm1, nm2
   REAL(8) :: t
   !***FIRST EXECUTABLE STATEMENT  DGTSL
   Info = 0
@@ -74,7 +74,7 @@ SUBROUTINE DGTSL(N,C,D,E,B,Info)
     E(1) = 0.0D0
     E(N) = 0.0D0
     !
-    DO k = 1 , nm1
+    DO k = 1, nm1
       kp1 = k + 1
       !
       !              FIND THE LARGEST OF THE TWO ROWS
@@ -120,7 +120,7 @@ SUBROUTINE DGTSL(N,C,D,E,B,Info)
     IF ( N/=1 ) THEN
       B(nm1) = (B(nm1)-D(nm1)*B(N))/C(nm1)
       IF ( nm2>=1 ) THEN
-        DO kb = 1 , nm2
+        DO kb = 1, nm2
           k = nm2 - kb + 1
           B(k) = (B(k)-D(k)*B(k+1)-E(k)*B(k+2))/C(k)
         ENDDO
@@ -130,4 +130,5 @@ SUBROUTINE DGTSL(N,C,D,E,B,Info)
     Info = N
   ENDIF
   !
-  99999 END SUBROUTINE DGTSL
+  99999 CONTINUE
+  END SUBROUTINE DGTSL

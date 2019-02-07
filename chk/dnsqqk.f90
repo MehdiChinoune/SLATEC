@@ -4,7 +4,7 @@ SUBROUTINE DNSQQK(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--DNSQQK5
   !*** Start of declarations inserted by SPAG
-  REAL DQFCN2 , DQJAC2
+  REAL DQFCN2, DQJAC2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DNSQQK
   !***PURPOSE  Quick check for DNSQE and DNSQ.
@@ -25,18 +25,18 @@ SUBROUTINE DNSQQK(Lun,Kprint,Ipass)
   !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
   !***END PROLOGUE  DNSQQK
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
-  REAL(8) :: fnorm , fnorms , tol
-  INTEGER icnt , info , infos , iopt , lwa , n , nprint
+  REAL(8) :: fnorm, fnorms, tol
+  INTEGER icnt, info, infos, iopt, lwa, n, nprint
   !     .. Local Arrays ..
-  REAL(8) :: fvec(2) , wa(19) , x(2)
+  REAL(8) :: fvec(2), wa(19), x(2)
   INTEGER itest(3)
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DENORM
-  EXTERNAL D1MACH , DENORM
+  REAL(8) :: D1MACH, DENORM
+  EXTERNAL D1MACH, DENORM
   !     .. External Subroutines ..
-  EXTERNAL DNSQE , DQFCN2 , DQJAC2 , PASS
+  EXTERNAL DNSQE, DQFCN2, DQJAC2, PASS
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
   !***FIRST EXECUTABLE STATEMENT  DNSQQK
@@ -62,7 +62,7 @@ SUBROUTINE DNSQQK(Lun,Kprint,Ipass)
   !
   IF ( Kprint/=0 ) THEN
     IF ( (Kprint>=2.AND.itest(icnt)/=1).OR.Kprint>=3 ) WRITE (Lun,99004)&
-      infos , fnorms , info , fnorm
+      infos, fnorms, info, fnorm
     IF ( (Kprint>=2).OR.(Kprint==1.AND.itest(icnt)/=1) )&
       CALL PASS(Lun,icnt,itest(icnt))
   ENDIF
@@ -80,7 +80,7 @@ SUBROUTINE DNSQQK(Lun,Kprint,Ipass)
   !
   IF ( Kprint/=0 ) THEN
     IF ( Kprint>=3.OR.(Kprint>=2.AND.itest(icnt)/=1) ) WRITE (Lun,99004)&
-      infos , fnorms , info , fnorm
+      infos, fnorms, info, fnorm
     IF ( Kprint>=2.OR.(Kprint==1.AND.itest(icnt)/=1) )&
       CALL PASS(Lun,icnt,itest(icnt))
   ENDIF

@@ -48,21 +48,21 @@ REAL FUNCTION GAMRN(X)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920520  Added REFERENCES section.  (WRB)
   !***END PROLOGUE  GAMRN
-  INTEGER i , i1m11 , k , mx , nx
+  INTEGER i, i1m11, k, mx, nx
   INTEGER I1MACH
-  REAL fln , gr , rln , s , tol , trm , X , xdmy , xinc , xm , xmin , xp , &
+  REAL fln, gr, rln, s, tol, trm, X, xdmy, xinc, xm, xmin, xp, &
     xsq
   REAL R1MACH
   DIMENSION gr(12)
   SAVE gr
   !
-  DATA gr(1) , gr(2) , gr(3) , gr(4) , gr(5) , gr(6) , gr(7) , gr(8) , &
-    gr(9) , gr(10) , gr(11) , gr(12)/1.00000000000000000E+00 , &
-    -1.56250000000000000E-02 , 2.56347656250000000E-03 , &
-    -1.27983093261718750E-03 , 1.34351104497909546E-03 , &
-    -2.43289663922041655E-03 , 6.75423753364157164E-03 , &
-    -2.66369606131178216E-02 , 1.41527455519564332E-01 , &
-    -9.74384543032201613E-01 , 8.43686251229783675E+00 , &
+  DATA gr(1), gr(2), gr(3), gr(4), gr(5), gr(6), gr(7), gr(8), &
+    gr(9), gr(10), gr(11), gr(12)/1.00000000000000000E+00, &
+    -1.56250000000000000E-02, 2.56347656250000000E-03, &
+    -1.27983093261718750E-03, 1.34351104497909546E-03, &
+    -2.43289663922041655E-03, 6.75423753364157164E-03, &
+    -2.66369606131178216E-02, 1.41527455519564332E-01, &
+    -9.74384543032201613E-01, 8.43686251229783675E+00, &
     -8.97258321640552515E+01/
   !
   !***FIRST EXECUTABLE STATEMENT  GAMRN
@@ -86,7 +86,7 @@ REAL FUNCTION GAMRN(X)
   IF ( xdmy*tol<=1.0E0 ) THEN
     xsq = 1.0E0/(xdmy*xdmy)
     xp = xsq
-    DO k = 2 , 12
+    DO k = 2, 12
       trm = gr(k)*xp
       IF ( ABS(trm)<tol ) EXIT
       s = s + trm
@@ -97,7 +97,7 @@ REAL FUNCTION GAMRN(X)
   IF ( xinc/=0.0E0 ) THEN
     nx = INT(xinc)
     xp = 0.0E0
-    DO i = 1 , nx
+    DO i = 1, nx
       s = s*(1.0E0+0.5E0/(X+xp))
       xp = xp + 1.0E0
     ENDDO
@@ -106,4 +106,5 @@ REAL FUNCTION GAMRN(X)
   ENDIF
   GAMRN = s
   RETURN
-  99999 END FUNCTION GAMRN
+  99999 CONTINUE
+  END FUNCTION GAMRN

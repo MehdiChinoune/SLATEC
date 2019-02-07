@@ -100,13 +100,13 @@ SUBROUTINE DCHDC(A,Lda,P,Work,Jpvt,Job,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DCHDC
-  INTEGER Lda , P , Jpvt(*) , Job , Info
-  REAL(8) :: A(Lda,*) , Work(*)
+  INTEGER Lda, P, Jpvt(*), Job, Info
+  REAL(8) :: A(Lda,*), Work(*)
   !
-  INTEGER pu , pl , plp1 , j , jp , jt , k , kb , km1 , kp1 , l , maxl
+  INTEGER pu, pl, plp1, j, jp, jt, k, kb, km1, kp1, l, maxl
   REAL(8) :: temp
   REAL(8) :: maxdia
-  LOGICAL swapk , negk
+  LOGICAL swapk, negk
   !***FIRST EXECUTABLE STATEMENT  DCHDC
   pl = 1
   pu = 0
@@ -116,7 +116,7 @@ SUBROUTINE DCHDC(A,Lda,P,Work,Jpvt,Job,Info)
     !        PIVOTING HAS BEEN REQUESTED. REARRANGE THE
     !        THE ELEMENTS ACCORDING TO JPVT.
     !
-    DO k = 1 , P
+    DO k = 1, P
       swapk = Jpvt(k)>0
       negk = Jpvt(k)<0
       Jpvt(k) = k
@@ -129,7 +129,7 @@ SUBROUTINE DCHDC(A,Lda,P,Work,Jpvt,Job,Info)
           A(pl,pl) = temp
           plp1 = pl + 1
           IF ( P>=plp1 ) THEN
-            DO j = plp1 , P
+            DO j = plp1, P
               IF ( j<k ) THEN
                 temp = A(pl,j)
                 A(pl,j) = A(j,k)
@@ -149,7 +149,7 @@ SUBROUTINE DCHDC(A,Lda,P,Work,Jpvt,Job,Info)
     ENDDO
     pu = P
     IF ( P>=pl ) THEN
-      DO kb = pl , P
+      DO kb = pl, P
         k = P - kb + pl
         IF ( Jpvt(k)<0 ) THEN
           Jpvt(k) = -Jpvt(k)
@@ -160,7 +160,7 @@ SUBROUTINE DCHDC(A,Lda,P,Work,Jpvt,Job,Info)
             A(pu,pu) = temp
             kp1 = k + 1
             IF ( P>=kp1 ) THEN
-              DO j = kp1 , P
+              DO j = kp1, P
                 IF ( j<pu ) THEN
                   temp = A(k,j)
                   A(k,j) = A(j,pu)
@@ -181,7 +181,7 @@ SUBROUTINE DCHDC(A,Lda,P,Work,Jpvt,Job,Info)
       ENDDO
     ENDIF
   ENDIF
-  DO k = 1 , P
+  DO k = 1, P
     !
     !        REDUCTION LOOP.
     !
@@ -192,7 +192,7 @@ SUBROUTINE DCHDC(A,Lda,P,Work,Jpvt,Job,Info)
     !        DETERMINE THE PIVOT ELEMENT.
     !
     IF ( k>=pl.AND.k<pu ) THEN
-      DO l = kp1 , pu
+      DO l = kp1, pu
         IF ( A(l,l)>maxdia ) THEN
           maxdia = A(l,l)
           maxl = l
@@ -221,7 +221,7 @@ SUBROUTINE DCHDC(A,Lda,P,Work,Jpvt,Job,Info)
       Work(k) = SQRT(A(k,k))
       A(k,k) = Work(k)
       IF ( P>=kp1 ) THEN
-        DO j = kp1 , P
+        DO j = kp1, P
           IF ( k/=maxl ) THEN
             IF ( j<maxl ) THEN
               temp = A(k,j)

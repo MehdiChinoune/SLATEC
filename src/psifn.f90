@@ -85,7 +85,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !
   !         This is supplemented by a series
   !
-  !                  SUM( (X+K)**(-N-1) , K=0,1,2,... )
+  !                  SUM( (X+K)**(-N-1), K=0,1,2,... )
   !
   !         which converges rapidly for large N. Both XMIN and the
   !         number of terms of the series are calculated from the unit
@@ -107,33 +107,33 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  PSIFN
-  INTEGER i , Ierr , j , k , Kode , M , mm , mx , N , nmax , nn , np , nx , &
+  INTEGER i, Ierr, j, k, Kode, M, mm, mx, N, nmax, nn, np, nx, &
     Nz
   INTEGER I1MACH
-  REAL Ans , arg , b , den , elim , eps , fln , fn , fnp , fns , fx , rln , &
-    rxsq , r1m4 , r1m5 , s , slope , t , ta , tk , tol , tols , trm , &
-    trmr , tss , tst , tt , t1 , t2 , wdtol , X , xdmln , xdmy , xinc , &
-    xln , xm , xmin , xq , yint
+  REAL Ans, arg, b, den, elim, eps, fln, fn, fnp, fns, fx, rln, &
+    rxsq, r1m4, r1m5, s, slope, t, ta, tk, tol, tols, trm, &
+    trmr, tss, tst, tt, t1, t2, wdtol, X, xdmln, xdmy, xinc, &
+    xln, xm, xmin, xq, yint
   REAL R1MACH
-  DIMENSION b(22) , trm(22) , trmr(100) , Ans(*)
-  SAVE nmax , b
+  DIMENSION b(22), trm(22), trmr(100), Ans(*)
+  SAVE nmax, b
   DATA nmax/100/
   !-----------------------------------------------------------------------
   !             BERNOULLI NUMBERS
   !-----------------------------------------------------------------------
-  DATA b(1) , b(2) , b(3) , b(4) , b(5) , b(6) , b(7) , b(8) , b(9) , &
-    b(10) , b(11) , b(12) , b(13) , b(14) , b(15) , b(16) , b(17) , &
-    b(18) , b(19) , b(20) , b(21) , b(22)/1.00000000000000000E+00 , &
-    -5.00000000000000000E-01 , 1.66666666666666667E-01 , &
-    -3.33333333333333333E-02 , 2.38095238095238095E-02 , &
-    -3.33333333333333333E-02 , 7.57575757575757576E-02 , &
-    -2.53113553113553114E-01 , 1.16666666666666667E+00 , &
-    -7.09215686274509804E+00 , 5.49711779448621554E+01 , &
-    -5.29124242424242424E+02 , 6.19212318840579710E+03 , &
-    -8.65802531135531136E+04 , 1.42551716666666667E+06 , &
-    -2.72982310678160920E+07 , 6.01580873900642368E+08 , &
-    -1.51163157670921569E+10 , 4.29614643061166667E+11 , &
-    -1.37116552050883328E+13 , 4.88332318973593167E+14 , &
+  DATA b(1), b(2), b(3), b(4), b(5), b(6), b(7), b(8), b(9), &
+    b(10), b(11), b(12), b(13), b(14), b(15), b(16), b(17), &
+    b(18), b(19), b(20), b(21), b(22)/1.00000000000000000E+00, &
+    -5.00000000000000000E-01, 1.66666666666666667E-01, &
+    -3.33333333333333333E-02, 2.38095238095238095E-02, &
+    -3.33333333333333333E-02, 7.57575757575757576E-02, &
+    -2.53113553113553114E-01, 1.16666666666666667E+00, &
+    -7.09215686274509804E+00, 5.49711779448621554E+01, &
+    -5.29124242424242424E+02, 6.19212318840579710E+03, &
+    -8.65802531135531136E+04, 1.42551716666666667E+06, &
+    -2.72982310678160920E+07, 6.01580873900642368E+08, &
+    -1.51163157670921569E+10, 4.29614643061166667E+11, &
+    -1.37116552050883328E+13, 4.88332318973593167E+14, &
     -1.92965793419400681E+16/
   !
   !***FIRST EXECUTABLE STATEMENT  PSIFN
@@ -169,7 +169,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       Ans(1) = X**(-N-1)
       IF ( mm/=1 ) THEN
         k = 1
-        DO i = 2 , mm
+        DO i = 2, mm
           Ans(k+1) = Ans(k)/X
           k = k + 1
         ENDDO
@@ -201,7 +201,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
         xm = xmin - X
         IF ( xm>7.0E0.AND.fln<15.0E0 ) THEN
           !-----------------------------------------------------------------------
-          !     COMPUTE BY SERIES (X+K)**(-(N+1)) , K=0,1,2,...
+          !     COMPUTE BY SERIES (X+K)**(-(N+1)), K=0,1,2,...
           !-----------------------------------------------------------------------
           nn = INT(fln) + 1
           np = N + 1
@@ -209,7 +209,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
           t = EXP(-t1)
           s = t
           den = X
-          DO i = 1 , nn
+          DO i = 1, nn
             den = den + 1.0E0
             trm(i) = den**(-np)
             s = s + trm(i)
@@ -223,12 +223,12 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
           !     GENERATE HIGHER DERIVATIVES, J.GT.N
           !-----------------------------------------------------------------------
           tol = wdtol/5.0E0
-          DO j = 2 , mm
+          DO j = 2, mm
             t = t/X
             s = t
             tols = t*tol
             den = X
-            DO i = 1 , nn
+            DO i = 1, nn
               den = den + 1.0E0
               trm(i) = trm(i)/den
               s = s + trm(i)
@@ -267,7 +267,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       s = t*b(3)
       IF ( ABS(s)>=tst ) THEN
         tk = 2.0E0
-        DO k = 4 , 22
+        DO k = 4, 22
           t = t*((tk+fn+1.0E0)/(tk+1.0E0))*((tk+fn)/(tk+2.0E0))*rxsq
           trm(k) = t*b(k)
           IF ( ABS(trm(k))<tst ) EXIT
@@ -293,7 +293,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
           !-----------------------------------------------------------------------
           !     THIS LOOP SHOULD NOT BE CHANGED. FX IS ACCURATE WHEN X IS SMALL
           !-----------------------------------------------------------------------
-          DO i = 1 , nx
+          DO i = 1, nx
             trmr(i) = fx**(-np)
             s = s + trmr(i)
             xm = xm - 1.0E0
@@ -307,7 +307,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       !     GENERATE LOWER DERIVATIVES, J.LT.N+MM-1
       !-----------------------------------------------------------------------
       IF ( mm==1 ) RETURN
-      DO j = 2 , mm
+      DO j = 2, mm
         fnp = fn
         fn = fn - 1.0E0
         tss = tss*xdmy
@@ -317,7 +317,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
         s = t*b(3)
         IF ( ABS(s)>=tst ) THEN
           tk = 3.0E0 + fnp
-          DO k = 4 , 22
+          DO k = 4, 22
             trm(k) = trm(k)*fnp/tk
             IF ( ABS(trm(k))<tst ) EXIT
             s = s + trm(k)
@@ -329,7 +329,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
           IF ( fn==0.0E0 ) GOTO 120
           xm = xinc - 1.0E0
           fx = X + xm
-          DO i = 1 , nx
+          DO i = 1, nx
             trmr(i) = trmr(i)*fx
             s = s + trmr(i)
             xm = xm - 1.0E0
@@ -344,7 +344,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       !-----------------------------------------------------------------------
       !     RECURSION FOR N = 0
       !-----------------------------------------------------------------------
-      120      DO i = 1 , nx
+      120      DO i = 1, nx
       s = s + 1.0E0/(X+nx-i)
     ENDDO
     ENDIF
@@ -367,4 +367,5 @@ Ans(mm) = 0.0E0
 mm = mm - 1
 IF ( mm==0 ) RETURN
 GOTO 100
-99999 END SUBROUTINE PSIFN
+  99999 CONTINUE
+  END SUBROUTINE PSIFN

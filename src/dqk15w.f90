@@ -74,14 +74,14 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQK15W
   !
-  REAL(8) :: A , absc , absc1 , absc2 , Abserr , B , centr , dhlgth , &
-    D1MACH , epmach , F , fc , fsum , fval1 , fval2 , fv1 , &
-    fv2 , hlgth , P1 , P2 , P3 , P4 , Resabs , Resasc , &
-    resg , resk , reskh , Result , uflow , W , wg , wgk , xgk
-  INTEGER j , jtw , jtwm1 , Kp
-  EXTERNAL F , W
+  REAL(8) :: A, absc, absc1, absc2, Abserr, B, centr, dhlgth, &
+    D1MACH, epmach, F, fc, fsum, fval1, fval2, fv1, &
+    fv2, hlgth, P1, P2, P3, P4, Resabs, Resasc, &
+    resg, resk, reskh, Result, uflow, W, wg, wgk, xgk
+  INTEGER j, jtw, jtwm1, Kp
+  EXTERNAL F, W
   !
-  DIMENSION fv1(7) , fv2(7) , xgk(8) , wgk(8) , wg(4)
+  DIMENSION fv1(7), fv2(7), xgk(8), wgk(8), wg(4)
   !
   !           THE ABSCISSAE AND WEIGHTS ARE GIVEN FOR THE INTERVAL (-1,1).
   !           BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND THEIR
@@ -97,21 +97,21 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   !
   !           WG     - WEIGHTS OF THE 7-POINT GAUSS RULE
   !
-  SAVE xgk , wgk , wg
-  DATA xgk(1) , xgk(2) , xgk(3) , xgk(4) , xgk(5) , xgk(6) , xgk(7) , xgk(8)&
-    /0.9914553711208126D+00 , 0.9491079123427585D+00 , &
-    0.8648644233597691D+00 , 0.7415311855993944D+00 , &
-    0.5860872354676911D+00 , 0.4058451513773972D+00 , &
-    0.2077849550078985D+00 , 0.0000000000000000D+00/
+  SAVE xgk, wgk, wg
+  DATA xgk(1), xgk(2), xgk(3), xgk(4), xgk(5), xgk(6), xgk(7), xgk(8)&
+    /0.9914553711208126D+00, 0.9491079123427585D+00, &
+    0.8648644233597691D+00, 0.7415311855993944D+00, &
+    0.5860872354676911D+00, 0.4058451513773972D+00, &
+    0.2077849550078985D+00, 0.0000000000000000D+00/
   !
-  DATA wgk(1) , wgk(2) , wgk(3) , wgk(4) , wgk(5) , wgk(6) , wgk(7) , wgk(8)&
-    /0.2293532201052922D-01 , 0.6309209262997855D-01 , &
-    0.1047900103222502D+00 , 0.1406532597155259D+00 , &
-    0.1690047266392679D+00 , 0.1903505780647854D+00 , &
-    0.2044329400752989D+00 , 0.2094821410847278D+00/
+  DATA wgk(1), wgk(2), wgk(3), wgk(4), wgk(5), wgk(6), wgk(7), wgk(8)&
+    /0.2293532201052922D-01, 0.6309209262997855D-01, &
+    0.1047900103222502D+00, 0.1406532597155259D+00, &
+    0.1690047266392679D+00, 0.1903505780647854D+00, &
+    0.2044329400752989D+00, 0.2094821410847278D+00/
   !
-  DATA wg(1) , wg(2) , wg(3) , wg(4)/0.1294849661688697D+00 , &
-    0.2797053914892767D+00 , 0.3818300505051889D+00 , &
+  DATA wg(1), wg(2), wg(3), wg(4)/0.1294849661688697D+00, &
+    0.2797053914892767D+00, 0.3818300505051889D+00, &
     0.4179591836734694D+00/
   !
   !
@@ -148,7 +148,7 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   resg = wg(4)*fc
   resk = wgk(8)*fc
   Resabs = ABS(resk)
-  DO j = 1 , 3
+  DO j = 1, 3
     jtw = j*2
     absc = hlgth*xgk(jtw)
     absc1 = centr - absc
@@ -162,7 +162,7 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
     resk = resk + wgk(jtw)*fsum
     Resabs = Resabs + wgk(jtw)*(ABS(fval1)+ABS(fval2))
   ENDDO
-  DO j = 1 , 4
+  DO j = 1, 4
     jtwm1 = j*2 - 1
     absc = hlgth*xgk(jtwm1)
     absc1 = centr - absc
@@ -177,7 +177,7 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   ENDDO
   reskh = resk*0.5D+00
   Resasc = wgk(8)*ABS(fc-reskh)
-  DO j = 1 , 7
+  DO j = 1, 7
     Resasc = Resasc + wgk(j)*(ABS(fv1(j)-reskh)+ABS(fv2(j)-reskh))
   ENDDO
   Result = resk*hlgth

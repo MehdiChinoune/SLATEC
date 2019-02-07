@@ -4,7 +4,7 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam,Alx)
   IMPLICIT NONE
   !*--D9GMIT5
   !*** Start of declarations inserted by SPAG
-  INTEGER k , m , ma
+  INTEGER k, m, ma
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9GMIT
   !***SUBSIDIARY
@@ -31,10 +31,10 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9GMIT
-  REAL(8) :: A , X , Algap1 , Sgngam , Alx , ae , aeps , algs , alg2 , &
-    bot , eps , fk , s , sgng2 , t , te , D1MACH , DLNGAM
+  REAL(8) :: A, X, Algap1, Sgngam, Alx, ae, aeps, algs, alg2, &
+    bot, eps, fk, s, sgng2, t, te, D1MACH, DLNGAM
   LOGICAL first
-  SAVE eps , bot , first
+  SAVE eps, bot, first
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  D9GMIT
   IF ( first ) THEN
@@ -55,7 +55,7 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam,Alx)
   t = 1.D0
   te = ae
   s = t
-  DO k = 1 , 200
+  DO k = 1, 200
     fk = k
     te = -X*te/fk
     t = te/(ae+fk)
@@ -65,7 +65,8 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam,Alx)
   CALL XERMSG('SLATEC','D9GMIT',&
     'NO CONVERGENCE IN 200 TERMS OF TAYLOR-S SERIES',2,2)
   !
-  100  IF ( A>=(-0.5D0) ) algs = -Algap1 + LOG(s)
+  100 CONTINUE
+  IF ( A>=(-0.5D0) ) algs = -Algap1 + LOG(s)
   IF ( A>=(-0.5D0) ) THEN
     !
     D9GMIT = EXP(algs)
@@ -76,7 +77,7 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam,Alx)
     m = -ma - 1
     IF ( m/=0 ) THEN
       t = 1.0D0
-      DO k = 1 , m
+      DO k = 1, m
         t = X*t/(aeps-(m+1-k))
         s = s + t
         IF ( ABS(t)<eps*ABS(s) ) EXIT

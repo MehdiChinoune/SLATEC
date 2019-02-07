@@ -4,9 +4,9 @@ FUNCTION COT(X)
   IMPLICIT NONE
   !*--COT5
   !*** Start of declarations inserted by SPAG
-  REAL ainty , ainty2 , COT , cotcs , CSEVL , pi2rec , prodbg , R1MACH , &
-    sqeps , X , xmax , xmin , xsml , y , yrem
-  INTEGER ifn , INITS , nterms
+  REAL ainty, ainty2, COT, cotcs, CSEVL, pi2rec, prodbg, R1MACH, &
+    sqeps, X, xmax, xmin, xsml, y, yrem
+  INTEGER ifn, INITS, nterms
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  COT
   !***PURPOSE  Compute the cotangent.
@@ -38,7 +38,7 @@ FUNCTION COT(X)
   !***END PROLOGUE  COT
   DIMENSION cotcs(8)
   LOGICAL first
-  SAVE cotcs , pi2rec , nterms , xmax , xsml , xmin , sqeps , first
+  SAVE cotcs, pi2rec, nterms, xmax, xsml, xmin, sqeps, first
   DATA cotcs(1)/.24025916098295630E0/
   DATA cotcs(2)/ - .016533031601500228E0/
   DATA cotcs(3)/ - .000042998391931724E0/

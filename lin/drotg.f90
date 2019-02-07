@@ -32,7 +32,7 @@ SUBROUTINE DROTG(Da,Db,Dc,Ds)
   !     Construct the Givens transformation
   !
   !         ( DC  DS )
-  !     G = (        ) ,    DC**2 + DS**2 = 1 ,
+  !     G = (        ),    DC**2 + DS**2 = 1 ,
   !         (-DS  DC )
   !
   !     which zeros the second entry of the 2-vector  (DA,DB)**T .
@@ -60,7 +60,7 @@ SUBROUTINE DROTG(Da,Db,Dc,Ds)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DROTG
-  REAL(8) :: Da , Db , Dc , Ds , u , v , r
+  REAL(8) :: Da, Db, Dc, Ds, u, v, r
   !***FIRST EXECUTABLE STATEMENT  DROTG
   IF ( ABS(Da)>ABS(Db) ) THEN
     !
@@ -111,4 +111,5 @@ SUBROUTINE DROTG(Da,Db,Dc,Ds)
   Db = 1.0D0
   RETURN
   !
-  99999 END SUBROUTINE DROTG
+  99999 CONTINUE
+  END SUBROUTINE DROTG

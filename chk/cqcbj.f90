@@ -76,24 +76,24 @@ SUBROUTINE CQCBJ(Lun,Kprint,Ipass)
   !
   !  Declare arguments.
   !
-  INTEGER Lun , Kprint , Ipass
+  INTEGER Lun, Kprint, Ipass
   !
   !  Declare external functions.
   !
   INTEGER I1MACH
   REAL R1MACH
-  EXTERNAL I1MACH , R1MACH
+  EXTERNAL I1MACH, R1MACH
   !
   !  Declare local variables.
   !
-  COMPLEX chalf , coe1 , coe2 , cw , v , w , y , z
-  REAL aa , ab , aer , alim , atol , av , cc , ct , dd , dig , elim , eps , &
-    er , ertol , film , fnu , fnul , gnu , hpi , pi , r , rl , rm , &
-    r1m4 , r1m5 , r2 , slak , st , t , tol , ts , xnu , xx , yy
-  INTEGER i , icase , ierr , il , ir , irb , it , itl , k , kdo , keps , &
-    kk , kode , k1 , k2 , lflg , m , mflg , n , nl , nu , nul , nz , &
-    nz1 , nz2
-  DIMENSION aer(20) , kdo(20) , keps(20) , t(20) , v(20) , w(20) , xnu(20) , &
+  COMPLEX chalf, coe1, coe2, cw, v, w, y, z
+  REAL aa, ab, aer, alim, atol, av, cc, ct, dd, dig, elim, eps, &
+    er, ertol, film, fnu, fnul, gnu, hpi, pi, r, rl, rm, &
+    r1m4, r1m5, r2, slak, st, t, tol, ts, xnu, xx, yy
+  INTEGER i, icase, ierr, il, ir, irb, it, itl, k, kdo, keps, &
+    kk, kode, k1, k2, lflg, m, mflg, n, nl, nu, nul, nz, &
+    nz1, nz2
+  DIMENSION aer(20), kdo(20), keps(20), t(20), v(20), w(20), xnu(20), &
     y(20)
   !
   !***FIRST EXECUTABLE STATEMENT  CQCBJ
@@ -137,7 +137,7 @@ SUBROUTINE CQCBJ(Lun,Kprint,Ipass)
     WRITE (Lun,99002)
     99002   FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
       8X,'DIG')
-    WRITE (Lun,99003) tol , elim , alim , rl , fnul , dig
+    WRITE (Lun,99003) tol, elim, alim, rl, fnul, dig
     99003   FORMAT (1X,6E12.4/)
   ENDIF
   !-----------------------------------------------------------------------
@@ -166,7 +166,7 @@ SUBROUTINE CQCBJ(Lun,Kprint,Ipass)
   IF ( MQC/=2 ) THEN
     nl = 2
     il = 5
-    DO i = 1 , il
+    DO i = 1, il
       keps(i) = 0
       kdo(i) = 0
     ENDDO
@@ -179,7 +179,7 @@ SUBROUTINE CQCBJ(Lun,Kprint,Ipass)
   ELSE
     nl = 4
     il = 13
-    DO i = 1 , il
+    DO i = 1, il
       kdo(i) = 0
       keps(i) = 0
     ENDDO
@@ -205,7 +205,7 @@ SUBROUTINE CQCBJ(Lun,Kprint,Ipass)
   eps = 0.01E0
   film = il - 1
   t(1) = -pi + eps
-  DO k = 2 , il
+  DO k = 2, il
     IF ( kdo(k)==0 ) THEN
       t(i) = pi*(-il+2*k-1)/film
       IF ( keps(k)==0 ) THEN
@@ -227,13 +227,13 @@ SUBROUTINE CQCBJ(Lun,Kprint,Ipass)
     99004   FORMAT (' CHECKS IN THE (Z,FNU) SPACE'/)
   ENDIF
   lflg = 0
-  DO kode = 1 , 2
-    DO n = 1 , nl
-      DO nu = 1 , nul
+  DO kode = 1, 2
+    DO n = 1, nl
+      DO nu = 1, nul
         fnu = xnu(nu)
-        DO icase = 1 , 3
+        DO icase = 1, 3
           irb = MIN(2,icase)
-          DO ir = irb , 4
+          DO ir = irb, 4
             !-------------- switch (icase)
             SELECT CASE (icase)
               CASE (2)
@@ -246,7 +246,7 @@ SUBROUTINE CQCBJ(Lun,Kprint,Ipass)
             END SELECT
             !-------------- end switch
             gnu = fnu + (n-1)
-            DO it = 1 , itl
+            DO it = 1, itl
               ct = COS(t(it))
               st = SIN(t(it))
               IF ( ABS(ct)<atol ) ct = 0.0E0
@@ -277,7 +277,7 @@ SUBROUTINE CQCBJ(Lun,Kprint,Ipass)
                   ELSE
                     coe2 = CMPLX(0.0E0,0.0E0)
                   ENDIF
-                  DO kk = 1 , n
+                  DO kk = 1, n
                     y(kk) = y(kk)*coe2
                     w(kk) = w(kk)*coe1
                   ENDDO
@@ -289,7 +289,7 @@ SUBROUTINE CQCBJ(Lun,Kprint,Ipass)
                 !------------------ Underflow at end of sequence - skip test
                 IF ( nz>10 ) CYCLE
                 CALL CBESJ(z,fnu,kode,n,w,nz,ierr)
-                DO kk = 1 , n
+                DO kk = 1, n
                   y(kk) = w(kk)
                 ENDDO
               ENDIF
@@ -302,7 +302,7 @@ SUBROUTINE CQCBJ(Lun,Kprint,Ipass)
               !     one region.  This is an internal consistency check.
               !-----------------------------------------------------------------------
               mflg = 0
-              DO i = 1 , n
+              DO i = 1, n
                 ab = fnu + i - 1
                 aa = MAX(2.0E0,ab)
                 cw = (w(i)+y(i))*chalf
@@ -348,7 +348,7 @@ SUBROUTINE CQCBJ(Lun,Kprint,Ipass)
                 ENDIF
                 lflg = lflg + 1
                 IF ( Kprint>=2 ) THEN
-                  WRITE (Lun,99013) z , fnu , kode , n
+                  WRITE (Lun,99013) z, fnu, kode, n
                   99013                 FORMAT ('   INPUT:   Z=',2E12.4,3X,'FNU=',E12.4,3X,&
                     'KODE=',I3,3X,'N=',I3)
                 ENDIF
@@ -358,18 +358,18 @@ SUBROUTINE CQCBJ(Lun,Kprint,Ipass)
                   IF ( r>=gnu ) THEN
                     kk = MAX(nz1,nz2) + 1
                     kk = MIN(n,kk)
-                    WRITE (Lun,99015) nz , v(kk)
+                    WRITE (Lun,99015) nz, v(kk)
                     99015                   FORMAT (' RESULTS:   NZ=',I3,3X,'V(KK)=',2E12.4)
-                    WRITE (Lun,99016) nz1 , w(kk)
+                    WRITE (Lun,99016) nz1, w(kk)
                     99016                   FORMAT (' RESULTS:  NZ1=',I3,3X,'W(KK)=',2E12.4)
-                    WRITE (Lun,99017) nz2 , y(kk)
+                    WRITE (Lun,99017) nz2, y(kk)
                     99017                   FORMAT (' RESULTS:  NZ2=',I3,3X,'Y(KK)=',2E12.4)
                   ELSE
                     kk = n - nz
-                    WRITE (Lun,99018) nz , w(kk)
+                    WRITE (Lun,99018) nz, w(kk)
                     99018                   FORMAT (' RESULTS:   NZ=',I3,3X,'W(KK)=',2E12.4)
                   ENDIF
-                  WRITE (Lun,99019) ir , it , icase
+                  WRITE (Lun,99019) ir, it, icase
                   99019                 FORMAT ('    CASE:  IR=',I3,3X,'IT=',I3,3X,'ICASE=',I3/)
                 ENDIF
               ENDIF

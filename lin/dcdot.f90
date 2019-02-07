@@ -40,9 +40,9 @@ SUBROUTINE DCDOT(N,Fm,Cx,Incx,Cy,Incy,Dcr,Dci)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DCDOT
-  INTEGER i , Incx , Incy , kx , ky , N
-  COMPLEX Cx(*) , Cy(*)
-  REAL(8) :: Dcr , Dci , dt1 , dt2 , dt3 , dt4 , Fm
+  INTEGER i, Incx, Incy, kx, ky, N
+  COMPLEX Cx(*), Cy(*)
+  REAL(8) :: Dcr, Dci, dt1, dt2, dt3, dt4, Fm
   !***FIRST EXECUTABLE STATEMENT  DCDOT
   Dcr = 0.0D0
   Dci = 0.0D0
@@ -52,7 +52,7 @@ SUBROUTINE DCDOT(N,Fm,Cx,Incx,Cy,Incy,Dcr,Dci)
     ky = 1
     IF ( Incx<0 ) kx = 1 + (1-N)*Incx
     IF ( Incy<0 ) ky = 1 + (1-N)*Incy
-    DO i = 1 , N
+    DO i = 1, N
       dt1 = REAL(REAL(Cx(kx)), 8)
       dt2 = REAL(REAL(Cy(ky)), 8)
       dt3 = REAL(AIMAG(Cx(kx)), 8)

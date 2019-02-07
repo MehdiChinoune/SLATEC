@@ -5,10 +5,10 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   IMPLICIT NONE
   !*--HSTPLR6
   !*** Start of declarations inserted by SPAG
-  REAL A , a1 , a2 , B , Bda , Bdb , Bdc , Bdd , C , D , deltar , deltht , &
-    dlrsq , dlthsq , Elmbda , F , Pertrb , W
-  INTEGER i , Idimf , ierr1 , Ierror , isw , iwb , iwc , iwr , j , k , lp , &
-    M , mb , Mbdcnd , N , Nbdcnd , np
+  REAL A, a1, a2, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, deltht, &
+    dlrsq, dlthsq, Elmbda, F, Pertrb, W
+  INTEGER i, Idimf, ierr1, Ierror, isw, iwb, iwc, iwr, j, k, lp, &
+    M, mb, Mbdcnd, N, Nbdcnd, np
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HSTPLR
   !***PURPOSE  Solve the standard five-point finite difference
@@ -82,11 +82,11 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !      A one-dimensional array of length N that specifies the boundary
   !      values (if any) of the solution at R = A.  When MBDCND = 1 or 2,
   !
-  !               BDA(J) = U(A,THETA(J)) ,          J=1,2,...,N.
+  !               BDA(J) = U(A,THETA(J)),          J=1,2,...,N.
   !
   !      When MBDCND = 3 or 4,
   !
-  !               BDA(J) = (d/dR)U(A,THETA(J)) ,    J=1,2,...,N.
+  !               BDA(J) = (d/dR)U(A,THETA(J)),    J=1,2,...,N.
   !
   !      When MBDCND = 5 or 6, BDA is a dummy variable.
   !
@@ -94,11 +94,11 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !      A one-dimensional array of length N that specifies the boundary
   !      values of the solution at R = B.  When MBDCND = 1,4, or 5,
   !
-  !               BDB(J) = U(B,THETA(J)) ,          J=1,2,...,N.
+  !               BDB(J) = U(B,THETA(J)),          J=1,2,...,N.
   !
   !      When MBDCND = 2,3, or 6,
   !
-  !               BDB(J) = (d/dR)U(B,THETA(J)) ,    J=1,2,...,N.
+  !               BDB(J) = (d/dR)U(B,THETA(J)),    J=1,2,...,N.
   !
   !    C,D
   !      The range of THETA, i.e. C .LE. THETA .LE. D.  C must be less
@@ -139,7 +139,7 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !      A one dimensional array of length M that specifies the boundary
   !      values of the solution at THETA = C.   When NBDCND = 1 or 2,
   !
-  !               BDC(I) = U(R(I),C) ,              I=1,2,...,M.
+  !               BDC(I) = U(R(I),C),              I=1,2,...,M.
   !
   !      When NBDCND = 3 or 4,
   !
@@ -151,11 +151,11 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !      A one-dimensional array of length M that specifies the boundary
   !      values of the solution at THETA = D.  When NBDCND = 1 or 4,
   !
-  !               BDD(I) = U(R(I),D) ,              I=1,2,...,M.
+  !               BDD(I) = U(R(I),D),              I=1,2,...,M.
   !
   !      When NBDCND = 2 or 3,
   !
-  !               BDD(I) = (d/dTHETA)U(R(I),D) ,    I=1,2,...,M.
+  !               BDD(I) = (d/dTHETA)U(R(I),D),    I=1,2,...,M.
   !
   !      When NBDCND = 0, BDD is a dummy variable.
   !
@@ -330,7 +330,7 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !
   DIMENSION F(Idimf,*)
-  DIMENSION Bda(*) , Bdb(*) , Bdc(*) , Bdd(*) , W(*)
+  DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HSTPLR
   Ierror = 0
   IF ( A<0. ) Ierror = 1
@@ -359,7 +359,7 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   iwb = M
   iwc = iwb + M
   iwr = iwc + M
-  DO i = 1 , M
+  DO i = 1, M
     j = iwr + i
     W(j) = A + (i-0.5)*deltar
     W(i) = (A+(i-1)*deltar)/dlrsq
@@ -368,10 +368,10 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     k = iwb + i
     W(k) = (Elmbda-2./dlrsq)*W(j)
   ENDDO
-  DO i = 1 , M
+  DO i = 1, M
     j = iwr + i
     a1 = W(j)
-    DO j = 1 , N
+    DO j = 1, N
       F(i,j) = a1*F(i,j)
     ENDDO
   ENDDO
@@ -382,14 +382,14 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE (3,4)
       a1 = deltar*W(1)
       W(iwb+1) = W(iwb+1) + W(1)
-      DO j = 1 , N
+      DO j = 1, N
         F(1,j) = F(1,j) + a1*Bda(j)
       ENDDO
     CASE (5,6)
     CASE DEFAULT
       a1 = 2.*W(1)
       W(iwb+1) = W(iwb+1) - W(1)
-      DO j = 1 , N
+      DO j = 1, N
         F(1,j) = F(1,j) - a1*Bda(j)
       ENDDO
   END SELECT
@@ -397,13 +397,13 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE (2,3,6)
       a1 = deltar*W(iwr)
       W(iwc) = W(iwc) + W(iwr)
-      DO j = 1 , N
+      DO j = 1, N
         F(M,j) = F(M,j) - a1*Bdb(j)
       ENDDO
     CASE DEFAULT
       a1 = 2.*W(iwr)
       W(iwc) = W(iwc) - W(iwr)
-      DO j = 1 , N
+      DO j = 1, N
         F(M,j) = F(M,j) - a1*Bdb(j)
       ENDDO
   END SELECT
@@ -416,12 +416,12 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       GOTO 100
     CASE (4,5)
       a1 = 1./deltht
-      DO i = 1 , M
+      DO i = 1, M
         j = iwr + i
         F(i,1) = F(i,1) + a1*Bdc(i)/W(j)
       ENDDO
     CASE DEFAULT
-      DO i = 1 , M
+      DO i = 1, M
         j = iwr + i
         F(i,1) = F(i,1) - a1*Bdc(i)/W(j)
       ENDDO
@@ -431,12 +431,12 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE (1)
     CASE (3,4)
       a1 = 1./deltht
-      DO i = 1 , M
+      DO i = 1, M
         j = iwr + i
         F(i,N) = F(i,N) - a1*Bdd(i)/W(j)
       ENDDO
     CASE DEFAULT
-      DO i = 1 , M
+      DO i = 1, M
         j = iwr + i
         F(i,N) = F(i,N) - a1*Bdd(i)/W(j)
       ENDDO
@@ -455,21 +455,21 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
           CASE (2,3,5)
           CASE DEFAULT
             isw = 2
-            DO j = 1 , N
-              DO i = 1 , M
+            DO j = 1, N
+              DO i = 1, M
                 Pertrb = Pertrb + F(i,j)
               ENDDO
             ENDDO
             Pertrb = Pertrb/(M*N*0.5*(A+B))
-            DO i = 1 , M
+            DO i = 1, M
               j = iwr + i
               a1 = Pertrb*W(j)
-              DO j = 1 , N
+              DO j = 1, N
                 F(i,j) = F(i,j) - a1
               ENDDO
             ENDDO
             a2 = 0.
-            DO j = 1 , N
+            DO j = 1, N
               a2 = a2 + F(1,j)
             ENDDO
             a2 = a2/W(iwr+1)
@@ -481,7 +481,7 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     MULTIPLY I-TH EQUATION THROUGH BY  R(I)*DELTHT**2
   !
-  DO i = 1 , M
+  DO i = 1, M
     j = iwr + i
     a1 = dlthsq*W(j)
     W(i) = a1*W(i)
@@ -489,7 +489,7 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     W(j) = a1*W(j)
     j = iwb + i
     W(j) = a1*W(j)
-    DO j = 1 , N
+    DO j = 1, N
       F(i,j) = a1*F(i,j)
     ENDDO
   ENDDO
@@ -507,14 +507,14 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   W(1) = W(iwr+1) + 3*M
   IF ( A==0..AND.Mbdcnd==2.AND.isw==2 ) THEN
     a1 = 0.
-    DO j = 1 , N
+    DO j = 1, N
       a1 = a1 + F(1,j)
     ENDDO
     a1 = (a1-dlrsq*a2/16.)/N
     IF ( Nbdcnd==3 ) a1 = a1 + (Bdd(1)-Bdc(1))/(D-C)
     a1 = Bda(1) - a1
-    DO i = 1 , M
-      DO j = 1 , N
+    DO i = 1, M
+      DO j = 1, N
         F(i,j) = F(i,j) + a1
       ENDDO
     ENDDO

@@ -85,8 +85,8 @@ SUBROUTINE RG(Nm,N,A,Wr,Wi,Matz,Z,Iv1,Fv1,Ierr)
   !   921103  Corrected description of IV1.  (DWL, FNF and WRB)
   !***END PROLOGUE  RG
   !
-  INTEGER N , Nm , is1 , is2 , Ierr , Matz
-  REAL A(Nm,*) , Wr(*) , Wi(*) , Z(Nm,*) , Fv1(*)
+  INTEGER N, Nm, is1, is2, Ierr, Matz
+  REAL A(Nm,*), Wr(*), Wi(*), Z(Nm,*), Fv1(*)
   INTEGER Iv1(*)
   !
   !***FIRST EXECUTABLE STATEMENT  RG

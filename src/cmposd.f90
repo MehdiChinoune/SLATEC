@@ -5,9 +5,9 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !*--CMPOSD5
   !*** Start of declarations inserted by SPAG
   REAL fi
-  INTEGER i , ideg , Idimq , ip , ip1 , ipstor , irreg , Istag , j , jdeg , &
-    jm1 , jm2 , jm3 , jp1 , jp2 , jp3 , jsh , jsp , jst , jstsav
-  INTEGER kr , krpi , l , lr , m , Mr , n , nodd , noddpr , Nr , nun
+  INTEGER i, ideg, Idimq, ip, ip1, ipstor, irreg, Istag, j, jdeg, &
+    jm1, jm2, jm3, jp1, jp2, jp3, jsh, jsp, jst, jstsav
+  INTEGER kr, krpi, l, lr, m, Mr, n, nodd, noddpr, Nr, nun
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CMPOSD
   !***SUBSIDIARY
@@ -34,9 +34,9 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !           routine CMPMRG.  (WRB)
   !***END PROLOGUE  CMPOSD
   !
-  COMPLEX Ba , Bb , Bc , Q , B , W , D , Tcos , P , t
-  DIMENSION Q(Idimq,*) , Ba(*) , Bb(*) , Bc(*) , Tcos(*) , B(*) , D(*) , &
-    W(*) , P(*)
+  COMPLEX Ba, Bb, Bc, Q, B, W, D, Tcos, P, t
+  DIMENSION Q(Idimq,*), Ba(*), Bb(*), Bc(*), Tcos(*), B(*), D(*), &
+    W(*), P(*)
   !***FIRST EXECUTABLE STATEMENT  CMPOSD
   m = Mr
   n = Nr
@@ -56,11 +56,11 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
     IF ( n>1 ) GOTO 100
     Tcos(1) = (0.,0.)
   ENDIF
-  DO i = 1 , m
+  DO i = 1, m
     B(i) = Q(i,1)
   ENDDO
   CALL CMPTRX(1,0,m,Ba,Bb,Bc,B,Tcos,D,W)
-  DO i = 1 , m
+  DO i = 1, m
     Q(i,1) = B(i)
   ENDDO
   !
@@ -69,7 +69,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   W(1) = CMPLX(REAL(ipstor),0.)
   GOTO 99999
   100  lr = 0
-  DO i = 1 , m
+  DO i = 1, m
     P(i) = CMPLX(0.,0.)
   ENDDO
   nun = n
@@ -94,7 +94,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !
   CALL CMPCSG(jst,1,0.5,0.0,Tcos)
   IF ( l<=jsp ) THEN
-    DO j = l , jsp , l
+    DO j = l, jsp, l
       jm1 = j - jsh
       jp1 = j + jsh
       jm2 = j - jst
@@ -102,19 +102,19 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
       jm3 = jm2 - jsh
       jp3 = jp2 + jsh
       IF ( jst/=1 ) THEN
-        DO i = 1 , m
+        DO i = 1, m
           t = Q(i,j) - Q(i,jm1) - Q(i,jp1) + Q(i,jm2) + Q(i,jp2)
           B(i) = t + Q(i,j) - Q(i,jm3) - Q(i,jp3)
           Q(i,j) = t
         ENDDO
       ELSE
-        DO i = 1 , m
+        DO i = 1, m
           B(i) = 2.*Q(i,j)
           Q(i,j) = Q(i,jm2) + Q(i,jp2)
         ENDDO
       ENDIF
       CALL CMPTRX(jst,0,m,Ba,Bb,Bc,B,Tcos,D,W)
-      DO i = 1 , m
+      DO i = 1, m
         Q(i,j) = Q(i,j) + B(i)
       ENDDO
     ENDDO
@@ -144,20 +144,20 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
       kr = l
     ENDIF
     IF ( jst/=1 ) THEN
-      DO i = 1 , m
+      DO i = 1, m
         B(i) = Q(i,j) + .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3))
       ENDDO
       IF ( irreg/=2 ) THEN
-        DO i = 1 , m
+        DO i = 1, m
           Q(i,j) = Q(i,jm2) + .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
         ENDDO
         irreg = 2
       ELSEIF ( noddpr==2 ) THEN
-        DO i = 1 , m
+        DO i = 1, m
           Q(i,j) = Q(i,jm2) + Q(i,j) - Q(i,jm1)
         ENDDO
       ELSE
-        DO i = 1 , m
+        DO i = 1, m
           ip1 = ip + i
           Q(i,j) = Q(i,jm2) + P(ip1)
         ENDDO
@@ -165,13 +165,13 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
       ENDIF
     ELSE
       irreg = 2
-      DO i = 1 , m
+      DO i = 1, m
         B(i) = Q(i,j)
         Q(i,j) = Q(i,jm2)
       ENDDO
     ENDIF
     CALL CMPTRX(ideg,lr,m,Ba,Bb,Bc,B,Tcos,D,W)
-    DO i = 1 , m
+    DO i = 1, m
       Q(i,j) = Q(i,j) + B(i)
     ENDDO
   ELSE
@@ -188,7 +188,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
     jm3 = jm2 - jsh
     IF ( Istag/=1 ) THEN
       IF ( jst==1 ) THEN
-        DO i = 1 , m
+        DO i = 1, m
           B(i) = Q(i,j)
           Q(i,j) = CMPLX(0.,0.)
         ENDDO
@@ -196,23 +196,23 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
       ENDIF
     ENDIF
     IF ( noddpr==2 ) THEN
-      DO i = 1 , m
+      DO i = 1, m
         B(i) = .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3)) + Q(i,jp2) - Q(i,jp1)&
           + Q(i,j)
       ENDDO
     ELSE
-      DO i = 1 , m
+      DO i = 1, m
         ip1 = ip + i
         B(i) = .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3)) + P(ip1) + Q(i,j)
       ENDDO
     ENDIF
-    DO i = 1 , m
+    DO i = 1, m
       Q(i,j) = .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
     ENDDO
     250    CALL CMPTRX(jst,0,m,Ba,Bb,Bc,B,Tcos,D,W)
     ip = ip + m
     ipstor = MAX(ipstor,ip+m)
-    DO i = 1 , m
+    DO i = 1, m
       ip1 = ip + i
       P(ip1) = Q(i,j) + B(i)
       B(i) = Q(i,jp2) + P(ip1)
@@ -221,14 +221,14 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
       CALL CMPCSG(lr,jstsav,0.,fi,Tcos(jst+1))
       CALL C1MERG(Tcos,0,jst,jst,lr,kr)
     ELSE
-      DO i = 1 , jst
+      DO i = 1, jst
         krpi = kr + i
         Tcos(krpi) = Tcos(i)
       ENDDO
     ENDIF
     CALL CMPCSG(kr,jstsav,0.0,fi,Tcos)
     CALL CMPTRX(kr,kr,m,Ba,Bb,Bc,B,Tcos,D,W)
-    DO i = 1 , m
+    DO i = 1, m
       ip1 = ip + i
       Q(i,j) = Q(i,jm2) + B(i) + P(ip1)
     ENDDO
@@ -244,7 +244,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !     START SOLUTION.
   !
   j = jsp
-  DO i = 1 , m
+  DO i = 1, m
     B(i) = Q(i,j)
   ENDDO
   IF ( irreg==2 ) THEN
@@ -260,15 +260,15 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   jm1 = j - jsh
   jp1 = j + jsh
   IF ( irreg/=2 ) THEN
-    DO i = 1 , m
+    DO i = 1, m
       Q(i,j) = .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1)) + B(i)
     ENDDO
   ELSEIF ( noddpr==2 ) THEN
-    DO i = 1 , m
+    DO i = 1, m
       Q(i,j) = Q(i,j) - Q(i,jm1) + B(i)
     ENDDO
   ELSE
-    DO i = 1 , m
+    DO i = 1, m
       ip1 = ip + i
       Q(i,j) = P(ip1) + B(i)
     ENDDO
@@ -285,14 +285,14 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
       W(1) = CMPLX(REAL(ipstor),0.)
       EXIT
     ELSE
-      DO j = jst , n , l
+      DO j = jst, n, l
         jm1 = j - jsh
         jp1 = j + jsh
         jm2 = j - jst
         jp2 = j + jst
         IF ( j>jst ) THEN
           IF ( jp2>n ) THEN
-            DO i = 1 , m
+            DO i = 1, m
               B(i) = Q(i,j) + Q(i,jm2)
             ENDDO
             IF ( jst<jstsav ) irreg = 1
@@ -307,11 +307,11 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
               GOTO 320
             ENDIF
           ENDIF
-          DO i = 1 , m
+          DO i = 1, m
             B(i) = Q(i,j) + Q(i,jm2) + Q(i,jp2)
           ENDDO
         ELSE
-          DO i = 1 , m
+          DO i = 1, m
             B(i) = Q(i,j) + Q(i,jp2)
           ENDDO
         ENDIF
@@ -323,11 +323,11 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
           IF ( jp2>n ) THEN
             IF ( irreg/=1 ) THEN
               IF ( j+jsh>n ) THEN
-                DO i = 1 , m
+                DO i = 1, m
                   Q(i,j) = B(i) + Q(i,j) - Q(i,jm1)
                 ENDDO
               ELSE
-                DO i = 1 , m
+                DO i = 1, m
                   ip1 = ip + i
                   Q(i,j) = B(i) + P(ip1)
                 ENDDO
@@ -336,11 +336,11 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
               CYCLE
             ENDIF
           ENDIF
-          DO i = 1 , m
+          DO i = 1, m
             Q(i,j) = .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1)) + B(i)
           ENDDO
         ELSE
-          DO i = 1 , m
+          DO i = 1, m
             Q(i,j) = B(i)
           ENDDO
         ENDIF
@@ -348,4 +348,5 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
       l = l/2
     ENDIF
   ENDDO
-  99999 END SUBROUTINE CMPOSD
+  99999 CONTINUE
+  END SUBROUTINE CMPOSD

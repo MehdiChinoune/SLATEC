@@ -4,10 +4,10 @@ SUBROUTINE ORTHOG(Usol,Idmn,Zn,Zm,Pertrb)
   IMPLICIT NONE
   !*--ORTHOG5
   !*** Start of declarations inserted by SPAG
-  REAL AIT , BIT , CIT , DIT , DLX , DLX4 , DLY , DLY4 , ete , Pertrb , &
-    TDLx3 , TDLy3 , Usol , ute , Zm , Zn
-  INTEGER i , Idmn , ifnl , ii , IS , istr , j , jfnl , jj , JS , jstr , K , &
-    KSWx , KSWy , L , MIT , MS , NIT , NS
+  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, ete, Pertrb, &
+    TDLx3, TDLy3, Usol, ute, Zm, Zn
+  INTEGER i, Idmn, ifnl, ii, IS, istr, j, jfnl, jj, JS, jstr, K, &
+    KSWx, KSWy, L, MIT, MS, NIT, NS
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ORTHOG
   !***SUBSIDIARY
@@ -29,10 +29,10 @@ SUBROUTINE ORTHOG(Usol,Idmn,Zn,Zm,Pertrb)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  ORTHOG
   !
-  COMMON /SPLPCM/ KSWx , KSWy , K , L , AIT , BIT , CIT , DIT , MIT , NIT , &
-    IS , MS , JS , NS , DLX , DLY , TDLx3 , TDLy3 , DLX4 , &
+  COMMON /SPLPCM/ KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
+    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
     DLY4
-  DIMENSION Usol(Idmn,*) , Zn(*) , Zm(*)
+  DIMENSION Usol(Idmn,*), Zn(*), Zm(*)
   !***FIRST EXECUTABLE STATEMENT  ORTHOG
   istr = IS
   ifnl = MS
@@ -43,9 +43,9 @@ SUBROUTINE ORTHOG(Usol,Idmn,Zn,Zm,Pertrb)
   !
   ute = 0.0
   ete = 0.0
-  DO i = IS , MS
+  DO i = IS, MS
     ii = i - IS + 1
-    DO j = JS , NS
+    DO j = JS, NS
       jj = j - JS + 1
       ete = ete + Zm(ii)*Zn(jj)
       ute = ute + Usol(i,j)*Zm(ii)*Zn(jj)
@@ -58,8 +58,8 @@ SUBROUTINE ORTHOG(Usol,Idmn,Zn,Zm,Pertrb)
   !
   !     SUBTRACT OFF CONSTANT PERTRB
   !
-  DO i = istr , ifnl
-    DO j = jstr , jfnl
+  DO i = istr, ifnl
+    DO j = jstr, jfnl
       Usol(i,j) = Usol(i,j) - Pertrb
     ENDDO
   ENDDO

@@ -99,13 +99,13 @@ SUBROUTINE CCHDC(A,Lda,P,Work,Jpvt,Job,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CCHDC
-  INTEGER Lda , P , Jpvt(*) , Job , Info
-  COMPLEX A(Lda,*) , Work(*)
+  INTEGER Lda, P, Jpvt(*), Job, Info
+  COMPLEX A(Lda,*), Work(*)
   !
-  INTEGER pu , pl , plp1 , j , jp , jt , k , kb , km1 , kp1 , l , maxl
+  INTEGER pu, pl, plp1, j, jp, jt, k, kb, km1, kp1, l, maxl
   COMPLEX temp
   REAL maxdia
-  LOGICAL swapk , negk
+  LOGICAL swapk, negk
   !***FIRST EXECUTABLE STATEMENT  CCHDC
   pl = 1
   pu = 0
@@ -115,7 +115,7 @@ SUBROUTINE CCHDC(A,Lda,P,Work,Jpvt,Job,Info)
     !        PIVOTING HAS BEEN REQUESTED. REARRANGE THE
     !        THE ELEMENTS ACCORDING TO JPVT.
     !
-    DO k = 1 , P
+    DO k = 1, P
       swapk = Jpvt(k)>0
       negk = Jpvt(k)<0
       Jpvt(k) = k
@@ -129,7 +129,7 @@ SUBROUTINE CCHDC(A,Lda,P,Work,Jpvt,Job,Info)
           A(pl,k) = CONJG(A(pl,k))
           plp1 = pl + 1
           IF ( P>=plp1 ) THEN
-            DO j = plp1 , P
+            DO j = plp1, P
               IF ( j<k ) THEN
                 temp = CONJG(A(pl,j))
                 A(pl,j) = CONJG(A(j,k))
@@ -149,7 +149,7 @@ SUBROUTINE CCHDC(A,Lda,P,Work,Jpvt,Job,Info)
     ENDDO
     pu = P
     IF ( P>=pl ) THEN
-      DO kb = pl , P
+      DO kb = pl, P
         k = P - kb + pl
         IF ( Jpvt(k)<0 ) THEN
           Jpvt(k) = -Jpvt(k)
@@ -161,7 +161,7 @@ SUBROUTINE CCHDC(A,Lda,P,Work,Jpvt,Job,Info)
             A(k,pu) = CONJG(A(k,pu))
             kp1 = k + 1
             IF ( P>=kp1 ) THEN
-              DO j = kp1 , P
+              DO j = kp1, P
                 IF ( j<pu ) THEN
                   temp = CONJG(A(k,j))
                   A(k,j) = CONJG(A(j,pu))
@@ -182,7 +182,7 @@ SUBROUTINE CCHDC(A,Lda,P,Work,Jpvt,Job,Info)
       ENDDO
     ENDIF
   ENDIF
-  DO k = 1 , P
+  DO k = 1, P
     !
     !        REDUCTION LOOP.
     !
@@ -193,7 +193,7 @@ SUBROUTINE CCHDC(A,Lda,P,Work,Jpvt,Job,Info)
     !        DETERMINE THE PIVOT ELEMENT.
     !
     IF ( k>=pl.AND.k<pu ) THEN
-      DO l = kp1 , pu
+      DO l = kp1, pu
         IF ( REAL(A(l,l))>maxdia ) THEN
           maxdia = REAL(A(l,l))
           maxl = l
@@ -223,7 +223,7 @@ SUBROUTINE CCHDC(A,Lda,P,Work,Jpvt,Job,Info)
       Work(k) = CMPLX(SQRT(REAL(A(k,k))),0.0E0)
       A(k,k) = Work(k)
       IF ( P>=kp1 ) THEN
-        DO j = kp1 , P
+        DO j = kp1, P
           IF ( k/=maxl ) THEN
             IF ( j<maxl ) THEN
               temp = CONJG(A(k,j))

@@ -4,8 +4,8 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   IMPLICIT NONE
   !*--LA05BD5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Ia , ii , j , k , k2 , kk , kl , kll , kp , kpc , l1 , LCOl , &
-    LENl , LENu , LP , LROw , N , n1 , NCP
+  INTEGER i, Ia, ii, j, k, k2, kk, kl, kll, kp, kpc, l1, LCOl, &
+    LENl, LENu, LP, LROw, N, n1, NCP
   INTEGER nz
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  LA05BD
@@ -44,11 +44,11 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   !   900402  Added TYPE section.  (WRB)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
   !***END PROLOGUE  LA05BD
-  REAL(8) :: A(*) , B(*) , am , W(*) , G , SMAll
+  REAL(8) :: A(*), B(*), am, W(*), G, SMAll
   LOGICAL Trans
-  INTEGER Ind(Ia,2) , Iw(N,8)
+  INTEGER Ind(Ia,2), Iw(N,8)
   INTEGER Ip(N,2)
-  COMMON /LA05DD/ SMAll , LP , LENl , LENu , NCP , LROw , LCOl
+  COMMON /LA05DD/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
   !***FIRST EXECUTABLE STATEMENT  LA05BD
   IF ( G<0.D0 ) THEN
     !
@@ -60,11 +60,11 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
     IF ( Trans ) THEN
       !
       !     MULTIPLY VECTOR BY INVERSE OF TRANSPOSE OF U
-      DO i = 1 , N
+      DO i = 1, N
         W(i) = B(i)
         B(i) = 0.D0
       ENDDO
-      DO ii = 1 , N
+      DO ii = 1, N
         i = Iw(ii,4)
         am = W(i)
         IF ( am/=0.D0 ) THEN
@@ -75,7 +75,7 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
           kl = Iw(j,1) + kp - 1
           IF ( kp/=kl ) THEN
             k2 = kp + 1
-            DO k = k2 , kl
+            DO k = k2, kl
               i = Ind(k,2)
               W(i) = W(i) - am*A(k)
             ENDDO
@@ -85,7 +85,7 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
       !
       !     MULTIPLY VECTOR BY INVERSE OF TRANSPOSE OF L
       IF ( kll>Ia ) RETURN
-      DO k = kll , Ia
+      DO k = kll, Ia
         j = Ind(k,2)
         IF ( B(j)/=0.D0 ) THEN
           i = Ind(k,1)
@@ -97,7 +97,7 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
       !     MULTIPLY VECTOR BY INVERSE OF L
       IF ( LENl>0 ) THEN
         l1 = Ia + 1
-        DO kk = 1 , LENl
+        DO kk = 1, LENl
           k = l1 - kk
           i = Ind(k,1)
           IF ( B(i)/=0.D0 ) THEN
@@ -106,14 +106,14 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
           ENDIF
         ENDDO
       ENDIF
-      DO i = 1 , N
+      DO i = 1, N
         W(i) = B(i)
         B(i) = 0.D0
       ENDDO
       !
       !     MULTIPLY VECTOR BY INVERSE OF U
       n1 = N + 1
-      DO ii = 1 , N
+      DO ii = 1, N
         i = n1 - ii
         i = Iw(i,3)
         am = W(i)
@@ -124,7 +124,7 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
           nz = Iw(i,1)
           kl = kp - 1 + nz
           k2 = kp + 1
-          DO k = k2 , kl
+          DO k = k2, kl
             j = Ind(k,2)
             am = am - A(k)*B(j)
           ENDDO
@@ -136,7 +136,7 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
           kl = Iw(j,2) + kpc - 1
           IF ( kl/=kpc ) THEN
             k2 = kpc + 1
-            DO k = k2 , kl
+            DO k = k2, kl
               i = Ind(k,1)
               Ip(i,1) = -ABS(Ip(i,1))
             ENDDO

@@ -24,7 +24,7 @@ SUBROUTINE UVEC(X,Y,Yp)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Array Arguments ..
-  REAL Y(*) , Yp(*)
+  REAL Y(*), Yp(*)
   !***FIRST EXECUTABLE STATEMENT  UVEC
   STOP
 END SUBROUTINE UVEC

@@ -45,7 +45,7 @@ PROGRAM TEST49
   !   901009  Corrected GAMS classification code.  (FNF)
   !   901009  Constructed double precision version.  (FNF)
   !***END PROLOGUE  TEST49
-  INTEGER ipass , kprint , lin , lun , nfail
+  INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST49
   lun = I1MACH(2)
   lin = I1MACH(1)

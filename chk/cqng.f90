@@ -22,11 +22,11 @@ SUBROUTINE CQNG(Lun,Kprint,Ipass)
   !
   ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
   !
-  REAL a , abserr , b , R1MACH , epmach , epsabs , epsrel , exact1 , error , &
-    exact2 , F1N , F2N , result , uflow
-  INTEGER ier , ierv , ip , Ipass , Kprint , neval
+  REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, exact1, error, &
+    exact2, F1N, F2N, result, uflow
+  INTEGER ier, ierv, ip, Ipass, Kprint, neval
   DIMENSION ierv(1)
-  EXTERNAL F1N , F2N
+  EXTERNAL F1N, F2N
   DATA exact1/0.7281029132255818E+00/
   DATA exact2/0.1E+02/
   !***FIRST EXECUTABLE STATEMENT  CQNG

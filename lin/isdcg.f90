@@ -167,12 +167,12 @@ INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !           output format.  (FNF)
   !***END PROLOGUE  ISDCG
   !     .. Scalar Arguments ..
-  REAL(8) :: Ak , Bk , Bnrm , Err , Solnrm , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
+  REAL(8) :: Ak, Bk, Bnrm, Err, Solnrm, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , B(N) , Dz(N) , P(N) , R(N) , Rwork(*) , X(N) , &
+  REAL(8) :: A(Nelt), B(N), Dz(N), P(N), R(N), Rwork(*), X(N), &
     Z(N)
-  INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL MSOLVE
   !     .. Arrays in Common ..
@@ -180,8 +180,8 @@ INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DNRM2
-  EXTERNAL D1MACH , DNRM2
+  REAL(8) :: D1MACH, DNRM2
+  EXTERNAL D1MACH, DNRM2
   !     .. Common blocks ..
   COMMON /DSLBLK/ SOLn
   !***FIRST EXECUTABLE STATEMENT  ISDCG
@@ -202,7 +202,7 @@ INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
     IF ( Iter==0 ) Solnrm = DNRM2(N,SOLn,1)
-    DO i = 1 , N
+    DO i = 1, N
       Dz(i) = X(i) - SOLn(i)
     ENDDO
     Err = DNRM2(N,Dz,1)/Solnrm
@@ -215,13 +215,13 @@ INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !
   IF ( Iunit/=0 ) THEN
     IF ( Iter==0 ) THEN
-      WRITE (Iunit,99001) N , Itol
+      WRITE (Iunit,99001) N, Itol
       99001     FORMAT (' Preconditioned Conjugate Gradient for ','N, ITOL = ',I5,I5,&
         /' ITER','   Error Estimate','            Alpha',&
         '             Beta')
-      WRITE (Iunit,99002) Iter , Err
+      WRITE (Iunit,99002) Iter, Err
     ELSE
-      WRITE (Iunit,99002) Iter , Err , Ak , Bk
+      WRITE (Iunit,99002) Iter, Err, Ak, Bk
     ENDIF
   ENDIF
   IF ( Err<=Tol ) ISDCG = 1

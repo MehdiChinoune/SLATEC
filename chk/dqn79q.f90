@@ -20,18 +20,18 @@ SUBROUTINE DQN79Q(Lun,Kprint,Ipass)
   !           revised.  (WRB)
   !***END PROLOGUE  DQN79Q
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
-  INTEGER ierr , kontrl , nfct
-  REAL(8) :: a , ans , b , cor , err , req , tol
+  INTEGER ierr, kontrl, nfct
+  REAL(8) :: a, ans, b, cor, err, req, tol
   LOGICAL fatal
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DFQD1 , DFQD2
-  EXTERNAL D1MACH , DFQD1 , DFQD2
+  REAL(8) :: D1MACH, DFQD1, DFQD2
+  EXTERNAL D1MACH, DFQD1, DFQD2
   !     .. External Subroutines ..
-  EXTERNAL DQNC79 , XGETF , XSETF
+  EXTERNAL DQNC79, XGETF, XSETF
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MAX , SQRT
+  INTRINSIC ABS, MAX, SQRT
   !***FIRST EXECUTABLE STATEMENT  DQN79Q
   IF ( Kprint>=2 ) WRITE (Lun,FMT=99003)
   !
@@ -48,12 +48,12 @@ SUBROUTINE DQN79Q(Lun,Kprint,Ipass)
   CALL DQNC79(DFQD1,a,b,err,ans,ierr,nfct)
   cor = 2.0D0
   IF ( ABS(ans-cor)<=tol.AND.ierr==1 ) THEN
-    IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED' , a , b , ans , cor , err , &
-      ierr , nfct
+    IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, &
+      ierr, nfct
   ELSE
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED' , a , b , ans , cor , err , &
-      ierr , nfct
+    IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, &
+      ierr, nfct
   ENDIF
   !
   !     Second accuracy test.
@@ -64,12 +64,12 @@ SUBROUTINE DQN79Q(Lun,Kprint,Ipass)
   CALL DQNC79(DFQD2,a,b,err,ans,ierr,nfct)
   cor = (EXP(b)-1.0D0)/101.0D0
   IF ( ABS(ans-cor)<=tol.AND.ierr==1 ) THEN
-    IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED' , a , b , ans , cor , err , &
-      ierr , nfct
+    IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, &
+      ierr, nfct
   ELSE
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED' , a , b , ans , cor , err , &
-      ierr , nfct
+    IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, &
+      ierr, nfct
   ENDIF
   !
   !     Test error returns.
@@ -96,11 +96,11 @@ SUBROUTINE DQN79Q(Lun,Kprint,Ipass)
   !     See if test passed.
   !
   IF ( ierr==2 ) THEN
-    IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED' , req , ans , ierr , &
-      err , cor
+    IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, &
+      err, cor
   ELSE
-    IF ( Kprint>=2 ) WRITE (Lun,FMT=99006) 'FAILED' , req , ans , ierr , &
-      err , cor
+    IF ( Kprint>=2 ) WRITE (Lun,FMT=99006) 'FAILED', req, ans, ierr, &
+      err, cor
     Ipass = 0
     fatal = .TRUE.
   ENDIF

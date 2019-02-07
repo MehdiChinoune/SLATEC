@@ -4,8 +4,8 @@ SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   IMPLICIT NONE
   !*--POISP25
   !*** Start of declarations inserted by SPAG
-  REAL A , B , B2 , B3 , Bb , C , D , P , Q , s , t , Tcos , W , W2 , W3
-  INTEGER i , Idimq , ipstor , j , lh , M , mr , N , nr , nrm1 , nrmj , nrpj
+  REAL A, B, B2, B3, Bb, C, D, P, Q, s, t, Tcos, W, W2, W3
+  INTEGER i, Idimq, ipstor, j, lh, M, mr, N, nr, nrm1, nrmj, nrpj
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POISP2
   !***SUBSIDIARY
@@ -27,8 +27,8 @@ SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  POISP2
   !
-  DIMENSION A(*) , Bb(*) , C(*) , Q(Idimq,*) , B(*) , B2(*) , B3(*) , W(*) , &
-    W2(*) , W3(*) , D(*) , Tcos(*) , P(*)
+  DIMENSION A(*), Bb(*), C(*), Q(Idimq,*), B(*), B2(*), B3(*), W(*), &
+    W2(*), W3(*), D(*), Tcos(*), P(*)
   !***FIRST EXECUTABLE STATEMENT  POISP2
   mr = M
   nr = (N+1)/2
@@ -37,22 +37,22 @@ SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     !
     !     ODD  NUMBER OF UNKNOWNS
     !
-    DO j = 1 , nrm1
+    DO j = 1, nrm1
       nrpj = N + 1 - j
-      DO i = 1 , mr
+      DO i = 1, mr
         s = Q(i,j) - Q(i,nrpj)
         t = Q(i,j) + Q(i,nrpj)
         Q(i,j) = s
         Q(i,nrpj) = t
       ENDDO
     ENDDO
-    DO i = 1 , mr
+    DO i = 1, mr
       Q(i,nr) = 2.*Q(i,nr)
     ENDDO
     lh = nrm1/2
-    DO j = 1 , lh
+    DO j = 1, lh
       nrmj = nr - j
-      DO i = 1 , mr
+      DO i = 1, mr
         s = Q(i,j)
         Q(i,j) = Q(i,nrmj)
         Q(i,nrmj) = s
@@ -62,21 +62,21 @@ SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     ipstor = W(1)
     CALL POISN2(mr,nr,2,1,A,Bb,C,Q(1,nr),Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     ipstor = MAX(ipstor,INT(W(1)))
-    DO j = 1 , nrm1
+    DO j = 1, nrm1
       nrpj = nr + j
-      DO i = 1 , mr
+      DO i = 1, mr
         s = .5*(Q(i,nrpj)+Q(i,j))
         t = .5*(Q(i,nrpj)-Q(i,j))
         Q(i,nrpj) = t
         Q(i,j) = s
       ENDDO
     ENDDO
-    DO i = 1 , mr
+    DO i = 1, mr
       Q(i,nr) = .5*Q(i,nr)
     ENDDO
-    DO j = 1 , lh
+    DO j = 1, lh
       nrmj = nr - j
-      DO i = 1 , mr
+      DO i = 1, mr
         s = Q(i,j)
         Q(i,j) = Q(i,nrmj)
         Q(i,nrmj) = s
@@ -86,17 +86,17 @@ SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     !
     !     EVEN NUMBER OF UNKNOWNS
     !
-    DO j = 1 , nrm1
+    DO j = 1, nrm1
       nrmj = nr - j
       nrpj = nr + j
-      DO i = 1 , mr
+      DO i = 1, mr
         s = Q(i,nrmj) - Q(i,nrpj)
         t = Q(i,nrmj) + Q(i,nrpj)
         Q(i,nrmj) = s
         Q(i,nrpj) = t
       ENDDO
     ENDDO
-    DO i = 1 , mr
+    DO i = 1, mr
       Q(i,nr) = 2.*Q(i,nr)
       Q(i,N) = 2.*Q(i,N)
     ENDDO
@@ -104,17 +104,17 @@ SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     ipstor = W(1)
     CALL POISN2(mr,nr+1,1,1,A,Bb,C,Q(1,nr),Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     ipstor = MAX(ipstor,INT(W(1)))
-    DO j = 1 , nrm1
+    DO j = 1, nrm1
       nrmj = nr - j
       nrpj = nr + j
-      DO i = 1 , mr
+      DO i = 1, mr
         s = .5*(Q(i,nrpj)+Q(i,nrmj))
         t = .5*(Q(i,nrpj)-Q(i,nrmj))
         Q(i,nrmj) = s
         Q(i,nrpj) = t
       ENDDO
     ENDDO
-    DO i = 1 , mr
+    DO i = 1, mr
       Q(i,nr) = .5*Q(i,nr)
       Q(i,N) = .5*Q(i,N)
     ENDDO

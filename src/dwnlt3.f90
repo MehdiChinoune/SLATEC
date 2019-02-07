@@ -23,8 +23,8 @@ SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
   !   900604  DP version created from SP version.  (RWC)
   !***END PROLOGUE  DWNLT3
-  INTEGER I , Imax , Ipivot(*) , M , Mdw
-  REAL(8) :: H(*) , W(Mdw,*)
+  INTEGER I, Imax, Ipivot(*), M, Mdw
+  REAL(8) :: H(*), W(Mdw,*)
   !
   EXTERNAL DSWAP
   !

@@ -102,14 +102,14 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CQRDC
-  INTEGER Ldx , N , P , Job
+  INTEGER Ldx, N, P, Job
   INTEGER Jpvt(*)
-  COMPLEX X(Ldx,*) , Qraux(*) , Work(*)
+  COMPLEX X(Ldx,*), Qraux(*), Work(*)
   !
-  INTEGER j , jp , l , lp1 , lup , maxj , pl , pu
-  REAL maxnrm , SCNRM2 , tt
-  COMPLEX CDOTC , nrmxl , t
-  LOGICAL negj , swapj
+  INTEGER j, jp, l, lp1, lup, maxj, pl, pu
+  REAL maxnrm, SCNRM2, tt
+  COMPLEX CDOTC, nrmxl, t
+  LOGICAL negj, swapj
   REAL, EXTERNAL :: CABS1
   COMPLEX, EXTERNAL :: CSIGN
   !
@@ -121,7 +121,7 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
     !        PIVOTING HAS BEEN REQUESTED.  REARRANGE THE COLUMNS
     !        ACCORDING TO JPVT.
     !
-    DO j = 1 , P
+    DO j = 1, P
       swapj = Jpvt(j)>0
       negj = Jpvt(j)<0
       Jpvt(j) = j
@@ -134,7 +134,7 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
       ENDIF
     ENDDO
     pu = P
-    DO jj = 1 , P
+    DO jj = 1, P
       j = P - jj + 1
       IF ( Jpvt(j)<0 ) THEN
         Jpvt(j) = -Jpvt(j)
@@ -152,7 +152,7 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   !     COMPUTE THE NORMS OF THE FREE COLUMNS.
   !
   IF ( pu>=pl ) THEN
-    DO j = pl , pu
+    DO j = pl, pu
       Qraux(j) = CMPLX(SCNRM2(N,X(1,j),1),0.0E0)
       Work(j) = Qraux(j)
     ENDDO
@@ -161,7 +161,7 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   !     PERFORM THE HOUSEHOLDER REDUCTION OF X.
   !
   lup = MIN(N,P)
-  DO l = 1 , lup
+  DO l = 1, lup
     IF ( l>=pl.AND.l<pu ) THEN
       !
       !           LOCATE THE COLUMN OF LARGEST NORM AND BRING IT
@@ -169,7 +169,7 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
       !
       maxnrm = 0.0E0
       maxj = l
-      DO j = l , pu
+      DO j = l, pu
         IF ( REAL(Qraux(j))>maxnrm ) THEN
           maxnrm = REAL(Qraux(j))
           maxj = j
@@ -200,7 +200,7 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
         !
         lp1 = l + 1
         IF ( P>=lp1 ) THEN
-          DO j = lp1 , P
+          DO j = lp1, P
             t = -CDOTC(N-l+1,X(l,l),1,X(l,j),1)/X(l,l)
             CALL CAXPY(N-l+1,t,X(l,l),1,X(l,j),1)
             IF ( j>=pl.AND.j<=pu ) THEN

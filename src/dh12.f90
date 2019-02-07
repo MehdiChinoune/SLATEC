@@ -50,10 +50,10 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !   900328  Added TYPE section.  (WRB)
   !   900911  Added DDOT to DOUBLE PRECISION statement.  (WRB)
   !***END PROLOGUE  DH12
-  INTEGER i , i2 , i3 , i4 , Ice , Icv , incr , Iue , j , kl1 , kl2 , klp , &
-    L1 , l1m1 , Lpivot , M , mml1p2 , Mode , Ncv
-  REAL(8) :: b , C , cl , clinv , one , ul1m1 , sm , U , Up , DDOT
-  DIMENSION U(Iue,*) , C(*)
+  INTEGER i, i2, i3, i4, Ice, Icv, incr, Iue, j, kl1, kl2, klp, &
+    L1, l1m1, Lpivot, M, mml1p2, Mode, Ncv
+  REAL(8) :: b, C, cl, clinv, one, ul1m1, sm, U, Up, DDOT
+  DIMENSION U(Iue,*), C(*)
   !     BEGIN BLOCK PERMITTING ...EXITS TO 140
   !***FIRST EXECUTABLE STATEMENT  DH12
   one = 1.0D0
@@ -63,14 +63,14 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
     cl = ABS(U(1,Lpivot))
     IF ( Mode/=2 ) THEN
       !           ****** CONSTRUCT THE TRANSFORMATION. ******
-      DO j = L1 , M
+      DO j = L1, M
         cl = MAX(ABS(U(1,j)),cl)
       ENDDO
       !     .........EXIT
       IF ( cl<=0.0D0 ) GOTO 99999
       clinv = one/cl
       sm = (U(1,Lpivot)*clinv)**2
-      DO j = L1 , M
+      DO j = L1, M
         sm = sm + (U(1,j)*clinv)**2
       ENDDO
       cl = cl*SQRT(sm)
@@ -94,19 +94,19 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
         IF ( mml1p2<=20 ) THEN
           i2 = 1 - Icv + Ice*(Lpivot-1)
           incr = Ice*(L1-Lpivot)
-          DO j = 1 , Ncv
+          DO j = 1, Ncv
             i2 = i2 + Icv
             i3 = i2 + incr
             i4 = i3
             sm = C(i2)*Up
-            DO i = L1 , M
+            DO i = L1, M
               sm = sm + C(i3)*U(1,i)
               i3 = i3 + Ice
             ENDDO
             IF ( sm/=0.0D0 ) THEN
               sm = sm*b
               C(i2) = C(i2) + sm*Up
-              DO i = L1 , M
+              DO i = L1, M
                 C(i4) = C(i4) + sm*U(1,i)
                 i4 = i4 + Ice
               ENDDO
@@ -120,7 +120,7 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
           ul1m1 = U(1,l1m1)
           U(1,l1m1) = Up
           IF ( Lpivot/=l1m1 ) CALL DSWAP(Ncv,C(kl1),Icv,C(klp),Icv)
-          DO j = 1 , Ncv
+          DO j = 1, Ncv
             sm = DDOT(mml1p2,U(1,l1m1),Iue,C(kl1),Ice)
             sm = sm*b
             CALL DAXPY(mml1p2,sm,U(1,l1m1),Iue,C(kl1),Ice)
@@ -137,4 +137,5 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
       ENDIF
     ENDIF
   ENDIF
-  99999 END SUBROUTINE DH12
+  99999 CONTINUE
+  END SUBROUTINE DH12

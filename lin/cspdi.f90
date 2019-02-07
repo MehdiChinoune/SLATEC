@@ -75,15 +75,15 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CSPDI
-  INTEGER N , Job
-  COMPLEX Ap(*) , Work(*) , Det(2)
+  INTEGER N, Job
+  COMPLEX Ap(*), Work(*), Det(2)
   INTEGER Kpvt(*)
   !
-  COMPLEX ak , akkp1 , akp1 , CDOTU , d , t , temp
+  COMPLEX ak, akkp1, akp1, CDOTU, d, t, temp
   REAL ten
-  INTEGER ij , ik , ikp1 , iks , j , jb , jk , jkp1
-  INTEGER k , kk , kkp1 , km1 , ks , ksj , kskp1 , kstep
-  LOGICAL noinv , nodet
+  INTEGER ij, ik, ikp1, iks, j, jb, jk, jkp1
+  INTEGER k, kk, kkp1, km1, ks, ksj, kskp1, kstep
+  LOGICAL noinv, nodet
   REAL, EXTERNAL :: CABS1
   !
   !***FIRST EXECUTABLE STATEMENT  CSPDI
@@ -96,7 +96,7 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
     ten = 10.0E0
     t = (0.0E0,0.0E0)
     ik = 0
-    DO k = 1 , N
+    DO k = 1, N
       kk = ik + k
       d = Ap(kk)
       !
@@ -163,7 +163,7 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
         IF ( km1>=1 ) THEN
           CALL CCOPY(km1,Ap(ikp1+1),1,Work,1)
           ij = 0
-          DO j = 1 , km1
+          DO j = 1, km1
             jkp1 = ikp1 + j
             Ap(jkp1) = CDOTU(j,Ap(ij+1),1,Work,1)
             CALL CAXPY(j-1,Work(j),Ap(ij+1),1,Ap(ikp1+1),1)
@@ -173,7 +173,7 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
           Ap(kkp1) = Ap(kkp1) + CDOTU(km1,Ap(ik+1),1,Ap(ikp1+1),1)
           CALL CCOPY(km1,Ap(ik+1),1,Work,1)
           ij = 0
-          DO j = 1 , km1
+          DO j = 1, km1
             jk = ik + j
             Ap(jk) = CDOTU(j,Ap(ij+1),1,Work,1)
             CALL CAXPY(j-1,Work(j),Ap(ij+1),1,Ap(ik+1),1)
@@ -190,7 +190,7 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
         IF ( km1>=1 ) THEN
           CALL CCOPY(km1,Ap(ik+1),1,Work,1)
           ij = 0
-          DO j = 1 , km1
+          DO j = 1, km1
             jk = ik + j
             Ap(jk) = CDOTU(j,Ap(ij+1),1,Work,1)
             CALL CAXPY(j-1,Work(j),Ap(ij+1),1,Ap(ik+1),1)
@@ -208,7 +208,7 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
         iks = (ks*(ks-1))/2
         CALL CSWAP(ks,Ap(iks+1),1,Ap(ik+1),1)
         ksj = ik + ks
-        DO jb = ks , k
+        DO jb = ks, k
           j = k + ks - jb
           jk = ik + j
           temp = Ap(jk)

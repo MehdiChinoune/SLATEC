@@ -4,7 +4,7 @@ SUBROUTINE XPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
   !*--XPMUP5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Ierror , Ipqa , iprod , j , k , l , mu , Mu1 , Mu2 , n
+  INTEGER i, Ierror, Ipqa, iprod, j, k, l, mu, Mu1, Mu2, n
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XPMUP
   !***SUBSIDIARY
@@ -28,8 +28,8 @@ SUBROUTINE XPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  XPMUP
-  REAL dmu , nu , Nu1 , Nu2 , Pqa , prod
-  DIMENSION Pqa(*) , Ipqa(*)
+  REAL dmu, nu, Nu1, Nu2, Pqa, prod
+  DIMENSION Pqa(*), Ipqa(*)
   !***FIRST EXECUTABLE STATEMENT  XPMUP
   Ierror = 0
   nu = Nu1
@@ -56,13 +56,13 @@ SUBROUTINE XPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   iprod = 0
   k = 2*mu
   IF ( k/=0 ) THEN
-    DO l = 1 , k
+    DO l = 1, k
       prod = prod*(dmu-nu-l)
       CALL XADJ(prod,iprod,Ierror)
     ENDDO
     IF ( Ierror/=0 ) RETURN
   ENDIF
-  DO i = j , n
+  DO i = j, n
     IF ( mu/=0 ) THEN
       Pqa(i) = Pqa(i)*prod*(-1)**mu
       Ipqa(i) = Ipqa(i) + iprod

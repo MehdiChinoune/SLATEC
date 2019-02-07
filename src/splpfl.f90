@@ -5,7 +5,7 @@ SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
   IMPLICIT NONE
   !*--SPLPFL6
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Ienter , Ileave , j , Mrelas , n20005 , n20036 , Nvars
+  INTEGER i, Ienter, Ileave, j, Mrelas, n20005, n20036, Nvars
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPLPFL
   !***SUBSIDIARY
@@ -35,10 +35,10 @@ SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  SPLPFL
-  INTEGER Ibasis(*) , Ind(*) , Ibb(*)
-  REAL Csc(*) , Ww(*) , Bl(*) , Bu(*) , Erp(*) , Rprim(*) , Primal(*) , &
-    bound , Dirnrm , ratio , Rprnrm , Theta , zero
-  LOGICAL Finite , Zerolv
+  INTEGER Ibasis(*), Ind(*), Ibb(*)
+  REAL Csc(*), Ww(*), Bl(*), Bu(*), Erp(*), Rprim(*), Primal(*), &
+    bound, Dirnrm, ratio, Rprnrm, Theta, zero
+  LOGICAL Finite, Zerolv
   !***FIRST EXECUTABLE STATEMENT  SPLPFL
   zero = 0.E0
   !

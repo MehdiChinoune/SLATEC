@@ -34,28 +34,28 @@ SUBROUTINE SGEQC(Lun,Kprint,Nerr)
   !   920601  Code reworked and TYPE section added.  (RWC, WRB)
   !***END PROLOGUE  SGEQC
   !     .. Scalar Arguments ..
-  INTEGER Kprint , Lun , Nerr
+  INTEGER Kprint, Lun, Nerr
   !     .. Local Scalars ..
-  REAL errcmp , errmax
-  INTEGER i , ind , itask , j , kprog , lda , n
+  REAL errcmp, errmax
+  INTEGER i, ind, itask, j, kprog, lda, n
   !     .. Local Arrays ..
-  REAL a(5,4) , atemp(5,4) , b(4) , btemp(4) , bxex(4) , work(20)
+  REAL a(5,4), atemp(5,4), b(4), btemp(4), bxex(4), work(20)
   INTEGER iwork(4)
   CHARACTER list(2)*4
   !     .. External Functions ..
   REAL R1MACH
   EXTERNAL R1MACH
   !     .. External Subroutines ..
-  EXTERNAL SGEFS , SGEIR
+  EXTERNAL SGEFS, SGEIR
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MAX
+  INTRINSIC ABS, MAX
   !     .. Data statements ..
-  DATA a/5.0E0 , 1.0E0 , 0.3E0 , 2.1E0 , 0.0E0 , -1.0E0 , -0.5E0 , 1.0E0 , &
-    1.0E0 , 0.0E0 , 4.5E0 , -1.0E0 , -1.7E0 , 2.0E0 , 0.0E0 , 0.5E0 , &
-    2.0E0 , 0.6E0 , 1.3E0 , 0.0E0/
-  DATA b/0.0E0 , 3.5E0 , 3.6E0 , 2.4E0/
-  DATA bxex/0.10E+01 , 0.10E+01 , -0.10E+01 , 0.10E+01/
-  DATA list/'GEFS' , 'GEIR'/
+  DATA a/5.0E0, 1.0E0, 0.3E0, 2.1E0, 0.0E0, -1.0E0, -0.5E0, 1.0E0, &
+    1.0E0, 0.0E0, 4.5E0, -1.0E0, -1.7E0, 2.0E0, 0.0E0, 0.5E0, &
+    2.0E0, 0.6E0, 1.3E0, 0.0E0/
+  DATA b/0.0E0, 3.5E0, 3.6E0, 2.4E0/
+  DATA bxex/0.10E+01, 0.10E+01, -0.10E+01, 0.10E+01/
+  DATA list/'GEFS', 'GEIR'/
   !***FIRST EXECUTABLE STATEMENT  SGEQC
   n = 4
   lda = 5
@@ -65,16 +65,16 @@ SUBROUTINE SGEQC(Lun,Kprint,Nerr)
   !
   99001 FORMAT (//,2X,'SGEFS and SGEIR Quick Check'/)
   !
-  DO kprog = 1 , 2
+  DO kprog = 1, 2
     !
     !     First test case - normal
     !
     itask = 1
-    DO i = 1 , n
+    DO i = 1, n
       btemp(i) = b(i)
     ENDDO
-    DO j = 1 , n
-      DO i = 1 , n
+    DO j = 1, n
+      DO i = 1, n
         atemp(i,j) = a(i,j)
       ENDDO
     ENDDO
@@ -84,7 +84,7 @@ SUBROUTINE SGEQC(Lun,Kprint,Nerr)
       CALL SGEIR(atemp,lda,n,btemp,itask,ind,work,iwork)
     ENDIF
     IF ( ind<0 ) THEN
-      IF ( Kprint>=2 ) WRITE (Lun,FMT=99004) list(kprog) , ind
+      IF ( Kprint>=2 ) WRITE (Lun,FMT=99004) list(kprog), ind
       Nerr = Nerr + 1
     ENDIF
     !
@@ -92,28 +92,28 @@ SUBROUTINE SGEQC(Lun,Kprint,Nerr)
     !
     errmax = 0.0E0
     !
-    DO i = 1 , n
+    DO i = 1, n
       errmax = MAX(errmax,ABS(btemp(i)-bxex(i)))
     ENDDO
     IF ( errcmp>errmax ) THEN
       IF ( Kprint>=3 ) WRITE (Lun,FMT=99004) list(kprog)
     ELSE
-      IF ( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog) , errmax
+      IF ( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog), errmax
       Nerr = Nerr + 1
     ENDIF
     !
     !       Second test case - singular matrix
     !
     itask = 1
-    DO i = 1 , n
+    DO i = 1, n
       btemp(i) = b(i)
     ENDDO
-    DO j = 1 , n
-      DO i = 1 , n
+    DO j = 1, n
+      DO i = 1, n
         atemp(i,j) = a(i,j)
       ENDDO
     ENDDO
-    DO j = 1 , n
+    DO j = 1, n
       atemp(1,j) = 0.0E0
     ENDDO
     IF ( kprog==1 ) THEN
@@ -124,7 +124,7 @@ SUBROUTINE SGEQC(Lun,Kprint,Nerr)
     IF ( ind==-4 ) THEN
       IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
     ELSE
-      IF ( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog) , ind
+      IF ( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
       Nerr = Nerr + 1
     ENDIF
     !

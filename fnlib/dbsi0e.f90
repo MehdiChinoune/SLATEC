@@ -5,7 +5,7 @@ REAL(8) FUNCTION DBSI0E(X)
   !*--DBSI0E5
   !*** Start of declarations inserted by SPAG
   REAL eta
-  INTEGER INITDS , ntai0 , ntai02 , nti0
+  INTEGER INITDS, ntai0, ntai02, nti0
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBSI0E
   !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
@@ -50,10 +50,10 @@ REAL(8) FUNCTION DBSI0E(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DBSI0E
-  REAL(8) :: X , bi0cs(18) , ai0cs(46) , ai02cs(69) , xsml , y , &
-    D1MACH , DCSEVL
+  REAL(8) :: X, bi0cs(18), ai0cs(46), ai02cs(69), xsml, y, &
+    D1MACH, DCSEVL
   LOGICAL first
-  SAVE bi0cs , ai0cs , ai02cs , nti0 , ntai0 , ntai02 , xsml , first
+  SAVE bi0cs, ai0cs, ai02cs, nti0, ntai0, ntai02, xsml, first
   DATA bi0cs(1)/ - .7660547252839144951081894976243285D-1/
   DATA bi0cs(2)/ + .1927337953993808269952408750881196D+1/
   DATA bi0cs(3)/ + .2282644586920301338937029292330415D+0/
@@ -212,4 +212,5 @@ REAL(8) FUNCTION DBSI0E(X)
   IF ( y>xsml ) DBSI0E = EXP(-y)*(2.75D0+DCSEVL(y*y/4.5D0-1.D0,bi0cs,nti0))
   RETURN
   !
-  99999 END FUNCTION DBSI0E
+  99999 CONTINUE
+  END FUNCTION DBSI0E

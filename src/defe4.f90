@@ -4,10 +4,10 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
   IMPLICIT NONE
   !*--DEFE45
   !*** Start of declarations inserted by SPAG
-  REAL ai , AIT , bi , BIT , ci , CIT , DIT , DLX , DLX4 , DLY , DLY4 , &
-    Grhs , TDLx3 , TDLy3 , tx , ty , Usol , uxxx , uxxxx , uyyy
-  REAL uyyyy , xi
-  INTEGER i , Idmn , IS , j , JS , K , KSWx , KSWy , L , MIT , MS , NIT , NS
+  REAL ai, AIT, bi, BIT, ci, CIT, DIT, DLX, DLX4, DLY, DLY4, &
+    Grhs, TDLx3, TDLy3, tx, ty, Usol, uxxx, uxxxx, uyyy
+  REAL uyyyy, xi
+  INTEGER i, Idmn, IS, j, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DEFE4
   !***SUBSIDIARY
@@ -42,16 +42,16 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  DEFE4
   !
-  COMMON /SPL4  / KSWx , KSWy , K , L , AIT , BIT , CIT , DIT , MIT , NIT , &
-    IS , MS , JS , NS , DLX , DLY , TDLx3 , TDLy3 , DLX4 , &
+  COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
+    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
     DLY4
-  DIMENSION Grhs(Idmn,*) , Usol(Idmn,*)
+  DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
   EXTERNAL COFX
   !***FIRST EXECUTABLE STATEMENT  DEFE4
-  DO i = IS , MS
+  DO i = IS, MS
     xi = AIT + (i-1)*DLX
     CALL COFX(xi,ai,bi,ci)
-    DO j = JS , NS
+    DO j = JS, NS
       !
       !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT (XI,YJ)
       !
@@ -71,8 +71,8 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
   !
   !     RESET THE RIGHT HAND SIDE IN USOL
   !
-  DO i = IS , MS
-    DO j = JS , NS
+  DO i = IS, MS
+    DO j = JS, NS
       Usol(i,j) = Grhs(i,j)
     ENDDO
   ENDDO

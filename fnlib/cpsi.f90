@@ -4,8 +4,8 @@ COMPLEX FUNCTION CPSI(Zin)
   IMPLICIT NONE
   !*--CPSI5
   !*** Start of declarations inserted by SPAG
-  REAL bern , bound , cabsz , dxrel , pi , R1MACH , rbig , rmin , x , y
-  INTEGER i , n , ndx , nterm
+  REAL bern, bound, cabsz, dxrel, pi, R1MACH, rbig, rmin, x, y
+  INTEGER i, n, ndx, nterm
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CPSI
   !***PURPOSE  Compute the Psi (or Digamma) function.
@@ -29,11 +29,11 @@ COMPLEX FUNCTION CPSI(Zin)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  CPSI
-  COMPLEX Zin , z , z2inv , corr , CCOT
+  COMPLEX Zin, z, z2inv, corr, CCOT
   DIMENSION bern(13)
   LOGICAL first
   EXTERNAL CCOT
-  SAVE bern , pi , nterm , bound , dxrel , rmin , rbig , first
+  SAVE bern, pi, nterm, bound, dxrel, rmin, rbig, first
   DATA bern(1)/.83333333333333333E-1/
   DATA bern(2)/ - .83333333333333333E-2/
   DATA bern(3)/.39682539682539683E-2/
@@ -86,7 +86,7 @@ COMPLEX FUNCTION CPSI(Zin)
         ENDIF
         !
         n = SQRT(bound**2-y**2) - x + 1.0
-        DO i = 1 , n
+        DO i = 1, n
           corr = corr - 1.0/z
           z = z + 1.0
         ENDDO
@@ -108,7 +108,7 @@ COMPLEX FUNCTION CPSI(Zin)
     !
     CPSI = (0.0,0.0)
     z2inv = 1.0/z**2
-    DO i = 1 , nterm
+    DO i = 1, nterm
       ndx = nterm + 1 - i
       CPSI = bern(ndx) + z2inv*CPSI
     ENDDO

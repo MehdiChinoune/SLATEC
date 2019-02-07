@@ -4,7 +4,7 @@ SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   IMPLICIT NONE
   !*--PINITM5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , iopt , Ipagef , Ix , Lmx , lp4 , M , N , n20008 , n20012 , &
+  INTEGER i, iopt, Ipagef, Ix, Lmx, lp4, M, N, n20008, n20012, &
     nerr
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PINITM
@@ -51,10 +51,10 @@ SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   !***END PROLOGUE  PINITM
-  REAL Sx(Lmx) , zero , one
+  REAL Sx(Lmx), zero, one
   DIMENSION Ix(*)
-  SAVE zero , one
-  DATA zero , one/0.E0 , 1.E0/
+  SAVE zero, one
+  DATA zero, one/0.E0, 1.E0/
   !***FIRST EXECUTABLE STATEMENT  PINITM
   iopt = 1
   !

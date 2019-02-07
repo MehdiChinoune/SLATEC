@@ -4,7 +4,7 @@ SUBROUTINE XERMAX(Max)
   IMPLICIT NONE
   !*--XERMAX5
   !*** Start of declarations inserted by SPAG
-  INTEGER J4SAVE , junk , Max
+  INTEGER J4SAVE, junk, Max
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XERMAX
   !***PURPOSE  Set maximum number of times any error message is to be

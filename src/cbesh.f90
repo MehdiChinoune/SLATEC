@@ -155,12 +155,12 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   !***END PROLOGUE  CBESH
   !
-  COMPLEX Cy , Z , zn , zt , csgn
-  REAL aa , alim , aln , arg , az , cpn , dig , elim , fmm , fn , Fnu , &
-    fnul , hpi , rhpi , rl , r1m5 , sgn , spn , tol , ufl , xn , xx , &
-    yn , yy , R1MACH , bb , ascle , rtol , atol
-  INTEGER i , Ierr , inu , inuh , ir , k , Kode , k1 , k2 , M , mm , mr , &
-    N , nn , nuf , nw , Nz , I1MACH
+  COMPLEX Cy, Z, zn, zt, csgn
+  REAL aa, alim, aln, arg, az, cpn, dig, elim, fmm, fn, Fnu, &
+    fnul, hpi, rhpi, rl, r1m5, sgn, spn, tol, ufl, xn, xx, &
+    yn, yy, R1MACH, bb, ascle, rtol, atol
+  INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, M, mm, mr, &
+    N, nn, nuf, nw, Nz, I1MACH
   DIMENSION Cy(N)
   !
   DATA hpi/1.57079632679489662E0/
@@ -297,7 +297,7 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
     zt = CMPLX(0.0E0,-fmm)
     rtol = 1.0E0/tol
     ascle = ufl*rtol
-    DO i = 1 , nn
+    DO i = 1, nn
       !       CY(I) = CY(I)*ZN
       !       ZN = ZN*ZT
       zn = Cy(i)
@@ -317,7 +317,8 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   100  Ierr = 2
   Nz = 0
   RETURN
-  200  IF ( nw==(-1) ) GOTO 100
+  200 CONTINUE
+  IF ( nw==(-1) ) GOTO 100
   Nz = 0
   Ierr = 5
   RETURN

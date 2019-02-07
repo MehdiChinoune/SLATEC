@@ -131,13 +131,13 @@ SUBROUTINE SCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SCHDD
-  INTEGER Ldr , P , Ldz , Nz , Info
-  REAL R(Ldr,*) , X(*) , Z(Ldz,*) , Y(*) , S(*)
-  REAL Rho(*) , C(*)
+  INTEGER Ldr, P, Ldz, Nz, Info
+  REAL R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
+  REAL Rho(*), C(*)
   !
-  INTEGER i , ii , j
-  REAL a , alpha , azeta , norm , SNRM2
-  REAL SDOT , t , zeta , b , xx
+  INTEGER i, ii, j
+  REAL a, alpha, azeta, norm, SNRM2
+  REAL SDOT, t, zeta, b, xx
   !
   !     SOLVE THE SYSTEM TRANS(R)*A = X, PLACING THE RESULT
   !     IN THE ARRAY S.
@@ -146,7 +146,7 @@ SUBROUTINE SCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   Info = 0
   S(1) = X(1)/R(1,1)
   IF ( P>=2 ) THEN
-    DO j = 2 , P
+    DO j = 2, P
       S(j) = X(j) - SDOT(j-1,R(1,j),1,S,1)
       S(j) = S(j)/R(j,j)
     ENDDO
@@ -157,7 +157,7 @@ SUBROUTINE SCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
     !
     !        DETERMINE THE TRANSFORMATIONS.
     !
-    DO ii = 1 , P
+    DO ii = 1, P
       i = P - ii + 1
       scale = alpha + ABS(S(i))
       a = alpha/scale
@@ -170,9 +170,9 @@ SUBROUTINE SCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
     !
     !        APPLY THE TRANSFORMATIONS TO R.
     !
-    DO j = 1 , P
+    DO j = 1, P
       xx = 0.0E0
-      DO ii = 1 , j
+      DO ii = 1, j
         i = j - ii + 1
         t = C(i)*xx + S(i)*R(i,j)
         R(i,j) = C(i)*R(i,j) - S(i)*xx
@@ -183,9 +183,9 @@ SUBROUTINE SCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
     !        IF REQUIRED, DOWNDATE Z AND RHO.
     !
     IF ( Nz>=1 ) THEN
-      DO j = 1 , Nz
+      DO j = 1, Nz
         zeta = Y(j)
-        DO i = 1 , P
+        DO i = 1, P
           Z(i,j) = (Z(i,j)-S(i)*zeta)/C(i)
           zeta = C(i)*zeta - S(i)*Z(i,j)
         ENDDO

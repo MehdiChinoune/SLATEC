@@ -4,8 +4,8 @@ SUBROUTINE INXCB(I,Ir,Idx,Idp)
   IMPLICIT NONE
   !*--INXCB5
   !*** Start of declarations inserted by SPAG
-  REAL CNV , EPS
-  INTEGER I , id , Idp , Idx , IK , ipl , Ir , izh , K , NCMplx , NM , NPP
+  REAL CNV, EPS
+  INTEGER I, id, Idp, Idx, IK, ipl, Ir, izh, K, NCMplx, NM, NPP
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  INXCB
   !***SUBSIDIARY
@@ -22,7 +22,7 @@ SUBROUTINE INXCB(I,Ir,Idx,Idp)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  INXCB
   !
-  COMMON /CCBLK / NPP , K , EPS , CNV , NM , NCMplx , IK
+  COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  INXCB
   Idp = 0
   IF ( Ir<0 ) GOTO 99999
@@ -44,4 +44,5 @@ SUBROUTINE INXCB(I,Ir,Idx,Idp)
   ENDIF
   Idp = 0
   RETURN
-  99999 END SUBROUTINE INXCB
+  99999 CONTINUE
+  END SUBROUTINE INXCB

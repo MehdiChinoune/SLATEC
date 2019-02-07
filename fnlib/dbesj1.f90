@@ -4,7 +4,7 @@ REAL(8) FUNCTION DBESJ1(X)
   IMPLICIT NONE
   !*--DBESJ15
   !*** Start of declarations inserted by SPAG
-  INTEGER INITDS , ntj1
+  INTEGER INITDS, ntj1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBESJ1
   !***PURPOSE  Compute the Bessel function of the first kind of order one.
@@ -36,10 +36,10 @@ REAL(8) FUNCTION DBESJ1(X)
   !   910401  Corrected error in code which caused values to have the
   !           wrong sign for arguments less than 4.0.  (WRB)
   !***END PROLOGUE  DBESJ1
-  REAL(8) :: X , bj1cs(19) , ampl , theta , xsml , xmin , y , D1MACH , &
+  REAL(8) :: X, bj1cs(19), ampl, theta, xsml, xmin, y, D1MACH, &
     DCSEVL
   LOGICAL first
-  SAVE bj1cs , ntj1 , xsml , xmin , first
+  SAVE bj1cs, ntj1, xsml, xmin, first
   DATA bj1cs(1)/ - .117261415133327865606240574524003D+0/
   DATA bj1cs(2)/ - .253615218307906395623030884554698D+0/
   DATA bj1cs(3)/ + .501270809844695685053656363203743D-1/
@@ -85,4 +85,5 @@ REAL(8) FUNCTION DBESJ1(X)
   IF ( y>xsml ) DBESJ1 = X*(.25D0+DCSEVL(.125D0*y*y-1.D0,bj1cs,ntj1))
   RETURN
   !
-  99999 END FUNCTION DBESJ1
+  99999 CONTINUE
+  END FUNCTION DBESJ1

@@ -5,7 +5,7 @@ SUBROUTINE DSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   IMPLICIT NONE
   !*--DSDOMN6
   !*** Start of declarations inserted by SPAG
-  REAL DSDI , DSMV
+  REAL DSDI, DSMV
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSDOMN
   !***PURPOSE  Diagonally Scaled Orthomin Sparse Iterative Ax=b Solver.
@@ -209,20 +209,20 @@ SUBROUTINE DSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  DSDOMN
   !     .. Parameters ..
-  INTEGER LOCRB , LOCIB
+  INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  REAL(8) :: Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
-    Nelt , Nsave
+  REAL(8) :: Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
+    Nelt, Nsave
   !     .. Array Arguments ..
-  REAL(8) :: A(N) , B(N) , Rwork(Lenw) , X(N)
-  INTEGER Ia(Nelt) , Iwork(Leniw) , Ja(Nelt)
+  REAL(8) :: A(N), B(N), Rwork(Lenw), X(N)
+  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locap , loccsa , locdin , locdz , locema , lociw , locp , locr , &
-    locw , locz
+  INTEGER locap, loccsa, locdin, locdz, locema, lociw, locp, locr, &
+    locw, locz
   !     .. External Subroutines ..
-  EXTERNAL DCHKW , DOMN , DS2Y , DSDI , DSDS , DSMV
+  EXTERNAL DCHKW, DOMN, DS2Y, DSDI, DSDS, DSMV
   !***FIRST EXECUTABLE STATEMENT  DSDOMN
   !
   Ierr = 0

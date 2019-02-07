@@ -26,14 +26,14 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CUNI1
-  COMPLEX cfn , cone , crsc , cscl , csr , css , cwrk , czero , c1 , c2 , &
-    phi , rz , sum , s1 , s2 , Y , Z , zeta1 , zeta2 , cy
-  REAL Alim , aphi , ascle , bry , c2i , c2m , c2r , Elim , fn , Fnu , &
-    Fnul , rs1 , Tol , yy , R1MACH
-  INTEGER i , iflag , init , k , Kode , m , N , nd , Nlast , nn , nuf , nw , &
+  COMPLEX cfn, cone, crsc, cscl, csr, css, cwrk, czero, c1, c2, &
+    phi, rz, sum, s1, s2, Y, Z, zeta1, zeta2, cy
+  REAL Alim, aphi, ascle, bry, c2i, c2m, c2r, Elim, fn, Fnu, &
+    Fnul, rs1, Tol, yy, R1MACH
+  INTEGER i, iflag, init, k, Kode, m, N, nd, Nlast, nn, nuf, nw, &
     Nz
-  DIMENSION bry(3) , Y(N) , cwrk(16) , css(3) , csr(3) , cy(2)
-  DATA czero , cone/(0.0E0,0.0E0) , (1.0E0,0.0E0)/
+  DIMENSION bry(3), Y(N), cwrk(16), css(3), csr(3), cy(2)
+  DATA czero, cone/(0.0E0,0.0E0), (1.0E0,0.0E0)/
   !***FIRST EXECUTABLE STATEMENT  CUNI1
   Nz = 0
   nd = N
@@ -68,13 +68,13 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   IF ( ABS(rs1)>Elim ) THEN
     IF ( rs1>0.0E0 ) GOTO 400
     Nz = N
-    DO i = 1 , N
+    DO i = 1, N
       Y(i) = czero
     ENDDO
     GOTO 99999
   ENDIF
   100  nn = MIN(2,nd)
-  DO i = 1 , nn
+  DO i = 1, nn
     fn = Fnu + (nd-i)
     init = 0
     CALL CUNIK(Z,fn,1,0,Tol,init,phi,zeta1,zeta2,sum,cwrk)
@@ -130,7 +130,7 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     ascle = bry(iflag)
     k = nd - 2
     fn = k
-    DO i = 3 , nd
+    DO i = 3, nd
       c2 = s2
       s2 = s1 + CMPLX(Fnu+fn,0.0E0)*rz*s2
       s1 = c2
@@ -160,22 +160,24 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   !     SET UNDERFLOW AND UPDATE PARAMETERS
   !-----------------------------------------------------------------------
-  300  IF ( rs1<=0.0E0 ) THEN
-  Y(nd) = czero
-  Nz = Nz + 1
-  nd = nd - 1
-  IF ( nd==0 ) GOTO 200
-  CALL CUOIK(Z,Fnu,Kode,1,nd,Y,nuf,Tol,Elim,Alim)
-  IF ( nuf>=0 ) THEN
-    nd = nd - nuf
-    Nz = Nz + nuf
+  300 CONTINUE
+  IF ( rs1<=0.0E0 ) THEN
+    Y(nd) = czero
+    Nz = Nz + 1
+    nd = nd - 1
     IF ( nd==0 ) GOTO 200
-    fn = Fnu + (nd-1)
-    IF ( fn>=Fnul ) GOTO 100
-    Nlast = nd
-    RETURN
+    CALL CUOIK(Z,Fnu,Kode,1,nd,Y,nuf,Tol,Elim,Alim)
+    IF ( nuf>=0 ) THEN
+      nd = nd - nuf
+      Nz = Nz + nuf
+      IF ( nd==0 ) GOTO 200
+      fn = Fnu + (nd-1)
+      IF ( fn>=Fnul ) GOTO 100
+      Nlast = nd
+      RETURN
+    ENDIF
   ENDIF
-ENDIF
-400  Nz = -1
-RETURN
-99999 END SUBROUTINE CUNI1
+  400  Nz = -1
+  RETURN
+  99999 CONTINUE
+  END SUBROUTINE CUNI1

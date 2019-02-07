@@ -69,15 +69,15 @@ SUBROUTINE ORTRAN(Nm,N,Low,Igh,A,Ort,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  ORTRAN
   !
-  INTEGER i , j , N , kl , mm , mp , Nm , Igh , Low , mp1
-  REAL A(Nm,*) , Ort(*) , Z(Nm,*)
+  INTEGER i, j, N, kl, mm, mp, Nm, Igh, Low, mp1
+  REAL A(Nm,*), Ort(*), Z(Nm,*)
   REAL g
   !
   !     .......... INITIALIZE Z TO IDENTITY MATRIX ..........
   !***FIRST EXECUTABLE STATEMENT  ORTRAN
-  DO i = 1 , N
+  DO i = 1, N
     !
-    DO j = 1 , N
+    DO j = 1, N
       Z(i,j) = 0.0E0
     ENDDO
     !
@@ -87,26 +87,26 @@ SUBROUTINE ORTRAN(Nm,N,Low,Igh,A,Ort,Z)
   kl = Igh - Low - 1
   IF ( kl>=1 ) THEN
     !     .......... FOR MP=IGH-1 STEP -1 UNTIL LOW+1 DO -- ..........
-    DO mm = 1 , kl
+    DO mm = 1, kl
       mp = Igh - mm
       IF ( A(mp,mp-1)/=0.0E0 ) THEN
         mp1 = mp + 1
         !
-        DO i = mp1 , Igh
+        DO i = mp1, Igh
           Ort(i) = A(i,mp-1)
         ENDDO
         !
-        DO j = mp , Igh
+        DO j = mp, Igh
           g = 0.0E0
           !
-          DO i = mp , Igh
+          DO i = mp, Igh
             g = g + Ort(i)*Z(i,j)
           ENDDO
           !     .......... DIVISOR BELOW IS NEGATIVE OF H FORMED IN ORTHES.
           !                DOUBLE DIVISION AVOIDS POSSIBLE UNDERFLOW ..........
           g = (g/Ort(mp))/A(mp,mp-1)
           !
-          DO i = mp , Igh
+          DO i = mp, Igh
             Z(i,j) = Z(i,j) + g*Ort(i)
           ENDDO
           !

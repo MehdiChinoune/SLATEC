@@ -74,18 +74,18 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  QZHES
   !
-  INTEGER i , j , k , l , N , lb , l1 , Nm , nk1 , nm1 , nm2
-  REAL A(Nm,*) , B(Nm,*) , Z(Nm,*)
-  REAL r , s , t , u1 , u2 , v1 , v2 , rho
+  INTEGER i, j, k, l, N, lb, l1, Nm, nk1, nm1, nm2
+  REAL A(Nm,*), B(Nm,*), Z(Nm,*)
+  REAL r, s, t, u1, u2, v1, v2, rho
   LOGICAL Matz
   !
   !     .......... INITIALIZE Z ..........
   !***FIRST EXECUTABLE STATEMENT  QZHES
   IF ( Matz ) THEN
     !
-    DO i = 1 , N
+    DO i = 1, N
       !
-      DO j = 1 , N
+      DO j = 1, N
         Z(i,j) = 0.0E0
       ENDDO
       !
@@ -96,11 +96,11 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
   IF ( N>1 ) THEN
     nm1 = N - 1
     !
-    DO l = 1 , nm1
+    DO l = 1, nm1
       l1 = l + 1
       s = 0.0E0
       !
-      DO i = l1 , N
+      DO i = l1, N
         s = s + ABS(B(i,l))
       ENDDO
       !
@@ -108,7 +108,7 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
         s = s + ABS(B(l,l))
         r = 0.0E0
         !
-        DO i = l , N
+        DO i = l, N
           B(i,l) = B(i,l)/s
           r = r + B(i,l)**2
         ENDDO
@@ -117,31 +117,31 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
         B(l,l) = B(l,l) + r
         rho = r*B(l,l)
         !
-        DO j = l1 , N
+        DO j = l1, N
           t = 0.0E0
           !
-          DO i = l , N
+          DO i = l, N
             t = t + B(i,l)*B(i,j)
           ENDDO
           !
           t = -t/rho
           !
-          DO i = l , N
+          DO i = l, N
             B(i,j) = B(i,j) + t*B(i,l)
           ENDDO
           !
         ENDDO
         !
-        DO j = 1 , N
+        DO j = 1, N
           t = 0.0E0
           !
-          DO i = l , N
+          DO i = l, N
             t = t + B(i,l)*A(i,j)
           ENDDO
           !
           t = -t/rho
           !
-          DO i = l , N
+          DO i = l, N
             A(i,j) = A(i,j) + t*B(i,l)
           ENDDO
           !
@@ -149,7 +149,7 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
         !
         B(l,l) = -s*r
         !
-        DO i = l1 , N
+        DO i = l1, N
           B(i,l) = 0.0E0
         ENDDO
       ENDIF
@@ -160,10 +160,10 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
     IF ( N/=2 ) THEN
       nm2 = N - 2
       !
-      DO k = 1 , nm2
+      DO k = 1, nm2
         nk1 = nm1 - k
         !     .......... FOR L=N-1 STEP -1 UNTIL K+1 DO -- ..........
-        DO lb = 1 , nk1
+        DO lb = 1, nk1
           l = N - lb
           l1 = l + 1
           !     .......... ZERO A(L+1,K) ..........
@@ -176,7 +176,7 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
             v2 = -u2/r
             u2 = v2/v1
             !
-            DO j = k , N
+            DO j = k, N
               t = A(l,j) + u2*A(l1,j)
               A(l,j) = A(l,j) + t*v1
               A(l1,j) = A(l1,j) + t*v2
@@ -184,7 +184,7 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
             !
             A(l1,k) = 0.0E0
             !
-            DO j = l , N
+            DO j = l, N
               t = B(l,j) + u2*B(l1,j)
               B(l,j) = B(l,j) + t*v1
               B(l1,j) = B(l1,j) + t*v2
@@ -199,7 +199,7 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
               v2 = -u2/r
               u2 = v2/v1
               !
-              DO i = 1 , l1
+              DO i = 1, l1
                 t = B(i,l1) + u2*B(i,l)
                 B(i,l1) = B(i,l1) + t*v1
                 B(i,l) = B(i,l) + t*v2
@@ -207,7 +207,7 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
               !
               B(l1,l) = 0.0E0
               !
-              DO i = 1 , N
+              DO i = 1, N
                 t = A(i,l1) + u2*A(i,l)
                 A(i,l1) = A(i,l1) + t*v1
                 A(i,l) = A(i,l) + t*v2
@@ -215,7 +215,7 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
               !
               IF ( Matz ) THEN
                 !
-                DO i = 1 , N
+                DO i = 1, N
                   t = Z(i,l1) + u2*Z(i,l)
                   Z(i,l1) = Z(i,l1) + t*v1
                   Z(i,l) = Z(i,l) + t*v2

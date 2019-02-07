@@ -4,7 +4,7 @@ SUBROUTINE XGETF(Kontrl)
   IMPLICIT NONE
   !*--XGETF5
   !*** Start of declarations inserted by SPAG
-  INTEGER J4SAVE , Kontrl
+  INTEGER J4SAVE, Kontrl
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XGETF
   !***PURPOSE  Return the current value of the error control flag.

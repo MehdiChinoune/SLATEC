@@ -23,9 +23,9 @@ SUBROUTINE DAVNTS(Lun,Kprint,Ipass)
   !           values of KPRINT.  (WRB)
   !***END PROLOGUE  DAVNTS
   REAL(8) :: D1MACH
-  INTEGER i , ierr , Ipass , Kprint , Lun , n
-  REAL(8) :: a , ans , b , del , rn1 , sqb , tol , tol1 , x(501) , &
-    xint , y(501)
+  INTEGER i, ierr, Ipass, Kprint, Lun, n
+  REAL(8) :: a, ans, b, del, rn1, sqb, tol, tol1, x(501), &
+    xint, y(501)
   LOGICAL fatal
   !***FIRST EXECUTABLE STATEMENT  DAVNTS
   IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -43,7 +43,7 @@ SUBROUTINE DAVNTS(Lun,Kprint,Ipass)
   rn1 = n - 1
   sqb = SQRT(b)
   del = 0.4D0*(b-a)/(n-1)
-  DO i = 1 , n
+  DO i = 1, n
     x(i) = sqb*SQRT(a+(i-1)*(b-a)/rn1) + del
     y(i) = EXP(x(i))
   ENDDO
@@ -53,7 +53,7 @@ SUBROUTINE DAVNTS(Lun,Kprint,Ipass)
   !
   IF ( ABS(ans-xint)>tol ) THEN
     Ipass = 0
-    IF ( Kprint>=3 ) WRITE (Lun,99009) ierr , ans , xint
+    IF ( Kprint>=3 ) WRITE (Lun,99009) ierr, ans, xint
   ENDIF
   !
   !     Perform second accuracy test.
@@ -71,7 +71,7 @@ SUBROUTINE DAVNTS(Lun,Kprint,Ipass)
   !
   IF ( ABS(ans-xint)>tol1 ) THEN
     Ipass = 0
-    IF ( Kprint>=3 ) WRITE (Lun,99009) ierr , ans , xint
+    IF ( Kprint>=3 ) WRITE (Lun,99009) ierr, ans, xint
   ENDIF
   !
   !     Send message indicating passage or failure of tests.
@@ -102,7 +102,7 @@ SUBROUTINE DAVNTS(Lun,Kprint,Ipass)
     99004   FORMAT (/' Test error returns from DAVINT'/' 4 error messages expected'/&
       )
   ENDIF
-  DO i = 1 , 20
+  DO i = 1, 20
     x(i) = (i-1)/19.0D0 - 0.01D0
     IF ( i/=1 ) y(i) = x(i)/(EXP(x(i))-1.0)
   ENDDO
@@ -114,7 +114,7 @@ SUBROUTINE DAVNTS(Lun,Kprint,Ipass)
   IF ( ierr/=1 ) THEN
     Ipass = 0
     fatal = .TRUE.
-    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr , 1
+    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr, 1
   ENDIF
   CALL XERCLR
   !
@@ -124,7 +124,7 @@ SUBROUTINE DAVNTS(Lun,Kprint,Ipass)
   IF ( ierr/=2 ) THEN
     Ipass = 0
     fatal = .TRUE.
-    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr , 2
+    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr, 2
   ENDIF
   IF ( ans/=0.0D0 ) THEN
     Ipass = 0
@@ -139,7 +139,7 @@ SUBROUTINE DAVNTS(Lun,Kprint,Ipass)
   IF ( ierr/=5 ) THEN
     Ipass = 0
     fatal = .TRUE.
-    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr , 5
+    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr, 5
   ENDIF
   IF ( ans/=0.0D0 ) THEN
     Ipass = 0
@@ -156,7 +156,7 @@ SUBROUTINE DAVNTS(Lun,Kprint,Ipass)
   IF ( ierr/=4 ) THEN
     Ipass = 0
     fatal = .TRUE.
-    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr , 4
+    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr, 4
   ENDIF
   IF ( ans/=0.0D0 ) THEN
     Ipass = 0
@@ -173,7 +173,7 @@ SUBROUTINE DAVNTS(Lun,Kprint,Ipass)
   IF ( ierr/=3 ) THEN
     Ipass = 0
     fatal = .TRUE.
-    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr , 3
+    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr, 3
   ENDIF
   IF ( ans/=0.0D0 ) THEN
     Ipass = 0

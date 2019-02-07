@@ -58,9 +58,9 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !         INTEGER IFLAG,LDFJAC,M,N
   !         DOUBLE PRECISION X(N),FVEC(M)
   !         ----------
-  !         FJAC and LDFJAC may be ignored       , if IOPT=1.
-  !         DOUBLE PRECISION FJAC(LDFJAC,N)      , if IOPT=2.
-  !         DOUBLE PRECISION FJAC(N)             , if IOPT=3.
+  !         FJAC and LDFJAC may be ignored      , if IOPT=1.
+  !         DOUBLE PRECISION FJAC(LDFJAC,N)     , if IOPT=2.
+  !         DOUBLE PRECISION FJAC(N)            , if IOPT=3.
   !         ----------
   !           If IFLAG=0, the values in X and FVEC are available
   !           for printing.  See the explanation of NPRINT below.
@@ -497,15 +497,15 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !*** Start of declarations inserted by SPAG
   REAL(8) :: FCN
   !*** End of declarations inserted by SPAG
-  INTEGER M , N , Nprint , Info , Lwa , Iopt
-  INTEGER index , Iw(*)
+  INTEGER M, N, Nprint, Info, Lwa, Iopt
+  INTEGER index, Iw(*)
   REAL(8) :: Tol
-  REAL(8) :: X(*) , Fvec(*) , Wa(*)
+  REAL(8) :: X(*), Fvec(*), Wa(*)
   EXTERNAL FCN
-  INTEGER maxfev , mode , nfev , njev
-  REAL(8) :: factor , ftol , gtol , xtol , zero , epsfcn
-  SAVE factor , zero
-  DATA factor , zero/1.0D2 , 0.0D0/
+  INTEGER maxfev, mode, nfev, njev
+  REAL(8) :: factor, ftol, gtol, xtol, zero, epsfcn
+  SAVE factor, zero
+  DATA factor, zero/1.0D2, 0.0D0/
   !***FIRST EXECUTABLE STATEMENT  DNLS1E
   Info = 0
   !

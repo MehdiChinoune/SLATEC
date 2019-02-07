@@ -45,7 +45,7 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !
   !        ABD     an upper triangular matrix in band storage and
   !                the multipliers which were used to obtain it.
-  !                The factorization can be written  A = L*U , where
+  !                The factorization can be written  A = L*U, where
   !                L  is a product of permutation and unit lower
   !                triangular matrices and  U  is upper triangular.
   !
@@ -97,12 +97,12 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SGBFA
-  INTEGER Lda , N , Ml , Mu , Ipvt(*) , Info
+  INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
   REAL Abd(Lda,*)
   !
   REAL t
-  INTEGER i , ISAMAX , i0 , j , ju , jz , j0 , j1 , k , kp1 , l , lm , m , &
-    mm , nm1
+  INTEGER i, ISAMAX, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, &
+    mm, nm1
   !
   !***FIRST EXECUTABLE STATEMENT  SGBFA
   m = Ml + Mu + 1
@@ -113,9 +113,9 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   j0 = Mu + 2
   j1 = MIN(N,m) - 1
   IF ( j1>=j0 ) THEN
-    DO jz = j0 , j1
+    DO jz = j0, j1
       i0 = m + 1 - jz
-      DO i = i0 , Ml
+      DO i = i0, Ml
         Abd(i,jz) = 0.0E0
       ENDDO
     ENDDO
@@ -127,7 +127,7 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !
   nm1 = N - 1
   IF ( nm1>=1 ) THEN
-    DO k = 1 , nm1
+    DO k = 1, nm1
       kp1 = k + 1
       !
       !        ZERO NEXT FILL-IN COLUMN
@@ -135,7 +135,7 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
       jz = jz + 1
       IF ( jz<=N ) THEN
         IF ( Ml>=1 ) THEN
-          DO i = 1 , Ml
+          DO i = 1, Ml
             Abd(i,jz) = 0.0E0
           ENDDO
         ENDIF
@@ -171,7 +171,7 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
         ju = MIN(MAX(ju,Mu+Ipvt(k)),N)
         mm = m
         IF ( ju>=kp1 ) THEN
-          DO j = kp1 , ju
+          DO j = kp1, ju
             l = l - 1
             mm = mm - 1
             t = Abd(l,j)

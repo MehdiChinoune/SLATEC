@@ -4,7 +4,7 @@ SUBROUTINE DXQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
   !*--DXQNU5
   !*** Start of declarations inserted by SPAG
-  INTEGER Id , Ierror , ipq , ipq1 , ipq2 , Ipqa , ipql1 , ipql2 , k , mu , &
+  INTEGER Id, Ierror, ipq, ipq1, ipq2, Ipqa, ipql1, ipql2, k, mu, &
     Mu1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXQNU
@@ -27,10 +27,10 @@ SUBROUTINE DXQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXQNU
-  DIMENSION Pqa(*) , Ipqa(*)
-  REAL(8) :: dmu , nu , Nu1 , Nu2 , pq , Pqa , pq1 , pq2 , Sx , X , &
-    x1 , x2
-  REAL(8) :: Theta , pql1 , pql2
+  DIMENSION Pqa(*), Ipqa(*)
+  REAL(8) :: dmu, nu, Nu1, Nu2, pq, Pqa, pq1, pq2, Sx, X, &
+    x1, x2
+  REAL(8) :: Theta, pql1, pql2
   !***FIRST EXECUTABLE STATEMENT  DXQNU
   Ierror = 0
   k = 0

@@ -65,19 +65,19 @@ SUBROUTINE DHELS(A,Lda,N,Q,B)
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
-  INTEGER Lda , N
+  INTEGER Lda, N
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*) , B(*) , Q(*)
+  REAL(8) :: A(Lda,*), B(*), Q(*)
   !     .. Local Scalars ..
-  REAL(8) :: c , s , t , t1 , t2
-  INTEGER iq , k , kb , kp1
+  REAL(8) :: c, s, t, t1, t2
+  INTEGER iq, k, kb, kp1
   !     .. External Subroutines ..
   EXTERNAL DAXPY
   !***FIRST EXECUTABLE STATEMENT  DHELS
   !
   !         Minimize(B-A*X,B-A*X).  First form Q*B.
   !
-  DO k = 1 , N
+  DO k = 1, N
     kp1 = k + 1
     iq = 2*(k-1) + 1
     c = Q(iq)
@@ -90,7 +90,7 @@ SUBROUTINE DHELS(A,Lda,N,Q,B)
   !
   !         Now solve  R*X = Q*B.
   !
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     B(k) = B(k)/A(k,k)
     t = -B(k)

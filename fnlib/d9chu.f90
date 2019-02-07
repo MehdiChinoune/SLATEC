@@ -4,7 +4,7 @@ REAL(8) FUNCTION D9CHU(A,B,Z)
   IMPLICIT NONE
   !*--D9CHU5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , j
+  INTEGER i, j
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9CHU
   !***SUBSIDIARY
@@ -35,11 +35,11 @@ REAL(8) FUNCTION D9CHU(A,B,Z)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9CHU
-  REAL(8) :: A , B , Z , aa(4) , bb(4) , ab , anbn , bp , ct1 , ct2 , &
-    ct3 , c2 , d1z , eps , g1 , g2 , g3 , sab , sqeps , &
-    x2i1 , D1MACH
+  REAL(8) :: A, B, Z, aa(4), bb(4), ab, anbn, bp, ct1, ct2, &
+    ct3, c2, d1z, eps, g1, g2, g3, sab, sqeps, &
+    x2i1, D1MACH
   LOGICAL first
-  SAVE eps , sqeps , first
+  SAVE eps, sqeps, first
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  D9CHU
   IF ( first ) THEN
@@ -65,7 +65,7 @@ REAL(8) FUNCTION D9CHU(A,B,Z)
   bb(3) = 1.0D0 + 6.0D0*ct1*Z/ct3
   aa(3) = 1.0D0 + 6.0D0*ab/anbn + 3.0D0*ct1*ct2/ct3
   !
-  DO i = 4 , 300
+  DO i = 4, 300
     x2i1 = 2*i - 3
     ct1 = x2i1/(x2i1-2.0D0)
     anbn = anbn + x2i1 + sab
@@ -86,7 +86,7 @@ REAL(8) FUNCTION D9CHU(A,B,Z)
     ! BELOW COULD BE ALTERED TO INCORPORATE A DYNAMICALLY ADJUSTED SCALE
     ! FACTOR.
     !
-    DO j = 1 , 3
+    DO j = 1, 3
       aa(j) = aa(j+1)
       bb(j) = bb(j+1)
     ENDDO

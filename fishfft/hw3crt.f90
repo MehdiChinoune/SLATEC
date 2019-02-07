@@ -5,13 +5,13 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
   IMPLICIT NONE
   !*--HW3CRT6
   !*** Start of declarations inserted by SPAG
-  REAL Bdxf , Bdxs , Bdyf , Bdys , Bdzf , Bdzs , c1 , c2 , c3 , dx , dy , &
-    dz , Elmbda , F , Pertrb , s , s1 , s2 , twbydx , twbydy
-  REAL twbydz , W , Xf , xlp , Xs , Yf , ylp , Ys , Zf , zlp , Zs
-  INTEGER i , Ierror , ir , iwb , iwc , iww , j , k , L , Lbdcnd , Ldimf , &
-    lp , lp1 , lstart , lstop , lstpm1 , lunk , M , Mbdcnd , Mdimf
-  INTEGER mp , mp1 , mstart , mstop , mstpm1 , munk , N , Nbdcnd , np , &
-    np1 , nperod , nstart , nstop , nstpm1 , nunk
+  REAL Bdxf, Bdxs, Bdyf, Bdys, Bdzf, Bdzs, c1, c2, c3, dx, dy, &
+    dz, Elmbda, F, Pertrb, s, s1, s2, twbydx, twbydy
+  REAL twbydz, W, Xf, xlp, Xs, Yf, ylp, Ys, Zf, zlp, Zs
+  INTEGER i, Ierror, ir, iwb, iwc, iww, j, k, L, Lbdcnd, Ldimf, &
+    lp, lp1, lstart, lstop, lstpm1, lunk, M, Mbdcnd, Mdimf
+  INTEGER mp, mp1, mstart, mstop, mstpm1, munk, N, Nbdcnd, np, &
+    np1, nperod, nstart, nstop, nstpm1, nunk
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HW3CRT
   !***PURPOSE  Solve the standard seven-point finite difference
@@ -373,8 +373,8 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
   !***END PROLOGUE  HW3CRT
   !
   !
-  DIMENSION Bdxs(Mdimf,*) , Bdxf(Mdimf,*) , Bdys(Ldimf,*) , Bdyf(Ldimf,*) , &
-    Bdzs(Ldimf,*) , Bdzf(Ldimf,*) , F(Ldimf,Mdimf,*) , W(*)
+  DIMENSION Bdxs(Mdimf,*), Bdxf(Mdimf,*), Bdys(Ldimf,*), Bdyf(Ldimf,*), &
+    Bdzs(Ldimf,*), Bdzf(Ldimf,*), F(Ldimf,Mdimf,*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HW3CRT
   Ierror = 0
   IF ( Xf<=Xs ) Ierror = 1
@@ -443,15 +443,15 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
       CASE (1)
         GOTO 150
       CASE (4,5)
-        DO j = mstart , mstop
-          DO k = nstart , nstop
+        DO j = mstart, mstop
+          DO k = nstart, nstop
             F(1,j,k) = F(1,j,k) + twbydx*Bdxs(j,k)
           ENDDO
         ENDDO
       CASE DEFAULT
         lstart = 2
-        DO j = mstart , mstop
-          DO k = nstart , nstop
+        DO j = mstart, mstop
+          DO k = nstart, nstop
             F(2,j,k) = F(2,j,k) - c1*F(1,j,k)
           ENDDO
         ENDDO
@@ -460,14 +460,14 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
       CASE (1)
       CASE (3,4)
         lstop = lp1
-        DO j = mstart , mstop
-          DO k = nstart , nstop
+        DO j = mstart, mstop
+          DO k = nstart, nstop
             F(lp1,j,k) = F(lp1,j,k) - twbydx*Bdxf(j,k)
           ENDDO
         ENDDO
       CASE DEFAULT
-        DO j = mstart , mstop
-          DO k = nstart , nstop
+        DO j = mstart, mstop
+          DO k = nstart, nstop
             F(L,j,k) = F(L,j,k) - c1*F(lp1,j,k)
           ENDDO
         ENDDO
@@ -480,14 +480,14 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
       CASE (1)
         GOTO 200
       CASE (4,5)
-        DO i = lstart , lstop
-          DO k = nstart , nstop
+        DO i = lstart, lstop
+          DO k = nstart, nstop
             F(i,1,k) = F(i,1,k) + twbydy*Bdys(i,k)
           ENDDO
         ENDDO
       CASE DEFAULT
-        DO i = lstart , lstop
-          DO k = nstart , nstop
+        DO i = lstart, lstop
+          DO k = nstart, nstop
             F(i,2,k) = F(i,2,k) - c2*F(i,1,k)
           ENDDO
         ENDDO
@@ -495,14 +495,14 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
     SELECT CASE (mp)
       CASE (1)
       CASE (3,4)
-        DO i = lstart , lstop
-          DO k = nstart , nstop
+        DO i = lstart, lstop
+          DO k = nstart, nstop
             F(i,mp1,k) = F(i,mp1,k) - twbydy*Bdyf(i,k)
           ENDDO
         ENDDO
       CASE DEFAULT
-        DO i = lstart , lstop
-          DO k = nstart , nstop
+        DO i = lstart, lstop
+          DO k = nstart, nstop
             F(i,M,k) = F(i,M,k) - c2*F(i,mp1,k)
           ENDDO
         ENDDO
@@ -510,182 +510,183 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
     !
     !     ENTER BOUNDARY DATA FOR Z-BOUNDARIES.
     !
-    200    SELECT CASE (np)
-  CASE (1)
-    GOTO 250
-  CASE (4,5)
-    DO i = lstart , lstop
-      DO j = mstart , mstop
-        F(i,j,1) = F(i,j,1) + twbydz*Bdzs(i,j)
-      ENDDO
+    200 CONTINUE
+    SELECT CASE (np)
+      CASE (1)
+        GOTO 250
+      CASE (4,5)
+        DO i = lstart, lstop
+          DO j = mstart, mstop
+            F(i,j,1) = F(i,j,1) + twbydz*Bdzs(i,j)
+          ENDDO
+        ENDDO
+      CASE DEFAULT
+        DO i = lstart, lstop
+          DO j = mstart, mstop
+            F(i,j,2) = F(i,j,2) - c3*F(i,j,1)
+          ENDDO
+        ENDDO
+    END SELECT
+    SELECT CASE (np)
+      CASE (1)
+      CASE (3,4)
+        DO i = lstart, lstop
+          DO j = mstart, mstop
+            F(i,j,np1) = F(i,j,np1) - twbydz*Bdzf(i,j)
+          ENDDO
+        ENDDO
+      CASE DEFAULT
+        DO i = lstart, lstop
+          DO j = mstart, mstop
+            F(i,j,N) = F(i,j,N) - c3*F(i,j,np1)
+          ENDDO
+        ENDDO
+    END SELECT
+    !
+    !     DEFINE A,B,C COEFFICIENTS IN W-ARRAY.
+    !
+    250    iwb = nunk + 1
+    iwc = iwb + nunk
+    iww = iwc + nunk
+    DO k = 1, nunk
+      i = iwc + k - 1
+      W(k) = c3
+      W(i) = c3
+      i = iwb + k - 1
+      W(i) = -2.*c3 + Elmbda
     ENDDO
-  CASE DEFAULT
-    DO i = lstart , lstop
-      DO j = mstart , mstop
-        F(i,j,2) = F(i,j,2) - c3*F(i,j,1)
-      ENDDO
-    ENDDO
-END SELECT
-SELECT CASE (np)
-  CASE (1)
-  CASE (3,4)
-    DO i = lstart , lstop
-      DO j = mstart , mstop
-        F(i,j,np1) = F(i,j,np1) - twbydz*Bdzf(i,j)
-      ENDDO
-    ENDDO
-  CASE DEFAULT
-    DO i = lstart , lstop
-      DO j = mstart , mstop
-        F(i,j,N) = F(i,j,N) - c3*F(i,j,np1)
-      ENDDO
-    ENDDO
-END SELECT
-!
-!     DEFINE A,B,C COEFFICIENTS IN W-ARRAY.
-!
-250    iwb = nunk + 1
-iwc = iwb + nunk
-iww = iwc + nunk
-DO k = 1 , nunk
-  i = iwc + k - 1
-  W(k) = c3
-  W(i) = c3
-  i = iwb + k - 1
-  W(i) = -2.*c3 + Elmbda
-ENDDO
-SELECT CASE (np)
-  CASE (1,2)
-    GOTO 300
-  CASE (3)
-  CASE DEFAULT
-    W(iwc) = 2.*c3
-END SELECT
-SELECT CASE (np)
-  CASE (1,2,5)
-  CASE DEFAULT
-    W(iwb-1) = 2.*c3
-END SELECT
-300    Pertrb = 0.
-!
-!     FOR SINGULAR PROBLEMS ADJUST DATA TO INSURE A SOLUTION WILL EXIST.
-!
-SELECT CASE (lp)
-  CASE (2,3,5)
-  CASE DEFAULT
-    SELECT CASE (mp)
+    SELECT CASE (np)
+      CASE (1,2)
+        GOTO 300
+      CASE (3)
+      CASE DEFAULT
+        W(iwc) = 2.*c3
+    END SELECT
+    SELECT CASE (np)
+      CASE (1,2,5)
+      CASE DEFAULT
+        W(iwb-1) = 2.*c3
+    END SELECT
+    300    Pertrb = 0.
+    !
+    !     FOR SINGULAR PROBLEMS ADJUST DATA TO INSURE A SOLUTION WILL EXIST.
+    !
+    SELECT CASE (lp)
       CASE (2,3,5)
       CASE DEFAULT
-        SELECT CASE (np)
+        SELECT CASE (mp)
           CASE (2,3,5)
           CASE DEFAULT
-            IF ( Elmbda<0 ) THEN
-            ELSEIF ( Elmbda==0 ) THEN
-              mstpm1 = mstop - 1
-              lstpm1 = lstop - 1
-              nstpm1 = nstop - 1
-              xlp = (2+lp)/3
-              ylp = (2+mp)/3
-              zlp = (2+np)/3
-              s1 = 0.
-              DO k = 2 , nstpm1
-                DO j = 2 , mstpm1
-                  DO i = 2 , lstpm1
-                    s1 = s1 + F(i,j,k)
+            SELECT CASE (np)
+              CASE (2,3,5)
+              CASE DEFAULT
+                IF ( Elmbda<0 ) THEN
+                ELSEIF ( Elmbda==0 ) THEN
+                  mstpm1 = mstop - 1
+                  lstpm1 = lstop - 1
+                  nstpm1 = nstop - 1
+                  xlp = (2+lp)/3
+                  ylp = (2+mp)/3
+                  zlp = (2+np)/3
+                  s1 = 0.
+                  DO k = 2, nstpm1
+                    DO j = 2, mstpm1
+                      DO i = 2, lstpm1
+                        s1 = s1 + F(i,j,k)
+                      ENDDO
+                      s1 = s1 + (F(1,j,k)+F(lstop,j,k))/xlp
+                    ENDDO
+                    s2 = 0.
+                    DO i = 2, lstpm1
+                      s2 = s2 + F(i,1,k) + F(i,mstop,k)
+                    ENDDO
+                    s2 = (s2+(F(1,1,k)+F(1,mstop,k)+F(lstop,1,k)+F(lstop,mstop,k))&
+                      /xlp)/ylp
+                    s1 = s1 + s2
                   ENDDO
-                  s1 = s1 + (F(1,j,k)+F(lstop,j,k))/xlp
-                ENDDO
-                s2 = 0.
-                DO i = 2 , lstpm1
-                  s2 = s2 + F(i,1,k) + F(i,mstop,k)
-                ENDDO
-                s2 = (s2+(F(1,1,k)+F(1,mstop,k)+F(lstop,1,k)+F(lstop,mstop,k))&
-                  /xlp)/ylp
-                s1 = s1 + s2
-              ENDDO
-              s = (F(1,1,1)+F(lstop,1,1)+F(1,1,nstop)+F(lstop,1,nstop)&
-                +F(1,mstop,1)+F(lstop,mstop,1)+F(1,mstop,nstop)&
-                +F(lstop,mstop,nstop))/(xlp*ylp)
-              DO j = 2 , mstpm1
-                DO i = 2 , lstpm1
-                  s = s + F(i,j,1) + F(i,j,nstop)
-                ENDDO
-              ENDDO
-              s2 = 0.
-              DO i = 2 , lstpm1
-                s2 = s2 + F(i,1,1) + F(i,1,nstop) + F(i,mstop,1)&
-                  + F(i,mstop,nstop)
-              ENDDO
-              s = s2/ylp + s
-              s2 = 0.
-              DO j = 2 , mstpm1
-                s2 = s2 + F(1,j,1) + F(1,j,nstop) + F(lstop,j,1)&
-                  + F(lstop,j,nstop)
-              ENDDO
-              s = s2/xlp + s
-              Pertrb = (s/zlp+s1)/((lunk+1.-xlp)*(munk+1.-ylp)*(nunk+1.-zlp))
-              DO i = 1 , lunk
-                DO j = 1 , munk
-                  DO k = 1 , nunk
-                    F(i,j,k) = F(i,j,k) - Pertrb
+                  s = (F(1,1,1)+F(lstop,1,1)+F(1,1,nstop)+F(lstop,1,nstop)&
+                    +F(1,mstop,1)+F(lstop,mstop,1)+F(1,mstop,nstop)&
+                    +F(lstop,mstop,nstop))/(xlp*ylp)
+                  DO j = 2, mstpm1
+                    DO i = 2, lstpm1
+                      s = s + F(i,j,1) + F(i,j,nstop)
+                    ENDDO
                   ENDDO
-                ENDDO
-              ENDDO
-            ELSE
-              Ierror = 12
-            ENDIF
+                  s2 = 0.
+                  DO i = 2, lstpm1
+                    s2 = s2 + F(i,1,1) + F(i,1,nstop) + F(i,mstop,1)&
+                      + F(i,mstop,nstop)
+                  ENDDO
+                  s = s2/ylp + s
+                  s2 = 0.
+                  DO j = 2, mstpm1
+                    s2 = s2 + F(1,j,1) + F(1,j,nstop) + F(lstop,j,1)&
+                      + F(lstop,j,nstop)
+                  ENDDO
+                  s = s2/xlp + s
+                  Pertrb = (s/zlp+s1)/((lunk+1.-xlp)*(munk+1.-ylp)*(nunk+1.-zlp))
+                  DO i = 1, lunk
+                    DO j = 1, munk
+                      DO k = 1, nunk
+                        F(i,j,k) = F(i,j,k) - Pertrb
+                      ENDDO
+                    ENDDO
+                  ENDDO
+                ELSE
+                  Ierror = 12
+                ENDIF
+            END SELECT
         END SELECT
     END SELECT
-END SELECT
-nperod = 0
-IF ( Nbdcnd/=0 ) THEN
-  nperod = 1
-  W(1) = 0.
-  W(iww-1) = 0.
-ENDIF
-CALL POIS3D(Lbdcnd,lunk,c1,Mbdcnd,munk,c2,nperod,nunk,W,W(iwb),W(iwc),&
-  Ldimf,Mdimf,F(lstart,mstart,nstart),ir,W(iww))
-!
-!     FILL IN SIDES FOR PERIODIC BOUNDARY CONDITIONS.
-!
-IF ( lp==1 ) THEN
-  IF ( mp==1 ) THEN
-    DO k = nstart , nstop
-      F(1,mp1,k) = F(1,1,k)
-    ENDDO
-    mstop = mp1
-  ENDIF
-  IF ( np==1 ) THEN
-    DO j = mstart , mstop
-      F(1,j,np1) = F(1,j,1)
-    ENDDO
-    nstop = np1
-  ENDIF
-  DO j = mstart , mstop
-    DO k = nstart , nstop
-      F(lp1,j,k) = F(1,j,k)
-    ENDDO
-  ENDDO
-ENDIF
-IF ( mp==1 ) THEN
-  IF ( np==1 ) THEN
-    DO i = lstart , lstop
-      F(i,1,np1) = F(i,1,1)
-    ENDDO
-    nstop = np1
-  ENDIF
-  DO i = lstart , lstop
-    DO k = nstart , nstop
-      F(i,mp1,k) = F(i,1,k)
-    ENDDO
-  ENDDO
-ENDIF
-IF ( np==1 ) THEN
-  DO i = lstart , lstop
-    DO j = mstart , mstop
-      F(i,j,np1) = F(i,j,1)
-    ENDDO
-  ENDDO
-ENDIF
+    nperod = 0
+    IF ( Nbdcnd/=0 ) THEN
+      nperod = 1
+      W(1) = 0.
+      W(iww-1) = 0.
+    ENDIF
+    CALL POIS3D(Lbdcnd,lunk,c1,Mbdcnd,munk,c2,nperod,nunk,W,W(iwb),W(iwc),&
+      Ldimf,Mdimf,F(lstart,mstart,nstart),ir,W(iww))
+    !
+    !     FILL IN SIDES FOR PERIODIC BOUNDARY CONDITIONS.
+    !
+    IF ( lp==1 ) THEN
+      IF ( mp==1 ) THEN
+        DO k = nstart, nstop
+          F(1,mp1,k) = F(1,1,k)
+        ENDDO
+        mstop = mp1
+      ENDIF
+      IF ( np==1 ) THEN
+        DO j = mstart, mstop
+          F(1,j,np1) = F(1,j,1)
+        ENDDO
+        nstop = np1
+      ENDIF
+      DO j = mstart, mstop
+        DO k = nstart, nstop
+          F(lp1,j,k) = F(1,j,k)
+        ENDDO
+      ENDDO
+    ENDIF
+    IF ( mp==1 ) THEN
+      IF ( np==1 ) THEN
+        DO i = lstart, lstop
+          F(i,1,np1) = F(i,1,1)
+        ENDDO
+        nstop = np1
+      ENDIF
+      DO i = lstart, lstop
+        DO k = nstart, nstop
+          F(i,mp1,k) = F(i,1,k)
+        ENDDO
+      ENDDO
+    ENDIF
+    IF ( np==1 ) THEN
+      DO i = lstart, lstop
+        DO j = mstart, mstop
+          F(i,j,np1) = F(i,j,1)
+        ENDDO
+      ENDDO
+    ENDIF
   ENDIF
 END SUBROUTINE HW3CRT

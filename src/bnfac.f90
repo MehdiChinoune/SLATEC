@@ -20,8 +20,8 @@ SUBROUTINE BNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   !
   ! *****  I N P U T  ******
   !  W.....Work array of size  (NROWW,NROW)  containing the interesting
-  !        part of a banded matrix  A , with the diagonals or bands of  A
-  !        stored in the rows of  W , while columns of  A  correspond to
+  !        part of a banded matrix  A, with the diagonals or bands of  A
+  !        stored in the rows of  W, while columns of  A  correspond to
   !        columns of  W . This is the storage mode used in  LINPACK  and
   !        results in efficient innermost loops.
   !           Explicitly,  A  has  NBANDL  bands below the diagonal
@@ -78,9 +78,9 @@ SUBROUTINE BNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  BNFAC
   !
-  INTEGER Iflag , Nbandl , Nbandu , Nrow , Nroww , i , ipk , j , jmax , k , &
-    kmax , middle , midmk , nrowm1
-  REAL W(Nroww,*) , factor , pivot
+  INTEGER Iflag, Nbandl, Nbandu, Nrow, Nroww, i, ipk, j, jmax, k, &
+    kmax, middle, midmk, nrowm1
+  REAL W(Nroww,*), factor, pivot
   !
   !***FIRST EXECUTABLE STATEMENT  BNFAC
   Iflag = 1
@@ -91,13 +91,13 @@ SUBROUTINE BNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   IF ( nrowm1/=0 ) THEN
     IF ( Nbandl<=0 ) THEN
       !                A IS UPPER TRIANGULAR. CHECK THAT DIAGONAL IS NONZERO .
-      DO i = 1 , nrowm1
+      DO i = 1, nrowm1
         IF ( W(middle,i)==0.0E0 ) GOTO 100
       ENDDO
     ELSEIF ( Nbandu>0 ) THEN
       !
       !        A  IS NOT JUST A TRIANGULAR MATRIX. CONSTRUCT LU FACTORIZATION
-      DO i = 1 , nrowm1
+      DO i = 1, nrowm1
         !                                  W(MIDDLE,I)  IS PIVOT FOR I-TH STEP .
         pivot = W(middle,i)
         IF ( pivot==0.0E0 ) GOTO 100
@@ -105,7 +105,7 @@ SUBROUTINE BNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
         !                     BELOW THE DIAGONAL .
         jmax = MIN(Nbandl,Nrow-i)
         !              DIVIDE EACH ENTRY IN COLUMN  I  BELOW DIAGONAL BY PIVOT .
-        DO j = 1 , jmax
+        DO j = 1, jmax
           W(middle+j,i) = W(middle+j,i)/pivot
         ENDDO
         !                 KMAX  IS THE NUMBER OF (NONZERO) ENTRIES IN ROW  I  TO
@@ -113,11 +113,11 @@ SUBROUTINE BNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
         kmax = MIN(Nbandu,Nrow-i)
         !                  SUBTRACT  A(I,I+K)*(I-TH COLUMN) FROM (I+K)-TH COLUMN
         !                  (BELOW ROW  I ) .
-        DO k = 1 , kmax
+        DO k = 1, kmax
           ipk = i + k
           midmk = middle - k
           factor = W(midmk,ipk)
-          DO j = 1 , jmax
+          DO j = 1, jmax
             W(midmk+j,ipk) = W(midmk+j,ipk) - W(middle+j,i)*factor
           ENDDO
         ENDDO
@@ -125,11 +125,11 @@ SUBROUTINE BNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
     ELSE
       !              A IS LOWER TRIANGULAR. CHECK THAT DIAGONAL IS NONZERO AND
       !                 DIVIDE EACH COLUMN BY ITS DIAGONAL .
-      DO i = 1 , nrowm1
+      DO i = 1, nrowm1
         pivot = W(middle,i)
         IF ( pivot==0.0E0 ) GOTO 100
         jmax = MIN(Nbandl,Nrow-i)
-        DO j = 1 , jmax
+        DO j = 1, jmax
           W(middle+j,i) = W(middle+j,i)/pivot
         ENDDO
       ENDDO
@@ -138,5 +138,6 @@ SUBROUTINE BNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   ENDIF
   !                                       CHECK THE LAST DIAGONAL ENTRY .
   IF ( W(middle,Nrow)/=0.0E0 ) RETURN
-  100  Iflag = 2
+  100 CONTINUE
+  IFlag = 2
 END SUBROUTINE BNFAC

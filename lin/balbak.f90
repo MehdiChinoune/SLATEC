@@ -66,20 +66,20 @@ SUBROUTINE BALBAK(Nm,N,Low,Igh,Scale,M,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BALBAK
   !
-  INTEGER i , j , k , M , N , ii , Nm , Igh , Low
-  REAL Scale(*) , Z(Nm,*)
+  INTEGER i, j, k, M, N, ii, Nm, Igh, Low
+  REAL Scale(*), Z(Nm,*)
   REAL s
   !
   !***FIRST EXECUTABLE STATEMENT  BALBAK
   IF ( M/=0 ) THEN
     IF ( Igh/=Low ) THEN
       !
-      DO i = Low , Igh
+      DO i = Low, Igh
         s = Scale(i)
         !     .......... LEFT HAND EIGENVECTORS ARE BACK TRANSFORMED
         !                IF THE FOREGOING STATEMENT IS REPLACED BY
         !                S=1.0E0/SCALE(I). ..........
-        DO j = 1 , M
+        DO j = 1, M
           Z(i,j) = Z(i,j)*s
         ENDDO
         !
@@ -87,14 +87,14 @@ SUBROUTINE BALBAK(Nm,N,Low,Igh,Scale,M,Z)
     ENDIF
     !     ......... FOR I=LOW-1 STEP -1 UNTIL 1,
     !               IGH+1 STEP 1 UNTIL N DO -- ..........
-    DO ii = 1 , N
+    DO ii = 1, N
       i = ii
       IF ( i<Low.OR.i>Igh ) THEN
         IF ( i<Low ) i = Low - ii
         k = Scale(i)
         IF ( k/=i ) THEN
           !
-          DO j = 1 , M
+          DO j = 1, M
             s = Z(i,j)
             Z(i,j) = Z(k,j)
             Z(k,j) = s

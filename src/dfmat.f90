@@ -13,9 +13,9 @@ SUBROUTINE DFMAT(X,Y,Yp)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DFMAT
-  REAL(8) :: X , Y , Yp , XSAve , TERm , tanx
-  DIMENSION Y(*) , Yp(*)
-  COMMON /DSAVEX/ XSAve , TERm
+  REAL(8) :: X, Y, Yp, XSAve, TERm, tanx
+  DIMENSION Y(*), Yp(*)
+  COMMON /DSAVEX/ XSAve, TERm
   !***FIRST EXECUTABLE STATEMENT  DFMAT
   Yp(1) = Y(2)
   IF ( X/=XSAve ) THEN

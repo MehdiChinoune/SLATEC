@@ -142,24 +142,24 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  CTBMV
   !     .. Scalar Arguments ..
-  INTEGER Incx , K , Lda , N
-  CHARACTER :: Diag , Trans , Uplo
+  INTEGER Incx, K, Lda, N
+  CHARACTER :: Diag, Trans, Uplo
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*) , X(*)
+  COMPLEX A(Lda,*), X(*)
   !     .. Parameters ..
   COMPLEX ZERO
   PARAMETER (ZERO=(0.0E+0,0.0E+0))
   !     .. Local Scalars ..
   COMPLEX temp
-  INTEGER i , info , ix , j , jx , kplus1 , kx , l
-  LOGICAL noconj , nounit
+  INTEGER i, info, ix, j, jx, kplus1, kx, l
+  LOGICAL noconj, nounit
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
-  INTRINSIC CONJG , MAX , MIN
+  INTRINSIC CONJG, MAX, MIN
   !***FIRST EXECUTABLE STATEMENT  CTBMV
   !
   !     Test the input parameters.
@@ -212,11 +212,11 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
     IF ( LSAME(Uplo,'U') ) THEN
       kplus1 = K + 1
       IF ( Incx==1 ) THEN
-        DO j = 1 , N
+        DO j = 1, N
           IF ( X(j)/=ZERO ) THEN
             temp = X(j)
             l = kplus1 - j
-            DO i = MAX(1,j-K) , j - 1
+            DO i = MAX(1,j-K), j - 1
               X(i) = X(i) + temp*A(l+i,j)
             ENDDO
             IF ( nounit ) X(j) = X(j)*A(kplus1,j)
@@ -224,12 +224,12 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
         ENDDO
       ELSE
         jx = kx
-        DO j = 1 , N
+        DO j = 1, N
           IF ( X(jx)/=ZERO ) THEN
             temp = X(jx)
             ix = kx
             l = kplus1 - j
-            DO i = MAX(1,j-K) , j - 1
+            DO i = MAX(1,j-K), j - 1
               X(ix) = X(ix) + temp*A(l+i,j)
               ix = ix + Incx
             ENDDO
@@ -240,11 +240,11 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
         ENDDO
       ENDIF
     ELSEIF ( Incx==1 ) THEN
-      DO j = N , 1 , -1
+      DO j = N, 1, -1
         IF ( X(j)/=ZERO ) THEN
           temp = X(j)
           l = 1 - j
-          DO i = MIN(N,j+K) , j + 1 , -1
+          DO i = MIN(N,j+K), j + 1, -1
             X(i) = X(i) + temp*A(l+i,j)
           ENDDO
           IF ( nounit ) X(j) = X(j)*A(1,j)
@@ -253,12 +253,12 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
     ELSE
       kx = kx + (N-1)*Incx
       jx = kx
-      DO j = N , 1 , -1
+      DO j = N, 1, -1
         IF ( X(jx)/=ZERO ) THEN
           temp = X(jx)
           ix = kx
           l = 1 - j
-          DO i = MIN(N,j+K) , j + 1 , -1
+          DO i = MIN(N,j+K), j + 1, -1
             X(ix) = X(ix) + temp*A(l+i,j)
             ix = ix - Incx
           ENDDO
@@ -274,17 +274,17 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   ELSEIF ( LSAME(Uplo,'U') ) THEN
     kplus1 = K + 1
     IF ( Incx==1 ) THEN
-      DO j = N , 1 , -1
+      DO j = N, 1, -1
         temp = X(j)
         l = kplus1 - j
         IF ( noconj ) THEN
           IF ( nounit ) temp = temp*A(kplus1,j)
-          DO i = j - 1 , MAX(1,j-K) , -1
+          DO i = j - 1, MAX(1,j-K), -1
             temp = temp + A(l+i,j)*X(i)
           ENDDO
         ELSE
           IF ( nounit ) temp = temp*CONJG(A(kplus1,j))
-          DO i = j - 1 , MAX(1,j-K) , -1
+          DO i = j - 1, MAX(1,j-K), -1
             temp = temp + CONJG(A(l+i,j))*X(i)
           ENDDO
         ENDIF
@@ -293,20 +293,20 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
     ELSE
       kx = kx + (N-1)*Incx
       jx = kx
-      DO j = N , 1 , -1
+      DO j = N, 1, -1
         temp = X(jx)
         kx = kx - Incx
         ix = kx
         l = kplus1 - j
         IF ( noconj ) THEN
           IF ( nounit ) temp = temp*A(kplus1,j)
-          DO i = j - 1 , MAX(1,j-K) , -1
+          DO i = j - 1, MAX(1,j-K), -1
             temp = temp + A(l+i,j)*X(ix)
             ix = ix - Incx
           ENDDO
         ELSE
           IF ( nounit ) temp = temp*CONJG(A(kplus1,j))
-          DO i = j - 1 , MAX(1,j-K) , -1
+          DO i = j - 1, MAX(1,j-K), -1
             temp = temp + CONJG(A(l+i,j))*X(ix)
             ix = ix - Incx
           ENDDO
@@ -316,17 +316,17 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
       ENDDO
     ENDIF
   ELSEIF ( Incx==1 ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       temp = X(j)
       l = 1 - j
       IF ( noconj ) THEN
         IF ( nounit ) temp = temp*A(1,j)
-        DO i = j + 1 , MIN(N,j+K)
+        DO i = j + 1, MIN(N,j+K)
           temp = temp + A(l+i,j)*X(i)
         ENDDO
       ELSE
         IF ( nounit ) temp = temp*CONJG(A(1,j))
-        DO i = j + 1 , MIN(N,j+K)
+        DO i = j + 1, MIN(N,j+K)
           temp = temp + CONJG(A(l+i,j))*X(i)
         ENDDO
       ENDIF
@@ -334,20 +334,20 @@ SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
     ENDDO
   ELSE
     jx = kx
-    DO j = 1 , N
+    DO j = 1, N
       temp = X(jx)
       kx = kx + Incx
       ix = kx
       l = 1 - j
       IF ( noconj ) THEN
         IF ( nounit ) temp = temp*A(1,j)
-        DO i = j + 1 , MIN(N,j+K)
+        DO i = j + 1, MIN(N,j+K)
           temp = temp + A(l+i,j)*X(ix)
           ix = ix + Incx
         ENDDO
       ELSE
         IF ( nounit ) temp = temp*CONJG(A(1,j))
-        DO i = j + 1 , MIN(N,j+K)
+        DO i = j + 1, MIN(N,j+K)
           temp = temp + CONJG(A(l+i,j))*X(ix)
           ix = ix + Incx
         ENDDO

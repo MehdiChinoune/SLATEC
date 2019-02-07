@@ -13,8 +13,8 @@ REAL FUNCTION FEIN(T)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  FEIN
-  COMMON /FEINX / X , A , FKM
-  REAL X , A , FKM , T , aln
+  COMMON /FEINX / X, A, FKM
+  REAL X, A, FKM, T, aln
   !***FIRST EXECUTABLE STATEMENT  FEIN
   aln = (FKM-T)*X - A*LOG(T)
   FEIN = EXP(aln)

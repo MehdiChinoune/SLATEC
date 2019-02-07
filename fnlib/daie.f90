@@ -5,7 +5,7 @@ REAL(8) FUNCTION DAIE(X)
   !*--DAIE5
   !*** Start of declarations inserted by SPAG
   REAL eta
-  INTEGER INITDS , naif , naig , naip1 , naip2
+  INTEGER INITDS, naif, naig, naip1, naip2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DAIE
   !***PURPOSE  Calculate the Airy function for a negative argument and an
@@ -59,12 +59,12 @@ REAL(8) FUNCTION DAIE(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DAIE
-  REAL(8) :: X , aifcs(13) , aigcs(13) , aip1cs(57) , aip2cs(37) , &
-    sqrtx , theta , xbig , xm , x3sml , x32sml , z , D1MACH , &
+  REAL(8) :: X, aifcs(13), aigcs(13), aip1cs(57), aip2cs(37), &
+    sqrtx, theta, xbig, xm, x3sml, x32sml, z, D1MACH, &
     DCSEVL
   LOGICAL first
-  SAVE aifcs , aigcs , aip1cs , aip2cs , naif , naig , naip1 , naip2 , &
-    x3sml , x32sml , xbig , first
+  SAVE aifcs, aigcs, aip1cs, aip2cs, naif, naig, naip1, naip2, &
+    x3sml, x32sml, xbig, first
   DATA aifcs(1)/ - .37971358496669997496197089469414D-1/
   DATA aifcs(2)/ + .59191888537263638574319728013777D-1/
   DATA aifcs(3)/ + .98629280577279975365603891044060D-3/
@@ -225,4 +225,5 @@ REAL(8) FUNCTION DAIE(X)
   DAIE = (0.28125D0+DCSEVL(z,aip1cs,naip1))/SQRT(sqrtx)
   RETURN
   !
-  99999 END FUNCTION DAIE
+  99999 CONTINUE
+  END FUNCTION DAIE

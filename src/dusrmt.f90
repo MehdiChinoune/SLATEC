@@ -4,7 +4,7 @@ SUBROUTINE DUSRMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   IMPLICIT NONE
   !*--DUSRMT5
   !*** Start of declarations inserted by SPAG
-  INTEGER I , Indcat , J , l
+  INTEGER I, Indcat, J, l
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DUSRMT
   !***SUBSIDIARY
@@ -23,7 +23,7 @@ SUBROUTINE DUSRMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DUSRMT
-  REAL(8) :: Prgopt(*) , Dattrv(*) , Aij
+  REAL(8) :: Prgopt(*), Dattrv(*), Aij
   INTEGER Iflag(*)
   !
   !***FIRST EXECUTABLE STATEMENT  DUSRMT

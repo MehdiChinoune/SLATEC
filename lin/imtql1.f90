@@ -69,25 +69,25 @@ SUBROUTINE IMTQL1(N,D,E,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  IMTQL1
   !
-  INTEGER i , j , l , m , N , ii , mml , Ierr
-  REAL D(*) , E(*)
-  REAL b , c , f , g , p , r , s , s1 , s2
+  INTEGER i, j, l, m, N, ii, mml, Ierr
+  REAL D(*), E(*)
+  REAL b, c, f, g, p, r, s, s1, s2
   REAL PYTHAG
   !
   !***FIRST EXECUTABLE STATEMENT  IMTQL1
   Ierr = 0
   IF ( N/=1 ) THEN
     !
-    DO i = 2 , N
+    DO i = 2, N
       E(i-1) = E(i)
     ENDDO
     !
     E(N) = 0.0E0
     !
-    DO l = 1 , N
+    DO l = 1, N
       j = 0
       !     .......... LOOK FOR SMALL SUB-DIAGONAL ELEMENT ..........
-      20       DO m = l , N
+      20       DO m = l, N
       IF ( m==N ) EXIT
       s1 = ABS(D(m)) + ABS(D(m+1))
       s2 = s1 + ABS(E(m))
@@ -99,7 +99,7 @@ SUBROUTINE IMTQL1(N,D,E,Ierr)
       !     .......... ORDER EIGENVALUES ..........
       IF ( l/=1 ) THEN
         !     .......... FOR I=L STEP -1 UNTIL 2 DO -- ..........
-        DO ii = 2 , l
+        DO ii = 2, l
           i = l + 2 - ii
           IF ( p>=D(i-1) ) GOTO 30
           D(i) = D(i-1)
@@ -120,7 +120,7 @@ SUBROUTINE IMTQL1(N,D,E,Ierr)
       p = 0.0E0
       mml = m - l
       !     .......... FOR I=M-1 STEP -1 UNTIL L DO -- ..........
-      DO ii = 1 , mml
+      DO ii = 1, mml
         i = m - ii
         f = s*E(i)
         b = c*E(i)
@@ -156,4 +156,5 @@ SUBROUTINE IMTQL1(N,D,E,Ierr)
   !     .......... SET ERROR -- NO CONVERGENCE TO AN
   !                EIGENVALUE AFTER 30 ITERATIONS ..........
   100  Ierr = l
-  99999 END SUBROUTINE IMTQL1
+  99999 CONTINUE
+  END SUBROUTINE IMTQL1

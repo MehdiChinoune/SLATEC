@@ -31,22 +31,22 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
   !***END PROLOGUE  PJAC
   !
   !LLL. OPTIMIZE
-  INTEGER Neq , Nyh , Iwm , i , i1 , i2 , IER , ii , IOWnd , IOWns , j , &
-    j1 , jj , JSTart , KFLag , L , lenp , MAXord , mba , mband , &
-    meb1 , meband , METh , MITer , ml , ml3 , mu , N , NFE , NJE , &
-    NQ , NQU , NST
-  EXTERNAL F , JAC
-  REAL Y , Yh , Ewt , Ftem , Savf , Wm , ROWnd , ROWns , EL0 , H , HMIn , &
-    HMXi , HU , TN , UROund , con , di , fac , hl0 , r , r0 , srur , yi , &
-    yj , yjj , VNWRMS
-  DIMENSION Y(*) , Yh(Nyh,*) , Ewt(*) , Ftem(*) , Savf(*) , Wm(*) , Iwm(*) , &
-    Rpar(*) , Ipar(*)
-  COMMON /DEBDF1/ ROWnd , ROWns(210) , EL0 , H , HMIn , HMXi , HU , TN , &
-    UROund , IOWnd(14) , IOWns(6) , IER , JSTart , KFLag , L , &
-    METh , MITer , MAXord , N , NQ , NST , NFE , NJE , NQU
+  INTEGER Neq, Nyh, Iwm, i, i1, i2, IER, ii, IOWnd, IOWns, j, &
+    j1, jj, JSTart, KFLag, L, lenp, MAXord, mba, mband, &
+    meb1, meband, METh, MITer, ml, ml3, mu, N, NFE, NJE, &
+    NQ, NQU, NST
+  EXTERNAL F, JAC
+  REAL Y, Yh, Ewt, Ftem, Savf, Wm, ROWnd, ROWns, EL0, H, HMIn, &
+    HMXi, HU, TN, UROund, con, di, fac, hl0, r, r0, srur, yi, &
+    yj, yjj, VNWRMS
+  DIMENSION Y(*), Yh(Nyh,*), Ewt(*), Ftem(*), Savf(*), Wm(*), Iwm(*), &
+    Rpar(*), Ipar(*)
+  COMMON /DEBDF1/ ROWnd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
+    UROund, IOWnd(14), IOWns(6), IER, JSTart, KFLag, L, &
+    METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
   !-----------------------------------------------------------------------
   ! PJAC IS CALLED BY STOD  TO COMPUTE AND PROCESS THE MATRIX
-  ! P = I - H*EL(1)*J , WHERE J IS AN APPROXIMATION TO THE JACOBIAN.
+  ! P = I - H*EL(1)*J, WHERE J IS AN APPROXIMATION TO THE JACOBIAN.
   ! HERE J IS COMPUTED BY THE USER-SUPPLIED ROUTINE JAC IF
   ! MITER = 1 OR 4, OR BY FINITE DIFFERENCING IF MITER = 2, 3, OR 5.
   ! IF MITER = 3, A DIAGONAL APPROXIMATION TO J IS USED.
@@ -62,7 +62,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
   ! SAVF = ARRAY CONTAINING F EVALUATED AT PREDICTED Y.
   ! WM   = REAL WORK SPACE FOR MATRICES.  ON OUTPUT IT CONTAINS THE
   !        INVERSE DIAGONAL MATRIX IF MITER = 3 AND THE LU DECOMPOSITION
-  !        OF P IF MITER IS 1, 2 , 4, OR 5.
+  !        OF P IF MITER IS 1, 2, 4, OR 5.
   !        STORAGE OF MATRIX ELEMENTS STARTS AT WM(3).
   !        WM ALSO CONTAINS THE FOLLOWING MATRIX-RELATED DATA..
   !        WM(1) = SQRT(UROUND), USED IN NUMERICAL JACOBIAN INCREMENTS.
@@ -87,13 +87,13 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
       IF ( r0==0.0E0 ) r0 = 1.0E0
       srur = Wm(1)
       j1 = 2
-      DO j = 1 , N
+      DO j = 1, N
         yj = Y(j)
         r = MAX(srur*ABS(yj),r0*Ewt(j))
         Y(j) = Y(j) + r
         fac = -hl0/r
         CALL F(TN,Y,Ftem,Rpar,Ipar)
-        DO i = 1 , N
+        DO i = 1, N
           Wm(i+j1) = (Ftem(i)-Savf(i))*fac
         ENDDO
         Y(j) = yj
@@ -105,12 +105,12 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
       Wm(2) = hl0
       IER = 0
       r = EL0*0.1E0
-      DO i = 1 , N
+      DO i = 1, N
         Y(i) = Y(i) + r*(H*Savf(i)-Yh(i,2))
       ENDDO
       CALL F(TN,Y,Wm(3),Rpar,Ipar)
       NFE = NFE + 1
-      DO i = 1 , N
+      DO i = 1, N
         r0 = H*Savf(i) - Yh(i,2)
         di = 0.1E0*r0 - H*(Wm(i+2)-Savf(i))
         Wm(i+2) = 1.0E0
@@ -128,12 +128,12 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
       mband = ml + mu + 1
       meband = mband + ml
       lenp = meband*N
-      DO i = 1 , lenp
+      DO i = 1, lenp
         Wm(i+2) = 0.0E0
       ENDDO
       CALL JAC(TN,Y,Wm(ml3),meband,Rpar,Ipar)
       con = -hl0
-      DO i = 1 , lenp
+      DO i = 1, lenp
         Wm(i+2) = Wm(i+2)*con
       ENDDO
       GOTO 200
@@ -149,14 +149,14 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
       fac = VNWRMS(N,Savf,Ewt)
       r0 = 1000.0E0*ABS(H)*UROund*N*fac
       IF ( r0==0.0E0 ) r0 = 1.0E0
-      DO j = 1 , mba
-        DO i = j , N , mband
+      DO j = 1, mba
+        DO i = j, N, mband
           yi = Y(i)
           r = MAX(srur*ABS(yi),r0*Ewt(i))
           Y(i) = Y(i) + r
         ENDDO
         CALL F(TN,Y,Ftem,Rpar,Ipar)
-        DO jj = j , N , mband
+        DO jj = j, N, mband
           Y(jj) = Yh(jj,1)
           yjj = Y(jj)
           r = MAX(srur*ABS(yjj),r0*Ewt(jj))
@@ -164,7 +164,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
           i1 = MAX(jj-mu,1)
           i2 = MIN(jj+ml,N)
           ii = jj*meb1 - ml + 2
-          DO i = i1 , i2
+          DO i = i1, i2
             Wm(ii+i) = (Ftem(i)-Savf(i))*fac
           ENDDO
         ENDDO
@@ -174,18 +174,18 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
     CASE DEFAULT
       ! IF MITER = 1, CALL JAC AND MULTIPLY BY SCALAR. -----------------------
       lenp = N*N
-      DO i = 1 , lenp
+      DO i = 1, lenp
         Wm(i+2) = 0.0E0
       ENDDO
       CALL JAC(TN,Y,Wm(3),N,Rpar,Ipar)
       con = -hl0
-      DO i = 1 , lenp
+      DO i = 1, lenp
         Wm(i+2) = Wm(i+2)*con
       ENDDO
   END SELECT
   ! ADD IDENTITY MATRIX. -------------------------------------------------
   j = 3
-  DO i = 1 , N
+  DO i = 1, N
     Wm(j) = Wm(j) + 1.0E0
     j = j + (N+1)
   ENDDO
@@ -196,7 +196,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
   RETURN
   ! ADD IDENTITY MATRIX. -------------------------------------------------
   200  ii = mband + 2
-  DO i = 1 , N
+  DO i = 1, N
     Wm(ii) = Wm(ii) + 1.0E0
     ii = ii + meband
   ENDDO

@@ -23,9 +23,9 @@ REAL(8) FUNCTION DBEG(Reset)
   !     .. Scalar Arguments ..
   LOGICAL Reset
   !     .. Local Scalars ..
-  INTEGER i , ic , mi
+  INTEGER i, ic, mi
   !     .. Save statement ..
-  SAVE i , ic , mi
+  SAVE i, ic, mi
   !     .. Intrinsic Functions ..
   INTRINSIC REAL
   !***FIRST EXECUTABLE STATEMENT  DBEG

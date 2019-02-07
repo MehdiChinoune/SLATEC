@@ -21,18 +21,18 @@ SUBROUTINE DSOSQX(Lun,Kprint,Ipass)
   !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
   !***END PROLOGUE  DSOSQX
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
-  REAL(8) :: aer , fnorm , fnorms , rer , tolf
-  INTEGER icnt , iflag , iflags , liw , lwa , n
+  REAL(8) :: aer, fnorm, fnorms, rer, tolf
+  INTEGER icnt, iflag, iflags, liw, lwa, n
   !     .. Local Arrays ..
-  REAL(8) :: fvec(2) , wa(17) , x(2)
-  INTEGER itest(2) , iw(6)
+  REAL(8) :: fvec(2), wa(17), x(2)
+  INTEGER itest(2), iw(6)
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DNRM2 , DSOSFN
-  EXTERNAL D1MACH , DNRM2 , DSOSFN
+  REAL(8) :: D1MACH, DNRM2, DSOSFN
+  EXTERNAL D1MACH, DNRM2, DSOSFN
   !     .. External Subroutines ..
-  EXTERNAL DSOS , PASS
+  EXTERNAL DSOS, PASS
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
   !***FIRST EXECUTABLE STATEMENT  DSOSQX
@@ -62,7 +62,7 @@ SUBROUTINE DSOSQX(Lun,Kprint,Ipass)
   !
   IF ( Kprint/=0 ) THEN
     IF ( Kprint>=3.OR.(Kprint>=2.AND.itest(icnt)/=1) ) WRITE (Lun,99002)&
-      iflags , fnorms , iflag , fnorm
+      iflags, fnorms, iflag, fnorm
     99002   FORMAT (' EXPECTED VALUE OF IFLAG AND RESIDUAL NORM',I5,&
       D20.5/' RETURNED VALUE OF IFLAG AND RESIDUAL NORM',I5,D20.5/)
     IF ( Kprint>=2.OR.(Kprint==1.AND.itest(icnt)/=1) )&

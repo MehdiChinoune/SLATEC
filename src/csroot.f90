@@ -20,7 +20,7 @@ SUBROUTINE CSROOT(Xr,Xi,Yr,Yi)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CSROOT
-  REAL Xr , Xi , Yr , Yi , s , tr , ti , PYTHAG
+  REAL Xr, Xi, Yr, Yi, s, tr, ti, PYTHAG
   !
   !     BRANCH CHOSEN SO THAT YR .GE. 0.0 AND SIGN(YI) .EQ. SIGN(XI)
   !***FIRST EXECUTABLE STATEMENT  CSROOT

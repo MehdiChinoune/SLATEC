@@ -19,10 +19,10 @@ SUBROUTINE CSICO(A,Lda,N,Kpvt,Rcond,Z)
   !     symmetric pivoting and estimates the condition of the matrix.
   !
   !     If  RCOND  is not needed, CSIFA is slightly faster.
-  !     To solve  A*X = B , follow CSICO by CSISL.
-  !     To compute  INVERSE(A)*C , follow CSICO by CSISL.
-  !     To compute  INVERSE(A) , follow CSICO by CSIDI.
-  !     To compute  DETERMINANT(A) , follow CSICO by CSIDI.
+  !     To solve  A*X = B, follow CSICO by CSISL.
+  !     To compute  INVERSE(A)*C, follow CSICO by CSISL.
+  !     To compute  INVERSE(A), follow CSICO by CSIDI.
+  !     To compute  DETERMINANT(A), follow CSICO by CSIDI.
   !
   !     On Entry
   !
@@ -42,8 +42,8 @@ SUBROUTINE CSICO(A,Lda,N,Kpvt,Rcond,Z)
   !                were used to obtain it.
   !                The factorization can be written  A = U*D*TRANS(U)
   !                where  U  is a product of permutation and unit
-  !                upper triangular matrices , TRANS(U) is the
-  !                transpose of  U , and  D  is block diagonal
+  !                upper triangular matrices, TRANS(U) is the
+  !                transpose of  U, and  D  is block diagonal
   !                with 1 by 1 and 2 by 2 blocks.
   !
   !        KVPT    INTEGER(N)
@@ -51,7 +51,7 @@ SUBROUTINE CSICO(A,Lda,N,Kpvt,Rcond,Z)
   !
   !        RCOND   REAL
   !                an estimate of the reciprocal condition of  A .
-  !                For the system  A*X = B , relative perturbations
+  !                For the system  A*X = B, relative perturbations
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -82,30 +82,30 @@ SUBROUTINE CSICO(A,Lda,N,Kpvt,Rcond,Z)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CSICO
-  INTEGER Lda , N , Kpvt(*)
-  COMPLEX A(Lda,*) , Z(*)
+  INTEGER Lda, N, Kpvt(*)
+  COMPLEX A(Lda,*), Z(*)
   REAL Rcond
   !
-  COMPLEX ak , akm1 , bk , bkm1 , CDOTU , denom , ek , t
-  REAL anorm , s , SCASUM , ynorm
-  INTEGER i , info , j , jm1 , k , kp , kps , ks
+  COMPLEX ak, akm1, bk, bkm1, CDOTU, denom, ek, t
+  REAL anorm, s, SCASUM, ynorm
+  INTEGER i, info, j, jm1, k, kp, kps, ks
   REAL, EXTERNAL :: CABS1
   COMPLEX, EXTERNAL :: CSIGN1
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !
   !***FIRST EXECUTABLE STATEMENT  CSICO
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = CMPLX(SCASUM(j,A(1,j),1),0.0E0)
     jm1 = j - 1
     IF ( jm1>=1 ) THEN
-      DO i = 1 , jm1
+      DO i = 1, jm1
         Z(i) = CMPLX(REAL(Z(i))+CABS1(A(i,j)),0.0E0)
       ENDDO
     ENDIF
   ENDDO
   anorm = 0.0E0
-  DO j = 1 , N
+  DO j = 1, N
     anorm = MAX(anorm,REAL(Z(j)))
   ENDDO
   !
@@ -122,7 +122,7 @@ SUBROUTINE CSICO(A,Lda,N,Kpvt,Rcond,Z)
   !     SOLVE U*D*W = E
   !
   ek = (1.0E0,0.0E0)
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = (0.0E0,0.0E0)
   ENDDO
   k = N

@@ -17,11 +17,11 @@ SUBROUTINE DSPFA(Ap,N,Kpvt,Info)
   !     DSPFA factors a double precision symmetric matrix stored in
   !     packed form by elimination with symmetric pivoting.
   !
-  !     To solve  A*X = B , follow DSPFA by DSPSL.
-  !     To compute  INVERSE(A)*C , follow DSPFA by DSPSL.
-  !     To compute  DETERMINANT(A) , follow DSPFA by DSPDI.
-  !     To compute  INERTIA(A) , follow DSPFA by DSPDI.
-  !     To compute  INVERSE(A) , follow DSPFA by DSPDI.
+  !     To solve  A*X = B, follow DSPFA by DSPSL.
+  !     To compute  INVERSE(A)*C, follow DSPFA by DSPSL.
+  !     To compute  DETERMINANT(A), follow DSPFA by DSPDI.
+  !     To compute  INERTIA(A), follow DSPFA by DSPDI.
+  !     To compute  INVERSE(A), follow DSPFA by DSPDI.
   !
   !     On Entry
   !
@@ -41,7 +41,7 @@ SUBROUTINE DSPFA(Ap,N,Kpvt,Info)
   !                The factorization can be written  A = U*D*TRANS(U)
   !                where  U  is a product of permutation and unit
   !                upper triangular matrices, TRANS(U) is the
-  !                transpose of  U , and  D  is block diagonal
+  !                transpose of  U, and  D  is block diagonal
   !                with 1 by 1 and 2 by 2 blocks.
   !
   !        KPVT    INTEGER(N)
@@ -81,14 +81,14 @@ SUBROUTINE DSPFA(Ap,N,Kpvt,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSPFA
-  INTEGER N , Kpvt(*) , Info
+  INTEGER N, Kpvt(*), Info
   REAL(8) :: Ap(*)
   !
-  REAL(8) :: ak , akm1 , bk , bkm1 , denom , mulk , mulkm1 , t
-  REAL(8) :: absakk , alpha , colmax , rowmax
-  INTEGER IDAMAX , ij , ik , ikm1 , im , imax , imaxp1 , imim , imj , imk
-  INTEGER j , jj , jk , jkm1 , jmax , jmim , k , kk , km1 , km1k , km1km1 , &
-    km2 , kstep
+  REAL(8) :: ak, akm1, bk, bkm1, denom, mulk, mulkm1, t
+  REAL(8) :: absakk, alpha, colmax, rowmax
+  INTEGER IDAMAX, ij, ik, ikm1, im, imax, imaxp1, imim, imj, imk
+  INTEGER j, jj, jk, jkm1, jmax, jmim, k, kk, km1, km1k, km1km1, &
+    km2, kstep
   LOGICAL swap
   !***FIRST EXECUTABLE STATEMENT  DSPFA
   !
@@ -135,7 +135,7 @@ SUBROUTINE DSPFA(Ap,N,Kpvt,Info)
         imaxp1 = imax + 1
         im = imax*(imax-1)/2
         imj = im + 2*imax
-        DO j = imaxp1 , k
+        DO j = imaxp1, k
           rowmax = MAX(rowmax,ABS(Ap(imj)))
           imj = imj + j
         ENDDO
@@ -177,7 +177,7 @@ SUBROUTINE DSPFA(Ap,N,Kpvt,Info)
           !
           CALL DSWAP(imax,Ap(im+1),1,Ap(ikm1+1),1)
           imj = ikm1 + imax
-          DO jj = imax , km1
+          DO jj = imax, km1
             j = km1 + imax - jj
             jkm1 = ikm1 + j
             t = Ap(jkm1)
@@ -199,7 +199,7 @@ SUBROUTINE DSPFA(Ap,N,Kpvt,Info)
           akm1 = Ap(km1km1)/Ap(km1k)
           denom = 1.0D0 - ak*akm1
           ij = ik - (k-1) - (k-2)
-          DO jj = 1 , km2
+          DO jj = 1, km2
             j = km1 - jj
             jk = ik + j
             bk = Ap(jk)/Ap(km1k)
@@ -232,7 +232,7 @@ SUBROUTINE DSPFA(Ap,N,Kpvt,Info)
           !
           CALL DSWAP(imax,Ap(im+1),1,Ap(ik+1),1)
           imj = ik + imax
-          DO jj = imax , k
+          DO jj = imax, k
             j = k + imax - jj
             jk = ik + j
             t = Ap(jk)
@@ -245,7 +245,7 @@ SUBROUTINE DSPFA(Ap,N,Kpvt,Info)
         !           PERFORM THE ELIMINATION.
         !
         ij = ik - (k-1)
-        DO jj = 1 , km1
+        DO jj = 1, km1
           j = k - jj
           jk = ik + j
           mulk = -Ap(jk)/Ap(kk)

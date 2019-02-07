@@ -80,29 +80,29 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  HTRID3
   !
-  INTEGER i , j , k , l , N , ii , Nm , jm1 , jp1
-  REAL A(Nm,*) , D(*) , E(*) , E2(*) , Tau(2,*)
-  REAL f , g , h , fi , gi , hh , si , scale
+  INTEGER i, j, k, l, N, ii, Nm, jm1, jp1
+  REAL A(Nm,*), D(*), E(*), E2(*), Tau(2,*)
+  REAL f, g, h, fi, gi, hh, si, scale
   REAL PYTHAG
   !
   !***FIRST EXECUTABLE STATEMENT  HTRID3
   Tau(1,N) = 1.0E0
   Tau(2,N) = 0.0E0
   !     .......... FOR I=N STEP -1 UNTIL 1 DO -- ..........
-  DO ii = 1 , N
+  DO ii = 1, N
     i = N + 1 - ii
     l = i - 1
     h = 0.0E0
     scale = 0.0E0
     IF ( l>=1 ) THEN
       !     .......... SCALE ROW (ALGOL TOL THEN NOT NEEDED) ..........
-      DO k = 1 , l
+      DO k = 1, l
         scale = scale + ABS(A(i,k)) + ABS(A(k,i))
       ENDDO
       !
       IF ( scale/=0.0E0 ) THEN
         !
-        DO k = 1 , l
+        DO k = 1, l
           A(i,k) = A(i,k)/scale
           A(k,i) = A(k,i)/scale
           h = h + A(i,k)*A(i,k) + A(k,i)*A(k,i)
@@ -138,13 +138,13 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
     GOTO 150
     50     f = 0.0E0
     !
-    DO j = 1 , l
+    DO j = 1, l
       g = 0.0E0
       gi = 0.0E0
       IF ( j/=1 ) THEN
         jm1 = j - 1
         !     .......... FORM ELEMENT OF A*U ..........
-        DO k = 1 , jm1
+        DO k = 1, jm1
           g = g + A(j,k)*A(i,k) + A(k,j)*A(k,i)
           gi = gi - A(j,k)*A(k,i) + A(k,j)*A(i,k)
         ENDDO
@@ -155,7 +155,7 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
       jp1 = j + 1
       IF ( l>=jp1 ) THEN
         !
-        DO k = jp1 , l
+        DO k = jp1, l
           g = g + A(k,j)*A(i,k) - A(j,k)*A(k,i)
           gi = gi - A(k,j)*A(k,i) - A(j,k)*A(i,k)
         ENDDO
@@ -168,7 +168,7 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
     !
     hh = f/(h+h)
     !     .......... FORM REDUCED A ..........
-    DO j = 1 , l
+    DO j = 1, l
       f = A(i,j)
       g = E(j) - hh*f
       E(j) = g
@@ -179,7 +179,7 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
       IF ( j/=1 ) THEN
         jm1 = j - 1
         !
-        DO k = 1 , jm1
+        DO k = 1, jm1
           A(j,k) = A(j,k) - f*E(k) - g*A(i,k) + fi*Tau(2,k) + gi*A(k,i)
           A(k,j) = A(k,j) - f*Tau(2,k) - g*A(k,i) - fi*E(k) - gi*A(i,k)
         ENDDO
@@ -187,7 +187,7 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
       !
     ENDDO
     !
-    100    DO k = 1 , l
+    100    DO k = 1, l
     A(i,k) = scale*A(i,k)
     A(k,i) = scale*A(k,i)
   ENDDO

@@ -46,7 +46,7 @@ REAL FUNCTION SASUM(N,Sx,Incx)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SASUM
   REAL Sx(*)
-  INTEGER i , Incx , ix , m , mp1 , N
+  INTEGER i, Incx, ix, m, mp1, N
   !***FIRST EXECUTABLE STATEMENT  SASUM
   SASUM = 0.0E0
   IF ( N<=0 ) RETURN
@@ -59,13 +59,13 @@ REAL FUNCTION SASUM(N,Sx,Incx)
     !
     m = MOD(N,6)
     IF ( m/=0 ) THEN
-      DO i = 1 , m
+      DO i = 1, m
         SASUM = SASUM + ABS(Sx(i))
       ENDDO
       IF ( N<6 ) RETURN
     ENDIF
     mp1 = m + 1
-    DO i = mp1 , N , 6
+    DO i = mp1, N, 6
       SASUM = SASUM + ABS(Sx(i)) + ABS(Sx(i+1)) + ABS(Sx(i+2))&
         + ABS(Sx(i+3)) + ABS(Sx(i+4)) + ABS(Sx(i+5))
     ENDDO
@@ -75,7 +75,7 @@ REAL FUNCTION SASUM(N,Sx,Incx)
     !
     ix = 1
     IF ( Incx<0 ) ix = (-N+1)*Incx + 1
-    DO i = 1 , N
+    DO i = 1, N
       SASUM = SASUM + ABS(Sx(ix))
       ix = ix + Incx
     ENDDO

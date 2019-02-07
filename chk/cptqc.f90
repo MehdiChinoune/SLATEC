@@ -4,7 +4,7 @@ SUBROUTINE CPTQC(Lun,Kprint,Nerr)
   IMPLICIT NONE
   !*--CPTQC5
   !*** Start of declarations inserted by SPAG
-  INTEGER Kprint , Lun
+  INTEGER Kprint, Lun
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CPTQC
   !***PURPOSE  Quick check for CPTSL.
@@ -35,17 +35,17 @@ SUBROUTINE CPTQC(Lun,Kprint,Nerr)
   !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
   !           FORMATs.  (RWC)
   !***END PROLOGUE  CPTQC
-  COMPLEX d(4) , e(4) , b(4) , cx(4) , dt(4) , et(4) , bt(4)
-  INTEGER n , i , indx , Nerr
+  COMPLEX d(4), e(4), b(4), cx(4), dt(4), et(4), bt(4)
+  INTEGER n, i, indx, Nerr
   REAL delx
-  DATA d/(2.E0,0.E0) , (2.E0,0.E0) , (3.E0,0.E0) , (4.E0,0.E0)/
-  DATA e/(0.E0,-1.E0) , (0.E0,0.E0) , (0.E0,-1.E0) , (0.E0,0.E0)/
-  DATA b/(3.E0,2.E0) , (-1.E0,3.E0) , (0.E0,-4.E0) , (5.E0,0.E0)/
-  DATA cx/(1.E0,1.E0) , (0.E0,1.E0) , (0.E0,-1.E0) , (1.E0,0.E0)/
+  DATA d/(2.E0,0.E0), (2.E0,0.E0), (3.E0,0.E0), (4.E0,0.E0)/
+  DATA e/(0.E0,-1.E0), (0.E0,0.E0), (0.E0,-1.E0), (0.E0,0.E0)/
+  DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
+  DATA cx/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
   !***FIRST EXECUTABLE STATEMENT  CPTQC
   n = 4
   Nerr = 0
-  DO i = 1 , n
+  DO i = 1, n
     dt(i) = d(i)
     et(i) = e(i)
     bt(i) = b(i)
@@ -53,7 +53,7 @@ SUBROUTINE CPTQC(Lun,Kprint,Nerr)
   !
   CALL CPTSL(n,dt,et,bt)
   indx = 0
-  DO i = 1 , n
+  DO i = 1, n
     delx = ABS(REAL(bt(i)-cx(i))) + ABS(AIMAG(bt(i)-cx(i)))
     IF ( delx>.0001 ) indx = indx + 1
   ENDDO

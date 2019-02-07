@@ -4,9 +4,9 @@ FUNCTION R9GMIC(A,X,Alx)
   IMPLICIT NONE
   !*--R9GMIC5
   !*** Start of declarations inserted by SPAG
-  REAL A , alng , ALNGAM , Alx , bot , eps , euler , fk , fkp1 , fm , &
-    R1MACH , R9GMIC , s , sgng , t , te , X
-  INTEGER k , m , ma , mm1
+  REAL A, alng, ALNGAM, Alx, bot, eps, euler, fk, fkp1, fm, &
+    R1MACH, R9GMIC, s, sgng, t, te, X
+  INTEGER k, m, ma, mm1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9GMIC
   !***SUBSIDIARY
@@ -33,9 +33,9 @@ FUNCTION R9GMIC(A,X,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  R9GMIC
-  SAVE euler , eps , bot
+  SAVE euler, eps, bot
   DATA euler/.5772156649015329E0/
-  DATA eps , bot/2*0.0/
+  DATA eps, bot/2*0.0/
   !***FIRST EXECUTABLE STATEMENT  R9GMIC
   IF ( eps==0.0 ) eps = 0.5*R1MACH(3)
   IF ( bot==0.0 ) bot = LOG(R1MACH(1))
@@ -51,7 +51,7 @@ FUNCTION R9GMIC(A,X,Alx)
   te = 1.0
   t = 1.0
   s = t
-  DO k = 1 , 200
+  DO k = 1, 200
     fkp1 = k + 1
     te = -X*te/(fm+fkp1)
     t = te/fkp1
@@ -71,7 +71,7 @@ FUNCTION R9GMIC(A,X,Alx)
   t = 1.0
   s = t
   mm1 = m - 1
-  DO k = 1 , mm1
+  DO k = 1, mm1
     fk = k
     te = -X*te/fk
     t = te/(fm-fk)
@@ -79,7 +79,7 @@ FUNCTION R9GMIC(A,X,Alx)
     IF ( ABS(t)<eps*ABS(s) ) EXIT
   ENDDO
   !
-  DO k = 1 , m
+  DO k = 1, m
     R9GMIC = R9GMIC + 1.0/k
   ENDDO
   !

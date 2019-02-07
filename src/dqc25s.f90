@@ -90,28 +90,28 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQC25S
   !
-  REAL(8) :: A , Abserr , Alfa , B , Beta , Bl , Br , centr , cheb12 , &
-    cheb24 , dc , F , factor , fix , fval , hlgth , resabs , &
-    Resasc , Result , res12 , res24 , Rg , Rh , Ri , Rj , u , &
-    DQWGTS , x
-  INTEGER i , Integr , isym , Nev
+  REAL(8) :: A, Abserr, Alfa, B, Beta, Bl, Br, centr, cheb12, &
+    cheb24, dc, F, factor, fix, fval, hlgth, resabs, &
+    Resasc, Result, res12, res24, Rg, Rh, Ri, Rj, u, &
+    DQWGTS, x
+  INTEGER i, Integr, isym, Nev
   !
-  DIMENSION cheb12(13) , cheb24(25) , fval(25) , Rg(25) , Rh(25) , Ri(25) , &
-    Rj(25) , x(11)
+  DIMENSION cheb12(13), cheb24(25), fval(25), Rg(25), Rh(25), Ri(25), &
+    Rj(25), x(11)
   !
-  EXTERNAL F , DQWGTS
+  EXTERNAL F, DQWGTS
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24)
   !           K = 1, ..., 11, TO BE USED FOR THE COMPUTATION OF THE
   !           CHEBYSHEV SERIES EXPANSION OF F.
   !
   SAVE x
-  DATA x(1) , x(2) , x(3) , x(4) , x(5) , x(6) , x(7) , x(8) , x(9) , &
-    x(10) , x(11)/0.9914448613738104D+00 , 0.9659258262890683D+00 , &
-    0.9238795325112868D+00 , 0.8660254037844386D+00 , &
-    0.7933533402912352D+00 , 0.7071067811865475D+00 , &
-    0.6087614290087206D+00 , 0.5000000000000000D+00 , &
-    0.3826834323650898D+00 , 0.2588190451025208D+00 , &
+  DATA x(1), x(2), x(3), x(4), x(5), x(6), x(7), x(8), x(9), &
+    x(10), x(11)/0.9914448613738104D+00, 0.9659258262890683D+00, &
+    0.9238795325112868D+00, 0.8660254037844386D+00, &
+    0.7933533402912352D+00, 0.7071067811865475D+00, &
+    0.6087614290087206D+00, 0.5000000000000000D+00, &
+    0.3826834323650898D+00, 0.2588190451025208D+00, &
     0.1305261922200516D+00/
   !
   !           LIST OF MAJOR VARIABLES
@@ -151,7 +151,7 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     fval(1) = 0.5D+00*F(hlgth+centr)*(fix-hlgth)**Beta
     fval(13) = F(centr)*(fix**Beta)
     fval(25) = 0.5D+00*F(centr-hlgth)*(fix+hlgth)**Beta
-    DO i = 2 , 12
+    DO i = 2, 12
       u = hlgth*x(i-1)
       isym = 26 - i
       fval(i) = F(u+centr)*(fix-u)**Beta
@@ -171,7 +171,7 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
       fval(1) = fval(1)*LOG(fix-hlgth)
       fval(13) = fval(13)*LOG(fix)
       fval(25) = fval(25)*LOG(fix+hlgth)
-      DO i = 2 , 12
+      DO i = 2, 12
         u = hlgth*x(i-1)
         isym = 26 - i
         fval(i) = fval(i)*LOG(fix-u)
@@ -181,11 +181,11 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
       !
       !           INTEGR = 3  (OR 4)
       !
-      DO i = 1 , 13
+      DO i = 1, 13
         res12 = res12 + cheb12(i)*Ri(i)
         res24 = res24 + cheb24(i)*Ri(i)
       ENDDO
-      DO i = 14 , 25
+      DO i = 14, 25
         res24 = res24 + cheb24(i)*Ri(i)
       ENDDO
       IF ( Integr/=3 ) THEN
@@ -197,11 +197,11 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
         Abserr = ABS((res24-res12)*dc)
         res12 = 0.0D+00
         res24 = 0.0D+00
-        DO i = 1 , 13
+        DO i = 1, 13
           res12 = res12 + cheb12(i)*Rg(i)
           res24 = res24 + cheb24(i)*Rg(i)
         ENDDO
-        DO i = 14 , 25
+        DO i = 14, 25
           res24 = res24 + cheb24(i)*Rg(i)
         ENDDO
       ENDIF
@@ -210,11 +210,11 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
       !
       !           INTEGR = 1  (OR 2)
       !
-      DO i = 1 , 13
+      DO i = 1, 13
         res12 = res12 + cheb12(i)*Ri(i)
         res24 = res24 + cheb24(i)*Ri(i)
       ENDDO
-      DO i = 14 , 25
+      DO i = 14, 25
         res24 = res24 + cheb24(i)*Ri(i)
       ENDDO
       IF ( Integr/=1 ) THEN
@@ -226,11 +226,11 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
         Abserr = ABS((res24-res12)*dc)
         res12 = 0.0D+00
         res24 = 0.0D+00
-        DO i = 1 , 13
+        DO i = 1, 13
           res12 = res12 + cheb12(i)*Rg(i)
           res24 = res12 + cheb24(i)*Rg(i)
         ENDDO
-        DO i = 14 , 25
+        DO i = 14, 25
           res24 = res24 + cheb24(i)*Rg(i)
         ENDDO
       ENDIF
@@ -253,7 +253,7 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     fval(1) = 0.5D+00*F(hlgth+centr)*(fix+hlgth)**Alfa
     fval(13) = F(centr)*(fix**Alfa)
     fval(25) = 0.5D+00*F(centr-hlgth)*(fix-hlgth)**Alfa
-    DO i = 2 , 12
+    DO i = 2, 12
       u = hlgth*x(i-1)
       isym = 26 - i
       fval(i) = F(u+centr)*(fix+u)**Alfa
@@ -273,7 +273,7 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
       fval(1) = fval(1)*LOG(fix+hlgth)
       fval(13) = fval(13)*LOG(fix)
       fval(25) = fval(25)*LOG(fix-hlgth)
-      DO i = 2 , 12
+      DO i = 2, 12
         u = hlgth*x(i-1)
         isym = 26 - i
         fval(i) = fval(i)*LOG(u+fix)
@@ -283,11 +283,11 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
       !
       !           INTEGR = 2  (OR 4)
       !
-      DO i = 1 , 13
+      DO i = 1, 13
         res12 = res12 + cheb12(i)*Rj(i)
         res24 = res24 + cheb24(i)*Rj(i)
       ENDDO
-      DO i = 14 , 25
+      DO i = 14, 25
         res24 = res24 + cheb24(i)*Rj(i)
       ENDDO
       IF ( Integr/=2 ) THEN
@@ -299,11 +299,11 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
         !
         !           INTEGR = 4
         !
-        DO i = 1 , 13
+        DO i = 1, 13
           res12 = res12 + cheb12(i)*Rh(i)
           res24 = res24 + cheb24(i)*Rh(i)
         ENDDO
-        DO i = 14 , 25
+        DO i = 14, 25
           res24 = res24 + cheb24(i)*Rh(i)
         ENDDO
       ENDIF
@@ -312,11 +312,11 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
       !           INTEGR = 1  (OR 3)
       !
       CALL DQCHEB(x,fval,cheb12,cheb24)
-      DO i = 1 , 13
+      DO i = 1, 13
         res12 = res12 + cheb12(i)*Rj(i)
         res24 = res24 + cheb24(i)*Rj(i)
       ENDDO
-      DO i = 14 , 25
+      DO i = 14, 25
         res24 = res24 + cheb24(i)*Rj(i)
       ENDDO
       IF ( Integr/=1 ) THEN
@@ -328,11 +328,11 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
         Abserr = ABS((res24-res12)*dc)
         res12 = 0.0D+00
         res24 = 0.0D+00
-        DO i = 1 , 13
+        DO i = 1, 13
           res12 = res12 + cheb12(i)*Rh(i)
           res24 = res24 + cheb24(i)*Rh(i)
         ENDDO
-        DO i = 14 , 25
+        DO i = 14, 25
           res24 = res24 + cheb24(i)*Rh(i)
         ENDDO
       ENDIF

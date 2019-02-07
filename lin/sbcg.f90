@@ -267,23 +267,23 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  SBCG
   !     .. Scalar Arguments ..
-  REAL Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
+  REAL Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt) , B(N) , Dz(N) , P(N) , Pp(N) , R(N) , Rr(N) , Rwork(*) , &
-    X(N) , Z(N) , Zz(N)
-  INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
+  REAL A(Nelt), B(N), Dz(N), P(N), Pp(N), R(N), Rr(N), Rwork(*), &
+    X(N), Z(N), Zz(N)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC , MSOLVE , MTSOLV , MTTVEC
+  EXTERNAL MATVEC, MSOLVE, MTSOLV, MTTVEC
   !     .. Local Scalars ..
-  REAL ak , akden , bk , bkden , bknum , bnrm , fuzz , solnrm , tolmin
-  INTEGER i , k
+  REAL ak, akden, bk, bkden, bknum, bnrm, fuzz, solnrm, tolmin
+  INTEGER i, k
   !     .. External Functions ..
-  REAL R1MACH , SDOT
+  REAL R1MACH, SDOT
   INTEGER ISSBCG
-  EXTERNAL R1MACH , SDOT , ISSBCG
+  EXTERNAL R1MACH, SDOT, ISSBCG
   !     .. External Subroutines ..
-  EXTERNAL SAXPY , SCOPY
+  EXTERNAL SAXPY, SCOPY
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !***FIRST EXECUTABLE STATEMENT  SBCG
@@ -307,7 +307,7 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   !         Calculate initial residual and pseudo-residual, and check
   !         stopping criterion.
   CALL MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
-  DO i = 1 , N
+  DO i = 1, N
     R(i) = B(i) - R(i)
     Rr(i) = R(i)
   ENDDO
@@ -320,7 +320,7 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
     !
     !         ***** iteration loop *****
     !
-    DO k = 1 , Itmax
+    DO k = 1, Itmax
       Iter = k
       !
       !         Calculate coefficient BK and direction vectors P and PP.
@@ -334,7 +334,7 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
         CALL SCOPY(N,Zz,1,Pp,1)
       ELSE
         bk = bknum/bkden
-        DO i = 1 , N
+        DO i = 1, N
           P(i) = Z(i) + bk*P(i)
           Pp(i) = Zz(i) + bk*Pp(i)
         ENDDO
@@ -372,4 +372,5 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   ENDIF
   !
   !------------- LAST LINE OF SBCG FOLLOWS ----------------------------
-  99999 END SUBROUTINE SBCG
+  99999 CONTINUE
+  END SUBROUTINE SBCG

@@ -63,12 +63,12 @@ SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  QELG
   !
-  REAL Abserr , delta1 , delta2 , delta3 , R1MACH , epmach , epsinf , &
-    Epstab , error , err1 , err2 , err3 , e0 , e1 , e1abs , e2 , e3 , &
-    oflow , res , Result , Res3la , ss , tol1 , tol2 , tol3
-  INTEGER i , ib , ib2 , ie , indx , k1 , k2 , k3 , limexp , N , newelm , &
-    Nres , num
-  DIMENSION Epstab(52) , Res3la(3)
+  REAL Abserr, delta1, delta2, delta3, R1MACH, epmach, epsinf, &
+    Epstab, error, err1, err2, err3, e0, e1, e1abs, e2, e3, &
+    oflow, res, Result, Res3la, ss, tol1, tol2, tol3
+  INTEGER i, ib, ib2, ie, indx, k1, k2, k3, limexp, N, newelm, &
+    Nres, num
+  DIMENSION Epstab(52), Res3la(3)
   !
   !           LIST OF MAJOR VARIABLES
   !           -----------------------
@@ -107,7 +107,7 @@ SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
     Epstab(N) = oflow
     num = N
     k1 = N
-    DO i = 1 , newelm
+    DO i = 1, newelm
       k2 = k1 - 1
       k3 = k1 - 2
       res = Epstab(k1+2)
@@ -178,14 +178,14 @@ SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
     ib = 1
     IF ( (num/2)*2==num ) ib = 2
     ie = newelm + 1
-    DO i = 1 , ie
+    DO i = 1, ie
       ib2 = ib + 2
       Epstab(ib) = Epstab(ib2)
       ib = ib2
     ENDDO
     IF ( num/=N ) THEN
       indx = num - N + 1
-      DO i = 1 , N
+      DO i = 1, N
         Epstab(i) = Epstab(indx)
         indx = indx + 1
       ENDDO

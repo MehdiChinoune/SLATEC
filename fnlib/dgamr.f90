@@ -27,7 +27,7 @@ REAL(8) FUNCTION DGAMR(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DGAMR
-  REAL(8) :: X , alngx , sgngx , DGAMMA
+  REAL(8) :: X, alngx, sgngx, DGAMMA
   EXTERNAL DGAMMA
   !***FIRST EXECUTABLE STATEMENT  DGAMR
   DGAMR = 0.0D0
@@ -48,4 +48,5 @@ REAL(8) FUNCTION DGAMR(X)
   CALL XSETF(irold)
   RETURN
   !
-  99999 END FUNCTION DGAMR
+  99999 CONTINUE
+  END FUNCTION DGAMR

@@ -48,9 +48,9 @@ COMPLEX FUNCTION CDCDOT(N,Cb,Cx,Incx,Cy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CDCDOT
-  INTEGER N , Incx , Incy , i , kx , ky
-  COMPLEX Cx(*) , Cy(*) , Cb
-  REAL(8) :: dsdotr , dsdoti , dt1 , dt2 , dt3 , dt4
+  INTEGER N, Incx, Incy, i, kx, ky
+  COMPLEX Cx(*), Cy(*), Cb
+  REAL(8) :: dsdotr, dsdoti, dt1, dt2, dt3, dt4
   !***FIRST EXECUTABLE STATEMENT  CDCDOT
   dsdotr = REAL(REAL(Cb), 8)
   dsdoti = REAL(AIMAG(Cb), 8)
@@ -59,7 +59,7 @@ COMPLEX FUNCTION CDCDOT(N,Cb,Cx,Incx,Cy,Incy)
     ky = 1
     IF ( Incx<0 ) kx = 1 + (1-N)*Incx
     IF ( Incy<0 ) ky = 1 + (1-N)*Incy
-    DO i = 1 , N
+    DO i = 1, N
       dt1 = REAL(REAL(Cx(kx)), 8)
       dt2 = REAL(REAL(Cy(ky)), 8)
       dt3 = REAL(AIMAG(Cx(kx)), 8)

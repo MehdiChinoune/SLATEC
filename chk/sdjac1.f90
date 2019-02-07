@@ -17,7 +17,7 @@ SUBROUTINE SDJAC1(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
   !           declarations explicit.  (FNF)
   !***END PROLOGUE  SDJAC1
   INTEGER Ipar(*)
-  REAL T , Y(*) , Yprime(*) , Pd(2,2) , Cj , Rpar(*)
+  REAL T, Y(*), Yprime(*), Pd(2,2), Cj, Rpar(*)
   !***FIRST EXECUTABLE STATEMENT  SDJAC1
   Pd(1,1) = Cj + 10.0E0
   Pd(1,2) = 0.0E0

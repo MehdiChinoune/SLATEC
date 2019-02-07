@@ -4,9 +4,9 @@ SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
   IMPLICIT NONE
   !*--DX45
   !*** Start of declarations inserted by SPAG
-  REAL AIT , BIT , CIT , DIT , DLX , DLX4 , DLY , DLY4 , TDLx3 , TDLy3 , U , &
-    Uxxx , Uxxxx
-  INTEGER I , Idmn , IS , J , JS , K , KSWx , KSWy , L , MIT , MS , NIT , NS
+  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, TDLx3, TDLy3, U, &
+    Uxxx, Uxxxx
+  INTEGER I, Idmn, IS, J, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DX4
   !***SUBSIDIARY
@@ -29,8 +29,8 @@ SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  DX4
   !
-  COMMON /SPL4  / KSWx , KSWy , K , L , AIT , BIT , CIT , DIT , MIT , NIT , &
-    IS , MS , JS , NS , DLX , DLY , TDLx3 , TDLy3 , DLX4 , &
+  COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
+    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
     DLY4
   DIMENSION U(Idmn,*)
   !***FIRST EXECUTABLE STATEMENT  DX4
@@ -108,4 +108,5 @@ SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
   Uxxx = (-U(K-2,J)+2.0*U(K-1,J)-2.0*U(2,J)+U(3,J))/(TDLx3)
   Uxxxx = (U(K-2,J)-4.0*U(K-1,J)+6.0*U(1,J)-4.0*U(2,J)+U(3,J))/DLX4
   RETURN
-  99999 END SUBROUTINE DX4
+  99999 CONTINUE
+  END SUBROUTINE DX4

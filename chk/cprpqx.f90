@@ -24,19 +24,19 @@ SUBROUTINE CPRPQX(Lun,Kprint,Ipass)
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CPRPQX
-  INTEGER Kprint , Ipass , Lun
-  INTEGER ideg , idegp1 , info , i , j , id
-  REAL a(6) , err , erri , relerr
-  COMPLEX ac(6) , z(5) , zk(5) , w(21)
+  INTEGER Kprint, Ipass, Lun
+  INTEGER ideg, idegp1, info, i, j, id
+  REAL a(6), err, erri, relerr
+  COMPLEX ac(6), z(5), zk(5), w(21)
   DATA ideg/5/
-  DATA a/1. , -3.7 , 7.4 , -10.8 , 10.8 , -6.8/
-  DATA zk/(1.7,0.) , (1.,1.) , (1.,-1.) , (0.,1.4142135623730950488) , &
+  DATA a/1., -3.7, 7.4, -10.8, 10.8, -6.8/
+  DATA zk/(1.7,0.), (1.,1.), (1.,-1.), (0.,1.4142135623730950488), &
     (0.,-1.4142135623730950488)/
   !***FIRST EXECUTABLE STATEMENT  CPRPQX
   Ipass = 1
   idegp1 = ideg + 1
   relerr = SQRT(R1MACH(4))
-  DO j = 1 , idegp1
+  DO j = 1, idegp1
     ac(j) = CMPLX(a(j),0.)
   ENDDO
   info = 0
@@ -50,10 +50,10 @@ SUBROUTINE CPRPQX(Lun,Kprint,Ipass)
     IF ( info==2.AND.Kprint>=1 ) WRITE (Lun,99002)
     99002   FORMAT (' CPZERO TEST FAILS: NON-CONVERGENCE IN 125 ITERATIONS')
   ENDIF
-  DO j = 1 , ideg
+  DO j = 1, ideg
     err = ABS(z(j)-zk(1))
     id = 1
-    DO i = 2 , ideg
+    DO i = 2, ideg
       erri = ABS(z(j)-zk(i))
       IF ( erri<err ) id = i
       err = MIN(erri,err)
@@ -70,10 +70,10 @@ SUBROUTINE CPRPQX(Lun,Kprint,Ipass)
     IF ( info==2.AND.Kprint>=1 ) WRITE (Lun,99004)
     99004   FORMAT (' RPZERO TEST FAILS: NON-CONVERGENCE IN 125 ITERATIONS')
   ENDIF
-  DO j = 1 , ideg
+  DO j = 1, ideg
     err = ABS(z(j)-zk(1))
     id = 1
-    DO i = 2 , ideg
+    DO i = 2, ideg
       erri = ABS(z(j)-zk(i))
       IF ( erri<err ) id = i
       err = MIN(erri,err)

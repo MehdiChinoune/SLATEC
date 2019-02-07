@@ -4,7 +4,7 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
   !*--DXLEGF5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Id , Ierror , Ipqa , l , Mu1 , Mu2 , Nudiff
+  INTEGER i, Id, Ierror, Ipqa, l, Mu1, Mu2, Nudiff
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXLEGF
   !***PURPOSE  Compute normalized Legendre polynomials and associated
@@ -129,8 +129,8 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXLEGF
-  REAL(8) :: Pqa , Dnu1 , dnu2 , sx , Theta , x , pi2
-  DIMENSION Pqa(*) , Ipqa(*)
+  REAL(8) :: Pqa, Dnu1, dnu2, sx, Theta, x, pi2
+  DIMENSION Pqa(*), Ipqa(*)
   !
   !***FIRST EXECUTABLE STATEMENT  DXLEGF
   Ierror = 0
@@ -141,7 +141,7 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !        ZERO OUTPUT ARRAYS
   !
   l = (Mu2-Mu1) + Nudiff + 1
-  DO i = 1 , l
+  DO i = 1, l
     Pqa(i) = 0.D0
     Ipqa(i) = 0
   ENDDO
@@ -221,7 +221,7 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
               !        PLACE RESULTS IN REDUCED FORM IF POSSIBLE
               !        AND RETURN TO MAIN PROGRAM.
               !
-              DO i = 1 , l
+              DO i = 1, l
                 CALL DXRED(Pqa(i),Ipqa(i),Ierror)
                 IF ( Ierror/=0 ) RETURN
               ENDDO
@@ -239,4 +239,5 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
     210,1)
   Ierror = 210
   RETURN
-  99999 END SUBROUTINE DXLEGF
+  99999 CONTINUE
+  END SUBROUTINE DXLEGF

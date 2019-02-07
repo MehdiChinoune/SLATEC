@@ -19,13 +19,13 @@ SUBROUTINE ISRTQC(Lun,Kprint,Ipass)
   !   920511  Added error message tests.  (MAM)
   !***END PROLOGUE  ISRTQC
   !
-  INTEGER N , NTEST
+  INTEGER N, NTEST
   PARAMETER (N=9,NTEST=4)
   !
   LOGICAL fail
-  INTEGER x(N,NTEST) , xs(N,NTEST) , y(N) , yc(N)
-  INTEGER ix(N,NTEST) , iy(N) , kflag(NTEST) , Kprint , Lun , Ipass , j , &
-    i , kabs , ier , nerr , NUMXER , nn , kkflag
+  INTEGER x(N,NTEST), xs(N,NTEST), y(N), yc(N)
+  INTEGER ix(N,NTEST), iy(N), kflag(NTEST), Kprint, Lun, Ipass, j, &
+    i, kabs, ier, nerr, NUMXER, nn, kkflag
   !
   !     ---------
   !     TEST DATA
@@ -36,24 +36,24 @@ SUBROUTINE ISRTQC(Lun,Kprint,Ipass)
   !         IX  = PERMUTATION VECTOR, I.E.  X(IX(J)) = XS(J)
   !
   DATA kflag(1)/2/
-  DATA (x(i,1),i=1,N)/36 , 54 , -1 , 29 , 1 , 80 , 98 , 99 , 55/
-  DATA (ix(i,1),i=1,N)/3 , 5 , 4 , 1 , 2 , 9 , 6 , 7 , 8/
-  DATA (xs(i,1),i=1,N)/ - 1 , 1 , 29 , 36 , 54 , 55 , 80 , 98 , 99/
+  DATA (x(i,1),i=1,N)/36, 54, -1, 29, 1, 80, 98, 99, 55/
+  DATA (ix(i,1),i=1,N)/3, 5, 4, 1, 2, 9, 6, 7, 8/
+  DATA (xs(i,1),i=1,N)/ - 1, 1, 29, 36, 54, 55, 80, 98, 99/
   !
   DATA kflag(2)/ - 1/
-  DATA (x(i,2),i=1,N)/1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9/
-  DATA (ix(i,2),i=1,N)/9 , 8 , 7 , 6 , 5 , 4 , 3 , 2 , 1/
-  DATA (xs(i,2),i=1,N)/9 , 8 , 7 , 6 , 5 , 4 , 3 , 2 , 1/
+  DATA (x(i,2),i=1,N)/1, 2, 3, 4, 5, 6, 7, 8, 9/
+  DATA (ix(i,2),i=1,N)/9, 8, 7, 6, 5, 4, 3, 2, 1/
+  DATA (xs(i,2),i=1,N)/9, 8, 7, 6, 5, 4, 3, 2, 1/
   !
   DATA kflag(3)/ - 2/
-  DATA (x(i,3),i=1,N)/ - 9 , -8 , -7 , -6 , -5 , -4 , -3 , -2 , -1/
-  DATA (ix(i,3),i=1,N)/9 , 8 , 7 , 6 , 5 , 4 , 3 , 2 , 1/
-  DATA (xs(i,3),i=1,N)/ - 1 , -2 , -3 , -4 , -5 , -6 , -7 , -8 , -9/
+  DATA (x(i,3),i=1,N)/ - 9, -8, -7, -6, -5, -4, -3, -2, -1/
+  DATA (ix(i,3),i=1,N)/9, 8, 7, 6, 5, 4, 3, 2, 1/
+  DATA (xs(i,3),i=1,N)/ - 1, -2, -3, -4, -5, -6, -7, -8, -9/
   !
   DATA kflag(4)/1/
-  DATA (x(i,4),i=1,N)/36 , 54 , -1 , 29 , 1 , 80 , 98 , 99 , 55/
-  DATA (ix(i,4),i=1,N)/3 , 5 , 4 , 1 , 2 , 9 , 6 , 7 , 8/
-  DATA (xs(i,4),i=1,N)/ - 1 , 1 , 29 , 36 , 54 , 55 , 80 , 98 , 99/
+  DATA (x(i,4),i=1,N)/36, 54, -1, 29, 1, 80, 98, 99, 55/
+  DATA (ix(i,4),i=1,N)/3, 5, 4, 1, 2, 9, 6, 7, 8/
+  DATA (xs(i,4),i=1,N)/ - 1, 1, 29, 36, 54, 55, 80, 98, 99/
   !
   !***FIRST EXECUTABLE STATEMENT  ISRTQC
   IF ( Kprint>=2 ) THEN
@@ -67,11 +67,11 @@ SUBROUTINE ISRTQC(Lun,Kprint,Ipass)
   !                          CHECK ISORT
   !     -------------------------------------------------------------
   !
-  DO j = 1 , NTEST
+  DO j = 1, NTEST
     !
     !        ... SETUP PROBLEM
     !
-    DO i = 1 , N
+    DO i = 1, N
       y(i) = x(i,j)
       yc(i) = x(i,j)
     ENDDO
@@ -84,7 +84,7 @@ SUBROUTINE ISRTQC(Lun,Kprint,Ipass)
     !
     kabs = ABS(kflag(j))
     fail = .FALSE.
-    DO i = 1 , N
+    DO i = 1, N
       fail = fail .OR. (y(i)/=xs(i,j)) .OR. ((kabs==1).AND.(yc(i)/=x(i,j)))&
         .OR. ((kabs==2).AND.(yc(i)/=xs(i,j)))
     ENDDO
@@ -93,30 +93,30 @@ SUBROUTINE ISRTQC(Lun,Kprint,Ipass)
     !
     IF ( fail ) THEN
       Ipass = 0
-      IF ( Kprint>0 ) WRITE (Lun,99001) 'ISORT FAILED TEST ' , j
+      IF ( Kprint>0 ) WRITE (Lun,99001) 'ISORT FAILED TEST ', j
     ELSE
-      IF ( Kprint>=2 ) WRITE (Lun,99001) 'ISORT PASSED TEST ' , j
+      IF ( Kprint>=2 ) WRITE (Lun,99001) 'ISORT PASSED TEST ', j
     ENDIF
     IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
       WRITE (Lun,99001) '------------------------'
-      WRITE (Lun,99002) 'DETAILS OF ISORT TEST ' , j
+      WRITE (Lun,99002) 'DETAILS OF ISORT TEST ', j
       WRITE (Lun,99002) '------------------------'
       WRITE (Lun,99002) '1ST ARGUMENT (VECTOR TO BE SORTED)'
-      WRITE (Lun,99003) '             INPUT = ' , (x(i,j),i=1,N)
-      WRITE (Lun,99003) '   COMPUTED OUTPUT = ' , (y(i),i=1,N)
-      WRITE (Lun,99003) '    CORRECT OUTPUT = ' , (xs(i,j),i=1,N)
+      WRITE (Lun,99003) '             INPUT = ', (x(i,j),i=1,N)
+      WRITE (Lun,99003) '   COMPUTED OUTPUT = ', (y(i),i=1,N)
+      WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
       WRITE (Lun,99002) '2ND ARGUMENT (VECTOR CARRIED ALONG)'
-      WRITE (Lun,99003) '             INPUT = ' , (x(i,j),i=1,N)
-      WRITE (Lun,99003) '   COMPUTED OUTPUT = ' , (yc(i),i=1,N)
+      WRITE (Lun,99003) '             INPUT = ', (x(i,j),i=1,N)
+      WRITE (Lun,99003) '   COMPUTED OUTPUT = ', (yc(i),i=1,N)
       IF ( kabs==1 ) THEN
-        WRITE (Lun,99003) '    CORRECT OUTPUT = ' , (x(i,j),i=1,N)
+        WRITE (Lun,99003) '    CORRECT OUTPUT = ', (x(i,j),i=1,N)
       ELSE
-        WRITE (Lun,99003) '    CORRECT OUTPUT = ' , (xs(i,j),i=1,N)
+        WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
       ENDIF
       WRITE (Lun,99002) '3RD ARGUMENT (VECTOR LENGTH)'
-      WRITE (Lun,99004) '             INPUT = ' , N
+      WRITE (Lun,99004) '             INPUT = ', N
       WRITE (Lun,99002) '4TH ARGUMENT (TYPE OF SORT)'
-      WRITE (Lun,99004) '             INPUT = ' , kflag(j)
+      WRITE (Lun,99004) '             INPUT = ', kflag(j)
     ENDIF
   ENDDO
   !
@@ -124,11 +124,11 @@ SUBROUTINE ISRTQC(Lun,Kprint,Ipass)
   !                            CHECK IPSORT
   !     -------------------------------------------------------------
   !
-  DO j = 1 , NTEST
+  DO j = 1, NTEST
     !
     !        ... SETUP PROBLEM
     !
-    DO i = 1 , N
+    DO i = 1, N
       y(i) = x(i,j)
     ENDDO
     !
@@ -140,7 +140,7 @@ SUBROUTINE ISRTQC(Lun,Kprint,Ipass)
     !
     kabs = ABS(kflag(j))
     fail = .FALSE. .OR. (ier>0)
-    DO i = 1 , N
+    DO i = 1, N
       fail = fail .OR. (iy(i)/=ix(i,j)) .OR. ((kabs==1).AND.(y(i)/=x(i,j)))&
         .OR. ((kabs==2).AND.(y(i)/=xs(i,j)))
     ENDDO
@@ -149,29 +149,29 @@ SUBROUTINE ISRTQC(Lun,Kprint,Ipass)
     !
     IF ( fail ) THEN
       Ipass = 0
-      IF ( Kprint>0 ) WRITE (Lun,99001) 'IPSORT FAILED TEST ' , j
+      IF ( Kprint>0 ) WRITE (Lun,99001) 'IPSORT FAILED TEST ', j
     ELSE
-      IF ( Kprint>=2 ) WRITE (Lun,99001) 'IPSORT PASSED TEST ' , j
+      IF ( Kprint>=2 ) WRITE (Lun,99001) 'IPSORT PASSED TEST ', j
     ENDIF
     IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
       WRITE (Lun,99001) '-------------------------'
-      WRITE (Lun,99002) 'DETAILS OF IPSORT TEST ' , j
+      WRITE (Lun,99002) 'DETAILS OF IPSORT TEST ', j
       WRITE (Lun,99002) '-------------------------'
       WRITE (Lun,99002) '1ST ARGUMENT (VECTOR TO BE SORTED)'
-      WRITE (Lun,99003) '             INPUT = ' , (x(i,j),i=1,N)
-      WRITE (Lun,99003) '   COMPUTED OUTPUT = ' , (y(i),i=1,N)
+      WRITE (Lun,99003) '             INPUT = ', (x(i,j),i=1,N)
+      WRITE (Lun,99003) '   COMPUTED OUTPUT = ', (y(i),i=1,N)
       IF ( kabs==1 ) THEN
-        WRITE (Lun,99003) '    CORRECT OUTPUT = ' , (x(i,j),i=1,N)
+        WRITE (Lun,99003) '    CORRECT OUTPUT = ', (x(i,j),i=1,N)
       ELSE
-        WRITE (Lun,99003) '    CORRECT OUTPUT = ' , (xs(i,j),i=1,N)
+        WRITE (Lun,99003) '    CORRECT OUTPUT = ', (xs(i,j),i=1,N)
       ENDIF
       WRITE (Lun,99002) '2ND ARGUMENT (VECTOR LENGTH)'
-      WRITE (Lun,99004) '             INPUT = ' , N
+      WRITE (Lun,99004) '             INPUT = ', N
       WRITE (Lun,99002) '3RD ARGUMENT (PERMUTATION VECTOR)'
-      WRITE (Lun,99004) '   COMPUTED OUTPUT = ' , (iy(i),i=1,N)
-      WRITE (Lun,99004) '    CORRECT OUTPUT = ' , (ix(i,j),i=1,N)
+      WRITE (Lun,99004) '   COMPUTED OUTPUT = ', (iy(i),i=1,N)
+      WRITE (Lun,99004) '    CORRECT OUTPUT = ', (ix(i,j),i=1,N)
       WRITE (Lun,99002) '4TH ARGUMENT (TYPE OF SORT)'
-      WRITE (Lun,99004) '             INPUT = ' , kflag(j)
+      WRITE (Lun,99004) '             INPUT = ', kflag(j)
     ENDIF
     !
   ENDDO
@@ -210,12 +210,12 @@ SUBROUTINE ISRTQC(Lun,Kprint,Ipass)
   !                            CHECK IPPERM
   !     -------------------------------------------------------------
   !
-  DO j = 1 , NTEST
+  DO j = 1, NTEST
     !
     !        ... SETUP PROBLEM
     !
     kabs = ABS(kflag(j))
-    DO i = 1 , N
+    DO i = 1, N
       y(i) = x(i,j)
       IF ( kabs==1 ) THEN
         iy(i) = i
@@ -231,7 +231,7 @@ SUBROUTINE ISRTQC(Lun,Kprint,Ipass)
     !        ... EVALUATE RESULTS
     !
     fail = .FALSE. .OR. (ier>0)
-    DO i = 1 , N
+    DO i = 1, N
       fail = fail .OR. ((kabs==1).AND.(iy(i)/=i)) .OR. &
         ((kabs==2).AND.(iy(i)/=ix(i,j))) .OR. &
         ((kabs==1).AND.(y(i)/=x(i,j))) .OR. &
@@ -242,28 +242,28 @@ SUBROUTINE ISRTQC(Lun,Kprint,Ipass)
     !
     IF ( fail ) THEN
       Ipass = 0
-      IF ( Kprint>0 ) WRITE (Lun,99001) 'IPPERM FAILED TEST ' , j
+      IF ( Kprint>0 ) WRITE (Lun,99001) 'IPPERM FAILED TEST ', j
     ELSE
-      IF ( Kprint>=2 ) WRITE (Lun,99001) 'IPPERM PASSED TEST ' , j
+      IF ( Kprint>=2 ) WRITE (Lun,99001) 'IPPERM PASSED TEST ', j
     ENDIF
     IF ( (fail.AND.(Kprint>=2)).OR.(Kprint>=3) ) THEN
       WRITE (Lun,99001) '------------------------'
-      WRITE (Lun,99002) 'DETAILS OF IPPERM TEST' , j
+      WRITE (Lun,99002) 'DETAILS OF IPPERM TEST', j
       WRITE (Lun,99002) '------------------------'
       WRITE (Lun,99002) '1ST ARGUMENT (VECTOR TO BE PERMUTED)'
-      WRITE (Lun,99003) '             INPUT =' , (x(i,j),i=1,N)
-      WRITE (Lun,99003) '   COMPUTED OUTPUT =' , (y(i),i=1,N)
+      WRITE (Lun,99003) '             INPUT =', (x(i,j),i=1,N)
+      WRITE (Lun,99003) '   COMPUTED OUTPUT =', (y(i),i=1,N)
       IF ( kabs==1 ) THEN
-        WRITE (Lun,99003) '    CORRECT OUTPUT =' , (x(i,j),i=1,N)
+        WRITE (Lun,99003) '    CORRECT OUTPUT =', (x(i,j),i=1,N)
       ELSE
-        WRITE (Lun,99003) '    CORRECT OUTPUT =' , (xs(i,j),i=1,N)
+        WRITE (Lun,99003) '    CORRECT OUTPUT =', (xs(i,j),i=1,N)
       ENDIF
       WRITE (Lun,99002) '2ND ARGUMENT (VECTOR LENGTH)'
-      WRITE (Lun,99004) '             INPUT =' , N
+      WRITE (Lun,99004) '             INPUT =', N
       WRITE (Lun,99002) '3RD ARGUMENT (PERMUTATION VECTOR)'
-      WRITE (Lun,99004) '             INPUT =' , (iy(i),i=1,N)
+      WRITE (Lun,99004) '             INPUT =', (iy(i),i=1,N)
       WRITE (Lun,99002) '4TH ARGUMENT (ERROR FLAG)'
-      WRITE (Lun,99004) '             OUTPUT =' , ier
+      WRITE (Lun,99004) '             OUTPUT =', ier
     ENDIF
     !
   ENDDO

@@ -4,7 +4,7 @@ SUBROUTINE DTEST(Len,Dcomp,Dtrue,Dsize,Dfac,Kprint)
   IMPLICIT NONE
   !*--DTEST5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , ICAse , INCx , INCy , Kprint , Len , MODe , N , NPRint
+  INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DTEST
   !***PURPOSE  Compare arrays DCOMP and DTRUE.
@@ -31,15 +31,15 @@ SUBROUTINE DTEST(Len,Dcomp,Dtrue,Dsize,Dfac,Kprint)
   !   920211  Code restructured and information added to the DESCRIPTION
   !           section.  (WRB)
   !***END PROLOGUE  DTEST
-  REAL(8) :: Dcomp(*) , Dtrue(*) , Dsize(*) , Dfac , dd , releps , &
+  REAL(8) :: Dcomp(*), Dtrue(*), Dsize(*), Dfac, dd, releps, &
     D1MACH
   LOGICAL PASs
-  COMMON /COMBLA/ NPRint , ICAse , N , INCx , INCy , MODe , PASs
+  COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
   SAVE releps
   DATA releps/0.0D0/
   !***FIRST EXECUTABLE STATEMENT  DTEST
   IF ( releps==0.0D0 ) releps = D1MACH(4)
-  DO i = 1 , Len
+  DO i = 1, Len
     dd = ABS(Dcomp(i)-Dtrue(i))
     IF ( Dfac*dd>ABS(Dsize(i))*releps ) THEN
       !
@@ -58,8 +58,8 @@ SUBROUTINE DTEST(Len,Dcomp,Dtrue,Dsize,Dfac,Kprint)
             2X,'DIFFERENCE',5X,'SIZE(I)'/1X)
         ENDIF
       ENDIF
-      IF ( Kprint>=3 ) WRITE (NPRint,99003) ICAse , N , INCx , INCy , MODe , &
-        i , Dcomp(i) , Dtrue(i) , dd , Dsize(i)
+      IF ( Kprint>=3 ) WRITE (NPRint,99003) ICAse, N, INCx, INCy, MODe, &
+        i, Dcomp(i), Dtrue(i), dd, Dsize(i)
       99003     FORMAT (1X,I4,I3,3I5,I3,2D36.18,2D12.4)
     ENDIF
   ENDDO

@@ -4,9 +4,9 @@ SUBROUTINE SBOCQX(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--SBOCQX5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , ib , Ipass , irhs , itest , j , Kprint , Lun , mcon , mdw ,&
-    mode , mpass , mrows , ncols
-  REAL R1MACH , rnorm , rnormc , SNRM2 , sr
+  INTEGER i, ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw ,&
+    mode, mpass, mrows, ncols
+  REAL R1MACH, rnorm, rnormc, SNRM2, sr
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SBOCQX
   !***PURPOSE  Quick check for SBOCLS.
@@ -30,26 +30,26 @@ SUBROUTINE SBOCQX(Lun,Kprint,Ipass)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   901013  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
   !***END PROLOGUE  SBOCQX
-  REAL d(6,5) , w(11,11) , bl(5,2) , bu(5,2) , x(30) , rw(55) , xtrue(9)
+  REAL d(6,5), w(11,11), bl(5,2), bu(5,2), x(30), rw(55), xtrue(9)
   REAL c(5,5)
-  REAL bl1(10) , bu1(10)
-  INTEGER ind(10) , iw(20) , iopt(40)
+  REAL bl1(10), bu1(10)
+  INTEGER ind(10), iw(20), iopt(40)
   REAL rhs(6,2)
   CHARACTER(4) :: msg
   !
-  DATA ((c(i,j),i=1,5),j=1,5)/1. , 10. , 4. , 8. , 1. , 1. , 10. , 2. ,&
-    -1. , 1. , 1. , -3. , -3. , 2. , 1. , 1. , 5. , 5. , 5. , 1. , 1. ,&
-    4. , -1. , -3. , 1./
-  DATA ((d(i,j),i=1,6),j=1,5)/ - 74. , 14. , 66. , -12. , 3. , 4. , 80. ,&
-    -69. , -72. , 66. , 8. , -12. , 18. , 21. , -5. , -30. , -7. , 4. ,&
-    -11. , 28. , 7. , -23. , -4. , 4. , -4. , 0. , 1. , 3. , 1. , 0./
-  DATA ((bl(i,j),i=1,5),j=1,2)/1. , 0. , -1. , 1. , -4. , -1. , 0. , -3. ,&
-    1. , -6./
-  DATA ((bu(i,j),i=1,5),j=1,2)/3. , 2. , 1. , 3. , -2. , 3. , 4. , 1. , 5. ,&
+  DATA ((c(i,j),i=1,5),j=1,5)/1., 10., 4., 8., 1., 1., 10., 2. ,&
+    -1., 1., 1., -3., -3., 2., 1., 1., 5., 5., 5., 1., 1. ,&
+    4., -1., -3., 1./
+  DATA ((d(i,j),i=1,6),j=1,5)/ - 74., 14., 66., -12., 3., 4., 80. ,&
+    -69., -72., 66., 8., -12., 18., 21., -5., -30., -7., 4. ,&
+    -11., 28., 7., -23., -4., 4., -4., 0., 1., 3., 1., 0./
+  DATA ((bl(i,j),i=1,5),j=1,2)/1., 0., -1., 1., -4., -1., 0., -3. ,&
+    1., -6./
+  DATA ((bu(i,j),i=1,5),j=1,2)/3., 2., 1., 3., -2., 3., 4., 1., 5. ,&
     -2./
-  DATA ((rhs(i,j),i=1,6),j=1,2)/51. , -61. , -56. , 69. , 10. , -12. , -5. ,&
-    -9. , 708. , 4165. , -13266. , 8409./
-  DATA (xtrue(j),j=1,9)/1. , 2. , -1. , 3. , -4. , 1. , 32. , 30. , 31./
+  DATA ((rhs(i,j),i=1,6),j=1,2)/51., -61., -56., 69., 10., -12., -5. ,&
+    -9., 708., 4165., -13266., 8409./
+  DATA (xtrue(j),j=1,9)/1., 2., -1., 3., -4., 1., 32., 30., 31./
   !***FIRST EXECUTABLE STATEMENT  SBOCQX
   mdw = 11
   mrows = 6
@@ -62,12 +62,12 @@ SUBROUTINE SBOCQX(Lun,Kprint,Ipass)
   IF ( Kprint>=2 ) WRITE (Lun,99001)
   99001 FORMAT (' TEST   IB IRHS             SR')
   !
-  DO ib = 1 , 2
-    DO irhs = 1 , 2
+  DO ib = 1, 2
+    DO irhs = 1, 2
       !
       !           TRANSFER DATA TO WORKING ARRAY W(*,*).
       !
-      DO j = 1 , ncols
+      DO j = 1, ncols
         CALL SCOPY(mrows,d(1,j),1,w(1,j),1)
       ENDDO
       !
@@ -75,13 +75,13 @@ SUBROUTINE SBOCQX(Lun,Kprint,Ipass)
       !
       !             SET BOUND INDICATOR FLAGS.
       !
-      DO j = 1 , ncols
+      DO j = 1, ncols
         ind(j) = 3
       ENDDO
       !
       CALL SBOLS(w,mdw,mrows,ncols,bl(1,ib),bu(1,ib),ind,iopt,x,rnorm,mode,&
         rw,iw)
-      DO j = 1 , ncols
+      DO j = 1, ncols
         x(j) = x(j) - xtrue(j)
       ENDDO
       !
@@ -93,15 +93,15 @@ SUBROUTINE SBOCQX(Lun,Kprint,Ipass)
         msg = 'PASS'
         IF ( mpass==0 ) msg = 'FAIL'
         itest = itest + 1
-        WRITE (Lun,99003) itest , ib , irhs , sr , msg
+        WRITE (Lun,99003) itest, ib, irhs, sr, msg
       ENDIF
     ENDDO
   ENDDO
   !
   !     RUN STOER'S PROBLEM FROM 1971 SIAM J. N. ANAL. PAPER.
   !
-  DO ib = 1 , 2
-    DO irhs = 1 , 2
+  DO ib = 1, 2
+    DO irhs = 1, 2
       CALL SCOPY(11*10,0.E0,0,w,1)
       CALL SCOPY(ncols,bl(1,ib),1,bl1,1)
       CALL SCOPY(ncols,bu(1,ib),1,bu1,1)
@@ -114,7 +114,7 @@ SUBROUTINE SBOCQX(Lun,Kprint,Ipass)
       bu1(ncols+3) = 30.
       bl1(ncols+4) = 11.
       bu1(ncols+4) = 40.
-      DO j = 1 , ncols
+      DO j = 1, ncols
         CALL SCOPY(mcon,c(1,j),1,w(1,j),1)
         CALL SCOPY(mrows,d(1,j),1,w(mcon+1,j),1)
       ENDDO
@@ -134,7 +134,7 @@ SUBROUTINE SBOCQX(Lun,Kprint,Ipass)
       iopt(09) = 99
       CALL SBOCLS(w,mdw,mcon,mrows,ncols,bl1,bu1,ind,iopt,x,rnormc,rnorm,&
         mode,rw,iw)
-      DO j = 1 , ncols + mcon
+      DO j = 1, ncols + mcon
         x(j) = x(j) - xtrue(j)
       ENDDO
       !
@@ -146,7 +146,7 @@ SUBROUTINE SBOCQX(Lun,Kprint,Ipass)
         msg = 'PASS'
         IF ( mpass==0 ) msg = 'FAIL'
         itest = itest + 1
-        WRITE (Lun,99003) itest , ib , irhs , sr , msg
+        WRITE (Lun,99003) itest, ib, irhs, sr, msg
       ENDIF
     ENDDO
   ENDDO

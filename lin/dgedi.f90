@@ -71,12 +71,12 @@ SUBROUTINE DGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGEDI
-  INTEGER Lda , N , Ipvt(*) , Job
-  REAL(8) :: A(Lda,*) , Det(2) , Work(*)
+  INTEGER Lda, N, Ipvt(*), Job
+  REAL(8) :: A(Lda,*), Det(2), Work(*)
   !
   REAL(8) :: t
   REAL(8) :: ten
-  INTEGER i , j , k , kb , kp1 , l , nm1
+  INTEGER i, j, k, kb, kp1, l, nm1
   !***FIRST EXECUTABLE STATEMENT  DGEDI
   !
   !     COMPUTE DETERMINANT
@@ -85,7 +85,7 @@ SUBROUTINE DGEDI(A,Lda,N,Ipvt,Det,Work,Job)
     Det(1) = 1.0D0
     Det(2) = 0.0D0
     ten = 10.0D0
-    DO i = 1 , N
+    DO i = 1, N
       IF ( Ipvt(i)/=i ) Det(1) = -Det(1)
       Det(1) = A(i,i)*Det(1)
       IF ( Det(1)==0.0D0 ) EXIT
@@ -103,13 +103,13 @@ SUBROUTINE DGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   !     COMPUTE INVERSE(U)
   !
   IF ( MOD(Job,10)/=0 ) THEN
-    DO k = 1 , N
+    DO k = 1, N
       A(k,k) = 1.0D0/A(k,k)
       t = -A(k,k)
       CALL DSCAL(k-1,t,A(1,k),1)
       kp1 = k + 1
       IF ( N>=kp1 ) THEN
-        DO j = kp1 , N
+        DO j = kp1, N
           t = A(k,j)
           A(k,j) = 0.0D0
           CALL DAXPY(k,t,A(1,k),1,A(1,j),1)
@@ -121,14 +121,14 @@ SUBROUTINE DGEDI(A,Lda,N,Ipvt,Det,Work,Job)
     !
     nm1 = N - 1
     IF ( nm1>=1 ) THEN
-      DO kb = 1 , nm1
+      DO kb = 1, nm1
         k = N - kb
         kp1 = k + 1
-        DO i = kp1 , N
+        DO i = kp1, N
           Work(i) = A(i,k)
           A(i,k) = 0.0D0
         ENDDO
-        DO j = kp1 , N
+        DO j = kp1, N
           t = Work(j)
           CALL DAXPY(N,t,A(1,j),1,A(1,k),1)
         ENDDO

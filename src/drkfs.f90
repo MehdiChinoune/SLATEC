@@ -49,19 +49,19 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DRKFS
   !
-  INTEGER Idid , Info , Init , Ipar , Iquit , k , Kop , Ksteps , ktol ,&
-    mxkop , mxstep , natolp , Neq , nrtolp , Nstifs , Ntstep
-  REAL(8) :: a , Atol , big , D1MACH , dt , Dtsign , DHVNRM , dy ,&
-    ee , eeoet , es , estiff , esttol , et , F1 , F2 , F3 ,&
-    F4 , F5 , H , hmin , remin , Rer , Rpar , Rtol , s , T ,&
-    tol , Told , Tolfac , Tout , u , U26 , ute , Y , yavg ,&
-    Yp , Ys
-  LOGICAL hfaild , output , Stiff , Nonstf
+  INTEGER Idid, Info, Init, Ipar, Iquit, k, Kop, Ksteps, ktol ,&
+    mxkop, mxstep, natolp, Neq, nrtolp, Nstifs, Ntstep
+  REAL(8) :: a, Atol, big, D1MACH, dt, Dtsign, DHVNRM, dy ,&
+    ee, eeoet, es, estiff, esttol, et, F1, F2, F3 ,&
+    F4, F5, H, hmin, remin, Rer, Rpar, Rtol, s, T ,&
+    tol, Told, Tolfac, Tout, u, U26, ute, Y, yavg ,&
+    Yp, Ys
+  LOGICAL hfaild, output, Stiff, Nonstf
   CHARACTER(8) :: xern1
-  CHARACTER(16) :: xern3 , xern4
+  CHARACTER(16) :: xern3, xern4
   !
-  DIMENSION Y(*) , Yp(*) , F1(*) , F2(*) , F3(*) , F4(*) , F5(*) , Ys(*) ,&
-    Info(15) , Rtol(*) , Atol(*) , Rpar(*) , Ipar(*)
+  DIMENSION Y(*), Yp(*), F1(*), F2(*), F3(*), F4(*), F5(*), Ys(*) ,&
+    Info(15), Rtol(*), Atol(*), Rpar(*), Ipar(*)
   !
   EXTERNAL DF
   !
@@ -74,7 +74,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !       TOLERANCE THRESHOLD REMIN IS ASSIGNED FOR THIS METHOD. THIS
   !       VALUE SHOULD NOT BE CHANGED ACROSS DIFFERENT MACHINES.
   !
-  SAVE remin , mxstep , mxkop
+  SAVE remin, mxstep, mxkop
   DATA remin/1.0D-12/
   !
   !     ..................................................................
@@ -101,7 +101,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !***FIRST EXECUTABLE STATEMENT  DRKFS
   IF ( Info(1)==0 ) THEN
     !
-    ! ON THE FIRST CALL , PERFORM INITIALIZATION --
+    ! ON THE FIRST CALL, PERFORM INITIALIZATION --
     !        DEFINE THE MACHINE UNIT ROUNDOFF QUANTITY  U  BY CALLING THE
     !        FUNCTION ROUTINE  D1MACH. THE USER MUST MAKE SURE THAT THE
     !        VALUES SET IN D1MACH ARE RELEVANT TO THE COMPUTER BEING USED.
@@ -170,7 +170,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !
   nrtolp = 0
   natolp = 0
-  DO k = 1 , Neq
+  DO k = 1, Neq
     IF ( nrtolp==0.AND.Rtol(k)<0.D0 ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Rtol(k)
@@ -256,7 +256,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !                RTOL IS RESET TO THE SMALLEST VALUE RER WHICH IS LIKELY
   !                TO BE REASONABLE FOR THIS METHOD AND MACHINE.
   !
-  DO k = 1 , Neq
+  DO k = 1, Neq
     IF ( Rtol(k)+Atol(k)<=0.0D0 ) THEN
       Rtol(k) = Rer
       Idid = -2
@@ -312,7 +312,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     dy = ute*DHVNRM(Y,Neq)
     IF ( dy==0.0D0 ) dy = ute
     ktol = 1
-    DO k = 1 , Neq
+    DO k = 1, Neq
       IF ( Info(2)==1 ) ktol = k
       tol = Rtol(ktol)*ABS(Y(k)) + Atol(ktol)
       IF ( tol==0.0D0 ) tol = dy*Rtol(ktol)
@@ -362,7 +362,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
         !
         Tolfac = 0.0D0
         ktol = 1
-        DO k = 1 , Neq
+        DO k = 1, Neq
           IF ( Info(2)==1 ) ktol = k
           et = Rtol(ktol)*ABS(Y(k)) + Atol(ktol)
           IF ( et>0.0D0 ) THEN
@@ -470,7 +470,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
             eeoet = 0.0D0
             estiff = 0.0D0
             ktol = 1
-            DO k = 1 , Neq
+            DO k = 1, Neq
               yavg = 0.5D0*(ABS(Y(k))+ABS(Ys(k)))
               IF ( Info(2)==1 ) ktol = k
               et = Rtol(ktol)*yavg + Atol(ktol)
@@ -509,7 +509,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               !                                                  DERIVATIVES THERE
               !
               T = T + H
-              DO k = 1 , Neq
+              DO k = 1, Neq
                 Y(k) = Ys(k)
               ENDDO
               a = T
@@ -596,7 +596,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               !
             ELSEIF ( ABS(H)>hmin ) THEN
               !
-              !                                   REDUCE THE STEP SIZE , TRY AGAIN
+              !                                   REDUCE THE STEP SIZE, TRY AGAIN
               !                                   THE DECREASE IS LIMITED TO A FACTOR
               !                                   OF 1/10
               !
@@ -647,7 +647,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
         !                       IF TOO CLOSE TO OUTPUT POINT,EXTRAPOLATE AND
         !                       RETURN
         !
-        DO k = 1 , Neq
+        DO k = 1, Neq
           Y(k) = Y(k) + dt*Yp(k)
         ENDDO
         a = Tout
@@ -682,10 +682,11 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     Atol(1) = Tolfac*Atol(1)
     !     ...EXIT
     IF ( Info(2)/=0 ) THEN
-      DO k = 2 , Neq
+      DO k = 2, Neq
         Rtol(k) = Tolfac*Rtol(k)
         Atol(k) = Tolfac*Atol(k)
       ENDDO
     ENDIF
   ENDIF
-  99999 END SUBROUTINE DRKFS
+  99999 CONTINUE
+  END SUBROUTINE DRKFS

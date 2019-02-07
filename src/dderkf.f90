@@ -24,7 +24,7 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   solvers DEPAC, consisting of the codes DDERKF, DDEABM, and DDEBDF.
   !   Design of the package was by L. F. Shampine and H. A. Watts.
   !   It is documented in
-  !        SAND-79-2374 , DEPAC - Design of a User Oriented Package of ODE
+  !        SAND-79-2374, DEPAC - Design of a User Oriented Package of ODE
   !                              Solvers.
   !   DDERKF is a driver for a modification of the code RKF45 written by
   !             H. A. Watts and L. F. Shampine
@@ -166,7 +166,7 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !                               DF(X,U,UPRIME,RPAR,IPAR)
   !             to define the system of first order differential equations
   !             which is to be solved.  For the given values of X and the
-  !             vector  U(*)=(U(1),U(2),...,U(NEQ)) , the subroutine must
+  !             vector  U(*)=(U(1),U(2),...,U(NEQ)), the subroutine must
   !             evaluate the NEQ components of the system of differential
   !             equations  DU/DX=DF(X,U)  and store the derivatives in the
   !             array UPRIME(*), that is,  UPRIME(I) = * DU(I)/DX *  for
@@ -431,7 +431,7 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !                        attempted on the next step.
   !
   !             RWORK(12)--If the tolerances have been increased by the
-  !                        code (IDID = -2) , they were multiplied by the
+  !                        code (IDID = -2), they were multiplied by the
   !                        value in RWORK(12).
   !
   !             RWORK(20+I)--which contains the approximate derivative
@@ -608,13 +608,13 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DDERKF
   !
-  INTEGER Idid , Info , Ipar , Iwork , kdi , kf1 , kf2 , kf3 , kf4 , kf5 ,&
-    kh , krer , ktf , kto , ktstar , ku , kyp , kys , Liw , Lrw , Neq
-  REAL(8) :: Atol , Rpar , Rtol , Rwork , T , Tout , Y
-  LOGICAL stiff , nonstf
+  INTEGER Idid, Info, Ipar, Iwork, kdi, kf1, kf2, kf3, kf4, kf5 ,&
+    kh, krer, ktf, kto, ktstar, ku, kyp, kys, Liw, Lrw, Neq
+  REAL(8) :: Atol, Rpar, Rtol, Rwork, T, Tout, Y
+  LOGICAL stiff, nonstf
   !
-  DIMENSION Y(*) , Info(15) , Rtol(*) , Atol(*) , Rwork(*) , Iwork(*) ,&
-    Rpar(*) , Ipar(*)
+  DIMENSION Y(*), Info(15), Rtol(*), Atol(*), Rwork(*), Iwork(*) ,&
+    Rpar(*), Ipar(*)
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
   !

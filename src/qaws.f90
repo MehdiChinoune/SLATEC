@@ -182,10 +182,10 @@ SUBROUTINE QAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  QAWS
   !
-  REAL A , Abserr , Alfa , B , Beta , Epsabs , Epsrel , F , Result , Work
-  INTEGER Ier , Integr , Iwork , Lenw , Limit , lvl , l1 , l2 , l3 , Neval
+  REAL A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, F, Result, Work
+  INTEGER Ier, Integr, Iwork, Lenw, Limit, lvl, l1, l2, l3, Neval
   !
-  DIMENSION Iwork(*) , Work(*)
+  DIMENSION Iwork(*), Work(*)
   !
   EXTERNAL F
   !

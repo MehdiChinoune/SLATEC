@@ -69,24 +69,24 @@ SUBROUTINE CQCAI(Lun,Kprint,Ipass)
   !
   !  Declare arguments.
   !
-  INTEGER Lun , Kprint , Ipass
+  INTEGER Lun, Kprint, Ipass
   !
   !  Declare external functions.
   !
   INTEGER I1MACH
   REAL R1MACH
-  EXTERNAL I1MACH , R1MACH
+  EXTERNAL I1MACH, R1MACH
   !
   !  Declare local variables.
   !
-  COMPLEX con1 , con2 , con3 , cv , cw , cy , w , y , z , zr
-  REAL aa , ab , acw , acy , alim , arg , arzr , atol , av , a1 , a2 , ct , &
-    c23 , dig , elim , eps , er , ertol , film , fnul , fpi , hpi , pi , &
-    pi3 , r , rl , rm , rpi , rtpi , rzr , r1m4 , r1m5 , slak , spi , &
-    st , t , tol , tpi , tpi3 , ts
-  INTEGER i , icase , icl , ierr , il , ir , irb , irset , it , itl , k , &
-    kdo , keps , kode , k1 , k2 , lflg , nz1 , nz2 , nz3 , nz4
-  DIMENSION kdo(20) , keps(20) , t(20) , w(20) , y(20)
+  COMPLEX con1, con2, con3, cv, cw, cy, w, y, z, zr
+  REAL aa, ab, acw, acy, alim, arg, arzr, atol, av, a1, a2, ct, &
+    c23, dig, elim, eps, er, ertol, film, fnul, fpi, hpi, pi, &
+    pi3, r, rl, rm, rpi, rtpi, rzr, r1m4, r1m5, slak, spi, &
+    st, t, tol, tpi, tpi3, ts
+  INTEGER i, icase, icl, ierr, il, ir, irb, irset, it, itl, k, &
+    kdo, keps, kode, k1, k2, lflg, nz1, nz2, nz3, nz4
+  DIMENSION kdo(20), keps(20), t(20), w(20), y(20)
   !
   !***FIRST EXECUTABLE STATEMENT  CQCAI
   IF ( Kprint>=2 ) THEN
@@ -129,7 +129,7 @@ SUBROUTINE CQCAI(Lun,Kprint,Ipass)
     WRITE (Lun,99002)
     99002   FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
       8X,'DIG')
-    WRITE (Lun,99003) tol , elim , alim , rl , fnul , dig
+    WRITE (Lun,99003) tol, elim, alim, rl, fnul, dig
     99003   FORMAT (6E12.4/)
   ENDIF
   !-----------------------------------------------------------------------
@@ -168,14 +168,14 @@ SUBROUTINE CQCAI(Lun,Kprint,Ipass)
   IF ( MQC/=2 ) THEN
     icl = 1
     il = 5
-    DO i = 1 , il
+    DO i = 1, il
       kdo(i) = 0
       keps(i) = 0
     ENDDO
   ELSE
     icl = 2
     il = 7
-    DO i = 1 , il
+    DO i = 1, il
       kdo(i) = 0
       keps(i) = 0
     ENDDO
@@ -188,7 +188,7 @@ SUBROUTINE CQCAI(Lun,Kprint,Ipass)
   eps = 0.01E0
   film = il - 1
   t(1) = -pi + eps
-  DO k = 2 , il
+  DO k = 2, il
     IF ( kdo(k)==0 ) THEN
       t(i) = pi*(-il+2*k-1)/film
       IF ( keps(k)/=0 ) THEN
@@ -209,15 +209,15 @@ SUBROUTINE CQCAI(Lun,Kprint,Ipass)
     99004   FORMAT (' CHECKS IN THE Z PLANE'/)
   ENDIF
   lflg = 0
-  DO icase = 1 , icl
+  DO icase = 1, icl
     !-----------------------------------------------------------------------
     !     ICASE = 1 computes wron(AI(Z),BI(Z))     =CON3
     !     ICASE = 2 computes wron(AI(Z),AI(Z*CON1))=CON2
     !-----------------------------------------------------------------------
-    DO kode = 1 , 2
-      DO irset = 1 , 3
+    DO kode = 1, 2
+      DO irset = 1, 3
         irb = MIN(irset,2)
-        DO ir = irb , 4
+        DO ir = irb, 4
           !------------ switch (irset)
           SELECT CASE (irset)
             CASE (2)
@@ -228,7 +228,7 @@ SUBROUTINE CQCAI(Lun,Kprint,Ipass)
               r = 2.0E0*(ir-1)/3.0E0
           END SELECT
           !------------ end switch
-          DO it = 1 , itl
+          DO it = 1, itl
             !----------------------------------------------------------------------
             !     The following values are set before the DO 30 loop:
             !            C23 = 2/3
@@ -321,25 +321,25 @@ SUBROUTINE CQCAI(Lun,Kprint,Ipass)
               ENDIF
               lflg = 1
               IF ( Kprint>=2 ) THEN
-                WRITE (Lun,99010) z , er
+                WRITE (Lun,99010) z, er
                 99010               FORMAT (12X,'INPUT:    Z=',2E12.4,5X,'ERROR:   ER=',E12.4)
               ENDIF
               IF ( Kprint>=3 ) THEN
-                WRITE (Lun,99011) cv , cy
+                WRITE (Lun,99011) cv, cy
                 99011               FORMAT (' COMPARISON VALUE:   CV=',2E12.4/8X,&
                   'WRONSKIAN:   CY=',2E12.4)
-                WRITE (Lun,99012) nz1 , y(1) , nz2 , y(2)
+                WRITE (Lun,99012) nz1, y(1), nz2, y(2)
                 99012               FORMAT (10X,'RESULTS:  NZ1=',I3,4X,'Y(1)=',2E12.4/20X,&
                   'NZ2=',I3,4X,'Y(2)=',2E12.4)
                 IF ( icase==1 ) THEN
-                  WRITE (Lun,99013) w(1) , w(2)
+                  WRITE (Lun,99013) w(1), w(2)
                   99013                 FORMAT (31X,'W(1)=',2E12.4/31X,'W(2)=',2E12.4)
                 ELSE
-                  WRITE (Lun,99014) nz3 , w(1) , nz4 , w(2)
+                  WRITE (Lun,99014) nz3, w(1), nz4, w(2)
                   99014                 FORMAT (20X,'NZ3=',I3,4X,'W(1)=',2E12.4/20X,'NZ4=',I3,4X,&
                     'W(2)=',2E12.4)
                 ENDIF
-                WRITE (Lun,99015) it , ir , irset , icase
+                WRITE (Lun,99015) it, ir, irset, icase
                 99015               FORMAT (13X,'CASE:   IT=',I3,4X,'IR=',I3,4X,'IRSET=',I3,4X,&
                   'ICASE=',I3,4X/)
               ENDIF

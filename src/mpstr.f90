@@ -4,7 +4,7 @@ SUBROUTINE MPSTR(X,Y)
   IMPLICIT NONE
   !*--MPSTR5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , LUN , M , MXR
+  INTEGER i, LUN, M, MXR
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPSTR
   !***SUBSIDIARY
@@ -31,10 +31,10 @@ SUBROUTINE MPSTR(X,Y)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPSTR
-  COMMON /MPCOM / B , T , M , LUN , MXR , R(30)
-  INTEGER B , T , R , X(*) , Y(*)
+  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
+  INTEGER B, T, R, X(*), Y(*)
   !***FIRST EXECUTABLE STATEMENT  MPSTR
-  DO i = 1 , T + 2
+  DO i = 1, T + 2
     Y(i) = X(i)
   ENDDO
 END SUBROUTINE MPSTR

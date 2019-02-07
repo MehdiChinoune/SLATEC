@@ -4,7 +4,7 @@ REAL(8) FUNCTION D9ATN1(X)
   IMPLICIT NONE
   !*--D9ATN15
   !*** Start of declarations inserted by SPAG
-  INTEGER INITDS , ntatn1
+  INTEGER INITDS, ntatn1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9ATN1
   !***SUBSIDIARY
@@ -39,10 +39,10 @@ REAL(8) FUNCTION D9ATN1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9ATN1
-  REAL(8) :: X , xbig , xmax , xsml , y , atn1cs(40) , eps , DCSEVL , &
+  REAL(8) :: X, xbig, xmax, xsml, y, atn1cs(40), eps, DCSEVL, &
     D1MACH
   LOGICAL first
-  SAVE atn1cs , ntatn1 , xsml , xbig , xmax , first
+  SAVE atn1cs, ntatn1, xsml, xbig, xmax, first
   DATA atn1cs(1)/ - .3283997535355202356907939922990D-1/
   DATA atn1cs(2)/ + .5833432343172412449951669914907D-1/
   DATA atn1cs(3)/ - .7400369696719646463809011551413D-2/
@@ -115,4 +115,5 @@ REAL(8) FUNCTION D9ATN1(X)
   D9ATN1 = -0.25D0 + DCSEVL(2.D0*y*y-1.D0,atn1cs,ntatn1)
   RETURN
   !
-  99999 END FUNCTION D9ATN1
+  99999 CONTINUE
+  END FUNCTION D9ATN1

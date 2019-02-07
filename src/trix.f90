@@ -4,8 +4,8 @@ SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   IMPLICIT NONE
   !*--TRIX5
   !*** Start of declarations inserted by SPAG
-  REAL A , B , C , D , Tcos , W , x , xx , Y , z
-  INTEGER i , Idegbr , Idegcr , ip , k , l , lint , M , mm1
+  REAL A, B, C, D, Tcos, W, x, xx, Y, z
+  INTEGER i, Idegbr, Idegcr, ip, k, l, lint, M, mm1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TRIX
   !***SUBSIDIARY
@@ -17,7 +17,7 @@ SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !
   !     Subroutine to solve a system of linear equations where the
   !     coefficient matrix is a rational function in the matrix given by
-  !     TRIDIAGONAL  ( . . . , A(I), B(I), C(I), . . . ).
+  !     TRIDIAGONAL  ( . . ., A(I), B(I), C(I), . . . ).
   !
   !***SEE ALSO  GENBUN
   !***ROUTINES CALLED  (NONE)
@@ -27,20 +27,20 @@ SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  TRIX
   !
-  DIMENSION A(*) , B(*) , C(*) , Y(*) , Tcos(*) , D(*) , W(*)
-  INTEGER kb , kc
+  DIMENSION A(*), B(*), C(*), Y(*), Tcos(*), D(*), W(*)
+  INTEGER kb, kc
   !***FIRST EXECUTABLE STATEMENT  TRIX
   mm1 = M - 1
   kb = Idegbr + 1
   kc = Idegcr + 1
   l = (Idegbr+1)/(Idegcr+1)
   lint = 1
-  DO k = 1 , Idegbr
+  DO k = 1, Idegbr
     x = Tcos(k)
     IF ( k==l ) THEN
       i = Idegbr + lint
       xx = x - Tcos(i)
-      DO i = 1 , M
+      DO i = 1, M
         W(i) = Y(i)
         Y(i) = xx*Y(i)
       ENDDO
@@ -48,7 +48,7 @@ SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
     z = 1./(B(1)-x)
     D(1) = C(1)*z
     Y(1) = Y(1)*z
-    DO i = 2 , mm1
+    DO i = 2, mm1
       z = 1./(B(i)-x-A(i)*D(i-1))
       D(i) = C(i)*z
       Y(i) = (Y(i)-A(i)*Y(i-1))*z
@@ -59,12 +59,12 @@ SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
     ELSE
       Y(M) = 0.
     ENDIF
-    DO ip = 1 , mm1
+    DO ip = 1, mm1
       i = M - ip
       Y(i) = Y(i) - D(i)*Y(i+1)
     ENDDO
     IF ( k==l ) THEN
-      DO i = 1 , M
+      DO i = 1, M
         Y(i) = Y(i) + W(i)
       ENDDO
       lint = lint + 1

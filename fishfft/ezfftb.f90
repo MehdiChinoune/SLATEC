@@ -4,8 +4,8 @@ SUBROUTINE EZFFTB(N,R,Azero,A,B,Wsave)
   IMPLICIT NONE
   !*--EZFFTB5
   !*** Start of declarations inserted by SPAG
-  REAL A , Azero , B , R , Wsave
-  INTEGER i , N , ns2
+  REAL A, Azero, B, R, Wsave
+  INTEGER i, N, ns2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  EZFFTB
   !***PURPOSE  A simplified real, periodic, backward fast Fourier
@@ -106,7 +106,7 @@ SUBROUTINE EZFFTB(N,R,Azero,A,B,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  EZFFTB
-  DIMENSION R(*) , A(*) , B(*) , Wsave(*)
+  DIMENSION R(*), A(*), B(*), Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  EZFFTB
   IF ( N<2 ) THEN
     R(1) = Azero
@@ -117,7 +117,7 @@ SUBROUTINE EZFFTB(N,R,Azero,A,B,Wsave)
     RETURN
   ELSE
     ns2 = (N-1)/2
-    DO i = 1 , ns2
+    DO i = 1, ns2
       R(2*i) = .5*A(i)
       R(2*i+1) = -.5*B(i)
     ENDDO

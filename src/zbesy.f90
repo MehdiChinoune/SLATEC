@@ -160,12 +160,12 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
   !***END PROLOGUE  ZBESY
   !
   !     COMPLEX CWRK,CY,C1,C2,EX,HCI,Z,ZU,ZV
-  REAL(8) :: Cwrki , Cwrkr , Cyi , Cyr , c1i , c1r , c2i , c2r , &
-    elim , exi , exr , ey , Fnu , hcii , sti , str , tay , &
-    Zi , Zr , D1MACH , ascle , rtol , atol , aa , bb , tol , &
+  REAL(8) :: Cwrki, Cwrkr, Cyi, Cyr, c1i, c1r, c2i, c2r, &
+    elim, exi, exr, ey, Fnu, hcii, sti, str, tay, &
+    Zi, Zr, D1MACH, ascle, rtol, atol, aa, bb, tol, &
     r1m5
-  INTEGER i , Ierr , k , Kode , k1 , k2 , N , Nz , nz1 , nz2 , I1MACH
-  DIMENSION Cyr(N) , Cyi(N) , Cwrkr(N) , Cwrki(N)
+  INTEGER i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2, I1MACH
+  DIMENSION Cyr(N), Cyi(N), Cwrkr(N), Cwrki(N)
   !***FIRST EXECUTABLE STATEMENT  ZBESY
   Ierr = 0
   Nz = 0
@@ -213,7 +213,7 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
         Nz = 0
         rtol = 1.0D0/tol
         ascle = D1MACH(1)*rtol*1.0D+3
-        DO i = 1 , N
+        DO i = 1, N
           !       STR = C1R*CYR(I) - C1I*CYI(I)
           !       STI = C1R*CYI(I) + C1I*CYR(I)
           !       STR = -STR + C2R*CWRKR(I) - C2I*CWRKI(I)
@@ -246,7 +246,7 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
         ENDDO
         RETURN
       ELSE
-        DO i = 1 , N
+        DO i = 1, N
           str = Cwrkr(i) - Cyr(i)
           sti = Cwrki(i) - Cyi(i)
           Cyr(i) = -sti*hcii

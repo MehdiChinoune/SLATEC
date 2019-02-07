@@ -305,15 +305,15 @@ REAL FUNCTION RJ(X,Y,Z,P,Ier)
   !           editorial changes.  (RWC)).
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RJ
-  CHARACTER(16) :: xern3 , xern4 , xern5 , xern6 , xern7
+  CHARACTER(16) :: xern3, xern4, xern5, xern6, xern7
   INTEGER Ier
-  REAL alfa , beta , c1 , c2 , c3 , c4 , ea , eb , ec , e2 , e3
-  REAL lolim , uplim , epslon , errtol
-  REAL lamda , mu , P , pn , pndev
-  REAL power4 , RC , sigma , s1 , s2 , s3 , X , xn , xndev
-  REAL xnroot , Y , yn , yndev , ynroot , Z , zn , zndev , znroot
+  REAL alfa, beta, c1, c2, c3, c4, ea, eb, ec, e2, e3
+  REAL lolim, uplim, epslon, errtol
+  REAL lamda, mu, P, pn, pndev
+  REAL power4, RC, sigma, s1, s2, s3, X, xn, xndev
+  REAL xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, znroot
   LOGICAL first
-  SAVE errtol , lolim , uplim , c1 , c2 , c3 , c4 , first
+  SAVE errtol, lolim, uplim, c1, c2, c3, c4, first
   DATA first/.TRUE./
   !
   !***FIRST EXECUTABLE STATEMENT  RJ

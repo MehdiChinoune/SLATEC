@@ -136,26 +136,26 @@ SUBROUTINE CHBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  CHBMV
   !     .. Scalar Arguments ..
-  COMPLEX Alpha , Beta
-  INTEGER Incx , Incy , K , Lda , N
+  COMPLEX Alpha, Beta
+  INTEGER Incx, Incy, K, Lda, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*) , X(*) , Y(*)
+  COMPLEX A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
   COMPLEX ONE
   PARAMETER (ONE=(1.0E+0,0.0E+0))
   COMPLEX ZERO
   PARAMETER (ZERO=(0.0E+0,0.0E+0))
   !     .. Local Scalars ..
-  COMPLEX temp1 , temp2
-  INTEGER i , info , ix , iy , j , jx , jy , kplus1 , kx , ky , l
+  COMPLEX temp1, temp2
+  INTEGER i, info, ix, iy, j, jx, jy, kplus1, kx, ky, l
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
-  INTRINSIC CONJG , MAX , MIN , REAL
+  INTRINSIC CONJG, MAX, MIN, REAL
   !***FIRST EXECUTABLE STATEMENT  CHBMV
   !
   !     Test the input parameters.
@@ -205,22 +205,22 @@ SUBROUTINE CHBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     IF ( Incy/=1 ) THEN
       iy = ky
       IF ( Beta==ZERO ) THEN
-        DO i = 1 , N
+        DO i = 1, N
           Y(iy) = ZERO
           iy = iy + Incy
         ENDDO
       ELSE
-        DO i = 1 , N
+        DO i = 1, N
           Y(iy) = Beta*Y(iy)
           iy = iy + Incy
         ENDDO
       ENDIF
     ELSEIF ( Beta==ZERO ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         Y(i) = ZERO
       ENDDO
     ELSE
-      DO i = 1 , N
+      DO i = 1, N
         Y(i) = Beta*Y(i)
       ENDDO
     ENDIF
@@ -232,11 +232,11 @@ SUBROUTINE CHBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     !
     kplus1 = K + 1
     IF ( (Incx==1).AND.(Incy==1) ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         temp1 = Alpha*X(j)
         temp2 = ZERO
         l = kplus1 - j
-        DO i = MAX(1,j-K) , j - 1
+        DO i = MAX(1,j-K), j - 1
           Y(i) = Y(i) + temp1*A(l+i,j)
           temp2 = temp2 + CONJG(A(l+i,j))*X(i)
         ENDDO
@@ -245,13 +245,13 @@ SUBROUTINE CHBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     ELSE
       jx = kx
       jy = ky
-      DO j = 1 , N
+      DO j = 1, N
         temp1 = Alpha*X(jx)
         temp2 = ZERO
         ix = kx
         iy = ky
         l = kplus1 - j
-        DO i = MAX(1,j-K) , j - 1
+        DO i = MAX(1,j-K), j - 1
           Y(iy) = Y(iy) + temp1*A(l+i,j)
           temp2 = temp2 + CONJG(A(l+i,j))*X(ix)
           ix = ix + Incx
@@ -270,12 +270,12 @@ SUBROUTINE CHBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     !        Form  y  when lower triangle of A is stored.
     !
   ELSEIF ( (Incx==1).AND.(Incy==1) ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       temp1 = Alpha*X(j)
       temp2 = ZERO
       Y(j) = Y(j) + temp1*REAL(A(1,j))
       l = 1 - j
-      DO i = j + 1 , MIN(N,j+K)
+      DO i = j + 1, MIN(N,j+K)
         Y(i) = Y(i) + temp1*A(l+i,j)
         temp2 = temp2 + CONJG(A(l+i,j))*X(i)
       ENDDO
@@ -284,14 +284,14 @@ SUBROUTINE CHBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   ELSE
     jx = kx
     jy = ky
-    DO j = 1 , N
+    DO j = 1, N
       temp1 = Alpha*X(jx)
       temp2 = ZERO
       Y(jy) = Y(jy) + temp1*REAL(A(1,j))
       l = 1 - j
       ix = jx
       iy = jy
-      DO i = j + 1 , MIN(N,j+K)
+      DO i = j + 1, MIN(N,j+K)
         ix = ix + Incx
         iy = iy + Incy
         Y(iy) = Y(iy) + temp1*A(l+i,j)

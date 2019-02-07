@@ -5,11 +5,11 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
   IMPLICIT NONE
   !*--CMPOSN6
   !*** Start of declarations inserted by SPAG
-  REAL fden , fistag , fnum
-  INTEGER i , i1 , i2 , i2r , i2rby2 , Idimq , ii , ip , ipstor , Istag , &
-    j , jm1 , jm2 , jm3 , jp1 , jp2 , jp3 , jr , jr2 , jstart
-  INTEGER jstep , jstop , k , k1 , k2 , k3 , k4 , kr , lr , M , Mixbnd , &
-    mr , N , nlast , nlastp , nr , nrod , nrodpr
+  REAL fden, fistag, fnum
+  INTEGER i, i1, i2, i2r, i2rby2, Idimq, ii, ip, ipstor, Istag, &
+    j, jm1, jm2, jm3, jp1, jp2, jp3, jr, jr2, jstart
+  INTEGER jstep, jstop, k, k1, k2, k3, k4, kr, lr, M, Mixbnd, &
+    mr, N, nlast, nlastp, nr, nrod, nrodpr
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CMPOSN
   !***SUBSIDIARY
@@ -39,9 +39,9 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
   !           routine CMPMRG.  (WRB)
   !***END PROLOGUE  CMPOSN
   !
-  COMPLEX A , Bb , C , Q , B , B2 , B3 , W , W2 , W3 , D , Tcos , P , fi , t
-  DIMENSION A(*) , Bb(*) , C(*) , Q(Idimq,*) , B(*) , B2(*) , B3(*) , W(*) , &
-    W2(*) , W3(*) , D(*) , Tcos(*) , k(4) , P(*)
+  COMPLEX A, Bb, C, Q, B, B2, B3, W, W2, W3, D, Tcos, P, fi, t
+  DIMENSION A(*), Bb(*), C(*), Q(Idimq,*), B(*), B2(*), B3(*), W(*), &
+    W2(*), W3(*), D(*), Tcos(*), k(4), P(*)
   EQUIVALENCE (k(1),k1)
   EQUIVALENCE (k(2),k2)
   EQUIVALENCE (k(3),k3)
@@ -60,7 +60,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
   kr = 1
   lr = 0
   IF ( Istag/=2 ) THEN
-    DO i = 1 , mr
+    DO i = 1, mr
       Q(i,N) = .5*Q(i,N)
     ENDDO
     IF ( Mixbnd==2 ) GOTO 100
@@ -83,7 +83,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
     !
     !     REGULAR REDUCTION.
     !
-    DO j = jstart , jstop , jr
+    DO j = jstart, jstop, jr
       jp1 = j + i2rby2
       jp2 = j + i2r
       jp3 = jp2 + i2rby2
@@ -96,20 +96,20 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
         jm3 = jp3
       ENDIF
       IF ( i2r/=1 ) THEN
-        DO i = 1 , mr
+        DO i = 1, mr
           fi = Q(i,j)
           Q(i,j) = Q(i,j) - Q(i,jm1) - Q(i,jp1) + Q(i,jm2) + Q(i,jp2)
           B(i) = fi + Q(i,j) - Q(i,jm3) - Q(i,jp3)
         ENDDO
       ELSE
         IF ( j==1 ) jm2 = jp2
-        DO i = 1 , mr
+        DO i = 1, mr
           B(i) = 2.*Q(i,j)
           Q(i,j) = Q(i,jm2) + Q(i,jp2)
         ENDDO
       ENDIF
       CALL CMPTRX(i2r,0,mr,A,Bb,C,B,Tcos,D,W)
-      DO i = 1 , mr
+      DO i = 1, mr
         Q(i,j) = Q(i,j) + B(i)
       ENDDO
       !
@@ -134,15 +134,15 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
     jp1 = j + i2rby2
     jp2 = j + i2r
     IF ( i2r/=1 ) THEN
-      DO i = 1 , mr
+      DO i = 1, mr
         B(i) = Q(i,j) + .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3))
       ENDDO
       IF ( nrodpr/=0 ) THEN
-        DO i = 1 , mr
+        DO i = 1, mr
           B(i) = B(i) + Q(i,jp2) - Q(i,jp1)
         ENDDO
       ELSE
-        DO i = 1 , mr
+        DO i = 1, mr
           ii = ip + i
           B(i) = B(i) + P(ii)
         ENDDO
@@ -150,13 +150,13 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
       CALL CMPTRX(i2r,0,mr,A,Bb,C,B,Tcos,D,W)
       ip = ip + mr
       ipstor = MAX(ipstor,ip+mr)
-      DO i = 1 , mr
+      DO i = 1, mr
         ii = ip + i
         P(ii) = B(i) + .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
         B(i) = P(ii) + Q(i,jp2)
       ENDDO
       IF ( lr==0 ) THEN
-        DO i = 1 , i2r
+        DO i = 1, i2r
           ii = kr + i
           Tcos(ii) = Tcos(i)
         ENDDO
@@ -168,37 +168,37 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
       IF ( lr/=0 ) THEN
         CALL CMPTRX(kr,kr,mr,A,Bb,C,B,Tcos,D,W)
       ELSEIF ( Istag==1 ) THEN
-        DO i = 1 , mr
+        DO i = 1, mr
           B(i) = fistag*B(i)
         ENDDO
       ELSE
         CALL CMPTRX(kr,kr,mr,A,Bb,C,B,Tcos,D,W)
       ENDIF
-      DO i = 1 , mr
+      DO i = 1, mr
         ii = ip + i
         Q(i,j) = Q(i,jm2) + P(ii) + B(i)
       ENDDO
     ELSE
-      DO i = 1 , mr
+      DO i = 1, mr
         B(i) = Q(i,j)
       ENDDO
       CALL CMPTRX(1,0,mr,A,Bb,C,B,Tcos,D,W)
       ip = 0
       ipstor = mr
       IF ( Istag==1 ) THEN
-        DO i = 1 , mr
+        DO i = 1, mr
           P(i) = B(i)
           Q(i,j) = Q(i,jm2) + 2.*Q(i,jp2) + 3.*B(i)
         ENDDO
       ELSE
-        DO i = 1 , mr
+        DO i = 1, mr
           P(i) = B(i)
           B(i) = B(i) + Q(i,N)
         ENDDO
         Tcos(1) = CMPLX(1.,0.)
         Tcos(2) = CMPLX(0.,0.)
         CALL CMPTRX(1,1,mr,A,Bb,C,B,Tcos,D,W)
-        DO i = 1 , mr
+        DO i = 1, mr
           Q(i,j) = Q(i,jm2) + P(i) + B(i)
         ENDDO
       ENDIF
@@ -210,36 +210,36 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
     !     ODD NUMBER OF UNKNOWNS
     !
     IF ( i2r/=1 ) THEN
-      DO i = 1 , mr
+      DO i = 1, mr
         B(i) = Q(i,j) + .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3))
       ENDDO
       IF ( nrodpr/=0 ) THEN
-        DO i = 1 , mr
+        DO i = 1, mr
           Q(i,j) = Q(i,j) - Q(i,jm1) + Q(i,jm2)
         ENDDO
       ELSE
-        DO i = 1 , mr
+        DO i = 1, mr
           ii = ip + i
           Q(i,j) = Q(i,jm2) + P(ii)
         ENDDO
         ip = ip - mr
       ENDIF
       IF ( lr==0 ) THEN
-        DO i = 1 , mr
+        DO i = 1, mr
           B(i) = fistag*B(i)
         ENDDO
       ELSE
         CALL CMPCSG(lr,1,0.5,fden,Tcos(kr+1))
       ENDIF
     ELSE
-      DO i = 1 , mr
+      DO i = 1, mr
         B(i) = fistag*Q(i,j)
         Q(i,j) = Q(i,jm2)
       ENDDO
     ENDIF
     CALL CMPCSG(kr,1,0.5,fden,Tcos)
     CALL CMPTRX(kr,lr,mr,A,Bb,C,B,Tcos,D,W)
-    DO i = 1 , mr
+    DO i = 1, mr
       Q(i,j) = Q(i,j) + B(i)
     ENDDO
     kr = kr + i2r
@@ -247,7 +247,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
   IF ( Mixbnd==2 ) THEN
     nr = nlast/jr
     IF ( nr<=1 ) THEN
-      DO i = 1 , mr
+      DO i = 1, mr
         B(i) = Q(i,nlast)
       ENDDO
       GOTO 500
@@ -271,7 +271,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
       !
       !     CASE OF GENERAL N AND NR = 2 .
       !
-      DO i = 1 , mr
+      DO i = 1, mr
         ii = ip + i
         B3(i) = (0.,0.)
         B(i) = Q(i,1) + 2.*P(ii)
@@ -292,31 +292,31 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
       k3 = lr
       k4 = 0
       CALL CMPTR3(mr,A,Bb,C,k,B,B2,B3,Tcos,D,W,W2,W3)
-      DO i = 1 , mr
+      DO i = 1, mr
         B(i) = B(i) + B2(i)
       ENDDO
       Tcos(1) = (2.,0.)
       CALL CMPTRX(1,0,mr,A,Bb,C,B,Tcos,D,W)
-      DO i = 1 , mr
+      DO i = 1, mr
         Q(i,1) = Q(i,1) + B(i)
       ENDDO
     ELSE
       !
       !     CASE  N = 2
       !
-      DO i = 1 , mr
+      DO i = 1, mr
         B(i) = Q(i,1)
       ENDDO
       Tcos(1) = (0.,0.)
       CALL CMPTRX(1,0,mr,A,Bb,C,B,Tcos,D,W)
-      DO i = 1 , mr
+      DO i = 1, mr
         Q(i,1) = B(i)
         B(i) = 2.*(Q(i,2)+B(i))*fistag
       ENDDO
       Tcos(1) = CMPLX(-fistag,0.)
       Tcos(2) = CMPLX(2.,0.)
       CALL CMPTRX(2,0,mr,A,Bb,C,B,Tcos,D,W)
-      DO i = 1 , mr
+      DO i = 1, mr
         Q(i,1) = Q(i,1) + B(i)
       ENDDO
       jr = 1
@@ -330,30 +330,30 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
         !     CASE N = 2**P+1
         !
         IF ( Istag/=2 ) THEN
-          DO i = 1 , mr
+          DO i = 1, mr
             B(i) = Q(i,j) + .5*Q(i,1) - Q(i,jm1) + Q(i,nlast) - Q(i,jm2)
           ENDDO
           CALL CMPCSG(jr,1,0.5,0.0,Tcos)
           CALL CMPTRX(jr,0,mr,A,Bb,C,B,Tcos,D,W)
-          DO i = 1 , mr
+          DO i = 1, mr
             Q(i,j) = .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1)) + B(i)
             B(i) = Q(i,1) + 2.*Q(i,nlast) + 4.*Q(i,j)
           ENDDO
           jr2 = 2*jr
           CALL CMPCSG(jr,1,0.0,0.0,Tcos)
-          DO i = 1 , jr
+          DO i = 1, jr
             i1 = jr + i
             i2 = jr + 1 - i
             Tcos(i1) = -Tcos(i2)
           ENDDO
           CALL CMPTRX(jr2,0,mr,A,Bb,C,B,Tcos,D,W)
-          DO i = 1 , mr
+          DO i = 1, mr
             Q(i,j) = Q(i,j) + B(i)
             B(i) = Q(i,1) + 2.*Q(i,j)
           ENDDO
           CALL CMPCSG(jr,1,0.5,0.0,Tcos)
           CALL CMPTRX(jr,0,mr,A,Bb,C,B,Tcos,D,W)
-          DO i = 1 , mr
+          DO i = 1, mr
             Q(i,1) = .5*Q(i,1) - Q(i,jm1) + B(i)
           ENDDO
           GOTO 400
@@ -365,7 +365,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
         !
         !     CASE OF GENERAL N WITH NR = 3 .
         !
-        DO i = 1 , mr
+        DO i = 1, mr
           B(i) = Q(i,2)
           Q(i,2) = (0.,0.)
           B2(i) = Q(i,3)
@@ -376,12 +376,12 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
         j = 2
         GOTO 300
       ELSE
-        DO i = 1 , mr
+        DO i = 1, mr
           B(i) = Q(i,2)
         ENDDO
         Tcos(1) = CMPLX(0.,0.)
         CALL CMPTRX(1,0,mr,A,Bb,C,B,Tcos,D,W)
-        DO i = 1 , mr
+        DO i = 1, mr
           Q(i,2) = B(i)
           B(i) = 4.*B(i) + Q(i,1) + 2.*Q(i,3)
         ENDDO
@@ -390,13 +390,13 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
         i1 = 2
         i2 = 0
         CALL CMPTRX(i1,i2,mr,A,Bb,C,B,Tcos,D,W)
-        DO i = 1 , mr
+        DO i = 1, mr
           Q(i,2) = Q(i,2) + B(i)
           B(i) = Q(i,1) + 2.*Q(i,2)
         ENDDO
         Tcos(1) = (0.,0.)
         CALL CMPTRX(1,0,mr,A,Bb,C,B,Tcos,D,W)
-        DO i = 1 , mr
+        DO i = 1, mr
           Q(i,1) = B(i)
         ENDDO
         jr = 1
@@ -404,20 +404,20 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
         GOTO 400
       ENDIF
     ENDIF
-    DO i = 1 , mr
+    DO i = 1, mr
       B(i) = .5*Q(i,1) - Q(i,jm1) + Q(i,j)
     ENDDO
     IF ( nrod/=0 ) THEN
-      DO i = 1 , mr
+      DO i = 1, mr
         B(i) = B(i) + Q(i,nlast) - Q(i,jm2)
       ENDDO
     ELSE
-      DO i = 1 , mr
+      DO i = 1, mr
         ii = ip + i
         B(i) = B(i) + P(ii)
       ENDDO
     ENDIF
-    DO i = 1 , mr
+    DO i = 1, mr
       t = .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
       Q(i,j) = t
       B2(i) = Q(i,nlast) + t
@@ -445,23 +445,23 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
   k3 = kr
   k4 = kr
   CALL CMPTR3(mr,A,Bb,C,k,B,B2,B3,Tcos,D,W,W2,W3)
-  DO i = 1 , mr
+  DO i = 1, mr
     B(i) = B(i) + B2(i) + B3(i)
   ENDDO
   Tcos(1) = (2.,0.)
   CALL CMPTRX(1,0,mr,A,Bb,C,B,Tcos,D,W)
-  DO i = 1 , mr
+  DO i = 1, mr
     Q(i,j) = Q(i,j) + B(i)
     B(i) = Q(i,1) + 2.*Q(i,j)
   ENDDO
   CALL CMPCSG(jr,1,0.5,0.0,Tcos)
   CALL CMPTRX(jr,0,mr,A,Bb,C,B,Tcos,D,W)
   IF ( jr/=1 ) THEN
-    DO i = 1 , mr
+    DO i = 1, mr
       Q(i,1) = .5*Q(i,1) - Q(i,jm1) + B(i)
     ENDDO
   ELSE
-    DO i = 1 , mr
+    DO i = 1, mr
       Q(i,1) = B(i)
     ENDDO
   ENDIF
@@ -469,20 +469,20 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
   !     START BACK SUBSTITUTION.
   !
   400  j = nlast - jr
-  DO i = 1 , mr
+  DO i = 1, mr
     B(i) = Q(i,nlast) + Q(i,j)
   ENDDO
   500  jm2 = nlast - i2r
   IF ( jr==1 ) THEN
-    DO i = 1 , mr
+    DO i = 1, mr
       Q(i,nlast) = (0.,0.)
     ENDDO
   ELSEIF ( nrod/=0 ) THEN
-    DO i = 1 , mr
+    DO i = 1, mr
       Q(i,nlast) = Q(i,nlast) - Q(i,jm2)
     ENDDO
   ELSE
-    DO i = 1 , mr
+    DO i = 1, mr
       ii = ip + i
       Q(i,nlast) = P(ii)
     ENDDO
@@ -491,12 +491,12 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
   CALL CMPCSG(kr,1,0.5,fden,Tcos)
   CALL CMPCSG(lr,1,0.5,fden,Tcos(kr+1))
   IF ( lr==0 ) THEN
-    DO i = 1 , mr
+    DO i = 1, mr
       B(i) = fistag*B(i)
     ENDDO
   ENDIF
   CALL CMPTRX(kr,lr,mr,A,Bb,C,B,Tcos,D,W)
-  DO i = 1 , mr
+  DO i = 1, mr
     Q(i,nlast) = Q(i,nlast) + B(i)
   ENDDO
   nlastp = nlast
@@ -526,31 +526,31 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
       ENDIF
       lr = kr - jr
       CALL CMPCSG(jr,1,0.5,0.0,Tcos)
-      DO j = jstart , jstop , jstep
+      DO j = jstart, jstop, jstep
         jm2 = j - jr
         jp2 = j + jr
         IF ( j/=jr ) THEN
-          DO i = 1 , mr
+          DO i = 1, mr
             B(i) = Q(i,j) + Q(i,jm2) + Q(i,jp2)
           ENDDO
         ELSE
-          DO i = 1 , mr
+          DO i = 1, mr
             B(i) = Q(i,j) + Q(i,jp2)
           ENDDO
         ENDIF
         IF ( jr/=1 ) THEN
           jm1 = j - i2r
           jp1 = j + i2r
-          DO i = 1 , mr
+          DO i = 1, mr
             Q(i,j) = .5*(Q(i,j)-Q(i,jm1)-Q(i,jp1))
           ENDDO
         ELSE
-          DO i = 1 , mr
+          DO i = 1, mr
             Q(i,j) = (0.,0.)
           ENDDO
         ENDIF
         CALL CMPTRX(jr,0,mr,A,Bb,C,B,Tcos,D,W)
-        DO i = 1 , mr
+        DO i = 1, mr
           Q(i,j) = Q(i,j) + B(i)
         ENDDO
       ENDDO

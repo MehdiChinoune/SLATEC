@@ -18,9 +18,9 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !     elimination and estimates the condition of the matrix.
   !
   !     If RCOND is not needed, CNBFA is slightly faster.
-  !     To solve  A*X = B , follow CNBCO by CNBSL.
-  !     To compute  INVERSE(A)*C , follow CNBCO by CNBSL.
-  !     To compute  DETERMINANT(A) , follow CNBCO by CNBDI.
+  !     To solve  A*X = B, follow CNBCO by CNBSL.
+  !     To compute  INVERSE(A)*C, follow CNBCO by CNBSL.
+  !     To compute  DETERMINANT(A), follow CNBCO by CNBDI.
   !
   !     On Entry
   !
@@ -61,7 +61,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !        RCOND   REAL
   !                an estimate of the reciprocal condition of  A .
-  !                For the system  A*X = B , relative perturbations
+  !                For the system  A*X = B, relative perturbations
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -110,8 +110,8 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !      then  N = 6, ML = 1, MU = 2, LDA .GE. 5  and ABE should contain
   !
-  !            * 11 12 13  +     , * = not used
-  !           21 22 23 24  +     , + = used for pivoting
+  !            * 11 12 13  +    , * = not used
+  !           21 22 23 24  +    , + = used for pivoting
   !           32 33 34 35  +
   !           43 44 45 46  +
   !           54 55 56  *  +
@@ -128,14 +128,14 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CNBCO
-  INTEGER Lda , N , Ml , Mu , Ipvt(*)
-  COMPLEX Abe(Lda,*) , Z(*)
+  INTEGER Lda, N, Ml, Mu, Ipvt(*)
+  COMPLEX Abe(Lda,*), Z(*)
   REAL Rcond
   !
-  COMPLEX CDOTC , ek , t , wk , wkm
-  REAL anorm , s , SCASUM , sm , ynorm
-  INTEGER i , info , j , ju , k , kb , kp1 , l , ldb , lm , lz , m , ml1 ,&
-    mm , nl , nu
+  COMPLEX CDOTC, ek, t, wk, wkm
+  REAL anorm, s, SCASUM, sm, ynorm
+  INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1 ,&
+    mm, nl, nu
   COMPLEX CSIGN1
   REAL CABS1
   !
@@ -145,7 +145,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   ml1 = Ml + 1
   ldb = Lda - 1
   anorm = 0.0E0
-  DO j = 1 , N
+  DO j = 1, N
     nu = MIN(Mu,j-1)
     nl = MIN(Ml,N-j)
     l = 1 + nu + nl
@@ -166,12 +166,12 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !     SOLVE CTRANS(U)*W = E
   !
   ek = (1.0E0,0.0E0)
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = (0.0E0,0.0E0)
   ENDDO
   m = Ml + Mu + 1
   ju = 0
-  DO k = 1 , N
+  DO k = 1, N
     IF ( CABS1(Z(k))/=0.0E0 ) ek = CSIGN1(ek,-Z(k))
     IF ( CABS1(ek-Z(k))>CABS1(Abe(k,ml1)) ) THEN
       s = CABS1(Abe(k,ml1))/CABS1(ek-Z(k))
@@ -193,7 +193,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     ju = MIN(MAX(ju,Mu+Ipvt(k)),N)
     mm = ml1
     IF ( kp1<=ju ) THEN
-      DO i = kp1 , ju
+      DO i = kp1, ju
         mm = mm + 1
         sm = sm + CABS1(Z(i)+wkm*CONJG(Abe(k,mm)))
         Z(i) = Z(i) + wk*CONJG(Abe(k,mm))
@@ -203,7 +203,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
         t = wkm - wk
         wk = wkm
         mm = ml1
-        DO i = kp1 , ju
+        DO i = kp1, ju
           mm = mm + 1
           Z(i) = Z(i) + t*CONJG(Abe(k,mm))
         ENDDO
@@ -216,7 +216,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !     SOLVE CTRANS(L)*Y = W
   !
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     nl = MIN(Ml,N-k)
     IF ( k<N ) Z(k) = Z(k) + CDOTC(nl,Abe(k+nl,ml1-nl),-ldb,Z(k+1),1)
@@ -236,7 +236,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !     SOLVE L*V = Y
   !
-  DO k = 1 , N
+  DO k = 1, N
     l = Ipvt(k)
     t = Z(l)
     Z(l) = Z(k)
@@ -255,7 +255,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !     SOLVE  U*Z = V
   !
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     IF ( CABS1(Z(k))>CABS1(Abe(k,ml1)) ) THEN
       s = CABS1(Abe(k,ml1))/CABS1(Z(k))

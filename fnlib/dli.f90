@@ -24,7 +24,7 @@ REAL(8) FUNCTION DLI(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DLI
-  REAL(8) :: X , DEI
+  REAL(8) :: X, DEI
   !***FIRST EXECUTABLE STATEMENT  DLI
   IF ( X<=0.D0 ) CALL XERMSG('SLATEC','DLI',&
     'LOG INTEGRAL UNDEFINED FOR X LE 0',1,2)

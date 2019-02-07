@@ -76,12 +76,12 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  D1UPDT
   REAL(8) :: D1MACH
-  INTEGER i , j , jj , l , Ls , M , N , nm1 , nmj
-  REAL(8) :: cos , cotan , giant , one , p25 , p5 , S(*) , sin , tan , &
-    tau , temp , U(*) , V(*) , W(*) , zero
+  INTEGER i, j, jj, l, Ls, M, N, nm1, nmj
+  REAL(8) :: cos, cotan, giant, one, p25, p5, S(*), sin, tan, &
+    tau, temp, U(*), V(*), W(*), zero
   LOGICAL Sing
-  SAVE one , p5 , p25 , zero
-  DATA one , p5 , p25 , zero/1.0D0 , 5.0D-1 , 2.5D-1 , 0.0D0/
+  SAVE one, p5, p25, zero
+  DATA one, p5, p25, zero/1.0D0, 5.0D-1, 2.5D-1, 0.0D0/
   !
   !     GIANT IS THE LARGEST MAGNITUDE.
   !
@@ -95,7 +95,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !     MOVE THE NONTRIVIAL PART OF THE LAST COLUMN OF S INTO W.
   !
   l = jj
-  DO i = N , M
+  DO i = N, M
     W(i) = S(l)
     l = l + 1
   ENDDO
@@ -105,7 +105,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !
   nm1 = N - 1
   IF ( nm1>=1 ) THEN
-    DO nmj = 1 , nm1
+    DO nmj = 1, nm1
       j = N - nmj
       jj = jj - (M-j+1)
       W(j) = zero
@@ -136,7 +136,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
         !        APPLY THE TRANSFORMATION TO S AND EXTEND THE SPIKE IN W.
         !
         l = jj
-        DO i = j , M
+        DO i = j, M
           temp = cos*S(l) - sin*W(i)
           W(i) = sin*S(l) + cos*W(i)
           S(l) = temp
@@ -148,7 +148,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !
   !     ADD THE SPIKE FROM THE RANK 1 UPDATE TO W.
   !
-  DO i = 1 , M
+  DO i = 1, M
     W(i) = W(i) + V(N)*U(i)
   ENDDO
   !
@@ -156,7 +156,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !
   Sing = .FALSE.
   IF ( nm1>=1 ) THEN
-    DO j = 1 , nm1
+    DO j = 1, nm1
       IF ( W(j)/=zero ) THEN
         !
         !        DETERMINE A GIVENS ROTATION WHICH ELIMINATES THE
@@ -178,7 +178,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
         !        APPLY THE TRANSFORMATION TO S AND REDUCE THE SPIKE IN W.
         !
         l = jj
-        DO i = j , M
+        DO i = j, M
           temp = cos*S(l) + sin*W(i)
           W(i) = -sin*S(l) + cos*W(i)
           S(l) = temp
@@ -201,7 +201,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !     MOVE W BACK INTO THE LAST COLUMN OF THE OUTPUT S.
   !
   l = jj
-  DO i = N , M
+  DO i = N, M
     S(l) = W(i)
     l = l + 1
   ENDDO

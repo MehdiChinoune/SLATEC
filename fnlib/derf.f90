@@ -4,7 +4,7 @@ REAL(8) FUNCTION DERF(X)
   IMPLICIT NONE
   !*--DERF5
   !*** Start of declarations inserted by SPAG
-  INTEGER INITDS , nterf
+  INTEGER INITDS, nterf
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DERF
   !***PURPOSE  Compute the error function.
@@ -34,11 +34,11 @@ REAL(8) FUNCTION DERF(X)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable name.  (RWC, WRB)
   !***END PROLOGUE  DERF
-  REAL(8) :: X , erfcs(21) , sqeps , sqrtpi , xbig , y , D1MACH , &
-    DCSEVL , DERFC
+  REAL(8) :: X, erfcs(21), sqeps, sqrtpi, xbig, y, D1MACH, &
+    DCSEVL, DERFC
   LOGICAL first
   EXTERNAL DERFC
-  SAVE erfcs , sqrtpi , nterf , xbig , sqeps , first
+  SAVE erfcs, sqrtpi, nterf, xbig, sqeps, first
   DATA erfcs(1)/ - .49046121234691808039984544033376D-1/
   DATA erfcs(2)/ - .14226120510371364237824741899631D+0/
   DATA erfcs(3)/ + .10035582187599795575754676712933D-1/
@@ -86,4 +86,5 @@ REAL(8) FUNCTION DERF(X)
   IF ( y>sqeps ) DERF = X*(1.0D0+DCSEVL(2.D0*X*X-1.D0,erfcs,nterf))
   RETURN
   !
-  99999 END FUNCTION DERF
+  99999 CONTINUE
+  END FUNCTION DERF

@@ -26,16 +26,16 @@ SUBROUTINE DCHKE3(Isnum,Srnamt,Nout,Kprint,Fatal)
   !***END PROLOGUE  DCHKE3
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  INTEGER Isnum , Nout
+  INTEGER Isnum, Nout
   CHARACTER(6) :: Srnamt
-  INTEGER infot , Kprint
+  INTEGER infot, Kprint
   !     .. Local Scalars ..
-  REAL(8) :: alpha , beta
+  REAL(8) :: alpha, beta
   INTEGER kontrl
   !     .. Local Arrays ..
-  REAL(8) :: a(1,1) , b(1,1) , c(1,1)
+  REAL(8) :: a(1,1), b(1,1), c(1,1)
   !     .. External Subroutines ..
-  EXTERNAL CHKXER , DGEMM , DSYMM , DTRMM , DTRSM , DSYRK , DSYR2K
+  EXTERNAL CHKXER, DGEMM, DSYMM, DTRMM, DTRSM, DSYRK, DSYR2K
   !***FIRST EXECUTABLE STATEMENT  DCHKE3
   CALL XGETF(kontrl)
   IF ( Kprint<=2 ) THEN

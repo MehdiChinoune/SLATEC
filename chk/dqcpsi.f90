@@ -4,7 +4,7 @@ SUBROUTINE DQCPSI(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--DQCPSI5
   !*** Start of declarations inserted by SPAG
-  INTEGER Ipass , Kprint
+  INTEGER Ipass, Kprint
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DQCPSI
   !***PURPOSE  Quick check for DPSIFN.
@@ -38,10 +38,10 @@ SUBROUTINE DQCPSI(Lun,Kprint,Ipass)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQCPSI
-  INTEGER i , ierr , iflg , ix , kode , Lun , m , n , nm , nn , nz
-  REAL(8) :: er , euler , psi1 , psi2 , r1m4 , s , tol , x
+  INTEGER i, ierr, iflg, ix, kode, Lun, m, n, nm, nn, nz
+  REAL(8) :: er, euler, psi1, psi2, r1m4, s, tol, x
   REAL(8) :: D1MACH
-  DIMENSION psi1(3) , psi2(20)
+  DIMENSION psi1(3), psi2(20)
   DATA euler/0.5772156649015328606D0/
   !***FIRST EXECUTABLE STATEMENT  DQCPSI
   r1m4 = D1MACH(4)
@@ -53,11 +53,11 @@ SUBROUTINE DQCPSI(Lun,Kprint,Ipass)
   !-----------------------------------------------------------------------
   iflg = 0
   n = 0
-  DO kode = 1 , 2
-    DO m = 1 , 2
+  DO kode = 1, 2
+    DO m = 1, 2
       s = -euler + (m-1)*(-2.0D0*LOG(2.0D0))
       x = 1.0D0 - (m-1)*0.5D0
-      DO i = 1 , 20
+      DO i = 1, 20
         CALL DPSIFN(x,n,kode,1,psi2,nz,ierr)
         psi1(1) = -s + (kode-1)*LOG(x)
         er = ABS((psi1(1)-psi2(1))/psi1(1))
@@ -66,8 +66,8 @@ SUBROUTINE DQCPSI(Lun,Kprint,Ipass)
             IF ( Kprint>=2 ) WRITE (Lun,99004)
           ENDIF
           iflg = iflg + 1
-          IF ( Kprint>=2 ) WRITE (Lun,99005) x , psi1(1) , psi2(i) , er , &
-            kode , n
+          IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), er, &
+            kode, n
           IF ( iflg>200 ) GOTO 100
         ENDIF
         s = s + 1.0D0/x
@@ -89,20 +89,20 @@ SUBROUTINE DQCPSI(Lun,Kprint,Ipass)
       IF ( Kprint>=2 ) WRITE (Lun,99004)
     ENDIF
     iflg = iflg + 1
-    IF ( Kprint>=2 ) WRITE (Lun,99005) x , psi1(1) , psi2(1) , er , kode , n
+    IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(1), er, kode, n
   ENDIF
   !-----------------------------------------------------------------------
   !     CONSISTENCY TESTS FOR N.GE.0
   !-----------------------------------------------------------------------
-  DO kode = 1 , 2
-    DO m = 1 , 5
-      DO n = 1 , 16 , 5
+  DO kode = 1, 2
+    DO m = 1, 5
+      DO n = 1, 16, 5
         nn = n - 1
         x = 0.1D0
-        DO ix = 1 , 25 , 2
+        DO ix = 1, 25, 2
           x = x + 1.0D0
           CALL DPSIFN(x,nn,kode,m,psi2,nz,ierr)
-          DO i = 1 , m
+          DO i = 1, m
             nm = nn + i - 1
             CALL DPSIFN(x,nm,kode,1,psi1,nz,ierr)
             er = ABS((psi2(i)-psi1(1))/psi1(1))
@@ -111,8 +111,8 @@ SUBROUTINE DQCPSI(Lun,Kprint,Ipass)
                 IF ( Kprint>=2 ) WRITE (Lun,99004)
               ENDIF
               iflg = iflg + 1
-              IF ( Kprint>=2 ) WRITE (Lun,99005) x , psi1(1) , psi2(i) , &
-                er , kode , nm
+              IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), &
+                er, kode, nm
             ENDIF
           ENDDO
         ENDDO
@@ -126,7 +126,8 @@ SUBROUTINE DQCPSI(Lun,Kprint,Ipass)
   Ipass = 0
   IF ( iflg==0 ) Ipass = 1
   RETURN
-  100  IF ( Kprint>=2 ) WRITE (Lun,99003)
+  100 CONTINUE
+  IF ( Kprint>=2 ) WRITE (Lun,99003)
   99003 FORMAT (//' PROCESSING OF MAIN LOOPS TERMINATED BECAUSE THE NUM',&
     'BER OF DIAGNOSTIC PRINTS EXCEEDS 200'//)
   Ipass = 0

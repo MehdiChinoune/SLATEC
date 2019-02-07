@@ -63,23 +63,23 @@ SUBROUTINE SPOSL(A,Lda,N,B)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SPOSL
-  INTEGER Lda , N
-  REAL A(Lda,*) , B(*)
+  INTEGER Lda, N
+  REAL A(Lda,*), B(*)
   !
-  REAL SDOT , t
-  INTEGER k , kb
+  REAL SDOT, t
+  INTEGER k, kb
   !
   !     SOLVE TRANS(R)*Y = B
   !
   !***FIRST EXECUTABLE STATEMENT  SPOSL
-  DO k = 1 , N
+  DO k = 1, N
     t = SDOT(k-1,A(1,k),1,B(1),1)
     B(k) = (B(k)-t)/A(k,k)
   ENDDO
   !
   !     SOLVE R*X = Y
   !
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     B(k) = B(k)/A(k,k)
     t = -B(k)

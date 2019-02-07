@@ -5,9 +5,9 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   IMPLICIT NONE
   !*--DERKF6
   !*** Start of declarations inserted by SPAG
-  REAL Atol , F , Rpar , Rtol , Rwork , T , Tout , Y
-  INTEGER Idid , Info , Ipar , Iwork , kdi , kf1 , kf2 , kf3 , kf4 , kf5 ,&
-    kh , krer , ktf , kto , ktstar , ku , kyp , kys , Liw , Lrw
+  REAL Atol, F, Rpar, Rtol, Rwork, T, Tout, Y
+  INTEGER Idid, Info, Ipar, Iwork, kdi, kf1, kf2, kf3, kf4, kf5 ,&
+    kh, krer, ktf, kto, ktstar, ku, kyp, kys, Liw, Lrw
   INTEGER Neq
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DERKF
@@ -27,7 +27,7 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   solvers DEPAC, consisting of the codes DERKF, DEABM, and DEBDF.
   !   Design of the package was by L. F. Shampine and H. A. Watts.
   !   It is documented in
-  !        SAND-79-2374 , DEPAC - Design of a User Oriented Package of ODE
+  !        SAND-79-2374, DEPAC - Design of a User Oriented Package of ODE
   !                              Solvers.
   !   DERKF is a driver for a modification of the code RKF45 written by
   !             H. A. Watts and L. F. Shampine
@@ -164,7 +164,7 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !                               F(X,U,UPRIME,RPAR,IPAR)
   !             to define the system of first order differential equations
   !             which is to be solved.  For the given values of X and the
-  !             vector  U(*)=(U(1),U(2),...,U(NEQ)) , the subroutine must
+  !             vector  U(*)=(U(1),U(2),...,U(NEQ)), the subroutine must
   !             evaluate the NEQ components of the system of differential
   !             equations  DU/DX=F(X,U)  and store the derivatives in the
   !             array UPRIME(*), that is,  UPRIME(I) = * DU(I)/DX *  for
@@ -428,7 +428,7 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !                        attempted on the next step.
   !
   !             RWORK(12)--If the tolerances have been increased by the
-  !                        code (IDID = -2) , they were multiplied by the
+  !                        code (IDID = -2), they were multiplied by the
   !                        value in RWORK(12).
   !
   !             RWORK(20+I)--which contains the approximate derivative
@@ -604,12 +604,12 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DERKF
   !
-  LOGICAL stiff , nonstf
+  LOGICAL stiff, nonstf
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
   !
-  DIMENSION Y(*) , Info(15) , Rtol(*) , Atol(*) , Rwork(*) , Iwork(*) ,&
-    Rpar(*) , Ipar(*)
+  DIMENSION Y(*), Info(15), Rtol(*), Atol(*), Rwork(*), Iwork(*) ,&
+    Rpar(*), Ipar(*)
   !
   EXTERNAL F
   !

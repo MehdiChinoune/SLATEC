@@ -4,9 +4,9 @@ SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   IMPLICIT NONE
   !*--PASSF45
   !*** Start of declarations inserted by SPAG
-  REAL Cc , Ch , ci2 , ci3 , ci4 , cr2 , cr3 , cr4 , ti1 , ti2 , ti3 , ti4 , &
-    tr1 , tr2 , tr3 , tr4 , Wa1 , Wa2 , Wa3
-  INTEGER i , Ido , k , L1
+  REAL Cc, Ch, ci2, ci3, ci4, cr2, cr3, cr4, ti1, ti2, ti3, ti4, &
+    tr1, tr2, tr3, tr4, Wa1, Wa2, Wa3
+  INTEGER i, Ido, k, L1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PASSF4
   !***SUBSIDIARY
@@ -26,10 +26,10 @@ SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  PASSF4
-  DIMENSION Cc(Ido,4,*) , Ch(Ido,L1,4) , Wa1(*) , Wa2(*) , Wa3(*)
+  DIMENSION Cc(Ido,4,*), Ch(Ido,L1,4), Wa1(*), Wa2(*), Wa3(*)
   !***FIRST EXECUTABLE STATEMENT  PASSF4
   IF ( Ido==2 ) THEN
-    DO k = 1 , L1
+    DO k = 1, L1
       ti1 = Cc(2,1,k) - Cc(2,3,k)
       ti2 = Cc(2,1,k) + Cc(2,3,k)
       tr4 = Cc(2,2,k) - Cc(2,4,k)
@@ -49,9 +49,9 @@ SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
     ENDDO
     RETURN
   ELSEIF ( Ido/2<L1 ) THEN
-    DO i = 2 , Ido , 2
+    DO i = 2, Ido, 2
       !DIR$ IVDEP
-      DO k = 1 , L1
+      DO k = 1, L1
         ti1 = Cc(i,1,k) - Cc(i,3,k)
         ti2 = Cc(i,1,k) + Cc(i,3,k)
         ti3 = Cc(i,2,k) + Cc(i,4,k)
@@ -78,9 +78,9 @@ SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
     ENDDO
     GOTO 99999
   ENDIF
-  DO k = 1 , L1
+  DO k = 1, L1
     !DIR$ IVDEP
-    DO i = 2 , Ido , 2
+    DO i = 2, Ido, 2
       ti1 = Cc(i,1,k) - Cc(i,3,k)
       ti2 = Cc(i,1,k) + Cc(i,3,k)
       ti3 = Cc(i,2,k) + Cc(i,4,k)
@@ -106,4 +106,5 @@ SUBROUTINE PASSF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
     ENDDO
   ENDDO
   RETURN
-  99999 END SUBROUTINE PASSF4
+  99999 CONTINUE
+  END SUBROUTINE PASSF4

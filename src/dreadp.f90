@@ -4,7 +4,7 @@ SUBROUTINE DREADP(Ipage,List,Rlist,Lpage,Irec)
   IMPLICIT NONE
   !*--DREADP5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Ipage , ipagef , Irec , irecn , Lpage , lpg
+  INTEGER i, Ipage, ipagef, Irec, irecn, Lpage, lpg
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DREADP
   !***SUBSIDIARY
@@ -33,7 +33,7 @@ SUBROUTINE DREADP(Ipage,List,Rlist,Lpage,Irec)
   !***END PROLOGUE  DREADP
   INTEGER List(*)
   REAL(8) :: Rlist(*)
-  CHARACTER(8) :: xern1 , xern2
+  CHARACTER(8) :: xern1, xern2
   !***FIRST EXECUTABLE STATEMENT  DREADP
   ipagef = Ipage
   lpg = Lpage

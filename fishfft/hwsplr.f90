@@ -5,12 +5,12 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   IMPLICIT NONE
   !*--HWSPLR6
   !*** Start of declarations inserted by SPAG
-  REAL A , a1 , a2 , B , Bda , Bdb , Bdc , Bdd , C , D , deltar , deltht , &
-    dlrby2 , dlrsq , dlthsq , Elmbda , F , Pertrb , r , s
-  REAL s1 , s2 , W , ypole
-  INTEGER i , id2 , id3 , id4 , id5 , id6 , Idimf , ierr1 , Ierror , ij , &
-    ip , iwstor , j , k , l , lp , M , Mbdcnd , mp1 , mstart
-  INTEGER mstop , munk , N , Nbdcnd , np , np1 , nstart , nstop , nunk
+  REAL A, a1, a2, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, deltht, &
+    dlrby2, dlrsq, dlthsq, Elmbda, F, Pertrb, r, s
+  REAL s1, s2, W, ypole
+  INTEGER i, id2, id3, id4, id5, id6, Idimf, ierr1, Ierror, ij, &
+    ip, iwstor, j, k, l, lp, M, Mbdcnd, mp1, mstart
+  INTEGER mstop, munk, N, Nbdcnd, np, np1, nstart, nstop, nunk
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HWSPLR
   !***PURPOSE  Solve a finite difference approximation to the Helmholtz
@@ -322,7 +322,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !
   DIMENSION F(Idimf,*)
-  DIMENSION Bda(*) , Bdb(*) , Bdc(*) , Bdd(*) , W(*)
+  DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HWSPLR
   Ierror = 0
   IF ( A<0. ) Ierror = 1
@@ -387,7 +387,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   a1 = 2./dlrsq
   ij = 0
   IF ( Mbdcnd==3.OR.Mbdcnd==4 ) ij = 1
-  DO i = 1 , munk
+  DO i = 1, munk
     r = A + (i-ij)*deltar
     j = id5 + i
     W(j) = r
@@ -415,25 +415,25 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   SELECT CASE (Mbdcnd)
     CASE (3,4)
       a1 = 2.*deltar*W(1)
-      DO j = nstart , nstop
+      DO j = nstart, nstop
         F(1,j) = F(1,j) + a1*Bda(j)
       ENDDO
     CASE (5,6)
     CASE DEFAULT
       a1 = W(1)
-      DO j = nstart , nstop
+      DO j = nstart, nstop
         F(2,j) = F(2,j) - a1*F(1,j)
       ENDDO
   END SELECT
   SELECT CASE (Mbdcnd)
     CASE (2,3,6)
       a1 = 2.*deltar*W(id4)
-      DO j = nstart , nstop
+      DO j = nstart, nstop
         F(mp1,j) = F(mp1,j) - a1*Bdb(j)
       ENDDO
     CASE DEFAULT
       a1 = W(id4)
-      DO j = nstart , nstop
+      DO j = nstart, nstop
         F(M,j) = F(M,j) - a1*F(mp1,j)
       ENDDO
   END SELECT
@@ -448,12 +448,12 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       GOTO 100
     CASE (4,5)
       a1 = 2./deltht
-      DO i = mstart , mstop
+      DO i = mstart, mstop
         j = i + lp
         F(i,1) = F(i,1) + a1*W(j)*Bdc(i)
       ENDDO
     CASE DEFAULT
-      DO i = mstart , mstop
+      DO i = mstart, mstop
         j = i + lp
         F(i,2) = F(i,2) - a1*W(j)*F(i,1)
       ENDDO
@@ -463,12 +463,12 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE (1)
     CASE (3,4)
       a1 = 2./deltht
-      DO i = mstart , mstop
+      DO i = mstart, mstop
         j = i + lp
         F(i,np1) = F(i,np1) - a1*W(j)*Bdd(i)
       ENDDO
     CASE DEFAULT
-      DO i = mstart , mstop
+      DO i = mstart, mstop
         j = i + lp
         F(i,N) = F(i,N) - a1*W(j)*F(i,np1)
       ENDDO
@@ -477,7 +477,8 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     ADJUST RIGHT SIDE OF EQUATION FOR UNKNOWN AT POLE WHEN HAVE
   !     DERIVATIVE SPECIFIED BOUNDARY CONDITIONS.
   !
-  100  IF ( Mbdcnd>=5.AND.Nbdcnd==3 ) F(1,1) = F(1,1) - (Bdd(2)-Bdc(2))&
+  100 CONTINUE
+  IF ( Mbdcnd>=5.AND.Nbdcnd==3 ) F(1,1) = F(1,1) - (Bdd(2)-Bdc(2))&
     *4./(N*deltht*dlrsq)
   !
   !     ADJUST RIGHT SIDE OF SINGULAR PROBLEMS TO INSURE EXISTENCE OF A
@@ -501,11 +502,11 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       j = id5 + munk
       W(j) = .5*(W(j-1)+dlrby2)
       s = 0.
-      DO i = mstart , mstop
+      DO i = mstart, mstop
         s1 = 0.
         ij = nstart + 1
         k = nstop - 1
-        DO j = ij , k
+        DO j = ij, k
           s1 = s1 + F(i,j)
         ENDDO
         j = i + l
@@ -519,8 +520,8 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
         s1 = s1 + s2
       ENDIF
       Pertrb = s/s1
-      DO i = mstart , mstop
-        DO j = nstart , nstop
+      DO i = mstart, mstop
+        DO j = nstart, nstop
           F(i,j) = F(i,j) - Pertrb
         ENDDO
       ENDDO
@@ -531,77 +532,80 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     MULTIPLY I-TH EQUATION THROUGH BY (R(I)*DELTHT)**2.
   !
-  200  DO i = mstart , mstop
-  k = i - mstart + 1
-  j = i + lp
-  a1 = dlthsq/W(j)
-  W(k) = a1*W(k)
-  j = id2 + k
-  W(j) = a1*W(j)
-  j = id3 + k
-  W(j) = a1*W(j)
-  DO j = nstart , nstop
-    F(i,j) = a1*F(i,j)
+  200 CONTINUE
+  DO i = mstart, mstop
+    k = i - mstart + 1
+    j = i + lp
+    a1 = dlthsq/W(j)
+    W(k) = a1*W(k)
+    j = id2 + k
+    W(j) = a1*W(j)
+    j = id3 + k
+    W(j) = a1*W(j)
+    DO j = nstart, nstop
+      F(i,j) = a1*F(i,j)
+    ENDDO
   ENDDO
-ENDDO
-W(1) = 0.
-W(id4) = 0.
-!
-!     CALL GENBUN TO SOLVE THE SYSTEM OF EQUATIONS.
-!
-CALL GENBUN(Nbdcnd,nunk,1,munk,W(1),W(id2+1),W(id3+1),Idimf,&
-  F(mstart,nstart),ierr1,W(id4+1))
-iwstor = W(id4+1) + 3*munk
-SELECT CASE (Mbdcnd)
-  CASE (1,2,3,4)
-    GOTO 400
-  CASE (5)
-  CASE DEFAULT
-    !
-    !     ADJUST THE SOLUTION AS NECESSARY FOR THE PROBLEMS WHERE A = 0.
-    !
-    IF ( Elmbda==0. ) THEN
-      ypole = 0.
-      GOTO 300
-    ENDIF
-END SELECT
-j = id5 + munk
-W(j) = W(id2)/W(id3)
-DO ip = 3 , munk
-  i = munk - ip + 2
-  j = id5 + i
-  lp = id2 + i
-  k = id3 + i
-  W(j) = W(i)/(W(lp)-W(k)*W(j+1))
-ENDDO
-W(id5+1) = -.5*dlthsq/(W(id2+1)-W(id3+1)*W(id5+2))
-DO i = 2 , munk
-  j = id5 + i
-  W(j) = -W(j)*W(j-1)
-ENDDO
-s = 0.
-DO j = nstart , nstop
-  s = s + F(2,j)
-ENDDO
-a2 = nunk
-IF ( Nbdcnd/=0 ) THEN
-  s = s - .5*(F(2,nstart)+F(2,nstop))
-  a2 = a2 - 1.
-ENDIF
-ypole = (.25*dlrsq*F(1,1)-s/a2)/(W(id5+1)-1.+Elmbda*dlrsq*.25)
-DO i = mstart , mstop
-  k = l + i
-  DO j = nstart , nstop
-    F(i,j) = F(i,j) + ypole*W(k)
+  W(1) = 0.
+  W(id4) = 0.
+  !
+  !     CALL GENBUN TO SOLVE THE SYSTEM OF EQUATIONS.
+  !
+  CALL GENBUN(Nbdcnd,nunk,1,munk,W(1),W(id2+1),W(id3+1),Idimf,&
+    F(mstart,nstart),ierr1,W(id4+1))
+  iwstor = W(id4+1) + 3*munk
+  SELECT CASE (Mbdcnd)
+    CASE (1,2,3,4)
+      GOTO 400
+    CASE (5)
+    CASE DEFAULT
+      !
+      !     ADJUST THE SOLUTION AS NECESSARY FOR THE PROBLEMS WHERE A = 0.
+      !
+      IF ( Elmbda==0. ) THEN
+        ypole = 0.
+        GOTO 300
+      ENDIF
+  END SELECT
+  j = id5 + munk
+  W(j) = W(id2)/W(id3)
+  DO ip = 3, munk
+    i = munk - ip + 2
+    j = id5 + i
+    lp = id2 + i
+    k = id3 + i
+    W(j) = W(i)/(W(lp)-W(k)*W(j+1))
   ENDDO
-ENDDO
-300  DO j = 1 , np1
-F(1,j) = ypole
-ENDDO
-400  IF ( Nbdcnd==0 ) THEN
-DO i = mstart , mstop
-F(i,np1) = F(i,1)
-ENDDO
-ENDIF
-W(1) = iwstor
+  W(id5+1) = -.5*dlthsq/(W(id2+1)-W(id3+1)*W(id5+2))
+  DO i = 2, munk
+    j = id5 + i
+    W(j) = -W(j)*W(j-1)
+  ENDDO
+  s = 0.
+  DO j = nstart, nstop
+    s = s + F(2,j)
+  ENDDO
+  a2 = nunk
+  IF ( Nbdcnd/=0 ) THEN
+    s = s - .5*(F(2,nstart)+F(2,nstop))
+    a2 = a2 - 1.
+  ENDIF
+  ypole = (.25*dlrsq*F(1,1)-s/a2)/(W(id5+1)-1.+Elmbda*dlrsq*.25)
+  DO i = mstart, mstop
+    k = l + i
+    DO j = nstart, nstop
+      F(i,j) = F(i,j) + ypole*W(k)
+    ENDDO
+  ENDDO
+  300 CONTINUE
+  DO j = 1, np1
+    F(1,j) = ypole
+  ENDDO
+  400 CONTINUE
+  IF ( Nbdcnd==0 ) THEN
+    DO i = mstart, mstop
+      F(i,np1) = F(i,1)
+    ENDDO
+  ENDIF
+  W(1) = iwstor
 END SUBROUTINE HWSPLR

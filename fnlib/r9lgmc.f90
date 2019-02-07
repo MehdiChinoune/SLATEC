@@ -4,8 +4,8 @@ FUNCTION R9LGMC(X)
   IMPLICIT NONE
   !*--R9LGMC5
   !*** Start of declarations inserted by SPAG
-  REAL algmcs , CSEVL , R1MACH , R9LGMC , X , xbig , xmax
-  INTEGER INITS , nalgm
+  REAL algmcs, CSEVL, R1MACH, R9LGMC, X, xbig, xmax
+  INTEGER INITS, nalgm
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9LGMC
   !***SUBSIDIARY
@@ -41,7 +41,7 @@ FUNCTION R9LGMC(X)
   !***END PROLOGUE  R9LGMC
   DIMENSION algmcs(6)
   LOGICAL first
-  SAVE algmcs , nalgm , xbig , xmax , first
+  SAVE algmcs, nalgm, xbig, xmax, first
   DATA algmcs(1)/.166638948045186E0/
   DATA algmcs(2)/ - .0000138494817606E0/
   DATA algmcs(3)/.0000000098108256E0/
@@ -69,4 +69,5 @@ FUNCTION R9LGMC(X)
   IF ( X<xbig ) R9LGMC = CSEVL(2.0*(10./X)**2-1.,algmcs,nalgm)/X
   RETURN
   !
-  99999 END FUNCTION R9LGMC
+  99999 CONTINUE
+  END FUNCTION R9LGMC

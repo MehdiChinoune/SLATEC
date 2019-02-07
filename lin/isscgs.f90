@@ -188,21 +188,21 @@ INTEGER FUNCTION ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  ISSCGS
   !     .. Scalar Arguments ..
-  REAL Ak , Bk , Bnrm , Err , Solnrm , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
+  REAL Ak, Bk, Bnrm, Err, Solnrm, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt) , B(N) , P(N) , Q(N) , R(N) , R0(N) , Rwork(*) , U(N) , &
-    V1(N) , V2(N) , X(N)
-  INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
+  REAL A(Nelt), B(N), P(N), Q(N), R(N), R0(N), Rwork(*), U(N), &
+    V1(N), V2(N), X(N)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC , MSOLVE
+  EXTERNAL MATVEC, MSOLVE
   !     .. Arrays in Common ..
   REAL SOLn(1)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
-  REAL R1MACH , SNRM2
-  EXTERNAL R1MACH , SNRM2
+  REAL R1MACH, SNRM2
+  EXTERNAL R1MACH, SNRM2
   !     .. Common blocks ..
   COMMON /SSLBLK/ SOLn
   !***FIRST EXECUTABLE STATEMENT  ISSCGS
@@ -212,7 +212,7 @@ INTEGER FUNCTION ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
     !         err = ||Residual||/||RightHandSide|| (2-Norms).
     IF ( Iter==0 ) Bnrm = SNRM2(N,B,1)
     CALL MATVEC(N,X,V2,Nelt,Ia,Ja,A,Isym)
-    DO i = 1 , N
+    DO i = 1, N
       V2(i) = V2(i) - B(i)
     ENDDO
     Err = SNRM2(N,V2,1)/Bnrm
@@ -227,7 +227,7 @@ INTEGER FUNCTION ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   ELSEIF ( Itol==11 ) THEN
     !         err = ||x-TrueSolution||/||TrueSolution|| (2-Norms).
     IF ( Iter==0 ) Solnrm = SNRM2(N,SOLn,1)
-    DO i = 1 , N
+    DO i = 1, N
       V2(i) = X(i) - SOLn(i)
     ENDDO
     Err = SNRM2(N,V2,1)/Solnrm
@@ -242,13 +242,13 @@ INTEGER FUNCTION ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   !         if desired.
   IF ( Iunit/=0 ) THEN
     IF ( Iter==0 ) THEN
-      WRITE (Iunit,99001) N , Itol
+      WRITE (Iunit,99001) N, Itol
       99001     FORMAT (' Preconditioned BiConjugate Gradient Squared for ',&
         'N, ITOL = ',I5,I5,/' ITER','   Error Estimate',&
         '            Alpha','             Beta')
-      WRITE (Iunit,99002) Iter , Err
+      WRITE (Iunit,99002) Iter, Err
     ELSE
-      WRITE (Iunit,99002) Iter , Err , Ak , Bk
+      WRITE (Iunit,99002) Iter, Err, Ak, Bk
     ENDIF
   ENDIF
   IF ( Err<=Tol ) ISSCGS = 1

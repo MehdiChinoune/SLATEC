@@ -87,16 +87,16 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
   !***END PROLOGUE  DSPR
   !     .. Scalar Arguments ..
   REAL(8) :: Alpha
-  INTEGER Incx , N
+  INTEGER Incx, N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  REAL(8) :: Ap(*) , X(*)
+  REAL(8) :: Ap(*), X(*)
   !     .. Parameters ..
   REAL(8) :: ZERO
   PARAMETER (ZERO=0.0D+0)
   !     .. Local Scalars ..
   REAL(8) :: temp
-  INTEGER i , info , ix , j , jx , k , kk , kx
+  INTEGER i, info, ix, j, jx, k, kk, kx
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
@@ -140,11 +140,11 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
     !        Form  A  when upper triangle is stored in AP.
     !
     IF ( Incx==1 ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( X(j)/=ZERO ) THEN
           temp = Alpha*X(j)
           k = kk
-          DO i = 1 , j
+          DO i = 1, j
             Ap(k) = Ap(k) + X(i)*temp
             k = k + 1
           ENDDO
@@ -153,11 +153,11 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
       ENDDO
     ELSE
       jx = kx
-      DO j = 1 , N
+      DO j = 1, N
         IF ( X(jx)/=ZERO ) THEN
           temp = Alpha*X(jx)
           ix = kx
-          DO k = kk , kk + j - 1
+          DO k = kk, kk + j - 1
             Ap(k) = Ap(k) + X(ix)*temp
             ix = ix + Incx
           ENDDO
@@ -170,11 +170,11 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
     !        Form  A  when lower triangle is stored in AP.
     !
   ELSEIF ( Incx==1 ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       IF ( X(j)/=ZERO ) THEN
         temp = Alpha*X(j)
         k = kk
-        DO i = j , N
+        DO i = j, N
           Ap(k) = Ap(k) + X(i)*temp
           k = k + 1
         ENDDO
@@ -183,11 +183,11 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
     ENDDO
   ELSE
     jx = kx
-    DO j = 1 , N
+    DO j = 1, N
       IF ( X(jx)/=ZERO ) THEN
         temp = Alpha*X(jx)
         ix = jx
-        DO k = kk , kk + N - j
+        DO k = kk, kk + N - j
           Ap(k) = Ap(k) + X(ix)*temp
           ix = ix + Incx
         ENDDO

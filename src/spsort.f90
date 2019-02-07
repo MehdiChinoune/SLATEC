@@ -72,19 +72,19 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
   !           IF-THEN-ELSE-ENDIF.  (SMR, WRB)
   !***END PROLOGUE  SPSORT
   !     .. Scalar Arguments ..
-  INTEGER Ier , Kflag , N
+  INTEGER Ier, Kflag, N
   !     .. Array Arguments ..
   REAL X(*)
   INTEGER Iperm(*)
   !     .. Local Scalars ..
-  REAL r , temp
-  INTEGER i , ij , indx , indx0 , istrt , j , k , kk , l , lm , lmt , m , nn
+  REAL r, temp
+  INTEGER i, ij, indx, indx0, istrt, j, k, kk, l, lm, lmt, m, nn
   !     .. Local Arrays ..
-  INTEGER il(21) , iu(21)
+  INTEGER il(21), iu(21)
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , INT
+  INTRINSIC ABS, INT
   !***FIRST EXECUTABLE STATEMENT  SPSORT
   Ier = 0
   nn = N
@@ -106,7 +106,7 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
   !
   !     Initialize permutation vector
   !
-  DO i = 1 , nn
+  DO i = 1, nn
     Iperm(i) = i
   ENDDO
   !
@@ -117,7 +117,7 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
   !     Alter array X to get decreasing order if needed
   !
   IF ( Kflag<=-1 ) THEN
-    DO i = 1 , nn
+    DO i = 1, nn
       X(i) = -X(i)
     ENDDO
   ENDIF
@@ -129,7 +129,8 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
   j = nn
   r = .375E0
   !
-  100  IF ( i==j ) GOTO 300
+  100 CONTINUE
+  IF ( i==j ) GOTO 300
   IF ( r<=0.5898437E0 ) THEN
     r = r + 3.90625E-2
   ELSE
@@ -220,7 +221,7 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
     !     Clean up
     !
     IF ( Kflag<=-1 ) THEN
-      DO i = 1 , nn
+      DO i = 1, nn
         X(i) = -X(i)
       ENDDO
     ENDIF
@@ -232,7 +233,7 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
       !        Use the IPERM vector as a flag.
       !        If IPERM(I) < 0, then the I-th value is in correct location
       !
-      DO istrt = 1 , nn
+      DO istrt = 1, nn
         IF ( Iperm(istrt)>=0 ) THEN
           indx = istrt
           indx0 = indx
@@ -253,7 +254,7 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
       !
       !        Revert the signs of the IPERM values
       !
-      DO i = 1 , nn
+      DO i = 1, nn
         Iperm(i) = -Iperm(i)
       ENDDO
       !
@@ -264,7 +265,8 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
     j = iu(m)
   ENDIF
   !
-  400  IF ( j-i>=1 ) GOTO 200
+  400 CONTINUE
+  IF ( j-i>=1 ) GOTO 200
   IF ( i==1 ) GOTO 100
   i = i - 1
   DO
@@ -287,4 +289,5 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
     ENDIF
   ENDDO
   !
-  99999 END SUBROUTINE SPSORT
+  99999 CONTINUE
+  END SUBROUTINE SPSORT

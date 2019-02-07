@@ -5,7 +5,7 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
   !*--D9AIMP5
   !*** Start of declarations inserted by SPAG
   REAL eta
-  INTEGER INITDS , nam20 , nam21 , nam22 , nath0 , nath1 , nath2
+  INTEGER INITDS, nam20, nam21, nam22, nath0, nath1, nath2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9AIMP
   !***SUBSIDIARY
@@ -65,12 +65,12 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9AIMP
-  REAL(8) :: X , Ampl , Theta , am20cs(57) , ath0cs(53) , am21cs(60) , &
-    ath1cs(58) , am22cs(74) , ath2cs(72) , pi4 , sqrtx , &
-    xsml , z , D1MACH , DCSEVL
+  REAL(8) :: X, Ampl, Theta, am20cs(57), ath0cs(53), am21cs(60), &
+    ath1cs(58), am22cs(74), ath2cs(72), pi4, sqrtx, &
+    xsml, z, D1MACH, DCSEVL
   LOGICAL first
-  SAVE am20cs , ath0cs , am21cs , ath1cs , am22cs , ath2cs , pi4 , nam20 , &
-    nath0 , nam21 , nath1 , nam22 , nath2 , xsml , first
+  SAVE am20cs, ath0cs, am21cs, ath1cs, am22cs, ath2cs, pi4, nam20, &
+    nath0, nam21, nath1, nam22, nath2, xsml, first
   DATA am20cs(1)/ + .108716749086561856615730588125D-1/
   DATA am20cs(2)/ + .369489228982663555091728665146D-3/
   DATA am20cs(3)/ + .440680100484689563667507001327D-5/

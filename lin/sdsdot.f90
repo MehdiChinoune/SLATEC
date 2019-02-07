@@ -4,7 +4,7 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
   IMPLICIT NONE
   !*--SDSDOT5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , Incy , kx , ky , N , ns
+  INTEGER i, Incx, Incy, kx, ky, N, ns
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SDSDOT
   !***PURPOSE  Compute the inner product of two vectors with extended
@@ -52,7 +52,7 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SDSDOT
-  REAL Sx(*) , Sy(*) , Sb
+  REAL Sx(*), Sy(*), Sb
   REAL(8) :: dsdot
   !***FIRST EXECUTABLE STATEMENT  SDSDOT
   dsdot = Sb
@@ -62,7 +62,7 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
       !     Code for equal and positive increments.
       !
       ns = N*Incx
-      DO i = 1 , ns , Incx
+      DO i = 1, ns, Incx
         dsdot = dsdot + REAL(Sx(i))*REAL(Sy(i))
       ENDDO
       SDSDOT = dsdot
@@ -75,7 +75,7 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
       ky = 1
       IF ( Incx<0 ) kx = 1 + (1-N)*Incx
       IF ( Incy<0 ) ky = 1 + (1-N)*Incy
-      DO i = 1 , N
+      DO i = 1, N
         dsdot = dsdot + REAL(Sx(kx), 8)*REAL(Sy(ky), 8)
         kx = kx + Incx
         ky = ky + Incy
@@ -84,4 +84,5 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
   ENDIF
   SDSDOT = dsdot
   RETURN
-  99999 END FUNCTION SDSDOT
+  99999 CONTINUE
+  END FUNCTION SDSDOT

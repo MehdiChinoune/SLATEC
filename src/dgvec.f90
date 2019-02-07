@@ -12,7 +12,7 @@ SUBROUTINE DGVEC(X,G)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DGVEC
-  REAL(8) :: X , G
+  REAL(8) :: X, G
   DIMENSION G(*)
   !***FIRST EXECUTABLE STATEMENT  DGVEC
   G(1) = 0.0D0

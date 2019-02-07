@@ -27,16 +27,16 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
   !***END PROLOGUE  ZSERI
   !     COMPLEX AK1,CK,COEF,CONE,CRSC,CSCL,CZ,CZERO,HZ,RZ,S1,S2,Y,Z
-  REAL(8) :: aa , acz , ak , ak1i , ak1r , Alim , arm , ascle , atol , &
-    az , cki , ckr , coefi , coefr , conei , coner , crscr , &
-    czi , czr , dfnu , Elim , Fnu , fnup , hzi , hzr , raz , &
-    rs , rtr1 , rzi , rzr , s , ss , sti , str , s1i , s1r , &
-    s2i , s2r , Tol , Yi , Yr , wi , wr , zeroi , zeror , &
-    Zi , Zr , DGAMLN , D1MACH , ZABS
-  INTEGER i , ib , idum , iflag , il , k , Kode , l , m , N , nn , Nz , nw
-  DIMENSION Yr(N) , Yi(N) , wr(2) , wi(2)
-  EXTERNAL ZABS , ZLOG
-  DATA zeror , zeroi , coner , conei/0.0D0 , 0.0D0 , 1.0D0 , 0.0D0/
+  REAL(8) :: aa, acz, ak, ak1i, ak1r, Alim, arm, ascle, atol, &
+    az, cki, ckr, coefi, coefr, conei, coner, crscr, &
+    czi, czr, dfnu, Elim, Fnu, fnup, hzi, hzr, raz, &
+    rs, rtr1, rzi, rzr, s, ss, sti, str, s1i, s1r, &
+    s2i, s2r, Tol, Yi, Yr, wi, wr, zeroi, zeror, &
+    Zi, Zr, DGAMLN, D1MACH, ZABS
+  INTEGER i, ib, idum, iflag, il, k, Kode, l, m, N, nn, Nz, nw
+  DIMENSION Yr(N), Yi(N), wr(2), wi(2)
+  EXTERNAL ZABS, ZLOG
+  DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
   !***FIRST EXECUTABLE STATEMENT  ZSERI
   Nz = 0
   az = ZABS(Zr,Zi)
@@ -82,7 +82,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     coefi = aa*SIN(ak1i)
     atol = Tol*acz/fnup
     il = MIN(2,nn)
-    DO i = 1 , il
+    DO i = 1, il
       dfnu = Fnu + (nn-i)
       fnup = dfnu + 1.0D0
       s1r = coner
@@ -144,7 +144,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
       s1i = wi(1)
       s2r = wr(2)
       s2i = wi(2)
-      DO l = 3 , nn
+      DO l = 3, nn
         ckr = s2r
         cki = s2i
         s2r = s1r + (ak+Fnu)*(rzr*ckr-rzi*cki)
@@ -180,26 +180,28 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     IF ( nn==0 ) RETURN
     GOTO 100
   ENDIF
-  300  DO i = ib , nn
-  Yr(k) = (ak+Fnu)*(rzr*Yr(k+1)-rzi*Yi(k+1)) + Yr(k+2)
-  Yi(k) = (ak+Fnu)*(rzr*Yi(k+1)+rzi*Yr(k+1)) + Yi(k+2)
-  ak = ak - 1.0D0
-  k = k - 1
-ENDDO
-RETURN
-400  ib = l + 1
-IF ( ib>nn ) RETURN
-GOTO 300
-500  Yr(1) = zeror
-Yi(1) = zeroi
-IF ( Fnu==0.0D0 ) THEN
-  Yr(1) = coner
-  Yi(1) = conei
-ENDIF
-IF ( N==1 ) RETURN
-DO i = 2 , N
-  Yr(i) = zeror
-  Yi(i) = zeroi
-ENDDO
-RETURN
-99999 END SUBROUTINE ZSERI
+  300 CONTINUE
+  DO i = ib, nn
+    Yr(k) = (ak+Fnu)*(rzr*Yr(k+1)-rzi*Yi(k+1)) + Yr(k+2)
+    Yi(k) = (ak+Fnu)*(rzr*Yi(k+1)+rzi*Yr(k+1)) + Yi(k+2)
+    ak = ak - 1.0D0
+    k = k - 1
+  ENDDO
+  RETURN
+  400  ib = l + 1
+  IF ( ib>nn ) RETURN
+  GOTO 300
+  500  Yr(1) = zeror
+  Yi(1) = zeroi
+  IF ( Fnu==0.0D0 ) THEN
+    Yr(1) = coner
+    Yi(1) = conei
+  ENDIF
+  IF ( N==1 ) RETURN
+  DO i = 2, N
+    Yr(i) = zeror
+    Yi(i) = zeroi
+  ENDDO
+  RETURN
+  99999 CONTINUE
+  END SUBROUTINE ZSERI

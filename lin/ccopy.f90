@@ -4,7 +4,7 @@ SUBROUTINE CCOPY(N,Cx,Incx,Cy,Incy)
   IMPLICIT NONE
   !*--CCOPY5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , Incy , kx , ky , N , ns
+  INTEGER i, Incx, Incy, kx, ky, N, ns
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CCOPY
   !***PURPOSE  Copy a vector.
@@ -49,7 +49,7 @@ SUBROUTINE CCOPY(N,Cx,Incx,Cy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CCOPY
-  COMPLEX Cx(*) , Cy(*)
+  COMPLEX Cx(*), Cy(*)
   !***FIRST EXECUTABLE STATEMENT  CCOPY
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy.AND.Incx>0 ) THEN
@@ -57,7 +57,7 @@ SUBROUTINE CCOPY(N,Cx,Incx,Cy,Incy)
     !     Code for equal, positive increments.
     !
     ns = N*Incx
-    DO i = 1 , ns , Incx
+    DO i = 1, ns, Incx
       Cy(i) = Cx(i)
     ENDDO
     GOTO 99999
@@ -69,10 +69,11 @@ SUBROUTINE CCOPY(N,Cx,Incx,Cy,Incy)
   ky = 1
   IF ( Incx<0 ) kx = 1 + (1-N)*Incx
   IF ( Incy<0 ) ky = 1 + (1-N)*Incy
-  DO i = 1 , N
+  DO i = 1, N
     Cy(ky) = Cx(kx)
     kx = kx + Incx
     ky = ky + Incy
   ENDDO
   RETURN
-  99999 END SUBROUTINE CCOPY
+  99999 CONTINUE
+  END SUBROUTINE CCOPY

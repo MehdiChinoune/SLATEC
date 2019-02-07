@@ -75,8 +75,8 @@ SUBROUTINE RSG(Nm,N,A,B,W,Matz,Z,Fv1,Fv2,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RSG
   !
-  INTEGER N , Nm , Ierr , Matz
-  REAL A(Nm,*) , B(Nm,*) , W(*) , Z(Nm,*) , Fv1(*) , Fv2(*)
+  INTEGER N, Nm, Ierr, Matz
+  REAL A(Nm,*), B(Nm,*), W(*), Z(Nm,*), Fv1(*), Fv2(*)
   !
   !***FIRST EXECUTABLE STATEMENT  RSG
   IF ( N<=Nm ) THEN

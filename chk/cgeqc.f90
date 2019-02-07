@@ -33,26 +33,26 @@ SUBROUTINE CGEQC(Lun,Kprint,Nerr)
   !   920601  Code reworked and TYPE section added.  (RWC, WRB)
   !***END PROLOGUE  CGEQC
   !     .. Scalar Arguments ..
-  INTEGER Kprint , Lun , Nerr
+  INTEGER Kprint, Lun, Nerr
   !     .. Local Scalars ..
-  COMPLEX xa , xb
-  INTEGER i , ind , indx , itask , j , kprog , lda , n
+  COMPLEX xa, xb
+  INTEGER i, ind, indx, itask, j, kprog, lda, n
   !     .. Local Arrays ..
-  COMPLEX a(3,3) , atemp(5,3) , b(3) , btemp(3) , bxex(3) , work(12)
+  COMPLEX a(3,3), atemp(5,3), b(3), btemp(3), bxex(3), work(12)
   INTEGER iwork(3)
   CHARACTER list(2)*4
   !     .. External Subroutines ..
-  EXTERNAL CGEFS , CGEIR
+  EXTERNAL CGEFS, CGEIR
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , AIMAG , REAL
+  INTRINSIC ABS, AIMAG, REAL
   REAL DELX
   !     .. Data statements ..
-  DATA a/(2.,3.) , (1.,1.) , (1.,2.) , (2.,0.) , (1.,-1.) , (0.,0.) ,&
-    (0.,0.) , (2.,5.) , (3.,2.)/
-  DATA b/(-1.,1.) , (-5.,4.) , (-4.,7.)/
-  DATA bxex/(.21459E-01,.209012E+01) , (.261373E+01,-.162231E+01) ,&
+  DATA a/(2.,3.), (1.,1.), (1.,2.), (2.,0.), (1.,-1.), (0.,0.) ,&
+    (0.,0.), (2.,5.), (3.,2.)/
+  DATA b/(-1.,1.), (-5.,4.), (-4.,7.)/
+  DATA bxex/(.21459E-01,.209012E+01), (.261373E+01,-.162231E+01) ,&
     (.785407E+00,.109871E+01)/
-  DATA list/'GEFS' , 'GEIR'/
+  DATA list/'GEFS', 'GEIR'/
   !***FIRST EXECUTABLE STATEMENT  CGEQC
   n = 3
   lda = 5
@@ -61,16 +61,16 @@ SUBROUTINE CGEQC(Lun,Kprint,Nerr)
   !
   99001 FORMAT (//,2X,'CGEFS and CGEIR Quick Check'/)
   !
-  DO kprog = 1 , 2
+  DO kprog = 1, 2
     !
     !     First test case - normal
     !
     itask = 1
-    DO i = 1 , n
+    DO i = 1, n
       btemp(i) = b(i)
     ENDDO
-    DO j = 1 , n
-      DO i = 1 , n
+    DO j = 1, n
+      DO i = 1, n
         atemp(i,j) = a(i,j)
       ENDDO
     ENDDO
@@ -80,14 +80,14 @@ SUBROUTINE CGEQC(Lun,Kprint,Nerr)
       CALL CGEIR(atemp,lda,n,btemp,itask,ind,work,iwork)
     ENDIF
     IF ( ind<0 ) THEN
-      IF ( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog) , ind
+      IF ( Kprint>=2 ) WRITE (Lun,FMT=99005) list(kprog), ind
       Nerr = Nerr + 1
     ENDIF
     !
     !       Calculate error for first test
     !
     indx = 0
-    DO i = 1 , n
+    DO i = 1, n
       IF ( DELX(bxex(i),btemp(i))>.0001 ) indx = indx + 1
     ENDDO
     IF ( indx==0 ) THEN
@@ -100,15 +100,15 @@ SUBROUTINE CGEQC(Lun,Kprint,Nerr)
     !       Second test case - singular matrix
     !
     itask = 1
-    DO i = 1 , n
+    DO i = 1, n
       btemp(i) = b(i)
     ENDDO
-    DO j = 1 , n
-      DO i = 1 , n
+    DO j = 1, n
+      DO i = 1, n
         atemp(i,j) = a(i,j)
       ENDDO
     ENDDO
-    DO j = 1 , n
+    DO j = 1, n
       atemp(1,j) = (0.E0,0.E0)
     ENDDO
     IF ( kprog==1 ) THEN
@@ -119,7 +119,7 @@ SUBROUTINE CGEQC(Lun,Kprint,Nerr)
     IF ( ind==-4 ) THEN
       IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) list(kprog)
     ELSE
-      IF ( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog) , ind
+      IF ( Kprint>=2 ) WRITE (Lun,FMT=99007) list(kprog), ind
       Nerr = Nerr + 1
     ENDIF
   ENDDO

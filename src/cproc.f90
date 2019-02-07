@@ -4,8 +4,8 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
   IMPLICIT NONE
   !*--CPROC5
   !*** Start of declarations inserted by SPAG
-  REAL Aa , Bm1 , Bm2 , rt , Yy
-  INTEGER ia , id , iflg , j , k , M , m1 , m2 , mm , Na , Nd , Nm1 , Nm2
+  REAL Aa, Bm1, Bm2, rt, Yy
+  INTEGER ia, id, iflg, j, k, M, m1, m2, mm, Na, Nd, Nm1, Nm2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CPROC
   !***SUBSIDIARY
@@ -36,11 +36,11 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CPROC
   !
-  COMPLEX Y , D , W , Bd , crt , den , y1 , y2 , X , A , B , C
-  DIMENSION A(*) , B(*) , C(*) , X(*) , Y(*) , D(*) , W(*) , Bd(*) , Bm1(*)&
-    , Bm2(*) , Aa(*) , Yy(*)
+  COMPLEX Y, D, W, Bd, crt, den, y1, y2, X, A, B, C
+  DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), W(*), Bd(*), Bm1(*)&
+    , Bm2(*), Aa(*), Yy(*)
   !***FIRST EXECUTABLE STATEMENT  CPROC
-  DO j = 1 , M
+  DO j = 1, M
     Y(j) = X(j)
   ENDDO
   mm = M - 1
@@ -48,7 +48,8 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
   m1 = Nm1
   m2 = Nm2
   ia = Na
-  100  iflg = 0
+  100 CONTINUE
+  IFlg = 0
   IF ( id>0 ) THEN
     crt = Bd(id)
     id = id - 1
@@ -57,7 +58,7 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
     !
     D(M) = A(M)/(B(M)-crt)
     W(M) = Y(M)/(B(M)-crt)
-    DO j = 2 , mm
+    DO j = 2, mm
       k = M - j
       den = B(k+1) - crt - C(k+1)*D(k+2)
       D(k+1) = A(k+1)/den
@@ -69,7 +70,7 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
     ELSE
       Y(1) = (1.,0.)
     ENDIF
-    DO j = 2 , M
+    DO j = 2, M
       Y(j) = W(j) - D(j)*Y(j-1)
     ENDDO
   ENDIF
@@ -82,7 +83,7 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
         !
         ! SCALAR MULTIPLICATION
         !
-        DO j = 1 , M
+        DO j = 1, M
           Y(j) = rt*Y(j)
         ENDDO
       ENDIF
@@ -107,7 +108,7 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
     !
     ! MATRIX MULTIPLICATION
     !
-    DO j = 2 , mm
+    DO j = 2, mm
       y2 = A(j)*Y(j-1) + (B(j)-rt)*Y(j) + C(j)*Y(j+1)
       Y(j-1) = y1
       y1 = y2
@@ -117,4 +118,5 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
   Y(M-1) = y1
   iflg = 1
   GOTO 100
-  99999 END SUBROUTINE CPROC
+  99999 CONTINUE
+  END SUBROUTINE CPROC

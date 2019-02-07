@@ -24,10 +24,10 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
   !
   !
   !LLL. OPTIMIZE
-  INTEGER Meth , i , ib , nq , nqm1 , nqp1
-  REAL Elco , Tesco , agamq , fnq , fnqm1 , pc , pint , ragq , rqfac , &
-    rq1fac , tsign , xpin
-  DIMENSION Elco(13,12) , Tesco(3,12)
+  INTEGER Meth, i, ib, nq, nqm1, nqp1
+  REAL Elco, Tesco, agamq, fnq, fnqm1, pc, pint, ragq, rqfac, &
+    rq1fac, tsign, xpin
+  DIMENSION Elco(13,12), Tesco(3,12)
   !-----------------------------------------------------------------------
   ! CFOD  IS CALLED BY THE INTEGRATOR ROUTINE TO SET COEFFICIENTS
   ! NEEDED THERE.  THE COEFFICIENTS FOR THE CURRENT METHOD, AS
@@ -61,7 +61,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
     !
     pc(1) = 1.0E0
     rq1fac = 1.0E0
-    DO nq = 1 , 5
+    DO nq = 1, 5
       !-----------------------------------------------------------------------
       ! THE PC ARRAY WILL CONTAIN THE COEFFICIENTS OF THE POLYNOMIAL
       !     P(X) = (X+1)*(X+2)*...*(X+NQ).
@@ -71,13 +71,13 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
       nqp1 = nq + 1
       ! FORM COEFFICIENTS OF P(X)*(X+NQ). ------------------------------------
       pc(nqp1) = 0.0E0
-      DO ib = 1 , nq
+      DO ib = 1, nq
         i = nq + 2 - ib
         pc(i) = pc(i-1) + fnq*pc(i)
       ENDDO
       pc(1) = fnq*pc(1)
       ! STORE COEFFICIENTS IN ELCO AND TESCO. --------------------------------
-      DO i = 1 , nqp1
+      DO i = 1, nqp1
         Elco(i,nq) = pc(i)/pc(2)
       ENDDO
       Elco(2,nq) = 1.0E0
@@ -97,7 +97,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
   Tesco(3,12) = 0.0E0
   pc(1) = 1.0E0
   rqfac = 1.0E0
-  DO nq = 2 , 12
+  DO nq = 2, 12
     !-----------------------------------------------------------------------
     ! THE PC ARRAY WILL CONTAIN THE COEFFICIENTS OF THE POLYNOMIAL
     !     P(X) = (X+1)*(X+2)*...*(X+NQ-1).
@@ -110,7 +110,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
     nqp1 = nq + 1
     ! FORM COEFFICIENTS OF P(X)*(X+NQ-1). ----------------------------------
     pc(nq) = 0.0E0
-    DO ib = 1 , nqm1
+    DO ib = 1, nqm1
       i = nqp1 - ib
       pc(i) = pc(i-1) + fnqm1*pc(i)
     ENDDO
@@ -119,7 +119,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
     pint = pc(1)
     xpin = pc(1)/2.0E0
     tsign = 1.0E0
-    DO i = 2 , nq
+    DO i = 2, nq
       tsign = -tsign
       pint = pint + tsign*pc(i)/i
       xpin = xpin + tsign*pc(i)/(i+1)
@@ -127,7 +127,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
     ! STORE COEFFICIENTS IN ELCO AND TESCO. --------------------------------
     Elco(1,nq) = pint*rq1fac
     Elco(2,nq) = 1.0E0
-    DO i = 2 , nq
+    DO i = 2, nq
       Elco(i+1,nq) = rq1fac*pc(i)/i
     ENDDO
     agamq = rqfac*xpin
@@ -138,4 +138,5 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
   ENDDO
   RETURN
   !----------------------- END OF SUBROUTINE CFOD  -----------------------
-  99999 END SUBROUTINE CFOD
+  99999 CONTINUE
+  END SUBROUTINE CFOD

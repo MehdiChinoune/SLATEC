@@ -4,7 +4,7 @@ REAL(8) FUNCTION DSPENC(X)
   IMPLICIT NONE
   !*--DSPENC5
   !*** Start of declarations inserted by SPAG
-  INTEGER INITDS , nspenc
+  INTEGER INITDS, nspenc
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSPENC
   !***PURPOSE  Compute a form of Spence's integral due to K. Mitchell.
@@ -48,9 +48,9 @@ REAL(8) FUNCTION DSPENC(X)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DSPENC
-  REAL(8) :: X , spencs(38) , aln , pi26 , xbig , D1MACH , DCSEVL
+  REAL(8) :: X, spencs(38), aln, pi26, xbig, D1MACH, DCSEVL
   LOGICAL first
-  SAVE spencs , pi26 , nspenc , xbig , first
+  SAVE spencs, pi26, nspenc, xbig, first
   DATA spencs(1)/ + .1527365598892405872946684910028D+0/
   DATA spencs(2)/ + .8169658058051014403501838185271D-1/
   DATA spencs(3)/ + .5814157140778730872977350641182D-2/
@@ -149,4 +149,5 @@ REAL(8) FUNCTION DSPENC(X)
     *(1.D0+DCSEVL(4.D0*(X-1.D0)/X-1.D0,spencs,nspenc))/X
   RETURN
   !
-  99999 END FUNCTION DSPENC
+  99999 CONTINUE
+  END FUNCTION DSPENC

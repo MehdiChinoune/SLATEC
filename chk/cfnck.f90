@@ -36,17 +36,17 @@ SUBROUTINE CFNCK(Lun,Kprint,Ipass)
   !   900330  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  CFNCK
-  INTEGER i , Lun , Kprint , Ipass
-  REAL sqrt2 , sqrt3 , pi , R1MACH , errmax , errtol , abserr , relerr
-  COMPLEX c(48) , w(48) , c1 , ci , C0LGMC , CACOS , CACOSH , CASIN , &
-    CASINH , CATAN , CATAN2 , CATANH , CBETA , CCBRT , CCOSH , CCOT , &
-    CEXPRL , CGAMMA , CGAMR , CLBETA , CLNGAM , CLNREL , CLOG10 , &
-    CPSI , CSINH , CTAN , CTANH
-  EXTERNAL CCOT , CGAMMA
+  INTEGER i, Lun, Kprint, Ipass
+  REAL sqrt2, sqrt3, pi, R1MACH, errmax, errtol, abserr, relerr
+  COMPLEX c(48), w(48), c1, ci, C0LGMC, CACOS, CACOSH, CASIN, &
+    CASINH, CATAN, CATAN2, CATANH, CBETA, CCBRT, CCOSH, CCOT, &
+    CEXPRL, CGAMMA, CGAMR, CLBETA, CLNGAM, CLNREL, CLOG10, &
+    CPSI, CSINH, CTAN, CTANH
+  EXTERNAL CCOT, CGAMMA
   !
   !     Constants to be used
   !
-  DATA c1/(1.E0,0.E0)/ , ci/(0.E0,1.E0)/
+  DATA c1/(1.E0,0.E0)/, ci/(0.E0,1.E0)/
   DATA sqrt2/.14142135623730950488E1/
   DATA sqrt3/.17320508075688772935E1/
   DATA pi/3.14159265358979323846E0/
@@ -178,11 +178,11 @@ SUBROUTINE CFNCK(Lun,Kprint,Ipass)
   !
   errmax = R1MACH(4)
   errtol = SQRT(errmax)
-  DO i = 1 , 48
+  DO i = 1, 48
     abserr = ABS(c(i)-w(i))
     relerr = abserr/ABS(c(i))
     errmax = MAX(relerr,errmax)
-    IF ( relerr>errtol.AND.Kprint>=2 ) WRITE (Lun,99001) i , relerr , abserr
+    IF ( relerr>errtol.AND.Kprint>=2 ) WRITE (Lun,99001) i, relerr, abserr
     99001   FORMAT (' For I  = ',I3,'  test fails with RELERR  = ',E38.30,&
       '  and ABSERR  = ',E38.30)
   ENDDO

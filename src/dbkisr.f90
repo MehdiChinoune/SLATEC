@@ -24,14 +24,14 @@ SUBROUTINE DBKISR(X,N,Sum,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DBKISR
-  INTEGER i , Ierr , k , kk , kkn , k1 , N , np
-  REAL(8) :: ak , atol , bk , c , fk , fn , hx , hxs , pol , pr , &
-    Sum , tkp , tol , trm , X , xln
-  REAL(8) :: DPSIXN , D1MACH
+  INTEGER i, Ierr, k, kk, kkn, k1, N, np
+  REAL(8) :: ak, atol, bk, c, fk, fn, hx, hxs, pol, pr, &
+    Sum, tkp, tol, trm, X, xln
+  REAL(8) :: DPSIXN, D1MACH
   DIMENSION c(2)
   SAVE c
   !
-  DATA c(1) , c(2)/1.57079632679489662D+00 , 1.0D0/
+  DATA c(1), c(2)/1.57079632679489662D+00, 1.0D0/
   !***FIRST EXECUTABLE STATEMENT  DBKISR
   Ierr = 0
   tol = MAX(D1MACH(4),1.0D-18)
@@ -39,7 +39,7 @@ SUBROUTINE DBKISR(X,N,Sum,Ierr)
     pr = 1.0D0
     pol = 0.0D0
     IF ( N/=0 ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         pol = -pol*X + c(i)
         pr = pr*X/i
       ENDDO
@@ -55,7 +55,7 @@ SUBROUTINE DBKISR(X,N,Sum,Ierr)
     ak = 2.0D0/((fn+1.0D0)*(fn+2.0D0))
     Sum = ak*(DPSIXN(N+3)-DPSIXN(3)+DPSIXN(2)-xln)
     atol = Sum*tol*0.75D0
-    DO k = 2 , 20
+    DO k = 2, 20
       ak = ak*(hxs/bk)*((tkp+1.0D0)/(tkp+fn+1.0D0))*(tkp/(tkp+fn))
       k1 = k + 1
       kk = k1 + k
@@ -84,4 +84,5 @@ SUBROUTINE DBKISR(X,N,Sum,Ierr)
   IF ( N==1 ) Sum = -Sum
   Sum = pol + Sum
   RETURN
-  99999 END SUBROUTINE DBKISR
+  99999 CONTINUE
+  END SUBROUTINE DBKISR

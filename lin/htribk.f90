@@ -76,18 +76,18 @@ SUBROUTINE HTRIBK(Nm,N,Ar,Ai,Tau,M,Zr,Zi)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  HTRIBK
   !
-  INTEGER i , j , k , l , M , N , Nm
-  REAL Ar(Nm,*) , Ai(Nm,*) , Tau(2,*) , Zr(Nm,*) , Zi(Nm,*)
-  REAL h , s , si
+  INTEGER i, j, k, l, M, N, Nm
+  REAL Ar(Nm,*), Ai(Nm,*), Tau(2,*), Zr(Nm,*), Zi(Nm,*)
+  REAL h, s, si
   !
   !***FIRST EXECUTABLE STATEMENT  HTRIBK
   IF ( M/=0 ) THEN
     !     .......... TRANSFORM THE EIGENVECTORS OF THE REAL SYMMETRIC
     !                TRIDIAGONAL MATRIX TO THOSE OF THE HERMITIAN
     !                TRIDIAGONAL MATRIX. ..........
-    DO k = 1 , N
+    DO k = 1, N
       !
-      DO j = 1 , M
+      DO j = 1, M
         Zi(k,j) = -Zr(k,j)*Tau(2,k)
         Zr(k,j) = Zr(k,j)*Tau(1,k)
       ENDDO
@@ -95,16 +95,16 @@ SUBROUTINE HTRIBK(Nm,N,Ar,Ai,Tau,M,Zr,Zi)
     !
     IF ( N/=1 ) THEN
       !     .......... RECOVER AND APPLY THE HOUSEHOLDER MATRICES ..........
-      DO i = 2 , N
+      DO i = 2, N
         l = i - 1
         h = Ai(i,i)
         IF ( h/=0.0E0 ) THEN
           !
-          DO j = 1 , M
+          DO j = 1, M
             s = 0.0E0
             si = 0.0E0
             !
-            DO k = 1 , l
+            DO k = 1, l
               s = s + Ar(i,k)*Zr(k,j) - Ai(i,k)*Zi(k,j)
               si = si + Ar(i,k)*Zi(k,j) + Ai(i,k)*Zr(k,j)
             ENDDO
@@ -112,7 +112,7 @@ SUBROUTINE HTRIBK(Nm,N,Ar,Ai,Tau,M,Zr,Zi)
             s = (s/h)/h
             si = (si/h)/h
             !
-            DO k = 1 , l
+            DO k = 1, l
               Zr(k,j) = Zr(k,j) - s*Ar(i,k) - si*Ai(i,k)
               Zi(k,j) = Zi(k,j) - si*Ar(i,k) + s*Ai(i,k)
             ENDDO

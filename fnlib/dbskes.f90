@@ -4,7 +4,7 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   IMPLICIT NONE
   !*--DBSKES5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , iswtch , n , Nin
+  INTEGER i, iswtch, n, Nin
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBSKES
   !***PURPOSE  Compute a sequence of exponentially scaled modified Bessel
@@ -21,8 +21,8 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   ! DBSKES(XNU,X,NIN,BKE) computes a double precision sequence
   ! of exponentially scaled modified Bessel functions
   ! of the third kind of order XNU + I at X, where X .GT. 0,
-  ! XNU lies in (-1,1), and I = 0, 1, ... , NIN - 1, if NIN is positive
-  ! and I = 0, -1, ... , NIN + 1, if NIN is negative.  On return, the
+  ! XNU lies in (-1,1), and I = 0, 1, ..., NIN - 1, if NIN is positive
+  ! and I = 0, -1, ..., NIN + 1, if NIN is negative.  On return, the
   ! vector BKE(.) contains the results at X for order starting at XNU.
   ! XNU, X, and BKE are double precision.  NIN is integer.
   !
@@ -36,8 +36,8 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBSKES
-  REAL(8) :: Xnu , X , Bke(*) , bknu1 , v , vincr , vend , alnbig , &
-    D1MACH , direct
+  REAL(8) :: Xnu, X, Bke(*), bknu1, v, vincr, vend, alnbig, &
+    D1MACH, direct
   SAVE alnbig
   DATA alnbig/0.D0/
   !***FIRST EXECUTABLE STATEMENT  DBSKES
@@ -71,7 +71,7 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
     'OVERFLOWS',5,2)
   !
   v = Xnu
-  DO i = 3 , n
+  DO i = 3, n
     v = v + vincr
     Bke(i) = 2.0D0*v*Bke(i-1)/X + Bke(i-2)
   ENDDO

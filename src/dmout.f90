@@ -4,7 +4,7 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   IMPLICIT NONE
   !*--DMOUT5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , I1MACH , Idigit , j , k1 , k2 , Lda , lout , M , N , ndigit
+  INTEGER i, I1MACH, Idigit, j, k1, k2, Lda, lout, M, N, ndigit
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DMOUT
   !***SUBSIDIARY
@@ -64,7 +64,7 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   !   910403  Updated AUTHOR section.  (WRB)
   !***END PROLOGUE  DMOUT
   REAL(8) :: A(Lda,*)
-  CHARACTER Ifmt*(*) , icol*3
+  CHARACTER Ifmt*(*), icol*3
   SAVE icol
   DATA icol/'COL'/
   !***FIRST EXECUTABLE STATEMENT  DMOUT
@@ -77,44 +77,44 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
     !
     IF ( ndigit<=4 ) THEN
       !
-      DO k1 = 1 , N , 10
+      DO k1 = 1, N, 10
         k2 = MIN(N,k1+9)
         WRITE (lout,99002) (icol,i,i=k1,k2)
-        DO i = 1 , M
-          WRITE (lout,99010) i , (A(i,j),j=k1,k2)
+        DO i = 1, M
+          WRITE (lout,99010) i, (A(i,j),j=k1,k2)
         ENDDO
       ENDDO
     ENDIF
     !
     IF ( ndigit<=6 ) THEN
       !
-      DO k1 = 1 , N , 8
+      DO k1 = 1, N, 8
         k2 = MIN(N,k1+7)
         WRITE (lout,99002) (icol,i,i=k1,k2)
-        DO i = 1 , M
-          WRITE (lout,99006) i , (A(i,j),j=k1,k2)
+        DO i = 1, M
+          WRITE (lout,99006) i, (A(i,j),j=k1,k2)
         ENDDO
       ENDDO
       RETURN
       !
     ELSEIF ( ndigit<=14 ) THEN
       !
-      DO k1 = 1 , N , 5
+      DO k1 = 1, N, 5
         k2 = MIN(N,k1+4)
         WRITE (lout,99003) (icol,i,i=k1,k2)
-        DO i = 1 , M
-          WRITE (lout,99007) i , (A(i,j),j=k1,k2)
+        DO i = 1, M
+          WRITE (lout,99007) i, (A(i,j),j=k1,k2)
         ENDDO
       ENDDO
       RETURN
       !
     ELSEIF ( ndigit>20 ) THEN
       !
-      DO k1 = 1 , N , 3
+      DO k1 = 1, N, 3
         k2 = MIN(N,k1+2)
         WRITE (lout,99005) (icol,i,i=k1,k2)
-        DO i = 1 , M
-          WRITE (lout,99009) i , (A(i,j),j=k1,k2)
+        DO i = 1, M
+          WRITE (lout,99009) i, (A(i,j),j=k1,k2)
         ENDDO
       ENDDO
       RETURN
@@ -124,66 +124,66 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
     ndigit = -Idigit
     IF ( ndigit<=4 ) THEN
       !
-      DO k1 = 1 , N , 5
+      DO k1 = 1, N, 5
         k2 = MIN(N,k1+4)
         WRITE (lout,99001) (icol,i,i=k1,k2)
         99001       FORMAT (10X,10(4X,A,I4,1X))
-        DO i = 1 , M
-          WRITE (lout,99010) i , (A(i,j),j=k1,k2)
+        DO i = 1, M
+          WRITE (lout,99010) i, (A(i,j),j=k1,k2)
         ENDDO
       ENDDO
       RETURN
       !
     ELSEIF ( ndigit<=6 ) THEN
       !
-      DO k1 = 1 , N , 4
+      DO k1 = 1, N, 4
         k2 = MIN(N,k1+3)
         WRITE (lout,99002) (icol,i,i=k1,k2)
-        DO i = 1 , M
-          WRITE (lout,99006) i , (A(i,j),j=k1,k2)
+        DO i = 1, M
+          WRITE (lout,99006) i, (A(i,j),j=k1,k2)
         ENDDO
       ENDDO
       RETURN
       !
     ELSEIF ( ndigit<=14 ) THEN
       !
-      DO k1 = 1 , N , 2
+      DO k1 = 1, N, 2
         k2 = MIN(N,k1+1)
         WRITE (lout,99003) (icol,i,i=k1,k2)
-        DO i = 1 , M
-          WRITE (lout,99007) i , (A(i,j),j=k1,k2)
+        DO i = 1, M
+          WRITE (lout,99007) i, (A(i,j),j=k1,k2)
         ENDDO
       ENDDO
       RETURN
       !
     ELSEIF ( ndigit>20 ) THEN
       !
-      DO k1 = 1 , N
+      DO k1 = 1, N
         k2 = k1
         WRITE (lout,99005) (icol,i,i=k1,k2)
-        DO i = 1 , M
-          WRITE (lout,99009) i , (A(i,j),j=k1,k2)
+        DO i = 1, M
+          WRITE (lout,99009) i, (A(i,j),j=k1,k2)
         ENDDO
       ENDDO
       RETURN
     ELSE
       !
-      DO k1 = 1 , N , 2
+      DO k1 = 1, N, 2
         k2 = MIN(N,k1+1)
         WRITE (lout,99004) (icol,i,i=k1,k2)
-        DO i = 1 , M
-          WRITE (lout,99008) i , (A(i,j),j=k1,k2)
+        DO i = 1, M
+          WRITE (lout,99008) i, (A(i,j),j=k1,k2)
         ENDDO
       ENDDO
       RETURN
     ENDIF
   ENDIF
   !
-  DO k1 = 1 , N , 4
+  DO k1 = 1, N, 4
     k2 = MIN(N,k1+3)
     WRITE (lout,99004) (icol,i,i=k1,k2)
-    DO i = 1 , M
-      WRITE (lout,99008) i , (A(i,j),j=k1,k2)
+    DO i = 1, M
+      WRITE (lout,99008) i, (A(i,j),j=k1,k2)
     ENDDO
   ENDDO
   RETURN

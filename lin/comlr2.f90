@@ -103,19 +103,19 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  COMLR2
   !
-  INTEGER i , j , k , l , m , N , en , ii , jj , ll , mm , Nm , nn , Igh , &
-    im1 , ip1
-  INTEGER itn , its , Low , mp1 , enm1 , iend , Ierr
-  REAL Hr(Nm,*) , Hi(Nm,*) , Wr(*) , Wi(*) , Zr(Nm,*) , Zi(Nm,*)
-  REAL si , sr , ti , tr , xi , xr , yi , yr , zzi , zzr , norm , s1 , s2
+  INTEGER i, j, k, l, m, N, en, ii, jj, ll, mm, Nm, nn, Igh, &
+    im1, ip1
+  INTEGER itn, its, Low, mp1, enm1, iend, Ierr
+  REAL Hr(Nm,*), Hi(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
+  REAL si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, norm, s1, s2
   INTEGER Int(*)
   !
   !***FIRST EXECUTABLE STATEMENT  COMLR2
   Ierr = 0
   !     .......... INITIALIZE EIGENVECTOR MATRIX ..........
-  DO i = 1 , N
+  DO i = 1, N
     !
-    DO j = 1 , N
+    DO j = 1, N
       Zr(i,j) = 0.0E0
       Zi(i,j) = 0.0E0
       IF ( i==j ) Zr(i,j) = 1.0E0
@@ -126,11 +126,11 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   iend = Igh - Low - 1
   IF ( iend>0 ) THEN
     !     .......... FOR I=IGH-1 STEP -1 UNTIL LOW+1 DO -- ..........
-    DO ii = 1 , iend
+    DO ii = 1, iend
       i = Igh - ii
       ip1 = i + 1
       !
-      DO k = ip1 , Igh
+      DO k = ip1, Igh
         Zr(k,i) = Hr(k,i-1)
         Zi(k,i) = Hi(k,i-1)
       ENDDO
@@ -138,7 +138,7 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
       j = Int(i)
       IF ( i/=j ) THEN
         !
-        DO k = i , Igh
+        DO k = i, Igh
           Zr(i,k) = Zr(j,k)
           Zi(i,k) = Zi(j,k)
           Zr(j,k) = 0.0E0
@@ -150,7 +150,7 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
     ENDDO
   ENDIF
   !     .......... STORE ROOTS ISOLATED BY CBAL ..........
-  DO i = 1 , N
+  DO i = 1, N
     IF ( i<Low.OR.i>Igh ) THEN
       Wr(i) = Hr(i,i)
       Wi(i) = Hi(i,i)
@@ -162,246 +162,249 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   ti = 0.0E0
   itn = 30*N
   !     .......... SEARCH FOR NEXT EIGENVALUE ..........
-  100  IF ( en<Low ) THEN
-  !     .......... ALL ROOTS FOUND.  BACKSUBSTITUTE TO FIND
-  !                VECTORS OF UPPER TRIANGULAR FORM ..........
-  norm = 0.0E0
-  !
-  DO i = 1 , N
+  100 CONTINUE
+  IF ( en<Low ) THEN
+    !     .......... ALL ROOTS FOUND.  BACKSUBSTITUTE TO FIND
+    !                VECTORS OF UPPER TRIANGULAR FORM ..........
+    norm = 0.0E0
     !
-    DO j = i , N
-      norm = norm + ABS(Hr(i,j)) + ABS(Hi(i,j))
+    DO i = 1, N
+      !
+      DO j = i, N
+        norm = norm + ABS(Hr(i,j)) + ABS(Hi(i,j))
+      ENDDO
     ENDDO
-  ENDDO
-  !
-  Hr(1,1) = norm
-  IF ( N/=1.AND.norm/=0.0E0 ) THEN
-    !     .......... FOR EN=N STEP -1 UNTIL 2 DO -- ..........
-    DO nn = 2 , N
-      en = N + 2 - nn
-      xr = Wr(en)
-      xi = Wi(en)
-      enm1 = en - 1
-      !     .......... FOR I=EN-1 STEP -1 UNTIL 1 DO -- ..........
-      DO ii = 1 , enm1
-        i = en - ii
-        zzr = Hr(i,en)
-        zzi = Hi(i,en)
-        IF ( i/=enm1 ) THEN
+    !
+    Hr(1,1) = norm
+    IF ( N/=1.AND.norm/=0.0E0 ) THEN
+      !     .......... FOR EN=N STEP -1 UNTIL 2 DO -- ..........
+      DO nn = 2, N
+        en = N + 2 - nn
+        xr = Wr(en)
+        xi = Wi(en)
+        enm1 = en - 1
+        !     .......... FOR I=EN-1 STEP -1 UNTIL 1 DO -- ..........
+        DO ii = 1, enm1
+          i = en - ii
+          zzr = Hr(i,en)
+          zzi = Hi(i,en)
+          IF ( i/=enm1 ) THEN
+            ip1 = i + 1
+            !
+            DO j = ip1, enm1
+              zzr = zzr + Hr(i,j)*Hr(j,en) - Hi(i,j)*Hi(j,en)
+              zzi = zzi + Hr(i,j)*Hi(j,en) + Hi(i,j)*Hr(j,en)
+            ENDDO
+          ENDIF
+          !
+          yr = xr - Wr(i)
+          yi = xi - Wi(i)
+          IF ( yr==0.0E0.AND.yi==0.0E0 ) THEN
+            yr = norm
+            DO
+              yr = 0.5E0*yr
+              IF ( norm+yr<=norm ) THEN
+                yr = 2.0E0*yr
+                EXIT
+              ENDIF
+            ENDDO
+          ENDIF
+          CALL CDIV(zzr,zzi,yr,yi,Hr(i,en),Hi(i,en))
+        ENDDO
+        !
+      ENDDO
+      !     .......... END BACKSUBSTITUTION ..........
+      enm1 = N - 1
+      !     .......... VECTORS OF ISOLATED ROOTS ..........
+      DO i = 1, enm1
+        IF ( i<Low.OR.i>Igh ) THEN
           ip1 = i + 1
           !
-          DO j = ip1 , enm1
-            zzr = zzr + Hr(i,j)*Hr(j,en) - Hi(i,j)*Hi(j,en)
-            zzi = zzi + Hr(i,j)*Hi(j,en) + Hi(i,j)*Hr(j,en)
+          DO j = ip1, N
+            Zr(i,j) = Hr(i,j)
+            Zi(i,j) = Hi(i,j)
           ENDDO
         ENDIF
         !
-        yr = xr - Wr(i)
-        yi = xi - Wi(i)
-        IF ( yr==0.0E0.AND.yi==0.0E0 ) THEN
-          yr = norm
-          DO
-            yr = 0.5E0*yr
-            IF ( norm+yr<=norm ) THEN
-              yr = 2.0E0*yr
-              EXIT
-            ENDIF
+      ENDDO
+      !     .......... MULTIPLY BY TRANSFORMATION MATRIX TO GIVE
+      !                VECTORS OF ORIGINAL FULL MATRIX.
+      !                FOR J=N STEP -1 UNTIL LOW+1 DO -- ..........
+      DO jj = Low, enm1
+        j = N + Low - jj
+        m = MIN(j-1,Igh)
+        !
+        DO i = Low, Igh
+          zzr = Zr(i,j)
+          zzi = Zi(i,j)
+          !
+          DO k = Low, m
+            zzr = zzr + Zr(i,k)*Hr(k,j) - Zi(i,k)*Hi(k,j)
+            zzi = zzi + Zr(i,k)*Hi(k,j) + Zi(i,k)*Hr(k,j)
           ENDDO
+          !
+          Zr(i,j) = zzr
+          Zi(i,j) = zzi
+        ENDDO
+        !
+      ENDDO
+    ENDIF
+    GOTO 99999
+  ELSE
+    its = 0
+    enm1 = en - 1
+  ENDIF
+  !     .......... LOOK FOR SINGLE SMALL SUB-DIAGONAL ELEMENT
+  !                FOR L=EN STEP -1 UNTIL LOW DO -- ..........
+  200 CONTINUE
+  DO ll = Low, en
+    l = en + Low - ll
+    IF ( l==Low ) EXIT
+    s1 = ABS(Hr(l-1,l-1)) + ABS(Hi(l-1,l-1)) + ABS(Hr(l,l)) + ABS(Hi(l,l))
+    s2 = s1 + ABS(Hr(l,l-1)) + ABS(Hi(l,l-1))
+    IF ( s2==s1 ) EXIT
+  ENDDO
+  !     .......... FORM SHIFT ..........
+  IF ( l==en ) THEN
+    !     .......... A ROOT FOUND ..........
+    Hr(en,en) = Hr(en,en) + tr
+    Wr(en) = Hr(en,en)
+    Hi(en,en) = Hi(en,en) + ti
+    Wi(en) = Hi(en,en)
+    en = enm1
+    GOTO 100
+  ELSEIF ( itn==0 ) THEN
+    !     .......... SET ERROR -- NO CONVERGENCE TO AN
+    !                EIGENVALUE AFTER 30*N ITERATIONS ..........
+    Ierr = en
+  ELSE
+    IF ( its==10.OR.its==20 ) THEN
+      !     .......... FORM EXCEPTIONAL SHIFT ..........
+      sr = ABS(Hr(en,enm1)) + ABS(Hr(enm1,en-2))
+      si = ABS(Hi(en,enm1)) + ABS(Hi(enm1,en-2))
+    ELSE
+      sr = Hr(en,en)
+      si = Hi(en,en)
+      xr = Hr(enm1,en)*Hr(en,enm1) - Hi(enm1,en)*Hi(en,enm1)
+      xi = Hr(enm1,en)*Hi(en,enm1) + Hi(enm1,en)*Hr(en,enm1)
+      IF ( xr/=0.0E0.OR.xi/=0.0E0 ) THEN
+        yr = (Hr(enm1,enm1)-sr)/2.0E0
+        yi = (Hi(enm1,enm1)-si)/2.0E0
+        CALL CSROOT(yr**2-yi**2+xr,2.0E0*yr*yi+xi,zzr,zzi)
+        IF ( yr*zzr+yi*zzi<0.0E0 ) THEN
+          zzr = -zzr
+          zzi = -zzi
         ENDIF
-        CALL CDIV(zzr,zzi,yr,yi,Hr(i,en),Hi(i,en))
+        CALL CDIV(xr,xi,yr+zzr,yi+zzi,xr,xi)
+        sr = sr - xr
+        si = si - xi
+      ENDIF
+    ENDIF
+    !
+    DO i = Low, en
+      Hr(i,i) = Hr(i,i) - sr
+      Hi(i,i) = Hi(i,i) - si
+    ENDDO
+    !
+    tr = tr + sr
+    ti = ti + si
+    its = its + 1
+    itn = itn - 1
+    !     .......... LOOK FOR TWO CONSECUTIVE SMALL
+    !                SUB-DIAGONAL ELEMENTS ..........
+    xr = ABS(Hr(enm1,enm1)) + ABS(Hi(enm1,enm1))
+    yr = ABS(Hr(en,enm1)) + ABS(Hi(en,enm1))
+    zzr = ABS(Hr(en,en)) + ABS(Hi(en,en))
+    !     .......... FOR M=EN-1 STEP -1 UNTIL L DO -- ..........
+    DO mm = l, enm1
+      m = enm1 + l - mm
+      IF ( m==l ) EXIT
+      yi = yr
+      yr = ABS(Hr(m,m-1)) + ABS(Hi(m,m-1))
+      xi = zzr
+      zzr = xr
+      xr = ABS(Hr(m-1,m-1)) + ABS(Hi(m-1,m-1))
+      s1 = zzr/yi*(zzr+xr+xi)
+      s2 = s1 + yr
+      IF ( s2==s1 ) EXIT
+    ENDDO
+    !     .......... TRIANGULAR DECOMPOSITION H=L*R ..........
+    mp1 = m + 1
+    !
+    DO i = mp1, en
+      im1 = i - 1
+      xr = Hr(im1,im1)
+      xi = Hi(im1,im1)
+      yr = Hr(i,im1)
+      yi = Hi(i,im1)
+      IF ( ABS(xr)+ABS(xi)>=ABS(yr)+ABS(yi) ) THEN
+        CALL CDIV(yr,yi,xr,xi,zzr,zzi)
+        Wr(i) = -1.0E0
+      ELSE
+        !     .......... INTERCHANGE ROWS OF HR AND HI ..........
+        DO j = im1, N
+          zzr = Hr(im1,j)
+          Hr(im1,j) = Hr(i,j)
+          Hr(i,j) = zzr
+          zzi = Hi(im1,j)
+          Hi(im1,j) = Hi(i,j)
+          Hi(i,j) = zzi
+        ENDDO
+        !
+        CALL CDIV(xr,xi,yr,yi,zzr,zzi)
+        Wr(i) = 1.0E0
+      ENDIF
+      Hr(i,im1) = zzr
+      Hi(i,im1) = zzi
+      !
+      DO j = i, N
+        Hr(i,j) = Hr(i,j) - zzr*Hr(im1,j) + zzi*Hi(im1,j)
+        Hi(i,j) = Hi(i,j) - zzr*Hi(im1,j) - zzi*Hr(im1,j)
       ENDDO
       !
     ENDDO
-    !     .......... END BACKSUBSTITUTION ..........
-    enm1 = N - 1
-    !     .......... VECTORS OF ISOLATED ROOTS ..........
-    DO i = 1 , enm1
-      IF ( i<Low.OR.i>Igh ) THEN
-        ip1 = i + 1
+    !     .......... COMPOSITION R*L=H ..........
+    DO j = mp1, en
+      xr = Hr(j,j-1)
+      xi = Hi(j,j-1)
+      Hr(j,j-1) = 0.0E0
+      Hi(j,j-1) = 0.0E0
+      !     .......... INTERCHANGE COLUMNS OF HR, HI, ZR, AND ZI,
+      !                IF NECESSARY ..........
+      IF ( Wr(j)>0.0E0 ) THEN
         !
-        DO j = ip1 , N
-          Zr(i,j) = Hr(i,j)
-          Zi(i,j) = Hi(i,j)
+        DO i = 1, j
+          zzr = Hr(i,j-1)
+          Hr(i,j-1) = Hr(i,j)
+          Hr(i,j) = zzr
+          zzi = Hi(i,j-1)
+          Hi(i,j-1) = Hi(i,j)
+          Hi(i,j) = zzi
+        ENDDO
+        !
+        DO i = Low, Igh
+          zzr = Zr(i,j-1)
+          Zr(i,j-1) = Zr(i,j)
+          Zr(i,j) = zzr
+          zzi = Zi(i,j-1)
+          Zi(i,j-1) = Zi(i,j)
+          Zi(i,j) = zzi
         ENDDO
       ENDIF
       !
-    ENDDO
-    !     .......... MULTIPLY BY TRANSFORMATION MATRIX TO GIVE
-    !                VECTORS OF ORIGINAL FULL MATRIX.
-    !                FOR J=N STEP -1 UNTIL LOW+1 DO -- ..........
-    DO jj = Low , enm1
-      j = N + Low - jj
-      m = MIN(j-1,Igh)
-      !
-      DO i = Low , Igh
-        zzr = Zr(i,j)
-        zzi = Zi(i,j)
-        !
-        DO k = Low , m
-          zzr = zzr + Zr(i,k)*Hr(k,j) - Zi(i,k)*Hi(k,j)
-          zzi = zzi + Zr(i,k)*Hi(k,j) + Zi(i,k)*Hr(k,j)
-        ENDDO
-        !
-        Zr(i,j) = zzr
-        Zi(i,j) = zzi
+      DO i = 1, j
+        Hr(i,j-1) = Hr(i,j-1) + xr*Hr(i,j) - xi*Hi(i,j)
+        Hi(i,j-1) = Hi(i,j-1) + xr*Hi(i,j) + xi*Hr(i,j)
+      ENDDO
+      !     .......... ACCUMULATE TRANSFORMATIONS ..........
+      DO i = Low, Igh
+        Zr(i,j-1) = Zr(i,j-1) + xr*Zr(i,j) - xi*Zi(i,j)
+        Zi(i,j-1) = Zi(i,j-1) + xr*Zi(i,j) + xi*Zr(i,j)
       ENDDO
       !
     ENDDO
-  ENDIF
-  GOTO 99999
-ELSE
-  its = 0
-  enm1 = en - 1
-ENDIF
-!     .......... LOOK FOR SINGLE SMALL SUB-DIAGONAL ELEMENT
-!                FOR L=EN STEP -1 UNTIL LOW DO -- ..........
-200  DO ll = Low , en
-l = en + Low - ll
-IF ( l==Low ) EXIT
-s1 = ABS(Hr(l-1,l-1)) + ABS(Hi(l-1,l-1)) + ABS(Hr(l,l)) + ABS(Hi(l,l))
-s2 = s1 + ABS(Hr(l,l-1)) + ABS(Hi(l,l-1))
-IF ( s2==s1 ) EXIT
-ENDDO
-!     .......... FORM SHIFT ..........
-IF ( l==en ) THEN
-!     .......... A ROOT FOUND ..........
-Hr(en,en) = Hr(en,en) + tr
-Wr(en) = Hr(en,en)
-Hi(en,en) = Hi(en,en) + ti
-Wi(en) = Hi(en,en)
-en = enm1
-GOTO 100
-ELSEIF ( itn==0 ) THEN
-!     .......... SET ERROR -- NO CONVERGENCE TO AN
-!                EIGENVALUE AFTER 30*N ITERATIONS ..........
-Ierr = en
-ELSE
-IF ( its==10.OR.its==20 ) THEN
-  !     .......... FORM EXCEPTIONAL SHIFT ..........
-  sr = ABS(Hr(en,enm1)) + ABS(Hr(enm1,en-2))
-  si = ABS(Hi(en,enm1)) + ABS(Hi(enm1,en-2))
-ELSE
-  sr = Hr(en,en)
-  si = Hi(en,en)
-  xr = Hr(enm1,en)*Hr(en,enm1) - Hi(enm1,en)*Hi(en,enm1)
-  xi = Hr(enm1,en)*Hi(en,enm1) + Hi(enm1,en)*Hr(en,enm1)
-  IF ( xr/=0.0E0.OR.xi/=0.0E0 ) THEN
-    yr = (Hr(enm1,enm1)-sr)/2.0E0
-    yi = (Hi(enm1,enm1)-si)/2.0E0
-    CALL CSROOT(yr**2-yi**2+xr,2.0E0*yr*yi+xi,zzr,zzi)
-    IF ( yr*zzr+yi*zzi<0.0E0 ) THEN
-      zzr = -zzr
-      zzi = -zzi
-    ENDIF
-    CALL CDIV(xr,xi,yr+zzr,yi+zzi,xr,xi)
-    sr = sr - xr
-    si = si - xi
-  ENDIF
-ENDIF
-!
-DO i = Low , en
-  Hr(i,i) = Hr(i,i) - sr
-  Hi(i,i) = Hi(i,i) - si
-ENDDO
-!
-tr = tr + sr
-ti = ti + si
-its = its + 1
-itn = itn - 1
-!     .......... LOOK FOR TWO CONSECUTIVE SMALL
-!                SUB-DIAGONAL ELEMENTS ..........
-xr = ABS(Hr(enm1,enm1)) + ABS(Hi(enm1,enm1))
-yr = ABS(Hr(en,enm1)) + ABS(Hi(en,enm1))
-zzr = ABS(Hr(en,en)) + ABS(Hi(en,en))
-!     .......... FOR M=EN-1 STEP -1 UNTIL L DO -- ..........
-DO mm = l , enm1
-  m = enm1 + l - mm
-  IF ( m==l ) EXIT
-  yi = yr
-  yr = ABS(Hr(m,m-1)) + ABS(Hi(m,m-1))
-  xi = zzr
-  zzr = xr
-  xr = ABS(Hr(m-1,m-1)) + ABS(Hi(m-1,m-1))
-  s1 = zzr/yi*(zzr+xr+xi)
-  s2 = s1 + yr
-  IF ( s2==s1 ) EXIT
-ENDDO
-!     .......... TRIANGULAR DECOMPOSITION H=L*R ..........
-mp1 = m + 1
-!
-DO i = mp1 , en
-  im1 = i - 1
-  xr = Hr(im1,im1)
-  xi = Hi(im1,im1)
-  yr = Hr(i,im1)
-  yi = Hi(i,im1)
-  IF ( ABS(xr)+ABS(xi)>=ABS(yr)+ABS(yi) ) THEN
-    CALL CDIV(yr,yi,xr,xi,zzr,zzi)
-    Wr(i) = -1.0E0
-  ELSE
-    !     .......... INTERCHANGE ROWS OF HR AND HI ..........
-    DO j = im1 , N
-      zzr = Hr(im1,j)
-      Hr(im1,j) = Hr(i,j)
-      Hr(i,j) = zzr
-      zzi = Hi(im1,j)
-      Hi(im1,j) = Hi(i,j)
-      Hi(i,j) = zzi
-    ENDDO
     !
-    CALL CDIV(xr,xi,yr,yi,zzr,zzi)
-    Wr(i) = 1.0E0
+    GOTO 200
   ENDIF
-  Hr(i,im1) = zzr
-  Hi(i,im1) = zzi
-  !
-  DO j = i , N
-    Hr(i,j) = Hr(i,j) - zzr*Hr(im1,j) + zzi*Hi(im1,j)
-    Hi(i,j) = Hi(i,j) - zzr*Hi(im1,j) - zzi*Hr(im1,j)
-  ENDDO
-  !
-ENDDO
-!     .......... COMPOSITION R*L=H ..........
-DO j = mp1 , en
-  xr = Hr(j,j-1)
-  xi = Hi(j,j-1)
-  Hr(j,j-1) = 0.0E0
-  Hi(j,j-1) = 0.0E0
-  !     .......... INTERCHANGE COLUMNS OF HR, HI, ZR, AND ZI,
-  !                IF NECESSARY ..........
-  IF ( Wr(j)>0.0E0 ) THEN
-    !
-    DO i = 1 , j
-      zzr = Hr(i,j-1)
-      Hr(i,j-1) = Hr(i,j)
-      Hr(i,j) = zzr
-      zzi = Hi(i,j-1)
-      Hi(i,j-1) = Hi(i,j)
-      Hi(i,j) = zzi
-    ENDDO
-    !
-    DO i = Low , Igh
-      zzr = Zr(i,j-1)
-      Zr(i,j-1) = Zr(i,j)
-      Zr(i,j) = zzr
-      zzi = Zi(i,j-1)
-      Zi(i,j-1) = Zi(i,j)
-      Zi(i,j) = zzi
-    ENDDO
-  ENDIF
-  !
-  DO i = 1 , j
-    Hr(i,j-1) = Hr(i,j-1) + xr*Hr(i,j) - xi*Hi(i,j)
-    Hi(i,j-1) = Hi(i,j-1) + xr*Hi(i,j) + xi*Hr(i,j)
-  ENDDO
-  !     .......... ACCUMULATE TRANSFORMATIONS ..........
-  DO i = Low , Igh
-    Zr(i,j-1) = Zr(i,j-1) + xr*Zr(i,j) - xi*Zi(i,j)
-    Zi(i,j-1) = Zi(i,j-1) + xr*Zi(i,j) + xi*Zr(i,j)
-  ENDDO
-  !
-ENDDO
-!
-GOTO 200
-ENDIF
-99999 END SUBROUTINE COMLR2
+  99999 CONTINUE
+  END SUBROUTINE COMLR2

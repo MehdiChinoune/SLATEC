@@ -4,7 +4,7 @@ FUNCTION ALBETA(A,B)
   IMPLICIT NONE
   !*--ALBETA5
   !*** Start of declarations inserted by SPAG
-  REAL A , ALBETA , ALNGAM , ALNREL , B , corr , GAMMA , p , q , R9LGMC , &
+  REAL A, ALBETA, ALNGAM, ALNREL, B, corr, GAMMA, p, q, R9LGMC, &
     sq2pil
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ALBETA
@@ -67,4 +67,5 @@ FUNCTION ALBETA(A,B)
   ALBETA = ALNGAM(p) + corr + p - p*LOG(p+q) + (q-0.5)*ALNREL(-p/(p+q))
   RETURN
   !
-  99999 END FUNCTION ALBETA
+  99999 CONTINUE
+  END FUNCTION ALBETA

@@ -77,27 +77,27 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !***END PROLOGUE  DCOEF
   !
   REAL(8) :: DDOT
-  INTEGER i , Iflag , Inhomo , Iwork(*) , j , k , kflag , ki , l , LPAr , &
-    mlso , Ncomp , ncomp2 , nf , Nfc , Nfcc , nfccm1 , Nic , Nrowb
-  REAL(8) :: Ae , B(Nrowb,*) , bbn , Beta(*) , bn , brn , By(Nfcc,*) , &
-    bykl , bys , Coef(*) , cons , Cvec(*) , EPS , FOUru , &
-    gam , Re , SQOvfl , SRU , TWOu , un , URO , Work(*) , &
-    Yh(Ncomp,*) , Yp(*) , ypn
+  INTEGER i, Iflag, Inhomo, Iwork(*), j, k, kflag, ki, l, LPAr, &
+    mlso, Ncomp, ncomp2, nf, Nfc, Nfcc, nfccm1, Nic, Nrowb
+  REAL(8) :: Ae, B(Nrowb,*), bbn, Beta(*), bn, brn, By(Nfcc,*), &
+    bykl, bys, Coef(*), cons, Cvec(*), EPS, FOUru, &
+    gam, Re, SQOvfl, SRU, TWOu, un, URO, Work(*), &
+    Yh(Ncomp,*), Yp(*), ypn
   !
-  COMMON /DML5MC/ URO , SRU , EPS , SQOvfl , TWOu , FOUru , LPAr
+  COMMON /DML5MC/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
   !***FIRST EXECUTABLE STATEMENT  DCOEF
   !
   !     SET UP MATRIX  B*YH  AND VECTOR  BETA - B*YP
   !
   ncomp2 = Ncomp/2
-  DO k = 1 , Nfcc
-    DO j = 1 , Nfc
+  DO k = 1, Nfcc
+    DO j = 1, Nfc
       l = j
       IF ( Nfc/=Nfcc ) l = 2*j - 1
       By(k,l) = DDOT(Ncomp,B(k,1),Nrowb,Yh(1,j),1)
     ENDDO
     IF ( Nfc/=Nfcc ) THEN
-      DO j = 1 , Nfc
+      DO j = 1, Nfc
         l = 2*j
         bykl = DDOT(ncomp2,B(k,1),Nrowb,Yh(ncomp2+1,j),1)
         By(k,l) = DDOT(ncomp2,B(k,ncomp2+1),Nrowb,Yh(1,j),1) - bykl
@@ -141,7 +141,7 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
         bn = 0.0D0
         un = 0.0D0
         ypn = 0.0D0
-        DO k = 1 , Ncomp
+        DO k = 1, Ncomp
           un = MAX(un,ABS(Yh(k,1)))
           ypn = MAX(ypn,ABS(Yp(k)))
           bn = MAX(bn,ABS(B(1,k)))
@@ -159,22 +159,22 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
         ENDIF
       ELSEIF ( Inhomo==3 ) THEN
         IF ( Iwork(1)<Nfcc ) THEN
-          DO k = 1 , Nfcc
+          DO k = 1, Nfcc
             ki = 4*Nfcc + k
             Coef(k) = Work(ki)
           ENDDO
         ELSE
           Iflag = 3
-          DO k = 1 , Nfcc
+          DO k = 1, Nfcc
             Coef(k) = 0.0D0
           ENDDO
           Coef(Nfcc) = 1.0D0
           nfccm1 = Nfcc - 1
-          DO k = 1 , nfccm1
+          DO k = 1, nfccm1
             j = Nfcc - k
             l = Nfcc - j + 1
             gam = DDOT(l,By(j,j),Nfcc,Coef(j),1)/(Work(j)*By(j,j))
-            DO i = j , Nfcc
+            DO i = j, Nfcc
               Coef(i) = Coef(i) + gam*By(j,i)
             ENDDO
           ENDDO

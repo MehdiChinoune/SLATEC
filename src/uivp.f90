@@ -24,7 +24,7 @@ SUBROUTINE UIVP(X,Y,Yp)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Array Arguments ..
-  REAL Y(*) , Yp(*)
+  REAL Y(*), Yp(*)
   !***FIRST EXECUTABLE STATEMENT  UIVP
   STOP
 END SUBROUTINE UIVP

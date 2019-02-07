@@ -89,25 +89,25 @@ SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  IMTQL2
   !
-  INTEGER i , j , k , l , m , N , ii , Nm , mml , Ierr
-  REAL D(*) , E(*) , Z(Nm,*)
-  REAL b , c , f , g , p , r , s , s1 , s2
+  INTEGER i, j, k, l, m, N, ii, Nm, mml, Ierr
+  REAL D(*), E(*), Z(Nm,*)
+  REAL b, c, f, g, p, r, s, s1, s2
   REAL PYTHAG
   !
   !***FIRST EXECUTABLE STATEMENT  IMTQL2
   Ierr = 0
   IF ( N/=1 ) THEN
     !
-    DO i = 2 , N
+    DO i = 2, N
       E(i-1) = E(i)
     ENDDO
     !
     E(N) = 0.0E0
     !
-    DO l = 1 , N
+    DO l = 1, N
       j = 0
       !     .......... LOOK FOR SMALL SUB-DIAGONAL ELEMENT ..........
-      20       DO m = l , N
+      20       DO m = l, N
       IF ( m==N ) EXIT
       s1 = ABS(D(m)) + ABS(D(m+1))
       s2 = s1 + ABS(E(m))
@@ -127,7 +127,7 @@ SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
       p = 0.0E0
       mml = m - l
       !     .......... FOR I=M-1 STEP -1 UNTIL L DO -- ..........
-      DO ii = 1 , mml
+      DO ii = 1, mml
         i = m - ii
         f = s*E(i)
         b = c*E(i)
@@ -150,7 +150,7 @@ SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
         D(i+1) = g + p
         g = c*r - b
         !     .......... FORM VECTOR ..........
-        DO k = 1 , N
+        DO k = 1, N
           f = Z(k,i+1)
           Z(k,i+1) = s*Z(k,i) + c*f
           Z(k,i) = c*Z(k,i) - s*f
@@ -165,12 +165,12 @@ SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
     ENDIF
   ENDDO
   !     .......... ORDER EIGENVALUES AND EIGENVECTORS ..........
-  DO ii = 2 , N
+  DO ii = 2, N
     i = ii - 1
     k = i
     p = D(i)
     !
-    DO j = ii , N
+    DO j = ii, N
       IF ( D(j)<p ) THEN
         k = j
         p = D(j)
@@ -181,7 +181,7 @@ SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
       D(k) = D(i)
       D(i) = p
       !
-      DO j = 1 , N
+      DO j = 1, N
         p = Z(j,i)
         Z(j,i) = Z(j,k)
         Z(j,k) = p
@@ -195,4 +195,5 @@ SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
   !     .......... SET ERROR -- NO CONVERGENCE TO AN
   !                EIGENVALUE AFTER 30 ITERATIONS ..........
   100  Ierr = l
-  99999 END SUBROUTINE IMTQL2
+  99999 CONTINUE
+  END SUBROUTINE IMTQL2

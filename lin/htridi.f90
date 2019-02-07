@@ -79,33 +79,33 @@ SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  HTRIDI
   !
-  INTEGER i , j , k , l , N , ii , Nm , jp1
-  REAL Ar(Nm,*) , Ai(Nm,*) , D(*) , E(*) , E2(*) , Tau(2,*)
-  REAL f , g , h , fi , gi , hh , si , scale
+  INTEGER i, j, k, l, N, ii, Nm, jp1
+  REAL Ar(Nm,*), Ai(Nm,*), D(*), E(*), E2(*), Tau(2,*)
+  REAL f, g, h, fi, gi, hh, si, scale
   REAL PYTHAG
   !
   !***FIRST EXECUTABLE STATEMENT  HTRIDI
   Tau(1,N) = 1.0E0
   Tau(2,N) = 0.0E0
   !
-  DO i = 1 , N
+  DO i = 1, N
     D(i) = Ar(i,i)
   ENDDO
   !     .......... FOR I=N STEP -1 UNTIL 1 DO -- ..........
-  DO ii = 1 , N
+  DO ii = 1, N
     i = N + 1 - ii
     l = i - 1
     h = 0.0E0
     scale = 0.0E0
     IF ( l>=1 ) THEN
       !     .......... SCALE ROW (ALGOL TOL THEN NOT NEEDED) ..........
-      DO k = 1 , l
+      DO k = 1, l
         scale = scale + ABS(Ar(i,k)) + ABS(Ai(i,k))
       ENDDO
       !
       IF ( scale/=0.0E0 ) THEN
         !
-        DO k = 1 , l
+        DO k = 1, l
           Ar(i,k) = Ar(i,k)/scale
           Ai(i,k) = Ai(i,k)/scale
           h = h + Ar(i,k)*Ar(i,k) + Ai(i,k)*Ai(i,k)
@@ -141,11 +141,11 @@ SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
     GOTO 150
     50     f = 0.0E0
     !
-    DO j = 1 , l
+    DO j = 1, l
       g = 0.0E0
       gi = 0.0E0
       !     .......... FORM ELEMENT OF A*U ..........
-      DO k = 1 , j
+      DO k = 1, j
         g = g + Ar(j,k)*Ar(i,k) + Ai(j,k)*Ai(i,k)
         gi = gi - Ar(j,k)*Ai(i,k) + Ai(j,k)*Ar(i,k)
       ENDDO
@@ -153,7 +153,7 @@ SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
       jp1 = j + 1
       IF ( l>=jp1 ) THEN
         !
-        DO k = jp1 , l
+        DO k = jp1, l
           g = g + Ar(k,j)*Ar(i,k) - Ai(k,j)*Ai(i,k)
           gi = gi - Ar(k,j)*Ai(i,k) - Ai(k,j)*Ar(i,k)
         ENDDO
@@ -166,7 +166,7 @@ SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
     !
     hh = f/(h+h)
     !     .......... FORM REDUCED A ..........
-    DO j = 1 , l
+    DO j = 1, l
       f = Ar(i,j)
       g = E(j) - hh*f
       E(j) = g
@@ -174,13 +174,13 @@ SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
       gi = Tau(2,j) - hh*fi
       Tau(2,j) = -gi
       !
-      DO k = 1 , j
+      DO k = 1, j
         Ar(j,k) = Ar(j,k) - f*E(k) - g*Ar(i,k) + fi*Tau(2,k) + gi*Ai(i,k)
         Ai(j,k) = Ai(j,k) - f*Tau(2,k) - g*Ai(i,k) - fi*E(k) - gi*Ar(i,k)
       ENDDO
     ENDDO
     !
-    100    DO k = 1 , l
+    100    DO k = 1, l
     Ar(i,k) = scale*Ar(i,k)
     Ai(i,k) = scale*Ai(i,k)
   ENDDO

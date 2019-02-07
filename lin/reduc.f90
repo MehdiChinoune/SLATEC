@@ -75,23 +75,23 @@ SUBROUTINE REDUC(Nm,N,A,B,Dl,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  REDUC
   !
-  INTEGER i , j , k , N , i1 , j1 , Nm , nn , Ierr
-  REAL A(Nm,*) , B(Nm,*) , Dl(*)
-  REAL x , y
+  INTEGER i, j, k, N, i1, j1, Nm, nn, Ierr
+  REAL A(Nm,*), B(Nm,*), Dl(*)
+  REAL x, y
   !
   !***FIRST EXECUTABLE STATEMENT  REDUC
   Ierr = 0
   nn = ABS(N)
   IF ( N>=0 ) THEN
     !     .......... FORM L IN THE ARRAYS B AND DL ..........
-    DO i = 1 , N
+    DO i = 1, N
       i1 = i - 1
       !
-      DO j = i , N
+      DO j = i, N
         x = B(i,j)
         IF ( i/=1 ) THEN
           !
-          DO k = 1 , i1
+          DO k = 1, i1
             x = x - B(i,k)*B(j,k)
           ENDDO
         ENDIF
@@ -108,15 +108,15 @@ SUBROUTINE REDUC(Nm,N,A,B,Dl,Ierr)
   ENDIF
   !     .......... FORM THE TRANSPOSE OF THE UPPER TRIANGLE OF INV(L)*A
   !                IN THE LOWER TRIANGLE OF THE ARRAY A ..........
-  DO i = 1 , nn
+  DO i = 1, nn
     i1 = i - 1
     y = Dl(i)
     !
-    DO j = i , nn
+    DO j = i, nn
       x = A(i,j)
       IF ( i/=1 ) THEN
         !
-        DO k = 1 , i1
+        DO k = 1, i1
           x = x - B(i,k)*A(j,k)
         ENDDO
       ENDIF
@@ -125,22 +125,22 @@ SUBROUTINE REDUC(Nm,N,A,B,Dl,Ierr)
     ENDDO
   ENDDO
   !     .......... PRE-MULTIPLY BY INV(L) AND OVERWRITE ..........
-  DO j = 1 , nn
+  DO j = 1, nn
     j1 = j - 1
     !
-    DO i = j , nn
+    DO i = j, nn
       x = A(i,j)
       IF ( i/=j ) THEN
         i1 = i - 1
         !
-        DO k = j , i1
+        DO k = j, i1
           x = x - A(k,j)*B(i,k)
         ENDDO
       ENDIF
       !
       IF ( j/=1 ) THEN
         !
-        DO k = 1 , j1
+        DO k = 1, j1
           x = x - A(j,k)*B(i,k)
         ENDDO
       ENDIF
@@ -152,4 +152,5 @@ SUBROUTINE REDUC(Nm,N,A,B,Dl,Ierr)
   GOTO 99999
   !     .......... SET ERROR -- B IS NOT POSITIVE DEFINITE ..........
   100  Ierr = 7*N + 1
-  99999 END SUBROUTINE REDUC
+  99999 CONTINUE
+  END SUBROUTINE REDUC

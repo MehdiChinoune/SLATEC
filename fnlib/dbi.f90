@@ -5,7 +5,7 @@ REAL(8) FUNCTION DBI(X)
   !*--DBI5
   !*** Start of declarations inserted by SPAG
   REAL eta
-  INTEGER INITDS , nbif , nbif2 , nbig , nbig2
+  INTEGER INITDS, nbif, nbif2, nbig, nbig2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBI
   !***PURPOSE  Evaluate the Bairy function (the Airy function of the
@@ -53,11 +53,11 @@ REAL(8) FUNCTION DBI(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBI
-  REAL(8) :: X , bifcs(13) , bigcs(13) , bif2cs(15) , big2cs(15) , &
-    theta , xm , xmax , x3sml , z , D1MACH , DCSEVL , DBIE
+  REAL(8) :: X, bifcs(13), bigcs(13), bif2cs(15), big2cs(15), &
+    theta, xm, xmax, x3sml, z, D1MACH, DCSEVL, DBIE
   LOGICAL first
-  SAVE bifcs , bigcs , bif2cs , big2cs , nbif , nbig , nbif2 , nbig2 , &
-    x3sml , xmax , first
+  SAVE bifcs, bigcs, bif2cs, big2cs, nbif, nbig, nbif2, nbig2, &
+    x3sml, xmax, first
   DATA bifcs(1)/ - .16730216471986649483537423928176D-1/
   DATA bifcs(2)/ + .10252335834249445611426362777757D+0/
   DATA bifcs(3)/ + .17083092507381516539429650242013D-2/
@@ -152,4 +152,5 @@ REAL(8) FUNCTION DBI(X)
     + X*(0.625D0+DCSEVL(z,big2cs,nbig2))
   RETURN
   !
-  99999 END FUNCTION DBI
+  99999 CONTINUE
+  END FUNCTION DBI

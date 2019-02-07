@@ -4,8 +4,8 @@ SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
   IMPLICIT NONE
   !*--SOSSOL5
   !*** Start of declarations inserted by SPAG
-  REAL B , C , X , xmax
-  INTEGER j , jkm , K , kj , km , km1 , kmm1 , kn , L , lk , M , N , np1
+  REAL B, C, X, xmax
+  INTEGER j, jkm, K, kj, km, km1, kmm1, kn, L, lk, M, N, np1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SOSSOL
   !***SUBSIDIARY
@@ -38,7 +38,7 @@ SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
   !***END PROLOGUE  SOSSOL
   !
   !
-  DIMENSION X(*) , C(*) , B(*)
+  DIMENSION X(*), C(*), B(*)
   !
   !***FIRST EXECUTABLE STATEMENT  SOSSOL
   np1 = N + 1
@@ -48,7 +48,7 @@ SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
   kn = M
   !
   !
-  DO kj = 1 , km1
+  DO kj = 1, km1
     kmm1 = K - kj
     km = kmm1 + 1
     xmax = 0.
@@ -56,7 +56,7 @@ SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
     IF ( km<=lk ) THEN
       jkm = kn
       !
-      DO j = km , lk
+      DO j = km, lk
         jkm = jkm + 1
         xmax = xmax + C(jkm)*X(j)
       ENDDO

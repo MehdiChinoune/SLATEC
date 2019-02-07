@@ -4,8 +4,8 @@ COMPLEX FUNCTION C9LGMC(Zin)
   IMPLICIT NONE
   !*--C9LGMC5
   !*** Start of declarations inserted by SPAG
-  REAL bern , bound , cabsz , R1MACH , x , xbig , xmax , y
-  INTEGER i , ndx , nterm
+  REAL bern, bound, cabsz, R1MACH, x, xbig, xmax, y
+  INTEGER i, ndx, nterm
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  C9LGMC
   !***SUBSIDIARY
@@ -37,10 +37,10 @@ COMPLEX FUNCTION C9LGMC(Zin)
   !           (WRB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  C9LGMC
-  COMPLEX Zin , z , z2inv
+  COMPLEX Zin, z, z2inv
   DIMENSION bern(11)
   LOGICAL first
-  SAVE bern , nterm , bound , xbig , xmax , first
+  SAVE bern, nterm, bound, xbig, xmax, first
   DATA bern(1)/.083333333333333333E0/
   DATA bern(2)/ - .0027777777777777778E0/
   DATA bern(3)/.00079365079365079365E0/
@@ -84,7 +84,7 @@ COMPLEX FUNCTION C9LGMC(Zin)
   !
   z2inv = 1.0/z**2
   C9LGMC = (0.0,0.0)
-  DO i = 1 , nterm
+  DO i = 1, nterm
     ndx = nterm + 1 - i
     C9LGMC = bern(ndx) + C9LGMC*z2inv
   ENDDO
@@ -92,4 +92,5 @@ COMPLEX FUNCTION C9LGMC(Zin)
   C9LGMC = C9LGMC/z
   RETURN
   !
-  99999 END FUNCTION C9LGMC
+  99999 CONTINUE
+  END FUNCTION C9LGMC

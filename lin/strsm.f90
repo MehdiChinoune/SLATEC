@@ -131,11 +131,11 @@ SUBROUTINE STRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  STRSM
   !     .. Scalar Arguments ..
-  CHARACTER :: Side , Uplo , Transa , Diag
-  INTEGER M , N , Lda , Ldb
+  CHARACTER :: Side, Uplo, Transa, Diag
+  INTEGER M, N, Lda, Ldb
   REAL Alpha
   !     .. Array Arguments ..
-  REAL A(Lda,*) , B(Ldb,*)
+  REAL A(Lda,*), B(Ldb,*)
   !
   !     .. External Functions ..
   LOGICAL LSAME
@@ -145,11 +145,11 @@ SUBROUTINE STRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !     .. Local Scalars ..
-  LOGICAL lside , nounit , upper
-  INTEGER i , info , j , k , nrowa
+  LOGICAL lside, nounit, upper
+  INTEGER i, info, j, k, nrowa
   REAL temp
   !     .. Parameters ..
-  REAL ONE , ZERO
+  REAL ONE, ZERO
   PARAMETER (ONE=1.0E+0,ZERO=0.0E+0)
   !***FIRST EXECUTABLE STATEMENT  STRSM
   !
@@ -195,8 +195,8 @@ SUBROUTINE STRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !     And when  alpha.eq.zero.
   !
   IF ( Alpha==ZERO ) THEN
-    DO j = 1 , N
-      DO i = 1 , M
+    DO j = 1, N
+      DO i = 1, M
         B(i,j) = ZERO
       ENDDO
     ENDDO
@@ -211,32 +211,32 @@ SUBROUTINE STRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
       !           Form  B := alpha*inv( A )*B.
       !
       IF ( upper ) THEN
-        DO j = 1 , N
+        DO j = 1, N
           IF ( Alpha/=ONE ) THEN
-            DO i = 1 , M
+            DO i = 1, M
               B(i,j) = Alpha*B(i,j)
             ENDDO
           ENDIF
-          DO k = M , 1 , -1
+          DO k = M, 1, -1
             IF ( B(k,j)/=ZERO ) THEN
               IF ( nounit ) B(k,j) = B(k,j)/A(k,k)
-              DO i = 1 , k - 1
+              DO i = 1, k - 1
                 B(i,j) = B(i,j) - B(k,j)*A(i,k)
               ENDDO
             ENDIF
           ENDDO
         ENDDO
       ELSE
-        DO j = 1 , N
+        DO j = 1, N
           IF ( Alpha/=ONE ) THEN
-            DO i = 1 , M
+            DO i = 1, M
               B(i,j) = Alpha*B(i,j)
             ENDDO
           ENDIF
-          DO k = 1 , M
+          DO k = 1, M
             IF ( B(k,j)/=ZERO ) THEN
               IF ( nounit ) B(k,j) = B(k,j)/A(k,k)
-              DO i = k + 1 , M
+              DO i = k + 1, M
                 B(i,j) = B(i,j) - B(k,j)*A(i,k)
               ENDDO
             ENDIF
@@ -247,10 +247,10 @@ SUBROUTINE STRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
       !           Form  B := alpha*inv( A' )*B.
       !
     ELSEIF ( upper ) THEN
-      DO j = 1 , N
-        DO i = 1 , M
+      DO j = 1, N
+        DO i = 1, M
           temp = Alpha*B(i,j)
-          DO k = 1 , i - 1
+          DO k = 1, i - 1
             temp = temp - A(k,i)*B(k,j)
           ENDDO
           IF ( nounit ) temp = temp/A(i,i)
@@ -258,10 +258,10 @@ SUBROUTINE STRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
         ENDDO
       ENDDO
     ELSE
-      DO j = 1 , N
-        DO i = M , 1 , -1
+      DO j = 1, N
+        DO i = M, 1, -1
           temp = Alpha*B(i,j)
-          DO k = i + 1 , M
+          DO k = i + 1, M
             temp = temp - A(k,i)*B(k,j)
           ENDDO
           IF ( nounit ) temp = temp/A(i,i)
@@ -274,43 +274,43 @@ SUBROUTINE STRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
     !           Form  B := alpha*B*inv( A ).
     !
     IF ( upper ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( Alpha/=ONE ) THEN
-          DO i = 1 , M
+          DO i = 1, M
             B(i,j) = Alpha*B(i,j)
           ENDDO
         ENDIF
-        DO k = 1 , j - 1
+        DO k = 1, j - 1
           IF ( A(k,j)/=ZERO ) THEN
-            DO i = 1 , M
+            DO i = 1, M
               B(i,j) = B(i,j) - A(k,j)*B(i,k)
             ENDDO
           ENDIF
         ENDDO
         IF ( nounit ) THEN
           temp = ONE/A(j,j)
-          DO i = 1 , M
+          DO i = 1, M
             B(i,j) = temp*B(i,j)
           ENDDO
         ENDIF
       ENDDO
     ELSE
-      DO j = N , 1 , -1
+      DO j = N, 1, -1
         IF ( Alpha/=ONE ) THEN
-          DO i = 1 , M
+          DO i = 1, M
             B(i,j) = Alpha*B(i,j)
           ENDDO
         ENDIF
-        DO k = j + 1 , N
+        DO k = j + 1, N
           IF ( A(k,j)/=ZERO ) THEN
-            DO i = 1 , M
+            DO i = 1, M
               B(i,j) = B(i,j) - A(k,j)*B(i,k)
             ENDDO
           ENDIF
         ENDDO
         IF ( nounit ) THEN
           temp = ONE/A(j,j)
-          DO i = 1 , M
+          DO i = 1, M
             B(i,j) = temp*B(i,j)
           ENDDO
         ENDIF
@@ -320,45 +320,45 @@ SUBROUTINE STRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
     !           Form  B := alpha*B*inv( A' ).
     !
   ELSEIF ( upper ) THEN
-    DO k = N , 1 , -1
+    DO k = N, 1, -1
       IF ( nounit ) THEN
         temp = ONE/A(k,k)
-        DO i = 1 , M
+        DO i = 1, M
           B(i,k) = temp*B(i,k)
         ENDDO
       ENDIF
-      DO j = 1 , k - 1
+      DO j = 1, k - 1
         IF ( A(j,k)/=ZERO ) THEN
           temp = A(j,k)
-          DO i = 1 , M
+          DO i = 1, M
             B(i,j) = B(i,j) - temp*B(i,k)
           ENDDO
         ENDIF
       ENDDO
       IF ( Alpha/=ONE ) THEN
-        DO i = 1 , M
+        DO i = 1, M
           B(i,k) = Alpha*B(i,k)
         ENDDO
       ENDIF
     ENDDO
   ELSE
-    DO k = 1 , N
+    DO k = 1, N
       IF ( nounit ) THEN
         temp = ONE/A(k,k)
-        DO i = 1 , M
+        DO i = 1, M
           B(i,k) = temp*B(i,k)
         ENDDO
       ENDIF
-      DO j = k + 1 , N
+      DO j = k + 1, N
         IF ( A(j,k)/=ZERO ) THEN
           temp = A(j,k)
-          DO i = 1 , M
+          DO i = 1, M
             B(i,j) = B(i,j) - temp*B(i,k)
           ENDDO
         ENDIF
       ENDDO
       IF ( Alpha/=ONE ) THEN
-        DO i = 1 , M
+        DO i = 1, M
           B(i,k) = Alpha*B(i,k)
         ENDDO
       ENDIF

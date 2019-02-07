@@ -18,10 +18,10 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !     and estimates the condition of the matrix.
   !
   !     If  RCOND  is not needed, CGEFA is slightly faster.
-  !     To solve  A*X = B , follow CGECO By CGESL.
-  !     To Compute  INVERSE(A)*C , follow CGECO by CGESL.
-  !     To compute  DETERMINANT(A) , follow CGECO by CGEDI.
-  !     To compute  INVERSE(A) , follow CGECO by CGEDI.
+  !     To solve  A*X = B, follow CGECO By CGESL.
+  !     To Compute  INVERSE(A)*C, follow CGECO by CGESL.
+  !     To compute  DETERMINANT(A), follow CGECO by CGEDI.
+  !     To compute  INVERSE(A), follow CGECO by CGEDI.
   !
   !     On Entry
   !
@@ -47,7 +47,7 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   !        RCOND   REAL
   !                an estimate of the reciprocal condition of  A .
-  !                For the system  A*X = B , relative perturbations
+  !                For the system  A*X = B, relative perturbations
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -76,13 +76,13 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CGECO
-  INTEGER Lda , N , Ipvt(*)
-  COMPLEX A(Lda,*) , Z(*)
+  INTEGER Lda, N, Ipvt(*)
+  COMPLEX A(Lda,*), Z(*)
   REAL Rcond
   !
-  COMPLEX CDOTC , ek , t , wk , wkm
-  REAL anorm , s , SCASUM , sm , ynorm
-  INTEGER info , j , k , kb , kp1 , l
+  COMPLEX CDOTC, ek, t, wk, wkm
+  REAL anorm, s, SCASUM, sm, ynorm
+  INTEGER info, j, k, kb, kp1, l
   REAL, EXTERNAL :: CABS1
   COMPLEX, EXTERNAL :: CSIGN1
   !
@@ -90,7 +90,7 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   !***FIRST EXECUTABLE STATEMENT  CGECO
   anorm = 0.0E0
-  DO j = 1 , N
+  DO j = 1, N
     anorm = MAX(anorm,SCASUM(N,A(1,j),1))
   ENDDO
   !
@@ -108,10 +108,10 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !     SOLVE CTRANS(U)*W = E
   !
   ek = (1.0E0,0.0E0)
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = (0.0E0,0.0E0)
   ENDDO
-  DO k = 1 , N
+  DO k = 1, N
     IF ( CABS1(Z(k))/=0.0E0 ) ek = CSIGN1(ek,-Z(k))
     IF ( CABS1(ek-Z(k))>CABS1(A(k,k)) ) THEN
       s = CABS1(A(k,k))/CABS1(ek-Z(k))
@@ -131,7 +131,7 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
     ENDIF
     kp1 = k + 1
     IF ( kp1<=N ) THEN
-      DO j = kp1 , N
+      DO j = kp1, N
         sm = sm + CABS1(Z(j)+wkm*CONJG(A(k,j)))
         Z(j) = Z(j) + wk*CONJG(A(k,j))
         s = s + CABS1(Z(j))
@@ -139,7 +139,7 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
       IF ( s<sm ) THEN
         t = wkm - wk
         wk = wkm
-        DO j = kp1 , N
+        DO j = kp1, N
           Z(j) = Z(j) + t*CONJG(A(k,j))
         ENDDO
       ENDIF
@@ -151,7 +151,7 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   !     SOLVE CTRANS(L)*Y = W
   !
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     IF ( k<N ) Z(k) = Z(k) + CDOTC(N-k,A(k+1,k),1,Z(k+1),1)
     IF ( CABS1(Z(k))>1.0E0 ) THEN
@@ -170,7 +170,7 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   !     SOLVE L*V = Y
   !
-  DO k = 1 , N
+  DO k = 1, N
     l = Ipvt(k)
     t = Z(l)
     Z(l) = Z(k)
@@ -188,7 +188,7 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   !     SOLVE  U*Z = V
   !
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     IF ( CABS1(Z(k))>CABS1(A(k,k)) ) THEN
       s = CABS1(A(k,k))/CABS1(Z(k))

@@ -4,7 +4,7 @@ SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   IMPLICIT NONE
   !*--DPINTM5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , iopt , Ipagef , Ix , Lmx , lp4 , M , N , n20008 , n20012 , &
+  INTEGER i, iopt, Ipagef, Ix, Lmx, lp4, M, N, n20008, n20012, &
     nerr
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPINTM
@@ -51,10 +51,10 @@ SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   !***END PROLOGUE  DPINTM
-  REAL(8) :: Sx(*) , zero , one
+  REAL(8) :: Sx(*), zero, one
   DIMENSION Ix(*)
-  SAVE zero , one
-  DATA zero , one/0.D0 , 1.D0/
+  SAVE zero, one
+  DATA zero, one/0.D0, 1.D0/
   !***FIRST EXECUTABLE STATEMENT  DPINTM
   iopt = 1
   !

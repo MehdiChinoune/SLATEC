@@ -20,7 +20,7 @@ SUBROUTINE ZDIV(Ar,Ai,Br,Bi,Cr,Ci)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  ZDIV
-  REAL(8) :: Ar , Ai , Br , Bi , Cr , Ci , bm , ca , cb , cc , cd
+  REAL(8) :: Ar, Ai, Br, Bi, Cr, Ci, bm, ca, cb, cc, cd
   REAL(8) :: ZABS
   EXTERNAL ZABS
   !***FIRST EXECUTABLE STATEMENT  ZDIV

@@ -130,15 +130,15 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
   !***END PROLOGUE  CBIRY
-  COMPLEX Bi , cone , csq , cy , s1 , s2 , trm1 , trm2 , Z , zta , z3
-  REAL aa , ad , ak , alim , atrm , az , az3 , bb , bk , ck , coef , c1 , &
-    c2 , dig , dk , d1 , d2 , elim , fid , fmr , fnu , fnul , pi , rl , &
-    r1m5 , sfac , tol , tth , zi , zr , z3i , z3r , R1MACH
-  INTEGER Id , Ierr , k , Kode , k1 , k2 , nz , I1MACH
+  COMPLEX Bi, cone, csq, cy, s1, s2, trm1, trm2, Z, zta, z3
+  REAL aa, ad, ak, alim, atrm, az, az3, bb, bk, ck, coef, c1, &
+    c2, dig, dk, d1, d2, elim, fid, fmr, fnu, fnul, pi, rl, &
+    r1m5, sfac, tol, tth, zi, zr, z3i, z3r, R1MACH
+  INTEGER Id, Ierr, k, Kode, k1, k2, nz, I1MACH
   DIMENSION cy(2)
-  DATA tth , c1 , c2 , coef , pi/6.66666666666666667E-01 , &
-    6.14926627446000736E-01 , 4.48288357353826359E-01 , &
-    5.77350269189625765E-01 , 3.14159265358979324E+00/
+  DATA tth, c1, c2, coef, pi/6.66666666666666667E-01, &
+    6.14926627446000736E-01, 4.48288357353826359E-01, &
+    5.77350269189625765E-01, 3.14159265358979324E+00/
   DATA cone/(1.0E0,0.0E0)/
   !***FIRST EXECUTABLE STATEMENT  CBIRY
   Ierr = 0
@@ -288,7 +288,7 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
         bk = 30.0E0 - 9.0E0*fid
         z3r = REAL(z3)
         z3i = AIMAG(z3)
-        DO k = 1 , 25
+        DO k = 1, 25
           trm1 = trm1*CMPLX(z3r/d1,z3i/d1)
           s1 = s1 + trm1
           trm2 = trm2*CMPLX(z3r/d2,z3i/d2)
@@ -325,4 +325,5 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   100  nz = 0
   Ierr = 5
   RETURN
-  99999 END SUBROUTINE CBIRY
+  99999 CONTINUE
+  END SUBROUTINE CBIRY

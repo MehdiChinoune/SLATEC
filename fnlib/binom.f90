@@ -4,9 +4,9 @@ FUNCTION BINOM(N,M)
   IMPLICIT NONE
   !*--BINOM5
   !*** Start of declarations inserted by SPAG
-  REAL ALNREL , bilnmx , BINOM , corr , fintmx , R1MACH , R9LGMC , sq2pil , &
-    xk , xn , xnk
-  INTEGER i , k , M , N
+  REAL ALNREL, bilnmx, BINOM, corr, fintmx, R1MACH, R9LGMC, sq2pil, &
+    xk, xn, xnk
+  INTEGER i, k, M, N
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BINOM
   !***PURPOSE  Compute the binomial coefficients.
@@ -31,7 +31,7 @@ FUNCTION BINOM(N,M)
   !           (WRB)
   !***END PROLOGUE  BINOM
   LOGICAL first
-  SAVE sq2pil , bilnmx , fintmx , first
+  SAVE sq2pil, bilnmx, fintmx, first
   DATA sq2pil/0.91893853320467274E0/
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  BINOM
@@ -51,7 +51,7 @@ FUNCTION BINOM(N,M)
       BINOM = 1.
       IF ( k==0 ) RETURN
       !
-      DO i = 1 , k
+      DO i = 1, k
         BINOM = BINOM*REAL(N-i+1)/i
       ENDDO
       !

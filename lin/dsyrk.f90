@@ -120,11 +120,11 @@ SUBROUTINE DSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  DSYRK
   !     .. Scalar Arguments ..
-  CHARACTER :: Uplo , Trans
-  INTEGER N , K , Lda , Ldc
-  REAL(8) :: Alpha , Beta
+  CHARACTER :: Uplo, Trans
+  INTEGER N, K, Lda, Ldc
+  REAL(8) :: Alpha, Beta
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*) , C(Ldc,*)
+  REAL(8) :: A(Lda,*), C(Ldc,*)
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
@@ -134,10 +134,10 @@ SUBROUTINE DSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   INTRINSIC MAX
   !     .. Local Scalars ..
   LOGICAL upper
-  INTEGER i , info , j , l , nrowa
+  INTEGER i, info, j, l, nrowa
   REAL(8) :: temp
   !     .. Parameters ..
-  REAL(8) :: ONE , ZERO
+  REAL(8) :: ONE, ZERO
   PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
   !***FIRST EXECUTABLE STATEMENT  DSYRK
   !
@@ -179,27 +179,27 @@ SUBROUTINE DSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   IF ( Alpha==ZERO ) THEN
     IF ( upper ) THEN
       IF ( Beta==ZERO ) THEN
-        DO j = 1 , N
-          DO i = 1 , j
+        DO j = 1, N
+          DO i = 1, j
             C(i,j) = ZERO
           ENDDO
         ENDDO
       ELSE
-        DO j = 1 , N
-          DO i = 1 , j
+        DO j = 1, N
+          DO i = 1, j
             C(i,j) = Beta*C(i,j)
           ENDDO
         ENDDO
       ENDIF
     ELSEIF ( Beta==ZERO ) THEN
-      DO j = 1 , N
-        DO i = j , N
+      DO j = 1, N
+        DO i = j, N
           C(i,j) = ZERO
         ENDDO
       ENDDO
     ELSE
-      DO j = 1 , N
-        DO i = j , N
+      DO j = 1, N
+        DO i = j, N
           C(i,j) = Beta*C(i,j)
         ENDDO
       ENDDO
@@ -214,40 +214,40 @@ SUBROUTINE DSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
     !        Form  C := alpha*A*A' + beta*C.
     !
     IF ( upper ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( Beta==ZERO ) THEN
-          DO i = 1 , j
+          DO i = 1, j
             C(i,j) = ZERO
           ENDDO
         ELSEIF ( Beta/=ONE ) THEN
-          DO i = 1 , j
+          DO i = 1, j
             C(i,j) = Beta*C(i,j)
           ENDDO
         ENDIF
-        DO l = 1 , K
+        DO l = 1, K
           IF ( A(j,l)/=ZERO ) THEN
             temp = Alpha*A(j,l)
-            DO i = 1 , j
+            DO i = 1, j
               C(i,j) = C(i,j) + temp*A(i,l)
             ENDDO
           ENDIF
         ENDDO
       ENDDO
     ELSE
-      DO j = 1 , N
+      DO j = 1, N
         IF ( Beta==ZERO ) THEN
-          DO i = j , N
+          DO i = j, N
             C(i,j) = ZERO
           ENDDO
         ELSEIF ( Beta/=ONE ) THEN
-          DO i = j , N
+          DO i = j, N
             C(i,j) = Beta*C(i,j)
           ENDDO
         ENDIF
-        DO l = 1 , K
+        DO l = 1, K
           IF ( A(j,l)/=ZERO ) THEN
             temp = Alpha*A(j,l)
-            DO i = j , N
+            DO i = j, N
               C(i,j) = C(i,j) + temp*A(i,l)
             ENDDO
           ENDIF
@@ -258,10 +258,10 @@ SUBROUTINE DSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
     !        Form  C := alpha*A'*A + beta*C.
     !
   ELSEIF ( upper ) THEN
-    DO j = 1 , N
-      DO i = 1 , j
+    DO j = 1, N
+      DO i = 1, j
         temp = ZERO
-        DO l = 1 , K
+        DO l = 1, K
           temp = temp + A(l,i)*A(l,j)
         ENDDO
         IF ( Beta==ZERO ) THEN
@@ -272,10 +272,10 @@ SUBROUTINE DSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
       ENDDO
     ENDDO
   ELSE
-    DO j = 1 , N
-      DO i = j , N
+    DO j = 1, N
+      DO i = j, N
         temp = ZERO
-        DO l = 1 , K
+        DO l = 1, K
           temp = temp + A(l,i)*A(l,j)
         ENDDO
         IF ( Beta==ZERO ) THEN

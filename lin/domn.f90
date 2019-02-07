@@ -247,26 +247,26 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !   930326  Removed unused variable.  (FNF)
   !***END PROLOGUE  DOMN
   !     .. Scalar Arguments ..
-  REAL(8) :: Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt , Nsave
+  REAL(8) :: Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt, Nsave
   !     .. Array Arguments ..
-  REAL(8) :: A(Nelt) , Ap(N,0:Nsave) , B(N) , Csav(Nsave) , Dz(N) , &
-    Emap(N,0:Nsave) , P(N,0:Nsave) , R(N) , Rwork(*) , X(N) , &
+  REAL(8) :: A(Nelt), Ap(N,0:Nsave), B(N), Csav(Nsave), Dz(N), &
+    Emap(N,0:Nsave), P(N,0:Nsave), R(N), Rwork(*), X(N), &
     Z(N)
-  INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC , MSOLVE
+  EXTERNAL MATVEC, MSOLVE
   !     .. Local Scalars ..
-  REAL(8) :: ak , akden , aknum , bkl , bnrm , fuzz , solnrm
-  INTEGER i , ip , ipo , k , l , lmax
+  REAL(8) :: ak, akden, aknum, bkl, bnrm, fuzz, solnrm
+  INTEGER i, ip, ipo, k, l, lmax
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DDOT
+  REAL(8) :: D1MACH, DDOT
   INTEGER ISDOMN
-  EXTERNAL D1MACH , DDOT , ISDOMN
+  EXTERNAL D1MACH, DDOT, ISDOMN
   !     .. External Subroutines ..
-  EXTERNAL DAXPY , DCOPY
+  EXTERNAL DAXPY, DCOPY
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MIN , MOD
+  INTRINSIC ABS, MIN, MOD
   !***FIRST EXECUTABLE STATEMENT  DOMN
   !
   !         Check some of the input data.
@@ -287,7 +287,7 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !         Calculate initial residual and pseudo-residual, and check
   !         stopping criterion.
   CALL MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
-  DO i = 1 , N
+  DO i = 1, N
     R(i) = B(i) - R(i)
   ENDDO
   CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
@@ -302,7 +302,7 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
     !
     !VD$R NOVECTOR
     !VD$R NOCONCUR
-    DO k = 1 , Itmax
+    DO k = 1, Itmax
       Iter = k
       ip = MOD(Iter-1,Nsave+1)
       !
@@ -316,7 +316,7 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
       ELSE
         IF ( Iter>1 ) THEN
           lmax = MIN(Nsave,Iter-1)
-          DO l = 1 , lmax
+          DO l = 1, lmax
             ipo = MOD(ip+(Nsave+1-l),Nsave+1)
             bkl = DDOT(N,Emap(1,ip),1,Emap(1,ipo),1)
             bkl = bkl*Csav(l)
@@ -325,7 +325,7 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
             CALL DAXPY(N,-bkl,Emap(1,ipo),1,Emap(1,ip),1)
           ENDDO
           IF ( Nsave>1 ) THEN
-            DO l = Nsave - 1 , 1 , -1
+            DO l = Nsave - 1, 1, -1
               Csav(l+1) = Csav(l)
             ENDDO
           ENDIF
@@ -361,4 +361,5 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   ENDIF
   !
   !------------- LAST LINE OF DOMN FOLLOWS ----------------------------
-  99999 END SUBROUTINE DOMN
+  99999 CONTINUE
+  END SUBROUTINE DOMN

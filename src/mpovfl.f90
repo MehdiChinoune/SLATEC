@@ -4,7 +4,7 @@ SUBROUTINE MPOVFL(X)
   IMPLICIT NONE
   !*--MPOVFL5
   !*** Start of declarations inserted by SPAG
-  INTEGER LUN , M , MXR
+  INTEGER LUN, M, MXR
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPOVFL
   !***SUBSIDIARY
@@ -36,8 +36,8 @@ SUBROUTINE MPOVFL(X)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPOVFL
-  COMMON /MPCOM / B , T , M , LUN , MXR , R(30)
-  INTEGER B , T , R , X(*)
+  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
+  INTEGER B, T, R, X(*)
   !***FIRST EXECUTABLE STATEMENT  MPOVFL
   CALL MPCHK(1,4)
   ! SET X TO LARGEST POSSIBLE POSITIVE NUMBER

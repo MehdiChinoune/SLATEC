@@ -4,7 +4,7 @@ SUBROUTINE SWRITP(Ipage,List,Rlist,Lpage,Irec)
   IMPLICIT NONE
   !*--SWRITP5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Ipage , ipagef , Irec , irecn , Lpage , lpg
+  INTEGER i, Ipage, ipagef, Irec, irecn, Lpage, lpg
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SWRITP
   !***SUBSIDIARY
@@ -33,7 +33,7 @@ SUBROUTINE SWRITP(Ipage,List,Rlist,Lpage,Irec)
   !***END PROLOGUE  SWRITP
   INTEGER List(*)
   REAL Rlist(*)
-  CHARACTER(8) :: xern1 , xern2
+  CHARACTER(8) :: xern1, xern2
   !***FIRST EXECUTABLE STATEMENT  SWRITP
   ipagef = Ipage
   lpg = Lpage

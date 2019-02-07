@@ -70,13 +70,13 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  TQLRAT
   !
-  INTEGER i , j , l , m , N , ii , l1 , mml , Ierr
-  REAL D(*) , E2(*)
-  REAL b , c , f , g , h , p , r , s , machep
+  INTEGER i, j, l, m, N, ii, l1, mml, Ierr
+  REAL D(*), E2(*)
+  REAL b, c, f, g, h, p, r, s, machep
   REAL PYTHAG
   LOGICAL first
   !
-  SAVE first , machep
+  SAVE first, machep
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  TQLRAT
   IF ( first ) machep = R1MACH(4)
@@ -85,7 +85,7 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
   Ierr = 0
   IF ( N/=1 ) THEN
     !
-    DO i = 2 , N
+    DO i = 2, N
       E2(i-1) = E2(i)
     ENDDO
     !
@@ -93,7 +93,7 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
     b = 0.0E0
     E2(N) = 0.0E0
     !
-    DO l = 1 , N
+    DO l = 1, N
       j = 0
       h = machep*(ABS(D(l))+SQRT(E2(l)))
       IF ( b<=h ) THEN
@@ -101,7 +101,7 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
         c = b*b
       ENDIF
       !     .......... LOOK FOR SMALL SQUARED SUB-DIAGONAL ELEMENT ..........
-      DO m = l , N
+      DO m = l, N
         IF ( E2(m)<=c ) EXIT
         !     .......... E2(N) IS ALWAYS ZERO, SO THERE IS NO EXIT
         !                THROUGH THE BOTTOM OF THE LOOP ..........
@@ -119,7 +119,7 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
           D(l) = s/(p+SIGN(r,p))
           h = g - D(l)
           !
-          DO i = l1 , N
+          DO i = l1, N
             D(i) = D(i) - h
           ENDDO
           !
@@ -131,7 +131,7 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
           s = 0.0E0
           mml = m - l
           !     .......... FOR I=M-1 STEP -1 UNTIL L DO -- ..........
-          DO ii = 1 , mml
+          DO ii = 1, mml
             i = m - ii
             p = g*h
             r = p + E2(i)
@@ -157,7 +157,7 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
       !     .......... ORDER EIGENVALUES ..........
       IF ( l/=1 ) THEN
         !     .......... FOR I=L STEP -1 UNTIL 2 DO -- ..........
-        DO ii = 2 , l
+        DO ii = 2, l
           i = l + 2 - ii
           IF ( p>=D(i-1) ) GOTO 40
           D(i) = D(i-1)
@@ -173,4 +173,5 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
   !     .......... SET ERROR -- NO CONVERGENCE TO AN
   !                EIGENVALUE AFTER 30 ITERATIONS ..........
   100  Ierr = l
-  99999 END SUBROUTINE TQLRAT
+  99999 CONTINUE
+  END SUBROUTINE TQLRAT

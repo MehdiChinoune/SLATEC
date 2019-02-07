@@ -159,15 +159,15 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   !***END PROLOGUE  ZBESI
   !     COMPLEX CONE,CSGN,CW,CY,CZERO,Z,ZN
-  REAL(8) :: aa , alim , arg , conei , coner , csgni , csgnr , Cyi , &
-    Cyr , dig , elim , Fnu , fnul , pi , rl , r1m5 , str , &
-    tol , Zi , zni , znr , Zr , D1MACH , az , bb , fn , &
-    ZABS , ascle , rtol , atol , sti
-  INTEGER i , Ierr , inu , k , Kode , k1 , k2 , N , Nz , nn , I1MACH
-  DIMENSION Cyr(N) , Cyi(N)
+  REAL(8) :: aa, alim, arg, conei, coner, csgni, csgnr, Cyi, &
+    Cyr, dig, elim, Fnu, fnul, pi, rl, r1m5, str, &
+    tol, Zi, zni, znr, Zr, D1MACH, az, bb, fn, &
+    ZABS, ascle, rtol, atol, sti
+  INTEGER i, Ierr, inu, k, Kode, k1, k2, N, Nz, nn, I1MACH
+  DIMENSION Cyr(N), Cyi(N)
   EXTERNAL ZABS
   DATA pi/3.14159265358979324D0/
-  DATA coner , conei/1.0D0 , 0.0D0/
+  DATA coner, conei/1.0D0, 0.0D0/
   !
   !***FIRST EXECUTABLE STATEMENT  ZBESI
   Ierr = 0
@@ -244,7 +244,7 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
         IF ( nn==0 ) RETURN
         rtol = 1.0D0/tol
         ascle = D1MACH(1)*rtol*1.0D+3
-        DO i = 1 , nn
+        DO i = 1, nn
           !       STR = CYR(I)*CSGNR - CYI(I)*CSGNI
           !       CYI(I) = CYR(I)*CSGNI + CYI(I)*CSGNR
           !       CYR(I) = STR

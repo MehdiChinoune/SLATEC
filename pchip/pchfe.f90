@@ -132,13 +132,13 @@ SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N , Incfd , Ne , Ierr
-  REAL X(*) , F(Incfd,*) , D(Incfd,*) , Xe(*) , Fe(*)
+  INTEGER N, Incfd, Ne, Ierr
+  REAL X(*), F(Incfd,*), D(Incfd,*), Xe(*), Fe(*)
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i , ierc , ir , j , jfirst , next(2) , nj
+  INTEGER i, ierc, ir, j, jfirst, next(2), nj
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
@@ -161,7 +161,7 @@ SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
       CALL XERMSG('SLATEC','PCHFE','INCREMENT LESS THAN ONE',Ierr,1)
       RETURN
     ELSE
-      DO i = 2 , N
+      DO i = 2, N
         IF ( X(i)<=X(i-1) ) GOTO 500
       ENDDO
     ENDIF
@@ -188,11 +188,12 @@ SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   !
   !     SKIP OUT OF LOOP IF HAVE PROCESSED ALL EVALUATION POINTS.
   !
-  100  IF ( jfirst>Ne ) GOTO 400
+  100 CONTINUE
+  IF ( jfirst>Ne ) GOTO 400
   !
   !     LOCATE ALL POINTS IN INTERVAL.
   !
-  DO j = jfirst , Ne
+  DO j = jfirst, Ne
     IF ( Xe(j)>=X(ir) ) GOTO 200
   ENDDO
   j = Ne + 1
@@ -200,7 +201,8 @@ SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   !
   !     HAVE LOCATED FIRST POINT BEYOND INTERVAL.
   !
-  200  IF ( ir==N ) j = Ne + 1
+  200 CONTINUE
+  IF ( ir==N ) j = Ne + 1
   !
   300  nj = j - jfirst
   !
@@ -242,7 +244,7 @@ SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
         !              EVALUATION INTERVAL.
         !
         !              FIRST, LOCATE FIRST POINT TO LEFT OF X(IR-1).
-        DO i = jfirst , j - 1
+        DO i = jfirst, j - 1
           IF ( Xe(i)<X(ir-1) ) GOTO 320
         ENDDO
         !              NOTE-- CANNOT DROP THROUGH HERE UNLESS THERE IS AN ERROR
@@ -259,7 +261,7 @@ SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
       320      j = i
       !
       !              NOW FIND OUT HOW FAR TO BACK UP IN THE X-ARRAY.
-      DO i = 1 , ir - 1
+      DO i = 1, ir - 1
         IF ( Xe(j)<X(i) ) EXIT
       ENDDO
       !              NB-- CAN NEVER DROP THROUGH HERE, SINCE XE(J).LT.X(IR-1).

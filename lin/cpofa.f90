@@ -36,7 +36,7 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
   !        A       an upper triangular matrix  R  so that  A =
   !                CTRANS(R)*R where  CTRANS(R)  is the conjugate
   !                transpose.  The strict lower triangle is unaltered.
-  !                If  INFO .NE. 0 , the factorization is not complete.
+  !                If  INFO .NE. 0, the factorization is not complete.
   !
   !        INFO    INTEGER
   !                = 0  for normal return.
@@ -55,19 +55,19 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CPOFA
-  INTEGER Lda , N , Info
+  INTEGER Lda, N, Info
   COMPLEX A(Lda,*)
   !
-  COMPLEX CDOTC , t
+  COMPLEX CDOTC, t
   REAL s
-  INTEGER j , jm1 , k
+  INTEGER j, jm1, k
   !***FIRST EXECUTABLE STATEMENT  CPOFA
-  DO j = 1 , N
+  DO j = 1, N
     Info = j
     s = 0.0E0
     jm1 = j - 1
     IF ( jm1>=1 ) THEN
-      DO k = 1 , jm1
+      DO k = 1, jm1
         t = A(k,j) - CDOTC(k-1,A(1,k),1,A(1,j),1)
         t = t/A(k,k)
         A(k,j) = t
@@ -79,4 +79,5 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
     A(j,j) = CMPLX(SQRT(s),0.0E0)
   ENDDO
   Info = 0
-  99999 END SUBROUTINE CPOFA
+  99999 CONTINUE
+  END SUBROUTINE CPOFA

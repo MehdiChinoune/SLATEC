@@ -5,7 +5,7 @@ SUBROUTINE COSQB(N,X,Wsave)
   !*--COSQB5
   !*** Start of declarations inserted by SPAG
   INTEGER N
-  REAL tsqrt2 , Wsave , X , x1
+  REAL tsqrt2, Wsave, X, x1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  COSQB
   !***PURPOSE  Compute the unnormalized inverse cosine transform.
@@ -77,7 +77,7 @@ SUBROUTINE COSQB(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  COSQB
-  DIMENSION X(*) , Wsave(*)
+  DIMENSION X(*), Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  COSQB
   tsqrt2 = 2.*SQRT(2.)
   IF ( N<2 ) THEN

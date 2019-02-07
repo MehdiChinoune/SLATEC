@@ -48,8 +48,8 @@ INTEGER FUNCTION ICAMAX(N,Cx,Incx)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  ICAMAX
   COMPLEX Cx(*)
-  REAL smax , xmag
-  INTEGER i , Incx , ix , N
+  REAL smax, xmag
+  INTEGER i, Incx, ix, N
   REAL, EXTERNAL :: CABS1
   !***FIRST EXECUTABLE STATEMENT  ICAMAX
   ICAMAX = 0
@@ -62,7 +62,7 @@ INTEGER FUNCTION ICAMAX(N,Cx,Incx)
     !     Code for increment equal to 1.
     !
     smax = CABS1(Cx(1))
-    DO i = 2 , N
+    DO i = 2, N
       xmag = CABS1(Cx(i))
       IF ( xmag>smax ) THEN
         ICAMAX = i
@@ -78,7 +78,7 @@ INTEGER FUNCTION ICAMAX(N,Cx,Incx)
   IF ( Incx<0 ) ix = (-N+1)*Incx + 1
   smax = CABS1(Cx(ix))
   ix = ix + Incx
-  DO i = 2 , N
+  DO i = 2, N
     xmag = CABS1(Cx(ix))
     IF ( xmag>smax ) THEN
       ICAMAX = i
@@ -87,4 +87,5 @@ INTEGER FUNCTION ICAMAX(N,Cx,Incx)
     ix = ix + Incx
   ENDDO
   RETURN
-  99999 END FUNCTION ICAMAX
+  99999 CONTINUE
+  END FUNCTION ICAMAX

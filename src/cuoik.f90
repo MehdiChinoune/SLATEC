@@ -37,12 +37,12 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CUOIK
-  COMPLEX arg , asum , bsum , cwrk , cz , czero , phi , sum , Y , Z , zb , &
-    zeta1 , zeta2 , zn , zr
-  REAL aarg , aic , Alim , aphi , ascle , ax , ay , Elim , fnn , Fnu , gnn , &
-    gnu , rcz , Tol , x , yy , R1MACH
-  INTEGER i , iform , Ikflg , init , Kode , N , nn , Nuf , nw
-  DIMENSION Y(N) , cwrk(16)
+  COMPLEX arg, asum, bsum, cwrk, cz, czero, phi, sum, Y, Z, zb, &
+    zeta1, zeta2, zn, zr
+  REAL aarg, aic, Alim, aphi, ascle, ax, ay, Elim, fnn, Fnu, gnn, &
+    gnu, rcz, Tol, x, yy, R1MACH
+  INTEGER i, iform, Ikflg, init, Kode, N, nn, Nuf, nw
+  DIMENSION Y(N), cwrk(16)
   DATA czero/(0.0E0,0.0E0)/
   DATA aic/1.265512123484645396E+00/
   !***FIRST EXECUTABLE STATEMENT  CUOIK
@@ -110,7 +110,7 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
           IF ( nw/=1 ) GOTO 50
         ENDIF
       ENDIF
-      DO i = 1 , nn
+      DO i = 1, nn
         Y(i) = czero
       ENDDO
       Nuf = nn
@@ -163,4 +163,5 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   Nuf = Nuf + 1
   IF ( nn==0 ) RETURN
   GOTO 100
-  99999 END SUBROUTINE CUOIK
+  99999 CONTINUE
+  END SUBROUTINE CUOIK

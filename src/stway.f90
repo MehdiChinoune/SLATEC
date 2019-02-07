@@ -4,13 +4,13 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
   IMPLICIT NONE
   !*--STWAY5
   !*** Start of declarations inserted by SPAG
-  REAL AE , C , PWCnd , PX , RE , Stowa , TND , TOL , U , V , X , XBEg , &
-    XENd , XOP , XOT , XSAv , Yhp
-  INTEGER ICOco , IGOfx , INDpvt , INFo , INHomo , Inout , INTeg , ISTkop , &
-    IVP , j , k , KNSwot , ko , KOP , ks , ksj , LOTjp , MNSwot , &
-    MXNon , NCOmp
-  INTEGER NDIsk , NEQ , NEQivp , NFC , NFCc , NIC , NOPg , NPS , NSWot , &
-    NTApe , NTP , NUMort , NXPts
+  REAL AE, C, PWCnd, PX, RE, Stowa, TND, TOL, U, V, X, XBEg, &
+    XENd, XOP, XOT, XSAv, Yhp
+  INTEGER ICOco, IGOfx, INDpvt, INFo, INHomo, Inout, INTeg, ISTkop, &
+    IVP, j, k, KNSwot, ko, KOP, ks, ksj, LOTjp, MNSwot, &
+    MXNon, NCOmp
+  INTEGER NDIsk, NEQ, NEQivp, NFC, NFCc, NIC, NOPg, NPS, NSWot, &
+    NTApe, NTP, NUMort, NXPts
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  STWAY
   !***SUBSIDIARY
@@ -36,14 +36,14 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  STWAY
   !
-  DIMENSION U(*) , V(*) , Yhp(*) , Stowa(*)
+  DIMENSION U(*), V(*), Yhp(*), Stowa(*)
   !
-  COMMON /ML8SZ / C , XSAv , IGOfx , INHomo , IVP , NCOmp , NFC
-  COMMON /ML15TO/ PX , PWCnd , TND , X , XBEg , XENd , XOT , XOP , INFo(15)&
-    , ISTkop , KNSwot , KOP , LOTjp , MNSwot , NSWot
-  COMMON /ML18JR/ AE , RE , TOL , NXPts , NIC , NOPg , MXNon , NDIsk , &
-    NTApe , NEQ , INDpvt , INTeg , NPS , NTP , NEQivp , &
-    NUMort , NFCc , ICOco
+  COMMON /ML8SZ / C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
+  COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
+    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
+  COMMON /ML18JR/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
+    NUMort, NFCc, ICOco
   !
   !***FIRST EXECUTABLE STATEMENT  STWAY
   IF ( Inout==1 ) THEN
@@ -54,7 +54,7 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
     CALL STOR1(Yhp,Stowa,Yhp(ks+1),Stowa(ks+1),1,0,0)
     ks = ks + NCOmp
     IF ( NEQivp/=0 ) THEN
-      DO j = 1 , NEQivp
+      DO j = 1, NEQivp
         ksj = ks + j
         Yhp(ksj) = Stowa(ksj)
       ENDDO
@@ -65,7 +65,7 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
     ko = KOP - ISTkop
     KOP = ISTkop
     IF ( NDIsk==0.OR.ko==0 ) RETURN
-    DO k = 1 , ko
+    DO k = 1, ko
       BACKSPACE NTApe
     ENDDO
   ELSE
@@ -76,7 +76,7 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
     CALL STOR1(Stowa,U,Stowa(ks+1),V,1,0,0)
     ks = ks + NCOmp
     IF ( NEQivp/=0 ) THEN
-      DO j = 1 , NEQivp
+      DO j = 1, NEQivp
         ksj = ks + j
         Stowa(ksj) = Yhp(ksj)
       ENDDO

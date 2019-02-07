@@ -22,41 +22,41 @@ SUBROUTINE DDNTP(H,K,N,Nq,T,Tout,Yh,Y)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  DDNTP
-  INTEGER i , j , jj , K , kk , kused , N , Nq
-  REAL(8) :: factor , H , r , T , Tout , Y(*) , Yh(N,*)
+  INTEGER i, j, jj, K, kk, kused, N, Nq
+  REAL(8) :: factor, H, r, T, Tout, Y(*), Yh(N,*)
   !***FIRST EXECUTABLE STATEMENT  DDNTP
   IF ( K==0 ) THEN
-    DO i = 1 , N
+    DO i = 1, N
       Y(i) = Yh(i,Nq+1)
     ENDDO
     r = ((Tout-T)/H)
-    DO jj = 1 , Nq
+    DO jj = 1, Nq
       j = Nq + 1 - jj
-      DO i = 1 , N
+      DO i = 1, N
         Y(i) = Yh(i,j) + r*Y(i)
       ENDDO
     ENDDO
   ELSE
     kused = MIN(K,Nq)
     factor = 1.D0
-    DO kk = 1 , kused
+    DO kk = 1, kused
       factor = factor*(Nq+1-kk)
     ENDDO
-    DO i = 1 , N
+    DO i = 1, N
       Y(i) = factor*Yh(i,Nq+1)
     ENDDO
     r = ((Tout-T)/H)
-    DO jj = kused + 1 , Nq
+    DO jj = kused + 1, Nq
       j = kused + 1 + Nq - jj
       factor = 1.D0
-      DO kk = 1 , kused
+      DO kk = 1, kused
         factor = factor*(j-kk)
       ENDDO
-      DO i = 1 , N
+      DO i = 1, N
         Y(i) = factor*Yh(i,j) + r*Y(i)
       ENDDO
     ENDDO
-    DO i = 1 , N
+    DO i = 1, N
       Y(i) = Y(i)*H**(-kused)
     ENDDO
   ENDIF

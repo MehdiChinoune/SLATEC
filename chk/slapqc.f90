@@ -84,28 +84,28 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
   !     PARAMETER (MAXN=69, MXNELT=5000, MAXIW=5000, MAXRW=5000)
   !
   !     .. Parameters ..
-  INTEGER MAXN , MXNELT , MAXIW , MAXRW
+  INTEGER MAXN, MXNELT, MAXIW, MAXRW
   PARAMETER (MAXN=25,MXNELT=500,MAXIW=1000,MAXRW=1000)
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Arrays in Common ..
   REAL SOLn(MAXN)
   !     .. Local Scalars ..
-  REAL dens , err , factor , tol
-  INTEGER ierr , isym , iter , itmax , itol , itolgm , iunit , k , kase , &
-    leniw , lenw , n , nelt , neltmx , nfail , nmax , nsave
+  REAL dens, err, factor, tol
+  INTEGER ierr, isym, iter, itmax, itol, itolgm, iunit, k, kase, &
+    leniw, lenw, n, nelt, neltmx, nfail, nmax, nsave
   !     .. Local Arrays ..
-  REAL a(MXNELT) , f(MAXN) , rwork(MAXRW) , xiter(MAXN)
-  INTEGER ia(MXNELT) , iwork(MAXIW) , ja(MXNELT)
+  REAL a(MXNELT), f(MAXN), rwork(MAXRW), xiter(MAXN)
+  INTEGER ia(MXNELT), iwork(MAXIW), ja(MXNELT)
   !     .. External Functions ..
   REAL R1MACH
   EXTERNAL R1MACH
   !     .. External Subroutines ..
-  EXTERNAL OUTERR , SCPPLT , SRMGEN , SS2Y , SSDBCG , SSDCG , SSDCGN , &
-    SSDCGS , SSDGMR , SSDOMN , SSGS , SSICCG , SSILUR , SSJAC , &
-    SSLUBC , SSLUCN , SSLUCS , SSLUGM , SSLUOM , VFILL
+  EXTERNAL OUTERR, SCPPLT, SRMGEN, SS2Y, SSDBCG, SSDCG, SSDCGN, &
+    SSDCGS, SSDGMR, SSDOMN, SSGS, SSICCG, SSILUR, SSJAC, &
+    SSLUBC, SSLUCN, SSLUCS, SSLUGM, SSLUOM, VFILL
   !     .. Intrinsic Functions ..
-  INTRINSIC MAX , REAL
+  INTRINSIC MAX, REAL
   !     .. Common blocks ..
   COMMON /SSLBLK/ SOLn
   !
@@ -143,7 +143,7 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
   !
   !     Test routines using various convergence criteria.
   !
-  DO kase = 1 , 3
+  DO kase = 1, 3
     IF ( kase==1.OR.kase==2 ) itol = kase
     IF ( kase==3 ) itol = 11
     !
@@ -152,8 +152,8 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
     !         is generated.  The amount of non-symmetry is controlled by
     !         user.
     !
-    DO isym = 0 , 1
-      IF ( Kprint>=2 ) WRITE (Lun,99001) n , kase , isym
+    DO isym = 0, 1
+      IF ( Kprint>=2 ) WRITE (Lun,99001) n, kase, isym
       99001     FORMAT ('1'/' Running tests with  N =',I3,',  KASE =',I2,',  ISYM =',&
         I2)
       !
@@ -175,7 +175,7 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
         dens = REAL(2*nelt)/(n*n)
       ENDIF
       IF ( Kprint>=2 ) THEN
-        WRITE (Lun,99003) n , nelt , dens
+        WRITE (Lun,99003) n, nelt, dens
         99003       FORMAT (/'                * RANDOM Matrix of size',I5,&
           '*'/'                ','Number of non-zeros & Density = ',&
           I5,1P,E16.7)
@@ -200,7 +200,7 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * * *   SSJAC   * * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSJAC ' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSJAC ', itol, isym
       CALL VFILL(n,xiter,0.0E0)
       !
       CALL SSJAC(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,2*itmax,iter,err,ierr,&
@@ -210,7 +210,7 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * *  SSGS  * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSGS  ' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSGS  ', itol, isym
       CALL VFILL(n,xiter,0.0E0)
       !
       CALL SSGS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -220,7 +220,7 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * * *   SSILUR   * * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSILUR' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSILUR', itol, isym
       CALL VFILL(n,xiter,0.0E0)
       !
       CALL SSILUR(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -231,7 +231,7 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
       !         * * * * * *   SSDCG    * * * * * *
       !
       IF ( isym==1 ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSDCG' , itol , isym
+        IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSDCG', itol, isym
         CALL VFILL(n,xiter,0.0E0)
         !
         CALL SSDCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -243,7 +243,7 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
       !         * * * * * *    SSICCG    * * * * * *
       !
       IF ( isym==1 ) THEN
-        IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSICCG' , itol , isym
+        IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSICCG', itol, isym
         CALL VFILL(n,xiter,0.0E0)
         !
         CALL SSICCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,&
@@ -254,7 +254,7 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * * *    SSDCGN   * * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSDCGN' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSDCGN', itol, isym
       CALL VFILL(n,xiter,0.0E0)
       !
       CALL SSDCGN(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -264,7 +264,7 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * * *   SSLUCN   * * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSLUCN' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSLUCN', itol, isym
       CALL VFILL(n,xiter,0.0E0)
       !
       CALL SSLUCN(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -274,7 +274,7 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * * *    SSDBCG   * * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSDBCG' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSDBCG', itol, isym
       CALL VFILL(n,xiter,0.0E0)
       !
       CALL SSDBCG(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -284,7 +284,7 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * * *   SSLUBC   * * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSLUBC' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSLUBC', itol, isym
       CALL VFILL(n,xiter,0.0E0)
       !
       CALL SSLUBC(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -294,7 +294,7 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * * *    SSDCGS   * * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSDCGS' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSDCGS', itol, isym
       CALL VFILL(n,xiter,0.0E0)
       !
       CALL SSDCGS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -304,7 +304,7 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
       !
       !         * * * * * *   SSLUCS   * * * * * *
       !
-      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSLUCS' , itol , isym
+      IF ( Kprint>=3 ) WRITE (Lun,99008) 'SSLUCS', itol, isym
       CALL VFILL(n,xiter,0.0E0)
       !
       CALL SSLUCS(n,f,xiter,nelt,ia,ja,a,isym,itol,tol,itmax,iter,err,ierr,&
@@ -315,8 +315,8 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
       !         * * * * * *    SSDOMN   * * * * * *
       !
       !VD$ NOVECTOR
-      DO nsave = 0 , 3
-        IF ( Kprint>=3 ) WRITE (Lun,99009) 'SSDOMN' , itol , isym , nsave
+      DO nsave = 0, 3
+        IF ( Kprint>=3 ) WRITE (Lun,99009) 'SSDOMN', itol, isym, nsave
         CALL VFILL(n,xiter,0.0E0)
         !
         CALL SSDOMN(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&
@@ -328,8 +328,8 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
       !         * * * * * *   SSLUOM   * * * * * *
       !
       !VD$ NOVECTOR
-      DO nsave = 0 , 3
-        IF ( Kprint>=3 ) WRITE (Lun,99009) 'SSLUOM' , itol , isym , nsave
+      DO nsave = 0, 3
+        IF ( Kprint>=3 ) WRITE (Lun,99009) 'SSLUOM', itol, isym, nsave
         CALL VFILL(n,xiter,0.0E0)
         !
         CALL SSLUOM(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&
@@ -341,8 +341,8 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
       !         * * * * * *   SSDGMR   * * * * * *
       !
       !VD$ NOVECTOR
-      DO nsave = 5 , 12
-        IF ( Kprint>=3 ) WRITE (Lun,99009) 'SSDGMR' , itol , isym , nsave
+      DO nsave = 5, 12
+        IF ( Kprint>=3 ) WRITE (Lun,99009) 'SSDGMR', itol, isym, nsave
         CALL VFILL(n,xiter,0.0E0)
         itolgm = 0
         !
@@ -355,8 +355,8 @@ SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
       !         * * * * * *   SSLUGM   * * * * * *
       !
       !VD$ NOVECTOR
-      DO nsave = 5 , 12
-        IF ( Kprint>=3 ) WRITE (Lun,99009) 'SSLUGM' , itol , isym , nsave
+      DO nsave = 5, 12
+        IF ( Kprint>=3 ) WRITE (Lun,99009) 'SSLUGM', itol, isym, nsave
         CALL VFILL(n,xiter,0.0E0)
         !
         CALL SSLUGM(n,f,xiter,nelt,ia,ja,a,isym,nsave,itol,tol,itmax,iter,&

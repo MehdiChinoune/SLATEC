@@ -81,8 +81,8 @@ SUBROUTINE RSP(Nm,N,Nv,A,W,Matz,Z,Fv1,Fv2,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RSP
   !
-  INTEGER i , j , N , Nm , Nv , Ierr , Matz
-  REAL A(*) , W(*) , Z(Nm,*) , Fv1(*) , Fv2(*)
+  INTEGER i, j, N, Nm, Nv, Ierr, Matz
+  REAL A(*), W(*), Z(Nm,*), Fv1(*), Fv2(*)
   !
   !***FIRST EXECUTABLE STATEMENT  RSP
   IF ( N>Nm ) THEN
@@ -92,9 +92,9 @@ SUBROUTINE RSP(Nm,N,Nv,A,W,Matz,Z,Fv1,Fv2,Ierr)
     CALL TRED3(N,Nv,A,W,Fv1,Fv2)
     IF ( Matz/=0 ) THEN
       !     .......... FIND BOTH EIGENVALUES AND EIGENVECTORS ..........
-      DO i = 1 , N
+      DO i = 1, N
         !
-        DO j = 1 , N
+        DO j = 1, N
           Z(j,i) = 0.0E0
         ENDDO
         !

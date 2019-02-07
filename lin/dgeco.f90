@@ -18,10 +18,10 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !     and estimates the condition of the matrix.
   !
   !     If  RCOND  is not needed, DGEFA is slightly faster.
-  !     To solve  A*X = B , follow DGECO by DGESL.
-  !     To compute  INVERSE(A)*C , follow DGECO by DGESL.
-  !     To compute  DETERMINANT(A) , follow DGECO by DGEDI.
-  !     To compute  INVERSE(A) , follow DGECO by DGEDI.
+  !     To solve  A*X = B, follow DGECO by DGESL.
+  !     To compute  INVERSE(A)*C, follow DGECO by DGESL.
+  !     To compute  DETERMINANT(A), follow DGECO by DGEDI.
+  !     To compute  INVERSE(A), follow DGECO by DGEDI.
   !
   !     On Entry
   !
@@ -47,7 +47,7 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   !        RCOND   DOUBLE PRECISION
   !                an estimate of the reciprocal condition of  A .
-  !                For the system  A*X = B , relative perturbations
+  !                For the system  A*X = B, relative perturbations
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -76,19 +76,19 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGECO
-  INTEGER Lda , N , Ipvt(*)
-  REAL(8) :: A(Lda,*) , Z(*)
+  INTEGER Lda, N, Ipvt(*)
+  REAL(8) :: A(Lda,*), Z(*)
   REAL(8) :: Rcond
   !
-  REAL(8) :: DDOT , ek , t , wk , wkm
-  REAL(8) :: anorm , s , DASUM , sm , ynorm
-  INTEGER info , j , k , kb , kp1 , l
+  REAL(8) :: DDOT, ek, t, wk, wkm
+  REAL(8) :: anorm, s, DASUM, sm, ynorm
+  INTEGER info, j, k, kb, kp1, l
   !
   !     COMPUTE 1-NORM OF A
   !
   !***FIRST EXECUTABLE STATEMENT  DGECO
   anorm = 0.0D0
-  DO j = 1 , N
+  DO j = 1, N
     anorm = MAX(anorm,DASUM(N,A(1,j),1))
   ENDDO
   !
@@ -106,10 +106,10 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !     SOLVE TRANS(U)*W = E
   !
   ek = 1.0D0
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = 0.0D0
   ENDDO
-  DO k = 1 , N
+  DO k = 1, N
     IF ( Z(k)/=0.0D0 ) ek = SIGN(ek,-Z(k))
     IF ( ABS(ek-Z(k))>ABS(A(k,k)) ) THEN
       s = ABS(A(k,k))/ABS(ek-Z(k))
@@ -129,7 +129,7 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
     ENDIF
     kp1 = k + 1
     IF ( kp1<=N ) THEN
-      DO j = kp1 , N
+      DO j = kp1, N
         sm = sm + ABS(Z(j)+wkm*A(k,j))
         Z(j) = Z(j) + wk*A(k,j)
         s = s + ABS(Z(j))
@@ -137,7 +137,7 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
       IF ( s<sm ) THEN
         t = wkm - wk
         wk = wkm
-        DO j = kp1 , N
+        DO j = kp1, N
           Z(j) = Z(j) + t*A(k,j)
         ENDDO
       ENDIF
@@ -149,7 +149,7 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   !     SOLVE TRANS(L)*Y = W
   !
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     IF ( k<N ) Z(k) = Z(k) + DDOT(N-k,A(k+1,k),1,Z(k+1),1)
     IF ( ABS(Z(k))>1.0D0 ) THEN
@@ -168,7 +168,7 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   !     SOLVE L*V = Y
   !
-  DO k = 1 , N
+  DO k = 1, N
     l = Ipvt(k)
     t = Z(l)
     Z(l) = Z(k)
@@ -186,7 +186,7 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   !     SOLVE  U*Z = V
   !
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     IF ( ABS(Z(k))>ABS(A(k,k)) ) THEN
       s = ABS(A(k,k))/ABS(Z(k))

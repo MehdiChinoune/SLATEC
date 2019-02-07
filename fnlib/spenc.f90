@@ -4,8 +4,8 @@ FUNCTION SPENC(X)
   IMPLICIT NONE
   !*--SPENC5
   !*** Start of declarations inserted by SPAG
-  REAL aln , CSEVL , pi26 , R1MACH , SPENC , spencs , X , xbig
-  INTEGER INITS , nspenc
+  REAL aln, CSEVL, pi26, R1MACH, SPENC, spencs, X, xbig
+  INTEGER INITS, nspenc
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPENC
   !***PURPOSE  Compute a form of Spence's integral due to K. Mitchell.
@@ -47,7 +47,7 @@ FUNCTION SPENC(X)
   !***END PROLOGUE  SPENC
   DIMENSION spencs(19)
   LOGICAL first
-  SAVE spencs , pi26 , nspenc , xbig , first
+  SAVE spencs, pi26, nspenc, xbig, first
   DATA spencs(1)/.1527365598892406E0/
   DATA spencs(2)/.08169658058051014E0/
   DATA spencs(3)/.00581415714077873E0/
@@ -124,4 +124,5 @@ FUNCTION SPENC(X)
     *(1.0+CSEVL(4.0*(X-1.)/X-1.0,spencs,nspenc))/X
   RETURN
   !
-  99999 END FUNCTION SPENC
+  99999 CONTINUE
+  END FUNCTION SPENC

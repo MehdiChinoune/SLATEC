@@ -26,7 +26,7 @@ CHARACTER(10) FUNCTION CVTCAT(Categ)
   !     .. Scalar Arguments ..
   CHARACTER*(*) Categ
   !     .. Local Scalars ..
-  INTEGER i , ii , l
+  INTEGER i, ii, l
   !     .. External Functions ..
   INTEGER LENSTR
   EXTERNAL LENSTR
@@ -113,9 +113,9 @@ INTEGER FUNCTION FIND(X,N,T)
   !     .. Array Arguments ..
   CHARACTER*(*) X(*)
   !     .. Local Scalars ..
-  INTEGER i , k , m
+  INTEGER i, k, m
   !     .. Intrinsic Functions ..
-  INTRINSIC LOG , REAL
+  INTRINSIC LOG, REAL
   !***FIRST EXECUTABLE STATEMENT  FIND
   IF ( N==0 ) THEN
     FIND = 0
@@ -146,7 +146,8 @@ INTEGER FUNCTION FIND(X,N,T)
   100  IF ( T<X(i) ) i = i - 1
   FIND = -i
   RETURN
-  99999 END FUNCTION FIND
+  99999 CONTINUE
+  END FUNCTION FIND
   !*==LENSTR.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
   !DECK LENSTR
   INTEGER FUNCTION LENSTR(String)
@@ -181,12 +182,12 @@ INTEGER FUNCTION FIND(X,N,T)
     !     .. Scalar Arguments ..
     CHARACTER*(*) String
     !     .. Local Scalars ..
-    INTEGER i , l
+    INTEGER i, l
     !     .. Intrinsic Functions ..
     INTRINSIC LEN
     !***FIRST EXECUTABLE STATEMENT  LENSTR
     l = LEN(String)
-    DO i = l , 1 , -1
+    DO i = l, 1, -1
       IF ( String(i:i)/=' ' ) THEN
         LENSTR = i
         RETURN
@@ -238,16 +239,16 @@ INTEGER FUNCTION FIND(X,N,T)
     CHARACTER(41) :: MSG
     PARAMETER (MSG='Input string is longer than output string')
     !     .. Scalar Arguments ..
-    CHARACTER*(*) Str1 , Str2
+    CHARACTER*(*) Str1, Str2
     !     .. Local Scalars ..
-    INTEGER i , l , m , n
+    INTEGER i, l, m, n
     !     .. External Functions ..
     INTEGER LENSTR
     EXTERNAL LENSTR
     !     .. External Subroutines ..
     EXTERNAL XERMSG
     !     .. Intrinsic Functions ..
-    INTRINSIC CHAR , ICHAR , LEN
+    INTRINSIC CHAR, ICHAR, LEN
     !***FIRST EXECUTABLE STATEMENT  UPCASE
     m = LENSTR(Str1)
     n = LEN(Str2)
@@ -255,12 +256,12 @@ INTEGER FUNCTION FIND(X,N,T)
       CALL XERMSG(' ','UPCASE',MSG,1,2)
       m = n
     ENDIF
-    DO i = 1 , m
+    DO i = 1, m
       Str2(i:i) = Str1(i:i)
       l = ICHAR(Str2(i:i))
       IF ( l>=97.AND.l<=122 ) Str2(i:i) = CHAR(l-32)
     ENDDO
-    DO i = m + 1 , n
+    DO i = m + 1, n
       Str2(i:i) = ' '
     ENDDO
   END SUBROUTINE UPCASE

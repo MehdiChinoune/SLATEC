@@ -4,11 +4,11 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   IMPLICIT NONE
   !*--LA05CS5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Ia , ii , ij , im , in , ins , ipp , ir , is , j , jm , jns ,&
-    jp , k , kj , kk , kl , km , knp
-  INTEGER kp , kpl , kq , kr , krl , ks , l , last , last1 , last2 , LCOl ,&
-    LENl , LENu , LP , LROw , m , m1 , mcp , Mm , N
-  INTEGER NCP , nz
+  INTEGER i, Ia, ii, ij, im, in, ins, ipp, ir, is, j, jm, jns ,&
+    jp, k, kj, kk, kl, km, knp
+  INTEGER kp, kpl, kq, kr, krl, ks, l, last, last1, last2, LCOl ,&
+    LENl, LENu, LP, LROw, m, m1, mcp, Mm, N
+  INTEGER NCP, nz
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  LA05CS
   !***SUBSIDIARY
@@ -45,12 +45,12 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
   !   920422  Changed upper limit on DO from LAST to LAST-1.  (WRB)
   !***END PROLOGUE  LA05CS
-  REAL A(*) , G , U , am , W(*) , SMAll , au
-  INTEGER Ind(Ia,2) , Iw(N,8)
+  REAL A(*), G, U, am, W(*), SMAll, au
+  INTEGER Ind(Ia,2), Iw(N,8)
   INTEGER Ip(N,2)
   CHARACTER(8) :: xern1
   !
-  COMMON /LA05DS/ SMAll , LP , LENl , LENu , NCP , LROw , LCOl
+  COMMON /LA05DS/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
   !***FIRST EXECUTABLE STATEMENT  LA05CS
   CALL XSETUN(LP)
   IF ( G<0.0E0 ) THEN
@@ -69,14 +69,14 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
     im = Ind(kp,1)
     kl = kp + Iw(jm,2) - 1
     Iw(jm,2) = 0
-    DO k = kp , kl
+    DO k = kp, kl
       i = Ind(k,1)
       Ind(k,1) = 0
       kr = Ip(i,1)
       nz = Iw(i,1) - 1
       Iw(i,1) = nz
       krl = kr + nz
-      DO km = kr , krl
+      DO km = kr, krl
         IF ( Ind(km,2)==jm ) EXIT
       ENDDO
       A(km) = A(krl)
@@ -85,7 +85,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
     ENDDO
     !
     ! INSERT NEW COLUMN
-    DO ii = 1 , N
+    DO ii = 1, N
       i = Iw(ii,3)
       IF ( i==im ) m = ii
       IF ( ABS(W(i))<=SMAll ) GOTO 40
@@ -116,7 +116,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
       Ip(i,1) = LROw + 1
       IF ( nz/=0 ) THEN
         kpl = kp + nz - 1
-        DO k = kp , kpl
+        DO k = kp, kpl
           LROw = LROw + 1
           A(LROw) = A(k)
           Ind(LROw,2) = Ind(k,2)
@@ -139,7 +139,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
     ins = m
     m1 = m
     W(jm) = 1.0E0
-    DO ii = m , last
+    DO ii = m, last
       i = Iw(ii,3)
       j = Iw(ii,4)
       IF ( W(j)==0.0E0 ) THEN
@@ -149,7 +149,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
       ELSE
         kp = Ip(i,1)
         kl = kp + Iw(i,1) - 1
-        DO k = kp , kl
+        DO k = kp, kl
           j = Ind(k,2)
           W(j) = 1.0E0
         ENDDO
@@ -159,7 +159,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
     ENDDO
     ! PLACE NON-SINGLETONS IN NEW POSITION.
     ij = m + 1
-    DO ii = m1 , last - 1
+    DO ii = m1, last - 1
       Iw(ii,3) = Iw(ij,4)
       ij = ij + 1
     ENDDO
@@ -173,7 +173,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
     jns = last
     W(im) = 2.0E0
     j = jm
-    DO ij = m1 , last
+    DO ij = m1, last
       ii = last + m1 - ij
       i = Iw(ii,3)
       IF ( W(i)/=2.0E0 ) THEN
@@ -186,13 +186,13 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
         kl = kp + Iw(j,2) - 1
         Iw(jns,4) = i
         jns = jns - 1
-        DO k = kp , kl
+        DO k = kp, kl
           i = Ind(k,1)
           W(i) = 2.0E0
         ENDDO
       ENDIF
     ENDDO
-    DO ii = m1 , last1
+    DO ii = m1, last1
       jns = jns + 1
       i = Iw(jns,4)
       W(i) = 3.0E0
@@ -201,11 +201,11 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
     !
     ! DEAL WITH SINGLETON SPIKE COLUMN. NOTE THAT BUMP ROWS ARE MARKED BY
     !    W(I)=3.0E0
-    DO ii = m1 , last1
+    DO ii = m1, last1
       kp = Ip(jm,2)
       kl = kp + Iw(jm,2) - 1
       is = 0
-      DO k = kp , kl
+      DO k = kp, kl
         l = Ind(k,1)
         IF ( W(l)==3.0E0 ) THEN
           IF ( is/=0 ) GOTO 50
@@ -219,7 +219,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
       Ind(knp,1) = Ind(kp,1)
       Ind(kp,1) = i
       kp = Ip(i,1)
-      DO k = kp , Ia
+      DO k = kp, Ia
         IF ( Ind(k,2)==jm ) EXIT
       ENDDO
       am = A(kp)
@@ -234,27 +234,27 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
     ii = last1
     GOTO 100
     50     in = m1
-    DO ij = ii , last1
+    DO ij = ii, last1
       Iw(ij,4) = Iw(in,3)
       in = in + 1
     ENDDO
   ENDIF
   100  last2 = last1 - 1
   IF ( m1/=last1 ) THEN
-    DO i = m1 , last2
+    DO i = m1, last2
       Iw(i,3) = Iw(i,4)
     ENDDO
     m1 = ii
     IF ( m1/=last1 ) THEN
       !
       ! CLEAR W
-      DO i = 1 , N
+      DO i = 1, N
         W(i) = 0.0E0
       ENDDO
       !
       ! PERFORM ELIMINATION
       ir = Iw(last1,3)
-      DO ii = m1 , last1
+      DO ii = m1, last1
         ipp = Iw(ii,3)
         kp = Ip(ipp,1)
         kr = Ip(ir,1)
@@ -263,7 +263,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
         ! SEARCH NON-PIVOT ROW FOR ELEMENT TO BE ELIMINATED.
         !  AND BRING IT TO FRONT OF ITS ROW
         krl = kr + Iw(ir,1) - 1
-        DO knp = kr , krl
+        DO knp = kr, krl
           IF ( jp==Ind(knp,2) ) GOTO 110
         ENDDO
         IF ( ii==last1 ) GOTO 200
@@ -289,7 +289,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
         kr = kp
         kp = k
         kj = Ip(jp,2)
-        DO k = kj , Ia
+        DO k = kj, Ia
           IF ( Ind(k,1)==ipp ) EXIT
         ENDDO
         Ind(k,1) = Ind(kj,1)
@@ -309,7 +309,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
           kpl = kp + Iw(ipp,1) - 1
           ! PLACE PIVOT ROW (EXCLUDING PIVOT ITSELF) IN W.
           IF ( kq<=kpl ) THEN
-            DO k = kq , kpl
+            DO k = kq, kpl
               j = Ind(k,2)
               W(j) = A(k)
             ENDDO
@@ -320,7 +320,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
           Ind(kr,2) = 0
           kr = kr + 1
           IF ( kr<=krl ) THEN
-            DO ks = kr , krl
+            DO ks = kr, krl
               j = Ind(ks,2)
               au = A(ks) + am*W(j)
               Ind(ks,2) = 0
@@ -331,7 +331,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
                 k = Ip(j,2)
                 kl = k + Iw(j,2) - 1
                 Iw(j,2) = kl - k
-                DO kk = k , kl
+                DO kk = k, kl
                   IF ( Ind(kk,1)==ir ) EXIT
                 ENDDO
                 Ind(kk,1) = Ind(kl,1)
@@ -348,7 +348,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
           !
           ! SCAN PIVOT ROW FOR FILLS.
           IF ( kq<=kpl ) THEN
-            DO ks = kq , kpl
+            DO ks = kq, kpl
               j = Ind(ks,2)
               au = am*W(j)
               IF ( ABS(au)<=SMAll ) GOTO 124
@@ -382,7 +382,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
               ENDIF
               ! TRANSFER OLD ENTRY INTO NEW.
               Ip(j,2) = LCOl + 1
-              DO kk = k , kl
+              DO kk = k, kl
                 LCOl = LCOl + 1
                 Ind(LCOl,1) = Ind(kk,1)
                 Ind(kk,1) = 0
@@ -412,7 +412,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
           kp = Ip(jp,2)
           nz = Iw(jp,2) - 1
           kl = kp + nz
-          DO k = kp , kl
+          DO k = kp, kl
             IF ( Ind(k,1)==ir ) EXIT
           ENDDO
           Ind(k,1) = Ind(kl,1)
@@ -425,7 +425,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   ENDIF
   !
   ! CONSTRUCT COLUMN PERMUTATION AND STORE IT IN IW(.,4)
-  DO ii = m , last
+  DO ii = m, last
     i = Iw(ii,3)
     k = Ip(i,1)
     j = Ind(k,2)
@@ -435,17 +435,20 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   !
   !     THE FOLLOWING INSTRUCTIONS IMPLEMENT THE FAILURE EXITS.
   !
-  200  IF ( LP>0 ) THEN
-  WRITE (xern1,'(I8)') Mm
-  CALL XERMSG('SLATEC','LA05CS','SINGULAR MATRIX AFTER '//&
-    'REPLACEMENT OF COLUMN.  INDEX = '//xern1,-6,1)
-ENDIF
-G = -6.0E0
-RETURN
-!
-300  IF ( LP>0 ) CALL XERMSG('SLATEC','LA05CS',&
-  'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.'&
-  ,-7,1)
-G = -7.0E0
-RETURN
-99999 END SUBROUTINE LA05CS
+  200 CONTINUE
+  IF ( LP>0 ) THEN
+    WRITE (xern1,'(I8)') Mm
+    CALL XERMSG('SLATEC','LA05CS','SINGULAR MATRIX AFTER '//&
+      'REPLACEMENT OF COLUMN.  INDEX = '//xern1,-6,1)
+  ENDIF
+  G = -6.0E0
+  RETURN
+  !
+  300 CONTINUE
+  IF ( LP>0 ) CALL XERMSG('SLATEC','LA05CS',&
+    'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.'&
+    ,-7,1)
+  G = -7.0E0
+  RETURN
+  99999 CONTINUE
+  END SUBROUTINE LA05CS

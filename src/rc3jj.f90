@@ -126,18 +126,18 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   !           D. W. Lozier.
   !***END PROLOGUE  RC3JJ
   !
-  INTEGER Ndim , Ier
-  REAL L2 , L3 , M2 , M3 , L1min , L1max , Thrcof(Ndim)
+  INTEGER Ndim, Ier
+  REAL L2, L3, M2, M3, L1min, L1max, Thrcof(Ndim)
   !
-  INTEGER i , index , lstep , n , nfin , nfinp1 , nfinp2 , nfinp3 , nlim , &
+  INTEGER i, index, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, &
     nstep2
-  REAL a1 , a1s , a2 , a2s , c1 , c1old , c2 , cnorm , R1MACH , denom , dv , &
-    eps , huge , l1 , m1 , newfac , oldfac , one , ratio , sign1 , &
-    sign2 , srhuge , srtiny , sum1 , sum2 , sumbac , sumfor , sumuni , &
-    three , thresh , tiny , two , x , x1 , x2 , x3 , y , y1 , y2 , y3 , &
+  REAL a1, a1s, a2, a2s, c1, c1old, c2, cnorm, R1MACH, denom, dv, &
+    eps, huge, l1, m1, newfac, oldfac, one, ratio, sign1, &
+    sign2, srhuge, srtiny, sum1, sum2, sumbac, sumfor, sumuni, &
+    three, thresh, tiny, two, x, x1, x2, x3, y, y1, y2, y3, &
     zero
   !
-  DATA zero , eps , one , two , three/0.0 , 0.01 , 1.0 , 2.0 , 3.0/
+  DATA zero, eps, one, two, three/0.0, 0.01, 1.0, 2.0, 3.0/
   !
   !***FIRST EXECUTABLE STATEMENT  RC3JJ
   Ier = 0
@@ -263,11 +263,11 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
       IF ( ABS(x)>=srhuge ) THEN
         !
         !  This is reached if last 3j coefficient larger than SRHUGE,
-        !  so that the recursion series THRCOF(1), ... , THRCOF(LSTEP)
+        !  so that the recursion series THRCOF(1), ..., THRCOF(LSTEP)
         !  has to be rescaled to prevent overflow
         !
         !     LSCALE = LSCALE + 1
-        DO i = 1 , lstep
+        DO i = 1, lstep
           IF ( ABS(Thrcof(i))<srtiny ) Thrcof(i) = zero
           Thrcof(i) = Thrcof(i)/srhuge
         ENDDO
@@ -353,13 +353,13 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
             !
             nlim = nlim + 1
             ratio = one/ratio
-            DO n = nlim , nfin
+            DO n = nlim, nfin
               Thrcof(n) = ratio*Thrcof(n)
             ENDDO
             sumuni = sumfor + ratio*ratio*sumbac
           ELSE
             !
-            DO n = 1 , nlim
+            DO n = 1, nlim
               Thrcof(n) = ratio*Thrcof(n)
             ENDDO
             sumuni = ratio*ratio*sumfor + sumbac
@@ -380,7 +380,7 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
             !  has to be rescaled to prevent overflow
             !
             !     LSCALE = LSCALE + 1
-            DO i = 1 , lstep
+            DO i = 1, lstep
               index = nfin - i + 1
               IF ( ABS(Thrcof(index))<srtiny ) Thrcof(index) = zero
               Thrcof(index) = Thrcof(index)/srhuge
@@ -429,16 +429,17 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   IF ( ABS(cnorm)<one ) THEN
     !
     thresh = tiny/ABS(cnorm)
-    DO n = 1 , nfin
+    DO n = 1, nfin
       IF ( ABS(Thrcof(n))<thresh ) Thrcof(n) = zero
       Thrcof(n) = cnorm*Thrcof(n)
     ENDDO
     GOTO 99999
   ENDIF
   !
-  DO n = 1 , nfin
+  DO n = 1, nfin
     Thrcof(n) = cnorm*Thrcof(n)
   ENDDO
   RETURN
   !
-  99999 END SUBROUTINE RC3JJ
+  99999 CONTINUE
+  END SUBROUTINE RC3JJ

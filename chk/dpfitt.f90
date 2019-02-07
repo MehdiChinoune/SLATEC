@@ -30,39 +30,39 @@ SUBROUTINE DPFITT(Lun,Kprint,Ipass)
   !           provide more PASS/FAIL information.  (WRB)
   !***END PROLOGUE  DPFITT
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Scalars in Common ..
-  REAL(8) :: EPS , RP , SVEps , TOL
-  INTEGER IERp , IERr , NORd , NORdp
+  REAL(8) :: EPS, RP, SVEps, TOL
+  INTEGER IERp, IERr, NORd, NORdp
   !     .. Arrays in Common ..
   REAL(8) :: R(11)
   !     .. Local Scalars ..
   REAL(8) :: yfit
-  INTEGER i , icnt , m , maxord
+  INTEGER i, icnt, m, maxord
   !     .. Local Arrays ..
-  REAL(8) :: a(97) , tc(5) , w(11) , x(11) , y(11) , yp(5)
+  REAL(8) :: a(97), tc(5), w(11), x(11), y(11), yp(5)
   INTEGER itest(9)
   !     .. External Functions ..
   REAL(8) :: D1MACH
   EXTERNAL D1MACH
   !     .. External Subroutines ..
-  EXTERNAL DCMPAR , PASS , DPCOEF , DPOLFT , DP1VLU
+  EXTERNAL DCMPAR, PASS, DPCOEF, DPOLFT, DP1VLU
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , SQRT
+  INTRINSIC ABS, SQRT
   !     .. Common blocks ..
-  COMMON /DCHECK/ EPS , R , RP , SVEps , TOL , NORdp , NORd , IERp , IERr
+  COMMON /DCHECK/ EPS, R, RP, SVEps, TOL, NORdp, NORd, IERp, IERr
   !***FIRST EXECUTABLE STATEMENT  DPFITT
   IF ( Kprint>=2 ) WRITE (Lun,FMT=99002)
   !
   !     Initialize variables for testing passage or failure of tests
   !
-  DO i = 1 , 9
+  DO i = 1, 9
     itest(i) = 0
   ENDDO
   icnt = 0
   TOL = SQRT(D1MACH(4))
   m = 11
-  DO i = 1 , m
+  DO i = 1, m
     x(i) = i - 6
     y(i) = x(i)**4
   ENDDO
@@ -90,8 +90,8 @@ SUBROUTINE DPFITT(Lun,Kprint,Ipass)
       WRITE (Lun,FMT=99003)
       WRITE (Lun,FMT=99004)
       IF ( Kprint>2.OR.itest(icnt)/=1 ) THEN
-        WRITE (Lun,FMT=99005) SVEps , NORdp , RP , IERp
-        WRITE (Lun,FMT=99006) EPS , NORd , R(11) , IERr
+        WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
+        WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
       ENDIF
       !
       !     Send message indicating passage or failure of test
@@ -117,8 +117,8 @@ SUBROUTINE DPFITT(Lun,Kprint,Ipass)
       WRITE (Lun,FMT=99007)
       IF ( Kprint>2.OR.itest(icnt)/=1 ) THEN
         WRITE (Lun,FMT=99008) maxord
-        WRITE (Lun,FMT=99005) SVEps , NORdp , RP , IERp
-        WRITE (Lun,FMT=99006) EPS , NORd , R(11) , IERr
+        WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
+        WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
       ENDIF
       !
       !     Send message indicating passage or failure of test
@@ -147,8 +147,8 @@ SUBROUTINE DPFITT(Lun,Kprint,Ipass)
       WRITE (Lun,FMT=99009)
       IF ( Kprint>2.OR.itest(icnt)/=1 ) THEN
         WRITE (Lun,FMT=99008) maxord
-        WRITE (Lun,FMT=99005) SVEps , NORdp , RP , IERp
-        WRITE (Lun,FMT=99006) EPS , NORd , R(11) , IERr
+        WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
+        WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
       ENDIF
       !
       !     Send message indicating passage or failure of test
@@ -176,8 +176,8 @@ SUBROUTINE DPFITT(Lun,Kprint,Ipass)
       WRITE (Lun,FMT=99010)
       IF ( Kprint>2.OR.itest(icnt)/=1 ) THEN
         WRITE (Lun,FMT=99008) maxord
-        WRITE (Lun,FMT=99005) SVEps , NORdp , RP , IERp
-        WRITE (Lun,FMT=99006) EPS , NORd , R(11) , IERr
+        WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
+        WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
       ENDIF
       !
       !     Send message indicating passage or failure of test
@@ -210,9 +210,9 @@ SUBROUTINE DPFITT(Lun,Kprint,Ipass)
   icnt = icnt + 1
   IF ( IERr==2 ) THEN
     itest(icnt) = 1
-    IF ( Kprint>=3 ) WRITE (Lun,99011) 'PASSED' , IERr
+    IF ( Kprint>=3 ) WRITE (Lun,99011) 'PASSED', IERr
   ELSEIF ( Kprint>=2 ) THEN
-    WRITE (Lun,99011) 'FAILED' , IERr
+    WRITE (Lun,99011) 'FAILED', IERr
   ENDIF
   !
   !     Check for suppression of printing.
@@ -254,8 +254,8 @@ SUBROUTINE DPFITT(Lun,Kprint,Ipass)
       WRITE (Lun,FMT=99012)
       IF ( Kprint>2.OR.itest(icnt)/=1 ) THEN
         WRITE (Lun,FMT=99008) maxord
-        WRITE (Lun,FMT=99005) SVEps , NORdp , RP , IERp
-        WRITE (Lun,FMT=99006) EPS , NORd , R(11) , IERr
+        WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
+        WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
       ENDIF
       !
       !     Send message indicating passage or failure of test
@@ -285,8 +285,8 @@ SUBROUTINE DPFITT(Lun,Kprint,Ipass)
       WRITE (Lun,FMT=99013)
       IF ( Kprint>2.OR.itest(icnt)/=1 ) THEN
         WRITE (Lun,FMT=99008) maxord
-        WRITE (Lun,FMT=99005) SVEps , NORdp , RP , IERp
-        WRITE (Lun,FMT=99006) EPS , NORd , R(11) , IERr
+        WRITE (Lun,FMT=99005) SVEps, NORdp, RP, IERp
+        WRITE (Lun,FMT=99006) EPS, NORd, R(11), IERr
       ENDIF
       !
       !     Send message indicating passage or failure of test
@@ -301,7 +301,7 @@ SUBROUTINE DPFITT(Lun,Kprint,Ipass)
   EPS = 0.0D0
   SVEps = EPS
   y(6) = 1.0D0
-  DO i = 1 , m
+  DO i = 1, m
     w(i) = 1.0D0/(y(i)**2)
   ENDDO
   y(6) = 0.0D0
@@ -318,7 +318,7 @@ SUBROUTINE DPFITT(Lun,Kprint,Ipass)
   IF ( Kprint/=0 ) THEN
     IF ( Kprint/=1.OR.itest(icnt)/=1 ) THEN
       WRITE (Lun,FMT=99014)
-      IF ( Kprint>2.OR.itest(icnt)/=1 ) WRITE (Lun,FMT=99015) R(11) , tc(1)
+      IF ( Kprint>2.OR.itest(icnt)/=1 ) WRITE (Lun,FMT=99015) R(11), tc(1)
       !
       !     Send message indicating passage or failure of test
       !
@@ -342,7 +342,7 @@ SUBROUTINE DPFITT(Lun,Kprint,Ipass)
     IF ( Kprint/=1.OR.itest(icnt)/=1 ) THEN
       WRITE (Lun,FMT=99016)
       WRITE (Lun,FMT=99017)
-      IF ( Kprint>2.OR.itest(icnt)/=1 ) WRITE (Lun,FMT=99018) x(8) , R(8) , &
+      IF ( Kprint>2.OR.itest(icnt)/=1 ) WRITE (Lun,FMT=99018) x(8), R(8), &
         yfit
       !
       !     Send message indicating passage or failure of test
@@ -354,7 +354,7 @@ SUBROUTINE DPFITT(Lun,Kprint,Ipass)
   !     Check to see if all tests passed
   !
   Ipass = 1
-  DO i = 1 , 9
+  DO i = 1, 9
     Ipass = Ipass*itest(i)
   ENDDO
   !

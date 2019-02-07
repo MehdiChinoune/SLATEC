@@ -31,30 +31,30 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !***END PROLOGUE  DLSOD
   !
-  INTEGER IBAnd , IBEgin , Idid , IER , IINteg , IJAc , INIt , intflg ,&
-    IOWns , Ipar , IQUit , ITOl , ITStop , Iwm , JSTart , k , KFLag ,&
-    KSTeps , l , LACor , LDUm , LEWt , LSAvf , ltol , LWM , LYH ,&
-    maxnum , MAXord , METh , MITer , N , natolp , Neq , NFE , NJE ,&
-    NQ , NQU , nrtolp , NST
-  REAL(8) :: absdel , Acor , Atol , big , D1MACH , del , Delsgn , dt ,&
-    DVNRMS , EL0 , Ewt , H , ha , HMIn , HMXi , HU , ROWns ,&
-    Rpar , Rtol , Savf , T , tol , TOLd , Tolfac , Tout ,&
-    Tstop , U , Wm , X , Y , Yh , Yh1 , Ypout
+  INTEGER IBAnd, IBEgin, Idid, IER, IINteg, IJAc, INIt, intflg ,&
+    IOWns, Ipar, IQUit, ITOl, ITStop, Iwm, JSTart, k, KFLag ,&
+    KSTeps, l, LACor, LDUm, LEWt, LSAvf, ltol, LWM, LYH ,&
+    maxnum, MAXord, METh, MITer, N, natolp, Neq, NFE, NJE ,&
+    NQ, NQU, nrtolp, NST
+  REAL(8) :: absdel, Acor, Atol, big, D1MACH, del, Delsgn, dt ,&
+    DVNRMS, EL0, Ewt, H, ha, HMIn, HMXi, HU, ROWns ,&
+    Rpar, Rtol, Savf, T, tol, TOLd, Tolfac, Tout ,&
+    Tstop, U, Wm, X, Y, Yh, Yh1, Ypout
   LOGICAL Intout
   CHARACTER(8) :: xern1
-  CHARACTER(16) :: xern3 , xern4
+  CHARACTER(16) :: xern3, xern4
   !
-  DIMENSION Y(*) , Ypout(*) , Yh(Neq,6) , Yh1(*) , Ewt(*) , Savf(*) ,&
-    Acor(*) , Wm(*) , Iwm(*) , Rtol(*) , Atol(*) , Rpar(*) , Ipar(*)
+  DIMENSION Y(*), Ypout(*), Yh(Neq,6), Yh1(*), Ewt(*), Savf(*) ,&
+    Acor(*), Wm(*), Iwm(*), Rtol(*), Atol(*), Rpar(*), Ipar(*)
   !
   !
-  COMMON /DDEBD1/ TOLd , ROWns(210) , EL0 , H , HMIn , HMXi , HU , X , U ,&
-    IQUit , INIt , LYH , LEWt , LACor , LSAvf , LWM , KSTeps ,&
-    IBEgin , ITOl , IINteg , ITStop , IJAc , IBAnd , IOWns(6)&
-    , IER , JSTart , KFLag , LDUm , METh , MITer , MAXord ,&
-    N , NQ , NST , NFE , NJE , NQU
+  COMMON /DDEBD1/ TOLd, ROWns(210), EL0, H, HMIn, HMXi, HU, X, U ,&
+    IQUit, INIt, LYH, LEWt, LACor, LSAvf, LWM, KSTeps ,&
+    IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, IOWns(6)&
+    , IER, JSTart, KFLag, LDUm, METh, MITer, MAXord ,&
+    N, NQ, NST, NFE, NJE, NQU
   !
-  EXTERNAL DF , DJAC
+  EXTERNAL DF, DJAC
   !
   !     ..................................................................
   !
@@ -71,7 +71,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !***FIRST EXECUTABLE STATEMENT  DLSOD
   IF ( IBEgin==0 ) THEN
     !
-    !        ON THE FIRST CALL , PERFORM INITIALIZATION --
+    !        ON THE FIRST CALL, PERFORM INITIALIZATION --
     !        DEFINE THE MACHINE UNIT ROUNDOFF QUANTITY  U  BY CALLING THE
     !        FUNCTION ROUTINE D1MACH. THE USER MUST MAKE SURE THAT THE
     !        VALUES SET IN D1MACH ARE RELEVANT TO THE COMPUTER BEING USED.
@@ -126,7 +126,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !
   nrtolp = 0
   natolp = 0
-  DO k = 1 , Neq
+  DO k = 1, Neq
     IF ( nrtolp<=0 ) THEN
       IF ( Rtol(k)<0. ) THEN
         WRITE (xern1,'(I8)') k
@@ -231,7 +231,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !             SMALLEST VALUE 100*U WHICH IS LIKELY TO BE REASONABLE FOR
   !             THIS METHOD AND MACHINE
   !
-  DO k = 1 , Neq
+  DO k = 1, Neq
     IF ( Rtol(k)+Atol(k)<=0.0D0 ) THEN
       Rtol(k) = 100.0D0*U
       Idid = -2
@@ -268,7 +268,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
       !                 ...EXIT
       IF ( T==Tout ) THEN
         Idid = 2
-        DO l = 1 , Neq
+        DO l = 1, Neq
           Ypout(l) = Yh(l,2)
         ENDDO
         TOLd = T
@@ -287,7 +287,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     !                                      X AND YH(*) FOR DSTOD
     !
     ltol = 1
-    DO l = 1 , Neq
+    DO l = 1, Neq
       IF ( ITOl==1 ) ltol = l
       tol = Rtol(ltol)*ABS(Y(l)) + Atol(ltol)
       IF ( tol==0.0D0 ) GOTO 200
@@ -300,7 +300,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     !
     Delsgn = SIGN(1.0D0,Tout-T)
     X = T
-    DO l = 1 , Neq
+    DO l = 1, Neq
       Yh(l,1) = Y(l)
       Yh(l,2) = H*Yh(l,2)
     ENDDO
@@ -336,7 +336,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     IF ( ITStop==1 ) THEN
       IF ( ABS(Tstop-X)<100.0D0*U*ABS(X) ) THEN
         dt = Tout - X
-        DO l = 1 , Neq
+        DO l = 1, Neq
           Y(l) = Yh(l,1) + (dt/H)*Yh(l,2)
         ENDDO
         CALL DF(Tout,Y,Ypout,Rpar,Ipar)
@@ -371,7 +371,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
       IF ( ITStop==1 ) ha = MIN(ha,ABS(Tstop-X))
       H = SIGN(ha,H)
       ltol = 1
-      DO l = 1 , Neq
+      DO l = 1, Neq
         IF ( ITOl==1 ) ltol = l
         Ewt(l) = Rtol(ltol)*ABS(Yh(l,1)) + Atol(ltol)
         !                    .........EXIT
@@ -414,7 +414,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
         Rtol(1) = Tolfac*Rtol(1)
         Atol(1) = Tolfac*Atol(1)
         IF ( ITOl/=0 ) THEN
-          DO l = 2 , Neq
+          DO l = 2, Neq
             Rtol(l) = Tolfac*Rtol(l)
             Atol(l) = Tolfac*Atol(l)
           ENDDO
@@ -454,11 +454,13 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !
   !                                  STORE VALUES BEFORE RETURNING TO
   !                                  DDEBDF
-  300  DO l = 1 , Neq
-  Y(l) = Yh(l,1)
-  Ypout(l) = Yh(l,2)/H
-ENDDO
-T = X
-TOLd = T
-Intout = .FALSE.
-99999 END SUBROUTINE DLSOD
+  300 CONTINUE
+  DO l = 1, Neq
+    Y(l) = Yh(l,1)
+    Ypout(l) = Yh(l,2)/H
+  ENDDO
+  T = X
+  TOLd = T
+  Intout = .FALSE.
+  99999 CONTINUE
+  END SUBROUTINE DLSOD

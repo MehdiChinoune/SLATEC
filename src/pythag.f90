@@ -22,9 +22,9 @@ REAL FUNCTION PYTHAG(A,B)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  PYTHAG
-  REAL A , B
+  REAL A, B
   !
-  REAL p , q , r , s , t
+  REAL p, q, r, s, t
   !***FIRST EXECUTABLE STATEMENT  PYTHAG
   p = MAX(ABS(A),ABS(B))
   q = MIN(ABS(A),ABS(B))

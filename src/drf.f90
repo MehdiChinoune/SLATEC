@@ -251,15 +251,15 @@ REAL(8) FUNCTION DRF(X,Y,Z,Ier)
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DRF
-  CHARACTER(16) :: xern3 , xern4 , xern5 , xern6
+  CHARACTER(16) :: xern3, xern4, xern5, xern6
   INTEGER Ier
-  REAL(8) :: lolim , uplim , epslon , errtol , D1MACH
-  REAL(8) :: c1 , c2 , c3 , e2 , e3 , lamda
-  REAL(8) :: mu , s , X , xn , xndev
-  REAL(8) :: xnroot , Y , yn , yndev , ynroot , Z , zn , zndev ,&
+  REAL(8) :: lolim, uplim, epslon, errtol, D1MACH
+  REAL(8) :: c1, c2, c3, e2, e3, lamda
+  REAL(8) :: mu, s, X, xn, xndev
+  REAL(8) :: xnroot, Y, yn, yndev, ynroot, Z, zn, zndev ,&
     znroot
   LOGICAL first
-  SAVE errtol , lolim , uplim , c1 , c2 , c3 , first
+  SAVE errtol, lolim, uplim, c1, c2, c3, first
   DATA first/.TRUE./
   !
   !***FIRST EXECUTABLE STATEMENT  DRF

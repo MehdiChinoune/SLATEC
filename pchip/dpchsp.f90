@@ -152,17 +152,17 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER Ic(2) , N , Incfd , Nwk , Ierr
-  REAL(8) :: Vc(2) , X(*) , F(Incfd,*) , D(Incfd,*) , Wk(2,*)
+  INTEGER Ic(2), N, Incfd, Nwk, Ierr
+  REAL(8) :: Vc(2), X(*), F(Incfd,*), D(Incfd,*), Wk(2,*)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER ibeg , iend , index , j , nm1
-  REAL(8) :: g , half , one , stemp(3) , three , two , xtemp(4) , zero
-  SAVE zero , half , one , two , three
+  INTEGER ibeg, iend, index, j, nm1
+  REAL(8) :: g, half, one, stemp(3), three, two, xtemp(4), zero
+  SAVE zero, half, one, two, three
   REAL(8) :: DPCHDF
   !
-  DATA zero/0.D0/ , half/.5D0/ , one/1.D0/ , two/2.D0/ , three/3.D0/
+  DATA zero/0.D0/, half/.5D0/, one/1.D0/, two/2.D0/, three/3.D0/
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
@@ -184,7 +184,7 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
       CALL XERMSG('SLATEC','DPCHSP','INCREMENT LESS THAN ONE',Ierr,1)
       RETURN
     ELSE
-      DO j = 2 , N
+      DO j = 2, N
         IF ( X(j)<=X(j-1) ) GOTO 20
       ENDDO
       !
@@ -212,7 +212,7 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !
         !  COMPUTE FIRST DIFFERENCES OF X SEQUENCE AND STORE IN WK(1,.). ALSO,
         !  COMPUTE FIRST DIVIDED DIFFERENCE OF DATA AND STORE IN WK(2,.).
-        DO j = 2 , N
+        DO j = 2, N
           Wk(1,j) = X(j) - X(j-1)
           Wk(2,j) = (F(1,j)-F(1,j-1))/Wk(1,j)
         ENDDO
@@ -228,7 +228,7 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
           D(1,1) = Vc(1)
         ELSEIF ( ibeg>2 ) THEN
           !        PICK UP FIRST IBEG POINTS, IN REVERSE ORDER.
-          DO j = 1 , ibeg
+          DO j = 1, ibeg
             index = ibeg - j + 1
             !           INDEX RUNS FROM IBEG DOWN TO 1.
             xtemp(j) = X(index)
@@ -245,7 +245,7 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
           D(1,N) = Vc(2)
         ELSEIF ( iend>2 ) THEN
           !        PICK UP LAST IEND POINTS.
-          DO j = 1 , iend
+          DO j = 1, iend
             index = N - iend + j
             !           INDEX RUNS FROM N+1-IEND UP TO N.
             xtemp(j) = X(index)
@@ -298,7 +298,7 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !
         nm1 = N - 1
         IF ( nm1>1 ) THEN
-          DO j = 2 , nm1
+          DO j = 2, nm1
             IF ( Wk(2,j-1)==zero ) GOTO 50
             g = -Wk(1,j+1)/Wk(2,j-1)
             D(1,j) = g*D(1,j-1) + three*(Wk(1,j)*Wk(2,j+1)+Wk(1,j+1)*Wk(2,j)&
@@ -353,7 +353,7 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !
         !  CARRY OUT BACK SUBSTITUTION
         !
-        10         DO j = nm1 , 1 , -1
+        10         DO j = nm1, 1, -1
         IF ( Wk(2,j)==zero ) GOTO 50
         D(1,j) = (D(1,j)-Wk(1,j)*D(1,j+1))/Wk(2,j)
       ENDDO

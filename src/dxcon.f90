@@ -4,7 +4,7 @@ SUBROUTINE DXCON(X,Ix,Ierror)
   IMPLICIT NONE
   !*--DXCON5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , i1 , icase , Ierror , ispace , itemp , j , j1 , j2
+  INTEGER i, i1, icase, Ierror, ispace, itemp, j, j1, j2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXCON
   !***PURPOSE  To provide double-precision floating-point arithmetic
@@ -53,12 +53,12 @@ SUBROUTINE DXCON(X,Ix,Ierror)
   ! THESE CONDITIONS MUST BE MET BY APPROPRIATE CODING
   ! IN SUBROUTINE DXSET.
   !
-  REAL(8) :: RADix , RADixl , RAD2l , DLG10r
-  INTEGER L , L2 , KMAx
-  COMMON /DXBLK2/ RADix , RADixl , RAD2l , DLG10r , L , L2 , KMAx
-  SAVE /DXBLK2/  , ispace
+  REAL(8) :: RADix, RADixl, RAD2l, DLG10r
+  INTEGER L, L2, KMAx
+  COMMON /DXBLK2/ RADix, RADixl, RAD2l, DLG10r, L, L2, KMAx
+  SAVE /DXBLK2/ , ispace
   !
-  REAL(8) :: a , b , z
+  REAL(8) :: a, b, z
   !
   DATA ispace/1/
   !   THE PARAMETER ISPACE IS THE INCREMENT USED IN FORM-
@@ -172,4 +172,5 @@ SUBROUTINE DXCON(X,Ix,Ierror)
       Ix = Ix + ispace
     ENDDO
   ENDIF
-  99999 END SUBROUTINE DXCON
+  99999 CONTINUE
+  END SUBROUTINE DXCON

@@ -12,7 +12,7 @@ REAL(8) FUNCTION DF1G(X)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DF1G
-  REAL(8) :: pi , X
+  REAL(8) :: pi, X
   DATA pi/3.1415926535897932D0/
   !***FIRST EXECUTABLE STATEMENT  DF1G
   DF1G = 2.0D0/(2.0D0+SIN(10.0D0*pi*X))

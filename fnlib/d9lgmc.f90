@@ -4,7 +4,7 @@ REAL(8) FUNCTION D9LGMC(X)
   IMPLICIT NONE
   !*--D9LGMC5
   !*** Start of declarations inserted by SPAG
-  INTEGER INITDS , nalgm
+  INTEGER INITDS, nalgm
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9LGMC
   !***SUBSIDIARY
@@ -38,9 +38,9 @@ REAL(8) FUNCTION D9LGMC(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9LGMC
-  REAL(8) :: X , algmcs(15) , xbig , xmax , DCSEVL , D1MACH
+  REAL(8) :: X, algmcs(15), xbig, xmax, DCSEVL, D1MACH
   LOGICAL first
-  SAVE algmcs , nalgm , xbig , xmax , first
+  SAVE algmcs, nalgm, xbig, xmax, first
   DATA algmcs(1)/ + .1666389480451863247205729650822D+0/
   DATA algmcs(2)/ - .1384948176067563840732986059135D-4/
   DATA algmcs(3)/ + .9810825646924729426157171547487D-8/
@@ -77,4 +77,5 @@ REAL(8) FUNCTION D9LGMC(X)
   IF ( X<xbig ) D9LGMC = DCSEVL(2.0D0*(10.D0/X)**2-1.D0,algmcs,nalgm)/X
   RETURN
   !
-  99999 END FUNCTION D9LGMC
+  99999 CONTINUE
+  END FUNCTION D9LGMC

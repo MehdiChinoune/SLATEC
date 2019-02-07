@@ -4,7 +4,7 @@ SUBROUTINE ALGAMS(X,Algam,Sgngam)
   IMPLICIT NONE
   !*--ALGAMS5
   !*** Start of declarations inserted by SPAG
-  REAL Algam , ALNGAM , Sgngam , X
+  REAL Algam, ALNGAM, Sgngam, X
   INTEGER int
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ALGAMS

@@ -105,30 +105,30 @@ SUBROUTINE SSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  SSMV
   !     .. Scalar Arguments ..
-  INTEGER Isym , N , Nelt
+  INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt) , X(N) , Y(N)
-  INTEGER Ia(Nelt) , Ja(Nelt)
+  REAL A(Nelt), X(N), Y(N)
+  INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER i , ibgn , icol , iend , irow , j , jbgn , jend
+  INTEGER i, ibgn, icol, iend, irow, j, jbgn, jend
   !***FIRST EXECUTABLE STATEMENT  SSMV
   !
   !         Zero out the result vector.
   !
-  DO i = 1 , N
+  DO i = 1, N
     Y(i) = 0
   ENDDO
   !
   !         Multiply by A.
   !
   !VD$R NOCONCUR
-  DO icol = 1 , N
+  DO icol = 1, N
     ibgn = Ja(icol)
     iend = Ja(icol+1) - 1
     !LLL. OPTION ASSERT (NOHAZARD)
     !DIR$ IVDEP
     !VD$ NODEPCHK
-    DO i = ibgn , iend
+    DO i = ibgn, iend
       Y(Ia(i)) = Y(Ia(i)) + A(i)*X(icol)
     ENDDO
   ENDDO
@@ -139,11 +139,11 @@ SUBROUTINE SSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
     !         This loops assumes that the diagonal is the first entry in
     !         each column.
     !
-    DO irow = 1 , N
+    DO irow = 1, N
       jbgn = Ja(irow) + 1
       jend = Ja(irow+1) - 1
       IF ( jbgn<=jend ) THEN
-        DO j = jbgn , jend
+        DO j = jbgn, jend
           Y(irow) = Y(irow) + A(j)*X(Ia(j))
         ENDDO
       ENDIF

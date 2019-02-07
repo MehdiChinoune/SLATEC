@@ -4,7 +4,7 @@ COMPLEX FUNCTION CLNREL(Z)
   IMPLICIT NONE
   !*--CLNREL5
   !*** Start of declarations inserted by SPAG
-  REAL ALNREL , CARG , R1MACH , rho , sqeps , x
+  REAL ALNREL, CARG, R1MACH, rho, sqeps, x
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CLNREL
   !***PURPOSE  Evaluate ln(1+X) accurate in the sense of relative error.

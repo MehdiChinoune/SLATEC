@@ -77,13 +77,13 @@ SUBROUTINE FIGI(Nm,N,T,D,E,E2,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  FIGI
   !
-  INTEGER i , N , Nm , Ierr
-  REAL T(Nm,3) , D(*) , E(*) , E2(*)
+  INTEGER i, N, Nm, Ierr
+  REAL T(Nm,3), D(*), E(*), E2(*)
   !
   !***FIRST EXECUTABLE STATEMENT  FIGI
   Ierr = 0
   !
-  DO i = 1 , N
+  DO i = 1, N
     IF ( i/=1 ) THEN
       E2(i) = T(i,1)*T(i-1,3)
       IF ( E2(i)<0 ) GOTO 100
@@ -101,4 +101,5 @@ SUBROUTINE FIGI(Nm,N,T,D,E,E2,Ierr)
   !     .......... SET ERROR -- PRODUCT OF SOME PAIR OF OFF-DIAGONAL
   !                ELEMENTS IS NEGATIVE ..........
   100  Ierr = N + i
-  99999 END SUBROUTINE FIGI
+  99999 CONTINUE
+  END SUBROUTINE FIGI

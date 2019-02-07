@@ -4,8 +4,8 @@ SUBROUTINE INXCA(I,Ir,Idxa,Na)
   IMPLICIT NONE
   !*--INXCA5
   !*** Start of declarations inserted by SPAG
-  REAL CNV , EPS
-  INTEGER I , Idxa , IK , Ir , K , Na , NCMplx , NM , NPP
+  REAL CNV, EPS
+  INTEGER I, Idxa, IK, Ir, K, Na, NCMplx, NM, NPP
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  INXCA
   !***SUBSIDIARY
@@ -21,7 +21,7 @@ SUBROUTINE INXCA(I,Ir,Idxa,Na)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  INXCA
-  COMMON /CCBLK / NPP , K , EPS , CNV , NM , NCMplx , IK
+  COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  INXCA
   Na = 2**Ir
   Idxa = I - Na + 1

@@ -4,9 +4,9 @@ SUBROUTINE DPNNZR(I,Xval,Iplace,Sx,Ix,Ircx)
   IMPLICIT NONE
   !*--DPNNZR5
   !*** Start of declarations inserted by SPAG
-  INTEGER I , i1 , idiff , IDLOC , iend , ii , il , ilast , iopt , ipl , &
-    Iplace , ipploc , Ircx , istart , Ix , j , l , ll , lmx , lpg
-  INTEGER n20046 , nerr , np
+  INTEGER I, i1, idiff, IDLOC, iend, ii, il, ilast, iopt, ipl, &
+    Iplace, ipploc, Ircx, istart, Ix, j, l, ll, lmx, lpg
+  INTEGER n20046, nerr, np
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPNNZR
   !***SUBSIDIARY
@@ -64,7 +64,7 @@ SUBROUTINE DPNNZR(I,Xval,Iplace,Sx,Ix,Ircx)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   !***END PROLOGUE  DPNNZR
   DIMENSION Ix(*)
-  REAL(8) :: Xval , Sx(*) , zero
+  REAL(8) :: Xval, Sx(*), zero
   SAVE zero
   DATA zero/0.D0/
   !***FIRST EXECUTABLE STATEMENT  DPNNZR
@@ -224,57 +224,59 @@ SUBROUTINE DPNNZR(I,Xval,Iplace,Sx,Ix,Ircx)
     Iplace = (np-1)*lpg + ipl
     RETURN
   ENDIF
-  200  IF ( (n20046-ii)<0 ) THEN
-  !
-  !     ORTHOGONAL SCAN FAILED. THE VALUE J WAS NOT A SUBSCRIPT
-  !     IN ANY ROW.
-  !
-  I = 0
-  Xval = zero
-  GOTO 99999
-ELSE
-  !
-  !     INITIALIZE IPPLOC FOR ORTHOGONAL SCAN.
-  !     LOOK FOR J AS A SUBSCRIPT IN ROWS II, II=I+1,...,L.
-  !
-  IF ( ii/=1 ) THEN
-    ipploc = Ix(ii+3) + 1
+  200 CONTINUE
+  IF ( (n20046-ii)<0 ) THEN
+    !
+    !     ORTHOGONAL SCAN FAILED. THE VALUE J WAS NOT A SUBSCRIPT
+    !     IN ANY ROW.
+    !
+    I = 0
+    Xval = zero
+    GOTO 99999
   ELSE
-    ipploc = ll + 1
-  ENDIF
-  iend = Ix(ii+4)
-  !
-  !     SCAN THROUGH SEVERAL PAGES, IF NECESSARY, TO FIND MATRIX ENTRY.
-  !
-  ipl = IDLOC(ipploc,Sx,Ix)
-  !
-  !     FIX UP IPPLOC AND IPL TO POINT TO MATRIX DATA.
-  !
-  idiff = lmx - ipl
-  IF ( idiff<=1.AND.Ix(lmx-1)>0 ) THEN
-    ipploc = ipploc + idiff + 1
+    !
+    !     INITIALIZE IPPLOC FOR ORTHOGONAL SCAN.
+    !     LOOK FOR J AS A SUBSCRIPT IN ROWS II, II=I+1,...,L.
+    !
+    IF ( ii/=1 ) THEN
+      ipploc = Ix(ii+3) + 1
+    ELSE
+      ipploc = ll + 1
+    ENDIF
+    iend = Ix(ii+4)
+    !
+    !     SCAN THROUGH SEVERAL PAGES, IF NECESSARY, TO FIND MATRIX ENTRY.
+    !
     ipl = IDLOC(ipploc,Sx,Ix)
+    !
+    !     FIX UP IPPLOC AND IPL TO POINT TO MATRIX DATA.
+    !
+    idiff = lmx - ipl
+    IF ( idiff<=1.AND.Ix(lmx-1)>0 ) THEN
+      ipploc = ipploc + idiff + 1
+      ipl = IDLOC(ipploc,Sx,Ix)
+    ENDIF
+    np = ABS(Ix(lmx-1))
   ENDIF
-  np = ABS(Ix(lmx-1))
-ENDIF
-300  ilast = MIN(iend,np*lpg+ll-2)
-il = IDLOC(ilast,Sx,Ix)
-il = MIN(il,lmx-2)
-DO WHILE ( .NOT.(ipl>=il.OR.Ix(ipl)>=j) )
-  ipl = ipl + 1
-ENDDO
-!
-!     TEST IF WE HAVE FOUND THE NEXT NONZERO.
-!
-IF ( Ix(ipl)/=j.OR.Sx(ipl)==zero.OR.ipl>il ) THEN
-  IF ( Ix(ipl)>=j ) ilast = iend
-  ipl = ll + 1
-  np = np + 1
-  IF ( ilast/=iend ) GOTO 300
-  ii = ii + 1
-  GOTO 200
-ENDIF
-I = ii
-Xval = Sx(ipl)
-RETURN
-99999 END SUBROUTINE DPNNZR
+  300  ilast = MIN(iend,np*lpg+ll-2)
+  il = IDLOC(ilast,Sx,Ix)
+  il = MIN(il,lmx-2)
+  DO WHILE ( .NOT.(ipl>=il.OR.Ix(ipl)>=j) )
+    ipl = ipl + 1
+  ENDDO
+  !
+  !     TEST IF WE HAVE FOUND THE NEXT NONZERO.
+  !
+  IF ( Ix(ipl)/=j.OR.Sx(ipl)==zero.OR.ipl>il ) THEN
+    IF ( Ix(ipl)>=j ) ilast = iend
+    ipl = ll + 1
+    np = np + 1
+    IF ( ilast/=iend ) GOTO 300
+    ii = ii + 1
+    GOTO 200
+  ENDIF
+  I = ii
+  Xval = Sx(ipl)
+  RETURN
+  99999 CONTINUE
+  END SUBROUTINE DPNNZR

@@ -4,11 +4,11 @@ REAL FUNCTION GAMIC(A,X)
   IMPLICIT NONE
   !*--GAMIC5
   !*** Start of declarations inserted by SPAG
-  REAL A , aeps , algap1 , alneps , ALNGAM , alngs , alx , bot , e , eps , &
-    fm , gstar , h , R1MACH , R9GMIC , R9GMIT , R9LGIC , R9LGIT , sga , &
+  REAL A, aeps, algap1, alneps, ALNGAM, alngs, alx, bot, e, eps, &
+    fm, gstar, h, R1MACH, R9GMIC, R9GMIT, R9LGIC, R9LGIT, sga, &
     sgng
-  REAL sgngam , sgngs , sqeps , t , X
-  INTEGER izero , ma
+  REAL sgngam, sgngs, sqeps, t, X
+  INTEGER izero, ma
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  GAMIC
   !***PURPOSE  Calculate the complementary incomplete Gamma function.
@@ -54,7 +54,7 @@ REAL FUNCTION GAMIC(A,X)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   !***END PROLOGUE  GAMIC
   LOGICAL first
-  SAVE eps , sqeps , alneps , bot , first
+  SAVE eps, sqeps, alneps, bot, first
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  GAMIC
   IF ( first ) THEN
@@ -141,4 +141,5 @@ REAL FUNCTION GAMIC(A,X)
   GAMIC = sgng*EXP(t)
   RETURN
   !
-  99999 END FUNCTION GAMIC
+  99999 CONTINUE
+  END FUNCTION GAMIC

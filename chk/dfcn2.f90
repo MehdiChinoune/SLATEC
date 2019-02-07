@@ -24,11 +24,11 @@ SUBROUTINE DFCN2(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
   !           (WRB)
   !***END PROLOGUE  DFCN2
   !     .. Scalar Arguments ..
-  INTEGER Iflag , Ldfjac , M , N
+  INTEGER Iflag, Ldfjac, M, N
   !     .. Array Arguments ..
-  REAL(8) :: Fjac(Ldfjac,*) , Fvec(*) , X(*)
+  REAL(8) :: Fjac(Ldfjac,*), Fvec(*), X(*)
   !     .. Local Scalars ..
-  REAL(8) :: temp , two
+  REAL(8) :: temp, two
   INTEGER i
   !     .. Intrinsic Functions ..
   INTRINSIC EXP
@@ -43,7 +43,7 @@ SUBROUTINE DFCN2(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
     !
     !       Evaluate functions.
     !
-    DO i = 1 , M
+    DO i = 1, M
       temp = i
       Fvec(i) = two + two*temp - EXP(temp*X(1)) - EXP(temp*X(2))
     ENDDO
@@ -52,7 +52,7 @@ SUBROUTINE DFCN2(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
     !       Evaluate Jacobian.
     !
     IF ( Iflag/=2 ) RETURN
-    DO i = 1 , M
+    DO i = 1, M
       temp = i
       Fjac(i,1) = -temp*EXP(temp*X(1))
       Fjac(i,2) = -temp*EXP(temp*X(2))

@@ -28,13 +28,13 @@ SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   IMPLICIT NONE
   !*--DU12US29
   !*** Start of declarations inserted by SPAG
-  REAL(8) :: A , B , bb , H , Rnorm , tt , W
-  INTEGER i , ij , ip1 , j , jb , k , kp1 , Krank , M , Mda , Mdb , mmk , &
-    Mode , N , Nb
+  REAL(8) :: A, B, bb, H, Rnorm, tt, W
+  INTEGER i, ij, ip1, j, jb, k, kp1, Krank, M, Mda, Mdb, mmk, &
+    Mode, N, Nb
   !*** End of declarations inserted by SPAG
-  REAL(8) :: DDOT , DNRM2
-  DIMENSION A(Mda,*) , B(Mdb,*) , Rnorm(*) , H(*) , W(*)
-  INTEGER Ic(*) , Ir(*)
+  REAL(8) :: DDOT, DNRM2
+  DIMENSION A(Mda,*), B(Mdb,*), Rnorm(*), H(*), W(*)
+  INTEGER Ic(*), Ir(*)
   !***FIRST EXECUTABLE STATEMENT  DU12US
   k = Krank
   kp1 = k + 1
@@ -49,7 +49,7 @@ SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
     DO
       i = i + 1
       IF ( i==M ) THEN
-        DO i = 1 , M
+        DO i = 1, M
           Ir(i) = ABS(Ir(i))
         ENDDO
         !
@@ -58,8 +58,8 @@ SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
         !
         IF ( Mode>=2.AND.k/=M ) THEN
           mmk = M - k
-          DO jb = 1 , Nb
-            DO j = 1 , k
+          DO jb = 1, Nb
+            DO j = 1, k
               i = kp1 - j
               tt = -DDOT(mmk,A(kp1,i),1,B(kp1,jb),1)/W(i)
               tt = tt - B(i,jb)
@@ -71,14 +71,14 @@ SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
         !
         !     FIND NORMS OF RESIDUAL VECTOR(S)..(BEFORE OVERWRITE B)
         !
-        DO jb = 1 , Nb
+        DO jb = 1, Nb
           Rnorm(jb) = DNRM2((M-k),B(kp1,jb),1)
         ENDDO
         !
         !     BACK SOLVE LOWER TRIANGULAR L
         !
-        DO jb = 1 , Nb
-          DO i = 1 , k
+        DO jb = 1, Nb
+          DO i = 1, k
             B(i,jb) = B(i,jb)/A(i,i)
             IF ( i==k ) EXIT
             ip1 = i + 1
@@ -90,8 +90,8 @@ SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
         !      TRUNCATED SOLUTION
         !
         IF ( k/=N ) THEN
-          DO jb = 1 , Nb
-            DO i = kp1 , N
+          DO jb = 1, Nb
+            DO i = kp1, N
               B(i,jb) = 0.0D0
             ENDDO
           ENDDO
@@ -99,11 +99,11 @@ SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
         !
         !     APPLY HOUSEHOLDER TRANSFORMATIONS TO B
         !
-        DO i = 1 , k
+        DO i = 1, k
           j = kp1 - i
           tt = A(j,j)
           A(j,j) = H(j)
-          DO jb = 1 , Nb
+          DO jb = 1, Nb
             bb = -DDOT(N-j+1,A(j,j),Mda,B(j,jb),1)/H(j)
             CALL DAXPY(N-j+1,bb,A(j,j),Mda,B(j,jb),1)
           ENDDO
@@ -117,7 +117,7 @@ SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
         DO
           i = i + 1
           IF ( i==N ) THEN
-            DO i = 1 , N
+            DO i = 1, N
               Ic(i) = ABS(Ic(i))
             ENDDO
             GOTO 99999
@@ -142,19 +142,19 @@ SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
         IF ( j/=i ) THEN
           IF ( j>=0 ) THEN
             Ir(i) = -Ir(i)
-            DO jb = 1 , Nb
+            DO jb = 1, Nb
               Rnorm(jb) = B(i,jb)
             ENDDO
             ij = i
             DO
-              DO jb = 1 , Nb
+              DO jb = 1, Nb
                 B(ij,jb) = B(j,jb)
               ENDDO
               ij = j
               j = Ir(ij)
               Ir(ij) = -Ir(ij)
               IF ( j==i ) THEN
-                DO jb = 1 , Nb
+                DO jb = 1, Nb
                   B(ij,jb) = Rnorm(jb)
                 ENDDO
                 EXIT
@@ -165,11 +165,11 @@ SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
       ENDIF
     ENDDO
   ELSE
-    DO jb = 1 , Nb
+    DO jb = 1, Nb
       Rnorm(jb) = DNRM2(M,B(1,jb),1)
     ENDDO
-    DO jb = 1 , Nb
-      DO i = 1 , N
+    DO jb = 1, Nb
+      DO i = 1, N
         B(i,jb) = 0.0D0
       ENDDO
     ENDDO
@@ -178,4 +178,5 @@ SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   !
   !        SOLUTION VECTORS ARE IN FIRST N ROWS OF B(,)
   !
-  99999 END SUBROUTINE DU12US
+  99999 CONTINUE
+  END SUBROUTINE DU12US

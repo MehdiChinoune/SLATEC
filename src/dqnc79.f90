@@ -76,33 +76,33 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !           wordlength.  (RWC)
   !***END PROLOGUE  DQNC79
   !     .. Scalar Arguments ..
-  REAL(8) :: A , Ans , B , Err
-  INTEGER Ierr , K
+  REAL(8) :: A, Ans, B, Err
+  INTEGER Ierr, K
   !     .. Function Arguments ..
   REAL(8) :: FUN
   EXTERNAL FUN
   !     .. Local Scalars ..
-  REAL(8) :: ae , area , bank , blocal , c , ce , ee , ef , eps , &
-    q13 , q7 , q7l , sq2 , test , tol , vr , w1 , w2 , w3 , &
+  REAL(8) :: ae, area, bank, blocal, c, ce, ee, ef, eps, &
+    q13, q7, q7l, sq2, test, tol, vr, w1, w2, w3, &
     w4
-  INTEGER i , kml , kmx , l , lmn , lmx , nbits , nib , nlmn , nlmx
+  INTEGER i, kml, kmx, l, lmn, lmx, nbits, nib, nlmn, nlmx
   LOGICAL first
   !     .. Local Arrays ..
-  REAL(8) :: aa(99) , f(13) , f1(99) , f2(99) , f3(99) , f4(99) , &
-    f5(99) , f6(99) , f7(99) , hh(99) , q7r(99) , vl(99)
+  REAL(8) :: aa(99), f(13), f1(99), f2(99), f3(99), f4(99), &
+    f5(99), f6(99), f7(99), hh(99), q7r(99), vl(99)
   INTEGER lr(99)
   !     .. External Functions ..
   REAL(8) :: D1MACH
   INTEGER I1MACH
-  EXTERNAL D1MACH , I1MACH
+  EXTERNAL D1MACH, I1MACH
   !     .. External Subroutines ..
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , LOG , MAX , MIN , SIGN , SQRT
+  INTRINSIC ABS, LOG, MAX, MIN, SIGN, SQRT
   !     .. Save statement ..
-  SAVE nbits , nlmx , first , sq2 , w1 , w2 , w3 , w4
+  SAVE nbits, nlmx, first, sq2, w1, w2, w3, w4
   !     .. Data statements ..
-  DATA kml/7/ , kmx/5000/ , nlmn/2/
+  DATA kml/7/, kmx/5000/, nlmn/2/
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  DQNC79
   IF ( first ) THEN
@@ -139,7 +139,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   hh(1) = (B-A)/12.0D0
   aa(1) = A
   lr(1) = 1
-  DO i = 1 , 11 , 2
+  DO i = 1, 11, 2
     f(i) = FUN(A+(i-1)*hh(1))
   ENDDO
   blocal = B
@@ -153,136 +153,138 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !
   !     Compute refined estimates, estimate the error, etc.
   !
-  100  DO i = 2 , 12 , 2
-  f(i) = FUN(aa(l)+(i-1)*hh(l))
-ENDDO
-K = K + 6
-!
-!     Compute left and right half estimates
-!
-q7l = hh(l)*((w1*(f(1)+f(7))+w2*(f(2)+f(6)))+(w3*(f(3)+f(5))+w4*f(4)))
-q7r(l) = hh(l)&
-  *((w1*(f(7)+f(13))+w2*(f(8)+f(12)))+(w3*(f(9)+f(11))+w4*f(10)))
-!
-!     Update estimate of integral of absolute value
-!
-area = area + (ABS(q7l)+ABS(q7r(l))-ABS(q7))
-!
-!     Do not bother to test convergence before minimum refinement level
-!
-IF ( l>=lmn ) THEN
+  100 CONTINUE
+  DO i = 2, 12, 2
+    f(i) = FUN(aa(l)+(i-1)*hh(l))
+  ENDDO
+  K = K + 6
   !
-  !     Estimate the error in new value for whole interval, Q13
+  !     Compute left and right half estimates
   !
-  q13 = q7l + q7r(l)
-  ee = ABS(q7-q13)*ef
+  q7l = hh(l)*((w1*(f(1)+f(7))+w2*(f(2)+f(6)))+(w3*(f(3)+f(5))+w4*f(4)))
+  q7r(l) = hh(l)&
+    *((w1*(f(7)+f(13))+w2*(f(8)+f(12)))+(w3*(f(9)+f(11))+w4*f(10)))
   !
-  !     Compute nominal allowed error
+  !     Update estimate of integral of absolute value
   !
-  ae = eps*area
+  area = area + (ABS(q7l)+ABS(q7r(l))-ABS(q7))
   !
-  !     Borrow from bank account, but not too much
+  !     Do not bother to test convergence before minimum refinement level
   !
-  test = MIN(ae+0.8D0*bank,10.0D0*ae)
-  !
-  !     Don't ask for excessive accuracy
-  !
-  test = MAX(test,tol*ABS(q13),0.00003D0*tol*area)
-  !
-  !     Now, did this interval pass or not?
-  !
-  IF ( ee<=test ) THEN
+  IF ( l>=lmn ) THEN
     !
-    !     On good intervals accumulate the theoretical estimate
+    !     Estimate the error in new value for whole interval, Q13
     !
-    ce = ce + (q7-q13)/255.0D0
-  ELSE
+    q13 = q7l + q7r(l)
+    ee = ABS(q7-q13)*ef
     !
-    !     Consider the left half of next deeper level
+    !     Compute nominal allowed error
     !
-    IF ( K>kmx ) lmx = MIN(kml,lmx)
-    IF ( l<lmx ) GOTO 200
+    ae = eps*area
     !
-    !     Have hit maximum refinement level -- penalize the cumulative error
+    !     Borrow from bank account, but not too much
     !
-    ce = ce + (q7-q13)
-  ENDIF
-  !
-  !     Update the bank account.  Don't go into debt.
-  !
-  bank = bank + (ae-ee)
-  IF ( bank<0.0D0 ) bank = 0.0D0
-  !
-  !     Did we just finish a left half or a right half?
-  !
-  IF ( lr(l)<=0 ) THEN
+    test = MIN(ae+0.8D0*bank,10.0D0*ae)
     !
-    !     Proceed to right half at this level
+    !     Don't ask for excessive accuracy
     !
-    vl(l) = q13
-    GOTO 300
-  ELSE
+    test = MAX(test,tol*ABS(q13),0.00003D0*tol*area)
     !
-    !     Left and right halves are done, so go back up a level
+    !     Now, did this interval pass or not?
     !
-    vr = q13
-    DO WHILE ( l>1 )
-      IF ( l<=17 ) ef = ef*sq2
-      eps = eps*2.0D0
-      l = l - 1
-      IF ( lr(l)<=0 ) THEN
-        vl(l) = vl(l+1) + vr
-        GOTO 300
-      ELSE
-        vr = vl(l+1) + vr
-      ENDIF
-    ENDDO
-    !
-    !     Exit
-    !
-    Ans = vr
-    IF ( ABS(ce)>2.0D0*tol*area ) THEN
-      Ierr = 2
-      CALL XERMSG('SLATEC','DQNC79',&
-        'ANS is probably insufficiently accurate.',2,1)
+    IF ( ee<=test ) THEN
+      !
+      !     On good intervals accumulate the theoretical estimate
+      !
+      ce = ce + (q7-q13)/255.0D0
+    ELSE
+      !
+      !     Consider the left half of next deeper level
+      !
+      IF ( K>kmx ) lmx = MIN(kml,lmx)
+      IF ( l<lmx ) GOTO 200
+      !
+      !     Have hit maximum refinement level -- penalize the cumulative error
+      !
+      ce = ce + (q7-q13)
     ENDIF
-    GOTO 99999
+    !
+    !     Update the bank account.  Don't go into debt.
+    !
+    bank = bank + (ae-ee)
+    IF ( bank<0.0D0 ) bank = 0.0D0
+    !
+    !     Did we just finish a left half or a right half?
+    !
+    IF ( lr(l)<=0 ) THEN
+      !
+      !     Proceed to right half at this level
+      !
+      vl(l) = q13
+      GOTO 300
+    ELSE
+      !
+      !     Left and right halves are done, so go back up a level
+      !
+      vr = q13
+      DO WHILE ( l>1 )
+        IF ( l<=17 ) ef = ef*sq2
+        eps = eps*2.0D0
+        l = l - 1
+        IF ( lr(l)<=0 ) THEN
+          vl(l) = vl(l+1) + vr
+          GOTO 300
+        ELSE
+          vr = vl(l+1) + vr
+        ENDIF
+      ENDDO
+      !
+      !     Exit
+      !
+      Ans = vr
+      IF ( ABS(ce)>2.0D0*tol*area ) THEN
+        Ierr = 2
+        CALL XERMSG('SLATEC','DQNC79',&
+          'ANS is probably insufficiently accurate.',2,1)
+      ENDIF
+      GOTO 99999
+    ENDIF
   ENDIF
-ENDIF
-200  l = l + 1
-eps = eps*0.5D0
-IF ( l<=17 ) ef = ef/sq2
-hh(l) = hh(l-1)*0.5D0
-lr(l) = -1
-aa(l) = aa(l-1)
-q7 = q7l
-f1(l) = f(7)
-f2(l) = f(8)
-f3(l) = f(9)
-f4(l) = f(10)
-f5(l) = f(11)
-f6(l) = f(12)
-f7(l) = f(13)
-f(13) = f(7)
-f(11) = f(6)
-f(9) = f(5)
-f(7) = f(4)
-f(5) = f(3)
-f(3) = f(2)
-GOTO 100
-300  q7 = q7r(l-1)
-lr(l) = 1
-aa(l) = aa(l) + 12.0D0*hh(l)
-f(1) = f1(l)
-f(3) = f2(l)
-f(5) = f3(l)
-f(7) = f4(l)
-f(9) = f5(l)
-f(11) = f6(l)
-f(13) = f7(l)
-GOTO 100
-400  Ierr = -1
-CALL XERMSG('SLATEC','DQNC79',&
-  'A and B are too nearly equal to allow normal integration. $$'&
-  //'ANS is set to zero and IERR to -1.',-1,-1)
-99999 END SUBROUTINE DQNC79
+  200  l = l + 1
+  eps = eps*0.5D0
+  IF ( l<=17 ) ef = ef/sq2
+  hh(l) = hh(l-1)*0.5D0
+  lr(l) = -1
+  aa(l) = aa(l-1)
+  q7 = q7l
+  f1(l) = f(7)
+  f2(l) = f(8)
+  f3(l) = f(9)
+  f4(l) = f(10)
+  f5(l) = f(11)
+  f6(l) = f(12)
+  f7(l) = f(13)
+  f(13) = f(7)
+  f(11) = f(6)
+  f(9) = f(5)
+  f(7) = f(4)
+  f(5) = f(3)
+  f(3) = f(2)
+  GOTO 100
+  300  q7 = q7r(l-1)
+  lr(l) = 1
+  aa(l) = aa(l) + 12.0D0*hh(l)
+  f(1) = f1(l)
+  f(3) = f2(l)
+  f(5) = f3(l)
+  f(7) = f4(l)
+  f(9) = f5(l)
+  f(11) = f6(l)
+  f(13) = f7(l)
+  GOTO 100
+  400  Ierr = -1
+  CALL XERMSG('SLATEC','DQNC79',&
+    'A and B are too nearly equal to allow normal integration. $$'&
+    //'ANS is set to zero and IERR to -1.',-1,-1)
+  99999 CONTINUE
+  END SUBROUTINE DQNC79

@@ -4,7 +4,7 @@ SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
   IMPLICIT NONE
   !*--RPZERO5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Iflg , N , n1
+  INTEGER i, Iflg, N, n1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RPZERO
   !***PURPOSE  Find the zeros of a polynomial with real coefficients.
@@ -54,11 +54,11 @@ SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  RPZERO
   !
-  COMPLEX R(*) , T(*)
-  REAL A(*) , S(*)
+  COMPLEX R(*), T(*)
+  REAL A(*), S(*)
   !***FIRST EXECUTABLE STATEMENT  RPZERO
   n1 = N + 1
-  DO i = 1 , n1
+  DO i = 1, n1
     T(i) = CMPLX(A(i),0.0)
   ENDDO
   CALL CPZERO(N,T,R,T(N+2),Iflg,S)

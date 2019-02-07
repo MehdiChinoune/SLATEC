@@ -26,20 +26,20 @@ SUBROUTINE CCHKE2(Isnum,Srnamt,Nout,Kprint,Fatal)
   !***END PROLOGUE  CCHKE2
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  INTEGER Isnum , Kprint , Nout
+  INTEGER Isnum, Kprint, Nout
   CHARACTER(6) :: Srnamt
   !     .. Scalars in Common ..
   INTEGER infot
   !     .. Local Scalars ..
-  COMPLEX alpha , beta
+  COMPLEX alpha, beta
   REAL ralpha
   INTEGER kontrl
   !     .. Local Arrays ..
-  COMPLEX a(1,1) , x(1) , y(1)
+  COMPLEX a(1,1), x(1), y(1)
   !     .. External Subroutines ..
-  EXTERNAL CGBMV , CGEMV , CGERC , CGERU , CHBMV , CHEMV , CHER , CHER2 ,&
-    CHKXER , CHPMV , CHPR , CHPR2 , CTBMV , CTBSV , CTPMV , CTPSV ,&
-    CTRMV , CTRSV
+  EXTERNAL CGBMV, CGEMV, CGERC, CGERU, CHBMV, CHEMV, CHER, CHER2 ,&
+    CHKXER, CHPMV, CHPR, CHPR2, CTBMV, CTBSV, CTPMV, CTPSV ,&
+    CTRMV, CTRSV
   !***FIRST EXECUTABLE STATEMENT  CCHKE2
   CALL XGETF(kontrl)
   IF ( Kprint<=2 ) THEN

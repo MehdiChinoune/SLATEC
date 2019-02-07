@@ -4,7 +4,7 @@ SUBROUTINE CCHQC(Lun,Kprint,Nerr)
   IMPLICIT NONE
   !*--CCHQC5
   !*** Start of declarations inserted by SPAG
-  INTEGER Kprint , Lun , Nerr
+  INTEGER Kprint, Lun, Nerr
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CCHQC
   !***PURPOSE  Quick check for CCHDC.
@@ -36,23 +36,23 @@ SUBROUTINE CCHQC(Lun,Kprint,Nerr)
   !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
   !           FORMATs.  (RWC)
   !***END PROLOGUE  CCHQC
-  COMPLEX a(4,4) , work(4) , at(5,4) , af(4,4)
-  INTEGER lda , p , jpvt(4) , job , info , jpvtt(4) , i , j , infoc ,&
+  COMPLEX a(4,4), work(4), at(5,4), af(4,4)
+  INTEGER lda, p, jpvt(4), job, info, jpvtt(4), i, j, infoc ,&
     jpvtc(4)
   CHARACTER(20) :: kfail
   INTEGER indx
   REAL delx
-  DATA a/(2.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,&
-    (0.E0,-1.E0) , (2.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0)&
-    , (0.E0,0.E0) , (3.E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0)&
-    , (0.E0,-1.E0) , (4.E0,0.E0)/
-  DATA jpvt/0 , -1 , 1 , 0/
-  DATA af/(1.73205E0,0.E0) , (0.E0,1.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,&
-    (0.E0,-.57735E0) , (1.91485E0,0.E0) , (0.E0,0.E0) , (0.E0,0.E0) ,&
-    (0.E0,0.E0) , (0.E0,0.E0) , (1.41421E0,0.E0) , (0.E0,1.E0) ,&
-    (0.E0,0.E0) , (0.E0,0.E0) , (0.E0,-.70711E0) , (1.22475E0,0.E0)/
+  DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
+    , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
+    , (0.E0,-1.E0), (4.E0,0.E0)/
+  DATA jpvt/0, -1, 1, 0/
+  DATA af/(1.73205E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    (0.E0,-.57735E0), (1.91485E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    (0.E0,0.E0), (0.E0,0.E0), (1.41421E0,0.E0), (0.E0,1.E0) ,&
+    (0.E0,0.E0), (0.E0,0.E0), (0.E0,-.70711E0), (1.22475E0,0.E0)/
   DATA infoc/4/
-  DATA jpvtc/3 , 4 , 1 , 2/
+  DATA jpvtc/3, 4, 1, 2/
   DATA kfail/'FACTORING JPVT INFO '/
   !***FIRST EXECUTABLE STATEMENT  CCHQC
   job = 1
@@ -62,9 +62,9 @@ SUBROUTINE CCHQC(Lun,Kprint,Nerr)
   !
   !     FORM AT AND JPVTT.
   !
-  DO j = 1 , p
+  DO j = 1, p
     jpvtt(j) = jpvt(j)
-    DO i = 1 , p
+    DO i = 1, p
       at(i,j) = a(i,j)
     ENDDO
   ENDDO
@@ -73,8 +73,8 @@ SUBROUTINE CCHQC(Lun,Kprint,Nerr)
   !
   CALL CCHDC(at,lda,p,work,jpvtt,job,info)
   indx = 0
-  DO j = 1 , p
-    DO i = 1 , p
+  DO j = 1, p
+    DO i = 1, p
       delx = ABS(REAL(at(i,j)-af(i,j))) + ABS(AIMAG(at(i,j)-af(i,j)))
       IF ( delx>.0001 ) indx = indx + 1
     ENDDO
@@ -86,7 +86,7 @@ SUBROUTINE CCHQC(Lun,Kprint,Nerr)
   ENDIF
   !
   indx = 0
-  DO i = 1 , p
+  DO i = 1, p
     IF ( jpvtt(i)/=jpvtc(i) ) indx = indx + 1
   ENDDO
   !

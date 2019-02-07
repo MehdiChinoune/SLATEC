@@ -4,7 +4,7 @@ SUBROUTINE SCOPY(N,Sx,Incx,Sy,Incy)
   IMPLICIT NONE
   !*--SCOPY5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , Incy , ix , iy , m , mp1 , N , ns
+  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SCOPY
   !***PURPOSE  Copy a vector.
@@ -49,7 +49,7 @@ SUBROUTINE SCOPY(N,Sx,Incx,Sy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SCOPY
-  REAL Sx(*) , Sy(*)
+  REAL Sx(*), Sy(*)
   !***FIRST EXECUTABLE STATEMENT  SCOPY
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy ) THEN
@@ -62,7 +62,7 @@ SUBROUTINE SCOPY(N,Sx,Incx,Sy,Incy)
       !
       m = MOD(N,7)
       IF ( m/=0 ) THEN
-        DO i = 1 , m
+        DO i = 1, m
           Sy(i) = Sx(i)
         ENDDO
         IF ( N<7 ) RETURN
@@ -73,7 +73,7 @@ SUBROUTINE SCOPY(N,Sx,Incx,Sy,Incy)
       !     Code for equal, positive, non-unit increments.
       !
       ns = N*Incx
-      DO i = 1 , ns , Incx
+      DO i = 1, ns, Incx
         Sy(i) = Sx(i)
       ENDDO
       GOTO 99999
@@ -86,14 +86,14 @@ SUBROUTINE SCOPY(N,Sx,Incx,Sy,Incy)
   iy = 1
   IF ( Incx<0 ) ix = (-N+1)*Incx + 1
   IF ( Incy<0 ) iy = (-N+1)*Incy + 1
-  DO i = 1 , N
+  DO i = 1, N
     Sy(iy) = Sx(ix)
     ix = ix + Incx
     iy = iy + Incy
   ENDDO
   RETURN
   100  mp1 = m + 1
-  DO i = mp1 , N , 7
+  DO i = mp1, N, 7
     Sy(i) = Sx(i)
     Sy(i+1) = Sx(i+1)
     Sy(i+2) = Sx(i+2)
@@ -103,4 +103,5 @@ SUBROUTINE SCOPY(N,Sx,Incx,Sy,Incy)
     Sy(i+6) = Sx(i+6)
   ENDDO
   RETURN
-  99999 END SUBROUTINE SCOPY
+  99999 CONTINUE
+  END SUBROUTINE SCOPY

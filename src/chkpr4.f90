@@ -4,8 +4,8 @@ SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   IMPLICIT NONE
   !*--CHKPR45
   !*** Start of declarations inserted by SPAG
-  REAL A , ai , B , bi , C , ci , D , dlx , xi
-  INTEGER i , Idmn , Ierror , Iorder , M , Mbdcnd , N , Nbdcnd
+  REAL A, ai, B, bi, C, ci, D, dlx, xi
+  INTEGER i, Idmn, Ierror, Iorder, M, Mbdcnd, N, Nbdcnd
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CHKPR4
   !***SUBSIDIARY
@@ -60,7 +60,7 @@ SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   !     CHECK THAT EQUATION IS ELLIPTIC
   !
   dlx = (B-A)/M
-  DO i = 2 , M
+  DO i = 2, M
     xi = A + (i-1)*dlx
     CALL COFX(xi,ai,bi,ci)
     IF ( ai<=0.0 ) THEN

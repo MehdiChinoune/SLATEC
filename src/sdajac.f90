@@ -58,17 +58,17 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   !   901101  Corrected PURPOSE.  (FNF)
   !***END PROLOGUE  SDAJAC
   !
-  INTEGER Neq , Ier , Iwm(*) , Ires , Ipar(*) , Ntemp
-  REAL X , Y(*) , Yprime(*) , Delta(*) , Cj , H , Wt(*) , E(*) , Wm(*) , &
-    Uround , Rpar(*)
-  EXTERNAL RES , JAC
+  INTEGER Neq, Ier, Iwm(*), Ires, Ipar(*), Ntemp
+  REAL X, Y(*), Yprime(*), Delta(*), Cj, H, Wt(*), E(*), Wm(*), &
+    Uround, Rpar(*)
+  EXTERNAL RES, JAC
   !
-  EXTERNAL SGBFA , SGEFA
+  EXTERNAL SGBFA, SGEFA
   !
-  INTEGER i , i1 , i2 , ii , ipsave , isave , j , k , l , lenpd , LIPVT , &
-    LML , LMTYPE , LMU , mba , mband , meb1 , meband , msave , mtype , &
-    n , NPD , npdm1 , nrow
-  REAL del , delinv , squr , ypsave , ysave
+  INTEGER i, i1, i2, ii, ipsave, isave, j, k, l, lenpd, LIPVT, &
+    LML, LMTYPE, LMU, mba, mband, meb1, meband, msave, mtype, &
+    n, NPD, npdm1, nrow
+  REAL del, delinv, squr, ypsave, ysave
   !
   PARAMETER (NPD=1)
   PARAMETER (LML=1)
@@ -88,7 +88,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
       Ires = 0
       nrow = npdm1
       squr = SQRT(Uround)
-      DO i = 1 , Neq
+      DO i = 1, Neq
         del = squr*MAX(ABS(Y(i)),ABS(H*Yprime(i)),ABS(Wt(i)))
         del = SIGN(del,H*Yprime(i))
         del = (Y(i)+del) - Y(i)
@@ -99,7 +99,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
         CALL RES(X,Y,Yprime,E,Ires,Rpar,Ipar)
         IF ( Ires<0 ) RETURN
         delinv = 1.0E0/del
-        DO l = 1 , Neq
+        DO l = 1, Neq
           Wm(nrow+l) = (E(l)-Delta(l))*delinv
         ENDDO
         nrow = nrow + Neq
@@ -116,7 +116,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
       !
       !     BANDED USER-SUPPLIED MATRIX
       lenpd = (2*Iwm(LML)+Iwm(LMU)+1)*Neq
-      DO i = 1 , lenpd
+      DO i = 1, lenpd
         Wm(npdm1+i) = 0.0E0
       ENDDO
       CALL JAC(X,Y,Yprime,Wm(NPD),Cj,Rpar,Ipar)
@@ -139,8 +139,8 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
       ipsave = isave + msave
       Ires = 0
       squr = SQRT(Uround)
-      DO j = 1 , mba
-        DO n = j , Neq , mband
+      DO j = 1, mba
+        DO n = j, Neq, mband
           k = (n-j)/mband + 1
           Wm(isave+k) = Y(n)
           Wm(ipsave+k) = Yprime(n)
@@ -152,7 +152,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
         ENDDO
         CALL RES(X,Y,Yprime,E,Ires,Rpar,Ipar)
         IF ( Ires<0 ) RETURN
-        DO n = j , Neq , mband
+        DO n = j, Neq, mband
           k = (n-j)/mband + 1
           Y(n) = Wm(isave+k)
           Yprime(n) = Wm(ipsave+k)
@@ -163,7 +163,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
           i1 = MAX(1,(n-Iwm(LMU)))
           i2 = MIN(Neq,(n+Iwm(LML)))
           ii = n*meb1 - Iwm(LML) + npdm1
-          DO i = i1 , i2
+          DO i = i1, i2
             Wm(ii+i) = (E(i)-Delta(i))*delinv
           ENDDO
         ENDDO
@@ -175,7 +175,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
       !
       !     DENSE USER-SUPPLIED MATRIX
       lenpd = Neq*Neq
-      DO i = 1 , lenpd
+      DO i = 1, lenpd
         Wm(npdm1+i) = 0.0E0
       ENDDO
       CALL JAC(X,Y,Yprime,Wm(NPD),Cj,Rpar,Ipar)
@@ -186,4 +186,5 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   CALL SGEFA(Wm(NPD),Neq,Neq,Iwm(LIPVT),Ier)
   RETURN
   !------END OF SUBROUTINE SDAJAC------
-  99999 END SUBROUTINE SDAJAC
+  99999 CONTINUE
+  END SUBROUTINE SDAJAC

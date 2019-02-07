@@ -24,7 +24,7 @@ SUBROUTINE DINTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   !         the X interval.  Precisely,
   !
   !                      X .LT. XT(1)                1         -1
-  !         if  XT(I) .LE. X .LT. XT(I+1)  then  ILEFT=I  , MFLAG=0
+  !         if  XT(I) .LE. X .LT. XT(I+1)  then  ILEFT=I , MFLAG=0
   !           XT(LXT) .LE. X                         LXT        1,
   !
   !         That is, when multiplicities are present in the break point
@@ -63,8 +63,8 @@ SUBROUTINE DINTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DINTRV
   !
-  INTEGER ihi , Ileft , Ilo , istep , Lxt , Mflag , middle
-  REAL(8) :: X , Xt
+  INTEGER ihi, Ileft, Ilo, istep, Lxt, Mflag, middle
+  REAL(8) :: X, Xt
   DIMENSION Xt(*)
   !***FIRST EXECUTABLE STATEMENT  DINTRV
   ihi = Ilo + 1

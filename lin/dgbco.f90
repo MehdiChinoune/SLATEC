@@ -18,9 +18,9 @@ SUBROUTINE DGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !     elimination and estimates the condition of the matrix.
   !
   !     If  RCOND  is not needed, DGBFA is slightly faster.
-  !     To solve  A*X = B , follow DGBCO by DGBSL.
-  !     To compute  INVERSE(A)*C , follow DGBCO by DGBSL.
-  !     To compute  DETERMINANT(A) , follow DGBCO by DGBDI.
+  !     To solve  A*X = B, follow DGBCO by DGBSL.
+  !     To compute  INVERSE(A)*C, follow DGBCO by DGBSL.
+  !     To compute  DETERMINANT(A), follow DGBCO by DGBDI.
   !
   !     On Entry
   !
@@ -60,7 +60,7 @@ SUBROUTINE DGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !        RCOND   DOUBLE PRECISION
   !                an estimate of the reciprocal condition of  A .
-  !                For the system  A*X = B , relative perturbations
+  !                For the system  A*X = B, relative perturbations
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -111,8 +111,8 @@ SUBROUTINE DGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !      then  N = 6, ML = 1, MU = 2, LDA .GE. 5  and ABD should contain
   !
-  !            *  *  *  +  +  +  , * = not used
-  !            *  * 13 24 35 46  , + = used for pivoting
+  !            *  *  *  +  +  + , * = not used
+  !            *  * 13 24 35 46 , + = used for pivoting
   !            * 12 23 34 45 56
   !           11 22 33 44 55 66
   !           21 32 43 54 65  *
@@ -130,13 +130,13 @@ SUBROUTINE DGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGBCO
-  INTEGER Lda , N , Ml , Mu , Ipvt(*)
-  REAL(8) :: Abd(Lda,*) , Z(*)
+  INTEGER Lda, N, Ml, Mu, Ipvt(*)
+  REAL(8) :: Abd(Lda,*), Z(*)
   REAL(8) :: Rcond
   !
-  REAL(8) :: DDOT , ek , t , wk , wkm
-  REAL(8) :: anorm , s , DASUM , sm , ynorm
-  INTEGER is , info , j , ju , k , kb , kp1 , l , la , lm , lz , m , mm
+  REAL(8) :: DDOT, ek, t, wk, wkm
+  REAL(8) :: anorm, s, DASUM, sm, ynorm
+  INTEGER is, info, j, ju, k, kb, kp1, l, la, lm, lz, m, mm
   !
   !     COMPUTE 1-NORM OF A
   !
@@ -144,7 +144,7 @@ SUBROUTINE DGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   anorm = 0.0D0
   l = Ml + 1
   is = l + Mu
-  DO j = 1 , N
+  DO j = 1, N
     anorm = MAX(anorm,DASUM(l,Abd(is,j),1))
     IF ( is>Ml+1 ) is = is - 1
     IF ( j<=Mu ) l = l + 1
@@ -165,12 +165,12 @@ SUBROUTINE DGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !     SOLVE TRANS(U)*W = E
   !
   ek = 1.0D0
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = 0.0D0
   ENDDO
   m = Ml + Mu + 1
   ju = 0
-  DO k = 1 , N
+  DO k = 1, N
     IF ( Z(k)/=0.0D0 ) ek = SIGN(ek,-Z(k))
     IF ( ABS(ek-Z(k))>ABS(Abd(m,k)) ) THEN
       s = ABS(Abd(m,k))/ABS(ek-Z(k))
@@ -192,7 +192,7 @@ SUBROUTINE DGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     ju = MIN(MAX(ju,Mu+Ipvt(k)),N)
     mm = m
     IF ( kp1<=ju ) THEN
-      DO j = kp1 , ju
+      DO j = kp1, ju
         mm = mm - 1
         sm = sm + ABS(Z(j)+wkm*Abd(mm,j))
         Z(j) = Z(j) + wk*Abd(mm,j)
@@ -202,7 +202,7 @@ SUBROUTINE DGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
         t = wkm - wk
         wk = wkm
         mm = m
-        DO j = kp1 , ju
+        DO j = kp1, ju
           mm = mm - 1
           Z(j) = Z(j) + t*Abd(mm,j)
         ENDDO
@@ -215,7 +215,7 @@ SUBROUTINE DGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !     SOLVE TRANS(L)*Y = W
   !
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     lm = MIN(Ml,N-k)
     IF ( k<N ) Z(k) = Z(k) + DDOT(lm,Abd(m+1,k),1,Z(k+1),1)
@@ -235,7 +235,7 @@ SUBROUTINE DGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !     SOLVE L*V = Y
   !
-  DO k = 1 , N
+  DO k = 1, N
     l = Ipvt(k)
     t = Z(l)
     Z(l) = Z(k)
@@ -254,7 +254,7 @@ SUBROUTINE DGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !     SOLVE  U*Z = W
   !
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     IF ( ABS(Z(k))>ABS(Abd(m,k)) ) THEN
       s = ABS(Abd(m,k))/ABS(Z(k))

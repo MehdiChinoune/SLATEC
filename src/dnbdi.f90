@@ -57,8 +57,8 @@ SUBROUTINE DNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DNBDI
-  INTEGER Lda , N , Ml , Mu , Ipvt(*)
-  REAL(8) :: Abe(Lda,*) , Det(2)
+  INTEGER Lda, N, Ml, Mu, Ipvt(*)
+  REAL(8) :: Abe(Lda,*), Det(2)
   !
   REAL(8) :: ten
   INTEGER i
@@ -66,7 +66,7 @@ SUBROUTINE DNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   Det(1) = 1.0D0
   Det(2) = 0.0D0
   ten = 10.0D0
-  DO i = 1 , N
+  DO i = 1, N
     IF ( Ipvt(i)/=i ) Det(1) = -Det(1)
     Det(1) = Abe(i,Ml+1)*Det(1)
     IF ( Det(1)==0.0D0 ) EXIT

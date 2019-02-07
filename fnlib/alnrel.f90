@@ -4,8 +4,8 @@ FUNCTION ALNREL(X)
   IMPLICIT NONE
   !*--ALNREL5
   !*** Start of declarations inserted by SPAG
-  REAL alnrcs , ALNREL , CSEVL , R1MACH , X , xmin
-  INTEGER INITS , nlnrel
+  REAL alnrcs, ALNREL, CSEVL, R1MACH, X, xmin
+  INTEGER INITS, nlnrel
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ALNREL
   !***PURPOSE  Evaluate ln(1+X) accurate in the sense of relative error.
@@ -40,7 +40,7 @@ FUNCTION ALNREL(X)
   !***END PROLOGUE  ALNREL
   DIMENSION alnrcs(23)
   LOGICAL first
-  SAVE alnrcs , nlnrel , xmin , first
+  SAVE alnrcs, nlnrel, xmin, first
   DATA alnrcs(1)/1.0378693562743770E0/
   DATA alnrcs(2)/ - .13364301504908918E0/
   DATA alnrcs(3)/.019408249135520563E0/

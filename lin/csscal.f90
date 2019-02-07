@@ -47,7 +47,7 @@ SUBROUTINE CSSCAL(N,Sa,Cx,Incx)
   !***END PROLOGUE  CSSCAL
   COMPLEX Cx(*)
   REAL Sa
-  INTEGER i , Incx , ix , N
+  INTEGER i, Incx, ix, N
   !***FIRST EXECUTABLE STATEMENT  CSSCAL
   IF ( N<=0 ) RETURN
   !
@@ -55,7 +55,7 @@ SUBROUTINE CSSCAL(N,Sa,Cx,Incx)
     !
     !     Code for increment equal to 1.
     !
-    DO i = 1 , N
+    DO i = 1, N
       Cx(i) = Sa*Cx(i)
     ENDDO
     GOTO 99999
@@ -65,9 +65,10 @@ SUBROUTINE CSSCAL(N,Sa,Cx,Incx)
   !
   ix = 1
   IF ( Incx<0 ) ix = (-N+1)*Incx + 1
-  DO i = 1 , N
+  DO i = 1, N
     Cx(ix) = Sa*Cx(ix)
     ix = ix + Incx
   ENDDO
   RETURN
-  99999 END SUBROUTINE CSSCAL
+  99999 CONTINUE
+  END SUBROUTINE CSSCAL

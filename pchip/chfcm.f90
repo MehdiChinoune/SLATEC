@@ -92,18 +92,18 @@ INTEGER FUNCTION CHFCM(D1,D2,Delta)
   !
   !  DECLARE ARGUMENTS.
   !
-  REAL D1 , D2 , Delta
+  REAL D1, D2, Delta
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER ismon , itrue
-  REAL a , b , eps , four , one , phi , ten , three , two , zero
-  SAVE zero , one , two , three , four
+  INTEGER ismon, itrue
+  REAL a, b, eps, four, one, phi, ten, three, two, zero
+  SAVE zero, one, two, three, four
   SAVE ten
   !
   !  INITIALIZE.
   !
-  DATA zero/0./ , one/1.0/ , two/2./ , three/3./ , four/4./ , ten/10./
+  DATA zero/0./, one/1.0/, two/2./, three/3./, four/4./, ten/10./
   !
   !        MACHINE-DEPENDENT PARAMETER -- SHOULD BE ABOUT 10*UROUND.
   !***FIRST EXECUTABLE STATEMENT  CHFCM

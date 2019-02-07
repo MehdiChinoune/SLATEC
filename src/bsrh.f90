@@ -4,9 +4,9 @@ FUNCTION BSRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   IMPLICIT NONE
   !*--BSRH5
   !*** Start of declarations inserted by SPAG
-  REAL A , Bh , BSRH , C , CNV , dx , EPS , F , Sgn , x , xl , Xll , xr , &
+  REAL A, Bh, BSRH, C, CNV, dx, EPS, F, Sgn, x, xl, Xll, xr, &
     Xrr
-  INTEGER IK , Iz , K , NCMplx , NM , NPP
+  INTEGER IK, Iz, K, NCMplx, NM, NPP
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BSRH
   !***SUBSIDIARY
@@ -22,8 +22,8 @@ FUNCTION BSRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  BSRH
-  DIMENSION A(*) , C(*) , Bh(*)
-  COMMON /CBLKT / NPP , K , EPS , CNV , NM , NCMplx , IK
+  DIMENSION A(*), C(*), Bh(*)
+  COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  BSRH
   xl = Xll
   xr = Xrr
@@ -40,4 +40,5 @@ FUNCTION BSRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   dx = .5*dx
   IF ( dx>CNV ) GOTO 100
   BSRH = .5*(xl+xr)
-  99999 END FUNCTION BSRH
+  99999 CONTINUE
+  END FUNCTION BSRH

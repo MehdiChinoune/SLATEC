@@ -68,22 +68,22 @@ SUBROUTINE REBAKB(Nm,N,B,Dl,M,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  REBAKB
   !
-  INTEGER i , j , k , M , N , i1 , ii , Nm
-  REAL B(Nm,*) , Dl(*) , Z(Nm,*)
+  INTEGER i, j, k, M, N, i1, ii, Nm
+  REAL B(Nm,*), Dl(*), Z(Nm,*)
   REAL x
   !
   !***FIRST EXECUTABLE STATEMENT  REBAKB
   IF ( M/=0 ) THEN
     !
-    DO j = 1 , M
+    DO j = 1, M
       !     .......... FOR I=N STEP -1 UNTIL 1 DO -- ..........
-      DO ii = 1 , N
+      DO ii = 1, N
         i1 = N - ii
         i = i1 + 1
         x = Dl(i)*Z(i,j)
         IF ( i/=1 ) THEN
           !
-          DO k = 1 , i1
+          DO k = 1, i1
             x = x + B(i,k)*Z(k,j)
           ENDDO
         ENDIF

@@ -5,7 +5,7 @@ SUBROUTINE DSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   IMPLICIT NONE
   !*--DSDBCG6
   !*** Start of declarations inserted by SPAG
-  REAL DSDI , DSMTV , DSMV
+  REAL DSDI, DSMTV, DSMV
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSDBCG
   !***PURPOSE  Diagonally Scaled BiConjugate Gradient Sparse Ax=b Solver.
@@ -219,20 +219,20 @@ SUBROUTINE DSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  DSDBCG
   !     .. Parameters ..
-  INTEGER LOCRB , LOCIB
+  INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  REAL(8) :: Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
+  REAL(8) :: Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
     Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(N) , B(N) , Rwork(Lenw) , X(N)
-  INTEGER Ia(Nelt) , Iwork(Leniw) , Ja(Nelt)
+  REAL(8) :: A(N), B(N), Rwork(Lenw), X(N)
+  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin , locdz , lociw , locp , locpp , locr , locrr , locw , &
-    locz , loczz
+  INTEGER locdin, locdz, lociw, locp, locpp, locr, locrr, locw, &
+    locz, loczz
   !     .. External Subroutines ..
-  EXTERNAL DBCG , DCHKW , DS2Y , DSDI , DSDS , DSMTV , DSMV
+  EXTERNAL DBCG, DCHKW, DS2Y, DSDI, DSDS, DSMTV, DSMV
   !***FIRST EXECUTABLE STATEMENT  DSDBCG
   !
   Ierr = 0

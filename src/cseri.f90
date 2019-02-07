@@ -25,13 +25,13 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CSERI
-  COMPLEX ak1 , ck , coef , cone , crsc , cz , czero , hz , rz , s1 , s2 , &
-    w , Y , Z
-  REAL aa , acz , ak , Alim , arm , ascle , atol , az , dfnu , Elim , Fnu , &
-    fnup , rak1 , rs , rtr1 , s , ss , Tol , x , GAMLN , R1MACH
-  INTEGER i , ib , idum , iflag , il , k , Kode , l , m , N , nn , nw , Nz
-  DIMENSION Y(N) , w(2)
-  DATA czero , cone/(0.0E0,0.0E0) , (1.0E0,0.0E0)/
+  COMPLEX ak1, ck, coef, cone, crsc, cz, czero, hz, rz, s1, s2, &
+    w, Y, Z
+  REAL aa, acz, ak, Alim, arm, ascle, atol, az, dfnu, Elim, Fnu, &
+    fnup, rak1, rs, rtr1, s, ss, Tol, x, GAMLN, R1MACH
+  INTEGER i, ib, idum, iflag, il, k, Kode, l, m, N, nn, nw, Nz
+  DIMENSION Y(N), w(2)
+  DATA czero, cone/(0.0E0,0.0E0), (1.0E0,0.0E0)/
   !***FIRST EXECUTABLE STATEMENT  CSERI
   Nz = 0
   az = ABS(Z)
@@ -76,7 +76,7 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     coef = CMPLX(aa,0.0E0)*CMPLX(COS(ak),SIN(ak))
     atol = Tol*acz/fnup
     il = MIN(2,nn)
-    DO i = 1 , il
+    DO i = 1, il
       dfnu = Fnu + (nn-i)
       fnup = dfnu + 1.0E0
       s1 = cone
@@ -119,7 +119,7 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
       !-----------------------------------------------------------------------
       s1 = w(1)
       s2 = w(2)
-      DO l = 3 , nn
+      DO l = 3, nn
         ck = s2
         s2 = s1 + CMPLX(ak+Fnu,0.0E0)*rz*s2
         s1 = ck
@@ -149,20 +149,22 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     IF ( nn==0 ) RETURN
     GOTO 100
   ENDIF
-  300  DO i = ib , nn
-  Y(k) = CMPLX(ak+Fnu,0.0E0)*rz*Y(k+1) + Y(k+2)
-  ak = ak - 1.0E0
-  k = k - 1
-ENDDO
-RETURN
-400  ib = l + 1
-IF ( ib>nn ) RETURN
-GOTO 300
-500  Y(1) = czero
-IF ( Fnu==0.0E0 ) Y(1) = cone
-IF ( N==1 ) RETURN
-DO i = 2 , N
-  Y(i) = czero
-ENDDO
-RETURN
-99999 END SUBROUTINE CSERI
+  300 CONTINUE
+  DO i = ib, nn
+    Y(k) = CMPLX(ak+Fnu,0.0E0)*rz*Y(k+1) + Y(k+2)
+    ak = ak - 1.0E0
+    k = k - 1
+  ENDDO
+  RETURN
+  400  ib = l + 1
+  IF ( ib>nn ) RETURN
+  GOTO 300
+  500  Y(1) = czero
+  IF ( Fnu==0.0E0 ) Y(1) = cone
+  IF ( N==1 ) RETURN
+  DO i = 2, N
+    Y(i) = czero
+  ENDDO
+  RETURN
+  99999 CONTINUE
+  END SUBROUTINE CSERI

@@ -4,7 +4,7 @@ COMPLEX FUNCTION CCOT(Z)
   IMPLICIT NONE
   !*--CCOT5
   !*** Start of declarations inserted by SPAG
-  REAL den , R1MACH , sn2x , sqeps , x2 , y2
+  REAL den, R1MACH, sn2x, sqeps, x2, y2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CCOT
   !***PURPOSE  Compute the cotangent.

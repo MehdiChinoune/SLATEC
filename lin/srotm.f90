@@ -4,8 +4,8 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
   IMPLICIT NONE
   !*--SROTM5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , Incy , kx , ky , N , nsteps
-  REAL sflag , sh11 , sh12 , sh21 , sh22 , Sparam , Sx , Sy , two , w , z , &
+  INTEGER i, Incx, Incy, kx, ky, N, nsteps
+  REAL sflag, sh11, sh12, sh21, sh22, Sparam, Sx, Sy, two, w, z, &
     zero
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SROTM
@@ -39,7 +39,7 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
   !
   !     Apply the modified Givens transformation, H, to the 2 by N matrix
   !     (SX**T)
-  !     (SY**T) , where **T indicates transpose.  The elements of SX are
+  !     (SY**T), where **T indicates transpose.  The elements of SX are
   !     in SX(LX+I*INCX), I = 0 to N-1, where LX = 1 if INCX .GE. 0, else
   !     LX = 1+(1-N)*INCX, and similarly for SY using LY and INCY.
   !
@@ -65,9 +65,9 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SROTM
-  DIMENSION Sx(*) , Sy(*) , Sparam(5)
-  SAVE zero , two
-  DATA zero , two/0.0E0 , 2.0E0/
+  DIMENSION Sx(*), Sy(*), Sparam(5)
+  SAVE zero, two
+  DATA zero, two/0.0E0, 2.0E0/
   !***FIRST EXECUTABLE STATEMENT  SROTM
   sflag = Sparam(1)
   IF ( N>0.AND.(sflag+two/=zero) ) THEN
@@ -82,7 +82,7 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
         sh12 = Sparam(4)
         sh21 = Sparam(3)
         sh22 = Sparam(5)
-        DO i = 1 , N
+        DO i = 1, N
           w = Sx(kx)
           z = Sy(ky)
           Sx(kx) = w*sh11 + z*sh12
@@ -93,7 +93,7 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
       ELSEIF ( sflag==0 ) THEN
         sh12 = Sparam(4)
         sh21 = Sparam(3)
-        DO i = 1 , N
+        DO i = 1, N
           w = Sx(kx)
           z = Sy(ky)
           Sx(kx) = w + z*sh12
@@ -104,7 +104,7 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
       ELSE
         sh11 = Sparam(2)
         sh22 = Sparam(5)
-        DO i = 1 , N
+        DO i = 1, N
           w = Sx(kx)
           z = Sy(ky)
           Sx(kx) = w*sh11 + z
@@ -121,7 +121,7 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
         sh12 = Sparam(4)
         sh21 = Sparam(3)
         sh22 = Sparam(5)
-        DO i = 1 , nsteps , Incx
+        DO i = 1, nsteps, Incx
           w = Sx(i)
           z = Sy(i)
           Sx(i) = w*sh11 + z*sh12
@@ -130,7 +130,7 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
       ELSEIF ( sflag==0 ) THEN
         sh12 = Sparam(4)
         sh21 = Sparam(3)
-        DO i = 1 , nsteps , Incx
+        DO i = 1, nsteps, Incx
           w = Sx(i)
           z = Sy(i)
           Sx(i) = w + z*sh12
@@ -139,7 +139,7 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
       ELSE
         sh11 = Sparam(2)
         sh22 = Sparam(5)
-        DO i = 1 , nsteps , Incx
+        DO i = 1, nsteps, Incx
           w = Sx(i)
           z = Sy(i)
           Sx(i) = w*sh11 + z

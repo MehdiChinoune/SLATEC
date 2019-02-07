@@ -22,7 +22,7 @@ COMPLEX FUNCTION CTANH(Z)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CTANH
-  COMPLEX Z , ci , CTAN
+  COMPLEX Z, ci, CTAN
   SAVE ci
   DATA ci/(0.,1.)/
   !***FIRST EXECUTABLE STATEMENT  CTANH

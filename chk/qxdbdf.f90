@@ -4,7 +4,7 @@ SUBROUTINE QXDBDF(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--QXDBDF5
   !*** Start of declarations inserted by SPAG
-  REAL DFDEQC , DJAC
+  REAL DFDEQC, DJAC
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QXDBDF
   !***PURPOSE  Test the DEPAC routine DDEBDF.
@@ -52,14 +52,14 @@ SUBROUTINE QXDBDF(Lun,Kprint,Ipass)
   !
   !     Declare arguments.
   !
-  INTEGER Lun , Kprint , Ipass
+  INTEGER Lun, Kprint, Ipass
   !
   !     Declare local variables.
   !
-  INTEGER idid , info(15) , ipar , iwork(60) , n , liw , lrw , nstep
-  REAL(8) :: abserr , D1MACH , r , reltol , relerr , rpar , rwork(306)&
-    , t , tout , u(4)
-  EXTERNAL DFDEQC , DJAC
+  INTEGER idid, info(15), ipar, iwork(60), n, liw, lrw, nstep
+  REAL(8) :: abserr, D1MACH, r, reltol, relerr, rpar, rwork(306)&
+    , t, tout, u(4)
+  EXTERNAL DFDEQC, DJAC
   !***FIRST EXECUTABLE STATEMENT  QXDBDF
   IF ( Kprint>=2 ) WRITE (Lun,99001)
   !
@@ -89,7 +89,7 @@ SUBROUTINE QXDBDF(Lun,Kprint,Ipass)
   info(4) = 0
   info(5) = 1
   info(6) = 0
-  IF ( Kprint>2 ) WRITE (Lun,99002) relerr , abserr , t , (1.0D0)
+  IF ( Kprint>2 ) WRITE (Lun,99002) relerr, abserr, t, (1.0D0)
   99002 FORMAT (/' RELERR = ',D16.8,'   ABSERR =',D16.8/12X,'T',19X,'R'/2D20.8)
   DO
     !
@@ -97,7 +97,7 @@ SUBROUTINE QXDBDF(Lun,Kprint,Ipass)
       liw,rpar,ipar,DJAC)
     r = SQRT(u(1)*u(1)+u(2)*u(2))
     IF ( ABS(r-1.0D0)>reltol ) Ipass = 0
-    IF ( Kprint>2 ) WRITE (Lun,99003) t , r
+    IF ( Kprint>2 ) WRITE (Lun,99003) t, r
     99003   FORMAT (2D20.8)
     info(1) = 1
     IF ( idid/=1 ) THEN

@@ -5,7 +5,7 @@ REAL(8) FUNCTION DDAWS(X)
   !*--DDAWS5
   !*** Start of declarations inserted by SPAG
   REAL eps
-  INTEGER INITDS , ntdaw , ntdaw2 , ntdawa
+  INTEGER INITDS, ntdaw, ntdaw2, ntdawa
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DDAWS
   !***PURPOSE  Compute Dawson's function.
@@ -47,11 +47,11 @@ REAL(8) FUNCTION DDAWS(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DDAWS
-  REAL(8) :: X , dawcs(21) , daw2cs(45) , dawacs(75) , xbig , xmax , &
-    xsml , y , DCSEVL , D1MACH
+  REAL(8) :: X, dawcs(21), daw2cs(45), dawacs(75), xbig, xmax, &
+    xsml, y, DCSEVL, D1MACH
   LOGICAL first
-  SAVE dawcs , daw2cs , dawacs , ntdaw , ntdaw2 , ntdawa , xsml , xbig , &
-    xmax , first
+  SAVE dawcs, daw2cs, dawacs, ntdaw, ntdaw2, ntdawa, xsml, xbig, &
+    xmax, first
   DATA dawcs(1)/ - .6351734375145949201065127736293D-2/
   DATA dawcs(2)/ - .2294071479677386939899824125866D+0/
   DATA dawcs(3)/ + .2213050093908476441683979161786D-1/
@@ -232,4 +232,5 @@ REAL(8) FUNCTION DDAWS(X)
   DDAWS = (0.5D0+DCSEVL(32.D0/y**2-1.D0,dawacs,ntdawa))/X
   RETURN
   !
-  99999 END FUNCTION DDAWS
+  99999 CONTINUE
+  END FUNCTION DDAWS

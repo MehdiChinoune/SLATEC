@@ -44,7 +44,7 @@ PROGRAM TEST01
   !   890713  DATE WRITTEN
   !   900524  Cosmetic changes to code.  (WRB)
   !***END PROLOGUE  TEST01
-  INTEGER ipass , kprint , lin , lun , nfail
+  INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST01
   lun = I1MACH(2)
   lin = I1MACH(1)

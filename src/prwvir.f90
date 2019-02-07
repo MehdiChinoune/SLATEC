@@ -4,7 +4,7 @@ SUBROUTINE PRWVIR(Key,Ipage,Lpg,Sx,Ix)
   IMPLICIT NONE
   !*--PRWVIR5
   !*** Start of declarations inserted by SPAG
-  INTEGER iaddr , Ipage , ipagef , istart , Ix , Key , Lpg
+  INTEGER iaddr, Ipage, ipagef, istart, Ix, Key, Lpg
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PRWVIR
   !***SUBSIDIARY
@@ -40,10 +40,10 @@ SUBROUTINE PRWVIR(Key,Ipage,Lpg,Sx,Ix)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   !***END PROLOGUE  PRWVIR
   DIMENSION Ix(*)
-  REAL Sx(*) , zero , one
+  REAL Sx(*), zero, one
   LOGICAL first
-  SAVE zero , one
-  DATA zero , one/0.E0 , 1.E0/
+  SAVE zero, one
+  DATA zero, one/0.E0, 1.E0/
   !***FIRST EXECUTABLE STATEMENT  PRWVIR
   !
   !     COMPUTE STARTING ADDRESS OF PAGE.

@@ -5,7 +5,7 @@ SUBROUTINE COSQF(N,X,Wsave)
   !*--COSQF5
   !*** Start of declarations inserted by SPAG
   INTEGER N
-  REAL sqrt2 , tsqx , Wsave , X
+  REAL sqrt2, tsqx, Wsave, X
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  COSQF
   !***PURPOSE  Compute the forward cosine transform with odd wave numbers.
@@ -77,7 +77,7 @@ SUBROUTINE COSQF(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  COSQF
-  DIMENSION X(*) , Wsave(*)
+  DIMENSION X(*), Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  COSQF
   sqrt2 = SQRT(2.)
   IF ( N<2 ) THEN
@@ -90,4 +90,5 @@ SUBROUTINE COSQF(N,X,Wsave)
     GOTO 99999
   ENDIF
   RETURN
-  99999 END SUBROUTINE COSQF
+  99999 CONTINUE
+  END SUBROUTINE COSQF

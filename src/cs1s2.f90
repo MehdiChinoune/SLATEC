@@ -25,9 +25,9 @@ SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CS1S2
-  COMPLEX czero , c1 , S1 , s1d , S2 , Zr
-  REAL aa , Alim , aln , Ascle , as1 , as2 , xx
-  INTEGER Iuf , Nz
+  COMPLEX czero, c1, S1, s1d, S2, Zr
+  REAL aa, Alim, aln, Ascle, as1, as2, xx
+  INTEGER Iuf, Nz
   DATA czero/(0.0E0,0.0E0)/
   !***FIRST EXECUTABLE STATEMENT  CS1S2
   Nz = 0

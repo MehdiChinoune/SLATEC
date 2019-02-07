@@ -14,7 +14,7 @@ SUBROUTINE PASS(Lun,Icnt,Itest)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920210  PURPOSE added and code restructured.  (WRB)
   !***END PROLOGUE  PASS
-  INTEGER Icnt , Itest , Lun
+  INTEGER Icnt, Itest, Lun
   !***FIRST EXECUTABLE STATEMENT  PASS
   IF ( Itest/=0 ) THEN
     WRITE (Lun,99001) Icnt

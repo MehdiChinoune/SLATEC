@@ -25,7 +25,7 @@ REAL FUNCTION QWGTF(X,Omega,P2,P3,P4,Integr)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  QWGTF
   !
-  REAL Omega , omx , P2 , P3 , P4 , X
+  REAL Omega, omx, P2, P3, P4, X
   INTEGER Integr
   !***FIRST EXECUTABLE STATEMENT  QWGTF
   omx = Omega*X

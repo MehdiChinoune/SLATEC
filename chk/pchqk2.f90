@@ -58,33 +58,33 @@ SUBROUTINE PCHQK2(Lun,Kprint,Ipass)
   !
   !  Declare arguments.
   !
-  INTEGER Lun , Kprint , Ipass
+  INTEGER Lun, Kprint, Ipass
   !
   !  DECLARE VARIABLES.
   !
-  INTEGER i , ierexp(17) , ierr , ifail , n , npairs
-  REAL a(17) , b(17) , calc , d(7) , errmax , error , f(7) , machep , one ,&
-    three , thrqtr , tol , true , two , x(7)
-  LOGICAL fail , skip
+  INTEGER i, ierexp(17), ierr, ifail, n, npairs
+  REAL a(17), b(17), calc, d(7), errmax, error, f(7), machep, one ,&
+    three, thrqtr, tol, true, two, x(7)
+  LOGICAL fail, skip
   !
   !  DECLARE EXTERNALS.
   !
-  REAL PCHIA , R1MACH
+  REAL PCHIA, R1MACH
   !
   !  INITIALIZE.
   !
-  DATA thrqtr/0.75E0/ , one/1.E0/ , two/2.E0/ , three/3.E0/
+  DATA thrqtr/0.75E0/, one/1.E0/, two/2.E0/, three/3.E0/
   DATA n/7/
-  DATA x/ - 4.E0 , -2.E0 , -0.9E0 , 0.E0 , 0.9E0 , 2.E0 , 4.E0/
+  DATA x/ - 4.E0, -2.E0, -0.9E0, 0.E0, 0.9E0, 2.E0, 4.E0/
   DATA npairs/17/
-  DATA a/ - 3.0E0 , 3.0E0 , -0.5E0 , -0.5E0 , -0.5E0 , -4.0E0 , -4.0E0 ,&
-    3.0E0 , -5.0E0 , -5.0E0 , -6.0E0 , 6.0E0 , -1.5E0 , -1.5E0 , -3.0E0 ,&
-    3.0E0 , 0.5E0/
-  DATA b/3.0E0 , -3.0E0 , 1.0E0 , 2.0E0 , 5.0E0 , -0.5E0 , 4.0E0 , 5.0E0 ,&
-    -3.0E0 , 5.0E0 , -5.0E0 , 5.0E0 , -0.5E0 , -1.0E0 , -2.5E0 , 3.5E0 ,&
+  DATA a/ - 3.0E0, 3.0E0, -0.5E0, -0.5E0, -0.5E0, -4.0E0, -4.0E0 ,&
+    3.0E0, -5.0E0, -5.0E0, -6.0E0, 6.0E0, -1.5E0, -1.5E0, -3.0E0 ,&
+    3.0E0, 0.5E0/
+  DATA b/3.0E0, -3.0E0, 1.0E0, 2.0E0, 5.0E0, -0.5E0, 4.0E0, 5.0E0 ,&
+    -3.0E0, 5.0E0, -5.0E0, 5.0E0, -0.5E0, -1.0E0, -2.5E0, 3.5E0 ,&
     0.5E0/
-  DATA ierexp/0 , 0 , 0 , 0 , 2 , 0 , 0 , 2 , 1 , 3 , 3 , 3 , 0 , 0 , 0 ,&
-    0 , 0/
+  DATA ierexp/0, 0, 0, 0, 2, 0, 0, 2, 1, 3, 3, 3, 0, 0, 0 ,&
+    0, 0/
   !
   !  SET PASS/FAIL TOLERANCE.
   !
@@ -94,7 +94,7 @@ SUBROUTINE PCHQK2(Lun,Kprint,Ipass)
   !
   !  SET UP PCH FUNCTION DEFINITION.
   !
-  DO i = 1 , n
+  DO i = 1, n
     f(i) = FCN(x(i))
     d(i) = DERIV(x(i))
   ENDDO
@@ -118,7 +118,7 @@ SUBROUTINE PCHQK2(Lun,Kprint,Ipass)
   ifail = 0
   !
   skip = .FALSE.
-  DO i = 1 , npairs
+  DO i = 1, npairs
     !               ---------------------------------------------
     calc = PCHIA(n,x,f,d,1,skip,a(i),b(i),ierr)
     !               ---------------------------------------------
@@ -128,11 +128,11 @@ SUBROUTINE PCHQK2(Lun,Kprint,Ipass)
       error = calc - true
       IF ( Kprint>=3 ) THEN
         IF ( fail ) THEN
-          WRITE (Lun,99005) a(i) , b(i) , ierr , true , calc , error ,&
+          WRITE (Lun,99005) a(i), b(i), ierr, true, calc, error ,&
             ierexp(i)
           99005         FORMAT (2F6.1,I5,1P,2E20.10,E15.5,'  (',I1,') *****')
         ELSE
-          WRITE (Lun,99010) a(i) , b(i) , ierr , true , calc , error
+          WRITE (Lun,99010) a(i), b(i), ierr, true, calc, error
         ENDIF
       ENDIF
       !
@@ -144,7 +144,7 @@ SUBROUTINE PCHQK2(Lun,Kprint,Ipass)
         errmax = MAX(errmax,error)
       ENDIF
     ELSE
-      IF ( Kprint>=3 ) WRITE (Lun,99010) a(i) , b(i) , ierr
+      IF ( Kprint>=3 ) WRITE (Lun,99010) a(i), b(i), ierr
       ifail = ifail + 1
     ENDIF
   ENDDO
@@ -152,7 +152,7 @@ SUBROUTINE PCHQK2(Lun,Kprint,Ipass)
   !  PRINT SUMMARY.
   !
   IF ( Kprint>=2 ) THEN
-    WRITE (Lun,99006) errmax , tol
+    WRITE (Lun,99006) errmax, tol
     99006   FORMAT (/'  MAXIMUM RELATIVE ERROR IS:',1P,E15.5,',   TOLERANCE:',1P,&
       E15.5)
     IF ( ifail/=0 ) WRITE (Lun,99007) ifail

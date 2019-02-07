@@ -6,12 +6,12 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   IMPLICIT NONE
   !*--DERKFS7
   !*** Start of declarations inserted by SPAG
-  REAL a , Atol , big , dt , Dtsign , dy , ee , eeoet , es , estiff ,&
-    esttol , et , F1 , F2 , F3 , F4 , F5 , H , hmin , HVNRM
-  INTEGER Idid , Info , Init , Ipar , Iquit , k , Kop , Ksteps , ktol ,&
-    mxkop , mxstep , natolp , Neq , nrtolp , Nstifs , Ntstep
-  REAL R1MACH , remin , Rer , Rpar , Rtol , s , T , tol , Told , Tolfac ,&
-    Tout , u , U26 , ute , Y , yavg , Yp , Ys
+  REAL a, Atol, big, dt, Dtsign, dy, ee, eeoet, es, estiff ,&
+    esttol, et, F1, F2, F3, F4, F5, H, hmin, HVNRM
+  INTEGER Idid, Info, Init, Ipar, Iquit, k, Kop, Ksteps, ktol ,&
+    mxkop, mxstep, natolp, Neq, nrtolp, Nstifs, Ntstep
+  REAL R1MACH, remin, Rer, Rpar, Rtol, s, T, tol, Told, Tolfac ,&
+    Tout, u, U26, ute, Y, yavg, Yp, Ys
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DERKFS
   !***SUBSIDIARY
@@ -58,12 +58,12 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DERKFS
   !
-  LOGICAL hfaild , output , Stiff , Nonstf
+  LOGICAL hfaild, output, Stiff, Nonstf
   CHARACTER(8) :: xern1
-  CHARACTER(16) :: xern3 , xern4
+  CHARACTER(16) :: xern3, xern4
   !
-  DIMENSION Y(*) , Yp(*) , F1(*) , F2(*) , F3(*) , F4(*) , F5(*) , Ys(*) ,&
-    Info(15) , Rtol(*) , Atol(*) , Rpar(*) , Ipar(*)
+  DIMENSION Y(*), Yp(*), F1(*), F2(*), F3(*), F4(*), F5(*), Ys(*) ,&
+    Info(15), Rtol(*), Atol(*), Rpar(*), Ipar(*)
   !
   EXTERNAL F
   !
@@ -76,7 +76,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !  TOLERANCE THRESHOLD REMIN IS ASSIGNED FOR THIS METHOD. THIS VALUE
   !  SHOULD NOT BE CHANGED ACROSS DIFFERENT MACHINES.
   !
-  SAVE remin , mxstep , mxkop
+  SAVE remin, mxstep, mxkop
   DATA remin/1.E-12/
   !
   !.......................................................................
@@ -103,7 +103,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !***FIRST EXECUTABLE STATEMENT  DERKFS
   IF ( Info(1)==0 ) THEN
     !
-    ! ON THE FIRST CALL , PERFORM INITIALIZATION --
+    ! ON THE FIRST CALL, PERFORM INITIALIZATION --
     !        DEFINE THE MACHINE UNIT ROUNDOFF QUANTITY  U  BY CALLING THE
     !        FUNCTION ROUTINE  R1MACH. THE USER MUST MAKE SURE THAT THE
     !        VALUES SET IN R1MACH ARE RELEVANT TO THE COMPUTER BEING USED.
@@ -174,7 +174,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !
   nrtolp = 0
   natolp = 0
-  DO k = 1 , Neq
+  DO k = 1, Neq
     IF ( nrtolp==0.AND.Rtol(k)<0.D0 ) THEN
       WRITE (xern1,'(I8)') k
       WRITE (xern3,'(1PE15.6)') Rtol(k)
@@ -258,7 +258,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !     THE RELATIVE ERROR TOLERANCE RTOL IS RESET TO THE SMALLEST VALUE
   !     RER WHICH IS LIKELY TO BE REASONABLE FOR THIS METHOD AND MACHINE.
   !
-  DO k = 1 , Neq
+  DO k = 1, Neq
     IF ( Rtol(k)+Atol(k)<=0. ) THEN
       Rtol(k) = Rer
       Idid = -2
@@ -300,7 +300,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     dy = ute*HVNRM(Y,Neq)
     IF ( dy==0. ) dy = ute
     ktol = 1
-    DO k = 1 , Neq
+    DO k = 1, Neq
       IF ( Info(2)==1 ) ktol = k
       tol = Rtol(ktol)*ABS(Y(k)) + Atol(ktol)
       IF ( tol==0. ) tol = dy*Rtol(ktol)
@@ -352,7 +352,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       !
       Tolfac = 0.
       ktol = 1
-      DO k = 1 , Neq
+      DO k = 1, Neq
         IF ( Info(2)==1 ) ktol = k
         et = Rtol(ktol)*ABS(Y(k)) + Atol(ktol)
         IF ( et>0. ) THEN
@@ -435,7 +435,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
           eeoet = 0.
           estiff = 0.
           ktol = 1
-          DO k = 1 , Neq
+          DO k = 1, Neq
             yavg = 0.5*(ABS(Y(k))+ABS(Ys(k)))
             IF ( Info(2)==1 ) ktol = k
             et = Rtol(ktol)*yavg + Atol(ktol)
@@ -469,7 +469,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
             !                       AND EVALUATE DERIVATIVES THERE
             !
             T = T + H
-            DO k = 1 , Neq
+            DO k = 1, Neq
               Y(k) = Ys(k)
             ENDDO
             a = T
@@ -543,7 +543,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
             !
           ELSEIF ( ABS(H)>hmin ) THEN
             !
-            !                       REDUCE THE STEP SIZE , TRY AGAIN
+            !                       REDUCE THE STEP SIZE, TRY AGAIN
             !                       THE DECREASE IS LIMITED TO A FACTOR OF 1/10
             !
             hfaild = .TRUE.
@@ -587,7 +587,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       !
       !     IF TOO CLOSE TO OUTPUT POINT,EXTRAPOLATE AND RETURN
       !
-      DO k = 1 , Neq
+      DO k = 1, Neq
         Y(k) = Y(k) + dt*Yp(k)
       ENDDO
       a = Tout
@@ -612,7 +612,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   Rtol(1) = Tolfac*Rtol(1)
   Atol(1) = Tolfac*Atol(1)
   IF ( Info(2)==0 ) RETURN
-  DO k = 2 , Neq
+  DO k = 2, Neq
     Rtol(k) = Tolfac*Rtol(k)
     Atol(k) = Tolfac*Atol(k)
   ENDDO

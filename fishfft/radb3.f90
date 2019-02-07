@@ -4,9 +4,9 @@ SUBROUTINE RADB3(Ido,L1,Cc,Ch,Wa1,Wa2)
   IMPLICIT NONE
   !*--RADB35
   !*** Start of declarations inserted by SPAG
-  REAL Cc , Ch , ci2 , ci3 , cr2 , cr3 , di2 , di3 , dr2 , dr3 , taui , &
-    taur , ti2 , tr2 , Wa1 , Wa2
-  INTEGER i , ic , Ido , idp2 , k , L1
+  REAL Cc, Ch, ci2, ci3, cr2, cr3, di2, di3, dr2, dr3, taui, &
+    taur, ti2, tr2, Wa1, Wa2
+  INTEGER i, ic, Ido, idp2, k, L1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RADB3
   !***SUBSIDIARY
@@ -29,11 +29,11 @@ SUBROUTINE RADB3(Ido,L1,Cc,Ch,Wa1,Wa2)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  RADB3
-  DIMENSION Cc(Ido,3,*) , Ch(Ido,L1,3) , Wa1(*) , Wa2(*)
+  DIMENSION Cc(Ido,3,*), Ch(Ido,L1,3), Wa1(*), Wa2(*)
   !***FIRST EXECUTABLE STATEMENT  RADB3
   taur = -.5
   taui = .5*SQRT(3.)
-  DO k = 1 , L1
+  DO k = 1, L1
     tr2 = Cc(Ido,2,k) + Cc(Ido,2,k)
     cr2 = Cc(1,1,k) + taur*tr2
     Ch(1,k,1) = Cc(1,1,k) + tr2
@@ -44,10 +44,10 @@ SUBROUTINE RADB3(Ido,L1,Cc,Ch,Wa1,Wa2)
   IF ( Ido==1 ) RETURN
   idp2 = Ido + 2
   IF ( (Ido-1)/2<L1 ) THEN
-    DO i = 3 , Ido , 2
+    DO i = 3, Ido, 2
       ic = idp2 - i
       !DIR$ IVDEP
-      DO k = 1 , L1
+      DO k = 1, L1
         tr2 = Cc(i-1,3,k) + Cc(ic-1,2,k)
         cr2 = Cc(i-1,1,k) + taur*tr2
         Ch(i-1,k,1) = Cc(i-1,1,k) + tr2
@@ -68,9 +68,9 @@ SUBROUTINE RADB3(Ido,L1,Cc,Ch,Wa1,Wa2)
     ENDDO
     GOTO 99999
   ENDIF
-  DO k = 1 , L1
+  DO k = 1, L1
     !DIR$ IVDEP
-    DO i = 3 , Ido , 2
+    DO i = 3, Ido, 2
       ic = idp2 - i
       tr2 = Cc(i-1,3,k) + Cc(ic-1,2,k)
       cr2 = Cc(i-1,1,k) + taur*tr2
@@ -91,4 +91,5 @@ SUBROUTINE RADB3(Ido,L1,Cc,Ch,Wa1,Wa2)
     ENDDO
   ENDDO
   RETURN
-  99999 END SUBROUTINE RADB3
+  99999 CONTINUE
+  END SUBROUTINE RADB3

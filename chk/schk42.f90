@@ -23,35 +23,35 @@ SUBROUTINE SCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  SCHK42
   !     .. Parameters ..
-  REAL ZERO , HALF , ONE
+  REAL ZERO, HALF, ONE
   PARAMETER (ZERO=0.0,HALF=0.5,ONE=1.0)
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  REAL Eps , Thresh
-  INTEGER Incmax , Kprint , Nalf , Nidim , Ninc , Nmax , Nout
+  REAL Eps, Thresh
+  INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
   CHARACTER(6) :: Sname
   !     .. Array Arguments ..
-  REAL A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) , G(Nmax) ,&
-    X(Nmax) , Xs(Nmax*Incmax) , Xx(Nmax*Incmax) , Y(Nmax) ,&
-    Ys(Nmax*Incmax) , Yt(Nmax) , Yy(Nmax*Incmax) , Z(Nmax)
-  INTEGER Idim(Nidim) , Inc(Ninc)
+  REAL A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), G(Nmax) ,&
+    X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax) ,&
+    Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
+  INTEGER Idim(Nidim), Inc(Ninc)
   !     .. Local Scalars ..
-  REAL alpha , als , err , errmax , transl
-  INTEGER i , ia , im , in , incx , incxs , incy , incys , ix , iy , j ,&
-    laa , lda , ldas , lx , ly , m , ms , n , nargs , nc , nd , ns ,&
+  REAL alpha, als, err, errmax, transl
+  INTEGER i, ia, im, in, incx, incxs, incy, incys, ix, iy, j ,&
+    laa, lda, ldas, lx, ly, m, ms, n, nargs, nc, nd, ns ,&
     nerr
-  LOGICAL ftl , null , reset
+  LOGICAL ftl, null, reset
   !     .. Local Arrays ..
   REAL w(1)
   LOGICAL isame(13)
   !     .. External Functions ..
   INTEGER NUMXER
-  LOGICAL LSE , LSERES
-  EXTERNAL LSE , LSERES , NUMXER
+  LOGICAL LSE, LSERES
+  EXTERNAL LSE, LSERES, NUMXER
   !     .. External Subroutines ..
-  EXTERNAL SGER , SMAKE2 , SMVCH
+  EXTERNAL SGER, SMAKE2, SMVCH
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MAX , MIN
+  INTRINSIC ABS, MAX, MIN
   !***FIRST EXECUTABLE STATEMENT SCHK42
   !     Define the number of arguments.
   nargs = 9
@@ -60,11 +60,11 @@ SUBROUTINE SCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   reset = .TRUE.
   errmax = ZERO
   !
-  DO in = 1 , Nidim
+  DO in = 1, Nidim
     n = Idim(in)
     nd = n/2 + 1
     !
-    DO im = 1 , 2
+    DO im = 1, 2
       IF ( im==1 ) m = MAX(n-nd,0)
       IF ( im==2 ) m = MIN(n+nd,Nmax)
       !
@@ -76,7 +76,7 @@ SUBROUTINE SCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
         laa = lda*n
         null = n<=0 .OR. m<=0
         !
-        DO ix = 1 , Ninc
+        DO ix = 1, Ninc
           incx = Inc(ix)
           lx = ABS(incx)*m
           !
@@ -89,7 +89,7 @@ SUBROUTINE SCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
             Xx(1+ABS(incx)*(m/2-1)) = ZERO
           ENDIF
           !
-          DO iy = 1 , Ninc
+          DO iy = 1, Ninc
             incy = Inc(iy)
             ly = ABS(incy)*n
             !
@@ -103,7 +103,7 @@ SUBROUTINE SCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
               Yy(1+ABS(incy)*(n/2-1)) = ZERO
             ENDIF
             !
-            DO ia = 1 , Nalf
+            DO ia = 1, Nalf
               alpha = Alf(ia)
               !
               !                    Generate the matrix A.
@@ -119,15 +119,15 @@ SUBROUTINE SCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
               ms = m
               ns = n
               als = alpha
-              DO i = 1 , laa
+              DO i = 1, laa
                 As(i) = Aa(i)
               ENDDO
               ldas = lda
-              DO i = 1 , lx
+              DO i = 1, lx
                 Xs(i) = Xx(i)
               ENDDO
               incxs = incx
-              DO i = 1 , ly
+              DO i = 1, ly
                 Ys(i) = Yy(i)
               ENDDO
               incys = incy
@@ -161,7 +161,7 @@ SUBROUTINE SCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
               !
               !                    If data was incorrectly changed, report and return.
               !
-              DO i = 1 , nargs
+              DO i = 1, nargs
                 IF ( .NOT.isame(i) ) THEN
                   Fatal = .TRUE.
                   IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
@@ -174,15 +174,15 @@ SUBROUTINE SCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                 !                       Check the result column by column.
                 !
                 IF ( incx>0 ) THEN
-                  DO i = 1 , m
+                  DO i = 1, m
                     Z(i) = X(i)
                   ENDDO
                 ELSE
-                  DO i = 1 , m
+                  DO i = 1, m
                     Z(i) = X(m-i+1)
                   ENDDO
                 ENDIF
-                DO j = 1 , n
+                DO j = 1, n
                   IF ( incy>0 ) THEN
                     w(1) = Y(j)
                   ELSE
@@ -198,8 +198,8 @@ SUBROUTINE SCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                 IF ( Kprint>=3 ) THEN
                   WRITE (Nout,FMT=99005) j
                   WRITE (Nout,FMT=99004) Sname
-                  WRITE (Nout,FMT=99006) nc , Sname , m , n , alpha , incx ,&
-                    incy , lda
+                  WRITE (Nout,FMT=99006) nc, Sname, m, n, alpha, incx ,&
+                    incy, lda
                 ENDIF
               ENDIF
               !
@@ -219,9 +219,9 @@ SUBROUTINE SCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   IF ( .NOT.(Fatal) ) THEN
     IF ( Kprint>=3 ) THEN
       IF ( errmax<Thresh ) THEN
-        WRITE (Nout,FMT=99001) Sname , nc
+        WRITE (Nout,FMT=99001) Sname, nc
       ELSE
-        WRITE (Nout,FMT=99003) Sname , nc , errmax
+        WRITE (Nout,FMT=99003) Sname, nc, errmax
       ENDIF
     ENDIF
   ENDIF

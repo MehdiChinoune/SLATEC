@@ -23,24 +23,24 @@ LOGICAL FUNCTION LSERES(Type,Uplo,M,N,Aa,As,Lda)
   !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  LSERES
   !     .. Scalar Arguments ..
-  INTEGER Lda , M , N
+  INTEGER Lda, M, N
   CHARACTER :: Uplo
   CHARACTER(2) :: Type
   !     .. Array Arguments ..
-  REAL Aa(Lda,*) , As(Lda,*)
+  REAL Aa(Lda,*), As(Lda,*)
   !     .. Local Scalars ..
-  INTEGER i , ibeg , iend , j
+  INTEGER i, ibeg, iend, j
   LOGICAL upper
   !***FIRST EXECUTABLE STATEMENT  LSERES
   upper = Uplo=='U'
   IF ( Type=='GE' ) THEN
-    DO j = 1 , N
-      DO i = M + 1 , Lda
+    DO j = 1, N
+      DO i = M + 1, Lda
         IF ( Aa(i,j)/=As(i,j) ) GOTO 100
       ENDDO
     ENDDO
   ELSEIF ( Type=='SY' ) THEN
-    DO j = 1 , N
+    DO j = 1, N
       IF ( upper ) THEN
         ibeg = 1
         iend = j
@@ -48,10 +48,10 @@ LOGICAL FUNCTION LSERES(Type,Uplo,M,N,Aa,As,Lda)
         ibeg = j
         iend = N
       ENDIF
-      DO i = 1 , ibeg - 1
+      DO i = 1, ibeg - 1
         IF ( Aa(i,j)/=As(i,j) ) GOTO 100
       ENDDO
-      DO i = iend + 1 , Lda
+      DO i = iend + 1, Lda
         IF ( Aa(i,j)/=As(i,j) ) GOTO 100
       ENDDO
     ENDDO
@@ -63,4 +63,5 @@ LOGICAL FUNCTION LSERES(Type,Uplo,M,N,Aa,As,Lda)
   !
   !     End of LSERES.
   !
-  99999 END FUNCTION LSERES
+  99999 CONTINUE
+  END FUNCTION LSERES

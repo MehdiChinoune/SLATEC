@@ -216,20 +216,20 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  QAWOE
   !
-  REAL A , abseps , Abserr , Alist , area , area1 , area12 , area2 , a1 , &
-    a2 , B , Blist , b1 , b2 , Chebmo , correc , defab1 , defab2 , &
-    defabs , domega , R1MACH , dres , Elist , epmach , Epsabs , Epsrel , &
-    erlarg , erlast , errbnd , errmax , error1 , erro12 , error2 , &
-    errsum , ertest , F , oflow , Omega , resabs , reseps , Result , &
-    res3la , Rlist , rlist2 , small , uflow , width
-  INTEGER Icall , id , Ier , ierro , Integr , Iord , iroff1 , iroff2 , &
-    iroff3 , jupbnd , k , ksgn , ktmin , Last , Limit , maxerr , &
-    Maxp1 , Momcom , nev , Neval , Nnlog , nres , nrmax , nrmom , &
+  REAL A, abseps, Abserr, Alist, area, area1, area12, area2, a1, &
+    a2, B, Blist, b1, b2, Chebmo, correc, defab1, defab2, &
+    defabs, domega, R1MACH, dres, Elist, epmach, Epsabs, Epsrel, &
+    erlarg, erlast, errbnd, errmax, error1, erro12, error2, &
+    errsum, ertest, F, oflow, Omega, resabs, reseps, Result, &
+    res3la, Rlist, rlist2, small, uflow, width
+  INTEGER Icall, id, Ier, ierro, Integr, Iord, iroff1, iroff2, &
+    iroff3, jupbnd, k, ksgn, ktmin, Last, Limit, maxerr, &
+    Maxp1, Momcom, nev, Neval, Nnlog, nres, nrmax, nrmom, &
     numrl2
-  LOGICAL extrap , noext , extall
+  LOGICAL extrap, noext, extall
   !
-  DIMENSION Alist(*) , Blist(*) , Rlist(*) , Elist(*) , Iord(*) , rlist2(52)&
-    , res3la(3) , Chebmo(Maxp1,25) , Nnlog(*)
+  DIMENSION Alist(*), Blist(*), Rlist(*), Elist(*), Iord(*), rlist2(52)&
+    , res3la(3), Chebmo(Maxp1,25), Nnlog(*)
   !
   EXTERNAL F
   !
@@ -363,7 +363,7 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
       !           MAIN DO-LOOP
       !           ------------
       !
-      DO Last = 2 , Limit
+      DO Last = 2, Limit
         !
         !           BISECT THE SUBINTERVAL WITH THE NRMAX-TH LARGEST
         !           ERROR ESTIMATE.
@@ -488,7 +488,7 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
           jupbnd = Last
           IF ( Last>(Limit/2+2) ) jupbnd = Limit + 3 - Last
           id = nrmax
-          DO k = id , jupbnd
+          DO k = id, jupbnd
             maxerr = Iord(nrmax)
             errmax = Elist(maxerr)
             IF ( ABS(Blist(maxerr)-Alist(maxerr))>small ) GOTO 20
@@ -565,11 +565,12 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
   !           COMPUTE GLOBAL INTEGRAL SUM.
   !
   50     Result = 0.0E+00
-  DO k = 1 , Last
+  DO k = 1, Last
     Result = Result + Rlist(k)
   ENDDO
   Abserr = errsum
   IF ( Ier>2 ) Ier = Ier - 1
   IF ( Integr==2.AND.Omega<0.0E+00 ) Result = -Result
 ENDIF
-99999 END SUBROUTINE QAWOE
+  99999 CONTINUE
+  END SUBROUTINE QAWOE

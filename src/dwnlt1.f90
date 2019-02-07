@@ -23,21 +23,21 @@ SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scale,W)
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
   !   900604  DP version created from SP version.  (RWC)
   !***END PROLOGUE  DWNLT1
-  INTEGER I , Imax , Ir , Lend , Mdw , Mend
-  REAL(8) :: H(*) , Hbar , Scale(*) , W(Mdw,*)
+  INTEGER I, Imax, Ir, Lend, Mdw, Mend
+  REAL(8) :: H(*), Hbar, Scale(*), W(Mdw,*)
   LOGICAL Recalc
   !
   EXTERNAL IDAMAX
   INTEGER IDAMAX
   !
-  INTEGER j , k
+  INTEGER j, k
   !
   !***FIRST EXECUTABLE STATEMENT  DWNLT1
   IF ( Ir/=1.AND.(.NOT.Recalc) ) THEN
     !
     !        Update column SS=sum of squares.
     !
-    DO j = I , Lend
+    DO j = I, Lend
       H(j) = H(j) - Scale(Ir-1)*W(Ir-1,j)**2
     ENDDO
     !
@@ -50,9 +50,9 @@ SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scale,W)
   !     If required, recalculate column SS, using rows IR through MEND.
   !
   IF ( Recalc ) THEN
-    DO j = I , Lend
+    DO j = I, Lend
       H(j) = 0.D0
-      DO k = Ir , Mend
+      DO k = Ir, Mend
         H(j) = H(j) + Scale(k)*W(k,j)**2
       ENDDO
     ENDDO

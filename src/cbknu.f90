@@ -20,32 +20,32 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CBKNU
   !
-  COMPLEX cch , ck , coef , cone , crsc , cs , cscl , csh , csr , css , &
-    ctwo , cz , czero , f , fmu , p , pt , p1 , p2 , q , rz , smu , &
-    st , s1 , s2 , Y , Z , zd , celm , cy
-  REAL aa , ak , Alim , ascle , a1 , a2 , bb , bk , bry , caz , cc , dnu , &
-    dnu2 , Elim , etest , fc , fhs , fk , fks , Fnu , fpi , g1 , g2 , &
-    hpi , pi , p2i , p2m , p2r , rk , rthpi , r1 , s , spi , tm , Tol , &
-    tth , t1 , t2 , xx , yy , GAMLN , R1MACH , helim , elm , xd , yd , &
-    alas , as
-  INTEGER i , idum , iflag , inu , k , kflag , kk , kmax , Kode , koded , &
-    N , Nz , I1MACH , nw , j , ic , inub
-  DIMENSION bry(3) , cc(8) , css(3) , csr(3) , Y(N) , cy(2)
+  COMPLEX cch, ck, coef, cone, crsc, cs, cscl, csh, csr, css, &
+    ctwo, cz, czero, f, fmu, p, pt, p1, p2, q, rz, smu, &
+    st, s1, s2, Y, Z, zd, celm, cy
+  REAL aa, ak, Alim, ascle, a1, a2, bb, bk, bry, caz, cc, dnu, &
+    dnu2, Elim, etest, fc, fhs, fk, fks, Fnu, fpi, g1, g2, &
+    hpi, pi, p2i, p2m, p2r, rk, rthpi, r1, s, spi, tm, Tol, &
+    tth, t1, t2, xx, yy, GAMLN, R1MACH, helim, elm, xd, yd, &
+    alas, as
+  INTEGER i, idum, iflag, inu, k, kflag, kk, kmax, Kode, koded, &
+    N, Nz, I1MACH, nw, j, ic, inub
+  DIMENSION bry(3), cc(8), css(3), csr(3), Y(N), cy(2)
   !
   DATA kmax/30/
   DATA r1/2.0E0/
-  DATA czero , cone , ctwo/(0.0E0,0.0E0) , (1.0E0,0.0E0) , (2.0E0,0.0E0)/
+  DATA czero, cone, ctwo/(0.0E0,0.0E0), (1.0E0,0.0E0), (2.0E0,0.0E0)/
   !
-  DATA pi , rthpi , spi , hpi , fpi , tth/3.14159265358979324E0 , &
-    1.25331413731550025E0 , 1.90985931710274403E0 , &
-    1.57079632679489662E0 , 1.89769999331517738E0 , &
+  DATA pi, rthpi, spi, hpi, fpi, tth/3.14159265358979324E0, &
+    1.25331413731550025E0, 1.90985931710274403E0, &
+    1.57079632679489662E0, 1.89769999331517738E0, &
     6.66666666666666666E-01/
   !
-  DATA cc(1) , cc(2) , cc(3) , cc(4) , cc(5) , cc(6) , cc(7) , &
-    cc(8)/5.77215664901532861E-01 , -4.20026350340952355E-02 , &
-    -4.21977345555443367E-02 , 7.21894324666309954E-03 , &
-    -2.15241674114950973E-04 , -2.01348547807882387E-05 , &
-    1.13302723198169588E-06 , 6.11609510448141582E-09/
+  DATA cc(1), cc(2), cc(3), cc(4), cc(5), cc(6), cc(7), &
+    cc(8)/5.77215664901532861E-01, -4.20026350340952355E-02, &
+    -4.21977345555443367E-02, 7.21894324666309954E-03, &
+    -2.15241674114950973E-04, -2.01348547807882387E-05, &
+    1.13302723198169588E-06, 6.11609510448141582E-09/
   !
   !***FIRST EXECUTABLE STATEMENT  CBKNU
   xx = REAL(Z)
@@ -98,7 +98,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
         !-----------------------------------------------------------------------
         ak = 1.0E0
         s = cc(1)
-        DO k = 2 , 8
+        DO k = 2, 8
           ak = ak*dnu2
           tm = cc(k)*ak
           s = s + tm
@@ -249,7 +249,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     rk = caz + caz + 2.0E0
     a1 = 0.0E0
     a2 = 1.0E0
-    DO i = 1 , kmax
+    DO i = 1, kmax
       ak = fhs/fks
       bk = rk/(fk+1.0E0)
       tm = a2
@@ -276,7 +276,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   p1 = czero
   p2 = CMPLX(Tol,0.0E0)
   cs = p2
-  DO i = 1 , k
+  DO i = 1, k
     a1 = fks - fk
     a2 = (fks+fk)/(a1+fhs)
     rk = 2.0E0/(fk+1.0E0)
@@ -334,7 +334,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
       yd = yy
       ic = -1
       j = 2
-      DO i = 1 , inu
+      DO i = 1, inu
         st = s2
         s2 = ck*s2 + s1
         s1 = st
@@ -375,7 +375,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   ENDIF
   300  p1 = csr(kflag)
   ascle = bry(kflag)
-  DO i = inub , inu
+  DO i = inub, inu
     st = s2
     s2 = ck*s2 + s1
     s1 = st
@@ -408,7 +408,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   IF ( kk>N ) RETURN
   p1 = csr(kflag)
   ascle = bry(kflag)
-  DO i = kk , N
+  DO i = kk, N
     p2 = s2
     s2 = ck*s2 + s1
     s1 = p2
@@ -465,4 +465,5 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   800  s1 = coef
   s2 = coef
   GOTO 200
-  99999 END SUBROUTINE CBKNU
+  99999 CONTINUE
+  END SUBROUTINE CBKNU

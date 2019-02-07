@@ -170,10 +170,10 @@ SUBROUTINE QAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !***END PROLOGUE  QAGS
   !
   !
-  REAL A , Abserr , B , Epsabs , Epsrel , F , Result , Work
-  INTEGER Ier , Iwork , Lenw , Limit , lvl , l1 , l2 , l3 , Neval
+  REAL A, Abserr, B, Epsabs, Epsrel, F, Result, Work
+  INTEGER Ier, Iwork, Lenw, Limit, lvl, l1, l2, l3, Neval
   !
-  DIMENSION Iwork(*) , Work(*)
+  DIMENSION Iwork(*), Work(*)
   !
   EXTERNAL F
   !

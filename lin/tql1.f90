@@ -67,16 +67,16 @@ SUBROUTINE TQL1(N,D,E,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  TQL1
   !
-  INTEGER i , j , l , m , N , ii , l1 , l2 , mml , Ierr
-  REAL D(*) , E(*)
-  REAL b , c , c2 , c3 , dl1 , el1 , f , g , h , p , r , s , s2
+  INTEGER i, j, l, m, N, ii, l1, l2, mml, Ierr
+  REAL D(*), E(*)
+  REAL b, c, c2, c3, dl1, el1, f, g, h, p, r, s, s2
   REAL PYTHAG
   !
   !***FIRST EXECUTABLE STATEMENT  TQL1
   Ierr = 0
   IF ( N/=1 ) THEN
     !
-    DO i = 2 , N
+    DO i = 2, N
       E(i-1) = E(i)
     ENDDO
     !
@@ -84,12 +84,12 @@ SUBROUTINE TQL1(N,D,E,Ierr)
     b = 0.0E0
     E(N) = 0.0E0
     !
-    DO l = 1 , N
+    DO l = 1, N
       j = 0
       h = ABS(D(l)) + ABS(E(l))
       IF ( b<h ) b = h
       !     .......... LOOK FOR SMALL SUB-DIAGONAL ELEMENT ..........
-      DO m = l , N
+      DO m = l, N
         IF ( b+ABS(E(m))==b ) EXIT
         !     .......... E(N) IS ALWAYS ZERO, SO THERE IS NO EXIT
         !                THROUGH THE BOTTOM OF THE LOOP ..........
@@ -110,7 +110,7 @@ SUBROUTINE TQL1(N,D,E,Ierr)
           h = g - D(l)
           IF ( l2<=N ) THEN
             !
-            DO i = l2 , N
+            DO i = l2, N
               D(i) = D(i) - h
             ENDDO
           ENDIF
@@ -124,7 +124,7 @@ SUBROUTINE TQL1(N,D,E,Ierr)
           s = 0.0E0
           mml = m - l
           !     .......... FOR I=M-1 STEP -1 UNTIL L DO -- ..........
-          DO ii = 1 , mml
+          DO ii = 1, mml
             c3 = c2
             c2 = c
             s2 = s
@@ -159,7 +159,7 @@ SUBROUTINE TQL1(N,D,E,Ierr)
       !     .......... ORDER EIGENVALUES ..........
       IF ( l/=1 ) THEN
         !     .......... FOR I=L STEP -1 UNTIL 2 DO -- ..........
-        DO ii = 2 , l
+        DO ii = 2, l
           i = l + 2 - ii
           IF ( p>=D(i-1) ) GOTO 40
           D(i) = D(i-1)
@@ -175,4 +175,5 @@ SUBROUTINE TQL1(N,D,E,Ierr)
   !     .......... SET ERROR -- NO CONVERGENCE TO AN
   !                EIGENVALUE AFTER 30 ITERATIONS ..........
   100  Ierr = l
-  99999 END SUBROUTINE TQL1
+  99999 CONTINUE
+  END SUBROUTINE TQL1

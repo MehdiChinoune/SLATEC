@@ -171,12 +171,12 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   IMPLICIT NONE
   !*--DULSIA172
   !*** Start of declarations inserted by SPAG
-  REAL(8) :: A , Ae , B , eps , Re , Rnorm , W
-  INTEGER i , Info , it , Key , Krank , Ksure , Liw , Lw , M , m1 , m2 , &
-    m3 , m4 , m5 , Mda , Mdb , Mode , N , Nb , Np
+  REAL(8) :: A, Ae, B, eps, Re, Rnorm, W
+  INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, m1, m2, &
+    m3, m4, m5, Mda, Mdb, Mode, N, Nb, Np
   !*** End of declarations inserted by SPAG
   REAL(8) :: D1MACH
-  DIMENSION A(Mda,*) , B(Mdb,*) , Re(*) , Ae(*) , Rnorm(*) , W(*)
+  DIMENSION A(Mda,*), B(Mdb,*), Re(*), Ae(*), Rnorm(*), W(*)
   INTEGER Iwork(*)
   !
   !***FIRST EXECUTABLE STATEMENT  DULSIA
@@ -251,7 +251,7 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                   IF ( Key==1 ) THEN
                     !
                     IF ( Ae(1)<0.0D0 ) GOTO 100
-                    DO i = 1 , M
+                    DO i = 1, M
                       IF ( Re(i)<0.0D0 ) GOTO 10
                       IF ( Re(i)>1.0D0 ) GOTO 20
                       IF ( Re(i)<eps ) Re(i) = eps
@@ -264,7 +264,7 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                     IF ( Re(1)<0.0D0 ) GOTO 10
                     IF ( Re(1)>1.0D0 ) GOTO 20
                     IF ( Re(1)<eps ) Re(1) = eps
-                    DO i = 1 , M
+                    DO i = 1, M
                       W(m4-1+i) = Re(1)
                       IF ( Ae(i)<0.0D0 ) GOTO 100
                     ENDDO
@@ -272,7 +272,7 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                       W(m1),W(m2),W(m3),Iwork(m1),Iwork(m2))
                   ELSEIF ( Key==3 ) THEN
                     !
-                    DO i = 1 , M
+                    DO i = 1, M
                       IF ( Re(i)<0.0D0 ) GOTO 10
                       IF ( Re(i)>1.0D0 ) GOTO 20
                       IF ( Re(i)<eps ) Re(i) = eps
@@ -286,7 +286,7 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                     IF ( Re(1)>1.0D0 ) GOTO 20
                     IF ( Re(1)<eps ) Re(1) = eps
                     IF ( Ae(1)<0.0D0 ) GOTO 100
-                    DO i = 1 , M
+                    DO i = 1, M
                       W(m4-1+i) = Re(1)
                       W(m5-1+i) = Ae(1)
                     ENDDO
@@ -344,4 +344,5 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
 ENDIF
 100  CALL XERMSG('SLATEC','DULSIA','AE(I) .LT. 0',2,1)
 RETURN
-99999 END SUBROUTINE DULSIA
+  99999 CONTINUE
+  END SUBROUTINE DULSIA

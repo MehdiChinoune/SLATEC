@@ -108,12 +108,12 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  TINVIT
   !
-  INTEGER i , j , M , N , p , q , r , s , ii , ip , jj , Nm , its , tag , &
-    Ierr , group
+  INTEGER i, j, M, N, p, q, r, s, ii, ip, jj, Nm, its, tag, &
+    Ierr, group
   INTEGER Ind(*)
-  REAL D(*) , E(*) , E2(*) , W(*) , Z(Nm,*)
-  REAL Rv1(*) , Rv2(*) , Rv3(*) , Rv4(*) , Rv6(*)
-  REAL u , v , uk , xu , x0 , x1 , eps2 , eps3 , eps4 , norm , order
+  REAL D(*), E(*), E2(*), W(*), Z(Nm,*)
+  REAL Rv1(*), Rv2(*), Rv3(*), Rv4(*), Rv6(*)
+  REAL u, v, uk, xu, x0, x1, eps2, eps3, eps4, norm, order
   !
   !***FIRST EXECUTABLE STATEMENT  TINVIT
   Ierr = 0
@@ -124,7 +124,7 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
   !     .......... ESTABLISH AND PROCESS NEXT SUBMATRIX ..........
   100  p = q + 1
   !
-  DO q = p , N
+  DO q = p, N
     IF ( q==N ) EXIT
     IF ( E2(q+1)==0.0E0 ) EXIT
   ENDDO
@@ -132,7 +132,7 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
   tag = tag + 1
   s = 0
   !
-  DO r = 1 , M
+  DO r = 1, M
     IF ( Ind(r)/=tag ) CYCLE
     its = 1
     x1 = W(r)
@@ -143,7 +143,7 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
         norm = ABS(D(p))
         ip = p + 1
         !
-        DO i = ip , q
+        DO i = ip, q
           norm = MAX(norm,ABS(D(i))+ABS(E(i)))
         ENDDO
         !     .......... EPS2 IS THE CRITERION FOR GROUPING,
@@ -179,7 +179,7 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
     !                INITIALIZATION OF VECTOR ..........
     v = 0.0E0
     !
-    DO i = p , q
+    DO i = p, q
       Rv6(i) = uk
       IF ( i/=p ) THEN
         IF ( ABS(E(i))<ABS(u) ) THEN
@@ -213,7 +213,7 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
     DO
       !     .......... BACK SUBSTITUTION
       !                FOR I=Q STEP -1 UNTIL P DO -- ..........
-      DO ii = p , q
+      DO ii = p, q
         i = p + q - ii
         Rv6(i) = (Rv6(i)-u*Rv2(i)-v*Rv3(i))/Rv1(i)
         v = u
@@ -224,17 +224,17 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
       IF ( group/=0 ) THEN
         j = r
         !
-        DO jj = 1 , group
+        DO jj = 1, group
           DO
             j = j - 1
             IF ( Ind(j)==tag ) THEN
               xu = 0.0E0
               !
-              DO i = p , q
+              DO i = p, q
                 xu = xu + Rv6(i)*Z(i,j)
               ENDDO
               !
-              DO i = p , q
+              DO i = p, q
                 Rv6(i) = Rv6(i) - xu*Z(i,j)
               ENDDO
               EXIT
@@ -246,7 +246,7 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
       !
       norm = 0.0E0
       !
-      DO i = p , q
+      DO i = p, q
         norm = norm + ABS(Rv6(i))
       ENDDO
       !
@@ -255,7 +255,7 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
         !                1 AND EXPAND TO FULL ORDER ..........
         u = 0.0E0
         !
-        DO i = p , q
+        DO i = p, q
           u = u + Rv6(i)**2
         ENDDO
         !
@@ -271,7 +271,7 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
         IF ( norm/=0.0E0 ) THEN
           xu = eps4/norm
           !
-          DO i = p , q
+          DO i = p, q
             Rv6(i) = Rv6(i)*xu
           ENDDO
         ELSE
@@ -281,7 +281,7 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
         ENDIF
         !     .......... ELIMINATION OPERATIONS ON NEXT VECTOR
         !                ITERATE ..........
-        DO i = ip , q
+        DO i = ip, q
           u = Rv6(i)
           !     .......... IF RV1(I-1) .EQ. E(I), A ROW INTERCHANGE
           !                WAS PERFORMED EARLIER IN THE
@@ -297,11 +297,11 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
       ENDIF
     ENDDO
     !
-    150    DO i = 1 , N
+    150    DO i = 1, N
     Z(i,r) = 0.0E0
   ENDDO
   !
-  DO i = p , q
+  DO i = p, q
     Z(i,r) = Rv6(i)*xu
   ENDDO
   !
@@ -309,4 +309,5 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
 ENDDO
 !
 IF ( q<N ) GOTO 100
-99999 END SUBROUTINE TINVIT
+  99999 CONTINUE
+  END SUBROUTINE TINVIT

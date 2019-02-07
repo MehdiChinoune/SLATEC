@@ -39,27 +39,27 @@ SUBROUTINE SDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
   !           cosmetic changes to prologue.  (FNF)
   !***END PROLOGUE  SDATRP
   !
-  INTEGER Neq , Kold
-  REAL X , Xout , Yout(*) , Ypout(*) , Phi(Neq,*) , Psi(*)
+  INTEGER Neq, Kold
+  REAL X, Xout, Yout(*), Ypout(*), Phi(Neq,*), Psi(*)
   !
-  INTEGER i , j , koldp1
-  REAL c , d , gamma , temp1
+  INTEGER i, j, koldp1
+  REAL c, d, gamma, temp1
   !
   !***FIRST EXECUTABLE STATEMENT  SDATRP
   koldp1 = Kold + 1
   temp1 = Xout - X
-  DO i = 1 , Neq
+  DO i = 1, Neq
     Yout(i) = Phi(i,1)
     Ypout(i) = 0.0E0
   ENDDO
   c = 1.0E0
   d = 0.0E0
   gamma = temp1/Psi(1)
-  DO j = 2 , koldp1
+  DO j = 2, koldp1
     d = d*gamma + c/Psi(j-1)
     c = c*gamma
     gamma = (temp1+Psi(j-1))/Psi(j)
-    DO i = 1 , Neq
+    DO i = 1, Neq
       Yout(i) = Yout(i) + c*Phi(i,j)
       Ypout(i) = Ypout(i) + d*Phi(i,j)
     ENDDO

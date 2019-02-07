@@ -4,8 +4,8 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   IMPLICIT NONE
   !*--PROC5
   !*** Start of declarations inserted by SPAG
-  REAL Aa , Bd , Bm1 , Bm2 , rt
-  INTEGER ia , ibr , id , j , k , M , m1 , m2 , mm , Na , Nd , Nm1 , Nm2
+  REAL Aa, Bd, Bm1, Bm2, rt
+  INTEGER ia, ibr, id, j, k, M, m1, m2, mm, Na, Nd, Nm1, Nm2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PROC
   !***SUBSIDIARY
@@ -36,11 +36,11 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  PROC
   !
-  DIMENSION A(*) , B(*) , C(*) , X(*) , Y(*) , D(*) , W(*) , Bd(*) , Bm1(*)&
-    , Bm2(*) , Aa(*) , U(*)
-  COMPLEX X , Y , A , B , C , D , W , U , den
+  DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), W(*), Bd(*), Bm1(*)&
+    , Bm2(*), Aa(*), U(*)
+  COMPLEX X, Y, A, B, C, D, W, U, den
   !***FIRST EXECUTABLE STATEMENT  PROC
-  DO j = 1 , M
+  DO j = 1, M
     W(j) = X(j)
     Y(j) = W(j)
   ENDDO
@@ -50,68 +50,74 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   m1 = Nm1
   m2 = Nm2
   ia = Na
-  100  DO
-  IF ( ia>0 ) THEN
-    rt = Aa(ia)
-    IF ( Nd==0 ) rt = -rt
-    ia = ia - 1
-    !
-    ! SCALAR MULTIPLICATION
-    !
-    DO j = 1 , M
-      Y(j) = rt*W(j)
-    ENDDO
-  ENDIF
-  IF ( id<=0 ) GOTO 99999
-  rt = Bd(id)
-  id = id - 1
-  IF ( id==0 ) ibr = 1
-  !
-  ! BEGIN SOLUTION TO SYSTEM
-  !
-  D(M) = A(M)/(B(M)-rt)
-  W(M) = Y(M)/(B(M)-rt)
-  DO j = 2 , mm
-    k = M - j
-    den = B(k+1) - rt - C(k+1)*D(k+2)
-    D(k+1) = A(k+1)/den
-    W(k+1) = (Y(k+1)-C(k+1)*W(k+2))/den
-  ENDDO
-  den = B(1) - rt - C(1)*D(2)
-  W(1) = (1.,0.)
-  IF ( ABS(den)/=0 ) W(1) = (Y(1)-C(1)*W(2))/den
-  DO j = 2 , M
-    W(j) = W(j) - D(j)*W(j-1)
-  ENDDO
-  IF ( Na<=0 ) THEN
-    IF ( m1<=0 ) THEN
-      IF ( m2>0 ) GOTO 400
-      EXIT
-    ELSE
-      IF ( m2<=0 ) GOTO 300
-      IF ( ABS(Bm1(m1))>ABS(Bm2(m2)) ) GOTO 300
-      GOTO 400
+  100 CONTINUE
+  DO
+    IF ( ia>0 ) THEN
+      rt = Aa(ia)
+      IF ( Nd==0 ) rt = -rt
+      ia = ia - 1
+      !
+      ! SCALAR MULTIPLICATION
+      !
+      DO j = 1, M
+        Y(j) = rt*W(j)
+      ENDDO
     ENDIF
+    IF ( id<=0 ) GOTO 99999
+    rt = Bd(id)
+    id = id - 1
+    IF ( id==0 ) ibr = 1
+    !
+    ! BEGIN SOLUTION TO SYSTEM
+    !
+    D(M) = A(M)/(B(M)-rt)
+    W(M) = Y(M)/(B(M)-rt)
+    DO j = 2, mm
+      k = M - j
+      den = B(k+1) - rt - C(k+1)*D(k+2)
+      D(k+1) = A(k+1)/den
+      W(k+1) = (Y(k+1)-C(k+1)*W(k+2))/den
+    ENDDO
+    den = B(1) - rt - C(1)*D(2)
+    W(1) = (1.,0.)
+    IF ( ABS(den)/=0 ) W(1) = (Y(1)-C(1)*W(2))/den
+    DO j = 2, M
+      W(j) = W(j) - D(j)*W(j-1)
+    ENDDO
+    IF ( Na<=0 ) THEN
+      IF ( m1<=0 ) THEN
+        IF ( m2>0 ) GOTO 400
+        EXIT
+      ELSE
+        IF ( m2<=0 ) GOTO 300
+        IF ( ABS(Bm1(m1))>ABS(Bm2(m2)) ) GOTO 300
+        GOTO 400
+      ENDIF
+    ENDIF
+  ENDDO
+  200 CONTINUE
+  DO j = 1, M
+    Y(j) = W(j)
+  ENDDO
+  ibr = 1
+  GOTO 100
+  300 CONTINUE
+  IF ( ibr<=0 ) THEN
+    IF ( ABS(Bm1(m1)-Bd(id))<ABS(Bm1(m1)-rt) ) GOTO 200
   ENDIF
-ENDDO
-200  DO j = 1 , M
-Y(j) = W(j)
-ENDDO
-ibr = 1
-GOTO 100
-300  IF ( ibr<=0 ) THEN
-IF ( ABS(Bm1(m1)-Bd(id))<ABS(Bm1(m1)-rt) ) GOTO 200
-ENDIF
-rt = rt - Bm1(m1)
-m1 = m1 - 1
-GOTO 500
-400  IF ( ibr<=0 ) THEN
-IF ( ABS(Bm2(m2)-Bd(id))<ABS(Bm2(m2)-rt) ) GOTO 200
-ENDIF
-rt = rt - Bm2(m2)
-m2 = m2 - 1
-500  DO j = 1 , M
-Y(j) = Y(j) + rt*W(j)
-ENDDO
-GOTO 100
-99999 END SUBROUTINE PROC
+  rt = rt - Bm1(m1)
+  m1 = m1 - 1
+  GOTO 500
+  400 CONTINUE
+  IF ( ibr<=0 ) THEN
+    IF ( ABS(Bm2(m2)-Bd(id))<ABS(Bm2(m2)-rt) ) GOTO 200
+  ENDIF
+  rt = rt - Bm2(m2)
+  m2 = m2 - 1
+  500 CONTINUE
+  DO j = 1, M
+    Y(j) = Y(j) + rt*W(j)
+  ENDDO
+  GOTO 100
+  99999 CONTINUE
+  END SUBROUTINE PROC

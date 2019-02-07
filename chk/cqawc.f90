@@ -4,7 +4,7 @@ SUBROUTINE CQAWC(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--CQAWC5
   !*** Start of declarations inserted by SPAG
-  INTEGER ierv , Lun
+  INTEGER ierv, Lun
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CQAWC
   !***PURPOSE  Quick check for QAWC.
@@ -22,11 +22,11 @@ SUBROUTINE CQAWC(Lun,Kprint,Ipass)
   !
   ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
   !
-  REAL a , abserr , b , R1MACH , epmach , epsabs , epsrel , error , exact0 , &
-    exact1 , F0C , F1C , c , result , uflow , work
-  INTEGER ier , ip , Ipass , iwork , Kprint , last , lenw , limit , neval
-  DIMENSION work(800) , iwork(200) , ierv(2)
-  EXTERNAL F0C , F1C
+  REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, exact0, &
+    exact1, F0C, F1C, c, result, uflow, work
+  INTEGER ier, ip, Ipass, iwork, Kprint, last, lenw, limit, neval
+  DIMENSION work(800), iwork(200), ierv(2)
+  EXTERNAL F0C, F1C
   DATA exact0/ - 0.6284617285065624E+03/
   DATA exact1/0.1855802E+01/
   !***FIRST EXECUTABLE STATEMENT  CQAWC

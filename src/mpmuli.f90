@@ -27,7 +27,7 @@ SUBROUTINE MPMULI(X,Iy,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  MPMULI
-  INTEGER X(*) , Z(*)
+  INTEGER X(*), Z(*)
   !***FIRST EXECUTABLE STATEMENT  MPMULI
   CALL MPMUL2(X,Iy,Z,0)
 END SUBROUTINE MPMULI

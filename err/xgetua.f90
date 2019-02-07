@@ -4,7 +4,7 @@ SUBROUTINE XGETUA(Iunita,N)
   IMPLICIT NONE
   !*--XGETUA5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , index , Iunita , J4SAVE , N
+  INTEGER i, index, Iunita, J4SAVE, N
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XGETUA
   !***PURPOSE  Return unit number(s) to which error messages are being
@@ -48,7 +48,7 @@ SUBROUTINE XGETUA(Iunita,N)
   DIMENSION Iunita(5)
   !***FIRST EXECUTABLE STATEMENT  XGETUA
   N = J4SAVE(5,0,.FALSE.)
-  DO i = 1 , N
+  DO i = 1, N
     index = i + 4
     IF ( i==1 ) index = 3
     Iunita(i) = J4SAVE(index,0,.FALSE.)

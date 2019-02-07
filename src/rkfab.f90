@@ -5,19 +5,19 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   IMPLICIT NONE
   !*--RKFAB6
   !*** Start of declarations inserted by SPAG
-  REAL AE , BVDER , C , G , P , PWCnd , PX , RE , S , Stowa , TND , TOL , &
-    U , V , W , Work , X , XBEg , XENd , XOP
-  REAL XOT , Xpts , XSAv , xxop , Yhp , Z
-  INTEGER ICOco , idid , Iflag , IGOfx , INDpvt , INFo , INHomo , INTeg , &
-    Ip , ipar , ISTkop , IVP , Iwork , j , jflag , jon , K1 , K10 , &
-    K11 , K2
-  INTEGER K3 , K4 , K5 , K6 , K7 , K8 , K9 , KKKint , KKKzpw , KNSwot , &
-    kod , KOP , kopp , L1 , L2 , LLLint , LOTjp , MNSwot , Mxnon , &
+  REAL AE, BVDER, C, G, P, PWCnd, PX, RE, S, Stowa, TND, TOL, &
+    U, V, W, Work, X, XBEg, XENd, XOP
+  REAL XOT, Xpts, XSAv, xxop, Yhp, Z
+  INTEGER ICOco, idid, Iflag, IGOfx, INDpvt, INFo, INHomo, INTeg, &
+    Ip, ipar, ISTkop, IVP, Iwork, j, jflag, jon, K1, K10, &
+    K11, K2
+  INTEGER K3, K4, K5, K6, K7, K8, K9, KKKint, KKKzpw, KNSwot, &
+    kod, KOP, kopp, L1, L2, LLLint, LOTjp, MNSwot, Mxnon, &
     MXNond
-  INTEGER Ncomp , NCOmpd , NDIsk , NEEdiw , NEEdw , NEQ , NEQivp , Nfc , &
-    Nfcc , NFCcd , NFCd , nfcp1 , NIC , Niv , non , NOPg , NPS , &
-    NSWot , NTApe , Ntp
-  INTEGER NTPd , NUMort , Nxpts , NXPtsd
+  INTEGER Ncomp, NCOmpd, NDIsk, NEEdiw, NEEdw, NEQ, NEQivp, Nfc, &
+    Nfcc, NFCcd, NFCd, nfcp1, NIC, Niv, non, NOPg, NPS, &
+    NSWot, NTApe, Ntp
+  INTEGER NTPd, NUMort, Nxpts, NXPtsd
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RKFAB
   !***SUBSIDIARY
@@ -49,20 +49,20 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  RKFAB
   !
-  DIMENSION P(Ntp,*) , Ip(Nfcc,*) , U(Ncomp,Nfc,*) , V(Ncomp,*) , W(Nfcc,*)&
-    , Z(*) , Yhp(Ncomp,*) , Xpts(*) , S(*) , Stowa(*) , Work(*) , &
-    Iwork(*) , G(*)
+  DIMENSION P(Ntp,*), Ip(Nfcc,*), U(Ncomp,Nfc,*), V(Ncomp,*), W(Nfcc,*)&
+    , Z(*), Yhp(Ncomp,*), Xpts(*), S(*), Stowa(*), Work(*), &
+    Iwork(*), G(*)
   !
   ! **********************************************************************
   !
-  COMMON /ML8SZ / C , XSAv , IGOfx , INHomo , IVP , NCOmpd , NFCd
-  COMMON /ML15TO/ PX , PWCnd , TND , X , XBEg , XENd , XOT , XOP , INFo(15)&
-    , ISTkop , KNSwot , KOP , LOTjp , MNSwot , NSWot
-  COMMON /ML18JR/ AE , RE , TOL , NXPtsd , NIC , NOPg , MXNond , NDIsk , &
-    NTApe , NEQ , INDpvt , INTeg , NPS , NTPd , NEQivp , &
-    NUMort , NFCcd , ICOco
-  COMMON /ML17BW/ KKKzpw , NEEdw , NEEdiw , K1 , K2 , K3 , K4 , K5 , K6 , &
-    K7 , K8 , K9 , K10 , K11 , L1 , L2 , KKKint , LLLint
+  COMMON /ML8SZ / C, XSAv, IGOfx, INHomo, IVP, NCOmpd, NFCd
+  COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
+    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
+  COMMON /ML18JR/ AE, RE, TOL, NXPtsd, NIC, NOPg, MXNond, NDIsk, &
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTPd, NEQivp, &
+    NUMort, NFCcd, ICOco
+  COMMON /ML17BW/ KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, &
+    K7, K8, K9, K10, K11, L1, L2, KKKint, LLLint
   !
   EXTERNAL BVDER
   !
@@ -89,7 +89,7 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   ! *****BEGINNING OF INTEGRATION LOOP AT OUTPUT POINTS.******************
   ! **********************************************************************
   !
-  DO kopp = 2 , Nxpts
+  DO kopp = 2, Nxpts
     KOP = kopp
     !
     50     XOP = Xpts(KOP)
@@ -161,7 +161,7 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
         IF ( INHomo==1.AND.NPS==0 ) C = S(nfcp1)*C
         IF ( NDIsk/=0 ) THEN
           IF ( INHomo==1 ) WRITE (NTApe) (W(j,1),j=1,Nfcc)
-          WRITE (NTApe) (Ip(j,1),j=1,Nfcc) , (P(j,1),j=1,Ntp)
+          WRITE (NTApe) (Ip(j,1),j=1,Nfcc), (P(j,1),j=1,Ntp)
         ENDIF
         INFo(1) = 0
         jon = jon + 1

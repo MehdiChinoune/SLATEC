@@ -27,22 +27,22 @@ SUBROUTINE RSCO(Rsav,Isav)
   !
   !-----------------------------------------------------------------------
   ! THIS ROUTINE RESTORES FROM RSAV AND ISAV THE CONTENTS OF COMMON
-  ! BLOCK DEBDF1  , WHICH IS USED INTERNALLY IN THE DEBDF
+  ! BLOCK DEBDF1 , WHICH IS USED INTERNALLY IN THE DEBDF
   ! PACKAGE.  THIS PRESUMES THAT RSAV AND ISAV WERE LOADED BY MEANS
   ! OF SUBROUTINE SVCO OR THE EQUIVALENT.
   !-----------------------------------------------------------------------
-  INTEGER Isav , i , ILS , lenils , lenrls
-  REAL Rsav , RLS
-  DIMENSION Rsav(*) , Isav(*)
-  COMMON /DEBDF1/ RLS(218) , ILS(33)
-  SAVE lenrls , lenils
-  DATA lenrls/218/ , lenils/33/
+  INTEGER Isav, i, ILS, lenils, lenrls
+  REAL Rsav, RLS
+  DIMENSION Rsav(*), Isav(*)
+  COMMON /DEBDF1/ RLS(218), ILS(33)
+  SAVE lenrls, lenils
+  DATA lenrls/218/, lenils/33/
   !
   !***FIRST EXECUTABLE STATEMENT  RSCO
-  DO i = 1 , lenrls
+  DO i = 1, lenrls
     RLS(i) = Rsav(i)
   ENDDO
-  DO i = 1 , lenils
+  DO i = 1, lenils
     ILS(i) = Isav(i)
   ENDDO
   !----------------------- END OF SUBROUTINE RSCO -----------------------

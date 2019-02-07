@@ -27,12 +27,12 @@ REAL(8) FUNCTION DHVNRM(V,Ncomp)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DHVNRM
   !
-  INTEGER k , Ncomp
+  INTEGER k, Ncomp
   REAL(8) :: V
   DIMENSION V(*)
   !***FIRST EXECUTABLE STATEMENT  DHVNRM
   DHVNRM = 0.0D0
-  DO k = 1 , Ncomp
+  DO k = 1, Ncomp
     DHVNRM = MAX(DHVNRM,ABS(V(k)))
   ENDDO
 END FUNCTION DHVNRM

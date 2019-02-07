@@ -4,7 +4,7 @@ SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
   IMPLICIT NONE
   !*--ICOPY5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , iix , iiy , Incx , Incy , m , mp1 , N , ns
+  INTEGER i, iix, iiy, Incx, Incy, m, mp1, N, ns
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ICOPY
   !***PURPOSE  Copy a vector.
@@ -42,7 +42,7 @@ SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
   !***REVISION HISTORY  (YYMMDD)
   !   930201  DATE WRITTEN
   !***END PROLOGUE  ICOPY
-  INTEGER Ix(*) , Iy(*)
+  INTEGER Ix(*), Iy(*)
   !***FIRST EXECUTABLE STATEMENT  ICOPY
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy ) THEN
@@ -55,7 +55,7 @@ SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
       !
       m = MOD(N,7)
       IF ( m/=0 ) THEN
-        DO i = 1 , m
+        DO i = 1, m
           Iy(i) = Ix(i)
         ENDDO
         IF ( N<7 ) RETURN
@@ -66,7 +66,7 @@ SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
       !     Code for equal, positive, non-unit increments.
       !
       ns = N*Incx
-      DO i = 1 , ns , Incx
+      DO i = 1, ns, Incx
         Iy(i) = Ix(i)
       ENDDO
       GOTO 99999
@@ -79,14 +79,14 @@ SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
   iiy = 1
   IF ( Incx<0 ) iix = (-N+1)*Incx + 1
   IF ( Incy<0 ) iiy = (-N+1)*Incy + 1
-  DO i = 1 , N
+  DO i = 1, N
     Iy(iiy) = Ix(iix)
     iix = iix + Incx
     iiy = iiy + Incy
   ENDDO
   RETURN
   100  mp1 = m + 1
-  DO i = mp1 , N , 7
+  DO i = mp1, N, 7
     Iy(i) = Ix(i)
     Iy(i+1) = Ix(i+1)
     Iy(i+2) = Ix(i+2)
@@ -96,4 +96,5 @@ SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
     Iy(i+6) = Ix(i+6)
   ENDDO
   RETURN
-  99999 END SUBROUTINE ICOPY
+  99999 CONTINUE
+  END SUBROUTINE ICOPY

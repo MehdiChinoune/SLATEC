@@ -272,23 +272,23 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  SCGN
   !     .. Scalar Arguments ..
-  REAL Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
+  REAL Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL A(N) , Atdz(N) , Atp(N) , Atz(N) , B(N) , Dz(N) , P(N) , R(N) , &
-    Rwork(*) , X(N) , Z(N)
-  INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
+  REAL A(N), Atdz(N), Atp(N), Atz(N), B(N), Dz(N), P(N), R(N), &
+    Rwork(*), X(N), Z(N)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC , MSOLVE , MTTVEC
+  EXTERNAL MATVEC, MSOLVE, MTTVEC
   !     .. Local Scalars ..
-  REAL ak , akden , bk , bkden , bknum , bnrm , solnrm , tolmin
-  INTEGER i , k
+  REAL ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
+  INTEGER i, k
   !     .. External Functions ..
-  REAL R1MACH , SDOT
+  REAL R1MACH, SDOT
   INTEGER ISSCGN
-  EXTERNAL R1MACH , SDOT , ISSCGN
+  EXTERNAL R1MACH, SDOT, ISSCGN
   !     .. External Subroutines ..
-  EXTERNAL SAXPY , SCOPY
+  EXTERNAL SAXPY, SCOPY
   !***FIRST EXECUTABLE STATEMENT  SCGN
   !
   !         Check user input.
@@ -307,7 +307,7 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   !         Calculate initial residual and pseudo-residual, and check
   !         stopping criterion.
   CALL MATVEC(N,X,R,Nelt,Ia,Ja,A,Isym)
-  DO i = 1 , N
+  DO i = 1, N
     R(i) = B(i) - R(i)
   ENDDO
   CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
@@ -320,7 +320,7 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
     !
     !         ***** iteration loop *****
     !
-    DO k = 1 , Itmax
+    DO k = 1, Itmax
       Iter = k
       !
       !         Calculate coefficient BK and direction vector P.
@@ -333,7 +333,7 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
         CALL SCOPY(N,Z,1,P,1)
       ELSE
         bk = bknum/bkden
-        DO i = 1 , N
+        DO i = 1, N
           P(i) = Z(i) + bk*P(i)
         ENDDO
       ENDIF
@@ -369,4 +369,5 @@ SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   ENDIF
   !
   !------------- LAST LINE OF SCGN FOLLOWS ----------------------------
-  99999 END SUBROUTINE SCGN
+  99999 CONTINUE
+  END SUBROUTINE SCGN

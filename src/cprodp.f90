@@ -4,8 +4,8 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   IMPLICIT NONE
   !*--CPRODP5
   !*** Start of declarations inserted by SPAG
-  REAL A , Aa , B , Bm1 , Bm2 , C , rt , X , Yy
-  INTEGER ia , id , iflg , j , k , M , m1 , m2 , mm , mm2 , Na , Nd , Nm1 , &
+  REAL A, Aa, B, Bm1, Bm2, C, rt, X, Yy
+  INTEGER ia, id, iflg, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, &
     Nm2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CPRODP
@@ -39,11 +39,11 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CPRODP
   !
-  COMPLEX Y , D , U , v , den , bh , ym , am , y1 , y2 , yh , Bd , crt
-  DIMENSION A(*) , B(*) , C(*) , X(*) , Y(*) , D(*) , U(*) , Bd(*) , Bm1(*)&
-    , Bm2(*) , Aa(*) , Yy(*)
+  COMPLEX Y, D, U, v, den, bh, ym, am, y1, y2, yh, Bd, crt
+  DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), U(*), Bd(*), Bm1(*)&
+    , Bm2(*), Aa(*), Yy(*)
   !***FIRST EXECUTABLE STATEMENT  CPRODP
-  DO j = 1 , M
+  DO j = 1, M
     Y(j) = CMPLX(X(j),0.)
   ENDDO
   mm = M - 1
@@ -52,7 +52,8 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   m1 = Nm1
   m2 = Nm2
   ia = Na
-  100  iflg = 0
+  100 CONTINUE
+  IFlg = 0
   IF ( id>0 ) THEN
     crt = Bd(id)
     id = id - 1
@@ -68,7 +69,7 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
     Y(1) = Y(1)/den
     v = CMPLX(C(M),0.)
     IF ( mm2>=2 ) THEN
-      DO j = 2 , mm2
+      DO j = 2, mm2
         den = B(j) - crt - A(j)*D(j-1)
         D(j) = C(j)/den
         U(j) = -A(j)*U(j-1)/den
@@ -91,7 +92,7 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
       Y(M) = (1.,0.)
     ENDIF
     Y(M-1) = Y(M-1) - D(M-1)*Y(M)
-    DO j = 2 , mm
+    DO j = 2, mm
       k = M - j
       Y(k) = Y(k) - D(k)*Y(k+1) - U(k)*Y(M)
     ENDDO
@@ -105,12 +106,12 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
         !
         ! SCALAR MULTIPLICATION
         !
-        DO j = 1 , M
+        DO j = 1, M
           Y(j) = rt*Y(j)
         ENDDO
       ENDIF
       IF ( iflg>0 ) GOTO 100
-      DO j = 1 , M
+      DO j = 1, M
         Yy(j) = REAL(Y(j))
       ENDDO
       GOTO 99999
@@ -134,7 +135,7 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   yh = Y(1)
   y1 = (B(1)-rt)*Y(1) + C(1)*Y(2) + A(1)*Y(M)
   IF ( mm>=2 ) THEN
-    DO j = 2 , mm
+    DO j = 2, mm
       y2 = A(j)*Y(j-1) + (B(j)-rt)*Y(j) + C(j)*Y(j+1)
       Y(j-1) = y1
       y1 = y2
@@ -144,4 +145,5 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   Y(M-1) = y1
   iflg = 1
   GOTO 100
-  99999 END SUBROUTINE CPRODP
+  99999 CONTINUE
+  END SUBROUTINE CPRODP

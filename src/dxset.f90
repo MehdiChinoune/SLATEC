@@ -4,10 +4,10 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   IMPLICIT NONE
   !*--DXSET5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , I1MACH , ic , Ierror , ii , imaxex , iminex , iradx , it , j , &
-    k , kk , lg102x , lgtemp , log102 , log2r , lx , nb , NBItsf , &
+  INTEGER i, I1MACH, ic, Ierror, ii, imaxex, iminex, iradx, it, j, &
+    k, kk, lg102x, lgtemp, log102, log2r, lx, nb, NBItsf, &
     nbitsx
-  INTEGER np1 , nrdplc
+  INTEGER np1, nrdplc
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXSET
   !***PURPOSE  To provide double-precision floating-point arithmetic
@@ -194,27 +194,27 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXSET
-  INTEGER Irad , Nradpl , Nbits
-  REAL(8) :: Dzero , dzerox
+  INTEGER Irad, Nradpl, Nbits
+  REAL(8) :: Dzero, dzerox
   COMMON /DXBLK1/ NBItsf
   SAVE /DXBLK1/
-  REAL(8) :: RADix , RADixl , RAD2l , DLG10r
-  INTEGER L , L2 , KMAx
-  COMMON /DXBLK2/ RADix , RADixl , RAD2l , DLG10r , L , L2 , KMAx
+  REAL(8) :: RADix, RADixl, RAD2l, DLG10r
+  INTEGER L, L2, KMAx
+  COMMON /DXBLK2/ RADix, RADixl, RAD2l, DLG10r, L, L2, KMAx
   SAVE /DXBLK2/
-  INTEGER NLG102 , MLG102 , LG102
-  COMMON /DXBLK3/ NLG102 , MLG102 , LG102(21)
+  INTEGER NLG102, MLG102, LG102
+  COMMON /DXBLK3/ NLG102, MLG102, LG102(21)
   SAVE /DXBLK3/
   INTEGER iflag
   SAVE iflag
   !
-  DIMENSION log102(20) , lgtemp(20)
+  DIMENSION log102(20), lgtemp(20)
   SAVE log102
   !
   !   LOG102 CONTAINS THE FIRST 60 DIGITS OF LOG10(2) FOR USE IN
   ! CONVERSION OF EXTENDED-RANGE NUMBERS TO BASE 10 .
-  DATA log102/301 , 029 , 995 , 663 , 981 , 195 , 213 , 738 , 894 , 724 , &
-    493 , 026 , 768 , 189 , 881 , 462 , 108 , 541 , 310 , 428/
+  DATA log102/301, 029, 995, 663, 981, 195, 213, 738, 894, 724, &
+    493, 026, 768, 189, 881, 462, 108, 541, 310, 428/
   !
   ! FOLLOWING CODING PREVENTS DXSET FROM BEING EXECUTED MORE THAN ONCE.
   ! THIS IS IMPORTANT BECAUSE SOME SUBROUTINES (SUCH AS DXNRMP AND
@@ -291,7 +291,7 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
         ! THE INTEGER PART AND LGTEMP CONTAINS THE FRACTIONAL PART
         ! OF LOG10(IRADX) IN RADIX 1000.
         ic = 0
-        DO ii = 1 , 20
+        DO ii = 1, 20
           i = 21 - ii
           it = log2r*log102(i) + ic
           ic = it/1000
@@ -302,11 +302,11 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
         ! LOG10(IRADX) IN RADIX MLG102. THE RADIX POINT IS
         ! BETWEEN LG102(1) AND LG102(2).
         LG102(1) = ic
-        DO i = 2 , np1
+        DO i = 2, np1
           lg102x = 0
-          DO j = 1 , nb
+          DO j = 1, nb
             ic = 0
-            DO kk = 1 , 20
+            DO kk = 1, 20
               k = 21 - kk
               it = 2*lgtemp(k) + ic
               ic = it/1000
@@ -344,4 +344,5 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   CALL XERMSG('SLATEC','DXSET','6*L .GT. KMAX',206,1)
   Ierror = 206
   RETURN
-  99999 END SUBROUTINE DXSET
+  99999 CONTINUE
+  END SUBROUTINE DXSET

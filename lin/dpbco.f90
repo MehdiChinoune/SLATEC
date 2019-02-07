@@ -19,9 +19,9 @@ SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !     matrix.
   !
   !     If  RCOND  is not needed, DPBFA is slightly faster.
-  !     To solve  A*X = B , follow DPBCO by DPBSL.
-  !     To compute  INVERSE(A)*C , follow DPBCO by DPBSL.
-  !     To compute  DETERMINANT(A) , follow DPBCO by DPBDI.
+  !     To solve  A*X = B, follow DPBCO by DPBSL.
+  !     To compute  INVERSE(A)*C, follow DPBCO by DPBSL.
+  !     To compute  DETERMINANT(A), follow DPBCO by DPBDI.
   !
   !     On Entry
   !
@@ -44,13 +44,13 @@ SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !
   !     On Return
   !
-  !        ABD     an upper triangular matrix  R , stored in band
+  !        ABD     an upper triangular matrix  R, stored in band
   !                form, so that  A = TRANS(R)*R .
-  !                If  INFO .NE. 0 , the factorization is not complete.
+  !                If  INFO .NE. 0, the factorization is not complete.
   !
   !        RCOND   DOUBLE PRECISION
   !                an estimate of the reciprocal condition of  A .
-  !                For the system  A*X = B , relative perturbations
+  !                For the system  A*X = B, relative perturbations
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -58,14 +58,14 @@ SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !                is true, then  A  may be singular to working
   !                precision.  In particular,  RCOND  is zero  if
   !                exact singularity is detected or the estimate
-  !                underflows.  If INFO .NE. 0 , RCOND is unchanged.
+  !                underflows.  If INFO .NE. 0, RCOND is unchanged.
   !
   !        Z       DOUBLE PRECISION(N)
   !                a work vector whose contents are usually unimportant.
   !                If  A  is singular to working precision, then  Z  is
   !                an approximate null vector in the sense that
   !                NORM(A*Z) = RCOND*NORM(A)*NORM(Z) .
-  !                If  INFO .NE. 0 , Z  is unchanged.
+  !                If  INFO .NE. 0, Z  is unchanged.
   !
   !        INFO    INTEGER
   !                = 0  for normal return.
@@ -86,7 +86,7 @@ SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !                10    CONTINUE
   !                20 CONTINUE
   !
-  !           This uses  M + 1  rows of  A , except for the  M by M
+  !           This uses  M + 1  rows of  A, except for the  M by M
   !           upper left triangle, which is ignored.
   !
   !     Example:  If the original matrix is
@@ -98,7 +98,7 @@ SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !            0  0 35 45 55 56
   !            0  0  0 46 56 66
   !
-  !     then  N = 6 , M = 2  and  ABD  should contain
+  !     then  N = 6, M = 2  and  ABD  should contain
   !
   !            *  * 13 24 35 46
   !            * 12 23 34 45 56
@@ -117,31 +117,31 @@ SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPBCO
-  INTEGER Lda , N , M , Info
-  REAL(8) :: Abd(Lda,*) , Z(*)
+  INTEGER Lda, N, M, Info
+  REAL(8) :: Abd(Lda,*), Z(*)
   REAL(8) :: Rcond
   !
-  REAL(8) :: DDOT , ek , t , wk , wkm
-  REAL(8) :: anorm , s , DASUM , sm , ynorm
-  INTEGER i , j , j2 , k , kb , kp1 , l , la , lb , lm , mu
+  REAL(8) :: DDOT, ek, t, wk, wkm
+  REAL(8) :: anorm, s, DASUM, sm, ynorm
+  INTEGER i, j, j2, k, kb, kp1, l, la, lb, lm, mu
   !
   !     FIND NORM OF A
   !
   !***FIRST EXECUTABLE STATEMENT  DPBCO
-  DO j = 1 , N
+  DO j = 1, N
     l = MIN(j,M+1)
     mu = MAX(M+2-j,1)
     Z(j) = DASUM(l,Abd(mu,j),1)
     k = j - l
     IF ( M>=mu ) THEN
-      DO i = mu , M
+      DO i = mu, M
         k = k + 1
         Z(k) = Z(k) + ABS(Abd(i,j))
       ENDDO
     ENDIF
   ENDDO
   anorm = 0.0D0
-  DO j = 1 , N
+  DO j = 1, N
     anorm = MAX(anorm,Z(j))
   ENDDO
   !
@@ -159,10 +159,10 @@ SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
     !        SOLVE TRANS(R)*W = E
     !
     ek = 1.0D0
-    DO j = 1 , N
+    DO j = 1, N
       Z(j) = 0.0D0
     ENDDO
-    DO k = 1 , N
+    DO k = 1, N
       IF ( Z(k)/=0.0D0 ) ek = SIGN(ek,-Z(k))
       IF ( ABS(ek-Z(k))>Abd(M+1,k) ) THEN
         s = Abd(M+1,k)/ABS(ek-Z(k))
@@ -179,7 +179,7 @@ SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
       j2 = MIN(k+M,N)
       i = M + 1
       IF ( kp1<=j2 ) THEN
-        DO j = kp1 , j2
+        DO j = kp1, j2
           i = i - 1
           sm = sm + ABS(Z(j)+wkm*Abd(i,j))
           Z(j) = Z(j) + wk*Abd(i,j)
@@ -189,7 +189,7 @@ SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
           t = wkm - wk
           wk = wkm
           i = M + 1
-          DO j = kp1 , j2
+          DO j = kp1, j2
             i = i - 1
             Z(j) = Z(j) + t*Abd(i,j)
           ENDDO
@@ -202,7 +202,7 @@ SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
     !
     !        SOLVE  R*Y = W
     !
-    DO kb = 1 , N
+    DO kb = 1, N
       k = N + 1 - kb
       IF ( ABS(Z(k))>Abd(M+1,k) ) THEN
         s = Abd(M+1,k)/ABS(Z(k))
@@ -222,7 +222,7 @@ SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
     !
     !        SOLVE TRANS(R)*V = Y
     !
-    DO k = 1 , N
+    DO k = 1, N
       lm = MIN(k-1,M)
       la = M + 1 - lm
       lb = k - lm
@@ -240,7 +240,7 @@ SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
     !
     !        SOLVE  R*Z = W
     !
-    DO kb = 1 , N
+    DO kb = 1, N
       k = N + 1 - kb
       IF ( ABS(Z(k))>Abd(M+1,k) ) THEN
         s = Abd(M+1,k)/ABS(Z(k))

@@ -23,23 +23,23 @@ SUBROUTINE SDPSC(Ksgn,N,Nq,Yh)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  SDPSC
-  INTEGER i , j , j1 , j2 , Ksgn , N , Nq
+  INTEGER i, j, j1, j2, Ksgn, N, Nq
   REAL Yh(N,*)
   !***FIRST EXECUTABLE STATEMENT  SDPSC
   IF ( Ksgn>0 ) THEN
-    DO j1 = 1 , Nq
-      DO j2 = j1 , Nq
+    DO j1 = 1, Nq
+      DO j2 = j1, Nq
         j = Nq - j2 + j1
-        DO i = 1 , N
+        DO i = 1, N
           Yh(i,j) = Yh(i,j) + Yh(i,j+1)
         ENDDO
       ENDDO
     ENDDO
   ELSE
-    DO j1 = 1 , Nq
-      DO j2 = j1 , Nq
+    DO j1 = 1, Nq
+      DO j2 = j1, Nq
         j = Nq - j2 + j1
-        DO i = 1 , N
+        DO i = 1, N
           Yh(i,j) = Yh(i,j) - Yh(i,j+1)
         ENDDO
       ENDDO

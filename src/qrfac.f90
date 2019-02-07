@@ -83,21 +83,21 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  QRFAC
-  INTEGER M , N , Lda , Lipvt
+  INTEGER M, N, Lda, Lipvt
   INTEGER Ipvt(*)
   LOGICAL Pivot
-  REAL A(Lda,*) , Sigma(*) , Acnorm(*) , Wa(*)
-  INTEGER i , j , jp1 , k , kmax , minmn
-  REAL ajnorm , epsmch , one , p05 , sum , temp , zero
-  REAL R1MACH , ENORM
-  SAVE one , p05 , zero
-  DATA one , p05 , zero/1.0E0 , 5.0E-2 , 0.0E0/
+  REAL A(Lda,*), Sigma(*), Acnorm(*), Wa(*)
+  INTEGER i, j, jp1, k, kmax, minmn
+  REAL ajnorm, epsmch, one, p05, sum, temp, zero
+  REAL R1MACH, ENORM
+  SAVE one, p05, zero
+  DATA one, p05, zero/1.0E0, 5.0E-2, 0.0E0/
   !***FIRST EXECUTABLE STATEMENT  QRFAC
   epsmch = R1MACH(4)
   !
   !     COMPUTE THE INITIAL COLUMN NORMS AND INITIALIZE SEVERAL ARRAYS.
   !
-  DO j = 1 , N
+  DO j = 1, N
     Acnorm(j) = ENORM(M,A(1,j))
     Sigma(j) = Acnorm(j)
     Wa(j) = Sigma(j)
@@ -107,17 +107,17 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !     REDUCE A TO R WITH HOUSEHOLDER TRANSFORMATIONS.
   !
   minmn = MIN(M,N)
-  DO j = 1 , minmn
+  DO j = 1, minmn
     IF ( Pivot ) THEN
       !
       !        BRING THE COLUMN OF LARGEST NORM INTO THE PIVOT POSITION.
       !
       kmax = j
-      DO k = j , N
+      DO k = j, N
         IF ( Sigma(k)>Sigma(kmax) ) kmax = k
       ENDDO
       IF ( kmax/=j ) THEN
-        DO i = 1 , M
+        DO i = 1, M
           temp = A(i,j)
           A(i,j) = A(i,kmax)
           A(i,kmax) = temp
@@ -136,7 +136,7 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
     ajnorm = ENORM(M-j+1,A(j,j))
     IF ( ajnorm/=zero ) THEN
       IF ( A(j,j)<zero ) ajnorm = -ajnorm
-      DO i = j , M
+      DO i = j, M
         A(i,j) = A(i,j)/ajnorm
       ENDDO
       A(j,j) = A(j,j) + one
@@ -146,13 +146,13 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
       !
       jp1 = j + 1
       IF ( N>=jp1 ) THEN
-        DO k = jp1 , N
+        DO k = jp1, N
           sum = zero
-          DO i = j , M
+          DO i = j, M
             sum = sum + A(i,j)*A(i,k)
           ENDDO
           temp = sum/A(j,j)
-          DO i = j , M
+          DO i = j, M
             A(i,k) = A(i,k) - temp*A(i,j)
           ENDDO
           IF ( .NOT.(.NOT.Pivot.OR.Sigma(k)==zero) ) THEN

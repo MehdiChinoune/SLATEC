@@ -4,9 +4,9 @@ FUNCTION AIE(X)
   IMPLICIT NONE
   !*--AIE5
   !*** Start of declarations inserted by SPAG
-  REAL AIE , aifcs , aigcs , aipcs , CSEVL , eta , R1MACH , sqrtx , theta , &
-    X , x32sml , x3sml , xbig , xm , z
-  INTEGER INITS , naif , naig , naip
+  REAL AIE, aifcs, aigcs, aipcs, CSEVL, eta, R1MACH, sqrtx, theta, &
+    X, x32sml, x3sml, xbig, xm, z
+  INTEGER INITS, naif, naig, naip
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  AIE
   !***PURPOSE  Calculate the Airy function for a negative argument and an
@@ -50,9 +50,9 @@ FUNCTION AIE(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  AIE
-  DIMENSION aifcs(9) , aigcs(8) , aipcs(34)
+  DIMENSION aifcs(9), aigcs(8), aipcs(34)
   LOGICAL first
-  SAVE aifcs , aigcs , aipcs , naif , naig , naip , x3sml , x32sml , xbig , &
+  SAVE aifcs, aigcs, aipcs, naif, naig, naip, x3sml, x32sml, xbig, &
     first
   DATA aifcs(1)/ - .03797135849666999750E0/
   DATA aifcs(2)/.05919188853726363857E0/
@@ -138,4 +138,5 @@ FUNCTION AIE(X)
   IF ( X>x32sml ) AIE = AIE*EXP(2.0*X*SQRT(X)/3.0)
   RETURN
   !
-  99999 END FUNCTION AIE
+  99999 CONTINUE
+  END FUNCTION AIE

@@ -26,7 +26,7 @@ COMPLEX FUNCTION CGAMR(Z)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CGAMR
-  COMPLEX Z , CLNGAM
+  COMPLEX Z, CLNGAM
   !***FIRST EXECUTABLE STATEMENT  CGAMR
   CGAMR = (0.0,0.0)
   x = REAL(Z)

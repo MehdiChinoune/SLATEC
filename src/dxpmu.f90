@@ -4,7 +4,7 @@ SUBROUTINE DXPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
   !*--DXPMU5
   !*** Start of declarations inserted by SPAG
-  INTEGER Id , Ierror , ip0 , Ipqa , j , mu , Mu1 , Mu2 , n
+  INTEGER Id, Ierror, ip0, Ipqa, j, mu, Mu1, Mu2, n
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXPMU
   !***SUBSIDIARY
@@ -27,8 +27,8 @@ SUBROUTINE DXPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXPMU
-  REAL(8) :: Pqa , Nu1 , Nu2 , p0 , X , Sx , Theta , x1 , x2
-  DIMENSION Pqa(*) , Ipqa(*)
+  REAL(8) :: Pqa, Nu1, Nu2, p0, X, Sx, Theta, x1, x2
+  DIMENSION Pqa(*), Ipqa(*)
   !
   !        CALL DXPQNU TO OBTAIN P(-MU2,NU,X)
   !

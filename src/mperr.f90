@@ -4,7 +4,7 @@ SUBROUTINE MPERR
   IMPLICIT NONE
   !*--MPERR5
   !*** Start of declarations inserted by SPAG
-  INTEGER LUN , M , MXR
+  INTEGER LUN, M, MXR
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPERR
   !***SUBSIDIARY
@@ -29,8 +29,8 @@ SUBROUTINE MPERR
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPERR
-  COMMON /MPCOM / B , T , M , LUN , MXR , R(30)
-  INTEGER B , T , R
+  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
+  INTEGER B, T, R
   !***FIRST EXECUTABLE STATEMENT  MPERR
   CALL XERMSG('SLATEC','MPERR',' *** EXECUTION TERMINATED BY CALL TO MPERR'&
     //' IN MP VERSION 770217 ***',1,2)

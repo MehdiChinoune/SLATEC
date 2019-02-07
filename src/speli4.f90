@@ -6,15 +6,15 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   IMPLICIT NONE
   !*--SPELI47
   !*** Start of declarations inserted by SPAG
-  REAL A , ai , AIT , Alpha , Am , An , ax1 , axi , B , Bda , Bdb , Bdc , &
-    Bdd , Beta , bi , BIT , Bm , Bn , bxi , C
-  REAL ci , CIT , Cm , Cn , cxi , cxm , D , DIT , DLX , DLX4 , DLY , DLY4 , &
-    Dm , Dn , dy1 , dyj , eyj , fyj , fyn , gama
-  REAL Grhs , Pertrb , prtrb , TDLx3 , TDLy3 , Um , Un , Usol , W , xi , &
-    xnu , Zm , Zn
-  INTEGER i , Idmn , ieror , Ierror , iord , Iorder , IS , j , JS , K , &
-    KSWx , KSWy , L , M , Mbdcnd , MIT , mp , MS , N , Nbdcnd
-  INTEGER NIT , np , NS
+  REAL A, ai, AIT, Alpha, Am, An, ax1, axi, B, Bda, Bdb, Bdc, &
+    Bdd, Beta, bi, BIT, Bm, Bn, bxi, C
+  REAL ci, CIT, Cm, Cn, cxi, cxm, D, DIT, DLX, DLX4, DLY, DLY4, &
+    Dm, Dn, dy1, dyj, eyj, fyj, fyn, gama
+  REAL Grhs, Pertrb, prtrb, TDLx3, TDLy3, Um, Un, Usol, W, xi, &
+    xnu, Zm, Zn
+  INTEGER i, Idmn, ieror, Ierror, iord, Iorder, IS, j, JS, K, &
+    KSWx, KSWy, L, M, Mbdcnd, MIT, mp, MS, N, Nbdcnd
+  INTEGER NIT, np, NS
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPELI4
   !***SUBSIDIARY
@@ -40,12 +40,12 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  SPELI4
   !
-  DIMENSION Bda(*) , Bdb(*) , Bdc(*) , Bdd(*) , W(*)
-  DIMENSION Grhs(Idmn,*) , Usol(Idmn,*)
-  DIMENSION An(*) , Bn(*) , Cn(*) , Dn(*) , Un(*) , Zn(*)
-  DIMENSION Am(*) , Bm(*) , Cm(*) , Dm(*) , Um(*) , Zm(*)
-  COMMON /SPL4  / KSWx , KSWy , K , L , AIT , BIT , CIT , DIT , MIT , NIT , &
-    IS , MS , JS , NS , DLX , DLY , TDLx3 , TDLy3 , DLX4 , &
+  DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
+  DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
+  DIMENSION An(*), Bn(*), Cn(*), Dn(*), Un(*), Zn(*)
+  DIMENSION Am(*), Bm(*), Cm(*), Dm(*), Um(*), Zm(*)
+  COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
+    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
     DLY4
   LOGICAL singlr
   EXTERNAL COFX
@@ -63,28 +63,28 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !     SET RIGHT HAND SIDE VALUES FROM GRHS IN USOL ON THE INTERIOR
   !     AND NON-SPECIFIED BOUNDARIES.
   !
-  DO i = 2 , M
-    DO j = 2 , N
+  DO i = 2, M
+    DO j = 2, N
       Usol(i,j) = DLY**2*Grhs(i,j)
     ENDDO
   ENDDO
   IF ( KSWx/=2.AND.KSWx/=3 ) THEN
-    DO j = 2 , N
+    DO j = 2, N
       Usol(1,j) = DLY**2*Grhs(1,j)
     ENDDO
   ENDIF
   IF ( KSWx/=2.AND.KSWx/=5 ) THEN
-    DO j = 2 , N
+    DO j = 2, N
       Usol(K,j) = DLY**2*Grhs(K,j)
     ENDDO
   ENDIF
   IF ( KSWy/=2.AND.KSWy/=3 ) THEN
-    DO i = 2 , M
+    DO i = 2, M
       Usol(i,1) = DLY**2*Grhs(i,1)
     ENDDO
   ENDIF
   IF ( KSWy/=2.AND.KSWy/=5 ) THEN
-    DO i = 2 , M
+    DO i = 2, M
       Usol(i,L) = DLY**2*Grhs(i,L)
     ENDDO
   ENDIF
@@ -130,7 +130,7 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !
   !     SET X - DIRECTION
   !
-  DO i = 1 , MIT
+  DO i = 1, MIT
     xi = AIT + (IS+i-2)*DLX
     CALL COFX(xi,ai,bi,ci)
     axi = (ai/DLX-0.5*bi)/DLX
@@ -143,7 +143,7 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !
   !     SET Y DIRECTION
   !
-  DO j = 1 , NIT
+  DO j = 1, NIT
     dyj = 1.0
     eyj = -2.0
     fyj = 1.0
@@ -237,7 +237,7 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     !
     !     ADJUST USOL ALONG X EDGE
     !
-    DO j = JS , NS
+    DO j = JS, NS
       IF ( KSWx/=2.AND.KSWx/=3 ) THEN
         Usol(IS,j) = Usol(IS,j) + 2.0*DLX*ax1*Bda(j)
       ELSE
@@ -254,7 +254,7 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     !
     !     ADJUST USOL ALONG Y EDGE
     !
-    DO i = IS , MS
+    DO i = IS, MS
       IF ( KSWy/=2.AND.KSWy/=3 ) THEN
         Usol(i,JS) = Usol(i,JS) + 2.0*DLY*dy1*Bdc(i)
       ELSE
@@ -271,11 +271,11 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !     SAVE ADJUSTED EDGES IN GRHS IF IORDER=4
   !
   IF ( Iorder==4 ) THEN
-    DO j = JS , NS
+    DO j = JS, NS
       Grhs(IS,j) = Usol(IS,j)
       Grhs(MS,j) = Usol(MS,j)
     ENDDO
-    DO i = IS , MS
+    DO i = IS, MS
       Grhs(i,JS) = Usol(i,JS)
       Grhs(i,NS) = Usol(i,NS)
     ENDDO
@@ -301,8 +301,8 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     !     COMPUTE SOLUTION
     !
     !     SAVE ADJUSTED RIGHT HAND SIDE IN GRHS
-    DO j = JS , NS
-      DO i = IS , MS
+    DO j = JS, NS
+      DO i = IS, MS
         Grhs(i,j) = Usol(i,j)
       ENDDO
     ENDDO
@@ -315,12 +315,12 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
       !     SET PERIODIC BOUNDARIES IF NECESSARY
       !
       IF ( KSWx==1 ) THEN
-        DO j = 1 , L
+        DO j = 1, L
           Usol(K,j) = Usol(1,j)
         ENDDO
       ENDIF
       IF ( KSWy==1 ) THEN
-        DO i = 1 , K
+        DO i = 1, K
           Usol(i,L) = Usol(i,1)
         ENDDO
       ENDIF

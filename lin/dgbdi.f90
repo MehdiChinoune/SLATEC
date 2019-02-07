@@ -59,17 +59,17 @@ SUBROUTINE DGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGBDI
-  INTEGER Lda , N , Ml , Mu , Ipvt(*)
-  REAL(8) :: Abd(Lda,*) , Det(2)
+  INTEGER Lda, N, Ml, Mu, Ipvt(*)
+  REAL(8) :: Abd(Lda,*), Det(2)
   !
   REAL(8) :: ten
-  INTEGER i , m
+  INTEGER i, m
   !***FIRST EXECUTABLE STATEMENT  DGBDI
   m = Ml + Mu + 1
   Det(1) = 1.0D0
   Det(2) = 0.0D0
   ten = 10.0D0
-  DO i = 1 , N
+  DO i = 1, N
     IF ( Ipvt(i)/=i ) Det(1) = -Det(1)
     Det(1) = Abd(m,i)*Det(1)
     IF ( Det(1)==0.0D0 ) EXIT

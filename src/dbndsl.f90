@@ -191,11 +191,11 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   IMPLICIT NONE
   !*--DBNDSL192
   !*** Start of declarations inserted by SPAG
-  REAL(8) :: G , Rnorm , rsq , s , X , zero
-  INTEGER i , i1 , i2 , ie , ii , iopt , Ip , Ir , irm1 , ix , j , jg , l , &
-    Mdg , Mode , N , Nb , nerr , np1
+  REAL(8) :: G, Rnorm, rsq, s, X, zero
+  INTEGER i, i1, i2, ie, ii, iopt, Ip, Ir, irm1, ix, j, jg, l, &
+    Mdg, Mode, N, Nb, nerr, np1
   !*** End of declarations inserted by SPAG
-  DIMENSION G(Mdg,*) , X(*)
+  DIMENSION G(Mdg,*), X(*)
   !***FIRST EXECUTABLE STATEMENT  DBNDSL
   zero = 0.D0
   !
@@ -203,12 +203,12 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   SELECT CASE (Mode)
     CASE (2)
       !                                   ********************* MODE = 2
-      DO j = 1 , N
+      DO j = 1, N
         s = zero
         IF ( j/=1 ) THEN
           i1 = MAX(1,j-Nb+1)
           i2 = j - 1
-          DO i = i1 , i2
+          DO i = i1, i2
             l = j - i + 1 + MAX(0,i-Ip)
             s = s + X(i)*G(i,l)
           ENDDO
@@ -222,14 +222,14 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
     CASE DEFAULT
       !                                   ********************* MODE = 1
       !                                   ALG. STEP 26
-      DO j = 1 , N
+      DO j = 1, N
         X(j) = G(j,Nb+1)
       ENDDO
       rsq = zero
       np1 = N + 1
       irm1 = Ir - 1
       IF ( np1<=irm1 ) THEN
-        DO j = np1 , irm1
+        DO j = np1, irm1
           rsq = rsq + G(j,Nb+1)**2
         ENDDO
         Rnorm = SQRT(rsq)
@@ -237,7 +237,7 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   END SELECT
   !                                   ********************* MODE = 3
   !                                   ALG. STEP 27
-  DO ii = 1 , N
+  DO ii = 1, N
     i = N + 1 - ii
     !                                   ALG. STEP 28
     s = zero
@@ -246,7 +246,7 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
     IF ( i/=N ) THEN
       !                                   ALG. STEP 30
       ie = MIN(N+1-i,Nb)
-      DO j = 2 , ie
+      DO j = 2, ie
         jg = j + l
         ix = i - 1 + j
         s = s + G(i,jg)*X(ix)

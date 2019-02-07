@@ -4,7 +4,7 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   IMPLICIT NONE
   !*--MPADD25
   !*** Start of declarations inserted by SPAG
-  INTEGER j , LUN , M , med , MXR
+  INTEGER j, LUN, M, med, MXR
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPADD2
   !***SUBSIDIARY
@@ -51,9 +51,9 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   !   920528  Added a REFERENCES section revised.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPADD2
-  COMMON /MPCOM / B , T , M , LUN , MXR , R(30)
-  INTEGER B , T , R , X(*) , Y(*) , Z(*) , Y1(*) , Trunc
-  INTEGER s , ed , rs , re
+  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
+  INTEGER B, T, R, X(*), Y(*), Z(*), Y1(*), Trunc
+  INTEGER s, ed, rs, re
   !***FIRST EXECUTABLE STATEMENT  MPADD2
   IF ( X(1)/=0 ) THEN
     IF ( Y1(1)==0 ) GOTO 100
@@ -69,7 +69,7 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
       ELSEIF ( ed==0 ) THEN
         ! EXPONENTS EQUAL SO COMPARE SIGNS, THEN FRACTIONS IF NEC.
         IF ( s>0 ) GOTO 200
-        DO j = 1 , T
+        DO j = 1, T
           IF ( X(j+2)<Y(j+2) ) GOTO 200
           IF ( X(j+2)/=Y(j+2) ) GOTO 400
         ENDDO

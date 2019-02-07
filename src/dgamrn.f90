@@ -49,21 +49,21 @@ REAL(8) FUNCTION DGAMRN(X)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920520  Added REFERENCES section.  (WRB)
   !***END PROLOGUE  DGAMRN
-  INTEGER i , i1m11 , k , mx , nx
+  INTEGER i, i1m11, k, mx, nx
   INTEGER I1MACH
-  REAL(8) :: fln , gr , rln , s , tol , trm , X , xdmy , xinc , xm , &
-    xmin , xp , xsq
+  REAL(8) :: fln, gr, rln, s, tol, trm, X, xdmy, xinc, xm, &
+    xmin, xp, xsq
   REAL(8) :: D1MACH
   DIMENSION gr(12)
   SAVE gr
   !
-  DATA gr(1) , gr(2) , gr(3) , gr(4) , gr(5) , gr(6) , gr(7) , gr(8) , &
-    gr(9) , gr(10) , gr(11) , gr(12)/1.00000000000000000D+00 , &
-    -1.56250000000000000D-02 , 2.56347656250000000D-03 , &
-    -1.27983093261718750D-03 , 1.34351104497909546D-03 , &
-    -2.43289663922041655D-03 , 6.75423753364157164D-03 , &
-    -2.66369606131178216D-02 , 1.41527455519564332D-01 , &
-    -9.74384543032201613D-01 , 8.43686251229783675D+00 , &
+  DATA gr(1), gr(2), gr(3), gr(4), gr(5), gr(6), gr(7), gr(8), &
+    gr(9), gr(10), gr(11), gr(12)/1.00000000000000000D+00, &
+    -1.56250000000000000D-02, 2.56347656250000000D-03, &
+    -1.27983093261718750D-03, 1.34351104497909546D-03, &
+    -2.43289663922041655D-03, 6.75423753364157164D-03, &
+    -2.66369606131178216D-02, 1.41527455519564332D-01, &
+    -9.74384543032201613D-01, 8.43686251229783675D+00, &
     -8.97258321640552515D+01/
   !
   !***FIRST EXECUTABLE STATEMENT  DGAMRN
@@ -87,7 +87,7 @@ REAL(8) FUNCTION DGAMRN(X)
   IF ( xdmy*tol<=1.0D0 ) THEN
     xsq = 1.0D0/(xdmy*xdmy)
     xp = xsq
-    DO k = 2 , 12
+    DO k = 2, 12
       trm = gr(k)*xp
       IF ( ABS(trm)<tol ) EXIT
       s = s + trm
@@ -98,7 +98,7 @@ REAL(8) FUNCTION DGAMRN(X)
   IF ( xinc/=0.0D0 ) THEN
     nx = INT(xinc)
     xp = 0.0D0
-    DO i = 1 , nx
+    DO i = 1, nx
       s = s*(1.0D0+0.5D0/(X+xp))
       xp = xp + 1.0D0
     ENDDO
@@ -107,4 +107,5 @@ REAL(8) FUNCTION DGAMRN(X)
   ENDIF
   DGAMRN = s
   RETURN
-  99999 END FUNCTION DGAMRN
+  99999 CONTINUE
+  END FUNCTION DGAMRN

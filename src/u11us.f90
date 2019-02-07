@@ -4,11 +4,11 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   IMPLICIT NONE
   !*--U11US5
   !*** Start of declarations inserted by SPAG
-  REAL A , bb , Db , Eb , H , r2 , rmin , SDOT , SNRM2 , sum , t , temp , &
-    tn , tt , Ub , W
-  INTEGER i , ii , im1 , imin , is , ISAMAX , j , jm1 , jmax , jp1 , kk , &
-    km1 , kmi , kp1 , Krank , Ksure , kz , l , lm1 , M
-  INTEGER Mda , mmk , Mode , N , nn , Np
+  REAL A, bb, Db, Eb, H, r2, rmin, SDOT, SNRM2, sum, t, temp, &
+    tn, tt, Ub, W
+  INTEGER i, ii, im1, imin, is, ISAMAX, j, jm1, jmax, jp1, kk, &
+    km1, kmi, kp1, Krank, Ksure, kz, l, lm1, M
+  INTEGER Mda, mmk, Mode, N, nn, Np
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  U11US
   !***SUBSIDIARY
@@ -35,18 +35,18 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  U11US
-  DIMENSION A(Mda,*) , Ub(*) , Db(*) , H(*) , W(*) , Eb(*)
-  INTEGER Ic(*) , Ir(*)
+  DIMENSION A(Mda,*), Ub(*), Db(*), H(*), W(*), Eb(*)
+  INTEGER Ic(*), Ir(*)
   !
   !        INITIALIZATION
   !
   !***FIRST EXECUTABLE STATEMENT  U11US
   j = 0
   Krank = M
-  DO i = 1 , N
+  DO i = 1, N
     Ic(i) = i
   ENDDO
-  DO i = 1 , M
+  DO i = 1, M
     Ir(i) = i
   ENDDO
   !
@@ -56,14 +56,14 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !
   !        CALCULATE ROW LENGTH
   !
-  DO i = 1 , M
+  DO i = 1, M
     H(i) = SNRM2(N,A(i,1),Mda)
     W(i) = H(i)
   ENDDO
   !
   !         INITIALIZE ERROR BOUNDS
   !
-  DO i = 1 , M
+  DO i = 1, M
     Eb(i) = MAX(Db(i),Ub(i)*H(i))
     Ub(i) = Eb(i)
     Db(i) = 0.0
@@ -125,7 +125,7 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   200  imin = j
   IF ( H(j)/=0. ) THEN
     rmin = Ub(j)/H(j)
-    DO i = j , kz
+    DO i = j, kz
       IF ( Ub(i)<H(i)*rmin ) THEN
         rmin = Ub(i)/H(i)
         imin = i
@@ -138,7 +138,7 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
     tt = (Eb(imin)+ABS(Db(imin)))/H(imin)
     IF ( tt<1.0 ) THEN
       !     COMPUTE EXACT UB
-      DO i = 1 , jm1
+      DO i = 1, jm1
         W(i) = A(imin,i)
       ENDDO
       l = jm1
@@ -146,7 +146,7 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
         W(l) = W(l)/A(l,l)
         IF ( l==1 ) THEN
           tt = Eb(imin)
-          DO i = 1 , jm1
+          DO i = 1, jm1
             tt = tt + ABS(W(i))*Eb(i)
           ENDDO
           Ub(imin) = tt
@@ -154,7 +154,7 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
           EXIT
         ELSE
           lm1 = l - 1
-          DO i = l , jm1
+          DO i = l, jm1
             W(lm1) = W(lm1) - A(i,lm1)*W(i)
           ENDDO
           l = lm1
@@ -189,118 +189,119 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !
   !        ROW PIVOT
   !
-  400  IF ( imin/=j ) THEN
-  CALL SSWAP(1,H(j),1,H(imin),1)
-  CALL SSWAP(N,A(j,1),Mda,A(imin,1),Mda)
-  CALL SSWAP(1,Eb(j),1,Eb(imin),1)
-  CALL SSWAP(1,Ub(j),1,Ub(imin),1)
-  CALL SSWAP(1,Db(j),1,Db(imin),1)
-  CALL SSWAP(1,W(j),1,W(imin),1)
-  CALL ISWAP(1,Ir(j),1,Ir(imin),1)
-ENDIF
-!
-!        COLUMN PIVOT
-!
-jmax = ISAMAX(nn,A(j,j),Mda)
-jmax = jmax + j - 1
-IF ( jmax/=j ) THEN
-  CALL SSWAP(M,A(1,j),1,A(1,jmax),1)
-  CALL ISWAP(1,Ic(j),1,Ic(jmax),1)
-ENDIF
-!
-!     APPLY HOUSEHOLDER TRANSFORMATION
-!
-tn = SNRM2(nn,A(j,j),Mda)
-IF ( tn==0.0 ) GOTO 300
-IF ( A(j,j)/=0.0 ) tn = SIGN(tn,A(j,j))
-CALL SSCAL(nn,1.0/tn,A(j,j),Mda)
-A(j,j) = A(j,j) + 1.0
-IF ( j/=M ) THEN
-  DO i = jp1 , M
-    bb = -SDOT(nn,A(j,j),Mda,A(i,j),Mda)/A(j,j)
-    CALL SAXPY(nn,bb,A(j,j),Mda,A(i,j),Mda)
-    IF ( i>Np ) THEN
-      IF ( H(i)/=0.0 ) THEN
-        tt = 1.0 - (ABS(A(i,j))/H(i))**2
-        tt = MAX(tt,0.0)
-        t = tt
-        tt = 1.0 + .05*tt*(H(i)/W(i))**2
-        IF ( tt==1.0 ) THEN
-          H(i) = SNRM2(N-j,A(i,j+1),Mda)
-          W(i) = H(i)
-        ELSE
-          H(i) = H(i)*SQRT(t)
+  400 CONTINUE
+  IF ( imin/=j ) THEN
+    CALL SSWAP(1,H(j),1,H(imin),1)
+    CALL SSWAP(N,A(j,1),Mda,A(imin,1),Mda)
+    CALL SSWAP(1,Eb(j),1,Eb(imin),1)
+    CALL SSWAP(1,Ub(j),1,Ub(imin),1)
+    CALL SSWAP(1,Db(j),1,Db(imin),1)
+    CALL SSWAP(1,W(j),1,W(imin),1)
+    CALL ISWAP(1,Ir(j),1,Ir(imin),1)
+  ENDIF
+  !
+  !        COLUMN PIVOT
+  !
+  jmax = ISAMAX(nn,A(j,j),Mda)
+  jmax = jmax + j - 1
+  IF ( jmax/=j ) THEN
+    CALL SSWAP(M,A(1,j),1,A(1,jmax),1)
+    CALL ISWAP(1,Ic(j),1,Ic(jmax),1)
+  ENDIF
+  !
+  !     APPLY HOUSEHOLDER TRANSFORMATION
+  !
+  tn = SNRM2(nn,A(j,j),Mda)
+  IF ( tn==0.0 ) GOTO 300
+  IF ( A(j,j)/=0.0 ) tn = SIGN(tn,A(j,j))
+  CALL SSCAL(nn,1.0/tn,A(j,j),Mda)
+  A(j,j) = A(j,j) + 1.0
+  IF ( j/=M ) THEN
+    DO i = jp1, M
+      bb = -SDOT(nn,A(j,j),Mda,A(i,j),Mda)/A(j,j)
+      CALL SAXPY(nn,bb,A(j,j),Mda,A(i,j),Mda)
+      IF ( i>Np ) THEN
+        IF ( H(i)/=0.0 ) THEN
+          tt = 1.0 - (ABS(A(i,j))/H(i))**2
+          tt = MAX(tt,0.0)
+          t = tt
+          tt = 1.0 + .05*tt*(H(i)/W(i))**2
+          IF ( tt==1.0 ) THEN
+            H(i) = SNRM2(N-j,A(i,j+1),Mda)
+            W(i) = H(i)
+          ELSE
+            H(i) = H(i)*SQRT(t)
+          ENDIF
         ENDIF
       ENDIF
-    ENDIF
-  ENDDO
-ENDIF
-H(j) = A(j,j)
-A(j,j) = -tn
-!
-!
-!          UPDATE UB, DB
-!
-Ub(j) = Ub(j)/ABS(A(j,j))
-Db(j) = (SIGN(Eb(j),Db(j))+Db(j))/A(j,j)
-IF ( j/=Krank ) THEN
-  DO i = jp1 , Krank
-    Ub(i) = Ub(i) + ABS(A(i,j))*Ub(j)
-    Db(i) = Db(i) - A(i,j)*Db(j)
-  ENDDO
-  GOTO 100
-ENDIF
-!
-!        E N D    M A I N    L O O P
-!
-!
-!        COMPUTE KSURE
-!
-500  km1 = Krank - 1
-DO i = 1 , km1
-  is = 0
-  kmi = Krank - i
-  DO ii = 1 , kmi
-    IF ( Ub(ii)>Ub(ii+1) ) THEN
-      is = 1
-      temp = Ub(ii)
-      Ub(ii) = Ub(ii+1)
-      Ub(ii+1) = temp
-    ENDIF
-  ENDDO
-  IF ( is==0 ) EXIT
-ENDDO
-Ksure = 0
-sum = 0.0
-DO i = 1 , Krank
-  r2 = Ub(i)*Ub(i)
-  IF ( r2+sum>=1.0 ) EXIT
-  sum = sum + r2
-  Ksure = Ksure + 1
-ENDDO
-!
-!     IF SYSTEM IS OF REDUCED RANK AND MODE = 2
-!     COMPLETE THE DECOMPOSITION FOR SHORTEST LEAST SQUARES SOLUTION
-!
-IF ( Krank/=M.AND.Mode>=2 ) THEN
-  mmk = M - Krank
-  kp1 = Krank + 1
-  i = Krank
-  DO
-    tn = SNRM2(mmk,A(kp1,i),1)/A(i,i)
-    tn = A(i,i)*SQRT(1.0+tn*tn)
-    CALL SSCAL(mmk,1.0/tn,A(kp1,i),1)
-    W(i) = A(i,i)/tn + 1.0
-    A(i,i) = -tn
-    IF ( i==1 ) EXIT
-    im1 = i - 1
-    DO ii = 1 , im1
-      tt = -SDOT(mmk,A(kp1,ii),1,A(kp1,i),1)/W(i)
-      tt = tt - A(i,ii)
-      CALL SAXPY(mmk,tt,A(kp1,i),1,A(kp1,ii),1)
-      A(i,ii) = A(i,ii) + tt*W(i)
     ENDDO
-    i = i - 1
+  ENDIF
+  H(j) = A(j,j)
+  A(j,j) = -tn
+  !
+  !
+  !          UPDATE UB, DB
+  !
+  Ub(j) = Ub(j)/ABS(A(j,j))
+  Db(j) = (SIGN(Eb(j),Db(j))+Db(j))/A(j,j)
+  IF ( j/=Krank ) THEN
+    DO i = jp1, Krank
+      Ub(i) = Ub(i) + ABS(A(i,j))*Ub(j)
+      Db(i) = Db(i) - A(i,j)*Db(j)
+    ENDDO
+    GOTO 100
+  ENDIF
+  !
+  !        E N D    M A I N    L O O P
+  !
+  !
+  !        COMPUTE KSURE
+  !
+  500  km1 = Krank - 1
+  DO i = 1, km1
+    is = 0
+    kmi = Krank - i
+    DO ii = 1, kmi
+      IF ( Ub(ii)>Ub(ii+1) ) THEN
+        is = 1
+        temp = Ub(ii)
+        Ub(ii) = Ub(ii+1)
+        Ub(ii+1) = temp
+      ENDIF
+    ENDDO
+    IF ( is==0 ) EXIT
   ENDDO
-ENDIF
+  Ksure = 0
+  sum = 0.0
+  DO i = 1, Krank
+    r2 = Ub(i)*Ub(i)
+    IF ( r2+sum>=1.0 ) EXIT
+    sum = sum + r2
+    Ksure = Ksure + 1
+  ENDDO
+  !
+  !     IF SYSTEM IS OF REDUCED RANK AND MODE = 2
+  !     COMPLETE THE DECOMPOSITION FOR SHORTEST LEAST SQUARES SOLUTION
+  !
+  IF ( Krank/=M.AND.Mode>=2 ) THEN
+    mmk = M - Krank
+    kp1 = Krank + 1
+    i = Krank
+    DO
+      tn = SNRM2(mmk,A(kp1,i),1)/A(i,i)
+      tn = A(i,i)*SQRT(1.0+tn*tn)
+      CALL SSCAL(mmk,1.0/tn,A(kp1,i),1)
+      W(i) = A(i,i)/tn + 1.0
+      A(i,i) = -tn
+      IF ( i==1 ) EXIT
+      im1 = i - 1
+      DO ii = 1, im1
+        tt = -SDOT(mmk,A(kp1,ii),1,A(kp1,i),1)/W(i)
+        tt = tt - A(i,ii)
+        CALL SAXPY(mmk,tt,A(kp1,i),1,A(kp1,ii),1)
+        A(i,ii) = A(i,ii) + tt*W(i)
+      ENDDO
+      i = i - 1
+    ENDDO
+  ENDIF
 END SUBROUTINE U11US

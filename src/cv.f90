@@ -4,9 +4,9 @@ REAL FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   IMPLICIT NONE
   !*--CV5
   !*** Start of declarations inserted by SPAG
-  REAL Bkpt , SDOT , v , W , Xval , zero
-  INTEGER i , ileft , ip , is , last , mdg , mdw , n , Nbkpt , Nconst , &
-    Ndata , Nord
+  REAL Bkpt, SDOT, v, W, Xval, zero
+  INTEGER i, ileft, ip, is, last, mdg, mdw, n, Nbkpt, Nconst, &
+    Ndata, Nord
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CV
   !***PURPOSE  Evaluate the variance function of the curve obtained
@@ -105,7 +105,7 @@ REAL FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CV
-  DIMENSION Bkpt(Nbkpt) , W(*) , v(40)
+  DIMENSION Bkpt(Nbkpt), W(*), v(40)
   !***FIRST EXECUTABLE STATEMENT  CV
   zero = 0.
   mdg = Nbkpt - Nord + 3
@@ -120,7 +120,7 @@ REAL FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   ileft = ileft - Nord + 1
   ip = mdw*(ileft-1) + ileft + is
   n = Nbkpt - Nord
-  DO i = 1 , Nord
+  DO i = 1, Nord
     v(i) = SDOT(Nord,W(ip),1,v(Nord+1),1)
     ip = ip + mdw
   ENDDO

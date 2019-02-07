@@ -4,7 +4,7 @@ SUBROUTINE ITEST(Len,Icomp,Itrue,Kprint)
   IMPLICIT NONE
   !*--ITEST5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , ICAse , id , INCx , INCy , Kprint , Len , MODe , N , NPRint
+  INTEGER i, ICAse, id, INCx, INCy, Kprint, Len, MODe, N, NPRint
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ITEST
   !***PURPOSE  Compare arrays ICOMP and ITRUE.
@@ -28,11 +28,11 @@ SUBROUTINE ITEST(Len,Icomp,Itrue,Kprint)
   !   920211  Code restructured and information added to the DESCRIPTION
   !           section.  (WRB)
   !***END PROLOGUE  ITEST
-  INTEGER Icomp(*) , Itrue(*)
+  INTEGER Icomp(*), Itrue(*)
   LOGICAL PASs
-  COMMON /COMBLA/ NPRint , ICAse , N , INCx , INCy , MODe , PASs
+  COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
   !***FIRST EXECUTABLE STATEMENT  ITEST
-  DO i = 1 , Len
+  DO i = 1, Len
     IF ( Icomp(i)/=Itrue(i) ) THEN
       !
       !         Here ICOMP(I) is not equal to ITRUE(I).
@@ -52,8 +52,8 @@ SUBROUTINE ITEST(Len,Icomp,Itrue,Kprint)
       ENDIF
       IF ( Kprint>=3 ) THEN
         id = Icomp(i) - Itrue(i)
-        WRITE (NPRint,99003) ICAse , N , INCx , INCy , MODe , i , Icomp(i) , &
-          Itrue(i) , id
+        WRITE (NPRint,99003) ICAse, N, INCx, INCy, MODe, i, Icomp(i), &
+          Itrue(i), id
         99003       FORMAT (1X,I4,I3,3I5,I3,2I36,I12)
       ENDIF
     ENDIF

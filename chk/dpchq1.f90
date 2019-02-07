@@ -56,11 +56,11 @@ SUBROUTINE DPCHQ1(Lun,Kprint,Ipass)
   !
   !  Declare arguments.
   !
-  INTEGER Lun , Kprint , Ipass
+  INTEGER Lun, Kprint, Ipass
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i1 , i2 , i3 , i4 , i5 , i6 , i7 , i8 , i9 , ifail , npts
+  INTEGER i1, i2, i3, i4, i5, i6, i7, i8, i9, ifail, npts
   REAL(8) :: work(4000)
   LOGICAL fail
   !

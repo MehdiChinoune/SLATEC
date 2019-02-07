@@ -4,8 +4,8 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
   IMPLICIT NONE
   !*--XERSVE5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , I1MACH , Icount , iunit , Kflag , kount , kountx , kunit ,&
-    LENTAB , Level , levtab , Nerr , nertab , nmsg , nunit
+  INTEGER i, I1MACH, Icount, iunit, Kflag, kount, kountx, kunit ,&
+    LENTAB, Level, levtab, Nerr, nertab, nmsg, nunit
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XERSVE
   !***SUBSIDIARY
@@ -65,12 +65,12 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
   !***END PROLOGUE  XERSVE
   PARAMETER (LENTAB=10)
   INTEGER lun(5)
-  CHARACTER*(*) Librar , Subrou , Messg
-  CHARACTER(8) :: libtab(LENTAB) , subtab(LENTAB) , lib , sub
-  CHARACTER(20) :: mestab(LENTAB) , mes
-  DIMENSION nertab(LENTAB) , levtab(LENTAB) , kount(LENTAB)
-  SAVE libtab , subtab , mestab , nertab , levtab , kount , kountx , nmsg
-  DATA kountx/0/ , nmsg/0/
+  CHARACTER*(*) Librar, Subrou, Messg
+  CHARACTER(8) :: libtab(LENTAB), subtab(LENTAB), lib, sub
+  CHARACTER(20) :: mestab(LENTAB), mes
+  DIMENSION nertab(LENTAB), levtab(LENTAB), kount(LENTAB)
+  SAVE libtab, subtab, mestab, nertab, levtab, kount, kountx, nmsg
+  DATA kountx/0/, nmsg/0/
   !***FIRST EXECUTABLE STATEMENT  XERSVE
   !
   IF ( Kflag<=0 ) THEN
@@ -82,7 +82,7 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
     !        Print to each unit.
     !
     CALL XGETUA(lun,nunit)
-    DO kunit = 1 , nunit
+    DO kunit = 1, nunit
       iunit = lun(kunit)
       IF ( iunit==0 ) iunit = I1MACH(4)
       !
@@ -98,9 +98,9 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
       !
       !           Print body of table.
       !
-      DO i = 1 , nmsg
-        WRITE (iunit,99002) libtab(i) , subtab(i) , mestab(i) , nertab(i) ,&
-          levtab(i) , kount(i)
+      DO i = 1, nmsg
+        WRITE (iunit,99002) libtab(i), subtab(i), mestab(i), nertab(i) ,&
+          levtab(i), kount(i)
         99002       FORMAT (1X,A,3X,A,3X,A,3I10)
       ENDDO
       !
@@ -127,7 +127,7 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
     lib = Librar
     sub = Subrou
     mes = Messg
-    DO i = 1 , nmsg
+    DO i = 1, nmsg
       IF ( lib==libtab(i).AND.sub==subtab(i).AND.mes==mestab(i).AND.&
           Nerr==nertab(i).AND.Level==levtab(i) ) THEN
         kount(i) = kount(i) + 1

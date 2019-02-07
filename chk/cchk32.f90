@@ -25,41 +25,41 @@ SUBROUTINE CCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
   !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  CCHK32
   !     .. Parameters ..
-  COMPLEX ZERO , HALF , ONE
+  COMPLEX ZERO, HALF, ONE
   PARAMETER (ZERO=(0.0,0.0),HALF=(0.5,0.0),ONE=(1.0,0.0))
   REAL RZERO
   PARAMETER (RZERO=0.0)
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  REAL Eps , Thresh
-  INTEGER Incmax , Kprint , Nidim , Ninc , Nkb , Nmax , Nout
+  REAL Eps, Thresh
+  INTEGER Incmax, Kprint, Nidim, Ninc, Nkb, Nmax, Nout
   CHARACTER(6) :: Sname
   !     .. Array Arguments ..
-  COMPLEX A(Nmax,Nmax) , Aa(Nmax*Nmax) , As(Nmax*Nmax) , X(Nmax) ,&
-    Xs(Nmax*Incmax) , Xt(Nmax) , Xx(Nmax*Incmax) , Z(Nmax)
+  COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), As(Nmax*Nmax), X(Nmax) ,&
+    Xs(Nmax*Incmax), Xt(Nmax), Xx(Nmax*Incmax), Z(Nmax)
   REAL G(Nmax)
-  INTEGER Idim(Nidim) , Inc(Ninc) , Kb(Nkb)
+  INTEGER Idim(Nidim), Inc(Ninc), Kb(Nkb)
   !     .. Local Scalars ..
   COMPLEX transl
-  REAL err , errmax
-  INTEGER i , icd , ict , icu , ik , in , incx , incxs , ix , k , ks , laa ,&
-    lda , ldas , lx , n , nargs , nc , nerr , nk , ns
-  LOGICAL banded , ftl , full , null , packed , reset
-  CHARACTER :: diag , diags , trans , transs , uplo , uplos
-  CHARACTER(2) :: ichd , ichu
+  REAL err, errmax
+  INTEGER i, icd, ict, icu, ik, in, incx, incxs, ix, k, ks, laa ,&
+    lda, ldas, lx, n, nargs, nc, nerr, nk, ns
+  LOGICAL banded, ftl, full, null, packed, reset
+  CHARACTER :: diag, diags, trans, transs, uplo, uplos
+  CHARACTER(2) :: ichd, ichu
   CHARACTER(3) :: icht
   !     .. Local Arrays ..
   LOGICAL isame(13)
   !     .. External Functions ..
   INTEGER NUMXER
-  LOGICAL LCE , LCERES
-  EXTERNAL LCE , LCERES , NUMXER
+  LOGICAL LCE, LCERES
+  EXTERNAL LCE, LCERES, NUMXER
   !     .. External Subroutines ..
-  EXTERNAL CMAKE2 , CMVCH , CTBMV , CTBSV , CTPMV , CTPSV , CTRMV , CTRSV
+  EXTERNAL CMAKE2, CMVCH, CTBMV, CTBSV, CTPMV, CTPSV, CTRMV, CTRSV
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MAX
+  INTRINSIC ABS, MAX
   !     .. Data statements ..
-  DATA ichu/'UL'/ , icht/'NTC'/ , ichd/'UN'/
+  DATA ichu/'UL'/, icht/'NTC'/, ichd/'UN'/
   !***FIRST EXECUTABLE STATEMENT  CCHK32
   full = Sname(3:3)=='R'
   banded = Sname(3:3)=='B'
@@ -77,11 +77,11 @@ SUBROUTINE CCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
   reset = .TRUE.
   errmax = RZERO
   !     Set up zero vector for CMVCH.
-  DO i = 1 , Nmax
+  DO i = 1, Nmax
     Z(i) = ZERO
   ENDDO
   !
-  DO in = 1 , Nidim
+  DO in = 1, Nidim
     n = Idim(in)
     !
     IF ( banded ) THEN
@@ -89,7 +89,7 @@ SUBROUTINE CCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
     ELSE
       nk = 1
     ENDIF
-    DO ik = 1 , nk
+    DO ik = 1, nk
       IF ( banded ) THEN
         k = Kb(ik)
       ELSE
@@ -111,13 +111,13 @@ SUBROUTINE CCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
         ENDIF
         null = n<=0
         !
-        DO icu = 1 , 2
+        DO icu = 1, 2
           uplo = ichu(icu:icu)
           !
-          DO ict = 1 , 3
+          DO ict = 1, 3
             trans = icht(ict:ict)
             !
-            DO icd = 1 , 2
+            DO icd = 1, 2
               diag = ichd(icd:icd)
               !
               !                    Generate the matrix A.
@@ -126,7 +126,7 @@ SUBROUTINE CCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
               CALL CMAKE2(Sname(2:3),uplo,diag,n,n,A,Nmax,Aa,lda,k,k,reset,&
                 transl)
               !
-              DO ix = 1 , Ninc
+              DO ix = 1, Ninc
                 incx = Inc(ix)
                 lx = ABS(incx)*n
                 !
@@ -149,11 +149,11 @@ SUBROUTINE CCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
                 diags = diag
                 ns = n
                 ks = k
-                DO i = 1 , laa
+                DO i = 1, laa
                   As(i) = Aa(i)
                 ENDDO
                 ldas = lda
-                DO i = 1 , lx
+                DO i = 1, lx
                   Xs(i) = Xx(i)
                 ENDDO
                 incxs = incx
@@ -223,7 +223,7 @@ SUBROUTINE CCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
                 !                       If data was incorrectly changed, report and
                 !                       return.
                 !
-                DO i = 1 , nargs
+                DO i = 1, nargs
                   IF ( .NOT.isame(i) ) THEN
                     Fatal = .TRUE.
                     IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
@@ -242,7 +242,7 @@ SUBROUTINE CCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
                     !
                     !                             Compute approximation to original vector.
                     !
-                    DO i = 1 , n
+                    DO i = 1, n
                       Z(i) = Xx(1+(i-1)*ABS(incx))
                       Xx(1+(i-1)*ABS(incx)) = X(i)
                     ENDDO
@@ -256,14 +256,14 @@ SUBROUTINE CCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
                   IF ( Kprint>=3 ) THEN
                     WRITE (Nout,FMT=99004) Sname
                     IF ( full ) THEN
-                      WRITE (Nout,FMT=99006) nc , Sname , uplo , trans ,&
-                        diag , n , lda , incx
+                      WRITE (Nout,FMT=99006) nc, Sname, uplo, trans ,&
+                        diag, n, lda, incx
                     ELSEIF ( banded ) THEN
-                      WRITE (Nout,FMT=99005) nc , Sname , uplo , trans ,&
-                        diag , n , k , lda , incx
+                      WRITE (Nout,FMT=99005) nc, Sname, uplo, trans ,&
+                        diag, n, k, lda, incx
                     ELSEIF ( packed ) THEN
-                      WRITE (Nout,FMT=99005) nc , Sname , uplo , trans ,&
-                        diag , n , incx
+                      WRITE (Nout,FMT=99005) nc, Sname, uplo, trans ,&
+                        diag, n, incx
                     ENDIF
                   ENDIF
                 ENDIF
@@ -286,9 +286,9 @@ SUBROUTINE CCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
   IF ( .NOT.Fatal ) THEN
     IF ( Kprint>=3 ) THEN
       IF ( errmax<Thresh ) THEN
-        WRITE (Nout,FMT=99001) Sname , nc
+        WRITE (Nout,FMT=99001) Sname, nc
       ELSE
-        WRITE (Nout,FMT=99003) Sname , nc , errmax
+        WRITE (Nout,FMT=99003) Sname, nc, errmax
       ENDIF
     ENDIF
   ENDIF

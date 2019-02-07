@@ -30,31 +30,31 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  CDCOR
-  INTEGER i , Ierror , iflag , Impl , j , Jstate , Matdim , Miter , Ml , &
-    Mu , mw , N , Nde , Nq
-  COMPLEX A(Matdim,*) , Dfdy(Matdim,*) , Save1(*) , Save2(*) , Y(*) , &
-    Yh(N,*) , Ywt(*)
-  REAL D , El(13,12) , H , SCNRM2 , T
+  INTEGER i, Ierror, iflag, Impl, j, Jstate, Matdim, Miter, Ml, &
+    Mu, mw, N, Nde, Nq
+  COMPLEX A(Matdim,*), Dfdy(Matdim,*), Save1(*), Save2(*), Y(*), &
+    Yh(N,*), Ywt(*)
+  REAL D, El(13,12), H, SCNRM2, T
   INTEGER Ipvt(*)
   LOGICAL Evalfa
   !***FIRST EXECUTABLE STATEMENT  CDCOR
   IF ( Miter==0 ) THEN
     IF ( Ierror==1.OR.Ierror==5 ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         Save1(i) = (H*Save2(i)-Yh(i,2)-Save1(i))/Ywt(i)
       ENDDO
     ELSE
-      DO i = 1 , N
+      DO i = 1, N
         Save1(i) = (H*Save2(i)-Yh(i,2)-Save1(i))/MAX(ABS(Y(i)),ABS(Ywt(i)))
       ENDDO
     ENDIF
     D = SCNRM2(N,Save1,1)/SQRT(REAL(N))
-    DO i = 1 , N
+    DO i = 1, N
       Save1(i) = H*Save2(i) - Yh(i,2)
     ENDDO
   ELSEIF ( Miter==1.OR.Miter==2 ) THEN
     IF ( Impl==0 ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         Save2(i) = H*Save2(i) - Yh(i,2) - Save1(i)
       ENDDO
     ELSEIF ( Impl==1 ) THEN
@@ -67,11 +67,11 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
       ELSE
         Evalfa = .TRUE.
       ENDIF
-      DO i = 1 , N
+      DO i = 1, N
         Save2(i) = H*Save2(i)
       ENDDO
-      DO j = 1 , N
-        DO i = 1 , N
+      DO j = 1, N
+        DO i = 1, N
           Save2(i) = Save2(i) - A(i,j)*(Yh(j,2)+Save1(j))
         ENDDO
       ENDDO
@@ -85,7 +85,7 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
       ELSE
         Evalfa = .TRUE.
       ENDIF
-      DO i = 1 , N
+      DO i = 1, N
         Save2(i) = H*Save2(i) - A(i,1)*(Yh(i,2)+Save1(i))
       ENDDO
     ELSEIF ( Impl==3 ) THEN
@@ -98,23 +98,23 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
       ELSE
         Evalfa = .TRUE.
       ENDIF
-      DO i = 1 , N
+      DO i = 1, N
         Save2(i) = H*Save2(i)
       ENDDO
-      DO j = 1 , Nde
-        DO i = 1 , Nde
+      DO j = 1, Nde
+        DO i = 1, Nde
           Save2(i) = Save2(i) - A(i,j)*(Yh(j,2)+Save1(j))
         ENDDO
       ENDDO
     ENDIF
     CALL CGESL(Dfdy,Matdim,N,Ipvt,Save2,0)
     IF ( Ierror==1.OR.Ierror==5 ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
         Save2(i) = Save2(i)/Ywt(i)
       ENDDO
     ELSE
-      DO i = 1 , N
+      DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),ABS(Ywt(i)))
       ENDDO
@@ -122,7 +122,7 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     D = SCNRM2(N,Save2,1)/SQRT(REAL(N))
   ELSEIF ( Miter==4.OR.Miter==5 ) THEN
     IF ( Impl==0 ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         Save2(i) = H*Save2(i) - Yh(i,2) - Save1(i)
       ENDDO
     ELSEIF ( Impl==1 ) THEN
@@ -135,12 +135,12 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
       ELSE
         Evalfa = .TRUE.
       ENDIF
-      DO i = 1 , N
+      DO i = 1, N
         Save2(i) = H*Save2(i)
       ENDDO
       mw = Ml + 1 + Mu
-      DO j = 1 , N
-        DO i = MAX(Ml+1,mw+1-j) , MIN(mw+N-j,mw+Ml)
+      DO j = 1, N
+        DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
           Save2(i+j-mw) = Save2(i+j-mw) - A(i,j)*(Yh(j,2)+Save1(j))
         ENDDO
       ENDDO
@@ -154,7 +154,7 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
       ELSE
         Evalfa = .TRUE.
       ENDIF
-      DO i = 1 , N
+      DO i = 1, N
         Save2(i) = H*Save2(i) - A(i,1)*(Yh(i,2)+Save1(i))
       ENDDO
     ELSEIF ( Impl==3 ) THEN
@@ -167,24 +167,24 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
       ELSE
         Evalfa = .TRUE.
       ENDIF
-      DO i = 1 , N
+      DO i = 1, N
         Save2(i) = H*Save2(i)
       ENDDO
       mw = Ml + 1 + Mu
-      DO j = 1 , Nde
-        DO i = MAX(Ml+1,mw+1-j) , MIN(mw+Nde-j,mw+Ml)
+      DO j = 1, Nde
+        DO i = MAX(Ml+1,mw+1-j), MIN(mw+Nde-j,mw+Ml)
           Save2(i+j-mw) = Save2(i+j-mw) - A(i,j)*(Yh(j,2)+Save1(j))
         ENDDO
       ENDDO
     ENDIF
     CALL CGBSL(Dfdy,Matdim,N,Ml,Mu,Ipvt,Save2,0)
     IF ( Ierror==1.OR.Ierror==5 ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
         Save2(i) = Save2(i)/Ywt(i)
       ENDDO
     ELSE
-      DO i = 1 , N
+      DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),ABS(Ywt(i)))
       ENDDO
@@ -198,12 +198,12 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
       RETURN
     ENDIF
     IF ( Ierror==1.OR.Ierror==5 ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
         Save2(i) = Save2(i)/Ywt(i)
       ENDDO
     ELSE
-      DO i = 1 , N
+      DO i = 1, N
         Save1(i) = Save1(i) + Save2(i)
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),ABS(Ywt(i)))
       ENDDO

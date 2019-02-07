@@ -104,17 +104,17 @@ SUBROUTINE CTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  CTPSV
   !     .. Scalar Arguments ..
-  INTEGER Incx , N
-  CHARACTER :: Diag , Trans , Uplo
+  INTEGER Incx, N
+  CHARACTER :: Diag, Trans, Uplo
   !     .. Array Arguments ..
-  COMPLEX Ap(*) , X(*)
+  COMPLEX Ap(*), X(*)
   !     .. Parameters ..
   COMPLEX ZERO
   PARAMETER (ZERO=(0.0E+0,0.0E+0))
   !     .. Local Scalars ..
   COMPLEX temp
-  INTEGER i , info , ix , j , jx , k , kk , kx
-  LOGICAL noconj , nounit
+  INTEGER i, info, ix, j, jx, k, kk, kx
+  LOGICAL noconj, nounit
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
@@ -170,12 +170,12 @@ SUBROUTINE CTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
     IF ( LSAME(Uplo,'U') ) THEN
       kk = (N*(N+1))/2
       IF ( Incx==1 ) THEN
-        DO j = N , 1 , -1
+        DO j = N, 1, -1
           IF ( X(j)/=ZERO ) THEN
             IF ( nounit ) X(j) = X(j)/Ap(kk)
             temp = X(j)
             k = kk - 1
-            DO i = j - 1 , 1 , -1
+            DO i = j - 1, 1, -1
               X(i) = X(i) - temp*Ap(k)
               k = k - 1
             ENDDO
@@ -184,12 +184,12 @@ SUBROUTINE CTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
         ENDDO
       ELSE
         jx = kx + (N-1)*Incx
-        DO j = N , 1 , -1
+        DO j = N, 1, -1
           IF ( X(jx)/=ZERO ) THEN
             IF ( nounit ) X(jx) = X(jx)/Ap(kk)
             temp = X(jx)
             ix = jx
-            DO k = kk - 1 , kk - j + 1 , -1
+            DO k = kk - 1, kk - j + 1, -1
               ix = ix - Incx
               X(ix) = X(ix) - temp*Ap(k)
             ENDDO
@@ -201,12 +201,12 @@ SUBROUTINE CTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
     ELSE
       kk = 1
       IF ( Incx==1 ) THEN
-        DO j = 1 , N
+        DO j = 1, N
           IF ( X(j)/=ZERO ) THEN
             IF ( nounit ) X(j) = X(j)/Ap(kk)
             temp = X(j)
             k = kk + 1
-            DO i = j + 1 , N
+            DO i = j + 1, N
               X(i) = X(i) - temp*Ap(k)
               k = k + 1
             ENDDO
@@ -215,12 +215,12 @@ SUBROUTINE CTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
         ENDDO
       ELSE
         jx = kx
-        DO j = 1 , N
+        DO j = 1, N
           IF ( X(jx)/=ZERO ) THEN
             IF ( nounit ) X(jx) = X(jx)/Ap(kk)
             temp = X(jx)
             ix = jx
-            DO k = kk + 1 , kk + N - j
+            DO k = kk + 1, kk + N - j
               ix = ix + Incx
               X(ix) = X(ix) - temp*Ap(k)
             ENDDO
@@ -236,17 +236,17 @@ SUBROUTINE CTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
   ELSEIF ( LSAME(Uplo,'U') ) THEN
     kk = 1
     IF ( Incx==1 ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         temp = X(j)
         k = kk
         IF ( noconj ) THEN
-          DO i = 1 , j - 1
+          DO i = 1, j - 1
             temp = temp - Ap(k)*X(i)
             k = k + 1
           ENDDO
           IF ( nounit ) temp = temp/Ap(kk+j-1)
         ELSE
-          DO i = 1 , j - 1
+          DO i = 1, j - 1
             temp = temp - CONJG(Ap(k))*X(i)
             k = k + 1
           ENDDO
@@ -257,17 +257,17 @@ SUBROUTINE CTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
       ENDDO
     ELSE
       jx = kx
-      DO j = 1 , N
+      DO j = 1, N
         temp = X(jx)
         ix = kx
         IF ( noconj ) THEN
-          DO k = kk , kk + j - 2
+          DO k = kk, kk + j - 2
             temp = temp - Ap(k)*X(ix)
             ix = ix + Incx
           ENDDO
           IF ( nounit ) temp = temp/Ap(kk+j-1)
         ELSE
-          DO k = kk , kk + j - 2
+          DO k = kk, kk + j - 2
             temp = temp - CONJG(Ap(k))*X(ix)
             ix = ix + Incx
           ENDDO
@@ -281,17 +281,17 @@ SUBROUTINE CTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
   ELSE
     kk = (N*(N+1))/2
     IF ( Incx==1 ) THEN
-      DO j = N , 1 , -1
+      DO j = N, 1, -1
         temp = X(j)
         k = kk
         IF ( noconj ) THEN
-          DO i = N , j + 1 , -1
+          DO i = N, j + 1, -1
             temp = temp - Ap(k)*X(i)
             k = k - 1
           ENDDO
           IF ( nounit ) temp = temp/Ap(kk-N+j)
         ELSE
-          DO i = N , j + 1 , -1
+          DO i = N, j + 1, -1
             temp = temp - CONJG(Ap(k))*X(i)
             k = k - 1
           ENDDO
@@ -303,17 +303,17 @@ SUBROUTINE CTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
     ELSE
       kx = kx + (N-1)*Incx
       jx = kx
-      DO j = N , 1 , -1
+      DO j = N, 1, -1
         temp = X(jx)
         ix = kx
         IF ( noconj ) THEN
-          DO k = kk , kk - (N-(j+1)) , -1
+          DO k = kk, kk - (N-(j+1)), -1
             temp = temp - Ap(k)*X(ix)
             ix = ix - Incx
           ENDDO
           IF ( nounit ) temp = temp/Ap(kk-N+j)
         ELSE
-          DO k = kk , kk - (N-(j+1)) , -1
+          DO k = kk, kk - (N-(j+1)), -1
             temp = temp - CONJG(Ap(k))*X(ix)
             ix = ix - Incx
           ENDDO

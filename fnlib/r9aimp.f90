@@ -4,9 +4,9 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
   IMPLICIT NONE
   !*--R9AIMP5
   !*** Start of declarations inserted by SPAG
-  REAL am21cs , am22cs , Ampl , ath1cs , ath2cs , CSEVL , eta , pi4 , &
-    R1MACH , sqrtx , Theta , X , xsml , z
-  INTEGER INITS , nam21 , nam22 , nath1 , nath2
+  REAL am21cs, am22cs, Ampl, ath1cs, ath2cs, CSEVL, eta, pi4, &
+    R1MACH, sqrtx, Theta, X, xsml, z
+  INTEGER INITS, nam21, nam22, nath1, nath2
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9AIMP
   !***SUBSIDIARY
@@ -53,10 +53,10 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  R9AIMP
-  DIMENSION am21cs(40) , ath1cs(36) , am22cs(33) , ath2cs(32)
+  DIMENSION am21cs(40), ath1cs(36), am22cs(33), ath2cs(32)
   LOGICAL first
-  SAVE am21cs , ath1cs , am22cs , ath2cs , pi4 , nam21 , nath1 , nam22 , &
-    nath2 , xsml , first
+  SAVE am21cs, ath1cs, am22cs, ath2cs, pi4, nam21, nath1, nam22, &
+    nath2, xsml, first
   DATA am21cs(1)/.0065809191761485E0/
   DATA am21cs(2)/.0023675984685722E0/
   DATA am21cs(3)/.0001324741670371E0/

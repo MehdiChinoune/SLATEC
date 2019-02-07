@@ -128,17 +128,17 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !           D. W. Lozier.
   !***END PROLOGUE  RC3JM
   !
-  INTEGER Ndim , Ier
-  REAL L1 , L2 , L3 , M1 , M2min , M2max , Thrcof(Ndim)
+  INTEGER Ndim, Ier
+  REAL L1, L2, L3, M1, M2min, M2max, Thrcof(Ndim)
   !
-  INTEGER i , index , lstep , n , nfin , nfinp1 , nfinp2 , nfinp3 , nlim , &
+  INTEGER i, index, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, &
     nstep2
-  REAL a1 , a1s , c1 , c1old , c2 , cnorm , R1MACH , dv , eps , huge , m2 , &
-    m3 , newfac , oldfac , one , ratio , sign1 , sign2 , srhuge , &
-    srtiny , sum1 , sum2 , sumbac , sumfor , sumuni , thresh , tiny , &
-    two , x , x1 , x2 , x3 , y , y1 , y2 , y3 , zero
+  REAL a1, a1s, c1, c1old, c2, cnorm, R1MACH, dv, eps, huge, m2, &
+    m3, newfac, oldfac, one, ratio, sign1, sign2, srhuge, &
+    srtiny, sum1, sum2, sumbac, sumfor, sumuni, thresh, tiny, &
+    two, x, x1, x2, x3, y, y1, y2, y3, zero
   !
-  DATA zero , eps , one , two/0.0 , 0.01 , 1.0 , 2.0/
+  DATA zero, eps, one, two/0.0, 0.01, 1.0, 2.0/
   !
   !***FIRST EXECUTABLE STATEMENT  RC3JM
   Ier = 0
@@ -256,11 +256,11 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
         IF ( ABS(x)>=srhuge ) THEN
           !
           !  This is reached if last 3j coefficient larger than SRHUGE,
-          !  so that the recursion series THRCOF(1), ... , THRCOF(LSTEP)
+          !  so that the recursion series THRCOF(1), ..., THRCOF(LSTEP)
           !  has to be rescaled to prevent overflow
           !
           !     MSCALE = MSCALE + 1
-          DO i = 1 , lstep
+          DO i = 1, lstep
             IF ( ABS(Thrcof(i))<srtiny ) Thrcof(i) = zero
             Thrcof(i) = Thrcof(i)/srhuge
           ENDDO
@@ -332,11 +332,11 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
           IF ( ABS(y)>=srhuge ) THEN
             !
             !  This is reached if last 3j coefficient larger than SRHUGE,
-            !  so that the recursion series THRCOF(NFIN), ... , THRCOF(NFIN-LSTEP+1)
+            !  so that the recursion series THRCOF(NFIN), ..., THRCOF(NFIN-LSTEP+1)
             !  has to be rescaled to prevent overflow.
             !
             !     MSCALE = MSCALE + 1
-            DO i = 1 , lstep
+            DO i = 1, lstep
               index = nfin - i + 1
               IF ( ABS(Thrcof(index))<srtiny ) Thrcof(index) = zero
               Thrcof(index) = Thrcof(index)/srhuge
@@ -377,13 +377,13 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
         !
         nlim = nlim + 1
         ratio = one/ratio
-        DO n = nlim , nfin
+        DO n = nlim, nfin
           Thrcof(n) = ratio*Thrcof(n)
         ENDDO
         sumuni = sumfor + ratio*ratio*sumbac
       ELSE
         !
-        DO n = 1 , nlim
+        DO n = 1, nlim
           Thrcof(n) = ratio*Thrcof(n)
         ENDDO
         sumuni = ratio*ratio*sumfor + sumbac
@@ -420,18 +420,19 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   IF ( ABS(cnorm)<one ) THEN
     !
     thresh = tiny/ABS(cnorm)
-    DO n = 1 , nfin
+    DO n = 1, nfin
       IF ( ABS(Thrcof(n))<thresh ) Thrcof(n) = zero
       Thrcof(n) = cnorm*Thrcof(n)
     ENDDO
     GOTO 99999
   ENDIF
   !
-  DO n = 1 , nfin
+  DO n = 1, nfin
     Thrcof(n) = cnorm*Thrcof(n)
   ENDDO
   RETURN
   !
   !
   !
-  99999 END SUBROUTINE RC3JM
+  99999 CONTINUE
+  END SUBROUTINE RC3JM

@@ -25,42 +25,42 @@ SUBROUTINE CCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  CCHK53
   !     .. Parameters ..
-  COMPLEX ZERO , ONE
+  COMPLEX ZERO, ONE
   PARAMETER (ZERO=(0.0,0.0),ONE=(1.0,0.0))
-  REAL RZERO , RONE
+  REAL RZERO, RONE
   PARAMETER (RZERO=0.0,RONE=1.0)
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  REAL Eps , Thresh
-  INTEGER Kprint , Nalf , Nbet , Nidim , Nmax , Nout
+  REAL Eps, Thresh
+  INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
   CHARACTER(6) :: Sname
   !     .. Array Arguments ..
-  COMPLEX Aa(Nmax*Nmax) , Ab(2*Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax) ,&
-    Bb(Nmax*Nmax) , Bet(Nbet) , Bs(Nmax*Nmax) , C(Nmax,Nmax) ,&
-    Cc(Nmax*Nmax) , Cs(Nmax*Nmax) , Ct(Nmax) , W(2*Nmax)
+  COMPLEX Aa(Nmax*Nmax), Ab(2*Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax) ,&
+    Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), C(Nmax,Nmax) ,&
+    Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax), W(2*Nmax)
   REAL G(Nmax)
   INTEGER Idim(Nidim)
   !     .. Local Scalars ..
-  COMPLEX alpha , als , beta , bets
-  REAL err , errmax , rbeta , rbets
-  INTEGER i , ia , ib , ict , icu , ik , in , j , jc , jj , jjab , k , ks ,&
-    laa , lbb , lcc , lda , ldas , ldb , ldbs , ldc , ldcs , lj , ma ,&
-    n , na , nargs , nc , nerr , ns
-  LOGICAL conj , ftl , null , reset , tran , upper
-  CHARACTER :: trans , transs , uplo , transt , uplos
-  CHARACTER(2) :: ichu , icht
+  COMPLEX alpha, als, beta, bets
+  REAL err, errmax, rbeta, rbets
+  INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, jjab, k, ks ,&
+    laa, lbb, lcc, lda, ldas, ldb, ldbs, ldc, ldcs, lj, ma ,&
+    n, na, nargs, nc, nerr, ns
+  LOGICAL conj, ftl, null, reset, tran, upper
+  CHARACTER :: trans, transs, uplo, transt, uplos
+  CHARACTER(2) :: ichu, icht
   !     .. Local Arrays ..
   LOGICAL isame(13)
   !     .. External Functions ..
   INTEGER NUMXER
-  LOGICAL LCE , LCERES
-  EXTERNAL LCE , LCERES , NUMXER
+  LOGICAL LCE, LCERES
+  EXTERNAL LCE, LCERES, NUMXER
   !     .. External Subroutines ..
-  EXTERNAL CHER2K , CSYR2K , CMAKE3 , CMMCH
+  EXTERNAL CHER2K, CSYR2K, CMAKE3, CMMCH
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , MAX , MIN
+  INTRINSIC ABS, MAX, MIN
   !     .. Data statements ..
-  DATA ichu/'UL'/ , icht/'NC'/
+  DATA ichu/'UL'/, icht/'NC'/
   !***FIRST EXECUTABLE STATEMENT  CCHK53
   conj = Sname(2:3)=='HE'
   !
@@ -69,7 +69,7 @@ SUBROUTINE CCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   reset = .TRUE.
   errmax = RZERO
   !
-  DO in = 1 , Nidim
+  DO in = 1, Nidim
     n = Idim(in)
     !        Set LDC to 1 more than minimum value if room.
     ldc = n
@@ -78,10 +78,10 @@ SUBROUTINE CCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
     IF ( ldc<=Nmax ) THEN
       lcc = ldc*n
       !
-      DO ik = 1 , Nidim
+      DO ik = 1, Nidim
         k = Idim(ik)
         !
-        DO ict = 1 , 2
+        DO ict = 1, 2
           trans = icht(ict:ict)
           tran = trans=='C'
           IF ( tran.AND..NOT.conj ) trans = 'T'
@@ -119,14 +119,14 @@ SUBROUTINE CCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                 ZERO)
             ENDIF
             !
-            DO icu = 1 , 2
+            DO icu = 1, 2
               uplo = ichu(icu:icu)
               upper = uplo=='U'
               !
-              DO ia = 1 , Nalf
+              DO ia = 1, Nalf
                 alpha = Alf(ia)
                 !
-                DO ib = 1 , Nbet
+                DO ib = 1, Nbet
                   beta = Bet(ib)
                   IF ( conj ) THEN
                     rbeta = REAL(beta)
@@ -150,11 +150,11 @@ SUBROUTINE CCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                   ns = n
                   ks = k
                   als = alpha
-                  DO i = 1 , laa
+                  DO i = 1, laa
                     As(i) = Aa(i)
                   ENDDO
                   ldas = lda
-                  DO i = 1 , lbb
+                  DO i = 1, lbb
                     Bs(i) = Bb(i)
                   ENDDO
                   ldbs = ldb
@@ -163,7 +163,7 @@ SUBROUTINE CCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                   ELSE
                     bets = beta
                   ENDIF
-                  DO i = 1 , lcc
+                  DO i = 1, lcc
                     Cs(i) = Cc(i)
                   ENDDO
                   ldcs = ldc
@@ -211,7 +211,7 @@ SUBROUTINE CCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                   !                       If data was incorrectly changed, report and
                   !                       return.
                   !
-                  DO i = 1 , nargs
+                  DO i = 1, nargs
                     IF ( .NOT.isame(i) ) THEN
                       Fatal = .TRUE.
                       IF ( Kprint>=2 ) WRITE (Nout,FMT=99002) i
@@ -229,7 +229,7 @@ SUBROUTINE CCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                     ENDIF
                     jjab = 1
                     jc = 1
-                    DO j = 1 , n
+                    DO j = 1, n
                       IF ( upper ) THEN
                         jj = 1
                         lj = j
@@ -238,7 +238,7 @@ SUBROUTINE CCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                         lj = n - j + 1
                       ENDIF
                       IF ( tran ) THEN
-                        DO i = 1 , k
+                        DO i = 1, k
                           W(i) = alpha*Ab((j-1)*2*Nmax+k+i)
                           IF ( conj ) THEN
                             W(k+i) = CONJG(alpha)*Ab((j-1)*2*Nmax+i)
@@ -251,7 +251,7 @@ SUBROUTINE CCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                           W,2*Nmax,beta,C(jj,j),Nmax,Ct,G,Cc(jc),&
                           ldc,Eps,err,ftl,Nout,.TRUE.,Kprint)
                       ELSE
-                        DO i = 1 , k
+                        DO i = 1, k
                           IF ( conj ) THEN
                             W(i) = alpha*CONJG(Ab((k+i-1)*Nmax+j))
                             W(k+i) = CONJG(alpha*Ab((i-1)*Nmax+j))
@@ -277,13 +277,13 @@ SUBROUTINE CCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
                         IF ( Kprint>=3 ) THEN
                           WRITE (Nout,FMT=99004) Sname
                           IF ( conj ) THEN
-                            WRITE (Nout,FMT=99005) nc , Sname , uplo ,&
-                              trans , n , k , alpha , lda , ldb ,&
-                              rbeta , ldc
+                            WRITE (Nout,FMT=99005) nc, Sname, uplo ,&
+                              trans, n, k, alpha, lda, ldb ,&
+                              rbeta, ldc
                           ELSE
-                            WRITE (Nout,FMT=99006) nc , Sname , uplo ,&
-                              trans , n , k , alpha , lda , ldb ,&
-                              beta , ldc
+                            WRITE (Nout,FMT=99006) nc, Sname, uplo ,&
+                              trans, n, k, alpha, lda, ldb ,&
+                              beta, ldc
                           ENDIF
                         ENDIF
                       ENDIF
@@ -309,9 +309,9 @@ SUBROUTINE CCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   IF ( .NOT.Fatal ) THEN
     IF ( Kprint>=3 ) THEN
       IF ( errmax<Thresh ) THEN
-        WRITE (Nout,FMT=99001) Sname , nc
+        WRITE (Nout,FMT=99001) Sname, nc
       ELSE
-        WRITE (Nout,FMT=99003) Sname , nc , errmax
+        WRITE (Nout,FMT=99003) Sname, nc, errmax
       ENDIF
     ENDIF
   ENDIF

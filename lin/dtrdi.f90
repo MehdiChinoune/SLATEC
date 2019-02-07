@@ -69,12 +69,12 @@ SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DTRDI
-  INTEGER Ldt , N , Job , Info
-  REAL(8) :: T(Ldt,*) , Det(2)
+  INTEGER Ldt, N, Job, Info
+  REAL(8) :: T(Ldt,*), Det(2)
   !
   REAL(8) :: temp
   REAL(8) :: ten
-  INTEGER i , j , k , kb , km1 , kp1
+  INTEGER i, j, k, kb, km1, kp1
   !***FIRST EXECUTABLE STATEMENT  DTRDI
   !
   !        COMPUTE DETERMINANT
@@ -83,7 +83,7 @@ SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
     Det(1) = 1.0D0
     Det(2) = 0.0D0
     ten = 10.0D0
-    DO i = 1 , N
+    DO i = 1, N
       Det(1) = T(i,i)*Det(1)
       IF ( Det(1)==0.0D0 ) EXIT
       DO WHILE ( ABS(Det(1))<1.0D0 )
@@ -104,7 +104,7 @@ SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
       !
       !              COMPUTE INVERSE OF LOWER TRIANGULAR
       !
-      DO kb = 1 , N
+      DO kb = 1, N
         k = N + 1 - kb
         Info = k
         IF ( T(k,k)==0.0D0 ) GOTO 99999
@@ -113,7 +113,7 @@ SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
         IF ( k/=N ) CALL DSCAL(N-k,temp,T(k+1,k),1)
         km1 = k - 1
         IF ( km1>=1 ) THEN
-          DO j = 1 , km1
+          DO j = 1, km1
             temp = T(k,j)
             T(k,j) = 0.0D0
             CALL DAXPY(N-k+1,temp,T(k,k),1,T(k,j),1)
@@ -122,7 +122,7 @@ SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
       ENDDO
       Info = 0
     ELSE
-      DO k = 1 , N
+      DO k = 1, N
         Info = k
         IF ( T(k,k)==0.0D0 ) GOTO 99999
         T(k,k) = 1.0D0/T(k,k)
@@ -130,7 +130,7 @@ SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
         CALL DSCAL(k-1,temp,T(1,k),1)
         kp1 = k + 1
         IF ( N>=kp1 ) THEN
-          DO j = kp1 , N
+          DO j = kp1, N
             temp = T(k,j)
             T(k,j) = 0.0D0
             CALL DAXPY(k,temp,T(1,k),1,T(1,j),1)
@@ -140,4 +140,5 @@ SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
       Info = 0
     ENDIF
   ENDIF
-  99999 END SUBROUTINE DTRDI
+  99999 CONTINUE
+  END SUBROUTINE DTRDI

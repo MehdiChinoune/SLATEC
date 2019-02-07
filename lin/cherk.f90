@@ -122,25 +122,25 @@ SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  CHERK
   !     .. Scalar Arguments ..
-  CHARACTER :: Uplo , Trans
-  INTEGER N , K , Lda , Ldc
-  REAL Alpha , Beta
+  CHARACTER :: Uplo, Trans
+  INTEGER N, K, Lda, Ldc
+  REAL Alpha, Beta
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*) , C(Ldc,*)
+  COMPLEX A(Lda,*), C(Ldc,*)
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
-  INTRINSIC CMPLX , CONJG , MAX , REAL
+  INTRINSIC CMPLX, CONJG, MAX, REAL
   !     .. Local Scalars ..
   LOGICAL upper
-  INTEGER i , info , j , l , nrowa
+  INTEGER i, info, j, l, nrowa
   REAL rtemp
   COMPLEX temp
   !     .. Parameters ..
-  REAL ONE , ZERO
+  REAL ONE, ZERO
   PARAMETER (ONE=1.0E+0,ZERO=0.0E+0)
   !***FIRST EXECUTABLE STATEMENT  CHERK
   !
@@ -181,29 +181,29 @@ SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   IF ( Alpha==ZERO ) THEN
     IF ( upper ) THEN
       IF ( Beta==ZERO ) THEN
-        DO j = 1 , N
-          DO i = 1 , j
+        DO j = 1, N
+          DO i = 1, j
             C(i,j) = ZERO
           ENDDO
         ENDDO
       ELSE
-        DO j = 1 , N
-          DO i = 1 , j - 1
+        DO j = 1, N
+          DO i = 1, j - 1
             C(i,j) = Beta*C(i,j)
           ENDDO
           C(j,j) = Beta*REAL(C(j,j))
         ENDDO
       ENDIF
     ELSEIF ( Beta==ZERO ) THEN
-      DO j = 1 , N
-        DO i = j , N
+      DO j = 1, N
+        DO i = j, N
           C(i,j) = ZERO
         ENDDO
       ENDDO
     ELSE
-      DO j = 1 , N
+      DO j = 1, N
         C(j,j) = Beta*REAL(C(j,j))
-        DO i = j + 1 , N
+        DO i = j + 1, N
           C(i,j) = Beta*C(i,j)
         ENDDO
       ENDDO
@@ -218,21 +218,21 @@ SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
     !        Form  C := alpha*A*conjg( A' ) + beta*C.
     !
     IF ( upper ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( Beta==ZERO ) THEN
-          DO i = 1 , j
+          DO i = 1, j
             C(i,j) = ZERO
           ENDDO
         ELSEIF ( Beta/=ONE ) THEN
-          DO i = 1 , j - 1
+          DO i = 1, j - 1
             C(i,j) = Beta*C(i,j)
           ENDDO
           C(j,j) = Beta*REAL(C(j,j))
         ENDIF
-        DO l = 1 , K
+        DO l = 1, K
           IF ( A(j,l)/=CMPLX(ZERO) ) THEN
             temp = Alpha*CONJG(A(j,l))
-            DO i = 1 , j - 1
+            DO i = 1, j - 1
               C(i,j) = C(i,j) + temp*A(i,l)
             ENDDO
             C(j,j) = REAL(C(j,j)) + REAL(temp*A(i,l))
@@ -240,22 +240,22 @@ SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
         ENDDO
       ENDDO
     ELSE
-      DO j = 1 , N
+      DO j = 1, N
         IF ( Beta==ZERO ) THEN
-          DO i = j , N
+          DO i = j, N
             C(i,j) = ZERO
           ENDDO
         ELSEIF ( Beta/=ONE ) THEN
           C(j,j) = Beta*REAL(C(j,j))
-          DO i = j + 1 , N
+          DO i = j + 1, N
             C(i,j) = Beta*C(i,j)
           ENDDO
         ENDIF
-        DO l = 1 , K
+        DO l = 1, K
           IF ( A(j,l)/=CMPLX(ZERO) ) THEN
             temp = Alpha*CONJG(A(j,l))
             C(j,j) = REAL(C(j,j)) + REAL(temp*A(j,l))
-            DO i = j + 1 , N
+            DO i = j + 1, N
               C(i,j) = C(i,j) + temp*A(i,l)
             ENDDO
           ENDIF
@@ -266,10 +266,10 @@ SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
     !        Form  C := alpha*conjg( A' )*A + beta*C.
     !
   ELSEIF ( upper ) THEN
-    DO j = 1 , N
-      DO i = 1 , j - 1
+    DO j = 1, N
+      DO i = 1, j - 1
         temp = ZERO
-        DO l = 1 , K
+        DO l = 1, K
           temp = temp + CONJG(A(l,i))*A(l,j)
         ENDDO
         IF ( Beta==ZERO ) THEN
@@ -279,7 +279,7 @@ SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
         ENDIF
       ENDDO
       rtemp = ZERO
-      DO l = 1 , K
+      DO l = 1, K
         rtemp = rtemp + CONJG(A(l,j))*A(l,j)
       ENDDO
       IF ( Beta==ZERO ) THEN
@@ -289,9 +289,9 @@ SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
       ENDIF
     ENDDO
   ELSE
-    DO j = 1 , N
+    DO j = 1, N
       rtemp = ZERO
-      DO l = 1 , K
+      DO l = 1, K
         rtemp = rtemp + CONJG(A(l,j))*A(l,j)
       ENDDO
       IF ( Beta==ZERO ) THEN
@@ -299,9 +299,9 @@ SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
       ELSE
         C(j,j) = Alpha*rtemp + Beta*REAL(C(j,j))
       ENDIF
-      DO i = j + 1 , N
+      DO i = j + 1, N
         temp = ZERO
-        DO l = 1 , K
+        DO l = 1, K
           temp = temp + CONJG(A(l,i))*A(l,j)
         ENDDO
         IF ( Beta==ZERO ) THEN

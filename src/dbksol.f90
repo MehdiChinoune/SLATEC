@@ -34,15 +34,15 @@ SUBROUTINE DBKSOL(N,A,X)
   !***END PROLOGUE  DBKSOL
   !
   REAL(8) :: DDOT
-  INTEGER j , k , m , N , nm1
-  REAL(8) :: A(*) , X(*)
+  INTEGER j, k, m, N, nm1
+  REAL(8) :: A(*), X(*)
   !
   !***FIRST EXECUTABLE STATEMENT  DBKSOL
   m = (N*(N+1))/2
   X(N) = X(N)*A(m)
   nm1 = N - 1
   IF ( nm1>=1 ) THEN
-    DO k = 1 , nm1
+    DO k = 1, nm1
       j = N - k
       m = m - k - 1
       X(j) = X(j)*A(m) - DDOT(k,A(m+1),1,X(j+1),1)

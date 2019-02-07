@@ -162,18 +162,18 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  QAGIE
   !
-  REAL abseps , Abserr , Alist , area , area1 , area12 , area2 , a1 , a2 , &
-    Blist , boun , Bound , b1 , b2 , correc , defabs , defab1 , defab2 , &
-    dres , R1MACH , Elist , epmach , Epsabs , Epsrel , erlarg , erlast , &
-    errbnd , errmax , error1 , error2 , erro12 , errsum , ertest , F , &
-    oflow , resabs , reseps , Result , res3la , Rlist , rlist2 , small , &
+  REAL abseps, Abserr, Alist, area, area1, area12, area2, a1, a2, &
+    Blist, boun, Bound, b1, b2, correc, defabs, defab1, defab2, &
+    dres, R1MACH, Elist, epmach, Epsabs, Epsrel, erlarg, erlast, &
+    errbnd, errmax, error1, error2, erro12, errsum, ertest, F, &
+    oflow, resabs, reseps, Result, res3la, Rlist, rlist2, small, &
     uflow
-  INTEGER id , Ier , ierro , Inf , Iord , iroff1 , iroff2 , iroff3 , &
-    jupbnd , k , ksgn , ktmin , Last , Limit , maxerr , Neval , nres , &
-    nrmax , numrl2
-  LOGICAL extrap , noext
+  INTEGER id, Ier, ierro, Inf, Iord, iroff1, iroff2, iroff3, &
+    jupbnd, k, ksgn, ktmin, Last, Limit, maxerr, Neval, nres, &
+    nrmax, numrl2
+  LOGICAL extrap, noext
   !
-  DIMENSION Alist(*) , Blist(*) , Elist(*) , Iord(*) , res3la(3) , Rlist(*)&
+  DIMENSION Alist(*), Blist(*), Elist(*), Iord(*), res3la(3), Rlist(*)&
     , rlist2(52)
   !
   EXTERNAL F
@@ -303,7 +303,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !           MAIN DO-LOOP
   !           ------------
   !
-  DO Last = 2 , Limit
+  DO Last = 2, Limit
     !
     !           BISECT THE SUBINTERVAL WITH NRMAX-TH LARGEST
     !           ERROR ESTIMATE.
@@ -405,7 +405,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
         id = nrmax
         jupbnd = Last
         IF ( Last>(2+Limit/2) ) jupbnd = Limit + 3 - Last
-        DO k = id , jupbnd
+        DO k = id, jupbnd
           maxerr = Iord(nrmax)
           errmax = Elist(maxerr)
           IF ( ABS(Blist(maxerr)-Alist(maxerr))>small ) GOTO 100
@@ -469,11 +469,12 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     !           COMPUTE GLOBAL INTEGRAL SUM.
     !
     200  Result = 0.0E+00
-    DO k = 1 , Last
+    DO k = 1, Last
       Result = Result + Rlist(k)
     ENDDO
     Abserr = errsum
     300  Neval = 30*Last - 15
     IF ( Inf==2 ) Neval = 2*Neval
     IF ( Ier>2 ) Ier = Ier - 1
-    99999 END SUBROUTINE QAGIE
+      99999 CONTINUE
+  END SUBROUTINE QAGIE

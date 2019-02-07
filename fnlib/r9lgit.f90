@@ -4,8 +4,8 @@ FUNCTION R9LGIT(A,X,Algap1)
   IMPLICIT NONE
   !*--R9LGIT5
   !*** Start of declarations inserted by SPAG
-  REAL A , a1x , Algap1 , ax , eps , fk , hstar , p , r , R1MACH , R9LGIT , &
-    s , sqeps , t , X
+  REAL A, a1x, Algap1, ax, eps, fk, hstar, p, r, R1MACH, R9LGIT, &
+    s, sqeps, t, X
   INTEGER k
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9LGIT
@@ -34,8 +34,8 @@ FUNCTION R9LGIT(A,X,Algap1)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  R9LGIT
-  SAVE eps , sqeps
-  DATA eps , sqeps/2*0.0/
+  SAVE eps, sqeps
+  DATA eps, sqeps/2*0.0/
   !***FIRST EXECUTABLE STATEMENT  R9LGIT
   IF ( eps==0.0 ) eps = 0.5*R1MACH(3)
   IF ( sqeps==0.0 ) sqeps = SQRT(R1MACH(4))
@@ -48,7 +48,7 @@ FUNCTION R9LGIT(A,X,Algap1)
   r = 0.0
   p = 1.0
   s = p
-  DO k = 1 , 200
+  DO k = 1, 200
     fk = k
     t = (A+fk)*X*(1.0+r)
     r = t/((ax+fk)*(a1x+fk)-t)

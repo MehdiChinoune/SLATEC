@@ -78,9 +78,9 @@ SUBROUTINE BALANC(Nm,N,A,Low,Igh,Scale)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BALANC
   !
-  INTEGER i , j , k , l , m , N , jj , Nm , Igh , Low , iexc
-  REAL A(Nm,*) , Scale(*)
-  REAL c , f , g , r , s , b2 , radix
+  INTEGER i, j, k, l, m, N, jj, Nm, Igh, Low, iexc
+  REAL A(Nm,*), Scale(*)
+  REAL c, f, g, r, s, b2, radix
   LOGICAL noconv
   !
   !***FIRST EXECUTABLE STATEMENT  BALANC
@@ -95,13 +95,13 @@ SUBROUTINE BALANC(Nm,N,A,Low,Igh,Scale)
   100  Scale(m) = j
   IF ( j/=m ) THEN
     !
-    DO i = 1 , l
+    DO i = 1, l
       f = A(i,j)
       A(i,j) = A(i,m)
       A(i,m) = f
     ENDDO
     !
-    DO i = k , N
+    DO i = k, N
       f = A(j,i)
       A(j,i) = A(m,i)
       A(m,i) = f
@@ -120,86 +120,88 @@ SUBROUTINE BALANC(Nm,N,A,Low,Igh,Scale)
     l = l - 1
   ENDIF
   !     .......... FOR J=L STEP -1 UNTIL 1 DO -- ..........
-  200  DO jj = 1 , l
-  j = l + 1 - jj
-  !
-  DO i = 1 , l
-    IF ( i/=j ) THEN
-      IF ( A(j,i)/=0.0E0 ) GOTO 300
-    ENDIF
-  ENDDO
-  !
-  m = l
-  iexc = 1
-  GOTO 100
-  !
-  300  ENDDO
-  !
-  400  DO j = k , l
-  !
-  DO i = k , l
-    IF ( i/=j ) THEN
-      IF ( A(i,j)/=0.0E0 ) GOTO 500
-    ENDIF
-  ENDDO
-  !
-  m = k
-  iexc = 2
-  GOTO 100
-  500  ENDDO
-  !     .......... NOW BALANCE THE SUBMATRIX IN ROWS K TO L ..........
-  DO i = k , l
-    Scale(i) = 1.0E0
-  ENDDO
-  DO
-    !     .......... ITERATIVE LOOP FOR NORM REDUCTION ..........
-    noconv = .FALSE.
+  200 CONTINUE
+  DO jj = 1, l
+    j = l + 1 - jj
     !
-    DO i = k , l
-      c = 0.0E0
-      r = 0.0E0
-      !
-      DO j = k , l
-        IF ( j/=i ) THEN
-          c = c + ABS(A(j,i))
-          r = r + ABS(A(i,j))
-        ENDIF
-      ENDDO
-      !     .......... GUARD AGAINST ZERO C OR R DUE TO UNDERFLOW ..........
-      IF ( c/=0.0E0.AND.r/=0.0E0 ) THEN
-        g = r/radix
-        f = 1.0E0
-        s = c + r
-        DO WHILE ( c<g )
-          f = f*radix
-          c = c*b2
-        ENDDO
-        g = r*radix
-        DO WHILE ( c>=g )
-          f = f/radix
-          c = c/b2
-        ENDDO
-        !     .......... NOW BALANCE ..........
-        IF ( (c+r)/f<0.95E0*s ) THEN
-          g = 1.0E0/f
-          Scale(i) = Scale(i)*f
-          noconv = .TRUE.
-          !
-          DO j = k , N
-            A(i,j) = A(i,j)*g
-          ENDDO
-          !
-          DO j = 1 , l
-            A(j,i) = A(j,i)*f
-          ENDDO
-        ENDIF
+    DO i = 1, l
+      IF ( i/=j ) THEN
+        IF ( A(j,i)/=0.0E0 ) GOTO 300
       ENDIF
-      !
     ENDDO
     !
-    IF ( .NOT.(noconv) ) EXIT
-  ENDDO
-  !
-  600  Low = k
-  Igh = l
+    m = l
+    iexc = 1
+    GOTO 100
+    !
+    300  ENDDO
+    !
+    400 CONTINUE
+    DO j = k, l
+      !
+      DO i = k, l
+        IF ( i/=j ) THEN
+          IF ( A(i,j)/=0.0E0 ) GOTO 500
+        ENDIF
+      ENDDO
+      !
+      m = k
+      iexc = 2
+      GOTO 100
+      500  ENDDO
+      !     .......... NOW BALANCE THE SUBMATRIX IN ROWS K TO L ..........
+      DO i = k, l
+        Scale(i) = 1.0E0
+      ENDDO
+      DO
+        !     .......... ITERATIVE LOOP FOR NORM REDUCTION ..........
+        noconv = .FALSE.
+        !
+        DO i = k, l
+          c = 0.0E0
+          r = 0.0E0
+          !
+          DO j = k, l
+            IF ( j/=i ) THEN
+              c = c + ABS(A(j,i))
+              r = r + ABS(A(i,j))
+            ENDIF
+          ENDDO
+          !     .......... GUARD AGAINST ZERO C OR R DUE TO UNDERFLOW ..........
+          IF ( c/=0.0E0.AND.r/=0.0E0 ) THEN
+            g = r/radix
+            f = 1.0E0
+            s = c + r
+            DO WHILE ( c<g )
+              f = f*radix
+              c = c*b2
+            ENDDO
+            g = r*radix
+            DO WHILE ( c>=g )
+              f = f/radix
+              c = c/b2
+            ENDDO
+            !     .......... NOW BALANCE ..........
+            IF ( (c+r)/f<0.95E0*s ) THEN
+              g = 1.0E0/f
+              Scale(i) = Scale(i)*f
+              noconv = .TRUE.
+              !
+              DO j = k, N
+                A(i,j) = A(i,j)*g
+              ENDDO
+              !
+              DO j = 1, l
+                A(j,i) = A(j,i)*f
+              ENDDO
+            ENDIF
+          ENDIF
+          !
+        ENDDO
+        !
+        IF ( .NOT.(noconv) ) EXIT
+      ENDDO
+      !
+      600  Low = k
+      Igh = l
 END SUBROUTINE BALANC

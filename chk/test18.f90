@@ -39,7 +39,7 @@ PROGRAM TEST18
   !***REVISION HISTORY  (YYMMDD)
   !   920601  DATE WRITTEN
   !***END PROLOGUE  TEST18
-  INTEGER ipass , kprint , lin , lun , nfail
+  INTEGER ipass, kprint, lin, lun, nfail
   !     .. External Functions ..
   INTEGER I1MACH
   EXTERNAL I1MACH

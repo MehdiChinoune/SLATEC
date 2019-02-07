@@ -34,7 +34,7 @@ SUBROUTINE IPPERM(Ix,N,Iperm,Ier)
   !   900618  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text.
   !***END PROLOGUE  IPPERM
-  INTEGER Ix(*) , N , Iperm(*) , i , Ier , indx , indx0 , itemp , istrt
+  INTEGER Ix(*), N, Iperm(*), i, Ier, indx, indx0, itemp, istrt
   !***FIRST EXECUTABLE STATEMENT  IPPERM
   Ier = 0
   IF ( N<1 ) THEN
@@ -47,7 +47,7 @@ SUBROUTINE IPPERM(Ix,N,Iperm,Ier)
   !
   !     CHECK WHETHER IPERM IS A VALID PERMUTATION
   !
-  DO i = 1 , N
+  DO i = 1, N
     indx = ABS(Iperm(i))
     IF ( (indx>=1).AND.(indx<=N) ) THEN
       IF ( Iperm(indx)>0 ) THEN
@@ -66,7 +66,7 @@ SUBROUTINE IPPERM(Ix,N,Iperm,Ier)
   !     USE THE IPERM VECTOR AS A FLAG.
   !     IF IPERM(I) > 0, THEN THE I-TH VALUE IS IN CORRECT LOCATION
   !
-  DO istrt = 1 , N
+  DO istrt = 1, N
     IF ( Iperm(istrt)<=0 ) THEN
       indx = istrt
       indx0 = indx

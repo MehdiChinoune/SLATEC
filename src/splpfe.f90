@@ -6,8 +6,8 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   IMPLICIT NONE
   !*--SPLPFE7
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Ienter , ihi , il1 , ilow , ipage , IPLOC , iu1 , j , key , &
-    Lbm , Lmx , lpg , Mrelas , n20002 , n20050 , Nvars
+  INTEGER i, Ienter, ihi, il1, ilow, ipage, IPLOC, iu1, j, key, &
+    Lbm, Lmx, lpg, Mrelas, n20002, n20050, Nvars
   REAL SASUM
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPLPFE
@@ -40,12 +40,12 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  SPLPFE
-  INTEGER Ibasis(*) , Imat(*) , Ibrc(Lbm,2) , Ipr(*) , Iwr(*) , Ind(*) , &
+  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), &
     Ibb(*)
-  REAL Amat(*) , Basmat(*) , Csc(*) , Wr(*) , Ww(*) , Bl(*) , Bu(*) , &
-    Rz(*) , Rg(*) , Colnrm(*) , Duals(*) , cnorm , Dirnrm , Dulnrm , &
-    Eps , Erdnrm , Gg , one , ratio , rcost , rmax , zero
-  LOGICAL Found , trans
+  REAL Amat(*), Basmat(*), Csc(*), Wr(*), Ww(*), Bl(*), Bu(*), &
+    Rz(*), Rg(*), Colnrm(*), Duals(*), cnorm, Dirnrm, Dulnrm, &
+    Eps, Erdnrm, Gg, one, ratio, rcost, rmax, zero
+  LOGICAL Found, trans
   !***FIRST EXECUTABLE STATEMENT  SPLPFE
   lpg = Lmx - (Nvars+4)
   zero = 0.E0
@@ -116,7 +116,7 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
       DO
         iu1 = MIN(Lmx-2,ihi)
         IF ( il1>iu1 ) EXIT
-        DO i = il1 , iu1
+        DO i = il1, iu1
           Ww(Imat(i)) = Amat(i)*Csc(j)
         ENDDO
         IF ( ihi<=Lmx-2 ) EXIT

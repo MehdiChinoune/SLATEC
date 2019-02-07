@@ -72,14 +72,14 @@ SUBROUTINE BESY(X,Fnu,N,Y)
   !***END PROLOGUE  BESY
   !
   EXTERNAL YAIRY
-  INTEGER i , iflw , j , N , nb , nd , nn , nud , nulim
+  INTEGER i, iflw, j, N, nb, nd, nn, nud, nulim
   INTEGER I1MACH
-  REAL azn , cn , dnu , elim , flgjy , fn , Fnu , ran , s , s1 , s2 , tm , &
-    trx , w , wk , w2n , X , xlim , xxn , Y
-  REAL BESY0 , BESY1 , R1MACH
-  DIMENSION w(2) , nulim(2) , Y(*) , wk(7)
+  REAL azn, cn, dnu, elim, flgjy, fn, Fnu, ran, s, s1, s2, tm, &
+    trx, w, wk, w2n, X, xlim, xxn, Y
+  REAL BESY0, BESY1, R1MACH
+  DIMENSION w(2), nulim(2), Y(*), wk(7)
   SAVE nulim
-  DATA nulim(1) , nulim(2)/70 , 100/
+  DATA nulim(1), nulim(2)/70, 100/
   !***FIRST EXECUTABLE STATEMENT  BESY
   nn = -I1MACH(12)
   elim = 2.303E0*(nn*R1MACH(5)-3.0E0)
@@ -153,7 +153,7 @@ SUBROUTINE BESY(X,Fnu,N,Y)
         !     FORWARD RECUR FROM DNU TO FNU+1 TO GET Y(1) AND Y(2)
         IF ( nd==1 ) nud = nud - 1
         IF ( nud>0 ) THEN
-          DO i = 1 , nud
+          DO i = 1, nud
             s = s2
             s2 = tm*s2 - s1
             s1 = s
@@ -185,28 +185,31 @@ SUBROUTINE BESY(X,Fnu,N,Y)
       Y(2) = s2
     ENDIF
   ENDIF
-  100  IF ( nd==2 ) RETURN
+  100 CONTINUE
+  IF ( nd==2 ) RETURN
   !     FORWARD RECUR FROM FNU+2 TO FNU+N-1
-  DO i = 3 , nd
+  DO i = 3, nd
     Y(i) = tm*Y(i-1) - Y(i-2)
     tm = tm + trx
   ENDDO
   RETURN
-  200  IF ( dnu==0.0E0 ) THEN
-  j = nud
-  IF ( j/=1 ) THEN
-    j = j + 1
-    Y(j) = BESY0(X)
+  200 CONTINUE
+  IF ( dnu==0.0E0 ) THEN
+    j = nud
+    IF ( j/=1 ) THEN
+      j = j + 1
+      Y(j) = BESY0(X)
+      IF ( nd==1 ) RETURN
+      j = j + 1
+    ENDIF
+    Y(j) = BESY1(X)
     IF ( nd==1 ) RETURN
-    j = j + 1
+    trx = 2.0E0/X
+    tm = trx
+    GOTO 100
+  ELSE
+    CALL BESYNU(X,Fnu,nd,Y)
+    RETURN
   ENDIF
-  Y(j) = BESY1(X)
-  IF ( nd==1 ) RETURN
-  trx = 2.0E0/X
-  tm = trx
-  GOTO 100
-ELSE
-  CALL BESYNU(X,Fnu,nd,Y)
-  RETURN
-ENDIF
-99999 END SUBROUTINE BESY
+  99999 CONTINUE
+  END SUBROUTINE BESY

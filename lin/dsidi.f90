@@ -83,15 +83,15 @@ SUBROUTINE DSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSIDI
-  INTEGER Lda , N , Job
-  REAL(8) :: A(Lda,*) , Work(*)
+  INTEGER Lda, N, Job
+  REAL(8) :: A(Lda,*), Work(*)
   REAL(8) :: Det(2)
-  INTEGER Kpvt(*) , Inert(3)
+  INTEGER Kpvt(*), Inert(3)
   !
-  REAL(8) :: akkp1 , DDOT , temp
-  REAL(8) :: ten , d , t , ak , akp1
-  INTEGER j , jb , k , km1 , ks , kstep
-  LOGICAL noinv , nodet , noert
+  REAL(8) :: akkp1, DDOT, temp
+  REAL(8) :: ten, d, t, ak, akp1
+  INTEGER j, jb, k, km1, ks, kstep
+  LOGICAL noinv, nodet, noert
   !***FIRST EXECUTABLE STATEMENT  DSIDI
   noinv = MOD(Job,10)==0
   nodet = MOD(Job,100)/10==0
@@ -109,7 +109,7 @@ SUBROUTINE DSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
       ten = 10.0D0
     ENDIF
     t = 0.0D0
-    DO k = 1 , N
+    DO k = 1, N
       d = A(k,k)
       !
       !           CHECK IF 1 BY 1
@@ -117,7 +117,7 @@ SUBROUTINE DSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
       IF ( Kpvt(k)<=0 ) THEN
         !
         !              2 BY 2 BLOCK
-        !              USE DET (D  S)  =  (D/T * C - T) * T  ,  T = ABS(S)
+        !              USE DET (D  S)  =  (D/T * C - T) * T ,  T = ABS(S)
         !                      (S  C)
         !              TO AVOID UNDERFLOW/OVERFLOW TROUBLES.
         !              TAKE TWO PASSES THROUGH SCALING.  USE  T  FOR FLAG.
@@ -173,14 +173,14 @@ SUBROUTINE DSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
         A(k,k+1) = -akkp1/d
         IF ( km1>=1 ) THEN
           CALL DCOPY(km1,A(1,k+1),1,Work,1)
-          DO j = 1 , km1
+          DO j = 1, km1
             A(j,k+1) = DDOT(j,A(1,j),1,Work,1)
             CALL DAXPY(j-1,Work(j),A(1,j),1,A(1,k+1),1)
           ENDDO
           A(k+1,k+1) = A(k+1,k+1) + DDOT(km1,Work,1,A(1,k+1),1)
           A(k,k+1) = A(k,k+1) + DDOT(km1,A(1,k),1,A(1,k+1),1)
           CALL DCOPY(km1,A(1,k),1,Work,1)
-          DO j = 1 , km1
+          DO j = 1, km1
             A(j,k) = DDOT(j,A(1,j),1,Work,1)
             CALL DAXPY(j-1,Work(j),A(1,j),1,A(1,k),1)
           ENDDO
@@ -194,7 +194,7 @@ SUBROUTINE DSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
         A(k,k) = 1.0D0/A(k,k)
         IF ( km1>=1 ) THEN
           CALL DCOPY(km1,A(1,k),1,Work,1)
-          DO j = 1 , km1
+          DO j = 1, km1
             A(j,k) = DDOT(j,A(1,j),1,Work,1)
             CALL DAXPY(j-1,Work(j),A(1,j),1,A(1,k),1)
           ENDDO
@@ -208,7 +208,7 @@ SUBROUTINE DSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
       ks = ABS(Kpvt(k))
       IF ( ks/=k ) THEN
         CALL DSWAP(ks,A(1,ks),1,A(1,k),1)
-        DO jb = ks , k
+        DO jb = ks, k
           j = k + ks - jb
           temp = A(j,k)
           A(j,k) = A(ks,j)

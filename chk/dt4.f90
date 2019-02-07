@@ -12,7 +12,7 @@ REAL(8) FUNCTION DT4(X)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DT4
-  REAL(8) :: a , b , DF4S , X , x1 , y
+  REAL(8) :: a, b, DF4S, X, x1, y
   !***FIRST EXECUTABLE STATEMENT  DT4
   a = 0.0D+00
   b = 0.1D+01

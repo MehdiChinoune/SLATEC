@@ -4,9 +4,9 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
   IMPLICIT NONE
   !*--EZFFT15
   !*** Start of declarations inserted by SPAG
-  REAL arg1 , argh , ch1 , ch1h , dch1 , dsh1 , sh1 , tpi , Wa
-  INTEGER i , ib , ido , Ifac , ii , ip , ipm , is , j , k1 , l1 , l2 , N , &
-    nf , nfm1 , nl , nq , nr , ntry , ntryh
+  REAL arg1, argh, ch1, ch1h, dch1, dsh1, sh1, tpi, Wa
+  INTEGER i, ib, ido, Ifac, ii, ip, ipm, is, j, k1, l1, l2, N, &
+    nf, nfm1, nl, nq, nr, ntry, ntryh
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  EZFFT1
   !***SUBSIDIARY
@@ -32,9 +32,9 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  EZFFT1
-  DIMENSION Wa(*) , Ifac(*) , ntryh(4)
+  DIMENSION Wa(*), Ifac(*), ntryh(4)
   SAVE ntryh
-  DATA ntryh(1) , ntryh(2) , ntryh(3) , ntryh(4)/4 , 2 , 3 , 5/
+  DATA ntryh(1), ntryh(2), ntryh(3), ntryh(4)/4, 2, 3, 5/
   !***FIRST EXECUTABLE STATEMENT  EZFFT1
   tpi = 8.*ATAN(1.)
   nl = N
@@ -55,7 +55,7 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
     nl = nq
     IF ( ntry==2 ) THEN
       IF ( nf/=1 ) THEN
-        DO i = 2 , nf
+        DO i = 2, nf
           ib = nf - i + 2
           Ifac(ib+2) = Ifac(ib+1)
         ENDDO
@@ -70,7 +70,7 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
       nfm1 = nf - 1
       l1 = 1
       IF ( nfm1==0 ) RETURN
-      DO k1 = 1 , nfm1
+      DO k1 = 1, nfm1
         ip = Ifac(k1+2)
         l2 = l1*ip
         ido = N/l2
@@ -80,7 +80,7 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
         sh1 = 0.
         dch1 = COS(arg1)
         dsh1 = SIN(arg1)
-        DO j = 1 , ipm
+        DO j = 1, ipm
           ch1h = dch1*ch1 - dsh1*sh1
           sh1 = dch1*sh1 + dsh1*ch1
           ch1 = ch1h
@@ -88,7 +88,7 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
           Wa(i-1) = ch1
           Wa(i) = sh1
           IF ( ido>=5 ) THEN
-            DO ii = 5 , ido , 2
+            DO ii = 5, ido, 2
               i = i + 2
               Wa(i-1) = ch1*Wa(i-3) - sh1*Wa(i-2)
               Wa(i) = ch1*Wa(i-2) + sh1*Wa(i-3)

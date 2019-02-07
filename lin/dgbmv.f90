@@ -130,16 +130,16 @@ SUBROUTINE DGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  DGBMV
   !     .. Scalar Arguments ..
-  REAL(8) :: Alpha , Beta
-  INTEGER Incx , Incy , Kl , Ku , Lda , M , N
+  REAL(8) :: Alpha, Beta
+  INTEGER Incx, Incy, Kl, Ku, Lda, M, N
   CHARACTER :: Trans
   !     .. Array Arguments ..
-  REAL(8) :: A(Lda,*) , X(*) , Y(*)
-  REAL(8) :: ONE , ZERO
+  REAL(8) :: A(Lda,*), X(*), Y(*)
+  REAL(8) :: ONE, ZERO
   PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
   !     .. Local Scalars ..
   REAL(8) :: temp
-  INTEGER i , info , ix , iy , j , jx , jy , k , kup1 , kx , ky , lenx ,&
+  INTEGER i, info, ix, iy, j, jx, jy, k, kup1, kx, ky, lenx ,&
     leny
   !     .. External Functions ..
   LOGICAL LSAME
@@ -147,7 +147,7 @@ SUBROUTINE DGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
-  INTRINSIC MAX , MIN
+  INTRINSIC MAX, MIN
   !***FIRST EXECUTABLE STATEMENT  DGBMV
   !
   !     Test the input parameters.
@@ -210,22 +210,22 @@ SUBROUTINE DGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     IF ( Incy/=1 ) THEN
       iy = ky
       IF ( Beta==ZERO ) THEN
-        DO i = 1 , leny
+        DO i = 1, leny
           Y(iy) = ZERO
           iy = iy + Incy
         ENDDO
       ELSE
-        DO i = 1 , leny
+        DO i = 1, leny
           Y(iy) = Beta*Y(iy)
           iy = iy + Incy
         ENDDO
       ENDIF
     ELSEIF ( Beta==ZERO ) THEN
-      DO i = 1 , leny
+      DO i = 1, leny
         Y(i) = ZERO
       ENDDO
     ELSE
-      DO i = 1 , leny
+      DO i = 1, leny
         Y(i) = Beta*Y(i)
       ENDDO
     ENDIF
@@ -238,23 +238,23 @@ SUBROUTINE DGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     !
     jx = kx
     IF ( Incy==1 ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         IF ( X(jx)/=ZERO ) THEN
           temp = Alpha*X(jx)
           k = kup1 - j
-          DO i = MAX(1,j-Ku) , MIN(M,j+Kl)
+          DO i = MAX(1,j-Ku), MIN(M,j+Kl)
             Y(i) = Y(i) + temp*A(k+i,j)
           ENDDO
         ENDIF
         jx = jx + Incx
       ENDDO
     ELSE
-      DO j = 1 , N
+      DO j = 1, N
         IF ( X(jx)/=ZERO ) THEN
           temp = Alpha*X(jx)
           iy = ky
           k = kup1 - j
-          DO i = MAX(1,j-Ku) , MIN(M,j+Kl)
+          DO i = MAX(1,j-Ku), MIN(M,j+Kl)
             Y(iy) = Y(iy) + temp*A(k+i,j)
             iy = iy + Incy
           ENDDO
@@ -269,21 +269,21 @@ SUBROUTINE DGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
     !
     jy = ky
     IF ( Incx==1 ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         temp = ZERO
         k = kup1 - j
-        DO i = MAX(1,j-Ku) , MIN(M,j+Kl)
+        DO i = MAX(1,j-Ku), MIN(M,j+Kl)
           temp = temp + A(k+i,j)*X(i)
         ENDDO
         Y(jy) = Y(jy) + Alpha*temp
         jy = jy + Incy
       ENDDO
     ELSE
-      DO j = 1 , N
+      DO j = 1, N
         temp = ZERO
         ix = kx
         k = kup1 - j
-        DO i = MAX(1,j-Ku) , MIN(M,j+Kl)
+        DO i = MAX(1,j-Ku), MIN(M,j+Kl)
           temp = temp + A(k+i,j)*X(ix)
           ix = ix + Incx
         ENDDO

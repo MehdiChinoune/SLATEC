@@ -5,12 +5,12 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   IMPLICIT NONE
   !*--LSSODS6
   !*** Start of declarations inserted by SPAG
-  REAL A , acc , B , Diag , Div , gam , gamma , Q , R , R1MACH , Resnrm , &
-    Scales , SDOT , SDSDOT , Td , uro , X , Xnorm , Z , znorm
+  REAL A, acc, B, Diag, Div, gam, gamma, Q, R, R1MACH, Resnrm, &
+    Scales, SDOT, SDSDOT, Td, uro, X, Xnorm, Z, znorm
   REAL znrm0
-  INTEGER Iflag , Irank , irm , irp , Iscale , it , Iter , iterp , j , &
-    J4SAVE , k , kp , Kpivot , l , M , maxmes , mj , mmir , N , nfat
-  INTEGER nfatal , nmir , Nrda
+  INTEGER Iflag, Irank, irm, irp, Iscale, it, Iter, iterp, j, &
+    J4SAVE, k, kp, Kpivot, l, M, maxmes, mj, mmir, N, nfat
+  INTEGER nfatal, nmir, Nrda
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  LSSODS
   !***SUBSIDIARY
@@ -125,8 +125,8 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !   910408  Updated the REFERENCES section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  LSSODS
-  DIMENSION A(Nrda,*) , X(*) , B(*) , Q(Nrda,*) , Diag(*) , Z(*) , Kpivot(*)&
-    , R(*) , Div(*) , Td(*) , Scales(*)
+  DIMENSION A(Nrda,*), X(*), B(*), Q(Nrda,*), Diag(*), Z(*), Kpivot(*)&
+    , R(*), Div(*), Td(*), Scales(*)
   !
   ! **********************************************************************
   !
@@ -153,8 +153,8 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         !
         !     COPY MATRIX A INTO MATRIX Q
         !
-        DO j = 1 , N
-          DO k = 1 , M
+        DO j = 1, N
+          DO k = 1, M
             Q(k,j) = A(k,j)
           ENDDO
         ENDDO
@@ -170,7 +170,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
           !
           !     STORE DIVISORS FOR THE TRIANGULAR SOLUTION
           !
-          DO k = 1 , N
+          DO k = 1, N
             Div(k) = Diag(k)
           ENDDO
           GOTO 100
@@ -200,7 +200,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !
   !     ZERO OUT SOLUTION ARRAY
   !
-  DO k = 1 , N
+  DO k = 1, N
     X(k) = 0.
   ENDDO
   !
@@ -208,7 +208,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
     !
     !     COPY CONSTANT VECTOR INTO R
     !
-    DO k = 1 , M
+    DO k = 1, M
       R(k) = B(k)
     ENDDO
     !
@@ -217,15 +217,15 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
     !     ITERATIVE REFINEMENT OF THE RESIDUAL VECTOR
     ! **********************************************************************
     !
-    DO it = 1 , iterp
+    DO it = 1, iterp
       Iter = it - 1
       !
       !        APPLY ORTHOGONAL TRANSFORMATION TO R
       !
-      DO j = 1 , Irank
+      DO j = 1, Irank
         mj = M - j + 1
         gamma = SDOT(mj,Q(j,j),1,R(j),1)/(Diag(j)*Q(j,j))
-        DO k = j , M
+        DO k = j, M
           R(k) = R(k) + gamma*Q(k,j)
         ENDDO
       ENDDO
@@ -234,7 +234,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
       !
       Z(Irank) = R(Irank)/Div(Irank)
       IF ( irm/=0 ) THEN
-        DO l = 1 , irm
+        DO l = 1, irm
           k = Irank - l
           kp = k + 1
           Z(k) = (R(k)-SDOT(l,Q(k,kp),Nrda,Z(kp),1))/Div(k)
@@ -247,14 +247,14 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         !        MINIMAL LENGTH SOLUTION
         !
         nmir = N - Irank
-        DO k = irp , N
+        DO k = irp, N
           Z(k) = 0.
         ENDDO
-        DO k = 1 , Irank
+        DO k = 1, Irank
           gam = ((Td(k)*Z(k))+SDOT(nmir,Q(k,irp),Nrda,Z(irp),1))&
             /(Td(k)*Div(k))
           Z(k) = Z(k) + gam*Td(k)
-          DO j = irp , N
+          DO j = irp, N
             Z(j) = Z(j) + gam*Q(k,j)
           ENDDO
         ENDDO
@@ -263,7 +263,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
       !        REORDER SOLUTION COMPONENTS ACCORDING TO PIVOTAL POINTS
       !        AND RESCALE ANSWERS AS DICTATED
       !
-      DO k = 1 , N
+      DO k = 1, N
         Z(k) = Z(k)*Scales(k)
         l = Kpivot(k)
         X(l) = X(l) + Z(k)
@@ -277,7 +277,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         !
         !        COMPUTE RESIDUAL VECTOR FOR THE ITERATIVE IMPROVEMENT PROCESS
         !
-        DO k = 1 , M
+        DO k = 1, M
           R(k) = -SDSDOT(N,-B(k),A(k,1),Nrda,X(1),1)
         ENDDO
         Resnrm = SQRT(SDOT(M,R(1),1,R(1),1))
@@ -343,4 +343,5 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   Resnrm = SQRT(SDOT(M,B(1),1,B(1),1))
   RETURN
   !
-  99999 END SUBROUTINE LSSODS
+  99999 CONTINUE
+  END SUBROUTINE LSSODS

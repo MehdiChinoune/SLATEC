@@ -5,7 +5,7 @@ SUBROUTINE SSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   IMPLICIT NONE
   !*--SSDOMN6
   !*** Start of declarations inserted by SPAG
-  REAL SSDI , SSMV
+  REAL SSDI, SSMV
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSDOMN
   !***PURPOSE  Diagonally Scaled Orthomin Sparse Iterative Ax=b Solver.
@@ -208,20 +208,20 @@ SUBROUTINE SSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  SSDOMN
   !     .. Parameters ..
-  INTEGER LOCRB , LOCIB
+  INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  REAL Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
-    Nelt , Nsave
+  REAL Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
+    Nelt, Nsave
   !     .. Array Arguments ..
-  REAL A(N) , B(N) , Rwork(Lenw) , X(N)
-  INTEGER Ia(Nelt) , Iwork(Leniw) , Ja(Nelt)
+  REAL A(N), B(N), Rwork(Lenw), X(N)
+  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locap , loccsa , locdin , locdz , locema , lociw , locp , locr , &
-    locw , locz
+  INTEGER locap, loccsa, locdin, locdz, locema, lociw, locp, locr, &
+    locw, locz
   !     .. External Subroutines ..
-  EXTERNAL SCHKW , SOMN , SS2Y , SSDI , SSDS , SSMV
+  EXTERNAL SCHKW, SOMN, SS2Y, SSDI, SSDS, SSMV
   !***FIRST EXECUTABLE STATEMENT  SSDOMN
   !
   Ierr = 0

@@ -5,10 +5,10 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   IMPLICIT NONE
   !*--HSTCSP6
   !*** Start of declarations inserted by SPAG
-  REAL A , B , Bda , Bdb , Bdc , Bdd , C , D , dum , Elmbda , F , Pertrb , &
-    pi , PIMACH , W
-  INTEGER Idimf , ierr1 , Ierror , Intl , iwan , iwbm , iwbn , iwcm , iwcn , &
-    iwrsq , iwsnth , iwwrk , M , Mbdcnd , N , Nbdcnd
+  REAL A, B, Bda, Bdb, Bdc, Bdd, C, D, dum, Elmbda, F, Pertrb, &
+    pi, PIMACH, W
+  INTEGER Idimf, ierr1, Ierror, Intl, iwan, iwbm, iwbn, iwcm, iwcn, &
+    iwrsq, iwsnth, iwwrk, M, Mbdcnd, N, Nbdcnd
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HSTCSP
   !***PURPOSE  Solve the standard five-point finite difference
@@ -134,11 +134,11 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     values (if any) of the solution at THETA = A.  When
   !     MBDCND = 1, 2, or 7,
   !
-  !              BDA(J) = U(A,R(J)) ,              J=1,2,...,N.
+  !              BDA(J) = U(A,R(J)),              J=1,2,...,N.
   !
   !     When MBDCND = 3, 4, or 8,
   !
-  !              BDA(J) = (d/dTHETA)U(A,R(J)) ,    J=1,2,...,N.
+  !              BDA(J) = (d/dTHETA)U(A,R(J)),    J=1,2,...,N.
   !
   !     When MBDCND has any other value, BDA is a dummy variable.
   !
@@ -146,16 +146,16 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     A one-dimensional array of length N that specifies the boundary
   !     values of the solution at THETA = B.  When MBDCND = 1, 4, or 5,
   !
-  !              BDB(J) = U(B,R(J)) ,              J=1,2,...,N.
+  !              BDB(J) = U(B,R(J)),              J=1,2,...,N.
   !
   !     When MBDCND = 2,3, or 6,
   !
-  !              BDB(J) = (d/dTHETA)U(B,R(J)) ,    J=1,2,...,N.
+  !              BDB(J) = (d/dTHETA)U(B,R(J)),    J=1,2,...,N.
   !
   !     When MBDCND has any other value, BDB is a dummy variable.
   !
   !   C,D
-  !     The range of R , i.e. C .LE. R .LE. D.
+  !     The range of R, i.e. C .LE. R .LE. D.
   !     C must be less than D.  C must be non-negative.
   !
   !   N
@@ -202,7 +202,7 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     A one dimensional array of length M that specifies the boundary
   !     values of the solution at R = C.   When NBDCND = 1 or 2,
   !
-  !              BDC(I) = U(THETA(I),C) ,              I=1,2,...,M.
+  !              BDC(I) = U(THETA(I),C),              I=1,2,...,M.
   !
   !     When NBDCND = 3 or 4,
   !
@@ -214,11 +214,11 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     A one-dimensional array of length M that specifies the boundary
   !     values of the solution at R = D.  When NBDCND = 1 or 4,
   !
-  !              BDD(I) = U(THETA(I),D) ,              I=1,2,...,M.
+  !              BDD(I) = U(THETA(I),D),              I=1,2,...,M.
   !
   !     When NBDCND = 2 or 3,
   !
-  !              BDD(I) = (d/dR)U(THETA(I),D) ,        I=1,2,...,M.
+  !              BDD(I) = (d/dR)U(THETA(I),D),        I=1,2,...,M.
   !
   !     When NBDCND has any other value, BDD is a dummy variable.
   !
@@ -406,7 +406,7 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !***END PROLOGUE  HSTCSP
   !
   !
-  DIMENSION F(Idimf,*) , Bda(*) , Bdb(*) , Bdc(*) , Bdd(*) , W(*)
+  DIMENSION F(Idimf,*), Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HSTCSP
   pi = PIMACH(dum)
   !

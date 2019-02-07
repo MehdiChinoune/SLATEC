@@ -4,7 +4,7 @@ FUNCTION EI(X)
   IMPLICIT NONE
   !*--EI5
   !*** Start of declarations inserted by SPAG
-  REAL E1 , EI , X
+  REAL E1, EI, X
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  EI
   !***PURPOSE  Compute the exponential integral Ei(X).

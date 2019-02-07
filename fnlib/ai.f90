@@ -4,9 +4,9 @@ FUNCTION AI(X)
   IMPLICIT NONE
   !*--AI5
   !*** Start of declarations inserted by SPAG
-  REAL AI , AIE , aifcs , aigcs , CSEVL , R1MACH , theta , X , x3sml , xm , &
-    xmax , xmaxt , z
-  INTEGER INITS , naif , naig
+  REAL AI, AIE, aifcs, aigcs, CSEVL, R1MACH, theta, X, x3sml, xm, &
+    xmax, xmaxt, z
+  INTEGER INITS, naif, naig
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  AI
   !***PURPOSE  Evaluate the Airy function.
@@ -42,9 +42,9 @@ FUNCTION AI(X)
   !           (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  AI
-  DIMENSION aifcs(9) , aigcs(8)
+  DIMENSION aifcs(9), aigcs(8)
   LOGICAL first
-  SAVE aifcs , aigcs , naif , naig , x3sml , xmax , first
+  SAVE aifcs, aigcs, naif, naig, x3sml, xmax, first
   DATA aifcs(1)/ - .03797135849666999750E0/
   DATA aifcs(2)/.05919188853726363857E0/
   DATA aifcs(3)/.00098629280577279975E0/
@@ -94,4 +94,5 @@ FUNCTION AI(X)
   AI = AIE(X)*EXP(-2.0*X*SQRT(X)/3.0)
   RETURN
   !
-  99999 END FUNCTION AI
+  99999 CONTINUE
+  END FUNCTION AI

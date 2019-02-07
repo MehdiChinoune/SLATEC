@@ -89,13 +89,13 @@ SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER Ne , Next(2) , Ierr
-  REAL X1 , X2 , F1 , F2 , D1 , D2 , Xe(*) , Fe(*)
+  INTEGER Ne, Next(2), Ierr
+  REAL X1, X2, F1, F2, D1, D2, Xe(*), Fe(*)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i
-  REAL c2 , c3 , del1 , del2 , delta , h , x , xmi , xma , zero
+  REAL c2, c3, del1, del2, delta, h, x, xmi, xma, zero
   SAVE zero
   DATA zero/0./
   !
@@ -142,7 +142,7 @@ SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !
   !  EVALUATION LOOP.
   !
-  DO i = 1 , Ne
+  DO i = 1, Ne
     x = Xe(i) - X1
     Fe(i) = F1 + x*(D1+x*(c2+x*c3))
     !          COUNT EXTRAPOLATION POINTS.
@@ -155,4 +155,5 @@ SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !
   RETURN
   !------------- LAST LINE OF CHFEV FOLLOWS ------------------------------
-  99999 END SUBROUTINE CHFEV
+  99999 CONTINUE
+  END SUBROUTINE CHFEV

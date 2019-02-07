@@ -32,26 +32,26 @@ SUBROUTINE BSPCK(Lun,Kprint,Ipass)
   !           returns for all values of KPRINT and code polished.  (WRB)
   !***END PROLOGUE  BSPCK
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
-  REAL atol , bquad , bv , den , dn , er , fbcl , fbcr , pi , pquad , quad , &
-    spv , tol , x1 , x2 , xl , xx
-  INTEGER i , ibcl , ibcr , id , ierr , iknt , ileft , ilo , inbv , inev , &
-    inppv , iwork , j , jhigh , jj , k , kk , knt , kntopt , kontrl , &
-    ldc , ldcc , lxi , mflag , n , ndata , nerr , nmk , nn
+  REAL atol, bquad, bv, den, dn, er, fbcl, fbcr, pi, pquad, quad, &
+    spv, tol, x1, x2, xl, xx
+  INTEGER i, ibcl, ibcr, id, ierr, iknt, ileft, ilo, inbv, inev, &
+    inppv, iwork, j, jhigh, jj, k, kk, knt, kntopt, kontrl, &
+    ldc, ldcc, lxi, mflag, n, ndata, nerr, nmk, nn
   LOGICAL fatal
   !     .. Local Arrays ..
-  REAL adif(52) , bc(13) , c(4,10) , cc(4,4) , q(3) , qq(77) , qsave(2) , &
-    sv(4) , t(17) , w(65) , x(11) , xi(11) , y(11)
+  REAL adif(52), bc(13), c(4,10), cc(4,4), q(3), qq(77), qsave(2), &
+    sv(4), t(17), w(65), x(11), xi(11), y(11)
   !     .. External Functions ..
-  REAL BVALU , FB , PPVAL , R1MACH
+  REAL BVALU, FB, PPVAL, R1MACH
   INTEGER NUMXER
-  EXTERNAL BVALU , FB , NUMXER , PPVAL , R1MACH
+  EXTERNAL BVALU, FB, NUMXER, PPVAL, R1MACH
   !     .. External Subroutines ..
-  EXTERNAL BFQAD , BINT4 , BINTK , BSPDR , BSPEV , BSPPP , BSPVD , BSPVN , &
-    BSQAD , INTRV , PFQAD , PPQAD , XGETF , XSETF
+  EXTERNAL BFQAD, BINT4, BINTK, BSPDR, BSPEV, BSPPP, BSPVD, BSPVN, &
+    BSQAD, INTRV, PFQAD, PPQAD, XGETF, XSETF
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , SIN
+  INTRINSIC ABS, SIN
   !***FIRST EXECUTABLE STATEMENT  BSPCK
   IF ( Kprint>=2 ) WRITE (Lun,99001)
   !
@@ -65,7 +65,7 @@ SUBROUTINE BSPCK(Lun,Kprint,Ipass)
   !
   ndata = 11
   den = ndata - 1
-  DO i = 1 , ndata
+  DO i = 1, ndata
     x(i) = (i-1)/den
     y(i) = SIN(pi*x(i))
   ENDDO
@@ -74,7 +74,7 @@ SUBROUTINE BSPCK(Lun,Kprint,Ipass)
   !
   !     Compute splines for two knot arrays.
   !
-  DO iknt = 1 , 2
+  DO iknt = 1, 2
     knt = 3 - iknt
     ibcl = 1
     ibcr = 2
@@ -85,7 +85,7 @@ SUBROUTINE BSPCK(Lun,Kprint,Ipass)
     !       Error test on BINT4.
     !
     inbv = 1
-    DO i = 1 , ndata
+    DO i = 1, ndata
       xx = x(i)
       bv = BVALU(t,bc,n,k,0,xx,inbv,w)
       er = ABS(y(i)-bv)
@@ -126,7 +126,7 @@ SUBROUTINE BSPCK(Lun,Kprint,Ipass)
     !
     !       Error test for quadratures.
     !
-    DO i = 1 , 3
+    DO i = 1, 3
       er = ABS(bquad-q(i))
       IF ( er>tol ) THEN
         Ipass = 0
@@ -150,11 +150,11 @@ SUBROUTINE BSPCK(Lun,Kprint,Ipass)
   inbv = 1
   inppv = 1
   ilo = 1
-  DO i = 1 , 6
+  DO i = 1, 6
     xx = x(i+i-1)
     CALL BSPEV(t,adif,n,k,k,xx,inev,sv,w)
     atol = tol
-    DO j = 1 , k
+    DO j = 1, k
       spv = BVALU(t,bc,n,k,j-1,xx,inbv,w)
       er = ABS(spv-sv(j))
       x2 = ABS(sv(j))
@@ -167,7 +167,7 @@ SUBROUTINE BSPCK(Lun,Kprint,Ipass)
       atol = 10.0E0*atol
     ENDDO
     atol = tol
-    DO j = 1 , k
+    DO j = 1, k
       spv = PPVAL(ldc,c,xi,lxi,k,j-1,xx,inppv)
       er = ABS(spv-sv(j))
       x2 = ABS(sv(j))
@@ -185,10 +185,10 @@ SUBROUTINE BSPCK(Lun,Kprint,Ipass)
     IF ( i+i-1==ndata ) x1 = t(n)
     nn = n + k
     CALL INTRV(t,nn,x1,ilo,ileft,mflag)
-    DO j = 1 , k
+    DO j = 1, k
       CALL BSPVD(t,k,j,xx,ileft,ldcc,cc,w)
       er = 0.0E0
-      DO jj = 1 , k
+      DO jj = 1, k
         er = er + bc(ileft-k+jj)*cc(jj,j)
       ENDDO
       er = ABS(er-sv(j))
@@ -202,16 +202,16 @@ SUBROUTINE BSPCK(Lun,Kprint,Ipass)
       atol = 10.0E0*atol
     ENDDO
   ENDDO
-  DO k = 2 , 4
+  DO k = 2, 4
     n = ndata
     nmk = n - k
-    DO i = 1 , k
+    DO i = 1, k
       t(i) = x(1)
       t(n+i) = x(n)
     ENDDO
     xl = x(n) - x(1)
     dn = n - k + 1
-    DO i = 1 , nmk
+    DO i = 1, nmk
       t(k+i) = x(1) + i*xl/dn
     ENDDO
     CALL BINTK(x,y,t,n,k,bc,qq,w)
@@ -219,7 +219,7 @@ SUBROUTINE BSPCK(Lun,Kprint,Ipass)
     !       Error test on BINTK.
     !
     inbv = 1
-    DO i = 1 , n
+    DO i = 1, n
       xx = x(i)
       bv = BVALU(t,bc,n,k,0,xx,inbv,w)
       er = ABS(y(i)-bv)
@@ -254,7 +254,7 @@ SUBROUTINE BSPCK(Lun,Kprint,Ipass)
   inev = 1
   inbv = 1
   CALL INTRV(t,n+1,w(4),ilo,ileft,mflag)
-  DO i = 1 , 5
+  DO i = 1, 5
     w(i) = -w(i)
     n = w(1)
     k = w(2)
@@ -368,7 +368,7 @@ SUBROUTINE BSPCK(Lun,Kprint,Ipass)
   x(1) = 0.0E0
   atol = 1.0E0
   kntopt = 3
-  DO i = 1 , 3
+  DO i = 1, 3
     qq(i) = -0.30E0 + 0.10E0*(i-1)
     qq(i+3) = 1.1E0 + 0.10E0*(i-1)
   ENDDO
@@ -388,7 +388,7 @@ SUBROUTINE BSPCK(Lun,Kprint,Ipass)
   CALL XERCLR
   !
   inppv = 1
-  DO i = 1 , 5
+  DO i = 1, 5
     w(i) = -w(i)
     lxi = w(1)
     k = w(2)

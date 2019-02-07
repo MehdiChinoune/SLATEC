@@ -43,7 +43,7 @@ SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !
   !        JOB     INTEGER
   !                = 0         to solve  A*X = B .
-  !                = nonzero   to solve  TRANS(A)*X = B , where
+  !                = nonzero   to solve  TRANS(A)*X = B, where
   !                            TRANS(A)  is the transpose.
   !
   !     On Return
@@ -78,11 +78,11 @@ SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SNBSL
-  INTEGER Lda , N , Ml , Mu , Ipvt(*) , Job
-  REAL Abe(Lda,*) , B(*)
+  INTEGER Lda, N, Ml, Mu, Ipvt(*), Job
+  REAL Abe(Lda,*), B(*)
   !
-  REAL SDOT , t
-  INTEGER k , kb , l , lb , ldb , lm , m , mlm , nm1
+  REAL SDOT, t
+  INTEGER k, kb, l, lb, ldb, lm, m, mlm, nm1
   !***FIRST EXECUTABLE STATEMENT  SNBSL
   m = Mu + Ml + 1
   nm1 = N - 1
@@ -92,7 +92,7 @@ SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
     !       JOB = NONZERO, SOLVE TRANS(A) * X = B
     !       FIRST SOLVE  TRANS(U)*Y = B
     !
-    DO k = 1 , N
+    DO k = 1, N
       lm = MIN(k,m) - 1
       lb = k - lm
       t = SDOT(lm,Abe(k-1,Ml+2),ldb,B(lb),1)
@@ -103,7 +103,7 @@ SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
     !
     IF ( Ml/=0 ) THEN
       IF ( nm1>=1 ) THEN
-        DO kb = 1 , nm1
+        DO kb = 1, nm1
           k = N - kb
           lm = MIN(Ml,N-k)
           mlm = Ml - (lm-1)
@@ -119,12 +119,12 @@ SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
     ENDIF
   ELSE
     !
-    !       JOB = 0 , SOLVE  A * X = B
+    !       JOB = 0, SOLVE  A * X = B
     !       FIRST SOLVE L*Y = B
     !
     IF ( Ml/=0 ) THEN
       IF ( nm1>=1 ) THEN
-        DO k = 1 , nm1
+        DO k = 1, nm1
           lm = MIN(Ml,N-k)
           l = Ipvt(k)
           t = B(l)
@@ -140,7 +140,7 @@ SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
     !
     !       NOW SOLVE  U*X = Y
     !
-    DO kb = 1 , N
+    DO kb = 1, N
       k = N + 1 - kb
       B(k) = B(k)/Abe(k,Ml+1)
       lm = MIN(k,m) - 1

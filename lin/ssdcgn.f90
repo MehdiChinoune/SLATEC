@@ -5,7 +5,7 @@ SUBROUTINE SSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   IMPLICIT NONE
   !*--SSDCGN6
   !*** Start of declarations inserted by SPAG
-  REAL SSDI , SSMTV , SSMV
+  REAL SSDI, SSMTV, SSMV
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSDCGN
   !***PURPOSE  Diagonally Scaled CG Sparse Ax=b Solver for Normal Eqn's.
@@ -218,20 +218,20 @@ SUBROUTINE SSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  SSDCGN
   !     .. Parameters ..
-  INTEGER LOCRB , LOCIB
+  INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  REAL Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
+  REAL Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
     Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt) , B(N) , Rwork(Lenw) , X(N)
-  INTEGER Ia(Nelt) , Iwork(Leniw) , Ja(Nelt)
+  REAL A(Nelt), B(N), Rwork(Lenw), X(N)
+  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locatd , locatp , locatz , locd , locdz , lociw , locp , locr , &
-    locw , locz
+  INTEGER locatd, locatp, locatz, locd, locdz, lociw, locp, locr, &
+    locw, locz
   !     .. External Subroutines ..
-  EXTERNAL SCGN , SCHKW , SS2Y , SSD2S , SSDI , SSMTV , SSMV
+  EXTERNAL SCGN, SCHKW, SS2Y, SSD2S, SSDI, SSMTV, SSMV
   !***FIRST EXECUTABLE STATEMENT  SSDCGN
   !
   Ierr = 0

@@ -350,7 +350,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !             involves dependent variables with index near I, e.g., I+1,
   !             I-2.  Such a system is called banded.  If, for all I, the
   !             I-th equation depends on at most the variables
-  !               Y(I-ML), Y(I-ML+1), ... , Y(I), Y(I+1), ... , Y(I+MU)
+  !               Y(I-ML), Y(I-ML+1), ..., Y(I), Y(I+1), ..., Y(I+MU)
   !             then we call ML+MU+1 the bandwidth of the system.  In a
   !             banded system many of the partial derivatives above are
   !             automatically zero.  For the cases MITER = 1, 2, 4, and 5,
@@ -420,7 +420,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !               to be banded with lower and upper half bandwidth ML and
   !               MU.  The left hand side of the I-th equation is a linear
   !               combination of dY(I-ML)/dT, dY(I-ML+1)/dT, ... ,
-  !               dY(I)/dT, ... , dY(I+MU-1)/dT, dY(I+MU)/dT.  Thus in the
+  !               dY(I)/dT, ..., dY(I+MU-1)/dT, dY(I+MU)/dT.  Thus in the
   !               I-th equation, the coefficient of dY(J)/dT is to be
   !               stored in A(K,J), where K=I-J+MU+1.
   !               NOTE: The array A will be altered between calls to FA.
@@ -465,7 +465,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !               A is assumed to be banded with lower and upper half
   !               bandwidths ML and MU.  The left hand side of the I-th
   !               equation is a linear combination of dY(I-ML)/dT,
-  !               dY(I-ML+1)/dT, ... , dY(I)/dT, ... , dY(I+MU-1)/dT,
+  !               dY(I-ML+1)/dT, ..., dY(I)/dT, ..., dY(I+MU-1)/dT,
   !               dY(I+MU)/dT.  Thus in the I-th equation, the coefficient
   !               of dY(J)/dT is to be stored in A(K,J), where K=I-J+MU+1.
   !               It is assumed that the system is ordered by the user so
@@ -728,24 +728,24 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  CDRIV3
-  EXTERNAL F , JACOBN , FA , G , USERS
-  COMPLEX Work(*) , Y(*)
-  REAL ae , avgh , avgord , big , el(13,12) , Eps , Ewt(*) , G , glast , &
-    gnow , h , Hmax , hold , hsign , hused , NROUND , rc , re , rmax , &
-    R1MACH , SCNRM2 , size , sum , T , tlast , Tout , tq(3,12) , trend , &
-    troot , uround
-  INTEGER i , ia , IAVGH , IAVGRD , ICNVRG , idfdy , IEL , Ierflg , Ierror , &
-    ifac , iflag , ignow , IH , IHMAX , IHOLD , IHSIGN , IHUSED , &
-    IJROOT , IJSTPL , IJTASK , IMNT , IMNTLD , Impl , IMTR , IMTRLD , &
-    IMTRSV , imxerr , IMXORD , IMXRDS , INDMXR , INDPRT , INDPVT , &
-    INDTRT , INFE , info , INJE , INQ , INQUSE , INROOT , INRTLD , &
-    INSTEP , INWAIT , IRC , IRMAX , iroot , IMACH1 , IMACH4 , isave1 , &
-    isave2 , IT , ITOUT , ITQ , ITREND , itroot , Iwork(*) , IYH , &
-    iywt , j , jstate , jtroot , lenchk , Leniw , Lenw , liwchk , &
-    matdim , maxord , Mint , Miter , Ml , Mu , Mxord , Mxstep , N , &
-    Nde , ndecom , npar , Nroot , Nstate , nstepl , Ntask
+  EXTERNAL F, JACOBN, FA, G, USERS
+  COMPLEX Work(*), Y(*)
+  REAL ae, avgh, avgord, big, el(13,12), Eps, Ewt(*), G, glast, &
+    gnow, h, Hmax, hold, hsign, hused, NROUND, rc, re, rmax, &
+    R1MACH, SCNRM2, size, sum, T, tlast, Tout, tq(3,12), trend, &
+    troot, uround
+  INTEGER i, ia, IAVGH, IAVGRD, ICNVRG, idfdy, IEL, Ierflg, Ierror, &
+    ifac, iflag, ignow, IH, IHMAX, IHOLD, IHSIGN, IHUSED, &
+    IJROOT, IJSTPL, IJTASK, IMNT, IMNTLD, Impl, IMTR, IMTRLD, &
+    IMTRSV, imxerr, IMXORD, IMXRDS, INDMXR, INDPRT, INDPVT, &
+    INDTRT, INFE, info, INJE, INQ, INQUSE, INROOT, INRTLD, &
+    INSTEP, INWAIT, IRC, IRMAX, iroot, IMACH1, IMACH4, isave1, &
+    isave2, IT, ITOUT, ITQ, ITREND, itroot, Iwork(*), IYH, &
+    iywt, j, jstate, jtroot, lenchk, Leniw, Lenw, liwchk, &
+    matdim, maxord, Mint, Miter, Ml, Mu, Mxord, Mxstep, N, &
+    Nde, ndecom, npar, Nroot, Nstate, nstepl, Ntask
   LOGICAL convrg
-  CHARACTER intgr1*8 , intgr2*8 , rl1*16 , rl2*16
+  CHARACTER intgr1*8, intgr2*8, rl1*16, rl2*16
   PARAMETER (NROUND=20.E0)
   PARAMETER (IAVGH=1,IHUSED=2,IAVGRD=3,IEL=4,IH=160,IHMAX=161,IHOLD=162,&
     IHSIGN=163,IRC=164,IRMAX=165,IT=166,ITOUT=167,ITQ=168,&
@@ -980,7 +980,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Iwork(ICNVRG) = 0
     Iwork(INDPRT) = 0
     !                                                 Set initial conditions
-    DO i = 1 , N
+    DO i = 1, N
       Work(i+IYH-1) = Y(i)
     ENDDO
     IF ( T==Tout ) RETURN
@@ -1006,13 +1006,13 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   rc = Work(IRC)
   rmax = Work(IRMAX)
   trend = Work(ITREND)
-  DO j = 1 , 12
-    DO i = 1 , 13
+  DO j = 1, 12
+    DO i = 1, 13
       el(i,j) = Work(i+IEL+(j-1)*13-1)
     ENDDO
   ENDDO
-  DO j = 1 , 12
-    DO i = 1 , 3
+  DO j = 1, 12
+    DO i = 1, 3
       tq(i,j) = Work(i+ITQ+(j-1)*3-1)
     ENDDO
   ENDDO
@@ -1040,7 +1040,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         IF ( Nstate==5 ) THEN
           troot = T
           iroot = 0
-          DO i = 1 , Iwork(INRTLD)
+          DO i = 1, Iwork(INRTLD)
             jtroot = i + Iwork(INDTRT) - 1
             IF ( REAL(Work(jtroot))*hsign<=troot*hsign ) THEN
               !
@@ -1191,11 +1191,11 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   ENDIF
   !
   100  nstepl = Iwork(INSTEP)
-  DO i = 1 , N
+  DO i = 1, N
     Y(i) = Work(i+IYH-1)
   ENDDO
   IF ( Nroot/=0 ) THEN
-    DO i = 1 , Nroot
+    DO i = 1, Nroot
       Work(i+ignow-1) = G(npar,T,Y,i)
       IF ( npar==0 ) THEN
         Iwork(INROOT) = i
@@ -1205,378 +1205,383 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     ENDDO
   ENDIF
   IF ( Ierror==1 ) THEN
-    DO i = 1 , N
+    DO i = 1, N
       Work(i+iywt-1) = 1.E0
     ENDDO
     GOTO 300
   ELSEIF ( Ierror==5 ) THEN
-    DO i = 1 , N
+    DO i = 1, N
       Work(i+iywt-1) = Ewt(i)
     ENDDO
     GOTO 300
   ENDIF
   !                                       Reset YWT array.  Looping point.
-  200  IF ( Ierror==2 ) THEN
-  DO i = 1 , N
-    IF ( Y(i)==0.E0 ) GOTO 250
-    Work(i+iywt-1) = Y(i)
-  ENDDO
-  GOTO 300
-  250    IF ( Iwork(IJTASK)==0 ) THEN
-  CALL F(npar,T,Y,Work(isave2))
-  IF ( npar==0 ) THEN
-    Nstate = 6
-    RETURN
-  ENDIF
-  Iwork(INFE) = Iwork(INFE) + 1
-  IF ( Miter==3.AND.Impl/=0 ) THEN
-    iflag = 0
-    CALL USERS(Y,Work(IYH),Work(iywt),Work(isave1),Work(isave2),T,h,&
-      REAL(Work(IEL)),Impl,npar,ndecom,iflag)
-    IF ( iflag==-1 ) GOTO 700
-    IF ( npar==0 ) THEN
-      Nstate = 10
-      RETURN
-    ENDIF
-  ELSEIF ( Impl==1 ) THEN
-    IF ( Miter==1.OR.Miter==2 ) THEN
-      CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
-      IF ( npar==0 ) THEN
-        Nstate = 9
-        RETURN
-      ENDIF
-      CALL CGEFA(Work(ia),matdim,N,Iwork(INDPVT),info)
-      IF ( info/=0 ) GOTO 700
-      CALL CGESL(Work(ia),matdim,N,Iwork(INDPVT),Work(isave2),0)
-    ELSEIF ( Miter==4.OR.Miter==5 ) THEN
-      CALL FA(npar,T,Y,Work(ia+Ml),matdim,Ml,Mu,ndecom)
-      IF ( npar==0 ) THEN
-        Nstate = 9
-        RETURN
-      ENDIF
-      CALL CGBFA(Work(ia),matdim,N,Ml,Mu,Iwork(INDPVT),info)
-      IF ( info/=0 ) GOTO 700
-      CALL CGBSL(Work(ia),matdim,N,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
-    ENDIF
-  ELSEIF ( Impl==2 ) THEN
-    CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
-    IF ( npar==0 ) THEN
-      Nstate = 9
-      RETURN
-    ENDIF
-    DO i = 1 , ndecom
-      IF ( Work(i+ia-1)==0.E0 ) GOTO 700
-      Work(i+isave2-1) = Work(i+isave2-1)/Work(i+ia-1)
+  200 CONTINUE
+  IF ( Ierror==2 ) THEN
+    DO i = 1, N
+      IF ( Y(i)==0.E0 ) GOTO 250
+      Work(i+iywt-1) = Y(i)
     ENDDO
-  ELSEIF ( Impl==3 ) THEN
-    IF ( Miter==1.OR.Miter==2 ) THEN
-      CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
+    GOTO 300
+    250 CONTINUE
+    IF ( Iwork(IJTASK)==0 ) THEN
+      CALL F(npar,T,Y,Work(isave2))
       IF ( npar==0 ) THEN
-        Nstate = 9
+        Nstate = 6
         RETURN
       ENDIF
-      CALL CGEFA(Work(ia),matdim,Nde,Iwork(INDPVT),info)
-      IF ( info/=0 ) GOTO 700
-      CALL CGESL(Work(ia),matdim,Nde,Iwork(INDPVT),Work(isave2),0)
-    ELSEIF ( Miter==4.OR.Miter==5 ) THEN
-      CALL FA(npar,T,Y,Work(ia+Ml),matdim,Ml,Mu,ndecom)
-      IF ( npar==0 ) THEN
-        Nstate = 9
-        RETURN
+      Iwork(INFE) = Iwork(INFE) + 1
+      IF ( Miter==3.AND.Impl/=0 ) THEN
+        iflag = 0
+        CALL USERS(Y,Work(IYH),Work(iywt),Work(isave1),Work(isave2),T,h,&
+          REAL(Work(IEL)),Impl,npar,ndecom,iflag)
+        IF ( iflag==-1 ) GOTO 700
+        IF ( npar==0 ) THEN
+          Nstate = 10
+          RETURN
+        ENDIF
+      ELSEIF ( Impl==1 ) THEN
+        IF ( Miter==1.OR.Miter==2 ) THEN
+          CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
+          IF ( npar==0 ) THEN
+            Nstate = 9
+            RETURN
+          ENDIF
+          CALL CGEFA(Work(ia),matdim,N,Iwork(INDPVT),info)
+          IF ( info/=0 ) GOTO 700
+          CALL CGESL(Work(ia),matdim,N,Iwork(INDPVT),Work(isave2),0)
+        ELSEIF ( Miter==4.OR.Miter==5 ) THEN
+          CALL FA(npar,T,Y,Work(ia+Ml),matdim,Ml,Mu,ndecom)
+          IF ( npar==0 ) THEN
+            Nstate = 9
+            RETURN
+          ENDIF
+          CALL CGBFA(Work(ia),matdim,N,Ml,Mu,Iwork(INDPVT),info)
+          IF ( info/=0 ) GOTO 700
+          CALL CGBSL(Work(ia),matdim,N,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
+        ENDIF
+      ELSEIF ( Impl==2 ) THEN
+        CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
+        IF ( npar==0 ) THEN
+          Nstate = 9
+          RETURN
+        ENDIF
+        DO i = 1, ndecom
+          IF ( Work(i+ia-1)==0.E0 ) GOTO 700
+          Work(i+isave2-1) = Work(i+isave2-1)/Work(i+ia-1)
+        ENDDO
+      ELSEIF ( Impl==3 ) THEN
+        IF ( Miter==1.OR.Miter==2 ) THEN
+          CALL FA(npar,T,Y,Work(ia),matdim,Ml,Mu,ndecom)
+          IF ( npar==0 ) THEN
+            Nstate = 9
+            RETURN
+          ENDIF
+          CALL CGEFA(Work(ia),matdim,Nde,Iwork(INDPVT),info)
+          IF ( info/=0 ) GOTO 700
+          CALL CGESL(Work(ia),matdim,Nde,Iwork(INDPVT),Work(isave2),0)
+        ELSEIF ( Miter==4.OR.Miter==5 ) THEN
+          CALL FA(npar,T,Y,Work(ia+Ml),matdim,Ml,Mu,ndecom)
+          IF ( npar==0 ) THEN
+            Nstate = 9
+            RETURN
+          ENDIF
+          CALL CGBFA(Work(ia),matdim,Nde,Ml,Mu,Iwork(INDPVT),info)
+          IF ( info/=0 ) GOTO 700
+          CALL CGBSL(Work(ia),matdim,Nde,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
+        ENDIF
       ENDIF
-      CALL CGBFA(Work(ia),matdim,Nde,Ml,Mu,Iwork(INDPVT),info)
-      IF ( info/=0 ) GOTO 700
-      CALL CGBSL(Work(ia),matdim,Nde,Ml,Mu,Iwork(INDPVT),Work(isave2),0)
     ENDIF
-  ENDIF
-ENDIF
-DO j = i , N
-  IF ( Y(j)/=0.E0 ) THEN
-    Work(j+iywt-1) = Y(j)
-  ELSEIF ( Iwork(IJTASK)==0 ) THEN
-    Work(j+iywt-1) = h*Work(j+isave2-1)
-  ELSE
-    Work(j+iywt-1) = Work(j+IYH+N-1)
-  ENDIF
-  IF ( Work(j+iywt-1)==0.E0 ) Work(j+iywt-1) = uround
-ENDDO
-ELSEIF ( Ierror==3 ) THEN
-DO i = 1 , N
-  Work(i+iywt-1) = MAX(Ewt(1),ABS(Y(i)))
-ENDDO
-ELSEIF ( Ierror==4 ) THEN
-DO i = 1 , N
-  Work(i+iywt-1) = MAX(Ewt(i),ABS(Y(i)))
-ENDDO
-ENDIF
-!
-300  DO i = 1 , N
-Work(i+isave2-1) = Y(i)/Work(i+iywt-1)
-ENDDO
-sum = SCNRM2(N,Work(isave2),1)/SQRT(REAL(N))
-sum = MAX(1.E0,sum)
-IF ( Eps<sum*uround ) THEN
-Eps = sum*uround*(1.E0+10.E0*uround)
-WRITE (rl1,'(E16.8)') T
-WRITE (rl2,'(E16.8)') Eps
-Ierflg = 4
-CALL XERMSG('SLATEC','CDRIV3',&
-'At T, '//rl1//', the requested accuracy, EPS, was not '//&
-'obtainable with the machine precision.  EPS has been '//&
-'increased to '//rl2//' .',Ierflg,0)
-Nstate = 4
-GOTO 400
-ENDIF
-IF ( ABS(h)>=uround*ABS(T) ) THEN
-Iwork(INDPRT) = 0
-ELSEIF ( Iwork(INDPRT)==0 ) THEN
-WRITE (rl1,'(E16.8)') T
-WRITE (rl2,'(E16.8)') h
-Ierflg = 15
-CALL XERMSG('SLATEC','CDRIV3','At T, '//rl1//', the step size, '//rl2//&
-', is smaller '//&
-'than the roundoff level of T.  This may occur if there is '&
-//'an abrupt change in the right hand side of the '//&
-'differential equations.',Ierflg,0)
-Iwork(INDPRT) = 1
-ENDIF
-IF ( Ntask/=2 ) THEN
-IF ( (Iwork(INSTEP)-nstepl)==Mxstep ) THEN
-WRITE (rl1,'(E16.8)') T
-WRITE (intgr1,'(I8)') Mxstep
-WRITE (rl2,'(E16.8)') Tout
-Ierflg = 3
-CALL XERMSG('SLATEC','CDRIV3','At T, '//rl1//', '//intgr1//&
-  ' steps have been taken '//'without reaching TOUT, '//&
-  rl2//' .',Ierflg,0)
-Nstate = 3
-GOTO 400
-ENDIF
-ENDIF
-!
-!     CALL CDSTP (EPS, F, FA, HMAX, IMPL, IERROR, JACOBN, MATDIM,
-!    8            MAXORD, MINT, MITER, ML, MU, N, NDE, YWT, UROUND,
-!    8            USERS,  AVGH, AVGORD, H, HUSED, JTASK, MNTOLD, MTROLD,
-!    8            NFE, NJE, NQUSED, NSTEP, T, Y, YH,  A, CONVRG,
-!    8            DFDY, EL, FAC, HOLD, IPVT, JSTATE, JSTEPL, NQ, NWAIT,
-!    8            RC, RMAX, SAVE1, SAVE2, TQ, TREND, ISWFLG, MTRSV,
-!    8            MXRDSV)
-!
-CALL CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,matdim,Iwork(IMXORD),&
-Iwork(IMNT),Iwork(IMTR),Ml,Mu,npar,ndecom,Work(iywt),uround,&
-USERS,avgh,avgord,h,hused,Iwork(IJTASK),Iwork(IMNTLD),&
-Iwork(IMTRLD),Iwork(INFE),Iwork(INJE),Iwork(INQUSE),&
-Iwork(INSTEP),T,Y,Work(IYH),Work(ia),convrg,Work(idfdy),el,&
-Work(ifac),hold,Iwork(INDPVT),jstate,Iwork(IJSTPL),Iwork(INQ),&
-Iwork(INWAIT),rc,rmax,Work(isave1),Work(isave2),tq,trend,Mint,&
-Iwork(IMTRSV),Iwork(IMXRDS))
-!
-Work(IH) = h
-Work(IT) = T
-SELECT CASE (jstate)
-CASE (2)
-GOTO 600
-CASE (3)
-!
-WRITE (rl1,'(E16.8)') T
-Ierflg = 42
-CALL XERMSG('SLATEC','CDRIV3',&
-  'At T, '//rl1//', the step size has been reduced about 50 '&
-  //&
-  'times without advancing the solution.  Often this occurs '&
-  //'if the problem setup is incorrect.',Ierflg,1)
-Nstate = 12
-RETURN
-CASE (4,5)
-GOTO 700
-CASE (6,7,8,9,10)
-!
-Nstate = jstate
-DO i = 1 , N
-  Y(i) = Work(i+IYH-1)
-ENDDO
-IF ( convrg ) THEN
-  Iwork(ICNVRG) = 1
-ELSE
-  Iwork(ICNVRG) = 0
-ENDIF
-Work(IAVGH) = avgh
-Work(IAVGRD) = avgord
-Work(IHUSED) = hused
-Work(IHOLD) = hold
-Work(IRC) = rc
-Work(IRMAX) = rmax
-Work(ITREND) = trend
-DO j = 1 , 12
-  DO i = 1 , 13
-    Work(i+IEL+(j-1)*13-1) = el(i,j)
-  ENDDO
-ENDDO
-DO j = 1 , 12
-  DO i = 1 , 3
-    Work(i+ITQ+(j-1)*3-1) = tq(i,j)
-  ENDDO
-ENDDO
-RETURN
-CASE DEFAULT
-Iwork(IJTASK) = 1
-!                                 Determine if a root has been overtaken
-IF ( Nroot/=0 ) THEN
-  iroot = 0
-  DO i = 1 , Nroot
-    glast = Work(i+ignow-1)
-    gnow = G(npar,T,Y,i)
-    IF ( npar==0 ) THEN
-      Iwork(INROOT) = i
-      Nstate = 7
-      RETURN
-    ENDIF
-    Work(i+ignow-1) = gnow
-    IF ( glast*gnow>0.E0 ) THEN
-      Work(i+itroot-1) = T + h
-    ELSEIF ( gnow==0.E0 ) THEN
-      Work(i+itroot-1) = T
-      iroot = i
-    ELSEIF ( glast==0.E0 ) THEN
-      Work(i+itroot-1) = T + h
-    ELSEIF ( ABS(hused)>=uround*ABS(T) ) THEN
-      tlast = T - hused
-      iroot = i
-      troot = T
-      CALL CDZRO(ae,G,h,npar,Iwork(INQ),iroot,re,T,Work(IYH),uround,&
-        troot,tlast,gnow,glast,Y)
-      DO j = 1 , N
-        Y(j) = Work(IYH+j-1)
-      ENDDO
-      IF ( npar==0 ) THEN
-        Iwork(INROOT) = i
-        Nstate = 7
-        RETURN
+    DO j = i, N
+      IF ( Y(j)/=0.E0 ) THEN
+        Work(j+iywt-1) = Y(j)
+      ELSEIF ( Iwork(IJTASK)==0 ) THEN
+        Work(j+iywt-1) = h*Work(j+isave2-1)
+      ELSE
+        Work(j+iywt-1) = Work(j+IYH+N-1)
       ENDIF
-      Work(i+itroot-1) = troot
-    ELSE
-      Work(i+itroot-1) = T
-      iroot = i
-    ENDIF
-  ENDDO
-  IF ( iroot==0 ) THEN
-    Iwork(IJROOT) = 0
-    !                                                  Select the first root
-  ELSE
-    Iwork(IJROOT) = Ntask
-    Iwork(INRTLD) = Nroot
-    Iwork(INDTRT) = itroot
-    troot = T + h
-    DO i = 1 , Nroot
-      IF ( REAL(Work(i+itroot-1))*hsign<troot*hsign ) THEN
-        troot = Work(i+itroot-1)
-        iroot = i
-      ENDIF
+      IF ( Work(j+iywt-1)==0.E0 ) Work(j+iywt-1) = uround
     ENDDO
-    Iwork(INROOT) = iroot
-    Work(ITOUT) = troot
-    IF ( troot*hsign<=Tout*hsign ) THEN
-      CALL CDNTP(h,0,N,Iwork(INQ),T,troot,Work(IYH),Y)
-      Nstate = 5
-      T = troot
-      Ierflg = 0
-      GOTO 500
-    ENDIF
+  ELSEIF ( Ierror==3 ) THEN
+    DO i = 1, N
+      Work(i+iywt-1) = MAX(Ewt(1),ABS(Y(i)))
+    ENDDO
+  ELSEIF ( Ierror==4 ) THEN
+    DO i = 1, N
+      Work(i+iywt-1) = MAX(Ewt(i),ABS(Y(i)))
+    ENDDO
   ENDIF
-ENDIF
-!                               Test for NTASK condition to be satisfied
-Nstate = 2
-IF ( Ntask==1 ) THEN
-  IF ( T*hsign<Tout*hsign ) GOTO 200
-  CALL CDNTP(h,0,N,Iwork(INQ),T,Tout,Work(IYH),Y)
-  T = Tout
-  Ierflg = 0
-  GOTO 500
-  !                               TOUT is assumed to have been attained
-  !                               exactly if T is within twenty roundoff
-  !                               units of TOUT, relative to MAX(TOUT, T).
   !
-ELSEIF ( Ntask==2 ) THEN
-  IF ( ABS(Tout-T)<=NROUND*uround*MAX(ABS(T),ABS(Tout)) ) THEN
-    T = Tout
-  ELSEIF ( (T+h)*hsign>Tout*hsign ) THEN
-    h = Tout - T
-    IF ( (T+h)*hsign>Tout*hsign ) h = h*(1.E0-4.E0*uround)
-    Work(IH) = h
-    IF ( h==0.E0 ) GOTO 600
-    Iwork(IJTASK) = -1
+  300 CONTINUE
+  DO i = 1, N
+    Work(i+isave2-1) = Y(i)/Work(i+iywt-1)
+  ENDDO
+  sum = SCNRM2(N,Work(isave2),1)/SQRT(REAL(N))
+  sum = MAX(1.E0,sum)
+  IF ( Eps<sum*uround ) THEN
+    Eps = sum*uround*(1.E0+10.E0*uround)
+    WRITE (rl1,'(E16.8)') T
+    WRITE (rl2,'(E16.8)') Eps
+    Ierflg = 4
+    CALL XERMSG('SLATEC','CDRIV3',&
+      'At T, '//rl1//', the requested accuracy, EPS, was not '//&
+      'obtainable with the machine precision.  EPS has been '//&
+      'increased to '//rl2//' .',Ierflg,0)
+    Nstate = 4
+    GOTO 400
   ENDIF
-ELSEIF ( Ntask==3 ) THEN
-  IF ( ABS(Tout-T)<=NROUND*uround*MAX(ABS(T),ABS(Tout)) ) THEN
-    T = Tout
-  ELSE
-    IF ( (T+h)*hsign>Tout*hsign ) THEN
-      h = Tout - T
-      IF ( (T+h)*hsign>Tout*hsign ) h = h*(1.E0-4.E0*uround)
-      Work(IH) = h
-      IF ( h==0.E0 ) GOTO 600
-      Iwork(IJTASK) = -1
+  IF ( ABS(h)>=uround*ABS(T) ) THEN
+    Iwork(INDPRT) = 0
+  ELSEIF ( Iwork(INDPRT)==0 ) THEN
+    WRITE (rl1,'(E16.8)') T
+    WRITE (rl2,'(E16.8)') h
+    Ierflg = 15
+    CALL XERMSG('SLATEC','CDRIV3','At T, '//rl1//', the step size, '//rl2//&
+      ', is smaller '//&
+      'than the roundoff level of T.  This may occur if there is '&
+      //'an abrupt change in the right hand side of the '//&
+      'differential equations.',Ierflg,0)
+    Iwork(INDPRT) = 1
+  ENDIF
+  IF ( Ntask/=2 ) THEN
+    IF ( (Iwork(INSTEP)-nstepl)==Mxstep ) THEN
+      WRITE (rl1,'(E16.8)') T
+      WRITE (intgr1,'(I8)') Mxstep
+      WRITE (rl2,'(E16.8)') Tout
+      Ierflg = 3
+      CALL XERMSG('SLATEC','CDRIV3','At T, '//rl1//', '//intgr1//&
+        ' steps have been taken '//'without reaching TOUT, '//&
+        rl2//' .',Ierflg,0)
+      Nstate = 3
+      GOTO 400
     ENDIF
-    GOTO 200
   ENDIF
-ENDIF
-Ierflg = 0
-END SELECT
-!                                      All returns are made through this
-!                                      section.  IMXERR is determined.
-400  DO i = 1 , N
-Y(i) = Work(i+IYH-1)
-ENDDO
-500  IF ( convrg ) THEN
-Iwork(ICNVRG) = 1
-ELSE
-Iwork(ICNVRG) = 0
-ENDIF
-Work(IAVGH) = avgh
-Work(IAVGRD) = avgord
-Work(IHUSED) = hused
-Work(IHOLD) = hold
-Work(IRC) = rc
-Work(IRMAX) = rmax
-Work(ITREND) = trend
-DO j = 1 , 12
-DO i = 1 , 13
-Work(i+IEL+(j-1)*13-1) = el(i,j)
-ENDDO
-ENDDO
-DO j = 1 , 12
-DO i = 1 , 3
-Work(i+ITQ+(j-1)*3-1) = tq(i,j)
-ENDDO
-ENDDO
-IF ( Iwork(IJTASK)==0 ) RETURN
-big = 0.E0
-imxerr = 1
-DO i = 1 , N
-!                                            SIZE = ABS(ERROR(I)/YWT(I))
-size = ABS(Work(i+isave1-1)/Work(i+iywt-1))
-IF ( big<size ) THEN
-big = size
-imxerr = i
-ENDIF
-ENDDO
-Iwork(INDMXR) = imxerr
-RETURN
-!                                        Fatal errors are processed here
-!
-600  WRITE (rl1,'(E16.8)') T
-Ierflg = 41
-CALL XERMSG('SLATEC','CDRIV3',&
-'At T, '//rl1//', the attempted step size has gone to '//&
-'zero.  Often this occurs if the problem setup is incorrect.',&
-Ierflg,1)
-Nstate = 12
-RETURN
-!
-700  WRITE (rl1,'(E16.8)') T
-Ierflg = 43
-CALL XERMSG('SLATEC','CDRIV3',&
-'At T, '//rl1//', while solving A*YDOT = F, A is singular.',&
-Ierflg,1)
-Nstate = 12
+  !
+  !     CALL CDSTP (EPS, F, FA, HMAX, IMPL, IERROR, JACOBN, MATDIM,
+  !    8            MAXORD, MINT, MITER, ML, MU, N, NDE, YWT, UROUND,
+  !    8            USERS,  AVGH, AVGORD, H, HUSED, JTASK, MNTOLD, MTROLD,
+  !    8            NFE, NJE, NQUSED, NSTEP, T, Y, YH,  A, CONVRG,
+  !    8            DFDY, EL, FAC, HOLD, IPVT, JSTATE, JSTEPL, NQ, NWAIT,
+  !    8            RC, RMAX, SAVE1, SAVE2, TQ, TREND, ISWFLG, MTRSV,
+  !    8            MXRDSV)
+  !
+  CALL CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,matdim,Iwork(IMXORD),&
+    Iwork(IMNT),Iwork(IMTR),Ml,Mu,npar,ndecom,Work(iywt),uround,&
+    USERS,avgh,avgord,h,hused,Iwork(IJTASK),Iwork(IMNTLD),&
+    Iwork(IMTRLD),Iwork(INFE),Iwork(INJE),Iwork(INQUSE),&
+    Iwork(INSTEP),T,Y,Work(IYH),Work(ia),convrg,Work(idfdy),el,&
+    Work(ifac),hold,Iwork(INDPVT),jstate,Iwork(IJSTPL),Iwork(INQ),&
+    Iwork(INWAIT),rc,rmax,Work(isave1),Work(isave2),tq,trend,Mint,&
+    Iwork(IMTRSV),Iwork(IMXRDS))
+  !
+  Work(IH) = h
+  Work(IT) = T
+  SELECT CASE (jstate)
+    CASE (2)
+      GOTO 600
+    CASE (3)
+      !
+      WRITE (rl1,'(E16.8)') T
+      Ierflg = 42
+      CALL XERMSG('SLATEC','CDRIV3',&
+        'At T, '//rl1//', the step size has been reduced about 50 '&
+        //&
+        'times without advancing the solution.  Often this occurs '&
+        //'if the problem setup is incorrect.',Ierflg,1)
+      Nstate = 12
+      RETURN
+    CASE (4,5)
+      GOTO 700
+    CASE (6,7,8,9,10)
+      !
+      Nstate = jstate
+      DO i = 1, N
+        Y(i) = Work(i+IYH-1)
+      ENDDO
+      IF ( convrg ) THEN
+        Iwork(ICNVRG) = 1
+      ELSE
+        Iwork(ICNVRG) = 0
+      ENDIF
+      Work(IAVGH) = avgh
+      Work(IAVGRD) = avgord
+      Work(IHUSED) = hused
+      Work(IHOLD) = hold
+      Work(IRC) = rc
+      Work(IRMAX) = rmax
+      Work(ITREND) = trend
+      DO j = 1, 12
+        DO i = 1, 13
+          Work(i+IEL+(j-1)*13-1) = el(i,j)
+        ENDDO
+      ENDDO
+      DO j = 1, 12
+        DO i = 1, 3
+          Work(i+ITQ+(j-1)*3-1) = tq(i,j)
+        ENDDO
+      ENDDO
+      RETURN
+    CASE DEFAULT
+      Iwork(IJTASK) = 1
+      !                                 Determine if a root has been overtaken
+      IF ( Nroot/=0 ) THEN
+        iroot = 0
+        DO i = 1, Nroot
+          glast = Work(i+ignow-1)
+          gnow = G(npar,T,Y,i)
+          IF ( npar==0 ) THEN
+            Iwork(INROOT) = i
+            Nstate = 7
+            RETURN
+          ENDIF
+          Work(i+ignow-1) = gnow
+          IF ( glast*gnow>0.E0 ) THEN
+            Work(i+itroot-1) = T + h
+          ELSEIF ( gnow==0.E0 ) THEN
+            Work(i+itroot-1) = T
+            iroot = i
+          ELSEIF ( glast==0.E0 ) THEN
+            Work(i+itroot-1) = T + h
+          ELSEIF ( ABS(hused)>=uround*ABS(T) ) THEN
+            tlast = T - hused
+            iroot = i
+            troot = T
+            CALL CDZRO(ae,G,h,npar,Iwork(INQ),iroot,re,T,Work(IYH),uround,&
+              troot,tlast,gnow,glast,Y)
+            DO j = 1, N
+              Y(j) = Work(IYH+j-1)
+            ENDDO
+            IF ( npar==0 ) THEN
+              Iwork(INROOT) = i
+              Nstate = 7
+              RETURN
+            ENDIF
+            Work(i+itroot-1) = troot
+          ELSE
+            Work(i+itroot-1) = T
+            iroot = i
+          ENDIF
+        ENDDO
+        IF ( iroot==0 ) THEN
+          Iwork(IJROOT) = 0
+          !                                                  Select the first root
+        ELSE
+          Iwork(IJROOT) = Ntask
+          Iwork(INRTLD) = Nroot
+          Iwork(INDTRT) = itroot
+          troot = T + h
+          DO i = 1, Nroot
+            IF ( REAL(Work(i+itroot-1))*hsign<troot*hsign ) THEN
+              troot = Work(i+itroot-1)
+              iroot = i
+            ENDIF
+          ENDDO
+          Iwork(INROOT) = iroot
+          Work(ITOUT) = troot
+          IF ( troot*hsign<=Tout*hsign ) THEN
+            CALL CDNTP(h,0,N,Iwork(INQ),T,troot,Work(IYH),Y)
+            Nstate = 5
+            T = troot
+            Ierflg = 0
+            GOTO 500
+          ENDIF
+        ENDIF
+      ENDIF
+      !                               Test for NTASK condition to be satisfied
+      Nstate = 2
+      IF ( Ntask==1 ) THEN
+        IF ( T*hsign<Tout*hsign ) GOTO 200
+        CALL CDNTP(h,0,N,Iwork(INQ),T,Tout,Work(IYH),Y)
+        T = Tout
+        Ierflg = 0
+        GOTO 500
+        !                               TOUT is assumed to have been attained
+        !                               exactly if T is within twenty roundoff
+        !                               units of TOUT, relative to MAX(TOUT, T).
+        !
+      ELSEIF ( Ntask==2 ) THEN
+        IF ( ABS(Tout-T)<=NROUND*uround*MAX(ABS(T),ABS(Tout)) ) THEN
+          T = Tout
+        ELSEIF ( (T+h)*hsign>Tout*hsign ) THEN
+          h = Tout - T
+          IF ( (T+h)*hsign>Tout*hsign ) h = h*(1.E0-4.E0*uround)
+          Work(IH) = h
+          IF ( h==0.E0 ) GOTO 600
+          Iwork(IJTASK) = -1
+        ENDIF
+      ELSEIF ( Ntask==3 ) THEN
+        IF ( ABS(Tout-T)<=NROUND*uround*MAX(ABS(T),ABS(Tout)) ) THEN
+          T = Tout
+        ELSE
+          IF ( (T+h)*hsign>Tout*hsign ) THEN
+            h = Tout - T
+            IF ( (T+h)*hsign>Tout*hsign ) h = h*(1.E0-4.E0*uround)
+            Work(IH) = h
+            IF ( h==0.E0 ) GOTO 600
+            Iwork(IJTASK) = -1
+          ENDIF
+          GOTO 200
+        ENDIF
+      ENDIF
+      Ierflg = 0
+  END SELECT
+  !                                      All returns are made through this
+  !                                      section.  IMXERR is determined.
+  400 CONTINUE
+  DO i = 1, N
+    Y(i) = Work(i+IYH-1)
+  ENDDO
+  500 CONTINUE
+  IF ( convrg ) THEN
+    Iwork(ICNVRG) = 1
+  ELSE
+    Iwork(ICNVRG) = 0
+  ENDIF
+  Work(IAVGH) = avgh
+  Work(IAVGRD) = avgord
+  Work(IHUSED) = hused
+  Work(IHOLD) = hold
+  Work(IRC) = rc
+  Work(IRMAX) = rmax
+  Work(ITREND) = trend
+  DO j = 1, 12
+    DO i = 1, 13
+      Work(i+IEL+(j-1)*13-1) = el(i,j)
+    ENDDO
+  ENDDO
+  DO j = 1, 12
+    DO i = 1, 3
+      Work(i+ITQ+(j-1)*3-1) = tq(i,j)
+    ENDDO
+  ENDDO
+  IF ( Iwork(IJTASK)==0 ) RETURN
+  big = 0.E0
+  imxerr = 1
+  DO i = 1, N
+    !                                            SIZE = ABS(ERROR(I)/YWT(I))
+    size = ABS(Work(i+isave1-1)/Work(i+iywt-1))
+    IF ( big<size ) THEN
+      big = size
+      imxerr = i
+    ENDIF
+  ENDDO
+  Iwork(INDMXR) = imxerr
+  RETURN
+  !                                        Fatal errors are processed here
+  !
+  600  WRITE (rl1,'(E16.8)') T
+  Ierflg = 41
+  CALL XERMSG('SLATEC','CDRIV3',&
+    'At T, '//rl1//', the attempted step size has gone to '//&
+    'zero.  Often this occurs if the problem setup is incorrect.',&
+    Ierflg,1)
+  Nstate = 12
+  RETURN
+  !
+  700  WRITE (rl1,'(E16.8)') T
+  Ierflg = 43
+  CALL XERMSG('SLATEC','CDRIV3',&
+    'At T, '//rl1//', while solving A*YDOT = F, A is singular.',&
+    Ierflg,1)
+  Nstate = 12
 END SUBROUTINE CDRIV3

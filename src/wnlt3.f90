@@ -22,8 +22,8 @@ SUBROUTINE WNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   !   790701  DATE WRITTEN
   !   890620  Code extracted from WNLT and made a subroutine.  (RWC))
   !***END PROLOGUE  WNLT3
-  INTEGER I , Imax , Ipivot(*) , M , Mdw
-  REAL H(*) , W(Mdw,*)
+  INTEGER I, Imax, Ipivot(*), M, Mdw
+  REAL H(*), W(Mdw,*)
   !
   EXTERNAL SSWAP
   !

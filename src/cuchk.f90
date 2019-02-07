@@ -28,7 +28,7 @@ SUBROUTINE CUCHK(Y,Nz,Ascle,Tol)
   !***END PROLOGUE  CUCHK
   !
   COMPLEX Y
-  REAL Ascle , ss , st , Tol , yr , yi
+  REAL Ascle, ss, st, Tol, yr, yi
   INTEGER Nz
   !***FIRST EXECUTABLE STATEMENT  CUCHK
   Nz = 0

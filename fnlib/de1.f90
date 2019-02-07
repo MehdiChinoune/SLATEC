@@ -5,7 +5,7 @@ REAL(8) FUNCTION DE1(X)
   !*--DE15
   !*** Start of declarations inserted by SPAG
   REAL eta
-  INTEGER INITDS , ntae10 , ntae11 , ntae12 , ntae13 , ntae14 , nte11 , &
+  INTEGER INITDS, ntae10, ntae11, ntae12, ntae13, ntae14, nte11, &
     nte12
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DE1
@@ -87,12 +87,12 @@ REAL(8) FUNCTION DE1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DE1
-  REAL(8) :: X , ae10cs(50) , ae11cs(60) , ae12cs(41) , e11cs(29) , &
-    e12cs(25) , ae13cs(50) , ae14cs(64) , xmax , xmaxt , &
-    D1MACH , DCSEVL
+  REAL(8) :: X, ae10cs(50), ae11cs(60), ae12cs(41), e11cs(29), &
+    e12cs(25), ae13cs(50), ae14cs(64), xmax, xmaxt, &
+    D1MACH, DCSEVL
   LOGICAL first
-  SAVE ae10cs , ae11cs , ae12cs , e11cs , e12cs , ae13cs , ae14cs , ntae10 , &
-    ntae11 , ntae12 , nte11 , nte12 , ntae13 , ntae14 , xmax , first
+  SAVE ae10cs, ae11cs, ae12cs, e11cs, e12cs, ae13cs, ae14cs, ntae10, &
+    ntae11, ntae12, nte11, nte12, ntae13, ntae14, xmax, first
   DATA ae10cs(1)/ + .3284394579616699087873844201881D-1/
   DATA ae10cs(2)/ - .1669920452031362851476184343387D-1/
   DATA ae10cs(3)/ + .2845284724361346807424899853252D-3/
@@ -467,4 +467,5 @@ REAL(8) FUNCTION DE1(X)
   DE1 = EXP(-X)/X*(1.D0+DCSEVL(8.D0/X-1.D0,ae14cs,ntae14))
   RETURN
   !
-  99999 END FUNCTION DE1
+  99999 CONTINUE
+  END FUNCTION DE1

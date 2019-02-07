@@ -5,7 +5,7 @@ REAL(8) FUNCTION DERFC(X)
   !*--DERFC5
   !*** Start of declarations inserted by SPAG
   REAL eta
-  INTEGER INITDS , nterc2 , nterf , nterfc
+  INTEGER INITDS, nterc2, nterf, nterfc
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DERFC
   !***PURPOSE  Compute the complementary error function.
@@ -48,11 +48,11 @@ REAL(8) FUNCTION DERFC(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DERFC
-  REAL(8) :: X , erfcs(21) , erfccs(59) , erc2cs(49) , sqeps , &
-    sqrtpi , xmax , txmax , xsml , y , D1MACH , DCSEVL
+  REAL(8) :: X, erfcs(21), erfccs(59), erc2cs(49), sqeps, &
+    sqrtpi, xmax, txmax, xsml, y, D1MACH, DCSEVL
   LOGICAL first
-  SAVE erfcs , erc2cs , erfccs , sqrtpi , nterf , nterfc , nterc2 , xsml , &
-    xmax , sqeps , first
+  SAVE erfcs, erc2cs, erfccs, sqrtpi, nterf, nterfc, nterc2, xsml, &
+    xmax, sqeps, first
   DATA erfcs(1)/ - .49046121234691808039984544033376D-1/
   DATA erfcs(2)/ - .14226120510371364237824741899631D+0/
   DATA erfcs(3)/ + .10035582187599795575754676712933D-1/
@@ -233,4 +233,5 @@ REAL(8) FUNCTION DERFC(X)
   IF ( X<0.D0 ) DERFC = 2.0D0 - DERFC
   RETURN
   !
-  99999 END FUNCTION DERFC
+  99999 CONTINUE
+  END FUNCTION DERFC

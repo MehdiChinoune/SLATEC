@@ -4,8 +4,8 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   IMPLICIT NONE
   !*--XERMSG5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , J4SAVE , kdummy , kount , lerr , Level , lkntrl , llevel ,&
-    ltemp , maxmes , mkntrl , Nerr
+  INTEGER i, J4SAVE, kdummy, kount, lerr, Level, lkntrl, llevel ,&
+    ltemp, maxmes, mkntrl, Nerr
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XERMSG
   !***PURPOSE  Process error messages for SLATEC and other libraries.
@@ -191,8 +191,8 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   !           XERCTL to XERCNT.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  XERMSG
-  CHARACTER*(*) Librar , Subrou , Messg
-  CHARACTER(8) :: xlibr , xsubr
+  CHARACTER*(*) Librar, Subrou, Messg
+  CHARACTER(8) :: xlibr, xsubr
   CHARACTER(72) :: temp
   CHARACTER(20) :: lfirst
   !***FIRST EXECUTABLE STATEMENT  XERMSG
@@ -329,7 +329,7 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
           !
           IF ( lkntrl>0 ) THEN
             WRITE (temp,'(''ERROR NUMBER = '', I8)') Nerr
-            DO i = 16 , 22
+            DO i = 16, 22
               IF ( temp(i:i)/=' ' ) EXIT
             ENDDO
             !

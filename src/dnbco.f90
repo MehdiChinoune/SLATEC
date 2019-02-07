@@ -18,9 +18,9 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !     elimination and estimates the condition of the matrix.
   !
   !     If RCOND is not needed, DNBFA is slightly faster.
-  !     To solve  A*X = B , follow DNBCO by DNBSL.
-  !     To compute  INVERSE(A)*C , follow DNBCO by DNBSL.
-  !     To compute  DETERMINANT(A) , follow DNBCO by DNBDI.
+  !     To solve  A*X = B, follow DNBCO by DNBSL.
+  !     To compute  INVERSE(A)*C, follow DNBCO by DNBSL.
+  !     To compute  DETERMINANT(A), follow DNBCO by DNBDI.
   !
   !     On Entry
   !
@@ -61,7 +61,7 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !        RCOND   DOUBLE PRECISION
   !                an estimate of the reciprocal condition of  A .
-  !                For the system  A*X = B , relative perturbations
+  !                For the system  A*X = B, relative perturbations
   !                in  A  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -110,8 +110,8 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !      then  N = 6, ML = 1, MU = 2, LDA .GE. 5  and ABE should contain
   !
-  !            * 11 12 13  +     , * = not used
-  !           21 22 23 24  +     , + = used for pivoting
+  !            * 11 12 13  +    , * = not used
+  !           21 22 23 24  +    , + = used for pivoting
   !           32 33 34 35  +
   !           43 44 45 46  +
   !           54 55 56  *  +
@@ -128,19 +128,19 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DNBCO
-  INTEGER Lda , N , Ml , Mu , Ipvt(*)
-  REAL(8) :: Abe(Lda,*) , Z(*)
+  INTEGER Lda, N, Ml, Mu, Ipvt(*)
+  REAL(8) :: Abe(Lda,*), Z(*)
   REAL(8) :: Rcond
   !
-  REAL(8) :: DDOT , ek , t , wk , wkm
-  REAL(8) :: anorm , s , DASUM , sm , ynorm
-  INTEGER i , info , j , ju , k , kb , kp1 , l , ldb , lm , lz , m , ml1 , &
-    mm , nl , nu
+  REAL(8) :: DDOT, ek, t, wk, wkm
+  REAL(8) :: anorm, s, DASUM, sm, ynorm
+  INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, &
+    mm, nl, nu
   !***FIRST EXECUTABLE STATEMENT  DNBCO
   ml1 = Ml + 1
   ldb = Lda - 1
   anorm = 0.0D0
-  DO j = 1 , N
+  DO j = 1, N
     nu = MIN(Mu,j-1)
     nl = MIN(Ml,N-j)
     l = 1 + nu + nl
@@ -161,12 +161,12 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !     SOLVE TRANS(U)*W = E
   !
   ek = 1.0D0
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = 0.0D0
   ENDDO
   m = Ml + Mu + 1
   ju = 0
-  DO k = 1 , N
+  DO k = 1, N
     IF ( Z(k)/=0.0D0 ) ek = SIGN(ek,-Z(k))
     IF ( ABS(ek-Z(k))>ABS(Abe(k,ml1)) ) THEN
       s = ABS(Abe(k,ml1))/ABS(ek-Z(k))
@@ -188,7 +188,7 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     ju = MIN(MAX(ju,Mu+Ipvt(k)),N)
     mm = ml1
     IF ( kp1<=ju ) THEN
-      DO i = kp1 , ju
+      DO i = kp1, ju
         mm = mm + 1
         sm = sm + ABS(Z(i)+wkm*Abe(k,mm))
         Z(i) = Z(i) + wk*Abe(k,mm)
@@ -198,7 +198,7 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
         t = wkm - wk
         wk = wkm
         mm = ml1
-        DO i = kp1 , ju
+        DO i = kp1, ju
           mm = mm + 1
           Z(i) = Z(i) + t*Abe(k,mm)
         ENDDO
@@ -211,7 +211,7 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !     SOLVE TRANS(L)*Y = W
   !
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     nl = MIN(Ml,N-k)
     IF ( k<N ) Z(k) = Z(k) + DDOT(nl,Abe(k+nl,ml1-nl),-ldb,Z(k+1),1)
@@ -231,7 +231,7 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !     SOLVE L*V = Y
   !
-  DO k = 1 , N
+  DO k = 1, N
     l = Ipvt(k)
     t = Z(l)
     Z(l) = Z(k)
@@ -250,7 +250,7 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !     SOLVE  U*Z = V
   !
-  DO kb = 1 , N
+  DO kb = 1, N
     k = N + 1 - kb
     IF ( ABS(Z(k))>ABS(Abe(k,ml1)) ) THEN
       s = ABS(Abe(k,ml1))/ABS(Z(k))

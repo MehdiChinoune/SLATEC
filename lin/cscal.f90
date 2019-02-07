@@ -45,8 +45,8 @@ SUBROUTINE CSCAL(N,Ca,Cx,Incx)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CSCAL
-  COMPLEX Ca , Cx(*)
-  INTEGER i , Incx , ix , N
+  COMPLEX Ca, Cx(*)
+  INTEGER i, Incx, ix, N
   !***FIRST EXECUTABLE STATEMENT  CSCAL
   IF ( N<=0 ) RETURN
   !
@@ -54,7 +54,7 @@ SUBROUTINE CSCAL(N,Ca,Cx,Incx)
     !
     !     Code for increment equal to 1.
     !
-    DO i = 1 , N
+    DO i = 1, N
       Cx(i) = Ca*Cx(i)
     ENDDO
     GOTO 99999
@@ -64,9 +64,10 @@ SUBROUTINE CSCAL(N,Ca,Cx,Incx)
   !
   ix = 1
   IF ( Incx<0 ) ix = (-N+1)*Incx + 1
-  DO i = 1 , N
+  DO i = 1, N
     Cx(ix) = Ca*Cx(ix)
     ix = ix + Incx
   ENDDO
   RETURN
-  99999 END SUBROUTINE CSCAL
+  99999 CONTINUE
+  END SUBROUTINE CSCAL

@@ -4,7 +4,7 @@ SUBROUTINE SROT(N,Sx,Incx,Sy,Incy,Sc,Ss)
   IMPLICIT NONE
   !*--SROT5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , Incx , Incy , kx , ky , N , nsteps
+  INTEGER i, Incx, Incy, kx, ky, N, nsteps
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SROT
   !***PURPOSE  Apply a plane Givens rotation.
@@ -53,10 +53,10 @@ SUBROUTINE SROT(N,Sx,Incx,Sy,Incy,Sc,Ss)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SROT
-  REAL Sx , Sy , Sc , Ss , zero , one , w , z
-  DIMENSION Sx(*) , Sy(*)
-  SAVE zero , one
-  DATA zero , one/0.0E0 , 1.0E0/
+  REAL Sx, Sy, Sc, Ss, zero, one, w, z
+  DIMENSION Sx(*), Sy(*)
+  SAVE zero, one
+  DATA zero, one/0.0E0, 1.0E0/
   !***FIRST EXECUTABLE STATEMENT  SROT
   IF ( .NOT.(N<=0.OR.(Ss==zero.AND.Sc==one)) ) THEN
     IF ( Incx/=Incy.OR.Incx<=0 ) THEN
@@ -69,7 +69,7 @@ SUBROUTINE SROT(N,Sx,Incx,Sy,Incy,Sc,Ss)
       IF ( Incx<0 ) kx = 1 - (N-1)*Incx
       IF ( Incy<0 ) ky = 1 - (N-1)*Incy
       !
-      DO i = 1 , N
+      DO i = 1, N
         w = Sx(kx)
         z = Sy(ky)
         Sx(kx) = Sc*w + Ss*z
@@ -82,7 +82,7 @@ SUBROUTINE SROT(N,Sx,Incx,Sy,Incy,Sc,Ss)
       !          Code for equal and positive increments.
       !
       nsteps = Incx*N
-      DO i = 1 , nsteps , Incx
+      DO i = 1, nsteps, Incx
         w = Sx(i)
         z = Sy(i)
         Sx(i) = Sc*w + Ss*z

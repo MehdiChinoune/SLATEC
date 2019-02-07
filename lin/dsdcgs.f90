@@ -5,7 +5,7 @@ SUBROUTINE DSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   IMPLICIT NONE
   !*--DSDCGS6
   !*** Start of declarations inserted by SPAG
-  REAL DSDI , DSMV
+  REAL DSDI, DSMV
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSDCGS
   !***PURPOSE  Diagonally Scaled CGS Sparse Ax=b Solver.
@@ -232,20 +232,20 @@ SUBROUTINE DSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  DSDCGS
   !     .. Parameters ..
-  INTEGER LOCRB , LOCIB
+  INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  REAL(8) :: Err , Tol
-  INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
+  REAL(8) :: Err, Tol
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
     Nelt
   !     .. Array Arguments ..
-  REAL(8) :: A(N) , B(N) , Rwork(Lenw) , X(N)
-  INTEGER Ia(Nelt) , Iwork(Leniw) , Ja(Nelt)
+  REAL(8) :: A(N), B(N), Rwork(Lenw), X(N)
+  INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin , lociw , locp , locq , locr , locr0 , locu , locv1 , &
-    locv2 , locw
+  INTEGER locdin, lociw, locp, locq, locr, locr0, locu, locv1, &
+    locv2, locw
   !     .. External Subroutines ..
-  EXTERNAL DCGS , DCHKW , DS2Y , DSDI , DSDS , DSMV
+  EXTERNAL DCGS, DCHKW, DS2Y, DSDI, DSDS, DSMV
   !***FIRST EXECUTABLE STATEMENT  DSDCGS
   !
   Ierr = 0

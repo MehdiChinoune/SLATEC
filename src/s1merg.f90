@@ -27,10 +27,10 @@ SUBROUTINE S1MERG(Tcos,I1,M1,I2,M2,I3)
   !           (RWC)
   !   920130  Code name changed from MERGE to S1MERG.  (WRB)
   !***END PROLOGUE  S1MERG
-  INTEGER I1 , I2 , I3 , M1 , M2
+  INTEGER I1, I2, I3, M1, M2
   REAL Tcos(*)
   !
-  INTEGER j1 , j2 , j3
+  INTEGER j1, j2, j3
   !
   !***FIRST EXECUTABLE STATEMENT  S1MERG
   IF ( M1==0.AND.M2==0 ) RETURN

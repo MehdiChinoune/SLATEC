@@ -25,12 +25,12 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CACON
-  COMPLEX ck , cone , cs , cscl , cscr , csgn , cspn , css , csr , c1 , c2 , &
-    rz , sc1 , sc2 , st , s1 , s2 , Y , Z , zn , cy
-  REAL Alim , arg , ascle , as2 , bscle , bry , cpn , c1i , c1m , c1r , &
-    Elim , fmr , Fnu , Fnul , pi , Rl , sgn , spn , Tol , yy , R1MACH
-  INTEGER i , inu , iuf , kflag , Kode , Mr , N , nn , nw , Nz
-  DIMENSION Y(N) , cy(2) , css(3) , csr(3) , bry(3)
+  COMPLEX ck, cone, cs, cscl, cscr, csgn, cspn, css, csr, c1, c2, &
+    rz, sc1, sc2, st, s1, s2, Y, Z, zn, cy
+  REAL Alim, arg, ascle, as2, bscle, bry, cpn, c1i, c1m, c1r, &
+    Elim, fmr, Fnu, Fnul, pi, Rl, sgn, spn, Tol, yy, R1MACH
+  INTEGER i, inu, iuf, kflag, Kode, Mr, N, nn, nw, Nz
+  DIMENSION Y(N), cy(2), css(3), csr(3), bry(3)
   DATA pi/3.14159265358979324E0/
   DATA cone/(1.0E0,0.0E0)/
   !***FIRST EXECUTABLE STATEMENT  CACON
@@ -115,7 +115,7 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
       s1 = s1*css(kflag)
       s2 = s2*css(kflag)
       cs = csr(kflag)
-      DO i = 3 , N
+      DO i = 3, N
         st = s2
         s2 = ck*s2 + s1
         s1 = st

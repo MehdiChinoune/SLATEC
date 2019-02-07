@@ -4,9 +4,9 @@ SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
   IMPLICIT NONE
   !*--RFFTF15
   !*** Start of declarations inserted by SPAG
-  REAL C , Ch , Wa
-  INTEGER i , idl1 , ido , Ifac , ip , iw , ix2 , ix3 , ix4 , k1 , kh , l1 , &
-    l2 , N , na , nf
+  REAL C, Ch, Wa
+  INTEGER i, idl1, ido, Ifac, ip, iw, ix2, ix3, ix4, k1, kh, l1, &
+    l2, N, na, nf
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RFFTF1
   !***PURPOSE  Compute the forward transform of a real, periodic sequence.
@@ -91,13 +91,13 @@ SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RFFTF1
-  DIMENSION Ch(*) , C(*) , Wa(*) , Ifac(*)
+  DIMENSION Ch(*), C(*), Wa(*), Ifac(*)
   !***FIRST EXECUTABLE STATEMENT  RFFTF1
   nf = Ifac(2)
   na = 1
   l2 = N
   iw = N
-  DO k1 = 1 , nf
+  DO k1 = 1, nf
     kh = nf - k1
     ip = Ifac(kh+3)
     l1 = l2/ip
@@ -148,7 +148,7 @@ SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
     l2 = l1
   ENDDO
   IF ( na==1 ) RETURN
-  DO i = 1 , N
+  DO i = 1, N
     C(i) = Ch(i)
   ENDDO
 END SUBROUTINE RFFTF1

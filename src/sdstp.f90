@@ -8,7 +8,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   IMPLICIT NONE
   !*--SDSTP9
   !*** Start of declarations inserted by SPAG
-  REAL FA , USERS
+  REAL FA, USERS
   INTEGER JACOBN
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SDSTP
@@ -75,19 +75,19 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  SDSTP
-  EXTERNAL F , JACOBN , FA , USERS
-  INTEGER i , Ierror , Impl , Ipvt(*) , Iswflg , iter , j , Jstate , &
-    Jstepl , Jtask , Matdim , Maxord , Mint , Miter , Ml , Mntold , &
-    Mtrold , Mtrsv , Mu , MXFAIL , MXITER , Mxrdsv , MXTRY , N , Nde , &
-    NDJSTP , nfail , Nfe , Nje , Nq , Nqused , Nstep , nsv , ntry , &
+  EXTERNAL F, JACOBN, FA, USERS
+  INTEGER i, Ierror, Impl, Ipvt(*), Iswflg, iter, j, Jstate, &
+    Jstepl, Jtask, Matdim, Maxord, Mint, Miter, Ml, Mntold, &
+    Mtrold, Mtrsv, Mu, MXFAIL, MXITER, Mxrdsv, MXTRY, N, Nde, &
+    NDJSTP, nfail, Nfe, Nje, Nq, Nqused, Nstep, nsv, ntry, &
     Nwait
-  REAL A(Matdim,*) , Avgh , Avgord , BIAS1 , BIAS2 , BIAS3 , bnd , ctest , &
-    d , denom , Dfdy(Matdim,*) , d1 , El(13,12) , Eps , erdn , erup , &
-    etest , Fac(*) , H , Hmax , hn , Hold , hs , Hused , numer , Rc , &
-    RCTEST , rh , rh1 , rh2 , rh3 , Rmax , RMFAIL , RMNORM , Save1(*) , &
-    Save2(*) , SNRM2 , T , told , Tq(3,12) , Trend , TRSHLD , Uround , &
-    Y(*) , Yh(N,*) , Ywt(*) , y0nrm
-  LOGICAL Convrg , evalfa , evaljc , ier , switch
+  REAL A(Matdim,*), Avgh, Avgord, BIAS1, BIAS2, BIAS3, bnd, ctest, &
+    d, denom, Dfdy(Matdim,*), d1, El(13,12), Eps, erdn, erup, &
+    etest, Fac(*), H, Hmax, hn, Hold, hs, Hused, numer, Rc, &
+    RCTEST, rh, rh1, rh2, rh3, Rmax, RMFAIL, RMNORM, Save1(*), &
+    Save2(*), SNRM2, T, told, Tq(3,12), Trend, TRSHLD, Uround, &
+    Y(*), Yh(N,*), Ywt(*), y0nrm
+  LOGICAL Convrg, evalfa, evaljc, ier, switch
   PARAMETER (BIAS1=1.3E0,BIAS2=1.2E0,BIAS3=1.4E0,MXFAIL=3,MXITER=3,MXTRY=50,&
     RCTEST=.3E0,RMFAIL=2.E0,RMNORM=10.E0,TRSHLD=1.E0)
   PARAMETER (NDJSTP=10)
@@ -123,7 +123,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   ENDIF
   !
   200  iter = 0
-  DO i = 1 , N
+  DO i = 1, N
     Y(i) = Yh(i,1)
   ENDDO
   CALL F(N,T,Y,Save2)
@@ -142,7 +142,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Rc = 1.E0
     Jstepl = Nstep
   ENDIF
-  DO i = 1 , N
+  DO i = 1, N
     Save1(i) = 0.E0
   ENDDO
   DO
@@ -167,13 +167,13 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     IF ( Iswflg==3.AND.Mint==1 ) THEN
       IF ( iter==0 ) THEN
         numer = SNRM2(N,Save1,1)
-        DO i = 1 , N
+        DO i = 1, N
           Dfdy(1,i) = Save1(i)
         ENDDO
         y0nrm = SNRM2(N,Yh,1)
       ELSE
         denom = numer
-        DO i = 1 , N
+        DO i = 1, N
           Dfdy(1,i) = Save1(i) - Dfdy(1,i)
         ENDDO
         numer = SNRM2(N,Dfdy,Matdim)
@@ -183,7 +183,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
             GOTO 400
           ENDIF
         ENDIF
-        DO i = 1 , N
+        DO i = 1, N
           Dfdy(1,i) = Save1(i)
         ENDDO
         IF ( denom/=0.E0 ) bnd = MAX(bnd,numer/(denom*ABS(H)*El(1,Nq)))
@@ -195,7 +195,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     IF ( ctest<=Eps ) GOTO 400
     iter = iter + 1
     IF ( iter<MXITER ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         Y(i) = Yh(i,1) + El(1,Nq)*Save1(i)
       ENDDO
       CALL F(N,T,Y,Save2)
@@ -237,11 +237,11 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !                          subsequent steps.  The error test is made.
   400  Convrg = (Miter/=0)
   IF ( Ierror==1.OR.Ierror==5 ) THEN
-    DO i = 1 , Nde
+    DO i = 1, Nde
       Save2(i) = Save1(i)/Ywt(i)
     ENDDO
   ELSE
-    DO i = 1 , Nde
+    DO i = 1, Nde
       Save2(i) = Save1(i)/MAX(ABS(Y(i)),Ywt(i))
     ENDDO
   ENDIF
@@ -261,11 +261,11 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
       rh2 = 1.E0/(BIAS2*(etest/Eps)**(1.E0/(Nq+1)))
       IF ( Nq>1 ) THEN
         IF ( Ierror==1.OR.Ierror==5 ) THEN
-          DO i = 1 , Nde
+          DO i = 1, Nde
             Save2(i) = Yh(i,Nq+1)/Ywt(i)
           ENDDO
         ELSE
-          DO i = 1 , Nde
+          DO i = 1, Nde
             Save2(i) = Yh(i,Nq+1)/MAX(ABS(Y(i)),Ywt(i))
           ENDDO
         ENDIF
@@ -294,7 +294,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     !                retried.
     nfail = 0
     Jtask = 2
-    DO i = 1 , N
+    DO i = 1, N
       Y(i) = Yh(i,1)
     ENDDO
     CALL SDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,Ml,Mu,&
@@ -313,12 +313,12 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   Nqused = Nq
   Avgh = ((Nstep-1)*Avgh+H)/Nstep
   Avgord = ((Nstep-1)*Avgord+Nq)/Nstep
-  DO j = 1 , Nq + 1
-    DO i = 1 , N
+  DO j = 1, Nq + 1
+    DO i = 1, N
       Yh(i,j) = Yh(i,j) + El(j,Nq)*Save1(i)
     ENDDO
   ENDDO
-  DO i = 1 , N
+  DO i = 1, N
     Y(i) = Yh(i,1)
   ENDDO
   !                                          If ISWFLG is 3, consider
@@ -384,7 +384,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   ELSEIF ( Nwait>1 ) THEN
     Nwait = Nwait - 1
     IF ( Nwait==1.AND.Nq<Maxord ) THEN
-      DO i = 1 , Nde
+      DO i = 1, Nde
         Yh(i,Maxord+1) = Save1(i)
       ENDDO
     ENDIF
@@ -404,11 +404,11 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
       rh1 = 0.E0
     ELSE
       IF ( Ierror==1.OR.Ierror==5 ) THEN
-        DO i = 1 , Nde
+        DO i = 1, Nde
           Save2(i) = Yh(i,Nq+1)/Ywt(i)
         ENDDO
       ELSE
-        DO i = 1 , Nde
+        DO i = 1, Nde
           Save2(i) = Yh(i,Nq+1)/MAX(ABS(Y(i)),Ywt(i))
         ENDDO
       ENDIF
@@ -420,11 +420,11 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
       rh3 = 0.E0
     ELSE
       IF ( Ierror==1.OR.Ierror==5 ) THEN
-        DO i = 1 , Nde
+        DO i = 1, Nde
           Save2(i) = (Save1(i)-Yh(i,Maxord+1))/Ywt(i)
         ENDDO
       ELSE
-        DO i = 1 , Nde
+        DO i = 1, Nde
           Save2(i) = (Save1(i)-Yh(i,Maxord+1))/MAX(ABS(Y(i)),Ywt(i))
         ENDDO
       ENDIF
@@ -442,7 +442,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     ELSE
       rh = rh3
       IF ( rh<=TRSHLD ) GOTO 450
-      DO i = 1 , N
+      DO i = 1, N
         Yh(i,Nq+2) = Save1(i)*El(Nq+1,Nq)/(Nq+1)
       ENDDO
       Nq = Nq + 1
@@ -463,7 +463,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !
   500  Jstate = 2
   Hold = H
-  DO i = 1 , N
+  DO i = 1, N
     Y(i) = Yh(i,1)
   ENDDO
   RETURN
@@ -474,7 +474,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !
   700  T = told
   CALL SDPSC(-1,nsv,Nq,Yh)
-  DO i = 1 , nsv
+  DO i = 1, nsv
     Y(i) = Yh(i,1)
   ENDDO
   800  Hold = H

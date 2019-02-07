@@ -61,7 +61,7 @@ PROGRAM TEST23
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
   !***END PROLOGUE  TEST23
-  INTEGER kprint , lin , lun , nerr , nfail
+  INTEGER kprint, lin, lun, nerr, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST23
   lun = I1MACH(2)
   lin = I1MACH(1)

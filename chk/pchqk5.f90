@@ -58,31 +58,31 @@ SUBROUTINE PCHQK5(Lun,Kprint,Ipass)
   !
   !  Declare arguments.
   !
-  INTEGER Lun , Kprint , Ipass
+  INTEGER Lun, Kprint, Ipass
   !
   !  Declare externals.
   !
-  REAL BVALU , R1MACH
-  EXTERNAL BVALU , PCHBS , R1MACH
+  REAL BVALU, R1MACH
+  EXTERNAL BVALU, PCHBS, R1MACH
   !
   !  Declare variables.
   !
-  INTEGER i , ierr , ifail , inbv , j , knotyp , k , N , ndim , nknots
+  INTEGER i, ierr, ifail, inbv, j, knotyp, k, N, ndim, nknots
   PARAMETER (N=9)
-  REAL bcoef(2*N) , d(N) , dcalc , derr , dermax , f(N) , fcalc , ferr ,&
-    fermax , t(2*N+4) , terr , termax , tol , tolz , tsave(2*N+4) ,&
-    work(16*N) , x(N) , ZERO
+  REAL bcoef(2*N), d(N), dcalc, derr, dermax, f(N), fcalc, ferr ,&
+    fermax, t(2*N+4), terr, termax, tol, tolz, tsave(2*N+4) ,&
+    work(16*N), x(N), ZERO
   PARAMETER (ZERO=0.0E0)
   LOGICAL fail
   !
   !  Define test data.
   !
-  DATA x/ - 2.2E0 , -1.2E0 , -1.0E0 , -0.5E0 , -0.01E0 , 0.5E0 , 1.0E0 ,&
-    2.0E0 , 2.2E0/
-  DATA f/0.0079E0 , 0.2369E0 , 0.3679E0 , 0.7788E0 , 0.9999E0 , 0.7788E0 ,&
-    0.3679E0 , 0.1083E0 , 0.0079E0/
-  DATA d/0.0000E0 , 0.3800E0 , 0.7173E0 , 0.5820E0 , 0.0177E0 , -0.5696E0 ,&
-    -0.5135E0 , -0.0778E0 , -0.0025E0/
+  DATA x/ - 2.2E0, -1.2E0, -1.0E0, -0.5E0, -0.01E0, 0.5E0, 1.0E0 ,&
+    2.0E0, 2.2E0/
+  DATA f/0.0079E0, 0.2369E0, 0.3679E0, 0.7788E0, 0.9999E0, 0.7788E0 ,&
+    0.3679E0, 0.1083E0, 0.0079E0/
+  DATA d/0.0000E0, 0.3800E0, 0.7173E0, 0.5820E0, 0.0177E0, -0.5696E0 ,&
+    -0.5135E0, -0.0778E0, -0.0025E0/
   !
   !  Initialize.
   !
@@ -103,11 +103,11 @@ SUBROUTINE PCHQK5(Lun,Kprint,Ipass)
   !
   IF ( Kprint>=3 ) WRITE (Lun,99003)
   99003 FORMAT (/4X,'(Results should be the same for all KNOTYP values.)')
-  DO knotyp = 2 , -1 , -1
+  DO knotyp = 2, -1, -1
     !        ------------
     CALL PCHBS(N,x,f,d,1,knotyp,nknots,t,bcoef,ndim,k,ierr)
     !        ------------
-    IF ( Kprint>=3 ) WRITE (Lun,99004) knotyp , nknots , ndim , k , ierr
+    IF ( Kprint>=3 ) WRITE (Lun,99004) knotyp, nknots, ndim, k, ierr
     99004   FORMAT (/4X,'KNOTYP =',I2,':  NKNOTS =',I3,',  NDIM =',I3,',  K =',I2,&
       ',  IERR =',I3)
     IF ( ierr/=0 ) THEN
@@ -122,10 +122,10 @@ SUBROUTINE PCHQK5(Lun,Kprint,Ipass)
       IF ( Kprint>=3 ) THEN
         WRITE (Lun,99006)
         99006       FORMAT (/15X,'X',9X,'KNOTS',10X,'F',7X,'FERR',8X,'D',7X,'DERR')
-        WRITE (Lun,99013) t(1) , t(2)
+        WRITE (Lun,99013) t(1), t(2)
         j = 1
       ENDIF
-      DO i = 1 , N
+      DO i = 1, N
         fcalc = BVALU(t,bcoef,ndim,k,0,x(i),inbv,work)
         ferr = f(i) - fcalc
         fermax = MAX(fermax,RELERR(ferr,f(i)))
@@ -134,18 +134,18 @@ SUBROUTINE PCHQK5(Lun,Kprint,Ipass)
         dermax = MAX(dermax,RELERR(derr,d(i)))
         IF ( Kprint>=3 ) THEN
           j = j + 2
-          WRITE (Lun,99007) x(i) , t(j) , t(j+1) , f(i) , ferr , d(i) , derr
+          WRITE (Lun,99007) x(i), t(j), t(j+1), f(i), ferr, d(i), derr
           99007         FORMAT (10X,3F8.2,F10.4,1P,E10.2,0P,F10.4,1P,E10.2)
         ENDIF
       ENDDO
       IF ( Kprint>=3 ) THEN
         j = j + 2
-        WRITE (Lun,99013) t(j) , t(j+1)
+        WRITE (Lun,99013) t(j), t(j+1)
       ENDIF
       fail = (fermax>tol) .OR. (dermax>tol)
       IF ( fail ) ifail = ifail + 1
       IF ( (Kprint>=3).OR.(Kprint>=2).AND.fail ) WRITE (Lun,99008) fermax ,&
-        dermax , tol
+        dermax, tol
       99008     FORMAT (/5X,'Maximum relative errors:'/15X,'F-error =',1P,E13.5,5X,&
         'D-error =',E13.5/5X,'Both should be less than  TOL =',E13.5)
     ENDIF
@@ -153,19 +153,19 @@ SUBROUTINE PCHQK5(Lun,Kprint,Ipass)
     !          Special check for KNOTYP=-1.
     IF ( knotyp==0 ) THEN
       !             Save knot vector for next test.
-      DO i = 1 , nknots
+      DO i = 1, nknots
         tsave(i) = t(i)
       ENDDO
     ELSEIF ( knotyp==-1 ) THEN
       !             Check that knot vector is unchanged.
       termax = ZERO
-      DO i = 1 , nknots
+      DO i = 1, nknots
         terr = ABS(t(i)-tsave(i))
         termax = MAX(termax,terr)
       ENDDO
       IF ( termax>tolz ) THEN
         ifail = ifail + 1
-        IF ( Kprint>=2 ) WRITE (Lun,99009) termax , tolz
+        IF ( Kprint>=2 ) WRITE (Lun,99009) termax, tolz
         99009       FORMAT (/' *** T-ARRAY MAXIMUM CHANGE =',1P,E13.5,&
           ';  SHOULD NOT EXCEED TOLZ =',E13.5)
       ENDIF
@@ -197,7 +197,7 @@ CONTAINS
   !  Define relative error function.
   !
   REAL FUNCTION RELERR(err,ans)
-    REAL, INTENT(IN) :: ans , err
+    REAL, INTENT(IN) :: ans, err
     RELERR = ABS(err)/MAX(1.0E-5,ABS(ans))
   END FUNCTION RELERR
 END SUBROUTINE PCHQK5

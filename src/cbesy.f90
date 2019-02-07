@@ -154,11 +154,11 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   !   920811  Prologue revised.  (DWL)
   !***END PROLOGUE  CBESY
   !
-  COMPLEX Cwrk , Cy , c1 , c2 , ex , hci , Z , zu , zv
-  REAL elim , ey , Fnu , r1 , r2 , tay , xx , yy , R1MACH , r1m5 , ascle , &
-    rtol , atol , tol , aa , bb
-  INTEGER i , Ierr , k , Kode , k1 , k2 , N , Nz , nz1 , nz2 , I1MACH
-  DIMENSION Cy(N) , Cwrk(N)
+  COMPLEX Cwrk, Cy, c1, c2, ex, hci, Z, zu, zv
+  REAL elim, ey, Fnu, r1, r2, tay, xx, yy, R1MACH, r1m5, ascle, &
+    rtol, atol, tol, aa, bb
+  INTEGER i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2, I1MACH
+  DIMENSION Cy(N), Cwrk(N)
   !***FIRST EXECUTABLE STATEMENT  CBESY
   xx = REAL(Z)
   yy = AIMAG(Z)
@@ -205,7 +205,7 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
         Nz = 0
         rtol = 1.0E0/tol
         ascle = R1MACH(1)*rtol*1.0E+3
-        DO i = 1 , N
+        DO i = 1, N
           !       CY(I) = HCI*(C2*CWRK(I)-C1*CY(I))
           zv = Cwrk(i)
           aa = REAL(zv)
@@ -232,7 +232,7 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
         ENDDO
         RETURN
       ELSE
-        DO i = 1 , N
+        DO i = 1, N
           Cy(i) = hci*(Cwrk(i)-Cy(i))
         ENDDO
         RETURN

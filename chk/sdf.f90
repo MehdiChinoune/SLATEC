@@ -23,7 +23,7 @@ SUBROUTINE SDF(N,T,Y,Yp)
   !   890405  DATE WRITTEN
   !   890405  Revised to meet SLATEC standards.
   !***END PROLOGUE  SDF
-  REAL alfa , T , Y(*) , Yp(*)
+  REAL alfa, T, Y(*), Yp(*)
   INTEGER N
   !***FIRST EXECUTABLE STATEMENT  SDF
   alfa = Y(N+1)

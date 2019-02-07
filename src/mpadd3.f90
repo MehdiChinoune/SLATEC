@@ -4,7 +4,7 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
   IMPLICIT NONE
   !*--MPADD35
   !*** Start of declarations inserted by SPAG
-  INTEGER i , i2 , i2p , j , LUN , M , Med , MXR
+  INTEGER i, i2, i2p, j, LUN, M, Med, MXR
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPADD3
   !***SUBSIDIARY
@@ -32,8 +32,8 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPADD3
-  COMMON /MPCOM / B , T , M , LUN , MXR , R(30)
-  INTEGER B , T , R , X(*) , Y(*) , S , Re , c , ted
+  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
+  INTEGER B, T, R, X(*), Y(*), S, Re, c, ted
   !***FIRST EXECUTABLE STATEMENT  MPADD3
   ted = T + Med
   i2 = T + 4
@@ -115,7 +115,7 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
     IF ( c==0 ) RETURN
     ! MUST SHIFT RIGHT HERE AS CARRY OFF END
     i2p = i2 + 1
-    DO j = 2 , i2
+    DO j = 2, i2
       i = i2p - j
       R(i+1) = R(i)
     ENDDO

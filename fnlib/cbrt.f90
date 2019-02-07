@@ -4,8 +4,8 @@ FUNCTION CBRT(X)
   IMPLICIT NONE
   !*--CBRT5
   !*** Start of declarations inserted by SPAG
-  REAL CBRT , cbrt2 , cbrtsq , R1MACH , R9PAK , X , y
-  INTEGER irem , iter , ixpnt , n , niter
+  REAL CBRT, cbrt2, cbrtsq, R1MACH, R9PAK, X, y
+  INTEGER irem, iter, ixpnt, n, niter
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CBRT
   !***PURPOSE  Compute the cube root.
@@ -27,7 +27,7 @@ FUNCTION CBRT(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CBRT
   DIMENSION cbrt2(5)
-  SAVE cbrt2 , niter
+  SAVE cbrt2, niter
   DATA cbrt2(1)/0.62996052494743658E0/
   DATA cbrt2(2)/0.79370052598409974E0/
   DATA cbrt2(3)/1.0E0/
@@ -50,7 +50,7 @@ FUNCTION CBRT(X)
   !
   CBRT = .439581E0 + y*(.928549E0+y*(-.512653E0+y*.144586E0))
   !
-  DO iter = 1 , niter
+  DO iter = 1, niter
     cbrtsq = CBRT*CBRT
     CBRT = CBRT + (y-CBRT*cbrtsq)/(3.0*cbrtsq)
   ENDDO

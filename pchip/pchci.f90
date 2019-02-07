@@ -92,20 +92,20 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N , Incfd
-  REAL H(*) , Slope(*) , D(Incfd,*)
+  INTEGER N, Incfd
+  REAL H(*), Slope(*), D(Incfd,*)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i , nless1
-  REAL del1 , del2 , dmax , dmin , drat1 , drat2 , hsum , hsumt3 , three , &
-    w1 , w2 , zero
-  SAVE zero , three
+  INTEGER i, nless1
+  REAL del1, del2, dmax, dmin, drat1, drat2, hsum, hsumt3, three, &
+    w1, w2, zero
+  SAVE zero, three
   REAL PCHST
   !
   !  INITIALIZE.
   !
-  DATA zero/0./ , three/3./
+  DATA zero/0./, three/3./
   !***FIRST EXECUTABLE STATEMENT  PCHCI
   nless1 = N - 1
   del1 = Slope(1)
@@ -135,7 +135,7 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
     !
     !  LOOP THROUGH INTERIOR POINTS.
     !
-    DO i = 2 , nless1
+    DO i = 2, nless1
       IF ( i/=2 ) THEN
         !
         hsum = H(i-1) + H(i)

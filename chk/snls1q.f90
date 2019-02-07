@@ -28,25 +28,25 @@ SUBROUTINE SNLS1Q(Lun,Kprint,Ipass)
   !           returns for all values of KPRINT and code polished.  (WRB)
   !***END PROLOGUE  SNLS1Q
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
-  REAL fnorm , fnorms , one , sigma , temp1 , temp2 , temp3 , tol , tol2 , &
+  REAL fnorm, fnorms, one, sigma, temp1, temp2, temp3, tol, tol2, &
     zero
-  INTEGER i , iflag , info , infos , iopt , kontrl , ldfjac , lwa , m , n , &
-    nerr , nprint
+  INTEGER i, iflag, info, infos, iopt, kontrl, ldfjac, lwa, m, n, &
+    nerr, nprint
   LOGICAL fatal
   !     .. Local Arrays ..
-  REAL fjac(10,2) , fjrow(2) , fjtj(3) , fvec(10) , wa(40) , x(2)
+  REAL fjac(10,2), fjrow(2), fjtj(3), fvec(10), wa(40), x(2)
   INTEGER iw(2)
   !     .. External Functions ..
-  REAL ENORM , R1MACH
+  REAL ENORM, R1MACH
   INTEGER NUMXER
-  EXTERNAL ENORM , NUMXER , R1MACH
+  EXTERNAL ENORM, NUMXER, R1MACH
   !     .. External Subroutines ..
-  EXTERNAL FCN1 , FCN2 , FCN3 , FDJAC3 , PASS , SCOV , SNLS1E , XGETF , &
+  EXTERNAL FCN1, FCN2, FCN3, FDJAC3, PASS, SCOV, SNLS1E, XGETF, &
     XSETF
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , SQRT
+  INTRINSIC ABS, SQRT
   !***FIRST EXECUTABLE STATEMENT  SNLS1Q
   IF ( Kprint>=2 ) WRITE (Lun,99001)
   !
@@ -82,18 +82,18 @@ SUBROUTINE SNLS1Q(Lun,Kprint,Ipass)
     fatal = .TRUE.
     IF ( Kprint>=2 ) CALL PASS(Lun,1,0)
   ENDIF
-  IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99007) infos , &
-    fnorms , info , fnorm
+  IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99007) infos, &
+    fnorms, info, fnorm
   !
   !     Form JAC-transpose*JAC.
   !
   sigma = fnorm*fnorm/(m-n)
   iflag = 2
   CALL FCN2(iflag,m,n,x,fvec,fjac,ldfjac)
-  DO i = 1 , 3
+  DO i = 1, 3
     fjtj(i) = zero
   ENDDO
-  DO i = 1 , m
+  DO i = 1, m
     fjtj(1) = fjtj(1) + fjac(i,1)**2
     fjtj(2) = fjtj(2) + fjac(i,1)*fjac(i,2)
     fjtj(3) = fjtj(3) + fjac(i,2)**2
@@ -118,8 +118,8 @@ SUBROUTINE SNLS1Q(Lun,Kprint,Ipass)
     fatal = .TRUE.
     IF ( Kprint>=2 ) CALL PASS(Lun,2,0)
   ENDIF
-  IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99008) infos , info , &
-    temp1 , temp2 , temp3
+  IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99008) infos, info, &
+    temp1, temp2, temp3
   !
   !     OPTION=1, the full Jacobian is stored and the code approximates
   !     the Jacobian.
@@ -137,18 +137,18 @@ SUBROUTINE SNLS1Q(Lun,Kprint,Ipass)
     fatal = .TRUE.
     IF ( Kprint>=2 ) CALL PASS(Lun,3,0)
   ENDIF
-  IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99007) infos , &
-    fnorms , info , fnorm
+  IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99007) infos, &
+    fnorms, info, fnorm
   !
   !     Form JAC-transpose*JAC.
   !
   sigma = fnorm*fnorm/(m-n)
   iflag = 1
   CALL FDJAC3(FCN1,m,n,x,fvec,fjac,ldfjac,iflag,zero,wa)
-  DO i = 1 , 3
+  DO i = 1, 3
     fjtj(i) = zero
   ENDDO
-  DO i = 1 , m
+  DO i = 1, m
     fjtj(1) = fjtj(1) + fjac(i,1)**2
     fjtj(2) = fjtj(2) + fjac(i,1)*fjac(i,2)
     fjtj(3) = fjtj(3) + fjac(i,2)**2
@@ -173,8 +173,8 @@ SUBROUTINE SNLS1Q(Lun,Kprint,Ipass)
     fatal = .TRUE.
     IF ( Kprint>=2 ) CALL PASS(Lun,4,0)
   ENDIF
-  IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99008) infos , info , &
-    temp1 , temp2 , temp3
+  IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99008) infos, info, &
+    temp1, temp2, temp3
   !
   !     OPTION=3, the full Jacobian is not stored.  Only the product of
   !     the Jacobian transpose and Jacobian is stored.  The user provides
@@ -193,17 +193,17 @@ SUBROUTINE SNLS1Q(Lun,Kprint,Ipass)
     fatal = .TRUE.
     IF ( Kprint>=2 ) CALL PASS(Lun,5,0)
   ENDIF
-  IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99007) infos , &
-    fnorms , info , fnorm
+  IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99007) infos, &
+    fnorms, info, fnorm
   !
   !     Form JAC-transpose*JAC.
   !
   sigma = fnorm*fnorm/(m-n)
-  DO i = 1 , 3
+  DO i = 1, 3
     fjtj(i) = zero
   ENDDO
   iflag = 3
-  DO i = 1 , m
+  DO i = 1, m
     CALL FCN3(iflag,m,n,x,fvec,fjrow,i)
     fjtj(1) = fjtj(1) + fjrow(1)**2
     fjtj(2) = fjtj(2) + fjrow(1)*fjrow(2)
@@ -229,8 +229,8 @@ SUBROUTINE SNLS1Q(Lun,Kprint,Ipass)
     fatal = .TRUE.
     IF ( Kprint>=2 ) CALL PASS(Lun,6,0)
   ENDIF
-  IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99008) infos , info , &
-    temp1 , temp2 , temp3
+  IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) WRITE (Lun,99008) infos, info, &
+    temp1, temp2, temp3
   !
   !     Test improper input parameters.
   !

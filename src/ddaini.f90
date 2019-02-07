@@ -59,24 +59,24 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   !   901030  Minor corrections to declarations.  (FNF)
   !***END PROLOGUE  DDAINI
   !
-  INTEGER Neq , Idid , Ipar(*) , Iwm(*) , Nonneg , Ntemp
-  REAL(8) :: X , Y(*) , Yprime(*) , H , Wt(*) , Rpar(*) , Phi(Neq,*) , &
-    Delta(*) , E(*) , Wm(*) , Hmin , Uround
-  EXTERNAL RES , JAC
+  INTEGER Neq, Idid, Ipar(*), Iwm(*), Nonneg, Ntemp
+  REAL(8) :: X, Y(*), Yprime(*), H, Wt(*), Rpar(*), Phi(Neq,*), &
+    Delta(*), E(*), Wm(*), Hmin, Uround
+  EXTERNAL RES, JAC
   !
-  EXTERNAL DDAJAC , DDANRM , DDASLV
+  EXTERNAL DDAJAC, DDANRM, DDASLV
   REAL(8) :: DDANRM
   !
-  INTEGER i , ier , ires , jcalc , LNJE , LNRE , m , maxit , mjac , ncf , &
-    nef , nsf
-  REAL(8) :: cj , damp , delnrm , err , oldnrm , r , rate , s , xold , &
+  INTEGER i, ier, ires, jcalc, LNJE, LNRE, m, maxit, mjac, ncf, &
+    nef, nsf
+  REAL(8) :: cj, damp, delnrm, err, oldnrm, r, rate, s, xold, &
     ynorm
   LOGICAL convgd
   !
   PARAMETER (LNRE=12)
   PARAMETER (LNJE=13)
   !
-  DATA maxit/10/ , mjac/5/
+  DATA maxit/10/, mjac/5/
   DATA damp/0.75D0/
   !
   !
@@ -94,7 +94,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   ynorm = DDANRM(Neq,Y,Wt,Rpar,Ipar)
   !
   !     SAVE Y AND YPRIME IN PHI
-  DO i = 1 , Neq
+  DO i = 1, Neq
     Phi(i,1) = Y(i)
     Phi(i,2) = Yprime(i)
   ENDDO
@@ -110,7 +110,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   X = X + H
   !
   !     PREDICT SOLUTION AND DERIVATIVE
-  DO i = 1 , Neq
+  DO i = 1, Neq
     Y(i) = Y(i) + H*Yprime(i)
   ENDDO
   !
@@ -155,7 +155,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
       !
       !
       !     MULTIPLY RESIDUAL BY DAMPING FACTOR
-      DO i = 1 , Neq
+      DO i = 1, Neq
         Delta(i) = Delta(i)*damp
       ENDDO
       !
@@ -165,7 +165,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
       CALL DDASLV(Neq,Delta,Wm,Iwm)
       !
       !     UPDATE Y AND YPRIME
-      DO i = 1 , Neq
+      DO i = 1, Neq
         Y(i) = Y(i) - Delta(i)
         Yprime(i) = Yprime(i) - cj*Delta(i)
       ENDDO
@@ -213,7 +213,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
       !     THE ITERATION HAS CONVERGED.
       !     CHECK NONNEGATIVITY CONSTRAINTS
       IF ( Nonneg/=0 ) THEN
-        DO i = 1 , Neq
+        DO i = 1, Neq
           Delta(i) = MIN(Y(i),0.0D0)
         ENDDO
         !
@@ -222,7 +222,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
           convgd = .FALSE.
         ELSE
           !
-          DO i = 1 , Neq
+          DO i = 1, Neq
             Y(i) = Y(i) - Delta(i)
             Yprime(i) = Yprime(i) - cj*Delta(i)
           ENDDO
@@ -241,7 +241,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
     !     DO ERROR TEST.
     !-----------------------------------------------------
     !
-    DO i = 1 , Neq
+    DO i = 1, Neq
       E(i) = Y(i) - Phi(i,1)
     ENDDO
     err = DDANRM(Neq,E,Wt,Rpar,Ipar)
@@ -260,7 +260,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   !---------------------------------------------------------
   !
   X = xold
-  DO i = 1 , Neq
+  DO i = 1, Neq
     Y(i) = Phi(i,1)
     Yprime(i) = Phi(i,2)
   ENDDO

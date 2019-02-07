@@ -70,25 +70,25 @@ SUBROUTINE CQCBI(Lun,Kprint,Ipass)
   !
   !  Declare arguments.
   !
-  INTEGER Lun , Kprint , Ipass
+  INTEGER Lun, Kprint, Ipass
   !
   !  Declare external functions.
   !
   INTEGER I1MACH
   REAL R1MACH
-  EXTERNAL I1MACH , R1MACH
+  EXTERNAL I1MACH, R1MACH
   !
   !  Declare local variables.
   !
-  COMPLEX ck , cone , csgn , cw , cy , w , y , z , zn , zsc , zt , zz
-  REAL aa , ab , aer , alim , arg , atol , aw , carg , ct , dig , elim , &
-    eps , er , ertol , film , fnu , fnul , gnu , hpi , pi , r , rl , &
-    rlt , rm , r1 , r1m4 , r1m5 , r2 , sarg , slak , st , t , tol , ts , &
-    xx , yy
-  INTEGER i , icase , ierr , il , inu , iprnt , ir , it , itl , k , kdo , &
-    keps , kk , kode , k1 , k2 , lflg , mflg , n , nl , nzi , nzk , &
-    nz1 , nz2 , n1
-  DIMENSION aer(20) , ck(2) , kdo(20) , keps(20) , t(20) , w(20) , y(20)
+  COMPLEX ck, cone, csgn, cw, cy, w, y, z, zn, zsc, zt, zz
+  REAL aa, ab, aer, alim, arg, atol, aw, carg, ct, dig, elim, &
+    eps, er, ertol, film, fnu, fnul, gnu, hpi, pi, r, rl, &
+    rlt, rm, r1, r1m4, r1m5, r2, sarg, slak, st, t, tol, ts, &
+    xx, yy
+  INTEGER i, icase, ierr, il, inu, iprnt, ir, it, itl, k, kdo, &
+    keps, kk, kode, k1, k2, lflg, mflg, n, nl, nzi, nzk, &
+    nz1, nz2, n1
+  DIMENSION aer(20), ck(2), kdo(20), keps(20), t(20), w(20), y(20)
   !
   !***FIRST EXECUTABLE STATEMENT  CQCBI
   IF ( Kprint>=2 ) THEN
@@ -132,7 +132,7 @@ SUBROUTINE CQCBI(Lun,Kprint,Ipass)
     WRITE (Lun,99002)
     99002   FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
       8X,'DIG')
-    WRITE (Lun,99003) tol , elim , alim , rl , fnul , dig
+    WRITE (Lun,99003) tol, elim, alim, rl, fnul, dig
     99003   FORMAT (1X,6E12.4/)
   ENDIF
   !-----------------------------------------------------------------------
@@ -162,14 +162,14 @@ SUBROUTINE CQCBI(Lun,Kprint,Ipass)
   IF ( MQC/=2 ) THEN
     nl = 2
     il = 5
-    DO i = 1 , il
+    DO i = 1, il
       keps(i) = 0
       kdo(i) = 0
     ENDDO
   ELSE
     nl = 4
     il = 13
-    DO i = 1 , il
+    DO i = 1, il
       kdo(i) = 0
       keps(i) = 0
     ENDDO
@@ -188,7 +188,7 @@ SUBROUTINE CQCBI(Lun,Kprint,Ipass)
   eps = 0.01E0
   film = il - 1
   t(1) = -pi + eps
-  DO k = 2 , il
+  DO k = 2, il
     IF ( kdo(k)==0 ) THEN
       t(i) = pi*(-il+2*k-1)/film
       IF ( keps(k)/=0 ) THEN
@@ -210,15 +210,15 @@ SUBROUTINE CQCBI(Lun,Kprint,Ipass)
     99004   FORMAT (' CHECKS ACROSS FORMULA BOUNDARIES')
   ENDIF
   lflg = 0
-  DO icase = 1 , 6
-    DO kode = 1 , 2
-      DO n = 1 , nl
+  DO icase = 1, 6
+    DO kode = 1, 2
+      DO n = 1, nl
         n1 = n + 2
         !-----------------------------------------------------------------------
         !     Set values for R = magnitude of Z and for FNU to test computation
         !     methods for the various regions of the (Z,FNU) plane.
         !-----------------------------------------------------------------------
-        DO ir = 1 , 3
+        DO ir = 1, 3
           !------------ switch (icase)
           SELECT CASE (icase)
             CASE (2)
@@ -247,7 +247,7 @@ SUBROUTINE CQCBI(Lun,Kprint,Ipass)
               fnu = MAX(0.0E0,gnu)
           END SELECT
           !------------ end switch
-          DO it = 1 , itl
+          DO it = 1, itl
             ct = COS(t(it))
             st = SIN(t(it))
             IF ( ABS(ct)<atol ) ct = 0.0E0
@@ -276,13 +276,13 @@ SUBROUTINE CQCBI(Lun,Kprint,Ipass)
                 IF ( MOD(inu,2)==1 ) csgn = -csgn
                 CALL CWRSK(zn,fnu,kode,n,w,nz2,ck,tol,elim,alim)
                 IF ( nz2/=0 ) CYCLE
-                DO i = 1 , n
+                DO i = 1, n
                   w(i) = w(i)*csgn
                   csgn = -csgn
                 ENDDO
               ENDIF
               mflg = 0
-              DO i = 1 , n
+              DO i = 1, n
                 ab = fnu + i - 1
                 aa = MAX(2.0E0,ab)
                 zt = w(i)
@@ -333,7 +333,7 @@ SUBROUTINE CQCBI(Lun,Kprint,Ipass)
                 ENDIF
                 lflg = lflg + 1
                 IF ( Kprint>=2 ) THEN
-                  WRITE (Lun,99010) z , fnu , kode , n
+                  WRITE (Lun,99010) z, fnu, kode, n
                   99010                 FORMAT ('   INPUT:    Z=',2E12.4,4X,'FNU=',E12.4,4X,&
                     'KODE=',I3,4X,'N=',I3)
                 ENDIF
@@ -342,10 +342,10 @@ SUBROUTINE CQCBI(Lun,Kprint,Ipass)
                   99011                 FORMAT ('   ERROR:  AER(K)=',4E12.4)
                   kk = MAX(nz1,nz2) + 1
                   kk = MIN(n,kk)
-                  WRITE (Lun,99012) nz1 , y(kk) , nz2 , w(kk)
+                  WRITE (Lun,99012) nz1, y(kk), nz2, w(kk)
                   99012                 FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2E12.4,/11X,&
                     'NZ2=',I3,4X,'W(KK)=',2E12.4)
-                  WRITE (Lun,99013) it , ir , icase
+                  WRITE (Lun,99013) it, ir, icase
                   99013                 FORMAT ('    CASE:   IT=',I3,4X,'IR=',I3,4X,'ICASE=',I3/)
                 ENDIF
               ENDIF
@@ -381,7 +381,7 @@ SUBROUTINE CQCBI(Lun,Kprint,Ipass)
       z = (1.4E0,1.4E0)
       kode = 1
       n = 20
-      DO i = 1 , 2
+      DO i = 1, 2
         fnu = 10.2E0
         DO
           !-----------------------------------------------------------------------
@@ -411,9 +411,9 @@ SUBROUTINE CQCBI(Lun,Kprint,Ipass)
               IF ( Kprint>=3 ) WRITE (Lun,99021)
             ENDIF
             iprnt = 1
-            IF ( Kprint>=2 ) WRITE (Lun,99022) z , fnu , kode , n
+            IF ( Kprint>=2 ) WRITE (Lun,99022) z, fnu, kode, n
             IF ( Kprint>=3 ) THEN
-              WRITE (Lun,99023) zt , cw + cy
+              WRITE (Lun,99023) zt, cw + cy
               WRITE (Lun,99024) er
             ENDIF
           ENDIF
@@ -457,9 +457,9 @@ SUBROUTINE CQCBI(Lun,Kprint,Ipass)
             IF ( Kprint>=3 ) WRITE (Lun,99021)
           ENDIF
           iprnt = 1
-          IF ( Kprint>=2 ) WRITE (Lun,99022) z , fnu , kode , n
+          IF ( Kprint>=2 ) WRITE (Lun,99022) z, fnu, kode, n
           IF ( Kprint>=3 ) THEN
-            WRITE (Lun,99023) zt , cw + cy
+            WRITE (Lun,99023) zt, cw + cy
             WRITE (Lun,99024) er
           ENDIF
         ENDIF

@@ -4,7 +4,7 @@ SUBROUTINE HEADER(Kprint)
   IMPLICIT NONE
   !*--HEADER5
   !*** Start of declarations inserted by SPAG
-  INTEGER ICAse , INCx , INCy , Kprint , MODe , N , NPRint
+  INTEGER ICAse, INCx, INCy, Kprint, MODe, N, NPRint
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HEADER
   !***PURPOSE  Print header for BLAS quick checks.
@@ -17,7 +17,7 @@ SUBROUTINE HEADER(Kprint)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920210  Minor modifications to prologue and code.  (WRB)
   !***END PROLOGUE  HEADER
-  COMMON /COMBLA/ NPRint , ICAse , N , INCx , INCy , MODe , PASs
+  COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
   LOGICAL PASs
   CHARACTER(6) :: l(38)
   !
@@ -60,7 +60,7 @@ SUBROUTINE HEADER(Kprint)
   DATA l(37)/'IDAMAX'/
   DATA l(38)/'ICAMAX'/
   !***FIRST EXECUTABLE STATEMENT  HEADER
-  IF ( Kprint>=2 ) WRITE (NPRint,99001) ICAse , l(ICAse)
+  IF ( Kprint>=2 ) WRITE (NPRint,99001) ICAse, l(ICAse)
   !
   99001 FORMAT (' Test of subprogram number',I3,2X,A)
   RETURN

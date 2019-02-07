@@ -4,7 +4,7 @@ FUNCTION BETA(A,B)
   IMPLICIT NONE
   !*--BETA5
   !*** Start of declarations inserted by SPAG
-  REAL A , ALBETA , alnsml , B , BETA , GAMMA , R1MACH , xmax , xmin
+  REAL A, ALBETA, alnsml, B, BETA, GAMMA, R1MACH, xmax, xmin
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BETA
   !***PURPOSE  Compute the complete Beta function.
@@ -34,8 +34,8 @@ FUNCTION BETA(A,B)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  BETA
   EXTERNAL GAMMA
-  SAVE xmax , alnsml
-  DATA xmax , alnsml/0. , 0./
+  SAVE xmax, alnsml
+  DATA xmax, alnsml/0., 0./
   !***FIRST EXECUTABLE STATEMENT  BETA
   IF ( alnsml==0.0 ) THEN
     CALL GAMLIM(xmin,xmax)

@@ -70,11 +70,11 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DBVALU
   !
-  INTEGER i , Ideriv , iderp1 , ihi , ihmkmj , ilo , imk , imkpj , Inbv , &
-    ipj , ip1 , ip1mj , j , jj , j1 , j2 , K , kmider , kmj , km1 , &
-    kpk , mflag , N
-  REAL(8) :: A , fkmj , T , Work , X
-  DIMENSION T(*) , A(*) , Work(*)
+  INTEGER i, Ideriv, iderp1, ihi, ihmkmj, ilo, imk, imkpj, Inbv, &
+    ipj, ip1, ip1mj, j, jj, j1, j2, K, kmider, kmj, km1, &
+    kpk, mflag, N
+  REAL(8) :: A, fkmj, T, Work, X
+  DIMENSION T(*), A(*), Work(*)
   !***FIRST EXECUTABLE STATEMENT  DBVALU
   DBVALU = 0.0D0
   IF ( K<1 ) THEN
@@ -122,15 +122,15 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
       !     WORK(I) = AJ(I), WORK(K+I) = DP(I), WORK(K+K+I) = DM(I), I=1.K
       !
       20       imk = i - K
-      DO j = 1 , K
+      DO j = 1, K
         imkpj = imk + j
         Work(j) = A(imkpj)
       ENDDO
       IF ( Ideriv/=0 ) THEN
-        DO j = 1 , Ideriv
+        DO j = 1, Ideriv
           kmj = K - j
           fkmj = kmj
-          DO jj = 1 , kmj
+          DO jj = 1, kmj
             ihi = i + jj
             ihmkmj = ihi - kmj
             Work(jj) = (Work(jj+1)-Work(jj))/(T(ihi)-T(ihmkmj))*fkmj
@@ -145,7 +145,7 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
         kpk = K + K
         j1 = K + 1
         j2 = kpk + 1
-        DO j = 1 , kmider
+        DO j = 1, kmider
           ipj = i + j
           Work(j1) = T(ipj) - X
           ip1mj = ip1 - j
@@ -154,10 +154,10 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
           j2 = j2 + 1
         ENDDO
         iderp1 = Ideriv + 1
-        DO j = iderp1 , km1
+        DO j = iderp1, km1
           kmj = K - j
           ilo = kmj
-          DO jj = 1 , kmj
+          DO jj = 1, kmj
             Work(jj) = (Work(jj+1)*Work(kpk+ilo)+Work(jj)*Work(K+jj))&
               /(Work(kpk+ilo)+Work(K+jj))
             ilo = ilo - 1
@@ -168,4 +168,5 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   ENDIF
   DBVALU = Work(1)
   RETURN
-  99999 END FUNCTION DBVALU
+  99999 CONTINUE
+  END FUNCTION DBVALU

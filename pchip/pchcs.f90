@@ -93,20 +93,20 @@ SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N , Incfd , Ierr
-  REAL Switch , H(*) , Slope(*) , D(Incfd,*)
+  INTEGER N, Incfd, Ierr
+  REAL Switch, H(*), Slope(*), D(Incfd,*)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i , indx , k , nless1
-  REAL del(3) , dext , dfloc , dfmx , fact , fudge , one , slmax , wtave(2)&
+  INTEGER i, indx, k, nless1
+  REAL del(3), dext, dfloc, dfmx, fact, fudge, one, slmax, wtave(2)&
     , zero
-  SAVE zero , one , fudge
+  SAVE zero, one, fudge
   REAL PCHST
   !
   !  INITIALIZE.
   !
-  DATA zero/0./ , one/1./
+  DATA zero/0./, one/1./
   DATA fudge/4./
   !***FIRST EXECUTABLE STATEMENT  PCHCS
   Ierr = 0
@@ -114,7 +114,7 @@ SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !
   !  LOOP OVER SEGMENTS.
   !
-  DO i = 2 , nless1
+  DO i = 2, nless1
     IF ( PCHST(Slope(i-1),Slope(i))<0 ) THEN
       !             --------------------------
       !
@@ -235,7 +235,7 @@ CONTAINS
   !  DEFINE INLINE FUNCTION FOR WEIGHTED AVERAGE OF SLOPES.
   !
   REAL FUNCTION PCHSD(s1,s2,h1,h2)
-    REAL, INTENT(IN) :: s1 , s2 , h1 , h2
+    REAL, INTENT(IN) :: s1, s2, h1, h2
 
     PCHSD = (h2/(h1+h2))*s1 + (h1/(h1+h2))*s2
 

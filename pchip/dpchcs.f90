@@ -95,20 +95,20 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER N , Incfd , Ierr
-  REAL(8) :: Switch , H(*) , Slope(*) , D(Incfd,*)
+  INTEGER N, Incfd, Ierr
+  REAL(8) :: Switch, H(*), Slope(*), D(Incfd,*)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  INTEGER i , indx , k , nless1
-  REAL(8) :: del(3) , dext , dfloc , dfmx , fact , fudge , one ,&
-    slmax , wtave(2) , zero
-  SAVE zero , one , fudge
+  INTEGER i, indx, k, nless1
+  REAL(8) :: del(3), dext, dfloc, dfmx, fact, fudge, one ,&
+    slmax, wtave(2), zero
+  SAVE zero, one, fudge
   REAL(8) :: DPCHST
   !
   !  INITIALIZE.
   !
-  DATA zero/0.D0/ , one/1.D0/
+  DATA zero/0.D0/, one/1.D0/
   DATA fudge/4.D0/
   !***FIRST EXECUTABLE STATEMENT  DPCHCS
   Ierr = 0
@@ -116,7 +116,7 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !
   !  LOOP OVER SEGMENTS.
   !
-  DO i = 2 , nless1
+  DO i = 2, nless1
     IF ( DPCHST(Slope(i-1),Slope(i))<0 ) THEN
       !             --------------------------
       !
@@ -237,7 +237,7 @@ CONTAINS
   !  DEFINE INLINE FUNCTION FOR WEIGHTED AVERAGE OF SLOPES.
   !
   REAL(8) FUNCTION DPCHSD(s1,s2,h1,h2)
-    REAL(8), INTENT(IN) :: s1 , s2 , h1 , h2
+    REAL(8), INTENT(IN) :: s1, s2, h1, h2
 
     DPCHSD = (h2/(h1+h2))*s1 + (h1/(h1+h2))*s2
 

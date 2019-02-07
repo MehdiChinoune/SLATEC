@@ -44,14 +44,14 @@ LOGICAL FUNCTION LSAME(Ca,Cb)
   !   930201  Tests for equality and equivalence combined.  (RWC and WRB)
   !***END PROLOGUE  LSAME
   !     .. Scalar Arguments ..
-  CHARACTER Ca*1 , Cb*1
+  CHARACTER Ca*1, Cb*1
   !     .. Local Scalars ..
   INTEGER ioff
   LOGICAL first
   !     .. Intrinsic Functions ..
   INTRINSIC ICHAR
   !     .. Save statement ..
-  SAVE first , ioff
+  SAVE first, ioff
   !     .. Data statements ..
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  LSAME

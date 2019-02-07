@@ -5,9 +5,9 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
   IMPLICIT NONE
   !*--CSCALE6
   !*** Start of declarations inserted by SPAG
-  REAL A , alog2 , Anorm , ascale , Cols , Colsav , cs , p , Rows , Rowsav , &
-    s , Scales , SDOT , ten20 , ten4
-  INTEGER Ic , ip , Iscale , j , k , Ncol , Nrda , Nrow
+  REAL A, alog2, Anorm, ascale, Cols, Colsav, cs, p, Rows, Rowsav, &
+    s, Scales, SDOT, ten20, ten4
+  INTEGER Ic, ip, Iscale, j, k, Ncol, Nrda, Nrow
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CSCALE
   !***SUBSIDIARY
@@ -29,37 +29,37 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  CSCALE
-  DIMENSION A(Nrda,*) , Cols(*) , Colsav(*) , Scales(*) , Rows(*) , &
+  DIMENSION A(Nrda,*), Cols(*), Colsav(*), Scales(*), Rows(*), &
     Rowsav(*)
   !
-  SAVE ten4 , ten20
-  DATA ten4 , ten20/1.E+4 , 1.E+20/
+  SAVE ten4, ten20
+  DATA ten4, ten20/1.E+4, 1.E+20/
   !
   !***FIRST EXECUTABLE STATEMENT  CSCALE
   IF ( Iscale==(-1) ) THEN
     !
     IF ( Ic/=0 ) THEN
-      DO k = 1 , Ncol
+      DO k = 1, Ncol
         Cols(k) = SDOT(Nrow,A(1,k),1,A(1,k),1)
       ENDDO
     ENDIF
     !
     ascale = Anorm/Ncol
-    DO k = 1 , Ncol
+    DO k = 1, Ncol
       cs = Cols(k)
       IF ( (cs>ten4*ascale).OR.(ten4*cs<ascale) ) GOTO 100
       IF ( (cs<1./ten20).OR.(cs>ten20) ) GOTO 100
     ENDDO
   ENDIF
   !
-  DO k = 1 , Ncol
+  DO k = 1, Ncol
     Scales(k) = 1.
   ENDDO
   RETURN
   !
   100  alog2 = LOG(2.)
   Anorm = 0.
-  DO k = 1 , Ncol
+  DO k = 1, Ncol
     cs = Cols(k)
     IF ( cs/=0. ) THEN
       p = LOG(cs)/alog2
@@ -71,7 +71,7 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
         Anorm = Anorm + Cols(k)
         Colsav(k) = Cols(k)
       ENDIF
-      DO j = 1 , Nrow
+      DO j = 1, Nrow
         A(j,k) = s*A(j,k)
       ENDDO
     ELSE
@@ -81,7 +81,7 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
   !
   IF ( Ic==0 ) RETURN
   !
-  DO k = 1 , Nrow
+  DO k = 1, Nrow
     Rows(k) = SDOT(Ncol,A(k,1),Nrda,A(k,1),Nrda)
     Rowsav(k) = Rows(k)
     Anorm = Anorm + Rows(k)

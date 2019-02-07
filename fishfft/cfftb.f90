@@ -4,7 +4,7 @@ SUBROUTINE CFFTB(N,C,Wsave)
   IMPLICIT NONE
   !*--CFFTB5
   !*** Start of declarations inserted by SPAG
-  INTEGER iw1 , iw2 , N
+  INTEGER iw1, iw2, N
   REAL Wsave
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CFFTB
@@ -85,7 +85,7 @@ SUBROUTINE CFFTB(N,C,Wsave)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CFFTB
   COMPLEX C
-  DIMENSION C(*) , Wsave(*)
+  DIMENSION C(*), Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  CFFTB
   IF ( N==1 ) RETURN
   iw1 = N + N + 1

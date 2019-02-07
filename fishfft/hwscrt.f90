@@ -5,14 +5,14 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   IMPLICIT NONE
   !*--HWSCRT6
   !*** Start of declarations inserted by SPAG
-  REAL A , a1 , a2 , B , Bda , Bdb , Bdc , Bdd , C , D , deltax , deltay , &
-    delxsq , delysq , Elmbda , F , Pertrb , s , s1 , st2
-  REAL twdelx , twdely , W
-  INTEGER i , id2 , id3 , id4 , Idimf , ierr1 , Ierror , j , M , Mbdcnd , &
-    mp , mp1 , mperod , mskip , msp1 , mstart , mstm1 , mstop , munk , &
+  REAL A, a1, a2, B, Bda, Bdb, Bdc, Bdd, C, D, deltax, deltay, &
+    delxsq, delysq, Elmbda, F, Pertrb, s, s1, st2
+  REAL twdelx, twdely, W
+  INTEGER i, id2, id3, id4, Idimf, ierr1, Ierror, j, M, Mbdcnd, &
+    mp, mp1, mperod, mskip, msp1, mstart, mstm1, mstop, munk, &
     N
-  INTEGER Nbdcnd , np , np1 , nperod , nskip , nsp1 , nstart , nstm1 , &
-    nstop , nunk
+  INTEGER Nbdcnd, np, np1, nperod, nskip, nsp1, nstart, nstm1, &
+    nstop, nunk
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HWSCRT
   !***PURPOSE  Solves the standard five-point finite difference
@@ -296,7 +296,7 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !
   DIMENSION F(Idimf,*)
-  DIMENSION Bda(*) , Bdb(*) , Bdc(*) , Bdd(*) , W(*)
+  DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HWSCRT
   Ierror = 0
   IF ( A>=B ) Ierror = 1
@@ -359,146 +359,148 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE DEFAULT
       mstart = 2
   END SELECT
-  DO j = nstart , nstop
+  DO j = nstart, nstop
     F(2,j) = F(2,j) - F(1,j)*delxsq
   ENDDO
   GOTO 400
-  300  DO j = nstart , nstop
-  F(1,j) = F(1,j) + Bda(j)*twdelx
-ENDDO
-400  IF ( mskip==2 ) THEN
-DO j = nstart , nstop
-  F(mp1,j) = F(mp1,j) - Bdb(j)*twdelx
-ENDDO
-ELSE
-DO j = nstart , nstop
-  F(M,j) = F(M,j) - F(mp1,j)*delxsq
-ENDDO
-ENDIF
-500  munk = mstop - mstart + 1
-!
-!     ENTER BOUNDARY DATA FOR Y-BOUNDARIES.
-!
-SELECT CASE (np)
-CASE (1)
-  GOTO 600
-CASE (4,5)
-  DO i = mstart , mstop
-    F(i,1) = F(i,1) + Bdc(i)*twdely
+  300 CONTINUE
+  DO j = nstart, nstop
+    F(1,j) = F(1,j) + Bda(j)*twdelx
   ENDDO
-CASE DEFAULT
-  DO i = mstart , mstop
-    F(i,2) = F(i,2) - F(i,1)*delysq
-  ENDDO
-END SELECT
-IF ( nskip==2 ) THEN
-DO i = mstart , mstop
-  F(i,np1) = F(i,np1) - Bdd(i)*twdely
-ENDDO
-ELSE
-DO i = mstart , mstop
-  F(i,N) = F(i,N) - F(i,np1)*delysq
-ENDDO
-ENDIF
-!
-!    MULTIPLY RIGHT SIDE BY DELTAY**2.
-!
-600  delysq = deltay*deltay
-DO i = mstart , mstop
-DO j = nstart , nstop
-  F(i,j) = F(i,j)*delysq
-ENDDO
-ENDDO
-!
-!     DEFINE THE A,B,C COEFFICIENTS IN W-ARRAY.
-!
-id2 = munk
-id3 = id2 + munk
-id4 = id3 + munk
-s = delysq*delxsq
-st2 = 2.*s
-DO i = 1 , munk
-W(i) = s
-j = id2 + i
-W(j) = -st2 + Elmbda*delysq
-j = id3 + i
-W(j) = s
-ENDDO
-IF ( mp/=1 ) THEN
-W(1) = 0.
-W(id4) = 0.
-ENDIF
-SELECT CASE (mp)
-CASE (1,2)
-CASE (4)
-  W(id2) = st2
-  W(id3+1) = st2
-CASE (5)
-  W(id3+1) = st2
-CASE DEFAULT
-  W(id2) = st2
-END SELECT
-Pertrb = 0.
-IF ( Elmbda<0 ) THEN
-ELSEIF ( Elmbda==0 ) THEN
-IF ( (Nbdcnd==0.OR.Nbdcnd==3).AND.(Mbdcnd==0.OR.Mbdcnd==3) ) THEN
-  !
-  !     FOR SINGULAR PROBLEMS MUST ADJUST DATA TO INSURE THAT A SOLUTION
-  !     WILL EXIST.
-  !
-  a1 = 1.
-  a2 = 1.
-  IF ( Nbdcnd==3 ) a2 = 2.
-  IF ( Mbdcnd==3 ) a1 = 2.
-  s1 = 0.
-  msp1 = mstart + 1
-  mstm1 = mstop - 1
-  nsp1 = nstart + 1
-  nstm1 = nstop - 1
-  DO j = nsp1 , nstm1
-    s = 0.
-    DO i = msp1 , mstm1
-      s = s + F(i,j)
+  400 CONTINUE
+  IF ( mskip==2 ) THEN
+    DO j = nstart, nstop
+      F(mp1,j) = F(mp1,j) - Bdb(j)*twdelx
     ENDDO
-    s1 = s1 + s*a1 + F(mstart,j) + F(mstop,j)
-  ENDDO
-  s1 = a2*s1
-  s = 0.
-  DO i = msp1 , mstm1
-    s = s + F(i,nstart) + F(i,nstop)
-  ENDDO
-  s1 = s1 + s*a1 + F(mstart,nstart) + F(mstart,nstop) + F(mstop,nstart)&
-    + F(mstop,nstop)
-  s = (2.+(nunk-2)*a2)*(2.+(munk-2)*a1)
-  Pertrb = s1/s
-  DO j = nstart , nstop
-    DO i = mstart , mstop
-      F(i,j) = F(i,j) - Pertrb
+  ELSE
+    DO j = nstart, nstop
+      F(M,j) = F(M,j) - F(mp1,j)*delxsq
+    ENDDO
+  ENDIF
+  500  munk = mstop - mstart + 1
+  !
+  !     ENTER BOUNDARY DATA FOR Y-BOUNDARIES.
+  !
+  SELECT CASE (np)
+    CASE (1)
+      GOTO 600
+    CASE (4,5)
+      DO i = mstart, mstop
+        F(i,1) = F(i,1) + Bdc(i)*twdely
+      ENDDO
+    CASE DEFAULT
+      DO i = mstart, mstop
+        F(i,2) = F(i,2) - F(i,1)*delysq
+      ENDDO
+  END SELECT
+  IF ( nskip==2 ) THEN
+    DO i = mstart, mstop
+      F(i,np1) = F(i,np1) - Bdd(i)*twdely
+    ENDDO
+  ELSE
+    DO i = mstart, mstop
+      F(i,N) = F(i,N) - F(i,np1)*delysq
+    ENDDO
+  ENDIF
+  !
+  !    MULTIPLY RIGHT SIDE BY DELTAY**2.
+  !
+  600  delysq = deltay*deltay
+  DO i = mstart, mstop
+    DO j = nstart, nstop
+      F(i,j) = F(i,j)*delysq
     ENDDO
   ENDDO
-  Pertrb = Pertrb/delysq
-ENDIF
-ELSE
-Ierror = 6
-ENDIF
-!
-!     SOLVE THE EQUATION.
-!
-CALL GENBUN(nperod,nunk,mperod,munk,W(1),W(id2+1),W(id3+1),Idimf,&
-F(mstart,nstart),ierr1,W(id4+1))
-W(1) = W(id4+1) + 3*munk
-!
-!     FILL IN IDENTICAL VALUES WHEN HAVE PERIODIC BOUNDARY CONDITIONS.
-!
-IF ( Nbdcnd==0 ) THEN
-DO i = mstart , mstop
-  F(i,np1) = F(i,1)
-ENDDO
-ENDIF
-IF ( Mbdcnd==0 ) THEN
-DO j = nstart , nstop
-  F(mp1,j) = F(1,j)
-ENDDO
-IF ( Nbdcnd==0 ) F(mp1,np1) = F(1,np1)
-ENDIF
+  !
+  !     DEFINE THE A,B,C COEFFICIENTS IN W-ARRAY.
+  !
+  id2 = munk
+  id3 = id2 + munk
+  id4 = id3 + munk
+  s = delysq*delxsq
+  st2 = 2.*s
+  DO i = 1, munk
+    W(i) = s
+    j = id2 + i
+    W(j) = -st2 + Elmbda*delysq
+    j = id3 + i
+    W(j) = s
+  ENDDO
+  IF ( mp/=1 ) THEN
+    W(1) = 0.
+    W(id4) = 0.
+  ENDIF
+  SELECT CASE (mp)
+    CASE (1,2)
+    CASE (4)
+      W(id2) = st2
+      W(id3+1) = st2
+    CASE (5)
+      W(id3+1) = st2
+    CASE DEFAULT
+      W(id2) = st2
+  END SELECT
+  Pertrb = 0.
+  IF ( Elmbda<0 ) THEN
+  ELSEIF ( Elmbda==0 ) THEN
+    IF ( (Nbdcnd==0.OR.Nbdcnd==3).AND.(Mbdcnd==0.OR.Mbdcnd==3) ) THEN
+      !
+      !     FOR SINGULAR PROBLEMS MUST ADJUST DATA TO INSURE THAT A SOLUTION
+      !     WILL EXIST.
+      !
+      a1 = 1.
+      a2 = 1.
+      IF ( Nbdcnd==3 ) a2 = 2.
+      IF ( Mbdcnd==3 ) a1 = 2.
+      s1 = 0.
+      msp1 = mstart + 1
+      mstm1 = mstop - 1
+      nsp1 = nstart + 1
+      nstm1 = nstop - 1
+      DO j = nsp1, nstm1
+        s = 0.
+        DO i = msp1, mstm1
+          s = s + F(i,j)
+        ENDDO
+        s1 = s1 + s*a1 + F(mstart,j) + F(mstop,j)
+      ENDDO
+      s1 = a2*s1
+      s = 0.
+      DO i = msp1, mstm1
+        s = s + F(i,nstart) + F(i,nstop)
+      ENDDO
+      s1 = s1 + s*a1 + F(mstart,nstart) + F(mstart,nstop) + F(mstop,nstart)&
+        + F(mstop,nstop)
+      s = (2.+(nunk-2)*a2)*(2.+(munk-2)*a1)
+      Pertrb = s1/s
+      DO j = nstart, nstop
+        DO i = mstart, mstop
+          F(i,j) = F(i,j) - Pertrb
+        ENDDO
+      ENDDO
+      Pertrb = Pertrb/delysq
+    ENDIF
+  ELSE
+    Ierror = 6
+  ENDIF
+  !
+  !     SOLVE THE EQUATION.
+  !
+  CALL GENBUN(nperod,nunk,mperod,munk,W(1),W(id2+1),W(id3+1),Idimf,&
+    F(mstart,nstart),ierr1,W(id4+1))
+  W(1) = W(id4+1) + 3*munk
+  !
+  !     FILL IN IDENTICAL VALUES WHEN HAVE PERIODIC BOUNDARY CONDITIONS.
+  !
+  IF ( Nbdcnd==0 ) THEN
+    DO i = mstart, mstop
+      F(i,np1) = F(i,1)
+    ENDDO
+  ENDIF
+  IF ( Mbdcnd==0 ) THEN
+    DO j = nstart, nstop
+      F(mp1,j) = F(1,j)
+    ENDDO
+    IF ( Nbdcnd==0 ) F(mp1,np1) = F(1,np1)
+  ENDIF
 END SUBROUTINE HWSCRT

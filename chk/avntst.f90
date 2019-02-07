@@ -4,8 +4,8 @@ SUBROUTINE AVNTST(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--AVNTST5
   !*** Start of declarations inserted by SPAG
-  REAL a , ans , b , del , R1MACH , rn1 , sqb , tol , tol1 , x , xint , y
-  INTEGER i , ierr , Ipass , kontrl , Kprint , Lun , n
+  REAL a, ans, b, del, R1MACH, rn1, sqb, tol, tol1, x, xint, y
+  INTEGER i, ierr, Ipass, kontrl, Kprint, Lun, n
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  AVNTST
   !***PURPOSE  Quick check for AVINT.
@@ -23,7 +23,7 @@ SUBROUTINE AVNTST(Lun,Kprint,Ipass)
   !   920210  Code restructured and revised to test error returns for all
   !           values of KPRINT.  (WRB)
   !***END PROLOGUE  AVNTST
-  DIMENSION x(501) , y(501)
+  DIMENSION x(501), y(501)
   LOGICAL fatal
   !***FIRST EXECUTABLE STATEMENT  AVNTST
   IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -41,7 +41,7 @@ SUBROUTINE AVNTST(Lun,Kprint,Ipass)
   rn1 = n - 1
   sqb = SQRT(b)
   del = 0.4E0*(b-a)/(n-1)
-  DO i = 1 , n
+  DO i = 1, n
     x(i) = sqb*SQRT(a+(i-1)*(b-a)/rn1) + del
     y(i) = EXP(x(i))
   ENDDO
@@ -51,7 +51,7 @@ SUBROUTINE AVNTST(Lun,Kprint,Ipass)
   !
   IF ( ABS(ans-xint)>tol ) THEN
     Ipass = 0
-    IF ( Kprint>=3 ) WRITE (Lun,99009) ierr , ans , xint
+    IF ( Kprint>=3 ) WRITE (Lun,99009) ierr, ans, xint
   ENDIF
   !
   !     Perform second accuracy test.
@@ -69,7 +69,7 @@ SUBROUTINE AVNTST(Lun,Kprint,Ipass)
   !
   IF ( ABS(ans-xint)>tol1 ) THEN
     Ipass = 0
-    IF ( Kprint>=3 ) WRITE (Lun,99009) ierr , ans , xint
+    IF ( Kprint>=3 ) WRITE (Lun,99009) ierr, ans, xint
   ENDIF
   !
   !     Send message indicating passage or failure of tests.
@@ -99,7 +99,7 @@ SUBROUTINE AVNTST(Lun,Kprint,Ipass)
     WRITE (Lun,99004)
     99004   FORMAT (/' Test error returns from AVINT'/' 4 error messages expected'/)
   ENDIF
-  DO i = 1 , 20
+  DO i = 1, 20
     x(i) = (i-1)/19.0E0 - 0.01E0
     IF ( i/=1 ) y(i) = x(i)/(EXP(x(i))-1.0)
   ENDDO
@@ -111,7 +111,7 @@ SUBROUTINE AVNTST(Lun,Kprint,Ipass)
   IF ( ierr/=1 ) THEN
     Ipass = 0
     fatal = .TRUE.
-    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr , 1
+    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr, 1
   ENDIF
   CALL XERCLR
   !
@@ -121,7 +121,7 @@ SUBROUTINE AVNTST(Lun,Kprint,Ipass)
   IF ( ierr/=2 ) THEN
     Ipass = 0
     fatal = .TRUE.
-    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr , 2
+    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr, 2
   ENDIF
   IF ( ans/=0.0E0 ) THEN
     Ipass = 0
@@ -136,7 +136,7 @@ SUBROUTINE AVNTST(Lun,Kprint,Ipass)
   IF ( ierr/=5 ) THEN
     Ipass = 0
     fatal = .TRUE.
-    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr , 5
+    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr, 5
   ENDIF
   IF ( ans/=0.0E0 ) THEN
     Ipass = 0
@@ -153,7 +153,7 @@ SUBROUTINE AVNTST(Lun,Kprint,Ipass)
   IF ( ierr/=4 ) THEN
     Ipass = 0
     fatal = .TRUE.
-    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr , 4
+    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr, 4
   ENDIF
   IF ( ans/=0.0E0 ) THEN
     Ipass = 0
@@ -170,7 +170,7 @@ SUBROUTINE AVNTST(Lun,Kprint,Ipass)
   IF ( ierr/=3 ) THEN
     Ipass = 0
     fatal = .TRUE.
-    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr , 3
+    IF ( Kprint>=3 ) WRITE (Lun,99010) ierr, 3
   ENDIF
   IF ( ans/=0.0E0 ) THEN
     Ipass = 0

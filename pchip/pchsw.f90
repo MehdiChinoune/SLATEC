@@ -76,18 +76,18 @@ SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !
   !  DECLARE ARGUMENTS.
   !
-  INTEGER Iextrm , Ierr
-  REAL Dfmax , D1 , D2 , H , Slope
+  INTEGER Iextrm, Ierr
+  REAL Dfmax, D1, D2, H, Slope
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL cp , fact , hphi , lambda , nu , one , phi , radcal , rho , sigma , &
-    small , that , third , three , two , zero
-  SAVE zero , one , two , three , fact
+  REAL cp, fact, hphi, lambda, nu, one, phi, radcal, rho, sigma, &
+    small, that, third, three, two, zero
+  SAVE zero, one, two, three, fact
   SAVE third
   REAL R1MACH
   !
-  DATA zero/0./ , one/1./ , two/2./ , three/3./ , fact/100./
+  DATA zero/0./, one/1./, two/2./, three/3./, fact/100./
   !        THIRD SHOULD BE SLIGHTLY LESS THAN 1/3.
   DATA third/0.33333/
   !
@@ -190,4 +190,5 @@ SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   CALL XERMSG('SLATEC','PCHSW','D1 AND/OR D2 INVALID',Ierr,1)
   RETURN
   !------------- LAST LINE OF PCHSW FOLLOWS ------------------------------
-  99999 END SUBROUTINE PCHSW
+  99999 CONTINUE
+  END SUBROUTINE PCHSW

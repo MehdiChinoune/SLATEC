@@ -88,8 +88,8 @@ SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  SSPEV
-  INTEGER i , Info , j , Ldv , m , N
-  REAL A(*) , E(*) , V(Ldv,*) , Work(*)
+  INTEGER i, Info, j, Ldv, m, N
+  REAL A(*), E(*), V(Ldv,*), Work(*)
   !***FIRST EXECUTABLE STATEMENT  SSPEV
   IF ( N>Ldv ) CALL XERMSG('SLATEC','SSPEV','N .GT. LDV.',1,1)
   IF ( N>Ldv ) RETURN
@@ -107,8 +107,8 @@ SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
     !     EIGENVALUES AND EIGENVECTORS
     !
     CALL TRED3(N,1,A,E,Work(1),Work(1))
-    DO i = 1 , N
-      DO j = 1 , N
+    DO i = 1, N
+      DO j = 1, N
         V(i,j) = 0.
       ENDDO
       V(i,i) = 1.
@@ -125,4 +125,5 @@ SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
   CALL TRED3(N,1,A,E,Work(1),Work(N+1))
   CALL TQLRAT(N,E,Work(N+1),Info)
   RETURN
-  99999 END SUBROUTINE SSPEV
+  99999 CONTINUE
+  END SUBROUTINE SSPEV

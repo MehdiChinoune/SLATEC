@@ -4,7 +4,7 @@ REAL(8) FUNCTION DAI(X)
   IMPLICIT NONE
   !*--DAI5
   !*** Start of declarations inserted by SPAG
-  INTEGER INITDS , naif , naig
+  INTEGER INITDS, naif, naig
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DAI
   !***PURPOSE  Evaluate the Airy function.
@@ -40,10 +40,10 @@ REAL(8) FUNCTION DAI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DAI
-  REAL(8) :: X , aifcs(13) , aigcs(13) , theta , xm , xmax , x3sml , &
-    z , D1MACH , DCSEVL , DAIE , xmaxt
+  REAL(8) :: X, aifcs(13), aigcs(13), theta, xm, xmax, x3sml, &
+    z, D1MACH, DCSEVL, DAIE, xmaxt
   LOGICAL first
-  SAVE aifcs , aigcs , naif , naig , x3sml , xmax , first
+  SAVE aifcs, aigcs, naif, naig, x3sml, xmax, first
   DATA aifcs(1)/ - .37971358496669997496197089469414D-1/
   DATA aifcs(2)/ + .59191888537263638574319728013777D-1/
   DATA aifcs(3)/ + .98629280577279975365603891044060D-3/
@@ -102,4 +102,5 @@ REAL(8) FUNCTION DAI(X)
   DAI = DAIE(X)*EXP(-2.0D0*X*SQRT(X)/3.0D0)
   RETURN
   !
-  99999 END FUNCTION DAI
+  99999 CONTINUE
+  END FUNCTION DAI

@@ -4,7 +4,7 @@ SUBROUTINE DBIKCK(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--DBIKCK5
   !*** Start of declarations inserted by SPAG
-  INTEGER Kprint , NUMXER
+  INTEGER Kprint, NUMXER
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBIKCK
   !***PURPOSE  Quick check for DBESI and DBESK.
@@ -34,10 +34,10 @@ SUBROUTINE DBIKCK(Lun,Kprint,Ipass)
   !           obtain more information when there is failure of the
   !           Wronskian.  (WRB)
   !***END PROLOGUE  DBIKCK
-  INTEGER i , Ipass , ix , k , kode , kontrl , Lun , m , n , nerr , nu , &
-    nw , ny
-  REAL(8) :: alp , del , er , fnu , fnup , rx , tol , x
-  REAL(8) :: fn(3) , w(5) , xx(5) , y(5)
+  INTEGER i, Ipass, ix, k, kode, kontrl, Lun, m, n, nerr, nu, &
+    nw, ny
+  REAL(8) :: alp, del, er, fnu, fnup, rx, tol, x
+  REAL(8) :: fn(3), w(5), xx(5), y(5)
   REAL(8) :: D1MACH
   LOGICAL fatal
   !***FIRST EXECUTABLE STATEMENT  DBIKCK
@@ -54,12 +54,12 @@ SUBROUTINE DBIKCK(Lun,Kprint,Ipass)
   fn(2) = 0.70D0
   fn(3) = 0.0D0
   tol = MAX(500.0D0*D1MACH(4),7.1D-12)
-  DO kode = 1 , 2
-    DO m = 1 , 3
-      DO n = 1 , 4
-        DO nu = 1 , 4
+  DO kode = 1, 2
+    DO m = 1, 3
+      DO n = 1, 4
+        DO nu = 1, 4
           fnu = fn(m) + 12*(nu-1)
-          DO ix = 1 , 5
+          DO ix = 1, 5
             IF ( ix>=2.OR.nu<=3 ) THEN
               x = xx(ix)
               rx = 1.0D0/x
@@ -72,14 +72,14 @@ SUBROUTINE DBIKCK(Lun,Kprint,Ipass)
                   IF ( ny==0 ) THEN
                     CALL DBESK(x,fnup,kode,1,w(n+1),nw)
                     IF ( nw==0 ) THEN
-                      DO i = 1 , n
+                      DO i = 1, n
                         er = y(i+1)*w(i) + w(i+1)*y(i) - rx
                         er = ABS(er)*x
                         IF ( er>tol ) THEN
                           Ipass = 0
-                          IF ( Kprint>=2 ) WRITE (Lun,99002) kode , m , n , &
-                            nu , ix , i , x , er , tol , y(i) , y(i+1) , &
-                            w(i) , w(i+1)
+                          IF ( Kprint>=2 ) WRITE (Lun,99002) kode, m, n, &
+                            nu, ix, i, x, er, tol, y(i), y(i+1), &
+                            w(i), w(i+1)
                           99002                         FORMAT (/' ERROR IN QUICK CHECK OF WRONSKIAN',&
                             1P/' KODE = ',I1,', M = ',I1,', N = ',I1,&
                             ', NU = ',I1,', IX = ',I1,', I = ',&
@@ -105,16 +105,16 @@ SUBROUTINE DBIKCK(Lun,Kprint,Ipass)
   n = 2
   fnu = 1.0D0
   x = D1MACH(4)
-  DO i = 1 , 3
-    DO kode = 1 , 2
+  DO i = 1, 3
+    DO kode = 1, 2
       CALL DBESI(x,fnu,kode,n,y,ny)
       CALL DBESK(x,fnu,kode,n,w,nw)
       er = y(2)*w(1) + w(2)*y(1) - 1.0D0/x
       er = ABS(er)*x
       IF ( er>tol ) THEN
         Ipass = 0
-        IF ( Kprint>=2 ) WRITE (Lun,99003) i , kode , fnu , x , er , tol , &
-          y(1) , y(2) , w(1) , w(2)
+        IF ( Kprint>=2 ) WRITE (Lun,99003) i, kode, fnu, x, er, tol, &
+          y(1), y(2), w(1), w(2)
         99003       FORMAT (/' ERROR IN QUICK CHECK OF SMALL X AND ORDER',1P/' I = ',I1,&
           ', KODE = ',I1,', FNU = ',E14.7/' X = ',E14.7,', ER = ',&
           E14.7,', TOL = ',E14.7/' Y(1) = ',E14.7,', Y(2) = ',&
@@ -130,12 +130,12 @@ SUBROUTINE DBIKCK(Lun,Kprint,Ipass)
   !     Check large values of X and order
   !
   kode = 2
-  DO k = 1 , 2
+  DO k = 1, 2
     del = 30*(k-1)
     fnu = 45.0D0 + del
-    DO n = 1 , 2
+    DO n = 1, 2
       x = 20.0D0 + del
-      DO i = 1 , 5
+      DO i = 1, 5
         rx = 1.0D0/x
         CALL DBESI(x,fnu,kode,n,y,ny)
         IF ( ny==0 ) THEN
@@ -152,8 +152,8 @@ SUBROUTINE DBIKCK(Lun,Kprint,Ipass)
             er = ABS(er)*x
             IF ( er>tol ) THEN
               Ipass = 0
-              IF ( Kprint>=2 ) WRITE (Lun,99004) k , n , i , fnup , x , er , &
-                tol , y(1) , y(2) , w(1) , w(2)
+              IF ( Kprint>=2 ) WRITE (Lun,99004) k, n, i, fnup, x, er, &
+                tol, y(1), y(2), w(1), w(2)
               99004             FORMAT (/' ERROR IN QUICK CHECK OF LARGE X AND ORDER',&
                 1P/' K = ',I1,', N = ',I1,', I = ',I1,', FNUP = ',&
                 E14.7/' X = ',E14.7,', ER = ',E14.7,', TOL = ',&
@@ -210,7 +210,7 @@ SUBROUTINE DBIKCK(Lun,Kprint,Ipass)
   !
   !     Illegal arguments
   !
-  DO i = 1 , 4
+  DO i = 1, 4
     xx(i) = -xx(i)
     k = INT(xx(3))
     n = INT(xx(4))

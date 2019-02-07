@@ -4,8 +4,8 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
   !*--XPQNU5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , ia , Id , Ierror , if , ipq , ipq1 , ipq2 , Ipqa , ipsik , &
-    ipsix , ix1 , ixs , j , j0 , k , Mu , NBItsf
+  INTEGER i, ia, Id, Ierror, if, ipq, ipq1, ipq2, Ipqa, ipsik, &
+    ipsix, ix1, ixs, j, j0, k, Mu, NBItsf
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XPQNU
   !***SUBSIDIARY
@@ -30,10 +30,10 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  XPQNU
-  REAL a , nu , Nu1 , Nu2 , pq , Pqa , XPSI , r , Theta , w , x , x1 , x2 , &
-    xs , y , z
-  REAL di , dmu , pq1 , pq2 , factmu , flok
-  DIMENSION Pqa(*) , Ipqa(*)
+  REAL a, nu, Nu1, Nu2, pq, Pqa, XPSI, r, Theta, w, x, x1, x2, &
+    xs, y, z
+  REAL di, dmu, pq1, pq2, factmu, flok
+  DIMENSION Pqa(*), Ipqa(*)
   COMMON /XBLK1 / NBItsf
   SAVE /XBLK1 /
   !
@@ -60,7 +60,7 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   IF ( Mu>0 ) THEN
     factmu = 1.
     if = 0
-    DO i = 1 , k
+    DO i = 1, k
       factmu = factmu*i
       CALL XADJ(factmu,if,Ierror)
     ENDDO
@@ -81,7 +81,7 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !        FOR USE AS STARTING VALUES IN RECURRENCE RELATION.
   !
   pq2 = 0.0
-  DO j = 1 , 2
+  DO j = 1, 2
     ipq1 = 0
     IF ( Id==2 ) THEN
       !
@@ -106,7 +106,7 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
       ipq = 0
       ia = 0
       a = 1.
-      DO k = 1 , j0
+      DO k = 1, j0
         flok = k
         IF ( k/=1 ) THEN
           a = a*y*(flok-2.-nu)*(flok-1.+nu)/((flok-1.+dmu)*(flok-1.))
@@ -142,7 +142,7 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
       pq = 1.
       a = 1.
       ia = 0
-      DO i = 2 , j0
+      DO i = 2, j0
         di = i
         a = a*y*(di-2.-nu)*(di-1.+nu)/((di-1.+dmu)*(di-1.))
         CALL XADJ(a,ia,Ierror)
@@ -155,7 +155,7 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
         x2 = r
         x1 = pq
         k = Mu
-        DO i = 1 , k
+        DO i = 1, k
           x1 = x1*x2
           CALL XADJ(x1,ipq,Ierror)
         ENDDO

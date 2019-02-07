@@ -78,10 +78,10 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  HQR
   !
-  INTEGER i , j , k , l , m , N , en , ll , mm , na , Nm , Igh , itn , its , &
-    Low , mp2 , enm2 , Ierr
-  REAL H(Nm,*) , Wr(*) , Wi(*)
-  REAL p , q , r , s , t , w , x , y , zz , norm , s1 , s2
+  INTEGER i, j, k, l, m, N, en, ll, mm, na, Nm, Igh, itn, its, &
+    Low, mp2, enm2, Ierr
+  REAL H(Nm,*), Wr(*), Wi(*)
+  REAL p, q, r, s, t, w, x, y, zz, norm, s1, s2
   LOGICAL notlas
   !
   !***FIRST EXECUTABLE STATEMENT  HQR
@@ -90,9 +90,9 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
   k = 1
   !     .......... STORE ROOTS ISOLATED BY BALANC
   !                AND COMPUTE MATRIX NORM ..........
-  DO i = 1 , N
+  DO i = 1, N
     !
-    DO j = k , N
+    DO j = k, N
       norm = norm + ABS(H(i,j))
     ENDDO
     !
@@ -107,154 +107,157 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
   t = 0.0E0
   itn = 30*N
   !     .......... SEARCH FOR NEXT EIGENVALUES ..........
-  100  IF ( en<Low ) GOTO 99999
+  100 CONTINUE
+  IF ( en<Low ) GOTO 99999
   its = 0
   na = en - 1
   enm2 = na - 1
   !     .......... LOOK FOR SINGLE SMALL SUB-DIAGONAL ELEMENT
   !                FOR L=EN STEP -1 UNTIL LOW DO -- ..........
-  200  DO ll = Low , en
-  l = en + Low - ll
-  IF ( l==Low ) EXIT
-  s = ABS(H(l-1,l-1)) + ABS(H(l,l))
-  IF ( s==0.0E0 ) s = norm
-  s2 = s + ABS(H(l,l-1))
-  IF ( s2==s ) EXIT
-ENDDO
-!     .......... FORM SHIFT ..........
-x = H(en,en)
-IF ( l==en ) THEN
-  !     .......... ONE ROOT FOUND ..........
-  Wr(en) = x + t
-  Wi(en) = 0.0E0
-  en = na
-ELSE
-  y = H(na,na)
-  w = H(en,na)*H(na,en)
-  IF ( l==na ) THEN
-    !     .......... TWO ROOTS FOUND ..........
-    p = (y-x)/2.0E0
-    q = p*p + w
-    zz = SQRT(ABS(q))
-    x = x + t
-    IF ( q<0.0E0 ) THEN
-      !     .......... COMPLEX PAIR ..........
-      Wr(na) = x + p
-      Wr(en) = x + p
-      Wi(na) = zz
-      Wi(en) = -zz
-    ELSE
-      !     .......... REAL PAIR ..........
-      zz = p + SIGN(zz,p)
-      Wr(na) = x + zz
-      Wr(en) = Wr(na)
-      IF ( zz/=0.0E0 ) Wr(en) = x - w/zz
-      Wi(na) = 0.0E0
-      Wi(en) = 0.0E0
-    ENDIF
-    en = enm2
-  ELSEIF ( itn==0 ) THEN
-    !     .......... SET ERROR -- NO CONVERGENCE TO AN
-    !                EIGENVALUE AFTER 30*N ITERATIONS ..........
-    Ierr = en
-    GOTO 99999
+  200 CONTINUE
+  DO ll = Low, en
+    l = en + Low - ll
+    IF ( l==Low ) EXIT
+    s = ABS(H(l-1,l-1)) + ABS(H(l,l))
+    IF ( s==0.0E0 ) s = norm
+    s2 = s + ABS(H(l,l-1))
+    IF ( s2==s ) EXIT
+  ENDDO
+  !     .......... FORM SHIFT ..........
+  x = H(en,en)
+  IF ( l==en ) THEN
+    !     .......... ONE ROOT FOUND ..........
+    Wr(en) = x + t
+    Wi(en) = 0.0E0
+    en = na
   ELSE
-    IF ( its==10.OR.its==20 ) THEN
-      !     .......... FORM EXCEPTIONAL SHIFT ..........
-      t = t + x
-      !
-      DO i = Low , en
-        H(i,i) = H(i,i) - x
-      ENDDO
-      !
-      s = ABS(H(en,na)) + ABS(H(na,enm2))
-      x = 0.75E0*s
-      y = x
-      w = -0.4375E0*s*s
-    ENDIF
-    its = its + 1
-    itn = itn - 1
-    !     .......... LOOK FOR TWO CONSECUTIVE SMALL
-    !                SUB-DIAGONAL ELEMENTS.
-    !                FOR M=EN-2 STEP -1 UNTIL L DO -- ..........
-    DO mm = l , enm2
-      m = enm2 + l - mm
-      zz = H(m,m)
-      r = x - zz
-      s = y - zz
-      p = (r*s-w)/H(m+1,m) + H(m,m+1)
-      q = H(m+1,m+1) - zz - r - s
-      r = H(m+2,m+1)
-      s = ABS(p) + ABS(q) + ABS(r)
-      p = p/s
-      q = q/s
-      r = r/s
-      IF ( m==l ) EXIT
-      s1 = ABS(p)*(ABS(H(m-1,m-1))+ABS(zz)+ABS(H(m+1,m+1)))
-      s2 = s1 + ABS(H(m,m-1))*(ABS(q)+ABS(r))
-      IF ( s2==s1 ) EXIT
-    ENDDO
-    !
-    mp2 = m + 2
-    !
-    DO i = mp2 , en
-      H(i,i-2) = 0.0E0
-      IF ( i/=mp2 ) H(i,i-3) = 0.0E0
-    ENDDO
-    !     .......... DOUBLE QR STEP INVOLVING ROWS L TO EN AND
-    !                COLUMNS M TO EN ..........
-    DO k = m , na
-      notlas = k/=na
-      IF ( k/=m ) THEN
-        p = H(k,k-1)
-        q = H(k+1,k-1)
-        r = 0.0E0
-        IF ( notlas ) r = H(k+2,k-1)
-        x = ABS(p) + ABS(q) + ABS(r)
-        IF ( x==0.0E0 ) CYCLE
-        p = p/x
-        q = q/x
-        r = r/x
-      ENDIF
-      s = SIGN(SQRT(p*p+q*q+r*r),p)
-      IF ( k==m ) THEN
-        IF ( l/=m ) H(k,k-1) = -H(k,k-1)
+    y = H(na,na)
+    w = H(en,na)*H(na,en)
+    IF ( l==na ) THEN
+      !     .......... TWO ROOTS FOUND ..........
+      p = (y-x)/2.0E0
+      q = p*p + w
+      zz = SQRT(ABS(q))
+      x = x + t
+      IF ( q<0.0E0 ) THEN
+        !     .......... COMPLEX PAIR ..........
+        Wr(na) = x + p
+        Wr(en) = x + p
+        Wi(na) = zz
+        Wi(en) = -zz
       ELSE
-        H(k,k-1) = -s*x
+        !     .......... REAL PAIR ..........
+        zz = p + SIGN(zz,p)
+        Wr(na) = x + zz
+        Wr(en) = Wr(na)
+        IF ( zz/=0.0E0 ) Wr(en) = x - w/zz
+        Wi(na) = 0.0E0
+        Wi(en) = 0.0E0
       ENDIF
-      p = p + s
-      x = p/s
-      y = q/s
-      zz = r/s
-      q = q/p
-      r = r/p
-      !     .......... ROW MODIFICATION ..........
-      DO j = k , en
-        p = H(k,j) + q*H(k+1,j)
-        IF ( notlas ) THEN
-          p = p + r*H(k+2,j)
-          H(k+2,j) = H(k+2,j) - p*zz
-        ENDIF
-        H(k+1,j) = H(k+1,j) - p*y
-        H(k,j) = H(k,j) - p*x
+      en = enm2
+    ELSEIF ( itn==0 ) THEN
+      !     .......... SET ERROR -- NO CONVERGENCE TO AN
+      !                EIGENVALUE AFTER 30*N ITERATIONS ..........
+      Ierr = en
+      GOTO 99999
+    ELSE
+      IF ( its==10.OR.its==20 ) THEN
+        !     .......... FORM EXCEPTIONAL SHIFT ..........
+        t = t + x
+        !
+        DO i = Low, en
+          H(i,i) = H(i,i) - x
+        ENDDO
+        !
+        s = ABS(H(en,na)) + ABS(H(na,enm2))
+        x = 0.75E0*s
+        y = x
+        w = -0.4375E0*s*s
+      ENDIF
+      its = its + 1
+      itn = itn - 1
+      !     .......... LOOK FOR TWO CONSECUTIVE SMALL
+      !                SUB-DIAGONAL ELEMENTS.
+      !                FOR M=EN-2 STEP -1 UNTIL L DO -- ..........
+      DO mm = l, enm2
+        m = enm2 + l - mm
+        zz = H(m,m)
+        r = x - zz
+        s = y - zz
+        p = (r*s-w)/H(m+1,m) + H(m,m+1)
+        q = H(m+1,m+1) - zz - r - s
+        r = H(m+2,m+1)
+        s = ABS(p) + ABS(q) + ABS(r)
+        p = p/s
+        q = q/s
+        r = r/s
+        IF ( m==l ) EXIT
+        s1 = ABS(p)*(ABS(H(m-1,m-1))+ABS(zz)+ABS(H(m+1,m+1)))
+        s2 = s1 + ABS(H(m,m-1))*(ABS(q)+ABS(r))
+        IF ( s2==s1 ) EXIT
       ENDDO
       !
-      j = MIN(en,k+3)
-      !     .......... COLUMN MODIFICATION ..........
-      DO i = l , j
-        p = x*H(i,k) + y*H(i,k+1)
-        IF ( notlas ) THEN
-          p = p + zz*H(i,k+2)
-          H(i,k+2) = H(i,k+2) - p*r
+      mp2 = m + 2
+      !
+      DO i = mp2, en
+        H(i,i-2) = 0.0E0
+        IF ( i/=mp2 ) H(i,i-3) = 0.0E0
+      ENDDO
+      !     .......... DOUBLE QR STEP INVOLVING ROWS L TO EN AND
+      !                COLUMNS M TO EN ..........
+      DO k = m, na
+        notlas = k/=na
+        IF ( k/=m ) THEN
+          p = H(k,k-1)
+          q = H(k+1,k-1)
+          r = 0.0E0
+          IF ( notlas ) r = H(k+2,k-1)
+          x = ABS(p) + ABS(q) + ABS(r)
+          IF ( x==0.0E0 ) CYCLE
+          p = p/x
+          q = q/x
+          r = r/x
         ENDIF
-        H(i,k+1) = H(i,k+1) - p*q
-        H(i,k) = H(i,k) - p
+        s = SIGN(SQRT(p*p+q*q+r*r),p)
+        IF ( k==m ) THEN
+          IF ( l/=m ) H(k,k-1) = -H(k,k-1)
+        ELSE
+          H(k,k-1) = -s*x
+        ENDIF
+        p = p + s
+        x = p/s
+        y = q/s
+        zz = r/s
+        q = q/p
+        r = r/p
+        !     .......... ROW MODIFICATION ..........
+        DO j = k, en
+          p = H(k,j) + q*H(k+1,j)
+          IF ( notlas ) THEN
+            p = p + r*H(k+2,j)
+            H(k+2,j) = H(k+2,j) - p*zz
+          ENDIF
+          H(k+1,j) = H(k+1,j) - p*y
+          H(k,j) = H(k,j) - p*x
+        ENDDO
+        !
+        j = MIN(en,k+3)
+        !     .......... COLUMN MODIFICATION ..........
+        DO i = l, j
+          p = x*H(i,k) + y*H(i,k+1)
+          IF ( notlas ) THEN
+            p = p + zz*H(i,k+2)
+            H(i,k+2) = H(i,k+2) - p*r
+          ENDIF
+          H(i,k+1) = H(i,k+1) - p*q
+          H(i,k) = H(i,k) - p
+        ENDDO
+        !
       ENDDO
       !
-    ENDDO
-    !
-    GOTO 200
+      GOTO 200
+    ENDIF
   ENDIF
-ENDIF
-GOTO 100
-99999 END SUBROUTINE HQR
+  GOTO 100
+  99999 CONTINUE
+  END SUBROUTINE HQR

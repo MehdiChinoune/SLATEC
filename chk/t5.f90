@@ -12,7 +12,7 @@ REAL FUNCTION T5(X)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  T5
-  REAL a , b , F5S , X , x1 , y
+  REAL a, b, F5S, X, x1, y
   !***FIRST EXECUTABLE STATEMENT  T5
   a = 0.0E+00
   b = 0.1E+01

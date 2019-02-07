@@ -4,9 +4,9 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   IMPLICIT NONE
   !*--RADB45
   !*** Start of declarations inserted by SPAG
-  REAL Cc , Ch , ci2 , ci3 , ci4 , cr2 , cr3 , cr4 , sqrt2 , ti1 , ti2 , &
-    ti3 , ti4 , tr1 , tr2 , tr3 , tr4 , Wa1 , Wa2 , Wa3
-  INTEGER i , ic , Ido , idp2 , k , L1
+  REAL Cc, Ch, ci2, ci3, ci4, cr2, cr3, cr4, sqrt2, ti1, ti2, &
+    ti3, ti4, tr1, tr2, tr3, tr4, Wa1, Wa2, Wa3
+  INTEGER i, ic, Ido, idp2, k, L1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RADB4
   !***SUBSIDIARY
@@ -29,10 +29,10 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  RADB4
-  DIMENSION Cc(Ido,4,*) , Ch(Ido,L1,4) , Wa1(*) , Wa2(*) , Wa3(*)
+  DIMENSION Cc(Ido,4,*), Ch(Ido,L1,4), Wa1(*), Wa2(*), Wa3(*)
   !***FIRST EXECUTABLE STATEMENT  RADB4
   sqrt2 = SQRT(2.)
-  DO k = 1 , L1
+  DO k = 1, L1
     tr1 = Cc(1,1,k) - Cc(Ido,4,k)
     tr2 = Cc(1,1,k) + Cc(Ido,4,k)
     tr3 = Cc(Ido,2,k) + Cc(Ido,2,k)
@@ -46,10 +46,10 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   IF ( Ido/=2 ) THEN
     idp2 = Ido + 2
     IF ( (Ido-1)/2<L1 ) THEN
-      DO i = 3 , Ido , 2
+      DO i = 3, Ido, 2
         ic = idp2 - i
         !DIR$ IVDEP
-        DO k = 1 , L1
+        DO k = 1, L1
           ti1 = Cc(i,1,k) + Cc(ic,4,k)
           ti2 = Cc(i,1,k) - Cc(ic,4,k)
           ti3 = Cc(i,3,k) - Cc(ic,2,k)
@@ -75,9 +75,9 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
         ENDDO
       ENDDO
     ELSE
-      DO k = 1 , L1
+      DO k = 1, L1
         !DIR$ IVDEP
-        DO i = 3 , Ido , 2
+        DO i = 3, Ido, 2
           ic = idp2 - i
           ti1 = Cc(i,1,k) + Cc(ic,4,k)
           ti2 = Cc(i,1,k) - Cc(ic,4,k)
@@ -106,7 +106,7 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
     ENDIF
     IF ( MOD(Ido,2)==1 ) RETURN
   ENDIF
-  DO k = 1 , L1
+  DO k = 1, L1
     ti1 = Cc(1,2,k) + Cc(1,4,k)
     ti2 = Cc(1,4,k) - Cc(1,2,k)
     tr1 = Cc(Ido,1,k) - Cc(Ido,3,k)
@@ -116,4 +116,5 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
     Ch(Ido,k,3) = ti2 + ti2
     Ch(Ido,k,4) = -sqrt2*(tr1+ti1)
   ENDDO
-  99999 END SUBROUTINE RADB4
+  99999 CONTINUE
+  END SUBROUTINE RADB4

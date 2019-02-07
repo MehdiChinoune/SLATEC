@@ -63,13 +63,13 @@ SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
   !   920316  Prologue corrected.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DROTMG
-  REAL(8) :: gam , one , rgamsq , Dd1 , Dd2 , dh11 , dh12 , dh21 , &
-    dh22 , Dparam , dp1 , dp2 , dq1 , dq2 , du , Dy1 , zero , &
-    gamsq , dflag , dtemp , Dx1 , two
+  REAL(8) :: gam, one, rgamsq, Dd1, Dd2, dh11, dh12, dh21, &
+    dh22, Dparam, dp1, dp2, dq1, dq2, du, Dy1, zero, &
+    gamsq, dflag, dtemp, Dx1, two
   DIMENSION Dparam(5)
-  SAVE zero , one , two , gam , gamsq , rgamsq
-  DATA zero , one , two/0.0D0 , 1.0D0 , 2.0D0/
-  DATA gam , gamsq , rgamsq/4096.0D0 , 16777216.D0 , 5.9604645D-8/
+  SAVE zero, one, two, gam, gamsq, rgamsq
+  DATA zero, one, two/0.0D0, 1.0D0, 2.0D0/
+  DATA gam, gamsq, rgamsq/4096.0D0, 16777216.D0, 5.9604645D-8/
   !***FIRST EXECUTABLE STATEMENT  DROTMG
   IF ( .NOT.Dd1<zero ) THEN
     !     CASE-DD1-NONNEGATIVE
@@ -128,76 +128,83 @@ SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
   !         RETURN..
   GOTO 1000
   !     PROCEDURE..FIX-H..
-  100  IF ( .NOT.(.NOT.dflag>=zero) ) THEN
-  !
-  IF ( .NOT.dflag==zero ) THEN
-    dh21 = -one
-    dh12 = one
-    dflag = -one
-  ELSE
-    dh11 = one
-    dh22 = one
-    dflag = -one
+  100 CONTINUE
+  IF ( .NOT.(.NOT.dflag>=zero) ) THEN
+    !
+    IF ( .NOT.dflag==zero ) THEN
+      dh21 = -one
+      dh12 = one
+      dflag = -one
+    ELSE
+      dh11 = one
+      dh22 = one
+      dflag = -one
+    ENDIF
   ENDIF
-ENDIF
-SELECT CASE(igo)
-  CASE(300)
-    GOTO 300
-  CASE(500)
-    GOTO 500
-  CASE(700)
-    GOTO 700
-  CASE(900)
-    GOTO 900
-END SELECT
-!     PROCEDURE..SCALE-CHECK
-200  IF ( .NOT.Dd1<=rgamsq ) GOTO 400
-IF ( Dd1==zero ) GOTO 600
-igo = 300
-!              FIX-H..
-GOTO 100
-300  Dd1 = Dd1*gam**2
-Dx1 = Dx1/gam
-dh11 = dh11/gam
-dh12 = dh12/gam
-GOTO 200
-400  IF ( .NOT.Dd1>=gamsq ) GOTO 600
-igo = 500
-!              FIX-H..
-GOTO 100
-500  Dd1 = Dd1/gam**2
-Dx1 = Dx1*gam
-dh11 = dh11*gam
-dh12 = dh12*gam
-GOTO 400
-600  IF ( .NOT.ABS(Dd2)<=rgamsq ) GOTO 800
-IF ( Dd2==zero ) GOTO 1000
-igo = 700
-!              FIX-H..
-GOTO 100
-700  Dd2 = Dd2*gam**2
-dh21 = dh21/gam
-dh22 = dh22/gam
-GOTO 600
-800  IF ( .NOT.ABS(Dd2)>=gamsq ) GOTO 1000
-igo = 900
-!              FIX-H..
-GOTO 100
-900  Dd2 = Dd2/gam**2
-dh21 = dh21*gam
-dh22 = dh22*gam
-GOTO 800
-1000 IF ( dflag<0 ) THEN
-Dparam(2) = dh11
-Dparam(3) = dh21
-Dparam(4) = dh12
-Dparam(5) = dh22
-ELSEIF ( dflag==0 ) THEN
-Dparam(3) = dh21
-Dparam(4) = dh12
-ELSE
-Dparam(2) = dh11
-Dparam(5) = dh22
-ENDIF
-Dparam(1) = dflag
-99999 END SUBROUTINE DROTMG
+  SELECT CASE(igo)
+    CASE(300)
+      GOTO 300
+    CASE(500)
+      GOTO 500
+    CASE(700)
+      GOTO 700
+    CASE(900)
+      GOTO 900
+  END SELECT
+  !     PROCEDURE..SCALE-CHECK
+  200 CONTINUE
+  IF ( .NOT.Dd1<=rgamsq ) GOTO 400
+  IF ( Dd1==zero ) GOTO 600
+  igo = 300
+  !              FIX-H..
+  GOTO 100
+  300  Dd1 = Dd1*gam**2
+  Dx1 = Dx1/gam
+  dh11 = dh11/gam
+  dh12 = dh12/gam
+  GOTO 200
+  400 CONTINUE
+  IF ( .NOT.Dd1>=gamsq ) GOTO 600
+  igo = 500
+  !              FIX-H..
+  GOTO 100
+  500  Dd1 = Dd1/gam**2
+  Dx1 = Dx1*gam
+  dh11 = dh11*gam
+  dh12 = dh12*gam
+  GOTO 400
+  600 CONTINUE
+  IF ( .NOT.ABS(Dd2)<=rgamsq ) GOTO 800
+  IF ( Dd2==zero ) GOTO 1000
+  igo = 700
+  !              FIX-H..
+  GOTO 100
+  700  Dd2 = Dd2*gam**2
+  dh21 = dh21/gam
+  dh22 = dh22/gam
+  GOTO 600
+  800 CONTINUE
+  IF ( .NOT.ABS(Dd2)>=gamsq ) GOTO 1000
+  igo = 900
+  !              FIX-H..
+  GOTO 100
+  900  Dd2 = Dd2/gam**2
+  dh21 = dh21*gam
+  dh22 = dh22*gam
+  GOTO 800
+  1000 CONTINUE
+  IF ( dflag<0 ) THEN
+    Dparam(2) = dh11
+    Dparam(3) = dh21
+    Dparam(4) = dh12
+    Dparam(5) = dh22
+  ELSEIF ( dflag==0 ) THEN
+    Dparam(3) = dh21
+    Dparam(4) = dh12
+  ELSE
+    Dparam(2) = dh11
+    Dparam(5) = dh22
+  ENDIF
+  Dparam(1) = dflag
+  99999 CONTINUE
+  END SUBROUTINE DROTMG

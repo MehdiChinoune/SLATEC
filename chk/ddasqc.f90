@@ -4,7 +4,7 @@ SUBROUTINE DDASQC(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--DDASQC5
   !*** Start of declarations inserted by SPAG
-  REAL DDJAC1 , DDJAC2 , DDRES1
+  REAL DDJAC1, DDJAC2, DDRES1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DDASQC
   !***PURPOSE  Quick check for SLATEC routine DDASSL.
@@ -44,18 +44,18 @@ SUBROUTINE DDASQC(Lun,Kprint,Ipass)
   !   901030  Made all declarations explicit; added 1P's to formats. (FNF)
   !***END PROLOGUE  DDASQC
   !
-  INTEGER Lun , Kprint , Ipass
+  INTEGER Lun, Kprint, Ipass
   !
-  EXTERNAL DDASSL , DDJAC1 , DDJAC2 , DDRES1 , DDRES2 , DEDIT2
+  EXTERNAL DDASSL, DDJAC1, DDJAC2, DDRES1, DDRES2, DEDIT2
   !
-  INTEGER i , idid , info(15) , iout , ipar(1) , ires , iwork(45) , j190 , &
-    j290 , liw , lrw , ml , mu , neq , nerr , nfe , nje , nout , nqu , &
+  INTEGER i, idid, info(15), iout, ipar(1), ires, iwork(45), j190, &
+    j290, liw, lrw, ml, mu, neq, nerr, nfe, nje, nout, nqu, &
     nst
-  REAL(8) :: atol , delta(25) , dtout , er , er1 , er2 , erm , ero , &
-    hu , rpar(1) , rtol , rwork(550) , t , tout , tout1 , &
-    y(25) , yprime(25) , yt1 , yt2
+  REAL(8) :: atol, delta(25), dtout, er, er1, er2, erm, ero, &
+    hu, rpar(1), rtol, rwork(550), t, tout, tout1, &
+    y(25), yprime(25), yt1, yt2
   !
-  DATA tout1/1.0D0/ , dtout/1.0D0/
+  DATA tout1/1.0D0/, dtout/1.0D0/
   !
   !***FIRST EXECUTABLE STATEMENT  DDASQC
   Ipass = 1
@@ -69,15 +69,15 @@ SUBROUTINE DDASQC(Lun,Kprint,Ipass)
   !
   neq = 2
   nout = 10
-  IF ( Kprint>=2 ) WRITE (Lun,99001) neq , rtol , atol
+  IF ( Kprint>=2 ) WRITE (Lun,99001) neq, rtol, atol
   99001 FORMAT ('1'/1X,' DEMONSTRATION PROGRAM FOR DDASSL',///1X,&
     ' PROBLEM 1..   LINEAR DIFFERENTIAL/ALGEBRAIC SYSTEM..',/1X,&
     ' X1DOT + 10.0*X1 = 0,  X1 + X2 = 1',/1X,&
     ' X1(0) = 1.0, X2(0) = 0.0',/1X,' NEQ =',I2/1X,' RTOL =',1P,D10.1,&
     '   ATOL =',D10.1)
   !
-  DO j190 = 1 , 2
-    DO i = 1 , 15
+  DO j190 = 1, 2
+    DO i = 1, 15
       info(i) = 0
     ENDDO
     IF ( j190==2 ) info(5) = 1
@@ -93,13 +93,13 @@ SUBROUTINE DDASQC(Lun,Kprint,Ipass)
     yprime(2) = 10.0D0
     tout = tout1
     ero = 0.0D0
-    DO iout = 1 , nout
+    DO iout = 1, nout
       CALL DDASSL(DDRES1,neq,t,y,yprime,tout,info,rtol,atol,idid,rwork,lrw,&
         iwork,liw,rpar,ipar,DDJAC1)
       hu = rwork(7)
       nqu = iwork(8)
       IF ( Kprint>2 ) THEN
-        WRITE (Lun,99003) t , y(1) , y(2) , nqu , hu
+        WRITE (Lun,99003) t, y(1), y(2), nqu, hu
         99003       FORMAT (1X,1P,D15.5,D16.5,D16.5,I6,D14.3)
       ENDIF
       !
@@ -118,14 +118,14 @@ SUBROUTINE DDASQC(Lun,Kprint,Ipass)
       tout = tout + dtout
     ENDDO
     IF ( idid<0 ) THEN
-      IF ( Kprint>=2 ) WRITE (Lun,99011) idid , t
+      IF ( Kprint>=2 ) WRITE (Lun,99011) idid, t
       !
       nerr = nerr + 1
     ENDIF
     nst = iwork(11)
     nfe = iwork(12)
     nje = iwork(13)
-    IF ( Kprint>2 ) WRITE (Lun,99012) nst , nfe , nje , ero
+    IF ( Kprint>2 ) WRITE (Lun,99012) nst, nfe, nje, ero
     !
   ENDDO
   !
@@ -137,15 +137,15 @@ SUBROUTINE DDASQC(Lun,Kprint,Ipass)
   iwork(1) = ml
   iwork(2) = mu
   nout = 5
-  IF ( Kprint>=2 ) WRITE (Lun,99004) neq , ml , mu , rtol , atol
+  IF ( Kprint>=2 ) WRITE (Lun,99004) neq, ml, mu, rtol, atol
   99004 FORMAT ('1'/1X,' DEMONSTRATION PROGRAM FOR DDASSL',///1X,&
-    ' PROBLEM 2.. YDOT = A * Y , WHERE ',&
+    ' PROBLEM 2.. YDOT = A * Y, WHERE ',&
     ' A IS A BANDED LOWER TRIANGULAR MATRIX',/1X,&
     '  DERIVED FROM 2-D ADVECTION PDE',/1X,' NEQ =',I3,'   ML =',I2,&
     '   MU =',I2/1X,' RTOL =',1P,D10.1,'   ATOL =',D10.1)
   !
-  DO j290 = 1 , 2
-    DO i = 1 , 15
+  DO j290 = 1, 2
+    DO i = 1, 15
       info(i) = 0
     ENDDO
     info(6) = 1
@@ -155,24 +155,24 @@ SUBROUTINE DDASQC(Lun,Kprint,Ipass)
     99005   FORMAT (////1X,' INFO(5) =',I3//6X,'T',14X,'MAX.ERR.',5X,'NQ',6X,'H'/)
     !
     t = 0.0D0
-    DO i = 2 , neq
+    DO i = 2, neq
       y(i) = 0.0D0
     ENDDO
     y(1) = 1.0D0
-    DO i = 1 , neq
+    DO i = 1, neq
       delta(i) = 0.0D0
     ENDDO
     !        Following is to initialize YPRIME.
     CALL DDRES2(t,y,delta,yprime,ires,rpar,ipar)
     tout = 0.01D0
     ero = 0.0D0
-    DO iout = 1 , nout
+    DO iout = 1, nout
       CALL DDASSL(DDRES2,neq,t,y,yprime,tout,info,rtol,atol,idid,rwork,lrw,&
         iwork,liw,rpar,ipar,DDJAC2)
       CALL DEDIT2(y,t,erm)
       hu = rwork(7)
       nqu = iwork(8)
-      IF ( Kprint>2 ) WRITE (Lun,99006) t , erm , nqu , hu
+      IF ( Kprint>2 ) WRITE (Lun,99006) t, erm, nqu, hu
       99006     FORMAT (1X,1P,D15.5,D14.3,I6,D14.3)
       !
       IF ( idid<0 ) EXIT
@@ -185,13 +185,13 @@ SUBROUTINE DDASQC(Lun,Kprint,Ipass)
       tout = tout*10.0D0
     ENDDO
     IF ( idid<0 ) THEN
-      IF ( Kprint>=2 ) WRITE (Lun,99011) idid , t
+      IF ( Kprint>=2 ) WRITE (Lun,99011) idid, t
       nerr = nerr + 1
     ENDIF
     nst = iwork(11)
     nfe = iwork(12)
     nje = iwork(13)
-    IF ( Kprint>2 ) WRITE (Lun,99012) nst , nfe , nje , ero
+    IF ( Kprint>2 ) WRITE (Lun,99012) nst, nfe, nje, ero
     !
   ENDDO
   IF ( Kprint>=2 ) WRITE (Lun,99007) nerr

@@ -29,20 +29,20 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DSTOR1
-  INTEGER IGOfx , INHomo , IVP , j , NCOmp , nctnf , Ndisk , NFC , Ntape , &
+  INTEGER IGOfx, INHomo, IVP, j, NCOmp, nctnf, Ndisk, NFC, Ntape, &
     Ntemp
-  REAL(8) :: C , U(*) , V(*) , XSAv , Yh(*) , Yp(*)
+  REAL(8) :: C, U(*), V(*), XSAv, Yh(*), Yp(*)
   !
   !     ******************************************************************
   !
-  COMMON /DML8SZ/ C , XSAv , IGOfx , INHomo , IVP , NCOmp , NFC
+  COMMON /DML8SZ/ C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
   !
   !      *****************************************************************
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 80
   !***FIRST EXECUTABLE STATEMENT  DSTOR1
   nctnf = NCOmp*NFC
-  DO j = 1 , nctnf
+  DO j = 1, nctnf
     U(j) = Yh(j)
   ENDDO
   IF ( INHomo==1 ) THEN
@@ -51,16 +51,16 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
     !
     IF ( Ntemp==0 ) THEN
       !
-      DO j = 1 , NCOmp
+      DO j = 1, NCOmp
         V(j) = C*Yp(j)
       ENDDO
       !
       !        IS OUTPUT INFORMATION TO BE WRITTEN TO DISK
       !
-      IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,NCOmp) , (U(j),j=1,nctnf)
+      IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,NCOmp), (U(j),j=1,nctnf)
     ELSE
       !
-      DO j = 1 , NCOmp
+      DO j = 1, NCOmp
         V(j) = Yp(j)
         !     .........EXIT
       ENDDO
@@ -70,10 +70,10 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
     !
     !     ......EXIT
   ELSEIF ( Ntemp/=1 ) THEN
-    DO j = 1 , NCOmp
+    DO j = 1, NCOmp
       V(j) = 0.0D0
     ENDDO
-    IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,NCOmp) , (U(j),j=1,nctnf)
+    IF ( Ndisk==1 ) WRITE (Ntape) (V(j),j=1,NCOmp), (U(j),j=1,nctnf)
   ENDIF
   !
 END SUBROUTINE DSTOR1

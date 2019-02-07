@@ -22,17 +22,17 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   !   930122  Added ZEXP and ZLOG to EXTERNAL statement.  (RWC)
   !***END PROLOGUE  ZMLRI
   !     COMPLEX CK,CNORM,CONE,CTWO,CZERO,PT,P1,P2,RZ,SUM,Y,Z
-  REAL(8) :: ack , ak , ap , at , az , bk , cki , ckr , cnormi , &
-    cnormr , conei , coner , fkap , fkk , flam , fnf , Fnu , &
-    pti , ptr , p1i , p1r , p2i , p2r , raz , rho , rho2 , &
-    rzi , rzr , scle , sti , str , sumi , sumr , tfnf , Tol , &
-    tst , Yi , Yr , zeroi , zeror , Zi , Zr , DGAMLN , &
-    D1MACH , ZABS
-  INTEGER i , iaz , idum , ifnu , inu , itime , k , kk , km , Kode , m , N , &
+  REAL(8) :: ack, ak, ap, at, az, bk, cki, ckr, cnormi, &
+    cnormr, conei, coner, fkap, fkk, flam, fnf, Fnu, &
+    pti, ptr, p1i, p1r, p2i, p2r, raz, rho, rho2, &
+    rzi, rzr, scle, sti, str, sumi, sumr, tfnf, Tol, &
+    tst, Yi, Yr, zeroi, zeror, Zi, Zr, DGAMLN, &
+    D1MACH, ZABS
+  INTEGER i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, &
     Nz
-  DIMENSION Yr(N) , Yi(N)
-  EXTERNAL ZABS , ZEXP , ZLOG
-  DATA zeror , zeroi , coner , conei/0.0D0 , 0.0D0 , 1.0D0 , 0.0D0/
+  DIMENSION Yr(N), Yi(N)
+  EXTERNAL ZABS, ZEXP, ZLOG
+  DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
   !***FIRST EXECUTABLE STATEMENT  ZMLRI
   scle = D1MACH(1)/Tol
   Nz = 0
@@ -61,7 +61,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   !     COMPUTE RELATIVE TRUNCATION ERROR INDEX FOR SERIES
   !-----------------------------------------------------------------------
   ak = at
-  DO i = 1 , 80
+  DO i = 1, 80
     ptr = p2r
     pti = p2i
     p2r = p1r - (ckr*ptr-cki*pti)
@@ -94,7 +94,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
     ack = at*raz
     tst = SQRT(ack/Tol)
     itime = 1
-    DO k = 1 , 80
+    DO k = 1, 80
       ptr = p2r
       pti = p2i
       p2r = p1r - (ckr*ptr-cki*pti)
@@ -138,7 +138,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   sumr = zeror
   sumi = zeroi
   km = kk - inu
-  DO i = 1 , km
+  DO i = 1, km
     ptr = p2r
     pti = p2i
     p2r = p1r + (fkk+fnf)*(rzr*ptr-rzi*pti)
@@ -155,7 +155,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   Yr(N) = p2r
   Yi(N) = p2i
   IF ( N/=1 ) THEN
-    DO i = 2 , N
+    DO i = 2, N
       ptr = p2r
       pti = p2i
       p2r = p1r + (fkk+fnf)*(rzr*ptr-rzi*pti)
@@ -174,7 +174,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
     ENDDO
   ENDIF
   IF ( ifnu>0 ) THEN
-    DO i = 1 , ifnu
+    DO i = 1, ifnu
       ptr = p2r
       pti = p2i
       p2r = p1r + (fkk+fnf)*(rzr*ptr-rzi*pti)
@@ -212,10 +212,11 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   ptr = p2r*p1r
   pti = -p2i*p1r
   CALL ZMLT(ckr,cki,ptr,pti,cnormr,cnormi)
-  DO i = 1 , N
+  DO i = 1, N
     str = Yr(i)*cnormr - Yi(i)*cnormi
     Yi(i) = Yr(i)*cnormi + Yi(i)*cnormr
     Yr(i) = str
   ENDDO
   RETURN
-  99999 END SUBROUTINE ZMLRI
+  99999 CONTINUE
+  END SUBROUTINE ZMLRI

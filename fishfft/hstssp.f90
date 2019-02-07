@@ -5,11 +5,11 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   IMPLICIT NONE
   !*--HSTSSP6
   !*** Start of declarations inserted by SPAG
-  REAL A , a1 , a2 , a3 , B , Bda , Bdb , Bdc , Bdd , C , D , deltar , &
-    deltht , dlrsq , dlthsq , dum , Elmbda , F , Pertrb , pi
-  REAL PIMACH , W
-  INTEGER i , Idimf , ierr1 , Ierror , isw , iwb , iwc , iwr , iws , j , &
-    jsw , k , lp , M , mb , Mbdcnd , mm1 , N , Nbdcnd , np
+  REAL A, a1, a2, a3, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, &
+    deltht, dlrsq, dlthsq, dum, Elmbda, F, Pertrb, pi
+  REAL PIMACH, W
+  INTEGER i, Idimf, ierr1, Ierror, isw, iwb, iwc, iwr, iws, j, &
+    jsw, k, lp, M, mb, Mbdcnd, mm1, N, Nbdcnd, np
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HSTSSP
   !***PURPOSE  Solve the standard five-point finite difference
@@ -123,11 +123,11 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     values (if any) of the solution at THETA = A.  When
   !     MBDCND = 1, 2, or 7,
   !
-  !              BDA(J) = U(A,PHI(J)) ,              J=1,2,...,N.
+  !              BDA(J) = U(A,PHI(J)),              J=1,2,...,N.
   !
   !     When MBDCND = 3, 4, or 8,
   !
-  !              BDA(J) = (d/dTHETA)U(A,PHI(J)) ,    J=1,2,...,N.
+  !              BDA(J) = (d/dTHETA)U(A,PHI(J)),    J=1,2,...,N.
   !
   !     When MBDCND has any other value, BDA is a dummy variable.
   !
@@ -135,11 +135,11 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     A one-dimensional array of length N that specifies the boundary
   !     values of the solution at THETA = B.  When MBDCND = 1,4, or 5,
   !
-  !              BDB(J) = U(B,PHI(J)) ,              J=1,2,...,N.
+  !              BDB(J) = U(B,PHI(J)),              J=1,2,...,N.
   !
   !     When MBDCND = 2,3, or 6,
   !
-  !              BDB(J) = (d/dTHETA)U(B,PHI(J)) ,    J=1,2,...,N.
+  !              BDB(J) = (d/dTHETA)U(B,PHI(J)),    J=1,2,...,N.
   !
   !     When MBDCND has any other value, BDB is a dummy variable.
   !
@@ -183,7 +183,7 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     A one dimensional array of length M that specifies the boundary
   !     values of the solution at PHI = C.   When NBDCND = 1 or 2,
   !
-  !              BDC(I) = U(THETA(I),C) ,              I=1,2,...,M.
+  !              BDC(I) = U(THETA(I),C),              I=1,2,...,M.
   !
   !     When NBDCND = 3 or 4,
   !
@@ -195,11 +195,11 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     A one-dimensional array of length M that specifies the boundary
   !     values of the solution at PHI = D.  When NBDCND = 1 or 4,
   !
-  !              BDD(I) = U(THETA(I),D) ,              I=1,2,...,M.
+  !              BDD(I) = U(THETA(I),D),              I=1,2,...,M.
   !
   !     When NBDCND = 2 or 3,
   !
-  !              BDD(I) = (d/dPHI)U(THETA(I),D) ,      I=1,2,...,M.
+  !              BDD(I) = (d/dPHI)U(THETA(I),D),      I=1,2,...,M.
   !
   !     When NBDCND = 0, BDD is a dummy variable.
   !
@@ -377,7 +377,7 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !***END PROLOGUE  HSTSSP
   !
   !
-  DIMENSION F(Idimf,*) , Bda(*) , Bdb(*) , Bdc(*) , Bdd(*) , W(*)
+  DIMENSION F(Idimf,*), Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HSTSSP
   Ierror = 0
   pi = PIMACH(dum)
@@ -430,13 +430,13 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   iwc = iwb + M
   iwr = iwc + M
   iws = iwr + M
-  DO i = 1 , M
+  DO i = 1, M
     j = iwr + i
     W(j) = SIN(A+(i-0.5)*deltar)
     W(i) = SIN((A+(i-1)*deltar))/dlrsq
   ENDDO
   mm1 = M - 1
-  DO i = 1 , mm1
+  DO i = 1, mm1
     k = iwc + i
     W(k) = W(i+1)
     j = iwr + i
@@ -445,10 +445,10 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   ENDDO
   W(iwr) = SIN(B)/dlrsq
   W(iwc) = Elmbda*W(iws) - (W(M)+W(iwr))
-  DO i = 1 , M
+  DO i = 1, M
     j = iwr + i
     a1 = W(j)
-    DO j = 1 , N
+    DO j = 1, N
       F(i,j) = a1*F(i,j)
     ENDDO
   ENDDO
@@ -459,14 +459,14 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE (3,4,8)
       a1 = deltar*W(1)
       W(iwb+1) = W(iwb+1) + W(1)
-      DO j = 1 , N
+      DO j = 1, N
         F(1,j) = F(1,j) + a1*Bda(j)
       ENDDO
     CASE (5,6,9)
     CASE DEFAULT
       a1 = 2.*W(1)
       W(iwb+1) = W(iwb+1) - W(1)
-      DO j = 1 , N
+      DO j = 1, N
         F(1,j) = F(1,j) - a1*Bda(j)
       ENDDO
   END SELECT
@@ -474,14 +474,14 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE (2,3,6)
       a1 = deltar*W(iwr)
       W(iwc) = W(iwc) + W(iwr)
-      DO j = 1 , N
+      DO j = 1, N
         F(M,j) = F(M,j) - a1*Bdb(j)
       ENDDO
     CASE (7,8,9)
     CASE DEFAULT
       a1 = 2.*W(iwr)
       W(iwc) = W(iwc) - W(iwr)
-      DO j = 1 , N
+      DO j = 1, N
         F(M,j) = F(M,j) - a1*Bdb(j)
       ENDDO
   END SELECT
@@ -494,12 +494,12 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       GOTO 100
     CASE (4,5)
       a1 = 1./deltht
-      DO i = 1 , M
+      DO i = 1, M
         j = iwr + i
         F(i,1) = F(i,1) + a1*Bdc(i)/W(j)
       ENDDO
     CASE DEFAULT
-      DO i = 1 , M
+      DO i = 1, M
         j = iwr + i
         F(i,1) = F(i,1) - a1*Bdc(i)/W(j)
       ENDDO
@@ -509,12 +509,12 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     CASE (1)
     CASE (3,4)
       a1 = 1./deltht
-      DO i = 1 , M
+      DO i = 1, M
         j = iwr + i
         F(i,N) = F(i,N) - a1*Bdd(i)/W(j)
       ENDDO
     CASE DEFAULT
-      DO i = 1 , M
+      DO i = 1, M
         j = iwr + i
         F(i,N) = F(i,N) - a1*Bdd(i)/W(j)
       ENDDO
@@ -533,23 +533,23 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
           CASE (2,3,5)
           CASE DEFAULT
             isw = 2
-            DO j = 1 , N
-              DO i = 1 , M
+            DO j = 1, N
+              DO i = 1, M
                 Pertrb = Pertrb + F(i,j)
               ENDDO
             ENDDO
             a1 = N*(COS(A)-COS(B))/(2.*SIN(0.5*deltar))
             Pertrb = Pertrb/a1
-            DO i = 1 , M
+            DO i = 1, M
               j = iwr + i
               a1 = Pertrb*W(j)
-              DO j = 1 , N
+              DO j = 1, N
                 F(i,j) = F(i,j) - a1
               ENDDO
             ENDDO
             a2 = 0.
             a3 = 0.
-            DO j = 1 , N
+            DO j = 1, N
               a2 = a2 + F(1,j)
               a3 = a3 + F(M,j)
             ENDDO
@@ -563,7 +563,7 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     MULTIPLY I-TH EQUATION THROUGH BY  R(I)*DELTHT**2
   !
-  DO i = 1 , M
+  DO i = 1, M
     j = iwr + i
     a1 = dlthsq*W(j)
     W(i) = a1*W(i)
@@ -571,7 +571,7 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     W(j) = a1*W(j)
     j = iwb + i
     W(j) = a1*W(j)
-    DO j = 1 , N
+    DO j = 1, N
       F(i,j) = a1*F(i,j)
     ENDDO
   ENDDO
@@ -590,7 +590,7 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   IF ( isw==2.AND.jsw==2 ) THEN
     IF ( mb/=8 ) THEN
       a1 = 0.
-      DO j = 1 , N
+      DO j = 1, N
         a1 = a1 + F(1,j)
       ENDDO
       a1 = (a1-dlrsq*a2/16.)/N
@@ -598,15 +598,15 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
       a1 = Bda(1) - a1
     ELSE
       a1 = 0.
-      DO j = 1 , N
+      DO j = 1, N
         a1 = a1 + F(M,j)
       ENDDO
       a1 = (a1-dlrsq*a3/16.)/N
       IF ( Nbdcnd==3 ) a1 = a1 + (Bdd(M)-Bdc(M))/(D-C)
       a1 = Bdb(1) - a1
     ENDIF
-    DO i = 1 , M
-      DO j = 1 , N
+    DO i = 1, M
+      DO j = 1, N
         F(i,j) = F(i,j) + a1
       ENDDO
     ENDDO

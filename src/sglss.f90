@@ -4,9 +4,9 @@ SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   IMPLICIT NONE
   !*--SGLSS5
   !*** Start of declarations inserted by SPAG
-  REAL A , ae , B , re , Rnorm , Work
-  INTEGER Info , key , krank , ksure , Liw , Lw , M , Mda , Mdb , mode , N , &
-    Nb , np
+  REAL A, ae, B, re, Rnorm, Work
+  INTEGER Info, key, krank, ksure, Liw, Lw, M, Mda, Mdb, mode, N, &
+    Nb, np
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SGLSS
   !***PURPOSE  Solve a linear least squares problems by performing a QR
@@ -124,7 +124,7 @@ SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SGLSS
-  DIMENSION A(Mda,*) , B(Mdb,*) , Rnorm(*) , Work(*)
+  DIMENSION A(Mda,*), B(Mdb,*), Rnorm(*), Work(*)
   INTEGER Iwork(*)
   !
   !***FIRST EXECUTABLE STATEMENT  SGLSS
@@ -149,4 +149,5 @@ SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   IF ( Info==-1 ) RETURN
   Info = N - krank
   RETURN
-  99999 END SUBROUTINE SGLSS
+  99999 CONTINUE
+  END SUBROUTINE SGLSS

@@ -77,8 +77,8 @@ SUBROUTINE BAKVEC(Nm,N,T,E,M,Z,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BAKVEC
   !
-  INTEGER i , j , M , N , Nm , Ierr
-  REAL T(Nm,3) , E(*) , Z(Nm,*)
+  INTEGER i, j, M, N, Nm, Ierr
+  REAL T(Nm,3), E(*), Z(Nm,*)
   !
   !***FIRST EXECUTABLE STATEMENT  BAKVEC
   Ierr = 0
@@ -86,7 +86,7 @@ SUBROUTINE BAKVEC(Nm,N,T,E,M,Z,Ierr)
     E(1) = 1.0E0
     IF ( N/=1 ) THEN
       !
-      DO i = 2 , N
+      DO i = 2, N
         IF ( E(i)/=0.0E0 ) THEN
           E(i) = E(i-1)*E(i)/T(i-1,3)
         ELSE
@@ -95,9 +95,9 @@ SUBROUTINE BAKVEC(Nm,N,T,E,M,Z,Ierr)
         ENDIF
       ENDDO
       !
-      DO j = 1 , M
+      DO j = 1, M
         !
-        DO i = 2 , N
+        DO i = 2, N
           Z(i,j) = Z(i,j)*E(i)
         ENDDO
         !
@@ -108,4 +108,5 @@ SUBROUTINE BAKVEC(Nm,N,T,E,M,Z,Ierr)
     !                FOUND BY THIS PROGRAM ..........
     50     Ierr = 2*N + i
   ENDIF
-  99999 END SUBROUTINE BAKVEC
+  99999 CONTINUE
+  END SUBROUTINE BAKVEC

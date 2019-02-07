@@ -12,7 +12,7 @@ REAL FUNCTION T3(X)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  T3
-  REAL a , b , F3S , X , x1 , y
+  REAL a, b, F3S, X, x1, y
   !***FIRST EXECUTABLE STATEMENT  T3
   a = 0.0E+00
   b = 0.5E+01

@@ -76,16 +76,16 @@ SUBROUTINE FIGI2(Nm,N,T,D,E,Z,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  FIGI2
   !
-  INTEGER i , j , N , Nm , Ierr
-  REAL T(Nm,3) , D(*) , E(*) , Z(Nm,*)
+  INTEGER i, j, N, Nm, Ierr
+  REAL T(Nm,3), D(*), E(*), Z(Nm,*)
   REAL h
   !
   !***FIRST EXECUTABLE STATEMENT  FIGI2
   Ierr = 0
   !
-  DO i = 1 , N
+  DO i = 1, N
     !
-    DO j = 1 , N
+    DO j = 1, N
       Z(i,j) = 0.0E0
     ENDDO
     !
@@ -114,4 +114,5 @@ SUBROUTINE FIGI2(Nm,N,T,D,E,Z,Ierr)
   !     .......... SET ERROR -- PRODUCT OF SOME PAIR OF OFF-DIAGONAL
   !                ELEMENTS IS ZERO WITH ONE MEMBER NON-ZERO ..........
   200  Ierr = 2*N + i
-  99999 END SUBROUTINE FIGI2
+  99999 CONTINUE
+  END SUBROUTINE FIGI2

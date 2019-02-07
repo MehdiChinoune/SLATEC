@@ -13,18 +13,18 @@ SUBROUTINE DFZTST(Lun,Kprint,Ipass)
   !   920212  DATE WRITTEN
   !***END PROLOGUE  DFZTST
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
-  INTEGER iflag , kontrl
-  REAL(8) :: ae , b , c , pi , r , re , tol
+  INTEGER iflag, kontrl
+  REAL(8) :: ae, b, c, pi, r, re, tol
   LOGICAL fatal
   !     .. External Functions ..
   REAL(8) :: D1MACH
   EXTERNAL D1MACH
   !     .. External Subroutines ..
-  EXTERNAL DFZERO , XERCLR , XGETF , XSETF
+  EXTERNAL DFZERO, XERCLR, XGETF, XSETF
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , ATAN , DSIN , DTAN , MAX , SQRT
+  INTRINSIC ABS, ATAN, DSIN, DTAN, MAX, SQRT
   !***FIRST EXECUTABLE STATEMENT  DFZTST
   IF ( Kprint>=2 ) WRITE (Lun,99001)
   99001 FORMAT ('1'/' DFZERO QUICK CHECK')
@@ -44,10 +44,10 @@ SUBROUTINE DFZTST(Lun,Kprint,Ipass)
   !     See if test was passed.
   !
   IF ( ABS(b-pi)<=tol.AND.ABS(c-pi)<=tol ) THEN
-    IF ( Kprint>=3 ) WRITE (Lun,99007) 'PASSED' , b , c , iflag
+    IF ( Kprint>=3 ) WRITE (Lun,99007) 'PASSED', b, c, iflag
   ELSE
     Ipass = 0
-    IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED' , b , c , iflag
+    IF ( Kprint>=2 ) WRITE (Lun,99007) 'FAILED', b, c, iflag
   ENDIF
   !
   !     Trigger 2 error conditions
@@ -73,7 +73,7 @@ SUBROUTINE DFZTST(Lun,Kprint,Ipass)
   IF ( iflag/=3 ) THEN
     Ipass = 0
     fatal = .TRUE.
-    IF ( Kprint>=2 ) WRITE (Lun,99008) iflag , 2
+    IF ( Kprint>=2 ) WRITE (Lun,99008) iflag, 2
   ENDIF
   !
   !     IFLAG=4 (No sign change)
@@ -85,7 +85,7 @@ SUBROUTINE DFZTST(Lun,Kprint,Ipass)
   IF ( iflag/=4 ) THEN
     Ipass = 0
     fatal = .TRUE.
-    IF ( Kprint>=2 ) WRITE (Lun,99008) iflag , 4
+    IF ( Kprint>=2 ) WRITE (Lun,99008) iflag, 4
   ENDIF
   !
   CALL XERCLR

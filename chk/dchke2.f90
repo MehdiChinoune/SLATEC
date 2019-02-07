@@ -24,18 +24,18 @@ SUBROUTINE DCHKE2(Isnum,Srnamt,Nout,Kprint,Fatal)
   !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  DCHKE2
   !     .. Scalar Arguments ..
-  INTEGER Isnum , Nout
+  INTEGER Isnum, Nout
   LOGICAL Fatal
   CHARACTER(6) :: Srnamt
-  INTEGER infot , Kprint
+  INTEGER infot, Kprint
   !     .. Local Scalars ..
-  REAL(8) :: alpha , beta
+  REAL(8) :: alpha, beta
   INTEGER kontrl
   !     .. Local Arrays ..
-  REAL(8) :: a(1,1) , x(1) , y(1)
+  REAL(8) :: a(1,1), x(1), y(1)
   !     .. External Subroutines ..
-  EXTERNAL CHKXER , DGBMV , DGEMV , DGER , DSBMV , DSPMV , DSPR , DSPR2 ,&
-    DSYMV , DSYR , DSYR2 , DTBMV , DTBSV , DTPMV , DTPSV , DTRMV ,&
+  EXTERNAL CHKXER, DGBMV, DGEMV, DGER, DSBMV, DSPMV, DSPR, DSPR2 ,&
+    DSYMV, DSYR, DSYR2, DTBMV, DTBSV, DTPMV, DTPSV, DTRMV ,&
     DTRSV
   !***FIRST EXECUTABLE STATEMENT  DCHKE2
   CALL XGETF(kontrl)

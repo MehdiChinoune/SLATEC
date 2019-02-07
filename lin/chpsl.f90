@@ -62,11 +62,11 @@ SUBROUTINE CHPSL(Ap,N,Kpvt,B)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CHPSL
-  INTEGER N , Kpvt(*)
-  COMPLEX Ap(*) , B(*)
+  INTEGER N, Kpvt(*)
+  COMPLEX Ap(*), B(*)
   !
-  COMPLEX ak , akm1 , bk , bkm1 , CDOTC , denom , temp
-  INTEGER ik , ikm1 , ikp1 , k , kk , km1k , km1km1 , kp
+  COMPLEX ak, akm1, bk, bkm1, CDOTC, denom, temp
+  INTEGER ik, ikm1, ikp1, k, kk, km1k, km1km1, kp
   !
   !     LOOP BACKWARD APPLYING THE TRANSFORMATIONS AND
   !     D INVERSE TO B.

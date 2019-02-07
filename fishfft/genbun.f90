@@ -4,11 +4,11 @@ SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   IMPLICIT NONE
   !*--GENBUN5
   !*** Start of declarations inserted by SPAG
-  REAL A , a1 , B , C , W , Y
-  INTEGER i , Idimy , Ierror , ipstor , irev , iwb2 , iwb3 , iwba , iwbb , &
-    iwbc , iwd , iwp , iwtcos , iww1 , iww2 , iww3 , j , k , M , mh
-  INTEGER mhm1 , mhmi , mhpi , modd , mp , mp1 , Mperod , mskip , N , nby2 , &
-    np , Nperod
+  REAL A, a1, B, C, W, Y
+  INTEGER i, Idimy, Ierror, ipstor, irev, iwb2, iwb3, iwba, iwbb, &
+    iwbc, iwd, iwp, iwtcos, iww1, iww2, iww3, j, k, M, mh
+  INTEGER mhm1, mhmi, mhpi, modd, mp, mp1, Mperod, mskip, N, nby2, &
+    np, Nperod
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  GENBUN
   !***PURPOSE  Solve by a cyclic reduction algorithm the linear system
@@ -237,7 +237,7 @@ SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !
   !
   DIMENSION Y(Idimy,*)
-  DIMENSION W(*) , B(*) , A(*) , C(*)
+  DIMENSION W(*), B(*), A(*), C(*)
   !***FIRST EXECUTABLE STATEMENT  GENBUN
   Ierror = 0
   IF ( M<=2 ) Ierror = 1
@@ -248,7 +248,7 @@ SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   IF ( Mperod==1 ) THEN
     IF ( A(1)/=0..OR.C(M)/=0. ) Ierror = 7
   ELSE
-    DO i = 2 , M
+    DO i = 2, M
       IF ( A(i)/=C(1) ) GOTO 100
       IF ( C(i)/=C(1) ) GOTO 100
       IF ( B(i)/=B(1) ) GOTO 100
@@ -256,7 +256,8 @@ SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   ENDIF
   GOTO 200
   100  Ierror = 6
-  200  IF ( Ierror/=0 ) RETURN
+  200 CONTINUE
+  IF ( Ierror/=0 ) RETURN
   mp1 = M + 1
   iwba = mp1
   iwbb = iwba + M
@@ -269,14 +270,14 @@ SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   iwd = iww3 + M
   iwtcos = iwd + M
   iwp = iwtcos + 4*N
-  DO i = 1 , M
+  DO i = 1, M
     k = iwba + i - 1
     W(k) = -A(i)
     k = iwbc + i - 1
     W(k) = -C(i)
     k = iwbb + i - 1
     W(k) = 2. - B(i)
-    DO j = 1 , N
+    DO j = 1, N
       Y(i,j) = -Y(i,j)
     ENDDO
   ENDDO
@@ -307,7 +308,8 @@ END SELECT
 400  ipstor = W(iww1)
 irev = 2
 IF ( Nperod==4 ) GOTO 700
-500  IF ( mp==1 ) GOTO 800
+500 CONTINUE
+IF ( mp==1 ) GOTO 800
 IF ( mp==2 ) GOTO 900
 !
 !     REORDER UNKNOWNS WHEN MP =0
@@ -316,8 +318,8 @@ IF ( mp==2 ) GOTO 900
 mhm1 = mh - 1
 modd = 1
 IF ( mh*2==M ) modd = 2
-DO j = 1 , N
-DO i = 1 , mhm1
+DO j = 1, N
+DO i = 1, mhm1
   mhpi = mh + i
   mhmi = mh - i
   W(i) = Y(mhmi,j) - Y(mhpi,j)
@@ -325,7 +327,7 @@ DO i = 1 , mhm1
 ENDDO
 W(mh) = 2.*Y(mh,j)
 IF ( modd/=1 ) W(M) = 2.*Y(M,j)
-DO i = 1 , M
+DO i = 1, M
   Y(i,j) = W(i)
 ENDDO
 ENDDO
@@ -342,32 +344,34 @@ W(k) = W(k) - W(i-1)
 W(iwbc-1) = W(iwbc-1) + W(iwbb-1)
 ENDIF
 GOTO 300
-700  DO j = 1 , nby2
+700 CONTINUE
+DO j = 1, nby2
 mskip = N + 1 - j
-DO i = 1 , M
-a1 = Y(i,j)
-Y(i,j) = Y(i,mskip)
-Y(i,mskip) = a1
+DO i = 1, M
+  a1 = Y(i,j)
+  Y(i,j) = Y(i,mskip)
+  Y(i,mskip) = a1
 ENDDO
 ENDDO
 IF ( irev==1 ) THEN
 CALL POISN2(M,N,1,2,W(iwba),W(iwbb),W(iwbc),Y,Idimy,W,W(iwb2),W(iwb3),&
-W(iww1),W(iww2),W(iww3),W(iwd),W(iwtcos),W(iwp))
+  W(iww1),W(iww2),W(iww3),W(iwd),W(iwtcos),W(iwp))
 GOTO 400
 ELSEIF ( irev==2 ) THEN
 GOTO 500
 ENDIF
-800  DO j = 1 , N
-DO i = 1 , mhm1
-mhmi = mh - i
-mhpi = mh + i
-W(mhmi) = .5*(Y(mhpi,j)+Y(i,j))
-W(mhpi) = .5*(Y(mhpi,j)-Y(i,j))
+800 CONTINUE
+DO j = 1, N
+DO i = 1, mhm1
+  mhmi = mh - i
+  mhpi = mh + i
+  W(mhmi) = .5*(Y(mhpi,j)+Y(i,j))
+  W(mhpi) = .5*(Y(mhpi,j)-Y(i,j))
 ENDDO
 W(mh) = .5*Y(mh,j)
 IF ( modd/=1 ) W(M) = .5*Y(M,j)
-DO i = 1 , M
-Y(i,j) = W(i)
+DO i = 1, M
+  Y(i,j) = W(i)
 ENDDO
 ENDDO
 !

@@ -20,10 +20,10 @@ SUBROUTINE QCDRF(Lun,Kprint,Ipass)
   !   910708  Minor modifications in use of KPRINT.  (WRB)
   !   930214  Added more digits to ALEM.  (WRB)
   !***END PROLOGUE  QCDRF
-  INTEGER Kprint , Ipass , contrl , kontrl , Lun , ier
-  INTEGER ipass1 , ipass2 , ipass3 , ipass4 , NUMXER
-  REAL(8) :: alem , trf , DRF , dif , D1MACH
-  EXTERNAL D1MACH , DRF , NUMXER , XERCLR , XGETF , XSETF
+  INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
+  INTEGER ipass1, ipass2, ipass3, ipass4, NUMXER
+  REAL(8) :: alem, trf, DRF, dif, D1MACH
+  EXTERNAL D1MACH, DRF, NUMXER, XERCLR, XGETF, XSETF
   !***FIRST EXECUTABLE STATEMENT  QCDRF
   CALL XERCLR
   CALL XGETF(contrl)
@@ -94,7 +94,7 @@ SUBROUTINE QCDRF(Lun,Kprint,Ipass)
     99004   FORMAT (' DRF - PASSED')
   ELSE
     WRITE (Lun,99006)
-    IF ( ipass4==0 ) WRITE (Lun,99005) alem , trf , dif
+    IF ( ipass4==0 ) WRITE (Lun,99005) alem, trf, dif
     99005   FORMAT (' CORRECT ANSWER =',1PD20.14/'COMPUTED ANSWER =',&
       D20.14/'     DIFFERENCE =',D20.14)
   ENDIF

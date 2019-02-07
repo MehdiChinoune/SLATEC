@@ -4,9 +4,9 @@ FUNCTION POCH(A,X)
   IMPLICIT NONE
   !*--POCH5
   !*** Start of declarations inserted by SPAG
-  REAL A , absa , absax , alnga , alngax , ALNREL , ax , b , COT , FAC , &
-    GAMMA , GAMR , pi , POCH , R9LGMC , sgnga , sgngax , X
-  INTEGER i , n
+  REAL A, absa, absax, alnga, alngax, ALNREL, ax, b, COT, FAC, &
+    GAMMA, GAMR, pi, POCH, R9LGMC, sgnga, sgngax, X
+  INTEGER i, n
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POCH
   !***PURPOSE  Evaluate a generalization of Pochhammer's symbol.
@@ -91,7 +91,7 @@ FUNCTION POCH(A,X)
     !
     POCH = 1.0
     IF ( n==0 ) RETURN
-    DO i = 1 , n
+    DO i = 1, n
       POCH = POCH*(A+i-1)
     ENDDO
     RETURN
@@ -108,4 +108,5 @@ FUNCTION POCH(A,X)
   IF ( A<0.0.AND.POCH/=0.0 ) POCH = POCH/(COS(pi*X)+COT(pi*A)*SIN(pi*X))
   RETURN
   !
-  99999 END FUNCTION POCH
+  99999 CONTINUE
+  END FUNCTION POCH

@@ -31,13 +31,13 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DVECS
   !
-  INTEGER ICOco , idp , Iflag , INDpvt , Inhomo , INTeg , Iwork(*) , k , &
-    kp , Lnfc , LNFcc , MXNon , Ncomp , NDIsk , NEQ , NEQivp , NIC , &
-    niv , NOPg , NPS , NTApe , NTP , NUMort , NXPts
-  REAL(8) :: AE , dum , RE , TOL , Work(*) , Yhp(Ncomp,*)
-  COMMON /DML18J/ AE , RE , TOL , NXPts , NIC , NOPg , MXNon , NDIsk , &
-    NTApe , NEQ , INDpvt , INTeg , NPS , NTP , NEQivp , &
-    NUMort , LNFcc , ICOco
+  INTEGER ICOco, idp, Iflag, INDpvt, Inhomo, INTeg, Iwork(*), k, &
+    kp, Lnfc, LNFcc, MXNon, Ncomp, NDIsk, NEQ, NEQivp, NIC, &
+    niv, NOPg, NPS, NTApe, NTP, NUMort, NXPts
+  REAL(8) :: AE, dum, RE, TOL, Work(*), Yhp(Ncomp,*)
+  COMMON /DML18J/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
+    NUMort, LNFcc, ICOco
   !***FIRST EXECUTABLE STATEMENT  DVECS
   IF ( Lnfc/=1 ) THEN
     niv = Lnfc
@@ -54,13 +54,13 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
     IF ( Iflag/=0.OR.niv/=Lnfc ) THEN
       Iflag = 99
     ELSE
-      DO k = 1 , Ncomp
+      DO k = 1, Ncomp
         Yhp(k,Lnfc+1) = Yhp(k,LNFcc+1)
       ENDDO
       Iflag = 1
     ENDIF
   ELSE
-    DO k = 1 , Ncomp
+    DO k = 1, Ncomp
       Yhp(k,Lnfc+1) = Yhp(k,LNFcc+1)
     ENDDO
     Iflag = 1

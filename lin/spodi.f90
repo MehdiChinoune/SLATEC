@@ -38,9 +38,9 @@ SUBROUTINE SPODI(A,Lda,N,Det,Job)
   !
   !     On Return
   !
-  !        A       If SPOCO or SPOFA was used to factor  A , then
+  !        A       If SPOCO or SPOFA was used to factor  A, then
   !                SPODI produces the upper half of INVERSE(A) .
-  !                If SQRDC was used to decompose  X , then
+  !                If SQRDC was used to decompose  X, then
   !                SPODI produces the upper half of INVERSE(TRANS(X)*X),
   !                where TRANS(X) is the transpose.
   !                Elements of  A  below the diagonal are unchanged.
@@ -72,13 +72,13 @@ SUBROUTINE SPODI(A,Lda,N,Det,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SPODI
-  INTEGER Lda , N , Job
+  INTEGER Lda, N, Job
   REAL A(Lda,*)
   REAL Det(2)
   !
   REAL t
   REAL s
-  INTEGER i , j , jm1 , k , kp1
+  INTEGER i, j, jm1, k, kp1
   !***FIRST EXECUTABLE STATEMENT  SPODI
   !
   !     COMPUTE DETERMINANT
@@ -87,7 +87,7 @@ SUBROUTINE SPODI(A,Lda,N,Det,Job)
     Det(1) = 1.0E0
     Det(2) = 0.0E0
     s = 10.0E0
-    DO i = 1 , N
+    DO i = 1, N
       Det(1) = A(i,i)**2*Det(1)
       IF ( Det(1)==0.0E0 ) EXIT
       DO WHILE ( Det(1)<1.0E0 )
@@ -104,13 +104,13 @@ SUBROUTINE SPODI(A,Lda,N,Det,Job)
   !     COMPUTE INVERSE(R)
   !
   IF ( MOD(Job,10)/=0 ) THEN
-    DO k = 1 , N
+    DO k = 1, N
       A(k,k) = 1.0E0/A(k,k)
       t = -A(k,k)
       CALL SSCAL(k-1,t,A(1,k),1)
       kp1 = k + 1
       IF ( N>=kp1 ) THEN
-        DO j = kp1 , N
+        DO j = kp1, N
           t = A(k,j)
           A(k,j) = 0.0E0
           CALL SAXPY(k,t,A(1,k),1,A(1,j),1)
@@ -120,10 +120,10 @@ SUBROUTINE SPODI(A,Lda,N,Det,Job)
     !
     !        FORM  INVERSE(R) * TRANS(INVERSE(R))
     !
-    DO j = 1 , N
+    DO j = 1, N
       jm1 = j - 1
       IF ( jm1>=1 ) THEN
-        DO k = 1 , jm1
+        DO k = 1, jm1
           t = A(k,j)
           CALL SAXPY(k,t,A(1,j),1,A(1,k),1)
         ENDDO

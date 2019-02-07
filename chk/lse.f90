@@ -23,12 +23,12 @@ LOGICAL FUNCTION LSE(Ri,Rj,Lr)
   !     .. Scalar Arguments ..
   INTEGER Lr
   !     .. Array Arguments ..
-  REAL Ri(*) , Rj(*)
+  REAL Ri(*), Rj(*)
   !     .. Local Scalars ..
   INTEGER i
   !***FIRST EXECUTABLE STATEMENT  LSE
   LSE = .TRUE.
-  DO i = 1 , Lr
+  DO i = 1, Lr
     IF ( Ri(i)/=Rj(i) ) THEN
       LSE = .FALSE.
       EXIT

@@ -4,11 +4,11 @@ SUBROUTINE QXCRT(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--QXCRT5
   !*** Start of declarations inserted by SPAG
-  REAL a , b , bda , bdb , bdc , bdd , c , d , dum , elmbda , ermax , err , &
-    f , pertrb , pi , piby2 , PIMACH , pisq , w , x
-  REAL y , z
-  INTEGER i , idimf , ierror , Ipass , j , Kprint , Lun , m , mbdcnd , mp1 , &
-    n , nbdcnd , np1
+  REAL a, b, bda, bdb, bdc, bdd, c, d, dum, elmbda, ermax, err, &
+    f, pertrb, pi, piby2, PIMACH, pisq, w, x
+  REAL y, z
+  INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
+    n, nbdcnd, np1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QXCRT
   !***PURPOSE
@@ -26,7 +26,7 @@ SUBROUTINE QXCRT(Lun,Kprint,Ipass)
   !     *                                                               *
   !     *      SEPARABLE ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS        *
   !     *                                                               *
-  !     *                  (VERSION  3 , JUNE 1979)                     *
+  !     *                  (VERSION  3, JUNE 1979)                     *
   !     *                                                               *
   !     *                             BY                                *
   !     *                                                               *
@@ -72,7 +72,7 @@ SUBROUTINE QXCRT(Lun,Kprint,Ipass)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
   !***END PROLOGUE  QXCRT
-  DIMENSION f(45,82) , bdb(81) , w(1200) , x(41) , y(81)
+  DIMENSION f(45,82), bdb(81), w(1200), x(41), y(81)
   !***FIRST EXECUTABLE STATEMENT  QXCRT
   !
   !     FROM DIMENSION STATEMENT WE GET VALUE OF IDIMF.  ALSO NOTE THAT W
@@ -101,29 +101,29 @@ SUBROUTINE QXCRT(Lun,Kprint,Ipass)
   !     GENERATE AND STORE GRID POINTS FOR THE PURPOSE OF COMPUTING
   !     BOUNDARY DATA AND THE RIGHT SIDE OF THE HELMHOLTZ EQUATION.
   !
-  DO i = 1 , mp1
+  DO i = 1, mp1
     x(i) = (i-1)/20.0E0
   ENDDO
-  DO j = 1 , np1
+  DO j = 1, np1
     y(j) = -1.0E0 + (j-1)/20.0E0
   ENDDO
   !
   !     GENERATE BOUNDARY DATA.
   !
-  DO j = 1 , np1
+  DO j = 1, np1
     bdb(j) = 4.*COS((y(j)+1.)*piby2)
   ENDDO
   !
   !     BDA, BDC, AND BDD ARE DUMMY VARIABLES.
   !
-  DO j = 1 , np1
+  DO j = 1, np1
     f(1,j) = 0.
   ENDDO
   !
   !     GENERATE RIGHT SIDE OF EQUATION.
   !
-  DO i = 2 , mp1
-    DO j = 1 , np1
+  DO i = 2, mp1
+    DO j = 1, np1
       f(i,j) = (2.-(4.+pisq/4.)*x(i)**2)*COS((y(j)+1.)*piby2)
     ENDDO
   ENDDO
@@ -134,8 +134,8 @@ SUBROUTINE QXCRT(Lun,Kprint,Ipass)
   !                U(X,Y) = X**2*COS((Y+1)*PIBY2)
   !
   err = 0.
-  DO i = 1 , mp1
-    DO j = 1 , np1
+  DO i = 1, mp1
+    DO j = 1, np1
       z = ABS(f(i,j)-x(i)**2*COS((y(j)+1.)*piby2))
       IF ( z>err ) err = z
     ENDDO
@@ -145,7 +145,7 @@ SUBROUTINE QXCRT(Lun,Kprint,Ipass)
   IF ( err>ermax ) Ipass = 0
   IF ( Kprint==0 ) RETURN
   IF ( Kprint>=2.OR.Ipass==0 ) THEN
-    WRITE (Lun,99001) ierror , err , INT(w(1))
+    WRITE (Lun,99001) ierror, err, INT(w(1))
     !
     99001   FORMAT ('1',20X,'SUBROUTINE HWSCRT EXAMPLE'///10X,&
       'THE OUTPUT FROM THE NCAR CONTROL DATA 7600 WAS'//32X,&

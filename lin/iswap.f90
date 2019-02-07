@@ -4,7 +4,7 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
   IMPLICIT NONE
   !*--ISWAP5
   !*** Start of declarations inserted by SPAG
-  INTEGER i , iix , iiy , Incx , Incy , m , mp1 , N , ns
+  INTEGER i, iix, iiy, Incx, Incy, m, mp1, N, ns
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ISWAP
   !***PURPOSE  Interchange two vectors.
@@ -46,7 +46,7 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  ISWAP
-  INTEGER Ix(*) , Iy(*) , itemp1 , itemp2 , itemp3
+  INTEGER Ix(*), Iy(*), itemp1, itemp2, itemp3
   !***FIRST EXECUTABLE STATEMENT  ISWAP
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy ) THEN
@@ -59,7 +59,7 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
       !
       m = MOD(N,3)
       IF ( m/=0 ) THEN
-        DO i = 1 , m
+        DO i = 1, m
           itemp1 = Ix(i)
           Ix(i) = Iy(i)
           Iy(i) = itemp1
@@ -72,7 +72,7 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
       !     Code for equal, positive, non-unit increments.
       !
       ns = N*Incx
-      DO i = 1 , ns , Incx
+      DO i = 1, ns, Incx
         itemp1 = Ix(i)
         Ix(i) = Iy(i)
         Iy(i) = itemp1
@@ -87,7 +87,7 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
   iiy = 1
   IF ( Incx<0 ) iix = (1-N)*Incx + 1
   IF ( Incy<0 ) iiy = (1-N)*Incy + 1
-  DO i = 1 , N
+  DO i = 1, N
     itemp1 = Ix(iix)
     Ix(iix) = Iy(iiy)
     Iy(iiy) = itemp1
@@ -96,7 +96,7 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
   ENDDO
   RETURN
   100  mp1 = m + 1
-  DO i = mp1 , N , 3
+  DO i = mp1, N, 3
     itemp1 = Ix(i)
     itemp2 = Ix(i+1)
     itemp3 = Ix(i+2)
@@ -108,4 +108,5 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
     Iy(i+2) = itemp3
   ENDDO
   RETURN
-  99999 END SUBROUTINE ISWAP
+  99999 CONTINUE
+  END SUBROUTINE ISWAP

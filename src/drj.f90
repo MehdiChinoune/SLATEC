@@ -299,15 +299,15 @@ REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DRJ
   INTEGER Ier
-  CHARACTER(16) :: xern3 , xern4 , xern5 , xern6 , xern7
-  REAL(8) :: alfa , beta , c1 , c2 , c3 , c4 , ea , eb , ec , e2 , e3
-  REAL(8) :: lolim , uplim , epslon , errtol , D1MACH
-  REAL(8) :: lamda , mu , P , pn , pndev
-  REAL(8) :: power4 , DRC , sigma , s1 , s2 , s3 , X , xn , xndev
-  REAL(8) :: xnroot , Y , yn , yndev , ynroot , Z , zn , zndev ,&
+  CHARACTER(16) :: xern3, xern4, xern5, xern6, xern7
+  REAL(8) :: alfa, beta, c1, c2, c3, c4, ea, eb, ec, e2, e3
+  REAL(8) :: lolim, uplim, epslon, errtol, D1MACH
+  REAL(8) :: lamda, mu, P, pn, pndev
+  REAL(8) :: power4, DRC, sigma, s1, s2, s3, X, xn, xndev
+  REAL(8) :: xnroot, Y, yn, yndev, ynroot, Z, zn, zndev ,&
     znroot
   LOGICAL first
-  SAVE errtol , lolim , uplim , c1 , c2 , c3 , c4 , first
+  SAVE errtol, lolim, uplim, c1, c2, c3, c4, first
   DATA first/.TRUE./
   !
   !***FIRST EXECUTABLE STATEMENT  DRJ

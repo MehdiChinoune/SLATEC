@@ -133,21 +133,21 @@ SUBROUTINE CGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  CGEMM
   !     .. Scalar Arguments ..
-  CHARACTER :: Transa , Transb
-  INTEGER M , N , K , Lda , Ldb , Ldc
-  COMPLEX Alpha , Beta
+  CHARACTER :: Transa, Transb
+  INTEGER M, N, K, Lda, Ldb, Ldc
+  COMPLEX Alpha, Beta
   !     .. Array Arguments ..
-  COMPLEX A(Lda,*) , B(Ldb,*) , C(Ldc,*)
+  COMPLEX A(Lda,*), B(Ldb,*), C(Ldc,*)
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
   !     .. External Subroutines ..
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
-  INTRINSIC CONJG , MAX
+  INTRINSIC CONJG, MAX
   !     .. Local Scalars ..
-  LOGICAL conja , conjb , nota , notb
-  INTEGER i , info , j , l , ncola , nrowa , nrowb
+  LOGICAL conja, conjb, nota, notb
+  INTEGER i, info, j, l, ncola, nrowa, nrowb
   COMPLEX temp
   !     .. Parameters ..
   COMPLEX ONE
@@ -213,14 +213,14 @@ SUBROUTINE CGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !
   IF ( Alpha==ZERO ) THEN
     IF ( Beta==ZERO ) THEN
-      DO j = 1 , N
-        DO i = 1 , M
+      DO j = 1, N
+        DO i = 1, M
           C(i,j) = ZERO
         ENDDO
       ENDDO
     ELSE
-      DO j = 1 , N
-        DO i = 1 , M
+      DO j = 1, N
+        DO i = 1, M
           C(i,j) = Beta*C(i,j)
         ENDDO
       ENDDO
@@ -235,20 +235,20 @@ SUBROUTINE CGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
       !
       !           Form  C := alpha*A*B + beta*C.
       !
-      DO j = 1 , N
+      DO j = 1, N
         IF ( Beta==ZERO ) THEN
-          DO i = 1 , M
+          DO i = 1, M
             C(i,j) = ZERO
           ENDDO
         ELSEIF ( Beta/=ONE ) THEN
-          DO i = 1 , M
+          DO i = 1, M
             C(i,j) = Beta*C(i,j)
           ENDDO
         ENDIF
-        DO l = 1 , K
+        DO l = 1, K
           IF ( B(l,j)/=ZERO ) THEN
             temp = Alpha*B(l,j)
-            DO i = 1 , M
+            DO i = 1, M
               C(i,j) = C(i,j) + temp*A(i,l)
             ENDDO
           ENDIF
@@ -258,10 +258,10 @@ SUBROUTINE CGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
       !
       !           Form  C := alpha*conjg( A' )*B + beta*C.
       !
-      DO j = 1 , N
-        DO i = 1 , M
+      DO j = 1, N
+        DO i = 1, M
           temp = ZERO
-          DO l = 1 , K
+          DO l = 1, K
             temp = temp + CONJG(A(l,i))*B(l,j)
           ENDDO
           IF ( Beta==ZERO ) THEN
@@ -275,10 +275,10 @@ SUBROUTINE CGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
       !
       !           Form  C := alpha*A'*B + beta*C
       !
-      DO j = 1 , N
-        DO i = 1 , M
+      DO j = 1, N
+        DO i = 1, M
           temp = ZERO
-          DO l = 1 , K
+          DO l = 1, K
             temp = temp + A(l,i)*B(l,j)
           ENDDO
           IF ( Beta==ZERO ) THEN
@@ -294,20 +294,20 @@ SUBROUTINE CGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
       !
       !           Form  C := alpha*A*conjg( B' ) + beta*C.
       !
-      DO j = 1 , N
+      DO j = 1, N
         IF ( Beta==ZERO ) THEN
-          DO i = 1 , M
+          DO i = 1, M
             C(i,j) = ZERO
           ENDDO
         ELSEIF ( Beta/=ONE ) THEN
-          DO i = 1 , M
+          DO i = 1, M
             C(i,j) = Beta*C(i,j)
           ENDDO
         ENDIF
-        DO l = 1 , K
+        DO l = 1, K
           IF ( B(j,l)/=ZERO ) THEN
             temp = Alpha*CONJG(B(j,l))
-            DO i = 1 , M
+            DO i = 1, M
               C(i,j) = C(i,j) + temp*A(i,l)
             ENDDO
           ENDIF
@@ -317,20 +317,20 @@ SUBROUTINE CGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
       !
       !           Form  C := alpha*A*B'          + beta*C
       !
-      DO j = 1 , N
+      DO j = 1, N
         IF ( Beta==ZERO ) THEN
-          DO i = 1 , M
+          DO i = 1, M
             C(i,j) = ZERO
           ENDDO
         ELSEIF ( Beta/=ONE ) THEN
-          DO i = 1 , M
+          DO i = 1, M
             C(i,j) = Beta*C(i,j)
           ENDDO
         ENDIF
-        DO l = 1 , K
+        DO l = 1, K
           IF ( B(j,l)/=ZERO ) THEN
             temp = Alpha*B(j,l)
-            DO i = 1 , M
+            DO i = 1, M
               C(i,j) = C(i,j) + temp*A(i,l)
             ENDDO
           ENDIF
@@ -342,10 +342,10 @@ SUBROUTINE CGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
       !
       !           Form  C := alpha*conjg( A' )*conjg( B' ) + beta*C.
       !
-      DO j = 1 , N
-        DO i = 1 , M
+      DO j = 1, N
+        DO i = 1, M
           temp = ZERO
-          DO l = 1 , K
+          DO l = 1, K
             temp = temp + CONJG(A(l,i))*CONJG(B(j,l))
           ENDDO
           IF ( Beta==ZERO ) THEN
@@ -359,10 +359,10 @@ SUBROUTINE CGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
       !
       !           Form  C := alpha*conjg( A' )*B' + beta*C
       !
-      DO j = 1 , N
-        DO i = 1 , M
+      DO j = 1, N
+        DO i = 1, M
           temp = ZERO
-          DO l = 1 , K
+          DO l = 1, K
             temp = temp + CONJG(A(l,i))*B(j,l)
           ENDDO
           IF ( Beta==ZERO ) THEN
@@ -377,10 +377,10 @@ SUBROUTINE CGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     !
     !           Form  C := alpha*A'*conjg( B' ) + beta*C
     !
-    DO j = 1 , N
-      DO i = 1 , M
+    DO j = 1, N
+      DO i = 1, M
         temp = ZERO
-        DO l = 1 , K
+        DO l = 1, K
           temp = temp + A(l,i)*CONJG(B(j,l))
         ENDDO
         IF ( Beta==ZERO ) THEN
@@ -394,10 +394,10 @@ SUBROUTINE CGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
     !
     !           Form  C := alpha*A'*B' + beta*C
     !
-    DO j = 1 , N
-      DO i = 1 , M
+    DO j = 1, N
+      DO i = 1, M
         temp = ZERO
-        DO l = 1 , K
+        DO l = 1, K
           temp = temp + A(l,i)*B(j,l)
         ENDDO
         IF ( Beta==ZERO ) THEN

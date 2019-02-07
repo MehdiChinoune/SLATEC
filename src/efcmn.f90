@@ -29,16 +29,16 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !***END PROLOGUE  EFCMN
-  INTEGER Lw , Mdein , Mdeout , Mdg , Mdw , Nbkpt , Ndata , Nord
-  REAL Bf(Nord,*) , Bkpt(*) , Bkptin(*) , Coeff(*) , G(Mdg,*) , Ptemp(*) ,&
-    Sddata(*) , W(Mdw,*) , Xdata(*) , Xtemp(*) , Ydata(*)
+  INTEGER Lw, Mdein, Mdeout, Mdg, Mdw, Nbkpt, Ndata, Nord
+  REAL Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), Ptemp(*) ,&
+    Sddata(*), W(Mdw,*), Xdata(*), Xtemp(*), Ydata(*)
   !
-  EXTERNAL BNDACC , BNDSOL , BSPLVN , SCOPY , SSCAL , SSORT , XERMSG
+  EXTERNAL BNDACC, BNDSOL, BSPLVN, SCOPY, SSCAL, SSORT, XERMSG
   !
-  REAL dummy , rnorm , xmax , xmin , xval
-  INTEGER i , idata , ileft , intseq , ip , ir , irow , l , mt , n , nb ,&
-    nordm1 , nordp1 , np1
-  CHARACTER(8) :: xern1 , xern2
+  REAL dummy, rnorm, xmax, xmin, xval
+  INTEGER i, idata, ileft, intseq, ip, ir, irow, l, mt, n, nb ,&
+    nordm1, nordp1, np1
+  CHARACTER(8) :: xern1, xern2
   !
   !***FIRST EXECUTABLE STATEMENT  EFCMN
   !
@@ -107,7 +107,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !     Sort data and an array of pointers.
   !
   CALL SCOPY(Ndata,Xdata,1,Xtemp,1)
-  DO i = 1 , Ndata
+  DO i = 1, Ndata
     Ptemp(i) = i
   ENDDO
   !
@@ -120,11 +120,11 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !     Fix breakpoint array if needed. This should only involve very
   !     minor differences with the input array of breakpoints.
   !
-  DO i = 1 , Nord
+  DO i = 1, Nord
     Bkpt(i) = MIN(Bkpt(i),xmin)
   ENDDO
   !
-  DO i = np1 , Nbkpt
+  DO i = np1, Nbkpt
     Bkpt(i) = MAX(Bkpt(i),xmax)
   ENDDO
   !
@@ -135,7 +135,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   ir = 1
   ileft = Nord
   intseq = 1
-  DO idata = 1 , Ndata
+  DO idata = 1, Ndata
     !
     !        Sorted indices are in PTEMP(*).
     !
@@ -150,7 +150,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
       !
       !           Move pointer up to have BKPT(ILEFT).LE.XVAL, ILEFT.LE.N.
       !
-      DO ileft = ileft , n
+      DO ileft = ileft, n
         IF ( xval<Bkpt(ileft+1) ) EXIT
         IF ( Mdein==2 ) THEN
           !
@@ -196,7 +196,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !     to G(*,*).
   !
   IF ( Mdein==2 ) THEN
-    DO i = intseq , np1
+    DO i = intseq, np1
       CALL SCOPY(nordp1,W(i,1),Mdw,G(ir,1),Mdg)
       CALL BNDACC(G,Mdg,Nord,ip,ir,1,MIN(n,i))
     ENDDO
@@ -210,13 +210,13 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !     Transfer accumulated rows from G(*,*) to W(*,*) for
   !     possible later sequential accumulation.
   !
-  DO i = 1 , np1
+  DO i = 1, np1
     CALL SCOPY(nordp1,G(i,1),Mdg,W(i,1),Mdw)
   ENDDO
   !
   !     Solve for coefficients when possible.
   !
-  DO i = 1 , n
+  DO i = 1, n
     IF ( G(i,1)==0.E0 ) THEN
       Mdeout = 2
       RETURN

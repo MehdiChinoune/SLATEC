@@ -161,31 +161,31 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
   !   930701  Updated CATEGORY section.  (FNF, WRB)
   !***END PROLOGUE  SSILUS
   !     .. Scalar Arguments ..
-  INTEGER Isym , N , Nelt , Nl , Nu
+  INTEGER Isym, N, Nelt, Nl, Nu
   !     .. Array Arguments ..
-  REAL A(Nelt) , Dinv(N) , L(Nl) , U(Nu)
-  INTEGER Ia(Nelt) , Il(Nl) , Iu(Nu) , Ja(Nelt) , Jl(Nl) , Ju(Nu) , Ncol(N)&
+  REAL A(Nelt), Dinv(N), L(Nl), U(Nu)
+  INTEGER Ia(Nelt), Il(Nl), Iu(Nu), Ja(Nelt), Jl(Nl), Ju(Nu), Ncol(N)&
     , Nrow(N)
   !     .. Local Scalars ..
   REAL temp
-  INTEGER i , ibgn , icol , iend , indx , indx1 , indx2 , indxc1 , indxc2 , &
-    indxr1 , indxr2 , irow , itemp , j , jbgn , jend , jtemp , k , &
-    kc , kr
+  INTEGER i, ibgn, icol, iend, indx, indx1, indx2, indxc1, indxc2, &
+    indxr1, indxr2, irow, itemp, j, jbgn, jend, jtemp, k, &
+    kc, kr
   !***FIRST EXECUTABLE STATEMENT  SSILUS
   !
   !         Count number of elements in each row of the lower triangle.
   !
-  DO i = 1 , N
+  DO i = 1, N
     Nrow(i) = 0
     Ncol(i) = 0
   ENDDO
   !VD$R NOCONCUR
   !VD$R NOVECTOR
-  DO icol = 1 , N
+  DO icol = 1, N
     jbgn = Ja(icol) + 1
     jend = Ja(icol+1) - 1
     IF ( jbgn<=jend ) THEN
-      DO j = jbgn , jend
+      DO j = jbgn, jend
         IF ( Ia(j)<icol ) THEN
           Ncol(icol) = Ncol(icol) + 1
         ELSE
@@ -197,7 +197,7 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
   ENDDO
   Ju(1) = 1
   Il(1) = 1
-  DO icol = 1 , N
+  DO icol = 1, N
     Il(icol+1) = Il(icol) + Nrow(icol)
     Ju(icol+1) = Ju(icol) + Ncol(icol)
     Nrow(icol) = Il(icol)
@@ -205,12 +205,12 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
   ENDDO
   !
   !         Copy the matrix A into the L and U structures.
-  DO icol = 1 , N
+  DO icol = 1, N
     Dinv(icol) = A(Ja(icol))
     jbgn = Ja(icol) + 1
     jend = Ja(icol+1) - 1
     IF ( jbgn<=jend ) THEN
-      DO j = jbgn , jend
+      DO j = jbgn, jend
         irow = Ia(j)
         IF ( irow<icol ) THEN
           !         Part of the upper triangle.
@@ -234,12 +234,12 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
   ENDDO
   !
   !         Sort the rows of L and the columns of U.
-  DO k = 2 , N
+  DO k = 2, N
     jbgn = Ju(k)
     jend = Ju(k+1) - 1
     IF ( jbgn<jend ) THEN
-      DO j = jbgn , jend - 1
-        DO i = j + 1 , jend
+      DO j = jbgn, jend - 1
+        DO i = j + 1, jend
           IF ( Iu(j)>Iu(i) ) THEN
             itemp = Iu(j)
             Iu(j) = Iu(i)
@@ -254,8 +254,8 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
     ibgn = Il(k)
     iend = Il(k+1) - 1
     IF ( ibgn<iend ) THEN
-      DO i = ibgn , iend - 1
-        DO j = i + 1 , iend
+      DO i = ibgn, iend - 1
+        DO j = i + 1, iend
           IF ( Jl(i)>Jl(j) ) THEN
             jtemp = Ju(i)
             Ju(i) = Ju(j)
@@ -270,13 +270,13 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
   ENDDO
   !
   !         Perform the incomplete LDU decomposition.
-  DO i = 2 , N
+  DO i = 2, N
     !
     !           I-th row of L
     indx1 = Il(i)
     indx2 = Il(i+1) - 1
     IF ( indx1<=indx2 ) THEN
-      DO indx = indx1 , indx2
+      DO indx = indx1, indx2
         IF ( indx/=indx1 ) THEN
           indxr1 = indx1
           indxr2 = indx - 1
@@ -316,7 +316,7 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
     indx1 = Ju(i)
     indx2 = Ju(i+1) - 1
     IF ( indx1<=indx2 ) THEN
-      DO indx = indx1 , indx2
+      DO indx = indx1, indx2
         IF ( indx/=indx1 ) THEN
           indxc1 = indx1
           indxc2 = indx - 1
@@ -389,7 +389,7 @@ SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
   !
   !         Replace diagonal elements by their inverses.
   !VD$ VECTOR
-  DO i = 1 , N
+  DO i = 1, N
     Dinv(i) = 1.0E0/Dinv(i)
   ENDDO
   !

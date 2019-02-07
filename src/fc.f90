@@ -374,13 +374,13 @@ SUBROUTINE FC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   !           DEFC, FC, and DFC look as much the same as possible.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  FC
-  REAL Bkpt(*) , Coeff(*) , Sddata(*) , W(*) , Xconst(*) , Xdata(*) , &
-    Yconst(*) , Ydata(*)
-  INTEGER Iw(*) , Mode , Nbkpt , Nconst , Ndata , Nderiv(*) , Nord
+  REAL Bkpt(*), Coeff(*), Sddata(*), W(*), Xconst(*), Xdata(*), &
+    Yconst(*), Ydata(*)
+  INTEGER Iw(*), Mode, Nbkpt, Nconst, Ndata, Nderiv(*), Nord
   !
   EXTERNAL FCMN
   !
-  INTEGER i1 , i2 , i3 , i4 , i5 , i6 , i7 , mdg , mdw
+  INTEGER i1, i2, i3, i4, i5, i6, i7, mdg, mdw
   !
   !***FIRST EXECUTABLE STATEMENT  FC
   mdg = Nbkpt - Nord + 3

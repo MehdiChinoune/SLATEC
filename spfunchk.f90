@@ -41,12 +41,12 @@ PROGRAM TESTI
   !   900709  DATE WRITTEN
   !***END PROLOGUE  TESTI
   !     .. Local Scalars ..
-  INTEGER ipass , kprint , lin , lun , nfail
+  INTEGER ipass, kprint, lin, lun, nfail
   !     .. External Functions ..
   INTEGER I1MACH
   EXTERNAL I1MACH
   !     .. External Subroutines ..
-  EXTERNAL QCINTC , QCINTD , QCINTS , XERMAX , XSETF , XSETUN
+  EXTERNAL QCINTC, QCINTD, QCINTS, XERMAX, XSETF, XSETUN
   !***FIRST EXECUTABLE STATEMENT  TESTI
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -123,16 +123,16 @@ SUBROUTINE QCINTC(Lun,Kprint,Ipass)
   !   900717  DATE WRITTEN
   !***END PROLOGUE  QCINTC
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
   REAL errtol
   INTEGER i
   !     .. Local Arrays ..
-  COMPLEX c(20) , w(20)
+  COMPLEX c(20), w(20)
   !     .. External Functions ..
-  COMPLEX CCOS , CEXP , CLOG , CSIN , CSQRT
-  REAL CABS , R1MACH , SQRT
-  EXTERNAL CCOS , CEXP , CLOG , CSIN , CSQRT , CABS , R1MACH , SQRT
+  COMPLEX CCOS, CEXP, CLOG, CSIN, CSQRT
+  REAL CABS, R1MACH, SQRT
+  EXTERNAL CCOS, CEXP, CLOG, CSIN, CSQRT, CABS, R1MACH, SQRT
   !     .. Intrinsic Functions ..
   INTRINSIC CMPLX
   !
@@ -197,10 +197,10 @@ SUBROUTINE QCINTC(Lun,Kprint,Ipass)
   !
   Ipass = 1
   errtol = SQRT(R1MACH(4))
-  DO i = 1 , 20
+  DO i = 1, 20
     IF ( CABS(c(i)-w(i))>=errtol*CABS(c(i))+errtol ) THEN
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (UNIT=Lun,FMT=99003) i , w(i) , c(i)
+      IF ( Kprint>=2 ) WRITE (UNIT=Lun,FMT=99003) i, w(i), c(i)
     ENDIF
   ENDDO
   IF ( Ipass/=0.AND.Kprint>=2 ) WRITE (UNIT=Lun,FMT=99002)
@@ -247,18 +247,18 @@ SUBROUTINE QCINTD(Lun,Kprint,Ipass)
   !   900717  DATE WRITTEN
   !***END PROLOGUE  QCINTD
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
   REAL(8) :: errtol
   INTEGER i
   !     .. Local Arrays ..
-  REAL(8) :: v(60) , y(60)
+  REAL(8) :: v(60), y(60)
   !     .. External Functions ..
-  REAL(8) :: D1MACH , DACOS , DASIN , DATAN , DATAN2 , DCOS , DCOSH , &
-    DEXP , DINT , DLOG , DLOG10 , DSIN , DSINH , DSQRT , &
-    DTAN , DTANH
-  EXTERNAL D1MACH , DACOS , DASIN , DATAN , DATAN2 , DCOS , DCOSH , DEXP , &
-    DINT , DLOG , DLOG10 , DSIN , DSINH , DSQRT , DTAN , DTANH
+  REAL(8) :: D1MACH, DACOS, DASIN, DATAN, DATAN2, DCOS, DCOSH, &
+    DEXP, DINT, DLOG, DLOG10, DSIN, DSINH, DSQRT, &
+    DTAN, DTANH
+  EXTERNAL D1MACH, DACOS, DASIN, DATAN, DATAN2, DCOS, DCOSH, DEXP, &
+    DINT, DLOG, DLOG10, DSIN, DSINH, DSQRT, DTAN, DTANH
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !
@@ -409,10 +409,10 @@ SUBROUTINE QCINTD(Lun,Kprint,Ipass)
   !
   Ipass = 1
   errtol = DSQRT(D1MACH(4))
-  DO i = 1 , 60
+  DO i = 1, 60
     IF ( ABS(v(i)-y(i))>=errtol*ABS(v(i))+errtol ) THEN
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (UNIT=Lun,FMT=99003) i , y(i) , v(i)
+      IF ( Kprint>=2 ) WRITE (UNIT=Lun,FMT=99003) i, y(i), v(i)
     ENDIF
   ENDDO
   IF ( Ipass/=0.AND.Kprint>=2 ) WRITE (UNIT=Lun,FMT=99002)
@@ -457,19 +457,19 @@ SUBROUTINE QCINTS(Lun,Kprint,Ipass)
   !   900711  DATE WRITTEN
   !***END PROLOGUE  QCINTS
   !     .. Scalar Arguments ..
-  INTEGER Ipass , Kprint , Lun
+  INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
   REAL errtol
   INTEGER i
   !     .. Local Arrays ..
-  REAL v(60) , y(60)
+  REAL v(60), y(60)
   !     .. External Functions ..
-  REAL ACOS , ALOG , ALOG10 , ASIN , ATAN , ATAN2 , CABS , COS , COSH , &
-    EXP , R1MACH , SIN , SINH , SQRT , TAN , TANH
-  EXTERNAL ACOS , ALOG , ALOG10 , ASIN , ATAN , ATAN2 , CABS , COS , COSH , &
-    EXP , R1MACH , SIN , SINH , SQRT , TAN , TANH
+  REAL ACOS, ALOG, ALOG10, ASIN, ATAN, ATAN2, CABS, COS, COSH, &
+    EXP, R1MACH, SIN, SINH, SQRT, TAN, TANH
+  EXTERNAL ACOS, ALOG, ALOG10, ASIN, ATAN, ATAN2, CABS, COS, COSH, &
+    EXP, R1MACH, SIN, SINH, SQRT, TAN, TANH
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , CMPLX
+  INTRINSIC ABS, CMPLX
   !
   !     Correct values through different calculations are stored in V(*)
   !
@@ -618,10 +618,10 @@ SUBROUTINE QCINTS(Lun,Kprint,Ipass)
   !
   Ipass = 1
   errtol = SQRT(R1MACH(4))
-  DO i = 1 , 60
+  DO i = 1, 60
     IF ( ABS(v(i)-y(i))>=errtol*ABS(v(i))+errtol ) THEN
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (UNIT=Lun,FMT=99003) i , y(i) , v(i)
+      IF ( Kprint>=2 ) WRITE (UNIT=Lun,FMT=99003) i, y(i), v(i)
     ENDIF
   ENDDO
   IF ( Ipass/=0.AND.Kprint>=2 ) WRITE (UNIT=Lun,FMT=99002)

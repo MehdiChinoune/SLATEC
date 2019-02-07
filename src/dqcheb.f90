@@ -58,14 +58,14 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DQCHEB
   !
-  REAL(8) :: alam , alam1 , alam2 , Cheb12 , Cheb24 , Fval , part1 , &
-    part2 , part3 , v , X
-  INTEGER i , j
+  REAL(8) :: alam, alam1, alam2, Cheb12, Cheb24, Fval, part1, &
+    part2, part3, v, X
+  INTEGER i, j
   !
-  DIMENSION Cheb12(13) , Cheb24(25) , Fval(25) , v(12) , X(11)
+  DIMENSION Cheb12(13), Cheb24(25), Fval(25), v(12), X(11)
   !
   !***FIRST EXECUTABLE STATEMENT  DQCHEB
-  DO i = 1 , 12
+  DO i = 1, 12
     j = 26 - i
     v(i) = Fval(i) - Fval(j)
     Fval(i) = Fval(i) + Fval(j)
@@ -109,7 +109,7 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
     *v(12)
   Cheb24(8) = Cheb12(8) + alam
   Cheb24(18) = Cheb12(8) - alam
-  DO i = 1 , 6
+  DO i = 1, 6
     j = 14 - i
     v(i) = Fval(i) - Fval(j)
     Fval(i) = Fval(i) + Fval(j)
@@ -128,7 +128,7 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   alam = X(10)*v(2) - X(6)*v(4) + X(2)*v(6)
   Cheb24(11) = Cheb12(11) + alam
   Cheb24(15) = Cheb12(11) - alam
-  DO i = 1 , 3
+  DO i = 1, 3
     j = 8 - i
     v(i) = Fval(i) - Fval(j)
     Fval(i) = Fval(i) + Fval(j)
@@ -148,13 +148,13 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   Cheb12(13) = v(1) - v(3)
   Cheb24(13) = Cheb12(13)
   alam = 0.1D+01/0.6D+01
-  DO i = 2 , 12
+  DO i = 2, 12
     Cheb12(i) = Cheb12(i)*alam
   ENDDO
   alam = 0.5D+00*alam
   Cheb12(1) = Cheb12(1)*alam
   Cheb12(13) = Cheb12(13)*alam
-  DO i = 2 , 24
+  DO i = 2, 24
     Cheb24(i) = Cheb24(i)*alam
   ENDDO
   Cheb24(1) = 0.5D+00*alam*Cheb24(1)

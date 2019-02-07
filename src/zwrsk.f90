@@ -21,12 +21,12 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  ZWRSK
   !     COMPLEX CINU,CSCL,CT,CW,C1,C2,RCT,ST,Y,ZR
-  REAL(8) :: act , acw , Alim , ascle , cinui , cinur , csclr , cti , &
-    ctr , Cwi , Cwr , c1i , c1r , c2i , c2r , Elim , Fnu , &
-    pti , ptr , ract , sti , str , Tol , Yi , Yr , Zri , &
-    Zrr , ZABS , D1MACH
-  INTEGER i , Kode , N , nw , Nz
-  DIMENSION Yr(N) , Yi(N) , Cwr(2) , Cwi(2)
+  REAL(8) :: act, acw, Alim, ascle, cinui, cinur, csclr, cti, &
+    ctr, Cwi, Cwr, c1i, c1r, c2i, c2r, Elim, Fnu, &
+    pti, ptr, ract, sti, str, Tol, Yi, Yr, Zri, &
+    Zrr, ZABS, D1MACH
+  INTEGER i, Kode, N, nw, Nz
+  DIMENSION Yr(N), Yi(N), Cwr(2), Cwi(2)
   EXTERNAL ZABS
   !***FIRST EXECUTABLE STATEMENT  ZWRSK
   !-----------------------------------------------------------------------
@@ -96,7 +96,7 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   Yr(1) = cinur*csclr
   Yi(1) = cinui*csclr
   IF ( N==1 ) RETURN
-  DO i = 2 , N
+  DO i = 2, N
     ptr = str*cinur - sti*cinui
     cinui = str*cinui + sti*cinur
     cinur = ptr
@@ -106,4 +106,5 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
     Yi(i) = cinui*csclr
   ENDDO
   RETURN
-  99999 END SUBROUTINE ZWRSK
+  99999 CONTINUE
+  END SUBROUTINE ZWRSK

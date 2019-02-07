@@ -28,12 +28,12 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  SDPST
-  INTEGER i , iflag , imax , Impl , info , Iswflg , j , j2 , Jstate , k , &
-    Matdim , Miter , Ml , Mu , mw , N , Nde , Nfe , Nje , Nq
-  REAL A(Matdim,*) , bl , Bnd , bp , br , BU , Dfdy(Matdim,*) , dfdymx , &
-    diff , dy , El(13,12) , Fac(*) , FACMAX , facmin , factor , H , &
-    Save1(*) , Save2(*) , scale , SNRM2 , T , Uround , Y(*) , Yh(N,*) , &
-    yj , ys , Ywt(*)
+  INTEGER i, iflag, imax, Impl, info, Iswflg, j, j2, Jstate, k, &
+    Matdim, Miter, Ml, Mu, mw, N, Nde, Nfe, Nje, Nq
+  REAL A(Matdim,*), bl, Bnd, bp, br, BU, Dfdy(Matdim,*), dfdymx, &
+    diff, dy, El(13,12), Fac(*), FACMAX, facmin, factor, H, &
+    Save1(*), Save2(*), scale, SNRM2, T, Uround, Y(*), Yh(N,*), &
+    yj, ys, Ywt(*)
   INTEGER Ipvt(*)
   LOGICAL Ier
   PARAMETER (FACMAX=.5E0,BU=0.5E0)
@@ -49,8 +49,8 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       ENDIF
       IF ( Iswflg==3 ) Bnd = SNRM2(N*N,Dfdy,1)
       factor = -El(1,Nq)*H
-      DO j = 1 , N
-        DO i = 1 , N
+      DO j = 1, N
+        DO i = 1, N
           Dfdy(i,j) = factor*Dfdy(i,j)
         ENDDO
       ENDDO
@@ -59,7 +59,7 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       bl = Uround**(.75E0)
       bp = Uround**(-.15E0)
       facmin = Uround**(.78E0)
-      DO j = 1 , N
+      DO j = 1, N
         ys = MAX(ABS(Ywt(j)),ABS(Y(j)))
         DO
           dy = Fac(j)*ys
@@ -86,13 +86,13 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           ENDIF
           Y(j) = yj
           factor = -El(1,Nq)*H/dy
-          DO i = 1 , N
+          DO i = 1, N
             Dfdy(i,j) = (Save1(i)-Save2(i))*factor
           ENDDO
           !                                                                 Step 1
           diff = ABS(Save2(1)-Save1(1))
           imax = 1
-          DO i = 2 , N
+          DO i = 2, N
             IF ( ABS(Save2(i)-Save1(i))>diff ) THEN
               imax = i
               diff = ABS(Save2(i)-Save1(i))
@@ -118,7 +118,7 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       Nfe = Nfe + N
     ENDIF
     IF ( Impl==0 ) THEN
-      DO i = 1 , N
+      DO i = 1, N
         Dfdy(i,i) = Dfdy(i,i) + 1.E0
       ENDDO
     ELSEIF ( Impl==1 ) THEN
@@ -127,8 +127,8 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Jstate = 9
         RETURN
       ENDIF
-      DO j = 1 , N
-        DO i = 1 , N
+      DO j = 1, N
+        DO i = 1, N
           Dfdy(i,j) = Dfdy(i,j) + A(i,j)
         ENDDO
       ENDDO
@@ -138,7 +138,7 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Jstate = 9
         RETURN
       ENDIF
-      DO i = 1 , Nde
+      DO i = 1, Nde
         Dfdy(i,i) = Dfdy(i,i) + A(i,1)
       ENDDO
     ELSEIF ( Impl==3 ) THEN
@@ -147,8 +147,8 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Jstate = 9
         RETURN
       ENDIF
-      DO j = 1 , Nde
-        DO i = 1 , Nde
+      DO j = 1, Nde
+        DO i = 1, Nde
           Dfdy(i,j) = Dfdy(i,j) + A(i,j)
         ENDDO
       ENDDO
@@ -164,8 +164,8 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       ENDIF
       factor = -El(1,Nq)*H
       mw = Ml + Mu + 1
-      DO j = 1 , N
-        DO i = MAX(Ml+1,mw+1-j) , MIN(mw+N-j,mw+Ml)
+      DO j = 1, N
+        DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
           Dfdy(i,j) = factor*Dfdy(i,j)
         ENDDO
       ENDDO
@@ -176,8 +176,8 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       facmin = Uround**(.78E0)
       mw = Ml + Mu + 1
       j2 = MIN(mw,N)
-      DO j = 1 , j2
-        DO k = j , N , mw
+      DO j = 1, j2
+        DO k = j, N, mw
           ys = MAX(ABS(Ywt(k)),ABS(Y(k)))
           DO
             dy = Fac(k)*ys
@@ -205,7 +205,7 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           Jstate = 6
           RETURN
         ENDIF
-        DO k = j , N , mw
+        DO k = j, N, mw
           Y(k) = Dfdy(mw,k)
           ys = MAX(ABS(Ywt(k)),ABS(Y(k)))
           dy = Fac(k)*ys
@@ -217,13 +217,13 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
           ENDIF
           dy = (Y(k)+dy) - Y(k)
           factor = -El(1,Nq)*H/dy
-          DO i = MAX(Ml+1,mw+1-k) , MIN(mw+N-k,mw+Ml)
+          DO i = MAX(Ml+1,mw+1-k), MIN(mw+N-k,mw+Ml)
             Dfdy(i,k) = factor*(Save1(i+k-mw)-Save2(i+k-mw))
           ENDDO
           !                                                                 Step 1
           imax = MAX(1,k-Mu)
           diff = ABS(Save2(imax)-Save1(imax))
-          DO i = MAX(1,k-Mu) + 1 , MIN(k+Ml,N)
+          DO i = MAX(1,k-Mu) + 1, MIN(k+Ml,N)
             IF ( ABS(Save2(i)-Save1(i))>diff ) THEN
               imax = i
               diff = ABS(Save2(i)-Save1(i))
@@ -248,15 +248,15 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     ENDIF
     IF ( Iswflg==3 ) THEN
       dfdymx = 0.E0
-      DO j = 1 , N
-        DO i = MAX(Ml+1,mw+1-j) , MIN(mw+N-j,mw+Ml)
+      DO j = 1, N
+        DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
           dfdymx = MAX(dfdymx,ABS(Dfdy(i,j)))
         ENDDO
       ENDDO
       Bnd = 0.E0
       IF ( dfdymx/=0.E0 ) THEN
-        DO j = 1 , N
-          DO i = MAX(Ml+1,mw+1-j) , MIN(mw+N-j,mw+Ml)
+        DO j = 1, N
+          DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
             Bnd = Bnd + (Dfdy(i,j)/dfdymx)**2
           ENDDO
         ENDDO
@@ -264,7 +264,7 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
       ENDIF
     ENDIF
     IF ( Impl==0 ) THEN
-      DO j = 1 , N
+      DO j = 1, N
         Dfdy(mw,j) = Dfdy(mw,j) + 1.E0
       ENDDO
     ELSEIF ( Impl==1 ) THEN
@@ -273,8 +273,8 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Jstate = 9
         RETURN
       ENDIF
-      DO j = 1 , N
-        DO i = MAX(Ml+1,mw+1-j) , MIN(mw+N-j,mw+Ml)
+      DO j = 1, N
+        DO i = MAX(Ml+1,mw+1-j), MIN(mw+N-j,mw+Ml)
           Dfdy(i,j) = Dfdy(i,j) + A(i,j)
         ENDDO
       ENDDO
@@ -284,7 +284,7 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Jstate = 9
         RETURN
       ENDIF
-      DO j = 1 , Nde
+      DO j = 1, Nde
         Dfdy(mw,j) = Dfdy(mw,j) + A(j,1)
       ENDDO
     ELSEIF ( Impl==3 ) THEN
@@ -293,8 +293,8 @@ SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
         Jstate = 9
         RETURN
       ENDIF
-      DO j = 1 , Nde
-        DO i = MAX(Ml+1,mw+1-j) , MIN(mw+Nde-j,mw+Ml)
+      DO j = 1, Nde
+        DO i = MAX(Ml+1,mw+1-j), MIN(mw+Nde-j,mw+Ml)
           Dfdy(i,j) = Dfdy(i,j) + A(i,j)
         ENDDO
       ENDDO

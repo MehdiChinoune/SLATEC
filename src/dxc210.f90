@@ -4,7 +4,7 @@ SUBROUTINE DXC210(K,Z,J,Ierror)
   IMPLICIT NONE
   !*--DXC2105
   !*** Start of declarations inserted by SPAG
-  INTEGER i , ic , id , Ierror , ii , it , ja , ka , ka1 , ka2 , m , nm1 , &
+  INTEGER i, ic, id, Ierror, ii, it, ja, ka, ka1, ka2, m, nm1, &
     np1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXC210
@@ -47,9 +47,9 @@ SUBROUTINE DXC210(K,Z,J,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXC210
   REAL(8) :: Z
-  INTEGER K , J
-  INTEGER NLG102 , MLG102 , LG102
-  COMMON /DXBLK3/ NLG102 , MLG102 , LG102(21)
+  INTEGER K, J
+  INTEGER NLG102, MLG102, LG102
+  COMMON /DXBLK3/ NLG102, MLG102, LG102(21)
   SAVE /DXBLK3/
   !
   !   THE CONDITIONS IMPOSED ON NLG102, MLG102, AND LG102 BY
@@ -83,7 +83,7 @@ SUBROUTINE DXC210(K,Z,J,Ierror)
       id = MOD(it,m)
       Z = id
       IF ( ka1>0 ) THEN
-        DO ii = 1 , nm1
+        DO ii = 1, nm1
           i = np1 - ii
           it = ka2*LG102(i) + ka1*LG102(i+1) + ic
           ic = it/m
@@ -92,7 +92,7 @@ SUBROUTINE DXC210(K,Z,J,Ierror)
         ENDDO
         ja = ka*LG102(1) + ka1*LG102(2) + ic
       ELSE
-        DO ii = 1 , nm1
+        DO ii = 1, nm1
           i = np1 - ii
           it = ka2*LG102(i) + ic
           ic = it/m
@@ -117,4 +117,5 @@ SUBROUTINE DXC210(K,Z,J,Ierror)
   CALL XERMSG('SLATEC','DXC210','K too large',208,1)
   Ierror = 208
   RETURN
-  99999 END SUBROUTINE DXC210
+  99999 CONTINUE
+  END SUBROUTINE DXC210

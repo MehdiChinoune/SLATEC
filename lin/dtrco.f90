@@ -38,7 +38,7 @@ SUBROUTINE DTRCO(T,Ldt,N,Rcond,Z,Job)
   !
   !        RCOND   DOUBLE PRECISION
   !                an estimate of the reciprocal condition of  T .
-  !                For the system  T*X = B , relative perturbations
+  !                For the system  T*X = B, relative perturbations
   !                in  T  and  B  of size  EPSILON  may cause
   !                relative perturbations in  X  of size  EPSILON/RCOND .
   !                If  RCOND  is so small that the logical expression
@@ -67,13 +67,13 @@ SUBROUTINE DTRCO(T,Ldt,N,Rcond,Z,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DTRCO
-  INTEGER Ldt , N , Job
-  REAL(8) :: T(Ldt,*) , Z(*)
+  INTEGER Ldt, N, Job
+  REAL(8) :: T(Ldt,*), Z(*)
   REAL(8) :: Rcond
   !
-  REAL(8) :: w , wk , wkm , ek
-  REAL(8) :: tnorm , ynorm , s , sm , DASUM
-  INTEGER i1 , j , j1 , j2 , k , kk , l
+  REAL(8) :: w, wk, wkm, ek
+  REAL(8) :: tnorm, ynorm, s, sm, DASUM
+  INTEGER i1, j, j1, j2, k, kk, l
   LOGICAL lower
   !***FIRST EXECUTABLE STATEMENT  DTRCO
   lower = Job==0
@@ -81,7 +81,7 @@ SUBROUTINE DTRCO(T,Ldt,N,Rcond,Z,Job)
   !     COMPUTE 1-NORM OF T
   !
   tnorm = 0.0D0
-  DO j = 1 , N
+  DO j = 1, N
     l = j
     IF ( lower ) l = N + 1 - j
     i1 = 1
@@ -99,10 +99,10 @@ SUBROUTINE DTRCO(T,Ldt,N,Rcond,Z,Job)
   !     SOLVE TRANS(T)*Y = E
   !
   ek = 1.0D0
-  DO j = 1 , N
+  DO j = 1, N
     Z(j) = 0.0D0
   ENDDO
-  DO kk = 1 , N
+  DO kk = 1, N
     k = kk
     IF ( lower ) k = N + 1 - kk
     IF ( Z(k)/=0.0D0 ) ek = SIGN(ek,-Z(k))
@@ -127,7 +127,7 @@ SUBROUTINE DTRCO(T,Ldt,N,Rcond,Z,Job)
       IF ( lower ) j1 = 1
       j2 = N
       IF ( lower ) j2 = k - 1
-      DO j = j1 , j2
+      DO j = j1, j2
         sm = sm + ABS(Z(j)+wkm*T(k,j))
         Z(j) = Z(j) + wk*T(k,j)
         s = s + ABS(Z(j))
@@ -135,7 +135,7 @@ SUBROUTINE DTRCO(T,Ldt,N,Rcond,Z,Job)
       IF ( s<sm ) THEN
         w = wkm - wk
         wk = wkm
-        DO j = j1 , j2
+        DO j = j1, j2
           Z(j) = Z(j) + w*T(k,j)
         ENDDO
       ENDIF
@@ -149,7 +149,7 @@ SUBROUTINE DTRCO(T,Ldt,N,Rcond,Z,Job)
   !
   !     SOLVE T*Z = Y
   !
-  DO kk = 1 , N
+  DO kk = 1, N
     k = N + 1 - kk
     IF ( lower ) k = kk
     IF ( ABS(Z(k))>ABS(T(k,k)) ) THEN

@@ -79,10 +79,10 @@ SUBROUTINE CORTB(Nm,Low,Igh,Ar,Ai,Ortr,Orti,M,Zr,Zi)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CORTB
   !
-  INTEGER i , j , M , la , mm , mp , Nm , Igh , kp1 , Low , mp1
-  REAL Ar(Nm,*) , Ai(Nm,*) , Ortr(*) , Orti(*)
-  REAL Zr(Nm,*) , Zi(Nm,*)
-  REAL h , gi , gr
+  INTEGER i, j, M, la, mm, mp, Nm, Igh, kp1, Low, mp1
+  REAL Ar(Nm,*), Ai(Nm,*), Ortr(*), Orti(*)
+  REAL Zr(Nm,*), Zi(Nm,*)
+  REAL h, gi, gr
   !
   !***FIRST EXECUTABLE STATEMENT  CORTB
   IF ( M/=0 ) THEN
@@ -90,23 +90,23 @@ SUBROUTINE CORTB(Nm,Low,Igh,Ar,Ai,Ortr,Orti,M,Zr,Zi)
     kp1 = Low + 1
     IF ( la>=kp1 ) THEN
       !     .......... FOR MP=IGH-1 STEP -1 UNTIL LOW+1 DO -- ..........
-      DO mm = kp1 , la
+      DO mm = kp1, la
         mp = Low + Igh - mm
         IF ( Ar(mp,mp-1)/=0.0E0.OR.Ai(mp,mp-1)/=0.0E0 ) THEN
           !     .......... H BELOW IS NEGATIVE OF H FORMED IN CORTH ..........
           h = Ar(mp,mp-1)*Ortr(mp) + Ai(mp,mp-1)*Orti(mp)
           mp1 = mp + 1
           !
-          DO i = mp1 , Igh
+          DO i = mp1, Igh
             Ortr(i) = Ar(i,mp-1)
             Orti(i) = Ai(i,mp-1)
           ENDDO
           !
-          DO j = 1 , M
+          DO j = 1, M
             gr = 0.0E0
             gi = 0.0E0
             !
-            DO i = mp , Igh
+            DO i = mp, Igh
               gr = gr + Ortr(i)*Zr(i,j) + Orti(i)*Zi(i,j)
               gi = gi + Ortr(i)*Zi(i,j) - Orti(i)*Zr(i,j)
             ENDDO
@@ -114,7 +114,7 @@ SUBROUTINE CORTB(Nm,Low,Igh,Ar,Ai,Ortr,Orti,M,Zr,Zi)
             gr = gr/h
             gi = gi/h
             !
-            DO i = mp , Igh
+            DO i = mp, Igh
               Zr(i,j) = Zr(i,j) + gr*Ortr(i) - gi*Orti(i)
               Zi(i,j) = Zi(i,j) + gr*Orti(i) + gi*Ortr(i)
             ENDDO

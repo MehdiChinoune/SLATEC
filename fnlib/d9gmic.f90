@@ -4,7 +4,7 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
   IMPLICIT NONE
   !*--D9GMIC5
   !*** Start of declarations inserted by SPAG
-  INTEGER k , m , mm1
+  INTEGER k, m, mm1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9GMIC
   !***SUBSIDIARY
@@ -32,10 +32,10 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9GMIC
-  REAL(8) :: A , X , Alx , alng , bot , eps , euler , fk , fkp1 , fm , &
-    s , sgng , t , te , D1MACH , DLNGAM
+  REAL(8) :: A, X, Alx, alng, bot, eps, euler, fk, fkp1, fm, &
+    s, sgng, t, te, D1MACH, DLNGAM
   LOGICAL first
-  SAVE euler , eps , bot , first
+  SAVE euler, eps, bot, first
   DATA euler/0.57721566490153286060651209008240D0/
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  D9GMIC
@@ -55,7 +55,7 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
   te = 1.0D0
   t = 1.0D0
   s = t
-  DO k = 1 , 200
+  DO k = 1, 200
     fkp1 = k + 1
     te = -X*te/(fm+fkp1)
     t = te/fkp1
@@ -75,7 +75,7 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
   t = 1.D0
   s = t
   mm1 = m - 1
-  DO k = 1 , mm1
+  DO k = 1, mm1
     fk = k
     te = -X*te/fk
     t = te/(fm-fk)
@@ -83,7 +83,7 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
     IF ( ABS(t)<eps*ABS(s) ) EXIT
   ENDDO
   !
-  DO k = 1 , m
+  DO k = 1, m
     D9GMIC = D9GMIC + 1.0D0/k
   ENDDO
   !

@@ -12,7 +12,7 @@ REAL FUNCTION T0(X)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  T0
-  REAL a , b , F0S , X , x1 , y
+  REAL a, b, F0S, X, x1, y
   !***FIRST EXECUTABLE STATEMENT  T0
   a = 0.0E+00
   b = 0.1E+01

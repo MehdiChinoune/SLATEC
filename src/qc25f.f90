@@ -106,29 +106,29 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  QC25F
   !
-  REAL A , Abserr , ac , an , an2 , as , asap , ass , B , centr , Chebmo , &
-    cheb12 , cheb24 , conc , cons , cospar , d , QWGTF , d1 , R1MACH , &
-    d2 , estc , ests , F , fval , hlgth , oflow , Omega , parint , par2 , &
-    par22 , p2 , p3 , p4 , Resabs , Resasc , resc12 , resc24 , ress12 , &
-    ress24 , Result , sinpar , v , x
-  INTEGER i , iers , Integr , isym , j , k , Ksave , m , Maxp1 , Momcom , &
-    Neval , noequ , noeq1 , Nrmom
+  REAL A, Abserr, ac, an, an2, as, asap, ass, B, centr, Chebmo, &
+    cheb12, cheb24, conc, cons, cospar, d, QWGTF, d1, R1MACH, &
+    d2, estc, ests, F, fval, hlgth, oflow, Omega, parint, par2, &
+    par22, p2, p3, p4, Resabs, Resasc, resc12, resc24, ress12, &
+    ress24, Result, sinpar, v, x
+  INTEGER i, iers, Integr, isym, j, k, Ksave, m, Maxp1, Momcom, &
+    Neval, noequ, noeq1, Nrmom
   !
-  DIMENSION Chebmo(Maxp1,25) , cheb12(13) , cheb24(25) , d(25) , d1(25) , &
-    d2(25) , fval(25) , v(28) , x(11)
+  DIMENSION Chebmo(Maxp1,25), cheb12(13), cheb24(25), d(25), d1(25), &
+    d2(25), fval(25), v(28), x(11)
   !
-  EXTERNAL F , QWGTF
+  EXTERNAL F, QWGTF
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24)
   !           K = 1, ...,11, TO BE USED FOR THE CHEBYSHEV EXPANSION OF F
   !
   SAVE x
-  DATA x(1) , x(2) , x(3) , x(4) , x(5) , x(6) , x(7) , x(8) , x(9) , &
-    x(10) , x(11)/0.9914448613738104E+00 , 0.9659258262890683E+00 , &
-    0.9238795325112868E+00 , 0.8660254037844386E+00 , &
-    0.7933533402912352E+00 , 0.7071067811865475E+00 , &
-    0.6087614290087206E+00 , 0.5000000000000000E+00 , &
-    0.3826834323650898E+00 , 0.2588190451025208E+00 , &
+  DATA x(1), x(2), x(3), x(4), x(5), x(6), x(7), x(8), x(9), &
+    x(10), x(11)/0.9914448613738104E+00, 0.9659258262890683E+00, &
+    0.9238795325112868E+00, 0.8660254037844386E+00, &
+    0.7933533402912352E+00, 0.7071067811865475E+00, &
+    0.6087614290087206E+00, 0.5000000000000000E+00, &
+    0.3826834323650898E+00, 0.2588190451025208E+00, &
     0.1305261922200516E+00/
   !
   !           LIST OF MAJOR VARIABLES
@@ -208,7 +208,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
         !           RECURSION.
         !
         an = 0.4E+01
-        DO i = 4 , 13
+        DO i = 4, 13
           an2 = an*an
           v(i) = ((an2-0.4E+01)*(0.2E+01*(par22-an2-an2)*v(i-1)-ac)&
             +as-par2*(an+0.1E+01)*(an+0.2E+01)*v(i-2))&
@@ -225,7 +225,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
         noequ = 25
         noeq1 = noequ - 1
         an = 0.6E+01
-        DO k = 1 , noeq1
+        DO k = 1, noeq1
           an2 = an*an
           d(k) = -0.2E+01*(an2-0.4E+01)*(par22-an2-an2)
           d2(k) = (an-0.1E+01)*(an-0.2E+01)*par2
@@ -249,7 +249,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
         !
         CALL SGTSL(noequ,d1,d,d2,v(4),iers)
       ENDIF
-      DO j = 1 , 13
+      DO j = 1, 13
         Chebmo(m,2*j-1) = v(j)
       ENDDO
       !
@@ -266,7 +266,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
         !           FORWARD RECURSION.
         !
         an = 0.3E+01
-        DO i = 3 , 12
+        DO i = 3, 12
           an2 = an*an
           v(i) = ((an2-0.4E+01)*(0.2E+01*(par22-an2-an2)*v(i-1)+as)&
             +ac-par2*(an+0.1E+01)*(an+0.2E+01)*v(i-2))&
@@ -281,7 +281,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
         !           USING AN ASYMPTOTIC FORMULA).
         !
         an = 0.5E+01
-        DO k = 1 , noeq1
+        DO k = 1, noeq1
           an2 = an*an
           d(k) = -0.2E+01*(an2-0.4E+01)*(par22-an2-an2)
           d2(k) = (an-0.1E+01)*(an-0.2E+01)*par2
@@ -305,7 +305,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
         !
         CALL SGTSL(noequ,d1,d,d2,v(3),iers)
       ENDIF
-      DO j = 1 , 12
+      DO j = 1, 12
         Chebmo(m,2*j) = v(j)
       ENDDO
     ENDIF
@@ -318,7 +318,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
     fval(1) = 0.5E+00*F(centr+hlgth)
     fval(13) = F(centr)
     fval(25) = 0.5E+00*F(centr-hlgth)
-    DO i = 2 , 12
+    DO i = 2, 12
       isym = 26 - i
       fval(i) = F(hlgth*x(i-1)+centr)
       fval(isym) = F(centr-hlgth*x(i-1))
@@ -330,7 +330,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
     resc12 = cheb12(13)*Chebmo(m,13)
     ress12 = 0.0E+00
     k = 11
-    DO j = 1 , 6
+    DO j = 1, 6
       resc12 = resc12 + cheb12(k)*Chebmo(m,k)
       ress12 = ress12 + cheb12(k+1)*Chebmo(m,k+1)
       k = k - 2
@@ -339,7 +339,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
     ress24 = 0.0E+00
     Resabs = ABS(cheb24(25))
     k = 23
-    DO j = 1 , 12
+    DO j = 1, 12
       resc24 = resc24 + cheb24(k)*Chebmo(m,k)
       ress24 = ress24 + cheb24(k+1)*Chebmo(m,k+1)
       Resabs = ABS(cheb24(k)) + ABS(cheb24(k+1))

@@ -4,9 +4,9 @@ FUNCTION PSI(X)
   IMPLICIT NONE
   !*--PSI5
   !*** Start of declarations inserted by SPAG
-  REAL apsics , aux , COT , CSEVL , dxrel , pi , PSI , psics , R1MACH , X , &
-    xbig , y
-  INTEGER i , INITS , n , ntapsi , ntpsi
+  REAL apsics, aux, COT, CSEVL, dxrel, pi, PSI, psics, R1MACH, X, &
+    xbig, y
+  INTEGER i, INITS, n, ntapsi, ntpsi
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PSI
   !***PURPOSE  Compute the Psi (or Digamma) function.
@@ -43,10 +43,10 @@ FUNCTION PSI(X)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  PSI
-  DIMENSION psics(23) , apsics(16)
+  DIMENSION psics(23), apsics(16)
   LOGICAL first
   EXTERNAL COT
-  SAVE psics , apsics , pi , ntpsi , ntapsi , xbig , dxrel , first
+  SAVE psics, apsics, pi, ntpsi, ntapsi, xbig, dxrel, first
   DATA psics(1)/ - .038057080835217922E0/
   DATA psics(2)/.49141539302938713E0/
   DATA psics(3)/ - .056815747821244730E0/
@@ -127,9 +127,10 @@ FUNCTION PSI(X)
     CALL XERMSG('SLATEC','PSI',&
     'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR NEGATIVE INTEGER',1,1)
   !
-  DO i = 1 , n
+  DO i = 1, n
     PSI = PSI - 1.0/(X+i-1)
   ENDDO
   RETURN
   !
-  99999 END FUNCTION PSI
+  99999 CONTINUE
+  END FUNCTION PSI

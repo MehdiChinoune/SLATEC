@@ -34,7 +34,7 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
   !
   !        A       an upper triangular matrix and the multipliers
   !                which were used to obtain it.
-  !                The factorization can be written  A = L*U , where
+  !                The factorization can be written  A = L*U, where
   !                L  is a product of permutation and unit lower
   !                triangular matrices and  U  is upper triangular.
   !
@@ -61,11 +61,11 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SGEFA
-  INTEGER Lda , N , Ipvt(*) , Info
+  INTEGER Lda, N, Ipvt(*), Info
   REAL A(Lda,*)
   !
   REAL t
-  INTEGER ISAMAX , j , k , kp1 , l , nm1
+  INTEGER ISAMAX, j, k, kp1, l, nm1
   !
   !     GAUSSIAN ELIMINATION WITH PARTIAL PIVOTING
   !
@@ -73,7 +73,7 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
   Info = 0
   nm1 = N - 1
   IF ( nm1>=1 ) THEN
-    DO k = 1 , nm1
+    DO k = 1, nm1
       kp1 = k + 1
       !
       !        FIND L = PIVOT INDEX
@@ -102,7 +102,7 @@ SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
         !
         !           ROW ELIMINATION WITH COLUMN INDEXING
         !
-        DO j = kp1 , N
+        DO j = kp1, N
           t = A(l,j)
           IF ( l/=k ) THEN
             A(l,j) = A(k,j)

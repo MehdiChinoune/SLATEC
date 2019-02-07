@@ -112,17 +112,17 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSVDC
-  INTEGER Ldx , N , P , Ldu , Ldv , Job , Info
-  REAL(8) :: X(Ldx,*) , S(*) , E(*) , U(Ldu,*) , V(Ldv,*) , Work(*)
+  INTEGER Ldx, N, P, Ldu, Ldv, Job, Info
+  REAL(8) :: X(Ldx,*), S(*), E(*), U(Ldu,*), V(Ldv,*), Work(*)
   !
   !
-  INTEGER i , iter , j , jobu , k , kase , kk , l , ll , lls , lm1 , lp1 , &
-    ls , lu , m , maxit , mm , mm1 , mp1 , nct , nctp1 , ncu , nrt , &
+  INTEGER i, iter, j, jobu, k, kase, kk, l, ll, lls, lm1, lp1, &
+    ls, lu, m, maxit, mm, mm1, mp1, nct, nctp1, ncu, nrt, &
     nrtp1
-  REAL(8) :: DDOT , t
-  REAL(8) :: b , c , cs , el , emm1 , f , g , DNRM2 , scale , shift , &
-    sl , sm , sn , smm1 , t1 , test , ztest
-  LOGICAL wantu , wantv
+  REAL(8) :: DDOT, t
+  REAL(8) :: b, c, cs, el, emm1, f, g, DNRM2, scale, shift, &
+    sl, sm, sn, smm1, t1, test, ztest
+  LOGICAL wantu, wantv
   !***FIRST EXECUTABLE STATEMENT  DSVDC
   !
   !     SET THE MAXIMUM NUMBER OF ITERATIONS.
@@ -147,7 +147,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   nrt = MAX(0,MIN(P-2,N))
   lu = MAX(nct,nrt)
   IF ( lu>=1 ) THEN
-    DO l = 1 , lu
+    DO l = 1, lu
       lp1 = l + 1
       IF ( l<=nct ) THEN
         !
@@ -163,7 +163,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
         S(l) = -S(l)
       ENDIF
       IF ( P>=lp1 ) THEN
-        DO j = lp1 , P
+        DO j = lp1, P
           IF ( l<=nct ) THEN
             IF ( S(l)/=0.0D0 ) THEN
               !
@@ -185,7 +185,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
         !           PLACE THE TRANSFORMATION IN U FOR SUBSEQUENT BACK
         !           MULTIPLICATION.
         !
-        DO i = l , N
+        DO i = l, N
           U(i,l) = X(i,l)
         ENDDO
       ENDIF
@@ -205,13 +205,13 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           !
           !              APPLY THE TRANSFORMATION.
           !
-          DO i = lp1 , N
+          DO i = lp1, N
             Work(i) = 0.0D0
           ENDDO
-          DO j = lp1 , P
+          DO j = lp1, P
             CALL DAXPY(N-l,E(j),X(lp1,j),1,Work(lp1),1)
           ENDDO
-          DO j = lp1 , P
+          DO j = lp1, P
             CALL DAXPY(N-l,-E(j)/E(lp1),Work(lp1),1,X(lp1,j),1)
           ENDDO
         ENDIF
@@ -220,7 +220,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           !              PLACE THE TRANSFORMATION IN V FOR SUBSEQUENT
           !              BACK MULTIPLICATION.
           !
-          DO i = lp1 , P
+          DO i = lp1, P
             V(i,l) = E(i)
           ENDDO
         ENDIF
@@ -242,25 +242,25 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !
   IF ( wantu ) THEN
     IF ( ncu>=nctp1 ) THEN
-      DO j = nctp1 , ncu
-        DO i = 1 , N
+      DO j = nctp1, ncu
+        DO i = 1, N
           U(i,j) = 0.0D0
         ENDDO
         U(j,j) = 1.0D0
       ENDDO
     ENDIF
     IF ( nct>=1 ) THEN
-      DO ll = 1 , nct
+      DO ll = 1, nct
         l = nct - ll + 1
         IF ( S(l)==0.0D0 ) THEN
-          DO i = 1 , N
+          DO i = 1, N
             U(i,l) = 0.0D0
           ENDDO
           U(l,l) = 1.0D0
         ELSE
           lp1 = l + 1
           IF ( ncu>=lp1 ) THEN
-            DO j = lp1 , ncu
+            DO j = lp1, ncu
               t = -DDOT(N-l+1,U(l,l),1,U(l,j),1)/U(l,l)
               CALL DAXPY(N-l+1,t,U(l,l),1,U(l,j),1)
             ENDDO
@@ -269,7 +269,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           U(l,l) = 1.0D0 + U(l,l)
           lm1 = l - 1
           IF ( lm1>=1 ) THEN
-            DO i = 1 , lm1
+            DO i = 1, lm1
               U(i,l) = 0.0D0
             ENDDO
           ENDIF
@@ -281,18 +281,18 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !     IF IT IS REQUIRED, GENERATE V.
   !
   IF ( wantv ) THEN
-    DO ll = 1 , P
+    DO ll = 1, P
       l = P - ll + 1
       lp1 = l + 1
       IF ( l<=nrt ) THEN
         IF ( E(l)/=0.0D0 ) THEN
-          DO j = lp1 , P
+          DO j = lp1, P
             t = -DDOT(P-l,V(lp1,l),1,V(lp1,j),1)/V(lp1,l)
             CALL DAXPY(P-l,t,V(lp1,l),1,V(lp1,j),1)
           ENDDO
         ENDIF
       ENDIF
-      DO i = 1 , P
+      DO i = 1, P
         V(i,l) = 0.0D0
       ENDDO
       V(l,l) = 1.0D0
@@ -323,7 +323,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
       !                        S(L), ..., S(M) ARE NOT NEGLIGIBLE (QR STEP).
       !           KASE = 4     IF E(M-1) IS NEGLIGIBLE (CONVERGENCE).
       !
-      DO ll = 1 , m
+      DO ll = 1, m
         l = m - ll
         IF ( l==0 ) EXIT
         test = ABS(S(l)) + ABS(S(l+1))
@@ -336,7 +336,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
       IF ( l/=m-1 ) THEN
         lp1 = l + 1
         mp1 = m + 1
-        DO lls = lp1 , mp1
+        DO lls = lp1, mp1
           ls = m - lls + lp1
           IF ( ls==l ) EXIT
           test = 0.0D0
@@ -370,7 +370,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           !
           f = E(l-1)
           E(l-1) = 0.0D0
-          DO k = l , m
+          DO k = l, m
             t1 = S(k)
             CALL DROTG(t1,f,cs,sn)
             S(k) = t1
@@ -405,7 +405,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           !           CHASE ZEROS.
           !
           mm1 = m - 1
-          DO k = l , mm1
+          DO k = l, mm1
             CALL DROTG(f,g,cs,sn)
             IF ( k/=l ) E(k-1) = f
             f = cs*S(k) + sn*E(k)
@@ -454,7 +454,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
           mm1 = m - 1
           f = E(m-1)
           E(m-1) = 0.0D0
-          DO kk = l , mm1
+          DO kk = l, mm1
             k = mm1 - kk + l
             t1 = S(k)
             CALL DROTG(t1,f,cs,sn)

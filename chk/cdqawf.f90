@@ -4,7 +4,7 @@ SUBROUTINE CDQAWF(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--CDQAWF5
   !*** Start of declarations inserted by SPAG
-  INTEGER ierv , integr , iwork , leniw , Lun , maxp1
+  INTEGER ierv, integr, iwork, leniw, Lun, maxp1
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CDQAWF
   !***PURPOSE  Quick check for DQAWF.
@@ -22,11 +22,11 @@ SUBROUTINE CDQAWF(Lun,Kprint,Ipass)
   !
   ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
   !
-  REAL(8) :: a , abserr , D1MACH , epsabs , epmach , error , exact0 , &
-    DF0F , DF1F , omega , pi , result , uflow , work
-  INTEGER ier , ip , Ipass , Kprint , lenw , limit , limlst , lst , neval
-  DIMENSION ierv(4) , iwork(450) , work(1425)
-  EXTERNAL DF0F , DF1F
+  REAL(8) :: a, abserr, D1MACH, epsabs, epmach, error, exact0, &
+    DF0F, DF1F, omega, pi, result, uflow, work
+  INTEGER ier, ip, Ipass, Kprint, lenw, limit, limlst, lst, neval
+  DIMENSION ierv(4), iwork(450), work(1425)
+  EXTERNAL DF0F, DF1F
   DATA exact0/0.1422552162575912D+01/
   DATA pi/0.31415926535897932D+01/
   !***FIRST EXECUTABLE STATEMENT  CDQAWF

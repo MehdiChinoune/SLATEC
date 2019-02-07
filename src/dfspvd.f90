@@ -13,7 +13,7 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
   ! Calculates value and deriv.s of all B-splines which do not vanish at X
   !
   !  Fill VNIKX(J,IDERIV), J=IDERIV, ... ,K  with nonzero values of
-  !  B-splines of order K+1-IDERIV , IDERIV=NDERIV, ... ,1, by repeated
+  !  B-splines of order K+1-IDERIV, IDERIV=NDERIV, ... ,1, by repeated
   !  calls to DFSPVN
   !
   !***SEE ALSO  DFC
@@ -29,33 +29,33 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
   IMPLICIT NONE
   !*--DFSPVD30
   !*** Start of declarations inserted by SPAG
-  REAL(8) :: a , diff , fkmd , T , v , Vnikx , X
-  INTEGER i , ideriv , idervm , Ileft , ipkmd , j , jlow , jm1 , K , kmd , &
-    l , m , Nderiv
+  REAL(8) :: a, diff, fkmd, T, v, Vnikx, X
+  INTEGER i, ideriv, idervm, Ileft, ipkmd, j, jlow, jm1, K, kmd, &
+    l, m, Nderiv
   !*** End of declarations inserted by SPAG
-  DIMENSION T(*) , Vnikx(K,*)
+  DIMENSION T(*), Vnikx(K,*)
   DIMENSION a(20,20)
   !***FIRST EXECUTABLE STATEMENT  DFSPVD
   CALL DFSPVN(T,K+1-Nderiv,1,X,Ileft,Vnikx(Nderiv,Nderiv))
   IF ( Nderiv>1 ) THEN
     ideriv = Nderiv
-    DO i = 2 , Nderiv
+    DO i = 2, Nderiv
       idervm = ideriv - 1
-      DO j = ideriv , K
+      DO j = ideriv, K
         Vnikx(j-1,idervm) = Vnikx(j,ideriv)
       ENDDO
       ideriv = idervm
       CALL DFSPVN(T,0,2,X,Ileft,Vnikx(ideriv,ideriv))
     ENDDO
     !
-    DO i = 1 , K
-      DO j = 1 , K
+    DO i = 1, K
+      DO j = 1, K
         a(i,j) = 0.D0
       ENDDO
       a(i,i) = 1.D0
     ENDDO
     kmd = K
-    DO m = 2 , Nderiv
+    DO m = 2, Nderiv
       kmd = kmd - 1
       fkmd = kmd
       i = Ileft
@@ -67,10 +67,10 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
         IF ( jm1==0 ) THEN
           IF ( diff/=0. ) a(1,1) = a(1,1)/diff*fkmd
           !
-          DO i = 1 , K
+          DO i = 1, K
             v = 0.D0
             jlow = MAX(i,m)
-            DO j = jlow , K
+            DO j = jlow, K
               v = a(i,j)*Vnikx(j,m) + v
             ENDDO
             Vnikx(i,m) = v
@@ -78,7 +78,7 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
           EXIT
         ELSE
           IF ( diff/=0.D0 ) THEN
-            DO l = 1 , j
+            DO l = 1, j
               a(l,j) = (a(l,j)-a(l,j-1))/diff*fkmd
             ENDDO
           ENDIF

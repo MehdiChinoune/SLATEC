@@ -70,10 +70,10 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   !***END PROLOGUE  DCHKW
   !     .. Scalar Arguments ..
   REAL(8) :: Err
-  INTEGER Ierr , Iter , Leniw , Lenw , Lociw , Locw
+  INTEGER Ierr, Iter, Leniw, Lenw, Lociw, Locw
   CHARACTER Name*(*)
   !     .. Local Scalars ..
-  CHARACTER xern1*8 , xern2*8 , xernam*8
+  CHARACTER xern1*8, xern2*8, xernam*8
   !     .. External Functions ..
   REAL(8) :: D1MACH
   EXTERNAL D1MACH

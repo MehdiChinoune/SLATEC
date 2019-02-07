@@ -6,11 +6,11 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !*--DSPLP6
   !*** Start of declarations inserted by SPAG
   REAL DUSRMT
-  INTEGER iadbig , ictmax , ictopt , Info , iopt , key , lamat , last ,&
-    lbasma , lbm , lcolnr , lcsc , lerd , lerp , libb , librc ,&
-    limat , lipr , Liw , liwork
-  INTEGER liwr , lmx , lrg , lrhs , lrprim , lrz , Lw , lwork , lwr , lww ,&
-    Mrelas , nerr , next , Nvars
+  INTEGER iadbig, ictmax, ictopt, Info, iopt, key, lamat, last ,&
+    lbasma, lbm, lcolnr, lcsc, lerd, lerp, libb, librc ,&
+    limat, lipr, Liw, liwork
+  INTEGER liwr, lmx, lrg, lrhs, lrprim, lrz, Lw, lwork, lwr, lww ,&
+    Mrelas, nerr, next, Nvars
   !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSPLP
   !***PURPOSE  Solve linear programming problems involving at
@@ -1550,11 +1550,11 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSPLP
-  REAL(8) :: Bl(*) , Bu(*) , Costs(*) , Dattrv(*) , Duals(*) ,&
-    Prgopt(*) , Primal(*) , Work(*) , zero
+  REAL(8) :: Bl(*), Bu(*), Costs(*), Dattrv(*), Duals(*) ,&
+    Prgopt(*), Primal(*), Work(*), zero
   !
-  INTEGER Ibasis(*) , Ind(*) , Iwork(*)
-  CHARACTER(8) :: xern1 , xern2
+  INTEGER Ibasis(*), Ind(*), Iwork(*)
+  CHARACTER(8) :: xern1, xern2
   !
   EXTERNAL DUSRMT
   !
@@ -1692,4 +1692,5 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !    4 WW,LMX,LBM,IBASIS,IBB,IMAT,
   !    5 IBRC,IPR,IWR)
   !
-  99999 END SUBROUTINE DSPLP
+  99999 CONTINUE
+  END SUBROUTINE DSPLP
