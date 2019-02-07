@@ -19,11 +19,11 @@ SUBROUTINE DFDEQC(T,U,Uprime,Rpar,Ipar)
   !     Declare arguments.
   !
   INTEGER Ipar(*)
-  DOUBLE PRECISION Rpar(*) , T , U(*) , Uprime(*)
+  REAL(8) :: Rpar(*) , T , U(*) , Uprime(*)
   !
   !     Declare local variables.
   !
-  DOUBLE PRECISION r , rsq , r3
+  REAL(8) :: r , rsq , r3
   !***FIRST EXECUTABLE STATEMENT  DFDEQC
   rsq = U(1)*U(1) + U(2)*U(2)
   r = SQRT(rsq)

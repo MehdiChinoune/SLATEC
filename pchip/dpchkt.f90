@@ -49,12 +49,12 @@ SUBROUTINE DPCHKT(N,X,Knotyp,T)
   !  Declare arguments.
   !
   INTEGER N , Knotyp
-  DOUBLE PRECISION X(*) , T(*)
+  REAL(8) :: X(*) , T(*)
   !
   !  Declare local variables.
   !
   INTEGER j , k , ndim
-  DOUBLE PRECISION hbeg , hend
+  REAL(8) :: hbeg , hend
   !***FIRST EXECUTABLE STATEMENT  DPCHKT
   !
   !  Initialize.

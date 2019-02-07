@@ -36,15 +36,15 @@ SUBROUTINE DGEQC(Lun,Kprint,Nerr)
   !     .. Scalar Arguments ..
   INTEGER Kprint , Lun , Nerr
   !     .. Local Scalars ..
-  DOUBLE PRECISION errcmp , errmax
+  REAL(8) :: errcmp , errmax
   INTEGER i , ind , itask , j , kprog , lda , n
   !     .. Local Arrays ..
-  DOUBLE PRECISION a(5,4) , atemp(5,4) , b(4) , btemp(4) , bxex(4) , &
+  REAL(8) :: a(5,4) , atemp(5,4) , b(4) , btemp(4) , bxex(4) , &
     work(20)
   INTEGER iwork(4)
   CHARACTER list(2)*4
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   EXTERNAL D1MACH
   !     .. External Subroutines ..
   EXTERNAL DGEFS

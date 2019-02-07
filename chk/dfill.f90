@@ -36,10 +36,10 @@ SUBROUTINE DFILL(N,V,Val)
   !   920511  Added complete declaration section.  (WRB)
   !***END PROLOGUE  DFILL
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Val
+  REAL(8) :: Val
   INTEGER N
   !     .. Array Arguments ..
-  DOUBLE PRECISION V(*)
+  REAL(8) :: V(*)
   !     .. Local Scalars ..
   INTEGER i , is , nr
   !     .. Intrinsic Functions ..

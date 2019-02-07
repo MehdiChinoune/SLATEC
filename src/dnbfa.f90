@@ -115,11 +115,11 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DNBFA
   INTEGER Lda , N , Ml , Mu , Ipvt(*) , Info
-  DOUBLE PRECISION Abe(Lda,*)
+  REAL(8) :: Abe(Lda,*)
   !
   INTEGER ml1 , mb , m , n1 , ldb , i , j , k , l , lm , lm1 , lm2 , mp , &
     IDAMAX
-  DOUBLE PRECISION t
+  REAL(8) :: t
   !***FIRST EXECUTABLE STATEMENT  DNBFA
   ml1 = Ml + 1
   mb = Ml + Mu

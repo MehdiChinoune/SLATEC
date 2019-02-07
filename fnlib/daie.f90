@@ -1,6 +1,6 @@
 !*==DAIE.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DAIE
-DOUBLE PRECISION FUNCTION DAIE(X)
+REAL(8) FUNCTION DAIE(X)
   IMPLICIT NONE
   !*--DAIE5
   !*** Start of declarations inserted by SPAG
@@ -59,7 +59,7 @@ DOUBLE PRECISION FUNCTION DAIE(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DAIE
-  DOUBLE PRECISION X , aifcs(13) , aigcs(13) , aip1cs(57) , aip2cs(37) , &
+  REAL(8) :: X , aifcs(13) , aigcs(13) , aip1cs(57) , aip2cs(37) , &
     sqrtx , theta , xbig , xm , x3sml , x32sml , z , D1MACH , &
     DCSEVL
   LOGICAL first

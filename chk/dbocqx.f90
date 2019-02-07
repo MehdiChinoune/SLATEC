@@ -26,16 +26,16 @@ SUBROUTINE DBOCQX(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--DBOCQX27
   !*** Start of declarations inserted by SPAG
-  DOUBLE PRECISION D1MACH , DNRM2 , rnorm , rnormc , sr
+  REAL(8) :: D1MACH , DNRM2 , rnorm , rnormc , sr
   INTEGER i , ib , Ipass , irhs , itest , j , Kprint , Lun , mcon , mdw ,&
     mode , mpass , mrows , ncols
   !*** End of declarations inserted by SPAG
-  DOUBLE PRECISION d(6,5) , w(11,11) , bl(5,2) , bu(5,2) , x(30) , rw(55) ,&
+  REAL(8) :: d(6,5) , w(11,11) , bl(5,2) , bu(5,2) , x(30) , rw(55) ,&
     xtrue(9)
-  DOUBLE PRECISION c(5,5)
-  DOUBLE PRECISION bl1(10) , bu1(10)
+  REAL(8) :: c(5,5)
+  REAL(8) :: bl1(10) , bu1(10)
   INTEGER ind(10) , iw(20) , iopt(40)
-  DOUBLE PRECISION rhs(6,2)
+  REAL(8) :: rhs(6,2)
   CHARACTER(4) :: msg
   !
   DATA ((c(i,j),i=1,5),j=1,5)/1.D0 , 10.D0 , 4.D0 , 8.D0 , 1.D0 , 1.D0 ,&

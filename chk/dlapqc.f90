@@ -88,16 +88,16 @@ SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
   !     .. Scalar Arguments ..
   INTEGER Ipass , Kprint , Lun
   !     .. Arrays in Common ..
-  DOUBLE PRECISION SOLn(MAXN)
+  REAL(8) :: SOLn(MAXN)
   !     .. Local Scalars ..
-  DOUBLE PRECISION dens , err , factor , tol
+  REAL(8) :: dens , err , factor , tol
   INTEGER ierr , isym , iter , itmax , itol , itolgm , iunit , k , kase , &
     leniw , lenw , n , nelt , neltmx , nfail , nmax , nsave
   !     .. Local Arrays ..
-  DOUBLE PRECISION a(MXNELT) , f(MAXN) , rwork(MAXRW) , xiter(MAXN)
+  REAL(8) :: a(MXNELT) , f(MAXN) , rwork(MAXRW) , xiter(MAXN)
   INTEGER ia(MXNELT) , iwork(MAXIW) , ja(MXNELT)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   EXTERNAL D1MACH
   !     .. External Subroutines ..
   EXTERNAL DCPPLT , DFILL , DRMGEN , DS2Y , DSDBCG , DSDCG , DSDCGN , &

@@ -1,6 +1,6 @@
 !*==DASINH.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DASINH
-DOUBLE PRECISION FUNCTION DASINH(X)
+REAL(8) FUNCTION DASINH(X)
   IMPLICIT NONE
   !*--DASINH5
   !*** Start of declarations inserted by SPAG
@@ -27,7 +27,7 @@ DOUBLE PRECISION FUNCTION DASINH(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DASINH
-  DOUBLE PRECISION X , asnhcs(39) , aln2 , sqeps , xmax , y , DCSEVL , &
+  REAL(8) :: X , asnhcs(39) , aln2 , sqeps , xmax , y , DCSEVL , &
     D1MACH
   LOGICAL first
   SAVE asnhcs , aln2 , nterms , xmax , sqeps , first

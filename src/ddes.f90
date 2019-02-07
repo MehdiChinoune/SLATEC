@@ -34,7 +34,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   INTEGER Idid , Info , Init , Ipar , Iquit , Iv , Ivc , k , Kgi , Kle4 ,&
     Kold , Kord , Kprev , Ksteps , l , ltol , maxnum , natolp , Neq ,&
     nrtolp , Ns
-  DOUBLE PRECISION a , absdel , Alpha , Atol , Beta , D1MACH , del ,&
+  REAL(8) :: a , absdel , Alpha , Atol , Beta , D1MACH , del ,&
     Delsgn , dt , Eps , Fouru , G , Gi , H , ha , Hold , P ,&
     Phi , Psi , Rpar , Rtol , Sig , T , Told , Tout , Tstop ,&
     Twou , u , V , W , Wt , X , Xold , Y , Yp , Ypout , Yy

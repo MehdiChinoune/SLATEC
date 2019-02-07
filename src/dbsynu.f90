@@ -74,7 +74,7 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
   !***END PROLOGUE  DBSYNU
   !
   INTEGER i , inu , j , k , kk , N , nn
-  DOUBLE PRECISION a , ak , arg , a1 , a2 , bk , cb , cbk , cc , cck , ck , &
+  REAL(8) :: a , ak , arg , a1 , a2 , bk , cb , cbk , cc , cck , ck , &
     coef , cpt , cp1 , cp2 , cs , cs1 , cs2 , cx , dnu , &
     dnu2 , etest , etx , f , fc , fhs , fk , fks , flrx , &
     fmu , fn , Fnu , fx , g , g1 , g2 , hpi , p , pi , pt , &
@@ -82,7 +82,7 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
     rs2 , rthpi , rx , s , sa , sb , smu , ss , st , s1 , &
     s2 , tb , tm , tol , t1 , t2 , X , x1 , x2 , Y
   DIMENSION a(120) , rb(120) , cb(120) , Y(*) , cc(8)
-  DOUBLE PRECISION DGAMMA , D1MACH
+  REAL(8) :: DGAMMA , D1MACH
   EXTERNAL DGAMMA
   SAVE x1 , x2 , pi , rthpi , hpi , cc
   DATA x1 , x2/3.0D0 , 20.0D0/

@@ -36,7 +36,7 @@ SUBROUTINE DDCST(Maxord,Mint,Iswflg,El,Tq)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  DDCST
-  DOUBLE PRECISION El(13,12) , factrl(12) , gamma(14) , sum , Tq(3,12)
+  REAL(8) :: El(13,12) , factrl(12) , gamma(14) , sum , Tq(3,12)
   INTEGER i , Iswflg , j , Maxord , Mint , mxrd
   !***FIRST EXECUTABLE STATEMENT  DDCST
   factrl(1) = 1.D0

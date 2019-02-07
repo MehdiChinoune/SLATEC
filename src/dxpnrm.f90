@@ -28,7 +28,7 @@ SUBROUTINE DXPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXPNRM
-  DOUBLE PRECISION c1 , dmu , nu , Nu1 , Nu2 , Pqa , prod
+  REAL(8) :: c1 , dmu , nu , Nu1 , Nu2 , Pqa , prod
   DIMENSION Pqa(*) , Ipqa(*)
   !***FIRST EXECUTABLE STATEMENT  DXPNRM
   Ierror = 0

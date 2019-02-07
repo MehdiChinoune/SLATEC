@@ -136,7 +136,7 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
   !   930122  Added ZSQRT to EXTERNAL statement.  (RWC)
   !***END PROLOGUE  ZBIRY
   !     COMPLEX BI,CONE,CSQ,CY,S1,S2,TRM1,TRM2,Z,ZTA,Z3
-  DOUBLE PRECISION aa , ad , ak , alim , atrm , az , az3 , bb , Bii , Bir , &
+  REAL(8) :: aa , ad , ak , alim , atrm , az , az3 , bb , Bii , Bir , &
     bk , cc , ck , coef , conei , coner , csqi , csqr , cyi , &
     cyr , c1 , c2 , dig , dk , d1 , d2 , eaa , elim , fid , &
     fmr , fnu , fnul , pi , rl , r1m5 , sfac , sti , str , &

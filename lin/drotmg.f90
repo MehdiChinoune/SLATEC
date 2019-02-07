@@ -63,7 +63,7 @@ SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
   !   920316  Prologue corrected.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DROTMG
-  DOUBLE PRECISION gam , one , rgamsq , Dd1 , Dd2 , dh11 , dh12 , dh21 , &
+  REAL(8) :: gam , one , rgamsq , Dd1 , Dd2 , dh11 , dh12 , dh21 , &
     dh22 , Dparam , dp1 , dp2 , dq1 , dq2 , du , Dy1 , zero , &
     gamsq , dflag , dtemp , Dx1 , two
   DIMENSION Dparam(5)

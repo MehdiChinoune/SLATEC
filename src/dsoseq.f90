@@ -93,11 +93,11 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !
   !
   INTEGER I1MACH
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   INTEGER ic , icr , Iflag , Iprint , Is(*) , isj , isv , it , item , itry , &
     j , jk , js , k , kd , kj , kk , km1 , kn , ksv , l , loun , ls , &
     m , mit , mm , Mxit , N , Nc , Ncjs , np1 , Nsri , Nsrrc
-  DOUBLE PRECISION Atolx , B(*) , C(*) , csv , f , Fac(*) , fact , fdif , &
+  REAL(8) :: Atolx , B(*) , C(*) , csv , f , Fac(*) , fact , fdif , &
     Fmax , fmin , fmxs , fn1 , fn2 , FNC , fp , h , hx , &
     P(*) , pmax , re , Rtolx , S(*) , sruro , Temp(*) , &
     test , Tolf , uro , X(*) , xnorm , Y(*) , yj , yn1 , &

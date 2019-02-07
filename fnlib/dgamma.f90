@@ -1,6 +1,6 @@
 !*==DGAMMA.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DGAMMA
-DOUBLE PRECISION FUNCTION DGAMMA(X)
+REAL(8) FUNCTION DGAMMA(X)
   IMPLICIT NONE
   !*--DGAMMA5
   !*** Start of declarations inserted by SPAG
@@ -35,7 +35,7 @@ DOUBLE PRECISION FUNCTION DGAMMA(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable name.  (RWC, WRB)
   !***END PROLOGUE  DGAMMA
-  DOUBLE PRECISION X , gamcs(42) , dxrel , pi , sinpiy , sq2pil , xmax , &
+  REAL(8) :: X , gamcs(42) , dxrel , pi , sinpiy , sq2pil , xmax , &
     xmin , y , D9LGMC , DCSEVL , D1MACH
   LOGICAL first
   !

@@ -77,9 +77,9 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
   EXTERNAL DYAIRY
   INTEGER i , iflw , j , N , nb , nd , nn , nud , nulim
   INTEGER I1MACH
-  DOUBLE PRECISION azn , cn , dnu , elim , flgjy , fn , Fnu , ran , s , s1 , &
+  REAL(8) :: azn , cn , dnu , elim , flgjy , fn , Fnu , ran , s , s1 , &
     s2 , tm , trx , w , wk , w2n , X , xlim , xxn , Y
-  DOUBLE PRECISION DBESY0 , DBESY1 , D1MACH
+  REAL(8) :: DBESY0 , DBESY1 , D1MACH
   DIMENSION w(2) , nulim(2) , Y(*) , wk(7)
   SAVE nulim
   DATA nulim(1) , nulim(2)/70 , 100/

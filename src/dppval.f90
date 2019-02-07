@@ -1,6 +1,6 @@
 !*==DPPVAL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DPPVAL
-DOUBLE PRECISION FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
+REAL(8) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   IMPLICIT NONE
   !*--DPPVAL5
   !***BEGIN PROLOGUE  DPPVAL
@@ -67,7 +67,7 @@ DOUBLE PRECISION FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !***END PROLOGUE  DPPVAL
   !
   INTEGER i , Ideriv , Inppv , j , K , Ldc , Lxi , ndummy , kk
-  DOUBLE PRECISION C , dx , X , Xi
+  REAL(8) :: C , dx , X , Xi
   DIMENSION Xi(*) , C(Ldc,*)
   !***FIRST EXECUTABLE STATEMENT  DPPVAL
   DPPVAL = 0.0D0

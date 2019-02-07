@@ -66,9 +66,9 @@ SUBROUTINE DSISL(A,Lda,N,Kpvt,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSISL
   INTEGER Lda , N , Kpvt(*)
-  DOUBLE PRECISION A(Lda,*) , B(*)
+  REAL(8) :: A(Lda,*) , B(*)
   !
-  DOUBLE PRECISION ak , akm1 , bk , bkm1 , DDOT , denom , temp
+  REAL(8) :: ak , akm1 , bk , bkm1 , DDOT , denom , temp
   INTEGER k , kp
   !
   !     LOOP BACKWARD APPLYING THE TRANSFORMATIONS AND

@@ -118,11 +118,11 @@ SUBROUTINE DPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPBCO
   INTEGER Lda , N , M , Info
-  DOUBLE PRECISION Abd(Lda,*) , Z(*)
-  DOUBLE PRECISION Rcond
+  REAL(8) :: Abd(Lda,*) , Z(*)
+  REAL(8) :: Rcond
   !
-  DOUBLE PRECISION DDOT , ek , t , wk , wkm
-  DOUBLE PRECISION anorm , s , DASUM , sm , ynorm
+  REAL(8) :: DDOT , ek , t , wk , wkm
+  REAL(8) :: anorm , s , DASUM , sm , ynorm
   INTEGER i , j , j2 , k , kb , kp1 , l , la , lb , lm , mu
   !
   !     FIND NORM OF A

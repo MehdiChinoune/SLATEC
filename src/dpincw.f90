@@ -39,11 +39,11 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !***END PROLOGUE  DPINCW
   INTEGER Ibasis(*) , Imat(*) , Ibrc(Lbm,2) , Ipr(*) , Iwr(*) , Ind(*) , &
     Ibb(*)
-  DOUBLE PRECISION Amat(*) , Basmat(*) , Csc(*) , Wr(*) , Ww(*) , Rz(*) , &
+  REAL(8) :: Amat(*) , Basmat(*) , Csc(*) , Wr(*) , Ww(*) , Rz(*) , &
     Rg(*) , Costs(*) , Colnrm(*) , Duals(*) , Costsc , &
     Erdnrm , Dulnrm , Gg , one , rzj , scalr , zero , rcost , &
     cnorm
-  DOUBLE PRECISION DDOT
+  REAL(8) :: DDOT
   LOGICAL Stpedg , pagepl , trans
   !***FIRST EXECUTABLE STATEMENT  DPINCW
   lpg = Lmx - (Nvars+4)

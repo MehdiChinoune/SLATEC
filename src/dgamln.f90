@@ -1,6 +1,6 @@
 !*==DGAMLN.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DGAMLN
-DOUBLE PRECISION FUNCTION DGAMLN(Z,Ierr)
+REAL(8) FUNCTION DGAMLN(Z,Ierr)
   IMPLICIT NONE
   !*--DGAMLN5
   !***BEGIN PROLOGUE  DGAMLN
@@ -47,7 +47,7 @@ DOUBLE PRECISION FUNCTION DGAMLN(Z,Ierr)
   !   920128  Category corrected.  (WRB)
   !   921215  DGAMLN defined for Z negative.  (WRB)
   !***END PROLOGUE  DGAMLN
-  DOUBLE PRECISION cf , con , fln , fz , gln , rln , s , tlg , trm , tst , &
+  REAL(8) :: cf , con , fln , fz , gln , rln , s , tlg , trm , tst , &
     t1 , wdtol , Z , zdmy , zinc , zm , zmin , zp , zsq , &
     D1MACH
   INTEGER i , Ierr , i1m , k , mz , nz , I1MACH

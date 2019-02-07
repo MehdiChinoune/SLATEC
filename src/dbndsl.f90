@@ -191,7 +191,7 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   IMPLICIT NONE
   !*--DBNDSL192
   !*** Start of declarations inserted by SPAG
-  DOUBLE PRECISION G , Rnorm , rsq , s , X , zero
+  REAL(8) :: G , Rnorm , rsq , s , X , zero
   INTEGER i , i1 , i2 , ie , ii , iopt , Ip , Ir , irm1 , ix , j , jg , l , &
     Mdg , Mode , N , Nb , nerr , np1
   !*** End of declarations inserted by SPAG

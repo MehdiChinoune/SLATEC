@@ -936,14 +936,14 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !     Declare arguments.
   !
   INTEGER Neq , Info(15) , Idid , Lrw , Iwork(*) , Liw , Ipar(*)
-  DOUBLE PRECISION T , Y(*) , Yprime(*) , Tout , Rtol(*) , Atol(*) ,&
+  REAL(8) :: T , Y(*) , Yprime(*) , Tout , Rtol(*) , Atol(*) ,&
     Rwork(*) , Rpar(*)
   EXTERNAL RES , JAC
   !
   !     Declare externals.
   !
   EXTERNAL D1MACH , DDAINI , DDANRM , DDASTP , DDATRP , DDAWTS , XERMSG
-  DOUBLE PRECISION D1MACH , DDANRM
+  REAL(8) :: D1MACH , DDANRM
   !
   !     Declare local variables.
   !
@@ -953,7 +953,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     LNJE , LNPD , LNRE , LNS , LNST , LNSTL , lpd , LPHASE , lphi ,&
     LPSI , LROUND , LS , LSIGMA , LTN , LTSTOP , lwm , lwt , mband ,&
     msave , mxord , NPD , ntemp , nzflg
-  DOUBLE PRECISION atoli , h , hmax , hmin , ho , r , rh , rtoli , tdist ,&
+  REAL(8) :: atoli , h , hmax , hmin , ho , r , rh , rtoli , tdist ,&
     tn , tnext , tstop , uround , ypnorm
   LOGICAL done
   !       Auxiliary variables for conversion of values to be included in

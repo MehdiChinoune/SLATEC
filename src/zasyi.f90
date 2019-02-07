@@ -24,7 +24,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
   !***END PROLOGUE  ZASYI
   !     COMPLEX AK1,CK,CONE,CS1,CS2,CZ,CZERO,DK,EZ,P1,RZ,S2,Y,Z
-  DOUBLE PRECISION aa , aez , ak , ak1i , ak1r , Alim , arg , arm , atol , &
+  REAL(8) :: aa , aez , ak , ak1i , ak1r , Alim , arg , arm , atol , &
     az , bb , bk , cki , ckr , conei , coner , cs1i , cs1r , &
     cs2i , cs2r , czi , czr , dfnu , dki , dkr , dnu2 , &
     Elim , ezi , ezr , fdn , Fnu , pi , p1i , p1r , raz , &

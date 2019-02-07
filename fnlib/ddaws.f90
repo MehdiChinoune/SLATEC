@@ -1,6 +1,6 @@
 !*==DDAWS.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DDAWS
-DOUBLE PRECISION FUNCTION DDAWS(X)
+REAL(8) FUNCTION DDAWS(X)
   IMPLICIT NONE
   !*--DDAWS5
   !*** Start of declarations inserted by SPAG
@@ -47,7 +47,7 @@ DOUBLE PRECISION FUNCTION DDAWS(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DDAWS
-  DOUBLE PRECISION X , dawcs(21) , daw2cs(45) , dawacs(75) , xbig , xmax , &
+  REAL(8) :: X , dawcs(21) , daw2cs(45) , dawacs(75) , xbig , xmax , &
     xsml , y , DCSEVL , D1MACH
   LOGICAL first
   SAVE dawcs , daw2cs , dawacs , ntdaw , ntdaw2 , ntdawa , xsml , xbig , &

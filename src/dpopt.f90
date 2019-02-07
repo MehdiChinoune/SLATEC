@@ -40,7 +40,7 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Fixed an error message.  (RWC)
   !***END PROLOGUE  DPOPT
-  DOUBLE PRECISION abig , asmall , costsc , Csc(*) , eps , one , Prgopt(*) , &
+  REAL(8) :: abig , asmall , costsc , Csc(*) , eps , one , Prgopt(*) , &
     Ropt(07) , tolls , tune , zero , D1MACH , tolabs
   INTEGER Ibasis(*) , Intopt(08)
   LOGICAL contin , usrbas , sizeup , savedt , colscp , cstscp , minprb , &

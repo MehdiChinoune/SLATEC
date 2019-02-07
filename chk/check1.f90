@@ -37,11 +37,11 @@ SUBROUTINE CHECK1(Sfac,Dfac,Kprint)
   COMMON /COMBLA/ NPRint , ICAse , N , INCx , INCy , MODe , PASs
   LOGICAL PASs
   INTEGER itrue2(5) , itrue3(5)
-  DOUBLE PRECISION da , dx(8)
-  DOUBLE PRECISION dv(8,5,2)
-  DOUBLE PRECISION Dfac
-  DOUBLE PRECISION DNRM2 , DASUM
-  DOUBLE PRECISION dtrue1(5) , dtrue3(5) , dtrue5(8,5,2)
+  REAL(8) :: da , dx(8)
+  REAL(8) :: dv(8,5,2)
+  REAL(8) :: Dfac
+  REAL(8) :: DNRM2 , DASUM
+  REAL(8) :: dtrue1(5) , dtrue3(5) , dtrue5(8,5,2)
   REAL strue2(5) , strue4(5) , strue(8) , sx(8)
   COMPLEX ca , cv(8,5,2) , ctrue5(8,5,2) , ctrue6(8,5,2) , cx(8)
   !

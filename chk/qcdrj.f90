@@ -22,7 +22,7 @@ SUBROUTINE QCDRJ(Lun,Kprint,Ipass)
   !***END PROLOGUE  QCDRJ
   INTEGER Kprint , Ipass , contrl , kontrl , Lun , ier
   INTEGER ipass1 , ipass2 , ipass3 , ipass4 , NUMXER
-  DOUBLE PRECISION consj , trj , DRJ , dif , D1MACH
+  REAL(8) :: consj , trj , DRJ , dif , D1MACH
   EXTERNAL D1MACH , DRJ , NUMXER , XERCLR , XGETF , XSETF
   !***FIRST EXECUTABLE STATEMENT  QCDRJ
   CALL XERCLR

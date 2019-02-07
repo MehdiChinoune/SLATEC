@@ -587,7 +587,7 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   INTEGER ialpha , ibeta , idelsn , Idid , ifouru , ig , ihold , Info , ip ,&
     Ipar , iphi , ipsi , isig , itold , itstar , itwou , iv , iw ,&
     Iwork , iwt , iyp , iypout , iyy , Liw , Lrw , Neq
-  DOUBLE PRECISION Atol , Rpar , Rtol , Rwork , T , Tout , Y
+  REAL(8) :: Atol , Rpar , Rtol , Rwork , T , Tout , Y
   LOGICAL start , phase1 , nornd , stiff , intout
   !
   DIMENSION Y(*) , Info(15) , Rtol(*) , Atol(*) , Rwork(*) , Iwork(*) ,&

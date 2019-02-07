@@ -74,7 +74,7 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQK15W
   !
-  DOUBLE PRECISION A , absc , absc1 , absc2 , Abserr , B , centr , dhlgth , &
+  REAL(8) :: A , absc , absc1 , absc2 , Abserr , B , centr , dhlgth , &
     D1MACH , epmach , F , fc , fsum , fval1 , fval2 , fv1 , &
     fv2 , hlgth , P1 , P2 , P3 , P4 , Resabs , Resasc , &
     resg , resk , reskh , Result , uflow , W , wg , wgk , xgk

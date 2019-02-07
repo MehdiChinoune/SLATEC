@@ -1,6 +1,6 @@
 !*==DRD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DRD
-DOUBLE PRECISION FUNCTION DRD(X,Y,Z,Ier)
+REAL(8) FUNCTION DRD(X,Y,Z,Ier)
   IMPLICIT NONE
   !*--DRD5
   !***BEGIN PROLOGUE  DRD
@@ -314,10 +314,10 @@ DOUBLE PRECISION FUNCTION DRD(X,Y,Z,Ier)
   !***END PROLOGUE  DRD
   CHARACTER(16) :: xern3 , xern4 , xern5 , xern6
   INTEGER Ier
-  DOUBLE PRECISION lolim , tuplim , uplim , epslon , errtol , D1MACH
-  DOUBLE PRECISION c1 , c2 , c3 , c4 , ea , eb , ec , ed , ef , lamda
-  DOUBLE PRECISION mu , power4 , sigma , s1 , s2 , X , xn , xndev
-  DOUBLE PRECISION xnroot , Y , yn , yndev , ynroot , Z , zn , zndev ,&
+  REAL(8) :: lolim , tuplim , uplim , epslon , errtol , D1MACH
+  REAL(8) :: c1 , c2 , c3 , c4 , ea , eb , ec , ed , ef , lamda
+  REAL(8) :: mu , power4 , sigma , s1 , s2 , X , xn , xndev
+  REAL(8) :: xnroot , Y , yn , yndev , ynroot , Z , zn , zndev ,&
     znroot
   LOGICAL first
   SAVE errtol , lolim , uplim , c1 , c2 , c3 , c4 , first

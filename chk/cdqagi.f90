@@ -23,7 +23,7 @@ SUBROUTINE CDQAGI(Lun,Kprint,Ipass)
   !
   ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
   !
-  DOUBLE PRECISION abserr , bound , D1MACH , epmach , epsabs , epsrel , &
+  REAL(8) :: abserr , bound , D1MACH , epmach , epsabs , epsrel , &
     error , exact0 , exact1 , exact2 , exact3 , exact4 , &
     oflow , result , DT0 , DT1 , DT2 , DT3 , DT4 , DT5 , &
     uflow , work

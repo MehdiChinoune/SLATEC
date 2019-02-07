@@ -51,7 +51,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !
   INTEGER Idid , Info , Init , Ipar , Iquit , k , Kop , Ksteps , ktol ,&
     mxkop , mxstep , natolp , Neq , nrtolp , Nstifs , Ntstep
-  DOUBLE PRECISION a , Atol , big , D1MACH , dt , Dtsign , DHVNRM , dy ,&
+  REAL(8) :: a , Atol , big , D1MACH , dt , Dtsign , DHVNRM , dy ,&
     ee , eeoet , es , estiff , esttol , et , F1 , F2 , F3 ,&
     F4 , F5 , H , hmin , remin , Rer , Rpar , Rtol , s , T ,&
     tol , Told , Tolfac , Tout , u , U26 , ute , Y , yavg ,&

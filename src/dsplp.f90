@@ -1550,7 +1550,7 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSPLP
-  DOUBLE PRECISION Bl(*) , Bu(*) , Costs(*) , Dattrv(*) , Duals(*) ,&
+  REAL(8) :: Bl(*) , Bu(*) , Costs(*) , Dattrv(*) , Duals(*) ,&
     Prgopt(*) , Primal(*) , Work(*) , zero
   !
   INTEGER Ibasis(*) , Ind(*) , Iwork(*)

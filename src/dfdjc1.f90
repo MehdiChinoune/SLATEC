@@ -92,9 +92,9 @@ SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DFDJC1
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   INTEGER i , Iflag , j , k , Ldfjac , Ml , msum , Mu , N
-  DOUBLE PRECISION eps , Epsfcn , epsmch , Fjac(Ldfjac,*) , Fvec(*) , h , &
+  REAL(8) :: eps , Epsfcn , epsmch , Fjac(Ldfjac,*) , Fvec(*) , h , &
     temp , Wa1(*) , Wa2(*) , X(*) , zero
   SAVE zero
   DATA zero/0.0D0/

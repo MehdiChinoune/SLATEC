@@ -175,8 +175,8 @@ SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !***END PROLOGUE  DNBFS
   !
   INTEGER Lda , N , Itask , Ind , Iwork(*) , Ml , Mu
-  DOUBLE PRECISION Abe(Lda,*) , V(*) , Work(*) , D1MACH
-  DOUBLE PRECISION rcond
+  REAL(8) :: Abe(Lda,*) , V(*) , Work(*) , D1MACH
+  REAL(8) :: rcond
   CHARACTER(8) :: xern1 , xern2
   !***FIRST EXECUTABLE STATEMENT  DNBFS
   IF ( Lda<N ) THEN

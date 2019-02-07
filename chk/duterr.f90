@@ -21,7 +21,7 @@ SUBROUTINE DUTERR(Method,Ierr,Iout,Nfail,Istdo,Iter,Err)
   !   921021  Changed E's to 1P,D's in output formats.  (FNF)
   !***END PROLOGUE  DUTERR
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Err
+  REAL(8) :: Err
   INTEGER Ierr , Iout , Istdo , Iter , Nfail
   CHARACTER Method*6
   !***FIRST EXECUTABLE STATEMENT  DUTERR

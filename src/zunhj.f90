@@ -48,7 +48,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
   !     COMPLEX ARG,ASUM,BSUM,CFNU,CONE,CR,CZERO,DR,P,PHI,PRZTH,PTFN,
   !    *RFN13,RTZTA,RZTH,SUMA,SUMB,TFN,T2,UP,W,W2,Z,ZA,ZB,ZC,ZETA,ZETA1,
   !    *ZETA2,ZTH
-  DOUBLE PRECISION alfa , ang , ap , ar , Argi , Argr , Asumi , Asumr , &
+  REAL(8) :: alfa , ang , ap , ar , Argi , Argr , Asumi , Asumr , &
     atol , aw2 , azth , beta , br , Bsumi , Bsumr , btol , &
     c , conei , coner , cri , crr , dri , drr , ex1 , ex2 , &
     Fnu , fn13 , fn23 , gama , gpi , hpi , Phii , Phir , pi , &

@@ -76,15 +76,15 @@ SUBROUTINE ZQCAI(Lun,Kprint,Ipass)
   !  Declare external functions.
   !
   INTEGER I1MACH
-  DOUBLE PRECISION D1MACH , ZABS
+  REAL(8) :: D1MACH , ZABS
   EXTERNAL I1MACH , D1MACH , ZABS , ZEXP , ZSQRT
   !
   !  Declare local variables.
   !
-  DOUBLE PRECISION con1r , con1i , con2r , con2i , con3r , con3i , cvr , &
+  REAL(8) :: con1r , con1i , con2r , con2i , con3r , con3i , cvr , &
     cvi , cwr , cwi , cyr , cyi , wr , wi , yr , yi , zr , &
     zi , zrr , zri
-  DOUBLE PRECISION aa , ab , acw , acy , alim , arg , atol , av , azrr , &
+  REAL(8) :: aa , ab , acw , acy , alim , arg , atol , av , azrr , &
     a1 , a2 , ct , c23 , dig , elim , eps , er , ertol , &
     film , fnul , fpi , hpi , pi , pi3 , ptr , r , rl , rm , &
     rpi , rtpi , r1m4 , r1m5 , slak , spi , st , sti , str , &

@@ -32,18 +32,18 @@ SUBROUTINE DPFITT(Lun,Kprint,Ipass)
   !     .. Scalar Arguments ..
   INTEGER Ipass , Kprint , Lun
   !     .. Scalars in Common ..
-  DOUBLE PRECISION EPS , RP , SVEps , TOL
+  REAL(8) :: EPS , RP , SVEps , TOL
   INTEGER IERp , IERr , NORd , NORdp
   !     .. Arrays in Common ..
-  DOUBLE PRECISION R(11)
+  REAL(8) :: R(11)
   !     .. Local Scalars ..
-  DOUBLE PRECISION yfit
+  REAL(8) :: yfit
   INTEGER i , icnt , m , maxord
   !     .. Local Arrays ..
-  DOUBLE PRECISION a(97) , tc(5) , w(11) , x(11) , y(11) , yp(5)
+  REAL(8) :: a(97) , tc(5) , w(11) , x(11) , y(11) , yp(5)
   INTEGER itest(9)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   EXTERNAL D1MACH
   !     .. External Subroutines ..
   EXTERNAL DCMPAR , PASS , DPCOEF , DPOLFT , DP1VLU

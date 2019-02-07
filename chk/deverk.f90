@@ -48,7 +48,7 @@ SUBROUTINE DEVERK(Lout,Kprint,Fail)
   !  DECLARATIONS.
   !
   INTEGER i , ierr , kontrl , N , nerr , next(2)
-  DOUBLE PRECISION d(10) , dum , f(10) , temp , x(10)
+  REAL(8) :: d(10) , dum , f(10) , temp , x(10)
   LOGICAL COMP , skip
   !
   !  INITIALIZE.

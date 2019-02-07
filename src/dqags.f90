@@ -167,7 +167,7 @@ SUBROUTINE DQAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !***END PROLOGUE  DQAGS
   !
   !
-  DOUBLE PRECISION A , Abserr , B , Epsabs , Epsrel , F , Result , Work
+  REAL(8) :: A , Abserr , B , Epsabs , Epsrel , F , Result , Work
   INTEGER Ier , Iwork , Last , Lenw , Limit , lvl , l1 , l2 , l3 , Neval
   !
   DIMENSION Iwork(*) , Work(*)

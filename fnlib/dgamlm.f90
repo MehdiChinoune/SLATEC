@@ -35,7 +35,7 @@ SUBROUTINE DGAMLM(Xmin,Xmax)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DGAMLM
-  DOUBLE PRECISION Xmin , Xmax , alnbig , alnsml , xln , xold , D1MACH
+  REAL(8) :: Xmin , Xmax , alnbig , alnsml , xln , xold , D1MACH
   !***FIRST EXECUTABLE STATEMENT  DGAMLM
   alnsml = LOG(D1MACH(1))
   Xmin = -alnsml

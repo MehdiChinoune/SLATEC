@@ -82,10 +82,10 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   !
   INTEGER i , j , k , Kode , mz , N , nb , nd , nn , nud , nulim , Nz
   INTEGER I1MACH
-  DOUBLE PRECISION cn , dnu , elim , etx , flgik , fn , fnn , Fnu , gln , &
+  REAL(8) :: cn , dnu , elim , etx , flgik , fn , fnn , Fnu , gln , &
     gnu , rtz , s , s1 , s2 , t , tm , trx , w , X , xlim , &
     Y , zn
-  DOUBLE PRECISION DBESK0 , DBESK1 , DBSK1E , DBSK0E , D1MACH
+  REAL(8) :: DBESK0 , DBESK1 , DBSK1E , DBSK0E , D1MACH
   DIMENSION w(2) , nulim(2) , Y(*)
   SAVE nulim
   DATA nulim(1) , nulim(2)/35 , 70/

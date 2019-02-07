@@ -131,11 +131,11 @@ SUBROUTINE DGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGBCO
   INTEGER Lda , N , Ml , Mu , Ipvt(*)
-  DOUBLE PRECISION Abd(Lda,*) , Z(*)
-  DOUBLE PRECISION Rcond
+  REAL(8) :: Abd(Lda,*) , Z(*)
+  REAL(8) :: Rcond
   !
-  DOUBLE PRECISION DDOT , ek , t , wk , wkm
-  DOUBLE PRECISION anorm , s , DASUM , sm , ynorm
+  REAL(8) :: DDOT , ek , t , wk , wkm
+  REAL(8) :: anorm , s , DASUM , sm , ynorm
   INTEGER is , info , j , ju , k , kb , kp1 , l , la , lm , lz , m , mm
   !
   !     COMPUTE 1-NORM OF A

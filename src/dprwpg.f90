@@ -46,7 +46,7 @@ SUBROUTINE DPRWPG(Key,Ipage,Lpg,Sx,Ix)
   !           IF-THEN-ELSE.  (RWC)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   !***END PROLOGUE  DPRWPG
-  DOUBLE PRECISION Sx(*)
+  REAL(8) :: Sx(*)
   DIMENSION Ix(*)
   !***FIRST EXECUTABLE STATEMENT  DPRWPG
   !

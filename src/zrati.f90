@@ -24,7 +24,7 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  ZRATI
-  DOUBLE PRECISION ak , amagz , ap1 , ap2 , arg , az , cdfnui , cdfnur , &
+  REAL(8) :: ak , amagz , ap1 , ap2 , arg , az , cdfnui , cdfnur , &
     conei , coner , Cyi , Cyr , czeroi , czeror , dfnu , &
     fdnu , flam , Fnu , fnup , pti , ptr , p1i , p1r , p2i , &
     p2r , rak , rap1 , rho , rt2 , rzi , rzr , test , test1 , &

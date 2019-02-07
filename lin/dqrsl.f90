@@ -158,11 +158,11 @@ SUBROUTINE DQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DQRSL
   INTEGER Ldx , N , K , Job , Info
-  DOUBLE PRECISION X(Ldx,*) , Qraux(*) , Y(*) , Qy(*) , Qty(*) , B(*) , &
+  REAL(8) :: X(Ldx,*) , Qraux(*) , Y(*) , Qy(*) , Qty(*) , B(*) , &
     Rsd(*) , Xb(*)
   !
   INTEGER i , j , jj , ju , kp1
-  DOUBLE PRECISION DDOT , t , temp
+  REAL(8) :: DDOT , t , temp
   LOGICAL cb , cqy , cqty , cr , cxb
   !***FIRST EXECUTABLE STATEMENT  DQRSL
   !

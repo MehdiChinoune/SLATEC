@@ -64,7 +64,7 @@ SUBROUTINE DQK51(F,A,B,Result,Abserr,Resabs,Resasc)
   !   910819  Added WGK(26) to code.  (WRB)
   !***END PROLOGUE  DQK51
   !
-  DOUBLE PRECISION A , absc , Abserr , B , centr , dhlgth , D1MACH , &
+  REAL(8) :: A , absc , Abserr , B , centr , dhlgth , D1MACH , &
     epmach , F , fc , fsum , fval1 , fval2 , fv1 , fv2 , &
     hlgth , Resabs , Resasc , resg , resk , reskh , Result , &
     uflow , wg , wgk , xgk

@@ -28,7 +28,7 @@ SUBROUTINE D9UPAK(X,Y,N)
   !   900820  Corrected code to find Y between 0.5 and 1.0 rather than
   !           between 0.05 and 1.0.  (WRB)
   !***END PROLOGUE  D9UPAK
-  DOUBLE PRECISION X , Y , absx
+  REAL(8) :: X , Y , absx
   !***FIRST EXECUTABLE STATEMENT  D9UPAK
   absx = ABS(X)
   N = 0

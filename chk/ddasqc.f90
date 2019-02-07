@@ -51,7 +51,7 @@ SUBROUTINE DDASQC(Lun,Kprint,Ipass)
   INTEGER i , idid , info(15) , iout , ipar(1) , ires , iwork(45) , j190 , &
     j290 , liw , lrw , ml , mu , neq , nerr , nfe , nje , nout , nqu , &
     nst
-  DOUBLE PRECISION atol , delta(25) , dtout , er , er1 , er2 , erm , ero , &
+  REAL(8) :: atol , delta(25) , dtout , er , er1 , er2 , erm , ero , &
     hu , rpar(1) , rtol , rwork(550) , t , tout , tout1 , &
     y(25) , yprime(25) , yt1 , yt2
   !

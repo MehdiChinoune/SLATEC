@@ -61,10 +61,10 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
   !
   INTEGER i , il1 , il2 , ilo , inbv , jf , K , left , m , mf , mflag , N , &
     npk , np1
-  DOUBLE PRECISION a , aa , b , bb , Bcoef , bma , bpa , Bquad , c1 , gpts , &
+  REAL(8) :: a , aa , b , bb , Bcoef , bma , bpa , Bquad , c1 , gpts , &
     gwts , gx , q , sum , T , ta , tb , Work , X1 , X2 , y1 , &
     y2
-  DOUBLE PRECISION DBVALU
+  REAL(8) :: DBVALU
   DIMENSION T(*) , Bcoef(*) , gpts(9) , gwts(9) , sum(5) , Work(*)
   !
   SAVE gpts , gwts

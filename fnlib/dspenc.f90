@@ -1,6 +1,6 @@
 !*==DSPENC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DSPENC
-DOUBLE PRECISION FUNCTION DSPENC(X)
+REAL(8) FUNCTION DSPENC(X)
   IMPLICIT NONE
   !*--DSPENC5
   !*** Start of declarations inserted by SPAG
@@ -48,7 +48,7 @@ DOUBLE PRECISION FUNCTION DSPENC(X)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DSPENC
-  DOUBLE PRECISION X , spencs(38) , aln , pi26 , xbig , D1MACH , DCSEVL
+  REAL(8) :: X , spencs(38) , aln , pi26 , xbig , D1MACH , DCSEVL
   LOGICAL first
   SAVE spencs , pi26 , nspenc , xbig , first
   DATA spencs(1)/ + .1527365598892405872946684910028D+0/

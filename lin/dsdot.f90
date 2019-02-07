@@ -1,6 +1,6 @@
 !*==DSDOT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSDOT
-DOUBLE PRECISION FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
+REAL(8) FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
   IMPLICIT NONE
   !*--DSDOT5
   !*** Start of declarations inserted by SPAG
@@ -61,7 +61,7 @@ DOUBLE PRECISION FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
     !
     ns = N*Incx
     DO i = 1 , ns , Incx
-      DSDOT = DSDOT + DBLE(Sx(i))*DBLE(Sy(i))
+      DSDOT = DSDOT + REAL(Sx(i), 8)*REAL(Sy(i), 8)
     ENDDO
     GOTO 99999
   ENDIF
@@ -73,7 +73,7 @@ DOUBLE PRECISION FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
   IF ( Incx<0 ) kx = 1 + (1-N)*Incx
   IF ( Incy<0 ) ky = 1 + (1-N)*Incy
   DO i = 1 , N
-    DSDOT = DSDOT + DBLE(Sx(kx))*DBLE(Sy(ky))
+    DSDOT = DSDOT + REAL(Sx(kx), 8)*REAL(Sy(ky), 8)
     kx = kx + Incx
     ky = ky + Incy
   ENDDO

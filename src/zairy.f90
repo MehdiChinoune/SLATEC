@@ -140,7 +140,7 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
   !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
   !***END PROLOGUE  ZAIRY
   !     COMPLEX AI,CONE,CSQ,CY,S1,S2,TRM1,TRM2,Z,ZTA,Z3
-  DOUBLE PRECISION aa , ad , Aii , Air , ak , alim , atrm , az , az3 , bk , &
+  REAL(8) :: aa , ad , Aii , Air , ak , alim , atrm , az , az3 , bk , &
     cc , ck , coef , conei , coner , csqi , csqr , cyi , &
     cyr , c1 , c2 , dig , dk , d1 , d2 , elim , fid , fnu , &
     ptr , rl , r1m5 , sfac , sti , str , s1i , s1r , s2i , &

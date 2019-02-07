@@ -73,7 +73,7 @@ SUBROUTINE DBSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
   !***END PROLOGUE  DBSPVN
   !
   INTEGER Ileft , imjp1 , Index , ipj , Iwork , Jhigh , jp1 , jp1ml , K , l
-  DOUBLE PRECISION T , vm , vmprev , Vnikx , Work , X
+  REAL(8) :: T , vm , vmprev , Vnikx , Work , X
   !     DIMENSION T(ILEFT+JHIGH)
   DIMENSION T(*) , Vnikx(*) , Work(*)
   !     CONTENT OF J, DELTAM, DELTAP IS EXPECTED UNCHANGED BETWEEN CALLS.

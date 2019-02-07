@@ -1,6 +1,6 @@
 !*==DERFC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DERFC
-DOUBLE PRECISION FUNCTION DERFC(X)
+REAL(8) FUNCTION DERFC(X)
   IMPLICIT NONE
   !*--DERFC5
   !*** Start of declarations inserted by SPAG
@@ -48,7 +48,7 @@ DOUBLE PRECISION FUNCTION DERFC(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DERFC
-  DOUBLE PRECISION X , erfcs(21) , erfccs(59) , erc2cs(49) , sqeps , &
+  REAL(8) :: X , erfcs(21) , erfccs(59) , erc2cs(49) , sqeps , &
     sqrtpi , xmax , txmax , xsml , y , D1MACH , DCSEVL
   LOGICAL first
   SAVE erfcs , erc2cs , erfccs , sqrtpi , nterf , nterfc , nterc2 , xsml , &

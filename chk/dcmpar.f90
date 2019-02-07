@@ -23,12 +23,12 @@ SUBROUTINE DCMPAR(Icnt,Itest)
   !     .. Array Arguments ..
   INTEGER Itest(9)
   !     .. Scalars in Common ..
-  DOUBLE PRECISION EPS , RP , SVEps , TOL
+  REAL(8) :: EPS , RP , SVEps , TOL
   INTEGER IERp , IERr , NORd , NORdp
   !     .. Arrays in Common ..
-  DOUBLE PRECISION R(11)
+  REAL(8) :: R(11)
   !     .. Local Scalars ..
-  DOUBLE PRECISION rpp , ss
+  REAL(8) :: rpp , ss
   INTEGER ierpp , nrdp
   !     .. Local Arrays ..
   INTEGER itemp(4)

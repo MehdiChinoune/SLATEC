@@ -142,10 +142,10 @@ SUBROUTINE DXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION R0nrm
+  REAL(8) :: R0nrm
   INTEGER Isym , Jpre , Jscal , Lgmr , Maxlp1 , N , Nelt , Nmsl
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nelt) , Hes(Maxlp1,*) , Q(*) , Rpar(*) , Sz(*) , V(N,*)&
+  REAL(8) :: A(Nelt) , Hes(Maxlp1,*) , Q(*) , Rpar(*) , Sz(*) , V(N,*)&
     , Wk(N) , X(N) , Xl(N) , Zl(N)
   INTEGER Ia(Nelt) , Ipar(*) , Ja(Nelt)
   !     .. Subroutine Arguments ..

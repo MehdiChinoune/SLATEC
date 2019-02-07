@@ -1,6 +1,6 @@
 !*==DBIE.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBIE
-DOUBLE PRECISION FUNCTION DBIE(X)
+REAL(8) FUNCTION DBIE(X)
   IMPLICIT NONE
   !*--DBIE5
   !*** Start of declarations inserted by SPAG
@@ -77,7 +77,7 @@ DOUBLE PRECISION FUNCTION DBIE(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DBIE
-  DOUBLE PRECISION X , bifcs(13) , bigcs(13) , bif2cs(15) , big2cs(15) , &
+  REAL(8) :: X , bifcs(13) , bigcs(13) , bif2cs(15) , big2cs(15) , &
     bip1cs(47) , bip2cs(88) , atr , btr , sqrtx , theta , &
     xbig , xm , x3sml , x32sml , z , D1MACH , DCSEVL
   LOGICAL first

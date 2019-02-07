@@ -146,7 +146,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !***END PROLOGUE  DHSTRT
   !
   INTEGER Ipar , j , k , lk , Morder , Neq
-  DOUBLE PRECISION A , absdx , B , Big , da , delf , dely , dfdub , dfdxb , &
+  REAL(8) :: A , absdx , B , Big , da , delf , dely , dfdub , dfdxb , &
     DHVNRM , dx , dy , Etol , fbnd , H , Pv , relper , Rpar , &
     Sf , Small , Spy , srydpb , tolexp , tolmin , tolp , &
     tolsum , Y , ydpb , Yp , Yprime

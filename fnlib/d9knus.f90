@@ -46,13 +46,13 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  D9KNUS
-  DOUBLE PRECISION Xnu , X , Bknu , Bknu1 , alpha(32) , beta(32) , a(32) , &
+  REAL(8) :: Xnu , X , Bknu , Bknu1 , alpha(32) , beta(32) , a(32) , &
     c0kcs(29) , znu1cs(20) , alnz , aln2 , a0 , bknud , &
     bknu0 , b0 , c0 , euler , expx , p1 , p2 , p3 , qq , &
     result , sqpi2 , sqrtx , v , vlnz , xi , xmu , xnusml , &
     xsml , x2n , x2tov , z , ztov , alnsml , alnbig
   REAL alneps
-  DOUBLE PRECISION D1MACH , DCSEVL , DGAMMA
+  REAL(8) :: D1MACH , DCSEVL , DGAMMA
   LOGICAL first
   EXTERNAL DGAMMA
   SAVE c0kcs , znu1cs , euler , sqpi2 , aln2 , ntc0k , ntznu1 , xnusml , &

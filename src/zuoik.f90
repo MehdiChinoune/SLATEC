@@ -40,7 +40,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   !***END PROLOGUE  ZUOIK
   !     COMPLEX ARG,ASUM,BSUM,CWRK,CZ,CZERO,PHI,SUM,Y,Z,ZB,ZETA1,ZETA2,ZN,
   !    *ZR
-  DOUBLE PRECISION aarg , aic , Alim , aphi , argi , argr , asumi , asumr , &
+  REAL(8) :: aarg , aic , Alim , aphi , argi , argr , asumi , asumr , &
     ascle , ax , ay , bsumi , bsumr , cwrki , cwrkr , czi , &
     czr , Elim , fnn , Fnu , gnn , gnu , phii , phir , rcz , &
     str , sti , sumi , sumr , Tol , Yi , Yr , zbi , zbr , &

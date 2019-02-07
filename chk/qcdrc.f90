@@ -21,7 +21,7 @@ SUBROUTINE QCDRC(Lun,Kprint,Ipass)
   !***END PROLOGUE  QCDRC
   INTEGER Kprint , Ipass , contrl , kontrl , Lun , ier
   INTEGER ipass1 , ipass2 , ipass3 , ipass4 , NUMXER
-  DOUBLE PRECISION pi , trc , DRC , dif , D1MACH
+  REAL(8) :: pi , trc , DRC , dif , D1MACH
   EXTERNAL D1MACH , DRC , NUMXER , XERCLR , XGETF , XSETF
   !***FIRST EXECUTABLE STATEMENT  QCDRC
   CALL XERCLR

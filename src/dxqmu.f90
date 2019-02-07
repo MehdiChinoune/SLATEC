@@ -26,9 +26,9 @@ SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXQMU
   DIMENSION Pqa(*) , Ipqa(*)
-  DOUBLE PRECISION dmu , nu , Nu1 , Nu2 , pq , Pqa , pq1 , pq2 , Sx , X , &
+  REAL(8) :: dmu , nu , Nu1 , Nu2 , pq , Pqa , pq1 , pq2 , Sx , X , &
     x1 , x2
-  DOUBLE PRECISION Theta
+  REAL(8) :: Theta
   !***FIRST EXECUTABLE STATEMENT  DXQMU
   Ierror = 0
   mu = 0

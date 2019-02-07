@@ -219,12 +219,12 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ic(2) , N , Incfd , Nwk , Ierr
-  DOUBLE PRECISION Vc(2) , Switch , X(*) , F(Incfd,*) , D(Incfd,*) , Wk(Nwk)
+  REAL(8) :: Vc(2) , Switch , X(*) , F(Incfd,*) , D(Incfd,*) , Wk(Nwk)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i , ibeg , iend , nless1
-  DOUBLE PRECISION zero
+  REAL(8) :: zero
   SAVE zero
   DATA zero/0.D0/
   !

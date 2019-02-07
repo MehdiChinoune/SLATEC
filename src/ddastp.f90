@@ -99,18 +99,18 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   !
   INTEGER Neq , Jstart , Idid , Ipar(*) , Iwm(*) , Iphase , Jcalc , K , &
     Kold , Ns , Nonneg , Ntemp
-  DOUBLE PRECISION X , Y(*) , Yprime(*) , H , Wt(*) , Rpar(*) , Phi(Neq,*) , &
+  REAL(8) :: X , Y(*) , Yprime(*) , H , Wt(*) , Rpar(*) , Phi(Neq,*) , &
     Delta(*) , E(*) , Wm(*) , Alpha(*) , Beta(*) , Gamma(*) , &
     Psi(*) , Sigma(*) , Cj , Cjold , Hold , S , Hmin , Uround
   EXTERNAL RES , JAC
   !
   EXTERNAL DDAJAC , DDANRM , DDASLV , DDATRP
-  DOUBLE PRECISION DDANRM
+  REAL(8) :: DDANRM
   !
   INTEGER i , ier , ires , j , j1 , kdiff , km1 , knew , kp1 , kp2 , LCTF , &
     LETF , LMXORD , LNJE , LNRE , LNST , m , maxit , ncf , nef , nsf , &
     nsp1
-  DOUBLE PRECISION alpha0 , alphas , cjlast , ck , delnrm , enorm , erk , &
+  REAL(8) :: alpha0 , alphas , cjlast , ck , delnrm , enorm , erk , &
     erkm1 , erkm2 , erkp1 , err , est , hnew , oldnrm , &
     pnorm , r , rate , temp1 , temp2 , terk , terkm1 , &
     terkm2 , terkp1 , xold , xrate

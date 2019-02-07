@@ -37,10 +37,10 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DPINIT
-  DOUBLE PRECISION aij , Amat(*) , Anorm , Bl(*) , Bu(*) , cmax , Colnrm(*)&
+  REAL(8) :: aij , Amat(*) , Anorm , Bl(*) , Bu(*) , cmax , Colnrm(*)&
     , Costs(*) , Costsc , Csc(*) , csum , one , Primal(*) , &
     Rhs(*) , Rhsnrm , scalr , testsc , Xlamda , zero
-  DOUBLE PRECISION DASUM
+  REAL(8) :: DASUM
   INTEGER Ibasis(*) , Ibb(*) , Imat(*) , Ind(*)
   LOGICAL contin , usrbas , colscp , cstscp , minprb , Lopt(8)
   !

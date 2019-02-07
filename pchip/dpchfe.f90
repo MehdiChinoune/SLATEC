@@ -135,7 +135,7 @@ SUBROUTINE DPCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N , Incfd , Ne , Ierr
-  DOUBLE PRECISION X(*) , F(Incfd,*) , D(Incfd,*) , Xe(*) , Fe(*)
+  REAL(8) :: X(*) , F(Incfd,*) , D(Incfd,*) , Xe(*) , Fe(*)
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.

@@ -1,6 +1,6 @@
 !*==DBSI1E.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBSI1E
-DOUBLE PRECISION FUNCTION DBSI1E(X)
+REAL(8) FUNCTION DBSI1E(X)
   IMPLICIT NONE
   !*--DBSI1E5
   !*** Start of declarations inserted by SPAG
@@ -51,7 +51,7 @@ DOUBLE PRECISION FUNCTION DBSI1E(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBSI1E
-  DOUBLE PRECISION X , bi1cs(17) , ai1cs(46) , ai12cs(69) , xmin , xsml , &
+  REAL(8) :: X , bi1cs(17) , ai1cs(46) , ai12cs(69) , xmin , xsml , &
     y , D1MACH , DCSEVL
   LOGICAL first
   SAVE bi1cs , ai1cs , ai12cs , nti1 , ntai1 , ntai12 , xmin , xsml , first

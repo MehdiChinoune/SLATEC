@@ -93,11 +93,11 @@ SUBROUTINE DPPCO(Ap,N,Rcond,Z,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPPCO
   INTEGER N , Info
-  DOUBLE PRECISION Ap(*) , Z(*)
-  DOUBLE PRECISION Rcond
+  REAL(8) :: Ap(*) , Z(*)
+  REAL(8) :: Rcond
   !
-  DOUBLE PRECISION DDOT , ek , t , wk , wkm
-  DOUBLE PRECISION anorm , s , DASUM , sm , ynorm
+  REAL(8) :: DDOT , ek , t , wk , wkm
+  REAL(8) :: anorm , s , DASUM , sm , ynorm
   INTEGER i , ij , j , jm1 , j1 , k , kb , kj , kk , kp1
   !
   !     FIND NORM OF A

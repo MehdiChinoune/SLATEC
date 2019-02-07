@@ -63,7 +63,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !***END PROLOGUE  LA05AD
   INTEGER Ip(N,2)
   INTEGER Ind(Ia,2) , Iw(N,8)
-  DOUBLE PRECISION A(*) , amax , au , am , D1MACH , eps , G , U , SMAll ,&
+  REAL(8) :: A(*) , amax , au , am , D1MACH , eps , G , U , SMAll ,&
     W(*)
   LOGICAL first
   CHARACTER(8) :: xern0 , xern1 , xern2

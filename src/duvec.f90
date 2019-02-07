@@ -22,9 +22,9 @@ SUBROUTINE DUVEC(X,Y,Yp)
   !   920401  Variables declaration and TYPE sections added.  (WRB)
   !***END PROLOGUE  DUVEC
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION X
+  REAL(8) :: X
   !     .. Array Arguments ..
-  DOUBLE PRECISION Y(*) , Yp(*)
+  REAL(8) :: Y(*) , Yp(*)
   !***FIRST EXECUTABLE STATEMENT  DUVEC
   STOP
 END SUBROUTINE DUVEC

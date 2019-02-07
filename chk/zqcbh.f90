@@ -75,14 +75,14 @@ SUBROUTINE ZQCBH(Lun,Kprint,Ipass)
   !  Declare external functions.
   !
   INTEGER I1MACH
-  DOUBLE PRECISION D1MACH , ZABS
+  REAL(8) :: D1MACH , ZABS
   EXTERNAL I1MACH , D1MACH , ZABS
   !
   !  Declare local variables.
   !
-  DOUBLE PRECISION cvr , cvi , cwr , cwi , cyr , cyi , wr , wi , yr , yi , &
+  REAL(8) :: cvr , cvi , cwr , cwi , cyr , cyi , wr , wi , yr , yi , &
     zr , zi , znr , zni
-  DOUBLE PRECISION aa , ab , acw , acy , aer , alim , atol , av , aw , ay , &
+  REAL(8) :: aa , ab , acw , acy , aer , alim , atol , av , aw , ay , &
     az , ct , dig , elim , eps , er , ertol , film , fnu , &
     fnul , fpi , hpi , pi , r , rfpi , rl , rm , r1m4 , &
     r1m5 , r2 , slak , st , t , tol , ts , xnu

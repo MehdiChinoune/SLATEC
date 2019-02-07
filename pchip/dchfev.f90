@@ -94,12 +94,12 @@ SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ne , Next(2) , Ierr
-  DOUBLE PRECISION X1 , X2 , F1 , F2 , D1 , D2 , Xe(*) , Fe(*)
+  REAL(8) :: X1 , X2 , F1 , F2 , D1 , D2 , Xe(*) , Fe(*)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i
-  DOUBLE PRECISION c2 , c3 , del1 , del2 , delta , h , x , xmi , xma , zero
+  REAL(8) :: c2 , c3 , del1 , del2 , delta , h , x , xmi , xma , zero
   SAVE zero
   DATA zero/0.D0/
   !

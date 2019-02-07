@@ -80,7 +80,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  AVINT
   !
-  DOUBLE PRECISION r3 , rp5 , sum , syl , syl2 , syl3 , syu , syu2 , syu3 , &
+  REAL(8) :: r3 , rp5 , sum , syl , syl2 , syl3 , syu , syu2 , syu3 , &
     x1 , x2 , x3 , x12 , x13 , x23 , term1 , term2 , term3 , &
     a , b , c , ca , cb , cc
   DIMENSION X(*) , Y(*)
@@ -131,9 +131,9 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
           x12 = x1 - x2
           x13 = x1 - x3
           x23 = x2 - x3
-          term1 = DBLE(Y(i-1))/(x12*x13)
-          term2 = -DBLE(Y(i))/(x12*x23)
-          term3 = DBLE(Y(i+1))/(x13*x23)
+          term1 = REAL(Y(i-1), 8)/(x12*x13)
+          term2 = -REAL(Y(i), 8)/(x12*x23)
+          term3 = REAL(Y(i+1), 8)/(x13*x23)
           a = term1 + term2 + term3
           b = -(x2+x3)*term1 - (x1+x3)*term2 - (x1+x2)*term3
           c = x2*x3*term1 + x1*x3*term2 + x1*x2*term3

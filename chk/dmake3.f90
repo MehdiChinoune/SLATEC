@@ -28,23 +28,23 @@ SUBROUTINE DMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
   !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  DMAKE3
   !     .. Parameters ..
-  DOUBLE PRECISION ZERO , ONE
+  REAL(8) :: ZERO , ONE
   PARAMETER (ZERO=0.0D0,ONE=1.0D0)
-  DOUBLE PRECISION ROGUE
+  REAL(8) :: ROGUE
   PARAMETER (ROGUE=-1.0D10)
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Transl
+  REAL(8) :: Transl
   INTEGER Lda , M , N , Nmax
   LOGICAL Reset
   CHARACTER :: Diag , Uplo
   CHARACTER(2) :: Type
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nmax,*) , Aa(*)
+  REAL(8) :: A(Nmax,*) , Aa(*)
   !     .. Local Scalars ..
   INTEGER i , ibeg , iend , j
   LOGICAL gen , lower , sym , tri , unit , upper
   !     .. External Functions ..
-  DOUBLE PRECISION DBEG
+  REAL(8) :: DBEG
   EXTERNAL DBEG
   !     .. Intrinsic Functions ..
   INTRINSIC MAX , MIN

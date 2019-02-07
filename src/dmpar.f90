@@ -106,13 +106,13 @@ SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !***END PROLOGUE  DMPAR
   INTEGER N , Ldr
   INTEGER Ipvt(*)
-  DOUBLE PRECISION Delta , Par
-  DOUBLE PRECISION R(Ldr,*) , Diag(*) , Qtb(*) , X(*) , Sigma(*) , Wa1(*) , &
+  REAL(8) :: Delta , Par
+  REAL(8) :: R(Ldr,*) , Diag(*) , Qtb(*) , X(*) , Sigma(*) , Wa1(*) , &
     Wa2(*)
   INTEGER i , iter , j , jm1 , jp1 , k , l , nsing
-  DOUBLE PRECISION dxnorm , dwarf , fp , gnorm , parc , parl , paru , p1 , &
+  REAL(8) :: dxnorm , dwarf , fp , gnorm , parc , parl , paru , p1 , &
     p001 , sum , temp , zero
-  DOUBLE PRECISION D1MACH , DENORM
+  REAL(8) :: D1MACH , DENORM
   SAVE p1 , p001 , zero
   DATA p1 , p001 , zero/1.0D-1 , 1.0D-3 , 0.0D0/
   !***FIRST EXECUTABLE STATEMENT  DMPAR

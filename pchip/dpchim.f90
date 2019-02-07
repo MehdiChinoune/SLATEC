@@ -141,15 +141,15 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N , Incfd , Ierr
-  DOUBLE PRECISION X(*) , F(Incfd,*) , D(Incfd,*)
+  REAL(8) :: X(*) , F(Incfd,*) , D(Incfd,*)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i , nless1
-  DOUBLE PRECISION del1 , del2 , dmax , dmin , drat1 , drat2 , dsave , h1 , &
+  REAL(8) :: del1 , del2 , dmax , dmin , drat1 , drat2 , dsave , h1 , &
     h2 , hsum , hsumt3 , three , w1 , w2 , zero
   SAVE zero , three
-  DOUBLE PRECISION DPCHST
+  REAL(8) :: DPCHST
   DATA zero/0.D0/ , three/3.D0/
   !
   !  VALIDITY-CHECK ARGUMENTS.

@@ -29,10 +29,10 @@ SUBROUTINE DCHKE2(Isnum,Srnamt,Nout,Kprint,Fatal)
   CHARACTER(6) :: Srnamt
   INTEGER infot , Kprint
   !     .. Local Scalars ..
-  DOUBLE PRECISION alpha , beta
+  REAL(8) :: alpha , beta
   INTEGER kontrl
   !     .. Local Arrays ..
-  DOUBLE PRECISION a(1,1) , x(1) , y(1)
+  REAL(8) :: a(1,1) , x(1) , y(1)
   !     .. External Subroutines ..
   EXTERNAL CHKXER , DGBMV , DGEMV , DGER , DSBMV , DSPMV , DSPR , DSPR2 ,&
     DSYMV , DSYR , DSYR2 , DTBMV , DTBSV , DTPMV , DTPSV , DTRMV ,&

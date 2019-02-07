@@ -81,15 +81,15 @@ SUBROUTINE ZQCBY(Lun,Kprint,Ipass)
   !  Declare external functions.
   !
   INTEGER I1MACH
-  DOUBLE PRECISION D1MACH , ZABS
+  REAL(8) :: D1MACH , ZABS
   EXTERNAL I1MACH , D1MACH , ZABS , ZEXP
   !
   !  Declare local variables.
   !
-  DOUBLE PRECISION cipr , cipi , coe1r , coe1i , coe2r , coe2i , csgnr , &
+  REAL(8) :: cipr , cipi , coe1r , coe1i , coe2r , coe2i , csgnr , &
     csgni , cspnr , cspni , cwr , cwi , cwrkr , cwrki , vr , &
     vi , wr , wi , yr , yi , zr , zi , znr , zni
-  DOUBLE PRECISION aa , ab , aer , ai , alim , ar , arg , atol , av , cc , &
+  REAL(8) :: aa , ab , aer , ai , alim , ar , arg , atol , av , cc , &
     ct , dig , elim , eps , er , ertol , ffnu , film , fnu , &
     fnul , hpi , pi , ptr , r , rhpi , rl , rm , r1m4 , &
     r1m5 , r2 , slak , st , sti , str , t , tol , ts , xnu

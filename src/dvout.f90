@@ -58,7 +58,7 @@ SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
   !*** Start of declarations inserted by SPAG
   INTEGER i , I1MACH , Idigit , k1 , k2 , lout , N , ndigit
   !*** End of declarations inserted by SPAG
-  DOUBLE PRECISION Dx(*)
+  REAL(8) :: Dx(*)
   CHARACTER Ifmt*(*)
   !***FIRST EXECUTABLE STATEMENT  DVOUT
   lout = I1MACH(2)

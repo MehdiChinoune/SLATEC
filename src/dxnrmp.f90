@@ -133,9 +133,9 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXNRMP
   INTEGER Nu , Mu1 , Mu2 , Mode , Ipn , Isig
-  DOUBLE PRECISION Darg , Dpn
+  REAL(8) :: Darg , Dpn
   DIMENSION Dpn(*) , Ipn(*)
-  DOUBLE PRECISION c1 , c2 , p , p1 , p2 , p3 , s , sx , t , tx , x , dk
+  REAL(8) :: c1 , c2 , p , p1 , p2 , p3 , s , sx , t , tx , x , dk
   ! CALL DXSET TO INITIALIZE EXTENDED-RANGE ARITHMETIC (SEE DXSET
   ! LISTING FOR DETAILS)
   !***FIRST EXECUTABLE STATEMENT  DXNRMP

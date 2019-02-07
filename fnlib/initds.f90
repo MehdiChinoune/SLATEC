@@ -41,7 +41,7 @@ FUNCTION INITDS(Os,Nos,Eta)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  INITDS
-  DOUBLE PRECISION Os(*)
+  REAL(8) :: Os(*)
   !***FIRST EXECUTABLE STATEMENT  INITDS
   IF ( Nos<1 ) CALL XERMSG('SLATEC','INITDS',&
     'Number of coefficients is less than 1',2,1)

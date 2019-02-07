@@ -51,7 +51,7 @@ SUBROUTINE DAXPY(N,Da,Dx,Incx,Dy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DAXPY
-  DOUBLE PRECISION Dx(*) , Dy(*) , Da
+  REAL(8) :: Dx(*) , Dy(*) , Da
   !***FIRST EXECUTABLE STATEMENT  DAXPY
   IF ( N<=0.OR.Da==0.0D0 ) RETURN
   IF ( Incx==Incy ) THEN

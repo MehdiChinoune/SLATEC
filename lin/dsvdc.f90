@@ -113,14 +113,14 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSVDC
   INTEGER Ldx , N , P , Ldu , Ldv , Job , Info
-  DOUBLE PRECISION X(Ldx,*) , S(*) , E(*) , U(Ldu,*) , V(Ldv,*) , Work(*)
+  REAL(8) :: X(Ldx,*) , S(*) , E(*) , U(Ldu,*) , V(Ldv,*) , Work(*)
   !
   !
   INTEGER i , iter , j , jobu , k , kase , kk , l , ll , lls , lm1 , lp1 , &
     ls , lu , m , maxit , mm , mm1 , mp1 , nct , nctp1 , ncu , nrt , &
     nrtp1
-  DOUBLE PRECISION DDOT , t
-  DOUBLE PRECISION b , c , cs , el , emm1 , f , g , DNRM2 , scale , shift , &
+  REAL(8) :: DDOT , t
+  REAL(8) :: b , c , cs , el , emm1 , f , g , DNRM2 , scale , shift , &
     sl , sm , sn , smm1 , t1 , test , ztest
   LOGICAL wantu , wantv
   !***FIRST EXECUTABLE STATEMENT  DSVDC

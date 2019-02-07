@@ -89,10 +89,10 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   INTEGER Ipvt(*)
   LOGICAL Pivot
   SAVE one , p05 , zero
-  DOUBLE PRECISION A(Lda,*) , Sigma(*) , Acnorm(*) , Wa(*)
+  REAL(8) :: A(Lda,*) , Sigma(*) , Acnorm(*) , Wa(*)
   INTEGER i , j , jp1 , k , kmax , minmn
-  DOUBLE PRECISION ajnorm , epsmch , one , p05 , sum , temp , zero
-  DOUBLE PRECISION D1MACH , DENORM
+  REAL(8) :: ajnorm , epsmch , one , p05 , sum , temp , zero
+  REAL(8) :: D1MACH , DENORM
   DATA one , p05 , zero/1.0D0 , 5.0D-2 , 0.0D0/
   !***FIRST EXECUTABLE STATEMENT  DQRFAC
   epsmch = D1MACH(4)

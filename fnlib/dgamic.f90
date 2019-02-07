@@ -1,6 +1,6 @@
 !*==DGAMIC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DGAMIC
-DOUBLE PRECISION FUNCTION DGAMIC(A,X)
+REAL(8) FUNCTION DGAMIC(A,X)
   IMPLICIT NONE
   !*--DGAMIC5
   !*** Start of declarations inserted by SPAG
@@ -49,7 +49,7 @@ DOUBLE PRECISION FUNCTION DGAMIC(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   !***END PROLOGUE  DGAMIC
-  DOUBLE PRECISION A , X , aeps , ainta , algap1 , alneps , alngs , alx , &
+  REAL(8) :: A , X , aeps , ainta , algap1 , alneps , alngs , alx , &
     bot , e , eps , gstar , h , sga , sgng , sgngam , sgngs , &
     sqeps , t , D1MACH , DLNGAM , D9GMIC , D9GMIT , D9LGIC , &
     D9LGIT

@@ -81,13 +81,13 @@ SUBROUTINE DPCHQ3(Lun,Kprint,Ipass)
   !
   INTEGER Lun , Kprint , Ipass
   LOGICAL COMP
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   !
   !  Declare variables.
   !
   INTEGER i , ic(2) , ierr , ifail , N , nbad , nbadz , NWK
   PARAMETER (N=9,NWK=2*N)
-  DOUBLE PRECISION d(N) , dc(N) , dc5 , dc6 , dm(N) , ds(N) , err , f(N) ,&
+  REAL(8) :: d(N) , dc(N) , dc5 , dc6 , dm(N) , ds(N) , err , f(N) ,&
     MONE , tol , told , tolz , vc(2) , x(N) , wk(NWK) , ZERO
   PARAMETER (ZERO=0.0D0,MONE=-1.0D0)
   CHARACTER(6) :: result

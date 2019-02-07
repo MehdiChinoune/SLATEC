@@ -51,13 +51,13 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DREORT
   !
-  DOUBLE PRECISION DDOT
+  REAL(8) :: DDOT
   INTEGER ICOco , Iflag , IGOfx , ijk , INDpvt , INFo , INHomo , INTeg , &
     Ip(*) , ISTkop , IVP , j , k , kk , KNSwot , KOP , l , LOTjp , &
     mflag , MNSwot , MXNon , Ncomp , NCOmpd , NDIsk , NEQ , NEQivp , &
     NFC , NFCc , nfcp , NIC , Niv , NOPg , NPS , NSWot , NTApe , NTP , &
     NUMort , NXPts
-  DOUBLE PRECISION AE , C , dnd , dndt , dx , P(*) , PWCnd , PX , RE , &
+  REAL(8) :: AE , C , dnd , dndt , dx , P(*) , PWCnd , PX , RE , &
     S(*) , srp , Stowa(*) , TND , TOL , vnorm , W(*) , wcnd , &
     X , XBEg , XENd , XOP , XOT , XSAv , Y(Ncomp,*) , &
     Yhp(Ncomp,*) , Yp(*) , ypnm

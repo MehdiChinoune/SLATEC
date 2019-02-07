@@ -1,6 +1,6 @@
 !*==DCV.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DCV
-DOUBLE PRECISION FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
+REAL(8) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   IMPLICIT NONE
   !*--DCV5
   !***BEGIN PROLOGUE  DCV
@@ -40,7 +40,7 @@ DOUBLE PRECISION FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !
   !     The variance function is given by
   !
-  !      VAR=(transpose of B(XVAL))*C*B(XVAL)/DBLE(MAX(NDATA-N,1))
+  !      VAR=(transpose of B(XVAL))*C*B(XVAL)/REAL(MAX(NDATA-N,1), 8)
   !
   !     where N = NBKPT - NORD.
   !
@@ -106,7 +106,7 @@ DOUBLE PRECISION FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !***END PROLOGUE  DCV
   INTEGER i , ileft , ip , is , last , mdg , mdw , n , Nbkpt , Nconst , &
     Ndata , Nord
-  DOUBLE PRECISION Bkpt , DDOT , v , W , Xval , zero
+  REAL(8) :: Bkpt , DDOT , v , W , Xval , zero
   DIMENSION Bkpt(*) , W(*) , v(40)
   !***FIRST EXECUTABLE STATEMENT  DCV
   zero = 0.0D0

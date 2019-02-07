@@ -84,12 +84,12 @@ SUBROUTINE DSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSIDI
   INTEGER Lda , N , Job
-  DOUBLE PRECISION A(Lda,*) , Work(*)
-  DOUBLE PRECISION Det(2)
+  REAL(8) :: A(Lda,*) , Work(*)
+  REAL(8) :: Det(2)
   INTEGER Kpvt(*) , Inert(3)
   !
-  DOUBLE PRECISION akkp1 , DDOT , temp
-  DOUBLE PRECISION ten , d , t , ak , akp1
+  REAL(8) :: akkp1 , DDOT , temp
+  REAL(8) :: ten , d , t , ak , akp1
   INTEGER j , jb , k , km1 , ks , kstep
   LOGICAL noinv , nodet , noert
   !***FIRST EXECUTABLE STATEMENT  DSIDI

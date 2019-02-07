@@ -56,9 +56,9 @@ SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !***END PROLOGUE  DASYIK
   !
   INTEGER In , j , jn , k , kk , Kode , l
-  DOUBLE PRECISION ak , ap , Arg , c , coef , con , etx , Flgik , fn , Fnu , &
+  REAL(8) :: ak , ap , Arg , c , coef , con , etx , Flgik , fn , Fnu , &
     gln , Ra , s1 , s2 , t , tol , t2 , X , Y , z
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   DIMENSION Y(*) , c(65) , con(2)
   SAVE con , c
   DATA con(1) , con(2)/3.98942280401432678D-01 , 1.25331413731550025D+00/

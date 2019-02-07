@@ -104,16 +104,16 @@ SUBROUTINE DGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  DGEMV
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Alpha , Beta
+  REAL(8) :: Alpha , Beta
   INTEGER Incx , Incy , Lda , M , N
   CHARACTER :: Trans
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Lda,*) , X(*) , Y(*)
+  REAL(8) :: A(Lda,*) , X(*) , Y(*)
   !     .. Parameters ..
-  DOUBLE PRECISION ONE , ZERO
+  REAL(8) :: ONE , ZERO
   PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
   !     .. Local Scalars ..
-  DOUBLE PRECISION temp
+  REAL(8) :: temp
   INTEGER i , info , ix , iy , j , jx , jy , kx , ky , lenx , leny
   !     .. External Functions ..
   LOGICAL LSAME

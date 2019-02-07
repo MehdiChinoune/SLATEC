@@ -293,7 +293,7 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  DDRIV1
   EXTERNAL F
-  DOUBLE PRECISION Eps , ewtcom(1) , hmax , T , Tout , Work(*) , Y(*)
+  REAL(8) :: Eps , ewtcom(1) , hmax , T , Tout , Work(*) , Y(*)
   INTEGER i , IDLIW , Ierflg , IERROR , IMPL , leniw , Lenw , lenwcm , &
     lnwchk , MINT , MITER , ml , Mstate , mu , MXN , MXORD , MXSTEP , &
     N , nde , NROOT , nstate , ntask

@@ -247,20 +247,20 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !   930326  Removed unused variable.  (FNF)
   !***END PROLOGUE  DOMN
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Err , Tol
+  REAL(8) :: Err , Tol
   INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt , Nsave
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nelt) , Ap(N,0:Nsave) , B(N) , Csav(Nsave) , Dz(N) , &
+  REAL(8) :: A(Nelt) , Ap(N,0:Nsave) , B(N) , Csav(Nsave) , Dz(N) , &
     Emap(N,0:Nsave) , P(N,0:Nsave) , R(N) , Rwork(*) , X(N) , &
     Z(N)
   INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL MATVEC , MSOLVE
   !     .. Local Scalars ..
-  DOUBLE PRECISION ak , akden , aknum , bkl , bnrm , fuzz , solnrm
+  REAL(8) :: ak , akden , aknum , bkl , bnrm , fuzz , solnrm
   INTEGER i , ip , ipo , k , l , lmax
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DDOT
+  REAL(8) :: D1MACH , DDOT
   INTEGER ISDOMN
   EXTERNAL D1MACH , DDOT , ISDOMN
   !     .. External Subroutines ..

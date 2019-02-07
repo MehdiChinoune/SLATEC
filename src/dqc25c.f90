@@ -68,7 +68,7 @@ SUBROUTINE DQC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQC25C
   !
-  DOUBLE PRECISION A , Abserr , ak22 , amom0 , amom1 , amom2 , B , C , cc , &
+  REAL(8) :: A , Abserr , ak22 , amom0 , amom1 , amom2 , B , C , cc , &
     centr , cheb12 , cheb24 , DQWGTC , F , fval , hlgth , &
     p2 , p3 , p4 , resabs , resasc , Result , res12 , res24 , &
     u , x

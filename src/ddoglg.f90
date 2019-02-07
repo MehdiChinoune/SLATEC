@@ -65,9 +65,9 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DDOGLG
-  DOUBLE PRECISION D1MACH , DENORM
+  REAL(8) :: D1MACH , DENORM
   INTEGER i , j , jj , jp1 , k , l , Lr , N
-  DOUBLE PRECISION alpha , bnorm , Delta , Diag(*) , epsmch , gnorm , one , &
+  REAL(8) :: alpha , bnorm , Delta , Diag(*) , epsmch , gnorm , one , &
     qnorm , Qtb(*) , R(*) , sgnorm , sum , temp , Wa1(*) , &
     Wa2(*) , X(*) , zero
   SAVE one , zero

@@ -153,14 +153,14 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ic(2) , N , Incfd , Nwk , Ierr
-  DOUBLE PRECISION Vc(2) , X(*) , F(Incfd,*) , D(Incfd,*) , Wk(2,*)
+  REAL(8) :: Vc(2) , X(*) , F(Incfd,*) , D(Incfd,*) , Wk(2,*)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER ibeg , iend , index , j , nm1
-  DOUBLE PRECISION g , half , one , stemp(3) , three , two , xtemp(4) , zero
+  REAL(8) :: g , half , one , stemp(3) , three , two , xtemp(4) , zero
   SAVE zero , half , one , two , three
-  DOUBLE PRECISION DPCHDF
+  REAL(8) :: DPCHDF
   !
   DATA zero/0.D0/ , half/.5D0/ , one/1.D0/ , two/2.D0/ , three/3.D0/
   !

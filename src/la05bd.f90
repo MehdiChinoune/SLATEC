@@ -44,7 +44,7 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   !   900402  Added TYPE section.  (WRB)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
   !***END PROLOGUE  LA05BD
-  DOUBLE PRECISION A(*) , B(*) , am , W(*) , G , SMAll
+  REAL(8) :: A(*) , B(*) , am , W(*) , G , SMAll
   LOGICAL Trans
   INTEGER Ind(Ia,2) , Iw(N,8)
   INTEGER Ip(N,2)

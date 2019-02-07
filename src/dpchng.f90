@@ -62,7 +62,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !***END PROLOGUE  DPCHNG
   DIMENSION Ix(*)
   INTEGER IDLOC
-  DOUBLE PRECISION Sx(*) , Xval , zero , one , sxlast , sxval
+  REAL(8) :: Sx(*) , Xval , zero , one , sxlast , sxval
   SAVE zero , one
   DATA zero , one/0.D0 , 1.D0/
   !***FIRST EXECUTABLE STATEMENT  DPCHNG

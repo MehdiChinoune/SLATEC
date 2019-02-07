@@ -23,10 +23,10 @@ SUBROUTINE DQG8TS(Lun,Kprint,Ipass)
   INTEGER Ipass , Kprint , Lun
   !     .. Local Scalars ..
   INTEGER ierr , kontrl
-  DOUBLE PRECISION a , ans , b , cor , err , req , tol
+  REAL(8) :: a , ans , b , cor , err , req , tol
   LOGICAL fatal
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DFQD1 , DFQD2
+  REAL(8) :: D1MACH , DFQD1 , DFQD2
   EXTERNAL D1MACH , DFQD1 , DFQD2
   !     .. External Subroutines ..
   EXTERNAL DGAUS8 , XGETF , XSETF

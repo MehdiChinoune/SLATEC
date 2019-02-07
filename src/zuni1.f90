@@ -28,7 +28,7 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !***END PROLOGUE  ZUNI1
   !     COMPLEX CFN,CONE,CRSC,CSCL,CSR,CSS,CWRK,CZERO,C1,C2,PHI,RZ,SUM,S1,
   !    *S2,Y,Z,ZETA1,ZETA2
-  DOUBLE PRECISION Alim , aphi , ascle , bry , coner , crsc , cscl , csrr , &
+  REAL(8) :: Alim , aphi , ascle , bry , coner , crsc , cscl , csrr , &
     cssr , cwrki , cwrkr , c1r , c2i , c2m , c2r , Elim , &
     fn , Fnu , Fnul , phii , phir , rast , rs1 , rzi , rzr , &
     sti , str , sumi , sumr , s1i , s1r , s2i , s2r , Tol , &

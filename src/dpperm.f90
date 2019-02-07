@@ -36,7 +36,7 @@ SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
   !   920507  Modified by M. McClain to revise prologue text.
   !***END PROLOGUE  DPPERM
   INTEGER N , Iperm(*) , i , Ier , indx , indx0 , istrt
-  DOUBLE PRECISION Dx(*) , dtemp
+  REAL(8) :: Dx(*) , dtemp
   !***FIRST EXECUTABLE STATEMENT  DPPERM
   Ier = 0
   IF ( N<1 ) THEN

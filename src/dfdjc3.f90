@@ -84,11 +84,11 @@ SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DFDJC3
   INTEGER M , N , Ldfjac , Iflag
-  DOUBLE PRECISION Epsfcn
-  DOUBLE PRECISION X(*) , Fvec(*) , Fjac(Ldfjac,*) , Wa(*)
+  REAL(8) :: Epsfcn
+  REAL(8) :: X(*) , Fvec(*) , Fjac(Ldfjac,*) , Wa(*)
   INTEGER i , j
-  DOUBLE PRECISION eps , epsmch , h , temp , zero
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: eps , epsmch , h , temp , zero
+  REAL(8) :: D1MACH
   SAVE zero
   DATA zero/0.0D0/
   !***FIRST EXECUTABLE STATEMENT  DFDJC3

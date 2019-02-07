@@ -63,9 +63,9 @@ SUBROUTINE DSPSL(Ap,N,Kpvt,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSPSL
   INTEGER N , Kpvt(*)
-  DOUBLE PRECISION Ap(*) , B(*)
+  REAL(8) :: Ap(*) , B(*)
   !
-  DOUBLE PRECISION ak , akm1 , bk , bkm1 , DDOT , denom , temp
+  REAL(8) :: ak , akm1 , bk , bkm1 , DDOT , denom , temp
   INTEGER ik , ikm1 , ikp1 , k , kk , km1k , km1km1 , kp
   !
   !     LOOP BACKWARD APPLYING THE TRANSFORMATIONS AND

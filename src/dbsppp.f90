@@ -62,7 +62,7 @@ SUBROUTINE DBSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   !***END PROLOGUE  DBSPPP
   !
   INTEGER ileft , inev , K , Ldc , Lxi , N , nk
-  DOUBLE PRECISION A , C , T , Work , Xi
+  REAL(8) :: A , C , T , Work , Xi
   !     DIMENSION T(N+K),XI(LXI+1),C(LDC,*)
   !     HERE, * = THE FINAL VALUE OF THE OUTPUT PARAMETER LXI.
   DIMENSION T(*) , A(*) , Work(*) , Xi(*) , C(Ldc,*)

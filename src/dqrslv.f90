@@ -91,9 +91,9 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !***END PROLOGUE  DQRSLV
   INTEGER N , Ldr
   INTEGER Ipvt(*)
-  DOUBLE PRECISION R(Ldr,*) , Diag(*) , Qtb(*) , X(*) , Sigma(*) , Wa(*)
+  REAL(8) :: R(Ldr,*) , Diag(*) , Qtb(*) , X(*) , Sigma(*) , Wa(*)
   INTEGER i , j , jp1 , k , kp1 , l , nsing
-  DOUBLE PRECISION cos , cotan , p5 , p25 , qtbpj , sin , sum , tan , temp , &
+  REAL(8) :: cos , cotan , p5 , p25 , qtbpj , sin , sum , tan , temp , &
     zero
   SAVE p5 , p25 , zero
   DATA p5 , p25 , zero/5.0D-1 , 2.5D-1 , 0.0D0/

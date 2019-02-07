@@ -121,7 +121,7 @@ SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   IMPLICIT NONE
   !*--DGLSS122
   !*** Start of declarations inserted by SPAG
-  DOUBLE PRECISION A , ae , B , re , Rnorm , Work
+  REAL(8) :: A , ae , B , re , Rnorm , Work
   INTEGER Info , key , krank , ksure , Liw , Lw , M , Mda , Mdb , mode , N , &
     Nb , np
   !*** End of declarations inserted by SPAG

@@ -47,7 +47,7 @@ SUBROUTINE DSLUTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !     .. Scalar Arguments ..
   INTEGER Isym , N , Nelt
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(N) , B(N) , Rwork(*) , X(N)
+  REAL(8) :: A(N) , B(N) , Rwork(*) , X(N)
   INTEGER Ia(Nelt) , Iwork(10) , Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locdin , locil , lociu , locjl , locju , locl , locu

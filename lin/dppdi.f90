@@ -63,11 +63,11 @@ SUBROUTINE DPPDI(Ap,N,Det,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPPDI
   INTEGER N , Job
-  DOUBLE PRECISION Ap(*)
-  DOUBLE PRECISION Det(2)
+  REAL(8) :: Ap(*)
+  REAL(8) :: Det(2)
   !
-  DOUBLE PRECISION t
-  DOUBLE PRECISION s
+  REAL(8) :: t
+  REAL(8) :: s
   INTEGER i , ii , j , jj , jm1 , j1 , k , kj , kk , kp1 , k1
   !***FIRST EXECUTABLE STATEMENT  DPPDI
   !

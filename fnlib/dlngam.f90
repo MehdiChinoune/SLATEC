@@ -1,6 +1,6 @@
 !*==DLNGAM.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DLNGAM
-DOUBLE PRECISION FUNCTION DLNGAM(X)
+REAL(8) FUNCTION DLNGAM(X)
   IMPLICIT NONE
   !*--DLNGAM5
   !***BEGIN PROLOGUE  DLNGAM
@@ -28,7 +28,7 @@ DOUBLE PRECISION FUNCTION DLNGAM(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DLNGAM
-  DOUBLE PRECISION X , dxrel , pi , sinpiy , sqpi2l , sq2pil , xmax , y , &
+  REAL(8) :: X , dxrel , pi , sinpiy , sqpi2l , sq2pil , xmax , y , &
     DGAMMA , D9LGMC , D1MACH , temp
   LOGICAL first
   EXTERNAL DGAMMA

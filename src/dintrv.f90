@@ -64,7 +64,7 @@ SUBROUTINE DINTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   !***END PROLOGUE  DINTRV
   !
   INTEGER ihi , Ileft , Ilo , istep , Lxt , Mflag , middle
-  DOUBLE PRECISION X , Xt
+  REAL(8) :: X , Xt
   DIMENSION Xt(*)
   !***FIRST EXECUTABLE STATEMENT  DINTRV
   ihi = Ilo + 1

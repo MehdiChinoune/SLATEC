@@ -36,7 +36,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     KSTeps , l , LACor , LDUm , LEWt , LSAvf , ltol , LWM , LYH ,&
     maxnum , MAXord , METh , MITer , N , natolp , Neq , NFE , NJE ,&
     NQ , NQU , nrtolp , NST
-  DOUBLE PRECISION absdel , Acor , Atol , big , D1MACH , del , Delsgn , dt ,&
+  REAL(8) :: absdel , Acor , Atol , big , D1MACH , del , Delsgn , dt ,&
     DVNRMS , EL0 , Ewt , H , ha , HMIn , HMXi , HU , ROWns ,&
     Rpar , Rtol , Savf , T , tol , TOLd , Tolfac , Tout ,&
     Tstop , U , Wm , X , Y , Yh , Yh1 , Ypout

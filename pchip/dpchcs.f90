@@ -96,15 +96,15 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N , Incfd , Ierr
-  DOUBLE PRECISION Switch , H(*) , Slope(*) , D(Incfd,*)
+  REAL(8) :: Switch , H(*) , Slope(*) , D(Incfd,*)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i , indx , k , nless1
-  DOUBLE PRECISION del(3) , dext , dfloc , dfmx , fact , fudge , one ,&
+  REAL(8) :: del(3) , dext , dfloc , dfmx , fact , fudge , one ,&
     slmax , wtave(2) , zero
   SAVE zero , one , fudge
-  DOUBLE PRECISION DPCHST
+  REAL(8) :: DPCHST
   !
   !  INITIALIZE.
   !

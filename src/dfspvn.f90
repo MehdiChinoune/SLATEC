@@ -24,7 +24,7 @@ SUBROUTINE DFSPVN(T,Jhigh,Index,X,Ileft,Vnikx)
   IMPLICIT NONE
   !*--DFSPVN25
   !*** Start of declarations inserted by SPAG
-  DOUBLE PRECISION deltam , deltap , T , vm , vmprev , Vnikx , X
+  REAL(8) :: deltam , deltap , T , vm , vmprev , Vnikx , X
   INTEGER i , Ileft , imjp1 , Index , ipj , j , Jhigh , jp1 , jp1ml , l
   !*** End of declarations inserted by SPAG
   DIMENSION T(*) , Vnikx(*)

@@ -728,7 +728,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  DDRIV3
   EXTERNAL F , JACOBN , FA , G , USERS
-  DOUBLE PRECISION ae , big , Eps , Ewt(*) , G , glast , gnow , h , Hmax , &
+  REAL(8) :: ae , big , Eps , Ewt(*) , G , glast , gnow , h , Hmax , &
     hsign , hused , NROUND , re , D1MACH , size , DNRM2 , &
     sum , T , tlast , Tout , troot , uround , Work(*) , Y(*)
   INTEGER i , ia , IAVGH , IAVGRD , ICNVRG , idfdy , IEL , Ierflg , Ierror , &
@@ -1292,7 +1292,7 @@ ENDIF
 300  DO i = 1 , N
 Work(i+isave2-1) = Y(i)/Work(i+iywt-1)
 ENDDO
-sum = DNRM2(N,Work(isave2),1)/SQRT(DBLE(N))
+sum = DNRM2(N,Work(isave2),1)/SQRT(REAL(N, 8))
 sum = MAX(1.D0,sum)
 IF ( Eps<sum*uround ) THEN
 Eps = sum*uround*(1.D0+10.D0*uround)

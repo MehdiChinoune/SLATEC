@@ -34,7 +34,7 @@ SUBROUTINE DXCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,&
   !   901019  Revisions to prologue.  (DWL and WRB)
   !   901106  Changed all specific intrinsics to generic.  (WRB)
   !***END PROLOGUE  DXCSRT
-  DOUBLE PRECISION C1 , C2 , dmu , dmu1 , nu , Dnu1 , P , Q , R , Theta , &
+  REAL(8) :: C1 , C2 , dmu , dmu1 , nu , Dnu1 , P , Q , R , Theta , &
     sx , x1 , x2
   DIMENSION P(*) , Ip(*) , Q(*) , Iq(*) , R(*) , Ir(*)
   DIMENSION C1(*) , Ic1(*) , C2(*) , Ic2(*)

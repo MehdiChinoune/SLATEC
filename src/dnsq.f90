@@ -423,11 +423,11 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DNSQ
-  DOUBLE PRECISION D1MACH , DENORM
+  REAL(8) :: D1MACH , DENORM
   INTEGER i , iflag , Info , Iopt , iter , iwa(1) , j , jm1 , l , Ldfjac , &
     Lr , Maxfev , Ml , Mode , Mu , N , ncfail , ncsuc , Nfev , Njev , &
     Nprint , nslow1 , nslow2
-  DOUBLE PRECISION actred , delta , Diag(*) , Epsfcn , epsmch , Factor , &
+  REAL(8) :: actred , delta , Diag(*) , Epsfcn , epsmch , Factor , &
     Fjac(Ldfjac,*) , fnorm , fnorm1 , Fvec(*) , one , p0001 , &
     p001 , p1 , p5 , pnorm , prered , Qtf(*) , R(*) , ratio , &
     sum , temp , Wa1(*) , Wa2(*) , Wa3(*) , Wa4(*) , X(*) , &

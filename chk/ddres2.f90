@@ -18,9 +18,9 @@ SUBROUTINE DDRES2(T,Y,Yprime,Delta,Ires,Rpar,Ipar)
   !   901030  Made all local declarations explicit.  (FNF)
   !***END PROLOGUE  DDRES2
   INTEGER Ires , Ipar(*)
-  DOUBLE PRECISION T , Y(*) , Yprime(*) , Delta(*) , Rpar(*)
+  REAL(8) :: T , Y(*) , Yprime(*) , Delta(*) , Rpar(*)
   INTEGER i , j , k , ng
-  DOUBLE PRECISION alph1 , alph2 , d
+  REAL(8) :: alph1 , alph2 , d
   DATA alph1/1.0D0/ , alph2/1.0D0/ , ng/5/
   !***FIRST EXECUTABLE STATEMENT  DDRES2
   DO j = 1 , ng

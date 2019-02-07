@@ -49,7 +49,7 @@ SUBROUTINE DCOPY(N,Dx,Incx,Dy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DCOPY
-  DOUBLE PRECISION Dx(*) , Dy(*)
+  REAL(8) :: Dx(*) , Dy(*)
   !***FIRST EXECUTABLE STATEMENT  DCOPY
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy ) THEN

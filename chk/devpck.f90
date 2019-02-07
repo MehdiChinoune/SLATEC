@@ -64,17 +64,17 @@ SUBROUTINE DEVPCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
   !
   INTEGER Lout , Kprint
   LOGICAL Fail
-  DOUBLE PRECISION X(10) , Y(10) , F(10,10) , Fx(10,10) , Fy(10,10) , Xe(51)&
+  REAL(8) :: X(10) , Y(10) , F(10,10) , Fx(10,10) , Fy(10,10) , Xe(51)&
     , Ye(51) , Fe(51) , De(51) , Fe2(51)
   !
   !  DECLARATIONS.
   !
   INTEGER i , ier2 , ierr , inc , j , k , ne , nerr , nmax , nx , ny
   LOGICAL faild , faile , failoc , skip
-  DOUBLE PRECISION dermax , derr , dtrue , dx , fdiff , fdifmx , fermax ,&
+  REAL(8) :: dermax , derr , dtrue , dx , fdiff , fdifmx , fermax ,&
     ferr , ftrue , machep , tol , pdermx , pdifmx , pfermx ,&
     zero
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   !
   DATA nmax/10/ , nx/4/ , ny/6/
   DATA ne/51/

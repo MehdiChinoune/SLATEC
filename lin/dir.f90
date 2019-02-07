@@ -258,18 +258,18 @@ SUBROUTINE DIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !***END PROLOGUE  DIR
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Err , Tol
+  REAL(8) :: Err , Tol
   INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nelt) , B(N) , Dz(N) , R(N) , Rwork(*) , X(N) , Z(N)
+  REAL(8) :: A(Nelt) , B(N) , Dz(N) , R(N) , Rwork(*) , X(N) , Z(N)
   INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL MATVEC , MSOLVE
   !     .. Local Scalars ..
-  DOUBLE PRECISION bnrm , solnrm , tolmin
+  REAL(8) :: bnrm , solnrm , tolmin
   INTEGER i , k
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   INTEGER ISDIR
   EXTERNAL D1MACH , ISDIR
   !***FIRST EXECUTABLE STATEMENT  DIR

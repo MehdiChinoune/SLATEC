@@ -1,6 +1,6 @@
 !*==DBETA.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBETA
-DOUBLE PRECISION FUNCTION DBETA(A,B)
+REAL(8) FUNCTION DBETA(A,B)
   IMPLICIT NONE
   !*--DBETA5
   !***BEGIN PROLOGUE  DBETA
@@ -25,7 +25,7 @@ DOUBLE PRECISION FUNCTION DBETA(A,B)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DBETA
-  DOUBLE PRECISION A , B , alnsml , xmax , xmin , DLBETA , DGAMMA , D1MACH
+  REAL(8) :: A , B , alnsml , xmax , xmin , DLBETA , DGAMMA , D1MACH
   LOGICAL first
   EXTERNAL DGAMMA
   SAVE xmax , alnsml , first

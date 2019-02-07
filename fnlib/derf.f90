@@ -1,6 +1,6 @@
 !*==DERF.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DERF
-DOUBLE PRECISION FUNCTION DERF(X)
+REAL(8) FUNCTION DERF(X)
   IMPLICIT NONE
   !*--DERF5
   !*** Start of declarations inserted by SPAG
@@ -34,7 +34,7 @@ DOUBLE PRECISION FUNCTION DERF(X)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable name.  (RWC, WRB)
   !***END PROLOGUE  DERF
-  DOUBLE PRECISION X , erfcs(21) , sqeps , sqrtpi , xbig , y , D1MACH , &
+  REAL(8) :: X , erfcs(21) , sqeps , sqrtpi , xbig , y , D1MACH , &
     DCSEVL , DERFC
   LOGICAL first
   EXTERNAL DERFC

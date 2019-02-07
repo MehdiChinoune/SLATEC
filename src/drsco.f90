@@ -31,7 +31,7 @@ SUBROUTINE DRSCO(Rsav,Isav)
   !-----------------------------------------------------------------------
   !
   INTEGER i , ILS , Isav , lenils , lenrls
-  DOUBLE PRECISION RLS , Rsav
+  REAL(8) :: RLS , Rsav
   DIMENSION Rsav(*) , Isav(*)
   SAVE lenrls , lenils
   COMMON /DDEBD1/ RLS(218) , ILS(33)

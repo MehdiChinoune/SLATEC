@@ -495,15 +495,15 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   IMPLICIT NONE
   !*--DNLS1E496
   !*** Start of declarations inserted by SPAG
-  DOUBLE PRECISION FCN
+  REAL(8) :: FCN
   !*** End of declarations inserted by SPAG
   INTEGER M , N , Nprint , Info , Lwa , Iopt
   INTEGER index , Iw(*)
-  DOUBLE PRECISION Tol
-  DOUBLE PRECISION X(*) , Fvec(*) , Wa(*)
+  REAL(8) :: Tol
+  REAL(8) :: X(*) , Fvec(*) , Wa(*)
   EXTERNAL FCN
   INTEGER maxfev , mode , nfev , njev
-  DOUBLE PRECISION factor , ftol , gtol , xtol , zero , epsfcn
+  REAL(8) :: factor , ftol , gtol , xtol , zero , epsfcn
   SAVE factor , zero
   DATA factor , zero/1.0D2 , 0.0D0/
   !***FIRST EXECUTABLE STATEMENT  DNLS1E

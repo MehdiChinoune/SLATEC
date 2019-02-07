@@ -22,17 +22,17 @@ SUBROUTINE DMVCH(Trans,M,N,Alpha,A,Nmax,X,Incx,Beta,Y,Incy,Yt,G,Yy,Eps,&
   !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  DMVCH
   !     .. Parameters ..
-  DOUBLE PRECISION ZERO , ONE
+  REAL(8) :: ZERO , ONE
   PARAMETER (ZERO=0.0D0,ONE=1.0D0)
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Alpha , Beta , Eps , Err
+  REAL(8) :: Alpha , Beta , Eps , Err
   INTEGER Incx , Incy , Kprint , M , N , Nmax , Nout
   LOGICAL Mv , Ftl
   CHARACTER :: Trans
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nmax,*) , G(*) , X(*) , Y(*) , Yt(*) , Yy(*)
+  REAL(8) :: A(Nmax,*) , G(*) , X(*) , Y(*) , Yt(*) , Yy(*)
   !     .. Local Scalars ..
-  DOUBLE PRECISION erri
+  REAL(8) :: erri
   INTEGER i , incxl , incyl , iy , j , jx , k , kx , ky , ml , nl
   LOGICAL tran
   !     .. Intrinsic Functions ..

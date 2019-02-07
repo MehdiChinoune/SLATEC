@@ -95,12 +95,12 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   INTEGER i , ialp , in , inlim , is , i1 , k , kk , km , Kode , kt , N , &
     nn , ns , Nz
   INTEGER I1MACH
-  DOUBLE PRECISION ain , ak , akm , Alpha , ans , ap , arg , atol , tolln , &
+  REAL(8) :: ain , ak , akm , Alpha , ans , ap , arg , atol , tolln , &
     dfn , dtm , dx , earg , elim , etx , flgik , fn , fnf , &
     fni , fnp1 , fnu , gln , ra , rttpi , s , sx , sxo2 , &
     s1 , s2 , t , ta , tb , temp , tfn , tm , tol , trx , &
     t2 , X , xo2 , xo2l , Y , z
-  DOUBLE PRECISION D1MACH , DLNGAM
+  REAL(8) :: D1MACH , DLNGAM
   DIMENSION Y(*) , temp(3)
   SAVE rttpi , inlim
   DATA rttpi/3.98942280401433D-01/

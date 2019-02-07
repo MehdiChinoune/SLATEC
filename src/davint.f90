@@ -74,7 +74,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !***END PROLOGUE  DAVINT
   !
   INTEGER i , Ierr , inlft , inrt , istart , istop , N
-  DOUBLE PRECISION a , Ans , b , c , ca , cb , cc , fl , fr , r3 , rp5 , &
+  REAL(8) :: a , Ans , b , c , ca , cb , cc , fl , fr , r3 , rp5 , &
     slope , sum , syl , syl2 , syl3 , syu , syu2 , syu3 , &
     term1 , term2 , term3 , X , x1 , x12 , x13 , x2 , x23 , &
     x3 , Xlo , Xup , Y

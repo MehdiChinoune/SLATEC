@@ -58,10 +58,10 @@ SUBROUTINE DPOFA(A,Lda,N,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPOFA
   INTEGER Lda , N , Info
-  DOUBLE PRECISION A(Lda,*)
+  REAL(8) :: A(Lda,*)
   !
-  DOUBLE PRECISION DDOT , t
-  DOUBLE PRECISION s
+  REAL(8) :: DDOT , t
+  REAL(8) :: s
   INTEGER j , jm1 , k
   !***FIRST EXECUTABLE STATEMENT  DPOFA
   DO j = 1 , N

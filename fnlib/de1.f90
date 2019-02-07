@@ -1,6 +1,6 @@
 !*==DE1.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DE1
-DOUBLE PRECISION FUNCTION DE1(X)
+REAL(8) FUNCTION DE1(X)
   IMPLICIT NONE
   !*--DE15
   !*** Start of declarations inserted by SPAG
@@ -87,7 +87,7 @@ DOUBLE PRECISION FUNCTION DE1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DE1
-  DOUBLE PRECISION X , ae10cs(50) , ae11cs(60) , ae12cs(41) , e11cs(29) , &
+  REAL(8) :: X , ae10cs(50) , ae11cs(60) , ae12cs(41) , e11cs(29) , &
     e12cs(25) , ae13cs(50) , ae14cs(64) , xmax , xmaxt , &
     D1MACH , DCSEVL
   LOGICAL first

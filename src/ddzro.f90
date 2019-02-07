@@ -57,7 +57,7 @@ SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  DDZRO
   INTEGER ic , Iroot , kount , N , Nq
-  DOUBLE PRECISION a , acbs , acmb , Ae , B , C , cmb , er , F , fa , Fb , &
+  REAL(8) :: a , acbs , acmb , Ae , B , C , cmb , er , F , fa , Fb , &
     Fc , H , p , q , Re , rw , T , tol , Uround , Y(*) , &
     Yh(N,*)
   !***FIRST EXECUTABLE STATEMENT  DDZRO

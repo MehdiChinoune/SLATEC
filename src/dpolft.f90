@@ -132,11 +132,11 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   INTEGER i , idegf , Ierr , j , jp1 , jpas , k1 , k1pj , k2 , k2pj , k3 , &
     k3pi , k4 , k4pi , k5 , k5pi , ksig , m , Maxdeg , mop1 , Ndeg , &
     nder , nfail
-  DOUBLE PRECISION temd1 , temd2
-  DOUBLE PRECISION A(*) , degf , den , Eps , etst , f , fcrit , R(*) , sig , &
+  REAL(8) :: temd1 , temd2
+  REAL(8) :: A(*) , degf , den , Eps , etst , f , fcrit , R(*) , sig , &
     sigj , sigjm1 , sigpas , temp , X(*) , xm , Y(*) , yp , &
     W(*) , w1 , w11
-  DOUBLE PRECISION co(4,3)
+  REAL(8) :: co(4,3)
   SAVE co
   DATA co(1,1) , co(2,1) , co(3,1) , co(4,1) , co(1,2) , co(2,2) , co(3,2) , &
     co(4,2) , co(1,3) , co(2,3) , co(3,3) , co(4,3)/ - 13.086850D0 , &

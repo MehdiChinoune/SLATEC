@@ -172,7 +172,7 @@ SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQAWSE
   !
-  DOUBLE PRECISION A , Abserr , Alfa , Alist , area , area1 , area12 , &
+  REAL(8) :: A , Abserr , Alfa , Alist , area , area1 , area12 , &
     area2 , a1 , a2 , B , Beta , Blist , b1 , b2 , centre , &
     D1MACH , Elist , epmach , Epsabs , Epsrel , errbnd , &
     errmax , error1 , erro12 , error2 , errsum , F , resas1 , &

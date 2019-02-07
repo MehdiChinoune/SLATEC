@@ -45,23 +45,23 @@ SUBROUTINE DFCQX(Lun,Kprint,Ipass)
   !     .. Scalar Arguments ..
   INTEGER Ipass , Kprint , Lun
   !     .. Local Scalars ..
-  DOUBLE PRECISION diff , one , t , tol , xval , zero
+  REAL(8) :: diff , one , t , tol , xval , zero
   INTEGER kontrl , i , idigit , ii , j , l , last , mode , n , nbkpt , &
     nconst , ndata , ndeg , nerr , nord , nval
   LOGICAL fatal
   !     .. Local Arrays ..
-  DOUBLE PRECISION bkpt(13) , check(51) , coefck(9) , coeff(9) , sddata(9) , &
+  REAL(8) :: bkpt(13) , check(51) , coefck(9) , coeff(9) , sddata(9) , &
     v(51,5) , w(529) , work(12) , xconst(11) , xdata(9) , &
     yconst(11) , ydata(9)
   INTEGER iw(30) , nderiv(11)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DBVALU , DCV
+  REAL(8) :: D1MACH , DBVALU , DCV
   INTEGER NUMXER
   EXTERNAL DBVALU , DCV , NUMXER , D1MACH
   !     .. External Subroutines ..
   EXTERNAL DCOPY , DFC , DMOUT , DVOUT , IVOUT , XGETF , XSETF
   !     .. Intrinsic Functions ..
-  INTRINSIC ABS , DBLE , SQRT
+  INTRINSIC ABS, REAL, SQRT
   !     .. Data statements ..
   !
   DATA xdata(1) , xdata(2) , xdata(3) , xdata(4) , xdata(5) , xdata(6) , &
@@ -244,7 +244,7 @@ SUBROUTINE DFCQX(Lun,Kprint,Ipass)
     !
     !       The function DBVALU is in the de Boor B-spline package.
     !
-    xval = DBLE(i-1)/(nval-1)
+    xval = REAL(i-1, 8)/(nval-1)
     ii = 1
     DO j = 1 , 3
       v(i,j+1) = DBVALU(bkpt,coeff,n,nord,j-1,xval,ii,work)

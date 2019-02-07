@@ -132,7 +132,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920527  Corrected erroneous statements in DESCRIPTION.  (WRB)
   !***END PROLOGUE  POLFIT
-  DOUBLE PRECISION temd1 , temd2
+  REAL(8) :: temd1 , temd2
   DIMENSION X(*) , Y(*) , W(*) , R(*) , A(*)
   DIMENSION co(4,3)
   SAVE co
@@ -212,17 +212,17 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   temd1 = 0.0D0
   DO i = 1 , m
     k4pi = k4 + i
-    temd1 = temd1 + DBLE(W(i))*DBLE(Y(i))*DBLE(A(k4pi))
+    temd1 = temd1 + REAL(W(i), 8)*REAL(Y(i), 8)*REAL(A(k4pi), 8)
   ENDDO
-  temd1 = temd1/DBLE(w11)
+  temd1 = temd1/REAL(w11, 8)
   A(k2+1) = temd1
   sigj = 0.0
   DO i = 1 , m
     k4pi = k4 + i
     k5pi = k5 + i
-    temd2 = temd1*DBLE(A(k4pi))
+    temd2 = temd1*REAL(A(k4pi), 8)
     R(i) = temd2
-    A(k5pi) = temd2 - DBLE(R(i))
+    A(k5pi) = temd2 - REAL(R(i), 8)
     sigj = sigj + W(i)*((Y(i)-R(i))-A(k5pi))**2
   ENDDO
   j = 0
@@ -252,9 +252,9 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   DO i = 1 , m
     k4pi = k4 + i
     temd2 = A(k4pi)
-    temd1 = temd1 + DBLE(X(i))*DBLE(W(i))*temd2*temd2
+    temd1 = temd1 + REAL(X(i), 8)*REAL(W(i), 8)*temd2*temd2
   ENDDO
-  A(jp1) = temd1/DBLE(w11)
+  A(jp1) = temd1/REAL(w11, 8)
   !
   ! EVALUATE ORTHOGONAL POLYNOMIAL AT DATA POINTS
   !
@@ -276,10 +276,10 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   DO i = 1 , m
     k4pi = k4 + i
     k5pi = k5 + i
-    temd2 = DBLE(W(i))*DBLE((Y(i)-R(i))-A(k5pi))*DBLE(A(k4pi))
+    temd2 = REAL(W(i),8)*REAL((Y(i)-R(i))-A(k5pi), 8)*REAL(A(k4pi), 8)
     temd1 = temd1 + temd2
   ENDDO
-  temd1 = temd1/DBLE(w11)
+  temd1 = temd1/REAL(w11, 8)
   A(k2pj+1) = temd1
   !
   ! UPDATE POLYNOMIAL EVALUATIONS AT EACH OF THE DATA POINTS, AND
@@ -292,9 +292,9 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   DO i = 1 , m
     k4pi = k4 + i
     k5pi = k5 + i
-    temd2 = DBLE(R(i)) + DBLE(A(k5pi)) + temd1*DBLE(A(k4pi))
+    temd2 = REAL(R(i), 8) + REAL(A(k5pi), 8) + temd1*REAL(A(k4pi), 8)
     R(i) = temd2
-    A(k5pi) = temd2 - DBLE(R(i))
+    A(k5pi) = temd2 - REAL(R(i), 8)
     sigj = sigj + W(i)*((Y(i)-R(i))-A(k5pi))**2
   ENDDO
   !

@@ -1,6 +1,6 @@
 !*==ZABS.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZABS
-DOUBLE PRECISION FUNCTION ZABS(Zr,Zi)
+REAL(8) FUNCTION ZABS(Zr,Zi)
   IMPLICIT NONE
   !*--ZABS5
   !***BEGIN PROLOGUE  ZABS
@@ -21,7 +21,7 @@ DOUBLE PRECISION FUNCTION ZABS(Zr,Zi)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  ZABS
-  DOUBLE PRECISION Zr , Zi , u , v , q , s
+  REAL(8) :: Zr , Zi , u , v , q , s
   !***FIRST EXECUTABLE STATEMENT  ZABS
   u = ABS(Zr)
   v = ABS(Zi)

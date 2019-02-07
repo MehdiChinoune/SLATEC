@@ -13,7 +13,7 @@ SUBROUTINE DFMAT(X,Y,Yp)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DFMAT
-  DOUBLE PRECISION X , Y , Yp , XSAve , TERm , tanx
+  REAL(8) :: X , Y , Yp , XSAve , TERm , tanx
   DIMENSION Y(*) , Yp(*)
   COMMON /DSAVEX/ XSAve , TERm
   !***FIRST EXECUTABLE STATEMENT  DFMAT

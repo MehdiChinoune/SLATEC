@@ -73,11 +73,11 @@ SUBROUTINE DPODI(A,Lda,N,Det,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPODI
   INTEGER Lda , N , Job
-  DOUBLE PRECISION A(Lda,*)
-  DOUBLE PRECISION Det(2)
+  REAL(8) :: A(Lda,*)
+  REAL(8) :: Det(2)
   !
-  DOUBLE PRECISION t
-  DOUBLE PRECISION s
+  REAL(8) :: t
+  REAL(8) :: s
   INTEGER i , j , jm1 , k , kp1
   !***FIRST EXECUTABLE STATEMENT  DPODI
   !

@@ -106,7 +106,7 @@ SUBROUTINE DSDS(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !     .. Scalar Arguments ..
   INTEGER Isym , N , Nelt
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nelt) , Dinv(N)
+  REAL(8) :: A(Nelt) , Dinv(N)
   INTEGER Ia(Nelt) , Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER icol

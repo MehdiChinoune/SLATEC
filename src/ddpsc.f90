@@ -24,7 +24,7 @@ SUBROUTINE DDPSC(Ksgn,N,Nq,Yh)
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  DDPSC
   INTEGER i , j , j1 , j2 , Ksgn , N , Nq
-  DOUBLE PRECISION Yh(N,*)
+  REAL(8) :: Yh(N,*)
   !***FIRST EXECUTABLE STATEMENT  DDPSC
   IF ( Ksgn>0 ) THEN
     DO j1 = 1 , Nq

@@ -57,7 +57,7 @@ SUBROUTINE D9B1MP(X,Ampl,Theta)
   !   920618  Removed space from variable name and code restructured to
   !           use IF-THEN-ELSE.  (RWC, WRB)
   !***END PROLOGUE  D9B1MP
-  DOUBLE PRECISION X , Ampl , Theta , bm1cs(37) , bt12cs(39) , bm12cs(40) , &
+  REAL(8) :: X , Ampl , Theta , bm1cs(37) , bt12cs(39) , bm12cs(40) , &
     bth1cs(44) , xmax , pi4 , z , D1MACH , DCSEVL
   LOGICAL first
   SAVE bm1cs , bt12cs , bth1cs , bm12cs , pi4 , nbm1 , nbt12 , nbm12 , &

@@ -30,17 +30,17 @@ SUBROUTINE DLSEIT(Lun,Kprint,Ipass)
   !     .. Scalar Arguments ..
   INTEGER Ipass , Kprint , Lun
   !     .. Local Scalars ..
-  DOUBLE PRECISION cnorm , relerr , relnrm , resnrm , rnorme , rnorml , &
+  REAL(8) :: cnorm , relerr , relnrm , resnrm , rnorme , rnorml , &
     tnorm
   INTEGER i , idigit , jdigit , kontrl , ma , mdd , me , meap1 , mep1 , mg , &
     mode , n , nerr , np1
   LOGICAL fatal
   !     .. Local Arrays ..
-  DOUBLE PRECISION a(6,5) , d(11,6) , err(5) , f(6) , g(5,5) , h(5) , &
+  REAL(8) :: a(6,5) , d(11,6) , err(5) , f(6) , g(5,5) , h(5) , &
     prgopt(4) , sol(5) , work(105) , x(5)
   INTEGER ip(17)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DDOT , DNRM2
+  REAL(8) :: D1MACH , DDOT , DNRM2
   INTEGER NUMXER
   EXTERNAL NUMXER , D1MACH , DDOT , DNRM2
   !     .. External Subroutines ..

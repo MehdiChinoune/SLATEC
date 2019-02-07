@@ -45,7 +45,7 @@ SUBROUTINE DSCAL(N,Da,Dx,Incx)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSCAL
-  DOUBLE PRECISION Da , Dx(*)
+  REAL(8) :: Da , Dx(*)
   INTEGER i , Incx , ix , m , mp1 , N
   !***FIRST EXECUTABLE STATEMENT  DSCAL
   IF ( N<=0 ) RETURN

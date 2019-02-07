@@ -68,11 +68,11 @@ SUBROUTINE DTRCO(T,Ldt,N,Rcond,Z,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DTRCO
   INTEGER Ldt , N , Job
-  DOUBLE PRECISION T(Ldt,*) , Z(*)
-  DOUBLE PRECISION Rcond
+  REAL(8) :: T(Ldt,*) , Z(*)
+  REAL(8) :: Rcond
   !
-  DOUBLE PRECISION w , wk , wkm , ek
-  DOUBLE PRECISION tnorm , ynorm , s , sm , DASUM
+  REAL(8) :: w , wk , wkm , ek
+  REAL(8) :: tnorm , ynorm , s , sm , DASUM
   INTEGER i1 , j , j1 , j2 , k , kk , l
   LOGICAL lower
   !***FIRST EXECUTABLE STATEMENT  DTRCO

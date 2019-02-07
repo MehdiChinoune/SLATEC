@@ -20,8 +20,8 @@ SUBROUTINE ZDIV(Ar,Ai,Br,Bi,Cr,Ci)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  ZDIV
-  DOUBLE PRECISION Ar , Ai , Br , Bi , Cr , Ci , bm , ca , cb , cc , cd
-  DOUBLE PRECISION ZABS
+  REAL(8) :: Ar , Ai , Br , Bi , Cr , Ci , bm , ca , cb , cc , cd
+  REAL(8) :: ZABS
   EXTERNAL ZABS
   !***FIRST EXECUTABLE STATEMENT  ZDIV
   bm = 1.0D0/ZABS(Br,Bi)

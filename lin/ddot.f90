@@ -1,6 +1,6 @@
 !*==DDOT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DDOT
-DOUBLE PRECISION FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
+REAL(8) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
   !*--DDOT5
   !*** Start of declarations inserted by SPAG
@@ -49,7 +49,7 @@ DOUBLE PRECISION FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DDOT
-  DOUBLE PRECISION Dx(*) , Dy(*)
+  REAL(8) :: Dx(*) , Dy(*)
   !***FIRST EXECUTABLE STATEMENT  DDOT
   DDOT = 0.0D0
   IF ( N<=0 ) RETURN

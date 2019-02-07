@@ -192,7 +192,7 @@ SUBROUTINE DBNDAC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   IMPLICIT NONE
   !*--DBNDAC193
   !*** Start of declarations inserted by SPAG
-  DOUBLE PRECISION G , rho , zero
+  REAL(8) :: G , rho , zero
   INTEGER i , ie , ig , ig1 , ig2 , iopt , Ip , Ir , j , jg , Jt , k , kh , &
     l , lp1 , Mdg , mh , Mt , mu , Nb
   INTEGER nbp1 , nerr

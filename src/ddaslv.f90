@@ -32,7 +32,7 @@ SUBROUTINE DDASLV(Neq,Delta,Wm,Iwm)
   !***END PROLOGUE  DDASLV
   !
   INTEGER Neq , Iwm(*)
-  DOUBLE PRECISION Delta(*) , Wm(*)
+  REAL(8) :: Delta(*) , Wm(*)
   !
   EXTERNAL DGBSL , DGESL
   !

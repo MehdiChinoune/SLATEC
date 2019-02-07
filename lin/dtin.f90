@@ -133,7 +133,7 @@ SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !     .. Scalar Arguments ..
   INTEGER Isym , Iunit , Job , N , Nelt
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nelt) , Rhs(N) , Soln(N)
+  REAL(8) :: A(Nelt) , Rhs(N) , Soln(N)
   INTEGER Ia(Nelt) , Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER i , irhs , isoln , jobret , neltmx

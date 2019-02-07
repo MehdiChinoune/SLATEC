@@ -603,17 +603,17 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   INTEGER Iopt , M , N , Ldfjac , Maxfev , Mode , Nprint , Info , Nfev ,&
     Njev
   INTEGER ijunk , nrow , Ipvt(*)
-  DOUBLE PRECISION Ftol , Xtol , Gtol , Factor , Epsfcn
-  DOUBLE PRECISION X(*) , Fvec(*) , Fjac(Ldfjac,*) , Diag(*) , Qtf(*) ,&
+  REAL(8) :: Ftol , Xtol , Gtol , Factor , Epsfcn
+  REAL(8) :: X(*) , Fvec(*) , Fjac(Ldfjac,*) , Diag(*) , Qtf(*) ,&
     Wa1(*) , Wa2(*) , Wa3(*) , Wa4(*)
   LOGICAL sing
   EXTERNAL FCN
   INTEGER i , iflag , iter , j , l , modech
-  DOUBLE PRECISION actred , delta , dirder , epsmch , fnorm , fnorm1 ,&
+  REAL(8) :: actred , delta , dirder , epsmch , fnorm , fnorm1 ,&
     gnorm , one , par , pnorm , prered , p1 , p5 , p25 ,&
     p75 , p0001 , ratio , sum , temp , temp1 , temp2 ,&
     xnorm , zero
-  DOUBLE PRECISION D1MACH , DENORM , err , chklim
+  REAL(8) :: D1MACH , DENORM , err , chklim
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
   SAVE chklim , one , p1 , p5 , p25 , p75 , p0001 , zero

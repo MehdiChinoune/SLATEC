@@ -33,16 +33,16 @@ SUBROUTINE MPCMD(X,Dz)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPCMD
-  DOUBLE PRECISION db , Dz , dz2
+  REAL(8) :: db , Dz , dz2
   COMMON /MPCOM / B , T , M , LUN , MXR , R(30)
   INTEGER B , T , R , X(*) , tm
   !***FIRST EXECUTABLE STATEMENT  MPCMD
   CALL MPCHK(1,4)
   Dz = 0D0
   IF ( X(1)==0 ) RETURN
-  db = DBLE(B)
+  db = REAL(B, 8)
   DO i = 1 , T
-    Dz = db*Dz + DBLE(X(i+2))
+    Dz = db*Dz + REAL(X(i+2), 8)
     tm = i
     ! CHECK IF FULL DOUBLE-PRECISION ACCURACY ATTAINED
     dz2 = Dz + 1D0
@@ -55,7 +55,7 @@ SUBROUTINE MPCMD(X,Dz)
   ! CHECK REASONABLENESS OF RESULT.
   IF ( Dz>0D0 ) THEN
     ! LHS SHOULD BE .LE. 0.5 BUT ALLOW FOR SOME ERROR IN LOG
-    IF ( ABS(DBLE(X(2))-(LOG(Dz)/LOG(DBLE(B))+0.5D0))<=0.6D0 ) THEN
+    IF ( ABS(REAL(X(2), 8)-(LOG(Dz)/LOG(REAL(B, 8))+0.5D0))<=0.6D0 ) THEN
       IF ( X(1)<0 ) Dz = -Dz
       RETURN
     ENDIF

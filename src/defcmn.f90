@@ -30,13 +30,13 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !   900604  DP version created from SP version.  (RWC)
   !***END PROLOGUE  DEFCMN
   INTEGER Lw , Mdein , Mdeout , Mdg , Mdw , Nbkpt , Ndata , Nord
-  DOUBLE PRECISION Bf(Nord,*) , Bkpt(*) , Bkptin(*) , Coeff(*) , G(Mdg,*) ,&
+  REAL(8) :: Bf(Nord,*) , Bkpt(*) , Bkptin(*) , Coeff(*) , G(Mdg,*) ,&
     Ptemp(*) , Sddata(*) , W(Mdw,*) , Xdata(*) , Xtemp(*) ,&
     Ydata(*)
   !
   EXTERNAL DBNDAC , DBNDSL , DCOPY , DFSPVN , DSCAL , DSORT , XERMSG
   !
-  DOUBLE PRECISION dummy , rnorm , xmax , xmin , xval
+  REAL(8) :: dummy , rnorm , xmax , xmin , xval
   INTEGER i , idata , ileft , intseq , ip , ir , irow , l , mt , n , nb ,&
     nordm1 , nordp1 , np1
   CHARACTER(8) :: xern1 , xern2

@@ -36,7 +36,7 @@ SUBROUTINE DPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DPLPFL
   INTEGER Ibasis(*) , Ind(*) , Ibb(*)
-  DOUBLE PRECISION Csc(*) , Ww(*) , Bl(*) , Bu(*) , Erp(*) , Rprim(*) , &
+  REAL(8) :: Csc(*) , Ww(*) , Bl(*) , Bu(*) , Erp(*) , Rprim(*) , &
     Primal(*) , bound , Dirnrm , ratio , Rprnrm , Theta , &
     zero
   LOGICAL Finite , Zerolv

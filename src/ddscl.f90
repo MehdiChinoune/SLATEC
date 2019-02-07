@@ -22,7 +22,7 @@ SUBROUTINE DDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  DDSCL
   INTEGER i , j , N , Nq
-  DOUBLE PRECISION H , Hmax , Rc , Rh , Rmax , r1 , Yh(N,*)
+  REAL(8) :: H , Hmax , Rc , Rh , Rmax , r1 , Yh(N,*)
   !***FIRST EXECUTABLE STATEMENT  DDSCL
   IF ( H<1.D0 ) THEN
     Rh = MIN(ABS(H)*Rh,ABS(H)*Rmax,Hmax)/ABS(H)

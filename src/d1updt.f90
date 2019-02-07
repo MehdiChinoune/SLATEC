@@ -75,9 +75,9 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  D1UPDT
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   INTEGER i , j , jj , l , Ls , M , N , nm1 , nmj
-  DOUBLE PRECISION cos , cotan , giant , one , p25 , p5 , S(*) , sin , tan , &
+  REAL(8) :: cos , cotan , giant , one , p25 , p5 , S(*) , sin , tan , &
     tau , temp , U(*) , V(*) , W(*) , zero
   LOGICAL Sing
   SAVE one , p5 , p25 , zero

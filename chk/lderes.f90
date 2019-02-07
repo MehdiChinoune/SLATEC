@@ -27,7 +27,7 @@ LOGICAL FUNCTION LDERES(Type,Uplo,M,N,Aa,As,Lda)
   CHARACTER :: Uplo
   CHARACTER(2) :: Type
   !     .. Array Arguments ..
-  DOUBLE PRECISION Aa(Lda,*) , As(Lda,*)
+  REAL(8) :: Aa(Lda,*) , As(Lda,*)
   !     .. Local Scalars ..
   INTEGER i , ibeg , iend , j
   LOGICAL upper

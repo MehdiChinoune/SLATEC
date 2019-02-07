@@ -22,7 +22,7 @@ SUBROUTINE CDQAWO(Lun,Kprint,Ipass)
   !
   ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
   !
-  DOUBLE PRECISION a , abserr , b , epmach , epsabs , epsrel , error , &
+  REAL(8) :: a , abserr , b , epmach , epsabs , epsrel , error , &
     exact0 , DF0O , DF1O , DF2O , oflow , omega , pi , &
     result , D1MACH , uflow , work
   INTEGER ier , ierv , integr , ip , Ipass , iwork , Kprint , last , lenw , &

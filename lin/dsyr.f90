@@ -89,16 +89,16 @@ SUBROUTINE DSYR(Uplo,N,Alpha,X,Incx,A,Lda)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  DSYR
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Alpha
+  REAL(8) :: Alpha
   INTEGER Incx , Lda , N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Lda,*) , X(*)
+  REAL(8) :: A(Lda,*) , X(*)
   !     .. Parameters ..
-  DOUBLE PRECISION ZERO
+  REAL(8) :: ZERO
   PARAMETER (ZERO=0.0D+0)
   !     .. Local Scalars ..
-  DOUBLE PRECISION temp
+  REAL(8) :: temp
   INTEGER i , info , ix , j , jx , kx
   !     .. External Functions ..
   LOGICAL LSAME

@@ -73,15 +73,15 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900911  Restriction on value of ALAMDA included.  (WRB)
   !***END PROLOGUE  DWNLSM
   INTEGER Ipivot(*) , Itype(*) , L , Ma , Mdw , Mme , Mode , N
-  DOUBLE PRECISION D(*) , H(*) , Prgopt(*) , Rnorm , Scale(*) , Temp(*) , &
+  REAL(8) :: D(*) , H(*) , Prgopt(*) , Rnorm , Scale(*) , Temp(*) , &
     W(Mdw,*) , Wd(*) , X(*) , Z(*)
   !
   EXTERNAL D1MACH , DASUM , DAXPY , DCOPY , DH12 , DNRM2 , DROTM , DROTMG , &
     DSCAL , DSWAP , DWNLIT , IDAMAX , XERMSG
-  DOUBLE PRECISION D1MACH , DASUM , DNRM2
+  REAL(8) :: D1MACH , DASUM , DNRM2
   INTEGER IDAMAX
   !
-  DOUBLE PRECISION alamda , alpha , alsq , amax , blowup , bnorm , dope(3) , &
+  REAL(8) :: alamda , alpha , alsq , amax , blowup , bnorm , dope(3) , &
     drelpr , eanorm , fac , sm , sparam(5) , t , tau , wmax , &
     z2 , zz
   INTEGER i , idope(3) , imax , isol , itemp , iter , itmax , iwmax , j , &

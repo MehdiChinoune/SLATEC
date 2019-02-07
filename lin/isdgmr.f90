@@ -263,22 +263,22 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  ISDGMR
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Bnrm , Err , Prod , R0nrm , Rnrm , Snormw , Tol
+  REAL(8) :: Bnrm , Err , Prod , R0nrm , Rnrm , Snormw , Tol
   INTEGER Isym , Iter , Itmax , Itol , Iunit , Jpre , Jscal , Kmp , Lgmr , &
     Maxl , Maxlp1 , N , Nelt , Nmsl
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(*) , B(*) , Dz(*) , Hes(Maxlp1,Maxl) , Q(*) , R(*) , &
+  REAL(8) :: A(*) , B(*) , Dz(*) , Hes(Maxlp1,Maxl) , Q(*) , R(*) , &
     Rwork(*) , Sb(*) , Sx(*) , V(N,*) , X(*) , Xl(*) , Z(*)
   INTEGER Ia(*) , Iwork(*) , Ja(*)
   !     .. Subroutine Arguments ..
   EXTERNAL MSOLVE
   !     .. Arrays in Common ..
-  DOUBLE PRECISION SOLn(1)
+  REAL(8) :: SOLn(1)
   !     .. Local Scalars ..
-  DOUBLE PRECISION dxnrm , fuzz , rat , ratmax , solnrm , tem
+  REAL(8) :: dxnrm , fuzz , rat , ratmax , solnrm , tem
   INTEGER i , ielmax
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DNRM2
+  REAL(8) :: D1MACH , DNRM2
   EXTERNAL D1MACH , DNRM2
   !     .. External Subroutines ..
   EXTERNAL DCOPY , DRLCAL , DSCAL , DXLCAL

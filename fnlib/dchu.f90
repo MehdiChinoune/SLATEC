@@ -1,6 +1,6 @@
 !*==DCHU.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DCHU
-DOUBLE PRECISION FUNCTION DCHU(A,B,X)
+REAL(8) FUNCTION DCHU(A,B,X)
   IMPLICIT NONE
   !*--DCHU5
   !*** Start of declarations inserted by SPAG
@@ -33,7 +33,7 @@ DOUBLE PRECISION FUNCTION DCHU(A,B,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DCHU
-  DOUBLE PRECISION A , B , X , aintb , alnx , a0 , beps , b0 , c0 , eps , &
+  REAL(8) :: A , B , X , aintb , alnx , a0 , beps , b0 , c0 , eps , &
     factor , gamri1 , gamrni , pch1ai , pch1i , pi , pochai , &
     sum , t , xeps1 , xi , xi1 , xn , xtoeps , D1MACH , &
     DPOCH , DGAMMA , DGAMR , DPOCH1 , DEXPRL , D9CHU

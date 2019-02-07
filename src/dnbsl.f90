@@ -79,9 +79,9 @@ SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DNBSL
   INTEGER Lda , N , Ml , Mu , Ipvt(*) , Job
-  DOUBLE PRECISION Abe(Lda,*) , B(*)
+  REAL(8) :: Abe(Lda,*) , B(*)
   !
-  DOUBLE PRECISION DDOT , t
+  REAL(8) :: DDOT , t
   INTEGER k , kb , l , lb , ldb , lm , m , mlm , nm1
   !***FIRST EXECUTABLE STATEMENT  DNBSL
   m = Mu + Ml + 1

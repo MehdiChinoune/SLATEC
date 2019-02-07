@@ -1,6 +1,6 @@
 !*==D9LGMC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9LGMC
-DOUBLE PRECISION FUNCTION D9LGMC(X)
+REAL(8) FUNCTION D9LGMC(X)
   IMPLICIT NONE
   !*--D9LGMC5
   !*** Start of declarations inserted by SPAG
@@ -38,7 +38,7 @@ DOUBLE PRECISION FUNCTION D9LGMC(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9LGMC
-  DOUBLE PRECISION X , algmcs(15) , xbig , xmax , DCSEVL , D1MACH
+  REAL(8) :: X , algmcs(15) , xbig , xmax , DCSEVL , D1MACH
   LOGICAL first
   SAVE algmcs , nalgm , xbig , xmax , first
   DATA algmcs(1)/ + .1666389480451863247205729650822D+0/

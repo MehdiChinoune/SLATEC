@@ -130,12 +130,12 @@ SUBROUTINE DCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DCHDD
   INTEGER Ldr , P , Ldz , Nz , Info
-  DOUBLE PRECISION R(Ldr,*) , X(*) , Z(Ldz,*) , Y(*) , S(*)
-  DOUBLE PRECISION Rho(*) , C(*)
+  REAL(8) :: R(Ldr,*) , X(*) , Z(Ldz,*) , Y(*) , S(*)
+  REAL(8) :: Rho(*) , C(*)
   !
   INTEGER i , ii , j
-  DOUBLE PRECISION a , alpha , azeta , norm , DNRM2
-  DOUBLE PRECISION DDOT , t , zeta , b , xx , scale
+  REAL(8) :: a , alpha , azeta , norm , DNRM2
+  REAL(8) :: DDOT , t , zeta , b , xx , scale
   !
   !     SOLVE THE SYSTEM TRANS(R)*A = X, PLACING THE RESULT
   !     IN THE ARRAY S.

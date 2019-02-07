@@ -83,11 +83,11 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSICO
   INTEGER Lda , N , Kpvt(*)
-  DOUBLE PRECISION A(Lda,*) , Z(*)
-  DOUBLE PRECISION Rcond
+  REAL(8) :: A(Lda,*) , Z(*)
+  REAL(8) :: Rcond
   !
-  DOUBLE PRECISION ak , akm1 , bk , bkm1 , DDOT , denom , ek , t
-  DOUBLE PRECISION anorm , s , DASUM , ynorm
+  REAL(8) :: ak , akm1 , bk , bkm1 , DDOT , denom , ek , t
+  REAL(8) :: anorm , s , DASUM , ynorm
   INTEGER i , info , j , jm1 , k , kp , kps , ks
   !
   !     FIND NORM OF A USING ONLY UPPER HALF

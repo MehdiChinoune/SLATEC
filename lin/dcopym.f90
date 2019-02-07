@@ -39,7 +39,7 @@ SUBROUTINE DCOPYM(N,Dx,Incx,Dy,Incy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !***END PROLOGUE  DCOPYM
-  DOUBLE PRECISION Dx(*) , Dy(*)
+  REAL(8) :: Dx(*) , Dy(*)
   !***FIRST EXECUTABLE STATEMENT  DCOPYM
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy ) THEN

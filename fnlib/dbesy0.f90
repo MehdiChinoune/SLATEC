@@ -1,6 +1,6 @@
 !*==DBESY0.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBESY0
-DOUBLE PRECISION FUNCTION DBESY0(X)
+REAL(8) FUNCTION DBESY0(X)
   IMPLICIT NONE
   !*--DBESY05
   !*** Start of declarations inserted by SPAG
@@ -35,7 +35,7 @@ DOUBLE PRECISION FUNCTION DBESY0(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBESY0
-  DOUBLE PRECISION X , by0cs(19) , ampl , theta , twodpi , xsml , y , &
+  REAL(8) :: X , by0cs(19) , ampl , theta , twodpi , xsml , y , &
     D1MACH , DCSEVL , DBESJ0
   LOGICAL first
   SAVE by0cs , twodpi , nty0 , xsml , first

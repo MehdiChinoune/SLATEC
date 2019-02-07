@@ -34,7 +34,7 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   INTEGER ICOco , idp , Iflag , INDpvt , Inhomo , INTeg , Iwork(*) , k , &
     kp , Lnfc , LNFcc , MXNon , Ncomp , NDIsk , NEQ , NEQivp , NIC , &
     niv , NOPg , NPS , NTApe , NTP , NUMort , NXPts
-  DOUBLE PRECISION AE , dum , RE , TOL , Work(*) , Yhp(Ncomp,*)
+  REAL(8) :: AE , dum , RE , TOL , Work(*) , Yhp(Ncomp,*)
   COMMON /DML18J/ AE , RE , TOL , NXPts , NIC , NOPg , MXNon , NDIsk , &
     NTApe , NEQ , INDpvt , INTeg , NPS , NTP , NEQivp , &
     NUMort , LNFcc , ICOco

@@ -55,7 +55,7 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  D9B0MP
-  DOUBLE PRECISION X , Ampl , Theta , bm0cs(37) , bt02cs(39) , bm02cs(40) , &
+  REAL(8) :: X , Ampl , Theta , bm0cs(37) , bt02cs(39) , bm02cs(40) , &
     bth0cs(44) , xmax , pi4 , z , D1MACH , DCSEVL
   LOGICAL first
   SAVE bm0cs , bth0cs , bm02cs , bt02cs , pi4 , nbm0 , nbt02 , nbm02 , &

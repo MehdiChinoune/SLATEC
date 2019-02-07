@@ -75,10 +75,10 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
   !     .. Scalar Arguments ..
   INTEGER Ier , Kflag , N
   !     .. Array Arguments ..
-  DOUBLE PRECISION Dx(*)
+  REAL(8) :: Dx(*)
   INTEGER Iperm(*)
   !     .. Local Scalars ..
-  DOUBLE PRECISION r , temp
+  REAL(8) :: r , temp
   INTEGER i , ij , indx , indx0 , istrt , j , k , kk , l , lm , lmt , m , nn
   !     .. Local Arrays ..
   INTEGER il(21) , iu(21)

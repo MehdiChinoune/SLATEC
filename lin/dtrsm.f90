@@ -132,9 +132,9 @@ SUBROUTINE DTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !     .. Scalar Arguments ..
   CHARACTER :: Side , Uplo , Transa , Diag
   INTEGER M , N , Lda , Ldb
-  DOUBLE PRECISION Alpha
+  REAL(8) :: Alpha
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Lda,*) , B(Ldb,*)
+  REAL(8) :: A(Lda,*) , B(Ldb,*)
   !
   !     .. External Functions ..
   LOGICAL LSAME
@@ -146,9 +146,9 @@ SUBROUTINE DTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !     .. Local Scalars ..
   LOGICAL lside , nounit , upper
   INTEGER i , info , j , k , nrowa
-  DOUBLE PRECISION temp
+  REAL(8) :: temp
   !     .. Parameters ..
-  DOUBLE PRECISION ONE , ZERO
+  REAL(8) :: ONE , ZERO
   PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
   !***FIRST EXECUTABLE STATEMENT  DTRSM
   !

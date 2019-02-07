@@ -57,7 +57,7 @@ SUBROUTINE QXDBDF(Lun,Kprint,Ipass)
   !     Declare local variables.
   !
   INTEGER idid , info(15) , ipar , iwork(60) , n , liw , lrw , nstep
-  DOUBLE PRECISION abserr , D1MACH , r , reltol , relerr , rpar , rwork(306)&
+  REAL(8) :: abserr , D1MACH , r , reltol , relerr , rpar , rwork(306)&
     , t , tout , u(4)
   EXTERNAL DFDEQC , DJAC
   !***FIRST EXECUTABLE STATEMENT  QXDBDF

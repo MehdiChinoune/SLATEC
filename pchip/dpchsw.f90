@@ -81,15 +81,15 @@ SUBROUTINE DPCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Iextrm , Ierr
-  DOUBLE PRECISION Dfmax , D1 , D2 , H , Slope
+  REAL(8) :: Dfmax , D1 , D2 , H , Slope
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  DOUBLE PRECISION cp , fact , hphi , lambda , nu , one , phi , radcal , &
+  REAL(8) :: cp , fact , hphi , lambda , nu , one , phi , radcal , &
     rho , sigma , small , that , third , three , two , zero
   SAVE zero , one , two , three , fact
   SAVE third
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   !
   DATA zero/0.D0/ , one/1.D0/ , two/2.D0/ , three/3.D0/ , fact/100.D0/
   !        THIRD SHOULD BE SLIGHTLY LESS THAN 1/3.

@@ -63,7 +63,7 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
   !***END PROLOGUE  DMOUT
-  DOUBLE PRECISION A(Lda,*)
+  REAL(8) :: A(Lda,*)
   CHARACTER Ifmt*(*) , icol*3
   SAVE icol
   DATA icol/'COL'/

@@ -37,7 +37,7 @@ SUBROUTINE MPCDM(Dx,Z)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPCDM
-  DOUBLE PRECISION db , dj , Dx
+  REAL(8) :: db , dj , Dx
   COMMON /MPCOM / B , T , M , LUN , MXR , R(30)
   INTEGER B , T , R , Z(*) , rs , re , tp
   !***FIRST EXECUTABLE STATEMENT  MPCDM
@@ -71,12 +71,12 @@ SUBROUTINE MPCDM(Dx,Z)
   ! NOW DJ IS DY DIVIDED BY SUITABLE POWER OF 16
   ! SET EXPONENT TO 0
   re = 0
-  db = DBLE(B)
+  db = REAL(B, 8)
   ! CONVERSION LOOP (ASSUME DOUBLE-PRECISION OPS. EXACT)
   DO i = 1 , i2
     dj = db*dj
     R(i) = INT(dj)
-    dj = dj - DBLE(R(i))
+    dj = dj - REAL(R(i), 8)
   ENDDO
   ! NORMALIZE RESULT
   CALL MPNZR(rs,re,Z,0)

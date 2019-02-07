@@ -24,7 +24,7 @@ SUBROUTINE CDQAGS(Lun,Kprint,Ipass)
   !
   ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
   !
-  DOUBLE PRECISION a , abserr , b , D1MACH , epmach , epsabs , epsrel , &
+  REAL(8) :: a , abserr , b , D1MACH , epmach , epsabs , epsrel , &
     error , exact0 , exact1 , exact2 , exact3 , exact4 , &
     DF0S , DF1S , DF2S , DF3S , DF4S , DF5S , oflow , &
     result , uflow , work

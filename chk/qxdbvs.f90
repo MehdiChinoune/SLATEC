@@ -24,8 +24,8 @@ SUBROUTINE QXDBVS(Lun,Kprint,Ipass)
   !   910708  Minor modifications in use of KPRINT.  (WRB)
   !***END PROLOGUE  QXDBVS
   INTEGER itmp(9) , iwork(100)
-  DOUBLE PRECISION work(1000) , ae , re , XSAve , sve , TERm , tol
-  DOUBLE PRECISION y(4,15) , xpts(15) , a(2,4) , alpha(2) , b(2,4) , beta(2)&
+  REAL(8) :: work(1000) , ae , re , XSAve , sve , TERm , tol
+  REAL(8) :: y(4,15) , xpts(15) , a(2,4) , alpha(2) , b(2,4) , beta(2)&
     , yans(2,15) , reler , abser
   CHARACTER(4) :: msg
   COMMON /DSAVEX/ XSAve , TERm

@@ -49,7 +49,7 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   INTEGER i , ic , IER , Iflag , IOWnd , IOWns , j , jb , jb2 , jj , jj1 , &
     jp1 , JSTart , K , KFLag , L , MAXord , METh , MITer , N , NFE , &
     NJE , NQ , NQU , NST , Nyh
-  DOUBLE PRECISION c , Dky , EL0 , H , HMIn , HMXi , HU , r , ROWnd , &
+  REAL(8) :: c , Dky , EL0 , H , HMIn , HMXi , HU , r , ROWnd , &
     ROWns , s , T , TN , tp , UROund , Yh
   DIMENSION Yh(Nyh,*) , Dky(*)
   COMMON /DDEBD1/ ROWnd , ROWns(210) , EL0 , H , HMIn , HMXi , HU , TN , &

@@ -38,7 +38,7 @@ SUBROUTINE DPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !***END PROLOGUE  DPLPDM
   INTEGER Ibasis(*) , Imat(*) , Ibrc(Lbm,2) , Ipr(*) , Iwr(*) , Ind(*) ,&
     Ibb(*)
-  DOUBLE PRECISION aij , Amat(*) , Basmat(*) , Csc(*) , Wr(*) , Anorm ,&
+  REAL(8) :: aij , Amat(*) , Basmat(*) , Csc(*) , Wr(*) , Anorm ,&
     DASUM , Eps , Gg , one , SMAll , Uu , zero
   LOGICAL Singlr , Redbas
   CHARACTER(16) :: xern3

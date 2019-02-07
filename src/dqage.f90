@@ -159,7 +159,7 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQAGE
   !
-  DOUBLE PRECISION A , Abserr , Alist , area , area1 , area12 , area2 , a1 , &
+  REAL(8) :: A , Abserr , Alist , area , area1 , area12 , area2 , a1 , &
     a2 , B , Blist , b1 , b2 , defabs , defab1 , defab2 , &
     D1MACH , Elist , epmach , Epsabs , Epsrel , errbnd , &
     errmax , error1 , error2 , erro12 , errsum , F , resabs , &

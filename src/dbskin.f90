@@ -100,9 +100,9 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   INTEGER i , icase , Ierr , il , i1m , k , kk , Kode , ktrms , M , m3 , N , &
     ne , nflg , nl , nlim , nn , np , ns , nt , Nz
   INTEGER I1MACH
-  DOUBLE PRECISION a , enlim , exi , fn , gr , h , hn , hrtpi , ss , tol , &
+  REAL(8) :: a , enlim , exi , fn , gr , h , hn , hrtpi , ss , tol , &
     t1 , t2 , w , X , xlim , xnlim , xp , Y , ys , yss
-  DOUBLE PRECISION DGAMRN , D1MACH
+  REAL(8) :: DGAMRN , D1MACH
   DIMENSION exi(102) , a(50) , ys(3) , yss(3) , h(31) , Y(*)
   SAVE a , hrtpi
   !-----------------------------------------------------------------------

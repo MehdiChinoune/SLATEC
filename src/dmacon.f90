@@ -20,9 +20,9 @@ SUBROUTINE DMACON
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DMACON
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   INTEGER ke , LPAr
-  DOUBLE PRECISION dd , EPS , FOUru , SQOvfl , SRU , TWOu , URO
+  REAL(8) :: dd , EPS , FOUru , SQOvfl , SRU , TWOu , URO
   COMMON /DML5MC/ URO , SRU , EPS , SQOvfl , TWOu , FOUru , LPAr
   !***FIRST EXECUTABLE STATEMENT  DMACON
   URO = D1MACH(4)

@@ -42,11 +42,11 @@ SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !***END PROLOGUE  DPLPFE
   INTEGER Ibasis(*) , Imat(*) , Ibrc(Lbm,2) , Ipr(*) , Iwr(*) , Ind(*) , &
     Ibb(*)
-  DOUBLE PRECISION Amat(*) , Basmat(*) , Csc(*) , Wr(*) , Ww(*) , Bl(*) , &
+  REAL(8) :: Amat(*) , Basmat(*) , Csc(*) , Wr(*) , Ww(*) , Bl(*) , &
     Bu(*) , Rz(*) , Rg(*) , Colnrm(*) , Duals(*) , cnorm , &
     Dirnrm , Dulnrm , Eps , Erdnrm , Gg , one , ratio , &
     rcost , rmax , zero
-  DOUBLE PRECISION DASUM
+  REAL(8) :: DASUM
   LOGICAL Found , trans
   !***FIRST EXECUTABLE STATEMENT  DPLPFE
   lpg = Lmx - (Nvars+4)

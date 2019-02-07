@@ -21,7 +21,7 @@ SUBROUTINE ZSHCH(Zr,Zi,Cshr,Cshi,Cchr,Cchi)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  ZSHCH
   !
-  DOUBLE PRECISION Cchi , Cchr , ch , cn , Cshi , Cshr , sh , sn , Zi , Zr
+  REAL(8) :: Cchi , Cchr , ch , cn , Cshi , Cshr , sh , sn , Zi , Zr
   !***FIRST EXECUTABLE STATEMENT  ZSHCH
   sh = SINH(Zr)
   ch = COSH(Zr)

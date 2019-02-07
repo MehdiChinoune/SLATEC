@@ -77,10 +77,10 @@ SUBROUTINE QS2I1D(Ia,Ja,A,N,Kflag)
   !     .. Scalar Arguments ..
   INTEGER Kflag , N
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(N)
+  REAL(8) :: A(N)
   INTEGER Ia(N) , Ja(N)
   !     .. Local Scalars ..
-  DOUBLE PRECISION r , ta , tta
+  REAL(8) :: r , ta , tta
   INTEGER i , iit , ij , it , j , jjt , jt , k , kk , l , m , nn
   !     .. Local Arrays ..
   INTEGER il(21) , iu(21)

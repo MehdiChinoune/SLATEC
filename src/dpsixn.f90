@@ -1,6 +1,6 @@
 !*==DPSIXN.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DPSIXN
-DOUBLE PRECISION FUNCTION DPSIXN(N)
+REAL(8) FUNCTION DPSIXN(N)
   IMPLICIT NONE
   !*--DPSIXN5
   !***BEGIN PROLOGUE  DPSIXN
@@ -28,8 +28,8 @@ DOUBLE PRECISION FUNCTION DPSIXN(N)
   !***END PROLOGUE  DPSIXN
   !
   INTEGER N , k
-  DOUBLE PRECISION ax , b , c , fn , rfn2 , trm , s , wdtol
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: ax , b , c , fn , rfn2 , trm , s , wdtol
+  REAL(8) :: D1MACH
   DIMENSION b(6) , c(100)
   !
   !             DPSIXN(N), N = 1,100

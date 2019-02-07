@@ -23,7 +23,7 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
   !***END PROLOGUE  ZKSCL
   !     COMPLEX CK,CS,CY,CZERO,RZ,S1,S2,Y,ZR,ZD,CELM
-  DOUBLE PRECISION acs , as , Ascle , cki , ckr , csi , csr , cyi , cyr , &
+  REAL(8) :: acs , as , Ascle , cki , ckr , csi , csr , cyi , cyr , &
     Elim , fn , Fnu , Rzi , Rzr , str , s1i , s1r , s2i , &
     s2r , Tol , Yi , Yr , zeroi , zeror , Zri , Zrr , ZABS , &
     zdr , zdi , celmr , elm , helim , alas

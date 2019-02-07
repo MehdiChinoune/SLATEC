@@ -1,6 +1,6 @@
 !*==DGAMR.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DGAMR
-DOUBLE PRECISION FUNCTION DGAMR(X)
+REAL(8) FUNCTION DGAMR(X)
   IMPLICIT NONE
   !*--DGAMR5
   !*** Start of declarations inserted by SPAG
@@ -27,7 +27,7 @@ DOUBLE PRECISION FUNCTION DGAMR(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DGAMR
-  DOUBLE PRECISION X , alngx , sgngx , DGAMMA
+  REAL(8) :: X , alngx , sgngx , DGAMMA
   EXTERNAL DGAMMA
   !***FIRST EXECUTABLE STATEMENT  DGAMR
   DGAMR = 0.0D0

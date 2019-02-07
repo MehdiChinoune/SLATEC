@@ -31,7 +31,7 @@ SUBROUTINE DDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   !***END PROLOGUE  DDPST
   INTEGER i , iflag , imax , Impl , info , Iswflg , j , j2 , Jstate , k , &
     Matdim , Miter , Ml , Mu , mw , N , Nde , Nfe , Nje , Nq
-  DOUBLE PRECISION A(Matdim,*) , bl , Bnd , bp , br , BU , Dfdy(Matdim,*) , &
+  REAL(8) :: A(Matdim,*) , bl , Bnd , bp , br , BU , Dfdy(Matdim,*) , &
     dfdymx , diff , dy , El(13,12) , Fac(*) , FACMAX , &
     facmin , factor , H , Save1(*) , Save2(*) , scale , &
     DNRM2 , T , Uround , Y(*) , Yh(N,*) , yj , ys , Ywt(*)

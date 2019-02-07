@@ -1,6 +1,6 @@
 !*==DFAC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DFAC
-DOUBLE PRECISION FUNCTION DFAC(N)
+REAL(8) FUNCTION DFAC(N)
   IMPLICIT NONE
   !*--DFAC5
   !*** Start of declarations inserted by SPAG
@@ -27,7 +27,7 @@ DOUBLE PRECISION FUNCTION DFAC(N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DFAC
-  DOUBLE PRECISION facn(31) , sq2pil , x , xmax , xmin , D9LGMC
+  REAL(8) :: facn(31) , sq2pil , x , xmax , xmin , D9LGMC
   SAVE facn , sq2pil , nmax
   DATA facn(1)/ + .100000000000000000000000000000000D+1/
   DATA facn(2)/ + .100000000000000000000000000000000D+1/

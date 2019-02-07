@@ -1,6 +1,6 @@
 !*==DRJ.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DRJ
-DOUBLE PRECISION FUNCTION DRJ(X,Y,Z,P,Ier)
+REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
   IMPLICIT NONE
   !*--DRJ5
   !***BEGIN PROLOGUE  DRJ
@@ -300,11 +300,11 @@ DOUBLE PRECISION FUNCTION DRJ(X,Y,Z,P,Ier)
   !***END PROLOGUE  DRJ
   INTEGER Ier
   CHARACTER(16) :: xern3 , xern4 , xern5 , xern6 , xern7
-  DOUBLE PRECISION alfa , beta , c1 , c2 , c3 , c4 , ea , eb , ec , e2 , e3
-  DOUBLE PRECISION lolim , uplim , epslon , errtol , D1MACH
-  DOUBLE PRECISION lamda , mu , P , pn , pndev
-  DOUBLE PRECISION power4 , DRC , sigma , s1 , s2 , s3 , X , xn , xndev
-  DOUBLE PRECISION xnroot , Y , yn , yndev , ynroot , Z , zn , zndev ,&
+  REAL(8) :: alfa , beta , c1 , c2 , c3 , c4 , ea , eb , ec , e2 , e3
+  REAL(8) :: lolim , uplim , epslon , errtol , D1MACH
+  REAL(8) :: lamda , mu , P , pn , pndev
+  REAL(8) :: power4 , DRC , sigma , s1 , s2 , s3 , X , xn , xndev
+  REAL(8) :: xnroot , Y , yn , yndev , ynroot , Z , zn , zndev ,&
     znroot
   LOGICAL first
   SAVE errtol , lolim , uplim , c1 , c2 , c3 , c4 , first

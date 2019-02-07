@@ -36,9 +36,9 @@ SUBROUTINE DBIKCK(Lun,Kprint,Ipass)
   !***END PROLOGUE  DBIKCK
   INTEGER i , Ipass , ix , k , kode , kontrl , Lun , m , n , nerr , nu , &
     nw , ny
-  DOUBLE PRECISION alp , del , er , fnu , fnup , rx , tol , x
-  DOUBLE PRECISION fn(3) , w(5) , xx(5) , y(5)
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: alp , del , er , fnu , fnup , rx , tol , x
+  REAL(8) :: fn(3) , w(5) , xx(5) , y(5)
+  REAL(8) :: D1MACH
   LOGICAL fatal
   !***FIRST EXECUTABLE STATEMENT  DBIKCK
   IF ( Kprint>=2 ) WRITE (Lun,99001)

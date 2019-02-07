@@ -82,7 +82,7 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   !
   INTEGER Iflag , Nbandl , Nbandu , Nrow , Nroww , i , ipk , j , jmax , k , &
     kmax , middle , midmk , nrowm1
-  DOUBLE PRECISION W(Nroww,*) , factor , pivot
+  REAL(8) :: W(Nroww,*) , factor , pivot
   !
   !***FIRST EXECUTABLE STATEMENT  DBNFAC
   Iflag = 1

@@ -1,6 +1,6 @@
 !*==DCHFIE.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DCHFIE
-DOUBLE PRECISION FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
+REAL(8) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
   IMPLICIT NONE
   !*--DCHFIE5
   !***BEGIN PROLOGUE  DCHFIE
@@ -62,11 +62,11 @@ DOUBLE PRECISION FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !
   !  DECLARE ARGUMENTS.
   !
-  DOUBLE PRECISION X1 , X2 , F1 , F2 , D1 , D2 , A , B
+  REAL(8) :: X1 , X2 , F1 , F2 , D1 , D2 , A , B
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  DOUBLE PRECISION dterm , four , fterm , h , half , phia1 , phia2 , phib1 , &
+  REAL(8) :: dterm , four , fterm , h , half , phia1 , phia2 , phib1 , &
     phib2 , psia1 , psia2 , psib1 , psib2 , six , ta1 , ta2 , &
     tb1 , tb2 , three , two , ua1 , ua2 , ub1 , ub2
   SAVE half , two , three , four , six

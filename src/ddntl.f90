@@ -44,7 +44,7 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   INTEGER i , iflag , Impl , info , Iswflg , Jstate , Jtask , Matdim , &
     Maxord , Mint , Miter , Ml , Mntold , Mtrold , Mu , N , Nde , &
     Nfe , Nq , Nwait
-  DOUBLE PRECISION A(Matdim,*) , El(13,12) , Eps , Fac(*) , H , Hmax , &
+  REAL(8) :: A(Matdim,*) , El(13,12) , Eps , Fac(*) , H , Hmax , &
     Hold , oldl0 , Rc , Rh , Rmax , RMINIT , Save1(*) , &
     Save2(*) , DNRM2 , sum , T , Tq(3,12) , Trend , Uround , &
     Y(*) , Yh(N,*) , Ywt(*)
@@ -155,7 +155,7 @@ SUBROUTINE DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     DO i = 1 , Nde
       Save1(i) = Save2(i)/MAX(1.D0,Ywt(i))
     ENDDO
-    sum = DNRM2(Nde,Save1,1)/SQRT(DBLE(Nde))
+    sum = DNRM2(Nde,Save1,1)/SQRT(REAL(Nde, 8))
     IF ( sum>Eps/ABS(H) ) H = SIGN(Eps/sum,H)
     DO i = 1 , N
       Yh(i,2) = H*Save2(i)

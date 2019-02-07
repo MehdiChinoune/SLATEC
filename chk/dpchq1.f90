@@ -61,7 +61,7 @@ SUBROUTINE DPCHQ1(Lun,Kprint,Ipass)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i1 , i2 , i3 , i4 , i5 , i6 , i7 , i8 , i9 , ifail , npts
-  DOUBLE PRECISION work(4000)
+  REAL(8) :: work(4000)
   LOGICAL fail
   !
   !***FIRST EXECUTABLE STATEMENT  DPCHQ1

@@ -23,7 +23,7 @@ SUBROUTINE DDF(N,T,Y,Yp)
   !   890405  DATE WRITTEN
   !   890405  Revised to meet SLATEC standards.
   !***END PROLOGUE  DDF
-  DOUBLE PRECISION alfa , T , Y(*) , Yp(*)
+  REAL(8) :: alfa , T , Y(*) , Yp(*)
   INTEGER N
   !***FIRST EXECUTABLE STATEMENT  DDF
   alfa = Y(N+1)

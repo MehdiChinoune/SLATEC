@@ -48,7 +48,7 @@ SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DQFORM
   INTEGER i , j , jm1 , k , l , Ldq , M , minmn , N , np1
-  DOUBLE PRECISION one , Q(Ldq,*) , sum , temp , Wa(*) , zero
+  REAL(8) :: one , Q(Ldq,*) , sum , temp , Wa(*) , zero
   SAVE one , zero
   DATA one , zero/1.0D0 , 0.0D0/
   !

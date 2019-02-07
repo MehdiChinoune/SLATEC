@@ -393,21 +393,21 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Err , Tol
+  REAL(8) :: Err , Tol
   INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Ligw , Lrgw , N , Nelt
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nelt) , B(N) , Rgwk(Lrgw) , Rwork(*) , Sb(N) , Sx(N) , &
+  REAL(8) :: A(Nelt) , B(N) , Rgwk(Lrgw) , Rwork(*) , Sb(N) , Sx(N) , &
     X(N)
   INTEGER Ia(Nelt) , Igwk(Ligw) , Iwork(*) , Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL MATVEC , MSOLVE
   !     .. Local Scalars ..
-  DOUBLE PRECISION bnrm , rhol , sum
+  REAL(8) :: bnrm , rhol , sum
   INTEGER i , iflag , jpre , jscal , kmp , ldl , lgmr , lhes , lq , lr , &
     lv , lw , lxl , lz , lzm1 , maxl , maxlp1 , nms , nmsl , nrmax , &
     nrsts
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DNRM2
+  REAL(8) :: D1MACH , DNRM2
   EXTERNAL D1MACH , DNRM2
   !     .. External Subroutines ..
   EXTERNAL DCOPY , DPIGMR

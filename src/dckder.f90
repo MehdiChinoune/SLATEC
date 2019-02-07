@@ -102,7 +102,7 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DCKDER
   INTEGER i , j , Ldfjac , M , Mode , N
-  DOUBLE PRECISION D1MACH , eps , epsf , epslog , epsmch , Err(*) , factor , &
+  REAL(8) :: D1MACH , eps , epsf , epslog , epsmch , Err(*) , factor , &
     Fjac(Ldfjac,*) , Fvec(*) , Fvecp(*) , one , temp , X(*) , &
     Xp(*) , zero
   SAVE factor , one , zero

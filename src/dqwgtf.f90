@@ -1,6 +1,6 @@
 !*==DQWGTF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQWGTF
-DOUBLE PRECISION FUNCTION DQWGTF(X,Omega,P2,P3,P4,Integr)
+REAL(8) FUNCTION DQWGTF(X,Omega,P2,P3,P4,Integr)
   IMPLICIT NONE
   !*--DQWGTF5
   !***BEGIN PROLOGUE  DQWGTF
@@ -26,7 +26,7 @@ DOUBLE PRECISION FUNCTION DQWGTF(X,Omega,P2,P3,P4,Integr)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DQWGTF
   !
-  DOUBLE PRECISION Omega , omx , P2 , P3 , P4 , X
+  REAL(8) :: Omega , omx , P2 , P3 , P4 , X
   INTEGER Integr
   !***FIRST EXECUTABLE STATEMENT  DQWGTF
   omx = Omega*X

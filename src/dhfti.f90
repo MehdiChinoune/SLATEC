@@ -139,7 +139,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !***END PROLOGUE  DHFTI
   INTEGER i , ii , iopt , Ip(*) , ip1 , j , jb , jj , k , kp1 , Krank , l , &
     ldiag , lmax , M , Mda , Mdb , N , Nb , nerr
-  DOUBLE PRECISION A , B , D1MACH , dzero , factor , G , H , hmax , releps , &
+  REAL(8) :: A , B , D1MACH , dzero , factor , G , H , hmax , releps , &
     Rnorm , sm , sm1 , szero , Tau , tmp
   DIMENSION A(Mda,*) , B(Mdb,*) , H(*) , G(*) , Rnorm(*)
   SAVE releps

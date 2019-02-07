@@ -72,15 +72,15 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Snormw
+  REAL(8) :: Snormw
   INTEGER Kmp , Ldhes , Ll , N
   !     .. Array Arguments ..
-  DOUBLE PRECISION Hes(Ldhes,*) , V(N,*) , Vnew(*)
+  REAL(8) :: Hes(Ldhes,*) , V(N,*) , Vnew(*)
   !     .. Local Scalars ..
-  DOUBLE PRECISION arg , sumdsq , tem , vnrm
+  REAL(8) :: arg , sumdsq , tem , vnrm
   INTEGER i , i0
   !     .. External Functions ..
-  DOUBLE PRECISION DDOT , DNRM2
+  REAL(8) :: DDOT , DNRM2
   EXTERNAL DDOT , DNRM2
   !     .. External Subroutines ..
   EXTERNAL DAXPY

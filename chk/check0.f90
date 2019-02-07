@@ -32,9 +32,9 @@ SUBROUTINE CHECK0(Sfac,Dfac,Kprint)
   COMMON /COMBLA/ NPRint , ICAse , N , INCx , INCy , MODe , PASs
   LOGICAL PASs
   REAL strue(9) , stemp(9)
-  DOUBLE PRECISION dc , ds , da1(8) , db1(8) , dc1(8) , ds1(8)
-  DOUBLE PRECISION da , datrue(8) , dbtrue(8) , dzero , Dfac , db
-  DOUBLE PRECISION dab(4,9) , dtemp(9) , dtrue(9,9) , d12
+  REAL(8) :: dc , ds , da1(8) , db1(8) , dc1(8) , ds1(8)
+  REAL(8) :: da , datrue(8) , dbtrue(8) , dzero , Dfac , db
+  REAL(8) :: dab(4,9) , dtemp(9) , dtrue(9,9) , d12
   DATA zero , dzero/0. , 0.D0/
   DATA da1/.3D0 , .4D0 , -.3D0 , -.4D0 , -.3D0 , 0.D0 , 0.D0 , 1.D0/
   DATA db1/.4D0 , .3D0 , .4D0 , .3D0 , -.4D0 , 0.D0 , 1.D0 , 0.D0/

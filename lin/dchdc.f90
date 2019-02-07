@@ -101,11 +101,11 @@ SUBROUTINE DCHDC(A,Lda,P,Work,Jpvt,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DCHDC
   INTEGER Lda , P , Jpvt(*) , Job , Info
-  DOUBLE PRECISION A(Lda,*) , Work(*)
+  REAL(8) :: A(Lda,*) , Work(*)
   !
   INTEGER pu , pl , plp1 , j , jp , jt , k , kb , km1 , kp1 , l , maxl
-  DOUBLE PRECISION temp
-  DOUBLE PRECISION maxdia
+  REAL(8) :: temp
+  REAL(8) :: maxdia
   LOGICAL swapk , negk
   !***FIRST EXECUTABLE STATEMENT  DCHDC
   pl = 1

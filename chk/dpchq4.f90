@@ -72,7 +72,7 @@ SUBROUTINE DPCHQ4(Lun,Kprint,Ipass)
   PARAMETER (MAXN=16,MAXN2=8,MAXN3=6,NB=7)
   INTEGER i , ierr , ifail , incfd , ismex1(MAXN) , ismex2(MAXN2) , &
     ismex3(MAXN3) , ismexb(NB) , ismon(MAXN) , k , n , ns(3)
-  DOUBLE PRECISION d(MAXN) , db(NB) , f(MAXN) , fb(NB) , x(MAXN)
+  REAL(8) :: d(MAXN) , db(NB) , f(MAXN) , fb(NB) , x(MAXN)
   LOGICAL skip
   !
   !  DEFINE EXPECTED RESULTS.

@@ -1,6 +1,6 @@
 !*==DLNREL.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DLNREL
-DOUBLE PRECISION FUNCTION DLNREL(X)
+REAL(8) FUNCTION DLNREL(X)
   IMPLICIT NONE
   !*--DLNREL5
   !*** Start of declarations inserted by SPAG
@@ -36,7 +36,7 @@ DOUBLE PRECISION FUNCTION DLNREL(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DLNREL
-  DOUBLE PRECISION alnrcs(43) , X , xmin , DCSEVL , D1MACH
+  REAL(8) :: alnrcs(43) , X , xmin , DCSEVL , D1MACH
   LOGICAL first
   SAVE alnrcs , nlnrel , xmin , first
   DATA alnrcs(1)/ + .10378693562743769800686267719098D+1/

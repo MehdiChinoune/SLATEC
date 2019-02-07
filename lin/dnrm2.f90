@@ -1,6 +1,6 @@
 !*==DNRM2.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DNRM2
-DOUBLE PRECISION FUNCTION DNRM2(N,Dx,Incx)
+REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   IMPLICIT NONE
   !*--DNRM25
   !*** Start of declarations inserted by SPAG
@@ -80,7 +80,7 @@ DOUBLE PRECISION FUNCTION DNRM2(N,Dx,Incx)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DNRM2
   INTEGER next
-  DOUBLE PRECISION Dx(*) , cutlo , cuthi , hitest , sum , xmax , zero , one
+  REAL(8) :: Dx(*) , cutlo , cuthi , hitest , sum , xmax , zero , one
   SAVE cutlo , cuthi , zero , one
   DATA zero , one/0.0D0 , 1.0D0/
   !

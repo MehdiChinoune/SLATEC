@@ -20,9 +20,9 @@ SUBROUTINE DDJAC2(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
   !   901030  Made all local declarations explicit.  (FNF)
   !***END PROLOGUE  DDJAC2
   INTEGER Ipar(*)
-  DOUBLE PRECISION T , Y(*) , Yprime(*) , Pd(11,25) , Cj , Rpar(*)
+  REAL(8) :: T , Y(*) , Yprime(*) , Pd(11,25) , Cj , Rpar(*)
   INTEGER j , mband , ml , mu , neq , ng
-  DOUBLE PRECISION alph1 , alph2
+  REAL(8) :: alph1 , alph2
   DATA alph1/1.0D0/ , alph2/1.0D0/ , ng/5/
   DATA ml/5/ , mu/0/ , neq/25/
   !***FIRST EXECUTABLE STATEMENT  DDJAC2

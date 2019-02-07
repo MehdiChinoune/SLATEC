@@ -314,7 +314,7 @@ SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   !                         feature was used.)  The value, VAR, should be
   !                         multiplied by the quantity
   !
-  !                         DBLE(MAX(NDATA-N,1))/DBLE(MAX(MDATA-N,1))
+  !                         REAL(MAX(NDATA-N,1), 8)/REAL(MAX(MDATA-N,1), 8)
   !
   !                         The output of this subprogram is not defined
   !                         if an input value of MODE=1 or 3 was used in
@@ -375,7 +375,7 @@ SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   !           DEFC, FC, and DFC look as much the same as possible.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DFC
-  DOUBLE PRECISION Bkpt(*) , Coeff(*) , Sddata(*) , W(*) , Xconst(*) , &
+  REAL(8) :: Bkpt(*) , Coeff(*) , Sddata(*) , W(*) , Xconst(*) , &
     Xdata(*) , Yconst(*) , Ydata(*)
   INTEGER Iw(*) , Mode , Nbkpt , Nconst , Ndata , Nderiv(*) , Nord
   !

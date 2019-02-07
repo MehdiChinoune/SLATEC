@@ -32,7 +32,7 @@ SUBROUTINE DWRITP(Ipage,List,Rlist,Lpage,Irec)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !***END PROLOGUE  DWRITP
   INTEGER List(*)
-  DOUBLE PRECISION Rlist(*)
+  REAL(8) :: Rlist(*)
   CHARACTER(8) :: xern1 , xern2
   !***FIRST EXECUTABLE STATEMENT  DWRITP
   ipagef = Ipage

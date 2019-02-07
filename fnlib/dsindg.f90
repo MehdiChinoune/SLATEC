@@ -1,6 +1,6 @@
 !*==DSINDG.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DSINDG
-DOUBLE PRECISION FUNCTION DSINDG(X)
+REAL(8) FUNCTION DSINDG(X)
   IMPLICIT NONE
   !*--DSINDG5
   !*** Start of declarations inserted by SPAG
@@ -26,7 +26,7 @@ DOUBLE PRECISION FUNCTION DSINDG(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DSINDG
-  DOUBLE PRECISION X , raddeg
+  REAL(8) :: X , raddeg
   SAVE raddeg
   DATA raddeg/0.017453292519943295769236907684886D0/
   !***FIRST EXECUTABLE STATEMENT  DSINDG

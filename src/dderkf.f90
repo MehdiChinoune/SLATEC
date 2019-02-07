@@ -610,7 +610,7 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !
   INTEGER Idid , Info , Ipar , Iwork , kdi , kf1 , kf2 , kf3 , kf4 , kf5 ,&
     kh , krer , ktf , kto , ktstar , ku , kyp , kys , Liw , Lrw , Neq
-  DOUBLE PRECISION Atol , Rpar , Rtol , Rwork , T , Tout , Y
+  REAL(8) :: Atol , Rpar , Rtol , Rwork , T , Tout , Y
   LOGICAL stiff , nonstf
   !
   DIMENSION Y(*) , Info(15) , Rtol(*) , Atol(*) , Rwork(*) , Iwork(*) ,&

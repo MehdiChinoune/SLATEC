@@ -1,6 +1,6 @@
 !*==DPOCH1.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DPOCH1
-DOUBLE PRECISION FUNCTION DPOCH1(A,X)
+REAL(8) FUNCTION DPOCH1(A,X)
   IMPLICIT NONE
   !*--DPOCH15
   !*** Start of declarations inserted by SPAG
@@ -54,7 +54,7 @@ DOUBLE PRECISION FUNCTION DPOCH1(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DPOCH1
-  DOUBLE PRECISION A , X , absa , absx , alneps , alnvar , b , bern(20) , &
+  REAL(8) :: A , X , absa , absx , alneps , alnvar , b , bern(20) , &
     binv , bp , gbern(21) , gbk , pi , poly1 , q , rho , &
     sinpxx , sinpx2 , sqtbig , term , trig , var , var2 , &
     D1MACH , DPSI , DEXPRL , DCOT , DPOCH

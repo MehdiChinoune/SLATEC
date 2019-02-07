@@ -18,9 +18,9 @@ SUBROUTINE DEDIT2(Y,T,Erm)
   !   901009  Changed AMAX1 to MAX.  (FNF)
   !   901030  Removed FLOAT's; made all local declarations explicit. (FNF)
   !***END PROLOGUE  DEDIT2
-  DOUBLE PRECISION Y(*) , T , Erm
+  REAL(8) :: Y(*) , T , Erm
   INTEGER i , j , k , ng
-  DOUBLE PRECISION alph1 , alph2 , a1 , a2 , er , ex , yt
+  REAL(8) :: alph1 , alph2 , a1 , a2 , er , ex , yt
   DATA alph1/1.0D0/ , alph2/1.0D0/ , ng/5/
   !***FIRST EXECUTABLE STATEMENT  DEDIT2
   Erm = 0.0D0

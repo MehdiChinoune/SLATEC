@@ -35,7 +35,7 @@ SUBROUTINE DSOSSL(K,N,L,X,C,B,M)
   !
   !
   INTEGER j , jkm , K , kj , km , km1 , kmm1 , kn , L , lk , M , N , np1
-  DOUBLE PRECISION B(*) , C(*) , X(*) , xmax
+  REAL(8) :: B(*) , C(*) , X(*) , xmax
   !
   !***FIRST EXECUTABLE STATEMENT  DSOSSL
   np1 = N + 1

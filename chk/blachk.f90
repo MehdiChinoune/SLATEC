@@ -28,7 +28,7 @@ SUBROUTINE BLACHK(Lun,Kprint,Ipass)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  BLACHK
   INTEGER Ipass , jtest(38)
-  DOUBLE PRECISION dfac , dqfac
+  REAL(8) :: dfac , dqfac
   LOGICAL PASs
   COMMON /COMBLA/ NPRint , ICAse , N , INCx , INCy , MODe , PASs
   DATA sfac , sdfac , dfac , dqfac/.625E-1 , .50 , .625D-1 , 0.625D-1/

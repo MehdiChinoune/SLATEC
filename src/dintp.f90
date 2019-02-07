@@ -57,7 +57,7 @@ SUBROUTINE DINTP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,Og,&
   !
   INTEGER i , iq , Iv , Ivc , iw , j , jq , Kgi , Kold , kp1 , kp2 , l , m , &
     Neqn
-  DOUBLE PRECISION alp , Alpha , c , g , gdi , gdif , Gi , gamma , h , hi , &
+  REAL(8) :: alp , Alpha , c , g , gdi , gdif , Gi , gamma , h , hi , &
     hmu , Og , Ow , Ox , Oy , Phi , rmu , sigma , temp1 , &
     temp2 , temp3 , w , X , xi , xim1 , xiq , Xout , Y , &
     Yout , Ypout

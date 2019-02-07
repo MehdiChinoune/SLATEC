@@ -40,7 +40,7 @@ SUBROUTINE DJAIRY(X,Rx,C,Ai,Dai)
   !
   INTEGER i , j , m1 , m1d , m2 , m2d , m3 , m3d , m4 , m4d , n1 , n1d , &
     n2 , n2d , n3 , n3d , n4 , n4d
-  DOUBLE PRECISION a , Ai , ajn , ajp , ak1 , ak2 , ak3 , b , C , ccv , &
+  REAL(8) :: a , Ai , ajn , ajp , ak1 , ak2 , ak3 , b , C , ccv , &
     con2 , con3 , con4 , con5 , cv , da , Dai , dajn , dajp , &
     dak1 , dak2 , dak3 , db , ec , e1 , e2 , fpi12 , f1 , &
     f2 , rtrx , Rx , scv , t , temp1 , temp2 , tt , X

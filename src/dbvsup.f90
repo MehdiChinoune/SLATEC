@@ -418,7 +418,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     NEEdiw , NEEdw , NEQ , NEQivd , Neqivp , Nfc , NFCc , NFCd , Nic ,&
     NICd , nitemp , non , NOPg , NPS , Nrowa , Nrowb , Nrowy ,&
     nrtemp , NSWot , NTApe , NTP , NUMort , Nxpts , NXPtsd , nxptsm
-  DOUBLE PRECISION A(Nrowa,*) , Ae , AED , Alpha(*) , B(Nrowb,*) , Beta(*) ,&
+  REAL(8) :: A(Nrowa,*) , Ae , AED , Alpha(*) , B(Nrowb,*) , Beta(*) ,&
     C , EPS , FOUru , PWCnd , PX , Re , RED , SQOvfl , SRU ,&
     TND , TOL , TWOu , URO , Work(Ndw) , X , XBEg , XENd ,&
     XOP , XOT , Xpts(*) , XSAv , Y(Nrowy,*)

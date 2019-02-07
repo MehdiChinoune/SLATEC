@@ -1111,7 +1111,7 @@ COMPLEX FUNCTION CSQRT(Z)
 END FUNCTION CSQRT
 !*==DACOS.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DACOS
-DOUBLE PRECISION FUNCTION DACOS(X)
+REAL(8) FUNCTION DACOS(X)
   IMPLICIT NONE
   !*--DACOS1116
   !***BEGIN PROLOGUE  DACOS
@@ -1154,11 +1154,11 @@ DOUBLE PRECISION FUNCTION DACOS(X)
   !           standards.  (SMR)
   !***END PROLOGUE  DACOS
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION X
+  REAL(8) :: X
   !     .. Local Scalars ..
-  DOUBLE PRECISION pi2
+  REAL(8) :: pi2
   !     .. External Functions ..
-  DOUBLE PRECISION DASIN
+  REAL(8) :: DASIN
   EXTERNAL DASIN
   !     .. External Subroutines ..
   EXTERNAL XERMSG
@@ -1175,7 +1175,7 @@ DOUBLE PRECISION FUNCTION DACOS(X)
 END FUNCTION DACOS
 !*==DASIN.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DASIN
-DOUBLE PRECISION FUNCTION DASIN(X)
+REAL(8) FUNCTION DASIN(X)
   IMPLICIT NONE
   !*--DASIN1180
   !***BEGIN PROLOGUE  DASIN
@@ -1225,15 +1225,15 @@ DOUBLE PRECISION FUNCTION DASIN(X)
   !           standards.  (SMR)
   !***END PROLOGUE  DASIN
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION X
+  REAL(8) :: X
   !     .. Local Scalars ..
-  DOUBLE PRECISION pi2 , sqeps , y , z
+  REAL(8) :: pi2 , sqeps , y , z
   INTEGER nterms
   LOGICAL first
   !     .. Local Arrays ..
-  DOUBLE PRECISION asincs(39)
+  REAL(8) :: asincs(39)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DCSEVL , DSQRT
+  REAL(8) :: D1MACH , DCSEVL , DSQRT
   INTEGER INITDS
   EXTERNAL D1MACH , DCSEVL , DSQRT , INITDS
   !     .. External Subroutines ..
@@ -1305,7 +1305,7 @@ DOUBLE PRECISION FUNCTION DASIN(X)
 END FUNCTION DASIN
 !*==DATAN.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DATAN
-DOUBLE PRECISION FUNCTION DATAN(X)
+REAL(8) FUNCTION DATAN(X)
   IMPLICIT NONE
   !*--DATAN1310
   !***BEGIN PROLOGUE  DATAN
@@ -1358,15 +1358,15 @@ DOUBLE PRECISION FUNCTION DATAN(X)
   !           standards.
   !***END PROLOGUE  DATAN
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION X
+  REAL(8) :: X
   !     .. Local Scalars ..
-  DOUBLE PRECISION sqeps , t , xbig , xbnd1 , xbnd2 , xbnd3 , xbnd4 , y
+  REAL(8) :: sqeps , t , xbig , xbnd1 , xbnd2 , xbnd3 , xbnd4 , y
   INTEGER n , nterms
   LOGICAL first
   !     .. Local Arrays ..
-  DOUBLE PRECISION atancs(16) , conpi8(4) , pi8(4) , tanp8(3)
+  REAL(8) :: atancs(16) , conpi8(4) , pi8(4) , tanp8(3)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DCSEVL , DSQRT
+  REAL(8) :: D1MACH , DCSEVL , DSQRT
   INTEGER INITDS
   EXTERNAL D1MACH , DCSEVL , DSQRT , INITDS
   !     .. Intrinsic Functions ..
@@ -1441,7 +1441,7 @@ DOUBLE PRECISION FUNCTION DATAN(X)
 END FUNCTION DATAN
 !*==DATAN2.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DATAN2
-DOUBLE PRECISION FUNCTION DATAN2(Sn,Cs)
+REAL(8) FUNCTION DATAN2(Sn,Cs)
   IMPLICIT NONE
   !*--DATAN21446
   !***BEGIN PROLOGUE  DATAN2
@@ -1488,11 +1488,11 @@ DOUBLE PRECISION FUNCTION DATAN2(Sn,Cs)
   !           standards.  (SMR)
   !***END PROLOGUE  DATAN2
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Cs , Sn
+  REAL(8) :: Cs , Sn
   !     .. Local Scalars ..
-  DOUBLE PRECISION pi
+  REAL(8) :: pi
   !     .. External Functions ..
-  DOUBLE PRECISION DATAN
+  REAL(8) :: DATAN
   EXTERNAL DATAN
   !     .. External Subroutines ..
   EXTERNAL XERMSG
@@ -1515,7 +1515,7 @@ DOUBLE PRECISION FUNCTION DATAN2(Sn,Cs)
 END FUNCTION DATAN2
 !*==DCOS.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DCOS
-DOUBLE PRECISION FUNCTION DCOS(X)
+REAL(8) FUNCTION DCOS(X)
   IMPLICIT NONE
   !*--DCOS1520
   !***BEGIN PROLOGUE  DCOS
@@ -1573,17 +1573,17 @@ DOUBLE PRECISION FUNCTION DCOS(X)
   !           standards.  (SMR)
   !***END PROLOGUE  DCOS
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION X
+  REAL(8) :: X
   !     .. Local Scalars ..
-  DOUBLE PRECISION ainty , ainty2 , pi4rec , xmax , xsml , xwarn , y , &
+  REAL(8) :: ainty , ainty2 , pi4rec , xmax , xsml , xwarn , y , &
     yrem , z
   REAL eta
   INTEGER ifn , noctnt , ntcs , ntsn
   LOGICAL first
   !     .. Local Arrays ..
-  DOUBLE PRECISION coscs(13) , sincs(12)
+  REAL(8) :: coscs(13) , sincs(12)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DCSEVL , DINT , DSQRT
+  REAL(8) :: D1MACH , DCSEVL , DINT , DSQRT
   INTEGER INITDS
   EXTERNAL D1MACH , DCSEVL , DINT , DSQRT , INITDS
   !     .. External Subroutines ..
@@ -1670,7 +1670,7 @@ DOUBLE PRECISION FUNCTION DCOS(X)
 END FUNCTION DCOS
 !*==DCOSH.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DCOSH
-DOUBLE PRECISION FUNCTION DCOSH(X)
+REAL(8) FUNCTION DCOSH(X)
   IMPLICIT NONE
   !*--DCOSH1675
   !***BEGIN PROLOGUE  DCOSH
@@ -1713,11 +1713,11 @@ DOUBLE PRECISION FUNCTION DCOSH(X)
   !           standards.  (SMR)
   !***END PROLOGUE  DCOSH
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION X
+  REAL(8) :: X
   !     .. Local Scalars ..
-  DOUBLE PRECISION y , ymax
+  REAL(8) :: y , ymax
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DEXP , DSQRT
+  REAL(8) :: D1MACH , DEXP , DSQRT
   EXTERNAL D1MACH , DEXP , DSQRT
   !     .. Intrinsic Functions ..
   INTRINSIC DABS
@@ -1735,7 +1735,7 @@ DOUBLE PRECISION FUNCTION DCOSH(X)
 END FUNCTION DCOSH
 !*==DEXP.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DEXP
-DOUBLE PRECISION FUNCTION DEXP(X)
+REAL(8) FUNCTION DEXP(X)
   IMPLICIT NONE
   !*--DEXP1740
   !***BEGIN PROLOGUE  DEXP
@@ -1788,15 +1788,15 @@ DOUBLE PRECISION FUNCTION DEXP(X)
   !           standards.  (SMR)
   !***END PROLOGUE  DEXP
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION X
+  REAL(8) :: X
   !     .. Local Scalars ..
-  DOUBLE PRECISION aln216 , f , xint , xmax , xmin , y
+  REAL(8) :: aln216 , f , xint , xmax , xmin , y
   INTEGER n , n16 , ndx , nterms
   LOGICAL first
   !     .. Local Arrays ..
-  DOUBLE PRECISION expcs(14) , twon16(17)
+  REAL(8) :: expcs(14) , twon16(17)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , D9PAK , DCSEVL , DINT , DLOG
+  REAL(8) :: D1MACH , D9PAK , DCSEVL , DINT , DLOG
   INTEGER INITDS
   EXTERNAL D1MACH , D9PAK , DCSEVL , DINT , DLOG , INITDS
   !     .. External Subroutines ..
@@ -1874,7 +1874,7 @@ DOUBLE PRECISION FUNCTION DEXP(X)
 END FUNCTION DEXP
 !*==DINT.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DINT
-DOUBLE PRECISION FUNCTION DINT(X)
+REAL(8) FUNCTION DINT(X)
   IMPLICIT NONE
   !*--DINT1879
   !***BEGIN PROLOGUE  DINT
@@ -1918,13 +1918,13 @@ DOUBLE PRECISION FUNCTION DINT(X)
   !           standards.  (SMR)
   !***END PROLOGUE  DINT
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION X
+  REAL(8) :: X
   !     .. Local Scalars ..
-  DOUBLE PRECISION part , scale , xbig , xmax , xscl
+  REAL(8) :: part , scale , xbig , xmax , xscl
   INTEGER i , ibase , ipart , ndigd , ndigi , npart
   LOGICAL first
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   REAL R1MACH
   INTEGER I1MACH
   EXTERNAL D1MACH , R1MACH , I1MACH
@@ -1979,7 +1979,7 @@ DOUBLE PRECISION FUNCTION DINT(X)
 END FUNCTION DINT
 !*==DLOG.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DLOG
-DOUBLE PRECISION FUNCTION DLOG(X)
+REAL(8) FUNCTION DLOG(X)
   IMPLICIT NONE
   !*--DLOG1984
   !***BEGIN PROLOGUE  DLOG
@@ -2030,14 +2030,14 @@ DOUBLE PRECISION FUNCTION DLOG(X)
   !           standards.  (SMR)
   !***END PROLOGUE  DLOG
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION X
+  REAL(8) :: X
   !     .. Local Scalars ..
-  DOUBLE PRECISION aln2 , t , t2 , xn , y
+  REAL(8) :: aln2 , t , t2 , xn , y
   INTEGER n , nterms , ntrval
   !     .. Local Arrays ..
-  DOUBLE PRECISION alncen(5) , alncs(11) , center(4)
+  REAL(8) :: alncen(5) , alncs(11) , center(4)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DCSEVL
+  REAL(8) :: D1MACH , DCSEVL
   INTEGER INITDS
   EXTERNAL D1MACH , DCSEVL , INITDS
   !     .. External Subroutines ..
@@ -2090,7 +2090,7 @@ DOUBLE PRECISION FUNCTION DLOG(X)
 END FUNCTION DLOG
 !*==DLOG10.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DLOG10
-DOUBLE PRECISION FUNCTION DLOG10(X)
+REAL(8) FUNCTION DLOG10(X)
   IMPLICIT NONE
   !*--DLOG102095
   !***BEGIN PROLOGUE  DLOG10
@@ -2133,11 +2133,11 @@ DOUBLE PRECISION FUNCTION DLOG10(X)
   !           standards.  (SMR)
   !***END PROLOGUE  DLOG10
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION X
+  REAL(8) :: X
   !     .. Local Scalars ..
-  DOUBLE PRECISION dloge
+  REAL(8) :: dloge
   !     .. External Functions ..
-  DOUBLE PRECISION DLOG
+  REAL(8) :: DLOG
   EXTERNAL DLOG
   !     .. Data statements ..
   DATA dloge/0.43429448190325182765112891891661D0/
@@ -2147,7 +2147,7 @@ DOUBLE PRECISION FUNCTION DLOG10(X)
 END FUNCTION DLOG10
 !*==DSIN.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DSIN
-DOUBLE PRECISION FUNCTION DSIN(X)
+REAL(8) FUNCTION DSIN(X)
   IMPLICIT NONE
   !*--DSIN2152
   !***BEGIN PROLOGUE  DSIN
@@ -2206,17 +2206,17 @@ DOUBLE PRECISION FUNCTION DSIN(X)
   !   901219  Logic in code corrected.  (WRB)
   !***END PROLOGUE  DSIN
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION X
+  REAL(8) :: X
   !     .. Local Scalars ..
-  DOUBLE PRECISION ainty , ainty2 , pi4rec , xmax , xsml , xwarn , y , &
+  REAL(8) :: ainty , ainty2 , pi4rec , xmax , xsml , xwarn , y , &
     yrem , z
   REAL eta
   INTEGER ifn , noctnt , ntcs , ntsn
   LOGICAL first
   !     .. Local Arrays ..
-  DOUBLE PRECISION coscs(13) , sincs(12)
+  REAL(8) :: coscs(13) , sincs(12)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DCSEVL , DINT , DSQRT
+  REAL(8) :: D1MACH , DCSEVL , DINT , DSQRT
   INTEGER INITDS
   EXTERNAL D1MACH , DCSEVL , DINT , DSQRT , INITDS
   !     .. External Subroutines ..
@@ -2304,7 +2304,7 @@ DOUBLE PRECISION FUNCTION DSIN(X)
 END FUNCTION DSIN
 !*==DSINH.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DSINH
-DOUBLE PRECISION FUNCTION DSINH(X)
+REAL(8) FUNCTION DSINH(X)
   IMPLICIT NONE
   !*--DSINH2309
   !***BEGIN PROLOGUE  DSINH
@@ -2353,15 +2353,15 @@ DOUBLE PRECISION FUNCTION DSINH(X)
   !           YMAX.  (WRB)
   !***END PROLOGUE  DSINH
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION X
+  REAL(8) :: X
   !     .. Local Scalars ..
-  DOUBLE PRECISION sqeps , y , ymax
+  REAL(8) :: sqeps , y , ymax
   INTEGER nterms
   LOGICAL first
   !     .. Local Arrays ..
-  DOUBLE PRECISION sinhcs(13)
+  REAL(8) :: sinhcs(13)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DCSEVL , DEXP , DSQRT
+  REAL(8) :: D1MACH , DCSEVL , DEXP , DSQRT
   INTEGER INITDS
   EXTERNAL D1MACH , DCSEVL , DEXP , DSQRT , INITDS
   !     .. Intrinsic Functions ..
@@ -2407,7 +2407,7 @@ DOUBLE PRECISION FUNCTION DSINH(X)
 END FUNCTION DSINH
 !*==DSQRT.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DSQRT
-DOUBLE PRECISION FUNCTION DSQRT(X)
+REAL(8) FUNCTION DSQRT(X)
   IMPLICIT NONE
   !*--DSQRT2412
   !***BEGIN PROLOGUE  DSQRT
@@ -2448,15 +2448,15 @@ DOUBLE PRECISION FUNCTION DSQRT(X)
   !           standards.  (SMR)
   !***END PROLOGUE  DSQRT
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION X
+  REAL(8) :: X
   !     .. Local Scalars ..
-  DOUBLE PRECISION y
+  REAL(8) :: y
   REAL z
   INTEGER irem , iter , ixpnt , n , niter
   !     .. Local Arrays ..
-  DOUBLE PRECISION sqrt2(3)
+  REAL(8) :: sqrt2(3)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , D9PAK
+  REAL(8) :: D1MACH , D9PAK
   REAL ALOG
   EXTERNAL D1MACH , D9PAK , ALOG
   !     .. External Subroutines ..
@@ -2497,7 +2497,7 @@ DOUBLE PRECISION FUNCTION DSQRT(X)
 END FUNCTION DSQRT
 !*==DTAN.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DTAN
-DOUBLE PRECISION FUNCTION DTAN(X)
+REAL(8) FUNCTION DTAN(X)
   IMPLICIT NONE
   !*--DTAN2502
   !***BEGIN PROLOGUE  DTAN
@@ -2548,16 +2548,16 @@ DOUBLE PRECISION FUNCTION DTAN(X)
   !           standards.  (SMR)
   !***END PROLOGUE  DTAN
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION X
+  REAL(8) :: X
   !     .. Local Scalars ..
-  DOUBLE PRECISION ainty , ainty2 , pi2rec , prodbg , sqeps , xmax , xsml , &
+  REAL(8) :: ainty , ainty2 , pi2rec , prodbg , sqeps , xmax , xsml , &
     y , yrem
   INTEGER ifn , nterms
   LOGICAL first
   !     .. Local Arrays ..
-  DOUBLE PRECISION tancs(19)
+  REAL(8) :: tancs(19)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DCSEVL , DINT , DSQRT
+  REAL(8) :: D1MACH , DCSEVL , DINT , DSQRT
   INTEGER INITDS
   EXTERNAL D1MACH , DCSEVL , DINT , DSQRT , INITDS
   !     .. External Subroutines ..
@@ -2641,7 +2641,7 @@ DOUBLE PRECISION FUNCTION DTAN(X)
 END FUNCTION DTAN
 !*==DTANH.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DTANH
-DOUBLE PRECISION FUNCTION DTANH(X)
+REAL(8) FUNCTION DTANH(X)
   IMPLICIT NONE
   !*--DTANH2646
   !***BEGIN PROLOGUE  DTANH
@@ -2689,15 +2689,15 @@ DOUBLE PRECISION FUNCTION DTANH(X)
   !           standards.  (SMR)
   !***END PROLOGUE  DTANH
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION X
+  REAL(8) :: X
   !     .. Local Scalars ..
-  DOUBLE PRECISION sqeps , xmax , y
+  REAL(8) :: sqeps , xmax , y
   INTEGER nterms
   LOGICAL first
   !     .. Local Arrays ..
-  DOUBLE PRECISION tanhcs(31)
+  REAL(8) :: tanhcs(31)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DCSEVL , DEXP , DLOG , DSQRT
+  REAL(8) :: D1MACH , DCSEVL , DEXP , DLOG , DSQRT
   INTEGER INITDS
   EXTERNAL D1MACH , DCSEVL , DEXP , DLOG , DSQRT , INITDS
   !     .. Intrinsic Functions ..

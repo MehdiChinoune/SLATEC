@@ -1,6 +1,6 @@
 !*==DENORM.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DENORM
-DOUBLE PRECISION FUNCTION DENORM(N,X)
+REAL(8) FUNCTION DENORM(N,X)
   IMPLICIT NONE
   !*--DENORM5
   !***BEGIN PROLOGUE  DENORM
@@ -48,7 +48,7 @@ DOUBLE PRECISION FUNCTION DENORM(N,X)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DENORM
   INTEGER i , N
-  DOUBLE PRECISION agiant , floatn , one , rdwarf , rgiant , s1 , s2 , s3 , &
+  REAL(8) :: agiant , floatn , one , rdwarf , rgiant , s1 , s2 , s3 , &
     X(*) , x1max , x3max , xabs , zero
   SAVE one , zero , rdwarf , rgiant
   DATA one , zero , rdwarf , rgiant/1.0D0 , 0.0D0 , 3.834D-20 , 1.304D19/

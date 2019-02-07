@@ -36,7 +36,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
   !***END PROLOGUE  ZUNIK
   !     COMPLEX CFN,CON,CONE,CRFN,CWRK,CZERO,PHI,S,SR,SUM,T,T2,ZETA1,
   !    *ZETA2,ZN,ZR
-  DOUBLE PRECISION ac , c , con , conei , coner , crfni , crfnr , Cwrki , &
+  REAL(8) :: ac , c , con , conei , coner , crfni , crfnr , Cwrki , &
     Cwrkr , Fnu , Phii , Phir , rfn , si , sr , sri , srr , &
     sti , str , Sumi , Sumr , test , ti , Tol , tr , t2i , &
     t2r , zeroi , zeror , Zeta1i , Zeta1r , Zeta2i , Zeta2r , &

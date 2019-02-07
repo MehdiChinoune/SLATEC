@@ -68,7 +68,7 @@ SUBROUTINE DQMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQMOMO
   !
-  DOUBLE PRECISION Alfa , alfp1 , alfp2 , an , anm1 , Beta , betp1 , betp2 , &
+  REAL(8) :: Alfa , alfp1 , alfp2 , an , anm1 , Beta , betp1 , betp2 , &
     ralf , rbet , Rg , Rh , Ri , Rj
   INTEGER i , im1 , Integr
   !

@@ -31,7 +31,7 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   !***END PROLOGUE  DSTOR1
   INTEGER IGOfx , INHomo , IVP , j , NCOmp , nctnf , Ndisk , NFC , Ntape , &
     Ntemp
-  DOUBLE PRECISION C , U(*) , V(*) , XSAv , Yh(*) , Yp(*)
+  REAL(8) :: C , U(*) , V(*) , XSAv , Yh(*) , Yp(*)
   !
   !     ******************************************************************
   !

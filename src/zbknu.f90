@@ -22,7 +22,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   930122  Added ZEXP, ZLOG and ZSQRT to EXTERNAL statement.  (RWC)
   !***END PROLOGUE  ZBKNU
   !
-  DOUBLE PRECISION aa , ak , Alim , ascle , a1 , a2 , bb , bk , bry , caz , &
+  REAL(8) :: aa , ak , Alim , ascle , a1 , a2 , bb , bk , bry , caz , &
     cbi , cbr , cc , cchi , cchr , cki , ckr , coefi , &
     coefr , conei , coner , crscr , csclr , cshi , cshr , &
     csi , csr , csrr , cssr , ctwor , czeroi , czeror , czi , &

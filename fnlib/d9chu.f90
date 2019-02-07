@@ -1,6 +1,6 @@
 !*==D9CHU.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9CHU
-DOUBLE PRECISION FUNCTION D9CHU(A,B,Z)
+REAL(8) FUNCTION D9CHU(A,B,Z)
   IMPLICIT NONE
   !*--D9CHU5
   !*** Start of declarations inserted by SPAG
@@ -35,7 +35,7 @@ DOUBLE PRECISION FUNCTION D9CHU(A,B,Z)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9CHU
-  DOUBLE PRECISION A , B , Z , aa(4) , bb(4) , ab , anbn , bp , ct1 , ct2 , &
+  REAL(8) :: A , B , Z , aa(4) , bb(4) , ab , anbn , bp , ct1 , ct2 , &
     ct3 , c2 , d1z , eps , g1 , g2 , g3 , sab , sqeps , &
     x2i1 , D1MACH
   LOGICAL first

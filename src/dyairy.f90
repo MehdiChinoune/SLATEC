@@ -37,7 +37,7 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
   !
   INTEGER i , j , m1 , m1d , m2 , m2d , m3 , m3d , m4d , n1 , n1d , n2 , &
     n2d , n3 , n3d , n4d
-  DOUBLE PRECISION aa , ax , bb , Bi , bjn , bjp , bk1 , bk2 , bk3 , bk4 , &
+  REAL(8) :: aa , ax , bb , Bi , bjn , bjp , bk1 , bk2 , bk3 , bk4 , &
     C , con1 , con2 , con3 , cv , daa , dbb , Dbi , dbjn , &
     dbjp , dbk1 , dbk2 , dbk3 , dbk4 , d1 , d2 , ex , e1 , &
     e2 , fpi12 , f1 , f2 , rtrx , Rx , spi12 , s1 , s2 , t , &

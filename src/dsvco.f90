@@ -30,7 +30,7 @@ SUBROUTINE DSVCO(Rsav,Isav)
   ! ISAV = INTEGER ARRAY OF LENGTH 33 OR MORE.
   !-----------------------------------------------------------------------
   INTEGER i , ILS , Isav , lenils , lenrls
-  DOUBLE PRECISION RLS , Rsav
+  REAL(8) :: RLS , Rsav
   DIMENSION Rsav(*) , Isav(*)
   SAVE lenrls , lenils
   COMMON /DDEBD1/ RLS(218) , ILS(33)

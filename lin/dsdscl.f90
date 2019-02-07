@@ -142,12 +142,12 @@ SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   !     .. Scalar Arguments ..
   INTEGER Isym , Itol , Job , N , Nelt
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nelt) , B(N) , Dinv(N) , X(N)
+  REAL(8) :: A(Nelt) , B(N) , Dinv(N) , X(N)
   INTEGER Ia(Nelt) , Ja(Nelt)
   !     .. Arrays in Common ..
-  DOUBLE PRECISION SOLn(1)
+  REAL(8) :: SOLn(1)
   !     .. Local Scalars ..
-  DOUBLE PRECISION di
+  REAL(8) :: di
   INTEGER icol , j , jbgn , jend
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT

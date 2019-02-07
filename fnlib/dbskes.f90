@@ -36,7 +36,7 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBSKES
-  DOUBLE PRECISION Xnu , X , Bke(*) , bknu1 , v , vincr , vend , alnbig , &
+  REAL(8) :: Xnu , X , Bke(*) , bknu1 , v , vincr , vend , alnbig , &
     D1MACH , direct
   SAVE alnbig
   DATA alnbig/0.D0/

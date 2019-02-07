@@ -24,11 +24,11 @@ SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   !   900604  DP version created from SP version.  (RWC)
   !***END PROLOGUE  DWNLT3
   INTEGER I , Imax , Ipivot(*) , M , Mdw
-  DOUBLE PRECISION H(*) , W(Mdw,*)
+  REAL(8) :: H(*) , W(Mdw,*)
   !
   EXTERNAL DSWAP
   !
-  DOUBLE PRECISION t
+  REAL(8) :: t
   INTEGER itemp
   !
   !***FIRST EXECUTABLE STATEMENT  DWNLT3

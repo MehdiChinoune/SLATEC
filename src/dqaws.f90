@@ -179,7 +179,7 @@ SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DQAWS
   !
-  DOUBLE PRECISION A , Abserr , Alfa , B , Beta , Epsabs , Epsrel , F , &
+  REAL(8) :: A , Abserr , Alfa , B , Beta , Epsabs , Epsrel , F , &
     Result , Work
   INTEGER Ier , Integr , Iwork , Last , Lenw , Limit , lvl , l1 , l2 , l3 , &
     Neval

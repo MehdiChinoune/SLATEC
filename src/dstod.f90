@@ -97,7 +97,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     Iwm , j , jb , JSTart , KFLag , KSTeps , L , LMAx , m , MAXord , &
     MEO , METh , MITer , N , ncf , Neq , newq , NFE , NJE , NQ , &
     NQNyh , NQU , NST , NSTepj , Nyh
-  DOUBLE PRECISION Acor , CONit , CRAte , dcon , ddn , del , delp , dsm , &
+  REAL(8) :: Acor , CONit , CRAte , dcon , ddn , del , delp , dsm , &
     dup , DVNRMS , EL , EL0 , ELCo , Ewt , exdn , exsm , &
     exup , H , HMIn , HMXi , HOLd , HU , r , RC , rh , rhdn , &
     rhsm , rhup , RMAx , ROWnd , Rpar , Savf , TESco , TN , &

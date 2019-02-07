@@ -27,7 +27,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
   !***END PROLOGUE  ZACON
   !     COMPLEX CK,CONE,CSCL,CSCR,CSGN,CSPN,CY,CZERO,C1,C2,RZ,SC1,SC2,ST,
   !    *S1,S2,Y,Z,ZN
-  DOUBLE PRECISION Alim , arg , ascle , as2 , azn , bry , bscle , cki , &
+  REAL(8) :: Alim , arg , ascle , as2 , azn , bry , bscle , cki , &
     ckr , coner , cpn , cscl , cscr , csgni , csgnr , cspni , &
     cspnr , csr , csrr , cssr , cyi , cyr , c1i , c1m , c1r , &
     c2i , c2r , Elim , fmr , fn , Fnu , Fnul , pi , pti , &

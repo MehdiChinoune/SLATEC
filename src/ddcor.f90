@@ -32,7 +32,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !***END PROLOGUE  DDCOR
   INTEGER i , Ierror , iflag , Impl , j , Jstate , Matdim , Miter , Ml , &
     Mu , mw , N , Nde , Nq
-  DOUBLE PRECISION A(Matdim,*) , D , Dfdy(Matdim,*) , El(13,12) , H , &
+  REAL(8) :: A(Matdim,*) , D , Dfdy(Matdim,*) , El(13,12) , H , &
     Save1(*) , Save2(*) , DNRM2 , T , Y(*) , Yh(N,*) , Ywt(*)
   INTEGER Ipvt(*)
   LOGICAL Evalfa
@@ -47,7 +47,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         Save1(i) = (H*Save2(i)-Yh(i,2)-Save1(i))/MAX(ABS(Y(i)),Ywt(i))
       ENDDO
     ENDIF
-    D = DNRM2(N,Save1,1)/SQRT(DBLE(N))
+    D = DNRM2(N,Save1,1)/SQRT(REAL(N, 8))
     DO i = 1 , N
       Save1(i) = H*Save2(i) - Yh(i,2)
     ENDDO
@@ -118,7 +118,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),Ywt(i))
       ENDDO
     ENDIF
-    D = DNRM2(N,Save2,1)/SQRT(DBLE(N))
+    D = DNRM2(N,Save2,1)/SQRT(REAL(N, 8))
   ELSEIF ( Miter==4.OR.Miter==5 ) THEN
     IF ( Impl==0 ) THEN
       DO i = 1 , N
@@ -188,7 +188,7 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),Ywt(i))
       ENDDO
     ENDIF
-    D = DNRM2(N,Save2,1)/SQRT(DBLE(N))
+    D = DNRM2(N,Save2,1)/SQRT(REAL(N, 8))
   ELSEIF ( Miter==3 ) THEN
     iflag = 2
     CALL USERS(Y,Yh(1,2),Ywt,Save1,Save2,T,H,El(1,Nq),Impl,N,Nde,iflag)
@@ -207,6 +207,6 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
         Save2(i) = Save2(i)/MAX(ABS(Y(i)),Ywt(i))
       ENDDO
     ENDIF
-    D = DNRM2(N,Save2,1)/SQRT(DBLE(N))
+    D = DNRM2(N,Save2,1)/SQRT(REAL(N, 8))
   ENDIF
 END SUBROUTINE DDCOR

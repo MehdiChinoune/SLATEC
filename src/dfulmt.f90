@@ -40,7 +40,7 @@ SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DFULMT
-  DOUBLE PRECISION Aij , zero , Dattrv(*) , Prgopt(*)
+  REAL(8) :: Aij , zero , Dattrv(*) , Prgopt(*)
   INTEGER Iflag(10)
   SAVE zero
   !***FIRST EXECUTABLE STATEMENT  DFULMT

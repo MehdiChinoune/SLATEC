@@ -216,7 +216,7 @@ SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQAWOE
   !
-  DOUBLE PRECISION A , abseps , Abserr , Alist , area , area1 , area12 , &
+  REAL(8) :: A , abseps , Abserr , Alist , area , area1 , area12 , &
     area2 , a1 , a2 , B , Blist , b1 , b2 , Chebmo , correc , &
     defab1 , defab2 , defabs , domega , D1MACH , dres , &
     Elist , epmach , Epsabs , Epsrel , erlarg , erlast , &

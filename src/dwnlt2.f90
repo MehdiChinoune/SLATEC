@@ -37,10 +37,10 @@ LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scale,Wic)
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
   !   900604  DP version created from SP version.  (RWC)
   !***END PROLOGUE  DWNLT2
-  DOUBLE PRECISION Factor , Scale(*) , Tau , Wic(*)
+  REAL(8) :: Factor , Scale(*) , Tau , Wic(*)
   INTEGER Ir , Me , Mend
   !
-  DOUBLE PRECISION rn , sn , t
+  REAL(8) :: rn , sn , t
   INTEGER j
   !
   !***FIRST EXECUTABLE STATEMENT  DWNLT2

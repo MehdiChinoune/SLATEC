@@ -108,7 +108,7 @@ SUBROUTINE DSUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   !***END PROLOGUE  DSUDS
   INTEGER Iflag , il , ip , is , Iwork(*) , ks , kt , ku , kv , Mlso , Neq , &
     Nrda , Nuk
-  DOUBLE PRECISION A(Nrda,*) , B(*) , Work(*) , X(*)
+  REAL(8) :: A(Nrda,*) , B(*) , Work(*) , X(*)
   !
   !***FIRST EXECUTABLE STATEMENT  DSUDS
   is = 2

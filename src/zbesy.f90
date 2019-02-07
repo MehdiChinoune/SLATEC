@@ -160,7 +160,7 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
   !***END PROLOGUE  ZBESY
   !
   !     COMPLEX CWRK,CY,C1,C2,EX,HCI,Z,ZU,ZV
-  DOUBLE PRECISION Cwrki , Cwrkr , Cyi , Cyr , c1i , c1r , c2i , c2r , &
+  REAL(8) :: Cwrki , Cwrkr , Cyi , Cyr , c1i , c1r , c2i , c2r , &
     elim , exi , exr , ey , Fnu , hcii , sti , str , tay , &
     Zi , Zr , D1MACH , ascle , rtol , atol , aa , bb , tol , &
     r1m5

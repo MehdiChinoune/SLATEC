@@ -63,7 +63,7 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DROTM
-  DOUBLE PRECISION dflag , dh12 , dh22 , Dx , two , z , dh11 , dh21 , &
+  REAL(8) :: dflag , dh12 , dh22 , Dx , two , z , dh11 , dh21 , &
     Dparam , Dy , w , zero
   DIMENSION Dx(*) , Dy(*) , Dparam(5)
   SAVE zero , two

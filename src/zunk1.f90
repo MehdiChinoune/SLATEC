@@ -25,7 +25,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !***END PROLOGUE  ZUNK1
   !     COMPLEX CFN,CK,CONE,CRSC,CS,CSCL,CSGN,CSPN,CSR,CSS,CWRK,CY,CZERO,
   !    *C1,C2,PHI,PHID,RZ,SUM,SUMD,S1,S2,Y,Z,ZETA1,ZETA1D,ZETA2,ZETA2D,ZR
-  DOUBLE PRECISION Alim , ang , aphi , asc , ascle , bry , cki , ckr , &
+  REAL(8) :: Alim , ang , aphi , asc , ascle , bry , cki , ckr , &
     coner , crsc , cscl , csgni , cspni , cspnr , csr , &
     csrr , cssr , cwrki , cwrkr , cyi , cyr , c1i , c1r , &
     c2i , c2m , c2r , Elim , fmr , fn , fnf , Fnu , phidi , &

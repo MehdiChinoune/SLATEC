@@ -28,9 +28,9 @@ SUBROUTINE DXQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXQNU
   DIMENSION Pqa(*) , Ipqa(*)
-  DOUBLE PRECISION dmu , nu , Nu1 , Nu2 , pq , Pqa , pq1 , pq2 , Sx , X , &
+  REAL(8) :: dmu , nu , Nu1 , Nu2 , pq , Pqa , pq1 , pq2 , Sx , X , &
     x1 , x2
-  DOUBLE PRECISION Theta , pql1 , pql2
+  REAL(8) :: Theta , pql1 , pql2
   !***FIRST EXECUTABLE STATEMENT  DXQNU
   Ierror = 0
   k = 0

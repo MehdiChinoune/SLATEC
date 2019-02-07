@@ -86,16 +86,16 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  DSPR
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Alpha
+  REAL(8) :: Alpha
   INTEGER Incx , N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  DOUBLE PRECISION Ap(*) , X(*)
+  REAL(8) :: Ap(*) , X(*)
   !     .. Parameters ..
-  DOUBLE PRECISION ZERO
+  REAL(8) :: ZERO
   PARAMETER (ZERO=0.0D+0)
   !     .. Local Scalars ..
-  DOUBLE PRECISION temp
+  REAL(8) :: temp
   INTEGER i , info , ix , j , jx , k , kk , kx
   !     .. External Functions ..
   LOGICAL LSAME

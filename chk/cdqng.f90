@@ -22,7 +22,7 @@ SUBROUTINE CDQNG(Lun,Kprint,Ipass)
   !
   ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
   !
-  DOUBLE PRECISION a , abserr , b , D1MACH , epmach , epsabs , epsrel , &
+  REAL(8) :: a , abserr , b , D1MACH , epmach , epsabs , epsrel , &
     exact1 , error , exact2 , DF1N , DF2N , result , uflow
   INTEGER ier , ierv , ip , Ipass , Kprint , neval
   DIMENSION ierv(1)

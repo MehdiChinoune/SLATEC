@@ -66,7 +66,7 @@ SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
   !
   INTEGER i , im1 , k , km1 , km1pi , km2n , km2npi , N , nm1 , nmkp1 , &
     npkm1
-  DOUBLE PRECISION C(*) , D(*) , pone , ptwo , X(*) , Xx , Work(*)
+  REAL(8) :: C(*) , D(*) , pone , ptwo , X(*) , Xx , Work(*)
   !***FIRST EXECUTABLE STATEMENT  DPOLCF
   DO k = 1 , N
     D(k) = C(k)

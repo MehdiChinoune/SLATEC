@@ -77,11 +77,11 @@ SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGECO
   INTEGER Lda , N , Ipvt(*)
-  DOUBLE PRECISION A(Lda,*) , Z(*)
-  DOUBLE PRECISION Rcond
+  REAL(8) :: A(Lda,*) , Z(*)
+  REAL(8) :: Rcond
   !
-  DOUBLE PRECISION DDOT , ek , t , wk , wkm
-  DOUBLE PRECISION anorm , s , DASUM , sm , ynorm
+  REAL(8) :: DDOT , ek , t , wk , wkm
+  REAL(8) :: anorm , s , DASUM , sm , ynorm
   INTEGER info , j , k , kb , kp1 , l
   !
   !     COMPUTE 1-NORM OF A

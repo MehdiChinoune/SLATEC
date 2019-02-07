@@ -99,16 +99,16 @@ SUBROUTINE DSPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   !           lines were modified.  (BKS)
   !***END PROLOGUE  DSPMV
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Alpha , Beta
+  REAL(8) :: Alpha , Beta
   INTEGER Incx , Incy , N
   CHARACTER :: Uplo
   !     .. Array Arguments ..
-  DOUBLE PRECISION Ap(*) , X(*) , Y(*)
+  REAL(8) :: Ap(*) , X(*) , Y(*)
   !     .. Parameters ..
-  DOUBLE PRECISION ONE , ZERO
+  REAL(8) :: ONE , ZERO
   PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
   !     .. Local Scalars ..
-  DOUBLE PRECISION temp1 , temp2
+  REAL(8) :: temp1 , temp2
   INTEGER i , info , ix , iy , j , jx , jy , k , kk , kx , ky
   !     .. External Functions ..
   LOGICAL LSAME

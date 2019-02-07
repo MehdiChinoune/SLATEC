@@ -19,7 +19,7 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  ZBINU
-  DOUBLE PRECISION Alim , az , cwi , cwr , Cyi , Cyr , dfnu , Elim , Fnu , &
+  REAL(8) :: Alim , az , cwi , cwr , Cyi , Cyr , dfnu , Elim , Fnu , &
     Fnul , Rl , Tol , zeroi , zeror , Zi , Zr , ZABS
   INTEGER i , inw , Kode , N , nlast , nn , nui , nw , Nz
   DIMENSION Cyr(N) , Cyi(N) , cwr(2) , cwi(2)

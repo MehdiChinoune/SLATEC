@@ -28,11 +28,11 @@ SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   IMPLICIT NONE
   !*--DU12US29
   !*** Start of declarations inserted by SPAG
-  DOUBLE PRECISION A , B , bb , H , Rnorm , tt , W
+  REAL(8) :: A , B , bb , H , Rnorm , tt , W
   INTEGER i , ij , ip1 , j , jb , k , kp1 , Krank , M , Mda , Mdb , mmk , &
     Mode , N , Nb
   !*** End of declarations inserted by SPAG
-  DOUBLE PRECISION DDOT , DNRM2
+  REAL(8) :: DDOT , DNRM2
   DIMENSION A(Mda,*) , B(Mdb,*) , Rnorm(*) , H(*) , W(*)
   INTEGER Ic(*) , Ir(*)
   !***FIRST EXECUTABLE STATEMENT  DU12US

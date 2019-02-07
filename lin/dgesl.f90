@@ -73,9 +73,9 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGESL
   INTEGER Lda , N , Ipvt(*) , Job
-  DOUBLE PRECISION A(Lda,*) , B(*)
+  REAL(8) :: A(Lda,*) , B(*)
   !
-  DOUBLE PRECISION DDOT , t
+  REAL(8) :: DDOT , t
   INTEGER k , kb , l , nm1
   !***FIRST EXECUTABLE STATEMENT  DGESL
   nm1 = N - 1

@@ -1,6 +1,6 @@
 !*==DCSEVL.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DCSEVL
-DOUBLE PRECISION FUNCTION DCSEVL(X,Cs,N)
+REAL(8) FUNCTION DCSEVL(X,Cs,N)
   IMPLICIT NONE
   !*--DCSEVL5
   !*** Start of declarations inserted by SPAG
@@ -41,7 +41,7 @@ DOUBLE PRECISION FUNCTION DCSEVL(X,Cs,N)
   !           X to be slightly outside interval (-1,+1).  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DCSEVL
-  DOUBLE PRECISION b0 , b1 , b2 , Cs(*) , onepl , twox , X , D1MACH
+  REAL(8) :: b0 , b1 , b2 , Cs(*) , onepl , twox , X , D1MACH
   LOGICAL first
   SAVE first , onepl
   DATA first/.TRUE./

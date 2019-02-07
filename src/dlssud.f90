@@ -114,11 +114,11 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DLSSUD
   INTEGER J4SAVE
-  DOUBLE PRECISION DDOT , D1MACH
+  REAL(8) :: DDOT , D1MACH
   INTEGER i , Iflag , Irank , irp , Iscale , Isflg , j , jr , k , kp , &
     Kpivot(*) , l , M , maxmes , mj , Mlso , N , nfat , nfatal , &
     nmir , Nrda , Nrdu , nu
-  DOUBLE PRECISION A(Nrda,*) , B(*) , Diag(*) , Div(*) , gam , gamma , &
+  REAL(8) :: A(Nrda,*) , B(*) , Diag(*) , Div(*) , gam , gamma , &
     Q(Nrda,*) , res , S(*) , Scales(*) , ss , Td(*) , &
     U(Nrdu,*) , uro , X(*)
   !

@@ -65,7 +65,7 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9AIMP
-  DOUBLE PRECISION X , Ampl , Theta , am20cs(57) , ath0cs(53) , am21cs(60) , &
+  REAL(8) :: X , Ampl , Theta , am20cs(57) , ath0cs(53) , am21cs(60) , &
     ath1cs(58) , am22cs(74) , ath2cs(72) , pi4 , sqrtx , &
     xsml , z , D1MACH , DCSEVL
   LOGICAL first

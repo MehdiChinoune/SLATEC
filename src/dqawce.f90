@@ -151,7 +151,7 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQAWCE
   !
-  DOUBLE PRECISION A , aa , Abserr , Alist , area , area1 , area12 , area2 , &
+  REAL(8) :: A , aa , Abserr , Alist , area , area1 , area12 , area2 , &
     a1 , a2 , B , bb , Blist , b1 , b2 , C , D1MACH , Elist , &
     epmach , Epsabs , Epsrel , errbnd , errmax , error1 , &
     erro12 , error2 , errsum , F , Result , Rlist , uflow

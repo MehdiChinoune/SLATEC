@@ -26,9 +26,9 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DCSCAL
-  DOUBLE PRECISION DDOT
+  REAL(8) :: DDOT
   INTEGER Ic , ip , Iscale , j , k , Ncol , Nrda , Nrow
-  DOUBLE PRECISION A(Nrda,*) , alog2 , Anorm , ascale , Cols(*) , Colsav(*)&
+  REAL(8) :: A(Nrda,*) , alog2 , Anorm , ascale , Cols(*) , Colsav(*)&
     , cs , p , Rows(*) , Rowsav(*) , s , Scales(*) , ten20 , &
     ten4
   !

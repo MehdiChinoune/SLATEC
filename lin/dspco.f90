@@ -96,11 +96,11 @@ SUBROUTINE DSPCO(Ap,N,Kpvt,Rcond,Z)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSPCO
   INTEGER N , Kpvt(*)
-  DOUBLE PRECISION Ap(*) , Z(*)
-  DOUBLE PRECISION Rcond
+  REAL(8) :: Ap(*) , Z(*)
+  REAL(8) :: Rcond
   !
-  DOUBLE PRECISION ak , akm1 , bk , bkm1 , DDOT , denom , ek , t
-  DOUBLE PRECISION anorm , s , DASUM , ynorm
+  REAL(8) :: ak , akm1 , bk , bkm1 , DDOT , denom , ek , t
+  REAL(8) :: anorm , s , DASUM , ynorm
   INTEGER i , ij , ik , ikm1 , ikp1 , info , j , jm1 , j1
   INTEGER k , kk , km1k , km1km1 , kp , kps , ks
   !

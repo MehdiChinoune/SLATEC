@@ -1,6 +1,6 @@
 !*==D9ATN1.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9ATN1
-DOUBLE PRECISION FUNCTION D9ATN1(X)
+REAL(8) FUNCTION D9ATN1(X)
   IMPLICIT NONE
   !*--D9ATN15
   !*** Start of declarations inserted by SPAG
@@ -39,7 +39,7 @@ DOUBLE PRECISION FUNCTION D9ATN1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9ATN1
-  DOUBLE PRECISION X , xbig , xmax , xsml , y , atn1cs(40) , eps , DCSEVL , &
+  REAL(8) :: X , xbig , xmax , xsml , y , atn1cs(40) , eps , DCSEVL , &
     D1MACH
   LOGICAL first
   SAVE atn1cs , ntatn1 , xsml , xbig , xmax , first

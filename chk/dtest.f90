@@ -31,7 +31,7 @@ SUBROUTINE DTEST(Len,Dcomp,Dtrue,Dsize,Dfac,Kprint)
   !   920211  Code restructured and information added to the DESCRIPTION
   !           section.  (WRB)
   !***END PROLOGUE  DTEST
-  DOUBLE PRECISION Dcomp(*) , Dtrue(*) , Dsize(*) , Dfac , dd , releps , &
+  REAL(8) :: Dcomp(*) , Dtrue(*) , Dsize(*) , Dfac , dd , releps , &
     D1MACH
   LOGICAL PASs
   COMMON /COMBLA/ NPRint , ICAse , N , INCx , INCy , MODe , PASs

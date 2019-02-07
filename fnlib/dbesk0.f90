@@ -1,6 +1,6 @@
 !*==DBESK0.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBESK0
-DOUBLE PRECISION FUNCTION DBESK0(X)
+REAL(8) FUNCTION DBESK0(X)
   IMPLICIT NONE
   !*--DBESK05
   !*** Start of declarations inserted by SPAG
@@ -38,7 +38,7 @@ DOUBLE PRECISION FUNCTION DBESK0(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBESK0
-  DOUBLE PRECISION X , bk0cs(16) , xmax , xmaxt , xsml , y , D1MACH , &
+  REAL(8) :: X , bk0cs(16) , xmax , xmaxt , xsml , y , D1MACH , &
     DCSEVL , DBESI0 , DBSK0E
   LOGICAL first
   SAVE bk0cs , ntk0 , xsml , xmax , first

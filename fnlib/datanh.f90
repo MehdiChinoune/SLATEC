@@ -1,6 +1,6 @@
 !*==DATANH.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DATANH
-DOUBLE PRECISION FUNCTION DATANH(X)
+REAL(8) FUNCTION DATANH(X)
   IMPLICIT NONE
   !*--DATANH5
   !*** Start of declarations inserted by SPAG
@@ -34,7 +34,7 @@ DOUBLE PRECISION FUNCTION DATANH(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DATANH
-  DOUBLE PRECISION X , atnhcs(27) , dxrel , sqeps , y , DCSEVL , D1MACH
+  REAL(8) :: X , atnhcs(27) , dxrel , sqeps , y , DCSEVL , D1MACH
   LOGICAL first
   SAVE atnhcs , nterms , dxrel , sqeps , first
   DATA atnhcs(1)/ + .9439510239319549230842892218633D-1/

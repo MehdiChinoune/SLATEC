@@ -232,7 +232,7 @@ SUBROUTINE DEFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,&
   !                         WRITTEN BY R. HANSON, SANDIA NATL. LABS.,
   !                         ALB., N. M., AUGUST-SEPTEMBER, 1980.
   !
-  DOUBLE PRECISION Bkpt(*) , Coeff(*) , W(*) , Sddata(*) , Xdata(*) , &
+  REAL(8) :: Bkpt(*) , Coeff(*) , W(*) , Sddata(*) , Xdata(*) , &
     Ydata(*)
   INTEGER Lw , Mdein , Mdeout , Nbkpt , Ndata , Nord
   !

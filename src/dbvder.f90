@@ -59,7 +59,7 @@ SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
   !   920618  Minor restructuring of code.  (RWC, WRB)
   !***END PROLOGUE  DBVDER
   INTEGER IGOfx , INHomo , Ipar , IVP , j , k , l , na , NCOmp , NFC , NOFst
-  DOUBLE PRECISION C , G(*) , X , XSAv , Y(*) , Yp(*)
+  REAL(8) :: C , G(*) , X , XSAv , Y(*) , Yp(*)
   !
   ! **********************************************************************
   !

@@ -1,6 +1,6 @@
 !*==DBESJ1.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBESJ1
-DOUBLE PRECISION FUNCTION DBESJ1(X)
+REAL(8) FUNCTION DBESJ1(X)
   IMPLICIT NONE
   !*--DBESJ15
   !*** Start of declarations inserted by SPAG
@@ -36,7 +36,7 @@ DOUBLE PRECISION FUNCTION DBESJ1(X)
   !   910401  Corrected error in code which caused values to have the
   !           wrong sign for arguments less than 4.0.  (WRB)
   !***END PROLOGUE  DBESJ1
-  DOUBLE PRECISION X , bj1cs(19) , ampl , theta , xsml , xmin , y , D1MACH , &
+  REAL(8) :: X , bj1cs(19) , ampl , theta , xsml , xmin , y , D1MACH , &
     DCSEVL
   LOGICAL first
   SAVE bj1cs , ntj1 , xsml , xmin , first

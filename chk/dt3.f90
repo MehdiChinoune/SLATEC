@@ -1,6 +1,6 @@
 !*==DT3.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DT3
-DOUBLE PRECISION FUNCTION DT3(X)
+REAL(8) FUNCTION DT3(X)
   IMPLICIT NONE
   !*--DT35
   !***BEGIN PROLOGUE  DT3
@@ -12,7 +12,7 @@ DOUBLE PRECISION FUNCTION DT3(X)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DT3
-  DOUBLE PRECISION a , b , DF3S , X , x1 , y
+  REAL(8) :: a , b , DF3S , X , x1 , y
   !***FIRST EXECUTABLE STATEMENT  DT3
   a = 0.0D+00
   b = 0.5D+01

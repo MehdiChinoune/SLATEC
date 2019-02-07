@@ -83,12 +83,12 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSPDI
   INTEGER N , Job
-  DOUBLE PRECISION Ap(*) , Work(*)
-  DOUBLE PRECISION Det(2)
+  REAL(8) :: Ap(*) , Work(*)
+  REAL(8) :: Det(2)
   INTEGER Kpvt(*) , Inert(3)
   !
-  DOUBLE PRECISION akkp1 , DDOT , temp
-  DOUBLE PRECISION ten , d , t , ak , akp1
+  REAL(8) :: akkp1 , DDOT , temp
+  REAL(8) :: ten , d , t , ak , akp1
   INTEGER ij , ik , ikp1 , iks , j , jb , jk , jkp1
   INTEGER k , kk , kkp1 , km1 , ks , ksj , kskp1 , kstep
   LOGICAL noinv , nodet , noert

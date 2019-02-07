@@ -30,10 +30,10 @@ SUBROUTINE DCHKE3(Isnum,Srnamt,Nout,Kprint,Fatal)
   CHARACTER(6) :: Srnamt
   INTEGER infot , Kprint
   !     .. Local Scalars ..
-  DOUBLE PRECISION alpha , beta
+  REAL(8) :: alpha , beta
   INTEGER kontrl
   !     .. Local Arrays ..
-  DOUBLE PRECISION a(1,1) , b(1,1) , c(1,1)
+  REAL(8) :: a(1,1) , b(1,1) , c(1,1)
   !     .. External Subroutines ..
   EXTERNAL CHKXER , DGEMM , DSYMM , DTRMM , DTRSM , DSYRK , DSYR2K
   !***FIRST EXECUTABLE STATEMENT  DCHKE3

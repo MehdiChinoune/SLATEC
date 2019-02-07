@@ -181,7 +181,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   INTEGER i , ifail , im1 , ip1 , Ipar , iq , j , K , km1 , km2 , knew , &
     Kold , kp1 , kp2 , Ksteps , l , limit1 , limit2 , Neqn , Ns , &
     nsm2 , nsp1 , nsp2
-  DOUBLE PRECISION absh , Alpha , Beta , big , D1MACH , Eps , erk , erkm1 , &
+  REAL(8) :: absh , Alpha , Beta , big , D1MACH , Eps , erk , erkm1 , &
     erkm2 , erkp1 , err , Fouru , G , Gi , gstr , H , hnew , &
     Hold , P , p5eps , Phi , Psi , r , reali , realns , rho , &
     round , Rpar , Sig , tau , temp1 , temp2 , temp3 , &

@@ -112,11 +112,11 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   INTEGER i , Ierr , j , k , Kode , M , mm , mx , N , nmax , nn , np , nx , &
     Nz , fn
   INTEGER I1MACH
-  DOUBLE PRECISION Ans , arg , b , den , elim , eps , fln , fx , rln , &
+  REAL(8) :: Ans , arg , b , den , elim , eps , fln , fx , rln , &
     rxsq , r1m4 , r1m5 , s , slope , t , ta , tk , tol , &
     tols , trm , trmr , tss , tst , tt , t1 , t2 , wdtol , &
     X , xdmln , xdmy , xinc , xln , xm , xmin , xq , yint
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   DIMENSION b(22) , trm(22) , trmr(100) , Ans(*)
   SAVE nmax , b
   DATA nmax/100/

@@ -46,7 +46,7 @@ SUBROUTINE DBNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   !***END PROLOGUE  DBNSLV
   !
   INTEGER Nbandl , Nbandu , Nrow , Nroww , i , j , jmax , middle , nrowm1
-  DOUBLE PRECISION W(Nroww,*) , B(*)
+  REAL(8) :: W(Nroww,*) , B(*)
   !***FIRST EXECUTABLE STATEMENT  DBNSLV
   middle = Nbandu + 1
   IF ( Nrow==1 ) THEN

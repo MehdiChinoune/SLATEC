@@ -60,16 +60,16 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   !***END PROLOGUE  DDAINI
   !
   INTEGER Neq , Idid , Ipar(*) , Iwm(*) , Nonneg , Ntemp
-  DOUBLE PRECISION X , Y(*) , Yprime(*) , H , Wt(*) , Rpar(*) , Phi(Neq,*) , &
+  REAL(8) :: X , Y(*) , Yprime(*) , H , Wt(*) , Rpar(*) , Phi(Neq,*) , &
     Delta(*) , E(*) , Wm(*) , Hmin , Uround
   EXTERNAL RES , JAC
   !
   EXTERNAL DDAJAC , DDANRM , DDASLV
-  DOUBLE PRECISION DDANRM
+  REAL(8) :: DDANRM
   !
   INTEGER i , ier , ires , jcalc , LNJE , LNRE , m , maxit , mjac , ncf , &
     nef , nsf
-  DOUBLE PRECISION cj , damp , delnrm , err , oldnrm , r , rate , s , xold , &
+  REAL(8) :: cj , damp , delnrm , err , oldnrm , r , rate , s , xold , &
     ynorm
   LOGICAL convgd
   !

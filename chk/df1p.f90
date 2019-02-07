@@ -1,6 +1,6 @@
 !*==DF1P.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DF1P
-DOUBLE PRECISION FUNCTION DF1P(X)
+REAL(8) FUNCTION DF1P(X)
   IMPLICIT NONE
   !*--DF1P5
   !***BEGIN PROLOGUE  DF1P
@@ -12,7 +12,7 @@ DOUBLE PRECISION FUNCTION DF1P(X)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DF1P
-  DOUBLE PRECISION alfa1 , alfa2 , p1 , p2 , X , d1 , d2
+  REAL(8) :: alfa1 , alfa2 , p1 , p2 , X , d1 , d2
   !***FIRST EXECUTABLE STATEMENT  DF1P
   !  P1 = 1/7, P2 = 2/3
   DATA p1/0.1428571428571428D+00/

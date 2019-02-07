@@ -20,8 +20,8 @@ SUBROUTINE ZLOG(Ar,Ai,Br,Bi,Ierr)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  ZLOG
-  DOUBLE PRECISION Ar , Ai , Br , Bi , zm , dtheta , dpi , dhpi
-  DOUBLE PRECISION ZABS
+  REAL(8) :: Ar , Ai , Br , Bi , zm , dtheta , dpi , dhpi
+  REAL(8) :: ZABS
   INTEGER Ierr
   EXTERNAL ZABS
   DATA dpi , dhpi/3.141592653589793238462643383D+0 , &

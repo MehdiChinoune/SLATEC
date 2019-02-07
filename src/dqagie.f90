@@ -161,7 +161,7 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQAGIE
-  DOUBLE PRECISION abseps , Abserr , Alist , area , area1 , area12 , area2 , &
+  REAL(8) :: abseps , Abserr , Alist , area , area1 , area12 , area2 , &
     a1 , a2 , Blist , boun , Bound , b1 , b2 , correc , &
     defabs , defab1 , defab2 , dres , D1MACH , Elist , &
     epmach , Epsabs , Epsrel , erlarg , erlast , errbnd , &

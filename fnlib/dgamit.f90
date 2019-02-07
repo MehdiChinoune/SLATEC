@@ -1,6 +1,6 @@
 !*==DGAMIT.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DGAMIT
-DOUBLE PRECISION FUNCTION DGAMIT(A,X)
+REAL(8) FUNCTION DGAMIT(A,X)
   IMPLICIT NONE
   !*--DGAMIT5
   !***BEGIN PROLOGUE  DGAMIT
@@ -51,7 +51,7 @@ DOUBLE PRECISION FUNCTION DGAMIT(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   !***END PROLOGUE  DGAMIT
-  DOUBLE PRECISION A , X , aeps , ainta , algap1 , alneps , alng , alx , &
+  REAL(8) :: A , X , aeps , ainta , algap1 , alneps , alng , alx , &
     bot , h , sga , sgngam , sqeps , t , D1MACH , DGAMR , &
     D9GMIT , D9LGIT , DLNGAM , D9LGIC
   LOGICAL first

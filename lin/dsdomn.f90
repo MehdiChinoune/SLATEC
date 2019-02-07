@@ -212,11 +212,11 @@ SUBROUTINE DSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   INTEGER LOCRB , LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Err , Tol
+  REAL(8) :: Err , Tol
   INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , Leniw , Lenw , N , &
     Nelt , Nsave
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(N) , B(N) , Rwork(Lenw) , X(N)
+  REAL(8) :: A(N) , B(N) , Rwork(Lenw) , X(N)
   INTEGER Ia(Nelt) , Iwork(Leniw) , Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locap , loccsa , locdin , locdz , locema , lociw , locp , locr , &

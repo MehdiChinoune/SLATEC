@@ -42,7 +42,7 @@ SUBROUTINE DQC36J(Lun,Kprint,Ipass)
   INTEGER ipass1 , ipass2 , ipass3 , ipass4 , ipass5 , NDIM , ier , index , &
     i , first , last , nsig , NUMXER , nerr , ierjj , ierjm
   PARAMETER (NDIM=15)
-  DOUBLE PRECISION tol , l1 , l2 , l3 , m1 , m2 , m3 , l1min , l1max , &
+  REAL(8) :: tol , l1 , l2 , l3 , m1 , m2 , m3 , l1min , l1max , &
     m2min , m2max , diff(NDIM) , D1MACH , x , jjval , jmval , &
     thrcof(NDIM) , sixcof(NDIM) , r3jj(8) , r3jm(14) , &
     r6j(15)

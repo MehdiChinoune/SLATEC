@@ -23,13 +23,13 @@ SUBROUTINE DSOSQX(Lun,Kprint,Ipass)
   !     .. Scalar Arguments ..
   INTEGER Ipass , Kprint , Lun
   !     .. Local Scalars ..
-  DOUBLE PRECISION aer , fnorm , fnorms , rer , tolf
+  REAL(8) :: aer , fnorm , fnorms , rer , tolf
   INTEGER icnt , iflag , iflags , liw , lwa , n
   !     .. Local Arrays ..
-  DOUBLE PRECISION fvec(2) , wa(17) , x(2)
+  REAL(8) :: fvec(2) , wa(17) , x(2)
   INTEGER itest(2) , iw(6)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DNRM2 , DSOSFN
+  REAL(8) :: D1MACH , DNRM2 , DSOSFN
   EXTERNAL D1MACH , DNRM2 , DSOSFN
   !     .. External Subroutines ..
   EXTERNAL DSOS , PASS

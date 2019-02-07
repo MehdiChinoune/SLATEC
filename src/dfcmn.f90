@@ -31,14 +31,14 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !***END PROLOGUE  DFCMN
   INTEGER Iwork(*) , Mdg , Mdw , Mode , Nbkpt , Nconst , Ndata , Nderiv(*) ,&
     Nord
-  DOUBLE PRECISION Bf(Nord,*) , Bkpt(*) , Bkptin(*) , Coeff(*) , G(Mdg,*) ,&
+  REAL(8) :: Bf(Nord,*) , Bkpt(*) , Bkptin(*) , Coeff(*) , G(Mdg,*) ,&
     Ptemp(*) , Sddata(*) , W(Mdw,*) , Work(*) , Xconst(*) ,&
     Xdata(*) , Xtemp(*) , Yconst(*) , Ydata(*)
   !
   EXTERNAL DAXPY , DBNDAC , DBNDSL , DCOPY , DFSPVD , DFSPVN , DLSEI ,&
     DSCAL , DSORT , XERMSG
   !
-  DOUBLE PRECISION dummy , prgopt(10) , rnorm , rnorme , rnorml , xmax ,&
+  REAL(8) :: dummy , prgopt(10) , rnorm , rnorme , rnorml , xmax ,&
     xmin , xval , yval
   INTEGER i , idata , ideriv , ileft , intrvl , intw1 , ip , ir , irow ,&
     itype , iw1 , iw2 , l , lw , mt , n , nb , neqcon , nincon ,&

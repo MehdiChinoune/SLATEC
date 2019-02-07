@@ -77,10 +77,10 @@ SUBROUTINE DPBFA(Abd,Lda,N,M,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPBFA
   INTEGER Lda , N , M , Info
-  DOUBLE PRECISION Abd(Lda,*)
+  REAL(8) :: Abd(Lda,*)
   !
-  DOUBLE PRECISION DDOT , t
-  DOUBLE PRECISION s
+  REAL(8) :: DDOT , t
+  REAL(8) :: s
   INTEGER ik , j , jk , k , mu
   !***FIRST EXECUTABLE STATEMENT  DPBFA
   DO j = 1 , N

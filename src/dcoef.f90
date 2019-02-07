@@ -76,10 +76,10 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DCOEF
   !
-  DOUBLE PRECISION DDOT
+  REAL(8) :: DDOT
   INTEGER i , Iflag , Inhomo , Iwork(*) , j , k , kflag , ki , l , LPAr , &
     mlso , Ncomp , ncomp2 , nf , Nfc , Nfcc , nfccm1 , Nic , Nrowb
-  DOUBLE PRECISION Ae , B(Nrowb,*) , bbn , Beta(*) , bn , brn , By(Nfcc,*) , &
+  REAL(8) :: Ae , B(Nrowb,*) , bbn , Beta(*) , bn , brn , By(Nfcc,*) , &
     bykl , bys , Coef(*) , cons , Cvec(*) , EPS , FOUru , &
     gam , Re , SQOvfl , SRU , TWOu , un , URO , Work(*) , &
     Yh(Ncomp,*) , Yp(*) , ypn

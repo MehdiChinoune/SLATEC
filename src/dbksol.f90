@@ -33,9 +33,9 @@ SUBROUTINE DBKSOL(N,A,X)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DBKSOL
   !
-  DOUBLE PRECISION DDOT
+  REAL(8) :: DDOT
   INTEGER j , k , m , N , nm1
-  DOUBLE PRECISION A(*) , X(*)
+  REAL(8) :: A(*) , X(*)
   !
   !***FIRST EXECUTABLE STATEMENT  DBKSOL
   m = (N*(N+1))/2

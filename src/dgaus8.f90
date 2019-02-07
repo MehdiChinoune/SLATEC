@@ -87,10 +87,10 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
   INTEGER Ierr , k , kml , kmx , l , lmn , lmx , lr , mxl , nbits , nib ,&
     nlmn , nlmx
   INTEGER I1MACH
-  DOUBLE PRECISION A , aa , ae , anib , Ans , area , B , c , ce , ee , ef ,&
+  REAL(8) :: A , aa , ae , anib , Ans , area , B , c , ce , ee , ef ,&
     eps , Err , est , gl , glr , gr , hh , sq2 , tol , vl ,&
     vr , w1 , w2 , w3 , w4 , x1 , x2 , x3 , x4 , x , h
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   DIMENSION aa(60) , hh(60) , lr(60) , vl(60) , gr(60)
   SAVE x1 , x2 , x3 , x4 , w1 , w2 , w3 , w4 , sq2 , nlmn , kmx , kml
   DATA x1 , x2 , x3 , x4/1.83434642495649805D-01 , 5.25532409916328986D-01 ,&

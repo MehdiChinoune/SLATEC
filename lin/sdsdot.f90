@@ -53,7 +53,7 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SDSDOT
   REAL Sx(*) , Sy(*) , Sb
-  DOUBLE PRECISION dsdot
+  REAL(8) :: dsdot
   !***FIRST EXECUTABLE STATEMENT  SDSDOT
   dsdot = Sb
   IF ( N>0 ) THEN
@@ -63,7 +63,7 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
       !
       ns = N*Incx
       DO i = 1 , ns , Incx
-        dsdot = dsdot + DBLE(Sx(i))*DBLE(Sy(i))
+        dsdot = dsdot + REAL(Sx(i))*REAL(Sy(i))
       ENDDO
       SDSDOT = dsdot
       GOTO 99999
@@ -76,7 +76,7 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
       IF ( Incx<0 ) kx = 1 + (1-N)*Incx
       IF ( Incy<0 ) ky = 1 + (1-N)*Incy
       DO i = 1 , N
-        dsdot = dsdot + DBLE(Sx(kx))*DBLE(Sy(ky))
+        dsdot = dsdot + REAL(Sx(kx), 8)*REAL(Sy(ky), 8)
         kx = kx + Incx
         ky = ky + Incy
       ENDDO

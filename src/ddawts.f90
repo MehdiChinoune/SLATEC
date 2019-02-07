@@ -27,10 +27,10 @@ SUBROUTINE DDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt,Rpar,Ipar)
   !***END PROLOGUE  DDAWTS
   !
   INTEGER Neq , Iwt , Ipar(*)
-  DOUBLE PRECISION Rtol(*) , Atol(*) , Y(*) , Wt(*) , Rpar(*)
+  REAL(8) :: Rtol(*) , Atol(*) , Y(*) , Wt(*) , Rpar(*)
   !
   INTEGER i
-  DOUBLE PRECISION atoli , rtoli
+  REAL(8) :: atoli , rtoli
   !
   !***FIRST EXECUTABLE STATEMENT  DDAWTS
   rtoli = Rtol(1)

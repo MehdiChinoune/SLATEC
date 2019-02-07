@@ -158,7 +158,7 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !***END PROLOGUE  ZBESK
   !
   !     COMPLEX CY,Z
-  DOUBLE PRECISION aa , alim , aln , arg , az , Cyi , Cyr , dig , elim , &
+  REAL(8) :: aa , alim , aln , arg , az , Cyi , Cyr , dig , elim , &
     fn , Fnu , fnul , rl , r1m5 , tol , ufl , Zi , Zr , &
     D1MACH , ZABS , bb
   INTEGER Ierr , k , Kode , k1 , k2 , mr , N , nn , nuf , nw , Nz , I1MACH

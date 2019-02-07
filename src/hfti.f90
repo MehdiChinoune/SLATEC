@@ -145,7 +145,7 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !***END PROLOGUE  HFTI
   DIMENSION A(Mda,*) , B(Mdb,*) , H(*) , G(*) , Rnorm(*)
   INTEGER Ip(*)
-  DOUBLE PRECISION sm , dzero
+  REAL(8) :: sm , dzero
   SAVE releps
   DATA releps/0.E0/
   !***FIRST EXECUTABLE STATEMENT  HFTI
@@ -268,7 +268,7 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
             IF ( i/=k ) THEN
               ip1 = i + 1
               DO j = ip1 , k
-                sm = sm + A(i,j)*DBLE(B(j,jb))
+                sm = sm + A(i,j)*REAL(B(j,jb), 8)
               ENDDO
             ENDIF
             sm1 = sm

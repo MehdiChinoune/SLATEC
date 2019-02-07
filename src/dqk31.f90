@@ -63,7 +63,7 @@ SUBROUTINE DQK31(F,A,B,Result,Abserr,Resabs,Resasc)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQK31
-  DOUBLE PRECISION A , absc , Abserr , B , centr , dhlgth , D1MACH , &
+  REAL(8) :: A , absc , Abserr , B , centr , dhlgth , D1MACH , &
     epmach , F , fc , fsum , fval1 , fval2 , fv1 , fv2 , &
     hlgth , Resabs , Resasc , resg , resk , reskh , Result , &
     uflow , wg , wgk , xgk

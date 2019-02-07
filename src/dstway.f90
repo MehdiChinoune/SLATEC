@@ -32,7 +32,7 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
     IVP , j , k , KNSwot , ko , KOP , ks , ksj , LOTjp , MNSwot , &
     MXNon , NCOmp , NDIsk , NEQ , NEQivp , NFC , NFCc , NIC , NOPg , &
     NPS , NSWot , NTApe , NTP , NUMort , NXPts
-  DOUBLE PRECISION AE , C , PWCnd , PX , RE , Stowa(*) , TND , TOL , U(*) , &
+  REAL(8) :: AE , C , PWCnd , PX , RE , Stowa(*) , TND , TOL , U(*) , &
     V(*) , X , XBEg , XENd , XOP , XOT , XSAv , Yhp(*)
   !
   COMMON /DML8SZ/ C , XSAv , IGOfx , INHomo , IVP , NCOmp , NFC

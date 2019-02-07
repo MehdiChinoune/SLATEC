@@ -42,8 +42,8 @@ SUBROUTINE DQCKIN(Lun,Kprint,Ipass)
   INTEGER i , ierr , iflg , ix , i1m12 , j , k , kode , Lun , m , mdel , &
     mm , n , ndel , nn
   INTEGER I1MACH
-  DOUBLE PRECISION aix , er , tol , v , x , xinc , y
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: aix , er , tol , v , x , xinc , y
+  REAL(8) :: D1MACH
   DIMENSION v(1) , y(10)
   !***FIRST EXECUTABLE STATEMENT  DQCKIN
   tol = 1000.0D0*MAX(D1MACH(4),1.0D-18)

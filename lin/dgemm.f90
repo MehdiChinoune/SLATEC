@@ -134,9 +134,9 @@ SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !     .. Scalar Arguments ..
   CHARACTER :: Transa , Transb
   INTEGER M , N , K , Lda , Ldb , Ldc
-  DOUBLE PRECISION Alpha , Beta
+  REAL(8) :: Alpha , Beta
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Lda,*) , B(Ldb,*) , C(Ldc,*)
+  REAL(8) :: A(Lda,*) , B(Ldb,*) , C(Ldc,*)
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
@@ -147,9 +147,9 @@ SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !     .. Local Scalars ..
   LOGICAL nota , notb
   INTEGER i , info , j , l , ncola , nrowa , nrowb
-  DOUBLE PRECISION temp
+  REAL(8) :: temp
   !     .. Parameters ..
-  DOUBLE PRECISION ONE , ZERO
+  REAL(8) :: ONE , ZERO
   PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
   !***FIRST EXECUTABLE STATEMENT  DGEMM
   !

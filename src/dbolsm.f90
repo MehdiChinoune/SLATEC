@@ -427,14 +427,14 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     /REAL            / TO /DOUBLE PRECISION/.
   !++
   !
-  DOUBLE PRECISION W(Mdw,*) , Bl(*) , Bu(*)
-  DOUBLE PRECISION X(*) , Rw(*) , Ww(*) , Scl(*)
-  DOUBLE PRECISION alpha , beta , bou , colabv , colblo
-  DOUBLE PRECISION cl1 , cl2 , cl3 , ONE , big
-  DOUBLE PRECISION fac , Rnorm , sc , ss , t , tolind , wt
-  DOUBLE PRECISION TWO , t1 , t2 , wbig , wlarge , wmag , xnew
-  DOUBLE PRECISION ZERO , DDOT , DNRM2
-  DOUBLE PRECISION D1MACH , tolsze
+  REAL(8) :: W(Mdw,*) , Bl(*) , Bu(*)
+  REAL(8) :: X(*) , Rw(*) , Ww(*) , Scl(*)
+  REAL(8) :: alpha , beta , bou , colabv , colblo
+  REAL(8) :: cl1 , cl2 , cl3 , ONE , big
+  REAL(8) :: fac , Rnorm , sc , ss , t , tolind , wt
+  REAL(8) :: TWO , t1 , t2 , wbig , wlarge , wmag , xnew
+  REAL(8) :: ZERO , DDOT , DNRM2
+  REAL(8) :: D1MACH , tolsze
   INTEGER Ibasis(*) , Ibb(*) , Ind(*) , Iopt(*)
   LOGICAL found , constr
   CHARACTER(8) :: xern1 , xern2

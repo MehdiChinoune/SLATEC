@@ -22,7 +22,7 @@ SUBROUTINE QCDRD(Lun,Kprint,Ipass)
   !***END PROLOGUE  QCDRD
   INTEGER Kprint , Ipass , contrl , kontrl , Lun , ier
   INTEGER ipass1 , ipass2 , ipass3 , ipass4 , NUMXER
-  DOUBLE PRECISION blem , trd , DRD , dif , D1MACH
+  REAL(8) :: blem , trd , DRD , dif , D1MACH
   EXTERNAL D1MACH , DRD , NUMXER , XERCLR , XGETF , XSETF
   !***FIRST EXECUTABLE STATEMENT  QCDRD
   CALL XERCLR

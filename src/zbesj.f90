@@ -157,7 +157,7 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !***END PROLOGUE  ZBESJ
   !
   !     COMPLEX CI,CSGN,CY,Z,ZN
-  DOUBLE PRECISION aa , alim , arg , cii , csgni , csgnr , Cyi , Cyr , dig , &
+  REAL(8) :: aa , alim , arg , cii , csgni , csgnr , Cyi , Cyr , dig , &
     elim , Fnu , fnul , hpi , rl , r1m5 , str , tol , Zi , &
     zni , znr , Zr , D1MACH , bb , fn , az , ZABS , ascle , &
     rtol , atol , sti

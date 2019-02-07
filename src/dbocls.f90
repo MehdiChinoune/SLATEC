@@ -564,10 +564,10 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !     /SSCAL/ TO /DSCAL/, /SASUM/ TO /DASUM/, /SBOLS/ TO /DBOLS/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
-  DOUBLE PRECISION W(Mdw,*) , Bl(*) , Bu(*) , X(*) , Rw(*)
-  DOUBLE PRECISION anorm , cnorm , one , Rnorm , Rnormc , drelpr
-  DOUBLE PRECISION t , t1 , t2 , DDOT , DNRM2 , wt , zero
-  DOUBLE PRECISION DASUM , D1MACH
+  REAL(8) :: W(Mdw,*) , Bl(*) , Bu(*) , X(*) , Rw(*)
+  REAL(8) :: anorm , cnorm , one , Rnorm , Rnormc , drelpr
+  REAL(8) :: t , t1 , t2 , DDOT , DNRM2 , wt , zero
+  REAL(8) :: DASUM , D1MACH
   !     THIS VARIABLE REMAINS TYPED REAL.
   INTEGER Ind(*) , Iopt(*) , Iw(*) , jopt(05)
   LOGICAL checkl , filter , accum , pretri

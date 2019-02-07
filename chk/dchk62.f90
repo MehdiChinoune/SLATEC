@@ -23,21 +23,21 @@ SUBROUTINE DCHK62(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
   !***END PROLOGUE  DCHK62
   !     .. Parameters ..
-  DOUBLE PRECISION ZERO , HALF , ONE
+  REAL(8) :: ZERO , HALF , ONE
   PARAMETER (ZERO=0.0D0,HALF=0.5D0,ONE=1.0D0)
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  DOUBLE PRECISION Eps , Thresh
+  REAL(8) :: Eps , Thresh
   INTEGER Incmax , Kprint , Nalf , Nidim , Ninc , Nmax , Nout
   CHARACTER(6) :: Sname
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax)&
+  REAL(8) :: A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax)&
     , G(Nmax) , X(Nmax) , Xs(Nmax*Incmax) , Xx(Nmax*Incmax) ,&
     Y(Nmax) , Ys(Nmax*Incmax) , Yt(Nmax) , Yy(Nmax*Incmax) ,&
     Z(Nmax,2)
   INTEGER Idim(Nidim) , Inc(Ninc)
   !     .. Local Scalars ..
-  DOUBLE PRECISION alpha , als , err , errmax , transl
+  REAL(8) :: alpha , als , err , errmax , transl
   INTEGER i , ia , ic , in , incx , incxs , incy , incys , ix , iy , j ,&
     ja , jj , laa , lda , ldas , lj , lx , ly , n , nargs , nc , ns ,&
     nerr
@@ -45,7 +45,7 @@ SUBROUTINE DCHK62(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   CHARACTER :: uplo , uplos
   CHARACTER(2) :: ich
   !     .. Local Arrays ..
-  DOUBLE PRECISION w(2)
+  REAL(8) :: w(2)
   LOGICAL isame(13)
   !     .. External Functions ..
   INTEGER NUMXER

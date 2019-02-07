@@ -171,11 +171,11 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   IMPLICIT NONE
   !*--DULSIA172
   !*** Start of declarations inserted by SPAG
-  DOUBLE PRECISION A , Ae , B , eps , Re , Rnorm , W
+  REAL(8) :: A , Ae , B , eps , Re , Rnorm , W
   INTEGER i , Info , it , Key , Krank , Ksure , Liw , Lw , M , m1 , m2 , &
     m3 , m4 , m5 , Mda , Mdb , Mode , N , Nb , Np
   !*** End of declarations inserted by SPAG
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   DIMENSION A(Mda,*) , B(Mdb,*) , Re(*) , Ae(*) , Rnorm(*) , W(*)
   INTEGER Iwork(*)
   !

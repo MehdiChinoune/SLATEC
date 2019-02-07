@@ -66,14 +66,14 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   INTEGER i , Iflw , In , j , jn , jr , ju , k , kb , klast , kmax , kp1 , &
     ks , ksp1 , kstemp , l , lr , lrp1 , iseta , isetb
   INTEGER I1MACH
-  DOUBLE PRECISION abw2 , akm , alfa , alfa1 , alfa2 , ap , ar , asum , az , &
+  REAL(8) :: abw2 , akm , alfa , alfa1 , alfa2 , ap , ar , asum , az , &
     beta , beta1 , beta2 , beta3 , br , bsum , c , con1 , &
     con2 , con548 , cr , crz32 , dfi , elim , dr , fi , &
     Flgjy , fn , Fnu , fn2 , gama , phi , rcz , rden , relb , &
     rfn2 , rtz , rzden , sa , sb , suma , sumb , s1 , ta , &
     tau , tb , tfn , tol , tols , t2 , upol , Wk , X , xx , &
     Y , z , z32
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   DIMENSION Y(*) , Wk(*) , c(65)
   DIMENSION alfa(26,4) , beta(26,5)
   DIMENSION alfa1(26,2) , alfa2(26,2)

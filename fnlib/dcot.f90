@@ -1,6 +1,6 @@
 !*==DCOT.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DCOT
-DOUBLE PRECISION FUNCTION DCOT(X)
+REAL(8) FUNCTION DCOT(X)
   IMPLICIT NONE
   !*--DCOT5
   !*** Start of declarations inserted by SPAG
@@ -34,7 +34,7 @@ DOUBLE PRECISION FUNCTION DCOT(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DCOT
-  DOUBLE PRECISION X , cotcs(15) , ainty , ainty2 , pi2rec , sqeps , xmax , &
+  REAL(8) :: X , cotcs(15) , ainty , ainty2 , pi2rec , sqeps , xmax , &
     xmin , xsml , y , yrem , prodbg , DCSEVL , D1MACH
   LOGICAL first
   SAVE cotcs , pi2rec , nterms , xmax , xsml , xmin , sqeps , first

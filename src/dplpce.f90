@@ -46,10 +46,10 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   !***END PROLOGUE  DPLPCE
   INTEGER Ibasis(*) , Imat(*) , Ibrc(Lbm,2) , Ipr(*) , Iwr(*) , Ind(*) , &
     Ibb(*)
-  DOUBLE PRECISION Amat(*) , Basmat(*) , Csc(*) , Wr(*) , Ww(*) , Primal(*)&
+  REAL(8) :: Amat(*) , Basmat(*) , Csc(*) , Wr(*) , Ww(*) , Primal(*)&
     , Erd(*) , Erp(*) , Eps , Erdnrm , factor , Gg , one , &
     zero , ten , Tune
-  DOUBLE PRECISION DASUM
+  REAL(8) :: DASUM
   LOGICAL Singlr , Redbas , trans , pagepl
   !***FIRST EXECUTABLE STATEMENT  DPLPCE
   zero = 0.D0

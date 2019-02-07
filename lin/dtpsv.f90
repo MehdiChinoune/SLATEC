@@ -107,12 +107,12 @@ SUBROUTINE DTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
   INTEGER Incx , N
   CHARACTER :: Diag , Trans , Uplo
   !     .. Array Arguments ..
-  DOUBLE PRECISION Ap(*) , X(*)
+  REAL(8) :: Ap(*) , X(*)
   !     .. Parameters ..
-  DOUBLE PRECISION ZERO
+  REAL(8) :: ZERO
   PARAMETER (ZERO=0.0D+0)
   !     .. Local Scalars ..
-  DOUBLE PRECISION temp
+  REAL(8) :: temp
   INTEGER i , info , ix , j , jx , k , kk , kx
   LOGICAL nounit
   !     .. External Functions ..

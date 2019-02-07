@@ -67,13 +67,13 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DMGSBV
   !
-  DOUBLE PRECISION DDOT , DPRVEC
+  REAL(8) :: DDOT , DPRVEC
   INTEGER i , Ia , ICOco , Iflag , INDpvt , Inhomo , INTeg , Ip(*) , ip1 , &
     ix , iz , j , jk , jp , jq , jy , jz , k , kd , kj , kp , l , &
     lix , LPAr , lr , M , m2 , MXNon , N , NDIsk , NEQ , NEQivp , &
     NFCc , NIC , Niv , nivn , nmnr , nn , NOPg , np1 , NPS , nr , &
     nrm1 , NTApe , NTP , NUMort , NXPts
-  DOUBLE PRECISION A(Ia,*) , AE , dot , EPS , FOUru , P(*) , pjp , psave , &
+  REAL(8) :: A(Ia,*) , AE , dot , EPS , FOUru , P(*) , pjp , psave , &
     RE , ry , S(*) , SQOvfl , SRU , sv , t , TOL , TWOu , &
     URO , V(*) , vl , vnorm , W(*) , Wcnd , y
   !

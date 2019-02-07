@@ -89,12 +89,12 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !
   !  DECLARE ARGUMENTS.
   !
-  DOUBLE PRECISION D1 , D2 , Delta , D1MACH
+  REAL(8) :: D1 , D2 , Delta , D1MACH
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER ismon , itrue
-  DOUBLE PRECISION a , b , eps , four , one , phi , ten , three , two , zero
+  REAL(8) :: a , b , eps , four , one , phi , ten , three , two , zero
   SAVE zero , one , two , three , four
   SAVE ten
   !

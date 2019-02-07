@@ -115,7 +115,7 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   INTEGER Lda , N , Itask , Ind , info , j
   COMPLEX A(Lda,*) , V(*) , Work(N,*)
   REAL SCASUM , xnorm , dnorm , R1MACH
-  DOUBLE PRECISION dr1 , di1 , dr2 , di2
+  REAL(8) :: dr1 , di1 , dr2 , di2
   CHARACTER(8) :: xern1 , xern2
   !***FIRST EXECUTABLE STATEMENT  CPOIR
   IF ( Lda<N ) THEN
@@ -182,8 +182,8 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   DO j = 1 , N
     CALL DCDOT(j-1,-1.D0,A(1,j),1,V(1),1,dr1,di1)
     CALL DCDOT(N-j+1,1.D0,A(j,j),Lda,V(j),1,dr2,di2)
-    dr1 = dr1 + dr2 - DBLE(REAL(Work(j,N+1)))
-    di1 = di1 + di2 - DBLE(AIMAG(Work(j,N+1)))
+    dr1 = dr1 + dr2 - REAL(REAL(Work(j,N+1)), 8)
+    di1 = di1 + di2 - REAL(AIMAG(Work(j,N+1)), 8)
     Work(j,N+1) = CMPLX(REAL(dr1),REAL(di1))
   ENDDO
   !

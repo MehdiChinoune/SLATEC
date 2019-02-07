@@ -1,6 +1,6 @@
 !*==DQWGTS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQWGTS
-DOUBLE PRECISION FUNCTION DQWGTS(X,A,B,Alfa,Beta,Integr)
+REAL(8) FUNCTION DQWGTS(X,A,B,Alfa,Beta,Integr)
   IMPLICIT NONE
   !*--DQWGTS5
   !***BEGIN PROLOGUE  DQWGTS
@@ -27,7 +27,7 @@ DOUBLE PRECISION FUNCTION DQWGTS(X,A,B,Alfa,Beta,Integr)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DQWGTS
   !
-  DOUBLE PRECISION A , Alfa , B , Beta , bmx , X , xma
+  REAL(8) :: A , Alfa , B , Beta , bmx , X , xma
   INTEGER Integr
   !***FIRST EXECUTABLE STATEMENT  DQWGTS
   xma = X - A

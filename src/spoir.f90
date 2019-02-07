@@ -110,7 +110,7 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   !
   INTEGER Lda , N , Itask , Ind , info , j
   REAL A(Lda,*) , V(*) , Work(N,*) , SASUM , xnorm , dnorm , R1MACH
-  DOUBLE PRECISION DSDOT
+  REAL(8) :: DSDOT
   CHARACTER(8) :: xern1 , xern2
   !***FIRST EXECUTABLE STATEMENT  SPOIR
   IF ( Lda<N ) THEN

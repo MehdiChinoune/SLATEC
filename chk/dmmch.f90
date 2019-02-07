@@ -24,19 +24,19 @@ SUBROUTINE DMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
   !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
   !***END PROLOGUE  DMMCH
   !     .. Parameters ..
-  DOUBLE PRECISION ZERO , ONE
+  REAL(8) :: ZERO , ONE
   PARAMETER (ZERO=0.0D0,ONE=1.0D0)
   !     .. Scalar Arguments ..
   LOGICAL Ftl
-  DOUBLE PRECISION Alpha , Beta , Eps , Err
+  REAL(8) :: Alpha , Beta , Eps , Err
   INTEGER Kk , Kprint , Lda , Ldb , Ldc , Ldcc , M , N , Nout
   LOGICAL Mv
   CHARACTER :: Transa , Transb
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Lda,*) , B(Ldb,*) , C(Ldc,*) , Cc(Ldcc,*) , Ct(*) ,&
+  REAL(8) :: A(Lda,*) , B(Ldb,*) , C(Ldc,*) , Cc(Ldcc,*) , Ct(*) ,&
     G(*)
   !     .. Local Scalars ..
-  DOUBLE PRECISION erri
+  REAL(8) :: erri
   INTEGER i , j , k
   LOGICAL trana , tranb
   !     .. Intrinsic Functions ..

@@ -34,7 +34,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
   !   900604  DP version created from SP version. .  (RWC)
   !***END PROLOGUE  DWNLIT
   INTEGER Idope(*) , Ipivot(*) , Itype(*) , L , M , Mdw , N
-  DOUBLE PRECISION Dope(*) , H(*) , Rnorm , Scale(*) , W(Mdw,*)
+  REAL(8) :: Dope(*) , H(*) , Rnorm , Scale(*) , W(Mdw,*)
   LOGICAL Done
   !
   EXTERNAL DCOPY , DH12 , DROTM , DROTMG , DSCAL , DSWAP , DWNLT1 , DWNLT2 , &
@@ -42,7 +42,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
   INTEGER IDAMAX
   LOGICAL DWNLT2
   !
-  DOUBLE PRECISION alsq , amax , eanorm , factor , hbar , rn , sparam(5) , &
+  REAL(8) :: alsq , amax , eanorm , factor , hbar , rn , sparam(5) , &
     t , tau
   INTEGER i , i1 , imax , ir , j , j1 , jj , jp , krank , l1 , lb , lend , &
     me , mend , niv , nsoln

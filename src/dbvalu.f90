@@ -1,6 +1,6 @@
 !*==DBVALU.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DBVALU
-DOUBLE PRECISION FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
+REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   IMPLICIT NONE
   !*--DBVALU5
   !***BEGIN PROLOGUE  DBVALU
@@ -73,7 +73,7 @@ DOUBLE PRECISION FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   INTEGER i , Ideriv , iderp1 , ihi , ihmkmj , ilo , imk , imkpj , Inbv , &
     ipj , ip1 , ip1mj , j , jj , j1 , j2 , K , kmider , kmj , km1 , &
     kpk , mflag , N
-  DOUBLE PRECISION A , fkmj , T , Work , X
+  REAL(8) :: A , fkmj , T , Work , X
   DIMENSION T(*) , A(*) , Work(*)
   !***FIRST EXECUTABLE STATEMENT  DBVALU
   DBVALU = 0.0D0

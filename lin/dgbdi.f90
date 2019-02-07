@@ -60,9 +60,9 @@ SUBROUTINE DGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGBDI
   INTEGER Lda , N , Ml , Mu , Ipvt(*)
-  DOUBLE PRECISION Abd(Lda,*) , Det(2)
+  REAL(8) :: Abd(Lda,*) , Det(2)
   !
-  DOUBLE PRECISION ten
+  REAL(8) :: ten
   INTEGER i , m
   !***FIRST EXECUTABLE STATEMENT  DGBDI
   m = Ml + Mu + 1

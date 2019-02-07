@@ -77,9 +77,9 @@ SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   !
   INTEGER Id , Ierr , iflg , ilo , il1 , il2 , K , left , mflag , N , npk , &
     np1
-  DOUBLE PRECISION a , aa , ans , b , bb , Bcoef , q , Quad , T , ta , tb , &
+  REAL(8) :: a , aa , ans , b , bb , Bcoef , q , Quad , T , ta , tb , &
     Tol , Work , wtol , X1 , X2
-  DOUBLE PRECISION D1MACH , F
+  REAL(8) :: D1MACH , F
   DIMENSION T(*) , Bcoef(*) , Work(*)
   EXTERNAL F
   !***FIRST EXECUTABLE STATEMENT  DBFQAD

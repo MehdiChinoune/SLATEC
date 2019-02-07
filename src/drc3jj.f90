@@ -127,11 +127,11 @@ SUBROUTINE DRC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   !***END PROLOGUE  DRC3JJ
   !
   INTEGER Ndim , Ier
-  DOUBLE PRECISION L2 , L3 , M2 , M3 , L1min , L1max , Thrcof(Ndim)
+  REAL(8) :: L2 , L3 , M2 , M3 , L1min , L1max , Thrcof(Ndim)
   !
   INTEGER i , index , lstep , n , nfin , nfinp1 , nfinp2 , nfinp3 , nlim , &
     nstep2
-  DOUBLE PRECISION a1 , a1s , a2 , a2s , c1 , c1old , c2 , cnorm , D1MACH , &
+  REAL(8) :: a1 , a1s , a2 , a2s , c1 , c1old , c2 , cnorm , D1MACH , &
     denom , dv , eps , huge , l1 , m1 , newfac , oldfac , &
     one , ratio , sign1 , sign2 , srhuge , srtiny , sum1 , &
     sum2 , sumbac , sumfor , sumuni , three , thresh , tiny , &

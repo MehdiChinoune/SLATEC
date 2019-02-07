@@ -33,7 +33,7 @@ INTEGER FUNCTION IDLOC(Loc,Sx,Ix)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   910731  Added code to set IDLOC to 0 if LOC is non-positive.  (WRB)
   !***END PROLOGUE  IDLOC
-  DOUBLE PRECISION Sx(*)
+  REAL(8) :: Sx(*)
   INTEGER Ix(*)
   !***FIRST EXECUTABLE STATEMENT  IDLOC
   IF ( Loc<=0 ) THEN

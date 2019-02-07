@@ -50,7 +50,7 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSWAP
-  DOUBLE PRECISION Dx(*) , Dy(*) , dtemp1 , dtemp2 , dtemp3
+  REAL(8) :: Dx(*) , Dy(*) , dtemp1 , dtemp2 , dtemp3
   !***FIRST EXECUTABLE STATEMENT  DSWAP
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy ) THEN

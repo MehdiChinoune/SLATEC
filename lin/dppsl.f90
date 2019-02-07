@@ -62,9 +62,9 @@ SUBROUTINE DPPSL(Ap,N,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPPSL
   INTEGER N
-  DOUBLE PRECISION Ap(*) , B(*)
+  REAL(8) :: Ap(*) , B(*)
   !
-  DOUBLE PRECISION DDOT , t
+  REAL(8) :: DDOT , t
   INTEGER k , kb , kk
   !***FIRST EXECUTABLE STATEMENT  DPPSL
   kk = 0

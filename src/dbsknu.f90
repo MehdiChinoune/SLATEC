@@ -89,13 +89,13 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
   !
   INTEGER i , iflag , inu , j , k , kk , Kode , koded , N , nn , Nz
   INTEGER I1MACH
-  DOUBLE PRECISION a , ak , a1 , a2 , b , bk , cc , ck , coef , cx , dk , &
+  REAL(8) :: a , ak , a1 , a2 , b , bk , cc , ck , coef , cx , dk , &
     dnu , dnu2 , elim , etest , ex , f , fc , fhs , fk , &
     fks , flrx , fmu , Fnu , g1 , g2 , p , pi , pt , p1 , &
     p2 , q , rthpi , rx , s , smu , sqk , st , s1 , s2 , tm , &
     tol , t1 , t2 , X , x1 , x2 , Y
   DIMENSION a(160) , b(160) , Y(*) , cc(8)
-  DOUBLE PRECISION DGAMMA , D1MACH
+  REAL(8) :: DGAMMA , D1MACH
   EXTERNAL DGAMMA
   SAVE x1 , x2 , pi , rthpi , cc
   DATA x1 , x2/2.0D0 , 17.0D0/

@@ -60,13 +60,13 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !   920422  Changed CALL to DHFTI to include variable MA.  (WRB)
   !***END PROLOGUE  DLSI
   INTEGER Ip(*) , Ma , Mdw , Mg , Mode , N
-  DOUBLE PRECISION Prgopt(*) , Rnorm , W(Mdw,*) , Ws(*) , X(*)
+  REAL(8) :: Prgopt(*) , Rnorm , W(Mdw,*) , Ws(*) , X(*)
   !
   EXTERNAL D1MACH , DASUM , DAXPY , DCOPY , DDOT , DH12 , DHFTI , DLPDP , &
     DSCAL , DSWAP
-  DOUBLE PRECISION D1MACH , DASUM , DDOT
+  REAL(8) :: D1MACH , DASUM , DDOT
   !
-  DOUBLE PRECISION anorm , drelpr , fac , gam , rb , tau , tol , xnorm
+  REAL(8) :: anorm , drelpr , fac , gam , rb , tau , tol , xnorm
   INTEGER i , j , k , key , krank , krm1 , krp1 , l , last , link , m , &
     map1 , mdlpdp , minman , n1 , n2 , n3 , next , np1
   LOGICAL cov , first , sclcov

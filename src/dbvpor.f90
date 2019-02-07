@@ -132,7 +132,7 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DBVPOR
   !
-  DOUBLE PRECISION DDOT
+  REAL(8) :: DDOT
   INTEGER i , i1 , i2 , ic , ICOco , Iflag , IGOfx , INDpvt , INFo , &
     INHomo , INTeg , ira , isflg , ISTkop , IVP , j , k , KNSwot , &
     kod , KOP , kpts , kwc , kwd , kws , kwt , l , LOTjp , m , &
@@ -141,7 +141,7 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nic , NICd , Niv , nn , non , NOPg , NPS , Nrowa , Nrowb , Nrowy , &
     NSWot , NTApe , Ntp , NTPd , NUMort , Nxpts , NXPtsd , Ip(Nfcc,*)&
     , Iwork(*)
-  DOUBLE PRECISION A(Nrowa,*) , AE , Alpha(*) , B(Nrowb,*) , Beta(*) , C , &
+  REAL(8) :: A(Nrowa,*) , AE , Alpha(*) , B(Nrowb,*) , Beta(*) , C , &
     Coef(*) , G(*) , P(Ntp,*) , PWCnd , PX , RE , S(*) , &
     Stowa(*) , TND , TOL , U(Ncomp,Nfc,*) , V(Ncomp,*) , &
     W(Nfcc,*) , Work(*) , X , XBEg , XENd , XOP , XOT , &

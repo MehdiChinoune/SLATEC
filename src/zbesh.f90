@@ -161,7 +161,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   !***END PROLOGUE  ZBESH
   !
   !     COMPLEX CY,Z,ZN,ZT,CSGN
-  DOUBLE PRECISION aa , alim , aln , arg , az , Cyi , Cyr , dig , elim , &
+  REAL(8) :: aa , alim , aln , arg , az , Cyi , Cyr , dig , elim , &
     fmm , fn , Fnu , fnul , hpi , rhpi , rl , r1m5 , sgn , &
     str , tol , ufl , Zi , zni , znr , Zr , zti , D1MACH , &
     ZABS , bb , ascle , rtol , atol , sti , csgnr , csgni

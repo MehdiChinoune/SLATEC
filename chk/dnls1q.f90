@@ -30,17 +30,17 @@ SUBROUTINE DNLS1Q(Lun,Kprint,Ipass)
   !     .. Scalar Arguments ..
   INTEGER Ipass , Kprint , Lun
   !     .. Local Scalars ..
-  DOUBLE PRECISION fnorm , fnorms , one , sigma , temp1 , temp2 , temp3 , &
+  REAL(8) :: fnorm , fnorms , one , sigma , temp1 , temp2 , temp3 , &
     tol , tol2 , zero
   INTEGER i , iflag , info , infos , iopt , kontrl , ldfjac , lwa , m , n , &
     nerr , nprint
   LOGICAL fatal
   !     .. Local Arrays ..
-  DOUBLE PRECISION fjac(10,2) , fjrow(2) , fjtj(3) , fvec(10) , wa(40) , &
+  REAL(8) :: fjac(10,2) , fjrow(2) , fjtj(3) , fvec(10) , wa(40) , &
     x(2)
   INTEGER iw(2)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DENORM
+  REAL(8) :: D1MACH , DENORM
   INTEGER NUMXER
   EXTERNAL D1MACH , DENORM , NUMXER
   !     .. External Subroutines ..

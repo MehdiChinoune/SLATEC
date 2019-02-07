@@ -108,7 +108,7 @@ SUBROUTINE DSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !     .. Scalar Arguments ..
   INTEGER Isym , N , Nelt
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nelt) , X(N) , Y(N)
+  REAL(8) :: A(Nelt) , X(N) , Y(N)
   INTEGER Ia(Nelt) , Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER i , ibgn , icol , iend , irow , j , jbgn , jend

@@ -64,7 +64,7 @@ SUBROUTINE DPNNZR(I,Xval,Iplace,Sx,Ix,Ircx)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   !***END PROLOGUE  DPNNZR
   DIMENSION Ix(*)
-  DOUBLE PRECISION Xval , Sx(*) , zero
+  REAL(8) :: Xval , Sx(*) , zero
   SAVE zero
   DATA zero/0.D0/
   !***FIRST EXECUTABLE STATEMENT  DPNNZR

@@ -100,10 +100,10 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !           D. Amos.  Included correction of argument list.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DEXINT
-  DOUBLE PRECISION a , aa , aams , ah , ak , at , b , bk , bt , cc , cnorm , &
+  REAL(8) :: a , aa , aams , ah , ak , at , b , bk , bt , cc , cnorm , &
     ct , em , emx , En , etol , fnm , fx , pt , p1 , p2 , s , &
     Tol , tx , X , xcut , xlim , xtol , y , yt , y1 , y2
-  DOUBLE PRECISION D1MACH , DPSIXN
+  REAL(8) :: D1MACH , DPSIXN
   INTEGER i , ic , icase , ict , Ierr , ik , ind , ix , i1m , jset , k , &
     kk , kn , Kode , ks , M , ml , mu , N , nd , nm , Nz
   INTEGER I1MACH

@@ -29,7 +29,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     COMPLEX AI,ARG,ARGD,ASUM,ASUMD,BSUM,BSUMD,CFN,CI,CIP,CK,CONE,CRSC,
   !    *CR1,CR2,CS,CSCL,CSGN,CSPN,CSR,CSS,CY,CZERO,C1,C2,DAI,PHI,PHID,RZ,
   !    *S1,S2,Y,Z,ZB,ZETA1,ZETA1D,ZETA2,ZETA2D,ZN,ZR
-  DOUBLE PRECISION aarg , aic , aii , air , Alim , ang , aphi , argdi , &
+  REAL(8) :: aarg , aic , aii , air , Alim , ang , aphi , argdi , &
     argdr , argi , argr , asc , ascle , asumdi , asumdr , &
     asumi , asumr , bry , bsumdi , bsumdr , bsumi , bsumr , &
     car , cipi , cipr , cki , ckr , coner , crsc , cr1i , &

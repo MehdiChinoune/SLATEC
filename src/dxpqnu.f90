@@ -30,9 +30,9 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXPQNU
-  DOUBLE PRECISION a , nu , Nu1 , Nu2 , pq , Pqa , DXPSI , r , Theta , w , &
+  REAL(8) :: a , nu , Nu1 , Nu2 , pq , Pqa , DXPSI , r , Theta , w , &
     x , x1 , x2 , xs , y , z
-  DOUBLE PRECISION di , dmu , pq1 , pq2 , factmu , flok
+  REAL(8) :: di , dmu , pq1 , pq2 , factmu , flok
   DIMENSION Pqa(*) , Ipqa(*)
   COMMON /DXBLK1/ NBItsf
   SAVE /DXBLK1/

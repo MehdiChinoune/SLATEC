@@ -164,11 +164,11 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   IMPLICIT NONE
   !*--DLLSIA165
   !*** Start of declarations inserted by SPAG
-  DOUBLE PRECISION A , Ae , B , eps , Re , Rnorm , W
+  REAL(8) :: A , Ae , B , eps , Re , Rnorm , W
   INTEGER i , Info , it , Key , Krank , Ksure , Liw , Lw , M , Mda , Mdb , &
     Mode , N , n1 , n2 , n3 , n4 , n5 , Nb , Np
   !*** End of declarations inserted by SPAG
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   DIMENSION A(Mda,*) , B(Mdb,*) , Re(*) , Ae(*) , Rnorm(*) , W(*)
   INTEGER Iwork(*)
   !

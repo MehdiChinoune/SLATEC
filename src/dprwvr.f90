@@ -40,7 +40,7 @@ SUBROUTINE DPRWVR(Key,Ipage,Lpg,Sx,Ix)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   !***END PROLOGUE  DPRWVR
   DIMENSION Ix(*)
-  DOUBLE PRECISION Sx(*) , zero , one
+  REAL(8) :: Sx(*) , zero , one
   LOGICAL first
   SAVE zero , one
   DATA zero , one/0.D0 , 1.D0/

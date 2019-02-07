@@ -39,9 +39,9 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXADJ
-  DOUBLE PRECISION X
+  REAL(8) :: X
   INTEGER Ix
-  DOUBLE PRECISION RADix , RADixl , RAD2l , DLG10r
+  REAL(8) :: RADix , RADixl , RAD2l , DLG10r
   INTEGER L , L2 , KMAx
   COMMON /DXBLK2/ RADix , RADixl , RAD2l , DLG10r , L , L2 , KMAx
   SAVE /DXBLK2/

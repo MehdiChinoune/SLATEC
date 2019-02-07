@@ -33,10 +33,10 @@ SUBROUTINE DHKSEQ(X,M,H,Ierr)
   !***END PROLOGUE  DHKSEQ
   INTEGER i , Ierr , j , k , M , mx , nx
   INTEGER I1MACH
-  DOUBLE PRECISION b , fk , fln , fn , fnp , H , hrx , rln , rxsq , r1m5 , &
+  REAL(8) :: b , fk , fln , fn , fnp , H , hrx , rln , rxsq , r1m5 , &
     s , slope , t , tk , trm , trmh , trmr , tst , u , v , &
     wdtol , X , xdmy , xh , xinc , xm , xmin , yint
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   DIMENSION b(22) , trm(22) , trmr(25) , trmh(25) , u(25) , v(25) , H(*)
   SAVE b
   !-----------------------------------------------------------------------

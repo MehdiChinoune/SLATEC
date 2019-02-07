@@ -1,6 +1,6 @@
 !*==DPCHID.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DPCHID
-DOUBLE PRECISION FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
+REAL(8) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   IMPLICIT NONE
   !*--DPCHID5
   !***BEGIN PROLOGUE  DPCHID
@@ -110,13 +110,13 @@ DOUBLE PRECISION FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N , Incfd , Ia , Ib , Ierr
-  DOUBLE PRECISION X(*) , F(Incfd,*) , D(Incfd,*)
+  REAL(8) :: X(*) , F(Incfd,*) , D(Incfd,*)
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i , iup , low
-  DOUBLE PRECISION h , half , six , sum , value , zero
+  REAL(8) :: h , half , six , sum , value , zero
   SAVE zero , half , six
   !
   !  INITIALIZE.

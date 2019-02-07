@@ -66,13 +66,13 @@ SUBROUTINE DEVCHK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
   !  Declare arguments.
   !
   INTEGER Lout , Kprint , Npts
-  DOUBLE PRECISION Xev(*) , Fev(*) , Dev(*) , Fev2(*)
+  REAL(8) :: Xev(*) , Fev(*) , Dev(*) , Fev2(*)
   LOGICAL Fail
   !
   !  DECLARATIONS.
   !
   INTEGER i , ierr , iint , next(2) , next2(2) , nint
-  DOUBLE PRECISION aed , aed2 , aedmax , aedmin , aef , aef2 , aefmax ,&
+  REAL(8) :: aed , aed2 , aedmax , aedmin , aef , aef2 , aefmax ,&
     aefmin , check(2) , checkf(2) , checkd(2) , d1 , d2 ,&
     dermax , dtrue , dx , eps1 , eps2 , f1 , f2 , fact ,&
     fermax , floord , floorf , four , ftrue , left(3) ,&
@@ -82,7 +82,7 @@ SUBROUTINE DEVCHK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
     xrdmax , xrdmin , xrfmax , xrfmin , zero
   LOGICAL failoc , failnx
   !
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   !       The following should stay REAL (no D.P. equivalent).
   REAL RAND
   EXTERNAL RAND

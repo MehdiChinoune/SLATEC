@@ -431,8 +431,8 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !     /SROTG/ TO /DROTG/, /SROT/ TO /DROT/, /E0/ TO /D0/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
-  DOUBLE PRECISION W(Mdw,*) , Bl(*) , Bu(*) , X(*) , Rw(*)
-  DOUBLE PRECISION sc , ss , one , DNRM2 , Rnorm , zero
+  REAL(8) :: W(Mdw,*) , Bl(*) , Bu(*) , X(*) , Rw(*)
+  REAL(8) :: sc , ss , one , DNRM2 , Rnorm , zero
   !
   !     THIS VARIABLE SHOULD REMAIN TYPE REAL.
   INTEGER Ind(*) , Iopt(*) , Iw(*)

@@ -44,7 +44,7 @@ SUBROUTINE DSLI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !     .. Scalar Arguments ..
   INTEGER Isym , N , Nelt
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nelt) , B(N) , Rwork(*) , X(N)
+  REAL(8) :: A(Nelt) , B(N) , Rwork(*) , X(N)
   INTEGER Ia(Nelt) , Iwork(10) , Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locel , lociel , locjel , nel

@@ -35,9 +35,9 @@ SUBROUTINE DBJYCK(Lun,Kprint,Ipass)
   !           Wronskian.  (WRB)
   !***END PROLOGUE  DBJYCK
   INTEGER i , Ipass , ix , k , kontrl , Lun , m , n , nerr , nu , ny
-  DOUBLE PRECISION alp , del , er , fnu , fnup , rhpi , rx , tol , x
-  DOUBLE PRECISION fn(3) , w(5) , xx(5) , y(5)
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: alp , del , er , fnu , fnup , rhpi , rx , tol , x
+  REAL(8) :: fn(3) , w(5) , xx(5) , y(5)
+  REAL(8) :: D1MACH
   LOGICAL fatal
   !***FIRST EXECUTABLE STATEMENT  DBJYCK
   IF ( Kprint>=2 ) WRITE (Lun,99001)

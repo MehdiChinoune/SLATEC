@@ -1,6 +1,6 @@
 !*==DCBRT.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DCBRT
-DOUBLE PRECISION FUNCTION DCBRT(X)
+REAL(8) FUNCTION DCBRT(X)
   IMPLICIT NONE
   !*--DCBRT5
   !*** Start of declarations inserted by SPAG
@@ -27,7 +27,7 @@ DOUBLE PRECISION FUNCTION DCBRT(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DCBRT
-  DOUBLE PRECISION X , cbrt2(5) , y , cbrtsq , D9PAK , D1MACH
+  REAL(8) :: X , cbrt2(5) , y , cbrtsq , D9PAK , D1MACH
   SAVE cbrt2 , niter
   DATA cbrt2(1)/0.62996052494743658238360530363911D0/
   DATA cbrt2(2)/0.79370052598409973737585281963615D0/

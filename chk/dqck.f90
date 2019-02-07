@@ -42,7 +42,7 @@ SUBROUTINE DQCK(Lun,Kprint,Nerr)
   !           including removing an illegal character from column 1, and
   !           editorial changes.  (RWC)
   !***END PROLOGUE  DQCK
-  DOUBLE PRECISION a(4,4) , at(5,4) , abe(5,7) , abet(5,7) , b(4) , bt(4) ,&
+  REAL(8) :: a(4,4) , at(5,4) , abe(5,7) , abet(5,7) , b(4) , bt(4) ,&
     c(4) , work(35) , sign , D1MACH
   REAL r , delx , delmax
   CHARACTER(4) :: list(2)

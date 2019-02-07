@@ -107,12 +107,12 @@ SUBROUTINE DTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   INTEGER Incx , Lda , N
   CHARACTER :: Diag , Trans , Uplo
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Lda,*) , X(*)
+  REAL(8) :: A(Lda,*) , X(*)
   !     .. Parameters ..
-  DOUBLE PRECISION ZERO
+  REAL(8) :: ZERO
   PARAMETER (ZERO=0.0D+0)
   !     .. Local Scalars ..
-  DOUBLE PRECISION temp
+  REAL(8) :: temp
   INTEGER i , info , ix , j , jx , kx
   LOGICAL nounit
   !     .. External Functions ..

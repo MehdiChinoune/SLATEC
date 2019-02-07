@@ -185,7 +185,7 @@ SUBROUTINE DSOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !***END PROLOGUE  DSOS
   INTEGER Iflag , inpflg , iprint , Iw(*) , k1 , k2 , k3 , k4 , k5 , k6 ,&
     Liw , Lrw , mxit , nc , ncjs , Neq , nsri , nsrrc
-  DOUBLE PRECISION Atolx , FNC , Rtolx , Rw(*) , Tolf , X(*)
+  REAL(8) :: Atolx , FNC , Rtolx , Rw(*) , Tolf , X(*)
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3 , xern4
   EXTERNAL FNC

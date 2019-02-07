@@ -35,7 +35,7 @@ SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBESKS
-  DOUBLE PRECISION Xnu , X , Bk(*) , expxi , xmax , D1MACH
+  REAL(8) :: Xnu , X , Bk(*) , expxi , xmax , D1MACH
   SAVE xmax
   DATA xmax/0.D0/
   !***FIRST EXECUTABLE STATEMENT  DBESKS

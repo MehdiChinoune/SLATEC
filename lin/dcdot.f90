@@ -42,7 +42,7 @@ SUBROUTINE DCDOT(N,Fm,Cx,Incx,Cy,Incy,Dcr,Dci)
   !***END PROLOGUE  DCDOT
   INTEGER i , Incx , Incy , kx , ky , N
   COMPLEX Cx(*) , Cy(*)
-  DOUBLE PRECISION Dcr , Dci , dt1 , dt2 , dt3 , dt4 , Fm
+  REAL(8) :: Dcr , Dci , dt1 , dt2 , dt3 , dt4 , Fm
   !***FIRST EXECUTABLE STATEMENT  DCDOT
   Dcr = 0.0D0
   Dci = 0.0D0
@@ -53,10 +53,10 @@ SUBROUTINE DCDOT(N,Fm,Cx,Incx,Cy,Incy,Dcr,Dci)
     IF ( Incx<0 ) kx = 1 + (1-N)*Incx
     IF ( Incy<0 ) ky = 1 + (1-N)*Incy
     DO i = 1 , N
-      dt1 = DBLE(REAL(Cx(kx)))
-      dt2 = DBLE(REAL(Cy(ky)))
-      dt3 = DBLE(AIMAG(Cx(kx)))
-      dt4 = DBLE(AIMAG(Cy(ky)))
+      dt1 = REAL(REAL(Cx(kx)), 8)
+      dt2 = REAL(REAL(Cy(ky)), 8)
+      dt3 = REAL(AIMAG(Cx(kx)), 8)
+      dt4 = REAL(AIMAG(Cy(ky)), 8)
       Dcr = Dcr + (dt1*dt2) - Fm*(dt3*dt4)
       Dci = Dci + (dt1*dt4) + Fm*(dt3*dt2)
       kx = kx + Incx

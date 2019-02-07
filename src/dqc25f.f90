@@ -110,7 +110,7 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQC25F
   !
-  DOUBLE PRECISION A , Abserr , ac , an , an2 , as , asap , ass , B , &
+  REAL(8) :: A , Abserr , ac , an , an2 , as , asap , ass , B , &
     centr , Chebmo , cheb12 , cheb24 , conc , cons , cospar , &
     d , DQWGTF , d1 , D1MACH , d2 , estc , ests , F , fval , &
     hlgth , oflow , Omega , parint , par2 , par22 , p2 , p3 , &

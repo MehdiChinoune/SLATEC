@@ -90,7 +90,7 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQC25S
   !
-  DOUBLE PRECISION A , Abserr , Alfa , B , Beta , Bl , Br , centr , cheb12 , &
+  REAL(8) :: A , Abserr , Alfa , B , Beta , Bl , Br , centr , cheb12 , &
     cheb24 , dc , F , factor , fix , fval , hlgth , resabs , &
     Resasc , Result , res12 , res24 , Rg , Rh , Ri , Rj , u , &
     DQWGTS , x

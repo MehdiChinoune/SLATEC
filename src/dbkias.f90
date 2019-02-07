@@ -26,11 +26,11 @@ SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !***END PROLOGUE  DBKIAS
   INTEGER i , ii , Ind , j , jmi , jn , k , kk , km , Ktrms , mm , mp , Ms , &
     N , Ierr
-  DOUBLE PRECISION Ans , b , bnd , den1 , den2 , den3 , er , err , fj , fk , &
+  REAL(8) :: Ans , b , bnd , den1 , den2 , den3 , er , err , fj , fk , &
     fln , fm1 , Gmrn , g1 , gs , H , hn , hrtpi , rat , rg1 , &
     rxp , rz , rzx , s , ss , sumi , sumj , T , tol , v , w , &
     X , xp , z
-  DOUBLE PRECISION DGAMRN , D1MACH
+  REAL(8) :: DGAMRN , D1MACH
   DIMENSION b(120) , xp(16) , s(31) , H(*) , v(52) , w(52) , T(50) , bnd(15)
   SAVE b , bnd , hrtpi
   !-----------------------------------------------------------------------

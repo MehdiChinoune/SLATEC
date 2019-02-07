@@ -144,12 +144,12 @@ SUBROUTINE DTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   INTEGER Incx , K , Lda , N
   CHARACTER :: Diag , Trans , Uplo
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Lda,*) , X(*)
+  REAL(8) :: A(Lda,*) , X(*)
   !     .. Parameters ..
-  DOUBLE PRECISION ZERO
+  REAL(8) :: ZERO
   PARAMETER (ZERO=0.0D+0)
   !     .. Local Scalars ..
-  DOUBLE PRECISION temp
+  REAL(8) :: temp
   INTEGER i , info , ix , j , jx , kplus1 , kx , l
   LOGICAL nounit
   !     .. External Functions ..

@@ -114,14 +114,14 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER Ic(2) , N , Incfd , Ierr
-  DOUBLE PRECISION Vc(2) , X(*) , H(*) , Slope(*) , D(Incfd,*)
+  REAL(8) :: Vc(2) , X(*) , H(*) , Slope(*) , D(Incfd,*)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER ibeg , iend , ierf , index , j , k
-  DOUBLE PRECISION half , stemp(3) , three , two , xtemp(4) , zero
+  REAL(8) :: half , stemp(3) , three , two , xtemp(4) , zero
   SAVE zero , half , two , three
-  DOUBLE PRECISION DPCHDF , DPCHST
+  REAL(8) :: DPCHDF , DPCHST
   !
   !  INITIALIZE.
   !

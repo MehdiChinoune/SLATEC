@@ -27,7 +27,7 @@ SUBROUTINE DXPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXPMU
-  DOUBLE PRECISION Pqa , Nu1 , Nu2 , p0 , X , Sx , Theta , x1 , x2
+  REAL(8) :: Pqa , Nu1 , Nu2 , p0 , X , Sx , Theta , x1 , x2
   DIMENSION Pqa(*) , Ipqa(*)
   !
   !        CALL DXPQNU TO OBTAIN P(-MU2,NU,X)

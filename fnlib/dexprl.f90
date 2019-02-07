@@ -1,6 +1,6 @@
 !*==DEXPRL.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DEXPRL
-DOUBLE PRECISION FUNCTION DEXPRL(X)
+REAL(8) FUNCTION DEXPRL(X)
   IMPLICIT NONE
   !*--DEXPRL5
   !*** Start of declarations inserted by SPAG
@@ -31,7 +31,7 @@ DOUBLE PRECISION FUNCTION DEXPRL(X)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DEXPRL
-  DOUBLE PRECISION X , absx , alneps , xbnd , xln , xn , D1MACH
+  REAL(8) :: X , absx , alneps , xbnd , xln , xn , D1MACH
   LOGICAL first
   SAVE nterms , xbnd , first
   DATA first/.TRUE./

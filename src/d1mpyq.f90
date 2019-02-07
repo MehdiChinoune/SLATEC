@@ -60,7 +60,7 @@ SUBROUTINE D1MPYQ(M,N,A,Lda,V,W)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  D1MPYQ
   INTEGER i , j , Lda , M , N , nm1 , nmj
-  DOUBLE PRECISION A(Lda,*) , cos , one , sin , temp , V(*) , W(*)
+  REAL(8) :: A(Lda,*) , cos , one , sin , temp , V(*) , W(*)
   SAVE one
   DATA one/1.0D0/
   !

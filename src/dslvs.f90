@@ -28,7 +28,7 @@ SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
   !
   INTEGER i , IER , IOWnd , IOWns , Iwm , JSTart , KFLag , L , MAXord , &
     meband , METh , MITer , ml , mu , N , NFE , NJE , NQ , NQU , NST
-  DOUBLE PRECISION di , EL0 , H , hl0 , HMIn , HMXi , HU , phl0 , r , &
+  REAL(8) :: di , EL0 , H , hl0 , HMIn , HMXi , HU , phl0 , r , &
     ROWnd , ROWns , Tem , TN , UROund , Wm , X
   DIMENSION Wm(*) , Iwm(*) , X(*) , Tem(*)
   COMMON /DDEBD1/ ROWnd , ROWns(210) , EL0 , H , HMIn , HMXi , HU , TN , &

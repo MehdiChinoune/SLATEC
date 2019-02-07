@@ -27,7 +27,7 @@ SUBROUTINE FDTRUE(X,F,D)
   !   900321  Changed name of d.p. version from DFTRUE to DFDTRU.
   !***END PROLOGUE  FDTRUE
   REAL X , F , D
-  DOUBLE PRECISION fact1 , fact2 , xx
+  REAL(8) :: fact1 , fact2 , xx
   !
   !***FIRST EXECUTABLE STATEMENT  FDTRUE
   xx = X

@@ -61,10 +61,10 @@ SUBROUTINE DGTSL(N,C,D,E,B,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGTSL
   INTEGER N , Info
-  DOUBLE PRECISION C(*) , D(*) , E(*) , B(*)
+  REAL(8) :: C(*) , D(*) , E(*) , B(*)
   !
   INTEGER k , kb , kp1 , nm1 , nm2
-  DOUBLE PRECISION t
+  REAL(8) :: t
   !***FIRST EXECUTABLE STATEMENT  DGTSL
   Info = 0
   C(1) = D(1)

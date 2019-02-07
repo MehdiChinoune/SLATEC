@@ -50,7 +50,7 @@ SUBROUTINE DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   !***END PROLOGUE  DFEHL
   !
   INTEGER Ipar , k , Neq
-  DOUBLE PRECISION ch , F1 , F2 , F3 , F4 , F5 , H , Rpar , T , Y , Yp , Ys
+  REAL(8) :: ch , F1 , F2 , F3 , F4 , F5 , H , Rpar , T , Y , Yp , Ys
   DIMENSION Y(*) , Yp(*) , F1(*) , F2(*) , F3(*) , F4(*) , F5(*) , Ys(*) , &
     Rpar(*) , Ipar(*)
   !

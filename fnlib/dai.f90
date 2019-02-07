@@ -1,6 +1,6 @@
 !*==DAI.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DAI
-DOUBLE PRECISION FUNCTION DAI(X)
+REAL(8) FUNCTION DAI(X)
   IMPLICIT NONE
   !*--DAI5
   !*** Start of declarations inserted by SPAG
@@ -40,7 +40,7 @@ DOUBLE PRECISION FUNCTION DAI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DAI
-  DOUBLE PRECISION X , aifcs(13) , aigcs(13) , theta , xm , xmax , x3sml , &
+  REAL(8) :: X , aifcs(13) , aigcs(13) , theta , xm , xmax , x3sml , &
     z , D1MACH , DCSEVL , DAIE , xmaxt
   LOGICAL first
   SAVE aifcs , aigcs , naif , naig , x3sml , xmax , first

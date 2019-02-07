@@ -24,7 +24,7 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
   !
   !
   INTEGER i , ib , Meth , nq , nqm1 , nqp1
-  DOUBLE PRECISION agamq , Elco , fnq , fnqm1 , pc , pint , ragq , rq1fac , &
+  REAL(8) :: agamq , Elco , fnq , fnqm1 , pc , pint , ragq , rq1fac , &
     rqfac , Tesco , tsign , xpin
   DIMENSION Elco(13,12) , Tesco(3,12)
   !     ------------------------------------------------------------------

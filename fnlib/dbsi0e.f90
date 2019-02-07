@@ -1,6 +1,6 @@
 !*==DBSI0E.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBSI0E
-DOUBLE PRECISION FUNCTION DBSI0E(X)
+REAL(8) FUNCTION DBSI0E(X)
   IMPLICIT NONE
   !*--DBSI0E5
   !*** Start of declarations inserted by SPAG
@@ -50,7 +50,7 @@ DOUBLE PRECISION FUNCTION DBSI0E(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DBSI0E
-  DOUBLE PRECISION X , bi0cs(18) , ai0cs(46) , ai02cs(69) , xsml , y , &
+  REAL(8) :: X , bi0cs(18) , ai0cs(46) , ai02cs(69) , xsml , y , &
     D1MACH , DCSEVL
   LOGICAL first
   SAVE bi0cs , ai0cs , ai02cs , nti0 , ntai0 , ntai02 , xsml , first

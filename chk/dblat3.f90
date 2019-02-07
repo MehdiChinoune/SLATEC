@@ -32,20 +32,20 @@ SUBROUTINE DBLAT3(Nout,Kprint,Ipass)
   !     .. Parameters ..
   INTEGER NSUBS
   PARAMETER (NSUBS=6)
-  DOUBLE PRECISION ZERO , ONE
+  REAL(8) :: ZERO , ONE
   PARAMETER (ZERO=0.0D0,ONE=1.0D0)
   INTEGER NMAX
   PARAMETER (NMAX=65)
   !     .. Scalar Arguments ..
   INTEGER Ipass , Kprint
   !     .. Local Scalars ..
-  DOUBLE PRECISION eps , err , thresh
+  REAL(8) :: eps , err , thresh
   INTEGER i , isnum , j , n , NALF , NBET , NIDIM , Nout
   PARAMETER (NIDIM=6,NALF=3,NBET=3)
   LOGICAL same , tsterr , ftl , ftl1 , ftl2
   CHARACTER :: transa , transb
   !     .. Local Arrays ..
-  DOUBLE PRECISION ab(NMAX,2*NMAX) , aa(NMAX*NMAX) , alf(NALF) ,&
+  REAL(8) :: ab(NMAX,2*NMAX) , aa(NMAX*NMAX) , alf(NALF) ,&
     as(NMAX*NMAX) , bet(NBET) , g(NMAX) , bb(NMAX*NMAX) ,&
     bs(NMAX*NMAX) , c(NMAX,NMAX) , cc(NMAX*NMAX) ,&
     cs(NMAX*NMAX) , ct(NMAX) , w(2*NMAX)

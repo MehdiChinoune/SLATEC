@@ -80,9 +80,9 @@ SUBROUTINE DGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGBSL
   INTEGER Lda , N , Ml , Mu , Ipvt(*) , Job
-  DOUBLE PRECISION Abd(Lda,*) , B(*)
+  REAL(8) :: Abd(Lda,*) , B(*)
   !
-  DOUBLE PRECISION DDOT , t
+  REAL(8) :: DDOT , t
   INTEGER k , kb , l , la , lb , lm , m , nm1
   !***FIRST EXECUTABLE STATEMENT  DGBSL
   m = Mu + Ml + 1

@@ -29,7 +29,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !***END PROLOGUE  ZUNI2
   !     COMPLEX AI,ARG,ASUM,BSUM,CFN,CI,CID,CIP,CONE,CRSC,CSCL,CSR,CSS,
   !    *CZERO,C1,C2,DAI,PHI,RZ,S1,S2,Y,Z,ZB,ZETA1,ZETA2,ZN
-  DOUBLE PRECISION aarg , aic , aii , air , Alim , ang , aphi , argi , &
+  REAL(8) :: aarg , aic , aii , air , Alim , ang , aphi , argi , &
     argr , ascle , asumi , asumr , bry , bsumi , bsumr , &
     cidi , cipi , cipr , coner , crsc , cscl , csrr , cssr , &
     c1r , c2i , c2m , c2r , daii , dair , Elim , fn , Fnu , &

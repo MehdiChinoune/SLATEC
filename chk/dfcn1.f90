@@ -25,12 +25,12 @@ SUBROUTINE DFCN1(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
   !   930214  TYPE and declarations sections added.  (WRB)
   !***END PROLOGUE  DFCN1
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Fjac
+  REAL(8) :: Fjac
   INTEGER Iflag , Ldfjac , M , N
   !     .. Array Arguments ..
-  DOUBLE PRECISION Fvec(*) , X(*)
+  REAL(8) :: Fvec(*) , X(*)
   !     .. Local Scalars ..
-  DOUBLE PRECISION temp , two
+  REAL(8) :: temp , two
   INTEGER i
   !     .. Intrinsic Functions ..
   INTRINSIC EXP

@@ -200,20 +200,20 @@ INTEGER FUNCTION ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  ISDCGN
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Ak , Bk , Bnrm , Err , Solnrm , Tol
+  REAL(8) :: Ak , Bk , Bnrm , Err , Solnrm , Tol
   INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(N) , Atdz(N) , Atp(N) , Atz(N) , B(N) , Dz(N) , P(N) , &
+  REAL(8) :: A(N) , Atdz(N) , Atp(N) , Atz(N) , B(N) , Dz(N) , P(N) , &
     R(N) , Rwork(*) , X(N) , Z(N)
   INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL MATVEC , MSOLVE , MTTVEC
   !     .. Arrays in Common ..
-  DOUBLE PRECISION SOLn(1)
+  REAL(8) :: SOLn(1)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DNRM2
+  REAL(8) :: D1MACH , DNRM2
   EXTERNAL D1MACH , DNRM2
   !     .. Common blocks ..
   COMMON /DSLBLK/ SOLn

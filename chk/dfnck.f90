@@ -41,7 +41,7 @@ SUBROUTINE DFNCK(Lun,Kprint,Ipass)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DFNCK
   INTEGER i , Lun , Kprint , Ipass
-  DOUBLE PRECISION D1MACH , y(105) , v(105) , errmax , errtol , abserr , &
+  REAL(8) :: D1MACH , y(105) , v(105) , errmax , errtol , abserr , &
     relerr , D9ATN1 , D9LN2R , DACOSH , DAI , DAIE , DASINH , &
     DATANH , DBESI0 , DBESI1 , DBESJ0 , DBESJ1 , DBESK0 , &
     DBESK1 , DBESY0 , DBESY1 , DBETA , DBETAI , DBI , DBIE , &

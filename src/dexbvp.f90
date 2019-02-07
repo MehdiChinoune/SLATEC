@@ -39,7 +39,7 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,&
     NEEdiw , NEEdw , NEQ , NEQivp , NFC , NFCc , NIC , NOPg , NPS ,&
     Nrowa , Nrowb , Nrowy , nsafiw , nsafw , NSWot , NTApe , NTP ,&
     NUMort , NXPts
-  DOUBLE PRECISION A(Nrowa,*) , AE , Alpha(*) , B(Nrowb,*) , Beta(*) , C ,&
+  REAL(8) :: A(Nrowa,*) , AE , Alpha(*) , B(Nrowb,*) , Beta(*) , C ,&
     EPS , FOUru , PWCnd , PX , RE , SQOvfl , SRU , TND ,&
     TOL , TWOu , URO , Work(*) , X , XBEg , XENd , xl , XOP ,&
     XOT , Xpts(*) , XSAv , Y(Nrowy,*) , zquit

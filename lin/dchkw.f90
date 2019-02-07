@@ -69,13 +69,13 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   !   921015  Added code to initialize ITER and ERR when IERR=0.  (FNF)
   !***END PROLOGUE  DCHKW
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Err
+  REAL(8) :: Err
   INTEGER Ierr , Iter , Leniw , Lenw , Lociw , Locw
   CHARACTER Name*(*)
   !     .. Local Scalars ..
   CHARACTER xern1*8 , xern2*8 , xernam*8
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   EXTERNAL D1MACH
   !     .. External Subroutines ..
   EXTERNAL XERMSG

@@ -34,17 +34,17 @@ SUBROUTINE DBSPCK(Lun,Kprint,Ipass)
   !     .. Scalar Arguments ..
   INTEGER Ipass , Kprint , Lun
   !     .. Local Scalars ..
-  DOUBLE PRECISION atol , bquad , bv , den , dn , er , fbcl , fbcr , pi , &
+  REAL(8) :: atol , bquad , bv , den , dn , er , fbcl , fbcr , pi , &
     pquad , quad , spv , tol , x1 , x2 , xl , xx
   INTEGER i , ibcl , ibcr , id , ierr , iknt , ileft , ilo , inbv , inev , &
     inppv , iwork , j , jhigh , jj , k , kk , knt , kntopt , kontrl , &
     ldc , ldcc , lxi , mflag , n , ndata , nerr , nmk , nn
   LOGICAL fatal
   !     .. Local Arrays ..
-  DOUBLE PRECISION adif(52) , bc(13) , c(4,10) , cc(4,4) , q(3) , qq(77) , &
+  REAL(8) :: adif(52) , bc(13) , c(4,10) , cc(4,4) , q(3) , qq(77) , &
     qsave(2) , sv(4) , t(17) , w(65) , x(11) , xi(11) , y(11)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DBVALU , DFB , DPPVAL
+  REAL(8) :: D1MACH , DBVALU , DFB , DPPVAL
   INTEGER NUMXER
   !     .. External Subroutines ..
   EXTERNAL DBFQAD , DBINT4 , DBINTK , DBSPDR , DBSPEV , DBSPPP , DBSPVD , &

@@ -1,6 +1,6 @@
 !*==DBESJ0.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBESJ0
-DOUBLE PRECISION FUNCTION DBESJ0(X)
+REAL(8) FUNCTION DBESJ0(X)
   IMPLICIT NONE
   !*--DBESJ05
   !*** Start of declarations inserted by SPAG
@@ -34,7 +34,7 @@ DOUBLE PRECISION FUNCTION DBESJ0(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DBESJ0
-  DOUBLE PRECISION X , bj0cs(19) , ampl , theta , xsml , y , D1MACH , DCSEVL
+  REAL(8) :: X , bj0cs(19) , ampl , theta , xsml , y , D1MACH , DCSEVL
   LOGICAL first
   SAVE bj0cs , ntj0 , xsml , first
   DATA bj0cs(1)/ + .10025416196893913701073127264074D+0/

@@ -94,15 +94,15 @@ SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N , Incfd
-  DOUBLE PRECISION H(*) , Slope(*) , D(Incfd,*)
+  REAL(8) :: H(*) , Slope(*) , D(Incfd,*)
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i , nless1
-  DOUBLE PRECISION del1 , del2 , dmax , dmin , drat1 , drat2 , hsum , &
+  REAL(8) :: del1 , del2 , dmax , dmin , drat1 , drat2 , hsum , &
     hsumt3 , three , w1 , w2 , zero
   SAVE zero , three
-  DOUBLE PRECISION DPCHST
+  REAL(8) :: DPCHST
   !
   !  INITIALIZE.
   !

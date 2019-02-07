@@ -44,7 +44,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     Nfcc , NFCcd , NFCd , nfcp1 , NIC , Niv , non , NOPg , NPS , &
     NSWot , NTApe , Ntp , NTPd , NUMort , Nxpts , NXPtsd , Ip(Nfcc,*)&
     , Iwork(*)
-  DOUBLE PRECISION AE , C , G(*) , P(Ntp,*) , PWCnd , PX , RE , S(*) , &
+  REAL(8) :: AE , C , G(*) , P(Ntp,*) , PWCnd , PX , RE , S(*) , &
     Stowa(*) , TND , TOL , U(Ncomp,Nfc,*) , V(Ncomp,*) , &
     W(Nfcc,*) , Work(*) , X , XBEg , XENd , XOP , XOT , &
     Xpts(*) , XSAv , xxop , Yhp(Ncomp,*) , Z(*)

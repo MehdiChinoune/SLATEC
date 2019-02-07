@@ -24,7 +24,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  ZBUNI
   !     COMPLEX CSCL,CSCR,CY,RZ,ST,S1,S2,Y,Z
-  DOUBLE PRECISION Alim , ax , ay , csclr , cscrr , cyi , cyr , dfnu , &
+  REAL(8) :: Alim , ax , ay , csclr , cscrr , cyi , cyr , dfnu , &
     Elim , Fnu , fnui , Fnul , gnu , raz , rzi , rzr , sti , &
     str , s1i , s1r , s2i , s2r , Tol , Yi , Yr , Zi , Zr , &
     ZABS , ascle , bry , c1r , c1i , c1m , D1MACH

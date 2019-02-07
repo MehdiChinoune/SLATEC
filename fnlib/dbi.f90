@@ -1,6 +1,6 @@
 !*==DBI.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBI
-DOUBLE PRECISION FUNCTION DBI(X)
+REAL(8) FUNCTION DBI(X)
   IMPLICIT NONE
   !*--DBI5
   !*** Start of declarations inserted by SPAG
@@ -53,7 +53,7 @@ DOUBLE PRECISION FUNCTION DBI(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBI
-  DOUBLE PRECISION X , bifcs(13) , bigcs(13) , bif2cs(15) , big2cs(15) , &
+  REAL(8) :: X , bifcs(13) , bigcs(13) , bif2cs(15) , big2cs(15) , &
     theta , xm , xmax , x3sml , z , D1MACH , DCSEVL , DBIE
   LOGICAL first
   SAVE bifcs , bigcs , bif2cs , big2cs , nbif , nbig , nbif2 , nbig2 , &

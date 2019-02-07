@@ -341,7 +341,7 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !***END PROLOGUE  DNSQE
   INTEGER index , Info , Iopt , j , lr , Lwa , maxfev , ml , mode , mu , N , &
     nfev , njev , Nprint
-  DOUBLE PRECISION epsfcn , factor , Fvec(*) , one , Tol , Wa(*) , X(*) , &
+  REAL(8) :: epsfcn , factor , Fvec(*) , one , Tol , Wa(*) , X(*) , &
     xtol , zero
   EXTERNAL FCN , JAC
   SAVE factor , one , zero

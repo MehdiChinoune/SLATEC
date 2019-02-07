@@ -52,7 +52,7 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !***END PROLOGUE  DH12
   INTEGER i , i2 , i3 , i4 , Ice , Icv , incr , Iue , j , kl1 , kl2 , klp , &
     L1 , l1m1 , Lpivot , M , mml1p2 , Mode , Ncv
-  DOUBLE PRECISION b , C , cl , clinv , one , ul1m1 , sm , U , Up , DDOT
+  REAL(8) :: b , C , cl , clinv , one , ul1m1 , sm , U , Up , DDOT
   DIMENSION U(Iue,*) , C(*)
   !     BEGIN BLOCK PERMITTING ...EXITS TO 140
   !***FIRST EXECUTABLE STATEMENT  DH12

@@ -1,6 +1,6 @@
 !*==DT2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DT2
-DOUBLE PRECISION FUNCTION DT2(X)
+REAL(8) FUNCTION DT2(X)
   IMPLICIT NONE
   !*--DT25
   !***BEGIN PROLOGUE  DT2
@@ -12,7 +12,7 @@ DOUBLE PRECISION FUNCTION DT2(X)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DT2
-  DOUBLE PRECISION a , b , DF2S , X , x1 , y
+  REAL(8) :: a , b , DF2S , X , x1 , y
   !***FIRST EXECUTABLE STATEMENT  DT2
   a = 0.1D+00
   b = 0.1D+01

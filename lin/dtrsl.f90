@@ -72,10 +72,10 @@ SUBROUTINE DTRSL(T,Ldt,N,B,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DTRSL
   INTEGER Ldt , N , Job , Info
-  DOUBLE PRECISION T(Ldt,*) , B(*)
+  REAL(8) :: T(Ldt,*) , B(*)
   !
   !
-  DOUBLE PRECISION DDOT , temp
+  REAL(8) :: DDOT , temp
   INTEGER case , j , jj
   !***FIRST EXECUTABLE STATEMENT  DTRSL
   !

@@ -1,6 +1,6 @@
 !*==DDANRM.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DDANRM
-DOUBLE PRECISION FUNCTION DDANRM(Neq,V,Wt,Rpar,Ipar)
+REAL(8) FUNCTION DDANRM(Neq,V,Wt,Rpar,Ipar)
   IMPLICIT NONE
   !*--DDANRM5
   !***BEGIN PROLOGUE  DDANRM
@@ -27,10 +27,10 @@ DOUBLE PRECISION FUNCTION DDANRM(Neq,V,Wt,Rpar,Ipar)
   !***END PROLOGUE  DDANRM
   !
   INTEGER Neq , Ipar(*)
-  DOUBLE PRECISION V(Neq) , Wt(Neq) , Rpar(*)
+  REAL(8) :: V(Neq) , Wt(Neq) , Rpar(*)
   !
   INTEGER i
-  DOUBLE PRECISION sum , vmax
+  REAL(8) :: sum , vmax
   !
   !***FIRST EXECUTABLE STATEMENT  DDANRM
   DDANRM = 0.0D0

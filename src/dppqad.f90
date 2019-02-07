@@ -54,7 +54,7 @@ SUBROUTINE DPPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   !
   INTEGER i , ii , il , ilo , il1 , il2 , im , K , Ldc , left , Lxi , mf1 , &
     mf2
-  DOUBLE PRECISION a , aa , bb , C , dx , flk , Pquad , q , s , ss , ta , &
+  REAL(8) :: a , aa , bb , C , dx , flk , Pquad , q , s , ss , ta , &
     tb , x , Xi , X1 , X2
   DIMENSION Xi(*) , C(Ldc,*) , ss(2)
   !

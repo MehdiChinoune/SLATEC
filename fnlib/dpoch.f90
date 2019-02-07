@@ -1,6 +1,6 @@
 !*==DPOCH.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DPOCH
-DOUBLE PRECISION FUNCTION DPOCH(A,X)
+REAL(8) FUNCTION DPOCH(A,X)
   IMPLICIT NONE
   !*--DPOCH5
   !*** Start of declarations inserted by SPAG
@@ -33,7 +33,7 @@ DOUBLE PRECISION FUNCTION DPOCH(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DPOCH
-  DOUBLE PRECISION A , X , absa , absax , alnga , alngax , ax , b , pi , &
+  REAL(8) :: A , X , absa , absax , alnga , alngax , ax , b , pi , &
     sgnga , sgngax , DFAC , DLNREL , D9LGMC , DGAMMA , &
     DGAMR , DCOT
   EXTERNAL DGAMMA
@@ -74,7 +74,7 @@ DOUBLE PRECISION FUNCTION DPOCH(A,X)
   IF ( A<=0.0D0.AND.AINT(A)==A ) RETURN
   !
   n = ABS(X)
-  IF ( DBLE(n)/=X.OR.n>20 ) THEN
+  IF ( REAL(n, 8)/=X.OR.n>20 ) THEN
     !
     absax = ABS(A+X)
     absa = ABS(A)

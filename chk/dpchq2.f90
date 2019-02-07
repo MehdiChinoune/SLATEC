@@ -63,13 +63,13 @@ SUBROUTINE DPCHQ2(Lun,Kprint,Ipass)
   !  DECLARE VARIABLES.
   !
   INTEGER i , ierexp(17) , ierr , ifail , n , npairs
-  DOUBLE PRECISION a(17) , b(17) , calc , d(7) , errmax , error , f(7) ,&
+  REAL(8) :: a(17) , b(17) , calc , d(7) , errmax , error , f(7) ,&
     machep , one , three , thrqtr , tol , true , two , x(7)
   LOGICAL fail , skip
   !
   !  DECLARE EXTERNALS.
   !
-  DOUBLE PRECISION DPCHIA , D1MACH
+  REAL(8) :: DPCHIA , D1MACH
   !
   !  INITIALIZE.
   !

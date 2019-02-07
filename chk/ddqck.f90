@@ -32,14 +32,14 @@ SUBROUTINE DDQCK(Lun,Kprint,Ipass)
   !   890405  Revised to meet SLATEC standards.
   !***END PROLOGUE  DDQCK
   EXTERNAL DDF
-  DOUBLE PRECISION ALFA , eps , ewt(1) , HMAX , D1MACH , t , tout
+  REAL(8) :: ALFA , eps , ewt(1) , HMAX , D1MACH , t , tout
   INTEGER ierflg , IERROR , IMPL , Ipass , Kprint , leniw , leniwx , lenw , &
     LENWMX , lenwx , LIWMX , Lun , mint , MITER , ML , mstate , MU , &
     MXORD , MXSTEP , N , nde , nfe , nje , NROOT , nstate , nstep , &
     NTASK , nx
   PARAMETER (ALFA=1.D0,HMAX=15.D0,IERROR=3,IMPL=0,LENWMX=342,LIWMX=53,&
     MITER=5,ML=2,MU=2,MXORD=5,MXSTEP=1000,N=3,NROOT=0,NTASK=1)
-  DOUBLE PRECISION work(LENWMX) , y(N+1)
+  REAL(8) :: work(LENWMX) , y(N+1)
   INTEGER iwork(LIWMX)
   DATA ewt(1)/.00001D0/
   !***FIRST EXECUTABLE STATEMENT  DDQCK

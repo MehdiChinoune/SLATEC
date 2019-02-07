@@ -106,8 +106,8 @@ SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !***END PROLOGUE  DGEFS
   !
   INTEGER Lda , N , Itask , Ind , Iwork(*)
-  DOUBLE PRECISION A(Lda,*) , V(*) , Work(*) , D1MACH
-  DOUBLE PRECISION rcond
+  REAL(8) :: A(Lda,*) , V(*) , Work(*) , D1MACH
+  REAL(8) :: rcond
   CHARACTER(8) :: xern1 , xern2
   !***FIRST EXECUTABLE STATEMENT  DGEFS
   IF ( Lda<N ) THEN

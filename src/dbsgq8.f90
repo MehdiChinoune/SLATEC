@@ -76,11 +76,11 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   INTEGER Id , Ierr , Inbv , k , Kk , kml , kmx , l , lmn , lmx , lr , mxl ,&
     N , nbits , nib , nlmn , nlmx
   INTEGER I1MACH
-  DOUBLE PRECISION A , aa , ae , anib , Ans , area , B , Bc , c , ce , ee ,&
+  REAL(8) :: A , aa , ae , anib , Ans , area , B , Bc , c , ce , ee ,&
     ef , eps , Err , est , gl , glr , gr , hh , sq2 , tol ,&
     vl , vr , Work , w1 , w2 , w3 , w4 , Xt , x1 , x2 , x3 ,&
     x4 , x , h
-  DOUBLE PRECISION D1MACH , DBVALU
+  REAL(8) :: D1MACH , DBVALU
   DIMENSION Xt(*) , Bc(*) , Work(*)
   DIMENSION aa(60) , hh(60) , lr(60) , vl(60) , gr(60)
   SAVE x1 , x2 , x3 , x4 , w1 , w2 , w3 , w4 , sq2 , nlmn , kmx , kml

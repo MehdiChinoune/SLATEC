@@ -39,8 +39,8 @@ SUBROUTINE DQCPSI(Lun,Kprint,Ipass)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQCPSI
   INTEGER i , ierr , iflg , ix , kode , Lun , m , n , nm , nn , nz
-  DOUBLE PRECISION er , euler , psi1 , psi2 , r1m4 , s , tol , x
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: er , euler , psi1 , psi2 , r1m4 , s , tol , x
+  REAL(8) :: D1MACH
   DIMENSION psi1(3) , psi2(20)
   DATA euler/0.5772156649015328606D0/
   !***FIRST EXECUTABLE STATEMENT  DQCPSI

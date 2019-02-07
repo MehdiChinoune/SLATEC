@@ -23,7 +23,7 @@ SUBROUTINE DUSRMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DUSRMT
-  DOUBLE PRECISION Prgopt(*) , Dattrv(*) , Aij
+  REAL(8) :: Prgopt(*) , Dattrv(*) , Aij
   INTEGER Iflag(*)
   !
   !***FIRST EXECUTABLE STATEMENT  DUSRMT

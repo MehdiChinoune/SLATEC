@@ -57,7 +57,7 @@ SUBROUTINE QXDRKF(Lun,Kprint,Ipass)
   !     Declare local variables.
   !
   INTEGER idid , info(15) , ipar , iwork(34) , n , liw , lrw , nstep
-  DOUBLE PRECISION abserr , D1MACH , r , relerr , reltol , rpar , rwork(61)&
+  REAL(8) :: abserr , D1MACH , r , relerr , reltol , rpar , rwork(61)&
     , t , tout , u(4)
   EXTERNAL DFDEQC
   !***FIRST EXECUTABLE STATEMENT  QXDRKF

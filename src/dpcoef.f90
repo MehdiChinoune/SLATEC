@@ -59,7 +59,7 @@ SUBROUTINE DPCOEF(L,C,Tc,A)
   !***END PROLOGUE  DPCOEF
   !
   INTEGER i , L , ll , llp1 , llp2 , new , nr
-  DOUBLE PRECISION A(*) , C , fac , save , Tc(*)
+  REAL(8) :: A(*) , C , fac , save , Tc(*)
   !***FIRST EXECUTABLE STATEMENT  DPCOEF
   ll = ABS(L)
   llp1 = ll + 1

@@ -249,19 +249,19 @@ SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !***END PROLOGUE  DCG
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Err , Tol
+  REAL(8) :: Err , Tol
   INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nelt) , B(N) , Dz(N) , P(N) , R(N) , Rwork(*) , X(N) , &
+  REAL(8) :: A(Nelt) , B(N) , Dz(N) , P(N) , R(N) , Rwork(*) , X(N) , &
     Z(N)
   INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL MATVEC , MSOLVE
   !     .. Local Scalars ..
-  DOUBLE PRECISION ak , akden , bk , bkden , bknum , bnrm , solnrm , tolmin
+  REAL(8) :: ak , akden , bk , bkden , bknum , bnrm , solnrm , tolmin
   INTEGER i , k
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DDOT
+  REAL(8) :: D1MACH , DDOT
   INTEGER ISDCG
   EXTERNAL D1MACH , DDOT , ISDCG
   !     .. External Subroutines ..

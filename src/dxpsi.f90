@@ -1,6 +1,6 @@
 !*==DXPSI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DXPSI
-DOUBLE PRECISION FUNCTION DXPSI(A,Ipsik,Ipsix)
+REAL(8) FUNCTION DXPSI(A,Ipsik,Ipsix)
   IMPLICIT NONE
   !*--DXPSI5
   !*** Start of declarations inserted by SPAG
@@ -24,7 +24,7 @@ DOUBLE PRECISION FUNCTION DXPSI(A,Ipsik,Ipsix)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXPSI
-  DOUBLE PRECISION A , b , c , cnum , cdenom
+  REAL(8) :: A , b , c , cnum , cdenom
   DIMENSION cnum(12) , cdenom(12)
   SAVE cnum , cdenom
   !

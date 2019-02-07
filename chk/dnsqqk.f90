@@ -27,13 +27,13 @@ SUBROUTINE DNSQQK(Lun,Kprint,Ipass)
   !     .. Scalar Arguments ..
   INTEGER Ipass , Kprint , Lun
   !     .. Local Scalars ..
-  DOUBLE PRECISION fnorm , fnorms , tol
+  REAL(8) :: fnorm , fnorms , tol
   INTEGER icnt , info , infos , iopt , lwa , n , nprint
   !     .. Local Arrays ..
-  DOUBLE PRECISION fvec(2) , wa(19) , x(2)
+  REAL(8) :: fvec(2) , wa(19) , x(2)
   INTEGER itest(3)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DENORM
+  REAL(8) :: D1MACH , DENORM
   EXTERNAL D1MACH , DENORM
   !     .. External Subroutines ..
   EXTERNAL DNSQE , DQFCN2 , DQJAC2 , PASS

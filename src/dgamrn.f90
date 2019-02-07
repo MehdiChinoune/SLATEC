@@ -1,6 +1,6 @@
 !*==DGAMRN.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DGAMRN
-DOUBLE PRECISION FUNCTION DGAMRN(X)
+REAL(8) FUNCTION DGAMRN(X)
   IMPLICIT NONE
   !*--DGAMRN5
   !***BEGIN PROLOGUE  DGAMRN
@@ -51,9 +51,9 @@ DOUBLE PRECISION FUNCTION DGAMRN(X)
   !***END PROLOGUE  DGAMRN
   INTEGER i , i1m11 , k , mx , nx
   INTEGER I1MACH
-  DOUBLE PRECISION fln , gr , rln , s , tol , trm , X , xdmy , xinc , xm , &
+  REAL(8) :: fln , gr , rln , s , tol , trm , X , xdmy , xinc , xm , &
     xmin , xp , xsq
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   DIMENSION gr(12)
   SAVE gr
   !

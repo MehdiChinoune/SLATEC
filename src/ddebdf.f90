@@ -749,7 +749,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Ipar , IQUit , ISAvf , ITOl , itstar , ITStop , IWM , Iwork ,&
     IYH , iypout , JSTart , KFLag , KSTeps , L , Liw , Lrw , MAXord ,&
     METh , MITer , ml , mu , N , Neq , NFE , NJE , NQ , NQU , NST
-  DOUBLE PRECISION Atol , EL0 , H , HMIn , HMXi , HU , ROWns , Rpar , Rtol ,&
+  REAL(8) :: Atol , EL0 , H , HMIn , HMXi , HU , ROWns , Rpar , Rtol ,&
     Rwork , T , TN , TOLd , Tout , UROund , Y
   LOGICAL intout
   CHARACTER(8) :: xern1 , xern2

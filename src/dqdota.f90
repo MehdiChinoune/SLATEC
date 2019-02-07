@@ -1,6 +1,6 @@
 !*==DQDOTA.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQDOTA
-DOUBLE PRECISION FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
+REAL(8) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
   !*--DQDOTA5
   !*** Start of declarations inserted by SPAG
@@ -68,7 +68,7 @@ DOUBLE PRECISION FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   930124  Increased Array sizes for SUN -r8.  (RWC)
   !***END PROLOGUE  DQDOTA
-  DOUBLE PRECISION Dx(*) , Dy(*) , Db
+  REAL(8) :: Dx(*) , Dy(*) , Db
   INTEGER Qc(30) , qx(30) , qy(30)
   COMMON /MPCOM / MPB , MPT , MPM , MPLun , MPMxr , MPR(30)
   SAVE i1

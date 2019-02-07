@@ -80,7 +80,7 @@ SUBROUTINE FFTQX(Lun,Kprint,Ipass)
   !     .. Scalar Arguments ..
   INTEGER Ipass , Kprint , Lun
   !     .. Local Scalars ..
-  DOUBLE PRECISION arg , arg1 , arg2 , dt , pi , sum , sum1 , sum2
+  REAL(8) :: arg , arg1 , arg2 , dt , pi , sum , sum1 , sum2
   REAL azero , azeroh , cf , cosqbt , cosqfb , cosqft , costfb , costt , &
     dcfb , dcfftb , dcfftf , dezb1 , dezf1 , dezfb , errmax , rftb , &
     rftf , rftfb , sign , sinqbt , sinqfb , sinqft , sintfb , sintt , &

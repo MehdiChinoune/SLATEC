@@ -88,7 +88,7 @@ SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DQNG
   !
-  DOUBLE PRECISION A , absc , Abserr , B , centr , dhlgth , D1MACH , &
+  REAL(8) :: A , absc , Abserr , B , centr , dhlgth , D1MACH , &
     epmach , Epsabs , Epsrel , F , fcentr , fval , fval1 , &
     fval2 , fv1 , fv2 , fv3 , fv4 , hlgth , Result , res10 , &
     res21 , res43 , res87 , resabs , resasc , reskh , &

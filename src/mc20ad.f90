@@ -36,7 +36,7 @@ SUBROUTINE MC20AD(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  MC20AD
   INTEGER Inum(*) , Jnum(*)
-  DOUBLE PRECISION A(*) , ace , acep
+  REAL(8) :: A(*) , ace , acep
   DIMENSION Jptr(Nc)
   !***FIRST EXECUTABLE STATEMENT  MC20AD
   null = -Jdisp

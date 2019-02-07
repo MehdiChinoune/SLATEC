@@ -1,6 +1,6 @@
 !*==D9LGIC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9LGIC
-DOUBLE PRECISION FUNCTION D9LGIC(A,X,Alx)
+REAL(8) FUNCTION D9LGIC(A,X,Alx)
   IMPLICIT NONE
   !*--D9LGIC5
   !*** Start of declarations inserted by SPAG
@@ -31,7 +31,7 @@ DOUBLE PRECISION FUNCTION D9LGIC(A,X,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9LGIC
-  DOUBLE PRECISION A , X , Alx , eps , fk , p , r , s , t , xma , xpa , &
+  REAL(8) :: A , X , Alx , eps , fk , p , r , s , t , xma , xpa , &
     D1MACH
   SAVE eps
   DATA eps/0.D0/

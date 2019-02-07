@@ -31,9 +31,9 @@ SUBROUTINE DEG8CK(Lun,Kprint,Ipass)
   COMMON /DFEINX/ X , A , FKM
   INTEGER i , icase , ie , ierr , ii , ik , Ipass , ix , iy , k , ke , kk , &
     kode , kx , Lun , m , n , nm , nz
-  DOUBLE PRECISION A , ans , atol , bb , en , er , ex , FKM , sig , sum , &
+  REAL(8) :: A , ans , atol , bb , en , er , ex , FKM , sig , sum , &
     tol , t1 , t2 , X , xx , y
-  DOUBLE PRECISION D1MACH , DFEIN
+  REAL(8) :: D1MACH , DFEIN
   DIMENSION en(4) , y(4) , xx(5)
   LOGICAL fatal
   EXTERNAL DFEIN

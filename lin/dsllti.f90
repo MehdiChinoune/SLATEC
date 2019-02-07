@@ -46,7 +46,7 @@ SUBROUTINE DSLLTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !     .. Scalar Arguments ..
   INTEGER Isym , N , Nelt
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nelt) , B(*) , Rwork(*) , X(*)
+  REAL(8) :: A(Nelt) , B(*) , Rwork(*) , X(*)
   INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locdin , locel , lociel , locjel , nel

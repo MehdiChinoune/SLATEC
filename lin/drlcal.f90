@@ -75,12 +75,12 @@ SUBROUTINE DRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Prod , R0nrm , Snormw
+  REAL(8) :: Prod , R0nrm , Snormw
   INTEGER Kmp , Ll , Maxl , N
   !     .. Array Arguments ..
-  DOUBLE PRECISION Q(*) , Rl(N) , V(N,*)
+  REAL(8) :: Q(*) , Rl(N) , V(N,*)
   !     .. Local Scalars ..
-  DOUBLE PRECISION c , s , tem
+  REAL(8) :: c , s , tem
   INTEGER i , i2 , ip1 , k , llm1 , llp1
   !     .. External Subroutines ..
   EXTERNAL DCOPY , DSCAL

@@ -1,6 +1,6 @@
 !*==DRF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DRF
-DOUBLE PRECISION FUNCTION DRF(X,Y,Z,Ier)
+REAL(8) FUNCTION DRF(X,Y,Z,Ier)
   IMPLICIT NONE
   !*--DRF5
   !***BEGIN PROLOGUE  DRF
@@ -253,10 +253,10 @@ DOUBLE PRECISION FUNCTION DRF(X,Y,Z,Ier)
   !***END PROLOGUE  DRF
   CHARACTER(16) :: xern3 , xern4 , xern5 , xern6
   INTEGER Ier
-  DOUBLE PRECISION lolim , uplim , epslon , errtol , D1MACH
-  DOUBLE PRECISION c1 , c2 , c3 , e2 , e3 , lamda
-  DOUBLE PRECISION mu , s , X , xn , xndev
-  DOUBLE PRECISION xnroot , Y , yn , yndev , ynroot , Z , zn , zndev ,&
+  REAL(8) :: lolim , uplim , epslon , errtol , D1MACH
+  REAL(8) :: c1 , c2 , c3 , e2 , e3 , lamda
+  REAL(8) :: mu , s , X , xn , xndev
+  REAL(8) :: xnroot , Y , yn , yndev , ynroot , Z , zn , zndev ,&
     znroot
   LOGICAL first
   SAVE errtol , lolim , uplim , c1 , c2 , c3 , first

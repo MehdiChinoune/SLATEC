@@ -42,9 +42,9 @@ SUBROUTINE DXRED(X,Ix,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXRED
-  DOUBLE PRECISION X
+  REAL(8) :: X
   INTEGER Ix
-  DOUBLE PRECISION RADix , RADixl , RAD2l , DLG10r , xa
+  REAL(8) :: RADix , RADixl , RAD2l , DLG10r , xa
   INTEGER L , L2 , KMAx
   COMMON /DXBLK2/ RADix , RADixl , RAD2l , DLG10r , L , L2 , KMAx
   SAVE /DXBLK2/

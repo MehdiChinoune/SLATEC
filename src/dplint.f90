@@ -43,7 +43,7 @@ SUBROUTINE DPLINT(N,X,Y,C)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPLINT
   INTEGER i , k , km1 , N
-  DOUBLE PRECISION dif , C(*) , X(*) , Y(*)
+  REAL(8) :: dif , C(*) , X(*) , Y(*)
   !***FIRST EXECUTABLE STATEMENT  DPLINT
   IF ( N<=0 ) THEN
     CALL XERMSG('SLATEC','DPLINT','N IS ZERO OR NEGATIVE.',2,1)

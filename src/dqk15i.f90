@@ -82,7 +82,7 @@ SUBROUTINE DQK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQK15I
   !
-  DOUBLE PRECISION A , absc , absc1 , absc2 , Abserr , B , Boun , centr , &
+  REAL(8) :: A , absc , absc1 , absc2 , Abserr , B , Boun , centr , &
     dinf , D1MACH , epmach , F , fc , fsum , fval1 , fval2 , &
     fv1 , fv2 , hlgth , Resabs , Resasc , resg , resk , &
     reskh , Result , tabsc1 , tabsc2 , uflow , wg , wgk , xgk

@@ -54,9 +54,9 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
   !     .. Scalar Arguments ..
   INTEGER Kflag , N
   !     .. Array Arguments ..
-  DOUBLE PRECISION Dx(*) , Dy(*)
+  REAL(8) :: Dx(*) , Dy(*)
   !     .. Local Scalars ..
-  DOUBLE PRECISION r , t , tt , tty , ty
+  REAL(8) :: r , t , tt , tty , ty
   INTEGER i , ij , j , k , kk , l , m , nn
   !     .. Local Arrays ..
   INTEGER il(21) , iu(21)

@@ -79,7 +79,7 @@ SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   !***END PROLOGUE  DPOLVL
   INTEGER i , Ierr , im1 , izero , k , km1 , km1pi , km2pn , km2pni , m , &
     mm , N , ndr , Nder , nmkp1 , npkm1
-  DOUBLE PRECISION C(*) , fac , pione , pitwo , pone , ptwo , X(*) , xk , &
+  REAL(8) :: C(*) , fac , pione , pitwo , pone , ptwo , X(*) , xk , &
     Xx , Yfit , Yp(*) , Work(*)
   !***FIRST EXECUTABLE STATEMENT  DPOLVL
   Ierr = 1

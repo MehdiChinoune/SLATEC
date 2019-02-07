@@ -25,20 +25,20 @@ SUBROUTINE DCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
   !***END PROLOGUE  DCHK33
   !     .. Parameters ..
-  DOUBLE PRECISION ZERO , ONE
+  REAL(8) :: ZERO , ONE
   PARAMETER (ZERO=0.0D0,ONE=1.0D0)
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  DOUBLE PRECISION Eps , Thresh
+  REAL(8) :: Eps , Thresh
   INTEGER Kprint , Nalf , Nidim , Nmax , Nout
   CHARACTER(6) :: Sname
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax)&
+  REAL(8) :: A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax)&
     , G(Nmax) , Bb(Nmax*Nmax) , Bs(Nmax*Nmax) , C(Nmax,Nmax)&
     , Ct(Nmax) , B(Nmax,Nmax)
   INTEGER Idim(Nidim)
   !     .. Local Scalars ..
-  DOUBLE PRECISION alpha , als , err , errmax
+  REAL(8) :: alpha , als , err , errmax
   INTEGER i , ia , icd , ics , ict , icu , im , in , j , laa , lbb , lda ,&
     ldas , ldb , ldbs , m , ms , n , na , nargs , nc , nerr , ns
   LOGICAL ftl , left , null , reset

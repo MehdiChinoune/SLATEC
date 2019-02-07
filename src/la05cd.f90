@@ -44,7 +44,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
   !   920422  Changed upper limit on DO from LAST to LAST-1.  (WRB)
   !***END PROLOGUE  LA05CD
-  DOUBLE PRECISION A(*) , G , U , am , W(*) , SMAll , au
+  REAL(8) :: A(*) , G , U , am , W(*) , SMAll , au
   INTEGER Ind(Ia,2) , Iw(N,8)
   INTEGER Ip(N,2)
   CHARACTER(8) :: xern1

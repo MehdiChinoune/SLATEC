@@ -22,7 +22,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   !   930122  Added ZEXP and ZLOG to EXTERNAL statement.  (RWC)
   !***END PROLOGUE  ZMLRI
   !     COMPLEX CK,CNORM,CONE,CTWO,CZERO,PT,P1,P2,RZ,SUM,Y,Z
-  DOUBLE PRECISION ack , ak , ap , at , az , bk , cki , ckr , cnormi , &
+  REAL(8) :: ack , ak , ap , at , az , bk , cki , ckr , cnormi , &
     cnormr , conei , coner , fkap , fkk , flam , fnf , Fnu , &
     pti , ptr , p1i , p1r , p2i , p2r , raz , rho , rho2 , &
     rzi , rzr , scle , sti , str , sumi , sumr , tfnf , Tol , &

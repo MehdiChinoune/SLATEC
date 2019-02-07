@@ -159,7 +159,7 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   !***END PROLOGUE  ZBESI
   !     COMPLEX CONE,CSGN,CW,CY,CZERO,Z,ZN
-  DOUBLE PRECISION aa , alim , arg , conei , coner , csgni , csgnr , Cyi , &
+  REAL(8) :: aa , alim , arg , conei , coner , csgni , csgnr , Cyi , &
     Cyr , dig , elim , Fnu , fnul , pi , rl , r1m5 , str , &
     tol , Zi , zni , znr , Zr , D1MACH , az , bb , fn , &
     ZABS , ascle , rtol , atol , sti

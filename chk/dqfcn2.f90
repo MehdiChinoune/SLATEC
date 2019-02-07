@@ -25,7 +25,7 @@ SUBROUTINE DQFCN2(N,X,Fvec,Iflag)
   !     .. Scalar Arguments ..
   INTEGER Iflag , N
   !     .. Array Arguments ..
-  DOUBLE PRECISION Fvec(*) , X(*)
+  REAL(8) :: Fvec(*) , X(*)
   !***FIRST EXECUTABLE STATEMENT  DQFCN2
   Fvec(1) = 1.0D0 - X(1)
   Fvec(2) = 10.0D0*(X(2)-X(1)**2)

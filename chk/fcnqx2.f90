@@ -36,9 +36,9 @@ SUBROUTINE FCNQX2(Lun,Kprint,Ipass)
   DIMENSION p(10) , q(10) , r(10) , c1(10) , c2(10) , ip(10) , iq(10) ,&
     ir(10)
   DIMENSION ic1(10) , ic2(10) , pn(10) , ipn(10)
-  DOUBLE PRECISION p , q , r , c1 , c2 , pn
-  DOUBLE PRECISION deg , theta , dnu1 , dzero
-  DOUBLE PRECISION x11 , x12 , x13 , x21 , x22 , x23
+  REAL(8) :: p , q , r , c1 , c2 , pn
+  REAL(8) :: deg , theta , dnu1 , dzero
+  REAL(8) :: x11 , x12 , x13 , x21 , x22 , x23
   REAL nu
   !
   !***FIRST EXECUTABLE STATEMENT  FCNQX2

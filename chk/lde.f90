@@ -23,7 +23,7 @@ LOGICAL FUNCTION LDE(Ri,Rj,Lr)
   !     .. Scalar Arguments ..
   INTEGER Lr
   !     .. Array Arguments ..
-  DOUBLE PRECISION Ri(*) , Rj(*)
+  REAL(8) :: Ri(*) , Rj(*)
   !     .. Local Scalars ..
   INTEGER i
   !***FIRST EXECUTABLE STATEMENT  LDE

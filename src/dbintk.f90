@@ -96,7 +96,7 @@ SUBROUTINE DBINTK(X,Y,T,N,K,Bcoef,Q,Work)
   !
   INTEGER iflag , iwork , K , N , i , ilp1mx , j , jj , km1 , kpkm2 , left , &
     lenq , np1
-  DOUBLE PRECISION Bcoef(*) , Y(*) , Q(*) , T(*) , X(*) , xi , Work(*)
+  REAL(8) :: Bcoef(*) , Y(*) , Q(*) , T(*) , X(*) , xi , Work(*)
   !     DIMENSION Q(2*K-1,N), T(N+K)
   !***FIRST EXECUTABLE STATEMENT  DBINTK
   IF ( K<1 ) THEN

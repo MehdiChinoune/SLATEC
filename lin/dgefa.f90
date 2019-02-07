@@ -62,9 +62,9 @@ SUBROUTINE DGEFA(A,Lda,N,Ipvt,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGEFA
   INTEGER Lda , N , Ipvt(*) , Info
-  DOUBLE PRECISION A(Lda,*)
+  REAL(8) :: A(Lda,*)
   !
-  DOUBLE PRECISION t
+  REAL(8) :: t
   INTEGER IDAMAX , j , k , kp1 , l , nm1
   !
   !     GAUSSIAN ELIMINATION WITH PARTIAL PIVOTING

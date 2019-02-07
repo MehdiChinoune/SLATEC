@@ -82,7 +82,7 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Mtrold , Mtrsv , Mu , MXFAIL , MXITER , Mxrdsv , MXTRY , N , Nde , &
     NDJSTP , nfail , Nfe , Nje , Nq , Nqused , Nstep , nsv , ntry , &
     Nwait
-  DOUBLE PRECISION A(Matdim,*) , Avgh , Avgord , BIAS1 , BIAS2 , BIAS3 , &
+  REAL(8) :: A(Matdim,*) , Avgh , Avgord , BIAS1 , BIAS2 , BIAS3 , &
     bnd , ctest , d , denom , Dfdy(Matdim,*) , d1 , El(13,12)&
     , Eps , erdn , erup , etest , Fac(*) , H , Hmax , hn , &
     Hold , hs , Hused , numer , Rc , RCTEST , rh , rh1 , &
@@ -247,7 +247,7 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
       Save2(i) = Save1(i)/MAX(ABS(Y(i)),Ywt(i))
     ENDDO
   ENDIF
-  etest = DNRM2(Nde,Save2,1)/(Tq(2,Nq)*SQRT(DBLE(Nde)))
+  etest = DNRM2(Nde,Save2,1)/(Tq(2,Nq)*SQRT(REAL(Nde, 8)))
   !
   !                           The error test failed.  NFAIL keeps track of
   !                           multiple failures.  Restore T and the YH
@@ -271,7 +271,7 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
             Save2(i) = Yh(i,Nq+1)/MAX(ABS(Y(i)),Ywt(i))
           ENDDO
         ENDIF
-        erdn = DNRM2(Nde,Save2,1)/(Tq(1,Nq)*SQRT(DBLE(Nde)))
+        erdn = DNRM2(Nde,Save2,1)/(Tq(1,Nq)*SQRT(REAL(Nde, 8)))
         rh1 = 1.D0/MAX(1.D0,BIAS1*(erdn/Eps)**(1.D0/Nq))
         IF ( rh2<rh1 ) THEN
           Nq = Nq - 1
@@ -414,7 +414,7 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
           Save2(i) = Yh(i,Nq+1)/MAX(ABS(Y(i)),Ywt(i))
         ENDDO
       ENDIF
-      erdn = DNRM2(Nde,Save2,1)/(Tq(1,Nq)*SQRT(DBLE(Nde)))
+      erdn = DNRM2(Nde,Save2,1)/(Tq(1,Nq)*SQRT(REAL(Nde, 8)))
       rh1 = 1.D0/MAX(Uround,BIAS1*(erdn/Eps)**(1.D0/Nq))
     ENDIF
     rh2 = 1.D0/MAX(Uround,BIAS2*(etest/Eps)**(1.D0/(Nq+1)))
@@ -430,7 +430,7 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
           Save2(i) = (Save1(i)-Yh(i,Maxord+1))/MAX(ABS(Y(i)),Ywt(i))
         ENDDO
       ENDIF
-      erup = DNRM2(Nde,Save2,1)/(Tq(3,Nq)*SQRT(DBLE(Nde)))
+      erup = DNRM2(Nde,Save2,1)/(Tq(3,Nq)*SQRT(REAL(Nde, 8)))
       rh3 = 1.D0/MAX(Uround,BIAS3*(erup/Eps)**(1.D0/(Nq+2)))
     ENDIF
     IF ( rh1>rh2.AND.rh1>=rh3 ) THEN

@@ -29,7 +29,7 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  ZACAI
   !     COMPLEX CSGN,CSPN,C1,C2,Y,Z,ZN,CY
-  DOUBLE PRECISION Alim , arg , ascle , az , csgnr , csgni , cspnr , cspni , &
+  REAL(8) :: Alim , arg , ascle , az , csgnr , csgni , cspnr , cspni , &
     c1r , c1i , c2r , c2i , cyr , cyi , dfnu , Elim , fmr , &
     Fnu , pi , Rl , sgn , Tol , yy , Yr , Yi , Zr , Zi , &
     znr , zni , D1MACH , ZABS

@@ -249,12 +249,12 @@ SUBROUTINE QCINTD(Lun,Kprint,Ipass)
   !     .. Scalar Arguments ..
   INTEGER Ipass , Kprint , Lun
   !     .. Local Scalars ..
-  DOUBLE PRECISION errtol
+  REAL(8) :: errtol
   INTEGER i
   !     .. Local Arrays ..
-  DOUBLE PRECISION v(60) , y(60)
+  REAL(8) :: v(60) , y(60)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DACOS , DASIN , DATAN , DATAN2 , DCOS , DCOSH , &
+  REAL(8) :: D1MACH , DACOS , DASIN , DATAN , DATAN2 , DCOS , DCOSH , &
     DEXP , DINT , DLOG , DLOG10 , DSIN , DSINH , DSQRT , &
     DTAN , DTANH
   EXTERNAL D1MACH , DACOS , DASIN , DATAN , DATAN2 , DCOS , DCOSH , DEXP , &

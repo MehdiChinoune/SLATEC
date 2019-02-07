@@ -216,21 +216,21 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Bnrm , Err , Rhol , Tol
+  REAL(8) :: Bnrm , Err , Rhol , Tol
   INTEGER Iflag , Isym , Itol , Iunit , Jpre , Jscal , Kmp , Lgmr , Maxl , &
     Maxlp1 , N , Nelt , Nmsl , Nrmax , Nrsts
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nelt) , B(*) , Dl(*) , Hes(Maxlp1,*) , Q(*) , R0(*) , &
+  REAL(8) :: A(Nelt) , B(*) , Dl(*) , Hes(Maxlp1,*) , Q(*) , R0(*) , &
     Rpar(*) , Sr(*) , Sz(*) , V(N,*) , Wk(*) , X(*) , Xl(*) , &
     Z(*)
   INTEGER Ia(Nelt) , Ipar(*) , Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL MATVEC , MSOLVE
   !     .. Local Scalars ..
-  DOUBLE PRECISION c , dlnrm , prod , r0nrm , rho , s , snormw , tem
+  REAL(8) :: c , dlnrm , prod , r0nrm , rho , s , snormw , tem
   INTEGER i , i2 , info , ip1 , iter , itmax , j , k , ll , llp1
   !     .. External Functions ..
-  DOUBLE PRECISION DNRM2
+  REAL(8) :: DNRM2
   INTEGER ISDGMR
   EXTERNAL DNRM2 , ISDGMR
   !     .. External Subroutines ..

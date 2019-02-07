@@ -167,20 +167,20 @@ INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !           output format.  (FNF)
   !***END PROLOGUE  ISDCG
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Ak , Bk , Bnrm , Err , Solnrm , Tol
+  REAL(8) :: Ak , Bk , Bnrm , Err , Solnrm , Tol
   INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nelt) , B(N) , Dz(N) , P(N) , R(N) , Rwork(*) , X(N) , &
+  REAL(8) :: A(Nelt) , B(N) , Dz(N) , P(N) , R(N) , Rwork(*) , X(N) , &
     Z(N)
   INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL MSOLVE
   !     .. Arrays in Common ..
-  DOUBLE PRECISION SOLn(1)
+  REAL(8) :: SOLn(1)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DNRM2
+  REAL(8) :: D1MACH , DNRM2
   EXTERNAL D1MACH , DNRM2
   !     .. Common blocks ..
   COMMON /DSLBLK/ SOLn

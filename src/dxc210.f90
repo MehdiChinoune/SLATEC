@@ -46,7 +46,7 @@ SUBROUTINE DXC210(K,Z,J,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXC210
-  DOUBLE PRECISION Z
+  REAL(8) :: Z
   INTEGER K , J
   INTEGER NLG102 , MLG102 , LG102
   COMMON /DXBLK3/ NLG102 , MLG102 , LG102(21)

@@ -50,20 +50,20 @@ COMPLEX FUNCTION CDCDOT(N,Cb,Cx,Incx,Cy,Incy)
   !***END PROLOGUE  CDCDOT
   INTEGER N , Incx , Incy , i , kx , ky
   COMPLEX Cx(*) , Cy(*) , Cb
-  DOUBLE PRECISION dsdotr , dsdoti , dt1 , dt2 , dt3 , dt4
+  REAL(8) :: dsdotr , dsdoti , dt1 , dt2 , dt3 , dt4
   !***FIRST EXECUTABLE STATEMENT  CDCDOT
-  dsdotr = DBLE(REAL(Cb))
-  dsdoti = DBLE(AIMAG(Cb))
+  dsdotr = REAL(REAL(Cb), 8)
+  dsdoti = REAL(AIMAG(Cb), 8)
   IF ( N>0 ) THEN
     kx = 1
     ky = 1
     IF ( Incx<0 ) kx = 1 + (1-N)*Incx
     IF ( Incy<0 ) ky = 1 + (1-N)*Incy
     DO i = 1 , N
-      dt1 = DBLE(REAL(Cx(kx)))
-      dt2 = DBLE(REAL(Cy(ky)))
-      dt3 = DBLE(AIMAG(Cx(kx)))
-      dt4 = DBLE(AIMAG(Cy(ky)))
+      dt1 = REAL(REAL(Cx(kx)), 8)
+      dt2 = REAL(REAL(Cy(ky)), 8)
+      dt3 = REAL(AIMAG(Cx(kx)), 8)
+      dt4 = REAL(AIMAG(Cy(ky)), 8)
       dsdotr = dsdotr + (dt1*dt2) - (dt3*dt4)
       dsdoti = dsdoti + (dt1*dt4) + (dt3*dt2)
       kx = kx + Incx

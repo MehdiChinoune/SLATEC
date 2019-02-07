@@ -23,7 +23,7 @@ SUBROUTINE DSRTQC(Lun,Kprint,Ipass)
   PARAMETER (N=9,NTEST=4)
   !
   LOGICAL fail
-  DOUBLE PRECISION x(N,NTEST) , xs(N,NTEST) , y(N) , yc(N)
+  REAL(8) :: x(N,NTEST) , xs(N,NTEST) , y(N) , yc(N)
   INTEGER ix(N,NTEST) , iy(N) , kflag(NTEST) , Kprint , Lun , Ipass , j , &
     i , kabs , ier , nerr , NUMXER , nn , kkflag
   !

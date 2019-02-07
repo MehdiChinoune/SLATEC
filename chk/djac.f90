@@ -17,7 +17,7 @@ SUBROUTINE DJAC(T,U,Pd,Nrowpd,Rpar,Ipar)
   !           DDJAC to DJAC.  (WRB)
   !***END PROLOGUE  DJAC
   INTEGER Ipar , Nrowpd
-  DOUBLE PRECISION Pd , r , r5 , Rpar , rsq , T , U , u1sq , u2sq , u1u2
+  REAL(8) :: Pd , r , r5 , Rpar , rsq , T , U , u1sq , u2sq , u1u2
   DIMENSION U(*) , Pd(Nrowpd,*) , Rpar(*) , Ipar(*)
   !***FIRST EXECUTABLE STATEMENT  DJAC
   u1sq = U(1)*U(1)

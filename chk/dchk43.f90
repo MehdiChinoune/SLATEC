@@ -25,21 +25,21 @@ SUBROUTINE DCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
   !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
   !***END PROLOGUE  DCHK43
   !     .. Parameters ..
-  DOUBLE PRECISION ZERO
+  REAL(8) :: ZERO
   PARAMETER (ZERO=0.0D0)
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  DOUBLE PRECISION Eps , Thresh
+  REAL(8) :: Eps , Thresh
   INTEGER Kprint , Nalf , Nbet , Nidim , Nmax , Nout
   CHARACTER(6) :: Sname
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax)&
+  REAL(8) :: A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax)&
     , G(Nmax) , Bb(Nmax*Nmax) , Bet(Nbet) , Bs(Nmax*Nmax) ,&
     C(Nmax,Nmax) , Cc(Nmax*Nmax) , Ct(Nmax) , B(Nmax,Nmax) ,&
     Cs(Nmax*Nmax)
   INTEGER Idim(Nidim)
   !     .. Local Scalars ..
-  DOUBLE PRECISION alpha , als , beta , bets , err , errmax
+  REAL(8) :: alpha , als , beta , bets , err , errmax
   INTEGER i , ia , ib , ict , icu , ik , in , j , jc , jj , k , ks , laa ,&
     lcc , lda , ldas , ldc , ldcs , lj , ma , n , na , nerr , ns ,&
     nargs , nc

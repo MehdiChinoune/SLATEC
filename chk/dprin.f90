@@ -27,12 +27,12 @@ SUBROUTINE DPRIN(Lun,Num1,Kprint,Ip,Exact,Result,Abserr,Neval,Ierv,Lierv)
   !   910627  Code completely rewritten.  (WRB)
   !***END PROLOGUE  DPRIN
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Abserr , Exact , Result
+  REAL(8) :: Abserr , Exact , Result
   INTEGER Ip , Kprint , Lierv , Lun , Neval , Num1
   !     .. Array Arguments ..
   INTEGER Ierv(*)
   !     .. Local Scalars ..
-  DOUBLE PRECISION error
+  REAL(8) :: error
   INTEGER ier , k
   !     .. Intrinsic Functions ..
   INTRINSIC ABS

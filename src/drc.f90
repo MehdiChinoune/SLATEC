@@ -1,6 +1,6 @@
 !*==DRC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DRC
-DOUBLE PRECISION FUNCTION DRC(X,Y,Ier)
+REAL(8) FUNCTION DRC(X,Y,Ier)
   IMPLICIT NONE
   !*--DRC5
   !***BEGIN PROLOGUE  DRC
@@ -266,8 +266,8 @@ DOUBLE PRECISION FUNCTION DRC(X,Y,Ier)
   !***END PROLOGUE  DRC
   CHARACTER(16) :: xern3 , xern4 , xern5
   INTEGER Ier
-  DOUBLE PRECISION c1 , c2 , errtol , lamda , lolim , D1MACH
-  DOUBLE PRECISION mu , s , sn , uplim , X , xn , Y , yn
+  REAL(8) :: c1 , c2 , errtol , lamda , lolim , D1MACH
+  REAL(8) :: mu , s , sn , uplim , X , xn , Y , yn
   LOGICAL first
   SAVE errtol , lolim , uplim , c1 , c2 , first
   DATA first/.TRUE./

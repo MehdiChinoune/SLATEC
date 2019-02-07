@@ -51,7 +51,7 @@ SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   !***END PROLOGUE  DPINTM
-  DOUBLE PRECISION Sx(*) , zero , one
+  REAL(8) :: Sx(*) , zero , one
   DIMENSION Ix(*)
   SAVE zero , one
   DATA zero , one/0.D0 , 1.D0/

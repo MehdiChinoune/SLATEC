@@ -70,10 +70,10 @@ SUBROUTINE DPPFA(Ap,N,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPPFA
   INTEGER N , Info
-  DOUBLE PRECISION Ap(*)
+  REAL(8) :: Ap(*)
   !
-  DOUBLE PRECISION DDOT , t
-  DOUBLE PRECISION s
+  REAL(8) :: DDOT , t
+  REAL(8) :: s
   INTEGER j , jj , jm1 , k , kj , kk
   !***FIRST EXECUTABLE STATEMENT  DPPFA
   jj = 0

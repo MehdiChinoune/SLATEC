@@ -132,11 +132,11 @@ SUBROUTINE DCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DCHEX
   INTEGER Ldr , P , K , L , Ldz , Nz , Job
-  DOUBLE PRECISION R(Ldr,*) , Z(Ldz,*) , S(*)
-  DOUBLE PRECISION C(*)
+  REAL(8) :: R(Ldr,*) , Z(Ldz,*) , S(*)
+  REAL(8) :: C(*)
   !
   INTEGER i , ii , il , iu , j , jj , km1 , kp1 , lmk , lm1
-  DOUBLE PRECISION t
+  REAL(8) :: t
   !
   !     INITIALIZE
   !

@@ -69,10 +69,10 @@ SUBROUTINE DSIFA(A,Lda,N,Kpvt,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSIFA
   INTEGER Lda , N , Kpvt(*) , Info
-  DOUBLE PRECISION A(Lda,*)
+  REAL(8) :: A(Lda,*)
   !
-  DOUBLE PRECISION ak , akm1 , bk , bkm1 , denom , mulk , mulkm1 , t
-  DOUBLE PRECISION absakk , alpha , colmax , rowmax
+  REAL(8) :: ak , akm1 , bk , bkm1 , denom , mulk , mulkm1 , t
+  REAL(8) :: absakk , alpha , colmax , rowmax
   INTEGER imax , imaxp1 , j , jj , jmax , k , km1 , km2 , kstep , IDAMAX
   LOGICAL swap
   !***FIRST EXECUTABLE STATEMENT  DSIFA

@@ -1,6 +1,6 @@
 !*==DBETAI.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBETAI
-DOUBLE PRECISION FUNCTION DBETAI(X,Pin,Qin)
+REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   IMPLICIT NONE
   !*--DBETAI5
   !*** Start of declarations inserted by SPAG
@@ -39,7 +39,7 @@ DOUBLE PRECISION FUNCTION DBETAI(X,Pin,Qin)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   !***END PROLOGUE  DBETAI
-  DOUBLE PRECISION X , Pin , Qin , alneps , alnsml , c , eps , finsum , p , &
+  REAL(8) :: X , Pin , Qin , alneps , alnsml , c , eps , finsum , p , &
     ps , q , sml , term , xb , xi , y , D1MACH , DLBETA , p1
   LOGICAL first
   SAVE eps , alneps , sml , alnsml , first
@@ -111,7 +111,7 @@ DOUBLE PRECISION FUNCTION DBETAI(X,Pin,Qin)
       !
       finsum = 0.0D0
       n = q
-      IF ( q==DBLE(n) ) n = n - 1
+      IF ( q==REAL(n, 8) ) n = n - 1
       DO i = 1 , n
         IF ( p1<=1.0D0.AND.term/eps<=finsum ) EXIT
         xi = i

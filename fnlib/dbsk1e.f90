@@ -1,6 +1,6 @@
 !*==DBSK1E.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBSK1E
-DOUBLE PRECISION FUNCTION DBSK1E(X)
+REAL(8) FUNCTION DBSK1E(X)
   IMPLICIT NONE
   !*--DBSK1E5
   !*** Start of declarations inserted by SPAG
@@ -50,7 +50,7 @@ DOUBLE PRECISION FUNCTION DBSK1E(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBSK1E
-  DOUBLE PRECISION X , bk1cs(16) , ak1cs(38) , ak12cs(33) , xmin , xsml , &
+  REAL(8) :: X , bk1cs(16) , ak1cs(38) , ak12cs(33) , xmin , xsml , &
     y , D1MACH , DCSEVL , DBESI1
   LOGICAL first
   SAVE bk1cs , ak1cs , ak12cs , ntk1 , ntak1 , ntak12 , xmin , xsml , first

@@ -23,7 +23,7 @@ SUBROUTINE DDNTP(H,K,N,Nq,T,Tout,Yh,Y)
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  DDNTP
   INTEGER i , j , jj , K , kk , kused , N , Nq
-  DOUBLE PRECISION factor , H , r , T , Tout , Y(*) , Yh(N,*)
+  REAL(8) :: factor , H , r , T , Tout , Y(*) , Yh(N,*)
   !***FIRST EXECUTABLE STATEMENT  DDNTP
   IF ( K==0 ) THEN
     DO i = 1 , N

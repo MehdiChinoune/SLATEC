@@ -53,7 +53,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !
   INTEGER i , Is(*) , iw , ix , j , l , M , Mda , Mode , modew , n , N1 , &
     N2 , np1
-  DOUBLE PRECISION A(Mda,*) , DDOT , DNRM2 , fac , one , Prgopt(*) , rnorm , &
+  REAL(8) :: A(Mda,*) , DDOT , DNRM2 , fac , one , Prgopt(*) , rnorm , &
     sc , Wnorm , Ws(*) , X(*) , ynorm , zero
   SAVE zero , one , fac
   DATA zero , one/0.0D0 , 1.0D0/ , fac/0.1D0/

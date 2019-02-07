@@ -24,7 +24,7 @@ SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scale,W)
   !   900604  DP version created from SP version.  (RWC)
   !***END PROLOGUE  DWNLT1
   INTEGER I , Imax , Ir , Lend , Mdw , Mend
-  DOUBLE PRECISION H(*) , Hbar , Scale(*) , W(Mdw,*)
+  REAL(8) :: H(*) , Hbar , Scale(*) , W(Mdw,*)
   LOGICAL Recalc
   !
   EXTERNAL IDAMAX

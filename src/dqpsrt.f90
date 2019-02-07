@@ -68,7 +68,7 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DQPSRT
   !
-  DOUBLE PRECISION Elist , Ermax , errmax , errmin
+  REAL(8) :: Elist , Ermax , errmax , errmin
   INTEGER i , ibeg , ido , Iord , isucc , j , jbnd , jupbn , k , Last , &
     Limit , Maxerr , Nrmax
   DIMENSION Elist(*) , Iord(*)

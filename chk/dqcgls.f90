@@ -41,7 +41,7 @@ SUBROUTINE DQCGLS(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--DQCGLS42
   !*** Start of declarations inserted by SPAG
-  DOUBLE PRECISION a , aa , b , bb , D1MACH , delmax , delx , r , rnorm ,&
+  REAL(8) :: a , aa , b , bb , D1MACH , delmax , delx , r , rnorm ,&
     work , xx
   INTEGER i , Ipass , j , kk , Kprint
   !*** End of declarations inserted by SPAG

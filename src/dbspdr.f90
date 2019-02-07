@@ -64,7 +64,7 @@ SUBROUTINE DBSPDR(T,A,N,K,Nderiv,Ad)
   !
   !
   INTEGER i , id , ii , ipkmid , jj , jm , K , kmid , N , Nderiv
-  DOUBLE PRECISION A , Ad , diff , fkmid , T
+  REAL(8) :: A , Ad , diff , fkmid , T
   !     DIMENSION T(N+K), AD((2*N-NDERIV+1)*NDERIV/2)
   DIMENSION T(*) , A(*) , Ad(*)
   !***FIRST EXECUTABLE STATEMENT  DBSPDR

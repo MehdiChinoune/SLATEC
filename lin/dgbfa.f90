@@ -98,9 +98,9 @@ SUBROUTINE DGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGBFA
   INTEGER Lda , N , Ml , Mu , Ipvt(*) , Info
-  DOUBLE PRECISION Abd(Lda,*)
+  REAL(8) :: Abd(Lda,*)
   !
-  DOUBLE PRECISION t
+  REAL(8) :: t
   INTEGER i , IDAMAX , i0 , j , ju , jz , j0 , j1 , k , kp1 , l , lm , m , &
     mm , nm1
   !

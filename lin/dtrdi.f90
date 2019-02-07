@@ -70,10 +70,10 @@ SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DTRDI
   INTEGER Ldt , N , Job , Info
-  DOUBLE PRECISION T(Ldt,*) , Det(2)
+  REAL(8) :: T(Ldt,*) , Det(2)
   !
-  DOUBLE PRECISION temp
-  DOUBLE PRECISION ten
+  REAL(8) :: temp
+  REAL(8) :: ten
   INTEGER i , j , k , kb , km1 , kp1
   !***FIRST EXECUTABLE STATEMENT  DTRDI
   !

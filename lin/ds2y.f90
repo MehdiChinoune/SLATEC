@@ -129,10 +129,10 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
   !     .. Scalar Arguments ..
   INTEGER Isym , N , Nelt
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nelt)
+  REAL(8) :: A(Nelt)
   INTEGER Ia(Nelt) , Ja(Nelt)
   !     .. Local Scalars ..
-  DOUBLE PRECISION temp
+  REAL(8) :: temp
   INTEGER i , ibgn , icol , iend , itemp , j
   !     .. External Subroutines ..
   EXTERNAL QS2I1D

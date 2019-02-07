@@ -46,7 +46,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !***END PROLOGUE  DPLPMN
-  DOUBLE PRECISION abig , aij , Amat(*) , anorm , asmall , Basmat(*) ,&
+  REAL(8) :: abig , aij , Amat(*) , anorm , asmall , Basmat(*) ,&
     Bl(*) , Bu(*) , Colnrm(*) , Costs(*) , costsc , Csc(*) ,&
     Dattrv(*) , dirnrm , Duals(*) , dulnrm , eps , tune ,&
     Erd(*) , erdnrm , Erp(*) , factor , gg , one , Prgopt(*)&
@@ -54,7 +54,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     , Rprim(*) , rprnrm , Rz(*) , rzj , scalr , scosts ,&
     size , SMAll , theta , tolls , upbnd , uu , Wr(*) ,&
     Ww(*) , xlamda , xval , zero , rdum(01) , tolabs
-  DOUBLE PRECISION DDOT , DASUM
+  REAL(8) :: DDOT , DASUM
   !
   INTEGER Ibasis(*) , Ibb(*) , Ibrc(Lbm,2) , Imat(*) , Ind(*) , Ipr(*) ,&
     Iwr(*) , intopt(08) , idum(01)

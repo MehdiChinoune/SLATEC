@@ -88,7 +88,7 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   INTEGER i , ialp , idalp , iflw , in , inlim , is , i1 , i2 , k , kk , &
     km , kt , N , nn , ns , Nz
   INTEGER I1MACH
-  DOUBLE PRECISION ak , akm , Alpha , ans , ap , arg , coef , dalpha , dfn , &
+  REAL(8) :: ak , akm , Alpha , ans , ap , arg , coef , dalpha , dfn , &
     dtm , earg , elim1 , etx , fidal , flgjy , fn , fnf , &
     fni , fnp1 , fnu , fnulim , gln , pdf , pidt , pp , &
     rden , relb , rttp , rtwo , rtx , rzden , s , sa , sb , &
@@ -96,7 +96,7 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
     tol , tolln , trx , tx , t1 , t2 , wk , X , xo2 , xo2l , &
     Y , slim , rtol
   SAVE rtwo , pdf , rttp , pidt , pp , inlim , fnulim
-  DOUBLE PRECISION D1MACH , DLNGAM
+  REAL(8) :: D1MACH , DLNGAM
   DIMENSION Y(*) , temp(3) , fnulim(2) , pp(4) , wk(7)
   DATA rtwo , pdf , rttp , pidt/1.34839972492648D+00 , &
     7.85398163397448D-01 , 7.97884560802865D-01 , 1.57079632679490D+00/

@@ -29,13 +29,13 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   IMPLICIT NONE
   !*--DU11US30
   !*** Start of declarations inserted by SPAG
-  DOUBLE PRECISION A , bb , Db , Eb , H , r2 , rmin , sum , t , temp , tn , &
+  REAL(8) :: A , bb , Db , Eb , H , r2 , rmin , sum , t , temp , tn , &
     tt , Ub , W
   INTEGER i , IDAMAX , ii , im1 , imin , is , j , jm1 , jmax , jp1 , kk , &
     km1 , kmi , kp1 , Krank , Ksure , kz , l , lm1 , M
   INTEGER Mda , mmk , Mode , N , nn , Np
   !*** End of declarations inserted by SPAG
-  DOUBLE PRECISION DDOT , DNRM2
+  REAL(8) :: DDOT , DNRM2
   DIMENSION A(Mda,*) , Ub(*) , Db(*) , H(*) , W(*) , Eb(*)
   INTEGER Ic(*) , Ir(*)
   !

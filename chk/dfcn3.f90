@@ -26,9 +26,9 @@ SUBROUTINE DFCN3(Iflag,M,N,X,Fvec,Fjrow,Nrow)
   !     .. Scalar Arguments ..
   INTEGER Iflag , M , N , Nrow
   !     .. Array Arguments ..
-  DOUBLE PRECISION Fjrow(*) , Fvec(*) , X(*)
+  REAL(8) :: Fjrow(*) , Fvec(*) , X(*)
   !     .. Local Scalars ..
-  DOUBLE PRECISION temp , two
+  REAL(8) :: temp , two
   INTEGER i
   !     .. Intrinsic Functions ..
   INTRINSIC EXP

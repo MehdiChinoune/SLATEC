@@ -122,9 +122,9 @@ SUBROUTINE DSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !     .. Scalar Arguments ..
   CHARACTER :: Uplo , Trans
   INTEGER N , K , Lda , Ldc
-  DOUBLE PRECISION Alpha , Beta
+  REAL(8) :: Alpha , Beta
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Lda,*) , C(Ldc,*)
+  REAL(8) :: A(Lda,*) , C(Ldc,*)
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME
@@ -135,9 +135,9 @@ SUBROUTINE DSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !     .. Local Scalars ..
   LOGICAL upper
   INTEGER i , info , j , l , nrowa
-  DOUBLE PRECISION temp
+  REAL(8) :: temp
   !     .. Parameters ..
-  DOUBLE PRECISION ONE , ZERO
+  REAL(8) :: ONE , ZERO
   PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
   !***FIRST EXECUTABLE STATEMENT  DSYRK
   !

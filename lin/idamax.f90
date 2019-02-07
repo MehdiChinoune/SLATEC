@@ -45,7 +45,7 @@ INTEGER FUNCTION IDAMAX(N,Dx,Incx)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  IDAMAX
-  DOUBLE PRECISION Dx(*) , dmax , xmag
+  REAL(8) :: Dx(*) , dmax , xmag
   INTEGER i , Incx , ix , N
   !***FIRST EXECUTABLE STATEMENT  IDAMAX
   IDAMAX = 0

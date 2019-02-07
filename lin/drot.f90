@@ -53,7 +53,7 @@ SUBROUTINE DROT(N,Dx,Incx,Dy,Incy,Dc,Ds)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DROT
-  DOUBLE PRECISION Dx , Dy , Dc , Ds , zero , one , w , z
+  REAL(8) :: Dx , Dy , Dc , Ds , zero , one , w , z
   DIMENSION Dx(*) , Dy(*)
   SAVE zero , one
   DATA zero , one/0.0D0 , 1.0D0/

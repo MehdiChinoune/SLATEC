@@ -22,7 +22,7 @@ SUBROUTINE CDQAWS(Lun,Kprint,Ipass)
   !
   ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
   !
-  DOUBLE PRECISION a , abserr , b , D1MACH , epmach , epsabs , epsrel , &
+  REAL(8) :: a , abserr , b , D1MACH , epmach , epsabs , epsrel , &
     error , exact0 , exact1 , DF0WS , DF1WS , alfa , beta , &
     result , uflow , work
   INTEGER ier , ip , Ipass , iwork , Kprint , last , lenw , limit , neval , &

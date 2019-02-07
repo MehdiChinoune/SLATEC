@@ -17,7 +17,7 @@ SUBROUTINE DDRES1(T,Y,Yprime,Delta,Ires,Rpar,Ipar)
   !           declarations explicit.  (FNF)
   !***END PROLOGUE  DDRES1
   INTEGER Ires , Ipar(*)
-  DOUBLE PRECISION T , Y(*) , Yprime(*) , Delta(*) , Rpar(*)
+  REAL(8) :: T , Y(*) , Yprime(*) , Delta(*) , Rpar(*)
   !***FIRST EXECUTABLE STATEMENT  DDRES1
   Delta(1) = Yprime(1) + 10.0D0*Y(1)
   Delta(2) = Y(2) + Y(1) - 1.0D0

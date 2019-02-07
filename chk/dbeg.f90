@@ -1,6 +1,6 @@
 !*==DBEG.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DBEG
-DOUBLE PRECISION FUNCTION DBEG(Reset)
+REAL(8) FUNCTION DBEG(Reset)
   IMPLICIT NONE
   !*--DBEG5
   !***BEGIN PROLOGUE  DBEG
@@ -27,7 +27,7 @@ DOUBLE PRECISION FUNCTION DBEG(Reset)
   !     .. Save statement ..
   SAVE i , ic , mi
   !     .. Intrinsic Functions ..
-  INTRINSIC DBLE
+  INTRINSIC REAL
   !***FIRST EXECUTABLE STATEMENT  DBEG
   IF ( Reset ) THEN
     !        Initialize local variables.
@@ -51,7 +51,7 @@ DOUBLE PRECISION FUNCTION DBEG(Reset)
       ic = 0
       CYCLE
     ENDIF
-    DBEG = DBLE(i-500)/1001.0D0
+    DBEG = REAL(i-500, 8)/1001.0D0
     EXIT
   ENDDO
   !

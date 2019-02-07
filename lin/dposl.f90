@@ -64,9 +64,9 @@ SUBROUTINE DPOSL(A,Lda,N,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPOSL
   INTEGER Lda , N
-  DOUBLE PRECISION A(Lda,*) , B(*)
+  REAL(8) :: A(Lda,*) , B(*)
   !
-  DOUBLE PRECISION DDOT , t
+  REAL(8) :: DDOT , t
   INTEGER k , kb
   !
   !     SOLVE TRANS(R)*Y = B

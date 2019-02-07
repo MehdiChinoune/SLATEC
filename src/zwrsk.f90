@@ -21,7 +21,7 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  ZWRSK
   !     COMPLEX CINU,CSCL,CT,CW,C1,C2,RCT,ST,Y,ZR
-  DOUBLE PRECISION act , acw , Alim , ascle , cinui , cinur , csclr , cti , &
+  REAL(8) :: act , acw , Alim , ascle , cinui , cinur , csclr , cti , &
     ctr , Cwi , Cwr , c1i , c1r , c2i , c2r , Elim , Fnu , &
     pti , ptr , ract , sti , str , Tol , Yi , Yr , Zri , &
     Zrr , ZABS , D1MACH

@@ -53,7 +53,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !***END PROLOGUE  DPLPMU
   INTEGER Ibasis(*) , Imat(*) , Ibrc(Lbm,2) , Ipr(*) , Iwr(*) , Ind(*) , &
     Ibb(*)
-  DOUBLE PRECISION aij , alpha , Anorm , Costsc , Erdnrm , Dulnrm , Eps , &
+  REAL(8) :: aij , alpha , Anorm , Costsc , Erdnrm , Dulnrm , Eps , &
     gamma , Gg , gq , one , Rprnrm , rzj , scalr , Theta , &
     two , Uu , wp , Xlamda , Rhsnrm , zero , Amat(*) , &
     Basmat(*) , Csc(*) , Wr(*) , Rprim(*) , Ww(*) , Bu(*) , &

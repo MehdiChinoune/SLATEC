@@ -31,7 +31,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     jj , JSTart , KFLag , L , lenp , MAXord , mba , mband , meb1 , &
     meband , METh , MITer , ml , ml3 , mu , N , Neq , NFE , NJE , NQ , &
     NQU , NST , Nyh
-  DOUBLE PRECISION con , di , DVNRMS , EL0 , Ewt , fac , Ftem , H , hl0 , &
+  REAL(8) :: con , di , DVNRMS , EL0 , Ewt , fac , Ftem , H , hl0 , &
     HMIn , HMXi , HU , r , r0 , ROWnd , ROWns , Rpar , Savf , &
     srur , TN , UROund , Wm , Y , Yh , yi , yj , yjj
   EXTERNAL DF , DJAC

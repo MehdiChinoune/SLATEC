@@ -72,10 +72,10 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DORTHR
-  DOUBLE PRECISION DDOT , D1MACH
+  REAL(8) :: DDOT , D1MACH
   INTEGER Iflag , Irank , Iscale , j , jrow , k , kp , Kpivot(*) , l , M , &
     mk , N , Nrda
-  DOUBLE PRECISION A(Nrda,*) , acc , akk , anorm , as , asave , Diag(*) , &
+  REAL(8) :: A(Nrda,*) , acc , akk , anorm , as , asave , Diag(*) , &
     diagk , dum , Rows(*) , Rs(*) , rss , sad , Scales(*) , &
     sig , sigma , sruro , uro
   !

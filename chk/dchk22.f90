@@ -25,21 +25,21 @@ SUBROUTINE DCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
   !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
   !***END PROLOGUE  DCHK22
   !     .. Parameters ..
-  DOUBLE PRECISION ZERO , HALF
+  REAL(8) :: ZERO , HALF
   PARAMETER (ZERO=0.0D0,HALF=0.5D0)
   !     .. Scalar Arguments ..
   LOGICAL Fatal
-  DOUBLE PRECISION Eps , Thresh
+  REAL(8) :: Eps , Thresh
   INTEGER Incmax , Kprint , Nalf , Nbet , Nidim , Ninc , Nkb , Nmax , Nout
   CHARACTER(6) :: Sname
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax)&
+  REAL(8) :: A(Nmax,Nmax) , Aa(Nmax*Nmax) , Alf(Nalf) , As(Nmax*Nmax)&
     , Bet(Nbet) , G(Nmax) , X(Nmax) , Xs(Nmax*Incmax) ,&
     Xx(Nmax*Incmax) , Y(Nmax) , Ys(Nmax*Incmax) , Yt(Nmax) ,&
     Yy(Nmax*Incmax)
   INTEGER Idim(Nidim) , Inc(Ninc) , Kb(Nkb)
   !     .. Local Scalars ..
-  DOUBLE PRECISION alpha , als , beta , bls , err , errmax , transl
+  REAL(8) :: alpha , als , beta , bls , err , errmax , transl
   INTEGER i , ia , ib , ic , ik , in , incx , incxs , incy , incys , ix ,&
     iy , k , ks , laa , lda , ldas , lx , ly , n , nargs , nc , nk ,&
     ns , nerr

@@ -16,17 +16,17 @@ SUBROUTINE DPLPQX(Lun,Kprint,Ipass)
   IMPLICIT NONE
   !*--DPLPQX17
   !*** Start of declarations inserted by SPAG
-  DOUBLE PRECISION DUSRMT
+  REAL(8) :: DUSRMT
   INTEGER i , ic , iv , ivv , j , kk , kount , Kprint , Lun , mm
   !*** End of declarations inserted by SPAG
   EXTERNAL DUSRMT
   INTEGER icnt , ind(60) , ibasis(60) , Ipass , iwork(900) , isoln(14)
-  DOUBLE PRECISION costs(37)
-  DOUBLE PRECISION prgopt(50) , dattrv(210) , bl(60) , bu(60)
-  DOUBLE PRECISION primal(60) , duals(60)
-  DOUBLE PRECISION work(800)
-  DOUBLE PRECISION d(14,37)
-  DOUBLE PRECISION zero
+  REAL(8) :: costs(37)
+  REAL(8) :: prgopt(50) , dattrv(210) , bl(60) , bu(60)
+  REAL(8) :: primal(60) , duals(60)
+  REAL(8) :: work(800)
+  REAL(8) :: d(14,37)
+  REAL(8) :: zero
   INTEGER mrelas , nvars , info , lw , liw
   !***FIRST EXECUTABLE STATEMENT  DPLPQX
   IF ( Kprint>=2 ) WRITE (Lun,99001)

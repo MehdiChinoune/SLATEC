@@ -1,6 +1,6 @@
 !*==DPCHIA.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DPCHIA
-DOUBLE PRECISION FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
+REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   IMPLICIT NONE
   !*--DPCHIA5
   !***BEGIN PROLOGUE  DPCHIA
@@ -118,15 +118,15 @@ DOUBLE PRECISION FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !  DECLARE ARGUMENTS.
   !
   INTEGER N , Incfd , Ierr
-  DOUBLE PRECISION X(*) , F(Incfd,*) , D(Incfd,*) , A , B
+  REAL(8) :: X(*) , F(Incfd,*) , D(Incfd,*) , A , B
   LOGICAL Skip
   !
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i , ia , ib , ierd , il , ir
-  DOUBLE PRECISION value , xa , xb , zero
+  REAL(8) :: value , xa , xb , zero
   SAVE zero
-  DOUBLE PRECISION DCHFIE , DPCHID
+  REAL(8) :: DCHFIE , DPCHID
   !
   !  INITIALIZE.
   !

@@ -22,7 +22,7 @@ SUBROUTINE ZBUNK(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  ZBUNK
   !     COMPLEX Y,Z
-  DOUBLE PRECISION Alim , ax , ay , Elim , Fnu , Tol , Yi , Yr , Zi , Zr
+  REAL(8) :: Alim , ax , ay , Elim , Fnu , Tol , Yi , Yr , Zi , Zr
   INTEGER Kode , Mr , N , Nz
   DIMENSION Yr(N) , Yi(N)
   !***FIRST EXECUTABLE STATEMENT  ZBUNK

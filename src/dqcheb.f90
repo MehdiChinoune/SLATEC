@@ -58,7 +58,7 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DQCHEB
   !
-  DOUBLE PRECISION alam , alam1 , alam2 , Cheb12 , Cheb24 , Fval , part1 , &
+  REAL(8) :: alam , alam1 , alam2 , Cheb12 , Cheb24 , Fval , part1 , &
     part2 , part3 , v , X
   INTEGER i , j
   !

@@ -160,7 +160,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQAGSE
   !
-  DOUBLE PRECISION A , abseps , Abserr , Alist , area , area1 , area12 , &
+  REAL(8) :: A , abseps , Abserr , Alist , area , area1 , area12 , &
     area2 , a1 , a2 , B , Blist , b1 , b2 , correc , defabs , &
     defab1 , defab2 , D1MACH , dres , Elist , epmach , &
     Epsabs , Epsrel , erlarg , erlast , errbnd , errmax , &

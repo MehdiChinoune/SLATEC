@@ -37,7 +37,7 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Ia,Reals)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  LA05ED
   LOGICAL Reals
-  DOUBLE PRECISION A(*) , SMAll
+  REAL(8) :: A(*) , SMAll
   INTEGER Irn(*) , Iw(*)
   INTEGER Ip(*)
   COMMON /LA05DD/ SMAll , LP , LENl , LENu , NCP , LROw , LCOl

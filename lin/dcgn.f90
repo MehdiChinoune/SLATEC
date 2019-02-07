@@ -273,19 +273,19 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  DCGN
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Err , Tol
+  REAL(8) :: Err , Tol
   INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(N) , Atdz(N) , Atp(N) , Atz(N) , B(N) , Dz(N) , P(N) , &
+  REAL(8) :: A(N) , Atdz(N) , Atp(N) , Atz(N) , B(N) , Dz(N) , P(N) , &
     R(N) , Rwork(*) , X(N) , Z(N)
   INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL MATVEC , MSOLVE , MTTVEC
   !     .. Local Scalars ..
-  DOUBLE PRECISION ak , akden , bk , bkden , bknum , bnrm , solnrm , tolmin
+  REAL(8) :: ak , akden , bk , bkden , bknum , bnrm , solnrm , tolmin
   INTEGER i , k
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DDOT
+  REAL(8) :: D1MACH , DDOT
   INTEGER ISDCGN
   EXTERNAL D1MACH , DDOT , ISDCGN
   !     .. External Subroutines ..

@@ -17,13 +17,13 @@ SUBROUTINE DPNTCK(Lun,Kprint,Ipass)
   !     .. Scalar Arguments ..
   INTEGER Ipass , Kprint , Lun
   !     .. Local Scalars ..
-  DOUBLE PRECISION tol , yf
+  REAL(8) :: tol , yf
   INTEGER i , ierr , kontrl , n , nerr
   LOGICAL fatal
   !     .. Local Arrays ..
-  DOUBLE PRECISION c(6) , d(6) , dchk(6) , w(12) , x(6) , xchk(6) , y(6)
+  REAL(8) :: c(6) , d(6) , dchk(6) , w(12) , x(6) , xchk(6) , y(6)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   INTEGER NUMXER
   EXTERNAL D1MACH , NUMXER
   !     .. External Subroutines ..

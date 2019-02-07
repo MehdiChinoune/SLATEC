@@ -162,10 +162,10 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !     .. Scalar Arguments ..
   INTEGER Isym , Iwarn , N , Nel , Nelt
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nelt) , D(N) , El(Nel) , R(N)
+  REAL(8) :: A(Nelt) , D(N) , El(Nel) , R(N)
   INTEGER Ia(Nelt) , Iel(Nel) , Ja(Nelt) , Jel(Nel)
   !     .. Local Scalars ..
-  DOUBLE PRECISION eltmp
+  REAL(8) :: eltmp
   INTEGER i , ibgn , ic , icbgn , icend , icol , iend , ir , irbgn , irend , &
     irow , irr , j , jbgn , jeltmp , jend
   CHARACTER xern1*8

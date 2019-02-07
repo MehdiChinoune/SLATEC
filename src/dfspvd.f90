@@ -29,7 +29,7 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
   IMPLICIT NONE
   !*--DFSPVD30
   !*** Start of declarations inserted by SPAG
-  DOUBLE PRECISION a , diff , fkmd , T , v , Vnikx , X
+  REAL(8) :: a , diff , fkmd , T , v , Vnikx , X
   INTEGER i , ideriv , idervm , Ileft , ipkmd , j , jlow , jm1 , K , kmd , &
     l , m , Nderiv
   !*** End of declarations inserted by SPAG

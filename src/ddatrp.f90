@@ -40,10 +40,10 @@ SUBROUTINE DDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
   !***END PROLOGUE  DDATRP
   !
   INTEGER Neq , Kold
-  DOUBLE PRECISION X , Xout , Yout(*) , Ypout(*) , Phi(Neq,*) , Psi(*)
+  REAL(8) :: X , Xout , Yout(*) , Ypout(*) , Phi(Neq,*) , Psi(*)
   !
   INTEGER i , j , koldp1
-  DOUBLE PRECISION c , d , gamma , temp1
+  REAL(8) :: c , d , gamma , temp1
   !
   !***FIRST EXECUTABLE STATEMENT  DDATRP
   koldp1 = Kold + 1

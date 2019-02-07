@@ -62,14 +62,14 @@ SUBROUTINE DPCHQ5(Lun,Kprint,Ipass)
   !
   !  Declare externals.
   !
-  DOUBLE PRECISION DBVALU , D1MACH
+  REAL(8) :: DBVALU , D1MACH
   EXTERNAL DBVALU , DPCHBS , D1MACH
   !
   !  Declare variables.
   !
   INTEGER i , ierr , ifail , inbv , j , knotyp , k , N , ndim , nknots
   PARAMETER (N=9)
-  DOUBLE PRECISION bcoef(2*N) , d(N) , dcalc , derr , dermax , f(N) ,&
+  REAL(8) :: bcoef(2*N) , d(N) , dcalc , derr , dermax , f(N) ,&
     fcalc , ferr , fermax , t(2*N+4) , terr , termax , tol ,&
     tolz , tsave(2*N+4) , work(16*N) , x(N) , ZERO
   PARAMETER (ZERO=0.0D0)

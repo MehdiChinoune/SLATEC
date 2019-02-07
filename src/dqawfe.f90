@@ -210,7 +210,7 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DQAWFE
   !
-  DOUBLE PRECISION A , abseps , Abserr , Alist , Blist , Chebmo , correc , &
+  REAL(8) :: A , abseps , Abserr , Alist , Blist , Chebmo , correc , &
     cycle , c1 , c2 , dl , drl , D1MACH , Elist , Erlst , &
     ep , eps , epsa , Epsabs , errsum , F , fact , Omega , &
     p , pi , p1 , psum , reseps , Result , res3la , Rlist , &

@@ -112,12 +112,12 @@ SUBROUTINE DCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DCHUD
   INTEGER Ldr , P , Ldz , Nz
-  DOUBLE PRECISION Rho(*) , C(*)
-  DOUBLE PRECISION R(Ldr,*) , X(*) , Z(Ldz,*) , Y(*) , S(*)
+  REAL(8) :: Rho(*) , C(*)
+  REAL(8) :: R(Ldr,*) , X(*) , Z(Ldz,*) , Y(*) , S(*)
   !
   INTEGER i , j , jm1
-  DOUBLE PRECISION azeta , scale
-  DOUBLE PRECISION t , xj , zeta
+  REAL(8) :: azeta , scale
+  REAL(8) :: t , xj , zeta
   !
   !     UPDATE R.
   !

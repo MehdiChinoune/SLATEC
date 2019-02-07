@@ -63,7 +63,7 @@ SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DQELG
   !
-  DOUBLE PRECISION Abserr , delta1 , delta2 , delta3 , D1MACH , epmach , &
+  REAL(8) :: Abserr , delta1 , delta2 , delta3 , D1MACH , epmach , &
     epsinf , Epstab , error , err1 , err2 , err3 , e0 , e1 , &
     e1abs , e2 , e3 , oflow , res , Result , Res3la , ss , &
     tol1 , tol2 , tol3

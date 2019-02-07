@@ -1,6 +1,6 @@
 !*==D9LN2R.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9LN2R
-DOUBLE PRECISION FUNCTION D9LN2R(X)
+REAL(8) FUNCTION D9LN2R(X)
   IMPLICIT NONE
   !*--D9LN2R5
   !*** Start of declarations inserted by SPAG
@@ -44,7 +44,7 @@ DOUBLE PRECISION FUNCTION D9LN2R(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9LN2R
-  DOUBLE PRECISION X , xbig , txbig , xmax , txmax , xmin , ln21cs(50) , &
+  REAL(8) :: X , xbig , txbig , xmax , txmax , xmin , ln21cs(50) , &
     ln22cs(37) , DCSEVL , D1MACH
   LOGICAL first
   SAVE ln21cs , ln22cs , ntln21 , ntln22 , xmin , xbig , xmax , first

@@ -54,10 +54,10 @@ SUBROUTINE DPBDI(Abd,Lda,N,M,Det)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPBDI
   INTEGER Lda , N , M
-  DOUBLE PRECISION Abd(Lda,*)
-  DOUBLE PRECISION Det(2)
+  REAL(8) :: Abd(Lda,*)
+  REAL(8) :: Det(2)
   !
-  DOUBLE PRECISION s
+  REAL(8) :: s
   INTEGER i
   !***FIRST EXECUTABLE STATEMENT  DPBDI
   !

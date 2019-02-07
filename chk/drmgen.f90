@@ -83,10 +83,10 @@ SUBROUTINE DRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Soln,Dsum,Itmp,&
   !   920511  Added complete declaration section.  (WRB)
   !***END PROLOGUE  DRMGEN
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Factor
+  REAL(8) :: Factor
   INTEGER Ierr , Isym , N , Nelt , Neltmx
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Neltmx) , Dsum(N) , F(N) , Soln(N)
+  REAL(8) :: A(Neltmx) , Dsum(N) , F(N) , Soln(N)
   INTEGER Ia(Neltmx) , Idiag(N) , Itmp(N) , Ja(Neltmx)
   !     .. Local Scalars ..
   REAL dummy

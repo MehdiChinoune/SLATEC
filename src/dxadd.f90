@@ -40,13 +40,13 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXADD
-  DOUBLE PRECISION X , Y , Z
+  REAL(8) :: X , Y , Z
   INTEGER Ix , Iy , Iz
-  DOUBLE PRECISION RADix , RADixl , RAD2l , DLG10r
+  REAL(8) :: RADix , RADixl , RAD2l , DLG10r
   INTEGER L , L2 , KMAx
   COMMON /DXBLK2/ RADix , RADixl , RAD2l , DLG10r , L , L2 , KMAx
   SAVE /DXBLK2/
-  DOUBLE PRECISION s , t
+  REAL(8) :: s , t
   !
   !   THE CONDITIONS IMPOSED ON L AND KMAX BY THIS SUBROUTINE
   ! ARE

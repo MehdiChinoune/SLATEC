@@ -22,7 +22,7 @@ SUBROUTINE QCDRF(Lun,Kprint,Ipass)
   !***END PROLOGUE  QCDRF
   INTEGER Kprint , Ipass , contrl , kontrl , Lun , ier
   INTEGER ipass1 , ipass2 , ipass3 , ipass4 , NUMXER
-  DOUBLE PRECISION alem , trf , DRF , dif , D1MACH
+  REAL(8) :: alem , trf , DRF , dif , D1MACH
   EXTERNAL D1MACH , DRF , NUMXER , XERCLR , XGETF , XSETF
   !***FIRST EXECUTABLE STATEMENT  QCDRF
   CALL XERCLR

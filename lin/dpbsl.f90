@@ -69,9 +69,9 @@ SUBROUTINE DPBSL(Abd,Lda,N,M,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPBSL
   INTEGER Lda , N , M
-  DOUBLE PRECISION Abd(Lda,*) , B(*)
+  REAL(8) :: Abd(Lda,*) , B(*)
   !
-  DOUBLE PRECISION DDOT , t
+  REAL(8) :: DDOT , t
   INTEGER k , kb , la , lb , lm
   !
   !     SOLVE TRANS(R)*Y = B

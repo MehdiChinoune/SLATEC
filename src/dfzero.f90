@@ -96,7 +96,7 @@ SUBROUTINE DFZERO(F,B,C,R,Re,Ae,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DFZERO
-  DOUBLE PRECISION a , acbs , acmb , Ae , aw , B , C , cmb , D1MACH , er , &
+  REAL(8) :: a , acbs , acmb , Ae , aw , B , C , cmb , D1MACH , er , &
     F , fa , fb , fc , fx , fz , p , q , R , Re , rw , t , &
     tol , z
   INTEGER ic , Iflag , kount

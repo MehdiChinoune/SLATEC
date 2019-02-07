@@ -176,21 +176,21 @@ INTEGER FUNCTION ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !***END PROLOGUE  ISDOMN
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION Ak , Bnrm , Err , Solnrm , Tol
+  REAL(8) :: Ak , Bnrm , Err , Solnrm , Tol
   INTEGER Ierr , Isym , Iter , Itmax , Itol , Iunit , N , Nelt , Nsave
   !     .. Array Arguments ..
-  DOUBLE PRECISION A(Nelt) , Ap(N,0:Nsave) , B(N) , Csav(Nsave) , Dz(N) , &
+  REAL(8) :: A(Nelt) , Ap(N,0:Nsave) , B(N) , Csav(Nsave) , Dz(N) , &
     Emap(N,0:Nsave) , P(N,0:Nsave) , R(N) , Rwork(*) , X(N) , &
     Z(N)
   INTEGER Ia(Nelt) , Iwork(*) , Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL MSOLVE
   !     .. Arrays in Common ..
-  DOUBLE PRECISION SOLn(1)
+  REAL(8) :: SOLn(1)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH , DNRM2
+  REAL(8) :: D1MACH , DNRM2
   EXTERNAL D1MACH , DNRM2
   !     .. Common blocks ..
   COMMON /DSLBLK/ SOLn

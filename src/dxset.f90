@@ -195,10 +195,10 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXSET
   INTEGER Irad , Nradpl , Nbits
-  DOUBLE PRECISION Dzero , dzerox
+  REAL(8) :: Dzero , dzerox
   COMMON /DXBLK1/ NBItsf
   SAVE /DXBLK1/
-  DOUBLE PRECISION RADix , RADixl , RAD2l , DLG10r
+  REAL(8) :: RADix , RADixl , RAD2l , DLG10r
   INTEGER L , L2 , KMAx
   COMMON /DXBLK2/ RADix , RADixl , RAD2l , DLG10r , L , L2 , KMAx
   SAVE /DXBLK2/

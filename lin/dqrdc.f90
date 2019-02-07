@@ -104,11 +104,11 @@ SUBROUTINE DQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   !***END PROLOGUE  DQRDC
   INTEGER Ldx , N , P , Job
   INTEGER Jpvt(*)
-  DOUBLE PRECISION X(Ldx,*) , Qraux(*) , Work(*)
+  REAL(8) :: X(Ldx,*) , Qraux(*) , Work(*)
   !
   INTEGER j , jp , l , lp1 , lup , maxj , pl , pu
-  DOUBLE PRECISION maxnrm , DNRM2 , tt
-  DOUBLE PRECISION DDOT , nrmxl , t
+  REAL(8) :: maxnrm , DNRM2 , tt
+  REAL(8) :: DDOT , nrmxl , t
   LOGICAL negj , swapj
   !
   !***FIRST EXECUTABLE STATEMENT  DQRDC

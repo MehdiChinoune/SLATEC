@@ -37,17 +37,17 @@ SUBROUTINE CHECK2(Sfac,Sdfac,Dfac,Dqfac,Kprint)
   INTEGER incxs(4) , incys(4) , lens(4,2) , ns(4)
   REAL sx(7) , sy(7) , stx(7) , sty(7) , ssize1(4) , ssize2(14,2)
   REAL ssize(7) , qc(30) , sparam(5) , st7b(4,4) , ssize3(4)
-  DOUBLE PRECISION dx(7) , da , dx1(7) , dy1(7) , dy(7) , dt7(4,4) , &
+  REAL(8) :: dx(7) , da , dx1(7) , dy1(7) , dy(7) , dt7(4,4) , &
     dt8(7,4,4)
-  DOUBLE PRECISION dx2(7) , dy2(7) , dt2(4,4,2) , dparam(5) , dpar(5,4)
-  DOUBLE PRECISION DSDOT , DDOT , DQDOTI , DQDOTA , Dfac , Dqfac
-  DOUBLE PRECISION dt10x(7,4,4) , dt10y(7,4,4) , db
-  DOUBLE PRECISION dsize1(4) , dsize2(7,2) , dsize(7)
-  DOUBLE PRECISION dc , ds , dt9x(7,4,4) , dt9y(7,4,4) , dtx(7) , dty(7)
-  DOUBLE PRECISION dt19x(7,4,16) , dt19xa(7,4,4) , dt19xb(7,4,4)
-  DOUBLE PRECISION dt19xc(7,4,4) , dt19xd(7,4,4) , dt19y(7,4,16)
-  DOUBLE PRECISION dt19ya(7,4,4) , dt19yb(7,4,4) , dt19yc(7,4,4)
-  DOUBLE PRECISION dt19yd(7,4,4)
+  REAL(8) :: dx2(7) , dy2(7) , dt2(4,4,2) , dparam(5) , dpar(5,4)
+  REAL(8) :: DSDOT , DDOT , DQDOTI , DQDOTA , Dfac , Dqfac
+  REAL(8) :: dt10x(7,4,4) , dt10y(7,4,4) , db
+  REAL(8) :: dsize1(4) , dsize2(7,2) , dsize(7)
+  REAL(8) :: dc , ds , dt9x(7,4,4) , dt9y(7,4,4) , dtx(7) , dty(7)
+  REAL(8) :: dt19x(7,4,16) , dt19xa(7,4,4) , dt19xb(7,4,4)
+  REAL(8) :: dt19xc(7,4,4) , dt19xd(7,4,4) , dt19y(7,4,16)
+  REAL(8) :: dt19ya(7,4,4) , dt19yb(7,4,4) , dt19yc(7,4,4)
+  REAL(8) :: dt19yd(7,4,4)
   !
   EQUIVALENCE (dt19x(1,1,1),dt19xa(1,1,1))
   EQUIVALENCE (dt19x(1,1,5),dt19xb(1,1,1))

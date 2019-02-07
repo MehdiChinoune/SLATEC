@@ -200,7 +200,7 @@ SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DQAWO
   !
-  DOUBLE PRECISION A , Abserr , B , Epsabs , Epsrel , F , Omega , Result , &
+  REAL(8) :: A , Abserr , B , Epsabs , Epsrel , F , Omega , Result , &
     Work
   INTEGER Ier , Integr , Iwork , Last , limit , Lenw , Leniw , lvl , l1 , &
     l2 , l3 , l4 , Maxp1 , momcom , Neval

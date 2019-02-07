@@ -25,9 +25,9 @@ SUBROUTINE DBKISR(X,N,Sum,Ierr)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DBKISR
   INTEGER i , Ierr , k , kk , kkn , k1 , N , np
-  DOUBLE PRECISION ak , atol , bk , c , fk , fn , hx , hxs , pol , pr , &
+  REAL(8) :: ak , atol , bk , c , fk , fn , hx , hxs , pol , pr , &
     Sum , tkp , tol , trm , X , xln
-  DOUBLE PRECISION DPSIXN , D1MACH
+  REAL(8) :: DPSIXN , D1MACH
   DIMENSION c(2)
   SAVE c
   !

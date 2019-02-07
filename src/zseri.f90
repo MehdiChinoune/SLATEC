@@ -27,7 +27,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
   !***END PROLOGUE  ZSERI
   !     COMPLEX AK1,CK,COEF,CONE,CRSC,CSCL,CZ,CZERO,HZ,RZ,S1,S2,Y,Z
-  DOUBLE PRECISION aa , acz , ak , ak1i , ak1r , Alim , arm , ascle , atol , &
+  REAL(8) :: aa , acz , ak , ak1i , ak1r , Alim , arm , ascle , atol , &
     az , cki , ckr , coefi , coefr , conei , coner , crscr , &
     czi , czr , dfnu , Elim , Fnu , fnup , hzi , hzr , raz , &
     rs , rtr1 , rzi , rzr , s , ss , sti , str , s1i , s1r , &

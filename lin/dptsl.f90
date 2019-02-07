@@ -49,10 +49,10 @@ SUBROUTINE DPTSL(N,D,E,B)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DPTSL
   INTEGER N
-  DOUBLE PRECISION D(*) , E(*) , B(*)
+  REAL(8) :: D(*) , E(*) , B(*)
   !
   INTEGER k , kbm1 , ke , kf , kp1 , nm1 , nm1d2
-  DOUBLE PRECISION t1 , t2
+  REAL(8) :: t1 , t2
   !
   !     CHECK FOR 1 X 1 CASE
   !

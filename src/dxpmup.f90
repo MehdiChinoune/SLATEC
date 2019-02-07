@@ -28,7 +28,7 @@ SUBROUTINE DXPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXPMUP
-  DOUBLE PRECISION dmu , nu , Nu1 , Nu2 , Pqa , prod
+  REAL(8) :: dmu , nu , Nu1 , Nu2 , Pqa , prod
   DIMENSION Pqa(*) , Ipqa(*)
   !***FIRST EXECUTABLE STATEMENT  DXPMUP
   Ierror = 0

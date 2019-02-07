@@ -1,6 +1,6 @@
 !*==D1MACH.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK D1MACH
-DOUBLE PRECISION FUNCTION D1MACH(I)
+REAL(8) FUNCTION D1MACH(I)
   IMPLICIT NONE
   !*--D1MACH5
   !*** Start of declarations inserted by SPAG
@@ -81,7 +81,7 @@ DOUBLE PRECISION FUNCTION D1MACH(I)
   INTEGER diver(4)
   INTEGER log10(4)
   !
-  DOUBLE PRECISION dmach(5)
+  REAL(8) :: dmach(5)
   SAVE dmach
   !
   EQUIVALENCE (dmach(1),small(1))

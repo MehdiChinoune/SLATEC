@@ -72,10 +72,10 @@ SUBROUTINE DGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGEDI
   INTEGER Lda , N , Ipvt(*) , Job
-  DOUBLE PRECISION A(Lda,*) , Det(2) , Work(*)
+  REAL(8) :: A(Lda,*) , Det(2) , Work(*)
   !
-  DOUBLE PRECISION t
-  DOUBLE PRECISION ten
+  REAL(8) :: t
+  REAL(8) :: ten
   INTEGER i , j , k , kb , kp1 , l , nm1
   !***FIRST EXECUTABLE STATEMENT  DGEDI
   !

@@ -76,23 +76,23 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !           wordlength.  (RWC)
   !***END PROLOGUE  DQNC79
   !     .. Scalar Arguments ..
-  DOUBLE PRECISION A , Ans , B , Err
+  REAL(8) :: A , Ans , B , Err
   INTEGER Ierr , K
   !     .. Function Arguments ..
-  DOUBLE PRECISION FUN
+  REAL(8) :: FUN
   EXTERNAL FUN
   !     .. Local Scalars ..
-  DOUBLE PRECISION ae , area , bank , blocal , c , ce , ee , ef , eps , &
+  REAL(8) :: ae , area , bank , blocal , c , ce , ee , ef , eps , &
     q13 , q7 , q7l , sq2 , test , tol , vr , w1 , w2 , w3 , &
     w4
   INTEGER i , kml , kmx , l , lmn , lmx , nbits , nib , nlmn , nlmx
   LOGICAL first
   !     .. Local Arrays ..
-  DOUBLE PRECISION aa(99) , f(13) , f1(99) , f2(99) , f3(99) , f4(99) , &
+  REAL(8) :: aa(99) , f(13) , f1(99) , f2(99) , f3(99) , f4(99) , &
     f5(99) , f6(99) , f7(99) , hh(99) , q7r(99) , vl(99)
   INTEGER lr(99)
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   INTEGER I1MACH
   EXTERNAL D1MACH , I1MACH
   !     .. External Subroutines ..

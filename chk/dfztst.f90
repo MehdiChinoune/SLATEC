@@ -16,10 +16,10 @@ SUBROUTINE DFZTST(Lun,Kprint,Ipass)
   INTEGER Ipass , Kprint , Lun
   !     .. Local Scalars ..
   INTEGER iflag , kontrl
-  DOUBLE PRECISION ae , b , c , pi , r , re , tol
+  REAL(8) :: ae , b , c , pi , r , re , tol
   LOGICAL fatal
   !     .. External Functions ..
-  DOUBLE PRECISION D1MACH
+  REAL(8) :: D1MACH
   EXTERNAL D1MACH
   !     .. External Subroutines ..
   EXTERNAL DFZERO , XERCLR , XGETF , XSETF

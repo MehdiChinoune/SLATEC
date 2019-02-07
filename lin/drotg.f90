@@ -60,7 +60,7 @@ SUBROUTINE DROTG(Da,Db,Dc,Ds)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DROTG
-  DOUBLE PRECISION Da , Db , Dc , Ds , u , v , r
+  REAL(8) :: Da , Db , Dc , Ds , u , v , r
   !***FIRST EXECUTABLE STATEMENT  DROTG
   IF ( ABS(Da)>ABS(Db) ) THEN
     !

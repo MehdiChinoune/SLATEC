@@ -75,7 +75,7 @@ SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   !
   INTEGER i , id , Inev , iwork , jj , K , kp1 , kp1mn , l , left , ll , &
     mflag , N , Nderiv
-  DOUBLE PRECISION Ad , Svalue , sum , T , Work , X
+  REAL(8) :: Ad , Svalue , sum , T , Work , X
   !     DIMENSION T(N+K)
   DIMENSION T(*) , Ad(*) , Svalue(*) , Work(*)
   !***FIRST EXECUTABLE STATEMENT  DBSPEV

@@ -59,7 +59,7 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   !***END PROLOGUE  DDAJAC
   !
   INTEGER Neq , Ier , Iwm(*) , Ires , Ipar(*) , Ntemp
-  DOUBLE PRECISION X , Y(*) , Yprime(*) , Delta(*) , Cj , H , Wt(*) , E(*) , &
+  REAL(8) :: X , Y(*) , Yprime(*) , Delta(*) , Cj , H , Wt(*) , E(*) , &
     Wm(*) , Uround , Rpar(*)
   EXTERNAL RES , JAC
   !
@@ -68,7 +68,7 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   INTEGER i , i1 , i2 , ii , ipsave , isave , j , k , l , lenpd , LIPVT , &
     LML , LMTYPE , LMU , mba , mband , meb1 , meband , msave , mtype , &
     n , NPD , npdm1 , nrow
-  DOUBLE PRECISION del , delinv , squr , ypsave , ysave
+  REAL(8) :: del , delinv , squr , ypsave , ysave
   !
   PARAMETER (NPD=1)
   PARAMETER (LML=1)
