@@ -267,6 +267,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
     lm = MIN(k,m) - 1
     lz = k - lm
     t = -Z(k)
+    IF(k<=1) CYCLE
     CALL CAXPY(lm,t,Abe(k-1,Ml+2),-ldb,Z(lz),1)
   ENDDO
   !     MAKE ZNORM = 1.0E0

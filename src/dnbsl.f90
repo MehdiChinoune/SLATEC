@@ -146,6 +146,7 @@ SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
       lm = MIN(k,m) - 1
       lb = k - lm
       t = -B(k)
+      IF(k<=1) CYCLE
       CALL DAXPY(lm,t,Abe(k-1,Ml+2),ldb,B(lb),1)
     ENDDO
   ENDIF
