@@ -1,8 +1,6 @@
-!*==QZVEC.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK QZVEC
 SUBROUTINE QZVEC(Nm,N,A,B,Alfr,Alfi,Beta,Z)
   IMPLICIT NONE
-  !*--QZVEC5
   !***BEGIN PROLOGUE  QZVEC
   !***PURPOSE  The optional fourth step of the QZ algorithm for
   !            generalized eigenproblems.  Accepts a matrix in

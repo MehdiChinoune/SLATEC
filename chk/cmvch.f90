@@ -1,9 +1,7 @@
-!*==CMVCH.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CMVCH
 SUBROUTINE CMVCH(Trans,M,N,Alpha,A,Nmax,X,Incx,Beta,Y,Incy,Yt,G,Yy,Eps,&
     Err,Ftl,Nout,Mv,Kprint)
   IMPLICIT NONE
-  !*--CMVCH6
   !***BEGIN PROLOGUE  CMVCH
   !***SUBSIDIARY
   !***PURPOSE  Check the results of the computational tests.

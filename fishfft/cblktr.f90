@@ -1,14 +1,10 @@
-!*==CBLKTR.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK CBLKTR
 SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   IMPLICIT NONE
-  !*--CBLKTR5
-  !*** Start of declarations inserted by SPAG
   REAL An, Bn, Cn, CNV, CPROC, CPROCP, EPS, PROC, PROCP, W
   INTEGER Idimy, Ierror, Iflg, IK, iw1, iw2, iw3, iwah, iwbh, iwd, &
     iwu, iww, K, M, m2, Mp, N, NCMplx, nh, nl
   INTEGER NM, Np, NPP
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CBLKTR
   !***PURPOSE  Solve a block tridiagonal system of linear equations
   !            (usually resulting from the discretization of separable

@@ -1,13 +1,9 @@
-!*==CV.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CV
 REAL FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   IMPLICIT NONE
-  !*--CV5
-  !*** Start of declarations inserted by SPAG
   REAL Bkpt, SDOT, v, W, Xval, zero
   INTEGER i, ileft, ip, is, last, mdg, mdw, n, Nbkpt, Nconst, &
     Ndata, Nord
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CV
   !***PURPOSE  Evaluate the variance function of the curve obtained
   !            by the constrained B-spline fitting subprogram FC.

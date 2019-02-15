@@ -1,8 +1,6 @@
-!*==SBEG.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SBEG
 REAL FUNCTION SBEG(Reset)
   IMPLICIT NONE
-  !*--SBEG5
   !***BEGIN PROLOGUE  SBEG
   !***SUBSIDIARY
   !***PURPOSE  Generate random numbers.

@@ -1,8 +1,6 @@
-!*==SSPR2.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSPR2
 SUBROUTINE SSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
   IMPLICIT NONE
-  !*--SSPR25
   !***BEGIN PROLOGUE  SSPR2
   !***PURPOSE  Perform the symmetric rank 2 operation.
   !***LIBRARY   SLATEC (BLAS)

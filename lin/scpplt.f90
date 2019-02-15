@@ -1,8 +1,6 @@
-!*==SCPPLT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SCPPLT
 SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   IMPLICIT NONE
-  !*--SCPPLT5
   !***BEGIN PROLOGUE  SCPPLT
   !***PURPOSE  Printer Plot of SLAP Column Format Matrix.
   !            Routine to print out a SLAP Column format matrix in a

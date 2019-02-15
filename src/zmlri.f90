@@ -1,8 +1,6 @@
-!*==ZMLRI.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZMLRI
 SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   IMPLICIT NONE
-  !*--ZMLRI5
   !***BEGIN PROLOGUE  ZMLRI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESI and ZBESK

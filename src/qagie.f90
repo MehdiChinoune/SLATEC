@@ -1,9 +1,7 @@
-!*==QAGIE.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QAGIE
 SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
   IMPLICIT NONE
-  !*--QAGIE6
   !***BEGIN PROLOGUE  QAGIE
   !***PURPOSE  The routine calculates an approximation result to a given
   !            integral   I = Integral of F over (BOUND,+INFINITY)

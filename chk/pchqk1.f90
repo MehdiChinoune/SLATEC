@@ -1,8 +1,6 @@
-!*==PCHQK1.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK PCHQK1
 SUBROUTINE PCHQK1(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--PCHQK15
   !***BEGIN PROLOGUE  PCHQK1
   !***PURPOSE  Test the PCHIP evaluators CHFDV, CHFEV, PCHFD and PCHFE.
   !***LIBRARY   SLATEC (PCHIP)

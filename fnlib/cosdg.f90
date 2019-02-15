@@ -1,12 +1,8 @@
-!*==COSDG.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK COSDG
 FUNCTION COSDG(X)
   IMPLICIT NONE
-  !*--COSDG5
-  !*** Start of declarations inserted by SPAG
   REAL COSDG, raddeg, X
   INTEGER n
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  COSDG
   !***PURPOSE  Compute the cosine of an argument in degrees.
   !***LIBRARY   SLATEC (FNLIB)

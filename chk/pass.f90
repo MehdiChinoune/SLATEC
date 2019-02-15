@@ -1,8 +1,6 @@
-!*==PASS.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK PASS
 SUBROUTINE PASS(Lun,Icnt,Itest)
   IMPLICIT NONE
-  !*--PASS5
   !***BEGIN PROLOGUE  PASS
   !***PURPOSE  Print a PASS/FAIL message for a particular quick check
   !            test.

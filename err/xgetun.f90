@@ -1,11 +1,7 @@
-!*==XGETUN.f90  processed by SPAG 6.72Dc at 10:54 on  6 Feb 2019
 !DECK XGETUN
 SUBROUTINE XGETUN(Iunit)
   IMPLICIT NONE
-  !*--XGETUN5
-  !*** Start of declarations inserted by SPAG
   INTEGER Iunit, J4SAVE
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XGETUN
   !***PURPOSE  Return the (first) output file to which error messages
   !            are being sent.

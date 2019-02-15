@@ -1,8 +1,6 @@
-!*==DRLCAL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DRLCAL
 SUBROUTINE DRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   IMPLICIT NONE
-  !*--DRLCAL5
   !***BEGIN PROLOGUE  DRLCAL
   !***SUBSIDIARY
   !***PURPOSE  Internal routine for DGMRES.

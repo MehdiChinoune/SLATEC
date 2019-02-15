@@ -1,12 +1,8 @@
-!*==CHKPR4.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CHKPR4
 SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   IMPLICIT NONE
-  !*--CHKPR45
-  !*** Start of declarations inserted by SPAG
   REAL A, ai, B, bi, C, ci, D, dlx, xi
   INTEGER i, Idmn, Ierror, Iorder, M, Mbdcnd, N, Nbdcnd
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CHKPR4
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPX4

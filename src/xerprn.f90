@@ -1,11 +1,7 @@
-!*==XERPRN.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XERPRN
 SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   IMPLICIT NONE
-  !*--XERPRN5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, I1MACH, idelta, lenmsg, lpiece, lpref, lwrap, n, nextc
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XERPRN
   !***SUBSIDIARY
   !***PURPOSE  Print error messages processed by XERMSG.

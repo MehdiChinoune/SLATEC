@@ -1,8 +1,6 @@
-!*==FCN3.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK FCN3
 SUBROUTINE FCN3(Iflag,M,N,X,Fvec,Fjrow,Nrow)
   IMPLICIT NONE
-  !*--FCN35
   !***BEGIN PROLOGUE  FCN3
   !***PURPOSE  Subsidiary to SNLS1Q.
   !***LIBRARY   SLATEC

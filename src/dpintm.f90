@@ -1,12 +1,8 @@
-!*==DPINTM.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DPINTM
 SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   IMPLICIT NONE
-  !*--DPINTM5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, iopt, Ipagef, Ix, Lmx, lp4, M, N, n20008, n20012, &
     nerr
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPINTM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP

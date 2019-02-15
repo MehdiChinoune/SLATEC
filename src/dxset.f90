@@ -1,14 +1,10 @@
-!*==DXSET.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DXSET
 SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   IMPLICIT NONE
-  !*--DXSET5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, I1MACH, ic, Ierror, ii, imaxex, iminex, iradx, it, j, &
     k, kk, lg102x, lgtemp, log102, log2r, lx, nb, NBItsf, &
     nbitsx
   INTEGER np1, nrdplc
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXSET
   !***PURPOSE  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.

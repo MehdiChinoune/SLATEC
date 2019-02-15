@@ -1,8 +1,6 @@
-!*==F3P.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK F3P
 REAL FUNCTION F3P(X)
   IMPLICIT NONE
-  !*--F3P5
   !***BEGIN PROLOGUE  F3P
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

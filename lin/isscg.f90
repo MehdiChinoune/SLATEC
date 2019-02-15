@@ -1,10 +1,8 @@
-!*==ISSCG.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK ISSCG
 INTEGER FUNCTION ISSCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork,Ak,Bk,Bnrm,&
     Solnrm)
   IMPLICIT NONE
-  !*--ISSCG7
   !***BEGIN PROLOGUE  ISSCG
   !***SUBSIDIARY
   !***PURPOSE  Preconditioned Conjugate Gradient Stop Test.

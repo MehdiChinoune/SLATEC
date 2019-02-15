@@ -1,8 +1,6 @@
-!*==DTBSV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DTBSV
 SUBROUTINE DTBSV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   IMPLICIT NONE
-  !*--DTBSV5
   !***BEGIN PROLOGUE  DTBSV
   !***PURPOSE  Solve one of the systems of equations.
   !***LIBRARY   SLATEC (BLAS)

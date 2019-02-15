@@ -1,13 +1,9 @@
-!*==R9LN2R.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK R9LN2R
 FUNCTION R9LN2R(X)
   IMPLICIT NONE
-  !*--R9LN2R5
-  !*** Start of declarations inserted by SPAG
   REAL CSEVL, eps, R1MACH, R9LN2R, sqeps, txbig, txmax, X, xbig, &
     xmax, xmin
   INTEGER INITS, ntln21, ntln22
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9LN2R
   !***SUBSIDIARY
   !***PURPOSE  Evaluate LOG(1+X) from second order relative accuracy so

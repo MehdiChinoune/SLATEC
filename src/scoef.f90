@@ -1,16 +1,12 @@
-!*==SCOEF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK SCOEF
 SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
     Cvec,Work,Iwork,Iflag,Nfcc)
   IMPLICIT NONE
-  !*--SCOEF6
-  !*** Start of declarations inserted by SPAG
   REAL Ae, B, bbn, Beta, bn, brn, By, bykl, bys, Coef, cons, &
     Cvec, EPS, FOUru, gam, Re, SDOT, SQOvfl, SRU, TWOu
   REAL un, URO, Work, Yh, Yp, ypn
   INTEGER i, Iflag, Inhomo, Iwork, j, k, kflag, ki, l, LPAr, &
     mlso, Ncomp, ncomp2, nf, Nfc, Nfcc, nfccm1, Nic, Nrowb
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SCOEF
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

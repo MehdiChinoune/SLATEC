@@ -1,11 +1,7 @@
-!*==DDQCK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DDQCK
 SUBROUTINE DDQCK(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DDQCK5
-  !*** Start of declarations inserted by SPAG
   REAL DDF
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DDQCK
   !***PURPOSE  Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.
   !***LIBRARY   SLATEC (SDRIVE)

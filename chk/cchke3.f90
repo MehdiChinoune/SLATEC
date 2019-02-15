@@ -1,8 +1,6 @@
-!*==CCHKE3.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CCHKE3
 SUBROUTINE CCHKE3(Isnum,Srnamt,Nout,Kprint,Fatal)
   IMPLICIT NONE
-  !*--CCHKE35
   !***BEGIN PROLOGUE  CCHKE3
   !***SUBSIDIARY
   !***PURPOSE  Test the error exits from the Level 3 Blas.

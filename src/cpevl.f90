@@ -1,12 +1,8 @@
-!*==CPEVL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CPEVL
 SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   IMPLICIT NONE
-  !*--CPEVL5
-  !*** Start of declarations inserted by SPAG
   REAL d1, r, s
   INTEGER i, I1MACH, j, M, mini, N, np1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CPEVL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CPZERO

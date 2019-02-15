@@ -1,14 +1,10 @@
-!*==SROTMG.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SROTMG
 SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
   IMPLICIT NONE
-  !*--SROTMG5
-  !*** Start of declarations inserted by SPAG
   REAL gam, gamsq, one, rgamsq, Sd1, Sd2, sflag, sh11, sh12, sh21, &
     sh22, sp1, sp2, Sparam, sq1, sq2, stemp, su, Sx1, Sy1
   REAL two, zero
   INTEGER igo
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SROTMG
   !***PURPOSE  Construct a modified Givens transformation.
   !***LIBRARY   SLATEC (BLAS)

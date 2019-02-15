@@ -1,12 +1,8 @@
-!*==DNSQE.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DNSQE
 SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   IMPLICIT NONE
-  !*--DNSQE5
-  !*** Start of declarations inserted by SPAG
   REAL FCN
   INTEGER JAC
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DNSQE
   !***PURPOSE  An easy-to-use code to find a zero of a system of N
   !            nonlinear functions in N variables by a modification of

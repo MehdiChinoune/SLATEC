@@ -1,14 +1,10 @@
-!*==CMGNBN.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK CMGNBN
 SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   IMPLICIT NONE
-  !*--CMGNBN5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Idimy, Ierror, ipstor, irev, iwb2, iwb3, iwba, iwbb, &
     iwbc, iwd, iwp, iwtcos, iww1, iww2, iww3, j, k, M, mh
   INTEGER mhm1, mhmi, mhpi, modd, mp, Mperod, mskip, N, nby2, np, &
     Nperod
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CMGNBN
   !***PURPOSE  Solve a complex block tridiagonal linear system of
   !            equations by a cyclic reduction algorithm.

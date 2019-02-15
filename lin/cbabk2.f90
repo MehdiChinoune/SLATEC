@@ -1,8 +1,6 @@
-!*==CBABK2.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CBABK2
 SUBROUTINE CBABK2(Nm,N,Low,Igh,Scale,M,Zr,Zi)
   IMPLICIT NONE
-  !*--CBABK25
   !***BEGIN PROLOGUE  CBABK2
   !***PURPOSE  Form the eigenvectors of a complex general matrix from the
   !            eigenvectors of matrix output from CBAL.

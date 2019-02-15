@@ -1,8 +1,6 @@
-!*==SCHKE2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SCHKE2
 SUBROUTINE SCHKE2(Isnum,Srnamt,Nout,Kprint,Fatal)
   IMPLICIT NONE
-  !*--SCHKE25
   !***BEGIN PROLOGUE  SCHKE2
   !***SUBSIDIARY
   !***PURPOSE  Test the error exits from the Level 2 Blas.

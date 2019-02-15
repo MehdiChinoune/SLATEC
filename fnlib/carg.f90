@@ -1,11 +1,7 @@
-!*==CARG.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CARG
 FUNCTION CARG(Z)
   IMPLICIT NONE
-  !*--CARG5
-  !*** Start of declarations inserted by SPAG
   REAL CARG
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CARG
   !***PURPOSE  Compute the argument of a complex number.
   !***LIBRARY   SLATEC (FNLIB)

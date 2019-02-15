@@ -1,11 +1,7 @@
-!*==DAI.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DAI
 REAL(8) FUNCTION DAI(X)
   IMPLICIT NONE
-  !*--DAI5
-  !*** Start of declarations inserted by SPAG
   INTEGER INITDS, naif, naig
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DAI
   !***PURPOSE  Evaluate the Airy function.
   !***LIBRARY   SLATEC (FNLIB)

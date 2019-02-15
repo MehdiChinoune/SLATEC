@@ -1,12 +1,8 @@
-!*==DXPQNU.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DXPQNU
 SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  !*--DXPQNU5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ia, Id, Ierror, if, ipq, ipq1, ipq2, Ipqa, ipsik, &
     ipsix, ix1, ixs, j, j0, k, Mu, NBItsf
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXPQNU
   !***SUBSIDIARY
   !***PURPOSE  To compute the values of Legendre functions for DXLEGF.

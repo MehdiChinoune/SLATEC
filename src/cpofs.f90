@@ -1,8 +1,6 @@
-!*==CPOFS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CPOFS
 SUBROUTINE CPOFS(A,Lda,N,V,Itask,Ind,Work)
   IMPLICIT NONE
-  !*--CPOFS5
   !***BEGIN PROLOGUE  CPOFS
   !***PURPOSE  Solve a positive definite symmetric complex system of
   !            linear equations.

@@ -1,8 +1,6 @@
-!*==DFCN1.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DFCN1
 SUBROUTINE DFCN1(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
   IMPLICIT NONE
-  !*--DFCN15
   !***BEGIN PROLOGUE  DFCN1
   !***PURPOSE  Subsidiary to DNLS1Q.
   !***LIBRARY   SLATEC

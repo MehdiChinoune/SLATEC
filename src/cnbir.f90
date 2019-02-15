@@ -1,8 +1,6 @@
-!*==CNBIR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CNBIR
 SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   IMPLICIT NONE
-  !*--CNBIR5
   !***BEGIN PROLOGUE  CNBIR
   !***PURPOSE  Solve a general nonsymmetric banded system of linear
   !            equations.  Iterative refinement is used to obtain an error

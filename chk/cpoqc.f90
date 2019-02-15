@@ -1,11 +1,7 @@
-!*==CPOQC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CPOQC
 SUBROUTINE CPOQC(Lun,Kprint,Nerr)
   IMPLICIT NONE
-  !*--CPOQC5
-  !*** Start of declarations inserted by SPAG
   INTEGER Kprint, Lun
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CPOQC
   !***PURPOSE  Quick check for CPOFA, CPOCO, CPOSL and CPODI.
   !***LIBRARY   SLATEC

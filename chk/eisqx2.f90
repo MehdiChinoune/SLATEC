@@ -1,12 +1,8 @@
-!*==EISQX2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK EISQX2
 SUBROUTINE EISQX2(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--EISQX25
-  !*** Start of declarations inserted by SPAG
   INTEGER info
   REAL R1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  EISQX2
   !***PURPOSE  Quick check for SSIEV, CHIEV and SSPEV.
   !***LIBRARY   SLATEC

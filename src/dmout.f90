@@ -1,11 +1,7 @@
-!*==DMOUT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DMOUT
 SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   IMPLICIT NONE
-  !*--DMOUT5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, I1MACH, Idigit, j, k1, k2, Lda, lout, M, N, ndigit
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DMOUT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBOCLS and DFC

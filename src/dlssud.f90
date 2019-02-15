@@ -1,9 +1,7 @@
-!*==DLSSUD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DLSSUD
 SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     Kpivot,S,Div,Td,Isflg,Scales)
   IMPLICIT NONE
-  !*--DLSSUD6
   !***BEGIN PROLOGUE  DLSSUD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBVSUP and DSUDS

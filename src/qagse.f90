@@ -1,9 +1,7 @@
-!*==QAGSE.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QAGSE
 SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     Blist,Rlist,Elist,Iord,Last)
   IMPLICIT NONE
-  !*--QAGSE6
   !***BEGIN PROLOGUE  QAGSE
   !***PURPOSE  The routine calculates an approximation result to a given
   !            definite integral I = Integral of F over (A,B),

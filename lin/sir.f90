@@ -1,9 +1,7 @@
-!*==SIR.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SIR
 SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork)
   IMPLICIT NONE
-  !*--SIR6
   !***BEGIN PROLOGUE  SIR
   !***PURPOSE  Preconditioned Iterative Refinement Sparse Ax = b Solver.
   !            Routine to solve a general linear system  Ax = b  using

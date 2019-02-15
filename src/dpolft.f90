@@ -1,11 +1,7 @@
-!*==DPOLFT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DPOLFT
 SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   IMPLICIT NONE
-  !*--DPOLFT5
-  !*** Start of declarations inserted by SPAG
   INTEGER N
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPOLFT
   !***PURPOSE  Fit discrete data in a least squares sense by polynomials
   !            in one variable.

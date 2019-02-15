@@ -1,8 +1,6 @@
-!*==PYTHAG.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK PYTHAG
 REAL FUNCTION PYTHAG(A,B)
   IMPLICIT NONE
-  !*--PYTHAG5
   !***BEGIN PROLOGUE  PYTHAG
   !***SUBSIDIARY
   !***PURPOSE  Compute the complex square root of a complex number without

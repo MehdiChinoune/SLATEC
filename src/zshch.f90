@@ -1,8 +1,6 @@
-!*==ZSHCH.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZSHCH
 SUBROUTINE ZSHCH(Zr,Zi,Cshr,Cshi,Cchr,Cchi)
   IMPLICIT NONE
-  !*--ZSHCH5
   !***BEGIN PROLOGUE  ZSHCH
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESH and ZBESK

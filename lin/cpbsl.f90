@@ -1,8 +1,6 @@
-!*==CPBSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CPBSL
 SUBROUTINE CPBSL(Abd,Lda,N,M,B)
   IMPLICIT NONE
-  !*--CPBSL5
   !***BEGIN PROLOGUE  CPBSL
   !***PURPOSE  Solve the complex Hermitian positive definite band system
   !            using the factors computed by CPBCO or CPBFA.

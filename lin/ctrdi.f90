@@ -1,8 +1,6 @@
-!*==CTRDI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CTRDI
 SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
   IMPLICIT NONE
-  !*--CTRDI5
   !***BEGIN PROLOGUE  CTRDI
   !***PURPOSE  Compute the determinant and inverse of a triangular matrix.
   !***LIBRARY   SLATEC (LINPACK)

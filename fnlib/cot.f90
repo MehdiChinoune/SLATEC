@@ -1,13 +1,9 @@
-!*==COT.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK COT
 FUNCTION COT(X)
   IMPLICIT NONE
-  !*--COT5
-  !*** Start of declarations inserted by SPAG
   REAL ainty, ainty2, COT, cotcs, CSEVL, pi2rec, prodbg, R1MACH, &
     sqeps, X, xmax, xmin, xsml, y, yrem
   INTEGER ifn, INITS, nterms
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  COT
   !***PURPOSE  Compute the cotangent.
   !***LIBRARY   SLATEC (FNLIB)

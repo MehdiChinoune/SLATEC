@@ -1,11 +1,7 @@
-!*==DNSQQK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DNSQQK
 SUBROUTINE DNSQQK(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DNSQQK5
-  !*** Start of declarations inserted by SPAG
   REAL DQFCN2, DQJAC2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DNSQQK
   !***PURPOSE  Quick check for DNSQE and DNSQ.
   !***LIBRARY   SLATEC

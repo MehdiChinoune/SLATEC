@@ -1,8 +1,6 @@
-!*==DGESL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DGESL
 SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
   IMPLICIT NONE
-  !*--DGESL5
   !***BEGIN PROLOGUE  DGESL
   !***PURPOSE  Solve the real system A*X=B or TRANS(A)*X=B using the
   !            factors computed by DGECO or DGEFA.

@@ -1,8 +1,6 @@
-!*==REBAK.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK REBAK
 SUBROUTINE REBAK(Nm,N,B,Dl,M,Z)
   IMPLICIT NONE
-  !*--REBAK5
   !***BEGIN PROLOGUE  REBAK
   !***PURPOSE  Form the eigenvectors of a generalized symmetric
   !            eigensystem from the eigenvectors of derived matrix output

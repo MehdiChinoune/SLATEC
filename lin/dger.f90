@@ -1,8 +1,6 @@
-!*==DGER.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DGER
 SUBROUTINE DGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   IMPLICIT NONE
-  !*--DGER5
   !***BEGIN PROLOGUE  DGER
   !***PURPOSE  Perform the rank 1 operation.
   !***LIBRARY   SLATEC (BLAS)

@@ -1,4 +1,3 @@
-!*==DBOCQX.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DBOCQX
 SUBROUTINE DBOCQX(Lun,Kprint,Ipass)
   !***BEGIN PROLOGUE  DBOCQX
@@ -24,12 +23,9 @@ SUBROUTINE DBOCQX(Lun,Kprint,Ipass)
   !   901010  Added PASS/FAIL message.  (RWC)
   !***END PROLOGUE  DBOCQX
   IMPLICIT NONE
-  !*--DBOCQX27
-  !*** Start of declarations inserted by SPAG
   REAL(8) :: D1MACH, DNRM2, rnorm, rnormc, sr
   INTEGER i, ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw ,&
     mode, mpass, mrows, ncols
-  !*** End of declarations inserted by SPAG
   REAL(8) :: d(6,5), w(11,11), bl(5,2), bu(5,2), x(30), rw(55) ,&
     xtrue(9)
   REAL(8) :: c(5,5)

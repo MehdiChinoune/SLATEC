@@ -1,8 +1,6 @@
-!*==SNBSL.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SNBSL
 SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   IMPLICIT NONE
-  !*--SNBSL5
   !***BEGIN PROLOGUE  SNBSL
   !***PURPOSE  Solve a real band system using the factors computed by
   !            SNBCO or SNBFA.

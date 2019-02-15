@@ -1,8 +1,6 @@
-!*==FZTEST.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK FZTEST
 SUBROUTINE FZTEST(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--FZTEST5
   !***BEGIN PROLOGUE  FZTEST
   !***PURPOSE  Quick check for FZERO.
   !***LIBRARY   SLATEC

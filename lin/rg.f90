@@ -1,8 +1,6 @@
-!*==RG.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK RG
 SUBROUTINE RG(Nm,N,A,Wr,Wi,Matz,Z,Iv1,Fv1,Ierr)
   IMPLICIT NONE
-  !*--RG5
   !***BEGIN PROLOGUE  RG
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real general matrix.

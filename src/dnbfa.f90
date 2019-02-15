@@ -1,8 +1,6 @@
-!*==DNBFA.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DNBFA
 SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   IMPLICIT NONE
-  !*--DNBFA5
   !***BEGIN PROLOGUE  DNBFA
   !***PURPOSE  Factor a band matrix by elimination.
   !***LIBRARY   SLATEC

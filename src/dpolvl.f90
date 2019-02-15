@@ -1,8 +1,6 @@
-!*==DPOLVL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DPOLVL
 SUBROUTINE DPOLVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   IMPLICIT NONE
-  !*--DPOLVL5
   !***BEGIN PROLOGUE  DPOLVL
   !***PURPOSE  Calculate the value of a polynomial and its first NDER
   !            derivatives where the polynomial was produced by a previous

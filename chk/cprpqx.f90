@@ -1,11 +1,7 @@
-!*==CPRPQX.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CPRPQX
 SUBROUTINE CPRPQX(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--CPRPQX5
-  !*** Start of declarations inserted by SPAG
   REAL R1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CPRPQX
   !***PURPOSE  Quick check for CPZERO and RPZERO.
   !***LIBRARY   SLATEC

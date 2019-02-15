@@ -1,8 +1,6 @@
-!*==RC3JJ.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK RC3JJ
 SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   IMPLICIT NONE
-  !*--RC3JJ5
   !***BEGIN PROLOGUE  RC3JJ
   !***PURPOSE  Evaluate the 3j symbol f(L1) = (  L1   L2 L3)
   !                                           (-M2-M3 M2 M3)

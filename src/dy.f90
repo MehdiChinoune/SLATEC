@@ -1,13 +1,9 @@
-!*==DY.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DY
 SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
   IMPLICIT NONE
-  !*--DY5
-  !*** Start of declarations inserted by SPAG
   REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, TDLx3, TDLy3, U, &
     Uyyy, Uyyyy
   INTEGER I, Idmn, IS, J, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DY
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPELI

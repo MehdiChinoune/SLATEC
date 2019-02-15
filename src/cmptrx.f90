@@ -1,11 +1,7 @@
-!*==CMPTRX.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CMPTRX
 SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   IMPLICIT NONE
-  !*--CMPTRX5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Idegbr, Idegcr, ip, k, l, lint, M, mm1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CMPTRX
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CMGNBN

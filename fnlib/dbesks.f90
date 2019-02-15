@@ -1,11 +1,7 @@
-!*==DBESKS.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBESKS
 SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   IMPLICIT NONE
-  !*--DBESKS5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, n, Nin
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBESKS
   !***PURPOSE  Compute a sequence of modified Bessel functions of the
   !            third kind of fractional order.

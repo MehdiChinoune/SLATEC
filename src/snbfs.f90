@@ -1,8 +1,6 @@
-!*==SNBFS.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SNBFS
 SUBROUTINE SNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   IMPLICIT NONE
-  !*--SNBFS5
   !***BEGIN PROLOGUE  SNBFS
   !***PURPOSE  Solve a general nonsymmetric banded system of linear
   !            equations.

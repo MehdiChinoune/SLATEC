@@ -1,13 +1,9 @@
-!*==E1.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK E1
 FUNCTION E1(X)
   IMPLICIT NONE
-  !*--E15
-  !*** Start of declarations inserted by SPAG
   REAL ae11cs, ae12cs, ae13cs, ae14cs, CSEVL, E1, e11cs, e12cs, &
     eta, R1MACH, X, xmax, xmaxt
   INTEGER INITS, ntae11, ntae12, ntae13, ntae14, nte11, nte12
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  E1
   !***PURPOSE  Compute the exponential integral E1(X).
   !***LIBRARY   SLATEC (FNLIB)

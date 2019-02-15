@@ -1,8 +1,6 @@
-!*==DGEFS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DGEFS
 SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   IMPLICIT NONE
-  !*--DGEFS5
   !***BEGIN PROLOGUE  DGEFS
   !***PURPOSE  Solve a general system of linear equations.
   !***LIBRARY   SLATEC

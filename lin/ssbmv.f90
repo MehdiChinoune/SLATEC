@@ -1,8 +1,6 @@
-!*==SSBMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSBMV
 SUBROUTINE SSBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   IMPLICIT NONE
-  !*--SSBMV5
   !***BEGIN PROLOGUE  SSBMV
   !***PURPOSE  Multiply a real vector by a real symmetric band matrix.
   !***LIBRARY   SLATEC (BLAS)

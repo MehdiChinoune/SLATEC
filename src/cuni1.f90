@@ -1,8 +1,6 @@
-!*==CUNI1.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CUNI1
 SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--CUNI15
   !***BEGIN PROLOGUE  CUNI1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBESI and CBESK

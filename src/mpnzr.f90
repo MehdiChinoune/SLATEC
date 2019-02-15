@@ -1,11 +1,7 @@
-!*==MPNZR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK MPNZR
 SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
   IMPLICIT NONE
-  !*--MPNZR5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, i2, i2m, i2p, is, it, j, k, LUN, M, MXR
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPNZR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI

@@ -1,17 +1,13 @@
-!*==CBLKT1.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CBLKT1
 SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
     CPRDCT)
   IMPLICIT NONE
-  !*--CBLKT16
-  !*** Start of declarations inserted by SPAG
   REAL An, B, Bn, Cn, CNV, dum, EPS
   INTEGER i, i1, i2, i3, i4, Idimy, idxa, idxc, if, ifd, IK, &
     im1, im2, im3, imi1, imi2, ip, ip1, ip2, ip3
   INTEGER ipi1, ipi2, ipi3, ir, irm1, iz, izr, j, K, kdo, l, ll, &
     M, N, na, nc, NCMplx, NM, nm1, nm2
   INTEGER nm3, np, np1, np2, np3, NPP, nz
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CBLKT1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBLKTR

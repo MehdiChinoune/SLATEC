@@ -1,8 +1,6 @@
-!*==SPOFA.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SPOFA
 SUBROUTINE SPOFA(A,Lda,N,Info)
   IMPLICIT NONE
-  !*--SPOFA5
   !***BEGIN PROLOGUE  SPOFA
   !***PURPOSE  Factor a real symmetric positive definite matrix.
   !***LIBRARY   SLATEC (LINPACK)

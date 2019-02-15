@@ -1,8 +1,6 @@
-!*==DBSPCK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DBSPCK
 SUBROUTINE DBSPCK(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DBSPCK5
   !***BEGIN PROLOGUE  DBSPCK
   !***PURPOSE  Quick check for the B-Spline package.
   !***LIBRARY   SLATEC

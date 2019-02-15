@@ -1,12 +1,8 @@
-!*==COSQB1.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK COSQB1
 SUBROUTINE COSQB1(N,X,W,Xh)
   IMPLICIT NONE
-  !*--COSQB15
-  !*** Start of declarations inserted by SPAG
   INTEGER i, k, kc, modn, N, np2, ns2
   REAL W, X, Xh, xim1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  COSQB1
   !***SUBSIDIARY
   !***PURPOSE  Compute the unnormalized inverse of COSQF1.

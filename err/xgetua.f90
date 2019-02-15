@@ -1,11 +1,7 @@
-!*==XGETUA.f90  processed by SPAG 6.72Dc at 10:54 on  6 Feb 2019
 !DECK XGETUA
 SUBROUTINE XGETUA(Iunita,N)
   IMPLICIT NONE
-  !*--XGETUA5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, index, Iunita, J4SAVE, N
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XGETUA
   !***PURPOSE  Return unit number(s) to which error messages are being
   !            sent.

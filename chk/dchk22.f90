@@ -1,10 +1,8 @@
-!*==DCHK22.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DCHK22
 SUBROUTINE DCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
     Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,&
     Y,Yy,Ys,Yt,G)
   IMPLICIT NONE
-  !*--DCHK227
   !***BEGIN PROLOGUE  DCHK22
   !***SUBSIDIARY
   !***PURPOSE  Test DSYMV, DSBMV and DSPMV.

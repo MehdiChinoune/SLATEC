@@ -1,13 +1,9 @@
-!*==U12LS.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK U12LS
 SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   IMPLICIT NONE
-  !*--U12LS5
-  !*** Start of declarations inserted by SPAG
   REAL A, B, bb, H, Rnorm, SDOT, SNRM2, tt, W
   INTEGER i, ij, im1, j, jb, k, kp1, Krank, M, Mda, Mdb, Mode, &
     N, Nb, nmk
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  U12LS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to LLSIA

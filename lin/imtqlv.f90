@@ -1,8 +1,6 @@
-!*==IMTQLV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK IMTQLV
 SUBROUTINE IMTQLV(N,D,E,E2,W,Ind,Ierr,Rv1)
   IMPLICIT NONE
-  !*--IMTQLV5
   !***BEGIN PROLOGUE  IMTQLV
   !***PURPOSE  Compute the eigenvalues of a symmetric tridiagonal matrix
   !            using the implicit QL method.  Eigenvectors may be computed

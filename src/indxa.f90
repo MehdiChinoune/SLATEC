@@ -1,12 +1,8 @@
-!*==INDXA.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK INDXA
 SUBROUTINE INDXA(I,Ir,Idxa,Na)
   IMPLICIT NONE
-  !*--INDXA5
-  !*** Start of declarations inserted by SPAG
   REAL CNV, EPS
   INTEGER I, Idxa, IK, Ir, K, Na, NCMplx, NM, NPP
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  INDXA
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI

@@ -1,8 +1,6 @@
-!*==CDNTP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CDNTP
 SUBROUTINE CDNTP(H,K,N,Nq,T,Tout,Yh,Y)
   IMPLICIT NONE
-  !*--CDNTP5
   !***BEGIN PROLOGUE  CDNTP
   !***SUBSIDIARY
   !***PURPOSE  Subroutine CDNTP interpolates the K-th derivative of Y at

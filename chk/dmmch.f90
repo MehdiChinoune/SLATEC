@@ -1,9 +1,7 @@
-!*==DMMCH.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DMMCH
 SUBROUTINE DMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
     Cc,Ldcc,Eps,Err,Ftl,Nout,Mv,Kprint)
   IMPLICIT NONE
-  !*--DMMCH6
   !***BEGIN PROLOGUE  DMMCH
   !***SUBSIDIARY
   !***PURPOSE  Check the results of the computational tests.

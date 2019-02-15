@@ -1,11 +1,7 @@
-!*==RD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK RD
 REAL FUNCTION RD(X,Y,Z,Ier)
   IMPLICIT NONE
-  !*--RD5
-  !*** Start of declarations inserted by SPAG
   REAL R1MACH, tuplim
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RD
   !***PURPOSE  Compute the incomplete or complete elliptic integral of the
   !            2nd kind.  For X and Y nonnegative, X+Y and Z positive,

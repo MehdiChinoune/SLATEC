@@ -1,14 +1,10 @@
-!*==HFTI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK HFTI
 SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   IMPLICIT NONE
-  !*--HFTI5
-  !*** Start of declarations inserted by SPAG
   REAL A, B, factor, G, H, hmax, R1MACH, releps, Rnorm, sm1, &
     szero, Tau, tmp
   INTEGER i, ii, iopt, ip1, j, jb, jj, k, kp1, Krank, l, ldiag, &
     lmax, M, Mda, Mdb, N, Nb, nerr
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HFTI
   !***PURPOSE  Solve a linear least squares problems by performing a QR
   !            factorization of the matrix using Householder

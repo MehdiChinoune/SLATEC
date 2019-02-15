@@ -1,8 +1,6 @@
-!*==DFQD1.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DFQD1
 REAL(8) FUNCTION DFQD1(X)
   IMPLICIT NONE
-  !*--DFQD15
   !***BEGIN PROLOGUE  DFQD1
   !***SUBSIDIARY
   !***PURPOSE  Function evaluator for DQNC79 and DGAUS8 quick checks.

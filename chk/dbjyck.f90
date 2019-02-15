@@ -1,11 +1,7 @@
-!*==DBJYCK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DBJYCK
 SUBROUTINE DBJYCK(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DBJYCK5
-  !*** Start of declarations inserted by SPAG
   INTEGER Kprint, NUMXER
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBJYCK
   !***PURPOSE  Quick check for DBESJ and DBESY.
   !***LIBRARY   SLATEC

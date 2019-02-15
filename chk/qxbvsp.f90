@@ -1,16 +1,12 @@
-!*==QXBVSP.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QXBVSP
 SUBROUTINE QXBVSP(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QXBVSP5
-  !*** Start of declarations inserted by SPAG
   REAL a, abser, ae, alpha, b, beta, re, reler, sve, TERm, tol ,&
     work, xpts, XSAve, y, yans
   INTEGER i, iflag, igofx, Ipass, ipss, j, kont, kount, Kprint, l ,&
     Lun, ncomp, ndiw, ndw, neqivp, nfc, nic, nrowa, nrowb ,&
     nrowy
   INTEGER numort, nxpts
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QXBVSP
   !***PURPOSE  Quick check for BVSUP.
   !***LIBRARY   SLATEC

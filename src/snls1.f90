@@ -1,10 +1,8 @@
-!*==SNLS1.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SNLS1
 SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,Ipvt,Qtf,&
     Wa1,Wa2,Wa3,Wa4)
   IMPLICIT NONE
-  !*--SNLS17
   !***BEGIN PROLOGUE  SNLS1
   !***PURPOSE  Minimize the sum of the squares of M nonlinear functions
   !            in N variables by a modification of the Levenberg-Marquardt

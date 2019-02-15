@@ -1,8 +1,6 @@
-!*==CHER2K.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CHER2K
 SUBROUTINE CHER2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   IMPLICIT NONE
-  !*--CHER2K5
   !***BEGIN PROLOGUE  CHER2K
   !***PURPOSE  Perform Hermitian rank 2k update of a complex.
   !***LIBRARY   SLATEC (BLAS)

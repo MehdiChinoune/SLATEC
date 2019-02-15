@@ -1,8 +1,6 @@
-!*==CORTB.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CORTB
 SUBROUTINE CORTB(Nm,Low,Igh,Ar,Ai,Ortr,Orti,M,Zr,Zi)
   IMPLICIT NONE
-  !*--CORTB5
   !***BEGIN PROLOGUE  CORTB
   !***PURPOSE  Form the eigenvectors of a complex general matrix from
   !            eigenvectors of upper Hessenberg matrix output from

@@ -1,8 +1,6 @@
-!*==CBESH.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CBESH
 SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   IMPLICIT NONE
-  !*--CBESH5
   !***BEGIN PROLOGUE  CBESH
   !***PURPOSE  Compute a sequence of the Hankel functions H(m,a,z)
   !            for superscript m=1 or 2, real nonnegative orders a=b,

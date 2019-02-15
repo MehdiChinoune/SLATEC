@@ -1,8 +1,6 @@
-!*==QWGTS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QWGTS
 REAL FUNCTION QWGTS(X,A,B,Alfa,Beta,Integr)
   IMPLICIT NONE
-  !*--QWGTS5
   !***BEGIN PROLOGUE  QWGTS
   !***SUBSIDIARY
   !***PURPOSE  This function subprogram is used together with the

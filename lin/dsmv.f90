@@ -1,8 +1,6 @@
-!*==DSMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSMV
 SUBROUTINE DSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   IMPLICIT NONE
-  !*--DSMV5
   !***BEGIN PROLOGUE  DSMV
   !***PURPOSE  SLAP Column Format Sparse Matrix Vector Product.
   !            Routine to calculate the sparse matrix vector product:

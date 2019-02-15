@@ -1,8 +1,6 @@
-!*==DQPSRT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQPSRT
 SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   IMPLICIT NONE
-  !*--DQPSRT5
   !***BEGIN PROLOGUE  DQPSRT
   !***SUBSIDIARY
   !***PURPOSE  This routine maintains the descending ordering in the

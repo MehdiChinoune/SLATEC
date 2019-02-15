@@ -1,9 +1,7 @@
-!*==DCHK62.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DCHK62
 SUBROUTINE DCHK62(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
     Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
   IMPLICIT NONE
-  !*--DCHK626
   !***BEGIN PROLOGUE  DCHK62
   !***SUBSIDIARY
   !***PURPOSE  Test DSYR2 and DSPR2.

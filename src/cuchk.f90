@@ -1,8 +1,6 @@
-!*==CUCHK.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CUCHK
 SUBROUTINE CUCHK(Y,Nz,Ascle,Tol)
   IMPLICIT NONE
-  !*--CUCHK5
   !***BEGIN PROLOGUE  CUCHK
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SERI, CUOIK, CUNK1, CUNK2, CUNI1, CUNI2 and

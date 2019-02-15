@@ -1,12 +1,8 @@
-!*==TSTURM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK TSTURM
 SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
     Rv5,Rv6)
   IMPLICIT NONE
-  !*--TSTURM6
-  !*** Start of declarations inserted by SPAG
   REAL R1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TSTURM
   !***PURPOSE  Find those eigenvalues of a symmetric tridiagonal matrix
   !            in a given interval and their associated eigenvectors by

@@ -1,8 +1,6 @@
-!*==RT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK RT
 SUBROUTINE RT(Nm,N,A,W,Matz,Z,Fv1,Ierr)
   IMPLICIT NONE
-  !*--RT5
   !***BEGIN PROLOGUE  RT
   !***PURPOSE  Compute the eigenvalues and eigenvectors of a special real
   !            tridiagonal matrix.

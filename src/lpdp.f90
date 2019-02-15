@@ -1,11 +1,7 @@
-!*==LPDP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK LPDP
 SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   IMPLICIT NONE
-  !*--LPDP5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, iw, ix, j, l, M, Mda, Mode, modew, n, N1, N2, np1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  LPDP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to LSEI

@@ -1,8 +1,6 @@
-!*==SDJAC2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SDJAC2
 SUBROUTINE SDJAC2(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
   IMPLICIT NONE
-  !*--SDJAC25
   !***BEGIN PROLOGUE  SDJAC2
   !***SUBSIDIARY
   !***PURPOSE  Second Jacobian evaluator for SDASQC.

@@ -1,8 +1,6 @@
-!*==DQWGTF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQWGTF
 REAL(8) FUNCTION DQWGTF(X,Omega,P2,P3,P4,Integr)
   IMPLICIT NONE
-  !*--DQWGTF5
   !***BEGIN PROLOGUE  DQWGTF
   !***SUBSIDIARY
   !***PURPOSE  This function subprogram is used together with the

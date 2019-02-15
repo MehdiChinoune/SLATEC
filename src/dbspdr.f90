@@ -1,8 +1,6 @@
-!*==DBSPDR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DBSPDR
 SUBROUTINE DBSPDR(T,A,N,K,Nderiv,Ad)
   IMPLICIT NONE
-  !*--DBSPDR5
   !***BEGIN PROLOGUE  DBSPDR
   !***PURPOSE  Use the B-representation to construct a divided difference
   !            table preparatory to a (right) derivative calculation.

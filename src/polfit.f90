@@ -1,16 +1,12 @@
-!*==POLFIT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK POLFIT
 SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   IMPLICIT NONE
-  !*--POLFIT5
-  !*** Start of declarations inserted by SPAG
   REAL A, co, degf, den, Eps, etst, f, fcrit, R, sig, sigj, &
     sigjm1, sigpas, temp, W, w1, w11, X, xm, Y
   REAL yp
   INTEGER i, idegf, Ierr, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, &
     k3pi, k4, k4pi, k5, k5pi, ksig, m, Maxdeg, mop1
   INTEGER N, Ndeg, nder, nfail
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POLFIT
   !***PURPOSE  Fit discrete data in a least squares sense by polynomials
   !            in one variable.

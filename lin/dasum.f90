@@ -1,8 +1,6 @@
-!*==DASUM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DASUM
 REAL(8) FUNCTION DASUM(N,Dx,Incx)
   IMPLICIT NONE
-  !*--DASUM5
   !***BEGIN PROLOGUE  DASUM
   !***PURPOSE  Compute the sum of the magnitudes of the elements of a
   !            vector.

@@ -1,11 +1,7 @@
-!*==XSETUN.f90  processed by SPAG 6.72Dc at 10:54 on  6 Feb 2019
 !DECK XSETUN
 SUBROUTINE XSETUN(Iunit)
   IMPLICIT NONE
-  !*--XSETUN5
-  !*** Start of declarations inserted by SPAG
   INTEGER Iunit, J4SAVE, junk
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XSETUN
   !***PURPOSE  Set output file to which error messages are to be sent.
   !***LIBRARY   SLATEC (XERROR)

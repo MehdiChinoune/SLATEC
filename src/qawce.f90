@@ -1,12 +1,8 @@
-!*==QAWCE.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QAWCE
 SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
   IMPLICIT NONE
-  !*--QAWCE6
-  !*** Start of declarations inserted by SPAG
   REAL erro12
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QAWCE
   !***PURPOSE  The routine calculates an approximation result to a
   !            CAUCHY PRINCIPAL VALUE I = Integral of F*W over (A,B)

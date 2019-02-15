@@ -1,8 +1,6 @@
-!*==CORTH.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CORTH
 SUBROUTINE CORTH(Nm,N,Low,Igh,Ar,Ai,Ortr,Orti)
   IMPLICIT NONE
-  !*--CORTH5
   !***BEGIN PROLOGUE  CORTH
   !***PURPOSE  Reduce a complex general matrix to complex upper Hessenberg
   !            form using unitary similarity transformations.

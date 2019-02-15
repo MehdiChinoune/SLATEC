@@ -1,9 +1,7 @@
-!*==DHSTRT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DHSTRT
 SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     Rpar,Ipar,H)
   IMPLICIT NONE
-  !*--DHSTRT6
   !***BEGIN PROLOGUE  DHSTRT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DDEABM, DDEBDF and DDERKF

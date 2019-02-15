@@ -1,8 +1,6 @@
-!*==FCN1.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK FCN1
 SUBROUTINE FCN1(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
   IMPLICIT NONE
-  !*--FCN15
   !***BEGIN PROLOGUE  FCN1
   !***PURPOSE  Subsidiary to SNLS1Q.
   !***LIBRARY   SLATEC

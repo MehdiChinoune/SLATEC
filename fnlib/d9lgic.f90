@@ -1,11 +1,7 @@
-!*==D9LGIC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9LGIC
 REAL(8) FUNCTION D9LGIC(A,X,Alx)
   IMPLICIT NONE
-  !*--D9LGIC5
-  !*** Start of declarations inserted by SPAG
   INTEGER k
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9LGIC
   !***SUBSIDIARY
   !***PURPOSE  Compute the log complementary incomplete Gamma function

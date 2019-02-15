@@ -1,8 +1,6 @@
-!*==CHPR.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CHPR
 SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
   IMPLICIT NONE
-  !*--CHPR5
   !***BEGIN PROLOGUE  CHPR
   !***PURPOSE  Perform the hermitian rank 1 operation.
   !***LIBRARY   SLATEC (BLAS)

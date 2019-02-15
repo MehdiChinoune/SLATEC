@@ -1,8 +1,6 @@
-!*==SGEMM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SGEMM
 SUBROUTINE SGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   IMPLICIT NONE
-  !*--SGEMM5
   !***BEGIN PROLOGUE  SGEMM
   !***PURPOSE  Multiply a real general matrix by a real general matrix.
   !***LIBRARY   SLATEC (BLAS)

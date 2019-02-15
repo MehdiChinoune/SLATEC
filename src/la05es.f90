@@ -1,13 +1,9 @@
-!*==LA05ES.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK LA05ES
 SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Ia,Reals)
   IMPLICIT NONE
-  !*--LA05ES5
-  !*** Start of declarations inserted by SPAG
   INTEGER Ia, ipi, j, k, kl, kn, LCOl, LENl, LENu, LP, LROw, N, &
     NCP, nz
   REAL SMAll
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  LA05ES
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

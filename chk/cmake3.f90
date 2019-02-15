@@ -1,8 +1,6 @@
-!*==CMAKE3.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CMAKE3
 SUBROUTINE CMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
   IMPLICIT NONE
-  !*--CMAKE35
   !***BEGIN PROLOGUE  CMAKE3
   !***SUBSIDIARY
   !***PURPOSE  Generate values for an M by N matrix A.

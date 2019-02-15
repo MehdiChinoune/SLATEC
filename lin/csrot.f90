@@ -1,8 +1,6 @@
-!*==CSROT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CSROT
 SUBROUTINE CSROT(N,Cx,Incx,Cy,Incy,C,S)
   IMPLICIT NONE
-  !*--CSROT5
   !***BEGIN PROLOGUE  CSROT
   !***PURPOSE  Apply a plane Givens rotation.
   !***LIBRARY   SLATEC (BLAS)

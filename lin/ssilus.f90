@@ -1,9 +1,7 @@
-!*==SSILUS.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSILUS
 SUBROUTINE SSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
     Ncol)
   IMPLICIT NONE
-  !*--SSILUS6
   !***BEGIN PROLOGUE  SSILUS
   !***PURPOSE  Incomplete LU Decomposition Preconditioner SLAP Set Up.
   !            Routine to generate the incomplete LDU decomposition of a

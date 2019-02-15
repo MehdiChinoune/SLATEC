@@ -1,8 +1,6 @@
-!*==BNFAC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BNFAC
 SUBROUTINE BNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   IMPLICIT NONE
-  !*--BNFAC5
   !***BEGIN PROLOGUE  BNFAC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BINT4 and BINTK

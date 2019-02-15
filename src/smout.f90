@@ -1,12 +1,8 @@
-!*==SMOUT.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SMOUT
 SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
   IMPLICIT NONE
-  !*--SMOUT5
-  !*** Start of declarations inserted by SPAG
   REAL A
   INTEGER i, I1MACH, Idigit, j, k1, k2, Lda, lout, M, N, ndigit
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SMOUT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to FC and SBOCLS

@@ -1,8 +1,6 @@
-!*==CQCBY.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CQCBY
 SUBROUTINE CQCBY(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--CQCBY5
   !***BEGIN PROLOGUE  CQCBY
   !***SUBSIDIARY
   !***PURPOSE  Quick check for SLATEC subroutine

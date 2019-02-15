@@ -1,8 +1,6 @@
-!*==XERBLA.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XERBLA
 SUBROUTINE XERBLA(Srname,Info)
   IMPLICIT NONE
-  !*--XERBLA5
   !***BEGIN PROLOGUE  XERBLA
   !***SUBSIDIARY
   !***PURPOSE  Error handler for the Level 2 and Level 3 BLAS Routines.

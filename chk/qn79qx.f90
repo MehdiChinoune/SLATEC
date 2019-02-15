@@ -1,11 +1,7 @@
-!*==QN79QX.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QN79QX
 SUBROUTINE QN79QX(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QN79QX5
-  !*** Start of declarations inserted by SPAG
   INTEGER kontrl
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QN79QX
   !***PURPOSE  Quick check for QNC79.
   !***LIBRARY   SLATEC

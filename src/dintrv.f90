@@ -1,8 +1,6 @@
-!*==DINTRV.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DINTRV
 SUBROUTINE DINTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   IMPLICIT NONE
-  !*--DINTRV5
   !***BEGIN PROLOGUE  DINTRV
   !***PURPOSE  Compute the largest integer ILEFT in 1 .LE. ILEFT .LE. LXT
   !            such that XT(ILEFT) .LE. X where XT(*) is a subdivision of

@@ -1,11 +1,7 @@
-!*==QXRKF.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QXRKF
 SUBROUTINE QXRKF(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QXRKF5
-  !*** Start of declarations inserted by SPAG
   REAL FDEQC
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QXRKF
   !***PURPOSE  Test the DEPAC routine DERKF.
   !***LIBRARY   SLATEC

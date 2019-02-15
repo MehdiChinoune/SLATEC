@@ -1,9 +1,7 @@
-!*==ISDIR.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK ISDIR
 INTEGER FUNCTION ISDIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork,Bnrm,Solnrm)
   IMPLICIT NONE
-  !*--ISDIR6
   !***BEGIN PROLOGUE  ISDIR
   !***SUBSIDIARY
   !***PURPOSE  Preconditioned Iterative Refinement Stop Test.

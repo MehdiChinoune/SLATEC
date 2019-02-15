@@ -1,8 +1,6 @@
-!*==FEIN.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK FEIN
 REAL FUNCTION FEIN(T)
   IMPLICIT NONE
-  !*--FEIN5
   !***BEGIN PROLOGUE  FEIN
   !***PURPOSE  Subsidiary to EG8CK.
   !***LIBRARY   SLATEC

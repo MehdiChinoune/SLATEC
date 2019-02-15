@@ -1,11 +1,7 @@
-!*==BISECT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK BISECT
 SUBROUTINE BISECT(N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Ind,Ierr,Rv4,Rv5)
   IMPLICIT NONE
-  !*--BISECT5
-  !*** Start of declarations inserted by SPAG
   REAL R1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BISECT
   !***PURPOSE  Compute the eigenvalues of a symmetric tridiagonal matrix
   !            in a given interval using Sturm sequencing.

@@ -1,8 +1,6 @@
-!*==DQFCN2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DQFCN2
 SUBROUTINE DQFCN2(N,X,Fvec,Iflag)
   IMPLICIT NONE
-  !*--DQFCN25
   !***BEGIN PROLOGUE  DQFCN2
   !***PURPOSE  Evaluate function used in DNSQE.
   !***LIBRARY   SLATEC

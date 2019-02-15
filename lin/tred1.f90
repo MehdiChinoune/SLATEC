@@ -1,8 +1,6 @@
-!*==TRED1.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK TRED1
 SUBROUTINE TRED1(Nm,N,A,D,E,E2)
   IMPLICIT NONE
-  !*--TRED15
   !***BEGIN PROLOGUE  TRED1
   !***PURPOSE  Reduce a real symmetric matrix to symmetric tridiagonal
   !            matrix using orthogonal similarity transformations.

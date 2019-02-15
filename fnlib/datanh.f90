@@ -1,11 +1,7 @@
-!*==DATANH.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DATANH
 REAL(8) FUNCTION DATANH(X)
   IMPLICIT NONE
-  !*--DATANH5
-  !*** Start of declarations inserted by SPAG
   INTEGER INITDS, nterms
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DATANH
   !***PURPOSE  Compute the arc hyperbolic tangent.
   !***LIBRARY   SLATEC (FNLIB)

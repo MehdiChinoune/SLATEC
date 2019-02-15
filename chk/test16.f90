@@ -1,11 +1,7 @@
-!*==TEST16.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK TEST16
 PROGRAM TEST16
   IMPLICIT NONE
-  !*--TEST165
-  !*** Start of declarations inserted by SPAG
   INTEGER I1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TEST16
   !***PURPOSE  Driver for testing SLATEC subprograms
   !            DRC3JJ   DRC3JM   DRC6J

@@ -1,8 +1,6 @@
-!*==DRC3JM.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DRC3JM
 SUBROUTINE DRC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   IMPLICIT NONE
-  !*--DRC3JM5
   !***BEGIN PROLOGUE  DRC3JM
   !***PURPOSE  Evaluate the 3j symbol g(M2) = (L1 L2   L3  )
   !                                           (M1 M2 -M1-M2)

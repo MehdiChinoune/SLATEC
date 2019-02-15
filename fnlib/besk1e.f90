@@ -1,13 +1,9 @@
-!*==BESK1E.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK BESK1E
 FUNCTION BESK1E(X)
   IMPLICIT NONE
-  !*--BESK1E5
-  !*** Start of declarations inserted by SPAG
   REAL ak12cs, ak1cs, BESI1, BESK1E, bk1cs, CSEVL, R1MACH, X, xmin, &
     xsml, y
   INTEGER INITS, ntak1, ntak12, ntk1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESK1E
   !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the third kind of order one.

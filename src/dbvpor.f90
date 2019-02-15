@@ -1,10 +1,8 @@
-!*==DBVPOR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DBVPOR
 SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,W,Niv,Yhp,U,V,Coef,S,Stowa,G,&
     Work,Iwork,Nfcc)
   IMPLICIT NONE
-  !*--DBVPOR7
   !***BEGIN PROLOGUE  DBVPOR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBVSUP

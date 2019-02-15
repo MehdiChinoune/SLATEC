@@ -1,11 +1,7 @@
-!*==NUMXER.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK NUMXER
 FUNCTION NUMXER(Nerr)
   IMPLICIT NONE
-  !*--NUMXER5
-  !*** Start of declarations inserted by SPAG
   INTEGER J4SAVE, Nerr, NUMXER
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  NUMXER
   !***PURPOSE  Return the most recent error number.
   !***LIBRARY   SLATEC (XERROR)

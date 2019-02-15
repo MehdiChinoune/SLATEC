@@ -1,8 +1,6 @@
-!*==BANDV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK BANDV
 SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
   IMPLICIT NONE
-  !*--BANDV5
   !***BEGIN PROLOGUE  BANDV
   !***PURPOSE  Form the eigenvectors of a real symmetric band matrix
   !            associated with a set of ordered approximate eigenvalues

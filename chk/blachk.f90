@@ -1,12 +1,8 @@
-!*==BLACHK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK BLACHK
 SUBROUTINE BLACHK(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--BLACHK5
-  !*** Start of declarations inserted by SPAG
   INTEGER ICAse, INCx, INCy, Kprint, Lun, MODe, N, NPRint
   REAL sdfac, sfac
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BLACHK
   !***PURPOSE  Quick check for Basic Linear Algebra Subprograms.
   !***LIBRARY   SLATEC

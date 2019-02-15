@@ -1,12 +1,8 @@
-!*==RFFTI.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK RFFTI
 SUBROUTINE RFFTI(N,Wsave)
   IMPLICIT NONE
-  !*--RFFTI5
-  !*** Start of declarations inserted by SPAG
   INTEGER N
   REAL Wsave
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RFFTI
   !***SUBSIDIARY
   !***PURPOSE  Initialize a work array for RFFTF and RFFTB.

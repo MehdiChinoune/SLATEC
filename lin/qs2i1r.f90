@@ -1,8 +1,6 @@
-!*==QS2I1R.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK QS2I1R
 SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
   IMPLICIT NONE
-  !*--QS2I1R5
   !***BEGIN PROLOGUE  QS2I1R
   !***SUBSIDIARY
   !***PURPOSE  Sort an integer array, moving an integer and real array.

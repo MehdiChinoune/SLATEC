@@ -1,14 +1,10 @@
-!*==CSCALE.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CSCALE
 SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
     Iscale,Ic)
   IMPLICIT NONE
-  !*--CSCALE6
-  !*** Start of declarations inserted by SPAG
   REAL A, alog2, Anorm, ascale, Cols, Colsav, cs, p, Rows, Rowsav, &
     s, Scales, SDOT, ten20, ten4
   INTEGER Ic, ip, Iscale, j, k, Ncol, Nrda, Nrow
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CSCALE
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

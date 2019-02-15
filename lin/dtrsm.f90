@@ -1,8 +1,6 @@
-!*==DTRSM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DTRSM
 SUBROUTINE DTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   IMPLICIT NONE
-  !*--DTRSM5
   !***BEGIN PROLOGUE  DTRSM
   !***PURPOSE  Solve one of the matrix equations.
   !***LIBRARY   SLATEC (BLAS)

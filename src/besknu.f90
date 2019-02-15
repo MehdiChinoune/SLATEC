@@ -1,8 +1,6 @@
-!*==BESKNU.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BESKNU
 SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
   IMPLICIT NONE
-  !*--BESKNU5
   !***BEGIN PROLOGUE  BESKNU
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BESK

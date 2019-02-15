@@ -1,8 +1,6 @@
-!*==T3.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK T3
 REAL FUNCTION T3(X)
   IMPLICIT NONE
-  !*--T35
   !***BEGIN PROLOGUE  T3
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

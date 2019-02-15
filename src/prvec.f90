@@ -1,12 +1,8 @@
-!*==PRVEC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK PRVEC
 FUNCTION PRVEC(M,U,V)
   IMPLICIT NONE
-  !*--PRVEC5
-  !*** Start of declarations inserted by SPAG
   INTEGER M, n, np
   REAL PRVEC, SDOT, U, V, vp
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PRVEC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

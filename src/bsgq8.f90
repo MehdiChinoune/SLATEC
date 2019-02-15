@@ -1,8 +1,6 @@
-!*==BSGQ8.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BSGQ8
 SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   IMPLICIT NONE
-  !*--BSGQ85
   !***BEGIN PROLOGUE  BSGQ8
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BFQAD

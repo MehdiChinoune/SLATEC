@@ -1,8 +1,6 @@
-!*==DSYRK.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSYRK
 SUBROUTINE DSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   IMPLICIT NONE
-  !*--DSYRK5
   !***BEGIN PROLOGUE  DSYRK
   !***PURPOSE  Perform one of the symmetric rank k operations.
   !***LIBRARY   SLATEC (BLAS)

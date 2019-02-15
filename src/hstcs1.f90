@@ -1,15 +1,11 @@
-!*==HSTCS1.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK HSTCS1
 SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierr1,Am,Bm,Cm,An,Bn,Cn,Snth,Rsq,Wrk)
   IMPLICIT NONE
-  !*--HSTCS16
-  !*** Start of declarations inserted by SPAG
   REAL A, a1, a2, a3, Am, An, B, Bda, Bdb, Bdc, Bdd, Bm, Bn, &
     C, Cm, Cn, D, dr, dth, dthsq
   REAL Elmbda, F, Pertrb, Rsq, Snth, Wrk, x, y
   INTEGER i, Idimf, Ierr1, Intl, isw, j, M, Mbdcnd, N, nb, Nbdcnd
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HSTCS1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to HSTCSP

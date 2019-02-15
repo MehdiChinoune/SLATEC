@@ -1,8 +1,6 @@
-!*==CBLAT3.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CBLAT3
 SUBROUTINE CBLAT3(Nout,Kprint,Ipass)
   IMPLICIT NONE
-  !*--CBLAT35
   !***BEGIN PROLOGUE  CBLAT3
   !***PURPOSE  Driver for testing Level 3 BLAS complex subroutines.
   !***LIBRARY   SLATEC (BLAS)

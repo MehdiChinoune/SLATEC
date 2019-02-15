@@ -1,8 +1,6 @@
-!*==CPODI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CPODI
 SUBROUTINE CPODI(A,Lda,N,Det,Job)
   IMPLICIT NONE
-  !*--CPODI5
   !***BEGIN PROLOGUE  CPODI
   !***PURPOSE  Compute the determinant and inverse of a certain complex
   !            Hermitian positive definite matrix using the factors

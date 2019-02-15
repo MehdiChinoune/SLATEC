@@ -1,8 +1,6 @@
-!*==SPOSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SPOSL
 SUBROUTINE SPOSL(A,Lda,N,B)
   IMPLICIT NONE
-  !*--SPOSL5
   !***BEGIN PROLOGUE  SPOSL
   !***PURPOSE  Solve the real symmetric positive definite linear system
   !            using the factors computed by SPOCO or SPOFA.

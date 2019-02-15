@@ -1,15 +1,11 @@
-!*==CCMPB.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CCMPB
 SUBROUTINE CCMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
   IMPLICIT NONE
-  !*--CCMPB5
-  !*** Start of declarations inserted by SPAG
   REAL Ah, An, arg, B, Bh, Bn, bnorm, Cn, CNV, d1, d2, d3, EPS, &
     R1MACH
   INTEGER i, i2, i4, ib, Ierror, if, ifd, IK, ipl, ir, j, j1, &
     j2, jf, js, K, kdo, l, l1, l2
   INTEGER lh, ls, N, n2m2, nb, NCMplx, NM, nmp, NPP
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CCMPB
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBLKTR

@@ -1,8 +1,6 @@
-!*==SSLI2.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSLI2
 SUBROUTINE SSLI2(N,B,X,Nel,Iel,Jel,El)
   IMPLICIT NONE
-  !*--SSLI25
   !***BEGIN PROLOGUE  SSLI2
   !***PURPOSE  SLAP Lower Triangle Matrix Backsolve.
   !            Routine to solve a system of the form  Lx = b, where L

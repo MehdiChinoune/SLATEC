@@ -1,8 +1,6 @@
-!*==DLBETA.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DLBETA
 REAL(8) FUNCTION DLBETA(A,B)
   IMPLICIT NONE
-  !*--DLBETA5
   !***BEGIN PROLOGUE  DLBETA
   !***PURPOSE  Compute the natural logarithm of the complete Beta
   !            function.

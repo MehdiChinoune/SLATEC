@@ -1,14 +1,10 @@
-!*==RADFG.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK RADFG
 SUBROUTINE RADFG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   IMPLICIT NONE
-  !*--RADFG5
-  !*** Start of declarations inserted by SPAG
   REAL ai1, ai2, ar1, ar1h, ar2, ar2h, arg, C1, C2, Cc, Ch, Ch2, &
     dc2, dcp, ds2, dsp, tpi, Wa
   INTEGER i, ic, idij, Idl1, Ido, idp2, ik, Ip, ipp2, ipph, is, &
     j, j2, jc, k, l, L1, lc, nbd
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RADFG
   !***SUBSIDIARY
   !***PURPOSE  Calculate the fast Fourier transform of subvectors of

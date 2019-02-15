@@ -1,12 +1,8 @@
-!*==R9PAK.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK R9PAK
 FUNCTION R9PAK(Y,N)
   IMPLICIT NONE
-  !*--R9PAK5
-  !*** Start of declarations inserted by SPAG
   REAL a1n210, a1n2b, R1MACH, R9PAK, Y
   INTEGER I1MACH, N, nmax, nmin, nsum, ny
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9PAK
   !***PURPOSE  Pack a base 2 exponent into a floating point number.
   !***LIBRARY   SLATEC (FNLIB)

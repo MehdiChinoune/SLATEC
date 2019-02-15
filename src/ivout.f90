@@ -1,11 +1,7 @@
-!*==IVOUT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK IVOUT
 SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
   IMPLICIT NONE
-  !*--IVOUT5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, I1MACH, Idigit, Ix, j, k1, k2, lout, N, ndigit
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  IVOUT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

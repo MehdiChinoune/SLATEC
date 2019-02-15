@@ -1,8 +1,6 @@
-!*==DDAWTS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DDAWTS
 SUBROUTINE DDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt,Rpar,Ipar)
   IMPLICIT NONE
-  !*--DDAWTS5
   !***BEGIN PROLOGUE  DDAWTS
   !***SUBSIDIARY
   !***PURPOSE  Set error weight vector for DDASSL.

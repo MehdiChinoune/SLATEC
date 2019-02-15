@@ -1,11 +1,7 @@
-!*==SROTG.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SROTG
 SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
   IMPLICIT NONE
-  !*--SROTG5
-  !*** Start of declarations inserted by SPAG
   REAL r, Sa, Sb, Sc, Ss, u, v
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SROTG
   !***PURPOSE  Construct a plane Givens rotation.
   !***LIBRARY   SLATEC (BLAS)

@@ -1,8 +1,6 @@
-!*==DINTYD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DINTYD
 SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   IMPLICIT NONE
-  !*--DINTYD5
   !***BEGIN PROLOGUE  DINTYD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DDEBDF

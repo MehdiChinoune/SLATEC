@@ -1,14 +1,10 @@
-!*==POCH1.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK POCH1
 FUNCTION POCH1(A,X)
   IMPLICIT NONE
-  !*--POCH15
-  !*** Start of declarations inserted by SPAG
   REAL A, absa, absx, alneps, alnvar, b, bern, binv, bp, COT, &
     EXPREL, gbern, gbk, pi, POCH, POCH1, poly1, PSI, q, R1MACH
   REAL rho, sinpx2, sinpxx, sqtbig, term, trig, var, var2, X
   INTEGER i, ii, incr, j, k, ndx, nterms
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POCH1
   !***PURPOSE  Calculate a generalization of Pochhammer's symbol starting
   !            from first order.

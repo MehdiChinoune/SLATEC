@@ -1,8 +1,6 @@
-!*==PCHQK2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK PCHQK2
 SUBROUTINE PCHQK2(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--PCHQK25
   !***BEGIN PROLOGUE  PCHQK2
   !***PURPOSE  Test the PCHIP integrators PCHIA and PCHID.
   !***LIBRARY   SLATEC (PCHIP)

@@ -1,15 +1,11 @@
-!*==QXBLKT.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QXBLKT
 SUBROUTINE QXBLKT(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QXBLKT5
-  !*** Start of declarations inserted by SPAG
   REAL am, an, bm, bn, cm, cn, deltas, deltat, ermax, err, hds, &
     hdt, s, t, tds, tdt, temp1, temp2, temp3, w
   REAL y, z
   INTEGER i, idimy, ierror, iflg, Ipass, j, Kprint, Lun, m, mp, &
     n, np
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QXBLKT
   !***PURPOSE
   !***LIBRARY   SLATEC

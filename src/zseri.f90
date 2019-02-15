@@ -1,8 +1,6 @@
-!*==ZSERI.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZSERI
 SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--ZSERI5
   !***BEGIN PROLOGUE  ZSERI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESI and ZBESK

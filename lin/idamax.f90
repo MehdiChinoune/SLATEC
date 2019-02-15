@@ -1,8 +1,6 @@
-!*==IDAMAX.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK IDAMAX
 INTEGER FUNCTION IDAMAX(N,Dx,Incx)
   IMPLICIT NONE
-  !*--IDAMAX5
   !***BEGIN PROLOGUE  IDAMAX
   !***PURPOSE  Find the smallest index of that component of a vector
   !            having the maximum magnitude.

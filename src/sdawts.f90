@@ -1,8 +1,6 @@
-!*==SDAWTS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK SDAWTS
 SUBROUTINE SDAWTS(Neq,Iwt,Rtol,Atol,Y,Wt,Rpar,Ipar)
   IMPLICIT NONE
-  !*--SDAWTS5
   !***BEGIN PROLOGUE  SDAWTS
   !***SUBSIDIARY
   !***PURPOSE  Set error weight vector for SDASSL.

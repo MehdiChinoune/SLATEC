@@ -1,12 +1,8 @@
-!*==SDAINI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK SDAINI
 SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
     Wm,Iwm,Hmin,Uround,Nonneg,Ntemp)
   IMPLICIT NONE
-  !*--SDAINI6
-  !*** Start of declarations inserted by SPAG
   INTEGER JAC
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SDAINI
   !***SUBSIDIARY
   !***PURPOSE  Initialization routine for SDASSL.

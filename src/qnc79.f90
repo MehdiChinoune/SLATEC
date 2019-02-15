@@ -1,8 +1,6 @@
-!*==QNC79.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QNC79
 SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   IMPLICIT NONE
-  !*--QNC795
   !***BEGIN PROLOGUE  QNC79
   !***PURPOSE  Integrate a function using a 7-point adaptive Newton-Cotes
   !            quadrature rule.

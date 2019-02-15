@@ -1,8 +1,6 @@
-!*==SPTSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SPTSL
 SUBROUTINE SPTSL(N,D,E,B)
   IMPLICIT NONE
-  !*--SPTSL5
   !***BEGIN PROLOGUE  SPTSL
   !***PURPOSE  Solve a positive definite tridiagonal linear system.
   !***LIBRARY   SLATEC (LINPACK)

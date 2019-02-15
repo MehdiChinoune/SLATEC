@@ -1,11 +1,7 @@
-!*==DBSKES.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBSKES
 SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   IMPLICIT NONE
-  !*--DBSKES5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, iswtch, n, Nin
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBSKES
   !***PURPOSE  Compute a sequence of exponentially scaled modified Bessel
   !            functions of the third kind of fractional order.

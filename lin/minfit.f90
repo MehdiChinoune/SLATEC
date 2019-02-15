@@ -1,8 +1,6 @@
-!*==MINFIT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK MINFIT
 SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
   IMPLICIT NONE
-  !*--MINFIT5
   !***BEGIN PROLOGUE  MINFIT
   !***PURPOSE  Compute the singular value decomposition of a rectangular
   !            matrix and solve the related linear least squares problem.

@@ -1,8 +1,6 @@
-!*==CQCAI.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CQCAI
 SUBROUTINE CQCAI(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--CQCAI5
   !***BEGIN PROLOGUE  CQCAI
   !***SUBSIDIARY
   !***PURPOSE  Quick check for SLATEC subroutines

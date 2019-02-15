@@ -1,12 +1,8 @@
-!*==PPSGF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK PPSGF
 FUNCTION PPSGF(X,Iz,C,A,Bh)
   IMPLICIT NONE
-  !*--PPSGF5
-  !*** Start of declarations inserted by SPAG
   REAL A, Bh, C, PPSGF, sum, X
   INTEGER Iz, j
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PPSGF
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI

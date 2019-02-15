@@ -1,11 +1,7 @@
-!*==SGEEV.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SGEEV
 SUBROUTINE SGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   IMPLICIT NONE
-  !*--SGEEV5
-  !*** Start of declarations inserted by SPAG
   INTEGER m
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SGEEV
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real general matrix.

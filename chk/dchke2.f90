@@ -1,8 +1,6 @@
-!*==DCHKE2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DCHKE2
 SUBROUTINE DCHKE2(Isnum,Srnamt,Nout,Kprint,Fatal)
   IMPLICIT NONE
-  !*--DCHKE25
   !***BEGIN PROLOGUE  DCHKE2
   !***SUBSIDIARY
   !***PURPOSE  Test the error exits from the Level 2 Blas.

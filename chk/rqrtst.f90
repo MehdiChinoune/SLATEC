@@ -1,12 +1,8 @@
-!*==RQRTST.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK RQRTST
 SUBROUTINE RQRTST(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--RQRTST5
-  !*** Start of declarations inserted by SPAG
   REAL beta, R1MACH, tol, work
   INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr, NUMXER
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RQRTST
   !***PURPOSE  Quick check for RPQR79.
   !***LIBRARY   SLATEC

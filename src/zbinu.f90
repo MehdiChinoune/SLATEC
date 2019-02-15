@@ -1,8 +1,6 @@
-!*==ZBINU.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZBINU
 SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--ZBINU5
   !***BEGIN PROLOGUE  ZBINU
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK and ZBIRY

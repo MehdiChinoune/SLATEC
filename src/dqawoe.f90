@@ -1,10 +1,8 @@
-!*==DQAWOE.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQAWOE
 SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
     Result,Abserr,Neval,Ier,Last,Alist,Blist,Rlist,Elist,&
     Iord,Nnlog,Momcom,Chebmo)
   IMPLICIT NONE
-  !*--DQAWOE7
   !***BEGIN PROLOGUE  DQAWOE
   !***PURPOSE  Calculate an approximation to a given definite integral
   !            I = Integral of F(X)*W(X) over (A,B), where

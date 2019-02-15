@@ -1,8 +1,6 @@
-!*==DFEIN.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DFEIN
 REAL(8) FUNCTION DFEIN(T)
   IMPLICIT NONE
-  !*--DFEIN5
   !***BEGIN PROLOGUE  DFEIN
   !***PURPOSE  Subsidiary to DEG8CK.
   !***LIBRARY   SLATEC

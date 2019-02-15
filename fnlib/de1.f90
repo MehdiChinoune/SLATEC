@@ -1,13 +1,9 @@
-!*==DE1.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DE1
 REAL(8) FUNCTION DE1(X)
   IMPLICIT NONE
-  !*--DE15
-  !*** Start of declarations inserted by SPAG
   REAL eta
   INTEGER INITDS, ntae10, ntae11, ntae12, ntae13, ntae14, nte11, &
     nte12
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DE1
   !***PURPOSE  Compute the exponential integral E1(X).
   !***LIBRARY   SLATEC (FNLIB)

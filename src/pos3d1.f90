@@ -1,16 +1,12 @@
-!*==POS3D1.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK POS3D1
 SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,&
     Bb)
   IMPLICIT NONE
-  !*--POS3D16
-  !*** Start of declarations inserted by SPAG
   REAL A, B, Bb, C, C1, C2, D, di, dj, dum, dx, dy, F, pi, &
     PIMACH, scalx, scaly, T, Wx, Wy
   REAL Xrt, Yrt
   INTEGER i, ifwrd, j, k, L, Ldimf, Lp, lr, lrdel, M, Mdimf, Mp, &
     mr, mrdel, N, nr
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POS3D1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to POIS3D

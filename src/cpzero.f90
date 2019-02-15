@@ -1,12 +1,8 @@
-!*==CPZERO.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CPZERO
 SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   IMPLICIT NONE
-  !*--CPZERO5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Iflg, imax, In, j, n, n1, nit, nmax, nr
   REAL u, v, x
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CPZERO
   !***PURPOSE  Find the zeros of a polynomial with complex coefficients.
   !***LIBRARY   SLATEC

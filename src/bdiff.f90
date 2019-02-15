@@ -1,8 +1,6 @@
-!*==BDIFF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BDIFF
 SUBROUTINE BDIFF(L,V)
   IMPLICIT NONE
-  !*--BDIFF5
   !***BEGIN PROLOGUE  BDIFF
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BSKIN

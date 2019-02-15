@@ -1,11 +1,7 @@
-!*==DBINOM.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBINOM
 REAL(8) FUNCTION DBINOM(N,M)
   IMPLICIT NONE
-  !*--DBINOM5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, k, M, N
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBINOM
   !***PURPOSE  Compute the binomial coefficients.
   !***LIBRARY   SLATEC (FNLIB)

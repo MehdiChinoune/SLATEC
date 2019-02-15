@@ -1,17 +1,13 @@
-!*==HWSPLR.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK HWSPLR
 SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !*--HWSPLR6
-  !*** Start of declarations inserted by SPAG
   REAL A, a1, a2, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, deltht, &
     dlrby2, dlrsq, dlthsq, Elmbda, F, Pertrb, r, s
   REAL s1, s2, W, ypole
   INTEGER i, id2, id3, id4, id5, id6, Idimf, ierr1, Ierror, ij, &
     ip, iwstor, j, k, l, lp, M, Mbdcnd, mp1, mstart
   INTEGER mstop, munk, N, Nbdcnd, np, np1, nstart, nstop, nunk
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HWSPLR
   !***PURPOSE  Solve a finite difference approximation to the Helmholtz
   !            equation in polar coordinates.

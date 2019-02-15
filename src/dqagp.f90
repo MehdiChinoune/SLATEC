@@ -1,9 +1,7 @@
-!*==DQAGP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQAGP
 SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     Leniw,Lenw,Last,Iwork,Work)
   IMPLICIT NONE
-  !*--DQAGP6
   !***BEGIN PROLOGUE  DQAGP
   !***PURPOSE  The routine calculates an approximation result to a given
   !            definite integral I = Integral of F over (A,B),

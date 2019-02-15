@@ -1,8 +1,6 @@
-!*==SPPERM.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SPPERM
 SUBROUTINE SPPERM(X,N,Iperm,Ier)
   IMPLICIT NONE
-  !*--SPPERM5
   !***BEGIN PROLOGUE  SPPERM
   !***PURPOSE  Rearrange a given array according to a prescribed
   !            permutation vector.

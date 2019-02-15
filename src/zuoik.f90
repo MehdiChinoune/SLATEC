@@ -1,8 +1,6 @@
-!*==ZUOIK.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZUOIK
 SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--ZUOIK5
   !***BEGIN PROLOGUE  ZUOIK
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESH, ZBESI and ZBESK
@@ -205,4 +203,4 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   IF ( nn==0 ) RETURN
   GOTO 100
   99999 CONTINUE
-  END SUBROUTINE ZUOIK
+END SUBROUTINE ZUOIK

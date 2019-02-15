@@ -1,8 +1,6 @@
-!*==CGEIR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CGEIR
 SUBROUTINE CGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   IMPLICIT NONE
-  !*--CGEIR5
   !***BEGIN PROLOGUE  CGEIR
   !***PURPOSE  Solve a general system of linear equations.  Iterative
   !            refinement is used to obtain an error estimate.

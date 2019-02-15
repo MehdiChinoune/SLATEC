@@ -1,8 +1,6 @@
-!*==DWUPDT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DWUPDT
 SUBROUTINE DWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
   IMPLICIT NONE
-  !*--DWUPDT5
   !***BEGIN PROLOGUE  DWUPDT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DNLS1 and DNLS1E

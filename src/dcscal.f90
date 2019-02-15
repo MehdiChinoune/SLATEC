@@ -1,9 +1,7 @@
-!*==DCSCAL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DCSCAL
 SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
     Iscale,Ic)
   IMPLICIT NONE
-  !*--DCSCAL6
   !***BEGIN PROLOGUE  DCSCAL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBVSUP and DSUDS

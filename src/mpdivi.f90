@@ -1,12 +1,8 @@
-!*==MPDIVI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK MPDIVI
 SUBROUTINE MPDIVI(X,Iy,Z)
   IMPLICIT NONE
-  !*--MPDIVI5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, i2, iq, iqj, ir, Iy, j, j1, j11, j2, k, kh, LUN, &
     M, MXR
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPDIVI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI

@@ -1,8 +1,6 @@
-!*==QMOMO.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QMOMO
 SUBROUTINE QMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
   IMPLICIT NONE
-  !*--QMOMO5
   !***BEGIN PROLOGUE  QMOMO
   !***PURPOSE  This routine computes modified Chebyshev moments.  The K-th
   !            modified Chebyshev moment is defined as the integral over

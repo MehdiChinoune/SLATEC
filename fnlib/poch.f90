@@ -1,13 +1,9 @@
-!*==POCH.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK POCH
 FUNCTION POCH(A,X)
   IMPLICIT NONE
-  !*--POCH5
-  !*** Start of declarations inserted by SPAG
   REAL A, absa, absax, alnga, alngax, ALNREL, ax, b, COT, FAC, &
     GAMMA, GAMR, pi, POCH, R9LGMC, sgnga, sgngax, X
   INTEGER i, n
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POCH
   !***PURPOSE  Evaluate a generalization of Pochhammer's symbol.
   !***LIBRARY   SLATEC (FNLIB)

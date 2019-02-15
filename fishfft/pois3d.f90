@@ -1,15 +1,11 @@
-!*==POIS3D.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK POIS3D
 SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,&
     Ierror,W)
   IMPLICIT NONE
-  !*--POIS3D6
-  !*** Start of declarations inserted by SPAG
   REAL A, B, C, C1, C2, F, save, W
   INTEGER i, Ierror, iwbb, iwd, iwt, iwx, iwy, iwyrt, j, k, L, &
     Ldimf, lp, Lperod, M, Mdimf, mp, Mperod, N, nh
   INTEGER nhm1, nhmk, nhpk, nodd, np, Nperod
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POIS3D
   !***PURPOSE  Solve a three-dimensional block tridiagonal linear system
   !            which arises from a finite difference approximation to a

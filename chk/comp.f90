@@ -1,8 +1,6 @@
-!*==COMP.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK COMP
 LOGICAL FUNCTION COMP(Ieract,Ierexp,Lout,Kprint)
   IMPLICIT NONE
-  !*--COMP5
   !***BEGIN PROLOGUE  COMP
   !***SUBSIDIARY
   !***PURPOSE  Compare actual and expected values of error flag.

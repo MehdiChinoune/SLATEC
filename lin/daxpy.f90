@@ -1,11 +1,7 @@
-!*==DAXPY.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DAXPY
 SUBROUTINE DAXPY(N,Da,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
-  !*--DAXPY5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DAXPY
   !***PURPOSE  Compute a constant times a vector plus a vector.
   !***LIBRARY   SLATEC (BLAS)

@@ -1,8 +1,6 @@
-!*==SLPDOC.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SLPDOC
 SUBROUTINE SLPDOC
   IMPLICIT NONE
-  !*--SLPDOC5
   !***BEGIN PROLOGUE  SLPDOC
   !***PURPOSE  Sparse Linear Algebra Package Version 2.0.2 Documentation.
   !            Routines to solve large sparse symmetric and nonsymmetric

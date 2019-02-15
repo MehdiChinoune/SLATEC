@@ -1,12 +1,8 @@
-!*==CHECK0.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CHECK0
 SUBROUTINE CHECK0(Sfac,Dfac,Kprint)
   IMPLICIT NONE
-  !*--CHECK05
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ICAse, INCx, INCy, jump, k, Kprint, MODe, N, NPRint
   REAL sa, sb, sc, Sfac, ss, zero
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CHECK0
   !***PURPOSE  (UNKNOWN)
   !***LIBRARY   SLATEC

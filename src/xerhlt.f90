@@ -1,8 +1,6 @@
-!*==XERHLT.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XERHLT
 SUBROUTINE XERHLT(Messg)
   IMPLICIT NONE
-  !*--XERHLT5
   !***BEGIN PROLOGUE  XERHLT
   !***SUBSIDIARY
   !***PURPOSE  Abort program execution and print error message.

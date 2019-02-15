@@ -1,14 +1,10 @@
-!*==DPINIT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DPINIT
 SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
     Costsc,Colnrm,Xlamda,Anorm,Rhs,Rhsnrm,Ibasis,Ibb,Imat,&
     Lopt)
   IMPLICIT NONE
-  !*--DPINIT7
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Info, ip, iplace, j, Mrelas, n20007, n20019, n20028, &
     n20041, n20056, n20066, n20070, n20074, n20078, Nvars
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPINIT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP

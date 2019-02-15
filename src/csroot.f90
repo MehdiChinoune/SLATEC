@@ -1,8 +1,6 @@
-!*==CSROOT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CSROOT
 SUBROUTINE CSROOT(Xr,Xi,Yr,Yi)
   IMPLICIT NONE
-  !*--CSROOT5
   !***BEGIN PROLOGUE  CSROOT
   !***SUBSIDIARY
   !***PURPOSE  Compute the complex square root of a complex number.

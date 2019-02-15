@@ -1,8 +1,6 @@
-!*==DSLVS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DSLVS
 SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
   IMPLICIT NONE
-  !*--DSLVS5
   !***BEGIN PROLOGUE  DSLVS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DDEBDF

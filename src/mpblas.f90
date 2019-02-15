@@ -1,11 +1,7 @@
-!*==MPBLAS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK MPBLAS
 SUBROUTINE MPBLAS(I1)
   IMPLICIT NONE
-  !*--MPBLAS5
-  !*** Start of declarations inserted by SPAG
   INTEGER I1, I1MACH, MPB, mpbexp, MPLun, MPM, MPMxr, MPR, MPT
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPBLAS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI

@@ -1,10 +1,8 @@
-!*==ISSOMN.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK ISSOMN
 INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,&
     Rwork,Iwork,Ak,Bnrm,Solnrm)
   IMPLICIT NONE
-  !*--ISSOMN7
   !***BEGIN PROLOGUE  ISSOMN
   !***SUBSIDIARY
   !***PURPOSE  Preconditioned Orthomin Stop Test.

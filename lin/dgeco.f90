@@ -1,8 +1,6 @@
-!*==DGECO.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DGECO
 SUBROUTINE DGECO(A,Lda,N,Ipvt,Rcond,Z)
   IMPLICIT NONE
-  !*--DGECO5
   !***BEGIN PROLOGUE  DGECO
   !***PURPOSE  Factor a matrix using Gaussian elimination and estimate
   !            the condition number of the matrix.

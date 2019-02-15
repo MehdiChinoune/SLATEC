@@ -1,8 +1,6 @@
-!*==STBSV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK STBSV
 SUBROUTINE STBSV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   IMPLICIT NONE
-  !*--STBSV5
   !***BEGIN PROLOGUE  STBSV
   !***PURPOSE  Solve a real triangular banded system of linear equations.
   !***LIBRARY   SLATEC (BLAS)

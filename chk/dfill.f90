@@ -1,8 +1,6 @@
-!*==DFILL.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DFILL
 SUBROUTINE DFILL(N,V,Val)
   IMPLICIT NONE
-  !*--DFILL5
   !***BEGIN PROLOGUE  DFILL
   !***SUBSIDIARY
   !***PURPOSE  Fill a vector with a value.

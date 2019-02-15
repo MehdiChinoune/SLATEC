@@ -1,8 +1,6 @@
-!*==RSGAB.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK RSGAB
 SUBROUTINE RSGAB(Nm,N,A,B,W,Matz,Z,Fv1,Fv2,Ierr)
   IMPLICIT NONE
-  !*--RSGAB5
   !***BEGIN PROLOGUE  RSGAB
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a symmetric generalized eigenproblem.

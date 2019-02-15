@@ -1,12 +1,8 @@
-!*==TRIDQ.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK TRIDQ
 SUBROUTINE TRIDQ(Mr,A,B,C,Y,D)
   IMPLICIT NONE
-  !*--TRIDQ5
-  !*** Start of declarations inserted by SPAG
   REAL A, B, C, D, Y, z
   INTEGER i, ip, m, mm1, Mr
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TRIDQ
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to POIS3D

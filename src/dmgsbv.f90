@@ -1,8 +1,6 @@
-!*==DMGSBV.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DMGSBV
 SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   IMPLICIT NONE
-  !*--DMGSBV5
   !***BEGIN PROLOGUE  DMGSBV
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBVSUP

@@ -1,8 +1,6 @@
-!*==SGER.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SGER
 SUBROUTINE SGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   IMPLICIT NONE
-  !*--SGER5
   !***BEGIN PROLOGUE  SGER
   !***PURPOSE  Perform rank 1 update of a real general matrix.
   !***LIBRARY   SLATEC (BLAS)

@@ -1,11 +1,7 @@
-!*==RATQR.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK RATQR
 SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
   IMPLICIT NONE
-  !*--RATQR5
-  !*** Start of declarations inserted by SPAG
   REAL R1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RATQR
   !***PURPOSE  Compute the largest or smallest eigenvalues of a symmetric
   !            tridiagonal matrix using the rational QR method with Newton

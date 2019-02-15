@@ -1,8 +1,6 @@
-!*==RSB.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK RSB
 SUBROUTINE RSB(Nm,N,Mb,A,W,Matz,Z,Fv1,Fv2,Ierr)
   IMPLICIT NONE
-  !*--RSB5
   !***BEGIN PROLOGUE  RSB
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a symmetric band matrix.

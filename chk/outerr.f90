@@ -1,8 +1,6 @@
-!*==OUTERR.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK OUTERR
 SUBROUTINE OUTERR(Method,Ierr,Iout,Nfail,Istdo,Iter,Err)
   IMPLICIT NONE
-  !*--OUTERR5
   !***BEGIN PROLOGUE  OUTERR
   !***SUBSIDIARY
   !***PURPOSE  Output error messages for the SLAP Quick Check.

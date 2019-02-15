@@ -1,15 +1,11 @@
-!*==DBOCLS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DBOCLS
 SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     Mode,Rw,Iw)
   IMPLICIT NONE
-  !*--DBOCLS6
-  !*** Start of declarations inserted by SPAG
   INTEGER i, icase, igo, iiw, inrows, ip, irw, iscale, j, jp ,&
     lbou, lboum, lds, lenx, liopt, liw, llb, lliw, llrw, llx
   INTEGER lmdw, lndw, locacc, locdim, lopt, lp, lrw, m, Mcon, Mdw ,&
     mdwl, mnew, Mode, modec, mopt, mout, Mrows, Ncols, nerr
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBOCLS
   !***PURPOSE  Solve the bounded and constrained least squares
   !            problem consisting of solving the equation

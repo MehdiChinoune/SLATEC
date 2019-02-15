@@ -1,13 +1,9 @@
-!*==RFFTF1.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK RFFTF1
 SUBROUTINE RFFTF1(N,C,Ch,Wa,Ifac)
   IMPLICIT NONE
-  !*--RFFTF15
-  !*** Start of declarations inserted by SPAG
   REAL C, Ch, Wa
   INTEGER i, idl1, ido, Ifac, ip, iw, ix2, ix3, ix4, k1, kh, l1, &
     l2, N, na, nf
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RFFTF1
   !***PURPOSE  Compute the forward transform of a real, periodic sequence.
   !***LIBRARY   SLATEC (FFTPACK)

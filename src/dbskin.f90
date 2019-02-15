@@ -1,8 +1,6 @@
-!*==DBSKIN.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DBSKIN
 SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   IMPLICIT NONE
-  !*--DBSKIN5
   !***BEGIN PROLOGUE  DBSKIN
   !***PURPOSE  Compute repeated integrals of the K-zero Bessel function.
   !***LIBRARY   SLATEC

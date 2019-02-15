@@ -1,11 +1,7 @@
-!*==CCBRT.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CCBRT
 COMPLEX FUNCTION CCBRT(Z)
   IMPLICIT NONE
-  !*--CCBRT5
-  !*** Start of declarations inserted by SPAG
   REAL CARG, CBRT, r, theta
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CCBRT
   !***PURPOSE  Compute the cube root.
   !***LIBRARY   SLATEC (FNLIB)

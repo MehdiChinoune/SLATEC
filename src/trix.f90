@@ -1,12 +1,8 @@
-!*==TRIX.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK TRIX
 SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   IMPLICIT NONE
-  !*--TRIX5
-  !*** Start of declarations inserted by SPAG
   REAL A, B, C, D, Tcos, W, x, xx, Y, z
   INTEGER i, Idegbr, Idegcr, ip, k, l, lint, M, mm1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TRIX
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to GENBUN

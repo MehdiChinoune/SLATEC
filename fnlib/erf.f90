@@ -1,12 +1,8 @@
-!*==ERF.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK ERF
 FUNCTION ERF(X)
   IMPLICIT NONE
-  !*--ERF5
-  !*** Start of declarations inserted by SPAG
   REAL CSEVL, ERF, ERFC, erfcs, R1MACH, sqeps, sqrtpi, X, xbig, y
   INTEGER INITS, nterf
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ERF
   !***PURPOSE  Compute the error function.
   !***LIBRARY   SLATEC (FNLIB)

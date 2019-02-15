@@ -1,8 +1,6 @@
-!*==F0WS.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK F0WS
 REAL FUNCTION F0WS(X)
   IMPLICIT NONE
-  !*--F0WS5
   !***BEGIN PROLOGUE  F0WS
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

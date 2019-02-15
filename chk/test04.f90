@@ -1,11 +1,7 @@
-!*==TEST04.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK TEST04
 PROGRAM TEST04
   IMPLICIT NONE
-  !*--TEST045
-  !*** Start of declarations inserted by SPAG
   INTEGER I1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TEST04
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC

@@ -1,8 +1,6 @@
-!*==DGBMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DGBMV
 SUBROUTINE DGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   IMPLICIT NONE
-  !*--DGBMV5
   !***BEGIN PROLOGUE  DGBMV
   !***PURPOSE  Perform one of the matrix-vector operations.
   !***LIBRARY   SLATEC (BLAS)

@@ -1,8 +1,6 @@
-!*==QPSRT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QPSRT
 SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   IMPLICIT NONE
-  !*--QPSRT5
   !***BEGIN PROLOGUE  QPSRT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to QAGE, QAGIE, QAGPE, QAGSE, QAWCE, QAWOE and

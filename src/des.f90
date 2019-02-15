@@ -1,12 +1,9 @@
-!*==DES.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DES
 SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     Alpha,Beta,Psi,V,W,Sig,G,Gi,H,Eps,X,Xold,Hold,Told,Delsgn,&
     Tstop,Twou,Fouru,Start,Phase1,Nornd,Stiff,Intout,Ns,Kord,&
     Kold,Init,Ksteps,Kle4,Iquit,Kprev,Ivc,Iv,Kgi,Rpar,Ipar)
   IMPLICIT NONE
-  !*--DES8
-  !*** Start of declarations inserted by SPAG
   REAL a, absdel, Alpha, Atol, Beta, del, Delsgn, dt, Eps, Fouru ,&
     G, Gi, H, ha, Hold, P, Phi, Psi, R1MACH, Rpar
   REAL Rtol, Sig, T, Told, Tout, Tstop, Twou, u, V, W, Wt, X ,&
@@ -15,7 +12,6 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     Kold, Kord, Kprev, Ksteps, l, ltol, maxnum, natolp, Neq ,&
     nrtolp
   INTEGER Ns
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DES
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DEABM

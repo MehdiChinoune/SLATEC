@@ -1,15 +1,11 @@
-!*==HSTPLR.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK HSTPLR
 SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !*--HSTPLR6
-  !*** Start of declarations inserted by SPAG
   REAL A, a1, a2, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, deltht, &
     dlrsq, dlthsq, Elmbda, F, Pertrb, W
   INTEGER i, Idimf, ierr1, Ierror, isw, iwb, iwc, iwr, j, k, lp, &
     M, mb, Mbdcnd, N, Nbdcnd, np
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HSTPLR
   !***PURPOSE  Solve the standard five-point finite difference
   !            approximation on a staggered grid to the Helmholtz equation

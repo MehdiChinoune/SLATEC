@@ -1,14 +1,10 @@
-!*==POISD2.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK POISD2
 SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   IMPLICIT NONE
-  !*--POISD25
-  !*** Start of declarations inserted by SPAG
   REAL B, Ba, Bb, Bc, D, fi, P, Q, t, Tcos, W
   INTEGER i, ideg, Idimq, ip, ip1, ipstor, irreg, Istag, j, jdeg, &
     jm1, jm2, jm3, jp1, jp2, jp3, jsh, jsp, jst, jstsav
   INTEGER kr, krpi, l, lr, m, Mr, n, nodd, noddpr, Nr, nun
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POISD2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to GENBUN

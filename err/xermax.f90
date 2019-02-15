@@ -1,11 +1,7 @@
-!*==XERMAX.f90  processed by SPAG 6.72Dc at 10:54 on  6 Feb 2019
 !DECK XERMAX
 SUBROUTINE XERMAX(Max)
   IMPLICIT NONE
-  !*--XERMAX5
-  !*** Start of declarations inserted by SPAG
   INTEGER J4SAVE, junk, Max
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XERMAX
   !***PURPOSE  Set maximum number of times any error message is to be
   !            printed.

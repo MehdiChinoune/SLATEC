@@ -1,8 +1,6 @@
-!*==DBSPEV.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DBSPEV
 SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   IMPLICIT NONE
-  !*--DBSPEV5
   !***BEGIN PROLOGUE  DBSPEV
   !***PURPOSE  Calculate the value of the spline and its derivatives from
   !            the B-representation.

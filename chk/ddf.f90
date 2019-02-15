@@ -1,8 +1,6 @@
-!*==DDF.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DDF
 SUBROUTINE DDF(N,T,Y,Yp)
   IMPLICIT NONE
-  !*--DDF5
   !***BEGIN PROLOGUE  DDF
   !***SUBSIDIARY
   !***PURPOSE  Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.

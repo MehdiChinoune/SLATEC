@@ -1,8 +1,6 @@
-!*==DGAMI.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DGAMI
 REAL(8) FUNCTION DGAMI(A,X)
   IMPLICIT NONE
-  !*--DGAMI5
   !***BEGIN PROLOGUE  DGAMI
   !***PURPOSE  Evaluate the incomplete Gamma function.
   !***LIBRARY   SLATEC (FNLIB)

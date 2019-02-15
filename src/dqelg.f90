@@ -1,8 +1,6 @@
-!*==DQELG.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQELG
 SUBROUTINE DQELG(N,Epstab,Result,Abserr,Res3la,Nres)
   IMPLICIT NONE
-  !*--DQELG5
   !***BEGIN PROLOGUE  DQELG
   !***SUBSIDIARY
   !***PURPOSE  The routine determines the limit of a given sequence of

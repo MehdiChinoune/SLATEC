@@ -1,9 +1,7 @@
-!*==CCHK32.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CCHK32
 SUBROUTINE CCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
     Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Xt,G,Z)
   IMPLICIT NONE
-  !*--CCHK326
   !***BEGIN PROLOGUE  CCHK32
   !***SUBSIDIARY
   !***PURPOSE  Quick check for CTRMV, CTBMV, CTPMV, CTRSV, CTBSV and

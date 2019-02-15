@@ -1,12 +1,8 @@
-!*==RUNIF.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK RUNIF
 FUNCTION RUNIF(T,N)
   IMPLICIT NONE
-  !*--RUNIF5
-  !*** Start of declarations inserted by SPAG
   REAL dummy, floatn, RAND, RUNIF, T
   INTEGER i, j, N, nold
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RUNIF
   !***PURPOSE  Generate a uniformly distributed random number.
   !***LIBRARY   SLATEC (FNLIB)

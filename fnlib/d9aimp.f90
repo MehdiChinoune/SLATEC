@@ -1,12 +1,8 @@
-!*==D9AIMP.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9AIMP
 SUBROUTINE D9AIMP(X,Ampl,Theta)
   IMPLICIT NONE
-  !*--D9AIMP5
-  !*** Start of declarations inserted by SPAG
   REAL eta
   INTEGER INITDS, nam20, nam21, nam22, nath0, nath1, nath2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9AIMP
   !***SUBSIDIARY
   !***PURPOSE  Evaluate the Airy modulus and phase.

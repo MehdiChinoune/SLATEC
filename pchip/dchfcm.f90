@@ -1,8 +1,6 @@
-!*==DCHFCM.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DCHFCM
 INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   IMPLICIT NONE
-  !*--DCHFCM5
   !***BEGIN PROLOGUE  DCHFCM
   !***SUBSIDIARY
   !***PURPOSE  Check a single cubic for monotonicity.

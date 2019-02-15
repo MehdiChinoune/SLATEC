@@ -1,8 +1,6 @@
-!*==DQFORM.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQFORM
 SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
   IMPLICIT NONE
-  !*--DQFORM5
   !***BEGIN PROLOGUE  DQFORM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DNSQ and DNSQE

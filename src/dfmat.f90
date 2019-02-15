@@ -1,8 +1,6 @@
-!*==DFMAT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DFMAT
 SUBROUTINE DFMAT(X,Y,Yp)
   IMPLICIT NONE
-  !*--DFMAT5
   !***BEGIN PROLOGUE  DFMAT
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

@@ -1,12 +1,8 @@
-!*==RGAUSS.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK RGAUSS
 FUNCTION RGAUSS(Xmean,Sd)
   IMPLICIT NONE
-  !*--RGAUSS5
-  !*** Start of declarations inserted by SPAG
   INTEGER i
   REAL RAND, RGAUSS, Sd, Xmean
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RGAUSS
   !***PURPOSE  Generate a normally distributed (Gaussian) random number.
   !***LIBRARY   SLATEC (FNLIB)

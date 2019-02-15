@@ -1,12 +1,8 @@
-!*==QCGLSS.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QCGLSS
 SUBROUTINE QCGLSS(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QCGLSS5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Ipass, j, kk, Kprint
   REAL R1MACH, rnorm
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QCGLSS
   !***PURPOSE  Quick check for SGLSS.
   !***LIBRARY   SLATEC

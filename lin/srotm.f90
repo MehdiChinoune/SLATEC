@@ -1,13 +1,9 @@
-!*==SROTM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SROTM
 SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
   IMPLICIT NONE
-  !*--SROTM5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Incx, Incy, kx, ky, N, nsteps
   REAL sflag, sh11, sh12, sh21, sh22, Sparam, Sx, Sy, two, w, z, &
     zero
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SROTM
   !***PURPOSE  Apply a modified Givens transformation.
   !***LIBRARY   SLATEC (BLAS)

@@ -1,10 +1,8 @@
-!*==DBCG.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DBCG
 SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
     Tol,Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,&
     Iwork)
   IMPLICIT NONE
-  !*--DBCG7
   !***BEGIN PROLOGUE  DBCG
   !***PURPOSE  Preconditioned BiConjugate Gradient Sparse Ax = b Solver.
   !            Routine to solve a Non-Symmetric linear system  Ax = b

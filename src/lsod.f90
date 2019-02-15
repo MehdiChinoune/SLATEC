@@ -1,10 +1,7 @@
-!*==LSOD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK LSOD
 SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     Wm,Iwm,JAC,Intout,Tstop,Tolfac,Delsgn,Rpar,Ipar)
   IMPLICIT NONE
-  !*--LSOD6
-  !*** Start of declarations inserted by SPAG
   REAL absdel, Acor, Atol, big, del, Delsgn, dt, EL0, Ewt, H, ha ,&
     HMIn, HMXi, HU, R1MACH, ROWns, Rpar, Rtol, Savf, T
   REAL tol, TOLd, Tolfac, Tout, Tstop, U, VNWRMS, Wm, X, Y, Yh ,&
@@ -15,7 +12,6 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   INTEGER LACor, LDUm, LEWt, LSAvf, ltol, LWM, LYH, maxnum, MAXord ,&
     METh, MITer, N, natolp, Neq, NFE, NJE, NQ, NQU, nrtolp ,&
     NST
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  LSOD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DEBDF

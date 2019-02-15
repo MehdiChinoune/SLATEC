@@ -1,11 +1,7 @@
-!*==EI.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK EI
 FUNCTION EI(X)
   IMPLICIT NONE
-  !*--EI5
-  !*** Start of declarations inserted by SPAG
   REAL E1, EI, X
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  EI
   !***PURPOSE  Compute the exponential integral Ei(X).
   !***LIBRARY   SLATEC (FNLIB)

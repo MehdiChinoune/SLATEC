@@ -1,12 +1,8 @@
-!*==CGAMR.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CGAMR
 COMPLEX FUNCTION CGAMR(Z)
   IMPLICIT NONE
-  !*--CGAMR5
-  !*** Start of declarations inserted by SPAG
   INTEGER irold
   REAL x
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CGAMR
   !***PURPOSE  Compute the reciprocal of the Gamma function.
   !***LIBRARY   SLATEC (FNLIB)

@@ -1,8 +1,6 @@
-!*==DEI.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DEI
 REAL(8) FUNCTION DEI(X)
   IMPLICIT NONE
-  !*--DEI5
   !***BEGIN PROLOGUE  DEI
   !***PURPOSE  Compute the exponential integral Ei(X).
   !***LIBRARY   SLATEC (FNLIB)

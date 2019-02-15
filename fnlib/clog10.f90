@@ -1,11 +1,7 @@
-!*==CLOG10.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CLOG10
 COMPLEX FUNCTION CLOG10(Z)
   IMPLICIT NONE
-  !*--CLOG105
-  !*** Start of declarations inserted by SPAG
   REAL aloge
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CLOG10
   !***PURPOSE  Compute the principal value of the complex base 10
   !            logarithm.

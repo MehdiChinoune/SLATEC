@@ -1,8 +1,6 @@
-!*==DPNTCK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DPNTCK
 SUBROUTINE DPNTCK(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DPNTCK5
   !***BEGIN PROLOGUE  DPNTCK
   !***PURPOSE  Quick check for DPLINT, DPOLCF and DPOLVL
   !***LIBRARY   SLATEC

@@ -1,8 +1,6 @@
-!*==DPCHCM.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DPCHCM
 SUBROUTINE DPCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   IMPLICIT NONE
-  !*--DPCHCM5
   !***BEGIN PROLOGUE  DPCHCM
   !***PURPOSE  Check a cubic Hermite function for monotonicity.
   !***LIBRARY   SLATEC (PCHIP)

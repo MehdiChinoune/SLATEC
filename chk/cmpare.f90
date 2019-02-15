@@ -1,8 +1,6 @@
-!*==CMPARE.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CMPARE
 SUBROUTINE CMPARE(Icnt,Itest)
   IMPLICIT NONE
-  !*--CMPARE5
   !***BEGIN PROLOGUE  CMPARE
   !***PURPOSE  Compare values in COMMON block CHECK for quick check
   !            routine PFITQX.

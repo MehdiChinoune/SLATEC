@@ -1,11 +1,7 @@
-!*==D9LGMC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9LGMC
 REAL(8) FUNCTION D9LGMC(X)
   IMPLICIT NONE
-  !*--D9LGMC5
-  !*** Start of declarations inserted by SPAG
   INTEGER INITDS, nalgm
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9LGMC
   !***SUBSIDIARY
   !***PURPOSE  Compute the log Gamma correction factor so that

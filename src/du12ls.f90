@@ -1,4 +1,3 @@
-!*==DU12LS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DU12LS
 SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   !***BEGIN PROLOGUE  DU12LS
@@ -26,12 +25,9 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DU12LS
   IMPLICIT NONE
-  !*--DU12LS29
-  !*** Start of declarations inserted by SPAG
   REAL(8) :: A, B, bb, H, Rnorm, tt, W
   INTEGER i, ij, im1, j, jb, k, kp1, Krank, M, Mda, Mdb, Mode, &
     N, Nb, nmk
-  !*** End of declarations inserted by SPAG
   REAL(8) :: DDOT, DNRM2
   DIMENSION A(Mda,*), B(Mdb,*), Rnorm(*), H(*), W(*)
   INTEGER Ic(*), Ir(*)

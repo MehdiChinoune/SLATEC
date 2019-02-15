@@ -1,12 +1,8 @@
-!*==PROD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK PROD
 SUBROUTINE PROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   IMPLICIT NONE
-  !*--PROD5
-  !*** Start of declarations inserted by SPAG
   REAL A, Aa, B, Bd, Bm1, Bm2, C, D, den, rt, U, W, X, Y
   INTEGER ia, ibr, id, j, k, M, m1, m2, mm, Na, Nd, Nm1, Nm2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PROD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI

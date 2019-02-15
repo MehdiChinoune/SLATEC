@@ -1,9 +1,7 @@
-!*==DDCOR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DDCOR
 SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     Nq,T,USERS,Y,Yh,Ywt,Evalfa,Save1,Save2,A,D,Jstate)
   IMPLICIT NONE
-  !*--DDCOR6
   !***BEGIN PROLOGUE  DDCOR
   !***SUBSIDIARY
   !***PURPOSE  Subroutine DDCOR computes corrections to the Y array.

@@ -1,8 +1,6 @@
-!*==DCOV.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DCOV
 SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   IMPLICIT NONE
-  !*--DCOV5
   !***BEGIN PROLOGUE  DCOV
   !***PURPOSE  Calculate the covariance matrix for a nonlinear data
   !            fitting problem.  It is intended to be used after a

@@ -1,8 +1,6 @@
-!*==UIVP.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK UIVP
 SUBROUTINE UIVP(X,Y,Yp)
   IMPLICIT NONE
-  !*--UIVP5
   !***BEGIN PROLOGUE  UIVP
   !***PURPOSE  Dummy routine for BVSUP quick check.
   !***LIBRARY   SLATEC

@@ -1,8 +1,6 @@
-!*==PCHBS.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK PCHBS
 SUBROUTINE PCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   IMPLICIT NONE
-  !*--PCHBS5
   !***BEGIN PROLOGUE  PCHBS
   !***PURPOSE  Piecewise Cubic Hermite to B-Spline converter.
   !***LIBRARY   SLATEC (PCHIP)

@@ -1,8 +1,6 @@
-!*==CTRMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CTRMV
 SUBROUTINE CTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   IMPLICIT NONE
-  !*--CTRMV5
   !***BEGIN PROLOGUE  CTRMV
   !***PURPOSE  Multiply a complex vector by a complex triangular matrix.
   !***LIBRARY   SLATEC (BLAS)

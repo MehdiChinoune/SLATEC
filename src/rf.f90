@@ -1,11 +1,7 @@
-!*==RF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK RF
 REAL FUNCTION RF(X,Y,Z,Ier)
   IMPLICIT NONE
-  !*--RF5
-  !*** Start of declarations inserted by SPAG
   REAL R1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RF
   !***PURPOSE  Compute the incomplete or complete elliptic integral of the
   !            1st kind.  For X, Y, and Z non-negative and at most one of

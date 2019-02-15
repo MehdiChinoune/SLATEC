@@ -1,12 +1,8 @@
-!*==C9LN2R.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK C9LN2R
 COMPLEX FUNCTION C9LN2R(Z)
   IMPLICIT NONE
-  !*--C9LN2R5
-  !*** Start of declarations inserted by SPAG
   REAL aipart, arg, cabsz, R9ATN1, R9LN2R, rpart, x, xz, y, y1x, &
     yz
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  C9LN2R
   !***SUBSIDIARY
   !***PURPOSE  Evaluate LOG(1+Z) from second order relative accuracy so

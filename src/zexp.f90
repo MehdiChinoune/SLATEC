@@ -1,8 +1,6 @@
-!*==ZEXP.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZEXP
 SUBROUTINE ZEXP(Ar,Ai,Br,Bi)
   IMPLICIT NONE
-  !*--ZEXP5
   !***BEGIN PROLOGUE  ZEXP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and

@@ -1,8 +1,6 @@
-!*==BESI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BESI
 SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   IMPLICIT NONE
-  !*--BESI5
   !***BEGIN PROLOGUE  BESI
   !***PURPOSE  Compute an N member sequence of I Bessel functions
   !            I/SUB(ALPHA+K-1)/(X), K=1,...,N or scaled Bessel functions

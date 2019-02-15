@@ -1,12 +1,8 @@
-!*==INITS.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK INITS
 FUNCTION INITS(Os,Nos,Eta)
   IMPLICIT NONE
-  !*--INITS5
-  !*** Start of declarations inserted by SPAG
   REAL err, Eta
   INTEGER i, ii, INITS, Nos
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  INITS
   !***PURPOSE  Determine the number of terms needed in an orthogonal
   !            polynomial series so that it meets a specified accuracy.

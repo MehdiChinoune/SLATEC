@@ -1,13 +1,9 @@
-!*==GAMIT.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK GAMIT
 REAL FUNCTION GAMIT(A,X)
   IMPLICIT NONE
-  !*--GAMIT5
-  !*** Start of declarations inserted by SPAG
   REAL A, aeps, ainta, algap1, alneps, alng, ALNGAM, alx, bot, &
     GAMR, h, R1MACH, R9GMIT, R9LGIC, R9LGIT, sga, sgngam, sqeps, &
     t, X
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  GAMIT
   !***PURPOSE  Calculate Tricomi's form of the incomplete Gamma function.
   !***LIBRARY   SLATEC (FNLIB)

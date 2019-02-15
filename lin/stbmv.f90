@@ -1,8 +1,6 @@
-!*==STBMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK STBMV
 SUBROUTINE STBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   IMPLICIT NONE
-  !*--STBMV5
   !***BEGIN PROLOGUE  STBMV
   !***PURPOSE  Multiply a real vector by a real triangular band matrix.
   !***LIBRARY   SLATEC (BLAS)

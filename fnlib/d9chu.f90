@@ -1,11 +1,7 @@
-!*==D9CHU.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9CHU
 REAL(8) FUNCTION D9CHU(A,B,Z)
   IMPLICIT NONE
-  !*--D9CHU5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, j
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9CHU
   !***SUBSIDIARY
   !***PURPOSE  Evaluate for large Z  Z**A * U(A,B,Z) where U is the

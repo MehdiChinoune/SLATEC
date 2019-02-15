@@ -1,11 +1,7 @@
-!*==C0LGMC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK C0LGMC
 COMPLEX FUNCTION C0LGMC(Z)
   IMPLICIT NONE
-  !*--C0LGMC5
-  !*** Start of declarations inserted by SPAG
   REAL cabsz, R1MACH, rbig
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  C0LGMC
   !***PURPOSE  Evaluate (Z+0.5)*LOG((Z+1.)/Z) - 1.0 with relative
   !            accuracy.

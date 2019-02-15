@@ -1,11 +1,7 @@
-!*==DBESK0.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBESK0
 REAL(8) FUNCTION DBESK0(X)
   IMPLICIT NONE
-  !*--DBESK05
-  !*** Start of declarations inserted by SPAG
   INTEGER INITDS, ntk0
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBESK0
   !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
   !            third kind of order zero.

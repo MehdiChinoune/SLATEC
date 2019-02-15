@@ -1,4 +1,3 @@
-!*==DNLS1E.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DNLS1E
 SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !***BEGIN PROLOGUE  DNLS1E
@@ -493,10 +492,7 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DNLS1E
   IMPLICIT NONE
-  !*--DNLS1E496
-  !*** Start of declarations inserted by SPAG
   REAL(8) :: FCN
-  !*** End of declarations inserted by SPAG
   INTEGER M, N, Nprint, Info, Lwa, Iopt
   INTEGER index, Iw(*)
   REAL(8) :: Tol

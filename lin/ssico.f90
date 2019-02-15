@@ -1,8 +1,6 @@
-!*==SSICO.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSICO
 SUBROUTINE SSICO(A,Lda,N,Kpvt,Rcond,Z)
   IMPLICIT NONE
-  !*--SSICO5
   !***BEGIN PROLOGUE  SSICO
   !***PURPOSE  Factor a symmetric matrix by elimination with symmetric
   !            pivoting and estimate the condition number of the matrix.

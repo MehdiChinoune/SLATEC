@@ -1,13 +1,9 @@
-!*==BESJ1.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK BESJ1
 FUNCTION BESJ1(X)
   IMPLICIT NONE
-  !*--BESJ15
-  !*** Start of declarations inserted by SPAG
   REAL ampl, BESJ1, bj1cs, bm1cs, bth1cs, CSEVL, pi4, R1MACH, &
     theta, X, xmax, xmin, xsml, y, z
   INTEGER INITS, ntj1, ntm1, ntth1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESJ1
   !***PURPOSE  Compute the Bessel function of the first kind of order one.
   !***LIBRARY   SLATEC (FNLIB)

@@ -1,11 +1,9 @@
-!*==SDNTL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK SDNTL
 SUBROUTINE SDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     Ml,Mu,N,Nde,Save1,T,Uround,USERS,Y,Ywt,H,Mntold,Mtrold,&
     Nfe,Rc,Yh,A,Convrg,El,Fac,Ier,Ipvt,Nq,Nwait,Rh,Rmax,&
     Save2,Tq,Trend,Iswflg,Jstate)
   IMPLICIT NONE
-  !*--SDNTL8
   !***BEGIN PROLOGUE  SDNTL
   !***SUBSIDIARY
   !***PURPOSE  Subroutine SDNTL is called to set parameters on the first

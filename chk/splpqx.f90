@@ -1,14 +1,10 @@
-!*==SPLPQX.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SPLPQX
 SUBROUTINE SPLPQX(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--SPLPQX5
-  !*** Start of declarations inserted by SPAG
   REAL bl, bu, d, dattrv, duals, prgopt, primal, USRMAT, work, zero
   INTEGER i, ibasis, ic, icnt, ind, info, Ipass, isoln, iv, ivv, &
     iwork, j, kk, kount, Kprint, liw, Lun, lw, mm, mrelas
   INTEGER nvars
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPLPQX
   !***PURPOSE  Quick check for SPLP.
   !***LIBRARY   SLATEC

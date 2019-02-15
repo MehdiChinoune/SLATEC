@@ -1,8 +1,6 @@
-!*==DF2O.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DF2O
 REAL(8) FUNCTION DF2O(X)
   IMPLICIT NONE
-  !*--DF2O5
   !***BEGIN PROLOGUE  DF2O
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

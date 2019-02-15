@@ -1,8 +1,6 @@
-!*==T5.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK T5
 REAL FUNCTION T5(X)
   IMPLICIT NONE
-  !*--T55
   !***BEGIN PROLOGUE  T5
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

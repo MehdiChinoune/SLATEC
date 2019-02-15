@@ -1,12 +1,8 @@
-!*==DRKFAB.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DRKFAB
 SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     W,S,Stowa,G,Work,Iwork,Nfcc)
   IMPLICIT NONE
-  !*--DRKFAB6
-  !*** Start of declarations inserted by SPAG
   REAL DBVDER
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DRKFAB
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBVSUP

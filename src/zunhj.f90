@@ -1,9 +1,7 @@
-!*==ZUNHJ.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZUNHJ
 SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     Zeta2r,Zeta2i,Asumr,Asumi,Bsumr,Bsumi)
   IMPLICIT NONE
-  !*--ZUNHJ6
   !***BEGIN PROLOGUE  ZUNHJ
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESI and ZBESK

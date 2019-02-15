@@ -1,8 +1,6 @@
-!*==PCHCI.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK PCHCI
 SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
   IMPLICIT NONE
-  !*--PCHCI5
   !***BEGIN PROLOGUE  PCHCI
   !***SUBSIDIARY
   !***PURPOSE  Set interior derivatives for PCHIC

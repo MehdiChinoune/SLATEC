@@ -1,11 +1,7 @@
-!*==DBESJ0.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBESJ0
 REAL(8) FUNCTION DBESJ0(X)
   IMPLICIT NONE
-  !*--DBESJ05
-  !*** Start of declarations inserted by SPAG
   INTEGER INITDS, ntj0
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBESJ0
   !***PURPOSE  Compute the Bessel function of the first kind of order
   !            zero.

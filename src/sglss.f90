@@ -1,13 +1,9 @@
-!*==SGLSS.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SGLSS
 SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   IMPLICIT NONE
-  !*--SGLSS5
-  !*** Start of declarations inserted by SPAG
   REAL A, ae, B, re, Rnorm, Work
   INTEGER Info, key, krank, ksure, Liw, Lw, M, Mda, Mdb, mode, N, &
     Nb, np
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SGLSS
   !***PURPOSE  Solve a linear least squares problems by performing a QR
   !            factorization of the matrix using Householder

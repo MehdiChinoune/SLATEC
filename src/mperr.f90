@@ -1,11 +1,7 @@
-!*==MPERR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK MPERR
 SUBROUTINE MPERR
   IMPLICIT NONE
-  !*--MPERR5
-  !*** Start of declarations inserted by SPAG
   INTEGER LUN, M, MXR
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPERR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI

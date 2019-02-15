@@ -1,8 +1,6 @@
-!*==DFCQX.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DFCQX
 SUBROUTINE DFCQX(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DFCQX5
   !***BEGIN PROLOGUE  DFCQX
   !***PURPOSE  Quick check for DFC.
   !***LIBRARY   SLATEC

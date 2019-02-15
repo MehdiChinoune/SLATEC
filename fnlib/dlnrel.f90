@@ -1,11 +1,7 @@
-!*==DLNREL.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DLNREL
 REAL(8) FUNCTION DLNREL(X)
   IMPLICIT NONE
-  !*--DLNREL5
-  !*** Start of declarations inserted by SPAG
   INTEGER INITDS, nlnrel
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DLNREL
   !***PURPOSE  Evaluate ln(1+X) accurate in the sense of relative error.
   !***LIBRARY   SLATEC (FNLIB)

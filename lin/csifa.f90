@@ -1,8 +1,6 @@
-!*==CSIFA.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CSIFA
 SUBROUTINE CSIFA(A,Lda,N,Kpvt,Info)
   IMPLICIT NONE
-  !*--CSIFA5
   !***BEGIN PROLOGUE  CSIFA
   !***PURPOSE  Factor a complex symmetric matrix by elimination with
   !            symmetric pivoting.

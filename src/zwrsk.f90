@@ -1,8 +1,6 @@
-!*==ZWRSK.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZWRSK
 SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--ZWRSK5
   !***BEGIN PROLOGUE  ZWRSK
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESI and ZBESK
@@ -107,4 +105,4 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   ENDDO
   RETURN
   99999 CONTINUE
-  END SUBROUTINE ZWRSK
+END SUBROUTINE ZWRSK

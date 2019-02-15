@@ -1,8 +1,6 @@
-!*==CHKDER.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CHKDER
 SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   IMPLICIT NONE
-  !*--CHKDER5
   !***BEGIN PROLOGUE  CHKDER
   !***PURPOSE  Check the gradients of M nonlinear functions in N
   !            variables, evaluated at a point X, for consistency

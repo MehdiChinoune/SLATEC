@@ -1,9 +1,7 @@
-!*==DBVSUP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DBVSUP
 SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Igofx,Re,Ae,Iflag,Work,Ndw,Iwork,Ndiw,Neqivp)
   IMPLICIT NONE
-  !*--DBVSUP6
   !***BEGIN PROLOGUE  DBVSUP
   !***PURPOSE  Solve a linear two-point boundary value problem using
   !            superposition coupled with an orthonormalization procedure

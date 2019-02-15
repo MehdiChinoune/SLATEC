@@ -1,8 +1,6 @@
-!*==F3G.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK F3G
 REAL FUNCTION F3G(X)
   IMPLICIT NONE
-  !*--F3G5
   !***BEGIN PROLOGUE  F3G
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

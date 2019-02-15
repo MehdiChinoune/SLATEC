@@ -1,8 +1,6 @@
-!*==QCRC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QCRC
 SUBROUTINE QCRC(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QCRC5
   !***BEGIN PROLOGUE  QCRC
   !***PURPOSE  Quick check for RC.
   !***LIBRARY   SLATEC

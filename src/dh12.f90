@@ -1,8 +1,6 @@
-!*==DH12.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DH12
 SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   IMPLICIT NONE
-  !*--DH125
   !***BEGIN PROLOGUE  DH12
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DHFTI, DLSEI and DWNNLS

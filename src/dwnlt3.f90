@@ -1,8 +1,6 @@
-!*==DWNLT3.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DWNLT3
 SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   IMPLICIT NONE
-  !*--DWNLT35
   !***BEGIN PROLOGUE  DWNLT3
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to WNLIT

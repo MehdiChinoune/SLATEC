@@ -1,11 +1,7 @@
-!*==DAVNTS.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DAVNTS
 SUBROUTINE DAVNTS(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DAVNTS5
-  !*** Start of declarations inserted by SPAG
   INTEGER kontrl
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DAVNTS
   !***PURPOSE  Quick check for DAVINT.
   !***LIBRARY   SLATEC

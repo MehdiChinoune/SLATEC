@@ -1,9 +1,7 @@
-!*==DQAWO.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQAWO
 SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     Leniw,Maxp1,Lenw,Last,Iwork,Work)
   IMPLICIT NONE
-  !*--DQAWO6
   !***BEGIN PROLOGUE  DQAWO
   !***PURPOSE  Calculate an approximation to a given definite integral
   !            I= Integral of F(X)*W(X) over (A,B), where

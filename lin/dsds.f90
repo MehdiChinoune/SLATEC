@@ -1,8 +1,6 @@
-!*==DSDS.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSDS
 SUBROUTINE DSDS(N,Nelt,Ia,Ja,A,Isym,Dinv)
   IMPLICIT NONE
-  !*--DSDS5
   !***BEGIN PROLOGUE  DSDS
   !***PURPOSE  Diagonal Scaling Preconditioner SLAP Set Up.
   !            Routine to compute the inverse of the diagonal of a matrix

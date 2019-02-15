@@ -1,14 +1,10 @@
-!*==CFFTI1.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK CFFTI1
 SUBROUTINE CFFTI1(N,Wa,Ifac)
   IMPLICIT NONE
-  !*--CFFTI15
-  !*** Start of declarations inserted by SPAG
   REAL arg, argh, argld, fi, tpi, Wa
   INTEGER i, i1, ib, ido, idot, Ifac, ii, ip, ipm, j, k1, l1, &
     l2, ld, N, nf, nl, nq, nr, ntry
   INTEGER ntryh
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CFFTI1
   !***PURPOSE  Initialize a real and an integer work array for CFFTF1 and
   !            CFFTB1.

@@ -1,17 +1,13 @@
-!*==SEPELI.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK SEPELI
 SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     Nbdcnd,Bdc,Gama,Bdd,Xnu,COFX,COFY,Grhs,Usol,Idmn,W,&
     Pertrb,Ierror)
   IMPLICIT NONE
-  !*--SEPELI7
-  !*** Start of declarations inserted by SPAG
   REAL A, Alpha, B, Bda, Bdb, Bdc, Bdd, Beta, C, COFX, COFY, D, &
     Gama, Grhs, Pertrb, Usol, W, Xnu
   INTEGER i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
     i9, Idmn, Ierror, Intl, Iorder, k, l, length
   INTEGER linput, ll, logb2n, loutpt, M, Mbdcnd, N, Nbdcnd
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SEPELI
   !***PURPOSE  Discretize and solve a second and, optionally, a fourth
   !            order finite difference approximation on a uniform grid to

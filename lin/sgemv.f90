@@ -1,8 +1,6 @@
-!*==SGEMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SGEMV
 SUBROUTINE SGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   IMPLICIT NONE
-  !*--SGEMV5
   !***BEGIN PROLOGUE  SGEMV
   !***PURPOSE  Multiply a real vector by a real general matrix.
   !***LIBRARY   SLATEC (BLAS)

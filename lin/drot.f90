@@ -1,11 +1,7 @@
-!*==DROT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DROT
 SUBROUTINE DROT(N,Dx,Incx,Dy,Incy,Dc,Ds)
   IMPLICIT NONE
-  !*--DROT5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Incx, Incy, kx, ky, N, nsteps
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DROT
   !***PURPOSE  Apply a plane Givens rotation.
   !***LIBRARY   SLATEC (BLAS)

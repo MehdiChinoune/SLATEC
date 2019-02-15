@@ -1,8 +1,6 @@
-!*==SNBCO.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SNBCO
 SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   IMPLICIT NONE
-  !*--SNBCO5
   !***BEGIN PROLOGUE  SNBCO
   !***PURPOSE  Factor a band matrix using Gaussian elimination and
   !            estimate the condition number.

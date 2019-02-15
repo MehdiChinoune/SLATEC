@@ -1,8 +1,6 @@
-!*==CPBCO.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CPBCO
 SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   IMPLICIT NONE
-  !*--CPBCO5
   !***BEGIN PROLOGUE  CPBCO
   !***PURPOSE  Factor a complex Hermitian positive definite matrix stored
   !            in band form and estimate the condition number of the

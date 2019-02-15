@@ -1,8 +1,6 @@
-!*==DSTWAY.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DSTWAY
 SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
   IMPLICIT NONE
-  !*--DSTWAY5
   !***BEGIN PROLOGUE  DSTWAY
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBVSUP

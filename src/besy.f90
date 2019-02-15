@@ -1,11 +1,7 @@
-!*==BESY.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BESY
 SUBROUTINE BESY(X,Fnu,N,Y)
   IMPLICIT NONE
-  !*--BESY5
-  !*** Start of declarations inserted by SPAG
   REAL YAIRY
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESY
   !***PURPOSE  Implement forward recursion on the three term recursion
   !            relation for a sequence of non-negative order Bessel

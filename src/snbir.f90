@@ -1,8 +1,6 @@
-!*==SNBIR.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SNBIR
 SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   IMPLICIT NONE
-  !*--SNBIR5
   !***BEGIN PROLOGUE  SNBIR
   !***PURPOSE  Solve a general nonsymmetric banded system of linear
   !            equations.  Iterative refinement is used to obtain an error

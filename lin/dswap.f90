@@ -1,11 +1,7 @@
-!*==DSWAP.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSWAP
 SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
-  !*--DSWAP5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSWAP
   !***PURPOSE  Interchange two vectors.
   !***LIBRARY   SLATEC (BLAS)

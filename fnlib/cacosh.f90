@@ -1,8 +1,6 @@
-!*==CACOSH.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CACOSH
 COMPLEX FUNCTION CACOSH(Z)
   IMPLICIT NONE
-  !*--CACOSH5
   !***BEGIN PROLOGUE  CACOSH
   !***PURPOSE  Compute the arc hyperbolic cosine.
   !***LIBRARY   SLATEC (FNLIB)

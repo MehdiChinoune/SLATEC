@@ -1,13 +1,9 @@
-!*==PCHNGS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK PCHNGS
 SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   IMPLICIT NONE
-  !*--PCHNGS5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, iend, Ii, il, ilast, iopt, ipl, Iplace, Ircx, istart, &
     Ix, ixlast, j, jj, jstart, k, key, ll, lmx, lpg
   INTEGER n20055, nerr, np
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PCHNGS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

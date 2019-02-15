@@ -1,15 +1,11 @@
-!*==SVECS.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SVECS
 SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   IMPLICIT NONE
-  !*--SVECS5
-  !*** Start of declarations inserted by SPAG
   REAL AE, dum, RE, TOL, Work, Yhp
   INTEGER ICOco, idp, Iflag, INDpvt, Inhomo, INTeg, Iwork, k, kp, &
     Lnfc, LNFcc, MXNon, Ncomp, NDIsk, NEQ, NEQivp, NIC, niv, &
     NOPg, NPS
   INTEGER NTApe, NTP, NUMort, NXPts
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SVECS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

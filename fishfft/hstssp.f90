@@ -1,16 +1,12 @@
-!*==HSTSSP.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK HSTSSP
 SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !*--HSTSSP6
-  !*** Start of declarations inserted by SPAG
   REAL A, a1, a2, a3, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, &
     deltht, dlrsq, dlthsq, dum, Elmbda, F, Pertrb, pi
   REAL PIMACH, W
   INTEGER i, Idimf, ierr1, Ierror, isw, iwb, iwc, iwr, iws, j, &
     jsw, k, lp, M, mb, Mbdcnd, mm1, N, Nbdcnd, np
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HSTSSP
   !***PURPOSE  Solve the standard five-point finite difference
   !            approximation on a staggered grid to the Helmholtz

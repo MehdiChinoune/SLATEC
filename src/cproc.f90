@@ -1,12 +1,8 @@
-!*==CPROC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CPROC
 SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
   IMPLICIT NONE
-  !*--CPROC5
-  !*** Start of declarations inserted by SPAG
   REAL Aa, Bm1, Bm2, rt, Yy
   INTEGER ia, id, iflg, j, k, M, m1, m2, mm, Na, Nd, Nm1, Nm2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CPROC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBLKTR

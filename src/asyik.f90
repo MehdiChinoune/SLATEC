@@ -1,8 +1,6 @@
-!*==ASYIK.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK ASYIK
 SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   IMPLICIT NONE
-  !*--ASYIK5
   !***BEGIN PROLOGUE  ASYIK
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BESI and BESK

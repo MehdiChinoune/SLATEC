@@ -1,9 +1,7 @@
-!*==CCHK43.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CCHK43
 SUBROUTINE CCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
     Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
   IMPLICIT NONE
-  !*--CCHK436
   !***BEGIN PROLOGUE  CCHK43
   !***SUBSIDIARY
   !***PURPOSE  Quick check for CHERK and CSYRK.

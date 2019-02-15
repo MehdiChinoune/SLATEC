@@ -1,8 +1,6 @@
-!*==SOSNQX.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SOSNQX
 SUBROUTINE SOSNQX(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--SOSNQX5
   !***BEGIN PROLOGUE  SOSNQX
   !***PURPOSE  Quick check for SOS.
   !***LIBRARY   SLATEC

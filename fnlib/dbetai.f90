@@ -1,11 +1,7 @@
-!*==DBETAI.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBETAI
 REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   IMPLICIT NONE
-  !*--DBETAI5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ib, n
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBETAI
   !***PURPOSE  Calculate the incomplete Beta function.
   !***LIBRARY   SLATEC (FNLIB)

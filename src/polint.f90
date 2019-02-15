@@ -1,12 +1,8 @@
-!*==POLINT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK POLINT
 SUBROUTINE POLINT(N,X,Y,C)
   IMPLICIT NONE
-  !*--POLINT5
-  !*** Start of declarations inserted by SPAG
   REAL C, dif, X, Y
   INTEGER i, k, km1, N
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POLINT
   !***PURPOSE  Produce the polynomial which interpolates a set of discrete
   !            data points.

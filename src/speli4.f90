@@ -1,11 +1,8 @@
-!*==SPELI4.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SPELI4
 SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     Bdd,COFX,An,Bn,Cn,Dn,Un,Zn,Am,Bm,Cm,Dm,Um,Zm,Grhs,Usol,&
     Idmn,W,Pertrb,Ierror)
   IMPLICIT NONE
-  !*--SPELI47
-  !*** Start of declarations inserted by SPAG
   REAL A, ai, AIT, Alpha, Am, An, ax1, axi, B, Bda, Bdb, Bdc, &
     Bdd, Beta, bi, BIT, Bm, Bn, bxi, C
   REAL ci, CIT, Cm, Cn, cxi, cxm, D, DIT, DLX, DLX4, DLY, DLY4, &
@@ -15,7 +12,6 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   INTEGER i, Idmn, ieror, Ierror, iord, Iorder, IS, j, JS, K, &
     KSWx, KSWy, L, M, Mbdcnd, MIT, mp, MS, N, Nbdcnd
   INTEGER NIT, np, NS
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPELI4
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPX4

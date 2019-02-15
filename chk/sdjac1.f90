@@ -1,8 +1,6 @@
-!*==SDJAC1.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SDJAC1
 SUBROUTINE SDJAC1(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
   IMPLICIT NONE
-  !*--SDJAC15
   !***BEGIN PROLOGUE  SDJAC1
   !***SUBSIDIARY
   !***PURPOSE  First Jacobian evaluator for SDASQC.

@@ -1,11 +1,7 @@
-!*==BSPVD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BSPVD
 SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   IMPLICIT NONE
-  !*--BSPVD5
-  !*** Start of declarations inserted by SPAG
   INTEGER iwork, Ldvnik
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BSPVD
   !***PURPOSE  Calculate the value and all derivatives of order less than
   !            NDERIV of all basis functions which do not vanish at X.

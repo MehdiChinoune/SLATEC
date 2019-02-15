@@ -1,11 +1,7 @@
-!*==PRWPGE.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK PRWPGE
 SUBROUTINE PRWPGE(Key,Ipage,Lpg,Sx,Ix)
   IMPLICIT NONE
-  !*--PRWPGE5
-  !*** Start of declarations inserted by SPAG
   INTEGER Ipage, Ix, Key, Lpg
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PRWPGE
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

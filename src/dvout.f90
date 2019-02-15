@@ -1,4 +1,3 @@
-!*==DVOUT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DVOUT
 SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
   !***BEGIN PROLOGUE  DVOUT
@@ -54,10 +53,7 @@ SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
   !   910403  Updated AUTHOR section.  (WRB)
   !***END PROLOGUE  DVOUT
   IMPLICIT NONE
-  !*--DVOUT57
-  !*** Start of declarations inserted by SPAG
   INTEGER i, I1MACH, Idigit, k1, k2, lout, N, ndigit
-  !*** End of declarations inserted by SPAG
   REAL(8) :: Dx(*)
   CHARACTER Ifmt*(*)
   !***FIRST EXECUTABLE STATEMENT  DVOUT

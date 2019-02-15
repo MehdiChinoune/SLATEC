@@ -1,13 +1,9 @@
-!*==R9AIMP.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK R9AIMP
 SUBROUTINE R9AIMP(X,Ampl,Theta)
   IMPLICIT NONE
-  !*--R9AIMP5
-  !*** Start of declarations inserted by SPAG
   REAL am21cs, am22cs, Ampl, ath1cs, ath2cs, CSEVL, eta, pi4, &
     R1MACH, sqrtx, Theta, X, xsml, z
   INTEGER INITS, nam21, nam22, nath1, nath2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9AIMP
   !***SUBSIDIARY
   !***PURPOSE  Evaluate the Airy modulus and phase.

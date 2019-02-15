@@ -1,8 +1,6 @@
-!*==QRFAC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QRFAC
 SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   IMPLICIT NONE
-  !*--QRFAC5
   !***BEGIN PROLOGUE  QRFAC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SNLS1, SNLS1E, SNSQ and SNSQE

@@ -1,8 +1,6 @@
-!*==DRF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DRF
 REAL(8) FUNCTION DRF(X,Y,Z,Ier)
   IMPLICIT NONE
-  !*--DRF5
   !***BEGIN PROLOGUE  DRF
   !***PURPOSE  Compute the incomplete or complete elliptic integral of the
   !            1st kind.  For X, Y, and Z non-negative and at most one of

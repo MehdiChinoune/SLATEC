@@ -1,8 +1,6 @@
-!*==DEVCHK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DEVCHK
 SUBROUTINE DEVCHK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
   IMPLICIT NONE
-  !*--DEVCHK5
   !***BEGIN PROLOGUE  DEVCHK
   !***SUBSIDIARY
   !***PURPOSE  Test evaluation accuracy of DCHFDV and DCHFEV for DPCHQ1.

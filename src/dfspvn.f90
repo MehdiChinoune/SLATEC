@@ -1,4 +1,3 @@
-!*==DFSPVN.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DFSPVN
 SUBROUTINE DFSPVN(T,Jhigh,Index,X,Ileft,Vnikx)
   !***BEGIN PROLOGUE  DFSPVN
@@ -22,11 +21,8 @@ SUBROUTINE DFSPVN(T,Jhigh,Index,X,Ileft,Vnikx)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DFSPVN
   IMPLICIT NONE
-  !*--DFSPVN25
-  !*** Start of declarations inserted by SPAG
   REAL(8) :: deltam, deltap, T, vm, vmprev, Vnikx, X
   INTEGER i, Ileft, imjp1, Index, ipj, j, Jhigh, jp1, jp1ml, l
-  !*** End of declarations inserted by SPAG
   DIMENSION T(*), Vnikx(*)
   DIMENSION deltam(20), deltap(20)
   SAVE j, deltam, deltap

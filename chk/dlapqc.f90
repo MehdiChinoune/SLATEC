@@ -1,8 +1,6 @@
-!*==DLAPQC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DLAPQC
 SUBROUTINE DLAPQC(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DLAPQC5
   !***BEGIN PROLOGUE  DLAPQC
   !***PURPOSE  Quick check for testing Sparse Linear Algebra Package
   !            (SLAP) Version 2.0.2.

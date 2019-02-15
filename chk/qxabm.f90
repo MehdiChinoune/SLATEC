@@ -1,11 +1,7 @@
-!*==QXABM.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QXABM
 SUBROUTINE QXABM(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QXABM5
-  !*** Start of declarations inserted by SPAG
   REAL FDEQC
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QXABM
   !***SUBSIDIARY
   !***PURPOSE  Test the DEPAC routine DEABM.

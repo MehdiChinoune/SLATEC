@@ -1,8 +1,6 @@
-!*==DSISL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSISL
 SUBROUTINE DSISL(A,Lda,N,Kpvt,B)
   IMPLICIT NONE
-  !*--DSISL5
   !***BEGIN PROLOGUE  DSISL
   !***PURPOSE  Solve a real symmetric system using the factors obtained
   !            from SSIFA.

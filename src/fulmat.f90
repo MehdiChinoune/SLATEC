@@ -1,11 +1,7 @@
-!*==FULMAT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK FULMAT
 SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   IMPLICIT NONE
-  !*--FULMAT5
-  !*** Start of declarations inserted by SPAG
   INTEGER I, Indcat, J, key, level, lp, nerr, next
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  FULMAT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

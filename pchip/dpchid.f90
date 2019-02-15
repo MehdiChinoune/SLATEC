@@ -1,8 +1,6 @@
-!*==DPCHID.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DPCHID
 REAL(8) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   IMPLICIT NONE
-  !*--DPCHID5
   !***BEGIN PROLOGUE  DPCHID
   !***PURPOSE  Evaluate the definite integral of a piecewise cubic
   !            Hermite function over an interval whose endpoints are data

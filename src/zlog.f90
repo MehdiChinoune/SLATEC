@@ -1,8 +1,6 @@
-!*==ZLOG.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZLOG
 SUBROUTINE ZLOG(Ar,Ai,Br,Bi,Ierr)
   IMPLICIT NONE
-  !*--ZLOG5
   !***BEGIN PROLOGUE  ZLOG
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and

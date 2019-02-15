@@ -1,8 +1,6 @@
-!*==DOGLEG.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DOGLEG
 SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   IMPLICIT NONE
-  !*--DOGLEG5
   !***BEGIN PROLOGUE  DOGLEG
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SNSQ and SNSQE

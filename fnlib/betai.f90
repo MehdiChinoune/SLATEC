@@ -1,13 +1,9 @@
-!*==BETAI.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK BETAI
 REAL FUNCTION BETAI(X,Pin,Qin)
   IMPLICIT NONE
-  !*--BETAI5
-  !*** Start of declarations inserted by SPAG
   REAL ALBETA, alneps, alnsml, c, eps, finsum, p, p1, Pin, ps, q, &
     Qin, R1MACH, sml, term, X, xb, y
   INTEGER i, ib, n
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BETAI
   !***PURPOSE  Calculate the incomplete Beta function.
   !***LIBRARY   SLATEC (FNLIB)

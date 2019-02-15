@@ -1,8 +1,6 @@
-!*==DGBFA.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DGBFA
 SUBROUTINE DGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   IMPLICIT NONE
-  !*--DGBFA5
   !***BEGIN PROLOGUE  DGBFA
   !***PURPOSE  Factor a band matrix using Gaussian elimination.
   !***LIBRARY   SLATEC (LINPACK)

@@ -1,9 +1,6 @@
-!*==EXBVP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK EXBVP
 SUBROUTINE EXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
   IMPLICIT NONE
-  !*--EXBVP5
-  !*** Start of declarations inserted by SPAG
   REAL A, AE, Alpha, B, Beta, C, EPS, FOUru, PWCnd, PX, RE ,&
     SQOvfl, SRU, TND, TOL, TWOu, URO, Work, X, XBEg
   REAL XENd, xl, XOP, XOT, Xpts, XSAv, Y, zquit
@@ -15,7 +12,6 @@ SUBROUTINE EXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
     NEEdw, NEQ
   INTEGER NEQivp, NFC, NFCc, NIC, NOPg, NPS, Nrowa, Nrowb, Nrowy ,&
     nsafiw, nsafw, NSWot, NTApe, NTP, NUMort, NXPts
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  EXBVP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

@@ -1,8 +1,6 @@
-!*==QK15I.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QK15I
 SUBROUTINE QK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   IMPLICIT NONE
-  !*--QK15I5
   !***BEGIN PROLOGUE  QK15I
   !***PURPOSE  The original (infinite integration range is mapped
   !            onto the interval (0,1) and (A,B) is a part of (0,1).

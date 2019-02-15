@@ -1,13 +1,9 @@
-!*==R9GMIT.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK R9GMIT
 FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
   IMPLICIT NONE
-  !*--R9GMIT5
-  !*** Start of declarations inserted by SPAG
   REAL A, ae, aeps, alg2, Algap1, algs, ALNGAM, Alx, bot, eps, &
     fk, R1MACH, R9GMIT, s, sgng2, Sgngam, t, te, X
   INTEGER k, m, ma
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9GMIT
   !***SUBSIDIARY
   !***PURPOSE  Compute Tricomi's incomplete Gamma function for small

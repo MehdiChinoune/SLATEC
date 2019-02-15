@@ -1,11 +1,7 @@
-!*==SQCK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SQCK
 SUBROUTINE SQCK(Lun,Kprint,Nerr)
   IMPLICIT NONE
-  !*--SQCK5
-  !*** Start of declarations inserted by SPAG
   INTEGER Kprint, Lun
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SQCK
   !***PURPOSE  Quick check for SPOFS, SPOIR, SNBFS and SNBIR.
   !***LIBRARY   SLATEC

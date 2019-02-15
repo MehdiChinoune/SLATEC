@@ -1,8 +1,6 @@
-!*==CAIRY.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CAIRY
 SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   IMPLICIT NONE
-  !*--CAIRY5
   !***BEGIN PROLOGUE  CAIRY
   !***PURPOSE  Compute the Airy function Ai(z) or its derivative dAi/dz
   !            for complex argument z.  A scaling option is available

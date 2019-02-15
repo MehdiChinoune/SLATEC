@@ -1,8 +1,6 @@
-!*==BNSLV.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BNSLV
 SUBROUTINE BNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   IMPLICIT NONE
-  !*--BNSLV5
   !***BEGIN PROLOGUE  BNSLV
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BINT4 and BINTK

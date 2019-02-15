@@ -1,10 +1,8 @@
-!*==SCHK12.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SCHK12
 SUBROUTINE SCHK12(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
     Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,&
     Y,Yy,Ys,Yt,G)
   IMPLICIT NONE
-  !*--SCHK127
   !***BEGIN PROLOGUE  SCHK12
   !***SUBSIDIARY
   !***PURPOSE  Quick check for SGEMV and SGBMV.

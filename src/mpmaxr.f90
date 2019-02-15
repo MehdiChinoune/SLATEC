@@ -1,11 +1,7 @@
-!*==MPMAXR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK MPMAXR
 SUBROUTINE MPMAXR(X)
   IMPLICIT NONE
-  !*--MPMAXR5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, it, LUN, M, MXR
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPMAXR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI

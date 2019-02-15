@@ -1,8 +1,6 @@
-!*==DUTERR.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DUTERR
 SUBROUTINE DUTERR(Method,Ierr,Iout,Nfail,Istdo,Iter,Err)
   IMPLICIT NONE
-  !*--DUTERR5
   !***BEGIN PROLOGUE  DUTERR
   !***SUBSIDIARY
   !***PURPOSE  Output error messages for the SLAP Quick Check.

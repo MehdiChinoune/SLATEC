@@ -1,12 +1,8 @@
-!*==BESI1.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK BESI1
 FUNCTION BESI1(X)
   IMPLICIT NONE
-  !*--BESI15
-  !*** Start of declarations inserted by SPAG
   REAL BESI1, BESI1E, bi1cs, CSEVL, R1MACH, X, xmax, xmin, xsml, y
   INTEGER INITS, nti1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESI1
   !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
   !            first kind of order one.

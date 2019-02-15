@@ -1,11 +1,7 @@
-!*==QK21.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QK21
 SUBROUTINE QK21(F,A,B,Result,Abserr,Resabs,Resasc)
   IMPLICIT NONE
-  !*--QK215
-  !*** Start of declarations inserted by SPAG
   REAL Resasc
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QK21
   !***PURPOSE  To compute I = Integral of F over (A,B), with error
   !                           estimate

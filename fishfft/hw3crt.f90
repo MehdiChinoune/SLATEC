@@ -1,10 +1,7 @@
-!*==HW3CRT.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK HW3CRT
 SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
     N,Nbdcnd,Bdzs,Bdzf,Elmbda,Ldimf,Mdimf,F,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !*--HW3CRT6
-  !*** Start of declarations inserted by SPAG
   REAL Bdxf, Bdxs, Bdyf, Bdys, Bdzf, Bdzs, c1, c2, c3, dx, dy, &
     dz, Elmbda, F, Pertrb, s, s1, s2, twbydx, twbydy
   REAL twbydz, W, Xf, xlp, Xs, Yf, ylp, Ys, Zf, zlp, Zs
@@ -12,7 +9,6 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
     lp, lp1, lstart, lstop, lstpm1, lunk, M, Mbdcnd, Mdimf
   INTEGER mp, mp1, mstart, mstop, mstpm1, munk, N, Nbdcnd, np, &
     np1, nperod, nstart, nstop, nstpm1, nunk
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HW3CRT
   !***PURPOSE  Solve the standard seven-point finite difference
   !            approximation to the Helmholtz equation in Cartesian

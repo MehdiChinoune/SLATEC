@@ -1,9 +1,7 @@
-!*==DQC25F.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQC25F
 SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
     Neval,Resabs,Resasc,Momcom,Chebmo)
   IMPLICIT NONE
-  !*--DQC25F6
   !***BEGIN PROLOGUE  DQC25F
   !***PURPOSE  To compute the integral I=Integral of F(X) over (A,B)
   !            Where W(X) = COS(OMEGA*X) or W(X)=SIN(OMEGA*X) and to

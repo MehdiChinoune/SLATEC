@@ -1,12 +1,8 @@
-!*==INXCB.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK INXCB
 SUBROUTINE INXCB(I,Ir,Idx,Idp)
   IMPLICIT NONE
-  !*--INXCB5
-  !*** Start of declarations inserted by SPAG
   REAL CNV, EPS
   INTEGER I, id, Idp, Idx, IK, ipl, Ir, izh, K, NCMplx, NM, NPP
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  INXCB
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBLKTR

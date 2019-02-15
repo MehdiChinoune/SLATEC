@@ -1,8 +1,6 @@
-!*==ZS1S2.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZS1S2
 SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
   IMPLICIT NONE
-  !*--ZS1S25
   !***BEGIN PROLOGUE  ZS1S2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZAIRY and ZBESK

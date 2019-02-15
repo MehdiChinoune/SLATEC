@@ -1,8 +1,6 @@
-!*==CGBMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CGBMV
 SUBROUTINE CGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   IMPLICIT NONE
-  !*--CGBMV5
   !***BEGIN PROLOGUE  CGBMV
   !***PURPOSE  Multiply a complex vector by a complex general band matrix.
   !***LIBRARY   SLATEC (BLAS)

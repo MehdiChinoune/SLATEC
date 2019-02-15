@@ -1,13 +1,9 @@
-!*==DDASTP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DDASTP
 SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     Delta,E,Wm,Iwm,Alpha,Beta,Gamma,Psi,Sigma,Cj,Cjold,Hold,&
     S,Hmin,Uround,Iphase,Jcalc,K,Kold,Ns,Nonneg,Ntemp)
   IMPLICIT NONE
-  !*--DDASTP7
-  !*** Start of declarations inserted by SPAG
   INTEGER JAC
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DDASTP
   !***SUBSIDIARY
   !***PURPOSE  Perform one step of the DDASSL integration.

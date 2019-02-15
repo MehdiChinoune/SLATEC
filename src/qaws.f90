@@ -1,12 +1,8 @@
-!*==QAWS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QAWS
 SUBROUTINE QAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
     Ier,Limit,Lenw,Last,Iwork,Work)
   IMPLICIT NONE
-  !*--QAWS6
-  !*** Start of declarations inserted by SPAG
   INTEGER Last
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QAWS
   !***PURPOSE  The routine calculates an approximation result to a given
   !            definite integral I = Integral of F*W over (A,B),

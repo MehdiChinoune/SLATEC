@@ -1,8 +1,6 @@
-!*==ELTRAN.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK ELTRAN
 SUBROUTINE ELTRAN(Nm,N,Low,Igh,A,Int,Z)
   IMPLICIT NONE
-  !*--ELTRAN5
   !***BEGIN PROLOGUE  ELTRAN
   !***PURPOSE  Accumulates the stabilized elementary similarity
   !            transformations used in the reduction of a real general

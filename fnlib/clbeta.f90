@@ -1,8 +1,6 @@
-!*==CLBETA.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CLBETA
 COMPLEX FUNCTION CLBETA(A,B)
   IMPLICIT NONE
-  !*--CLBETA5
   !***BEGIN PROLOGUE  CLBETA
   !***PURPOSE  Compute the natural logarithm of the complete Beta
   !            function.

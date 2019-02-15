@@ -1,14 +1,10 @@
-!*==QAWFE.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QAWFE
 SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
     Neval,Ier,Rslst,Erlst,Ierlst,Lst,Alist,Blist,Rlist,Elist,&
     Iord,Nnlog,Chebmo)
   IMPLICIT NONE
-  !*--QAWFE7
-  !*** Start of declarations inserted by SPAG
   REAL F
   INTEGER last, Limlst, momcom
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QAWFE
   !***PURPOSE  The routine calculates an approximation result to a
   !            given Fourier integral

@@ -1,8 +1,6 @@
-!*==DFDTRU.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DFDTRU
 SUBROUTINE DFDTRU(X,F,D)
   IMPLICIT NONE
-  !*--DFDTRU5
   !***BEGIN PROLOGUE  DFDTRU
   !***SUBSIDIARY
   !***PURPOSE  Compute exact function values for DEVCHK.

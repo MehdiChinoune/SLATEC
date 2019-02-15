@@ -1,9 +1,7 @@
-!*==DEXBVP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DEXBVP
 SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,&
     Iwork)
   IMPLICIT NONE
-  !*--DEXBVP6
   !***BEGIN PROLOGUE  DEXBVP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBVSUP

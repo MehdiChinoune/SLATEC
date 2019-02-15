@@ -1,8 +1,6 @@
-!*==S1MERG.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK S1MERG
 SUBROUTINE S1MERG(Tcos,I1,M1,I2,M2,I3)
   IMPLICIT NONE
-  !*--S1MERG5
   !***BEGIN PROLOGUE  S1MERG
   !***SUBSIDIARY
   !***PURPOSE  Merge two strings of ascending real numbers.

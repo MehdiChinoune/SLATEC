@@ -1,15 +1,11 @@
-!*==CHU.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CHU
 FUNCTION CHU(A,B,X)
   IMPLICIT NONE
-  !*--CHU5
-  !*** Start of declarations inserted by SPAG
   REAL A, a0, aintb, alnx, B, b0, beps, c0, CHU, eps, EXPREL, &
     factor, GAMMA, GAMR, gamri1, gamrni, pch1ai, pch1i, pi, POCH
   REAL POCH1, pochai, R1MACH, R9CHU, sum, t, X, xeps1, xi, xi1, &
     xn, xtoeps
   INTEGER i, istrt, m, n
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CHU
   !***PURPOSE  Compute the logarithmic confluent hypergeometric function.
   !***LIBRARY   SLATEC (FNLIB)

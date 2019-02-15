@@ -1,8 +1,6 @@
-!*==PCHST.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK PCHST
 REAL FUNCTION PCHST(Arg1,Arg2)
   IMPLICIT NONE
-  !*--PCHST5
   !***BEGIN PROLOGUE  PCHST
   !***SUBSIDIARY
   !***PURPOSE  PCHIP Sign-Testing Routine

@@ -1,11 +1,7 @@
-!*==DPFITT.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DPFITT
 SUBROUTINE DPFITT(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DPFITT5
-  !*** Start of declarations inserted by SPAG
   INTEGER kontrl
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPFITT
   !***PURPOSE  Quick check for DPOLFT, DPCOEF and DP1VLU.
   !***LIBRARY   SLATEC

@@ -1,10 +1,8 @@
-!*==DGMRES.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DGMRES
 SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
     Iter,Err,Ierr,Iunit,Sb,Sx,Rgwk,Lrgw,Igwk,Ligw,Rwork,&
     Iwork)
   IMPLICIT NONE
-  !*--DGMRES7
   !***BEGIN PROLOGUE  DGMRES
   !***PURPOSE  Preconditioned GMRES iterative sparse Ax=b solver.
   !            This routine uses the generalized minimum residual

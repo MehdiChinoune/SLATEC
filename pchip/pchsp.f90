@@ -1,8 +1,6 @@
-!*==PCHSP.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK PCHSP
 SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   IMPLICIT NONE
-  !*--PCHSP5
   !***BEGIN PROLOGUE  PCHSP
   !***PURPOSE  Set derivatives needed to determine the Hermite represen-
   !            tation of the cubic spline interpolant to given data, with

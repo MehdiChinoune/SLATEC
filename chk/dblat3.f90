@@ -1,8 +1,6 @@
-!*==DBLAT3.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DBLAT3
 SUBROUTINE DBLAT3(Nout,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DBLAT35
   !***BEGIN PROLOGUE  DBLAT3
   !***PURPOSE  Driver for testing Level 3 BLAS double precision
   !            subroutines.

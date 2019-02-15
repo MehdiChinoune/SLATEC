@@ -1,13 +1,9 @@
-!*==GAMMA.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK GAMMA
 FUNCTION GAMMA(X)
   IMPLICIT NONE
-  !*--GAMMA5
-  !*** Start of declarations inserted by SPAG
   REAL CSEVL, dxrel, GAMMA, gcs, pi, R1MACH, R9LGMC, sinpiy, &
     sq2pil, X, xmax, xmin, y
   INTEGER i, INITS, n, ngcs
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  GAMMA
   !***PURPOSE  Compute the complete Gamma function.
   !***LIBRARY   SLATEC (FNLIB)

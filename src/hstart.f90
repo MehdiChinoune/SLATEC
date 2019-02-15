@@ -1,16 +1,12 @@
-!*==HSTART.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK HSTART
 SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     Rpar,Ipar,H)
   IMPLICIT NONE
-  !*--HSTART6
-  !*** Start of declarations inserted by SPAG
   REAL A, absdx, B, Big, da, delf, delx, delxb, dely, dfdub, &
     dfdxb, dx, dy, Etol, fbnd, H, HVNRM, power, Pv, relper
   REAL Rpar, Sf, Small, Spy, srydpb, wtj, Y, ydpb, ynorm, Yp, &
     ypnorm, Yprime
   INTEGER icase, Ipar, j, k, lk, Morder, Neq
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HSTART
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DEABM, DEBDF and DERKF

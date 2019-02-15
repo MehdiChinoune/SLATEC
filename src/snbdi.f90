@@ -1,8 +1,6 @@
-!*==SNBDI.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SNBDI
 SUBROUTINE SNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   IMPLICIT NONE
-  !*--SNBDI5
   !***BEGIN PROLOGUE  SNBDI
   !***PURPOSE  Compute the determinant of a band matrix using the factors
   !            computed by SNBCO or SNBFA.

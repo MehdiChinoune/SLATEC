@@ -1,8 +1,6 @@
-!*==DGEMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DGEMV
 SUBROUTINE DGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   IMPLICIT NONE
-  !*--DGEMV5
   !***BEGIN PROLOGUE  DGEMV
   !***PURPOSE  Perform one of the matrix-vector operations.
   !***LIBRARY   SLATEC (BLAS)

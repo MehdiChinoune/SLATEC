@@ -1,8 +1,6 @@
-!*==SDPSC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK SDPSC
 SUBROUTINE SDPSC(Ksgn,N,Nq,Yh)
   IMPLICIT NONE
-  !*--SDPSC5
   !***BEGIN PROLOGUE  SDPSC
   !***SUBSIDIARY
   !***PURPOSE  Subroutine SDPSC computes the predicted YH values by

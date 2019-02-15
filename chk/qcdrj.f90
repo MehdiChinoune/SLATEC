@@ -1,8 +1,6 @@
-!*==QCDRJ.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QCDRJ
 SUBROUTINE QCDRJ(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QCDRJ5
   !***BEGIN PROLOGUE  QCDRJ
   !***PURPOSE  Quick check for DRJ.
   !***LIBRARY   SLATEC

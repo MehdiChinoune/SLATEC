@@ -1,8 +1,6 @@
-!*==QG8TST.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QG8TST
 SUBROUTINE QG8TST(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QG8TST5
   !***BEGIN PROLOGUE  QG8TST
   !***PURPOSE  Quick check for GAUS8.
   !***LIBRARY   SLATEC

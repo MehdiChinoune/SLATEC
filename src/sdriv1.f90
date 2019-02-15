@@ -1,11 +1,7 @@
-!*==SDRIV1.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK SDRIV1
 SUBROUTINE SDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   IMPLICIT NONE
-  !*--SDRIV15
-  !*** Start of declarations inserted by SPAG
   REAL F
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SDRIV1
   !***PURPOSE  The function of SDRIV1 is to solve N (200 or fewer)
   !            ordinary differential equations of the form

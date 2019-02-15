@@ -1,12 +1,8 @@
-!*==ASINH.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK ASINH
 FUNCTION ASINH(X)
   IMPLICIT NONE
-  !*--ASINH5
-  !*** Start of declarations inserted by SPAG
   REAL aln2, ASINH, asnhcs, CSEVL, R1MACH, sqeps, X, xmax, y
   INTEGER INITS, nterms
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ASINH
   !***PURPOSE  Compute the arc hyperbolic sine.
   !***LIBRARY   SLATEC (FNLIB)

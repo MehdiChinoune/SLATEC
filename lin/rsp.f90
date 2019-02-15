@@ -1,8 +1,6 @@
-!*==RSP.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK RSP
 SUBROUTINE RSP(Nm,N,Nv,A,W,Matz,Z,Fv1,Fv2,Ierr)
   IMPLICIT NONE
-  !*--RSP5
   !***BEGIN PROLOGUE  RSP
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real symmetric matrix packed into a one dimensional

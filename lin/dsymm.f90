@@ -1,8 +1,6 @@
-!*==DSYMM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSYMM
 SUBROUTINE DSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   IMPLICIT NONE
-  !*--DSYMM5
   !***BEGIN PROLOGUE  DSYMM
   !***PURPOSE  Perform one of the matrix-matrix operations.
   !***LIBRARY   SLATEC (BLAS)

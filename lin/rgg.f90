@@ -1,8 +1,6 @@
-!*==RGG.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK RGG
 SUBROUTINE RGG(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z,Ierr)
   IMPLICIT NONE
-  !*--RGG5
   !***BEGIN PROLOGUE  RGG
   !***PURPOSE  Compute the eigenvalues and eigenvectors for a real
   !            generalized eigenproblem.

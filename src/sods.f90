@@ -1,13 +1,9 @@
-!*==SODS.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SODS
 SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   IMPLICIT NONE
-  !*--SODS5
-  !*** Start of declarations inserted by SPAG
   REAL A, B, Work, X
   INTEGER Iflag, ip, is, iter, Iwork, kc, kd, ks, kt, kv, kz, &
     Neq, Nrda, Nuk
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SODS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

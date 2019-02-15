@@ -1,8 +1,6 @@
-!*==PCHDF.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK PCHDF
 REAL FUNCTION PCHDF(K,X,S,Ierr)
   IMPLICIT NONE
-  !*--PCHDF5
   !***BEGIN PROLOGUE  PCHDF
   !***SUBSIDIARY
   !***PURPOSE  Computes divided differences for PCHCE and PCHSP

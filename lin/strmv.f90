@@ -1,8 +1,6 @@
-!*==STRMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK STRMV
 SUBROUTINE STRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   IMPLICIT NONE
-  !*--STRMV5
   !***BEGIN PROLOGUE  STRMV
   !***PURPOSE  Multiply a real vector by a real triangular matrix.
   !***LIBRARY   SLATEC (BLAS)

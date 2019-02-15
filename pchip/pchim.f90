@@ -1,8 +1,6 @@
-!*==PCHIM.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK PCHIM
 SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
   IMPLICIT NONE
-  !*--PCHIM5
   !***BEGIN PROLOGUE  PCHIM
   !***PURPOSE  Set derivatives needed to determine a monotone piecewise
   !            cubic Hermite interpolant to given data.  Boundary values

@@ -1,8 +1,6 @@
-!*==CPOFA.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CPOFA
 SUBROUTINE CPOFA(A,Lda,N,Info)
   IMPLICIT NONE
-  !*--CPOFA5
   !***BEGIN PROLOGUE  CPOFA
   !***PURPOSE  Factor a complex Hermitian positive definite matrix.
   !***LIBRARY   SLATEC (LINPACK)

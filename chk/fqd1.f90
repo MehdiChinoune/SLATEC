@@ -1,8 +1,6 @@
-!*==FQD1.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK FQD1
 REAL FUNCTION FQD1(X)
   IMPLICIT NONE
-  !*--FQD15
   !***BEGIN PROLOGUE  FQD1
   !***SUBSIDIARY
   !***PURPOSE  Function evaluator for QNC79 and GAUS8 quick checks.

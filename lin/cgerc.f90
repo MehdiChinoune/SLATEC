@@ -1,8 +1,6 @@
-!*==CGERC.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CGERC
 SUBROUTINE CGERC(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   IMPLICIT NONE
-  !*--CGERC5
   !***BEGIN PROLOGUE  CGERC
   !***PURPOSE  Perform conjugated rank 1 update of a complex general
   !            matrix.

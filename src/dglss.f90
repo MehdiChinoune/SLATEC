@@ -1,4 +1,3 @@
-!*==DGLSS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DGLSS
 SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !***BEGIN PROLOGUE  DGLSS
@@ -119,12 +118,9 @@ SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGLSS
   IMPLICIT NONE
-  !*--DGLSS122
-  !*** Start of declarations inserted by SPAG
   REAL(8) :: A, ae, B, re, Rnorm, Work
   INTEGER Info, key, krank, ksure, Liw, Lw, M, Mda, Mdb, mode, N, &
     Nb, np
-  !*** End of declarations inserted by SPAG
   DIMENSION A(Mda,*), B(Mdb,*), Rnorm(*), Work(*)
   INTEGER Iwork(*)
   !

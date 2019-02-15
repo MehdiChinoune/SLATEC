@@ -1,11 +1,7 @@
-!*==TEST29.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK TEST29
 PROGRAM TEST29
   IMPLICIT NONE
-  !*--TEST295
-  !*** Start of declarations inserted by SPAG
   INTEGER I1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TEST29
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC

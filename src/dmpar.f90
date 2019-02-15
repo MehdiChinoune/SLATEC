@@ -1,8 +1,6 @@
-!*==DMPAR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DMPAR
 SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   IMPLICIT NONE
-  !*--DMPAR5
   !***BEGIN PROLOGUE  DMPAR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DNLS1 and DNLS1E

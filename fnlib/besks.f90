@@ -1,12 +1,8 @@
-!*==BESKS.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK BESKS
 SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   IMPLICIT NONE
-  !*--BESKS5
-  !*** Start of declarations inserted by SPAG
   REAL Bk, expxi, R1MACH, X, xmax, Xnu
   INTEGER i, n, Nin
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESKS
   !***PURPOSE  Compute a sequence of modified Bessel functions of the
   !            third kind of fractional order.

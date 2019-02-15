@@ -1,11 +1,7 @@
-!*==CMPOSP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CMPOSP
 SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   IMPLICIT NONE
-  !*--CMPOSP5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Idimq, ipstor, j, lh, M, mr, N, nr, nrm1, nrmj, nrpj
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CMPOSP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CMGNBN

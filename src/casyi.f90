@@ -1,8 +1,6 @@
-!*==CASYI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CASYI
 SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--CASYI5
   !***BEGIN PROLOGUE  CASYI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBESI and CBESK

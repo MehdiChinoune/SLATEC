@@ -1,14 +1,10 @@
-!*==ORTHOG.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK ORTHOG
 SUBROUTINE ORTHOG(Usol,Idmn,Zn,Zm,Pertrb)
   IMPLICIT NONE
-  !*--ORTHOG5
-  !*** Start of declarations inserted by SPAG
   REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, ete, Pertrb, &
     TDLx3, TDLy3, Usol, ute, Zm, Zn
   INTEGER i, Idmn, ifnl, ii, IS, istr, j, jfnl, jj, JS, jstr, K, &
     KSWx, KSWy, L, MIT, MS, NIT, NS
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ORTHOG
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPELI

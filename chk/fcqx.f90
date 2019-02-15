@@ -1,8 +1,6 @@
-!*==FCQX.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK FCQX
 SUBROUTINE FCQX(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--FCQX5
   !***BEGIN PROLOGUE  FCQX
   !***PURPOSE  Quick check for FC.
   !***LIBRARY   SLATEC

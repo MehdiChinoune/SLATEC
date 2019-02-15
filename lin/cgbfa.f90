@@ -1,8 +1,6 @@
-!*==CGBFA.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CGBFA
 SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   IMPLICIT NONE
-  !*--CGBFA5
   !***BEGIN PROLOGUE  CGBFA
   !***PURPOSE  Factor a band matrix using Gaussian elimination.
   !***LIBRARY   SLATEC (LINPACK)

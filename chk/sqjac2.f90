@@ -1,12 +1,8 @@
-!*==SQJAC2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SQJAC2
 SUBROUTINE SQJAC2(N,X,Fvec,Fjac,Ldfjac,Iflag)
   IMPLICIT NONE
-  !*--SQJAC25
-  !*** Start of declarations inserted by SPAG
   REAL Fjac, Fvec, X
   INTEGER Iflag, Ldfjac, N
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SQJAC2
   !***PURPOSE  Evaluate full Jacobian for SNSQE test.
   !***LIBRARY   SLATEC

@@ -1,12 +1,8 @@
-!*==DSDCGN.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSDCGN
 SUBROUTINE DSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !*--DSDCGN6
-  !*** Start of declarations inserted by SPAG
   REAL DSDI, DSMTV, DSMV
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSDCGN
   !***PURPOSE  Diagonally Scaled CG Sparse Ax=b Solver for Normal Eqn's.
   !            Routine to solve a general linear system  Ax = b  using

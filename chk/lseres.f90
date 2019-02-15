@@ -1,8 +1,6 @@
-!*==LSERES.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK LSERES
 LOGICAL FUNCTION LSERES(Type,Uplo,M,N,Aa,As,Lda)
   IMPLICIT NONE
-  !*--LSERES5
   !***BEGIN PROLOGUE  LSERES
   !***SUBSIDIARY
   !***PURPOSE  Test if selected elements in two arrays are equal.

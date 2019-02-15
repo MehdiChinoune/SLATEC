@@ -1,11 +1,7 @@
-!*==DGAMMA.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DGAMMA
 REAL(8) FUNCTION DGAMMA(X)
   IMPLICIT NONE
-  !*--DGAMMA5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, INITDS, n, ngam
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DGAMMA
   !***PURPOSE  Compute the complete Gamma function.
   !***LIBRARY   SLATEC (FNLIB)

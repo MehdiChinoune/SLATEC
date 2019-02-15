@@ -1,11 +1,7 @@
-!*==J4SAVE.f90  processed by SPAG 6.72Dc at 10:54 on  6 Feb 2019
 !DECK J4SAVE
 FUNCTION J4SAVE(Iwhich,Ivalue,Iset)
   IMPLICIT NONE
-  !*--J4SAVE5
-  !*** Start of declarations inserted by SPAG
   INTEGER Ivalue, Iwhich, J4SAVE
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  J4SAVE
   !***SUBSIDIARY
   !***PURPOSE  Save or recall global variables needed by error

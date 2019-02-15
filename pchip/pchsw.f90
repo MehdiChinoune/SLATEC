@@ -1,8 +1,6 @@
-!*==PCHSW.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK PCHSW
 SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   IMPLICIT NONE
-  !*--PCHSW5
   !***BEGIN PROLOGUE  PCHSW
   !***SUBSIDIARY
   !***PURPOSE  Limits excursion from data for PCHCS

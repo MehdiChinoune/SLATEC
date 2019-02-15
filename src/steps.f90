@@ -1,11 +1,8 @@
-!*==STEPS.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK STEPS
 SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     Alpha,Beta,Sig,V,W,G,Phase1,Ns,Nornd,Ksteps,Twou,Fouru,&
     Xold,Kprev,Ivc,Iv,Kgi,Gi,Rpar,Ipar)
   IMPLICIT NONE
-  !*--STEPS7
-  !*** Start of declarations inserted by SPAG
   REAL absh, Alpha, Beta, big, Eps, erk, erkm1, erkm2, erkp1, err, &
     Fouru, G, Gi, gstr, H, hnew, Hold, P, p5eps, Phi
   REAL Psi, r, R1MACH, reali, realns, rho, round, Rpar, Sig, tau, &
@@ -14,7 +11,6 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   INTEGER i, ifail, im1, ip1, Ipar, iq, Iv, Ivc, j, jv, K, Kgi, &
     km1, km2, knew, Kold, kp1, kp2, Kprev, Ksteps
   INTEGER l, limit1, limit2, Neqn, Ns, nsm2, nsp1, nsp2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  STEPS
   !***PURPOSE  Integrate a system of first order ordinary differential
   !            equations one step.

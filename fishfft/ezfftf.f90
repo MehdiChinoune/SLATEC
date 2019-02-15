@@ -1,12 +1,8 @@
-!*==EZFFTF.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK EZFFTF
 SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
   IMPLICIT NONE
-  !*--EZFFTF5
-  !*** Start of declarations inserted by SPAG
   REAL A, Azero, B, cf, cfm, R, Wsave
   INTEGER i, N, ns2, ns2m
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  EZFFTF
   !***PURPOSE  Compute a simplified real, periodic, fast Fourier forward
   !            transform.

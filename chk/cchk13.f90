@@ -1,9 +1,7 @@
-!*==CCHK13.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CCHK13
 SUBROUTINE CCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
     Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
   IMPLICIT NONE
-  !*--CCHK136
   !***BEGIN PROLOGUE  CCHK13
   !***SUBSIDIARY
   !***PURPOSE  Quick check for CGEMM.

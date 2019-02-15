@@ -1,8 +1,6 @@
-!*==AAAAAA.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK AAAAAA
 SUBROUTINE AAAAAA(Ver)
   IMPLICIT NONE
-  !*--AAAAAA5
   !***BEGIN PROLOGUE  AAAAAA
   !***PURPOSE  SLATEC Common Mathematical Library disclaimer and version.
   !***LIBRARY   SLATEC

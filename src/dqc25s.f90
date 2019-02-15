@@ -1,9 +1,7 @@
-!*==DQC25S.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQC25S
 SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     Integr,Nev)
   IMPLICIT NONE
-  !*--DQC25S6
   !***BEGIN PROLOGUE  DQC25S
   !***PURPOSE  To compute I = Integral of F*W over (BL,BR), with error
   !            estimate, where the weight function W has a singular

@@ -1,11 +1,7 @@
-!*==XERCNT.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XERCNT
 SUBROUTINE XERCNT(Librar,Subrou,Messg,Nerr,Level,Kontrl)
   IMPLICIT NONE
-  !*--XERCNT5
-  !*** Start of declarations inserted by SPAG
   INTEGER Kontrl, Level, Nerr
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XERCNT
   !***SUBSIDIARY
   !***PURPOSE  Allow user control over handling of errors.

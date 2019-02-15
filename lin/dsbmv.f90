@@ -1,8 +1,6 @@
-!*==DSBMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSBMV
 SUBROUTINE DSBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   IMPLICIT NONE
-  !*--DSBMV5
   !***BEGIN PROLOGUE  DSBMV
   !***PURPOSE  Perform the matrix-vector operation.
   !***LIBRARY   SLATEC (BLAS)

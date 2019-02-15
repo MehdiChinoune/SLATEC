@@ -1,8 +1,6 @@
-!*==CBESI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CBESI
 SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   IMPLICIT NONE
-  !*--CBESI5
   !***BEGIN PROLOGUE  CBESI
   !***PURPOSE  Compute a sequence of the Bessel functions I(a,z) for
   !            complex argument z and real nonnegative orders a=b,b+1,

@@ -1,9 +1,7 @@
-!*==EFCMN.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK EFCMN
 SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,Lw)
   IMPLICIT NONE
-  !*--EFCMN6
   !***BEGIN PROLOGUE  EFCMN
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to EFC

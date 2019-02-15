@@ -1,8 +1,6 @@
-!*==SSPDI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSPDI
 SUBROUTINE SSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   IMPLICIT NONE
-  !*--SSPDI5
   !***BEGIN PROLOGUE  SSPDI
   !***PURPOSE  Compute the determinant, inertia, inverse of a real
   !            symmetric matrix stored in packed form using the factors

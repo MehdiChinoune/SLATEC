@@ -1,8 +1,6 @@
-!*==F2P.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK F2P
 REAL FUNCTION F2P(X)
   IMPLICIT NONE
-  !*--F2P5
   !***BEGIN PROLOGUE  F2P
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

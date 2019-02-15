@@ -1,8 +1,6 @@
-!*==DSDSCL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSDSCL
 SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   IMPLICIT NONE
-  !*--DSDSCL5
   !***BEGIN PROLOGUE  DSDSCL
   !***PURPOSE  Diagonal Scaling of system Ax = b.
   !            This routine scales (and unscales) the system  Ax = b

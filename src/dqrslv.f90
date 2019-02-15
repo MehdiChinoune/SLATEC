@@ -1,8 +1,6 @@
-!*==DQRSLV.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQRSLV
 SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   IMPLICIT NONE
-  !*--DQRSLV5
   !***BEGIN PROLOGUE  DQRSLV
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DNLS1 and DNLS1E

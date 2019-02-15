@@ -1,8 +1,6 @@
-!*==DEDIT2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DEDIT2
 SUBROUTINE DEDIT2(Y,T,Erm)
   IMPLICIT NONE
-  !*--DEDIT25
   !***BEGIN PROLOGUE  DEDIT2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DDASQC.

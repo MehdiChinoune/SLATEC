@@ -1,8 +1,6 @@
-!*==DSYR2.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSYR2
 SUBROUTINE DSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
   IMPLICIT NONE
-  !*--DSYR25
   !***BEGIN PROLOGUE  DSYR2
   !***PURPOSE  Perform the symmetric rank 2 operation.
   !***LIBRARY   SLATEC (BLAS)

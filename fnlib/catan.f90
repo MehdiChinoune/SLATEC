@@ -1,13 +1,9 @@
-!*==CATAN.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CATAN
 COMPLEX FUNCTION CATAN(Z)
   IMPLICIT NONE
-  !*--CATAN5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, nterms
   REAL pi2, r, R1MACH, r2, rmax, rmin, sqeps, twoi, x, xans, y, &
     yans
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CATAN
   !***PURPOSE  Compute the complex arc tangent.
   !***LIBRARY   SLATEC (FNLIB)

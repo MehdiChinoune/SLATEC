@@ -1,8 +1,6 @@
-!*==CHKXER.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CHKXER
 SUBROUTINE CHKXER(Srnamt,Infot,Nout,Fatal,Kprint)
   IMPLICIT NONE
-  !*--CHKXER5
   !***BEGIN PROLOGUE  CHKXER
   !***SUBSIDIARY
   !***PURPOSE  Test whether an error has been detected.

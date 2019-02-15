@@ -1,8 +1,6 @@
-!*==CVTCAT.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK CVTCAT
 CHARACTER(10) FUNCTION CVTCAT(Categ)
   IMPLICIT NONE
-  !*--CVTCAT5
   !***BEGIN PROLOGUE  CVTCAT
   !***SUBSIDIARY
   !***PURPOSE  Expand a GAMS category
@@ -58,11 +56,9 @@ CHARACTER(10) FUNCTION CVTCAT(Categ)
     ENDIF
   ENDDO
 END FUNCTION CVTCAT
-!*==FIND.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK FIND
 INTEGER FUNCTION FIND(X,N,T)
   IMPLICIT NONE
-  !*--FIND65
   !***BEGIN PROLOGUE  FIND
   !***PURPOSE  Use a binary search to locate a phrase within a character
   !            array.
@@ -147,121 +143,117 @@ INTEGER FUNCTION FIND(X,N,T)
   FIND = -i
   RETURN
   99999 CONTINUE
-  END FUNCTION FIND
-  !*==LENSTR.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
-  !DECK LENSTR
-  INTEGER FUNCTION LENSTR(String)
-    IMPLICIT NONE
-    !*--LENSTR154
-    !***BEGIN PROLOGUE  LENSTR
-    !***PURPOSE  Find the position of the last non-blank character in a
-    !            string.
-    !***LIBRARY   SLATEC
-    !***CATEGORY  N3
-    !***TYPE      CHARACTER (LENSTR-H)
-    !***KEYWORDS  POSITION OF LAST NON-BLANK CHARACTER
-    !***AUTHOR  Berkbigler, Kathryn, C-3, Los Alamos National Laboratory
-    !***DESCRIPTION
-    !
-    !   This function finds the position of the last non-blank character in
-    !   a string.
-    !
-    !   INPUT
-    !
-    !      STRING - a character variable which contains the string to be
-    !               examined.
-    !
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
-    !   830124  DATE WRITTEN
-    !   830324  REVISION DATE from the pre-1990 prologue.
-    !   891208  Prologue converted to the 1990 format.  (BAB)
-    !   920911  Declarations section restructured.  (WRB)
-    !***END PROLOGUE  LENSTR
-    !     .. Scalar Arguments ..
-    CHARACTER*(*) String
-    !     .. Local Scalars ..
-    INTEGER i, l
-    !     .. Intrinsic Functions ..
-    INTRINSIC LEN
-    !***FIRST EXECUTABLE STATEMENT  LENSTR
-    l = LEN(String)
-    DO i = l, 1, -1
-      IF ( String(i:i)/=' ' ) THEN
-        LENSTR = i
-        RETURN
-      ENDIF
-    ENDDO
-    LENSTR = 0
-  END FUNCTION LENSTR
-  !*==UPCASE.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
-  !DECK UPCASE
-  SUBROUTINE UPCASE(Str1,Str2)
-    IMPLICIT NONE
-    !*--UPCASE201
-    !***BEGIN PROLOGUE  UPCASE
-    !***PURPOSE  Convert all lower case alphabetic characters in a character
-    !            string to upper case.
-    !***LIBRARY   SLATEC
-    !***CATEGORY  N3
-    !***TYPE      CHARACTER (UPCASE-H)
-    !***KEYWORDS  CONVERT CHARACTERS, UPPER CASE
-    !***AUTHOR  Boland, W. Robert, C-8, Los Alamos National Laboratory
-    !***DESCRIPTION
-    !
-    !   This routine converts all the lower case alphabetic characters
-    !   in a character string to UPPER case.  If the output string is
-    !   longer than the input string, it is padded with blanks.  If the
-    !   output string is not long enough, an error message is written and
-    !   the input string is truncated.
-    !
-    !   INPUT
-    !
-    !     STR1   - a character string which is to be converted to
-    !              upper case.
-    !
-    !   OUTPUT
-    !
-    !     STR2   - a character string which has all alphabetic
-    !              characters in upper case.
-    !
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  LENSTR, XERMSG
-    !***REVISION HISTORY  (YYMMDD)
-    !   830308  DATE WRITTEN
-    !   870902  REVISION DATE from the pre-1990 prologue.
-    !   891208  Prologue converted to the 1990 format.  (BAB)
-    !   901101  Correctly check the lengths of STR1 and STR2.  (WRB)
-    !   920911  Declarations section restructured.  (WRB)
-    !***END PROLOGUE  UPCASE
-    !     .. Parameters ..
-    CHARACTER(41) :: MSG
-    PARAMETER (MSG='Input string is longer than output string')
-    !     .. Scalar Arguments ..
-    CHARACTER*(*) Str1, Str2
-    !     .. Local Scalars ..
-    INTEGER i, l, m, n
-    !     .. External Functions ..
-    INTEGER LENSTR
-    EXTERNAL LENSTR
-    !     .. External Subroutines ..
-    EXTERNAL XERMSG
-    !     .. Intrinsic Functions ..
-    INTRINSIC CHAR, ICHAR, LEN
-    !***FIRST EXECUTABLE STATEMENT  UPCASE
-    m = LENSTR(Str1)
-    n = LEN(Str2)
-    IF ( m>n ) THEN
-      CALL XERMSG(' ','UPCASE',MSG,1,2)
-      m = n
+END FUNCTION FIND
+!DECK LENSTR
+INTEGER FUNCTION LENSTR(String)
+  IMPLICIT NONE
+  !***BEGIN PROLOGUE  LENSTR
+  !***PURPOSE  Find the position of the last non-blank character in a
+  !            string.
+  !***LIBRARY   SLATEC
+  !***CATEGORY  N3
+  !***TYPE      CHARACTER (LENSTR-H)
+  !***KEYWORDS  POSITION OF LAST NON-BLANK CHARACTER
+  !***AUTHOR  Berkbigler, Kathryn, C-3, Los Alamos National Laboratory
+  !***DESCRIPTION
+  !
+  !   This function finds the position of the last non-blank character in
+  !   a string.
+  !
+  !   INPUT
+  !
+  !      STRING - a character variable which contains the string to be
+  !               examined.
+  !
+  !***REFERENCES  (NONE)
+  !***ROUTINES CALLED  (NONE)
+  !***REVISION HISTORY  (YYMMDD)
+  !   830124  DATE WRITTEN
+  !   830324  REVISION DATE from the pre-1990 prologue.
+  !   891208  Prologue converted to the 1990 format.  (BAB)
+  !   920911  Declarations section restructured.  (WRB)
+  !***END PROLOGUE  LENSTR
+  !     .. Scalar Arguments ..
+  CHARACTER*(*) String
+  !     .. Local Scalars ..
+  INTEGER i, l
+  !     .. Intrinsic Functions ..
+  INTRINSIC LEN
+  !***FIRST EXECUTABLE STATEMENT  LENSTR
+  l = LEN(String)
+  DO i = l, 1, -1
+    IF ( String(i:i)/=' ' ) THEN
+      LENSTR = i
+      RETURN
     ENDIF
-    DO i = 1, m
-      Str2(i:i) = Str1(i:i)
-      l = ICHAR(Str2(i:i))
-      IF ( l>=97.AND.l<=122 ) Str2(i:i) = CHAR(l-32)
-    ENDDO
-    DO i = m + 1, n
-      Str2(i:i) = ' '
-    ENDDO
-  END SUBROUTINE UPCASE
+  ENDDO
+  LENSTR = 0
+END FUNCTION LENSTR
+!DECK UPCASE
+SUBROUTINE UPCASE(Str1,Str2)
+  IMPLICIT NONE
+  !***BEGIN PROLOGUE  UPCASE
+  !***PURPOSE  Convert all lower case alphabetic characters in a character
+  !            string to upper case.
+  !***LIBRARY   SLATEC
+  !***CATEGORY  N3
+  !***TYPE      CHARACTER (UPCASE-H)
+  !***KEYWORDS  CONVERT CHARACTERS, UPPER CASE
+  !***AUTHOR  Boland, W. Robert, C-8, Los Alamos National Laboratory
+  !***DESCRIPTION
+  !
+  !   This routine converts all the lower case alphabetic characters
+  !   in a character string to UPPER case.  If the output string is
+  !   longer than the input string, it is padded with blanks.  If the
+  !   output string is not long enough, an error message is written and
+  !   the input string is truncated.
+  !
+  !   INPUT
+  !
+  !     STR1   - a character string which is to be converted to
+  !              upper case.
+  !
+  !   OUTPUT
+  !
+  !     STR2   - a character string which has all alphabetic
+  !              characters in upper case.
+  !
+  !***REFERENCES  (NONE)
+  !***ROUTINES CALLED  LENSTR, XERMSG
+  !***REVISION HISTORY  (YYMMDD)
+  !   830308  DATE WRITTEN
+  !   870902  REVISION DATE from the pre-1990 prologue.
+  !   891208  Prologue converted to the 1990 format.  (BAB)
+  !   901101  Correctly check the lengths of STR1 and STR2.  (WRB)
+  !   920911  Declarations section restructured.  (WRB)
+  !***END PROLOGUE  UPCASE
+  !     .. Parameters ..
+  CHARACTER(41) :: MSG
+  PARAMETER (MSG='Input string is longer than output string')
+  !     .. Scalar Arguments ..
+  CHARACTER*(*) Str1, Str2
+  !     .. Local Scalars ..
+  INTEGER i, l, m, n
+  !     .. External Functions ..
+  INTEGER LENSTR
+  EXTERNAL LENSTR
+  !     .. External Subroutines ..
+  EXTERNAL XERMSG
+  !     .. Intrinsic Functions ..
+  INTRINSIC CHAR, ICHAR, LEN
+  !***FIRST EXECUTABLE STATEMENT  UPCASE
+  m = LENSTR(Str1)
+  n = LEN(Str2)
+  IF ( m>n ) THEN
+    CALL XERMSG(' ','UPCASE',MSG,1,2)
+    m = n
+  ENDIF
+  DO i = 1, m
+    Str2(i:i) = Str1(i:i)
+    l = ICHAR(Str2(i:i))
+    IF ( l>=97.AND.l<=122 ) Str2(i:i) = CHAR(l-32)
+  ENDDO
+  DO i = m + 1, n
+    Str2(i:i) = ' '
+  ENDDO
+END SUBROUTINE UPCASE

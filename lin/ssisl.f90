@@ -1,8 +1,6 @@
-!*==SSISL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSISL
 SUBROUTINE SSISL(A,Lda,N,Kpvt,B)
   IMPLICIT NONE
-  !*--SSISL5
   !***BEGIN PROLOGUE  SSISL
   !***PURPOSE  Solve a real symmetric system using the factors obtained
   !            from SSIFA.

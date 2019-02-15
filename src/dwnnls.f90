@@ -1,8 +1,6 @@
-!*==DWNNLS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DWNNLS
 SUBROUTINE DWNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   IMPLICIT NONE
-  !*--DWNNLS5
   !***BEGIN PROLOGUE  DWNNLS
   !***PURPOSE  Solve a linearly constrained least squares problem with
   !            equality constraints and nonnegativity constraints on

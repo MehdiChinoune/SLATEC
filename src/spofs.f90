@@ -1,8 +1,6 @@
-!*==SPOFS.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SPOFS
 SUBROUTINE SPOFS(A,Lda,N,V,Itask,Ind,Work)
   IMPLICIT NONE
-  !*--SPOFS5
   !***BEGIN PROLOGUE  SPOFS
   !***PURPOSE  Solve a positive definite symmetric system of linear
   !            equations.

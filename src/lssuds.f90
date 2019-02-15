@@ -1,16 +1,12 @@
-!*==LSSUDS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK LSSUDS
 SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     Kpivot,S,Div,Td,Isflg,Scales)
   IMPLICIT NONE
-  !*--LSSUDS6
-  !*** Start of declarations inserted by SPAG
   REAL A, B, Diag, Div, gam, gamma, Q, R1MACH, res, S, Scales, &
     SDOT, ss, Td, U, uro, X
   INTEGER i, Iflag, Irank, irp, Iscale, Isflg, j, J4SAVE, jr, k, &
     kp, Kpivot, l, M, maxmes, mj, Mlso, N, nfat, nfatal
   INTEGER nmir, Nrda, Nrdu, nu
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  LSSUDS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

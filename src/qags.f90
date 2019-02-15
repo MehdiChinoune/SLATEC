@@ -1,12 +1,8 @@
-!*==QAGS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QAGS
 SUBROUTINE QAGS(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
     Last,Iwork,Work)
   IMPLICIT NONE
-  !*--QAGS6
-  !*** Start of declarations inserted by SPAG
   INTEGER Last
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QAGS
   !***PURPOSE  The routine calculates an approximation result to a given
   !            Definite integral  I = Integral of F over (A,B),

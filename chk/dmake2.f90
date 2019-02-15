@@ -1,8 +1,6 @@
-!*==DMAKE2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DMAKE2
 SUBROUTINE DMAKE2(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Kl,Ku,Reset,Transl)
   IMPLICIT NONE
-  !*--DMAKE25
   !***BEGIN PROLOGUE  DMAKE2
   !***SUBSIDIARY
   !***PURPOSE  Generate values for an M by N matrix A.

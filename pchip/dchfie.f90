@@ -1,8 +1,6 @@
-!*==DCHFIE.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DCHFIE
 REAL(8) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
   IMPLICIT NONE
-  !*--DCHFIE5
   !***BEGIN PROLOGUE  DCHFIE
   !***SUBSIDIARY
   !***PURPOSE  Evaluates integral of a single cubic for DPCHIA

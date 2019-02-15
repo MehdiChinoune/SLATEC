@@ -1,10 +1,7 @@
-!*==DEBDF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DEBDF
 SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar,JAC)
   IMPLICIT NONE
-  !*--DEBDF6
-  !*** Start of declarations inserted by SPAG
   REAL Atol, EL0, F, H, HMIn, HMXi, HU, ROWns, Rpar, Rtol, Rwork ,&
     T, TN, TOLd, Tout, UROund, Y
   INTEGER IACor, IBAnd, IBEgin, icomi, icomr, idelsn, Idid, IER ,&
@@ -14,7 +11,6 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     KFLag, KSTeps, L, Liw, Lrw, MAXord, METh, MITer, ml, mu ,&
     N, Neq
   INTEGER NFE, NJE, NQ, NQU, NST
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DEBDF
   !***PURPOSE  Solve an initial value problem in ordinary differential
   !            equations using backward differentiation formulas.  It is

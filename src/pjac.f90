@@ -1,12 +1,8 @@
-!*==PJAC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK PJAC
 SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
   IMPLICIT NONE
-  !*--PJAC5
-  !*** Start of declarations inserted by SPAG
   INTEGER Ipar
   REAL Rpar
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PJAC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DEBDF

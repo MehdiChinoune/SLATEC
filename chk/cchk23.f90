@@ -1,9 +1,7 @@
-!*==CCHK23.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CCHK23
 SUBROUTINE CCHK23(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
     Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
   IMPLICIT NONE
-  !*--CCHK236
   !***BEGIN PROLOGUE  CCHK23
   !***SUBSIDIARY
   !***PURPOSE  Quick check for CHEMM and CSYMM.

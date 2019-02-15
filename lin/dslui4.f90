@@ -1,8 +1,6 @@
-!*==DSLUI4.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSLUI4
 SUBROUTINE DSLUI4(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   IMPLICIT NONE
-  !*--DSLUI45
   !***BEGIN PROLOGUE  DSLUI4
   !***PURPOSE  SLAP Backsolve for LDU Factorization.
   !            Routine to solve a system of the form  (L*D*U)' X = B,

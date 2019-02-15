@@ -1,12 +1,8 @@
-!*==INITDS.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK INITDS
 FUNCTION INITDS(Os,Nos,Eta)
   IMPLICIT NONE
-  !*--INITDS5
-  !*** Start of declarations inserted by SPAG
   REAL err, Eta
   INTEGER i, ii, INITDS, Nos
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  INITDS
   !***PURPOSE  Determine the number of terms needed in an orthogonal
   !            polynomial series so that it meets a specified accuracy.

@@ -1,15 +1,11 @@
-!*==BLKTRI.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK BLKTRI
 SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   IMPLICIT NONE
-  !*--BLKTRI5
-  !*** Start of declarations inserted by SPAG
   REAL Am, An, Bm, Bn, Cm, Cn, CNV, CPROD, CPRODP, EPS, PROD, &
     PRODP, W, Y
   INTEGER Idimy, Ierror, Iflg, IK, iw1, iw2, iw3, iwah, iwbh, iwd, &
     iwu, iww, K, M, Mp, N, NCMplx, nh, nl, NM
   INTEGER Np, NPP
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BLKTRI
   !***PURPOSE  Solve a block tridiagonal system of linear equations
   !            (usually resulting from the discretization of separable

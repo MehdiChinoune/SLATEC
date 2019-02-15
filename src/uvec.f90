@@ -1,8 +1,6 @@
-!*==UVEC.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK UVEC
 SUBROUTINE UVEC(X,Y,Yp)
   IMPLICIT NONE
-  !*--UVEC5
   !***BEGIN PROLOGUE  UVEC
   !***PURPOSE  Dummy routine for BVSUP quick check.
   !***LIBRARY   SLATEC

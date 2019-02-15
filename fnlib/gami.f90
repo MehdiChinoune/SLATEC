@@ -1,11 +1,7 @@
-!*==GAMI.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK GAMI
 FUNCTION GAMI(A,X)
   IMPLICIT NONE
-  !*--GAMI5
-  !*** Start of declarations inserted by SPAG
   REAL A, ALNGAM, factor, GAMI, GAMIT, X
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  GAMI
   !***PURPOSE  Evaluate the incomplete Gamma function.
   !***LIBRARY   SLATEC (FNLIB)

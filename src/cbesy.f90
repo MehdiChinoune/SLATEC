@@ -1,8 +1,6 @@
-!*==CBESY.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CBESY
 SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   IMPLICIT NONE
-  !*--CBESY5
   !***BEGIN PROLOGUE  CBESY
   !***PURPOSE  Compute a sequence of the Bessel functions Y(a,z) for
   !            complex argument z and real nonnegative orders a=b,b+1,

@@ -1,9 +1,7 @@
-!*==DQAWF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQAWF
 SUBROUTINE DQAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
     Lst,Leniw,Maxp1,Lenw,Iwork,Work)
   IMPLICIT NONE
-  !*--DQAWF6
   !***BEGIN PROLOGUE  DQAWF
   !***PURPOSE  The routine calculates an approximation result to a given
   !            Fourier integral I=Integral of F(X)*W(X) over (A,INFINITY)

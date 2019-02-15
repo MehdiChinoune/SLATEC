@@ -1,8 +1,6 @@
-!*==SDF.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SDF
 SUBROUTINE SDF(N,T,Y,Yp)
   IMPLICIT NONE
-  !*--SDF5
   !***BEGIN PROLOGUE  SDF
   !***SUBSIDIARY
   !***PURPOSE  Quick check for SLATEC routines SDRIV1, SDRIV2 and SDRIV3.

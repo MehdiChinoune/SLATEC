@@ -1,8 +1,6 @@
-!*==QCRF.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QCRF
 SUBROUTINE QCRF(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QCRF5
   !***BEGIN PROLOGUE  QCRF
   !***PURPOSE  Quick check for RF.
   !***LIBRARY   SLATEC

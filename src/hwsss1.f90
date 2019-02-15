@@ -1,10 +1,7 @@
-!*==HWSSS1.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK HWSSS1
 SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     Elmbda,F,Idimf,Pertrb,Am,Bm,Cm,Sn,Ss,Sint,D)
   IMPLICIT NONE
-  !*--HWSSS16
-  !*** Start of declarations inserted by SPAG
   REAL Am, at, Bdpf, Bdps, Bdtf, Bdts, Bm, cf, Cm, cnp, cp, csp, &
     ct, D, den, dfn, dfs, dnn, dns, dphi
   REAL dphi2, dsn, dss, dth, dth2, Elmbda, F, fim1, fjj, fm, fn, &
@@ -14,7 +11,6 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   INTEGER i, Idimf, ierror, ii, iid, inp, ising, isp, itf, itfm, &
     its, itsp, j, jpf, jpfm, jps, jpsp, M, Mbdcnd, mbr
   INTEGER mp1, munk, N, Nbdcnd, nbr, np1, nunk
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HWSSS1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to HWSSSP

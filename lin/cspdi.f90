@@ -1,8 +1,6 @@
-!*==CSPDI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CSPDI
 SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
   IMPLICIT NONE
-  !*--CSPDI5
   !***BEGIN PROLOGUE  CSPDI
   !***PURPOSE  Compute the determinant and inverse of a complex symmetric
   !            matrix stored in packed form using the factors from CSPFA.

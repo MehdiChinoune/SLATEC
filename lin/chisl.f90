@@ -1,8 +1,6 @@
-!*==CHISL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CHISL
 SUBROUTINE CHISL(A,Lda,N,Kpvt,B)
   IMPLICIT NONE
-  !*--CHISL5
   !***BEGIN PROLOGUE  CHISL
   !***PURPOSE  Solve the complex Hermitian system using factors obtained
   !            from CHIFA.

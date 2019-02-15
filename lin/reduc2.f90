@@ -1,8 +1,6 @@
-!*==REDUC2.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK REDUC2
 SUBROUTINE REDUC2(Nm,N,A,B,Dl,Ierr)
   IMPLICIT NONE
-  !*--REDUC25
   !***BEGIN PROLOGUE  REDUC2
   !***PURPOSE  Reduce a certain generalized symmetric eigenproblem to a
   !            standard symmetric eigenproblem using Cholesky

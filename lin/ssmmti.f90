@@ -1,8 +1,6 @@
-!*==SSMMTI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSMMTI
 SUBROUTINE SSMMTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   IMPLICIT NONE
-  !*--SSMMTI5
   !***BEGIN PROLOGUE  SSMMTI
   !***PURPOSE  SLAP MSOLVE for LDU Factorization of Normal Equations.
   !            This routine acts as an interface between the SLAP generic

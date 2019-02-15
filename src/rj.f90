@@ -1,11 +1,7 @@
-!*==RJ.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK RJ
 REAL FUNCTION RJ(X,Y,Z,P,Ier)
   IMPLICIT NONE
-  !*--RJ5
-  !*** Start of declarations inserted by SPAG
   REAL R1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RJ
   !***PURPOSE  Compute the incomplete or complete (X or Y or Z is zero)
   !            elliptic integral of the 3rd kind.  For X, Y, and Z non-

@@ -1,8 +1,6 @@
-!*==CNBFA.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CNBFA
 SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   IMPLICIT NONE
-  !*--CNBFA5
   !***BEGIN PROLOGUE  CNBFA
   !***PURPOSE  Factor a band matrix by elimination.
   !***LIBRARY   SLATEC

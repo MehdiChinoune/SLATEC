@@ -1,15 +1,11 @@
-!*==CHKSNG.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CHKSNG
 SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
   IMPLICIT NONE
-  !*--CHKSNG5
-  !*** Start of declarations inserted by SPAG
   REAL ai, AIT, Alpha, Beta, bi, BIT, ci, CIT, DIT, dj, DLX, &
     DLX4, DLY, DLY4, ej, fj, Gama, TDLx3, TDLy3, xi
   REAL Xnu, yj
   INTEGER i, IS, j, JS, K, KSWx, KSWy, L, Mbdcnd, MIT, MS, &
     Nbdcnd, NIT, NS
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CHKSNG
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPELI

@@ -1,8 +1,6 @@
-!*==DCHDC.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DCHDC
 SUBROUTINE DCHDC(A,Lda,P,Work,Jpvt,Job,Info)
   IMPLICIT NONE
-  !*--DCHDC5
   !***BEGIN PROLOGUE  DCHDC
   !***PURPOSE  Compute the Cholesky decomposition of a positive definite
   !            matrix.  A pivoting option allows the user to estimate the

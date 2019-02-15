@@ -1,12 +1,8 @@
-!*==PCOEF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK PCOEF
 SUBROUTINE PCOEF(L,C,Tc,A)
   IMPLICIT NONE
-  !*--PCOEF5
-  !*** Start of declarations inserted by SPAG
   REAL A, C, fac, save, Tc
   INTEGER i, L, ll, llp1, llp2, new, nr
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PCOEF
   !***PURPOSE  Convert the POLFIT coefficients to Taylor series form.
   !***LIBRARY   SLATEC

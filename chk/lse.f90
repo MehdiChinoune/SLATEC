@@ -1,8 +1,6 @@
-!*==LSE.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK LSE
 LOGICAL FUNCTION LSE(Ri,Rj,Lr)
   IMPLICIT NONE
-  !*--LSE5
   !***BEGIN PROLOGUE  LSE
   !***SUBSIDIARY
   !***PURPOSE  Test if two arrays are identical.

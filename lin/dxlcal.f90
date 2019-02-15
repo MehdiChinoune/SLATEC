@@ -1,9 +1,7 @@
-!*==DXLCAL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DXLCAL
 SUBROUTINE DXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
     MSOLVE,Nmsl,Rpar,Ipar,Nelt,Ia,Ja,A,Isym)
   IMPLICIT NONE
-  !*--DXLCAL6
   !***BEGIN PROLOGUE  DXLCAL
   !***SUBSIDIARY
   !***PURPOSE  Internal routine for DGMRES.

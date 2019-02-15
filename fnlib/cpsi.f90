@@ -1,12 +1,8 @@
-!*==CPSI.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CPSI
 COMPLEX FUNCTION CPSI(Zin)
   IMPLICIT NONE
-  !*--CPSI5
-  !*** Start of declarations inserted by SPAG
   REAL bern, bound, cabsz, dxrel, pi, R1MACH, rbig, rmin, x, y
   INTEGER i, n, ndx, nterm
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CPSI
   !***PURPOSE  Compute the Psi (or Digamma) function.
   !***LIBRARY   SLATEC (FNLIB)

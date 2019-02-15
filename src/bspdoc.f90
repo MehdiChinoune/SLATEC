@@ -1,8 +1,6 @@
-!*==BSPDOC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BSPDOC
 SUBROUTINE BSPDOC
   IMPLICIT NONE
-  !*--BSPDOC5
   !***BEGIN PROLOGUE  BSPDOC
   !***PURPOSE  Documentation for BSPLINE, a package of subprograms for
   !            working with piecewise polynomial functions

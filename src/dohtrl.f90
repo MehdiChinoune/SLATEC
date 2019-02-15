@@ -1,8 +1,6 @@
-!*==DOHTRL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DOHTRL
 SUBROUTINE DOHTRL(Q,N,Nrda,Diag,Irank,Div,Td)
   IMPLICIT NONE
-  !*--DOHTRL5
   !***BEGIN PROLOGUE  DOHTRL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBVSUP and DSUDS

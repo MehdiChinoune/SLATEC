@@ -1,12 +1,8 @@
-!*==ALNREL.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK ALNREL
 FUNCTION ALNREL(X)
   IMPLICIT NONE
-  !*--ALNREL5
-  !*** Start of declarations inserted by SPAG
   REAL alnrcs, ALNREL, CSEVL, R1MACH, X, xmin
   INTEGER INITS, nlnrel
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ALNREL
   !***PURPOSE  Evaluate ln(1+X) accurate in the sense of relative error.
   !***LIBRARY   SLATEC (FNLIB)

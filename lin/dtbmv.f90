@@ -1,8 +1,6 @@
-!*==DTBMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DTBMV
 SUBROUTINE DTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   IMPLICIT NONE
-  !*--DTBMV5
   !***BEGIN PROLOGUE  DTBMV
   !***PURPOSE  Perform one of the matrix-vector operations.
   !***LIBRARY   SLATEC (BLAS)

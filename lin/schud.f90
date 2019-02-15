@@ -1,8 +1,6 @@
-!*==SCHUD.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SCHUD
 SUBROUTINE SCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   IMPLICIT NONE
-  !*--SCHUD5
   !***BEGIN PROLOGUE  SCHUD
   !***PURPOSE  Update an augmented Cholesky decomposition of the
   !            triangular part of an augmented QR decomposition.

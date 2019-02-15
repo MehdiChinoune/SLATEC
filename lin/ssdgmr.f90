@@ -1,12 +1,8 @@
-!*==SSDGMR.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSDGMR
 SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !*--SSDGMR6
-  !*** Start of declarations inserted by SPAG
   REAL SSDI, SSMV
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSDGMR
   !***PURPOSE  Diagonally Scaled GMRES Iterative Sparse Ax=b Solver.
   !            This routine uses the generalized minimum residual

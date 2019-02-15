@@ -1,8 +1,6 @@
-!*==TRBAK3.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK TRBAK3
 SUBROUTINE TRBAK3(Nm,N,Nv,A,M,Z)
   IMPLICIT NONE
-  !*--TRBAK35
   !***BEGIN PROLOGUE  TRBAK3
   !***PURPOSE  Form the eigenvectors of a real symmetric matrix from the
   !            eigenvectors of a symmetric tridiagonal matrix formed

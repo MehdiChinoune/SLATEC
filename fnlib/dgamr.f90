@@ -1,11 +1,7 @@
-!*==DGAMR.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DGAMR
 REAL(8) FUNCTION DGAMR(X)
   IMPLICIT NONE
-  !*--DGAMR5
-  !*** Start of declarations inserted by SPAG
   INTEGER irold
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DGAMR
   !***PURPOSE  Compute the reciprocal of the Gamma function.
   !***LIBRARY   SLATEC (FNLIB)

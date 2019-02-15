@@ -1,9 +1,7 @@
-!*==DWNLSM.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DWNLSM
 SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     Scale,Z,Temp,D)
   IMPLICIT NONE
-  !*--DWNLSM6
   !***BEGIN PROLOGUE  DWNLSM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DWNNLS

@@ -1,8 +1,6 @@
-!*==CSCAL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CSCAL
 SUBROUTINE CSCAL(N,Ca,Cx,Incx)
   IMPLICIT NONE
-  !*--CSCAL5
   !***BEGIN PROLOGUE  CSCAL
   !***PURPOSE  Multiply a vector by a constant.
   !***LIBRARY   SLATEC (BLAS)

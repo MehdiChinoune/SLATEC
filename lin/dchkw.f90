@@ -1,8 +1,6 @@
-!*==DCHKW.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DCHKW
 SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   IMPLICIT NONE
-  !*--DCHKW5
   !***BEGIN PROLOGUE  DCHKW
   !***SUBSIDIARY
   !***PURPOSE  SLAP WORK/IWORK Array Bounds Checker.

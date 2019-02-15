@@ -1,11 +1,7 @@
-!*==EG8CK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK EG8CK
 SUBROUTINE EG8CK(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--EG8CK5
-  !*** Start of declarations inserted by SPAG
   INTEGER Kprint
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  EG8CK
   !***PURPOSE  Quick check for EXINT and GAUS8.
   !***LIBRARY   SLATEC

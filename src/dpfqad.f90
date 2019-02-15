@@ -1,8 +1,6 @@
-!*==DPFQAD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DPFQAD
 SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   IMPLICIT NONE
-  !*--DPFQAD5
   !***BEGIN PROLOGUE  DPFQAD
   !***PURPOSE  Compute the integral on (X1,X2) of a product of a
   !            function F and the ID-th derivative of a B-spline,

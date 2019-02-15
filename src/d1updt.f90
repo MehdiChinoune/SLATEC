@@ -1,8 +1,6 @@
-!*==D1UPDT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK D1UPDT
 SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   IMPLICIT NONE
-  !*--D1UPDT5
   !***BEGIN PROLOGUE  D1UPDT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DNSQ and DNSQE

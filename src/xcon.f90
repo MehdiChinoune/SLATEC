@@ -1,11 +1,7 @@
-!*==XCON.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XCON
 SUBROUTINE XCON(X,Ix,Ierror)
   IMPLICIT NONE
-  !*--XCON5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, i1, icase, Ierror, ispace, itemp, j, j1, j2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XCON
   !***PURPOSE  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.

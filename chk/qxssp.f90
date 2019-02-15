@@ -1,15 +1,11 @@
-!*==QXSSP.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QXSSP
 SUBROUTINE QXSSP(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QXSSP5
-  !*** Start of declarations inserted by SPAG
   REAL bdpf, bdps, bdtf, bdts, dphi, dtheta, dum, elmbda, ermax, &
     err, f, pertrb, pf, pi, PIMACH, ps, sinp, sint, tf, ts
   REAL w, z
   INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
     n, nbdcnd, np1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QXSSP
   !***PURPOSE
   !***LIBRARY   SLATEC

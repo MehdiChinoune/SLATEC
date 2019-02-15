@@ -1,12 +1,8 @@
-!*==SPLPFL.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SPLPFL
 SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
     Rprnrm,Csc,Ww,Bl,Bu,Erp,Rprim,Primal,Finite,Zerolv)
   IMPLICIT NONE
-  !*--SPLPFL6
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Ienter, Ileave, j, Mrelas, n20005, n20036, Nvars
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPLPFL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

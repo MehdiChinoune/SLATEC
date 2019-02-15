@@ -1,12 +1,8 @@
-!*==QAGP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QAGP
 SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     Leniw,Lenw,Last,Iwork,Work)
   IMPLICIT NONE
-  !*--QAGP6
-  !*** Start of declarations inserted by SPAG
   INTEGER l4, Last
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QAGP
   !***PURPOSE  The routine calculates an approximation result to a given
   !            definite integral I = Integral of F over (A,B),

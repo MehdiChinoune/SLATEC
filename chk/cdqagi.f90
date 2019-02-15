@@ -1,11 +1,7 @@
-!*==CDQAGI.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CDQAGI
 SUBROUTINE CDQAGI(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--CDQAGI5
-  !*** Start of declarations inserted by SPAG
   INTEGER ierv, inf
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CDQAGI
   !***PURPOSE  Quick check for DQAGI.
   !***LIBRARY   SLATEC

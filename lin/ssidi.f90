@@ -1,8 +1,6 @@
-!*==SSIDI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSIDI
 SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   IMPLICIT NONE
-  !*--SSIDI5
   !***BEGIN PROLOGUE  SSIDI
   !***PURPOSE  Compute the determinant, inertia and inverse of a real
   !            symmetric matrix using the factors from SSIFA.

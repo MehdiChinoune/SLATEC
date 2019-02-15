@@ -1,8 +1,6 @@
-!*==CHBMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CHBMV
 SUBROUTINE CHBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   IMPLICIT NONE
-  !*--CHBMV5
   !***BEGIN PROLOGUE  CHBMV
   !***PURPOSE  Multiply a complex vector by a complex Hermitian band
   !            matrix.

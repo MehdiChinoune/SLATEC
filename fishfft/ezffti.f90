@@ -1,12 +1,8 @@
-!*==EZFFTI.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK EZFFTI
 SUBROUTINE EZFFTI(N,Wsave)
   IMPLICIT NONE
-  !*--EZFFTI5
-  !*** Start of declarations inserted by SPAG
   INTEGER N
   REAL Wsave
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  EZFFTI
   !***PURPOSE  Initialize a work array for EZFFTF and EZFFTB.
   !***LIBRARY   SLATEC (FFTPACK)

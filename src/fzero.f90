@@ -1,11 +1,7 @@
-!*==FZERO.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK FZERO
 SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   IMPLICIT NONE
-  !*--FZERO5
-  !*** Start of declarations inserted by SPAG
   REAL F, R1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  FZERO
   !***PURPOSE  Search for a zero of a function F(X) in a given interval
   !            (B,C).  It is designed primarily for problems where F(B)

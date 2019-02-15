@@ -1,8 +1,6 @@
-!*==TRED2.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK TRED2
 SUBROUTINE TRED2(Nm,N,A,D,E,Z)
   IMPLICIT NONE
-  !*--TRED25
   !***BEGIN PROLOGUE  TRED2
   !***PURPOSE  Reduce a real symmetric matrix to a symmetric tridiagonal
   !            matrix using and accumulating orthogonal transformations.

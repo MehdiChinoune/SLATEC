@@ -1,11 +1,7 @@
-!*==DASINH.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DASINH
 REAL(8) FUNCTION DASINH(X)
   IMPLICIT NONE
-  !*--DASINH5
-  !*** Start of declarations inserted by SPAG
   INTEGER INITDS, nterms
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DASINH
   !***PURPOSE  Compute the arc hyperbolic sine.
   !***LIBRARY   SLATEC (FNLIB)

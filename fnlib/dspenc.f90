@@ -1,11 +1,7 @@
-!*==DSPENC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DSPENC
 REAL(8) FUNCTION DSPENC(X)
   IMPLICIT NONE
-  !*--DSPENC5
-  !*** Start of declarations inserted by SPAG
   INTEGER INITDS, nspenc
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSPENC
   !***PURPOSE  Compute a form of Spence's integral due to K. Mitchell.
   !***LIBRARY   SLATEC (FNLIB)

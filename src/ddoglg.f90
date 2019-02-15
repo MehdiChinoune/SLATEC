@@ -1,8 +1,6 @@
-!*==DDOGLG.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DDOGLG
 SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   IMPLICIT NONE
-  !*--DDOGLG5
   !***BEGIN PROLOGUE  DDOGLG
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DNSQ and DNSQE

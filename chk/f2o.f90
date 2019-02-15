@@ -1,8 +1,6 @@
-!*==F2O.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK F2O
 REAL FUNCTION F2O(X)
   IMPLICIT NONE
-  !*--F2O5
   !***BEGIN PROLOGUE  F2O
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

@@ -1,11 +1,7 @@
-!*==CDQNG.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CDQNG
 SUBROUTINE CDQNG(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--CDQNG5
-  !*** Start of declarations inserted by SPAG
   INTEGER Lun
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CDQNG
   !***PURPOSE  Quick check for DQNG.
   !***LIBRARY   SLATEC

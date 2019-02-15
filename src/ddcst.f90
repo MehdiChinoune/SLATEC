@@ -1,8 +1,6 @@
-!*==DDCST.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DDCST
 SUBROUTINE DDCST(Maxord,Mint,Iswflg,El,Tq)
   IMPLICIT NONE
-  !*--DDCST5
   !***BEGIN PROLOGUE  DDCST
   !***SUBSIDIARY
   !***PURPOSE  DDCST sets coefficients used by the core integrator DDSTP.

@@ -1,8 +1,6 @@
-!*==CGERU.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CGERU
 SUBROUTINE CGERU(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   IMPLICIT NONE
-  !*--CGERU5
   !***BEGIN PROLOGUE  CGERU
   !***PURPOSE  Perform unconjugated rank 1 update of a complex general
   !            matrix.

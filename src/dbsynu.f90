@@ -1,8 +1,6 @@
-!*==DBSYNU.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DBSYNU
 SUBROUTINE DBSYNU(X,Fnu,N,Y)
   IMPLICIT NONE
-  !*--DBSYNU5
   !***BEGIN PROLOGUE  DBSYNU
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBESY

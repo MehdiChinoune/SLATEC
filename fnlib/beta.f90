@@ -1,11 +1,7 @@
-!*==BETA.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK BETA
 FUNCTION BETA(A,B)
   IMPLICIT NONE
-  !*--BETA5
-  !*** Start of declarations inserted by SPAG
   REAL A, ALBETA, alnsml, B, BETA, GAMMA, R1MACH, xmax, xmin
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BETA
   !***PURPOSE  Compute the complete Beta function.
   !***LIBRARY   SLATEC (FNLIB)

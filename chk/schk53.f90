@@ -1,9 +1,7 @@
-!*==SCHK53.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SCHK53
 SUBROUTINE SCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
     Nbet,Bet,Nmax,Ab,Aa,As,Bb,Bs,C,Cc,Cs,Ct,G,W)
   IMPLICIT NONE
-  !*--SCHK536
   !***BEGIN PROLOGUE  SCHK53
   !***SUBSIDIARY
   !***PURPOSE  Quick check for SSYR2K.

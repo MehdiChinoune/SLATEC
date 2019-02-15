@@ -1,11 +1,7 @@
-!*==PPVAL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK PPVAL
 FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   IMPLICIT NONE
-  !*--PPVAL5
-  !*** Start of declarations inserted by SPAG
   REAL PPVAL
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PPVAL
   !***PURPOSE  Calculate the value of the IDERIV-th derivative of the
   !            B-spline from the PP-representation.

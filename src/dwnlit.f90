@@ -1,8 +1,6 @@
-!*==DWNLIT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DWNLIT
 SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
   IMPLICIT NONE
-  !*--DWNLIT5
   !***BEGIN PROLOGUE  DWNLIT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DWNNLS

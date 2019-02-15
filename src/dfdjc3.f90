@@ -1,8 +1,6 @@
-!*==DFDJC3.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DFDJC3
 SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   IMPLICIT NONE
-  !*--DFDJC35
   !***BEGIN PROLOGUE  DFDJC3
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DNLS1 and DNLS1E

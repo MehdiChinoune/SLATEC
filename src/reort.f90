@@ -1,9 +1,6 @@
-!*==REORT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK REORT
 SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   IMPLICIT NONE
-  !*--REORT5
-  !*** Start of declarations inserted by SPAG
   REAL AE, C, dnd, dndt, dx, P, PWCnd, PX, RE, S, SDOT, srp, &
     Stowa, TND, TOL, vnorm, W, wcnd, X, XBEg
   REAL XENd, XOP, XOT, XSAv, Y, Yhp, Yp, ypnm
@@ -13,7 +10,6 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   INTEGER MXNon, Ncomp, NCOmpd, NDIsk, NEQ, NEQivp, NFC, NFCc, &
     nfcp, NIC, Niv, NOPg, NPS, NSWot, NTApe, NTP, NUMort, &
     NXPts
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  REORT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

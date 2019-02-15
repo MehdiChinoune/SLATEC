@@ -1,12 +1,8 @@
-!*==CLNGAM.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CLNGAM
 COMPLEX FUNCTION CLNGAM(Zin)
   IMPLICIT NONE
-  !*--CLNGAM5
-  !*** Start of declarations inserted by SPAG
   REAL argsum, bound, cabsz, CARG, dxrel, pi, R1MACH, sq2pil, x, y
   INTEGER i, n
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CLNGAM
   !***PURPOSE  Compute the logarithm of the absolute value of the Gamma
   !            function.

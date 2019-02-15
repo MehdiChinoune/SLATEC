@@ -1,8 +1,6 @@
-!*==DCHFDV.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DCHFDV
 SUBROUTINE DCHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   IMPLICIT NONE
-  !*--DCHFDV5
   !***BEGIN PROLOGUE  DCHFDV
   !***PURPOSE  Evaluate a cubic polynomial given in Hermite form and its
   !            first derivative at an array of points.  While designed for

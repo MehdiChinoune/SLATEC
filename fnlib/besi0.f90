@@ -1,12 +1,8 @@
-!*==BESI0.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK BESI0
 FUNCTION BESI0(X)
   IMPLICIT NONE
-  !*--BESI05
-  !*** Start of declarations inserted by SPAG
   REAL BESI0, BESI0E, bi0cs, CSEVL, R1MACH, X, xmax, xsml, y
   INTEGER INITS, nti0
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESI0
   !***PURPOSE  Compute the hyperbolic Bessel function of the first kind
   !            of order zero.

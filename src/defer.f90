@@ -1,14 +1,10 @@
-!*==DEFER.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DEFER
 SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
   IMPLICIT NONE
-  !*--DEFER5
-  !*** Start of declarations inserted by SPAG
   REAL ai, AIT, bi, BIT, ci, CIT, DIT, dj, DLX, DLX4, DLY, DLY4, &
     ej, fj, Grhs, TDLx3, TDLy3, tx, ty, Usol
   REAL uxxx, uxxxx, uyyy, uyyyy, xi, yj
   INTEGER i, Idmn, IS, j, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DEFER
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPELI

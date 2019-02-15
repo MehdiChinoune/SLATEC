@@ -1,8 +1,6 @@
-!*==DRJ.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DRJ
 REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
   IMPLICIT NONE
-  !*--DRJ5
   !***BEGIN PROLOGUE  DRJ
   !***PURPOSE  Compute the incomplete or complete (X or Y or Z is zero)
   !            elliptic integral of the 3rd kind.  For X, Y, and Z non-

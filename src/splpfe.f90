@@ -1,15 +1,11 @@
-!*==SPLPFE.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SPLPFE
 SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,Ibb,Erdnrm,Eps,Gg,Dulnrm,Dirnrm,Amat,Basmat,Csc,Wr,&
     Ww,Bl,Bu,Rz,Rg,Colnrm,Duals,Found)
   IMPLICIT NONE
-  !*--SPLPFE7
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Ienter, ihi, il1, ilow, ipage, IPLOC, iu1, j, key, &
     Lbm, Lmx, lpg, Mrelas, n20002, n20050, Nvars
   REAL SASUM
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPLPFE
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

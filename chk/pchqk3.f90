@@ -1,8 +1,6 @@
-!*==PCHQK3.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK PCHQK3
 SUBROUTINE PCHQK3(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--PCHQK35
   !***BEGIN PROLOGUE  PCHQK3
   !***PURPOSE  Test the PCHIP interpolators PCHIC, PCHIM, PCHSP.
   !***LIBRARY   SLATEC (PCHIP)

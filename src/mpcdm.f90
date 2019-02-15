@@ -1,11 +1,7 @@
-!*==MPCDM.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK MPCDM
 SUBROUTINE MPCDM(Dx,Z)
   IMPLICIT NONE
-  !*--MPCDM5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, i2, ib, ie, k, LUN, M, MXR
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPCDM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI

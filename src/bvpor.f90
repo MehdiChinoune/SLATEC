@@ -1,11 +1,8 @@
-!*==BVPOR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BVPOR
 SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,W,Niv,Yhp,U,V,Coef,S,Stowa,G,&
     Work,Iwork,Nfcc)
   IMPLICIT NONE
-  !*--BVPOR7
-  !*** Start of declarations inserted by SPAG
   REAL A, AE, Alpha, B, Beta, C, Coef, G, P, PWCnd, PX, RE, S, &
     SDOT, Stowa, TND, TOL, U, V, W
   REAL Work, X, XBEg, XENd, XOP, XOT, Xpts, XSAv, Y, Yhp, Z
@@ -19,7 +16,6 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Niv, nn, non, NOPg, NPS, Nrowa, Nrowb, Nrowy, NSWot, &
     NTApe, Ntp
   INTEGER NTPd, NUMort, Nxpts, NXPtsd
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BVPOR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

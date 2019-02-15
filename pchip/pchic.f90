@@ -1,8 +1,6 @@
-!*==PCHIC.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK PCHIC
 SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   IMPLICIT NONE
-  !*--PCHIC5
   !***BEGIN PROLOGUE  PCHIC
   !***PURPOSE  Set derivatives needed to determine a piecewise monotone
   !            piecewise cubic Hermite interpolant to given data.

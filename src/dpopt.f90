@@ -1,14 +1,10 @@
-!*==DPOPT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DPOPT
 SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   IMPLICIT NONE
-  !*--DPOPT5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, iadbig, ictmax, ictopt, idg, Info, iopt, ipagef, &
     isave, itbrc, itest, j, key, kprint, last, lds, lprg, &
     Mrelas, mxitlp, n20043
   INTEGER n20053, n20096, nerr, next, npp, Nvars
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPOPT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP

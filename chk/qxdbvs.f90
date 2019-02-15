@@ -1,14 +1,10 @@
-!*==QXDBVS.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QXDBVS
 SUBROUTINE QXDBVS(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QXDBVS5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, iflag, igofx, Ipass, ipss, j, kont, kount, Kprint, l ,&
     Lun, ncomp, ndiw, ndw, neqivp, nfc, nic, nrowa, nrowb ,&
     nrowy
   INTEGER numort, nxpts
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QXDBVS
   !***PURPOSE  Quick check for DBVSUP.
   !***LIBRARY   SLATEC

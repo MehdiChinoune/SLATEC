@@ -1,10 +1,8 @@
-!*==CDPST.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CDPST
 SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     T,USERS,Y,Yh,Ywt,Uround,Nfe,Nje,A,Dfdy,Fac,Ier,Ipvt,&
     Save1,Iswflg,Bnd,Jstate)
   IMPLICIT NONE
-  !*--CDPST7
   !***BEGIN PROLOGUE  CDPST
   !***SUBSIDIARY
   !***PURPOSE  Subroutine CDPST evaluates the Jacobian matrix of the right

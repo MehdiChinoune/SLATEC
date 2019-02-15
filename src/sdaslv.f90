@@ -1,8 +1,6 @@
-!*==SDASLV.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK SDASLV
 SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
   IMPLICIT NONE
-  !*--SDASLV5
   !***BEGIN PROLOGUE  SDASLV
   !***SUBSIDIARY
   !***PURPOSE  Linear system solver for SDASSL.

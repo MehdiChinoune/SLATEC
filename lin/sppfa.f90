@@ -1,8 +1,6 @@
-!*==SPPFA.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SPPFA
 SUBROUTINE SPPFA(Ap,N,Info)
   IMPLICIT NONE
-  !*--SPPFA5
   !***BEGIN PROLOGUE  SPPFA
   !***PURPOSE  Factor a real symmetric positive definite matrix stored in
   !            packed form.

@@ -1,13 +1,9 @@
-!*==CHECK2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CHECK2
 SUBROUTINE CHECK2(Sfac,Sdfac,Dfac,Dqfac,Kprint)
   IMPLICIT NONE
-  !*--CHECK25
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ICAse, INCx, INCy, j, ki, kn, kni, kpar, Kprint, &
     ksize, lenx, leny, MODe, mx, my, N, NPRint
   REAL sa, sb, sc, Sdfac, SDOT, SDSDOT, Sfac, ss
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CHECK2
   !***PURPOSE  (UNKNOWN)
   !***LIBRARY   SLATEC

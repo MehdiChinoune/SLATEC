@@ -1,8 +1,6 @@
-!*==CSVDC.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CSVDC
 SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   IMPLICIT NONE
-  !*--CSVDC5
   !***BEGIN PROLOGUE  CSVDC
   !***PURPOSE  Perform the singular value decomposition of a rectangular
   !            matrix.

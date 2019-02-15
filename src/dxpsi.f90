@@ -1,11 +1,7 @@
-!*==DXPSI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DXPSI
 REAL(8) FUNCTION DXPSI(A,Ipsik,Ipsix)
   IMPLICIT NONE
-  !*--DXPSI5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Ipsik, Ipsix, k, k1, m, n
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXPSI
   !***SUBSIDIARY
   !***PURPOSE  To compute values of the Psi function for DXLEGF.

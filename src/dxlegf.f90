@@ -1,11 +1,7 @@
-!*==DXLEGF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DXLEGF
 SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  !*--DXLEGF5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Id, Ierror, Ipqa, l, Mu1, Mu2, Nudiff
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXLEGF
   !***PURPOSE  Compute normalized Legendre polynomials and associated
   !            Legendre functions.

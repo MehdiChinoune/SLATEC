@@ -1,13 +1,9 @@
-!*==BESJ0.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK BESJ0
 FUNCTION BESJ0(X)
   IMPLICIT NONE
-  !*--BESJ05
-  !*** Start of declarations inserted by SPAG
   REAL ampl, BESJ0, bj0cs, bm0cs, bth0cs, CSEVL, pi4, R1MACH, &
     theta, X, xmax, xsml, y, z
   INTEGER INITS, ntj0, ntm0, ntth0
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESJ0
   !***PURPOSE  Compute the Bessel function of the first kind of order
   !            zero.

@@ -1,8 +1,6 @@
-!*==ISMPL.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK ISMPL
 SUBROUTINE ISMPL(N,M,Indx)
   IMPLICIT NONE
-  !*--ISMPL5
   !***BEGIN PROLOGUE  ISMPL
   !***SUBSIDIARY
   !***PURPOSE  Generate integer sample.

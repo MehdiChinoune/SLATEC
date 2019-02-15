@@ -1,14 +1,10 @@
-!*==XSET.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XSET
 SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   IMPLICIT NONE
-  !*--XSET5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, I1MACH, ic, Ierror, ii, imaxex, iminex, iradx, it, j, &
     k, kk, lg102x, lgtemp, log102, log2r, lx, nb, NBItsf, &
     nbitsx
   INTEGER np1, nrdplc
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XSET
   !***PURPOSE  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.

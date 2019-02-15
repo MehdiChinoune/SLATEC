@@ -1,11 +1,7 @@
-!*==STEST.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK STEST
 SUBROUTINE STEST(Len,Scomp,Strue,Ssize,Sfac,Kprint)
   IMPLICIT NONE
-  !*--STEST5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  STEST
   !***PURPOSE  Compare arrays SCOMP and STRUE.
   !***LIBRARY   SLATEC

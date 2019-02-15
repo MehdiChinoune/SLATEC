@@ -1,15 +1,11 @@
-!*==SPINCW.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SPINCW
 SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,Ibb,Costsc,Gg,Erdnrm,Dulnrm,Amat,Basmat,Csc,Wr,Ww,&
     Rz,Rg,Costs,Colnrm,Duals,Stpedg)
   IMPLICIT NONE
-  !*--SPINCW7
-  !*** Start of declarations inserted by SPAG
   REAL cnorm, SDOT
   INTEGER i, ihi, il1, ilow, ipage, IPLOC, iu1, j, Jstrt, key, &
     Lbm, Lmx, lpg, Mrelas, nnegrc, Npp, Nvars
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPINCW
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

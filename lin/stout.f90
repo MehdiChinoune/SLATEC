@@ -1,8 +1,6 @@
-!*==STOUT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK STOUT
 SUBROUTINE STOUT(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   IMPLICIT NONE
-  !*--STOUT5
   !***BEGIN PROLOGUE  STOUT
   !***PURPOSE  Write out SLAP Triad Format Linear System.
   !            Routine to write out a SLAP Triad format matrix and right

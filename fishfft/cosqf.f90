@@ -1,12 +1,8 @@
-!*==COSQF.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK COSQF
 SUBROUTINE COSQF(N,X,Wsave)
   IMPLICIT NONE
-  !*--COSQF5
-  !*** Start of declarations inserted by SPAG
   INTEGER N
   REAL sqrt2, tsqx, Wsave, X
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  COSQF
   !***PURPOSE  Compute the forward cosine transform with odd wave numbers.
   !***LIBRARY   SLATEC (FFTPACK)

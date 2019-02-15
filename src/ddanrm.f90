@@ -1,8 +1,6 @@
-!*==DDANRM.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DDANRM
 REAL(8) FUNCTION DDANRM(Neq,V,Wt,Rpar,Ipar)
   IMPLICIT NONE
-  !*--DDANRM5
   !***BEGIN PROLOGUE  DDANRM
   !***SUBSIDIARY
   !***PURPOSE  Compute vector norm for DDASSL.

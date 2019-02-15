@@ -1,8 +1,6 @@
-!*==BANDR.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK BANDR
 SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
   IMPLICIT NONE
-  !*--BANDR5
   !***BEGIN PROLOGUE  BANDR
   !***PURPOSE  Reduce a real symmetric band matrix to symmetric
   !            tridiagonal matrix and, optionally, accumulate

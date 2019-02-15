@@ -1,11 +1,7 @@
-!*==SNSQQK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SNSQQK
 SUBROUTINE SNSQQK(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--SNSQQK5
-  !*** Start of declarations inserted by SPAG
   REAL SQFCN2, SQJAC2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SNSQQK
   !***PURPOSE  Quick check for SNSQE and SNSQ.
   !***LIBRARY   SLATEC

@@ -1,8 +1,6 @@
-!*==DSPFA.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSPFA
 SUBROUTINE DSPFA(Ap,N,Kpvt,Info)
   IMPLICIT NONE
-  !*--DSPFA5
   !***BEGIN PROLOGUE  DSPFA
   !***PURPOSE  Factor a real symmetric matrix stored in packed form by
   !            elimination with symmetric pivoting.

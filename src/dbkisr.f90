@@ -1,8 +1,6 @@
-!*==DBKISR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DBKISR
 SUBROUTINE DBKISR(X,N,Sum,Ierr)
   IMPLICIT NONE
-  !*--DBKISR5
   !***BEGIN PROLOGUE  DBKISR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBSKIN

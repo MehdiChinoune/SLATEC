@@ -1,8 +1,6 @@
-!*==DSRTQC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DSRTQC
 SUBROUTINE DSRTQC(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DSRTQC5
   !***BEGIN PROLOGUE  DSRTQC
   !***SUBSIDIARY
   !***PURPOSE  Quick check for SLATEC routines DSORT, DPSORT, DPPERM

@@ -1,11 +1,7 @@
-!*==CDQAWS.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CDQAWS
 SUBROUTINE CDQAWS(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--CDQAWS5
-  !*** Start of declarations inserted by SPAG
   INTEGER ierv, Lun
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CDQAWS
   !***PURPOSE  Quick check for DQAWS.
   !***LIBRARY   SLATEC

@@ -1,12 +1,8 @@
-!*==ALNGAM.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK ALNGAM
 FUNCTION ALNGAM(X)
   IMPLICIT NONE
-  !*--ALNGAM5
-  !*** Start of declarations inserted by SPAG
   REAL ALNGAM, dxrel, GAMMA, pi, R1MACH, R9LGMC, sinpiy, sq2pil, &
     sqpi2l, X, xmax, y
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ALNGAM
   !***PURPOSE  Compute the logarithm of the absolute value of the Gamma
   !            function.

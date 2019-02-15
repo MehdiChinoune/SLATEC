@@ -1,9 +1,7 @@
-!*==SCG.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SCG
 SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork)
   IMPLICIT NONE
-  !*--SCG6
   !***BEGIN PROLOGUE  SCG
   !***PURPOSE  Preconditioned Conjugate Gradient Sparse Ax=b Solver.
   !            Routine to solve a symmetric positive definite linear

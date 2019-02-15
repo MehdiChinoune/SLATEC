@@ -1,8 +1,6 @@
-!*==DCPPLT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DCPPLT
 SUBROUTINE DCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   IMPLICIT NONE
-  !*--DCPPLT5
   !***BEGIN PROLOGUE  DCPPLT
   !***PURPOSE  Printer Plot of SLAP Column Format Matrix.
   !            Routine to print out a SLAP Column format matrix in a

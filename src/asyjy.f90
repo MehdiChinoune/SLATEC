@@ -1,8 +1,6 @@
-!*==ASYJY.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK ASYJY
 SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   IMPLICIT NONE
-  !*--ASYJY5
   !***BEGIN PROLOGUE  ASYJY
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BESJ and BESY

@@ -1,8 +1,6 @@
-!*==CSERI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CSERI
 SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--CSERI5
   !***BEGIN PROLOGUE  CSERI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBESI and CBESK

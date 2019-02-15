@@ -1,11 +1,7 @@
-!*==DQCPSI.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DQCPSI
 SUBROUTINE DQCPSI(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DQCPSI5
-  !*** Start of declarations inserted by SPAG
   INTEGER Ipass, Kprint
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DQCPSI
   !***PURPOSE  Quick check for DPSIFN.
   !***LIBRARY   SLATEC

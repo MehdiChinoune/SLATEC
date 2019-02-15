@@ -1,14 +1,10 @@
-!*==POLYVL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK POLYVL
 SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   IMPLICIT NONE
-  !*--POLYVL5
-  !*** Start of declarations inserted by SPAG
   REAL C, fac, pione, pitwo, pone, ptwo, Work, X, xk, Xx, Yfit, &
     Yp
   INTEGER i, Ierr, im1, izero, k, km1, km1pi, km2pn, km2pni, m, &
     mm, N, Nder, ndr, nmkp1, npkm1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POLYVL
   !***PURPOSE  Calculate the value of a polynomial and its first NDER
   !            derivatives where the polynomial was produced by a previous

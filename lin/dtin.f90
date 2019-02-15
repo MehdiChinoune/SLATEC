@@ -1,8 +1,6 @@
-!*==DTIN.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DTIN
 SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   IMPLICIT NONE
-  !*--DTIN5
   !***BEGIN PROLOGUE  DTIN
   !***PURPOSE  Read in SLAP Triad Format Linear System.
   !            Routine to read in a SLAP Triad format matrix and right

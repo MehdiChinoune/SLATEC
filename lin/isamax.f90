@@ -1,8 +1,6 @@
-!*==ISAMAX.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK ISAMAX
 INTEGER FUNCTION ISAMAX(N,Sx,Incx)
   IMPLICIT NONE
-  !*--ISAMAX5
   !***BEGIN PROLOGUE  ISAMAX
   !***PURPOSE  Find the smallest index of that component of a vector
   !            having the maximum magnitude.

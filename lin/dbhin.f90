@@ -1,8 +1,6 @@
-!*==DBHIN.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DBHIN
 SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   IMPLICIT NONE
-  !*--DBHIN5
   !***BEGIN PROLOGUE  DBHIN
   !***PURPOSE  Read a Sparse Linear System in the Boeing/Harwell Format.
   !            The matrix is read in and if the right hand side is also

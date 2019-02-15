@@ -1,12 +1,8 @@
-!*==MC20AD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK MC20AD
 SUBROUTINE MC20AD(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   IMPLICIT NONE
-  !*--MC20AD5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ice, icep, j, ja, jb, jce, jcep, Jdisp, Jptr, k, &
     kr, loc, Maxa, Nc, null
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MC20AD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP

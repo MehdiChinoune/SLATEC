@@ -1,8 +1,6 @@
-!*==LSI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK LSI
 SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   IMPLICIT NONE
-  !*--LSI5
   !***BEGIN PROLOGUE  LSI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to LSEI

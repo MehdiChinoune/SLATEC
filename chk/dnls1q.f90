@@ -1,11 +1,7 @@
-!*==DNLS1Q.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DNLS1Q
 SUBROUTINE DNLS1Q(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DNLS1Q5
-  !*** Start of declarations inserted by SPAG
   REAL DFCN1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DNLS1Q
   !***PURPOSE  Quick check for DNLS1E, DNLS1 and DCOV.
   !***LIBRARY   SLATEC

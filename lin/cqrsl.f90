@@ -1,8 +1,6 @@
-!*==CQRSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CQRSL
 SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   IMPLICIT NONE
-  !*--CQRSL5
   !***BEGIN PROLOGUE  CQRSL
   !***PURPOSE  Apply the output of CQRDC to compute coordinate transfor-
   !            mations, projections, and least squares solutions.

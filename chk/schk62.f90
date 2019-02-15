@@ -1,9 +1,7 @@
-!*==SCHK62.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SCHK62
 SUBROUTINE SCHK62(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
     Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
   IMPLICIT NONE
-  !*--SCHK626
   !***BEGIN PROLOGUE  SCHK62
   !***SUBSIDIARY
   !***PURPOSE  Quick check for SSYR2 and SSPR2.

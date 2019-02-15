@@ -1,8 +1,6 @@
-!*==SCHKE3.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SCHKE3
 SUBROUTINE SCHKE3(Isnum,Srnamt,Nout,Kprint,Fatal)
   IMPLICIT NONE
-  !*--SCHKE35
   !***BEGIN PROLOGUE  SCHKE3
   !***SUBSIDIARY
   !***PURPOSE  Test the error exits from the Level 3 Blas.

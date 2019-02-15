@@ -1,8 +1,6 @@
-!*==DASYIK.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DASYIK
 SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   IMPLICIT NONE
-  !*--DASYIK5
   !***BEGIN PROLOGUE  DASYIK
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBESI and DBESK

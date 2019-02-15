@@ -1,13 +1,9 @@
-!*==MC20AS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK MC20AS
 SUBROUTINE MC20AS(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   IMPLICIT NONE
-  !*--MC20AS5
-  !*** Start of declarations inserted by SPAG
   REAL ace, acep
   INTEGER i, ice, icep, j, ja, jb, jce, jcep, Jdisp, Jptr, k, &
     kr, loc, Maxa, Nc, null
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MC20AS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

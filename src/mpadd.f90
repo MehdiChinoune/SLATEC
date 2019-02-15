@@ -1,8 +1,6 @@
-!*==MPADD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK MPADD
 SUBROUTINE MPADD(X,Y,Z)
   IMPLICIT NONE
-  !*--MPADD5
   !***BEGIN PROLOGUE  MPADD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI

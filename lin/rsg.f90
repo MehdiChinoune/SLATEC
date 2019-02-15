@@ -1,8 +1,6 @@
-!*==RSG.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK RSG
 SUBROUTINE RSG(Nm,N,A,B,W,Matz,Z,Fv1,Fv2,Ierr)
   IMPLICIT NONE
-  !*--RSG5
   !***BEGIN PROLOGUE  RSG
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a symmetric generalized eigenproblem.

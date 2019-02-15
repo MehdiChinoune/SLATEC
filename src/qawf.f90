@@ -1,12 +1,8 @@
-!*==QAWF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QAWF
 SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
     Lst,Leniw,Maxp1,Lenw,Iwork,Work)
   IMPLICIT NONE
-  !*--QAWF6
-  !*** Start of declarations inserted by SPAG
   INTEGER Iwork, Lenw, ll2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QAWF
   !***PURPOSE  The routine calculates an approximation result to a given
   !            Fourier integral

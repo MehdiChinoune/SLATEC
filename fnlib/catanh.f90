@@ -1,8 +1,6 @@
-!*==CATANH.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CATANH
 COMPLEX FUNCTION CATANH(Z)
   IMPLICIT NONE
-  !*--CATANH5
   !***BEGIN PROLOGUE  CATANH
   !***PURPOSE  Compute the arc hyperbolic tangent.
   !***LIBRARY   SLATEC (FNLIB)

@@ -1,8 +1,6 @@
-!*==DJAC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DJAC
 SUBROUTINE DJAC(T,U,Pd,Nrowpd,Rpar,Ipar)
   IMPLICIT NONE
-  !*--DJAC5
   !***BEGIN PROLOGUE  DJAC
   !***SUBSIDIARY
   !***PURPOSE  Evaluate Jacobian for DDEBDF quick check.

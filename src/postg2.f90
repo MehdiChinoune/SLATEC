@@ -1,16 +1,12 @@
-!*==POSTG2.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK POSTG2
 SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
   IMPLICIT NONE
-  !*--POSTG25
-  !*** Start of declarations inserted by SPAG
   REAL A, B, B2, B3, Bb, C, D, fi, fnum, fnum2, P, Q, t, Tcos, &
     W, W2, W3
   INTEGER i, i2r, i2rby2, Idimq, ii, ijump, ip, ipstor, j, jm1, &
     jm2, jm3, jp1, jp2, jp3, jr, jstart, jstep, jstop, k
   INTEGER k1, k2, k3, k4, kr, lr, M, mr, N, nlast, nlastp, np, &
     Nperod, nr, nrod, nrodpr
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POSTG2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to POISTG

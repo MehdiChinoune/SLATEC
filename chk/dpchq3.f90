@@ -1,8 +1,6 @@
-!*==DPCHQ3.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DPCHQ3
 SUBROUTINE DPCHQ3(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DPCHQ35
   !***BEGIN PROLOGUE  DPCHQ3
   !***PURPOSE  Test the PCHIP interpolators DPCHIC, DPCHIM, DPCHSP.
   !***LIBRARY   SLATEC (PCHIP)

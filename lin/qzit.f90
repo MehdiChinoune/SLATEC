@@ -1,8 +1,6 @@
-!*==QZIT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK QZIT
 SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
   IMPLICIT NONE
-  !*--QZIT5
   !***BEGIN PROLOGUE  QZIT
   !***PURPOSE  The second step of the QZ algorithm for generalized
   !            eigenproblems.  Accepts an upper Hessenberg and an upper

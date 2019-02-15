@@ -1,8 +1,6 @@
-!*==CHIFA.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CHIFA
 SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
   IMPLICIT NONE
-  !*--CHIFA5
   !***BEGIN PROLOGUE  CHIFA
   !***PURPOSE  Factor a complex Hermitian matrix by elimination
   !            (symmetric pivoting).

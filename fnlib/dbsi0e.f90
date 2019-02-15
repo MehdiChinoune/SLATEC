@@ -1,12 +1,8 @@
-!*==DBSI0E.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBSI0E
 REAL(8) FUNCTION DBSI0E(X)
   IMPLICIT NONE
-  !*--DBSI0E5
-  !*** Start of declarations inserted by SPAG
   REAL eta
   INTEGER INITDS, ntai0, ntai02, nti0
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBSI0E
   !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order zero.

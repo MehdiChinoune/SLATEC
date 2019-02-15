@@ -1,8 +1,6 @@
-!*==DT2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DT2
 REAL(8) FUNCTION DT2(X)
   IMPLICIT NONE
-  !*--DT25
   !***BEGIN PROLOGUE  DT2
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

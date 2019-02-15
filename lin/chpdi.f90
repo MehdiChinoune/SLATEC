@@ -1,8 +1,6 @@
-!*==CHPDI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CHPDI
 SUBROUTINE CHPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   IMPLICIT NONE
-  !*--CHPDI5
   !***BEGIN PROLOGUE  CHPDI
   !***PURPOSE  Compute the determinant, inertia and inverse of a complex
   !            Hermitian matrix stored in packed form using the factors

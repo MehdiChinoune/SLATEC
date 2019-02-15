@@ -1,8 +1,6 @@
-!*==LCE.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK LCE
 LOGICAL FUNCTION LCE(Ri,Rj,Lr)
   IMPLICIT NONE
-  !*--LCE5
   !***BEGIN PROLOGUE  LCE
   !***SUBSIDIARY
   !***PURPOSE  Test if two arrays are identical.

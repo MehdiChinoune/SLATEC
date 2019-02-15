@@ -1,9 +1,7 @@
-!*==DCG.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DCG
 SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork)
   IMPLICIT NONE
-  !*--DCG6
   !***BEGIN PROLOGUE  DCG
   !***PURPOSE  Preconditioned Conjugate Gradient Sparse Ax=b Solver.
   !            Routine to solve a symmetric positive definite linear

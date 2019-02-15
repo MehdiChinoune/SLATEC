@@ -1,8 +1,6 @@
-!*==INTYD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK INTYD
 SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
   IMPLICIT NONE
-  !*--INTYD5
   !***BEGIN PROLOGUE  INTYD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DEBDF

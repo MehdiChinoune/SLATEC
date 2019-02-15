@@ -1,8 +1,6 @@
-!*==DFDJC1.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DFDJC1
 SUBROUTINE DFDJC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   IMPLICIT NONE
-  !*--DFDJC15
   !***BEGIN PROLOGUE  DFDJC1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DNSQ and DNSQE

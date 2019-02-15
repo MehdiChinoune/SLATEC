@@ -1,12 +1,8 @@
-!*==D9B1MP.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9B1MP
 SUBROUTINE D9B1MP(X,Ampl,Theta)
   IMPLICIT NONE
-  !*--D9B1MP5
-  !*** Start of declarations inserted by SPAG
   REAL eta
   INTEGER INITDS, nbm1, nbm12, nbt12, nbth1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9B1MP
   !***SUBSIDIARY
   !***PURPOSE  Evaluate the modulus and phase for the J1 and Y1 Bessel

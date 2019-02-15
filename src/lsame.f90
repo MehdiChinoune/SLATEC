@@ -1,8 +1,6 @@
-!*==LSAME.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK LSAME
 LOGICAL FUNCTION LSAME(Ca,Cb)
   IMPLICIT NONE
-  !*--LSAME5
   !***BEGIN PROLOGUE  LSAME
   !***SUBSIDIARY
   !***PURPOSE  Test two characters to determine if they are the same

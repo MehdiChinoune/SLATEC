@@ -1,12 +1,8 @@
-!*==CPROD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CPROD
 SUBROUTINE CPROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,W,Y)
   IMPLICIT NONE
-  !*--CPROD5
-  !*** Start of declarations inserted by SPAG
   REAL A, Aa, B, Bm1, Bm2, C, rt, X, Yy
   INTEGER ia, id, iflg, j, k, M, m1, m2, mm, Na, Nd, Nm1, Nm2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CPROD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI

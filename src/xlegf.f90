@@ -1,11 +1,7 @@
-!*==XLEGF.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XLEGF
 SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  !*--XLEGF5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Id, Ierror, Ipqa, l, Mu1, Mu2, Nudiff
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XLEGF
   !***PURPOSE  Compute normalized Legendre polynomials and associated
   !            Legendre functions.

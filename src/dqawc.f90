@@ -1,9 +1,7 @@
-!*==DQAWC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQAWC
 SUBROUTINE DQAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
     Last,Iwork,Work)
   IMPLICIT NONE
-  !*--DQAWC6
   !***BEGIN PROLOGUE  DQAWC
   !***PURPOSE  The routine calculates an approximation result to a
   !            Cauchy principal value I = INTEGRAL of F*W over (A,B)

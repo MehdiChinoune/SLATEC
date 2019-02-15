@@ -1,8 +1,6 @@
-!*==STPSV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK STPSV
 SUBROUTINE STPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
   IMPLICIT NONE
-  !*--STPSV5
   !***BEGIN PROLOGUE  STPSV
   !***PURPOSE  Solve one of the systems of equations.
   !***LIBRARY   SLATEC (BLAS)

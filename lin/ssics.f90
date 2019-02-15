@@ -1,8 +1,6 @@
-!*==SSICS.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSICS
 SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   IMPLICIT NONE
-  !*--SSICS5
   !***BEGIN PROLOGUE  SSICS
   !***PURPOSE  Incompl. Cholesky Decomposition Preconditioner SLAP Set Up.
   !            Routine to generate the Incomplete Cholesky decomposition,

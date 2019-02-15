@@ -1,12 +1,8 @@
-!*==DDERKF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DDERKF
 SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar)
   IMPLICIT NONE
-  !*--DDERKF6
-  !*** Start of declarations inserted by SPAG
   REAL DF
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DDERKF
   !***PURPOSE  Solve an initial value problem in ordinary differential
   !            equations using a Runge-Kutta-Fehlberg scheme.

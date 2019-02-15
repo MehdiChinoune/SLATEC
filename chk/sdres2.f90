@@ -1,8 +1,6 @@
-!*==SDRES2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SDRES2
 SUBROUTINE SDRES2(T,Y,Yprime,Delta,Ires,Rpar,Ipar)
   IMPLICIT NONE
-  !*--SDRES25
   !***BEGIN PROLOGUE  SDRES2
   !***SUBSIDIARY
   !***PURPOSE  Second residual evaluator for SDASQC.

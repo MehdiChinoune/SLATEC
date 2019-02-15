@@ -1,8 +1,6 @@
-!*==DSLI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSLI
 SUBROUTINE DSLI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   IMPLICIT NONE
-  !*--DSLI5
   !***BEGIN PROLOGUE  DSLI
   !***PURPOSE  SLAP MSOLVE for Lower Triangle Matrix.
   !            This routine acts as an interface between the SLAP generic

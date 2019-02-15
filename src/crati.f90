@@ -1,8 +1,6 @@
-!*==CRATI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CRATI
 SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   IMPLICIT NONE
-  !*--CRATI5
   !***BEGIN PROLOGUE  CRATI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBESH, CBESI and CBESK

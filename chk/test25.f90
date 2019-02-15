@@ -1,8 +1,6 @@
-!*==TEST25.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK TEST25
 PROGRAM TEST25
   IMPLICIT NONE
-  !*--TEST255
   !***BEGIN PROLOGUE  TEST25
   !***PURPOSE  Driver for testing SLATEC subprograms.
   !***LIBRARY   SLATEC

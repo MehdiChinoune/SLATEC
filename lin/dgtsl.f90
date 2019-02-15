@@ -1,8 +1,6 @@
-!*==DGTSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DGTSL
 SUBROUTINE DGTSL(N,C,D,E,B,Info)
   IMPLICIT NONE
-  !*--DGTSL5
   !***BEGIN PROLOGUE  DGTSL
   !***PURPOSE  Solve a tridiagonal linear system.
   !***LIBRARY   SLATEC (LINPACK)

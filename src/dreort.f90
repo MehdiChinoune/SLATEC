@@ -1,8 +1,6 @@
-!*==DREORT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DREORT
 SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   IMPLICIT NONE
-  !*--DREORT5
   !***BEGIN PROLOGUE  DREORT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBVSUP

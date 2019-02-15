@@ -1,13 +1,9 @@
-!*==RFFTB1.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK RFFTB1
 SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
   IMPLICIT NONE
-  !*--RFFTB15
-  !*** Start of declarations inserted by SPAG
   REAL C, Ch, Wa
   INTEGER i, idl1, ido, Ifac, ip, iw, ix2, ix3, ix4, k1, l1, l2, &
     N, na, nf
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RFFTB1
   !***PURPOSE  Compute the backward fast Fourier transform of a real
   !            coefficient array.

@@ -1,12 +1,8 @@
-!*==DAIE.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DAIE
 REAL(8) FUNCTION DAIE(X)
   IMPLICIT NONE
-  !*--DAIE5
-  !*** Start of declarations inserted by SPAG
   REAL eta
   INTEGER INITDS, naif, naig, naip1, naip2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DAIE
   !***PURPOSE  Calculate the Airy function for a negative argument and an
   !            exponentially scaled Airy function for a non-negative

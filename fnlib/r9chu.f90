@@ -1,14 +1,10 @@
-!*==R9CHU.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK R9CHU
 FUNCTION R9CHU(A,B,Z)
   IMPLICIT NONE
-  !*--R9CHU5
-  !*** Start of declarations inserted by SPAG
   REAL A, aa, ab, anbn, B, bb, bp, c2, ct1, ct2, ct3, d1z, eps, &
     g1, g2, g3, R1MACH, R9CHU, sab, sqeps
   REAL x2i1, Z
   INTEGER i, j
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9CHU
   !***SUBSIDIARY
   !***PURPOSE  Evaluate for large Z  Z**A * U(A,B,Z) where U is the

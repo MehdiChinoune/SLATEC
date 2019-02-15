@@ -1,8 +1,6 @@
-!*==C1MERG.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK C1MERG
 SUBROUTINE C1MERG(Tcos,I1,M1,I2,M2,I3)
   IMPLICIT NONE
-  !*--C1MERG5
   !***BEGIN PROLOGUE  C1MERG
   !***SUBSIDIARY
   !***PURPOSE  Merge two strings of complex numbers.  Each string is

@@ -1,8 +1,6 @@
-!*==ZUCHK.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZUCHK
 SUBROUTINE ZUCHK(Yr,Yi,Nz,Ascle,Tol)
   IMPLICIT NONE
-  !*--ZUCHK5
   !***BEGIN PROLOGUE  ZUCHK
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SERI, ZUOIK, ZUNK1, ZUNK2, ZUNI1, ZUNI2 and

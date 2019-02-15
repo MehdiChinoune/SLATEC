@@ -1,12 +1,8 @@
-!*==D9LN2R.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9LN2R
 REAL(8) FUNCTION D9LN2R(X)
   IMPLICIT NONE
-  !*--D9LN2R5
-  !*** Start of declarations inserted by SPAG
   REAL eps, sqeps
   INTEGER INITDS, ntln21, ntln22
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9LN2R
   !***SUBSIDIARY
   !***PURPOSE  Evaluate LOG(1+X) from second order relative accuracy so

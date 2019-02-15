@@ -1,12 +1,8 @@
-!*==COSTI.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK COSTI
 SUBROUTINE COSTI(N,Wsave)
   IMPLICIT NONE
-  !*--COSTI5
-  !*** Start of declarations inserted by SPAG
   REAL dt, fk, pi, Wsave
   INTEGER k, kc, N, nm1, np1, ns2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  COSTI
   !***PURPOSE  Initialize a work array for COST.
   !***LIBRARY   SLATEC (FFTPACK)

@@ -1,15 +1,11 @@
-!*==QXCRT.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QXCRT
 SUBROUTINE QXCRT(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QXCRT5
-  !*** Start of declarations inserted by SPAG
   REAL a, b, bda, bdb, bdc, bdd, c, d, dum, elmbda, ermax, err, &
     f, pertrb, pi, piby2, PIMACH, pisq, w, x
   REAL y, z
   INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
     n, nbdcnd, np1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QXCRT
   !***PURPOSE
   !***LIBRARY   SLATEC

@@ -1,8 +1,6 @@
-!*==CHPCO.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CHPCO
 SUBROUTINE CHPCO(Ap,N,Kpvt,Rcond,Z)
   IMPLICIT NONE
-  !*--CHPCO5
   !***BEGIN PROLOGUE  CHPCO
   !***PURPOSE  Factor a complex Hermitian matrix stored in packed form by
   !            elimination with symmetric pivoting and estimate the

@@ -1,13 +1,9 @@
-!*==EZFFT1.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK EZFFT1
 SUBROUTINE EZFFT1(N,Wa,Ifac)
   IMPLICIT NONE
-  !*--EZFFT15
-  !*** Start of declarations inserted by SPAG
   REAL arg1, argh, ch1, ch1h, dch1, dsh1, sh1, tpi, Wa
   INTEGER i, ib, ido, Ifac, ii, ip, ipm, is, j, k1, l1, l2, N, &
     nf, nfm1, nl, nq, nr, ntry, ntryh
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  EZFFT1
   !***SUBSIDIARY
   !***PURPOSE  EZFFTI calls EZFFT1 with appropriate work array

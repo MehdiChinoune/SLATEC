@@ -1,13 +1,9 @@
-!*==DDASSL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DDASSL
 SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     Iwork,Liw,Rpar,Ipar,JAC)
   IMPLICIT NONE
-  !*--DDASSL6
-  !*** Start of declarations inserted by SPAG
   INTEGER JAC
   REAL RES
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DDASSL
   !***PURPOSE  This code solves a system of differential/algebraic
   !            equations of the form G(T,Y,YPRIME) = 0.

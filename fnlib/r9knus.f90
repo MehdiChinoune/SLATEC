@@ -1,16 +1,12 @@
-!*==R9KNUS.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK R9KNUS
 SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   IMPLICIT NONE
-  !*--R9KNUS5
-  !*** Start of declarations inserted by SPAG
   REAL a, a0, aln2, alnbig, alneps, alnsml, alnz, alpha, an, b0, &
     beta, Bknu, bknu0, Bknu1, bknud, bn, c0, c0kcs, CSEVL, euler
   REAL expx, GAMMA, p1, p2, p3, qq, R1MACH, result, sqpi2, sqrtx, &
     v, vlnz, X, x2n, x2tov, xi, xmu, Xnu, xnusml, xsml
   REAL z, znu1cs, ztov
   INTEGER i, ii, INITS, inu, Iswtch, n, ntc0k, nterms, ntznu1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9KNUS
   !***SUBSIDIARY
   !***PURPOSE  Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*

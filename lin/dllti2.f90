@@ -1,8 +1,6 @@
-!*==DLLTI2.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DLLTI2
 SUBROUTINE DLLTI2(N,B,X,Nel,Iel,Jel,El,Dinv)
   IMPLICIT NONE
-  !*--DLLTI25
   !***BEGIN PROLOGUE  DLLTI2
   !***PURPOSE  SLAP Backsolve routine for LDL' Factorization.
   !            Routine to solve a system of the form  L*D*L' X = B,

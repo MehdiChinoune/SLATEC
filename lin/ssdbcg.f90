@@ -1,12 +1,8 @@
-!*==SSDBCG.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSDBCG
 SUBROUTINE SSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !*--SSDBCG6
-  !*** Start of declarations inserted by SPAG
   REAL SSDI, SSMTV, SSMV
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSDBCG
   !***PURPOSE  Diagonally Scaled BiConjugate Gradient Sparse Ax=b Solver.
   !            Routine to solve a linear system  Ax = b  using the

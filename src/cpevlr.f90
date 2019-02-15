@@ -1,12 +1,8 @@
-!*==CPEVLR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CPEVLR
 SUBROUTINE CPEVLR(N,M,A,X,C)
   IMPLICIT NONE
-  !*--CPEVLR5
-  !*** Start of declarations inserted by SPAG
   REAL ci, cim1, X
   INTEGER i, j, M, mini, N, np1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CPEVLR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CPZERO

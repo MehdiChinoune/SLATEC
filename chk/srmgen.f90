@@ -1,9 +1,7 @@
-!*==SRMGEN.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SRMGEN
 SUBROUTINE SRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Soln,Dsum,Itmp,&
     Idiag)
   IMPLICIT NONE
-  !*--SRMGEN6
   !***BEGIN PROLOGUE  SRMGEN
   !***SUBSIDIARY
   !***PURPOSE  This routine generates a "Random" symmetric or

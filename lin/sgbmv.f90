@@ -1,8 +1,6 @@
-!*==SGBMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SGBMV
 SUBROUTINE SGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   IMPLICIT NONE
-  !*--SGBMV5
   !***BEGIN PROLOGUE  SGBMV
   !***PURPOSE  Multiply a real vector by a real general band matrix.
   !***LIBRARY   SLATEC (BLAS)

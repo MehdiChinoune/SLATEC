@@ -1,8 +1,6 @@
-!*==CHEMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CHEMV
 SUBROUTINE CHEMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   IMPLICIT NONE
-  !*--CHEMV5
   !***BEGIN PROLOGUE  CHEMV
   !***PURPOSE  Multiply a complex vector by a complex Hermitian matrix.
   !***LIBRARY   SLATEC (BLAS)

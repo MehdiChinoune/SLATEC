@@ -1,11 +1,7 @@
-!*==TEST38.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK TEST38
 PROGRAM TEST38
   IMPLICIT NONE
-  !*--TEST385
-  !*** Start of declarations inserted by SPAG
   INTEGER I1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TEST38
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC

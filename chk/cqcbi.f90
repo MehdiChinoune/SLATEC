@@ -1,8 +1,6 @@
-!*==CQCBI.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CQCBI
 SUBROUTINE CQCBI(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--CQCBI5
   !***BEGIN PROLOGUE  CQCBI
   !***SUBSIDIARY
   !***PURPOSE  Quick check for SLATEC subroutine

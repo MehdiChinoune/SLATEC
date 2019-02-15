@@ -1,8 +1,6 @@
-!*==BSQAD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BSQAD
 SUBROUTINE BSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
   IMPLICIT NONE
-  !*--BSQAD5
   !***BEGIN PROLOGUE  BSQAD
   !***PURPOSE  Compute the integral of a K-th order B-spline using the
   !            B-representation.

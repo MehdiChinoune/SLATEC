@@ -1,11 +1,7 @@
-!*==CTAN.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CTAN
 COMPLEX FUNCTION CTAN(Z)
   IMPLICIT NONE
-  !*--CTAN5
-  !*** Start of declarations inserted by SPAG
   REAL den, R1MACH, sn2x, sqeps, x2, y2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CTAN
   !***PURPOSE  Compute the complex tangent.
   !***LIBRARY   SLATEC (FNLIB)

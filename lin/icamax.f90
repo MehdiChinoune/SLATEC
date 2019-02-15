@@ -1,8 +1,6 @@
-!*==ICAMAX.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK ICAMAX
 INTEGER FUNCTION ICAMAX(N,Cx,Incx)
   IMPLICIT NONE
-  !*--ICAMAX5
   !***BEGIN PROLOGUE  ICAMAX
   !***PURPOSE  Find the smallest index of the component of a complex
   !            vector having the maximum sum of magnitudes of real

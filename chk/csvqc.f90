@@ -1,11 +1,7 @@
-!*==CSVQC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CSVQC
 SUBROUTINE CSVQC(Lun,Kprint,Nerr)
   IMPLICIT NONE
-  !*--CSVQC5
-  !*** Start of declarations inserted by SPAG
   INTEGER kone, Kprint, Lun, Nerr
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CSVQC
   !***PURPOSE  Quick check for CSVDC.
   !***LIBRARY   SLATEC

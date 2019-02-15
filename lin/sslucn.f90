@@ -1,12 +1,8 @@
-!*==SSLUCN.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSLUCN
 SUBROUTINE SSLUCN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !*--SSLUCN6
-  !*** Start of declarations inserted by SPAG
   REAL SSMMTI, SSMTV, SSMV
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSLUCN
   !***PURPOSE  Incomplete LU CG Sparse Ax=b Solver for Normal Equations.
   !            Routine to solve a general linear system  Ax = b  using the

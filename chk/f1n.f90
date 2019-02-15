@@ -1,8 +1,6 @@
-!*==F1N.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK F1N
 REAL FUNCTION F1N(X)
   IMPLICIT NONE
-  !*--F1N5
   !***BEGIN PROLOGUE  F1N
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

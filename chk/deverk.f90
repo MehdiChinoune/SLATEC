@@ -1,8 +1,6 @@
-!*==DEVERK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DEVERK
 SUBROUTINE DEVERK(Lout,Kprint,Fail)
   IMPLICIT NONE
-  !*--DEVERK5
   !***BEGIN PROLOGUE  DEVERK
   !***SUBSIDIARY
   !***PURPOSE  Test error returns from DPCHIP evaluators for DPCHQ1.

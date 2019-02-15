@@ -1,8 +1,6 @@
-!*==FDJAC1.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK FDJAC1
 SUBROUTINE FDJAC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   IMPLICIT NONE
-  !*--FDJAC15
   !***BEGIN PROLOGUE  FDJAC1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SNSQ and SNSQE

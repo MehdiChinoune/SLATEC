@@ -1,14 +1,10 @@
-!*==BIE.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK BIE
 FUNCTION BIE(X)
   IMPLICIT NONE
-  !*--BIE5
-  !*** Start of declarations inserted by SPAG
   REAL atr, BIE, bif2cs, bifcs, big2cs, bigcs, bip2cs, bipcs, btr, &
     CSEVL, eta, R1MACH, sqrtx, theta, X, x32sml, x3sml, xbig, &
     xm, z
   INTEGER INITS, nbif, nbif2, nbig, nbig2, nbip, nbip2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BIE
   !***PURPOSE  Calculate the Bairy function for a negative argument and an
   !            exponentially scaled Bairy function for a non-negative

@@ -1,8 +1,6 @@
-!*==CH.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CH
 SUBROUTINE CH(Nm,N,Ar,Ai,W,Matz,Zr,Zi,Fv1,Fv2,Fm1,Ierr)
   IMPLICIT NONE
-  !*--CH5
   !***BEGIN PROLOGUE  CH
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a complex Hermitian matrix.

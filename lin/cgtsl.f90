@@ -1,8 +1,6 @@
-!*==CGTSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CGTSL
 SUBROUTINE CGTSL(N,C,D,E,B,Info)
   IMPLICIT NONE
-  !*--CGTSL5
   !***BEGIN PROLOGUE  CGTSL
   !***PURPOSE  Solve a tridiagonal linear system.
   !***LIBRARY   SLATEC (LINPACK)

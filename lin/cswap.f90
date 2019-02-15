@@ -1,11 +1,7 @@
-!*==CSWAP.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CSWAP
 SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
   IMPLICIT NONE
-  !*--CSWAP5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Incx, Incy, kx, ky, N, ns
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CSWAP
   !***PURPOSE  Interchange two vectors.
   !***LIBRARY   SLATEC (BLAS)

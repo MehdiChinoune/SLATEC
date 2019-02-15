@@ -1,8 +1,6 @@
-!*==CUNHJ.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CUNHJ
 SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
   IMPLICIT NONE
-  !*--CUNHJ5
   !***BEGIN PROLOGUE  CUNHJ
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBESI and CBESK

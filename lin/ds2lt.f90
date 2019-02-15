@@ -1,8 +1,6 @@
-!*==DS2LT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DS2LT
 SUBROUTINE DS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
   IMPLICIT NONE
-  !*--DS2LT5
   !***BEGIN PROLOGUE  DS2LT
   !***PURPOSE  Lower Triangle Preconditioner SLAP Set Up.
   !            Routine to store the lower triangle of a matrix stored

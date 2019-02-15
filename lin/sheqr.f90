@@ -1,8 +1,6 @@
-!*==SHEQR.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SHEQR
 SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
   IMPLICIT NONE
-  !*--SHEQR5
   !***BEGIN PROLOGUE  SHEQR
   !***SUBSIDIARY
   !***PURPOSE  Internal routine for SGMRES.

@@ -1,11 +1,7 @@
-!*==QCKIN.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QCKIN
 SUBROUTINE QCKIN(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QCKIN5
-  !*** Start of declarations inserted by SPAG
   INTEGER Ipass, Kprint
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QCKIN
   !***PURPOSE  Quick check for BSKIN.
   !***LIBRARY   SLATEC

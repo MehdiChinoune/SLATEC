@@ -1,17 +1,13 @@
-!*==DSPLP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DSPLP
 SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Ibasis,Work,Lw,Iwork,Liw)
   IMPLICIT NONE
-  !*--DSPLP6
-  !*** Start of declarations inserted by SPAG
   REAL DUSRMT
   INTEGER iadbig, ictmax, ictopt, Info, iopt, key, lamat, last ,&
     lbasma, lbm, lcolnr, lcsc, lerd, lerp, libb, librc ,&
     limat, lipr, Liw, liwork
   INTEGER liwr, lmx, lrg, lrhs, lrprim, lrz, Lw, lwork, lwr, lww ,&
     Mrelas, nerr, next, Nvars
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSPLP
   !***PURPOSE  Solve linear programming problems involving at
   !            most a few thousand constraints and variables.

@@ -1,8 +1,6 @@
-!*==CPBFA.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CPBFA
 SUBROUTINE CPBFA(Abd,Lda,N,M,Info)
   IMPLICIT NONE
-  !*--CPBFA5
   !***BEGIN PROLOGUE  CPBFA
   !***PURPOSE  Factor a complex Hermitian positive definite matrix stored
   !            in band form.

@@ -1,11 +1,7 @@
-!*==XSETF.f90  processed by SPAG 6.72Dc at 10:54 on  6 Feb 2019
 !DECK XSETF
 SUBROUTINE XSETF(Kontrl)
   IMPLICIT NONE
-  !*--XSETF5
-  !*** Start of declarations inserted by SPAG
   INTEGER J4SAVE, junk, Kontrl
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XSETF
   !***PURPOSE  Set the error control flag.
   !***LIBRARY   SLATEC (XERROR)

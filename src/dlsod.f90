@@ -1,12 +1,8 @@
-!*==DLSOD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DLSOD
 SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     Acor,Wm,Iwm,DJAC,Intout,Tstop,Tolfac,Delsgn,Rpar,Ipar)
   IMPLICIT NONE
-  !*--DLSOD6
-  !*** Start of declarations inserted by SPAG
   REAL DJAC
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DLSOD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DDEBDF

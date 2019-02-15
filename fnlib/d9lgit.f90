@@ -1,11 +1,7 @@
-!*==D9LGIT.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9LGIT
 REAL(8) FUNCTION D9LGIT(A,X,Algap1)
   IMPLICIT NONE
-  !*--D9LGIT5
-  !*** Start of declarations inserted by SPAG
   INTEGER k
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9LGIT
   !***SUBSIDIARY
   !***PURPOSE  Compute the logarithm of Tricomi's incomplete Gamma

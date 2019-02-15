@@ -1,8 +1,6 @@
-!*==CPOIR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CPOIR
 SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   IMPLICIT NONE
-  !*--CPOIR5
   !***BEGIN PROLOGUE  CPOIR
   !***PURPOSE  Solve a positive definite Hermitian system of linear
   !            equations.  Iterative refinement is used to obtain an

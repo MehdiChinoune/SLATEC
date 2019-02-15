@@ -1,8 +1,6 @@
-!*==CCOSH.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CCOSH
 COMPLEX FUNCTION CCOSH(Z)
   IMPLICIT NONE
-  !*--CCOSH5
   !***BEGIN PROLOGUE  CCOSH
   !***PURPOSE  Compute the complex hyperbolic cosine.
   !***LIBRARY   SLATEC (FNLIB)

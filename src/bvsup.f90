@@ -1,10 +1,7 @@
-!*==BVSUP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BVSUP
 SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Igofx,Re,Ae,Iflag,Work,Ndw,Iwork,Ndiw,Neqivp)
   IMPLICIT NONE
-  !*--BVSUP6
-  !*** Start of declarations inserted by SPAG
   REAL A, Ae, AED, Alpha, B, Beta, C, EPS, FOUru, PWCnd, PX, Re ,&
     RED, SQOvfl, SRU, TND, TOL, TWOu, URO, Work
   REAL X, XBEg, XENd, XOP, XOT, Xpts, XSAv, Y
@@ -20,7 +17,6 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nic, NICd, nitemp, non, NOPg, NPS, Nrowa, Nrowb, Nrowy ,&
     nrtemp, NSWot
   INTEGER NTApe, NTP, NUMort, Nxpts, NXPtsd, nxptsm
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BVSUP
   !***PURPOSE  Solve a linear two-point boundary value problem using
   !            superposition coupled with an orthonormalization procedure

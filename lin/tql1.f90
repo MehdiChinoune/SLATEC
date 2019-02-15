@@ -1,8 +1,6 @@
-!*==TQL1.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK TQL1
 SUBROUTINE TQL1(N,D,E,Ierr)
   IMPLICIT NONE
-  !*--TQL15
   !***BEGIN PROLOGUE  TQL1
   !***PURPOSE  Compute the eigenvalues of symmetric tridiagonal matrix by
   !            the QL method.

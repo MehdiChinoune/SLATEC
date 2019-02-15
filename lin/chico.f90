@@ -1,8 +1,6 @@
-!*==CHICO.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CHICO
 SUBROUTINE CHICO(A,Lda,N,Kpvt,Rcond,Z)
   IMPLICIT NONE
-  !*--CHICO5
   !***BEGIN PROLOGUE  CHICO
   !***PURPOSE  Factor a complex Hermitian matrix by elimination with sym-
   !            metric pivoting and estimate the condition of the matrix.

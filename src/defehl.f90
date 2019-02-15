@@ -1,12 +1,8 @@
-!*==DEFEHL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DEFEHL
 SUBROUTINE DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   IMPLICIT NONE
-  !*--DEFEHL5
-  !*** Start of declarations inserted by SPAG
   REAL ch, F1, F2, F3, F4, F5, H, Rpar, T, Y, Yp, Ys
   INTEGER Ipar, k, Neq
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DEFEHL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DERKF

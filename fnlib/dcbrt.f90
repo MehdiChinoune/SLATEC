@@ -1,12 +1,8 @@
-!*==DCBRT.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DCBRT
 REAL(8) FUNCTION DCBRT(X)
   IMPLICIT NONE
-  !*--DCBRT5
-  !*** Start of declarations inserted by SPAG
   INTEGER irem, iter, ixpnt, n, niter
   REAL z
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DCBRT
   !***PURPOSE  Compute the cube root.
   !***LIBRARY   SLATEC (FNLIB)

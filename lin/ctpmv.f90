@@ -1,8 +1,6 @@
-!*==CTPMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CTPMV
 SUBROUTINE CTPMV(Uplo,Trans,Diag,N,Ap,X,Incx)
   IMPLICIT NONE
-  !*--CTPMV5
   !***BEGIN PROLOGUE  CTPMV
   !***PURPOSE  Perform one of the matrix-vector operations.
   !***LIBRARY   SLATEC (BLAS)

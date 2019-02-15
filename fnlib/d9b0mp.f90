@@ -1,12 +1,8 @@
-!*==D9B0MP.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9B0MP
 SUBROUTINE D9B0MP(X,Ampl,Theta)
   IMPLICIT NONE
-  !*--D9B0MP5
-  !*** Start of declarations inserted by SPAG
   REAL eta
   INTEGER INITDS, nbm0, nbm02, nbt02, nbth0
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9B0MP
   !***SUBSIDIARY
   !***PURPOSE  Evaluate the modulus and phase for the J0 and Y0 Bessel

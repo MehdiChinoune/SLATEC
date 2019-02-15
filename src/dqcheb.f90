@@ -1,8 +1,6 @@
-!*==DQCHEB.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQCHEB
 SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   IMPLICIT NONE
-  !*--DQCHEB5
   !***BEGIN PROLOGUE  DQCHEB
   !***SUBSIDIARY
   !***PURPOSE  This routine computes the CHEBYSHEV series expansion

@@ -1,12 +1,8 @@
-!*==FAC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK FAC
 FUNCTION FAC(N)
   IMPLICIT NONE
-  !*--FAC5
-  !*** Start of declarations inserted by SPAG
   REAL FAC, facn, R9LGMC, sq2pil, x, xmax, xmin
   INTEGER N, nmax
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  FAC
   !***PURPOSE  Compute the factorial function.
   !***LIBRARY   SLATEC (FNLIB)

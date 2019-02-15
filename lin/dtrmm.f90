@@ -1,8 +1,6 @@
-!*==DTRMM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DTRMM
 SUBROUTINE DTRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   IMPLICIT NONE
-  !*--DTRMM5
   !***BEGIN PROLOGUE  DTRMM
   !***PURPOSE  Perform one of the matrix-matrix operations.
   !***LIBRARY   SLATEC (BLAS)

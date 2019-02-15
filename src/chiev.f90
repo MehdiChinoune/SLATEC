@@ -1,8 +1,6 @@
-!*==CHIEV.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CHIEV
 SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   IMPLICIT NONE
-  !*--CHIEV5
   !***BEGIN PROLOGUE  CHIEV
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a complex Hermitian matrix.

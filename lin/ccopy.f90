@@ -1,11 +1,7 @@
-!*==CCOPY.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CCOPY
 SUBROUTINE CCOPY(N,Cx,Incx,Cy,Incy)
   IMPLICIT NONE
-  !*--CCOPY5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Incx, Incy, kx, ky, N, ns
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CCOPY
   !***PURPOSE  Copy a vector.
   !***LIBRARY   SLATEC (BLAS)

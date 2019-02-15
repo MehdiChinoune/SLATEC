@@ -1,8 +1,6 @@
-!*==CBEG.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CBEG
 COMPLEX FUNCTION CBEG(Reset)
   IMPLICIT NONE
-  !*--CBEG5
   !***BEGIN PROLOGUE  CBEG
   !***SUBSIDIARY
   !***PURPOSE  Generate random numbers.

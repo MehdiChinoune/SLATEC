@@ -1,15 +1,11 @@
-!*==GAMIC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK GAMIC
 REAL FUNCTION GAMIC(A,X)
   IMPLICIT NONE
-  !*--GAMIC5
-  !*** Start of declarations inserted by SPAG
   REAL A, aeps, algap1, alneps, ALNGAM, alngs, alx, bot, e, eps, &
     fm, gstar, h, R1MACH, R9GMIC, R9GMIT, R9LGIC, R9LGIT, sga, &
     sgng
   REAL sgngam, sgngs, sqeps, t, X
   INTEGER izero, ma
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  GAMIC
   !***PURPOSE  Calculate the complementary incomplete Gamma function.
   !***LIBRARY   SLATEC (FNLIB)

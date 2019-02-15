@@ -1,11 +1,7 @@
-!*==WNNLS.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK WNNLS
 SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   IMPLICIT NONE
-  !*--WNNLS5
-  !*** Start of declarations inserted by SPAG
   INTEGER L, l1, l2, l3, l4, l5, liw, lw, Ma, Mdw, Me, Mode, N
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  WNNLS
   !***PURPOSE  Solve a linearly constrained least squares problem with
   !            equality constraints and nonnegativity constraints on

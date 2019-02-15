@@ -1,11 +1,7 @@
-!*==DXCON.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DXCON
 SUBROUTINE DXCON(X,Ix,Ierror)
   IMPLICIT NONE
-  !*--DXCON5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, i1, icase, Ierror, ispace, itemp, j, j1, j2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXCON
   !***PURPOSE  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.

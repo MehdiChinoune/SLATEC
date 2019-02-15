@@ -1,12 +1,8 @@
-!*==STOD.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK STOD
 SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   IMPLICIT NONE
-  !*--STOD5
-  !*** Start of declarations inserted by SPAG
   INTEGER IOD, Ipar, JAC, KSTeps
   REAL Rpar
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  STOD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DEBDF

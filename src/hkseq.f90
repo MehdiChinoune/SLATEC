@@ -1,8 +1,6 @@
-!*==HKSEQ.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK HKSEQ
 SUBROUTINE HKSEQ(X,M,H,Ierr)
   IMPLICIT NONE
-  !*--HKSEQ5
   !***BEGIN PROLOGUE  HKSEQ
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BSKIN

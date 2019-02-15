@@ -1,11 +1,7 @@
-!*==TEST46.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK TEST46
 PROGRAM TEST46
   IMPLICIT NONE
-  !*--TEST465
-  !*** Start of declarations inserted by SPAG
   INTEGER I1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TEST46
   !***PURPOSE  Driver for testing SLATEC subprograms
   !            DDRIV1  DDRIV2  DDRIV3

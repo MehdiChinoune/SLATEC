@@ -1,12 +1,8 @@
-!*==R9LGMC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK R9LGMC
 FUNCTION R9LGMC(X)
   IMPLICIT NONE
-  !*--R9LGMC5
-  !*** Start of declarations inserted by SPAG
   REAL algmcs, CSEVL, R1MACH, R9LGMC, X, xbig, xmax
   INTEGER INITS, nalgm
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9LGMC
   !***SUBSIDIARY
   !***PURPOSE  Compute the log Gamma correction factor so that

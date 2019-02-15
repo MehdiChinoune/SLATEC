@@ -1,9 +1,7 @@
-!*==DQAWS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQAWS
 SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
     Ier,Limit,Lenw,Last,Iwork,Work)
   IMPLICIT NONE
-  !*--DQAWS6
   !***BEGIN PROLOGUE  DQAWS
   !***PURPOSE  The routine calculates an approximation result to a given
   !            definite integral I = Integral of F*W over (A,B),

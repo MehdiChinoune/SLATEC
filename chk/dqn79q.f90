@@ -1,8 +1,6 @@
-!*==DQN79Q.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DQN79Q
 SUBROUTINE DQN79Q(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DQN79Q5
   !***BEGIN PROLOGUE  DQN79Q
   !***PURPOSE  Quick check for DQNC79.
   !***LIBRARY   SLATEC

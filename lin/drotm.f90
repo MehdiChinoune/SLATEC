@@ -1,11 +1,7 @@
-!*==DROTM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DROTM
 SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
   IMPLICIT NONE
-  !*--DROTM5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Incx, Incy, kx, ky, N, nsteps
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DROTM
   !***PURPOSE  Apply a modified Givens transformation.
   !***LIBRARY   SLATEC (BLAS)

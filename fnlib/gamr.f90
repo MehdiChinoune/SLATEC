@@ -1,12 +1,8 @@
-!*==GAMR.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK GAMR
 FUNCTION GAMR(X)
   IMPLICIT NONE
-  !*--GAMR5
-  !*** Start of declarations inserted by SPAG
   REAL alngx, GAMMA, GAMR, sgngx, X
   INTEGER irold
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  GAMR
   !***PURPOSE  Compute the reciprocal of the Gamma function.
   !***LIBRARY   SLATEC (FNLIB)

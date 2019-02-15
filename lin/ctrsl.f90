@@ -1,8 +1,6 @@
-!*==CTRSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CTRSL
 SUBROUTINE CTRSL(T,Ldt,N,B,Job,Info)
   IMPLICIT NONE
-  !*--CTRSL5
   !***BEGIN PROLOGUE  CTRSL
   !***PURPOSE  Solve a system of the form  T*X=B or CTRANS(T)*X=B, where
   !            T is a triangular matrix.  Here CTRANS(T) is the conjugate

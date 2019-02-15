@@ -1,8 +1,6 @@
-!*==DPCHKT.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DPCHKT
 SUBROUTINE DPCHKT(N,X,Knotyp,T)
   IMPLICIT NONE
-  !*--DPCHKT5
   !***BEGIN PROLOGUE  DPCHKT
   !***SUBSIDIARY
   !***PURPOSE  Compute B-spline knot sequence for DPCHBS.

@@ -1,11 +1,7 @@
-!*==DCHU.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DCHU
 REAL(8) FUNCTION DCHU(A,B,X)
   IMPLICIT NONE
-  !*--DCHU5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, istrt, m, n
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DCHU
   !***PURPOSE  Compute the logarithmic confluent hypergeometric function.
   !***LIBRARY   SLATEC (FNLIB)

@@ -1,8 +1,6 @@
-!*==CFNCK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CFNCK
 SUBROUTINE CFNCK(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--CFNCK5
   !***BEGIN PROLOGUE  CFNCK
   !***PURPOSE  Quick check for the complex Fullerton special functions.
   !***LIBRARY   SLATEC

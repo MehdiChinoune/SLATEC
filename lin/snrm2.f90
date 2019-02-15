@@ -1,11 +1,7 @@
-!*==SNRM2.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SNRM2
 REAL FUNCTION SNRM2(N,Sx,Incx)
   IMPLICIT NONE
-  !*--SNRM25
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Incx, j, N, nn
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SNRM2
   !***PURPOSE  Compute the Euclidean length (L2 norm) of a vector.
   !***LIBRARY   SLATEC (BLAS)

@@ -1,13 +1,9 @@
-!*==U12US.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK U12US
 SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   IMPLICIT NONE
-  !*--U12US5
-  !*** Start of declarations inserted by SPAG
   REAL A, B, bb, H, Rnorm, SDOT, SNRM2, tt, W
   INTEGER i, ij, ip1, j, jb, k, kp1, Krank, M, Mda, Mdb, mmk, &
     Mode, N, Nb
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  U12US
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ULSIA

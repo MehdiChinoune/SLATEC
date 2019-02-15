@@ -1,8 +1,6 @@
-!*==ZAIRY.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZAIRY
 SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
   IMPLICIT NONE
-  !*--ZAIRY5
   !***BEGIN PROLOGUE  ZAIRY
   !***PURPOSE  Compute the Airy function Ai(z) or its derivative dAi/dz
   !            for complex argument z.  A scaling option is available

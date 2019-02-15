@@ -1,11 +1,7 @@
-!*==CQAGP.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CQAGP
 SUBROUTINE CQAGP(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--CQAGP5
-  !*** Start of declarations inserted by SPAG
   INTEGER ierv
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CQAGP
   !***PURPOSE  Quick check for QAGP.
   !***LIBRARY   SLATEC

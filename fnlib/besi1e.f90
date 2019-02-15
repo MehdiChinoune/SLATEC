@@ -1,13 +1,9 @@
-!*==BESI1E.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK BESI1E
 FUNCTION BESI1E(X)
   IMPLICIT NONE
-  !*--BESI1E5
-  !*** Start of declarations inserted by SPAG
   REAL ai12cs, ai1cs, BESI1E, bi1cs, CSEVL, R1MACH, X, xmin, xsml, &
     y
   INTEGER INITS, ntai1, ntai12, nti1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESI1E
   !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order one.

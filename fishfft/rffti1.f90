@@ -1,14 +1,10 @@
-!*==RFFTI1.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK RFFTI1
 SUBROUTINE RFFTI1(N,Wa,Ifac)
   IMPLICIT NONE
-  !*--RFFTI15
-  !*** Start of declarations inserted by SPAG
   REAL arg, argh, argld, fi, tpi, Wa
   INTEGER i, ib, ido, Ifac, ii, ip, ipm, is, j, k1, l1, l2, ld, &
     N, nf, nfm1, nl, nq, nr, ntry
   INTEGER ntryh
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RFFTI1
   !***PURPOSE  Initialize a real and an integer work array for RFFTF1 and
   !            RFFTB1.

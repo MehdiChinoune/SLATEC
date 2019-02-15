@@ -1,8 +1,6 @@
-!*==DBETA.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBETA
 REAL(8) FUNCTION DBETA(A,B)
   IMPLICIT NONE
-  !*--DBETA5
   !***BEGIN PROLOGUE  DBETA
   !***PURPOSE  Compute the complete Beta function.
   !***LIBRARY   SLATEC (FNLIB)

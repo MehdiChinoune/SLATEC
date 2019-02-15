@@ -1,11 +1,7 @@
-!*==FMAT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK FMAT
 SUBROUTINE FMAT(X,Y,Yp)
   IMPLICIT NONE
-  !*--FMAT5
-  !*** Start of declarations inserted by SPAG
   REAL tanx, TERm, X, XSAve, Y, Yp
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  FMAT
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

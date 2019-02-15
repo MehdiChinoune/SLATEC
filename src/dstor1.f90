@@ -1,8 +1,6 @@
-!*==DSTOR1.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DSTOR1
 SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   IMPLICIT NONE
-  !*--DSTOR15
   !***BEGIN PROLOGUE  DSTOR1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBVSUP

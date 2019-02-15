@@ -1,4 +1,3 @@
-!*==DULSIA.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DULSIA
 SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
     W,Lw,Iwork,Liw,Info)
@@ -169,12 +168,9 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DULSIA
   IMPLICIT NONE
-  !*--DULSIA172
-  !*** Start of declarations inserted by SPAG
   REAL(8) :: A, Ae, B, eps, Re, Rnorm, W
   INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, m1, m2, &
     m3, m4, m5, Mda, Mdb, Mode, N, Nb, Np
-  !*** End of declarations inserted by SPAG
   REAL(8) :: D1MACH
   DIMENSION A(Mda,*), B(Mdb,*), Re(*), Ae(*), Rnorm(*), W(*)
   INTEGER Iwork(*)

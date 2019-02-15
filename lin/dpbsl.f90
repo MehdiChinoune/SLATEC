@@ -1,8 +1,6 @@
-!*==DPBSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DPBSL
 SUBROUTINE DPBSL(Abd,Lda,N,M,B)
   IMPLICIT NONE
-  !*--DPBSL5
   !***BEGIN PROLOGUE  DPBSL
   !***PURPOSE  Solve a real symmetric positive definite band system
   !            using the factors computed by DPBCO or DPBFA.

@@ -1,12 +1,8 @@
-!*==R9LGIC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK R9LGIC
 FUNCTION R9LGIC(A,X,Alx)
   IMPLICIT NONE
-  !*--R9LGIC5
-  !*** Start of declarations inserted by SPAG
   REAL A, Alx, eps, fk, p, r, R1MACH, R9LGIC, s, t, X, xma, xpa
   INTEGER k
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9LGIC
   !***SUBSIDIARY
   !***PURPOSE  Compute the log complementary incomplete Gamma function

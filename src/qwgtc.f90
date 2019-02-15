@@ -1,8 +1,6 @@
-!*==QWGTC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QWGTC
 REAL FUNCTION QWGTC(X,C,P2,P3,P4,Kp)
   IMPLICIT NONE
-  !*--QWGTC5
   !***BEGIN PROLOGUE  QWGTC
   !***SUBSIDIARY
   !***PURPOSE  This function subprogram is used together with the

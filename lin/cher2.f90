@@ -1,8 +1,6 @@
-!*==CHER2.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CHER2
 SUBROUTINE CHER2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
   IMPLICIT NONE
-  !*--CHER25
   !***BEGIN PROLOGUE  CHER2
   !***PURPOSE  Perform Hermitian rank 2 update of a complex Hermitian
   !            matrix.

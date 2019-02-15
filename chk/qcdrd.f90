@@ -1,8 +1,6 @@
-!*==QCDRD.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QCDRD
 SUBROUTINE QCDRD(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QCDRD5
   !***BEGIN PROLOGUE  QCDRD
   !***PURPOSE  Quick check for DRD.
   !***LIBRARY   SLATEC

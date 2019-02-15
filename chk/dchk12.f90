@@ -1,10 +1,8 @@
-!*==DCHK12.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DCHK12
 SUBROUTINE DCHK12(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
     Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,&
     Y,Yy,Ys,Yt,G)
   IMPLICIT NONE
-  !*--DCHK127
   !***BEGIN PROLOGUE  DCHK12
   !***SUBSIDIARY
   !***PURPOSE  Test DGEMV and DGBMV.

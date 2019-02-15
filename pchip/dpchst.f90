@@ -1,8 +1,6 @@
-!*==DPCHST.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DPCHST
 REAL(8) FUNCTION DPCHST(Arg1,Arg2)
   IMPLICIT NONE
-  !*--DPCHST5
   !***BEGIN PROLOGUE  DPCHST
   !***SUBSIDIARY
   !***PURPOSE  DPCHIP Sign-Testing Routine

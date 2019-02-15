@@ -1,12 +1,8 @@
-!*==DDAWS.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DDAWS
 REAL(8) FUNCTION DDAWS(X)
   IMPLICIT NONE
-  !*--DDAWS5
-  !*** Start of declarations inserted by SPAG
   REAL eps
   INTEGER INITDS, ntdaw, ntdaw2, ntdawa
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DDAWS
   !***PURPOSE  Compute Dawson's function.
   !***LIBRARY   SLATEC (FNLIB)

@@ -1,8 +1,6 @@
-!*==HSRTQC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK HSRTQC
 SUBROUTINE HSRTQC(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--HSRTQC5
   !***BEGIN PROLOGUE  HSRTQC
   !***SUBSIDIARY
   !***PURPOSE  Quick check for SLATEC routine HPSORT, HPPERM

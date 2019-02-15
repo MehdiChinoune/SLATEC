@@ -1,8 +1,6 @@
-!*==SGEFA.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SGEFA
 SUBROUTINE SGEFA(A,Lda,N,Ipvt,Info)
   IMPLICIT NONE
-  !*--SGEFA5
   !***BEGIN PROLOGUE  SGEFA
   !***PURPOSE  Factor a matrix using Gaussian elimination.
   !***LIBRARY   SLATEC (LINPACK)

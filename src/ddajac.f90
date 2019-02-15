@@ -1,9 +1,7 @@
-!*==DDAJAC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DDAJAC
 SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
     Uround,JAC,Rpar,Ipar,Ntemp)
   IMPLICIT NONE
-  !*--DDAJAC6
   !***BEGIN PROLOGUE  DDAJAC
   !***SUBSIDIARY
   !***PURPOSE  Compute the iteration matrix for DDASSL and form the

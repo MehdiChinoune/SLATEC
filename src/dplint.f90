@@ -1,8 +1,6 @@
-!*==DPLINT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DPLINT
 SUBROUTINE DPLINT(N,X,Y,C)
   IMPLICIT NONE
-  !*--DPLINT5
   !***BEGIN PROLOGUE  DPLINT
   !***PURPOSE  Produce the polynomial which interpolates a set of discrete
   !            data points.

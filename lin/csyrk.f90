@@ -1,8 +1,6 @@
-!*==CSYRK.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CSYRK
 SUBROUTINE CSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   IMPLICIT NONE
-  !*--CSYRK5
   !***BEGIN PROLOGUE  CSYRK
   !***PURPOSE  Perform symmetric rank k update of a complex symmetric
   !            matrix.

@@ -1,8 +1,6 @@
-!*==DPCHQ5.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DPCHQ5
 SUBROUTINE DPCHQ5(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DPCHQ55
   !***BEGIN PROLOGUE  DPCHQ5
   !***PURPOSE  Test the PCH to B-spline conversion routine DPCHBS.
   !***LIBRARY   SLATEC (PCHIP)

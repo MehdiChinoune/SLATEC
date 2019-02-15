@@ -1,8 +1,6 @@
-!*==DLNGAM.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DLNGAM
 REAL(8) FUNCTION DLNGAM(X)
   IMPLICIT NONE
-  !*--DLNGAM5
   !***BEGIN PROLOGUE  DLNGAM
   !***PURPOSE  Compute the logarithm of the absolute value of the Gamma
   !            function.

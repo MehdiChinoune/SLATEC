@@ -1,8 +1,6 @@
-!*==DGEQC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DGEQC
 SUBROUTINE DGEQC(Lun,Kprint,Nerr)
   IMPLICIT NONE
-  !*--DGEQC5
   !***BEGIN PROLOGUE  DGEQC
   !***PURPOSE  Quick check for DGEFS.
   !***LIBRARY   SLATEC

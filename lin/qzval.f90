@@ -1,8 +1,6 @@
-!*==QZVAL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK QZVAL
 SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
   IMPLICIT NONE
-  !*--QZVAL5
   !***BEGIN PROLOGUE  QZVAL
   !***PURPOSE  The third step of the QZ algorithm for generalized
   !            eigenproblems.  Accepts a pair of real matrices, one in

@@ -1,8 +1,6 @@
-!*==DRC6J.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DRC6J
 SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   IMPLICIT NONE
-  !*--DRC6J5
   !***BEGIN PROLOGUE  DRC6J
   !***PURPOSE  Evaluate the 6j symbol h(L1) = {L1 L2 L3}
   !                                           {L4 L5 L6}

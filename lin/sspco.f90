@@ -1,8 +1,6 @@
-!*==SSPCO.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSPCO
 SUBROUTINE SSPCO(Ap,N,Kpvt,Rcond,Z)
   IMPLICIT NONE
-  !*--SSPCO5
   !***BEGIN PROLOGUE  SSPCO
   !***PURPOSE  Factor a real symmetric matrix stored in packed form
   !            by elimination with symmetric pivoting and estimate the

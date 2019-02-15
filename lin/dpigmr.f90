@@ -1,10 +1,8 @@
-!*==DPIGMR.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DPIGMR
 SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     MSOLVE,Nmsl,Z,V,Hes,Q,Lgmr,Rpar,Ipar,Wk,Dl,Rhol,Nrmax,B,&
     Bnrm,X,Xl,Itol,Tol,Nelt,Ia,Ja,A,Isym,Iunit,Iflag,Err)
   IMPLICIT NONE
-  !*--DPIGMR7
   !***BEGIN PROLOGUE  DPIGMR
   !***SUBSIDIARY
   !***PURPOSE  Internal routine for DGMRES.

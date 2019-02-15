@@ -1,8 +1,6 @@
-!*==DQK15W.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQK15W
 SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   IMPLICIT NONE
-  !*--DQK15W5
   !***BEGIN PROLOGUE  DQK15W
   !***PURPOSE  To compute I = Integral of F*W over (A,B), with error
   !                           estimate

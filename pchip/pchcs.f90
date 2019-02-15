@@ -1,8 +1,6 @@
-!*==PCHCS.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK PCHCS
 SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   IMPLICIT NONE
-  !*--PCHCS5
   !***BEGIN PROLOGUE  PCHCS
   !***SUBSIDIARY
   !***PURPOSE  Adjusts derivative values for PCHIC

@@ -1,8 +1,6 @@
-!*==CNBSL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CNBSL
 SUBROUTINE CNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   IMPLICIT NONE
-  !*--CNBSL5
   !***BEGIN PROLOGUE  CNBSL
   !***PURPOSE  Solve a complex band system using the factors computed by
   !            CNBCO or CNBFA.

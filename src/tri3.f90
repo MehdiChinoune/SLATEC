@@ -1,13 +1,9 @@
-!*==TRI3.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK TRI3
 SUBROUTINE TRI3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
   IMPLICIT NONE
-  !*--TRI35
-  !*** Start of declarations inserted by SPAG
   REAL A, B, C, D, Tcos, W1, W2, W3, x, xx, Y1, Y2, Y3, z
   INTEGER i, ip, K, k1, k2, k2k3k4, k3, k4, kint1, kint2, kint3, &
     l1, l2, l3, lint1, lint2, lint3, M, mm1, n
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TRI3
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to GENBUN

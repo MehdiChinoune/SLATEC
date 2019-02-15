@@ -1,11 +1,7 @@
-!*==TEST24.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK TEST24
 PROGRAM TEST24
   IMPLICIT NONE
-  !*--TEST245
-  !*** Start of declarations inserted by SPAG
   INTEGER I1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TEST24
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC

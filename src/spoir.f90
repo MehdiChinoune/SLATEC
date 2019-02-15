@@ -1,8 +1,6 @@
-!*==SPOIR.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SPOIR
 SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   IMPLICIT NONE
-  !*--SPOIR5
   !***BEGIN PROLOGUE  SPOIR
   !***PURPOSE  Solve a positive definite symmetric system of linear
   !            equations.  Iterative refinement is used to obtain an error

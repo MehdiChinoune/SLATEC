@@ -1,8 +1,6 @@
-!*==CTRSM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CTRSM
 SUBROUTINE CTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   IMPLICIT NONE
-  !*--CTRSM5
   !***BEGIN PROLOGUE  CTRSM
   !***PURPOSE  Solve a complex triangular system of equations with
   !            multiple right-hand sides.

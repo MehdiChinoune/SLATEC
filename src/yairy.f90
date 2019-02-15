@@ -1,8 +1,6 @@
-!*==YAIRY.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK YAIRY
 SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
   IMPLICIT NONE
-  !*--YAIRY5
   !***BEGIN PROLOGUE  YAIRY
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BESJ and BESY

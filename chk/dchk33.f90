@@ -1,9 +1,7 @@
-!*==DCHK33.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DCHK33
 SUBROUTINE DCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
     Nmax,A,Aa,As,B,Bb,Bs,Ct,G,C)
   IMPLICIT NONE
-  !*--DCHK336
   !***BEGIN PROLOGUE  DCHK33
   !***SUBSIDIARY
   !***PURPOSE  Test DTRMM and DTRSM.

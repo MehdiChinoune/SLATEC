@@ -1,8 +1,6 @@
-!*==SGEQC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SGEQC
 SUBROUTINE SGEQC(Lun,Kprint,Nerr)
   IMPLICIT NONE
-  !*--SGEQC5
   !***BEGIN PROLOGUE  SGEQC
   !***PURPOSE  Quick check for SGEFS and SGEIR.
   !***LIBRARY   SLATEC

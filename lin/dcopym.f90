@@ -1,11 +1,7 @@
-!*==DCOPYM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DCOPYM
 SUBROUTINE DCOPYM(N,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
-  !*--DCOPYM5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DCOPYM
   !***PURPOSE  Copy the negative of a vector to a vector.
   !***LIBRARY   SLATEC (BLAS)

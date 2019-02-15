@@ -1,11 +1,7 @@
-!*==DPOCH1.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DPOCH1
 REAL(8) FUNCTION DPOCH1(A,X)
   IMPLICIT NONE
-  !*--DPOCH15
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ii, incr, j, k, ndx, nterms
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPOCH1
   !***PURPOSE  Calculate a generalization of Pochhammer's symbol starting
   !            from first order.

@@ -1,11 +1,7 @@
-!*==CGEEV.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CGEEV
 SUBROUTINE CGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   IMPLICIT NONE
-  !*--CGEEV5
-  !*** Start of declarations inserted by SPAG
   INTEGER Job, m
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CGEEV
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a complex general matrix.

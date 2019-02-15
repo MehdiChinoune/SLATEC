@@ -1,8 +1,6 @@
-!*==EVPCCK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK EVPCCK
 SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
   IMPLICIT NONE
-  !*--EVPCCK5
   !***BEGIN PROLOGUE  EVPCCK
   !***SUBSIDIARY
   !***PURPOSE  Test usage of increment argument in PCHFD and PCHFE for

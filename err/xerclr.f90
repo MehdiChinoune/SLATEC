@@ -1,11 +1,7 @@
-!*==XERCLR.f90  processed by SPAG 6.72Dc at 10:54 on  6 Feb 2019
 !DECK XERCLR
 SUBROUTINE XERCLR
   IMPLICIT NONE
-  !*--XERCLR5
-  !*** Start of declarations inserted by SPAG
   INTEGER J4SAVE, junk
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XERCLR
   !***PURPOSE  Reset current error number to zero.
   !***LIBRARY   SLATEC (XERROR)

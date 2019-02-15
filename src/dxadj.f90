@@ -1,11 +1,7 @@
-!*==DXADJ.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DXADJ
 SUBROUTINE DXADJ(X,Ix,Ierror)
   IMPLICIT NONE
-  !*--DXADJ5
-  !*** Start of declarations inserted by SPAG
   INTEGER Ierror
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXADJ
   !***PURPOSE  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.

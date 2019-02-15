@@ -1,13 +1,9 @@
-!*==SOS.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SOS
 SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   IMPLICIT NONE
-  !*--SOS5
-  !*** Start of declarations inserted by SPAG
   REAL Atolx, FNC, Rtolx, Rw, Tolf, X
   INTEGER Iflag, inpflg, iprint, Iw, k1, k2, k3, k4, k5, k6, Liw ,&
     Lrw, mxit, nc, ncjs, Neq, nsri, nsrrc
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SOS
   !***PURPOSE  Solve a square system of nonlinear equations.
   !***LIBRARY   SLATEC

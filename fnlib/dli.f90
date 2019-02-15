@@ -1,8 +1,6 @@
-!*==DLI.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DLI
 REAL(8) FUNCTION DLI(X)
   IMPLICIT NONE
-  !*--DLI5
   !***BEGIN PROLOGUE  DLI
   !***PURPOSE  Compute the logarithmic integral.
   !***LIBRARY   SLATEC (FNLIB)

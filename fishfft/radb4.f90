@@ -1,13 +1,9 @@
-!*==RADB4.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK RADB4
 SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   IMPLICIT NONE
-  !*--RADB45
-  !*** Start of declarations inserted by SPAG
   REAL Cc, Ch, ci2, ci3, ci4, cr2, cr3, cr4, sqrt2, ti1, ti2, &
     ti3, ti4, tr1, tr2, tr3, tr4, Wa1, Wa2, Wa3
   INTEGER i, ic, Ido, idp2, k, L1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RADB4
   !***SUBSIDIARY
   !***PURPOSE  Calculate the fast Fourier transform of subvectors of

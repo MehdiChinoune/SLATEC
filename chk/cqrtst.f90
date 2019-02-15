@@ -1,12 +1,8 @@
-!*==CQRTST.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CQRTST
 SUBROUTINE CQRTST(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--CQRTST5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr, NUMXER
   REAL R1MACH, tol
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CQRTST
   !***PURPOSE  Quick check for CPQR79.
   !***LIBRARY   SLATEC

@@ -1,8 +1,6 @@
-!*==DQK41.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQK41
 SUBROUTINE DQK41(F,A,B,Result,Abserr,Resabs,Resasc)
   IMPLICIT NONE
-  !*--DQK415
   !***BEGIN PROLOGUE  DQK41
   !***PURPOSE  To compute I = Integral of F over (A,B), with error
   !                           estimate

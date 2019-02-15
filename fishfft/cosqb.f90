@@ -1,12 +1,8 @@
-!*==COSQB.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK COSQB
 SUBROUTINE COSQB(N,X,Wsave)
   IMPLICIT NONE
-  !*--COSQB5
-  !*** Start of declarations inserted by SPAG
   INTEGER N
   REAL tsqrt2, Wsave, X, x1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  COSQB
   !***PURPOSE  Compute the unnormalized inverse cosine transform.
   !***LIBRARY   SLATEC (FFTPACK)

@@ -1,12 +1,8 @@
-!*==DBIE.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBIE
 REAL(8) FUNCTION DBIE(X)
   IMPLICIT NONE
-  !*--DBIE5
-  !*** Start of declarations inserted by SPAG
   REAL eta
   INTEGER INITDS, nbif, nbif2, nbig, nbig2, nbip1, nbip2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBIE
   !***PURPOSE  Calculate the Bairy function for a negative argument and an
   !            exponentially scaled Bairy function for a non-negative

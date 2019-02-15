@@ -1,12 +1,8 @@
-!*==TRIS4.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK TRIS4
 SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
   IMPLICIT NONE
-  !*--TRIS45
-  !*** Start of declarations inserted by SPAG
   REAL A, an, B, bn, C, D, den, U, v, Z
   INTEGER j, k, N, nm1, nm2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TRIS4
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPX4

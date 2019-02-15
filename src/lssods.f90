@@ -1,17 +1,13 @@
-!*==LSSODS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK LSSODS
 SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
     Resnrm,Xnorm,Z,R,Div,Td,Scales)
   IMPLICIT NONE
-  !*--LSSODS6
-  !*** Start of declarations inserted by SPAG
   REAL A, acc, B, Diag, Div, gam, gamma, Q, R, R1MACH, Resnrm, &
     Scales, SDOT, SDSDOT, Td, uro, X, Xnorm, Z, znorm
   REAL znrm0
   INTEGER Iflag, Irank, irm, irp, Iscale, it, Iter, iterp, j, &
     J4SAVE, k, kp, Kpivot, l, M, maxmes, mj, mmir, N, nfat
   INTEGER nfatal, nmir, Nrda
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  LSSODS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

@@ -1,8 +1,6 @@
-!*==DGBDI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DGBDI
 SUBROUTINE DGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
   IMPLICIT NONE
-  !*--DGBDI5
   !***BEGIN PROLOGUE  DGBDI
   !***PURPOSE  Compute the determinant of a band matrix using the factors
   !            computed by DGBCO or DGBFA.

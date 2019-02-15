@@ -1,11 +1,7 @@
-!*==RPZERO.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK RPZERO
 SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
   IMPLICIT NONE
-  !*--RPZERO5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Iflg, N, n1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RPZERO
   !***PURPOSE  Find the zeros of a polynomial with real coefficients.
   !***LIBRARY   SLATEC

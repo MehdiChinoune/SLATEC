@@ -1,12 +1,8 @@
-!*==DERFC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DERFC
 REAL(8) FUNCTION DERFC(X)
   IMPLICIT NONE
-  !*--DERFC5
-  !*** Start of declarations inserted by SPAG
   REAL eta
   INTEGER INITDS, nterc2, nterf, nterfc
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DERFC
   !***PURPOSE  Compute the complementary error function.
   !***LIBRARY   SLATEC (FNLIB)

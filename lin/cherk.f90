@@ -1,8 +1,6 @@
-!*==CHERK.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CHERK
 SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   IMPLICIT NONE
-  !*--CHERK5
   !***BEGIN PROLOGUE  CHERK
   !***PURPOSE  Perform Hermitian rank k update of a complex Hermitian
   !            matrix.

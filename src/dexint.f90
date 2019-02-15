@@ -1,8 +1,6 @@
-!*==DEXINT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DEXINT
 SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   IMPLICIT NONE
-  !*--DEXINT5
   !***BEGIN PROLOGUE  DEXINT
   !***PURPOSE  Compute an M member sequence of exponential integrals
   !            E(N+K,X), K=0,1,...,M-1 for N .GE. 1 and X .GE. 0.

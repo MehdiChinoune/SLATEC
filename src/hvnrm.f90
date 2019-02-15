@@ -1,12 +1,8 @@
-!*==HVNRM.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK HVNRM
 FUNCTION HVNRM(V,Ncomp)
   IMPLICIT NONE
-  !*--HVNRM5
-  !*** Start of declarations inserted by SPAG
   REAL HVNRM, V
   INTEGER k, Ncomp
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HVNRM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DEABM, DEBDF and DERKF

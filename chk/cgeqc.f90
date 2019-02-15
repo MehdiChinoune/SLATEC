@@ -1,8 +1,6 @@
-!*==CGEQC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CGEQC
 SUBROUTINE CGEQC(Lun,Kprint,Nerr)
   IMPLICIT NONE
-  !*--CGEQC5
   !***BEGIN PROLOGUE  CGEQC
   !***PURPOSE  Quick check for CGEFS and CGEIR.
   !***LIBRARY   SLATEC

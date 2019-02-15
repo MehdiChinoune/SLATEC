@@ -1,9 +1,6 @@
-!*==STWAY.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK STWAY
 SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
   IMPLICIT NONE
-  !*--STWAY5
-  !*** Start of declarations inserted by SPAG
   REAL AE, C, PWCnd, PX, RE, Stowa, TND, TOL, U, V, X, XBEg, &
     XENd, XOP, XOT, XSAv, Yhp
   INTEGER ICOco, IGOfx, INDpvt, INFo, INHomo, Inout, INTeg, ISTkop, &
@@ -11,7 +8,6 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
     MXNon, NCOmp
   INTEGER NDIsk, NEQ, NEQivp, NFC, NFCc, NIC, NOPg, NPS, NSWot, &
     NTApe, NTP, NUMort, NXPts
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  STWAY
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

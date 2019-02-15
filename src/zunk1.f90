@@ -1,8 +1,6 @@
-!*==ZUNK1.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZUNK1
 SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--ZUNK15
   !***BEGIN PROLOGUE  ZUNK1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESK

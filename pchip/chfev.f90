@@ -1,8 +1,6 @@
-!*==CHFEV.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK CHFEV
 SUBROUTINE CHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   IMPLICIT NONE
-  !*--CHFEV5
   !***BEGIN PROLOGUE  CHFEV
   !***PURPOSE  Evaluate a cubic polynomial given in Hermite form at an
   !            array of points.  While designed for use by PCHFE, it may

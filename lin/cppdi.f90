@@ -1,8 +1,6 @@
-!*==CPPDI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CPPDI
 SUBROUTINE CPPDI(Ap,N,Det,Job)
   IMPLICIT NONE
-  !*--CPPDI5
   !***BEGIN PROLOGUE  CPPDI
   !***PURPOSE  Compute the determinant and inverse of a complex Hermitian
   !            positive definite matrix using factors from CPPCO or CPPFA.

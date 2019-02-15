@@ -1,11 +1,7 @@
-!*==MPMLP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK MPMLP
 SUBROUTINE MPMLP(U,V,W,J)
   IMPLICIT NONE
-  !*--MPMLP5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, J
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPMLP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI

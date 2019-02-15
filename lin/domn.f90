@@ -1,10 +1,8 @@
-!*==DOMN.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DOMN
 SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,&
     Iwork)
   IMPLICIT NONE
-  !*--DOMN7
   !***BEGIN PROLOGUE  DOMN
   !***PURPOSE  Preconditioned Orthomin Sparse Iterative Ax=b Solver.
   !            Routine to solve a general linear system  Ax = b  using

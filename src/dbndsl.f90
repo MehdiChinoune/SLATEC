@@ -1,4 +1,3 @@
-!*==DBNDSL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DBNDSL
 SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !***BEGIN PROLOGUE  DBNDSL
@@ -189,12 +188,9 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DBNDSL
   IMPLICIT NONE
-  !*--DBNDSL192
-  !*** Start of declarations inserted by SPAG
   REAL(8) :: G, Rnorm, rsq, s, X, zero
   INTEGER i, i1, i2, ie, ii, iopt, Ip, Ir, irm1, ix, j, jg, l, &
     Mdg, Mode, N, Nb, nerr, np1
-  !*** End of declarations inserted by SPAG
   DIMENSION G(Mdg,*), X(*)
   !***FIRST EXECUTABLE STATEMENT  DBNDSL
   zero = 0.D0

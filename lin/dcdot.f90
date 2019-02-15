@@ -1,8 +1,6 @@
-!*==DCDOT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DCDOT
 SUBROUTINE DCDOT(N,Fm,Cx,Incx,Cy,Incy,Dcr,Dci)
   IMPLICIT NONE
-  !*--DCDOT5
   !***BEGIN PROLOGUE  DCDOT
   !***PURPOSE  Compute the inner product of two vectors with extended
   !            precision accumulation and result.

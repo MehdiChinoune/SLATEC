@@ -1,8 +1,6 @@
-!*==IMTQL1.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK IMTQL1
 SUBROUTINE IMTQL1(N,D,E,Ierr)
   IMPLICIT NONE
-  !*--IMTQL15
   !***BEGIN PROLOGUE  IMTQL1
   !***PURPOSE  Compute the eigenvalues of a symmetric tridiagonal matrix
   !            using the implicit QL method.

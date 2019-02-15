@@ -1,12 +1,8 @@
-!*==TEVLS.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK TEVLS
 SUBROUTINE TEVLS(N,D,E2,Ierr)
   IMPLICIT NONE
-  !*--TEVLS5
-  !*** Start of declarations inserted by SPAG
   REAL CNV, dhold
   INTEGER IK, K, NCMplx, nhalf, NM, NPP, ntop
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TEVLS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI

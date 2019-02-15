@@ -1,12 +1,8 @@
-!*==PASSF2.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK PASSF2
 SUBROUTINE PASSF2(Ido,L1,Cc,Ch,Wa1)
   IMPLICIT NONE
-  !*--PASSF25
-  !*** Start of declarations inserted by SPAG
   REAL Cc, Ch, ti2, tr2, Wa1
   INTEGER i, Ido, k, L1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PASSF2
   !***SUBSIDIARY
   !***PURPOSE  Calculate the fast Fourier transform of subvectors of

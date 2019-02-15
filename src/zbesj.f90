@@ -1,8 +1,6 @@
-!*==ZBESJ.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZBESJ
 SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   IMPLICIT NONE
-  !*--ZBESJ5
   !***BEGIN PROLOGUE  ZBESJ
   !***PURPOSE  Compute a sequence of the Bessel functions J(a,z) for
   !            complex argument z and real nonnegative orders a=b,b+1,

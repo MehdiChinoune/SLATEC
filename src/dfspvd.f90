@@ -1,4 +1,3 @@
-!*==DFSPVD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DFSPVD
 SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
   !***BEGIN PROLOGUE  DFSPVD
@@ -27,12 +26,9 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DFSPVD
   IMPLICIT NONE
-  !*--DFSPVD30
-  !*** Start of declarations inserted by SPAG
   REAL(8) :: a, diff, fkmd, T, v, Vnikx, X
   INTEGER i, ideriv, idervm, Ileft, ipkmd, j, jlow, jm1, K, kmd, &
     l, m, Nderiv
-  !*** End of declarations inserted by SPAG
   DIMENSION T(*), Vnikx(K,*)
   DIMENSION a(20,20)
   !***FIRST EXECUTABLE STATEMENT  DFSPVD

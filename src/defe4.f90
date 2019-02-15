@@ -1,14 +1,10 @@
-!*==DEFE4.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DEFE4
 SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
   IMPLICIT NONE
-  !*--DEFE45
-  !*** Start of declarations inserted by SPAG
   REAL ai, AIT, bi, BIT, ci, CIT, DIT, DLX, DLX4, DLY, DLY4, &
     Grhs, TDLx3, TDLy3, tx, ty, Usol, uxxx, uxxxx, uyyy
   REAL uyyyy, xi
   INTEGER i, Idmn, IS, j, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DEFE4
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPX4

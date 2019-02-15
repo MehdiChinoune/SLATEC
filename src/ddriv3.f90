@@ -1,13 +1,9 @@
-!*==DDRIV3.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DDRIV3
 SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Miter,Impl,Ml,Mu,Mxord,Hmax,Work,Lenw,Iwork,Leniw,&
     JACOBN,FA,Nde,Mxstep,G,USERS,Ierflg)
   IMPLICIT NONE
-  !*--DDRIV37
-  !*** Start of declarations inserted by SPAG
   INTEGER JACOBN
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DDRIV3
   !***PURPOSE  The function of DDRIV3 is to solve N ordinary differential
   !            equations of the form dY(I)/dT = F(Y(I),T), given the

@@ -1,10 +1,8 @@
-!*==SCHK22.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SCHK22
 SUBROUTINE SCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
     Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,&
     Y,Yy,Ys,Yt,G)
   IMPLICIT NONE
-  !*--SCHK227
   !***BEGIN PROLOGUE  SCHK22
   !***SUBSIDIARY
   !***PURPOSE  Quick check for SSYMV, SSBMV and SSPMV.

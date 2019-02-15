@@ -1,14 +1,10 @@
-!*==QXPLR.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QXPLR
 SUBROUTINE QXPLR(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QXPLR5
-  !*** Start of declarations inserted by SPAG
   REAL a, b, bda, bdb, bdc, bdd, c, d, dum, elmbda, ermax, err, &
     f, pertrb, pi, PIMACH, r, theta, w, z
   INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
     n, nbdcnd, np1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QXPLR
   !***PURPOSE
   !***LIBRARY   SLATEC

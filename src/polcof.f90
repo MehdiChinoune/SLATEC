@@ -1,13 +1,9 @@
-!*==POLCOF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK POLCOF
 SUBROUTINE POLCOF(Xx,N,X,C,D,Work)
   IMPLICIT NONE
-  !*--POLCOF5
-  !*** Start of declarations inserted by SPAG
   REAL C, D, pone, ptwo, Work, X, Xx
   INTEGER i, im1, k, km1, km1pi, km2n, km2npi, N, nm1, nmkp1, &
     npkm1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POLCOF
   !***PURPOSE  Compute the coefficients of the polynomial fit (including
   !            Hermite polynomial fits) produced by a previous call to

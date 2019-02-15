@@ -1,8 +1,6 @@
-!*==HTRID3.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK HTRID3
 SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
   IMPLICIT NONE
-  !*--HTRID35
   !***BEGIN PROLOGUE  HTRID3
   !***PURPOSE  Reduce a complex Hermitian (packed) matrix to a real
   !            symmetric tridiagonal matrix by unitary similarity

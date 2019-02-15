@@ -1,12 +1,8 @@
-!*==SOSSOL.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SOSSOL
 SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
   IMPLICIT NONE
-  !*--SOSSOL5
-  !*** Start of declarations inserted by SPAG
   REAL B, C, X, xmax
   INTEGER j, jkm, K, kj, km, km1, kmm1, kn, L, lk, M, N, np1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SOSSOL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SOS

@@ -1,8 +1,6 @@
-!*==SASUM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SASUM
 REAL FUNCTION SASUM(N,Sx,Incx)
   IMPLICIT NONE
-  !*--SASUM5
   !***BEGIN PROLOGUE  SASUM
   !***PURPOSE  Compute the sum of the magnitudes of the elements of a
   !            vector.

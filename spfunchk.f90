@@ -1,8 +1,6 @@
-!*==TESTI.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK TESTI
 PROGRAM TESTI
   IMPLICIT NONE
-  !*--TESTI5
   !***BEGIN PROLOGUE  TESTI
   !***PURPOSE  Driver for testing SLATEC subprogram
   !            Fullerton intrinsics.
@@ -90,11 +88,9 @@ PROGRAM TESTI
   99002 FORMAT (/' ************* WARNING -- ',I5,&
     ' TEST(S) FAILED IN PROGRAM TESTI *************')
 END PROGRAM TESTI
-!*==QCINTC.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK QCINTC
 SUBROUTINE QCINTC(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QCINTC97
   !***BEGIN PROLOGUE  QCINTC
   !***PURPOSE  Quick check for the complex Fullerton elementary
   !            intrinsic functions.
@@ -211,11 +207,9 @@ SUBROUTINE QCINTC(Lun,Kprint,Ipass)
     E22.14,', ',E22.14,'  ) '/' and true result = (',E22.14,', ',&
     E22.14,'  )')
 END SUBROUTINE QCINTC
-!*==QCINTD.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK QCINTD
 SUBROUTINE QCINTD(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QCINTD218
   !***BEGIN PROLOGUE  QCINTD
   !***PURPOSE  Quick check for the double precision Fullerton
   !            elementary intrinsic functions.
@@ -422,11 +416,9 @@ SUBROUTINE QCINTD(Lun,Kprint,Ipass)
   99003 FORMAT (' For I  = ',I3,'  test fails with ',/' computed result = ',1P,&
     E38.30,/' and true result = ',E38.30)
 END SUBROUTINE QCINTD
-!*==QCINTS.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK QCINTS
 SUBROUTINE QCINTS(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QCINTS429
   !***BEGIN PROLOGUE  QCINTS
   !***PURPOSE  Quick check for the single precision Fullerton
   !            elementary intrinsic functions.

@@ -1,9 +1,7 @@
-!*==DIR.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DIR
 SUBROUTINE DIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork)
   IMPLICIT NONE
-  !*--DIR6
   !***BEGIN PROLOGUE  DIR
   !***PURPOSE  Preconditioned Iterative Refinement Sparse Ax = b Solver.
   !            Routine to solve a general linear system  Ax = b  using

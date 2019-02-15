@@ -1,8 +1,6 @@
-!*==DTRDI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DTRDI
 SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
   IMPLICIT NONE
-  !*--DTRDI5
   !***BEGIN PROLOGUE  DTRDI
   !***PURPOSE  Compute the determinant and inverse of a triangular matrix.
   !***LIBRARY   SLATEC (LINPACK)

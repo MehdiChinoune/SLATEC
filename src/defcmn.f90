@@ -1,9 +1,7 @@
-!*==DEFCMN.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DEFCMN
 SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,Lw)
   IMPLICIT NONE
-  !*--DEFCMN6
   !***BEGIN PROLOGUE  DEFCMN
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DEFC

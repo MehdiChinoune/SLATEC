@@ -1,11 +1,7 @@
-!*==DBESI0.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBESI0
 REAL(8) FUNCTION DBESI0(X)
   IMPLICIT NONE
-  !*--DBESI05
-  !*** Start of declarations inserted by SPAG
   INTEGER INITDS, nti0
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBESI0
   !***PURPOSE  Compute the hyperbolic Bessel function of the first kind
   !            of order zero.

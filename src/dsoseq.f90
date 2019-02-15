@@ -1,9 +1,7 @@
-!*==DSOSEQ.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DSOSEQ
 SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     Iprint,Fmax,C,Nc,B,P,Temp,X,Y,Fac,Is)
   IMPLICIT NONE
-  !*--DSOSEQ6
   !***BEGIN PROLOGUE  DSOSEQ
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSOS

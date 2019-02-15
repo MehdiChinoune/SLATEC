@@ -1,8 +1,6 @@
-!*==STRMM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK STRMM
 SUBROUTINE STRMM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   IMPLICIT NONE
-  !*--STRMM5
   !***BEGIN PROLOGUE  STRMM
   !***PURPOSE  Multiply a real general matrix by a real triangular matrix.
   !***LIBRARY   SLATEC (BLAS)

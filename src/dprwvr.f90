@@ -1,11 +1,7 @@
-!*==DPRWVR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DPRWVR
 SUBROUTINE DPRWVR(Key,Ipage,Lpg,Sx,Ix)
   IMPLICIT NONE
-  !*--DPRWVR5
-  !*** Start of declarations inserted by SPAG
   INTEGER iaddr, Ipage, ipagef, istart, Ix, Key, Lpg
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPRWVR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP

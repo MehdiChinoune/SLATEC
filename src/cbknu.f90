@@ -1,8 +1,6 @@
-!*==CBKNU.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CBKNU
 SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--CBKNU5
   !***BEGIN PROLOGUE  CBKNU
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CAIRY, CBESH, CBESI and CBESK

@@ -1,8 +1,6 @@
-!*==DSD2S.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSD2S
 SUBROUTINE DSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   IMPLICIT NONE
-  !*--DSD2S5
   !***BEGIN PROLOGUE  DSD2S
   !***PURPOSE  Diagonal Scaling Preconditioner SLAP Normal Eqns Set Up.
   !            Routine to compute the inverse of the diagonal of the

@@ -1,8 +1,6 @@
-!*==TEST54.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK TEST54
 PROGRAM TEST54
   IMPLICIT NONE
-  !*--TEST545
   !***BEGIN PROLOGUE  TEST54
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC

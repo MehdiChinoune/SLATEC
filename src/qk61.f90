@@ -1,8 +1,6 @@
-!*==QK61.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QK61
 SUBROUTINE QK61(F,A,B,Result,Abserr,Resabs,Resasc)
   IMPLICIT NONE
-  !*--QK615
   !***BEGIN PROLOGUE  QK61
   !***PURPOSE  To compute I = Integral of F over (A,B) with error
   !                           estimate

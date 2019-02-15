@@ -1,12 +1,8 @@
-!*==XERSVE.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XERSVE
 SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
   IMPLICIT NONE
-  !*--XERSVE5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, I1MACH, Icount, iunit, Kflag, kount, kountx, kunit ,&
     LENTAB, Level, levtab, Nerr, nertab, nmsg, nunit
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XERSVE
   !***SUBSIDIARY
   !***PURPOSE  Record that an error has occurred.

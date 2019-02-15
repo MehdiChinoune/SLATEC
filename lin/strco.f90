@@ -1,8 +1,6 @@
-!*==STRCO.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK STRCO
 SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
   IMPLICIT NONE
-  !*--STRCO5
   !***BEGIN PROLOGUE  STRCO
   !***PURPOSE  Estimate the condition number of a triangular matrix.
   !***LIBRARY   SLATEC (LINPACK)

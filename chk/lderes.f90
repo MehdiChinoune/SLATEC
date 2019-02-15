@@ -1,8 +1,6 @@
-!*==LDERES.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK LDERES
 LOGICAL FUNCTION LDERES(Type,Uplo,M,N,Aa,As,Lda)
   IMPLICIT NONE
-  !*--LDERES5
   !***BEGIN PROLOGUE  LDERES
   !***SUBSIDIARY
   !***PURPOSE  Test if selected elements in two arrays are equal.

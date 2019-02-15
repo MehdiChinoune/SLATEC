@@ -1,8 +1,6 @@
-!*==HTRIB3.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK HTRIB3
 SUBROUTINE HTRIB3(Nm,N,A,Tau,M,Zr,Zi)
   IMPLICIT NONE
-  !*--HTRIB35
   !***BEGIN PROLOGUE  HTRIB3
   !***PURPOSE  Compute the eigenvectors of a complex Hermitian matrix from
   !            the eigenvectors of a real symmetric tridiagonal matrix

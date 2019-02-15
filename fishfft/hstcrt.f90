@@ -1,16 +1,12 @@
-!*==HSTCRT.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK HSTCRT
 SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !*--HSTCRT6
-  !*** Start of declarations inserted by SPAG
   REAL A, B, Bda, Bdb, Bdc, Bdd, C, D, deltax, deltay, delxsq, &
     delysq, Elmbda, F, Pertrb, s, st2, twdelx, twdely, twdysq
   REAL W
   INTEGER i, id2, id3, id4, Idimf, ierr1, Ierror, j, M, Mbdcnd, &
     mp, mperod, N, Nbdcnd, np, nperod
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HSTCRT
   !***PURPOSE  Solve the standard five-point finite difference
   !            approximation on a staggered grid to the Helmholtz equation

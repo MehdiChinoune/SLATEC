@@ -1,8 +1,6 @@
-!*==DPCHDF.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DPCHDF
 REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
   IMPLICIT NONE
-  !*--DPCHDF5
   !***BEGIN PROLOGUE  DPCHDF
   !***SUBSIDIARY
   !***PURPOSE  Computes divided differences for DPCHCE and DPCHSP

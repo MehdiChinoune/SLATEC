@@ -1,11 +1,7 @@
-!*==MPSTR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK MPSTR
 SUBROUTINE MPSTR(X,Y)
   IMPLICIT NONE
-  !*--MPSTR5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, LUN, M, MXR
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPSTR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI

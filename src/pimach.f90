@@ -1,11 +1,7 @@
-!*==PIMACH.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK PIMACH
 FUNCTION PIMACH(Dum)
   IMPLICIT NONE
-  !*--PIMACH5
-  !*** Start of declarations inserted by SPAG
   REAL Dum, PIMACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PIMACH
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to HSTCSP, HSTSSP and HWSCSP

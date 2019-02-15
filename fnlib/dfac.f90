@@ -1,11 +1,7 @@
-!*==DFAC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DFAC
 REAL(8) FUNCTION DFAC(N)
   IMPLICIT NONE
-  !*--DFAC5
-  !*** Start of declarations inserted by SPAG
   INTEGER N, nmax
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DFAC
   !***PURPOSE  Compute the factorial function.
   !***LIBRARY   SLATEC (FNLIB)

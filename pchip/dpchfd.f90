@@ -1,8 +1,6 @@
-!*==DPCHFD.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DPCHFD
 SUBROUTINE DPCHFD(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,De,Ierr)
   IMPLICIT NONE
-  !*--DPCHFD5
   !***BEGIN PROLOGUE  DPCHFD
   !***PURPOSE  Evaluate a piecewise cubic Hermite function and its first
   !            derivative at an array of points.  May be used by itself

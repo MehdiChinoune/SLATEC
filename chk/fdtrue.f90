@@ -1,8 +1,6 @@
-!*==FDTRUE.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK FDTRUE
 SUBROUTINE FDTRUE(X,F,D)
   IMPLICIT NONE
-  !*--FDTRUE5
   !***BEGIN PROLOGUE  FDTRUE
   !***SUBSIDIARY
   !***PURPOSE  Compute exact function values for EVCHCK.

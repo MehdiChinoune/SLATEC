@@ -1,11 +1,7 @@
-!*==XSETUA.f90  processed by SPAG 6.72Dc at 10:54 on  6 Feb 2019
 !DECK XSETUA
 SUBROUTINE XSETUA(Iunita,N)
   IMPLICIT NONE
-  !*--XSETUA5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, index, Iunita, J4SAVE, junk, N
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XSETUA
   !***PURPOSE  Set logical unit numbers (up to 5) to which error
   !            messages are to be sent.

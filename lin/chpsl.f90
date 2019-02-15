@@ -1,8 +1,6 @@
-!*==CHPSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CHPSL
 SUBROUTINE CHPSL(Ap,N,Kpvt,B)
   IMPLICIT NONE
-  !*--CHPSL5
   !***BEGIN PROLOGUE  CHPSL
   !***PURPOSE  Solve a complex Hermitian system using factors obtained
   !            from CHPFA.

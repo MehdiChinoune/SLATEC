@@ -1,11 +1,7 @@
-!*==DBFQAD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DBFQAD
 SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   IMPLICIT NONE
-  !*--DBFQAD5
-  !*** Start of declarations inserted by SPAG
   INTEGER inbv
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBFQAD
   !***PURPOSE  Compute the integral of a product of a function and a
   !            derivative of a K-th order B-spline.

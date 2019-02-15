@@ -1,11 +1,7 @@
-!*==DERF.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DERF
 REAL(8) FUNCTION DERF(X)
   IMPLICIT NONE
-  !*--DERF5
-  !*** Start of declarations inserted by SPAG
   INTEGER INITDS, nterf
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DERF
   !***PURPOSE  Compute the error function.
   !***LIBRARY   SLATEC (FNLIB)

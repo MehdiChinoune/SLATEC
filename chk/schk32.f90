@@ -1,9 +1,7 @@
-!*==SCHK32.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SCHK32
 SUBROUTINE SCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
     Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Xt,G,Z)
   IMPLICIT NONE
-  !*--SCHK326
   !***BEGIN PROLOGUE  SCHK32
   !***SUBSIDIARY
   !***PURPOSE  Quick check for STRMV, STBMV, STPMV, STRSV, STBSV and

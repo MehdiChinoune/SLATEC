@@ -1,8 +1,6 @@
-!*==DPCHCS.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DPCHCS
 SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   IMPLICIT NONE
-  !*--DPCHCS5
   !***BEGIN PROLOGUE  DPCHCS
   !***SUBSIDIARY
   !***PURPOSE  Adjusts derivative values for DPCHIC

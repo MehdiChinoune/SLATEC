@@ -1,8 +1,6 @@
-!*==CGESL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CGESL
 SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
   IMPLICIT NONE
-  !*--CGESL5
   !***BEGIN PROLOGUE  CGESL
   !***PURPOSE  Solve the complex system A*X=B or CTRANS(A)*X=B using the
   !            factors computed by CGECO or CGEFA.

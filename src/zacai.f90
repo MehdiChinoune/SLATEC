@@ -1,8 +1,6 @@
-!*==ZACAI.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZACAI
 SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--ZACAI5
   !***BEGIN PROLOGUE  ZACAI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZAIRY

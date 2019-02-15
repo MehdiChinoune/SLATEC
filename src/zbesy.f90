@@ -1,8 +1,6 @@
-!*==ZBESY.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZBESY
 SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
   IMPLICIT NONE
-  !*--ZBESY5
   !***BEGIN PROLOGUE  ZBESY
   !***PURPOSE  Compute a sequence of the Bessel functions Y(a,z) for
   !            complex argument z and real nonnegative orders a=b,b+1,

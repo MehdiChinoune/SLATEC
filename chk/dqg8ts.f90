@@ -1,8 +1,6 @@
-!*==DQG8TS.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DQG8TS
 SUBROUTINE DQG8TS(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DQG8TS5
   !***BEGIN PROLOGUE  DQG8TS
   !***PURPOSE  Quick check for DGAUS8.
   !***LIBRARY   SLATEC

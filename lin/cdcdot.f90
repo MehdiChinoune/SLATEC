@@ -1,8 +1,6 @@
-!*==CDCDOT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CDCDOT
 COMPLEX FUNCTION CDCDOT(N,Cb,Cx,Incx,Cy,Incy)
   IMPLICIT NONE
-  !*--CDCDOT5
   !***BEGIN PROLOGUE  CDCDOT
   !***PURPOSE  Compute the inner product of two vectors with extended
   !            precision accumulation.

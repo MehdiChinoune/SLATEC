@@ -1,8 +1,6 @@
-!*==EVERCK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK EVERCK
 SUBROUTINE EVERCK(Lout,Kprint,Fail)
   IMPLICIT NONE
-  !*--EVERCK5
   !***BEGIN PROLOGUE  EVERCK
   !***SUBSIDIARY
   !***PURPOSE  Test error returns from PCHIP evaluators for PCHQK1.

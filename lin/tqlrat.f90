@@ -1,11 +1,7 @@
-!*==TQLRAT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK TQLRAT
 SUBROUTINE TQLRAT(N,D,E2,Ierr)
   IMPLICIT NONE
-  !*--TQLRAT5
-  !*** Start of declarations inserted by SPAG
   REAL R1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TQLRAT
   !***PURPOSE  Compute the eigenvalues of symmetric tridiagonal matrix
   !            using a rational variant of the QL method.

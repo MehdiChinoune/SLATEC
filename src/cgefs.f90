@@ -1,8 +1,6 @@
-!*==CGEFS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CGEFS
 SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   IMPLICIT NONE
-  !*--CGEFS5
   !***BEGIN PROLOGUE  CGEFS
   !***PURPOSE  Solve a general system of linear equations.
   !***LIBRARY   SLATEC

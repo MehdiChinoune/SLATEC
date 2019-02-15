@@ -1,8 +1,6 @@
-!*==RST.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK RST
 SUBROUTINE RST(Nm,N,W,E,Matz,Z,Ierr)
   IMPLICIT NONE
-  !*--RST5
   !***BEGIN PROLOGUE  RST
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real symmetric tridiagonal matrix.

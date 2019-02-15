@@ -1,10 +1,8 @@
-!*==DRKFS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DRKFS
 SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     F4,F5,Ys,Told,Dtsign,U26,Rer,Init,Ksteps,Kop,Iquit,Stiff,&
     Nonstf,Ntstep,Nstifs,Rpar,Ipar)
   IMPLICIT NONE
-  !*--DRKFS7
   !***BEGIN PROLOGUE  DRKFS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DDERKF

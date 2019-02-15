@@ -1,8 +1,6 @@
-!*==DTOUT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DTOUT
 SUBROUTINE DTOUT(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   IMPLICIT NONE
-  !*--DTOUT5
   !***BEGIN PROLOGUE  DTOUT
   !***PURPOSE  Write out SLAP Triad Format Linear System.
   !            Routine to write out a SLAP Triad format matrix and right

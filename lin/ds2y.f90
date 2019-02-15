@@ -1,8 +1,6 @@
-!*==DS2Y.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DS2Y
 SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
   IMPLICIT NONE
-  !*--DS2Y5
   !***BEGIN PROLOGUE  DS2Y
   !***PURPOSE  SLAP Triad to SLAP Column Format Converter.
   !            Routine to convert from the SLAP Triad to SLAP Column

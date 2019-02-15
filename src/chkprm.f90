@@ -1,13 +1,9 @@
-!*==CHKPRM.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CHKPRM
 SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,&
     Ierror)
   IMPLICIT NONE
-  !*--CHKPRM6
-  !*** Start of declarations inserted by SPAG
   REAL A, ai, B, bi, C, ci, D, dj, dlx, dly, ej, fj, xi, yj
   INTEGER i, Idmn, Ierror, Intl, Iorder, j, M, Mbdcnd, N, Nbdcnd
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CHKPRM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPELI

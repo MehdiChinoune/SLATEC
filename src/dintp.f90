@@ -1,9 +1,7 @@
-!*==DINTP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DINTP
 SUBROUTINE DINTP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,Og,&
     Ow,Ox,Oy)
   IMPLICIT NONE
-  !*--DINTP6
   !***BEGIN PROLOGUE  DINTP
   !***PURPOSE  Approximate the solution at XOUT by evaluating the
   !            polynomial computed in DSTEPS at XOUT.  Must be used in

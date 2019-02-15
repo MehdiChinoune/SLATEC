@@ -1,12 +1,8 @@
-!*==BSPLVN.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BSPLVN
 SUBROUTINE BSPLVN(T,Jhigh,Index,X,Ileft,Vnikx)
   IMPLICIT NONE
-  !*--BSPLVN5
-  !*** Start of declarations inserted by SPAG
   REAL deltam, deltap, T, vm, vmprev, Vnikx, X
   INTEGER i, Ileft, imjp1, Index, ipj, j, Jhigh, jp1, jp1ml, l
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BSPLVN
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to FC

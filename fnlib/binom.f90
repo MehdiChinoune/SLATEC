@@ -1,13 +1,9 @@
-!*==BINOM.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK BINOM
 FUNCTION BINOM(N,M)
   IMPLICIT NONE
-  !*--BINOM5
-  !*** Start of declarations inserted by SPAG
   REAL ALNREL, bilnmx, BINOM, corr, fintmx, R1MACH, R9LGMC, sq2pil, &
     xk, xn, xnk
   INTEGER i, k, M, N
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BINOM
   !***PURPOSE  Compute the binomial coefficients.
   !***LIBRARY   SLATEC (FNLIB)

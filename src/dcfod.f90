@@ -1,8 +1,6 @@
-!*==DCFOD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DCFOD
 SUBROUTINE DCFOD(Meth,Elco,Tesco)
   IMPLICIT NONE
-  !*--DCFOD5
   !***BEGIN PROLOGUE  DCFOD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DDEBDF

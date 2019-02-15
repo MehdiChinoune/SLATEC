@@ -1,12 +1,8 @@
-!*==RAND.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK RAND
 FUNCTION RAND(R)
   IMPLICIT NONE
-  !*--RAND5
-  !*** Start of declarations inserted by SPAG
   INTEGER ia0, ia1, ia1ma0, ic, ix0, ix1, iy0, iy1
   REAL R, RAND
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RAND
   !***PURPOSE  Generate a uniformly distributed random number.
   !***LIBRARY   SLATEC (FNLIB)

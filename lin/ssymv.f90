@@ -1,8 +1,6 @@
-!*==SSYMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSYMV
 SUBROUTINE SSYMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   IMPLICIT NONE
-  !*--SSYMV5
   !***BEGIN PROLOGUE  SSYMV
   !***PURPOSE  Multiply a real vector by a real symmetric matrix.
   !***LIBRARY   SLATEC (BLAS)

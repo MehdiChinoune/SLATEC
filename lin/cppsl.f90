@@ -1,8 +1,6 @@
-!*==CPPSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CPPSL
 SUBROUTINE CPPSL(Ap,N,B)
   IMPLICIT NONE
-  !*--CPPSL5
   !***BEGIN PROLOGUE  CPPSL
   !***PURPOSE  Solve the complex Hermitian positive definite system using
   !            the factors computed by CPPCO or CPPFA.

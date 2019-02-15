@@ -1,8 +1,6 @@
-!*==FUNDOC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK FUNDOC
 SUBROUTINE FUNDOC
   IMPLICIT NONE
-  !*--FUNDOC5
   !***BEGIN PROLOGUE  FUNDOC
   !***PURPOSE  Documentation for FNLIB, a collection of routines for
   !            evaluating elementary and special functions.

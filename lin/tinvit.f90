@@ -1,8 +1,6 @@
-!*==TINVIT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK TINVIT
 SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
   IMPLICIT NONE
-  !*--TINVIT5
   !***BEGIN PROLOGUE  TINVIT
   !***PURPOSE  Compute the eigenvectors of symmetric tridiagonal matrix
   !            corresponding to specified eigenvalues, using inverse

@@ -1,14 +1,10 @@
-!*==LLSIA.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK LLSIA
 SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
     Lw,Iwork,Liw,Info)
   IMPLICIT NONE
-  !*--LLSIA6
-  !*** Start of declarations inserted by SPAG
   REAL A, Ae, B, eps, R1MACH, Re, Rnorm, W
   INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
     Mode, N, n1, n2, n3, n4, n5, Nb, Np
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  LLSIA
   !***PURPOSE  Solve a linear least squares problems by performing a QR
   !            factorization of the matrix using Householder

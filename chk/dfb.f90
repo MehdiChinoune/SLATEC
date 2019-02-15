@@ -1,8 +1,6 @@
-!*==DFB.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DFB
 REAL(8) FUNCTION DFB(X)
   IMPLICIT NONE
-  !*--DFB5
   !***BEGIN PROLOGUE  DFB
   !***PURPOSE  Subsidiary to DBSPCK.
   !***LIBRARY   SLATEC

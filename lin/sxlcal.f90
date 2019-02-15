@@ -1,9 +1,7 @@
-!*==SXLCAL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SXLCAL
 SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
     MSOLVE,Nmsl,Rpar,Ipar,Nelt,Ia,Ja,A,Isym)
   IMPLICIT NONE
-  !*--SXLCAL6
   !***BEGIN PROLOGUE  SXLCAL
   !***SUBSIDIARY
   !***PURPOSE  Internal routine for SGMRES.

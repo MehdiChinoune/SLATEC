@@ -1,8 +1,6 @@
-!*==BQR.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK BQR
 SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
   IMPLICIT NONE
-  !*--BQR5
   !***BEGIN PROLOGUE  BQR
   !***PURPOSE  Compute some of the eigenvalues of a real symmetric
   !            matrix using the QR method with shifts of origin.

@@ -1,8 +1,6 @@
-!*==ZUNI2.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZUNI2
 SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--ZUNI25
   !***BEGIN PROLOGUE  ZUNI2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESI and ZBESK

@@ -1,11 +1,7 @@
-!*==D9UPAK.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9UPAK
 SUBROUTINE D9UPAK(X,Y,N)
   IMPLICIT NONE
-  !*--D9UPAK5
-  !*** Start of declarations inserted by SPAG
   INTEGER N
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9UPAK
   !***PURPOSE  Unpack a floating point number X so that X = Y*2**N.
   !***LIBRARY   SLATEC (FNLIB)

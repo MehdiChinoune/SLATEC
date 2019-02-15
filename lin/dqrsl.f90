@@ -1,8 +1,6 @@
-!*==DQRSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DQRSL
 SUBROUTINE DQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   IMPLICIT NONE
-  !*--DQRSL5
   !***BEGIN PROLOGUE  DQRSL
   !***PURPOSE  Apply the output of DQRDC to compute coordinate transfor-
   !            mations, projections, and least squares solutions.

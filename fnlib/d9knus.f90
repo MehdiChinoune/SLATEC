@@ -1,12 +1,8 @@
-!*==D9KNUS.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9KNUS
 SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   IMPLICIT NONE
-  !*--D9KNUS5
-  !*** Start of declarations inserted by SPAG
   REAL an, bn, eta
   INTEGER i, ii, INITDS, inu, Iswtch, n, ntc0k, nterms, ntznu1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9KNUS
   !***SUBSIDIARY
   !***PURPOSE  Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*

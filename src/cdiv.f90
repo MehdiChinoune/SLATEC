@@ -1,8 +1,6 @@
-!*==CDIV.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CDIV
 SUBROUTINE CDIV(Ar,Ai,Br,Bi,Cr,Ci)
   IMPLICIT NONE
-  !*--CDIV5
   !***BEGIN PROLOGUE  CDIV
   !***SUBSIDIARY
   !***PURPOSE  Compute the complex quotient of two complex numbers.

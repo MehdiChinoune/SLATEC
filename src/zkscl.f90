@@ -1,8 +1,6 @@
-!*==ZKSCL.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZKSCL
 SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
   IMPLICIT NONE
-  !*--ZKSCL5
   !***BEGIN PROLOGUE  ZKSCL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESK

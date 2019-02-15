@@ -1,8 +1,6 @@
-!*==BINTK.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BINTK
 SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
   IMPLICIT NONE
-  !*--BINTK5
   !***BEGIN PROLOGUE  BINTK
   !***PURPOSE  Compute the B-representation of a spline which interpolates
   !            given data.

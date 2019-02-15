@@ -1,10 +1,7 @@
-!*==RKFAB.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK RKFAB
 SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     W,S,Stowa,G,Work,Iwork,Nfcc)
   IMPLICIT NONE
-  !*--RKFAB6
-  !*** Start of declarations inserted by SPAG
   REAL AE, BVDER, C, G, P, PWCnd, PX, RE, S, Stowa, TND, TOL, &
     U, V, W, Work, X, XBEg, XENd, XOP
   REAL XOT, Xpts, XSAv, xxop, Yhp, Z
@@ -18,7 +15,6 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     Nfcc, NFCcd, NFCd, nfcp1, NIC, Niv, non, NOPg, NPS, &
     NSWot, NTApe, Ntp
   INTEGER NTPd, NUMort, Nxpts, NXPtsd
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RKFAB
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

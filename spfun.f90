@@ -1,8 +1,6 @@
-!*==ACOS.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK ACOS
 REAL FUNCTION ACOS(X)
   IMPLICIT NONE
-  !*--ACOS5
   !***BEGIN PROLOGUE  ACOS
   !***PURPOSE  Compute the arccosine.
   !***LIBRARY   FNLIB
@@ -61,11 +59,9 @@ REAL FUNCTION ACOS(X)
   ACOS = pi2 - ASIN(X)
   !
 END FUNCTION ACOS
-!*==ALOG.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK ALOG
 REAL FUNCTION ALOG(X)
   IMPLICIT NONE
-  !*--ALOG68
   !***BEGIN PROLOGUE  ALOG
   !***PURPOSE  Compute the natural logarithm of a number.
   !***LIBRARY   FNLIB
@@ -165,11 +161,9 @@ REAL FUNCTION ALOG(X)
     nterms))
   !
 END FUNCTION ALOG
-!*==ALOG10.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK ALOG10
 REAL FUNCTION ALOG10(X)
   IMPLICIT NONE
-  !*--ALOG10172
   !***BEGIN PROLOGUE  ALOG10
   !***PURPOSE  Compute the common base 10 logarithm.
   !***LIBRARY   FNLIB
@@ -222,11 +216,9 @@ REAL FUNCTION ALOG10(X)
   ALOG10 = aloge*ALOG(X)
   !
 END FUNCTION ALOG10
-!*==ASIN.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK ASIN
 REAL FUNCTION ASIN(X)
   IMPLICIT NONE
-  !*--ASIN229
   !***BEGIN PROLOGUE  ASIN
   !***PURPOSE  Compute the arcsine.
   !***LIBRARY   FNLIB
@@ -332,11 +324,9 @@ REAL FUNCTION ASIN(X)
   IF ( X/=0.0E0 ) ASIN = SIGN(ASIN,X)
   !
 END FUNCTION ASIN
-!*==ATAN.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK ATAN
 REAL FUNCTION ATAN(X)
   IMPLICIT NONE
-  !*--ATAN339
   !***BEGIN PROLOGUE  ATAN
   !***PURPOSE  Compute the arctangent.
   !***LIBRARY   FNLIB
@@ -459,11 +449,9 @@ REAL FUNCTION ATAN(X)
   ENDIF
   !
 END FUNCTION ATAN
-!*==ATAN2.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK ATAN2
 REAL FUNCTION ATAN2(Sn,Cs)
   IMPLICIT NONE
-  !*--ATAN2466
   !***BEGIN PROLOGUE  ATAN2
   !***PURPOSE  Compute the arctangent in the proper quadrant.
   !***LIBRARY   FNLIB
@@ -529,11 +517,9 @@ REAL FUNCTION ATAN2(Sn,Cs)
   ENDIF
   !
 END FUNCTION ATAN2
-!*==CABS.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK CABS
 REAL FUNCTION CABS(Z)
   IMPLICIT NONE
-  !*--CABS536
   !***BEGIN PROLOGUE  CABS
   !***PURPOSE  Compute the absolute value of a complex number.
   !***LIBRARY   FNLIB
@@ -600,11 +586,9 @@ REAL FUNCTION CABS(Z)
   IF ( r1>r2*sqeps ) CABS = r2*SQRT(1.0E0+(r1/r2)**2)
   !
 END FUNCTION CABS
-!*==CCOS.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK CCOS
 COMPLEX FUNCTION CCOS(Z)
   IMPLICIT NONE
-  !*--CCOS607
   !***BEGIN PROLOGUE  CCOS
   !***PURPOSE  Compute the cosine of a complex argument.
   !***LIBRARY   FNLIB
@@ -662,11 +646,9 @@ COMPLEX FUNCTION CCOS(Z)
   CCOS = CMPLX(cs*COSH(y),-SIN(x)*SINH(y))
   !
 END FUNCTION CCOS
-!*==CEXP.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK CEXP
 COMPLEX FUNCTION CEXP(Z)
   IMPLICIT NONE
-  !*--CEXP669
   !***BEGIN PROLOGUE  CEXP
   !***PURPOSE  Compute the complex exponential.
   !***LIBRARY   FNLIB
@@ -722,11 +704,9 @@ COMPLEX FUNCTION CEXP(Z)
   ENDIF
   !
 END FUNCTION CEXP
-!*==CLOG.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK CLOG
 COMPLEX FUNCTION CLOG(Z)
   IMPLICIT NONE
-  !*--CLOG729
   !***BEGIN PROLOGUE  CLOG
   !***PURPOSE  Compute the complex natural logarithm.
   !***LIBRARY   FNLIB
@@ -774,11 +754,9 @@ COMPLEX FUNCTION CLOG(Z)
   CLOG = CMPLX(ALOG(CABS(Z)),CARG(Z))
   !
 END FUNCTION CLOG
-!*==COS.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK COS
 REAL FUNCTION COS(X)
   IMPLICIT NONE
-  !*--COS781
   !***BEGIN PROLOGUE  COS
   !***PURPOSE  Compute the cosine.
   !***LIBRARY   FNLIB
@@ -916,11 +894,9 @@ REAL FUNCTION COS(X)
   ENDIF
   !
 END FUNCTION COS
-!*==COSH.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK COSH
 REAL FUNCTION COSH(X)
   IMPLICIT NONE
-  !*--COSH923
   !***BEGIN PROLOGUE  COSH
   !***PURPOSE  Compute the hyperbolic cosine.
   !***LIBRARY   FNLIB
@@ -976,11 +952,9 @@ REAL FUNCTION COSH(X)
   IF ( y<ymax ) COSH = 0.5E0*(y+1.0E0/y)
   !
 END FUNCTION COSH
-!*==CSIN.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK CSIN
 COMPLEX FUNCTION CSIN(Z)
   IMPLICIT NONE
-  !*--CSIN983
   !***BEGIN PROLOGUE  CSIN
   !***PURPOSE  Compute the complex sine.
   !***LIBRARY   FNLIB
@@ -1037,11 +1011,9 @@ COMPLEX FUNCTION CSIN(Z)
   CSIN = CMPLX(sn*COSH(y),COS(x)*SINH(y))
   !
 END FUNCTION CSIN
-!*==CSQRT.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK CSQRT
 COMPLEX FUNCTION CSQRT(Z)
   IMPLICIT NONE
-  !*--CSQRT1044
   !***BEGIN PROLOGUE  CSQRT
   !***PURPOSE  Compute the complex square root.
   !***LIBRARY   FNLIB
@@ -1109,11 +1081,9 @@ COMPLEX FUNCTION CSQRT(Z)
   ENDIF
   !
 END FUNCTION CSQRT
-!*==DACOS.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DACOS
 REAL(8) FUNCTION DACOS(X)
   IMPLICIT NONE
-  !*--DACOS1116
   !***BEGIN PROLOGUE  DACOS
   !***PURPOSE  Compute the double precision arccosine.
   !***LIBRARY   FNLIB
@@ -1173,11 +1143,9 @@ REAL(8) FUNCTION DACOS(X)
   DACOS = pi2 - DASIN(X)
   !
 END FUNCTION DACOS
-!*==DASIN.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DASIN
 REAL(8) FUNCTION DASIN(X)
   IMPLICIT NONE
-  !*--DASIN1180
   !***BEGIN PROLOGUE  DASIN
   !***PURPOSE  Compute the double precision arcsine.
   !***LIBRARY   FNLIB
@@ -1303,11 +1271,9 @@ REAL(8) FUNCTION DASIN(X)
   IF ( X/=0.0D0 ) DASIN = DSIGN(DASIN,X)
   !
 END FUNCTION DASIN
-!*==DATAN.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DATAN
 REAL(8) FUNCTION DATAN(X)
   IMPLICIT NONE
-  !*--DATAN1310
   !***BEGIN PROLOGUE  DATAN
   !***PURPOSE  Compute the double precision arctangent.
   !***LIBRARY   FNLIB
@@ -1439,11 +1405,9 @@ REAL(8) FUNCTION DATAN(X)
   ENDIF
   !
 END FUNCTION DATAN
-!*==DATAN2.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DATAN2
 REAL(8) FUNCTION DATAN2(Sn,Cs)
   IMPLICIT NONE
-  !*--DATAN21446
   !***BEGIN PROLOGUE  DATAN2
   !***PURPOSE  Compute the double precision arctangent in the
   !            proper quadrant.
@@ -1513,11 +1477,9 @@ REAL(8) FUNCTION DATAN2(Sn,Cs)
   ENDIF
   !
 END FUNCTION DATAN2
-!*==DCOS.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DCOS
 REAL(8) FUNCTION DCOS(X)
   IMPLICIT NONE
-  !*--DCOS1520
   !***BEGIN PROLOGUE  DCOS
   !***PURPOSE  Compute the double precision cosine.
   !***LIBRARY   FNLIB
@@ -1668,11 +1630,9 @@ REAL(8) FUNCTION DCOS(X)
   ENDIF
   !
 END FUNCTION DCOS
-!*==DCOSH.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DCOSH
 REAL(8) FUNCTION DCOSH(X)
   IMPLICIT NONE
-  !*--DCOSH1675
   !***BEGIN PROLOGUE  DCOSH
   !***PURPOSE  Compute the double precision hyperbolic cosine.
   !***LIBRARY   FNLIB
@@ -1733,11 +1693,9 @@ REAL(8) FUNCTION DCOSH(X)
   IF ( y<ymax ) DCOSH = 0.5D0*(y+1.0D0/y)
   !
 END FUNCTION DCOSH
-!*==DEXP.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DEXP
 REAL(8) FUNCTION DEXP(X)
   IMPLICIT NONE
-  !*--DEXP1740
   !***BEGIN PROLOGUE  DEXP
   !***PURPOSE  Compute the double precision exponential.
   !***LIBRARY   FNLIB
@@ -1872,11 +1830,9 @@ REAL(8) FUNCTION DEXP(X)
   ENDIF
   !
 END FUNCTION DEXP
-!*==DINT.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DINT
 REAL(8) FUNCTION DINT(X)
   IMPLICIT NONE
-  !*--DINT1879
   !***BEGIN PROLOGUE  DINT
   !***PURPOSE  Find the largest integer whose magnitude does not
   !            exceed the argument and convert to double precision.
@@ -1977,11 +1933,9 @@ REAL(8) FUNCTION DINT(X)
   ENDIF
   !
 END FUNCTION DINT
-!*==DLOG.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DLOG
 REAL(8) FUNCTION DLOG(X)
   IMPLICIT NONE
-  !*--DLOG1984
   !***BEGIN PROLOGUE  DLOG
   !***PURPOSE  Compute the double precision natural logarithm.
   !***LIBRARY   FNLIB
@@ -2088,11 +2042,9 @@ REAL(8) FUNCTION DLOG(X)
     nterms))
   !
 END FUNCTION DLOG
-!*==DLOG10.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DLOG10
 REAL(8) FUNCTION DLOG10(X)
   IMPLICIT NONE
-  !*--DLOG102095
   !***BEGIN PROLOGUE  DLOG10
   !***PURPOSE  Compute the double precision common base 10 logarithm.
   !***LIBRARY   FNLIB
@@ -2145,11 +2097,9 @@ REAL(8) FUNCTION DLOG10(X)
   DLOG10 = dloge*DLOG(X)
   !
 END FUNCTION DLOG10
-!*==DSIN.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DSIN
 REAL(8) FUNCTION DSIN(X)
   IMPLICIT NONE
-  !*--DSIN2152
   !***BEGIN PROLOGUE  DSIN
   !***PURPOSE  Compute the double precision sine.
   !***LIBRARY   FNLIB
@@ -2302,11 +2252,9 @@ REAL(8) FUNCTION DSIN(X)
   ENDIF
   !
 END FUNCTION DSIN
-!*==DSINH.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DSINH
 REAL(8) FUNCTION DSINH(X)
   IMPLICIT NONE
-  !*--DSINH2309
   !***BEGIN PROLOGUE  DSINH
   !***PURPOSE  Compute the double precision hyperbolic sine.
   !***LIBRARY   FNLIB
@@ -2405,11 +2353,9 @@ REAL(8) FUNCTION DSINH(X)
   ENDIF
   !
 END FUNCTION DSINH
-!*==DSQRT.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DSQRT
 REAL(8) FUNCTION DSQRT(X)
   IMPLICIT NONE
-  !*--DSQRT2412
   !***BEGIN PROLOGUE  DSQRT
   !***PURPOSE  Compute the double precision square root.
   !***LIBRARY   FNLIB
@@ -2495,11 +2441,9 @@ REAL(8) FUNCTION DSQRT(X)
   ENDIF
   !
 END FUNCTION DSQRT
-!*==DTAN.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DTAN
 REAL(8) FUNCTION DTAN(X)
   IMPLICIT NONE
-  !*--DTAN2502
   !***BEGIN PROLOGUE  DTAN
   !***PURPOSE  Compute the double precision tangent.
   !***LIBRARY   FNLIB
@@ -2639,11 +2583,9 @@ REAL(8) FUNCTION DTAN(X)
   IF ( ifn==1 ) DTAN = -DTAN
   !
 END FUNCTION DTAN
-!*==DTANH.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK DTANH
 REAL(8) FUNCTION DTANH(X)
   IMPLICIT NONE
-  !*--DTANH2646
   !***BEGIN PROLOGUE  DTANH
   !***PURPOSE  Compute the double precision hyperbolic tangent.
   !***LIBRARY   FNLIB
@@ -2757,11 +2699,9 @@ REAL(8) FUNCTION DTANH(X)
   ENDIF
   !
 END FUNCTION DTANH
-!*==EXP.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK EXP
 REAL FUNCTION EXP(X)
   IMPLICIT NONE
-  !*--EXP2764
   !***BEGIN PROLOGUE  EXP
   !***PURPOSE  Compute the exponential.
   !***LIBRARY   FNLIB
@@ -2885,11 +2825,9 @@ REAL FUNCTION EXP(X)
   ENDIF
   !
 END FUNCTION EXP
-!*==SIN.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK SIN
 REAL FUNCTION SIN(X)
   IMPLICIT NONE
-  !*--SIN2892
   !***BEGIN PROLOGUE  SIN
   !***PURPOSE  Compute the sine.
   !***LIBRARY   FNLIB
@@ -3026,11 +2964,9 @@ REAL FUNCTION SIN(X)
   ENDIF
   !
 END FUNCTION SIN
-!*==SINH.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK SINH
 REAL FUNCTION SINH(X)
   IMPLICIT NONE
-  !*--SINH3033
   !***BEGIN PROLOGUE  SINH
   !***PURPOSE  Compute the hyperbolic sine.
   !***LIBRARY   FNLIB
@@ -3121,11 +3057,9 @@ REAL FUNCTION SINH(X)
   ENDIF
   !
 END FUNCTION SINH
-!*==SQRT.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK SQRT
 REAL FUNCTION SQRT(X)
   IMPLICIT NONE
-  !*--SQRT3128
   !***BEGIN PROLOGUE  SQRT
   !***PURPOSE  Compute the square root.
   !***LIBRARY   FNLIB
@@ -3206,11 +3140,9 @@ REAL FUNCTION SQRT(X)
   ENDIF
   !
 END FUNCTION SQRT
-!*==TAN.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK TAN
 REAL FUNCTION TAN(X)
   IMPLICIT NONE
-  !*--TAN3213
   !***BEGIN PROLOGUE  TAN
   !***PURPOSE  Compute the tangent.
   !***LIBRARY   FNLIB
@@ -3340,11 +3272,9 @@ REAL FUNCTION TAN(X)
   IF ( ifn==1 ) TAN = -TAN
   !
 END FUNCTION TAN
-!*==TANH.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK TANH
 REAL FUNCTION TANH(X)
   IMPLICIT NONE
-  !*--TANH3347
   !***BEGIN PROLOGUE  TANH
   !***PURPOSE  Compute the hyperbolic tangent.
   !***LIBRARY   FNLIB

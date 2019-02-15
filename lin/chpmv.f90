@@ -1,8 +1,6 @@
-!*==CHPMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CHPMV
 SUBROUTINE CHPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   IMPLICIT NONE
-  !*--CHPMV5
   !***BEGIN PROLOGUE  CHPMV
   !***PURPOSE  Perform the matrix-vector operation.
   !***LIBRARY   SLATEC (BLAS)

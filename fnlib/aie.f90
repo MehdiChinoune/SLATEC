@@ -1,13 +1,9 @@
-!*==AIE.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK AIE
 FUNCTION AIE(X)
   IMPLICIT NONE
-  !*--AIE5
-  !*** Start of declarations inserted by SPAG
   REAL AIE, aifcs, aigcs, aipcs, CSEVL, eta, R1MACH, sqrtx, theta, &
     X, x32sml, x3sml, xbig, xm, z
   INTEGER INITS, naif, naig, naip
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  AIE
   !***PURPOSE  Calculate the Airy function for a negative argument and an
   !            exponentially scaled Airy function for a non-negative

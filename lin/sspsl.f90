@@ -1,8 +1,6 @@
-!*==SSPSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSPSL
 SUBROUTINE SSPSL(Ap,N,Kpvt,B)
   IMPLICIT NONE
-  !*--SSPSL5
   !***BEGIN PROLOGUE  SSPSL
   !***PURPOSE  Solve a real symmetric system using the factors obtained
   !            from SSPFA.

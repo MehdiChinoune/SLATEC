@@ -1,8 +1,6 @@
-!*==SLVS.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SLVS
 SUBROUTINE SLVS(Wm,Iwm,X,Tem)
   IMPLICIT NONE
-  !*--SLVS5
   !***BEGIN PROLOGUE  SLVS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DEBDF

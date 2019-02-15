@@ -1,8 +1,6 @@
-!*==CMLRI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CMLRI
 SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   IMPLICIT NONE
-  !*--CMLRI5
   !***BEGIN PROLOGUE  CMLRI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBESI and CBESK

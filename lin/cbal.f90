@@ -1,8 +1,6 @@
-!*==CBAL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CBAL
 SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
   IMPLICIT NONE
-  !*--CBAL5
   !***BEGIN PROLOGUE  CBAL
   !***PURPOSE  Balance a complex general matrix and isolate eigenvalues
   !            whenever possible.

@@ -1,4 +1,3 @@
-!*==DBNDAC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DBNDAC
 SUBROUTINE DBNDAC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !***BEGIN PROLOGUE  DBNDAC
@@ -190,13 +189,10 @@ SUBROUTINE DBNDAC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DBNDAC
   IMPLICIT NONE
-  !*--DBNDAC193
-  !*** Start of declarations inserted by SPAG
   REAL(8) :: G, rho, zero
   INTEGER i, ie, ig, ig1, ig2, iopt, Ip, Ir, j, jg, Jt, k, kh, &
     l, lp1, Mdg, mh, Mt, mu, Nb
   INTEGER nbp1, nerr
-  !*** End of declarations inserted by SPAG
   DIMENSION G(Mdg,*)
   !***FIRST EXECUTABLE STATEMENT  DBNDAC
   zero = 0.D0

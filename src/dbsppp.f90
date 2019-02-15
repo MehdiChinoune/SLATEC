@@ -1,8 +1,6 @@
-!*==DBSPPP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DBSPPP
 SUBROUTINE DBSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   IMPLICIT NONE
-  !*--DBSPPP5
   !***BEGIN PROLOGUE  DBSPPP
   !***PURPOSE  Convert the B-representation of a B-spline to the piecewise
   !            polynomial (PP) form.

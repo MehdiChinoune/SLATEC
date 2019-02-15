@@ -1,8 +1,6 @@
-!*==SGESL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SGESL
 SUBROUTINE SGESL(A,Lda,N,Ipvt,B,Job)
   IMPLICIT NONE
-  !*--SGESL5
   !***BEGIN PROLOGUE  SGESL
   !***PURPOSE  Solve the real system A*X=B or TRANS(A)*X=B using the
   !            factors of SGECO or SGEFA.

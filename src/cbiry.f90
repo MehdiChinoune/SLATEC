@@ -1,8 +1,6 @@
-!*==CBIRY.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CBIRY
 SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   IMPLICIT NONE
-  !*--CBIRY5
   !***BEGIN PROLOGUE  CBIRY
   !***PURPOSE  Compute the Airy function Bi(z) or its derivative dBi/dz
   !            for complex argument z.  A scaling option is available

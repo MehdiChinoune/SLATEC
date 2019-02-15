@@ -1,11 +1,7 @@
-!*==TEST15.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK TEST15
 PROGRAM TEST15
   IMPLICIT NONE
-  !*--TEST155
-  !*** Start of declarations inserted by SPAG
   INTEGER I1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TEST15
   !***PURPOSE  Driver for testing SLATEC subprograms
   !            RC3JJ    RC3JM    RC6J

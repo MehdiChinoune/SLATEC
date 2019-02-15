@@ -1,8 +1,6 @@
-!*==EDIT2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK EDIT2
 SUBROUTINE EDIT2(Y,T,Erm)
   IMPLICIT NONE
-  !*--EDIT25
   !***BEGIN PROLOGUE  EDIT2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SDASQC.

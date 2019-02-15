@@ -1,8 +1,6 @@
-!*==DSYMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSYMV
 SUBROUTINE DSYMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   IMPLICIT NONE
-  !*--DSYMV5
   !***BEGIN PROLOGUE  DSYMV
   !***PURPOSE  Perform the matrix-vector operation.
   !***LIBRARY   SLATEC (BLAS)

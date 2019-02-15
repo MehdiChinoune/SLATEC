@@ -1,11 +1,7 @@
-!*==TEST48.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK TEST48
 PROGRAM TEST48
   IMPLICIT NONE
-  !*--TEST485
-  !*** Start of declarations inserted by SPAG
   INTEGER I1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TEST48
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC

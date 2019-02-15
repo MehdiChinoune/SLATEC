@@ -1,4 +1,3 @@
-!*==CDSTP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CDSTP
 SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Miter,Ml,Mu,N,Nde,Ywt,Uround,USERS,Avgh,Avgord,H,Hused,&
@@ -6,11 +5,8 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Dfdy,El,Fac,Hold,Ipvt,Jstate,Jstepl,Nq,Nwait,Rc,Rmax,&
     Save1,Save2,Tq,Trend,Iswflg,Mtrsv,Mxrdsv)
   IMPLICIT NONE
-  !*--CDSTP9
-  !*** Start of declarations inserted by SPAG
   REAL FA, USERS
   INTEGER JACOBN
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CDSTP
   !***SUBSIDIARY
   !***PURPOSE  CDSTP performs one step of the integration of an initial

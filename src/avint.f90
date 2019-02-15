@@ -1,12 +1,8 @@
-!*==AVINT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK AVINT
 SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   IMPLICIT NONE
-  !*--AVINT5
-  !*** Start of declarations inserted by SPAG
   REAL Ans, fl, fr, slope, X, Xlo, Xup, Y
   INTEGER i, Ierr, inlft, inrt, istart, istop, N
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  AVINT
   !***PURPOSE  Integrate a function tabulated at arbitrarily spaced
   !            abscissas using overlapping parabolas.

@@ -1,13 +1,9 @@
-!*==BESK0.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK BESK0
 FUNCTION BESK0(X)
   IMPLICIT NONE
-  !*--BESK05
-  !*** Start of declarations inserted by SPAG
   REAL BESI0, BESK0, BESK0E, bk0cs, CSEVL, R1MACH, X, xmax, xmaxt, &
     xsml, y
   INTEGER INITS, ntk0
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESK0
   !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
   !            third kind of order zero.

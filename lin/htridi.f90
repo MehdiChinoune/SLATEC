@@ -1,8 +1,6 @@
-!*==HTRIDI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK HTRIDI
 SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
   IMPLICIT NONE
-  !*--HTRIDI5
   !***BEGIN PROLOGUE  HTRIDI
   !***PURPOSE  Reduce a complex Hermitian matrix to a real symmetric
   !            tridiagonal matrix using unitary similarity

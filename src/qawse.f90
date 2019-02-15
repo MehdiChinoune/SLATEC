@@ -1,9 +1,7 @@
-!*==QAWSE.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QAWSE
 SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
     Neval,Ier,Alist,Blist,Rlist,Elist,Iord,Last)
   IMPLICIT NONE
-  !*--QAWSE6
   !***BEGIN PROLOGUE  QAWSE
   !***PURPOSE  The routine calculates an approximation result to a given
   !            definite integral I = Integral of F*W over (A,B),

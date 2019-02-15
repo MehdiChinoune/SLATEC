@@ -1,8 +1,6 @@
-!*==DCMPAR.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DCMPAR
 SUBROUTINE DCMPAR(Icnt,Itest)
   IMPLICIT NONE
-  !*--DCMPAR5
   !***BEGIN PROLOGUE  DCMPAR
   !***PURPOSE  Compare values in COMMON block DCHECK for quick check
   !            routine DPFITT.

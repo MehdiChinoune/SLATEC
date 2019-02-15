@@ -1,8 +1,6 @@
-!*==DTRSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DTRSL
 SUBROUTINE DTRSL(T,Ldt,N,B,Job,Info)
   IMPLICIT NONE
-  !*--DTRSL5
   !***BEGIN PROLOGUE  DTRSL
   !***PURPOSE  Solve a system of the form  T*X=B or TRANS(T)*X=B, where
   !            T is a triangular matrix.

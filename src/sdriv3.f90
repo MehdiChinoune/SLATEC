@@ -1,13 +1,9 @@
-!*==SDRIV3.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SDRIV3
 SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Miter,Impl,Ml,Mu,Mxord,Hmax,Work,Lenw,Iwork,Leniw,&
     JACOBN,FA,Nde,Mxstep,G,USERS,Ierflg)
   IMPLICIT NONE
-  !*--SDRIV37
-  !*** Start of declarations inserted by SPAG
   INTEGER JACOBN
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SDRIV3
   !***PURPOSE  The function of SDRIV3 is to solve N ordinary differential
   !            equations of the form dY(I)/dT = F(Y(I),T), given the

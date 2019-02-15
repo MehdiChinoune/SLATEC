@@ -1,8 +1,6 @@
-!*==LCERES.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK LCERES
 LOGICAL FUNCTION LCERES(Type,Uplo,M,N,Aa,As,Lda)
   IMPLICIT NONE
-  !*--LCERES5
   !***BEGIN PROLOGUE  LCERES
   !***SUBSIDIARY
   !***PURPOSE  Test if selected elements in two arrays are equal.

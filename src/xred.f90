@@ -1,11 +1,7 @@
-!*==XRED.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XRED
 SUBROUTINE XRED(X,Ix,Ierror)
   IMPLICIT NONE
-  !*--XRED5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Ierror, ixa, ixa1, ixa2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XRED
   !***PURPOSE  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.

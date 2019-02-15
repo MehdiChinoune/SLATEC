@@ -1,13 +1,9 @@
-!*==CHECK1.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CHECK1
 SUBROUTINE CHECK1(Sfac,Dfac,Kprint)
   IMPLICIT NONE
-  !*--CHECK15
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ICAMAX, ICAse, IDAMAX, INCx, INCy, ISAMAX, jump, &
     Kprint, len, MODe, N, np1, NPRint
   REAL sa, SASUM, SCASUM, SCNRM2, Sfac, SNRM2, stemp
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CHECK1
   !***PURPOSE  (UNKNOWN)
   !***LIBRARY   SLATEC

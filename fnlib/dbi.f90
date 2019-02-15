@@ -1,12 +1,8 @@
-!*==DBI.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBI
 REAL(8) FUNCTION DBI(X)
   IMPLICIT NONE
-  !*--DBI5
-  !*** Start of declarations inserted by SPAG
   REAL eta
   INTEGER INITDS, nbif, nbif2, nbig, nbig2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBI
   !***PURPOSE  Evaluate the Bairy function (the Airy function of the
   !            second kind).

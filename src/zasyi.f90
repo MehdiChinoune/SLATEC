@@ -1,8 +1,6 @@
-!*==ZASYI.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZASYI
 SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--ZASYI5
   !***BEGIN PROLOGUE  ZASYI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESI and ZBESK

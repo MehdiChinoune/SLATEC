@@ -1,8 +1,6 @@
-!*==CACAI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CACAI
 SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--CACAI5
   !***BEGIN PROLOGUE  CACAI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CAIRY

@@ -1,8 +1,6 @@
-!*==CSSCAL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CSSCAL
 SUBROUTINE CSSCAL(N,Sa,Cx,Incx)
   IMPLICIT NONE
-  !*--CSSCAL5
   !***BEGIN PROLOGUE  CSSCAL
   !***PURPOSE  Scale a complex vector.
   !***LIBRARY   SLATEC (BLAS)

@@ -1,11 +1,7 @@
-!*==MPCHK.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK MPCHK
 SUBROUTINE MPCHK(I,J)
   IMPLICIT NONE
-  !*--MPCHK5
-  !*** Start of declarations inserted by SPAG
   INTEGER I, I1MACH, ib, J, LUN, M, mx, MXR
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPCHK
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI

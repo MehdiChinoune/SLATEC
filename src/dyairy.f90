@@ -1,8 +1,6 @@
-!*==DYAIRY.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DYAIRY
 SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
   IMPLICIT NONE
-  !*--DYAIRY5
   !***BEGIN PROLOGUE  DYAIRY
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBESJ and DBESY

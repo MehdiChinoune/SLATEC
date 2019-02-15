@@ -1,8 +1,6 @@
-!*==DSORT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DSORT
 SUBROUTINE DSORT(Dx,Dy,N,Kflag)
   IMPLICIT NONE
-  !*--DSORT5
   !***BEGIN PROLOGUE  DSORT
   !***PURPOSE  Sort an array and optionally make the same interchanges in
   !            an auxiliary array.  The array may be sorted in increasing

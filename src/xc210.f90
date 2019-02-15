@@ -1,12 +1,8 @@
-!*==XC210.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XC210
 SUBROUTINE XC210(K,Z,J,Ierror)
   IMPLICIT NONE
-  !*--XC2105
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ic, id, Ierror, ii, it, ja, ka, ka1, ka2, m, nm1, &
     np1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XC210
   !***PURPOSE  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.

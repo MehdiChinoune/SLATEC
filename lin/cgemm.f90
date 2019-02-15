@@ -1,8 +1,6 @@
-!*==CGEMM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CGEMM
 SUBROUTINE CGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   IMPLICIT NONE
-  !*--CGEMM5
   !***BEGIN PROLOGUE  CGEMM
   !***PURPOSE  Multiply a complex general matrix by a complex general
   !            matrix.

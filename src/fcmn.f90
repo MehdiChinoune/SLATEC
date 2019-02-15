@@ -1,10 +1,8 @@
-!*==FCMN.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK FCMN
 SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     Yconst,Nderiv,Mode,Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,&
     Work,Iwork)
   IMPLICIT NONE
-  !*--FCMN7
   !***BEGIN PROLOGUE  FCMN
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to FC

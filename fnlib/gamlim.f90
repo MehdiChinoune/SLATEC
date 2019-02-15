@@ -1,12 +1,8 @@
-!*==GAMLIM.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK GAMLIM
 SUBROUTINE GAMLIM(Xmin,Xmax)
   IMPLICIT NONE
-  !*--GAMLIM5
-  !*** Start of declarations inserted by SPAG
   REAL alnbig, alnsml, R1MACH, xln, Xmax, Xmin, xold
   INTEGER i
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  GAMLIM
   !***PURPOSE  Compute the minimum and maximum bounds for the argument in
   !            the Gamma function.

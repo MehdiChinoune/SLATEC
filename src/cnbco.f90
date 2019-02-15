@@ -1,8 +1,6 @@
-!*==CNBCO.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CNBCO
 SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   IMPLICIT NONE
-  !*--CNBCO5
   !***BEGIN PROLOGUE  CNBCO
   !***PURPOSE  Factor a band matrix using Gaussian elimination and
   !            estimate the condition number.

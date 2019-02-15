@@ -1,12 +1,8 @@
-!*==CDRIV2.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CDRIV2
 SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     Leniw,G,Ierflg)
   IMPLICIT NONE
-  !*--CDRIV26
-  !*** Start of declarations inserted by SPAG
   REAL F
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CDRIV2
   !***PURPOSE  The function of CDRIV2 is to solve N ordinary differential
   !            equations of the form dY(I)/dT = F(Y(I),T), given the

@@ -1,8 +1,6 @@
-!*==F2S.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK F2S
 REAL FUNCTION F2S(X)
   IMPLICIT NONE
-  !*--F2S5
   !***BEGIN PROLOGUE  F2S
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

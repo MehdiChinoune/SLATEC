@@ -1,8 +1,6 @@
-!*==COMBAK.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK COMBAK
 SUBROUTINE COMBAK(Nm,Low,Igh,Ar,Ai,Int,M,Zr,Zi)
   IMPLICIT NONE
-  !*--COMBAK5
   !***BEGIN PROLOGUE  COMBAK
   !***PURPOSE  Form the eigenvectors of a complex general matrix from the
   !            eigenvectors of a upper Hessenberg matrix output from

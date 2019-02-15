@@ -1,8 +1,6 @@
-!*==CTBMV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CTBMV
 SUBROUTINE CTBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   IMPLICIT NONE
-  !*--CTBMV5
   !***BEGIN PROLOGUE  CTBMV
   !***PURPOSE  Multiply a complex vector by a complex triangular band
   !            matrix.

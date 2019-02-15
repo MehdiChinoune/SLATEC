@@ -1,8 +1,6 @@
-!*==ZBESH.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZBESH
 SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   IMPLICIT NONE
-  !*--ZBESH5
   !***BEGIN PROLOGUE  ZBESH
   !***PURPOSE  Compute a sequence of the Hankel functions H(m,a,z)
   !            for superscript m=1 or 2, real nonnegative orders a=b,

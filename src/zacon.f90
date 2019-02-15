@@ -1,8 +1,6 @@
-!*==ZACON.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZACON
 SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--ZACON5
   !***BEGIN PROLOGUE  ZACON
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESH and ZBESK

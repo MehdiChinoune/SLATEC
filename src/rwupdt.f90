@@ -1,8 +1,6 @@
-!*==RWUPDT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK RWUPDT
 SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
   IMPLICIT NONE
-  !*--RWUPDT5
   !***BEGIN PROLOGUE  RWUPDT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SNLS1 and SNLS1E

@@ -1,8 +1,6 @@
-!*==GAUS8.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK GAUS8
 SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
   IMPLICIT NONE
-  !*--GAUS85
   !***BEGIN PROLOGUE  GAUS8
   !***PURPOSE  Integrate a real function of one variable over a finite
   !            interval using an adaptive 8-point Legendre-Gauss

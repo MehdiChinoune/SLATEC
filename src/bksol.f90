@@ -1,12 +1,8 @@
-!*==BKSOL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BKSOL
 SUBROUTINE BKSOL(N,A,X)
   IMPLICIT NONE
-  !*--BKSOL5
-  !*** Start of declarations inserted by SPAG
   REAL A, SDOT, X
   INTEGER j, k, m, N, nm1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BKSOL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

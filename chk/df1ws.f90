@@ -1,8 +1,6 @@
-!*==DF1WS.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DF1WS
 REAL(8) FUNCTION DF1WS(X)
   IMPLICIT NONE
-  !*--DF1WS5
   !***BEGIN PROLOGUE  DF1WS
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

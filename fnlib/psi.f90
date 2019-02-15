@@ -1,13 +1,9 @@
-!*==PSI.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK PSI
 FUNCTION PSI(X)
   IMPLICIT NONE
-  !*--PSI5
-  !*** Start of declarations inserted by SPAG
   REAL apsics, aux, COT, CSEVL, dxrel, pi, PSI, psics, R1MACH, X, &
     xbig, y
   INTEGER i, INITS, n, ntapsi, ntpsi
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PSI
   !***PURPOSE  Compute the Psi (or Digamma) function.
   !***LIBRARY   SLATEC (FNLIB)

@@ -1,8 +1,6 @@
-!*==SGBCO.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SGBCO
 SUBROUTINE SGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   IMPLICIT NONE
-  !*--SGBCO5
   !***BEGIN PROLOGUE  SGBCO
   !***PURPOSE  Factor a band matrix by Gaussian elimination and
   !            estimate the condition number of the matrix.

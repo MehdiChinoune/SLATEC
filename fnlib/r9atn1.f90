@@ -1,12 +1,8 @@
-!*==R9ATN1.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK R9ATN1
 FUNCTION R9ATN1(X)
   IMPLICIT NONE
-  !*--R9ATN15
-  !*** Start of declarations inserted by SPAG
   REAL atn1cs, CSEVL, eps, R1MACH, R9ATN1, X, xbig, xmax, xsml, y
   INTEGER INITS, ntatn1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9ATN1
   !***SUBSIDIARY
   !***PURPOSE  Evaluate ATAN(X) from first order relative accuracy so that

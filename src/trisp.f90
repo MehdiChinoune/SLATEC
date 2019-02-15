@@ -1,12 +1,8 @@
-!*==TRISP.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK TRISP
 SUBROUTINE TRISP(N,A,B,C,D,U,Z)
   IMPLICIT NONE
-  !*--TRISP5
-  !*** Start of declarations inserted by SPAG
   REAL A, an, B, bn, C, D, den, U, v, Z
   INTEGER j, k, N, nm1, nm2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TRISP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPELI

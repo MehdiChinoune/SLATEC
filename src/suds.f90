@@ -1,13 +1,9 @@
-!*==SUDS.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SUDS
 SUBROUTINE SUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   IMPLICIT NONE
-  !*--SUDS5
-  !*** Start of declarations inserted by SPAG
   REAL A, B, Work, X
   INTEGER Iflag, il, ip, is, Iwork, ks, kt, ku, kv, Mlso, Neq, &
     Nrda, Nuk
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SUDS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

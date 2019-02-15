@@ -1,4 +1,3 @@
-!*==DPLPMU.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DPLPMU
 SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,&
@@ -6,14 +5,11 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     Basmat,Csc,Wr,Rprim,Ww,Bu,Bl,Rhs,Erd,Erp,Rz,Rg,Colnrm,&
     Costs,Primal,Duals,Singlr,Redbas,Zerolv,Stpedg)
   IMPLICIT NONE
-  !*--DPLPMU9
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ibas, IDLOC, Ienter, ihi, il1, Ileave, ilow, Info, &
     Iopt, ipage, iplace, iu1, j, Jstrt, k, key, Lbm, Lmx, &
     lpg
   INTEGER Mrelas, n20002, n20018, n20121, nerr, nnegrc, Npp, npr001, &
     npr003, Nredc, Nvars
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPLPMU
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP

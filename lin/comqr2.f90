@@ -1,8 +1,6 @@
-!*==COMQR2.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK COMQR2
 SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   IMPLICIT NONE
-  !*--COMQR25
   !***BEGIN PROLOGUE  COMQR2
   !***PURPOSE  Compute the eigenvalues and eigenvectors of a complex upper
   !            Hessenberg matrix.

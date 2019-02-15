@@ -1,17 +1,13 @@
-!*==SPLPCE.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SPLPCE
 SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
     Iwr,Ind,Ibb,Erdnrm,Eps,Tune,Gg,Amat,Basmat,Csc,Wr,Ww,&
     Primal,Erd,Erp,Singlr,Redbas)
   IMPLICIT NONE
-  !*--SPLPCE7
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ihi, il1, ilow, ipage, IPLOC, Itbrc, Itlp, iu1, j, &
     key, l, Lbm, Lmx, lpg, Mrelas, n20002, n20012, n20016, &
     n20023
   INTEGER n20047, n20057, n20061, Nvars
   REAL SASUM
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPLPCE
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

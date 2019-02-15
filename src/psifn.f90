@@ -1,8 +1,6 @@
-!*==PSIFN.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK PSIFN
 SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   IMPLICIT NONE
-  !*--PSIFN5
   !***BEGIN PROLOGUE  PSIFN
   !***PURPOSE  Compute derivatives of the Psi function.
   !***LIBRARY   SLATEC

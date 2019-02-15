@@ -1,15 +1,11 @@
-!*==SBOLSM.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK SBOLSM
 SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     Scl,Ibasis,Ibb)
   IMPLICIT NONE
-  !*--SBOLSM6
-  !*** Start of declarations inserted by SPAG
   INTEGER i, igopr, ioff, ip, iprint, itemp, iter ,&
     itmax, j, jbig, jcol, jdrop, jdrop1, jdrop2, jlarge ,&
     jmag, jp, lds
   INTEGER lgopr, lp, Mdw, Minput, Mode, mrows, mval, Ncols, nsetb
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SBOLSM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SBOCLS and SBOLS

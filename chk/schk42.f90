@@ -1,9 +1,7 @@
-!*==SCHK42.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SCHK42
 SUBROUTINE SCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
     Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
   IMPLICIT NONE
-  !*--SCHK426
   !***BEGIN PROLOGUE  SCHK42
   !***SUBSIDIARY
   !***PURPOSE  Quick check for SGER.

@@ -1,12 +1,8 @@
-!*==DQDOTI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQDOTI
 REAL(8) FUNCTION DQDOTI(N,Db,Qc,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
-  !*--DQDOTI5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, i1, Incx, Incy, ix, iy, MPB, MPLun, MPM, MPMxr, MPR, &
     MPT, N
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DQDOTI
   !***PURPOSE  Compute the inner product of two vectors with extended
   !            precision accumulation and result.

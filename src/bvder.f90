@@ -1,12 +1,8 @@
-!*==BVDER.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BVDER
 SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
   IMPLICIT NONE
-  !*--BVDER5
-  !*** Start of declarations inserted by SPAG
   REAL C, G, X, XSAv, Y, Yp
   INTEGER IGOfx, INHomo, Ipar, IVP, j, k, l, na, NCOmp, NFC, NOFst
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BVDER
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

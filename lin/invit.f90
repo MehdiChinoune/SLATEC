@@ -1,8 +1,6 @@
-!*==INVIT.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK INVIT
 SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
   IMPLICIT NONE
-  !*--INVIT5
   !***BEGIN PROLOGUE  INVIT
   !***PURPOSE  Compute the eigenvectors of a real upper Hessenberg
   !            matrix associated with specified eigenvalues by inverse

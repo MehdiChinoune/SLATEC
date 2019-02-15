@@ -1,9 +1,7 @@
-!*==DORTHR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DORTHR
 SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
     Rs)
   IMPLICIT NONE
-  !*--DORTHR6
   !***BEGIN PROLOGUE  DORTHR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBVSUP and DSUDS

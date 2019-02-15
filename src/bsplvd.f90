@@ -1,13 +1,9 @@
-!*==BSPLVD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BSPLVD
 SUBROUTINE BSPLVD(T,K,X,Ileft,Vnikx,Nderiv)
   IMPLICIT NONE
-  !*--BSPLVD5
-  !*** Start of declarations inserted by SPAG
   REAL a, diff, fkmd, T, v, Vnikx, X
   INTEGER i, ideriv, idervm, Ileft, ipkmd, j, jlow, jm1, K, kmd, &
     l, m, Nderiv
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BSPLVD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to FC

@@ -1,10 +1,8 @@
-!*==SNSQ.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SNSQ
 SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,R,Lr,Qtf,&
     Wa1,Wa2,Wa3,Wa4)
   IMPLICIT NONE
-  !*--SNSQ7
   !***BEGIN PROLOGUE  SNSQ
   !***PURPOSE  Find a zero of a system of a N nonlinear functions in N
   !            variables by a modification of the Powell hybrid method.

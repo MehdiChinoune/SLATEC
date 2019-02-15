@@ -1,11 +1,7 @@
-!*==RPQR79.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK RPQR79
 SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   IMPLICIT NONE
-  !*--RPQR795
-  !*** Start of declarations inserted by SPAG
   INTEGER km1, kwend
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RPQR79
   !***PURPOSE  Find the zeros of a polynomial with real coefficients.
   !***LIBRARY   SLATEC

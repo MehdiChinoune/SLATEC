@@ -1,8 +1,6 @@
-!*==DHELS.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DHELS
 SUBROUTINE DHELS(A,Lda,N,Q,B)
   IMPLICIT NONE
-  !*--DHELS5
   !***BEGIN PROLOGUE  DHELS
   !***SUBSIDIARY
   !***PURPOSE  Internal routine for DGMRES.

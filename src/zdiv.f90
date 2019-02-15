@@ -1,8 +1,6 @@
-!*==ZDIV.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZDIV
 SUBROUTINE ZDIV(Ar,Ai,Br,Bi,Cr,Ci)
   IMPLICIT NONE
-  !*--ZDIV5
   !***BEGIN PROLOGUE  ZDIV
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and

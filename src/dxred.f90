@@ -1,11 +1,7 @@
-!*==DXRED.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DXRED
 SUBROUTINE DXRED(X,Ix,Ierror)
   IMPLICIT NONE
-  !*--DXRED5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Ierror, ixa, ixa1, ixa2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXRED
   !***PURPOSE  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.

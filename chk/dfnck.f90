@@ -1,8 +1,6 @@
-!*==DFNCK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DFNCK
 SUBROUTINE DFNCK(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DFNCK5
   !***BEGIN PROLOGUE  DFNCK
   !***PURPOSE  Quick check for the double precision Fullerton
   !            special functions.

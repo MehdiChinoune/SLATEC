@@ -1,8 +1,6 @@
-!*==CKSCL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CKSCL
 SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   IMPLICIT NONE
-  !*--CKSCL5
   !***BEGIN PROLOGUE  CKSCL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBKNU, CUNK1 and CUNK2

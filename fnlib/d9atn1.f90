@@ -1,11 +1,7 @@
-!*==D9ATN1.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9ATN1
 REAL(8) FUNCTION D9ATN1(X)
   IMPLICIT NONE
-  !*--D9ATN15
-  !*** Start of declarations inserted by SPAG
   INTEGER INITDS, ntatn1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9ATN1
   !***SUBSIDIARY
   !***PURPOSE  Evaluate DATAN(X) from first order relative accuracy so

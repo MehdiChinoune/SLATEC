@@ -1,8 +1,6 @@
-!*==CPOSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CPOSL
 SUBROUTINE CPOSL(A,Lda,N,B)
   IMPLICIT NONE
-  !*--CPOSL5
   !***BEGIN PROLOGUE  CPOSL
   !***PURPOSE  Solve the complex Hermitian positive definite linear system
   !            using the factors computed by CPOCO or CPOFA.

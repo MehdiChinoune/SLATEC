@@ -1,8 +1,6 @@
-!*==BKIAS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BKIAS
 SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   IMPLICIT NONE
-  !*--BKIAS5
   !***BEGIN PROLOGUE  BKIAS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BSKIN

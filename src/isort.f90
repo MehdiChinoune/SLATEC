@@ -1,8 +1,6 @@
-!*==ISORT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK ISORT
 SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   IMPLICIT NONE
-  !*--ISORT5
   !***BEGIN PROLOGUE  ISORT
   !***PURPOSE  Sort an array and optionally make the same interchanges in
   !            an auxiliary array.  The array may be sorted in increasing

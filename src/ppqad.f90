@@ -1,8 +1,6 @@
-!*==PPQAD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK PPQAD
 SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   IMPLICIT NONE
-  !*--PPQAD5
   !***BEGIN PROLOGUE  PPQAD
   !***PURPOSE  Compute the integral on (X1,X2) of a K-th order B-spline
   !            using the piecewise polynomial (PP) representation.

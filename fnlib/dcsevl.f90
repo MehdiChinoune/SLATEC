@@ -1,11 +1,7 @@
-!*==DCSEVL.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DCSEVL
 REAL(8) FUNCTION DCSEVL(X,Cs,N)
   IMPLICIT NONE
-  !*--DCSEVL5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, N, ni
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DCSEVL
   !***PURPOSE  Evaluate a Chebyshev series.
   !***LIBRARY   SLATEC (FNLIB)

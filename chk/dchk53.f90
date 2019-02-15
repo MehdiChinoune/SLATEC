@@ -1,9 +1,7 @@
-!*==DCHK53.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DCHK53
 SUBROUTINE DCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
     Nbet,Bet,Nmax,Ab,Aa,As,Bb,Bs,C,Cc,Cs,Ct,G,W)
   IMPLICIT NONE
-  !*--DCHK536
   !***BEGIN PROLOGUE  DCHK53
   !***SUBSIDIARY
   !***PURPOSE  Test DSYR2K.

@@ -1,8 +1,6 @@
-!*==CSHCH.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CSHCH
 SUBROUTINE CSHCH(Z,Csh,Cch)
   IMPLICIT NONE
-  !*--CSHCH5
   !***BEGIN PROLOGUE  CSHCH
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBESH and CBESK

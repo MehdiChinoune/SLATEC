@@ -1,8 +1,6 @@
-!*==DRSCO.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DRSCO
 SUBROUTINE DRSCO(Rsav,Isav)
   IMPLICIT NONE
-  !*--DRSCO5
   !***BEGIN PROLOGUE  DRSCO
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DDEBDF

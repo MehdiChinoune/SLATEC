@@ -1,9 +1,7 @@
-!*==DQAGE.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQAGE
 SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
   IMPLICIT NONE
-  !*--DQAGE6
   !***BEGIN PROLOGUE  DQAGE
   !***PURPOSE  The routine calculates an approximation result to a given
   !            definite integral   I = Integral of F over (A,B),

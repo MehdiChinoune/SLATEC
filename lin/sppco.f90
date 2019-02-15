@@ -1,8 +1,6 @@
-!*==SPPCO.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SPPCO
 SUBROUTINE SPPCO(Ap,N,Rcond,Z,Info)
   IMPLICIT NONE
-  !*--SPPCO5
   !***BEGIN PROLOGUE  SPPCO
   !***PURPOSE  Factor a symmetric positive definite matrix stored in
   !            packed form and estimate the condition number of the

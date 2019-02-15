@@ -1,13 +1,9 @@
-!*==DAWS.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DAWS
 FUNCTION DAWS(X)
   IMPLICIT NONE
-  !*--DAWS5
-  !*** Start of declarations inserted by SPAG
   REAL CSEVL, daw2cs, dawacs, dawcs, DAWS, eps, R1MACH, X, xbig, &
     xmax, xsml, y
   INTEGER INITS, ntdaw, ntdaw2, ntdawa
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DAWS
   !***PURPOSE  Compute Dawson's function.
   !***LIBRARY   SLATEC (FNLIB)

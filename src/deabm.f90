@@ -1,16 +1,12 @@
-!*==DEABM.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DEABM
 SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar)
   IMPLICIT NONE
-  !*--DEABM6
-  !*** Start of declarations inserted by SPAG
   REAL Atol, F, Rpar, Rtol, Rwork, T, Tout, Y
   INTEGER ialpha, ibeta, idelsn, Idid, ifouru, ig, igi, ihold ,&
     Info, ip, Ipar, iphi, ipsi, isig, itold, itstar, itwou ,&
     iv, iw, Iwork
   INTEGER iwt, ixold, iyp, iypout, iyy, Liw, Lrw, Neq
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DEABM
   !***PURPOSE  Solve an initial value problem in ordinary differential
   !            equations using an Adams-Bashforth method.

@@ -1,11 +1,7 @@
-!*==XADJ.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XADJ
 SUBROUTINE XADJ(X,Ix,Ierror)
   IMPLICIT NONE
-  !*--XADJ5
-  !*** Start of declarations inserted by SPAG
   INTEGER Ierror
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XADJ
   !***PURPOSE  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.

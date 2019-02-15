@@ -1,8 +1,6 @@
-!*==DUVEC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DUVEC
 SUBROUTINE DUVEC(X,Y,Yp)
   IMPLICIT NONE
-  !*--DUVEC5
   !***BEGIN PROLOGUE  DUVEC
   !***PURPOSE  Dummy routine for DBVSUP quick check.
   !***LIBRARY   SLATEC

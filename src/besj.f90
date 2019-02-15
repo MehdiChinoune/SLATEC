@@ -1,11 +1,7 @@
-!*==BESJ.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BESJ
 SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   IMPLICIT NONE
-  !*--BESJ5
-  !*** Start of declarations inserted by SPAG
   INTEGER JAIRY
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESJ
   !***PURPOSE  Compute an N member sequence of J Bessel functions
   !            J/SUB(ALPHA+K-1)/(X), K=1,...,N for non-negative ALPHA

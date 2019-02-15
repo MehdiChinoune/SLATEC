@@ -1,8 +1,6 @@
-!*==SNBFA.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SNBFA
 SUBROUTINE SNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   IMPLICIT NONE
-  !*--SNBFA5
   !***BEGIN PROLOGUE  SNBFA
   !***PURPOSE  Factor a real band matrix by elimination.
   !***LIBRARY   SLATEC

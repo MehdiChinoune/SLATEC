@@ -1,8 +1,6 @@
-!*==ISRTQC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK ISRTQC
 SUBROUTINE ISRTQC(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--ISRTQC5
   !***BEGIN PROLOGUE  ISRTQC
   !***SUBSIDIARY
   !***PURPOSE  Quick check for SLATEC routines ISORT, IPSORT, IPPERM

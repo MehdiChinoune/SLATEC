@@ -1,12 +1,8 @@
-!*==XADD.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XADD
 SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   IMPLICIT NONE
-  !*--XADD5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, i1, i2, Ierror, is, j
   REAL s, t
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XADD
   !***PURPOSE  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.

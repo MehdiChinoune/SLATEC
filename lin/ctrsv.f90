@@ -1,8 +1,6 @@
-!*==CTRSV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CTRSV
 SUBROUTINE CTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   IMPLICIT NONE
-  !*--CTRSV5
   !***BEGIN PROLOGUE  CTRSV
   !***PURPOSE  Solve a complex triangular system of equations.
   !***LIBRARY   SLATEC (BLAS)

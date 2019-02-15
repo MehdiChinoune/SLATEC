@@ -1,12 +1,8 @@
-!*==XERMSG.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XERMSG
 SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   IMPLICIT NONE
-  !*--XERMSG5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, J4SAVE, kdummy, kount, lerr, Level, lkntrl, llevel ,&
     ltemp, maxmes, mkntrl, Nerr
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XERMSG
   !***PURPOSE  Process error messages for SLATEC and other libraries.
   !***LIBRARY   SLATEC (XERROR)

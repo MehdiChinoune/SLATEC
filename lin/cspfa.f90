@@ -1,8 +1,6 @@
-!*==CSPFA.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CSPFA
 SUBROUTINE CSPFA(Ap,N,Kpvt,Info)
   IMPLICIT NONE
-  !*--CSPFA5
   !***BEGIN PROLOGUE  CSPFA
   !***PURPOSE  Factor a complex symmetric matrix stored in packed form by
   !            elimination with symmetric pivoting.

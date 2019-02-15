@@ -1,8 +1,6 @@
-!*==SSDS.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSDS
 SUBROUTINE SSDS(N,Nelt,Ia,Ja,A,Isym,Dinv)
   IMPLICIT NONE
-  !*--SSDS5
   !***BEGIN PROLOGUE  SSDS
   !***PURPOSE  Diagonal Scaling Preconditioner SLAP Set Up.
   !            Routine to compute the inverse of the diagonal of a matrix

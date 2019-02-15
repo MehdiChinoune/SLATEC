@@ -1,12 +1,8 @@
-!*==MACON.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK MACON
 SUBROUTINE MACON
   IMPLICIT NONE
-  !*--MACON5
-  !*** Start of declarations inserted by SPAG
   REAL dd, EPS, FOUru, R1MACH, SQOvfl, SRU, TWOu, URO
   INTEGER ke, LPAr
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MACON
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

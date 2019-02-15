@@ -1,8 +1,6 @@
-!*==DDATRP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DDATRP
 SUBROUTINE DDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
   IMPLICIT NONE
-  !*--DDATRP5
   !***BEGIN PROLOGUE  DDATRP
   !***SUBSIDIARY
   !***PURPOSE  Interpolation routine for DDASSL.

@@ -1,11 +1,7 @@
-!*==SCOV.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK SCOV
 SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   IMPLICIT NONE
-  !*--SCOV5
-  !*** Start of declarations inserted by SPAG
   REAL ENORM
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SCOV
   !***PURPOSE  Calculate the covariance matrix for a nonlinear data
   !            fitting problem.  It is intended to be used after a

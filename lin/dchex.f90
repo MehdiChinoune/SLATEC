@@ -1,8 +1,6 @@
-!*==DCHEX.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DCHEX
 SUBROUTINE DCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
   IMPLICIT NONE
-  !*--DCHEX5
   !***BEGIN PROLOGUE  DCHEX
   !***PURPOSE  Update the Cholesky factorization  A=TRANS(R)*R  of a
   !            positive definite matrix A of order P under diagonal

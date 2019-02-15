@@ -1,11 +1,7 @@
-!*==DTEST.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DTEST
 SUBROUTINE DTEST(Len,Dcomp,Dtrue,Dsize,Dfac,Kprint)
   IMPLICIT NONE
-  !*--DTEST5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DTEST
   !***PURPOSE  Compare arrays DCOMP and DTRUE.
   !***LIBRARY   SLATEC

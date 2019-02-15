@@ -1,8 +1,6 @@
-!*==D1MERG.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK D1MERG
 SUBROUTINE D1MERG(Tcos,I1,M1,I2,M2,I3)
   IMPLICIT NONE
-  !*--D1MERG5
   !***BEGIN PROLOGUE  D1MERG
   !***SUBSIDIARY
   !***PURPOSE  Merge two strings of ascending double precision numbers.

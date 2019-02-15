@@ -1,11 +1,7 @@
-!*==CHIQC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CHIQC
 SUBROUTINE CHIQC(Lun,Kprint,Nerr)
   IMPLICIT NONE
-  !*--CHIQC5
-  !*** Start of declarations inserted by SPAG
   INTEGER Kprint, Lun
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CHIQC
   !***PURPOSE  Quick check for CHIFA, CHICO, CHISL and CHIDI.
   !***LIBRARY   SLATEC

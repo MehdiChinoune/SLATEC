@@ -1,8 +1,6 @@
-!*==PCHQK4.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK PCHQK4
 SUBROUTINE PCHQK4(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--PCHQK45
   !***BEGIN PROLOGUE  PCHQK4
   !***PURPOSE  Test the PCHIP monotonicity checker PCHCM.
   !***LIBRARY   SLATEC (PCHIP)

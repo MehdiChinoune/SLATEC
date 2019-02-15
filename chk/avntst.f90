@@ -1,12 +1,8 @@
-!*==AVNTST.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK AVNTST
 SUBROUTINE AVNTST(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--AVNTST5
-  !*** Start of declarations inserted by SPAG
   REAL a, ans, b, del, R1MACH, rn1, sqb, tol, tol1, x, xint, y
   INTEGER i, ierr, Ipass, kontrl, Kprint, Lun, n
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  AVNTST
   !***PURPOSE  Quick check for AVINT.
   !***LIBRARY   SLATEC

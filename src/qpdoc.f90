@@ -1,8 +1,6 @@
-!*==QPDOC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QPDOC
 SUBROUTINE QPDOC
   IMPLICIT NONE
-  !*--QPDOC5
   !***BEGIN PROLOGUE  QPDOC
   !***PURPOSE  Documentation for QUADPACK, a package of subprograms for
   !            automatic evaluation of one-dimensional definite integrals.

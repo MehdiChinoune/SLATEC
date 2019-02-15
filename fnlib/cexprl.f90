@@ -1,12 +1,8 @@
-!*==CEXPRL.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CEXPRL
 COMPLEX FUNCTION CEXPRL(Z)
   IMPLICIT NONE
-  !*--CEXPRL5
-  !*** Start of declarations inserted by SPAG
   REAL alneps, r, R1MACH, rbnd, xln, xn
   INTEGER i, nterms
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CEXPRL
   !***PURPOSE  Calculate the relative error exponential (EXP(X)-1)/X.
   !***LIBRARY   SLATEC (FNLIB)

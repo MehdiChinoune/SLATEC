@@ -1,11 +1,7 @@
-!*==SQRDC.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SQRDC
 SUBROUTINE SQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   IMPLICIT NONE
-  !*--SQRDC5
-  !*** Start of declarations inserted by SPAG
   INTEGER jj
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SQRDC
   !***PURPOSE  Use Householder transformations to compute the QR
   !            factorization of an N by P matrix.  Column pivoting is a

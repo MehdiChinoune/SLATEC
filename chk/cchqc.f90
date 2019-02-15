@@ -1,11 +1,7 @@
-!*==CCHQC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CCHQC
 SUBROUTINE CCHQC(Lun,Kprint,Nerr)
   IMPLICIT NONE
-  !*--CCHQC5
-  !*** Start of declarations inserted by SPAG
   INTEGER Kprint, Lun, Nerr
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CCHQC
   !***PURPOSE  Quick check for CCHDC.
   !***LIBRARY   SLATEC

@@ -1,11 +1,7 @@
-!*==DXADD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DXADD
 SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   IMPLICIT NONE
-  !*--DXADD5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, i1, i2, Ierror, is, j
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXADD
   !***PURPOSE  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.

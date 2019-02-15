@@ -1,8 +1,6 @@
-!*==SRLCAL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SRLCAL
 SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   IMPLICIT NONE
-  !*--SRLCAL5
   !***BEGIN PROLOGUE  SRLCAL
   !***SUBSIDIARY
   !***PURPOSE  Internal routine for SGMRES.

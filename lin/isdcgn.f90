@@ -1,10 +1,8 @@
-!*==ISDCGN.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK ISDCGN
 INTEGER FUNCTION ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
     Tol,Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Atp,Atz,Dz,&
     Atdz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   IMPLICIT NONE
-  !*--ISDCGN7
   !***BEGIN PROLOGUE  ISDCGN
   !***SUBSIDIARY
   !***PURPOSE  Preconditioned CG on Normal Equations Stop Test.

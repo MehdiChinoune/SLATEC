@@ -1,8 +1,6 @@
-!*==DFEHL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DFEHL
 SUBROUTINE DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   IMPLICIT NONE
-  !*--DFEHL5
   !***BEGIN PROLOGUE  DFEHL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DDERKF

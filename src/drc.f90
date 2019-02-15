@@ -1,8 +1,6 @@
-!*==DRC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DRC
 REAL(8) FUNCTION DRC(X,Y,Ier)
   IMPLICIT NONE
-  !*--DRC5
   !***BEGIN PROLOGUE  DRC
   !***PURPOSE  Calculate a double precision approximation to
   !             DRC(X,Y) = Integral from zero to infinity of

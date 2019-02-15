@@ -1,8 +1,6 @@
-!*==DCV.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DCV
 REAL(8) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   IMPLICIT NONE
-  !*--DCV5
   !***BEGIN PROLOGUE  DCV
   !***PURPOSE  Evaluate the variance function of the curve obtained
   !            by the constrained B-spline fitting subprogram DFC.

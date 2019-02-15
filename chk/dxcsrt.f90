@@ -1,13 +1,9 @@
-!*==DXCSRT.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DXCSRT
 SUBROUTINE DXCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,&
     Ierror)
   IMPLICIT NONE
-  !*--DXCSRT6
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Ic1, Ic2, Ierror, Ip, Iq, Ir, ix1, ix2, j, k, l, &
     lm1, mu, Mu1, Mu2, Nudiff
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXCSRT
   !***PURPOSE  TO COMPUTE CHECK VALUES FOR LEGENDRE FUNCTIONS
   !***LIBRARY   SLATEC

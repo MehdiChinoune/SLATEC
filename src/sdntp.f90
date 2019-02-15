@@ -1,8 +1,6 @@
-!*==SDNTP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK SDNTP
 SUBROUTINE SDNTP(H,K,N,Nq,T,Tout,Yh,Y)
   IMPLICIT NONE
-  !*--SDNTP5
   !***BEGIN PROLOGUE  SDNTP
   !***SUBSIDIARY
   !***PURPOSE  Subroutine SDNTP interpolates the K-th derivative of Y at

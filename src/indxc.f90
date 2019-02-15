@@ -1,12 +1,8 @@
-!*==INDXC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK INDXC
 SUBROUTINE INDXC(I,Ir,Idxc,Nc)
   IMPLICIT NONE
-  !*--INDXC5
-  !*** Start of declarations inserted by SPAG
   REAL CNV, EPS
   INTEGER I, Idxc, IK, Ir, K, Nc, NCMplx, NM, NPP
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  INDXC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI

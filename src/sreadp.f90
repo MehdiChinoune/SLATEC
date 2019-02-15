@@ -1,11 +1,7 @@
-!*==SREADP.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SREADP
 SUBROUTINE SREADP(Ipage,List,Rlist,Lpage,Irec)
   IMPLICIT NONE
-  !*--SREADP5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Ipage, ipagef, Irec, irecn, Lpage, lpg
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SREADP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

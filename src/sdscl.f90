@@ -1,8 +1,6 @@
-!*==SDSCL.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SDSCL
 SUBROUTINE SDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
   IMPLICIT NONE
-  !*--SDSCL5
   !***BEGIN PROLOGUE  SDSCL
   !***SUBSIDIARY
   !***PURPOSE  Subroutine SDSCL rescales the YH array whenever the step

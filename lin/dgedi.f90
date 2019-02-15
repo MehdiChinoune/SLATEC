@@ -1,8 +1,6 @@
-!*==DGEDI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DGEDI
 SUBROUTINE DGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   IMPLICIT NONE
-  !*--DGEDI5
   !***BEGIN PROLOGUE  DGEDI
   !***PURPOSE  Compute the determinant and inverse of a matrix using the
   !            factors computed by DGECO or DGEFA.

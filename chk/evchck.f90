@@ -1,8 +1,6 @@
-!*==EVCHCK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK EVCHCK
 SUBROUTINE EVCHCK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
   IMPLICIT NONE
-  !*--EVCHCK5
   !***BEGIN PROLOGUE  EVCHCK
   !***SUBSIDIARY
   !***PURPOSE  Test evaluation accuracy of CHFDV and CHFEV for PCHQK1.

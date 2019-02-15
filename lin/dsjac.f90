@@ -1,12 +1,8 @@
-!*==DSJAC.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSJAC
 SUBROUTINE DSJAC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !*--DSJAC6
-  !*** Start of declarations inserted by SPAG
   REAL DSDI, DSMV
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSJAC
   !***PURPOSE  Jacobi's Method Iterative Sparse Ax = b Solver.
   !            Routine to solve a general linear system  Ax = b  using

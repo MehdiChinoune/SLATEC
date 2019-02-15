@@ -1,16 +1,12 @@
-!*==SINTRP.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SINTRP
 SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
     Og,Ow,Ox,Oy)
   IMPLICIT NONE
-  !*--SINTRP6
-  !*** Start of declarations inserted by SPAG
   REAL alp, Alpha, c, g, gamma, gdi, gdif, Gi, h, hi, hmu, Og, &
     Ow, Ox, Oy, Phi, rmu, sigma, temp1, temp2
   REAL temp3, w, X, xi, xim1, xiq, Xout, Y, Yout, Ypout
   INTEGER i, iq, Iv, Ivc, iw, j, jq, Kgi, Kold, kp1, kp2, l, m, &
     Neqn
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SINTRP
   !***PURPOSE  Approximate the solution at XOUT by evaluating the
   !            polynomial computed in STEPS at XOUT.  Must be used in

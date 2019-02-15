@@ -1,11 +1,7 @@
-!*==D9PAK.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9PAK
 REAL(8) FUNCTION D9PAK(Y,N)
   IMPLICIT NONE
-  !*--D9PAK5
-  !*** Start of declarations inserted by SPAG
   INTEGER I1MACH, N, nmax, nmin, nsum, ny
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9PAK
   !***PURPOSE  Pack a base 2 exponent into a floating point number.
   !***LIBRARY   SLATEC (FNLIB)

@@ -1,8 +1,6 @@
-!*==BESK.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BESK
 SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   IMPLICIT NONE
-  !*--BESK5
   !***BEGIN PROLOGUE  BESK
   !***PURPOSE  Implement forward recursion on the three term recursion
   !            relation for a sequence of non-negative order Bessel

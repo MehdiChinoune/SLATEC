@@ -1,8 +1,6 @@
-!*==DEVPCK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DEVPCK
 SUBROUTINE DEVPCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
   IMPLICIT NONE
-  !*--DEVPCK5
   !***BEGIN PROLOGUE  DEVPCK
   !***SUBSIDIARY
   !***PURPOSE  Test usage of increment argument in DPCHFD and DPCHFE for

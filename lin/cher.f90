@@ -1,8 +1,6 @@
-!*==CHER.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CHER
 SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
   IMPLICIT NONE
-  !*--CHER5
   !***BEGIN PROLOGUE  CHER
   !***PURPOSE  Perform Hermitian rank 1 update of a complex Hermitian
   !            matrix.

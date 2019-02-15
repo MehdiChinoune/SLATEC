@@ -1,15 +1,11 @@
-!*==ORTHOR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK ORTHOR
 SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
     Rs)
   IMPLICIT NONE
-  !*--ORTHOR6
-  !*** Start of declarations inserted by SPAG
   REAL A, acc, akk, anorm, as, asave, Diag, diagk, dum, R1MACH, &
     Rows, Rs, rss, sad, Scales, SDOT, sig, sigma, sruro, uro
   INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot, l, M, mk, &
     N, Nrda
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ORTHOR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

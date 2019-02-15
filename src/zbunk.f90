@@ -1,8 +1,6 @@
-!*==ZBUNK.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZBUNK
 SUBROUTINE ZBUNK(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--ZBUNK5
   !***BEGIN PROLOGUE  ZBUNK
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESH and ZBESK

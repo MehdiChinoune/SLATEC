@@ -1,11 +1,7 @@
-!*==PSIXN.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK PSIXN
 FUNCTION PSIXN(N)
   IMPLICIT NONE
-  !*--PSIXN5
-  !*** Start of declarations inserted by SPAG
   REAL PSIXN
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PSIXN
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to EXINT

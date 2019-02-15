@@ -1,11 +1,7 @@
-!*==CACOS.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CACOS
 COMPLEX FUNCTION CACOS(Z)
   IMPLICIT NONE
-  !*--CACOS5
-  !*** Start of declarations inserted by SPAG
   REAL pi2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CACOS
   !***PURPOSE  Compute the complex arc cosine.
   !***LIBRARY   SLATEC (FNLIB)

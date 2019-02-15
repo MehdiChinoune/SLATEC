@@ -1,14 +1,10 @@
-!*==BNDACC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BNDACC
 SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   IMPLICIT NONE
-  !*--BNDACC5
-  !*** Start of declarations inserted by SPAG
   REAL G, rho, zero
   INTEGER i, ie, ig, ig1, ig2, iopt, Ip, Ir, j, jg, Jt, k, kh, &
     l, lp1, Mdg, mh, Mt, mu, Nb
   INTEGER nbp1, nerr
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BNDACC
   !***PURPOSE  Compute the LU factorization of a banded matrices using
   !            sequential accumulation of rows of the data matrix.

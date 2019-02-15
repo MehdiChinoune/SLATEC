@@ -1,11 +1,7 @@
-!*==MPADD2.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK MPADD2
 SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   IMPLICIT NONE
-  !*--MPADD25
-  !*** Start of declarations inserted by SPAG
   INTEGER j, LUN, M, med, MXR
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPADD2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI

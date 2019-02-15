@@ -1,12 +1,8 @@
-!*==DXC210.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DXC210
 SUBROUTINE DXC210(K,Z,J,Ierror)
   IMPLICIT NONE
-  !*--DXC2105
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ic, id, Ierror, ii, it, ja, ka, ka1, ka2, m, nm1, &
     np1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXC210
   !***PURPOSE  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.

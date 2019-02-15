@@ -1,8 +1,6 @@
-!*==DQC25C.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQC25C
 SUBROUTINE DQC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   IMPLICIT NONE
-  !*--DQC25C5
   !***BEGIN PROLOGUE  DQC25C
   !***PURPOSE  To compute I = Integral of F*W over (A,B) with
   !            error estimate, where W(X) = 1/(X-C)

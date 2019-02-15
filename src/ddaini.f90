@@ -1,12 +1,8 @@
-!*==DDAINI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DDAINI
 SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
     Wm,Iwm,Hmin,Uround,Nonneg,Ntemp)
   IMPLICIT NONE
-  !*--DDAINI6
-  !*** Start of declarations inserted by SPAG
   INTEGER JAC
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DDAINI
   !***SUBSIDIARY
   !***PURPOSE  Initialization routine for DDASSL.

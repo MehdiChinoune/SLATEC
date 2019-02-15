@@ -1,14 +1,10 @@
-!*==ORTHO4.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK ORTHO4
 SUBROUTINE ORTHO4(Usol,Idmn,Zn,Zm,Pertrb)
   IMPLICIT NONE
-  !*--ORTHO45
-  !*** Start of declarations inserted by SPAG
   REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, ete, Pertrb, &
     TDLx3, TDLy3, Usol, ute, Zm, Zn
   INTEGER i, Idmn, ifnl, ii, IS, istr, j, jfnl, jj, JS, jstr, K, &
     KSWx, KSWy, L, MIT, MS, NIT, NS
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ORTHO4
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPX4

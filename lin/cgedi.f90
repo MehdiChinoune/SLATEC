@@ -1,8 +1,6 @@
-!*==CGEDI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CGEDI
 SUBROUTINE CGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   IMPLICIT NONE
-  !*--CGEDI5
   !***BEGIN PROLOGUE  CGEDI
   !***PURPOSE  Compute the determinant and inverse of a matrix using the
   !            factors computed by CGECO or CGEFA.

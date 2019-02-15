@@ -1,8 +1,6 @@
-!*==DWNLT1.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DWNLT1
 SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scale,W)
   IMPLICIT NONE
-  !*--DWNLT15
   !***BEGIN PROLOGUE  DWNLT1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to WNLIT

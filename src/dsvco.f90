@@ -1,8 +1,6 @@
-!*==DSVCO.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DSVCO
 SUBROUTINE DSVCO(Rsav,Isav)
   IMPLICIT NONE
-  !*--DSVCO5
   !***BEGIN PROLOGUE  DSVCO
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DDEBDF

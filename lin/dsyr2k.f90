@@ -1,8 +1,6 @@
-!*==DSYR2K.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSYR2K
 SUBROUTINE DSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   IMPLICIT NONE
-  !*--DSYR2K5
   !***BEGIN PROLOGUE  DSYR2K
   !***PURPOSE  Perform one of the symmetric rank 2k operations.
   !***LIBRARY   SLATEC (BLAS)

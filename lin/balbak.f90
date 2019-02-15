@@ -1,8 +1,6 @@
-!*==BALBAK.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK BALBAK
 SUBROUTINE BALBAK(Nm,N,Low,Igh,Scale,M,Z)
   IMPLICIT NONE
-  !*--BALBAK5
   !***BEGIN PROLOGUE  BALBAK
   !***PURPOSE  Form the eigenvectors of a real general matrix from the
   !            eigenvectors of matrix output from BALANC.

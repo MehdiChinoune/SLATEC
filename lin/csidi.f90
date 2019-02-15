@@ -1,8 +1,6 @@
-!*==CSIDI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CSIDI
 SUBROUTINE CSIDI(A,Lda,N,Kpvt,Det,Work,Job)
   IMPLICIT NONE
-  !*--CSIDI5
   !***BEGIN PROLOGUE  CSIDI
   !***PURPOSE  Compute the determinant and inverse of a complex symmetric
   !            matrix using the factors from CSIFA.

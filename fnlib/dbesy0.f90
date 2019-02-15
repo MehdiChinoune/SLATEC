@@ -1,11 +1,7 @@
-!*==DBESY0.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBESY0
 REAL(8) FUNCTION DBESY0(X)
   IMPLICIT NONE
-  !*--DBESY05
-  !*** Start of declarations inserted by SPAG
   INTEGER INITDS, nty0
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBESY0
   !***PURPOSE  Compute the Bessel function of the second kind of order
   !            zero.

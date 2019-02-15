@@ -1,8 +1,6 @@
-!*==DNBSL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DNBSL
 SUBROUTINE DNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   IMPLICIT NONE
-  !*--DNBSL5
   !***BEGIN PROLOGUE  DNBSL
   !***PURPOSE  Solve a real band system using the factors computed by
   !            DNBCO or DNBFA.

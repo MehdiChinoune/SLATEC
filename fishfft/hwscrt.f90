@@ -1,10 +1,7 @@
-!*==HWSCRT.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK HWSCRT
 SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !*--HWSCRT6
-  !*** Start of declarations inserted by SPAG
   REAL A, a1, a2, B, Bda, Bdb, Bdc, Bdd, C, D, deltax, deltay, &
     delxsq, delysq, Elmbda, F, Pertrb, s, s1, st2
   REAL twdelx, twdely, W
@@ -13,7 +10,6 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     N
   INTEGER Nbdcnd, np, np1, nperod, nskip, nsp1, nstart, nstm1, &
     nstop, nunk
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HWSCRT
   !***PURPOSE  Solves the standard five-point finite difference
   !            approximation to the Helmholtz equation in Cartesian

@@ -1,8 +1,6 @@
-!*==FIGI2.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK FIGI2
 SUBROUTINE FIGI2(Nm,N,T,D,E,Z,Ierr)
   IMPLICIT NONE
-  !*--FIGI25
   !***BEGIN PROLOGUE  FIGI2
   !***PURPOSE  Transforms certain real non-symmetric tridiagonal matrix
   !            to symmetric tridiagonal matrix.

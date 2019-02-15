@@ -1,8 +1,6 @@
-!*==DORTH.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DORTH
 SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   IMPLICIT NONE
-  !*--DORTH5
   !***BEGIN PROLOGUE  DORTH
   !***SUBSIDIARY
   !***PURPOSE  Internal routine for DGMRES.

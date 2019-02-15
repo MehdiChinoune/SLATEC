@@ -1,13 +1,9 @@
-!*==BI.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK BI
 FUNCTION BI(X)
   IMPLICIT NONE
-  !*--BI5
-  !*** Start of declarations inserted by SPAG
   REAL BI, BIE, bif2cs, bifcs, big2cs, bigcs, CSEVL, eta, R1MACH, &
     theta, X, x3sml, xm, xmax, z
   INTEGER INITS, nbif, nbif2, nbig, nbig2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BI
   !***PURPOSE  Evaluate the Bairy function (the Airy function of the
   !            second kind).

@@ -1,8 +1,6 @@
-!*==DGBSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DGBSL
 SUBROUTINE DGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   IMPLICIT NONE
-  !*--DGBSL5
   !***BEGIN PROLOGUE  DGBSL
   !***PURPOSE  Solve the real band system A*X=B or TRANS(A)*X=B using
   !            the factors computed by DGBCO or DGBFA.

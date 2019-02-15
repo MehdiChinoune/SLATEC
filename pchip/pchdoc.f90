@@ -1,8 +1,6 @@
-!*==PCHDOC.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK PCHDOC
 SUBROUTINE PCHDOC
   IMPLICIT NONE
-  !*--PCHDOC5
   !***BEGIN PROLOGUE  PCHDOC
   !***PURPOSE  Documentation for PCHIP, a Fortran package for piecewise
   !            cubic Hermite interpolation of data.

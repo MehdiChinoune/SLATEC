@@ -1,8 +1,6 @@
-!*==CSINH.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CSINH
 COMPLEX FUNCTION CSINH(Z)
   IMPLICIT NONE
-  !*--CSINH5
   !***BEGIN PROLOGUE  CSINH
   !***PURPOSE  Compute the complex hyperbolic sine.
   !***LIBRARY   SLATEC (FNLIB)

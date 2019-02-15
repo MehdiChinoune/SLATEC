@@ -1,11 +1,7 @@
-!*==IDLOC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK IDLOC
 INTEGER FUNCTION IDLOC(Loc,Sx,Ix)
   IMPLICIT NONE
-  !*--IDLOC5
-  !*** Start of declarations inserted by SPAG
   INTEGER ipage, itemp, k, key, lmx, lmxm1, Loc, lpg, np
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  IDLOC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP

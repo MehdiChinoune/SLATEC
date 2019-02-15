@@ -1,8 +1,6 @@
-!*==SQFCN2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SQFCN2
 SUBROUTINE SQFCN2(N,X,Fvec,Iflag)
   IMPLICIT NONE
-  !*--SQFCN25
   !***BEGIN PROLOGUE  SQFCN2
   !***PURPOSE  Evaluate function used in SNSQE.
   !***LIBRARY   SLATEC

@@ -1,8 +1,6 @@
-!*==WNLIT.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK WNLIT
 SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
   IMPLICIT NONE
-  !*--WNLIT5
   !***BEGIN PROLOGUE  WNLIT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to WNNLS

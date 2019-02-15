@@ -1,11 +1,7 @@
-!*==CHFCM.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK CHFCM
 INTEGER FUNCTION CHFCM(D1,D2,Delta)
   IMPLICIT NONE
-  !*--CHFCM5
-  !*** Start of declarations inserted by SPAG
   REAL R1MACH
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CHFCM
   !***SUBSIDIARY
   !***PURPOSE  Check a single cubic for monotonicity.

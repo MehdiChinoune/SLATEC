@@ -1,8 +1,6 @@
-!*==SPBDI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SPBDI
 SUBROUTINE SPBDI(Abd,Lda,N,M,Det)
   IMPLICIT NONE
-  !*--SPBDI5
   !***BEGIN PROLOGUE  SPBDI
   !***PURPOSE  Compute the determinant of a symmetric positive definite
   !            band matrix using the factors computed by SPBCO or SPBFA.

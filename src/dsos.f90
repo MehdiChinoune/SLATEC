@@ -1,8 +1,6 @@
-!*==DSOS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DSOS
 SUBROUTINE DSOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   IMPLICIT NONE
-  !*--DSOS5
   !***BEGIN PROLOGUE  DSOS
   !***PURPOSE  Solve a square system of nonlinear equations.
   !***LIBRARY   SLATEC

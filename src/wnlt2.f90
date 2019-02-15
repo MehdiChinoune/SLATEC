@@ -1,8 +1,6 @@
-!*==WNLT2.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK WNLT2
 LOGICAL FUNCTION WNLT2(Me,Mend,Ir,Factor,Tau,Scale,Wic)
   IMPLICIT NONE
-  !*--WNLT25
   !***BEGIN PROLOGUE  WNLT2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to WNLIT

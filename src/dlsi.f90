@@ -1,8 +1,6 @@
-!*==DLSI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DLSI
 SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   IMPLICIT NONE
-  !*--DLSI5
   !***BEGIN PROLOGUE  DLSI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DLSEI

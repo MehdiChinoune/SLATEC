@@ -1,8 +1,6 @@
-!*==CUNIK.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CUNIK
 SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Sum,Cwrk)
   IMPLICIT NONE
-  !*--CUNIK5
   !***BEGIN PROLOGUE  CUNIK
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBESI and CBESK

@@ -1,11 +1,7 @@
-!*==CDQAWF.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CDQAWF
 SUBROUTINE CDQAWF(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--CDQAWF5
-  !*** Start of declarations inserted by SPAG
   INTEGER ierv, integr, iwork, leniw, Lun, maxp1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CDQAWF
   !***PURPOSE  Quick check for DQAWF.
   !***LIBRARY   SLATEC

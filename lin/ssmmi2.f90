@@ -1,8 +1,6 @@
-!*==SSMMI2.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSMMI2
 SUBROUTINE SSMMI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   IMPLICIT NONE
-  !*--SSMMI25
   !***BEGIN PROLOGUE  SSMMI2
   !***PURPOSE  SLAP Backsolve for LDU Factorization of Normal Equations.
   !            To solve a system of the form  (L*D*U)*(L*D*U)' X = B,

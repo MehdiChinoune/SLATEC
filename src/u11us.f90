@@ -1,15 +1,11 @@
-!*==U11US.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK U11US
 SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   IMPLICIT NONE
-  !*--U11US5
-  !*** Start of declarations inserted by SPAG
   REAL A, bb, Db, Eb, H, r2, rmin, SDOT, SNRM2, sum, t, temp, &
     tn, tt, Ub, W
   INTEGER i, ii, im1, imin, is, ISAMAX, j, jm1, jmax, jp1, kk, &
     km1, kmi, kp1, Krank, Ksure, kz, l, lm1, M
   INTEGER Mda, mmk, Mode, N, nn, Np
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  U11US
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ULSIA

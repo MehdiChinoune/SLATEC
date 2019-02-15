@@ -1,8 +1,6 @@
-!*==DSIFA.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSIFA
 SUBROUTINE DSIFA(A,Lda,N,Kpvt,Info)
   IMPLICIT NONE
-  !*--DSIFA5
   !***BEGIN PROLOGUE  DSIFA
   !***PURPOSE  Factor a real symmetric matrix by elimination with
   !            symmetric pivoting.

@@ -1,10 +1,8 @@
-!*==SCGN.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SCGN
 SUBROUTINE SCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Atp,Atz,Dz,Atdz,Rwork,&
     Iwork)
   IMPLICIT NONE
-  !*--SCGN7
   !***BEGIN PROLOGUE  SCGN
   !***PURPOSE  Preconditioned CG Sparse Ax=b Solver for Normal Equations.
   !            Routine to solve a general linear system  Ax = b  using the

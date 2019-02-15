@@ -1,8 +1,6 @@
-!*==FDUMP.f90  processed by SPAG 6.72Dc at 10:54 on  6 Feb 2019
 !DECK FDUMP
 SUBROUTINE FDUMP
   IMPLICIT NONE
-  !*--FDUMP5
   !***BEGIN PROLOGUE  FDUMP
   !***PURPOSE  Symbolic dump (should be locally written).
   !***LIBRARY   SLATEC (XERROR)

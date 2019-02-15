@@ -1,11 +1,7 @@
-!*==DSTOD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DSTOD
 SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   IMPLICIT NONE
-  !*--DSTOD5
-  !*** Start of declarations inserted by SPAG
   REAL DJAC
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSTOD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DDEBDF

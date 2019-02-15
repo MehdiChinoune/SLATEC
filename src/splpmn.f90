@@ -1,11 +1,8 @@
-!*==SPLPMN.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SPLPMN
 SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Amat,Csc,Colnrm,Erd,Erp,Basmat,Wr,Rz,Rg,&
     Rprim,Rhs,Ww,Lmx,Lbm,Ibasis,Ibb,Imat,Ibrc,Ipr,Iwr)
   IMPLICIT NONE
-  !*--SPLPMN7
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ibas, idg, ienter, ileave, Info, iopt, ipage, ipagef ,&
     iplace, isave, itbrc, itlp, j, jstrt, k, key, kprint ,&
     Lbm, LCOl
@@ -17,7 +14,6 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     npr010, npr011, npr012, npr013, npr014
   INTEGER npr015, nredc, ntries, Nvars, nx0066, nx0091, nx0106
   REAL SASUM, SDOT, USRMAT
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPLPMN
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

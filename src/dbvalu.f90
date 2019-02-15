@@ -1,8 +1,6 @@
-!*==DBVALU.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DBVALU
 REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   IMPLICIT NONE
-  !*--DBVALU5
   !***BEGIN PROLOGUE  DBVALU
   !***PURPOSE  Evaluate the B-representation of a B-spline at X for the
   !            function value or any of its derivatives.

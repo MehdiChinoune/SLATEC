@@ -1,11 +1,7 @@
-!*==DXQMU.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DXQMU
 SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  !*--DXQMU5
-  !*** Start of declarations inserted by SPAG
   INTEGER Id, Ierror, ipq, ipq1, ipq2, Ipqa, k, mu, Mu1, Mu2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DXQMU
   !***SUBSIDIARY
   !***PURPOSE  To compute the values of Legendre functions for DXLEGF.

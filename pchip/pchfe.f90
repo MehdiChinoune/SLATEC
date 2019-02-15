@@ -1,8 +1,6 @@
-!*==PCHFE.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK PCHFE
 SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   IMPLICIT NONE
-  !*--PCHFE5
   !***BEGIN PROLOGUE  PCHFE
   !***PURPOSE  Evaluate a piecewise cubic Hermite function at an array of
   !            points.  May be used by itself for Hermite interpolation,

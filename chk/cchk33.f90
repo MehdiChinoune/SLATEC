@@ -1,9 +1,7 @@
-!*==CCHK33.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CCHK33
 SUBROUTINE CCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
     Nmax,A,Aa,As,B,Bb,Bs,Ct,G,C)
   IMPLICIT NONE
-  !*--CCHK336
   !***BEGIN PROLOGUE  CCHK33
   !***SUBSIDIARY
   !***PURPOSE  Quick check for CTRMM and CTRSM.

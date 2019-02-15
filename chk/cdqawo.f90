@@ -1,11 +1,7 @@
-!*==CDQAWO.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CDQAWO
 SUBROUTINE CDQAWO(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--CDQAWO5
-  !*** Start of declarations inserted by SPAG
   INTEGER leniw
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CDQAWO
   !***PURPOSE  Quick check for DQAWO.
   !***LIBRARY   SLATEC

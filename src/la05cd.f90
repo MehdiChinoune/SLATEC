@@ -1,15 +1,11 @@
-!*==LA05CD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK LA05CD
 SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   IMPLICIT NONE
-  !*--LA05CD5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Ia, ii, ij, im, in, ins, ipp, ir, is, j, jm, jns ,&
     jp, k, kj, kk, kl, km, knp
   INTEGER kp, kpl, kq, kr, krl, ks, l, last, last1, last2, LCOl ,&
     LENl, LENu, LP, LROw, m, m1, mcp, Mm, N
   INTEGER NCP, nz
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  LA05CD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP

@@ -1,9 +1,7 @@
-!*==DQAWCE.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQAWCE
 SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
   IMPLICIT NONE
-  !*--DQAWCE6
   !***BEGIN PROLOGUE  DQAWCE
   !***PURPOSE  The routine calculates an approximation result to a
   !            CAUCHY PRINCIPAL VALUE I = Integral of F*W over (A,B)

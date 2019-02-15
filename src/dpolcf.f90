@@ -1,8 +1,6 @@
-!*==DPOLCF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DPOLCF
 SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
   IMPLICIT NONE
-  !*--DPOLCF5
   !***BEGIN PROLOGUE  DPOLCF
   !***PURPOSE  Compute the coefficients of the polynomial fit (including
   !            Hermite polynomial fits) produced by a previous call to

@@ -1,8 +1,6 @@
-!*==DPJAC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DPJAC
 SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   IMPLICIT NONE
-  !*--DPJAC5
   !***BEGIN PROLOGUE  DPJAC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DDEBDF

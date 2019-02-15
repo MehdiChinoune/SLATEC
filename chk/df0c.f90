@@ -1,8 +1,6 @@
-!*==DF0C.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DF0C
 REAL(8) FUNCTION DF0C(X)
   IMPLICIT NONE
-  !*--DF0C5
   !***BEGIN PROLOGUE  DF0C
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

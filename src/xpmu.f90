@@ -1,11 +1,7 @@
-!*==XPMU.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XPMU
 SUBROUTINE XPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  !*--XPMU5
-  !*** Start of declarations inserted by SPAG
   INTEGER Id, Ierror, ip0, Ipqa, j, mu, Mu1, Mu2, n
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XPMU
   !***SUBSIDIARY
   !***PURPOSE  To compute the values of Legendre functions for XLEGF.

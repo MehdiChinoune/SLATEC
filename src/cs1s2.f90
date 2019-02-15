@@ -1,8 +1,6 @@
-!*==CS1S2.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CS1S2
 SUBROUTINE CS1S2(Zr,S1,S2,Nz,Ascle,Alim,Iuf)
   IMPLICIT NONE
-  !*--CS1S25
   !***BEGIN PROLOGUE  CS1S2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CAIRY and CBESK

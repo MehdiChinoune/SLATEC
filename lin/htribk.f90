@@ -1,8 +1,6 @@
-!*==HTRIBK.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK HTRIBK
 SUBROUTINE HTRIBK(Nm,N,Ar,Ai,Tau,M,Zr,Zi)
   IMPLICIT NONE
-  !*--HTRIBK5
   !***BEGIN PROLOGUE  HTRIBK
   !***PURPOSE  Form the eigenvectors of a complex Hermitian matrix from
   !            the eigenvectors of a real symmetric tridiagonal matrix

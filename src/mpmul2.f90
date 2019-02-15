@@ -1,11 +1,7 @@
-!*==MPMUL2.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK MPMUL2
 SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
   IMPLICIT NONE
-  !*--MPMUL25
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ij, is, ix, Iy, j, j1, j2, LUN, M, MXR
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MPMUL2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI

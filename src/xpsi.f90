@@ -1,11 +1,7 @@
-!*==XPSI.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XPSI
 REAL FUNCTION XPSI(A,Ipsik,Ipsix)
   IMPLICIT NONE
-  !*--XPSI5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Ipsik, Ipsix, k, k1, m, n
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XPSI
   !***SUBSIDIARY
   !***PURPOSE  To compute values of the Psi function for XLEGF.

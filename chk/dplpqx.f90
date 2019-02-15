@@ -1,4 +1,3 @@
-!*==DPLPQX.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DPLPQX
 SUBROUTINE DPLPQX(Lun,Kprint,Ipass)
   !***BEGIN PROLOGUE  DPLPQX
@@ -14,11 +13,8 @@ SUBROUTINE DPLPQX(Lun,Kprint,Ipass)
   !   901013  Added additional printout on failure.  (RWC)
   !***END PROLOGUE  DPLPQX
   IMPLICIT NONE
-  !*--DPLPQX17
-  !*** Start of declarations inserted by SPAG
   REAL(8) :: DUSRMT
   INTEGER i, ic, iv, ivv, j, kk, kount, Kprint, Lun, mm
-  !*** End of declarations inserted by SPAG
   EXTERNAL DUSRMT
   INTEGER icnt, ind(60), ibasis(60), Ipass, iwork(900), isoln(14)
   REAL(8) :: costs(37)

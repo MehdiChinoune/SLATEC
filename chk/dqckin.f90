@@ -1,11 +1,7 @@
-!*==DQCKIN.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DQCKIN
 SUBROUTINE DQCKIN(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DQCKIN5
-  !*** Start of declarations inserted by SPAG
   INTEGER Ipass, Kprint, nz
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DQCKIN
   !***PURPOSE  Quick check for DBSKIN.
   !***LIBRARY   SLATEC

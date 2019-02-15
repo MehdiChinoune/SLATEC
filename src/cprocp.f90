@@ -1,13 +1,9 @@
-!*==CPROCP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CPROCP
 SUBROUTINE CPROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,Yy)
   IMPLICIT NONE
-  !*--CPROCP5
-  !*** Start of declarations inserted by SPAG
   REAL Aa, Bm1, Bm2, rt, Yy
   INTEGER ia, id, iflg, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, &
     Nm2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CPROCP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBLKTR

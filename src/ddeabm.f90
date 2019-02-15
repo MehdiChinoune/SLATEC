@@ -1,13 +1,9 @@
-!*==DDEABM.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DDEABM
 SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar)
   IMPLICIT NONE
-  !*--DDEABM6
-  !*** Start of declarations inserted by SPAG
   REAL DF
   INTEGER igi, ixold
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DDEABM
   !***PURPOSE  Solve an initial value problem in ordinary differential
   !            equations using an Adams-Bashforth method.

@@ -1,11 +1,9 @@
-!*==DDES.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DDES
 SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     Alpha,Beta,Psi,V,W,Sig,G,Gi,H,Eps,X,Xold,Hold,Told,Delsgn,&
     Tstop,Twou,Fouru,Start,Phase1,Nornd,Stiff,Intout,Ns,Kord,&
     Kold,Init,Ksteps,Kle4,Iquit,Kprev,Ivc,Iv,Kgi,Rpar,Ipar)
   IMPLICIT NONE
-  !*--DDES8
   !***BEGIN PROLOGUE  DDES
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DDEABM

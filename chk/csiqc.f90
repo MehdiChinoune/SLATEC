@@ -1,11 +1,7 @@
-!*==CSIQC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CSIQC
 SUBROUTINE CSIQC(Lun,Kprint,Nerr)
   IMPLICIT NONE
-  !*--CSIQC5
-  !*** Start of declarations inserted by SPAG
   INTEGER Kprint, Lun
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CSIQC
   !***PURPOSE  Quick check for CSIFA, CSICO, CSISL and CSIDI.
   !***LIBRARY   SLATEC

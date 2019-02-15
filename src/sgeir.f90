@@ -1,8 +1,6 @@
-!*==SGEIR.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SGEIR
 SUBROUTINE SGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   IMPLICIT NONE
-  !*--SGEIR5
   !***BEGIN PROLOGUE  SGEIR
   !***PURPOSE  Solve a general system of linear equations.  Iterative
   !            refinement is used to obtain an error estimate.

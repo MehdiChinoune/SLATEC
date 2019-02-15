@@ -1,8 +1,6 @@
-!*==DSLUTI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSLUTI
 SUBROUTINE DSLUTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   IMPLICIT NONE
-  !*--DSLUTI5
   !***BEGIN PROLOGUE  DSLUTI
   !***PURPOSE  SLAP MTSOLV for LDU Factorization.
   !            This routine acts as an interface between the SLAP generic

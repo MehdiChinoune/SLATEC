@@ -1,8 +1,6 @@
-!*==SQRSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SQRSL
 SUBROUTINE SQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   IMPLICIT NONE
-  !*--SQRSL5
   !***BEGIN PROLOGUE  SQRSL
   !***PURPOSE  Apply the output of SQRDC to compute coordinate transfor-
   !            mations, projections, and least squares solutions.

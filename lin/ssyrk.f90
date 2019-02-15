@@ -1,8 +1,6 @@
-!*==SSYRK.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSYRK
 SUBROUTINE SSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   IMPLICIT NONE
-  !*--SSYRK5
   !***BEGIN PROLOGUE  SSYRK
   !***PURPOSE  Perform symmetric rank k update of a real symmetric matrix.
   !***LIBRARY   SLATEC (BLAS)

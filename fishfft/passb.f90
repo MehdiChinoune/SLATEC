@@ -1,14 +1,10 @@
-!*==PASSB.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK PASSB
 SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   IMPLICIT NONE
-  !*--PASSB5
-  !*** Start of declarations inserted by SPAG
   REAL C1, C2, Cc, Ch, Ch2, Wa, wai, war
   INTEGER i, idij, idj, idl, Idl1, idlj, Ido, idot, idp, ik, inc, &
     Ip, ipp2, ipph, j, jc, k, l, L1, lc
   INTEGER Nac
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PASSB
   !***SUBSIDIARY
   !***PURPOSE  Calculate the fast Fourier transform of subvectors of

@@ -1,13 +1,9 @@
-!*==PNNZRS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK PNNZRS
 SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   IMPLICIT NONE
-  !*--PNNZRS5
-  !*** Start of declarations inserted by SPAG
   INTEGER I, i1, idiff, iend, ii, il, ilast, iopt, ipl, Iplace, &
     IPLOC, ipploc, Ircx, istart, Ix, j, l, ll, lmx, lpg
   INTEGER n20046, nerr, np
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PNNZRS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

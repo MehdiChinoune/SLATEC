@@ -1,8 +1,6 @@
-!*==CGBDI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CGBDI
 SUBROUTINE CGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
   IMPLICIT NONE
-  !*--CGBDI5
   !***BEGIN PROLOGUE  CGBDI
   !***PURPOSE  Compute the determinant of a complex band matrix using the
   !            factors from CGBCO or CGBFA.

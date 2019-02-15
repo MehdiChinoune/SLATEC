@@ -1,8 +1,6 @@
-!*==DPCHSW.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DPCHSW
 SUBROUTINE DPCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   IMPLICIT NONE
-  !*--DPCHSW5
   !***BEGIN PROLOGUE  DPCHSW
   !***SUBSIDIARY
   !***PURPOSE  Limits excursion from data for DPCHCS

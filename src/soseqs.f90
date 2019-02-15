@@ -1,10 +1,7 @@
-!*==SOSEQS.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SOSEQS
 SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     Iprint,Fmax,C,Nc,B,P,Temp,X,Y,Fac,Is)
   IMPLICIT NONE
-  !*--SOSEQS6
-  !*** Start of declarations inserted by SPAG
   REAL Atolx, B, C, csv, f, Fac, fact, fdif, Fmax, fmin, fmxs, &
     fn1, fn2, FNC, fp, h, hx, P, pmax, R1MACH
   REAL re, Rtolx, S, sruro, Temp, test, Tolf, uro, X, xnorm, Y, &
@@ -13,7 +10,6 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     itry, j, jk, js, k, kd, kj, kk, km1, kn
   INTEGER ksv, l, loun, ls, m, mit, mm, Mxit, N, Nc, Ncjs, np1, &
     Nsri, Nsrrc
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SOSEQS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SOS

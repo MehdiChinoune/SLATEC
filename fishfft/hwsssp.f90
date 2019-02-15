@@ -1,14 +1,10 @@
-!*==HWSSSP.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK HWSSSP
 SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     Elmbda,F,Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !*--HWSSSP6
-  !*** Start of declarations inserted by SPAG
   REAL Bdpf, Bdps, Bdtf, Bdts, dum, Elmbda, F, Pertrb, Pf, pi, &
     PIMACH, Ps, Tf, tpi, Ts, W
   INTEGER Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HWSSSP
   !***PURPOSE  Solve a finite difference approximation to the Helmholtz
   !            equation in spherical coordinates and on the surface of the

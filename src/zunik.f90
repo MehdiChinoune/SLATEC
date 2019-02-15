@@ -1,9 +1,7 @@
-!*==ZUNIK.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZUNIK
 SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
     Zeta2r,Zeta2i,Sumr,Sumi,Cwrkr,Cwrki)
   IMPLICIT NONE
-  !*--ZUNIK6
   !***BEGIN PROLOGUE  ZUNIK
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESI and ZBESK

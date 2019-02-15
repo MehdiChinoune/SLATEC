@@ -1,8 +1,6 @@
-!*==DQJAC2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DQJAC2
 SUBROUTINE DQJAC2(N,X,Fvec,Fjac,Ldfjac,Iflag)
   IMPLICIT NONE
-  !*--DQJAC25
   !***BEGIN PROLOGUE  DQJAC2
   !***PURPOSE
   !***LIBRARY   SLATEC

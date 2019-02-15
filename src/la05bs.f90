@@ -1,13 +1,9 @@
-!*==LA05BS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK LA05BS
 SUBROUTINE LA05BS(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   IMPLICIT NONE
-  !*--LA05BS5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Ia, ii, j, k, k2, kk, kl, kll, kp, kpc, l1, LCOl, &
     LENl, LENu, LP, LROw, N, n1, NCP
   INTEGER nz
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  LA05BS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

@@ -1,8 +1,6 @@
-!*==HQR2.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK HQR2
 SUBROUTINE HQR2(Nm,N,Low,Igh,H,Wr,Wi,Z,Ierr)
   IMPLICIT NONE
-  !*--HQR25
   !***BEGIN PROLOGUE  HQR2
   !***PURPOSE  Compute the eigenvalues and eigenvectors of a real upper
   !            Hessenberg matrix using QR method.

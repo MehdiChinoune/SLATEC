@@ -1,8 +1,6 @@
-!*==DGAMIT.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DGAMIT
 REAL(8) FUNCTION DGAMIT(A,X)
   IMPLICIT NONE
-  !*--DGAMIT5
   !***BEGIN PROLOGUE  DGAMIT
   !***PURPOSE  Calculate Tricomi's form of the incomplete Gamma function.
   !***LIBRARY   SLATEC (FNLIB)

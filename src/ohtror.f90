@@ -1,12 +1,8 @@
-!*==OHTROR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK OHTROR
 SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
   IMPLICIT NONE
-  !*--OHTROR5
-  !*** Start of declarations inserted by SPAG
   REAL dd, Diag, diagk, Div, Q, qs, SDOT, sig, sqd, Td, tdv
   INTEGER Irank, irp, j, k, kir, kirm, l, N, nmir, Nrda
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  OHTROR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

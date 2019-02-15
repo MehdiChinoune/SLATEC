@@ -1,8 +1,6 @@
-!*==SSYR2.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSYR2
 SUBROUTINE SSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
   IMPLICIT NONE
-  !*--SSYR25
   !***BEGIN PROLOGUE  SSYR2
   !***PURPOSE  Perform symmetric rank 2 update of a real symmetric matrix.
   !***LIBRARY   SLATEC (BLAS)

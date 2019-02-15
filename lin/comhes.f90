@@ -1,8 +1,6 @@
-!*==COMHES.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK COMHES
 SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
   IMPLICIT NONE
-  !*--COMHES5
   !***BEGIN PROLOGUE  COMHES
   !***PURPOSE  Reduce a complex general matrix to complex upper Hessenberg
   !            form using stabilized elementary similarity

@@ -1,13 +1,9 @@
-!*==DSTEPS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DSTEPS
 SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     Psi,Alpha,Beta,Sig,V,W,G,Phase1,Ns,Nornd,Ksteps,Twou,&
     Fouru,Xold,Kprev,Ivc,Iv,Kgi,Gi,Rpar,Ipar)
   IMPLICIT NONE
-  !*--DSTEPS7
-  !*** Start of declarations inserted by SPAG
   INTEGER Iv, Ivc, jv, Kgi, Kprev
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSTEPS
   !***PURPOSE  Integrate a system of first order ordinary differential
   !            equations one step.

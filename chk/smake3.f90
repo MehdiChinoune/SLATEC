@@ -1,8 +1,6 @@
-!*==SMAKE3.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SMAKE3
 SUBROUTINE SMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
   IMPLICIT NONE
-  !*--SMAKE35
   !***BEGIN PROLOGUE  SMAKE3
   !***SUBSIDIARY
   !***PURPOSE  Generate values for an M by N matrix A.

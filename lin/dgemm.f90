@@ -1,8 +1,6 @@
-!*==DGEMM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DGEMM
 SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   IMPLICIT NONE
-  !*--DGEMM5
   !***BEGIN PROLOGUE  DGEMM
   !***PURPOSE  Perform one of the matrix-matrix operations.
   !***LIBRARY   SLATEC (BLAS)

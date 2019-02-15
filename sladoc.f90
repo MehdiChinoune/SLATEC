@@ -1,8 +1,6 @@
-!*==SLADOC.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK SLADOC
 PROGRAM SLADOC
   IMPLICIT NONE
-  !*--SLADOC5
   !***BEGIN PROLOGUE  SLADOC
   !***PURPOSE   Retrieve documentation for the SLATEC library.
   !***LIBRARY   (NONE)
@@ -1620,11 +1618,9 @@ PROGRAM SLADOC
   99046 FORMAT (1X,A,1X,A)
   99047 FORMAT ('(1X, ',I2,'X, A)')
 END PROGRAM SLADOC
-!*==CHARIN.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK CHARIN
 SUBROUTINE CHARIN(Cardin,Lcard,Iopt,Lb,Lt)
   IMPLICIT NONE
-  !*--CHARIN1632
   !***BEGIN PROLOGUE  CHARIN
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SLADOC
@@ -1710,11 +1706,9 @@ SUBROUTINE CHARIN(Cardin,Lcard,Iopt,Lb,Lt)
     Lt = le - Lb + 1
   ENDIF
 END SUBROUTINE CHARIN
-!*==MINOR.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK MINOR
 INTEGER FUNCTION MINOR(Kat,Kats,Ncc,Tclass,Iptr,Jptr,Kptr,Ntry)
   IMPLICIT NONE
-  !*--MINOR1722
   !***BEGIN PROLOGUE  MINOR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SLADOC
@@ -1780,11 +1774,9 @@ INTEGER FUNCTION MINOR(Kat,Kats,Ncc,Tclass,Iptr,Jptr,Kptr,Ntry)
   ENDDO
   RETURN
 END FUNCTION MINOR
-!*==RBLNKS.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK RBLNKS
 SUBROUTINE RBLNKS(L1,L2)
   IMPLICIT NONE
-  !*--RBLNKS1792
   !***BEGIN PROLOGUE  RBLNKS
   !***SUBSIDIARY
   !***PURPOSE  Remove leading blanks from a character string.
@@ -1828,11 +1820,9 @@ SUBROUTINE RBLNKS(L1,L2)
     k = k + 1
   ENDDO
 END SUBROUTINE RBLNKS
-!*==UNDOCL.f90  processed by SPAG 6.72Dc at 10:48 on  6 Feb 2019
 !DECK UNDOCL
 SUBROUTINE UNDOCL(Kat,Cat)
   IMPLICIT NONE
-  !*--UNDOCL1840
   !***BEGIN PROLOGUE  UNDOCL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SLADOC

@@ -1,8 +1,6 @@
-!*==ZRATI.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZRATI
 SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
   IMPLICIT NONE
-  !*--ZRATI5
   !***BEGIN PROLOGUE  ZRATI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESH, ZBESI and ZBESK

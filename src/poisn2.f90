@@ -1,17 +1,13 @@
-!*==POISN2.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK POISN2
 SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
     P)
   IMPLICIT NONE
-  !*--POISN26
-  !*** Start of declarations inserted by SPAG
   REAL A, B, B2, B3, Bb, C, D, fden, fi, fistag, fnum, P, Q, &
     t, Tcos, W, W2, W3
   INTEGER i, i1, i2, i2r, i2rby2, Idimq, ii, ip, ipstor, Istag, &
     j, jm1, jm2, jm3, jp1, jp2, jp3, jr, jr2, jstart
   INTEGER jstep, jstop, k, k1, k2, k3, k4, kr, lr, M, Mixbnd, &
     mr, N, nlast, nlastp, nr, nrod, nrodpr
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POISN2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to GENBUN

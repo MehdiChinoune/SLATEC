@@ -1,11 +1,7 @@
-!*==SCOPY.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SCOPY
 SUBROUTINE SCOPY(N,Sx,Incx,Sy,Incy)
   IMPLICIT NONE
-  !*--SCOPY5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SCOPY
   !***PURPOSE  Copy a vector.
   !***LIBRARY   SLATEC (BLAS)

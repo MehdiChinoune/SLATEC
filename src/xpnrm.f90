@@ -1,11 +1,7 @@
-!*==XPNRM.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XPNRM
 SUBROUTINE XPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  !*--XPNRM5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Ierror, Ipqa, iprod, j, k, l, mu, Mu1, Mu2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XPNRM
   !***SUBSIDIARY
   !***PURPOSE  To compute the values of Legendre functions for XLEGF.

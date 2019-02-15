@@ -1,8 +1,6 @@
-!*==CROTG.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CROTG
 SUBROUTINE CROTG(Ca,Cb,C,S)
   IMPLICIT NONE
-  !*--CROTG5
   !***BEGIN PROLOGUE  CROTG
   !***PURPOSE  Construct a Givens transformation.
   !***LIBRARY   SLATEC (BLAS)

@@ -1,9 +1,6 @@
-!*==MGSBV.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK MGSBV
 SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   IMPLICIT NONE
-  !*--MGSBV5
-  !*** Start of declarations inserted by SPAG
   REAL A, AE, dot, EPS, FOUru, P, pjp, PRVEC, psave, RE, ry, S, &
     SDOT, SQOvfl, SRU, sv, t, TOL, TWOu, URO
   REAL V, vl, vnorm, W, Wcnd, y
@@ -12,7 +9,6 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   INTEGER kp, l, lix, LPAr, lr, M, m2, MXNon, N, NDIsk, NEQ, &
     NEQivp, NFCc, NIC, Niv, nivn, nmnr, nn, NOPg, np1
   INTEGER NPS, nr, nrm1, NTApe, NTP, NUMort, NXPts
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  MGSBV
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

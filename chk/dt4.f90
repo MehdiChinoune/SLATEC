@@ -1,8 +1,6 @@
-!*==DT4.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DT4
 REAL(8) FUNCTION DT4(X)
   IMPLICIT NONE
-  !*--DT45
   !***BEGIN PROLOGUE  DT4
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

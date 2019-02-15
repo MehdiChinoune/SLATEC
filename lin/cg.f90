@@ -1,8 +1,6 @@
-!*==CG.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CG
 SUBROUTINE CG(Nm,N,Ar,Ai,Wr,Wi,Matz,Zr,Zi,Fv1,Fv2,Fv3,Ierr)
   IMPLICIT NONE
-  !*--CG5
   !***BEGIN PROLOGUE  CG
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a complex general matrix.

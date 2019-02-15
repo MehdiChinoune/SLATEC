@@ -1,13 +1,9 @@
-!*==BESY1.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK BESY1
 FUNCTION BESY1(X)
   IMPLICIT NONE
-  !*--BESY15
-  !*** Start of declarations inserted by SPAG
   REAL ampl, BESJ1, BESY1, bm1cs, bth1cs, by1cs, CSEVL, pi4, &
     R1MACH, theta, twodpi, X, xmax, xmin, xsml, y, z
   INTEGER INITS, ntm1, ntth1, nty1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BESY1
   !***PURPOSE  Compute the Bessel function of the second kind of order
   !            one.

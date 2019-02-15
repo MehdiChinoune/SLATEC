@@ -1,12 +1,8 @@
-!*==USRMAT.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK USRMAT
 SUBROUTINE USRMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   IMPLICIT NONE
-  !*--USRMAT5
-  !*** Start of declarations inserted by SPAG
   REAL Aij, Dattrv, Prgopt
   INTEGER I, Iflag, Indcat, J, l
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  USRMAT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

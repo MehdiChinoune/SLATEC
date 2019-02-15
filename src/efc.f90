@@ -1,9 +1,7 @@
-!*==EFC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK EFC
 SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,&
     Coeff,Lw,W)
   IMPLICIT NONE
-  !*--EFC6
   !***BEGIN PROLOGUE  EFC
   !***PURPOSE  Fit a piecewise polynomial curve to discrete data.
   !            The piecewise polynomials are represented as B-splines.

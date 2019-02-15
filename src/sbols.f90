@@ -1,14 +1,10 @@
-!*==SBOLS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK SBOLS
 SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   IMPLICIT NONE
-  !*--SBOLS5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ibig, igo, inrows, ip, ISAMAX, iscale, j, jp, lds ,&
     lenx, liopt, llb, lliw, llrw, llx, lmdw, lndw, locacc ,&
     locdim
   INTEGER lopt, lp, Mdw, mnew, Mode, Mrows, Ncols, nerr
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SBOLS
   !***PURPOSE  Solve the problem
   !                 E*X = F (in the least  squares  sense)

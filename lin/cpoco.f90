@@ -1,8 +1,6 @@
-!*==CPOCO.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CPOCO
 SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
   IMPLICIT NONE
-  !*--CPOCO5
   !***BEGIN PROLOGUE  CPOCO
   !***PURPOSE  Factor a complex Hermitian positive definite matrix
   !            and estimate the condition number of the matrix.

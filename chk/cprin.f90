@@ -1,8 +1,6 @@
-!*==CPRIN.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CPRIN
 SUBROUTINE CPRIN(Lun,Num1,Kprint,Ip,Exact,Result,Abserr,Neval,Ierv,Lierv)
   IMPLICIT NONE
-  !*--CPRIN5
   !***BEGIN PROLOGUE  CPRIN
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CQAG, CQAG, CQAGI, CQAGP, CQAGS, CQAWC,

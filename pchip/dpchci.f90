@@ -1,8 +1,6 @@
-!*==DPCHCI.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DPCHCI
 SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
   IMPLICIT NONE
-  !*--DPCHCI5
   !***BEGIN PROLOGUE  DPCHCI
   !***SUBSIDIARY
   !***PURPOSE  Set interior derivatives for DPCHIC

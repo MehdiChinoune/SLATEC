@@ -1,8 +1,6 @@
-!*==DSPR.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSPR
 SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
   IMPLICIT NONE
-  !*--DSPR5
   !***BEGIN PROLOGUE  DSPR
   !***PURPOSE  Perform the symmetric rank 1 operation.
   !***LIBRARY   SLATEC (BLAS)

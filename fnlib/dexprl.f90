@@ -1,11 +1,7 @@
-!*==DEXPRL.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DEXPRL
 REAL(8) FUNCTION DEXPRL(X)
   IMPLICIT NONE
-  !*--DEXPRL5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, nterms
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DEXPRL
   !***PURPOSE  Calculate the relative error exponential (EXP(X)-1)/X.
   !***LIBRARY   SLATEC (FNLIB)

@@ -1,12 +1,8 @@
-!*==C9LGMC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK C9LGMC
 COMPLEX FUNCTION C9LGMC(Zin)
   IMPLICIT NONE
-  !*--C9LGMC5
-  !*** Start of declarations inserted by SPAG
   REAL bern, bound, cabsz, R1MACH, x, xbig, xmax, y
   INTEGER i, ndx, nterm
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  C9LGMC
   !***SUBSIDIARY
   !***PURPOSE  Compute the log gamma correction factor so that

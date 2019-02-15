@@ -1,11 +1,7 @@
-!*==DGAMIC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DGAMIC
 REAL(8) FUNCTION DGAMIC(A,X)
   IMPLICIT NONE
-  !*--DGAMIC5
-  !*** Start of declarations inserted by SPAG
   INTEGER izero
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DGAMIC
   !***PURPOSE  Calculate the complementary incomplete Gamma function.
   !***LIBRARY   SLATEC (FNLIB)

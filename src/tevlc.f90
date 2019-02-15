@@ -1,12 +1,8 @@
-!*==TEVLC.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK TEVLC
 SUBROUTINE TEVLC(N,D,E2,Ierr)
   IMPLICIT NONE
-  !*--TEVLC5
-  !*** Start of declarations inserted by SPAG
   REAL CNV, dhold
   INTEGER IK, K, NCMplx, nhalf, NM, NPP, ntop
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  TEVLC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBLKTR

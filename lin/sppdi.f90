@@ -1,8 +1,6 @@
-!*==SPPDI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SPPDI
 SUBROUTINE SPPDI(Ap,N,Det,Job)
   IMPLICIT NONE
-  !*--SPPDI5
   !***BEGIN PROLOGUE  SPPDI
   !***PURPOSE  Compute the determinant and inverse of a real symmetric
   !            positive definite matrix using factors from SPPCO or SPPFA.

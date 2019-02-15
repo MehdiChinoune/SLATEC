@@ -1,10 +1,8 @@
-!*==DQAWFE.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQAWFE
 SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
     Abserr,Neval,Ier,Rslst,Erlst,Ierlst,Lst,Alist,Blist,&
     Rlist,Elist,Iord,Nnlog,Chebmo)
   IMPLICIT NONE
-  !*--DQAWFE7
   !***BEGIN PROLOGUE  DQAWFE
   !***PURPOSE  The routine calculates an approximation result to a
   !            given Fourier integral

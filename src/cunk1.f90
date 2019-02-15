@@ -1,8 +1,6 @@
-!*==CUNK1.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CUNK1
 SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--CUNK15
   !***BEGIN PROLOGUE  CUNK1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBESK

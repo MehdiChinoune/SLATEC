@@ -1,8 +1,6 @@
-!*==CASINH.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CASINH
 COMPLEX FUNCTION CASINH(Z)
   IMPLICIT NONE
-  !*--CASINH5
   !***BEGIN PROLOGUE  CASINH
   !***PURPOSE  Compute the arc hyperbolic sine.
   !***LIBRARY   SLATEC (FNLIB)

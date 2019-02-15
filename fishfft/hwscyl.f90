@@ -1,17 +1,13 @@
-!*==HWSCYL.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK HWSCYL
 SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !*--HWSCYL6
-  !*** Start of declarations inserted by SPAG
   REAL A, a1, a2, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, deltht, &
     dlrby2, dlrsq, dlthsq, Elmbda, F, Pertrb, r, s
   REAL s1, s2, W
   INTEGER i, id2, id3, id4, id5, id6, Idimf, ierr1, Ierror, ij, &
     istart, j, k, l, M, Mbdcnd, mp1, mstart, mstop, munk
   INTEGER N, Nbdcnd, np, np1, nsp1, nstart, nstm1, nstop, nunk
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HWSCYL
   !***PURPOSE  Solve a standard finite difference approximation
   !            to the Helmholtz equation in cylindrical coordinates.

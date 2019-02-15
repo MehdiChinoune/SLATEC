@@ -1,14 +1,10 @@
-!*==QXGBUN.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QXGBUN
 SUBROUTINE QXGBUN(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QXGBUN5
-  !*** Start of declarations inserted by SPAG
   REAL a, b, c, deltax, deltay, dum, dysq, ermax, err, f, pi, &
     PIMACH, s, t, w, x, y, z
   INTEGER i, idimy, ierror, Ipass, j, Kprint, Lun, m, mm1, mperod, &
     n, nperod
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  QXGBUN
   !***PURPOSE
   !***LIBRARY   SLATEC

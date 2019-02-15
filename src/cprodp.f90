@@ -1,13 +1,9 @@
-!*==CPRODP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CPRODP
 SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   IMPLICIT NONE
-  !*--CPRODP5
-  !*** Start of declarations inserted by SPAG
   REAL A, Aa, B, Bm1, Bm2, C, rt, X, Yy
   INTEGER ia, id, iflg, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, &
     Nm2
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CPRODP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI

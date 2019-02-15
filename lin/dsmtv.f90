@@ -1,8 +1,6 @@
-!*==DSMTV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSMTV
 SUBROUTINE DSMTV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   IMPLICIT NONE
-  !*--DSMTV5
   !***BEGIN PROLOGUE  DSMTV
   !***PURPOSE  SLAP Column Format Sparse Matrix Transpose Vector Product.
   !            Routine to calculate the sparse matrix vector product:

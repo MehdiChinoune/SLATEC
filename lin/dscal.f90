@@ -1,8 +1,6 @@
-!*==DSCAL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSCAL
 SUBROUTINE DSCAL(N,Da,Dx,Incx)
   IMPLICIT NONE
-  !*--DSCAL5
   !***BEGIN PROLOGUE  DSCAL
   !***PURPOSE  Multiply a vector by a constant.
   !***LIBRARY   SLATEC (BLAS)

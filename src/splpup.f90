@@ -1,13 +1,9 @@
-!*==SPLPUP.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SPLPUP
 SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
     Imat,Sizeup,Asmall,Abig)
   IMPLICIT NONE
-  !*--SPLPUP6
-  !*** Start of declarations inserted by SPAG
   INTEGER i, indcat, index, Info, iplace, itcnt, itmax, j, Mrelas ,&
     Nvars
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPLPUP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

@@ -1,11 +1,7 @@
-!*==CHPQC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CHPQC
 SUBROUTINE CHPQC(Lun,Kprint,Nerr)
   IMPLICIT NONE
-  !*--CHPQC5
-  !*** Start of declarations inserted by SPAG
   INTEGER Kprint, Lun
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CHPQC
   !***PURPOSE  Quick check for CHPFA, CHPCO, CHPSL and CHPDI.
   !***LIBRARY   SLATEC

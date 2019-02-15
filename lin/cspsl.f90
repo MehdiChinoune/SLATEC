@@ -1,8 +1,6 @@
-!*==CSPSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CSPSL
 SUBROUTINE CSPSL(Ap,N,Kpvt,B)
   IMPLICIT NONE
-  !*--CSPSL5
   !***BEGIN PROLOGUE  CSPSL
   !***PURPOSE  Solve a complex symmetric system using the factors obtained
   !            from CSPFA.

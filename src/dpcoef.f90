@@ -1,8 +1,6 @@
-!*==DPCOEF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DPCOEF
 SUBROUTINE DPCOEF(L,C,Tc,A)
   IMPLICIT NONE
-  !*--DPCOEF5
   !***BEGIN PROLOGUE  DPCOEF
   !***PURPOSE  Convert the DPOLFT coefficients to Taylor series form.
   !***LIBRARY   SLATEC

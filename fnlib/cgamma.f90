@@ -1,8 +1,6 @@
-!*==CGAMMA.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CGAMMA
 COMPLEX FUNCTION CGAMMA(Z)
   IMPLICIT NONE
-  !*--CGAMMA5
   !***BEGIN PROLOGUE  CGAMMA
   !***PURPOSE  Compute the complete Gamma function.
   !***LIBRARY   SLATEC (FNLIB)

@@ -1,12 +1,8 @@
-!*==CMPCSG.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CMPCSG
 SUBROUTINE CMPCSG(N,Ijump,Fnum,Fden,A)
   IMPLICIT NONE
-  !*--CMPCSG5
-  !*** Start of declarations inserted by SPAG
   REAL dum, Fden, Fnum, pi, pibyn, PIMACH, x, y
   INTEGER i, Ijump, k, k1, k2, k3, k4, k5, N, np1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CMPCSG
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CMGNBN

@@ -1,8 +1,6 @@
-!*==D1MPYQ.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK D1MPYQ
 SUBROUTINE D1MPYQ(M,N,A,Lda,V,W)
   IMPLICIT NONE
-  !*--D1MPYQ5
   !***BEGIN PROLOGUE  D1MPYQ
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DNSQ and DNSQE

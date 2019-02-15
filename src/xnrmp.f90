@@ -1,11 +1,7 @@
-!*==XNRMP.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XNRMP
 SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   IMPLICIT NONE
-  !*--XNRMP5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Ierror, ip, ip1, ip2, j, k, mu
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XNRMP
   !***PURPOSE  Compute normalized Legendre polynomials.
   !***LIBRARY   SLATEC

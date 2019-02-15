@@ -1,11 +1,7 @@
-!*==SCLOSM.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK SCLOSM
 SUBROUTINE SCLOSM(Ipage)
   IMPLICIT NONE
-  !*--SCLOSM5
-  !*** Start of declarations inserted by SPAG
   INTEGER ios, Ipage, ipagef
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SCLOSM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

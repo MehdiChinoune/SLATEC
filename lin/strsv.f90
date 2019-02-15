@@ -1,8 +1,6 @@
-!*==STRSV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK STRSV
 SUBROUTINE STRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   IMPLICIT NONE
-  !*--STRSV5
   !***BEGIN PROLOGUE  STRSV
   !***PURPOSE  Solve a real triangular system of linear equations.
   !***LIBRARY   SLATEC (BLAS)

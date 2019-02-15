@@ -1,11 +1,7 @@
-!*==DEG8CK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DEG8CK
 SUBROUTINE DEG8CK(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DEG8CK5
-  !*** Start of declarations inserted by SPAG
   INTEGER Kprint
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DEG8CK
   !***PURPOSE  Quick check for DEXINT and DGAUS8.
   !***LIBRARY   SLATEC

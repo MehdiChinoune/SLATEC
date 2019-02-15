@@ -1,8 +1,6 @@
-!*==DPCHQ2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DPCHQ2
 SUBROUTINE DPCHQ2(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DPCHQ25
   !***BEGIN PROLOGUE  DPCHQ2
   !***PURPOSE  Test the PCHIP integrators DPCHIA and DPCHID.
   !***LIBRARY   SLATEC (PCHIP)

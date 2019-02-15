@@ -1,8 +1,6 @@
-!*==PCHIA.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK PCHIA
 REAL FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   IMPLICIT NONE
-  !*--PCHIA5
   !***BEGIN PROLOGUE  PCHIA
   !***PURPOSE  Evaluate the definite integral of a piecewise cubic
   !            Hermite function over an arbitrary interval.

@@ -1,8 +1,6 @@
-!*==DBNFAC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DBNFAC
 SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   IMPLICIT NONE
-  !*--DBNFAC5
   !***BEGIN PROLOGUE  DBNFAC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBINT4 and DBINTK

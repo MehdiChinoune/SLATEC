@@ -1,8 +1,6 @@
-!*==DHKSEQ.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DHKSEQ
 SUBROUTINE DHKSEQ(X,M,H,Ierr)
   IMPLICIT NONE
-  !*--DHKSEQ5
   !***BEGIN PROLOGUE  DHKSEQ
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBSKIN

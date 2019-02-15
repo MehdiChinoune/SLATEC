@@ -1,8 +1,6 @@
-!*==T0.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK T0
 REAL FUNCTION T0(X)
   IMPLICIT NONE
-  !*--T05
   !***BEGIN PROLOGUE  T0
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

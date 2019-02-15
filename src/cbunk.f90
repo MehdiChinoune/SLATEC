@@ -1,8 +1,6 @@
-!*==CBUNK.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CBUNK
 SUBROUTINE CBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--CBUNK5
   !***BEGIN PROLOGUE  CBUNK
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBESH and CBESK

@@ -1,10 +1,7 @@
-!*==BLKTR1.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BLKTR1
 SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
     CPRDCT)
   IMPLICIT NONE
-  !*--BLKTR16
-  !*** Start of declarations inserted by SPAG
   REAL Am, An, B, Bm, Bn, Cm, Cn, CNV, dum, EPS, W1, W2, W3, &
     Wd, Wu, Ww, Y
   INTEGER i, i1, i2, i3, i4, Idimy, idxa, idxc, if, ifd, IK, &
@@ -12,7 +9,6 @@ SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
   INTEGER ipi1, ipi2, ipi3, ir, irm1, iz, izr, j, K, kdo, l, ll, &
     M, N, na, nc, NCMplx, NM, nm1, nm2
   INTEGER nm3, np, np1, np2, np3, NPP, nz
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BLKTR1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI

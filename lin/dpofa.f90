@@ -1,8 +1,6 @@
-!*==DPOFA.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DPOFA
 SUBROUTINE DPOFA(A,Lda,N,Info)
   IMPLICIT NONE
-  !*--DPOFA5
   !***BEGIN PROLOGUE  DPOFA
   !***PURPOSE  Factor a real symmetric positive definite matrix.
   !***LIBRARY   SLATEC (LINPACK)

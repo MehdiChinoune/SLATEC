@@ -1,8 +1,6 @@
-!*==TEST19.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK TEST19
 PROGRAM TEST19
   IMPLICIT NONE
-  !*--TEST195
   !***BEGIN PROLOGUE  TEST19
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC

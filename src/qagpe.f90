@@ -1,10 +1,8 @@
-!*==QAGPE.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QAGPE
 SUBROUTINE QAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     Neval,Ier,Alist,Blist,Rlist,Elist,Pts,Iord,Level,Ndin,&
     Last)
   IMPLICIT NONE
-  !*--QAGPE7
   !***BEGIN PROLOGUE  QAGPE
   !***PURPOSE  Approximate a given definite integral I = Integral of F
   !            over (A,B), hopefully satisfying the accuracy claim:

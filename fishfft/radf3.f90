@@ -1,13 +1,9 @@
-!*==RADF3.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK RADF3
 SUBROUTINE RADF3(Ido,L1,Cc,Ch,Wa1,Wa2)
   IMPLICIT NONE
-  !*--RADF35
-  !*** Start of declarations inserted by SPAG
   REAL Cc, Ch, ci2, cr2, di2, di3, dr2, dr3, taui, taur, ti2, &
     ti3, tr2, tr3, Wa1, Wa2
   INTEGER i, ic, Ido, idp2, k, L1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  RADF3
   !***SUBSIDIARY
   !***PURPOSE  Calculate the fast Fourier transform of subvectors of

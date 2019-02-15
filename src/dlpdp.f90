@@ -1,8 +1,6 @@
-!*==DLPDP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DLPDP
 SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   IMPLICIT NONE
-  !*--DLPDP5
   !***BEGIN PROLOGUE  DLPDP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DLSEI

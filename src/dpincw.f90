@@ -1,14 +1,10 @@
-!*==DPINCW.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DPINCW
 SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,Ibb,Costsc,Gg,Erdnrm,Dulnrm,Amat,Basmat,Csc,Wr,Ww,&
     Rz,Rg,Costs,Colnrm,Duals,Stpedg)
   IMPLICIT NONE
-  !*--DPINCW7
-  !*** Start of declarations inserted by SPAG
   INTEGER i, IDLOC, ihi, il1, ilow, ipage, iu1, j, Jstrt, key, &
     Lbm, Lmx, lpg, Mrelas, nnegrc, Npp, Nvars
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPINCW
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP

@@ -1,11 +1,7 @@
-!*==DBESI1.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBESI1
 REAL(8) FUNCTION DBESI1(X)
   IMPLICIT NONE
-  !*--DBESI15
-  !*** Start of declarations inserted by SPAG
   INTEGER INITDS, nti1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBESI1
   !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
   !            first kind of order one.

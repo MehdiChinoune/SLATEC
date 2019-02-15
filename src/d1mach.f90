@@ -1,11 +1,7 @@
-!*==D1MACH.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK D1MACH
 REAL(8) FUNCTION D1MACH(I)
   IMPLICIT NONE
-  !*--D1MACH5
-  !*** Start of declarations inserted by SPAG
   INTEGER I
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D1MACH
   !***PURPOSE  Return floating point machine dependent constants.
   !***LIBRARY   SLATEC

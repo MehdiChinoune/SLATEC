@@ -1,12 +1,8 @@
-!*==DSDBCG.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSDBCG
 SUBROUTINE DSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !*--DSDBCG6
-  !*** Start of declarations inserted by SPAG
   REAL DSDI, DSMTV, DSMV
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DSDBCG
   !***PURPOSE  Diagonally Scaled BiConjugate Gradient Sparse Ax=b Solver.
   !            Routine to solve a linear system  Ax = b  using the

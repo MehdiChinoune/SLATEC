@@ -1,8 +1,6 @@
-!*==CFOD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CFOD
 SUBROUTINE CFOD(Meth,Elco,Tesco)
   IMPLICIT NONE
-  !*--CFOD5
   !***BEGIN PROLOGUE  CFOD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DEBDF

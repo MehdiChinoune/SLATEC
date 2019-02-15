@@ -1,11 +1,7 @@
-!*==D9GMIC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK D9GMIC
 REAL(8) FUNCTION D9GMIC(A,X,Alx)
   IMPLICIT NONE
-  !*--D9GMIC5
-  !*** Start of declarations inserted by SPAG
   INTEGER k, m, mm1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  D9GMIC
   !***SUBSIDIARY
   !***PURPOSE  Compute the complementary incomplete Gamma function for A

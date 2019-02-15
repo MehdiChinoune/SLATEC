@@ -1,8 +1,6 @@
-!*==DPCHBS.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DPCHBS
 SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   IMPLICIT NONE
-  !*--DPCHBS5
   !***BEGIN PROLOGUE  DPCHBS
   !***PURPOSE  Piecewise Cubic Hermite to B-Spline converter.
   !***LIBRARY   SLATEC (PCHIP)

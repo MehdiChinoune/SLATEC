@@ -1,11 +1,7 @@
-!*==BVALU.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BVALU
 FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   IMPLICIT NONE
-  !*--BVALU5
-  !*** Start of declarations inserted by SPAG
   REAL BVALU
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BVALU
   !***PURPOSE  Evaluate the B-representation of a B-spline at X for the
   !            function value or any of its derivatives.

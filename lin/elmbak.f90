@@ -1,8 +1,6 @@
-!*==ELMBAK.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK ELMBAK
 SUBROUTINE ELMBAK(Nm,Low,Igh,A,Int,M,Z)
   IMPLICIT NONE
-  !*--ELMBAK5
   !***BEGIN PROLOGUE  ELMBAK
   !***PURPOSE  Form the eigenvectors of a real general matrix from the
   !            eigenvectors of the upper Hessenberg matrix output from

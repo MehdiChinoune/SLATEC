@@ -1,8 +1,6 @@
-!*==ORTHES.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK ORTHES
 SUBROUTINE ORTHES(Nm,N,Low,Igh,A,Ort)
   IMPLICIT NONE
-  !*--ORTHES5
   !***BEGIN PROLOGUE  ORTHES
   !***PURPOSE  Reduce a real general matrix to upper Hessenberg form
   !            using orthogonal similarity transformations.

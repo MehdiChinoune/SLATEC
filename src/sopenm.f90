@@ -1,11 +1,7 @@
-!*==SOPENM.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SOPENM
 SUBROUTINE SOPENM(Ipage,Lpage)
   IMPLICIT NONE
-  !*--SOPENM5
-  !*** Start of declarations inserted by SPAG
   INTEGER ios, Ipage, ipagef, Lpage, lpg
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SOPENM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

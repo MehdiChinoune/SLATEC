@@ -1,8 +1,6 @@
-!*==COMLR.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK COMLR
 SUBROUTINE COMLR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
   IMPLICIT NONE
-  !*--COMLR5
   !***BEGIN PROLOGUE  COMLR
   !***PURPOSE  Compute the eigenvalues of a complex upper Hessenberg
   !            matrix using the modified LR method.

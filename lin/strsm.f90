@@ -1,8 +1,6 @@
-!*==STRSM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK STRSM
 SUBROUTINE STRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   IMPLICIT NONE
-  !*--STRSM5
   !***BEGIN PROLOGUE  STRSM
   !***PURPOSE  Solve a real triangular system of equations with multiple
   !            right-hand sides.

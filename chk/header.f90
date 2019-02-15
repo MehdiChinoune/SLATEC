@@ -1,11 +1,7 @@
-!*==HEADER.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK HEADER
 SUBROUTINE HEADER(Kprint)
   IMPLICIT NONE
-  !*--HEADER5
-  !*** Start of declarations inserted by SPAG
   INTEGER ICAse, INCx, INCy, Kprint, MODe, N, NPRint
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HEADER
   !***PURPOSE  Print header for BLAS quick checks.
   !***LIBRARY   SLATEC

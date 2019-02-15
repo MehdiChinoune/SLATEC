@@ -1,8 +1,6 @@
-!*==DFDEQC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DFDEQC
 SUBROUTINE DFDEQC(T,U,Uprime,Rpar,Ipar)
   IMPLICIT NONE
-  !*--DFDEQC5
   !***BEGIN PROLOGUE  DFDEQC
   !***SUBSIDIARY
   !***PURPOSE  Derivative evaluator for DDEPAC quick checks.

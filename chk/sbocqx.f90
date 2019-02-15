@@ -1,13 +1,9 @@
-!*==SBOCQX.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SBOCQX
 SUBROUTINE SBOCQX(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--SBOCQX5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw ,&
     mode, mpass, mrows, ncols
   REAL R1MACH, rnorm, rnormc, SNRM2, sr
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SBOCQX
   !***PURPOSE  Quick check for SBOCLS.
   !***LIBRARY   SLATEC

@@ -1,8 +1,6 @@
-!*==QC6A.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QC6A
 SUBROUTINE QC6A(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QC6A5
   !***BEGIN PROLOGUE  QC6A
   !***PURPOSE  Test subroutine AAAAAA.
   !***LIBRARY   SLATEC

@@ -1,11 +1,7 @@
-!*==CGBQC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CGBQC
 SUBROUTINE CGBQC(Lun,Kprint,Nerr)
   IMPLICIT NONE
-  !*--CGBQC5
-  !*** Start of declarations inserted by SPAG
   INTEGER Kprint, Lun
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CGBQC
   !***PURPOSE  Quick check for CGBFA, CGBCO, CGBSL and CGBDI.
   !***LIBRARY   SLATEC

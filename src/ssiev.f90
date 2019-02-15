@@ -1,11 +1,7 @@
-!*==SSIEV.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SSIEV
 SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
   IMPLICIT NONE
-  !*--SSIEV5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, j
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSIEV
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real symmetric matrix.

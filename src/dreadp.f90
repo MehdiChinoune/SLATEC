@@ -1,11 +1,7 @@
-!*==DREADP.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DREADP
 SUBROUTINE DREADP(Ipage,List,Rlist,Lpage,Irec)
   IMPLICIT NONE
-  !*--DREADP5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Ipage, ipagef, Irec, irecn, Lpage, lpg
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DREADP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP

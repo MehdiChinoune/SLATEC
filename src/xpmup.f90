@@ -1,11 +1,7 @@
-!*==XPMUP.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK XPMUP
 SUBROUTINE XPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  !*--XPMUP5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Ierror, Ipqa, iprod, j, k, l, mu, Mu1, Mu2, n
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  XPMUP
   !***SUBSIDIARY
   !***PURPOSE  To compute the values of Legendre functions for XLEGF.

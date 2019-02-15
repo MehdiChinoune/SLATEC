@@ -1,11 +1,7 @@
-!*==CATAN2.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CATAN2
 COMPLEX FUNCTION CATAN2(Csn,Ccs)
   IMPLICIT NONE
-  !*--CATAN25
-  !*** Start of declarations inserted by SPAG
   REAL pi
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CATAN2
   !***PURPOSE  Compute the complex arc tangent in the proper quadrant.
   !***LIBRARY   SLATEC (FNLIB)

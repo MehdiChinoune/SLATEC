@@ -1,8 +1,6 @@
-!*==CACON.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CACON
 SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--CACON5
   !***BEGIN PROLOGUE  CACON
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBESH and CBESK

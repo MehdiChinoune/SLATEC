@@ -1,8 +1,6 @@
-!*==R1MPYQ.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK R1MPYQ
 SUBROUTINE R1MPYQ(M,N,A,Lda,V,W)
   IMPLICIT NONE
-  !*--R1MPYQ5
   !***BEGIN PROLOGUE  R1MPYQ
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SNSQ and SNSQE

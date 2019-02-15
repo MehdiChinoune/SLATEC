@@ -1,13 +1,9 @@
-!*==H12.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK H12
 SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   IMPLICIT NONE
-  !*--H125
-  !*** Start of declarations inserted by SPAG
   REAL b, C, cl, clinv, one, SDOT, sm, U, ul1m1, Up
   INTEGER i, i2, i3, i4, Ice, Icv, incr, Iue, j, kl1, kl2, klp, &
     L1, l1m1, Lpivot, M, mml1p2, Mode, Ncv
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  H12
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to HFTI, LSEI and WNNLS

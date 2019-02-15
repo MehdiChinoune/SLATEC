@@ -1,8 +1,6 @@
-!*==QZHES.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK QZHES
 SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
   IMPLICIT NONE
-  !*--QZHES5
   !***BEGIN PROLOGUE  QZHES
   !***PURPOSE  The first step of the QZ algorithm for solving generalized
   !            matrix eigenproblems.  Accepts a pair of real general

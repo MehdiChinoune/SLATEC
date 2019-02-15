@@ -1,8 +1,6 @@
-!*==PCHKT.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK PCHKT
 SUBROUTINE PCHKT(N,X,Knotyp,T)
   IMPLICIT NONE
-  !*--PCHKT5
   !***BEGIN PROLOGUE  PCHKT
   !***SUBSIDIARY
   !***PURPOSE  Compute B-spline knot sequence for PCHBS.

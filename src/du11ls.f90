@@ -1,4 +1,3 @@
-!*==DU11LS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DU11LS
 SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !***BEGIN PROLOGUE  DU11LS
@@ -30,14 +29,11 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DU11LS
   IMPLICIT NONE
-  !*--DU11LS33
-  !*** Start of declarations inserted by SPAG
   REAL(8) :: A, bb, Db, Eb, H, r2, rmin, sum, t, temp, tn, &
     tt, Ub, W
   INTEGER i, IDAMAX, ii, im1, imin, is, j, jm1, jmax, jp1, kk, &
     km1, kmi, kp1, Krank, Ksure, kz, l, lm1, M
   INTEGER Mda, mm, Mode, N, nmk, Np
-  !*** End of declarations inserted by SPAG
   REAL(8) :: DDOT, DNRM2
   DIMENSION A(Mda,*), Ub(*), Db(*), H(*), W(*), Eb(*)
   INTEGER Ic(*), Ir(*)

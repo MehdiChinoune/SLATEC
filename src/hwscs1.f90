@@ -1,10 +1,7 @@
-!*==HWSCS1.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK HWSCS1
 SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
     Elmbda,F,Idimf,Pertrb,W,S,An,Bn,Cn,R,Am,Bm,Cm,Sint,Bmh)
   IMPLICIT NONE
-  !*--HWSCS16
-  !*** Start of declarations inserted by SPAG
   REAL Am, An, ar, at, Bdrf, Bdrs, Bdtf, Bdts, Bm, Bmh, Bn, Cm, &
     Cn, cr, ct, czr, dr, dr2, dth, Elmbda
   REAL F, hdr, hdth, hne, Pertrb, R, r2, Rf, rf2, Rs, rs2, rsq, &
@@ -14,7 +11,6 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   INTEGER i, ictr, Idimf, ierror, iflg, Intl, ising, itf, itfm, &
     its, itsp, j, jrf, jrfm, jrs, jrsp, l, M, Mbdcnd, mp
   INTEGER mp1, munk, N, Nbdcnd, np, np1, nunk
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  HWSCS1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to HWSCSP

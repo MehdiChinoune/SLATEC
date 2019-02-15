@@ -1,8 +1,6 @@
-!*==BAKVEC.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK BAKVEC
 SUBROUTINE BAKVEC(Nm,N,T,E,M,Z,Ierr)
   IMPLICIT NONE
-  !*--BAKVEC5
   !***BEGIN PROLOGUE  BAKVEC
   !***PURPOSE  Form the eigenvectors of a certain real non-symmetric
   !            tridiagonal matrix from a symmetric tridiagonal matrix

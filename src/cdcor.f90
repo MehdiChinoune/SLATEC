@@ -1,9 +1,7 @@
-!*==CDCOR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CDCOR
 SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     Nq,T,USERS,Y,Yh,Ywt,Evalfa,Save1,Save2,A,D,Jstate)
   IMPLICIT NONE
-  !*--CDCOR6
   !***BEGIN PROLOGUE  CDCOR
   !***SUBSIDIARY
   !***PURPOSE  Subroutine CDCOR computes corrections to the Y array.

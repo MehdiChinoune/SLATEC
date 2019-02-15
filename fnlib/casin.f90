@@ -1,12 +1,8 @@
-!*==CASIN.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CASIN
 COMPLEX FUNCTION CASIN(Zinp)
   IMPLICIT NONE
-  !*--CASIN5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, nterms
   REAL pi, pi2, r, R1MACH, rmin, twoi
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CASIN
   !***PURPOSE  Compute the complex arc sine.
   !***LIBRARY   SLATEC (FNLIB)

@@ -1,12 +1,8 @@
-!*==POISP2.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK POISP2
 SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   IMPLICIT NONE
-  !*--POISP25
-  !*** Start of declarations inserted by SPAG
   REAL A, B, B2, B3, Bb, C, D, P, Q, s, t, Tcos, W, W2, W3
   INTEGER i, Idimq, ipstor, j, lh, M, mr, N, nr, nrm1, nrmj, nrpj
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  POISP2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to GENBUN

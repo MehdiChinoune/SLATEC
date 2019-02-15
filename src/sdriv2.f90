@@ -1,12 +1,8 @@
-!*==SDRIV2.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SDRIV2
 SUBROUTINE SDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     Leniw,G,Ierflg)
   IMPLICIT NONE
-  !*--SDRIV26
-  !*** Start of declarations inserted by SPAG
   REAL F
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SDRIV2
   !***PURPOSE  The function of SDRIV2 is to solve N ordinary differential
   !            equations of the form dY(I)/dT = F(Y(I),T), given the

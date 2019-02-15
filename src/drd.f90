@@ -1,8 +1,6 @@
-!*==DRD.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DRD
 REAL(8) FUNCTION DRD(X,Y,Z,Ier)
   IMPLICIT NONE
-  !*--DRD5
   !***BEGIN PROLOGUE  DRD
   !***PURPOSE  Compute the incomplete or complete elliptic integral of
   !            the 2nd kind. For X and Y nonnegative, X+Y and Z positive,

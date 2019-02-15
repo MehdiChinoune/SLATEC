@@ -1,12 +1,8 @@
-!*==ALBETA.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK ALBETA
 FUNCTION ALBETA(A,B)
   IMPLICIT NONE
-  !*--ALBETA5
-  !*** Start of declarations inserted by SPAG
   REAL A, ALBETA, ALNGAM, ALNREL, B, corr, GAMMA, p, q, R9LGMC, &
     sq2pil
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ALBETA
   !***PURPOSE  Compute the natural logarithm of the complete Beta
   !            function.

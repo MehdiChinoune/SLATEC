@@ -1,12 +1,8 @@
-!*==OHTROL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK OHTROL
 SUBROUTINE OHTROL(Q,N,Nrda,Diag,Irank,Div,Td)
   IMPLICIT NONE
-  !*--OHTROL5
-  !*** Start of declarations inserted by SPAG
   REAL dd, Diag, diagk, Div, Q, qs, SDOT, sig, sqd, Td, tdv
   INTEGER Irank, irp, j, k, kir, kirm, l, N, nmir, Nrda
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  OHTROL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

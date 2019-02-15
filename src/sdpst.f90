@@ -1,10 +1,8 @@
-!*==SDPST.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK SDPST
 SUBROUTINE SDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     T,USERS,Y,Yh,Ywt,Uround,Nfe,Nje,A,Dfdy,Fac,Ier,Ipvt,&
     Save1,Iswflg,Bnd,Jstate)
   IMPLICIT NONE
-  !*--SDPST7
   !***BEGIN PROLOGUE  SDPST
   !***SUBSIDIARY
   !***PURPOSE  Subroutine SDPST evaluates the Jacobian matrix of the right

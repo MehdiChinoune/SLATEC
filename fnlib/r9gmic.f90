@@ -1,13 +1,9 @@
-!*==R9GMIC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK R9GMIC
 FUNCTION R9GMIC(A,X,Alx)
   IMPLICIT NONE
-  !*--R9GMIC5
-  !*** Start of declarations inserted by SPAG
   REAL A, alng, ALNGAM, Alx, bot, eps, euler, fk, fkp1, fm, &
     R1MACH, R9GMIC, s, sgng, t, te, X
   INTEGER k, m, ma, mm1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R9GMIC
   !***SUBSIDIARY
   !***PURPOSE  Compute the complementary incomplete Gamma function for A

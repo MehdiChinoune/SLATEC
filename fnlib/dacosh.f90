@@ -1,8 +1,6 @@
-!*==DACOSH.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DACOSH
 REAL(8) FUNCTION DACOSH(X)
   IMPLICIT NONE
-  !*--DACOSH5
   !***BEGIN PROLOGUE  DACOSH
   !***PURPOSE  Compute the arc hyperbolic cosine.
   !***LIBRARY   SLATEC (FNLIB)

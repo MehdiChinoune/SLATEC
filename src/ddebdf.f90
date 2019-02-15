@@ -1,12 +1,8 @@
-!*==DDEBDF.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DDEBDF
 SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar,DJAC)
   IMPLICIT NONE
-  !*--DDEBDF6
-  !*** Start of declarations inserted by SPAG
   REAL DF, DJAC
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DDEBDF
   !***PURPOSE  Solve an initial value problem in ordinary differential
   !            equations using backward differentiation formulas.  It is

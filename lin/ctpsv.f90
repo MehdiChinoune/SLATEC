@@ -1,8 +1,6 @@
-!*==CTPSV.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CTPSV
 SUBROUTINE CTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
   IMPLICIT NONE
-  !*--CTPSV5
   !***BEGIN PROLOGUE  CTPSV
   !***PURPOSE  Solve one of the systems of equations.
   !***LIBRARY   SLATEC (BLAS)

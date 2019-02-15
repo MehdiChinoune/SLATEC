@@ -1,8 +1,6 @@
-!*==DQRFAC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQRFAC
 SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   IMPLICIT NONE
-  !*--DQRFAC5
   !***BEGIN PROLOGUE  DQRFAC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DNLS1, DNLS1E, DNSQ and DNSQE

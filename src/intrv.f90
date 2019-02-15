@@ -1,8 +1,6 @@
-!*==INTRV.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK INTRV
 SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   IMPLICIT NONE
-  !*--INTRV5
   !***BEGIN PROLOGUE  INTRV
   !***PURPOSE  Compute the largest integer ILEFT in 1 .LE. ILEFT .LE. LXT
   !            such that XT(ILEFT) .LE. X where XT(*) is a subdivision

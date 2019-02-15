@@ -1,12 +1,8 @@
-!*==SINT.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK SINT
 SUBROUTINE SINT(N,X,Wsave)
   IMPLICIT NONE
-  !*--SINT5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, k, kc, kw, modn, N, nf, np1, ns2
   REAL sqrt3, t1, t2, Wsave, X, xh
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SINT
   !***PURPOSE  Compute the sine transform of a real, odd sequence.
   !***LIBRARY   SLATEC (FFTPACK)

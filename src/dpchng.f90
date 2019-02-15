@@ -1,13 +1,9 @@
-!*==DPCHNG.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DPCHNG
 SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   IMPLICIT NONE
-  !*--DPCHNG5
-  !*** Start of declarations inserted by SPAG
   INTEGER i, iend, Ii, il, ilast, iopt, ipl, Iplace, Ircx, istart, &
     Ix, ixlast, j, jj, jstart, k, key, ll, lmx, lpg
   INTEGER n20055, nerr, np
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DPCHNG
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP

@@ -1,8 +1,6 @@
-!*==BINT4.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK BINT4
 SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   IMPLICIT NONE
-  !*--BINT45
   !***BEGIN PROLOGUE  BINT4
   !***PURPOSE  Compute the B-representation of a cubic spline
   !            which interpolates given data.

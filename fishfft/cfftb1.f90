@@ -1,13 +1,9 @@
-!*==CFFTB1.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK CFFTB1
 SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
   IMPLICIT NONE
-  !*--CFFTB15
-  !*** Start of declarations inserted by SPAG
   REAL C, Ch, Wa
   INTEGER i, idl1, ido, idot, Ifac, ip, iw, ix2, ix3, ix4, k1, &
     l1, l2, N, n2, na, nac, nf
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CFFTB1
   !***PURPOSE  Compute the unnormalized inverse of CFFTF1.
   !***LIBRARY   SLATEC (FFTPACK)

@@ -1,13 +1,9 @@
-!*==PASSF3.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK PASSF3
 SUBROUTINE PASSF3(Ido,L1,Cc,Ch,Wa1,Wa2)
   IMPLICIT NONE
-  !*--PASSF35
-  !*** Start of declarations inserted by SPAG
   REAL Cc, Ch, ci2, ci3, cr2, cr3, di2, di3, dr2, dr3, taui, &
     taur, ti2, tr2, Wa1, Wa2
   INTEGER i, Ido, k, L1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  PASSF3
   !***SUBSIDIARY
   !***PURPOSE  Calculate the fast Fourier transform of subvectors of

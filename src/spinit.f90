@@ -1,15 +1,11 @@
-!*==SPINIT.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SPINIT
 SUBROUTINE SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
     Costsc,Colnrm,Xlamda,Anorm,Rhs,Rhsnrm,Ibasis,Ibb,Imat,&
     Lopt)
   IMPLICIT NONE
-  !*--SPINIT7
-  !*** Start of declarations inserted by SPAG
   INTEGER i, Info, ip, iplace, j, Mrelas, n20007, n20019, n20028, &
     n20041, n20056, n20066, n20070, n20074, n20078, Nvars
   REAL SASUM
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPINIT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

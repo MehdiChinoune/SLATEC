@@ -1,9 +1,7 @@
-!*==DFC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DFC
 SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
     Yconst,Nderiv,Mode,Coeff,W,Iw)
   IMPLICIT NONE
-  !*--DFC6
   !***BEGIN PROLOGUE  DFC
   !***PURPOSE  Fit a piecewise polynomial curve to discrete data.
   !            The piecewise polynomials are represented as B-splines.

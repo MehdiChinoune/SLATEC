@@ -1,8 +1,6 @@
-!*==ZBUNI.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ZBUNI
 SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--ZBUNI5
   !***BEGIN PROLOGUE  ZBUNI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ZBESI and ZBESK

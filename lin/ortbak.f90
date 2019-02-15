@@ -1,8 +1,6 @@
-!*==ORTBAK.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK ORTBAK
 SUBROUTINE ORTBAK(Nm,Low,Igh,A,Ort,M,Z)
   IMPLICIT NONE
-  !*--ORTBAK5
   !***BEGIN PROLOGUE  ORTBAK
   !***PURPOSE  Form the eigenvectors of a general real matrix from the
   !            eigenvectors of the upper Hessenberg matrix output from

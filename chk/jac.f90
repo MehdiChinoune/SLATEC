@@ -1,8 +1,6 @@
-!*==JAC.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK JAC
 SUBROUTINE JAC(T,U,Pd,Nrowpd,Rpar,Ipar)
   IMPLICIT NONE
-  !*--JAC5
   !***BEGIN PROLOGUE  JAC
   !***SUBSIDIARY
   !***PURPOSE  Evaluate Jacobian for DEBDF quick check.

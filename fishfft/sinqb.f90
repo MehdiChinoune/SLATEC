@@ -1,12 +1,8 @@
-!*==SINQB.f90  processed by SPAG 6.72Dc at 10:55 on  6 Feb 2019
 !DECK SINQB
 SUBROUTINE SINQB(N,X,Wsave)
   IMPLICIT NONE
-  !*--SINQB5
-  !*** Start of declarations inserted by SPAG
   INTEGER k, kc, N, ns2
   REAL Wsave, X, xhold
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SINQB
   !***PURPOSE  Compute the unnormalized inverse of SINQF.
   !***LIBRARY   SLATEC (FFTPACK)

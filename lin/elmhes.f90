@@ -1,8 +1,6 @@
-!*==ELMHES.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK ELMHES
 SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Int)
   IMPLICIT NONE
-  !*--ELMHES5
   !***BEGIN PROLOGUE  ELMHES
   !***PURPOSE  Reduce a real general matrix to upper Hessenberg form
   !            using stabilized elementary similarity transformations.

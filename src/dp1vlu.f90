@@ -1,4 +1,3 @@
-!*==DP1VLU.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DP1VLU
 SUBROUTINE DP1VLU(L,Nder,X,Yfit,Yp,A)
   !***BEGIN PROLOGUE  DP1VLU
@@ -57,7 +56,6 @@ SUBROUTINE DP1VLU(L,Nder,X,Yfit,Yp,A)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DP1VLU
   IMPLICIT NONE
-  !*--DP1VLU60
   INTEGER i, ic, ilo, in, inp1, iup, k1, k1i, k2, k3, k3p1 ,&
     k3pn, k4, k4p1, k4pn, kc, L, lm1, lp1, maxord, n, Nder ,&
     ndo, ndp1, nord

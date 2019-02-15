@@ -1,8 +1,6 @@
-!*==LMPAR.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK LMPAR
 SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   IMPLICIT NONE
-  !*--LMPAR5
   !***BEGIN PROLOGUE  LMPAR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SNLS1 and SNLS1E

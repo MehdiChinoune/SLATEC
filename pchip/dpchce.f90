@@ -1,8 +1,6 @@
-!*==DPCHCE.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DPCHCE
 SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   IMPLICIT NONE
-  !*--DPCHCE5
   !***BEGIN PROLOGUE  DPCHCE
   !***SUBSIDIARY
   !***PURPOSE  Set boundary conditions for DPCHIC

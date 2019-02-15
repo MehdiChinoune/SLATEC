@@ -1,8 +1,6 @@
-!*==PPGQ8.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK PPGQ8
 SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   IMPLICIT NONE
-  !*--PPGQ85
   !***BEGIN PROLOGUE  PPGQ8
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to PFQAD

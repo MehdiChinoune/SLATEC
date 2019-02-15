@@ -1,9 +1,7 @@
-!*==DQAGI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQAGI
 SUBROUTINE DQAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
     Lenw,Last,Iwork,Work)
   IMPLICIT NONE
-  !*--DQAGI6
   !***BEGIN PROLOGUE  DQAGI
   !***PURPOSE  The routine calculates an approximation result to a given
   !            INTEGRAL   I = Integral of F over (BOUND,+INFINITY)

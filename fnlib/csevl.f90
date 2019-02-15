@@ -1,12 +1,8 @@
-!*==CSEVL.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CSEVL
 FUNCTION CSEVL(X,Cs,N)
   IMPLICIT NONE
-  !*--CSEVL5
-  !*** Start of declarations inserted by SPAG
   REAL CSEVL, R1MACH
   INTEGER i, N, ni
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CSEVL
   !***PURPOSE  Evaluate a Chebyshev series.
   !***LIBRARY   SLATEC (FNLIB)

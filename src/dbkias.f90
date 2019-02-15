@@ -1,8 +1,6 @@
-!*==DBKIAS.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DBKIAS
 SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   IMPLICIT NONE
-  !*--DBKIAS5
   !***BEGIN PROLOGUE  DBKIAS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBSKIN

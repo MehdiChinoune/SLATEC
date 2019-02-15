@@ -1,11 +1,7 @@
-!*==SNLS1Q.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SNLS1Q
 SUBROUTINE SNLS1Q(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--SNLS1Q5
-  !*** Start of declarations inserted by SPAG
   REAL FCN1
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SNLS1Q
   !***PURPOSE  Quick check for SNLS1E, SNLS1 and SCOV.
   !***LIBRARY   SLATEC

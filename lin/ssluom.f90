@@ -1,12 +1,8 @@
-!*==SSLUOM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSLUOM
 SUBROUTINE SSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !*--SSLUOM6
-  !*** Start of declarations inserted by SPAG
   REAL SSLUI, SSMV
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSLUOM
   !***PURPOSE  Incomplete LU Orthomin Sparse Iterative Ax=b Solver.
   !            Routine to solve a general linear system  Ax = b  using

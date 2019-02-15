@@ -1,12 +1,8 @@
-!*==SINDG.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK SINDG
 FUNCTION SINDG(X)
   IMPLICIT NONE
-  !*--SINDG5
-  !*** Start of declarations inserted by SPAG
   INTEGER n
   REAL raddeg, SINDG, X
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SINDG
   !***PURPOSE  Compute the sine of an argument in degrees.
   !***LIBRARY   SLATEC (FNLIB)

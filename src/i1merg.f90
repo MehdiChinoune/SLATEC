@@ -1,8 +1,6 @@
-!*==I1MERG.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK I1MERG
 SUBROUTINE I1MERG(Icos,I1,M1,I2,M2,I3)
   IMPLICIT NONE
-  !*--I1MERG5
   !***BEGIN PROLOGUE  I1MERG
   !***SUBSIDIARY
   !***PURPOSE  Merge two strings of ascending integers.

@@ -1,8 +1,6 @@
-!*==SBLAT2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SBLAT2
 SUBROUTINE SBLAT2(Nout,Kprint,Ipass)
   IMPLICIT NONE
-  !*--SBLAT25
   !***BEGIN PROLOGUE  SBLAT2
   !***PURPOSE  Driver for testing Level 2 BLAS single precision
   !            subroutines.

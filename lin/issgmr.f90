@@ -1,11 +1,9 @@
-!*==ISSGMR.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK ISSGMR
 INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
     Itmax,Iter,Err,Iunit,R,Z,Dz,Rwork,Iwork,Rnrm,Bnrm,&
     Sb,Sx,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,Snormw,Prod,&
     R0nrm,Hes,Jpre)
   IMPLICIT NONE
-  !*--ISSGMR8
   !***BEGIN PROLOGUE  ISSGMR
   !***SUBSIDIARY
   !***PURPOSE  Generalized Minimum Residual Stop Test.

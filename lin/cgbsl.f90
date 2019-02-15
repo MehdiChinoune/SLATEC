@@ -1,8 +1,6 @@
-!*==CGBSL.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CGBSL
 SUBROUTINE CGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   IMPLICIT NONE
-  !*--CGBSL5
   !***BEGIN PROLOGUE  CGBSL
   !***PURPOSE  Solve the complex band system A*X=B or CTRANS(A)*X=B using
   !            the factors computed by CGBCO or CGBFA.

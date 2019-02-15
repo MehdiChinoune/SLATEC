@@ -1,8 +1,6 @@
-!*==CBUNI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CBUNI
 SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   IMPLICIT NONE
-  !*--CBUNI5
   !***BEGIN PROLOGUE  CBUNI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBESI and CBESK

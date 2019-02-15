@@ -1,8 +1,6 @@
-!*==TRED3.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK TRED3
 SUBROUTINE TRED3(N,Nv,A,D,E,E2)
   IMPLICIT NONE
-  !*--TRED35
   !***BEGIN PROLOGUE  TRED3
   !***PURPOSE  Reduce a real symmetric matrix stored in packed form to
   !            symmetric tridiagonal matrix using orthogonal

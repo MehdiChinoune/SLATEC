@@ -1,11 +1,7 @@
-!*==R1MACH.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK R1MACH
 REAL FUNCTION R1MACH(I)
   IMPLICIT NONE
-  !*--R1MACH5
-  !*** Start of declarations inserted by SPAG
   INTEGER I
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  R1MACH
   !***PURPOSE  Return floating point machine dependent constants.
   !***LIBRARY   SLATEC

@@ -1,8 +1,6 @@
-!*==FB.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK FB
 REAL FUNCTION FB(X)
   IMPLICIT NONE
-  !*--FB5
   !***BEGIN PROLOGUE  FB
   !***PURPOSE  Subsidiary to BSPCK.
   !***LIBRARY   SLATEC

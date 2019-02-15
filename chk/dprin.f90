@@ -1,8 +1,6 @@
-!*==DPRIN.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DPRIN
 SUBROUTINE DPRIN(Lun,Num1,Kprint,Ip,Exact,Result,Abserr,Neval,Ierv,Lierv)
   IMPLICIT NONE
-  !*--DPRIN5
   !***BEGIN PROLOGUE  DPRIN
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CDQAG, CDQAG, CDQAGI, CDQAGP, CDQAGS, CDQAWC,

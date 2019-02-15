@@ -1,14 +1,10 @@
-!*==CHKSN4.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CHKSN4
 SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   IMPLICIT NONE
-  !*--CHKSN45
-  !*** Start of declarations inserted by SPAG
   REAL ai, AIT, Alpha, Beta, bi, BIT, ci, CIT, DIT, DLX, DLX4, &
     DLY, DLY4, TDLx3, TDLy3, xi
   INTEGER i, IS, JS, K, KSWx, KSWy, L, Mbdcnd, MIT, MS, Nbdcnd, &
     NIT, NS
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  CHKSN4
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPX4

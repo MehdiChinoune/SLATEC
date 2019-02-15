@@ -1,8 +1,6 @@
-!*==SDCST.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK SDCST
 SUBROUTINE SDCST(Maxord,Mint,Iswflg,El,Tq)
   IMPLICIT NONE
-  !*--SDCST5
   !***BEGIN PROLOGUE  SDCST
   !***SUBSIDIARY
   !***PURPOSE  SDCST sets coefficients used by the core integrator SDSTP.

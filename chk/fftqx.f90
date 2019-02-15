@@ -1,8 +1,6 @@
-!*==FFTQX.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK FFTQX
 SUBROUTINE FFTQX(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--FFTQX5
   !***BEGIN PROLOGUE  FFTQX
   !***PURPOSE  Quick check for the NCAR FFT routines.
   !***LIBRARY   SLATEC

@@ -1,8 +1,6 @@
-!*==R1UPDT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK R1UPDT
 SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   IMPLICIT NONE
-  !*--R1UPDT5
   !***BEGIN PROLOGUE  R1UPDT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SNSQ and SNSQE

@@ -1,11 +1,7 @@
-!*==SFNCK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK SFNCK
 SUBROUTINE SFNCK(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--SFNCK5
-  !*** Start of declarations inserted by SPAG
   REAL ACOSH, AI, AIE, ALI, ALNREL, ASINH, ATANH, BESI0, BESI0E
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SFNCK
   !***PURPOSE  Quick check for the single precision Fullerton
   !            special functions.

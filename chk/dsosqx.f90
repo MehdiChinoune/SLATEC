@@ -1,8 +1,6 @@
-!*==DSOSQX.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DSOSQX
 SUBROUTINE DSOSQX(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--DSOSQX5
   !***BEGIN PROLOGUE  DSOSQX
   !***PURPOSE  Quick check for DSOS.
   !***LIBRARY   SLATEC

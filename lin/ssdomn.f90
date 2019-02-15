@@ -1,12 +1,8 @@
-!*==SSDOMN.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSDOMN
 SUBROUTINE SSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !*--SSDOMN6
-  !*** Start of declarations inserted by SPAG
   REAL SSDI, SSMV
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSDOMN
   !***PURPOSE  Diagonally Scaled Orthomin Sparse Iterative Ax=b Solver.
   !            Routine to solve a general linear system  Ax = b  using

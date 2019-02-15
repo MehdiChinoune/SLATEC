@@ -1,8 +1,6 @@
-!*==DAVINT.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DAVINT
 SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   IMPLICIT NONE
-  !*--DAVINT5
   !***BEGIN PROLOGUE  DAVINT
   !***PURPOSE  Integrate a function tabulated at arbitrarily spaced
   !            abscissas using overlapping parabolas.

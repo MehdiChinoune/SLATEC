@@ -1,16 +1,12 @@
-!*==ORTHOL.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK ORTHOL
 SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,&
     Cs)
   IMPLICIT NONE
-  !*--ORTHOL6
-  !*** Start of declarations inserted by SPAG
   REAL A, acc, akk, anorm, as, asave, Cols, Cs, css, Diag, diagk, &
     dum, R1MACH, sad, sc, Scales, SDOT, sig, sigma, sruro
   REAL uro
   INTEGER Iflag, Irank, Iscale, j, jcol, k, kp, Kpivot, l, M, mk, &
     N, Nrda
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ORTHOL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

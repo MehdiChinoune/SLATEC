@@ -1,8 +1,6 @@
-!*==DGAMLN.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DGAMLN
 REAL(8) FUNCTION DGAMLN(Z,Ierr)
   IMPLICIT NONE
-  !*--DGAMLN5
   !***BEGIN PROLOGUE  DGAMLN
   !***SUBSIDIARY
   !***PURPOSE  Compute the logarithm of the Gamma function

@@ -1,8 +1,6 @@
-!*==DHFTI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DHFTI
 SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   IMPLICIT NONE
-  !*--DHFTI5
   !***BEGIN PROLOGUE  DHFTI
   !***PURPOSE  Solve a least squares problem for banded matrices using
   !            sequential accumulation of rows of the data matrix.

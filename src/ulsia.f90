@@ -1,14 +1,10 @@
-!*==ULSIA.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK ULSIA
 SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
     Lw,Iwork,Liw,Info)
   IMPLICIT NONE
-  !*--ULSIA6
-  !*** Start of declarations inserted by SPAG
   REAL A, Ae, B, eps, R1MACH, Re, Rnorm, W
   INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, m1, m2, &
     m3, m4, m5, Mda, Mdb, Mode, N, Nb, Np
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  ULSIA
   !***PURPOSE  Solve an underdetermined linear system of equations by
   !            performing an LQ factorization of the matrix using

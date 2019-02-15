@@ -1,8 +1,6 @@
-!*==DSIDI.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DSIDI
 SUBROUTINE DSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   IMPLICIT NONE
-  !*--DSIDI5
   !***BEGIN PROLOGUE  DSIDI
   !***PURPOSE  Compute the determinant, inertia and inverse of a real
   !            symmetric matrix using the factors from DSIFA.

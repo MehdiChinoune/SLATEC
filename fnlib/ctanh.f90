@@ -1,8 +1,6 @@
-!*==CTANH.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK CTANH
 COMPLEX FUNCTION CTANH(Z)
   IMPLICIT NONE
-  !*--CTANH5
   !***BEGIN PROLOGUE  CTANH
   !***PURPOSE  Compute the complex hyperbolic tangent.
   !***LIBRARY   SLATEC (FNLIB)

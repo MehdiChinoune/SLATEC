@@ -1,8 +1,6 @@
-!*==QFORM.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK QFORM
 SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
   IMPLICIT NONE
-  !*--QFORM5
   !***BEGIN PROLOGUE  QFORM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SNSQ and SNSQE

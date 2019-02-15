@@ -1,8 +1,6 @@
-!*==DGVEC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DGVEC
 SUBROUTINE DGVEC(X,G)
   IMPLICIT NONE
-  !*--DGVEC5
   !***BEGIN PROLOGUE  DGVEC
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC

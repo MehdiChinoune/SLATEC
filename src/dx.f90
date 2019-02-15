@@ -1,13 +1,9 @@
-!*==DX.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DX
 SUBROUTINE DX(U,Idmn,I,J,Uxxx,Uxxxx)
   IMPLICIT NONE
-  !*--DX5
-  !*** Start of declarations inserted by SPAG
   REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, TDLx3, TDLy3, U, &
     Uxxx, Uxxxx
   INTEGER I, Idmn, IS, J, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DX
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPELI

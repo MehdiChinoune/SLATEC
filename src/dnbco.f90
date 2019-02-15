@@ -1,8 +1,6 @@
-!*==DNBCO.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DNBCO
 SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   IMPLICIT NONE
-  !*--DNBCO5
   !***BEGIN PROLOGUE  DNBCO
   !***PURPOSE  Factor a band matrix using Gaussian elimination and
   !            estimate the condition number.

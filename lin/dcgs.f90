@@ -1,9 +1,7 @@
-!*==DCGS.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK DCGS
 SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,Iwork)
   IMPLICIT NONE
-  !*--DCGS6
   !***BEGIN PROLOGUE  DCGS
   !***PURPOSE  Preconditioned BiConjugate Gradient Squared Ax=b Solver.
   !            Routine to solve a Non-Symmetric linear system  Ax = b

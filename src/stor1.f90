@@ -1,13 +1,9 @@
-!*==STOR1.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK STOR1
 SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   IMPLICIT NONE
-  !*--STOR15
-  !*** Start of declarations inserted by SPAG
   REAL C, U, V, XSAv, Yh, Yp
   INTEGER IGOfx, INHomo, IVP, j, NCOmp, nctnf, Ndisk, NFC, Ntape, &
     Ntemp
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  STOR1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP

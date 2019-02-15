@@ -1,8 +1,6 @@
-!*==CTRCO.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK CTRCO
 SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
   IMPLICIT NONE
-  !*--CTRCO5
   !***BEGIN PROLOGUE  CTRCO
   !***PURPOSE  Estimate the condition number of a triangular matrix.
   !***LIBRARY   SLATEC (LINPACK)

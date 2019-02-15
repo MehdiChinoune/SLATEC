@@ -1,8 +1,6 @@
-!*==SDZRO.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SDZRO
 SUBROUTINE SDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   IMPLICIT NONE
-  !*--SDZRO5
   !***BEGIN PROLOGUE  SDZRO
   !***SUBSIDIARY
   !***PURPOSE  SDZRO searches for a zero of a function F(N, T, Y, IROOT)

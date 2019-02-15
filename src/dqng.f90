@@ -1,8 +1,6 @@
-!*==DQNG.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQNG
 SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   IMPLICIT NONE
-  !*--DQNG5
   !***BEGIN PROLOGUE  DQNG
   !***PURPOSE  The routine calculates an approximation result to a
   !            given definite integral I = integral of F over (A,B),

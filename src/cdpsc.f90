@@ -1,8 +1,6 @@
-!*==CDPSC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CDPSC
 SUBROUTINE CDPSC(Ksgn,N,Nq,Yh)
   IMPLICIT NONE
-  !*--CDPSC5
   !***BEGIN PROLOGUE  CDPSC
   !***SUBSIDIARY
   !***PURPOSE  Subroutine CDPSC computes the predicted YH values by

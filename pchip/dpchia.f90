@@ -1,8 +1,6 @@
-!*==DPCHIA.f90  processed by SPAG 6.72Dc at 11:00 on  6 Feb 2019
 !DECK DPCHIA
 REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   IMPLICIT NONE
-  !*--DPCHIA5
   !***BEGIN PROLOGUE  DPCHIA
   !***PURPOSE  Evaluate the definite integral of a piecewise cubic
   !            Hermite function over an arbitrary interval.

@@ -1,12 +1,8 @@
-!*==DBSK0E.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK DBSK0E
 REAL(8) FUNCTION DBSK0E(X)
   IMPLICIT NONE
-  !*--DBSK0E5
-  !*** Start of declarations inserted by SPAG
   REAL eta
   INTEGER INITDS, ntak0, ntak02, ntk0
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  DBSK0E
   !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the third kind of order zero.

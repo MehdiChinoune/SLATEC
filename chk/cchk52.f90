@@ -1,9 +1,7 @@
-!*==CCHK52.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK CCHK52
 SUBROUTINE CCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
     Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
   IMPLICIT NONE
-  !*--CCHK526
   !***BEGIN PROLOGUE  CCHK52
   !***SUBSIDIARY
   !***PURPOSE  Quick check for CHER and CHPR.

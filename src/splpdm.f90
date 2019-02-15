@@ -1,15 +1,11 @@
-!*==SPLPDM.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SPLPDM
 SUBROUTINE SPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
     Ipr,Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,&
     Singlr,Redbas)
   IMPLICIT NONE
-  !*--SPLPDM7
-  !*** Start of declarations inserted by SPAG
   REAL aij, SASUM
   INTEGER i, Info, Iopt, iplace, j, k, Lbm, LCOl, LENl, LENu ,&
     Lmx, LP, LROw, Mrelas, NCP, Nredc, Nvars, nzbm
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPLPDM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP

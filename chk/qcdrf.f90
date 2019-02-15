@@ -1,8 +1,6 @@
-!*==QCDRF.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK QCDRF
 SUBROUTINE QCDRF(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--QCDRF5
   !***BEGIN PROLOGUE  QCDRF
   !***PURPOSE  Quick check for DRF.
   !***LIBRARY   SLATEC

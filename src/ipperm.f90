@@ -1,8 +1,6 @@
-!*==IPPERM.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK IPPERM
 SUBROUTINE IPPERM(Ix,N,Iperm,Ier)
   IMPLICIT NONE
-  !*--IPPERM5
   !***BEGIN PROLOGUE  IPPERM
   !***PURPOSE  Rearrange a given array according to a prescribed
   !            permutation vector.

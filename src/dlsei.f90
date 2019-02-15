@@ -1,8 +1,6 @@
-!*==DLSEI.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DLSEI
 SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   IMPLICIT NONE
-  !*--DLSEI5
   !***BEGIN PROLOGUE  DLSEI
   !***PURPOSE  Solve a linearly constrained least squares problem with
   !            equality and inequality constraints, and optionally compute

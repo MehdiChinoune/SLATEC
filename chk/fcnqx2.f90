@@ -1,14 +1,10 @@
-!*==FCNQX2.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK FCNQX2
 SUBROUTINE FCNQX2(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--FCNQX25
-  !*** Start of declarations inserted by SPAG
   INTEGER i, I1MACH, ic1, ic2, id, ierr, ierror, ip, ipn, iq, ir ,&
     irad, isig, isum, ix11, ix12, ix13, ix21, ix22, ix23
   INTEGER mu, mu1, mu2, n, nbits, ndec, nerr, nradpl, nu1, nudiff ,&
     NUMXER
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  FCNQX2
   !***SUBSIDIARY
   !***PURPOSE  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES DXLEGF

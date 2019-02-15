@@ -1,12 +1,8 @@
-!*==EXPREL.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK EXPREL
 FUNCTION EXPREL(X)
   IMPLICIT NONE
-  !*--EXPREL5
-  !*** Start of declarations inserted by SPAG
   REAL absx, alneps, EXPREL, R1MACH, X, xbnd, xln, xn
   INTEGER i, nterms
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  EXPREL
   !***PURPOSE  Calculate the relative error exponential (EXP(X)-1)/X.
   !***LIBRARY   SLATEC (FNLIB)

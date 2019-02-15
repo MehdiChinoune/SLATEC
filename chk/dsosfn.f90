@@ -1,8 +1,6 @@
-!*==DSOSFN.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DSOSFN
 REAL(8) FUNCTION DSOSFN(X,K)
   IMPLICIT NONE
-  !*--DSOSFN5
   !***BEGIN PROLOGUE  DSOSFN
   !***PURPOSE  Function evaluator for DSOS quick check.
   !***LIBRARY   SLATEC

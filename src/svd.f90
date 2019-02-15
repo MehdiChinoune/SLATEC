@@ -1,8 +1,6 @@
-!*==SVD.f90  processed by SPAG 6.72Dc at 11:02 on  6 Feb 2019
 !DECK SVD
 SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
   IMPLICIT NONE
-  !*--SVD5
   !***BEGIN PROLOGUE  SVD
   !***SUBSIDIARY
   !***PURPOSE  Perform the singular value decomposition of a rectangular

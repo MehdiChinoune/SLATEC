@@ -1,4 +1,3 @@
-!*==DQCGLS.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK DQCGLS
 SUBROUTINE DQCGLS(Lun,Kprint,Ipass)
   !***BEGIN PROLOGUE  DQCGLS
@@ -39,12 +38,9 @@ SUBROUTINE DQCGLS(Lun,Kprint,Ipass)
   !***END PROLOGUE  DQCGLS
   !
   IMPLICIT NONE
-  !*--DQCGLS42
-  !*** Start of declarations inserted by SPAG
   REAL(8) :: a, aa, b, bb, D1MACH, delmax, delx, r, rnorm ,&
     work, xx
   INTEGER i, Ipass, j, kk, Kprint
-  !*** End of declarations inserted by SPAG
   DIMENSION aa(4,4,2), a(4,4), bb(4,2), b(4), xx(4,4)
   DIMENSION work(50)
   CHARACTER :: list(2)

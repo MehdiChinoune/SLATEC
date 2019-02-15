@@ -1,12 +1,8 @@
-!*==SSLUGM.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SSLUGM
 SUBROUTINE SSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !*--SSLUGM6
-  !*** Start of declarations inserted by SPAG
   REAL SSLUI, SSMV
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SSLUGM
   !***PURPOSE  Incomplete LU GMRES Iterative Sparse Ax=b Solver.
   !            This routine uses the generalized minimum residual

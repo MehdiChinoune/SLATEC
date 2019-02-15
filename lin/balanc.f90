@@ -1,8 +1,6 @@
-!*==BALANC.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK BALANC
 SUBROUTINE BALANC(Nm,N,A,Low,Igh,Scale)
   IMPLICIT NONE
-  !*--BALANC5
   !***BEGIN PROLOGUE  BALANC
   !***PURPOSE  Balance a real general matrix and isolate eigenvalues
   !            whenever possible.

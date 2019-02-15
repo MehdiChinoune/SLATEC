@@ -1,8 +1,6 @@
-!*==DQWGTC.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK DQWGTC
 REAL(8) FUNCTION DQWGTC(X,C,P2,P3,P4,Kp)
   IMPLICIT NONE
-  !*--DQWGTC5
   !***BEGIN PROLOGUE  DQWGTC
   !***SUBSIDIARY
   !***PURPOSE  This function subprogram is used together with the

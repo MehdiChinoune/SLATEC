@@ -1,12 +1,8 @@
-!*==SPENC.f90  processed by SPAG 6.72Dc at 10:56 on  6 Feb 2019
 !DECK SPENC
 FUNCTION SPENC(X)
   IMPLICIT NONE
-  !*--SPENC5
-  !*** Start of declarations inserted by SPAG
   REAL aln, CSEVL, pi26, R1MACH, SPENC, spencs, X, xbig
   INTEGER INITS, nspenc
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SPENC
   !***PURPOSE  Compute a form of Spence's integral due to K. Mitchell.
   !***LIBRARY   SLATEC (FNLIB)

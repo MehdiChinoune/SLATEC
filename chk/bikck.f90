@@ -1,11 +1,7 @@
-!*==BIKCK.f90  processed by SPAG 6.72Dc at 10:52 on  6 Feb 2019
 !DECK BIKCK
 SUBROUTINE BIKCK(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !*--BIKCK5
-  !*** Start of declarations inserted by SPAG
   INTEGER Ipass, Kprint, NUMXER
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  BIKCK
   !***PURPOSE  Quick check for BESI and BESK.
   !***LIBRARY   SLATEC

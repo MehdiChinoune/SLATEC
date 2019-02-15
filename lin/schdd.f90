@@ -1,11 +1,7 @@
-!*==SCHDD.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK SCHDD
 SUBROUTINE SCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   IMPLICIT NONE
-  !*--SCHDD5
-  !*** Start of declarations inserted by SPAG
   REAL scale
-  !*** End of declarations inserted by SPAG
   !***BEGIN PROLOGUE  SCHDD
   !***PURPOSE  Downdate an augmented Cholesky decomposition or the
   !            triangular factor of an augmented QR decomposition.

@@ -1,8 +1,6 @@
-!*==CDCST.f90  processed by SPAG 6.72Dc at 11:01 on  6 Feb 2019
 !DECK CDCST
 SUBROUTINE CDCST(Maxord,Mint,Iswflg,El,Tq)
   IMPLICIT NONE
-  !*--CDCST5
   !***BEGIN PROLOGUE  CDCST
   !***SUBSIDIARY
   !***PURPOSE  CDCST sets coefficients used by the core integrator CDSTP.

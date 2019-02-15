@@ -1,8 +1,6 @@
-!*==TQL2.f90  processed by SPAG 6.72Dc at 10:58 on  6 Feb 2019
 !DECK TQL2
 SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
   IMPLICIT NONE
-  !*--TQL25
   !***BEGIN PROLOGUE  TQL2
   !***PURPOSE  Compute the eigenvalues and eigenvectors of symmetric
   !            tridiagonal matrix.
