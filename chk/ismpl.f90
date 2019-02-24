@@ -38,7 +38,7 @@ SUBROUTINE ISMPL(N,M,Indx)
   !     Check the input
   !
   dummy = 0.0
-  IF ( N*M<0.OR.M>N ) RETURN
+  IF ( N*M<=0 .OR. M>N ) RETURN
   !
   !     Set the indices.
   Indx(1) = INT(RAND(dummy)*N) + 1

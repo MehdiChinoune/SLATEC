@@ -157,7 +157,7 @@ SUBROUTINE DSMMI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   !     .. Scalar Arguments ..
   INTEGER N
   !     .. Array Arguments ..
-  REAL(8) :: B(N), Dinv(N), L(*), U(N), X(N)
+  REAL(8) :: B(N), Dinv(N), L(*), U(*), X(N)
   INTEGER Il(*), Iu(*), Jl(*), Ju(*)
   !     .. Local Scalars ..
   INTEGER i, icol, irow, j, jbgn, jend

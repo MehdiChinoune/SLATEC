@@ -163,7 +163,7 @@ INTEGER FUNCTION ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !     .. Subroutine Arguments ..
   EXTERNAL MSOLVE
   !     .. Arrays in Common ..
-  REAL SOLn(1)
+  REAL SOLn(25)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..

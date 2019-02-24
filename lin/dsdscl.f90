@@ -143,7 +143,7 @@ SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   REAL(8) :: A(Nelt), B(N), Dinv(N), X(N)
   INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Arrays in Common ..
-  REAL(8) :: SOLn(1)
+  REAL(8) :: SOLn(25)
   !     .. Local Scalars ..
   REAL(8) :: di
   INTEGER icol, j, jbgn, jend

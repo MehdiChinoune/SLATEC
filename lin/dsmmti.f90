@@ -46,7 +46,7 @@ SUBROUTINE DSMMTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
   REAL(8) :: A(Nelt), B(N), Rwork(*), X(N)
-  INTEGER Ia(Nelt), Iwork(10), Ja(Nelt)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER locdin, locil, lociu, locjl, locju, locl, locu
   !     .. External Subroutines ..

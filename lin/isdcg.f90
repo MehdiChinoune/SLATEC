@@ -174,7 +174,7 @@ INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !     .. Subroutine Arguments ..
   EXTERNAL MSOLVE
   !     .. Arrays in Common ..
-  REAL(8) :: SOLn(1)
+  REAL(8) :: SOLn(25)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..

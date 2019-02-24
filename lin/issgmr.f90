@@ -269,7 +269,7 @@ INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   !     .. Subroutine Arguments ..
   EXTERNAL MSOLVE
   !     .. Arrays in Common ..
-  REAL SOLn(1)
+  REAL SOLn(25)
   !     .. Local Scalars ..
   REAL dxnrm, fuzz, rat, ratmax, solnrm, tem
   INTEGER i, ielmax

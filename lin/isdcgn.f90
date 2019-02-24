@@ -207,7 +207,7 @@ INTEGER FUNCTION ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
   !     .. Subroutine Arguments ..
   EXTERNAL MATVEC, MSOLVE, MTTVEC
   !     .. Arrays in Common ..
-  REAL(8) :: SOLn(1)
+  REAL(8) :: SOLn(25)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..

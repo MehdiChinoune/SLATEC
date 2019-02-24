@@ -511,7 +511,7 @@ CONTAINS
       !
       !         To keep things sparse divide by two, three or four or ...
       !
-      inum = MAX(1, (INT(RAND(dummy)*nl)+1)/3 )
+      inum = (INT(RAND(dummy)*nl)+1)/3
       CALL ISMPL(nl,inum,Itmp)
       !
       !         Set up this column (and row, if non-symmetric structure).

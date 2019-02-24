@@ -218,7 +218,7 @@ SUBROUTINE SSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Nelt
   !     .. Array Arguments ..
   REAL A(N), B(N), Rwork(*), X(N)
-  INTEGER Ia(Nelt), Iwork(10), Ja(Nelt)
+  INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER icol, j, jbgn, jend, locdz, locel, lociel, lociw, locjel, &
     locr, locw, locz, nl

@@ -142,7 +142,7 @@ SUBROUTINE SSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   REAL A(Nelt), B(N), Dinv(N), X(N)
   INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Arrays in Common ..
-  REAL SOLn(1)
+  REAL SOLn(25)
   !     .. Local Scalars ..
   REAL di
   INTEGER icol, j, jbgn, jend
