@@ -146,7 +146,7 @@ CONTAINS
     !***END PROLOGUE  CGBQC
     COMPLEX abd(6,4), at(7,4), b(4), bt(4), c(4), det(2), dc(2), z(4) ,&
       xa, xb
-    REAL r, rcond, rcnd, DELX
+    REAL r, rcond, rcnd, CABS1
     CHARACTER kfail*39, kprog*19
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
     INTEGER ml, mu
@@ -189,7 +189,7 @@ CONTAINS
     CALL CGBSL(at,lda,n,ml,mu,ipvt,bt,0)
     indx = 0
     DO i = 1, n
-      IF ( DELX(c(i),bt(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -218,7 +218,7 @@ CONTAINS
     CALL CGBSL(at,lda,n,ml,mu,ipvt,bt,1)
     indx = 0
     DO i = 1, n
-      IF ( DELX(c(i),bt(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -231,7 +231,7 @@ CONTAINS
     CALL CGBDI(at,lda,n,ml,mu,ipvt,det)
     indx = 0
     DO i = 1, 2
-      IF ( DELX(dc(i),det(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(dc(i)-det(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -285,7 +285,7 @@ CONTAINS
     !***END PROLOGUE  CGECK
     COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), det(2) ,&
       dc(2), z(4), xa, xb
-    REAL r, rcond, rcnd, DELX
+    REAL r, rcond, rcnd, CABS1
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
     DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
@@ -327,7 +327,7 @@ CONTAINS
     CALL CGESL(at,lda,n,ipvt,bt,0)
     indx = 0
     DO i = 1, n
-      IF ( DELX(c(i),bt(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -356,7 +356,7 @@ CONTAINS
     CALL CGESL(at,lda,n,ipvt,bt,1)
     indx = 0
     DO i = 1, n
-      IF ( DELX(c(i),bt(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -369,7 +369,7 @@ CONTAINS
     CALL CGEDI(at,lda,n,ipvt,det,z,11)
     indx = 0
     DO i = 1, 2
-      IF ( DELX(dc(i),det(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(dc(i)-det(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -380,7 +380,7 @@ CONTAINS
     indx = 0
     DO i = 1, n
       DO j = 1, n
-        IF ( DELX(ainv(i,j),at(i,j))>.0001 ) indx = indx + 1
+        IF ( CABS1(ainv(i,j)-at(i,j))>.0001 ) indx = indx + 1
       ENDDO
     ENDDO
     !
@@ -433,7 +433,7 @@ CONTAINS
     COMPLEX c(4), d(4), e(4), b(4), cx(4), ct(4), dt(4), et(4), bt(4)
     CHARACTER kfail*13
     INTEGER n, info, i, indx, Nerr
-    REAL delx
+    REAL delx, CABS1
     DATA c/(0.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,1.E0)/
     DATA d/(2.E0,0.E0), (2.E0,0.E0), (3.E0,0.E0), (4.E0,0.E0)/
     DATA e/(0.E0,-1.E0), (0.E0,0.E0), (0.E0,-1.E0), (0.E0,0.E0)/
@@ -458,7 +458,7 @@ CONTAINS
     !
     indx = 0
     DO i = 1, n
-      delx = ABS(REAL(bt(i)-cx(i))) + ABS(AIMAG(bt(i)-cx(i)))
+      delx = CABS1(bt(i)-cx(i))
       IF ( delx>.0001 ) indx = indx + 1
     ENDDO
     !
@@ -512,7 +512,7 @@ CONTAINS
     !***END PROLOGUE  CHIQC
     COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), z(4), xa ,&
       xb
-    REAL r, rcond, rcnd, DELX, det(2), dc(2)
+    REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*47
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
     INTEGER inert(3), irt(3)
@@ -556,7 +556,7 @@ CONTAINS
     CALL CHISL(at,lda,n,ipvt,bt)
     indx = 0
     DO i = 1, n
-      IF ( DELX(c(i),bt(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -595,7 +595,7 @@ CONTAINS
     indx = 0
     DO i = 1, n
       DO j = 1, n
-        IF ( DELX(ainv(i,j),at(i,j))>.0001 ) indx = indx + 1
+        IF ( CABS1(ainv(i,j)-at(i,j))>.0001 ) indx = indx + 1
       ENDDO
     ENDDO
     !
@@ -659,7 +659,7 @@ CONTAINS
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CHPQC
     COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), z(4), xa, xb
-    REAL r, rcond, rcnd, DELX, det(2), dc(2)
+    REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*47
     INTEGER n, ipvt(4), info, i, j, indx, Nerr
     INTEGER inert(3), irt(3)
@@ -701,7 +701,7 @@ CONTAINS
     CALL CHPSL(at,n,ipvt,bt)
     indx = 0
     DO i = 1, n
-      IF ( DELX(c(i),bt(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -737,7 +737,7 @@ CONTAINS
     !
     indx = 0
     DO i = 1, 10
-      IF ( DELX(ainv(i),at(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(ainv(i)-at(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -799,7 +799,7 @@ CONTAINS
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CPBQC
     COMPLEX abd(2,4), at(3,4), b(4), bt(4), c(4), z(4), xa, xb
-    REAL r, rcond, rcnd, DELX, det(2), dc(2)
+    REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, info, i, j, indx, Nerr, m
     DATA abd/(0.E0,0.E0), (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0) ,&
@@ -836,7 +836,7 @@ CONTAINS
     CALL CPBSL(at,lda,n,m,bt)
     indx = 0
     DO i = 1, n
-      IF ( DELX(c(i),bt(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -923,7 +923,7 @@ CONTAINS
     !***END PROLOGUE  CPOQC
     COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), z(4), xa ,&
       xb
-    REAL r, rcond, rcnd, DELX, det(2), dc(2)
+    REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, info, i, j, indx, Nerr
     DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
@@ -965,7 +965,7 @@ CONTAINS
     CALL CPOSL(at,lda,n,bt)
     indx = 0
     DO i = 1, n
-      IF ( DELX(c(i),bt(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -1009,7 +1009,7 @@ CONTAINS
     indx = 0
     DO i = 1, n
       DO j = 1, n
-        IF ( DELX(ainv(i,j),at(i,j))>.0001 ) indx = indx + 1
+        IF ( CABS1(ainv(i,j)-at(i,j))>.0001 ) indx = indx + 1
       ENDDO
     ENDDO
     !
@@ -1064,7 +1064,7 @@ CONTAINS
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CPPQC
     COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), z(4), xa, xb
-    REAL r, rcond, rcnd, DELX, det(2), dc(2)
+    REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*39
     INTEGER n, info, i, j, indx, Nerr
     DATA ap/(2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0) ,&
@@ -1104,7 +1104,7 @@ CONTAINS
     CALL CPPSL(at,n,bt)
     indx = 0
     DO i = 1, n
-      IF ( DELX(c(i),bt(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -1145,7 +1145,7 @@ CONTAINS
     !
     indx = 0
     DO i = 1, 10
-      IF ( DELX(ainv(i),at(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(ainv(i)-at(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -1195,7 +1195,7 @@ CONTAINS
     !***END PROLOGUE  CPTQC
     COMPLEX d(4), e(4), b(4), cx(4), dt(4), et(4), bt(4)
     INTEGER n, i, indx, Nerr
-    REAL delx
+    REAL delx, CABS1
     DATA d/(2.E0,0.E0), (2.E0,0.E0), (3.E0,0.E0), (4.E0,0.E0)/
     DATA e/(0.E0,-1.E0), (0.E0,0.E0), (0.E0,-1.E0), (0.E0,0.E0)/
     DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
@@ -1212,7 +1212,7 @@ CONTAINS
     CALL CPTSL(n,dt,et,bt)
     indx = 0
     DO i = 1, n
-      delx = ABS(REAL(bt(i)-cx(i))) + ABS(AIMAG(bt(i)-cx(i)))
+      delx = CABS1(bt(i)-cx(i))
       IF ( delx>.0001 ) indx = indx + 1
     ENDDO
     !
@@ -1268,7 +1268,7 @@ CONTAINS
     CHARACTER kprog*9, kfail*75
     INTEGER ldx, n, p, jpvt(4), job, k, info
     INTEGER jpvtt(4), jpvtc(4), i, j, indx(5), Nerr, l
-    REAL DELX
+    REAL CABS1
     DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
@@ -1315,7 +1315,7 @@ CONTAINS
     indx(1) = 0
     DO j = 1, n
       DO i = 1, n
-        IF ( DELX(at(i,j),ac(i,j))>.0001 ) indx(1) = indx(1) + 1
+        IF ( CABS1(at(i,j)-ac(i,j))>.0001 ) indx(1) = indx(1) + 1
       ENDDO
     ENDDO
     !
@@ -1329,7 +1329,7 @@ CONTAINS
     ENDDO
     !
     DO i = 1, n
-      IF ( DELX(qraux(i),qrauxc(i))>.0001 ) indx(1) = indx(1) + 1
+      IF ( CABS1(qraux(i)-qrauxc(i))>.0001 ) indx(1) = indx(1) + 1
       IF ( jpvtt(i)/=jpvtc(i) ) indx(2) = indx(2) + 1
     ENDDO
     !
@@ -1350,11 +1350,11 @@ CONTAINS
     !
     CALL CQRSL(at,ldx,n,k,qraux,y,qy,qty,b,rsd,xb,job,info)
     DO i = 1, n
-      IF ( DELX(qy(i),qyc(i))>.0001 ) indx(1) = indx(1) + 1
-      IF ( DELX(qty(i),qtyc(i))>.0001 ) indx(2) = indx(2) + 1
-      IF ( DELX(b(i),bc(i))>.0001 ) indx(3) = indx(3) + 1
-      IF ( DELX(rsd(i),rsdc(i))>.0001 ) indx(4) = indx(4) + 1
-      IF ( DELX(xb(i),xbc(i))>.0001 ) indx(5) = indx(5) + 1
+      IF ( CABS1(qy(i)-qyc(i))>.0001 ) indx(1) = indx(1) + 1
+      IF ( CABS1(qty(i)-qtyc(i))>.0001 ) indx(2) = indx(2) + 1
+      IF ( CABS1(b(i)-bc(i))>.0001 ) indx(3) = indx(3) + 1
+      IF ( CABS1(rsd(i)-rsdc(i))>.0001 ) indx(4) = indx(4) + 1
+      IF ( CABS1(xb(i)-xbc(i))>.0001 ) indx(5) = indx(5) + 1
     ENDDO
     !
     DO i = 1, 5
@@ -1415,7 +1415,7 @@ CONTAINS
     !***END PROLOGUE  CSIQC
     COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), det(2) ,&
       dc(2), z(4), xa, xb
-    REAL r, rcond, rcnd, DELX
+    REAL r, rcond, rcnd, CABS1
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
     DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
@@ -1457,7 +1457,7 @@ CONTAINS
     CALL CSISL(at,lda,n,ipvt,bt)
     indx = 0
     DO i = 1, n
-      IF ( DELX(c(i),bt(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -1485,7 +1485,7 @@ CONTAINS
     CALL CSIDI(at,lda,n,ipvt,det,z,11)
     indx = 0
     DO i = 1, 2
-      IF ( DELX(dc(i),det(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(dc(i)-det(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -1496,7 +1496,7 @@ CONTAINS
     indx = 0
     DO i = 1, n
       DO j = 1, n
-        IF ( DELX(ainv(i,j),at(i,j))>.0001 ) indx = indx + 1
+        IF ( CABS1(ainv(i,j)-at(i,j))>.0001 ) indx = indx + 1
       ENDDO
     ENDDO
     !
@@ -1551,7 +1551,7 @@ CONTAINS
     !***END PROLOGUE  CSPQC
     COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), det(2) ,&
       dc(2), z(4), xa, xb
-    REAL r, rcond, rcnd, DELX
+    REAL r, rcond, rcnd, CABS1
     CHARACTER kprog*19, kfail*39
     INTEGER n, ipvt(4), info, i, j, indx, Nerr
     DATA ap/(2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0) ,&
@@ -1591,7 +1591,7 @@ CONTAINS
     CALL CSPSL(at,n,ipvt,bt)
     indx = 0
     DO i = 1, n
-      IF ( DELX(c(i),bt(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -1617,7 +1617,7 @@ CONTAINS
     CALL CSPDI(at,n,ipvt,det,z,11)
     indx = 0
     DO i = 1, 2
-      IF ( DELX(dc(i),det(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(dc(i)-det(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -1627,7 +1627,7 @@ CONTAINS
     !
     indx = 0
     DO i = 1, 10
-      IF ( DELX(ainv(i),at(i))>.0001 ) indx = indx + 1
+      IF ( CABS1(ainv(i)-at(i))>.0001 ) indx = indx + 1
     ENDDO
     !
     IF ( indx/=0 ) THEN
@@ -1681,7 +1681,7 @@ CONTAINS
     INTEGER ldx, n, p, ldu, ldv, job, info
     CHARACTER kfail*12
     INTEGER i, j, indx(4)
-    REAL DELX
+    REAL CABS1
     DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
@@ -1718,11 +1718,11 @@ CONTAINS
     !
     CALL CSVDC(at,ldx,n,p,s,e,u,ldu,v,ldv,work,job,info)
     DO j = 1, n
-      IF ( DELX(s(j),sc(j))>.0001 ) indx(1) = indx(1) + 1
-      IF ( DELX(e(j),ec(j))>.0001 ) indx(2) = indx(2) + 1
+      IF ( CABS1(s(j)-sc(j))>.0001 ) indx(1) = indx(1) + 1
+      IF ( CABS1(e(j)-ec(j))>.0001 ) indx(2) = indx(2) + 1
       DO i = 1, n
-        IF ( DELX(u(i,j),uvc(i,j))>.0001 ) indx(3) = indx(3) + 1
-        IF ( DELX(v(i,j),uvc(i,j))>.0001 ) indx(4) = indx(4) + 1
+        IF ( CABS1(u(i,j)-uvc(i,j))>.0001 ) indx(3) = indx(3) + 1
+        IF ( CABS1(v(i,j)-uvc(i,j))>.0001 ) indx(4) = indx(4) + 1
       ENDDO
     ENDDO
     !
@@ -1784,7 +1784,7 @@ CONTAINS
     !***END PROLOGUE  CTRQC
     COMPLEX a(4,4), at(5,4), b(4,2), bt(4), c(4), ainv(4,4,2), det(2) ,&
       dc(2), z(4), xa, xb
-    REAL r, rcond, rcnd(2), DELX
+    REAL r, rcond, rcnd(2), CABS1
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, info, i, j, indx, Nerr
     INTEGER job, k, kk
@@ -1843,7 +1843,7 @@ CONTAINS
       !
       indx = 0
       DO i = 1, n
-        IF ( DELX(c(i),bt(i))>.0001 ) indx = indx + 1
+        IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
       ENDDO
       !
       IF ( indx/=0 ) THEN
@@ -1869,7 +1869,7 @@ CONTAINS
       !
       indx = 0
       DO i = 1, n
-        IF ( DELX(c(i),bt(i))>.0001 ) indx = indx + 1
+        IF ( CABS1(c(i)-bt(i))>.0001 ) indx = indx + 1
       ENDDO
       !
       IF ( indx/=0 ) THEN
@@ -1888,7 +1888,7 @@ CONTAINS
       !
       indx = 0
       DO i = 1, 2
-        IF ( DELX(dc(i),det(i))>.0001 ) indx = indx + 1
+        IF ( CABS1(dc(i)-det(i))>.0001 ) indx = indx + 1
       ENDDO
       !
       IF ( indx/=0 ) THEN
@@ -1899,7 +1899,7 @@ CONTAINS
       indx = 0
       DO i = 1, n
         DO j = 1, n
-          IF ( DELX(ainv(i,j,k),at(i,j))>.0001 ) indx = indx + 1
+          IF ( CABS1(ainv(i,j,k)-at(i,j))>.0001 ) indx = indx + 1
         ENDDO
       ENDDO
       !

@@ -1264,7 +1264,7 @@ CONTAINS
     !           section.  (WRB)
     !***END PROLOGUE  DTEST
     COMPLEX :: Ccomp(*), Ctrue(*), Csize(*)
-    REAL :: Cfac, dd, releps, R1MACH, DELX
+    REAL :: Cfac, dd, releps, R1MACH, CABS1
     LOGICAL PASs
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     SAVE releps
@@ -1272,7 +1272,7 @@ CONTAINS
     !***FIRST EXECUTABLE STATEMENT  DTEST
     IF ( releps==0.0 ) releps = R1MACH(4)
     DO i = 1, Len
-      dd = DELX(Ccomp(i),Ctrue(i))
+      dd = CABS1(Ccomp(i)-Ctrue(i))
       IF ( Cfac*dd>ABS(Csize(i))*releps ) THEN
         !
         !         Here DCOMP(I) is not close to DTRUE(I).

@@ -32,7 +32,7 @@ add_executable(test15 test15.f90)
 
 add_executable(test16 test16.f90)
 
-add_executable(test17 test17.f90 delx.f90)
+add_executable(test17 test17.f90)
 
 add_executable(test18 test18.f90 chkxer.f90 )
 
@@ -40,11 +40,11 @@ add_executable(test19 test19.f90 chkxer.f90)
 
 add_executable(test20 test20.f90 chkxer.f90)
 
-add_executable(test21 test21.f90 delx.f90 )
+add_executable(test21 test21.f90)
 
 add_executable(test22 test22.f90)
 
-add_executable(test23 test23.f90 delx.f90 )
+add_executable(test23 test23.f90)
 
 add_executable(test24 test24.f90)
 

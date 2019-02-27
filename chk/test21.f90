@@ -318,7 +318,7 @@ CONTAINS
     EXTERNAL CGEFS, CGEIR
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, AIMAG, REAL
-    REAL DELX
+    REAL CABS1
     !     .. Data statements ..
     DATA a/(2.,3.), (1.,1.), (1.,2.), (2.,0.), (1.,-1.), (0.,0.) ,&
       (0.,0.), (2.,5.), (3.,2.)/
@@ -361,7 +361,7 @@ CONTAINS
       !
       indx = 0
       DO i = 1, n
-        IF ( DELX(bxex(i),btemp(i))>.0001 ) indx = indx + 1
+        IF ( CABS1(bxex(i)-btemp(i))>.0001 ) indx = indx + 1
       ENDDO
       IF ( indx==0 ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,FMT=99004) list(kprog)
