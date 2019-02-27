@@ -341,7 +341,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       IF ( Iprint==(-1) ) THEN
         mm = m - 1
         WRITE (loun,99001) Fmax, mm, (X(j),j=1,N)
-        99001       FORMAT ('0RESIDUAL NORM =',D9.2,/1X,'SOLUTION ITERATE (',I3,')',&
+        99001 FORMAT ('0RESIDUAL NORM =',D9.2,/1X,'SOLUTION ITERATE (',I3,')',&
           /(1X,5D26.14))
       ENDIF
       !
@@ -356,134 +356,135 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       ENDDO
       IF ( Fmax<=fmxs ) Iflag = 1
       EXIT
-      50     ENDDO
+      50 CONTINUE
+    ENDDO
+    !
+    !                    TEST FOR CONVERGENCE TO A SOLUTION BASED ON
+    !                    RESIDUALS
+    !
+    100    IF ( Fmax<=Tolf ) Iflag = Iflag + 2
+    !        ............EXIT
+    IF ( Iflag>0 ) GOTO 200
+    !
+    !
+    IF ( m>1 ) THEN
+      !                       BEGIN BLOCK PERMITTING ...EXITS TO 320
       !
-      !                    TEST FOR CONVERGENCE TO A SOLUTION BASED ON
-      !                    RESIDUALS
+      !                          SAVE SOLUTION HAVING MINIMUM RESIDUAL NORM.
       !
-      100    IF ( Fmax<=Tolf ) Iflag = Iflag + 2
-      !        ............EXIT
-      IF ( Iflag>0 ) GOTO 200
+      IF ( Fmax<fmin ) THEN
+        mit = m + 1
+        yn1 = ynorm
+        yn2 = yns
+        fn1 = fmxs
+        fmin = Fmax
+        DO j = 1, N
+          S(j) = X(j)
+        ENDDO
+        ic = 0
+      ENDIF
       !
+      !                          TEST FOR LIMITING PRECISION CONVERGENCE. VERY
+      !                          SLOWLY CONVERGENT PROBLEMS MAY ALSO BE
+      !                          DETECTED.
       !
-      IF ( m>1 ) THEN
-        !                       BEGIN BLOCK PERMITTING ...EXITS TO 320
-        !
-        !                          SAVE SOLUTION HAVING MINIMUM RESIDUAL NORM.
-        !
-        IF ( Fmax<fmin ) THEN
-          mit = m + 1
-          yn1 = ynorm
-          yn2 = yns
-          fn1 = fmxs
-          fmin = Fmax
-          DO j = 1, N
-            S(j) = X(j)
-          ENDDO
-          ic = 0
-        ENDIF
-        !
-        !                          TEST FOR LIMITING PRECISION CONVERGENCE. VERY
-        !                          SLOWLY CONVERGENT PROBLEMS MAY ALSO BE
-        !                          DETECTED.
-        !
-        IF ( ynorm<=sruro*xnorm ) THEN
-          IF ( Fmax>=0.2D0*fmxs.AND.Fmax<=5.0D0*fmxs ) THEN
-            IF ( ynorm>=0.2D0*yns.AND.ynorm<=5.0D0*yns ) THEN
-              icr = icr + 1
-              IF ( icr>=Nsrrc ) THEN
-                Iflag = 4
-                Fmax = fmin
-                !     ........................EXIT
-                GOTO 400
-              ELSE
-                ic = 0
-                !                       .........EXIT
-                GOTO 150
-              ENDIF
+      IF ( ynorm<=sruro*xnorm ) THEN
+        IF ( Fmax>=0.2D0*fmxs.AND.Fmax<=5.0D0*fmxs ) THEN
+          IF ( ynorm>=0.2D0*yns.AND.ynorm<=5.0D0*yns ) THEN
+            icr = icr + 1
+            IF ( icr>=Nsrrc ) THEN
+              Iflag = 4
+              Fmax = fmin
+              !     ........................EXIT
+              GOTO 400
+            ELSE
+              ic = 0
+              !                       .........EXIT
+              GOTO 150
             ENDIF
           ENDIF
         ENDIF
-        icr = 0
-        !
-        !                          TEST FOR DIVERGENCE OF THE ITERATIVE SCHEME.
-        !
-        IF ( ynorm>2.0D0*yns.OR.Fmax>2.0D0*fmxs ) THEN
-          ic = ic + 1
-          !                       ......EXIT
-          IF ( ic>=Nsri ) THEN
-            Iflag = 7
-            !        .....................EXIT
-            GOTO 200
-          ENDIF
-        ELSE
-          ic = 0
+      ENDIF
+      icr = 0
+      !
+      !                          TEST FOR DIVERGENCE OF THE ITERATIVE SCHEME.
+      !
+      IF ( ynorm>2.0D0*yns.OR.Fmax>2.0D0*fmxs ) THEN
+        ic = ic + 1
+        !                       ......EXIT
+        IF ( ic>=Nsri ) THEN
+          Iflag = 7
+          !        .....................EXIT
+          GOTO 200
         ENDIF
       ELSE
-        fmin = Fmax
+        ic = 0
       ENDIF
-      !
-      !                    CHECK TO SEE IF NEXT ITERATION CAN USE THE OLD
-      !                    JACOBIAN FACTORIZATION
-      !
-      150    itry = itry - 1
-      IF ( itry==0 ) THEN
-        itry = Ncjs
-      ELSEIF ( 20.0D0*ynorm>xnorm ) THEN
-        itry = Ncjs
-      ELSEIF ( ynorm>2.0D0*yns ) THEN
-        itry = Ncjs
-        !                 ......EXIT
-      ELSEIF ( Fmax>=2.0D0*fmxs ) THEN
-        itry = Ncjs
-      ENDIF
-      !
-      !                 SAVE THE CURRENT SOLUTION APPROXIMATION AND THE
-      !                 RESIDUAL AND SOLUTION INCREMENT NORMS FOR USE IN THE
-      !                 NEXT ITERATION.
-      !
-      DO j = 1, N
-        Temp(j) = X(j)
-      ENDDO
-      IF ( m==mit ) THEN
-        fn2 = Fmax
-        yn3 = ynorm
-      ENDIF
-      fmxs = Fmax
-      yns = ynorm
-      !
-      !
-    ENDDO
+    ELSE
+      fmin = Fmax
+    ENDIF
     !
-    !              *********************************************************
-    !              **** END OF PRINCIPAL ITERATION LOOP ****
-    !              *********************************************************
+    !                    CHECK TO SEE IF NEXT ITERATION CAN USE THE OLD
+    !                    JACOBIAN FACTORIZATION
     !
+    150    itry = itry - 1
+    IF ( itry==0 ) THEN
+      itry = Ncjs
+    ELSEIF ( 20.0D0*ynorm>xnorm ) THEN
+      itry = Ncjs
+    ELSEIF ( ynorm>2.0D0*yns ) THEN
+      itry = Ncjs
+      !                 ......EXIT
+    ELSEIF ( Fmax>=2.0D0*fmxs ) THEN
+      itry = Ncjs
+    ENDIF
     !
-    !               TOO MANY ITERATIONS, CONVERGENCE WAS NOT ACHIEVED.
-    m = Mxit
-    Iflag = 5
-    IF ( yn1>10.0D0*yn2.OR.yn3>10.0D0*yn1 ) Iflag = 6
-    IF ( fn1>5.0D0*fmin.OR.fn2>5.0D0*fmin ) Iflag = 6
-    !        ......EXIT
-    IF ( Fmax>5.0D0*fmin ) Iflag = 6
+    !                 SAVE THE CURRENT SOLUTION APPROXIMATION AND THE
+    !                 RESIDUAL AND SOLUTION INCREMENT NORMS FOR USE IN THE
+    !                 NEXT ITERATION.
     !
-    !
-    200 CONTINUE
     DO j = 1, N
-      S(j) = X(j)
+      Temp(j) = X(j)
     ENDDO
-    GOTO 400
+    IF ( m==mit ) THEN
+      fn2 = Fmax
+      yn3 = ynorm
+    ENDIF
+    fmxs = Fmax
+    yns = ynorm
     !
     !
-    !           A JACOBIAN-RELATED MATRIX IS EFFECTIVELY SINGULAR.
-    300 CONTINUE
-    IFlag = 8
-    DO j = 1, N
-      S(j) = Temp(j)
-      !     ......EXIT
-    ENDDO
-    !
-    !
-    400  Mxit = m
+  ENDDO
+  !
+  !              *********************************************************
+  !              **** END OF PRINCIPAL ITERATION LOOP ****
+  !              *********************************************************
+  !
+  !
+  !               TOO MANY ITERATIONS, CONVERGENCE WAS NOT ACHIEVED.
+  m = Mxit
+  Iflag = 5
+  IF ( yn1>10.0D0*yn2.OR.yn3>10.0D0*yn1 ) Iflag = 6
+  IF ( fn1>5.0D0*fmin.OR.fn2>5.0D0*fmin ) Iflag = 6
+  !        ......EXIT
+  IF ( Fmax>5.0D0*fmin ) Iflag = 6
+  !
+  !
+  200 CONTINUE
+  DO j = 1, N
+    S(j) = X(j)
+  ENDDO
+  GOTO 400
+  !
+  !
+  !           A JACOBIAN-RELATED MATRIX IS EFFECTIVELY SINGULAR.
+  300 CONTINUE
+  IFlag = 8
+  DO j = 1, N
+    S(j) = Temp(j)
+    !     ......EXIT
+  ENDDO
+  !
+  !
+  400  Mxit = m
 END SUBROUTINE DSOSEQ

@@ -91,11 +91,11 @@ CONTAINS
       IF ( Ipass/=1 ) WRITE (Lun,99006)
     ELSEIF ( Ipass==1 ) THEN
       WRITE (Lun,99004)
-      99004   FORMAT (' DRC - PASSED')
+      99004 FORMAT (' DRC - PASSED')
     ELSE
       WRITE (Lun,99006)
       IF ( ipass4==0 ) WRITE (Lun,99005) pi, trc, dif
-      99005   FORMAT (' CORRECT ANSWER =',1PD20.14/'COMPUTED ANSWER =',&
+      99005 FORMAT (' CORRECT ANSWER =',1PD20.14/'COMPUTED ANSWER =',&
         D20.14/'     DIFFERENCE =',D20.14)
     ENDIF
     CALL XSETF(contrl)
@@ -192,11 +192,11 @@ CONTAINS
       IF ( Ipass/=1 ) WRITE (Lun,99006)
     ELSEIF ( Ipass==1 ) THEN
       WRITE (Lun,99004)
-      99004   FORMAT (' DRD - PASSED')
+      99004 FORMAT (' DRD - PASSED')
     ELSE
       WRITE (Lun,99006)
       IF ( ipass4==0 ) WRITE (Lun,99005) blem, trd, dif
-      99005   FORMAT (' CORRECT ANSWER =',1PD20.14/'COMPUTED ANSWER =',&
+      99005 FORMAT (' CORRECT ANSWER =',1PD20.14/'COMPUTED ANSWER =',&
         D20.14/'     DIFFERENCE =',D20.14)
     ENDIF
     CALL XSETF(contrl)
@@ -293,11 +293,11 @@ CONTAINS
       IF ( Ipass/=1 ) WRITE (Lun,99006)
     ELSEIF ( Ipass==1 ) THEN
       WRITE (Lun,99004)
-      99004   FORMAT (' DRF - PASSED')
+      99004 FORMAT (' DRF - PASSED')
     ELSE
       WRITE (Lun,99006)
       IF ( ipass4==0 ) WRITE (Lun,99005) alem, trf, dif
-      99005   FORMAT (' CORRECT ANSWER =',1PD20.14/'COMPUTED ANSWER =',&
+      99005 FORMAT (' CORRECT ANSWER =',1PD20.14/'COMPUTED ANSWER =',&
         D20.14/'     DIFFERENCE =',D20.14)
     ENDIF
     CALL XSETF(contrl)
@@ -393,11 +393,11 @@ CONTAINS
       IF ( Ipass/=1 ) WRITE (Lun,99006)
     ELSEIF ( Ipass==1 ) THEN
       WRITE (Lun,99004)
-      99004   FORMAT (' DRJ - PASSED')
+      99004 FORMAT (' DRJ - PASSED')
     ELSE
       WRITE (Lun,99006)
       IF ( ipass4==0 ) WRITE (Lun,99005) consj, trj, dif
-      99005   FORMAT (' CORRECT ANSWER =',1PD20.14/'COMPUTED ANSWER =',&
+      99005 FORMAT (' CORRECT ANSWER =',1PD20.14/'COMPUTED ANSWER =',&
         D20.14/'     DIFFERENCE =',D20.14)
     ENDIF
     CALL XSETF(contrl)
@@ -481,10 +481,10 @@ PROGRAM TEST14
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST14 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST14 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST14  *************')
   ENDIF
   STOP

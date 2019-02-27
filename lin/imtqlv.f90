@@ -110,81 +110,82 @@ SUBROUTINE IMTQLV(N,D,E,E2,W,Ind,Ierr,Rv1)
   DO l = 1, N
     j = 0
     !     .......... LOOK FOR SMALL SUB-DIAGONAL ELEMENT ..........
-    50     DO m = l, N
-    IF ( m==N ) EXIT
-    s1 = ABS(W(m)) + ABS(W(m+1))
-    s2 = s1 + ABS(Rv1(m))
-    IF ( s2==s1 ) EXIT
-    !     .......... GUARD AGAINST UNDERFLOWED ELEMENT OF E2 ..........
-    IF ( E2(m+1)==0.0E0 ) GOTO 100
-  ENDDO
-  !
-  IF ( m<=k ) GOTO 150
-  IF ( m/=N ) E2(m+1) = 0.0E0
-  100    k = m
-  tag = tag + 1
-  150    p = W(l)
-  IF ( m==l ) THEN
-    !     .......... ORDER EIGENVALUES ..........
-    IF ( l/=1 ) THEN
-      !     .......... FOR I=L STEP -1 UNTIL 2 DO -- ..........
-      DO ii = 2, l
-        i = l + 2 - ii
-        IF ( p>=W(i-1) ) GOTO 160
-        W(i) = W(i-1)
-        Ind(i) = Ind(i-1)
-      ENDDO
-    ENDIF
-    !
-    i = 1
-    160      W(i) = p
-    Ind(i) = tag
-  ELSE
-    IF ( j==30 ) GOTO 200
-    j = j + 1
-    !     .......... FORM SHIFT ..........
-    g = (W(l+1)-p)/(2.0E0*Rv1(l))
-    r = PYTHAG(g,1.0E0)
-    g = W(m) - p + Rv1(l)/(g+SIGN(r,g))
-    s = 1.0E0
-    c = 1.0E0
-    p = 0.0E0
-    mml = m - l
-    !     .......... FOR I=M-1 STEP -1 UNTIL L DO -- ..........
-    DO ii = 1, mml
-      i = m - ii
-      f = s*Rv1(i)
-      b = c*Rv1(i)
-      IF ( ABS(f)<ABS(g) ) THEN
-        s = f/g
-        r = SQRT(s*s+1.0E0)
-        Rv1(i+1) = g*r
-        c = 1.0E0/r
-        s = s*c
-      ELSE
-        c = g/f
-        r = SQRT(c*c+1.0E0)
-        Rv1(i+1) = f*r
-        s = 1.0E0/r
-        c = c*s
-      ENDIF
-      g = W(i+1) - p
-      r = (W(i)-g)*s + 2.0E0*c*b
-      p = s*r
-      W(i+1) = g + p
-      g = c*r - b
+    50 CONTINUE
+    DO m = l, N
+      IF ( m==N ) EXIT
+      s1 = ABS(W(m)) + ABS(W(m+1))
+      s2 = s1 + ABS(Rv1(m))
+      IF ( s2==s1 ) EXIT
+      !     .......... GUARD AGAINST UNDERFLOWED ELEMENT OF E2 ..........
+      IF ( E2(m+1)==0.0E0 ) GOTO 100
     ENDDO
     !
-    W(l) = W(l) - p
-    Rv1(l) = g
-    Rv1(m) = 0.0E0
-    GOTO 50
-  ENDIF
-ENDDO
-!
-GOTO 99999
-!     .......... SET ERROR -- NO CONVERGENCE TO AN
-!                EIGENVALUE AFTER 30 ITERATIONS ..........
-200  Ierr = l
+    IF ( m<=k ) GOTO 150
+    IF ( m/=N ) E2(m+1) = 0.0E0
+    100    k = m
+    tag = tag + 1
+    150    p = W(l)
+    IF ( m==l ) THEN
+      !     .......... ORDER EIGENVALUES ..........
+      IF ( l/=1 ) THEN
+        !     .......... FOR I=L STEP -1 UNTIL 2 DO -- ..........
+        DO ii = 2, l
+          i = l + 2 - ii
+          IF ( p>=W(i-1) ) GOTO 160
+          W(i) = W(i-1)
+          Ind(i) = Ind(i-1)
+        ENDDO
+      ENDIF
+      !
+      i = 1
+      160      W(i) = p
+      Ind(i) = tag
+    ELSE
+      IF ( j==30 ) GOTO 200
+      j = j + 1
+      !     .......... FORM SHIFT ..........
+      g = (W(l+1)-p)/(2.0E0*Rv1(l))
+      r = PYTHAG(g,1.0E0)
+      g = W(m) - p + Rv1(l)/(g+SIGN(r,g))
+      s = 1.0E0
+      c = 1.0E0
+      p = 0.0E0
+      mml = m - l
+      !     .......... FOR I=M-1 STEP -1 UNTIL L DO -- ..........
+      DO ii = 1, mml
+        i = m - ii
+        f = s*Rv1(i)
+        b = c*Rv1(i)
+        IF ( ABS(f)<ABS(g) ) THEN
+          s = f/g
+          r = SQRT(s*s+1.0E0)
+          Rv1(i+1) = g*r
+          c = 1.0E0/r
+          s = s*c
+        ELSE
+          c = g/f
+          r = SQRT(c*c+1.0E0)
+          Rv1(i+1) = f*r
+          s = 1.0E0/r
+          c = c*s
+        ENDIF
+        g = W(i+1) - p
+        r = (W(i)-g)*s + 2.0E0*c*b
+        p = s*r
+        W(i+1) = g + p
+        g = c*r - b
+      ENDDO
+      !
+      W(l) = W(l) - p
+      Rv1(l) = g
+      Rv1(m) = 0.0E0
+      GOTO 50
+    ENDIF
+  ENDDO
+  !
+  GOTO 99999
+  !     .......... SET ERROR -- NO CONVERGENCE TO AN
+  !                EIGENVALUE AFTER 30 ITERATIONS ..........
+  200  Ierr = l
   99999 CONTINUE
-  END SUBROUTINE IMTQLV
+END SUBROUTINE IMTQLV

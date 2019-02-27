@@ -158,15 +158,17 @@ SUBROUTINE DXCON(X,Ix,Ierror)
     !  10.0D0**(-2*ISPACE) .LE. ABS(X) .LT. 1.0D0                IN CASE 1,
     !           10.0D0**-1 .LE. ABS(X) .LT. 10.0D0**(2*ISPACE-1) IN CASE 2.
     IF ( icase==2 ) GOTO 100
-    50     DO WHILE ( b*ABS(X)<1.0D0 )
+    50 CONTINUE
+    DO WHILE ( b*ABS(X)<1.0D0 )
       X = X*b
       Ix = Ix - ispace
     ENDDO
     GOTO 99999
-    100    DO WHILE ( 10.0D0*ABS(X)>=b )
+    100 CONTINUE
+    DO WHILE ( 10.0D0*ABS(X)>=b )
       X = X/b
       Ix = Ix + ispace
     ENDDO
   ENDIF
   99999 CONTINUE
-  END SUBROUTINE DXCON
+END SUBROUTINE DXCON

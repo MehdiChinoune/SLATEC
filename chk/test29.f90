@@ -123,11 +123,11 @@ CONTAINS
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99003)
-        99003     FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+        99003 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99004)
-      99004   FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
+      99004 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     ENDIF
     !
     IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99005)
@@ -259,11 +259,11 @@ CONTAINS
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99003)
-        99003     FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+        99003 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99004)
-      99004   FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
+      99004 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     ENDIF
     !
     IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99005)
@@ -357,10 +357,10 @@ PROGRAM TEST29
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST29 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST29 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST29 *************')
   ENDIF
   STOP

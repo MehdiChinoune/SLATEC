@@ -93,7 +93,7 @@ CONTAINS
     !***FIRST EXECUTABLE STATEMENT  CQCAI
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
-      99001   FORMAT (' QUICK CHECK ROUTINE FOR THE AIRY FUNCTIONS FROM ',&
+      99001 FORMAT (' QUICK CHECK ROUTINE FOR THE AIRY FUNCTIONS FROM ',&
         'CAIRY AND CBIRY'/)
     ENDIF
     !-----------------------------------------------------------------------
@@ -129,10 +129,10 @@ CONTAINS
     fnul = 10.0E0 + 6.0E0*(dig-3.0E0)
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99002)
-      99002   FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
+      99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
         8X,'DIG')
       WRITE (Lun,99003) tol, elim, alim, rl, fnul, dig
-      99003   FORMAT (6E12.4/)
+      99003 FORMAT (6E12.4/)
     ENDIF
     !-----------------------------------------------------------------------
     !     Generate angles for construction of complex Z to be used in tests.
@@ -208,7 +208,7 @@ CONTAINS
     !-----------------------------------------------------------------------
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99004)
-      99004   FORMAT (' CHECKS IN THE Z PLANE'/)
+      99004 FORMAT (' CHECKS IN THE Z PLANE'/)
     ENDIF
     lflg = 0
     DO icase = 1, icl
@@ -307,42 +307,42 @@ CONTAINS
                 IF ( lflg==0 ) THEN
                   IF ( Kprint>=2 ) THEN
                     WRITE (Lun,99005) ertol
-                    99005                 FORMAT (' CASES WHICH VIOLATE THE RELATIVE ERROR',&
+                    99005 FORMAT (' CASES WHICH VIOLATE THE RELATIVE ERROR',&
                       ' TEST WITH ERTOL = ',E12.4/)
                     WRITE (Lun,99006)
-                    99006                 FORMAT (' INPUT TO CAIRY AND ERROR')
+                    99006 FORMAT (' INPUT TO CAIRY AND ERROR')
                   ENDIF
                   IF ( Kprint>=3 ) THEN
                     WRITE (Lun,99007)
-                    99007                 FORMAT (' COMPARISON VALUE AND WRONSKIAN')
+                    99007 FORMAT (' COMPARISON VALUE AND WRONSKIAN')
                     WRITE (Lun,99008)
-                    99008                 FORMAT (' RESULTS FROM CAIRY AND/OR CBIRY')
+                    99008 FORMAT (' RESULTS FROM CAIRY AND/OR CBIRY')
                     WRITE (Lun,99009)
-                    99009                 FORMAT (' TEST CASE INDICES'/)
+                    99009 FORMAT (' TEST CASE INDICES'/)
                   ENDIF
                 ENDIF
                 lflg = 1
                 IF ( Kprint>=2 ) THEN
                   WRITE (Lun,99010) z, er
-                  99010               FORMAT (12X,'INPUT:    Z=',2E12.4,5X,'ERROR:   ER=',E12.4)
+                  99010 FORMAT (12X,'INPUT:    Z=',2E12.4,5X,'ERROR:   ER=',E12.4)
                 ENDIF
                 IF ( Kprint>=3 ) THEN
                   WRITE (Lun,99011) cv, cy
-                  99011               FORMAT (' COMPARISON VALUE:   CV=',2E12.4/8X,&
+                  99011 FORMAT (' COMPARISON VALUE:   CV=',2E12.4/8X,&
                     'WRONSKIAN:   CY=',2E12.4)
                   WRITE (Lun,99012) nz1, y(1), nz2, y(2)
-                  99012               FORMAT (10X,'RESULTS:  NZ1=',I3,4X,'Y(1)=',2E12.4/20X,&
+                  99012 FORMAT (10X,'RESULTS:  NZ1=',I3,4X,'Y(1)=',2E12.4/20X,&
                     'NZ2=',I3,4X,'Y(2)=',2E12.4)
                   IF ( icase==1 ) THEN
                     WRITE (Lun,99013) w(1), w(2)
-                    99013                 FORMAT (31X,'W(1)=',2E12.4/31X,'W(2)=',2E12.4)
+                    99013 FORMAT (31X,'W(1)=',2E12.4/31X,'W(2)=',2E12.4)
                   ELSE
                     WRITE (Lun,99014) nz3, w(1), nz4, w(2)
-                    99014                 FORMAT (20X,'NZ3=',I3,4X,'W(1)=',2E12.4/20X,'NZ4=',I3,4X,&
+                    99014 FORMAT (20X,'NZ3=',I3,4X,'W(1)=',2E12.4/20X,'NZ4=',I3,4X,&
                       'W(2)=',2E12.4)
                   ENDIF
                   WRITE (Lun,99015) it, ir, irset, icase
-                  99015               FORMAT (13X,'CASE:   IT=',I3,4X,'IR=',I3,4X,'IRSET=',I3,4X,&
+                  99015 FORMAT (13X,'CASE:   IT=',I3,4X,'IR=',I3,4X,'IRSET=',I3,4X,&
                     'ICASE=',I3,4X/)
                 ENDIF
               ENDIF
@@ -354,21 +354,21 @@ CONTAINS
     IF ( Kprint>=2 ) THEN
       IF ( lflg==0 ) THEN
         WRITE (Lun,99016)
-        99016     FORMAT (' QUICK CHECKS OK')
+        99016 FORMAT (' QUICK CHECKS OK')
       ELSE
         WRITE (Lun,99017)
-        99017     FORMAT (' ***',5X,'FAILURE(S) FOR CAIRY IN THE Z PLANE')
+        99017 FORMAT (' ***',5X,'FAILURE(S) FOR CAIRY IN THE Z PLANE')
       ENDIF
     ENDIF
     Ipass = 0
     IF ( lflg==0 ) Ipass = 1
     IF ( Ipass==1.AND.Kprint>=2 ) THEN
       WRITE (Lun,99018)
-      99018   FORMAT (/' ****** CAIRY  PASSED ALL TESTS  ******'/)
+      99018 FORMAT (/' ****** CAIRY  PASSED ALL TESTS  ******'/)
     ENDIF
     IF ( Ipass==0.AND.Kprint>=1 ) THEN
       WRITE (Lun,99019)
-      99019   FORMAT (/' ****** CAIRY  FAILED SOME TESTS ******'/)
+      99019 FORMAT (/' ****** CAIRY  FAILED SOME TESTS ******'/)
     ENDIF
   END SUBROUTINE CQCAI
   !DECK CQCBH
@@ -463,7 +463,7 @@ CONTAINS
     !***FIRST EXECUTABLE STATEMENT  CQCBH
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
-      99001   FORMAT (' QUICK CHECK ROUTINE FOR THE H BESSEL FUNCTIONS FROM ',&
+      99001 FORMAT (' QUICK CHECK ROUTINE FOR THE H BESSEL FUNCTIONS FROM ',&
         'CBESH'/)
     ENDIF
     !-----------------------------------------------------------------------
@@ -500,10 +500,10 @@ CONTAINS
     r2 = MIN(fnul,rm)
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99002)
-      99002   FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
+      99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
         8X,'DIG')
       WRITE (Lun,99003) tol, elim, alim, rl, fnul, dig
-      99003   FORMAT (6E12.4/)
+      99003 FORMAT (6E12.4/)
     ENDIF
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
@@ -591,7 +591,7 @@ CONTAINS
     !-----------------------------------------------------------------------
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99004)
-      99004   FORMAT (' CHECKS IN THE (Z,FNU) SPACE'/)
+      99004 FORMAT (' CHECKS IN THE (Z,FNU) SPACE'/)
     ENDIF
     lflg = 0
     DO kode = 1, 2
@@ -669,38 +669,38 @@ CONTAINS
                       IF ( lflg==0 ) THEN
                         IF ( Kprint>=2 ) THEN
                           WRITE (Lun,99005) ertol
-                          99005                       FORMAT (' CASES WHICH VIOLATE THE RELATIVE ',&
+                          99005 FORMAT (' CASES WHICH VIOLATE THE RELATIVE ',&
                             'ERROR TEST WITH ERTOL = ',E12.4/)
                           WRITE (Lun,99006)
-                          99006                       FORMAT (' INPUT TO CBESH   Z, FNU, KODE, N')
+                          99006 FORMAT (' INPUT TO CBESH   Z, FNU, KODE, N')
                         ENDIF
                         IF ( Kprint>=3 ) THEN
                           WRITE (Lun,99007)
-                          99007                       FORMAT (' COMPARE -4i/(PI*Z) WITH WRONSKIAN OF',&
+                          99007 FORMAT (' COMPARE -4i/(PI*Z) WITH WRONSKIAN OF',&
                             ' H1(Z,FNU) AND H2(Z,FNU)')
                           WRITE (Lun,99008)
-                          99008                       FORMAT (' RESULTS FROM CBESH FOR FUNCTION H1'/&
+                          99008 FORMAT (' RESULTS FROM CBESH FOR FUNCTION H1'/&
                             '         AND FUNCTION H2')
                           WRITE (Lun,99009)
-                          99009                       FORMAT (' TEST CASE INDICES'/)
+                          99009 FORMAT (' TEST CASE INDICES'/)
                         ENDIF
                       ENDIF
                       lflg = lflg + 1
                       IF ( Kprint>=2 ) THEN
                         WRITE (Lun,99010) z, fnu, kode, n
-                        99010                     FORMAT ('   INPUT:    Z=',2E12.4,4X,'FNU=',E12.4,4X,&
+                        99010 FORMAT ('   INPUT:    Z=',2E12.4,4X,'FNU=',E12.4,4X,&
                           'KODE=',I3,4X,'N=',I3)
                       ENDIF
                       IF ( Kprint>=3 ) THEN
                         WRITE (Lun,99011) (aer(k),k=1,n)
-                        99011                     FORMAT ('   ERROR:   AER(K)=',4E12.4)
+                        99011 FORMAT ('   ERROR:   AER(K)=',4E12.4)
                         kk = MAX(nz1,nz2) + 1
                         kk = MIN(n,kk)
                         WRITE (Lun,99012) nz1, y(kk), nz2, w(kk)
-                        99012                     FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2E12.4/11X,&
+                        99012 FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2E12.4/11X,&
                           'NZ2=',I3,4X,'W(KK)=',2E12.4)
                         WRITE (Lun,99013) it, ir, icase
-                        99013                     FORMAT ('    CASE:   IT=',I3,4X,'IR=',I3,4X,'ICASE=',&
+                        99013 FORMAT ('    CASE:   IT=',I3,4X,'IR=',I3,4X,'ICASE=',&
                           I3/)
                       ENDIF
                     ENDIF
@@ -715,21 +715,21 @@ CONTAINS
     IF ( Kprint>=2 ) THEN
       IF ( lflg==0 ) THEN
         WRITE (Lun,99014)
-        99014     FORMAT (' QUICK CHECKS OK')
+        99014 FORMAT (' QUICK CHECKS OK')
       ELSE
         WRITE (Lun,99015) lflg
-        99015     FORMAT (' ***',I5,' FAILURE(S) FOR CBESH IN THE (Z,FNU)',' PLANE')
+        99015 FORMAT (' ***',I5,' FAILURE(S) FOR CBESH IN THE (Z,FNU)',' PLANE')
       ENDIF
     ENDIF
     Ipass = 0
     IF ( lflg==0 ) Ipass = 1
     IF ( Ipass==1.AND.Kprint>=2 ) THEN
       WRITE (Lun,99016)
-      99016   FORMAT (/' ****** CBESH  PASSED ALL TESTS  ******'/)
+      99016 FORMAT (/' ****** CBESH  PASSED ALL TESTS  ******'/)
     ENDIF
     IF ( Ipass==0.AND.Kprint>=1 ) THEN
       WRITE (Lun,99017)
-      99017   FORMAT (/' ****** CBESH  FAILED SOME TESTS ******'/)
+      99017 FORMAT (/' ****** CBESH  FAILED SOME TESTS ******'/)
     ENDIF
   END SUBROUTINE CQCBH
   !DECK CQCBI
@@ -825,7 +825,7 @@ CONTAINS
     !***FIRST EXECUTABLE STATEMENT  CQCBI
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
-      99001   FORMAT (' QUICK CHECK ROUTINE FOR THE I BESSEL FUNCTION FROM ','CBESI'/)
+      99001 FORMAT (' QUICK CHECK ROUTINE FOR THE I BESSEL FUNCTION FROM ','CBESI'/)
     ENDIF
     !-----------------------------------------------------------------------
     !     Set parameters related to machine constants.
@@ -862,10 +862,10 @@ CONTAINS
     r1 = 2.0E0*SQRT(fnul+1.0E0)
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99002)
-      99002   FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
+      99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
         8X,'DIG')
       WRITE (Lun,99003) tol, elim, alim, rl, fnul, dig
-      99003   FORMAT (1X,6E12.4/)
+      99003 FORMAT (1X,6E12.4/)
     ENDIF
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
@@ -939,7 +939,7 @@ CONTAINS
     !-----------------------------------------------------------------------
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99004)
-      99004   FORMAT (' CHECKS ACROSS FORMULA BOUNDARIES')
+      99004 FORMAT (' CHECKS ACROSS FORMULA BOUNDARIES')
     ENDIF
     lflg = 0
     DO icase = 1, 6
@@ -1047,38 +1047,38 @@ CONTAINS
                   IF ( lflg==0 ) THEN
                     IF ( Kprint>=2 ) THEN
                       WRITE (Lun,99005) ertol
-                      99005                   FORMAT (/' CASES WHICH UNDERFLOW OR VIOLATE THE ',&
+                      99005 FORMAT (/' CASES WHICH UNDERFLOW OR VIOLATE THE ',&
                         'RELATIVE ERROR TEST'/' WITH ERTOL = ',E12.4/)
                       WRITE (Lun,99006)
-                      99006                   FORMAT (' INPUT TO CBESI   Z, FNU, KODE, N')
+                      99006 FORMAT (' INPUT TO CBESI   Z, FNU, KODE, N')
                     ENDIF
                     IF ( Kprint>=3 ) THEN
                       WRITE (Lun,99007)
-                      99007                   FORMAT (' ERROR TEST ON RESULTS FROM CBESI AND ',&
+                      99007 FORMAT (' ERROR TEST ON RESULTS FROM CBESI AND ',&
                         'CWRSK   AER(K)')
                       WRITE (Lun,99008)
-                      99008                   FORMAT (' RESULTS FROM CBESI   NZ1, Y(KK)'/,&
+                      99008 FORMAT (' RESULTS FROM CBESI   NZ1, Y(KK)'/,&
                         ' RESULTS FROM CWRSK   NZ2, W(KK)')
                       WRITE (Lun,99009)
-                      99009                   FORMAT (' TEST CASE INDICES   IT, IR, ICASE'/)
+                      99009 FORMAT (' TEST CASE INDICES   IT, IR, ICASE'/)
                     ENDIF
                   ENDIF
                   lflg = lflg + 1
                   IF ( Kprint>=2 ) THEN
                     WRITE (Lun,99010) z, fnu, kode, n
-                    99010                 FORMAT ('   INPUT:    Z=',2E12.4,4X,'FNU=',E12.4,4X,&
+                    99010 FORMAT ('   INPUT:    Z=',2E12.4,4X,'FNU=',E12.4,4X,&
                       'KODE=',I3,4X,'N=',I3)
                   ENDIF
                   IF ( Kprint>=3 ) THEN
                     WRITE (Lun,99011) (aer(k),k=1,n)
-                    99011                 FORMAT ('   ERROR:  AER(K)=',4E12.4)
+                    99011 FORMAT ('   ERROR:  AER(K)=',4E12.4)
                     kk = MAX(nz1,nz2) + 1
                     kk = MIN(n,kk)
                     WRITE (Lun,99012) nz1, y(kk), nz2, w(kk)
-                    99012                 FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2E12.4,/11X,&
+                    99012 FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2E12.4,/11X,&
                       'NZ2=',I3,4X,'W(KK)=',2E12.4)
                     WRITE (Lun,99013) it, ir, icase
-                    99013                 FORMAT ('    CASE:   IT=',I3,4X,'IR=',I3,4X,'ICASE=',I3/)
+                    99013 FORMAT ('    CASE:   IT=',I3,4X,'IR=',I3,4X,'ICASE=',I3/)
                   ENDIF
                 ENDIF
               ENDIF
@@ -1086,103 +1086,58 @@ CONTAINS
           ENDDO
         ENDDO
       ENDDO
-      100  ENDDO
-      IF ( Kprint>=2 ) THEN
-        IF ( lflg==0 ) THEN
-          WRITE (Lun,99019)
-        ELSE
-          WRITE (Lun,99014) lflg
-          99014     FORMAT (' ***',I5,' FAILURE(S) FOR CBESI CHECKS NEAR FORMULA ',&
-            'BOUNDARIES')
-        ENDIF
+      100 CONTINUE
+    ENDDO
+    IF ( Kprint>=2 ) THEN
+      IF ( lflg==0 ) THEN
+        WRITE (Lun,99019)
+      ELSE
+        WRITE (Lun,99014) lflg
+        99014 FORMAT (' ***',I5,' FAILURE(S) FOR CBESI CHECKS NEAR FORMULA ',&
+          'BOUNDARIES')
       ENDIF
-      !
-      !
-      iprnt = 0
-      IF ( MQC/=1 ) THEN
-        !-----------------------------------------------------------------------
-        !     Checks near underflow limits on series(I=1) and uniform
-        !     asymptotic expansion(I=2)
-        !     Compare 1/Z with I(Z,FNU)*K(Z,FNU+1) + I(Z,FNU+1)*K(Z,FNU) and
-        !     report cases for which the relative error is greater than ERTOL.
-        !-----------------------------------------------------------------------
-        IF ( Kprint>=2 ) THEN
-          WRITE (Lun,99015)
-          99015     FORMAT (/' CHECKS NEAR UNDERFLOW AND OVERFLOW LIMITS'/)
-        ENDIF
-        z = (1.4E0,1.4E0)
-        kode = 1
-        n = 20
-        DO i = 1, 2
-          fnu = 10.2E0
-          DO
-            !-----------------------------------------------------------------------
-            !       Adjust FNU by repeating until 0.lt.NZI.lt.10
-            !-----------------------------------------------------------------------
-            CALL CBESI(z,fnu,kode,n,y,nzi,ierr)
-            IF ( nzi==0 ) THEN
-              fnu = fnu + 5.0E0
-              CYCLE
-            ELSEIF ( nzi>=10 ) THEN
-              fnu = fnu - 1.0E0
-              CYCLE
-            ENDIF
-            !------ End repeat
-            CALL CBESK(z,fnu,kode,2,w,nzk,ierr)
-            zt = cone/z
-            cy = w(1)*y(2)
-            cw = w(2)*y(1)
-            cw = cw + cy - zt
-            er = ABS(cw)/ABS(zt)
-            !-----------------------------------------------------------------------
-            !     Write failure reports for KPRINT.ge.2 and KPRINT.ge.3
-            !-----------------------------------------------------------------------
-            IF ( er>=ertol ) THEN
-              IF ( iprnt==0 ) THEN
-                IF ( Kprint>=2 ) WRITE (Lun,99020)
-                IF ( Kprint>=3 ) WRITE (Lun,99021)
-              ENDIF
-              iprnt = 1
-              IF ( Kprint>=2 ) WRITE (Lun,99022) z, fnu, kode, n
-              IF ( Kprint>=3 ) THEN
-                WRITE (Lun,99023) zt, cw + cy
-                WRITE (Lun,99024) er
-              ENDIF
-            ENDIF
-            rlt = rl + rl
-            z = CMPLX(rlt,0.0E0)
-            EXIT
-          ENDDO
-        ENDDO
-        !-----------------------------------------------------------------------
-        !     Check near overflow limits
-        !     Compare 1/Z with I(Z,FNU)*K(Z,FNU+1) + I(Z,FNU+1)*K(Z,FNU) and
-        !     report cases for which the relative error is greater than ERTOL.
-        !-----------------------------------------------------------------------
-        z = CMPLX(elim,0.0E0)
-        fnu = 0.0E0
+    ENDIF
+    !
+    !
+    iprnt = 0
+    IF ( MQC/=1 ) THEN
+      !-----------------------------------------------------------------------
+      !     Checks near underflow limits on series(I=1) and uniform
+      !     asymptotic expansion(I=2)
+      !     Compare 1/Z with I(Z,FNU)*K(Z,FNU+1) + I(Z,FNU+1)*K(Z,FNU) and
+      !     report cases for which the relative error is greater than ERTOL.
+      !-----------------------------------------------------------------------
+      IF ( Kprint>=2 ) THEN
+        WRITE (Lun,99015)
+        99015 FORMAT (/' CHECKS NEAR UNDERFLOW AND OVERFLOW LIMITS'/)
+      ENDIF
+      z = (1.4E0,1.4E0)
+      kode = 1
+      n = 20
+      DO i = 1, 2
+        fnu = 10.2E0
         DO
           !-----------------------------------------------------------------------
-          !     Adjust FNU by repeating until NZK.lt.10
-          !     N = 20 set before DO 280 loop
+          !       Adjust FNU by repeating until 0.lt.NZI.lt.10
           !-----------------------------------------------------------------------
-          CALL CBESK(z,fnu,kode,n,y,nzk,ierr)
-          IF ( nzk>=10 ) THEN
-            IF ( nzk==n ) THEN
-              fnu = fnu + 3.0E0
-            ELSE
-              fnu = fnu + 2.0E0
-            ENDIF
+          CALL CBESI(z,fnu,kode,n,y,nzi,ierr)
+          IF ( nzi==0 ) THEN
+            fnu = fnu + 5.0E0
+            CYCLE
+          ELSEIF ( nzi>=10 ) THEN
+            fnu = fnu - 1.0E0
             CYCLE
           ENDIF
-          !---- End repeat
-          gnu = fnu + (n-2)
-          CALL CBESI(z,gnu,kode,2,w,nzi,ierr)
+          !------ End repeat
+          CALL CBESK(z,fnu,kode,2,w,nzk,ierr)
           zt = cone/z
-          cy = y(n-1)*w(2)
-          cw = y(n)*w(1)
+          cy = w(1)*y(2)
+          cw = w(2)*y(1)
           cw = cw + cy - zt
           er = ABS(cw)/ABS(zt)
+          !-----------------------------------------------------------------------
+          !     Write failure reports for KPRINT.ge.2 and KPRINT.ge.3
+          !-----------------------------------------------------------------------
           IF ( er>=ertol ) THEN
             IF ( iprnt==0 ) THEN
               IF ( Kprint>=2 ) WRITE (Lun,99020)
@@ -1195,35 +1150,81 @@ CONTAINS
               WRITE (Lun,99024) er
             ENDIF
           ENDIF
-          IF ( Kprint>=2 ) THEN
-            IF ( iprnt==0 ) THEN
-              WRITE (Lun,99019)
-              ! 99986   FORMAT (' QUICK CHECKS OK')
-            ELSE
-              WRITE (Lun,99016)
-              99016         FORMAT (' ***',5X,'FAILURE(S) FOR CBESI NEAR UNDERFLOW AND ',&
-                'OVERFLOW LIMITS')
-            ENDIF
-          ENDIF
+          rlt = rl + rl
+          z = CMPLX(rlt,0.0E0)
           EXIT
         ENDDO
-      ENDIF
-      Ipass = 0
-      IF ( iprnt==0.AND.lflg==0 ) Ipass = 1
-      IF ( Ipass==1.AND.Kprint>=2 ) THEN
-        WRITE (Lun,99017)
-        99017   FORMAT (/' ****** CBESI  PASSED ALL TESTS  ******'/)
-      ENDIF
-      IF ( Ipass==0.AND.Kprint>=1 ) THEN
-        WRITE (Lun,99018)
-        99018   FORMAT (/' ****** CBESI  FAILED SOME TESTS ******'/)
-      ENDIF
-      99019 FORMAT (' QUICK CHECKS OK')
-      99020 FORMAT (' INPUT TO CBESI   Z, FNU, KODE, N')
-      99021 FORMAT (' COMPARE 1/Z WITH WRONSKIAN(CBESI(Z,FNU),','CBESK(Z,FNU))'/)
-      99022 FORMAT (' INPUT: Z=',2E12.4,3X,'FNU=',E12.4,3X,'KODE=',I3,3X,'N=',I3)
-      99023 FORMAT (' RESULTS:',15X,'1/Z=',2E12.4/10X,'WRON(CBESI,CBESK)=',2E12.4)
-      99024 FORMAT (' RELATIVE ERROR:',9X,'ER=',E12.4/)
+      ENDDO
+      !-----------------------------------------------------------------------
+      !     Check near overflow limits
+      !     Compare 1/Z with I(Z,FNU)*K(Z,FNU+1) + I(Z,FNU+1)*K(Z,FNU) and
+      !     report cases for which the relative error is greater than ERTOL.
+      !-----------------------------------------------------------------------
+      z = CMPLX(elim,0.0E0)
+      fnu = 0.0E0
+      DO
+        !-----------------------------------------------------------------------
+        !     Adjust FNU by repeating until NZK.lt.10
+        !     N = 20 set before DO 280 loop
+        !-----------------------------------------------------------------------
+        CALL CBESK(z,fnu,kode,n,y,nzk,ierr)
+        IF ( nzk>=10 ) THEN
+          IF ( nzk==n ) THEN
+            fnu = fnu + 3.0E0
+          ELSE
+            fnu = fnu + 2.0E0
+          ENDIF
+          CYCLE
+        ENDIF
+        !---- End repeat
+        gnu = fnu + (n-2)
+        CALL CBESI(z,gnu,kode,2,w,nzi,ierr)
+        zt = cone/z
+        cy = y(n-1)*w(2)
+        cw = y(n)*w(1)
+        cw = cw + cy - zt
+        er = ABS(cw)/ABS(zt)
+        IF ( er>=ertol ) THEN
+          IF ( iprnt==0 ) THEN
+            IF ( Kprint>=2 ) WRITE (Lun,99020)
+            IF ( Kprint>=3 ) WRITE (Lun,99021)
+          ENDIF
+          iprnt = 1
+          IF ( Kprint>=2 ) WRITE (Lun,99022) z, fnu, kode, n
+          IF ( Kprint>=3 ) THEN
+            WRITE (Lun,99023) zt, cw + cy
+            WRITE (Lun,99024) er
+          ENDIF
+        ENDIF
+        IF ( Kprint>=2 ) THEN
+          IF ( iprnt==0 ) THEN
+            WRITE (Lun,99019)
+            ! 99986 FORMAT (' QUICK CHECKS OK')
+          ELSE
+            WRITE (Lun,99016)
+            99016 FORMAT (' ***',5X,'FAILURE(S) FOR CBESI NEAR UNDERFLOW AND ',&
+              'OVERFLOW LIMITS')
+          ENDIF
+        ENDIF
+        EXIT
+      ENDDO
+    ENDIF
+    Ipass = 0
+    IF ( iprnt==0.AND.lflg==0 ) Ipass = 1
+    IF ( Ipass==1.AND.Kprint>=2 ) THEN
+      WRITE (Lun,99017)
+      99017 FORMAT (/' ****** CBESI  PASSED ALL TESTS  ******'/)
+    ENDIF
+    IF ( Ipass==0.AND.Kprint>=1 ) THEN
+      WRITE (Lun,99018)
+      99018 FORMAT (/' ****** CBESI  FAILED SOME TESTS ******'/)
+    ENDIF
+    99019 FORMAT (' QUICK CHECKS OK')
+    99020 FORMAT (' INPUT TO CBESI   Z, FNU, KODE, N')
+    99021 FORMAT (' COMPARE 1/Z WITH WRONSKIAN(CBESI(Z,FNU),','CBESK(Z,FNU))'/)
+    99022 FORMAT (' INPUT: Z=',2E12.4,3X,'FNU=',E12.4,3X,'KODE=',I3,3X,'N=',I3)
+    99023 FORMAT (' RESULTS:',15X,'1/Z=',2E12.4/10X,'WRON(CBESI,CBESK)=',2E12.4)
+    99024 FORMAT (' RELATIVE ERROR:',9X,'ER=',E12.4/)
   END SUBROUTINE CQCBI
   !DECK CQCBJ
   SUBROUTINE CQCBJ(Lun,Kprint,Ipass)
@@ -1324,7 +1325,7 @@ CONTAINS
     !***FIRST EXECUTABLE STATEMENT  CQCBJ
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
-      99001   FORMAT (' QUICK CHECK ROUTINE FOR THE J BESSEL FUNCTION FROM ','CBESJ'/)
+      99001 FORMAT (' QUICK CHECK ROUTINE FOR THE J BESSEL FUNCTION FROM ','CBESJ'/)
     ENDIF
     !-----------------------------------------------------------------------
     !     Set parameters related to machine constants.
@@ -1360,10 +1361,10 @@ CONTAINS
     r2 = MIN(rm,fnul)
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99002)
-      99002   FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
+      99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
         8X,'DIG')
       WRITE (Lun,99003) tol, elim, alim, rl, fnul, dig
-      99003   FORMAT (1X,6E12.4/)
+      99003 FORMAT (1X,6E12.4/)
     ENDIF
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
@@ -1449,7 +1450,7 @@ CONTAINS
     !-----------------------------------------------------------------------
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99004)
-      99004   FORMAT (' CHECKS IN THE (Z,FNU) SPACE'/)
+      99004 FORMAT (' CHECKS IN THE (Z,FNU) SPACE'/)
     ENDIF
     lflg = 0
     DO kode = 1, 2
@@ -1547,55 +1548,55 @@ CONTAINS
                   IF ( lflg==0 ) THEN
                     IF ( Kprint>=2 ) THEN
                       WRITE (Lun,99005) ertol
-                      99005                   FORMAT (' CASES WHICH VIOLATE THE RELATIVE ',&
+                      99005 FORMAT (' CASES WHICH VIOLATE THE RELATIVE ',&
                         'ERROR TEST WITH ERTOL=',E12.4/)
                       WRITE (Lun,99006)
-                      99006                   FORMAT (' INPUT TO CBESJ   Z, FNU, KODE, N')
+                      99006 FORMAT (' INPUT TO CBESJ   Z, FNU, KODE, N')
                     ENDIF
                     IF ( Kprint>=3 ) THEN
                       IF ( r>=gnu ) THEN
                         WRITE (Lun,99007)
-                        99007                     FORMAT (' COMPARE WITH AVERAGE OF H1 AND H2 ',&
+                        99007 FORMAT (' COMPARE WITH AVERAGE OF H1 AND H2 ',&
                           'FUNCTIONS FOR THE SAME INPUT')
                         WRITE (Lun,99008)
-                        99008                     FORMAT (' RESULTS FROM CBESJ    NZ, V(KK)')
+                        99008 FORMAT (' RESULTS FROM CBESJ    NZ, V(KK)')
                         WRITE (Lun,99009)
-                        99009                     FORMAT (' RESULTS FROM CBESH   NZ1, W(KK)')
+                        99009 FORMAT (' RESULTS FROM CBESH   NZ1, W(KK)')
                         WRITE (Lun,99010)
-                        99010                     FORMAT (' RESULTS FROM CBESH   NZ2, Y(KK)')
+                        99010 FORMAT (' RESULTS FROM CBESH   NZ2, Y(KK)')
                       ELSE
                         WRITE (Lun,99011)
-                        99011                     FORMAT (' RESULTS FROM CBESJ    NZ, W(KK)')
+                        99011 FORMAT (' RESULTS FROM CBESJ    NZ, W(KK)')
                       ENDIF
                       WRITE (Lun,99012)
-                      99012                   FORMAT (' TEST CASE INDICES   IR, IT, ICASE'/)
+                      99012 FORMAT (' TEST CASE INDICES   IR, IT, ICASE'/)
                     ENDIF
                   ENDIF
                   lflg = lflg + 1
                   IF ( Kprint>=2 ) THEN
                     WRITE (Lun,99013) z, fnu, kode, n
-                    99013                 FORMAT ('   INPUT:   Z=',2E12.4,3X,'FNU=',E12.4,3X,&
+                    99013 FORMAT ('   INPUT:   Z=',2E12.4,3X,'FNU=',E12.4,3X,&
                       'KODE=',I3,3X,'N=',I3)
                   ENDIF
                   IF ( Kprint>=3 ) THEN
                     WRITE (Lun,99014) (aer(k),k=1,n)
-                    99014                 FORMAT ('   ERROR:   AER(K)=',4E12.4)
+                    99014 FORMAT ('   ERROR:   AER(K)=',4E12.4)
                     IF ( r>=gnu ) THEN
                       kk = MAX(nz1,nz2) + 1
                       kk = MIN(n,kk)
                       WRITE (Lun,99015) nz, v(kk)
-                      99015                   FORMAT (' RESULTS:   NZ=',I3,3X,'V(KK)=',2E12.4)
+                      99015 FORMAT (' RESULTS:   NZ=',I3,3X,'V(KK)=',2E12.4)
                       WRITE (Lun,99016) nz1, w(kk)
-                      99016                   FORMAT (' RESULTS:  NZ1=',I3,3X,'W(KK)=',2E12.4)
+                      99016 FORMAT (' RESULTS:  NZ1=',I3,3X,'W(KK)=',2E12.4)
                       WRITE (Lun,99017) nz2, y(kk)
-                      99017                   FORMAT (' RESULTS:  NZ2=',I3,3X,'Y(KK)=',2E12.4)
+                      99017 FORMAT (' RESULTS:  NZ2=',I3,3X,'Y(KK)=',2E12.4)
                     ELSE
                       kk = n - nz
                       WRITE (Lun,99018) nz, w(kk)
-                      99018                   FORMAT (' RESULTS:   NZ=',I3,3X,'W(KK)=',2E12.4)
+                      99018 FORMAT (' RESULTS:   NZ=',I3,3X,'W(KK)=',2E12.4)
                     ENDIF
                     WRITE (Lun,99019) ir, it, icase
-                    99019                 FORMAT ('    CASE:  IR=',I3,3X,'IT=',I3,3X,'ICASE=',I3/)
+                    99019 FORMAT ('    CASE:  IR=',I3,3X,'IT=',I3,3X,'ICASE=',I3/)
                   ENDIF
                 ENDIF
               ENDDO
@@ -1607,21 +1608,21 @@ CONTAINS
     IF ( Kprint>=2 ) THEN
       IF ( lflg==0 ) THEN
         WRITE (Lun,99020)
-        99020     FORMAT (' QUICK CHECKS OK')
+        99020 FORMAT (' QUICK CHECKS OK')
       ELSE
         WRITE (Lun,99021) lflg
-        99021     FORMAT (' ***',I5,' FAILURE(S) FOR CBESJ IN THE (Z,FNU)',' PLANE')
+        99021 FORMAT (' ***',I5,' FAILURE(S) FOR CBESJ IN THE (Z,FNU)',' PLANE')
       ENDIF
     ENDIF
     Ipass = 0
     IF ( lflg==0 ) Ipass = 1
     IF ( Ipass==1.AND.Kprint>=2 ) THEN
       WRITE (Lun,99022)
-      99022   FORMAT (/' ****** CBESJ  PASSED ALL TESTS  ******'/)
+      99022 FORMAT (/' ****** CBESJ  PASSED ALL TESTS  ******'/)
     ENDIF
     IF ( Ipass==0.AND.Kprint>=1 ) THEN
       WRITE (Lun,99023)
-      99023   FORMAT (/' ****** CBESJ  FAILED SOME TESTS ******'/)
+      99023 FORMAT (/' ****** CBESJ  FAILED SOME TESTS ******'/)
     ENDIF
   END SUBROUTINE CQCBJ
   !DECK CQCBK
@@ -1715,7 +1716,7 @@ CONTAINS
     !***FIRST EXECUTABLE STATEMENT  CQCBK
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
-      99001   FORMAT (' QUICK CHECK ROUTINE FOR THE K BESSEL FUNCTION FROM ','CBESK'/)
+      99001 FORMAT (' QUICK CHECK ROUTINE FOR THE K BESSEL FUNCTION FROM ','CBESK'/)
     ENDIF
     !-----------------------------------------------------------------------
     !     Set parameters related to machine constants.
@@ -1751,10 +1752,10 @@ CONTAINS
     r2 = MIN(rm,fnul)
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99002)
-      99002   FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
+      99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
         8X,'DIG')
       WRITE (Lun,99003) tol, elim, alim, rl, fnul, dig
-      99003   FORMAT (1X,6E12.4/)
+      99003 FORMAT (1X,6E12.4/)
     ENDIF
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
@@ -1840,7 +1841,7 @@ CONTAINS
     !-----------------------------------------------------------------------
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99004)
-      99004   FORMAT (' CHECKS IN THE (Z,FNU) SPACE')
+      99004 FORMAT (' CHECKS IN THE (Z,FNU) SPACE')
     ENDIF
     lflg = 0
     DO kode = 1, 2
@@ -1929,38 +1930,38 @@ CONTAINS
                     IF ( lflg==0 ) THEN
                       IF ( Kprint>=2 ) THEN
                         WRITE (Lun,99005) ertol
-                        99005                     FORMAT (/' CASES WHICH OR VIOLATE THE RELATIVE',&
+                        99005 FORMAT (/' CASES WHICH OR VIOLATE THE RELATIVE',&
                           ' ERROR TEST WITH ERTOL = ',E12.4/)
                         WRITE (Lun,99006)
-                        99006                     FORMAT (' INPUT TO CBESK   Z, FNU, KODE, N')
+                        99006 FORMAT (' INPUT TO CBESK   Z, FNU, KODE, N')
                       ENDIF
                       IF ( Kprint>=3 ) THEN
                         WRITE (Lun,99007)
-                        99007                     FORMAT (' ERROR TEST ON THE WRONSKIAN OF ',&
+                        99007 FORMAT (' ERROR TEST ON THE WRONSKIAN OF ',&
                           'CBESI(Z,FNU) AND CBESK(Z,FNU)')
                         WRITE (Lun,99008)
-                        99008                     FORMAT (' RESULTS FROM CBESK   NZ1, Y(KK)'/,&
+                        99008 FORMAT (' RESULTS FROM CBESK   NZ1, Y(KK)'/,&
                           ' RESULTS FROM CBESI   NZ2, W(KK)')
                         WRITE (Lun,99009)
-                        99009                     FORMAT (' TEST CASE INDICES   IT, IR, ICASE'/)
+                        99009 FORMAT (' TEST CASE INDICES   IT, IR, ICASE'/)
                       ENDIF
                     ENDIF
                     lflg = lflg + 1
                     IF ( Kprint>=2 ) THEN
                       WRITE (Lun,99010) z, fnu, kode, n
-                      99010                   FORMAT ('   INPUT:    Z=',2E12.4,4X,'FNU=',E12.4,4X,&
+                      99010 FORMAT ('   INPUT:    Z=',2E12.4,4X,'FNU=',E12.4,4X,&
                         'KODE=',I3,4X,'N=',I3)
                     ENDIF
                     IF ( Kprint>=3 ) THEN
                       WRITE (Lun,99011) (aer(k),k=1,n)
-                      99011                   FORMAT ('   ERROR:  AER(K)=',4E12.4)
+                      99011 FORMAT ('   ERROR:  AER(K)=',4E12.4)
                       kk = MAX(nz1,nz2) + 1
                       kk = MIN(n,kk)
                       WRITE (Lun,99012) nz1, y(kk), nz2, w(kk)
-                      99012                   FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2E12.4,/11X,&
+                      99012 FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2E12.4,/11X,&
                         'NZ2=',I3,4X,'W(KK)=',2E12.4)
                       WRITE (Lun,99013) it, ir, icase
-                      99013                   FORMAT ('    CASE:   IT=',I3,4X,'IR=',I3,4X,'ICASE=',&
+                      99013 FORMAT ('    CASE:   IT=',I3,4X,'IR=',I3,4X,'ICASE=',&
                         I3/)
                     ENDIF
                   ENDIF
@@ -1974,21 +1975,21 @@ CONTAINS
     IF ( Kprint>=2 ) THEN
       IF ( lflg==0 ) THEN
         WRITE (Lun,99014)
-        99014     FORMAT (' QUICK CHECKS OK')
+        99014 FORMAT (' QUICK CHECKS OK')
       ELSE
         WRITE (Lun,99015) lflg
-        99015     FORMAT (' ***',I5,' FAILURE(S) FOR CBESK NEAR FORMULA ','BOUNDARIES')
+        99015 FORMAT (' ***',I5,' FAILURE(S) FOR CBESK NEAR FORMULA ','BOUNDARIES')
       ENDIF
     ENDIF
     Ipass = 0
     IF ( lflg==0 ) Ipass = 1
     IF ( Ipass==1.AND.Kprint>=2 ) THEN
       WRITE (Lun,99016)
-      99016   FORMAT (/' ****** CBESK  PASSED ALL TESTS  ******'/)
+      99016 FORMAT (/' ****** CBESK  PASSED ALL TESTS  ******'/)
     ENDIF
     IF ( Ipass==0.AND.Kprint>=1 ) THEN
       WRITE (Lun,99017)
-      99017   FORMAT (/' ****** CBESK  FAILED SOME TESTS ******'/)
+      99017 FORMAT (/' ****** CBESK  FAILED SOME TESTS ******'/)
     ENDIF
   END SUBROUTINE CQCBK
   !DECK CQCBY
@@ -2092,7 +2093,7 @@ CONTAINS
     !***FIRST EXECUTABLE STATEMENT  CQCBY
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
-      99001   FORMAT (' QUICK CHECK ROUTINE FOR THE Y BESSEL FUNCTION FROM ','CBESY'/)
+      99001 FORMAT (' QUICK CHECK ROUTINE FOR THE Y BESSEL FUNCTION FROM ','CBESY'/)
     ENDIF
     !-----------------------------------------------------------------------
     !     Set parameters related to machine constants.
@@ -2128,10 +2129,10 @@ CONTAINS
     r2 = MIN(rm,fnul)
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99002)
-      99002   FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
+      99002 FORMAT (' PARAMETERS'/5X,'TOL ',8X,'ELIM',8X,'ALIM',8X,'RL  ',8X,'FNUL',&
         8X,'DIG')
       WRITE (Lun,99003) tol, elim, alim, rl, fnul, dig
-      99003   FORMAT (1X,6E12.4/)
+      99003 FORMAT (1X,6E12.4/)
     ENDIF
     !-----------------------------------------------------------------------
     !     Set other constants needed in the tests.
@@ -2219,7 +2220,7 @@ CONTAINS
     !-----------------------------------------------------------------------
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99004)
-      99004   FORMAT (' CHECKS IN THE (Z,FNU) SPACE')
+      99004 FORMAT (' CHECKS IN THE (Z,FNU) SPACE')
     ENDIF
     lflg = 0
     DO kode = 1, 2
@@ -2321,46 +2322,46 @@ CONTAINS
                         IF ( lflg==0 ) THEN
                           IF ( Kprint>=2 ) THEN
                             WRITE (Lun,99005) ertol
-                            99005                         FORMAT (/' CASES WHICH VIOLATE THE RELATIVE ',&
+                            99005 FORMAT (/' CASES WHICH VIOLATE THE RELATIVE ',&
                               'ERROR TEST WITH ERTOL = ',E12.4/)
                             WRITE (Lun,99006)
-                            99006                         FORMAT (' INPUT TO CBESY   ZN, FNU, KODE, N')
+                            99006 FORMAT (' INPUT TO CBESY   ZN, FNU, KODE, N')
                           ENDIF
                           IF ( Kprint>=3 ) THEN
                             WRITE (Lun,99007)
-                            99007                         FORMAT (' COMPARE Y(ZN,FNU) WITH COE1*I(Z,FNU)',&
+                            99007 FORMAT (' COMPARE Y(ZN,FNU) WITH COE1*I(Z,FNU)',&
                               '-COE2*K(Z,FNU)')
                             WRITE (Lun,99008)
-                            99008                         FORMAT (' Z = ZN*EXP(-i*PI/2)'/&
+                            99008 FORMAT (' Z = ZN*EXP(-i*PI/2)'/&
                               ' COE1 = EXP(i*(FNU+1)*PI/2)  ',&
                               ' COE2 = (2/PI)*EXP(-i*FNU*PI/2)')
                             WRITE (Lun,99009)
-                            99009                         FORMAT (' RESULTS FROM CBESY   V(KK)'/9X,&
+                            99009 FORMAT (' RESULTS FROM CBESY   V(KK)'/9X,&
                               'FROM CBESI   W(KK)'/9X,&
                               'FROM CBESK   Y(KK)')
                             WRITE (Lun,99010)
-                            99010                         FORMAT (' TEST CASE INDICES   IR, IT, ICASE'/)
+                            99010 FORMAT (' TEST CASE INDICES   IR, IT, ICASE'/)
                           ENDIF
                         ENDIF
                         lflg = lflg + 1
                         IF ( Kprint>=2 ) THEN
                           WRITE (Lun,99011) zn, fnu, kode, n
-                          99011                       FORMAT ('   INPUT:   ZN=',2E12.4,3X,'FNU=',E12.4,3X,&
+                          99011 FORMAT ('   INPUT:   ZN=',2E12.4,3X,'FNU=',E12.4,3X,&
                             'KODE=',I3,3X,'N=',I3)
                         ENDIF
                         IF ( Kprint>=3 ) THEN
                           WRITE (Lun,99012) (aer(k),k=1,n)
-                          99012                       FORMAT ('   ERROR:   AER(K)=',4E12.4)
+                          99012 FORMAT ('   ERROR:   AER(K)=',4E12.4)
                           WRITE (Lun,99013) z, coe1, coe2
-                          99013                       FORMAT (12X,'Z=',2E12.4/12X,'COE1=',2E12.4,3X,&
+                          99013 FORMAT (12X,'Z=',2E12.4/12X,'COE1=',2E12.4,3X,&
                             'COE2=',2E12.4)
                           kk = MAX(nz1,nz2) + 1
                           kk = MIN(n,kk)
                           WRITE (Lun,99014) v(kk), w(kk), y(kk)
-                          99014                       FORMAT (' RESULTS:   V(KK)=',2E12.4/12X,'W(KK)=',&
+                          99014 FORMAT (' RESULTS:   V(KK)=',2E12.4/12X,'W(KK)=',&
                             2E12.4/12X,'Y(KK)=',2E12.4)
                           WRITE (Lun,99015) ir, it, icase
-                          99015                       FORMAT ('    CASE:   IR=',I3,3X,'IT=',I3,3X,&
+                          99015 FORMAT ('    CASE:   IR=',I3,3X,'IT=',I3,3X,&
                             'ICASE=',I3/)
                         ENDIF
                       ENDIF
@@ -2376,21 +2377,21 @@ CONTAINS
     IF ( Kprint>=2 ) THEN
       IF ( lflg==0 ) THEN
         WRITE (Lun,99016)
-        99016     FORMAT (' QUICK CHECKS OK')
+        99016 FORMAT (' QUICK CHECKS OK')
       ELSE
         WRITE (Lun,99017) lflg
-        99017     FORMAT (' ***',I5,' FAILURE(S) FOR CBESY IN THE (Z,FNU) ','PLANE')
+        99017 FORMAT (' ***',I5,' FAILURE(S) FOR CBESY IN THE (Z,FNU) ','PLANE')
       ENDIF
     ENDIF
     Ipass = 0
     IF ( lflg==0 ) Ipass = 1
     IF ( Ipass==1.AND.Kprint>=2 ) THEN
       WRITE (Lun,99018)
-      99018   FORMAT (/' ****** CBESY  PASSED ALL TESTS  ******'/)
+      99018 FORMAT (/' ****** CBESY  PASSED ALL TESTS  ******'/)
     ENDIF
     IF ( Ipass==0.AND.Kprint>=1 ) THEN
       WRITE (Lun,99019)
-      99019   FORMAT (/' ****** CBESY  FAILED SOME TESTS ******'/)
+      99019 FORMAT (/' ****** CBESY  FAILED SOME TESTS ******'/)
     ENDIF
   END SUBROUTINE CQCBY
 END MODULE TEST09_MOD
@@ -2473,10 +2474,10 @@ PROGRAM TEST09
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST09 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST09 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST09  *************')
   ENDIF
   STOP

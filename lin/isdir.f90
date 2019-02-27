@@ -202,7 +202,7 @@ INTEGER FUNCTION ISDIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !
   IF ( Iunit/=0 ) THEN
     WRITE (Iunit,99001) Iter, Err
-    99001   FORMAT (5X,'ITER = ',I4,' Error Estimate = ',D16.7)
+    99001 FORMAT (5X,'ITER = ',I4,' Error Estimate = ',D16.7)
   ENDIF
   !
   IF ( Err<=Tol ) ISDIR = 1

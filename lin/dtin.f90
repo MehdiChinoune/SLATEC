@@ -149,7 +149,7 @@ SUBROUTINE DTIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !         Read in the matrix non-zeros in Triad format.
   DO i = 1, Nelt
     READ (Iunit,99002) Ia(i), Ja(i), A(i)
-    99002   FORMAT (1X,I5,1X,I5,1X,D16.7)
+    99002 FORMAT (1X,I5,1X,I5,1X,D16.7)
   ENDDO
   !
   !         If requested, read in the rhs.

@@ -481,62 +481,63 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   tb = tol
   kk = 1
   ak = 1.0D0
-  1000 DO
-  !
-  !     BACKWARD RECUR UNINDEXED
-  !
-  DO i = 1, in
-    s = tb
-    tb = tm*tb - ta
+  1000 CONTINUE
+  DO
+    !
+    !     BACKWARD RECUR UNINDEXED
+    !
+    DO i = 1, in
+      s = tb
+      tb = tm*tb - ta
+      ta = s
+      dtm = dtm - 1.0D0
+      tm = (dtm+fnf)*trx
+    ENDDO
+    !     NORMALIZATION
+    IF ( kk/=1 ) EXIT
+    s = temp(3)
+    sa = ta/tb
     ta = s
-    dtm = dtm - 1.0D0
-    tm = (dtm+fnf)*trx
+    tb = s
+    IF ( ABS(s)<=slim ) THEN
+      ta = ta*rtol
+      tb = tb*rtol
+      ak = tol
+    ENDIF
+    ta = ta*sa
+    kk = 2
+    in = ns
+    IF ( ns==0 ) EXIT
   ENDDO
-  !     NORMALIZATION
-  IF ( kk/=1 ) EXIT
-  s = temp(3)
-  sa = ta/tb
-  ta = s
-  tb = s
-  IF ( ABS(s)<=slim ) THEN
-    ta = ta*rtol
-    tb = tb*rtol
-    ak = tol
-  ENDIF
-  ta = ta*sa
-  kk = 2
-  in = ns
-  IF ( ns==0 ) EXIT
-ENDDO
-1100 Y(nn) = tb*ak
-Nz = N - nn
-IF ( nn==1 ) RETURN
-k = nn - 1
-s = tb
-tb = tm*tb - ta
-ta = s
-Y(k) = tb*ak
-IF ( nn==2 ) RETURN
-dtm = dtm - 1.0D0
-tm = (dtm+fnf)*trx
-k = nn - 2
-!
-!     BACKWARD RECUR INDEXED
-!
-DO i = 3, nn
+  1100 Y(nn) = tb*ak
+  Nz = N - nn
+  IF ( nn==1 ) RETURN
+  k = nn - 1
   s = tb
   tb = tm*tb - ta
   ta = s
   Y(k) = tb*ak
+  IF ( nn==2 ) RETURN
   dtm = dtm - 1.0D0
   tm = (dtm+fnf)*trx
-  k = k - 1
-ENDDO
-RETURN
-!
-!
-!
-1200 CALL XERMSG('SLATEC','DBESJ','ORDER, ALPHA, LESS THAN ZERO.',2,1)
-RETURN
+  k = nn - 2
+  !
+  !     BACKWARD RECUR INDEXED
+  !
+  DO i = 3, nn
+    s = tb
+    tb = tm*tb - ta
+    ta = s
+    Y(k) = tb*ak
+    dtm = dtm - 1.0D0
+    tm = (dtm+fnf)*trx
+    k = k - 1
+  ENDDO
+  RETURN
+  !
+  !
+  !
+  1200 CALL XERMSG('SLATEC','DBESJ','ORDER, ALPHA, LESS THAN ZERO.',2,1)
+  RETURN
   99999 CONTINUE
-  END SUBROUTINE DBESJ
+END SUBROUTINE DBESJ

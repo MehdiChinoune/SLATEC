@@ -160,7 +160,7 @@ CONTAINS
           IF ( r<=delmax ) THEN
             Nerr = Nerr + 1
             WRITE (Lun,99002) list(kprog), kcase, delmax
-            99002         FORMAT ('   PROBLEM WITH S',A,', CASE ',I1,'.  MAX ABS ERROR OF',&
+            99002 FORMAT ('   PROBLEM WITH S',A,', CASE ',I1,'.  MAX ABS ERROR OF',&
               E11.4/)
           ENDIF
           !
@@ -169,7 +169,7 @@ CONTAINS
         ELSEIF ( ind/=-4 ) THEN
           Nerr = Nerr + 1
           WRITE (Lun,99003) list(kprog), kcase, ind
-          99003       FORMAT ('   PROBLEM WITH S',A,', CASE ',I1,'.  IND = ',I2,&
+          99003 FORMAT ('   PROBLEM WITH S',A,', CASE ',I1,'.  IND = ',I2,&
             ' INSTEAD OF -4'/)
         ENDIF
       ENDDO
@@ -336,7 +336,7 @@ CONTAINS
           IF ( r<=delmax ) THEN
             Nerr = Nerr + 1
             WRITE (Lun,99002) list(kprog), kcase, delmax
-            99002         FORMAT ('   PROBLEM WITH D',A,', CASE ',I1,'.  MAX ABS ERROR OF',&
+            99002 FORMAT ('   PROBLEM WITH D',A,', CASE ',I1,'.  MAX ABS ERROR OF',&
               E11.4/)
           ENDIF
           !
@@ -345,7 +345,7 @@ CONTAINS
         ELSEIF ( ind/=-4 ) THEN
           Nerr = Nerr + 1
           WRITE (Lun,99003) list(kprog), kcase, ind
-          99003       FORMAT ('   PROBLEM WITH D',A,', CASE ',I1,'.  IND = ',I2,&
+          99003 FORMAT ('   PROBLEM WITH D',A,', CASE ',I1,'.  IND = ',I2,&
             ' INSTEAD OF -4'/)
         ENDIF
       ENDDO
@@ -493,7 +493,7 @@ CONTAINS
           IF ( r<=delmax ) THEN
             Nerr = Nerr + 1
             WRITE (Lun,99002) list(kprog), kcase, delmax
-            99002         FORMAT ('   PROBLEM WITH C',A,', CASE ',I1,'.  MAX ABS ERROR OF',&
+            99002 FORMAT ('   PROBLEM WITH C',A,', CASE ',I1,'.  MAX ABS ERROR OF',&
               E11.4/)
           ENDIF
           !              CHECK CONTROL FOR SINGULAR MATRIX FOR CASE 2
@@ -501,7 +501,7 @@ CONTAINS
         ELSEIF ( ind/=-4 ) THEN
           Nerr = Nerr + 1
           WRITE (Lun,99003) list(kprog), kcase, ind
-          99003       FORMAT ('   PROBLEM WITH C',A,', CASE ',I1,'.  IND = ',I2,&
+          99003 FORMAT ('   PROBLEM WITH C',A,', CASE ',I1,'.  IND = ',I2,&
             ' INSTEAD OF -4'/)
         ENDIF
       ENDDO
@@ -592,10 +592,10 @@ PROGRAM TEST22
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST22 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST22 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST22 *************')
   ENDIF
   STOP

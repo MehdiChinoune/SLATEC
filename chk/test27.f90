@@ -24,7 +24,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, modified tolerances
     !           to use R1MACH(4) rather than R1MACH(3) and cleaned up
-    !           FORMATs.  (RWC)
+    ! FORMATs.  (RWC)
     !   920722  Initialized IP(1) and IP(2) for CALL to LSEI.  (BKS, WRB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
@@ -167,11 +167,11 @@ CONTAINS
     IF ( relerr<=70.0E0*SQRT(R1MACH(4)).AND.relnrm<=5.0E0*R1MACH(4) ) THEN
       Ipass = 1
       IF ( Kprint>=3 ) WRITE (Lun,99002)
-      99002   FORMAT (/' LSEI PASSED TEST')
+      99002 FORMAT (/' LSEI PASSED TEST')
     ELSE
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99003) relerr, relnrm
-      99003   FORMAT (/' LSEI FAILED TEST'/' RELERR = ',1P,E20.6/' RELNRM = ',E20.6)
+      99003 FORMAT (/' LSEI FAILED TEST'/' RELERR = ',1P,E20.6/' RELNRM = ',E20.6)
     ENDIF
     !
     !     Print out known and computed solutions.
@@ -239,11 +239,11 @@ CONTAINS
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99005)
-        99005     FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+        99005 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99006)
-      99006   FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
+      99006 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     ENDIF
     !
     !     Print PASS/FAIL message.
@@ -357,30 +357,30 @@ CONTAINS
         !
         IF ( Kprint>=3 ) WRITE (Lun,99002) list(kprog), kcase, delmax
         !
-        99002     FORMAT (3X,A,'LSIA, CASE ',I1,'.  MAX ABS ERROR OF',E11.4/)
+        99002 FORMAT (3X,A,'LSIA, CASE ',I1,'.  MAX ABS ERROR OF',E11.4/)
         IF ( delmax>=r ) THEN
           nerr = nerr + 1
           IF ( Kprint>=2 ) WRITE (Lun,99003) list(kprog), kcase, delmax
-          99003       FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,'.  MAX ABS ERROR OF',&
+          99003 FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,'.  MAX ABS ERROR OF',&
             E11.4/)
         ENDIF
         IF ( Kprint>=3 ) WRITE (Lun,99004) list(kprog), kcase, rnorm
-        99004     FORMAT (3X,A,'LSIA, CASE ',I1,'.  RNORM IS ',E11.4/)
+        99004 FORMAT (3X,A,'LSIA, CASE ',I1,'.  RNORM IS ',E11.4/)
         IF ( rnorm>r ) THEN
           nerr = nerr + 1
           IF ( Kprint>=2 ) WRITE (Lun,99005) list(kprog), kcase, rnorm
-          99005       FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,&
+          99005 FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,&
             '.  RNORM (TOO LARGE) IS',E11.4/)
         ENDIF
         !
         IF ( Kprint>=3 ) WRITE (Lun,99006) list(kprog), kcase, info ,&
           inf(kk)
-        99006     FORMAT (3X,A,'LSIA, CASE ',I1,'.  INFO=',I1,' (SHOULD = ',I1,')'/)
+        99006 FORMAT (3X,A,'LSIA, CASE ',I1,'.  INFO=',I1,' (SHOULD = ',I1,')'/)
         IF ( info/=inf(kk) ) THEN
           nerr = nerr + 1
           IF ( Kprint>=2 ) WRITE (Lun,99007) list(kprog), kcase, info ,&
             inf(kk)
-          99007       FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,'.  INFO=',I1,&
+          99007 FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,'.  INFO=',I1,&
             ' (SHOULD = ',I1,')'/)
         ENDIF
       ENDDO
@@ -473,10 +473,10 @@ PROGRAM TEST27
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST27 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST27 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST27 *************')
   ENDIF
   STOP

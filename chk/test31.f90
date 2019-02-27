@@ -93,7 +93,7 @@ CONTAINS
         IF ( er>tol ) THEN
           Ipass = 0
           IF ( Kprint>=2 ) WRITE (Lun,99002)
-          99002       FORMAT (' ERROR TEST FOR INTERPOLATION BY DBINT4 NOT SATISFIED')
+          99002 FORMAT (' ERROR TEST FOR INTERPOLATION BY DBINT4 NOT SATISFIED')
         ENDIF
       ENDDO
       inbv = 1
@@ -102,7 +102,7 @@ CONTAINS
       IF ( er>tol ) THEN
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99003)
-        99003     FORMAT (' ERROR TEST FOR INTERPOLATION BY DBINT4 NOT SATISFIED ',&
+        99003 FORMAT (' ERROR TEST FOR INTERPOLATION BY DBINT4 NOT SATISFIED ',&
           'BY FIRST DERIVATIVE')
       ENDIF
       bv = DBVALU(t,bc,n,k,2,x(ndata),inbv,w)
@@ -110,7 +110,7 @@ CONTAINS
       IF ( er>tol ) THEN
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99004)
-        99004     FORMAT (' ERROR TEST FOR INTERPOLATION BY DBINT4 NOT SATISFIED ',&
+        99004 FORMAT (' ERROR TEST FOR INTERPOLATION BY DBINT4 NOT SATISFIED ',&
           'BY SECOND DERIVATIVE')
       ENDIF
       !
@@ -132,7 +132,7 @@ CONTAINS
         IF ( er>tol ) THEN
           Ipass = 0
           IF ( Kprint>=2 ) WRITE (Lun,99005)
-          99005       FORMAT (' ERROR IN QUADRATURE CHECKS')
+          99005 FORMAT (' ERROR IN QUADRATURE CHECKS')
         ENDIF
       ENDDO
       qsave(knt) = bquad
@@ -141,7 +141,7 @@ CONTAINS
     IF ( er>tol ) THEN
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99006)
-      99006   FORMAT (' ERROR IN QUADRATURE CHECK USING TWO SETS OF KNOTS')
+      99006 FORMAT (' ERROR IN QUADRATURE CHECK USING TWO SETS OF KNOTS')
     ENDIF
     !
     !     Check DBSPDR and DBSPEV against DBVALU, DPPVAL and DBSPVD.
@@ -163,7 +163,7 @@ CONTAINS
         IF ( er>atol ) THEN
           Ipass = 0
           IF ( Kprint>=2 ) WRITE (Lun,99007)
-          99007       FORMAT (' COMPARISONS FROM DBSPEV AND DBVALU DO NOT AGREE')
+          99007 FORMAT (' COMPARISONS FROM DBSPEV AND DBVALU DO NOT AGREE')
         ENDIF
         atol = 10.0D0*atol
       ENDDO
@@ -176,7 +176,7 @@ CONTAINS
         IF ( er>atol ) THEN
           Ipass = 0
           IF ( Kprint>=2 ) WRITE (Lun,99008)
-          99008       FORMAT (' COMPARISONS FROM DBSPEV AND DPPVAL DO NOT AGREE')
+          99008 FORMAT (' COMPARISONS FROM DBSPEV AND DPPVAL DO NOT AGREE')
         ENDIF
         atol = 10.0D0*atol
       ENDDO
@@ -198,7 +198,7 @@ CONTAINS
         IF ( er>atol ) THEN
           Ipass = 0
           IF ( Kprint>=2 ) WRITE (Lun,99009)
-          99009       FORMAT (' COMPARISONS FROM DBSPEV AND DBSPVD DO NOT AGREE')
+          99009 FORMAT (' COMPARISONS FROM DBSPEV AND DBSPVD DO NOT AGREE')
         ENDIF
         atol = 10.0D0*atol
       ENDDO
@@ -227,7 +227,7 @@ CONTAINS
         IF ( er>tol ) THEN
           Ipass = 0
           IF ( Kprint>=2 ) WRITE (Lun,99010)
-          99010       FORMAT (' ERROR TEST FOR INTERPOLATION BY DBINTK NOT SATISFIED')
+          99010 FORMAT (' ERROR TEST FOR INTERPOLATION BY DBINTK NOT SATISFIED')
         ENDIF
       ENDDO
     ENDDO
@@ -436,11 +436,11 @@ CONTAINS
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99012)
-        99012     FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+        99012 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99013)
-      99013   FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
+      99013 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     ENDIF
     !
     !     Print PASS/FAIL message.
@@ -542,10 +542,10 @@ PROGRAM TEST31
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST31 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST31 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST31 *************')
   ENDIF
   STOP

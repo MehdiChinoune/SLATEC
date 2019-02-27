@@ -95,87 +95,88 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
     SNRM2 = zero
     GOTO 99999
   ENDIF
-  100  SELECT CASE(next)
-CASE(200)
-  GOTO 200
-CASE(300)
-  GOTO 300
-CASE(600)
-  GOTO 600
-CASE(700)
-  GOTO 700
-END SELECT
-200 CONTINUE
-IF ( ABS(Sx(i))>cutlo ) GOTO 800
-next = 300
-xmax = zero
-!
-!                        PHASE 1.  SUM IS ZERO
-!
-300 CONTINUE
-IF ( Sx(i)==zero ) GOTO 900
-IF ( ABS(Sx(i))>cutlo ) GOTO 800
-!
-!                                PREPARE FOR PHASE 2.
-!
-next = 600
-GOTO 500
-!
-!                                PREPARE FOR PHASE 4.
-!
-400  i = j
-next = 700
-sum = (sum/Sx(i))/Sx(i)
-500  xmax = ABS(Sx(i))
-!
-sum = sum + (Sx(i)/xmax)**2
-GOTO 900
-!
-!                   PHASE 2.  SUM IS SMALL.
-!                             SCALE TO AVOID DESTRUCTIVE UNDERFLOW.
-!
-600 CONTINUE
-IF ( ABS(Sx(i))>cutlo ) THEN
-!
-!                  PREPARE FOR PHASE 3.
-!
-sum = (sum*xmax)*xmax
-GOTO 800
-ENDIF
-!
-!                     COMMON CODE FOR PHASES 2 AND 4.
-!                     IN PHASE 4 SUM IS LARGE.  SCALE TO AVOID OVERFLOW.
-!
-700 CONTINUE
-IF ( ABS(Sx(i))<=xmax ) THEN
-sum = sum + (Sx(i)/xmax)**2
-ELSE
-sum = one + sum*(xmax/Sx(i))**2
-xmax = ABS(Sx(i))
-ENDIF
-GOTO 900
-!
-!     FOR REAL OR D.P. SET HITEST = CUTHI/N
-!     FOR COMPLEX      SET HITEST = CUTHI/(2*N)
-!
-800  hitest = cuthi/N
-!
-!                   PHASE 3.  SUM IS MID-RANGE.  NO SCALING.
-!
-DO j = i, nn, Incx
-IF ( ABS(Sx(j))>=hitest ) GOTO 400
-sum = sum + Sx(j)**2
-ENDDO
-SNRM2 = SQRT(sum)
-GOTO 99999
-!
-900  i = i + Incx
-IF ( i<=nn ) GOTO 100
-!
-!              END OF MAIN LOOP.
-!
-!              COMPUTE SQUARE ROOT AND ADJUST FOR SCALING.
-!
-SNRM2 = xmax*SQRT(sum)
+  100 CONTINUE
+  SELECT CASE(next)
+    CASE(200)
+      GOTO 200
+    CASE(300)
+      GOTO 300
+    CASE(600)
+      GOTO 600
+    CASE(700)
+      GOTO 700
+  END SELECT
+  200 CONTINUE
+  IF ( ABS(Sx(i))>cutlo ) GOTO 800
+  next = 300
+  xmax = zero
+  !
+  !                        PHASE 1.  SUM IS ZERO
+  !
+  300 CONTINUE
+  IF ( Sx(i)==zero ) GOTO 900
+  IF ( ABS(Sx(i))>cutlo ) GOTO 800
+  !
+  !                                PREPARE FOR PHASE 2.
+  !
+  next = 600
+  GOTO 500
+  !
+  !                                PREPARE FOR PHASE 4.
+  !
+  400  i = j
+  next = 700
+  sum = (sum/Sx(i))/Sx(i)
+  500  xmax = ABS(Sx(i))
+  !
+  sum = sum + (Sx(i)/xmax)**2
+  GOTO 900
+  !
+  !                   PHASE 2.  SUM IS SMALL.
+  !                             SCALE TO AVOID DESTRUCTIVE UNDERFLOW.
+  !
+  600 CONTINUE
+  IF ( ABS(Sx(i))>cutlo ) THEN
+    !
+    !                  PREPARE FOR PHASE 3.
+    !
+    sum = (sum*xmax)*xmax
+    GOTO 800
+  ENDIF
+  !
+  !                     COMMON CODE FOR PHASES 2 AND 4.
+  !                     IN PHASE 4 SUM IS LARGE.  SCALE TO AVOID OVERFLOW.
+  !
+  700 CONTINUE
+  IF ( ABS(Sx(i))<=xmax ) THEN
+    sum = sum + (Sx(i)/xmax)**2
+  ELSE
+    sum = one + sum*(xmax/Sx(i))**2
+    xmax = ABS(Sx(i))
+  ENDIF
+  GOTO 900
+  !
+  !     FOR REAL OR D.P. SET HITEST = CUTHI/N
+  !     FOR COMPLEX      SET HITEST = CUTHI/(2*N)
+  !
+  800  hitest = cuthi/N
+  !
+  !                   PHASE 3.  SUM IS MID-RANGE.  NO SCALING.
+  !
+  DO j = i, nn, Incx
+    IF ( ABS(Sx(j))>=hitest ) GOTO 400
+    sum = sum + Sx(j)**2
+  ENDDO
+  SNRM2 = SQRT(sum)
+  GOTO 99999
+  !
+  900  i = i + Incx
+  IF ( i<=nn ) GOTO 100
+  !
+  !              END OF MAIN LOOP.
+  !
+  !              COMPUTE SQUARE ROOT AND ADJUST FOR SCALING.
+  !
+  SNRM2 = xmax*SQRT(sum)
   99999 CONTINUE
-  END FUNCTION SNRM2
+END FUNCTION SNRM2

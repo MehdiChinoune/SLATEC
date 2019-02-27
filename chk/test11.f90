@@ -58,13 +58,13 @@ CONTAINS
     IF ( I1MACH(13)*LOG10(REAL(I1MACH(10)))<150. ) dnu1 = 100.4
     IF ( Kprint>2 ) THEN
       IF ( I1MACH(13)<500 ) WRITE (Lun,99002)
-      99002   FORMAT (' ON COMPUTERS WITH MAXIMUM EXPONENT LESS THAN 500, SMALL'/&
+      99002 FORMAT (' ON COMPUTERS WITH MAXIMUM EXPONENT LESS THAN 500, SMALL'/&
         ' TEST VALUES FOR NU, MU ARE USED. IF LARGER THAN OR EQUAL 500,'&
         /&
         ' LARGER VALUES ARE USED. THIS COMPUTER USES THE SMALLER VALUES.'&
         )
       IF ( I1MACH(13)>=500 ) WRITE (Lun,99003)
-      99003   FORMAT (' ON COMPUTERS WITH MAXIMUM EXPONENT LESS THAN 500, SMALL'/&
+      99003 FORMAT (' ON COMPUTERS WITH MAXIMUM EXPONENT LESS THAN 500, SMALL'/&
         ' TEST VALUES FOR NU, MU ARE USED. IF LARGER THAN OR EQUAL 500,'&
         /&
         ' LARGER VALUES ARE USED. THIS COMPUTER USES THE LARGER VALUES.'&
@@ -145,7 +145,7 @@ CONTAINS
     ENDDO
     IF ( isum==0 ) THEN
       IF ( Kprint>=2 ) WRITE (Lun,99005)
-      99005   FORMAT (' ***** TEST 1 (SINGLE PRECISION) PASSED *****')
+      99005 FORMAT (' ***** TEST 1 (SINGLE PRECISION) PASSED *****')
       GOTO 200
     ENDIF
     100 CONTINUE
@@ -226,7 +226,7 @@ CONTAINS
     400 CONTINUE
     IF ( Kprint>2 ) THEN
       WRITE (Lun,99010) deg, mu2, dnu1
-      99010   FORMAT (/' TEST 3, COMPARISON OF VALUES FROM TEST 1 AND TEST 2',&
+      99010 FORMAT (/' TEST 3, COMPARISON OF VALUES FROM TEST 1 AND TEST 2',&
         ' WITH THETA = ',F3.1,' DEGREES,'/'         MU = ',I4,&
         ' AND NU = ',F6.1)
       WRITE (Lun,'(A)') '          P(-MU,NU)'
@@ -246,7 +246,7 @@ CONTAINS
             IF ( ix12==ix22 ) THEN
               IF ( ix13==ix23 ) THEN
                 IF ( Kprint>=2 ) WRITE (Lun,99011)
-                99011             FORMAT (' ***** TEST 3 (SINGLE PRECISION) PASSED *****')
+                99011 FORMAT (' ***** TEST 3 (SINGLE PRECISION) PASSED *****')
                 GOTO 500
               ENDIF
             ENDIF
@@ -292,7 +292,7 @@ CONTAINS
       IF ( ix11==ix21 ) THEN
         IF ( isum==0 ) THEN
           IF ( Kprint>=2 ) WRITE (Lun,99014)
-          99014       FORMAT (' ***** TEST 4 (SINGLE PRECISION) PASSED *****')
+          99014 FORMAT (' ***** TEST 4 (SINGLE PRECISION) PASSED *****')
           GOTO 600
         ENDIF
       ENDIF
@@ -334,7 +334,7 @@ CONTAINS
         n = NUMXER(nerr)
         IF ( n==ierror ) THEN
           IF ( Kprint>=2 ) WRITE (Lun,99017)
-          99017       FORMAT (' ***** TEST 5 (SINGLE PRECISION) PASSED *****')
+          99017 FORMAT (' ***** TEST 5 (SINGLE PRECISION) PASSED *****')
           GOTO 700
         ENDIF
       ENDIF
@@ -346,7 +346,7 @@ CONTAINS
     700 CONTINUE
     IF ( ierr/=0 ) THEN
       IF ( Kprint>=2 ) WRITE (Lun,99019) ierr
-      99019   FORMAT (/'  TESTS COMPLETED, NUMBER OF TESTS FAILED = ',I2)
+      99019 FORMAT (/'  TESTS COMPLETED, NUMBER OF TESTS FAILED = ',I2)
     ENDIF
   END SUBROUTINE FCNQX1
   !DECK XCSRT
@@ -610,10 +610,10 @@ PROGRAM TEST11
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST11 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST11 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST11 *************')
   ENDIF
   STOP

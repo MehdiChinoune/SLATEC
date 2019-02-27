@@ -178,16 +178,17 @@ SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
       ENDDO
     ENDDO
     !
-    100    DO k = 1, l
-    Ar(i,k) = scale*Ar(i,k)
-    Ai(i,k) = scale*Ai(i,k)
+    100 CONTINUE
+    DO k = 1, l
+      Ar(i,k) = scale*Ar(i,k)
+      Ai(i,k) = scale*Ai(i,k)
+    ENDDO
+    !
+    Tau(2,l) = -si
+    150    hh = D(i)
+    D(i) = Ar(i,i)
+    Ar(i,i) = hh
+    Ai(i,i) = scale*SQRT(h)
   ENDDO
   !
-  Tau(2,l) = -si
-  150    hh = D(i)
-  D(i) = Ar(i,i)
-  Ar(i,i) = hh
-  Ai(i,i) = scale*SQRT(h)
-ENDDO
-!
 END SUBROUTINE HTRIDI

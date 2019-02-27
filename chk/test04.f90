@@ -185,7 +185,7 @@ CONTAINS
       relerr = abserr/ABS(c(i))
       errmax = MAX(relerr,errmax)
       IF ( relerr>errtol.AND.Kprint>=2 ) WRITE (Lun,99001) i, relerr, abserr
-      99001   FORMAT (' For I  = ',I3,'  test fails with RELERR  = ',E38.30,&
+      99001 FORMAT (' For I  = ',I3,'  test fails with RELERR  = ',E38.30,&
         '  and ABSERR  = ',E38.30)
     ENDDO
     Ipass = 0
@@ -265,10 +265,10 @@ PROGRAM TEST04
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST04 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST04 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST04  *************')
   ENDIF
   STOP

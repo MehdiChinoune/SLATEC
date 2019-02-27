@@ -341,9 +341,10 @@ SUBROUTINE DPSIFN(X,N,Kode,M,Ans,Nz,Ierr)
       !-----------------------------------------------------------------------
       !     RECURSION FOR N = 0
       !-----------------------------------------------------------------------
-      120      DO i = 1, nx
-      s = s + 1.0D0/(X+nx-i)
-    ENDDO
+      120 CONTINUE
+      DO i = 1, nx
+        s = s + 1.0D0/(X+nx-i)
+      ENDDO
     ENDIF
     150    IF ( Kode==2 ) THEN
     IF ( xdmy==X ) RETURN
@@ -364,5 +365,5 @@ Ans(mm) = 0.0D0
 mm = mm - 1
 IF ( mm==0 ) RETURN
 GOTO 100
-  99999 CONTINUE
-  END SUBROUTINE DPSIFN
+99999 CONTINUE
+END SUBROUTINE DPSIFN

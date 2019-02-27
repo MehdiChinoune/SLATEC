@@ -51,7 +51,7 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
       ELSE
         CALL MPCHK(1,4)
         WRITE (LUN,99001)
-        99001       FORMAT (' *** OVERFLOW OCCURRED IN MPMUL2 ***')
+        99001 FORMAT (' *** OVERFLOW OCCURRED IN MPMUL2 ***')
         CALL MPOVFL(Z)
         RETURN
       ENDIF

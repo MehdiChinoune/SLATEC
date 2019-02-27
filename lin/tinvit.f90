@@ -295,17 +295,18 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
       ENDIF
     ENDDO
     !
-    150    DO i = 1, N
-    Z(i,r) = 0.0E0
+    150 CONTINUE
+    DO i = 1, N
+      Z(i,r) = 0.0E0
+    ENDDO
+    !
+    DO i = p, q
+      Z(i,r) = Rv6(i)*xu
+    ENDDO
+    !
+    x0 = x1
   ENDDO
   !
-  DO i = p, q
-    Z(i,r) = Rv6(i)*xu
-  ENDDO
-  !
-  x0 = x1
-ENDDO
-!
-IF ( q<N ) GOTO 100
+  IF ( q<N ) GOTO 100
   99999 CONTINUE
-  END SUBROUTINE TINVIT
+END SUBROUTINE TINVIT

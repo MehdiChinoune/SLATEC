@@ -188,7 +188,7 @@ SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   !         Write out the character representations matrix elements.
   DO irow = 1, nmax
     WRITE (Iunit,99003) irow, chmat(irow)(1:nmax)
-    99003   FORMAT (1X,I3,A)
+    99003 FORMAT (1X,I3,A)
   ENDDO
   RETURN
   !------------- LAST LINE OF SCPPLT FOLLOWS ----------------------------

@@ -199,7 +199,7 @@ CONTAINS
     IF ( Kprint/=0 ) THEN
       IF ( Kprint>=3.OR.(Kprint>=2.AND.itest(icnt)/=1) ) WRITE (Lun,99002)&
         iflags, fnorms, iflag, fnorm
-      99002   FORMAT (' EXPECTED VALUE OF IFLAG AND RESIDUAL NORM',I5,&
+      99002 FORMAT (' EXPECTED VALUE OF IFLAG AND RESIDUAL NORM',I5,&
         E20.5/' RETURNED VALUE OF IFLAG AND RESIDUAL NORM',I5,E20.5/)
       IF ( Kprint>=2.OR.(Kprint==1.AND.itest(icnt)/=1) )&
         CALL PASS(Lun,icnt,itest(icnt))
@@ -361,10 +361,10 @@ PROGRAM TEST35
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST35 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST35 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST35 *************')
   ENDIF
   STOP

@@ -67,7 +67,7 @@ CONTAINS
         END SELECT
         !                                                  PRINT
         IF ( Kprint>=2.AND.PASs ) WRITE (NPRint,99002)
-        99002     FORMAT ('+',39X,'PASS')
+        99002 FORMAT ('+',39X,'PASS')
         IF ( .NOT.PASs ) Ipass = 0
       ENDIF
     ENDDO
@@ -1091,9 +1091,9 @@ CONTAINS
           PASs = .FALSE.
           IF ( Kprint>=3 ) THEN
             WRITE (NPRint,99001)
-            99001         FORMAT ('+',39X,'FAIL')
+            99001 FORMAT ('+',39X,'FAIL')
             WRITE (NPRint,99002)
-            99002         FORMAT ('0CASE  N INCX INCY MODE  I',29X,'COMP(I)',29X,'TRUE(I)',&
+            99002 FORMAT ('0CASE  N INCX INCY MODE  I',29X,'COMP(I)',29X,'TRUE(I)',&
               2X,'DIFFERENCE'/1X)
           ENDIF
         ENDIF
@@ -1101,7 +1101,7 @@ CONTAINS
           id = Icomp(i) - Itrue(i)
           WRITE (NPRint,99003) ICAse, N, INCx, INCy, MODe, i, Icomp(i), &
             Itrue(i), id
-          99003       FORMAT (1X,I4,I3,3I5,I3,2I36,I12)
+          99003 FORMAT (1X,I4,I3,3I5,I3,2I36,I12)
         ENDIF
       ENDIF
     ENDDO
@@ -1158,15 +1158,15 @@ CONTAINS
           PASs = .FALSE.
           IF ( Kprint>=3 ) THEN
             WRITE (NPRint,99001)
-            99001         FORMAT ('+',39X,'FAIL')
+            99001 FORMAT ('+',39X,'FAIL')
             WRITE (NPRint,99002)
-            99002         FORMAT ('0CASE  N INCX INCY MODE  I',29X,'COMP(I)',29X,'TRUE(I)',&
+            99002 FORMAT ('0CASE  N INCX INCY MODE  I',29X,'COMP(I)',29X,'TRUE(I)',&
               2X,'DIFFERENCE',5X,'SIZE(I)'/1X)
           ENDIF
         ENDIF
         IF ( Kprint>=3 ) WRITE (NPRint,99003) ICAse, N, INCx, INCy, MODe, &
           i, Scomp(i), Strue(i), sd, Ssize(i)
-        99003     FORMAT (1X,I4,I3,3I5,I3,2E36.8,2E12.4)
+        99003 FORMAT (1X,I4,I3,3I5,I3,2E36.8,2E12.4)
       ENDIF
     ENDDO
     RETURN
@@ -1221,15 +1221,15 @@ CONTAINS
           PASs = .FALSE.
           IF ( Kprint>=3 ) THEN
             WRITE (NPRint,99001)
-            99001         FORMAT ('+',39X,'FAIL')
+            99001 FORMAT ('+',39X,'FAIL')
             WRITE (NPRint,99002)
-            99002         FORMAT ('0CASE  N INCX INCY MODE  I',29X,'COMP(I)',29X,'TRUE(I)',&
+            99002 FORMAT ('0CASE  N INCX INCY MODE  I',29X,'COMP(I)',29X,'TRUE(I)',&
               2X,'DIFFERENCE',5X,'SIZE(I)'/1X)
           ENDIF
         ENDIF
         IF ( Kprint>=3 ) WRITE (NPRint,99003) ICAse, N, INCx, INCy, MODe, &
           i, Dcomp(i), Dtrue(i), dd, Dsize(i)
-        99003     FORMAT (1X,I4,I3,3I5,I3,2D36.18,2D12.4)
+        99003 FORMAT (1X,I4,I3,3I5,I3,2D36.18,2D12.4)
       ENDIF
     ENDDO
     RETURN
@@ -1284,15 +1284,15 @@ CONTAINS
           PASs = .FALSE.
           IF ( Kprint>=3 ) THEN
             WRITE (NPRint,99001)
-            99001         FORMAT ('+',39X,'FAIL')
+            99001 FORMAT ('+',39X,'FAIL')
             WRITE (NPRint,99002)
-            99002         FORMAT ('0CASE  N INCX INCY MODE  I',29X,'COMP(I)',29X,'TRUE(I)',&
+            99002 FORMAT ('0CASE  N INCX INCY MODE  I',29X,'COMP(I)',29X,'TRUE(I)',&
               2X,'DIFFERENCE',5X,'SIZE(I)'/1X)
           ENDIF
         ENDIF
         IF ( Kprint>=3 ) WRITE (NPRint,99003) ICAse, N, INCx, INCy, MODe, &
           i, Ccomp(i), Ctrue(i), dd, Csize(i)
-        99003     FORMAT (1X,I4,I3,3I5,I3,2D36.18,2D12.4)
+        99003 FORMAT (1X,I4,I3,3I5,I3,2D36.18,2D12.4)
       ENDIF
     ENDDO
     RETURN
@@ -1368,10 +1368,10 @@ PROGRAM TEST17
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST17 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST17 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST17 *************')
   ENDIF
   STOP

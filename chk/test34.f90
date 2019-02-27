@@ -45,10 +45,10 @@ CONTAINS
       Ipass = 0
       IF ( info==1.AND.Kprint>=1 ) WRITE (Lun,99001)
       !
-      99001   FORMAT (' CPZERO TEST FAILS: LEADING COEFFICIENT OR DEGREE OF',&
+      99001 FORMAT (' CPZERO TEST FAILS: LEADING COEFFICIENT OR DEGREE OF',&
         ' POLYNOMIAL IS ZERO')
       IF ( info==2.AND.Kprint>=1 ) WRITE (Lun,99002)
-      99002   FORMAT (' CPZERO TEST FAILS: NON-CONVERGENCE IN 125 ITERATIONS')
+      99002 FORMAT (' CPZERO TEST FAILS: NON-CONVERGENCE IN 125 ITERATIONS')
     ENDIF
     DO j = 1, ideg
       err = ABS(z(j)-zk(1))
@@ -65,10 +65,10 @@ CONTAINS
     IF ( info/=0 ) THEN
       Ipass = 0
       IF ( info==1.AND.Kprint>=1 ) WRITE (Lun,99003)
-      99003   FORMAT (' RPZERO TEST FAILS: LEADING COEFFICIENT OR DEGREE OF',&
+      99003 FORMAT (' RPZERO TEST FAILS: LEADING COEFFICIENT OR DEGREE OF',&
         ' POLYNOMIAL IS ZERO')
       IF ( info==2.AND.Kprint>=1 ) WRITE (Lun,99004)
-      99004   FORMAT (' RPZERO TEST FAILS: NON-CONVERGENCE IN 125 ITERATIONS')
+      99004 FORMAT (' RPZERO TEST FAILS: NON-CONVERGENCE IN 125 ITERATIONS')
     ENDIF
     DO j = 1, ideg
       err = ABS(z(j)-zk(1))
@@ -186,11 +186,11 @@ CONTAINS
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99003)
-        99003     FORMAT (/' At least IFLAG test failed')
+        99003 FORMAT (/' At least IFLAG test failed')
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99004)
-      99004   FORMAT (/' All IFLAG tests passed')
+      99004 FORMAT (/' All IFLAG tests passed')
     ENDIF
     !
     IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99005)
@@ -297,11 +297,11 @@ CONTAINS
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99003)
-        99003     FORMAT (/' At least IFLAG test failed')
+        99003 FORMAT (/' At least IFLAG test failed')
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99004)
-      99004   FORMAT (/' All IFLAG tests passed')
+      99004 FORMAT (/' All IFLAG tests passed')
     ENDIF
     !
     IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99005)
@@ -388,14 +388,14 @@ CONTAINS
     !
     IF ( Kprint>=3.OR.(Kprint>=2.AND.Ipass==0) ) THEN
       WRITE (Lun,99002)
-      99002   FORMAT (/,' CHECK REAL AND IMAGINARY PARTS OF ROOT'/' COEFFICIENTS')
+      99002 FORMAT (/,' CHECK REAL AND IMAGINARY PARTS OF ROOT'/' COEFFICIENTS')
       WRITE (Lun,99003) (j,coef(j),j=1,8)
-      99003   FORMAT (/(I6,3X,1P,E22.14))
+      99003 FORMAT (/(I6,3X,1P,E22.14))
       WRITE (Lun,99004)
-      99004   FORMAT (//25X,'TABLE of ROOTS'//'   ROOT         REAL  PART',12X,&
+      99004 FORMAT (//25X,'TABLE of ROOTS'//'   ROOT         REAL  PART',12X,&
         'IMAG  PART'/'  NUMBER',8X,2(' of  ZERO ',12X))
       WRITE (Lun,99005) (j,root(j),j=1,7)
-      99005   FORMAT (I6,3X,1P,2E22.14)
+      99005 FORMAT (I6,3X,1P,2E22.14)
     ENDIF
     IF ( Kprint>=2 ) CALL PASS(Lun,1,Ipass)
     !
@@ -430,11 +430,11 @@ CONTAINS
       Ipass = 0
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99007)
-        99007     FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+        99007 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99008)
-      99008   FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
+      99008 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     ENDIF
     !
     IF ( Ipass==1.AND.Kprint>1 ) WRITE (Lun,99009)
@@ -530,7 +530,7 @@ CONTAINS
     !
     IF ( Kprint>=3.OR.(Kprint>=2.AND.itest(1)==0) ) THEN
       WRITE (Lun,99002)
-      99002   FORMAT (/,' TEST SUBSEQUENT RELATED CALL')
+      99002 FORMAT (/,' TEST SUBSEQUENT RELATED CALL')
       WRITE (Lun,99008)
       WRITE (Lun,99009) (j,coeff2(j),j=1,2)
       WRITE (Lun,99010)
@@ -568,11 +568,11 @@ CONTAINS
       Ipass = 0
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99004)
-        99004     FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+        99004 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99005)
-      99005   FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
+      99005 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     ENDIF
     !
     !     See if all tests passed.
@@ -684,10 +684,10 @@ PROGRAM TEST34
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST34 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST34 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST34 *************')
   ENDIF
   STOP

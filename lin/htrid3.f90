@@ -185,14 +185,15 @@ SUBROUTINE HTRID3(Nm,N,A,D,E,E2,Tau)
       !
     ENDDO
     !
-    100    DO k = 1, l
-    A(i,k) = scale*A(i,k)
-    A(k,i) = scale*A(k,i)
+    100 CONTINUE
+    DO k = 1, l
+      A(i,k) = scale*A(i,k)
+      A(k,i) = scale*A(k,i)
+    ENDDO
+    !
+    Tau(2,l) = -si
+    150    D(i) = A(i,i)
+    A(i,i) = scale*SQRT(h)
   ENDDO
   !
-  Tau(2,l) = -si
-  150    D(i) = A(i,i)
-  A(i,i) = scale*SQRT(h)
-ENDDO
-!
 END SUBROUTINE HTRID3

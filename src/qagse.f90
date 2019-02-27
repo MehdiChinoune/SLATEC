@@ -433,37 +433,38 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
           small = small*0.5E+00
           erlarg = errsum
         ENDIF
-        20       ENDDO
-        !
-        !           SET FINAL RESULT AND ERROR ESTIMATE.
-        !           ------------------------------------
-        !
-        IF ( Abserr/=oflow ) THEN
-          IF ( Ier+ierro/=0 ) THEN
-            IF ( ierro==3 ) Abserr = Abserr + correc
-            IF ( Ier==0 ) Ier = 3
-            IF ( Result==0.0E+00.OR.area==0.0E+00 ) THEN
-              IF ( Abserr>errsum ) GOTO 50
-              IF ( area==0.0E+00 ) THEN
-                IF ( Ier>2 ) Ier = Ier - 1
-                Neval = 42*Last - 21
-                GOTO 99999
-              ENDIF
-            ELSEIF ( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
-              GOTO 50
+        20 CONTINUE
+      ENDDO
+      !
+      !           SET FINAL RESULT AND ERROR ESTIMATE.
+      !           ------------------------------------
+      !
+      IF ( Abserr/=oflow ) THEN
+        IF ( Ier+ierro/=0 ) THEN
+          IF ( ierro==3 ) Abserr = Abserr + correc
+          IF ( Ier==0 ) Ier = 3
+          IF ( Result==0.0E+00.OR.area==0.0E+00 ) THEN
+            IF ( Abserr>errsum ) GOTO 50
+            IF ( area==0.0E+00 ) THEN
+              IF ( Ier>2 ) Ier = Ier - 1
+              Neval = 42*Last - 21
+              GOTO 99999
             ENDIF
+          ELSEIF ( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
+            GOTO 50
           ENDIF
-          !
-          !           TEST ON DIVERGENCE.
-          !
-          IF ( ksgn/=(-1).OR.MAX(ABS(Result),ABS(area))>defabs*0.1E-01 ) THEN
-            IF ( 0.1E-01>(Result/area).OR.(Result/area)>0.1E+03.OR.&
-              errsum>ABS(area) ) Ier = 6
-          ENDIF
-          IF ( Ier>2 ) Ier = Ier - 1
-          Neval = 42*Last - 21
-          GOTO 99999
         ENDIF
+        !
+        !           TEST ON DIVERGENCE.
+        !
+        IF ( ksgn/=(-1).OR.MAX(ABS(Result),ABS(area))>defabs*0.1E-01 ) THEN
+          IF ( 0.1E-01>(Result/area).OR.(Result/area)>0.1E+03.OR.&
+            errsum>ABS(area) ) Ier = 6
+        ENDIF
+        IF ( Ier>2 ) Ier = Ier - 1
+        Neval = 42*Last - 21
+        GOTO 99999
+      ENDIF
     ENDIF
     !
     !           COMPUTE GLOBAL INTEGRAL SUM.
@@ -477,4 +478,4 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     Neval = 42*Last - 21
   ENDIF
   99999 CONTINUE
-  END SUBROUTINE QAGSE
+END SUBROUTINE QAGSE

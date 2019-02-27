@@ -145,7 +145,7 @@ CONTAINS
         IF ( Kprint>=2.OR.Ipass==0 ) THEN
           WRITE (Lun,99001) ierror, err, INT(w(1))
           !
-          99001       FORMAT ('1',20X,'SUBROUTINE BLKTRI EXAMPLE'///10X,&
+          99001 FORMAT ('1',20X,'SUBROUTINE BLKTRI EXAMPLE'///10X,&
             'THE OUTPUT FROM THE NCAR CONTROL DATA 7600 WAS'//32X,&
             'IERROR = 0'/18X,'DISCRETIZATION ERROR = 1.6478E-05'/12X,&
             'REQUIRED LENGTH OF W ARRAY = 823'//10X,&
@@ -154,10 +154,10 @@ CONTAINS
             'REQUIRED LENGTH OF W ARRAY =',I4)
           IF ( Ipass==1 ) THEN
             WRITE (Lun,99002)
-            99002         FORMAT (60X,'PASS'/)
+            99002 FORMAT (60X,'PASS'/)
           ELSE
             WRITE (Lun,99003)
-            99003         FORMAT (60X,'FAIL'/)
+            99003 FORMAT (60X,'FAIL'/)
           ENDIF
         ENDIF
         RETURN
@@ -309,7 +309,7 @@ CONTAINS
     IF ( Kprint>=2.OR.Ipass==0 ) THEN
       WRITE (Lun,99001) ierror, err, INT(w(1))
       !
-      99001   FORMAT ('1',20X,'SUBROUTINE HWSCRT EXAMPLE'///10X,&
+      99001 FORMAT ('1',20X,'SUBROUTINE HWSCRT EXAMPLE'///10X,&
         'THE OUTPUT FROM THE NCAR CONTROL DATA 7600 WAS'//32X,&
         'IERROR = 0'/18X,'DISCRETIZATION ERROR = 5.36508E-04'/12X,&
         'REQUIRED LENGTH OF W ARRAY = 880'//10X,&
@@ -318,10 +318,10 @@ CONTAINS
         'REQUIRED LENGTH OF W ARRAY =',I4)
       IF ( Ipass==1 ) THEN
         WRITE (Lun,99002)
-        99002     FORMAT (60X,'PASS'/)
+        99002 FORMAT (60X,'PASS'/)
       ELSE
         WRITE (Lun,99003)
-        99003     FORMAT (60X,'FAIL'/)
+        99003 FORMAT (60X,'FAIL'/)
       ENDIF
     ENDIF
     RETURN
@@ -456,7 +456,7 @@ CONTAINS
       IF ( Kprint>=2.OR.Ipass==0 ) THEN
         WRITE (Lun,99001) ierror, err, INT(w(1))
         !
-        99001     FORMAT ('1',20X,'SUBROUTINE HWSCSP EXAMPLE 1'///10X,&
+        99001 FORMAT ('1',20X,'SUBROUTINE HWSCSP EXAMPLE 1'///10X,&
           'THE OUTPUT FROM THE NCAR CONTROL DATA 7600 WAS'//32X,&
           'IERROR = 0'/18X,'DISCRETIZATION ERROR = 7.99842E-04'/12X,&
           'REQUIRED LENGTH OF W ARRAY = 775'//10X,&
@@ -511,7 +511,7 @@ CONTAINS
     IF ( Kprint==0 ) RETURN
     IF ( Kprint>=2.OR.Ipass==0 ) THEN
       WRITE (Lun,99002) ierror, err, INT(w(1))
-      99002   FORMAT ('1',20X,'SUBROUTINE HWSCSP EXAMPLE 2'///10X,&
+      99002 FORMAT ('1',20X,'SUBROUTINE HWSCSP EXAMPLE 2'///10X,&
         'THE OUTPUT FROM THE NCAR CONTROL DATA 7600 WAS'//32X,&
         'IERROR = 0'/18X,'DISCRETIZATION ERROR = 5.86824E-05'/12X,&
         'REQUIRED LENGTH OF W ARRAY = 775'//10X,&
@@ -836,7 +836,7 @@ CONTAINS
     IF ( Kprint>=2.OR.Ipass==0 ) THEN
       WRITE (Lun,99001) ierror, err, INT(w(1))
       !
-      99001   FORMAT ('1',20X,'SUBROUTINE GENBUN EXAMPLE'///10X,&
+      99001 FORMAT ('1',20X,'SUBROUTINE GENBUN EXAMPLE'///10X,&
         'THE OUTPUT FROM THE NCAR CONTROL DATA 7600 WAS'//32X,&
         'IERROR = 0'/18X,'DISCRETIZATION ERROR = 7.94113E-03'/12X,&
         'REQUIRED LENGTH OF W ARRAY = 740'//10X,&
@@ -845,10 +845,10 @@ CONTAINS
         'REQUIRED LENGTH OF W ARRAY =',I4)
       IF ( Ipass==1 ) THEN
         WRITE (Lun,99002)
-        99002     FORMAT (60X,'PASS'/)
+        99002 FORMAT (60X,'PASS'/)
       ELSE
         WRITE (Lun,99003)
-        99003     FORMAT (60X,'FAIL'/)
+        99003 FORMAT (60X,'FAIL'/)
       ENDIF
     ENDIF
     RETURN
@@ -996,7 +996,7 @@ CONTAINS
     IF ( Kprint>=2.OR.Ipass==0 ) THEN
       WRITE (Lun,99001) ierror, err, INT(w(1))
       !
-      99001   FORMAT ('1',20X,'SUBROUTINE HWSPLR EXAMPLE'///10X,&
+      99001 FORMAT ('1',20X,'SUBROUTINE HWSPLR EXAMPLE'///10X,&
         'THE OUTPUT FROM THE NCAR CONTROL DATA 7600 WAS'//32X,&
         'IERROR = 0'/18X,'DISCRETIZATION ERROR = 6.19134E-04'/12X,&
         'REQUIRED LENGTH OF W ARRAY = 882'//10X,&
@@ -1005,10 +1005,10 @@ CONTAINS
         'REQUIRED LENGTH OF W ARRAY =',I4)
       IF ( Ipass==1 ) THEN
         WRITE (Lun,99002)
-        99002     FORMAT (60X,'PASS'/)
+        99002 FORMAT (60X,'PASS'/)
       ELSE
         WRITE (Lun,99003)
-        99003     FORMAT (60X,'FAIL'/)
+        99003 FORMAT (60X,'FAIL'/)
       ENDIF
     ENDIF
     RETURN
@@ -1134,7 +1134,7 @@ CONTAINS
     IF ( Kprint>=2.OR.Ipass==0 ) THEN
       WRITE (Lun,99001) ierror, err, INT(w(1))
       !
-      99001   FORMAT ('1',20X,'SUBROUTINE HWSSSP EXAMPLE'///10X,&
+      99001 FORMAT ('1',20X,'SUBROUTINE HWSSSP EXAMPLE'///10X,&
         'THE OUTPUT FROM THE NCAR CONTROL DATA 7600 WAS'//32X,&
         'IERROR = 0'/18X,'DISCRETIZATION ERROR = 3.38107E-03'/12X,&
         'REQUIRED LENGTH OF W ARRAY = 600'//10X,&
@@ -1143,10 +1143,10 @@ CONTAINS
         'REQUIRED LENGTH OF W ARRAY =',I4)
       IF ( Ipass==1 ) THEN
         WRITE (Lun,99002)
-        99002     FORMAT (60X,'PASS'/)
+        99002 FORMAT (60X,'PASS'/)
       ELSE
         WRITE (Lun,99003)
-        99003     FORMAT (60X,'FAIL'/)
+        99003 FORMAT (60X,'FAIL'/)
       ENDIF
     ENDIF
     RETURN
@@ -1259,10 +1259,10 @@ PROGRAM TEST50
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST50 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST50 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST50 *************')
   ENDIF
   STOP

@@ -119,7 +119,7 @@ CONTAINS
       IF ( j190==2 ) info(5) = 1
       !
       IF ( Kprint>2 ) WRITE (Lun,99002) info(5)
-      99002   FORMAT (////1X,' INFO(5) =',I3//6X,'T',15X,'X1',14X,'X2',12X,'NQ',6X,&
+      99002 FORMAT (////1X,' INFO(5) =',I3//6X,'T',15X,'X1',14X,'X2',12X,'NQ',6X,&
         'H',12X/)
       !
       t = 0.0E0
@@ -136,7 +136,7 @@ CONTAINS
         nqu = iwork(8)
         IF ( Kprint>2 ) THEN
           WRITE (Lun,99003) t, y(1), y(2), nqu, hu
-          99003       FORMAT (1X,1P,E15.5,E16.5,E16.5,I6,E14.3)
+          99003 FORMAT (1X,1P,E15.5,E16.5,E16.5,I6,E14.3)
         ENDIF
         !
         IF ( idid<0 ) EXIT
@@ -188,7 +188,7 @@ CONTAINS
       IF ( j290==2 ) info(5) = 1
       !
       IF ( Kprint>2 ) WRITE (Lun,99005) info(5)
-      99005   FORMAT (////1X,' INFO(5) =',I3//6X,'T',14X,'MAX.ERR.',5X,'NQ',6X,'H'/)
+      99005 FORMAT (////1X,' INFO(5) =',I3//6X,'T',14X,'MAX.ERR.',5X,'NQ',6X,'H'/)
       !
       t = 0.0E0
       DO i = 2, neq
@@ -209,7 +209,7 @@ CONTAINS
         hu = rwork(7)
         nqu = iwork(8)
         IF ( Kprint>2 ) WRITE (Lun,99006) t, erm, nqu, hu
-        99006     FORMAT (1X,1P,E15.5,E14.3,I6,E14.3)
+        99006 FORMAT (1X,1P,E15.5,E14.3,I6,E14.3)
         !
         IF ( idid<0 ) EXIT
         er = erm/atol
@@ -434,10 +434,10 @@ PROGRAM TEST48
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST48 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST48 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST48 *************')
   ENDIF
   STOP

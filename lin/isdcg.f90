@@ -214,7 +214,7 @@ INTEGER FUNCTION ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   IF ( Iunit/=0 ) THEN
     IF ( Iter==0 ) THEN
       WRITE (Iunit,99001) N, Itol
-      99001     FORMAT (' Preconditioned Conjugate Gradient for ','N, ITOL = ',I5,I5,&
+      99001 FORMAT (' Preconditioned Conjugate Gradient for ','N, ITOL = ',I5,I5,&
         /' ITER','   Error Estimate','            Alpha',&
         '             Beta')
       WRITE (Iunit,99002) Iter, Err

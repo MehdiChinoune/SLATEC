@@ -351,15 +351,16 @@ SUBROUTINE DPCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
         !
         !  CARRY OUT BACK SUBSTITUTION
         !
-        10         DO j = nm1, 1, -1
-        IF ( Wk(2,j)==zero ) GOTO 50
-        D(1,j) = (D(1,j)-Wk(1,j)*D(1,j+1))/Wk(2,j)
-      ENDDO
-      ! --------------------(  END  CODING FROM CUBSPL )--------------------
-      !
-      !  NORMAL RETURN.
-      !
-      RETURN
+        10 CONTINUE
+        DO j = nm1, 1, -1
+          IF ( Wk(2,j)==zero ) GOTO 50
+          D(1,j) = (D(1,j)-Wk(1,j)*D(1,j+1))/Wk(2,j)
+        ENDDO
+        ! --------------------(  END  CODING FROM CUBSPL )--------------------
+        !
+        !  NORMAL RETURN.
+        !
+        RETURN
       ENDIF
       !
       !     X-ARRAY NOT STRICTLY INCREASING.

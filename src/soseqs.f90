@@ -311,7 +311,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
       IF ( Iprint==(-1) ) THEN
         mm = m - 1
         WRITE (loun,99001) Fmax, mm, (X(j),j=1,N)
-        99001       FORMAT ('0RESIDUAL NORM =',E9.2,/1X,'SOLUTION ITERATE',' (',I3,')',&
+        99001 FORMAT ('0RESIDUAL NORM =',E9.2,/1X,'SOLUTION ITERATE',' (',I3,')',&
           /(1X,5E26.14))
       ENDIF
       !

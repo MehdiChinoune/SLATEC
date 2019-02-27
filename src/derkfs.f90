@@ -578,17 +578,18 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
         Idid = -2
         GOTO 300
       ENDIF
-      150    ENDDO
-    ELSE
-      !
-      !     IF TOO CLOSE TO OUTPUT POINT,EXTRAPOLATE AND RETURN
-      !
-      DO k = 1, Neq
-        Y(k) = Y(k) + dt*Yp(k)
-      ENDDO
-      a = Tout
-      CALL F(a,Y,Yp,Rpar,Ipar)
-      Ksteps = Ksteps + 1
+      150 CONTINUE
+    ENDDO
+  ELSE
+    !
+    !     IF TOO CLOSE TO OUTPUT POINT,EXTRAPOLATE AND RETURN
+    !
+    DO k = 1, Neq
+      Y(k) = Y(k) + dt*Yp(k)
+    ENDDO
+    a = Tout
+    CALL F(a,Y,Yp,Rpar,Ipar)
+    Ksteps = Ksteps + 1
   ENDIF
   !
   !                 INTERVAL MODE

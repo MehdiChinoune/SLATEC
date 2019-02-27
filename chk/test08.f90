@@ -66,13 +66,13 @@ CONTAINS
                 IF ( er>tol ) THEN
                   IF ( iflg==0 ) THEN
                     IF ( Kprint>=2 ) WRITE (Lun,99002)
-                    99002                 FORMAT (8X,'X',13X,'V(1)',11X,'Y(K)',9X,'REL ER','R',5X,&
+                    99002 FORMAT (8X,'X',13X,'V(1)',11X,'Y(K)',9X,'REL ER','R',5X,&
                       'KODE',3X,'N',4X,'M',4X,'K')
                   ENDIF
                   iflg = iflg + 1
                   IF ( Kprint>=2 ) WRITE (Lun,99003) x, v(1), y(k), er, &
                     kode, n, m, k
-                  99003               FORMAT (4E15.6,4I5)
+                  99003 FORMAT (4E15.6,4I5)
                   IF ( iflg>200 ) GOTO 300
                 ENDIF
               ENDDO
@@ -103,7 +103,7 @@ CONTAINS
       ENDDO
     ELSE
       IF ( Kprint>=2 ) WRITE (Lun,99004)
-      99004   FORMAT (//' NZ IN UNDERFLOW TEST IS NOT 1'//)
+      99004 FORMAT (//' NZ IN UNDERFLOW TEST IS NOT 1'//)
       iflg = iflg + 1
     ENDIF
     GOTO 200
@@ -113,7 +113,7 @@ CONTAINS
     200 CONTINUE
     IF ( iflg==0.AND.Kprint>=3 ) THEN
       WRITE (Lun,99006)
-      99006   FORMAT (//' QUICK CHECKS OK'//)
+      99006 FORMAT (//' QUICK CHECKS OK'//)
     ENDIF
     Ipass = 0
     IF ( iflg==0 ) Ipass = 1
@@ -244,7 +244,7 @@ CONTAINS
     ENDDO
     IF ( iflg==0.AND.Kprint>=3 ) THEN
       WRITE (Lun,99002)
-      99002   FORMAT (//' QUICK CHECKS OK'//)
+      99002 FORMAT (//' QUICK CHECKS OK'//)
     ENDIF
     Ipass = 0
     IF ( iflg==0 ) Ipass = 1
@@ -331,10 +331,10 @@ PROGRAM TEST08
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST08 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST08 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST08  *************')
   ENDIF
   STOP

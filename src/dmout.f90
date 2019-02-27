@@ -123,7 +123,7 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
       DO k1 = 1, N, 5
         k2 = MIN(N,k1+4)
         WRITE (lout,99001) (icol,i,i=k1,k2)
-        99001       FORMAT (10X,10(4X,A,I4,1X))
+        99001 FORMAT (10X,10(4X,A,I4,1X))
         DO i = 1, M
           WRITE (lout,99010) i, (A(i,j),j=k1,k2)
         ENDDO

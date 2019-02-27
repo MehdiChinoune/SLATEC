@@ -55,7 +55,8 @@ SUBROUTINE ISMPL(N,M,Indx)
       ENDDO
       Indx(i) = id
       EXIT
-      50     ENDDO
+      50 CONTINUE
     ENDDO
-    !------------- LAST LINE OF ISMPL FOLLOWS ------------------------------
+  ENDDO
+  !------------- LAST LINE OF ISMPL FOLLOWS ------------------------------
 END SUBROUTINE ISMPL

@@ -126,7 +126,7 @@ CONTAINS
     !***FIRST EXECUTABLE STATEMENT  QXABM
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
-    !     FORMATs.
+    ! FORMATs.
     !
     99001 FORMAT ('1'/' ------------  DEABM QUICK CHECK OUTPUT',' ------------')
     !
@@ -158,7 +158,7 @@ CONTAINS
       r = SQRT(u(1)*u(1)+u(2)*u(2))
       IF ( ABS(r-1.0E0)>reltol ) Ipass = 0
       IF ( Kprint>2 ) WRITE (Lun,99003) t, r
-      99003   FORMAT (2E20.8)
+      99003 FORMAT (2E20.8)
       info(1) = 1
       IF ( idid/=1 ) THEN
         !
@@ -166,11 +166,11 @@ CONTAINS
         !
         IF ( idid<1 ) Ipass = 0
         IF ( Kprint>1.AND.idid<1 ) WRITE (Lun,99004) idid
-        99004     FORMAT (1X,'ERROR RETURN FROM DEABM.  IDID = ',I3)
+        99004 FORMAT (1X,'ERROR RETURN FROM DEABM.  IDID = ',I3)
         IF ( Kprint>1.AND.Ipass==1 ) WRITE (Lun,99005)
-        99005     FORMAT (/' ------------  DEABM PASSED TESTS  ------------')
+        99005 FORMAT (/' ------------  DEABM PASSED TESTS  ------------')
         IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
-        99006     FORMAT (/' ************  DEABM FAILED TESTS  ************')
+        99006 FORMAT (/' ************  DEABM FAILED TESTS  ************')
         RETURN
       ENDIF
     ENDDO
@@ -233,7 +233,7 @@ CONTAINS
     !***FIRST EXECUTABLE STATEMENT  QXBDF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
-    !     FORMATs.
+    ! FORMATs.
     !
     99001 FORMAT ('1'/' ------------  DEBDF QUICK CHECK OUTPUT',' ------------')
     !
@@ -267,7 +267,7 @@ CONTAINS
       r = SQRT(u(1)*u(1)+u(2)*u(2))
       IF ( ABS(r-1.0E0)>reltol ) Ipass = 0
       IF ( Kprint>2 ) WRITE (Lun,99003) t, r
-      99003   FORMAT (2E20.8)
+      99003 FORMAT (2E20.8)
       info(1) = 1
       IF ( idid/=1 ) THEN
         !
@@ -275,11 +275,11 @@ CONTAINS
         !
         IF ( idid<1 ) Ipass = 0
         IF ( Kprint>1.AND.idid<1 ) WRITE (Lun,99004) idid
-        99004     FORMAT (1X,'ERROR RETURN FROM DEBDF.  IDID = ',I3)
+        99004 FORMAT (1X,'ERROR RETURN FROM DEBDF.  IDID = ',I3)
         IF ( Kprint>1.AND.Ipass==1 ) WRITE (Lun,99005)
-        99005     FORMAT (/' ------------  DEBDF PASSED TESTS  ------------')
+        99005 FORMAT (/' ------------  DEBDF PASSED TESTS  ------------')
         IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
-        99006     FORMAT (/' ************  DEBDF FAILED TESTS  ************')
+        99006 FORMAT (/' ************  DEBDF FAILED TESTS  ************')
         RETURN
       ENDIF
     ENDDO
@@ -342,7 +342,7 @@ CONTAINS
     !***FIRST EXECUTABLE STATEMENT  QXRKF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
-    !     FORMATs.
+    ! FORMATs.
     !
     99001 FORMAT ('1'/' ------------  DERKF QUICK CHECK OUTPUT',' ------------')
     !
@@ -374,7 +374,7 @@ CONTAINS
       r = SQRT(u(1)*u(1)+u(2)*u(2))
       IF ( ABS(r-1.0E0)>reltol ) Ipass = 0
       IF ( Kprint>2 ) WRITE (Lun,99003) t, r
-      99003   FORMAT (2E20.8)
+      99003 FORMAT (2E20.8)
       info(1) = 1
       IF ( idid/=1 ) THEN
         !
@@ -382,11 +382,11 @@ CONTAINS
         !
         IF ( idid<1 ) Ipass = 0
         IF ( Kprint>1.AND.idid<1 ) WRITE (Lun,99004) idid
-        99004     FORMAT (1X,'ERROR RETURN FROM DERKF.  IDID = ',I3)
+        99004 FORMAT (1X,'ERROR RETURN FROM DERKF.  IDID = ',I3)
         IF ( Kprint>1.AND.Ipass==1 ) WRITE (Lun,99005)
-        99005     FORMAT (/' ------------  DERKF PASSED TESTS  ------------')
+        99005 FORMAT (/' ------------  DERKF PASSED TESTS  ------------')
         IF ( Kprint>=1.AND.Ipass==0 ) WRITE (Lun,99006)
-        99006     FORMAT (/' ************  DERKF FAILED TESTS  ************')
+        99006 FORMAT (/' ************  DERKF FAILED TESTS  ************')
         RETURN
       ENDIF
     ENDDO
@@ -443,9 +443,9 @@ CONTAINS
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       !
-      99001   FORMAT ('1')
+      99001 FORMAT ('1')
       WRITE (Lun,99002)
-      99002   FORMAT (/' BVSUP QUICK CHECK')
+      99002 FORMAT (/' BVSUP QUICK CHECK')
     ENDIF
     !
     !-----INITIALIZE VARIABLES FOR TEST PROBLEM.
@@ -490,7 +490,7 @@ CONTAINS
     IF ( iflag/=0 ) THEN
       Ipass = 0
       IF ( Kprint>1 ) WRITE (Lun,99003) iflag
-      99003   FORMAT (10X,'IFLAG =',I2)
+      99003 FORMAT (10X,'IFLAG =',I2)
       GOTO 300
     ENDIF
     !
@@ -512,13 +512,13 @@ CONTAINS
     IF ( Kprint/=1.OR.Ipass/=0 ) THEN
       IF ( Kprint>=3.OR.Ipass==0 ) THEN
         WRITE (Lun,99004)
-        99004     FORMAT (/' ACCURACY TEST')
+        99004 FORMAT (/' ACCURACY TEST')
         WRITE (Lun,99005) numort
-        99005     FORMAT (/' NUMBER OF ORTHONORMALIZATIONS =',I3)
+        99005 FORMAT (/' NUMBER OF ORTHONORMALIZATIONS =',I3)
         WRITE (Lun,99006) (work(j),j=1,numort)
-        99006     FORMAT (/' ORTHONORMALIZATION POINTS ARE'/(1X,4F10.2))
+        99006 FORMAT (/' ORTHONORMALIZATION POINTS ARE'/(1X,4F10.2))
         WRITE (Lun,99007)
-        99007     FORMAT (//20X,'CALCULATION',30X,'TRUE SOLUTION'/2X,'X',14X,'Y',17X,&
+        99007 FORMAT (//20X,'CALCULATION',30X,'TRUE SOLUTION'/2X,'X',14X,'Y',17X,&
           'Y-PRIME',15X,'Y',17X,'Y-PRIME'/)
         DO j = 1, nxpts
           msg = 'PASS'
@@ -530,7 +530,7 @@ CONTAINS
           IF ( reler>tol.AND.abser>tol ) msg = 'FAIL'
           WRITE (Lun,99008) xpts(j), y(1,j), y(2,j), yans(1,j), yans(2,j)&
             , msg
-          99008       FORMAT (F5.1,4E20.7,5X,A)
+          99008 FORMAT (F5.1,4E20.7,5X,A)
         ENDDO
       ENDIF
     ENDIF
@@ -590,7 +590,7 @@ CONTAINS
         CASE (6)
           !
           WRITE (Lun,99010) iflag
-          99010     FORMAT (/' IFLAG SHOULD BE -1, IFLAG =',I3)
+          99010 FORMAT (/' IFLAG SHOULD BE -1, IFLAG =',I3)
           IF ( iflag==-1 ) itmp(kont) = 1
           kont = kont + 1
           !-----INCORRECT ORDERING OF XPTS
@@ -743,10 +743,10 @@ PROGRAM TEST43
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST43 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST43 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST43 *************')
   ENDIF
   STOP

@@ -59,7 +59,7 @@ CONTAINS
     !***FIRST EXECUTABLE STATEMENT  QC6A
     IF ( Kprint>=3 ) WRITE (Lun,99001)
     !
-    !     Formats.
+    ! FORMATs.
     !
     99001 FORMAT ('1'//' CODE TO TEST SLATEC ROUTINE AAAAAA')
     CALL AAAAAA(ver)
@@ -68,13 +68,13 @@ CONTAINS
       IF ( Kprint>=3 ) THEN
         WRITE (Lun,99006)
         WRITE (Lun,99002) ver
-        99002     FORMAT (' *** Passed -- version number = ',A16)
+        99002 FORMAT (' *** Passed -- version number = ',A16)
       ENDIF
     ELSE
       Ipass = 0
       IF ( Kprint>=3 ) WRITE (Lun,99006)
       IF ( Kprint>=2 ) WRITE (Lun,99003) ver, VERSN
-      99003   FORMAT (' *** Failed -- version number from AAAAAA = ',A16,&
+      99003 FORMAT (' *** Failed -- version number from AAAAAA = ',A16,&
         ' but expected version number = ',A16)
     ENDIF
     !
@@ -158,10 +158,10 @@ PROGRAM TEST01
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST01 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST01 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST01  *************')
   ENDIF
   STOP

@@ -79,10 +79,10 @@ CONTAINS
     IF ( Kprint>=2 ) THEN
       IF ( Ipass==1 ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99002)
-        99002     FORMAT (/' DAVINT passed both accuracy tests.')
+        99002 FORMAT (/' DAVINT passed both accuracy tests.')
       ELSE
         WRITE (Lun,99003)
-        99003     FORMAT (/' DAVINT failed at least one accuracy test.')
+        99003 FORMAT (/' DAVINT failed at least one accuracy test.')
       ENDIF
     ENDIF
     !
@@ -99,7 +99,7 @@ CONTAINS
     !
     IF ( Kprint>=3 ) THEN
       WRITE (Lun,99004)
-      99004   FORMAT (/' Test error returns from DAVINT'/' 4 error messages expected'/&
+      99004 FORMAT (/' Test error returns from DAVINT'/' 4 error messages expected'/&
         )
     ENDIF
     DO i = 1, 20
@@ -188,11 +188,11 @@ CONTAINS
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99005)
-        99005     FORMAT (/' At least one incorrect argument test FAILED')
+        99005 FORMAT (/' At least one incorrect argument test FAILED')
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99006)
-      99006   FORMAT (/' All incorrect argument tests PASSED')
+      99006 FORMAT (/' All incorrect argument tests PASSED')
     ENDIF
     !
     !     Write PASS/FAIL message.
@@ -335,11 +335,11 @@ CONTAINS
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99001)
-        99001     FORMAT (/' At least one incorrect argument test FAILED')
+        99001 FORMAT (/' At least one incorrect argument test FAILED')
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99002)
-      99002   FORMAT (/' All incorrect argument tests PASSED')
+      99002 FORMAT (/' All incorrect argument tests PASSED')
     ENDIF
     !
     IF ( Ipass==1.AND.Kprint>=3 ) WRITE (Lun,FMT=99008)
@@ -485,11 +485,11 @@ CONTAINS
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99001)
-        99001     FORMAT (/' At least one incorrect argument test FAILED')
+        99001 FORMAT (/' At least one incorrect argument test FAILED')
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99002)
-      99002   FORMAT (/' All incorrect argument tests PASSED')
+      99002 FORMAT (/' All incorrect argument tests PASSED')
     ENDIF
     !
     IF ( Ipass==1.AND.Kprint>=3 ) WRITE (Lun,FMT=99008)
@@ -633,10 +633,10 @@ PROGRAM TEST42
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST42 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST42 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST42 *************')
   ENDIF
   STOP

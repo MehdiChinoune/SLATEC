@@ -117,7 +117,7 @@ CONTAINS
     DO nz = 1, nns
       n = nd(nz)
       IF ( Kprint>=2 ) WRITE (Lun,99002) n
-      99002   FORMAT (/' Test FFT routines with a sequence of length ',I3)
+      99002 FORMAT (/' Test FFT routines with a sequence of length ',I3)
       modn = MOD(n,2)
       np1 = n + 1
       nm1 = n - 1
@@ -164,11 +164,11 @@ CONTAINS
       rftf = rftf/n
       IF ( rftf<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99003)
-        99003     FORMAT (' Test of RFFTF PASSED')
+        99003 FORMAT (' Test of RFFTF PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99004)
-        99004     FORMAT (' Test of RFFTF FAILED')
+        99004 FORMAT (' Test of RFFTF FAILED')
       ENDIF
       sign = 1.0
       DO i = 1, n
@@ -194,11 +194,11 @@ CONTAINS
       rftb = rftb/n
       IF ( rftb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99005)
-        99005     FORMAT (' Test of RFFTB PASSED')
+        99005 FORMAT (' Test of RFFTB PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99006)
-        99006     FORMAT (' Test of RFFTB FAILED')
+        99006 FORMAT (' Test of RFFTB FAILED')
       ENDIF
       !
       CALL RFFTB(n,y,w)
@@ -210,11 +210,11 @@ CONTAINS
       ENDDO
       IF ( rftfb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99007)
-        99007     FORMAT (' Test of RFFTF and RFFTB PASSED')
+        99007 FORMAT (' Test of RFFTF and RFFTB PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99008)
-        99008     FORMAT (' Test of RFFTF and RFFTB FAILED')
+        99008 FORMAT (' Test of RFFTF and RFFTB FAILED')
       ENDIF
       !
       !       Test Subroutines SINTI and SINT
@@ -243,11 +243,11 @@ CONTAINS
       sintt = cf*sintt
       IF ( sintt<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99009)
-        99009     FORMAT (' First test of SINT PASSED')
+        99009 FORMAT (' First test of SINT PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99010)
-        99010     FORMAT (' First test of SINT FAILED')
+        99010 FORMAT (' First test of SINT FAILED')
       ENDIF
       CALL SINT(nm1,x,w)
       CALL SINT(nm1,x,w)
@@ -257,11 +257,11 @@ CONTAINS
       ENDDO
       IF ( sintfb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99011)
-        99011     FORMAT (' Second test of SINT PASSED')
+        99011 FORMAT (' Second test of SINT PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99012)
-        99012     FORMAT (' Second test of SINT FAILED')
+        99012 FORMAT (' Second test of SINT FAILED')
       ENDIF
       !
       !       Test Subroutines COSTI and COST
@@ -290,11 +290,11 @@ CONTAINS
       costt = cf*costt
       IF ( costt<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99013)
-        99013     FORMAT (' First test of COST PASSED')
+        99013 FORMAT (' First test of COST PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99014)
-        99014     FORMAT (' First test of COST FAILED')
+        99014 FORMAT (' First test of COST FAILED')
       ENDIF
       !
       CALL COST(np1,x,w)
@@ -305,11 +305,11 @@ CONTAINS
       ENDDO
       IF ( costfb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99015)
-        99015     FORMAT (' Second test of COST PASSED')
+        99015 FORMAT (' Second test of COST PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99016)
-        99016     FORMAT (' Second test of COST FAILED')
+        99016 FORMAT (' Second test of COST FAILED')
       ENDIF
       !
       !       Test Subroutines SINQI, SINQF and SINQB
@@ -337,11 +337,11 @@ CONTAINS
       sinqbt = cf*sinqbt
       IF ( sinqbt<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99017)
-        99017     FORMAT (' Test of SINQB PASSED')
+        99017 FORMAT (' Test of SINQB PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99018)
-        99018     FORMAT (' Test of SINQB FAILED')
+        99018 FORMAT (' Test of SINQB FAILED')
       ENDIF
       !
       sign = 1.0
@@ -363,11 +363,11 @@ CONTAINS
       ENDDO
       IF ( sinqft<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99019)
-        99019     FORMAT (' Test of SINQF PASSED')
+        99019 FORMAT (' Test of SINQF PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99020)
-        99020     FORMAT (' Test of SINQF FAILED')
+        99020 FORMAT (' Test of SINQF FAILED')
       ENDIF
       !
       CALL SINQF(n,y,w)
@@ -378,11 +378,11 @@ CONTAINS
       ENDDO
       IF ( sinqfb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99021)
-        99021     FORMAT (' Test of SINQF and SINQB PASSED')
+        99021 FORMAT (' Test of SINQF and SINQB PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99022)
-        99022     FORMAT (' Test of SINQF and SINQB FAILED')
+        99022 FORMAT (' Test of SINQF and SINQB FAILED')
       ENDIF
       !
       !       Test Subroutines COSQI, COSQF and COSQB
@@ -408,11 +408,11 @@ CONTAINS
       cosqbt = cf*cosqbt
       IF ( cosqbt<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99023)
-        99023     FORMAT (' Test of COSQB PASSED')
+        99023 FORMAT (' Test of COSQB PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99024)
-        99024     FORMAT (' Test of COSQB FAILED')
+        99024 FORMAT (' Test of COSQB FAILED')
       ENDIF
       !
       DO i = 1, n
@@ -433,11 +433,11 @@ CONTAINS
       cosqft = cf*cosqft
       IF ( cosqft<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99025)
-        99025     FORMAT (' Test of COSQF PASSED')
+        99025 FORMAT (' Test of COSQF PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99026)
-        99026     FORMAT (' Test of COSQF FAILED')
+        99026 FORMAT (' Test of COSQF FAILED')
       ENDIF
       !
       CALL COSQB(n,x,w)
@@ -448,11 +448,11 @@ CONTAINS
       ENDDO
       IF ( cosqfb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99027)
-        99027     FORMAT (' Test of COSQF and COSQB PASSED')
+        99027 FORMAT (' Test of COSQF and COSQB PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99028)
-        99028     FORMAT (' Test of COSQF and COSQB FAILED')
+        99028 FORMAT (' Test of COSQF and COSQB FAILED')
       ENDIF
       !
       !       Test Subroutines EZFFTI, EZFFTF and EZFFTB
@@ -499,11 +499,11 @@ CONTAINS
         ENDDO
         IF ( dezf1<=errmax ) THEN
           IF ( Kprint>=3 ) WRITE (Lun,99029)
-          99029       FORMAT (' Test of EZFFTF PASSED')
+          99029 FORMAT (' Test of EZFFTF PASSED')
         ELSE
           Ipass = 0
           IF ( Kprint>=2 ) WRITE (Lun,99030)
-          99030       FORMAT (' Test of EZFFTF FAILED')
+          99030 FORMAT (' Test of EZFFTF FAILED')
         ENDIF
       ENDIF
       !
@@ -526,11 +526,11 @@ CONTAINS
       ENDDO
       IF ( dezb1<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99031)
-        99031     FORMAT (' Test of EZFFTB PASSED')
+        99031 FORMAT (' Test of EZFFTB PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99032)
-        99032     FORMAT (' Test of EZFFTB FAILED')
+        99032 FORMAT (' Test of EZFFTB FAILED')
       ENDIF
       !
       CALL EZFFTF(n,x,azero,a,b,w)
@@ -541,11 +541,11 @@ CONTAINS
       ENDDO
       IF ( dezfb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99033)
-        99033     FORMAT (' Test of EZFFTF and EZFFTB PASSED')
+        99033 FORMAT (' Test of EZFFTF and EZFFTB PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99034)
-        99034     FORMAT (' Test of EZFFTF and EZFFTB FAILED')
+        99034 FORMAT (' Test of EZFFTF and EZFFTB FAILED')
       ENDIF
       !
       !       Test Subroutines CFFTI, CFFTF and CFFTB
@@ -572,11 +572,11 @@ CONTAINS
       dcfftf = dcfftf/n
       IF ( dcfftf<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99035)
-        99035     FORMAT (' Test of CFFTF PASSED')
+        99035 FORMAT (' Test of CFFTF PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99036)
-        99036     FORMAT (' Test of CFFTF FAILED')
+        99036 FORMAT (' Test of CFFTF FAILED')
       ENDIF
       !
       DO i = 1, n
@@ -595,11 +595,11 @@ CONTAINS
       ENDDO
       IF ( dcfftb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99037)
-        99037     FORMAT (' Test of CFFTB PASSED')
+        99037 FORMAT (' Test of CFFTB PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99038)
-        99038     FORMAT (' Test of CFFTB FAILED')
+        99038 FORMAT (' Test of CFFTB FAILED')
       ENDIF
       !
       cf = 1.0/n
@@ -611,18 +611,18 @@ CONTAINS
       ENDDO
       IF ( dcfb<=errmax ) THEN
         IF ( Kprint>=3 ) WRITE (Lun,99039)
-        99039     FORMAT (' Test of CFFTF and CFFTB PASSED')
+        99039 FORMAT (' Test of CFFTF and CFFTB PASSED')
       ELSE
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99040)
-        99040     FORMAT (' Test of CFFTF and CFFTB FAILED')
+        99040 FORMAT (' Test of CFFTF and CFFTB FAILED')
       ENDIF
       IF ( Kprint>=3 ) THEN
         WRITE (Lun,99041) n, rftf, rftb, rftfb, sintt, sintfb, costt, &
           costfb, sinqft, sinqbt, sinqfb, cosqft, &
           cosqbt, cosqfb, dezf1, dezb1, dezfb, dcfftf, &
           dcfftb, dcfb
-        99041     FORMAT ('0N',I5,'  RFFTF  ',E9.3,'  RFFTB  ',E9.3,'  RFFTFB ',E9.3/7X,&
+        99041 FORMAT ('0N',I5,'  RFFTF  ',E9.3,'  RFFTB  ',E9.3,'  RFFTFB ',E9.3/7X,&
           '  SINT   ',E9.3,'  SINTFB ',E9.3/7X,'  COST   ',E9.3,&
           '  COSTFB ',E9.3/7X,'  SINQF  ',E9.3,'  SINQB  ',E9.3,&
           '  SINQFB ',E9.3/7X,'  COSQF  ',E9.3,'  COSQB  ',E9.3,&
@@ -710,10 +710,10 @@ PROGRAM TEST51
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST51 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST51 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST51 *************')
   ENDIF
   STOP

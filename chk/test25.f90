@@ -156,7 +156,7 @@ CONTAINS
       !
       DO isym = 0, 1
         IF ( Kprint>=2 ) WRITE (Lun,99001) n, kase, isym
-        99001     FORMAT ('1'/' Running tests with  N =',I3,',  KASE =',I2,',  ISYM =',&
+        99001 FORMAT ('1'/' Running tests with  N =',I3,',  KASE =',I2,',  ISYM =',&
           I2)
         !
         !         Set up a random matrix.
@@ -166,7 +166,7 @@ CONTAINS
         IF ( ierr/=0 ) THEN
           WRITE (Lun,99002) ierr
           !
-          99002       FORMAT (/1X,'SLAPQC -- Fatal error ',I1,' generating ',&
+          99002 FORMAT (/1X,'SLAPQC -- Fatal error ',I1,' generating ',&
             '*RANDOM* Matrix.')
           nfail = nfail + 1
           CYCLE
@@ -178,11 +178,11 @@ CONTAINS
         ENDIF
         IF ( Kprint>=2 ) THEN
           WRITE (Lun,99003) n, nelt, dens
-          99003       FORMAT (/'                * RANDOM Matrix of size',I5,&
+          99003 FORMAT (/'                * RANDOM Matrix of size',I5,&
             '*'/'                ','Number of non-zeros & Density = ',&
             I5,1P,E16.7)
           WRITE (Lun,99004) tol
-          99004       FORMAT ('                Error tolerance = ',1P,E16.7)
+          99004 FORMAT ('                Error tolerance = ',1P,E16.7)
         ENDIF
         !
         !         Convert to the SLAP-Column format and
@@ -191,7 +191,7 @@ CONTAINS
         CALL SS2Y(n,nelt,ia,ja,a,isym)
         IF ( Kprint>=4 ) THEN
           WRITE (Lun,99005) (k,ia(k),ja(k),a(k),k=1,nelt)
-          99005       FORMAT (/'  ***** SLAP Column Matrix *****'/' Indx   ia   ja     a'/&
+          99005 FORMAT (/'  ***** SLAP Column Matrix *****'/' Indx   ia   ja     a'/&
             (1X,I4,1X,I4,1X,I4,1X,1P,E16.7))
           CALL SCPPLT(n,nelt,ia,ja,a,isym,Lun)
         ENDIF
@@ -372,11 +372,11 @@ CONTAINS
     IF ( nfail==0 ) THEN
       Ipass = 1
       IF ( Kprint>=2 ) WRITE (Lun,99006)
-      99006   FORMAT ('--------- All single precision SLAP tests passed ','---------')
+      99006 FORMAT ('--------- All single precision SLAP tests passed ','---------')
     ELSE
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99007) nfail
-      99007   FORMAT ('*********',I3,' single precision SLAP tests failed ',&
+      99007 FORMAT ('*********',I3,' single precision SLAP tests failed ',&
         '*********')
     ENDIF
     !
@@ -694,12 +694,12 @@ CONTAINS
     IF ( Ierr/=0 ) Nfail = Nfail + 1
     IF ( Iout==1.AND.Ierr/=0 ) THEN
       WRITE (Istdo,99001) Method
-      99001   FORMAT (1X,A6,' : **** FAILURE ****')
+      99001 FORMAT (1X,A6,' : **** FAILURE ****')
     ENDIF
     IF ( Iout==2 ) THEN
       IF ( Ierr==0 ) THEN
         WRITE (Istdo,99002) Method
-        99002     FORMAT (1X,A6,' : **** PASSED  ****')
+        99002 FORMAT (1X,A6,' : **** PASSED  ****')
       ELSE
         WRITE (Istdo,99004) Method, Ierr, Iter, Err
       ENDIF
@@ -707,7 +707,7 @@ CONTAINS
     IF ( Iout>=3 ) THEN
       IF ( Ierr==0 ) THEN
         WRITE (Istdo,99003) Method, Ierr, Iter, Err
-        99003     FORMAT (' ***************** PASSED ***********************'/' **** ',&
+        99003 FORMAT (' ***************** PASSED ***********************'/' **** ',&
           A6,' Quick Test PASSED: IERR = ',I5,&
           ' ****'/' ***************** PASSED ***********************'/&
           ' Iteration Count = ',I3,' Stop Test = ',1P,E12.6)
@@ -796,10 +796,10 @@ PROGRAM TEST25
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST25 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST25 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST25 *************')
   ENDIF
   STOP

@@ -276,98 +276,99 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   mp = Mperod + 1
   np = Nperod + 1
   IF ( mp==1 ) GOTO 600
-  300  SELECT CASE (np)
-CASE (2)
-  CALL CMPOSD(M,N,1,W(iwba),W(iwbb),W(iwbc),Y,Idimy,W,W(iww1),W(iwd),&
-    W(iwtcos),W(iwp))
-CASE (3)
-  CALL CMPOSN(M,N,1,2,W(iwba),W(iwbb),W(iwbc),Y,Idimy,W,W(iwb2),W(iwb3),&
-    W(iww1),W(iww2),W(iww3),W(iwd),W(iwtcos),W(iwp))
-CASE (4)
-  CALL CMPOSN(M,N,1,1,W(iwba),W(iwbb),W(iwbc),Y,Idimy,W,W(iwb2),W(iwb3),&
-    W(iww1),W(iww2),W(iww3),W(iwd),W(iwtcos),W(iwp))
-CASE (5)
+  300 CONTINUE
+  SELECT CASE (np)
+    CASE (2)
+      CALL CMPOSD(M,N,1,W(iwba),W(iwbb),W(iwbc),Y,Idimy,W,W(iww1),W(iwd),&
+        W(iwtcos),W(iwp))
+    CASE (3)
+      CALL CMPOSN(M,N,1,2,W(iwba),W(iwbb),W(iwbc),Y,Idimy,W,W(iwb2),W(iwb3),&
+        W(iww1),W(iww2),W(iww3),W(iwd),W(iwtcos),W(iwp))
+    CASE (4)
+      CALL CMPOSN(M,N,1,1,W(iwba),W(iwbb),W(iwbc),Y,Idimy,W,W(iwb2),W(iwb3),&
+        W(iww1),W(iww2),W(iww3),W(iwd),W(iwtcos),W(iwp))
+    CASE (5)
+      !
+      !     REVERSE COLUMNS WHEN NPEROD = 4
+      !
+      irev = 1
+      nby2 = N/2
+      GOTO 700
+    CASE DEFAULT
+      CALL CMPOSP(M,N,W(iwba),W(iwbb),W(iwbc),Y,Idimy,W,W(iwb2),W(iwb3),&
+        W(iww1),W(iww2),W(iww3),W(iwd),W(iwtcos),W(iwp))
+  END SELECT
+  400  ipstor = REAL(W(iww1))
+  irev = 2
+  IF ( Nperod==4 ) GOTO 700
+  500 CONTINUE
+  IF ( mp==1 ) GOTO 800
+  IF ( mp==2 ) GOTO 900
   !
-  !     REVERSE COLUMNS WHEN NPEROD = 4
+  !     REORDER UNKNOWNS WHEN MP =0
   !
-  irev = 1
-  nby2 = N/2
-  GOTO 700
-CASE DEFAULT
-  CALL CMPOSP(M,N,W(iwba),W(iwbb),W(iwbc),Y,Idimy,W,W(iwb2),W(iwb3),&
-    W(iww1),W(iww2),W(iww3),W(iwd),W(iwtcos),W(iwp))
-END SELECT
-400  ipstor = REAL(W(iww1))
-irev = 2
-IF ( Nperod==4 ) GOTO 700
-500 CONTINUE
-IF ( mp==1 ) GOTO 800
-IF ( mp==2 ) GOTO 900
-!
-!     REORDER UNKNOWNS WHEN MP =0
-!
-600  mh = (M+1)/2
-mhm1 = mh - 1
-modd = 1
-IF ( mh*2==M ) modd = 2
-DO j = 1, N
-DO i = 1, mhm1
-  mhpi = mh + i
-  mhmi = mh - i
-  W(i) = Y(mhmi,j) - Y(mhpi,j)
-  W(mhpi) = Y(mhmi,j) + Y(mhpi,j)
-ENDDO
-W(mh) = 2.*Y(mh,j)
-IF ( modd/=1 ) W(M) = 2.*Y(M,j)
-DO i = 1, M
-  Y(i,j) = W(i)
-ENDDO
-ENDDO
-k = iwbc + mhm1 - 1
-i = iwba + mhm1
-W(k) = (0.,0.)
-W(i) = (0.,0.)
-W(k+1) = 2.*W(k+1)
-IF ( modd==2 ) THEN
-W(iwbb-1) = W(k+1)
-ELSE
-k = iwbb + mhm1 - 1
-W(k) = W(k) - W(i-1)
-W(iwbc-1) = W(iwbc-1) + W(iwbb-1)
-ENDIF
-GOTO 300
-700 CONTINUE
-DO j = 1, nby2
-mskip = N + 1 - j
-DO i = 1, M
-  a1 = Y(i,j)
-  Y(i,j) = Y(i,mskip)
-  Y(i,mskip) = a1
-ENDDO
-ENDDO
-IF ( irev==1 ) THEN
-CALL CMPOSN(M,N,1,2,W(iwba),W(iwbb),W(iwbc),Y,Idimy,W,W(iwb2),W(iwb3),&
-  W(iww1),W(iww2),W(iww3),W(iwd),W(iwtcos),W(iwp))
-GOTO 400
-ELSEIF ( irev==2 ) THEN
-GOTO 500
-ENDIF
-800 CONTINUE
-DO j = 1, N
-DO i = 1, mhm1
-  mhmi = mh - i
-  mhpi = mh + i
-  W(mhmi) = .5*(Y(mhpi,j)+Y(i,j))
-  W(mhpi) = .5*(Y(mhpi,j)-Y(i,j))
-ENDDO
-W(mh) = .5*Y(mh,j)
-IF ( modd/=1 ) W(M) = .5*Y(M,j)
-DO i = 1, M
-  Y(i,j) = W(i)
-ENDDO
-ENDDO
-!
-!     RETURN STORAGE REQUIREMENTS FOR W ARRAY.
-!
-900  W(1) = CMPLX(REAL(ipstor+iwp-1),0.)
+  600  mh = (M+1)/2
+  mhm1 = mh - 1
+  modd = 1
+  IF ( mh*2==M ) modd = 2
+  DO j = 1, N
+    DO i = 1, mhm1
+      mhpi = mh + i
+      mhmi = mh - i
+      W(i) = Y(mhmi,j) - Y(mhpi,j)
+      W(mhpi) = Y(mhmi,j) + Y(mhpi,j)
+    ENDDO
+    W(mh) = 2.*Y(mh,j)
+    IF ( modd/=1 ) W(M) = 2.*Y(M,j)
+    DO i = 1, M
+      Y(i,j) = W(i)
+    ENDDO
+  ENDDO
+  k = iwbc + mhm1 - 1
+  i = iwba + mhm1
+  W(k) = (0.,0.)
+  W(i) = (0.,0.)
+  W(k+1) = 2.*W(k+1)
+  IF ( modd==2 ) THEN
+    W(iwbb-1) = W(k+1)
+  ELSE
+    k = iwbb + mhm1 - 1
+    W(k) = W(k) - W(i-1)
+    W(iwbc-1) = W(iwbc-1) + W(iwbb-1)
+  ENDIF
+  GOTO 300
+  700 CONTINUE
+  DO j = 1, nby2
+    mskip = N + 1 - j
+    DO i = 1, M
+      a1 = Y(i,j)
+      Y(i,j) = Y(i,mskip)
+      Y(i,mskip) = a1
+    ENDDO
+  ENDDO
+  IF ( irev==1 ) THEN
+    CALL CMPOSN(M,N,1,2,W(iwba),W(iwbb),W(iwbc),Y,Idimy,W,W(iwb2),W(iwb3),&
+      W(iww1),W(iww2),W(iww3),W(iwd),W(iwtcos),W(iwp))
+    GOTO 400
+  ELSEIF ( irev==2 ) THEN
+    GOTO 500
+  ENDIF
+  800 CONTINUE
+  DO j = 1, N
+    DO i = 1, mhm1
+      mhmi = mh - i
+      mhpi = mh + i
+      W(mhmi) = .5*(Y(mhpi,j)+Y(i,j))
+      W(mhpi) = .5*(Y(mhpi,j)-Y(i,j))
+    ENDDO
+    W(mh) = .5*Y(mh,j)
+    IF ( modd/=1 ) W(M) = .5*Y(M,j)
+    DO i = 1, M
+      Y(i,j) = W(i)
+    ENDDO
+  ENDDO
+  !
+  !     RETURN STORAGE REQUIREMENTS FOR W ARRAY.
+  !
+  900  W(1) = CMPLX(REAL(ipstor+iwp-1),0.)
 END SUBROUTINE CMGNBN

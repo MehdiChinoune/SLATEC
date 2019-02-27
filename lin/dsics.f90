@@ -332,14 +332,15 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
             'A and EL data structure mismatch in row '//xern1,1,2)
         ENDIF
       ENDIF
-      50     ENDDO
+      50 CONTINUE
     ENDDO
-    !
-    !         Replace diagonals by their inverses.
-    !
-    !VD$ CONCUR
-    DO i = 1, N
-      D(i) = 1.0D0/D(i)
-    ENDDO
-    !------------- LAST LINE OF DSICS FOLLOWS ----------------------------
+  ENDDO
+  !
+  !         Replace diagonals by their inverses.
+  !
+  !VD$ CONCUR
+  DO i = 1, N
+    D(i) = 1.0D0/D(i)
+  ENDDO
+  !------------- LAST LINE OF DSICS FOLLOWS ----------------------------
 END SUBROUTINE DSICS

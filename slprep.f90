@@ -1292,57 +1292,59 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,&
         ENDIF
       ENDDO
       EXIT
-      50     ENDDO
+      50 CONTINUE
     ENDDO
-    DO j = 1, 7
-      DO i = 1, Ncc
-        ilen = LENSTR(Tclass(i))
-        IF ( ilen==size(j) ) THEN
-          nlen = LENSTR(Tclass(i+1))
-          IF ( ilen<nlen ) THEN
-            IF ( Tclass(i)(1:size(j))==Tclass(i+1)(1:size(j)) ) Jptr(i)&
-              = i + 1
-          ENDIF
-        ENDIF
-      ENDDO
-    ENDDO
+  ENDDO
+  DO j = 1, 7
     DO i = 1, Ncc
-      Kptr(i) = 0
+      ilen = LENSTR(Tclass(i))
+      IF ( ilen==size(j) ) THEN
+        nlen = LENSTR(Tclass(i+1))
+        IF ( ilen<nlen ) THEN
+          IF ( Tclass(i)(1:size(j))==Tclass(i+1)(1:size(j)) ) Jptr(i)&
+            = i + 1
+        ENDIF
+      ENDIF
     ENDDO
-    !
-    iclass = 1
-    Istmt = 1
-    DO i = 1, Ncc
-      DO
-        !
-        iper = INDEX(Class(iclass)(1:8),'.')
-        IF ( iper==0 ) THEN
-          iclass = iclass + 1
-          IF ( iclass>Mncl ) THEN
-            Nerr = i
-            RETURN
-          ENDIF
-          CYCLE
+  ENDDO
+  DO i = 1, Ncc
+    Kptr(i) = 0
+  ENDDO
+  !
+  iclass = 1
+  Istmt = 1
+  DO i = 1, Ncc
+    DO
+      !
+      iper = INDEX(Class(iclass)(1:8),'.')
+      IF ( iper==0 ) THEN
+        iclass = iclass + 1
+        IF ( iclass>Mncl ) THEN
+          Nerr = i
+          RETURN
         ENDIF
-        !
-        IF ( Tclass(i)==CVTCAT(Class(iclass)(1:iper-1)) ) THEN
-          Kptr(i) = Istmt
-          DO
-            Stmts(Istmt) = Class(iclass)(iper+2:80)
-            Istmt = Istmt + 1
-            iclass = iclass + 1
-            IF ( Class(iclass)(1:1)/=' ' ) GOTO 100
-          ENDDO
-        ELSE
+        CYCLE
+      ENDIF
+      !
+      IF ( Tclass(i)==CVTCAT(Class(iclass)(1:iper-1)) ) THEN
+        Kptr(i) = Istmt
+        DO
+          Stmts(Istmt) = Class(iclass)(iper+2:80)
+          Istmt = Istmt + 1
           iclass = iclass + 1
-          IF ( iclass>Mncl ) THEN
-            Nerr = i
-            RETURN
-          ENDIF
+          IF ( Class(iclass)(1:1)/=' ' ) GOTO 100
+        ENDDO
+      ELSE
+        iclass = iclass + 1
+        IF ( iclass>Mncl ) THEN
+          Nerr = i
+          RETURN
         ENDIF
-      ENDDO
-      100  ENDDO
-      Kptr(Ncc+1) = Istmt
+      ENDIF
+    ENDDO
+    100 CONTINUE
+  ENDDO
+  Kptr(Ncc+1) = Istmt
 END SUBROUTINE PSCAT
 !DECK SORT
 SUBROUTINE SORT(R,N,Nr,Cr)

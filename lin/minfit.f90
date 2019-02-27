@@ -272,117 +272,118 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
     its = 0
     !     .......... TEST FOR SPLITTING.
     !                FOR L=K STEP -1 UNTIL 1 DO -- ..........
-    50     DO ll = 1, k
-    l1 = k - ll
-    l = l1 + 1
-    IF ( s1+ABS(Rv1(l))==s1 ) GOTO 100
-    !     .......... RV1(1) IS ALWAYS ZERO, SO THERE IS NO EXIT
-    !                THROUGH THE BOTTOM OF THE LOOP ..........
-    IF ( s1+ABS(W(l1))==s1 ) EXIT
-  ENDDO
-  !     .......... CANCELLATION OF RV1(L) IF L GREATER THAN 1 ..........
-  c = 0.0E0
-  s = 1.0E0
-  !
-  DO i = l, k
-    f = s*Rv1(i)
-    Rv1(i) = c*Rv1(i)
-    IF ( s1+ABS(f)==s1 ) EXIT
-    g = W(i)
-    h = PYTHAG(f,g)
-    W(i) = h
-    c = g/h
-    s = -f/h
-    IF ( Ip/=0 ) THEN
-      !
-      DO j = 1, Ip
-        y = B(l1,j)
-        z = B(i,j)
-        B(l1,j) = y*c + z*s
-        B(i,j) = -y*s + z*c
-      ENDDO
-    ENDIF
-    !
-  ENDDO
-  !     .......... TEST FOR CONVERGENCE ..........
-  100    z = W(k)
-  IF ( l/=k ) THEN
-    !     .......... SHIFT FROM BOTTOM 2 BY 2 MINOR ..........
-    IF ( its==30 ) GOTO 200
-    its = its + 1
-    x = W(l)
-    y = W(k1)
-    g = Rv1(k1)
-    h = Rv1(k)
-    f = 0.5E0*(((g+z)/h)*((g-z)/y)+y/h-h/y)
-    g = PYTHAG(f,1.0E0)
-    f = x - (z/x)*z + (h/x)*(y/(f+SIGN(g,f))-h)
-    !     .......... NEXT QR TRANSFORMATION ..........
-    c = 1.0E0
+    50 CONTINUE
+    DO ll = 1, k
+      l1 = k - ll
+      l = l1 + 1
+      IF ( s1+ABS(Rv1(l))==s1 ) GOTO 100
+      !     .......... RV1(1) IS ALWAYS ZERO, SO THERE IS NO EXIT
+      !                THROUGH THE BOTTOM OF THE LOOP ..........
+      IF ( s1+ABS(W(l1))==s1 ) EXIT
+    ENDDO
+    !     .......... CANCELLATION OF RV1(L) IF L GREATER THAN 1 ..........
+    c = 0.0E0
     s = 1.0E0
     !
-    DO i1 = l, k1
-      i = i1 + 1
-      g = Rv1(i)
-      y = W(i)
-      h = s*g
-      g = c*g
-      z = PYTHAG(f,h)
-      Rv1(i1) = z
-      c = f/z
-      s = h/z
-      f = x*c + g*s
-      g = -x*s + g*c
-      h = y*s
-      y = y*c
-      !
-      DO j = 1, N
-        x = A(j,i1)
-        z = A(j,i)
-        A(j,i1) = x*c + z*s
-        A(j,i) = -x*s + z*c
-      ENDDO
-      !
-      z = PYTHAG(f,h)
-      W(i1) = z
-      !     .......... ROTATION CAN BE ARBITRARY IF Z IS ZERO ..........
-      IF ( z/=0.0E0 ) THEN
-        c = f/z
-        s = h/z
-      ENDIF
-      f = c*g + s*y
-      x = -s*g + c*y
+    DO i = l, k
+      f = s*Rv1(i)
+      Rv1(i) = c*Rv1(i)
+      IF ( s1+ABS(f)==s1 ) EXIT
+      g = W(i)
+      h = PYTHAG(f,g)
+      W(i) = h
+      c = g/h
+      s = -f/h
       IF ( Ip/=0 ) THEN
         !
         DO j = 1, Ip
-          y = B(i1,j)
+          y = B(l1,j)
           z = B(i,j)
-          B(i1,j) = y*c + z*s
+          B(l1,j) = y*c + z*s
           B(i,j) = -y*s + z*c
         ENDDO
       ENDIF
       !
     ENDDO
+    !     .......... TEST FOR CONVERGENCE ..........
+    100    z = W(k)
+    IF ( l/=k ) THEN
+      !     .......... SHIFT FROM BOTTOM 2 BY 2 MINOR ..........
+      IF ( its==30 ) GOTO 200
+      its = its + 1
+      x = W(l)
+      y = W(k1)
+      g = Rv1(k1)
+      h = Rv1(k)
+      f = 0.5E0*(((g+z)/h)*((g-z)/y)+y/h-h/y)
+      g = PYTHAG(f,1.0E0)
+      f = x - (z/x)*z + (h/x)*(y/(f+SIGN(g,f))-h)
+      !     .......... NEXT QR TRANSFORMATION ..........
+      c = 1.0E0
+      s = 1.0E0
+      !
+      DO i1 = l, k1
+        i = i1 + 1
+        g = Rv1(i)
+        y = W(i)
+        h = s*g
+        g = c*g
+        z = PYTHAG(f,h)
+        Rv1(i1) = z
+        c = f/z
+        s = h/z
+        f = x*c + g*s
+        g = -x*s + g*c
+        h = y*s
+        y = y*c
+        !
+        DO j = 1, N
+          x = A(j,i1)
+          z = A(j,i)
+          A(j,i1) = x*c + z*s
+          A(j,i) = -x*s + z*c
+        ENDDO
+        !
+        z = PYTHAG(f,h)
+        W(i1) = z
+        !     .......... ROTATION CAN BE ARBITRARY IF Z IS ZERO ..........
+        IF ( z/=0.0E0 ) THEN
+          c = f/z
+          s = h/z
+        ENDIF
+        f = c*g + s*y
+        x = -s*g + c*y
+        IF ( Ip/=0 ) THEN
+          !
+          DO j = 1, Ip
+            y = B(i1,j)
+            z = B(i,j)
+            B(i1,j) = y*c + z*s
+            B(i,j) = -y*s + z*c
+          ENDDO
+        ENDIF
+        !
+      ENDDO
+      !
+      Rv1(l) = 0.0E0
+      Rv1(k) = f
+      W(k) = x
+      GOTO 50
+      !     .......... CONVERGENCE ..........
+    ELSEIF ( z<0.0E0 ) THEN
+      !     .......... W(K) IS MADE NON-NEGATIVE ..........
+      W(k) = -z
+      !
+      DO j = 1, N
+        A(j,k) = -A(j,k)
+      ENDDO
+    ENDIF
     !
-    Rv1(l) = 0.0E0
-    Rv1(k) = f
-    W(k) = x
-    GOTO 50
-    !     .......... CONVERGENCE ..........
-  ELSEIF ( z<0.0E0 ) THEN
-    !     .......... W(K) IS MADE NON-NEGATIVE ..........
-    W(k) = -z
-    !
-    DO j = 1, N
-      A(j,k) = -A(j,k)
-    ENDDO
-  ENDIF
+  ENDDO
   !
-ENDDO
-!
-GOTO 99999
-!     .......... SET ERROR -- NO CONVERGENCE TO A
-!                SINGULAR VALUE AFTER 30 ITERATIONS ..........
-200  Ierr = k
+  GOTO 99999
+  !     .......... SET ERROR -- NO CONVERGENCE TO A
+  !                SINGULAR VALUE AFTER 30 ITERATIONS ..........
+  200  Ierr = k
   99999 CONTINUE
-  END SUBROUTINE MINFIT
+END SUBROUTINE MINFIT

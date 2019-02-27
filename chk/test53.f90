@@ -707,11 +707,11 @@ CONTAINS
       Ipass = 0
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99003)
-        99003     FORMAT (' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+        99003 FORMAT (' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99004)
-      99004   FORMAT (' ALL INCORRECT ARGUMENT TESTS PASSED')
+      99004 FORMAT (' ALL INCORRECT ARGUMENT TESTS PASSED')
     ENDIF
     !
     !     Print PASS/FAIL message.
@@ -949,12 +949,12 @@ CONTAINS
     IF ( diff<=tol ) THEN
       fatal = .FALSE.
       IF ( Kprint>=3 ) WRITE (Lun,99002)
-      99002   FORMAT (/' DFC PASSED TEST 1')
+      99002 FORMAT (/' DFC PASSED TEST 1')
     ELSE
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=2 ) WRITE (Lun,99003)
-      99003   FORMAT (/' DFC FAILED TEST 1')
+      99003 FORMAT (/' DFC FAILED TEST 1')
     ENDIF
     !
     IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) THEN
@@ -991,12 +991,12 @@ CONTAINS
     IF ( diff<=tol ) THEN
       fatal = .FALSE.
       IF ( Kprint>=3 ) WRITE (Lun,99004)
-      99004   FORMAT (/' DFC (AND DBVALU) PASSED TEST 2')
+      99004 FORMAT (/' DFC (AND DBVALU) PASSED TEST 2')
     ELSE
       Ipass = 0
       fatal = .TRUE.
       IF ( Kprint>=2 ) WRITE (Lun,99005)
-      99005   FORMAT (/' DFC (AND DBVALU) FAILED TEST 2')
+      99005 FORMAT (/' DFC (AND DBVALU) FAILED TEST 2')
     ENDIF
     !
     IF ( (fatal.AND.Kprint>=2).OR.Kprint>=3 ) THEN
@@ -1006,7 +1006,7 @@ CONTAINS
       CALL DMOUT(nval,5,nval,v,'(16X, ''X'', 10X, ''FNCN'', 8X,'//&
         '''1ST D'', 7X, ''2ND D'', 7X, ''ERROR'')',idigit)
       WRITE (Lun,99006)
-      99006   FORMAT (/' VALUES SHOULD CORRESPOND TO THOSE IN ','SAND78-1291,',&
+      99006 FORMAT (/' VALUES SHOULD CORRESPOND TO THOSE IN ','SAND78-1291,',&
         ' P. 26')
     ENDIF
     !
@@ -1066,11 +1066,11 @@ CONTAINS
       Ipass = 0
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99008)
-        99008     FORMAT (' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+        99008 FORMAT (' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99009)
-      99009   FORMAT (' ALL INCORRECT ARGUMENT TESTS PASSED')
+      99009 FORMAT (' ALL INCORRECT ARGUMENT TESTS PASSED')
     ENDIF
     !
     !     Print PASS/FAIL message.
@@ -1324,10 +1324,10 @@ PROGRAM TEST53
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST53 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST53 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST53 *************')
   ENDIF
   STOP

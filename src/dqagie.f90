@@ -434,41 +434,42 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
       small = small*0.5D+00
       erlarg = errsum
     ENDIF
-    100  ENDDO
-    !
-    !           SET FINAL RESULT AND ERROR ESTIMATE.
-    !           ------------------------------------
-    !
-    IF ( Abserr/=oflow ) THEN
-      IF ( (Ier+ierro)/=0 ) THEN
-        IF ( ierro==3 ) Abserr = Abserr + correc
-        IF ( Ier==0 ) Ier = 3
-        IF ( Result==0.0D+00.OR.area==0.0D+00 ) THEN
-          IF ( Abserr>errsum ) GOTO 200
-          IF ( area==0.0D+00 ) GOTO 300
-        ELSEIF ( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
-          GOTO 200
-        ENDIF
+    100 CONTINUE
+  ENDDO
+  !
+  !           SET FINAL RESULT AND ERROR ESTIMATE.
+  !           ------------------------------------
+  !
+  IF ( Abserr/=oflow ) THEN
+    IF ( (Ier+ierro)/=0 ) THEN
+      IF ( ierro==3 ) Abserr = Abserr + correc
+      IF ( Ier==0 ) Ier = 3
+      IF ( Result==0.0D+00.OR.area==0.0D+00 ) THEN
+        IF ( Abserr>errsum ) GOTO 200
+        IF ( area==0.0D+00 ) GOTO 300
+      ELSEIF ( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
+        GOTO 200
       ENDIF
-      !
-      !           TEST ON DIVERGENCE
-      !
-      IF ( ksgn/=(-1).OR.MAX(ABS(Result),ABS(area))>defabs*0.1D-01 ) THEN
-        IF ( 0.1D-01>(Result/area).OR.(Result/area)>0.1D+03.OR.&
-          errsum>ABS(area) ) Ier = 6
-      ENDIF
-      GOTO 300
     ENDIF
     !
-    !           COMPUTE GLOBAL INTEGRAL SUM.
+    !           TEST ON DIVERGENCE
     !
-    200  Result = 0.0D+00
-    DO k = 1, Last
-      Result = Result + Rlist(k)
-    ENDDO
-    Abserr = errsum
-    300  Neval = 30*Last - 15
-    IF ( Inf==2 ) Neval = 2*Neval
-    IF ( Ier>2 ) Ier = Ier - 1
-      99999 CONTINUE
-  END SUBROUTINE DQAGIE
+    IF ( ksgn/=(-1).OR.MAX(ABS(Result),ABS(area))>defabs*0.1D-01 ) THEN
+      IF ( 0.1D-01>(Result/area).OR.(Result/area)>0.1D+03.OR.&
+        errsum>ABS(area) ) Ier = 6
+    ENDIF
+    GOTO 300
+  ENDIF
+  !
+  !           COMPUTE GLOBAL INTEGRAL SUM.
+  !
+  200  Result = 0.0D+00
+  DO k = 1, Last
+    Result = Result + Rlist(k)
+  ENDDO
+  Abserr = errsum
+  300  Neval = 30*Last - 15
+  IF ( Inf==2 ) Neval = 2*Neval
+  IF ( Ier>2 ) Ier = Ier - 1
+  99999 CONTINUE
+END SUBROUTINE DQAGIE

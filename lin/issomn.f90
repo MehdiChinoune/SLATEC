@@ -221,7 +221,7 @@ INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   IF ( Iunit/=0 ) THEN
     IF ( Iter==0 ) THEN
       WRITE (Iunit,99001) Nsave, N, Itol
-      99001     FORMAT (' Preconditioned Orthomin(',I3,') for ','N, ITOL = ',I5,I5,&
+      99001 FORMAT (' Preconditioned Orthomin(',I3,') for ','N, ITOL = ',I5,I5,&
         /' ITER','   Error Estimate','            Alpha')
       WRITE (Iunit,99002) Iter, Err
     ELSE

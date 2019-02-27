@@ -527,37 +527,38 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
     ENDIF
     10         ertest = errbnd
     erlarg = errsum
-    20       ENDDO
-    !
-    !           SET THE FINAL RESULT.
-    !           ---------------------
-    !
-    IF ( Abserr/=oflow.AND.nres/=0 ) THEN
-      IF ( Ier+ierro/=0 ) THEN
-        IF ( ierro==3 ) Abserr = Abserr + correc
-        IF ( Ier==0 ) Ier = 3
-        IF ( Result==0.0E+00.OR.area==0.0E+00 ) THEN
-          IF ( Abserr>errsum ) GOTO 50
-          IF ( area==0.0E+00 ) THEN
-            IF ( Ier>2 ) Ier = Ier - 1
-            IF ( Integr==2.AND.Omega<0.0E+00 ) Result = -Result
-            GOTO 99999
-          ENDIF
-        ELSEIF ( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
-          GOTO 50
+    20 CONTINUE
+  ENDDO
+  !
+  !           SET THE FINAL RESULT.
+  !           ---------------------
+  !
+  IF ( Abserr/=oflow.AND.nres/=0 ) THEN
+    IF ( Ier+ierro/=0 ) THEN
+      IF ( ierro==3 ) Abserr = Abserr + correc
+      IF ( Ier==0 ) Ier = 3
+      IF ( Result==0.0E+00.OR.area==0.0E+00 ) THEN
+        IF ( Abserr>errsum ) GOTO 50
+        IF ( area==0.0E+00 ) THEN
+          IF ( Ier>2 ) Ier = Ier - 1
+          IF ( Integr==2.AND.Omega<0.0E+00 ) Result = -Result
+          GOTO 99999
         ENDIF
+      ELSEIF ( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
+        GOTO 50
       ENDIF
-      !
-      !           TEST ON DIVERGENCE.
-      !
-      IF ( ksgn/=(-1).OR.MAX(ABS(Result),ABS(area))>defabs*0.1E-01 ) THEN
-        IF ( 0.1E-01>(Result/area).OR.(Result/area)>0.1E+03.OR.&
-          errsum>=ABS(area) ) Ier = 6
-      ENDIF
-      IF ( Ier>2 ) Ier = Ier - 1
-      IF ( Integr==2.AND.Omega<0.0E+00 ) Result = -Result
-      GOTO 99999
     ENDIF
+    !
+    !           TEST ON DIVERGENCE.
+    !
+    IF ( ksgn/=(-1).OR.MAX(ABS(Result),ABS(area))>defabs*0.1E-01 ) THEN
+      IF ( 0.1E-01>(Result/area).OR.(Result/area)>0.1E+03.OR.&
+        errsum>=ABS(area) ) Ier = 6
+    ENDIF
+    IF ( Ier>2 ) Ier = Ier - 1
+    IF ( Integr==2.AND.Omega<0.0E+00 ) Result = -Result
+    GOTO 99999
+  ENDIF
   ENDIF
   !
   !           COMPUTE GLOBAL INTEGRAL SUM.
@@ -570,5 +571,5 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
   IF ( Ier>2 ) Ier = Ier - 1
   IF ( Integr==2.AND.Omega<0.0E+00 ) Result = -Result
 ENDIF
-  99999 CONTINUE
-  END SUBROUTINE QAWOE
+99999 CONTINUE
+END SUBROUTINE QAWOE

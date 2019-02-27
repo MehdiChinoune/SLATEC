@@ -273,29 +273,58 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
       l = l1
       GOTO 300
     ENDIF
-    500  ENDDO
-    its = its + 1
-    itn = itn - 1
-    IF ( .NOT.Matz ) lor1 = ld
-    !     .......... MAIN LOOP ..........
-    DO k = l, na
-      notlas = k/=na .AND. ish==2
-      k1 = k + 1
-      k2 = k + 2
-      km1 = MAX(k-1,l)
-      ll = MIN(en,k1+ish)
-      IF ( notlas ) THEN
-        !     .......... ZERO A(K+1,K-1) AND A(K+2,K-1) ..........
-        IF ( k/=l ) THEN
-          a1 = A(k,km1)
-          a2 = A(k1,km1)
-          a3 = A(k2,km1)
-        ENDIF
-        s = ABS(a1) + ABS(a2) + ABS(a3)
-        IF ( s==0.0E0 ) CYCLE
-        u1 = a1/s
-        u2 = a2/s
-        u3 = a3/s
+    500 CONTINUE
+  ENDDO
+  its = its + 1
+  itn = itn - 1
+  IF ( .NOT.Matz ) lor1 = ld
+  !     .......... MAIN LOOP ..........
+  DO k = l, na
+    notlas = k/=na .AND. ish==2
+    k1 = k + 1
+    k2 = k + 2
+    km1 = MAX(k-1,l)
+    ll = MIN(en,k1+ish)
+    IF ( notlas ) THEN
+      !     .......... ZERO A(K+1,K-1) AND A(K+2,K-1) ..........
+      IF ( k/=l ) THEN
+        a1 = A(k,km1)
+        a2 = A(k1,km1)
+        a3 = A(k2,km1)
+      ENDIF
+      s = ABS(a1) + ABS(a2) + ABS(a3)
+      IF ( s==0.0E0 ) CYCLE
+      u1 = a1/s
+      u2 = a2/s
+      u3 = a3/s
+      r = SIGN(SQRT(u1*u1+u2*u2+u3*u3),u1)
+      v1 = -(u1+r)/r
+      v2 = -u2/r
+      v3 = -u3/r
+      u2 = v2/v1
+      u3 = v3/v1
+      !
+      DO j = km1, enorn
+        t = A(k,j) + u2*A(k1,j) + u3*A(k2,j)
+        A(k,j) = A(k,j) + t*v1
+        A(k1,j) = A(k1,j) + t*v2
+        A(k2,j) = A(k2,j) + t*v3
+        t = B(k,j) + u2*B(k1,j) + u3*B(k2,j)
+        B(k,j) = B(k,j) + t*v1
+        B(k1,j) = B(k1,j) + t*v2
+        B(k2,j) = B(k2,j) + t*v3
+      ENDDO
+      !
+      IF ( k/=l ) THEN
+        A(k1,km1) = 0.0E0
+        A(k2,km1) = 0.0E0
+      ENDIF
+      !     .......... ZERO B(K+2,K+1) AND B(K+2,K) ..........
+      s = ABS(B(k2,k2)) + ABS(B(k2,k1)) + ABS(B(k2,k))
+      IF ( s/=0.0E0 ) THEN
+        u1 = B(k2,k2)/s
+        u2 = B(k2,k1)/s
+        u3 = B(k2,k)/s
         r = SIGN(SQRT(u1*u1+u2*u2+u3*u3),u1)
         v1 = -(u1+r)/r
         v2 = -u2/r
@@ -303,115 +332,87 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
         u2 = v2/v1
         u3 = v3/v1
         !
-        DO j = km1, enorn
-          t = A(k,j) + u2*A(k1,j) + u3*A(k2,j)
-          A(k,j) = A(k,j) + t*v1
-          A(k1,j) = A(k1,j) + t*v2
-          A(k2,j) = A(k2,j) + t*v3
-          t = B(k,j) + u2*B(k1,j) + u3*B(k2,j)
-          B(k,j) = B(k,j) + t*v1
-          B(k1,j) = B(k1,j) + t*v2
-          B(k2,j) = B(k2,j) + t*v3
-        ENDDO
-        !
-        IF ( k/=l ) THEN
-          A(k1,km1) = 0.0E0
-          A(k2,km1) = 0.0E0
-        ENDIF
-        !     .......... ZERO B(K+2,K+1) AND B(K+2,K) ..........
-        s = ABS(B(k2,k2)) + ABS(B(k2,k1)) + ABS(B(k2,k))
-        IF ( s/=0.0E0 ) THEN
-          u1 = B(k2,k2)/s
-          u2 = B(k2,k1)/s
-          u3 = B(k2,k)/s
-          r = SIGN(SQRT(u1*u1+u2*u2+u3*u3),u1)
-          v1 = -(u1+r)/r
-          v2 = -u2/r
-          v3 = -u3/r
-          u2 = v2/v1
-          u3 = v3/v1
-          !
-          DO i = lor1, ll
-            t = A(i,k2) + u2*A(i,k1) + u3*A(i,k)
-            A(i,k2) = A(i,k2) + t*v1
-            A(i,k1) = A(i,k1) + t*v2
-            A(i,k) = A(i,k) + t*v3
-            t = B(i,k2) + u2*B(i,k1) + u3*B(i,k)
-            B(i,k2) = B(i,k2) + t*v1
-            B(i,k1) = B(i,k1) + t*v2
-            B(i,k) = B(i,k) + t*v3
-          ENDDO
-          !
-          B(k2,k) = 0.0E0
-          B(k2,k1) = 0.0E0
-          IF ( Matz ) THEN
-            !
-            DO i = 1, N
-              t = Z(i,k2) + u2*Z(i,k1) + u3*Z(i,k)
-              Z(i,k2) = Z(i,k2) + t*v1
-              Z(i,k1) = Z(i,k1) + t*v2
-              Z(i,k) = Z(i,k) + t*v3
-            ENDDO
-          ENDIF
-        ENDIF
-      ELSE
-        !     .......... ZERO A(K+1,K-1) ..........
-        IF ( k/=l ) THEN
-          a1 = A(k,km1)
-          a2 = A(k1,km1)
-        ENDIF
-        s = ABS(a1) + ABS(a2)
-        IF ( s==0.0E0 ) EXIT
-        u1 = a1/s
-        u2 = a2/s
-        r = SIGN(SQRT(u1*u1+u2*u2),u1)
-        v1 = -(u1+r)/r
-        v2 = -u2/r
-        u2 = v2/v1
-        !
-        DO j = km1, enorn
-          t = A(k,j) + u2*A(k1,j)
-          A(k,j) = A(k,j) + t*v1
-          A(k1,j) = A(k1,j) + t*v2
-          t = B(k,j) + u2*B(k1,j)
-          B(k,j) = B(k,j) + t*v1
-          B(k1,j) = B(k1,j) + t*v2
-        ENDDO
-        !
-        IF ( k/=l ) A(k1,km1) = 0.0E0
-      ENDIF
-      !     .......... ZERO B(K+1,K) ..........
-      s = ABS(B(k1,k1)) + ABS(B(k1,k))
-      IF ( s/=0.0E0 ) THEN
-        u1 = B(k1,k1)/s
-        u2 = B(k1,k)/s
-        r = SIGN(SQRT(u1*u1+u2*u2),u1)
-        v1 = -(u1+r)/r
-        v2 = -u2/r
-        u2 = v2/v1
-        !
         DO i = lor1, ll
-          t = A(i,k1) + u2*A(i,k)
-          A(i,k1) = A(i,k1) + t*v1
-          A(i,k) = A(i,k) + t*v2
-          t = B(i,k1) + u2*B(i,k)
-          B(i,k1) = B(i,k1) + t*v1
-          B(i,k) = B(i,k) + t*v2
+          t = A(i,k2) + u2*A(i,k1) + u3*A(i,k)
+          A(i,k2) = A(i,k2) + t*v1
+          A(i,k1) = A(i,k1) + t*v2
+          A(i,k) = A(i,k) + t*v3
+          t = B(i,k2) + u2*B(i,k1) + u3*B(i,k)
+          B(i,k2) = B(i,k2) + t*v1
+          B(i,k1) = B(i,k1) + t*v2
+          B(i,k) = B(i,k) + t*v3
         ENDDO
         !
-        B(k1,k) = 0.0E0
+        B(k2,k) = 0.0E0
+        B(k2,k1) = 0.0E0
         IF ( Matz ) THEN
           !
           DO i = 1, N
-            t = Z(i,k1) + u2*Z(i,k)
-            Z(i,k1) = Z(i,k1) + t*v1
-            Z(i,k) = Z(i,k) + t*v2
+            t = Z(i,k2) + u2*Z(i,k1) + u3*Z(i,k)
+            Z(i,k2) = Z(i,k2) + t*v1
+            Z(i,k1) = Z(i,k1) + t*v2
+            Z(i,k) = Z(i,k) + t*v3
           ENDDO
         ENDIF
       ENDIF
+    ELSE
+      !     .......... ZERO A(K+1,K-1) ..........
+      IF ( k/=l ) THEN
+        a1 = A(k,km1)
+        a2 = A(k1,km1)
+      ENDIF
+      s = ABS(a1) + ABS(a2)
+      IF ( s==0.0E0 ) EXIT
+      u1 = a1/s
+      u2 = a2/s
+      r = SIGN(SQRT(u1*u1+u2*u2),u1)
+      v1 = -(u1+r)/r
+      v2 = -u2/r
+      u2 = v2/v1
       !
-    ENDDO
-    !     .......... END QZ STEP ..........
-    GOTO 200
-      99999 CONTINUE
-  END SUBROUTINE QZIT
+      DO j = km1, enorn
+        t = A(k,j) + u2*A(k1,j)
+        A(k,j) = A(k,j) + t*v1
+        A(k1,j) = A(k1,j) + t*v2
+        t = B(k,j) + u2*B(k1,j)
+        B(k,j) = B(k,j) + t*v1
+        B(k1,j) = B(k1,j) + t*v2
+      ENDDO
+      !
+      IF ( k/=l ) A(k1,km1) = 0.0E0
+    ENDIF
+    !     .......... ZERO B(K+1,K) ..........
+    s = ABS(B(k1,k1)) + ABS(B(k1,k))
+    IF ( s/=0.0E0 ) THEN
+      u1 = B(k1,k1)/s
+      u2 = B(k1,k)/s
+      r = SIGN(SQRT(u1*u1+u2*u2),u1)
+      v1 = -(u1+r)/r
+      v2 = -u2/r
+      u2 = v2/v1
+      !
+      DO i = lor1, ll
+        t = A(i,k1) + u2*A(i,k)
+        A(i,k1) = A(i,k1) + t*v1
+        A(i,k) = A(i,k) + t*v2
+        t = B(i,k1) + u2*B(i,k)
+        B(i,k1) = B(i,k1) + t*v1
+        B(i,k) = B(i,k) + t*v2
+      ENDDO
+      !
+      B(k1,k) = 0.0E0
+      IF ( Matz ) THEN
+        !
+        DO i = 1, N
+          t = Z(i,k1) + u2*Z(i,k)
+          Z(i,k1) = Z(i,k1) + t*v1
+          Z(i,k) = Z(i,k) + t*v2
+        ENDDO
+      ENDIF
+    ENDIF
+    !
+  ENDDO
+  !     .......... END QZ STEP ..........
+  GOTO 200
+  99999 CONTINUE
+END SUBROUTINE QZIT

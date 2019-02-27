@@ -44,7 +44,7 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
       ENDDO
     ELSE
       WRITE (LUN,99001)
-      99001     FORMAT (' *** SIGN NOT 0, +1 OR -1 IN CALL TO MPNZR,',&
+      99001 FORMAT (' *** SIGN NOT 0, +1 OR -1 IN CALL TO MPNZR,',&
         ' POSSIBLE OVERWRITING PROBLEM ***')
       CALL MPERR
     ENDIF
@@ -90,21 +90,22 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
       ENDIF
     ENDIF
     ! ROUND
-    150    DO j = 1, T
-    i = T + 1 - j
-    R(i) = R(i) + 1
-    IF ( R(i)<B ) GOTO 200
-    R(i) = 0
-  ENDDO
-  ! EXCEPTIONAL CASE, ROUNDED UP TO .10000...
-  Re = Re + 1
-  R(1) = 1
+    150 CONTINUE
+    DO j = 1, T
+      i = T + 1 - j
+      R(i) = R(i) + 1
+      IF ( R(i)<B ) GOTO 200
+      R(i) = 0
+    ENDDO
+    ! EXCEPTIONAL CASE, ROUNDED UP TO .10000...
+    Re = Re + 1
+    R(1) = 1
   ENDIF
   ! CHECK FOR OVERFLOW
   200 CONTINUE
   IF ( Re>M ) THEN
     WRITE (LUN,99002)
-    99002   FORMAT (' *** OVERFLOW OCCURRED IN MPNZR ***')
+    99002 FORMAT (' *** OVERFLOW OCCURRED IN MPNZR ***')
     CALL MPOVFL(Z)
     RETURN
     ! CHECK FOR UNDERFLOW
@@ -121,4 +122,4 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
   ENDDO
   RETURN
   99999 CONTINUE
-  END SUBROUTINE MPNZR
+END SUBROUTINE MPNZR

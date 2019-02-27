@@ -174,142 +174,143 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
     !                TO ANY PREVIOUS EIGENVALUE ..........
     50     rlambd = rlambd + eps3
     !     .......... FOR I=K-1 STEP -1 UNTIL 1 DO -- ..........
-    100    DO ii = 1, km1
-    i = k - ii
-    IF ( Select(i).AND.ABS(Wr(i)-rlambd)<eps3.AND.ABS(Wi(i)-ilambd)<eps3 )&
-      GOTO 50
-  ENDDO
-  !
-  Wr(k) = rlambd
-  !     .......... FORM UPPER HESSENBERG (AR,AI)-(RLAMBD,ILAMBD)*I
-  !                AND INITIAL COMPLEX VECTOR ..........
-  150    mp = 1
-  !
-  DO i = 1, uk
-    !
-    DO j = mp, uk
-      Rm1(i,j) = Ar(i,j)
-      Rm2(i,j) = Ai(i,j)
+    100 CONTINUE
+    DO ii = 1, km1
+      i = k - ii
+      IF ( Select(i).AND.ABS(Wr(i)-rlambd)<eps3.AND.ABS(Wi(i)-ilambd)<eps3 )&
+        GOTO 50
     ENDDO
     !
-    Rm1(i,i) = Rm1(i,i) - rlambd
-    Rm2(i,i) = Rm2(i,i) - ilambd
-    mp = i
-    Rv1(i) = eps3
-  ENDDO
-  !     .......... TRIANGULAR DECOMPOSITION WITH INTERCHANGES,
-  !                REPLACING ZERO PIVOTS BY EPS3 ..........
-  IF ( uk/=1 ) THEN
-    !
-    DO i = 2, uk
-      mp = i - 1
-      IF ( PYTHAG(Rm1(i,mp),Rm2(i,mp))>PYTHAG(Rm1(mp,mp),Rm2(mp,mp)) )&
-          THEN
-        !
-        DO j = mp, uk
-          y = Rm1(i,j)
-          Rm1(i,j) = Rm1(mp,j)
-          Rm1(mp,j) = y
-          y = Rm2(i,j)
-          Rm2(i,j) = Rm2(mp,j)
-          Rm2(mp,j) = y
-        ENDDO
-      ENDIF
-      !
-      IF ( Rm1(mp,mp)==0.0E0.AND.Rm2(mp,mp)==0.0E0 ) Rm1(mp,mp) = eps3
-      CALL CDIV(Rm1(i,mp),Rm2(i,mp),Rm1(mp,mp),Rm2(mp,mp),x,y)
-      IF ( x/=0.0E0.OR.y/=0.0E0 ) THEN
-        !
-        DO j = i, uk
-          Rm1(i,j) = Rm1(i,j) - x*Rm1(mp,j) + y*Rm2(mp,j)
-          Rm2(i,j) = Rm2(i,j) - x*Rm2(mp,j) - y*Rm1(mp,j)
-        ENDDO
-      ENDIF
-      !
-    ENDDO
-  ENDIF
-  !
-  IF ( Rm1(uk,uk)==0.0E0.AND.Rm2(uk,uk)==0.0E0 ) Rm1(uk,uk) = eps3
-  its = 0
-  DO
-    !     .......... BACK SUBSTITUTION
-    !                FOR I=UK STEP -1 UNTIL 1 DO -- ..........
-    DO ii = 1, uk
-      i = uk + 1 - ii
-      x = Rv1(i)
-      y = 0.0E0
-      IF ( i/=uk ) THEN
-        ip1 = i + 1
-        !
-        DO j = ip1, uk
-          x = x - Rm1(i,j)*Rv1(j) + Rm2(i,j)*Rv2(j)
-          y = y - Rm1(i,j)*Rv2(j) - Rm2(i,j)*Rv1(j)
-        ENDDO
-      ENDIF
-      !
-      CALL CDIV(x,y,Rm1(i,i),Rm2(i,i),Rv1(i),Rv2(i))
-    ENDDO
-    !     .......... ACCEPTANCE TEST FOR EIGENVECTOR
-    !                AND NORMALIZATION ..........
-    its = its + 1
-    norm = 0.0E0
-    normv = 0.0E0
+    Wr(k) = rlambd
+    !     .......... FORM UPPER HESSENBERG (AR,AI)-(RLAMBD,ILAMBD)*I
+    !                AND INITIAL COMPLEX VECTOR ..........
+    150    mp = 1
     !
     DO i = 1, uk
-      x = PYTHAG(Rv1(i),Rv2(i))
-      IF ( normv<x ) THEN
-        normv = x
-        j = i
-      ENDIF
-      norm = norm + x
-    ENDDO
-    !
-    IF ( norm>=growto ) THEN
-      !     .......... ACCEPT VECTOR ..........
-      x = Rv1(j)
-      y = Rv2(j)
       !
-      DO i = 1, uk
-        CALL CDIV(Rv1(i),Rv2(i),x,y,Zr(i,s),Zi(i,s))
+      DO j = mp, uk
+        Rm1(i,j) = Ar(i,j)
+        Rm2(i,j) = Ai(i,j)
       ENDDO
       !
-      IF ( uk==N ) GOTO 200
-      j = uk + 1
-      EXIT
-      !     .......... IN-LINE PROCEDURE FOR CHOOSING
-      !                A NEW STARTING VECTOR ..........
-    ELSEIF ( its>=uk ) THEN
-      !     .......... SET ERROR -- UNACCEPTED EIGENVECTOR ..........
-      j = 1
-      Ierr = -k
-      EXIT
-    ELSE
-      x = ukroot
-      y = eps3/(x+1.0E0)
-      Rv1(1) = eps3
+      Rm1(i,i) = Rm1(i,i) - rlambd
+      Rm2(i,i) = Rm2(i,i) - ilambd
+      mp = i
+      Rv1(i) = eps3
+    ENDDO
+    !     .......... TRIANGULAR DECOMPOSITION WITH INTERCHANGES,
+    !                REPLACING ZERO PIVOTS BY EPS3 ..........
+    IF ( uk/=1 ) THEN
       !
       DO i = 2, uk
-        Rv1(i) = y
+        mp = i - 1
+        IF ( PYTHAG(Rm1(i,mp),Rm2(i,mp))>PYTHAG(Rm1(mp,mp),Rm2(mp,mp)) )&
+            THEN
+          !
+          DO j = mp, uk
+            y = Rm1(i,j)
+            Rm1(i,j) = Rm1(mp,j)
+            Rm1(mp,j) = y
+            y = Rm2(i,j)
+            Rm2(i,j) = Rm2(mp,j)
+            Rm2(mp,j) = y
+          ENDDO
+        ENDIF
+        !
+        IF ( Rm1(mp,mp)==0.0E0.AND.Rm2(mp,mp)==0.0E0 ) Rm1(mp,mp) = eps3
+        CALL CDIV(Rm1(i,mp),Rm2(i,mp),Rm1(mp,mp),Rm2(mp,mp),x,y)
+        IF ( x/=0.0E0.OR.y/=0.0E0 ) THEN
+          !
+          DO j = i, uk
+            Rm1(i,j) = Rm1(i,j) - x*Rm1(mp,j) + y*Rm2(mp,j)
+            Rm2(i,j) = Rm2(i,j) - x*Rm2(mp,j) - y*Rm1(mp,j)
+          ENDDO
+        ENDIF
+        !
+      ENDDO
+    ENDIF
+    !
+    IF ( Rm1(uk,uk)==0.0E0.AND.Rm2(uk,uk)==0.0E0 ) Rm1(uk,uk) = eps3
+    its = 0
+    DO
+      !     .......... BACK SUBSTITUTION
+      !                FOR I=UK STEP -1 UNTIL 1 DO -- ..........
+      DO ii = 1, uk
+        i = uk + 1 - ii
+        x = Rv1(i)
+        y = 0.0E0
+        IF ( i/=uk ) THEN
+          ip1 = i + 1
+          !
+          DO j = ip1, uk
+            x = x - Rm1(i,j)*Rv1(j) + Rm2(i,j)*Rv2(j)
+            y = y - Rm1(i,j)*Rv2(j) - Rm2(i,j)*Rv1(j)
+          ENDDO
+        ENDIF
+        !
+        CALL CDIV(x,y,Rm1(i,i),Rm2(i,i),Rv1(i),Rv2(i))
+      ENDDO
+      !     .......... ACCEPTANCE TEST FOR EIGENVECTOR
+      !                AND NORMALIZATION ..........
+      its = its + 1
+      norm = 0.0E0
+      normv = 0.0E0
+      !
+      DO i = 1, uk
+        x = PYTHAG(Rv1(i),Rv2(i))
+        IF ( normv<x ) THEN
+          normv = x
+          j = i
+        ENDIF
+        norm = norm + x
       ENDDO
       !
-      j = uk - its + 1
-      Rv1(j) = Rv1(j) - eps3*x
-    ENDIF
-  ENDDO
-  !     .......... SET REMAINING VECTOR COMPONENTS TO ZERO ..........
-  DO i = j, N
-    Zr(i,s) = 0.0E0
-    Zi(i,s) = 0.0E0
+      IF ( norm>=growto ) THEN
+        !     .......... ACCEPT VECTOR ..........
+        x = Rv1(j)
+        y = Rv2(j)
+        !
+        DO i = 1, uk
+          CALL CDIV(Rv1(i),Rv2(i),x,y,Zr(i,s),Zi(i,s))
+        ENDDO
+        !
+        IF ( uk==N ) GOTO 200
+        j = uk + 1
+        EXIT
+        !     .......... IN-LINE PROCEDURE FOR CHOOSING
+        !                A NEW STARTING VECTOR ..........
+      ELSEIF ( its>=uk ) THEN
+        !     .......... SET ERROR -- UNACCEPTED EIGENVECTOR ..........
+        j = 1
+        Ierr = -k
+        EXIT
+      ELSE
+        x = ukroot
+        y = eps3/(x+1.0E0)
+        Rv1(1) = eps3
+        !
+        DO i = 2, uk
+          Rv1(i) = y
+        ENDDO
+        !
+        j = uk - its + 1
+        Rv1(j) = Rv1(j) - eps3*x
+      ENDIF
+    ENDDO
+    !     .......... SET REMAINING VECTOR COMPONENTS TO ZERO ..........
+    DO i = j, N
+      Zr(i,s) = 0.0E0
+      Zi(i,s) = 0.0E0
+    ENDDO
+    !
+    200    s = s + 1
   ENDDO
   !
-  200    s = s + 1
-ENDDO
-!
-GOTO 400
-!     .......... SET ERROR -- UNDERESTIMATE OF EIGENVECTOR
-!                SPACE REQUIRED ..........
-300 CONTINUE
-IF ( Ierr/=0 ) Ierr = Ierr - N
-IF ( Ierr==0 ) Ierr = -(2*N+1)
-400  M = s - 1
+  GOTO 400
+  !     .......... SET ERROR -- UNDERESTIMATE OF EIGENVECTOR
+  !                SPACE REQUIRED ..........
+  300 CONTINUE
+  IF ( Ierr/=0 ) Ierr = Ierr - N
+  IF ( Ierr==0 ) Ierr = -(2*N+1)
+  400  M = s - 1
 END SUBROUTINE CINVIT

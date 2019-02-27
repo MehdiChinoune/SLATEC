@@ -80,7 +80,7 @@ CONTAINS
                             IF ( Kprint>=2 ) WRITE (Lun,99002) kode, m, n, &
                               nu, ix, i, x, er, tol, y(i), y(i+1), &
                               w(i), w(i+1)
-                            99002                         FORMAT (/' ERROR IN QUICK CHECK OF WRONSKIAN',&
+                            99002 FORMAT (/' ERROR IN QUICK CHECK OF WRONSKIAN',&
                               1P/' KODE = ',I1,', M = ',I1,', N = ',I1,&
                               ', NU = ',I1,', IX = ',I1,', I = ',&
                               I1/' X = ',E14.7,', ER   = ',E14.7,&
@@ -115,7 +115,7 @@ CONTAINS
           Ipass = 0
           IF ( Kprint>=2 ) WRITE (Lun,99003) i, kode, fnu, x, er, tol, &
             y(1), y(2), w(1), w(2)
-          99003       FORMAT (/' ERROR IN QUICK CHECK OF SMALL X AND ORDER',1P/' I = ',I1,&
+          99003 FORMAT (/' ERROR IN QUICK CHECK OF SMALL X AND ORDER',1P/' I = ',I1,&
             ', KODE = ',I1,', FNU = ',E14.7/' X = ',E14.7,', ER = ',&
             E14.7,', TOL = ',E14.7/' Y(1) = ',E14.7,', Y(2) = ',&
             E14.7/' W(1) = ',E14.7,', W(2) = ',E14.7)
@@ -154,7 +154,7 @@ CONTAINS
                 Ipass = 0
                 IF ( Kprint>=2 ) WRITE (Lun,99004) k, n, i, fnup, x, er, &
                   tol, y(1), y(2), w(1), w(2)
-                99004             FORMAT (/' ERROR IN QUICK CHECK OF LARGE X AND ORDER',&
+                99004 FORMAT (/' ERROR IN QUICK CHECK OF LARGE X AND ORDER',&
                   1P/' K = ',I1,', N = ',I1,', I = ',I1,', FNUP = ',&
                   E14.7/' X = ',E14.7,', ER = ',E14.7,', TOL = ',&
                   E14.7/' Y(1) = ',E14.7,', Y(2) = ',E14.7/' W(1) = ',&
@@ -177,7 +177,7 @@ CONTAINS
     IF ( ny/=3 ) THEN
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99005)
-      99005   FORMAT (/' ERROR IN DBESI UNDERFLOW TEST'/)
+      99005 FORMAT (/' ERROR IN DBESI UNDERFLOW TEST'/)
     ENDIF
     !
     x = LOG(D1MACH(2)/10.0D0) + 20.0D0
@@ -187,7 +187,7 @@ CONTAINS
     IF ( nw/=3 ) THEN
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99006)
-      99006   FORMAT (/' ERROR IN DBESK UNDERFLOW TEST'/)
+      99006 FORMAT (/' ERROR IN DBESK UNDERFLOW TEST'/)
     ENDIF
     !
     !     Trigger 10 error conditions
@@ -253,11 +253,11 @@ CONTAINS
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99008)
-        99008     FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+        99008 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99009)
-      99009   FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
+      99009 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     ENDIF
     !
     IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99010)
@@ -340,7 +340,7 @@ CONTAINS
                       Ipass = 0
                       IF ( Kprint>=2 ) WRITE (Lun,99002) m, n, nu, ix, i, &
                         x, er, tol, y(i), y(i+1), w(i), w(i+1)
-                      99002                   FORMAT (/' ERROR IN QUICK CHECK OF WRONSKIAN',&
+                      99002 FORMAT (/' ERROR IN QUICK CHECK OF WRONSKIAN',&
                         1P/' M = ',I1,', N = ',I1,', NU = ',I1,&
                         ', IX = ',I1,', I = ',I1,/' X = ',E14.7,&
                         ', ER   = ',E14.7,', TOL = ',E14.7/' Y(I) = ',&
@@ -371,7 +371,7 @@ CONTAINS
         Ipass = 0
         IF ( Kprint>=2 ) WRITE (Lun,99003) i, fnu, x, er, tol, y(i), &
           y(i+1), w(i), w(i+1)
-        99003     FORMAT (/' ERROR IN QUICK CHECK OF SMALL X AND ORDER',1P/' I = ',I1,&
+        99003 FORMAT (/' ERROR IN QUICK CHECK OF SMALL X AND ORDER',1P/' I = ',I1,&
           ',  FNU = ',E14.7/' X = ',E14.7,', ER = ',E14.7,', TOL = ',&
           E14.7/' Y(1) = ',E14.7,', Y(2) = ',E14.7/' W(1) = ',E14.7,&
           ', W(2) = ',E14.7)
@@ -406,7 +406,7 @@ CONTAINS
               Ipass = 0
               IF ( Kprint>=2 ) WRITE (Lun,99004) k, n, i, x, er, tol, &
                 y(1), y(2), w(1), w(2)
-              99004           FORMAT (/' ERROR IN QUICK CHECK OF LARGE X AND ORDER',&
+              99004 FORMAT (/' ERROR IN QUICK CHECK OF LARGE X AND ORDER',&
                 1P/' K = ',I1,', N = ',I1,', I = ',I1/' X = ',E14.7,&
                 ', ER = ',E14.7,', TOL = ',E14.7/' Y(1) = ',E14.7,&
                 ', Y(2) = ',E14.7/' W(1) = ',E14.7,', W(2) = ',E14.7)
@@ -427,7 +427,7 @@ CONTAINS
     IF ( ny/=3 ) THEN
       Ipass = 0
       IF ( Kprint>=2 ) WRITE (Lun,99005)
-      99005   FORMAT (/' ERROR IN DBESJ UNDERFLOW TEST'/)
+      99005 FORMAT (/' ERROR IN DBESJ UNDERFLOW TEST'/)
     ENDIF
     !
     !     Trigger 7 error conditions
@@ -482,11 +482,11 @@ CONTAINS
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99007)
-        99007     FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+        99007 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99008)
-      99008   FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
+      99008 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     ENDIF
     !
     IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99009)
@@ -614,7 +614,7 @@ CONTAINS
               er = ABS((y(i)-en(i))/y(i))
               IF ( er>tol ) THEN
                 WRITE (Lun,99002)
-                99002             FORMAT (//' ERROR IN DEG8CK COMPARISON TEST'/)
+                99002 FORMAT (//' ERROR IN DEG8CK COMPARISON TEST'/)
                 Ipass = 0
                 GOTO 100
               ENDIF
@@ -645,7 +645,7 @@ CONTAINS
         Ipass = 0
         fatal = .TRUE.
         WRITE (Lun,99004) i
-        99004     FORMAT (' Error occurred with DO index I =',I2)
+        99004 FORMAT (' Error occurred with DO index I =',I2)
       ENDIF
       xx(i) = -xx(i)
     ENDDO
@@ -656,16 +656,16 @@ CONTAINS
       Ipass = 0
       fatal = .TRUE.
       WRITE (Lun,99005)
-      99005   FORMAT (' Error occurred with X = 0.0')
+      99005 FORMAT (' Error occurred with X = 0.0')
     ENDIF
     IF ( fatal ) THEN
       IF ( Kprint>=2 ) THEN
         WRITE (Lun,99006)
-        99006     FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
+        99006 FORMAT (/' AT LEAST ONE INCORRECT ARGUMENT TEST FAILED')
       ENDIF
     ELSEIF ( Kprint>=3 ) THEN
       WRITE (Lun,99007)
-      99007   FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
+      99007 FORMAT (/' ALL INCORRECT ARGUMENT TESTS PASSED')
     ENDIF
     !
     IF ( Ipass==1.AND.Kprint>=2 ) WRITE (Lun,99008)
@@ -777,10 +777,10 @@ PROGRAM TEST06
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST06 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST06 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST06  *************')
   ENDIF
   STOP

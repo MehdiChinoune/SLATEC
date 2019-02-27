@@ -639,18 +639,19 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
           !              .....................EXIT
           GOTO 200
         ENDIF
-        120      ENDDO
-      ELSE
-        !
-        !                       IF TOO CLOSE TO OUTPUT POINT,EXTRAPOLATE AND
-        !                       RETURN
-        !
-        DO k = 1, Neq
-          Y(k) = Y(k) + dt*Yp(k)
-        ENDDO
-        a = Tout
-        CALL DF(a,Y,Yp,Rpar,Ipar)
-        Ksteps = Ksteps + 1
+        120 CONTINUE
+      ENDDO
+    ELSE
+      !
+      !                       IF TOO CLOSE TO OUTPUT POINT,EXTRAPOLATE AND
+      !                       RETURN
+      !
+      DO k = 1, Neq
+        Y(k) = Y(k) + dt*Yp(k)
+      ENDDO
+      a = Tout
+      CALL DF(a,Y,Yp,Rpar,Ipar)
+      Ksteps = Ksteps + 1
     ENDIF
     !
     !                    INTERVAL MODE
@@ -687,4 +688,4 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     ENDIF
   ENDIF
   99999 CONTINUE
-  END SUBROUTINE DRKFS
+END SUBROUTINE DRKFS

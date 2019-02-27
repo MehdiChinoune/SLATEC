@@ -27,11 +27,11 @@ LOGICAL FUNCTION COMP(Ieract,Ierexp,Lout,Kprint)
   IF ( Ieract==Ierexp ) THEN
     COMP = .TRUE.
     IF ( Kprint>=3 ) WRITE (Lout,99001)
-    99001   FORMAT ('     OK.')
+    99001 FORMAT ('     OK.')
   ELSE
     COMP = .FALSE.
     IF ( Kprint>=3 ) WRITE (Lout,99002) Ieract
-    99002   FORMAT (' *** COMPARE FAILED -- IERR =',I5)
+    99002 FORMAT (' *** COMPARE FAILED -- IERR =',I5)
   ENDIF
   !
   !------------- LAST LINE OF COMP FOLLOWS -----------------------------

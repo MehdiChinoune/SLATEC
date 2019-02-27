@@ -229,22 +229,23 @@ CONTAINS
       ENDDO
       Ipass = 0
       EXIT
-      100  ENDDO
-      !
-      IF ( Kprint>=2 ) WRITE (Lun,99002) (isoln(i),ibasis(i),i=1,mrelas)
-      !
-      99002 FORMAT (/'     ISOLN    IBASIS'/(2I10))
-      !
-      IF ( Kprint>=2.OR.(Kprint==1.AND.Ipass/=1) ) CALL PASS(Lun,icnt,Ipass)
-      !
-      !     HERE IPASS=0 IF CODE FAILED QUICK CHECK;
-      !               =1 IF CODE PASSED QUICK CHECK.
-      !
-      IF ( Kprint>=1.AND.Ipass/=1 ) WRITE (Lun,99003)
-      99003 FORMAT (/' ************ DSPLP FAILED SOME TESTS ***************')
-      IF ( Kprint>=2.AND.Ipass==1 ) WRITE (Lun,99004)
-      99004 FORMAT (/' ************ DSPLP PASSED ALL TESTS ****************')
-      RETURN
+      100 CONTINUE
+    ENDDO
+    !
+    IF ( Kprint>=2 ) WRITE (Lun,99002) (isoln(i),ibasis(i),i=1,mrelas)
+    !
+    99002 FORMAT (/'     ISOLN    IBASIS'/(2I10))
+    !
+    IF ( Kprint>=2.OR.(Kprint==1.AND.Ipass/=1) ) CALL PASS(Lun,icnt,Ipass)
+    !
+    !     HERE IPASS=0 IF CODE FAILED QUICK CHECK;
+    !               =1 IF CODE PASSED QUICK CHECK.
+    !
+    IF ( Kprint>=1.AND.Ipass/=1 ) WRITE (Lun,99003)
+    99003 FORMAT (/' ************ DSPLP FAILED SOME TESTS ***************')
+    IF ( Kprint>=2.AND.Ipass==1 ) WRITE (Lun,99004)
+    99004 FORMAT (/' ************ DSPLP PASSED ALL TESTS ****************')
+    RETURN
   END SUBROUTINE DPLPQX
   !DECK DBOCQX
   SUBROUTINE DBOCQX(Lun,Kprint,Ipass)
@@ -487,10 +488,10 @@ PROGRAM TEST38
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST38 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST38 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST38 *************')
   ENDIF
   STOP

@@ -174,19 +174,20 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
         END SELECT
         GOTO 400
       ENDIF
-      320      SELECT CASE (j)
-    CASE (1)
+      320 CONTINUE
+      SELECT CASE (j)
+        CASE (1)
+          s = s*RADixl
+          GOTO 400
+        CASE (2)
+        CASE (3)
+          s = s*RADixl
+        CASE DEFAULT
+          GOTO 350
+      END SELECT
+      s = s*RADixl
       s = s*RADixl
       GOTO 400
-    CASE (2)
-    CASE (3)
-      s = s*RADixl
-    CASE DEFAULT
-      GOTO 350
-  END SELECT
-  s = s*RADixl
-  s = s*RADixl
-  GOTO 400
     ENDIF
     350    Z = s
     Iz = is
@@ -217,4 +218,4 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   ENDIF
   CALL XADJ(Z,Iz,Ierror)
   99999 CONTINUE
-  END SUBROUTINE XADD
+END SUBROUTINE XADD

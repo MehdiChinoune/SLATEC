@@ -156,7 +156,7 @@ CONTAINS
           ier
       ELSE
         WRITE (Lun,99002)
-        99002     FORMAT ('    L1',T31,'DRC3JJ VALUE',T67,'FORMULA VALUE')
+        99002 FORMAT ('    L1',T31,'DRC3JJ VALUE',T67,'FORMULA VALUE')
         DO index = 1, INT(l1max-l1min) + 1
           l1 = index+ l1min - 1
           WRITE (Lun,fmt) l1, thrcof(index), r3jj(index)
@@ -198,15 +198,15 @@ CONTAINS
       WRITE (Lun,*) ' VALUES CALCULATED BY EXPLICIT FORMULA FROM ', &
         'MESSIAH''S QUANTUM MECHANICS'
       WRITE (Lun,99003) l1, l2, l3
-      99003   FORMAT (' L1 = ',F5.1,'   L2 = ',F5.1,'   L3 = ',F5.1)
+      99003 FORMAT (' L1 = ',F5.1,'   L2 = ',F5.1,'   L3 = ',F5.1)
       WRITE (Lun,99004) m1
-      99004   FORMAT (' M1 = ',F5.1,'                M3 = -(M1+M2)')
+      99004 FORMAT (' M1 = ',F5.1,'                M3 = -(M1+M2)')
       IF ( ier/=0 ) THEN
         WRITE (Lun,*) ' ERROR RETURNED FROM SUBROUTINE ', 'DRC3JM: IER =', &
           ier
       ELSE
         WRITE (Lun,99005)
-        99005     FORMAT ('    M2',T31,'DRC3JM VALUE',T67,'FORMULA VALUE')
+        99005 FORMAT ('    M2',T31,'DRC3JM VALUE',T67,'FORMULA VALUE')
         DO index = 1, INT(m2max-m2min) + 1
           m2 = index+ m2min - 1
           WRITE (Lun,fmt) m2, thrcof(index), r3jm(index)
@@ -299,7 +299,7 @@ CONTAINS
           ier
       ELSE
         WRITE (Lun,99006)
-        99006     FORMAT ('    L1',T32,'DRC6J VALUE',T67,'FORMULA VALUE')
+        99006 FORMAT ('    L1',T32,'DRC6J VALUE',T67,'FORMULA VALUE')
         DO index = 1, INT(l1max-l1min) + 1
           l1 = index+ l1min - 1
           WRITE (Lun,fmt) l1, sixcof(index), r6j(index)
@@ -483,11 +483,11 @@ CONTAINS
         (ipass5==0) ) THEN
       Ipass = 0
       IF ( Kprint>=1 ) WRITE (Lun,99007)
-      99007   FORMAT (' ***** DQC36J  FAILED SOME TESTS *****')
+      99007 FORMAT (' ***** DQC36J  FAILED SOME TESTS *****')
     ELSE
       Ipass = 1
       IF ( Kprint>=2 ) WRITE (Lun,99008)
-      99008   FORMAT (' ***** DQC36J  PASSED ALL TESTS  *****')
+      99008 FORMAT (' ***** DQC36J  PASSED ALL TESTS  *****')
     ENDIF
     99009 FORMAT ('              L2 = ',F5.1,'   L3 = ',F5.1)
     99010 FORMAT (' M1 = ',F5.1,'   M2 = ',F5.1,'   M3 = ',F5.1)
@@ -565,10 +565,10 @@ PROGRAM TEST16
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST16 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST16 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST16  *************')
   ENDIF
   STOP

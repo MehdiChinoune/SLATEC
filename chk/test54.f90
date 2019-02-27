@@ -1302,10 +1302,10 @@ PROGRAM TEST54
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST54 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST54 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST54 *************')
   ENDIF
   STOP

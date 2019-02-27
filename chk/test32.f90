@@ -158,9 +158,9 @@ CONTAINS
       IF ( Kprint>=3 ) THEN
         IF ( iint==1 ) WRITE (Lout,99002)
         !
-        !  FORMATS.
+        ! FORMATS.
         !
-        99002     FORMAT (/10X,'CHFDV ACCURACY TEST')
+        99002 FORMAT (/10X,'CHFDV ACCURACY TEST')
         WRITE (Lout,'(/)')
         WRITE (Lout,99017) 'X1', x1, 'X2', x2
         WRITE (Lout,99017) 'F1', f1, 'F2', f2
@@ -168,7 +168,7 @@ CONTAINS
       ENDIF
       !
       IF ( Kprint>=2 ) WRITE (Lout,99003) x1, x2
-      99003   FORMAT (/10X,'INTERVAL = (',1P,E12.5,',',E12.5,' ):')
+      99003 FORMAT (/10X,'INTERVAL = (',1P,E12.5,',',E12.5,' ):')
       !
       !  COMPUTE FLOORS FOR RELATIVE ERRORS.
       !
@@ -196,14 +196,14 @@ CONTAINS
       !
       IF ( Kprint>=3 ) THEN
         WRITE (Lout,99004) next, aef, aef2, aed, aed2
-        99004     FORMAT (/' ERRORS AT ENDPOINTS:',40X,'(NEXT =',2I3,')'//1P,4X,'F1:',&
+        99004 FORMAT (/' ERRORS AT ENDPOINTS:',40X,'(NEXT =',2I3,')'//1P,4X,'F1:',&
           E13.5,4X,'F2:',E13.5,4X,'D1:',E13.5,4X,'D2:',E13.5)
         WRITE (Lout,99005) ref, ref2, red, red2
-        99005     FORMAT (1P,4(7X,E13.5))
+        99005 FORMAT (1P,4(7X,E13.5))
       ENDIF
       !
       IF ( failoc.AND.(Kprint>=2) ) WRITE (Lout,99006)
-      99006   FORMAT (/' ***** CHFDV FAILED TO REPRODUCE ENDPOINT VALUES.')
+      99006 FORMAT (/' ***** CHFDV FAILED TO REPRODUCE ENDPOINT VALUES.')
       !
       !  CHFEV SHOULD AGREE EXACTLY WITH CHFDV.
       !                     -------
@@ -214,7 +214,7 @@ CONTAINS
       Fail = Fail .OR. failoc
       !
       IF ( failoc.AND.(Kprint>=2) ) WRITE (Lout,99007)
-      99007   FORMAT (/' ***** CHFEV DOES NOT AGREE WITH CHFDV AT ENDPOINTS.')
+      99007 FORMAT (/' ***** CHFEV DOES NOT AGREE WITH CHFDV AT ENDPOINTS.')
       !
       !  EVALUATE AT NPTS 'UNIFORMLY RANDOM' POINTS IN (X1,X2).
       !     THIS VERSION EXTENDS EVALUATION DOMAIN BY ADDING 4 SUBINTERVALS
@@ -230,7 +230,7 @@ CONTAINS
       IF ( ierr/=0 ) THEN
         failoc = .TRUE.
         IF ( Kprint>=2 ) WRITE (Lout,99008) ierr
-        99008     FORMAT (/' ***** ERROR ***** CHFDV RETURNED IERR =',I5)
+        99008 FORMAT (/' ***** ERROR ***** CHFDV RETURNED IERR =',I5)
       ELSE
         !
         !     CUMULATE LARGEST AND SMALLEST ERRORS FOR SUMMARY.
@@ -305,7 +305,7 @@ CONTAINS
       !
       IF ( Kprint>=3 ) THEN
         WRITE (Lout,99009) Npts - 10, next
-        99009     FORMAT (/' ERRORS AT ',I5,' INTERIOR POINTS + 10 OUTSIDE:',15X,&
+        99009 FORMAT (/' ERRORS AT ',I5,' INTERIOR POINTS + 10 OUTSIDE:',15X,&
           '(NEXT =',2I3,')'//30X,'FUNCTION',17X,'DERIVATIVE'/15X,&
           2(11X,'ABS',9X,'REL'))
         !
@@ -320,10 +320,10 @@ CONTAINS
           IF ( fermax>tol2 ) WRITE (Lout,99020) 'F', fermax, tol2
           IF ( dermax>tol2 ) WRITE (Lout,99020) 'D', dermax, tol2
           IF ( failnx ) WRITE (Lout,99010) next
-          99010       FORMAT (/' ***** REPORTED NEXT =',2I5,'   RATHER THAN    4    6')
+          99010 FORMAT (/' ***** REPORTED NEXT =',2I5,'   RATHER THAN    4    6')
         ELSE
           WRITE (Lout,99011)
-          99011       FORMAT (/' CHFDV RESULTS OK.')
+          99011 FORMAT (/' CHFDV RESULTS OK.')
         ENDIF
       ENDIF
       !
@@ -335,7 +335,7 @@ CONTAINS
       IF ( ierr/=0 ) THEN
         failoc = .TRUE.
         IF ( Kprint>=2 ) WRITE (Lout,99012) ierr
-        99012     FORMAT (/' ***** ERROR ***** CHFEV RETURNED IERR =',I5)
+        99012 FORMAT (/' ***** ERROR ***** CHFEV RETURNED IERR =',I5)
       ELSE
         aefmax = ABS(Fev2(1)-Fev(1))
         xafmax = Xev(1)
@@ -351,15 +351,15 @@ CONTAINS
         IF ( Kprint>=2 ) THEN
           IF ( failoc ) THEN
             WRITE (Lout,99013)
-            99013         FORMAT (/' ***** CHFEV DID NOT AGREE WITH CHFDV:')
+            99013 FORMAT (/' ***** CHFEV DID NOT AGREE WITH CHFDV:')
             IF ( aefmax/=zero ) WRITE (Lout,99014) aefmax, xafmax
-            99014         FORMAT (7X,'MAXIMUM DIFFERENCE ',1P,E12.5,'; OCCURRED AT X =',&
+            99014 FORMAT (7X,'MAXIMUM DIFFERENCE ',1P,E12.5,'; OCCURRED AT X =',&
               E12.5)
             IF ( failnx ) WRITE (Lout,99015) next2, next
-            99015         FORMAT (7X,'REPORTED NEXT =',2I3,'   RATHER THAN ',2I3)
+            99015 FORMAT (7X,'REPORTED NEXT =',2I3,'   RATHER THAN ',2I3)
           ELSE
             WRITE (Lout,99016)
-            99016         FORMAT (/' CHFEV AGREES WITH CHFDV.')
+            99016 FORMAT (/' CHFEV AGREES WITH CHFDV.')
           ENDIF
         ENDIF
       ENDIF
@@ -454,7 +454,7 @@ CONTAINS
     !
     IF ( Kprint>=3 ) WRITE (Lout,99001)
     !
-    !  FORMATS.
+    ! FORMATS.
     !
     99001 FORMAT ('1'//10X,'TEST ERROR RETURNS')
     IF ( Kprint>=2 ) WRITE (Lout,99002)
@@ -530,11 +530,11 @@ CONTAINS
     IF ( nerr==0 ) THEN
       Fail = .FALSE.
       IF ( Kprint>=2 ) WRITE (Lout,99003)
-      99003   FORMAT (/' ALL ERROR RETURNS OK.')
+      99003 FORMAT (/' ALL ERROR RETURNS OK.')
     ELSE
       Fail = .TRUE.
       IF ( Kprint>=2 ) WRITE (Lout,99004) nerr
-      99004   FORMAT (//' ***** TROUBLE IN EVERCK *****'//5X,I5,&
+      99004 FORMAT (//' ***** TROUBLE IN EVERCK *****'//5X,I5,&
         ' TESTS FAILED TO GIVE EXPECTED RESULTS.')
     ENDIF
     !
@@ -663,7 +663,7 @@ CONTAINS
     !
     IF ( Kprint>=3 ) WRITE (Lout,99001)
     !
-    !  FORMATS.
+    ! FORMATS.
     !
     99001 FORMAT ('1'//10X,'TEST PCHFE AND PCHFD')
     IF ( Kprint>=2 ) WRITE (Lout,99002)
@@ -951,7 +951,7 @@ CONTAINS
     !***FIRST EXECUTABLE STATEMENT  PCHQK1
     IF ( Kprint>=2 ) WRITE (Lun,99001) Kprint
     !
-    !  FORMATS.
+    ! FORMATS.
     !
     99001 FORMAT ('1'/' ------------  PCHIP QUICK CHECK OUTPUT',' ------------'//&
       20X,'( KPRINT =',I2,' )')
@@ -1000,12 +1000,12 @@ CONTAINS
     IF ( ifail==0 ) THEN
       Ipass = 1
       IF ( Kprint>=2 ) WRITE (Lun,99003)
-      99003   FORMAT (/' ------------  PCHIP PASSED  ALL EVALUATION TESTS',&
+      99003 FORMAT (/' ------------  PCHIP PASSED  ALL EVALUATION TESTS',&
         ' ------------')
     ELSE
       Ipass = 0
       IF ( Kprint>=1 ) WRITE (Lun,99004)
-      99004   FORMAT (/' ************  PCHIP FAILED SOME EVALUATION TESTS',&
+      99004 FORMAT (/' ************  PCHIP FAILED SOME EVALUATION TESTS',&
         ' ************')
     ENDIF
     !
@@ -1113,7 +1113,7 @@ CONTAINS
     !
     IF ( Kprint>=3 ) WRITE (Lun,99001)
     !
-    !  FORMATS.
+    ! FORMATS.
     !
     99001 FORMAT ('1'//10X,'TEST PCHIP INTEGRATORS')
     IF ( Kprint>=2 ) WRITE (Lun,99002)
@@ -1142,7 +1142,7 @@ CONTAINS
           IF ( fail ) THEN
             WRITE (Lun,99005) a(i), b(i), ierr, true, calc, error ,&
               ierexp(i)
-            99005         FORMAT (2F6.1,I5,1P,2E20.10,E15.5,'  (',I1,') *****')
+            99005 FORMAT (2F6.1,I5,1P,2E20.10,E15.5,'  (',I1,') *****')
           ELSE
             WRITE (Lun,99010) a(i), b(i), ierr, true, calc, error
           ENDIF
@@ -1165,10 +1165,10 @@ CONTAINS
     !
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99006) errmax, tol
-      99006   FORMAT (/'  MAXIMUM RELATIVE ERROR IS:',1P,E15.5,',   TOLERANCE:',1P,&
+      99006 FORMAT (/'  MAXIMUM RELATIVE ERROR IS:',1P,E15.5,',   TOLERANCE:',1P,&
         E15.5)
       IF ( ifail/=0 ) WRITE (Lun,99007) ifail
-      99007   FORMAT (/' *** TROUBLE ***',I5,' INTEGRATION TESTS FAILED.')
+      99007 FORMAT (/' *** TROUBLE ***',I5,' INTEGRATION TESTS FAILED.')
     ENDIF
     !
     !  TERMINATE.
@@ -1176,12 +1176,12 @@ CONTAINS
     IF ( ifail==0 ) THEN
       Ipass = 1
       IF ( Kprint>=2 ) WRITE (Lun,99008)
-      99008   FORMAT (/' ------------  PCHIP PASSED  ALL INTEGRATION TESTS',&
+      99008 FORMAT (/' ------------  PCHIP PASSED  ALL INTEGRATION TESTS',&
         ' ------------')
     ELSE
       Ipass = 0
       IF ( Kprint>=1 ) WRITE (Lun,99009)
-      99009   FORMAT (/' ************  PCHIP FAILED SOME INTEGRATION TESTS',&
+      99009 FORMAT (/' ************  PCHIP FAILED SOME INTEGRATION TESTS',&
         ' ************')
     ENDIF
     !
@@ -1323,7 +1323,7 @@ CONTAINS
     !
     IF ( Kprint>=3 ) WRITE (Lun,99001)
     !
-    !  FORMATS.
+    ! FORMATS.
     !
     99001 FORMAT ('1'//10X,'TEST PCHIP INTERPOLATORS')
     IF ( Kprint>=2 ) WRITE (Lun,99002)
@@ -1337,7 +1337,7 @@ CONTAINS
     !
     IF ( Kprint>=3 ) THEN
       WRITE (Lun,99003)
-      99003   FORMAT (//5X,'DATA:'/39X,'---------- EXPECTED D-VALUES ----------'/12X,&
+      99003 FORMAT (//5X,'DATA:'/39X,'---------- EXPECTED D-VALUES ----------'/12X,&
         'X',9X,'F',18X,'DM',13X,'DC',13X,'DS')
       DO i = 1, 4
         WRITE (Lun,99009) x(i), f(i), dm(i), ds(i)
@@ -1385,7 +1385,7 @@ CONTAINS
       IF ( (nbadz/=0).OR.(nbad/=0) ) THEN
         ifail = ifail + 1
         IF ( (nbadz/=0).AND.(Kprint>=2) ) WRITE (Lun,99004) nbad
-        99004     FORMAT (/'    **',I5,'  PCHIM RESULTS FAILED TO BE EXACTLY ZERO.')
+        99004 FORMAT (/'    **',I5,'  PCHIM RESULTS FAILED TO BE EXACTLY ZERO.')
         IF ( (nbad/=0).AND.(Kprint>=2) ) WRITE (Lun,99015) nbad, 'IM', told
       ELSE
         IF ( Kprint>=2 ) WRITE (Lun,99016) 'IM'
@@ -1464,7 +1464,7 @@ CONTAINS
       IF ( (nbadz/=0).OR.(nbad/=0) ) THEN
         ifail = ifail + 1
         IF ( (nbadz/=0).AND.(Kprint>=2) ) WRITE (Lun,99005) nbad
-        99005     FORMAT (/'    **',I5,'  PCHIC RESULTS FAILED TO AGREE WITH',&
+        99005 FORMAT (/'    **',I5,'  PCHIC RESULTS FAILED TO AGREE WITH',&
           ' PREVIOUS CALL.')
         IF ( (nbad/=0).AND.(Kprint>=2) ) WRITE (Lun,99015) nbad, 'IC', told
       ELSE
@@ -1511,12 +1511,12 @@ CONTAINS
     IF ( ifail==0 ) THEN
       Ipass = 1
       IF ( Kprint>=2 ) WRITE (Lun,99007)
-      99007   FORMAT (/' ------------  PCHIP PASSED  ALL INTERPOLATION TESTS',&
+      99007 FORMAT (/' ------------  PCHIP PASSED  ALL INTERPOLATION TESTS',&
         ' ------------')
     ELSE
       Ipass = 0
       IF ( Kprint>=1 ) WRITE (Lun,99008)
-      99008   FORMAT (/' ************  PCHIP FAILED SOME INTERPOLATION TESTS',&
+      99008 FORMAT (/' ************  PCHIP FAILED SOME INTERPOLATION TESTS',&
         ' ************')
     ENDIF
     !
@@ -1621,7 +1621,7 @@ CONTAINS
     !***FIRST EXECUTABLE STATEMENT  PCHQK4
     IF ( Kprint>=3 ) WRITE (Lun,99001)
     !
-    !  FORMATS.
+    ! FORMATS.
     !
     99001 FORMAT ('1'//10X,'TEST PCHIP MONOTONICITY CHECKER')
     IF ( Kprint>=2 ) WRITE (Lun,99002)
@@ -1663,7 +1663,7 @@ CONTAINS
     !
     IF ( Kprint>=3 ) THEN
       WRITE (Lun,99003)
-      99003   FORMAT (//5X,'DATA:'//9X,'I',4X,'X',5X,'F',5X,'D',5X,'FB',4X,'DB')
+      99003 FORMAT (//5X,'DATA:'//9X,'I',4X,'X',5X,'F',5X,'D',5X,'FB',4X,'DB')
       DO i = 1, NB
         WRITE (Lun,99010) i, x(i), f(i), d(i), fb(i), db(i)
       ENDDO
@@ -1685,7 +1685,7 @@ CONTAINS
       CALL PCHCM(n,x,f,d,incfd,skip,ismon,ierr)
       !        -------------------------------------------------
       IF ( Kprint>=3 ) WRITE (Lun,99004) incfd, ierr, (ismon(i),i=1,n)
-      99004   FORMAT (/4X,'INCFD =',I2,':  IERR =',I3/15X,'ISMON =',16I3)
+      99004 FORMAT (/4X,'INCFD =',I2,':  IERR =',I3/15X,'ISMON =',16I3)
       IF ( ierr/=0 ) THEN
         ifail = ifail + 1
         IF ( Kprint>=3 ) WRITE (Lun,99011)
@@ -1738,17 +1738,17 @@ CONTAINS
       !  PRINT SUMMARY AND TERMINATE.
       !
       IF ( (Kprint>=2).AND.(ifail/=0) ) WRITE (Lun,99006) ifail
-      99006   FORMAT (/' *** TROUBLE ***',I5,' MONOTONICITY TESTS FAILED.')
+      99006 FORMAT (/' *** TROUBLE ***',I5,' MONOTONICITY TESTS FAILED.')
       !
       IF ( ifail==0 ) THEN
         Ipass = 1
         IF ( Kprint>=2 ) WRITE (Lun,99007)
-        99007     FORMAT (/' ------------  PCHIP PASSED  ALL MONOTONICITY TESTS',&
+        99007 FORMAT (/' ------------  PCHIP PASSED  ALL MONOTONICITY TESTS',&
           ' ------------')
       ELSE
         Ipass = 0
         IF ( Kprint>=1 ) WRITE (Lun,99008)
-        99008     FORMAT (/' ************  PCHIP FAILED SOME MONOTONICITY TESTS',&
+        99008 FORMAT (/' ************  PCHIP FAILED SOME MONOTONICITY TESTS',&
           ' ************')
       ENDIF
       !
@@ -1758,7 +1758,7 @@ CONTAINS
       !  Change sign and do again.
       !
       IF ( Kprint>=3 ) WRITE (Lun,99009)
-      99009   FORMAT (/4X,'Changing sign of data.....')
+      99009 FORMAT (/4X,'Changing sign of data.....')
       DO i = 1, MAXN
         f(i) = -f(i)
         d(i) = -d(i)
@@ -1875,7 +1875,7 @@ CONTAINS
     !
     IF ( Kprint>=3 ) WRITE (Lun,99001)
     !
-    !  FORMATS.
+    ! FORMATS.
     !
     99001 FORMAT ('1'//10X,'TEST PCH TO B-SPLINE CONVERTER')
     IF ( Kprint>=2 ) WRITE (Lun,99002)
@@ -1890,12 +1890,12 @@ CONTAINS
       CALL PCHBS(N,x,f,d,1,knotyp,nknots,t,bcoef,ndim,k,ierr)
       !        ------------
       IF ( Kprint>=3 ) WRITE (Lun,99004) knotyp, nknots, ndim, k, ierr
-      99004   FORMAT (/4X,'KNOTYP =',I2,':  NKNOTS =',I3,',  NDIM =',I3,',  K =',I2,&
+      99004 FORMAT (/4X,'KNOTYP =',I2,':  NKNOTS =',I3,',  NDIM =',I3,',  K =',I2,&
         ',  IERR =',I3)
       IF ( ierr/=0 ) THEN
         ifail = ifail + 1
         IF ( Kprint>=3 ) WRITE (Lun,99005)
-        99005     FORMAT (' *** Failed -- bad IERR value.')
+        99005 FORMAT (' *** Failed -- bad IERR value.')
       ELSE
         !             Compare evaluated results with inputs to PCHBS.
         inbv = 1
@@ -1903,7 +1903,7 @@ CONTAINS
         dermax = ZERO
         IF ( Kprint>=3 ) THEN
           WRITE (Lun,99006)
-          99006       FORMAT (/15X,'X',9X,'KNOTS',10X,'F',7X,'FERR',8X,'D',7X,'DERR')
+          99006 FORMAT (/15X,'X',9X,'KNOTS',10X,'F',7X,'FERR',8X,'D',7X,'DERR')
           WRITE (Lun,99013) t(1), t(2)
           j = 1
         ENDIF
@@ -1917,7 +1917,7 @@ CONTAINS
           IF ( Kprint>=3 ) THEN
             j = j + 2
             WRITE (Lun,99007) x(i), t(j), t(j+1), f(i), ferr, d(i), derr
-            99007         FORMAT (10X,3F8.2,F10.4,1P,E10.2,0P,F10.4,1P,E10.2)
+            99007 FORMAT (10X,3F8.2,F10.4,1P,E10.2,0P,F10.4,1P,E10.2)
           ENDIF
         ENDDO
         IF ( Kprint>=3 ) THEN
@@ -1928,7 +1928,7 @@ CONTAINS
         IF ( fail ) ifail = ifail + 1
         IF ( (Kprint>=3).OR.(Kprint>=2).AND.fail ) WRITE (Lun,99008) fermax ,&
           dermax, tol
-        99008     FORMAT (/5X,'Maximum relative errors:'/15X,'F-error =',1P,E13.5,5X,&
+        99008 FORMAT (/5X,'Maximum relative errors:'/15X,'F-error =',1P,E13.5,5X,&
           'D-error =',E13.5/5X,'Both should be less than  TOL =',E13.5)
       ENDIF
       !
@@ -1948,7 +1948,7 @@ CONTAINS
         IF ( termax>tolz ) THEN
           ifail = ifail + 1
           IF ( Kprint>=2 ) WRITE (Lun,99009) termax, tolz
-          99009       FORMAT (/' *** T-ARRAY MAXIMUM CHANGE =',1P,E13.5,&
+          99009 FORMAT (/' *** T-ARRAY MAXIMUM CHANGE =',1P,E13.5,&
             ';  SHOULD NOT EXCEED TOLZ =',E13.5)
         ENDIF
       ENDIF
@@ -1962,12 +1962,12 @@ CONTAINS
     IF ( ifail==0 ) THEN
       Ipass = 1
       IF ( Kprint>=2 ) WRITE (Lun,99011)
-      99011   FORMAT (/' ------------  PCHIP PASSED  ALL CONVERSION TESTS',&
+      99011 FORMAT (/' ------------  PCHIP PASSED  ALL CONVERSION TESTS',&
         ' ------------')
     ELSE
       Ipass = 0
       IF ( Kprint>=1 ) WRITE (Lun,99012)
-      99012   FORMAT (/' ************  PCHIP FAILED SOME CONVERSION TESTS',&
+      99012 FORMAT (/' ************  PCHIP FAILED SOME CONVERSION TESTS',&
         ' ************')
     ENDIF
     !
@@ -2078,10 +2078,10 @@ PROGRAM TEST32
   !
   IF ( nfail==0 ) THEN
     WRITE (lun,99001)
-    99001   FORMAT (/' --------------TEST32 PASSED ALL TESTS----------------')
+    99001 FORMAT (/' --------------TEST32 PASSED ALL TESTS----------------')
   ELSE
     WRITE (lun,99002) nfail
-    99002   FORMAT (/' ************* WARNING -- ',I5,&
+    99002 FORMAT (/' ************* WARNING -- ',I5,&
       ' TEST(S) FAILED IN PROGRAM TEST32 *************')
   ENDIF
   STOP

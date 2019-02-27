@@ -334,7 +334,7 @@ INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
       Err = ratmax
       IF ( ratmax<=Tol ) ISSGMR = 1
       IF ( Iunit>0 ) WRITE (Iunit,99001) Iter, ielmax, ratmax
-      99001     FORMAT (1X,' ITER = ',I5,' IELMAX = ',I5,' |R(IELMAX)/X(IELMAX)| = ',&
+      99001 FORMAT (1X,' ITER = ',I5,' IELMAX = ',I5,' |R(IELMAX)/X(IELMAX)| = ',&
         E12.5)
       RETURN
     ENDIF
@@ -382,11 +382,11 @@ INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   IF ( Iunit/=0 ) THEN
     IF ( Iter==0 ) THEN
       WRITE (Iunit,99002) N, Itol, Maxl, Kmp
-      99002     FORMAT (' Generalized Minimum Residual(',I3,I3,') for ','N, ITOL = ',&
+      99002 FORMAT (' Generalized Minimum Residual(',I3,I3,') for ','N, ITOL = ',&
         I5,I5,/' ITER','   Natural Err Est','   Error Estimate')
     ENDIF
     WRITE (Iunit,99003) Iter, Rnrm/Bnrm, Err
-    99003   FORMAT (1X,I4,1X,E16.7,1X,E16.7)
+    99003 FORMAT (1X,I4,1X,E16.7,1X,E16.7)
   ENDIF
   IF ( Err<=Tol ) ISSGMR = 1
   !
