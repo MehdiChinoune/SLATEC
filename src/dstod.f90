@@ -1,7 +1,6 @@
 !DECK DSTOD
 SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   IMPLICIT NONE
-  REAL DJAC
   !***BEGIN PROLOGUE  DSTOD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DDEBDF

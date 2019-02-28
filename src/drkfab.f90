@@ -2,7 +2,6 @@
 SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     W,S,Stowa,G,Work,Iwork,Nfcc)
   IMPLICIT NONE
-  REAL DBVDER
   !***BEGIN PROLOGUE  DRKFAB
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBVSUP

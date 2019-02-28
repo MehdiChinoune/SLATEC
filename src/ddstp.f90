@@ -5,8 +5,6 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Dfdy,El,Fac,Hold,Ipvt,Jstate,Jstepl,Nq,Nwait,Rc,Rmax,&
     Save1,Save2,Tq,Trend,Iswflg,Mtrsv,Mxrdsv)
   IMPLICIT NONE
-  REAL FA, USERS
-  INTEGER JACOBN
   !***BEGIN PROLOGUE  DDSTP
   !***SUBSIDIARY
   !***PURPOSE  DDSTP performs one step of the integration of an initial

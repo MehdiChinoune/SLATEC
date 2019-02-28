@@ -1,7 +1,6 @@
 !DECK DBESY
 SUBROUTINE DBESY(X,Fnu,N,Y)
   IMPLICIT NONE
-  REAL DYAIRY
   !***BEGIN PROLOGUE  DBESY
   !***PURPOSE  Implement forward recursion on the three term recursion
   !            relation for a sequence of non-negative order Bessel

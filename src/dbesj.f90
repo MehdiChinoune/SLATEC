@@ -1,7 +1,6 @@
 !DECK DBESJ
 SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   IMPLICIT NONE
-  REAL DJAIRY
   !***BEGIN PROLOGUE  DBESJ
   !***PURPOSE  Compute an N member sequence of J Bessel functions
   !            J/SUB(ALPHA+K-1)/(X), K=1,...,N for non-negative ALPHA

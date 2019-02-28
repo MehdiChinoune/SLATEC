@@ -2,7 +2,7 @@
 SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar)
   IMPLICIT NONE
-  REAL Atol, F, Rpar, Rtol, Rwork, T, Tout, Y
+  REAL Atol, Rpar, Rtol, Rwork, T, Tout, Y
   INTEGER ialpha, ibeta, idelsn, Idid, ifouru, ig, igi, ihold ,&
     Info, ip, Ipar, iphi, ipsi, isig, itold, itstar, itwou ,&
     iv, iw, Iwork

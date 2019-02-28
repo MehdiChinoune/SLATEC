@@ -1,8 +1,6 @@
 !DECK DNSQE
 SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   IMPLICIT NONE
-  REAL FCN
-  INTEGER JAC
   !***BEGIN PROLOGUE  DNSQE
   !***PURPOSE  An easy-to-use code to find a zero of a system of N
   !            nonlinear functions in N variables by a modification of

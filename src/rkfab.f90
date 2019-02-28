@@ -2,7 +2,7 @@
 SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     W,S,Stowa,G,Work,Iwork,Nfcc)
   IMPLICIT NONE
-  REAL AE, BVDER, C, G, P, PWCnd, PX, RE, S, Stowa, TND, TOL, &
+  REAL AE, C, G, P, PWCnd, PX, RE, S, Stowa, TND, TOL, &
     U, V, W, Work, X, XBEg, XENd, XOP
   REAL XOT, Xpts, XSAv, xxop, Yhp, Z
   INTEGER ICOco, idid, Iflag, IGOfx, INDpvt, INFo, INHomo, INTeg, &

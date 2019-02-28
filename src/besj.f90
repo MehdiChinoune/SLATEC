@@ -1,7 +1,6 @@
 !DECK BESJ
 SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   IMPLICIT NONE
-  INTEGER JAIRY
   !***BEGIN PROLOGUE  BESJ
   !***PURPOSE  Compute an N member sequence of J Bessel functions
   !            J/SUB(ALPHA+K-1)/(X), K=1,...,N for non-negative ALPHA

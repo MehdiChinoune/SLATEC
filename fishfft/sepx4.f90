@@ -2,8 +2,7 @@
 SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     Bdd,COFX,Grhs,Usol,Idmn,W,Pertrb,Ierror)
   IMPLICIT NONE
-  REAL A, Alpha, B, Bda, Bdb, Bdc, Bdd, Beta, C, COFX, D, Grhs, &
-    Pertrb, Usol, W
+  REAL A, Alpha, B, Bda, Bdb, Bdc, Bdd, Beta, C, D, Grhs, Pertrb, Usol, W
   INTEGER i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
     i9, Idmn, Ierror, Iorder, k, l, length, linput
   INTEGER log2n, loutpt, M, Mbdcnd, N, Nbdcnd

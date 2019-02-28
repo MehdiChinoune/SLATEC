@@ -3,7 +3,6 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Miter,Impl,Ml,Mu,Mxord,Hmax,Work,Lenw,Iwork,Leniw,&
     JACOBN,FA,Nde,Mxstep,G,USERS,Ierflg)
   IMPLICIT NONE
-  INTEGER JACOBN
   !***BEGIN PROLOGUE  CDRIV3
   !***PURPOSE  The function of CDRIV3 is to solve N ordinary differential
   !            equations of the form dY(I)/dT = F(Y(I),T), given the

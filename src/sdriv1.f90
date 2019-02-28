@@ -1,7 +1,6 @@
 !DECK SDRIV1
 SUBROUTINE SDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   IMPLICIT NONE
-  REAL F
   !***BEGIN PROLOGUE  SDRIV1
   !***PURPOSE  The function of SDRIV1 is to solve N (200 or fewer)
   !            ordinary differential equations of the form

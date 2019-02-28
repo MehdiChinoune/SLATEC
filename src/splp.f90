@@ -7,7 +7,6 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     limat, lipr, Liw, liwork
   INTEGER liwr, lmx, lrg, lrhs, lrprim, lrz, Lw, lwork, lwr, lww ,&
     Mrelas, nerr, next, Nvars
-  REAL USRMAT
   !***BEGIN PROLOGUE  SPLP
   !***PURPOSE  Solve linear programming problems involving at
   !            most a few thousand constraints and variables.

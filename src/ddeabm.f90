@@ -2,7 +2,6 @@
 SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar)
   IMPLICIT NONE
-  REAL DF
   INTEGER igi, ixold
   !***BEGIN PROLOGUE  DDEABM
   !***PURPOSE  Solve an initial value problem in ordinary differential

@@ -2,7 +2,6 @@
 SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Ibasis,Work,Lw,Iwork,Liw)
   IMPLICIT NONE
-  REAL DUSRMT
   INTEGER iadbig, ictmax, ictopt, Info, iopt, key, lamat, last ,&
     lbasma, lbm, lcolnr, lcsc, lerd, lerp, libb, librc ,&
     limat, lipr, Liw, liwork

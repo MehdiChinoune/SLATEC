@@ -2,7 +2,6 @@
 SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     Leniw,G,Ierflg)
   IMPLICIT NONE
-  REAL F
   !***BEGIN PROLOGUE  DDRIV2
   !***PURPOSE  The function of DDRIV2 is to solve N ordinary differential
   !            equations of the form dY(I)/dT = F(Y(I),T), given the

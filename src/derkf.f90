@@ -2,7 +2,7 @@
 SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar)
   IMPLICIT NONE
-  REAL Atol, F, Rpar, Rtol, Rwork, T, Tout, Y
+  REAL Atol, Rpar, Rtol, Rwork, T, Tout, Y
   INTEGER Idid, Info, Ipar, Iwork, kdi, kf1, kf2, kf3, kf4, kf5 ,&
     kh, krer, ktf, kto, ktstar, ku, kyp, kys, Liw, Lrw
   INTEGER Neq

@@ -3,7 +3,6 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Amat,Csc,Colnrm,Erd,Erp,Basmat,Wr,Rz,Rg,&
     Rprim,Rhs,Ww,Lmx,Lbm,Ibasis,Ibb,Imat,Ibrc,Ipr,Iwr)
   IMPLICIT NONE
-  REAL DUSRMT
   INTEGER i, ibas, idg, ienter, ileave, Info, iopt, ipage, ipagef ,&
     iplace, isave, itbrc, itlp, j, jstrt, k, key, kprint ,&
     Lbm, LCOl

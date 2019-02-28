@@ -2,7 +2,6 @@
 SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     Acor,Wm,Iwm,DJAC,Intout,Tstop,Tolfac,Delsgn,Rpar,Ipar)
   IMPLICIT NONE
-  REAL DJAC
   !***BEGIN PROLOGUE  DLSOD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DDEBDF

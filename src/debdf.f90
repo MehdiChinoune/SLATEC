@@ -2,12 +2,12 @@
 SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar,JAC)
   IMPLICIT NONE
-  REAL Atol, EL0, F, H, HMIn, HMXi, HU, ROWns, Rpar, Rtol, Rwork ,&
+  REAL Atol, EL0, H, HMIn, HMXi, HU, ROWns, Rpar, Rtol, Rwork ,&
     T, TN, TOLd, Tout, UROund, Y
   INTEGER IACor, IBAnd, IBEgin, icomi, icomr, idelsn, Idid, IER ,&
     IEWt, iinout, IINteg, IJAc, ilrw, Info, INIt, IOWns ,&
     Ipar, IQUit, ISAvf, ITOl
-  INTEGER itstar, ITStop, IWM, Iwork, IYH, iypout, JAC, JSTart ,&
+  INTEGER itstar, ITStop, IWM, Iwork, IYH, iypout, JSTart ,&
     KFLag, KSTeps, L, Liw, Lrw, MAXord, METh, MITer, ml, mu ,&
     N, Neq
   INTEGER NFE, NJE, NQ, NQU, NST

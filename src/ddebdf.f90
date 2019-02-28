@@ -2,7 +2,6 @@
 SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar,DJAC)
   IMPLICIT NONE
-  REAL DF, DJAC
   !***BEGIN PROLOGUE  DDEBDF
   !***PURPOSE  Solve an initial value problem in ordinary differential
   !            equations using backward differentiation formulas.  It is

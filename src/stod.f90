@@ -1,7 +1,7 @@
 !DECK STOD
 SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   IMPLICIT NONE
-  INTEGER IOD, Ipar, JAC, KSTeps
+  INTEGER IOD, Ipar, KSTeps
   REAL Rpar
   !***BEGIN PROLOGUE  STOD
   !***SUBSIDIARY

@@ -492,7 +492,6 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DNLS1E
   IMPLICIT NONE
-  REAL(8) :: FCN
   INTEGER M, N, Nprint, Info, Lwa, Iopt
   INTEGER index, Iw(*)
   REAL(8) :: Tol

@@ -1,8 +1,7 @@
 !DECK BLKTRI
 SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   IMPLICIT NONE
-  REAL Am, An, Bm, Bn, Cm, Cn, CNV, CPROD, CPRODP, EPS, PROD, &
-    PRODP, W, Y
+  REAL Am, An, Bm, Bn, Cm, Cn, CNV, EPS, W, Y
   INTEGER Idimy, Ierror, Iflg, IK, iw1, iw2, iw3, iwah, iwbh, iwd, &
     iwu, iww, K, M, Mp, N, NCMplx, nh, nl, NM
   INTEGER Np, NPP

@@ -1,7 +1,6 @@
 !DECK BESY
 SUBROUTINE BESY(X,Fnu,N,Y)
   IMPLICIT NONE
-  REAL YAIRY
   !***BEGIN PROLOGUE  BESY
   !***PURPOSE  Implement forward recursion on the three term recursion
   !            relation for a sequence of non-negative order Bessel
