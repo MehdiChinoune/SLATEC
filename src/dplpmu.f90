@@ -210,7 +210,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     !     COMPUTE COL. ABS(ILEAVE) OF THE NEW INVERSE (TRANSPOSE) MATRIX
     !     HERE ABS(ILEAVE) POINTS TO THE EJECTED COLUMN.
     !     USE ERD(*) FOR TEMP. STORAGE.
-    CALL DCOPY(Mrelas,zero,0,Erd,1)
+    CALL DCOPY(Mrelas,[zero],0,Erd,1)
     Erd(ABS(Ileave)) = one
     trans = .TRUE.
     CALL LA05BD(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Erd,trans)
@@ -226,7 +226,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !     SEARCH DIRECTION WITH EACH NON-BASIC COLUMN.
   !     RECOMPUTE REDUCED COSTS.
   1100 pagepl = .TRUE.
-  CALL DCOPY(Nvars+Mrelas,zero,0,Rz,1)
+  CALL DCOPY(Nvars+Mrelas,[zero],0,Rz,1)
   nnegrc = 0
   j = Jstrt
   1200 CONTINUE
@@ -310,7 +310,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !     IF MINIMUM REDUCED COST (DANTZIG) PRICING IS USED,
   !     CALCULATE THE NEW REDUCED COSTS.
   GOTO 1700
-  1300 CALL DCOPY(Nvars+Mrelas,zero,0,Rz,1)
+  1300 CALL DCOPY(Nvars+Mrelas,[zero],0,Rz,1)
   nnegrc = 0
   j = Jstrt
   pagepl = .TRUE.

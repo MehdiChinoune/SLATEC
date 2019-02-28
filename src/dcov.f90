@@ -210,7 +210,7 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
         IF ( iflag<0 ) GOTO 100
         !
         !     COMPUTE THE QR DECOMPOSITION
-        CALL DQRFAC(M,N,R,Ldr,.FALSE.,idum,1,Wa1,Wa1,Wa1)
+        CALL DQRFAC(M,N,R,Ldr,.FALSE.,[idum],1,Wa1,Wa1,Wa1)
         DO i = 1, N
           R(i,i) = Wa1(i)
         ENDDO

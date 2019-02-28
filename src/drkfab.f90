@@ -107,13 +107,13 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
       IF ( INTeg==2 ) THEN
         !                       DDEABM INTEGRATOR
         !
-        CALL DDEABM(DBVDER,NEQ,X,Yhp,xxop,INFo,RE,AE,idid,Work,KKKint,Iwork,&
-          LLLint,G,ipar)
+        CALL DDEABM(DBVDER,NEQ,X,Yhp,xxop,INFo,[RE],[AE],idid,Work,KKKint,Iwork,&
+          LLLint,G,[ipar])
       ELSE
         !                       DDERKF INTEGRATOR
         !
-        CALL DDERKF(DBVDER,NEQ,X,Yhp,xxop,INFo,RE,AE,idid,Work,KKKint,Iwork,&
-          LLLint,G,ipar)
+        CALL DDERKF(DBVDER,NEQ,X,Yhp,xxop,INFo,[RE],[AE],idid,Work,KKKint,Iwork,&
+          LLLint,G,[ipar])
       ENDIF
       IF ( idid>=1 ) THEN
         !

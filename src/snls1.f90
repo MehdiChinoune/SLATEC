@@ -699,7 +699,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         !            GET THE INCREMENTED X-VALUES INTO WA1(*).
         !
         modech = 1
-        CALL CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Wa1,Wa4,modech,err)
+        CALL CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Wa1,Wa4,modech,[err])
         !
         !            EVALUATE AT INCREMENTED VALUES, IF NOT ALREADY EVALUATED.
         !
@@ -713,7 +713,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
           IF ( iflag<0 ) GOTO 200
         ENDIF
         modech = 2
-        CALL CHKDER(1,N,X,Fvec(i),Wa3,1,Wa1,Wa4(i),modech,err)
+        CALL CHKDER(1,N,X,Fvec(i),Wa3,1,Wa1,Wa4(i),modech,[err])
         IF ( err<chklim ) THEN
           WRITE (xern1,'(I8)') i
           WRITE (xern3,'(1PE15.6)') err
@@ -780,7 +780,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         !           GET THE INCREMENTED X-VALUES INTO WA1(*).
         !
         modech = 1
-        CALL CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Wa1,Wa4,modech,err)
+        CALL CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Wa1,Wa4,modech,[err])
         !
         !           EVALUATE FUNCTION AT INCREMENTED VALUE AND PUT IN WA4(*).
         !
@@ -790,7 +790,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         IF ( iflag<0 ) GOTO 200
         DO i = 1, M
           modech = 2
-          CALL CHKDER(1,N,X,Fvec(i),Fjac(i,1),Ldfjac,Wa1,Wa4(i),modech,err)
+          CALL CHKDER(1,N,X,Fvec(i),Fjac(i,1),Ldfjac,Wa1,Wa4(i),modech,[err])
           IF ( err<chklim ) THEN
             WRITE (xern1,'(I8)') i
             WRITE (xern3,'(1PE15.6)') err

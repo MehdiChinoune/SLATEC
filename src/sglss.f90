@@ -134,13 +134,13 @@ SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !     IF M.LT.N CALL ULSIA
   !
   IF ( M<N ) THEN
-    CALL ULSIA(A,Mda,M,N,B,Mdb,Nb,re,ae,key,mode,np,krank,ksure,Rnorm,Work,&
+    CALL ULSIA(A,Mda,M,N,B,Mdb,Nb,[re],[ae],key,mode,np,krank,ksure,Rnorm,Work,&
       Lw,Iwork,Liw,Info)
     IF ( Info==-1 ) RETURN
     Info = M - krank
     GOTO 99999
   ENDIF
-  CALL LLSIA(A,Mda,M,N,B,Mdb,Nb,re,ae,key,mode,np,krank,ksure,Rnorm,Work,Lw,&
+  CALL LLSIA(A,Mda,M,N,B,Mdb,Nb,[re],[ae],key,mode,np,krank,ksure,Rnorm,Work,Lw,&
     Iwork,Liw,Info)
   IF ( Info==-1 ) RETURN
   Info = N - krank

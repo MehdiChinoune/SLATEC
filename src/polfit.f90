@@ -374,7 +374,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   IF ( Eps<0.0.AND.Ndeg/=Maxdeg ) THEN
     nder = 0
     DO i = 1, m
-      CALL PVALUE(Ndeg,nder,X(i),R(i),yp,A)
+      CALL PVALUE(Ndeg,nder,X(i),R(i),[yp],A)
     ENDDO
   ENDIF
   Eps = SQRT(sig/xm)

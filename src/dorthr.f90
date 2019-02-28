@@ -106,7 +106,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
     !
     !        PERFORM COLUMN SCALING ON A WHEN SPECIFIED
     !
-    CALL DCSCAL(A,Nrda,N,M,Scales,dum,Rows,Rs,anorm,Scales,Iscale,1)
+    CALL DCSCAL(A,Nrda,N,M,Scales,[dum],Rows,Rs,anorm,Scales,Iscale,1)
     !
     anorm = SQRT(anorm)
     !

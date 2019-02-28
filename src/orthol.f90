@@ -111,7 +111,7 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,&
     !
     !     PERFORM COLUMN SCALING ON A WHEN SPECIFIED
     !
-    CALL CSCALE(A,Nrda,M,N,Cols,Cs,dum,dum,anorm,Scales,Iscale,0)
+    CALL CSCALE(A,Nrda,M,N,Cols,Cs,[dum],[dum],anorm,Scales,Iscale,0)
     !
     anorm = SQRT(anorm)
     !

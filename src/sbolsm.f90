@@ -558,7 +558,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       !
       !     Set the X(*) array to zero so all components are defined.
       !
-      CALL SCOPY(Ncols,ZERO,0,X,1)
+      CALL SCOPY(Ncols,[ZERO],0,X,1)
       !
       !     The arrays IBASIS(*) and IBB(*) are initialized by the calling
       !     program and the column scaling is defined in the calling program.
@@ -776,7 +776,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !                                                 T
   !     Compute (negative) of gradient vector, W = E *(F-E*X).
   !
-  CALL SCOPY(Ncols,ZERO,0,Ww,1)
+  CALL SCOPY(Ncols,[ZERO],0,Ww,1)
   DO j = nsetb + 1, Ncols
     jcol = ABS(Ibasis(j))
     Ww(j) = SDOT(mrows-nsetb,W(INEXT(nsetb),j),1,W(INEXT(nsetb),Ncols+1),1)&
@@ -843,14 +843,14 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     !
     IF ( jbig==0 ) THEN
       found = .FALSE.
-      IF ( iprint>0 ) CALL IVOUT(0,i,'('' FOUND NO VARIABLE TO ENTER'')',-4)
+      IF ( iprint>0 ) CALL IVOUT(0,[i],'('' FOUND NO VARIABLE TO ENTER'')',-4)
       GOTO 600
     ENDIF
     !
     !     See if the incoming column is sufficiently independent.  This
     !     test is made before an elimination is performed.
     !
-    IF ( iprint>0 ) CALL IVOUT(1,jbig,'('' TRY TO BRING IN THIS COL.'')',-4)
+    IF ( iprint>0 ) CALL IVOUT(1,[jbig],'('' TRY TO BRING IN THIS COL.'')',-4)
     !
     IF ( mval<=nsetb ) THEN
       cl1 = SNRM2(mval,W(1,jbig),1)
@@ -870,9 +870,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     !
     IF ( colblo<=tolind*colabv ) THEN
       Ww(jbig) = big
-      IF ( iprint>0 ) CALL IVOUT(0,i,&
-        '('' VARIABLE IS DEPENDENT, NOT USED.'')',&
-        -4)
+      IF ( iprint>0 ) CALL IVOUT(0,[i],&
+        '('' VARIABLE IS DEPENDENT, NOT USED.'')',-4)
       CYCLE
     ENDIF
     !
@@ -910,7 +909,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     IF ( W(nsetb,nsetb)==ZERO ) THEN
       Ww(nsetb) = big
       nsetb = nsetb - 1
-      IF ( iprint>0 ) CALL IVOUT(0,i,'('' PIVOT IS ZERO, NOT USED.'')',-4)
+      IF ( iprint>0 ) CALL IVOUT(0,[i],'('' PIVOT IS ZERO, NOT USED.'')',-4)
       CYCLE
     ENDIF
     !
@@ -929,9 +928,8 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         !
         Ww(nsetb) = big
         nsetb = nsetb - 1
-        IF ( iprint>0 ) CALL IVOUT(0,i,&
-          '('' VARIABLE HAS BAD DIRECTION, NOT USED.'')'&
-          ,-4)
+        IF ( iprint>0 ) CALL IVOUT(0,[i],&
+          '('' VARIABLE HAS BAD DIRECTION, NOT USED.'')',-4)
         CYCLE
       ENDIF
     ENDIF
@@ -1159,7 +1157,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   igopr = 2
   700  CALL SCOPY(nsetb,X,1,Rw,1)
-  CALL SCOPY(Ncols,ZERO,0,X,1)
+  CALL SCOPY(Ncols,[ZERO],0,X,1)
   DO j = 1, nsetb
     jcol = ABS(Ibasis(j))
     X(jcol) = Rw(j)*ABS(Scl(jcol))

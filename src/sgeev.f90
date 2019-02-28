@@ -155,7 +155,7 @@ SUBROUTINE SGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
           km = k - mdim
           IF ( E(i)>=0.0E0 ) CALL SCOPY(N,V(k),1,Work(1),2)
           IF ( E(i)<0.0E0 ) CALL SCOPY(N,V(km),1,Work(1),2)
-          IF ( E(i)==0.0E0 ) CALL SCOPY(N,0.0E0,0,Work(2),2)
+          IF ( E(i)==0.0E0 ) CALL SCOPY(N,[0.0E0],0,Work(2),2)
           IF ( E(i)>0.0E0 ) CALL SCOPY(N,V(kp),1,Work(2),2)
           IF ( E(i)<0.0E0 ) CALL SCOPYM(N,V(k),1,Work(2),2)
           l = 2*(j-1)*Ldv + 1

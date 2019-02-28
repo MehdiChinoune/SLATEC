@@ -53,7 +53,7 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   !***END PROLOGUE  CPZERO
   !
   REAL S(*)
-  COMPLEX R(*), T(*), A(*), pn, temp
+  COMPLEX R(*), T(*), A(*), pn(1), temp(1)
   !***FIRST EXECUTABLE STATEMENT  CPZERO
   IF ( In<=0.OR.ABS(A(1))==0.0 ) THEN
     Iflg = 1
@@ -76,7 +76,7 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
           !          IF INITIAL ESTIMATES FOR ZEROS NOT GIVEN, FIND SOME
           !
           temp = -A(2)/(A(1)*n)
-          CALL CPEVL(n,n,A,temp,T,T,.FALSE.)
+          CALL CPEVL(n,n,A,temp(1),T,T,.FALSE.)
           imax = n + 2
           T(n1) = ABS(T(n1))
           DO i = 2, n1
@@ -87,18 +87,18 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
           DO
             x = 2.*x
             CALL CPEVL(n,0,T(n1),CMPLX(x,0.0),pn,pn,.FALSE.)
-            IF ( REAL(pn)>=0. ) THEN
+            IF ( REAL(pn(1))>=0. ) THEN
               u = .5*x
               v = x
               DO
                 x = .5*(u+v)
                 CALL CPEVL(n,0,T(n1),CMPLX(x,0.0),pn,pn,.FALSE.)
-                IF ( REAL(pn)>0. ) v = x
-                IF ( REAL(pn)<=0. ) u = x
+                IF ( REAL(pn(1))>0. ) v = x
+                IF ( REAL(pn(1))<=0. ) u = x
                 IF ( (v-u)<=.001*(1.+v) ) THEN
                   DO i = 1, n
                     u = (3.14159265/n)*(2*i-1.5)
-                    R(i) = MAX(x,.001*ABS(temp))*CMPLX(COS(u),SIN(u)) + temp
+                    R(i) = MAX(x,.001*ABS(temp(1)))*CMPLX(COS(u),SIN(u)) + temp(1)
                   ENDDO
                   GOTO 50
                 ENDIF
@@ -121,12 +121,12 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
       DO i = 1, n
         IF ( nit==1.OR.ABS(T(i))/=0. ) THEN
           CALL CPEVL(n,0,A,R(i),pn,temp,.TRUE.)
-          IF ( ABS(REAL(pn))+ABS(AIMAG(pn))>REAL(temp)+AIMAG(temp) ) THEN
+          IF ( ABS(REAL(pn(1)))+ABS(AIMAG(pn(1)))>REAL(temp(1))+AIMAG(temp(1)) ) THEN
             temp = A(1)
             DO j = 1, n
               IF ( j/=i ) temp = temp*(R(i)-R(j))
             ENDDO
-            T(i) = pn/temp
+            T(i) = pn(1)/temp(1)
           ELSE
             T(i) = 0.0
             nr = nr + 1
@@ -152,7 +152,7 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
       x = x*REAL(n1-i)/i
       temp = CMPLX(MAX(ABS(REAL(T(i+1)))-REAL(T(n1+i)),0.0),&
         MAX(ABS(AIMAG(T(i+1)))-AIMAG(T(n1+i)),0.0))
-      S(nr) = MAX(S(nr),(ABS(temp)/x)**(1./i))
+      S(nr) = MAX(S(nr),(ABS(temp(1))/x)**(1./i))
     ENDDO
     S(nr) = 1./S(nr)
   ENDDO
