@@ -36,8 +36,8 @@ FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
   !
   IF ( X<=0.0 ) CALL XERMSG('SLATEC','R9GMIT','X SHOULD BE GT 0',1,2)
   !
-  ma = A + 0.5
-  IF ( A<0.0 ) ma = A - 0.5
+  ma = INT( A + 0.5 )
+  IF ( A<0.0 ) ma = INT( A - 0.5 )
   aeps = A - ma
   !
   ae = A

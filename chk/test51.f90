@@ -142,8 +142,8 @@ CONTAINS
             sum1 = sum1 + x(i)*COS(arg1)
             sum2 = sum2 + x(i)*SIN(arg1)
           ENDDO
-          y(2*k-2) = sum1
-          y(2*k-1) = -sum2
+          y(2*k-2) = REAL( sum1, 4 )
+          y(2*k-1) = REAL( -sum2, 4 )
         ENDDO
       ENDIF
       sum1 = 0.0D0
@@ -153,8 +153,8 @@ CONTAINS
         sum2 = sum2 + x(i+1)
       ENDDO
       IF ( modn==1 ) sum1 = sum1 + x(n)
-      y(1) = sum1 + sum2
-      IF ( modn==0 ) y(n) = sum1 - sum2
+      y(1) = REAL( sum1 + sum2, 4 )
+      IF ( modn==0 ) y(n) = REAL( sum1 - sum2, 4 )
       CALL RFFTF(n,x,w)
       rftf = 0.0
       DO i = 1, n
@@ -181,7 +181,7 @@ CONTAINS
           ENDDO
         ENDIF
         IF ( modn==0 ) sum = sum + 0.5D0*sign*x(n)
-        y(i) = sum + sum
+        y(i) = REAL( sum + sum, 4 )
         sign = -sign
       ENDDO
       CALL RFFTB(n,x,w)
@@ -227,7 +227,7 @@ CONTAINS
         y(i) = 0.0
         arg1 = i*dt
         DO k = 1, nm1
-          y(i) = y(i) + x(k)*SIN((k)*arg1)
+          y(i) = y(i) + x(k)*REAL( SIN((k)*arg1), 4 )
         ENDDO
         y(i) = y(i) + y(i)
       ENDDO
@@ -274,7 +274,7 @@ CONTAINS
         y(i) = 0.5*(x(1)+sign*x(n+1))
         arg = (i-1)*dt
         DO k = 2, n
-          y(i) = y(i) + x(k)*COS((k-1)*arg)
+          y(i) = y(i) + x(k)*REAL( COS((k-1)*arg), 4 )
         ENDDO
         y(i) = y(i) + y(i)
         sign = -sign
@@ -323,7 +323,7 @@ CONTAINS
         x(i) = 0.0
         arg = i*dt
         DO k = 1, n
-          x(i) = x(i) + y(k)*SIN((k+k-1)*arg)
+          x(i) = x(i) + y(k)*REAL( SIN((k+k-1)*arg), 4 )
         ENDDO
         x(i) = 4.0*x(i)
       ENDDO
@@ -349,7 +349,7 @@ CONTAINS
         arg = (i+i-1)*dt
         y(i) = 0.5*sign*x(n)
         DO k = 1, nm1
-          y(i) = y(i) + x(k)*SIN((k)*arg)
+          y(i) = y(i) + x(k)*REAL( SIN((k)*arg), 4 )
         ENDDO
         y(i) = y(i) + y(i)
         sign = -sign
@@ -394,7 +394,7 @@ CONTAINS
         x(i) = 0.0
         arg = (i-1)*dt
         DO k = 1, n
-          x(i) = x(i) + y(k)*COS((k+k-1)*arg)
+          x(i) = x(i) + y(k)*REAL( COS((k+k-1)*arg), 4 )
         ENDDO
         x(i) = 4.0*x(i)
       ENDDO
@@ -419,7 +419,7 @@ CONTAINS
         y(i) = 0.5*x(1)
         arg = (i+i-1)*dt
         DO k = 2, n
-          y(i) = y(i) + x(k)*COS((k-1)*arg)
+          y(i) = y(i) + x(k)*REAL( COS((k-1)*arg), 4 )
         ENDDO
         y(i) = y(i) + y(i)
       ENDDO
@@ -461,7 +461,7 @@ CONTAINS
       DO i = 1, n
         x(i) = xh(i)
       ENDDO
-      tpi = 2.0*pi
+      tpi = REAL( 2.0*pi, 4 )
       dt = tpi/n
       ns2 = (n+1)/2
       cf = 2.0/n
@@ -476,8 +476,8 @@ CONTAINS
             sum1 = sum1 + x(i)*COS(arg1)
             sum2 = sum2 + x(i)*SIN(arg1)
           ENDDO
-          a(k) = cf*sum1
-          b(k) = cf*sum2
+          a(k) = REAL( cf*sum1, 4 )
+          b(k) = REAL( cf*sum2, 4 )
         ENDDO
       ENDIF
       nm1 = n - 1
@@ -488,8 +488,8 @@ CONTAINS
         sum2 = sum2 + x(i+1)
       ENDDO
       IF ( modn==1 ) sum1 = sum1 + x(n)
-      azero = 0.5*cf*(sum1+sum2)
-      IF ( modn==0 ) a(ns2) = 0.5*cf*(sum1-sum2)
+      azero = REAL( 0.5*cf*(sum1+sum2), 4 )
+      IF ( modn==0 ) a(ns2) = REAL( 0.5*cf*(sum1-sum2), 4 )
       CALL EZFFTF(n,x,azeroh,ah,bh,w)
       dezf1 = ABS(azeroh-azero)
       IF ( modn==0 ) dezf1 = MAX(dezf1,ABS(a(ns2)-ah(ns2)))
@@ -516,7 +516,7 @@ CONTAINS
           arg2 = k*arg1
           sum = sum + a(k)*COS(arg2) + b(k)*SIN(arg2)
         ENDDO
-        x(i) = sum
+        x(i) = REAL( sum, 4 )
       ENDDO
       CALL EZFFTB(n,y,azero,a,b,w)
       dezb1 = 0.0
@@ -559,7 +559,7 @@ CONTAINS
         cy(i) = (0.0,0.0)
         DO k = 1, n
           arg2 = (k-1)*arg1
-          cy(i) = cy(i) + CMPLX(COS(arg2),SIN(arg2))*cx(k)
+          cy(i) = cy(i) + CMPLX(COS(arg2),SIN(arg2),4)*cx(k)
         ENDDO
       ENDDO
       CALL CFFTI(n,w)
@@ -584,7 +584,7 @@ CONTAINS
         cy(i) = (0.0,0.0)
         DO k = 1, n
           arg2 = (k-1)*arg1
-          cy(i) = cy(i) + CMPLX(COS(arg2),SIN(arg2))*cx(k)
+          cy(i) = cy(i) + CMPLX(COS(arg2),SIN(arg2),4)*cx(k)
         ENDDO
       ENDDO
       CALL CFFTB(n,cx,w)

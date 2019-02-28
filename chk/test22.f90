@@ -242,7 +242,7 @@ CONTAINS
     mu = 1
     jd = 2*ml + mu + 1
     Nerr = 0
-    r = D1MACH(4)**0.8E0
+    r = REAL( D1MACH(4)**0.8E0, 4 )
     !
     !     COMPUTE C VECTOR.
     !
@@ -329,7 +329,7 @@ CONTAINS
         IF ( kcase==1 ) THEN
           delmax = 0.0E0
           DO i = 1, n
-            delx = ABS(bt(i)-c(i))
+            delx = REAL( ABS(bt(i)-c(i)), 4 )
             delmax = MAX(delmax,delx)
           ENDDO
           !

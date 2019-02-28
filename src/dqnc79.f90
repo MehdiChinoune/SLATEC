@@ -108,7 +108,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
     w2 = 216.0D0/140.0D0
     w3 = 27.0D0/140.0D0
     w4 = 272.0D0/140.0D0
-    nbits = D1MACH(5)*I1MACH(14)/0.30102000D0
+    nbits = INT( D1MACH(5)*I1MACH(14)/0.30102000D0 )
     nlmx = MIN(99,(nbits*4)/5)
     sq2 = SQRT(2.0D0)
   ENDIF
@@ -124,7 +124,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
       c = ABS(1.0D0-A/B)
       IF ( c<=0.1D0 ) THEN
         IF ( c<=0.0D0 ) GOTO 400
-        nib = 0.5D0 - LOG(c)/LOG(2.0D0)
+        nib = INT( 0.5D0 - LOG(c)/LOG(2.0D0) )
         lmx = MIN(nlmx,nbits-nib-4)
         IF ( lmx<2 ) GOTO 400
         lmn = MIN(lmn,lmx)

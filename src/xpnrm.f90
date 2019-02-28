@@ -28,7 +28,7 @@ SUBROUTINE XPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   DIMENSION Pqa(*), Ipqa(*)
   !***FIRST EXECUTABLE STATEMENT  XPNRM
   Ierror = 0
-  l = (Mu2-Mu1) + (Nu2-Nu1+1.5)
+  l = INT( (Mu2-Mu1) + (Nu2-Nu1+1.5) )
   mu = Mu1
   dmu = Mu1
   nu = Nu1

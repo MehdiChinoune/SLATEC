@@ -30,8 +30,8 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   Nz = 0
   az = ABS(Z)
   x = REAL(Z)
-  iaz = az
-  ifnu = Fnu
+  iaz = INT( az )
+  ifnu = INT( Fnu )
   inu = ifnu + N - 1
   at = iaz + 1.0E0
   ck = CMPLX(at,0.0E0)/Z

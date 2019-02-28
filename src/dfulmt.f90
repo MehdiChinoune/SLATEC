@@ -46,17 +46,17 @@ SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
     zero = 0.D0
     lp = 1
     DO
-      next = Prgopt(lp)
+      next = INT( Prgopt(lp) )
       IF ( next>1 ) THEN
-        key = Prgopt(lp+1)
+        key = INT( Prgopt(lp+1) )
         IF ( key/=68 ) THEN
           lp = next
         ELSEIF ( Prgopt(lp+2)/=zero ) THEN
           Iflag(2) = 1
           Iflag(3) = 1
-          Iflag(4) = Prgopt(lp+3)
-          Iflag(5) = Prgopt(lp+4)
-          Iflag(6) = Prgopt(lp+5)
+          Iflag(4) = INT( Prgopt(lp+3) )
+          Iflag(5) = INT( Prgopt(lp+4) )
+          Iflag(6) = INT( Prgopt(lp+5) )
           EXIT
         ELSE
           lp = next

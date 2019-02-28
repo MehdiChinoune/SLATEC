@@ -222,7 +222,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
       !
       !           Sorted indices are in PTEMP(*).
       !
-      l = Ptemp(idata)
+      l = INT( Ptemp(idata) )
       xval = Xdata(l)
       !
       !           When interval changes, process equations in the last block.

@@ -205,7 +205,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !     CSPN AND CSGN ARE COEFF OF K AND I FUNCTIONS RESP.
   !-----------------------------------------------------------------------
   csgn = CMPLX(0.0E0,sgn)
-  inu = Fnu
+  inu = INT( Fnu )
   fnf = Fnu - inu
   ifn = inu + N - 1
   ang = fnf*sgn

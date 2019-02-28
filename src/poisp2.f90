@@ -55,7 +55,7 @@ SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
       ENDDO
     ENDDO
     CALL POISD2(mr,nrm1,2,A,Bb,C,Q,Idimq,B,W,D,Tcos,P)
-    ipstor = W(1)
+    ipstor = INT( W(1) )
     CALL POISN2(mr,nr,2,1,A,Bb,C,Q(1,nr),Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     ipstor = MAX(ipstor,INT(W(1)))
     DO j = 1, nrm1
@@ -97,7 +97,7 @@ SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
       Q(i,N) = 2.*Q(i,N)
     ENDDO
     CALL POISD2(mr,nrm1,1,A,Bb,C,Q,Idimq,B,W,D,Tcos,P)
-    ipstor = W(1)
+    ipstor = INT( W(1) )
     CALL POISN2(mr,nr+1,1,1,A,Bb,C,Q(1,nr),Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
     ipstor = MAX(ipstor,INT(W(1)))
     DO j = 1, nrm1

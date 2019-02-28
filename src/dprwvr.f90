@@ -44,7 +44,7 @@ SUBROUTINE DPRWVR(Key,Ipage,Lpg,Sx,Ix)
   !
   !     COMPUTE STARTING ADDRESS OF PAGE.
   !
-  ipagef = Sx(3)
+  ipagef = INT( Sx(3) )
   istart = Ix(3) + 5
   !
   !     OPEN RANDOM ACCESS FILE NUMBER IPAGEF, IF FIRST PAGE WRITE.

@@ -192,7 +192,7 @@ REAL(8) FUNCTION DDAWS(X)
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  DDAWS
   IF ( first ) THEN
-    eps = D1MACH(3)
+    eps = REAL( D1MACH(3), 4 )
     ntdaw = INITDS(dawcs,21,0.1*eps)
     ntdaw2 = INITDS(daw2cs,45,0.1*eps)
     ntdawa = INITDS(dawacs,75,0.1*eps)

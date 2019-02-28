@@ -148,7 +148,7 @@ SUBROUTINE CGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     !
     !        COMPUTE IND (ESTIMATE OF NO. OF SIGNIFICANT DIGITS)
     !
-    Ind = -LOG10(R1MACH(4)/rcond)
+    Ind = INT( -LOG10(R1MACH(4)/rcond) )
     !
     !        CHECK FOR IND GREATER THAN ZERO
     !

@@ -46,7 +46,7 @@ FUNCTION POCH(A,X)
       POCH = 1.0
       IF ( X==0.0 ) RETURN
       !
-      n = X
+      n = INT( X )
       IF ( MIN(A+X,A)<(-20.0) ) THEN
         !
         POCH = (-1.0)**n*EXP((A-0.5)*ALNREL(X/(A-1.0))+X*LOG(-A+1.0-X)&
@@ -65,7 +65,7 @@ FUNCTION POCH(A,X)
   POCH = 0.0
   IF ( A<=0.0.AND.AINT(A)==A ) RETURN
   !
-  n = ABS(X)
+  n = INT( ABS(X) )
   IF ( REAL(n)/=X.OR.n>20 ) THEN
     !
     absax = ABS(A+X)

@@ -207,7 +207,7 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
       !     CALCULATE CSGN=EXP(FNU*HPI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
       !     WHEN FNU IS LARGE
       !-----------------------------------------------------------------------
-      inu = Fnu
+      inu = INT( Fnu )
       inuh = inu/2
       ir = inu - 2*inuh
       arg = (Fnu-(inu-ir))*hpi

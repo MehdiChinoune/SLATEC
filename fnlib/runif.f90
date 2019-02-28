@@ -75,7 +75,7 @@ FUNCTION RUNIF(T,N)
     ENDIF
   ENDIF
   !
-  j = T(nold+1)*floatn + 1.
+  j = INT( T(nold+1)*floatn ) + 1
   T(nold+1) = T(j)
   RUNIF = T(j)
   T(j) = RAND(0.)

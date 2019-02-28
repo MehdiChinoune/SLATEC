@@ -47,7 +47,7 @@ COMPLEX FUNCTION CPSI(Zin)
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  CPSI
   IF ( first ) THEN
-    nterm = -0.30*LOG(R1MACH(3))
+    nterm = INT( -0.30*LOG(R1MACH(3)) )
     ! MAYBE BOUND = N*(0.1*EPS)**(-1/(2*N-1)) / (PI*EXP(1))
     bound = 0.1171*nterm*(0.1*R1MACH(3))**(-1.0/(2*nterm-1))
     dxrel = SQRT(R1MACH(4))
@@ -81,7 +81,7 @@ COMPLEX FUNCTION CPSI(Zin)
             CALL XERMSG('SLATEC','CPSI','Z IS A NEGATIVE INTEGER',3,2)
         ENDIF
         !
-        n = SQRT(bound**2-y**2) - x + 1.0
+        n = INT( SQRT(bound**2-y**2) - x ) + 1
         DO i = 1, n
           corr = corr - 1.0/z
           z = z + 1.0

@@ -108,7 +108,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  D9KNUS
   IF ( first ) THEN
-    eta = 0.1D0*D1MACH(3)
+    eta = REAL(  0.1D0*D1MACH(3), 4 )
     ntc0k = INITDS(c0kcs,29,eta)
     ntznu1 = INITDS(znu1cs,20,eta)
     !
@@ -116,7 +116,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     xsml = 0.1D0*D1MACH(3)
     alnsml = LOG(D1MACH(1))
     alnbig = LOG(D1MACH(2))
-    alneps = LOG(0.1D0*D1MACH(3))
+    alneps = REAL(  LOG(0.1D0*D1MACH(3)), 4 )
   ENDIF
   first = .FALSE.
   !
@@ -174,7 +174,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     !
     z = 0.0D0
     IF ( X>xsml ) z = 0.25D0*X*X
-    nterms = MAX(2.0,11.0+(8.*REAL(alnz)-25.19-alneps)/(4.28-REAL(alnz)))
+    nterms = INT( MAX(2.0,11.0+(8.*REAL(alnz)-25.19-alneps)/(4.28-REAL(alnz))) )
     DO i = 2, nterms
       xi = i - 1
       a0 = a0/(xi*(xi-v))

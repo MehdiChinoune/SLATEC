@@ -96,7 +96,7 @@ SUBROUTINE CBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   !     INCREMENT FNU+NN-1 UP TO FNUL, COMPUTE AND RECUR BACKWARD
   !-----------------------------------------------------------------------
-  500  nui = Fnul - dfnu + 1
+  500  nui = INT( Fnul - dfnu ) + 1
   nui = MAX(nui,0)
   CALL CBUNI(Z,Fnu,Kode,nn,Cy,nw,nui,nlast,Fnul,Tol,Elim,Alim)
   IF ( nw<0 ) GOTO 700

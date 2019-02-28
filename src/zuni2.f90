@@ -72,7 +72,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   zbr = Zr
   zbi = Zi
   cidi = -coner
-  inu = Fnu
+  inu = INT( Fnu )
   ang = hpi*(Fnu-inu)
   c2r = COS(ang)
   c2i = SIN(ang)

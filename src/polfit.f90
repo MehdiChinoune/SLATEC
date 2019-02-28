@@ -211,14 +211,14 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     temd1 = temd1 + REAL(W(i), 8)*REAL(Y(i), 8)*REAL(A(k4pi), 8)
   ENDDO
   temd1 = temd1/REAL(w11, 8)
-  A(k2+1) = temd1
+  A(k2+1) = REAL( temd1, 4 )
   sigj = 0.0
   DO i = 1, m
     k4pi = k4 + i
     k5pi = k5 + i
     temd2 = temd1*REAL(A(k4pi), 8)
-    R(i) = temd2
-    A(k5pi) = temd2 - REAL(R(i), 8)
+    R(i) = REAL( temd2, 4 )
+    A(k5pi) = REAL( temd2 - R(i), 4 )
     sigj = sigj + W(i)*((Y(i)-R(i))-A(k5pi))**2
   ENDDO
   j = 0
@@ -251,7 +251,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
       temd2 = A(k4pi)
       temd1 = temd1 + REAL(X(i), 8)*REAL(W(i), 8)*temd2*temd2
     ENDDO
-    A(jp1) = temd1/REAL(w11, 8)
+    A(jp1) = REAL( temd1/w11, 4 )
     !
     ! EVALUATE ORTHOGONAL POLYNOMIAL AT DATA POINTS
     !
@@ -277,7 +277,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
       temd1 = temd1 + temd2
     ENDDO
     temd1 = temd1/REAL(w11, 8)
-    A(k2pj+1) = temd1
+    A(k2pj+1) = REAL( temd1, 4 )
     !
     ! UPDATE POLYNOMIAL EVALUATIONS AT EACH OF THE DATA POINTS, AND
     ! ACCUMULATE SUM OF SQUARES OF ERRORS.  THE POLYNOMIAL EVALUATIONS ARE
@@ -290,8 +290,8 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
       k4pi = k4 + i
       k5pi = k5 + i
       temd2 = REAL(R(i), 8) + REAL(A(k5pi), 8) + temd1*REAL(A(k4pi), 8)
-      R(i) = temd2
-      A(k5pi) = temd2 - REAL(R(i), 8)
+      R(i) = REAL( temd2, 4 )
+      A(k5pi) = REAL( temd2 - R(i), 4 )
       sigj = sigj + W(i)*((Y(i)-R(i))-A(k5pi))**2
     ENDDO
     !

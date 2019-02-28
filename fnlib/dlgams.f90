@@ -1,7 +1,7 @@
 !DECK DLGAMS
 SUBROUTINE DLGAMS(X,Dlgam,Sgngam)
   IMPLICIT NONE
-  INTEGER int
+  INTEGER i
   !***BEGIN PROLOGUE  DLGAMS
   !***PURPOSE  Compute the logarithm of the absolute value of the Gamma
   !            function.
@@ -32,7 +32,7 @@ SUBROUTINE DLGAMS(X,Dlgam,Sgngam)
   Sgngam = 1.0D0
   IF ( X>0.D0 ) RETURN
   !
-  int = MOD(-AINT(X),2.0D0) + 0.1D0
-  IF ( int==0 ) Sgngam = -1.0D0
+  i = INT( MOD(-AINT(X),2.0D0) + 0.1D0 )
+  IF ( i==0 ) Sgngam = -1.0D0
   !
 END SUBROUTINE DLGAMS

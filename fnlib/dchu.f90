@@ -55,7 +55,7 @@ REAL(8) FUNCTION DCHU(A,B,X)
     IF ( B>=0.0D0 ) aintb = AINT(B+0.5D0)
     IF ( B<0.0D0 ) aintb = AINT(B-0.5D0)
     beps = B - aintb
-    n = aintb
+    n = INT( aintb )
     !
     alnx = LOG(X)
     xtoeps = EXP(-beps*alnx)

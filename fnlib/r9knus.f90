@@ -149,7 +149,7 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     !
     z = 0.0
     IF ( X>xsml ) z = 0.25*X*X
-    nterms = MAX(2.0,11.0+(8.*alnz-25.19-alneps)/(4.28-alnz))
+    nterms = INT( MAX(2.0,11.0+(8.*alnz-25.19-alneps)/(4.28-alnz)) )
     DO i = 2, nterms
       xi = i - 1
       a0 = a0/(xi*(xi-v))

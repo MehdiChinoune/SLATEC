@@ -35,8 +35,8 @@ CONTAINS
     xx = X
     fact1 = xx + 1
     fact2 = xx - 2
-    F = xx*fact1*fact2
-    D = fact1*fact2 + xx*(fact1+fact2)
+    F = REAL( xx*fact1*fact2, 4 )
+    D = REAL( fact1*fact2 + xx*(fact1+fact2), 4 )
     !
     !------------- LAST LINE OF FDTRUE FOLLOWS -----------------------------
   END SUBROUTINE FDTRUE

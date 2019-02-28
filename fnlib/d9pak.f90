@@ -39,8 +39,8 @@ REAL(8) FUNCTION D9PAK(Y,N)
   IF ( first ) THEN
     a1n2b = 1.0D0
     IF ( I1MACH(10)/=2 ) a1n2b = D1MACH(5)*a1n210
-    nmin = a1n2b*I1MACH(15)
-    nmax = a1n2b*I1MACH(16)
+    nmin = INT( a1n2b*I1MACH(15) )
+    nmax = INT( a1n2b*I1MACH(16) )
   ENDIF
   first = .FALSE.
   !

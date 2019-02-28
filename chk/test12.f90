@@ -71,7 +71,7 @@ CONTAINS
         )
     ENDIF
     nudiff = 5
-    mu1 = dnu1
+    mu1 = INT( dnu1 )
     mu2 = mu1
     deg = 0.1D0
     theta = deg*4.D0*ATAN(1.0D0)/180.0D0
@@ -89,7 +89,7 @@ CONTAINS
     ! XADJ, XCSRT, XRED, XC210, and XCON.
     !
     isum = 0
-    ndec = (I1MACH(14)-1)*LOG10(REAL(I1MACH(10)))
+    ndec = INT( (I1MACH(14)-1)*LOG10(REAL(I1MACH(10))) )
     ! Formats that depend on NDEC ...
     fmt(1:20) = '(1X, 6X, 4H   (,E50.'
     WRITE (fmt(21:22),'(I2)') ndec
@@ -127,13 +127,13 @@ CONTAINS
     ix13 = iq(1)
     IF ( Kprint>2 ) THEN
       WRITE (Lun,'(A)') '     NU   CASORATI 1'
-      nu = dnu1
+      nu = REAL( dnu1, 4 )
       DO i = 1, 5
         WRITE (Lun,fmtf) nu, c1(i), ic1(i)
         nu = nu + 1.
       ENDDO
       WRITE (Lun,'(A)') '     NU   CASORATI 2'
-      nu = dnu1
+      nu = REAL( dnu1, 4 )
       DO i = 1, 5
         WRITE (Lun,fmtf) nu, c2(i), ic2(i)
         nu = nu + 1.

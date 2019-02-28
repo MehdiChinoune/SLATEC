@@ -103,7 +103,7 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
   !
   k = I1MACH(14)
   anib = D1MACH(5)*k/0.30102000D0
-  nbits = anib
+  nbits = INT( anib )
   nlmx = MIN(60,(nbits*5)/8)
   Ans = 0.0D0
   Ierr = 1
@@ -123,7 +123,7 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
             GOTO 99999
           ELSE
             anib = 0.5D0 - LOG(c)/0.69314718D0
-            nib = anib
+            nib = INT( anib )
             lmx = MIN(nlmx,nbits-nib-7)
             IF ( lmx<1 ) THEN
               Ierr = -1

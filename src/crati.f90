@@ -30,10 +30,10 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   DATA czero, cone/(0.0E0,0.0E0), (1.0E0,0.0E0)/
   !***FIRST EXECUTABLE STATEMENT  CRATI
   az = ABS(Z)
-  inu = Fnu
+  inu = INT( Fnu )
   idnu = inu + N - 1
   fdnu = idnu
-  magz = az
+  magz = INT( az )
   amagz = magz + 1
   fnup = MAX(amagz,fdnu)
   id = idnu - magz - 1

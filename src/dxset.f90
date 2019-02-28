@@ -255,7 +255,7 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   RADix = iradx
   DLG10r = LOG10(RADix)
   IF ( dzerox/=0.0D0 ) THEN
-    lx = 0.5D0*LOG10(dzerox)/DLG10r
+    lx = INT( 0.5D0*LOG10(dzerox)/DLG10r )
     ! RADIX**(2*L) SHOULD NOT OVERFLOW, BUT REDUCE L BY 1 FOR FURTHER
     ! PROTECTION.
     lx = lx - 1

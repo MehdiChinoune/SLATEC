@@ -154,8 +154,8 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
           syl3 = syu3
         ENDDO
         syu = Xup
-        Ans = sum + ca*(syu**3-syl3)/r3 + cb*rp5*(syu**2-syl2)&
-          + cc*(syu-syl)
+        Ans = REAL( sum + ca*(syu**3-syl3)/r3 + cb*rp5*(syu**2-syl2)&
+          + cc*(syu-syl) , 4 )
       ELSE
         !
         !     SPECIAL N=2 CASE

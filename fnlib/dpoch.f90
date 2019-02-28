@@ -48,7 +48,7 @@ REAL(8) FUNCTION DPOCH(A,X)
       DPOCH = 1.0D0
       IF ( X==0.D0 ) RETURN
       !
-      n = X
+      n = INT( X )
       IF ( MIN(A+X,A)<(-20.0D0) ) THEN
         !
         DPOCH = (-1.0D0)&
@@ -57,7 +57,7 @@ REAL(8) FUNCTION DPOCH(A,X)
         RETURN
       ELSE
         !
-        ia = A
+        ia = INT( A )
         DPOCH = (-1.0D0)**n*DFAC(-ia)/DFAC(-ia-n)
         RETURN
       ENDIF
@@ -69,7 +69,7 @@ REAL(8) FUNCTION DPOCH(A,X)
   DPOCH = 0.0D0
   IF ( A<=0.0D0.AND.AINT(A)==A ) RETURN
   !
-  n = ABS(X)
+  n = INT( ABS(X) )
   IF ( REAL(n, 8)/=X.OR.n>20 ) THEN
     !
     absax = ABS(A+X)

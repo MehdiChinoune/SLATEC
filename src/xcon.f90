@@ -90,7 +90,7 @@ SUBROUTINE XCON(X,Ix,Ierror)
     !
     ! AT THIS POINT, RADIX**(-L) .LE. ABS(X) .LT. 1.0     IN CASE 1,
     !                      1.0 .LE. ABS(X) .LT. RADIX**L  IN CASE 2.
-    i = LOG10(ABS(X))/DLG10r
+    i = INT( LOG10(ABS(X))/DLG10r )
     a = RADix**i
     IF ( icase==2 ) THEN
       DO WHILE ( a>ABS(X) )
@@ -115,7 +115,7 @@ SUBROUTINE XCON(X,Ix,Ierror)
     ! AT THIS POINT I IS SUCH THAT
     ! RADIX**(I-1) .LE. ABS(X) .LT. RADIX**I      IN CASE 1,
     !     RADIX**I .LE. ABS(X) .LT. RADIX**(I+1)  IN CASE 2.
-    itemp = ispace/DLG10r
+    itemp = INT( ispace/DLG10r )
     a = RADix**itemp
     b = 10.0**ispace
     DO WHILE ( a>b )

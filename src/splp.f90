@@ -1583,7 +1583,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   DO
     !
     !     LOOK IN OPTION ARRAY FOR CHANGES TO WORK ARRAY LENGTHS.
-    next = Prgopt(last)
+    next = INT( Prgopt(last) )
     IF ( next<=0.OR.next>iadbig ) THEN
       !
       !     THE CHECKS FOR SMALL OR LARGE VALUES OF NEXT ARE TO PREVENT
@@ -1650,7 +1650,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         Iwork(liwr))
       GOTO 99999
     ELSEIF ( ictopt<=ictmax ) THEN
-      key = Prgopt(last+1)
+      key = INT( Prgopt(last+1) )
       !
       !     IF KEY = 53, USER MAY SPECIFY LENGTHS OF PORTIONS
       !    OF WORK(*) AND IWORK(*) THAT ARE ALLOCATED TO THE
@@ -1658,8 +1658,8 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       !     SOLVING.
       IF ( key==53 ) THEN
         IF ( Prgopt(last+2)/=zero ) THEN
-          lmx = Prgopt(last+3)
-          lbm = Prgopt(last+4)
+          lmx = INT( Prgopt(last+3) )
+          lbm = INT( Prgopt(last+4) )
         ENDIF
       ENDIF
       ictopt = ictopt + 1

@@ -40,7 +40,7 @@ FUNCTION R9GMIC(A,X,Alx)
     'A MUST BE NEAR A NEGATIVE INTEGER',2,2)
   IF ( X<=0.0 ) CALL XERMSG('SLATEC','R9GMIC','X MUST BE GT ZERO',3,2)
   !
-  ma = A - 0.5
+  ma = INT( A - 0.5 )
   fm = -ma
   m = -ma
   !

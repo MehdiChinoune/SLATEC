@@ -278,7 +278,7 @@ SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
       ENDDO
       rtemp = ZERO
       DO l = 1, K
-        rtemp = rtemp + CONJG(A(l,j))*A(l,j)
+        rtemp = rtemp + ABS(A(l,j))**2
       ENDDO
       IF ( Beta==ZERO ) THEN
         C(j,j) = Alpha*rtemp
@@ -290,7 +290,7 @@ SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
     DO j = 1, N
       rtemp = ZERO
       DO l = 1, K
-        rtemp = rtemp + CONJG(A(l,j))*A(l,j)
+        rtemp = rtemp + ABS(A(l,j))**2
       ENDDO
       IF ( Beta==ZERO ) THEN
         C(j,j) = Alpha*rtemp

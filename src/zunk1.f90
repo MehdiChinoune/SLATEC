@@ -253,7 +253,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     CSPN AND CSGN ARE COEFF OF K AND I FUNCTIONS RESP.
   !-----------------------------------------------------------------------
   csgni = sgn
-  inu = Fnu
+  inu = INT( Fnu )
   fnf = Fnu - inu
   ifn = inu + N - 1
   ang = fnf*sgn

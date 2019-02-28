@@ -2,7 +2,7 @@
 SUBROUTINE ALGAMS(X,Algam,Sgngam)
   IMPLICIT NONE
   REAL Algam, ALNGAM, Sgngam, X
-  INTEGER int
+  INTEGER i
   !***BEGIN PROLOGUE  ALGAMS
   !***PURPOSE  Compute the logarithm of the absolute value of the Gamma
   !            function.
@@ -34,7 +34,7 @@ SUBROUTINE ALGAMS(X,Algam,Sgngam)
   Sgngam = 1.0
   IF ( X>0.0 ) RETURN
   !
-  int = MOD(-AINT(X),2.0) + 0.1
-  IF ( int==0 ) Sgngam = -1.0
+  i = INT( MOD(-AINT(X),2.0) + 0.1 )
+  IF ( i==0 ) Sgngam = -1.0
   !
 END SUBROUTINE ALGAMS

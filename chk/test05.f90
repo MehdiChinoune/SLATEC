@@ -542,7 +542,7 @@ CONTAINS
           DO ix = 1, 25, 8
             X = ix - 0.20E0
             CALL EXINT(X,n,kode,m,tol,en,nz,ierr)
-            kx = X + 0.5E0
+            kx = INT( X + 0.5E0 )
             IF ( kx==0 ) kx = 1
             icase = 1
             A = n
@@ -635,9 +635,9 @@ CONTAINS
     xx(5) = 0.01E0
     DO i = 1, 5
       xx(i) = -xx(i)
-      k = xx(2)
-      n = xx(3)
-      m = xx(4)
+      k = INT( xx(2) )
+      n = INT( xx(3) )
+      m = INT( xx(4) )
       CALL EXINT(xx(i),n,k,m,xx(5),en,nz,ierr)
       IF ( ierr/=1 ) THEN
         Ipass = 0

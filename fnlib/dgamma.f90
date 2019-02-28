@@ -120,7 +120,7 @@ REAL(8) FUNCTION DGAMMA(X)
     ! COMPUTE GAMMA(X) FOR -XBND .LE. X .LE. XBND.  REDUCE INTERVAL AND FIND
     ! GAMMA(1+Y) FOR 0.0 .LE. Y .LT. 1.0 FIRST OF ALL.
     !
-    n = X
+    n = INT( X )
     IF ( X<0.D0 ) n = n - 1
     y = X - n
     n = n - 1

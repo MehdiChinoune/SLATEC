@@ -59,7 +59,7 @@ FUNCTION CHU(A,B,X)
     aintb = AINT(B+0.5)
     IF ( B<0.0 ) aintb = AINT(B-0.5)
     beps = B - aintb
-    n = aintb
+    n = INT( aintb )
     !
     alnx = LOG(X)
     xtoeps = EXP(-beps*alnx)

@@ -51,7 +51,7 @@ COMPLEX FUNCTION C9LGMC(Zin)
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  C9LGMC
   IF ( first ) THEN
-    nterm = -0.30*LOG(R1MACH(3))
+    nterm = INT( -0.30*LOG(R1MACH(3)) )
     bound = 0.1170*nterm*(0.1*R1MACH(3))**(-1./(2*nterm-1))
     xbig = 1.0/SQRT(R1MACH(3))
     xmax = EXP(MIN(LOG(R1MACH(2)/12.0),-LOG(12.*R1MACH(1))))

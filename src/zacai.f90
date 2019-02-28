@@ -82,7 +82,7 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     !     CALCULATE CSPN=EXP(FNU*PI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
     !     WHEN FNU IS LARGE
     !-----------------------------------------------------------------------
-    inu = Fnu
+    inu = INT( Fnu )
     arg = (Fnu-inu)*sgn
     cspnr = COS(arg)
     cspni = SIN(arg)

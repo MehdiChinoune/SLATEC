@@ -108,7 +108,7 @@ FUNCTION PSI(X)
   !
   ! PSI(X) FOR -2. .LT. X .LT. 2.
   !
-  n = X
+  n = INT( X )
   IF ( X<0. ) n = n - 1
   y = X - n
   n = n - 1

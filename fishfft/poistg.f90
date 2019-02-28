@@ -286,7 +286,7 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   END SELECT
   300  CALL POSTG2(np,N,M,W(iwba),W(iwbb),W(iwbc),Idimy,Y,W,W(iwb2),W(iwb3),&
     W(iww1),W(iww2),W(iww3),W(iwd),W(iwtcos),W(iwp))
-  ipstor = W(iww1)
+  ipstor = INT( W(iww1) )
   irev = 2
   IF ( Nperod==4 ) GOTO 600
   400 CONTINUE

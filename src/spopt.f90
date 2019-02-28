@@ -80,7 +80,7 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   ictmax = 1000
   ictopt = 0
   DO
-    next = Prgopt(last)
+    next = INT( Prgopt(last) )
     IF ( next<=0.OR.next>iadbig ) THEN
       !
       !     THE CHECKS FOR SMALL OR LARGE VALUES OF NEXT ARE TO PREVENT
@@ -168,7 +168,7 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         RETURN
       ENDIF
     ELSEIF ( ictopt<=ictmax ) THEN
-      key = Prgopt(last+1)
+      key = INT( Prgopt(last+1) )
       !
       !     IF KEY = 50, THIS IS TO BE A MAXIMIZATION PROBLEM
       !     INSTEAD OF A MINIMIZATION PROBLEM.
@@ -182,13 +182,13 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         !            = 2, LOTS OF OUTPUT
         !            = 3, EVEN MORE OUTPUT
       ELSEIF ( key==51 ) THEN
-        kprint = Prgopt(last+2)
+        kprint = INT( Prgopt(last+2) )
         lds = 3
         !
         !     IF KEY = 52, REDEFINE THE FORMAT AND PRECISION USED
         !     IN THE OUTPUT.
       ELSEIF ( key==52 ) THEN
-        IF ( Prgopt(last+2)/=zero ) idg = Prgopt(last+3)
+        IF ( Prgopt(last+2)/=zero ) idg = INT( Prgopt(last+3) )
         lds = 4
         !
         !     IF KEY = 53, THE ALLOTTED SPACE FOR THE SPARSE MATRIX
@@ -200,7 +200,7 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         !     IF KEY = 54, REDEFINE THE FILE NUMBER WHERE THE PAGES
         !     FOR THE SPARSE MATRIX ARE STORED.
       ELSEIF ( key==54 ) THEN
-        IF ( Prgopt(last+2)/=zero ) ipagef = Prgopt(last+3)
+        IF ( Prgopt(last+2)/=zero ) ipagef = INT( Prgopt(last+3) )
         lds = 4
         !
         !     IF KEY = 55,  A CONTINUATION FOR A PROBLEM MAY BE REQUESTED.
@@ -211,7 +211,7 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         !     IF KEY = 56, REDEFINE THE FILE NUMBER WHERE THE SAVED DATA
         !     WILL BE STORED.
       ELSEIF ( key==56 ) THEN
-        IF ( Prgopt(last+2)/=zero ) isave = Prgopt(last+3)
+        IF ( Prgopt(last+2)/=zero ) isave = INT( Prgopt(last+3) )
         lds = 4
         !
         !     IF KEY = 57, SAVE DATA (ON EXTERNAL FILE)  AT MXITLP ITERATIONS OR
@@ -223,7 +223,7 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         !     IF KEY = 58,  SEE IF PROBLEM IS TO RUN ONLY A GIVEN
         !     NUMBER OF ITERATIONS.
       ELSEIF ( key==58 ) THEN
-        IF ( Prgopt(last+2)/=zero ) mxitlp = Prgopt(last+3)
+        IF ( Prgopt(last+2)/=zero ) mxitlp = INT( Prgopt(last+3) )
         lds = 4
         !
         !     IF KEY = 59,  SEE IF USER PROVIDES THE BASIS INDICES.
@@ -235,7 +235,7 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
           i = 1
           n20043 = Mrelas
           DO WHILE ( (n20043-i)>=0 )
-            Ibasis(i) = Prgopt(last+2+i)
+            Ibasis(i) = INT( Prgopt(last+2+i) )
             i = i + 1
           ENDDO
           lds = Mrelas + 3
@@ -287,14 +287,14 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         !     IF KEY = 65, SET THE NUMBER OF ITERATIONS BETWEEN RECALCULATING
         !     THE ERROR IN THE PRIMAL SOLUTION.
       ELSEIF ( key==65 ) THEN
-        IF ( Prgopt(last+2)/=zero ) itbrc = MAX(one,Prgopt(last+3))
+        IF ( Prgopt(last+2)/=zero ) itbrc = INT( MAX(one,Prgopt(last+3)) )
         lds = 4
         !
         !     IF KEY = 66, SET THE NUMBER OF NEGATIVE REDUCED COSTS TO BE FOUND
         !     IN THE PARTIAL PRICING STRATEGY.
       ELSEIF ( key==66 ) THEN
         IF ( Prgopt(last+2)/=zero ) THEN
-          npp = MAX(Prgopt(last+3),one)
+          npp = INT( MAX(Prgopt(last+3),one) )
           npp = MIN(npp,Nvars)
         ENDIF
         lds = 4

@@ -222,7 +222,7 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
         !     CALCULATE CSGN=EXP(FNU*PI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
         !     WHEN FNU IS LARGE
         !-----------------------------------------------------------------------
-        inu = Fnu
+        inu = INT( Fnu )
         arg = (Fnu-inu)*pi
         IF ( Zi<0.0D0 ) arg = -arg
         csgnr = COS(arg)

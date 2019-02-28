@@ -35,7 +35,7 @@ COMPLEX FUNCTION CLNGAM(Zin)
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  CLNGAM
   IF ( first ) THEN
-    n = -0.30*LOG(R1MACH(3))
+    n = INT( -0.30*LOG(R1MACH(3)) )
     ! BOUND = N*(0.1*EPS)**(-1/(2*N-1))/(PI*EXP(1))
     bound = 0.1171*n*(0.1*R1MACH(3))**(-1./(2*n-1))
     dxrel = SQRT(R1MACH(4))
@@ -61,7 +61,7 @@ COMPLEX FUNCTION CLNGAM(Zin)
             ,1,1)
         ENDIF
         !
-        n = SQRT(bound**2-y**2) - x + 1.0
+        n = INT( SQRT(bound**2-y**2) - x ) + 1
         argsum = 0.0
         corr = (1.0,0.0)
         DO i = 1, n

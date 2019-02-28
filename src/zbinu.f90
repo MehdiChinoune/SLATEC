@@ -98,7 +98,7 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   !     INCREMENT FNU+NN-1 UP TO FNUL, COMPUTE AND RECUR BACKWARD
   !-----------------------------------------------------------------------
-  500  nui = Fnul - dfnu + 1
+  500  nui = INT( Fnul - dfnu ) + 1
   nui = MAX(nui,0)
   CALL ZBUNI(Zr,Zi,Fnu,Kode,nn,Cyr,Cyi,nw,nui,nlast,Fnul,Tol,Elim,Alim)
   IF ( nw<0 ) GOTO 700

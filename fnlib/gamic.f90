@@ -68,7 +68,7 @@ REAL FUNCTION GAMIC(A,X)
     alx = LOG(X)
     sga = 1.0
     IF ( A/=0.0 ) sga = SIGN(1.0,A)
-    ma = A + 0.5*sga
+    ma = INT( A + 0.5*sga )
     aeps = A - ma
     !
     izero = 0

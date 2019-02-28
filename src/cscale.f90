@@ -59,7 +59,7 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
     cs = Cols(k)
     IF ( cs/=0. ) THEN
       p = LOG(cs)/alog2
-      ip = -0.5*p
+      ip = INT( -0.5*p )
       s = 2.**ip
       Scales(k) = s
       IF ( Ic/=1 ) THEN

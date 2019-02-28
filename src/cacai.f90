@@ -78,7 +78,7 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
     !     CALCULATE CSPN=EXP(FNU*PI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
     !     WHEN FNU IS LARGE
     !-----------------------------------------------------------------------
-    inu = Fnu
+    inu = INT( Fnu )
     arg = (Fnu-inu)*sgn
     cpn = COS(arg)
     spn = SIN(arg)

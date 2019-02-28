@@ -267,7 +267,7 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
                 sm = sm + A(i,j)*REAL(B(j,jb), 8)
               ENDDO
             ENDIF
-            sm1 = sm
+            sm1 = REAL( sm, 4 )
             B(i,jb) = (B(i,jb)-sm1)/A(i,i)
           ENDDO
           !

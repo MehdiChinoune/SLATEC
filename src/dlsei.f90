@@ -486,7 +486,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !
   nlink = 100000
   last = 1
-  link = Prgopt(1)
+  link = INT( Prgopt(1) )
   IF ( link==0.OR.link>nlink ) THEN
     CALL XERMSG('SLATEC','DLSEI','THE OPTION VECTOR IS UNDEFINED',2,1)
     RETURN
@@ -501,7 +501,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
         RETURN
       ENDIF
       !
-      key = Prgopt(last+1)
+      key = INT( Prgopt(last+1) )
       IF ( key==1 ) THEN
         cov = Prgopt(last+2)/=0.D0
       ELSEIF ( key==2.AND.Prgopt(last+2)/=0.D0 ) THEN
@@ -516,7 +516,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
         tau = MAX(drelpr,Prgopt(last+2))
       ENDIF
       !
-      next = Prgopt(link)
+      next = INT( Prgopt(link) )
       IF ( next<=0.OR.next>nlink ) THEN
         CALL XERMSG('SLATEC','DLSEI','THE OPTION VECTOR IS UNDEFINED',2,1)
         RETURN

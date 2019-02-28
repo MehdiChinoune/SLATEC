@@ -34,8 +34,8 @@ SUBROUTINE USRMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
       J = 0
       Iflag(1) = 3
     ELSE
-      Iflag(2) = -Dattrv(1)
-      Iflag(3) = Dattrv(2)
+      Iflag(2) = INT( -Dattrv(1) )
+      Iflag(3) = INT( Dattrv(2) )
       Iflag(4) = 3
     ENDIF
     !
@@ -53,7 +53,7 @@ SUBROUTINE USRMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
       !
       !     SIGNAL THAT A SWITCH IS MADE TO A NEW COLUMN.
       J = -I
-      I = Dattrv(l)
+      I = INT( Dattrv(l) )
       l = l + 1
     ENDIF
     !
@@ -61,7 +61,7 @@ SUBROUTINE USRMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
     !
     !     UPDATE THE INDICES AND POINTERS FOR THE NEXT ENTRY.
     Iflag(2) = J
-    Iflag(3) = Dattrv(l+1)
+    Iflag(3) = INT( Dattrv(l+1) )
     Iflag(4) = l + 2
     !
     !     INDCAT=0 DENOTES THAT ENTRIES OF THE MATRIX ARE ASSIGNED THE

@@ -64,7 +64,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   iflag = 0
   koded = Kode
   rz = ctwo/Z
-  inu = Fnu + 0.5E0
+  inu = INT( Fnu + 0.5E0 )
   dnu = Fnu - inu
   IF ( ABS(dnu)/=0.5E0 ) THEN
     dnu2 = 0.0E0
@@ -265,7 +265,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     50     fk = fk + spi*t1*SQRT(t2/caz)
     fhs = ABS(0.25E0-dnu2)
   ENDIF
-  100  k = fk
+  100  k = INT( fk )
   !-----------------------------------------------------------------------
   !     BACKWARD RECURRENCE LOOP FOR MILLER ALGORITHM
   !-----------------------------------------------------------------------

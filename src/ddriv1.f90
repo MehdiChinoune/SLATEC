@@ -344,7 +344,7 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   ENDIF
   IF ( nstate/=1 ) THEN
     DO i = 1, leniw
-      iwork(i) = Work(i+lenwcm)
+      iwork(i) = INT( Work(i+lenwcm) )
     ENDDO
   ENDIF
   CALL DDRIV3(N,T,Y,F,nstate,Tout,ntask,NROOT,Eps,ewtcom,IERROR,MINT,MITER,&

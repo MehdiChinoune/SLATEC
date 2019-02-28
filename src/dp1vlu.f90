@@ -71,11 +71,11 @@ SUBROUTINE DP1VLU(L,Nder,X,Yfit,Yp,A)
   ELSE
     ndo = MAX(Nder,0)
     ndo = MIN(ndo,L)
-    maxord = A(1) + 0.5D0
+    maxord = INT( A(1) + 0.5D0 )
     k1 = maxord + 1
     k2 = k1 + maxord
     k3 = k2 + maxord + 2
-    nord = A(k3) + 0.5D0
+    nord = INT( A(k3) + 0.5D0 )
     IF ( L<=nord ) THEN
       k4 = k3 + L + 1
       IF ( Nder>=1 ) THEN

@@ -107,7 +107,7 @@ FUNCTION GAMMA(X)
     ! COMPUTE GAMMA(X) FOR ABS(X) .LE. 10.0.  REDUCE INTERVAL AND
     ! FIND GAMMA(1+Y) FOR 0. .LE. Y .LT. 1. FIRST OF ALL.
     !
-    n = X
+    n = INT( X )
     IF ( X<0. ) n = n - 1
     y = X - n
     n = n - 1

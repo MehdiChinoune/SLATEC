@@ -148,7 +148,7 @@ SUBROUTINE DGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
     !        COMPUTE IND (ESTIMATE OF NO. OF SIGNIFICANT DIGITS)
     !        AND CHECK FOR IND GREATER THAN ZERO
     !
-    Ind = -LOG10(D1MACH(4)/rcond)
+    Ind = INT( -LOG10(D1MACH(4)/rcond) )
     IF ( Ind<=0 ) THEN
       Ind = -10
       CALL XERMSG('SLATEC','DGEFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,&

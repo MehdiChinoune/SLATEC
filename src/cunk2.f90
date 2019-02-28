@@ -66,7 +66,7 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   yy = AIMAG(zr)
   zn = -zr*ci
   zb = zr
-  inu = Fnu
+  inu = INT( Fnu )
   fnf = Fnu - inu
   ang = -hpi*fnf
   car = COS(ang)

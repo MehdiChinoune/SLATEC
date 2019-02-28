@@ -36,7 +36,7 @@ REAL(8) FUNCTION DEXPRL(X)
     alneps = LOG(D1MACH(3))
     xn = 3.72D0 - 0.3D0*alneps
     xln = LOG((xn+1.0D0)/1.36D0)
-    nterms = xn - (xn*xln+alneps)/(xln+1.36D0) + 1.5D0
+    nterms = INT( xn - (xn*xln+alneps)/(xln+1.36D0) + 1.5D0 )
     xbnd = D1MACH(3)
   ENDIF
   first = .FALSE.

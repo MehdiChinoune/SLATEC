@@ -35,7 +35,7 @@ COMPLEX FUNCTION CEXPRL(Z)
     alneps = LOG(R1MACH(3))
     xn = 3.72 - 0.3*alneps
     xln = LOG((xn+1.0)/1.36)
-    nterms = xn - (xn*xln+alneps)/(xln+1.36) + 1.5
+    nterms = INT( xn - (xn*xln+alneps)/(xln+1.36) + 1.5 )
     rbnd = R1MACH(3)
   ENDIF
   first = .FALSE.

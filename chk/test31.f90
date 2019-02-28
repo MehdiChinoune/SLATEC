@@ -257,11 +257,11 @@ CONTAINS
     CALL DINTRV(t,n+1,w(4),ilo,ileft,mflag)
     DO i = 1, 5
       w(i) = -w(i)
-      n = w(1)
-      k = w(2)
-      id = w(3)
+      n = INT(w(1))
+      k = INT(w(2))
+      id = INT(w(3))
       xx = w(4)
-      ldc = w(5)
+      ldc = INT(w(5))
       IF ( i<=4 ) THEN
         bv = DBVALU(t,bc,n,k,id,xx,inbv,qq)
         IF ( NUMXER(nerr)/=2 ) THEN
@@ -391,11 +391,11 @@ CONTAINS
     inppv = 1
     DO i = 1, 5
       w(i) = -w(i)
-      lxi = w(1)
-      k = w(2)
-      id = w(3)
+      lxi =INT(w(1))
+      k = INT(w(2))
+      id = INT(w(3))
       xx = w(4)
-      ldc = w(5)
+      ldc = INT(w(5))
       spv = DPPVAL(ldc,c,xi,lxi,k,id,xx,inppv)
       IF ( (i/=4.AND.NUMXER(nerr)/=2).OR.(i==4.AND.NUMXER(nerr)/=0) ) THEN
         Ipass = 0
@@ -421,7 +421,7 @@ CONTAINS
       !
       w(i) = -w(i)
     ENDDO
-    ldc = w(5)
+    ldc = INT(w(5))
     CALL DPFQAD(DFB,ldc,c,xi,lxi,k,id,x1,x2,atol,quad,ierr)
     IF ( NUMXER(nerr)/=2 ) THEN
       Ipass = 0

@@ -88,7 +88,7 @@ FUNCTION POCH1(A,X)
     bp = A
     IF ( A<(-0.5) ) bp = 1.0 - A - X
     incr = 0
-    IF ( bp<10.0 ) incr = 11.0 - bp
+    IF ( bp<10.0 ) incr = 11 - INT( bp )
     b = bp + incr
     !
     var = b + 0.5*(X-1.0)
@@ -105,7 +105,7 @@ FUNCTION POCH1(A,X)
       term = var2
       poly1 = gbern(2)*term
       !
-      nterms = -0.5*alneps/alnvar + 1.0
+      nterms = INT( -0.5*alneps/alnvar ) + 1
       IF ( nterms>9 ) CALL XERMSG('SLATEC','POCH1',&
         'NTERMS IS TOO BIG, MAYBE R1MACH(3) IS BAD'&
         ,1,2)

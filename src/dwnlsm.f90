@@ -128,7 +128,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   nlink = 100000
   ntimes = 0
   last = 1
-  link = Prgopt(1)
+  link = INT( Prgopt(1) )
   IF ( link<=0.OR.link>nlink ) THEN
     CALL XERMSG('SLATEC','DWNLSM',&
       'IN DWNNLS, THE OPTION VECTOR IS UNDEFINED',3,1)
@@ -145,7 +145,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
         RETURN
       ENDIF
       !
-      key = Prgopt(last+1)
+      key = INT( Prgopt(last+1) )
       IF ( key==6.AND.Prgopt(last+2)/=0.D0 ) THEN
         DO j = 1, N
           t = DNRM2(m,W(1,j),1)
@@ -158,7 +158,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       IF ( key==8 ) tau = MAX(drelpr,Prgopt(last+2))
       IF ( key==9 ) blowup = MAX(drelpr,Prgopt(last+2))
       !
-      next = Prgopt(link)
+      next = INT( Prgopt(link) )
       IF ( next<=0.OR.next>nlink ) THEN
         CALL XERMSG('SLATEC','DWNLSM',&
           'IN DWNNLS, THE OPTION VECTOR IS UNDEFINED',3,1)

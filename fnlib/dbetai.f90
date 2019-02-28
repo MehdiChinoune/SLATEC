@@ -86,7 +86,7 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
       DBETAI = EXP(xb)
       term = DBETAI*p
       IF ( ps/=1.0D0 ) THEN
-        n = MAX(alneps/LOG(y),4.0D0)
+        n = INT( MAX(alneps/LOG(y),4.0D0) )
         DO i = 1, n
           xi = i
           term = term*(xi-ps)*y/xi
@@ -100,13 +100,13 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
     IF ( q>1.0D0 ) THEN
       !
       xb = p*LOG(y) + q*LOG(1.0D0-y) - DLBETA(p,q) - LOG(q)
-      ib = MAX(xb/alnsml,0.0D0)
+      ib = INT( MAX(xb/alnsml,0.0D0) )
       term = EXP(xb-ib*alnsml)
       c = 1.0D0/(1.D0-y)
       p1 = q*c/(p+q-1.D0)
       !
       finsum = 0.0D0
-      n = q
+      n = INT( q )
       IF ( q==REAL(n, 8) ) n = n - 1
       DO i = 1, n
         IF ( p1<=1.0D0.AND.term/eps<=finsum ) EXIT

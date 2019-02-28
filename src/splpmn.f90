@@ -1031,7 +1031,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     ENDIF
     !
     !     FORCE PAGE FILE TO BE OPENED ON RESTARTS.
-    key = Amat(4)
+    key = INT( Amat(4) )
     Amat(4) = zero
     lpr = Nvars + 4
     WRITE (isave) (Amat(i),i=1,lpr), (Imat(i),i=1,lpr)

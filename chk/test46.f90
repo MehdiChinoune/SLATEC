@@ -54,9 +54,9 @@ CONTAINS
     mstate = 1
     lenw = 342
     CALL DDRIV1(N,t,y,DDF,tout,mstate,eps,work,lenw,ierflg)
-    nstep = work(lenw-(N+50)+3)
-    nfe = work(lenw-(N+50)+4)
-    nje = work(lenw-(N+50)+5)
+    nstep = INT( work(lenw-(N+50)+3) )
+    nfe = INT( work(lenw-(N+50)+4) )
+    nje = INT( work(lenw-(N+50)+5) )
     IF ( mstate/=2 ) THEN
       IF ( Kprint==1 ) THEN
         WRITE (Lun,&

@@ -42,7 +42,7 @@ SUBROUTINE DXQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
     CALL DXPQNU(Nu1,Nu2,mu,Theta,Id,Pqa,Ipqa,Ierror)
     IF ( Ierror/=0 ) RETURN
     IF ( Mu1==0 ) RETURN
-    k = (Nu2-Nu1+1.5D0)
+    k = INT( (Nu2-Nu1+1.5D0) )
     pq2 = Pqa(k)
     ipq2 = Ipqa(k)
     pql2 = Pqa(k-1)

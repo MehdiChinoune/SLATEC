@@ -131,7 +131,7 @@ REAL(8) FUNCTION DPSI(X)
     !
     ! DPSI(X) FOR ABS(X) .LE. 2
     !
-    n = X
+    n = INT( X )
     IF ( X<0.D0 ) n = n - 1
     y = X - n
     n = n - 1

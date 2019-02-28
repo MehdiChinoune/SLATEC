@@ -103,7 +103,7 @@ FUNCTION RAND(R)
   IF ( R>=0. ) THEN
     IF ( R>0. ) THEN
       !
-      ix1 = MOD(R,1.)*4194304. + 0.5
+      ix1 = INT( MOD(R,1.)*4194304. + 0.5 )
       ix0 = MOD(ix1,2048)
       ix1 = (ix1-ix0)/2048
     ELSE

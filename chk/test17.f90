@@ -250,14 +250,14 @@ CONTAINS
         CASE (5)
           ! 16. SROTMG
           DO i = 1, 4
-            stemp(i) = dab(i,k)
+            stemp(i) = REAL( dab(i,k), 4 )
             stemp(i+4) = zero
           ENDDO
           stemp(9) = zero
           CALL SROTMG(stemp(1),stemp(2),stemp(3),stemp(4),stemp(5))
           !
           DO i = 1, 9
-            strue(i) = dtrue(i,k)
+            strue(i) = REAL( dtrue(i,k), 4 )
           ENDDO
           CALL STEST(9,stemp,strue,strue,Sfac,Kprint)
         CASE (6)
@@ -272,8 +272,8 @@ CONTAINS
         CASE DEFAULT
           ! 12. SROTG
           IF ( k>8 ) EXIT
-          sa = da1(k)
-          sb = db1(k)
+          sa = REAL( da1(k), 4 )
+          sb = REAL( db1(k), 4 )
           CALL SROTG(sa,sb,sc,ss)
           CALL STEST(1,[sa],[REAL(datrue(k))],[REAL(datrue(k))],Sfac,Kprint)
           CALL STEST(1,[sb],[REAL(dbtrue(k))],[REAL(dbtrue(k))],Sfac,Kprint)
@@ -406,7 +406,7 @@ CONTAINS
         len = 2*MAX(N,1)
         !                                                  SET VECTOR ARGUMENTS.
         DO i = 1, len
-          sx(i) = dv(i,np1,INCx)
+          sx(i) = REAL( dv(i,np1,INCx), 4 )
           dx(i) = dv(i,np1,INCx)
           cx(i) = cv(i,np1,INCx)
         ENDDO
@@ -422,7 +422,7 @@ CONTAINS
             CALL STEST(1,[SCNRM2(N,cx,INCx)],strue2(np1),strue2(np1),Sfac,Kprint)
           CASE (4)
             ! 29. SASUM
-            stemp = dtrue3(np1)
+            stemp = REAL( dtrue3(np1), 4 )
             CALL STEST(1,[SASUM(N,sx,INCx)],[stemp],[stemp],Sfac,Kprint)
           CASE (5)
             ! 30. DASUM
@@ -434,7 +434,7 @@ CONTAINS
             ! 32. SSCALE
             CALL SSCAL(N,sa,sx,INCx)
             DO i = 1, len
-              strue(i) = dtrue5(i,np1,INCx)
+              strue(i) = REAL( dtrue5(i,np1,INCx), 4 )
             ENDDO
             CALL STEST(len,sx,strue,strue,Sfac,Kprint)
           CASE (8)
@@ -460,7 +460,7 @@ CONTAINS
             CALL ITEST(1,[ICAMAX(N,cx,INCx)],itrue3(np1),Kprint)
           CASE DEFAULT
             ! 26. SNRM2
-            stemp = dtrue1(np1)
+            stemp = REAL( dtrue1(np1), 4 )
             CALL STEST(1,[SNRM2(N,sx,INCx)],[stemp],[stemp],Sfac,Kprint)
         END SELECT
         !
@@ -849,8 +849,8 @@ CONTAINS
         leny = lens(kn,my)
         ! INITIALIZE ALL ARGUMENT ARRAYS.
         DO i = 1, 7
-          sx(i) = dx1(i)
-          sy(i) = dy1(i)
+          sx(i) = REAL( dx1(i), 4 )
+          sy(i) = REAL( dy1(i), 4 )
           dx(i) = dx1(i)
           dy(i) = dy1(i)
           cx(i) = cx1(i)
@@ -907,7 +907,7 @@ CONTAINS
             ! 9. SAXPY
             CALL SAXPY(N,sa,sx,INCx,sy,INCy)
             DO j = 1, leny
-              sty(j) = dt8(j,kn,ki)
+              sty(j) = REAL( dt8(j,kn,ki), 4 )
             ENDDO
             CALL STEST(leny,sy,sty,ssize2(1,ksize),Sfac,Kprint)
           CASE (10)
@@ -923,10 +923,10 @@ CONTAINS
           CASE (14)
             ! 14. SROT
             DO i = 1, 7
-              sx(i) = dx1(i)
-              sy(i) = dy1(i)
-              stx(i) = dt9x(i,kn,ki)
-              sty(i) = dt9y(i,kn,ki)
+              sx(i) = REAL( dx1(i), 4 )
+              sy(i) = REAL( dy1(i), 4 )
+              stx(i) = REAL( dt9x(i,kn,ki), 4 )
+              sty(i) = REAL( dt9y(i,kn,ki), 4 )
             ENDDO
             CALL SROT(N,sx,INCx,sy,INCy,sc,ss)
             CALL STEST(lenx,sx,stx,ssize2(1,ksize),Sfac,Kprint)
@@ -945,14 +945,14 @@ CONTAINS
             kni = kn + 4*(ki-1)
             DO kpar = 1, 4
               DO i = 1, 7
-                sx(i) = dx1(i)
-                sy(i) = dy1(i)
-                stx(i) = dt19x(i,kpar,kni)
-                sty(i) = dt19y(i,kpar,kni)
+                sx(i) = REAL( dx1(i), 4 )
+                sy(i) = REAL( dy1(i), 4 )
+                stx(i) = REAL( dt19x(i,kpar,kni), 4 )
+                sty(i) = REAL( dt19y(i,kpar,kni), 4 )
               ENDDO
               !
               DO i = 1, 5
-                sparam(i) = dpar(i,kpar)
+                sparam(i) = REAL( dpar(i,kpar), 4 )
               ENDDO
               ! SET MODE TO IDENTIFY DIAGNOSTIC OUTPUT, IF ANY
               MODe = INT(sparam(1))
@@ -1004,7 +1004,7 @@ CONTAINS
           CASE (20)
             ! 20. SCOPY
             DO i = 1, 7
-              sty(i) = dt10y(i,kn,ki)
+              sty(i) = REAL( dt10y(i,kn,ki), 4 )
             ENDDO
             CALL SCOPY(N,sx,INCx,sy,INCy)
             CALL STEST(leny,sy,sty,ssize2(1,1),1.,Kprint)
@@ -1020,8 +1020,8 @@ CONTAINS
             ! 23. SSWAP
             CALL SSWAP(N,sx,INCx,sy,INCy)
             DO i = 1, 7
-              stx(i) = dt10x(i,kn,ki)
-              sty(i) = dt10y(i,kn,ki)
+              stx(i) = REAL( dt10x(i,kn,ki), 4 )
+              sty(i) = REAL( dt10y(i,kn,ki), 4 )
             ENDDO
             CALL STEST(lenx,sx,stx,ssize2(1,1),1.,Kprint)
             CALL STEST(leny,sy,sty,ssize2(1,1),1.,Kprint)

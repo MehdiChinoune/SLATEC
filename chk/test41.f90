@@ -36,7 +36,7 @@ CONTAINS
     !
     a = 0.0E0
     b = 5.0E0
-    xint = EXP(5.0D0) - 1.0D0
+    xint = REAL( (EXP(5.0D0) - 1.D0), 4 )
     n = 500
     rn1 = n - 1
     sqb = SQRT(b)

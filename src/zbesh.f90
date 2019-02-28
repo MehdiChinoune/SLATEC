@@ -288,7 +288,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
     !     CALCULATE EXP(FNU*HPI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
     !     WHEN FNU IS LARGE
     !-----------------------------------------------------------------------
-    inu = Fnu
+    inu = INT( Fnu )
     inuh = inu/2
     ir = inu - 2*inuh
     arg = (Fnu-(inu-ir))*sgn

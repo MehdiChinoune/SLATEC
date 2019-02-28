@@ -213,7 +213,7 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
         !     CALCULATE CSGN=EXP(FNU*PI*I) TO MINIMIZE LOSSES OF SIGNIFICANCE
         !     WHEN FNU IS LARGE
         !-----------------------------------------------------------------------
-        inu = Fnu
+        inu = INT( Fnu )
         arg = (Fnu-inu)*pi
         IF ( yy<0.0E0 ) arg = -arg
         s1 = COS(arg)

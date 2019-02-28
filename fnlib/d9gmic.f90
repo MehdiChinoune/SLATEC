@@ -45,7 +45,7 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
     'A MUST BE NEAR A NEGATIVE INTEGER',2,2)
   IF ( X<=0.D0 ) CALL XERMSG('SLATEC','D9GMIC','X MUST BE GT ZERO',3,2)
   !
-  m = -(A-0.5D0)
+  m = INT( -(A-0.5D0) )
   fm = m
   !
   te = 1.0D0

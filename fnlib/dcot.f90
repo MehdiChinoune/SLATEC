@@ -80,7 +80,7 @@ REAL(8) FUNCTION DCOT(X)
   ainty = ainty + ainty2
   y = y - ainty2
   !
-  ifn = MOD(ainty,2.0D0)
+  ifn = INT( MOD(ainty,2.0D0) )
   IF ( ifn==1 ) y = 1.0D0 - y
   !
   IF ( ABS(X)>0.5D0.AND.y<ABS(X)*sqeps ) CALL XERMSG('SLATEC','DCOT',&

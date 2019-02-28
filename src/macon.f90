@@ -29,8 +29,8 @@ SUBROUTINE MACON
   URO = R1MACH(4)
   SRU = SQRT(URO)
   dd = -LOG10(URO)
-  LPAr = 0.5*dd
-  ke = 0.5 + 0.75*dd
+  LPAr = INT( 0.5*dd )
+  ke = INT( 0.5 + 0.75*dd )
   EPS = 10.**(-2*ke)
   SQOvfl = SQRT(R1MACH(2))
   TWOu = 2.0*URO

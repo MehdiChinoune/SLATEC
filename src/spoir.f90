@@ -171,8 +171,8 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   !     COMPUTE  RESIDUAL
   !
   DO j = 1, N
-    Work(j,N+1) = -Work(j,N+1) + DSDOT(j-1,A(1,j),1,V(1),1)&
-      + DSDOT(N-j+1,A(j,j),Lda,V(j),1)
+    Work(j,N+1) = -Work(j,N+1) + REAL( DSDOT(j-1,A(1,j),1,V(1),1)&
+      + DSDOT(N-j+1,A(j,j),Lda,V(j),1) , 4 )
   ENDDO
   !
   !     SOLVE A*DELTA=R
@@ -186,7 +186,7 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   !     COMPUTE IND (ESTIMATE OF NO. OF SIGNIFICANT DIGITS)
   !     AND CHECK FOR IND GREATER THAN ZERO
   !
-  Ind = -LOG10(MAX(R1MACH(4),dnorm/xnorm))
+  Ind = INT( -LOG10(MAX(R1MACH(4),dnorm/xnorm)) )
   IF ( Ind<=0 ) THEN
     Ind = -10
     CALL XERMSG('SLATEC','SPOIR','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)

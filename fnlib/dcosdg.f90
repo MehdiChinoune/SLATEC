@@ -30,7 +30,7 @@ REAL(8) FUNCTION DCOSDG(X)
   DCOSDG = COS(raddeg*X)
   !
   IF ( MOD(X,90.D0)/=0.D0 ) RETURN
-  n = ABS(X)/90.D0 + 0.5D0
+  n = INT( ABS(X)/90.D0 + 0.5D0 )
   n = MOD(n,2)
   IF ( n==0 ) DCOSDG = SIGN(1.0D0,DCOSDG)
   IF ( n==1 ) DCOSDG = 0.0D0

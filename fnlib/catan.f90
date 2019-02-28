@@ -36,7 +36,7 @@ COMPLEX FUNCTION CATAN(Z)
   !***FIRST EXECUTABLE STATEMENT  CATAN
   IF ( first ) THEN
     ! NTERMS = LOG(EPS)/LOG(RBND) WHERE RBND = 0.1
-    nterms = -0.4343*LOG(R1MACH(3)) + 1.0
+    nterms = INT( -0.4343*LOG(R1MACH(3)) ) + 1
     sqeps = SQRT(R1MACH(4))
     rmin = SQRT(3.0*R1MACH(3))
     rmax = 1.0/R1MACH(3)

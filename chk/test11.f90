@@ -71,7 +71,7 @@ CONTAINS
         )
     ENDIF
     nudiff = 5
-    mu1 = dnu1
+    mu1 = INT( dnu1 )
     mu2 = mu1
     deg = 0.1
     theta = deg*4.*ATAN(1.0)/180.0
@@ -89,7 +89,7 @@ CONTAINS
     ! XADJ, XCSRT, XRED, XC210, and XCON.
     !
     isum = 0
-    ndec = (I1MACH(11)-1)*LOG10(REAL(I1MACH(10)))
+    ndec = INT( (I1MACH(11)-1)*LOG10(REAL(I1MACH(10))) )
     ! Formats that depend on NDEC ...
     fmt(1:20) = '(1X, 6X, 4H   (,E30.'
     WRITE (fmt(21:22),'(I2)') ndec

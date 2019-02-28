@@ -35,8 +35,8 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   scle = D1MACH(1)/Tol
   Nz = 0
   az = ZABS(Zr,Zi)
-  iaz = az
-  ifnu = Fnu
+  iaz = INT( az )
+  ifnu = INT( Fnu )
   inu = ifnu + N - 1
   at = iaz + 1.0D0
   raz = 1.0D0/az

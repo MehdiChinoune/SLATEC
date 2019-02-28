@@ -137,7 +137,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     !
     !        Sorted indices are in PTEMP(*).
     !
-    l = Ptemp(idata)
+    l = INT( Ptemp(idata) )
     xval = Xdata(l)
     !
     !        When interval changes, process equations in the last block.

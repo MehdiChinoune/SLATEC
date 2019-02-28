@@ -26,8 +26,8 @@ SUBROUTINE DMACON
   URO = D1MACH(4)
   SRU = SQRT(URO)
   dd = -LOG10(URO)
-  LPAr = 0.5D0*dd
-  ke = 0.5D0 + 0.75D0*dd
+  LPAr = INT( 0.5D0*dd )
+  ke = INT( 0.5D0 + 0.75D0*dd )
   EPS = 10.0D0**(-2*ke)
   SQOvfl = SQRT(D1MACH(2))
   TWOu = 2.0D0*URO

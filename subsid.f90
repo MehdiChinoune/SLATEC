@@ -117,7 +117,7 @@ INTEGER FUNCTION FIND(X,N,T)
     FIND = 0
     RETURN
   ENDIF
-  m = LOG(REAL(N))/B
+  m = INT( LOG(REAL(N))/B )
   k = 2**m
   i = N - k + 1
   DO WHILE ( T/=X(i) )

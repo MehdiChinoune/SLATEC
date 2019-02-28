@@ -75,7 +75,7 @@ FUNCTION COT(X)
   ainty = ainty + ainty2
   y = y - ainty2
   !
-  ifn = MOD(ainty,2.)
+  ifn = INT( MOD(ainty,2.) )
   IF ( ifn==1 ) y = 1.0 - y
   !
   IF ( ABS(X)>0.5.AND.y<ABS(X)*sqeps ) CALL XERMSG('SLATEC','COT',&

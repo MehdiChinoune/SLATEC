@@ -139,7 +139,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
         RETURN
       ENDIF
     ENDIF
-    ix = X + 0.5E0
+    ix = INT( X + 0.5E0 )
     kn = N + M - 1
     IF ( kn<=ix ) THEN
       icase = 1
@@ -178,7 +178,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     !     SERIES FOR E(N,X) FOR X.LE.XCUT
     !-----------------------------------------------------------------------
     tx = X + 0.5E0
-    ix = tx
+    ix = INT( tx )
     !-----------------------------------------------------------------------
     !     ICASE=1 MEANS INTEGER CLOSEST TO X IS 2 AND N=1
     !     ICASE=2 MEANS INTEGER CLOSEST TO X IS 0,1, OR 2 AND N.GE.2

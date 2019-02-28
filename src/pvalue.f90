@@ -72,11 +72,11 @@ SUBROUTINE PVALUE(L,Nder,X,Yfit,Yp,A)
   ELSE
     ndo = MAX(Nder,0)
     ndo = MIN(ndo,L)
-    maxord = A(1) + 0.5
+    maxord = INT( A(1) + 0.5 )
     k1 = maxord + 1
     k2 = k1 + maxord
     k3 = k2 + maxord + 2
-    nord = A(k3) + 0.5
+    nord = INT( A(k3) + 0.5 )
     IF ( L<=nord ) THEN
       k4 = k3 + L + 1
       IF ( Nder>=1 ) THEN

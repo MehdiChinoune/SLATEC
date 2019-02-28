@@ -120,7 +120,7 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   Iflag = 0
   mlso = 0
   IF ( Inhomo==3 ) mlso = 1
-  kflag = 0.5*LOG10(EPS)
+  kflag = INT( 0.5*LOG10(EPS) )
   CALL XGETF(nf)
   CALL XSETF(0)
   DO

@@ -92,7 +92,7 @@ SUBROUTINE CBABK2(Nm,N,Low,Igh,Scale,M,Zr,Zi)
       i = ii
       IF ( i<Low.OR.i>Igh ) THEN
         IF ( i<Low ) i = Low - ii
-        k = Scale(i)
+        k = INT(Scale(i))
         IF ( k/=i ) THEN
           !
           DO j = 1, M

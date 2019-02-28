@@ -214,7 +214,7 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
       !     WHEN FNU IS LARGE
       !-----------------------------------------------------------------------
       cii = 1.0D0
-      inu = Fnu
+      inu = INT( Fnu )
       inuh = inu/2
       ir = inu - 2*inuh
       arg = (Fnu-(inu-ir))*hpi

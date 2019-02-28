@@ -57,7 +57,7 @@ FUNCTION FAC(N)
   !***FIRST EXECUTABLE STATEMENT  FAC
   IF ( nmax==0 ) THEN
     CALL GAMLIM(xmin,xmax)
-    nmax = xmax - 1.
+    nmax = INT( xmax ) - 1
   ENDIF
   !
   IF ( N<0 ) CALL XERMSG('SLATEC','FAC',&

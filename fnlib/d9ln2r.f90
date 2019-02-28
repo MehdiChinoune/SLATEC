@@ -134,7 +134,7 @@ REAL(8) FUNCTION D9LN2R(X)
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  D9LN2R
   IF ( first ) THEN
-    eps = D1MACH(3)
+    eps = REAL(  D1MACH(3), 4 )
     ntln21 = INITDS(ln21cs,50,0.1*eps)
     ntln22 = INITDS(ln22cs,37,0.1*eps)
     !

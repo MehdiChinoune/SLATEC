@@ -29,7 +29,7 @@ REAL(8) FUNCTION DSINDG(X)
   DSINDG = SIN(raddeg*X)
   !
   IF ( MOD(X,90.D0)/=0.D0 ) RETURN
-  n = ABS(X)/90.D0 + 0.5D0
+  n = INT( ABS(X)/90.D0 + 0.5D0 )
   n = MOD(n,2)
   IF ( n==0 ) DSINDG = 0.D0
   IF ( n==1 ) DSINDG = SIGN(1.0D0,DSINDG)

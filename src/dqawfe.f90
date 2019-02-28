@@ -266,7 +266,7 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
       !           INITIALIZATIONS
       !           ---------------
       !
-      l = ABS(Omega)
+      l = INT( ABS(Omega) )
       dl = 2*l + 1
       cycle = dl*pi/ABS(Omega)
       Ier = 0

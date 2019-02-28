@@ -104,7 +104,7 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
     w2 = 216.0E0/140.0E0
     w3 = 27.0E0/140.0E0
     w4 = 272.0E0/140.0E0
-    nbits = R1MACH(5)*I1MACH(11)/0.30102000E0
+    nbits = INT( R1MACH(5)*I1MACH(11)/0.30102000E0 )
     nlmx = MIN(40,(nbits*4)/5)
     sq2 = SQRT(2.0E0)
   ENDIF
@@ -120,7 +120,7 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
       c = ABS(1.0E0-A/B)
       IF ( c<=0.1E0 ) THEN
         IF ( c<=0.0E0 ) GOTO 400
-        nib = 0.5E0 - LOG(c)/LOG(2.0E0)
+        nib = INT( 0.5E0 - LOG(c)/LOG(2.0E0) )
         lmx = MIN(nlmx,nbits-nib-4)
         IF ( lmx<2 ) GOTO 400
         lmn = MIN(lmn,lmx)

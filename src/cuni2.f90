@@ -62,7 +62,7 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   zn = -Z*ci
   zb = Z
   cid = -ci
-  inu = Fnu
+  inu = INT( Fnu )
   ang = hpi*(Fnu-inu)
   car = COS(ang)
   sar = SIN(ang)

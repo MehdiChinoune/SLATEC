@@ -41,8 +41,8 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam,Alx)
   !
   IF ( X<=0.D0 ) CALL XERMSG('SLATEC','D9GMIT','X SHOULD BE GT 0',1,2)
   !
-  ma = A + 0.5D0
-  IF ( A<0.D0 ) ma = A - 0.5D0
+  ma = INT( A + 0.5D0 )
+  IF ( A<0.D0 ) ma = INT( A - 0.5D0 )
   aeps = A - ma
   !
   ae = A

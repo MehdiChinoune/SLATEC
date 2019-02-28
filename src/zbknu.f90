@@ -73,7 +73,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   sti = -Zi*rcaz
   rzr = (str+str)*rcaz
   rzi = (sti+sti)*rcaz
-  inu = Fnu + 0.5D0
+  inu = INT( Fnu + 0.5D0 )
   dnu = Fnu - inu
   IF ( ABS(dnu)/=0.5D0 ) THEN
     dnu2 = 0.0D0
@@ -317,7 +317,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   !     BACKWARD RECURRENCE LOOP FOR MILLER ALGORITHM
   !-----------------------------------------------------------------------
-  100  k = fk
+  100  k = INT( fk )
   fk = k
   fks = fk*fk
   p1r = czeror

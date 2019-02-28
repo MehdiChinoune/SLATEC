@@ -91,15 +91,15 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
     cov = .FALSE.
     sclcov = .TRUE.
     last = 1
-    link = Prgopt(1)
+    link = INT( Prgopt(1) )
     DO
       !
       IF ( link>1 ) THEN
-        key = Prgopt(last+1)
+        key = INT( Prgopt(last+1) )
         IF ( key==1 ) cov = Prgopt(last+2)/=0.E0
         IF ( key==10 ) sclcov = Prgopt(last+2)==0.E0
         IF ( key==5 ) tol = MAX(srelpr,Prgopt(last+2))
-        next = Prgopt(link)
+        next = INT( Prgopt(link) )
         last = link
         link = next
         CYCLE

@@ -549,7 +549,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   CALL GENBUN(Nbdcnd,nunk,1,munk,W(1),W(id2+1),W(id3+1),Idimf,&
     F(mstart,nstart),ierr1,W(id4+1))
-  iwstor = W(id4+1) + 3*munk
+  iwstor = INT( W(id4+1) ) + 3*munk
   SELECT CASE (Mbdcnd)
     CASE (1,2,3,4)
       GOTO 400

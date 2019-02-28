@@ -93,7 +93,7 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,&
       IF ( Iflag==13 ) THEN
         xl = ABS(XENd-XBEg)
         zquit = ABS(X-XBEg)
-        inc = 1.5D0*xl/zquit*(MXNon+1)
+        inc = INT( 1.5D0*xl/zquit*(MXNon+1) )
         IF ( NDIsk/=1 ) THEN
           nsafw = inc*KKKzpw + NEEdw
           nsafiw = inc*NFCc + NEEdiw

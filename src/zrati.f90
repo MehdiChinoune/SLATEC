@@ -34,9 +34,9 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
     1.41421356237309505D0/
   !***FIRST EXECUTABLE STATEMENT  ZRATI
   az = ZABS(Zr,Zi)
-  inu = Fnu
+  inu = INT( Fnu )
   idnu = inu + N - 1
-  magz = az
+  magz = INT( az )
   amagz = magz + 1
   fdnu = idnu
   fnup = MAX(amagz,fdnu)

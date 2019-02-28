@@ -38,8 +38,8 @@ FUNCTION R9PAK(Y,N)
   IF ( first ) THEN
     a1n2b = 1.0
     IF ( I1MACH(10)/=2 ) a1n2b = R1MACH(5)*a1n210
-    nmin = a1n2b*I1MACH(12)
-    nmax = a1n2b*I1MACH(13)
+    nmin = INT( a1n2b*I1MACH(12) )
+    nmax = INT( a1n2b*I1MACH(13) )
   ENDIF
   first = .FALSE.
   !

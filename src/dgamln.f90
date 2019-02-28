@@ -144,7 +144,7 @@ REAL(8) FUNCTION DGAMLN(Z,Ierr)
     GOTO 99999
   ELSE
     IF ( Z<=101.0D0 ) THEN
-      nz = Z
+      nz = INT( Z )
       fz = Z - nz
       IF ( fz<=0.0D0 ) THEN
         IF ( nz<=100 ) THEN
@@ -161,7 +161,7 @@ REAL(8) FUNCTION DGAMLN(Z,Ierr)
     fln = MAX(fln,3.0D0)
     fln = fln - 3.0D0
     zm = 1.8000D0 + 0.3875D0*fln
-    mz = zm + 1
+    mz = INT( zm ) + 1
     zmin = mz
     zdmy = Z
     zinc = 0.0D0
@@ -189,7 +189,7 @@ REAL(8) FUNCTION DGAMLN(Z,Ierr)
     ENDIF
   ENDIF
   zp = 1.0D0
-  nz = zinc
+  nz = INT( zinc )
   DO i = 1, nz
     zp = zp*(Z+(i-1))
   ENDDO

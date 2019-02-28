@@ -88,7 +88,7 @@ REAL FUNCTION BETAI(X,Pin,Qin)
       term = BETAI*p
       IF ( ps/=1.0 ) THEN
         !
-        n = MAX(alneps/LOG(y),4.0E0)
+        n = INT( MAX(alneps/LOG(y),4.0E0) )
         DO i = 1, n
           term = term*(i-ps)*y/i
           BETAI = BETAI + term/(p+i)
@@ -101,13 +101,13 @@ REAL FUNCTION BETAI(X,Pin,Qin)
     IF ( q>1.0 ) THEN
       !
       xb = p*LOG(y) + q*LOG(1.0-y) - ALBETA(p,q) - LOG(q)
-      ib = MAX(xb/alnsml,0.0E0)
+      ib = INT( MAX(xb/alnsml,0.0E0) )
       term = EXP(xb-ib*alnsml)
       c = 1.0/(1.0-y)
       p1 = q*c/(p+q-1.)
       !
       finsum = 0.0
-      n = q
+      n = INT( q )
       IF ( q==REAL(n) ) n = n - 1
       DO i = 1, n
         IF ( p1<=1.0.AND.term/eps<=finsum ) EXIT

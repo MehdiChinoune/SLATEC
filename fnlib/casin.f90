@@ -34,7 +34,7 @@ COMPLEX FUNCTION CASIN(Zinp)
   !***FIRST EXECUTABLE STATEMENT  CASIN
   IF ( first ) THEN
     ! NTERMS = LOG(EPS)/LOG(RMAX)  WHERE RMAX = 0.1
-    nterms = -0.4343*LOG(R1MACH(3))
+    nterms = INT( -0.4343*LOG(R1MACH(3)) )
     rmin = SQRT(6.0*R1MACH(3))
   ENDIF
   first = .FALSE.

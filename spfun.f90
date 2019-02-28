@@ -151,7 +151,7 @@ REAL FUNCTION ALOG(X)
   !
   xn = n - 1
   y = 2.0E0*y
-  ntrval = 4.0E0*y - 2.5E0
+  ntrval = INT( 4.0E0*y - 2.5E0 )
   IF ( ntrval==5 ) t = ((y-1.0E0)-1.0E0)/(y+2.0E0)
   IF ( ntrval<5 ) t = (y-center(ntrval))/(y+center(ntrval))
   t2 = t*t
@@ -880,7 +880,7 @@ REAL FUNCTION COS(X)
     ainty = ainty + ainty2
     y = y - ainty2
     !
-    noctnt = AMOD(ainty,8.0E0)
+    noctnt = INT( AMOD(ainty,8.0E0) )
     ifn = MOD((noctnt+1)/2,2)
     IF ( MOD(noctnt,2)==1 ) y = 1.0E0 - y
     z = 2.0E0*y**2 - 1.0E0
@@ -1584,7 +1584,7 @@ REAL(8) FUNCTION DCOS(X)
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  DCOS
   IF ( first ) THEN
-    eta = 0.1D0*D1MACH(3)
+    eta = REAL( 0.1D0*D1MACH(3), 4 )
     ntsn = INITDS(sincs,12,eta)
     ntcs = INITDS(coscs,13,eta)
     xsml = DSQRT(2.0D0*D1MACH(3))
@@ -1616,7 +1616,7 @@ REAL(8) FUNCTION DCOS(X)
     ainty = ainty + ainty2
     y = y - ainty2
     !
-    noctnt = DMOD(ainty,8.0D0)
+    noctnt = INT( DMOD(ainty,8.0D0) )
     ifn = MOD((noctnt+1)/2,2)
     IF ( MOD(noctnt,2)==1 ) y = 1.0D0 - y
     z = 2.0D0*y*y - 1.0D0
@@ -1812,9 +1812,9 @@ REAL(8) FUNCTION DEXP(X)
     y = X - xint
     !
     y = 23.0D0*y + X*aln216
-    n = y
+    n = INT( y )
     f = y - n
-    n = 23.0D0*xint + n
+    n = INT( 23.0D0*xint ) + n
     n16 = n/16
     IF ( n<0 ) n16 = n16 - 1
     ndx = n - 16*n16 + 1
@@ -1917,7 +1917,7 @@ REAL(8) FUNCTION DINT(X)
       !
       DO i = 1, npart
         xscl = xscl*scale
-        ipart = xscl
+        ipart = INT( xscl )
         part = ipart
         xscl = xscl - part
         DINT = DINT*scale + part
@@ -2032,7 +2032,7 @@ REAL(8) FUNCTION DLOG(X)
   !
   xn = n - 1
   y = 2.0D0*y
-  ntrval = 4.0D0*y - 2.5D0
+  ntrval = INT( 4.0D0*y - 2.5D0 )
   !
   IF ( ntrval==5 ) t = ((y-1.0D0)-1.0D0)/(y+2.0D0)
   IF ( ntrval<5 ) t = (y-center(ntrval))/(y+center(ntrval))
@@ -2205,7 +2205,7 @@ REAL(8) FUNCTION DSIN(X)
   DATA first/.TRUE./
   !***FIRST EXECUTABLE STATEMENT  DSIN
   IF ( first ) THEN
-    eta = 0.1D0*D1MACH(3)
+    eta = REAL( 0.1D0*D1MACH(3), 4 )
     ntsn = INITDS(sincs,12,eta)
     ntcs = INITDS(coscs,13,eta)
     xsml = DSQRT(2.0D0*D1MACH(3))
@@ -2237,7 +2237,7 @@ REAL(8) FUNCTION DSIN(X)
     ainty = ainty + ainty2
     y = y - ainty2
     !
-    noctnt = DMOD(ainty,8.0D0)
+    noctnt = INT( DMOD(ainty,8.0D0) )
     ifn = MOD((noctnt+1)/2,2)
     IF ( MOD(noctnt,2)==1 ) y = 1.0D0 - y
     z = 2.0D0*y*y - 1.0D0
@@ -2417,7 +2417,7 @@ REAL(8) FUNCTION DSQRT(X)
   DATA sqrt2(3)/1.41421356237309504880168872420970D0/
   DATA niter/0/
   !***FIRST EXECUTABLE STATEMENT  DSQRT
-  IF ( niter==0 ) niter = 1.443*ALOG(-0.104*ALOG(0.1*SNGL(D1MACH(3)))) + 1.0
+  IF ( niter==0 ) niter = INT( 1.443*ALOG(-0.104*ALOG(0.1*SNGL(D1MACH(3)))) ) + 1
   !
   IF ( X>0.0D0 ) THEN
     !
@@ -2427,7 +2427,7 @@ REAL(8) FUNCTION DSQRT(X)
     !
     ! THE APPROXIMATION BELOW HAS ACCURACY OF 4.16 DIGITS.
     !
-    z = y
+    z = REAL( y, 4 )
     DSQRT = 0.261599E0 + z*(1.114292E0+z*(-0.516888E0+z*0.141067E0))
     !
     DO iter = 1, niter
@@ -2559,7 +2559,7 @@ REAL(8) FUNCTION DTAN(X)
   ainty = ainty + ainty2
   y = y - ainty2
   !
-  ifn = DMOD(ainty,2.0D0)
+  ifn = INT( DMOD(ainty,2.0D0) )
   IF ( ifn==1 ) y = 1.0D0 - y
   IF ( 1.0D0-y<DABS(X)*sqeps ) CALL XERMSG('SLATEC','DTAN',&
     'ANSWER LT HALF PRECISION, DABS(X) BIG OR NEAR PI/2 OR 3*PI/2',1,1)
@@ -2808,9 +2808,9 @@ REAL FUNCTION EXP(X)
     y = X - xint
     !
     y = 23.0*y + X*aln216
-    n = y
+    n = INT( y )
     f = y - n
-    n = 23.0*xint + n
+    n = INT( 23.0*xint ) + n
     n16 = n/16
     IF ( n<0 ) n16 = n16 - 1
     ndx = n - 16*n16 + 1
@@ -2949,7 +2949,7 @@ REAL FUNCTION SIN(X)
     ainty = ainty + ainty2
     y = y - ainty2
     !
-    noctnt = AMOD(ainty,8.0E0)
+    noctnt = INT( AMOD(ainty,8.0E0) )
     ifn = MOD((noctnt+1)/2,2)
     IF ( MOD(noctnt,2)==1 ) y = 1.0E0 - y
     z = 2.0E0*y**2 - 1.0E0
@@ -3116,7 +3116,7 @@ REAL FUNCTION SQRT(X)
   DATA sqrt2(3)/1.41421356237309505E0/
   DATA niter/0/
   !***FIRST EXECUTABLE STATEMENT  SQRT
-  IF ( niter==0 ) niter = 1.443*ALOG(-0.104*ALOG(0.1*R1MACH(3))) + 1.0
+  IF ( niter==0 ) niter = INT( 1.443*ALOG(-0.104*ALOG(0.1*R1MACH(3))) ) + 1
   !
   IF ( X>0.0E0 ) THEN
     !
@@ -3247,7 +3247,7 @@ REAL FUNCTION TAN(X)
   ainty = ainty + ainty2
   y = y - ainty2
   !
-  ifn = AMOD(ainty,2.0E0)
+  ifn = INT( AMOD(ainty,2.0E0) )
   IF ( ifn==1 ) y = 1.0E0 - y
   !
   IF ( 1.0E0-y<ABS(X)*sqeps ) CALL XERMSG('SLATEC','TAN',&

@@ -31,7 +31,7 @@ FUNCTION COSDG(X)
   COSDG = COS(raddeg*X)
   !
   IF ( MOD(X,90.)/=0. ) RETURN
-  n = ABS(X)/90.0 + 0.5
+  n = INT( ABS(X)/90.0 + 0.5 )
   n = MOD(n,2)
   IF ( n==0 ) COSDG = SIGN(1.0,COSDG)
   IF ( n==1 ) COSDG = 0.0

@@ -65,7 +65,7 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     aez = 8.0E0*az
     s = Tol/aez
-    jl = Rl + Rl + 2
+    jl = INT( Rl + Rl ) + 2
     yy = AIMAG(Z)
     p1 = czero
     IF ( yy/=0.0E0 ) THEN
@@ -73,7 +73,7 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
       !     CALCULATE EXP(PI*(0.5+FNU+N-IL)*I) TO MINIMIZE LOSSES OF
       !     SIGNIFICANCE WHEN FNU OR N IS LARGE
       !-----------------------------------------------------------------------
-      inu = Fnu
+      inu = INT( Fnu )
       arg = (Fnu-inu)*pi
       inu = inu + N - il
       ak = -SIN(arg)

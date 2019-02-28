@@ -31,7 +31,7 @@ FUNCTION CBRT(X)
   DATA cbrt2(5)/1.58740105196819947E0/
   DATA niter/0/
   !***FIRST EXECUTABLE STATEMENT  CBRT
-  IF ( niter==0 ) niter = 1.443*LOG(-.106*LOG(0.1*R1MACH(3))) + 1.
+  IF ( niter==0 ) niter = INT( 1.443*LOG(-.106*LOG(0.1*R1MACH(3))) ) + 1
   !
   CBRT = 0.0
   IF ( X==0. ) RETURN

@@ -152,14 +152,14 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
     x = COS(Sarg)
     sx = ABS(SIN(Sarg))
     tx = x/sx
-    Isig = LOG10(2.0*Nu*(5.0+ABS(Sarg*tx)))
+    Isig = INT( LOG10(2.0*Nu*(5.0+ABS(Sarg*tx))) )
   ELSE
     IF ( ABS(Sarg)>1.0 ) GOTO 400
     IF ( ABS(Sarg)==1.0 ) GOTO 200
     x = Sarg
     sx = SQRT((1.0+ABS(x))*((0.5-ABS(x))+0.5))
     tx = x/sx
-    Isig = LOG10(2.0*Nu*(5.0+tx**2))
+    Isig = INT( LOG10(2.0*Nu*(5.0+tx**2)) )
   ENDIF
   !
   !        BEGIN CALCULATION

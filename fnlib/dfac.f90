@@ -61,7 +61,7 @@ REAL(8) FUNCTION DFAC(N)
   !***FIRST EXECUTABLE STATEMENT  DFAC
   IF ( nmax==0 ) THEN
     CALL DGAMLM(xmin,xmax)
-    nmax = xmax - 1.D0
+    nmax = INT( xmax ) - 1
   ENDIF
   !
   IF ( N<0 ) CALL XERMSG('SLATEC','DFAC',&

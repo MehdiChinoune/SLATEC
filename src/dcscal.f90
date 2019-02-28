@@ -66,7 +66,7 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
     cs = Cols(k)
     IF ( cs/=0.0D0 ) THEN
       p = LOG(cs)/alog2
-      ip = -0.5D0*p
+      ip = INT( -0.5D0*p )
       s = 2.0D0**ip
       Scales(k) = s
       IF ( Ic/=1 ) THEN

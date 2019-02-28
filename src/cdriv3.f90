@@ -952,7 +952,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Work(IMACH1) = R1MACH(1)
     IF ( Nroot/=0 ) THEN
       re = uround
-      ae = Work(IMACH1)
+      ae = REAL( Work(IMACH1) )
     ENDIF
     h = (Tout-T)*(1.E0-4.E0*uround)
     h = SIGN(MIN(ABS(h),Hmax),h)
@@ -982,10 +982,10 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     IF ( T==Tout ) RETURN
     GOTO 100
   ELSE
-    uround = Work(IMACH4)
+    uround = REAL( Work(IMACH4) )
     IF ( Nroot/=0 ) THEN
       re = uround
-      ae = Work(IMACH1)
+      ae = REAL( Work(IMACH1) )
     ENDIF
   ENDIF
   !                                             On a continuation, check
@@ -996,25 +996,25 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   ELSE
     convrg = .FALSE.
   ENDIF
-  avgh = Work(IAVGH)
-  avgord = Work(IAVGRD)
-  hold = Work(IHOLD)
-  rc = Work(IRC)
-  rmax = Work(IRMAX)
-  trend = Work(ITREND)
+  avgh = REAL( Work(IAVGH) )
+  avgord = REAL( Work(IAVGRD) )
+  hold = REAL( Work(IHOLD) )
+  rc = REAL( Work(IRC) )
+  rmax = REAL( Work(IRMAX) )
+  trend = REAL( Work(ITREND) )
   DO j = 1, 12
     DO i = 1, 13
-      el(i,j) = Work(i+IEL+(j-1)*13-1)
+      el(i,j) = REAL( Work(i+IEL+(j-1)*13-1) )
     ENDDO
   ENDDO
   DO j = 1, 12
     DO i = 1, 3
-      tq(i,j) = Work(i+ITQ+(j-1)*3-1)
+      tq(i,j) = REAL( Work(i+ITQ+(j-1)*3-1) )
     ENDDO
   ENDDO
-  T = Work(IT)
-  h = Work(IH)
-  hsign = Work(IHSIGN)
+  T = REAL( Work(IT) )
+  h = REAL( Work(IH) )
+  hsign = REAL( Work(IHSIGN) )
   IF ( Iwork(IJTASK)/=0 ) THEN
     !
     !                                   IWORK(IJROOT) flags unreported
@@ -1044,12 +1044,12 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
               !
               IF ( Work(jtroot)==Work(ITOUT).AND.i>Iwork(INROOT) ) THEN
                 iroot = i
-                troot = Work(jtroot)
+                troot = REAL( Work(jtroot) )
                 EXIT
               ENDIF
               IF ( REAL(Work(jtroot))*hsign>REAL(Work(ITOUT))*hsign ) THEN
                 iroot = i
-                troot = Work(jtroot)
+                troot = REAL( Work(jtroot) )
               ENDIF
             ENDIF
           ENDDO
@@ -1083,7 +1083,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
             ENDIF
           ENDIF
         ELSEIF ( Tout*hsign>=REAL(Work(ITOUT))*hsign ) THEN
-          troot = Work(ITOUT)
+          troot = REAL( Work(ITOUT) )
           CALL CDNTP(h,0,N,Iwork(INQ),T,troot,Work(IYH),Y)
           T = troot
           Nstate = 5
@@ -1423,7 +1423,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       IF ( Nroot/=0 ) THEN
         iroot = 0
         DO i = 1, Nroot
-          glast = Work(i+ignow-1)
+          glast = REAL( Work(i+ignow-1) )
           gnow = G(npar,T,Y,i)
           IF ( npar==0 ) THEN
             Iwork(INROOT) = i
@@ -1468,7 +1468,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
           troot = T + h
           DO i = 1, Nroot
             IF ( REAL(Work(i+itroot-1))*hsign<troot*hsign ) THEN
-              troot = Work(i+itroot-1)
+              troot = REAL( Work(i+itroot-1) )
               iroot = i
             ENDIF
           ENDDO

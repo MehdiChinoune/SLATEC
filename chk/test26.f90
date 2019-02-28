@@ -492,7 +492,7 @@ CONTAINS
     !            certain compilers with literal arguments to RAND.
     !
     dummy = 16381.0
-    iseed = RAND(dummy)
+    iseed = INT( RAND(dummy) )
     Ierr = 0
     DO i = 1, N
       Idiag(i) = 0

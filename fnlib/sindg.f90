@@ -31,7 +31,7 @@ FUNCTION SINDG(X)
   SINDG = SIN(raddeg*X)
   !
   IF ( MOD(X,90.)/=0. ) RETURN
-  n = ABS(X)/90.0 + 0.5
+  n = INT( ABS(X)/90.0 + 0.5 )
   n = MOD(n,2)
   IF ( n==0 ) SINDG = 0.
   IF ( n==1 ) SINDG = SIGN(1.0,SINDG)

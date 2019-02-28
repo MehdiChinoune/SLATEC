@@ -298,7 +298,7 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
       CALL CMPOSP(M,N,W(iwba),W(iwbb),W(iwbc),Y,Idimy,W,W(iwb2),W(iwb3),&
         W(iww1),W(iww2),W(iww3),W(iwd),W(iwtcos),W(iwp))
   END SELECT
-  400  ipstor = REAL(W(iww1))
+  400  ipstor = INT(W(iww1))
   irev = 2
   IF ( Nperod==4 ) GOTO 700
   500 CONTINUE

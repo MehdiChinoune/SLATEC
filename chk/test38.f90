@@ -219,7 +219,7 @@ CONTAINS
     !     LOOK FOR THE KNOWN BASIS AT THE SOLN., NOW IS ISOLN(*).
     !
     DO i = 1, mrelas
-      isoln(i) = prgopt(i+3)
+      isoln(i) = INT( prgopt(i+3) )
     ENDDO
     !
     Ipass = 1

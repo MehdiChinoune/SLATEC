@@ -84,7 +84,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   zni = -zrr
   zbr = zrr
   zbi = zri
-  inu = Fnu
+  inu = INT( Fnu )
   fnf = Fnu - inu
   ang = -hpi*fnf
   car = COS(ang)

@@ -61,7 +61,7 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
       DO i = 1, ns, Incx
         dsdot = dsdot + REAL(Sx(i))*REAL(Sy(i))
       ENDDO
-      SDSDOT = dsdot
+      SDSDOT = REAL( dsdot, 4 )
       GOTO 99999
     ELSE
       !
@@ -78,7 +78,7 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
       ENDDO
     ENDIF
   ENDIF
-  SDSDOT = dsdot
+  SDSDOT = REAL( dsdot, 4 )
   RETURN
   99999 CONTINUE
   END FUNCTION SDSDOT

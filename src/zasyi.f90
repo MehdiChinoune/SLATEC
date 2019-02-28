@@ -78,7 +78,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     !-----------------------------------------------------------------------
     aez = 8.0D0*az
     s = Tol/aez
-    jl = Rl + Rl + 2
+    jl = INT( Rl + Rl ) + 2
     p1r = zeror
     p1i = zeroi
     IF ( Zi/=0.0D0 ) THEN
@@ -86,7 +86,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
       !     CALCULATE EXP(PI*(0.5+FNU+N-IL)*I) TO MINIMIZE LOSSES OF
       !     SIGNIFICANCE WHEN FNU OR N IS LARGE
       !-----------------------------------------------------------------------
-      inu = Fnu
+      inu = INT( Fnu )
       arg = (Fnu-inu)*pi
       inu = inu + N - il
       ak = -SIN(arg)

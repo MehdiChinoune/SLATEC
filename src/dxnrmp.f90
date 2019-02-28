@@ -152,14 +152,14 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
     x = COS(Darg)
     sx = ABS(SIN(Darg))
     tx = x/sx
-    Isig = LOG10(2.0D0*Nu*(5.0D0+ABS(Darg*tx)))
+    Isig = INT( LOG10(2.0D0*Nu*(5.0D0+ABS(Darg*tx))) )
   ELSE
     IF ( ABS(Darg)>1.0D0 ) GOTO 400
     IF ( ABS(Darg)==1.0D0 ) GOTO 200
     x = Darg
     sx = SQRT((1.0D0+ABS(x))*((0.5D0-ABS(x))+0.5D0))
     tx = x/sx
-    Isig = LOG10(2.0D0*Nu*(5.0D0+tx**2))
+    Isig = INT( LOG10(2.0D0*Nu*(5.0D0+tx**2)) )
   ENDIF
   !
   !        BEGIN CALCULATION
