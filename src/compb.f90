@@ -29,7 +29,8 @@ SUBROUTINE COMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  COMPB
   !
-  DIMENSION An(*), Bn(*), Cn(*), B(*), Ah(*), Bh(*)
+  COMPLEX :: Bc
+  DIMENSION An(*), Bn(*), Cn(*), B(*), Ah(*), Bh(*), Bc(500)
   COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  COMPB
   EPS = R1MACH(4)
@@ -108,7 +109,7 @@ SUBROUTINE COMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
     B(lh) = B(n2m2+1)
     CALL INDXB(if,K-1,j1,j2)
     j2 = j1 + nmp + nmp
-    CALL PPADD(NM+1,Ierror,An,Cn,B(j1),B(j1),B(j2))
+    CALL PPADD(NM+1,Ierror,An,Cn,Bc(j1),B(j1),B(j2))
   ENDIF
   RETURN
   100  Ierror = 4

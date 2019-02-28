@@ -287,8 +287,8 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  DDRIV1
-  EXTERNAL F
-  REAL(8) :: Eps, ewtcom(1), hmax, T, Tout, Work(*), Y(*)
+  EXTERNAL F, D1MACH
+  REAL(8) :: Eps, ewtcom(1), hmax, T, Tout, Work(*), Y(*), D1MACH
   INTEGER i, IDLIW, Ierflg, IERROR, IMPL, leniw, Lenw, lenwcm, &
     lnwchk, MINT, MITER, ml, Mstate, mu, MXN, MXORD, MXSTEP, &
     N, nde, NROOT, nstate, ntask
@@ -348,7 +348,7 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   ENDIF
   CALL DDRIV3(N,T,Y,F,nstate,Tout,ntask,NROOT,Eps,ewtcom,IERROR,MINT,MITER,&
     IMPL,ml,mu,MXORD,hmax,Work,lenwcm,iwork,leniw,F,F,nde,MXSTEP,&
-    F,F,Ierflg)
+    D1MACH,F,Ierflg)
   DO i = 1, leniw
     Work(i+lenwcm) = iwork(i)
   ENDDO

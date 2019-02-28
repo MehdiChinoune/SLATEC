@@ -284,8 +284,8 @@ SUBROUTINE SDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  SDRIV1
-  EXTERNAL F
-  REAL Eps, ewtcom(1), hmax, T, Tout, Work(*), Y(*)
+  EXTERNAL F, R1MACH
+  REAL Eps, ewtcom(1), hmax, T, Tout, Work(*), Y(*), R1MACH
   INTEGER i, IDLIW, Ierflg, IERROR, IMPL, leniw, Lenw, lenwcm, &
     lnwchk, MINT, MITER, ml, Mstate, mu, MXN, MXORD, MXSTEP, &
     N, nde, NROOT, nstate, ntask
@@ -345,7 +345,7 @@ SUBROUTINE SDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   ENDIF
   CALL SDRIV3(N,T,Y,F,nstate,Tout,ntask,NROOT,Eps,ewtcom,IERROR,MINT,MITER,&
     IMPL,ml,mu,MXORD,hmax,Work,lenwcm,iwork,leniw,F,F,nde,MXSTEP,&
-    F,F,Ierflg)
+    R1MACH,F,Ierflg)
   DO i = 1, leniw
     Work(i+lenwcm) = iwork(i)
   ENDDO

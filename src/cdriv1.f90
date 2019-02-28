@@ -288,9 +288,9 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   !***END PROLOGUE  CDRIV1
-  EXTERNAL F
+  EXTERNAL F, R1MACH
   COMPLEX Work(*), Y(*)
-  REAL Eps, ewtcom(1), hmax, T, Tout
+  REAL Eps, ewtcom(1), hmax, T, Tout, R1MACH
   INTEGER i, IDLIW, Ierflg, IERROR, IMPL, leniw, Lenw, lenwcm, &
     lnwchk, MINT, MITER, ml, Mstate, mu, MXN, MXORD, MXSTEP, &
     N, nde, NROOT, nstate, ntask
@@ -350,7 +350,7 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   ENDIF
   CALL CDRIV3(N,T,Y,F,nstate,Tout,ntask,NROOT,Eps,ewtcom,IERROR,MINT,MITER,&
     IMPL,ml,mu,MXORD,hmax,Work,lenwcm,iwork,leniw,F,F,nde,MXSTEP,&
-    F,F,Ierflg)
+    R1MACH,F,Ierflg)
   DO i = 1, leniw
     Work(i+lenwcm) = iwork(i)
   ENDDO
