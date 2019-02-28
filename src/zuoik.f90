@@ -106,7 +106,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   !-----------------------------------------------------------------------
   IF ( rcz>Elim ) THEN
     Nuf = -1
-    GOTO 99999
+    RETURN
   ELSE
     IF ( rcz<Alim ) THEN
       !-----------------------------------------------------------------------
@@ -145,7 +145,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
       IF ( iform==2 ) rcz = rcz - 0.25D0*LOG(aarg) - aic
       IF ( rcz>Elim ) THEN
         Nuf = -1
-        GOTO 99999
+        RETURN
       ENDIF
     ENDIF
     50     IF ( Ikflg==2 ) RETURN
@@ -202,5 +202,5 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   Nuf = Nuf + 1
   IF ( nn==0 ) RETURN
   GOTO 100
-  99999 CONTINUE
+  RETURN
 END SUBROUTINE ZUOIK

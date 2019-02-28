@@ -92,10 +92,10 @@ SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
       !     ......EXIT
       CALL DGESL(Wm(3),N,N,Iwm(21),X,0)
   END SELECT
-  GOTO 99999
+  RETURN
   !     ...EXIT
   100  IER = -1
   !     ----------------------- END OF SUBROUTINE DSLVS
   !     -----------------------
-  99999 CONTINUE
-  END SUBROUTINE DSLVS
+  RETURN
+END SUBROUTINE DSLVS

@@ -23,9 +23,9 @@ SUBROUTINE INDXB(I,Ir,Idx,Idp)
   !***FIRST EXECUTABLE STATEMENT  INDXB
   Idx = max(I,1)
   Idp = 0
-  IF ( Ir<0 ) GOTO 99999
+  IF ( Ir<0 ) RETURN
   IF ( Ir==0 ) THEN
-    IF ( I>NM ) GOTO 99999
+    IF ( I>NM ) RETURN
     Idx = I
     Idp = 1
     RETURN
@@ -37,10 +37,9 @@ SUBROUTINE INDXB(I,Ir,Idx,Idp)
     Idp = izh + izh - 1
     IF ( I-ipl<=NM ) THEN
       IF ( I+ipl>NM ) Idp = NM + ipl - I + 1
-      GOTO 99999
+      RETURN
     ENDIF
   ENDIF
   Idp = 0
   RETURN
-  99999 CONTINUE
 END SUBROUTINE INDXB

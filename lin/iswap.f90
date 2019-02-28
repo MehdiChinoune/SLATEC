@@ -73,7 +73,7 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
         Ix(i) = Iy(i)
         Iy(i) = itemp1
       ENDDO
-      GOTO 99999
+      RETURN
     ENDIF
   ENDIF
   !
@@ -104,5 +104,4 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
     Iy(i+2) = itemp3
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE ISWAP
+END SUBROUTINE ISWAP

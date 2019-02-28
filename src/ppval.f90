@@ -84,7 +84,7 @@ FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   ELSEIF ( Ideriv<0.OR.Ideriv>=K ) THEN
     CALL XERMSG('SLATEC','PPVAL','IDERIV DOES NOT SATISFY 0.LE.IDERIV.LT.K',&
       2,1)
-    GOTO 99999
+    RETURN
   ELSE
     i = K - Ideriv
     fltk = i
@@ -99,5 +99,4 @@ FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
     ENDDO
   ENDIF
   RETURN
-  99999 CONTINUE
-  END FUNCTION PPVAL
+END FUNCTION PPVAL

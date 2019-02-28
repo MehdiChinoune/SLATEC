@@ -140,7 +140,7 @@ REAL FUNCTION GAMLN(Z,Ierr)
     !
     GAMLN = R1MACH(2)
     Ierr = 1
-    GOTO 99999
+    RETURN
   ELSE
     IF ( Z<=101.0E0 ) THEN
       nz = INT( Z )
@@ -195,5 +195,4 @@ REAL FUNCTION GAMLN(Z,Ierr)
   tlg = ALOG(zdmy)
   GAMLN = zdmy*(tlg-1.0E0) - ALOG(zp) + 0.5E0*(con-tlg) + s
   RETURN
-  99999 CONTINUE
-  END FUNCTION GAMLN
+END FUNCTION GAMLN

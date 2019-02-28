@@ -84,7 +84,7 @@ SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
           +5.0*U(I,L))/TDLy3
         Uyyyy = (-2.0*U(I,L-5)+11.0*U(I,L-4)-24.0*U(I,L-3)+26.0*U(I,L-2)&
           -14.0*U(I,L-1)+3.0*U(I,L))/DLY4
-        GOTO 99999
+        RETURN
       ENDIF
     ENDIF
     !
@@ -104,5 +104,4 @@ SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
   Uyyy = (-U(I,L-2)+2.0*U(I,L-1)-2.0*U(I,2)+U(I,3))/TDLy3
   Uyyyy = (U(I,L-2)-4.0*U(I,L-1)+6.0*U(I,1)-4.0*U(I,2)+U(I,3))/DLY4
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE DY4
+END SUBROUTINE DY4

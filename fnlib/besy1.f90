@@ -135,7 +135,7 @@ FUNCTION BESY1(X)
     ampl = (0.75+CSEVL(z,bm1cs,ntm1))/SQRT(X)
     theta = X - 3.0*pi4 + CSEVL(z,bth1cs,ntth1)/X
     BESY1 = ampl*SIN(theta)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   IF ( X<xmin ) CALL XERMSG('SLATEC','BESY1','X SO SMALL Y1 OVERFLOWS',3,2)
@@ -143,6 +143,4 @@ FUNCTION BESY1(X)
   IF ( X>xsml ) y = X*X
   BESY1 = twodpi*LOG(0.5*X)*BESJ1(X) + (0.5+CSEVL(.125*y-1.,by1cs,nty1))/X
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION BESY1
+END FUNCTION BESY1

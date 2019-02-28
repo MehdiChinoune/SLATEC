@@ -67,7 +67,7 @@ SUBROUTINE CSROT(N,Cx,Incx,Cy,Incy,C,S)
       Cy(i) = C*Cy(i) - S*Cx(i)
       Cx(i) = ctemp
     ENDDO
-    GOTO 99999
+    RETURN
   ENDIF
   !
   !     Code for unequal increments or equal increments not equal to 1.
@@ -84,5 +84,4 @@ SUBROUTINE CSROT(N,Cx,Incx,Cy,Incy,C,S)
     iy = iy + Incy
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE CSROT
+END SUBROUTINE CSROT

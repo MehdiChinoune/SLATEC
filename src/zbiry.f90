@@ -195,7 +195,7 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
     IF ( az>aa ) THEN
       Ierr = 4
       nz = 0
-      GOTO 99999
+      RETURN
     ELSE
       aa = SQRT(aa)
       IF ( az>aa ) Ierr = 3
@@ -381,5 +381,4 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
   100  nz = 0
   Ierr = 5
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE ZBIRY
+END SUBROUTINE ZBIRY

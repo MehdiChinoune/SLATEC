@@ -147,7 +147,7 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
         IF ( Inhomo/=3 ) RETURN
         Iflag = 3
         Coef(1) = 1.
-        GOTO 99999
+        RETURN
       ELSE
         IF ( Inhomo/=3 ) RETURN
         IF ( Iwork(1)<Nfcc ) THEN
@@ -185,5 +185,4 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   IF ( cons<=Re*ABS(Beta(1))+Ae+(Re*ypn+Ae)*bn ) Iflag = 1
   IF ( Inhomo==3 ) Coef(1) = 1.
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE SCOEF
+END SUBROUTINE SCOEF

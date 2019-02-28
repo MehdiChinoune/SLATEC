@@ -133,7 +133,7 @@ SUBROUTINE COMQR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
   itn = 30*N
   !     .......... SEARCH FOR NEXT EIGENVALUE ..........
   100 CONTINUE
-  IF ( en<Low ) GOTO 99999
+  IF ( en<Low ) RETURN
   its = 0
   enm1 = en - 1
   !     .......... LOOK FOR SINGLE SMALL SUB-DIAGONAL ELEMENT
@@ -259,5 +259,5 @@ SUBROUTINE COMQR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
     ENDIF
     GOTO 200
   ENDIF
-  99999 CONTINUE
-  END SUBROUTINE COMQR
+  RETURN
+END SUBROUTINE COMQR

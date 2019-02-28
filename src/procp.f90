@@ -59,7 +59,7 @@ SUBROUTINE PROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
         Y(j) = rt*W(j)
       ENDDO
     ENDIF
-    IF ( id<=0 ) GOTO 99999
+    IF ( id<=0 ) RETURN
     rt = Bd(id)
     id = id - 1
     IF ( id==0 ) ibr = 1
@@ -136,5 +136,5 @@ SUBROUTINE PROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
     Y(j) = Y(j) + rt*W(j)
   ENDDO
   GOTO 100
-  99999 CONTINUE
-  END SUBROUTINE PROCP
+  RETURN
+END SUBROUTINE PROCP

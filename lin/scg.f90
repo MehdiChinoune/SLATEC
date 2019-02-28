@@ -327,7 +327,7 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       !         check stopping criterion.
       IF ( ISSCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,Err,&
         Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork,ak,bk,bnrm,solnrm)/=0 )&
-        GOTO 99999
+        RETURN
       !
     ENDDO
     !
@@ -339,5 +339,5 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   ENDIF
   !
   !------------- LAST LINE OF SCG FOLLOWS -----------------------------
-  99999 CONTINUE
-  END SUBROUTINE SCG
+  RETURN
+END SUBROUTINE SCG

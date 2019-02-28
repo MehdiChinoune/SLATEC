@@ -27,7 +27,7 @@ SUBROUTINE RADB2(Ido,L1,Cc,Ch,Wa1)
     Ch(1,k,1) = Cc(1,1,k) + Cc(Ido,2,k)
     Ch(1,k,2) = Cc(1,1,k) - Cc(Ido,2,k)
   ENDDO
-  IF ( Ido<2 ) GOTO 99999
+  IF ( Ido<2 ) RETURN
   IF ( Ido/=2 ) THEN
     idp2 = Ido + 2
     IF ( (Ido-1)/2<L1 ) THEN
@@ -63,5 +63,5 @@ SUBROUTINE RADB2(Ido,L1,Cc,Ch,Wa1)
     Ch(Ido,k,1) = Cc(Ido,1,k) + Cc(Ido,1,k)
     Ch(Ido,k,2) = -(Cc(1,2,k)+Cc(1,2,k))
   ENDDO
-  99999 CONTINUE
-  END SUBROUTINE RADB2
+  RETURN
+END SUBROUTINE RADB2

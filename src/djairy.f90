@@ -241,7 +241,7 @@ SUBROUTINE DJAIRY(X,Rx,C,Ai,Dai)
       e1 = ccv*con5 + 0.5D0*scv
       e2 = scv*con5 - 0.5D0*ccv
       Dai = (temp1*e1-temp2*e2)*rtrx
-      GOTO 99999
+      RETURN
     ENDIF
   ELSEIF ( C>5.0D0 ) THEN
     !
@@ -356,5 +356,4 @@ SUBROUTINE DJAIRY(X,Rx,C,Ai,Dai)
   ENDDO
   Dai = X*X*(t*f1-f2+dajp(1)) + (t*e1-e2+dajn(1))
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE DJAIRY
+END SUBROUTINE DJAIRY

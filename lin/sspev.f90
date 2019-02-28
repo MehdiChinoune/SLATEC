@@ -113,7 +113,7 @@ SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
     m = N
     IF ( Info/=0 ) m = Info - 1
     CALL TRBAK3(Ldv,N,1,A,m,V)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   !     EIGENVALUES ONLY
@@ -121,5 +121,4 @@ SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
   CALL TRED3(N,1,A,E,Work(1),Work(N+1))
   CALL TQLRAT(N,E,Work(N+1),Info)
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE SSPEV
+END SUBROUTINE SSPEV

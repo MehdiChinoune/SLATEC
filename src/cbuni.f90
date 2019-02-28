@@ -71,7 +71,7 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
     IF ( nw>=0 ) THEN
       IF ( nw/=0 ) THEN
         Nlast = N
-        GOTO 99999
+        RETURN
       ELSE
         ay = ABS(cy(1))
         !----------------------------------------------------------------------
@@ -168,5 +168,4 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   RETURN
   100  Nz = nw
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE CBUNI
+END SUBROUTINE CBUNI

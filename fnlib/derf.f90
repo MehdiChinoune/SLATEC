@@ -73,7 +73,7 @@ REAL(8) FUNCTION DERF(X)
     !
     IF ( y<=xbig ) DERF = SIGN(1.0D0-DERFC(y),X)
     IF ( y>xbig ) DERF = SIGN(1.0D0,X)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   ! ERF(X) = 1.0 - ERFC(X)  FOR  -1.0 .LE. X .LE. 1.0
@@ -81,6 +81,4 @@ REAL(8) FUNCTION DERF(X)
   IF ( y<=sqeps ) DERF = 2.0D0*X*X/sqrtpi
   IF ( y>sqeps ) DERF = X*(1.0D0+DCSEVL(2.D0*X*X-1.D0,erfcs,nterf))
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION DERF
+END FUNCTION DERF

@@ -246,7 +246,7 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   Elist(1) = 0.0E+00
   Iord(1) = 0
   IF ( Epsabs<=0.0E+00.AND.Epsrel<MAX(0.5E+02*epmach,0.5E-14) ) Ier = 6
-  IF ( Ier==6 ) GOTO 99999
+  IF ( Ier==6 ) RETURN
   !
   !
   !           FIRST APPROXIMATION TO THE INTEGRAL
@@ -475,5 +475,5 @@ SUBROUTINE QAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   300  Neval = 30*Last - 15
   IF ( Inf==2 ) Neval = 2*Neval
   IF ( Ier>2 ) Ier = Ier - 1
-  99999 CONTINUE
+  RETURN
 END SUBROUTINE QAGIE

@@ -101,7 +101,7 @@ REAL(8) FUNCTION DSPENC(X)
     DSPENC = 2.0D0*pi26 - 0.5D0*LOG(X)**2
     IF ( X<xbig ) DSPENC = DSPENC - (1.D0+DCSEVL(4.D0/X-1.D0,spencs,nspenc))&
       /X
-    GOTO 99999
+    RETURN
   ELSEIF ( X<=1.0D0 ) THEN
     IF ( X>0.5D0 ) THEN
       !
@@ -144,6 +144,4 @@ REAL(8) FUNCTION DSPENC(X)
   DSPENC = pi26 - 0.5D0*LOG(X)*LOG((X-1.D0)**2/X) + (X-1.D0)&
     *(1.D0+DCSEVL(4.D0*(X-1.D0)/X-1.D0,spencs,nspenc))/X
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION DSPENC
+END FUNCTION DSPENC

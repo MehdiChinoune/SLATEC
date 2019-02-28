@@ -96,7 +96,7 @@ REAL FUNCTION GAMIT(A,X)
         t = t - A*alx
         IF ( t<bot ) CALL XERCLR
         GAMIT = -sga*sgngam*EXP(t)
-        GOTO 99999
+        RETURN
       ELSE
         IF ( t>(-alneps) ) h = 1.0 - sga*sgngam*EXP(t)
         IF ( ABS(h)<=sqeps ) THEN
@@ -116,6 +116,4 @@ REAL FUNCTION GAMIT(A,X)
   IF ( t<bot ) CALL XERCLR
   GAMIT = SIGN(EXP(t),h)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION GAMIT
+END FUNCTION GAMIT

@@ -102,7 +102,7 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   ELSEIF ( X<xlim ) THEN
     CALL XERMSG('SLATEC','BESK',&
       'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-    GOTO 99999
+    RETURN
   ELSEIF ( N<1 ) THEN
     CALL XERMSG('SLATEC','BESK','N LESS THAN ONE',2,1)
     RETURN
@@ -136,7 +136,7 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
       IF ( zn==0.0E0 ) THEN
         CALL XERMSG('SLATEC','BESK',&
           'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-        GOTO 99999
+        RETURN
       ELSE
         rtz = SQRT(1.0E0+zn*zn)
         gln = LOG((1.0E0+rtz)/zn)
@@ -145,7 +145,7 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
         IF ( cn>elim ) THEN
           CALL XERMSG('SLATEC','BESK',&
             'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-          GOTO 99999
+          RETURN
         ELSEIF ( nud<nulim(nn) ) THEN
           !
           IF ( Kode==2 ) GOTO 300
@@ -236,7 +236,7 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
     IF ( -fn*(LOG(X)-0.693E0)>elim ) THEN
       CALL XERMSG('SLATEC','BESK',&
         'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-      GOTO 99999
+      RETURN
     ENDIF
   ENDIF
   IF ( dnu==0.0E0 ) THEN
@@ -287,5 +287,4 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
     Y(i) = 0.0E0
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE BESK
+END SUBROUTINE BESK

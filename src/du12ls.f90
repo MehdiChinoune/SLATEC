@@ -112,7 +112,7 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
                 DO i = 1, N
                   Ic(i) = ABS(Ic(i))
                 ENDDO
-                GOTO 99999
+                RETURN
               ELSE
                 j = Ic(i)
                 IF ( j/=i ) THEN
@@ -178,5 +178,5 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   !
   !        SOLUTION VECTORS ARE IN FIRST N ROWS OF B(,)
   !
-  99999 CONTINUE
-  END SUBROUTINE DU12LS
+  RETURN
+END SUBROUTINE DU12LS

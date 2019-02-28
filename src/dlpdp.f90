@@ -129,7 +129,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       IF ( one+fac*ABS(sc)==one.OR.rnorm<=zero ) THEN
         Mode = 2
         !        .........EXIT
-        GOTO 99999
+        RETURN
       ELSE
         sc = one/sc
         DO j = 1, N1
@@ -176,7 +176,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       IF ( one+fac*ABS(sc)==one.OR.rnorm<=zero ) THEN
         Mode = 2
         !        .........EXIT
-        GOTO 99999
+        RETURN
       ELSE
         sc = one/sc
         DO j = 1, N2
@@ -196,5 +196,5 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
     ENDIF
     Wnorm = zero
   ENDIF
-  99999 CONTINUE
-  END SUBROUTINE DLPDP
+  RETURN
+END SUBROUTINE DLPDP

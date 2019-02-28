@@ -62,7 +62,7 @@ SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !     RETURN STORAGE REQUIREMENTS FOR P VECTORS.
   !
   W(1) = ipstor
-  GOTO 99999
+  RETURN
   100  lr = 0
   DO i = 1, m
     P(i) = 0.
@@ -343,5 +343,5 @@ SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
       l = l/2
     ENDIF
   ENDDO
-  99999 CONTINUE
-  END SUBROUTINE POISD2
+  RETURN
+END SUBROUTINE POISD2

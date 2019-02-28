@@ -72,7 +72,7 @@ SUBROUTINE SCOPY(N,Sx,Incx,Sy,Incy)
       DO i = 1, ns, Incx
         Sy(i) = Sx(i)
       ENDDO
-      GOTO 99999
+      RETURN
     ENDIF
   ENDIF
   !
@@ -99,5 +99,4 @@ SUBROUTINE SCOPY(N,Sx,Incx,Sy,Incy)
     Sy(i+6) = Sx(i+6)
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE SCOPY
+END SUBROUTINE SCOPY

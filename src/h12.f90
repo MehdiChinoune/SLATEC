@@ -99,7 +99,7 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
       IF ( Lpivot==l1m1 ) RETURN
       kl1 = kl2
       CALL SSWAP(Ncv,C(kl1),Icv,C(klp),Icv)
-      GOTO 99999
+      RETURN
     ELSE
       i2 = 1 - Icv + Ice*(Lpivot-1)
       incr = Ice*(L1-Lpivot)
@@ -124,5 +124,4 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
     ENDIF
   ENDIF
   100  RETURN
-  99999 CONTINUE
   END SUBROUTINE H12

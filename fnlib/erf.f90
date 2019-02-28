@@ -65,7 +65,7 @@ FUNCTION ERF(X)
     !
     IF ( y<=xbig ) ERF = SIGN(1.0-ERFC(y),X)
     IF ( y>xbig ) ERF = SIGN(1.0,X)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   ! ERF(X) = 1. - ERFC(X) FOR -1. .LE. X .LE. 1.
@@ -73,6 +73,4 @@ FUNCTION ERF(X)
   IF ( y<=sqeps ) ERF = 2.0*X/sqrtpi
   IF ( y>sqeps ) ERF = X*(1.0+CSEVL(2.*X**2-1.,erfcs,nterf))
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION ERF
+END FUNCTION ERF

@@ -65,7 +65,7 @@ FUNCTION BESI1(X)
       2,2)
     !
     BESI1 = EXP(y)*BESI1E(X)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   BESI1 = 0.0
@@ -76,6 +76,4 @@ FUNCTION BESI1(X)
   IF ( y>xmin ) BESI1 = 0.5*X
   IF ( y>xsml ) BESI1 = X*(.875+CSEVL(y*y/4.5-1.,bi1cs,nti1))
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION BESI1
+END FUNCTION BESI1

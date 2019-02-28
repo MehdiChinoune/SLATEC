@@ -74,7 +74,7 @@ SUBROUTINE SAXPY(N,Sa,Sx,Incx,Sy,Incy)
       DO i = 1, ns, Incx
         Sy(i) = Sa*Sx(i) + Sy(i)
       ENDDO
-      GOTO 99999
+      RETURN
     ENDIF
   ENDIF
   !
@@ -98,5 +98,4 @@ SUBROUTINE SAXPY(N,Sa,Sx,Incx,Sy,Incy)
     Sy(i+3) = Sy(i+3) + Sa*Sx(i+3)
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE SAXPY
+END SUBROUTINE SAXPY

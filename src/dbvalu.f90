@@ -112,7 +112,7 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
           CALL XERMSG('SLATEC','DBVALU',&
             'A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)',2,&
             1)
-          GOTO 99999
+          RETURN
         ENDIF
       ENDIF
       !
@@ -166,5 +166,4 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   ENDIF
   DBVALU = Work(1)
   RETURN
-  99999 CONTINUE
-  END FUNCTION DBVALU
+END FUNCTION DBVALU

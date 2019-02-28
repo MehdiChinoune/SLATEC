@@ -83,7 +83,7 @@ REAL(8) FUNCTION DPOCH(A,X)
       CALL DLGAMS(A+X,alngax,sgngax)
       CALL DLGAMS(A,alnga,sgnga)
       DPOCH = sgngax*sgnga*EXP(alngax-alnga)
-      GOTO 99999
+      RETURN
     ENDIF
   ELSE
     !
@@ -108,6 +108,4 @@ REAL(8) FUNCTION DPOCH(A,X)
   IF ( A<0.0D0.AND.DPOCH/=0.0D0 )&
     DPOCH = DPOCH/(COS(pi*X)+DCOT(pi*A)*SIN(pi*X))
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION DPOCH
+END FUNCTION DPOCH

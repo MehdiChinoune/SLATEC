@@ -316,7 +316,7 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       !
       !         check stopping criterion.
       IF ( ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,Err,&
-        Ierr,Iunit,R,Z,Dz,Rwork,Iwork,bnrm,solnrm)/=0 ) GOTO 99999
+        Ierr,Iunit,R,Z,Dz,Rwork,Iwork,bnrm,solnrm)/=0 ) RETURN
       !
     ENDDO
     !
@@ -327,5 +327,5 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   ENDIF
   !
   !------------- LAST LINE OF SIR FOLLOWS -------------------------------
-  99999 CONTINUE
-  END SUBROUTINE SIR
+  RETURN
+END SUBROUTINE SIR

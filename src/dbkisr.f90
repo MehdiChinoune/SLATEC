@@ -66,7 +66,7 @@ SUBROUTINE DBKISR(X,N,Sum,Ierr)
       fk = fk + 1.0D0
     ENDDO
     Ierr = 2
-    GOTO 99999
+    RETURN
     !-----------------------------------------------------------------------
     !     SMALL X CASE, X.LT.WORD TOLERANCE
     !-----------------------------------------------------------------------
@@ -82,5 +82,4 @@ SUBROUTINE DBKISR(X,N,Sum,Ierr)
   IF ( N==1 ) Sum = -Sum
   Sum = pol + Sum
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE DBKISR
+END SUBROUTINE DBKISR

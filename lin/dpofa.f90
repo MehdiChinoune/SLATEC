@@ -75,9 +75,9 @@ SUBROUTINE DPOFA(A,Lda,N,Info)
       ENDDO
     ENDIF
     s = A(j,j) - s
-    IF ( s<=0.0D0 ) GOTO 99999
+    IF ( s<=0.0D0 ) RETURN
     A(j,j) = SQRT(s)
   ENDDO
   Info = 0
-  99999 CONTINUE
-  END SUBROUTINE DPOFA
+  RETURN
+END SUBROUTINE DPOFA

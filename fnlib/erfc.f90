@@ -136,7 +136,7 @@ FUNCTION ERFC(X)
     !
     CALL XERMSG('SLATEC','ERFC','X SO BIG ERFC UNDERFLOWS',1,1)
     ERFC = 0.
-    GOTO 99999
+    RETURN
   ELSE
     y = ABS(X)
     IF ( y<=1.0 ) THEN
@@ -156,6 +156,4 @@ FUNCTION ERFC(X)
   IF ( y>4. ) ERFC = EXP(-y)/ABS(X)*(0.5+CSEVL(8./y-1.,erfccs,nterfc))
   IF ( X<0. ) ERFC = 2.0 - ERFC
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION ERFC
+END FUNCTION ERFC

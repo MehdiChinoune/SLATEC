@@ -124,7 +124,7 @@ SUBROUTINE DHEQR(A,Lda,N,Q,Info,Ijob)
     Q(iq+1) = s
     A(N,N) = c*t1 - s*t2
     IF ( A(N,N)==0.0D0 ) Info = N
-    GOTO 99999
+    RETURN
   ENDIF
   !   -------------------------------------------------------------------
   !         A new factorization is desired.
@@ -176,5 +176,5 @@ SUBROUTINE DHEQR(A,Lda,N,Q,Info,Ijob)
   ENDDO
   RETURN
   !------------- LAST LINE OF DHEQR FOLLOWS ----------------------------
-  99999 CONTINUE
-  END SUBROUTINE DHEQR
+  RETURN
+END SUBROUTINE DHEQR

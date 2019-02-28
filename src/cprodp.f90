@@ -110,7 +110,7 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
       DO j = 1, M
         Yy(j) = REAL(Y(j))
       ENDDO
-      GOTO 99999
+      RETURN
     ELSE
       rt = Bm2(m2)
       m2 = m2 - 1
@@ -141,5 +141,5 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   Y(M-1) = y1
   iflg = 1
   GOTO 100
-  99999 CONTINUE
-  END SUBROUTINE CPRODP
+  RETURN
+END SUBROUTINE CPRODP

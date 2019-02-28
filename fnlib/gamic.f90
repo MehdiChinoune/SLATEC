@@ -114,7 +114,7 @@ REAL FUNCTION GAMIC(A,X)
         t = t + algap1 - LOG(ABS(A))
         IF ( t<bot ) CALL XERCLR
         GAMIC = sgng*EXP(t)
-        GOTO 99999
+        RETURN
       ELSE
         IF ( t>(-alneps) ) h = 1.0 - sgngs*EXP(t)
         !
@@ -136,6 +136,4 @@ REAL FUNCTION GAMIC(A,X)
   IF ( t<bot ) CALL XERCLR
   GAMIC = sgng*EXP(t)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION GAMIC
+END FUNCTION GAMIC

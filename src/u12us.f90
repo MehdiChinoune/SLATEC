@@ -115,7 +115,7 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
             DO i = 1, N
               Ic(i) = ABS(Ic(i))
             ENDDO
-            GOTO 99999
+            RETURN
           ELSE
             j = Ic(i)
             IF ( j/=i ) THEN
@@ -173,5 +173,5 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   !
   !        SOLUTION VECTORS ARE IN FIRST N ROWS OF B(,)
   !
-  99999 CONTINUE
-  END SUBROUTINE U12US
+  RETURN
+END SUBROUTINE U12US

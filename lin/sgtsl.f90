@@ -104,7 +104,7 @@ SUBROUTINE SGTSL(N,C,D,E,B,Info)
         B(kp1) = B(kp1) + t*B(k)
       ELSE
         Info = k
-        GOTO 99999
+        RETURN
       ENDIF
     ENDDO
   ENDIF
@@ -127,5 +127,5 @@ SUBROUTINE SGTSL(N,C,D,E,B,Info)
     Info = N
   ENDIF
   !
-  99999 CONTINUE
-  END SUBROUTINE SGTSL
+  RETURN
+END SUBROUTINE SGTSL

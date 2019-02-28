@@ -355,14 +355,14 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
       !         -----------------------------------
       !
       Abserr = Abserr + 0.1E+02*correc
-      IF ( Ier==0 ) GOTO 99999
+      IF ( Ier==0 ) RETURN
       IF ( Result==0.0E+00.OR.psum(numrl2)==0.0E+00 ) THEN
         IF ( Abserr>errsum ) GOTO 50
-        IF ( psum(numrl2)==0.0E+00 ) GOTO 99999
+        IF ( psum(numrl2)==0.0E+00 ) RETURN
       ENDIF
       IF ( Abserr/ABS(Result)<=(errsum+drl)/ABS(psum(numrl2)) ) THEN
         IF ( Ier>=1.AND.Ier/=7 ) Abserr = Abserr + drl
-        GOTO 99999
+        RETURN
       ENDIF
     ELSE
       !
@@ -376,10 +376,10 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
       Erlst(1) = Abserr
       Ierlst(1) = Ier
       Lst = 1
-      GOTO 99999
+      RETURN
     ENDIF
     50     Result = psum(numrl2)
     Abserr = errsum + drl
   ENDIF
-  99999 CONTINUE
-  END SUBROUTINE QAWFE
+  RETURN
+END SUBROUTINE QAWFE

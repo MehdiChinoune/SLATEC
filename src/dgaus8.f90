@@ -110,7 +110,7 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
   ce = 0.0D0
   IF ( A==B ) THEN
     IF ( Err<0.0D0 ) Err = ce
-    GOTO 99999
+    RETURN
   ELSE
     lmx = nlmx
     lmn = nlmn
@@ -120,7 +120,7 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
         IF ( c<=0.1D0 ) THEN
           IF ( c<=0.0D0 ) THEN
             IF ( Err<0.0D0 ) Err = ce
-            GOTO 99999
+            RETURN
           ELSE
             anib = 0.5D0 - LOG(c)/0.69314718D0
             nib = INT( anib )
@@ -131,7 +131,7 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
                 'A and B are too nearly equal to allow normal integration. $$'&
                 //'ANS is set to zero and IERR to -1.',1,-1)
               IF ( Err<0.0D0 ) Err = ce
-              GOTO 99999
+              RETURN
             ELSE
               lmn = MIN(lmn,lmx)
             ENDIF
@@ -215,7 +215,7 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
         'ANS is probably insufficiently accurate.',3,1)
     ENDIF
     IF ( Err<0.0D0 ) Err = ce
-    GOTO 99999
+    RETURN
   ENDIF
   200  est = gr(l-1)
   lr(l) = 1

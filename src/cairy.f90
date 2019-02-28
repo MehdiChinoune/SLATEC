@@ -188,7 +188,7 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
     IF ( az>aa ) THEN
       Ierr = 4
       Nz = 0
-      GOTO 99999
+      RETURN
     ELSE
       aa = SQRT(aa)
       IF ( az>aa ) Ierr = 3
@@ -349,5 +349,4 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   100  Nz = 0
   Ierr = 5
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE CAIRY
+END SUBROUTINE CAIRY

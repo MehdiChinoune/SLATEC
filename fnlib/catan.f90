@@ -62,7 +62,7 @@ COMPLEX FUNCTION CATAN(Z)
     !
     CATAN = CMPLX(pi2,0.)
     IF ( REAL(Z)<0.0 ) CATAN = CMPLX(-pi2,0.0)
-    GOTO 99999
+    RETURN
   ELSE
     x = REAL(Z)
     y = AIMAG(Z)
@@ -79,6 +79,4 @@ COMPLEX FUNCTION CATAN(Z)
   yans = 0.25*LOG((r2+2.0*y+1.0)/(r2-2.0*y+1.0))
   CATAN = CMPLX(xans,yans)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION CATAN
+END FUNCTION CATAN

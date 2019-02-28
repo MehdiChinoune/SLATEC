@@ -118,12 +118,10 @@ FUNCTION R9LN2R(X)
       ,2,1)
     !
     R9LN2R = (LOG(1.0+X)-X*(1.0-0.5*X))/X**3
-    GOTO 99999
+    RETURN
   ENDIF
   !
   IF ( X<0.0 ) R9LN2R = 0.375 + CSEVL(16.*X/5.+1.0,ln21cs,ntln21)
   IF ( X>=0.0 ) R9LN2R = 0.375 + CSEVL(32.*X/13.-1.0,ln22cs,ntln22)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION R9LN2R
+END FUNCTION R9LN2R

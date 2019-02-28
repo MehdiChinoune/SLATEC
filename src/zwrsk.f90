@@ -38,7 +38,7 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   IF ( nw/=0 ) THEN
     Nz = -1
     IF ( nw==(-2) ) Nz = -2
-    GOTO 99999
+    RETURN
   ELSE
     CALL ZRATI(Zrr,Zri,Fnu,N,Yr,Yi,Tol)
     !-----------------------------------------------------------------------
@@ -104,5 +104,4 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
     Yi(i) = cinui*csclr
   ENDDO
   RETURN
-  99999 CONTINUE
 END SUBROUTINE ZWRSK

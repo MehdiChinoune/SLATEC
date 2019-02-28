@@ -38,7 +38,7 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
     Ch(1,k,3) = tr2 - tr3
     Ch(1,k,4) = tr1 + tr4
   ENDDO
-  IF ( Ido<2 ) GOTO 99999
+  IF ( Ido<2 ) RETURN
   IF ( Ido/=2 ) THEN
     idp2 = Ido + 2
     IF ( (Ido-1)/2<L1 ) THEN
@@ -112,5 +112,5 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
     Ch(Ido,k,3) = ti2 + ti2
     Ch(Ido,k,4) = -sqrt2*(tr1+ti1)
   ENDDO
-  99999 CONTINUE
-  END SUBROUTINE RADB4
+  RETURN
+END SUBROUTINE RADB4

@@ -81,7 +81,7 @@ FUNCTION R9ATN1(X)
       ,1,1)
     !
     R9ATN1 = (ATAN(X)-X)/X**3
-    GOTO 99999
+    RETURN
   ENDIF
   !
   IF ( y<=xsml ) R9ATN1 = -1.0/3.0
@@ -89,6 +89,4 @@ FUNCTION R9ATN1(X)
   !
   R9ATN1 = -0.25 + CSEVL(2.0*y*y-1.,atn1cs,ntatn1)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION R9ATN1
+END FUNCTION R9ATN1

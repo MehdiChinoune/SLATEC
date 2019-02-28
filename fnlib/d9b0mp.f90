@@ -240,12 +240,10 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
     z = 128.D0/(X*X) - 1.D0
     Ampl = (.75D0+DCSEVL(z,bm02cs,nbm02))/SQRT(X)
     Theta = X - pi4 + DCSEVL(z,bth0cs,nbth0)/X
-    GOTO 99999
+    RETURN
   ENDIF
   z = (128.D0/(X*X)-5.D0)/3.D0
   Ampl = (.75D0+DCSEVL(z,bm0cs,nbm0))/SQRT(X)
   Theta = X - pi4 + DCSEVL(z,bt02cs,nbt02)/X
   RETURN
-  !
-  99999 CONTINUE
-  END SUBROUTINE D9B0MP
+END SUBROUTINE D9B0MP

@@ -268,7 +268,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
         ENDDO
         TOLd = T
         !        ............EXIT
-        GOTO 99999
+        RETURN
       ENDIF
       !                 ......EXIT
     ELSEIF ( INIt/=1 ) THEN
@@ -304,7 +304,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     !        RTOL=ATOL=0 ON INPUT, SO RTOL IS CHANGED TO A
     !                                 SMALL POSITIVE VALUE
     IBEgin = -1
-    GOTO 99999
+    RETURN
   ENDIF
   !
   !              ......................................................
@@ -340,7 +340,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
         T = Tout
         TOLd = T
         !        ..................EXIT
-        GOTO 99999
+        RETURN
       ENDIF
     ENDIF
     !
@@ -438,7 +438,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   T = Tout
   TOLd = T
   !        ..................EXIT
-  GOTO 99999
+  RETURN
   !
   !                    RELATIVE ERROR CRITERION INAPPROPRIATE
   200  Idid = -3
@@ -457,5 +457,5 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   T = X
   TOLd = T
   Intout = .FALSE.
-  99999 CONTINUE
-  END SUBROUTINE DLSOD
+  RETURN
+END SUBROUTINE DLSOD

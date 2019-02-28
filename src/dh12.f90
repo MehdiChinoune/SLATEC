@@ -65,7 +65,7 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
         cl = MAX(ABS(U(1,j)),cl)
       ENDDO
       !     .........EXIT
-      IF ( cl<=0.0D0 ) GOTO 99999
+      IF ( cl<=0.0D0 ) RETURN
       clinv = one/cl
       sm = (U(1,Lpivot)*clinv)**2
       DO j = L1, M
@@ -78,7 +78,7 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
       !        ****** APPLY THE TRANSFORMATION  I+U*(U**T)/B  TO C. ******
       !
     ELSEIF ( cl<=0.0D0 ) THEN
-      GOTO 99999
+      RETURN
       !     ......EXIT
     ENDIF
     !     ...EXIT
@@ -135,5 +135,5 @@ SUBROUTINE DH12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
       ENDIF
     ENDIF
   ENDIF
-  99999 CONTINUE
-  END SUBROUTINE DH12
+  RETURN
+END SUBROUTINE DH12

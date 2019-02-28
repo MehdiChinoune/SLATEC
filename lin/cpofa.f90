@@ -73,9 +73,9 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
       ENDDO
     ENDIF
     s = REAL(A(j,j)) - s
-    IF ( s<=0.0E0.OR.AIMAG(A(j,j))/=0.0E0 ) GOTO 99999
+    IF ( s<=0.0E0.OR.AIMAG(A(j,j))/=0.0E0 ) RETURN
     A(j,j) = CMPLX(SQRT(s),0.0E0)
   ENDDO
   Info = 0
-  99999 CONTINUE
-  END SUBROUTINE CPOFA
+  RETURN
+END SUBROUTINE CPOFA

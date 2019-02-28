@@ -68,7 +68,7 @@ REAL(8) FUNCTION DBESY0(X)
     !
     CALL D9B0MP(X,ampl,theta)
     DBESY0 = ampl*SIN(theta)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   y = 0.D0
@@ -76,6 +76,4 @@ REAL(8) FUNCTION DBESY0(X)
   DBESY0 = twodpi*LOG(0.5D0*X)*DBESJ0(X) + .375D0 + &
     DCSEVL(.125D0*y-1.D0,by0cs,nty0)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION DBESY0
+END FUNCTION DBESY0

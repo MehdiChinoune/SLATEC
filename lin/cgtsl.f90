@@ -105,7 +105,7 @@ SUBROUTINE CGTSL(N,C,D,E,B,Info)
         B(kp1) = B(kp1) + t*B(k)
       ELSE
         Info = k
-        GOTO 99999
+        RETURN
       ENDIF
     ENDDO
   ENDIF
@@ -128,5 +128,5 @@ SUBROUTINE CGTSL(N,C,D,E,B,Info)
     Info = N
   ENDIF
   !
-  99999 CONTINUE
-  END SUBROUTINE CGTSL
+  RETURN
+END SUBROUTINE CGTSL

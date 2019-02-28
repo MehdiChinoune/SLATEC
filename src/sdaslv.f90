@@ -53,7 +53,7 @@ SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
       !     BANDED MATRIX
       meband = 2*Iwm(LML) + Iwm(LMU) + 1
       CALL SGBSL(Wm(NPD),meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT),Delta,0)
-      GOTO 99999
+      RETURN
     CASE DEFAULT
   END SELECT
   !
@@ -61,5 +61,5 @@ SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
   CALL SGESL(Wm(NPD),Neq,Neq,Iwm(LIPVT),Delta,0)
   RETURN
   !------END OF SUBROUTINE SDASLV------
-  99999 CONTINUE
-  END SUBROUTINE SDASLV
+  RETURN
+END SUBROUTINE SDASLV

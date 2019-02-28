@@ -83,7 +83,7 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
       Yr(i) = zeror
       Yi(i) = zeroi
     ENDDO
-    GOTO 99999
+    RETURN
   ENDIF
   100  nn = MIN(2,nd)
   DO i = 1, nn
@@ -215,5 +215,4 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   ENDIF
   400  Nz = -1
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE ZUNI1
+END SUBROUTINE ZUNI1

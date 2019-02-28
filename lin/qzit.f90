@@ -152,7 +152,7 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
   IF ( en<=2 ) THEN
     !     .......... SAVE EPSB FOR USE BY QZVAL AND QZVEC ..........
     IF ( N>1 ) B(N,1) = epsb
-    GOTO 99999
+    RETURN
   ELSE
     IF ( .NOT.Matz ) enorn = en
     its = 0
@@ -190,7 +190,7 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
           !                HAS BECOME NEGLIGIBLE AFTER 30*N ITERATIONS ..........
           Ierr = en
           IF ( N>1 ) B(N,1) = epsb
-          GOTO 99999
+          RETURN
         ELSEIF ( its==10 ) THEN
           !     .......... AD HOC SHIFT ..........
           a1 = 0.0E0
@@ -414,5 +414,5 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
   ENDDO
   !     .......... END QZ STEP ..........
   GOTO 200
-  99999 CONTINUE
+  RETURN
 END SUBROUTINE QZIT

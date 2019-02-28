@@ -107,7 +107,7 @@ SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
     ELSE
       dflag = -two
       Dparam(1) = dflag
-      GOTO 99999
+      RETURN
     ENDIF
     !       GO ZERO-H-D-AND-DX1..
   ENDIF
@@ -202,5 +202,5 @@ SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
     Dparam(5) = dh22
   ENDIF
   Dparam(1) = dflag
-  99999 CONTINUE
-  END SUBROUTINE DROTMG
+  RETURN
+END SUBROUTINE DROTMG

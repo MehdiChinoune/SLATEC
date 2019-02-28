@@ -67,7 +67,7 @@ INTEGER FUNCTION ICAMAX(N,Cx,Incx)
         smax = xmag
       ENDIF
     ENDDO
-    GOTO 99999
+    RETURN
   ENDIF
   !
   !     Code for increment not equal to 1.
@@ -85,5 +85,4 @@ INTEGER FUNCTION ICAMAX(N,Cx,Incx)
     ix = ix + Incx
   ENDDO
   RETURN
-  99999 CONTINUE
-  END FUNCTION ICAMAX
+END FUNCTION ICAMAX

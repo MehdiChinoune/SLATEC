@@ -64,7 +64,7 @@ SUBROUTINE DXRED(X,Ix,Ierror)
         xa = xa*RADix**ixa2
         IF ( ixa1/=0 ) THEN
           DO i = 1, ixa1
-            IF ( xa>1.0D0 ) GOTO 99999
+            IF ( xa>1.0D0 ) RETURN
             xa = xa*RAD2l
           ENDDO
         ENDIF
@@ -76,7 +76,7 @@ SUBROUTINE DXRED(X,Ix,Ierror)
         xa = xa/RADix**ixa2
         IF ( ixa1/=0 ) THEN
           DO i = 1, ixa1
-            IF ( xa<1.0D0 ) GOTO 99999
+            IF ( xa<1.0D0 ) RETURN
             xa = xa/RAD2l
           ENDDO
         ENDIF
@@ -92,5 +92,5 @@ SUBROUTINE DXRED(X,Ix,Ierror)
       ENDIF
     ENDIF
   ENDIF
-  99999 CONTINUE
-  END SUBROUTINE DXRED
+  RETURN
+END SUBROUTINE DXRED

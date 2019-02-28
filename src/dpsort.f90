@@ -259,7 +259,7 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
       ENDDO
       !
     ENDIF
-    GOTO 99999
+    RETURN
   ELSE
     i = il(m)
     j = iu(m)
@@ -288,5 +288,5 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
     ENDIF
   ENDDO
   !
-  99999 CONTINUE
-  END SUBROUTINE DPSORT
+  RETURN
+END SUBROUTINE DPSORT

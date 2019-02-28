@@ -107,7 +107,7 @@ SUBROUTINE CPROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,Yy)
         ENDDO
       ENDIF
       IF ( iflg>0 ) GOTO 100
-      GOTO 99999
+      RETURN
     ELSE
       rt = Bm2(m2)
       m2 = m2 - 1
@@ -138,5 +138,5 @@ SUBROUTINE CPROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,Yy)
   Y(M-1) = y1
   iflg = 1
   GOTO 100
-  99999 CONTINUE
-  END SUBROUTINE CPROCP
+  RETURN
+END SUBROUTINE CPROCP

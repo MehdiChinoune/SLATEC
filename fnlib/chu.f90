@@ -143,7 +143,7 @@ FUNCTION CHU(A,B,X)
           *b0/(xi*(B+xi1)*(A+xi1-beps))
         t = c0 + xeps1*b0
         CHU = CHU + t
-        IF ( ABS(t)<eps*ABS(CHU) ) GOTO 99999
+        IF ( ABS(t)<eps*ABS(CHU) ) RETURN
       ENDDO
       CALL XERMSG('SLATEC','CHU',&
         'NO CONVERGENCE IN 1000 TERMS OF THE ASCENDING SERIES',3,&
@@ -164,7 +164,7 @@ FUNCTION CHU(A,B,X)
       b0 = (A+xi1-beps)*b0*X/((aintb+xi1)*(xi-beps))
       t = a0 - b0
       CHU = CHU + t
-      IF ( ABS(t)<eps*ABS(CHU) ) GOTO 99999
+      IF ( ABS(t)<eps*ABS(CHU) ) RETURN
     ENDDO
     CALL XERMSG('SLATEC','CHU',&
       'NO CONVERGENCE IN 1000 TERMS OF THE ASCENDING SERIES',3,2)
@@ -174,5 +174,5 @@ FUNCTION CHU(A,B,X)
   !
   CHU = X**(-A)*R9CHU(A,B,X)
   !
-  99999 CONTINUE
-  END FUNCTION CHU
+  RETURN
+END FUNCTION CHU

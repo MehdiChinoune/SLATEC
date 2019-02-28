@@ -72,7 +72,7 @@ SUBROUTINE DCOPY(N,Dx,Incx,Dy,Incy)
       DO i = 1, ns, Incx
         Dy(i) = Dx(i)
       ENDDO
-      GOTO 99999
+      RETURN
     ENDIF
   ENDIF
   !
@@ -99,5 +99,4 @@ SUBROUTINE DCOPY(N,Dx,Incx,Dy,Incy)
     Dy(i+6) = Dx(i+6)
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE DCOPY
+END SUBROUTINE DCOPY

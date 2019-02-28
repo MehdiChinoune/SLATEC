@@ -65,12 +65,10 @@ FUNCTION BESI0(X)
       1,2)
     !
     BESI0 = EXP(y)*BESI0E(X)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   BESI0 = 1.0
   IF ( y>xsml ) BESI0 = 2.75 + CSEVL(y*y/4.5-1.0,bi0cs,nti0)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION BESI0
+END FUNCTION BESI0

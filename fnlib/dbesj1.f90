@@ -70,7 +70,7 @@ REAL(8) FUNCTION DBESJ1(X)
     !
     CALL D9B1MP(y,ampl,theta)
     DBESJ1 = SIGN(ampl,X)*COS(theta)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   DBESJ1 = 0.0D0
@@ -80,6 +80,4 @@ REAL(8) FUNCTION DBESJ1(X)
   IF ( y>xmin ) DBESJ1 = 0.5D0*X
   IF ( y>xsml ) DBESJ1 = X*(.25D0+DCSEVL(.125D0*y*y-1.D0,bj1cs,ntj1))
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION DBESJ1
+END FUNCTION DBESJ1

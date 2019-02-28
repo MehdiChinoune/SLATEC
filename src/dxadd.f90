@@ -61,7 +61,7 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
     Z = Y
     Iz = Iy
     CALL DXADJ(Z,Iz,Ierror)
-    GOTO 99999
+    RETURN
   ELSEIF ( Y/=0.0D0 ) THEN
     IF ( Ix<0.OR.Iy<0 ) THEN
       IF ( Ix>=0.OR.Iy>=0 ) THEN
@@ -74,7 +74,7 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
             Iz = Iy
           ENDIF
           CALL DXADJ(Z,Iz,Ierror)
-          GOTO 99999
+          RETURN
         ENDIF
       ENDIF
     ENDIF
@@ -99,7 +99,7 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
         Iz = Ix
       ENDIF
       CALL DXADJ(Z,Iz,Ierror)
-      GOTO 99999
+      RETURN
     ELSE
       s = X
       is = Ix
@@ -129,7 +129,7 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
     Z = X
     Iz = Ix
     CALL DXADJ(Z,Iz,Ierror)
-    GOTO 99999
+    RETURN
   ENDIF
   100  j = i1
   t = t*RADix**(-i2)
@@ -191,7 +191,7 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
     350    Z = s
     Iz = is
     CALL DXADJ(Z,Iz,Ierror)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   !   AT THIS POINT, THE REMAINING DIFFERENCE IN THE
@@ -216,5 +216,5 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
     Iz = is - j*L
   ENDIF
   CALL DXADJ(Z,Iz,Ierror)
-  99999 CONTINUE
+  RETURN
 END SUBROUTINE DXADD

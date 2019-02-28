@@ -62,7 +62,7 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
     Z = Y
     Iz = Iy
     CALL XADJ(Z,Iz,Ierror)
-    GOTO 99999
+    RETURN
   ELSEIF ( Y/=0.0 ) THEN
     IF ( Ix<0.OR.Iy<0 ) THEN
       IF ( Ix>=0.OR.Iy>=0 ) THEN
@@ -75,7 +75,7 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
             Iz = Iy
           ENDIF
           CALL XADJ(Z,Iz,Ierror)
-          GOTO 99999
+          RETURN
         ENDIF
       ENDIF
     ENDIF
@@ -100,7 +100,7 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
         Iz = Ix
       ENDIF
       CALL XADJ(Z,Iz,Ierror)
-      GOTO 99999
+      RETURN
     ELSE
       s = X
       is = Ix
@@ -130,7 +130,7 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
     Z = X
     Iz = Ix
     CALL XADJ(Z,Iz,Ierror)
-    GOTO 99999
+    RETURN
   ENDIF
   100  j = i1
   t = t*RADix**(-i2)
@@ -192,7 +192,7 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
     350    Z = s
     Iz = is
     CALL XADJ(Z,Iz,Ierror)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   !   AT THIS POINT, THE REMAINING DIFFERENCE IN THE
@@ -217,5 +217,5 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
     Iz = is - j*L
   ENDIF
   CALL XADJ(Z,Iz,Ierror)
-  99999 CONTINUE
+  RETURN
 END SUBROUTINE XADD

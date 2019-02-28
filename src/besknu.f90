@@ -117,7 +117,7 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
     ELSE
       IF ( N<1 ) THEN
         CALL XERMSG('SLATEC','BESKNU','N NOT GREATER THAN 0',2,1)
-        GOTO 99999
+        RETURN
       ELSE
         Nz = 0
         iflag = 0
@@ -395,5 +395,4 @@ DO i = kk, N
   ck = ck + rx
 ENDDO
 RETURN
-  99999 CONTINUE
   END SUBROUTINE BESKNU

@@ -36,7 +36,7 @@ SUBROUTINE RADF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
     Ch(Ido,2,k) = Cc(1,k,1) - Cc(1,k,3)
     Ch(1,3,k) = Cc(1,k,4) - Cc(1,k,2)
   ENDDO
-  IF ( Ido<2 ) GOTO 99999
+  IF ( Ido<2 ) RETURN
   IF ( Ido/=2 ) THEN
     idp2 = Ido + 2
     IF ( (Ido-1)/2<L1 ) THEN
@@ -108,5 +108,5 @@ SUBROUTINE RADF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
     Ch(1,2,k) = ti1 - Cc(Ido,k,3)
     Ch(1,4,k) = ti1 + Cc(Ido,k,3)
   ENDDO
-  99999 CONTINUE
-  END SUBROUTINE RADF4
+  RETURN
+END SUBROUTINE RADF4

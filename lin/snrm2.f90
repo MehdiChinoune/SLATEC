@@ -93,7 +93,7 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
     i = 1
   ELSE
     SNRM2 = zero
-    GOTO 99999
+    RETURN
   ENDIF
   100 CONTINUE
   SELECT CASE(next)
@@ -168,7 +168,7 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
     sum = sum + Sx(j)**2
   ENDDO
   SNRM2 = SQRT(sum)
-  GOTO 99999
+  RETURN
   !
   900  i = i + Incx
   IF ( i<=nn ) GOTO 100
@@ -178,5 +178,5 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
   !              COMPUTE SQUARE ROOT AND ADJUST FOR SCALING.
   !
   SNRM2 = xmax*SQRT(sum)
-  99999 CONTINUE
+  RETURN
 END FUNCTION SNRM2

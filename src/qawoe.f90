@@ -324,7 +324,7 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
     IF ( Limit==1 ) Ier = 1
     IF ( Ier/=0.OR.Abserr<=errbnd ) THEN
       IF ( Integr==2.AND.Omega<0.0E+00 ) Result = -Result
-      GOTO 99999
+      RETURN
     ELSE
       !
       !           INITIALIZATIONS
@@ -542,7 +542,7 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
         IF ( area==0.0E+00 ) THEN
           IF ( Ier>2 ) Ier = Ier - 1
           IF ( Integr==2.AND.Omega<0.0E+00 ) Result = -Result
-          GOTO 99999
+          RETURN
         ENDIF
       ELSEIF ( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
         GOTO 50
@@ -557,7 +557,7 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
     ENDIF
     IF ( Ier>2 ) Ier = Ier - 1
     IF ( Integr==2.AND.Omega<0.0E+00 ) Result = -Result
-    GOTO 99999
+    RETURN
   ENDIF
   ENDIF
   !
@@ -571,5 +571,5 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
   IF ( Ier>2 ) Ier = Ier - 1
   IF ( Integr==2.AND.Omega<0.0E+00 ) Result = -Result
 ENDIF
-99999 CONTINUE
+RETURN
 END SUBROUTINE QAWOE

@@ -68,12 +68,10 @@ FUNCTION ASINH(X)
     IF ( y<xmax ) ASINH = LOG(y+SQRT(y**2+1.))
     IF ( y>=xmax ) ASINH = aln2 + LOG(y)
     ASINH = SIGN(ASINH,X)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   ASINH = X
   IF ( y>sqeps ) ASINH = X*(1.0+CSEVL(2.*X*X-1.,asnhcs,nterms))
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION ASINH
+END FUNCTION ASINH

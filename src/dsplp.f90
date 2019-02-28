@@ -1650,7 +1650,7 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         Work(lrg),Work(lrprim),Work(lrhs),Work(lww),lmx,lbm,&
         Ibasis,Iwork(libb),Iwork(limat),Iwork(librc),Iwork(lipr),&
         Iwork(liwr))
-      GOTO 99999
+      RETURN
     ELSEIF ( ictopt<=ictmax ) THEN
       key = INT( Prgopt(last+1) )
       !
@@ -1687,5 +1687,5 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !    4 WW,LMX,LBM,IBASIS,IBB,IMAT,
   !    5 IBRC,IPR,IWR)
   !
-  99999 CONTINUE
-  END SUBROUTINE DSPLP
+  RETURN
+END SUBROUTINE DSPLP

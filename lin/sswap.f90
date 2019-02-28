@@ -77,7 +77,7 @@ SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
         Sx(i) = Sy(i)
         Sy(i) = stemp1
       ENDDO
-      GOTO 99999
+      RETURN
     ENDIF
   ENDIF
   !
@@ -108,5 +108,4 @@ SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
     Sy(i+2) = stemp3
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE SSWAP
+END SUBROUTINE SSWAP

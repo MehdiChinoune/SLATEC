@@ -214,12 +214,10 @@ REAL(8) FUNCTION DAIE(X)
     z = -1.0D0
     IF ( X<xbig ) z = 16.0D0/(X*sqrtx) - 1.0D0
     DAIE = (0.28125D0+DCSEVL(z,aip2cs,naip2))/SQRT(sqrtx)
-    GOTO 99999
+    RETURN
   ENDIF
   sqrtx = SQRT(X)
   z = (16.D0/(X*sqrtx)-9.D0)/7.D0
   DAIE = (0.28125D0+DCSEVL(z,aip1cs,naip1))/SQRT(sqrtx)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION DAIE
+END FUNCTION DAIE

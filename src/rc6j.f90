@@ -435,13 +435,11 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
       IF ( ABS(Sixcof(n))<thresh ) Sixcof(n) = zero
       Sixcof(n) = cnorm*Sixcof(n)
     ENDDO
-    GOTO 99999
+    RETURN
   ENDIF
   !
   DO n = 1, nfin
     Sixcof(n) = cnorm*Sixcof(n)
   ENDDO
   RETURN
-  !
-  99999 CONTINUE
-  END SUBROUTINE RC6J
+END SUBROUTINE RC6J

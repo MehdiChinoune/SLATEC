@@ -102,7 +102,7 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   be = 0.0D0
   IF ( A==B ) THEN
     IF ( Err<0.0D0 ) Err = be
-    GOTO 99999
+    RETURN
   ELSE
     lmx = nlmx
     lmn = nlmn
@@ -112,7 +112,7 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
         IF ( cc<=0.1D0 ) THEN
           IF ( cc<=0.0D0 ) THEN
             IF ( Err<0.0D0 ) Err = be
-            GOTO 99999
+            RETURN
           ELSE
             anib = 0.5D0 - LOG(cc)/0.69314718D0
             nib = INT(anib)
@@ -124,7 +124,7 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
                 'INTEGRATION.  ANSWER IS SET TO ZERO, AND IERR=-1.'&
                 ,1,-1)
               IF ( Err<0.0D0 ) Err = be
-              GOTO 99999
+              RETURN
             ELSE
               lmn = MIN(lmn,lmx)
             ENDIF
@@ -207,7 +207,7 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
         'ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
     ENDIF
     IF ( Err<0.0D0 ) Err = be
-    GOTO 99999
+    RETURN
   ENDIF
   200  est = gr(l-1)
   lr(l) = 1

@@ -78,7 +78,7 @@ FUNCTION SPENC(X)
     !
     SPENC = 2.0*pi26 - 0.5*LOG(X)**2
     IF ( X<xbig ) SPENC = SPENC - (1.0+CSEVL(4.0/X-1.0,spencs,nspenc))/X
-    GOTO 99999
+    RETURN
   ELSEIF ( X<=1.0 ) THEN
     IF ( X>0.5 ) THEN
       !
@@ -119,6 +119,4 @@ FUNCTION SPENC(X)
   SPENC = pi26 - 0.5*LOG(X)*LOG((X-1.0)**2/X) + (X-1.)&
     *(1.0+CSEVL(4.0*(X-1.)/X-1.0,spencs,nspenc))/X
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION SPENC
+END FUNCTION SPENC

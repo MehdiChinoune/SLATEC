@@ -97,7 +97,7 @@ REAL(8) FUNCTION DGAMIT(A,X)
         t = t - A*alx
         IF ( t<bot ) CALL XERCLR
         DGAMIT = -sga*sgngam*EXP(t)
-        GOTO 99999
+        RETURN
       ELSE
         !
         IF ( t>(-alneps) ) h = 1.0D0 - sga*sgngam*EXP(t)
@@ -119,6 +119,4 @@ REAL(8) FUNCTION DGAMIT(A,X)
   IF ( t<bot ) CALL XERCLR
   DGAMIT = SIGN(EXP(t),h)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION DGAMIT
+END FUNCTION DGAMIT

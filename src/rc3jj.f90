@@ -431,13 +431,11 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
       IF ( ABS(Thrcof(n))<thresh ) Thrcof(n) = zero
       Thrcof(n) = cnorm*Thrcof(n)
     ENDDO
-    GOTO 99999
+    RETURN
   ENDIF
   !
   DO n = 1, nfin
     Thrcof(n) = cnorm*Thrcof(n)
   ENDDO
   RETURN
-  !
-  99999 CONTINUE
-  END SUBROUTINE RC3JJ
+END SUBROUTINE RC3JJ

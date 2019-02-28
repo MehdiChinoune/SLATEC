@@ -63,13 +63,11 @@ FUNCTION ALNGAM(X)
       1,1)
     !
     ALNGAM = sqpi2l + (X-0.5)*LOG(y) - X - LOG(sinpiy) - R9LGMC(y)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   ! LOG (ABS (GAMMA(X))) FOR  ABS(X) .LE. 10.0
   !
   ALNGAM = LOG(ABS(GAMMA(X)))
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION ALNGAM
+END FUNCTION ALNGAM

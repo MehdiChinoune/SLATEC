@@ -87,7 +87,7 @@ SUBROUTINE DROTG(Da,Db,Dc,Ds)
     !
     Dc = 1.0D0
     Ds = 0.0D0
-    GOTO 99999
+    RETURN
   ELSE
     u = Db + Db
     v = Da/u
@@ -108,6 +108,4 @@ SUBROUTINE DROTG(Da,Db,Dc,Ds)
   ENDIF
   Db = 1.0D0
   RETURN
-  !
-  99999 CONTINUE
-  END SUBROUTINE DROTG
+END SUBROUTINE DROTG

@@ -109,13 +109,11 @@ FUNCTION BESK0E(X)
     !
     IF ( X<=8. ) BESK0E = (1.25+CSEVL((16./X-5.)/3.,ak0cs,ntak0))/SQRT(X)
     IF ( X>8. ) BESK0E = (1.25+CSEVL(16./X-1.,ak02cs,ntak02))/SQRT(X)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   y = 0.
   IF ( X>xsml ) y = X*X
   BESK0E = EXP(X)*(-LOG(0.5*X)*BESI0(X)-.25+CSEVL(.5*y-1.,bk0cs,ntk0))
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION BESK0E
+END FUNCTION BESK0E

@@ -65,7 +65,7 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
     tp = TN - HU*(1.0E0+100.0E0*UROund)
     IF ( (T-tp)*(T-TN)>0.0E0 ) THEN
       Iflag = -2
-      GOTO 99999
+      RETURN
     ELSE
       !
       s = (T-TN)/H
@@ -107,5 +107,5 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
   ENDDO
   RETURN
   !----------------------- END OF SUBROUTINE INTYD -----------------------
-  99999 CONTINUE
-  END SUBROUTINE INTYD
+  RETURN
+END SUBROUTINE INTYD

@@ -73,7 +73,7 @@ REAL FUNCTION SDOT(N,Sx,Incx,Sy,Incy)
       DO i = 1, ns, Incx
         SDOT = SDOT + Sx(i)*Sy(i)
       ENDDO
-      GOTO 99999
+      RETURN
     ENDIF
   ENDIF
   !
@@ -95,5 +95,4 @@ REAL FUNCTION SDOT(N,Sx,Incx,Sy,Incy)
       *Sy(i+3) + Sx(i+4)*Sy(i+4)
   ENDDO
   RETURN
-  99999 CONTINUE
-  END FUNCTION SDOT
+END FUNCTION SDOT

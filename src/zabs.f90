@@ -31,7 +31,7 @@ REAL(8) FUNCTION ZABS(Zr,Zi)
   s = s*1.0D+0
   IF ( s==0.0D+0 ) THEN
     ZABS = 0.0D+0
-    GOTO 99999
+    RETURN
   ELSEIF ( u<=v ) THEN
     q = u/v
     ZABS = v*SQRT(1.D+0+q*q)
@@ -40,5 +40,4 @@ REAL(8) FUNCTION ZABS(Zr,Zi)
   q = v/u
   ZABS = u*SQRT(1.D+0+q*q)
   RETURN
-  99999 CONTINUE
-  END FUNCTION ZABS
+END FUNCTION ZABS

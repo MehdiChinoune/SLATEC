@@ -161,7 +161,7 @@ SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
     ENDIF
   ENDDO
   Ierr = 2
-  GOTO 99999
+  RETURN
   100  Ms = j
   200  mm = Ms + Ms
   mp = mm + 1
@@ -248,5 +248,4 @@ SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   ENDDO
   Ans = gs*(s(1)-sumj)
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE BKIAS
+END SUBROUTINE BKIAS

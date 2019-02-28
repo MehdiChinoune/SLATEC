@@ -151,7 +151,7 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
           IF ( Theta<=0.D0.OR.Theta>pi2 ) THEN
             CALL XERMSG('SLATEC','DXLEGF','THETA out of range',211,1)
             Ierror = 211
-            GOTO 99999
+            RETURN
           ELSEIF ( Id>=1.AND.Id<=4 ) THEN
             IF ( (Mu1==Mu2).OR.(Nudiff<=0) ) THEN
               !
@@ -235,5 +235,4 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
     210,1)
   Ierror = 210
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE DXLEGF
+END SUBROUTINE DXLEGF

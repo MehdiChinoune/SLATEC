@@ -98,7 +98,7 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   be = 0.0E0
   IF ( A==B ) THEN
     IF ( Err<0.0E0 ) Err = be
-    GOTO 99999
+    RETURN
   ELSE
     lmx = nlmx
     lmn = nlmn
@@ -108,7 +108,7 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
         IF ( cc<=0.1E0 ) THEN
           IF ( cc<=0.0E0 ) THEN
             IF ( Err<0.0E0 ) Err = be
-            GOTO 99999
+            RETURN
           ELSE
             anib = 0.5E0 - LOG(cc)/0.69314718E0
             nib = INT(anib)
@@ -119,7 +119,7 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
                 'A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL INTEGRATION. '&
                 //'ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
               IF ( Err<0.0E0 ) Err = be
-              GOTO 99999
+              RETURN
             ELSE
               lmn = MIN(lmn,lmx)
             ENDIF
@@ -202,7 +202,7 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
         'ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
     ENDIF
     IF ( Err<0.0E0 ) Err = be
-    GOTO 99999
+    RETURN
   ENDIF
   200  est = gr(l-1)
   lr(l) = 1

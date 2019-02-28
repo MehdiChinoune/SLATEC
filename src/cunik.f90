@@ -182,7 +182,7 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Sum,Cwrk)
     ENDDO
     Sum = s
     Phi = Cwrk(16)*con(2)
-    GOTO 99999
+    RETURN
   ENDIF
   !-----------------------------------------------------------------------
   !     COMPUTE SUM FOR THE I FUNCTION
@@ -194,5 +194,4 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Sum,Cwrk)
   Sum = s
   Phi = Cwrk(16)*con(1)
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE CUNIK
+END SUBROUTINE CUNIK

@@ -27,9 +27,8 @@ FUNCTION PSGF(X,Iz,C,A,Bh)
   ENDDO
   IF ( MOD(Iz,2)/=0 ) THEN
     PSGF = 1. + fsg + hsg
-    GOTO 99999
+    RETURN
   ENDIF
   PSGF = 1. - fsg - hsg
   RETURN
-  99999 CONTINUE
-  END FUNCTION PSGF
+END FUNCTION PSGF

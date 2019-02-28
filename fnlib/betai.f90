@@ -72,7 +72,7 @@ REAL FUNCTION BETAI(X,Pin,Qin)
     xb = p*LOG(MAX(y,sml)) - LOG(p) - ALBETA(p,q)
     IF ( xb>alnsml.AND.y/=0. ) BETAI = EXP(xb)
     IF ( y/=X.OR.p/=Pin ) BETAI = 1.0 - BETAI
-    GOTO 99999
+    RETURN
   ELSE
     !
     ! EVALUATE THE INFINITE SUM FIRST.
@@ -125,6 +125,4 @@ REAL FUNCTION BETAI(X,Pin,Qin)
   IF ( y/=X.OR.p/=Pin ) BETAI = 1.0 - BETAI
   BETAI = MAX(MIN(BETAI,1.0),0.0)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION BETAI
+END FUNCTION BETAI

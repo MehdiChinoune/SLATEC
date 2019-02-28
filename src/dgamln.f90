@@ -141,7 +141,7 @@ REAL(8) FUNCTION DGAMLN(Z,Ierr)
     !
     DGAMLN = D1MACH(2)
     Ierr = 1
-    GOTO 99999
+    RETURN
   ELSE
     IF ( Z<=101.0D0 ) THEN
       nz = INT( Z )
@@ -196,5 +196,4 @@ REAL(8) FUNCTION DGAMLN(Z,Ierr)
   tlg = LOG(zdmy)
   DGAMLN = zdmy*(tlg-1.0D0) - LOG(zp) + 0.5D0*(con-tlg) + s
   RETURN
-  99999 CONTINUE
-  END FUNCTION DGAMLN
+END FUNCTION DGAMLN

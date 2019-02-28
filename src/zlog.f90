@@ -29,7 +29,7 @@ SUBROUTINE ZLOG(Ar,Ai,Br,Bi,Ierr)
   IF ( Ar==0.0D+0 ) THEN
     IF ( Ai==0.0D+0 ) THEN
       Ierr = 1
-      GOTO 99999
+      RETURN
     ELSE
       Bi = dhpi
       Br = LOG(ABS(Ai))
@@ -58,5 +58,4 @@ SUBROUTINE ZLOG(Ar,Ai,Br,Bi,Ierr)
   Br = LOG(zm)
   Bi = dtheta
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE ZLOG
+END SUBROUTINE ZLOG

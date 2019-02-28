@@ -95,7 +95,7 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     DO i = 1, N
       Y(i) = czero
     ENDDO
-    GOTO 99999
+    RETURN
   ENDIF
   100  nn = MIN(2,nd)
   DO i = 1, nn
@@ -223,5 +223,4 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   ENDIF
   400  Nz = -1
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE CUNI2
+END SUBROUTINE CUNI2

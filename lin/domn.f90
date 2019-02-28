@@ -347,7 +347,7 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
       !         check stopping criterion.
       IF ( ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,Itmax,Iter,&
         Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,Iwork,ak,bnrm,solnrm)&
-        /=0 ) GOTO 99999
+        /=0 ) RETURN
       !
     ENDDO
     !
@@ -359,5 +359,5 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   ENDIF
   !
   !------------- LAST LINE OF DOMN FOLLOWS ----------------------------
-  99999 CONTINUE
-  END SUBROUTINE DOMN
+  RETURN
+END SUBROUTINE DOMN

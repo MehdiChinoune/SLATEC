@@ -65,12 +65,10 @@ REAL(8) FUNCTION DBESJ0(X)
     !
     CALL D9B0MP(y,ampl,theta)
     DBESJ0 = ampl*COS(theta)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   DBESJ0 = 1.0D0
   IF ( y>xsml ) DBESJ0 = DCSEVL(.125D0*y*y-1.D0,bj0cs,ntj0)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION DBESJ0
+END FUNCTION DBESJ0

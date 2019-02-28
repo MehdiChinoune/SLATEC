@@ -53,7 +53,7 @@ SUBROUTINE DDASLV(Neq,Delta,Wm,Iwm)
       !     BANDED MATRIX
       meband = 2*Iwm(LML) + Iwm(LMU) + 1
       CALL DGBSL(Wm(NPD),meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT),Delta,0)
-      GOTO 99999
+      RETURN
     CASE DEFAULT
   END SELECT
   !
@@ -61,5 +61,5 @@ SUBROUTINE DDASLV(Neq,Delta,Wm,Iwm)
   CALL DGESL(Wm(NPD),Neq,Neq,Iwm(LIPVT),Delta,0)
   RETURN
   !------END OF SUBROUTINE DDASLV------
-  99999 CONTINUE
-  END SUBROUTINE DDASLV
+  RETURN
+END SUBROUTINE DDASLV

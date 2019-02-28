@@ -204,7 +204,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
     Sumi = si
     Phir = Cwrkr(16)*con(2)
     Phii = Cwrki(16)*con(2)
-    GOTO 99999
+    RETURN
   ENDIF
   !-----------------------------------------------------------------------
   !     COMPUTE SUM FOR THE I FUNCTION
@@ -220,5 +220,4 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
   Phir = Cwrkr(16)*con(1)
   Phii = Cwrki(16)*con(1)
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE ZUNIK
+END SUBROUTINE ZUNIK

@@ -338,9 +338,9 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
         Abserr = MAX((epmach*0.5E+02)*resabs,Abserr)
       IF ( Abserr<=MAX(Epsabs,Epsrel*ABS(Result)) ) Ier = 0
       ! ***JUMP OUT OF DO-LOOP
-      IF ( Ier==0 ) GOTO 99999
+      IF ( Ier==0 ) RETURN
     ENDDO
   ENDIF
   CALL XERMSG('SLATEC','QNG','ABNORMAL RETURN',Ier,0)
-  99999 CONTINUE
-  END SUBROUTINE QNG
+  RETURN
+END SUBROUTINE QNG

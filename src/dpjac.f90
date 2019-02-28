@@ -124,7 +124,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
         ENDIF
       ENDDO
       !     .........EXIT
-      GOTO 99999
+      RETURN
     CASE (4)
       !           IF MITER = 4, CALL DJAC AND MULTIPLY BY SCALAR.
       !           -----------------------
@@ -204,10 +204,10 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   !              --------------------------------------------
   CALL DGEFA(Wm(3),N,N,Iwm(21),IER)
   !     .........EXIT
-  GOTO 99999
+  RETURN
   100  IER = -1
   !     ......EXIT
-  GOTO 99999
+  RETURN
   !        ADD IDENTITY MATRIX.
   !        -------------------------------------------------
   200  ii = mband + 2
@@ -220,5 +220,5 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   CALL DGBFA(Wm(3),meband,N,ml,mu,Iwm(21),IER)
   !     ----------------------- END OF SUBROUTINE DPJAC
   !     -----------------------
-  99999 CONTINUE
-  END SUBROUTINE DPJAC
+  RETURN
+END SUBROUTINE DPJAC

@@ -133,13 +133,11 @@ FUNCTION BESY0(X)
     ampl = (0.75+CSEVL(z,bm0cs,ntm0))/SQRT(X)
     theta = X - pi4 + CSEVL(z,bth0cs,ntth0)/X
     BESY0 = ampl*SIN(theta)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   y = 0.
   IF ( X>xsml ) y = X*X
   BESY0 = twodpi*LOG(0.5*X)*BESJ0(X) + .375 + CSEVL(.125*y-1.,by0cs,nty0)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION BESY0
+END FUNCTION BESY0

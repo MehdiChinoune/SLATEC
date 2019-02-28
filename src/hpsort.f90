@@ -322,7 +322,7 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
       ENDDO
       !
     ENDIF
-    GOTO 99999
+    RETURN
   ELSE
     i = il(m)
     j = iu(m)
@@ -352,5 +352,5 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
     ENDIF
   ENDDO
   !
-  99999 CONTINUE
-  END SUBROUTINE HPSORT
+  RETURN
+END SUBROUTINE HPSORT

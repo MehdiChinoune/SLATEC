@@ -57,7 +57,7 @@ COMPLEX FUNCTION CDOTU(N,Cx,Incx,Cy,Incy)
     DO i = 1, ns, Incx
       CDOTU = CDOTU + Cx(i)*Cy(i)
     ENDDO
-    GOTO 99999
+    RETURN
   ENDIF
   !
   !     Code for unequal or nonpositive increments.
@@ -72,5 +72,4 @@ COMPLEX FUNCTION CDOTU(N,Cx,Incx,Cy,Incy)
     ky = ky + Incy
   ENDDO
   RETURN
-  99999 CONTINUE
-  END FUNCTION CDOTU
+END FUNCTION CDOTU

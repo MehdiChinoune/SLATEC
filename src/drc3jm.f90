@@ -423,7 +423,7 @@ SUBROUTINE DRC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
       IF ( ABS(Thrcof(n))<thresh ) Thrcof(n) = zero
       Thrcof(n) = cnorm*Thrcof(n)
     ENDDO
-    GOTO 99999
+    RETURN
   ENDIF
   !
   DO n = 1, nfin
@@ -433,5 +433,5 @@ SUBROUTINE DRC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !
   !
   !
-  99999 CONTINUE
-  END SUBROUTINE DRC3JM
+  RETURN
+END SUBROUTINE DRC3JM

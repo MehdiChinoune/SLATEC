@@ -84,7 +84,7 @@ SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
           +5.0*U(K,J))/TDLx3
         Uxxxx = (-2.0*U(K-5,J)+11.0*U(K-4,J)-24.0*U(K-3,J)+26.0*U(K-2,J)&
           -14.0*U(K-1,J)+3.0*U(K,J))/DLX4
-        GOTO 99999
+        RETURN
       ENDIF
     ENDIF
     !
@@ -104,5 +104,4 @@ SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
   Uxxx = (-U(K-2,J)+2.0*U(K-1,J)-2.0*U(2,J)+U(3,J))/(TDLx3)
   Uxxxx = (U(K-2,J)-4.0*U(K-1,J)+6.0*U(1,J)-4.0*U(2,J)+U(3,J))/DLX4
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE DX4
+END SUBROUTINE DX4

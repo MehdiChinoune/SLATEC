@@ -120,12 +120,10 @@ FUNCTION BESI0E(X)
     !
     IF ( y<=8. ) BESI0E = (.375+CSEVL((48./y-11.)/5.,ai0cs,ntai0))/SQRT(y)
     IF ( y>8. ) BESI0E = (.375+CSEVL(16./y-1.,ai02cs,ntai02))/SQRT(y)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   BESI0E = 1.0 - X
   IF ( y>xsml ) BESI0E = EXP(-y)*(2.75+CSEVL(y*y/4.5-1.0,bi0cs,nti0))
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION BESI0E
+END FUNCTION BESI0E

@@ -86,7 +86,7 @@ SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
     !
     Sc = 1.0E0
     Ss = 0.0E0
-    GOTO 99999
+    RETURN
   ELSE
     u = Sb + Sb
     v = Sa/u
@@ -107,6 +107,4 @@ SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
   ENDIF
   Sb = 1.0E0
   RETURN
-  !
-  99999 CONTINUE
-  END SUBROUTINE SROTG
+END SUBROUTINE SROTG

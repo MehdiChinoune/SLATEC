@@ -227,7 +227,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     !
     I = 0
     Xval = zero
-    GOTO 99999
+    RETURN
   ELSE
     !
     !     INITIALIZE IPPLOC FOR ORTHOGONAL SCAN.
@@ -273,5 +273,4 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   I = ii
   Xval = Sx(ipl)
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE PNNZRS
+END SUBROUTINE PNNZRS

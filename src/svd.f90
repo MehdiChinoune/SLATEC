@@ -413,9 +413,9 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
     !
   ENDDO
   !
-  GOTO 99999
+  RETURN
   !     .......... SET ERROR -- NO CONVERGENCE TO A
   !                SINGULAR VALUE AFTER 30 ITERATIONS ..........
   200  Ierr = k
-  99999 CONTINUE
+  RETURN
 END SUBROUTINE SVD

@@ -56,7 +56,7 @@ SUBROUTINE CSSCAL(N,Sa,Cx,Incx)
     DO i = 1, N
       Cx(i) = Sa*Cx(i)
     ENDDO
-    GOTO 99999
+    RETURN
   ENDIF
   !
   !     Code for increment not equal to 1.
@@ -68,5 +68,4 @@ SUBROUTINE CSSCAL(N,Sa,Cx,Incx)
     ix = ix + Incx
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE CSSCAL
+END SUBROUTINE CSSCAL

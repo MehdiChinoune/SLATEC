@@ -33,7 +33,7 @@ SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
   IF ( nw/=0 ) THEN
     Nz = -1
     IF ( nw==(-2) ) Nz = -2
-    GOTO 99999
+    RETURN
   ELSE
     CALL CRATI(Zr,Fnu,N,Y,Tol)
     !-----------------------------------------------------------------------
@@ -83,5 +83,4 @@ SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
     Y(i) = cinu*cscl
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE CWRSK
+END SUBROUTINE CWRSK

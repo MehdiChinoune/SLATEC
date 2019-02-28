@@ -316,12 +316,10 @@ REAL(8) FUNCTION DBIE(X)
     z = -1.0D0
     IF ( X<xbig ) z = 16.D0/(X*sqrtx) - 1.0D0
     DBIE = (0.625D0+DCSEVL(z,bip2cs,nbip2))/SQRT(sqrtx)
-    GOTO 99999
+    RETURN
   ENDIF
   sqrtx = SQRT(X)
   z = atr/(X*sqrtx) + btr
   DBIE = (0.625D0+DCSEVL(z,bip1cs,nbip1))/SQRT(sqrtx)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION DBIE
+END FUNCTION DBIE

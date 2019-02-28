@@ -83,9 +83,8 @@ SUBROUTINE SINQB(N,X,Wsave)
       X(k) = X(kc+1)
       X(kc+1) = xhold
     ENDDO
-    GOTO 99999
+    RETURN
   ENDIF
   X(1) = 4.*X(1)
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE SINQB
+END SUBROUTINE SINQB

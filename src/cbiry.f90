@@ -185,7 +185,7 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
     IF ( az>aa ) THEN
       Ierr = 4
       nz = 0
-      GOTO 99999
+      RETURN
     ELSE
       aa = SQRT(aa)
       IF ( az>aa ) Ierr = 3
@@ -323,5 +323,4 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   100  nz = 0
   Ierr = 5
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE CBIRY
+END SUBROUTINE CBIRY

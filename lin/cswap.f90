@@ -59,7 +59,7 @@ SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
       Cx(i) = Cy(i)
       Cy(i) = ctemp
     ENDDO
-    GOTO 99999
+    RETURN
   ENDIF
   !
   !     Code for unequal or nonpositive increments.
@@ -76,5 +76,4 @@ SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
     ky = ky + Incy
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE CSWAP
+END SUBROUTINE CSWAP

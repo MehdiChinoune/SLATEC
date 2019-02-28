@@ -52,7 +52,7 @@ SUBROUTINE MPDIVI(X,Iy,Z)
       IF ( re<=(-M) ) THEN
         ! UNDERFLOW HERE
         CALL MPUNFL(Z)
-        GOTO 99999
+        RETURN
       ELSE
         Z(1) = rs
         Z(2) = re - 1
@@ -165,5 +165,4 @@ SUBROUTINE MPDIVI(X,Iy,Z)
   500  CALL MPERR
   Z(1) = 0
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE MPDIVI
+END SUBROUTINE MPDIVI

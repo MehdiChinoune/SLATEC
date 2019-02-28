@@ -63,7 +63,7 @@ INTEGER FUNCTION IDAMAX(N,Dx,Incx)
         dmax = xmag
       ENDIF
     ENDDO
-    GOTO 99999
+    RETURN
   ENDIF
   !
   !     Code for increments not equal to 1.
@@ -81,5 +81,4 @@ INTEGER FUNCTION IDAMAX(N,Dx,Incx)
     ix = ix + Incx
   ENDDO
   RETURN
-  99999 CONTINUE
-  END FUNCTION IDAMAX
+END FUNCTION IDAMAX

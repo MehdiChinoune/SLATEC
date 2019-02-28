@@ -84,7 +84,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
       Tesco(3,nq) = (nq+2)/Elco(1,nq)
       rq1fac = rq1fac/fnq
     ENDDO
-    GOTO 99999
+    RETURN
   ENDIF
   !
   Elco(1,1) = 1.0E0
@@ -136,5 +136,5 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
   ENDDO
   RETURN
   !----------------------- END OF SUBROUTINE CFOD  -----------------------
-  99999 CONTINUE
-  END SUBROUTINE CFOD
+  RETURN
+END SUBROUTINE CFOD

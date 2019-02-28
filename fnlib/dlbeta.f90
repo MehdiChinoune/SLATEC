@@ -45,7 +45,7 @@ REAL(8) FUNCTION DLBETA(A,B)
     corr = D9LGMC(p) + D9LGMC(q) - D9LGMC(p+q)
     DLBETA = -0.5D0*LOG(q) + sq2pil + corr + (p-0.5D0)*LOG(p/(p+q))&
       + q*DLNREL(-p/(p+q))
-    GOTO 99999
+    RETURN
   ELSEIF ( q<10.D0 ) THEN
     !
     ! P AND Q ARE SMALL.
@@ -59,6 +59,4 @@ REAL(8) FUNCTION DLBETA(A,B)
   corr = D9LGMC(q) - D9LGMC(p+q)
   DLBETA = DLNGAM(p) + corr + p - p*LOG(p+q) + (q-0.5D0)*DLNREL(-p/(p+q))
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION DLBETA
+END FUNCTION DLBETA

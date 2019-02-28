@@ -320,7 +320,7 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
           RETURN
         ELSEIF ( 6*L<=KMAx ) THEN
           iflag = 1
-          GOTO 99999
+          RETURN
         ENDIF
       ELSE
         CALL XERMSG('SLATEC','DXSET','IMPROPER VALUE OF NRADPL',204,1)
@@ -340,5 +340,4 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   CALL XERMSG('SLATEC','DXSET','6*L .GT. KMAX',206,1)
   Ierror = 206
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE DXSET
+END SUBROUTINE DXSET

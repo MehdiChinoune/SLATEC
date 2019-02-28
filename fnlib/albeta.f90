@@ -48,7 +48,7 @@ FUNCTION ALBETA(A,B)
     corr = R9LGMC(p) + R9LGMC(q) - R9LGMC(p+q)
     ALBETA = -0.5*LOG(q) + sq2pil + corr + (p-0.5)*LOG(p/(p+q))&
       + q*ALNREL(-p/(p+q))
-    GOTO 99999
+    RETURN
   ELSEIF ( q<10.0 ) THEN
     !
     ! P AND Q ARE SMALL.
@@ -62,6 +62,4 @@ FUNCTION ALBETA(A,B)
   corr = R9LGMC(q) - R9LGMC(p+q)
   ALBETA = ALNGAM(p) + corr + p - p*LOG(p+q) + (q-0.5)*ALNREL(-p/(p+q))
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION ALBETA
+END FUNCTION ALBETA

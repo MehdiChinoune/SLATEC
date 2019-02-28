@@ -266,7 +266,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     IF ( Ier/=0.OR.(Abserr<=errbnd.AND.Abserr/=resabs).OR.Abserr==0.0D+00 )&
         THEN
       Neval = 42*Last - 21
-      GOTO 99999
+      RETURN
     ELSE
       !
       !           INITIALIZATION
@@ -446,7 +446,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
             IF ( area==0.0D+00 ) THEN
               IF ( Ier>2 ) Ier = Ier - 1
               Neval = 42*Last - 21
-              GOTO 99999
+              RETURN
             ENDIF
           ELSEIF ( Abserr/ABS(Result)>errsum/ABS(area) ) THEN
             GOTO 50
@@ -461,7 +461,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
         ENDIF
         IF ( Ier>2 ) Ier = Ier - 1
         Neval = 42*Last - 21
-        GOTO 99999
+        RETURN
       ENDIF
     ENDIF
     !
@@ -475,5 +475,5 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     IF ( Ier>2 ) Ier = Ier - 1
     Neval = 42*Last - 21
   ENDIF
-  99999 CONTINUE
+  RETURN
 END SUBROUTINE DQAGSE

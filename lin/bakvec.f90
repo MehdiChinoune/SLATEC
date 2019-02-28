@@ -101,10 +101,10 @@ SUBROUTINE BAKVEC(Nm,N,T,E,M,Z,Ierr)
         !
       ENDDO
     ENDIF
-    GOTO 99999
+    RETURN
     !     .......... SET ERROR -- EIGENVECTORS CANNOT BE
     !                FOUND BY THIS PROGRAM ..........
     50     Ierr = 2*N + i
   ENDIF
-  99999 CONTINUE
-  END SUBROUTINE BAKVEC
+  RETURN
+END SUBROUTINE BAKVEC

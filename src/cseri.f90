@@ -141,7 +141,7 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     !     THE CALCULATION IN CBINU WITH N=N-ABS(NZ)
     !-----------------------------------------------------------------------
     Nz = -Nz
-    GOTO 99999
+    RETURN
   ELSE
     nn = nn - 1
     IF ( nn==0 ) RETURN
@@ -164,5 +164,4 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     Y(i) = czero
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE CSERI
+END SUBROUTINE CSERI

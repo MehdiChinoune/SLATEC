@@ -106,7 +106,7 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
   itn = 30*N
   !     .......... SEARCH FOR NEXT EIGENVALUES ..........
   100 CONTINUE
-  IF ( en<Low ) GOTO 99999
+  IF ( en<Low ) RETURN
   its = 0
   na = en - 1
   enm2 = na - 1
@@ -157,7 +157,7 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
       !     .......... SET ERROR -- NO CONVERGENCE TO AN
       !                EIGENVALUE AFTER 30*N ITERATIONS ..........
       Ierr = en
-      GOTO 99999
+      RETURN
     ELSE
       IF ( its==10.OR.its==20 ) THEN
         !     .......... FORM EXCEPTIONAL SHIFT ..........
@@ -257,5 +257,5 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
     ENDIF
   ENDIF
   GOTO 100
-  99999 CONTINUE
-  END SUBROUTINE HQR
+  RETURN
+END SUBROUTINE HQR

@@ -106,7 +106,7 @@ SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
     ELSE
       sflag = -two
       Sparam(1) = sflag
-      GOTO 99999
+      RETURN
     ENDIF
     !       GO ZERO-H-D-AND-SX1..
   ENDIF
@@ -201,5 +201,5 @@ SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
     Sparam(5) = sh22
   ENDIF
   Sparam(1) = sflag
-  99999 CONTINUE
-  END SUBROUTINE SROTMG
+  RETURN
+END SUBROUTINE SROTMG

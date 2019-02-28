@@ -917,7 +917,7 @@ LOGICAL FUNCTION IFSID(Line)
     IF ( id/=0 ) THEN
       !         IF (LINE(2:ID-1) .EQ. ' ') IFSID = .TRUE.
       DO i = 2, id - 1
-        IF ( Line(i:i)/=' ' ) GOTO 99999
+        IF ( Line(i:i)/=' ' ) RETURN
       ENDDO
       !
       !         We have a line with *^^...^^IDENT
@@ -925,7 +925,7 @@ LOGICAL FUNCTION IFSID(Line)
       IFSID = .TRUE.
     ENDIF
   ENDIF
-  99999 CONTINUE
+  RETURN
 END FUNCTION IFSID
 !DECK PSCAT
 SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,&

@@ -68,13 +68,11 @@ FUNCTION BESK0(X)
     IF ( X>xmax ) RETURN
     !
     BESK0 = EXP(-X)*BESK0E(X)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   y = 0.
   IF ( X>xsml ) y = X*X
   BESK0 = -LOG(0.5*X)*BESI0(X) - .25 + CSEVL(.5*y-1.,bk0cs,ntk0)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION BESK0
+END FUNCTION BESK0

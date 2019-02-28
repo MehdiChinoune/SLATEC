@@ -114,7 +114,7 @@ FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
           CALL XERMSG('SLATEC','BVALU',&
             'A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)',2,&
             1)
-          GOTO 99999
+          RETURN
         ENDIF
       ENDIF
       !
@@ -168,5 +168,4 @@ FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   ENDIF
   BVALU = Work(1)
   RETURN
-  99999 CONTINUE
-  END FUNCTION BVALU
+END FUNCTION BVALU

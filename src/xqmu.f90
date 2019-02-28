@@ -50,13 +50,13 @@ SUBROUTINE XQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
     k = k + 1
     Pqa(k) = pq2
     Ipqa(k) = ipq2
-    IF ( Mu2<1 ) GOTO 99999
+    IF ( Mu2<1 ) RETURN
   ENDIF
   IF ( Mu1<=1 ) THEN
     k = k + 1
     Pqa(k) = pq1
     Ipqa(k) = ipq1
-    IF ( Mu2<=1 ) GOTO 99999
+    IF ( Mu2<=1 ) RETURN
   ENDIF
   DO
     !
@@ -84,5 +84,5 @@ SUBROUTINE XQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
       IF ( Mu2<=mu ) EXIT
     ENDIF
   ENDDO
-  99999 CONTINUE
-  END SUBROUTINE XQMU
+  RETURN
+END SUBROUTINE XQMU

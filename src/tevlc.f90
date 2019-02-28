@@ -168,7 +168,7 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
         D(ntop+1) = dhold
       ENDDO
     ENDIF
-    GOTO 99999
+    RETURN
     !
     !     ********** SET ERROR -- NO CONVERGENCE TO AN
     !                EIGENVALUE AFTER 30 ITERATIONS **********
@@ -178,5 +178,5 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
   !
   !     ********** LAST CARD OF TQLRAT **********
   !
-  99999 CONTINUE
-  END SUBROUTINE TEVLC
+  RETURN
+END SUBROUTINE TEVLC

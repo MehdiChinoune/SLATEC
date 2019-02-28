@@ -232,7 +232,7 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
                 IF ( Key==3.AND.Lw<3*M ) GOTO 5
                 IF ( Np<0.OR.Np>M ) THEN
                   CALL XERMSG('SLATEC','ULSIA','NP OUT OF RANGE',2,1)
-                  GOTO 99999
+                  RETURN
                 ELSE
                   !
                   eps = 10.*R1MACH(4)
@@ -338,5 +338,4 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
 ENDIF
 100  CALL XERMSG('SLATEC','ULSIA','AE(I) .LT. 0',2,1)
 RETURN
-  99999 CONTINUE
   END SUBROUTINE ULSIA

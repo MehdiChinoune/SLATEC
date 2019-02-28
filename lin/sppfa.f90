@@ -92,9 +92,9 @@ SUBROUTINE SPPFA(Ap,N,Info)
     ENDIF
     jj = jj + j
     s = Ap(jj) - s
-    IF ( s<=0.0E0 ) GOTO 99999
+    IF ( s<=0.0E0 ) RETURN
     Ap(jj) = SQRT(s)
   ENDDO
   Info = 0
-  99999 CONTINUE
-  END SUBROUTINE SPPFA
+  RETURN
+END SUBROUTINE SPPFA

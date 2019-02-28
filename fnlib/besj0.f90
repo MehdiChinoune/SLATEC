@@ -131,12 +131,10 @@ FUNCTION BESJ0(X)
     ampl = (0.75+CSEVL(z,bm0cs,ntm0))/SQRT(y)
     theta = y - pi4 + CSEVL(z,bth0cs,ntth0)/y
     BESJ0 = ampl*COS(theta)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   BESJ0 = 1.0
   IF ( y>xsml ) BESJ0 = CSEVL(.125*y*y-1.,bj0cs,ntj0)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION BESJ0
+END FUNCTION BESJ0

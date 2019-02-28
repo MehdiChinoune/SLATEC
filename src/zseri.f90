@@ -172,7 +172,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     !     THE CALCULATION IN CBINU WITH N=N-ABS(NZ)
     !-----------------------------------------------------------------------
     Nz = -Nz
-    GOTO 99999
+    RETURN
   ELSE
     nn = nn - 1
     IF ( nn==0 ) RETURN
@@ -201,5 +201,4 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     Yi(i) = zeroi
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE ZSERI
+END SUBROUTINE ZSERI

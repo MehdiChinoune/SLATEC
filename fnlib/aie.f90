@@ -126,13 +126,11 @@ FUNCTION AIE(X)
     z = -1.0
     IF ( X<xbig ) z = 2.0/(X*sqrtx) - 1.0
     AIE = (.28125+CSEVL(z,aipcs,naip))/SQRT(sqrtx)
-    GOTO 99999
+    RETURN
   ENDIF
   z = 0.0
   IF ( ABS(X)>x3sml ) z = X**3
   AIE = 0.375 + (CSEVL(z,aifcs,naif)-X*(0.25+CSEVL(z,aigcs,naig)))
   IF ( X>x32sml ) AIE = AIE*EXP(2.0*X*SQRT(X)/3.0)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION AIE
+END FUNCTION AIE

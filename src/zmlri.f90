@@ -73,7 +73,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
     ak = ak + 1.0D0
   ENDDO
   Nz = -2
-  GOTO 99999
+  RETURN
   100  i = i + 1
   k = 0
   IF ( inu>=iaz ) THEN
@@ -113,7 +113,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
       ENDIF
     ENDDO
     Nz = -2
-    GOTO 99999
+    RETURN
   ENDIF
   !-----------------------------------------------------------------------
   !     BACKWARD RECURRENCE AND SUM NORMALIZING RELATION
@@ -216,5 +216,4 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
     Yr(i) = str
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE ZMLRI
+END SUBROUTINE ZMLRI

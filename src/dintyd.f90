@@ -94,7 +94,7 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
           ENDDO
         ENDDO
         !     .........EXIT
-        IF ( K==0 ) GOTO 99999
+        IF ( K==0 ) RETURN
       ENDIF
       r = H**(-K)
       DO i = 1, N
@@ -107,5 +107,5 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   ENDIF
   !     ----------------------- END OF SUBROUTINE DINTYD
   !     -----------------------
-  99999 CONTINUE
-  END SUBROUTINE DINTYD
+  RETURN
+END SUBROUTINE DINTYD

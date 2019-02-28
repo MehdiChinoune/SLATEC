@@ -1114,12 +1114,12 @@ CONTAINS
     ENDIF
     !
     LSERES = .TRUE.
-    GOTO 99999
+    RETURN
     100  LSERES = .FALSE.
     !
     !     End of LSERES.
     !
-    99999 CONTINUE
+    RETURN
   END FUNCTION LSERES
   !DECK SCHK12
   SUBROUTINE SCHK12(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&

@@ -73,7 +73,7 @@ REAL(8) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
       DO i = 1, ns, Incx
         DDOT = DDOT + Dx(i)*Dy(i)
       ENDDO
-      GOTO 99999
+      RETURN
     ENDIF
   ENDIF
   !
@@ -95,5 +95,4 @@ REAL(8) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
       *Dy(i+3) + Dx(i+4)*Dy(i+4)
   ENDDO
   RETURN
-  99999 CONTINUE
-  END FUNCTION DDOT
+END FUNCTION DDOT

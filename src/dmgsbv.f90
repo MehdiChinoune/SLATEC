@@ -290,17 +290,17 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
       !                  TEST FOR LINEAR DEPENDENCE OF PARTICULAR SOLUTION
       !
       !        ......EXIT
-      IF ( Inhomo/=1 ) GOTO 99999
-      IF ( (N>1).AND.(S(np1)<1.0) ) GOTO 99999
+      IF ( Inhomo/=1 ) RETURN
+      IF ( (N>1).AND.(S(np1)<1.0) ) RETURN
       vnorm = DDOT(M,V,1,V,1)
       IF ( S(np1)/=0.0D0 ) Wcnd = MIN(Wcnd,vnorm/S(np1))
       !        ......EXIT
-      IF ( vnorm>=EPS*S(np1) ) GOTO 99999
+      IF ( vnorm>=EPS*S(np1) ) RETURN
     ENDIF
     50     Iflag = 2
     Wcnd = EPS
   ELSE
     Iflag = 1
   ENDIF
-  99999 CONTINUE
-  END SUBROUTINE DMGSBV
+  RETURN
+END SUBROUTINE DMGSBV

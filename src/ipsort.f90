@@ -259,7 +259,7 @@ SUBROUTINE IPSORT(Ix,N,Iperm,Kflag,Ier)
       ENDDO
       !
     ENDIF
-    GOTO 99999
+    RETURN
   ELSE
     i = il(m)
     j = iu(m)
@@ -289,5 +289,5 @@ SUBROUTINE IPSORT(Ix,N,Iperm,Kflag,Ier)
     ENDIF
   ENDDO
   !
-  99999 CONTINUE
-  END SUBROUTINE IPSORT
+  RETURN
+END SUBROUTINE IPSORT

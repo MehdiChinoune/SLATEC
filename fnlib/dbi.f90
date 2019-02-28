@@ -141,12 +141,10 @@ REAL(8) FUNCTION DBI(X)
       2)
     !
     DBI = DBIE(X)*EXP(2.0D0*X*SQRT(X)/3.0D0)
-    GOTO 99999
+    RETURN
   ENDIF
   z = (2.0D0*X**3-9.0D0)/7.D0
   DBI = 1.125D0 + DCSEVL(z,bif2cs,nbif2)&
     + X*(0.625D0+DCSEVL(z,big2cs,nbig2))
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION DBI
+END FUNCTION DBI

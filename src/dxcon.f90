@@ -163,12 +163,12 @@ SUBROUTINE DXCON(X,Ix,Ierror)
       X = X*b
       Ix = Ix - ispace
     ENDDO
-    GOTO 99999
+    RETURN
     100 CONTINUE
     DO WHILE ( 10.0D0*ABS(X)>=b )
       X = X/b
       Ix = Ix + ispace
     ENDDO
   ENDIF
-  99999 CONTINUE
+  RETURN
 END SUBROUTINE DXCON

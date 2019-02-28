@@ -148,7 +148,7 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
       !     .......... SET ERROR -- NO CONVERGENCE TO
       !                EIGENVALUE AFTER 30 ITERATIONS ..........
       Ierr = N
-      GOTO 99999
+      RETURN
     ELSE
       its = its + 1
       !     .......... FORM SHIFT FROM BOTTOM 2 BY 2 MINOR ..........
@@ -325,5 +325,5 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
     A(N,mk) = 0.0E0
     !
   ENDDO
-  99999 CONTINUE
-  END SUBROUTINE BQR
+  RETURN
+END SUBROUTINE BQR

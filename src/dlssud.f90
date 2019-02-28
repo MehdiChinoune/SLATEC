@@ -178,7 +178,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
           !
           IF ( Irank/=0 ) CALL DOHTRL(Q,N,Nrda,Diag,Irank,Div,Td)
           !     ...............EXIT
-          GOTO 99999
+          RETURN
         ENDIF
         !        ......EXIT
       ELSEIF ( Iflag==1 ) THEN
@@ -191,7 +191,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   Iflag = 2
   CALL XERMSG('SLATEC','DLSSUD','INVALID IMPUT PARAMETERS.',2,1)
   !     ......EXIT
-  GOTO 99999
+  RETURN
   !
   !
   100 CONTINUE
@@ -310,5 +310,5 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     ENDDO
   ENDIF
   !
-  99999 CONTINUE
-  END SUBROUTINE DLSSUD
+  RETURN
+END SUBROUTINE DLSSUD

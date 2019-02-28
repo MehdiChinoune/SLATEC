@@ -360,7 +360,7 @@ SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
       !         check stopping criterion.
       IF ( ISDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,Err,&
         Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork,ak,bk,bnrm,solnrm)/=0 )&
-        GOTO 99999
+        RETURN
       !
     ENDDO
     !
@@ -372,5 +372,5 @@ SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   ENDIF
   !
   !------------- LAST LINE OF DBCG FOLLOWS ----------------------------
-  99999 CONTINUE
-  END SUBROUTINE DBCG
+  RETURN
+END SUBROUTINE DBCG

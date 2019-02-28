@@ -92,9 +92,9 @@ SUBROUTINE CPPFA(Ap,N,Info)
     ENDIF
     jj = jj + j
     s = REAL(Ap(jj)) - s
-    IF ( s<=0.0E0.OR.AIMAG(Ap(jj))/=0.0E0 ) GOTO 99999
+    IF ( s<=0.0E0.OR.AIMAG(Ap(jj))/=0.0E0 ) RETURN
     Ap(jj) = CMPLX(SQRT(s),0.0E0)
   ENDDO
   Info = 0
-  99999 CONTINUE
-  END SUBROUTINE CPPFA
+  RETURN
+END SUBROUTINE CPPFA

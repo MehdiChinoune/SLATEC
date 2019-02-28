@@ -201,12 +201,10 @@ REAL(8) FUNCTION DBSI0E(X)
       ))/SQRT(y)
     IF ( y>8.D0 ) DBSI0E = (0.375D0+DCSEVL(16.D0/y-1.D0,ai02cs,ntai02))&
       /SQRT(y)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   DBSI0E = 1.0D0 - X
   IF ( y>xsml ) DBSI0E = EXP(-y)*(2.75D0+DCSEVL(y*y/4.5D0-1.D0,bi0cs,nti0))
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION DBSI0E
+END FUNCTION DBSI0E

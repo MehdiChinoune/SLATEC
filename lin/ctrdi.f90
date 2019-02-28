@@ -105,7 +105,7 @@ SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
       DO kb = 1, N
         k = N + 1 - kb
         Info = k
-        IF ( CABS1(T(k,k))==0.0E0 ) GOTO 99999
+        IF ( CABS1(T(k,k))==0.0E0 ) RETURN
         T(k,k) = (1.0E0,0.0E0)/T(k,k)
         temp = -T(k,k)
         IF ( k/=N ) CALL CSCAL(N-k,temp,T(k+1,k),1)
@@ -122,7 +122,7 @@ SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
     ELSE
       DO k = 1, N
         Info = k
-        IF ( CABS1(T(k,k))==0.0E0 ) GOTO 99999
+        IF ( CABS1(T(k,k))==0.0E0 ) RETURN
         T(k,k) = (1.0E0,0.0E0)/T(k,k)
         temp = -T(k,k)
         CALL CSCAL(k-1,temp,T(1,k),1)
@@ -138,5 +138,5 @@ SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
       Info = 0
     ENDIF
   ENDIF
-  99999 CONTINUE
-  END SUBROUTINE CTRDI
+  RETURN
+END SUBROUTINE CTRDI

@@ -357,7 +357,7 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
       !         check stopping criterion.
       IF ( ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
         Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Atp,Atz,Dz,Atdz,Rwork,Iwork,ak,&
-        bk,bnrm,solnrm)/=0 ) GOTO 99999
+        bk,bnrm,solnrm)/=0 ) RETURN
       !
     ENDDO
     !
@@ -368,5 +368,5 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   ENDIF
   !
   !------------- LAST LINE OF DCGN FOLLOWS ----------------------------
-  99999 CONTINUE
-  END SUBROUTINE DCGN
+  RETURN
+END SUBROUTINE DCGN

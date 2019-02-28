@@ -536,7 +536,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   100 CONTINUE
   IFlag = -2
   !     ..................EXIT
-  GOTO 99999
+  RETURN
   200  INHomo = 2
   !              ......EXIT
   GOTO 400
@@ -732,5 +732,5 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   CALL DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
   Nfc = NFCc
   Iwork(17) = Iwork(L1)
-  99999 CONTINUE
-  END SUBROUTINE DBVSUP
+  RETURN
+END SUBROUTINE DBVSUP

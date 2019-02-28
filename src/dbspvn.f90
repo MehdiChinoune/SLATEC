@@ -92,7 +92,7 @@ SUBROUTINE DBSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
   ELSEIF ( X<T(Ileft).OR.X>T(Ileft+1) ) THEN
     CALL XERMSG('SLATEC','DBSPVN',&
       'X DOES NOT SATISFY T(ILEFT).LE.X.LE.T(ILEFT+1)',2,1)
-    GOTO 99999
+    RETURN
   ELSE
     IF ( Index/=2 ) THEN
       Iwork = 1
@@ -120,5 +120,4 @@ SUBROUTINE DBSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
   ENDIF
   !
   100  RETURN
-  99999 CONTINUE
   END SUBROUTINE DBSPVN

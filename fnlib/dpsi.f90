@@ -126,7 +126,7 @@ REAL(8) FUNCTION DPSI(X)
     !
     IF ( X<0.D0 ) DPSI = LOG(ABS(X)) - 0.5D0/X + aux - pi*DCOT(pi*X)
     IF ( X>0.D0 ) DPSI = LOG(X) - 0.5D0/X + aux
-    GOTO 99999
+    RETURN
   ELSE
     !
     ! DPSI(X) FOR ABS(X) .LE. 2
@@ -162,6 +162,4 @@ REAL(8) FUNCTION DPSI(X)
     DPSI = DPSI + 1.0D0/(y+i)
   ENDDO
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION DPSI
+END FUNCTION DPSI

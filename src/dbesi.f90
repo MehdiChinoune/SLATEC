@@ -186,7 +186,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
         IF ( X>elim ) THEN
           CALL XERMSG('SLATEC','DBESI',&
             'OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
-          GOTO 99999
+          RETURN
         ELSE
           earg = earg*EXP(X)
           GOTO 1000
@@ -208,7 +208,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
           IF ( X<=elim ) GOTO 100
           CALL XERMSG('SLATEC','DBESI',&
             'OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
-          GOTO 99999
+          RETURN
         ELSE
           z = X/Alpha
           ra = SQRT(1.0D0+z*z)
@@ -218,7 +218,7 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
           IF ( arg>elim ) THEN
             CALL XERMSG('SLATEC','DBESI',&
               'OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
-            GOTO 99999
+            RETURN
           ELSE
             IF ( km/=0 ) GOTO 100
             GOTO 200
@@ -493,5 +493,4 @@ SUBROUTINE DBESI(X,Alpha,Kode,N,Y,Nz)
   RETURN
   1300 CALL XERMSG('SLATEC','DBESI','ORDER, ALPHA, LESS THAN ZERO.',2,1)
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE DBESI
+END SUBROUTINE DBESI

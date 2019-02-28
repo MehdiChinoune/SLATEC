@@ -76,7 +76,7 @@ SUBROUTINE COST(N,X,Wsave)
   nm1 = N - 1
   np1 = N + 1
   ns2 = N/2
-  IF ( N<2 ) GOTO 99999
+  IF ( N<2 ) RETURN
   IF ( N==2 ) THEN
     x1h = X(1) + X(2)
     X(2) = X(1) - X(2)
@@ -106,7 +106,7 @@ SUBROUTINE COST(N,X,Wsave)
       xim2 = xi
     ENDDO
     IF ( modn/=0 ) X(N) = xim2
-    GOTO 99999
+    RETURN
   ENDIF
   x1p3 = X(1) + X(3)
   tx2 = X(2) + X(2)
@@ -114,5 +114,4 @@ SUBROUTINE COST(N,X,Wsave)
   X(1) = x1p3 + tx2
   X(3) = x1p3 - tx2
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE COST
+END SUBROUTINE COST

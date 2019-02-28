@@ -123,7 +123,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
       !
       !     DO LU DECOMPOSITION OF BANDED PD
       CALL SGBFA(Wm(NPD),meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT),Ier)
-      GOTO 99999
+      RETURN
     CASE (5)
       !
       !
@@ -167,7 +167,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
         ENDDO
       ENDDO
       CALL SGBFA(Wm(NPD),meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT),Ier)
-      GOTO 99999
+      RETURN
     CASE DEFAULT
       !
       !
@@ -184,5 +184,5 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   CALL SGEFA(Wm(NPD),Neq,Neq,Iwm(LIPVT),Ier)
   RETURN
   !------END OF SUBROUTINE SDAJAC------
-  99999 CONTINUE
-  END SUBROUTINE SDAJAC
+  RETURN
+END SUBROUTINE SDAJAC

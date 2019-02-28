@@ -345,7 +345,7 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
       !         check stopping criterion.
       IF ( ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,Itmax,Iter,&
         Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,Iwork,ak,bnrm,solnrm)&
-        /=0 ) GOTO 99999
+        /=0 ) RETURN
       !
     ENDDO
     !
@@ -357,5 +357,5 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   ENDIF
   !
   !------------- LAST LINE OF SOMN FOLLOWS ----------------------------
-  99999 CONTINUE
-  END SUBROUTINE SOMN
+  RETURN
+END SUBROUTINE SOMN

@@ -58,7 +58,7 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
     Scales(k) = 1.0D0
   ENDDO
   !     ......EXIT
-  GOTO 99999
+  RETURN
   !
   100  alog2 = LOG(2.0D0)
   Anorm = 0.0D0
@@ -91,5 +91,5 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
       Anorm = Anorm + Rows(k)
     ENDDO
   ENDIF
-  99999 CONTINUE
-  END SUBROUTINE DCSCAL
+  RETURN
+END SUBROUTINE DCSCAL

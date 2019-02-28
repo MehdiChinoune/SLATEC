@@ -98,9 +98,9 @@ SUBROUTINE CPBFA(Abd,Lda,N,M,Info)
       ENDDO
     ENDIF
     s = REAL(Abd(M+1,j)) - s
-    IF ( s<=0.0E0.OR.AIMAG(Abd(M+1,j))/=0.0E0 ) GOTO 99999
+    IF ( s<=0.0E0.OR.AIMAG(Abd(M+1,j))/=0.0E0 ) RETURN
     Abd(M+1,j) = CMPLX(SQRT(s),0.0E0)
   ENDDO
   Info = 0
-  99999 CONTINUE
-  END SUBROUTINE CPBFA
+  RETURN
+END SUBROUTINE CPBFA

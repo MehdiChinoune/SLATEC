@@ -162,7 +162,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
         ENDIF
       ELSE
         Ierr = 2
-        GOTO 99999
+        RETURN
       ENDIF
     ENDIF
     ks = 2
@@ -222,7 +222,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     ENDDO
     IF ( ic/=1 ) THEN
       Ierr = 2
-      GOTO 99999
+      RETURN
     ENDIF
     50     IF ( nd==1 ) s = s + (-LOG(X)+PSIXN(1))
     IF ( Kode==2 ) s = s*EXP(X)
@@ -329,7 +329,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     ENDIF
   ENDDO
   Ierr = 2
-  GOTO 99999
+  RETURN
   300  k = ind - 1
   DO i = 1, ml
     aa = aa - 1.0E0
@@ -345,5 +345,4 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     k = k + 1
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE EXINT
+END SUBROUTINE EXINT

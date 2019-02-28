@@ -289,7 +289,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   npts = Npts2 - 2
   IF ( Npts2<2.OR.Limit<=npts.OR.&
     (Epsabs<=0.0D+00.AND.Epsrel<MAX(0.5D+02*epmach,0.5D-28)) ) Ier = 6
-  IF ( Ier==6 ) GOTO 99999
+  IF ( Ier==6 ) RETURN
   !
   !            IF ANY BREAK POINTS ARE PROVIDED, SORT THEM INTO AN
   !            ASCENDING SEQUENCE.
@@ -318,7 +318,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
       ENDDO
     ENDDO
     IF ( Pts(1)/=MIN(A,B).OR.Pts(nintp1)/=MAX(A,B) ) Ier = 6
-    IF ( Ier==6 ) GOTO 99999
+    IF ( Ier==6 ) RETURN
   ENDIF
   !
   !            COMPUTE FIRST INTEGRAL AND ERROR APPROXIMATIONS.
@@ -372,7 +372,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     ENDDO
     IF ( Limit<Npts2 ) Ier = 1
   ENDIF
-  IF ( Ier/=0.OR.Abserr<=errbnd ) GOTO 99999
+  IF ( Ier/=0.OR.Abserr<=errbnd ) RETURN
   !
   !           INITIALIZATION
   !           --------------
@@ -580,5 +580,5 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   300 CONTINUE
   IF ( Ier>2 ) Ier = Ier - 1
   Result = Result*sign
-  99999 CONTINUE
+  RETURN
 END SUBROUTINE DQAGPE

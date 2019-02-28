@@ -186,13 +186,13 @@ SUBROUTINE CPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   ENDIF
   NCMplx = 1
   DO j = 2, iz
-    IF ( AIMAG(Cbp(j))/=0 ) GOTO 99999
+    IF ( AIMAG(Cbp(j))/=0 ) RETURN
   ENDDO
   NCMplx = 0
   DO j = 2, iz
     Bp(j) = REAL(Cbp(j))
   ENDDO
-  GOTO 99999
+  RETURN
   300  Ierror = 4
-  99999 CONTINUE
-  END SUBROUTINE CPADD
+  RETURN
+END SUBROUTINE CPADD

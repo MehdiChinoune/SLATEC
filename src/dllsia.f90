@@ -227,7 +227,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
                 IF ( Key==3.AND.Lw<3*N ) GOTO 5
                 IF ( Np<0.OR.Np>N ) THEN
                   CALL XERMSG('SLATEC','DLLSIA','NP OUT OF RANGE',2,1)
-                  GOTO 99999
+                  RETURN
                 ELSE
                   !
                   eps = 10.*D1MACH(3)
@@ -332,5 +332,4 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
 ENDIF
 100  CALL XERMSG('SLATEC','DLLSIA','AE(I) .LT. 0',2,1)
 RETURN
-  99999 CONTINUE
   END SUBROUTINE DLLSIA

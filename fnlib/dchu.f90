@@ -139,7 +139,7 @@ REAL(8) FUNCTION DCHU(A,B,X)
           *b0/(xi*(B+xi1)*(A+xi1-beps))
         t = c0 + xeps1*b0
         DCHU = DCHU + t
-        IF ( ABS(t)<eps*ABS(DCHU) ) GOTO 99999
+        IF ( ABS(t)<eps*ABS(DCHU) ) RETURN
       ENDDO
       CALL XERMSG('SLATEC','DCHU',&
         'NO CONVERGENCE IN 1000 TERMS OF THE ASCENDING SERIES',3,&
@@ -160,7 +160,7 @@ REAL(8) FUNCTION DCHU(A,B,X)
       b0 = (A+xi1-beps)*b0*X/((aintb+xi1)*(xi-beps))
       t = a0 - b0
       DCHU = DCHU + t
-      IF ( ABS(t)<eps*ABS(DCHU) ) GOTO 99999
+      IF ( ABS(t)<eps*ABS(DCHU) ) RETURN
     ENDDO
     CALL XERMSG('SLATEC','DCHU',&
       'NO CONVERGENCE IN 1000 TERMS OF THE ASCENDING SERIES',3,2)
@@ -170,5 +170,5 @@ REAL(8) FUNCTION DCHU(A,B,X)
   !
   DCHU = X**(-A)*D9CHU(A,B,X)
   !
-  99999 CONTINUE
-  END FUNCTION DCHU
+  RETURN
+END FUNCTION DCHU

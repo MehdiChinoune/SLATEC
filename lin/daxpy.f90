@@ -74,7 +74,7 @@ SUBROUTINE DAXPY(N,Da,Dx,Incx,Dy,Incy)
       DO i = 1, ns, Incx
         Dy(i) = Da*Dx(i) + Dy(i)
       ENDDO
-      GOTO 99999
+      RETURN
     ENDIF
   ENDIF
   !
@@ -98,5 +98,4 @@ SUBROUTINE DAXPY(N,Da,Dx,Incx,Dy,Incy)
     Dy(i+3) = Dy(i+3) + Da*Dx(i+3)
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE DAXPY
+END SUBROUTINE DAXPY

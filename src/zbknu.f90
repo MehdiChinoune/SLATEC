@@ -310,7 +310,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     !
     !
     Nz = -2
-    GOTO 99999
+    RETURN
     50     fk = fk + spi*t1*SQRT(t2/caz)
     fhs = ABS(0.25D0-dnu2)
   ENDIF
@@ -583,5 +583,5 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   s2r = coefr
   s2i = coefi
   GOTO 200
-  99999 CONTINUE
-  END SUBROUTINE ZBKNU
+  RETURN
+END SUBROUTINE ZBKNU

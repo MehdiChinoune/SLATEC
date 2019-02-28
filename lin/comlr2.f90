@@ -247,7 +247,7 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
         !
       ENDDO
     ENDIF
-    GOTO 99999
+    RETURN
   ELSE
     its = 0
     enm1 = en - 1
@@ -404,5 +404,5 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
     !
     GOTO 200
   ENDIF
-  99999 CONTINUE
-  END SUBROUTINE COMLR2
+  RETURN
+END SUBROUTINE COMLR2

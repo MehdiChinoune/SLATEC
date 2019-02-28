@@ -232,7 +232,7 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
         Ia(i) = -Ia(i)
       ENDDO
     ENDIF
-    GOTO 99999
+    RETURN
   ELSE
     i = il(m)
     j = iu(m)
@@ -265,5 +265,5 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
     ENDIF
   ENDDO
   !------------- LAST LINE OF QS2I1R FOLLOWS ----------------------------
-  99999 CONTINUE
-  END SUBROUTINE QS2I1R
+  RETURN
+END SUBROUTINE QS2I1R

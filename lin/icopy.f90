@@ -65,7 +65,7 @@ SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
       DO i = 1, ns, Incx
         Iy(i) = Ix(i)
       ENDDO
-      GOTO 99999
+      RETURN
     ENDIF
   ENDIF
   !
@@ -92,5 +92,4 @@ SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
     Iy(i+6) = Ix(i+6)
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE ICOPY
+END SUBROUTINE ICOPY

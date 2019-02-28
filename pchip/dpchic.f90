@@ -325,7 +325,7 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
             !   *** THIS CASE SHOULD NEVER OCCUR ***
             Ierr = -9
             CALL XERMSG('SLATEC','DPCHIC','ERROR RETURN FROM DPCHCE',Ierr,1)
-            GOTO 99999
+            RETURN
           ENDIF
         ENDIF
         !
@@ -341,5 +341,5 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   CALL XERMSG('SLATEC','DPCHIC','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
   RETURN
   !------------- LAST LINE OF DPCHIC FOLLOWS -----------------------------
-  99999 CONTINUE
-  END SUBROUTINE DPCHIC
+  RETURN
+END SUBROUTINE DPCHIC

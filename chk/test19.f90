@@ -1111,12 +1111,12 @@ CONTAINS
     ENDIF
     !
     LDERES = .TRUE.
-    GOTO 99999
+    RETURN
     100  LDERES = .FALSE.
     !
     !     End of LDERES.
     !
-    99999 CONTINUE
+    RETURN
   END FUNCTION LDERES
   !DECK DCHK12
   SUBROUTINE DCHK12(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&

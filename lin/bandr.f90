@@ -121,7 +121,7 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
       E(j) = 0.0E0
       E2(j) = 0.0E0
     ENDDO
-    GOTO 99999
+    RETURN
   ELSEIF ( m1/=1 ) THEN
     n2 = N - 2
     !
@@ -305,5 +305,5 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
   E(1) = 0.0E0
   E2(1) = 0.0E0
   !
-  99999 CONTINUE
-  END SUBROUTINE BANDR
+  RETURN
+END SUBROUTINE BANDR

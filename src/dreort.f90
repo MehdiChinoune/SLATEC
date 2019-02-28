@@ -83,7 +83,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     !        ...EXIT
     IF ( KNSwot<NSWot ) THEN
       !     ......EXIT
-      IF ( (XENd-X)*(X-XOT)<0.0D0 ) GOTO 99999
+      IF ( (XENd-X)*(X-XOT)<0.0D0 ) RETURN
     ENDIF
   ENDIF
   CALL DSTOR1(Y,Yhp,Yp,Yhp(1,nfcp),1,0,0)
@@ -151,7 +151,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
           PWCnd = wcnd
           PX = X
         ENDIF
-        GOTO 99999
+        RETURN
       ENDIF
     ENDIF
     !
@@ -219,5 +219,5 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     !           .........EXIT
     Iflag = 10
   ENDIF
-  99999 CONTINUE
-  END SUBROUTINE DREORT
+  RETURN
+END SUBROUTINE DREORT

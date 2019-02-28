@@ -223,7 +223,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
           'MDB.LT.MAX(M,N).AND.NB.GT.1. PROBABLE ERROR.',nerr,&
           iopt)
         !     ...............EXIT
-        GOTO 99999
+        RETURN
       ENDIF
       20       k = j - 1
     ELSE
@@ -231,7 +231,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
       iopt = 2
       CALL XERMSG('SLATEC','DHFTI','MDA.LT.M, PROBABLE ERROR.',nerr,iopt)
       !     ...............EXIT
-      GOTO 99999
+      RETURN
     ENDIF
     50     kp1 = k + 1
     !
@@ -318,5 +318,5 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !         IN THE FIRST  N  ROWS OF THE ARRAY B(,).
   !
   Krank = k
-  99999 CONTINUE
-  END SUBROUTINE DHFTI
+  RETURN
+END SUBROUTINE DHFTI

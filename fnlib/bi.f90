@@ -124,11 +124,9 @@ FUNCTION BI(X)
       2)
     !
     BI = BIE(X)*EXP(2.0*X*SQRT(X)/3.0)
-    GOTO 99999
+    RETURN
   ENDIF
   z = (2.0*X**3-9.0)/7.0
   BI = 1.125 + CSEVL(z,bif2cs,nbif2) + X*(0.625+CSEVL(z,big2cs,nbig2))
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION BI
+END FUNCTION BI

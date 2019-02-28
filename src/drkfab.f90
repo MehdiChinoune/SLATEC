@@ -146,7 +146,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
         IF ( jflag==30 ) THEN
           Iflag = 30
           !     .....................EXIT
-          GOTO 99999
+          RETURN
           !
         ELSEIF ( jflag==10 ) THEN
           XOP = Xpts(KOP)
@@ -164,7 +164,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
             IF ( X/=XENd ) THEN
               Iflag = 13
               !     .....................EXIT
-              GOTO 99999
+              RETURN
             ENDIF
           ENDIF
           !
@@ -210,7 +210,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
         IF ( idid/=-1 ) THEN
           Iflag = 20 - idid
           !     .....................EXIT
-          GOTO 99999
+          RETURN
         ENDIF
       ENDIF
     ENDDO
@@ -224,5 +224,5 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !        ***************************************************************
   !
   Iflag = 0
-  99999 CONTINUE
-  END SUBROUTINE DRKFAB
+  RETURN
+END SUBROUTINE DRKFAB

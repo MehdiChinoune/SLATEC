@@ -72,7 +72,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
     IF ( nw>=0 ) THEN
       IF ( nw/=0 ) THEN
         Nlast = N
-        GOTO 99999
+        RETURN
       ELSE
         str = ZABS(cyr(1),cyi(1))
         !----------------------------------------------------------------------
@@ -181,5 +181,4 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   RETURN
   100  Nz = nw
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE ZBUNI
+END SUBROUTINE ZBUNI

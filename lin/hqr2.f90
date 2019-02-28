@@ -284,7 +284,7 @@ SUBROUTINE HQR2(Nm,N,Low,Igh,H,Wr,Wi,Z,Ierr)
         !
       ENDDO
     ENDIF
-    GOTO 99999
+    RETURN
   ELSE
     its = 0
     na = en - 1
@@ -366,7 +366,7 @@ SUBROUTINE HQR2(Nm,N,Low,Igh,H,Wr,Wi,Z,Ierr)
       !     .......... SET ERROR -- NO CONVERGENCE TO AN
       !                EIGENVALUE AFTER 30*N ITERATIONS ..........
       Ierr = en
-      GOTO 99999
+      RETURN
     ELSE
       IF ( its==10.OR.its==20 ) THEN
         !     .......... FORM EXCEPTIONAL SHIFT ..........
@@ -476,5 +476,5 @@ SUBROUTINE HQR2(Nm,N,Low,Igh,H,Wr,Wi,Z,Ierr)
     ENDIF
   ENDIF
   GOTO 100
-  99999 CONTINUE
-  END SUBROUTINE HQR2
+  RETURN
+END SUBROUTINE HQR2

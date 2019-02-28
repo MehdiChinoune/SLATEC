@@ -294,7 +294,7 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
         !
       ENDDO
     ENDIF
-    GOTO 99999
+    RETURN
   ELSE
     its = 0
     enm1 = en - 1
@@ -452,5 +452,5 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
     ENDIF
     GOTO 300
   ENDIF
-  99999 CONTINUE
-  END SUBROUTINE COMQR2
+  RETURN
+END SUBROUTINE COMQR2

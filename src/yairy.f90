@@ -254,7 +254,7 @@ SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
       temp2 = t*e1 - e2 + dbb(1)
       cv = C - spi12
       Dbi = (temp1*COS(cv)-temp2*SIN(cv))*rtrx
-      GOTO 99999
+      RETURN
     ENDIF
   ELSEIF ( C>8.0E0 ) THEN
     !
@@ -402,5 +402,4 @@ SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
   ENDDO
   Dbi = X*X*(t*f1-f2+dbjp(1)) + (t*e1-e2+dbjn(1))
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE YAIRY
+END SUBROUTINE YAIRY

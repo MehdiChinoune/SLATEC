@@ -91,7 +91,7 @@ SUBROUTINE BESY(X,Fnu,N,Y)
   ELSEIF ( X<xlim ) THEN
     CALL XERMSG('SLATEC','BESY',&
       'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-    GOTO 99999
+    RETURN
   ELSEIF ( N<1 ) THEN
     CALL XERMSG('SLATEC','BESY','N LESS THAN ONE',2,1)
     RETURN
@@ -111,7 +111,7 @@ SUBROUTINE BESY(X,Fnu,N,Y)
       IF ( -fn*(LOG(X)-0.693E0)<=elim ) GOTO 200
       CALL XERMSG('SLATEC','BESY',&
         'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-      GOTO 99999
+      RETURN
     ELSE
       !
       !     OVERFLOW TEST  (LEADING EXPONENTIAL OF ASYMPTOTIC EXPANSION)
@@ -126,7 +126,7 @@ SUBROUTINE BESY(X,Fnu,N,Y)
         IF ( cn>elim ) THEN
           CALL XERMSG('SLATEC','BESY',&
             'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-          GOTO 99999
+          RETURN
         ENDIF
       ENDIF
       IF ( nud<nulim(nn) ) THEN
@@ -167,7 +167,7 @@ SUBROUTINE BESY(X,Fnu,N,Y)
         IF ( iflw/=0 ) THEN
           CALL XERMSG('SLATEC','BESY',&
             'OVERFLOW, FNU OR N TOO LARGE OR X TOO SMALL',6,1)
-          GOTO 99999
+          RETURN
         ELSE
           IF ( nn==1 ) RETURN
           trx = 2.0E0/X
@@ -206,5 +206,5 @@ SUBROUTINE BESY(X,Fnu,N,Y)
     CALL BESYNU(X,Fnu,nd,Y)
     RETURN
   ENDIF
-  99999 CONTINUE
-  END SUBROUTINE BESY
+  RETURN
+END SUBROUTINE BESY

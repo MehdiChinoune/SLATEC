@@ -241,7 +241,7 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
         CALL XERMSG('SLATEC','QNC79',&
           'ANS is probably insufficiently accurate.',2,1)
       ENDIF
-      GOTO 99999
+      RETURN
     ENDIF
   ENDIF
   200  l = l + 1
@@ -280,5 +280,5 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   CALL XERMSG('SLATEC','QNC79',&
     'A and B are too nearly equal to allow normal integration. $$'&
     //'ANS is set to zero and IERR to -1.',-1,-1)
-  99999 CONTINUE
-  END SUBROUTINE QNC79
+  RETURN
+END SUBROUTINE QNC79

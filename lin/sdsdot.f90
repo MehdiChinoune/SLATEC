@@ -62,7 +62,7 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
         dsdot = dsdot + REAL(Sx(i))*REAL(Sy(i))
       ENDDO
       SDSDOT = REAL( dsdot, 4 )
-      GOTO 99999
+      RETURN
     ELSE
       !
       !     Code for unequal or nonpositive increments.
@@ -80,5 +80,4 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
   ENDIF
   SDSDOT = REAL( dsdot, 4 )
   RETURN
-  99999 CONTINUE
-  END FUNCTION SDSDOT
+END FUNCTION SDSDOT

@@ -135,7 +135,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
       !
       Bknu = sqpi2/sqrtx
       Bknu1 = Bknu
-      GOTO 99999
+      RETURN
     ENDIF
   ELSE
     !
@@ -253,6 +253,4 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     IF ( inu==2 ) Bknu1 = result
   ENDDO
   RETURN
-  !
-  99999 CONTINUE
-  END SUBROUTINE D9KNUS
+END SUBROUTINE D9KNUS

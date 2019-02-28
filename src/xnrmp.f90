@@ -176,7 +176,7 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
     mu = mu - 1
     IF ( i<=0 ) THEN
       Isig = 0
-      GOTO 99999
+      RETURN
     ENDIF
   ENDDO
   mu = Nu
@@ -254,7 +254,7 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
       ENDIF
     ENDIF
   ENDIF
-  GOTO 99999
+  RETURN
   !
   !          ERROR PRINTOUTS AND TERMINATION.
   !
@@ -272,5 +272,5 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
     CALL XRED(Spn(i),Ipn(i),Ierror)
     IF ( Ierror/=0 ) RETURN
   ENDDO
-  99999 CONTINUE
-  END SUBROUTINE XNRMP
+  RETURN
+END SUBROUTINE XNRMP

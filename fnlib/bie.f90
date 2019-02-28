@@ -201,12 +201,10 @@ FUNCTION BIE(X)
     z = -1.0
     IF ( X<xbig ) z = 16.0/(X*sqrtx) - 1.0
     BIE = (0.625+CSEVL(z,bip2cs,nbip2))/SQRT(sqrtx)
-    GOTO 99999
+    RETURN
   ENDIF
   sqrtx = SQRT(X)
   z = atr/(X*sqrtx) + btr
   BIE = (0.625+CSEVL(z,bipcs,nbip))/SQRT(sqrtx)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION BIE
+END FUNCTION BIE

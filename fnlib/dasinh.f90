@@ -81,12 +81,10 @@ REAL(8) FUNCTION DASINH(X)
     IF ( y<xmax ) DASINH = LOG(y+SQRT(y*y+1.D0))
     IF ( y>=xmax ) DASINH = aln2 + LOG(y)
     DASINH = SIGN(DASINH,X)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   DASINH = X
   IF ( y>sqeps ) DASINH = X*(1.0D0+DCSEVL(2.D0*X*X-1.D0,asnhcs,nterms))
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION DASINH
+END FUNCTION DASINH

@@ -124,7 +124,7 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
     Q(iq+1) = s
     A(N,N) = c*t1 - s*t2
     IF ( A(N,N)==0.0E0 ) Info = N
-    GOTO 99999
+    RETURN
   ENDIF
   !   -------------------------------------------------------------------
   !         A new factorization is desired.
@@ -176,5 +176,5 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
   ENDDO
   RETURN
   !------------- LAST LINE OF SHEQR FOLLOWS ----------------------------
-  99999 CONTINUE
-  END SUBROUTINE SHEQR
+  RETURN
+END SUBROUTINE SHEQR

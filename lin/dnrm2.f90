@@ -93,7 +93,7 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
     i = 1
   ELSE
     DNRM2 = zero
-    GOTO 99999
+    RETURN
   ENDIF
   100 CONTINUE
   SELECT CASE(next)
@@ -169,7 +169,7 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
     sum = sum + Dx(j)**2
   ENDDO
   DNRM2 = SQRT(sum)
-  GOTO 99999
+  RETURN
   !
   900  i = i + Incx
   IF ( i<=nn ) GOTO 100
@@ -179,5 +179,5 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   !              COMPUTE SQUARE ROOT AND ADJUST FOR SCALING.
   !
   DNRM2 = xmax*SQRT(sum)
-  99999 CONTINUE
+  RETURN
 END FUNCTION DNRM2

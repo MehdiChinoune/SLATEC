@@ -29,12 +29,12 @@ FUNCTION BCRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
     xl = x
   ELSEIF ( Sgn*F(x,Iz,C,A,Bh)==0 ) THEN
     BCRH = .5*(xl+xr)
-    GOTO 99999
+    RETURN
   ELSE
     xr = x
   ENDIF
   dx = .5*dx
   IF ( dx>CNV ) GOTO 100
   BCRH = .5*(xl+xr)
-  99999 CONTINUE
-  END FUNCTION BCRH
+  RETURN
+END FUNCTION BCRH

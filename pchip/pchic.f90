@@ -319,7 +319,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
             !   *** THIS CASE SHOULD NEVER OCCUR ***
             Ierr = -9
             CALL XERMSG('SLATEC','PCHIC','ERROR RETURN FROM PCHCE',Ierr,1)
-            GOTO 99999
+            RETURN
           ENDIF
         ENDIF
         !
@@ -335,5 +335,5 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   CALL XERMSG('SLATEC','PCHIC','X-ARRAY NOT STRICTLY INCREASING',Ierr,1)
   RETURN
   !------------- LAST LINE OF PCHIC FOLLOWS ------------------------------
-  99999 CONTINUE
-  END SUBROUTINE PCHIC
+  RETURN
+END SUBROUTINE PCHIC

@@ -79,7 +79,7 @@ FUNCTION POCH(A,X)
       CALL ALGAMS(A+X,alngax,sgngax)
       CALL ALGAMS(A,alnga,sgnga)
       POCH = sgngax*sgnga*EXP(alngax-alnga)
-      GOTO 99999
+      RETURN
     ENDIF
   ELSE
     !
@@ -103,6 +103,4 @@ FUNCTION POCH(A,X)
   POCH = EXP((b-0.5)*ALNREL(X/b)+X*LOG(b+X)-X+R9LGMC(b+X)-R9LGMC(b))
   IF ( A<0.0.AND.POCH/=0.0 ) POCH = POCH/(COS(pi*X)+COT(pi*A)*SIN(pi*X))
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION POCH
+END FUNCTION POCH

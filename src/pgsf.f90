@@ -27,9 +27,8 @@ FUNCTION PGSF(X,Iz,C,A,Bh)
   ENDDO
   IF ( MOD(Iz,2)/=0 ) THEN
     PGSF = 1. + fsg + hsg
-    GOTO 99999
+    RETURN
   ENDIF
   PGSF = 1. - fsg - hsg
   RETURN
-  99999 CONTINUE
-  END FUNCTION PGSF
+END FUNCTION PGSF

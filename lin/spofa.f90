@@ -73,9 +73,9 @@ SUBROUTINE SPOFA(A,Lda,N,Info)
       ENDDO
     ENDIF
     s = A(j,j) - s
-    IF ( s<=0.0E0 ) GOTO 99999
+    IF ( s<=0.0E0 ) RETURN
     A(j,j) = SQRT(s)
   ENDDO
   Info = 0
-  99999 CONTINUE
-  END SUBROUTINE SPOFA
+  RETURN
+END SUBROUTINE SPOFA

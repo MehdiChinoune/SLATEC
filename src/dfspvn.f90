@@ -31,7 +31,7 @@ SUBROUTINE DFSPVN(T,Jhigh,Index,X,Ileft,Vnikx)
   IF ( Index/=2 ) THEN
     j = 1
     Vnikx(1) = 1.D0
-    IF ( j>=Jhigh ) GOTO 99999
+    IF ( j>=Jhigh ) RETURN
   ENDIF
   DO
     !
@@ -52,5 +52,5 @@ SUBROUTINE DFSPVN(T,Jhigh,Index,X,Ileft,Vnikx)
     IF ( j>=Jhigh ) EXIT
   ENDDO
   !
-  99999 CONTINUE
-  END SUBROUTINE DFSPVN
+  RETURN
+END SUBROUTINE DFSPVN

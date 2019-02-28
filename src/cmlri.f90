@@ -57,7 +57,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
     ak = ak + 1.0E0
   ENDDO
   Nz = -2
-  GOTO 99999
+  RETURN
   100  i = i + 1
   k = 0
   IF ( inu>=iaz ) THEN
@@ -88,7 +88,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
       ENDIF
     ENDDO
     Nz = -2
-    GOTO 99999
+    RETURN
   ENDIF
   !-----------------------------------------------------------------------
   !     BACKWARD RECURRENCE AND SUM NORMALIZING RELATION
@@ -164,5 +164,4 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
     Y(i) = Y(i)*cnorm
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE CMLRI
+END SUBROUTINE CMLRI

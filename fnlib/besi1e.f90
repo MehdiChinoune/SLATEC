@@ -124,7 +124,7 @@ FUNCTION BESI1E(X)
     IF ( y<=8. ) BESI1E = (.375+CSEVL((48./y-11.)/5.,ai1cs,ntai1))/SQRT(y)
     IF ( y>8. ) BESI1E = (.375+CSEVL(16./y-1.0,ai12cs,ntai12))/SQRT(y)
     BESI1E = SIGN(BESI1E,X)
-    GOTO 99999
+    RETURN
   ENDIF
   !
   BESI1E = 0.0
@@ -136,6 +136,4 @@ FUNCTION BESI1E(X)
   IF ( y>xsml ) BESI1E = X*(.875+CSEVL(y*y/4.5-1.,bi1cs,nti1))
   BESI1E = EXP(-y)*BESI1E
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION BESI1E
+END FUNCTION BESI1E

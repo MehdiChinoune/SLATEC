@@ -1209,12 +1209,12 @@ CONTAINS
     ENDIF
     !
     LCERES = .TRUE.
-    GOTO 99999
+    RETURN
     100  LCERES = .FALSE.
     !
     !     End of LCERES.
     !
-    99999 CONTINUE
+    RETURN
   END FUNCTION LCERES
   !DECK CCHK12
   SUBROUTINE CCHK12(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&

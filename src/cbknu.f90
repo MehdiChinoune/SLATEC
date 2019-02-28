@@ -261,7 +261,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
       IF ( etest<tm ) GOTO 50
     ENDDO
     Nz = -2
-    GOTO 99999
+    RETURN
     50     fk = fk + spi*t1*SQRT(t2/caz)
     fhs = ABS(0.25E0-dnu2)
   ENDIF
@@ -463,5 +463,5 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   800  s1 = coef
   s2 = coef
   GOTO 200
-  99999 CONTINUE
-  END SUBROUTINE CBKNU
+  RETURN
+END SUBROUTINE CBKNU

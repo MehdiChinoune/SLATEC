@@ -113,7 +113,7 @@ REAL(8) FUNCTION DGAMIC(A,X)
         t = t + algap1 - LOG(ABS(A))
         IF ( t<bot ) CALL XERCLR
         DGAMIC = sgng*EXP(t)
-        GOTO 99999
+        RETURN
       ELSE
         IF ( t>(-alneps) ) h = 1.0D0 - sgngs*EXP(t)
         !
@@ -136,6 +136,4 @@ REAL(8) FUNCTION DGAMIC(A,X)
   IF ( t<bot ) CALL XERCLR
   DGAMIC = sgng*EXP(t)
   RETURN
-  !
-  99999 CONTINUE
-  END FUNCTION DGAMIC
+END FUNCTION DGAMIC

@@ -27,7 +27,7 @@ SUBROUTINE RADF2(Ido,L1,Cc,Ch,Wa1)
     Ch(1,1,k) = Cc(1,k,1) + Cc(1,k,2)
     Ch(Ido,2,k) = Cc(1,k,1) - Cc(1,k,2)
   ENDDO
-  IF ( Ido<2 ) GOTO 99999
+  IF ( Ido<2 ) RETURN
   IF ( Ido/=2 ) THEN
     idp2 = Ido + 2
     IF ( (Ido-1)/2<L1 ) THEN
@@ -63,5 +63,5 @@ SUBROUTINE RADF2(Ido,L1,Cc,Ch,Wa1)
     Ch(1,2,k) = -Cc(Ido,k,2)
     Ch(Ido,1,k) = Cc(Ido,k,1)
   ENDDO
-  99999 CONTINUE
-  END SUBROUTINE RADF2
+  RETURN
+END SUBROUTINE RADF2

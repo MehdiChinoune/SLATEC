@@ -59,7 +59,7 @@ REAL(8) FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
     DO i = 1, ns, Incx
       DSDOT = DSDOT + REAL(Sx(i), 8)*REAL(Sy(i), 8)
     ENDDO
-    GOTO 99999
+    RETURN
   ENDIF
   !
   !     Code for unequal or nonpositive increments.
@@ -74,5 +74,4 @@ REAL(8) FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
     ky = ky + Incy
   ENDDO
   RETURN
-  99999 CONTINUE
-  END FUNCTION DSDOT
+END FUNCTION DSDOT

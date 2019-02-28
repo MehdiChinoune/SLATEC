@@ -101,7 +101,7 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   ce = 0.0D0
   IF ( A==B ) THEN
     IF ( Err<0.0D0 ) Err = ce
-    GOTO 99999
+    RETURN
   ELSE
     lmx = nlmx
     lmn = nlmn
@@ -111,7 +111,7 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
         IF ( c<=0.1D0 ) THEN
           IF ( c<=0.0D0 ) THEN
             IF ( Err<0.0D0 ) Err = ce
-            GOTO 99999
+            RETURN
           ELSE
             anib = 0.5D0 - LOG(c)/0.69314718D0
             nib = INT(anib)
@@ -122,7 +122,7 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
                 'A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL INTEGRATION. '&
                 //' ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
               IF ( Err<0.0D0 ) Err = ce
-              GOTO 99999
+              RETURN
             ELSE
               lmn = MIN(lmn,lmx)
             ENDIF
@@ -205,7 +205,7 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
         'ANS IS PROBABLY INSUFFICIENTLY ACCURATE.',3,1)
     ENDIF
     IF ( Err<0.0D0 ) Err = ce
-    GOTO 99999
+    RETURN
   ENDIF
   200  est = gr(l-1)
   lr(l) = 1

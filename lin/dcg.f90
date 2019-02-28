@@ -329,7 +329,7 @@ SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
       !         check stopping criterion.
       IF ( ISDCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,Err,&
         Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork,ak,bk,bnrm,solnrm)/=0 )&
-        GOTO 99999
+        RETURN
       !
     ENDDO
     !
@@ -341,5 +341,5 @@ SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   ENDIF
   !
   !------------- LAST LINE OF DCG FOLLOWS -----------------------------
-  99999 CONTINUE
-  END SUBROUTINE DCG
+  RETURN
+END SUBROUTINE DCG

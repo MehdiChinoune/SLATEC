@@ -82,7 +82,7 @@ SUBROUTINE SLVS(Wm,Iwm,X,Tem)
       mu = Iwm(2)
       meband = 2*ml + mu + 1
       CALL SGBSL(Wm(3),meband,N,ml,mu,Iwm(21),X,0)
-      GOTO 99999
+      RETURN
     CASE DEFAULT
       CALL SGESL(Wm(3),N,N,Iwm(21),X,0)
       RETURN
@@ -90,5 +90,5 @@ SUBROUTINE SLVS(Wm,Iwm,X,Tem)
   100  IER = -1
   RETURN
   !----------------------- END OF SUBROUTINE SLVS -----------------------
-  99999 CONTINUE
-  END SUBROUTINE SLVS
+  RETURN
+END SUBROUTINE SLVS

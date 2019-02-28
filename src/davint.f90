@@ -104,14 +104,14 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
         fr = Y(2) + slope*(Xup-X(2))
         Ans = 0.5D0*(fl+fr)*(Xup-Xlo)
         !     ...............EXIT
-        GOTO 99999
+        RETURN
       ELSEIF ( X(N-2)<Xlo ) THEN
         Ierr = 3
         CALL XERMSG('SLATEC','DAVINT',&
           'THERE WERE LESS THAN THREE FUNCTION VALUES '//&
           'BETWEEN THE LIMITS OF INTEGRATION.',4,1)
         !     ...............EXIT
-        GOTO 99999
+        RETURN
       ELSEIF ( X(3)<=Xup ) THEN
         i = 1
         DO WHILE ( X(i)<Xlo )
@@ -180,26 +180,26 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
             'THERE WERE LESS THAN THREE FUNCTION VALUES '//&
             'BETWEEN THE LIMITS OF INTEGRATION.',4,1)
         ENDIF
-        GOTO 99999
+        RETURN
       ELSE
         Ierr = 3
         CALL XERMSG('SLATEC','DAVINT',&
           'THERE WERE LESS THAN THREE FUNCTION VALUES '//&
           'BETWEEN THE LIMITS OF INTEGRATION.',4,1)
         !     ...............EXIT
-        GOTO 99999
+        RETURN
       ENDIF
     ELSE
       Ierr = 5
       CALL XERMSG('SLATEC','DAVINT',&
         'LESS THAN TWO FUNCTION VALUES WERE SUPPLIED.',4,1)
       !     ...............EXIT
-      GOTO 99999
+      RETURN
     ENDIF
     50     Ierr = 4
     CALL XERMSG('SLATEC','DAVINT',&
       'THE ABSCISSAS WERE NOT STRICTLY INCREASING.  MUST HAVE '//&
       'X(I-1) .LT. X(I) FOR ALL I.',4,1)
   ENDIF
-  99999 CONTINUE
-  END SUBROUTINE DAVINT
+  RETURN
+END SUBROUTINE DAVINT

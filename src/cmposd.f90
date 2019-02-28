@@ -63,7 +63,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !     RETURN STORAGE REQUIREMENTS FOR P VECTORS.
   !
   W(1) = CMPLX(REAL(ipstor),0.)
-  GOTO 99999
+  RETURN
   100  lr = 0
   DO i = 1, m
     P(i) = CMPLX(0.,0.)
@@ -344,5 +344,5 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
       l = l/2
     ENDIF
   ENDDO
-  99999 CONTINUE
-  END SUBROUTINE CMPOSD
+  RETURN
+END SUBROUTINE CMPOSD

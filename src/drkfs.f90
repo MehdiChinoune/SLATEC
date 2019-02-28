@@ -291,7 +291,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
         T = Tout
         Told = T
         !     .....................EXIT
-        GOTO 99999
+        RETURN
       ENDIF
       !                    ......EXIT
     ELSEIF ( Init/=1 ) THEN
@@ -586,7 +586,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               Idid = 1
               Told = T
               !     .....................EXIT
-              GOTO 99999
+              RETURN
               !
               !                                   ....................................
               !
@@ -659,7 +659,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     T = Tout
     Told = T
     !     ...............EXIT
-    GOTO 99999
+    RETURN
   ELSE
     !
     !                    UNNECESSARY FREQUENCY OF OUTPUT IS RESTRICTING
@@ -687,5 +687,5 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
       ENDDO
     ENDIF
   ENDIF
-  99999 CONTINUE
+  RETURN
 END SUBROUTINE DRKFS

@@ -59,7 +59,7 @@ FUNCTION SCASUM(N,Cx,Incx)
     DO i = 1, N
       SCASUM = SCASUM + ABS(REAL(Cx(i))) + ABS(AIMAG(Cx(i)))
     ENDDO
-    GOTO 99999
+    RETURN
   ENDIF
   !
   !     Code for increment not equal to 1.
@@ -71,5 +71,4 @@ FUNCTION SCASUM(N,Cx,Incx)
     ix = ix + Incx
   ENDDO
   RETURN
-  99999 CONTINUE
-  END FUNCTION SCASUM
+END FUNCTION SCASUM

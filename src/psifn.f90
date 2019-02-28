@@ -283,7 +283,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
         IF ( nx>nmax ) THEN
           Ierr = 3
           Nz = 0
-          GOTO 99999
+          RETURN
         ELSE
           IF ( nn==0 ) GOTO 120
           xm = xinc - 1.0E0
@@ -366,5 +366,5 @@ Ans(mm) = 0.0E0
 mm = mm - 1
 IF ( mm==0 ) RETURN
 GOTO 100
-99999 CONTINUE
+RETURN
 END SUBROUTINE PSIFN

@@ -34,7 +34,7 @@ SUBROUTINE ZSQRT(Ar,Ai,Br,Bi)
     ELSEIF ( Ai<0.0D+0 ) THEN
       Br = zm*drt
       Bi = -zm*drt
-      GOTO 99999
+      RETURN
     ELSE
       Br = 0.0D+0
       Bi = 0.0D+0
@@ -62,5 +62,4 @@ SUBROUTINE ZSQRT(Ar,Ai,Br,Bi)
   Br = zm*COS(dtheta)
   Bi = zm*SIN(dtheta)
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE ZSQRT
+END SUBROUTINE ZSQRT

@@ -65,7 +65,7 @@ SUBROUTINE XC210(K,Z,J,Ierror)
   IF ( K==0 ) THEN
     J = 0
     Z = 1.0
-    GOTO 99999
+    RETURN
   ELSE
     m = MLG102
     ka = ABS(K)
@@ -105,7 +105,7 @@ SUBROUTINE XC210(K,Z,J,Ierror)
         J = -ja
         Z = 10.0**(-Z)
       ENDIF
-      GOTO 99999
+      RETURN
     ENDIF
   ENDIF
   !   THIS ERROR OCCURS IF K EXCEEDS  MLG102**2 - 1  IN MAGNITUDE.
@@ -113,5 +113,4 @@ SUBROUTINE XC210(K,Z,J,Ierror)
   CALL XERMSG('SLATEC','XC210','K too large',108,1)
   Ierror = 108
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE XC210
+END SUBROUTINE XC210

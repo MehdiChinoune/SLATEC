@@ -58,7 +58,7 @@ COMPLEX FUNCTION CDOTC(N,Cx,Incx,Cy,Incy)
     DO i = 1, ns, Incx
       CDOTC = CDOTC + CONJG(Cx(i))*Cy(i)
     ENDDO
-    GOTO 99999
+    RETURN
   ENDIF
   !
   !     Code for unequal or nonpositive increments.
@@ -73,5 +73,4 @@ COMPLEX FUNCTION CDOTC(N,Cx,Incx,Cy,Incy)
     ky = ky + Incy
   ENDDO
   RETURN
-  99999 CONTINUE
-  END FUNCTION CDOTC
+END FUNCTION CDOTC

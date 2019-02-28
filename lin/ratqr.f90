@@ -269,7 +269,7 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
     Ind(k) = ii
   ENDDO
   !
-  IF ( Type ) GOTO 99999
+  IF ( Type ) RETURN
   f = Bd(1)
   E2(1) = 2.0E0
   Bd(1) = f
@@ -282,8 +282,8 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
   !
   jdef = -jdef
   IF ( j==1 ) GOTO 100
-  IF ( j==2 ) GOTO 99999
+  IF ( j==2 ) RETURN
   !     .......... SET ERROR -- IDEF SPECIFIED INCORRECTLY ..........
   300  Ierr = 6*N + 1
-  99999 CONTINUE
-  END SUBROUTINE RATQR
+  RETURN
+END SUBROUTINE RATQR

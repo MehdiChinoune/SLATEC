@@ -77,7 +77,7 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
         Dx(i) = Dy(i)
         Dy(i) = dtemp1
       ENDDO
-      GOTO 99999
+      RETURN
     ENDIF
   ENDIF
   !
@@ -108,5 +108,4 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
     Dy(i+2) = dtemp3
   ENDDO
   RETURN
-  99999 CONTINUE
-  END SUBROUTINE DSWAP
+END SUBROUTINE DSWAP
