@@ -133,8 +133,13 @@ CONTAINS
     !***END PROLOGUE  SOSFNC
     DIMENSION X(2)
     !***FIRST EXECUTABLE STATEMENT  SOSFNC
-    IF ( K==1 ) SOSFNC = 1.E0 - X(1)
-    IF ( K==2 ) SOSFNC = 1.E1*(X(2)-X(1)**2)
+    IF ( K==1 ) THEN
+      SOSFNC = 1.E0 - X(1)
+    ELSEIF ( K==2 ) THEN
+      SOSFNC = 1.E1*(X(2)-X(1)**2)
+    ELSE
+      SOSFNC = 0.
+    ENDIF
   END FUNCTION SOSFNC
   !DECK SOSNQX
   SUBROUTINE SOSNQX(Lun,Kprint,Ipass)

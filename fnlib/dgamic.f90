@@ -74,8 +74,10 @@ REAL(8) FUNCTION DGAMIC(A,X)
     izero = 0
     IF ( X>=1.0D0 ) THEN
       !
-      IF ( A<X ) DGAMIC = EXP(D9LGIC(A,X,alx))
-      IF ( A<X ) RETURN
+      IF ( A<X ) THEN
+        DGAMIC = EXP(D9LGIC(A,X,alx))
+        RETURN
+      ENDIF
       !
       sgngam = 1.0D0
       algap1 = DLNGAM(A+1.0D0)

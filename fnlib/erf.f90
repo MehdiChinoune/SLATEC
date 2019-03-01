@@ -63,8 +63,11 @@ FUNCTION ERF(X)
     !
     ! ERF(X) = 1. - ERFC(X) FOR  ABS(X) .GT. 1.
     !
-    IF ( y<=xbig ) ERF = SIGN(1.0-ERFC(y),X)
-    IF ( y>xbig ) ERF = SIGN(1.0,X)
+    IF ( y<=xbig ) THEN
+      ERF = SIGN(1.0-ERFC(y),X)
+    ELSE
+      ERF = SIGN(1.0,X)
+    ENDIF
     RETURN
   ENDIF
   !

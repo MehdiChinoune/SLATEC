@@ -41,8 +41,10 @@ FUNCTION BETA(A,B)
   IF ( A<=0..OR.B<=0. ) CALL XERMSG('SLATEC','BETA',&
     'BOTH ARGUMENTS MUST BE GT 0',2,2)
   !
-  IF ( A+B<xmax ) BETA = GAMMA(A)*GAMMA(B)/GAMMA(A+B)
-  IF ( A+B<xmax ) RETURN
+  IF ( A+B<xmax ) THEN
+    BETA = GAMMA(A)*GAMMA(B)/GAMMA(A+B)
+    RETURN
+  ENDIF
   !
   BETA = ALBETA(A,B)
   IF ( BETA<alnsml ) CALL XERMSG('SLATEC','BETA',&

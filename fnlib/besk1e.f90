@@ -109,8 +109,11 @@ FUNCTION BESK1E(X)
   IF ( X<=0. ) CALL XERMSG('SLATEC','BESK1E','X IS ZERO OR NEGATIVE',2,2)
   IF ( X>2.0 ) THEN
     !
-    IF ( X<=8. ) BESK1E = (1.25+CSEVL((16./X-5.)/3.,ak1cs,ntak1))/SQRT(X)
-    IF ( X>8. ) BESK1E = (1.25+CSEVL(16./X-1.,ak12cs,ntak12))/SQRT(X)
+    IF ( X<=8. ) THEN
+      BESK1E = (1.25+CSEVL((16./X-5.)/3.,ak1cs,ntak1))/SQRT(X)
+    ELSE
+      BESK1E = (1.25+CSEVL(16./X-1.,ak12cs,ntak12))/SQRT(X)
+    ENDIF
     RETURN
   ENDIF
   !

@@ -51,8 +51,10 @@ FUNCTION ALNGAM(X)
     IF ( y>xmax ) CALL XERMSG('SLATEC','ALNGAM',&
       'ABS(X) SO BIG ALNGAM OVERFLOWS',2,2)
     !
-    IF ( X>0. ) ALNGAM = sq2pil + (X-0.5)*LOG(X) - X + R9LGMC(y)
-    IF ( X>0. ) RETURN
+    IF ( X>0. ) THEN
+      ALNGAM = sq2pil + (X-0.5)*LOG(X) - X + R9LGMC(y)
+      RETURN
+    ENDIF
     !
     sinpiy = ABS(SIN(pi*y))
     IF ( sinpiy==0. ) CALL XERMSG('SLATEC','ALNGAM',&

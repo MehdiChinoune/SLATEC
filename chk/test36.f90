@@ -131,8 +131,13 @@ CONTAINS
     INTEGER K
     REAL(8) :: X(2)
     !***FIRST EXECUTABLE STATEMENT  DSOSFN
-    IF ( K==1 ) DSOSFN = 1.0D0 - X(1)
-    IF ( K==2 ) DSOSFN = 1.0D1*(X(2)-X(1)**2)
+    IF ( K==1 ) THEN
+      DSOSFN = 1.0D0 - X(1)
+    ELSEIF ( K==2 ) THEN
+      DSOSFN = 1.0D1*(X(2)-X(1)**2)
+    ELSE
+      DSOSFN = 0.D0
+    ENDIF
   END FUNCTION DSOSFN
   !DECK DSOSQX
   SUBROUTINE DSOSQX(Lun,Kprint,Ipass)

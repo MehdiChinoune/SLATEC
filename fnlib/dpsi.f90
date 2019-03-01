@@ -124,8 +124,11 @@ REAL(8) FUNCTION DPSI(X)
     aux = 0.D0
     IF ( y<xbig ) aux = DCSEVL(2.D0*(10.D0/y)**2-1.D0,apsics,ntapsi)
     !
-    IF ( X<0.D0 ) DPSI = LOG(ABS(X)) - 0.5D0/X + aux - pi*DCOT(pi*X)
-    IF ( X>0.D0 ) DPSI = LOG(X) - 0.5D0/X + aux
+    IF ( X<0.D0 ) THEN
+      DPSI = LOG(ABS(X)) - 0.5D0/X + aux - pi*DCOT(pi*X)
+    ELSE
+      DPSI = LOG(X) - 0.5D0/X + aux
+    ENDIF
     RETURN
   ELSE
     !

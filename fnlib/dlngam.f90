@@ -51,8 +51,10 @@ REAL(8) FUNCTION DLNGAM(X)
     IF ( y>xmax ) CALL XERMSG('SLATEC','DLNGAM',&
       'ABS(X) SO BIG DLNGAM OVERFLOWS',2,2)
     !
-    IF ( X>0.D0 ) DLNGAM = sq2pil + (X-0.5D0)*LOG(X) - X + D9LGMC(y)
-    IF ( X>0.D0 ) RETURN
+    IF ( X>0.D0 ) THEN
+      DLNGAM = sq2pil + (X-0.5D0)*LOG(X) - X + D9LGMC(y)
+      RETURN
+    ENDIF
     !
     sinpiy = ABS(SIN(pi*y))
     IF ( sinpiy==0.D0 ) CALL XERMSG('SLATEC','DLNGAM',&

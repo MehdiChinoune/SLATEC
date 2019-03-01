@@ -73,7 +73,10 @@ FUNCTION ALNREL(X)
     'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR -1'&
     ,1,1)
   !
-  IF ( ABS(X)<=0.375 ) ALNREL = X*(1.-X*CSEVL(X/.375,alnrcs,nlnrel))
-  IF ( ABS(X)>0.375 ) ALNREL = LOG(1.0+X)
+  IF ( ABS(X)<=0.375 ) THEN
+    ALNREL = X*(1.-X*CSEVL(X/.375,alnrcs,nlnrel))
+  ELSE
+    ALNREL = LOG(1.0+X)
+  ENDIF
   !
 END FUNCTION ALNREL

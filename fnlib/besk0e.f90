@@ -107,8 +107,11 @@ FUNCTION BESK0E(X)
   IF ( X<=0. ) CALL XERMSG('SLATEC','BESK0E','X IS ZERO OR NEGATIVE',2,2)
   IF ( X>2. ) THEN
     !
-    IF ( X<=8. ) BESK0E = (1.25+CSEVL((16./X-5.)/3.,ak0cs,ntak0))/SQRT(X)
-    IF ( X>8. ) BESK0E = (1.25+CSEVL(16./X-1.,ak02cs,ntak02))/SQRT(X)
+    IF ( X<=8. ) THEN
+      BESK0E = (1.25+CSEVL((16./X-5.)/3.,ak0cs,ntak0))/SQRT(X)
+    ELSE
+      BESK0E = (1.25+CSEVL(16./X-1.,ak02cs,ntak02))/SQRT(X)
+    ENDIF
     RETURN
   ENDIF
   !

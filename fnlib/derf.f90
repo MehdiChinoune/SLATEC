@@ -71,8 +71,11 @@ REAL(8) FUNCTION DERF(X)
     !
     ! ERF(X) = 1.0 - ERFC(X) FOR ABS(X) .GT. 1.0
     !
-    IF ( y<=xbig ) DERF = SIGN(1.0D0-DERFC(y),X)
-    IF ( y>xbig ) DERF = SIGN(1.0D0,X)
+    IF ( y<=xbig ) THEN
+      DERF = SIGN(1.0D0-DERFC(y),X)
+    ELSE
+      DERF = SIGN(1.0D0,X)
+    ENDIF
     RETURN
   ENDIF
   !

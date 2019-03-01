@@ -74,8 +74,10 @@ REAL FUNCTION GAMIC(A,X)
     izero = 0
     IF ( X>=1.0 ) THEN
       !
-      IF ( A<X ) GAMIC = EXP(R9LGIC(A,X,alx))
-      IF ( A<X ) RETURN
+      IF ( A<X ) THEN
+        GAMIC = EXP(R9LGIC(A,X,alx))
+        RETURN
+      ENDIF
       !
       sgngam = 1.0
       algap1 = ALNGAM(A+1.0)

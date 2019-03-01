@@ -73,8 +73,10 @@ FUNCTION POCH1(A,X)
   ENDIF
   first = .FALSE.
   !
-  IF ( X==0.0 ) POCH1 = PSI(A)
-  IF ( X==0.0 ) RETURN
+  IF ( X==0.0 ) THEN
+    POCH1 = PSI(A)
+    RETURN
+  ENDIF
   !
   absx = ABS(X)
   absa = ABS(A)

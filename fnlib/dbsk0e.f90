@@ -151,10 +151,11 @@ REAL(8) FUNCTION DBSK0E(X)
   IF ( X<=0.D0 ) CALL XERMSG('SLATEC','DBSK0E','X IS ZERO OR NEGATIVE',2,2)
   IF ( X>2.0D0 ) THEN
     !
-    IF ( X<=8.D0 ) DBSK0E = (1.25D0+DCSEVL((16.D0/X-5.D0)/3.D0,ak0cs,ntak0))&
-      /SQRT(X)
-    IF ( X>8.D0 ) DBSK0E = (1.25D0+DCSEVL(16.D0/X-1.D0,ak02cs,ntak02))&
-      /SQRT(X)
+    IF ( X<=8.D0 ) THEN
+      DBSK0E = (1.25D0+DCSEVL((16.D0/X-5.D0)/3.D0,ak0cs,ntak0))/SQRT(X)
+    ELSE
+      DBSK0E = (1.25D0+DCSEVL(16.D0/X-1.D0,ak02cs,ntak02))/SQRT(X)
+    ENDIF
     RETURN
   ENDIF
   !

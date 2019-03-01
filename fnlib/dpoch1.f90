@@ -86,8 +86,10 @@ REAL(8) FUNCTION DPOCH1(A,X)
   ENDIF
   first = .FALSE.
   !
-  IF ( X==0.0D0 ) DPOCH1 = DPSI(A)
-  IF ( X==0.0D0 ) RETURN
+  IF ( X==0.0D0 ) THEN
+    DPOCH1 = DPSI(A)
+    RETURN
+  ENDIF
   !
   absx = ABS(X)
   absa = ABS(A)

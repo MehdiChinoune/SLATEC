@@ -101,8 +101,11 @@ FUNCTION PSI(X)
     !
     aux = 0.
     IF ( y<xbig ) aux = CSEVL(8./y**2-1.,apsics,ntapsi)
-    IF ( X<0. ) PSI = LOG(ABS(X)) - 0.5/X + aux - pi*COT(pi*X)
-    IF ( X>0. ) PSI = LOG(X) - 0.5/X + aux
+    IF ( X<0. ) THEN
+      PSI = LOG(ABS(X)) - 0.5/X + aux - pi*COT(pi*X)
+    ELSE
+      PSI = LOG(X) - 0.5/X + aux
+    ENDIF
     RETURN
   ENDIF
   !

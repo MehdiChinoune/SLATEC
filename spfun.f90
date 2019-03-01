@@ -1074,8 +1074,8 @@ COMPLEX FUNCTION CSQRT(Z)
     IF ( x>=0.0E0 ) THEN
       CSQRT = CMPLX(xtmp,ytmp)
     ELSEIF ( y==0.0E0 ) THEN
-      y = 1.0E0
-    ELSEIF ( x<0.0E0 ) THEN
+      CSQRT = CMPLX( 0., SQRT(r) )
+    ELSE !IF ( x<0.0E0 ) THEN
       CSQRT = CMPLX(ABS(ytmp),SIGN(xtmp,y))
     ENDIF
   ENDIF
@@ -1914,7 +1914,7 @@ REAL(8) FUNCTION DINT(X)
       DO i = 1, npart
         xscl = xscl/scale
       ENDDO
-      !
+      DINT = 0.
       DO i = 1, npart
         xscl = xscl*scale
         ipart = INT( xscl )
