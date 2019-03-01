@@ -77,9 +77,8 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   INTEGER I1MACH
   REAL(8) :: A, aa, ae, anib, Ans, area, B, be, C, cc, ee ,&
     ef, eps, Err, est, gl, glr, gr, hh, sq2, tol ,&
-    vl, vr, w1, w2, w3, w4, Xi, x1, x2, x3, x4 ,&
-    x, h
-  REAL(8) :: D1MACH, DPPVAL
+    vl, vr, w1, w2, w3, w4, Xi, x1, x2, x3, x4
+  REAL(8) :: D1MACH
   DIMENSION Xi(*), C(Ldc,*)
   DIMENSION aa(60), hh(60), lr(60), vl(60), gr(60)
   SAVE x1, x2, x3, x4, w1, w2, w3, w4, sq2, nlmn, kmx, kml

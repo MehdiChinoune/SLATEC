@@ -81,7 +81,7 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
   INTEGER I1MACH
   REAL A, aa, ae, anib, Ans, area, B, c, ce, ee, ef, eps, Err ,&
     est, gl, glr, gr, hh, sq2, tol, vl, vr, w1, w2, w3, w4 ,&
-    x1, x2, x3, x4, x, h
+    x1, x2, x3, x4
   REAL R1MACH
   DIMENSION aa(30), hh(30), lr(30), vl(30), gr(30)
   SAVE x1, x2, x3, x4, w1, w2, w3, w4, sq2, nlmn, kmx, kml

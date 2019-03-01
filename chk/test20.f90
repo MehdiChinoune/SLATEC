@@ -849,7 +849,6 @@ CONTAINS
     COMPLEX A(Lda,*), B(Ldb,*), C(Ldc,*), Cc(Ldcc,*), Ct(*)
     REAL G(*)
     !     .. Local Scalars ..
-    COMPLEX cl
     REAL erri
     INTEGER i, j, k
     LOGICAL ctrana, ctranb, trana, tranb
@@ -1017,7 +1016,6 @@ CONTAINS
     COMPLEX A(Nmax,*), X(*), Y(*), Yt(*), Yy(*)
     REAL G(*)
     !     .. Local Scalars ..
-    COMPLEX c
     REAL erri
     INTEGER i, incxl, incyl, iy, j, jx, k, kx, ky, ml, nl
     LOGICAL ctran, tran

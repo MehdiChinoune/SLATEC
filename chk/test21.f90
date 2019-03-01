@@ -308,7 +308,6 @@ CONTAINS
     !     .. Scalar Arguments ..
     INTEGER Kprint, Lun, Nerr
     !     .. Local Scalars ..
-    COMPLEX xa, xb
     INTEGER i, ind, indx, itask, j, kprog, lda, n
     !     .. Local Arrays ..
     COMPLEX a(3,3), atemp(5,3), b(3), btemp(3), bxex(3), work(12)

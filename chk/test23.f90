@@ -144,8 +144,7 @@ CONTAINS
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
     !***END PROLOGUE  CGBQC
-    COMPLEX abd(6,4), at(7,4), b(4), bt(4), c(4), det(2), dc(2), z(4) ,&
-      xa, xb
+    COMPLEX abd(6,4), at(7,4), b(4), bt(4), c(4), det(2), dc(2), z(4)
     REAL r, rcond, rcnd, CABS1
     CHARACTER kfail*39, kprog*19
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
@@ -284,7 +283,7 @@ CONTAINS
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CGECK
     COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), det(2) ,&
-      dc(2), z(4), xa, xb
+      dc(2), z(4)
     REAL r, rcond, rcnd, CABS1
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
@@ -510,8 +509,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CHIQC
-    COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), z(4), xa ,&
-      xb
+    COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), z(4)
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*47
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
@@ -658,7 +656,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CHPQC
-    COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), z(4), xa, xb
+    COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), z(4)
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*47
     INTEGER n, ipvt(4), info, i, j, indx, Nerr
@@ -798,7 +796,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CPBQC
-    COMPLEX abd(2,4), at(3,4), b(4), bt(4), c(4), z(4), xa, xb
+    COMPLEX abd(2,4), at(3,4), b(4), bt(4), c(4), z(4)
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, info, i, j, indx, Nerr, m
@@ -921,8 +919,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CPOQC
-    COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), z(4), xa ,&
-      xb
+    COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), z(4)
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, info, i, j, indx, Nerr
@@ -1063,7 +1060,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CPPQC
-    COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), z(4), xa, xb
+    COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), z(4)
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*39
     INTEGER n, info, i, j, indx, Nerr
@@ -1264,7 +1261,7 @@ CONTAINS
     COMPLEX a(4,4), qraux(4), work(4), y(4), qy(4), qty(4), b(4) ,&
       rsd(4), xb(4)
     COMPLEX at(5,4), ac(4,4), qrauxc(4), qyc(4), qtyc(4), bc(4), rsdc(4)&
-      , xbc(4), x1, x2
+      , xbc(4)
     CHARACTER kprog*9, kfail*75
     INTEGER ldx, n, p, jpvt(4), job, k, info
     INTEGER jpvtt(4), jpvtc(4), i, j, indx(5), Nerr, l
@@ -1414,7 +1411,7 @@ CONTAINS
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CSIQC
     COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), det(2) ,&
-      dc(2), z(4), xa, xb
+      dc(2), z(4)
     REAL r, rcond, rcnd, CABS1
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
@@ -1550,7 +1547,7 @@ CONTAINS
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CSPQC
     COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), det(2) ,&
-      dc(2), z(4), xa, xb
+      dc(2), z(4)
     REAL r, rcond, rcnd, CABS1
     CHARACTER kprog*19, kfail*39
     INTEGER n, ipvt(4), info, i, j, indx, Nerr
@@ -1677,7 +1674,7 @@ CONTAINS
     !           record and cleaned up FORMATs.  (RWC)
     !***END PROLOGUE  CSVQC
     COMPLEX a(4,4), work(4), s(4), e(4), u(4,4), v(4,4)
-    COMPLEX at(5,4), sc(4), ec(4), uvc(4,4), x1, x2
+    COMPLEX at(5,4), sc(4), ec(4), uvc(4,4)
     INTEGER ldx, n, p, ldu, ldv, job, info
     CHARACTER kfail*12
     INTEGER i, j, indx(4)
@@ -1783,7 +1780,7 @@ CONTAINS
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CTRQC
     COMPLEX a(4,4), at(5,4), b(4,2), bt(4), c(4), ainv(4,4,2), det(2) ,&
-      dc(2), z(4), xa, xb
+      dc(2), z(4)
     REAL r, rcond, rcnd(2), CABS1
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, info, i, j, indx, Nerr

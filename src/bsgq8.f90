@@ -74,8 +74,8 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   INTEGER I1MACH
   REAL A, aa, ae, anib, Ans, area, B, Bc, c, ce, ee, ef, eps ,&
     Err, est, gl, glr, gr, hh, sq2, tol, vl, vr, Work, w1 ,&
-    w2, w3, w4, Xt, x1, x2, x3, x4, x, h
-  REAL R1MACH, BVALU
+    w2, w3, w4, Xt, x1, x2, x3, x4
+  REAL R1MACH
   DIMENSION Xt(*), Bc(*), Work(*)
   DIMENSION aa(30), hh(30), lr(30), vl(30), gr(30)
   SAVE x1, x2, x3, x4, w1, w2, w3, w4, sq2, nlmn, kmx, kml

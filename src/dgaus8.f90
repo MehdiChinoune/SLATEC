@@ -87,7 +87,7 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
   INTEGER I1MACH
   REAL(8) :: A, aa, ae, anib, Ans, area, B, c, ce, ee, ef ,&
     eps, Err, est, gl, glr, gr, hh, sq2, tol, vl ,&
-    vr, w1, w2, w3, w4, x1, x2, x3, x4, x, h
+    vr, w1, w2, w3, w4, x1, x2, x3, x4
   REAL(8) :: D1MACH
   DIMENSION aa(60), hh(60), lr(60), vl(60), gr(60)
   SAVE x1, x2, x3, x4, w1, w2, w3, w4, sq2, nlmn, kmx, kml

@@ -74,8 +74,8 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   INTEGER I1MACH
   REAL A, aa, ae, anib, Ans, area, B, be, C, cc, ee, ef, eps ,&
     Err, est, gl, glr, gr, hh, sq2, tol, vl, vr, w1, w2, w3 ,&
-    w4, Xi, x1, x2, x3, x4, x, h
-  REAL R1MACH, PPVAL
+    w4, Xi, x1, x2, x3, x4
+  REAL R1MACH
   DIMENSION Xi(*), C(Ldc,*)
   DIMENSION aa(30), hh(30), lr(30), vl(30), gr(30)
   SAVE x1, x2, x3, x4, w1, w2, w3, w4, sq2, nlmn, kmx, kml
