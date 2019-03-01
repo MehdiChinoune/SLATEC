@@ -210,7 +210,7 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   lr(l) = 1
   aa(l) = aa(l) + 4.0D0*hh(l)
   GOTO 100
-  99999 RETURN
+  RETURN
 CONTAINS
   REAL(8) FUNCTION G8(x,h)
     REAL(8), INTENT(IN) :: x, h

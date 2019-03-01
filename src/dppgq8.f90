@@ -212,7 +212,7 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   lr(l) = 1
   aa(l) = aa(l) + 4.0D0*hh(l)
   GOTO 100
-  99999 RETURN
+  RETURN
 CONTAINS
   REAL(8) FUNCTION G8(x,h)
     REAL(8), INTENT(IN) :: x, h

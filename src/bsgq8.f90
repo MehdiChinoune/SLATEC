@@ -208,7 +208,7 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   lr(l) = 1
   aa(l) = aa(l) + 4.0E0*hh(l)
   GOTO 100
-  99999 RETURN
+  RETURN
 CONTAINS
   REAL FUNCTION G8(x,h)
     REAL, INTENT(IN) :: x, h
