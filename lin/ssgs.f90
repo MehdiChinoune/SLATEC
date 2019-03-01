@@ -2,7 +2,6 @@
 SUBROUTINE SSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  REAL SSLI, SSMV
   !***BEGIN PROLOGUE  SSGS
   !***PURPOSE  Gauss-Seidel Method Iterative Sparse Ax = b Solver.
   !            Routine to solve a general linear system  Ax = b  using
@@ -272,8 +271,7 @@ SUBROUTINE SSGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   Iwork(9) = lociw
   Iwork(10) = locw
   !
-  CALL SS2LT(N,Nelt,Ia,Ja,A,Isym,nl,Iwork(lociel),Iwork(locjel),Rwork(locel)&
-    )
+  CALL SS2LT(N,Nelt,Ia,Ja,A,Isym,nl,Iwork(lociel),Iwork(locjel),Rwork(locel))
   !
   !         Call iterative refinement routine.
   CALL SIR(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSLI,Itol,Tol,Itmax,Iter,Err,Ierr,&

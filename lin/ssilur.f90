@@ -2,7 +2,6 @@
 SUBROUTINE SSILUR(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  REAL SSLUI, SSMV
   !***BEGIN PROLOGUE  SSILUR
   !***PURPOSE  Incomplete LU Iterative Refinement Sparse Ax = b Solver.
   !            Routine to solve a general linear system  Ax = b  using

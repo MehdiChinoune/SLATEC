@@ -2,8 +2,6 @@
 SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     Iwork,Liw,Rpar,Ipar,JAC)
   IMPLICIT NONE
-  INTEGER JAC
-  REAL RES
   !***BEGIN PROLOGUE  DDASSL
   !***PURPOSE  This code solves a system of differential/algebraic
   !            equations of the form G(T,Y,YPRIME) = 0.

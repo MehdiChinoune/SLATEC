@@ -2,7 +2,6 @@
 SUBROUTINE SSLUCN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  REAL SSMMTI, SSMTV, SSMV
   !***BEGIN PROLOGUE  SSLUCN
   !***PURPOSE  Incomplete LU CG Sparse Ax=b Solver for Normal Equations.
   !            Routine to solve a general linear system  Ax = b  using the

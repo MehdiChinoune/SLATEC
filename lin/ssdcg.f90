@@ -2,7 +2,6 @@
 SUBROUTINE SSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  REAL SSDI, SSMV
   !***BEGIN PROLOGUE  SSDCG
   !***PURPOSE  Diagonally Scaled Conjugate Gradient Sparse Ax=b Solver.
   !            Routine to solve a symmetric positive definite linear

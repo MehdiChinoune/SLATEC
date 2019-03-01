@@ -2,7 +2,6 @@
 SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  REAL SSLLTI, SSMV
   !***BEGIN PROLOGUE  SSICCG
   !***PURPOSE  Incomplete Cholesky Conjugate Gradient Sparse Ax=b Solver.
   !            Routine to solve a symmetric positive definite linear
@@ -299,15 +298,12 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   IF ( Ierr/=0 ) THEN
     WRITE (xern1,'(I8)') Ierr
     CALL XERMSG('SLATEC','SSICCG','IC factorization broke down on step '//&
-      xern1//&
-      '.  Diagonal was set to unity and factorization proceeded.',&
-      1,1)
+      xern1//'.  Diagonal was set to unity and factorization proceeded.',1,1)
     Ierr = 7
   ENDIF
   !
   !         Do the Preconditioned Conjugate Gradient.
   CALL SCG(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSLLTI,Itol,Tol,Itmax,Iter,Err,Ierr,&
-    Iunit,Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locdz),Rwork(1),&
-    Iwork(1))
+    Iunit,Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locdz),Rwork(1),Iwork(1))
   !------------- LAST LINE OF SSICCG FOLLOWS ----------------------------
 END SUBROUTINE SSICCG

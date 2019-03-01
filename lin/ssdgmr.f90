@@ -2,7 +2,6 @@
 SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  REAL SSDI, SSMV
   !***BEGIN PROLOGUE  SSDGMR
   !***PURPOSE  Diagonally Scaled GMRES Iterative Sparse Ax=b Solver.
   !            This routine uses the generalized minimum residual

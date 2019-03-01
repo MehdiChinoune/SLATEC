@@ -2,7 +2,6 @@
 SUBROUTINE DSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  REAL DSLUI, DSMV
   !***BEGIN PROLOGUE  DSLUOM
   !***PURPOSE  Incomplete LU Orthomin Sparse Iterative Ax=b Solver.
   !            Routine to solve a general linear system  Ax = b  using

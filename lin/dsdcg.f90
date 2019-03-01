@@ -2,7 +2,6 @@
 SUBROUTINE DSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  REAL DSDI, DSMV
   !***BEGIN PROLOGUE  DSDCG
   !***PURPOSE  Diagonally Scaled Conjugate Gradient Sparse Ax=b Solver.
   !            Routine to solve a symmetric positive definite linear

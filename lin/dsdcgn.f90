@@ -2,7 +2,6 @@
 SUBROUTINE DSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  REAL DSDI, DSMTV, DSMV
   !***BEGIN PROLOGUE  DSDCGN
   !***PURPOSE  Diagonally Scaled CG Sparse Ax=b Solver for Normal Eqn's.
   !            Routine to solve a general linear system  Ax = b  using

@@ -3,7 +3,6 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     Delta,E,Wm,Iwm,Alpha,Beta,Gamma,Psi,Sigma,Cj,Cjold,Hold,&
     S,Hmin,Uround,Iphase,Jcalc,K,Kold,Ns,Nonneg,Ntemp)
   IMPLICIT NONE
-  INTEGER JAC
   !***BEGIN PROLOGUE  SDASTP
   !***SUBSIDIARY
   !***PURPOSE  Perform one step of the SDASSL integration.

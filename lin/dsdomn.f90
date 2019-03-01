@@ -2,7 +2,6 @@
 SUBROUTINE DSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  REAL DSDI, DSMV
   !***BEGIN PROLOGUE  DSDOMN
   !***PURPOSE  Diagonally Scaled Orthomin Sparse Iterative Ax=b Solver.
   !            Routine to solve a general linear system  Ax = b  using

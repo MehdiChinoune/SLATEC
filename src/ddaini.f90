@@ -2,7 +2,6 @@
 SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
     Wm,Iwm,Hmin,Uround,Nonneg,Ntemp)
   IMPLICIT NONE
-  INTEGER JAC
   !***BEGIN PROLOGUE  DDAINI
   !***SUBSIDIARY
   !***PURPOSE  Initialization routine for DDASSL.

@@ -2,7 +2,6 @@
 SUBROUTINE SSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  REAL SSDI, SSMTV, SSMV
   !***BEGIN PROLOGUE  SSDBCG
   !***PURPOSE  Diagonally Scaled BiConjugate Gradient Sparse Ax=b Solver.
   !            Routine to solve a linear system  Ax = b  using the

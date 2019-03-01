@@ -2,7 +2,6 @@
 SUBROUTINE SSJAC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  REAL SSDI, SSMV
   !***BEGIN PROLOGUE  SSJAC
   !***PURPOSE  Jacobi's Method Iterative Sparse Ax = b Solver.
   !            Routine to solve a general linear system  Ax = b  using

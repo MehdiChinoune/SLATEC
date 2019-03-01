@@ -2,7 +2,6 @@
 SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  REAL DSLUI, DSMV
   !***BEGIN PROLOGUE  DSLUGM
   !***PURPOSE  Incomplete LU GMRES iterative sparse Ax=b solver.
   !            This routine uses the generalized minimum residual
