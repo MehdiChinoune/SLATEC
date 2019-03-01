@@ -91,7 +91,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !     Sort the breakpoints.
   !
   CALL SCOPY(Nbkpt,Bkptin,1,Bkpt,1)
-  CALL SSORT(Bkpt,dummy,Nbkpt,1)
+  CALL SSORT(Bkpt,[dummy],Nbkpt,1)
   !
   !     Save interval containing knots.
   !

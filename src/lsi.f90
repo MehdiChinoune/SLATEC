@@ -63,7 +63,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
     SSCAL, SSWAP
   REAL R1MACH, SASUM, SDOT
   !
-  REAL anorm, fac, gam, rb, srelpr, tau, tol, xnorm
+  REAL anorm, fac, gam, rb, srelpr, tau, tol, xnorm, temp(1)
   INTEGER i, j, k, key, krank, krm1, krp1, l, last, link, m, &
     map1, mdlpdp, minman, n1, n2, n3, next, np1
   LOGICAL cov, first, sclcov
@@ -124,7 +124,8 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       minman = MIN(Ma,N)
       n1 = k + 1
       n2 = n1 + N
-      CALL HFTI(W,Mdw,Ma,N,Ws,Ma,1,tau,krank,Rnorm,Ws(n2),Ws(n1),Ip)
+      CALL HFTI(W,Mdw,Ma,N,Ws,Ma,1,tau,krank,temp,Ws(n2),Ws(n1),Ip)
+      Rnorm = temp(1)
       fac = 1.E0
       gam = Ma - krank
       IF ( krank<Ma.AND.sclcov ) fac = Rnorm**2/gam

@@ -112,7 +112,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !     Sort the breakpoints.
   !
   CALL SCOPY(Nbkpt,Bkptin,1,Bkpt,1)
-  CALL SSORT(Bkpt,dummy,Nbkpt,1)
+  CALL SSORT(Bkpt,[dummy],Nbkpt,1)
   !
   !     Initialize variables.
   !

@@ -64,7 +64,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
     DSCAL, DSWAP
   REAL(8) :: D1MACH, DASUM, DDOT
   !
-  REAL(8) :: anorm, drelpr, fac, gam, rb, tau, tol, xnorm
+  REAL(8) :: anorm, drelpr, fac, gam, rb, tau, tol, xnorm, temp(1)
   INTEGER i, j, k, key, krank, krm1, krp1, l, last, link, m, &
     map1, mdlpdp, minman, n1, n2, n3, next, np1
   LOGICAL cov, first, sclcov
@@ -125,7 +125,8 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
       minman = MIN(Ma,N)
       n1 = k + 1
       n2 = n1 + N
-      CALL DHFTI(W,Mdw,Ma,N,Ws,Ma,1,tau,krank,Rnorm,Ws(n2),Ws(n1),Ip)
+      CALL DHFTI(W,Mdw,Ma,N,Ws,Ma,1,tau,krank,temp,Ws(n2),Ws(n1),Ip)
+      Rnorm = temp(1)
       fac = 1.D0
       gam = Ma - krank
       IF ( krank<Ma.AND.sclcov ) fac = Rnorm**2/gam
