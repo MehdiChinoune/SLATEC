@@ -113,7 +113,7 @@ PROGRAM SLADOC
   CHARACTER(LLIB) :: LIB
   PARAMETER (UTIL='SLADOC',LIB='SLATEC')
   INTEGER LLN
-  PARAMETER (LLN=72)
+  PARAMETER (LLN=80)
   !
   !     Other declarations.
   !
@@ -1582,7 +1582,7 @@ PROGRAM SLADOC
     /'     type''q''            to quit browsing mode')
   99027 FORMAT ('(I',I2,')')
   99028 FORMAT (/' Enter your next browsing command',' {spgsz p pd pu hd hu e q}')
-  99029 FORMAT (' ',I4,2X,72A)
+  99029 FORMAT (' ',I4,2X,80A)
   99030 FORMAT (/,' The current value of PGSZ is: ',I5)
   99031 FORMAT (/,' The new value of PGSZ is: ',I5)
   99032 FORMAT (/' Input C for classification scheme or K for keywords')

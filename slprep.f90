@@ -121,7 +121,7 @@ PROGRAM SLPREP
   INTEGER MXLRN, MXNRN, MXLCAT, MXNCAT, MXNKWD, MXNCL
   PARAMETER (MXLRN=6,MXNRN=1600,MXLCAT=10,MXNCAT=750,MXNKWD=500,MXNCL=751)
   INTEGER KMAXI, KMAXJ, LLN
-  PARAMETER (KMAXI=60,KMAXJ=40,LLN=72)
+  PARAMETER (KMAXI=60,KMAXJ=40,LLN=80)
   !
   !     Other declarations.
   !
@@ -133,7 +133,7 @@ PROGRAM SLPREP
   INTEGER LU5, LU6, LU12, LU13, LU14, LU15, LU17, LU18, LU19
   PARAMETER (LU12=12,LU13=13,LU14=14,LU15=15,LU6=6,LU17=17,LU18=18,LU19=19,&
     LU5=5)
-  CHARACTER(LLN) :: line
+  CHARACTER(LLN) :: line, line_big
   CHARACTER(80) :: clline
   CHARACTER(80) :: msg
   CHARACTER(KMAXI) :: kwrds(KMAXJ), tkwd(MXNKWD)
@@ -283,13 +283,21 @@ PROGRAM SLPREP
   mxlkw = 0
   DO
     !
-    READ (UNIT=LU15,FMT=99001,END=900) line
+    READ (UNIT=LU15,FMT=99001,END=900) line_big
+    line = TRIM(ADJUSTL(line_big))
     ird = ird + 1
+    !
+    IF( line(1:13) == 'IMPLICIT NONE' ) THEN
+      READ (UNIT=LU15,FMT=99001,END=900) line_big
+      line = TRIM(ADJUSTL(line_big))
+      ird = ird + 1
+    END IF
+    !
     IF ( .NOT.(IFDECK(line).OR.IFIF(line)) ) THEN
       iwr = iwr + 1
       WRITE (UNIT=LU17,FMT=99001,REC=iwr) line
       !
-      IF ( line(1:6)=='      '.OR.IFSID(line) ) THEN
+      IF ( line(1:1)/='!' .OR. IFSID(line) ) THEN
         !
         !       Subprogram statement.  Save starting record number.
         !
@@ -333,7 +341,8 @@ PROGRAM SLPREP
         !
         ips = iwr
         DO
-          READ (UNIT=LU15,FMT=99001,END=900) line
+          READ (UNIT=LU15,FMT=99001,END=900) line_big
+          line = TRIM(ADJUSTL(line_big))
           ird = ird + 1
           iwr = iwr + 1
           WRITE (UNIT=LU17,FMT=99001,REC=iwr) line
@@ -355,7 +364,7 @@ PROGRAM SLPREP
         !
         !       Initialize the pointer to point to the first category.
         !
-        710        ic = 15
+        710 ic = 15
         ilen = LENSTR(line)
         IF ( ic>ilen ) THEN
           msg = 'No category on CATEGORY record'
@@ -426,9 +435,10 @@ PROGRAM SLPREP
               !
               !         We are at the end of the line and need to read again.
               !
-              READ (UNIT=LU15,FMT=99001,END=900) line
+              READ (UNIT=LU15,FMT=99001,END=900) line_big
+              line = TRIM(ADJUSTL(line_big))
               ird = ird + 1
-              IF ( line(1:5)/='C   '.AND.line(1:5)/='*   ' ) THEN
+              IF ( line(1:1)/='!' ) THEN
                 msg = 'CATEGORY section not in correct form'
                 nerr = 3
                 GOTO 800
@@ -512,9 +522,10 @@ PROGRAM SLPREP
               !
               !         We are at the end of the line and need to read again.
               !
-              READ (UNIT=LU15,FMT=99001,END=900) line
+              READ (UNIT=LU15,FMT=99001,END=900) line_big
+              line = TRIM(ADJUSTL(line_big))
               ird = ird + 1
-              IF ( line(1:5)/='C   '.AND.line(1:5)/='*   ' ) THEN
+              IF ( line(1:1)/='!' ) THEN
                 msg = 'KEYWORD section not in correct form'
                 nerr = 4
                 GOTO 800
@@ -547,8 +558,7 @@ PROGRAM SLPREP
           !         Write the categories for this routine, the routine name, etc.
           !         to the file FTBL.
           !
-          WRITE (UNIT=LU18,FMT=99005) (categ(j),rtname,ib,iwr,ips,ipe,j=1,&
-            ncat)
+          WRITE (UNIT=LU18,FMT=99005) (categ(j),rtname,ib,iwr,ips,ipe,j=1,ncat)
           numrr = numrr + ncat
           !
           IF ( nkwd>0 ) THEN
@@ -606,7 +616,8 @@ PROGRAM SLPREP
           !
           !       Read to the next *DECK record.
           !
-          READ (UNIT=LU15,FMT=99001,END=900) line
+          READ (UNIT=LU15,FMT=99001,END=900) line_big
+          line = TRIM(ADJUSTL(line_big))
           ird = ird + 1
           IF ( IFDECK(line) ) EXIT
         ENDDO
@@ -742,25 +753,19 @@ PROGRAM SLPREP
   99004 FORMAT (I15)
   99005 FORMAT (1X,2A,4I8)
   99006 FORMAT (' Processing routine ',A,',  number ',I4)
-  99007 FORMAT (//' S U M M A R Y There were ',I4,&
-    ' documentation modules and a total ','of ',I6,&
-    ' lines read '/' from the sequential input file and a total of ',&
-    I6,' lines written '/' to the direct access documentation file.'/&
-    ' The library has a total of ',I3,' distinct ','categories and ',&
-    I3,' distinct keywords.'/' At least one module has ',I4,&
-    ' lines, one module ','has ',I2,' categories,'/' one module has ',&
-    I2,' keyword phrases and ','the longest keyword phrase is '/1X,I2,&
-    ' characters.'/' There were ',I4,&
-    ' category/routine lines written to ',&
-    'the category file.'/' There were ',I3,&
-    ' distinct keyword phrases written ',&
-    'to the keyword file, and '/1X,I4,&
-    ' keyword pointers written to the file.')
-  99008 FORMAT (' There were ',I3,' lines read from the GAMS ',&
-    'classification scheme file.'/' There were ',I3,&
-    ' classification categories written ',&
-    'to the classification file'/' and a total of ',I3,&
-    ' classification descriptors ','written to the file.'//)
+  99007 FORMAT (//' S U M M A R Y '&
+    /'There were ',I4,' documentation modules'&
+    /' and a total of ',I6,' lines read  from the sequential input file'&
+    /' and a total of ',I6,' lines written to the direct access documentation file.'&
+    /' The library has a total of ',I3,' distinct categories and ',I3,' distinct keywords.'&
+    /' At least one module has ',I4,' lines, one module has ',I2,' categories,'&
+    /' one module has ',I2,' keyword phrases and the longest keyword phrase is ',I2,' characters.'&
+    /' There were ',I4,' category/routine lines written to the category file.'&
+    /' There were ',I3,' distinct keyword phrases written to the keyword file,'&
+    /' and',I4,' keyword pointers written to the file.')
+  99008 FORMAT (' There were ',I3,' lines read from the GAMS classification scheme file.'&
+    /' There were ',I3,' classification categories written to the classification file'&
+    /' and a total of ',I3,' classification descriptors written to the file.'//)
   99009 FORMAT (//' J O B   A B O R T The job aborted in routine ',A,&
     ' after processing ','approximately ',I6,&
     ' lines'/' of the input file.'/&
@@ -830,7 +835,7 @@ LOGICAL FUNCTION IFDECK(Line)
   !***FIRST EXECUTABLE STATEMENT  IFDECK
   CALL UPCASE(Line(1:6),temp(1:6))
   IFDECK = .TRUE.
-  IF ( temp(1:6)/='*DECK '.AND.temp(1:4)/='*DK ' ) IFDECK = .FALSE.
+  IF ( temp(1:6)/='!DECK '.AND.temp(1:4)/='!DK ' ) IFDECK = .FALSE.
 END FUNCTION IFDECK
 !DECK IFIF
 LOGICAL FUNCTION IFIF(Line)
@@ -867,7 +872,7 @@ LOGICAL FUNCTION IFIF(Line)
   !***FIRST EXECUTABLE STATEMENT  IFIF
   CALL UPCASE(Line(1:3),temp(1:3))
   IFIF = .TRUE.
-  IF ( temp(1:3)/='*IF' ) IFIF = .FALSE.
+  IF ( temp(1:3)/='!IF' ) IFIF = .FALSE.
 END FUNCTION IFIF
 !DECK IFSID
 LOGICAL FUNCTION IFSID(Line)
@@ -907,7 +912,7 @@ LOGICAL FUNCTION IFSID(Line)
   !***FIRST EXECUTABLE STATEMENT  IFSID
   CALL UPCASE(Line(1:20),temp(1:20))
   IFSID = .FALSE.
-  IF ( Line(1:1)=='*' ) THEN
+  IF ( Line(1:1)=='!' ) THEN
     id = INDEX(Line,'IDENT')
     IF ( id/=0 ) THEN
       !         IF (LINE(2:ID-1) .EQ. ' ') IFSID = .TRUE.
