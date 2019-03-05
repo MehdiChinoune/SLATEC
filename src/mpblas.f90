@@ -69,8 +69,7 @@ SUBROUTINE MPBLAS(I1)
   !
   IF ( MPMxr>30 ) THEN
     CALL XERMSG('SLATEC','MPBLAS',&
-      'Array space not sufficient for Quad Precision 2x '//&
-      'Double Precision, Proceeding.',1,1)
+      'Array space not sufficient for Quad Precision 2x Double Precision, Proceeding.',1,1)
     MPT = 26
     MPMxr = 30
   ENDIF

@@ -483,8 +483,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   IF ( LP>0 ) THEN
     WRITE (xern1,'(I8)') ir
     WRITE (xern2,'(I8)') j
-    CALL XERMSG('SLATEC','LA05AS','MORE THAN ONE MATRIX '//&
-      'ENTRY.  HERE ROW = '//xern1//' AND COL = '//xern2,-4,1)
+    CALL XERMSG('SLATEC','LA05AS','MORE THAN ONE MATRIX ENTRY.  HERE ROW = '//xern1//' AND COL = '//xern2,-4,1)
   ENDIF
   G = -4.
   RETURN
@@ -504,8 +503,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   300 CONTINUE
   IF ( LP>0 ) THEN
     WRITE (xern1,'(I8)') l
-    CALL XERMSG('SLATEC','LA05AS','ROW OR COLUMN HAS NO '//&
-      'ELEMENTS.  HERE INDEX = '//xern1,-2,1)
+    CALL XERMSG('SLATEC','LA05AS','ROW OR COLUMN HAS NO ELEMENTS.  HERE INDEX = '//xern1,-2,1)
   ENDIF
   G = -2.
   RETURN

@@ -326,8 +326,7 @@ PROGRAM SLADOC
           !
           READ (UNIT=LU14,FMT=99037) ncc
           IF ( ncc>MXNCAT ) THEN
-            msg = 'MXNCAT internal error.  Please contact the '//&
-              'consulting office.'
+            msg = 'MXNCAT internal error.  Please contact the consulting office.'
             nerr = 3
             EXIT
           ENDIF
@@ -339,8 +338,7 @@ PROGRAM SLADOC
           READ (UNIT=LU14,FMT=99038) kptr(ncc+1)
           istmt = kptr(ncc+1)
           IF ( istmt>MXNCL ) THEN
-            msg = 'MXNCL internal error.  Please contact the '//&
-              'consulting office.'
+            msg = 'MXNCL internal error.  Please contact the consulting office.'
             nerr = 4
             EXIT
           ENDIF
@@ -538,8 +536,7 @@ PROGRAM SLADOC
           READ (UNIT=LU19,FMT=99037) ntkwd
           WRITE (UNIT=form,FMT=99042) KMAXI
           IF ( ntkwd>MXKWDS ) THEN
-            msg = 'MXKWDS internal error.  Please contact the '//&
-              'consulting office.'
+            msg = 'MXKWDS internal error.  Please contact the consulting office.'
             nerr = 5
             EXIT
           ENDIF
@@ -549,8 +546,7 @@ PROGRAM SLADOC
           DO
             READ (UNIT=LU19,FMT=99001,END=510) linesv
             IF ( inext>=10*MXKWDS ) THEN
-              msg = 'MXKWDS internal error.  Please contact the '//&
-                'consulting office.'
+              msg = 'MXKWDS internal error.  Please contact the consulting office.'
               nerr = 6
               GOTO 700
             ENDIF
@@ -569,8 +565,7 @@ PROGRAM SLADOC
             lftbl = lftbl + 1
             READ (UNIT=LU18,FMT=99001,END=515) linesv
             IF ( lftbl>MXNRN ) THEN
-              msg = 'MXNRN internal error.  Please contact the '//&
-                'consulting office.'
+              msg = 'MXNRN internal error.  Please contact the consulting office.'
               nerr = 2
               GOTO 700
             ENDIF
@@ -655,8 +650,7 @@ PROGRAM SLADOC
             lftbl = lftbl + 1
             READ (UNIT=LU18,FMT=99001,END=535) linesv
             IF ( lftbl>MXNRN ) THEN
-              msg = 'MXNRN internal error.  Please contact the '//&
-                'consulting office.'
+              msg = 'MXNRN internal error.  Please contact the consulting office.'
               nerr = 2
               GOTO 700
             ENDIF
@@ -748,8 +742,7 @@ PROGRAM SLADOC
             !
             READ (UNIT=LU14,FMT=99037) ncc
             IF ( ncc>MXNCAT ) THEN
-              msg = 'MXNCAT internal error.  Please contact the '//&
-                'consulting office.'
+              msg = 'MXNCAT internal error.  Please contact the consulting office.'
               nerr = 3
               EXIT
             ENDIF
@@ -761,8 +754,7 @@ PROGRAM SLADOC
             READ (UNIT=LU14,FMT=99038) kptr(ncc+1)
             istmt = kptr(ncc+1)
             IF ( istmt>MXNCL ) THEN
-              msg = 'MXNCL internal error.  Please contact the '//&
-                'consulting office.'
+              msg = 'MXNCL internal error.  Please contact the consulting office.'
               nerr = 4
               EXIT
             ENDIF
@@ -781,8 +773,7 @@ PROGRAM SLADOC
             READ (UNIT=LU19,FMT=99037) ntkwd
             WRITE (UNIT=form,FMT=99042) KMAXI
             IF ( ntkwd>MXKWDS ) THEN
-              msg = 'MXKWDS internal error.  Please contact the '//&
-                'consulting office.'
+              msg = 'MXKWDS internal error.  Please contact the consulting office.'
               nerr = 5
               EXIT
             ENDIF
@@ -792,8 +783,7 @@ PROGRAM SLADOC
             DO
               READ (UNIT=LU19,FMT=99001,END=566) linesv
               IF ( inext>=10*MXKWDS ) THEN
-                msg = 'MXKWDS internal error.  Please contact the '//&
-                  'consulting office.'
+                msg = 'MXKWDS internal error.  Please contact the consulting office.'
                 nerr = 6
                 GOTO 700
               ENDIF
@@ -1185,8 +1175,7 @@ PROGRAM SLADOC
             lftbl = lftbl + 1
             READ (UNIT=LU18,FMT=99001,END=580) linesv
             IF ( lftbl>MXNRN ) THEN
-              msg = 'MXNRN internal error.  Please contact the '//&
-                'consulting office.'
+              msg = 'MXNRN internal error.  Please contact the consulting office.'
               nerr = 2
               GOTO 700
             ENDIF
@@ -1537,8 +1526,7 @@ PROGRAM SLADOC
   99003 FORMAT (' The first field of a command line is required, but'/&
     ' the second field is optional.  For example, to view'/&
     ' the main classification categories, just type ''l''.'/&
-    ' Other commands are:'//&
-    ' x,abc  to extract the documentation by name, where'/&
+    ' Other commands are: x,abc  to extract the documentation by name, where'/&
     '  ''abc'' is a routine name'/&
     ' k,...  to find routine names by keyword(s), where'/&
     '  ''...'' is a keyword or keyphrase'/&

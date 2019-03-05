@@ -390,8 +390,7 @@ SUBROUTINE DFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
     !
   ELSEIF ( Nbkpt<2*Nord ) THEN
     CALL XERMSG('SLATEC','FCMN',&
-      'IN FC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE '//&
-      'THE B-SPLINE ORDER.',2,1)
+      'IN FC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE B-SPLINE ORDER.',2,1)
     Mode = -1
     RETURN
   ENDIF

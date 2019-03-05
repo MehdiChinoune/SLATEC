@@ -118,8 +118,7 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
             IF ( lmx<1 ) THEN
               Ierr = -1
               CALL XERMSG('SLATEC','DBSGQ8',&
-                'A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL INTEGRATION. '&
-                //' ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
+                'A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL INTEGRATION.  ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
               IF ( Err<0.0D0 ) Err = ce
               RETURN
             ELSE

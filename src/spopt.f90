@@ -120,8 +120,7 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
         IF ( asmall<=zero.OR.abig<asmall ) THEN
           nerr = 17
           CALL XERMSG('SLATEC','SPOPT',&
-            'IN SPLP, SIZE PARAMETERS FOR MATRIX MUST BE SMALLEST AND '&
-            //'LARGEST MAGNITUDES OF NONZERO ENTRIES.',nerr,iopt)
+            'IN SPLP, SIZE PARAMETERS FOR MATRIX MUST BE SMALLEST AND LARGEST MAGNITUDES OF NONZERO ENTRIES.',nerr,iopt)
           Info = -nerr
           RETURN
         ENDIF
@@ -162,8 +161,7 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
       ELSE
         nerr = 18
         CALL XERMSG('SLATEC','SPOPT',&
-          'IN SPLP, THE NUMBER OF REVISED SIMPLEX STEPS BETWEEN '&
-          //'CHECK-POINTS MUST BE POSITIVE.',nerr,iopt)
+          'IN SPLP, THE NUMBER OF REVISED SIMPLEX STEPS BETWEEN CHECK-POINTS MUST BE POSITIVE.',nerr,iopt)
         Info = -nerr
         RETURN
       ENDIF
@@ -326,8 +324,7 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   ENDDO
   nerr = 19
   CALL XERMSG('SLATEC','SPOPT',&
-    'IN SPLP, FILE NUMBERS FOR SAVED DATA AND MATRIX PAGES '//&
-    'MUST BE POSITIVE AND NOT EQUAL.',nerr,iopt)
+    'IN SPLP, FILE NUMBERS FOR SAVED DATA AND MATRIX PAGES MUST BE POSITIVE AND NOT EQUAL.',nerr,iopt)
   Info = -nerr
   RETURN
 END SUBROUTINE SPOPT

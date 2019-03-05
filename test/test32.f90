@@ -1124,7 +1124,7 @@ CONTAINS
     !  LOOP OVER (A,B)-PAIRS.
     !
     IF ( Kprint>=3 ) WRITE (Lun,99004)
-    99004 FORMAT (//5X,'TEST RESULTS:'//'    A     B    ERR     TRUE',16X,'CALC',&
+    99004 FORMAT (//5X,'TEST RESULTS:    A     B    ERR     TRUE',16X,'CALC',&
       15X,'ERROR')
     !
     ifail = 0

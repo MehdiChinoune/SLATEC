@@ -291,15 +291,13 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
               !
               Iflag = 5
               CALL XERMSG('SLATEC','LSSODS',&
-                'PROBLEM IS VERY ILL-CONDITIONED.  ITERATIVE '//&
-                'IMPROVEMENT IS INEFFECTIVE.',8,1)
+                'PROBLEM IS VERY ILL-CONDITIONED.  ITERATIVE IMPROVEMENT IS INEFFECTIVE.',8,1)
               RETURN
             ELSE
               !
               Iflag = 4
               CALL XERMSG('SLATEC','LSSODS',&
-                'PROBLEM MAY BE ILL-CONDITIONED.  MAXIMAL MACHINE ACCURACY '&
-                //'IS NOT ACHIEVABLE.',3,1)
+                'PROBLEM MAY BE ILL-CONDITIONED.  MAXIMAL MACHINE ACCURACY IS NOT ACHIEVABLE.',3,1)
               RETURN
             ENDIF
           ENDIF
@@ -328,8 +326,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
     ! **********************************************************************
     Iflag = 6
     CALL XERMSG('SLATEC','LSSODS',&
-      'CONVERGENCE HAS NOT BEEN OBTAINED WITH ALLOWABLE '//&
-      'NUMBER OF ITERATIVE IMPROVEMENT STEPS.',8,1)
+      'CONVERGENCE HAS NOT BEEN OBTAINED WITH ALLOWABLE NUMBER OF ITERATIVE IMPROVEMENT STEPS.',8,1)
     RETURN
   ENDIF
   !

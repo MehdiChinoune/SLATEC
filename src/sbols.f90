@@ -671,8 +671,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
               WRITE (xern1,'(I8)') j
               WRITE (xern3,'(1PE15.6)') Rw(j)
               CALL XERMSG('SLATEC','SBOLS',&
-                'EACH PROVIDED COLUMN SCALE FACTOR '//&
-                'MUST BE POSITIVE.$$COMPONENT '//xern1//&
+                'EACH PROVIDED COLUMN SCALE FACTOR MUST BE POSITIVE.$$COMPONENT '//xern1//&
                 ' NOW = '//xern3,9,1)
               !     DO(RETURN TO USER PROGRAM UNIT)
               GOTO 100

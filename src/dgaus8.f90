@@ -128,8 +128,7 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
             IF ( lmx<1 ) THEN
               Ierr = -1
               CALL XERMSG('SLATEC','DGAUS8',&
-                'A and B are too nearly equal to allow normal integration. $$'&
-                //'ANS is set to zero and IERR to -1.',1,-1)
+                'A and B are too nearly equal to allow normal integration. $$ANS is set to zero and IERR to -1.',1,-1)
               IF ( Err<0.0D0 ) Err = ce
               RETURN
             ELSE

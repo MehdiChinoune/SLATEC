@@ -1561,16 +1561,14 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !
   IF ( Mrelas<=0 ) THEN
     WRITE (xern1,'(I8)') Mrelas
-    CALL XERMSG('SLATEC','DSPLP','VALUE OF MRELAS MUST BE '//&
-      '.GT. 0.  NOW = '//xern1,5,1)
+    CALL XERMSG('SLATEC','DSPLP','VALUE OF MRELAS MUST BE .GT. 0.  NOW = '//xern1,5,1)
     Info = -5
     RETURN
   ENDIF
   !
   IF ( Nvars<=0 ) THEN
     WRITE (xern1,'(I8)') Nvars
-    CALL XERMSG('SLATEC','DSPLP','VALUE OF NVARS MUST BE '//&
-      '.GT. 0.  NOW = '//xern1,6,1)
+    CALL XERMSG('SLATEC','DSPLP','VALUE OF NVARS MUST BE .GT. 0.  NOW = '//xern1,6,1)
     Info = -6
     RETURN
   ENDIF
@@ -1600,7 +1598,7 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       !
       IF ( lmx<Nvars+7 ) THEN
         WRITE (xern1,'(I8)') lmx
-        CALL XERMSG('SLATEC','DSPLP','USER-DEFINED VALUE OF '//'LAMAT = '//&
+        CALL XERMSG('SLATEC','DSPLP','USER-DEFINED VALUE OF LAMAT = '//&
           xern1//' MUST BE .GE. NVARS+7.',20,1)
         Info = -20
         RETURN
@@ -1637,8 +1635,7 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       IF ( Lw<lwork.OR.Liw<liwork ) THEN
         WRITE (xern1,'(I8)') lwork
         WRITE (xern2,'(I8)') liwork
-        CALL XERMSG('SLATEC','DSPLP','WORK OR IWORK IS NOT LONG '//&
-          'ENOUGH. LW MUST BE = '//xern1//' AND LIW MUST BE = '//&
+        CALL XERMSG('SLATEC','DSPLP','WORK OR IWORK IS NOT LONG ENOUGH. LW MUST BE = '//xern1//' AND LIW MUST BE = '//&
           xern2,4,1)
         Info = -4
         RETURN

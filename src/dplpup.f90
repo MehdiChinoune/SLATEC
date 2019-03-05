@@ -122,8 +122,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
     itcnt = itcnt + 1
     IF ( itcnt>itmax ) THEN
       CALL XERMSG('SLATEC','DPLPUP',&
-        'IN DSPLP, MORE THAN 2*NVARS*MRELAS ITERATIONS DEFINING '&
-        //'OR UPDATING MATRIX DATA.',7,1)
+        'IN DSPLP, MORE THAN 2*NVARS*MRELAS ITERATIONS DEFINING OR UPDATING MATRIX DATA.',7,1)
       Info = -7
       RETURN
     ENDIF
@@ -203,8 +202,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
   IF ( Sizeup.AND..NOT.first ) THEN
     IF ( amn<Asmall.OR.amx>Abig ) THEN
       CALL XERMSG('SLATEC','DPLPUP',&
-        'IN DSPLP, A MATRIX ELEMENT''S SIZE IS OUT OF THE '//&
-        'SPECIFIED RANGE.',22,1)
+        'IN DSPLP, A MATRIX ELEMENT''S SIZE IS OUT OF THE SPECIFIED RANGE.',22,1)
       Info = -22
       RETURN
     ENDIF

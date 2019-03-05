@@ -84,8 +84,7 @@ REAL(8) FUNCTION DCOT(X)
   IF ( ifn==1 ) y = 1.0D0 - y
   !
   IF ( ABS(X)>0.5D0.AND.y<ABS(X)*sqeps ) CALL XERMSG('SLATEC','DCOT',&
-    'ANSWER LT HALF PRECISION, ABS(X) TOO BIG OR X NEAR N*PI '//&
-    '(N.NE.0)',1,1)
+    'ANSWER LT HALF PRECISION, ABS(X) TOO BIG OR X NEAR N*PI (N.NE.0)',1,1)
   !
   IF ( y<=0.25D0 ) THEN
     DCOT = 1.0D0/X

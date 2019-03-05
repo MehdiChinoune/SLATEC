@@ -391,8 +391,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ELSEIF ( (.NOT.feas).AND.unbnd ) THEN
     nerr = 3
     CALL XERMSG('SLATEC','SPLPMN',&
-      'IN SPLP, THE PROBLEM APPEARS TO BE INFEASIBLE AND TO HAVE '&
-      //'NO FINITE SOLUTION.',nerr,iopt)
+      'IN SPLP, THE PROBLEM APPEARS TO BE INFEASIBLE AND TO HAVE NO FINITE SOLUTION.',nerr,iopt)
     Info = -nerr
   ENDIF
   !

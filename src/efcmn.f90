@@ -57,8 +57,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   IF ( Nbkpt<2*Nord ) THEN
     CALL XERMSG('SLATEC','EFCMN',&
-      'IN EFC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE '//&
-      'THE B-SPLINE ORDER.',4,1)
+      'IN EFC, THE NUMBER OF KNOTS MUST BE AT LEAST TWICE THE B-SPLINE ORDER.',4,1)
     RETURN
   ENDIF
   !
@@ -75,8 +74,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     WRITE (xern1,'(I8)') nb
     WRITE (xern2,'(I8)') Lw
     CALL XERMSG('SLATEC','EFCMN',&
-      'IN EFC, INSUFFICIENT STORAGE FOR W(*).  CHECK FORMULA '//&
-      'THAT READS LW.GE. ... .  NEED = '//xern1//' GIVEN = '//&
+      'IN EFC, INSUFFICIENT STORAGE FOR W(*).  CHECK FORMULA THAT READS LW.GE. ... .  NEED = '//xern1//' GIVEN = '//&
       xern2,6,1)
     Mdeout = -1
     RETURN

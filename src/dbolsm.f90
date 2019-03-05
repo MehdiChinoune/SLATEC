@@ -670,9 +670,8 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         tolsze = X(Ncols+ioff)
         IF ( tolsze<=ZERO ) THEN
           WRITE (xern3,'(1PD15.6)') tolsze
-          CALL XERMSG('SLATEC','DBOLSM','THE RECIPROCAL '//&
-            'OF THE BLOW-UP FACTOR FOR REJECTING VARIABLES '//&
-            'MUST BE POSITIVE.$$NOW = '//xern3,27,1)
+          CALL XERMSG('SLATEC','DBOLSM','THE RECIPROCAL OF THE BLOW-UP FACTOR&
+            & FOR REJECTING VARIABLES MUST BE POSITIVE.$$NOW = '//xern3,27,1)
           Mode = -27
           RETURN
         ENDIF
@@ -714,9 +713,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         IF ( fac<ZERO ) THEN
           WRITE (xern3,'(1PD15.6)') fac
           CALL XERMSG('SLATEC','DBOLSM',&
-            'THE FACTOR (NCOLS/MINPUT) WHERE PRE-'//&
-            'TRIANGULARIZING IS PERFORMED MUST BE NON-'//&
-            'NEGATIVE.$$NOW = '//xern3,30,0)
+            'THE FACTOR (NCOLS/MINPUT) WHERE PRE-TRIANGULARIZING IS PERFORMED MUST BE NON-NEGATIVE.$$NOW = '//xern3,30,0)
           Mode = -30
           RETURN
         ENDIF

@@ -812,8 +812,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
               WRITE (xern1,'(I8)') j
               WRITE (xern3,'(1PE15.6)') Rw(j)
               CALL XERMSG('SLATEC','DBOCLS',&
-                'EACH PROVIDED COLUMN SCALE FACTOR MUST BE '//&
-                'POSITIVE.$$COMPONENT '//xern1//' NOW = '//xern3,&
+                'EACH PROVIDED COLUMN SCALE FACTOR MUST BE POSITIVE.$$COMPONENT '//xern1//' NOW = '//xern3,&
                 50,1)
               !     DO(RETURN TO USER PROGRAM UNIT)
               GOTO 100

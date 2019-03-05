@@ -364,8 +364,7 @@ SUBROUTINE SDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     WRITE (intgr1,'(I8)') Mint
     Ierflg = 23
     CALL XERMSG('SLATEC','SDRIV2',&
-      'Illegal input.  Improper value for the integration method '&
-      //'flag, '//intgr1//' .',Ierflg,1)
+      'Illegal input.  Improper value for the integration method flag, '//intgr1//' .',Ierflg,1)
     Mstate = SIGN(9,Mstate)
     RETURN
   ENDIF

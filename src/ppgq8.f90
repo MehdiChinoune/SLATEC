@@ -116,8 +116,7 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
             IF ( lmx<1 ) THEN
               Ierr = -1
               CALL XERMSG('SLATEC','PPGQ8',&
-                'A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL INTEGRATION. '&
-                //'ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
+                'A AND B ARE TOO NEARLY EQUAL TO ALLOW NORMAL INTEGRATION. ANS IS SET TO ZERO AND IERR TO -1.',1,-1)
               IF ( Err<0.0E0 ) Err = be
               RETURN
             ELSE

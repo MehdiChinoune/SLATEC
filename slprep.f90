@@ -315,8 +315,7 @@ PROGRAM SLPREP
         ENDIF
         numr = numr + 1
         IF ( numr>MXNRN ) THEN
-          msg = 'Too many routine names.  Recompile code with '//&
-            'larger MXNRN.'
+          msg = 'Too many routine names.  Recompile code with larger MXNRN.'
           nerr = 2
           EXIT
         ENDIF
@@ -375,8 +374,7 @@ PROGRAM SLPREP
           ENDIF
           ncat = ncat + 1
           IF ( ncat>15 ) THEN
-            msg = 'Too many categories in a routine.  Recompile code '//&
-              'with larger MXNCAT.'
+            msg = 'Too many categories in a routine.  Recompile code with larger MXNCAT.'
             nerr = 3
             GOTO 800
           ENDIF
@@ -401,8 +399,7 @@ PROGRAM SLPREP
             !
             ntcat = ntcat + 1
             IF ( ntcat>MXNCAT ) THEN
-              msg = 'Too many categories in the library.  Recompile '//&
-                'code with larger MXNCAT.'
+              msg = 'Too many categories in the library.  Recompile code with larger MXNCAT.'
               nerr = 3
               GOTO 800
             ENDIF
@@ -483,8 +480,7 @@ PROGRAM SLPREP
           ENDIF
           nkwd = nkwd + 1
           IF ( nkwd>KMAXJ ) THEN
-            msg = 'Too many keyword phrases in a routine.  Recompile '//&
-              'code with larger KMAXJ.'
+            msg = 'Too many keyword phrases in a routine.  Recompile code with larger KMAXJ.'
             nerr = 4
             GOTO 800
           ENDIF
@@ -562,8 +558,7 @@ PROGRAM SLPREP
               IF ( ifind<=0 ) THEN
                 ntkwd = ntkwd + 1
                 IF ( ntkwd>MXNKWD ) THEN
-                  msg = 'Too many keyword phrases.  Recompile code '//&
-                    'with larger MXNKWD.'
+                  msg = 'Too many keyword phrases.  Recompile code with larger MXNKWD.'
                   nerr = 2
                   GOTO 800
                 ENDIF
@@ -747,7 +742,7 @@ PROGRAM SLPREP
   99004 FORMAT (I15)
   99005 FORMAT (1X,2A,4I8)
   99006 FORMAT (' Processing routine ',A,',  number ',I4)
-  99007 FORMAT (//' S U M M A R Y'//' There were ',I4,&
+  99007 FORMAT (//' S U M M A R Y There were ',I4,&
     ' documentation modules and a total ','of ',I6,&
     ' lines read '/' from the sequential input file and a total of ',&
     I6,' lines written '/' to the direct access documentation file.'/&
@@ -766,7 +761,7 @@ PROGRAM SLPREP
     ' classification categories written ',&
     'to the classification file'/' and a total of ',I3,&
     ' classification descriptors ','written to the file.'//)
-  99009 FORMAT (//' J O B   A B O R T'//' The job aborted in routine ',A,&
+  99009 FORMAT (//' J O B   A B O R T The job aborted in routine ',A,&
     ' after processing ','approximately ',I6,&
     ' lines'/' of the input file.'/&
     ' The last line read from the input file was '/1X,A//)

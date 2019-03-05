@@ -338,8 +338,7 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
     WRITE (intgr1,'(I8)') lnwchk
     Ierflg = 32
     CALL XERMSG('SLATEC','CDRIV1',&
-      'Insufficient storage allocated for the work array.  '//&
-      'The required storage is at least '//intgr1//' .',Ierflg,1)
+      'Insufficient storage allocated for the work array.  The required storage is at least '//intgr1//' .',Ierflg,1)
     Mstate = SIGN(7,Mstate)
     RETURN
   ENDIF

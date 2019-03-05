@@ -63,8 +63,7 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   vend = ABS(Xnu+Nin) - 1.0D0
   IF ( (vend-.5D0)*LOG(vend)+0.27D0-vend*(LOG(X)-.694D0)>alnbig )&
     CALL XERMSG('SLATEC','DBSKES',&
-    'X SO SMALL OR ABS(NU) SO BIG THAT BESSEL K-SUB-NU '//&
-    'OVERFLOWS',5,2)
+    'X SO SMALL OR ABS(NU) SO BIG THAT BESSEL K-SUB-NU OVERFLOWS',5,2)
   !
   v = Xnu
   DO i = 3, n

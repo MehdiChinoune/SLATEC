@@ -83,8 +83,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     IF ( Ircx>Ix(3).OR.ABS(I)>Ix(2) ) THEN
       nerr = 55
       CALL XERMSG('SLATEC','PNNZRS',&
-        'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF '&
-        //'BOUNDS.',nerr,iopt)
+        'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.',nerr,iopt)
     ENDIF
     l = Ix(2)
   ELSE
@@ -95,8 +94,7 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
     IF ( Ix(2)<-Ircx.OR.Ix(3)<ABS(I) ) THEN
       nerr = 55
       CALL XERMSG('SLATEC','PNNZRS',&
-        'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF '&
-        //'BOUNDS.',nerr,iopt)
+        'SUBSCRIPTS FOR ARRAY ELEMENT TO BE ACCESSED WERE OUT OF BOUNDS.',nerr,iopt)
     ENDIF
     l = Ix(3)
   ENDIF

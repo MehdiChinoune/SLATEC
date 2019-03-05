@@ -1095,8 +1095,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     WRITE (xern1,'(I8)') Idid
     CALL XERMSG('SLATEC','SDASSL',&
       'THE LAST STEP TERMINATED WITH A NEGATIVE VALUE OF IDID = '&
-      //xern1//' AND NO APPROPRIATE ACTION WAS TAKEN.  '//&
-      'RUN TERMINATED',-998,2)
+      //xern1//' AND NO APPROPRIATE ACTION WAS TAKEN.  RUN TERMINATED',-998,2)
     RETURN
   ENDIF
   !
@@ -1391,15 +1390,13 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !     TOO MUCH ACCURACY FOR MACHINE PRECISION
         WRITE (xern3,'(1P,E15.6)') tn
         CALL XERMSG('SLATEC','SDASSL','AT T = '//xern3//&
-          ' TOO MUCH ACCURACY REQUESTED FOR '//&
-          'PRECISION OF MACHINE. RTOL AND ATOL WERE INCREASED TO '//&
-          'APPROPRIATE VALUES',Idid,1)
+          ' TOO MUCH ACCURACY REQUESTED FOR PRECISION OF MACHINE. RTOL AND ATOL WERE INCREASED TO APPROPRIATE VALUES',Idid,1)
       CASE (3)
         !
         !     WT(I) .LE. 0.0 FOR SOME I (NOT AT START OF PROBLEM)
         WRITE (xern3,'(1P,E15.6)') tn
         CALL XERMSG('SLATEC','SDASSL','AT T = '//xern3//&
-          ' SOME ELEMENT OF WT HAS BECOME .LE. '//'0.0',Idid,1)
+          ' SOME ELEMENT OF WT HAS BECOME .LE. 0.0',Idid,1)
       CASE (4,5)
       CASE (6)
         !
@@ -1417,8 +1414,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         WRITE (xern4,'(1P,E15.6)') h
         CALL XERMSG('SLATEC','SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
           xern4//&
-          ' THE CORRECTOR FAILED TO CONVERGE REPEATEDLY OR WITH '//&
-          'ABS(H)=HMIN',Idid,1)
+          ' THE CORRECTOR FAILED TO CONVERGE REPEATEDLY OR WITH ABS(H)=HMIN',Idid,1)
       CASE (8)
         !
         !     THE ITERATION MATRIX IS SINGULAR
@@ -1433,8 +1429,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         WRITE (xern4,'(1P,E15.6)') h
         CALL XERMSG('SLATEC','SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
           xern4//&
-          ' THE CORRECTOR COULD NOT CONVERGE.  ALSO, THE ERROR TEST '&
-          //'FAILED REPEATEDLY.',Idid,1)
+          ' THE CORRECTOR COULD NOT CONVERGE.  ALSO, THE ERROR TEST FAILED REPEATEDLY.',Idid,1)
       CASE (10)
         !
         !     CORRECTOR FAILURE BECAUSE IRES = -1
@@ -1442,8 +1437,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         WRITE (xern4,'(1P,E15.6)') h
         CALL XERMSG('SLATEC','SDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
           xern4//&
-          ' THE CORRECTOR COULD NOT CONVERGE BECAUSE IRES WAS EQUAL '&
-          //'TO MINUS ONE',Idid,1)
+          ' THE CORRECTOR COULD NOT CONVERGE BECAUSE IRES WAS EQUAL TO MINUS ONE',Idid,1)
       CASE (11)
         !
         !     FAILURE BECAUSE IRES = -2
@@ -1464,7 +1458,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !     REACHING TOUT
         WRITE (xern3,'(1P,E15.6)') tn
         CALL XERMSG('SLATEC','SDASSL','AT CURRENT T = '//xern3//&
-          ' 500 STEPS TAKEN ON THIS '//'CALL BEFORE REACHING TOUT',&
+          ' 500 STEPS TAKEN ON THIS CALL BEFORE REACHING TOUT',&
           Idid,1)
     END SELECT
     !
@@ -1580,8 +1574,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !
   1200 Idid = -33
   IF ( Info(1)==-1 ) CALL XERMSG('SLATEC','SDASSL',&
-    'REPEATED OCCURRENCES OF ILLEGAL INPUT$$'//&
-    'RUN TERMINATED. APPARENT INFINITE LOOP',&
+    'REPEATED OCCURRENCES OF ILLEGAL INPUT$$RUN TERMINATED. APPARENT INFINITE LOOP',&
     -999,2)
   !
   Info(1) = -1

@@ -49,7 +49,7 @@ CONTAINS
     tol = 1000.0D0*MAX(D1MACH(4),1.0D-18)
     iflg = 0
     IF ( Kprint>=3 ) WRITE (Lun,99001)
-    99001 FORMAT ('1'//' QUICK CHECK DIAGNOSTICS FOR DBSKIN'//)
+    99001 FORMAT ('1 QUICK CHECK DIAGNOSTICS FOR DBSKIN'//)
     DO kode = 1, 2
       n = 0
       DO nn = 1, 7
@@ -170,7 +170,7 @@ CONTAINS
     r1m4 = D1MACH(4)
     tol = 1000.0D0*MAX(r1m4,1.0D-18)
     IF ( Kprint>=3 ) WRITE (Lun,99001)
-    99001 FORMAT ('1'//' QUICK CHECK DIAGNOSTICS FOR DPSIFN'//)
+    99001 FORMAT ('1 QUICK CHECK DIAGNOSTICS FOR DPSIFN'//)
     !-----------------------------------------------------------------------
     !     CHECK PSI(I) AND PSI(I-0.5), I=1,2,...
     !-----------------------------------------------------------------------

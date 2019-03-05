@@ -788,8 +788,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     WRITE (intgr1,'(I8)') Mint
     Ierflg = 23
     CALL XERMSG('SLATEC','SDRIV3',&
-      'Illegal input.  Improper value for the integration method '&
-      //'flag, '//intgr1//' .',Ierflg,1)
+      'Illegal input.  Improper value for the integration method flag, '//intgr1//' .',Ierflg,1)
     Nstate = 12
     RETURN
   ELSEIF ( Miter<0.OR.Miter>5 ) THEN
@@ -843,10 +842,9 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   IF ( Leniw<liwchk ) THEN
     WRITE (intgr1,'(I8)') liwchk
     Ierflg = 33
-    CALL XERMSG('SLATEC','SDRIV3',&
-      'Illegal input.  Insufficient storage allocated for the '//&
-      'IWORK array.  Based on the value of the input parameters '&
-      //'involved, the required storage is '//intgr1//' .',Ierflg,&
+    CALL XERMSG('SLATEC','SDRIV3','Illegal input.  Insufficient storage allocated&
+      & for the IWORK array.  Based on the value of the input parameters involved,&
+      & the required storage is '//intgr1//' .',Ierflg,&
       1)
     Nstate = 12
     RETURN
@@ -901,10 +899,9 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   IF ( Lenw<lenchk ) THEN
     WRITE (intgr1,'(I8)') lenchk
     Ierflg = 32
-    CALL XERMSG('SLATEC','SDRIV3',&
-      'Illegal input.  Insufficient storage allocated for the '//&
-      'WORK array.  Based on the value of the input parameters '//&
-      'involved, the required storage is '//intgr1//' .',Ierflg,1)
+    CALL XERMSG('SLATEC','SDRIV3','Illegal input.  Insufficient storage&
+      & allocated for the WORK array.  Based on the value of the input&
+      & parameters involved, the required storage is '//intgr1//' .',Ierflg,1)
     Nstate = 12
     RETURN
   ENDIF
@@ -1088,8 +1085,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         Ierflg = 11
         CALL XERMSG('SLATEC','SDRIV3',&
           'While integrating exactly to TOUT, T, '//rl1//&
-          ', was beyond TOUT, '//rl2//' .  Solution obtained by '&
-          //'interpolation.',Ierflg,0)
+          ', was beyond TOUT, '//rl2//' .  Solution obtained by interpolation.',Ierflg,0)
         Nstate = 11
         CALL SDNTP(h,0,N,Iwork(INQ),T,Tout,Work(IYH),Y)
         T = Tout
@@ -1128,8 +1124,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
         Ierflg = 11
         CALL XERMSG('SLATEC','SDRIV3',&
           'While integrating exactly to TOUT, T, '//rl1//&
-          ', was beyond TOUT, '//rl2//' .  Solution obtained by '&
-          //'interpolation.',Ierflg,0)
+          ', was beyond TOUT, '//rl2//' .  Solution obtained by interpolation.',Ierflg,0)
         Nstate = 11
         CALL SDNTP(h,0,N,Iwork(INQ),T,Tout,Work(IYH),Y)
         T = Tout
@@ -1295,10 +1290,9 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     WRITE (rl1,'(E16.8)') T
     WRITE (rl2,'(E16.8)') Eps
     Ierflg = 4
-    CALL XERMSG('SLATEC','SDRIV3',&
-      'At T, '//rl1//', the requested accuracy, EPS, was not '//&
-      'obtainable with the machine precision.  EPS has been '//&
-      'increased to '//rl2//' .',Ierflg,0)
+    CALL XERMSG('SLATEC','SDRIV3','At T, '//rl1//', the requested accuracy,&
+      & EPS, was not obtainable with the machine precision.&
+      & EPS has been increased to '//rl2//' .',Ierflg,0)
     Nstate = 4
     GOTO 400
   ENDIF
@@ -1309,10 +1303,8 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     WRITE (rl2,'(E16.8)') h
     Ierflg = 15
     CALL XERMSG('SLATEC','SDRIV3','At T, '//rl1//', the step size, '//rl2//&
-      ', is smaller '//&
-      'than the roundoff level of T.  This may occur if there is '&
-      //'an abrupt change in the right hand side of the '//&
-      'differential equations.',Ierflg,0)
+      ', is smaller than the roundoff level of T. This may occur if there is&
+      & an abrupt change in the right hand side of the differential equations.',Ierflg,0)
     Iwork(INDPRT) = 1
   ENDIF
   IF ( Ntask/=2 ) THEN
@@ -1322,7 +1314,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       WRITE (rl2,'(E16.8)') Tout
       Ierflg = 3
       CALL XERMSG('SLATEC','SDRIV3','At T, '//rl1//', '//intgr1//&
-        ' steps have been taken '//'without reaching TOUT, '//&
+        ' steps have been taken without reaching TOUT, '//&
         rl2//' .',Ierflg,0)
       Nstate = 3
       GOTO 400
@@ -1363,8 +1355,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       CALL XERMSG('SLATEC','SDRIV3',&
         'At T, '//rl1//', the step size has been reduced about 50 '&
         //&
-        'times without advancing the solution.  Often this occurs '&
-        //'if the problem setup is incorrect.',Ierflg,1)
+        'times without advancing the solution.  Often this occurs if the problem setup is incorrect.',Ierflg,1)
       Nstate = 12
       RETURN
     CASE (4,5)
@@ -1503,8 +1494,7 @@ SUBROUTINE SDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   600  WRITE (rl1,'(E16.8)') T
   Ierflg = 41
   CALL XERMSG('SLATEC','SDRIV3',&
-    'At T, '//rl1//', the attempted step size has gone to '//&
-    'zero.  Often this occurs if the problem setup is incorrect.',&
+    'At T, '//rl1//', the attempted step size has gone to zero.  Often this occurs if the problem setup is incorrect.',&
     Ierflg,1)
   Nstate = 12
   RETURN

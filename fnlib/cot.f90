@@ -79,8 +79,7 @@ FUNCTION COT(X)
   IF ( ifn==1 ) y = 1.0 - y
   !
   IF ( ABS(X)>0.5.AND.y<ABS(X)*sqeps ) CALL XERMSG('SLATEC','COT',&
-    'ANSWER LT HALF PRECISION, ABS(X) TOO BIG OR X NEAR N*PI '//&
-    '(N.NE.0)',1,1)
+    'ANSWER LT HALF PRECISION, ABS(X) TOO BIG OR X NEAR N*PI (N.NE.0)',1,1)
   !
   IF ( y<=0.25 ) THEN
     COT = 1.0/X

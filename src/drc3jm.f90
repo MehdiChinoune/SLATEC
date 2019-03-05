@@ -154,13 +154,11 @@ SUBROUTINE DRC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !  Check error conditions 1, 2, and 3.
   IF ( (L1-ABS(M1)+eps<zero).OR.(MOD(L1+ABS(M1)+eps,one)>=eps+eps) ) THEN
     Ier = 1
-    CALL XERMSG('SLATEC','DRC3JM','L1-ABS(M1) less than zero or '//&
-      'L1+ABS(M1) not integer.',Ier,1)
+    CALL XERMSG('SLATEC','DRC3JM','L1-ABS(M1) less than zero or L1+ABS(M1) not integer.',Ier,1)
     RETURN
   ELSEIF ( (L1+L2-L3<-eps).OR.(L1-L2+L3<-eps).OR.(-L1+L2+L3<-eps) ) THEN
     Ier = 2
-    CALL XERMSG('SLATEC','DRC3JM','L1, L2, L3 do not satisfy '//&
-      'triangular condition.',Ier,1)
+    CALL XERMSG('SLATEC','DRC3JM','L1, L2, L3 do not satisfy triangular condition.',Ier,1)
     RETURN
   ELSEIF ( MOD(L1+L2+L3+eps,one)>=eps+eps ) THEN
     Ier = 3
@@ -188,8 +186,7 @@ SUBROUTINE DRC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
       !
       !  Check error condition 6.
       Ier = 6
-      CALL XERMSG('SLATEC','DRC3JM','Dimension of result array for '//&
-        '3j coefficients too small.',Ier,1)
+      CALL XERMSG('SLATEC','DRC3JM','Dimension of result array for 3j coefficients too small.',Ier,1)
       RETURN
     ELSE
       !

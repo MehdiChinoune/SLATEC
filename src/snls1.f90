@@ -794,7 +794,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
           IF ( err<chklim ) THEN
             WRITE (xern1,'(I8)') i
             WRITE (xern3,'(1PE15.6)') err
-            CALL XERMSG('SLATEC','SNLS1','DERIVATIVE OF '//'FUNCTION '//&
+            CALL XERMSG('SLATEC','SNLS1','DERIVATIVE OF FUNCTION '//&
               xern1//' MAY BE WRONG, ERR = '//xern3//&
               ' TOO CLOSE TO 0.',7,0)
           ENDIF

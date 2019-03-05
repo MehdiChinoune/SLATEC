@@ -103,8 +103,7 @@ SUBROUTINE DPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !
   IF ( Gg>=zero ) RETURN
   IF ( Gg==(-7.) ) THEN
-    CALL XERMSG('SLATEC','DPLPDM','IN DSPLP, SHORT ON STORAGE FOR LA05AD.  '&
-      //'USE PRGOPT(*) TO GIVE MORE.',28,Iopt)
+    CALL XERMSG('SLATEC','DPLPDM','IN DSPLP, SHORT ON STORAGE FOR LA05AD.  USE PRGOPT(*) TO GIVE MORE.',28,Iopt)
     Info = -28
   ELSEIF ( Gg==(-5.) ) THEN
     Singlr = .TRUE.

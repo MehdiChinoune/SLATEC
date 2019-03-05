@@ -282,7 +282,6 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   GOTO 100
   400  Ierr = -1
   CALL XERMSG('SLATEC','DQNC79',&
-    'A and B are too nearly equal to allow normal integration. $$'&
-    //'ANS is set to zero and IERR to -1.',-1,-1)
+    'A and B are too nearly equal to allow normal integration. $$ANS is set to zero and IERR to -1.',-1,-1)
   RETURN
 END SUBROUTINE DQNC79

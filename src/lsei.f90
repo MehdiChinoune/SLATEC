@@ -416,8 +416,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     WRITE (xern2,'(I8)') Me
     WRITE (xern3,'(I8)') Ma
     WRITE (xern4,'(I8)') Mg
-    CALL XERMSG('SLATEC','LSEI','ALL OF THE VARIABLES N, ME,'//&
-      ' MA, MG MUST BE .GE. 0$$ENTERED ROUTINE WITH'//'$$N  = '//&
+    CALL XERMSG('SLATEC','LSEI','ALL OF THE VARIABLES N, ME, MA, MG MUST BE .GE. 0$$ENTERED ROUTINE WITH$$N  = '//&
       xern1//'$$ME = '//xern2//'$$MA = '//xern3//'$$MG = '//xern4,&
       2,1)
     RETURN
@@ -427,8 +426,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     lchk = 2*(Me+N) + MAX(Ma+Mg,N) + (Mg+2)*(N+7)
     IF ( Ip(1)<lchk ) THEN
       WRITE (xern1,'(I8)') lchk
-      CALL XERMSG('SLATEC','LSEI','INSUFFICIENT STORAGE '//&
-        'ALLOCATED FOR WS(*), NEED LW = '//xern1,2,1)
+      CALL XERMSG('SLATEC','LSEI','INSUFFICIENT STORAGE ALLOCATED FOR WS(*), NEED LW = '//xern1,2,1)
       RETURN
     ENDIF
   ENDIF
@@ -437,8 +435,7 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     lchk = Mg + 2*N + 2
     IF ( Ip(2)<lchk ) THEN
       WRITE (xern1,'(I8)') lchk
-      CALL XERMSG('SLATEC','LSEI','INSUFFICIENT STORAGE '//&
-        'ALLOCATED FOR IP(*), NEED LIP = '//xern1,2,1)
+      CALL XERMSG('SLATEC','LSEI','INSUFFICIENT STORAGE ALLOCATED FOR IP(*), NEED LIP = '//xern1,2,1)
       RETURN
     ENDIF
   ENDIF

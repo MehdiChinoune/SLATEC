@@ -389,8 +389,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ELSEIF ( (.NOT.feas).AND.unbnd ) THEN
     nerr = 3
     CALL XERMSG('SLATEC','DPLPMN',&
-      'IN DSPLP, THE PROBLEM APPEARS TO BE INFEASIBLE AND TO '//&
-      'HAVE NO FINITE SOLN.',nerr,iopt)
+      'IN DSPLP, THE PROBLEM APPEARS TO BE INFEASIBLE AND TO HAVE NO FINITE SOLN.',nerr,iopt)
     Info = -nerr
   ENDIF
   !

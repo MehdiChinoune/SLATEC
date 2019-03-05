@@ -161,7 +161,7 @@ CONTAINS
           l1 = index+ l1min - 1
           WRITE (Lun,fmt) l1, thrcof(index), r3jj(index)
           IF ( diff(index)>ABS(r3jj(index))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
-            'DIFFERENCE EXCEEDS ERROR '//'TOLERANCE FOR L1 =', l1
+            'DIFFERENCE EXCEEDS ERROR TOLERANCE FOR L1 =', l1
         ENDDO
       ENDIF
     ENDIF
@@ -211,7 +211,7 @@ CONTAINS
           m2 = index+ m2min - 1
           WRITE (Lun,fmt) m2, thrcof(index), r3jm(index)
           IF ( diff(index)>ABS(r3jm(index))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
-            'DIFFERENCE EXCEEDS ERROR '//'TOLERANCE FOR M2 =', m2
+            'DIFFERENCE EXCEEDS ERROR TOLERANCE FOR M2 =', m2
         ENDDO
       ENDIF
     ENDIF
@@ -304,7 +304,7 @@ CONTAINS
           l1 = index+ l1min - 1
           WRITE (Lun,fmt) l1, sixcof(index), r6j(index)
           IF ( diff(index)>ABS(r6j(index))*tol ) WRITE (Lun,'(1X,A,F5.1)')&
-            'DIFFERENCE EXCEEDS ERROR '//'TOLERANCE FOR L1 =', l1
+            'DIFFERENCE EXCEEDS ERROR TOLERANCE FOR L1 =', l1
         ENDDO
       ENDIF
     ENDIF

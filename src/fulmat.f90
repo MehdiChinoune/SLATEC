@@ -64,8 +64,7 @@ SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
         nerr = 29
         level = 1
         CALL XERMSG('SLATEC','FULMAT',&
-          'IN SPLP PACKAGE, ROW DIM., MRELAS, NVARS ARE MISSING FROM '&
-          //'PRGOPT.',nerr,level)
+          'IN SPLP PACKAGE, ROW DIM., MRELAS, NVARS ARE MISSING FROM PRGOPT.',nerr,level)
         Iflag(1) = 3
         EXIT
       ENDIF

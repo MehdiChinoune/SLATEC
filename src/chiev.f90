@@ -116,12 +116,10 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
       !
       mdim = MIN(mdim,2*Ldv)
       IF ( Lda<Ldv ) CALL XERMSG('SLATEC','CHIEV',&
-        'LDA.LT.LDV,  ELEMENTS OF V OTHER THAN THE N BY N OUTPUT '&
-        //'ELEMENTS HAVE BEEN CHANGED.',5,0)
+        'LDA.LT.LDV,  ELEMENTS OF V OTHER THAN THE N BY N OUTPUT ELEMENTS HAVE BEEN CHANGED.',5,0)
       IF ( Lda>Ldv ) THEN
         CALL XERMSG('SLATEC','CHIEV',&
-          'LDA.GT.LDV, ELEMENTS OF A OTHER THAN THE N BY N INPUT '&
-          //'ELEMENTS HAVE BEEN CHANGED.',4,0)
+          'LDA.GT.LDV, ELEMENTS OF A OTHER THAN THE N BY N INPUT ELEMENTS HAVE BEEN CHANGED.',4,0)
         l = N - 1
         DO j = 1, l
           m = 1 + j*2*Ldv
