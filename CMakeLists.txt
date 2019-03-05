@@ -37,6 +37,8 @@ file(GLOB srcs src/*.f90 fnlib/*.f90 pchip/*.f90 fishfft/*.f90 linear/*.f90 xerr
 
 add_library(slatec SHARED ${srcs})
 
+add_subdirectory(include)
+
 add_subdirectory(test)
 
 add_executable(spfuntest spfun.f90 spfunchk.f90)
@@ -53,3 +55,5 @@ target_link_libraries(slprep slatec)
 
 add_executable(sladoc sladoc.f90 subsid.f90)
 target_link_libraries(sladoc slatec)
+
+install(TARGETS slatec)
