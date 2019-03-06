@@ -41,6 +41,8 @@ add_subdirectory(include)
 
 add_subdirectory(test)
 
+add_subdirectory(doc)
+
 add_executable(spfuntest spfun.f90 spfunchk.f90)
 target_link_libraries(spfuntest slatec)
 if (UNIX)
@@ -49,11 +51,5 @@ elseif (WIN32)
   add_test(NAME spfuntest COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} $ENV{ComSpec} /c "spfuntest <${CMAKE_SOURCE_DIR}/test/kprint.txt")
 endif ()
 set_tests_properties(spfuntest PROPERTIES FAIL_REGULAR_EXPRESSION "[^a-z]Error;ERROR;Failed;FAILED")
-
-add_executable(slprep slprep.f90 subsid.f90)
-target_link_libraries(slprep slatec)
-
-add_executable(sladoc sladoc.f90 subsid.f90)
-target_link_libraries(sladoc slatec)
 
 install(TARGETS slatec LIBRARY DESTINATION lib RUNTIME DESTINATION bin)
