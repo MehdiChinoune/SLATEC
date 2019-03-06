@@ -1,0 +1,16 @@
+SUBROUTINE GET_ARGUMENT(Kprint)
+  IMPLICIT NONE
+  INTEGER, INTENT(OUT) :: Kprint
+  INTEGER :: narg
+  CHARACTER :: arg1
+
+  narg = COMMAND_ARGUMENT_COUNT()
+
+  IF(narg>0) THEN
+    CALL GET_COMMAND_ARGUMENT( 1, arg1 )
+    READ(arg1,'(I1)') Kprint
+  ELSE
+    Kprint = 0
+  END IF
+
+END SUBROUTINE GET_ARGUMENT

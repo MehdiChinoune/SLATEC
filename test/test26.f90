@@ -775,7 +775,7 @@ PROGRAM TEST26
   !
   !     Read KPRINT parameter
   !
-  READ (lin,'(I1)') kprint
+  CALL GET_ARGUMENT(kprint)
   CALL XSETUN(lun)
   IF ( kprint<=1 ) THEN
     CALL XSETF(0)

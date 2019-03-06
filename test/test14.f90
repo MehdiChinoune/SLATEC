@@ -457,7 +457,7 @@ PROGRAM TEST14
   !
   !     Read KPRINT parameter
   !
-  READ (lin,'(I1)') kprint
+  CALL GET_ARGUMENT(kprint)
   CALL XERMAX(1000)
   CALL XSETUN(lun)
   IF ( kprint<=1 ) THEN

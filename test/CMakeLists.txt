@@ -1,4 +1,4 @@
-FILE(GLOB tests test*.f90)
+FILE(GLOB tests RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} test*.f90)
 
 add_executable(test01 test01.f90)
 
@@ -108,14 +108,11 @@ add_executable(test53 test53.f90 pass.f90)
 
 add_executable(test54 test54.f90)
 
+add_library(get_argument OBJECT get_argument.f90)
+
 foreach( tst ${tests} )
-  STRING(REPLACE ".f90" "" exe1 ${tst})
-  STRING(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/" "" exe ${exe1})
-  target_link_libraries(${exe} slatec)
-  if(UNIX)
-    add_test(NAME ${exe} COMMAND sh -c "./${exe} < ${CMAKE_CURRENT_SOURCE_DIR}/kprint.txt" WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
-  elseif(WIN32)
-    add_test(NAME ${exe} COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} $ENV{ComSpec} /c "${exe} < ${CMAKE_CURRENT_SOURCE_DIR}/kprint.txt")
-  endif()
+  STRING(REPLACE ".f90" "" exe ${tst})
+  target_link_libraries(${exe} slatec get_argument)
+  add_test(NAME ${exe} COMMAND ./${exe} 1 WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
   set_tests_properties(${exe} PROPERTIES FAIL_REGULAR_EXPRESSION "[^a-z]Error;ERROR;Failed;FAILED")
 endforeach()
