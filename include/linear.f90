@@ -439,4 +439,5 @@ CONTAINS
   INCLUDE'../linear/tred3.f90'
   INCLUDE'../linear/tridib.f90'
   INCLUDE'../linear/tsturm.f90'
+  INCLUDE'../linear/xerbla.f90'
 END MODULE linear
