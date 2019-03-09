@@ -39,7 +39,8 @@ PROGRAM TESTI
   !   900709  DATE WRITTEN
   !***END PROLOGUE  TESTI
   !     .. Local Scalars ..
-  INTEGER ipass, kprint, lin, lun, nfail
+  INTEGER ipass, kprint, lin, lun, nfail, narg
+  CHARACTER :: arg1
   !     .. External Functions ..
   INTEGER I1MACH
   EXTERNAL I1MACH
@@ -52,7 +53,15 @@ PROGRAM TESTI
   !
   !     Read KPRINT parameter
   !
-  READ (UNIT=lin,FMT='(I1)') kprint
+  narg = COMMAND_ARGUMENT_COUNT()
+
+  IF(narg>0) THEN
+    CALL GET_COMMAND_ARGUMENT( 1, arg1 )
+    READ(arg1,'(I1)') Kprint
+  ELSE
+    Kprint = 0
+  END IF
+  
   CALL XSETUN(lun)
   CALL XERMAX(1000)
   IF ( kprint<=1 ) THEN
