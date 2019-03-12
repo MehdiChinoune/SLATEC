@@ -45,7 +45,7 @@ SUBROUTINE EZFFTI(N,Wsave)
   INTEGER :: ifac(15)
   !***FIRST EXECUTABLE STATEMENT  EZFFTI
   IF ( N==1 ) RETURN
-  ifac = Wsave(2*N+1:2*N+15)
+  ifac = INT( Wsave(2*N+1:2*N+15) )
   CALL EZFFT1(N,Wsave(2*N+1),ifac)
   Wsave(3*N+1:3*N+15) = ifac
 END SUBROUTINE EZFFTI

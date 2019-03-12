@@ -60,7 +60,7 @@ SUBROUTINE RFFTI(N,Wsave)
   INTEGER :: ifac(15)
   !***FIRST EXECUTABLE STATEMENT  RFFTI
   IF ( N==1 ) RETURN
-  ifac = Wsave(2*N+1:2*N+15)
+  ifac = INT( Wsave(2*N+1:2*N+15) )
   CALL RFFTI1(N,Wsave(N+1),ifac)
   Wsave(2*N+1:2*N+15) = ifac
 END SUBROUTINE RFFTI

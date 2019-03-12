@@ -88,7 +88,7 @@ SUBROUTINE CFFTF(N,C,Wsave)
   !***FIRST EXECUTABLE STATEMENT  CFFTF
   RC = [ ( [REAL(C(i)), AIMAG(C(i))], i=1,N ) ]
   IF ( N==1 ) RETURN
-  ifac = Wsave(4*N+1:4*N+15)
+  ifac = INT( Wsave(4*N+1:4*N+15) )
   CALL CFFTF1(N,RC,Wsave,Wsave(2*N+1),ifac)
   C(1:N) = [ ( CMPLX(RC(i),RC(i+1)), i=1,2*N-1,2 ) ]
 END SUBROUTINE CFFTF
