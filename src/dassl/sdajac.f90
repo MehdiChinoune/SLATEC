@@ -1,0 +1,188 @@
+!DECK SDAJAC
+SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
+    Uround,JAC,Rpar,Ipar,Ntemp)
+  IMPLICIT NONE
+  !***BEGIN PROLOGUE  SDAJAC
+  !***SUBSIDIARY
+  !***PURPOSE  Compute the iteration matrix for SDASSL and form the
+  !            LU-decomposition.
+  !***LIBRARY   SLATEC (DASSL)
+  !***TYPE      SINGLE PRECISION (SDAJAC-S, DDAJAC-D)
+  !***AUTHOR  Petzold, Linda R., (LLNL)
+  !***DESCRIPTION
+  !-----------------------------------------------------------------------
+  !     THIS ROUTINE COMPUTES THE ITERATION MATRIX
+  !     PD=DG/DY+CJ*DG/DYPRIME (WHERE G(X,Y,YPRIME)=0).
+  !     HERE PD IS COMPUTED BY THE USER-SUPPLIED
+  !     ROUTINE JAC IF IWM(MTYPE) IS 1 OR 4, AND
+  !     IT IS COMPUTED BY NUMERICAL FINITE DIFFERENCING
+  !     IF IWM(MTYPE)IS 2 OR 5
+  !     THE PARAMETERS HAVE THE FOLLOWING MEANINGS.
+  !     Y        = ARRAY CONTAINING PREDICTED VALUES
+  !     YPRIME   = ARRAY CONTAINING PREDICTED DERIVATIVES
+  !     DELTA    = RESIDUAL EVALUATED AT (X,Y,YPRIME)
+  !                (USED ONLY IF IWM(MTYPE)=2 OR 5)
+  !     CJ       = SCALAR PARAMETER DEFINING ITERATION MATRIX
+  !     H        = CURRENT STEPSIZE IN INTEGRATION
+  !     IER      = VARIABLE WHICH IS .NE. 0
+  !                IF ITERATION MATRIX IS SINGULAR,
+  !                AND 0 OTHERWISE.
+  !     WT       = VECTOR OF WEIGHTS FOR COMPUTING NORMS
+  !     E        = WORK SPACE (TEMPORARY) OF LENGTH NEQ
+  !     WM       = REAL WORK SPACE FOR MATRICES. ON
+  !                OUTPUT IT CONTAINS THE LU DECOMPOSITION
+  !                OF THE ITERATION MATRIX.
+  !     IWM      = INTEGER WORK SPACE CONTAINING
+  !                MATRIX INFORMATION
+  !     RES      = NAME OF THE EXTERNAL USER-SUPPLIED ROUTINE
+  !                TO EVALUATE THE RESIDUAL FUNCTION G(X,Y,YPRIME)
+  !     IRES     = FLAG WHICH IS EQUAL TO ZERO IF NO ILLEGAL VALUES
+  !                IN RES, AND LESS THAN ZERO OTHERWISE.  (IF IRES
+  !                IS LESS THAN ZERO, THE MATRIX WAS NOT COMPLETED)
+  !                IN THIS CASE (IF IRES .LT. 0), THEN IER = 0.
+  !     UROUND   = THE UNIT ROUNDOFF ERROR OF THE MACHINE BEING USED.
+  !     JAC      = NAME OF THE EXTERNAL USER-SUPPLIED ROUTINE
+  !                TO EVALUATE THE ITERATION MATRIX (THIS ROUTINE
+  !                IS ONLY USED IF IWM(MTYPE) IS 1 OR 4)
+  !-----------------------------------------------------------------------
+  !***ROUTINES CALLED  SGBFA, SGEFA
+  !***REVISION HISTORY  (YYMMDD)
+  !   830315  DATE WRITTEN
+  !   901009  Finished conversion to SLATEC 4.0 format (F.N.Fritsch)
+  !   901010  Modified three MAX calls to be all on one line.  (FNF)
+  !   901019  Merged changes made by C. Ulrich with SLATEC 4.0 format.
+  !   901026  Added explicit declarations for all variables and minor
+  !           cosmetic changes to prologue.  (FNF)
+  !   901101  Corrected PURPOSE.  (FNF)
+  !***END PROLOGUE  SDAJAC
+  !
+  INTEGER Neq, Ier, Iwm(*), Ires, Ipar(*), Ntemp
+  REAL X, Y(*), Yprime(*), Delta(*), Cj, H, Wt(*), E(*), Wm(*), &
+    Uround, Rpar(*)
+  EXTERNAL RES, JAC
+  !
+  EXTERNAL SGBFA, SGEFA
+  !
+  INTEGER i, i1, i2, ii, ipsave, isave, j, k, l, lenpd, LIPVT, &
+    LML, LMTYPE, LMU, mba, mband, meb1, meband, msave, mtype, &
+    n, NPD, npdm1, nrow
+  REAL del, delinv, squr, ypsave, ysave
+  !
+  PARAMETER (NPD=1)
+  PARAMETER (LML=1)
+  PARAMETER (LMU=2)
+  PARAMETER (LMTYPE=4)
+  PARAMETER (LIPVT=21)
+  !
+  !***FIRST EXECUTABLE STATEMENT  SDAJAC
+  Ier = 0
+  npdm1 = NPD - 1
+  mtype = Iwm(LMTYPE)
+  SELECT CASE (mtype)
+    CASE (2)
+      !
+      !
+      !     DENSE FINITE-DIFFERENCE-GENERATED MATRIX
+      Ires = 0
+      nrow = npdm1
+      squr = SQRT(Uround)
+      DO i = 1, Neq
+        del = squr*MAX(ABS(Y(i)),ABS(H*Yprime(i)),ABS(Wt(i)))
+        del = SIGN(del,H*Yprime(i))
+        del = (Y(i)+del) - Y(i)
+        ysave = Y(i)
+        ypsave = Yprime(i)
+        Y(i) = Y(i) + del
+        Yprime(i) = Yprime(i) + Cj*del
+        CALL RES(X,Y,Yprime,E,Ires,Rpar,Ipar)
+        IF ( Ires<0 ) RETURN
+        delinv = 1.0E0/del
+        DO l = 1, Neq
+          Wm(nrow+l) = (E(l)-Delta(l))*delinv
+        ENDDO
+        nrow = nrow + Neq
+        Y(i) = ysave
+        Yprime(i) = ypsave
+      ENDDO
+    CASE (3)
+      !
+      !
+      !     DUMMY SECTION FOR IWM(MTYPE)=3
+      RETURN
+    CASE (4)
+      !
+      !
+      !     BANDED USER-SUPPLIED MATRIX
+      lenpd = (2*Iwm(LML)+Iwm(LMU)+1)*Neq
+      DO i = 1, lenpd
+        Wm(npdm1+i) = 0.0E0
+      ENDDO
+      CALL JAC(X,Y,Yprime,Wm(NPD),Cj,Rpar,Ipar)
+      meband = 2*Iwm(LML) + Iwm(LMU) + 1
+      !
+      !
+      !     DO LU DECOMPOSITION OF BANDED PD
+      CALL SGBFA(Wm(NPD),meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT),Ier)
+      RETURN
+    CASE (5)
+      !
+      !
+      !     BANDED FINITE-DIFFERENCE-GENERATED MATRIX
+      mband = Iwm(LML) + Iwm(LMU) + 1
+      mba = MIN(mband,Neq)
+      meband = mband + Iwm(LML)
+      meb1 = meband - 1
+      msave = (Neq/mband) + 1
+      isave = Ntemp - 1
+      ipsave = isave + msave
+      Ires = 0
+      squr = SQRT(Uround)
+      DO j = 1, mba
+        DO n = j, Neq, mband
+          k = (n-j)/mband + 1
+          Wm(isave+k) = Y(n)
+          Wm(ipsave+k) = Yprime(n)
+          del = squr*MAX(ABS(Y(n)),ABS(H*Yprime(n)),ABS(Wt(n)))
+          del = SIGN(del,H*Yprime(n))
+          del = (Y(n)+del) - Y(n)
+          Y(n) = Y(n) + del
+          Yprime(n) = Yprime(n) + Cj*del
+        ENDDO
+        CALL RES(X,Y,Yprime,E,Ires,Rpar,Ipar)
+        IF ( Ires<0 ) RETURN
+        DO n = j, Neq, mband
+          k = (n-j)/mband + 1
+          Y(n) = Wm(isave+k)
+          Yprime(n) = Wm(ipsave+k)
+          del = squr*MAX(ABS(Y(n)),ABS(H*Yprime(n)),ABS(Wt(n)))
+          del = SIGN(del,H*Yprime(n))
+          del = (Y(n)+del) - Y(n)
+          delinv = 1.0E0/del
+          i1 = MAX(1,(n-Iwm(LMU)))
+          i2 = MIN(Neq,(n+Iwm(LML)))
+          ii = n*meb1 - Iwm(LML) + npdm1
+          DO i = i1, i2
+            Wm(ii+i) = (E(i)-Delta(i))*delinv
+          ENDDO
+        ENDDO
+      ENDDO
+      CALL SGBFA(Wm(NPD),meband,Neq,Iwm(LML),Iwm(LMU),Iwm(LIPVT),Ier)
+      RETURN
+    CASE DEFAULT
+      !
+      !
+      !     DENSE USER-SUPPLIED MATRIX
+      lenpd = Neq*Neq
+      DO i = 1, lenpd
+        Wm(npdm1+i) = 0.0E0
+      ENDDO
+      CALL JAC(X,Y,Yprime,Wm(NPD),Cj,Rpar,Ipar)
+  END SELECT
+  !
+  !
+  !     DO DENSE-MATRIX LU DECOMPOSITION ON PD
+  CALL SGEFA(Wm(NPD),Neq,Neq,Iwm(LIPVT),Ier)
+  RETURN
+  !------END OF SUBROUTINE SDAJAC------
+  RETURN
+END SUBROUTINE SDAJAC

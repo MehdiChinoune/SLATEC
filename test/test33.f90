@@ -1327,7 +1327,7 @@ CONTAINS
     !
     !        Set tolerances.
     tol = 10*D1MACH(4)
-    told = MAX(1.0D-7,10*tol)
+    told = SQRT(D1MACH(4))
     tolz = ZERO
     !
     IF ( Kprint>=3 ) WRITE (Lun,99001)

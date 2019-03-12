@@ -1,0 +1,93 @@
+!DECK R9GMIC
+FUNCTION R9GMIC(A,X,Alx)
+  IMPLICIT NONE
+  REAL A, alng, ALNGAM, Alx, bot, eps, euler, fk, fkp1, fm, &
+    R1MACH, R9GMIC, s, sgng, t, te, X
+  INTEGER k, m, ma, mm1
+  !***BEGIN PROLOGUE  R9GMIC
+  !***SUBSIDIARY
+  !***PURPOSE  Compute the complementary incomplete Gamma function for A
+  !            near a negative integer and for small X.
+  !***LIBRARY   SLATEC (FNLIB)
+  !***CATEGORY  C7E
+  !***TYPE      SINGLE PRECISION (R9GMIC-S, D9GMIC-D)
+  !***KEYWORDS  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB, SMALL X,
+  !             SPECIAL FUNCTIONS
+  !***AUTHOR  Fullerton, W., (LANL)
+  !***DESCRIPTION
+  !
+  ! Compute the complementary incomplete gamma function for A near
+  ! a negative integer and for small X.
+  !
+  !***REFERENCES  (NONE)
+  !***ROUTINES CALLED  ALNGAM, R1MACH, XERMSG
+  !***REVISION HISTORY  (YYMMDD)
+  !   770701  DATE WRITTEN
+  !   890531  Changed all specific intrinsics to generic.  (WRB)
+  !   890531  REVISION DATE from Version 3.2
+  !   891214  Prologue converted to Version 4.0 format.  (BAB)
+  !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
+  !   900720  Routine changed from user-callable to subsidiary.  (WRB)
+  !***END PROLOGUE  R9GMIC
+  SAVE euler, eps, bot
+  DATA euler/.5772156649015329E0/
+  DATA eps, bot/2*0.0/
+  !***FIRST EXECUTABLE STATEMENT  R9GMIC
+  IF ( eps==0.0 ) eps = 0.5*R1MACH(3)
+  IF ( bot==0.0 ) bot = LOG(R1MACH(1))
+  !
+  IF ( A>0.0 ) CALL XERMSG('SLATEC','R9GMIC',&
+    'A MUST BE NEAR A NEGATIVE INTEGER',2,2)
+  IF ( X<=0.0 ) CALL XERMSG('SLATEC','R9GMIC','X MUST BE GT ZERO',3,2)
+  !
+  ma = INT( A - 0.5 )
+  fm = -ma
+  m = -ma
+  !
+  te = 1.0
+  t = 1.0
+  s = t
+  DO k = 1, 200
+    fkp1 = k + 1
+    te = -X*te/(fm+fkp1)
+    t = te/fkp1
+    s = s + t
+    IF ( ABS(t)<eps*s ) GOTO 100
+  ENDDO
+  CALL XERMSG('SLATEC','R9GMIC',&
+    'NO CONVERGENCE IN 200 TERMS OF CONTINUED FRACTION',4,2)
+  !
+  100  R9GMIC = -Alx - euler + X*s/(fm+1.0)
+  IF ( m==0 ) RETURN
+  !
+  IF ( m==1 ) R9GMIC = -R9GMIC - 1.0 + 1.0/X
+  IF ( m==1 ) RETURN
+  !
+  te = fm
+  t = 1.0
+  s = t
+  mm1 = m - 1
+  DO k = 1, mm1
+    fk = k
+    te = -X*te/fk
+    t = te/(fm-fk)
+    s = s + t
+    IF ( ABS(t)<eps*ABS(s) ) EXIT
+  ENDDO
+  !
+  DO k = 1, m
+    R9GMIC = R9GMIC + 1.0/k
+  ENDDO
+  !
+  sgng = 1.0
+  IF ( MOD(m,2)==1 ) sgng = -1.0
+  alng = LOG(R9GMIC) - ALNGAM(fm+1.0)
+  !
+  R9GMIC = 0.0
+  IF ( alng>bot ) R9GMIC = sgng*EXP(alng)
+  IF ( s/=0.0 ) R9GMIC = R9GMIC + SIGN(EXP(-fm*Alx+LOG(ABS(s)/fm)),s)
+  !
+  IF ( R9GMIC==0.0.AND.s==0.0 )&
+    CALL XERMSG('SLATEC','R9GMIC','RESULT UNDERFLOWS',1,1)
+  !
+END FUNCTION R9GMIC

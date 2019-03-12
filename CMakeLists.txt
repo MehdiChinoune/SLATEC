@@ -33,11 +33,7 @@ elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "PGI" )
 
 endif ()
 
-file(GLOB srcs src/*.f90 fnlib/*.f90 pchip/*.f90 fishfft/*.f90 linear/*.f90 xerror/*.f90 )
-
-add_library(slatec SHARED ${srcs})
-
-add_subdirectory(include)
+add_subdirectory(src)
 
 add_subdirectory(test)
 

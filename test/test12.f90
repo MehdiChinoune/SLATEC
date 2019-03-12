@@ -47,7 +47,7 @@ CONTAINS
     99001 FORMAT (' ** TEST DOUBLE PRECISION LEGENDRE FUNCTION ROUTINES',&
       ' IN FCNPAK ** ',/)
     Ipass = 1
-    irad = 0
+    irad = I1MACH(10)
     nradpl = 0
     dzero = 0.0D0
     nbits = 0
