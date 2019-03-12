@@ -29,9 +29,6 @@ target_link_libraries(slatec dqdot )
 add_subdirectory( eispack )
 target_link_libraries(slatec eispack )
 
-add_subdirectory( ext_exp )
-target_link_libraries(slatec ext_exp )
-
 add_subdirectory( fftpack )
 target_link_libraries(slatec fftpack )
 
