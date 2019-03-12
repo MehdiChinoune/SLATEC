@@ -53,3 +53,7 @@ target_link_libraries(slprep slatec)
 
 add_executable(sladoc sladoc.f subsid.f)
 target_link_libraries(sladoc slatec)
+
+install(TARGETS slatec
+  LIBRARY DESTINATION lib 
+  RUNTIME DESTINATION bin )
