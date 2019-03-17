@@ -1,8 +1,6 @@
 !DECK XERMSG
 SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   IMPLICIT NONE
-  INTEGER i, J4SAVE, kdummy, kount, lerr, Level, lkntrl, llevel ,&
-    ltemp, maxmes, mkntrl, Nerr
   !***BEGIN PROLOGUE  XERMSG
   !***PURPOSE  Process error messages for SLATEC and other libraries.
   !***LIBRARY   SLATEC (XERROR)
@@ -187,6 +185,8 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   !           XERCTL to XERCNT.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  XERMSG
+  INTEGER i, J4SAVE, kdummy, kount, lerr, Level, lkntrl, llevel, &
+    ltemp, maxmes, mkntrl, Nerr
   CHARACTER*(*) Librar, Subrou, Messg
   CHARACTER(8) :: xlibr, xsubr
   CHARACTER(72) :: temp

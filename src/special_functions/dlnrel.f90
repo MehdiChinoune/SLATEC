@@ -1,7 +1,6 @@
 !DECK DLNREL
 REAL(8) FUNCTION DLNREL(X)
   IMPLICIT NONE
-  INTEGER INITDS, nlnrel
   !***BEGIN PROLOGUE  DLNREL
   !***PURPOSE  Evaluate ln(1+X) accurate in the sense of relative error.
   !***LIBRARY   SLATEC (FNLIB)
@@ -32,6 +31,7 @@ REAL(8) FUNCTION DLNREL(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DLNREL
+  INTEGER INITDS, nlnrel
   REAL(8) :: alnrcs(43), X, xmin, DCSEVL, D1MACH
   LOGICAL first
   SAVE alnrcs, nlnrel, xmin, first
@@ -88,8 +88,7 @@ REAL(8) FUNCTION DLNREL(X)
   !
   IF ( X<=(-1.D0) ) CALL XERMSG('SLATEC','DLNREL','X IS LE -1',2,2)
   IF ( X<xmin ) CALL XERMSG('SLATEC','DLNREL',&
-    'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR -1'&
-    ,1,1)
+    'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR -1',1,1)
   !
   IF ( ABS(X)<=0.375D0 ) THEN
     DLNREL = X*(1.D0-X*DCSEVL(X/.375D0,alnrcs,nlnrel))

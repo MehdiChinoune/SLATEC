@@ -1,8 +1,6 @@
 !DECK COSQB1
 SUBROUTINE COSQB1(N,X,W,Xh)
   IMPLICIT NONE
-  INTEGER i, k, kc, modn, N, np2, ns2
-  REAL W, X, Xh, xim1
   !***BEGIN PROLOGUE  COSQB1
   !***SUBSIDIARY
   !***PURPOSE  Compute the unnormalized inverse of COSQF1.
@@ -31,6 +29,8 @@ SUBROUTINE COSQB1(N,X,W,Xh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  COSQB1
+  INTEGER i, k, kc, modn, N, np2, ns2
+  REAL W, X, Xh, xim1
   DIMENSION X(*), W(*), Xh(*)
   !***FIRST EXECUTABLE STATEMENT  COSQB1
   ns2 = (N+1)/2

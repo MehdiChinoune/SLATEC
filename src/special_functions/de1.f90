@@ -1,9 +1,6 @@
 !DECK DE1
 REAL(8) FUNCTION DE1(X)
   IMPLICIT NONE
-  REAL eta
-  INTEGER INITDS, ntae10, ntae11, ntae12, ntae13, ntae14, nte11, &
-    nte12
   !***BEGIN PROLOGUE  DE1
   !***PURPOSE  Compute the exponential integral E1(X).
   !***LIBRARY   SLATEC (FNLIB)
@@ -83,9 +80,10 @@ REAL(8) FUNCTION DE1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DE1
+  REAL eta
+  INTEGER INITDS, ntae10, ntae11, ntae12, ntae13, ntae14, nte11, nte12
   REAL(8) :: X, ae10cs(50), ae11cs(60), ae12cs(41), e11cs(29), &
-    e12cs(25), ae13cs(50), ae14cs(64), xmax, xmaxt, &
-    D1MACH, DCSEVL
+    e12cs(25), ae13cs(50), ae14cs(64), xmax, xmaxt, D1MACH, DCSEVL
   LOGICAL first
   SAVE ae10cs, ae11cs, ae12cs, e11cs, e12cs, ae13cs, ae14cs, ntae10, &
     ntae11, ntae12, nte11, nte12, ntae13, ntae14, xmax, first

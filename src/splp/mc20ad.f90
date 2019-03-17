@@ -1,8 +1,6 @@
 !DECK MC20AD
 SUBROUTINE MC20AD(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   IMPLICIT NONE
-  INTEGER i, ice, icep, j, ja, jb, jce, jcep, Jdisp, Jptr, k, &
-    kr, loc, Maxa, Nc, null
   !***BEGIN PROLOGUE  MC20AD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -31,6 +29,8 @@ SUBROUTINE MC20AD(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  MC20AD
+  INTEGER i, ice, icep, j, ja, jb, jce, jcep, Jdisp, Jptr, k, &
+    kr, loc, Maxa, Nc, null
   INTEGER Inum(*), Jnum(*)
   REAL(8) :: A(*), ace, acep
   DIMENSION Jptr(Nc)

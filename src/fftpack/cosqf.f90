@@ -1,8 +1,6 @@
 !DECK COSQF
 SUBROUTINE COSQF(N,X,Wsave)
   IMPLICIT NONE
-  INTEGER N
-  REAL sqrt2, tsqx, Wsave, X
   !***BEGIN PROLOGUE  COSQF
   !***PURPOSE  Compute the forward cosine transform with odd wave numbers.
   !***LIBRARY   SLATEC (FFTPACK)
@@ -73,6 +71,8 @@ SUBROUTINE COSQF(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  COSQF
+  INTEGER N
+  REAL sqrt2, tsqx, Wsave, X
   DIMENSION X(*), Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  COSQF
   sqrt2 = SQRT(2.)

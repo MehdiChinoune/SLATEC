@@ -1,7 +1,6 @@
 !DECK GAMI
-FUNCTION GAMI(A,X)
+REAL FUNCTION GAMI(A,X)
   IMPLICIT NONE
-  REAL A, ALNGAM, factor, GAMI, GAMIT, X
   !***BEGIN PROLOGUE  GAMI
   !***PURPOSE  Evaluate the incomplete Gamma function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -29,6 +28,7 @@ FUNCTION GAMI(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  GAMI
+  REAL A, ALNGAM, factor, GAMIT, X
   !***FIRST EXECUTABLE STATEMENT  GAMI
   IF ( A<=0.0 ) CALL XERMSG('SLATEC','GAMI','A MUST BE GT ZERO',1,2)
   IF ( X<0.0 ) CALL XERMSG('SLATEC','GAMI','X MUST BE GE ZERO',2,2)

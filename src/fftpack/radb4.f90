@@ -1,9 +1,6 @@
 !DECK RADB4
 SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   IMPLICIT NONE
-  REAL Cc, Ch, ci2, ci3, ci4, cr2, cr3, cr4, sqrt2, ti1, ti2, &
-    ti3, ti4, tr1, tr2, tr3, tr4, Wa1, Wa2, Wa3
-  INTEGER i, ic, Ido, idp2, k, L1
   !***BEGIN PROLOGUE  RADB4
   !***SUBSIDIARY
   !***PURPOSE  Calculate the fast Fourier transform of subvectors of
@@ -25,6 +22,9 @@ SUBROUTINE RADB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  RADB4
+  REAL Cc, Ch, ci2, ci3, ci4, cr2, cr3, cr4, sqrt2, ti1, ti2, &
+    ti3, ti4, tr1, tr2, tr3, tr4, Wa1, Wa2, Wa3
+  INTEGER i, ic, Ido, idp2, k, L1
   DIMENSION Cc(Ido,4,*), Ch(Ido,L1,4), Wa1(*), Wa2(*), Wa3(*)
   !***FIRST EXECUTABLE STATEMENT  RADB4
   sqrt2 = SQRT(2.)

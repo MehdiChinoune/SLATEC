@@ -1,8 +1,6 @@
 !DECK BESKES
 SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   IMPLICIT NONE
-  REAL alnbig, Bke, bknu1, direct, R1MACH, v, vend, vincr, X, Xnu
-  INTEGER i, iswtch, n, Nin
   !***BEGIN PROLOGUE  BESKES
   !***PURPOSE  Compute a sequence of exponentially scaled modified Bessel
   !            functions of the third kind of fractional order.
@@ -34,6 +32,8 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BESKES
+  REAL alnbig, Bke, bknu1, direct, R1MACH, v, vend, vincr, X, Xnu
+  INTEGER i, iswtch, n, Nin
   DIMENSION Bke(*)
   SAVE alnbig
   DATA alnbig/0./

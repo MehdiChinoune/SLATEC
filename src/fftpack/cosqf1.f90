@@ -1,8 +1,6 @@
 !DECK COSQF1
 SUBROUTINE COSQF1(N,X,W,Xh)
   IMPLICIT NONE
-  INTEGER i, k, kc, modn, N, np2, ns2
-  REAL W, X, Xh, xim1
   !***BEGIN PROLOGUE  COSQF1
   !***SUBSIDIARY
   !***PURPOSE  Compute the forward cosine transform with odd wave numbers.
@@ -31,6 +29,8 @@ SUBROUTINE COSQF1(N,X,W,Xh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  COSQF1
+  INTEGER i, k, kc, modn, N, np2, ns2
+  REAL W, X, Xh, xim1
   DIMENSION X(*), W(*), Xh(*)
   !***FIRST EXECUTABLE STATEMENT  COSQF1
   ns2 = (N+1)/2

@@ -3,15 +3,6 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     Bdd,COFX,An,Bn,Cn,Dn,Un,Zn,Am,Bm,Cm,Dm,Um,Zm,Grhs,Usol,&
     Idmn,W,Pertrb,Ierror)
   IMPLICIT NONE
-  REAL A, ai, AIT, Alpha, Am, An, ax1, axi, B, Bda, Bdb, Bdc, &
-    Bdd, Beta, bi, BIT, Bm, Bn, bxi, C
-  REAL ci, CIT, Cm, Cn, cxi, cxm, D, DIT, DLX, DLX4, DLY, DLY4, &
-    Dm, Dn, dy1, dyj, eyj, fyj, fyn, gama
-  REAL Grhs, Pertrb, prtrb, TDLx3, TDLy3, Um, Un, Usol, W, xi, &
-    xnu, Zm, Zn
-  INTEGER i, Idmn, ieror, Ierror, iord, Iorder, IS, j, JS, K, &
-    KSWx, KSWy, L, M, Mbdcnd, MIT, mp, MS, N, Nbdcnd
-  INTEGER NIT, np, NS
   !***BEGIN PROLOGUE  SPELI4
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPX4
@@ -35,14 +26,20 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  SPELI4
-  !
+  REAL A, ai, AIT, Alpha, Am, An, ax1, axi, B, Bda, Bdb, Bdc, &
+    Bdd, Beta, bi, BIT, Bm, Bn, bxi, C
+  REAL ci, CIT, Cm, Cn, cxi, cxm, D, DIT, DLX, DLX4, DLY, DLY4, &
+    Dm, Dn, dy1, dyj, eyj, fyj, fyn, gama
+  REAL Grhs, Pertrb, prtrb, TDLx3, TDLy3, Um, Un, Usol, W, xi, xnu, Zm, Zn
+  INTEGER i, Idmn, ieror, Ierror, iord, Iorder, IS, j, JS, K, &
+    KSWx, KSWy, L, M, Mbdcnd, MIT, mp, MS, N, Nbdcnd
+  INTEGER NIT, np, NS
   DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
   DIMENSION An(*), Bn(*), Cn(*), Dn(*), Un(*), Zn(*)
   DIMENSION Am(*), Bm(*), Cm(*), Dm(*), Um(*), Zm(*)
   COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
-    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
-    DLY4
+    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   LOGICAL singlr
   EXTERNAL COFX
   !***FIRST EXECUTABLE STATEMENT  SPELI4

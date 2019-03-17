@@ -1,9 +1,6 @@
 !DECK RFFTB1
 SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
   IMPLICIT NONE
-  REAL C, Ch, Wa
-  INTEGER i, idl1, ido, Ifac, ip, iw, ix2, ix3, ix4, k1, l1, l2, &
-    N, na, nf
   !***BEGIN PROLOGUE  RFFTB1
   !***PURPOSE  Compute the backward fast Fourier transform of a real
   !            coefficient array.
@@ -86,6 +83,8 @@ SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RFFTB1
+  REAL C, Ch, Wa
+  INTEGER i, idl1, ido, Ifac, ip, iw, ix2, ix3, ix4, k1, l1, l2, N, na, nf
   DIMENSION Ch(*), C(*), Wa(*), Ifac(*)
   !***FIRST EXECUTABLE STATEMENT  RFFTB1
   nf = Ifac(2)

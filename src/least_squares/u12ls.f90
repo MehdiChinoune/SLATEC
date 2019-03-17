@@ -1,9 +1,6 @@
 !DECK U12LS
 SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   IMPLICIT NONE
-  REAL A, B, bb, H, Rnorm, SDOT, SNRM2, tt, W
-  INTEGER i, ij, im1, j, jb, k, kp1, Krank, M, Mda, Mdb, Mode, &
-    N, Nb, nmk
   !***BEGIN PROLOGUE  U12LS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to LLSIA
@@ -28,6 +25,8 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  U12LS
+  REAL A, B, bb, H, Rnorm, SDOT, SNRM2, tt, W
+  INTEGER i, ij, im1, j, jb, k, kp1, Krank, M, Mda, Mdb, Mode, N, Nb, nmk
   DIMENSION A(Mda,*), B(Mdb,*), Rnorm(*), H(*), W(*)
   INTEGER Ic(*), Ir(*)
   !***FIRST EXECUTABLE STATEMENT  U12LS

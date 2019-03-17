@@ -2,10 +2,6 @@
 SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     Scl,Ibasis,Ibb)
   IMPLICIT NONE
-  INTEGER i, igopr, ioff, ip, iprint, itemp, iter ,&
-    itmax, j, jbig, jcol, jdrop, jdrop1, jdrop2, jlarge ,&
-    jmag, jp, lds
-  INTEGER lgopr, lp, Mdw, Minput, Mode, mrows, mval, Ncols, nsetb
   !***BEGIN PROLOGUE  SBOLSM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SBOCLS and SBOLS
@@ -420,6 +416,9 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     /REAL            / TO /DOUBLE PRECISION/.
   !++
   !
+  INTEGER i, igopr, ioff, ip, iprint, itemp, iter, &
+    itmax, j, jbig, jcol, jdrop, jdrop1, jdrop2, jlarge, jmag, jp, lds
+  INTEGER lgopr, lp, Mdw, Minput, Mode, mrows, mval, Ncols, nsetb
   REAL W(Mdw,*), Bl(*), Bu(*)
   REAL X(*), Rw(*), Ww(*), Scl(*)
   REAL alpha, beta, bou, colabv, colblo

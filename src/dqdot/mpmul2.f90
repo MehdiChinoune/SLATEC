@@ -1,7 +1,6 @@
 !DECK MPMUL2
 SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
   IMPLICIT NONE
-  INTEGER i, ij, is, ix, Iy, j, j1, j2, LUN, M, MXR
   !***BEGIN PROLOGUE  MPMUL2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
@@ -31,6 +30,7 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPMUL2
+  INTEGER i, ij, is, ix, Iy, j, j1, j2, LUN, M, MXR
   COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
   INTEGER B, T, R, X(*), Z(*), Trunc, re, rs
   INTEGER c, c1, c2, ri, t1, t3, t4

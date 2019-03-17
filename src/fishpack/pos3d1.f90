@@ -1,12 +1,6 @@
 !DECK POS3D1
-SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,&
-    Bb)
+SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
   IMPLICIT NONE
-  REAL A, B, Bb, C, C1, C2, D, di, dj, dum, dx, dy, F, pi, &
-    PIMACH, scalx, scaly, T, Wx, Wy
-  REAL Xrt, Yrt
-  INTEGER i, ifwrd, j, k, L, Ldimf, Lp, lr, lrdel, M, Mdimf, Mp, &
-    mr, mrdel, N, nr
   !***BEGIN PROLOGUE  POS3D1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to POIS3D
@@ -25,6 +19,11 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,&
   !   900308  Changed call to TRID to call to TRIDQ.  (WRB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  POS3D1
+  REAL A, B, Bb, C, C1, C2, D, di, dj, dum, dx, dy, F, pi, &
+    PIMACH, scalx, scaly, T, Wx, Wy
+  REAL Xrt, Yrt
+  INTEGER i, ifwrd, j, k, L, Ldimf, Lp, lr, lrdel, M, Mdimf, Mp, &
+    mr, mrdel, N, nr
   DIMENSION A(*), B(*), C(*), F(Ldimf,Mdimf,*), Xrt(*), Yrt(*), T(*), &
     D(*), Wx(*), Wy(*), Bb(*)
   !***FIRST EXECUTABLE STATEMENT  POS3D1

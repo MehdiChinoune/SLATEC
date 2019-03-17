@@ -3,12 +3,6 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     F4,F5,Ys,Told,Dtsign,U26,Rer,Init,Ksteps,Kop,Iquit,&
     Stiff,Nonstf,Ntstep,Nstifs,Rpar,Ipar)
   IMPLICIT NONE
-  REAL a, Atol, big, dt, Dtsign, dy, ee, eeoet, es, estiff ,&
-    esttol, et, F1, F2, F3, F4, F5, H, hmin, HVNRM
-  INTEGER Idid, Info, Init, Ipar, Iquit, k, Kop, Ksteps, ktol ,&
-    mxkop, mxstep, natolp, Neq, nrtolp, Nstifs, Ntstep
-  REAL R1MACH, remin, Rer, Rpar, Rtol, s, T, tol, Told, Tolfac ,&
-    Tout, u, U26, ute, Y, yavg, Yp, Ys
   !***BEGIN PROLOGUE  DERKFS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DERKF
@@ -53,12 +47,17 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !           IF-THEN-ELSEs.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DERKFS
-  !
+  REAL a, Atol, big, dt, Dtsign, dy, ee, eeoet, es, estiff, &
+    esttol, et, F1, F2, F3, F4, F5, H, hmin, HVNRM
+  INTEGER Idid, Info, Init, Ipar, Iquit, k, Kop, Ksteps, ktol, &
+    mxkop, mxstep, natolp, Neq, nrtolp, Nstifs, Ntstep
+  REAL R1MACH, remin, Rer, Rpar, Rtol, s, T, tol, Told, Tolfac, &
+    Tout, u, U26, ute, Y, yavg, Yp, Ys
   LOGICAL hfaild, output, Stiff, Nonstf
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
   !
-  DIMENSION Y(*), Yp(*), F1(*), F2(*), F3(*), F4(*), F5(*), Ys(*) ,&
+  DIMENSION Y(*), Yp(*), F1(*), F2(*), F3(*), F4(*), F5(*), Ys(*), &
     Info(15), Rtol(*), Atol(*), Rpar(*), Ipar(*)
   !
   EXTERNAL F

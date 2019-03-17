@@ -2,9 +2,6 @@
 SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     Elmbda,F,Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  REAL Bdpf, Bdps, Bdtf, Bdts, dum, Elmbda, F, Pertrb, Pf, pi, &
-    PIMACH, Ps, Tf, tpi, Ts, W
-  INTEGER Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
   !***BEGIN PROLOGUE  HWSSSP
   !***PURPOSE  Solve a finite difference approximation to the Helmholtz
   !            equation in spherical coordinates and on the surface of the
@@ -369,7 +366,9 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  HWSSSP
-  !
+  REAL Bdpf, Bdps, Bdtf, Bdts, dum, Elmbda, F, Pertrb, Pf, pi, &
+    PIMACH, Ps, Tf, tpi, Ts, W
+  INTEGER Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
   DIMENSION F(Idimf,*), Bdts(*), Bdtf(*), Bdps(*), Bdpf(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HWSSSP
   pi = PIMACH(dum)

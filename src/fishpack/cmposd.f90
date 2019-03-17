@@ -1,10 +1,6 @@
 !DECK CMPOSD
 SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   IMPLICIT NONE
-  REAL fi
-  INTEGER i, ideg, Idimq, ip, ip1, ipstor, irreg, Istag, j, jdeg, &
-    jm1, jm2, jm3, jp1, jp2, jp3, jsh, jsp, jst, jstsav
-  INTEGER kr, krpi, l, lr, m, Mr, n, nodd, noddpr, Nr, nun
   !***BEGIN PROLOGUE  CMPOSD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CMGNBN
@@ -29,10 +25,12 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !   920130  Modified to use merge routine C1MERG rather than deleted
   !           routine CMPMRG.  (WRB)
   !***END PROLOGUE  CMPOSD
-  !
+  REAL fi
+  INTEGER i, ideg, Idimq, ip, ip1, ipstor, irreg, Istag, j, jdeg, &
+    jm1, jm2, jm3, jp1, jp2, jp3, jsh, jsp, jst, jstsav
+  INTEGER kr, krpi, l, lr, m, Mr, n, nodd, noddpr, Nr, nun
   COMPLEX Ba, Bb, Bc, Q, B, W, D, Tcos, P, t
-  DIMENSION Q(Idimq,*), Ba(*), Bb(*), Bc(*), Tcos(*), B(*), D(*), &
-    W(*), P(*)
+  DIMENSION Q(Idimq,*), Ba(*), Bb(*), Bc(*), Tcos(*), B(*), D(*), W(*), P(*)
   !***FIRST EXECUTABLE STATEMENT  CMPOSD
   m = Mr
   n = Nr

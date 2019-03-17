@@ -1,8 +1,6 @@
 !DECK SVOUT
 SUBROUTINE SVOUT(N,Sx,Ifmt,Idigit)
   IMPLICIT NONE
-  INTEGER i, I1MACH, Idigit, j, k1, k2, lout, N, ndigit
-  REAL Sx
   !***BEGIN PROLOGUE  SVOUT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -53,6 +51,8 @@ SUBROUTINE SVOUT(N,Sx,Ifmt,Idigit)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  SVOUT
+  INTEGER i, I1MACH, Idigit, j, k1, k2, lout, N, ndigit
+  REAL Sx
   DIMENSION Sx(*)
   CHARACTER Ifmt*(*)
   !

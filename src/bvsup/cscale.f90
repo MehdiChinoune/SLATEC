@@ -2,9 +2,6 @@
 SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
     Iscale,Ic)
   IMPLICIT NONE
-  REAL A, alog2, Anorm, ascale, Cols, Colsav, cs, p, Rows, Rowsav, &
-    s, Scales, SDOT, ten20, ten4
-  INTEGER Ic, ip, Iscale, j, k, Ncol, Nrda, Nrow
   !***BEGIN PROLOGUE  CSCALE
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP
@@ -25,8 +22,10 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  CSCALE
-  DIMENSION A(Nrda,*), Cols(*), Colsav(*), Scales(*), Rows(*), &
-    Rowsav(*)
+  REAL A, alog2, Anorm, ascale, Cols, Colsav, cs, p, Rows, Rowsav, &
+    s, Scales, SDOT, ten20, ten4
+  INTEGER Ic, ip, Iscale, j, k, Ncol, Nrda, Nrow
+  DIMENSION A(Nrda,*), Cols(*), Colsav(*), Scales(*), Rows(*), Rowsav(*)
   !
   SAVE ten4, ten20
   DATA ten4, ten20/1.E+4, 1.E+20/

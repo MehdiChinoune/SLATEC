@@ -2,11 +2,6 @@
 SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     Rpar,Ipar,H)
   IMPLICIT NONE
-  REAL A, absdx, B, Big, da, delf, delx, delxb, dely, dfdub, &
-    dfdxb, dx, dy, Etol, fbnd, H, HVNRM, power, Pv, relper
-  REAL Rpar, Sf, Small, Spy, srydpb, wtj, Y, ydpb, ynorm, Yp, &
-    ypnorm, Yprime
-  INTEGER icase, Ipar, j, k, lk, Morder, Neq
   !***BEGIN PROLOGUE  HSTART
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DEABM, DEBDF and DERKF
@@ -142,9 +137,11 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  HSTART
-  !
-  DIMENSION Y(*), Yprime(*), Etol(*), Spy(*), Pv(*), Yp(*), Sf(*), &
-    Rpar(*), Ipar(*)
+  REAL A, absdx, B, Big, da, delf, delx, delxb, dely, dfdub, &
+    dfdxb, dx, dy, Etol, fbnd, H, HVNRM, power, Pv, relper
+  REAL Rpar, Sf, Small, Spy, srydpb, wtj, Y, ydpb, ynorm, Yp, ypnorm, Yprime
+  INTEGER icase, Ipar, j, k, lk, Morder, Neq
+  DIMENSION Y(*), Yprime(*), Etol(*), Spy(*), Pv(*), Yp(*), Sf(*), Rpar(*), Ipar(*)
   EXTERNAL F
   !
   !.......................................................................

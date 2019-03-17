@@ -1,7 +1,6 @@
 !DECK TQLRAT
 SUBROUTINE TQLRAT(N,D,E2,Ierr)
   IMPLICIT NONE
-  REAL R1MACH
   !***BEGIN PROLOGUE  TQLRAT
   !***PURPOSE  Compute the eigenvalues of symmetric tridiagonal matrix
   !            using a rational variant of the QL method.
@@ -65,7 +64,7 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  TQLRAT
-  !
+  REAL R1MACH
   INTEGER i, j, l, m, N, ii, l1, mml, Ierr
   REAL D(*), E2(*)
   REAL b, c, f, g, h, p, r, s, machep

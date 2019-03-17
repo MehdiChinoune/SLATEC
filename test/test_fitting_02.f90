@@ -295,7 +295,7 @@ CONTAINS
     !***END PROLOGUE  DQCGLS
     !
     IMPLICIT NONE
-    REAL(8) :: a, aa, b, bb, D1MACH, delmax, delx, r, rnorm ,&
+    REAL(8) :: a, aa, b, bb, D1MACH, delmax, delx, r, rnorm, &
       work, xx
     INTEGER i, Ipass, j, kk, Kprint
     DIMENSION aa(4,4,2), a(4,4), bb(4,2), b(4), xx(4,4)
@@ -303,16 +303,16 @@ CONTAINS
     CHARACTER :: list(2)
     INTEGER inf(4), nerr, kprog, kcase
     INTEGER iwork(20), info, Lun
-    DATA aa/1.D0, .5D0, 1.D0, .25D0, 0.D0, 2.D0, 0.D0, 1.D0, 2.D0 ,&
-      -1.D0, 1.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 1.D0, 2.D0 ,&
-      -1.D0, 0.D0, 0.D0, 1.D0, 2.D0, 0.D0, -1.D0, 0.D0, 1.D0 ,&
+    DATA aa/1.D0, .5D0, 1.D0, .25D0, 0.D0, 2.D0, 0.D0, 1.D0, 2.D0, &
+      -1.D0, 1.D0, 0.D0, 0.D0, 0.D0, 0.D0, 0.D0, 1.D0, 2.D0, &
+      -1.D0, 0.D0, 0.D0, 1.D0, 2.D0, 0.D0, -1.D0, 0.D0, 1.D0, &
       0.D0, 1.D0, 0.D0, 1.D0, 0.D0/
     DATA bb/3.D0, 1.5D0, 2.D0, 1.25D0, 1.D0, 3.D0, 3.D0, 0.D0/
-    DATA xx/.9999999999999787D0, 1.000000000000007D0, 1.000000000000007D0 ,&
-      0.D0, .8095238095238102D0, 1.047619047619044D0 ,&
-      1.095238095238081D0, 0.D0, .7777777777777857D0 ,&
-      1.444444444444429D0, .3333333333333393D0, .5555555555555500D0 ,&
-      .3333333333333321D0, 0.0D0, -.3333333333333286D0 ,&
+    DATA xx/.9999999999999787D0, 1.000000000000007D0, 1.000000000000007D0, &
+      0.D0, .8095238095238102D0, 1.047619047619044D0, &
+      1.095238095238081D0, 0.D0, .7777777777777857D0, &
+      1.444444444444429D0, .3333333333333393D0, .5555555555555500D0, &
+      .3333333333333321D0, 0.0D0, -.3333333333333286D0, &
       .3333333333333286D0/
     DATA inf/0, 1, 0, 2/
     DATA list/'L', 'U'/
@@ -377,13 +377,13 @@ CONTAINS
           99005 FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,&
             '.  RNORM (TOO LARGE) IS',D11.4/)
         ENDIF
-        IF ( Kprint>=3 ) WRITE (Lun,99006) list(kprog), kcase, info ,&
+        IF ( Kprint>=3 ) WRITE (Lun,99006) list(kprog), kcase, info, &
           inf(kk)
         !
         99006 FORMAT (3X,A,'LSIA, CASE ',I1,'.  INFO=',I1,' (SHOULD = ',I1,')'/)
         IF ( info/=inf(kk) ) THEN
           nerr = nerr + 1
-          IF ( Kprint>=2 ) WRITE (Lun,99007) list(kprog), kcase, info ,&
+          IF ( Kprint>=2 ) WRITE (Lun,99007) list(kprog), kcase, info, &
             inf(kk)
           99007 FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,'.  INFO=',I1,&
             ' (SHOULD = ',I1,')'/)
@@ -407,7 +407,6 @@ END MODULE TEST28_MOD
 PROGRAM TEST28
   USE TEST28_MOD
   IMPLICIT NONE
-  INTEGER I1MACH
   !***BEGIN PROLOGUE  TEST28
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC
@@ -447,6 +446,7 @@ PROGRAM TEST28
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
   !***END PROLOGUE  TEST28
+  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST28
   lun = I1MACH(2)

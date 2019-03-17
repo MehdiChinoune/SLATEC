@@ -3,11 +3,6 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
     Iwr,Ind,Ibb,Erdnrm,Eps,Tune,Gg,Amat,Basmat,Csc,Wr,Ww,&
     Primal,Erd,Erp,Singlr,Redbas)
   IMPLICIT NONE
-  INTEGER i, ihi, il1, ilow, ipage, IPLOC, Itbrc, Itlp, iu1, j, &
-    key, l, Lbm, Lmx, lpg, Mrelas, n20002, n20012, n20016, &
-    n20023
-  INTEGER n20047, n20057, n20061, Nvars
-  REAL SASUM
   !***BEGIN PROLOGUE  SPLPCE
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -40,6 +35,11 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  SPLPCE
+  INTEGER i, ihi, il1, ilow, ipage, IPLOC, Itbrc, Itlp, iu1, j, &
+    key, l, Lbm, Lmx, lpg, Mrelas, n20002, n20012, n20016, &
+    n20023
+  INTEGER n20047, n20057, n20061, Nvars
+  REAL SASUM
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), &
     Ibb(*)
   REAL Amat(*), Basmat(*), Csc(*), Wr(*), Ww(*), Primal(*), Erd(*), &

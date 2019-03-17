@@ -1,8 +1,6 @@
 !DECK DERFC
 REAL(8) FUNCTION DERFC(X)
   IMPLICIT NONE
-  REAL eta
-  INTEGER INITDS, nterc2, nterf, nterfc
   !***BEGIN PROLOGUE  DERFC
   !***PURPOSE  Compute the complementary error function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -44,6 +42,8 @@ REAL(8) FUNCTION DERFC(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DERFC
+  REAL eta
+  INTEGER INITDS, nterc2, nterf, nterfc
   REAL(8) :: X, erfcs(21), erfccs(59), erc2cs(49), sqeps, &
     sqrtpi, xmax, txmax, xsml, y, D1MACH, DCSEVL
   LOGICAL first

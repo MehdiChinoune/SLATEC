@@ -1,9 +1,6 @@
 !DECK BSRH
-FUNCTION BSRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
+REAL FUNCTION BSRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   IMPLICIT NONE
-  REAL A, Bh, BSRH, C, CNV, dx, EPS, F, Sgn, x, xl, Xll, xr, &
-    Xrr
-  INTEGER IK, Iz, K, NCMplx, NM, NPP
   !***BEGIN PROLOGUE  BSRH
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI
@@ -18,6 +15,8 @@ FUNCTION BSRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  BSRH
+  REAL A, Bh, C, CNV, dx, EPS, F, Sgn, x, xl, Xll, xr, Xrr
+  INTEGER IK, Iz, K, NCMplx, NM, NPP
   DIMENSION A(*), C(*), Bh(*)
   COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  BSRH

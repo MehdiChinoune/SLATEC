@@ -2,11 +2,6 @@
 SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Ibasis,Work,Lw,Iwork,Liw)
   IMPLICIT NONE
-  INTEGER iadbig, ictmax, ictopt, Info, iopt, key, lamat, last ,&
-    lbasma, lbm, lcolnr, lcsc, lerd, lerp, libb, librc ,&
-    limat, lipr, Liw, liwork
-  INTEGER liwr, lmx, lrg, lrhs, lrprim, lrz, Lw, lwork, lwr, lww ,&
-    Mrelas, nerr, next, Nvars
   !***BEGIN PROLOGUE  SPLP
   !***PURPOSE  Solve linear programming problems involving at
   !            most a few thousand constraints and variables.
@@ -1543,7 +1538,12 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SPLP
-  REAL Bl(*), Bu(*), Costs(*), Dattrv(*), Duals(*), Prgopt(*) ,&
+  INTEGER iadbig, ictmax, ictopt, Info, iopt, key, lamat, last, &
+    lbasma, lbm, lcolnr, lcsc, lerd, lerp, libb, librc, &
+    limat, lipr, Liw, liwork
+  INTEGER liwr, lmx, lrg, lrhs, lrprim, lrz, Lw, lwork, lwr, lww, &
+    Mrelas, nerr, next, Nvars
+  REAL Bl(*), Bu(*), Costs(*), Dattrv(*), Duals(*), Prgopt(*), &
     Primal(*), Work(*), zero
   !
   INTEGER Ibasis(*), Ind(*), Iwork(*)

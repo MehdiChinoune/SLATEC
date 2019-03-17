@@ -2,7 +2,6 @@
 SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
     Last,Iwork,Work)
   IMPLICIT NONE
-  INTEGER Last
   !***BEGIN PROLOGUE  QAG
   !***PURPOSE  The routine calculates an approximation result to a given
   !            definite integral I = integral of F over (A,B),
@@ -160,6 +159,7 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  QAG
+  INTEGER Last
   REAL A, Abserr, B, Epsabs, Epsrel, F, Result, Work
   INTEGER Ier, Iwork, Key, Lenw, Limit, lvl, l1, l2, l3, Neval
   !

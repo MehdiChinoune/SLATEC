@@ -2,12 +2,6 @@
 SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
     Resnrm,Xnorm,Z,R,Div,Td,Scales)
   IMPLICIT NONE
-  REAL A, acc, B, Diag, Div, gam, gamma, Q, R, R1MACH, Resnrm, &
-    Scales, SDOT, SDSDOT, Td, uro, X, Xnorm, Z, znorm
-  REAL znrm0
-  INTEGER Iflag, Irank, irm, irp, Iscale, it, Iter, iterp, j, &
-    J4SAVE, k, kp, Kpivot, l, M, maxmes, mj, mmir, N, nfat
-  INTEGER nfatal, nmir, Nrda
   !***BEGIN PROLOGUE  LSSODS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP
@@ -121,6 +115,12 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !   910408  Updated the REFERENCES section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  LSSODS
+  REAL A, acc, B, Diag, Div, gam, gamma, Q, R, R1MACH, Resnrm, &
+    Scales, SDOT, SDSDOT, Td, uro, X, Xnorm, Z, znorm
+  REAL znrm0
+  INTEGER Iflag, Irank, irm, irp, Iscale, it, Iter, iterp, j, &
+    J4SAVE, k, kp, Kpivot, l, M, maxmes, mj, mmir, N, nfat
+  INTEGER nfatal, nmir, Nrda
   DIMENSION A(Nrda,*), X(*), B(*), Q(Nrda,*), Diag(*), Z(*), Kpivot(*)&
     , R(*), Div(*), Td(*), Scales(*)
   !

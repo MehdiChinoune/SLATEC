@@ -2,7 +2,6 @@
 SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
     Rprnrm,Csc,Ww,Bl,Bu,Erp,Rprim,Primal,Finite,Zerolv)
   IMPLICIT NONE
-  INTEGER i, Ienter, Ileave, j, Mrelas, n20005, n20036, Nvars
   !***BEGIN PROLOGUE  SPLPFL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -31,6 +30,7 @@ SUBROUTINE SPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  SPLPFL
+  INTEGER i, Ienter, Ileave, j, Mrelas, n20005, n20036, Nvars
   INTEGER Ibasis(*), Ind(*), Ibb(*)
   REAL Csc(*), Ww(*), Bl(*), Bu(*), Erp(*), Rprim(*), Primal(*), &
     bound, Dirnrm, ratio, Rprnrm, Theta, zero

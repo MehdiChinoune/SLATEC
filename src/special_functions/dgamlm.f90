@@ -1,7 +1,6 @@
 !DECK DGAMLM
 SUBROUTINE DGAMLM(Xmin,Xmax)
   IMPLICIT NONE
-  INTEGER i
   !***BEGIN PROLOGUE  DGAMLM
   !***PURPOSE  Compute the minimum and maximum bounds for the argument in
   !            the Gamma function.
@@ -31,6 +30,7 @@ SUBROUTINE DGAMLM(Xmin,Xmax)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DGAMLM
+  INTEGER i
   REAL(8) :: Xmin, Xmax, alnbig, alnsml, xln, xold, D1MACH
   !***FIRST EXECUTABLE STATEMENT  DGAMLM
   alnsml = LOG(D1MACH(1))

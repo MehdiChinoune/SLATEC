@@ -1,7 +1,6 @@
 !DECK R1MACH
 REAL FUNCTION R1MACH(I)
   IMPLICIT NONE
-  INTEGER I
   !***BEGIN PROLOGUE  R1MACH
   !***PURPOSE  Return floating point machine dependent constants.
   !***LIBRARY   SLATEC
@@ -69,7 +68,7 @@ REAL FUNCTION R1MACH(I)
   !           (BKS, WRB)
   !   930201  Added DEC Alpha and SGI constants.  (RWC and WRB)
   !***END PROLOGUE  R1MACH
-  !
+  INTEGER I
   REAL, SAVE :: rmach(5)
   LOGICAL :: FIRST = .TRUE.
   !

@@ -1663,7 +1663,6 @@ END MODULE TEST39_MOD
 PROGRAM TEST39
   USE TEST39_MOD
   IMPLICIT NONE
-  INTEGER I1MACH
   !***BEGIN PROLOGUE  TEST39
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC
@@ -1705,6 +1704,7 @@ PROGRAM TEST39
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
   !***END PROLOGUE  TEST39
+  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST39
   lun = I1MACH(2)

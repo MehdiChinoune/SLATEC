@@ -172,9 +172,9 @@ SUBROUTINE SNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SNBIR
   !
-  INTEGER Lda, N, Itask, Ind, Iwork(*), info, j, k, kk, l, m ,&
+  INTEGER Lda, N, Itask, Ind, Iwork(*), info, j, k, kk, l, m, &
     Ml, Mu, nc
-  REAL Abe(Lda,*), V(*), Work(N,*), xnorm, dnorm, SDSDOT, SASUM ,&
+  REAL Abe(Lda,*), V(*), Work(N,*), xnorm, dnorm, SDSDOT, SASUM, &
     R1MACH
   CHARACTER(8) :: xern1, xern2
   !***FIRST EXECUTABLE STATEMENT  SNBIR

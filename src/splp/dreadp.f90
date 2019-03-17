@@ -1,7 +1,6 @@
 !DECK DREADP
 SUBROUTINE DREADP(Ipage,List,Rlist,Lpage,Irec)
   IMPLICIT NONE
-  INTEGER i, Ipage, ipagef, Irec, irecn, Lpage, lpg
   !***BEGIN PROLOGUE  DREADP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -27,6 +26,7 @@ SUBROUTINE DREADP(Ipage,List,Rlist,Lpage,Irec)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !***END PROLOGUE  DREADP
+  INTEGER i, Ipage, ipagef, Irec, irecn, Lpage, lpg
   INTEGER List(*)
   REAL(8) :: Rlist(*)
   CHARACTER(8) :: xern1, xern2

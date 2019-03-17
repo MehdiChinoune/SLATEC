@@ -331,7 +331,7 @@ CONTAINS
     LOGICAL fail
     CHARACTER :: short
     CHARACTER(2) :: x(N,NTEST), xs(N,NTEST), y(N), work(N)
-    INTEGER ix(N,NTEST), iy(N), kflag(NTEST), Kprint, Lun, Ipass, j ,&
+    INTEGER ix(N,NTEST), iy(N), kflag(NTEST), Kprint, Lun, Ipass, j, &
       i, kabs, ier, nerr, NUMXER, nn, kkflag, strbeg, strend
     !
     !     ---------
@@ -343,31 +343,31 @@ CONTAINS
     !         IX  = PERMUTATION VECTOR, I.E.  X(IX(J)) = XS(J)
     !
     DATA kflag(1)/2/
-    DATA (x(i,1),i=1,N)/'AC', 'AZ', 'AD', 'AA', 'AB', 'ZZ', 'ZA' ,&
+    DATA (x(i,1),i=1,N)/'AC', 'AZ', 'AD', 'AA', 'AB', 'ZZ', 'ZA', &
       'ZX', 'ZY'/
     DATA (ix(i,1),i=1,N)/4, 5, 1, 3, 2, 7, 8, 9, 6/
-    DATA (xs(i,1),i=1,N)/'AA', 'AB', 'AC', 'AD', 'AZ', 'ZA', 'ZX' ,&
+    DATA (xs(i,1),i=1,N)/'AA', 'AB', 'AC', 'AD', 'AZ', 'ZA', 'ZX', &
       'ZY', 'ZZ'/
     !
     DATA kflag(2)/ - 1/
-    DATA (x(i,2),i=1,N)/'AA', 'BB', 'CC', 'DD', 'EE', 'FF', 'GG' ,&
+    DATA (x(i,2),i=1,N)/'AA', 'BB', 'CC', 'DD', 'EE', 'FF', 'GG', &
       'HH', 'II'/
     DATA (ix(i,2),i=1,N)/9, 8, 7, 6, 5, 4, 3, 2, 1/
-    DATA (xs(i,2),i=1,N)/'II', 'HH', 'GG', 'FF', 'EE', 'DD', 'CC' ,&
+    DATA (xs(i,2),i=1,N)/'II', 'HH', 'GG', 'FF', 'EE', 'DD', 'CC', &
       'BB', 'AA'/
     !
     DATA kflag(3)/ - 2/
-    DATA (x(i,3),i=1,N)/'AA', 'BB', 'CC', 'DD', 'EE', 'FF', 'GG' ,&
+    DATA (x(i,3),i=1,N)/'AA', 'BB', 'CC', 'DD', 'EE', 'FF', 'GG', &
       'HH', 'II'/
     DATA (ix(i,3),i=1,N)/9, 8, 7, 6, 5, 4, 3, 2, 1/
-    DATA (xs(i,3),i=1,N)/'II', 'HH', 'GG', 'FF', 'EE', 'DD', 'CC' ,&
+    DATA (xs(i,3),i=1,N)/'II', 'HH', 'GG', 'FF', 'EE', 'DD', 'CC', &
       'BB', 'AA'/
     !
     DATA kflag(4)/1/
-    DATA (x(i,4),i=1,N)/'AC', 'AZ', 'AD', 'AA', 'AB', 'ZZ', 'ZA' ,&
+    DATA (x(i,4),i=1,N)/'AC', 'AZ', 'AD', 'AA', 'AB', 'ZZ', 'ZA', &
       'ZX', 'ZY'/
     DATA (ix(i,4),i=1,N)/4, 5, 1, 3, 2, 7, 8, 9, 6/
-    DATA (xs(i,4),i=1,N)/'AA', 'AB', 'AC', 'AD', 'AZ', 'ZA', 'ZX' ,&
+    DATA (xs(i,4),i=1,N)/'AA', 'AB', 'AC', 'AD', 'AZ', 'ZA', 'ZX', &
       'ZY', 'ZZ'/
     !
     !***FIRST EXECUTABLE STATEMENT  HSRTQC

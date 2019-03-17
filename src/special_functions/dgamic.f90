@@ -1,7 +1,6 @@
 !DECK DGAMIC
 REAL(8) FUNCTION DGAMIC(A,X)
   IMPLICIT NONE
-  INTEGER izero
   !***BEGIN PROLOGUE  DGAMIC
   !***PURPOSE  Calculate the complementary incomplete Gamma function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -45,6 +44,7 @@ REAL(8) FUNCTION DGAMIC(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   !***END PROLOGUE  DGAMIC
+  INTEGER izero
   REAL(8) :: A, X, aeps, ainta, algap1, alneps, alngs, alx, &
     bot, e, eps, gstar, h, sga, sgng, sgngam, sgngs, &
     sqeps, t, D1MACH, DLNGAM, D9GMIC, D9GMIT, D9LGIC, &

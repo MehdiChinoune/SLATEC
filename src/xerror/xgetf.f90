@@ -1,7 +1,6 @@
 !DECK XGETF
 SUBROUTINE XGETF(Kontrl)
   IMPLICIT NONE
-  INTEGER J4SAVE, Kontrl
   !***BEGIN PROLOGUE  XGETF
   !***PURPOSE  Return the current value of the error control flag.
   !***LIBRARY   SLATEC (XERROR)
@@ -26,6 +25,7 @@ SUBROUTINE XGETF(Kontrl)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  XGETF
+  INTEGER J4SAVE, Kontrl
   !***FIRST EXECUTABLE STATEMENT  XGETF
   Kontrl = J4SAVE(2,0,.FALSE.)
 END SUBROUTINE XGETF

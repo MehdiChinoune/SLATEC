@@ -1,7 +1,6 @@
 !DECK RPZERO
 SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
   IMPLICIT NONE
-  INTEGER i, Iflg, N, n1
   !***BEGIN PROLOGUE  RPZERO
   !***PURPOSE  Find the zeros of a polynomial with real coefficients.
   !***LIBRARY   SLATEC
@@ -49,7 +48,7 @@ SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  RPZERO
-  !
+  INTEGER i, Iflg, N, n1
   COMPLEX R(*), T(*)
   REAL A(*), S(*)
   !***FIRST EXECUTABLE STATEMENT  RPZERO

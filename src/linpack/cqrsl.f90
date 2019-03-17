@@ -156,7 +156,7 @@ SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CQRSL
   INTEGER Ldx, N, K, Job, Info
-  COMPLEX X(Ldx,*), Qraux(*), Y(*), Qy(*), Qty(*), B(*), Rsd(*) ,&
+  COMPLEX X(Ldx,*), Qraux(*), Y(*), Qy(*), Qty(*), B(*), Rsd(*), &
     Xb(*)
   !
   INTEGER i, j, jj, ju, kp1

@@ -3,14 +3,6 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     Alpha,Beta,Sig,V,W,G,Phase1,Ns,Nornd,Ksteps,Twou,Fouru,&
     Xold,Kprev,Ivc,Iv,Kgi,Gi,Rpar,Ipar)
   IMPLICIT NONE
-  REAL absh, Alpha, Beta, big, Eps, erk, erkm1, erkm2, erkp1, err, &
-    Fouru, G, Gi, gstr, H, hnew, Hold, P, p5eps, Phi
-  REAL Psi, r, R1MACH, reali, realns, rho, round, Rpar, Sig, tau, &
-    temp1, temp2, temp3, temp4, temp5, temp6, two, Twou, u, V
-  REAL W, Wt, X, Xold, Y, Yp
-  INTEGER i, ifail, im1, ip1, Ipar, iq, Iv, Ivc, j, jv, K, Kgi, &
-    km1, km2, knew, Kold, kp1, kp2, Kprev, Ksteps
-  INTEGER l, limit1, limit2, Neqn, Ns, nsm2, nsp1, nsp2
   !***BEGIN PROLOGUE  STEPS
   !***PURPOSE  Integrate a system of first order ordinary differential
   !            equations one step.
@@ -180,7 +172,14 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  STEPS
-  !
+  REAL absh, Alpha, Beta, big, Eps, erk, erkm1, erkm2, erkp1, err, &
+    Fouru, G, Gi, gstr, H, hnew, Hold, P, p5eps, Phi
+  REAL Psi, r, R1MACH, reali, realns, rho, round, Rpar, Sig, tau, &
+    temp1, temp2, temp3, temp4, temp5, temp6, two, Twou, u, V
+  REAL W, Wt, X, Xold, Y, Yp
+  INTEGER i, ifail, im1, ip1, Ipar, iq, Iv, Ivc, j, jv, K, Kgi, &
+    km1, km2, knew, Kold, kp1, kp2, Kprev, Ksteps
+  INTEGER l, limit1, limit2, Neqn, Ns, nsm2, nsp1, nsp2
   LOGICAL Start, Crash, Phase1, Nornd
   DIMENSION Y(*), Wt(*), Phi(Neqn,16), P(*), Yp(*), Psi(12), Alpha(12)&
     , Beta(12), Sig(13), V(12), W(12), G(13), Gi(11), Iv(10), &

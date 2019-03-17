@@ -1,10 +1,6 @@
 !DECK CHKSN4
 SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   IMPLICIT NONE
-  REAL ai, AIT, Alpha, Beta, bi, BIT, ci, CIT, DIT, DLX, DLX4, &
-    DLY, DLY4, TDLx3, TDLy3, xi
-  INTEGER i, IS, JS, K, KSWx, KSWy, L, Mbdcnd, MIT, MS, Nbdcnd, &
-    NIT, NS
   !***BEGIN PROLOGUE  CHKSN4
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPX4
@@ -25,10 +21,11 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CHKSN4
-  !
+  REAL ai, AIT, Alpha, Beta, bi, BIT, ci, CIT, DIT, DLX, DLX4, &
+    DLY, DLY4, TDLx3, TDLy3, xi
+  INTEGER i, IS, JS, K, KSWx, KSWy, L, Mbdcnd, MIT, MS, Nbdcnd, NIT, NS
   COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
-    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
-    DLY4
+    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   LOGICAL Singlr
   EXTERNAL COFX
   !***FIRST EXECUTABLE STATEMENT  CHKSN4

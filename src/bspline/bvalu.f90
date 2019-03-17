@@ -1,7 +1,6 @@
 !DECK BVALU
-FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
+REAL FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   IMPLICIT NONE
-  REAL BVALU
   !***BEGIN PROLOGUE  BVALU
   !***PURPOSE  Evaluate the B-representation of a B-spline at X for the
   !            function value or any of its derivatives.
@@ -68,7 +67,6 @@ FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BVALU
-  !
   INTEGER i, Ideriv, iderp1, ihi, ihmkmj, ilo, imk, imkpj, Inbv, &
     ipj, ip1, ip1mj, j, jj, j1, j2, K, kmider, kmj, km1, &
     kpk, mflag, N

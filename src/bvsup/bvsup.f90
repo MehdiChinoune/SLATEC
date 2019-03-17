@@ -2,21 +2,6 @@
 SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Igofx,Re,Ae,Iflag,Work,Ndw,Iwork,Ndiw,Neqivp)
   IMPLICIT NONE
-  REAL A, Ae, AED, Alpha, B, Beta, C, EPS, FOUru, PWCnd, PX, Re ,&
-    RED, SQOvfl, SRU, TND, TOL, TWOu, URO, Work
-  REAL X, XBEg, XENd, XOP, XOT, Xpts, XSAv, Y
-  INTEGER ICOco, Iflag, Igofx, IGOfxd, INDpvt, INFo, INHomo, INTeg ,&
-    is, ISTkop, IVP, Iwork, j, k, K1, K10, K11, K2, K3, K4
-  INTEGER K5, K6, K7, K8, K9, kkkcoe, kkkcof, kkkg, KKKint, kkks ,&
-    kkksto, kkksud, kkksvc, kkku, kkkv, kkkws, kkkyhp, KKKzpw ,&
-    KNSwot, KOP
-  INTEGER kpts, L1, L2, lllcof, LLLint, lllip, llliws, lllsud ,&
-    lllsvc, LOTjp, LPAr, MNSwot, MXNon, mxnoni, mxnonr, Ncomp ,&
-    NCOmpd, ndeq, NDIsk, Ndiw
-  INTEGER Ndw, NEEdiw, NEEdw, NEQ, NEQivd, Neqivp, Nfc, NFCc, NFCd ,&
-    Nic, NICd, nitemp, non, NOPg, NPS, Nrowa, Nrowb, Nrowy ,&
-    nrtemp, NSWot
-  INTEGER NTApe, NTP, NUMort, Nxpts, NXPtsd, nxptsm
   !***BEGIN PROLOGUE  BVSUP
   !***PURPOSE  Solve a linear two-point boundary value problem using
   !            superposition coupled with an orthonormalization procedure
@@ -415,10 +400,22 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BVSUP
-  ! **********************************************************************
-  !
-  !
-  DIMENSION Y(Nrowy,*), A(Nrowa,*), Alpha(*), B(Nrowb,*), Beta(*) ,&
+  REAL A, Ae, AED, Alpha, B, Beta, C, EPS, FOUru, PWCnd, PX, Re, &
+    RED, SQOvfl, SRU, TND, TOL, TWOu, URO, Work
+  REAL X, XBEg, XENd, XOP, XOT, Xpts, XSAv, Y
+  INTEGER ICOco, Iflag, Igofx, IGOfxd, INDpvt, INFo, INHomo, INTeg, &
+    is, ISTkop, IVP, Iwork, j, k, K1, K10, K11, K2, K3, K4
+  INTEGER K5, K6, K7, K8, K9, kkkcoe, kkkcof, kkkg, KKKint, kkks, &
+    kkksto, kkksud, kkksvc, kkku, kkkv, kkkws, kkkyhp, KKKzpw, &
+    KNSwot, KOP
+  INTEGER kpts, L1, L2, lllcof, LLLint, lllip, llliws, lllsud, &
+    lllsvc, LOTjp, LPAr, MNSwot, MXNon, mxnoni, mxnonr, Ncomp, &
+    NCOmpd, ndeq, NDIsk, Ndiw
+  INTEGER Ndw, NEEdiw, NEEdw, NEQ, NEQivd, Neqivp, Nfc, NFCc, NFCd, &
+    Nic, NICd, nitemp, non, NOPg, NPS, Nrowa, Nrowb, Nrowy, &
+    nrtemp, NSWot
+  INTEGER NTApe, NTP, NUMort, Nxpts, NXPtsd, nxptsm
+  DIMENSION Y(Nrowy,*), A(Nrowa,*), Alpha(*), B(Nrowb,*), Beta(*), &
     Work(*), Iwork(*), Xpts(*)
   CHARACTER(8) :: xern1, xern2, xern3, xern4
   !
@@ -433,10 +430,10 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     THESE COMMON BLOCKS AID IN REDUCING THE NUMBER OF SUBROUTINE
   !     ARGUMENTS PREVALENT IN THIS MODULAR STRUCTURE
   !
-  COMMON /ML18JR/ AED, RED, TOL, NXPtsd, NICd, NOPg, MXNon, NDIsk ,&
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivd ,&
+  COMMON /ML18JR/ AED, RED, TOL, NXPtsd, NICd, NOPg, MXNon, NDIsk, &
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivd, &
     NUMort, NFCc, ICOco
-  COMMON /ML17BW/ KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6 ,&
+  COMMON /ML17BW/ KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, &
     K7, K8, K9, K10, K11, L1, L2, KKKint, LLLint
   !
   ! **********************************************************************

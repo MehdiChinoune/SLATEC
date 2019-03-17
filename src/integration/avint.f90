@@ -1,8 +1,6 @@
 !DECK AVINT
 SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   IMPLICIT NONE
-  REAL Ans, fl, fr, slope, X, Xlo, Xup, Y
-  INTEGER i, Ierr, inlft, inrt, istart, istop, N
   !***BEGIN PROLOGUE  AVINT
   !***PURPOSE  Integrate a function tabulated at arbitrarily spaced
   !            abscissas using overlapping parabolas.
@@ -75,7 +73,8 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  AVINT
-  !
+  REAL Ans, fl, fr, slope, X, Xlo, Xup, Y
+  INTEGER i, Ierr, inlft, inrt, istart, istop, N
   REAL(8) :: r3, rp5, sum, syl, syl2, syl3, syu, syu2, syu3, &
     x1, x2, x3, x12, x13, x23, term1, term2, term3, &
     a, b, c, ca, cb, cc

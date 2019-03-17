@@ -698,7 +698,6 @@ END MODULE TEST06_MOD
 PROGRAM TEST06
   USE TEST06_MOD
   IMPLICIT NONE
-  INTEGER I1MACH
   !***BEGIN PROLOGUE  TEST06
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC
@@ -741,6 +740,7 @@ PROGRAM TEST06
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
   !***END PROLOGUE  TEST06
+  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST06
   lun = I1MACH(2)

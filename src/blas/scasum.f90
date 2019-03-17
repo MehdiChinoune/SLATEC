@@ -1,7 +1,6 @@
 !DECK SCASUM
-FUNCTION SCASUM(N,Cx,Incx)
+REAL FUNCTION SCASUM(N,Cx,Incx)
   IMPLICIT NONE
-  REAL SCASUM
   !***BEGIN PROLOGUE  SCASUM
   !***PURPOSE  Compute the sum of the magnitudes of the real and
   !            imaginary elements of a complex vector.

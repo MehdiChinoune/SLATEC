@@ -1,7 +1,6 @@
 !DECK IPLOC
 INTEGER FUNCTION IPLOC(Loc,Sx,Ix)
   IMPLICIT NONE
-  INTEGER ipage, itemp, k, key, lmx, lmxm1, Loc, lpg, np
   !***BEGIN PROLOGUE  IPLOC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -31,13 +30,13 @@ INTEGER FUNCTION IPLOC(Loc,Sx,Ix)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   910731  Added code to set IPLOC to 0 if LOC is non-positive.  (WRB)
   !***END PROLOGUE  IPLOC
+  INTEGER ipage, itemp, k, key, lmx, lmxm1, Loc, lpg, np
   REAL Sx(*)
   INTEGER Ix(*)
   !***FIRST EXECUTABLE STATEMENT  IPLOC
   IF ( Loc<=0 ) THEN
     CALL XERMSG('SLATEC','IPLOC',&
-      'A value of LOC, the first argument, .LE. 0 was encountered'&
-      ,55,1)
+      'A value of LOC, the first argument, .LE. 0 was encountered',55,1)
     IPLOC = 0
     RETURN
   ENDIF

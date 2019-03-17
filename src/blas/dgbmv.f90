@@ -137,7 +137,7 @@ SUBROUTINE DGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
   !     .. Local Scalars ..
   REAL(8) :: temp
-  INTEGER i, info, ix, iy, j, jx, jy, k, kup1, kx, ky, lenx ,&
+  INTEGER i, info, ix, iy, j, jx, jy, k, kup1, kx, ky, lenx, &
     leny
   !     .. External Functions ..
   LOGICAL LSAME

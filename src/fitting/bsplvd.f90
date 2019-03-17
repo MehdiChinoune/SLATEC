@@ -1,9 +1,6 @@
 !DECK BSPLVD
 SUBROUTINE BSPLVD(T,K,X,Ileft,Vnikx,Nderiv)
   IMPLICIT NONE
-  REAL a, diff, fkmd, T, v, Vnikx, X
-  INTEGER i, ideriv, idervm, Ileft, ipkmd, j, jlow, jm1, K, kmd, &
-    l, m, Nderiv
   !***BEGIN PROLOGUE  BSPLVD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to FC
@@ -27,6 +24,8 @@ SUBROUTINE BSPLVD(T,K,X,Ileft,Vnikx,Nderiv)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  BSPLVD
+  REAL a, diff, fkmd, T, v, Vnikx, X
+  INTEGER i, ideriv, idervm, Ileft, ipkmd, j, jlow, jm1, K, kmd, l, m, Nderiv
   DIMENSION T(*), Vnikx(K,*)
   DIMENSION a(20,20)
   !***FIRST EXECUTABLE STATEMENT  BSPLVD

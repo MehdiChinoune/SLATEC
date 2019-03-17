@@ -1,11 +1,6 @@
 !DECK ORTHOR
-SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
-    Rs)
+SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   IMPLICIT NONE
-  REAL A, acc, akk, anorm, as, asave, Diag, diagk, dum, R1MACH, &
-    Rows, Rs, rss, sad, Scales, SDOT, sig, sigma, sruro, uro
-  INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot, l, M, mk, &
-    N, Nrda
   !***BEGIN PROLOGUE  ORTHOR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP
@@ -78,6 +73,9 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  ORTHOR
+  REAL A, acc, akk, anorm, as, asave, Diag, diagk, dum, R1MACH, &
+    Rows, Rs, rss, sad, Scales, SDOT, sig, sigma, sruro, uro
+  INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot, l, M, mk, N, Nrda
   DIMENSION A(Nrda,*), Diag(*), Kpivot(*), Rows(*), Rs(*), Scales(*)
   !
   ! END OF ABSTRACT

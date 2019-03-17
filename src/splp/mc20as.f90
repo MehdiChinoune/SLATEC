@@ -1,9 +1,6 @@
 !DECK MC20AS
 SUBROUTINE MC20AS(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   IMPLICIT NONE
-  REAL ace, acep
-  INTEGER i, ice, icep, j, ja, jb, jce, jcep, Jdisp, Jptr, k, &
-    kr, loc, Maxa, Nc, null
   !***BEGIN PROLOGUE  MC20AS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -32,6 +29,9 @@ SUBROUTINE MC20AS(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  MC20AS
+  REAL ace, acep
+  INTEGER i, ice, icep, j, ja, jb, jce, jcep, Jdisp, Jptr, k, &
+    kr, loc, Maxa, Nc, null
   INTEGER Inum(*), Jnum(*)
   REAL A(*)
   DIMENSION Jptr(Nc)

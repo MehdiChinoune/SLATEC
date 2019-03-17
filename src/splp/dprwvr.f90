@@ -1,7 +1,6 @@
 !DECK DPRWVR
 SUBROUTINE DPRWVR(Key,Ipage,Lpg,Sx,Ix)
   IMPLICIT NONE
-  INTEGER iaddr, Ipage, ipagef, istart, Ix, Key, Lpg
   !***BEGIN PROLOGUE  DPRWVR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -35,6 +34,7 @@ SUBROUTINE DPRWVR(Key,Ipage,Lpg,Sx,Ix)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   !***END PROLOGUE  DPRWVR
+  INTEGER iaddr, Ipage, ipagef, istart, Ix, Key, Lpg
   DIMENSION Ix(*)
   REAL(8) :: Sx(*), zero, one
   LOGICAL first

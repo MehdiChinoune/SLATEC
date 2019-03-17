@@ -1,7 +1,6 @@
 !DECK D9GMIC
 REAL(8) FUNCTION D9GMIC(A,X,Alx)
   IMPLICIT NONE
-  INTEGER k, m, mm1
   !***BEGIN PROLOGUE  D9GMIC
   !***SUBSIDIARY
   !***PURPOSE  Compute the complementary incomplete Gamma function for A
@@ -28,6 +27,7 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9GMIC
+  INTEGER k, m, mm1
   REAL(8) :: A, X, Alx, alng, bot, eps, euler, fk, fkp1, fm, &
     s, sgng, t, te, D1MACH, DLNGAM
   LOGICAL first

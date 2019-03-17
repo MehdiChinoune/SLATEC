@@ -1,7 +1,6 @@
 !DECK CBETA
 COMPLEX FUNCTION CBETA(A,B)
   IMPLICIT NONE
-  REAL xmax, xmaxt, xmin
   !***BEGIN PROLOGUE  CBETA
   !***PURPOSE  Compute the complete Beta function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -28,6 +27,7 @@ COMPLEX FUNCTION CBETA(A,B)
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  CBETA
+  REAL xmax, xmaxt, xmin
   COMPLEX A, B, CGAMMA, CLBETA
   EXTERNAL CGAMMA
   SAVE xmax

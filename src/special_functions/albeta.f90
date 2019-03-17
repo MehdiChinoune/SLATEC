@@ -1,8 +1,6 @@
 !DECK ALBETA
-FUNCTION ALBETA(A,B)
+REAL FUNCTION ALBETA(A,B)
   IMPLICIT NONE
-  REAL A, ALBETA, ALNGAM, ALNREL, B, corr, GAMMA, p, q, R9LGMC, &
-    sq2pil
   !***BEGIN PROLOGUE  ALBETA
   !***PURPOSE  Compute the natural logarithm of the complete Beta
   !            function.
@@ -32,6 +30,7 @@ FUNCTION ALBETA(A,B)
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  ALBETA
+  REAL A, ALNGAM, ALNREL, B, corr, GAMMA, p, q, R9LGMC, sq2pil
   EXTERNAL GAMMA
   SAVE sq2pil
   DATA sq2pil/0.91893853320467274E0/

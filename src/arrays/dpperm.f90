@@ -40,8 +40,7 @@ SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
   IF ( N<1 ) THEN
     Ier = 1
     CALL XERMSG('SLATEC','DPPERM',&
-      'The number of values to be rearranged, N, is not positive.'&
-      ,Ier,1)
+      'The number of values to be rearranged, N, is not positive.',Ier,1)
     RETURN
   ENDIF
   !

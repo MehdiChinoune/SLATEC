@@ -1,7 +1,6 @@
 !DECK SSWAP
 SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   !***BEGIN PROLOGUE  SSWAP
   !***PURPOSE  Interchange two vectors.
   !***LIBRARY   SLATEC (BLAS)
@@ -46,6 +45,7 @@ SUBROUTINE SSWAP(N,Sx,Incx,Sy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SSWAP
+  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   REAL Sx(*), Sy(*), stemp1, stemp2, stemp3
   !***FIRST EXECUTABLE STATEMENT  SSWAP
   IF ( N<=0 ) RETURN

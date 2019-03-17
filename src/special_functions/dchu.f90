@@ -1,7 +1,6 @@
 !DECK DCHU
 REAL(8) FUNCTION DCHU(A,B,X)
   IMPLICIT NONE
-  INTEGER i, istrt, m, n
   !***BEGIN PROLOGUE  DCHU
   !***PURPOSE  Compute the logarithmic confluent hypergeometric function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -29,6 +28,7 @@ REAL(8) FUNCTION DCHU(A,B,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DCHU
+  INTEGER i, istrt, m, n
   REAL(8) :: A, B, X, aintb, alnx, a0, beps, b0, c0, eps, &
     factor, gamri1, gamrni, pch1ai, pch1i, pi, pochai, &
     sum, t, xeps1, xi, xi1, xn, xtoeps, D1MACH, &

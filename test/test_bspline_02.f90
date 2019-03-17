@@ -474,7 +474,6 @@ END MODULE TEST31_MOD
 PROGRAM TEST31
   USE TEST31_MOD
   IMPLICIT NONE
-  INTEGER I1MACH
   !***BEGIN PROLOGUE  TEST31
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC
@@ -516,6 +515,7 @@ PROGRAM TEST31
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
   !***END PROLOGUE  TEST31
+  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST31
   lun = I1MACH(2)

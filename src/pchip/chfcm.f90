@@ -1,7 +1,6 @@
 !DECK CHFCM
 INTEGER FUNCTION CHFCM(D1,D2,Delta)
   IMPLICIT NONE
-  REAL R1MACH
   !***BEGIN PROLOGUE  CHFCM
   !***SUBSIDIARY
   !***PURPOSE  Check a single cubic for monotonicity.
@@ -70,14 +69,11 @@ INTEGER FUNCTION CHFCM(D1,D2,Delta)
   !   890407  Modified DESCRIPTION to LDOC format.
   !   891214  Moved SAVE statements.  (WRB)
   !***END PROLOGUE  CHFCM
-  !
+  REAL R1MACH
   !  Fortran intrinsics used:  SIGN.
   !  Other routines used:  R1MACH.
-  !
   ! ----------------------------------------------------------------------
-  !
   !  Programming notes:
-  !
   !     TEN is actually a tuning parameter, which determines the width of
   !     the fuzz around the elliptical boundary.
   !
@@ -85,23 +81,16 @@ INTEGER FUNCTION CHFCM(D1,D2,Delta)
   !        a. Change CHFCM to DCHFCM wherever it occurs,
   !        b. Change the real declarations to double precision, and
   !        c. Change the constants ZERO, ONE, ... to double precision.
-  !
   !  DECLARE ARGUMENTS.
-  !
   REAL D1, D2, Delta
-  !
-  !  DECLARE LOCAL VARIABLES.
-  !
+  !  DECLARE LOCAL VARIABLES
   INTEGER ismon, itrue
   REAL a, b, eps, four, one, phi, ten, three, two, zero
   SAVE zero, one, two, three, four
   SAVE ten
-  !
   !  INITIALIZE.
-  !
   DATA zero/0./, one/1.0/, two/2./, three/3./, four/4./, ten/10./
-  !
-  !        MACHINE-DEPENDENT PARAMETER -- SHOULD BE ABOUT 10*UROUND.
+  !  MACHINE-DEPENDENT PARAMETER -- SHOULD BE ABOUT 10*UROUND.
   !***FIRST EXECUTABLE STATEMENT  CHFCM
   eps = ten*R1MACH(4)
   !

@@ -1,7 +1,6 @@
 !DECK PSIXN
-FUNCTION PSIXN(N)
+REAL FUNCTION PSIXN(N)
   IMPLICIT NONE
-  REAL PSIXN
   !***BEGIN PROLOGUE  PSIXN
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to EXINT
@@ -24,7 +23,6 @@ FUNCTION PSIXN(N)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  PSIXN
-  !
   INTEGER N, k
   REAL ax, b, c, fn, rfn2, trm, s, wdtol
   REAL R1MACH

@@ -1,7 +1,6 @@
 !DECK SREADP
 SUBROUTINE SREADP(Ipage,List,Rlist,Lpage,Irec)
   IMPLICIT NONE
-  INTEGER i, Ipage, ipagef, Irec, irecn, Lpage, lpg
   !***BEGIN PROLOGUE  SREADP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -27,6 +26,7 @@ SUBROUTINE SREADP(Ipage,List,Rlist,Lpage,Irec)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !***END PROLOGUE  SREADP
+  INTEGER i, Ipage, ipagef, Irec, irecn, Lpage, lpg
   INTEGER List(*)
   REAL Rlist(*)
   CHARACTER(8) :: xern1, xern2

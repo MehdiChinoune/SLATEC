@@ -1,8 +1,6 @@
 !DECK DBSI1E
 REAL(8) FUNCTION DBSI1E(X)
   IMPLICIT NONE
-  REAL eta
-  INTEGER INITDS, ntai1, ntai12, nti1
   !***BEGIN PROLOGUE  DBSI1E
   !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order one.
@@ -47,8 +45,9 @@ REAL(8) FUNCTION DBSI1E(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBSI1E
-  REAL(8) :: X, bi1cs(17), ai1cs(46), ai12cs(69), xmin, xsml, &
-    y, D1MACH, DCSEVL
+  REAL eta
+  INTEGER INITDS, ntai1, ntai12, nti1
+  REAL(8) :: X, bi1cs(17), ai1cs(46), ai12cs(69), xmin, xsml, y, D1MACH, DCSEVL
   LOGICAL first
   SAVE bi1cs, ai1cs, ai12cs, nti1, ntai1, ntai12, xmin, xsml, first
   DATA bi1cs(1)/ - .19717132610998597316138503218149D-2/

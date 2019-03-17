@@ -1,8 +1,6 @@
 !DECK XERSVE
 SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
   IMPLICIT NONE
-  INTEGER i, I1MACH, Icount, iunit, Kflag, kount, kountx, kunit ,&
-    LENTAB, Level, levtab, Nerr, nertab, nmsg, nunit
   !***BEGIN PROLOGUE  XERSVE
   !***SUBSIDIARY
   !***PURPOSE  Record that an error has occurred.
@@ -59,6 +57,8 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
   !   910626  Added LIBTAB and SUBTAB to SAVE statement.  (BKS)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  XERSVE
+  INTEGER i, I1MACH, Icount, iunit, Kflag, kount, kountx, kunit, &
+    LENTAB, Level, levtab, Nerr, nertab, nmsg, nunit
   PARAMETER (LENTAB=10)
   INTEGER lun(5)
   CHARACTER*(*) Librar, Subrou, Messg
@@ -95,7 +95,7 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
       !           Print body of table.
       !
       DO i = 1, nmsg
-        WRITE (iunit,99002) libtab(i), subtab(i), mestab(i), nertab(i) ,&
+        WRITE (iunit,99002) libtab(i), subtab(i), mestab(i), nertab(i), &
           levtab(i), kount(i)
         99002 FORMAT (1X,A,3X,A,3X,A,3I10)
       ENDDO

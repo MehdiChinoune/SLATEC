@@ -1,7 +1,6 @@
 !DECK D9ATN1
 REAL(8) FUNCTION D9ATN1(X)
   IMPLICIT NONE
-  INTEGER INITDS, ntatn1
   !***BEGIN PROLOGUE  D9ATN1
   !***SUBSIDIARY
   !***PURPOSE  Evaluate DATAN(X) from first order relative accuracy so
@@ -35,8 +34,8 @@ REAL(8) FUNCTION D9ATN1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9ATN1
-  REAL(8) :: X, xbig, xmax, xsml, y, atn1cs(40), eps, DCSEVL, &
-    D1MACH
+  INTEGER INITDS, ntatn1
+  REAL(8) :: X, xbig, xmax, xsml, y, atn1cs(40), eps, DCSEVL, D1MACH
   LOGICAL first
   SAVE atn1cs, ntatn1, xsml, xbig, xmax, first
   DATA atn1cs(1)/ - .3283997535355202356907939922990D-1/
@@ -95,11 +94,9 @@ REAL(8) FUNCTION D9ATN1(X)
   IF ( y>1.0D0 ) THEN
     !
     IF ( y>xmax ) CALL XERMSG('SLATEC','D9ATN1',&
-      'NO PRECISION IN ANSWER BECAUSE X IS TOO BIG',&
-      2,2)
+      'NO PRECISION IN ANSWER BECAUSE X IS TOO BIG',2,2)
     IF ( y>xbig ) CALL XERMSG('SLATEC','D9ATN1',&
-      'ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG'&
-      ,1,1)
+      'ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG',1,1)
     !
     D9ATN1 = (ATAN(X)-X)/X**3
     RETURN

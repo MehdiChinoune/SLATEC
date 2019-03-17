@@ -1,9 +1,6 @@
 !DECK GAMMA
-FUNCTION GAMMA(X)
+REAL FUNCTION GAMMA(X)
   IMPLICIT NONE
-  REAL CSEVL, dxrel, GAMMA, gcs, pi, R1MACH, R9LGMC, sinpiy, &
-    sq2pil, X, xmax, xmin, y
-  INTEGER i, INITS, n, ngcs
   !***BEGIN PROLOGUE  GAMMA
   !***PURPOSE  Compute the complete Gamma function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -25,6 +22,9 @@ FUNCTION GAMMA(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  GAMMA
+  REAL CSEVL, dxrel, gcs, pi, R1MACH, R9LGMC, sinpiy, &
+    sq2pil, X, xmax, xmin, y
+  INTEGER i, INITS, n, ngcs
   DIMENSION gcs(23)
   LOGICAL first
   SAVE gcs, pi, sq2pil, ngcs, xmin, xmax, dxrel, first

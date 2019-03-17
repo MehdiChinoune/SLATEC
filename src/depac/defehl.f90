@@ -1,8 +1,6 @@
 !DECK DEFEHL
 SUBROUTINE DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   IMPLICIT NONE
-  REAL ch, F1, F2, F3, F4, F5, H, Rpar, T, Y, Yp, Ys
-  INTEGER Ipar, k, Neq
   !***BEGIN PROLOGUE  DEFEHL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DERKF
@@ -49,8 +47,8 @@ SUBROUTINE DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DEFEHL
-  !
-  !
+  REAL ch, F1, F2, F3, F4, F5, H, Rpar, T, Y, Yp, Ys
+  INTEGER Ipar, k, Neq
   DIMENSION Y(*), Yp(*), F1(*), F2(*), F3(*), F4(*), F5(*), Ys(*), &
     Rpar(*), Ipar(*)
   !

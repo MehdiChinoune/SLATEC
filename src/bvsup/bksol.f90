@@ -1,8 +1,6 @@
 !DECK BKSOL
 SUBROUTINE BKSOL(N,A,X)
   IMPLICIT NONE
-  REAL A, SDOT, X
-  INTEGER j, k, m, N, nm1
   !***BEGIN PROLOGUE  BKSOL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP
@@ -31,9 +29,9 @@ SUBROUTINE BKSOL(N,A,X)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  BKSOL
-  !
+  REAL A, SDOT, X
+  INTEGER j, k, m, N, nm1
   DIMENSION A(*), X(*)
-  !
   !***FIRST EXECUTABLE STATEMENT  BKSOL
   m = (N*(N+1))/2
   X(N) = X(N)*A(m)

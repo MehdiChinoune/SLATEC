@@ -2,7 +2,6 @@
 SUBROUTINE QAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
     Last,Iwork,Work)
   IMPLICIT NONE
-  INTEGER Last
   !***BEGIN PROLOGUE  QAWC
   !***PURPOSE  The routine calculates an approximation result to a
   !            Cauchy principal value I = INTEGRAL of F*W over (A,B)
@@ -156,7 +155,7 @@ SUBROUTINE QAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  QAWC
-  !
+  INTEGER Last
   REAL A, Abserr, B, C, Epsabs, Epsrel, F, Result, Work
   INTEGER Ier, Iwork, Lenw, Limit, lvl, l1, l2, l3, Neval
   !

@@ -1,8 +1,6 @@
 !DECK ATANH
-FUNCTION ATANH(X)
+REAL FUNCTION ATANH(X)
   IMPLICIT NONE
-  REAL ATANH, atnhcs, CSEVL, dxrel, R1MACH, sqeps, X, y
-  INTEGER INITS, nterms
   !***BEGIN PROLOGUE  ATANH
   !***PURPOSE  Compute the arc hyperbolic tangent.
   !***LIBRARY   SLATEC (FNLIB)
@@ -32,6 +30,8 @@ FUNCTION ATANH(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  ATANH
+  REAL atnhcs, CSEVL, dxrel, R1MACH, sqeps, X, y
+  INTEGER INITS, nterms
   DIMENSION atnhcs(15)
   LOGICAL first
   SAVE atnhcs, nterms, dxrel, sqeps, first
@@ -63,8 +63,7 @@ FUNCTION ATANH(X)
   IF ( y>=1.0 ) CALL XERMSG('SLATEC','ATANH','ABS(X) GE 1',2,2)
   !
   IF ( 1.0-y<dxrel ) CALL XERMSG('SLATEC','ATANH',&
-    'ANSWER LT HALF PRECISION BECAUSE ABS(X) TOO NEAR 1'&
-    ,1,1)
+    'ANSWER LT HALF PRECISION BECAUSE ABS(X) TOO NEAR 1',1,1)
   !
   ATANH = X
   IF ( y>sqeps.AND.y<=0.5 ) ATANH = X*(1.0+CSEVL(8.*X*X-1.,atnhcs,nterms))

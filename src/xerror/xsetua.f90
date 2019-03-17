@@ -1,7 +1,6 @@
 !DECK XSETUA
 SUBROUTINE XSETUA(Iunita,N)
   IMPLICIT NONE
-  INTEGER i, index, Iunita, J4SAVE, junk, N
   !***BEGIN PROLOGUE  XSETUA
   !***PURPOSE  Set logical unit numbers (up to 5) to which error
   !            messages are to be sent.
@@ -40,6 +39,7 @@ SUBROUTINE XSETUA(Iunita,N)
   !   900510  Change call to XERRWV to XERMSG.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  XSETUA
+  INTEGER i, index, Iunita, J4SAVE, junk, N
   DIMENSION Iunita(5)
   CHARACTER(8) :: xern1
   !***FIRST EXECUTABLE STATEMENT  XSETUA

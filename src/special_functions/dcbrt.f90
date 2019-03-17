@@ -1,8 +1,6 @@
 !DECK DCBRT
 REAL(8) FUNCTION DCBRT(X)
   IMPLICIT NONE
-  INTEGER irem, iter, ixpnt, n, niter
-  REAL z
   !***BEGIN PROLOGUE  DCBRT
   !***PURPOSE  Compute the cube root.
   !***LIBRARY   SLATEC (FNLIB)
@@ -23,6 +21,8 @@ REAL(8) FUNCTION DCBRT(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DCBRT
+  INTEGER irem, iter, ixpnt, n, niter
+  REAL z
   REAL(8) :: X, cbrt2(5), y, cbrtsq, D9PAK, D1MACH
   SAVE cbrt2, niter
   DATA cbrt2(1)/0.62996052494743658238360530363911D0/

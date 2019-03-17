@@ -1,8 +1,6 @@
 !DECK POISP2
 SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   IMPLICIT NONE
-  REAL A, B, B2, B3, Bb, C, D, P, Q, s, t, Tcos, W, W2, W3
-  INTEGER i, Idimq, ipstor, j, lh, M, mr, N, nr, nrm1, nrmj, nrpj
   !***BEGIN PROLOGUE  POISP2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to GENBUN
@@ -22,7 +20,8 @@ SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  POISP2
-  !
+  REAL A, B, B2, B3, Bb, C, D, P, Q, s, t, Tcos, W, W2, W3
+  INTEGER i, Idimq, ipstor, j, lh, M, mr, N, nr, nrm1, nrmj, nrpj
   DIMENSION A(*), Bb(*), C(*), Q(Idimq,*), B(*), B2(*), B3(*), W(*), &
     W2(*), W3(*), D(*), Tcos(*), P(*)
   !***FIRST EXECUTABLE STATEMENT  POISP2

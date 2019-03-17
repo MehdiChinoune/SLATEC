@@ -1,7 +1,6 @@
 !DECK DPOCH
 REAL(8) FUNCTION DPOCH(A,X)
   IMPLICIT NONE
-  INTEGER i, ia, n
   !***BEGIN PROLOGUE  DPOCH
   !***PURPOSE  Evaluate a generalization of Pochhammer's symbol.
   !***LIBRARY   SLATEC (FNLIB)
@@ -29,6 +28,7 @@ REAL(8) FUNCTION DPOCH(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DPOCH
+  INTEGER i, ia, n
   REAL(8) :: A, X, absa, absax, alnga, alngax, ax, b, pi, &
     sgnga, sgngax, DFAC, DLNREL, D9LGMC, DGAMMA, &
     DGAMR, DCOT

@@ -1,12 +1,6 @@
 !DECK POSTG2
 SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
   IMPLICIT NONE
-  REAL A, B, B2, B3, Bb, C, D, fi, fnum, fnum2, P, Q, t, Tcos, &
-    W, W2, W3
-  INTEGER i, i2r, i2rby2, Idimq, ii, ijump, ip, ipstor, j, jm1, &
-    jm2, jm3, jp1, jp2, jp3, jr, jstart, jstep, jstop, k
-  INTEGER k1, k2, k3, k4, kr, lr, M, mr, N, nlast, nlastp, np, &
-    Nperod, nr, nrod, nrodpr
   !***BEGIN PROLOGUE  POSTG2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to POISTG
@@ -27,7 +21,11 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   920130  Modified to use merge routine S1MERG rather than deleted
   !           routine MERGE.  (WRB)
   !***END PROLOGUE  POSTG2
-  !
+  REAL A, B, B2, B3, Bb, C, D, fi, fnum, fnum2, P, Q, t, Tcos, W, W2, W3
+  INTEGER i, i2r, i2rby2, Idimq, ii, ijump, ip, ipstor, j, jm1, &
+    jm2, jm3, jp1, jp2, jp3, jr, jstart, jstep, jstop, k
+  INTEGER k1, k2, k3, k4, kr, lr, M, mr, N, nlast, nlastp, np, &
+    Nperod, nr, nrod, nrodpr
   DIMENSION A(*), Bb(*), C(*), Q(Idimq,*), B(*), B2(*), B3(*), W(*), &
     W2(*), W3(*), D(*), Tcos(*), k(4), P(*)
   EQUIVALENCE (k(1),k1)

@@ -3,9 +3,6 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,Ibb,Erdnrm,Eps,Gg,Dulnrm,Dirnrm,Amat,Basmat,Csc,Wr,&
     Ww,Bl,Bu,Rz,Rg,Colnrm,Duals,Found)
   IMPLICIT NONE
-  INTEGER i, Ienter, ihi, il1, ilow, ipage, IPLOC, iu1, j, key, &
-    Lbm, Lmx, lpg, Mrelas, n20002, n20050, Nvars
-  REAL SASUM
   !***BEGIN PROLOGUE  SPLPFE
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -36,6 +33,9 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  SPLPFE
+  INTEGER i, Ienter, ihi, il1, ilow, ipage, IPLOC, iu1, j, key, &
+    Lbm, Lmx, lpg, Mrelas, n20002, n20050, Nvars
+  REAL SASUM
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), &
     Ibb(*)
   REAL Amat(*), Basmat(*), Csc(*), Wr(*), Ww(*), Bl(*), Bu(*), &

@@ -1,7 +1,6 @@
 !DECK FZERO
 SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   IMPLICIT NONE
-  REAL F, R1MACH
   !***BEGIN PROLOGUE  FZERO
   !***PURPOSE  Search for a zero of a function F(X) in a given interval
   !            (B,C).  It is designed primarily for problems where F(B)
@@ -94,6 +93,7 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  FZERO
+  REAL F, R1MACH
   REAL a, acbs, acmb, Ae, aw, B, C, cmb, er, fa, fb, fc, fx, &
     fz, p, q, R, Re, rw, t, tol, z
   INTEGER ic, Iflag, kount

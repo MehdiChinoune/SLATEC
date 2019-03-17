@@ -1,9 +1,6 @@
 !DECK LA05ES
 SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Ia,Reals)
   IMPLICIT NONE
-  INTEGER Ia, ipi, j, k, kl, kn, LCOl, LENl, LENu, LP, LROw, N, &
-    NCP, nz
-  REAL SMAll
   !***BEGIN PROLOGUE  LA05ES
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -33,6 +30,8 @@ SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Ia,Reals)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  LA05ES
+  INTEGER Ia, ipi, j, k, kl, kn, LCOl, LENl, LENu, LP, LROw, N, NCP, nz
+  REAL SMAll
   LOGICAL Reals
   REAL A(*)
   INTEGER Irn(*), Iw(*)

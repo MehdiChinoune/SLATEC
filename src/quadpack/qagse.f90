@@ -169,8 +169,7 @@ SUBROUTINE QAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     numrl2
   LOGICAL extrap, noext
   !
-  DIMENSION Alist(*), Blist(*), Elist(*), Iord(*), res3la(3), Rlist(*)&
-    , rlist2(52)
+  DIMENSION Alist(*), Blist(*), Elist(*), Iord(*), res3la(3), Rlist(*), rlist2(52)
   !
   EXTERNAL F
   !

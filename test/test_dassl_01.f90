@@ -369,7 +369,6 @@ END MODULE TEST48_MOD
 PROGRAM TEST48
   USE TEST48_MOD
   IMPLICIT NONE
-  INTEGER I1MACH
   !***BEGIN PROLOGUE  TEST48
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC
@@ -408,6 +407,7 @@ PROGRAM TEST48
   !   901001  Converted prologue to 4.0 format.  (FNF)
   !   901009  Corrected GAMS classification code.  (FNF)
   !***END PROLOGUE  TEST48
+  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST48
   lun = I1MACH(2)

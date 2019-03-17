@@ -211,14 +211,12 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
   REAL(8) :: A, abseps, Abserr, Alist, Blist, Chebmo, correc, &
     cycle, c1, c2, dl, drl, D1MACH, Elist, Erlst, &
     ep, eps, epsa, Epsabs, errsum, F, fact, Omega, &
-    p, pi, p1, psum, reseps, Result, res3la, Rlist, &
-    Rslst, uflow
+    p, pi, p1, psum, reseps, Result, res3la, Rlist, Rslst, uflow
   INTEGER Ier, Ierlst, Integr, Iord, ktmin, l, last, Lst, Limit, &
     Limlst, ll, Maxp1, momcom, nev, Neval, Nnlog, nres, numrl2
   !
   DIMENSION Alist(*), Blist(*), Chebmo(Maxp1,25), Elist(*), Erlst(*), &
-    Ierlst(*), Iord(*), Nnlog(*), psum(52), res3la(3), Rlist(*)&
-    , Rslst(*)
+    Ierlst(*), Iord(*), Nnlog(*), psum(52), res3la(3), Rlist(*), Rslst(*)
   !
   EXTERNAL F
   !

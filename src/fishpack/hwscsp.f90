@@ -2,11 +2,6 @@
 SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
     Elmbda,F,Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  REAL Bdrf, Bdrs, Bdtf, Bdts, dum, Elmbda, F, Pertrb, pi, PIMACH, &
-    Rf, Rs, Tf, Ts, W
-  INTEGER i1, i10, i2, i3, i4, i5, i6, i7, i8, i9, Idimf, &
-    Ierror, Intl, k, l, M, Mbdcnd, mp1, N, Nbdcnd
-  INTEGER nck, np1
   !***BEGIN PROLOGUE  HWSCSP
   !***PURPOSE  Solve a finite difference approximation to the modified
   !            Helmholtz equation in spherical coordinates assuming
@@ -350,7 +345,11 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  HWSCSP
-  !
+  REAL Bdrf, Bdrs, Bdtf, Bdts, dum, Elmbda, F, Pertrb, pi, PIMACH, &
+    Rf, Rs, Tf, Ts, W
+  INTEGER i1, i10, i2, i3, i4, i5, i6, i7, i8, i9, Idimf, &
+    Ierror, Intl, k, l, M, Mbdcnd, mp1, N, Nbdcnd
+  INTEGER nck, np1
   DIMENSION F(Idimf,*), Bdts(*), Bdtf(*), Bdrs(*), Bdrf(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HWSCSP
   pi = PIMACH(dum)

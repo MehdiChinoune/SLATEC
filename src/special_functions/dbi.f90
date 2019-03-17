@@ -1,8 +1,6 @@
 !DECK DBI
 REAL(8) FUNCTION DBI(X)
   IMPLICIT NONE
-  REAL eta
-  INTEGER INITDS, nbif, nbif2, nbig, nbig2
   !***BEGIN PROLOGUE  DBI
   !***PURPOSE  Evaluate the Bairy function (the Airy function of the
   !            second kind).
@@ -49,6 +47,8 @@ REAL(8) FUNCTION DBI(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBI
+  REAL eta
+  INTEGER INITDS, nbif, nbif2, nbig, nbig2
   REAL(8) :: X, bifcs(13), bigcs(13), bif2cs(15), big2cs(15), &
     theta, xm, xmax, x3sml, z, D1MACH, DCSEVL, DBIE
   LOGICAL first

@@ -1,7 +1,6 @@
 !DECK XERCNT
 SUBROUTINE XERCNT(Librar,Subrou,Messg,Nerr,Level,Kontrl)
   IMPLICIT NONE
-  INTEGER Kontrl, Level, Nerr
   !***BEGIN PROLOGUE  XERCNT
   !***SUBSIDIARY
   !***PURPOSE  Allow user control over handling of errors.
@@ -56,6 +55,7 @@ SUBROUTINE XERCNT(Librar,Subrou,Messg,Nerr,Level,Kontrl)
   !           names, changed routine name from XERCTL to XERCNT.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  XERCNT
+  INTEGER Kontrl, Level, Nerr
   CHARACTER*(*) Librar, Subrou, Messg
   !***FIRST EXECUTABLE STATEMENT  XERCNT
 END SUBROUTINE XERCNT

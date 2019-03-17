@@ -1,8 +1,6 @@
 !DECK DBIE
 REAL(8) FUNCTION DBIE(X)
   IMPLICIT NONE
-  REAL eta
-  INTEGER INITDS, nbif, nbif2, nbig, nbig2, nbip1, nbip2
   !***BEGIN PROLOGUE  DBIE
   !***PURPOSE  Calculate the Bairy function for a negative argument and an
   !            exponentially scaled Bairy function for a non-negative
@@ -73,6 +71,8 @@ REAL(8) FUNCTION DBIE(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DBIE
+  REAL eta
+  INTEGER INITDS, nbif, nbif2, nbig, nbig2, nbip1, nbip2
   REAL(8) :: X, bifcs(13), bigcs(13), bif2cs(15), big2cs(15), &
     bip1cs(47), bip2cs(88), atr, btr, sqrtx, theta, &
     xbig, xm, x3sml, x32sml, z, D1MACH, DCSEVL

@@ -1,13 +1,6 @@
 !DECK STWAY
 SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
   IMPLICIT NONE
-  REAL AE, C, PWCnd, PX, RE, Stowa, TND, TOL, U, V, X, XBEg, &
-    XENd, XOP, XOT, XSAv, Yhp
-  INTEGER ICOco, IGOfx, INDpvt, INFo, INHomo, Inout, INTeg, ISTkop, &
-    IVP, j, k, KNSwot, ko, KOP, ks, ksj, LOTjp, MNSwot, &
-    MXNon, NCOmp
-  INTEGER NDIsk, NEQ, NEQivp, NFC, NFCc, NIC, NOPg, NPS, NSWot, &
-    NTApe, NTP, NUMort, NXPts
   !***BEGIN PROLOGUE  STWAY
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP
@@ -31,7 +24,12 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  STWAY
-  !
+  REAL AE, C, PWCnd, PX, RE, Stowa, TND, TOL, U, V, X, XBEg, &
+    XENd, XOP, XOT, XSAv, Yhp
+  INTEGER ICOco, IGOfx, INDpvt, INFo, INHomo, Inout, INTeg, ISTkop, &
+    IVP, j, k, KNSwot, ko, KOP, ks, ksj, LOTjp, MNSwot, MXNon, NCOmp
+  INTEGER NDIsk, NEQ, NEQivp, NFC, NFCc, NIC, NOPg, NPS, NSWot, &
+    NTApe, NTP, NUMort, NXPts
   DIMENSION U(*), V(*), Yhp(*), Stowa(*)
   !
   COMMON /ML8SZ / C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC

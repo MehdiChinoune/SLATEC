@@ -1,12 +1,6 @@
 !DECK ORTHOL
-SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,&
-    Cs)
+SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   IMPLICIT NONE
-  REAL A, acc, akk, anorm, as, asave, Cols, Cs, css, Diag, diagk, &
-    dum, R1MACH, sad, sc, Scales, SDOT, sig, sigma, sruro
-  REAL uro
-  INTEGER Iflag, Irank, Iscale, j, jcol, k, kp, Kpivot, l, M, mk, &
-    N, Nrda
   !***BEGIN PROLOGUE  ORTHOL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP
@@ -79,6 +73,10 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,&
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  ORTHOL
+  REAL A, acc, akk, anorm, as, asave, Cols, Cs, css, Diag, diagk, &
+    dum, R1MACH, sad, sc, Scales, SDOT, sig, sigma, sruro
+  REAL uro
+  INTEGER Iflag, Irank, Iscale, j, jcol, k, kp, Kpivot, l, M, mk, N, Nrda
   DIMENSION A(Nrda,*), Diag(*), Kpivot(*), Cols(*), Cs(*), Scales(*)
   !
   ! **********************************************************************

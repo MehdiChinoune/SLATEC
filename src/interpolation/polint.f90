@@ -1,8 +1,6 @@
 !DECK POLINT
 SUBROUTINE POLINT(N,X,Y,C)
   IMPLICIT NONE
-  REAL C, dif, X, Y
-  INTEGER i, k, km1, N
   !***BEGIN PROLOGUE  POLINT
   !***PURPOSE  Produce the polynomial which interpolates a set of discrete
   !            data points.
@@ -42,6 +40,8 @@ SUBROUTINE POLINT(N,X,Y,C)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  POLINT
+  REAL C, dif, X, Y
+  INTEGER i, k, km1, N
   DIMENSION X(*), Y(*), C(*)
   !***FIRST EXECUTABLE STATEMENT  POLINT
   IF ( N<=0 ) THEN

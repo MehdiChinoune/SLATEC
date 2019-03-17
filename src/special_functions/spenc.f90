@@ -1,8 +1,6 @@
 !DECK SPENC
-FUNCTION SPENC(X)
+REAL FUNCTION SPENC(X)
   IMPLICIT NONE
-  REAL aln, CSEVL, pi26, R1MACH, SPENC, spencs, X, xbig
-  INTEGER INITS, nspenc
   !***BEGIN PROLOGUE  SPENC
   !***PURPOSE  Compute a form of Spence's integral due to K. Mitchell.
   !***LIBRARY   SLATEC (FNLIB)
@@ -41,6 +39,8 @@ FUNCTION SPENC(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  SPENC
+  REAL aln, CSEVL, pi26, R1MACH, spencs, X, xbig
+  INTEGER INITS, nspenc
   DIMENSION spencs(19)
   LOGICAL first
   SAVE spencs, pi26, nspenc, xbig, first

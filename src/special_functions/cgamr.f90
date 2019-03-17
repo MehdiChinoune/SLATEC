@@ -1,8 +1,6 @@
 !DECK CGAMR
 COMPLEX FUNCTION CGAMR(Z)
   IMPLICIT NONE
-  INTEGER irold
-  REAL x
   !***BEGIN PROLOGUE  CGAMR
   !***PURPOSE  Compute the reciprocal of the Gamma function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -22,6 +20,8 @@ COMPLEX FUNCTION CGAMR(Z)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CGAMR
+  INTEGER irold
+  REAL x
   COMPLEX Z, CLNGAM
   !***FIRST EXECUTABLE STATEMENT  CGAMR
   CGAMR = (0.0,0.0)

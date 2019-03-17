@@ -1,5 +1,6 @@
 !DECK DNLS1E
 SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
+  IMPLICIT NONE
   !***BEGIN PROLOGUE  DNLS1E
   !***PURPOSE  An easy-to-use code which minimizes the sum of the squares
   !            of M nonlinear functions in N variables by a modification
@@ -491,7 +492,6 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DNLS1E
-  IMPLICIT NONE
   INTEGER M, N, Nprint, Info, Lwa, Iopt
   INTEGER index, Iw(*)
   REAL(8) :: Tol

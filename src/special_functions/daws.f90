@@ -1,9 +1,6 @@
 !DECK DAWS
-FUNCTION DAWS(X)
+REAL FUNCTION DAWS(X)
   IMPLICIT NONE
-  REAL CSEVL, daw2cs, dawacs, dawcs, DAWS, eps, R1MACH, X, xbig, &
-    xmax, xsml, y
-  INTEGER INITS, ntdaw, ntdaw2, ntdawa
   !***BEGIN PROLOGUE  DAWS
   !***PURPOSE  Compute Dawson's function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -43,10 +40,11 @@ FUNCTION DAWS(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DAWS
+  REAL CSEVL, daw2cs, dawacs, dawcs, eps, R1MACH, X, xbig, xmax, xsml, y
+  INTEGER INITS, ntdaw, ntdaw2, ntdawa
   DIMENSION dawcs(13), daw2cs(29), dawacs(26)
   LOGICAL first
-  SAVE dawcs, daw2cs, dawacs, ntdaw, ntdaw2, ntdawa, xsml, xbig, &
-    xmax, first
+  SAVE dawcs, daw2cs, dawacs, ntdaw, ntdaw2, ntdawa, xsml, xbig, xmax, first
   DATA dawcs(1)/ - .006351734375145949E0/
   DATA dawcs(2)/ - .22940714796773869E0/
   DATA dawcs(3)/.022130500939084764E0/

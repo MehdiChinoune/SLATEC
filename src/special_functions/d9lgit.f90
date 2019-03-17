@@ -1,7 +1,6 @@
 !DECK D9LGIT
 REAL(8) FUNCTION D9LGIT(A,X,Algap1)
   IMPLICIT NONE
-  INTEGER k
   !***BEGIN PROLOGUE  D9LGIT
   !***SUBSIDIARY
   !***PURPOSE  Compute the logarithm of Tricomi's incomplete Gamma
@@ -28,8 +27,8 @@ REAL(8) FUNCTION D9LGIT(A,X,Algap1)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9LGIT
-  REAL(8) :: A, X, Algap1, ax, a1x, eps, fk, hstar, p, r, &
-    s, sqeps, t, D1MACH
+  INTEGER k
+  REAL(8) :: A, X, Algap1, ax, a1x, eps, fk, hstar, p, r, s, sqeps, t, D1MACH
   LOGICAL first
   SAVE eps, sqeps, first
   DATA first/.TRUE./

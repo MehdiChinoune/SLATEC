@@ -1,8 +1,6 @@
 !DECK SINDG
-FUNCTION SINDG(X)
+REAL FUNCTION SINDG(X)
   IMPLICIT NONE
-  INTEGER n
-  REAL raddeg, SINDG, X
   !***BEGIN PROLOGUE  SINDG
   !***PURPOSE  Compute the sine of an argument in degrees.
   !***LIBRARY   SLATEC (FNLIB)
@@ -24,6 +22,8 @@ FUNCTION SINDG(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  SINDG
   ! JUNE 1977 EDITION.   W. FULLERTON, C3, LOS ALAMOS SCIENTIFIC LAB.
+  INTEGER n
+  REAL raddeg, X
   SAVE raddeg
   DATA raddeg/.017453292519943296E0/
   !

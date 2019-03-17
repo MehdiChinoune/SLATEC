@@ -1,9 +1,6 @@
 !DECK BESY1
-FUNCTION BESY1(X)
+REAL FUNCTION BESY1(X)
   IMPLICIT NONE
-  REAL ampl, BESJ1, BESY1, bm1cs, bth1cs, by1cs, CSEVL, pi4, &
-    R1MACH, theta, twodpi, X, xmax, xmin, xsml, y, z
-  INTEGER INITS, ntm1, ntth1, nty1
   !***BEGIN PROLOGUE  BESY1
   !***PURPOSE  Compute the Bessel function of the second kind of order
   !            one.
@@ -47,6 +44,9 @@ FUNCTION BESY1(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BESY1
+  REAL ampl, BESJ1, bm1cs, bth1cs, by1cs, CSEVL, pi4, &
+    R1MACH, theta, twodpi, X, xmax, xmin, xsml, y, z
+  INTEGER INITS, ntm1, ntth1, nty1
   DIMENSION by1cs(14), bm1cs(21), bth1cs(24)
   LOGICAL first
   SAVE by1cs, bm1cs, bth1cs, twodpi, pi4, nty1, ntm1, ntth1, xmin, &

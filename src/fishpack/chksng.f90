@@ -1,11 +1,6 @@
 !DECK CHKSNG
 SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
   IMPLICIT NONE
-  REAL ai, AIT, Alpha, Beta, bi, BIT, ci, CIT, DIT, dj, DLX, &
-    DLX4, DLY, DLY4, ej, fj, Gama, TDLx3, TDLy3, xi
-  REAL Xnu, yj
-  INTEGER i, IS, j, JS, K, KSWx, KSWy, L, Mbdcnd, MIT, MS, &
-    Nbdcnd, NIT, NS
   !***BEGIN PROLOGUE  CHKSNG
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPELI
@@ -26,10 +21,12 @@ SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CHKSNG
-  !
+  REAL ai, AIT, Alpha, Beta, bi, BIT, ci, CIT, DIT, dj, DLX, &
+    DLX4, DLY, DLY4, ej, fj, Gama, TDLx3, TDLy3, xi
+  REAL Xnu, yj
+  INTEGER i, IS, j, JS, K, KSWx, KSWy, L, Mbdcnd, MIT, MS, Nbdcnd, NIT, NS
   COMMON /SPLPCM/ KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
-    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
-    DLY4
+    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   LOGICAL Singlr
   !***FIRST EXECUTABLE STATEMENT  CHKSNG
   Singlr = .FALSE.

@@ -1,7 +1,6 @@
 !DECK DUSRMT
 SUBROUTINE DUSRMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   IMPLICIT NONE
-  INTEGER I, Indcat, J, l
   !***BEGIN PROLOGUE  DUSRMT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -19,6 +18,7 @@ SUBROUTINE DUSRMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DUSRMT
+  INTEGER I, Indcat, J, l
   REAL(8) :: Prgopt(*), Dattrv(*), Aij
   INTEGER Iflag(*)
   !

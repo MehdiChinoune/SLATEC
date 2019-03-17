@@ -1,7 +1,6 @@
 !DECK XNRMP
 SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   IMPLICIT NONE
-  INTEGER i, Ierror, ip, ip1, ip2, j, k, mu
   !***BEGIN PROLOGUE  XNRMP
   !***PURPOSE  Compute normalized Legendre polynomials.
   !***LIBRARY   SLATEC
@@ -128,6 +127,7 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  XNRMP
+  INTEGER i, Ierror, ip, ip1, ip2, j, k, mu
   INTEGER Nu, Mu1, Mu2, Mode, Ipn, Isig
   REAL Sarg, Spn
   DIMENSION Spn(*), Ipn(*)

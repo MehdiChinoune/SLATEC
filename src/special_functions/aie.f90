@@ -1,9 +1,6 @@
 !DECK AIE
-FUNCTION AIE(X)
+REAL FUNCTION AIE(X)
   IMPLICIT NONE
-  REAL AIE, aifcs, aigcs, aipcs, CSEVL, eta, R1MACH, sqrtx, theta, &
-    X, x32sml, x3sml, xbig, xm, z
-  INTEGER INITS, naif, naig, naip
   !***BEGIN PROLOGUE  AIE
   !***PURPOSE  Calculate the Airy function for a negative argument and an
   !            exponentially scaled Airy function for a non-negative
@@ -46,10 +43,12 @@ FUNCTION AIE(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  AIE
+  REAL aifcs, aigcs, aipcs, CSEVL, eta, R1MACH, sqrtx, theta, &
+    X, x32sml, x3sml, xbig, xm, z
+  INTEGER INITS, naif, naig, naip
   DIMENSION aifcs(9), aigcs(8), aipcs(34)
   LOGICAL first
-  SAVE aifcs, aigcs, aipcs, naif, naig, naip, x3sml, x32sml, xbig, &
-    first
+  SAVE aifcs, aigcs, aipcs, naif, naig, naip, x3sml, x32sml, xbig, first
   DATA aifcs(1)/ - .03797135849666999750E0/
   DATA aifcs(2)/.05919188853726363857E0/
   DATA aifcs(3)/.00098629280577279975E0/

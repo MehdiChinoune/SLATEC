@@ -1,7 +1,6 @@
 !DECK D9UPAK
 SUBROUTINE D9UPAK(X,Y,N)
   IMPLICIT NONE
-  INTEGER N
   !***BEGIN PROLOGUE  D9UPAK
   !***PURPOSE  Unpack a floating point number X so that X = Y*2**N.
   !***LIBRARY   SLATEC (FNLIB)
@@ -24,6 +23,7 @@ SUBROUTINE D9UPAK(X,Y,N)
   !   900820  Corrected code to find Y between 0.5 and 1.0 rather than
   !           between 0.05 and 1.0.  (WRB)
   !***END PROLOGUE  D9UPAK
+  INTEGER N
   REAL(8) :: X, Y, absx
   !***FIRST EXECUTABLE STATEMENT  D9UPAK
   absx = ABS(X)

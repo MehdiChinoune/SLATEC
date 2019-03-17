@@ -1,8 +1,6 @@
 !DECK INDXB
 SUBROUTINE INDXB(I,Ir,Idx,Idp)
   IMPLICIT NONE
-  REAL CNV, EPS
-  INTEGER I, id, Idp, Idx, IK, ipl, Ir, izh, K, NCMplx, NM, NPP
   !***BEGIN PROLOGUE  INDXB
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI
@@ -18,7 +16,8 @@ SUBROUTINE INDXB(I,Ir,Idx,Idp)
   !   900402  Added TYPE section.  (WRB)
   !   920422  Added statement so IDX would always be defined.  (WRB)
   !***END PROLOGUE  INDXB
-  !
+  REAL CNV, EPS
+  INTEGER I, id, Idp, Idx, IK, ipl, Ir, izh, K, NCMplx, NM, NPP
   COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  INDXB
   Idx = max(I,1)

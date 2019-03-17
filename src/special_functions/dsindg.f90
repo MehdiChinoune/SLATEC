@@ -1,7 +1,6 @@
 !DECK DSINDG
 REAL(8) FUNCTION DSINDG(X)
   IMPLICIT NONE
-  INTEGER n
   !***BEGIN PROLOGUE  DSINDG
   !***PURPOSE  Compute the sine of an argument in degrees.
   !***LIBRARY   SLATEC (FNLIB)
@@ -22,6 +21,7 @@ REAL(8) FUNCTION DSINDG(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DSINDG
+  INTEGER n
   REAL(8) :: X, raddeg
   SAVE raddeg
   DATA raddeg/0.017453292519943295769236907684886D0/

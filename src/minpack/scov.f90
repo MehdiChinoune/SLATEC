@@ -1,7 +1,6 @@
 !DECK SCOV
 SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   IMPLICIT NONE
-  REAL ENORM
   !***BEGIN PROLOGUE  SCOV
   !***PURPOSE  Calculate the covariance matrix for a nonlinear data
   !            fitting problem.  It is intended to be used after a
@@ -145,6 +144,7 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !     REVISED 820707-1100
   !     REVISED YYMMDD HHMM
   !
+  REAL ENORM
   INTEGER i, idum, iflag, Info, Iopt, j, k, kp1, Ldr, M, N, nm1, &
     nrow
   REAL X(*), R(Ldr,*), Fvec(*), Wa1(*), Wa2(*), Wa3(*), Wa4(*)
@@ -262,8 +262,7 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   IF ( iflag<0 ) Info = iflag
   IF ( sing ) Info = 2
   IF ( Info<0 ) CALL XERMSG('SLATEC','SCOV',&
-    'EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.'&
-    ,1,1)
+    'EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.',1,1)
   IF ( Info==0 ) CALL XERMSG('SLATEC','SCOV','INVALID INPUT PARAMETER.',2,1)
   IF ( Info==2 ) CALL XERMSG('SLATEC','SCOV',&
     'SINGULAR JACOBIAN MATRIX, COVARIANCE MATRIX CANNOT BE CALCULATED.',1,1)

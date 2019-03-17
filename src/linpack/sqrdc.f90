@@ -1,7 +1,6 @@
 !DECK SQRDC
 SUBROUTINE SQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   IMPLICIT NONE
-  INTEGER jj
   !***BEGIN PROLOGUE  SQRDC
   !***PURPOSE  Use Householder transformations to compute the QR
   !            factorization of an N by P matrix.  Column pivoting is a
@@ -98,6 +97,7 @@ SUBROUTINE SQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SQRDC
+  INTEGER jj
   INTEGER Ldx, N, P, Job
   INTEGER Jpvt(*)
   REAL X(Ldx,*), Qraux(*), Work(*)

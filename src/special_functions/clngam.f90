@@ -1,8 +1,6 @@
 !DECK CLNGAM
 COMPLEX FUNCTION CLNGAM(Zin)
   IMPLICIT NONE
-  REAL argsum, bound, cabsz, CARG, dxrel, pi, R1MACH, sq2pil, x, y
-  INTEGER i, n
   !***BEGIN PROLOGUE  CLNGAM
   !***PURPOSE  Compute the logarithm of the absolute value of the Gamma
   !            function.
@@ -27,6 +25,8 @@ COMPLEX FUNCTION CLNGAM(Zin)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  CLNGAM
+  REAL argsum, bound, cabsz, CARG, dxrel, pi, R1MACH, sq2pil, x, y
+  INTEGER i, n
   COMPLEX Zin, z, corr, CLNREL, C9LGMC
   LOGICAL first
   SAVE pi, sq2pil, bound, dxrel, first
@@ -57,8 +57,7 @@ COMPLEX FUNCTION CLNGAM(Zin)
         !
         IF ( x<(-0.5).AND.ABS(y)<=dxrel ) THEN
           IF ( ABS((z-AINT(x-0.5))/x)<dxrel ) CALL XERMSG('SLATEC','CLNGAM',&
-            'ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR NEGATIVE INTEGER'&
-            ,1,1)
+            'ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR NEGATIVE INTEGER',1,1)
         ENDIF
         !
         n = INT( SQRT(bound**2-y**2) - x ) + 1

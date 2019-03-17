@@ -1,7 +1,6 @@
 !DECK D9PAK
 REAL(8) FUNCTION D9PAK(Y,N)
   IMPLICIT NONE
-  INTEGER I1MACH, N, nmax, nmin, nsum, ny
   !***BEGIN PROLOGUE  D9PAK
   !***PURPOSE  Pack a base 2 exponent into a floating point number.
   !***LIBRARY   SLATEC (FNLIB)
@@ -30,6 +29,7 @@ REAL(8) FUNCTION D9PAK(Y,N)
   !   901009  Routine used I1MACH(7) where it should use I1MACH(10),
   !           Corrected (RWC)
   !***END PROLOGUE  D9PAK
+  INTEGER I1MACH, N, nmax, nmin, nsum, ny
   REAL(8) :: Y, a1n2b, a1n210, D1MACH
   LOGICAL first
   SAVE nmin, nmax, a1n210, first

@@ -1,7 +1,6 @@
 !DECK TRIDIB
 SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
   IMPLICIT NONE
-  REAL R1MACH
   !***BEGIN PROLOGUE  TRIDIB
   !***PURPOSE  Compute the eigenvalues of a symmetric tridiagonal matrix
   !            in a given interval using Sturm sequencing.
@@ -105,7 +104,7 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  TRIDIB
-  !
+  REAL R1MACH
   INTEGER i, j, k, l, M, N, p, q, r, s, ii, m1, m2, M11, m22, &
     tag, Ierr, isturm
   REAL D(*), E(*), E2(*), W(*), Rv4(*), Rv5(*)

@@ -2,10 +2,6 @@
 SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  REAL A, B, Bda, Bdb, Bdc, Bdd, C, D, dum, Elmbda, F, Pertrb, &
-    pi, PIMACH, W
-  INTEGER Idimf, ierr1, Ierror, Intl, iwan, iwbm, iwbn, iwcm, iwcn, &
-    iwrsq, iwsnth, iwwrk, M, Mbdcnd, N, Nbdcnd
   !***BEGIN PROLOGUE  HSTCSP
   !***PURPOSE  Solve the standard five-point finite difference
   !            approximation on a staggered grid to the modified Helmholtz
@@ -400,8 +396,9 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  HSTCSP
-  !
-  !
+  REAL A, B, Bda, Bdb, Bdc, Bdd, C, D, dum, Elmbda, F, Pertrb, pi, PIMACH, W
+  INTEGER Idimf, ierr1, Ierror, Intl, iwan, iwbm, iwbn, iwcm, iwcn, &
+    iwrsq, iwsnth, iwwrk, M, Mbdcnd, N, Nbdcnd
   DIMENSION F(Idimf,*), Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HSTCSP
   pi = PIMACH(dum)

@@ -1,7 +1,6 @@
 !DECK DNRM2
 REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   IMPLICIT NONE
-  INTEGER i, Incx, j, N, nn
   !***BEGIN PROLOGUE  DNRM2
   !***PURPOSE  Compute the Euclidean length (L2 norm) of a vector.
   !***LIBRARY   SLATEC (BLAS)
@@ -75,6 +74,7 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DNRM2
+  INTEGER i, Incx, j, N, nn
   INTEGER next
   REAL(8) :: Dx(*), cutlo, cuthi, hitest, sum, xmax, zero, one
   SAVE cutlo, cuthi, zero, one

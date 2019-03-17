@@ -1,8 +1,6 @@
 !DECK ASINH
-FUNCTION ASINH(X)
+REAL FUNCTION ASINH(X)
   IMPLICIT NONE
-  REAL aln2, ASINH, asnhcs, CSEVL, R1MACH, sqeps, X, xmax, y
-  INTEGER INITS, nterms
   !***BEGIN PROLOGUE  ASINH
   !***PURPOSE  Compute the arc hyperbolic sine.
   !***LIBRARY   SLATEC (FNLIB)
@@ -29,6 +27,8 @@ FUNCTION ASINH(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  ASINH
+  REAL aln2, asnhcs, CSEVL, R1MACH, sqeps, X, xmax, y
+  INTEGER INITS, nterms
   DIMENSION asnhcs(20)
   LOGICAL first
   SAVE aln2, asnhcs, nterms, xmax, sqeps, first

@@ -1,8 +1,6 @@
 !DECK CPEVL
 SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   IMPLICIT NONE
-  REAL d1, r, s
-  INTEGER i, I1MACH, j, M, mini, N, np1
   !***BEGIN PROLOGUE  CPEVL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CPZERO
@@ -45,7 +43,8 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CPEVL
-  !
+  REAL d1, r, s
+  INTEGER i, I1MACH, j, M, mini, N, np1
   COMPLEX A(*), C(*), Z, ci, cim1, B(*), bi, bim1, t
   LOGICAL Kbd
   SAVE d1

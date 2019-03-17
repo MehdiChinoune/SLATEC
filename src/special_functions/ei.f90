@@ -1,7 +1,6 @@
 !DECK EI
-FUNCTION EI(X)
+REAL FUNCTION EI(X)
   IMPLICIT NONE
-  REAL E1, EI, X
   !***BEGIN PROLOGUE  EI
   !***PURPOSE  Compute the exponential integral Ei(X).
   !***LIBRARY   SLATEC (FNLIB)
@@ -29,6 +28,7 @@ FUNCTION EI(X)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  EI
+  REAL E1, X
   !***FIRST EXECUTABLE STATEMENT  EI
   EI = -E1(-X)
   !

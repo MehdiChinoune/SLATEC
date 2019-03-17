@@ -1,8 +1,6 @@
 !DECK GAMR
-FUNCTION GAMR(X)
+REAL FUNCTION GAMR(X)
   IMPLICIT NONE
-  REAL alngx, GAMMA, GAMR, sgngx, X
-  INTEGER irold
   !***BEGIN PROLOGUE  GAMR
   !***PURPOSE  Compute the reciprocal of the Gamma function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -23,6 +21,8 @@ FUNCTION GAMR(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  GAMR
+  REAL alngx, GAMMA, sgngx, X
+  INTEGER irold
   EXTERNAL GAMMA
   !***FIRST EXECUTABLE STATEMENT  GAMR
   GAMR = 0.0

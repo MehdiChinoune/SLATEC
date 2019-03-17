@@ -1,10 +1,6 @@
 !DECK BLKTRI
 SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   IMPLICIT NONE
-  REAL Am, An, Bm, Bn, Cm, Cn, CNV, EPS, W, Y
-  INTEGER Idimy, Ierror, Iflg, IK, iw1, iw2, iw3, iwah, iwbh, iwd, &
-    iwu, iww, K, M, Mp, N, NCMplx, nh, nl, NM
-  INTEGER Np, NPP
   !***BEGIN PROLOGUE  BLKTRI
   !***PURPOSE  Solve a block tridiagonal system of linear equations
   !            (usually resulting from the discretization of separable
@@ -199,9 +195,11 @@ SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BLKTRI
-  !
-  DIMENSION An(*), Bn(*), Cn(*), Am(*), Bm(*), Cm(*), Y(Idimy,*), &
-    W(*)
+  REAL Am, An, Bm, Bn, Cm, Cn, CNV, EPS, W, Y
+  INTEGER Idimy, Ierror, Iflg, IK, iw1, iw2, iw3, iwah, iwbh, iwd, &
+    iwu, iww, K, M, Mp, N, NCMplx, nh, nl, NM
+  INTEGER Np, NPP
+  DIMENSION An(*), Bn(*), Cn(*), Am(*), Bm(*), Cm(*), Y(Idimy,*), W(*)
   EXTERNAL PROD, PRODP, CPROD, CPRODP
   COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  BLKTRI

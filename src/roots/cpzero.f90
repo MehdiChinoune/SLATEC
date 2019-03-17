@@ -1,8 +1,6 @@
 !DECK CPZERO
 SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   IMPLICIT NONE
-  INTEGER i, Iflg, imax, In, j, n, n1, nit, nmax, nr
-  REAL u, v, x
   !***BEGIN PROLOGUE  CPZERO
   !***PURPOSE  Find the zeros of a polynomial with complex coefficients.
   !***LIBRARY   SLATEC
@@ -51,7 +49,8 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CPZERO
-  !
+  INTEGER i, Iflg, imax, In, j, n, n1, nit, nmax, nr
+  REAL u, v, x
   REAL S(*)
   COMPLEX R(*), T(*), A(*), pn(1), temp(1)
   !***FIRST EXECUTABLE STATEMENT  CPZERO

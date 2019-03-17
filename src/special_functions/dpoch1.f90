@@ -1,7 +1,6 @@
 !DECK DPOCH1
 REAL(8) FUNCTION DPOCH1(A,X)
   IMPLICIT NONE
-  INTEGER i, ii, incr, j, k, ndx, nterms
   !***BEGIN PROLOGUE  DPOCH1
   !***PURPOSE  Calculate a generalization of Pochhammer's symbol starting
   !            from first order.
@@ -50,6 +49,7 @@ REAL(8) FUNCTION DPOCH1(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DPOCH1
+  INTEGER i, ii, incr, j, k, ndx, nterms
   REAL(8) :: A, X, absa, absx, alneps, alnvar, b, bern(20), &
     binv, bp, gbern(21), gbk, pi, poly1, q, rho, &
     sinpxx, sinpx2, sqtbig, term, trig, var, var2, &
@@ -122,8 +122,7 @@ REAL(8) FUNCTION DPOCH1(A,X)
       !
       nterms = INT( -0.5D0*alneps/alnvar ) + 1
       IF ( nterms>20 ) CALL XERMSG('SLATEC','DPOCH1',&
-        'NTERMS IS TOO BIG, MAYBE D1MACH(3) IS BAD'&
-        ,1,2)
+        'NTERMS IS TOO BIG, MAYBE D1MACH(3) IS BAD',1,2)
       IF ( nterms>=2 ) THEN
         !
         DO k = 2, nterms

@@ -3,8 +3,6 @@ SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,Ibb,Erdnrm,Eps,Gg,Dulnrm,Dirnrm,Amat,Basmat,Csc,Wr,&
     Ww,Bl,Bu,Rz,Rg,Colnrm,Duals,Found)
   IMPLICIT NONE
-  INTEGER i, IDLOC, Ienter, ihi, il1, ilow, ipage, iu1, j, key, &
-    Lbm, Lmx, lpg, Mrelas, n20002, n20050, Nvars
   !***BEGIN PROLOGUE  DPLPFE
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -36,6 +34,8 @@ SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DPLPFE
+  INTEGER i, IDLOC, Ienter, ihi, il1, ilow, ipage, iu1, j, key, &
+    Lbm, Lmx, lpg, Mrelas, n20002, n20050, Nvars
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), &
     Ibb(*)
   REAL(8) :: Amat(*), Basmat(*), Csc(*), Wr(*), Ww(*), Bl(*), &

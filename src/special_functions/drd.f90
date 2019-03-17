@@ -315,7 +315,7 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
   REAL(8) :: lolim, tuplim, uplim, epslon, errtol, D1MACH
   REAL(8) :: c1, c2, c3, c4, ea, eb, ec, ed, ef, lamda
   REAL(8) :: mu, power4, sigma, s1, s2, X, xn, xndev
-  REAL(8) :: xnroot, Y, yn, yndev, ynroot, Z, zn, zndev ,&
+  REAL(8) :: xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, &
     znroot
   LOGICAL first
   SAVE errtol, lolim, uplim, c1, c2, c3, c4, first

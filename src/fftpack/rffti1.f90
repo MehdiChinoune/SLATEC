@@ -1,10 +1,6 @@
 !DECK RFFTI1
 SUBROUTINE RFFTI1(N,Wa,Ifac)
   IMPLICIT NONE
-  REAL arg, argh, argld, fi, tpi, Wa
-  INTEGER i, ib, ido, Ifac, ii, ip, ipm, is, j, k1, l1, l2, ld, &
-    N, nf, nfm1, nl, nq, nr, ntry
-  INTEGER ntryh
   !***BEGIN PROLOGUE  RFFTI1
   !***PURPOSE  Initialize a real and an integer work array for RFFTF1 and
   !            RFFTB1.
@@ -55,6 +51,10 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RFFTI1
+  REAL arg, argh, argld, fi, tpi, Wa
+  INTEGER i, ib, ido, Ifac, ii, ip, ipm, is, j, k1, l1, l2, ld, &
+    N, nf, nfm1, nl, nq, nr, ntry
+  INTEGER ntryh
   DIMENSION Wa(*), Ifac(*), ntryh(4)
   SAVE ntryh
   DATA ntryh(1), ntryh(2), ntryh(3), ntryh(4)/4, 2, 3, 5/

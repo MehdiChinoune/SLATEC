@@ -1,9 +1,6 @@
 !DECK COT
-FUNCTION COT(X)
+REAL FUNCTION COT(X)
   IMPLICIT NONE
-  REAL ainty, ainty2, COT, cotcs, CSEVL, pi2rec, prodbg, R1MACH, &
-    sqeps, X, xmax, xmin, xsml, y, yrem
-  INTEGER ifn, INITS, nterms
   !***BEGIN PROLOGUE  COT
   !***PURPOSE  Compute the cotangent.
   !***LIBRARY   SLATEC (FNLIB)
@@ -32,6 +29,9 @@ FUNCTION COT(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  COT
+  REAL ainty, ainty2, cotcs, CSEVL, pi2rec, prodbg, R1MACH, &
+    sqeps, X, xmax, xmin, xsml, y, yrem
+  INTEGER ifn, INITS, nterms
   DIMENSION cotcs(8)
   LOGICAL first
   SAVE cotcs, pi2rec, nterms, xmax, xsml, xmin, sqeps, first

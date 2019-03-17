@@ -1,7 +1,6 @@
 !DECK XPNRM
 SUBROUTINE XPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  INTEGER i, Ierror, Ipqa, iprod, j, k, l, mu, Mu1, Mu2
   !***BEGIN PROLOGUE  XPNRM
   !***SUBSIDIARY
   !***PURPOSE  To compute the values of Legendre functions for XLEGF.
@@ -24,6 +23,7 @@ SUBROUTINE XPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  XPNRM
+  INTEGER i, Ierror, Ipqa, iprod, j, k, l, mu, Mu1, Mu2
   REAL c1, dmu, nu, Nu1, Nu2, Pqa, prod
   DIMENSION Pqa(*), Ipqa(*)
   !***FIRST EXECUTABLE STATEMENT  XPNRM

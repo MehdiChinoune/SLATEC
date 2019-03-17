@@ -1,8 +1,6 @@
 !DECK C9LN2R
 COMPLEX FUNCTION C9LN2R(Z)
   IMPLICIT NONE
-  REAL aipart, arg, cabsz, R9ATN1, R9LN2R, rpart, x, xz, y, y1x, &
-    yz
   !***BEGIN PROLOGUE  C9LN2R
   !***SUBSIDIARY
   !***PURPOSE  Evaluate LOG(1+Z) from second order relative accuracy so
@@ -48,6 +46,7 @@ COMPLEX FUNCTION C9LN2R(Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  C9LN2R
+  REAL aipart, arg, cabsz, R9ATN1, R9LN2R, rpart, x, xz, y, y1x, yz
   COMPLEX Z
   !***FIRST EXECUTABLE STATEMENT  C9LN2R
   x = REAL(Z)

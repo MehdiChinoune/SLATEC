@@ -1,8 +1,6 @@
 !DECK COSQB
 SUBROUTINE COSQB(N,X,Wsave)
   IMPLICIT NONE
-  INTEGER N
-  REAL tsqrt2, Wsave, X, x1
   !***BEGIN PROLOGUE  COSQB
   !***PURPOSE  Compute the unnormalized inverse cosine transform.
   !***LIBRARY   SLATEC (FFTPACK)
@@ -73,6 +71,8 @@ SUBROUTINE COSQB(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  COSQB
+  INTEGER N
+  REAL tsqrt2, Wsave, X, x1
   DIMENSION X(*), Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  COSQB
   tsqrt2 = 2.*SQRT(2.)

@@ -44,8 +44,8 @@ CONTAINS
       i, first, last, nsig, NUMXER, nerr, ierjj, ierjm
     PARAMETER (NDIM=15)
     REAL tol, l1, l2, l3, m1, m2, m3, l1min, l1max, m2min, m2max, &
-      diff(NDIM), R1MACH, x, jjval, jmval, thrcof(NDIM), sixcof(NDIM)&
-      , r3jj(8), r3jm(14), r6j(15)
+      diff(NDIM), R1MACH, x, jjval, jmval, thrcof(NDIM), sixcof(NDIM), &
+      r3jj(8), r3jm(14), r6j(15)
     !
     DATA r3jj/2.78886675511358515993E-1, -9.53462589245592315447E-2, &
       -6.74199862463242086246E-2, 1.53311035167966641297E-1, &
@@ -477,7 +477,6 @@ END MODULE TEST15_MOD
 PROGRAM TEST15
   USE TEST15_MOD
   IMPLICIT NONE
-  INTEGER I1MACH
   !***BEGIN PROLOGUE  TEST15
   !***PURPOSE  Driver for testing SLATEC subprograms
   !            RC3JJ    RC3JM    RC6J
@@ -518,6 +517,7 @@ PROGRAM TEST15
   !***REVISION HISTORY  (YYMMDD)
   !   891130  DATE WRITTEN
   !***END PROLOGUE  TEST15
+  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST15
   lun = I1MACH(2)

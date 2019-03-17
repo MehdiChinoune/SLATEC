@@ -1,8 +1,6 @@
 !DECK ALNGAM
-FUNCTION ALNGAM(X)
+REAL FUNCTION ALNGAM(X)
   IMPLICIT NONE
-  REAL ALNGAM, dxrel, GAMMA, pi, R1MACH, R9LGMC, sinpiy, sq2pil, &
-    sqpi2l, X, xmax, y
   !***BEGIN PROLOGUE  ALNGAM
   !***PURPOSE  Compute the logarithm of the absolute value of the Gamma
   !            function.
@@ -29,6 +27,7 @@ FUNCTION ALNGAM(X)
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  ALNGAM
+  REAL dxrel, GAMMA, pi, R1MACH, R9LGMC, sinpiy, sq2pil, sqpi2l, X, xmax, y
   LOGICAL first
   EXTERNAL GAMMA
   SAVE sq2pil, sqpi2l, pi, xmax, dxrel, first

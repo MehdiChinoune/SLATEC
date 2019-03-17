@@ -1,7 +1,6 @@
 !DECK ICOPY
 SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
   IMPLICIT NONE
-  INTEGER i, iix, iiy, Incx, Incy, m, mp1, N, ns
   !***BEGIN PROLOGUE  ICOPY
   !***PURPOSE  Copy a vector.
   !***LIBRARY   SLATEC (BLAS)
@@ -38,6 +37,7 @@ SUBROUTINE ICOPY(N,Ix,Incx,Iy,Incy)
   !***REVISION HISTORY  (YYMMDD)
   !   930201  DATE WRITTEN
   !***END PROLOGUE  ICOPY
+  INTEGER i, iix, iiy, Incx, Incy, m, mp1, N, ns
   INTEGER Ix(*), Iy(*)
   !***FIRST EXECUTABLE STATEMENT  ICOPY
   IF ( N<=0 ) RETURN

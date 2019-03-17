@@ -1,8 +1,6 @@
 !DECK COSQI
 SUBROUTINE COSQI(N,Wsave)
   IMPLICIT NONE
-  REAL dt, fk, pih, Wsave
-  INTEGER k, N
   !***BEGIN PROLOGUE  COSQI
   !***PURPOSE  Initialize a work array for COSQF and COSQB.
   !***LIBRARY   SLATEC (FFTPACK)
@@ -50,6 +48,8 @@ SUBROUTINE COSQI(N,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  COSQI
+  REAL dt, fk, pih, Wsave
+  INTEGER k, N
   DIMENSION Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  COSQI
   pih = 2.*ATAN(1.)

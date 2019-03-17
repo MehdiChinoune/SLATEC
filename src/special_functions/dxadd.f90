@@ -1,7 +1,6 @@
 !DECK DXADD
 SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   IMPLICIT NONE
-  INTEGER i, i1, i2, Ierror, is, j
   !***BEGIN PROLOGUE  DXADD
   !***PURPOSE  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.
@@ -36,6 +35,7 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXADD
+  INTEGER i, i1, i2, Ierror, is, j
   REAL(8) :: X, Y, Z
   INTEGER Ix, Iy, Iz
   REAL(8) :: RADix, RADixl, RAD2l, DLG10r

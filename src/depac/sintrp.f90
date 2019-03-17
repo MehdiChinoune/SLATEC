@@ -2,11 +2,6 @@
 SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
     Og,Ow,Ox,Oy)
   IMPLICIT NONE
-  REAL alp, Alpha, c, g, gamma, gdi, gdif, Gi, h, hi, hmu, Og, &
-    Ow, Ox, Oy, Phi, rmu, sigma, temp1, temp2
-  REAL temp3, w, X, xi, xim1, xiq, Xout, Y, Yout, Ypout
-  INTEGER i, iq, Iv, Ivc, iw, j, jq, Kgi, Kold, kp1, kp2, l, m, &
-    Neqn
   !***BEGIN PROLOGUE  SINTRP
   !***PURPOSE  Approximate the solution at XOUT by evaluating the
   !            polynomial computed in STEPS at XOUT.  Must be used in
@@ -57,7 +52,10 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SINTRP
-  !
+  REAL alp, Alpha, c, g, gamma, gdi, gdif, Gi, h, hi, hmu, Og, &
+    Ow, Ox, Oy, Phi, rmu, sigma, temp1, temp2
+  REAL temp3, w, X, xi, xim1, xiq, Xout, Y, Yout, Ypout
+  INTEGER i, iq, Iv, Ivc, iw, j, jq, Kgi, Kold, kp1, kp2, l, m, Neqn
   DIMENSION Y(*), Yout(*), Ypout(*), Phi(Neqn,16), Oy(*)
   DIMENSION g(13), c(13), w(13), Og(13), Ow(12), Alpha(12), Gi(11), &
     Iv(10)

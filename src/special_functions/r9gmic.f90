@@ -1,9 +1,6 @@
 !DECK R9GMIC
-FUNCTION R9GMIC(A,X,Alx)
+REAL FUNCTION R9GMIC(A,X,Alx)
   IMPLICIT NONE
-  REAL A, alng, ALNGAM, Alx, bot, eps, euler, fk, fkp1, fm, &
-    R1MACH, R9GMIC, s, sgng, t, te, X
-  INTEGER k, m, ma, mm1
   !***BEGIN PROLOGUE  R9GMIC
   !***SUBSIDIARY
   !***PURPOSE  Compute the complementary incomplete Gamma function for A
@@ -29,6 +26,9 @@ FUNCTION R9GMIC(A,X,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  R9GMIC
+  REAL A, alng, ALNGAM, Alx, bot, eps, euler, fk, fkp1, fm, &
+    R1MACH, s, sgng, t, te, X
+  INTEGER k, m, ma, mm1
   SAVE euler, eps, bot
   DATA euler/.5772156649015329E0/
   DATA eps, bot/2*0.0/

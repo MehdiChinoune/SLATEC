@@ -1,11 +1,6 @@
 !DECK POISTG
 SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   IMPLICIT NONE
-  REAL A, a1, B, C, W, Y
-  INTEGER i, Idimy, Ierror, ipstor, irev, iwb2, iwb3, iwba, iwbb, &
-    iwbc, iwd, iwp, iwtcos, iww1, iww2, iww3, j, k, M, mh
-  INTEGER mhm1, mhmi, mhpi, modd, mp, Mperod, mskip, N, nby2, np, &
-    Nperod
   !***BEGIN PROLOGUE  POISTG
   !***PURPOSE  Solve a block tridiagonal system of linear equations
   !            that results from a staggered grid finite difference
@@ -223,8 +218,10 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  POISTG
-  !
-  !
+  REAL A, a1, B, C, W, Y
+  INTEGER i, Idimy, Ierror, ipstor, irev, iwb2, iwb3, iwba, iwbb, &
+    iwbc, iwd, iwp, iwtcos, iww1, iww2, iww3, j, k, M, mh
+  INTEGER mhm1, mhmi, mhpi, modd, mp, Mperod, mskip, N, nby2, np, Nperod
   DIMENSION Y(Idimy,*)
   DIMENSION W(*), B(*), A(*), C(*)
   !***FIRST EXECUTABLE STATEMENT  POISTG

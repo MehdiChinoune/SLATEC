@@ -1,13 +1,6 @@
 !DECK POISN2
-SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
-    P)
+SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   IMPLICIT NONE
-  REAL A, B, B2, B3, Bb, C, D, fden, fi, fistag, fnum, P, Q, &
-    t, Tcos, W, W2, W3
-  INTEGER i, i1, i2, i2r, i2rby2, Idimq, ii, ip, ipstor, Istag, &
-    j, jm1, jm2, jm3, jp1, jp2, jp3, jr, jr2, jstart
-  INTEGER jstep, jstop, k, k1, k2, k3, k4, kr, lr, M, Mixbnd, &
-    mr, N, nlast, nlastp, nr, nrod, nrodpr
   !***BEGIN PROLOGUE  POISN2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to GENBUN
@@ -35,7 +28,12 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
   !   920130  Modified to use merge routine S1MERG rather than deleted
   !           routine MERGE.  (WRB)
   !***END PROLOGUE  POISN2
-  !
+  REAL A, B, B2, B3, Bb, C, D, fden, fi, fistag, fnum, P, Q, &
+    t, Tcos, W, W2, W3
+  INTEGER i, i1, i2, i2r, i2rby2, Idimq, ii, ip, ipstor, Istag, &
+    j, jm1, jm2, jm3, jp1, jp2, jp3, jr, jr2, jstart
+  INTEGER jstep, jstop, k, k1, k2, k3, k4, kr, lr, M, Mixbnd, &
+    mr, N, nlast, nlastp, nr, nrod, nrodpr
   DIMENSION A(*), Bb(*), C(*), Q(Idimq,*), B(*), B2(*), B3(*), W(*), &
     W2(*), W3(*), D(*), Tcos(*), k(4), P(*)
   EQUIVALENCE (k(1),k1)

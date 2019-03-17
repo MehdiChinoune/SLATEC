@@ -1,8 +1,6 @@
 !DECK CHKPR4
 SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   IMPLICIT NONE
-  REAL A, ai, B, bi, C, ci, D, dlx, xi
-  INTEGER i, Idmn, Ierror, Iorder, M, Mbdcnd, N, Nbdcnd
   !***BEGIN PROLOGUE  CHKPR4
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPX4
@@ -21,6 +19,8 @@ SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CHKPR4
+  REAL A, ai, B, bi, C, ci, D, dlx, xi
+  INTEGER i, Idmn, Ierror, Iorder, M, Mbdcnd, N, Nbdcnd
   EXTERNAL COFX
   !***FIRST EXECUTABLE STATEMENT  CHKPR4
   Ierror = 1

@@ -1,9 +1,6 @@
 !DECK H12
 SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   IMPLICIT NONE
-  REAL b, C, cl, clinv, one, SDOT, sm, U, ul1m1, Up
-  INTEGER i, i2, i3, i4, Ice, Icv, incr, Iue, j, kl1, kl2, klp, &
-    L1, l1m1, Lpivot, M, mml1p2, Mode, Ncv
   !***BEGIN PROLOGUE  H12
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to HFTI, LSEI and WNNLS
@@ -48,6 +45,9 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  H12
+  REAL b, C, cl, clinv, one, SDOT, sm, U, ul1m1, Up
+  INTEGER i, i2, i3, i4, Ice, Icv, incr, Iue, j, kl1, kl2, klp, &
+    L1, l1m1, Lpivot, M, mml1p2, Mode, Ncv
   DIMENSION U(Iue,*), C(*)
   !***FIRST EXECUTABLE STATEMENT  H12
   one = 1.

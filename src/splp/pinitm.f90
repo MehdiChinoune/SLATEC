@@ -1,8 +1,6 @@
 !DECK PINITM
 SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   IMPLICIT NONE
-  INTEGER i, iopt, Ipagef, Ix, Lmx, lp4, M, N, n20008, n20012, &
-    nerr
   !***BEGIN PROLOGUE  PINITM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -47,6 +45,7 @@ SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   !***END PROLOGUE  PINITM
+  INTEGER i, iopt, Ipagef, Ix, Lmx, lp4, M, N, n20008, n20012, nerr
   REAL Sx(Lmx), zero, one
   DIMENSION Ix(*)
   SAVE zero, one

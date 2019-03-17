@@ -1,9 +1,6 @@
 !DECK BETAI
 REAL FUNCTION BETAI(X,Pin,Qin)
   IMPLICIT NONE
-  REAL ALBETA, alneps, alnsml, c, eps, finsum, p, p1, Pin, ps, q, &
-    Qin, R1MACH, sml, term, X, xb, y
-  INTEGER i, ib, n
   !***BEGIN PROLOGUE  BETAI
   !***PURPOSE  Calculate the incomplete Beta function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -38,6 +35,9 @@ REAL FUNCTION BETAI(X,Pin,Qin)
   !           (WRB)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   !***END PROLOGUE  BETAI
+  REAL ALBETA, alneps, alnsml, c, eps, finsum, p, p1, Pin, ps, q, &
+    Qin, R1MACH, sml, term, X, xb, y
+  INTEGER i, ib, n
   LOGICAL first
   SAVE eps, alneps, sml, alnsml, first
   DATA first/.TRUE./

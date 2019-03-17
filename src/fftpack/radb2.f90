@@ -1,8 +1,6 @@
 !DECK RADB2
 SUBROUTINE RADB2(Ido,L1,Cc,Ch,Wa1)
   IMPLICIT NONE
-  REAL Cc, Ch, ti2, tr2, Wa1
-  INTEGER i, ic, Ido, idp2, k, L1
   !***BEGIN PROLOGUE  RADB2
   !***SUBSIDIARY
   !***PURPOSE  Calculate the fast Fourier transform of subvectors of
@@ -21,6 +19,8 @@ SUBROUTINE RADB2(Ido,L1,Cc,Ch,Wa1)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  RADB2
+  REAL Cc, Ch, ti2, tr2, Wa1
+  INTEGER i, ic, Ido, idp2, k, L1
   DIMENSION Cc(Ido,2,*), Ch(Ido,L1,2), Wa1(*)
   !***FIRST EXECUTABLE STATEMENT  RADB2
   DO k = 1, L1

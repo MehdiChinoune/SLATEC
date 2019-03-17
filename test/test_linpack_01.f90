@@ -37,19 +37,19 @@ CONTAINS
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CCHQC
     COMPLEX a(4,4), work(4), at(5,4), af(4,4)
-    INTEGER lda, p, jpvt(4), job, info, jpvtt(4), i, j, infoc ,&
+    INTEGER lda, p, jpvt(4), job, info, jpvtt(4), i, j, infoc, &
       jpvtc(4)
     CHARACTER(20) :: kfail
     INTEGER indx
     REAL delx
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,-1.E0), (4.E0,0.E0)/
     DATA jpvt/0, -1, 1, 0/
-    DATA af/(1.73205E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,-.57735E0), (1.91485E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,0.E0), (0.E0,0.E0), (1.41421E0,0.E0), (0.E0,1.E0) ,&
+    DATA af/(1.73205E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,-.57735E0), (1.91485E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (1.41421E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,-.70711E0), (1.22475E0,0.E0)/
     DATA infoc/4/
     DATA jpvtc/3, 4, 1, 2/
@@ -149,11 +149,11 @@ CONTAINS
     CHARACTER kfail*39, kprog*19
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
     INTEGER ml, mu
-    DATA abd/(0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    DATA abd/(0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0)&
-      , (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ,&
+      , (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0), &
       (0.E0,0.E0)/
     DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
     DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
@@ -282,20 +282,20 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CGECK
-    COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), det(2) ,&
+    COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), det(2), &
       dc(2), z(4)
     REAL r, rcond, rcnd, CABS1
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,-1.E0), (4.E0,0.E0)/
     DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
     DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA ainv/(.66667E0,0.E0), (0.E0,-.33333E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,.33333E0), (.66667E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,-.09091E0) ,&
+    DATA ainv/(.66667E0,0.E0), (0.E0,-.33333E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,.33333E0), (.66667E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,-.09091E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0)/
     DATA dc/(3.3E0,0.E0), (1.0E0,0.E0)/
     DATA kprog/'GEFA GECO GESL GEDI'/
@@ -514,15 +514,15 @@ CONTAINS
     CHARACTER kprog*19, kfail*47
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
     INTEGER inert(3), irt(3)
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,-1.E0), (4.E0,0.E0)/
     DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
     DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA ainv/(.66667E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,.33333E0), (.66667E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,1.E0) ,&
+    DATA ainv/(.66667E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,.33333E0), (.66667E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0)/
     DATA dc/3.3E0, 1.0E0/
     DATA kprog/'HIFA HICO HISL HIDI'/
@@ -661,13 +661,12 @@ CONTAINS
     CHARACTER kprog*19, kfail*47
     INTEGER n, ipvt(4), info, i, j, indx, Nerr
     INTEGER inert(3), irt(3)
-    DATA ap/(2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0)&
-      , (4.E0,0.E0)/
+    DATA ap/(2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0)/
     DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
     DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA ainv/(.66667E0,0.E0), (0.E0,.33333E0), (.66667E0,0.E0) ,&
-      (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,0.E0) ,&
+    DATA ainv/(.66667E0,0.E0), (0.E0,.33333E0), (.66667E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0)/
     DATA dc/3.3E0, 1.0E0/
     DATA kprog/'HPFA HPCO HPSL HPDI'/
@@ -800,7 +799,7 @@ CONTAINS
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, info, i, j, indx, Nerr, m
-    DATA abd/(0.E0,0.E0), (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0) ,&
+    DATA abd/(0.E0,0.E0), (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
       (0.E0,0.E0), (3.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0)/
     DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
     DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
@@ -923,15 +922,15 @@ CONTAINS
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, info, i, j, indx, Nerr
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,-1.E0), (4.E0,0.E0)/
     DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
     DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA ainv/(.66667E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,.33333E0), (.66667E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,1.E0) ,&
+    DATA ainv/(.66667E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,.33333E0), (.66667E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0)/
     DATA dc/3.3E0, 1.0E0/
     DATA kprog/'POFA POCO POSL PODI'/
@@ -1064,13 +1063,13 @@ CONTAINS
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*39
     INTEGER n, info, i, j, indx, Nerr
-    DATA ap/(2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0) ,&
+    DATA ap/(2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0)&
       , (4.E0,0.E0)/
     DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
     DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA ainv/(.66667E0,0.E0), (0.E0,.33333E0), (.66667E0,0.E0) ,&
-      (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,0.E0) ,&
+    DATA ainv/(.66667E0,0.E0), (0.E0,.33333E0), (.66667E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0)/
     DATA dc/3.3E0, 1.0E0/
     DATA kprog/'PPFA PPCO PPSL PPDI'/
@@ -1258,30 +1257,29 @@ CONTAINS
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
     !***END PROLOGUE  CQRQC
-    COMPLEX a(4,4), qraux(4), work(4), y(4), qy(4), qty(4), b(4) ,&
+    COMPLEX a(4,4), qraux(4), work(4), y(4), qy(4), qty(4), b(4), &
       rsd(4), xb(4)
-    COMPLEX at(5,4), ac(4,4), qrauxc(4), qyc(4), qtyc(4), bc(4), rsdc(4)&
-      , xbc(4)
+    COMPLEX at(5,4), ac(4,4), qrauxc(4), qyc(4), qtyc(4), bc(4), rsdc(4), xbc(4)
     CHARACTER kprog*9, kfail*75
     INTEGER ldx, n, p, jpvt(4), job, k, info
     INTEGER jpvtt(4), jpvtc(4), i, j, indx(5), Nerr, l
     REAL CABS1
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,-1.E0), (4.E0,0.E0)/
     DATA jpvt/0, -1, 1, 0/
     DATA y/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
-    DATA ac/(-3.16228E0,0.E0), (0.E0,0.E0), (.94868E0,0.E0) ,&
-      (0.E0,.31623E0), (0.E0,2.21359E0), (-3.47851E0,0.E0) ,&
-      (0.E0,.31623E0), (.94868E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (2.23607E0,0.E0), (0.E0,.70711E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    DATA ac/(-3.16228E0,0.E0), (0.E0,0.E0), (.94868E0,0.E0), &
+      (0.E0,.31623E0), (0.E0,2.21359E0), (-3.47851E0,0.E0), &
+      (0.E0,.31623E0), (.94868E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (2.23607E0,0.E0), (0.E0,.70711E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.78885E0), (-1.34164E0,0.E0)/
     DATA qrauxc/(1.E0,0.E0), (1.E0,0.E0), (1.70711E0,0.E0), (0.E0,0.E0)/
     DATA jpvtc/3, 4, 1, 2/
-    DATA qyc/(0.E0,-5.81378E0), (-2.68328E0,0.E0), (-1.89737E0,-1.58114E0) ,&
+    DATA qyc/(0.E0,-5.81378E0), (-2.68328E0,0.E0), (-1.89737E0,-1.58114E0), &
       (1.58114E0,-3.79473E0)/
-    DATA qtyc/(0.E0,5.37587E0), (-3.47851E0,0.E0), (4.02492E0,2.23607E0) ,&
+    DATA qtyc/(0.E0,5.37587E0), (-3.47851E0,0.E0), (4.02492E0,2.23607E0), &
       (0.E0,-1.34164E0)/
     DATA bc/(0.E0,-1.E0), (1.E0,0.E0), (1.E0,1.E0), (0.E0,1.E0)/
     DATA rsdc/(0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)/
@@ -1410,20 +1408,20 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CSIQC
-    COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), det(2) ,&
+    COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), det(2), &
       dc(2), z(4)
     REAL r, rcond, rcnd, CABS1
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,-1.E0), (4.E0,0.E0)/
     DATA b/(3.E0,2.E0), (1.E0,1.E0), (0.E0,-4.E0), (3.E0,0.E0)/
     DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA ainv/(.40000E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,.20000E0), (.40000E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,0.E0), (0.E0,0.E0), (.30769E0,0.E0), (0.E0,1.E0) ,&
+    DATA ainv/(.40000E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,.20000E0), (.40000E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (.30769E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,.07692E0), (.23077E0,0.E0)/
     DATA dc/(6.5E0,0.E0), (1.0E0,0.E0)/
     DATA kprog/'SIFA SICO SISL SIDI'/
@@ -1546,18 +1544,18 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CSPQC
-    COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), det(2) ,&
+    COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), det(2), &
       dc(2), z(4)
     REAL r, rcond, rcnd, CABS1
     CHARACTER kprog*19, kfail*39
     INTEGER n, ipvt(4), info, i, j, indx, Nerr
-    DATA ap/(2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0) ,&
+    DATA ap/(2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0)&
       , (4.E0,0.E0)/
     DATA b/(3.E0,2.E0), (1.E0,1.E0), (0.E0,-4.E0), (3.E0,0.E0)/
     DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA ainv/(.4E0,0.E0), (0.E0,.2E0), (.4E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,0.E0), (.30769E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    DATA ainv/(.4E0,0.E0), (0.E0,.2E0), (.4E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (.30769E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,.07692E0), (.23077E0,0.E0)/
     DATA dc/(6.5E0,0.E0), (1.0E0,0.E0)/
     DATA kprog/'SPFA SPCO SPSL SPDI'/
@@ -1679,16 +1677,16 @@ CONTAINS
     CHARACTER kfail*12
     INTEGER i, j, indx(4)
     REAL CABS1
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,-1.E0), (4.E0,0.E0)/
     DATA kfail/'S E U V INFO'/
     DATA sc/(4.61803E0,0.E0), (3.0E0,0.E0), (2.38197E0,0.E0), (1.E0,0.E0)/
     DATA ec/(0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)/
-    DATA uvc/(0.E0,0.E0), (0.E0,0.E0), (-.52573E0,0.E0), (0.E0,-.85065E0) ,&
-      (.70711E0,0.E0), (0.E0,.70711E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,0.E0), (0.E0,0.E0), (-.85065E0,0.E0), (0.E0,.52573E0) ,&
+    DATA uvc/(0.E0,0.E0), (0.E0,0.E0), (-.52573E0,0.E0), (0.E0,-.85065E0), &
+      (.70711E0,0.E0), (0.E0,.70711E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (-.85065E0,0.E0), (0.E0,.52573E0), &
       (-.70711E0,0.E0), (0.E0,.70711E0), (0.E0,0.E0), (0.E0,0.E0)/
     !***FIRST EXECUTABLE STATEMENT  CSVQC
     n = 4
@@ -1779,26 +1777,26 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CTRQC
-    COMPLEX a(4,4), at(5,4), b(4,2), bt(4), c(4), ainv(4,4,2), det(2) ,&
+    COMPLEX a(4,4), at(5,4), b(4,2), bt(4), c(4), ainv(4,4,2), det(2), &
       dc(2), z(4)
     REAL r, rcond, rcnd(2), CABS1
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, info, i, j, indx, Nerr
     INTEGER job, k, kk
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
+    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
       , (0.E0,-1.E0), (4.E0,0.E0)/
-    DATA b/(2.E0,2.E0), (-1.E0,3.E0), (0.E0,-3.E0), (5.E0,0.E0) ,&
+    DATA b/(2.E0,2.E0), (-1.E0,3.E0), (0.E0,-3.E0), (5.E0,0.E0), &
       (3.E0,2.E0), (0.E0,2.E0), (0.E0,-4.E0), (4.E0,0.E0)/
     DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA ainv/(.50000E0,0.E0), (0.E0,-.25000E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,-1.00000E0), (.50000E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,0.E0), (0.E0,0.E0), (.33333E0,0.E0), (0.E0,-.083333E0) ,&
-      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.00000E0), (.25000E0,0.E0) ,&
-      (.50000E0,0.E0), (0.E0,1.00000E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,.25000E0), (.50000E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ,&
-      (0.E0,0.E0), (0.E0,0.E0), (.33333E0,0.E0), (0.E0,1.00000E0) ,&
+    DATA ainv/(.50000E0,0.E0), (0.E0,-.25000E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,-1.00000E0), (.50000E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (.33333E0,0.E0), (0.E0,-.083333E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.00000E0), (.25000E0,0.E0), &
+      (.50000E0,0.E0), (0.E0,1.00000E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,.25000E0), (.50000E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (.33333E0,0.E0), (0.E0,1.00000E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,.083333E0), (.25000E0,0.E0)/
     DATA dc/(4.8E0,0.E0), (1.0E0,0.E0)/
     DATA kprog/'TRFA TRCO TRSL TRDI'/
@@ -1918,7 +1916,6 @@ END MODULE TEST23_MOD
 PROGRAM TEST23
   USE TEST23_MOD
   IMPLICIT NONE
-  INTEGER I1MACH
   !***BEGIN PROLOGUE  TEST23
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC
@@ -1974,6 +1971,7 @@ PROGRAM TEST23
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
   !***END PROLOGUE  TEST23
+  INTEGER I1MACH
   INTEGER kprint, lin, lun, nerr, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST23
   lun = I1MACH(2)

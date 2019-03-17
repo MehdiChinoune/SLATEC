@@ -1,8 +1,6 @@
 !DECK PSGF
-FUNCTION PSGF(X,Iz,C,A,Bh)
+REAL FUNCTION PSGF(X,Iz,C,A,Bh)
   IMPLICIT NONE
-  REAL A, Bh, C, dd, fsg, hsg, PSGF, X
-  INTEGER Iz, j
   !***BEGIN PROLOGUE  PSGF
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI
@@ -16,6 +14,8 @@ FUNCTION PSGF(X,Iz,C,A,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  PSGF
+  REAL A, Bh, C, dd, fsg, hsg, X
+  INTEGER Iz, j
   DIMENSION A(*), C(*), Bh(*)
   !***FIRST EXECUTABLE STATEMENT  PSGF
   fsg = 1.

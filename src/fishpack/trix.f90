@@ -1,8 +1,6 @@
 !DECK TRIX
 SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   IMPLICIT NONE
-  REAL A, B, C, D, Tcos, W, x, xx, Y, z
-  INTEGER i, Idegbr, Idegcr, ip, k, l, lint, M, mm1
   !***BEGIN PROLOGUE  TRIX
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to GENBUN
@@ -22,7 +20,8 @@ SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  TRIX
-  !
+  REAL A, B, C, D, Tcos, W, x, xx, Y, z
+  INTEGER i, Idegbr, Idegcr, ip, k, l, lint, M, mm1
   DIMENSION A(*), B(*), C(*), Y(*), Tcos(*), D(*), W(*)
   INTEGER kb, kc
   !***FIRST EXECUTABLE STATEMENT  TRIX

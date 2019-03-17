@@ -1,8 +1,6 @@
 !DECK SOSSOL
 SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
   IMPLICIT NONE
-  REAL B, C, X, xmax
-  INTEGER j, jkm, K, kj, km, km1, kmm1, kn, L, lk, M, N, np1
   !***BEGIN PROLOGUE  SOSSOL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SOS
@@ -32,10 +30,9 @@ SUBROUTINE SOSSOL(K,N,L,X,C,B,M)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  SOSSOL
-  !
-  !
+  REAL B, C, X, xmax
+  INTEGER j, jkm, K, kj, km, km1, kmm1, kn, L, lk, M, N, np1
   DIMENSION X(*), C(*), B(*)
-  !
   !***FIRST EXECUTABLE STATEMENT  SOSSOL
   np1 = N + 1
   km1 = K - 1

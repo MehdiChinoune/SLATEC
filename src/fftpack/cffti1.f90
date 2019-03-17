@@ -1,10 +1,6 @@
 !DECK CFFTI1
 SUBROUTINE CFFTI1(N,Wa,Ifac)
   IMPLICIT NONE
-  REAL arg, argh, argld, fi, tpi, Wa
-  INTEGER i, i1, ib, ido, idot, Ifac, ii, ip, ipm, j, k1, l1, &
-    l2, ld, N, nf, nl, nq, nr, ntry
-  INTEGER ntryh
   !***BEGIN PROLOGUE  CFFTI1
   !***PURPOSE  Initialize a real and an integer work array for CFFTF1 and
   !            CFFTB1.
@@ -56,6 +52,10 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CFFTI1
+  REAL arg, argh, argld, fi, tpi, Wa
+  INTEGER i, i1, ib, ido, idot, Ifac, ii, ip, ipm, j, k1, l1, &
+    l2, ld, N, nf, nl, nq, nr, ntry
+  INTEGER ntryh
   DIMENSION Wa(*), Ifac(*), ntryh(4)
   SAVE ntryh
   DATA ntryh(1), ntryh(2), ntryh(3), ntryh(4)/3, 4, 2, 5/

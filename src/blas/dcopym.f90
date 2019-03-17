@@ -1,7 +1,6 @@
 !DECK DCOPYM
 SUBROUTINE DCOPYM(N,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   !***BEGIN PROLOGUE  DCOPYM
   !***PURPOSE  Copy the negative of a vector to a vector.
   !***LIBRARY   SLATEC (BLAS)
@@ -35,6 +34,7 @@ SUBROUTINE DCOPYM(N,Dx,Incx,Dy,Incy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !***END PROLOGUE  DCOPYM
+  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   REAL(8) :: Dx(*), Dy(*)
   !***FIRST EXECUTABLE STATEMENT  DCOPYM
   IF ( N<=0 ) RETURN

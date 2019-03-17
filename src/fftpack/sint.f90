@@ -1,8 +1,6 @@
 !DECK SINT
 SUBROUTINE SINT(N,X,Wsave)
   IMPLICIT NONE
-  INTEGER i, k, kc, kw, modn, N, nf, np1, ns2
-  REAL sqrt3, t1, t2, Wsave, X, xh
   !***BEGIN PROLOGUE  SINT
   !***PURPOSE  Compute the sine transform of a real, odd sequence.
   !***LIBRARY   SLATEC (FFTPACK)
@@ -73,6 +71,8 @@ SUBROUTINE SINT(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SINT
+  INTEGER i, k, kc, kw, modn, N, nf, np1, ns2
+  REAL sqrt3, t1, t2, Wsave, X, xh
   DIMENSION X(*), Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  SINT
   sqrt3 = SQRT(3.)

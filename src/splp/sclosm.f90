@@ -1,7 +1,6 @@
 !DECK SCLOSM
 SUBROUTINE SCLOSM(Ipage)
   IMPLICIT NONE
-  INTEGER ios, Ipage, ipagef
   !***BEGIN PROLOGUE  SCLOSM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -21,6 +20,7 @@ SUBROUTINE SCLOSM(Ipage)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !***END PROLOGUE  SCLOSM
+  INTEGER ios, Ipage, ipagef
   CHARACTER(8) :: xern1
   !
   !***FIRST EXECUTABLE STATEMENT  SCLOSM

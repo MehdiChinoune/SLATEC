@@ -1,7 +1,6 @@
 !DECK DXPSI
 REAL(8) FUNCTION DXPSI(A,Ipsik,Ipsix)
   IMPLICIT NONE
-  INTEGER i, Ipsik, Ipsix, k, k1, m, n
   !***BEGIN PROLOGUE  DXPSI
   !***SUBSIDIARY
   !***PURPOSE  To compute values of the Psi function for DXLEGF.
@@ -20,6 +19,7 @@ REAL(8) FUNCTION DXPSI(A,Ipsik,Ipsix)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXPSI
+  INTEGER i, Ipsik, Ipsix, k, k1, m, n
   REAL(8) :: A, b, c, cnum, cdenom
   DIMENSION cnum(12), cdenom(12)
   SAVE cnum, cdenom

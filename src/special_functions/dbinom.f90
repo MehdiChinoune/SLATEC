@@ -1,7 +1,6 @@
 !DECK DBINOM
 REAL(8) FUNCTION DBINOM(N,M)
   IMPLICIT NONE
-  INTEGER i, k, M, N
   !***BEGIN PROLOGUE  DBINOM
   !***PURPOSE  Compute the binomial coefficients.
   !***LIBRARY   SLATEC (FNLIB)
@@ -23,6 +22,7 @@ REAL(8) FUNCTION DBINOM(N,M)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBINOM
+  INTEGER i, k, M, N
   REAL(8) :: corr, fintmx, sq2pil, xk, xn, xnk, D9LGMC, &
     DLNREL, D1MACH, bilnmx
   LOGICAL first
@@ -69,8 +69,7 @@ REAL(8) FUNCTION DBINOM(N,M)
     + 1.0D0 - sq2pil + corr
   !
   IF ( DBINOM>bilnmx ) CALL XERMSG('SLATEC','DBINOM',&
-    'RESULT OVERFLOWS BECAUSE N AND/OR M TOO BIG'&
-    ,3,2)
+    'RESULT OVERFLOWS BECAUSE N AND/OR M TOO BIG',3,2)
   !
   DBINOM = EXP(DBINOM)
   IF ( DBINOM<fintmx ) DBINOM = AINT(DBINOM+0.5D0)

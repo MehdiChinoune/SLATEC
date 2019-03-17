@@ -1,7 +1,6 @@
 !DECK DSWAP
 SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   !***BEGIN PROLOGUE  DSWAP
   !***PURPOSE  Interchange two vectors.
   !***LIBRARY   SLATEC (BLAS)
@@ -46,6 +45,7 @@ SUBROUTINE DSWAP(N,Dx,Incx,Dy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSWAP
+  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   REAL(8) :: Dx(*), Dy(*), dtemp1, dtemp2, dtemp3
   !***FIRST EXECUTABLE STATEMENT  DSWAP
   IF ( N<=0 ) RETURN

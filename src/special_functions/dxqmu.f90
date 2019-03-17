@@ -1,7 +1,6 @@
 !DECK DXQMU
 SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  INTEGER Id, Ierror, ipq, ipq1, ipq2, Ipqa, k, mu, Mu1, Mu2
   !***BEGIN PROLOGUE  DXQMU
   !***SUBSIDIARY
   !***PURPOSE  To compute the values of Legendre functions for DXLEGF.
@@ -21,6 +20,7 @@ SUBROUTINE DXQMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXQMU
+  INTEGER Id, Ierror, ipq, ipq1, ipq2, Ipqa, k, mu, Mu1, Mu2
   DIMENSION Pqa(*), Ipqa(*)
   REAL(8) :: dmu, nu, Nu1, Nu2, pq, Pqa, pq1, pq2, Sx, X, &
     x1, x2

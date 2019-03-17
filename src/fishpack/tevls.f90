@@ -1,8 +1,6 @@
 !DECK TEVLS
 SUBROUTINE TEVLS(N,D,E2,Ierr)
   IMPLICIT NONE
-  REAL CNV, dhold
-  INTEGER IK, K, NCMplx, nhalf, NM, NPP, ntop
   !***BEGIN PROLOGUE  TEVLS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI
@@ -50,7 +48,8 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
   !   900402  Added TYPE section.  (WRB)
   !   920528  DESCRIPTION revised and REFERENCES section added.  (WRB)
   !***END PROLOGUE  TEVLS
-  !
+  REAL CNV, dhold
+  INTEGER IK, K, NCMplx, nhalf, NM, NPP, ntop
   INTEGER i, j, l, m, N, ii, l1, mml, Ierr
   REAL D(*), E2(*)
   REAL b, c, f, g, h, p, r, s, MAChep

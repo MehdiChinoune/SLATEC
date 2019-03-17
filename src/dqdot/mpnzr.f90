@@ -1,7 +1,6 @@
 !DECK MPNZR
 SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
   IMPLICIT NONE
-  INTEGER i, i2, i2m, i2p, is, it, j, k, LUN, M, MXR
   !***BEGIN PROLOGUE  MPNZR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
@@ -29,6 +28,7 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPNZR
+  INTEGER i, i2, i2m, i2p, is, it, j, k, LUN, M, MXR
   COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
   INTEGER B, T, R, Z(*), Re, Rs, Trunc, b2
   !***FIRST EXECUTABLE STATEMENT  MPNZR

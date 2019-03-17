@@ -1,9 +1,6 @@
 !DECK BESY0
-FUNCTION BESY0(X)
+REAL FUNCTION BESY0(X)
   IMPLICIT NONE
-  REAL ampl, BESJ0, BESY0, bm0cs, bth0cs, by0cs, CSEVL, pi4, &
-    R1MACH, theta, twodpi, X, xmax, xsml, y, z
-  INTEGER INITS, ntm0, ntth0, nty0
   !***BEGIN PROLOGUE  BESY0
   !***PURPOSE  Compute the Bessel function of the second kind of order
   !            zero.
@@ -47,10 +44,12 @@ FUNCTION BESY0(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BESY0
+  REAL ampl, BESJ0, bm0cs, bth0cs, by0cs, CSEVL, pi4, &
+    R1MACH, theta, twodpi, X, xmax, xsml, y, z
+  INTEGER INITS, ntm0, ntth0, nty0
   DIMENSION by0cs(13), bm0cs(21), bth0cs(24)
   LOGICAL first
-  SAVE by0cs, bm0cs, bth0cs, twodpi, pi4, nty0, ntm0, ntth0, xsml, &
-    xmax, first
+  SAVE by0cs, bm0cs, bth0cs, twodpi, pi4, nty0, ntm0, ntth0, xsml, xmax, first
   DATA by0cs(1)/ - .011277839392865573E0/
   DATA by0cs(2)/ - .12834523756042035E0/
   DATA by0cs(3)/ - .10437884799794249E0/

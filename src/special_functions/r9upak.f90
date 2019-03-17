@@ -1,8 +1,6 @@
 !DECK R9UPAK
 SUBROUTINE R9UPAK(X,Y,N)
   IMPLICIT NONE
-  REAL absx, X, Y
-  INTEGER N
   !***BEGIN PROLOGUE  R9UPAK
   !***PURPOSE  Unpack a floating point number X so that X = Y*2**N.
   !***LIBRARY   SLATEC (FNLIB)
@@ -23,6 +21,8 @@ SUBROUTINE R9UPAK(X,Y,N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  R9UPAK
   !***FIRST EXECUTABLE STATEMENT  R9UPAK
+  REAL absx, X, Y
+  INTEGER N
   absx = ABS(X)
   N = 0
   IF ( X==0.0E0 ) THEN

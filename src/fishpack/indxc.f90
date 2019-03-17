@@ -1,8 +1,6 @@
 !DECK INDXC
 SUBROUTINE INDXC(I,Ir,Idxc,Nc)
   IMPLICIT NONE
-  REAL CNV, EPS
-  INTEGER I, Idxc, IK, Ir, K, Nc, NCMplx, NM, NPP
   !***BEGIN PROLOGUE  INDXC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI
@@ -17,6 +15,8 @@ SUBROUTINE INDXC(I,Ir,Idxc,Nc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  INDXC
+  REAL CNV, EPS
+  INTEGER I, Idxc, IK, Ir, K, Nc, NCMplx, NM, NPP
   COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  INDXC
   Nc = 2**Ir

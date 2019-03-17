@@ -1,7 +1,6 @@
 !DECK SCNRM2
 REAL FUNCTION SCNRM2(N,Cx,Incx)
   IMPLICIT NONE
-  INTEGER i, Incx, N, nn
   !***BEGIN PROLOGUE  SCNRM2
   !***PURPOSE  Compute the unitary norm of a complex vector.
   !***LIBRARY   SLATEC (BLAS)
@@ -75,6 +74,7 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SCNRM2
+  INTEGER i, Incx, N, nn
   LOGICAL imag, scale
   INTEGER next
   REAL cutlo, cuthi, hitest, sum, xmax, absx, zero, one

@@ -1,9 +1,6 @@
 !DECK POLCOF
 SUBROUTINE POLCOF(Xx,N,X,C,D,Work)
   IMPLICIT NONE
-  REAL C, D, pone, ptwo, Work, X, Xx
-  INTEGER i, im1, k, km1, km1pi, km2n, km2npi, N, nm1, nmkp1, &
-    npkm1
   !***BEGIN PROLOGUE  POLCOF
   !***PURPOSE  Compute the coefficients of the polynomial fit (including
   !            Hermite polynomial fits) produced by a previous call to
@@ -63,7 +60,8 @@ SUBROUTINE POLCOF(Xx,N,X,C,D,Work)
   !   891024  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  POLCOF
-  !
+  REAL C, D, pone, ptwo, Work, X, Xx
+  INTEGER i, im1, k, km1, km1pi, km2n, km2npi, N, nm1, nmkp1, npkm1
   DIMENSION X(*), C(*), D(*), Work(*)
   !***FIRST EXECUTABLE STATEMENT  POLCOF
   DO k = 1, N

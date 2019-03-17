@@ -1,5 +1,6 @@
 !DECK DU12US
 SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
+  IMPLICIT NONE
   !***BEGIN PROLOGUE  DU12US
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DULSIA
@@ -24,7 +25,6 @@ SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DU12US
-  IMPLICIT NONE
   REAL(8) :: A, B, bb, H, Rnorm, tt, W
   INTEGER i, ij, ip1, j, jb, k, kp1, Krank, M, Mda, Mdb, mmk, &
     Mode, N, Nb

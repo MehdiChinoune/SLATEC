@@ -137,7 +137,7 @@ SUBROUTINE SGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   PARAMETER (ONE=1.0E+0,ZERO=0.0E+0)
   !     .. Local Scalars ..
   REAL temp
-  INTEGER i, info, ix, iy, j, jx, jy, k, kup1, kx, ky, lenx ,&
+  INTEGER i, info, ix, iy, j, jx, jy, k, kup1, kx, ky, lenx, &
     leny
   !     .. External Functions ..
   LOGICAL LSAME

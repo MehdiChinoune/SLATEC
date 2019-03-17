@@ -2,8 +2,6 @@
 SUBROUTINE QAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
     Lenw,Last,Iwork,Work)
   IMPLICIT NONE
-  REAL Bound
-  INTEGER Inf, Last
   !***BEGIN PROLOGUE  QAGI
   !***PURPOSE  The routine calculates an approximation result to a given
   !            INTEGRAL   I = Integral of F over (BOUND,+INFINITY)
@@ -170,7 +168,8 @@ SUBROUTINE QAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  QAGI
-  !
+  REAL Bound
+  INTEGER Inf, Last
   REAL Abserr, Epsabs, Epsrel, F, Result, Work
   INTEGER Ier, Iwork, Lenw, Limit, lvl, l1, l2, l3, Neval
   !

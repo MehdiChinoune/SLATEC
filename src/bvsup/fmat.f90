@@ -1,7 +1,6 @@
 !DECK FMAT
 SUBROUTINE FMAT(X,Y,Yp)
   IMPLICIT NONE
-  REAL tanx, TERm, X, XSAve, Y, Yp
   !***BEGIN PROLOGUE  FMAT
   !***PURPOSE  Subsidiary to
   !***LIBRARY   SLATEC
@@ -12,6 +11,7 @@ SUBROUTINE FMAT(X,Y,Yp)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  FMAT
+  REAL tanx, TERm, X, XSAve, Y, Yp
   DIMENSION Y(*), Yp(*)
   COMMON /SAVEX / XSAve, TERm
   !***FIRST EXECUTABLE STATEMENT  FMAT

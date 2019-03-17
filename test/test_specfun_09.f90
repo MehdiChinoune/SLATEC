@@ -736,8 +736,7 @@ CONTAINS
                         99011 FORMAT ('   ERROR:   AER(K)=',4D12.4)
                         kk = MAX(nz1,nz2) + 1
                         kk = MIN(n,kk)
-                        WRITE (Lun,99012) nz1, yr(kk), yi(kk), nz2, wr(kk)&
-                          , wi(kk)
+                        WRITE (Lun,99012) nz1, yr(kk), yi(kk), nz2, wr(kk), wi(kk)
                         99012 FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2D12.4/11X,&
                           'NZ2=',I3,4X,'W(KK)=',2D12.4)
                         WRITE (Lun,99013) it, ir, icase
@@ -2541,7 +2540,6 @@ END MODULE TEST10_MOD
 PROGRAM TEST10
   USE TEST10_MOD
   IMPLICIT NONE
-  INTEGER I1MACH
   !***BEGIN PROLOGUE  TEST10
   !***PURPOSE  Driver for testing SLATEC subprograms.
   !***LIBRARY   SLATEC
@@ -2581,6 +2579,7 @@ PROGRAM TEST10
   !   910411  DATE WRITTEN
   !   920128  Category corrected.  (WRB)
   !***END PROLOGUE  TEST10
+  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST10
   lun = I1MACH(2)

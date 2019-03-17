@@ -1,8 +1,6 @@
 !DECK LA05ED
 SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Ia,Reals)
   IMPLICIT NONE
-  INTEGER Ia, ipi, j, k, kl, kn, LCOl, LENl, LENu, LP, LROw, N, &
-    NCP, nz
   !***BEGIN PROLOGUE  LA05ED
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -32,6 +30,7 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Ia,Reals)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  LA05ED
+  INTEGER Ia, ipi, j, k, kl, kn, LCOl, LENl, LENu, LP, LROw, N, NCP, nz
   LOGICAL Reals
   REAL(8) :: A(*), SMAll
   INTEGER Irn(*), Iw(*)

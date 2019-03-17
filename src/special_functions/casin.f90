@@ -1,8 +1,6 @@
 !DECK CASIN
 COMPLEX FUNCTION CASIN(Zinp)
   IMPLICIT NONE
-  INTEGER i, nterms
-  REAL pi, pi2, r, R1MACH, rmin, twoi
   !***BEGIN PROLOGUE  CASIN
   !***PURPOSE  Compute the complex arc sine.
   !***LIBRARY   SLATEC (FNLIB)
@@ -24,6 +22,8 @@ COMPLEX FUNCTION CASIN(Zinp)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CASIN
+  INTEGER i, nterms
+  REAL pi, pi2, r, R1MACH, rmin, twoi
   COMPLEX Zinp, z, z2, sqzp1, ci
   LOGICAL first
   SAVE pi2, pi, ci, nterms, rmin, first

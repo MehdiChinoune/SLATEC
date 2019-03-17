@@ -114,7 +114,7 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
   CHARACTER*(*) Hx(*)
   !     .. Local Scalars ..
   REAL r
-  INTEGER i, ij, indx, indx0, ir, istrt, j, k, kk, l, lm, lmt ,&
+  INTEGER i, ij, indx, indx0, ir, istrt, j, k, kk, l, lm, lmt, &
     m, nn, nn2
   !     .. Local Arrays ..
   INTEGER il(21), iu(21)
@@ -144,8 +144,7 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
   IF ( LEN(Work)<LEN(Hx(1)) ) THEN
     Ier = 3
     CALL XERMSG('SLATEC',' HPSORT',&
-      'The length of the work variable, WORK, is too short.',Ier,&
-      1)
+      'The length of the work variable, WORK, is too short.',Ier,1)
     RETURN
   ENDIF
   IF ( Strbeg>Strend ) THEN
@@ -163,8 +162,7 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
   ENDIF
   IF ( Strend<1.OR.Strend>LEN(Hx(1)) ) THEN
     Ier = 6
-    CALL XERMSG('SLATEC','HPSORT','The string end, STREND, is out-of-range.'&
-      ,Ier,1)
+    CALL XERMSG('SLATEC','HPSORT','The string end, STREND, is out-of-range.',Ier,1)
     RETURN
   ENDIF
   !

@@ -1,7 +1,6 @@
 !DECK DXNRMP
 SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   IMPLICIT NONE
-  INTEGER i, Ierror, ip, ip1, ip2, j, k, mu
   !***BEGIN PROLOGUE  DXNRMP
   !***PURPOSE  Compute normalized Legendre polynomials.
   !***LIBRARY   SLATEC
@@ -128,6 +127,7 @@ SUBROUTINE DXNRMP(Nu,Mu1,Mu2,Darg,Mode,Dpn,Ipn,Isig,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXNRMP
+  INTEGER i, Ierror, ip, ip1, ip2, j, k, mu
   INTEGER Nu, Mu1, Mu2, Mode, Ipn, Isig
   REAL(8) :: Darg, Dpn
   DIMENSION Dpn(*), Ipn(*)

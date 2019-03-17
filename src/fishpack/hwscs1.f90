@@ -2,15 +2,6 @@
 SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
     Elmbda,F,Idimf,Pertrb,W,S,An,Bn,Cn,R,Am,Bm,Cm,Sint,Bmh)
   IMPLICIT NONE
-  REAL Am, An, ar, at, Bdrf, Bdrs, Bdtf, Bdts, Bm, Bmh, Bn, Cm, &
-    Cn, cr, ct, czr, dr, dr2, dth, Elmbda
-  REAL F, hdr, hdth, hne, Pertrb, R, r2, Rf, rf2, Rs, rs2, rsq, &
-    S, sdts, Sint, sum, t1, tdr, tdt, Tf
-  REAL theta, Ts, W, wrf, wrs, wrz, wtf, wtnm, wts, xp, xps, &
-    yhld, yph, yps
-  INTEGER i, ictr, Idimf, ierror, iflg, Intl, ising, itf, itfm, &
-    its, itsp, j, jrf, jrfm, jrs, jrsp, l, M, Mbdcnd, mp
-  INTEGER mp1, munk, N, Nbdcnd, np, np1, nunk
   !***BEGIN PROLOGUE  HWSCS1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to HWSCSP
@@ -26,9 +17,16 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  HWSCS1
+  REAL Am, An, ar, at, Bdrf, Bdrs, Bdtf, Bdts, Bm, Bmh, Bn, Cm, &
+    Cn, cr, ct, czr, dr, dr2, dth, Elmbda
+  REAL F, hdr, hdth, hne, Pertrb, R, r2, Rf, rf2, Rs, rs2, rsq, &
+    S, sdts, Sint, sum, t1, tdr, tdt, Tf
+  REAL theta, Ts, W, wrf, wrs, wrz, wtf, wtnm, wts, xp, xps, yhld, yph, yps
+  INTEGER i, ictr, Idimf, ierror, iflg, Intl, ising, itf, itfm, &
+    its, itsp, j, jrf, jrfm, jrs, jrsp, l, M, Mbdcnd, mp
+  INTEGER mp1, munk, N, Nbdcnd, np, np1, nunk
   DIMENSION F(Idimf,*), Bdrs(*), Bdrf(*), Bdts(*), Bdtf(*), Am(*), &
-    Bm(*), Cm(*), An(*), Bn(*), Cn(*), S(*), R(*), Sint(*), &
-    Bmh(*), W(*)
+    Bm(*), Cm(*), An(*), Bn(*), Cn(*), S(*), R(*), Sint(*), Bmh(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HWSCS1
   mp1 = M + 1
   dth = (Tf-Ts)/M

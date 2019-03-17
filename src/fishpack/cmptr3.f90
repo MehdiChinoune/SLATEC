@@ -1,8 +1,6 @@
 !DECK CMPTR3
 SUBROUTINE CMPTR3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
   IMPLICIT NONE
-  INTEGER i, ip, K, k1, k2, k2k3k4, k3, k4, kint1, kint2, kint3, &
-    l1, l2, l3, lint1, lint2, lint3, M, mm1, n
   !***BEGIN PROLOGUE  CMPTR3
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CMGNBN
@@ -21,6 +19,8 @@ SUBROUTINE CMPTR3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CMPTR3
+  INTEGER i, ip, K, k1, k2, k2k3k4, k3, k4, kint1, kint2, kint3, &
+    l1, l2, l3, lint1, lint2, lint3, M, mm1, n
   COMPLEX A, B, C, Y1, Y2, Y3, Tcos, D, W1, W2, W3, x, xx, z
   DIMENSION A(*), B(*), C(*), K(4), Tcos(*), Y1(*), Y2(*), Y3(*), &
     D(*), W1(*), W2(*), W3(*)

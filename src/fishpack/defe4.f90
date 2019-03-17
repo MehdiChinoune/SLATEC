@@ -1,10 +1,6 @@
 !DECK DEFE4
 SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
   IMPLICIT NONE
-  REAL ai, AIT, bi, BIT, ci, CIT, DIT, DLX, DLX4, DLY, DLY4, &
-    Grhs, TDLx3, TDLy3, tx, ty, Usol, uxxx, uxxxx, uyyy
-  REAL uyyyy, xi
-  INTEGER i, Idmn, IS, j, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
   !***BEGIN PROLOGUE  DEFE4
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPX4
@@ -37,10 +33,12 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  DEFE4
-  !
+  REAL ai, AIT, bi, BIT, ci, CIT, DIT, DLX, DLX4, DLY, DLY4, &
+    Grhs, TDLx3, TDLy3, tx, ty, Usol, uxxx, uxxxx, uyyy
+  REAL uyyyy, xi
+  INTEGER i, Idmn, IS, j, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
   COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
-    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
-    DLY4
+    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
   EXTERNAL COFX
   !***FIRST EXECUTABLE STATEMENT  DEFE4

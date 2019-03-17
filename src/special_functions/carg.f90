@@ -1,7 +1,6 @@
 !DECK CARG
-FUNCTION CARG(Z)
+REAL FUNCTION CARG(Z)
   IMPLICIT NONE
-  REAL CARG
   !***BEGIN PROLOGUE  CARG
   !***PURPOSE  Compute the argument of a complex number.
   !***LIBRARY   SLATEC (FNLIB)

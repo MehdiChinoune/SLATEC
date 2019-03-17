@@ -1,8 +1,6 @@
 !DECK R9LGIC
-FUNCTION R9LGIC(A,X,Alx)
+REAL FUNCTION R9LGIC(A,X,Alx)
   IMPLICIT NONE
-  REAL A, Alx, eps, fk, p, r, R1MACH, R9LGIC, s, t, X, xma, xpa
-  INTEGER k
   !***BEGIN PROLOGUE  R9LGIC
   !***SUBSIDIARY
   !***PURPOSE  Compute the log complementary incomplete Gamma function
@@ -28,6 +26,8 @@ FUNCTION R9LGIC(A,X,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  R9LGIC
+  REAL A, Alx, eps, fk, p, r, R1MACH, s, t, X, xma, xpa
+  INTEGER k
   SAVE eps
   DATA eps/0.0/
   !***FIRST EXECUTABLE STATEMENT  R9LGIC

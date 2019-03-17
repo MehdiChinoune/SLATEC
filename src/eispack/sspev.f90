@@ -1,7 +1,6 @@
 !DECK SSPEV
 SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
   IMPLICIT NONE
-  INTEGER Job
   !***BEGIN PROLOGUE  SSPEV
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real symmetric matrix stored in packed form.
@@ -84,6 +83,7 @@ SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  SSPEV
+  INTEGER Job
   INTEGER i, Info, j, Ldv, m, N
   REAL A(*), E(*), V(Ldv,*), Work(*)
   !***FIRST EXECUTABLE STATEMENT  SSPEV

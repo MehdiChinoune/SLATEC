@@ -1,9 +1,6 @@
 !DECK PNNZRS
 SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   IMPLICIT NONE
-  INTEGER I, i1, idiff, iend, ii, il, ilast, iopt, ipl, Iplace, &
-    IPLOC, ipploc, Ircx, istart, Ix, j, l, ll, lmx, lpg
-  INTEGER n20046, nerr, np
   !***BEGIN PROLOGUE  PNNZRS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -58,6 +55,9 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   !***END PROLOGUE  PNNZRS
+  INTEGER I, i1, idiff, iend, ii, il, ilast, iopt, ipl, Iplace, &
+    IPLOC, ipploc, Ircx, istart, Ix, j, l, ll, lmx, lpg
+  INTEGER n20046, nerr, np
   DIMENSION Ix(*)
   REAL Xval, Sx(*), zero
   SAVE zero

@@ -1,10 +1,6 @@
 !DECK POISD2
 SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   IMPLICIT NONE
-  REAL B, Ba, Bb, Bc, D, fi, P, Q, t, Tcos, W
-  INTEGER i, ideg, Idimq, ip, ip1, ipstor, irreg, Istag, j, jdeg, &
-    jm1, jm2, jm3, jp1, jp2, jp3, jsh, jsp, jst, jstsav
-  INTEGER kr, krpi, l, lr, m, Mr, n, nodd, noddpr, Nr, nun
   !***BEGIN PROLOGUE  POISD2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to GENBUN
@@ -29,9 +25,11 @@ SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !   920130  Modified to use merge routine S1MERG rather than deleted
   !           routine MERGE.  (WRB)
   !***END PROLOGUE  POISD2
-  !
-  DIMENSION Q(Idimq,*), Ba(*), Bb(*), Bc(*), Tcos(*), B(*), D(*), &
-    W(*), P(*)
+  REAL B, Ba, Bb, Bc, D, fi, P, Q, t, Tcos, W
+  INTEGER i, ideg, Idimq, ip, ip1, ipstor, irreg, Istag, j, jdeg, &
+    jm1, jm2, jm3, jp1, jp2, jp3, jsh, jsp, jst, jstsav
+  INTEGER kr, krpi, l, lr, m, Mr, n, nodd, noddpr, Nr, nun
+  DIMENSION Q(Idimq,*), Ba(*), Bb(*), Bc(*), Tcos(*), B(*), D(*), W(*), P(*)
   !***FIRST EXECUTABLE STATEMENT  POISD2
   m = Mr
   n = Nr

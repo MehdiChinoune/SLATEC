@@ -1,9 +1,6 @@
 !DECK LA05BD
 SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   IMPLICIT NONE
-  INTEGER i, Ia, ii, j, k, k2, kk, kl, kll, kp, kpc, l1, LCOl, &
-    LENl, LENu, LP, LROw, N, n1, NCP
-  INTEGER nz
   !***BEGIN PROLOGUE  LA05BD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -40,6 +37,9 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   !   900402  Added TYPE section.  (WRB)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
   !***END PROLOGUE  LA05BD
+  INTEGER i, Ia, ii, j, k, k2, kk, kl, kll, kp, kpc, l1, LCOl, &
+    LENl, LENu, LP, LROw, N, n1, NCP
+  INTEGER nz
   REAL(8) :: A(*), B(*), am, W(*), G, SMAll
   LOGICAL Trans
   INTEGER Ind(Ia,2), Iw(N,8)

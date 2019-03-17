@@ -1,7 +1,6 @@
 !DECK LPDP
 SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   IMPLICIT NONE
-  INTEGER i, iw, ix, j, l, M, Mda, Mode, modew, n, N1, N2, np1
   !***BEGIN PROLOGUE  LPDP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to LSEI
@@ -59,6 +58,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !     SSCAL,SNRM2,  SEE TRANS. MATH. SOFT., VOL. 5, NO. 3, P. 308.
   !     SCOPY
   !
+  INTEGER i, iw, ix, j, l, M, Mda, Mode, modew, n, N1, N2, np1
   REAL A(Mda,*), Prgopt(*), Ws(*), Wnorm, X(*)
   INTEGER Is(*)
   REAL fac, one, rnorm, sc, ynorm, zero

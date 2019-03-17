@@ -1,7 +1,6 @@
 !DECK XLEGF
 SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  INTEGER i, Id, Ierror, Ipqa, l, Mu1, Mu2, Nudiff
   !***BEGIN PROLOGUE  XLEGF
   !***PURPOSE  Compute normalized Legendre polynomials and associated
   !            Legendre functions.
@@ -125,6 +124,7 @@ SUBROUTINE XLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  XLEGF
+  INTEGER i, Id, Ierror, Ipqa, l, Mu1, Mu2, Nudiff
   REAL Pqa, Dnu1, dnu2, sx, Theta, x, pi2
   DIMENSION Pqa(*), Ipqa(*)
   !

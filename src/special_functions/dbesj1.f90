@@ -1,7 +1,6 @@
 !DECK DBESJ1
 REAL(8) FUNCTION DBESJ1(X)
   IMPLICIT NONE
-  INTEGER INITDS, ntj1
   !***BEGIN PROLOGUE  DBESJ1
   !***PURPOSE  Compute the Bessel function of the first kind of order one.
   !***LIBRARY   SLATEC (FNLIB)
@@ -32,8 +31,8 @@ REAL(8) FUNCTION DBESJ1(X)
   !   910401  Corrected error in code which caused values to have the
   !           wrong sign for arguments less than 4.0.  (WRB)
   !***END PROLOGUE  DBESJ1
-  REAL(8) :: X, bj1cs(19), ampl, theta, xsml, xmin, y, D1MACH, &
-    DCSEVL
+  INTEGER INITDS, ntj1
+  REAL(8) :: X, bj1cs(19), ampl, theta, xsml, xmin, y, D1MACH, DCSEVL
   LOGICAL first
   SAVE bj1cs, ntj1, xsml, xmin, first
   DATA bj1cs(1)/ - .117261415133327865606240574524003D+0/

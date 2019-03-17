@@ -1,7 +1,6 @@
 !DECK RPQR79
 SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   IMPLICIT NONE
-  INTEGER km1, kwend
   !***BEGIN PROLOGUE  RPQR79
   !***PURPOSE  Find the zeros of a polynomial with real coefficients.
   !***LIBRARY   SLATEC
@@ -49,6 +48,7 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   911010  Code reworked and simplified.  (RWC and WRB)
   !***END PROLOGUE  RPQR79
+  INTEGER km1, kwend
   REAL Coeff(*), Work(*), scale
   COMPLEX Root(*)
   INTEGER Ndeg, Ierr, k, kh, kwr, kwi, kcol

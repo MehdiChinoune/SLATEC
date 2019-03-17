@@ -1,7 +1,6 @@
 !DECK WNNLS
 SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   IMPLICIT NONE
-  INTEGER L, l1, l2, l3, l4, l5, liw, lw, Ma, Mdw, Me, Mode, N
   !***BEGIN PROLOGUE  WNNLS
   !***PURPOSE  Solve a linearly constrained least squares problem with
   !            equality constraints and nonnegativity constraints on
@@ -265,6 +264,7 @@ SUBROUTINE WNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  WNNLS
+  INTEGER L, l1, l2, l3, l4, l5, liw, lw, Ma, Mdw, Me, Mode, N
   REAL Prgopt(*), Rnorm, W(Mdw,*), Work(*), X(*)
   INTEGER Iwork(*)
   CHARACTER(8) :: xern1

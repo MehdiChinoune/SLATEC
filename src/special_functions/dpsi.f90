@@ -1,7 +1,6 @@
 !DECK DPSI
 REAL(8) FUNCTION DPSI(X)
   IMPLICIT NONE
-  INTEGER i, INITDS, n, ntapsi, ntpsi
   !***BEGIN PROLOGUE  DPSI
   !***PURPOSE  Compute the Psi (or Digamma) function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -40,6 +39,7 @@ REAL(8) FUNCTION DPSI(X)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable name.  (RWC, WRB)
   !***END PROLOGUE  DPSI
+  INTEGER i, INITDS, n, ntapsi, ntpsi
   REAL(8) :: X, psics(42), apsics(16), aux, dxrel, pi, xbig, &
     y, DCOT, DCSEVL, D1MACH
   LOGICAL first

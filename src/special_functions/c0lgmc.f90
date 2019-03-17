@@ -1,7 +1,6 @@
 !DECK C0LGMC
 COMPLEX FUNCTION C0LGMC(Z)
   IMPLICIT NONE
-  REAL cabsz, R1MACH, rbig
   !***BEGIN PROLOGUE  C0LGMC
   !***PURPOSE  Evaluate (Z+0.5)*LOG((Z+1.)/Z) - 1.0 with relative
   !            accuracy.
@@ -26,6 +25,7 @@ COMPLEX FUNCTION C0LGMC(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  C0LGMC
+  REAL cabsz, R1MACH, rbig
   COMPLEX Z, q, C9LN2R
   SAVE rbig
   DATA rbig/0.0/

@@ -1,7 +1,6 @@
 !DECK CACOS
 COMPLEX FUNCTION CACOS(Z)
   IMPLICIT NONE
-  REAL pi2
   !***BEGIN PROLOGUE  CACOS
   !***PURPOSE  Compute the complex arc cosine.
   !***LIBRARY   SLATEC (FNLIB)
@@ -22,6 +21,7 @@ COMPLEX FUNCTION CACOS(Z)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CACOS
+  REAL pi2
   COMPLEX Z, CASIN
   SAVE pi2
   DATA pi2/1.57079632679489661923E0/

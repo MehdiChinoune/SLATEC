@@ -1,7 +1,6 @@
 !DECK DBESI1
 REAL(8) FUNCTION DBESI1(X)
   IMPLICIT NONE
-  INTEGER INITDS, nti1
   !***BEGIN PROLOGUE  DBESI1
   !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
   !            first kind of order one.
@@ -32,8 +31,8 @@ REAL(8) FUNCTION DBESI1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBESI1
-  REAL(8) :: X, bi1cs(17), xmax, xmin, xsml, y, D1MACH, &
-    DCSEVL, DBSI1E
+  INTEGER INITDS, nti1
+  REAL(8) :: X, bi1cs(17), xmax, xmin, xsml, y, D1MACH, DCSEVL, DBSI1E
   LOGICAL first
   SAVE bi1cs, nti1, xmin, xsml, xmax, first
   DATA bi1cs(1)/ - .19717132610998597316138503218149D-2/

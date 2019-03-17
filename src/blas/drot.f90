@@ -1,7 +1,6 @@
 !DECK DROT
 SUBROUTINE DROT(N,Dx,Incx,Dy,Incy,Dc,Ds)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, kx, ky, N, nsteps
   !***BEGIN PROLOGUE  DROT
   !***PURPOSE  Apply a plane Givens rotation.
   !***LIBRARY   SLATEC (BLAS)
@@ -49,6 +48,7 @@ SUBROUTINE DROT(N,Dx,Incx,Dy,Incy,Dc,Ds)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DROT
+  INTEGER i, Incx, Incy, kx, ky, N, nsteps
   REAL(8) :: Dx, Dy, Dc, Ds, zero, one, w, z
   DIMENSION Dx(*), Dy(*)
   SAVE zero, one

@@ -2,15 +2,6 @@
 SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     Elmbda,F,Idimf,Pertrb,Am,Bm,Cm,Sn,Ss,Sint,D)
   IMPLICIT NONE
-  REAL Am, at, Bdpf, Bdps, Bdtf, Bdts, Bm, cf, Cm, cnp, cp, csp, &
-    ct, D, den, dfn, dfs, dnn, dns, dphi
-  REAL dphi2, dsn, dss, dth, dth2, Elmbda, F, fim1, fjj, fm, fn, &
-    hdth, hld, hne, Pertrb, Pf, Ps, rtn, rts, Sint
-  REAL Sn, Ss, sum, sum1, sum2, t1, tdp, tdt, Tf, theta, Ts, wp, &
-    wpf, wps, wtf, wts, yhld
-  INTEGER i, Idimf, ierror, ii, iid, inp, ising, isp, itf, itfm, &
-    its, itsp, j, jpf, jpfm, jps, jpsp, M, Mbdcnd, mbr
-  INTEGER mp1, munk, N, Nbdcnd, nbr, np1, nunk
   !***BEGIN PROLOGUE  HWSSS1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to HWSSSP
@@ -25,6 +16,15 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  HWSSS1
+  REAL Am, at, Bdpf, Bdps, Bdtf, Bdts, Bm, cf, Cm, cnp, cp, csp, &
+    ct, D, den, dfn, dfs, dnn, dns, dphi
+  REAL dphi2, dsn, dss, dth, dth2, Elmbda, F, fim1, fjj, fm, fn, &
+    hdth, hld, hne, Pertrb, Pf, Ps, rtn, rts, Sint
+  REAL Sn, Ss, sum, sum1, sum2, t1, tdp, tdt, Tf, theta, Ts, wp, &
+    wpf, wps, wtf, wts, yhld
+  INTEGER i, Idimf, ierror, ii, iid, inp, ising, isp, itf, itfm, &
+    its, itsp, j, jpf, jpfm, jps, jpsp, M, Mbdcnd, mbr
+  INTEGER mp1, munk, N, Nbdcnd, nbr, np1, nunk
   DIMENSION F(Idimf,*), Bdts(*), Bdtf(*), Bdps(*), Bdpf(*), Am(*), &
     Bm(*), Cm(*), Ss(*), Sn(*), D(*), Sint(*)
   !

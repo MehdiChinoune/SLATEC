@@ -1,7 +1,6 @@
 !DECK CMPTRX
 SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   IMPLICIT NONE
-  INTEGER i, Idegbr, Idegcr, ip, k, l, lint, M, mm1
   !***BEGIN PROLOGUE  CMPTRX
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CMGNBN
@@ -23,7 +22,7 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CMPTRX
-  !
+  INTEGER i, Idegbr, Idegcr, ip, k, l, lint, M, mm1
   COMPLEX A, B, C, Y, Tcos, D, W, x, xx, z
   DIMENSION A(*), B(*), C(*), Y(*), Tcos(*), D(*), W(*)
   INTEGER kb, kc

@@ -1,8 +1,6 @@
 !DECK INDXA
 SUBROUTINE INDXA(I,Ir,Idxa,Na)
   IMPLICIT NONE
-  REAL CNV, EPS
-  INTEGER I, Idxa, IK, Ir, K, Na, NCMplx, NM, NPP
   !***BEGIN PROLOGUE  INDXA
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI
@@ -17,6 +15,8 @@ SUBROUTINE INDXA(I,Ir,Idxa,Na)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  INDXA
+  REAL CNV, EPS
+  INTEGER I, Idxa, IK, Ir, K, Na, NCMplx, NM, NPP
   COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  INDXA
   Na = 2**Ir

@@ -1,9 +1,6 @@
 !DECK POCH
-FUNCTION POCH(A,X)
+REAL FUNCTION POCH(A,X)
   IMPLICIT NONE
-  REAL A, absa, absax, alnga, alngax, ALNREL, ax, b, COT, FAC, &
-    GAMMA, GAMR, pi, POCH, R9LGMC, sgnga, sgngax, X
-  INTEGER i, n
   !***BEGIN PROLOGUE  POCH
   !***PURPOSE  Evaluate a generalization of Pochhammer's symbol.
   !***LIBRARY   SLATEC (FNLIB)
@@ -30,6 +27,9 @@ FUNCTION POCH(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  POCH
+  REAL A, absa, absax, alnga, alngax, ALNREL, ax, b, COT, FAC, &
+    GAMMA, GAMR, pi, R9LGMC, sgnga, sgngax, X
+  INTEGER i, n
   EXTERNAL GAMMA
   SAVE pi
   DATA pi/3.141592653589793238E0/

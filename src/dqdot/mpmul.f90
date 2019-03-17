@@ -1,7 +1,6 @@
 !DECK MPMUL
 SUBROUTINE MPMUL(X,Y,Z)
   IMPLICIT NONE
-  INTEGER i, i2, i2p, j, j1, LUN, M, MXR
   !***BEGIN PROLOGUE  MPMUL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
@@ -36,6 +35,7 @@ SUBROUTINE MPMUL(X,Y,Z)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPMUL
+  INTEGER i, i2, i2p, j, j1, LUN, M, MXR
   COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
   INTEGER B, T, R, X(*), Y(*), Z(*), rs, re, xi, c, ri
   !***FIRST EXECUTABLE STATEMENT  MPMUL

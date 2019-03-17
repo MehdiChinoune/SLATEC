@@ -1,10 +1,6 @@
 !DECK POCH1
-FUNCTION POCH1(A,X)
+REAL FUNCTION POCH1(A,X)
   IMPLICIT NONE
-  REAL A, absa, absx, alneps, alnvar, b, bern, binv, bp, COT, &
-    EXPREL, gbern, gbk, pi, POCH, POCH1, poly1, PSI, q, R1MACH
-  REAL rho, sinpx2, sinpxx, sqtbig, term, trig, var, var2, X
-  INTEGER i, ii, incr, j, k, ndx, nterms
   !***BEGIN PROLOGUE  POCH1
   !***PURPOSE  Calculate a generalization of Pochhammer's symbol starting
   !            from first order.
@@ -51,6 +47,10 @@ FUNCTION POCH1(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  POCH1
+  REAL A, absa, absx, alneps, alnvar, b, bern, binv, bp, COT, &
+    EXPREL, gbern, gbk, pi, POCH, poly1, PSI, q, R1MACH
+  REAL rho, sinpx2, sinpxx, sqtbig, term, trig, var, var2, X
+  INTEGER i, ii, incr, j, k, ndx, nterms
   DIMENSION bern(9), gbern(10)
   LOGICAL first
   EXTERNAL COT
@@ -109,8 +109,7 @@ FUNCTION POCH1(A,X)
       !
       nterms = INT( -0.5*alneps/alnvar ) + 1
       IF ( nterms>9 ) CALL XERMSG('SLATEC','POCH1',&
-        'NTERMS IS TOO BIG, MAYBE R1MACH(3) IS BAD'&
-        ,1,2)
+        'NTERMS IS TOO BIG, MAYBE R1MACH(3) IS BAD',1,2)
       IF ( nterms>=2 ) THEN
         !
         DO k = 2, nterms

@@ -1,7 +1,6 @@
 !DECK RJ
 REAL FUNCTION RJ(X,Y,Z,P,Ier)
   IMPLICIT NONE
-  REAL R1MACH
   !***BEGIN PROLOGUE  RJ
   !***PURPOSE  Compute the incomplete or complete (X or Y or Z is zero)
   !            elliptic integral of the 3rd kind.  For X, Y, and Z non-
@@ -301,6 +300,7 @@ REAL FUNCTION RJ(X,Y,Z,P,Ier)
   !           editorial changes.  (RWC)).
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RJ
+  REAL R1MACH
   CHARACTER(16) :: xern3, xern4, xern5, xern6, xern7
   INTEGER Ier
   REAL alfa, beta, c1, c2, c3, c4, ea, eb, ec, e2, e3

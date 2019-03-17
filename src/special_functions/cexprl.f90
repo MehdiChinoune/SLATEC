@@ -1,8 +1,6 @@
 !DECK CEXPRL
 COMPLEX FUNCTION CEXPRL(Z)
   IMPLICIT NONE
-  REAL alneps, r, R1MACH, rbnd, xln, xn
-  INTEGER i, nterms
   !***BEGIN PROLOGUE  CEXPRL
   !***PURPOSE  Calculate the relative error exponential (EXP(X)-1)/X.
   !***LIBRARY   SLATEC (FNLIB)
@@ -26,6 +24,8 @@ COMPLEX FUNCTION CEXPRL(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CEXPRL
+  REAL alneps, r, R1MACH, rbnd, xln, xn
+  INTEGER i, nterms
   COMPLEX Z
   LOGICAL first
   SAVE nterms, rbnd, first

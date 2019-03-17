@@ -2,7 +2,6 @@
 SUBROUTINE DPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
     Rprnrm,Csc,Ww,Bl,Bu,Erp,Rprim,Primal,Finite,Zerolv)
   IMPLICIT NONE
-  INTEGER i, Ienter, Ileave, j, Mrelas, n20005, n20036, Nvars
   !***BEGIN PROLOGUE  DPLPFL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -31,6 +30,7 @@ SUBROUTINE DPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DPLPFL
+  INTEGER i, Ienter, Ileave, j, Mrelas, n20005, n20036, Nvars
   INTEGER Ibasis(*), Ind(*), Ibb(*)
   REAL(8) :: Csc(*), Ww(*), Bl(*), Bu(*), Erp(*), Rprim(*), &
     Primal(*), bound, Dirnrm, ratio, Rprnrm, Theta, &

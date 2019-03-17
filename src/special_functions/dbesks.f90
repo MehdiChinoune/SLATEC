@@ -1,7 +1,6 @@
 !DECK DBESKS
 SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   IMPLICIT NONE
-  INTEGER i, n, Nin
   !***BEGIN PROLOGUE  DBESKS
   !***PURPOSE  Compute a sequence of modified Bessel functions of the
   !            third kind of fractional order.
@@ -31,6 +30,7 @@ SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBESKS
+  INTEGER i, n, Nin
   REAL(8) :: Xnu, X, Bk(*), expxi, xmax, D1MACH
   SAVE xmax
   DATA xmax/0.D0/

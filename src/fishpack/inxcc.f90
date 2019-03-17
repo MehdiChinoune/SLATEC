@@ -1,8 +1,6 @@
 !DECK INXCC
 SUBROUTINE INXCC(I,Ir,Idxc,Nc)
   IMPLICIT NONE
-  REAL CNV, EPS
-  INTEGER I, Idxc, IK, Ir, K, Nc, NCMplx, NM, NPP
   !***BEGIN PROLOGUE  INXCC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBLKTR
@@ -17,6 +15,8 @@ SUBROUTINE INXCC(I,Ir,Idxc,Nc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  INXCC
+  REAL CNV, EPS
+  INTEGER I, Idxc, IK, Ir, K, Nc, NCMplx, NM, NPP
   COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  INXCC
   Nc = 2**Ir

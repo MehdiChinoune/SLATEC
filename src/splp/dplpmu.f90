@@ -5,11 +5,6 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     Basmat,Csc,Wr,Rprim,Ww,Bu,Bl,Rhs,Erd,Erp,Rz,Rg,Colnrm,&
     Costs,Primal,Duals,Singlr,Redbas,Zerolv,Stpedg)
   IMPLICIT NONE
-  INTEGER i, ibas, IDLOC, Ienter, ihi, il1, Ileave, ilow, Info, &
-    Iopt, ipage, iplace, iu1, j, Jstrt, k, key, Lbm, Lmx, &
-    lpg
-  INTEGER Mrelas, n20002, n20018, n20121, nerr, nnegrc, Npp, npr001, &
-    npr003, Nredc, Nvars
   !***BEGIN PROLOGUE  DPLPMU
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -47,8 +42,11 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DPLPMU
-  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), &
-    Ibb(*)
+  INTEGER i, ibas, IDLOC, Ienter, ihi, il1, Ileave, ilow, Info, &
+    Iopt, ipage, iplace, iu1, j, Jstrt, k, key, Lbm, Lmx, lpg
+  INTEGER Mrelas, n20002, n20018, n20121, nerr, nnegrc, Npp, npr001, &
+    npr003, Nredc, Nvars
+  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
   REAL(8) :: aij, alpha, Anorm, Costsc, Erdnrm, Dulnrm, Eps, &
     gamma, Gg, gq, one, Rprnrm, rzj, scalr, Theta, &
     two, Uu, wp, Xlamda, Rhsnrm, zero, Amat(*), &
@@ -186,8 +184,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     ELSE
       nerr = 26
       CALL XERMSG('SLATEC','DPLPMU',&
-        'IN DSPLP, MOVED TO A SINGULAR POINT. THIS SHOULD NOT HAPPEN.'&
-        ,nerr,Iopt)
+        'IN DSPLP, MOVED TO A SINGULAR POINT. THIS SHOULD NOT HAPPEN.',nerr,Iopt)
       Info = -nerr
       RETURN
     ENDIF

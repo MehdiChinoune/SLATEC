@@ -1,8 +1,6 @@
 !DECK INXCB
 SUBROUTINE INXCB(I,Ir,Idx,Idp)
   IMPLICIT NONE
-  REAL CNV, EPS
-  INTEGER I, id, Idp, Idx, IK, ipl, Ir, izh, K, NCMplx, NM, NPP
   !***BEGIN PROLOGUE  INXCB
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBLKTR
@@ -17,7 +15,8 @@ SUBROUTINE INXCB(I,Ir,Idx,Idp)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  INXCB
-  !
+  REAL CNV, EPS
+  INTEGER I, id, Idp, Idx, IK, ipl, Ir, izh, K, NCMplx, NM, NPP
   COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  INXCB
   Idp = 0

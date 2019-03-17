@@ -1,8 +1,6 @@
 !DECK RGAUSS
-FUNCTION RGAUSS(Xmean,Sd)
+REAL FUNCTION RGAUSS(Xmean,Sd)
   IMPLICIT NONE
-  INTEGER i
-  REAL RAND, RGAUSS, Sd, Xmean
   !***BEGIN PROLOGUE  RGAUSS
   !***PURPOSE  Generate a normally distributed (Gaussian) random number.
   !***LIBRARY   SLATEC (FNLIB)
@@ -33,6 +31,8 @@ FUNCTION RGAUSS(Xmean,Sd)
   !   910819  Added EXTERNAL statement for RAND due to problem on IBM
   !           RS 6000.  (WRB)
   !***END PROLOGUE  RGAUSS
+  INTEGER i
+  REAL RAND, Sd, Xmean
   EXTERNAL RAND
   !***FIRST EXECUTABLE STATEMENT  RGAUSS
   RGAUSS = -6.0

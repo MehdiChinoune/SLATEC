@@ -1,9 +1,6 @@
 !DECK E1
-FUNCTION E1(X)
+REAL FUNCTION E1(X)
   IMPLICIT NONE
-  REAL ae11cs, ae12cs, ae13cs, ae14cs, CSEVL, E1, e11cs, e12cs, &
-    eta, R1MACH, X, xmax, xmaxt
-  INTEGER INITS, ntae11, ntae12, ntae13, ntae14, nte11, nte12
   !***BEGIN PROLOGUE  E1
   !***PURPOSE  Compute the exponential integral E1(X).
   !***LIBRARY   SLATEC (FNLIB)
@@ -76,6 +73,9 @@ FUNCTION E1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  E1
+  REAL ae11cs, ae12cs, ae13cs, ae14cs, CSEVL, e11cs, e12cs, &
+    eta, R1MACH, X, xmax, xmaxt
+  INTEGER INITS, ntae11, ntae12, ntae13, ntae14, nte11, nte12
   DIMENSION ae11cs(39), ae12cs(25), e11cs(19), e12cs(16), ae13cs(25), &
     ae14cs(26)
   LOGICAL first

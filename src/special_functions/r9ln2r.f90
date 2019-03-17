@@ -1,9 +1,6 @@
 !DECK R9LN2R
-FUNCTION R9LN2R(X)
+REAL FUNCTION R9LN2R(X)
   IMPLICIT NONE
-  REAL CSEVL, eps, R1MACH, R9LN2R, sqeps, txbig, txmax, X, xbig, &
-    xmax, xmin
-  INTEGER INITS, ntln21, ntln22
   !***BEGIN PROLOGUE  R9LN2R
   !***SUBSIDIARY
   !***PURPOSE  Evaluate LOG(1+X) from second order relative accuracy so
@@ -40,6 +37,8 @@ FUNCTION R9LN2R(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  R9LN2R
+  REAL CSEVL, eps, R1MACH, sqeps, txbig, txmax, X, xbig, xmax, xmin
+  INTEGER INITS, ntln21, ntln22
   REAL ln21cs(26), ln22cs(20)
   LOGICAL first
   SAVE ln21cs, ln22cs, ntln21, ntln22, xmin, xbig, xmax, first

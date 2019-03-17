@@ -1,7 +1,6 @@
 !DECK MPADD2
 SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   IMPLICIT NONE
-  INTEGER j, LUN, M, med, MXR
   !***BEGIN PROLOGUE  MPADD2
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
@@ -47,6 +46,7 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   !   920528  Added a REFERENCES section revised.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPADD2
+  INTEGER j, LUN, M, med, MXR
   COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
   INTEGER B, T, R, X(*), Y(*), Z(*), Y1(*), Trunc
   INTEGER s, ed, rs, re

@@ -1,9 +1,6 @@
 !DECK BESK1E
-FUNCTION BESK1E(X)
+REAL FUNCTION BESK1E(X)
   IMPLICIT NONE
-  REAL ak12cs, ak1cs, BESI1, BESK1E, bk1cs, CSEVL, R1MACH, X, xmin, &
-    xsml, y
-  INTEGER INITS, ntak1, ntak12, ntk1
   !***BEGIN PROLOGUE  BESK1E
   !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the third kind of order one.
@@ -49,6 +46,8 @@ FUNCTION BESK1E(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BESK1E
+  REAL ak12cs, ak1cs, BESI1, bk1cs, CSEVL, R1MACH, X, xmin, xsml, y
+  INTEGER INITS, ntak1, ntak12, ntk1
   DIMENSION bk1cs(11), ak1cs(17), ak12cs(14)
   LOGICAL first
   SAVE bk1cs, ak1cs, ak12cs, ntk1, ntak1, ntak12, xmin, xsml, first

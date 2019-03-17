@@ -1,7 +1,6 @@
 !DECK DBESI0
 REAL(8) FUNCTION DBESI0(X)
   IMPLICIT NONE
-  INTEGER INITDS, nti0
   !***BEGIN PROLOGUE  DBESI0
   !***PURPOSE  Compute the hyperbolic Bessel function of the first kind
   !            of order zero.
@@ -32,8 +31,8 @@ REAL(8) FUNCTION DBESI0(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBESI0
-  REAL(8) :: X, bi0cs(18), xmax, xsml, y, D1MACH, DCSEVL, &
-    DBSI0E
+  INTEGER INITDS, nti0
+  REAL(8) :: X, bi0cs(18), xmax, xsml, y, D1MACH, DCSEVL, DBSI0E
   LOGICAL first
   SAVE bi0cs, nti0, xsml, xmax, first
   DATA bi0cs(1)/ - .7660547252839144951081894976243285D-1/

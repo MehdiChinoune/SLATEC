@@ -1,9 +1,6 @@
 !DECK STOR1
 SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   IMPLICIT NONE
-  REAL C, U, V, XSAv, Yh, Yp
-  INTEGER IGOfx, INHomo, IVP, j, NCOmp, nctnf, Ndisk, NFC, Ntape, &
-    Ntemp
   !***BEGIN PROLOGUE  STOR1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP
@@ -29,6 +26,8 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  STOR1
+  REAL C, U, V, XSAv, Yh, Yp
+  INTEGER IGOfx, INHomo, IVP, j, NCOmp, nctnf, Ndisk, NFC, Ntape, Ntemp
   DIMENSION U(*), Yh(*), V(*), Yp(*)
   !
   ! **********************************************************************

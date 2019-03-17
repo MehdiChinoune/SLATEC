@@ -1,7 +1,6 @@
 !DECK DGAMMA
 REAL(8) FUNCTION DGAMMA(X)
   IMPLICIT NONE
-  INTEGER i, INITDS, n, ngam
   !***BEGIN PROLOGUE  DGAMMA
   !***PURPOSE  Compute the complete Gamma function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -31,6 +30,7 @@ REAL(8) FUNCTION DGAMMA(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable name.  (RWC, WRB)
   !***END PROLOGUE  DGAMMA
+  INTEGER i, INITDS, n, ngam
   REAL(8) :: X, gamcs(42), dxrel, pi, sinpiy, sq2pil, xmax, &
     xmin, y, D9LGMC, DCSEVL, D1MACH
   LOGICAL first

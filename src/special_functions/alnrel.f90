@@ -1,8 +1,6 @@
 !DECK ALNREL
-FUNCTION ALNREL(X)
+REAL FUNCTION ALNREL(X)
   IMPLICIT NONE
-  REAL alnrcs, ALNREL, CSEVL, R1MACH, X, xmin
-  INTEGER INITS, nlnrel
   !***BEGIN PROLOGUE  ALNREL
   !***PURPOSE  Evaluate ln(1+X) accurate in the sense of relative error.
   !***LIBRARY   SLATEC (FNLIB)
@@ -34,6 +32,8 @@ FUNCTION ALNREL(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  ALNREL
+  REAL alnrcs, CSEVL, R1MACH, X, xmin
+  INTEGER INITS, nlnrel
   DIMENSION alnrcs(23)
   LOGICAL first
   SAVE alnrcs, nlnrel, xmin, first
@@ -70,8 +70,7 @@ FUNCTION ALNREL(X)
   !
   IF ( X<=(-1.0) ) CALL XERMSG('SLATEC','ALNREL','X IS LE -1',2,2)
   IF ( X<xmin ) CALL XERMSG('SLATEC','ALNREL',&
-    'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR -1'&
-    ,1,1)
+    'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR -1',1,1)
   !
   IF ( ABS(X)<=0.375 ) THEN
     ALNREL = X*(1.-X*CSEVL(X/.375,alnrcs,nlnrel))

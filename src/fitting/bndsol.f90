@@ -1,9 +1,6 @@
 !DECK BNDSOL
 SUBROUTINE BNDSOL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   IMPLICIT NONE
-  REAL G, Rnorm, rsq, s, X, zero
-  INTEGER i, i1, i2, ie, ii, iopt, Ip, Ir, irm1, ix, j, jg, l, &
-    Mdg, Mode, N, Nb, nerr, np1
   !***BEGIN PROLOGUE  BNDSOL
   !***PURPOSE  Solve the least squares problem for a banded matrix using
   !            sequential accumulation of rows of the data matrix.
@@ -193,6 +190,9 @@ SUBROUTINE BNDSOL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BNDSOL
+  REAL G, Rnorm, rsq, s, X, zero
+  INTEGER i, i1, i2, ie, ii, iopt, Ip, Ir, irm1, ix, j, jg, l, &
+    Mdg, Mode, N, Nb, nerr, np1
   DIMENSION G(Mdg,*), X(*)
   !***FIRST EXECUTABLE STATEMENT  BNDSOL
   zero = 0.

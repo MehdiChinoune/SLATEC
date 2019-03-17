@@ -1,9 +1,6 @@
 !DECK SUDS
 SUBROUTINE SUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   IMPLICIT NONE
-  REAL A, B, Work, X
-  INTEGER Iflag, il, ip, is, Iwork, ks, kt, ku, kv, Mlso, Neq, &
-    Nrda, Nuk
   !***BEGIN PROLOGUE  SUDS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP
@@ -107,8 +104,9 @@ SUBROUTINE SUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SUDS
+  REAL A, B, Work, X
+  INTEGER Iflag, il, ip, is, Iwork, ks, kt, ku, kv, Mlso, Neq, Nrda, Nuk
   DIMENSION A(Nrda,*), X(*), B(*), Work(*), Iwork(*)
-  !
   !***FIRST EXECUTABLE STATEMENT  SUDS
   is = 2
   ip = 3

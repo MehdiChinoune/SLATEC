@@ -1,10 +1,6 @@
 !DECK CMGNBN
 SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   IMPLICIT NONE
-  INTEGER i, Idimy, Ierror, ipstor, irev, iwb2, iwb3, iwba, iwbb, &
-    iwbc, iwd, iwp, iwtcos, iww1, iww2, iww3, j, k, M, mh
-  INTEGER mhm1, mhmi, mhpi, modd, mp, Mperod, mskip, N, nby2, np, &
-    Nperod
   !***BEGIN PROLOGUE  CMGNBN
   !***PURPOSE  Solve a complex block tridiagonal linear system of
   !            equations by a cyclic reduction algorithm.
@@ -226,8 +222,9 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CMGNBN
-  !
-  !
+  INTEGER i, Idimy, Ierror, ipstor, irev, iwb2, iwb3, iwba, iwbb, &
+    iwbc, iwd, iwp, iwtcos, iww1, iww2, iww3, j, k, M, mh
+  INTEGER mhm1, mhmi, mhpi, modd, mp, Mperod, mskip, N, nby2, np, Nperod
   COMPLEX A, B, C, Y, W, a1
   DIMENSION Y(Idimy,*)
   DIMENSION W(*), B(*), A(*), C(*)

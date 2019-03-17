@@ -1,7 +1,6 @@
 !DECK DCOT
 REAL(8) FUNCTION DCOT(X)
   IMPLICIT NONE
-  INTEGER ifn, INITDS, nterms
   !***BEGIN PROLOGUE  DCOT
   !***PURPOSE  Compute the cotangent.
   !***LIBRARY   SLATEC (FNLIB)
@@ -30,6 +29,7 @@ REAL(8) FUNCTION DCOT(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DCOT
+  INTEGER ifn, INITDS, nterms
   REAL(8) :: X, cotcs(15), ainty, ainty2, pi2rec, sqeps, xmax, &
     xmin, xsml, y, yrem, prodbg, DCSEVL, D1MACH
   LOGICAL first

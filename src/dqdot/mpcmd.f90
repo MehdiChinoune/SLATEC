@@ -1,7 +1,6 @@
 !DECK MPCMD
 SUBROUTINE MPCMD(X,Dz)
   IMPLICIT NONE
-  INTEGER i, LUN, M, MXR
   !***BEGIN PROLOGUE  MPCMD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
@@ -29,6 +28,7 @@ SUBROUTINE MPCMD(X,Dz)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPCMD
+  INTEGER i, LUN, M, MXR
   REAL(8) :: db, Dz, dz2
   COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
   INTEGER B, T, R, X(*), tm

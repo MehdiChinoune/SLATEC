@@ -603,7 +603,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SNLS1
-  INTEGER Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint, Info, Nfev ,&
+  INTEGER Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint, Info, Nfev, &
     Njev
   INTEGER ijunk, nrow, Ipvt(*)
   REAL Ftol, Xtol, Gtol, Factor, Epsfcn
@@ -612,8 +612,8 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   LOGICAL sing
   EXTERNAL FCN
   INTEGER i, iflag, iter, j, l, modech
-  REAL actred, delta, dirder, epsmch, fnorm, fnorm1, gnorm, one ,&
-    par, pnorm, prered, p1, p5, p25, p75, p0001, ratio, sum ,&
+  REAL actred, delta, dirder, epsmch, fnorm, fnorm1, gnorm, one, &
+    par, pnorm, prered, p1, p5, p25, p75, p0001, ratio, sum, &
     temp, temp1, temp2, xnorm, zero
   REAL R1MACH, ENORM, err, chklim
   CHARACTER(8) :: xern1
@@ -621,7 +621,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !
   SAVE chklim, one, p1, p5, p25, p75, p0001, zero
   DATA chklim/.1E0/
-  DATA one, p1, p5, p25, p75, p0001, zero/1.0E0, 1.0E-1, 5.0E-1 ,&
+  DATA one, p1, p5, p25, p75, p0001, zero/1.0E0, 1.0E-1, 5.0E-1, &
     2.5E-1, 7.5E-1, 1.0E-4, 0.0E0/
   !
   !***FIRST EXECUTABLE STATEMENT  SNLS1
@@ -1001,18 +1001,14 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   iflag = 0
   IF ( Nprint>0 ) CALL FCN(iflag,M,N,X,Fvec,Fjac,ijunk)
   IF ( Info<0 ) CALL XERMSG('SLATEC','SNLS1',&
-    'EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.'&
-    ,1,1)
-  IF ( Info==0 ) CALL XERMSG('SLATEC','SNLS1','INVALID INPUT PARAMETER.',2,&
-    1)
+    'EXECUTION TERMINATED BECAUSE USER SET IFLAG NEGATIVE.',1,1)
+  IF ( Info==0 ) CALL XERMSG('SLATEC','SNLS1','INVALID INPUT PARAMETER.',2,1)
   IF ( Info==4 ) CALL XERMSG('SLATEC','SNLS1',&
-    'THIRD CONVERGENCE CONDITION, CHECK RESULTS BEFORE ACCEPTING.'&
-    ,1,1)
+    'THIRD CONVERGENCE CONDITION, CHECK RESULTS BEFORE ACCEPTING.' ,1,1)
   IF ( Info==5 ) CALL XERMSG('SLATEC','SNLS1',&
     'TOO MANY FUNCTION EVALUATIONS.',9,1)
   IF ( Info>=6 ) CALL XERMSG('SLATEC','SNLS1',&
-    'TOLERANCES TOO SMALL, NO FURTHER IMPROVEMENT POSSIBLE.'&
-    ,3,1)
+    'TOLERANCES TOO SMALL, NO FURTHER IMPROVEMENT POSSIBLE.',3,1)
   !
   !     LAST CARD OF SUBROUTINE SNLS1.
   !

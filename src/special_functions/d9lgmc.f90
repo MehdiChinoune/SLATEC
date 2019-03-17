@@ -1,7 +1,6 @@
 !DECK D9LGMC
 REAL(8) FUNCTION D9LGMC(X)
   IMPLICIT NONE
-  INTEGER INITDS, nalgm
   !***BEGIN PROLOGUE  D9LGMC
   !***SUBSIDIARY
   !***PURPOSE  Compute the log Gamma correction factor so that
@@ -34,6 +33,7 @@ REAL(8) FUNCTION D9LGMC(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9LGMC
+  INTEGER INITDS, nalgm
   REAL(8) :: X, algmcs(15), xbig, xmax, DCSEVL, D1MACH
   LOGICAL first
   SAVE algmcs, nalgm, xbig, xmax, first

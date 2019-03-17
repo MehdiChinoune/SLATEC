@@ -2,8 +2,6 @@
 SUBROUTINE QAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     Leniw,Maxp1,Lenw,Last,Iwork,Work)
   IMPLICIT NONE
-  INTEGER Iwork, Last, Lenw, limit
-  REAL Work
   !***BEGIN PROLOGUE  QAWO
   !***PURPOSE  Calculate an approximation to a given definite integral
   !             I = Integral of F(X)*W(X) over (A,B), where
@@ -199,7 +197,8 @@ SUBROUTINE QAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  QAWO
-  !
+  INTEGER Iwork, Last, Lenw, limit
+  REAL Work
   REAL A, Abserr, B, Epsabs, Epsrel, F, Omega, Result
   INTEGER Ier, Integr, Leniw, lvl, l1, l2, l3, l4, Maxp1, momcom, &
     Neval

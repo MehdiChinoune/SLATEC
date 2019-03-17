@@ -1,15 +1,6 @@
 !DECK REORT
 SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   IMPLICIT NONE
-  REAL AE, C, dnd, dndt, dx, P, PWCnd, PX, RE, S, SDOT, srp, &
-    Stowa, TND, TOL, vnorm, W, wcnd, X, XBEg
-  REAL XENd, XOP, XOT, XSAv, Y, Yhp, Yp, ypnm
-  INTEGER ICOco, Iflag, IGOfx, ijk, INDpvt, INFo, INHomo, INTeg, &
-    Ip, ISTkop, IVP, j, k, kk, KNSwot, KOP, l, LOTjp, &
-    mflag, MNSwot
-  INTEGER MXNon, Ncomp, NCOmpd, NDIsk, NEQ, NEQivp, NFC, NFCc, &
-    nfcp, NIC, Niv, NOPg, NPS, NSWot, NTApe, NTP, NUMort, &
-    NXPts
   !***BEGIN PROLOGUE  REORT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP
@@ -57,7 +48,13 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  REORT
-  !
+  REAL AE, C, dnd, dndt, dx, P, PWCnd, PX, RE, S, SDOT, srp, &
+    Stowa, TND, TOL, vnorm, W, wcnd, X, XBEg
+  REAL XENd, XOP, XOT, XSAv, Y, Yhp, Yp, ypnm
+  INTEGER ICOco, Iflag, IGOfx, ijk, INDpvt, INFo, INHomo, INTeg, &
+    Ip, ISTkop, IVP, j, k, kk, KNSwot, KOP, l, LOTjp, mflag, MNSwot
+  INTEGER MXNon, Ncomp, NCOmpd, NDIsk, NEQ, NEQivp, NFC, NFCc, &
+    nfcp, NIC, Niv, NOPg, NPS, NSWot, NTApe, NTP, NUMort, NXPts
   DIMENSION Y(Ncomp,*), Yp(*), W(*), S(*), P(*), Ip(*), Stowa(*), &
     Yhp(Ncomp,*)
   !

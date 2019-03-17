@@ -1,8 +1,6 @@
 !DECK STOD
 SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   IMPLICIT NONE
-  INTEGER IOD, Ipar, KSTeps
-  REAL Rpar
   !***BEGIN PROLOGUE  STOD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DEBDF
@@ -88,6 +86,8 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
   !***END PROLOGUE  STOD
+  INTEGER IOD, Ipar, KSTeps
+  REAL Rpar
   EXTERNAL F, JAC
   !
   !LLL. OPTIMIZE

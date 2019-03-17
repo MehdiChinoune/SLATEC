@@ -1,9 +1,6 @@
 !DECK U12US
 SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   IMPLICIT NONE
-  REAL A, B, bb, H, Rnorm, SDOT, SNRM2, tt, W
-  INTEGER i, ij, ip1, j, jb, k, kp1, Krank, M, Mda, Mdb, mmk, &
-    Mode, N, Nb
   !***BEGIN PROLOGUE  U12US
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ULSIA
@@ -28,6 +25,8 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  U12US
+  REAL A, B, bb, H, Rnorm, SDOT, SNRM2, tt, W
+  INTEGER i, ij, ip1, j, jb, k, kp1, Krank, M, Mda, Mdb, mmk, Mode, N, Nb
   DIMENSION A(Mda,*), B(Mdb,*), Rnorm(*), H(*), W(*)
   INTEGER Ic(*), Ir(*)
   !***FIRST EXECUTABLE STATEMENT  U12US

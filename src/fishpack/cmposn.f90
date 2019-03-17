@@ -1,12 +1,6 @@
 !DECK CMPOSN
-SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
-    P)
+SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   IMPLICIT NONE
-  REAL fden, fistag, fnum
-  INTEGER i, i1, i2, i2r, i2rby2, Idimq, ii, ip, ipstor, Istag, &
-    j, jm1, jm2, jm3, jp1, jp2, jp3, jr, jr2, jstart
-  INTEGER jstep, jstop, k, k1, k2, k3, k4, kr, lr, M, Mixbnd, &
-    mr, N, nlast, nlastp, nr, nrod, nrodpr
   !***BEGIN PROLOGUE  CMPOSN
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CMGNBN
@@ -34,7 +28,11 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,&
   !   920130  Modified to use merge routine C1MERG rather than deleted
   !           routine CMPMRG.  (WRB)
   !***END PROLOGUE  CMPOSN
-  !
+  REAL fden, fistag, fnum
+  INTEGER i, i1, i2, i2r, i2rby2, Idimq, ii, ip, ipstor, Istag, &
+    j, jm1, jm2, jm3, jp1, jp2, jp3, jr, jr2, jstart
+  INTEGER jstep, jstop, k, k1, k2, k3, k4, kr, lr, M, Mixbnd, &
+    mr, N, nlast, nlastp, nr, nrod, nrodpr
   COMPLEX A, Bb, C, Q, B, B2, B3, W, W2, W3, D, Tcos, P, fi, t
   DIMENSION A(*), Bb(*), C(*), Q(Idimq,*), B(*), B2(*), B3(*), W(*), &
     W2(*), W3(*), D(*), Tcos(*), k(4), P(*)

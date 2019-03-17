@@ -1,7 +1,6 @@
 !DECK CCOPY
 SUBROUTINE CCOPY(N,Cx,Incx,Cy,Incy)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, kx, ky, N, ns
   !***BEGIN PROLOGUE  CCOPY
   !***PURPOSE  Copy a vector.
   !***LIBRARY   SLATEC (BLAS)
@@ -45,6 +44,7 @@ SUBROUTINE CCOPY(N,Cx,Incx,Cy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CCOPY
+  INTEGER i, Incx, Incy, kx, ky, N, ns
   COMPLEX Cx(*), Cy(*)
   !***FIRST EXECUTABLE STATEMENT  CCOPY
   IF ( N<=0 ) RETURN

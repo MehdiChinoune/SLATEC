@@ -1,7 +1,6 @@
 !DECK PPVAL
-FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
+REAL FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   IMPLICIT NONE
-  REAL PPVAL
   !***BEGIN PROLOGUE  PPVAL
   !***PURPOSE  Calculate the value of the IDERIV-th derivative of the
   !            B-spline from the PP-representation.
@@ -64,7 +63,6 @@ FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  PPVAL
-  !
   INTEGER i, Ideriv, Inppv, j, K, Ldc, Lxi, ndummy
   REAL C, dx, fltk, X, Xi
   DIMENSION Xi(*), C(Ldc,*)

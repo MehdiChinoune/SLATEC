@@ -3,16 +3,6 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Amat,Csc,Colnrm,Erd,Erp,Basmat,Wr,Rz,Rg,&
     Rprim,Rhs,Ww,Lmx,Lbm,Ibasis,Ibb,Imat,Ibrc,Ipr,Iwr)
   IMPLICIT NONE
-  INTEGER i, ibas, idg, ienter, ileave, Info, iopt, ipage, ipagef ,&
-    iplace, isave, itbrc, itlp, j, jstrt, k, key, kprint ,&
-    Lbm, LCOl
-  INTEGER LENl, LENu, Lmx, LP, lpg, lpr, lpr1, lprg, LROw, Mrelas ,&
-    mxitlp, n20046, n20058, n20080, n20098, n20119, n20172 ,&
-    n20206, n20247, n20252
-  INTEGER n20271, n20276, n20283, n20290, NCP, nerr, np, nparm ,&
-    npp, npr004, npr005, npr006, npr007, npr008, npr009 ,&
-    npr010, npr011, npr012, npr013, npr014
-  INTEGER npr015, nredc, ntries, Nvars, nx0066, nx0091, nx0106
   !***BEGIN PROLOGUE  DPLPMN
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -41,17 +31,26 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !***END PROLOGUE  DPLPMN
-  REAL(8) :: abig, aij, Amat(*), anorm, asmall, Basmat(*) ,&
-    Bl(*), Bu(*), Colnrm(*), Costs(*), costsc, Csc(*) ,&
-    Dattrv(*), dirnrm, Duals(*), dulnrm, eps, tune ,&
+  INTEGER i, ibas, idg, ienter, ileave, Info, iopt, ipage, ipagef, &
+    iplace, isave, itbrc, itlp, j, jstrt, k, key, kprint ,Lbm, LCOl
+  INTEGER LENl, LENu, Lmx, LP, lpg, lpr, lpr1, lprg, LROw, Mrelas, &
+    mxitlp, n20046, n20058, n20080, n20098, n20119, n20172, &
+    n20206, n20247, n20252
+  INTEGER n20271, n20276, n20283, n20290, NCP, nerr, np, nparm, &
+    npp, npr004, npr005, npr006, npr007, npr008, npr009, &
+    npr010, npr011, npr012, npr013, npr014
+  INTEGER npr015, nredc, ntries, Nvars, nx0066, nx0091, nx0106
+  REAL(8) :: abig, aij, Amat(*), anorm, asmall, Basmat(*), &
+    Bl(*), Bu(*), Colnrm(*), Costs(*), costsc, Csc(*), &
+    Dattrv(*), dirnrm, Duals(*), dulnrm, eps, tune, &
     Erd(*), erdnrm, Erp(*), factor, gg, one, Prgopt(*)&
     , Primal(*), resnrm, Rg(*), Rhs(*), rhsnrm, ropt(07)&
-    , Rprim(*), rprnrm, Rz(*), rzj, scalr, scosts ,&
-    size, SMAll, theta, tolls, upbnd, uu, Wr(*) ,&
+    , Rprim(*), rprnrm, Rz(*), rzj, scalr, scosts, &
+    size, SMAll, theta, tolls, upbnd, uu, Wr(*), &
     Ww(*), xlamda, xval, zero, rdum(01), tolabs
   REAL(8) :: DDOT, DASUM
   !
-  INTEGER Ibasis(*), Ibb(*), Ibrc(Lbm,2), Imat(*), Ind(*), Ipr(*) ,&
+  INTEGER Ibasis(*), Ibb(*), Ibrc(Lbm,2), Imat(*), Ind(*), Ipr(*), &
     Iwr(*), intopt(08), idum(01)
   !
   !     ARRAY LOCAL VARIABLES
@@ -147,8 +146,8 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !                             IN PARTIAL PRICING
   !     JSTRT      INTEGER      STARTING PLACE FOR PARTIAL PRICING.
   !
-  LOGICAL colscp, savedt, contin, cstscp, unbnd, feas, finite ,&
-    found, minprb, redbas, singlr, sizeup, stpedg, trans ,&
+  LOGICAL colscp, savedt, contin, cstscp, unbnd, feas, finite, &
+    found, minprb, redbas, singlr, sizeup, stpedg, trans, &
     usrbas, zerolv, lopt(08)
   CHARACTER(8) :: xern1, xern2
   EQUIVALENCE (contin,lopt(1))
@@ -243,8 +242,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     CALL DVOUT(Nvars,Costs,'('' ARRAY OF COSTS'')',idg)
     CALL IVOUT(Nvars+Mrelas,Ind,'('' CONSTRAINT INDICATORS'')',idg)
     CALL DVOUT(Nvars+Mrelas,Bl,&
-      '('' LOWER BOUNDS FOR VARIABLES  (IGNORE UNUSED ENTRIES.)'')'&
-      ,idg)
+      '('' LOWER BOUNDS FOR VARIABLES  (IGNORE UNUSED ENTRIES.)'')',idg)
     CALL DVOUT(Nvars+Mrelas,Bu,&
       '('' UPPER BOUNDS FOR VARIABLES  (IGNORE UNUSED ENTRIES.)'')',idg)
     IF ( kprint>=2 ) THEN
@@ -587,8 +585,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
           CALL DVOUT(Mrelas,Rprim,'('' BASIC (INTERNAL) PRIMAL SOLN.'')',&
             idg)
           CALL IVOUT(Nvars+Mrelas,Ibasis,&
-            '('' VARIABLE INDICES IN POSITIONS 1-MRELAS ARE BASIC.'')'&
-            ,idg)
+            '('' VARIABLE INDICES IN POSITIONS 1-MRELAS ARE BASIC.'')',idg)
           CALL IVOUT(Nvars+Mrelas,Ibb,'('' IBB ARRAY'')',idg)
           CALL DVOUT(Mrelas,Rhs,'('' TRANSLATED RHS'')',idg)
           CALL DVOUT(Mrelas,Duals,'('' BASIC (INTERNAL) DUAL SOLN.'')',idg)
@@ -639,8 +636,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !++  CODE FOR OUTPUT=YES IS ACTIVE
   2700 CONTINUE
   IF ( kprint>=2 ) CALL IVOUT(Mrelas,Ibasis,&
-    '('' SUBSCRIPTS OF BASIC VARIABLES DURING REDECOMPOSITION'')'&
-    ,idg)
+    '('' SUBSCRIPTS OF BASIC VARIABLES DURING REDECOMPOSITION'')',idg)
   !++  CODE FOR OUTPUT=NO IS INACTIVE
   !++  END
   !
@@ -729,8 +725,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ENDIF
   nerr = 26
   CALL XERMSG('SLATEC','DPLPMN',&
-    'IN DSPLP, MOVED TO A SINGULAR POINT. THIS SHOULD NOT HAPPEN.'&
-    ,nerr,iopt)
+    'IN DSPLP, MOVED TO A SINGULAR POINT. THIS SHOULD NOT HAPPEN.',nerr,iopt)
   Info = -nerr
   GOTO 4600
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC

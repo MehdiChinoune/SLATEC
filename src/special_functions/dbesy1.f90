@@ -1,7 +1,6 @@
 !DECK DBESY1
 REAL(8) FUNCTION DBESY1(X)
   IMPLICIT NONE
-  INTEGER INITDS, nty1
   !***BEGIN PROLOGUE  DBESY1
   !***PURPOSE  Compute the Bessel function of the second kind of order
   !            one.
@@ -31,6 +30,7 @@ REAL(8) FUNCTION DBESY1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBESY1
+  INTEGER INITDS, nty1
   REAL(8) :: X, by1cs(20), ampl, theta, twodpi, xmin, xsml, y, &
     D1MACH, DCSEVL, DBESJ1
   LOGICAL first

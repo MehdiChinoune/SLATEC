@@ -1,10 +1,6 @@
 !DECK SPOPT
 SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   IMPLICIT NONE
-  INTEGER i, iadbig, ictmax, ictopt, idg, Info, iopt, ipagef, &
-    isave, itbrc, itest, j, key, kprint, last, lds, lprg, &
-    Mrelas, mxitlp, n20043
-  INTEGER n20053, n20096, nerr, next, npp, Nvars
   !***BEGIN PROLOGUE  SPOPT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -36,6 +32,10 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  SPOPT
+  INTEGER i, iadbig, ictmax, ictopt, idg, Info, iopt, ipagef, &
+    isave, itbrc, itest, j, key, kprint, last, lds, lprg, &
+    Mrelas, mxitlp, n20043
+  INTEGER n20053, n20096, nerr, next, npp, Nvars
   REAL abig, asmall, costsc, Csc(*), eps, one, Prgopt(*), Ropt(07), &
     tolls, tune, zero, R1MACH, tolabs
   INTEGER Ibasis(*), Intopt(08)
@@ -106,8 +106,7 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
           ELSE
             nerr = 16
             CALL XERMSG('SLATEC','SPOPT',&
-              'IN SPLP, AN INDEX OF USER-SUPPLIED BASIS IS OUT OF RANGE.'&
-              ,nerr,iopt)
+              'IN SPLP, AN INDEX OF USER-SUPPLIED BASIS IS OUT OF RANGE.',nerr,iopt)
             Info = -nerr
             RETURN
           ENDIF

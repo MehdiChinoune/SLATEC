@@ -1,8 +1,6 @@
 !DECK SINTI
 SUBROUTINE SINTI(N,Wsave)
   IMPLICIT NONE
-  REAL dt, fk, pi, Wsave
-  INTEGER k, kf, ks, N, np1, ns2
   !***BEGIN PROLOGUE  SINTI
   !***PURPOSE  Initialize a work array for SINT.
   !***LIBRARY   SLATEC (FFTPACK)
@@ -49,6 +47,8 @@ SUBROUTINE SINTI(N,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SINTI
+  REAL dt, fk, pi, Wsave
+  INTEGER k, kf, ks, N, np1, ns2
   DIMENSION Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  SINTI
   IF ( N<=1 ) RETURN

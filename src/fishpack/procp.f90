@@ -1,9 +1,6 @@
 !DECK PROCP
 SUBROUTINE PROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
   IMPLICIT NONE
-  REAL Aa, Bd, Bm1, Bm2, rt
-  INTEGER ia, ibr, id, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, &
-    Nm2
   !***BEGIN PROLOGUE  PROCP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBLKTR
@@ -33,7 +30,8 @@ SUBROUTINE PROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  PROCP
-  !
+  REAL Aa, Bd, Bm1, Bm2, rt
+  INTEGER ia, ibr, id, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, Nm2
   DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), U(*), Bd(*), Bm1(*)&
     , Bm2(*), Aa(*), W(*)
   COMPLEX X, Y, A, B, C, D, U, W, den, ym, v, bh, am

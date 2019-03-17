@@ -1,8 +1,6 @@
 !DECK EXPREL
-FUNCTION EXPREL(X)
+REAL FUNCTION EXPREL(X)
   IMPLICIT NONE
-  REAL absx, alneps, EXPREL, R1MACH, X, xbnd, xln, xn
-  INTEGER i, nterms
   !***BEGIN PROLOGUE  EXPREL
   !***PURPOSE  Calculate the relative error exponential (EXP(X)-1)/X.
   !***LIBRARY   SLATEC (FNLIB)
@@ -27,6 +25,8 @@ FUNCTION EXPREL(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  EXPREL
+  REAL absx, alneps, R1MACH, X, xbnd, xln, xn
+  INTEGER i, nterms
   LOGICAL first
   SAVE nterms, xbnd, first
   DATA first/.TRUE./

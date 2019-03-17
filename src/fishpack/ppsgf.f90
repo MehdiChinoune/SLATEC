@@ -1,8 +1,6 @@
 !DECK PPSGF
-FUNCTION PPSGF(X,Iz,C,A,Bh)
+REAL FUNCTION PPSGF(X,Iz,C,A,Bh)
   IMPLICIT NONE
-  REAL A, Bh, C, PPSGF, sum, X
-  INTEGER Iz, j
   !***BEGIN PROLOGUE  PPSGF
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI
@@ -16,6 +14,8 @@ FUNCTION PPSGF(X,Iz,C,A,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  PPSGF
+  REAL A, Bh, C, sum, X
+  INTEGER Iz, j
   DIMENSION A(*), C(*), Bh(*)
   !***FIRST EXECUTABLE STATEMENT  PPSGF
   sum = 0.

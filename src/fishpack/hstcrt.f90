@@ -2,11 +2,6 @@
 SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  REAL A, B, Bda, Bdb, Bdc, Bdd, C, D, deltax, deltay, delxsq, &
-    delysq, Elmbda, F, Pertrb, s, st2, twdelx, twdely, twdysq
-  REAL W
-  INTEGER i, id2, id3, id4, Idimf, ierr1, Ierror, j, M, Mbdcnd, &
-    mp, mperod, N, Nbdcnd, np, nperod
   !***BEGIN PROLOGUE  HSTCRT
   !***PURPOSE  Solve the standard five-point finite difference
   !            approximation on a staggered grid to the Helmholtz equation
@@ -287,8 +282,11 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  HSTCRT
-  !
-  !
+  REAL A, B, Bda, Bdb, Bdc, Bdd, C, D, deltax, deltay, delxsq, &
+    delysq, Elmbda, F, Pertrb, s, st2, twdelx, twdely, twdysq
+  REAL W
+  INTEGER i, id2, id3, id4, Idimf, ierr1, Ierror, j, M, Mbdcnd, &
+    mp, mperod, N, Nbdcnd, np, nperod
   DIMENSION F(Idimf,*), Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HSTCRT
   Ierror = 0

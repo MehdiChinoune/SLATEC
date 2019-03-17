@@ -1,8 +1,6 @@
 !DECK CPROC
 SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
   IMPLICIT NONE
-  REAL Aa, Bm1, Bm2, rt, Yy
-  INTEGER ia, id, iflg, j, k, M, m1, m2, mm, Na, Nd, Nm1, Nm2
   !***BEGIN PROLOGUE  CPROC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBLKTR
@@ -31,7 +29,8 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CPROC
-  !
+  REAL Aa, Bm1, Bm2, rt, Yy
+  INTEGER ia, id, iflg, j, k, M, m1, m2, mm, Na, Nd, Nm1, Nm2
   COMPLEX Y, D, W, Bd, crt, den, y1, y2, X, A, B, C
   DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), W(*), Bd(*), Bm1(*)&
     , Bm2(*), Aa(*), Yy(*)

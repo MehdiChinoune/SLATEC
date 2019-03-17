@@ -1,7 +1,6 @@
 !DECK MPADD3
 SUBROUTINE MPADD3(X,Y,S,Med,Re)
   IMPLICIT NONE
-  INTEGER i, i2, i2p, j, LUN, M, Med, MXR
   !***BEGIN PROLOGUE  MPADD3
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
@@ -28,6 +27,7 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPADD3
+  INTEGER i, i2, i2p, j, LUN, M, Med, MXR
   COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
   INTEGER B, T, R, X(*), Y(*), S, Re, c, ted
   !***FIRST EXECUTABLE STATEMENT  MPADD3

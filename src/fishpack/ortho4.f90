@@ -1,10 +1,6 @@
 !DECK ORTHO4
 SUBROUTINE ORTHO4(Usol,Idmn,Zn,Zm,Pertrb)
   IMPLICIT NONE
-  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, ete, Pertrb, &
-    TDLx3, TDLy3, Usol, ute, Zm, Zn
-  INTEGER i, Idmn, ifnl, ii, IS, istr, j, jfnl, jj, JS, jstr, K, &
-    KSWx, KSWy, L, MIT, MS, NIT, NS
   !***BEGIN PROLOGUE  ORTHO4
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPX4
@@ -24,10 +20,12 @@ SUBROUTINE ORTHO4(Usol,Idmn,Zn,Zm,Pertrb)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  ORTHO4
-  !
+  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, ete, Pertrb, &
+    TDLx3, TDLy3, Usol, ute, Zm, Zn
+  INTEGER i, Idmn, ifnl, ii, IS, istr, j, jfnl, jj, JS, jstr, K, &
+    KSWx, KSWy, L, MIT, MS, NIT, NS
   COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
-    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
-    DLY4
+    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   DIMENSION Usol(Idmn,*), Zn(*), Zm(*)
   !***FIRST EXECUTABLE STATEMENT  ORTHO4
   istr = IS

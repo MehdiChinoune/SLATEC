@@ -1,8 +1,6 @@
 !DECK TRIS4
 SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
   IMPLICIT NONE
-  REAL A, an, B, bn, C, D, den, U, v, Z
-  INTEGER j, k, N, nm1, nm2
   !***BEGIN PROLOGUE  TRIS4
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPX4
@@ -25,7 +23,8 @@ SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  TRIS4
-  !
+  REAL A, an, B, bn, C, D, den, U, v, Z
+  INTEGER j, k, N, nm1, nm2
   DIMENSION A(*), B(*), C(*), D(*), U(*), Z(*)
   !***FIRST EXECUTABLE STATEMENT  TRIS4
   bn = B(N)

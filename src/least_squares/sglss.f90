@@ -1,9 +1,6 @@
 !DECK SGLSS
 SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   IMPLICIT NONE
-  REAL A, ae, B, re, Rnorm, Work
-  INTEGER Info, key, krank, ksure, Liw, Lw, M, Mda, Mdb, mode, N, &
-    Nb, np
   !***BEGIN PROLOGUE  SGLSS
   !***PURPOSE  Solve a linear least squares problems by performing a QR
   !            factorization of the matrix using Householder
@@ -120,6 +117,8 @@ SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SGLSS
+  REAL A, ae, B, re, Rnorm, Work
+  INTEGER Info, key, krank, ksure, Liw, Lw, M, Mda, Mdb, mode, N, Nb, np
   DIMENSION A(Mda,*), B(Mdb,*), Rnorm(*), Work(*)
   INTEGER Iwork(*)
   !

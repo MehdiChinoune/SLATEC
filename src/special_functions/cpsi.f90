@@ -1,8 +1,6 @@
 !DECK CPSI
 COMPLEX FUNCTION CPSI(Zin)
   IMPLICIT NONE
-  REAL bern, bound, cabsz, dxrel, pi, R1MACH, rbig, rmin, x, y
-  INTEGER i, n, ndx, nterm
   !***BEGIN PROLOGUE  CPSI
   !***PURPOSE  Compute the Psi (or Digamma) function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -25,6 +23,8 @@ COMPLEX FUNCTION CPSI(Zin)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  CPSI
+  REAL bern, bound, cabsz, dxrel, pi, R1MACH, rbig, rmin, x, y
+  INTEGER i, n, ndx, nterm
   COMPLEX Zin, z, z2inv, corr, CCOT
   DIMENSION bern(13)
   LOGICAL first
@@ -75,8 +75,7 @@ COMPLEX FUNCTION CPSI(Zin)
         !
         IF ( x<(-0.5).AND.ABS(y)<=dxrel ) THEN
           IF ( ABS((z-AINT(x-0.5))/x)<dxrel ) CALL XERMSG('SLATEC','CPSI',&
-            'ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR NEGATIVE INTEGER'&
-            ,1,1)
+            'ANSWER LT HALF PRECISION BECAUSE Z TOO NEAR NEGATIVE INTEGER',1,1)
           IF ( y==0.0.AND.x==AINT(x) )&
             CALL XERMSG('SLATEC','CPSI','Z IS A NEGATIVE INTEGER',3,2)
         ENDIF

@@ -1,7 +1,6 @@
 !DECK DDOT
 REAL(8) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   !***BEGIN PROLOGUE  DDOT
   !***PURPOSE  Compute the inner product of two vectors.
   !***LIBRARY   SLATEC (BLAS)
@@ -45,6 +44,7 @@ REAL(8) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DDOT
+  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   REAL(8) :: Dx(*), Dy(*)
   !***FIRST EXECUTABLE STATEMENT  DDOT
   DDOT = 0.0D0

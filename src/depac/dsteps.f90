@@ -3,7 +3,6 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     Psi,Alpha,Beta,Sig,V,W,G,Phase1,Ns,Nornd,Ksteps,Twou,&
     Fouru,Xold,Kprev,Ivc,Iv,Kgi,Gi,Rpar,Ipar)
   IMPLICIT NONE
-  INTEGER Iv, Ivc, jv, Kgi, Kprev
   !***BEGIN PROLOGUE  DSTEPS
   !***PURPOSE  Integrate a system of first order ordinary differential
   !            equations one step.
@@ -173,7 +172,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSTEPS
-  !
+  INTEGER Iv, Ivc, jv, Kgi, Kprev
   INTEGER i, ifail, im1, ip1, Ipar, iq, j, K, km1, km2, knew, &
     Kold, kp1, kp2, Ksteps, l, limit1, limit2, Neqn, Ns, &
     nsm2, nsp1, nsp2

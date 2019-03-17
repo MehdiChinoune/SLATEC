@@ -1,7 +1,6 @@
 !DECK DBESK0
 REAL(8) FUNCTION DBESK0(X)
   IMPLICIT NONE
-  INTEGER INITDS, ntk0
   !***BEGIN PROLOGUE  DBESK0
   !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
   !            third kind of order zero.
@@ -34,6 +33,7 @@ REAL(8) FUNCTION DBESK0(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBESK0
+  INTEGER INITDS, ntk0
   REAL(8) :: X, bk0cs(16), xmax, xmaxt, xsml, y, D1MACH, &
     DCSEVL, DBESI0, DBSK0E
   LOGICAL first

@@ -1,7 +1,6 @@
 !DECK SAXPY
 SUBROUTINE SAXPY(N,Sa,Sx,Incx,Sy,Incy)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   !***BEGIN PROLOGUE  SAXPY
   !***PURPOSE  Compute a constant times a vector plus a vector.
   !***LIBRARY   SLATEC (BLAS)
@@ -47,6 +46,7 @@ SUBROUTINE SAXPY(N,Sa,Sx,Incx,Sy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SAXPY
+  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   REAL Sx(*), Sy(*), Sa
   !***FIRST EXECUTABLE STATEMENT  SAXPY
   IF ( N<=0.OR.Sa==0.0E0 ) RETURN

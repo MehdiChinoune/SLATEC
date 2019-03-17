@@ -1,7 +1,6 @@
 !DECK DXRED
 SUBROUTINE DXRED(X,Ix,Ierror)
   IMPLICIT NONE
-  INTEGER i, Ierror, ixa, ixa1, ixa2
   !***BEGIN PROLOGUE  DXRED
   !***PURPOSE  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.
@@ -38,6 +37,7 @@ SUBROUTINE DXRED(X,Ix,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXRED
+  INTEGER i, Ierror, ixa, ixa1, ixa2
   REAL(8) :: X
   INTEGER Ix
   REAL(8) :: RADix, RADixl, RAD2l, DLG10r, xa

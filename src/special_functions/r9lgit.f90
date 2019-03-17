@@ -1,9 +1,6 @@
 !DECK R9LGIT
-FUNCTION R9LGIT(A,X,Algap1)
+REAL FUNCTION R9LGIT(A,X,Algap1)
   IMPLICIT NONE
-  REAL A, a1x, Algap1, ax, eps, fk, hstar, p, r, R1MACH, R9LGIT, &
-    s, sqeps, t, X
-  INTEGER k
   !***BEGIN PROLOGUE  R9LGIT
   !***SUBSIDIARY
   !***PURPOSE  Compute the logarithm of Tricomi's incomplete Gamma
@@ -30,6 +27,8 @@ FUNCTION R9LGIT(A,X,Algap1)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  R9LGIT
+  REAL A, a1x, Algap1, ax, eps, fk, hstar, p, r, R1MACH, s, sqeps, t, X
+  INTEGER k
   SAVE eps, sqeps
   DATA eps, sqeps/2*0.0/
   !***FIRST EXECUTABLE STATEMENT  R9LGIT

@@ -1,7 +1,6 @@
 !DECK MPBLAS
 SUBROUTINE MPBLAS(I1)
   IMPLICIT NONE
-  INTEGER I1, I1MACH, MPB, mpbexp, MPLun, MPM, MPMxr, MPR, MPT
   !***BEGIN PROLOGUE  MPBLAS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
@@ -40,6 +39,7 @@ SUBROUTINE MPBLAS(I1)
   !   930124  Increased Array size in MPCON for SUN -r8, and calculate
   !               size for Quad Precision for 2x DP.  (RWC)
   !***END PROLOGUE  MPBLAS
+  INTEGER I1, I1MACH, MPB, mpbexp, MPLun, MPM, MPMxr, MPR, MPT
   COMMON /MPCOM / MPB, MPT, MPM, MPLun, MPMxr, MPR(30)
   !***FIRST EXECUTABLE STATEMENT  MPBLAS
   I1 = 1

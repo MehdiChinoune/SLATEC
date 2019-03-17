@@ -1,5 +1,6 @@
 !DECK DU12LS
 SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
+  IMPLICIT NONE
   !***BEGIN PROLOGUE  DU12LS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DLLSIA
@@ -24,7 +25,6 @@ SUBROUTINE DU12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DU12LS
-  IMPLICIT NONE
   REAL(8) :: A, B, bb, H, Rnorm, tt, W
   INTEGER i, ij, im1, j, jb, k, kp1, Krank, M, Mda, Mdb, Mode, &
     N, Nb, nmk

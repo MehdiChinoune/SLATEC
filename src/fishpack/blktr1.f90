@@ -1,14 +1,6 @@
 !DECK BLKTR1
-SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
-    CPRDCT)
+SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   IMPLICIT NONE
-  REAL Am, An, B, Bm, Bn, Cm, Cn, CNV, dum, EPS, W1, W2, W3, &
-    Wd, Wu, Ww, Y
-  INTEGER i, i1, i2, i3, i4, Idimy, idxa, idxc, if, ifd, IK, &
-    im1, im2, im3, imi1, imi2, ip, ip1, ip2, ip3
-  INTEGER ipi1, ipi2, ipi3, ir, irm1, iz, izr, j, K, kdo, l, ll, &
-    M, N, na, nc, NCMplx, NM, nm1, nm2
-  INTEGER nm3, np, np1, np2, np3, NPP, nz
   !***BEGIN PROLOGUE  BLKTR1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI
@@ -35,7 +27,12 @@ SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  BLKTR1
-  !
+  REAL Am, An, B, Bm, Bn, Cm, Cn, CNV, dum, EPS, W1, W2, W3, Wd, Wu, Ww, Y
+  INTEGER i, i1, i2, i3, i4, Idimy, idxa, idxc, if, ifd, IK, &
+    im1, im2, im3, imi1, imi2, ip, ip1, ip2, ip3
+  INTEGER ipi1, ipi2, ipi3, ir, irm1, iz, izr, j, K, kdo, l, ll, &
+    M, N, na, nc, NCMplx, NM, nm1, nm2
+  INTEGER nm3, np, np1, np2, np3, NPP, nz
   DIMENSION An(*), Bn(*), Cn(*), Am(*), Bm(*), Cm(*), B(*), W1(*), &
     W2(*), W3(*), Wd(*), Ww(*), Wu(*), Y(Idimy,*)
   COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK

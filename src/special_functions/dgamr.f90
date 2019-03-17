@@ -1,7 +1,6 @@
 !DECK DGAMR
 REAL(8) FUNCTION DGAMR(X)
   IMPLICIT NONE
-  INTEGER irold
   !***BEGIN PROLOGUE  DGAMR
   !***PURPOSE  Compute the reciprocal of the Gamma function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -23,6 +22,7 @@ REAL(8) FUNCTION DGAMR(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  DGAMR
+  INTEGER irold
   REAL(8) :: X, alngx, sgngx, DGAMMA
   EXTERNAL DGAMMA
   !***FIRST EXECUTABLE STATEMENT  DGAMR

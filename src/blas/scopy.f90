@@ -1,7 +1,6 @@
 !DECK SCOPY
 SUBROUTINE SCOPY(N,Sx,Incx,Sy,Incy)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   !***BEGIN PROLOGUE  SCOPY
   !***PURPOSE  Copy a vector.
   !***LIBRARY   SLATEC (BLAS)
@@ -45,6 +44,7 @@ SUBROUTINE SCOPY(N,Sx,Incx,Sy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SCOPY
+  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   REAL Sx(*), Sy(*)
   !***FIRST EXECUTABLE STATEMENT  SCOPY
   IF ( N<=0 ) RETURN

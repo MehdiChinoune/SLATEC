@@ -1,7 +1,6 @@
 !DECK BISECT
 SUBROUTINE BISECT(N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Ind,Ierr,Rv4,Rv5)
   IMPLICIT NONE
-  REAL R1MACH
   !***BEGIN PROLOGUE  BISECT
   !***PURPOSE  Compute the eigenvalues of a symmetric tridiagonal matrix
   !            in a given interval using Sturm sequencing.
@@ -108,7 +107,7 @@ SUBROUTINE BISECT(N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Ind,Ierr,Rv4,Rv5)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BISECT
-  !
+  REAL R1MACH
   INTEGER i, j, k, l, M, N, p, q, r, s, ii, Mm, m1, m2, tag, &
     Ierr, isturm
   REAL D(*), E(*), E2(*), W(*), Rv4(*), Rv5(*)

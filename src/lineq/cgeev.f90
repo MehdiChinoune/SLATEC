@@ -1,7 +1,6 @@
 !DECK CGEEV
 SUBROUTINE CGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   IMPLICIT NONE
-  INTEGER Job, m
   !***BEGIN PROLOGUE  CGEEV
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a complex general matrix.
@@ -96,6 +95,7 @@ SUBROUTINE CGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  CGEEV
+  INTEGER Job, m
   INTEGER i, ihi, ilo, Info, j, k, l, Lda, Ldv, mdim, N
   REAL A(*), E(*), Work(*), V(*)
   !***FIRST EXECUTABLE STATEMENT  CGEEV
@@ -106,8 +106,7 @@ SUBROUTINE CGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   IF ( N/=1.OR.Job/=0 ) THEN
     mdim = 2*Lda
     IF ( Job/=0 ) THEN
-      IF ( N>Ldv ) CALL XERMSG('SLATEC','CGEEV','JOB .NE. 0 AND N .GT. LDV.'&
-        ,3,1)
+      IF ( N>Ldv ) CALL XERMSG('SLATEC','CGEEV','JOB .NE. 0 AND N .GT. LDV.',3,1)
       IF ( N>Ldv ) RETURN
       IF ( N==1 ) GOTO 100
       !

@@ -1,8 +1,6 @@
 !DECK D9AIMP
 SUBROUTINE D9AIMP(X,Ampl,Theta)
   IMPLICIT NONE
-  REAL eta
-  INTEGER INITDS, nam20, nam21, nam22, nath0, nath1, nath2
   !***BEGIN PROLOGUE  D9AIMP
   !***SUBSIDIARY
   !***PURPOSE  Evaluate the Airy modulus and phase.
@@ -61,9 +59,10 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9AIMP
+  REAL eta
+  INTEGER INITDS, nam20, nam21, nam22, nath0, nath1, nath2
   REAL(8) :: X, Ampl, Theta, am20cs(57), ath0cs(53), am21cs(60), &
-    ath1cs(58), am22cs(74), ath2cs(72), pi4, sqrtx, &
-    xsml, z, D1MACH, DCSEVL
+    ath1cs(58), am22cs(74), ath2cs(72), pi4, sqrtx, xsml, z, D1MACH, DCSEVL
   LOGICAL first
   SAVE am20cs, ath0cs, am21cs, ath1cs, am22cs, ath2cs, pi4, nam20, &
     nath0, nam21, nath1, nam22, nath2, xsml, first

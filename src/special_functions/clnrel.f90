@@ -1,7 +1,6 @@
 !DECK CLNREL
 COMPLEX FUNCTION CLNREL(Z)
   IMPLICIT NONE
-  REAL ALNREL, CARG, R1MACH, rho, sqeps, x
   !***BEGIN PROLOGUE  CLNREL
   !***PURPOSE  Evaluate ln(1+X) accurate in the sense of relative error.
   !***LIBRARY   SLATEC (FNLIB)
@@ -28,6 +27,7 @@ COMPLEX FUNCTION CLNREL(Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  CLNREL
+  REAL ALNREL, CARG, R1MACH, rho, sqeps, x
   COMPLEX Z
   SAVE sqeps
   DATA sqeps/0.0/

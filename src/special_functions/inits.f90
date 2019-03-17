@@ -1,8 +1,6 @@
 !DECK INITS
-FUNCTION INITS(Os,Nos,Eta)
+INTEGER FUNCTION INITS(Os,Nos,Eta)
   IMPLICIT NONE
-  REAL err, Eta
-  INTEGER i, ii, INITS, Nos
   !***BEGIN PROLOGUE  INITS
   !***PURPOSE  Determine the number of terms needed in an orthogonal
   !            polynomial series so that it meets a specified accuracy.
@@ -36,6 +34,8 @@ FUNCTION INITS(Os,Nos,Eta)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  INITS
+  REAL err, Eta
+  INTEGER i, ii, Nos
   REAL Os(*)
   !***FIRST EXECUTABLE STATEMENT  INITS
   IF ( Nos<1 ) CALL XERMSG('SLATEC','INITS',&
@@ -49,8 +49,7 @@ FUNCTION INITS(Os,Nos,Eta)
   ENDDO
   !
   IF ( i==Nos ) CALL XERMSG('SLATEC','INITS',&
-    'Chebyshev series too short for specified accuracy'&
-    ,1,1)
+    'Chebyshev series too short for specified accuracy',1,1)
   INITS = i
   !
 END FUNCTION INITS

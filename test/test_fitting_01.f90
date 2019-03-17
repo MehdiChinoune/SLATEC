@@ -300,14 +300,14 @@ CONTAINS
     CHARACTER :: list(2)
     INTEGER inf(4), nerr, kprog, kcase
     INTEGER iwork(7), info, Lun
-    DATA aa/1., .5, 1., .25, 0., 2., 0., 1., 2., -1., 1., 0., 0. ,&
-      0., 0., 0., 1., 2., -1., 0., 0., 1., 2., 0., -1., 0. ,&
+    DATA aa/1., .5, 1., .25, 0., 2., 0., 1., 2., -1., 1., 0., 0., &
+      0., 0., 0., 1., 2., -1., 0., 0., 1., 2., 0., -1., 0., &
       1., 0., 1., 0., 1., 0./
     DATA bb/3., 1.5, 2., 1.25, 1., 3., 3., 0./
-    DATA xx/.9999999999999787, 1.000000000000007, 1.000000000000007, 0. ,&
-      .8095238095238102, 1.047619047619044, 1.095238095238081, 0. ,&
-      .7777777777777857, 1.444444444444429, .3333333333333393 ,&
-      .5555555555555500, .3333333333333321, 0.0, -.3333333333333286 ,&
+    DATA xx/.9999999999999787, 1.000000000000007, 1.000000000000007, 0., &
+      .8095238095238102, 1.047619047619044, 1.095238095238081, 0., &
+      .7777777777777857, 1.444444444444429, .3333333333333393, &
+      .5555555555555500, .3333333333333321, 0.0, -.3333333333333286, &
       .3333333333333286/
     DATA inf/0, 1, 0, 2/
     DATA list/'L', 'U'/
@@ -373,12 +373,12 @@ CONTAINS
             '.  RNORM (TOO LARGE) IS',E11.4/)
         ENDIF
         !
-        IF ( Kprint>=3 ) WRITE (Lun,99006) list(kprog), kcase, info ,&
+        IF ( Kprint>=3 ) WRITE (Lun,99006) list(kprog), kcase, info, &
           inf(kk)
         99006 FORMAT (3X,A,'LSIA, CASE ',I1,'.  INFO=',I1,' (SHOULD = ',I1,')'/)
         IF ( info/=inf(kk) ) THEN
           nerr = nerr + 1
-          IF ( Kprint>=2 ) WRITE (Lun,99007) list(kprog), kcase, info ,&
+          IF ( Kprint>=2 ) WRITE (Lun,99007) list(kprog), kcase, info, &
             inf(kk)
           99007 FORMAT ('   PROBLEM WITH ',A,'LSIA, CASE ',I1,'.  INFO=',I1,&
             ' (SHOULD = ',I1,')'/)
@@ -402,7 +402,6 @@ END MODULE TEST27_MOD
 PROGRAM TEST27
   USE TEST27_MOD
   IMPLICIT NONE
-  INTEGER I1MACH
   !***BEGIN PROLOGUE  TEST27
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC
@@ -442,6 +441,7 @@ PROGRAM TEST27
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
   !***END PROLOGUE  TEST27
+  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST27
   lun = I1MACH(2)

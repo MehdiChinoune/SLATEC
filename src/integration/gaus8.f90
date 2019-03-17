@@ -76,18 +76,18 @@ SUBROUTINE GAUS8(FUN,A,B,Err,Ans,Ierr)
       REAL, INTENT(IN) :: X
     END FUNCTION
   END INTERFACE
-  INTEGER Ierr, k, kml, kmx, l, lmn, lmx, lr, mxl, nbits, nib ,&
+  INTEGER Ierr, k, kml, kmx, l, lmn, lmx, lr, mxl, nbits, nib, &
     nlmn, nlmx
   INTEGER I1MACH
-  REAL A, aa, ae, anib, Ans, area, B, c, ce, ee, ef, eps, Err ,&
-    est, gl, glr, gr, hh, sq2, tol, vl, vr, w1, w2, w3, w4 ,&
+  REAL A, aa, ae, anib, Ans, area, B, c, ce, ee, ef, eps, Err, &
+    est, gl, glr, gr, hh, sq2, tol, vl, vr, w1, w2, w3, w4, &
     x1, x2, x3, x4
   REAL R1MACH
   DIMENSION aa(30), hh(30), lr(30), vl(30), gr(30)
   SAVE x1, x2, x3, x4, w1, w2, w3, w4, sq2, nlmn, kmx, kml
-  DATA x1, x2, x3, x4/1.83434642495649805E-01, 5.25532409916328986E-01 ,&
+  DATA x1, x2, x3, x4/1.83434642495649805E-01, 5.25532409916328986E-01, &
     7.96666477413626740E-01, 9.60289856497536232E-01/
-  DATA w1, w2, w3, w4/3.62683783378361983E-01, 3.13706645877887287E-01 ,&
+  DATA w1, w2, w3, w4/3.62683783378361983E-01, 3.13706645877887287E-01, &
     2.22381034453374471E-01, 1.01228536290376259E-01/
   DATA sq2/1.41421356E0/
   DATA nlmn/1/, kmx/5000/, kml/6/

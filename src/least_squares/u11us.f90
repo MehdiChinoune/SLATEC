@@ -1,11 +1,6 @@
 !DECK U11US
 SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   IMPLICIT NONE
-  REAL A, bb, Db, Eb, H, r2, rmin, SDOT, SNRM2, sum, t, temp, &
-    tn, tt, Ub, W
-  INTEGER i, ii, im1, imin, is, ISAMAX, j, jm1, jmax, jp1, kk, &
-    km1, kmi, kp1, Krank, Ksure, kz, l, lm1, M
-  INTEGER Mda, mmk, Mode, N, nn, Np
   !***BEGIN PROLOGUE  U11US
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to ULSIA
@@ -31,6 +26,10 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  U11US
+  REAL A, bb, Db, Eb, H, r2, rmin, SDOT, SNRM2, sum, t, temp, tn, tt, Ub, W
+  INTEGER i, ii, im1, imin, is, ISAMAX, j, jm1, jmax, jp1, kk, &
+    km1, kmi, kp1, Krank, Ksure, kz, l, lm1, M
+  INTEGER Mda, mmk, Mode, N, nn, Np
   DIMENSION A(Mda,*), Ub(*), Db(*), H(*), W(*), Eb(*)
   INTEGER Ic(*), Ir(*)
   !

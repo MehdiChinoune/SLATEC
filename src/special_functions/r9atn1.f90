@@ -1,8 +1,6 @@
 !DECK R9ATN1
-FUNCTION R9ATN1(X)
+REAL FUNCTION R9ATN1(X)
   IMPLICIT NONE
-  REAL atn1cs, CSEVL, eps, R1MACH, R9ATN1, X, xbig, xmax, xsml, y
-  INTEGER INITS, ntatn1
   !***BEGIN PROLOGUE  R9ATN1
   !***SUBSIDIARY
   !***PURPOSE  Evaluate ATAN(X) from first order relative accuracy so that
@@ -34,6 +32,8 @@ FUNCTION R9ATN1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  R9ATN1
+  REAL atn1cs, CSEVL, eps, R1MACH, X, xbig, xmax, xsml, y
+  INTEGER INITS, ntatn1
   DIMENSION atn1cs(21)
   LOGICAL first
   SAVE atn1cs, ntatn1, xsml, xbig, xmax, first
@@ -74,11 +74,9 @@ FUNCTION R9ATN1(X)
   IF ( y>1.0 ) THEN
     !
     IF ( y>xmax ) CALL XERMSG('SLATEC','R9ATN1',&
-      'NO PRECISION IN ANSWER BECAUSE X IS TOO BIG',&
-      2,2)
+      'NO PRECISION IN ANSWER BECAUSE X IS TOO BIG',2,2)
     IF ( y>xbig ) CALL XERMSG('SLATEC','R9ATN1',&
-      'ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG'&
-      ,1,1)
+      'ANSWER LT HALF PRECISION BECAUSE X IS TOO BIG',1,1)
     !
     R9ATN1 = (ATAN(X)-X)/X**3
     RETURN

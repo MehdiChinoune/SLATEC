@@ -1,9 +1,6 @@
 !DECK PSI
-FUNCTION PSI(X)
+REAL FUNCTION PSI(X)
   IMPLICIT NONE
-  REAL apsics, aux, COT, CSEVL, dxrel, pi, PSI, psics, R1MACH, X, &
-    xbig, y
-  INTEGER i, INITS, n, ntapsi, ntpsi
   !***BEGIN PROLOGUE  PSI
   !***PURPOSE  Compute the Psi (or Digamma) function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -39,6 +36,8 @@ FUNCTION PSI(X)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  PSI
+  REAL apsics, aux, COT, CSEVL, dxrel, pi, psics, R1MACH, X, xbig, y
+  INTEGER i, INITS, n, ntapsi, ntpsi
   DIMENSION psics(23), apsics(16)
   LOGICAL first
   EXTERNAL COT

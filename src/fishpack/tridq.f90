@@ -1,8 +1,6 @@
 !DECK TRIDQ
 SUBROUTINE TRIDQ(Mr,A,B,C,Y,D)
   IMPLICIT NONE
-  REAL A, B, C, D, Y, z
-  INTEGER i, ip, m, mm1, Mr
   !***BEGIN PROLOGUE  TRIDQ
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to POIS3D
@@ -17,6 +15,8 @@ SUBROUTINE TRIDQ(Mr,A,B,C,Y,D)
   !   900308  Renamed routine from TRID to TRIDQ.  (WRB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  TRIDQ
+  REAL A, B, C, D, Y, z
+  INTEGER i, ip, m, mm1, Mr
   DIMENSION A(*), B(*), C(*), Y(*), D(*)
   !***FIRST EXECUTABLE STATEMENT  TRIDQ
   m = Mr

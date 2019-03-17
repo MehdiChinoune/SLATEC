@@ -2,10 +2,6 @@
 SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     Bdd,COFX,Grhs,Usol,Idmn,W,Pertrb,Ierror)
   IMPLICIT NONE
-  REAL A, Alpha, B, Bda, Bdb, Bdc, Bdd, Beta, C, D, Grhs, Pertrb, Usol, W
-  INTEGER i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
-    i9, Idmn, Ierror, Iorder, k, l, length, linput
-  INTEGER log2n, loutpt, M, Mbdcnd, N, Nbdcnd
   !***BEGIN PROLOGUE  SEPX4
   !***PURPOSE  Solve for either the second or fourth order finite
   !            difference approximation to the solution of a separable
@@ -407,7 +403,10 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !   920122  Minor corrections and modifications to prologue.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SEPX4
-  !
+  REAL A, Alpha, B, Bda, Bdb, Bdc, Bdd, Beta, C, D, Grhs, Pertrb, Usol, W
+  INTEGER i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
+    i9, Idmn, Ierror, Iorder, k, l, length, linput
+  INTEGER log2n, loutpt, M, Mbdcnd, N, Nbdcnd
   DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
   DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   EXTERNAL COFX

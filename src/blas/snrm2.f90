@@ -1,7 +1,6 @@
 !DECK SNRM2
 REAL FUNCTION SNRM2(N,Sx,Incx)
   IMPLICIT NONE
-  INTEGER i, Incx, j, N, nn
   !***BEGIN PROLOGUE  SNRM2
   !***PURPOSE  Compute the Euclidean length (L2 norm) of a vector.
   !***LIBRARY   SLATEC (BLAS)
@@ -75,6 +74,7 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SNRM2
+  INTEGER i, Incx, j, N, nn
   INTEGER next
   REAL Sx(*), cutlo, cuthi, hitest, sum, xmax, zero, one
   SAVE cutlo, cuthi, zero, one

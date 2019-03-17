@@ -1,10 +1,6 @@
 !DECK PASSB
 SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   IMPLICIT NONE
-  REAL C1, C2, Cc, Ch, Ch2, Wa, wai, war
-  INTEGER i, idij, idj, idl, Idl1, idlj, Ido, idot, idp, ik, inc, &
-    Ip, ipp2, ipph, j, jc, k, l, L1, lc
-  INTEGER Nac
   !***BEGIN PROLOGUE  PASSB
   !***SUBSIDIARY
   !***PURPOSE  Calculate the fast Fourier transform of subvectors of
@@ -24,8 +20,11 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  PASSB
-  DIMENSION Ch(Ido,L1,*), Cc(Ido,Ip,*), C1(Ido,L1,*), Wa(*), C2(Idl1,*)&
-    , Ch2(Idl1,*)
+  REAL C1, C2, Cc, Ch, Ch2, Wa, wai, war
+  INTEGER i, idij, idj, idl, Idl1, idlj, Ido, idot, idp, ik, inc, &
+    Ip, ipp2, ipph, j, jc, k, l, L1, lc
+  INTEGER Nac
+  DIMENSION Ch(Ido,L1,*), Cc(Ido,Ip,*), C1(Ido,L1,*), Wa(*), C2(Idl1,*), Ch2(Idl1,*)
   !***FIRST EXECUTABLE STATEMENT  PASSB
   idot = Ido/2
   ipp2 = Ip + 2

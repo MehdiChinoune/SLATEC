@@ -1,8 +1,6 @@
 !DECK ALGAMS
 SUBROUTINE ALGAMS(X,Algam,Sgngam)
   IMPLICIT NONE
-  REAL Algam, ALNGAM, Sgngam, X
-  INTEGER i
   !***BEGIN PROLOGUE  ALGAMS
   !***PURPOSE  Compute the logarithm of the absolute value of the Gamma
   !            function.
@@ -30,6 +28,8 @@ SUBROUTINE ALGAMS(X,Algam,Sgngam)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  ALGAMS
   !***FIRST EXECUTABLE STATEMENT  ALGAMS
+  REAL Algam, ALNGAM, Sgngam, X
+  INTEGER i
   Algam = ALNGAM(X)
   Sgngam = 1.0
   IF ( X>0.0 ) RETURN

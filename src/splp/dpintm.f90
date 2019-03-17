@@ -1,8 +1,6 @@
 !DECK DPINTM
 SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   IMPLICIT NONE
-  INTEGER i, iopt, Ipagef, Ix, Lmx, lp4, M, N, n20008, n20012, &
-    nerr
   !***BEGIN PROLOGUE  DPINTM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -47,6 +45,7 @@ SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   !***END PROLOGUE  DPINTM
+  INTEGER i, iopt, Ipagef, Ix, Lmx, lp4, M, N, n20008, n20012, nerr
   REAL(8) :: Sx(*), zero, one
   DIMENSION Ix(*)
   SAVE zero, one

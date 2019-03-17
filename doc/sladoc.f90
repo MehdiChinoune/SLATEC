@@ -117,9 +117,9 @@ PROGRAM SLADOC
   !
   !     Other declarations.
   !
-  INTEGER ierror, ifind, ii, ij, il, ilen, in, inext, ir, irec ,&
-    istart, istmt, itemp, jcl, jj, lb2, leng, lftbl, lkats ,&
-    ll, ls, lt2, ltcl, ncc, nerr, nlines, npd, ntkwd, ntry ,&
+  INTEGER ierror, ifind, ii, ij, il, ilen, in, inext, ir, irec, &
+    istart, istmt, itemp, jcl, jj, lb2, leng, lftbl, lkats, &
+    ll, ls, lt2, ltcl, ncc, nerr, nlines, npd, ntkwd, ntry, &
     num
   CHARACTER(LLN) :: line, linesv
   !
@@ -332,7 +332,7 @@ PROGRAM SLADOC
           ENDIF
           ncc = ncc - 1
           DO j = 1, ncc
-            READ (UNIT=LU14,FMT=99040) iptr(j), jptr(j), kptr(j) ,&
+            READ (UNIT=LU14,FMT=99040) iptr(j), jptr(j), kptr(j), &
               tclass(j)
           ENDDO
           READ (UNIT=LU14,FMT=99038) kptr(ncc+1)
@@ -569,7 +569,7 @@ PROGRAM SLADOC
               nerr = 2
               GOTO 700
             ENDIF
-            READ (UNIT=linesv,FMT=99017) cat(lftbl), rtname(lftbl) ,&
+            READ (UNIT=linesv,FMT=99017) cat(lftbl), rtname(lftbl), &
               is(lftbl), ie(lftbl), ips(lftbl), ipe(lftbl)
           ENDDO
           515          lftbl = lftbl - 1
@@ -654,7 +654,7 @@ PROGRAM SLADOC
               nerr = 2
               GOTO 700
             ENDIF
-            READ (UNIT=linesv,FMT=99017) cat(lftbl), rtname(lftbl) ,&
+            READ (UNIT=linesv,FMT=99017) cat(lftbl), rtname(lftbl), &
               is(lftbl), ie(lftbl), ips(lftbl), ipe(lftbl)
           ENDDO
           535          lftbl = lftbl - 1
@@ -748,7 +748,7 @@ PROGRAM SLADOC
             ENDIF
             ncc = ncc - 1
             DO j = 1, ncc
-              READ (UNIT=LU14,FMT=99040) iptr(j), jptr(j), kptr(j) ,&
+              READ (UNIT=LU14,FMT=99040) iptr(j), jptr(j), kptr(j), &
                 tclass(j)
             ENDDO
             READ (UNIT=LU14,FMT=99038) kptr(ncc+1)
@@ -898,7 +898,7 @@ PROGRAM SLADOC
                   ii = kptr(irec)
                   tcl = ' '
                   CALL UNDOCL(tclass(irec),tcl)
-                  WRITE (UNIT=LU6,FMT=99044) ii, tcl(1:LENSTR(tcl)) ,&
+                  WRITE (UNIT=LU6,FMT=99044) ii, tcl(1:LENSTR(tcl)), &
                     stmts(ii)(1:LENSTR(stmts(ii)))
                   itemp = kptr(irec+1) - kptr(irec) - 1
                   ltcl = LENSTR(tcl) + 3
@@ -947,7 +947,7 @@ PROGRAM SLADOC
                   ii = kptr(irec)
                   tcl = ' '
                   CALL UNDOCL(tclass(irec),tcl)
-                  WRITE (UNIT=LU6,FMT=99044) ii, tcl(1:LENSTR(tcl)) ,&
+                  WRITE (UNIT=LU6,FMT=99044) ii, tcl(1:LENSTR(tcl)), &
                     stmts(ii)(1:LENSTR(stmts(ii)))
                   itemp = kptr(irec+1) - kptr(irec) - 1
                   ltcl = LENSTR(tcl) + 3
@@ -974,7 +974,7 @@ PROGRAM SLADOC
                   ii = kptr(irec)
                   tcl = ' '
                   CALL UNDOCL(tclass(irec),tcl)
-                  WRITE (UNIT=LU6,FMT=99044) ii, tcl(1:LENSTR(tcl)) ,&
+                  WRITE (UNIT=LU6,FMT=99044) ii, tcl(1:LENSTR(tcl)), &
                     stmts(ii)(1:LENSTR(stmts(ii)))
                   itemp = kptr(irec+1) - kptr(irec) - 1
                   ltcl = LENSTR(tcl) + 3
@@ -1001,7 +1001,7 @@ PROGRAM SLADOC
                   ii = kptr(irec)
                   tcl = ' '
                   CALL UNDOCL(tclass(irec),tcl)
-                  WRITE (UNIT=LU6,FMT=99044) ii, tcl(1:LENSTR(tcl)) ,&
+                  WRITE (UNIT=LU6,FMT=99044) ii, tcl(1:LENSTR(tcl)), &
                     stmts(ii)(1:LENSTR(stmts(ii)))
                   itemp = kptr(irec+1) - kptr(irec) - 1
                   ltcl = LENSTR(tcl) + 3
@@ -1027,7 +1027,7 @@ PROGRAM SLADOC
                   ii = kptr(irec)
                   tcl = ' '
                   CALL UNDOCL(tclass(irec),tcl)
-                  WRITE (UNIT=LU6,FMT=99044) ii, tcl(1:LENSTR(tcl)) ,&
+                  WRITE (UNIT=LU6,FMT=99044) ii, tcl(1:LENSTR(tcl)), &
                     stmts(ii)(1:LENSTR(stmts(ii)))
                   itemp = kptr(irec+1) - kptr(irec) - 1
                   ltcl = LENSTR(tcl) + 3
@@ -1179,7 +1179,7 @@ PROGRAM SLADOC
               nerr = 2
               GOTO 700
             ENDIF
-            READ (UNIT=linesv,FMT=99017) cat(lftbl), rtname(lftbl) ,&
+            READ (UNIT=linesv,FMT=99017) cat(lftbl), rtname(lftbl), &
               is(lftbl), ie(lftbl), ips(lftbl), ipe(lftbl)
           ENDDO
           580          lftbl = lftbl - 1

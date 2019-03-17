@@ -1,9 +1,6 @@
 !DECK XSET
 SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   IMPLICIT NONE
-  INTEGER i, I1MACH, ic, Ierror, ii, imaxex, iminex, iradx, it, j, &
-    k, kk, lg102x, lgtemp, log102, log2r, lx, nb, NBItsf, nbitsx
-  INTEGER np1, nrdplc
   !***BEGIN PROLOGUE  XSET
   !***PURPOSE  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.
@@ -189,6 +186,9 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  XSET
+  INTEGER i, I1MACH, ic, Ierror, ii, imaxex, iminex, iradx, it, j, &
+    k, kk, lg102x, lgtemp, log102, log2r, lx, nb, NBItsf, nbitsx
+  INTEGER np1, nrdplc
   INTEGER Irad, Nradpl, Nbits
   REAL Dzero, dzerox
   COMMON /XBLK1 / NBItsf

@@ -1,11 +1,6 @@
 !DECK POIS3D
-SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,&
-    Ierror,W)
+SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
   IMPLICIT NONE
-  REAL A, B, C, C1, C2, F, save, W
-  INTEGER i, Ierror, iwbb, iwd, iwt, iwx, iwy, iwyrt, j, k, L, &
-    Ldimf, lp, Lperod, M, Mdimf, mp, Mperod, N, nh
-  INTEGER nhm1, nhmk, nhpk, nodd, np, Nperod
   !***BEGIN PROLOGUE  POIS3D
   !***PURPOSE  Solve a three-dimensional block tridiagonal linear system
   !            which arises from a finite difference approximation to a
@@ -235,6 +230,10 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,&
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  POIS3D
+  REAL A, B, C, C1, C2, F, save, W
+  INTEGER i, Ierror, iwbb, iwd, iwt, iwx, iwy, iwyrt, j, k, L, &
+    Ldimf, lp, Lperod, M, Mdimf, mp, Mperod, N, nh
+  INTEGER nhm1, nhmk, nhpk, nodd, np, Nperod
   DIMENSION A(*), B(*), C(*), F(Ldimf,Mdimf,*), W(*), save(6)
   !***FIRST EXECUTABLE STATEMENT  POIS3D
   lp = Lperod + 1

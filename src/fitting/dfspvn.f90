@@ -1,5 +1,6 @@
 !DECK DFSPVN
 SUBROUTINE DFSPVN(T,Jhigh,Index,X,Ileft,Vnikx)
+  IMPLICIT NONE
   !***BEGIN PROLOGUE  DFSPVN
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DFC
@@ -20,7 +21,6 @@ SUBROUTINE DFSPVN(T,Jhigh,Index,X,Ileft,Vnikx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DFSPVN
-  IMPLICIT NONE
   REAL(8) :: deltam, deltap, T, vm, vmprev, Vnikx, X
   INTEGER i, Ileft, imjp1, Index, ipj, j, Jhigh, jp1, jp1ml, l
   DIMENSION T(*), Vnikx(*)

@@ -1,7 +1,6 @@
 !DECK CAXPY
 SUBROUTINE CAXPY(N,Ca,Cx,Incx,Cy,Incy)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, kx, ky, N, ns
   !***BEGIN PROLOGUE  CAXPY
   !***PURPOSE  Compute a constant times a vector plus a vector.
   !***LIBRARY   SLATEC (BLAS)
@@ -47,6 +46,7 @@ SUBROUTINE CAXPY(N,Ca,Cx,Incx,Cy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920801  Removed variable CANORM.  (RWC, WRB)
   !***END PROLOGUE  CAXPY
+  INTEGER i, Incx, Incy, kx, ky, N, ns
   COMPLEX Cx(*), Cy(*), Ca
   !***FIRST EXECUTABLE STATEMENT  CAXPY
   IF ( N<=0.OR.Ca==(0.0E0,0.0E0) ) RETURN

@@ -1,7 +1,6 @@
 !DECK CSWAP
 SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, kx, ky, N, ns
   !***BEGIN PROLOGUE  CSWAP
   !***PURPOSE  Interchange two vectors.
   !***LIBRARY   SLATEC (BLAS)
@@ -46,6 +45,7 @@ SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CSWAP
+  INTEGER i, Incx, Incy, kx, ky, N, ns
   COMPLEX Cx(*), Cy(*), ctemp
   !***FIRST EXECUTABLE STATEMENT  CSWAP
   IF ( N<=0 ) RETURN

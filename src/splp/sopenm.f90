@@ -1,7 +1,6 @@
 !DECK SOPENM
 SUBROUTINE SOPENM(Ipage,Lpage)
   IMPLICIT NONE
-  INTEGER ios, Ipage, ipagef, Lpage, lpg
   !***BEGIN PROLOGUE  SOPENM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -23,6 +22,7 @@ SUBROUTINE SOPENM(Ipage,Lpage)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !***END PROLOGUE  SOPENM
+  INTEGER ios, Ipage, ipagef, Lpage, lpg
   CHARACTER(8) :: xern1
   !
   !***FIRST EXECUTABLE STATEMENT  SOPENM

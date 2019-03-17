@@ -1,7 +1,6 @@
 !DECK BSPVD
 SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   IMPLICIT NONE
-  INTEGER iwork, Ldvnik
   !***BEGIN PROLOGUE  BSPVD
   !***PURPOSE  Calculate the value and all derivatives of order less than
   !            NDERIV of all basis functions which do not vanish at X.
@@ -74,7 +73,7 @@ SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BSPVD
-  !
+  INTEGER iwork, Ldvnik
   INTEGER i, ideriv, Ileft, ipkmd, j, jj, jlow, jm, jp1mid, K, &
     kmd, kp1, l, ldummy, m, mhigh, Nderiv
   REAL factor, fkmd, T, v, Vnikx, Work, X

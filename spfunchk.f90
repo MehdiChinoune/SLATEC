@@ -61,7 +61,7 @@ PROGRAM TESTI
   ELSE
     Kprint = 0
   END IF
-  
+
   CALL XSETUN(lun)
   CALL XERMAX(1000)
   IF ( kprint<=1 ) THEN

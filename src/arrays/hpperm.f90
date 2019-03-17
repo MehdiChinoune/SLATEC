@@ -44,8 +44,7 @@ SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
   IF ( N<1 ) THEN
     Ier = 1
     CALL XERMSG('SLATEC','HPPERM',&
-      'The number of values to be rearranged, N, is not positive.'&
-      ,Ier,1)
+      'The number of values to be rearranged, N, is not positive.',Ier,1)
     RETURN
   ENDIF
   IF ( LEN(Work)<LEN(Hx(1)) ) THEN

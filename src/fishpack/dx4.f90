@@ -1,9 +1,6 @@
 !DECK DX4
 SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
   IMPLICIT NONE
-  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, TDLx3, TDLy3, U, &
-    Uxxx, Uxxxx
-  INTEGER I, Idmn, IS, J, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
   !***BEGIN PROLOGUE  DX4
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPX4
@@ -24,10 +21,10 @@ SUBROUTINE DX4(U,Idmn,I,J,Uxxx,Uxxxx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  DX4
-  !
+  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, TDLx3, TDLy3, U, Uxxx, Uxxxx
+  INTEGER I, Idmn, IS, J, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
   COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
-    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
-    DLY4
+    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   DIMENSION U(Idmn,*)
   !***FIRST EXECUTABLE STATEMENT  DX4
   IF ( I>2.AND.I<(K-1) ) THEN

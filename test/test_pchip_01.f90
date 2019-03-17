@@ -108,12 +108,12 @@ CONTAINS
     !  DECLARATIONS.
     !
     INTEGER i, ierr, iint, next(2), next2(2), nint
-    REAL aed, aed2, aedmax, aedmin, aef, aef2, aefmax, aefmin ,&
-      check(2), checkf(2), checkd(2), d1, d2, dermax, dtrue, dx ,&
-      eps1, eps2, f1, f2, fact, fermax, floord, floorf, four ,&
-      ftrue, left(3), machep, one, red, red2, redmax, redmin, ref ,&
-      ref2, refmax, refmin, right(3), small, ten, tol1, tol2, x1 ,&
-      x2, xadmax, xadmin, xafmax, xafmin, xrdmax, xrdmin, xrfmax ,&
+    REAL aed, aed2, aedmax, aedmin, aef, aef2, aefmax, aefmin, &
+      check(2), checkf(2), checkd(2), d1, d2, dermax, dtrue, dx, &
+      eps1, eps2, f1, f2, fact, fermax, floord, floorf, four, &
+      ftrue, left(3), machep, one, red, red2, redmax, redmin, ref, &
+      ref2, refmax, refmin, right(3), small, ten, tol1, tol2, x1, &
+      x2, xadmax, xadmin, xafmax, xafmin, xrdmax, xrdmin, xrfmax, &
       xrfmin, zero
     LOGICAL failoc, failnx
     !
@@ -609,14 +609,14 @@ CONTAINS
     !
     INTEGER Lout, Kprint
     LOGICAL Fail
-    REAL X(10), Y(10), F(10,10), Fx(10,10), Fy(10,10), Xe(51), Ye(51) ,&
+    REAL X(10), Y(10), F(10,10), Fx(10,10), Fy(10,10), Xe(51), Ye(51), &
       Fe(51), De(51), Fe2(51)
     !
     !  DECLARATIONS.
     !
     INTEGER i, ier2, ierr, inc, j, k, ne, nerr, nmax, nx, ny
     LOGICAL faild, faile, failoc, skip
-    REAL dermax, derr, dtrue, dx, fdiff, fdifmx, fermax, ferr, ftrue ,&
+    REAL dermax, derr, dtrue, dx, fdiff, fdifmx, fermax, ferr, ftrue, &
       machep, tol, pdermx, pdifmx, pfermx, zero
     REAL R1MACH
     !
@@ -697,7 +697,7 @@ CONTAINS
           ferr = Fe(k) - ftrue
           dtrue = DFDX(Xe(k),Y(j))
           derr = De(k) - dtrue
-          IF ( Kprint>3 ) WRITE (Lout,99005) Xe(k), ftrue, Fe(k), ferr ,&
+          IF ( Kprint>3 ) WRITE (Lout,99005) Xe(k), ftrue, Fe(k), ferr, &
             dtrue, De(k), derr
           IF ( k==1 ) THEN
             !              INITIALIZE.
@@ -742,7 +742,7 @@ CONTAINS
         !
         IF ( (ierr/=13).AND.(Kprint>=2) ) WRITE (Lout,99009) 'D', ierr, 13
         !
-        IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E', ier2 ,&
+        IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E', ier2, &
           ierr
       ENDIF
       !
@@ -786,7 +786,7 @@ CONTAINS
           ferr = Fe(k) - ftrue
           dtrue = DFDY(X(i),Ye(k))
           derr = De(k) - dtrue
-          IF ( Kprint>3 ) WRITE (Lout,99005) Ye(k), ftrue, Fe(k), ferr ,&
+          IF ( Kprint>3 ) WRITE (Lout,99005) Ye(k), ftrue, Fe(k), ferr, &
             dtrue, De(k), derr
           IF ( k==1 ) THEN
             !              INITIALIZE.
@@ -831,7 +831,7 @@ CONTAINS
         !
         IF ( (ierr/=20).AND.(Kprint>=2) ) WRITE (Lout,99009) 'D', ierr, 20
         !
-        IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E', ier2 ,&
+        IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E', ier2, &
           ierr
       ENDIF
       !
@@ -1075,7 +1075,7 @@ CONTAINS
     !  DECLARE VARIABLES.
     !
     INTEGER i, ierexp(17), ierr, ifail, n, npairs
-    REAL a(17), b(17), calc, d(7), errmax, error, f(7), machep, one ,&
+    REAL a(17), b(17), calc, d(7), errmax, error, f(7), machep, one, &
       three, thrqtr, tol, true, two, x(7)
     LOGICAL fail, skip
     !
@@ -1089,13 +1089,13 @@ CONTAINS
     DATA n/7/
     DATA x/ - 4.E0, -2.E0, -0.9E0, 0.E0, 0.9E0, 2.E0, 4.E0/
     DATA npairs/17/
-    DATA a/ - 3.0E0, 3.0E0, -0.5E0, -0.5E0, -0.5E0, -4.0E0, -4.0E0 ,&
-      3.0E0, -5.0E0, -5.0E0, -6.0E0, 6.0E0, -1.5E0, -1.5E0, -3.0E0 ,&
+    DATA a/ - 3.0E0, 3.0E0, -0.5E0, -0.5E0, -0.5E0, -4.0E0, -4.0E0, &
+      3.0E0, -5.0E0, -5.0E0, -6.0E0, 6.0E0, -1.5E0, -1.5E0, -3.0E0, &
       3.0E0, 0.5E0/
-    DATA b/3.0E0, -3.0E0, 1.0E0, 2.0E0, 5.0E0, -0.5E0, 4.0E0, 5.0E0 ,&
-      -3.0E0, 5.0E0, -5.0E0, 5.0E0, -0.5E0, -1.0E0, -2.5E0, 3.5E0 ,&
+    DATA b/3.0E0, -3.0E0, 1.0E0, 2.0E0, 5.0E0, -0.5E0, 4.0E0, 5.0E0, &
+      -3.0E0, 5.0E0, -5.0E0, 5.0E0, -0.5E0, -1.0E0, -2.5E0, 3.5E0, &
       0.5E0/
-    DATA ierexp/0, 0, 0, 0, 2, 0, 0, 2, 1, 3, 3, 3, 0, 0, 0 ,&
+    DATA ierexp/0, 0, 0, 0, 2, 0, 0, 2, 1, 3, 3, 3, 0, 0, 0, &
       0, 0/
     !
     !  SET PASS/FAIL TOLERANCE.
@@ -1140,7 +1140,7 @@ CONTAINS
         error = calc - true
         IF ( Kprint>=3 ) THEN
           IF ( fail ) THEN
-            WRITE (Lun,99005) a(i), b(i), ierr, true, calc, error ,&
+            WRITE (Lun,99005) a(i), b(i), ierr, true, calc, error, &
               ierexp(i)
             99005 FORMAT (2F6.1,I5,1P,2E20.10,E15.5,'  (',I1,') *****')
           ELSE
@@ -1292,7 +1292,7 @@ CONTAINS
     !
     INTEGER i, ic(2), ierr, ifail, N, nbad, nbadz, NWK
     PARAMETER (N=9,NWK=2*N)
-    REAL d(N), dc(N), dc5, dc6, dm(N), ds(N), err, f(N), MONE, tol ,&
+    REAL d(N), dc(N), dc5, dc6, dm(N), ds(N), err, f(N), MONE, tol, &
       told, tolz, vc(2), x(N), wk(NWK), ZERO
     PARAMETER (ZERO=0.0E0,MONE=-1.0E0)
     CHARACTER(6) :: result
@@ -1301,16 +1301,16 @@ CONTAINS
     !
     !       Data.
     DATA ic/0, 0/
-    DATA x/ - 2.2E0, -1.2E0, -1.0E0, -0.5E0, -0.01E0, 0.5E0, 1.0E0 ,&
+    DATA x/ - 2.2E0, -1.2E0, -1.0E0, -0.5E0, -0.01E0, 0.5E0, 1.0E0, &
       2.0E0, 2.2E0/
     !
     !       Results generated on Cray X/MP (9 sign. figs.)
-    DATA dm/0., 3.80027352E-01, 7.17253009E-01, 5.82014161E-01, 0. ,&
-      -5.68208031E-01, -5.13501618E-01, -7.77910977E-02 ,&
+    DATA dm/0., 3.80027352E-01, 7.17253009E-01, 5.82014161E-01, 0., &
+      -5.68208031E-01, -5.13501618E-01, -7.77910977E-02, &
       -2.45611117E-03/
     DATA dc5, dc6/1.76950158E-02, -5.69579814E-01/
-    DATA ds/ - 5.16830792E-02, 5.71455855E-01, 7.40530225E-01 ,&
-      7.63864934E-01, 1.92614386E-02, -7.65324380E-01, -7.28209035E-01 ,&
+    DATA ds/ - 5.16830792E-02, 5.71455855E-01, 7.40530225E-01, &
+      7.63864934E-01, 1.92614386E-02, -7.65324380E-01, -7.28209035E-01, &
       -7.98445427E-02, -2.85983446E-02/
     !
     !***FIRST EXECUTABLE STATEMENT  PCHQK3
@@ -1851,19 +1851,19 @@ CONTAINS
     !
     INTEGER i, ierr, ifail, inbv, j, knotyp, k, N, ndim, nknots
     PARAMETER (N=9)
-    REAL bcoef(2*N), d(N), dcalc, derr, dermax, f(N), fcalc, ferr ,&
-      fermax, t(2*N+4), terr, termax, tol, tolz, tsave(2*N+4) ,&
+    REAL bcoef(2*N), d(N), dcalc, derr, dermax, f(N), fcalc, ferr, &
+      fermax, t(2*N+4), terr, termax, tol, tolz, tsave(2*N+4), &
       work(16*N), x(N), ZERO
     PARAMETER (ZERO=0.0E0)
     LOGICAL fail
     !
     !  Define test data.
     !
-    DATA x/ - 2.2E0, -1.2E0, -1.0E0, -0.5E0, -0.01E0, 0.5E0, 1.0E0 ,&
+    DATA x/ - 2.2E0, -1.2E0, -1.0E0, -0.5E0, -0.01E0, 0.5E0, 1.0E0, &
       2.0E0, 2.2E0/
-    DATA f/0.0079E0, 0.2369E0, 0.3679E0, 0.7788E0, 0.9999E0, 0.7788E0 ,&
+    DATA f/0.0079E0, 0.2369E0, 0.3679E0, 0.7788E0, 0.9999E0, 0.7788E0, &
       0.3679E0, 0.1083E0, 0.0079E0/
-    DATA d/0.0000E0, 0.3800E0, 0.7173E0, 0.5820E0, 0.0177E0, -0.5696E0 ,&
+    DATA d/0.0000E0, 0.3800E0, 0.7173E0, 0.5820E0, 0.0177E0, -0.5696E0, &
       -0.5135E0, -0.0778E0, -0.0025E0/
     !
     !  Initialize.
@@ -1926,7 +1926,7 @@ CONTAINS
         ENDIF
         fail = (fermax>tol) .OR. (dermax>tol)
         IF ( fail ) ifail = ifail + 1
-        IF ( (Kprint>=3).OR.(Kprint>=2).AND.fail ) WRITE (Lun,99008) fermax ,&
+        IF ( (Kprint>=3).OR.(Kprint>=2).AND.fail ) WRITE (Lun,99008) fermax, &
           dermax, tol
         99008 FORMAT (/5X,'Maximum relative errors:'/15X,'F-error =',1P,E13.5,5X,&
           'D-error =',E13.5/5X,'Both should be less than  TOL =',E13.5)
@@ -1988,7 +1988,6 @@ END MODULE TEST32_MOD
 PROGRAM TEST32
   USE TEST32_MOD
   IMPLICIT NONE
-  INTEGER I1MACH
   !***BEGIN PROLOGUE  TEST32
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC
@@ -2032,6 +2031,7 @@ PROGRAM TEST32
   !   900524  Cosmetic changes to code.  (WRB)
   !   930318  Added new quick check PCHQK5.  (WRB,FNF)
   !***END PROLOGUE  TEST32
+  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST32
   lun = I1MACH(2)

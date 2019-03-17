@@ -1,7 +1,6 @@
 !DECK XERMAX
 SUBROUTINE XERMAX(Max)
   IMPLICIT NONE
-  INTEGER J4SAVE, junk, Max
   !***BEGIN PROLOGUE  XERMAX
   !***PURPOSE  Set maximum number of times any error message is to be
   !            printed.
@@ -35,6 +34,7 @@ SUBROUTINE XERMAX(Max)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  XERMAX
+  INTEGER J4SAVE, junk, Max
   !***FIRST EXECUTABLE STATEMENT  XERMAX
   junk = J4SAVE(4,Max,.TRUE.)
 END SUBROUTINE XERMAX

@@ -2,13 +2,6 @@
 SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
     N,Nbdcnd,Bdzs,Bdzf,Elmbda,Ldimf,Mdimf,F,Pertrb,Ierror,W)
   IMPLICIT NONE
-  REAL Bdxf, Bdxs, Bdyf, Bdys, Bdzf, Bdzs, c1, c2, c3, dx, dy, &
-    dz, Elmbda, F, Pertrb, s, s1, s2, twbydx, twbydy
-  REAL twbydz, W, Xf, xlp, Xs, Yf, ylp, Ys, Zf, zlp, Zs
-  INTEGER i, Ierror, ir, iwb, iwc, iww, j, k, L, Lbdcnd, Ldimf, &
-    lp, lp1, lstart, lstop, lstpm1, lunk, M, Mbdcnd, Mdimf
-  INTEGER mp, mp1, mstart, mstop, mstpm1, munk, N, Nbdcnd, np, &
-    np1, nperod, nstart, nstop, nstpm1, nunk
   !***BEGIN PROLOGUE  HW3CRT
   !***PURPOSE  Solve the standard seven-point finite difference
   !            approximation to the Helmholtz equation in Cartesian
@@ -367,8 +360,13 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  HW3CRT
-  !
-  !
+  REAL Bdxf, Bdxs, Bdyf, Bdys, Bdzf, Bdzs, c1, c2, c3, dx, dy, &
+    dz, Elmbda, F, Pertrb, s, s1, s2, twbydx, twbydy
+  REAL twbydz, W, Xf, xlp, Xs, Yf, ylp, Ys, Zf, zlp, Zs
+  INTEGER i, Ierror, ir, iwb, iwc, iww, j, k, L, Lbdcnd, Ldimf, &
+    lp, lp1, lstart, lstop, lstpm1, lunk, M, Mbdcnd, Mdimf
+  INTEGER mp, mp1, mstart, mstop, mstpm1, munk, N, Nbdcnd, np, &
+    np1, nperod, nstart, nstop, nstpm1, nunk
   DIMENSION Bdxs(Mdimf,*), Bdxf(Mdimf,*), Bdys(Ldimf,*), Bdyf(Ldimf,*), &
     Bdzs(Ldimf,*), Bdzf(Ldimf,*), F(Ldimf,Mdimf,*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HW3CRT

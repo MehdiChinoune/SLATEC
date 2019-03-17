@@ -2,8 +2,6 @@
 SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
     Imat,Sizeup,Asmall,Abig)
   IMPLICIT NONE
-  INTEGER i, indcat, index, Info, iplace, itcnt, itmax, j, Mrelas ,&
-    Nvars
   !***BEGIN PROLOGUE  SPLPUP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -39,6 +37,7 @@ SUBROUTINE SPLPUP(USRMAT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
   !           DO loops to DO loops.  (RWC)
   !   900602  Get rid of ASSIGNed GOTOs.  (RWC)
   !***END PROLOGUE  SPLPUP
+  INTEGER i, indcat, index, Info, iplace, itcnt, itmax, j, Mrelas, Nvars
   REAL Abig, aij, Amat(*), amn, amx, Asmall, Bl(*), Bu(*), Dattrv(*)&
     , Prgopt(*), xval, zero
   INTEGER iflag(10), Imat(*), Ind(*)

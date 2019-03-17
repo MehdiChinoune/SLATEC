@@ -1,10 +1,6 @@
 !DECK SROTMG
 SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
   IMPLICIT NONE
-  REAL gam, gamsq, one, rgamsq, Sd1, Sd2, sflag, sh11, sh12, sh21, &
-    sh22, sp1, sp2, Sparam, sq1, sq2, stemp, su, Sx1, Sy1
-  REAL two, zero
-  INTEGER igo
   !***BEGIN PROLOGUE  SROTMG
   !***PURPOSE  Construct a modified Givens transformation.
   !***LIBRARY   SLATEC (BLAS)
@@ -61,6 +57,10 @@ SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
   !   920316  Prologue corrected.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SROTMG
+  REAL gam, gamsq, one, rgamsq, Sd1, Sd2, sflag, sh11, sh12, sh21, &
+    sh22, sp1, sp2, Sparam, sq1, sq2, stemp, su, Sx1, Sy1
+  REAL two, zero
+  INTEGER igo
   DIMENSION Sparam(5)
   SAVE zero, one, two, gam, gamsq, rgamsq
   DATA zero, one, two/0.0E0, 1.0E0, 2.0E0/

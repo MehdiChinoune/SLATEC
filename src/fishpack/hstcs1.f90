@@ -2,10 +2,6 @@
 SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierr1,Am,Bm,Cm,An,Bn,Cn,Snth,Rsq,Wrk)
   IMPLICIT NONE
-  REAL A, a1, a2, a3, Am, An, B, Bda, Bdb, Bdc, Bdd, Bm, Bn, &
-    C, Cm, Cn, D, dr, dth, dthsq
-  REAL Elmbda, F, Pertrb, Rsq, Snth, Wrk, x, y
-  INTEGER i, Idimf, Ierr1, Intl, isw, j, M, Mbdcnd, N, nb, Nbdcnd
   !***BEGIN PROLOGUE  HSTCS1
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to HSTCSP
@@ -20,6 +16,10 @@ SUBROUTINE HSTCS1(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  HSTCS1
+  REAL A, a1, a2, a3, Am, An, B, Bda, Bdb, Bdc, Bdd, Bm, Bn, &
+    C, Cm, Cn, D, dr, dth, dthsq
+  REAL Elmbda, F, Pertrb, Rsq, Snth, Wrk, x, y
+  INTEGER i, Idimf, Ierr1, Intl, isw, j, M, Mbdcnd, N, nb, Nbdcnd
   DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), F(Idimf,*), Am(*), Bm(*), &
     Cm(*), An(*), Bn(*), Cn(*), Snth(*), Rsq(*), Wrk(*)
   !***FIRST EXECUTABLE STATEMENT  HSTCS1

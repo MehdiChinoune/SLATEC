@@ -1,9 +1,6 @@
 !DECK SROTM
 SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, kx, ky, N, nsteps
-  REAL sflag, sh11, sh12, sh21, sh22, Sparam, Sx, Sy, two, w, z, &
-    zero
   !***BEGIN PROLOGUE  SROTM
   !***PURPOSE  Apply a modified Givens transformation.
   !***LIBRARY   SLATEC (BLAS)
@@ -61,6 +58,8 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SROTM
+  INTEGER i, Incx, Incy, kx, ky, N, nsteps
+  REAL sflag, sh11, sh12, sh21, sh22, Sparam, Sx, Sy, two, w, z, zero
   DIMENSION Sx(*), Sy(*), Sparam(5)
   SAVE zero, two
   DATA zero, two/0.0E0, 2.0E0/

@@ -273,9 +273,9 @@ CONTAINS
     !***END PROLOGUE  DBOCQX
     IMPLICIT NONE
     REAL(8) :: D1MACH, DNRM2, rnorm, rnormc, sr
-    INTEGER i, ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw ,&
+    INTEGER i, ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
-    REAL(8) :: d(6,5), w(11,11), bl(5,2), bu(5,2), x(30), rw(55) ,&
+    REAL(8) :: d(6,5), w(11,11), bl(5,2), bu(5,2), x(30), rw(55), &
       xtrue(9)
     REAL(8) :: c(5,5)
     REAL(8) :: bl1(10), bu1(10)
@@ -283,21 +283,21 @@ CONTAINS
     REAL(8) :: rhs(6,2)
     CHARACTER(4) :: msg
     !
-    DATA ((c(i,j),i=1,5),j=1,5)/1.D0, 10.D0, 4.D0, 8.D0, 1.D0, 1.D0 ,&
-      10.D0, 2.D0, -1.D0, 1.D0, 1.D0, -3.D0, -3.D0, 2.D0, 1.D0 ,&
-      1.D0, 5.D0, 5.D0, 5.D0, 1.D0, 1.D0, 4.D0, -1.D0, -3.D0 ,&
+    DATA ((c(i,j),i=1,5),j=1,5)/1.D0, 10.D0, 4.D0, 8.D0, 1.D0, 1.D0, &
+      10.D0, 2.D0, -1.D0, 1.D0, 1.D0, -3.D0, -3.D0, 2.D0, 1.D0, &
+      1.D0, 5.D0, 5.D0, 5.D0, 1.D0, 1.D0, 4.D0, -1.D0, -3.D0, &
       1.D0/
-    DATA ((d(i,j),i=1,6),j=1,5)/ - 74.D0, 14.D0, 66.D0, -12.D0, 3.D0 ,&
-      4.D0, 80.D0, -69.D0, -72.D0, 66.D0, 8.D0, -12.D0, 18.D0 ,&
-      21.D0, -5.D0, -30.D0, -7.D0, 4.D0, -11.D0, 28.D0, 7.D0 ,&
+    DATA ((d(i,j),i=1,6),j=1,5)/ - 74.D0, 14.D0, 66.D0, -12.D0, 3.D0, &
+      4.D0, 80.D0, -69.D0, -72.D0, 66.D0, 8.D0, -12.D0, 18.D0, &
+      21.D0, -5.D0, -30.D0, -7.D0, 4.D0, -11.D0, 28.D0, 7.D0, &
       -23.D0, -4.D0, 4.D0, -4.D0, 0.D0, 1.D0, 3.D0, 1.D0, 0.D0/
-    DATA ((bl(i,j),i=1,5),j=1,2)/1.D0, 0.D0, -1.D0, 1.D0, -4.D0, -1.D0 ,&
+    DATA ((bl(i,j),i=1,5),j=1,2)/1.D0, 0.D0, -1.D0, 1.D0, -4.D0, -1.D0, &
       0.D0, -3.D0, 1.D0, -6.D0/
-    DATA ((bu(i,j),i=1,5),j=1,2)/3.D0, 2.D0, 1.D0, 3.D0, -2.D0, 3.D0 ,&
+    DATA ((bu(i,j),i=1,5),j=1,2)/3.D0, 2.D0, 1.D0, 3.D0, -2.D0, 3.D0, &
       4.D0, 1.D0, 5.D0, -2.D0/
-    DATA ((rhs(i,j),i=1,6),j=1,2)/51.D0, -61.D0, -56.D0, 69.D0, 10.D0 ,&
+    DATA ((rhs(i,j),i=1,6),j=1,2)/51.D0, -61.D0, -56.D0, 69.D0, 10.D0, &
       -12.D0, -5.D0, -9.D0, 708.D0, 4165.D0, -13266.D0, 8409.D0/
-    DATA (xtrue(j),j=1,9)/1.D0, 2.D0, -1.D0, 3.D0, -4.D0, 1.D0, 32.D0 ,&
+    DATA (xtrue(j),j=1,9)/1.D0, 2.D0, -1.D0, 3.D0, -4.D0, 1.D0, 32.D0, &
       30.D0, 31.D0/
     !***FIRST EXECUTABLE STATEMENT  DBOCQX
     mdw = 11
@@ -417,7 +417,6 @@ END MODULE TEST38_MOD
 PROGRAM TEST38
   USE TEST38_MOD
   IMPLICIT NONE
-  INTEGER I1MACH
   !***BEGIN PROLOGUE  TEST38
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC
@@ -457,6 +456,7 @@ PROGRAM TEST38
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
   !***END PROLOGUE  TEST38
+  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST38
   lun = I1MACH(2)

@@ -1,7 +1,6 @@
 !DECK DFAC
 REAL(8) FUNCTION DFAC(N)
   IMPLICIT NONE
-  INTEGER N, nmax
   !***BEGIN PROLOGUE  DFAC
   !***PURPOSE  Compute the factorial function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -23,6 +22,7 @@ REAL(8) FUNCTION DFAC(N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DFAC
+  INTEGER N, nmax
   REAL(8) :: facn(31), sq2pil, x, xmax, xmin, D9LGMC
   SAVE facn, sq2pil, nmax
   DATA facn(1)/ + .100000000000000000000000000000000D+1/

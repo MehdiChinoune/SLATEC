@@ -1,5 +1,6 @@
 !DECK DFSPVD
 SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
+  IMPLICIT NONE
   !***BEGIN PROLOGUE  DFSPVD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DFC
@@ -25,7 +26,6 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DFSPVD
-  IMPLICIT NONE
   REAL(8) :: a, diff, fkmd, T, v, Vnikx, X
   INTEGER i, ideriv, idervm, Ileft, ipkmd, j, jlow, jm1, K, kmd, &
     l, m, Nderiv

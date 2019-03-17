@@ -1,7 +1,6 @@
 !DECK DEXPRL
 REAL(8) FUNCTION DEXPRL(X)
   IMPLICIT NONE
-  INTEGER i, nterms
   !***BEGIN PROLOGUE  DEXPRL
   !***PURPOSE  Calculate the relative error exponential (EXP(X)-1)/X.
   !***LIBRARY   SLATEC (FNLIB)
@@ -27,6 +26,7 @@ REAL(8) FUNCTION DEXPRL(X)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DEXPRL
+  INTEGER i, nterms
   REAL(8) :: X, absx, alneps, xbnd, xln, xn, D1MACH
   LOGICAL first
   SAVE nterms, xbnd, first

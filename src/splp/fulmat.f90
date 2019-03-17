@@ -1,7 +1,6 @@
 !DECK FULMAT
 SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   IMPLICIT NONE
-  INTEGER I, Indcat, J, key, level, lp, nerr, next
   !***BEGIN PROLOGUE  FULMAT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -35,6 +34,7 @@ SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  FULMAT
+  INTEGER I, Indcat, J, key, level, lp, nerr, next
   REAL Aij, zero, Dattrv(*), Prgopt(*)
   INTEGER Iflag(10)
   SAVE zero

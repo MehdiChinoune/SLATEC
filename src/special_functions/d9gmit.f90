@@ -1,7 +1,6 @@
 !DECK D9GMIT
 REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam,Alx)
   IMPLICIT NONE
-  INTEGER k, m, ma
   !***BEGIN PROLOGUE  D9GMIT
   !***SUBSIDIARY
   !***PURPOSE  Compute Tricomi's incomplete Gamma function for small
@@ -27,6 +26,7 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9GMIT
+  INTEGER k, m, ma
   REAL(8) :: A, X, Algap1, Sgngam, Alx, ae, aeps, algs, alg2, &
     bot, eps, fk, s, sgng2, t, te, D1MACH, DLNGAM
   LOGICAL first

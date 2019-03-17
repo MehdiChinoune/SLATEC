@@ -1,7 +1,6 @@
 !DECK CATAN2
 COMPLEX FUNCTION CATAN2(Csn,Ccs)
   IMPLICIT NONE
-  REAL pi
   !***BEGIN PROLOGUE  CATAN2
   !***PURPOSE  Compute the complex arc tangent in the proper quadrant.
   !***LIBRARY   SLATEC (FNLIB)
@@ -29,6 +28,7 @@ COMPLEX FUNCTION CATAN2(Csn,Ccs)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  CATAN2
+  REAL pi
   COMPLEX Csn, Ccs, CATAN
   SAVE pi
   DATA pi/3.14159265358979323846E0/

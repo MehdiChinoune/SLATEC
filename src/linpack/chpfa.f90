@@ -84,9 +84,9 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
   !
   COMPLEX ak, akm1, bk, bkm1, denom, mulk, mulkm1, t
   REAL absakk, alpha, colmax, rowmax
-  INTEGER ICAMAX, ij, ijj, ik, ikm1, im, imax, imaxp1, imim, imj ,&
+  INTEGER ICAMAX, ij, ijj, ik, ikm1, im, imax, imaxp1, imim, imj, &
     imk
-  INTEGER j, jj, jk, jkm1, jmax, jmim, k, kk, km1, km1k, km1km1 ,&
+  INTEGER j, jj, jk, jkm1, jmax, jmim, k, kk, km1, km1k, km1km1, &
     km2, kstep
   LOGICAL swap
   REAL, EXTERNAL :: CABS1

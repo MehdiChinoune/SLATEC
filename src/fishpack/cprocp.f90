@@ -1,9 +1,6 @@
 !DECK CPROCP
 SUBROUTINE CPROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,Yy)
   IMPLICIT NONE
-  REAL Aa, Bm1, Bm2, rt, Yy
-  INTEGER ia, id, iflg, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, &
-    Nm2
   !***BEGIN PROLOGUE  CPROCP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBLKTR
@@ -33,9 +30,9 @@ SUBROUTINE CPROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,Yy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CPROCP
-  !
-  COMPLEX Y, D, U, v, den, bh, ym, am, y1, y2, yh, Bd, crt, X, &
-    A, B, C
+  REAL Aa, Bm1, Bm2, rt, Yy
+  INTEGER ia, id, iflg, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, Nm2
+  COMPLEX Y, D, U, v, den, bh, ym, am, y1, y2, yh, Bd, crt, X, A, B, C
   DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), U(*), Bd(*), Bm1(*)&
     , Bm2(*), Aa(*), Yy(*)
   !***FIRST EXECUTABLE STATEMENT  CPROCP

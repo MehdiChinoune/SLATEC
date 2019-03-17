@@ -1,6 +1,7 @@
 !DECK DLLSIA
 SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
     W,Lw,Iwork,Liw,Info)
+  IMPLICIT NONE
   !***BEGIN PROLOGUE  DLLSIA
   !***PURPOSE  Solve linear least squares problems by performing a QR
   !            factorization of the input matrix using Householder
@@ -160,7 +161,6 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DLLSIA
-  IMPLICIT NONE
   REAL(8) :: A, Ae, B, eps, Re, Rnorm, W
   INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
     Mode, N, n1, n2, n3, n4, n5, Nb, Np

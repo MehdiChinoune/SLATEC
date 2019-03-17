@@ -1,7 +1,6 @@
 !DECK CLOG10
 COMPLEX FUNCTION CLOG10(Z)
   IMPLICIT NONE
-  REAL aloge
   !***BEGIN PROLOGUE  CLOG10
   !***PURPOSE  Compute the principal value of the complex base 10
   !            logarithm.
@@ -23,6 +22,7 @@ COMPLEX FUNCTION CLOG10(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CLOG10
+  REAL aloge
   COMPLEX Z
   SAVE aloge
   DATA aloge/0.43429448190325182765E0/

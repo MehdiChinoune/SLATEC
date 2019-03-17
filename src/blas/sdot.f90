@@ -1,7 +1,6 @@
 !DECK SDOT
 REAL FUNCTION SDOT(N,Sx,Incx,Sy,Incy)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   !***BEGIN PROLOGUE  SDOT
   !***PURPOSE  Compute the inner product of two vectors.
   !***LIBRARY   SLATEC (BLAS)
@@ -45,6 +44,7 @@ REAL FUNCTION SDOT(N,Sx,Incx,Sy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SDOT
+  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   REAL Sx(*), Sy(*)
   !***FIRST EXECUTABLE STATEMENT  SDOT
   SDOT = 0.0E0

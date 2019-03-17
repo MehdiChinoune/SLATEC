@@ -143,7 +143,7 @@ SUBROUTINE CGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   PARAMETER (ZERO=(0.0E+0,0.0E+0))
   !     .. Local Scalars ..
   COMPLEX temp
-  INTEGER i, info, ix, iy, j, jx, jy, k, kup1, kx, ky, lenx ,&
+  INTEGER i, info, ix, iy, j, jx, jy, k, kup1, kx, ky, lenx, &
     leny
   LOGICAL noconj
   !     .. External Functions ..

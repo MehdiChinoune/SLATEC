@@ -1,5 +1,6 @@
 !DECK DU11LS
 SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
+  IMPLICIT NONE
   !***BEGIN PROLOGUE  DU11LS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DLLSIA
@@ -28,7 +29,6 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DU11LS
-  IMPLICIT NONE
   REAL(8) :: A, bb, Db, Eb, H, r2, rmin, sum, t, temp, tn, &
     tt, Ub, W
   INTEGER i, IDAMAX, ii, im1, imin, is, j, jm1, jmax, jp1, kk, &

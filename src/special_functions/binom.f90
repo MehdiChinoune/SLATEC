@@ -1,9 +1,6 @@
 !DECK BINOM
-FUNCTION BINOM(N,M)
+REAL FUNCTION BINOM(N,M)
   IMPLICIT NONE
-  REAL ALNREL, bilnmx, BINOM, corr, fintmx, R1MACH, R9LGMC, sq2pil, &
-    xk, xn, xnk
-  INTEGER i, k, M, N
   !***BEGIN PROLOGUE  BINOM
   !***PURPOSE  Compute the binomial coefficients.
   !***LIBRARY   SLATEC (FNLIB)
@@ -26,6 +23,8 @@ FUNCTION BINOM(N,M)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BINOM
+  REAL ALNREL, bilnmx, corr, fintmx, R1MACH, R9LGMC, sq2pil, xk, xn, xnk
+  INTEGER i, k, M, N
   LOGICAL first
   SAVE sq2pil, bilnmx, fintmx, first
   DATA sq2pil/0.91893853320467274E0/
@@ -69,8 +68,7 @@ FUNCTION BINOM(N,M)
     + 1.0 - sq2pil + corr
   !
   IF ( BINOM>bilnmx ) CALL XERMSG('SLATEC','BINOM',&
-    'RESULT OVERFLOWS BECAUSE N AND/OR M TOO BIG'&
-    ,3,2)
+    'RESULT OVERFLOWS BECAUSE N AND/OR M TOO BIG',3,2)
   !
   BINOM = EXP(BINOM)
   IF ( BINOM<fintmx ) BINOM = AINT(BINOM+0.5)

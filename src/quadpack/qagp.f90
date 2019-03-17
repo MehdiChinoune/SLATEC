@@ -2,7 +2,6 @@
 SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     Leniw,Lenw,Last,Iwork,Work)
   IMPLICIT NONE
-  INTEGER l4, Last
   !***BEGIN PROLOGUE  QAGP
   !***PURPOSE  The routine calculates an approximation result to a given
   !            definite integral I = Integral of F over (A,B),
@@ -197,7 +196,7 @@ SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  QAGP
-  !
+  INTEGER l4, Last
   REAL A, Abserr, B, Epsabs, Epsrel, F, Points, Result, Work
   INTEGER Ier, Iwork, Leniw, Lenw, limit, lvl, l1, l2, l3, Neval, &
     Npts2

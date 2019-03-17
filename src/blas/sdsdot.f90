@@ -1,7 +1,6 @@
 !DECK SDSDOT
 REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, kx, ky, N, ns
   !***BEGIN PROLOGUE  SDSDOT
   !***PURPOSE  Compute the inner product of two vectors with extended
   !            precision accumulation.
@@ -48,6 +47,7 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SDSDOT
+  INTEGER i, Incx, Incy, kx, ky, N, ns
   REAL Sx(*), Sy(*), Sb
   REAL(8) :: dsdot
   !***FIRST EXECUTABLE STATEMENT  SDSDOT

@@ -1,9 +1,6 @@
 !DECK CATAN
 COMPLEX FUNCTION CATAN(Z)
   IMPLICIT NONE
-  INTEGER i, nterms
-  REAL pi2, r, R1MACH, r2, rmax, rmin, sqeps, twoi, x, xans, y, &
-    yans
   !***BEGIN PROLOGUE  CATAN
   !***PURPOSE  Compute the complex arc tangent.
   !***LIBRARY   SLATEC (FNLIB)
@@ -28,6 +25,8 @@ COMPLEX FUNCTION CATAN(Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  CATAN
+  INTEGER i, nterms
+  REAL pi2, r, R1MACH, r2, rmax, rmin, sqeps, twoi, x, xans, y, yans
   COMPLEX Z, z2
   LOGICAL first
   SAVE pi2, nterms, sqeps, rmin, rmax, first

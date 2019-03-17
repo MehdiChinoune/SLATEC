@@ -1,8 +1,6 @@
 !DECK R9LGMC
-FUNCTION R9LGMC(X)
+REAL FUNCTION R9LGMC(X)
   IMPLICIT NONE
-  REAL algmcs, CSEVL, R1MACH, R9LGMC, X, xbig, xmax
-  INTEGER INITS, nalgm
   !***BEGIN PROLOGUE  R9LGMC
   !***SUBSIDIARY
   !***PURPOSE  Compute the log Gamma correction factor so that
@@ -35,6 +33,8 @@ FUNCTION R9LGMC(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  R9LGMC
+  REAL algmcs, CSEVL, R1MACH, X, xbig, xmax
+  INTEGER INITS, nalgm
   DIMENSION algmcs(6)
   LOGICAL first
   SAVE algmcs, nalgm, xbig, xmax, first

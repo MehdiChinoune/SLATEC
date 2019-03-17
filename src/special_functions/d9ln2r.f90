@@ -1,8 +1,6 @@
 !DECK D9LN2R
 REAL(8) FUNCTION D9LN2R(X)
   IMPLICIT NONE
-  REAL eps, sqeps
-  INTEGER INITDS, ntln21, ntln22
   !***BEGIN PROLOGUE  D9LN2R
   !***SUBSIDIARY
   !***PURPOSE  Evaluate LOG(1+X) from second order relative accuracy so
@@ -40,6 +38,8 @@ REAL(8) FUNCTION D9LN2R(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9LN2R
+  REAL eps, sqeps
+  INTEGER INITDS, ntln21, ntln22
   REAL(8) :: X, xbig, txbig, xmax, txmax, xmin, ln21cs(50), &
     ln22cs(37), DCSEVL, D1MACH
   LOGICAL first

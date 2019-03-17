@@ -1,7 +1,6 @@
 !DECK BFQAD
 SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   IMPLICIT NONE
-  INTEGER inbv
   !***BEGIN PROLOGUE  BFQAD
   !***PURPOSE  Compute the integral of a product of a function and a
   !            derivative of a B-spline.
@@ -66,12 +65,9 @@ SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BFQAD
-  !
-  !
-  INTEGER Id, Ierr, iflg, ilo, il1, il2, K, left, mflag, N, npk, &
-    np1
-  REAL a, aa, ans, b, bb, Bcoef, q, Quad, T, ta, tb, Tol, Work, &
-    wtol, X1, X2
+  INTEGER inbv
+  INTEGER Id, Ierr, iflg, ilo, il1, il2, K, left, mflag, N, npk, np1
+  REAL a, aa, ans, b, bb, Bcoef, q, Quad, T, ta, tb, Tol, Work, wtol, X1, X2
   REAL R1MACH, F
   DIMENSION T(*), Bcoef(*), Work(*)
   EXTERNAL F

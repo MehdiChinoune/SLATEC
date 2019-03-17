@@ -1,7 +1,6 @@
 !DECK RC
 REAL FUNCTION RC(X,Y,Ier)
   IMPLICIT NONE
-  REAL R1MACH
   !***BEGIN PROLOGUE  RC
   !***PURPOSE  Calculate an approximation to
   !             RC(X,Y) = Integral from zero to infinity of
@@ -266,6 +265,7 @@ REAL FUNCTION RC(X,Y,Ier)
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RC
+  REAL R1MACH
   CHARACTER(16) :: xern3, xern4, xern5
   INTEGER Ier
   REAL c1, c2, errtol, lamda, lolim

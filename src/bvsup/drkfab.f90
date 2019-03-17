@@ -37,8 +37,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     KOP, kopp, L1, L2, LLLint, LOTjp, MNSwot, Mxnon, MXNond, &
     Ncomp, NCOmpd, NDIsk, NEEdiw, NEEdw, NEQ, NEQivp, Nfc, &
     Nfcc, NFCcd, NFCd, nfcp1, NIC, Niv, non, NOPg, NPS, &
-    NSWot, NTApe, Ntp, NTPd, NUMort, Nxpts, NXPtsd, Ip(Nfcc,*)&
-    , Iwork(*)
+    NSWot, NTApe, Ntp, NTPd, NUMort, Nxpts, NXPtsd, Ip(Nfcc,*), Iwork(*)
   REAL(8) :: AE, C, G(*), P(Ntp,*), PWCnd, PX, RE, S(*), &
     Stowa(*), TND, TOL, U(Ncomp,Nfc,*), V(Ncomp,*), &
     W(Nfcc,*), Work(*), X, XBEg, XENd, XOP, XOT, &

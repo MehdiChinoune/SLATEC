@@ -1,8 +1,6 @@
 !DECK D9KNUS
 SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   IMPLICIT NONE
-  REAL an, bn, eta
-  INTEGER i, ii, INITDS, inu, Iswtch, n, ntc0k, nterms, ntznu1
   !***BEGIN PROLOGUE  D9KNUS
   !***SUBSIDIARY
   !***PURPOSE  Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*
@@ -42,6 +40,8 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  D9KNUS
+  REAL an, bn, eta
+  INTEGER i, ii, INITDS, inu, Iswtch, n, ntc0k, nterms, ntznu1
   REAL(8) :: Xnu, X, Bknu, Bknu1, alpha(32), beta(32), a(32), &
     c0kcs(29), znu1cs(20), alnz, aln2, a0, bknud, &
     bknu0, b0, c0, euler, expx, p1, p2, p3, qq, &

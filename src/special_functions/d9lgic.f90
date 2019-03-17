@@ -1,7 +1,6 @@
 !DECK D9LGIC
 REAL(8) FUNCTION D9LGIC(A,X,Alx)
   IMPLICIT NONE
-  INTEGER k
   !***BEGIN PROLOGUE  D9LGIC
   !***SUBSIDIARY
   !***PURPOSE  Compute the log complementary incomplete Gamma function
@@ -27,8 +26,8 @@ REAL(8) FUNCTION D9LGIC(A,X,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9LGIC
-  REAL(8) :: A, X, Alx, eps, fk, p, r, s, t, xma, xpa, &
-    D1MACH
+  INTEGER k
+  REAL(8) :: A, X, Alx, eps, fk, p, r, s, t, xma, xpa, D1MACH
   SAVE eps
   DATA eps/0.D0/
   !***FIRST EXECUTABLE STATEMENT  D9LGIC

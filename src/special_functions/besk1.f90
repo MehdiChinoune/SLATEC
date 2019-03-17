@@ -1,9 +1,6 @@
 !DECK BESK1
-FUNCTION BESK1(X)
+REAL FUNCTION BESK1(X)
   IMPLICIT NONE
-  REAL BESI1, BESK1, BESK1E, bk1cs, CSEVL, R1MACH, X, xmax, xmaxt, &
-    xmin, xsml, y
-  INTEGER INITS, ntk1
   !***BEGIN PROLOGUE  BESK1
   !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
   !            third kind of order one.
@@ -36,6 +33,9 @@ FUNCTION BESK1(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BESK1
+  REAL BESI1, BESK1E, bk1cs, CSEVL, R1MACH, X, xmax, xmaxt, &
+    xmin, xsml, y
+  INTEGER INITS, ntk1
   DIMENSION bk1cs(11)
   LOGICAL first
   SAVE bk1cs, ntk1, xmin, xsml, xmax, first

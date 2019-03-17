@@ -171,8 +171,7 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     nrmax, numrl2
   LOGICAL extrap, noext
   !
-  DIMENSION Alist(*), Blist(*), Elist(*), Iord(*), res3la(3), Rlist(*)&
-    , rlist2(52)
+  DIMENSION Alist(*), Blist(*), Elist(*), Iord(*), res3la(3), Rlist(*), rlist2(52)
   !
   EXTERNAL F
   !

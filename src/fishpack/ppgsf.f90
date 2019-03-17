@@ -1,8 +1,6 @@
 !DECK PPGSF
-FUNCTION PPGSF(X,Iz,C,A,Bh)
+REAL FUNCTION PPGSF(X,Iz,C,A,Bh)
   IMPLICIT NONE
-  REAL A, Bh, C, PPGSF, sum, X
-  INTEGER Iz, j
   !***BEGIN PROLOGUE  PPGSF
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBLKTR
@@ -16,6 +14,8 @@ FUNCTION PPGSF(X,Iz,C,A,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  PPGSF
+  REAL A, Bh, C, sum, X
+  INTEGER Iz, j
   DIMENSION A(*), C(*), Bh(*)
   !***FIRST EXECUTABLE STATEMENT  PPGSF
   sum = 0.

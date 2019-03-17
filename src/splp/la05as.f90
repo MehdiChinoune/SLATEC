@@ -1,12 +1,6 @@
 !DECK LA05AS
 SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   IMPLICIT NONE
-  REAL eps, R1MACH
-  INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp ,&
-    k, k1, k2, kc, kcost, kj, kk, kl
-  INTEGER klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, LCOl ,&
-    LENl, LENu, LP, LROw, mcp, N, nc, NCP
-  INTEGER Nz, nzc
   !***BEGIN PROLOGUE  LA05AS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -56,6 +50,12 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !***END PROLOGUE  LA05AS
+  REAL eps, R1MACH
+  INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, &
+    k, k1, k2, kc, kcost, kj, kk, kl
+  INTEGER klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, LCOl, &
+    LENl, LENu, LP, LROw, mcp, N, nc, NCP
+  INTEGER Nz, nzc
   INTEGER Ip(N,2)
   INTEGER Ind(Ia,2), Iw(N,8)
   REAL A(*), amax, au, am, G, U, SMAll, W(*)
@@ -510,8 +510,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !
   400 CONTINUE
   IF ( LP>0 ) CALL XERMSG('SLATEC','LA05AS',&
-    'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.'&
-    ,-7,1)
+    'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.',-7,1)
   G = -7.
   RETURN
   !

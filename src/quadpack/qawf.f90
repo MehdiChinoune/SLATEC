@@ -2,7 +2,6 @@
 SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
     Lst,Leniw,Maxp1,Lenw,Iwork,Work)
   IMPLICIT NONE
-  INTEGER Iwork, Lenw, ll2
   !***BEGIN PROLOGUE  QAWF
   !***PURPOSE  The routine calculates an approximation result to a given
   !            Fourier integral
@@ -203,7 +202,7 @@ SUBROUTINE QAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  QAWF
-  !
+  INTEGER Iwork, Lenw, ll2
   REAL A, Abserr, Epsabs, F, Omega, Result, Work
   INTEGER Ier, Integr, Leniw, limit, Limlst, lvl, Lst, l1, l2, l3, &
     l4, l5, l6, Maxp1, Neval

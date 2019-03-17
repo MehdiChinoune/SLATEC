@@ -1,8 +1,6 @@
 !DECK COST
 SUBROUTINE COST(N,X,Wsave)
   IMPLICIT NONE
-  REAL c1, t1, t2, tx2, Wsave, X, x1h, x1p3, xi, xim2
-  INTEGER i, k, kc, modn, N, nm1, np1, ns2
   !***BEGIN PROLOGUE  COST
   !***PURPOSE  Compute the cosine transform of a real, even sequence.
   !***LIBRARY   SLATEC (FFTPACK)
@@ -71,6 +69,8 @@ SUBROUTINE COST(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  COST
+  REAL c1, t1, t2, tx2, Wsave, X, x1h, x1p3, xi, xim2
+  INTEGER i, k, kc, modn, N, nm1, np1, ns2
   DIMENSION X(*), Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  COST
   nm1 = N - 1

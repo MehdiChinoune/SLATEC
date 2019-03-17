@@ -1,7 +1,6 @@
 !DECK DBESJ0
 REAL(8) FUNCTION DBESJ0(X)
   IMPLICIT NONE
-  INTEGER INITDS, ntj0
   !***BEGIN PROLOGUE  DBESJ0
   !***PURPOSE  Compute the Bessel function of the first kind of order
   !            zero.
@@ -30,6 +29,7 @@ REAL(8) FUNCTION DBESJ0(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DBESJ0
+  INTEGER INITDS, ntj0
   REAL(8) :: X, bj0cs(19), ampl, theta, xsml, y, D1MACH, DCSEVL
   LOGICAL first
   SAVE bj0cs, ntj0, xsml, first

@@ -1,12 +1,6 @@
 !DECK R9KNUS
 SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   IMPLICIT NONE
-  REAL a, a0, aln2, alnbig, alneps, alnsml, alnz, alpha, an, b0, &
-    beta, Bknu, bknu0, Bknu1, bknud, bn, c0, c0kcs, CSEVL, euler
-  REAL expx, GAMMA, p1, p2, p3, qq, R1MACH, result, sqpi2, sqrtx, &
-    v, vlnz, X, x2n, x2tov, xi, xmu, Xnu, xnusml, xsml
-  REAL z, znu1cs, ztov
-  INTEGER i, ii, INITS, inu, Iswtch, n, ntc0k, nterms, ntznu1
   !***BEGIN PROLOGUE  R9KNUS
   !***SUBSIDIARY
   !***PURPOSE  Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*
@@ -45,6 +39,12 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  R9KNUS
+  REAL a, a0, aln2, alnbig, alneps, alnsml, alnz, alpha, an, b0, &
+    beta, Bknu, bknu0, Bknu1, bknud, bn, c0, c0kcs, CSEVL, euler
+  REAL expx, GAMMA, p1, p2, p3, qq, R1MACH, result, sqpi2, sqrtx, &
+    v, vlnz, X, x2n, x2tov, xi, xmu, Xnu, xnusml, xsml
+  REAL z, znu1cs, ztov
+  INTEGER i, ii, INITS, inu, Iswtch, n, ntc0k, nterms, ntznu1
   DIMENSION alpha(15), beta(15), a(15), c0kcs(16), znu1cs(12)
   LOGICAL first
   EXTERNAL GAMMA

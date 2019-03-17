@@ -5,9 +5,9 @@ CONTAINS
   !DECK FCNQX2
   SUBROUTINE FCNQX2(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER i, I1MACH, ic1, ic2, id, ierr, ierror, ip, ipn, iq, ir ,&
+    INTEGER i, I1MACH, ic1, ic2, id, ierr, ierror, ip, ipn, iq, ir, &
       irad, isig, isum, ix11, ix12, ix13, ix21, ix22, ix23
-    INTEGER mu, mu1, mu2, n, nbits, ndec, nerr, nradpl, nu1, nudiff ,&
+    INTEGER mu, mu1, mu2, n, nbits, ndec, nerr, nradpl, nu1, nudiff, &
       NUMXER
     !***BEGIN PROLOGUE  FCNQX2
     !***SUBSIDIARY
@@ -33,7 +33,7 @@ CONTAINS
     !
     CHARACTER(34) :: fmt, fmtf, fmti
     INTEGER Lun, Kprint, Ipass
-    DIMENSION p(10), q(10), r(10), c1(10), c2(10), ip(10), iq(10) ,&
+    DIMENSION p(10), q(10), r(10), c1(10), c2(10), ip(10), iq(10), &
       ir(10)
     DIMENSION ic1(10), ic2(10), pn(10), ipn(10)
     REAL(8) :: p, q, r, c1, c2, pn
@@ -548,7 +548,6 @@ END MODULE TEST12_MOD
 PROGRAM TEST12
   USE TEST12_MOD
   IMPLICIT NONE
-  INTEGER I1MACH
   !***BEGIN PROLOGUE  TEST12
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC
@@ -585,6 +584,7 @@ PROGRAM TEST12
   !***REVISION HISTORY  (YYMMDD)
   !   901204  DATE WRITTEN
   !***END PROLOGUE  TEST12
+  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST12
   lun = I1MACH(2)

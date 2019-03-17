@@ -5,12 +5,6 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     Basmat,Csc,Wr,Rprim,Ww,Bu,Bl,Rhs,Erd,Erp,Rz,Rg,Colnrm,&
     Costs,Primal,Duals,Singlr,Redbas,Zerolv,Stpedg)
   IMPLICIT NONE
-  REAL cnorm
-  INTEGER i, ibas, Ienter, ihi, il1, Ileave, ilow, Info, Iopt, &
-    ipage, iplace, IPLOC, iu1, j, Jstrt, k, key, Lbm, Lmx, &
-    lpg
-  INTEGER Mrelas, n20002, n20018, n20121, nerr, nnegrc, Npp, npr001, &
-    npr003, Nredc, Nvars
   !***BEGIN PROLOGUE  SPLPMU
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -47,6 +41,11 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  SPLPMU
+  REAL cnorm
+  INTEGER i, ibas, Ienter, ihi, il1, Ileave, ilow, Info, Iopt, &
+    ipage, iplace, IPLOC, iu1, j, Jstrt, k, key, Lbm, Lmx, lpg
+  INTEGER Mrelas, n20002, n20018, n20121, nerr, nnegrc, Npp, npr001, &
+    npr003, Nredc, Nvars
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), &
     Ibb(*)
   REAL aij, alpha, Anorm, Costsc, Erdnrm, Dulnrm, Eps, gamma, Gg, &
@@ -184,8 +183,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     ELSE
       nerr = 26
       CALL XERMSG('SLATEC','SPLPMU',&
-        'IN SPLP, MOVED TO A SINGULAR POINT.  THIS SHOULD NOT HAPPEN.'&
-        ,nerr,Iopt)
+        'IN SPLP, MOVED TO A SINGULAR POINT.  THIS SHOULD NOT HAPPEN.',nerr,Iopt)
       Info = -nerr
       RETURN
     ENDIF

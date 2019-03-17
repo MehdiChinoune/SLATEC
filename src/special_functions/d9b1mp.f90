@@ -1,8 +1,6 @@
 !DECK D9B1MP
 SUBROUTINE D9B1MP(X,Ampl,Theta)
   IMPLICIT NONE
-  REAL eta
-  INTEGER INITDS, nbm1, nbm12, nbt12, nbth1
   !***BEGIN PROLOGUE  D9B1MP
   !***SUBSIDIARY
   !***PURPOSE  Evaluate the modulus and phase for the J1 and Y1 Bessel
@@ -53,6 +51,8 @@ SUBROUTINE D9B1MP(X,Ampl,Theta)
   !   920618  Removed space from variable name and code restructured to
   !           use IF-THEN-ELSE.  (RWC, WRB)
   !***END PROLOGUE  D9B1MP
+  REAL eta
+  INTEGER INITDS, nbm1, nbm12, nbt12, nbth1
   REAL(8) :: X, Ampl, Theta, bm1cs(37), bt12cs(39), bm12cs(40), &
     bth1cs(44), xmax, pi4, z, D1MACH, DCSEVL
   LOGICAL first

@@ -2,10 +2,6 @@
 SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  REAL A, a1, a2, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, deltht, &
-    dlrsq, dlthsq, Elmbda, F, Pertrb, W
-  INTEGER i, Idimf, ierr1, Ierror, isw, iwb, iwc, iwr, j, k, lp, &
-    M, mb, Mbdcnd, N, Nbdcnd, np
   !***BEGIN PROLOGUE  HSTPLR
   !***PURPOSE  Solve the standard five-point finite difference
   !            approximation on a staggered grid to the Helmholtz equation
@@ -323,8 +319,10 @@ SUBROUTINE HSTPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  HSTPLR
-  !
-  !
+  REAL A, a1, a2, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, deltht, &
+    dlrsq, dlthsq, Elmbda, F, Pertrb, W
+  INTEGER i, Idimf, ierr1, Ierror, isw, iwb, iwc, iwr, j, k, lp, &
+    M, mb, Mbdcnd, N, Nbdcnd, np
   DIMENSION F(Idimf,*)
   DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HSTPLR

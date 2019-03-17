@@ -1,6 +1,7 @@
 !DECK DULSIA
 SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
     W,Lw,Iwork,Liw,Info)
+  IMPLICIT NONE
   !***BEGIN PROLOGUE  DULSIA
   !***PURPOSE  Solve an underdetermined linear system of equations by
   !            performing an LQ factorization of the matrix using
@@ -167,7 +168,6 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DULSIA
-  IMPLICIT NONE
   REAL(8) :: A, Ae, B, eps, Re, Rnorm, W
   INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, m1, m2, &
     m3, m4, m5, Mda, Mdb, Mode, N, Nb, Np

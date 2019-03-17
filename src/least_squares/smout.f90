@@ -1,8 +1,6 @@
 !DECK SMOUT
 SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
   IMPLICIT NONE
-  REAL A
-  INTEGER i, I1MACH, Idigit, j, k1, k2, Lda, lout, M, N, ndigit
   !***BEGIN PROLOGUE  SMOUT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to FC and SBOCLS
@@ -58,6 +56,8 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  SMOUT
+  REAL A
+  INTEGER i, I1MACH, Idigit, j, k1, k2, Lda, lout, M, N, ndigit
   DIMENSION A(Lda,*)
   CHARACTER Ifmt*(*), icol*3
   SAVE icol

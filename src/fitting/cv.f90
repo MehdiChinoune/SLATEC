@@ -1,9 +1,6 @@
 !DECK CV
 REAL FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   IMPLICIT NONE
-  REAL Bkpt, SDOT, v, W, Xval, zero
-  INTEGER i, ileft, ip, is, last, mdg, mdw, n, Nbkpt, Nconst, &
-    Ndata, Nord
   !***BEGIN PROLOGUE  CV
   !***PURPOSE  Evaluate the variance function of the curve obtained
   !            by the constrained B-spline fitting subprogram FC.
@@ -101,6 +98,8 @@ REAL FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CV
+  REAL Bkpt, SDOT, v, W, Xval, zero
+  INTEGER i, ileft, ip, is, last, mdg, mdw, n, Nbkpt, Nconst, Ndata, Nord
   DIMENSION Bkpt(Nbkpt), W(*), v(40)
   !***FIRST EXECUTABLE STATEMENT  CV
   zero = 0.

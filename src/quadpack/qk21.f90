@@ -1,7 +1,6 @@
 !DECK QK21
 SUBROUTINE QK21(F,A,B,Result,Abserr,Resabs,Resasc)
   IMPLICIT NONE
-  REAL Resasc
   !***BEGIN PROLOGUE  QK21
   !***PURPOSE  To compute I = Integral of F over (A,B), with error
   !                           estimate
@@ -61,7 +60,7 @@ SUBROUTINE QK21(F,A,B,Result,Abserr,Resabs,Resasc)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  QK21
-  !
+  REAL Resasc
   REAL A, absc, Abserr, B, centr, dhlgth, epmach, F, fc, fsum, &
     fval1, fval2, fv1, fv2, hlgth, Resabs, resg, resk, reskh, &
     Result, R1MACH, uflow, wg, wgk, xgk

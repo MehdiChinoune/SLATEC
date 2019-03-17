@@ -319,10 +319,10 @@ CONTAINS
     INTRINSIC ABS, AIMAG, REAL
     REAL CABS1
     !     .. Data statements ..
-    DATA a/(2.,3.), (1.,1.), (1.,2.), (2.,0.), (1.,-1.), (0.,0.) ,&
+    DATA a/(2.,3.), (1.,1.), (1.,2.), (2.,0.), (1.,-1.), (0.,0.), &
       (0.,0.), (2.,5.), (3.,2.)/
     DATA b/(-1.,1.), (-5.,4.), (-4.,7.)/
-    DATA bxex/(.21459E-01,.209012E+01), (.261373E+01,-.162231E+01) ,&
+    DATA bxex/(.21459E-01,.209012E+01), (.261373E+01,-.162231E+01), &
       (.785407E+00,.109871E+01)/
     DATA list/'GEFS', 'GEIR'/
     !***FIRST EXECUTABLE STATEMENT  CGEQC
@@ -411,7 +411,6 @@ END MODULE TEST21_MOD
 PROGRAM TEST21
   USE TEST21_MOD
   IMPLICIT NONE
-  INTEGER I1MACH
   !***BEGIN PROLOGUE  TEST21
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC
@@ -453,6 +452,7 @@ PROGRAM TEST21
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
   !***END PROLOGUE  TEST21
+  INTEGER I1MACH
   INTEGER kprint, lin, lun, nerr, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST21
   lun = I1MACH(2)

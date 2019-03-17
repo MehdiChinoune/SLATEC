@@ -1,11 +1,6 @@
 !DECK CCMPB
 SUBROUTINE CCMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
   IMPLICIT NONE
-  REAL Ah, An, arg, B, Bh, Bn, bnorm, Cn, CNV, d1, d2, d3, EPS, &
-    R1MACH
-  INTEGER i, i2, i4, ib, Ierror, if, ifd, IK, ipl, ir, j, j1, &
-    j2, jf, js, K, kdo, l, l1, l2
-  INTEGER lh, ls, N, n2m2, nb, NCMplx, NM, nmp, NPP
   !***BEGIN PROLOGUE  CCMPB
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBLKTR
@@ -28,7 +23,10 @@ SUBROUTINE CCMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CCMPB
-  !
+  REAL Ah, An, arg, B, Bh, Bn, bnorm, Cn, CNV, d1, d2, d3, EPS, R1MACH
+  INTEGER i, i2, i4, ib, Ierror, if, ifd, IK, ipl, ir, j, j1, &
+    j2, jf, js, K, kdo, l, l1, l2
+  INTEGER lh, ls, N, n2m2, nb, NCMplx, NM, nmp, NPP
   COMPLEX :: Bc
   DIMENSION An(*), Bn(*), Cn(*), B(*), Ah(*), Bh(*), Bc(500)
   COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK

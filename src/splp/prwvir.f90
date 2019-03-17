@@ -1,7 +1,6 @@
 !DECK PRWVIR
 SUBROUTINE PRWVIR(Key,Ipage,Lpg,Sx,Ix)
   IMPLICIT NONE
-  INTEGER iaddr, Ipage, ipagef, istart, Ix, Key, Lpg
   !***BEGIN PROLOGUE  PRWVIR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -35,6 +34,7 @@ SUBROUTINE PRWVIR(Key,Ipage,Lpg,Sx,Ix)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   !***END PROLOGUE  PRWVIR
+  INTEGER iaddr, Ipage, ipagef, istart, Ix, Key, Lpg
   DIMENSION Ix(*)
   REAL Sx(*), zero, one
   LOGICAL first

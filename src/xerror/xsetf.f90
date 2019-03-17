@@ -1,7 +1,6 @@
 !DECK XSETF
 SUBROUTINE XSETF(Kontrl)
   IMPLICIT NONE
-  INTEGER J4SAVE, junk, Kontrl
   !***BEGIN PROLOGUE  XSETF
   !***PURPOSE  Set the error control flag.
   !***LIBRARY   SLATEC (XERROR)
@@ -48,6 +47,7 @@ SUBROUTINE XSETF(Kontrl)
   !   900510  Change call to XERRWV to XERMSG.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  XSETF
+  INTEGER J4SAVE, junk, Kontrl
   CHARACTER(8) :: xern1
   !***FIRST EXECUTABLE STATEMENT  XSETF
   IF ( ABS(Kontrl)>2 ) THEN

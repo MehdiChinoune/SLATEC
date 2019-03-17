@@ -1,7 +1,6 @@
 !DECK DCSEVL
 REAL(8) FUNCTION DCSEVL(X,Cs,N)
   IMPLICIT NONE
-  INTEGER i, N, ni
   !***BEGIN PROLOGUE  DCSEVL
   !***PURPOSE  Evaluate a Chebyshev series.
   !***LIBRARY   SLATEC (FNLIB)
@@ -37,6 +36,7 @@ REAL(8) FUNCTION DCSEVL(X,Cs,N)
   !           X to be slightly outside interval (-1,+1).  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DCSEVL
+  INTEGER i, N, ni
   REAL(8) :: b0, b1, b2, Cs(*), onepl, twox, X, D1MACH
   LOGICAL first
   SAVE first, onepl

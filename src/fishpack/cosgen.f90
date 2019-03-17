@@ -1,8 +1,6 @@
 !DECK COSGEN
 SUBROUTINE COSGEN(N,Ijump,Fnum,Fden,A)
   IMPLICIT NONE
-  REAL A, dum, Fden, Fnum, pi, pibyn, PIMACH, x, y
-  INTEGER i, Ijump, k, k1, k2, k3, k4, k5, N, np1
   !***BEGIN PROLOGUE  COSGEN
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to GENBUN
@@ -38,9 +36,9 @@ SUBROUTINE COSGEN(N,Ijump,Fnum,Fden,A)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  COSGEN
+  REAL A, dum, Fden, Fnum, pi, pibyn, PIMACH, x, y
+  INTEGER i, Ijump, k, k1, k2, k3, k4, k5, N, np1
   DIMENSION A(*)
-  !
-  !
   !***FIRST EXECUTABLE STATEMENT  COSGEN
   pi = PIMACH(dum)
   IF ( N/=0 ) THEN

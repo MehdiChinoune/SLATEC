@@ -1,8 +1,6 @@
 !DECK COSDG
-FUNCTION COSDG(X)
+REAL FUNCTION COSDG(X)
   IMPLICIT NONE
-  REAL COSDG, raddeg, X
-  INTEGER n
   !***BEGIN PROLOGUE  COSDG
   !***PURPOSE  Compute the cosine of an argument in degrees.
   !***LIBRARY   SLATEC (FNLIB)
@@ -24,6 +22,8 @@ FUNCTION COSDG(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  COSDG
   ! JUNE 1977 EDITION.   W. FULLERTON, C3, LOS ALAMOS SCIENTIFIC LAB.
+  REAL raddeg, X
+  INTEGER n
   SAVE raddeg
   DATA raddeg/.017453292519943296E0/
   !

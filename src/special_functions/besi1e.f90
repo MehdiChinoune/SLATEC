@@ -1,9 +1,6 @@
 !DECK BESI1E
-FUNCTION BESI1E(X)
+REAL FUNCTION BESI1E(X)
   IMPLICIT NONE
-  REAL ai12cs, ai1cs, BESI1E, bi1cs, CSEVL, R1MACH, X, xmin, xsml, &
-    y
-  INTEGER INITS, ntai1, ntai12, nti1
   !***BEGIN PROLOGUE  BESI1E
   !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order one.
@@ -49,6 +46,8 @@ FUNCTION BESI1E(X)
   !           (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  BESI1E
+  REAL ai12cs, ai1cs, bi1cs, CSEVL, R1MACH, X, xmin, xsml, y
+  INTEGER INITS, ntai1, ntai12, nti1
   DIMENSION bi1cs(11), ai1cs(21), ai12cs(22)
   LOGICAL first
   SAVE bi1cs, ai1cs, ai12cs, nti1, ntai1, ntai12, xmin, xsml, first

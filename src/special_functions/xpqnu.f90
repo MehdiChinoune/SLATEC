@@ -1,8 +1,6 @@
 !DECK XPQNU
 SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  INTEGER i, ia, Id, Ierror, if, ipq, ipq1, ipq2, Ipqa, ipsik, &
-    ipsix, ix1, ixs, j, j0, k, Mu, NBItsf
   !***BEGIN PROLOGUE  XPQNU
   !***SUBSIDIARY
   !***PURPOSE  To compute the values of Legendre functions for XLEGF.
@@ -26,8 +24,9 @@ SUBROUTINE XPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  XPQNU
-  REAL a, nu, Nu1, Nu2, pq, Pqa, XPSI, r, Theta, w, x, x1, x2, &
-    xs, y, z
+  INTEGER i, ia, Id, Ierror, if, ipq, ipq1, ipq2, Ipqa, ipsik, &
+    ipsix, ix1, ixs, j, j0, k, Mu, NBItsf
+  REAL a, nu, Nu1, Nu2, pq, Pqa, XPSI, r, Theta, w, x, x1, x2, xs, y, z
   REAL di, dmu, pq1, pq2, factmu, flok
   DIMENSION Pqa(*), Ipqa(*)
   COMMON /XBLK1 / NBItsf

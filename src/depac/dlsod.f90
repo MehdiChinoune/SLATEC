@@ -26,27 +26,27 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !***END PROLOGUE  DLSOD
   !
-  INTEGER IBAnd, IBEgin, Idid, IER, IINteg, IJAc, INIt, intflg ,&
-    IOWns, Ipar, IQUit, ITOl, ITStop, Iwm, JSTart, k, KFLag ,&
-    KSTeps, l, LACor, LDUm, LEWt, LSAvf, ltol, LWM, LYH ,&
-    maxnum, MAXord, METh, MITer, N, natolp, Neq, NFE, NJE ,&
+  INTEGER IBAnd, IBEgin, Idid, IER, IINteg, IJAc, INIt, intflg, &
+    IOWns, Ipar, IQUit, ITOl, ITStop, Iwm, JSTart, k, KFLag, &
+    KSTeps, l, LACor, LDUm, LEWt, LSAvf, ltol, LWM, LYH, &
+    maxnum, MAXord, METh, MITer, N, natolp, Neq, NFE, NJE, &
     NQ, NQU, nrtolp, NST
-  REAL(8) :: absdel, Acor, Atol, big, D1MACH, del, Delsgn, dt ,&
-    DVNRMS, EL0, Ewt, H, ha, HMIn, HMXi, HU, ROWns ,&
-    Rpar, Rtol, Savf, T, tol, TOLd, Tolfac, Tout ,&
+  REAL(8) :: absdel, Acor, Atol, big, D1MACH, del, Delsgn, dt, &
+    DVNRMS, EL0, Ewt, H, ha, HMIn, HMXi, HU, ROWns, &
+    Rpar, Rtol, Savf, T, tol, TOLd, Tolfac, Tout, &
     Tstop, U, Wm, X, Y, Yh, Yh1, Ypout
   LOGICAL Intout
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
   !
-  DIMENSION Y(*), Ypout(*), Yh(Neq,6), Yh1(*), Ewt(*), Savf(*) ,&
+  DIMENSION Y(*), Ypout(*), Yh(Neq,6), Yh1(*), Ewt(*), Savf(*), &
     Acor(*), Wm(*), Iwm(*), Rtol(*), Atol(*), Rpar(*), Ipar(*)
   !
   !
-  COMMON /DDEBD1/ TOLd, ROWns(210), EL0, H, HMIn, HMXi, HU, X, U ,&
-    IQUit, INIt, LYH, LEWt, LACor, LSAvf, LWM, KSTeps ,&
+  COMMON /DDEBD1/ TOLd, ROWns(210), EL0, H, HMIn, HMXi, HU, X, U, &
+    IQUit, INIt, LYH, LEWt, LACor, LSAvf, LWM, KSTeps, &
     IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, IOWns(6)&
-    , IER, JSTart, KFLag, LDUm, METh, MITer, MAXord ,&
+    , IER, JSTart, KFLag, LDUm, METh, MITer, MAXord, &
     N, NQ, NST, NFE, NJE, NQU
   !
   EXTERNAL DF, DJAC

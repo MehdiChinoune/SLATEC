@@ -140,8 +140,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       ntimes = ntimes + 1
       IF ( ntimes>nopt ) THEN
         CALL XERMSG('SLATEC','DWNLSM',&
-          'IN DWNNLS, THE LINKS IN THE OPTION VECTOR ARE CYCLING.'&
-          ,3,1)
+          'IN DWNNLS, THE LINKS IN THE OPTION VECTOR ARE CYCLING.',3,1)
         RETURN
       ENDIF
       !

@@ -2,7 +2,6 @@
 SUBROUTINE QAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
     Ier,Limit,Lenw,Last,Iwork,Work)
   IMPLICIT NONE
-  INTEGER Last
   !***BEGIN PROLOGUE  QAWS
   !***PURPOSE  The routine calculates an approximation result to a given
   !            definite integral I = Integral of F*W over (A,B),
@@ -177,7 +176,7 @@ SUBROUTINE QAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  QAWS
-  !
+  INTEGER Last
   REAL A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, F, Result, Work
   INTEGER Ier, Integr, Iwork, Lenw, Limit, lvl, l1, l2, l3, Neval
   !

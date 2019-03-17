@@ -1,8 +1,6 @@
 !DECK PJAC
 SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
   IMPLICIT NONE
-  INTEGER Ipar
-  REAL Rpar
   !***BEGIN PROLOGUE  PJAC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DEBDF
@@ -25,6 +23,8 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
   !***END PROLOGUE  PJAC
+  INTEGER Ipar
+  REAL Rpar
   !
   !LLL. OPTIMIZE
   INTEGER Neq, Nyh, Iwm, i, i1, i2, IER, ii, IOWnd, IOWns, j, &

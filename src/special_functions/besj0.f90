@@ -1,9 +1,6 @@
 !DECK BESJ0
-FUNCTION BESJ0(X)
+REAL FUNCTION BESJ0(X)
   IMPLICIT NONE
-  REAL ampl, BESJ0, bj0cs, bm0cs, bth0cs, CSEVL, pi4, R1MACH, &
-    theta, X, xmax, xsml, y, z
-  INTEGER INITS, ntj0, ntm0, ntth0
   !***BEGIN PROLOGUE  BESJ0
   !***PURPOSE  Compute the Bessel function of the first kind of order
   !            zero.
@@ -46,6 +43,9 @@ FUNCTION BESJ0(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BESJ0
+  REAL ampl, bj0cs, bm0cs, bth0cs, CSEVL, pi4, R1MACH, &
+    theta, X, xmax, xsml, y, z
+  INTEGER INITS, ntj0, ntm0, ntth0
   DIMENSION bj0cs(13), bm0cs(21), bth0cs(24)
   LOGICAL first
   SAVE bj0cs, bm0cs, bth0cs, pi4, ntj0, ntm0, ntth0, xsml, xmax, &

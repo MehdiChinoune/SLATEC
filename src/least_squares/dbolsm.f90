@@ -2,10 +2,6 @@
 SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     Scl,Ibasis,Ibb)
   IMPLICIT NONE
-  INTEGER i, igopr, ioff, ip, iprint, itemp, iter ,&
-    itmax, j, jbig, jcol, jdrop, jdrop1, jdrop2, jlarge ,&
-    jmag, jp, lds
-  INTEGER lgopr, lp, Mdw, Minput, Mode, mrows, mval, Ncols, nsetb
   !***BEGIN PROLOGUE  DBOLSM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBOCLS and DBOLS
@@ -422,7 +418,9 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     /SSWAP/ TO /DSWAP/, /E0/ TO /D0/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   !++
-  !
+  INTEGER i, igopr, ioff, ip, iprint, itemp, iter, &
+    itmax, j, jbig, jcol, jdrop, jdrop1, jdrop2, jlarge, jmag, jp, lds
+  INTEGER lgopr, lp, Mdw, Minput, Mode, mrows, mval, Ncols, nsetb
   REAL(8) :: W(Mdw,*), Bl(*), Bu(*)
   REAL(8) :: X(*), Rw(*), Ww(*), Scl(*)
   REAL(8) :: alpha, beta, bou, colabv, colblo

@@ -1,10 +1,6 @@
 !DECK SBOLS
 SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   IMPLICIT NONE
-  INTEGER i, ibig, igo, inrows, ip, ISAMAX, iscale, j, jp, lds ,&
-    lenx, liopt, llb, lliw, llrw, llx, lmdw, lndw, locacc ,&
-    locdim
-  INTEGER lopt, lp, Mdw, mnew, Mode, Mrows, Ncols, nerr
   !***BEGIN PROLOGUE  SBOLS
   !***PURPOSE  Solve the problem
   !                 E*X = F (in the least  squares  sense)
@@ -424,6 +420,9 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !     /SROTG/ TO /DROTG/, /SROT/ TO /DROT/, /E0/ TO /D0/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
+  INTEGER i, ibig, igo, inrows, ip, ISAMAX, iscale, j, jp, lds, &
+    lenx, liopt, llb, lliw, llrw, llx, lmdw, lndw, locacc, locdim
+  INTEGER lopt, lp, Mdw, mnew, Mode, Mrows, Ncols, nerr
   REAL W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*)
   REAL sc, ss, one, SNRM2, Rnorm, zero
   !
@@ -659,8 +658,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
           IF ( Iopt(lp+2)<=0 ) THEN
             WRITE (xern1,'(I8)') Iopt(lp+2)
             CALL XERMSG('SLATEC','SBOLS','OFFSET PAST X(NCOLS) ('//xern1//&
-              ') FOR USER-PROVIDED COLUMN SCALING MUST BE POSITIVE.'&
-              ,8,1)
+              ') FOR USER-PROVIDED COLUMN SCALING MUST BE POSITIVE.',8,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           ENDIF

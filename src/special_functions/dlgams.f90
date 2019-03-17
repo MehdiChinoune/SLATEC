@@ -1,7 +1,6 @@
 !DECK DLGAMS
 SUBROUTINE DLGAMS(X,Dlgam,Sgngam)
   IMPLICIT NONE
-  INTEGER i
   !***BEGIN PROLOGUE  DLGAMS
   !***PURPOSE  Compute the logarithm of the absolute value of the Gamma
   !            function.
@@ -26,6 +25,7 @@ SUBROUTINE DLGAMS(X,Dlgam,Sgngam)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DLGAMS
+  INTEGER i
   REAL(8) :: X, Dlgam, Sgngam, DLNGAM
   !***FIRST EXECUTABLE STATEMENT  DLGAMS
   Dlgam = DLNGAM(X)

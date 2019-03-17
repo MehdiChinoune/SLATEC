@@ -538,10 +538,8 @@ CONTAINS
     DATA dy2/1.D0, .04D0, -.03D0, -1.D0, .05D0, 3.D0, -1.D0/
     !            THE TERMS D11(3,2) AND D11(4,2) WILL BE SET BY
     !            COMPUTATION AT RUN TIME.
-    DATA cx1/(.7,-.8), (-.4,-.7), (-.1,-.9), (.2,-.8), (-.9,-.4), (.1,.4)&
-      , (-.6,.6)/
-    DATA cy1/(.6,-.6), (-.9,.5), (.7,-.6), (.1,-.5), (-.1,-.2), (-.5,-.3)&
-      , (.8,-.7)/
+    DATA cx1/(.7,-.8), (-.4,-.7), (-.1,-.9), (.2,-.8), (-.9,-.4), (.1,.4), (-.6,.6)/
+    DATA cy1/(.6,-.6), (-.9,.5), (.7,-.6), (.1,-.5), (-.1,-.2), (-.5,-.3), (.8,-.7)/
     !
     !                             FOR DQDOTI AND DQDOTA
     !
@@ -1302,7 +1300,6 @@ END MODULE TEST17_MOD
 PROGRAM TEST17
   USE TEST17_MOD
   IMPLICIT NONE
-  INTEGER I1MACH
   !***BEGIN PROLOGUE  TEST17
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC
@@ -1342,6 +1339,7 @@ PROGRAM TEST17
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
   !***END PROLOGUE  TEST17
+  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST17
   lun = I1MACH(2)

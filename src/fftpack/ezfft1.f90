@@ -1,9 +1,6 @@
 !DECK EZFFT1
 SUBROUTINE EZFFT1(N,Wa,Ifac)
   IMPLICIT NONE
-  REAL arg1, argh, ch1, ch1h, dch1, dsh1, sh1, tpi, Wa
-  INTEGER i, ib, ido, Ifac, ii, ip, ipm, is, j, k1, l1, l2, N, &
-    nf, nfm1, nl, nq, nr, ntry, ntryh
   !***BEGIN PROLOGUE  EZFFT1
   !***SUBSIDIARY
   !***PURPOSE  EZFFTI calls EZFFT1 with appropriate work array
@@ -28,6 +25,9 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  EZFFT1
+  REAL arg1, argh, ch1, ch1h, dch1, dsh1, sh1, tpi, Wa
+  INTEGER i, ib, ido, Ifac, ii, ip, ipm, is, j, k1, l1, l2, N, &
+    nf, nfm1, nl, nq, nr, ntry, ntryh
   DIMENSION Wa(*), Ifac(*), ntryh(4)
   SAVE ntryh
   DATA ntryh(1), ntryh(2), ntryh(3), ntryh(4)/4, 2, 3, 5/

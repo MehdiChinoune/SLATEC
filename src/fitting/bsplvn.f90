@@ -1,8 +1,6 @@
 !DECK BSPLVN
 SUBROUTINE BSPLVN(T,Jhigh,Index,X,Ileft,Vnikx)
   IMPLICIT NONE
-  REAL deltam, deltap, T, vm, vmprev, Vnikx, X
-  INTEGER i, Ileft, imjp1, Index, ipj, j, Jhigh, jp1, jp1ml, l
   !***BEGIN PROLOGUE  BSPLVN
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to FC
@@ -21,6 +19,8 @@ SUBROUTINE BSPLVN(T,Jhigh,Index,X,Ileft,Vnikx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  BSPLVN
+  REAL deltam, deltap, T, vm, vmprev, Vnikx, X
+  INTEGER i, Ileft, imjp1, Index, ipj, j, Jhigh, jp1, jp1ml, l
   DIMENSION T(*), Vnikx(*)
   DIMENSION deltam(20), deltap(20)
   SAVE j, deltam, deltap

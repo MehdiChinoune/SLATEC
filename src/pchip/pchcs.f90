@@ -97,8 +97,7 @@ SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, indx, k, nless1
-  REAL del(3), dext, dfloc, dfmx, fact, fudge, one, slmax, wtave(2)&
-    , zero
+  REAL del(3), dext, dfloc, dfmx, fact, fudge, one, slmax, wtave(2), zero
   SAVE zero, one, fudge
   REAL PCHST
   !

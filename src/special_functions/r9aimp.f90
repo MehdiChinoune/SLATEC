@@ -1,9 +1,6 @@
 !DECK R9AIMP
 SUBROUTINE R9AIMP(X,Ampl,Theta)
   IMPLICIT NONE
-  REAL am21cs, am22cs, Ampl, ath1cs, ath2cs, CSEVL, eta, pi4, &
-    R1MACH, sqrtx, Theta, X, xsml, z
-  INTEGER INITS, nam21, nam22, nath1, nath2
   !***BEGIN PROLOGUE  R9AIMP
   !***SUBSIDIARY
   !***PURPOSE  Evaluate the Airy modulus and phase.
@@ -49,6 +46,9 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  R9AIMP
+  REAL am21cs, am22cs, Ampl, ath1cs, ath2cs, CSEVL, eta, pi4, &
+    R1MACH, sqrtx, Theta, X, xsml, z
+  INTEGER INITS, nam21, nam22, nath1, nath2
   DIMENSION am21cs(40), ath1cs(36), am22cs(33), ath2cs(32)
   LOGICAL first
   SAVE am21cs, ath1cs, am22cs, ath2cs, pi4, nam21, nath1, nam22, &

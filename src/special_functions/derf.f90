@@ -1,7 +1,6 @@
 !DECK DERF
 REAL(8) FUNCTION DERF(X)
   IMPLICIT NONE
-  INTEGER INITDS, nterf
   !***BEGIN PROLOGUE  DERF
   !***PURPOSE  Compute the error function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -30,8 +29,8 @@ REAL(8) FUNCTION DERF(X)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable name.  (RWC, WRB)
   !***END PROLOGUE  DERF
-  REAL(8) :: X, erfcs(21), sqeps, sqrtpi, xbig, y, D1MACH, &
-    DCSEVL, DERFC
+  INTEGER INITDS, nterf
+  REAL(8) :: X, erfcs(21), sqeps, sqrtpi, xbig, y, D1MACH, DCSEVL, DERFC
   LOGICAL first
   EXTERNAL DERFC
   SAVE erfcs, sqrtpi, nterf, xbig, sqeps, first

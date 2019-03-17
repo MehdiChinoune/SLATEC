@@ -1,7 +1,6 @@
 !DECK XGETUN
 SUBROUTINE XGETUN(Iunit)
   IMPLICIT NONE
-  INTEGER Iunit, J4SAVE
   !***BEGIN PROLOGUE  XGETUN
   !***PURPOSE  Return the (first) output file to which error messages
   !            are being sent.
@@ -34,6 +33,7 @@ SUBROUTINE XGETUN(Iunit)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  XGETUN
+  INTEGER Iunit, J4SAVE
   !***FIRST EXECUTABLE STATEMENT  XGETUN
   Iunit = J4SAVE(3,0,.FALSE.)
 END SUBROUTINE XGETUN

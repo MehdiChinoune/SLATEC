@@ -1,9 +1,6 @@
 !DECK DY4
 SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
   IMPLICIT NONE
-  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, TDLx3, TDLy3, U, &
-    Uyyy, Uyyyy
-  INTEGER I, Idmn, IS, J, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
   !***BEGIN PROLOGUE  DY4
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPX4
@@ -24,7 +21,8 @@ SUBROUTINE DY4(U,Idmn,I,J,Uyyy,Uyyyy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  DY4
-  !
+  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, TDLx3, TDLy3, U, Uyyy, Uyyyy
+  INTEGER I, Idmn, IS, J, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
   COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
     IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
     DLY4

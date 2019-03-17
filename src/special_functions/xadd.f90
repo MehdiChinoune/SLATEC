@@ -1,8 +1,6 @@
 !DECK XADD
 SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   IMPLICIT NONE
-  INTEGER i, i1, i2, Ierror, is, j
-  REAL s, t
   !***BEGIN PROLOGUE  XADD
   !***PURPOSE  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.
@@ -37,6 +35,8 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  XADD
+  INTEGER i, i1, i2, Ierror, is, j
+  REAL s, t
   REAL X, Y, Z
   INTEGER Ix, Iy, Iz
   REAL RADix, RADixl, RAD2l, DLG10r

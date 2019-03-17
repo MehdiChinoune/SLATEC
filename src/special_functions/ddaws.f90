@@ -1,8 +1,6 @@
 !DECK DDAWS
 REAL(8) FUNCTION DDAWS(X)
   IMPLICIT NONE
-  REAL eps
-  INTEGER INITDS, ntdaw, ntdaw2, ntdawa
   !***BEGIN PROLOGUE  DDAWS
   !***PURPOSE  Compute Dawson's function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -43,11 +41,12 @@ REAL(8) FUNCTION DDAWS(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DDAWS
+  REAL eps
+  INTEGER INITDS, ntdaw, ntdaw2, ntdawa
   REAL(8) :: X, dawcs(21), daw2cs(45), dawacs(75), xbig, xmax, &
     xsml, y, DCSEVL, D1MACH
   LOGICAL first
-  SAVE dawcs, daw2cs, dawacs, ntdaw, ntdaw2, ntdawa, xsml, xbig, &
-    xmax, first
+  SAVE dawcs, daw2cs, dawacs, ntdaw, ntdaw2, ntdawa, xsml, xbig, xmax, first
   DATA dawcs(1)/ - .6351734375145949201065127736293D-2/
   DATA dawcs(2)/ - .2294071479677386939899824125866D+0/
   DATA dawcs(3)/ + .2213050093908476441683979161786D-1/

@@ -1,9 +1,6 @@
 !DECK DPNNZR
 SUBROUTINE DPNNZR(I,Xval,Iplace,Sx,Ix,Ircx)
   IMPLICIT NONE
-  INTEGER I, i1, idiff, IDLOC, iend, ii, il, ilast, iopt, ipl, &
-    Iplace, ipploc, Ircx, istart, Ix, j, l, ll, lmx, lpg
-  INTEGER n20046, nerr, np
   !***BEGIN PROLOGUE  DPNNZR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -59,6 +56,9 @@ SUBROUTINE DPNNZR(I,Xval,Iplace,Sx,Ix,Ircx)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   !***END PROLOGUE  DPNNZR
+  INTEGER I, i1, idiff, IDLOC, iend, ii, il, ilast, iopt, ipl, &
+    Iplace, ipploc, Ircx, istart, Ix, j, l, ll, lmx, lpg
+  INTEGER n20046, nerr, np
   DIMENSION Ix(*)
   REAL(8) :: Xval, Sx(*), zero
   SAVE zero

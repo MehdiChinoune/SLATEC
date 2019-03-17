@@ -1,7 +1,6 @@
 !DECK D9CHU
 REAL(8) FUNCTION D9CHU(A,B,Z)
   IMPLICIT NONE
-  INTEGER i, j
   !***BEGIN PROLOGUE  D9CHU
   !***SUBSIDIARY
   !***PURPOSE  Evaluate for large Z  Z**A * U(A,B,Z) where U is the
@@ -31,6 +30,7 @@ REAL(8) FUNCTION D9CHU(A,B,Z)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  D9CHU
+  INTEGER i, j
   REAL(8) :: A, B, Z, aa(4), bb(4), ab, anbn, bp, ct1, ct2, &
     ct3, c2, d1z, eps, g1, g2, g3, sab, sqeps, &
     x2i1, D1MACH

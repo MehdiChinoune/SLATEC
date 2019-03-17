@@ -1,8 +1,6 @@
 !DECK TRISP
 SUBROUTINE TRISP(N,A,B,C,D,U,Z)
   IMPLICIT NONE
-  REAL A, an, B, bn, C, D, den, U, v, Z
-  INTEGER j, k, N, nm1, nm2
   !***BEGIN PROLOGUE  TRISP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPELI
@@ -25,7 +23,8 @@ SUBROUTINE TRISP(N,A,B,C,D,U,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  TRISP
-  !
+  REAL A, an, B, bn, C, D, den, U, v, Z
+  INTEGER j, k, N, nm1, nm2
   DIMENSION A(*), B(*), C(*), D(*), U(*), Z(*)
   !***FIRST EXECUTABLE STATEMENT  TRISP
   bn = B(N)

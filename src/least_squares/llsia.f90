@@ -2,9 +2,6 @@
 SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
     Lw,Iwork,Liw,Info)
   IMPLICIT NONE
-  REAL A, Ae, B, eps, R1MACH, Re, Rnorm, W
-  INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
-    Mode, N, n1, n2, n3, n4, n5, Nb, Np
   !***BEGIN PROLOGUE  LLSIA
   !***PURPOSE  Solve a linear least squares problems by performing a QR
   !            factorization of the matrix using Householder
@@ -163,6 +160,9 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  LLSIA
+  REAL A, Ae, B, eps, R1MACH, Re, Rnorm, W
+  INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
+    Mode, N, n1, n2, n3, n4, n5, Nb, Np
   DIMENSION A(Mda,*), B(Mdb,*), Re(*), Ae(*), Rnorm(*), W(*)
   INTEGER Iwork(*)
   !

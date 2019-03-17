@@ -1,7 +1,6 @@
 !DECK IVOUT
 SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
   IMPLICIT NONE
-  INTEGER i, I1MACH, Idigit, Ix, j, k1, k2, lout, N, ndigit
   !***BEGIN PROLOGUE  IVOUT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -52,6 +51,7 @@ SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
   !   900402  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
   !***END PROLOGUE  IVOUT
+  INTEGER i, I1MACH, Idigit, Ix, j, k1, k2, lout, N, ndigit
   DIMENSION Ix(*)
   CHARACTER Ifmt*(*)
   !

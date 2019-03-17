@@ -1,8 +1,6 @@
 !DECK D9B0MP
 SUBROUTINE D9B0MP(X,Ampl,Theta)
   IMPLICIT NONE
-  REAL eta
-  INTEGER INITDS, nbm0, nbm02, nbt02, nbth0
   !***BEGIN PROLOGUE  D9B0MP
   !***SUBSIDIARY
   !***PURPOSE  Evaluate the modulus and phase for the J0 and Y0 Bessel
@@ -51,6 +49,8 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  D9B0MP
+  REAL eta
+  INTEGER INITDS, nbm0, nbm02, nbt02, nbth0
   REAL(8) :: X, Ampl, Theta, bm0cs(37), bt02cs(39), bm02cs(40), &
     bth0cs(44), xmax, pi4, z, D1MACH, DCSEVL
   LOGICAL first

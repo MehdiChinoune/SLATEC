@@ -1,7 +1,6 @@
 !DECK XERCLR
 SUBROUTINE XERCLR
   IMPLICIT NONE
-  INTEGER J4SAVE, junk
   !***BEGIN PROLOGUE  XERCLR
   !***PURPOSE  Reset current error number to zero.
   !***LIBRARY   SLATEC (XERROR)
@@ -27,6 +26,7 @@ SUBROUTINE XERCLR
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  XERCLR
+  INTEGER J4SAVE, junk
   !***FIRST EXECUTABLE STATEMENT  XERCLR
   junk = J4SAVE(1,0,.TRUE.)
 END SUBROUTINE XERCLR

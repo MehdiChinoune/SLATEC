@@ -163,8 +163,7 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
   INTEGER Isym, N, Nelt, Nl, Nu
   !     .. Array Arguments ..
   REAL(8) :: A(Nelt), Dinv(N), L(Nl), U(Nu)
-  INTEGER Ia(Nelt), Il(Nl), Iu(Nu), Ja(Nelt), Jl(Nl), Ju(Nu), Ncol(N)&
-    , Nrow(N)
+  INTEGER Ia(Nelt), Il(Nl), Iu(Nu), Ja(Nelt), Jl(Nl), Ju(Nu), Ncol(N), Nrow(N)
   !     .. Local Scalars ..
   REAL(8) :: temp
   INTEGER i, ibgn, icol, iend, indx, indx1, indx2, indxc1, indxc2, &

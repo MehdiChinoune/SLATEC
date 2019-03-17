@@ -1,7 +1,6 @@
 !DECK SGEEV
 SUBROUTINE SGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   IMPLICIT NONE
-  INTEGER m
   !***BEGIN PROLOGUE  SGEEV
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real general matrix.
@@ -97,8 +96,8 @@ SUBROUTINE SGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  SGEEV
-  INTEGER i, ihi, ilo, Info, j, jb, Job, k, km, kp, l, Lda, &
-    Ldv, mdim, N
+  INTEGER m
+  INTEGER i, ihi, ilo, Info, j, jb, Job, k, km, kp, l, Lda, Ldv, mdim, N
   REAL A(*), E(*), Work(*), V(*)
   !***FIRST EXECUTABLE STATEMENT  SGEEV
   IF ( N>Lda ) CALL XERMSG('SLATEC','SGEEV','N .GT. LDA.',1,1)
@@ -108,8 +107,7 @@ SUBROUTINE SGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   IF ( N/=1.OR.Job/=0 ) THEN
     mdim = Lda
     IF ( Job/=0 ) THEN
-      IF ( N>Ldv ) CALL XERMSG('SLATEC','SGEEV','JOB .NE. 0 AND N .GT. LDV.'&
-        ,3,1)
+      IF ( N>Ldv ) CALL XERMSG('SLATEC','SGEEV','JOB .NE. 0 AND N .GT. LDV.',3,1)
       IF ( N>Ldv ) RETURN
       IF ( N==1 ) GOTO 100
       !

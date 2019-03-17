@@ -2,7 +2,6 @@
 SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar)
   IMPLICIT NONE
-  INTEGER igi, ixold
   !***BEGIN PROLOGUE  DDEABM
   !***PURPOSE  Solve an initial value problem in ordinary differential
   !            equations using an Adams-Bashforth method.
@@ -578,15 +577,14 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DDEABM
-  !
-  INTEGER ialpha, ibeta, idelsn, Idid, ifouru, ig, ihold, Info, ip ,&
-    Ipar, iphi, ipsi, isig, itold, itstar, itwou, iv, iw ,&
+  INTEGER igi, ixold
+  INTEGER ialpha, ibeta, idelsn, Idid, ifouru, ig, ihold, Info, ip, &
+    Ipar, iphi, ipsi, isig, itold, itstar, itwou, iv, iw, &
     Iwork, iwt, iyp, iypout, iyy, Liw, Lrw, Neq
   REAL(8) :: Atol, Rpar, Rtol, Rwork, T, Tout, Y
   LOGICAL start, phase1, nornd, stiff, intout
   !
-  DIMENSION Y(*), Info(15), Rtol(*), Atol(*), Rwork(*), Iwork(*) ,&
-    Rpar(*), Ipar(*)
+  DIMENSION Y(*), Info(15), Rtol(*), Atol(*), Rwork(*), Iwork(*), Rpar(*), Ipar(*)
   !
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3

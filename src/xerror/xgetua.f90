@@ -1,7 +1,6 @@
 !DECK XGETUA
 SUBROUTINE XGETUA(Iunita,N)
   IMPLICIT NONE
-  INTEGER i, index, Iunita, J4SAVE, N
   !***BEGIN PROLOGUE  XGETUA
   !***PURPOSE  Return unit number(s) to which error messages are being
   !            sent.
@@ -41,6 +40,7 @@ SUBROUTINE XGETUA(Iunita,N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  XGETUA
+  INTEGER i, index, Iunita, J4SAVE, N
   DIMENSION Iunita(5)
   !***FIRST EXECUTABLE STATEMENT  XGETUA
   N = J4SAVE(5,0,.FALSE.)

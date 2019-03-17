@@ -2,11 +2,6 @@
 SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
     Cvec,Work,Iwork,Iflag,Nfcc)
   IMPLICIT NONE
-  REAL Ae, B, bbn, Beta, bn, brn, By, bykl, bys, Coef, cons, &
-    Cvec, EPS, FOUru, gam, Re, SDOT, SQOvfl, SRU, TWOu
-  REAL un, URO, Work, Yh, Yp, ypn
-  INTEGER i, Iflag, Inhomo, Iwork, j, k, kflag, ki, l, LPAr, &
-    mlso, Ncomp, ncomp2, nf, Nfc, Nfcc, nfccm1, Nic, Nrowb
   !***BEGIN PROLOGUE  SCOEF
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP
@@ -76,7 +71,11 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  SCOEF
-  !
+  REAL Ae, B, bbn, Beta, bn, brn, By, bykl, bys, Coef, cons, &
+    Cvec, EPS, FOUru, gam, Re, SDOT, SQOvfl, SRU, TWOu
+  REAL un, URO, Work, Yh, Yp, ypn
+  INTEGER i, Iflag, Inhomo, Iwork, j, k, kflag, ki, l, LPAr, &
+    mlso, Ncomp, ncomp2, nf, Nfc, Nfcc, nfccm1, Nic, Nrowb
   DIMENSION Yh(Ncomp,*), Yp(*), B(Nrowb,*), Beta(*), Coef(*), &
     By(Nfcc,*), Cvec(*), Work(*), Iwork(*)
   !

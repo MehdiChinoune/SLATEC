@@ -1,7 +1,6 @@
 !DECK SROT
 SUBROUTINE SROT(N,Sx,Incx,Sy,Incy,Sc,Ss)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, kx, ky, N, nsteps
   !***BEGIN PROLOGUE  SROT
   !***PURPOSE  Apply a plane Givens rotation.
   !***LIBRARY   SLATEC (BLAS)
@@ -49,6 +48,7 @@ SUBROUTINE SROT(N,Sx,Incx,Sy,Incy,Sc,Ss)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SROT
+  INTEGER i, Incx, Incy, kx, ky, N, nsteps
   REAL Sx, Sy, Sc, Ss, zero, one, w, z
   DIMENSION Sx(*), Sy(*)
   SAVE zero, one

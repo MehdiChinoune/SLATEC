@@ -1,7 +1,6 @@
 !DECK CPQR79
 SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   IMPLICIT NONE
-  INTEGER km1
   !***BEGIN PROLOGUE  CPQR79
   !***PURPOSE  Find the zeros of a polynomial with complex coefficients.
   !***LIBRARY   SLATEC
@@ -52,6 +51,7 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !           (WRB)
   !   911010  Code reworked and simplified.  (RWC and WRB)
   !***END PROLOGUE  CPQR79
+  INTEGER km1
   COMPLEX Coeff(*), Root(*), scale, c
   REAL Work(*)
   INTEGER Ndeg, Ierr, k, khr, khi, kwr, kwi, kad, kj

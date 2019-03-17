@@ -1,8 +1,6 @@
 !DECK RAND
-FUNCTION RAND(R)
+REAL FUNCTION RAND(R)
   IMPLICIT NONE
-  INTEGER ia0, ia1, ia1ma0, ic, ix0, ix1, iy0, iy1
-  REAL R, RAND
   !***BEGIN PROLOGUE  RAND
   !***PURPOSE  Generate a uniformly distributed random number.
   !***LIBRARY   SLATEC (FNLIB)
@@ -95,6 +93,8 @@ FUNCTION RAND(R)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  RAND
+  INTEGER ia0, ia1, ia1ma0, ic, ix0, ix1, iy0, iy1
+  REAL R
   SAVE ia1, ia0, ia1ma0, ic, ix1, ix0
   DATA ia1, ia0, ia1ma0/1536, 1029, 507/
   DATA ic/1731/

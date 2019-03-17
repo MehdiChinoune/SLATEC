@@ -4,14 +4,6 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     Tstop,Twou,Fouru,Start,Phase1,Nornd,Stiff,Intout,Ns,Kord,&
     Kold,Init,Ksteps,Kle4,Iquit,Kprev,Ivc,Iv,Kgi,Rpar,Ipar)
   IMPLICIT NONE
-  REAL a, absdel, Alpha, Atol, Beta, del, Delsgn, dt, Eps, Fouru ,&
-    G, Gi, H, ha, Hold, P, Phi, Psi, R1MACH, Rpar
-  REAL Rtol, Sig, T, Told, Tout, Tstop, Twou, u, V, W, Wt, X ,&
-    Xold, Y, Yp, Ypout, Yy
-  INTEGER Idid, Info, Init, Ipar, Iquit, Iv, Ivc, k, Kgi, Kle4 ,&
-    Kold, Kord, Kprev, Ksteps, l, ltol, maxnum, natolp, Neq ,&
-    nrtolp
-  INTEGER Ns
   !***BEGIN PROLOGUE  DES
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DEABM
@@ -36,13 +28,17 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !           IF-THEN-ELSEs.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  DES
-  !
+  REAL a, absdel, Alpha, Atol, Beta, del, Delsgn, dt, Eps, Fouru, &
+    G, Gi, H, ha, Hold, P, Phi, Psi, R1MACH, Rpar
+  REAL Rtol, Sig, T, Told, Tout, Tstop, Twou, u, V, W, Wt, X, Xold, Y, Yp, Ypout, Yy
+  INTEGER Idid, Info, Init, Ipar, Iquit, Iv, Ivc, k, Kgi, Kle4, &
+    Kold, Kord, Kprev, Ksteps, l, ltol, maxnum, natolp, Neq, nrtolp
+  INTEGER Ns
   LOGICAL Stiff, crash, Start, Phase1, Nornd, Intout
   !
-  DIMENSION Y(*), Yy(*), Wt(*), Phi(Neq,16), P(*), Yp(*), Ypout(*) ,&
-    Psi(12), Alpha(12), Beta(12), Sig(13), V(12), W(12) ,&
-    G(13), Gi(11), Iv(10), Info(15), Rtol(*), Atol(*), Rpar(*)&
-    , Ipar(*)
+  DIMENSION Y(*), Yy(*), Wt(*), Phi(Neq,16), P(*), Yp(*), Ypout(*), &
+    Psi(12), Alpha(12), Beta(12), Sig(13), V(12), W(12), &
+    G(13), Gi(11), Iv(10), Info(15), Rtol(*), Atol(*), Rpar(*), Ipar(*)
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
   !

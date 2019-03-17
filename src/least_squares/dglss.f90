@@ -1,5 +1,6 @@
 !DECK DGLSS
 SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
+  IMPLICIT NONE
   !***BEGIN PROLOGUE  DGLSS
   !***PURPOSE  Solve a linear least squares problems by performing a QR
   !            factorization of the input matrix using Householder
@@ -117,7 +118,6 @@ SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DGLSS
-  IMPLICIT NONE
   REAL(8) :: A, ae, B, re, Rnorm, Work
   INTEGER Info, key, krank, ksure, Liw, Lw, M, Mda, Mdb, mode, N, &
     Nb, np

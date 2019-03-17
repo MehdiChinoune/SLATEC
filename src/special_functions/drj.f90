@@ -302,7 +302,7 @@ REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
   REAL(8) :: lolim, uplim, epslon, errtol, D1MACH
   REAL(8) :: lamda, mu, P, pn, pndev
   REAL(8) :: power4, DRC, sigma, s1, s2, s3, X, xn, xndev
-  REAL(8) :: xnroot, Y, yn, yndev, ynroot, Z, zn, zndev ,&
+  REAL(8) :: xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, &
     znroot
   LOGICAL first
   SAVE errtol, lolim, uplim, c1, c2, c3, c4, first

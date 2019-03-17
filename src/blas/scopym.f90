@@ -1,7 +1,6 @@
 !DECK SCOPYM
 SUBROUTINE SCOPYM(N,Sx,Incx,Sy,Incy)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   !***BEGIN PROLOGUE  SCOPYM
   !***PURPOSE  Copy the negative of a vector to a vector.
   !***LIBRARY   SLATEC (BLAS)
@@ -36,6 +35,7 @@ SUBROUTINE SCOPYM(N,Sx,Incx,Sy,Incy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !***END PROLOGUE  SCOPYM
+  INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   REAL Sx(*), Sy(*)
   !***FIRST EXECUTABLE STATEMENT  SCOPYM
   IF ( N<=0 ) RETURN

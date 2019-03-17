@@ -1,8 +1,6 @@
 !DECK BESKS
 SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   IMPLICIT NONE
-  REAL Bk, expxi, R1MACH, X, xmax, Xnu
-  INTEGER i, n, Nin
   !***BEGIN PROLOGUE  BESKS
   !***PURPOSE  Compute a sequence of modified Bessel functions of the
   !            third kind of fractional order.
@@ -32,6 +30,8 @@ SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BESKS
+  REAL Bk, expxi, R1MACH, X, xmax, Xnu
+  INTEGER i, n, Nin
   DIMENSION Bk(*)
   SAVE xmax
   DATA xmax/0.0/

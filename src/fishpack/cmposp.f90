@@ -1,7 +1,6 @@
 !DECK CMPOSP
 SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   IMPLICIT NONE
-  INTEGER i, Idimq, ipstor, j, lh, M, mr, N, nr, nrm1, nrmj, nrpj
   !***BEGIN PROLOGUE  CMPOSP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CMGNBN
@@ -21,7 +20,7 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CMPOSP
-  !
+  INTEGER i, Idimq, ipstor, j, lh, M, mr, N, nr, nrm1, nrmj, nrpj
   COMPLEX A, Bb, C, Q, B, B2, B3, W, W2, W3, D, Tcos, P, s, t
   DIMENSION A(*), Bb(*), C(*), Q(Idimq,*), B(*), B2(*), B3(*), W(*), &
     W2(*), W3(*), D(*), Tcos(*), P(*)

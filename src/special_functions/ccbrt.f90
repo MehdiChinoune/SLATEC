@@ -1,7 +1,6 @@
 !DECK CCBRT
 COMPLEX FUNCTION CCBRT(Z)
   IMPLICIT NONE
-  REAL CARG, CBRT, r, theta
   !***BEGIN PROLOGUE  CCBRT
   !***PURPOSE  Compute the cube root.
   !***LIBRARY   SLATEC (FNLIB)
@@ -22,6 +21,7 @@ COMPLEX FUNCTION CCBRT(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CCBRT
+  REAL CARG, CBRT, r, theta
   COMPLEX Z
   !***FIRST EXECUTABLE STATEMENT  CCBRT
   theta = CARG(Z)/3.0

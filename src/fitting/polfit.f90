@@ -1,12 +1,6 @@
 !DECK POLFIT
 SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   IMPLICIT NONE
-  REAL A, co, degf, den, Eps, etst, f, fcrit, R, sig, sigj, &
-    sigjm1, sigpas, temp, W, w1, w11, X, xm, Y
-  REAL yp
-  INTEGER i, idegf, Ierr, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, &
-    k3pi, k4, k4pi, k5, k5pi, ksig, m, Maxdeg, mop1
-  INTEGER N, Ndeg, nder, nfail
   !***BEGIN PROLOGUE  POLFIT
   !***PURPOSE  Fit discrete data in a least squares sense by polynomials
   !            in one variable.
@@ -128,6 +122,12 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920527  Corrected erroneous statements in DESCRIPTION.  (WRB)
   !***END PROLOGUE  POLFIT
+  REAL A, co, degf, den, Eps, etst, f, fcrit, R, sig, sigj, &
+    sigjm1, sigpas, temp, W, w1, w11, X, xm, Y
+  REAL yp
+  INTEGER i, idegf, Ierr, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, &
+    k3pi, k4, k4pi, k5, k5pi, ksig, m, Maxdeg, mop1
+  INTEGER N, Ndeg, nder, nfail
   REAL(8) :: temd1, temd2
   DIMENSION X(*), Y(*), W(*), R(*), A(*)
   DIMENSION co(4,3)

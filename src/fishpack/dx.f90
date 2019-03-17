@@ -1,9 +1,6 @@
 !DECK DX
 SUBROUTINE DX(U,Idmn,I,J,Uxxx,Uxxxx)
   IMPLICIT NONE
-  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, TDLx3, TDLy3, U, &
-    Uxxx, Uxxxx
-  INTEGER I, Idmn, IS, J, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
   !***BEGIN PROLOGUE  DX
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPELI
@@ -24,7 +21,8 @@ SUBROUTINE DX(U,Idmn,I,J,Uxxx,Uxxxx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  DX
-  !
+  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, TDLx3, TDLy3, U, Uxxx, Uxxxx
+  INTEGER I, Idmn, IS, J, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
   COMMON /SPLPCM/ KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
     IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
     DLY4

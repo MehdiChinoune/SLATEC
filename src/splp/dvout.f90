@@ -1,5 +1,6 @@
 !DECK DVOUT
 SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
+  IMPLICIT NONE
   !***BEGIN PROLOGUE  DVOUT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -52,7 +53,6 @@ SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
   !***END PROLOGUE  DVOUT
-  IMPLICIT NONE
   INTEGER i, I1MACH, Idigit, k1, k2, lout, N, ndigit
   REAL(8) :: Dx(*)
   CHARACTER Ifmt*(*)

@@ -1,8 +1,6 @@
 !DECK PPSPF
-FUNCTION PPSPF(X,Iz,C,A,Bh)
+REAL FUNCTION PPSPF(X,Iz,C,A,Bh)
   IMPLICIT NONE
-  REAL A, Bh, C, PPSPF, sum, X
-  INTEGER Iz, j
   !***BEGIN PROLOGUE  PPSPF
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI
@@ -16,6 +14,8 @@ FUNCTION PPSPF(X,Iz,C,A,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  PPSPF
+  REAL A, Bh, C, sum, X
+  INTEGER Iz, j
   DIMENSION A(*), C(*), Bh(*)
   !***FIRST EXECUTABLE STATEMENT  PPSPF
   sum = 0.

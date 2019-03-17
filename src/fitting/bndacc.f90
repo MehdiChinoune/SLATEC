@@ -1,10 +1,6 @@
 !DECK BNDACC
 SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   IMPLICIT NONE
-  REAL G, rho, zero
-  INTEGER i, ie, ig, ig1, ig2, iopt, Ip, Ir, j, jg, Jt, k, kh, &
-    l, lp1, Mdg, mh, Mt, mu, Nb
-  INTEGER nbp1, nerr
   !***BEGIN PROLOGUE  BNDACC
   !***PURPOSE  Compute the LU factorization of a banded matrices using
   !            sequential accumulation of rows of the data matrix.
@@ -195,6 +191,10 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  BNDACC
+  REAL G, rho, zero
+  INTEGER i, ie, ig, ig1, ig2, iopt, Ip, Ir, j, jg, Jt, k, kh, &
+    l, lp1, Mdg, mh, Mt, mu, Nb
+  INTEGER nbp1, nerr
   DIMENSION G(Mdg,*)
   !***FIRST EXECUTABLE STATEMENT  BNDACC
   zero = 0.

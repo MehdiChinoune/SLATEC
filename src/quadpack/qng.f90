@@ -1,7 +1,6 @@
 !DECK QNG
 SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   IMPLICIT NONE
-  REAL w21b
   !***BEGIN PROLOGUE  QNG
   !***PURPOSE  The routine calculates an approximation result to a
   !            given definite integral I = integral of F over (A,B),
@@ -86,7 +85,7 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  QNG
-  !
+  REAL w21b
   REAL A, absc, Abserr, B, centr, dhlgth, epmach, Epsabs, Epsrel, &
     F, fcentr, fval, fval1, fval2, fv1, fv2, fv3, fv4, hlgth, &
     Result, res10, res21, res43, res87, resabs, resasc, reskh, &

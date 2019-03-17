@@ -1,9 +1,6 @@
 !DECK BESJ1
-FUNCTION BESJ1(X)
+REAL FUNCTION BESJ1(X)
   IMPLICIT NONE
-  REAL ampl, BESJ1, bj1cs, bm1cs, bth1cs, CSEVL, pi4, R1MACH, &
-    theta, X, xmax, xmin, xsml, y, z
-  INTEGER INITS, ntj1, ntm1, ntth1
   !***BEGIN PROLOGUE  BESJ1
   !***PURPOSE  Compute the Bessel function of the first kind of order one.
   !***LIBRARY   SLATEC (FNLIB)
@@ -45,6 +42,9 @@ FUNCTION BESJ1(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BESJ1
+  REAL ampl, bj1cs, bm1cs, bth1cs, CSEVL, pi4, R1MACH, &
+    theta, X, xmax, xmin, xsml, y, z
+  INTEGER INITS, ntj1, ntm1, ntth1
   DIMENSION bj1cs(12), bm1cs(21), bth1cs(24)
   LOGICAL first
   SAVE bj1cs, bm1cs, bth1cs, pi4, ntj1, ntm1, ntth1, xsml, xmin, &

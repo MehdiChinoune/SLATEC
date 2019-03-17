@@ -1,8 +1,6 @@
 !DECK C9LGMC
 COMPLEX FUNCTION C9LGMC(Zin)
   IMPLICIT NONE
-  REAL bern, bound, cabsz, R1MACH, x, xbig, xmax, y
-  INTEGER i, ndx, nterm
   !***BEGIN PROLOGUE  C9LGMC
   !***SUBSIDIARY
   !***PURPOSE  Compute the log gamma correction factor so that
@@ -33,6 +31,8 @@ COMPLEX FUNCTION C9LGMC(Zin)
   !           (WRB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  C9LGMC
+  REAL bern, bound, cabsz, R1MACH, x, xbig, xmax, y
+  INTEGER i, ndx, nterm
   COMPLEX Zin, z, z2inv
   DIMENSION bern(11)
   LOGICAL first

@@ -1,7 +1,6 @@
 !DECK DATANH
 REAL(8) FUNCTION DATANH(X)
   IMPLICIT NONE
-  INTEGER INITDS, nterms
   !***BEGIN PROLOGUE  DATANH
   !***PURPOSE  Compute the arc hyperbolic tangent.
   !***LIBRARY   SLATEC (FNLIB)
@@ -30,6 +29,7 @@ REAL(8) FUNCTION DATANH(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DATANH
+  INTEGER INITDS, nterms
   REAL(8) :: X, atnhcs(27), dxrel, sqeps, y, DCSEVL, D1MACH
   LOGICAL first
   SAVE atnhcs, nterms, dxrel, sqeps, first
@@ -73,8 +73,7 @@ REAL(8) FUNCTION DATANH(X)
   IF ( y>=1.D0 ) CALL XERMSG('SLATEC','DATANH','ABS(X) GE 1',2,2)
   !
   IF ( 1.D0-y<dxrel ) CALL XERMSG('SLATEC','DATANH',&
-    'ANSWER LT HALF PRECISION BECAUSE ABS(X) TOO NEAR 1'&
-    ,1,1)
+    'ANSWER LT HALF PRECISION BECAUSE ABS(X) TOO NEAR 1',1,1)
   !
   DATANH = X
   IF ( y>sqeps.AND.y<=0.5D0 )&

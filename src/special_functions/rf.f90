@@ -1,7 +1,6 @@
 !DECK RF
 REAL FUNCTION RF(X,Y,Z,Ier)
   IMPLICIT NONE
-  REAL R1MACH
   !***BEGIN PROLOGUE  RF
   !***PURPOSE  Compute the incomplete or complete elliptic integral of the
   !            1st kind.  For X, Y, and Z non-negative and at most one of
@@ -245,6 +244,7 @@ REAL FUNCTION RF(X,Y,Z,Ier)
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  RF
+  REAL R1MACH
   CHARACTER(16) :: xern3, xern4, xern5, xern6
   INTEGER Ier
   REAL lolim, uplim, epslon, errtol

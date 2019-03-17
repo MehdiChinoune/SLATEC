@@ -1,11 +1,6 @@
 !DECK LA05CD
 SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   IMPLICIT NONE
-  INTEGER i, Ia, ii, ij, im, in, ins, ipp, ir, is, j, jm, jns ,&
-    jp, k, kj, kk, kl, km, knp
-  INTEGER kp, kpl, kq, kr, krl, ks, l, last, last1, last2, LCOl ,&
-    LENl, LENu, LP, LROw, m, m1, mcp, Mm, N
-  INTEGER NCP, nz
   !***BEGIN PROLOGUE  LA05CD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -40,6 +35,11 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
   !   920422  Changed upper limit on DO from LAST to LAST-1.  (WRB)
   !***END PROLOGUE  LA05CD
+  INTEGER i, Ia, ii, ij, im, in, ins, ipp, ir, is, j, jm, jns, &
+    jp, k, kj, kk, kl, km, knp
+  INTEGER kp, kpl, kq, kr, krl, ks, l, last, last1, last2, LCOl, &
+    LENl, LENu, LP, LROw, m, m1, mcp, Mm, N
+  INTEGER NCP, nz
   REAL(8) :: A(*), G, U, am, W(*), SMAll, au
   INTEGER Ind(Ia,2), Iw(N,8)
   INTEGER Ip(N,2)
@@ -440,8 +440,7 @@ SUBROUTINE LA05CD(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   !
   300 CONTINUE
   IF ( LP>0 ) CALL XERMSG('SLATEC','LA05CD',&
-    'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.'&
-    ,-7,1)
+    'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.',-7,1)
   G = -7.0D0
   RETURN
 END SUBROUTINE LA05CD

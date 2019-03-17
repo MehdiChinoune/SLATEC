@@ -1,8 +1,6 @@
 !DECK SINQI
 SUBROUTINE SINQI(N,Wsave)
   IMPLICIT NONE
-  INTEGER N
-  REAL Wsave
   !***BEGIN PROLOGUE  SINQI
   !***PURPOSE  Initialize a work array for SINQF and SINQB.
   !***LIBRARY   SLATEC (FFTPACK)
@@ -44,6 +42,8 @@ SUBROUTINE SINQI(N,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SINQI
+  INTEGER N
+  REAL Wsave
   DIMENSION Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  SINQI
   CALL COSQI(N,Wsave)

@@ -2,7 +2,6 @@
 SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
     Rv5,Rv6)
   IMPLICIT NONE
-  REAL R1MACH
   !***BEGIN PROLOGUE  TSTURM
   !***PURPOSE  Find those eigenvalues of a symmetric tridiagonal matrix
   !            in a given interval and their associated eigenvectors by
@@ -116,7 +115,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  TSTURM
-  !
+  REAL R1MACH
   INTEGER i, j, k, M, N, p, q, r, s, ii, ip, jj, Mm, m1, m2, &
     Nm, its
   INTEGER Ierr, group, isturm

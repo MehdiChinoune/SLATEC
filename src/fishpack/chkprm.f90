@@ -1,9 +1,6 @@
 !DECK CHKPRM
-SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,&
-    Ierror)
+SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
   IMPLICIT NONE
-  REAL A, ai, B, bi, C, ci, D, dj, dlx, dly, ej, fj, xi, yj
-  INTEGER i, Idmn, Ierror, Intl, Iorder, j, M, Mbdcnd, N, Nbdcnd
   !***BEGIN PROLOGUE  CHKPRM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPELI
@@ -22,7 +19,8 @@ SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CHKPRM
-  !
+  REAL A, ai, B, bi, C, ci, D, dj, dlx, dly, ej, fj, xi, yj
+  INTEGER i, Idmn, Ierror, Intl, Iorder, j, M, Mbdcnd, N, Nbdcnd
   EXTERNAL COFX, COFY
   !***FIRST EXECUTABLE STATEMENT  CHKPRM
   Ierror = 1

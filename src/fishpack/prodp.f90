@@ -1,10 +1,6 @@
 !DECK PRODP
 SUBROUTINE PRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
   IMPLICIT NONE
-  REAL A, Aa, am, B, Bd, bh, Bm1, Bm2, C, D, den, rt, U, v, &
-    W, X, Y, ym
-  INTEGER ia, ibr, id, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, &
-    Nm2
   !***BEGIN PROLOGUE  PRODP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI
@@ -33,7 +29,8 @@ SUBROUTINE PRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  PRODP
-  !
+  REAL A, Aa, am, B, Bd, bh, Bm1, Bm2, C, D, den, rt, U, v, W, X, Y, ym
+  INTEGER ia, ibr, id, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, Nm2
   DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), U(*), Bd(*), Bm1(*)&
     , Bm2(*), Aa(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  PRODP

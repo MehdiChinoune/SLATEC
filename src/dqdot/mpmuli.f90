@@ -1,7 +1,6 @@
 !DECK MPMULI
 SUBROUTINE MPMULI(X,Iy,Z)
   IMPLICIT NONE
-  INTEGER Iy
   !***BEGIN PROLOGUE  MPMULI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
@@ -23,6 +22,7 @@ SUBROUTINE MPMULI(X,Iy,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  MPMULI
+  INTEGER Iy
   INTEGER X(*), Z(*)
   !***FIRST EXECUTABLE STATEMENT  MPMULI
   CALL MPMUL2(X,Iy,Z,0)

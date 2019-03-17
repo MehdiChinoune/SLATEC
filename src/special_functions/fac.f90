@@ -1,8 +1,6 @@
 !DECK FAC
-FUNCTION FAC(N)
+REAL FUNCTION FAC(N)
   IMPLICIT NONE
-  REAL FAC, facn, R9LGMC, sq2pil, x, xmax, xmin
-  INTEGER N, nmax
   !***BEGIN PROLOGUE  FAC
   !***PURPOSE  Compute the factorial function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -24,6 +22,8 @@ FUNCTION FAC(N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  FAC
+  REAL facn, R9LGMC, sq2pil, x, xmax, xmin
+  INTEGER N, nmax
   DIMENSION facn(26)
   SAVE facn, sq2pil, nmax
   DATA facn(1)/1.0E0/

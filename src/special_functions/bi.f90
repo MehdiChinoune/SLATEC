@@ -1,9 +1,6 @@
 !DECK BI
-FUNCTION BI(X)
+REAL FUNCTION BI(X)
   IMPLICIT NONE
-  REAL BI, BIE, bif2cs, bifcs, big2cs, bigcs, CSEVL, eta, R1MACH, &
-    theta, X, x3sml, xm, xmax, z
-  INTEGER INITS, nbif, nbif2, nbig, nbig2
   !***BEGIN PROLOGUE  BI
   !***PURPOSE  Evaluate the Bairy function (the Airy function of the
   !            second kind).
@@ -52,6 +49,9 @@ FUNCTION BI(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BI
+  REAL BIE, bif2cs, bifcs, big2cs, bigcs, CSEVL, eta, R1MACH, &
+    theta, X, x3sml, xm, xmax, z
+  INTEGER INITS, nbif, nbif2, nbig, nbig2
   DIMENSION bifcs(9), bigcs(8), bif2cs(10), big2cs(10)
   LOGICAL first
   SAVE bifcs, bigcs, bif2cs, big2cs, nbif, nbig, nbif2, nbig2, &

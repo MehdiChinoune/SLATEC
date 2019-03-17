@@ -1,8 +1,6 @@
 !DECK PCOEF
 SUBROUTINE PCOEF(L,C,Tc,A)
   IMPLICIT NONE
-  REAL A, C, fac, save, Tc
-  INTEGER i, L, ll, llp1, llp2, new, nr
   !***BEGIN PROLOGUE  PCOEF
   !***PURPOSE  Convert the POLFIT coefficients to Taylor series form.
   !***LIBRARY   SLATEC
@@ -58,7 +56,8 @@ SUBROUTINE PCOEF(L,C,Tc,A)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  PCOEF
-  !
+  REAL A, C, fac, save, Tc
+  INTEGER i, L, ll, llp1, llp2, new, nr
   DIMENSION A(*), Tc(*)
   !***FIRST EXECUTABLE STATEMENT  PCOEF
   ll = ABS(L)

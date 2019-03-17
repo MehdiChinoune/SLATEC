@@ -1,8 +1,6 @@
 !DECK DXC210
 SUBROUTINE DXC210(K,Z,J,Ierror)
   IMPLICIT NONE
-  INTEGER i, ic, id, Ierror, ii, it, ja, ka, ka1, ka2, m, nm1, &
-    np1
   !***BEGIN PROLOGUE  DXC210
   !***PURPOSE  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.
@@ -42,6 +40,7 @@ SUBROUTINE DXC210(K,Z,J,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXC210
+  INTEGER i, ic, id, Ierror, ii, it, ja, ka, ka1, ka2, m, nm1, np1
   REAL(8) :: Z
   INTEGER K, J
   INTEGER NLG102, MLG102, LG102

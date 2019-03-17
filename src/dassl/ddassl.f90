@@ -930,7 +930,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !     Declare arguments.
   !
   INTEGER Neq, Info(15), Idid, Lrw, Iwork(*), Liw, Ipar(*)
-  REAL(8) :: T, Y(*), Yprime(*), Tout, Rtol(*), Atol(*) ,&
+  REAL(8) :: T, Y(*), Yprime(*), Tout, Rtol(*), Atol(*), &
     Rwork(*), Rpar(*)
   EXTERNAL RES, JAC
   !
@@ -941,13 +941,13 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !
   !     Declare local variables.
   !
-  INTEGER i, itemp, LALPHA, LBETA, LCJ, LCJOLD, LCTF, LDELTA ,&
-    leniw, lenpd, lenrw, le, LETF, LGAMMA, LH, LHMAX, LHOLD ,&
-    LIPVT, LJCALC, LK, LKOLD, LIWM, LML, LMTYPE, LMU, LMXORD ,&
-    LNJE, LNPD, LNRE, LNS, LNST, LNSTL, lpd, LPHASE, lphi ,&
-    LPSI, LROUND, LS, LSIGMA, LTN, LTSTOP, lwm, lwt, mband ,&
+  INTEGER i, itemp, LALPHA, LBETA, LCJ, LCJOLD, LCTF, LDELTA, &
+    leniw, lenpd, lenrw, le, LETF, LGAMMA, LH, LHMAX, LHOLD, &
+    LIPVT, LJCALC, LK, LKOLD, LIWM, LML, LMTYPE, LMU, LMXORD, &
+    LNJE, LNPD, LNRE, LNS, LNST, LNSTL, lpd, LPHASE, lphi, &
+    LPSI, LROUND, LS, LSIGMA, LTN, LTSTOP, lwm, lwt, mband, &
     msave, mxord, NPD, ntemp, nzflg
-  REAL(8) :: atoli, h, hmax, hmin, ho, r, rh, rtoli, tdist ,&
+  REAL(8) :: atoli, h, hmax, hmin, ho, r, rh, rtoli, tdist, &
     tn, tnext, tstop, uround, ypnorm
   LOGICAL done
   !       Auxiliary variables for conversion of values to be included in
@@ -1362,8 +1362,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           Iwork(LIWM),Rwork(LALPHA),Rwork(LBETA),Rwork(LGAMMA),&
           Rwork(LPSI),Rwork(LSIGMA),Rwork(LCJ),Rwork(LCJOLD),&
           Rwork(LHOLD),Rwork(LS),hmin,Rwork(LROUND),Iwork(LPHASE),&
-          Iwork(LJCALC),Iwork(LK),Iwork(LKOLD),Iwork(LNS),Info(10)&
-          ,ntemp)
+          Iwork(LJCALC),Iwork(LK),Iwork(LKOLD),Iwork(LNS),Info(10),ntemp)
         !     MULTIPLY RTOL AND ATOL BY R AND RETURN
       ELSEIF ( Info(2)==1 ) THEN
         DO i = 1, Neq

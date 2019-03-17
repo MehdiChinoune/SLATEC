@@ -115,7 +115,7 @@ SUBROUTINE CNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
   COMPLEX Abe(Lda,*)
   !
-  INTEGER ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp ,&
+  INTEGER ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp, &
     ICAMAX
   COMPLEX t
   REAL CABS1

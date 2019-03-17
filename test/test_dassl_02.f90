@@ -371,7 +371,6 @@ END MODULE TEST49_MOD
 PROGRAM TEST49
   USE TEST49_MOD
   IMPLICIT NONE
-  INTEGER I1MACH
   !***BEGIN PROLOGUE  TEST49
   !***PURPOSE  Driver for testing SLATEC subprograms
   !***LIBRARY   SLATEC
@@ -411,6 +410,7 @@ PROGRAM TEST49
   !   901009  Corrected GAMS classification code.  (FNF)
   !   901009  Constructed double precision version.  (FNF)
   !***END PROLOGUE  TEST49
+  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST49
   lun = I1MACH(2)

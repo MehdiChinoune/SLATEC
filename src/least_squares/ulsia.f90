@@ -2,9 +2,6 @@
 SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
     Lw,Iwork,Liw,Info)
   IMPLICIT NONE
-  REAL A, Ae, B, eps, R1MACH, Re, Rnorm, W
-  INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, m1, m2, &
-    m3, m4, m5, Mda, Mdb, Mode, N, Nb, Np
   !***BEGIN PROLOGUE  ULSIA
   !***PURPOSE  Solve an underdetermined linear system of equations by
   !            performing an LQ factorization of the matrix using
@@ -170,6 +167,9 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  ULSIA
+  REAL A, Ae, B, eps, R1MACH, Re, Rnorm, W
+  INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, m1, m2, &
+    m3, m4, m5, Mda, Mdb, Mode, N, Nb, Np
   DIMENSION A(Mda,*), B(Mdb,*), Re(*), Ae(*), Rnorm(*), W(*)
   INTEGER Iwork(*)
   !

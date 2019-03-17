@@ -1,8 +1,6 @@
 !DECK DBSK0E
 REAL(8) FUNCTION DBSK0E(X)
   IMPLICIT NONE
-  REAL eta
-  INTEGER INITDS, ntak0, ntak02, ntk0
   !***BEGIN PROLOGUE  DBSK0E
   !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the third kind of order zero.
@@ -46,6 +44,8 @@ REAL(8) FUNCTION DBSK0E(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBSK0E
+  REAL eta
+  INTEGER INITDS, ntak0, ntak02, ntk0
   REAL(8) :: X, bk0cs(16), ak0cs(38), ak02cs(33), xsml, y, &
     D1MACH, DCSEVL, DBESI0
   LOGICAL first

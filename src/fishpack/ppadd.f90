@@ -1,10 +1,6 @@
 !DECK PPADD
 SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   IMPLICIT NONE
-  REAL A, Bh, Bp, BSRH, C, CNV, db, EPS, PPSGF, PPSPF, psg, &
-    PSGF, scnv, sgn, xl, xm, xr
-  INTEGER i3, icv, Ierror, if, ig, IK, is, it, iz, j, K, modiz, &
-    N, NCMplx, nhalf, NM, NPP, nt
   !***BEGIN PROLOGUE  PPADD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BLKTRI
@@ -31,7 +27,10 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  PPADD
-  !
+  REAL A, Bh, Bp, BSRH, C, CNV, db, EPS, PPSGF, PPSPF, psg, &
+    PSGF, scnv, sgn, xl, xm, xr
+  INTEGER i3, icv, Ierror, if, ig, IK, is, it, iz, j, K, modiz, &
+    N, NCMplx, nhalf, NM, NPP, nt
   COMPLEX cx, fsg, hsg, dd, f, fp, fpp, cdis, r1, r2, r3, Cbp
   DIMENSION A(*), C(*), Bp(*), Bh(*), Cbp(*)
   COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK

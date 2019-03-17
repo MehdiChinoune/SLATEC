@@ -1,5 +1,6 @@
 !DECK DBNDAC
 SUBROUTINE DBNDAC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
+  IMPLICIT NONE
   !***BEGIN PROLOGUE  DBNDAC
   !***PURPOSE  Compute the LU factorization of a  banded matrices using
   !            sequential accumulation of rows of the data matrix.
@@ -188,7 +189,6 @@ SUBROUTINE DBNDAC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DBNDAC
-  IMPLICIT NONE
   REAL(8) :: G, rho, zero
   INTEGER i, ie, ig, ig1, ig2, iopt, Ip, Ir, j, jg, Jt, k, kh, &
     l, lp1, Mdg, mh, Mt, mu, Nb

@@ -97,8 +97,7 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
   IF ( kk/=1.AND.kk/=2 ) THEN
     Ier = 2
     CALL XERMSG('SLATEC','SPSORT',&
-      'The sort control parameter, KFLAG, is not 2, 1, -1, or -2.'&
-      ,Ier,1)
+      'The sort control parameter, KFLAG, is not 2, 1, -1, or -2.',Ier,1)
     RETURN
   ENDIF
   !

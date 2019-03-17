@@ -1,7 +1,6 @@
 !DECK DXADJ
 SUBROUTINE DXADJ(X,Ix,Ierror)
   IMPLICIT NONE
-  INTEGER Ierror
   !***BEGIN PROLOGUE  DXADJ
   !***PURPOSE  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.
@@ -35,6 +34,7 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXADJ
+  INTEGER Ierror
   REAL(8) :: X
   INTEGER Ix
   REAL(8) :: RADix, RADixl, RAD2l, DLG10r

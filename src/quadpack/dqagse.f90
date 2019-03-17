@@ -163,15 +163,12 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     defab1, defab2, D1MACH, dres, Elist, epmach, &
     Epsabs, Epsrel, erlarg, erlast, errbnd, errmax, &
     error1, error2, erro12, errsum, ertest, F, oflow, &
-    resabs, reseps, Result, res3la, Rlist, rlist2, &
-    small, uflow
+    resabs, reseps, Result, res3la, Rlist, rlist2, small, uflow
   INTEGER id, Ier, ierro, Iord, iroff1, iroff2, iroff3, jupbnd, k, &
-    ksgn, ktmin, Last, Limit, maxerr, Neval, nres, nrmax, &
-    numrl2
+    ksgn, ktmin, Last, Limit, maxerr, Neval, nres, nrmax, numrl2
   LOGICAL extrap, noext
   !
-  DIMENSION Alist(*), Blist(*), Elist(*), Iord(*), res3la(3), Rlist(*)&
-    , rlist2(52)
+  DIMENSION Alist(*), Blist(*), Elist(*), Iord(*), res3la(3), Rlist(*), rlist2(52)
   !
   EXTERNAL F
   !

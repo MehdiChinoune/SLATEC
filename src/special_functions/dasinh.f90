@@ -1,7 +1,6 @@
 !DECK DASINH
 REAL(8) FUNCTION DASINH(X)
   IMPLICIT NONE
-  INTEGER INITDS, nterms
   !***BEGIN PROLOGUE  DASINH
   !***PURPOSE  Compute the arc hyperbolic sine.
   !***LIBRARY   SLATEC (FNLIB)
@@ -23,8 +22,8 @@ REAL(8) FUNCTION DASINH(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DASINH
-  REAL(8) :: X, asnhcs(39), aln2, sqeps, xmax, y, DCSEVL, &
-    D1MACH
+  INTEGER INITDS, nterms
+  REAL(8) :: X, asnhcs(39), aln2, sqeps, xmax, y, DCSEVL, D1MACH
   LOGICAL first
   SAVE asnhcs, aln2, nterms, xmax, sqeps, first
   DATA asnhcs(1)/ - .12820039911738186343372127359268D+0/

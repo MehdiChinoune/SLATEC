@@ -1,9 +1,6 @@
 !DECK SODS
 SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   IMPLICIT NONE
-  REAL A, B, Work, X
-  INTEGER Iflag, ip, is, iter, Iwork, kc, kd, ks, kt, kv, kz, &
-    Neq, Nrda, Nuk
   !***BEGIN PROLOGUE  SODS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP
@@ -100,6 +97,8 @@ SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SODS
+  REAL A, B, Work, X
+  INTEGER Iflag, ip, is, iter, Iwork, kc, kd, ks, kt, kv, kz, Neq, Nrda, Nuk
   DIMENSION A(Nrda,*), X(*), B(*), Work(*), Iwork(*)
   !
   !***FIRST EXECUTABLE STATEMENT  SODS

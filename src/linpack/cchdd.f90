@@ -1,7 +1,6 @@
 !DECK CCHDD
 SUBROUTINE CCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   IMPLICIT NONE
-  REAL scale
   !***BEGIN PROLOGUE  CCHDD
   !***PURPOSE  Downdate an augmented Cholesky decomposition or the
   !            triangular factor of an augmented QR decomposition.
@@ -128,6 +127,7 @@ SUBROUTINE CCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CCHDD
+  REAL scale
   INTEGER Ldr, P, Ldz, Nz, Info
   COMPLEX R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
   REAL Rho(*), C(*)

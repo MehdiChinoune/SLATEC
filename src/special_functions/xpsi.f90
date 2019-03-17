@@ -1,7 +1,6 @@
 !DECK XPSI
 REAL FUNCTION XPSI(A,Ipsik,Ipsix)
   IMPLICIT NONE
-  INTEGER i, Ipsik, Ipsix, k, k1, m, n
   !***BEGIN PROLOGUE  XPSI
   !***SUBSIDIARY
   !***PURPOSE  To compute values of the Psi function for XLEGF.
@@ -20,6 +19,7 @@ REAL FUNCTION XPSI(A,Ipsik,Ipsix)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  XPSI
+  INTEGER i, Ipsik, Ipsix, k, k1, m, n
   REAL A, b, c, cnum, cdenom
   DIMENSION cnum(12), cdenom(12)
   SAVE cnum, cdenom

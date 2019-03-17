@@ -1,7 +1,6 @@
 !DECK CDOTU
 COMPLEX FUNCTION CDOTU(N,Cx,Incx,Cy,Incy)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, kx, ky, N, ns
   !***BEGIN PROLOGUE  CDOTU
   !***PURPOSE  Compute the inner product of two vectors.
   !***LIBRARY   SLATEC (BLAS)
@@ -45,6 +44,7 @@ COMPLEX FUNCTION CDOTU(N,Cx,Incx,Cy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CDOTU
+  INTEGER i, Incx, Incy, kx, ky, N, ns
   COMPLEX Cx(*), Cy(*)
   !***FIRST EXECUTABLE STATEMENT  CDOTU
   CDOTU = (0.0,0.0)

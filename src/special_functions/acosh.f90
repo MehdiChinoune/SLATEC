@@ -1,7 +1,6 @@
 !DECK ACOSH
-FUNCTION ACOSH(X)
+REAL FUNCTION ACOSH(X)
   IMPLICIT NONE
-  REAL ACOSH, aln2, R1MACH, X, xmax
   !***BEGIN PROLOGUE  ACOSH
   !***PURPOSE  Compute the arc hyperbolic cosine.
   !***LIBRARY   SLATEC (FNLIB)
@@ -25,6 +24,7 @@ FUNCTION ACOSH(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  ACOSH
+  REAL aln2, R1MACH, X, xmax
   SAVE aln2, xmax
   DATA aln2/0.69314718055994530942E0/
   DATA xmax/0./

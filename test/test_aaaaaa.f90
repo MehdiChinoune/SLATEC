@@ -93,7 +93,6 @@ END MODULE TEST01_MOD
 PROGRAM TEST01
   USE TEST01_MOD
   IMPLICIT NONE
-  INTEGER I1MACH
   !***BEGIN PROLOGUE  TEST01
   !***PURPOSE  Driver for testing SLATEC subprogram
   !            AAAAAA
@@ -132,6 +131,7 @@ PROGRAM TEST01
   !   890713  DATE WRITTEN
   !   900524  Cosmetic changes to code.  (WRB)
   !***END PROLOGUE  TEST01
+  INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !***FIRST EXECUTABLE STATEMENT  TEST01
   lun = I1MACH(2)

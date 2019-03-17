@@ -110,7 +110,7 @@ CONTAINS
     LOGICAL same, tsterr, ftl, ftl1, ftl2
     CHARACTER :: trans
     !     .. Local Arrays ..
-    COMPLEX a(NMAX,NMAX), aa(NMAX*NMAX), alf(NALF), as(NMAX*NMAX) ,&
+    COMPLEX a(NMAX,NMAX), aa(NMAX*NMAX), alf(NALF), as(NMAX*NMAX), &
       bet(NBET), x(NMAX), xs(NMAX*INCMAX), xx(NMAX*INCMAX), y(NMAX)&
       , ys(NMAX*INCMAX), yt(NMAX), yy(NMAX*INCMAX), z(2*NMAX)
     REAL g(NMAX)
@@ -123,8 +123,8 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA snames/'CGEMV ', 'CGBMV ', 'CHEMV ', 'CHBMV ', 'CHPMV ' ,&
-      'CTRMV ', 'CTBMV ', 'CTPMV ', 'CTRSV ', 'CTBSV ', 'CTPSV ' ,&
+    DATA snames/'CGEMV ', 'CGBMV ', 'CHEMV ', 'CHBMV ', 'CHPMV ', &
+      'CTRMV ', 'CTBMV ', 'CTPMV ', 'CTRSV ', 'CTBSV ', 'CTPSV ', &
       'CGERC ', 'CGERU ', 'CHER  ', 'CHPR  ', 'CHER2 ', 'CHPR2 '/
     DATA idim/0, 1, 2, 3, 5, 9/
     DATA kb/0, 1, 2, 4/
@@ -316,8 +316,8 @@ CONTAINS
     LOGICAL same, tsterr, ftl, ftl1, ftl2
     CHARACTER :: transa, transb
     !     .. Local Arrays ..
-    COMPLEX aa(NMAX*NMAX), ab(NMAX,2*NMAX), alf(NALF), as(NMAX*NMAX) ,&
-      bb(NMAX*NMAX), bet(NBET), bs(NMAX*NMAX), c(NMAX,NMAX) ,&
+    COMPLEX aa(NMAX*NMAX), ab(NMAX,2*NMAX), alf(NALF), as(NMAX*NMAX), &
+      bb(NMAX*NMAX), bet(NBET), bs(NMAX*NMAX), c(NMAX,NMAX), &
       cc(NMAX*NMAX), cs(NMAX*NMAX), ct(NMAX), w(2*NMAX)
     REAL g(NMAX)
     INTEGER idim(NIDIM)
@@ -329,7 +329,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA snames/'CGEMM ', 'CHEMM ', 'CSYMM ', 'CTRMM ', 'CTRSM ' ,&
+    DATA snames/'CGEMM ', 'CHEMM ', 'CSYMM ', 'CTRMM ', 'CTRSM ', &
       'CHERK ', 'CSYRK ', 'CHER2K', 'CSYR2K'/
     DATA idim/0, 1, 2, 3, 5, 9/
     DATA alf/(0.0,0.0), (1.0,0.0), (0.7,-0.9)/
@@ -1248,7 +1248,7 @@ CONTAINS
     INTEGER Incmax, Kprint, Nalf, Nbet, Nidim, Ninc, Nkb, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax) ,&
+    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       Bet(Nbet), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax)&
       , Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
     REAL G(Nmax)
@@ -1256,8 +1256,8 @@ CONTAINS
     !     .. Local Scalars ..
     COMPLEX alpha, als, beta, bls, transl
     REAL err, errmax
-    INTEGER i, ia, ib, ic, iku, im, in, incx, incxs, incy, incys ,&
-      ix, iy, kl, kls, ku, kus, laa, lda, ldas, lx, ly, m ,&
+    INTEGER i, ia, ib, ic, iku, im, in, incx, incxs, incy, incys, &
+      ix, iy, kl, kls, ku, kus, laa, lda, ldas, lx, ly, m, &
       ml, ms, n, nargs, nc, nd, nk, nerr, nl, ns
     LOGICAL banded, ftl, full, null, reset, tran
     CHARACTER :: trans, transs
@@ -1469,11 +1469,11 @@ CONTAINS
                         IF ( Kprint>=3 ) THEN
                           WRITE (Nout,FMT=99004) Sname
                           IF ( full ) THEN
-                            WRITE (Nout,FMT=99006) nc, Sname, trans, m ,&
+                            WRITE (Nout,FMT=99006) nc, Sname, trans, m, &
                               n, alpha, lda, incx, beta, incy
                           ELSEIF ( banded ) THEN
-                            WRITE (Nout,FMT=99005) nc, Sname, trans, m ,&
-                              n, kl, ku, alpha, lda, incx, beta ,&
+                            WRITE (Nout,FMT=99005) nc, Sname, trans, m, &
+                              n, kl, ku, alpha, lda, incx, beta, &
                               incy
                           ENDIF
                         ENDIF
@@ -1560,16 +1560,16 @@ CONTAINS
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax) ,&
-      B(Nmax,Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax) ,&
+    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+      B(Nmax,Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
       C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax)
     REAL G(Nmax)
     INTEGER Idim(Nidim)
     !     .. Local Scalars ..
     COMPLEX alpha, als, beta, bls
     REAL err, errmax
-    INTEGER i, ia, ib, ica, icb, ik, im, in, k, ks, laa, lbb ,&
-      lcc, lda, ldas, ldb, ldbs, ldc, ldcs, m, ma, mb, ms ,&
+    INTEGER i, ia, ib, ica, icb, ik, im, in, k, ks, laa, lbb, &
+      lcc, lda, ldas, ldb, ldbs, ldc, ldcs, m, ma, mb, ms, &
       n, na, nargs, nb, nc, nerr, ns
     LOGICAL ftl, null, reset, trana, tranb
     CHARACTER :: tranas, tranbs, transa, transb
@@ -1741,8 +1741,8 @@ CONTAINS
                           Fatal = .TRUE.
                           IF ( Kprint>=3 ) THEN
                             WRITE (Nout,FMT=99004) Sname
-                            WRITE (Nout,FMT=99005) nc, Sname, transa ,&
-                              transb, m, n, k, alpha, lda, ldb ,&
+                            WRITE (Nout,FMT=99005) nc, Sname, transa, &
+                              transb, m, n, k, alpha, lda, ldb, &
                               beta, ldc
                           ENDIF
                         ENDIF
@@ -1825,7 +1825,7 @@ CONTAINS
     INTEGER Incmax, Kprint, Nalf, Nbet, Nidim, Ninc, Nkb, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax) ,&
+    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
       Bet(Nbet), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax)&
       , Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
     REAL G(Nmax)
@@ -1833,8 +1833,8 @@ CONTAINS
     !     .. Local Scalars ..
     COMPLEX alpha, als, beta, bls, transl
     REAL err, errmax
-    INTEGER i, ia, ib, ic, ik, in, incx, incxs, incy, incys, ix ,&
-      iy, k, ks, laa, lda, ldas, lx, ly, n, nargs, nc, nerr ,&
+    INTEGER i, ia, ib, ic, ik, in, incx, incxs, incy, incys, ix, &
+      iy, k, ks, laa, lda, ldas, lx, ly, n, nargs, nc, nerr, &
       nk, ns
     LOGICAL banded, ftl, full, null, packed, reset
     CHARACTER :: uplo, uplos
@@ -2045,13 +2045,13 @@ CONTAINS
                       IF ( Kprint>=3 ) THEN
                         WRITE (Nout,FMT=99004) Sname
                         IF ( full ) THEN
-                          WRITE (Nout,FMT=99006) nc, Sname, uplo, n ,&
+                          WRITE (Nout,FMT=99006) nc, Sname, uplo, n, &
                             alpha, lda, incx, beta, incy
                         ELSEIF ( banded ) THEN
-                          WRITE (Nout,FMT=99005) nc, Sname, uplo, n ,&
+                          WRITE (Nout,FMT=99005) nc, Sname, uplo, n, &
                             alpha, lda, incx, beta, incy
                         ELSEIF ( packed ) THEN
-                          WRITE (Nout,FMT=99005) nc, Sname, uplo, n ,&
+                          WRITE (Nout,FMT=99005) nc, Sname, uplo, n, &
                             alpha, incx, beta, incy
                         ENDIF
                       ENDIF
@@ -2136,15 +2136,15 @@ CONTAINS
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax) ,&
-      B(Nmax,Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax) ,&
+    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+      B(Nmax,Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
       C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax)
     REAL G(Nmax)
     INTEGER Idim(Nidim)
     !     .. Local Scalars ..
     COMPLEX alpha, als, beta, bls
     REAL err, errmax
-    INTEGER i, ia, ib, ics, icu, im, in, laa, lbb, lcc, lda, ldas ,&
+    INTEGER i, ia, ib, ics, icu, im, in, laa, lbb, lcc, lda, ldas, &
       ldb, ldbs, ldc, ldcs, m, ms, n, na, nargs, nc, nerr, ns
     LOGICAL conj, ftl, left, null, reset
     CHARACTER :: side, sides, uplo, uplos
@@ -2316,7 +2316,7 @@ CONTAINS
                         Fatal = .TRUE.
                         IF ( Kprint>=3 ) THEN
                           WRITE (Nout,FMT=99004) Sname
-                          WRITE (Nout,FMT=99005) nc, Sname, side, uplo ,&
+                          WRITE (Nout,FMT=99005) nc, Sname, side, uplo, &
                             m, n, alpha, lda, ldb, beta, ldc
                         ENDIF
                       ENDIF
@@ -2397,14 +2397,14 @@ CONTAINS
     INTEGER Incmax, Kprint, Nidim, Ninc, Nkb, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), As(Nmax*Nmax), X(Nmax) ,&
+    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), As(Nmax*Nmax), X(Nmax), &
       Xs(Nmax*Incmax), Xt(Nmax), Xx(Nmax*Incmax), Z(Nmax)
     REAL G(Nmax)
     INTEGER Idim(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
     COMPLEX transl
     REAL err, errmax
-    INTEGER i, icd, ict, icu, ik, in, incx, incxs, ix, k, ks, laa ,&
+    INTEGER i, icd, ict, icu, ik, in, incx, incxs, ix, k, ks, laa, &
       lda, ldas, lx, n, nargs, nc, nerr, nk, ns
     LOGICAL banded, ftl, full, null, packed, reset
     CHARACTER :: diag, diags, trans, transs, uplo, uplos
@@ -2617,13 +2617,13 @@ CONTAINS
                     IF ( Kprint>=3 ) THEN
                       WRITE (Nout,FMT=99004) Sname
                       IF ( full ) THEN
-                        WRITE (Nout,FMT=99006) nc, Sname, uplo, trans ,&
+                        WRITE (Nout,FMT=99006) nc, Sname, uplo, trans, &
                           diag, n, lda, incx
                       ELSEIF ( banded ) THEN
-                        WRITE (Nout,FMT=99005) nc, Sname, uplo, trans ,&
+                        WRITE (Nout,FMT=99005) nc, Sname, uplo, trans, &
                           diag, n, k, lda, incx
                       ELSEIF ( packed ) THEN
-                        WRITE (Nout,FMT=99005) nc, Sname, uplo, trans ,&
+                        WRITE (Nout,FMT=99005) nc, Sname, uplo, trans, &
                           diag, n, incx
                       ENDIF
                     ENDIF
@@ -2706,15 +2706,15 @@ CONTAINS
     INTEGER Kprint, Nalf, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax) ,&
-      B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), C(Nmax,Nmax) ,&
+    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+      B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), C(Nmax,Nmax), &
       Ct(Nmax)
     REAL G(Nmax)
     INTEGER Idim(Nidim)
     !     .. Local Scalars ..
     COMPLEX alpha, als
     REAL err, errmax
-    INTEGER i, ia, icd, ics, ict, icu, im, in, j, laa, lbb, lda ,&
+    INTEGER i, ia, icd, ics, ict, icu, im, in, j, laa, lbb, lda, &
       ldas, ldb, ldbs, m, ms, n, na, nargs, nc, nerr, ns
     LOGICAL ftl, left, null, reset
     CHARACTER :: diag, diags, side, sides, tranas, transa, uplo, uplos
@@ -2900,7 +2900,7 @@ CONTAINS
                       Fatal = .TRUE.
                       IF ( Kprint>=3 ) THEN
                         WRITE (Nout,FMT=99004) Sname
-                        WRITE (Nout,FMT=99005) nc, Sname, side, uplo ,&
+                        WRITE (Nout,FMT=99005) nc, Sname, side, uplo, &
                           transa, diag, m, n, alpha, lda, ldb
                       ENDIF
                     ENDIF
@@ -2981,15 +2981,15 @@ CONTAINS
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
     COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax)&
-      , Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax) ,&
+      , Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), &
       Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
     REAL G(Nmax)
     INTEGER Idim(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
     COMPLEX alpha, als, transl
     REAL err, errmax
-    INTEGER i, ia, im, in, incx, incxs, incy, incys, ix, iy, j ,&
-      laa, lda, ldas, lx, ly, m, ms, n, nargs, nc, nd, nerr ,&
+    INTEGER i, ia, im, in, incx, incxs, incy, incys, ix, iy, j, &
+      laa, lda, ldas, lx, ly, m, ms, n, nargs, nc, nd, nerr, &
       ns
     LOGICAL conj, ftl, null, reset
     !     .. Local Arrays ..
@@ -3154,7 +3154,7 @@ CONTAINS
                   IF ( Kprint>=3 ) THEN
                     WRITE (Nout,FMT=99005) j
                     WRITE (Nout,FMT=99004) Sname
-                    WRITE (Nout,FMT=99006) nc, Sname, m, n, alpha, incx ,&
+                    WRITE (Nout,FMT=99006) nc, Sname, m, n, alpha, incx, &
                       incy, lda
                   ENDIF
                 ENDIF
@@ -3233,16 +3233,16 @@ CONTAINS
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax) ,&
-      B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), Bet(Nbet) ,&
+    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+      B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), Bet(Nbet), &
       C(Nmax,Nmax), Cc(Nmax*Nmax), Ct(Nmax), Cs(Nmax*Nmax)
     REAL G(Nmax)
     INTEGER Idim(Nidim)
     !     .. Local Scalars ..
     COMPLEX alpha, als, beta, bets
     REAL err, errmax, ralpha, rals, rbeta, rbets
-    INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, k, ks, laa ,&
-      lcc, lda, ldas, ldc, ldcs, lj, ma, n, na, nargs, nc ,&
+    INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, k, ks, laa, &
+      lcc, lda, ldas, ldc, ldcs, lj, ma, n, na, nargs, nc, &
       nerr, ns
     LOGICAL conj, ftl, null, reset, tran, upper
     CHARACTER :: trans, transs, uplo, transt, uplos
@@ -3443,11 +3443,11 @@ CONTAINS
                           IF ( Kprint>=3 ) THEN
                             WRITE (Nout,FMT=99004) Sname
                             IF ( conj ) THEN
-                              WRITE (Nout,FMT=99005) nc, Sname, uplo ,&
-                                trans, n, k, ralpha, lda, rbeta ,&
+                              WRITE (Nout,FMT=99005) nc, Sname, uplo, &
+                                trans, n, k, ralpha, lda, rbeta, &
                                 ldc
                             ELSE
-                              WRITE (Nout,FMT=99006) nc, Sname, uplo ,&
+                              WRITE (Nout,FMT=99006) nc, Sname, uplo, &
                                 trans, n, k, alpha, lda, beta, ldc
                             ENDIF
                           ENDIF
@@ -3532,14 +3532,14 @@ CONTAINS
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
     COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax)&
-      , Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax) ,&
+      , Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), &
       Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
     REAL G(Nmax)
     INTEGER Idim(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
     COMPLEX alpha, transl
     REAL err, errmax, ralpha, rals
-    INTEGER i, ia, ic, in, incx, incxs, ix, j, ja, jj, laa, lda ,&
+    INTEGER i, ia, ic, in, incx, incxs, ix, j, ja, jj, laa, lda, &
       ldas, lj, lx, n, nargs, nc, nerr, ns
     LOGICAL ftl, full, null, packed, reset, upper
     CHARACTER :: uplo, uplos
@@ -3705,10 +3705,10 @@ CONTAINS
                 IF ( Kprint>=3 ) THEN
                   WRITE (Nout,FMT=99004) Sname
                   IF ( full ) THEN
-                    WRITE (Nout,FMT=99006) nc, Sname, uplo, n, ralpha ,&
+                    WRITE (Nout,FMT=99006) nc, Sname, uplo, n, ralpha, &
                       incx, lda
                   ELSEIF ( packed ) THEN
-                    WRITE (Nout,FMT=99005) nc, Sname, uplo, n, ralpha ,&
+                    WRITE (Nout,FMT=99005) nc, Sname, uplo, n, ralpha, &
                       incx
                   ENDIF
                 ENDIF
@@ -3787,16 +3787,16 @@ CONTAINS
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX Aa(Nmax*Nmax), Ab(2*Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax) ,&
-      Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), C(Nmax,Nmax) ,&
+    COMPLEX Aa(Nmax*Nmax), Ab(2*Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+      Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), C(Nmax,Nmax), &
       Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax), W(2*Nmax)
     REAL G(Nmax)
     INTEGER Idim(Nidim)
     !     .. Local Scalars ..
     COMPLEX alpha, als, beta, bets
     REAL err, errmax, rbeta, rbets
-    INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, jjab, k, ks ,&
-      laa, lbb, lcc, lda, ldas, ldb, ldbs, ldc, ldcs, lj, ma ,&
+    INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, jjab, k, ks, &
+      laa, lbb, lcc, lda, ldas, ldb, ldbs, ldc, ldcs, lj, ma, &
       n, na, nargs, nc, nerr, ns
     LOGICAL conj, ftl, null, reset, tran, upper
     CHARACTER :: trans, transs, uplo, transt, uplos
@@ -4028,12 +4028,12 @@ CONTAINS
                           IF ( Kprint>=3 ) THEN
                             WRITE (Nout,FMT=99004) Sname
                             IF ( conj ) THEN
-                              WRITE (Nout,FMT=99005) nc, Sname, uplo ,&
-                                trans, n, k, alpha, lda, ldb ,&
+                              WRITE (Nout,FMT=99005) nc, Sname, uplo, &
+                                trans, n, k, alpha, lda, ldb, &
                                 rbeta, ldc
                             ELSE
-                              WRITE (Nout,FMT=99006) nc, Sname, uplo ,&
-                                trans, n, k, alpha, lda, ldb ,&
+                              WRITE (Nout,FMT=99006) nc, Sname, uplo, &
+                                trans, n, k, alpha, lda, ldb, &
                                 beta, ldc
                             ENDIF
                           ENDIF
@@ -4118,15 +4118,15 @@ CONTAINS
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
     COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax)&
-      , Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax) ,&
+      , Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), &
       Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax,2)
     REAL G(Nmax)
     INTEGER Idim(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
     COMPLEX alpha, als, transl
     REAL err, errmax
-    INTEGER i, ia, ic, in, incx, incxs, incy, incys, ix, iy, j ,&
-      ja, jj, laa, lda, ldas, lj, lx, ly, n, nargs, nc ,&
+    INTEGER i, ia, ic, in, incx, incxs, incy, incys, ix, iy, j, &
+      ja, jj, laa, lda, ldas, lj, lx, ly, n, nargs, nc, &
       nerr, ns
     LOGICAL ftl, full, null, packed, reset, upper
     CHARACTER :: uplo, uplos
@@ -4322,10 +4322,10 @@ CONTAINS
                     WRITE (Nout,FMT=99005) j
                     WRITE (Nout,FMT=99004) Sname
                     IF ( full ) THEN
-                      WRITE (Nout,FMT=99007) nc, Sname, uplo, n, alpha ,&
+                      WRITE (Nout,FMT=99007) nc, Sname, uplo, n, alpha, &
                         incx, incy, lda
                     ELSEIF ( packed ) THEN
-                      WRITE (Nout,FMT=99006) nc, Sname, uplo, n, alpha ,&
+                      WRITE (Nout,FMT=99006) nc, Sname, uplo, n, alpha, &
                         incx, incy
                     ENDIF
                   ENDIF
@@ -4409,8 +4409,8 @@ CONTAINS
     !     .. Local Arrays ..
     COMPLEX a(1,1), x(1), y(1)
     !     .. External Subroutines ..
-    EXTERNAL CGBMV, CGEMV, CGERC, CGERU, CHBMV, CHEMV, CHER, CHER2 ,&
-      CHKXER, CHPMV, CHPR, CHPR2, CTBMV, CTBSV, CTPMV, CTPSV ,&
+    EXTERNAL CGBMV, CGEMV, CGERC, CGERU, CHBMV, CHEMV, CHER, CHER2, &
+      CHKXER, CHPMV, CHPR, CHPR2, CTBMV, CTBSV, CTPMV, CTPSV, &
       CTRMV, CTRSV
     !***FIRST EXECUTABLE STATEMENT  CCHKE2
     CALL XGETF(kontrl)
@@ -4857,7 +4857,7 @@ CONTAINS
     !     .. Local Arrays ..
     COMPLEX a(2,1), b(2,1), c(2,1)
     !     .. External Subroutines ..
-    EXTERNAL CGEMM, CHEMM, CHER2K, CHERK, CHKXER, CSYMM, CSYR2K ,&
+    EXTERNAL CGEMM, CHEMM, CHER2K, CHERK, CHKXER, CSYMM, CSYR2K, &
       CSYRK, CTRMM, CTRSM
     !***FIRST EXECUTABLE STATEMENT  CCHKE3
     CALL XGETF(kontrl)

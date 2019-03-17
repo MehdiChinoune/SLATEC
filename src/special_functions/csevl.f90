@@ -1,8 +1,6 @@
 !DECK CSEVL
-FUNCTION CSEVL(X,Cs,N)
+REAL FUNCTION CSEVL(X,Cs,N)
   IMPLICIT NONE
-  REAL CSEVL, R1MACH
-  INTEGER i, N, ni
   !***BEGIN PROLOGUE  CSEVL
   !***PURPOSE  Evaluate a Chebyshev series.
   !***LIBRARY   SLATEC (FNLIB)
@@ -38,6 +36,8 @@ FUNCTION CSEVL(X,Cs,N)
   !           X to be slightly outside interval (-1,+1).  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CSEVL
+  REAL R1MACH
+  INTEGER i, N, ni
   REAL b0, b1, b2, Cs(*), onepl, twox, X
   LOGICAL first
   SAVE first, onepl

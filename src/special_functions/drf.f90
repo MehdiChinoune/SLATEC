@@ -254,7 +254,7 @@ REAL(8) FUNCTION DRF(X,Y,Z,Ier)
   REAL(8) :: lolim, uplim, epslon, errtol, D1MACH
   REAL(8) :: c1, c2, c3, e2, e3, lamda
   REAL(8) :: mu, s, X, xn, xndev
-  REAL(8) :: xnroot, Y, yn, yndev, ynroot, Z, zn, zndev ,&
+  REAL(8) :: xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, &
     znroot
   LOGICAL first
   SAVE errtol, lolim, uplim, c1, c2, c3, first

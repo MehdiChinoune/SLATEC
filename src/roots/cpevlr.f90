@@ -1,8 +1,6 @@
 !DECK CPEVLR
 SUBROUTINE CPEVLR(N,M,A,X,C)
   IMPLICIT NONE
-  REAL ci, cim1, X
-  INTEGER i, j, M, mini, N, np1
   !***BEGIN PROLOGUE  CPEVLR
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CPZERO
@@ -18,6 +16,8 @@ SUBROUTINE CPEVLR(N,M,A,X,C)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  CPEVLR
+  REAL ci, cim1, X
+  INTEGER i, j, M, mini, N, np1
   REAL A(*), C(*)
   !***FIRST EXECUTABLE STATEMENT  CPEVLR
   np1 = N + 1

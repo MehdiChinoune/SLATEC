@@ -1,9 +1,6 @@
 !DECK GAMIT
 REAL FUNCTION GAMIT(A,X)
   IMPLICIT NONE
-  REAL A, aeps, ainta, algap1, alneps, alng, ALNGAM, alx, bot, &
-    GAMR, h, R1MACH, R9GMIT, R9LGIC, R9LGIT, sga, sgngam, sqeps, &
-    t, X
   !***BEGIN PROLOGUE  GAMIT
   !***PURPOSE  Calculate Tricomi's form of the incomplete Gamma function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -52,6 +49,8 @@ REAL FUNCTION GAMIT(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   !***END PROLOGUE  GAMIT
+  REAL A, aeps, ainta, algap1, alneps, alng, ALNGAM, alx, bot, &
+    GAMR, h, R1MACH, R9GMIT, R9LGIC, R9LGIT, sga, sgngam, sqeps, t, X
   LOGICAL first
   SAVE alneps, sqeps, bot, first
   DATA first/.TRUE./

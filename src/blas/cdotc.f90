@@ -1,7 +1,6 @@
 !DECK CDOTC
 COMPLEX FUNCTION CDOTC(N,Cx,Incx,Cy,Incy)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, kx, ky, N, ns
   !***BEGIN PROLOGUE  CDOTC
   !***PURPOSE  Dot product of two complex vectors using the complex
   !            conjugate of the first vector.
@@ -46,6 +45,7 @@ COMPLEX FUNCTION CDOTC(N,Cx,Incx,Cy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CDOTC
+  INTEGER i, Incx, Incy, kx, ky, N, ns
   COMPLEX Cx(*), Cy(*)
   !***FIRST EXECUTABLE STATEMENT  CDOTC
   CDOTC = (0.0,0.0)

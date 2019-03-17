@@ -1,7 +1,6 @@
 !DECK D1MACH
 REAL(8) FUNCTION D1MACH(I)
   IMPLICIT NONE
-  INTEGER I
   !***BEGIN PROLOGUE  D1MACH
   !***PURPOSE  Return floating point machine dependent constants.
   !***LIBRARY   SLATEC
@@ -70,10 +69,9 @@ REAL(8) FUNCTION D1MACH(I)
   !           (BKS, WRB)
   !   930201  Added DEC Alpha and SGI constants.  (RWC and WRB)
   !***END PROLOGUE  D1MACH
-  !
+  INTEGER I
   REAL(8), SAVE :: dmach(5)
   LOGICAL :: FIRST = .TRUE.
-  !
   !***FIRST EXECUTABLE STATEMENT  D1MACH
   !IF ( I<1 .OR. I>5 ) CALL XERMSG('SLATEC','D1MACH','I OUT OF BOUNDS',1,2)
 

@@ -1,8 +1,6 @@
 !DECK PROC
 SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   IMPLICIT NONE
-  REAL Aa, Bd, Bm1, Bm2, rt
-  INTEGER ia, ibr, id, j, k, M, m1, m2, mm, Na, Nd, Nm1, Nm2
   !***BEGIN PROLOGUE  PROC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBLKTR
@@ -31,7 +29,8 @@ SUBROUTINE PROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  PROC
-  !
+  REAL Aa, Bd, Bm1, Bm2, rt
+  INTEGER ia, ibr, id, j, k, M, m1, m2, mm, Na, Nd, Nm1, Nm2
   DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), W(*), Bd(*), Bm1(*)&
     , Bm2(*), Aa(*), U(*)
   COMPLEX X, Y, A, B, C, D, W, U, den

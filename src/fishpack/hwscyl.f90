@@ -2,12 +2,6 @@
 SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  REAL A, a1, a2, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, deltht, &
-    dlrby2, dlrsq, dlthsq, Elmbda, F, Pertrb, r, s
-  REAL s1, s2, W
-  INTEGER i, id2, id3, id4, id5, id6, Idimf, ierr1, Ierror, ij, &
-    istart, j, k, l, M, Mbdcnd, mp1, mstart, mstop, munk
-  INTEGER N, Nbdcnd, np, np1, nsp1, nstart, nstm1, nstop, nunk
   !***BEGIN PROLOGUE  HWSCYL
   !***PURPOSE  Solve a standard finite difference approximation
   !            to the Helmholtz equation in cylindrical coordinates.
@@ -305,8 +299,12 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  HWSCYL
-  !
-  !
+  REAL A, a1, a2, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, deltht, &
+    dlrby2, dlrsq, dlthsq, Elmbda, F, Pertrb, r, s
+  REAL s1, s2, W
+  INTEGER i, id2, id3, id4, id5, id6, Idimf, ierr1, Ierror, ij, &
+    istart, j, k, l, M, Mbdcnd, mp1, mstart, mstop, munk
+  INTEGER N, Nbdcnd, np, np1, nsp1, nstart, nstm1, nstop, nunk
   DIMENSION F(Idimf,*)
   DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HWSCYL

@@ -1,7 +1,6 @@
 !DECK MPCDM
 SUBROUTINE MPCDM(Dx,Z)
   IMPLICIT NONE
-  INTEGER i, i2, ib, ie, k, LUN, M, MXR
   !***BEGIN PROLOGUE  MPCDM
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
@@ -33,6 +32,7 @@ SUBROUTINE MPCDM(Dx,Z)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPCDM
+  INTEGER i, i2, ib, ie, k, LUN, M, MXR
   REAL(8) :: db, dj, Dx
   COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
   INTEGER B, T, R, Z(*), rs, re, tp

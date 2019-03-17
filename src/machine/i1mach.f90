@@ -2,7 +2,6 @@
 INTEGER FUNCTION I1MACH(I)
   use ISO_FORTRAN_ENV
   IMPLICIT NONE
-  INTEGER I
   !***BEGIN PROLOGUE  I1MACH
   !***PURPOSE  Return integer machine dependent constants.
   !***LIBRARY   SLATEC
@@ -92,7 +91,7 @@ INTEGER FUNCTION I1MACH(I)
   !   930618  Corrected I1MACH(5) for Convex -p8 and -pd8 compiler
   !           options.  (DWL, RWC and WRB).
   !***END PROLOGUE  I1MACH
-  !
+  INTEGER I
   INTEGER, PARAMETER :: imach(16) = (/ INPUT_UNIT, OUTPUT_UNIT, OUTPUT_UNIT, &
     ERROR_UNIT, NUMERIC_STORAGE_SIZE, CHARACTER_STORAGE_SIZE, &
     RADIX(1), DIGITS(1), HUGE(1), RADIX(1.), &

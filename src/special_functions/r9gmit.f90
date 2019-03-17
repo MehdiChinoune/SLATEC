@@ -1,9 +1,6 @@
 !DECK R9GMIT
-FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
+REAL FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
   IMPLICIT NONE
-  REAL A, ae, aeps, alg2, Algap1, algs, ALNGAM, Alx, bot, eps, &
-    fk, R1MACH, R9GMIT, s, sgng2, Sgngam, t, te, X
-  INTEGER k, m, ma
   !***BEGIN PROLOGUE  R9GMIT
   !***SUBSIDIARY
   !***PURPOSE  Compute Tricomi's incomplete Gamma function for small
@@ -28,6 +25,9 @@ FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  R9GMIT
+  REAL A, ae, aeps, alg2, Algap1, algs, ALNGAM, Alx, bot, eps, &
+    fk, R1MACH, s, sgng2, Sgngam, t, te, X
+  INTEGER k, m, ma
   SAVE eps, bot
   DATA eps, bot/2*0.0/
   !***FIRST EXECUTABLE STATEMENT  R9GMIT

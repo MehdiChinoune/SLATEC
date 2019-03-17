@@ -1,7 +1,6 @@
 !DECK SSIEV
 SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
   IMPLICIT NONE
-  INTEGER i, j
   !***BEGIN PROLOGUE  SSIEV
   !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real symmetric matrix.
@@ -77,6 +76,7 @@ SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  SSIEV
+  INTEGER i, j
   INTEGER Info, Job, Lda, N
   REAL A(Lda,*), E(*), Work(*)
   !***FIRST EXECUTABLE STATEMENT  SSIEV

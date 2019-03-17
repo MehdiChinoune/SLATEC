@@ -28,13 +28,13 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !***END PROLOGUE  EFCMN
   INTEGER Lw, Mdein, Mdeout, Mdg, Mdw, Nbkpt, Ndata, Nord
-  REAL Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), Ptemp(*) ,&
+  REAL Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), Ptemp(*), &
     Sddata(*), W(Mdw,*), Xdata(*), Xtemp(*), Ydata(*)
   !
   EXTERNAL BNDACC, BNDSOL, BSPLVN, SCOPY, SSCAL, SSORT, XERMSG
   !
   REAL dummy, rnorm, xmax, xmin, xval
-  INTEGER i, idata, ileft, intseq, ip, ir, irow, l, mt, n, nb ,&
+  INTEGER i, idata, ileft, intseq, ip, ir, irow, l, mt, n, nb, &
     nordm1, nordp1, np1
   CHARACTER(8) :: xern1, xern2
   !
@@ -81,8 +81,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   ENDIF
   !
   IF ( Mdein/=1.AND.Mdein/=2 ) THEN
-    CALL XERMSG('SLATEC','EFCMN','IN EFC, INPUT VALUE OF MDEIN MUST BE 1-2.'&
-      ,7,1)
+    CALL XERMSG('SLATEC','EFCMN','IN EFC, INPUT VALUE OF MDEIN MUST BE 1-2.',7,1)
     RETURN
   ENDIF
   !

@@ -1,7 +1,6 @@
 !DECK DROTM
 SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, kx, ky, N, nsteps
   !***BEGIN PROLOGUE  DROTM
   !***PURPOSE  Apply a modified Givens transformation.
   !***LIBRARY   SLATEC (BLAS)
@@ -59,6 +58,7 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DROTM
+  INTEGER i, Incx, Incy, kx, ky, N, nsteps
   REAL(8) :: dflag, dh12, dh22, Dx, two, z, dh11, dh21, &
     Dparam, Dy, w, zero
   DIMENSION Dx(*), Dy(*), Dparam(5)

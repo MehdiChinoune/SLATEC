@@ -1,7 +1,6 @@
 !DECK DBETAI
 REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   IMPLICIT NONE
-  INTEGER i, ib, n
   !***BEGIN PROLOGUE  DBETAI
   !***PURPOSE  Calculate the incomplete Beta function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -35,6 +34,7 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   !***END PROLOGUE  DBETAI
+  INTEGER i, ib, n
   REAL(8) :: X, Pin, Qin, alneps, alnsml, c, eps, finsum, p, &
     ps, q, sml, term, xb, xi, y, D1MACH, DLBETA, p1
   LOGICAL first

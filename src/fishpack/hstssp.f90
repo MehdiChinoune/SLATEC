@@ -2,11 +2,6 @@
 SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  REAL A, a1, a2, a3, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, &
-    deltht, dlrsq, dlthsq, dum, Elmbda, F, Pertrb, pi
-  REAL PIMACH, W
-  INTEGER i, Idimf, ierr1, Ierror, isw, iwb, iwc, iwr, iws, j, &
-    jsw, k, lp, M, mb, Mbdcnd, mm1, N, Nbdcnd, np
   !***BEGIN PROLOGUE  HSTSSP
   !***PURPOSE  Solve the standard five-point finite difference
   !            approximation on a staggered grid to the Helmholtz
@@ -371,8 +366,11 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  HSTSSP
-  !
-  !
+  REAL A, a1, a2, a3, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, &
+    deltht, dlrsq, dlthsq, dum, Elmbda, F, Pertrb, pi
+  REAL PIMACH, W
+  INTEGER i, Idimf, ierr1, Ierror, isw, iwb, iwc, iwr, iws, j, &
+    jsw, k, lp, M, mb, Mbdcnd, mm1, N, Nbdcnd, np
   DIMENSION F(Idimf,*), Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   !***FIRST EXECUTABLE STATEMENT  HSTSSP
   Ierror = 0

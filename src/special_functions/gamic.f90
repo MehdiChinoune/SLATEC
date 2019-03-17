@@ -1,11 +1,6 @@
 !DECK GAMIC
 REAL FUNCTION GAMIC(A,X)
   IMPLICIT NONE
-  REAL A, aeps, algap1, alneps, ALNGAM, alngs, alx, bot, e, eps, &
-    fm, gstar, h, R1MACH, R9GMIC, R9GMIT, R9LGIC, R9LGIT, sga, &
-    sgng
-  REAL sgngam, sgngs, sqeps, t, X
-  INTEGER izero, ma
   !***BEGIN PROLOGUE  GAMIC
   !***PURPOSE  Calculate the complementary incomplete Gamma function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -49,6 +44,10 @@ REAL FUNCTION GAMIC(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
   !***END PROLOGUE  GAMIC
+  REAL A, aeps, algap1, alneps, ALNGAM, alngs, alx, bot, e, eps, &
+    fm, gstar, h, R1MACH, R9GMIC, R9GMIT, R9LGIC, R9LGIT, sga, sgng
+  REAL sgngam, sgngs, sqeps, t, X
+  INTEGER izero, ma
   LOGICAL first
   SAVE eps, sqeps, alneps, bot, first
   DATA first/.TRUE./

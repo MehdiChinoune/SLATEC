@@ -1,8 +1,6 @@
 !DECK DAIE
 REAL(8) FUNCTION DAIE(X)
   IMPLICIT NONE
-  REAL eta
-  INTEGER INITDS, naif, naig, naip1, naip2
   !***BEGIN PROLOGUE  DAIE
   !***PURPOSE  Calculate the Airy function for a negative argument and an
   !            exponentially scaled Airy function for a non-negative
@@ -55,9 +53,10 @@ REAL(8) FUNCTION DAIE(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  DAIE
+  REAL eta
+  INTEGER INITDS, naif, naig, naip1, naip2
   REAL(8) :: X, aifcs(13), aigcs(13), aip1cs(57), aip2cs(37), &
-    sqrtx, theta, xbig, xm, x3sml, x32sml, z, D1MACH, &
-    DCSEVL
+    sqrtx, theta, xbig, xm, x3sml, x32sml, z, D1MACH, DCSEVL
   LOGICAL first
   SAVE aifcs, aigcs, aip1cs, aip2cs, naif, naig, naip1, naip2, &
     x3sml, x32sml, xbig, first

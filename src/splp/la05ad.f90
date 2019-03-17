@@ -1,11 +1,6 @@
 !DECK LA05AD
 SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   IMPLICIT NONE
-  INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp ,&
-    k, k1, k2, kc, kcost, kj, kk, kl
-  INTEGER klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, LCOl ,&
-    LENl, LENu, LP, LROw, mcp, N, nc, NCP
-  INTEGER Nz, nzc
   !***BEGIN PROLOGUE  LA05AD
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -57,9 +52,14 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !***END PROLOGUE  LA05AD
+  INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, &
+    k, k1, k2, kc, kcost, kj, kk, kl
+  INTEGER klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, LCOl, &
+    LENl, LENu, LP, LROw, mcp, N, nc, NCP
+  INTEGER Nz, nzc
   INTEGER Ip(N,2)
   INTEGER Ind(Ia,2), Iw(N,8)
-  REAL(8) :: A(*), amax, au, am, D1MACH, eps, G, U, SMAll ,&
+  REAL(8) :: A(*), amax, au, am, D1MACH, eps, G, U, SMAll, &
     W(*)
   LOGICAL first
   CHARACTER(8) :: xern0, xern1, xern2
@@ -512,8 +512,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !
   400 CONTINUE
   IF ( LP>0 ) CALL XERMSG('SLATEC','LA05AD',&
-    'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.'&
-    ,-7,1)
+    'LENGTHS OF ARRAYS A(*) AND IND(*,2) ARE TOO SMALL.',-7,1)
   G = -7.
   RETURN
   !

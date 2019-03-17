@@ -1,8 +1,6 @@
 !DECK DBSI0E
 REAL(8) FUNCTION DBSI0E(X)
   IMPLICIT NONE
-  REAL eta
-  INTEGER INITDS, ntai0, ntai02, nti0
   !***BEGIN PROLOGUE  DBSI0E
   !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order zero.
@@ -46,8 +44,9 @@ REAL(8) FUNCTION DBSI0E(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DBSI0E
-  REAL(8) :: X, bi0cs(18), ai0cs(46), ai02cs(69), xsml, y, &
-    D1MACH, DCSEVL
+  REAL eta
+  INTEGER INITDS, ntai0, ntai02, nti0
+  REAL(8) :: X, bi0cs(18), ai0cs(46), ai02cs(69), xsml, y, D1MACH, DCSEVL
   LOGICAL first
   SAVE bi0cs, ai0cs, ai02cs, nti0, ntai0, ntai02, xsml, first
   DATA bi0cs(1)/ - .7660547252839144951081894976243285D-1/

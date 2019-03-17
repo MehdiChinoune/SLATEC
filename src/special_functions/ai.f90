@@ -1,9 +1,6 @@
 !DECK AI
-FUNCTION AI(X)
+REAL FUNCTION AI(X)
   IMPLICIT NONE
-  REAL AI, AIE, aifcs, aigcs, CSEVL, R1MACH, theta, X, x3sml, xm, &
-    xmax, xmaxt, z
-  INTEGER INITS, naif, naig
   !***BEGIN PROLOGUE  AI
   !***PURPOSE  Evaluate the Airy function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -38,6 +35,9 @@ FUNCTION AI(X)
   !           (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
   !***END PROLOGUE  AI
+  REAL AIE, aifcs, aigcs, CSEVL, R1MACH, theta, X, x3sml, xm, &
+    xmax, xmaxt, z
+  INTEGER INITS, naif, naig
   DIMENSION aifcs(9), aigcs(8)
   LOGICAL first
   SAVE aifcs, aigcs, naif, naig, x3sml, xmax, first

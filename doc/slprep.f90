@@ -109,7 +109,7 @@ PROGRAM SLPREP
   !
   INTEGER MXLFN
   PARAMETER (MXLFN=32)
-  CHARACTER(MXLFN) :: finp, fclass, fcat, fdaf, fkwd, ftbl, FOUT ,&
+  CHARACTER(MXLFN) :: finp, fclass, fcat, fdaf, fkwd, ftbl, FOUT, &
     flog, FERR, FINPUT
   CHARACTER(MXLFN) :: DFINP, DFCLAS, DFCAT, DFDAF, DFKWD, DFTBL, DFLOG
   PARAMETER (DFINP='slainp',DFCLAS='class',DFCAT='slacat',DFDAF='sladaf',&
@@ -125,9 +125,9 @@ PROGRAM SLPREP
   !
   !     Other declarations.
   !
-  INTEGER i, ib, ic, ichng, icom, id, ientry, ifind, ilen, inext ,&
-    info, ipe, ips, ird, iwr, j, jj, mncl, mxlkw, mxlr ,&
-    mxnca, mxnkw, ncat, ncc, nclass, nerr, nextl, nkwd ,&
+  INTEGER i, ib, ic, ichng, icom, id, ientry, ifind, ilen, inext, &
+    info, ipe, ips, ird, iwr, j, jj, mncl, mxlkw, mxlr, &
+    mxnca, mxnkw, ncat, ncc, nclass, nerr, nextl, nkwd, &
     nstmts, ntcat, ntkwd, numr, numrr
   !
   INTEGER LU5, LU6, LU12, LU13, LU14, LU15, LU17, LU18, LU19
@@ -138,7 +138,7 @@ PROGRAM SLPREP
   CHARACTER(80) :: msg
   CHARACTER(KMAXI) :: kwrds(KMAXJ), tkwd(MXNKWD)
   CHARACTER(MXLRN) :: rtname
-  CHARACTER(MXLCAT) :: tcat(MXNCAT), etcat(MXNCAT), categ(15) ,&
+  CHARACTER(MXLCAT) :: tcat(MXNCAT), etcat(MXNCAT), categ(15), &
     tclass(MXNCAT)
   INTEGER iptr(MXNCAT), jptr(MXNCAT), kptr(MXNCAT)
   CHARACTER(80) :: class(MXNCL+1), stmts(MXNCL)
@@ -262,7 +262,7 @@ PROGRAM SLPREP
   !
   !     Write the names of all files to the transaction log file.
   !
-  WRITE (UNIT=LU12,FMT=99010) finp, FOUT, fclass, fcat, fdaf, ftbl ,&
+  WRITE (UNIT=LU12,FMT=99010) finp, FOUT, fclass, fcat, fdaf, ftbl, &
     fkwd
   !
   !     IRD is the "READ" line number and IWR is the "WRITE" line number.
@@ -721,15 +721,15 @@ PROGRAM SLPREP
   !
   !     Normal termination.
   !
-  WRITE (UNIT=LU6,FMT=99007) numr, ird, iwr, ntcat, ntkwd, mxlr ,&
-    mxnca, mxnkw, mxlkw, numrr, ntkwd ,&
+  WRITE (UNIT=LU6,FMT=99007) numr, ird, iwr, ntcat, ntkwd, mxlr, &
+    mxnca, mxnkw, mxlkw, numrr, ntkwd, &
     inext - ichng
   WRITE (UNIT=LU6,FMT=99008) nclass, ncc, nstmts
   !
   !     Write summary information to the transaction log file also.
   !
-  WRITE (UNIT=LU12,FMT=99007) numr, ird, iwr, ntcat, ntkwd, mxlr ,&
-    mxnca, mxnkw, mxlkw, numrr, ntkwd ,&
+  WRITE (UNIT=LU12,FMT=99007) numr, ird, iwr, ntcat, ntkwd, mxlr, &
+    mxnca, mxnkw, mxlkw, numrr, ntkwd, &
     inext - ichng
   WRITE (UNIT=LU12,FMT=99008) nclass, ncc, nstmts
   CLOSE (UNIT=LU14)
@@ -1132,7 +1132,7 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,&
   CHARACTER*(*) Class(*), Ecat(*), Stmts(*), Tclass(*)
   !     .. Local Scalars ..
   INTEGER i, iclass, ilen, iper, istart, j, k, nlen
-  CHARACTER :: opart1, opart3, opart5, opart7, part1, part3, part5 ,&
+  CHARACTER :: opart1, opart3, opart5, opart7, part1, part3, part5, &
     part7
   CHARACTER(2) :: opart2, opart4, opart6, part2, part4, part6
   !     .. Local Arrays ..

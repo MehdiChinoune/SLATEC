@@ -1,7 +1,6 @@
 !DECK DFULMT
 SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   IMPLICIT NONE
-  INTEGER I, Indcat, J, key, level, lp, nerr, next
   !***BEGIN PROLOGUE  DFULMT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -36,6 +35,7 @@ SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  DFULMT
+  INTEGER I, Indcat, J, key, level, lp, nerr, next
   REAL(8) :: Aij, zero, Dattrv(*), Prgopt(*)
   INTEGER Iflag(10)
   SAVE zero
@@ -65,8 +65,7 @@ SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
         nerr = 29
         level = 1
         CALL XERMSG('SLATEC','DFULMT',&
-          'IN DSPLP, ROW DIM., MRELAS, NVARS ARE MISSING FROM PRGOPT.'&
-          ,nerr,level)
+          'IN DSPLP, ROW DIM., MRELAS, NVARS ARE MISSING FROM PRGOPT.',nerr,level)
         Iflag(1) = 3
         EXIT
       ENDIF

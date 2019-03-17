@@ -1,7 +1,6 @@
 !DECK IDLOC
 INTEGER FUNCTION IDLOC(Loc,Sx,Ix)
   IMPLICIT NONE
-  INTEGER ipage, itemp, k, key, lmx, lmxm1, Loc, lpg, np
   !***BEGIN PROLOGUE  IDLOC
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -29,13 +28,13 @@ INTEGER FUNCTION IDLOC(Loc,Sx,Ix)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   910731  Added code to set IDLOC to 0 if LOC is non-positive.  (WRB)
   !***END PROLOGUE  IDLOC
+  INTEGER ipage, itemp, k, key, lmx, lmxm1, Loc, lpg, np
   REAL(8) :: Sx(*)
   INTEGER Ix(*)
   !***FIRST EXECUTABLE STATEMENT  IDLOC
   IF ( Loc<=0 ) THEN
     CALL XERMSG('SLATEC','IDLOC',&
-      'A value of LOC, the first argument, .LE. 0 was encountered'&
-      ,55,1)
+      'A value of LOC, the first argument, .LE. 0 was encountered',55,1)
     IDLOC = 0
     RETURN
   ENDIF

@@ -1,8 +1,6 @@
 !DECK SINQB
 SUBROUTINE SINQB(N,X,Wsave)
   IMPLICIT NONE
-  INTEGER k, kc, N, ns2
-  REAL Wsave, X, xhold
   !***BEGIN PROLOGUE  SINQB
   !***PURPOSE  Compute the unnormalized inverse of SINQF.
   !***LIBRARY   SLATEC (FFTPACK)
@@ -69,6 +67,8 @@ SUBROUTINE SINQB(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SINQB
+  INTEGER k, kc, N, ns2
+  REAL Wsave, X, xhold
   DIMENSION X(*), Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  SINQB
   IF ( N>1 ) THEN

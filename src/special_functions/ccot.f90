@@ -1,7 +1,6 @@
 !DECK CCOT
 COMPLEX FUNCTION CCOT(Z)
   IMPLICIT NONE
-  REAL den, R1MACH, sn2x, sqeps, x2, y2
   !***BEGIN PROLOGUE  CCOT
   !***PURPOSE  Compute the cotangent.
   !***LIBRARY   SLATEC (FNLIB)
@@ -24,6 +23,7 @@ COMPLEX FUNCTION CCOT(Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  CCOT
+  REAL den, R1MACH, sn2x, sqeps, x2, y2
   COMPLEX Z
   SAVE sqeps
   DATA sqeps/0./
@@ -38,8 +38,7 @@ COMPLEX FUNCTION CCOT(Z)
   !
   den = COSH(y2) - COS(x2)
   IF ( den==0. ) CALL XERMSG('SLATEC','CCOT',&
-    'COT IS SINGULAR FOR INPUT Z (X IS 0 OR PI AND Y IS 0)'&
-    ,2,2)
+    'COT IS SINGULAR FOR INPUT Z (X IS 0 OR PI AND Y IS 0)',2,2)
   !
   IF ( ABS(den)<=MAX(ABS(x2),1.)*sqeps ) THEN
     CALL XERCLR

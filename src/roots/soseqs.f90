@@ -2,14 +2,6 @@
 SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     Iprint,Fmax,C,Nc,B,P,Temp,X,Y,Fac,Is)
   IMPLICIT NONE
-  REAL Atolx, B, C, csv, f, Fac, fact, fdif, Fmax, fmin, fmxs, &
-    fn1, fn2, FNC, fp, h, hx, P, pmax, R1MACH
-  REAL re, Rtolx, S, sruro, Temp, test, Tolf, uro, X, xnorm, Y, &
-    yj, yn1, yn2, yn3, ynorm, yns, zero
-  INTEGER I1MACH, ic, icr, Iflag, Iprint, Is, isj, isv, it, item, &
-    itry, j, jk, js, k, kd, kj, kk, km1, kn
-  INTEGER ksv, l, loun, ls, m, mit, mm, Mxit, N, Nc, Ncjs, np1, &
-    Nsri, Nsrrc
   !***BEGIN PROLOGUE  SOSEQS
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SOS
@@ -97,11 +89,14 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  SOSEQS
-  !
-  !
-  DIMENSION S(*), C(Nc), B(*), Is(*), P(*), Temp(*), X(*), Y(*), &
-    Fac(*)
-  !
+  REAL Atolx, B, C, csv, f, Fac, fact, fdif, Fmax, fmin, fmxs, &
+    fn1, fn2, FNC, fp, h, hx, P, pmax, R1MACH
+  REAL re, Rtolx, S, sruro, Temp, test, Tolf, uro, X, xnorm, Y, &
+    yj, yn1, yn2, yn3, ynorm, yns, zero
+  INTEGER I1MACH, ic, icr, Iflag, Iprint, Is, isj, isv, it, item, &
+    itry, j, jk, js, k, kd, kj, kk, km1, kn
+  INTEGER ksv, l, loun, ls, m, mit, mm, Mxit, N, Nc, Ncjs, np1, Nsri, Nsrrc
+  DIMENSION S(*), C(Nc), B(*), Is(*), P(*), Temp(*), X(*), Y(*), Fac(*)
   !***FIRST EXECUTABLE STATEMENT  SOSEQS
   uro = R1MACH(4)
   loun = I1MACH(2)

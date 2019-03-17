@@ -1,8 +1,6 @@
 !DECK CBRT
-FUNCTION CBRT(X)
+REAL FUNCTION CBRT(X)
   IMPLICIT NONE
-  REAL CBRT, cbrt2, cbrtsq, R1MACH, R9PAK, X, y
-  INTEGER irem, iter, ixpnt, n, niter
   !***BEGIN PROLOGUE  CBRT
   !***PURPOSE  Compute the cube root.
   !***LIBRARY   SLATEC (FNLIB)
@@ -22,6 +20,8 @@ FUNCTION CBRT(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  CBRT
+  REAL cbrt2, cbrtsq, R1MACH, R9PAK, X, y
+  INTEGER irem, iter, ixpnt, n, niter
   DIMENSION cbrt2(5)
   SAVE cbrt2, niter
   DATA cbrt2(1)/0.62996052494743658E0/

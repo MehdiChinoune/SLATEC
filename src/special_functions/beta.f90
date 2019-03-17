@@ -1,7 +1,6 @@
 !DECK BETA
-FUNCTION BETA(A,B)
+REAL FUNCTION BETA(A,B)
   IMPLICIT NONE
-  REAL A, ALBETA, alnsml, B, BETA, GAMMA, R1MACH, xmax, xmin
   !***BEGIN PROLOGUE  BETA
   !***PURPOSE  Compute the complete Beta function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -29,6 +28,7 @@ FUNCTION BETA(A,B)
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !***END PROLOGUE  BETA
+  REAL A, ALBETA, alnsml, B, GAMMA, R1MACH, xmax, xmin
   EXTERNAL GAMMA
   SAVE xmax, alnsml
   DATA xmax, alnsml/0., 0./

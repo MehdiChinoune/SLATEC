@@ -1,10 +1,6 @@
 !DECK BIE
-FUNCTION BIE(X)
+REAL FUNCTION BIE(X)
   IMPLICIT NONE
-  REAL atr, BIE, bif2cs, bifcs, big2cs, bigcs, bip2cs, bipcs, btr, &
-    CSEVL, eta, R1MACH, sqrtx, theta, X, x32sml, x3sml, xbig, &
-    xm, z
-  INTEGER INITS, nbif, nbif2, nbig, nbig2, nbip, nbip2
   !***BEGIN PROLOGUE  BIE
   !***PURPOSE  Calculate the Bairy function for a negative argument and an
   !            exponentially scaled Bairy function for a non-negative
@@ -63,6 +59,9 @@ FUNCTION BIE(X)
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  BIE
+  REAL atr, bif2cs, bifcs, big2cs, bigcs, bip2cs, bipcs, btr, &
+    CSEVL, eta, R1MACH, sqrtx, theta, X, x32sml, x3sml, xbig, xm, z
+  INTEGER INITS, nbif, nbif2, nbig, nbig2, nbip, nbip2
   LOGICAL first
   DIMENSION bifcs(9), bigcs(8), bif2cs(10), big2cs(10), bipcs(24), &
     bip2cs(29)

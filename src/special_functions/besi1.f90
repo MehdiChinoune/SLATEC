@@ -1,8 +1,6 @@
 !DECK BESI1
-FUNCTION BESI1(X)
+REAL FUNCTION BESI1(X)
   IMPLICIT NONE
-  REAL BESI1, BESI1E, bi1cs, CSEVL, R1MACH, X, xmax, xmin, xsml, y
-  INTEGER INITS, nti1
   !***BEGIN PROLOGUE  BESI1
   !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
   !            first kind of order one.
@@ -34,6 +32,8 @@ FUNCTION BESI1(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BESI1
+  REAL BESI1E, bi1cs, CSEVL, R1MACH, X, xmax, xmin, xsml, y
+  INTEGER INITS, nti1
   DIMENSION bi1cs(11)
   LOGICAL first
   SAVE bi1cs, nti1, xmin, xsml, xmax, first

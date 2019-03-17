@@ -1,7 +1,6 @@
 !DECK DROTMG
 SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
   IMPLICIT NONE
-  INTEGER igo
   !***BEGIN PROLOGUE  DROTMG
   !***PURPOSE  Construct a modified Givens transformation.
   !***LIBRARY   SLATEC (BLAS)
@@ -59,6 +58,7 @@ SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
   !   920316  Prologue corrected.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DROTMG
+  INTEGER igo
   REAL(8) :: gam, one, rgamsq, Dd1, Dd2, dh11, dh12, dh21, &
     dh22, Dparam, dp1, dp2, dq1, dq2, du, Dy1, zero, &
     gamsq, dflag, dtemp, Dx1, two

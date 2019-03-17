@@ -107,8 +107,7 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   IF ( N/=1.OR.Job/=0 ) THEN
     mdim = 2*Lda
     IF ( Job/=0 ) THEN
-      IF ( N>Ldv ) CALL XERMSG('SLATEC','CHIEV','JOB .NE. 0 AND N .GT. LDV.'&
-        ,3,1)
+      IF ( N>Ldv ) CALL XERMSG('SLATEC','CHIEV','JOB .NE. 0 AND N .GT. LDV.',3,1)
       IF ( N>Ldv ) RETURN
       IF ( N==1 ) GOTO 100
       !

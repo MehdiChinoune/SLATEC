@@ -3,8 +3,6 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
     Neval,Ier,Rslst,Erlst,Ierlst,Lst,Alist,Blist,Rlist,Elist,&
     Iord,Nnlog,Chebmo)
   IMPLICIT NONE
-  REAL F
-  INTEGER last, Limlst, momcom
   !***BEGIN PROLOGUE  QAWFE
   !***PURPOSE  The routine calculates an approximation result to a
   !            given Fourier integral
@@ -209,7 +207,8 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  QAWFE
-  !
+  REAL F
+  INTEGER last, Limlst, momcom
   REAL A, abseps, Abserr, Alist, Blist, Chebmo, correc, cycle, c1, &
     c2, dl, drl, Elist, ep, eps, epsa, Epsabs, Erlst, errsum, &
     fact, Omega, p, pi, p1, psum, reseps, Result, res3la, &
@@ -218,8 +217,7 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
     Maxp1, nev, Neval, Nnlog, nres, numrl2
   !
   DIMENSION Alist(*), Blist(*), Chebmo(Maxp1,25), Elist(*), Erlst(*), &
-    Ierlst(*), Iord(*), Nnlog(*), psum(52), res3la(3), Rlist(*)&
-    , Rslst(*)
+    Ierlst(*), Iord(*), Nnlog(*), psum(52), res3la(3), Rlist(*), Rslst(*)
   !
   EXTERNAL F
   !

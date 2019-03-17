@@ -1,8 +1,6 @@
 !DECK MPDIVI
 SUBROUTINE MPDIVI(X,Iy,Z)
   IMPLICIT NONE
-  INTEGER i, i2, iq, iqj, ir, Iy, j, j1, j11, j2, k, kh, LUN, &
-    M, MXR
   !***BEGIN PROLOGUE  MPDIVI
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
@@ -30,6 +28,7 @@ SUBROUTINE MPDIVI(X,Iy,Z)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
   !***END PROLOGUE  MPDIVI
+  INTEGER i, i2, iq, iqj, ir, Iy, j, j1, j11, j2, k, kh, LUN, M, MXR
   COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
   INTEGER B, T, R, X(*), Z(*), rs, re, r1, c, c2, b2
   !***FIRST EXECUTABLE STATEMENT  MPDIVI

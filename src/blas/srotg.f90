@@ -1,7 +1,6 @@
 !DECK SROTG
 SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
   IMPLICIT NONE
-  REAL r, Sa, Sb, Sc, Ss, u, v
   !***BEGIN PROLOGUE  SROTG
   !***PURPOSE  Construct a plane Givens rotation.
   !***LIBRARY   SLATEC (BLAS)
@@ -58,6 +57,7 @@ SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SROTG
+  REAL r, Sa, Sb, Sc, Ss, u, v
   !***FIRST EXECUTABLE STATEMENT  SROTG
   IF ( ABS(Sa)>ABS(Sb) ) THEN
     !

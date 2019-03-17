@@ -1,9 +1,6 @@
 !DECK CFFTB1
 SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
   IMPLICIT NONE
-  REAL C, Ch, Wa
-  INTEGER i, idl1, ido, idot, Ifac, ip, iw, ix2, ix3, ix4, k1, &
-    l1, l2, N, n2, na, nac, nf
   !***BEGIN PROLOGUE  CFFTB1
   !***PURPOSE  Compute the unnormalized inverse of CFFTF1.
   !***LIBRARY   SLATEC (FFTPACK)
@@ -72,6 +69,9 @@ SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  CFFTB1
+  REAL C, Ch, Wa
+  INTEGER i, idl1, ido, idot, Ifac, ip, iw, ix2, ix3, ix4, k1, &
+    l1, l2, N, n2, na, nac, nf
   DIMENSION Ch(*), C(*), Wa(*), Ifac(*)
   !***FIRST EXECUTABLE STATEMENT  CFFTB1
   nf = Ifac(2)

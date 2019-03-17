@@ -2,10 +2,6 @@
 SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     Mode,Rw,Iw)
   IMPLICIT NONE
-  INTEGER i, icase, igo, iiw, inrows, ip, irw, iscale, j, jp ,&
-    lbou, lboum, lds, lenx, liopt, liw, llb, lliw, llrw, llx
-  INTEGER lmdw, lndw, locacc, locdim, lopt, lp, lrw, m, Mcon, Mdw ,&
-    mdwl, mnew, Mode, modec, mopt, mout, Mrows, Ncols, nerr
   !***BEGIN PROLOGUE  SBOCLS
   !***PURPOSE  Solve the bounded and constrained least squares
   !            problem consisting of solving the equation
@@ -558,6 +554,10 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !     /SSCAL/ TO /DSCAL/, /SASUM/ TO /DASUM/, /SBOLS/ TO /DBOLS/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
+  INTEGER i, icase, igo, iiw, inrows, ip, irw, iscale, j, jp, &
+    lbou, lboum, lds, lenx, liopt, liw, llb, lliw, llrw, llx
+  INTEGER lmdw, lndw, locacc, locdim, lopt, lp, lrw, m, Mcon, Mdw, &
+    mdwl, mnew, Mode, modec, mopt, mout, Mrows, Ncols, nerr
   REAL W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*)
   REAL anorm, cnorm, one, Rnorm, Rnormc, srelpr
   REAL t, t1, t2, SDOT, SNRM2, wt, zero
@@ -798,8 +798,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
           IF ( Iopt(lp+2)<=0 ) THEN
             WRITE (xern1,'(I8)') Iopt(lp+2)
             CALL XERMSG('SLATEC','SBOCLS','OFFSET PAST X(NCOLS) ('//xern1//&
-              ') FOR USER-PROVIDED COLUMN SCALING MUST BE POSITIVE.'&
-              ,49,1)
+              ') FOR USER-PROVIDED COLUMN SCALING MUST BE POSITIVE.',49,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           ENDIF

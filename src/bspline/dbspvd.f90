@@ -1,7 +1,6 @@
 !DECK DBSPVD
 SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   IMPLICIT NONE
-  INTEGER iwork, Ldvnik
   !***BEGIN PROLOGUE  DBSPVD
   !***PURPOSE  Calculate the value and all derivatives of order less than
   !            NDERIV of all basis functions which do not vanish at X.
@@ -73,7 +72,7 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DBSPVD
-  !
+  INTEGER iwork, Ldvnik
   INTEGER i, ideriv, Ileft, ipkmd, j, jj, jlow, jm, jp1mid, K, &
     kmd, kp1, l, ldummy, m, mhigh, Nderiv
   REAL(8) :: factor, fkmd, T, v, Vnikx, Work, X
@@ -89,8 +88,7 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
     CALL XERMSG('SLATEC','DBSPVD','K DOES NOT SATISFY K.GE.1',2,1)
     RETURN
   ELSEIF ( Nderiv<1.OR.Nderiv>K ) THEN
-    CALL XERMSG('SLATEC','DBSPVD','NDERIV DOES NOT SATISFY 1.LE.NDERIV.LE.K'&
-      ,2,1)
+    CALL XERMSG('SLATEC','DBSPVD','NDERIV DOES NOT SATISFY 1.LE.NDERIV.LE.K',2,1)
     RETURN
   ELSEIF ( Ldvnik<K ) THEN
     CALL XERMSG('SLATEC','DBSPVD','LDVNIK DOES NOT SATISFY LDVNIK.GE.K',2,1)

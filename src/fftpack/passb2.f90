@@ -1,8 +1,6 @@
 !DECK PASSB2
 SUBROUTINE PASSB2(Ido,L1,Cc,Ch,Wa1)
   IMPLICIT NONE
-  REAL Cc, Ch, ti2, tr2, Wa1
-  INTEGER i, Ido, k, L1
   !***BEGIN PROLOGUE  PASSB2
   !***SUBSIDIARY
   !***PURPOSE  Calculate the fast Fourier transform of subvectors of
@@ -21,6 +19,8 @@ SUBROUTINE PASSB2(Ido,L1,Cc,Ch,Wa1)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  PASSB2
+  REAL Cc, Ch, ti2, tr2, Wa1
+  INTEGER i, Ido, k, L1
   DIMENSION Cc(Ido,2,*), Ch(Ido,L1,2), Wa1(*)
   !***FIRST EXECUTABLE STATEMENT  PASSB2
   IF ( Ido<=2 ) THEN

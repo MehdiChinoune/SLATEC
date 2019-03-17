@@ -1,7 +1,6 @@
 !DECK ISWAP
 SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
   IMPLICIT NONE
-  INTEGER i, iix, iiy, Incx, Incy, m, mp1, N, ns
   !***BEGIN PROLOGUE  ISWAP
   !***PURPOSE  Interchange two vectors.
   !***LIBRARY   SLATEC (BLAS)
@@ -42,6 +41,7 @@ SUBROUTINE ISWAP(N,Ix,Incx,Iy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  ISWAP
+  INTEGER i, iix, iiy, Incx, Incy, m, mp1, N, ns
   INTEGER Ix(*), Iy(*), itemp1, itemp2, itemp3
   !***FIRST EXECUTABLE STATEMENT  ISWAP
   IF ( N<=0 ) RETURN

@@ -1,7 +1,6 @@
 !DECK MPMLP
 SUBROUTINE MPMLP(U,V,W,J)
   IMPLICIT NONE
-  INTEGER i, J
   !***BEGIN PROLOGUE  MPMLP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
@@ -21,6 +20,7 @@ SUBROUTINE MPMLP(U,V,W,J)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  MPMLP
+  INTEGER i, J
   INTEGER U(*), V(*), W
   !***FIRST EXECUTABLE STATEMENT  MPMLP
   DO i = 1, J

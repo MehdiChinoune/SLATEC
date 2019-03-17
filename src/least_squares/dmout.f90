@@ -1,7 +1,6 @@
 !DECK DMOUT
 SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   IMPLICIT NONE
-  INTEGER i, I1MACH, Idigit, j, k1, k2, Lda, lout, M, N, ndigit
   !***BEGIN PROLOGUE  DMOUT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DBOCLS and DFC
@@ -59,6 +58,7 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
   !***END PROLOGUE  DMOUT
+  INTEGER i, I1MACH, Idigit, j, k1, k2, Lda, lout, M, N, ndigit
   REAL(8) :: A(Lda,*)
   CHARACTER Ifmt*(*), icol*3
   SAVE icol

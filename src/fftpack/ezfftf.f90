@@ -1,8 +1,6 @@
 !DECK EZFFTF
 SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
   IMPLICIT NONE
-  REAL A, Azero, B, cf, cfm, R, Wsave
-  INTEGER i, N, ns2, ns2m
   !***BEGIN PROLOGUE  EZFFTF
   !***PURPOSE  Compute a simplified real, periodic, fast Fourier forward
   !            transform.
@@ -73,6 +71,8 @@ SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  EZFFTF
+  REAL A, Azero, B, cf, cfm, R, Wsave
+  INTEGER i, N, ns2, ns2m
   DIMENSION R(*), A(*), B(*), Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  EZFFTF
   IF ( N<2 ) THEN

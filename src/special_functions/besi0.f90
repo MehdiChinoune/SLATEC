@@ -1,8 +1,6 @@
 !DECK BESI0
-FUNCTION BESI0(X)
+REAL FUNCTION BESI0(X)
   IMPLICIT NONE
-  REAL BESI0, BESI0E, bi0cs, CSEVL, R1MACH, X, xmax, xsml, y
-  INTEGER INITS, nti0
   !***BEGIN PROLOGUE  BESI0
   !***PURPOSE  Compute the hyperbolic Bessel function of the first kind
   !            of order zero.
@@ -34,6 +32,8 @@ FUNCTION BESI0(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BESI0
+  REAL BESI0E, bi0cs, CSEVL, R1MACH, X, xmax, xsml, y
+  INTEGER INITS, nti0
   DIMENSION bi0cs(12)
   LOGICAL first
   SAVE bi0cs, nti0, xsml, xmax, first

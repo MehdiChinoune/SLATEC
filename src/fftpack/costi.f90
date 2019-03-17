@@ -1,8 +1,6 @@
 !DECK COSTI
 SUBROUTINE COSTI(N,Wsave)
   IMPLICIT NONE
-  REAL dt, fk, pi, Wsave
-  INTEGER k, kc, N, nm1, np1, ns2
   !***BEGIN PROLOGUE  COSTI
   !***PURPOSE  Initialize a work array for COST.
   !***LIBRARY   SLATEC (FFTPACK)
@@ -49,6 +47,8 @@ SUBROUTINE COSTI(N,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  COSTI
+  REAL dt, fk, pi, Wsave
+  INTEGER k, kc, N, nm1, np1, ns2
   DIMENSION Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  COSTI
   IF ( N<=3 ) RETURN

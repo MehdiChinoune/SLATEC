@@ -2,19 +2,6 @@
 SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     W,S,Stowa,G,Work,Iwork,Nfcc)
   IMPLICIT NONE
-  REAL AE, C, G, P, PWCnd, PX, RE, S, Stowa, TND, TOL, &
-    U, V, W, Work, X, XBEg, XENd, XOP
-  REAL XOT, Xpts, XSAv, xxop, Yhp, Z
-  INTEGER ICOco, idid, Iflag, IGOfx, INDpvt, INFo, INHomo, INTeg, &
-    Ip, ipar, ISTkop, IVP, Iwork, j, jflag, jon, K1, K10, &
-    K11, K2
-  INTEGER K3, K4, K5, K6, K7, K8, K9, KKKint, KKKzpw, KNSwot, &
-    kod, KOP, kopp, L1, L2, LLLint, LOTjp, MNSwot, Mxnon, &
-    MXNond
-  INTEGER Ncomp, NCOmpd, NDIsk, NEEdiw, NEEdw, NEQ, NEQivp, Nfc, &
-    Nfcc, NFCcd, NFCd, nfcp1, NIC, Niv, non, NOPg, NPS, &
-    NSWot, NTApe, Ntp
-  INTEGER NTPd, NUMort, Nxpts, NXPtsd
   !***BEGIN PROLOGUE  RKFAB
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP
@@ -44,7 +31,19 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  RKFAB
-  !
+  REAL AE, C, G, P, PWCnd, PX, RE, S, Stowa, TND, TOL, &
+    U, V, W, Work, X, XBEg, XENd, XOP
+  REAL XOT, Xpts, XSAv, xxop, Yhp, Z
+  INTEGER ICOco, idid, Iflag, IGOfx, INDpvt, INFo, INHomo, INTeg, &
+    Ip, ipar, ISTkop, IVP, Iwork, j, jflag, jon, K1, K10, &
+    K11, K2
+  INTEGER K3, K4, K5, K6, K7, K8, K9, KKKint, KKKzpw, KNSwot, &
+    kod, KOP, kopp, L1, L2, LLLint, LOTjp, MNSwot, Mxnon, &
+    MXNond
+  INTEGER Ncomp, NCOmpd, NDIsk, NEEdiw, NEEdw, NEQ, NEQivp, Nfc, &
+    Nfcc, NFCcd, NFCd, nfcp1, NIC, Niv, non, NOPg, NPS, &
+    NSWot, NTApe, Ntp
+  INTEGER NTPd, NUMort, Nxpts, NXPtsd
   DIMENSION P(Ntp,*), Ip(Nfcc,*), U(Ncomp,Nfc,*), V(Ncomp,*), W(Nfcc,*)&
     , Z(*), Yhp(Ncomp,*), Xpts(*), S(*), Stowa(*), Work(*), &
     Iwork(*), G(*)

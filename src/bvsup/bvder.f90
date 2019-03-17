@@ -1,8 +1,6 @@
 !DECK BVDER
 SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
   IMPLICIT NONE
-  REAL C, G, X, XSAv, Y, Yp
-  INTEGER IGOfx, INHomo, Ipar, IVP, j, k, l, na, NCOmp, NFC, NOFst
   !***BEGIN PROLOGUE  BVDER
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP
@@ -57,6 +55,8 @@ SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920618  Minor restructuring of code.  (RWC, WRB)
   !***END PROLOGUE  BVDER
+  REAL C, G, X, XSAv, Y, Yp
+  INTEGER IGOfx, INHomo, Ipar, IVP, j, k, l, na, NCOmp, NFC, NOFst
   DIMENSION Y(*), Yp(*), G(*)
   !
   ! **********************************************************************

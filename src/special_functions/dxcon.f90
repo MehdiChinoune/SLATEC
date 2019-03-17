@@ -1,7 +1,6 @@
 !DECK DXCON
 SUBROUTINE DXCON(X,Ix,Ierror)
   IMPLICIT NONE
-  INTEGER i, i1, icase, Ierror, ispace, itemp, j, j1, j2
   !***BEGIN PROLOGUE  DXCON
   !***PURPOSE  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.
@@ -37,6 +36,7 @@ SUBROUTINE DXCON(X,Ix,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  DXCON
+  INTEGER i, i1, icase, Ierror, ispace, itemp, j, j1, j2
   REAL(8) :: X
   INTEGER Ix
   !

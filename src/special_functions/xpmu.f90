@@ -1,7 +1,6 @@
 !DECK XPMU
 SUBROUTINE XPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  INTEGER Id, Ierror, ip0, Ipqa, j, mu, Mu1, Mu2, n
   !***BEGIN PROLOGUE  XPMU
   !***SUBSIDIARY
   !***PURPOSE  To compute the values of Legendre functions for XLEGF.
@@ -23,6 +22,7 @@ SUBROUTINE XPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   !***END PROLOGUE  XPMU
+  INTEGER Id, Ierror, ip0, Ipqa, j, mu, Mu1, Mu2, n
   REAL Pqa, Nu1, Nu2, p0, X, Sx, Theta, x1, x2
   DIMENSION Pqa(*), Ipqa(*)
   !

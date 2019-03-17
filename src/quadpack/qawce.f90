@@ -2,7 +2,6 @@
 SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
   IMPLICIT NONE
-  REAL erro12
   !***BEGIN PROLOGUE  QAWCE
   !***PURPOSE  The routine calculates an approximation result to a
   !            CAUCHY PRINCIPAL VALUE I = Integral of F*W over (A,B)
@@ -149,7 +148,7 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  QAWCE
-  !
+  REAL erro12
   REAL A, aa, Abserr, Alist, area, area1, area12, area2, a1, a2, &
     B, bb, Blist, b1, b2, C, R1MACH, Elist, epmach, Epsabs, &
     Epsrel, errbnd, errmax, error1, error2, errsum, F, Result, &

@@ -1,7 +1,6 @@
 !DECK DSPENC
 REAL(8) FUNCTION DSPENC(X)
   IMPLICIT NONE
-  INTEGER INITDS, nspenc
   !***BEGIN PROLOGUE  DSPENC
   !***PURPOSE  Compute a form of Spence's integral due to K. Mitchell.
   !***LIBRARY   SLATEC (FNLIB)
@@ -44,6 +43,7 @@ REAL(8) FUNCTION DSPENC(X)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !***END PROLOGUE  DSPENC
+  INTEGER INITDS, nspenc
   REAL(8) :: X, spencs(38), aln, pi26, xbig, D1MACH, DCSEVL
   LOGICAL first
   SAVE spencs, pi26, nspenc, xbig, first

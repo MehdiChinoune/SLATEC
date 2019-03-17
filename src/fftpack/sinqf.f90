@@ -1,8 +1,6 @@
 !DECK SINQF
 SUBROUTINE SINQF(N,X,Wsave)
   IMPLICIT NONE
-  INTEGER k, kc, N, ns2
-  REAL Wsave, X, xhold
   !***BEGIN PROLOGUE  SINQF
   !***PURPOSE  Compute the forward sine transform with odd wave numbers.
   !***LIBRARY   SLATEC (FFTPACK)
@@ -71,6 +69,8 @@ SUBROUTINE SINQF(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  SINQF
+  INTEGER k, kc, N, ns2
+  REAL Wsave, X, xhold
   DIMENSION X(*), Wsave(*)
   !***FIRST EXECUTABLE STATEMENT  SINQF
   IF ( N==1 ) RETURN

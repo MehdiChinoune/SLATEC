@@ -1,11 +1,6 @@
 !DECK PASSB5
 SUBROUTINE PASSB5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
   IMPLICIT NONE
-  REAL Cc, Ch, ci2, ci3, ci4, ci5, cr2, cr3, cr4, cr5, di2, di3, &
-    di4, di5, dr2, dr3, dr4, dr5, pi, ti11
-  REAL ti12, ti2, ti3, ti4, ti5, tr11, tr12, tr2, tr3, tr4, tr5, &
-    Wa1, Wa2, Wa3, Wa4
-  INTEGER i, Ido, k, L1
   !***BEGIN PROLOGUE  PASSB5
   !***SUBSIDIARY
   !***PURPOSE  Calculate the fast Fourier transform of subvectors of
@@ -27,6 +22,11 @@ SUBROUTINE PASSB5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  PASSB5
+  REAL Cc, Ch, ci2, ci3, ci4, ci5, cr2, cr3, cr4, cr5, di2, di3, &
+    di4, di5, dr2, dr3, dr4, dr5, pi, ti11
+  REAL ti12, ti2, ti3, ti4, ti5, tr11, tr12, tr2, tr3, tr4, tr5, &
+    Wa1, Wa2, Wa3, Wa4
+  INTEGER i, Ido, k, L1
   DIMENSION Cc(Ido,5,*), Ch(Ido,L1,5), Wa1(*), Wa2(*), Wa3(*), Wa4(*)
   !***FIRST EXECUTABLE STATEMENT  PASSB5
   pi = 4.*ATAN(1.)

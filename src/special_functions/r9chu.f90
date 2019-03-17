@@ -1,10 +1,6 @@
 !DECK R9CHU
-FUNCTION R9CHU(A,B,Z)
+REAL FUNCTION R9CHU(A,B,Z)
   IMPLICIT NONE
-  REAL A, aa, ab, anbn, B, bb, bp, c2, ct1, ct2, ct3, d1z, eps, &
-    g1, g2, g3, R1MACH, R9CHU, sab, sqeps
-  REAL x2i1, Z
-  INTEGER i, j
   !***BEGIN PROLOGUE  R9CHU
   !***SUBSIDIARY
   !***PURPOSE  Evaluate for large Z  Z**A * U(A,B,Z) where U is the
@@ -33,6 +29,10 @@ FUNCTION R9CHU(A,B,Z)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !***END PROLOGUE  R9CHU
+  REAL A, aa, ab, anbn, B, bb, bp, c2, ct1, ct2, ct3, d1z, eps, &
+    g1, g2, g3, R1MACH, sab, sqeps
+  REAL x2i1, Z
+  INTEGER i, j
   DIMENSION aa(4), bb(4)
   LOGICAL first
   SAVE eps, sqeps, first

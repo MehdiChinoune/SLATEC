@@ -3,15 +3,6 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     Nbdcnd,Bdc,Gama,Bdd,Xnu,COFX,COFY,An,Bn,Cn,Dn,Un,Zn,Am,&
     Bm,Cm,Dm,Um,Zm,Grhs,Usol,Idmn,W,Pertrb,Ierror)
   IMPLICIT NONE
-  REAL A, ai, AIT, Alpha, Am, An, ax1, axi, B, Bda, Bdb, Bdc, &
-    Bdd, Beta, bi, BIT, Bm, Bn, bxi, C
-  REAL ci, CIT, Cm, Cn, cxi, cxm, D, DIT, dj, DLX, DLX4, DLY, &
-    DLY4, Dm, Dn, dy1, dyj, ej, eyj, fj
-  REAL fyj, fyn, Gama, Grhs, Pertrb, prtrb, TDLx3, TDLy3, Um, Un, &
-    Usol, W, xi, Xnu, yj, Zm, Zn
-  INTEGER i, i1, Idmn, Ierror, Intl, iord, Iorder, IS, j, JS, K, &
-    KSWx, KSWy, L, M, Mbdcnd, MIT, mp, MS, N
-  INTEGER Nbdcnd, NIT, np, NS
   !***BEGIN PROLOGUE  SPELIP
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SEPELI
@@ -34,7 +25,15 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  SPELIP
-  !
+  REAL A, ai, AIT, Alpha, Am, An, ax1, axi, B, Bda, Bdb, Bdc, &
+    Bdd, Beta, bi, BIT, Bm, Bn, bxi, C
+  REAL ci, CIT, Cm, Cn, cxi, cxm, D, DIT, dj, DLX, DLX4, DLY, &
+    DLY4, Dm, Dn, dy1, dyj, ej, eyj, fj
+  REAL fyj, fyn, Gama, Grhs, Pertrb, prtrb, TDLx3, TDLy3, Um, Un, &
+    Usol, W, xi, Xnu, yj, Zm, Zn
+  INTEGER i, i1, Idmn, Ierror, Intl, iord, Iorder, IS, j, JS, K, &
+    KSWx, KSWy, L, M, Mbdcnd, MIT, mp, MS, N
+  INTEGER Nbdcnd, NIT, np, NS
   DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
   DIMENSION An(*), Bn(*), Cn(*), Dn(*), Un(*), Zn(*)

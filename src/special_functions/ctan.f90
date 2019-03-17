@@ -1,7 +1,6 @@
 !DECK CTAN
 COMPLEX FUNCTION CTAN(Z)
   IMPLICIT NONE
-  REAL den, R1MACH, sn2x, sqeps, x2, y2
   !***BEGIN PROLOGUE  CTAN
   !***PURPOSE  Compute the complex tangent.
   !***LIBRARY   SLATEC (FNLIB)
@@ -23,6 +22,7 @@ COMPLEX FUNCTION CTAN(Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  CTAN
+  REAL den, R1MACH, sn2x, sqeps, x2, y2
   COMPLEX Z
   SAVE sqeps
   DATA sqeps/0./
@@ -37,8 +37,7 @@ COMPLEX FUNCTION CTAN(Z)
   !
   den = COS(x2) + COSH(y2)
   IF ( den==0. ) CALL XERMSG('SLATEC','CTAN',&
-    'TAN IS SINGULAR FOR INPUT Z (X IS PI/2 OR 3*PI/2 AND Y IS 0)'&
-    ,2,2)
+    'TAN IS SINGULAR FOR INPUT Z (X IS PI/2 OR 3*PI/2 AND Y IS 0)',2,2)
   !
   IF ( ABS(den)<=MAX(ABS(x2),1.)*sqeps ) THEN
     CALL XERCLR

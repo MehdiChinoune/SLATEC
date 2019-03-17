@@ -1,8 +1,6 @@
 !DECK RUNIF
-FUNCTION RUNIF(T,N)
+REAL FUNCTION RUNIF(T,N)
   IMPLICIT NONE
-  REAL dummy, floatn, RAND, RUNIF, T
-  INTEGER i, j, N, nold
   !***BEGIN PROLOGUE  RUNIF
   !***PURPOSE  Generate a uniformly distributed random number.
   !***LIBRARY   SLATEC (FNLIB)
@@ -56,6 +54,8 @@ FUNCTION RUNIF(T,N)
   !   910819  Added EXTERNAL statement for RAND due to problem on IBM
   !           RS 6000.  (WRB)
   !***END PROLOGUE  RUNIF
+  REAL dummy, floatn, RAND, T
+  INTEGER i, j, N, nold
   DIMENSION T(*)
   EXTERNAL RAND
   SAVE nold, floatn

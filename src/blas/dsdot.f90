@@ -1,7 +1,6 @@
 !DECK DSDOT
 REAL(8) FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
   IMPLICIT NONE
-  INTEGER i, Incx, Incy, kx, ky, N, ns
   !***BEGIN PROLOGUE  DSDOT
   !***PURPOSE  Compute the inner product of two vectors with extended
   !            precision accumulation and result.
@@ -47,6 +46,7 @@ REAL(8) FUNCTION DSDOT(N,Sx,Incx,Sy,Incy)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !***END PROLOGUE  DSDOT
+  INTEGER i, Incx, Incy, kx, ky, N, ns
   REAL Sx(*), Sy(*)
   !***FIRST EXECUTABLE STATEMENT  DSDOT
   DSDOT = 0.0D0

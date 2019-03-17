@@ -1,8 +1,6 @@
 !DECK OHTROL
 SUBROUTINE OHTROL(Q,N,Nrda,Diag,Irank,Div,Td)
   IMPLICIT NONE
-  REAL dd, Diag, diagk, Div, Q, qs, SDOT, sig, sqd, Td, tdv
-  INTEGER Irank, irp, j, k, kir, kirm, l, N, nmir, Nrda
   !***BEGIN PROLOGUE  OHTROL
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to BVSUP
@@ -28,6 +26,8 @@ SUBROUTINE OHTROL(Q,N,Nrda,Diag,Irank,Div,Td)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !***END PROLOGUE  OHTROL
+  REAL dd, Diag, diagk, Div, Q, qs, SDOT, sig, sqd, Td, tdv
+  INTEGER Irank, irp, j, k, kir, kirm, l, N, nmir, Nrda
   DIMENSION Q(Nrda,*), Diag(*), Div(*), Td(*)
   !***FIRST EXECUTABLE STATEMENT  OHTROL
   nmir = N - Irank

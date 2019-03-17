@@ -1,9 +1,6 @@
 !DECK BESK0
-FUNCTION BESK0(X)
+REAL FUNCTION BESK0(X)
   IMPLICIT NONE
-  REAL BESI0, BESK0, BESK0E, bk0cs, CSEVL, R1MACH, X, xmax, xmaxt, &
-    xsml, y
-  INTEGER INITS, ntk0
   !***BEGIN PROLOGUE  BESK0
   !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
   !            third kind of order zero.
@@ -36,6 +33,8 @@ FUNCTION BESK0(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !***END PROLOGUE  BESK0
+  REAL BESI0, BESK0E, bk0cs, CSEVL, R1MACH, X, xmax, xmaxt, xsml, y
+  INTEGER INITS, ntk0
   DIMENSION bk0cs(11)
   LOGICAL first
   SAVE bk0cs, ntk0, xsml, xmax, first

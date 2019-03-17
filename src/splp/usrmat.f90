@@ -1,8 +1,6 @@
 !DECK USRMAT
 SUBROUTINE USRMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   IMPLICIT NONE
-  REAL Aij, Dattrv, Prgopt
-  INTEGER I, Iflag, Indcat, J, l
   !***BEGIN PROLOGUE  USRMAT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to SPLP
@@ -20,6 +18,8 @@ SUBROUTINE USRMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !***END PROLOGUE  USRMAT
+  REAL Aij, Dattrv, Prgopt
+  INTEGER I, Iflag, Indcat, J, l
   DIMENSION Prgopt(*), Dattrv(*), Iflag(10)
   !
   !***FIRST EXECUTABLE STATEMENT  USRMAT

@@ -1,7 +1,6 @@
 !DECK DBSKES
 SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   IMPLICIT NONE
-  INTEGER i, iswtch, n, Nin
   !***BEGIN PROLOGUE  DBSKES
   !***PURPOSE  Compute a sequence of exponentially scaled modified Bessel
   !            functions of the third kind of fractional order.
@@ -32,6 +31,7 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !***END PROLOGUE  DBSKES
+  INTEGER i, iswtch, n, Nin
   REAL(8) :: Xnu, X, Bke(*), bknu1, v, vincr, vend, alnbig, &
     D1MACH, direct
   SAVE alnbig

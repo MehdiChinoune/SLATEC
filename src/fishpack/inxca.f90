@@ -1,8 +1,6 @@
 !DECK INXCA
 SUBROUTINE INXCA(I,Ir,Idxa,Na)
   IMPLICIT NONE
-  REAL CNV, EPS
-  INTEGER I, Idxa, IK, Ir, K, Na, NCMplx, NM, NPP
   !***BEGIN PROLOGUE  INXCA
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to CBLKTR
@@ -17,6 +15,8 @@ SUBROUTINE INXCA(I,Ir,Idxa,Na)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !***END PROLOGUE  INXCA
+  REAL CNV, EPS
+  INTEGER I, Idxa, IK, Ir, K, Na, NCMplx, NM, NPP
   COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
   !***FIRST EXECUTABLE STATEMENT  INXCA
   Na = 2**Ir

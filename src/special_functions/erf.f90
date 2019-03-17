@@ -1,8 +1,6 @@
 !DECK ERF
-FUNCTION ERF(X)
+REAL FUNCTION ERF(X)
   IMPLICIT NONE
-  REAL CSEVL, ERF, ERFC, erfcs, R1MACH, sqeps, sqrtpi, X, xbig, y
-  INTEGER INITS, nterf
   !***BEGIN PROLOGUE  ERF
   !***PURPOSE  Compute the error function.
   !***LIBRARY   SLATEC (FNLIB)
@@ -31,6 +29,8 @@ FUNCTION ERF(X)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable name.  (RWC, WRB)
   !***END PROLOGUE  ERF
+  REAL CSEVL, ERFC, erfcs, R1MACH, sqeps, sqrtpi, X, xbig, y
+  INTEGER INITS, nterf
   DIMENSION erfcs(13)
   LOGICAL first
   EXTERNAL ERFC

@@ -1,10 +1,6 @@
 !DECK DPOPT
 SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   IMPLICIT NONE
-  INTEGER i, iadbig, ictmax, ictopt, idg, Info, iopt, ipagef, &
-    isave, itbrc, itest, j, key, kprint, last, lds, lprg, &
-    Mrelas, mxitlp, n20043
-  INTEGER n20053, n20096, nerr, next, npp, Nvars
   !***BEGIN PROLOGUE  DPOPT
   !***SUBSIDIARY
   !***PURPOSE  Subsidiary to DSPLP
@@ -36,6 +32,10 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Fixed an error message.  (RWC)
   !***END PROLOGUE  DPOPT
+  INTEGER i, iadbig, ictmax, ictopt, idg, Info, iopt, ipagef, &
+    isave, itbrc, itest, j, key, kprint, last, lds, lprg, &
+    Mrelas, mxitlp, n20043
+  INTEGER n20053, n20096, nerr, next, npp, Nvars
   REAL(8) :: abig, asmall, costsc, Csc(*), eps, one, Prgopt(*), &
     Ropt(07), tolls, tune, zero, D1MACH, tolabs
   INTEGER Ibasis(*), Intopt(08)
