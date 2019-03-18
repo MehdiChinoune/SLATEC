@@ -7,6 +7,7 @@ pool:
 
 steps:
 - script: |
+    sudo apt -y install gfortran
     mkdir build && cd build
     cmake ..
     make -j
