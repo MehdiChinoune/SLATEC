@@ -1,0 +1,14 @@
+
+trigger:
+- master
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+steps:
+- script: |
+    mkdir build && cd build
+    cmake ..
+    make -j
+    make test
+  displayName: 'gcc-6-Release'
