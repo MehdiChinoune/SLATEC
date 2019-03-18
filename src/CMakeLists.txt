@@ -88,3 +88,5 @@ target_link_libraries(slatec xerror )
 
 add_subdirectory( wigner_coef )
 target_link_libraries(slatec wigner_coef )
+
+install(TARGETS slatec LIBRARY DESTINATION lib RUNTIME DESTINATION bin)

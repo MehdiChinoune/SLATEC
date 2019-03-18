@@ -11,4 +11,4 @@ steps:
     cmake ..
     make -j
     make test
-  displayName: 'gcc-6-Release'
+  displayName: 'gcc-5-Release'

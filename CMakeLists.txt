@@ -44,5 +44,3 @@ target_link_libraries(spfuntest slatec)
 
 add_test(NAME spfuntest COMMAND ./spfuntest 1 WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 set_tests_properties(spfuntest PROPERTIES FAIL_REGULAR_EXPRESSION "[^a-z]Error;ERROR;Failed;FAILED")
-
-install(TARGETS slatec LIBRARY DESTINATION lib RUNTIME DESTINATION bin)
