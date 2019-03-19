@@ -39,12 +39,12 @@ CONTAINS
     !   900727  Added EXTERNAL statement.  (WRB)
     !***END PROLOGUE  CFNCK
     INTEGER i, Lun, Kprint, Ipass
-    REAL sqrt2, sqrt3, pi, R1MACH, errmax, errtol, abserr, relerr
-    COMPLEX c(48), w(48), c1, ci, C0LGMC, CACOS, CACOSH, CASIN, &
-      CASINH, CATAN, CATAN2, CATANH, CBETA, CCBRT, CCOSH, CCOT, &
-      CEXPRL, CGAMMA, CGAMR, CLBETA, CLNGAM, CLNREL, CLOG10, &
-      CPSI, CSINH, CTAN, CTANH
-    EXTERNAL CCOT, CGAMMA
+    REAL sqrt2, sqrt3, pi, errmax, errtol, abserr, relerr
+    REAL, EXTERNAL :: R1MACH
+    COMPLEX c(48), w(48), c1, ci
+    COMPLEX, EXTERNAL :: C0LGMC, CACOS, CACOSH, CASIN, CASINH, CATAN, CATAN2, &
+      CATANH, CBETA, CCBRT, CCOSH, CCOT, CEXPRL, CGAMMA, CGAMR, CLBETA, CLNGAM, &
+      CLNREL, CLOG10, CPSI, CSINH, CTAN, CTANH
     !
     !     Constants to be used
     !

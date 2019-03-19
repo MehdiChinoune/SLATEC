@@ -5,7 +5,6 @@ CONTAINS
   !DECK SFNCK
   SUBROUTINE SFNCK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    REAL ACOSH, AI, AIE, ALI, ALNREL, ASINH, ATANH, BESI0, BESI0E
     !***BEGIN PROLOGUE  SFNCK
     !***PURPOSE  Quick check for the single precision Fullerton
     !            special functions.
@@ -43,13 +42,13 @@ CONTAINS
     !   900727  Added EXTERNAL statement.  (WRB)
     !***END PROLOGUE  SFNCK
     INTEGER i, Lun, Kprint, Ipass
-    REAL R1MACH, y(105), v(105), errmax, errtol, abserr, relerr, &
-      BESI1, BESI1E, BESJ0, BESJ1, BESK0, BESK0E, BESK1, BESK1E, &
-      BESY0, BESY1, BETA, BETAI, BI, BIE, BINOM, CBRT, CHU, &
-      COSDG, COT, DAWS, E1, EI, ERF, EXPREL, FAC, GAMI, GAMIC, &
-      GAMIT, GAMMA, GAMR, POCH, POCH1, PSI, R9ATN1, R9LN2R, SINDG, &
-      SPENC
-    EXTERNAL COT, ERF, GAMMA
+    REAL y(105), v(105), errmax, errtol, abserr, relerr
+    REAL, EXTERNAL :: ACOSH, AI, AIE, ALI, ALNREL, ASINH, ATANH, BESI0, BESI0E, &
+      BESI1, BESI1E, BESJ0, BESJ1, BESK0, BESK0E, BESK1, BESK1E, BESY0, BESY1, &
+      BETA, BETAI, BI, BIE, BINOM, CBRT, CHU, COSDG, COT, DAWS, E1, EI, ERF, &
+      EXPREL, FAC, GAMI, GAMIC, GAMIT, GAMMA, GAMR, POCH, POCH1, PSI, R1MACH, &
+      R9ATN1, R9LN2R, SINDG, SPENC
+    EXTERNAL :: BESKES, BESKS
     !
     !     Correct values through different calculations are stored in V(*)
     !
