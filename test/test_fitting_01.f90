@@ -257,8 +257,6 @@ CONTAINS
   !DECK QCGLSS
   SUBROUTINE QCGLSS(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER i, Ipass, j, kk, Kprint
-    REAL R1MACH, rnorm
     !***BEGIN PROLOGUE  QCGLSS
     !***PURPOSE  Quick check for SGLSS.
     !***LIBRARY   SLATEC
@@ -295,6 +293,8 @@ CONTAINS
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
     !***END PROLOGUE  QCGLSS
+    INTEGER i, Ipass, j, kk, Kprint
+    REAL R1MACH, rnorm
     REAL aa(4,4,2), a(4,4), bb(4,2), b(4), xx(4,4), delmax, delx, r
     REAL work(20)
     CHARACTER :: list(2)

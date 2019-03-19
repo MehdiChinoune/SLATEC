@@ -5,7 +5,6 @@ CONTAINS
   !DECK SQCK
   SUBROUTINE SQCK(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun
     !***BEGIN PROLOGUE  SQCK
     !***PURPOSE  Quick check for SPOFS, SPOIR, SNBFS and SNBIR.
     !***LIBRARY   SLATEC
@@ -46,6 +45,7 @@ CONTAINS
     !           including removing an illegal character from column 1, and
     !           fixed code to test all four routines.  (RWC)
     !***END PROLOGUE  SQCK
+    INTEGER Kprint, Lun
     REAL a(4,4), at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), &
       work(35), r, delx, delmax, sign, R1MACH
     CHARACTER(4) :: list(4)
@@ -186,7 +186,6 @@ CONTAINS
   !DECK DQCK
   SUBROUTINE DQCK(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun
     !***BEGIN PROLOGUE  DQCK
     !***PURPOSE  Quick check for DPOFS AND DNBFS.
     !***LIBRARY   SLATEC
@@ -223,6 +222,7 @@ CONTAINS
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
     !***END PROLOGUE  DQCK
+    INTEGER Kprint, Lun
     REAL(8) :: a(4,4), at(5,4), abe(5,7), abet(5,7), b(4), bt(4), &
       c(4), work(35), sign, D1MACH
     REAL r, delx, delmax
@@ -362,7 +362,6 @@ CONTAINS
   !DECK CQCK
   SUBROUTINE CQCK(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun
     !***BEGIN PROLOGUE  CQCK
     !***PURPOSE  Quick check for CPOFS, CPOIR, CNBFS and CNBIR.
     !***LIBRARY   SLATEC
@@ -399,9 +398,9 @@ CONTAINS
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
     !***END PROLOGUE  CQCK
+    INTEGER Kprint, Lun
     REAL r, delx, delmax, R1MACH
-    COMPLEX a(4,4), at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), &
-      work(35)
+    COMPLEX a(4,4), at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), work(35)
     CHARACTER(4) :: list(4)
     INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog

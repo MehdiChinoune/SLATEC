@@ -5,7 +5,6 @@ CONTAINS
   !DECK CPRPQX
   SUBROUTINE CPRPQX(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    REAL R1MACH
     !***BEGIN PROLOGUE  CPRPQX
     !***PURPOSE  Quick check for CPZERO and RPZERO.
     !***LIBRARY   SLATEC
@@ -24,6 +23,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !***END PROLOGUE  CPRPQX
+    REAL R1MACH
     INTEGER Kprint, Ipass, Lun
     INTEGER ideg, idegp1, info, i, j, id
     REAL a(6), err, erri, relerr
@@ -317,8 +317,6 @@ CONTAINS
   !DECK RQRTST
   SUBROUTINE RQRTST(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    REAL beta, R1MACH, tol, work
-    INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr, NUMXER
     !***BEGIN PROLOGUE  RQRTST
     !***PURPOSE  Quick check for RPQR79.
     !***LIBRARY   SLATEC
@@ -333,6 +331,8 @@ CONTAINS
     !           the IBM 370 mainframes.  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
     !***END PROLOGUE  RQRTST
+    REAL beta, R1MACH, tol, work
+    INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr, NUMXER
     INTEGER itmp(7)
     COMPLEX root(7), chk(7)
     DIMENSION work(63)
@@ -446,8 +446,6 @@ CONTAINS
   !DECK CQRTST
   SUBROUTINE CQRTST(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr, NUMXER
-    REAL R1MACH, tol
     !***BEGIN PROLOGUE  CQRTST
     !***PURPOSE  Quick check for CPQR79.
     !***LIBRARY   SLATEC
@@ -460,6 +458,8 @@ CONTAINS
     !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
     !***END PROLOGUE  CQRTST
+    INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr, NUMXER
+    REAL R1MACH, tol
     INTEGER itest(2), itmp(7)
     REAL work(144)
     COMPLEX coeff1(9), coeff2(2), coeff3(2), root(8), chk1(8), chk2

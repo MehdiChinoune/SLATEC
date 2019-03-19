@@ -5,7 +5,6 @@ CONTAINS
   !DECK DBIKCK
   SUBROUTINE DBIKCK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER Kprint, NUMXER
     !***BEGIN PROLOGUE  DBIKCK
     !***PURPOSE  Quick check for DBESI and DBESK.
     !***LIBRARY   SLATEC
@@ -34,8 +33,8 @@ CONTAINS
     !           obtain more information when there is failure of the
     !           Wronskian.  (WRB)
     !***END PROLOGUE  DBIKCK
-    INTEGER i, Ipass, ix, k, kode, kontrl, Lun, m, n, nerr, nu, &
-      nw, ny
+    INTEGER Kprint, NUMXER
+    INTEGER i, Ipass, ix, k, kode, kontrl, Lun, m, n, nerr, nu, nw, ny
     REAL(8) :: alp, del, er, fnu, fnup, rx, tol, x
     REAL(8) :: fn(3), w(5), xx(5), y(5)
     REAL(8) :: D1MACH
@@ -269,7 +268,6 @@ CONTAINS
   !DECK DBJYCK
   SUBROUTINE DBJYCK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER Kprint, NUMXER
     !***BEGIN PROLOGUE  DBJYCK
     !***PURPOSE  Quick check for DBESJ and DBESY.
     !***LIBRARY   SLATEC
@@ -298,6 +296,7 @@ CONTAINS
     !           obtain more information when there is failure of the
     !           Wronskian.  (WRB)
     !***END PROLOGUE  DBJYCK
+    INTEGER Kprint, NUMXER
     INTEGER i, Ipass, ix, k, kontrl, Lun, m, n, nerr, nu, ny
     REAL(8) :: alp, del, er, fnu, fnup, rhpi, rx, tol, x
     REAL(8) :: fn(3), w(5), xx(5), y(5)
@@ -498,7 +497,6 @@ CONTAINS
   !DECK DEG8CK
   SUBROUTINE DEG8CK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER Kprint
     !***BEGIN PROLOGUE  DEG8CK
     !***PURPOSE  Quick check for DEXINT and DGAUS8.
     !***LIBRARY   SLATEC
@@ -521,6 +519,7 @@ CONTAINS
     !           KPRINT.  (WRB)
     !   920206  Corrected argument list in CALL to DEXINT.  (WRB)
     !***END PROLOGUE  DEG8CK
+    INTEGER Kprint
     COMMON /DFEINX/ X, A, FKM
     INTEGER i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
       kode, kx, Lun, m, n, nm, nz

@@ -5,7 +5,6 @@ CONTAINS
   !DECK QCKIN
   SUBROUTINE QCKIN(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER Ipass, Kprint
     !***BEGIN PROLOGUE  QCKIN
     !***PURPOSE  Quick check for BSKIN.
     !***LIBRARY   SLATEC
@@ -39,8 +38,8 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !***END PROLOGUE  QCKIN
-    INTEGER i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, &
-      mm, n, ndel, nn, nz
+    INTEGER Ipass, Kprint
+    INTEGER i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, mm, n, ndel, nn, nz
     INTEGER I1MACH
     REAL aix, er, tol, v, x, xinc, y
     REAL R1MACH
@@ -129,7 +128,6 @@ CONTAINS
   !DECK QCPSI
   SUBROUTINE QCPSI(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER Ipass, Kprint
     !***BEGIN PROLOGUE  QCPSI
     !***PURPOSE  Quick check for PSIFN.
     !***LIBRARY   SLATEC
@@ -162,6 +160,7 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !***END PROLOGUE  QCPSI
+    INTEGER Ipass, Kprint
     INTEGER i, ierr, iflg, ix, kode, Lun, m, n, nm, nn, nz
     REAL er, euler, psi1, psi2, r1m4, s, tol, x
     REAL R1MACH

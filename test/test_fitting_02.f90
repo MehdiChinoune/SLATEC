@@ -257,6 +257,7 @@ CONTAINS
   END SUBROUTINE DLSEIT
   !DECK DQCGLS
   SUBROUTINE DQCGLS(Lun,Kprint,Ipass)
+    IMPLICIT NONE
     !***BEGIN PROLOGUE  DQCGLS
     !***PURPOSE  Quick check for DGLSS.
     !***LIBRARY   SLATEC
@@ -293,10 +294,7 @@ CONTAINS
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
     !***END PROLOGUE  DQCGLS
-    !
-    IMPLICIT NONE
-    REAL(8) :: a, aa, b, bb, D1MACH, delmax, delx, r, rnorm, &
-      work, xx
+    REAL(8) :: a, aa, b, bb, D1MACH, delmax, delx, r, rnorm, work, xx
     INTEGER i, Ipass, j, kk, Kprint
     DIMENSION aa(4,4,2), a(4,4), bb(4,2), b(4), xx(4,4)
     DIMENSION work(50)

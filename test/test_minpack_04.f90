@@ -62,7 +62,6 @@ CONTAINS
   !DECK DPFITT
   SUBROUTINE DPFITT(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER kontrl
     !***BEGIN PROLOGUE  DPFITT
     !***PURPOSE  Quick check for DPOLFT, DPCOEF and DP1VLU.
     !***LIBRARY   SLATEC
@@ -86,6 +85,7 @@ CONTAINS
     !   920214  Code restructured to test for all values of KPRINT and to
     !           provide more PASS/FAIL information.  (WRB)
     !***END PROLOGUE  DPFITT
+    INTEGER kontrl
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Scalars in Common ..

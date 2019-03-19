@@ -5,7 +5,6 @@ CONTAINS
   !DECK DAVNTS
   SUBROUTINE DAVNTS(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER kontrl
     !***BEGIN PROLOGUE  DAVNTS
     !***PURPOSE  Quick check for DAVINT.
     !***LIBRARY   SLATEC
@@ -22,10 +21,10 @@ CONTAINS
     !   920210  Code restructured and revised to test error returns for all
     !           values of KPRINT.  (WRB)
     !***END PROLOGUE  DAVNTS
+    INTEGER kontrl
     REAL(8) :: D1MACH
     INTEGER i, ierr, Ipass, Kprint, Lun, n
-    REAL(8) :: a, ans, b, del, rn1, sqb, tol, tol1, x(501), &
-      xint, y(501)
+    REAL(8) :: a, ans, b, del, rn1, sqb, tol, tol1, x(501), xint, y(501)
     LOGICAL fatal
     !***FIRST EXECUTABLE STATEMENT  DAVNTS
     IF ( Kprint>=2 ) WRITE (Lun,99001)

@@ -5,7 +5,6 @@ CONTAINS
   !DECK CDQAG
   SUBROUTINE CDQAG(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER ierv, Lun
     !***BEGIN PROLOGUE  CDQAG
     !***PURPOSE  Quick check for DQAG.
     !***LIBRARY   SLATEC
@@ -19,9 +18,9 @@ CONTAINS
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !***END PROLOGUE  CDQAG
-    !
+
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    !
+    INTEGER ierv, Lun
     REAL(8) :: a, abserr, b, D1MACH, epmach, epsabs, epsrel, &
       error, exact1, exact2, exact3, pi, result, uflow, work
     INTEGER ier, ip, Ipass, iwork, key, Kprint, last, lenw, limit, &
@@ -116,7 +115,6 @@ CONTAINS
   !DECK CDQAGI
   SUBROUTINE CDQAGI(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER ierv, inf
     !***BEGIN PROLOGUE  CDQAGI
     !***PURPOSE  Quick check for DQAGI.
     !***LIBRARY   SLATEC
@@ -133,7 +131,7 @@ CONTAINS
     !***END PROLOGUE  CDQAGI
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    !
+    INTEGER ierv, inf
     REAL(8) :: abserr, bound, D1MACH, epmach, epsabs, epsrel, &
       error, exact0, exact1, exact2, exact3, exact4, &
       oflow, result, uflow, work
@@ -248,7 +246,6 @@ CONTAINS
   !DECK CDQAGP
   SUBROUTINE CDQAGP(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER ierv
     !***BEGIN PROLOGUE  CDQAGP
     !***PURPOSE  Quick check for DQAGP.
     !***LIBRARY   SLATEC
@@ -262,9 +259,9 @@ CONTAINS
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !***END PROLOGUE  CDQAGP
-    !
+
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    !
+    INTEGER ierv
     REAL(8) :: a, abserr, b, D1MACH, epmach, epsabs, epsrel, &
       error, exact1, exact2, exact3, oflow, points, p1, p2, result, uflow, work
     INTEGER ier, ip, Ipass, iwork, Kprint, last, leniw, lenw, limit, &
@@ -390,7 +387,6 @@ CONTAINS
   !DECK CDQAGS
   SUBROUTINE CDQAGS(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER ierv, Lun
     !***BEGIN PROLOGUE  CDQAGS
     !***PURPOSE  Quick check for DQAGS.
     !***LIBRARY   SLATEC
@@ -406,9 +402,9 @@ CONTAINS
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   911114  Modified test on IER=4 to allow IER=5.  (WRB)
     !***END PROLOGUE  CDQAGS
-    !
+
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    !
+    INTEGER ierv, Lun
     REAL(8) :: a, abserr, b, D1MACH, epmach, epsabs, epsrel, &
       error, exact0, exact1, exact2, exact3, exact4, oflow, &
       result, uflow, work
@@ -528,7 +524,6 @@ CONTAINS
   !DECK CDQAWC
   SUBROUTINE CDQAWC(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER ierv, Lun
     !***BEGIN PROLOGUE  CDQAWC
     !***PURPOSE  Quick check for DQAWC.
     !***LIBRARY   SLATEC
@@ -542,9 +537,9 @@ CONTAINS
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !***END PROLOGUE  CDQAWC
-    !
+
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    !
+    INTEGER ierv, Lun
     REAL(8) :: a, abserr, b, D1MACH, epmach, epsabs, epsrel, &
       error, exact0, exact1, c, result, uflow, work
     INTEGER ier, ip, Ipass, iwork, Kprint, last, lenw, limit, neval
@@ -630,7 +625,6 @@ CONTAINS
   !DECK CDQAWF
   SUBROUTINE CDQAWF(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER ierv, integr, iwork, leniw, Lun, maxp1
     !***BEGIN PROLOGUE  CDQAWF
     !***PURPOSE  Quick check for DQAWF.
     !***LIBRARY   SLATEC
@@ -644,9 +638,9 @@ CONTAINS
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !***END PROLOGUE  CDQAWF
-    !
+
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    !
+    INTEGER ierv, integr, iwork, leniw, Lun, maxp1
     REAL(8) :: a, abserr, D1MACH, epsabs, epmach, error, exact0, &
       omega, pi, result, uflow, work
     INTEGER ier, ip, Ipass, Kprint, lenw, limit, limlst, lst, neval
@@ -744,7 +738,6 @@ CONTAINS
   !DECK CDQAWO
   SUBROUTINE CDQAWO(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER leniw
     !***BEGIN PROLOGUE  CDQAWO
     !***PURPOSE  Quick check for DQAWO.
     !***LIBRARY   SLATEC
@@ -758,9 +751,9 @@ CONTAINS
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !***END PROLOGUE  CDQAWO
-    !
+
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    !
+    INTEGER leniw
     REAL(8) :: a, abserr, b, epmach, epsabs, epsrel, error, &
       exact0, oflow, omega, pi, result, D1MACH, uflow, work
     INTEGER ier, ierv, integr, ip, Ipass, iwork, Kprint, last, lenw, &
@@ -871,7 +864,6 @@ CONTAINS
   !DECK CDQAWS
   SUBROUTINE CDQAWS(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER ierv, Lun
     !***BEGIN PROLOGUE  CDQAWS
     !***PURPOSE  Quick check for DQAWS.
     !***LIBRARY   SLATEC
@@ -885,9 +877,9 @@ CONTAINS
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !***END PROLOGUE  CDQAWS
-    !
+
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    !
+    INTEGER ierv, Lun
     REAL(8) :: a, abserr, b, D1MACH, epmach, epsabs, epsrel, &
       error, exact0, exact1, alfa, beta, result, uflow, work
     INTEGER ier, ip, Ipass, iwork, Kprint, last, lenw, limit, neval, &
@@ -975,7 +967,6 @@ CONTAINS
   !DECK CDQNG
   SUBROUTINE CDQNG(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER Lun
     !***BEGIN PROLOGUE  CDQNG
     !***PURPOSE  Quick check for DQNG.
     !***LIBRARY   SLATEC
@@ -989,9 +980,9 @@ CONTAINS
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !***END PROLOGUE  CDQNG
-    !
+
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    !
+    INTEGER Lun
     REAL(8) :: a, abserr, b, D1MACH, epmach, epsabs, epsrel, &
       exact1, error, exact2, result, uflow
     INTEGER ier, ierv, ip, Ipass, Kprint, neval

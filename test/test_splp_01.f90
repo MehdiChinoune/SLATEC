@@ -5,10 +5,6 @@ CONTAINS
   !DECK SPLPQX
   SUBROUTINE SPLPQX(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    REAL bl, bu, d, dattrv, duals, prgopt, primal, USRMAT, work, zero
-    INTEGER i, ibasis, ic, icnt, ind, info, Ipass, isoln, iv, ivv, &
-      iwork, j, kk, kount, Kprint, liw, Lun, lw, mm, mrelas
-    INTEGER nvars
     !***BEGIN PROLOGUE  SPLPQX
     !***PURPOSE  Quick check for SPLP.
     !***LIBRARY   SLATEC
@@ -21,6 +17,10 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901013  Added additional printout on failure.  (RWC)
     !***END PROLOGUE  SPLPQX
+    REAL bl, bu, d, dattrv, duals, prgopt, primal, USRMAT, work, zero
+    INTEGER i, ibasis, ic, icnt, ind, info, Ipass, isoln, iv, ivv, &
+      iwork, j, kk, kount, Kprint, liw, Lun, lw, mm, mrelas
+    INTEGER nvars
     EXTERNAL USRMAT
     REAL costs(37)
     DIMENSION prgopt(50), dattrv(210), bl(60), bu(60)
@@ -258,9 +258,6 @@ CONTAINS
   !DECK SBOCQX
   SUBROUTINE SBOCQX(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER i, ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
-      mode, mpass, mrows, ncols
-    REAL R1MACH, rnorm, rnormc, SNRM2, sr
     !***BEGIN PROLOGUE  SBOCQX
     !***PURPOSE  Quick check for SBOCLS.
     !***LIBRARY   SLATEC
@@ -283,6 +280,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901013  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     !***END PROLOGUE  SBOCQX
+    INTEGER i, ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
+      mode, mpass, mrows, ncols
+    REAL R1MACH, rnorm, rnormc, SNRM2, sr
     REAL d(6,5), w(11,11), bl(5,2), bu(5,2), x(30), rw(55), xtrue(9)
     REAL c(5,5)
     REAL bl1(10), bu1(10)

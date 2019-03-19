@@ -394,12 +394,6 @@ CONTAINS
   !DECK QXBVSP
   SUBROUTINE QXBVSP(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    REAL a, abser, ae, alpha, b, beta, re, reler, sve, TERm, tol, &
-      work, xpts, XSAve, y, yans
-    INTEGER i, iflag, igofx, Ipass, ipss, j, kont, kount, Kprint, l, &
-      Lun, ncomp, ndiw, ndw, neqivp, nfc, nic, nrowa, nrowb, &
-      nrowy
-    INTEGER numort, nxpts
     !***BEGIN PROLOGUE  QXBVSP
     !***PURPOSE  Quick check for BVSUP.
     !***LIBRARY   SLATEC
@@ -414,6 +408,11 @@ CONTAINS
     !           output.  (RWC)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !***END PROLOGUE  QXBVSP
+    INTEGER numort, nxpts
+    REAL a, abser, ae, alpha, b, beta, re, reler, sve, TERm, tol, &
+      work, xpts, XSAve, y, yans
+    INTEGER i, iflag, igofx, Ipass, ipss, j, kont, kount, Kprint, l, &
+      Lun, ncomp, ndiw, ndw, neqivp, nfc, nic, nrowa, nrowb, nrowy
     INTEGER itmp(9), iwork(100)
     DIMENSION y(4,15), xpts(15), a(2,4), alpha(2), b(2,4), beta(2), &
       yans(2,15), work(1000)

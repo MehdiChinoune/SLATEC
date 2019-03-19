@@ -61,7 +61,6 @@ CONTAINS
   !DECK PFITQX
   SUBROUTINE PFITQX(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER kontrl
     !***BEGIN PROLOGUE  PFITQX
     !***PURPOSE  Quick check for POLFIT, PCOEF and PVALUE.
     !***LIBRARY   SLATEC
@@ -83,6 +82,7 @@ CONTAINS
     !   920214  Code restructured to test for all values of KPRINT and to
     !           provide more PASS/FAIL information.  (WRB)
     !***END PROLOGUE  PFITQX
+    INTEGER kontrl
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Scalars in Common ..

@@ -5,8 +5,6 @@ CONTAINS
   !DECK EISQX1
   SUBROUTINE EISQX1(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER info
-    REAL R1MACH
     !***BEGIN PROLOGUE  EISQX1
     !***PURPOSE  Quick check for SGEEV and CGEEV.
     !***LIBRARY   SLATEC
@@ -26,6 +24,8 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900405  CALL to XERROR replaced by message to LUN.  (WRB)
     !***END PROLOGUE  EISQX1
+    INTEGER info
+    REAL R1MACH
     INTEGER Kprint, Ipass, Lun
     INTEGER lda, n, ldv, job, i, j, id
     REAL a(3,3), ek(3), w(9)
@@ -90,8 +90,6 @@ CONTAINS
   !DECK EISQX2
   SUBROUTINE EISQX2(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER info
-    REAL R1MACH
     !***BEGIN PROLOGUE  EISQX2
     !***PURPOSE  Quick check for SSIEV, CHIEV and SSPEV.
     !***LIBRARY   SLATEC
@@ -111,6 +109,8 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900405  CALL to XERROR replaced by message to LUN.  (WRB)
     !***END PROLOGUE  EISQX2
+    INTEGER info
+    REAL R1MACH
     INTEGER Kprint, Ipass, Lun
     INTEGER lda, n, ldv, job, i, j, id
     REAL a1(4,4), a2(10), ap(10), e(4), v(4,4), ek(4), w(16)

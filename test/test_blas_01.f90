@@ -5,8 +5,6 @@ CONTAINS
   !DECK BLACHK
   SUBROUTINE BLACHK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER ICAse, INCx, INCy, Kprint, Lun, MODe, N, NPRint
-    REAL sdfac, sfac
     !***BEGIN PROLOGUE  BLACHK
     !***PURPOSE  Quick check for Basic Linear Algebra Subprograms.
     !***LIBRARY   SLATEC
@@ -27,6 +25,8 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !***END PROLOGUE  BLACHK
+    INTEGER ICAse, INCx, INCy, Kprint, Lun, MODe, N, NPRint
+    REAL sdfac, sfac
     INTEGER Ipass, jtest(38)
     REAL(8) :: dfac, dqfac
     LOGICAL PASs
@@ -80,7 +80,6 @@ CONTAINS
   !DECK HEADER
   SUBROUTINE HEADER(Kprint)
     IMPLICIT NONE
-    INTEGER ICAse, INCx, INCy, Kprint, MODe, N, NPRint
     !***BEGIN PROLOGUE  HEADER
     !***PURPOSE  Print header for BLAS quick checks.
     !***LIBRARY   SLATEC
@@ -92,6 +91,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920210  Minor modifications to prologue and code.  (WRB)
     !***END PROLOGUE  HEADER
+    INTEGER ICAse, INCx, INCy, Kprint, MODe, N, NPRint
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     LOGICAL PASs
     CHARACTER(6) :: l(38)
@@ -143,8 +143,6 @@ CONTAINS
   !DECK CHECK0
   SUBROUTINE CHECK0(Sfac,Dfac,Kprint)
     IMPLICIT NONE
-    INTEGER i, ICAse, INCx, INCy, jump, k, Kprint, MODe, N, NPRint
-    REAL sa, sb, sc, Sfac, ss, zero
     !***BEGIN PROLOGUE  CHECK0
     !***PURPOSE  (UNKNOWN)
     !***LIBRARY   SLATEC
@@ -167,6 +165,8 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !***END PROLOGUE  CHECK0
+    INTEGER i, ICAse, INCx, INCy, jump, k, Kprint, MODe, N, NPRint
+    REAL sa, sb, sc, Sfac, ss, zero
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     LOGICAL PASs
     REAL strue(9), stemp(9)
@@ -288,9 +288,6 @@ CONTAINS
   !DECK CHECK1
   SUBROUTINE CHECK1(Sfac,Dfac,Kprint)
     IMPLICIT NONE
-    INTEGER i, ICAMAX, ICAse, IDAMAX, INCx, INCy, ISAMAX, jump, &
-      Kprint, len, MODe, N, np1, NPRint
-    REAL sa, SASUM, SCASUM, SCNRM2, Sfac, SNRM2, stemp
     !***BEGIN PROLOGUE  CHECK1
     !***PURPOSE  (UNKNOWN)
     !***LIBRARY   SLATEC
@@ -317,6 +314,9 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !***END PROLOGUE  CHECK1
+    INTEGER i, ICAMAX, ICAse, IDAMAX, INCx, INCy, ISAMAX, jump, &
+      Kprint, len, MODe, N, np1, NPRint
+    REAL sa, SASUM, SCASUM, SCNRM2, Sfac, SNRM2, stemp
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     LOGICAL PASs
     INTEGER itrue2(5), itrue3(5)
@@ -470,9 +470,6 @@ CONTAINS
   !DECK CHECK2
   SUBROUTINE CHECK2(Sfac,Sdfac,Dfac,Dqfac,Kprint)
     IMPLICIT NONE
-    INTEGER i, ICAse, INCx, INCy, j, ki, kn, kni, kpar, Kprint, &
-      ksize, lenx, leny, MODe, mx, my, N, NPRint
-    REAL sa, sb, sc, Sdfac, SDOT, SDSDOT, Sfac, ss
     !***BEGIN PROLOGUE  CHECK2
     !***PURPOSE  (UNKNOWN)
     !***LIBRARY   SLATEC
@@ -496,6 +493,9 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !***END PROLOGUE  CHECK2
+    INTEGER i, ICAse, INCx, INCy, j, ki, kn, kni, kpar, Kprint, &
+      ksize, lenx, leny, MODe, mx, my, N, NPRint
+    REAL sa, sb, sc, Sdfac, SDOT, SDSDOT, Sfac, ss
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     !
     LOGICAL PASs
@@ -1050,7 +1050,6 @@ CONTAINS
   !DECK ITEST
   SUBROUTINE ITEST(Len,Icomp,Itrue,Kprint)
     IMPLICIT NONE
-    INTEGER i, ICAse, id, INCx, INCy, Kprint, Len, MODe, N, NPRint
     !***BEGIN PROLOGUE  ITEST
     !***PURPOSE  Compare arrays ICOMP and ITRUE.
     !***LIBRARY   SLATEC
@@ -1073,6 +1072,7 @@ CONTAINS
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
     !***END PROLOGUE  ITEST
+    INTEGER i, ICAse, id, INCx, INCy, Kprint, Len, MODe, N, NPRint
     INTEGER Icomp(*), Itrue(*)
     LOGICAL PASs
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
@@ -1108,7 +1108,6 @@ CONTAINS
   !DECK STEST
   SUBROUTINE STEST(Len,Scomp,Strue,Ssize,Sfac,Kprint)
     IMPLICIT NONE
-    INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
     !***BEGIN PROLOGUE  STEST
     !***PURPOSE  Compare arrays SCOMP and STRUE.
     !***LIBRARY   SLATEC
@@ -1136,6 +1135,7 @@ CONTAINS
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
     !***END PROLOGUE  STEST
+    INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
     REAL Scomp(*), Strue(*), Ssize(*), Sfac, sd, releps, R1MACH
     LOGICAL PASs
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
@@ -1172,7 +1172,6 @@ CONTAINS
   !DECK DTEST
   SUBROUTINE DTEST(Len,Dcomp,Dtrue,Dsize,Dfac,Kprint)
     IMPLICIT NONE
-    INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
     !***BEGIN PROLOGUE  DTEST
     !***PURPOSE  Compare arrays DCOMP and DTRUE.
     !***LIBRARY   SLATEC
@@ -1198,8 +1197,8 @@ CONTAINS
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
     !***END PROLOGUE  DTEST
-    REAL(8) :: Dcomp(*), Dtrue(*), Dsize(*), Dfac, dd, releps, &
-      D1MACH
+    INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
+    REAL(8) :: Dcomp(*), Dtrue(*), Dsize(*), Dfac, dd, releps, D1MACH
     LOGICAL PASs
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     SAVE releps
@@ -1235,7 +1234,6 @@ CONTAINS
 
   SUBROUTINE CTEST(Len,Ccomp,Ctrue,Csize,Cfac,Kprint)
     IMPLICIT NONE
-    INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
     !***BEGIN PROLOGUE  DTEST
     !***PURPOSE  Compare arrays DCOMP and DTRUE.
     !***LIBRARY   SLATEC
@@ -1261,6 +1259,7 @@ CONTAINS
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
     !***END PROLOGUE  DTEST
+    INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
     COMPLEX :: Ccomp(*), Ctrue(*), Csize(*)
     REAL :: Cfac, dd, releps, R1MACH, CABS1
     LOGICAL PASs

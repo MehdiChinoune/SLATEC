@@ -5,7 +5,6 @@ CONTAINS
   !DECK DQCKIN
   SUBROUTINE DQCKIN(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER Ipass, Kprint, nz
     !***BEGIN PROLOGUE  DQCKIN
     !***PURPOSE  Quick check for DBSKIN.
     !***LIBRARY   SLATEC
@@ -39,6 +38,7 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !***END PROLOGUE  DQCKIN
+    INTEGER Ipass, Kprint, nz
     INTEGER i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, &
       mm, n, ndel, nn
     INTEGER I1MACH
@@ -128,7 +128,6 @@ CONTAINS
   !DECK DQCPSI
   SUBROUTINE DQCPSI(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER Ipass, Kprint
     !***BEGIN PROLOGUE  DQCPSI
     !***PURPOSE  Quick check for DPSIFN.
     !***LIBRARY   SLATEC
@@ -161,6 +160,7 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !***END PROLOGUE  DQCPSI
+    INTEGER Ipass, Kprint
     INTEGER i, ierr, iflg, ix, kode, Lun, m, n, nm, nn, nz
     REAL(8) :: er, euler, psi1, psi2, r1m4, s, tol, x
     REAL(8) :: D1MACH

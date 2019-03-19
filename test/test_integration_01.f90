@@ -5,8 +5,6 @@ CONTAINS
   !DECK AVNTST
   SUBROUTINE AVNTST(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    REAL a, ans, b, del, R1MACH, rn1, sqb, tol, tol1, x, xint, y
-    INTEGER i, ierr, Ipass, kontrl, Kprint, Lun, n
     !***BEGIN PROLOGUE  AVNTST
     !***PURPOSE  Quick check for AVINT.
     !***LIBRARY   SLATEC
@@ -23,6 +21,8 @@ CONTAINS
     !   920210  Code restructured and revised to test error returns for all
     !           values of KPRINT.  (WRB)
     !***END PROLOGUE  AVNTST
+    REAL a, ans, b, del, R1MACH, rn1, sqb, tol, tol1, x, xint, y
+    INTEGER i, ierr, Ipass, kontrl, Kprint, Lun, n
     DIMENSION x(501), y(501)
     LOGICAL fatal
     !***FIRST EXECUTABLE STATEMENT  AVNTST
@@ -357,7 +357,6 @@ CONTAINS
   !DECK QN79QX
   SUBROUTINE QN79QX(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER kontrl
     !***BEGIN PROLOGUE  QN79QX
     !***PURPOSE  Quick check for QNC79.
     !***LIBRARY   SLATEC
@@ -374,6 +373,7 @@ CONTAINS
     !           second accuracy test added and testing of error returns
     !           revised.  (WRB)
     !***END PROLOGUE  QN79QX
+    INTEGER kontrl
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..

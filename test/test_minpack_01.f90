@@ -113,8 +113,6 @@ CONTAINS
   !DECK SOSFNC
   REAL FUNCTION SOSFNC(X,K)
     IMPLICIT NONE
-    INTEGER K
-    REAL X
     !***BEGIN PROLOGUE  SOSFNC
     !***PURPOSE  Function evaluator for SOS quick check.
     !***LIBRARY   SLATEC
@@ -131,6 +129,8 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !***END PROLOGUE  SOSFNC
+    INTEGER K
+    REAL X
     DIMENSION X(2)
     !***FIRST EXECUTABLE STATEMENT  SOSFNC
     IF ( K==1 ) THEN
@@ -264,8 +264,6 @@ CONTAINS
   !DECK SQJAC2
   SUBROUTINE SQJAC2(N,X,Fvec,Fjac,Ldfjac,Iflag)
     IMPLICIT NONE
-    REAL Fjac, Fvec, X
-    INTEGER Iflag, Ldfjac, N
     !***BEGIN PROLOGUE  SQJAC2
     !***PURPOSE  Evaluate full Jacobian for SNSQE test.
     !***LIBRARY   SLATEC
@@ -283,6 +281,8 @@ CONTAINS
     !   890831  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !***END PROLOGUE  SQJAC2
+    REAL Fjac, Fvec, X
+    INTEGER Iflag, Ldfjac, N
     DIMENSION X(*), Fvec(*), Fjac(Ldfjac,*)
     !***FIRST EXECUTABLE STATEMENT  SQJAC2
     Fjac(1,1) = -1.E0

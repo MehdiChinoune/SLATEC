@@ -4,6 +4,7 @@ MODULE TEST38_MOD
 CONTAINS
   !DECK DPLPQX
   SUBROUTINE DPLPQX(Lun,Kprint,Ipass)
+    IMPLICIT NONE
     !***BEGIN PROLOGUE  DPLPQX
     !***PURPOSE  Quick check for DSPLP.
     !***LIBRARY   SLATEC
@@ -16,7 +17,6 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901013  Added additional printout on failure.  (RWC)
     !***END PROLOGUE  DPLPQX
-    IMPLICIT NONE
     REAL(8) :: DUSRMT
     INTEGER i, ic, iv, ivv, j, kk, kount, Kprint, Lun, mm
     EXTERNAL DUSRMT
@@ -249,6 +249,7 @@ CONTAINS
   END SUBROUTINE DPLPQX
   !DECK DBOCQX
   SUBROUTINE DBOCQX(Lun,Kprint,Ipass)
+    IMPLICIT NONE
     !***BEGIN PROLOGUE  DBOCQX
     !***PURPOSE  Quick check for DBOCLS.
     !***LIBRARY   SLATEC
@@ -271,7 +272,6 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message.  (RWC)
     !***END PROLOGUE  DBOCQX
-    IMPLICIT NONE
     REAL(8) :: D1MACH, DNRM2, rnorm, rnormc, sr
     INTEGER i, ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols

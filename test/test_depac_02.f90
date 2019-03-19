@@ -307,10 +307,6 @@ CONTAINS
   !DECK QXDBVS
   SUBROUTINE QXDBVS(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER i, iflag, igofx, Ipass, ipss, j, kont, kount, Kprint, l, &
-      Lun, ncomp, ndiw, ndw, neqivp, nfc, nic, nrowa, nrowb, &
-      nrowy
-    INTEGER numort, nxpts
     !***BEGIN PROLOGUE  QXDBVS
     !***PURPOSE  Quick check for DBVSUP.
     !***LIBRARY   SLATEC
@@ -325,6 +321,9 @@ CONTAINS
     !           output. (RWC)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !***END PROLOGUE  QXDBVS
+    INTEGER i, iflag, igofx, Ipass, ipss, j, kont, kount, Kprint, l, &
+      Lun, ncomp, ndiw, ndw, neqivp, nfc, nic, nrowa, nrowb, nrowy
+    INTEGER numort, nxpts
     INTEGER itmp(9), iwork(100)
     REAL(8) :: work(1000), ae, re, XSAve, sve, TERm, tol
     REAL(8) :: y(4,15), xpts(15), a(2,4), alpha(2), b(2,4), beta(2)&

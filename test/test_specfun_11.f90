@@ -5,10 +5,6 @@ CONTAINS
   !DECK FCNQX2
   SUBROUTINE FCNQX2(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER i, I1MACH, ic1, ic2, id, ierr, ierror, ip, ipn, iq, ir, &
-      irad, isig, isum, ix11, ix12, ix13, ix21, ix22, ix23
-    INTEGER mu, mu1, mu2, n, nbits, ndec, nerr, nradpl, nu1, nudiff, &
-      NUMXER
     !***BEGIN PROLOGUE  FCNQX2
     !***SUBSIDIARY
     !***PURPOSE  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES DXLEGF
@@ -30,7 +26,9 @@ CONTAINS
     !   901106  Changed all specific intrinsics to generic.  (WRB)
     !   910104  Changed to print variable number of decimals. (DWL and JMS)
     !***END PROLOGUE  FCNQX2
-    !
+    INTEGER i, I1MACH, ic1, ic2, id, ierr, ierror, ip, ipn, iq, ir, &
+      irad, isig, isum, ix11, ix12, ix13, ix21, ix22, ix23
+    INTEGER mu, mu1, mu2, n, nbits, ndec, nerr, nradpl, nu1, nudiff, NUMXER
     CHARACTER(34) :: fmt, fmtf, fmti
     INTEGER Lun, Kprint, Ipass
     DIMENSION p(10), q(10), r(10), c1(10), c2(10), ip(10), iq(10), &
@@ -350,11 +348,8 @@ CONTAINS
     ENDIF
   END SUBROUTINE FCNQX2
   !DECK DXCSRT
-  SUBROUTINE DXCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,&
-      Ierror)
+  SUBROUTINE DXCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,Ierror)
     IMPLICIT NONE
-    INTEGER i, Ic1, Ic2, Ierror, Ip, Iq, Ir, ix1, ix2, j, k, l, &
-      lm1, mu, Mu1, Mu2, Nudiff
     !***BEGIN PROLOGUE  DXCSRT
     !***PURPOSE  TO COMPUTE CHECK VALUES FOR LEGENDRE FUNCTIONS
     !***LIBRARY   SLATEC
@@ -381,8 +376,9 @@ CONTAINS
     !   901019  Revisions to prologue.  (DWL and WRB)
     !   901106  Changed all specific intrinsics to generic.  (WRB)
     !***END PROLOGUE  DXCSRT
-    REAL(8) :: C1, C2, dmu, dmu1, nu, Dnu1, P, Q, R, Theta, &
-      sx, x1, x2
+    INTEGER i, Ic1, Ic2, Ierror, Ip, Iq, Ir, ix1, ix2, j, k, l, &
+      lm1, mu, Mu1, Mu2, Nudiff
+    REAL(8) :: C1, C2, dmu, dmu1, nu, Dnu1, P, Q, R, Theta, sx, x1, x2
     DIMENSION P(*), Ip(*), Q(*), Iq(*), R(*), Ir(*)
     DIMENSION C1(*), Ic1(*), C2(*), Ic2(*)
     !

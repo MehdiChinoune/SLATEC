@@ -5,7 +5,6 @@ CONTAINS
   !DECK CCHQC
   SUBROUTINE CCHQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun, Nerr
     !***BEGIN PROLOGUE  CCHQC
     !***PURPOSE  Quick check for CCHDC.
     !***LIBRARY   SLATEC
@@ -36,9 +35,9 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CCHQC
+    INTEGER Kprint, Lun, Nerr
     COMPLEX a(4,4), work(4), at(5,4), af(4,4)
-    INTEGER lda, p, jpvt(4), job, info, jpvtt(4), i, j, infoc, &
-      jpvtc(4)
+    INTEGER lda, p, jpvt(4), job, info, jpvtt(4), i, j, infoc, jpvtc(4)
     CHARACTER(20) :: kfail
     INTEGER indx
     REAL delx
@@ -110,7 +109,6 @@ CONTAINS
   !DECK CGBQC
   SUBROUTINE CGBQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun
     !***BEGIN PROLOGUE  CGBQC
     !***PURPOSE  Quick check for CGBFA, CGBCO, CGBSL and CGBDI.
     !***LIBRARY   SLATEC
@@ -144,6 +142,7 @@ CONTAINS
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
     !***END PROLOGUE  CGBQC
+    INTEGER Kprint, Lun
     COMPLEX abd(6,4), at(7,4), b(4), bt(4), c(4), det(2), dc(2), z(4)
     REAL r, rcond, rcnd, CABS1
     CHARACTER kfail*39, kprog*19
@@ -248,7 +247,6 @@ CONTAINS
   !DECK CGECK
   SUBROUTINE CGECK(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun
     !***BEGIN PROLOGUE  CGECK
     !***PURPOSE  Quick check for CGEFA, CGECO, CGESL and CGEDI.
     !***LIBRARY   SLATEC
@@ -282,8 +280,8 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CGECK
-    COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), det(2), &
-      dc(2), z(4)
+    INTEGER Kprint, Lun
+    COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), det(2), dc(2), z(4)
     REAL r, rcond, rcnd, CABS1
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
@@ -398,7 +396,6 @@ CONTAINS
   !DECK CGTQC
   SUBROUTINE CGTQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun
     !***BEGIN PROLOGUE  CGTQC
     !***PURPOSE  Quick check for CGTSL.
     !***LIBRARY   SLATEC
@@ -429,6 +426,7 @@ CONTAINS
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
     !***END PROLOGUE  CGTQC
+    INTEGER Kprint, Lun
     COMPLEX c(4), d(4), e(4), b(4), cx(4), ct(4), dt(4), et(4), bt(4)
     CHARACTER kfail*13
     INTEGER n, info, i, indx, Nerr
@@ -475,7 +473,6 @@ CONTAINS
   !DECK CHIQC
   SUBROUTINE CHIQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun
     !***BEGIN PROLOGUE  CHIQC
     !***PURPOSE  Quick check for CHIFA, CHICO, CHISL and CHIDI.
     !***LIBRARY   SLATEC
@@ -509,6 +506,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CHIQC
+    INTEGER Kprint, Lun
     COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), z(4)
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*47
@@ -622,7 +620,6 @@ CONTAINS
   !DECK CHPQC
   SUBROUTINE CHPQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun
     !***BEGIN PROLOGUE  CHPQC
     !***PURPOSE  Quick check for CHPFA, CHPCO, CHPSL and CHPDI.
     !***LIBRARY   SLATEC
@@ -656,6 +653,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CHPQC
+    INTEGER Kprint, Lun
     COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), z(4)
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*47
@@ -762,7 +760,6 @@ CONTAINS
   !DECK CPBQC
   SUBROUTINE CPBQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun
     !***BEGIN PROLOGUE  CPBQC
     !***PURPOSE  Quick check for CPBFA, CPBCO, CPBSL and CPBDI.
     !***LIBRARY   SLATEC
@@ -795,6 +792,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CPBQC
+    INTEGER Kprint, Lun
     COMPLEX abd(2,4), at(3,4), b(4), bt(4), c(4), z(4)
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*39
@@ -884,7 +882,6 @@ CONTAINS
   !DECK CPOQC
   SUBROUTINE CPOQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun
     !***BEGIN PROLOGUE  CPOQC
     !***PURPOSE  Quick check for CPOFA, CPOCO, CPOSL and CPODI.
     !***LIBRARY   SLATEC
@@ -918,6 +915,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CPOQC
+    INTEGER Kprint, Lun
     COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), z(4)
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*39
@@ -1025,7 +1023,6 @@ CONTAINS
   !DECK CPPQC
   SUBROUTINE CPPQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun
     !***BEGIN PROLOGUE  CPPQC
     !***PURPOSE  Quick check for CPPFA, CPPCO, CPPSL and CPPDI.
     !***LIBRARY   SLATEC
@@ -1059,6 +1056,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CPPQC
+    INTEGER Kprint, Lun
     COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), z(4)
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
     CHARACTER kprog*19, kfail*39
@@ -1159,7 +1157,6 @@ CONTAINS
   !DECK CPTQC
   SUBROUTINE CPTQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun
     !***BEGIN PROLOGUE  CPTQC
     !***PURPOSE  Quick check for CPTSL.
     !***LIBRARY   SLATEC
@@ -1189,6 +1186,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CPTQC
+    INTEGER Kprint, Lun
     COMPLEX d(4), e(4), b(4), cx(4), dt(4), et(4), bt(4)
     INTEGER n, i, indx, Nerr
     REAL delx, CABS1
@@ -1226,7 +1224,6 @@ CONTAINS
   !DECK CQRQC
   SUBROUTINE CQRQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun
     !***BEGIN PROLOGUE  CQRQC
     !***PURPOSE  Quick check for CQRDC and CQRSL.
     !***LIBRARY   SLATEC
@@ -1257,8 +1254,8 @@ CONTAINS
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
     !***END PROLOGUE  CQRQC
-    COMPLEX a(4,4), qraux(4), work(4), y(4), qy(4), qty(4), b(4), &
-      rsd(4), xb(4)
+    INTEGER Kprint, Lun
+    COMPLEX a(4,4), qraux(4), work(4), y(4), qy(4), qty(4), b(4), rsd(4), xb(4)
     COMPLEX at(5,4), ac(4,4), qrauxc(4), qyc(4), qtyc(4), bc(4), rsdc(4), xbc(4)
     CHARACTER kprog*9, kfail*75
     INTEGER ldx, n, p, jpvt(4), job, k, info
@@ -1374,7 +1371,6 @@ CONTAINS
   !DECK CSIQC
   SUBROUTINE CSIQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun
     !***BEGIN PROLOGUE  CSIQC
     !***PURPOSE  Quick check for CSIFA, CSICO, CSISL and CSIDI.
     !***LIBRARY   SLATEC
@@ -1408,8 +1404,8 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CSIQC
-    COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), det(2), &
-      dc(2), z(4)
+    INTEGER Kprint, Lun
+    COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), det(2), dc(2), z(4)
     REAL r, rcond, rcnd, CABS1
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
@@ -1510,7 +1506,6 @@ CONTAINS
   !DECK CSPQC
   SUBROUTINE CSPQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun
     !***BEGIN PROLOGUE  CSPQC
     !***PURPOSE  Quick check for CSPFA, CSPCO, CSPSL and CSPDI.
     !***LIBRARY   SLATEC
@@ -1544,8 +1539,8 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CSPQC
-    COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), det(2), &
-      dc(2), z(4)
+    INTEGER Kprint, Lun
+    COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), det(2), dc(2), z(4)
     REAL r, rcond, rcnd, CABS1
     CHARACTER kprog*19, kfail*39
     INTEGER n, ipvt(4), info, i, j, indx, Nerr
@@ -1640,7 +1635,6 @@ CONTAINS
   !DECK CSVQC
   SUBROUTINE CSVQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER kone, Kprint, Lun, Nerr
     !***BEGIN PROLOGUE  CSVQC
     !***PURPOSE  Quick check for CSVDC.
     !***LIBRARY   SLATEC
@@ -1671,6 +1665,7 @@ CONTAINS
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
     !***END PROLOGUE  CSVQC
+    INTEGER kone, Kprint, Lun, Nerr
     COMPLEX a(4,4), work(4), s(4), e(4), u(4,4), v(4,4)
     COMPLEX at(5,4), sc(4), ec(4), uvc(4,4)
     INTEGER ldx, n, p, ldu, ldv, job, info
@@ -1743,7 +1738,6 @@ CONTAINS
   !DECK CTRQC
   SUBROUTINE CTRQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    INTEGER Kprint, Lun
     !***BEGIN PROLOGUE  CTRQC
     !***PURPOSE  Quick check for CTRFA, CTRCO, CTRSL and CTRDI.
     !***LIBRARY   SLATEC
@@ -1777,8 +1771,8 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
     !***END PROLOGUE  CTRQC
-    COMPLEX a(4,4), at(5,4), b(4,2), bt(4), c(4), ainv(4,4,2), det(2), &
-      dc(2), z(4)
+    INTEGER Kprint, Lun
+    COMPLEX a(4,4), at(5,4), b(4,2), bt(4), c(4), ainv(4,4,2), det(2), dc(2), z(4)
     REAL r, rcond, rcnd(2), CABS1
     CHARACTER kprog*19, kfail*39
     INTEGER lda, n, info, i, j, indx, Nerr

@@ -5,11 +5,6 @@ CONTAINS
   !DECK QXBLKT
   SUBROUTINE QXBLKT(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    REAL am, an, bm, bn, cm, cn, deltas, deltat, ermax, err, hds, &
-      hdt, s, t, tds, tdt, temp1, temp2, temp3, w
-    REAL y, z
-    INTEGER i, idimy, ierror, iflg, Ipass, j, Kprint, Lun, m, mp, &
-      n, np
     !***BEGIN PROLOGUE  QXBLKT
     !***PURPOSE
     !***LIBRARY   SLATEC
@@ -55,6 +50,10 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     !***END PROLOGUE  QXBLKT
+    REAL am, an, bm, bn, cm, cn, deltas, deltat, ermax, err, hds, &
+      hdt, s, t, tds, tdt, temp1, temp2, temp3, w
+    REAL y, z
+    INTEGER i, idimy, ierror, iflg, Ipass, j, Kprint, Lun, m, mp, n, np
     DIMENSION y(75,105), am(75), bm(75), cm(75), an(105), bn(105), &
       cn(105), w(1952), s(75), t(105)
     !***FIRST EXECUTABLE STATEMENT  QXBLKT
@@ -167,11 +166,6 @@ CONTAINS
   !DECK QXCRT
   SUBROUTINE QXCRT(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    REAL a, b, bda, bdb, bdc, bdd, c, d, dum, elmbda, ermax, err, &
-      f, pertrb, pi, piby2, PIMACH, pisq, w, x
-    REAL y, z
-    INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
-      n, nbdcnd, np1
     !***BEGIN PROLOGUE  QXCRT
     !***PURPOSE
     !***LIBRARY   SLATEC
@@ -234,6 +228,11 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     !***END PROLOGUE  QXCRT
+    REAL a, b, bda, bdb, bdc, bdd, c, d, dum, elmbda, ermax, err, &
+      f, pertrb, pi, piby2, PIMACH, pisq, w, x
+    REAL y, z
+    INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
+      n, nbdcnd, np1
     DIMENSION f(45,82), bdb(81), w(1200), x(41), y(81)
     !***FIRST EXECUTABLE STATEMENT  QXCRT
     !
@@ -329,11 +328,6 @@ CONTAINS
   !DECK QXCSP
   SUBROUTINE QXCSP(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    REAL bdrf, bdrs, bdtf, bdts, ci4, dphi, dr, dtheta, dum, elmbda, &
-      ermax, err, f, pertrb, pi, PIMACH, r, rf, rs, si
-    REAL tf, theta, ts, w, z
-    INTEGER i, idimf, ierror, intl, Ipass, j, Kprint, Lun, m, &
-      mbdcnd, mp1, n, nbdcnd, np1
     !***BEGIN PROLOGUE  QXCSP
     !***PURPOSE
     !***LIBRARY   SLATEC
@@ -380,6 +374,11 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     !***END PROLOGUE  QXCSP
+    REAL bdrf, bdrs, bdtf, bdts, ci4, dphi, dr, dtheta, dum, elmbda, &
+      ermax, err, f, pertrb, pi, PIMACH, r, rf, rs, si
+    REAL tf, theta, ts, w, z
+    INTEGER i, idimf, ierror, intl, Ipass, j, Kprint, Lun, m, &
+      mbdcnd, mp1, n, nbdcnd, np1
     DIMENSION f(48,33), bdtf(33), w(1200), r(33), theta(48)
     !***FIRST EXECUTABLE STATEMENT  QXCSP
     !
@@ -531,10 +530,6 @@ CONTAINS
   !DECK QXCYL
   SUBROUTINE QXCYL(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    REAL a, b, bda, bdb, bdc, bdd, c, d, elmbda, ermax, err, f, &
-      pertrb, r, w, x, z
-    INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
-      n, nbdcnd, np1
     !***BEGIN PROLOGUE  QXCYL
     !***PURPOSE
     !***LIBRARY   SLATEC
@@ -602,6 +597,9 @@ CONTAINS
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     !   930415  Test modified to use a 64 by 128 grid.  (WRB)
     !***END PROLOGUE  QXCYL
+    REAL a, b, bda, bdb, bdc, bdd, c, d, elmbda, ermax, err, f, &
+      pertrb, r, w, x, z
+    INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, n, nbdcnd, np1
     DIMENSION f(65,129), bda(129), bdb(129), bdc(65), bdd(65), w(1400), &
       r(65), z(129)
     !***FIRST EXECUTABLE STATEMENT  QXCYL
@@ -703,10 +701,6 @@ CONTAINS
   !DECK QXGBUN
   SUBROUTINE QXGBUN(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    REAL a, b, c, deltax, deltay, dum, dysq, ermax, err, f, pi, &
-      PIMACH, s, t, w, x, y, z
-    INTEGER i, idimy, ierror, Ipass, j, Kprint, Lun, m, mm1, mperod, &
-      n, nperod
     !***BEGIN PROLOGUE  QXGBUN
     !***PURPOSE
     !***LIBRARY   SLATEC
@@ -753,6 +747,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     !***END PROLOGUE  QXGBUN
+    REAL a, b, c, deltax, deltay, dum, dysq, ermax, err, f, pi, &
+      PIMACH, s, t, w, x, y, z
+    INTEGER i, idimy, ierror, Ipass, j, Kprint, Lun, m, mm1, mperod, n, nperod
     DIMENSION f(25,130), a(20), b(20), c(20), w(1200), x(20), y(120)
     !***FIRST EXECUTABLE STATEMENT  QXGBUN
     !
@@ -856,10 +853,6 @@ CONTAINS
   !DECK QXPLR
   SUBROUTINE QXPLR(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    REAL a, b, bda, bdb, bdc, bdd, c, d, dum, elmbda, ermax, err, &
-      f, pertrb, pi, PIMACH, r, theta, w, z
-    INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
-      n, nbdcnd, np1
     !***BEGIN PROLOGUE  QXPLR
     !***PURPOSE
     !***LIBRARY   SLATEC
@@ -922,6 +915,10 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     !***END PROLOGUE  QXPLR
+    REAL a, b, bda, bdb, bdc, bdd, c, d, dum, elmbda, ermax, err, &
+      f, pertrb, pi, PIMACH, r, theta, w, z
+    INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
+      n, nbdcnd, np1
     DIMENSION f(100,50), bdc(51), bdd(51), w(1200), r(51), theta(49)
     !***FIRST EXECUTABLE STATEMENT  QXPLR
     !
@@ -1016,11 +1013,6 @@ CONTAINS
   !DECK QXSSP
   SUBROUTINE QXSSP(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    REAL bdpf, bdps, bdtf, bdts, dphi, dtheta, dum, elmbda, ermax, &
-      err, f, pertrb, pf, pi, PIMACH, ps, sinp, sint, tf, ts
-    REAL w, z
-    INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
-      n, nbdcnd, np1
     !***BEGIN PROLOGUE  QXSSP
     !***PURPOSE
     !***LIBRARY   SLATEC
@@ -1068,6 +1060,11 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     !***END PROLOGUE  QXSSP
+    REAL bdpf, bdps, bdtf, bdts, dphi, dtheta, dum, elmbda, ermax, &
+      err, f, pertrb, pf, pi, PIMACH, ps, sinp, sint, tf, ts
+    REAL w, z
+    INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
+      n, nbdcnd, np1
     DIMENSION f(19,73), bdtf(73), sint(19), sinp(73), w(1200)
     !***FIRST EXECUTABLE STATEMENT  QXSSP
     !

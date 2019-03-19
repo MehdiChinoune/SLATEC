@@ -5,7 +5,6 @@ CONTAINS
   !DECK BIKCK
   SUBROUTINE BIKCK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER Ipass, Kprint, NUMXER
     !***BEGIN PROLOGUE  BIKCK
     !***PURPOSE  Quick check for BESI and BESK.
     !***LIBRARY   SLATEC
@@ -32,6 +31,7 @@ CONTAINS
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
     !***END PROLOGUE  BIKCK
+    INTEGER Ipass, Kprint, NUMXER
     INTEGER i, ix, k, kontrl, kode, Lun, m, n, nerr, nu, nw, ny
     REAL alp, del, er, fnu, fnup, rx, tol, x
     REAL fn(3), w(5), xx(5), y(5)
@@ -267,7 +267,6 @@ CONTAINS
   !DECK BJYCK
   SUBROUTINE BJYCK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER Ipass, Kprint, NUMXER
     !***BEGIN PROLOGUE  BJYCK
     !***PURPOSE  Quick check for BESJ and BESY.
     !***LIBRARY   SLATEC
@@ -294,6 +293,7 @@ CONTAINS
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
     !***END PROLOGUE  BJYCK
+    INTEGER Ipass, Kprint, NUMXER
     INTEGER i, ix, k, kontrl, Lun, m, n, nerr, nu, ny
     REAL alp, del, er, fnu, fnup, rhpi, rx, tol, x
     REAL fn(3), w(5), xx(5), y(5)
@@ -496,7 +496,6 @@ CONTAINS
   !DECK EG8CK
   SUBROUTINE EG8CK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    INTEGER Kprint
     !***BEGIN PROLOGUE  EG8CK
     !***PURPOSE  Quick check for EXINT and GAUS8.
     !***LIBRARY   SLATEC
@@ -519,11 +518,11 @@ CONTAINS
     !           KPRINT.  (WRB)
     !   920206  Corrected argument list in CALL to EXINT.  (WRB)
     !***END PROLOGUE  EG8CK
+    INTEGER Kprint
     COMMON /FEINX / X, A, FKM
     INTEGER i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
       kode, kx, Lun, m, n, nm, nz
-    REAL A, ans, atol, bb, en, er, ex, FKM, sig, sum, tol, t1, &
-      t2, X, xx, y
+    REAL A, ans, atol, bb, en, er, ex, FKM, sig, sum, tol, t1, t2, X, xx, y
     REAL R1MACH
     DIMENSION en(4), y(4), xx(5)
     LOGICAL fatal
