@@ -1,15 +1,20 @@
-!DECK PASSB4
+!** PASSB4
 SUBROUTINE PASSB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PASSB4
-  !***SUBSIDIARY
-  !***PURPOSE  Calculate the fast Fourier transform of subvectors of
+  !>
+  !***
+  !  Calculate the fast Fourier transform of subvectors of
   !            length four.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***TYPE      SINGLE PRECISION (PASSB4-S)
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Type:**      SINGLE PRECISION (PASSB4-S)
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -18,12 +23,12 @@ SUBROUTINE PASSB4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  PASSB4
+  
   REAL Cc, Ch, ci2, ci3, ci4, cr2, cr3, cr4, ti1, ti2, ti3, ti4, &
     tr1, tr2, tr3, tr4, Wa1, Wa2, Wa3
   INTEGER i, Ido, k, L1
   DIMENSION Cc(Ido,4,*), Ch(Ido,L1,4), Wa1(*), Wa2(*), Wa3(*)
-  !***FIRST EXECUTABLE STATEMENT  PASSB4
+  !* FIRST EXECUTABLE STATEMENT  PASSB4
   IF ( Ido==2 ) THEN
     DO k = 1, L1
       ti1 = Cc(2,1,k) - Cc(2,3,k)

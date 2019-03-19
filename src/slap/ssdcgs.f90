@@ -1,25 +1,32 @@
-!DECK SSDCGS
+!** SSDCGS
 SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSDCGS
-  !***PURPOSE  Diagonally Scaled CGS Sparse Ax=b Solver.
+  !>
+  !***
+  !  Diagonally Scaled CGS Sparse Ax=b Solver.
   !            Routine to solve a linear system  Ax = b  using the
   !            BiConjugate Gradient Squared method with diagonal scaling.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (SSDCGS-S, DSDCGS-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM, SLAP,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SSDCGS-S, DSDCGS-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM, SLAP,
   !             SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM, ITOL, ITMAX
   !     INTEGER ITER, IERR, IUNIT, LENW, IWORK(10), LENIW
   !     REAL B(N), X(N), A(NELT), TOL, ERR, RWORK(8*N)
@@ -27,7 +34,7 @@ SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     CALL SSDCGS(N, B, X, NELT, IA, JA, A, ISYM, ITOL, TOL,
   !    $     ITMAX, ITER, ERR, IERR, IUNIT, RWORK, LENW, IWORK, LENIW )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   ! B      :IN       Real B(N).
@@ -118,7 +125,7 @@ SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   ! LENIW  :IN       Integer.
   !         Length of the integer workspace, IWORK.  LENIW >= 10.
   !
-  ! *Description:
+  !- Description:
   !       This  routine performs  preconditioned  BiConjugate gradient
   !       method on the Non-Symmetric positive definite  linear system
   !       Ax=b. The preconditioner is M = DIAG(A), the diagonal of the
@@ -189,19 +196,21 @@ SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Side Effects:
+  !- Side Effects:
   !       The SLAP Triad format (IA, JA, A) is  modified internally to
   !       be   the SLAP  Column format.   See above.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  SCGS, SLUBCG
-  !***REFERENCES  1. P. Sonneveld, CGS, a fast Lanczos-type solver
+  !***
+  ! **See also:**  SCGS, SLUBCG
+  !***
+  ! **References:**  1. P. Sonneveld, CGS, a fast Lanczos-type solver
   !                  for nonsymmetric linear systems, Delft University
   !                  of Technology Report 84-16, Department of Mathe-
   !                  matics and Informatics, Delft, The Netherlands.
@@ -210,8 +219,10 @@ SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !                  gradients squared,  Delft University of Technology
   !                  Report 86-21, Department of Mathematics and Informa-
   !                  tics, Delft, The Netherlands.
-  !***ROUTINES CALLED  SCGS, SCHKW, SS2Y, SSDI, SSDS, SSMV
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SCGS, SCHKW, SS2Y, SSDI, SSDS, SSMV
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -224,7 +235,7 @@ SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  !***END PROLOGUE  SSDCGS
+  
   !     .. Parameters ..
   INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
@@ -240,7 +251,7 @@ SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     locv2, locw
   !     .. External Subroutines ..
   EXTERNAL SCGS, SCHKW, SS2Y, SSDI, SSDS, SSMV
-  !***FIRST EXECUTABLE STATEMENT  SSDCGS
+  !* FIRST EXECUTABLE STATEMENT  SSDCGS
   !
   Ierr = 0
   IF ( N<1.OR.Nelt<1 ) THEN

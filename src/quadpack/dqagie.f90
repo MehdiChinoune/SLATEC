@@ -1,27 +1,34 @@
-!DECK DQAGIE
+!** DQAGIE
 SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQAGIE
-  !***PURPOSE  The routine calculates an approximation result to a given
+  !>
+  !***
+  !  The routine calculates an approximation result to a given
   !            integral   I = Integral of F over (BOUND,+INFINITY)
   !            or I = Integral of F over (-INFINITY,BOUND)
   !            or I = Integral of F over (-INFINITY,+INFINITY),
   !            hopefully satisfying following claim for accuracy
   !            ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I))
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A3A1, H2A4A1
-  !***TYPE      DOUBLE PRECISION (QAGIE-S, DQAGIE-D)
-  !***KEYWORDS  AUTOMATIC INTEGRATOR, EXTRAPOLATION, GENERAL-PURPOSE,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A3A1, H2A4A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (QAGIE-S, DQAGIE-D)
+  !***
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, EXTRAPOLATION, GENERAL-PURPOSE,
   !             GLOBALLY ADAPTIVE, INFINITE INTERVALS, QUADPACK,
   !             QUADRATURE, TRANSFORMATION
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   ! Integration over infinite intervals
   ! Standard fortran subroutine
@@ -150,15 +157,18 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !                     Number of subintervals actually produced
   !                     in the subdivision process
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DQELG, DQK15I, DQPSRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DQELG, DQK15I, DQPSRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DQAGIE
+  
   REAL(8) :: abseps, Abserr, Alist, area, area1, area12, area2, &
     a1, a2, Blist, boun, Bound, b1, b2, correc, &
     defabs, defab1, defab2, dres, D1MACH, Elist, &
@@ -228,7 +238,7 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !           UFLOW IS THE SMALLEST POSITIVE MAGNITUDE.
   !           OFLOW IS THE LARGEST POSITIVE MAGNITUDE.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQAGIE
+  !* FIRST EXECUTABLE STATEMENT  DQAGIE
   epmach = D1MACH(4)
   !
   !           TEST ON VALIDITY OF PARAMETERS

@@ -1,18 +1,25 @@
-!DECK HWSCYL
+!** HWSCYL
 SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HWSCYL
-  !***PURPOSE  Solve a standard finite difference approximation
+  !>
+  !***
+  !  Solve a standard finite difference approximation
   !            to the Helmholtz equation in cylindrical coordinates.
-  !***LIBRARY   SLATEC (FISHPACK)
-  !***CATEGORY  I2B1A1A
-  !***TYPE      SINGLE PRECISION (HWSCYL-S)
-  !***KEYWORDS  CYLINDRICAL, ELLIPTIC, FISHPACK, HELMHOLTZ, PDE
-  !***AUTHOR  Adams, J., (NCAR)
+  !***
+  ! **Library:**   SLATEC (FISHPACK)
+  !***
+  ! **Category:**  I2B1A1A
+  !***
+  ! **Type:**      SINGLE PRECISION (HWSCYL-S)
+  !***
+  ! **Keywords:**  CYLINDRICAL, ELLIPTIC, FISHPACK, HELMHOLTZ, PDE
+  !***
+  ! **Author:**  Adams, J., (NCAR)
   !           Swarztrauber, P. N., (NCAR)
   !           Sweet, R., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Subroutine HWSCYL solves a finite difference approximation to the
   !     Helmholtz equation in cylindrical coordinates:
@@ -213,7 +220,7 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     W
   !       W(1) contains the required length of W.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !     * * * * * * *   Program Specifications    * * * * * * * * * * * *
   !
@@ -288,17 +295,20 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   !
-  !***REFERENCES  P. N. Swarztrauber and R. Sweet, Efficient Fortran
+  !***
+  ! **References:**  P. N. Swarztrauber and R. Sweet, Efficient Fortran
   !                 subprograms for the solution of elliptic equations,
   !                 NCAR TN/IA-109, July 1975, 138 pp.
-  !***ROUTINES CALLED  GENBUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  GENBUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  HWSCYL
+  
   REAL A, a1, a2, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, deltht, &
     dlrby2, dlrsq, dlthsq, Elmbda, F, Pertrb, r, s
   REAL s1, s2, W
@@ -307,7 +317,7 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   INTEGER N, Nbdcnd, np, np1, nsp1, nstart, nstm1, nstop, nunk
   DIMENSION F(Idimf,*)
   DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
-  !***FIRST EXECUTABLE STATEMENT  HWSCYL
+  !* FIRST EXECUTABLE STATEMENT  HWSCYL
   Ierror = 0
   IF ( A<0. ) Ierror = 1
   IF ( A>=B ) Ierror = 2

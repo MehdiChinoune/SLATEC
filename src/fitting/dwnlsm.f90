@@ -1,15 +1,19 @@
-!DECK DWNLSM
+!** DWNLSM
 SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     Scale,Z,Temp,D)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DWNLSM
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DWNNLS
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (WNLSM-S, DWNLSM-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to DWNNLS
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (WNLSM-S, DWNLSM-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Haskell, K. H., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     This is a companion subprogram to DWNNLS.
   !     The documentation for DWNNLS has complete usage instructions.
@@ -56,10 +60,13 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !         column scaling for the matrix (E).
   !                                       (A)
   !
-  !***SEE ALSO  DWNNLS
-  !***ROUTINES CALLED  D1MACH, DASUM, DAXPY, DCOPY, DH12, DNRM2, DROTM,
+  !***
+  ! **See also:**  DWNNLS
+  !***
+  ! **Routines called:**  D1MACH, DASUM, DAXPY, DCOPY, DH12, DNRM2, DROTM,
   !                    DROTMG, DSCAL, DSWAP, DWNLIT, IDAMAX, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890618  Completely restructured and revised.  (WRB & RWC)
@@ -69,7 +76,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900510  Fixed an error message.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
   !   900911  Restriction on value of ALAMDA included.  (WRB)
-  !***END PROLOGUE  DWNLSM
+  
   INTEGER Ipivot(*), Itype(*), L, Ma, Mdw, Mme, Mode, N
   REAL(8) :: D(*), H(*), Prgopt(*), Rnorm, Scale(*), Temp(*), &
     W(Mdw,*), Wd(*), X(*), Z(*)
@@ -89,7 +96,7 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !
   SAVE drelpr, first
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DWNLSM
+  !* FIRST EXECUTABLE STATEMENT  DWNLSM
   !
   !     Initialize variables.
   !     DRELPR is the precision for the particular machine

@@ -1,16 +1,23 @@
-!DECK XADJ
+!** XADJ
 SUBROUTINE XADJ(X,Ix,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XADJ
-  !***PURPOSE  To provide single-precision floating-point arithmetic
+  !>
+  !***
+  !  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  A3D
-  !***TYPE      SINGLE PRECISION (XADJ-S, DXADJ-D)
-  !***KEYWORDS  EXTENDED-RANGE SINGLE-PRECISION ARITHMETIC
-  !***AUTHOR  Lozier, Daniel W., (National Bureau of Standards)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  A3D
+  !***
+  ! **Type:**      SINGLE PRECISION (XADJ-S, DXADJ-D)
+  !***
+  ! **Keywords:**  EXTENDED-RANGE SINGLE-PRECISION ARITHMETIC
+  !***
+  ! **Author:**  Lozier, Daniel W., (National Bureau of Standards)
   !           Smith, John M., (NBS and George Mason University)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !     REAL X
   !     INTEGER IX
   !
@@ -20,11 +27,16 @@ SUBROUTINE XADJ(X,Ix,Ierror)
   !                  NOT CHANGE THE MANTISSA OF X PROVIDED RADIX IS
   !                  THE NUMBER BASE OF SINGLE-PRECISION ARITHMETIC.
   !
-  !***SEE ALSO  XSET
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  XERMSG
-  !***COMMON BLOCKS    XBLK2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  XSET
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  XERMSG
+  !***
+  ! COMMON BLOCKS    XBLK2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820712  DATE WRITTEN
   !   881020  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
@@ -33,7 +45,7 @@ SUBROUTINE XADJ(X,Ix,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  XADJ
+  
   INTEGER Ierror
   REAL X
   INTEGER Ix
@@ -49,7 +61,7 @@ SUBROUTINE XADJ(X,Ix,Ierror)
   ! THIS CONDITION MUST BE MET BY APPROPRIATE CODING
   ! IN SUBROUTINE XSET.
   !
-  !***FIRST EXECUTABLE STATEMENT  XADJ
+  !* FIRST EXECUTABLE STATEMENT  XADJ
   Ierror = 0
   IF ( X==0.0 ) THEN
     Ix = 0

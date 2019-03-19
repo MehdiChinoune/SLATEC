@@ -1,29 +1,35 @@
-!DECK ISSBCG
+!** ISSBCG
 INTEGER FUNCTION ISSBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
     Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork,&
     Ak,Bk,Bnrm,Solnrm)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ISSBCG
-  !***SUBSIDIARY
-  !***PURPOSE  Preconditioned BiConjugate Gradient Stop Test.
+  !>
+  !***
+  !  Preconditioned BiConjugate Gradient Stop Test.
   !            This routine calculates the stop test for the BiConjugate
   !            Gradient iteration scheme.  It returns a non-zero if the
   !            error estimate (the type of which is determined by ITOL)
   !            is less than the user specified tolerance TOL.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (ISSBCG-S, ISDBCG-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM, SLAP,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (ISSBCG-S, ISDBCG-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM, SLAP,
   !             SPARSE, STOP TEST
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER  N, NELT, IA(NELT), JA(NELT), ISYM, ITOL, ITMAX, ITER
   !     INTEGER  IERR, IUNIT, IWORK(USER DEFINED)
   !     REAL     B(N), X(N), A(N), TOL, ERR, R(N), Z(N), P(N)
@@ -36,7 +42,7 @@ INTEGER FUNCTION ISSBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
   !    $     RWORK, IWORK, AK, BK, BNRM, SOLNRM) .NE. 0 )
   !    $     THEN ITERATION DONE
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   ! B      :IN       Real B(N).
@@ -138,24 +144,28 @@ INTEGER FUNCTION ISSBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
   !         2-Norm of the true solution, SOLN.  Only computed and used
   !         if ITOL = 11.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !       0 : Error estimate (determined by ITOL) is *NOT* less than the
   !           specified tolerance, TOL.  The iteration must continue.
   !       1 : Error estimate (determined by ITOL) is less than the
   !           specified tolerance, TOL.  The iteration can be considered
   !           complete.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  SBCG
-  !***ROUTINES CALLED  R1MACH, SNRM2
-  !***COMMON BLOCKS    SSLBLK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SBCG
+  !***
+  ! **Routines called:**  R1MACH, SNRM2
+  !***
+  ! COMMON BLOCKS    SSLBLK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -171,7 +181,7 @@ INTEGER FUNCTION ISSBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
   !   920930  Corrected to not print AK,BK when ITER=0.  (FNF)
   !   921026  Changed 1.0E10 to R1MACH(2).  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  !***END PROLOGUE  ISSBCG
+  
   !     .. Scalar Arguments ..
   REAL Ak, Bk, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
@@ -190,7 +200,7 @@ INTEGER FUNCTION ISSBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
   EXTERNAL R1MACH, SNRM2
   !     .. Common blocks ..
   COMMON /SSLBLK/ SOLn
-  !***FIRST EXECUTABLE STATEMENT  ISSBCG
+  !* FIRST EXECUTABLE STATEMENT  ISSBCG
   ISSBCG = 0
   !
   IF ( Itol==1 ) THEN

@@ -1,14 +1,21 @@
-!DECK SINQB
+!** SINQB
 SUBROUTINE SINQB(N,X,Wsave)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SINQB
-  !***PURPOSE  Compute the unnormalized inverse of SINQF.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A3
-  !***TYPE      SINGLE PRECISION (SINQB-S)
-  !***KEYWORDS  FFTPACK, FOURIER TRANSFORM
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the unnormalized inverse of SINQF.
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A3
+  !***
+  ! **Type:**      SINGLE PRECISION (SINQB-S)
+  !***
+  ! **Keywords:**  FFTPACK, FOURIER TRANSFORM
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !  Subroutine SINQB computes the fast Fourier transform of quarter
   !  wave data.  That is, SINQB computes a sequence from its
@@ -53,11 +60,14 @@ SUBROUTINE SINQB(N,X,Wsave)
   !  WSAVE   contains initialization calculations which must not
   !          be destroyed between calls of SINQB or SINQF.
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  COSQB
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  COSQB
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -66,11 +76,11 @@ SUBROUTINE SINQB(N,X,Wsave)
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SINQB
+  
   INTEGER k, kc, N, ns2
   REAL Wsave, X, xhold
   DIMENSION X(*), Wsave(*)
-  !***FIRST EXECUTABLE STATEMENT  SINQB
+  !* FIRST EXECUTABLE STATEMENT  SINQB
   IF ( N>1 ) THEN
     ns2 = N/2
     DO k = 2, N, 2

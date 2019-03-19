@@ -1,28 +1,35 @@
-!DECK CBINU
+!** CBINU
 SUBROUTINE CBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CBINU
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CAIRY, CBESH, CBESI, CBESJ, CBESK and CBIRY
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CBINU-A, ZBINU-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CAIRY, CBESH, CBESI, CBESJ, CBESK and CBIRY
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CBINU-A, ZBINU-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     CBINU COMPUTES THE I FUNCTION IN THE RIGHT HALF Z PLANE
   !
-  !***SEE ALSO  CAIRY, CBESH, CBESI, CBESJ, CBESK, CBIRY
-  !***ROUTINES CALLED  CASYI, CBUNI, CMLRI, CSERI, CUOIK, CWRSK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CAIRY, CBESH, CBESI, CBESJ, CBESK, CBIRY
+  !***
+  ! **Routines called:**  CASYI, CBUNI, CMLRI, CSERI, CUOIK, CWRSK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CBINU
+  
   COMPLEX cw, Cy, czero, Z
   REAL Alim, az, dfnu, Elim, Fnu, Fnul, Rl, Tol
   INTEGER i, inw, Kode, N, nlast, nn, nui, nw, Nz
   DIMENSION Cy(N), cw(2)
   DATA czero/(0.0E0,0.0E0)/
-  !***FIRST EXECUTABLE STATEMENT  CBINU
+  !* FIRST EXECUTABLE STATEMENT  CBINU
   Nz = 0
   az = ABS(Z)
   nn = N

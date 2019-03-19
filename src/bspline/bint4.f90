@@ -1,15 +1,22 @@
-!DECK BINT4
+!** BINT4
 SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BINT4
-  !***PURPOSE  Compute the B-representation of a cubic spline
+  !>
+  !***
+  !  Compute the B-representation of a cubic spline
   !            which interpolates given data.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E1A
-  !***TYPE      SINGLE PRECISION (BINT4-S, DBINT4-D)
-  !***KEYWORDS  B-SPLINE, CUBIC SPLINES, DATA FITTING, INTERPOLATION
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E1A
+  !***
+  ! **Type:**      SINGLE PRECISION (BINT4-S, DBINT4-D)
+  !***
+  ! **Keywords:**  B-SPLINE, CUBIC SPLINES, DATA FITTING, INTERPOLATION
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !         BINT4 computes the B representation (T,BCOEF,N,K) of a
@@ -78,7 +85,8 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !         Improper  input is a fatal error
   !         Singular system of equations is a fatal error
   !
-  !***REFERENCES  D. E. Amos, Computation with splines and B-splines,
+  !***
+  ! **References:**  D. E. Amos, Computation with splines and B-splines,
   !                 Report SAND78-1968, Sandia Laboratories, March 1979.
   !               Carl de Boor, Package for calculating with B-splines,
   !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
@@ -86,8 +94,10 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !               Carl de Boor, A Practical Guide to Splines, Applied
   !                 Mathematics Series 27, Springer-Verlag, New York,
   !                 1978.
-  !***ROUTINES CALLED  BNFAC, BNSLV, BSPVD, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  BNFAC, BNSLV, BSPVD, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -96,7 +106,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BINT4
+  
   !
   INTEGER i, Ibcl, Ibcr, iflag, ilb, ileft, it, iub, iw, iwp, j, &
     jw, K, Kntopt, N, Ndata, ndm, np, nwrow
@@ -104,7 +114,7 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
     work, X, xl, Y
   REAL R1MACH
   DIMENSION X(*), Y(*), T(*), Bcoef(*), W(5,*), vnikx(4,4), work(15)
-  !***FIRST EXECUTABLE STATEMENT  BINT4
+  !* FIRST EXECUTABLE STATEMENT  BINT4
   wdtol = R1MACH(4)
   tol = SQRT(wdtol)
   IF ( Ndata<2 ) THEN

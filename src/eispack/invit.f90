@@ -1,16 +1,23 @@
-!DECK INVIT
+!** INVIT
 SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  INVIT
-  !***PURPOSE  Compute the eigenvectors of a real upper Hessenberg
+  !>
+  !***
+  !  Compute the eigenvectors of a real upper Hessenberg
   !            matrix associated with specified eigenvalues by inverse
   !            iteration.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C2B
-  !***TYPE      SINGLE PRECISION (INVIT-S, CINVIT-C)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C2B
+  !***
+  ! **Type:**      SINGLE PRECISION (INVIT-S, CINVIT-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure INVIT
   !     by Peters and Wilkinson.
@@ -110,19 +117,22 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  CDIV, PYTHAG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDIV, PYTHAG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  INVIT
+  
   !
   INTEGER i, j, k, l, M, N, s, ii, ip, Mm, mp, Nm, ns, n1, &
     uk, ip1, its, km1, Ierr
@@ -133,7 +143,7 @@ SUBROUTINE INVIT(Nm,N,A,Wr,Wi,Select,Mm,M,Z,Ierr,Rm1,Rv1,Rv2)
   REAL PYTHAG
   LOGICAL Select(N)
   !
-  !***FIRST EXECUTABLE STATEMENT  INVIT
+  !* FIRST EXECUTABLE STATEMENT  INVIT
   Ierr = 0
   uk = 0
   s = 1

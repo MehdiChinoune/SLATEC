@@ -1,19 +1,23 @@
-!DECK DBVPOR
+!** DBVPOR
 SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,W,Niv,Yhp,U,V,Coef,S,Stowa,G,&
     Work,Iwork,Nfcc)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBVPOR
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (BVPOR-S, DBVPOR-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (BVPOR-S, DBVPOR-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     INPUT to DBVPOR    (items not defined in DBVSUP comments)
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     NOPG = 0 -- orthonormalization points not pre-assigned
   !          = 1 -- orthonormalization points pre-assigned
@@ -46,9 +50,9 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !           = 1 calculate superposition coefficients and obtain
   !               solution to the boundary value problem
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     OUTPUT from DBVPOR
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     Y(NROWY,NXPTS) = solution at specified output points.
   !
@@ -60,7 +64,7 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !           this parameter will be meaningful only when DMGSBV returns
   !           with MFLAG = 2.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     The following variables are in the argument list because of
   !     variable dimensioning.  In general, they contain no information of
@@ -82,7 +86,7 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     WORK(KKKWS)
   !     IWORK(LLLIWS)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     SUBROUTINES used by DBVPOR
   !         DLSSUD -- solves an underdetermined system of linear
   !                   equations.  This routine is used to get a full
@@ -113,13 +117,17 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !
   !         DBKSOL -- solves an upper triangular set of linear equations.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  DBVSUP
-  !***ROUTINES CALLED  DBKSOL, DCOEF, DDOT, DLSSUD, DRKFAB, DSTOR1,
+  !***
+  ! **See also:**  DBVSUP
+  !***
+  ! **Routines called:**  DBKSOL, DCOEF, DDOT, DLSSUD, DRKFAB, DSTOR1,
   !                    DSTWAY, DVECS
-  !***COMMON BLOCKS    DML15T, DML18J, DML8SZ
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! COMMON BLOCKS    DML15T, DML18J, DML8SZ
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -128,7 +136,7 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DBVPOR
+  
   !
   REAL(8) :: DDOT
   INTEGER i, i1, i2, ic, ICOco, Iflag, IGOfx, INDpvt, INFo, &
@@ -155,7 +163,7 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !
   !      *****************************************************************
   !
-  !***FIRST EXECUTABLE STATEMENT  DBVPOR
+  !* FIRST EXECUTABLE STATEMENT  DBVPOR
   nfcp1 = Nfc + 1
   NUMort = 0
   C = 1.0D0

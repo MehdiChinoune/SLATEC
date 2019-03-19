@@ -1,14 +1,21 @@
-!DECK DGTSL
+!** DGTSL
 SUBROUTINE DGTSL(N,C,D,E,B,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGTSL
-  !***PURPOSE  Solve a tridiagonal linear system.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2A2A
-  !***TYPE      DOUBLE PRECISION (SGTSL-S, DGTSL-D, CGTSL-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE, TRIDIAGONAL
-  !***AUTHOR  Dongarra, J., (ANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Solve a tridiagonal linear system.
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2A2A
+  !***
+  ! **Type:**      DOUBLE PRECISION (SGTSL-S, DGTSL-D, CGTSL-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE, TRIDIAGONAL
+  !***
+  ! **Author:**  Dongarra, J., (ANL)
+  !***
+  ! **Description:**
   !
   !     DGTSL given a general tridiagonal matrix and a right hand
   !     side will find the solution.
@@ -45,10 +52,13 @@ SUBROUTINE DGTSL(N,C,D,E,B,Info)
   !                    exactly zero.  The subroutine returns when
   !                    this is detected.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -57,13 +67,13 @@ SUBROUTINE DGTSL(N,C,D,E,B,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DGTSL
+  
   INTEGER N, Info
   REAL(8) :: C(*), D(*), E(*), B(*)
   !
   INTEGER k, kb, kp1, nm1, nm2
   REAL(8) :: t
-  !***FIRST EXECUTABLE STATEMENT  DGTSL
+  !* FIRST EXECUTABLE STATEMENT  DGTSL
   Info = 0
   C(1) = D(1)
   nm1 = N - 1

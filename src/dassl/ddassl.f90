@@ -1,23 +1,30 @@
-!DECK DDASSL
+!** DDASSL
 SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     Iwork,Liw,Rpar,Ipar,JAC)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DDASSL
-  !***PURPOSE  This code solves a system of differential/algebraic
+  !>
+  !***
+  !  This code solves a system of differential/algebraic
   !            equations of the form G(T,Y,YPRIME) = 0.
-  !***LIBRARY   SLATEC (DASSL)
-  !***CATEGORY  I1A2
-  !***TYPE      DOUBLE PRECISION (SDASSL-S, DDASSL-D)
-  !***KEYWORDS  BACKWARD DIFFERENTIATION FORMULAS, DASSL,
+  !***
+  ! **Library:**   SLATEC (DASSL)
+  !***
+  ! **Category:**  I1A2
+  !***
+  ! **Type:**      DOUBLE PRECISION (SDASSL-S, DDASSL-D)
+  !***
+  ! **Keywords:**  BACKWARD DIFFERENTIATION FORMULAS, DASSL,
   !             DIFFERENTIAL/ALGEBRAIC, IMPLICIT DIFFERENTIAL SYSTEMS
-  !***AUTHOR  Petzold, Linda R., (LLNL)
+  !***
+  ! **Author:**  Petzold, Linda R., (LLNL)
   !             Computing and Mathematics Research Division
   !             Lawrence Livermore National Laboratory
   !             L - 316, P.O. Box 808,
   !             Livermore, CA.    94550
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      EXTERNAL RES, JAC
   !      INTEGER NEQ, INFO(N), IDID, LRW, LIW, IWORK(LIW), IPAR
@@ -28,7 +35,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !     *   IDID, RWORK, LRW, IWORK, LIW, RPAR, IPAR, JAC)
   !
   !
-  ! *Arguments:
+  !- Arguments:
   !  (In the following, all real arrays should be type DOUBLE PRECISION.)
   !
   !  RES:EXT     This is a subroutine which you provide to define the
@@ -85,7 +92,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !     T, Y(*), YPRIME(*), INFO(1), RTOL, ATOL,
   !     IDID, RWORK(*) AND IWORK(*)
   !
-  ! *Description
+  !- Description
   !
   !  Subroutine DDASSL uses the backward differentiation formulas of
   !  orders one through five to solve a system of the above form for Y and
@@ -834,12 +841,15 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !
   !  ---------------------------------------------------------------------
   !
-  !***REFERENCES  A DESCRIPTION OF DASSL: A DIFFERENTIAL/ALGEBRAIC
+  !***
+  ! **References:**  A DESCRIPTION OF DASSL: A DIFFERENTIAL/ALGEBRAIC
   !                 SYSTEM SOLVER, L. R. PETZOLD, SAND82-8637,
   !                 SANDIA NATIONAL LABORATORIES, SEPTEMBER 1982.
-  !***ROUTINES CALLED  D1MACH, DDAINI, DDANRM, DDASTP, DDATRP, DDAWTS,
+  !***
+  ! **Routines called:**  D1MACH, DDAINI, DDANRM, DDASTP, DDATRP, DDAWTS,
   !                    XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830315  DATE WRITTEN
   !   880387  Code changes made.  All common statements have been
   !           replaced by a DATA statement, which defines pointers into
@@ -923,7 +933,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !           be of more uniform format.  (FNF)
   !   910624  Fixed minor bug related to HMAX (six lines after label
   !           525).  (LRP)
-  !***END PROLOGUE  DDASSL
+  
   !
   !**End
   !
@@ -968,7 +978,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
     LROUND=9,LALPHA=11,LBETA=17,LGAMMA=23,LPSI=29,LSIGMA=35,&
     LDELTA=41)
   !
-  !***FIRST EXECUTABLE STATEMENT  DDASSL
+  !* FIRST EXECUTABLE STATEMENT  DDASSL
   IF ( Info(1)==0 ) THEN
     !
     !-----------------------------------------------------------------------

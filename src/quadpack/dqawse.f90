@@ -1,27 +1,34 @@
-!DECK DQAWSE
+!** DQAWSE
 SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
     Abserr,Neval,Ier,Alist,Blist,Rlist,Elist,Iord,Last)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQAWSE
-  !***PURPOSE  The routine calculates an approximation result to a given
+  !>
+  !***
+  !  The routine calculates an approximation result to a given
   !            definite integral I = Integral of F*W over (A,B),
   !            (where W shows a singular behaviour at the end points,
   !            see parameter INTEGR).
   !            Hopefully satisfying following claim for accuracy
   !            ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I)).
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A2A1
-  !***TYPE      DOUBLE PRECISION (QAWSE-S, DQAWSE-D)
-  !***KEYWORDS  ALGEBRAIC-LOGARITHMIC END POINT SINGULARITIES,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A2A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (QAWSE-S, DQAWSE-D)
+  !***
+  ! **Keywords:**  ALGEBRAIC-LOGARITHMIC END POINT SINGULARITIES,
   !             AUTOMATIC INTEGRATOR, CLENSHAW-CURTIS METHOD, QUADPACK,
   !             QUADRATURE, SPECIAL-PURPOSE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Integration of functions having algebraico-logarithmic
   !        end point singularities
@@ -160,15 +167,18 @@ SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
   !                     Number of subintervals actually produced in
   !                     the subdivision process
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DQC25S, DQMOMO, DQPSRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DQC25S, DQMOMO, DQPSRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DQAWSE
+  
   !
   REAL(8) :: A, Abserr, Alfa, Alist, area, area1, area12, &
     area2, a1, a2, B, Beta, Blist, b1, b2, centre, &
@@ -211,7 +221,7 @@ SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
   !           EPMACH IS THE LARGEST RELATIVE SPACING.
   !           UFLOW IS THE SMALLEST POSITIVE MAGNITUDE.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQAWSE
+  !* FIRST EXECUTABLE STATEMENT  DQAWSE
   epmach = D1MACH(4)
   uflow = D1MACH(1)
   !
@@ -370,7 +380,7 @@ SUBROUTINE DQAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,&
         !           WITH LARGEST ERROR ESTIMATE (TO BE BISECTED NEXT).
         !
         CALL DQPSRT(Limit,Last,maxerr,errmax,Elist,Iord,nrmax)
-        ! ***JUMP OUT OF DO-LOOP
+        !- **JUMP OUT OF DO-LOOP
         IF ( Ier/=0.OR.errsum<=errbnd ) EXIT
       ENDDO
       !

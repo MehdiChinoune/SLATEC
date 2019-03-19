@@ -1,26 +1,34 @@
-!DECK CHKSN4
+!** CHKSN4
 SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHKSN4
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SEPX4
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (CHKSN4-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SEPX4
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (CHKSN4-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This subroutine checks if the PDE SEPX4
   !     must solve is a singular operator.
   !
-  !***SEE ALSO  SEPX4
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    SPL4
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SEPX4
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    SPL4
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  CHKSN4
+  
   REAL ai, AIT, Alpha, Beta, bi, BIT, ci, CIT, DIT, DLX, DLX4, &
     DLY, DLY4, TDLx3, TDLy3, xi
   INTEGER i, IS, JS, K, KSWx, KSWy, L, Mbdcnd, MIT, MS, Nbdcnd, NIT, NS
@@ -28,7 +36,7 @@ SUBROUTINE CHKSN4(Mbdcnd,Nbdcnd,Alpha,Beta,COFX,Singlr)
     IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   LOGICAL Singlr
   EXTERNAL COFX
-  !***FIRST EXECUTABLE STATEMENT  CHKSN4
+  !* FIRST EXECUTABLE STATEMENT  CHKSN4
   Singlr = .FALSE.
   !
   !     CHECK IF THE BOUNDARY CONDITIONS ARE

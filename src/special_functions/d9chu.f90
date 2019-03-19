@@ -1,17 +1,23 @@
-!DECK D9CHU
+!** D9CHU
 REAL(8) FUNCTION D9CHU(A,B,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  D9CHU
-  !***SUBSIDIARY
-  !***PURPOSE  Evaluate for large Z  Z**A * U(A,B,Z) where U is the
+  !>
+  !***
+  !  Evaluate for large Z  Z**A * U(A,B,Z) where U is the
   !            logarithmic confluent hypergeometric function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C11
-  !***TYPE      DOUBLE PRECISION (R9CHU-S, D9CHU-D)
-  !***KEYWORDS  FNLIB, LOGARITHMIC CONFLUENT HYPERGEOMETRIC FUNCTION,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C11
+  !***
+  ! **Type:**      DOUBLE PRECISION (R9CHU-S, D9CHU-D)
+  !***
+  ! **Keywords:**  FNLIB, LOGARITHMIC CONFLUENT HYPERGEOMETRIC FUNCTION,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate for large Z  Z**A * U(A,B,Z)  where U is the logarithmic
   ! confluent hypergeometric function.  A rational approximation due to Y.
@@ -20,16 +26,19 @@ REAL(8) FUNCTION D9CHU(A,B,Z)
   ! A warning is provided when the computed result is less than half
   ! precision.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  !***END PROLOGUE  D9CHU
+  
   INTEGER i, j
   REAL(8) :: A, B, Z, aa(4), bb(4), ab, anbn, bp, ct1, ct2, &
     ct3, c2, d1z, eps, g1, g2, g3, sab, sqeps, &
@@ -37,7 +46,7 @@ REAL(8) FUNCTION D9CHU(A,B,Z)
   LOGICAL first
   SAVE eps, sqeps, first
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  D9CHU
+  !* FIRST EXECUTABLE STATEMENT  D9CHU
   IF ( first ) THEN
     eps = 4.0D0*D1MACH(4)
     sqeps = SQRT(D1MACH(4))

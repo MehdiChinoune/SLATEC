@@ -1,16 +1,23 @@
-!DECK COMBAK
+!** COMBAK
 SUBROUTINE COMBAK(Nm,Low,Igh,Ar,Ai,Int,M,Zr,Zi)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  COMBAK
-  !***PURPOSE  Form the eigenvectors of a complex general matrix from the
+  !>
+  !***
+  !  Form the eigenvectors of a complex general matrix from the
   !            eigenvectors of a upper Hessenberg matrix output from
   !            COMHES.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C4
-  !***TYPE      COMPLEX (ELMBAK-S, COMBAK-C)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C4
+  !***
+  ! **Type:**      COMPLEX (ELMBAK-S, COMBAK-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure COMBAK,
   !     NUM. MATH. 12, 349-368(1968) by Martin and Wilkinson.
@@ -58,25 +65,28 @@ SUBROUTINE COMBAK(Nm,Low,Igh,Ar,Ai,Int,M,Zr,Zi)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  COMBAK
+  
   !
   INTEGER i, j, M, la, mm, mp, Nm, Igh, kp1, Low, mp1
   REAL Ar(Nm,*), Ai(Nm,*), Zr(Nm,*), Zi(Nm,*)
   REAL xr, xi
   INTEGER Int(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  COMBAK
+  !* FIRST EXECUTABLE STATEMENT  COMBAK
   IF ( M/=0 ) THEN
     la = Igh - 1
     kp1 = Low + 1

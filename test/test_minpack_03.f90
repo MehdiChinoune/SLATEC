@@ -2,24 +2,31 @@ MODULE TEST52_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK CMPARE
+  !** CMPARE
   SUBROUTINE CMPARE(Icnt,Itest)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CMPARE
-    !***PURPOSE  Compare values in COMMON block CHECK for quick check
+    !>
+    !***
+    !  Compare values in COMMON block CHECK for quick check
     !            routine PFITQX.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (CMPARE-S, DCMPAR-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***COMMON BLOCKS    CHECK
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (CMPARE-S, DCMPAR-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+    !***
+    ! COMMON BLOCKS    CHECK
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890921  Realigned order of variables in the COMMON block.
     !           (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920214  Minor improvements to code for readability.  (WRB)
-    !***END PROLOGUE  CMPARE
+    
     !     .. Scalar Arguments ..
     INTEGER Icnt
     !     .. Array Arguments ..
@@ -38,7 +45,7 @@ CONTAINS
     INTRINSIC ABS
     !     .. Common blocks ..
     COMMON /CHECK / EPS, R, RP, SVEps, TOL, NORdp, NORd, IERp, IERr
-    !***FIRST EXECUTABLE STATEMENT  CMPARE
+    !* FIRST EXECUTABLE STATEMENT  CMPARE
     Icnt = Icnt + 1
     itemp(1) = 0
     itemp(2) = 0
@@ -58,18 +65,25 @@ CONTAINS
     !
     Itest(Icnt) = itemp(1)*itemp(2)*itemp(3)*itemp(4)
   END SUBROUTINE CMPARE
-  !DECK PFITQX
+  !** PFITQX
   SUBROUTINE PFITQX(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  PFITQX
-    !***PURPOSE  Quick check for POLFIT, PCOEF and PVALUE.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (PFITQX-S, DPFITT-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  CMPARE, PASS, PCOEF, POLFIT, PVALUE, R1MACH,
+    !>
+    !***
+    !  Quick check for POLFIT, PCOEF and PVALUE.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (PFITQX-S, DPFITT-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  CMPARE, PASS, PCOEF, POLFIT, PVALUE, R1MACH,
     !                    XERCLR, XGETF, XSETF
-    !***COMMON BLOCKS    CHECK
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! COMMON BLOCKS    CHECK
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890921  Realigned order of variables in the COMMON block.
@@ -81,7 +95,7 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920214  Code restructured to test for all values of KPRINT and to
     !           provide more PASS/FAIL information.  (WRB)
-    !***END PROLOGUE  PFITQX
+    
     INTEGER kontrl
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
@@ -105,7 +119,7 @@ CONTAINS
     INTRINSIC ABS, SQRT
     !     .. Common blocks ..
     COMMON /CHECK / EPS, R, RP, SVEps, TOL, NORdp, NORd, IERp, IERr
-    !***FIRST EXECUTABLE STATEMENT  PFITQX
+    !* FIRST EXECUTABLE STATEMENT  PFITQX
     IF ( Kprint>=2 ) WRITE (Lun,FMT=99002)
     !
     !     Initialize variables for testing passage or failure of tests
@@ -441,30 +455,38 @@ CONTAINS
     99019 FORMAT (/' ***************POLFIT PASSED ALL TESTS***************')
     99020 FORMAT (/' ***************POLFIT FAILED SOME TESTS**************')
   END SUBROUTINE PFITQX
-  !DECK SNLS1Q
+  !** SNLS1Q
   SUBROUTINE SNLS1Q(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SNLS1Q
-    !***PURPOSE  Quick check for SNLS1E, SNLS1 and SCOV.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (SNLS1Q-S, DNLS1Q-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for SNLS1E, SNLS1 and SCOV.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (SNLS1Q-S, DNLS1Q-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !   This subroutine performs a quick check on the subroutines SNLS1E
     !   (and SNLS1) and SCOV.
     !
-    !***ROUTINES CALLED  ENORM, FCN1, FCN2, FCN3, FDJAC3, PASS, R1MACH,
+    !***
+    ! **Routines called:**  ENORM, FCN1, FCN2, FCN3, FDJAC3, PASS, R1MACH,
     !                    SCOV, SNLS1E
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    !***END PROLOGUE  SNLS1Q
+    
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -484,7 +506,7 @@ CONTAINS
     EXTERNAL FDJAC3, PASS, SCOV, SNLS1E, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
-    !***FIRST EXECUTABLE STATEMENT  SNLS1Q
+    !* FIRST EXECUTABLE STATEMENT  SNLS1Q
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1'/' Test SNLS1E, SNLS1 and SCOV')
@@ -724,16 +746,22 @@ CONTAINS
       I5/' RETURNED PRODUCT OF (J-TRANS*J)*COVARIANCE MATRIX/SIGMA'/&
       ' (SHOULD = THE IDENTITY -- 1.0, 0.0, 1.0)'/3E20.9/)
   END SUBROUTINE SNLS1Q
-  !DECK FCQX
+  !** FCQX
   SUBROUTINE FCQX(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  FCQX
-    !***PURPOSE  Quick check for FC.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (FCQX-S, DFCQX-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Hanson, R. J., (SNLA)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for FC.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (FCQX-S, DFCQX-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Hanson, R. J., (SNLA)
+    !***
+    ! **Description:**
     !
     !   Quick check subprogram for the subroutine FC.
     !
@@ -751,8 +779,10 @@ CONTAINS
     !   The dimensions in the following arrays are as small as possible for
     !   the problem being solved.
     !
-    !***ROUTINES CALLED  BVALU, CV, FC, IVOUT, R1MACH, SCOPY, SMOUT, SVOUT
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  BVALU, CV, FC, IVOUT, R1MACH, SCOPY, SMOUT, SVOUT
+
+    !* REVISION HISTORY  (YYMMDD)
     !   780801  DATE WRITTEN
     !   890718  Changed references from BVALUE to BVALU.  (WRB)
     !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -764,7 +794,7 @@ CONTAINS
     !           FORMATs.  (RWC)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    !***END PROLOGUE  FCQX
+    
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -834,7 +864,7 @@ CONTAINS
     DATA check(46), check(47), check(48), check(49), check(50), check(51)&
       /9.894902905E-01, 9.926011645E-01, 9.954598055E-01, &
       9.978139804E-01, 9.994114563E-01, 1.000000000E+00/
-    !***FIRST EXECUTABLE STATEMENT  FCQX
+    !* FIRST EXECUTABLE STATEMENT  FCQX
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1'/' Test FC')
@@ -1075,29 +1105,37 @@ CONTAINS
     99011 FORMAT (/' ****************FC FAILED SOME TESTS*****************')
     RETURN
   END SUBROUTINE FCQX
-  !DECK FCN1
+  !** FCN1
   SUBROUTINE FCN1(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  FCN1
-    !***PURPOSE  Subsidiary to SNLS1Q.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (FCN1-S, DFCN1-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Subsidiary to SNLS1Q.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (FCN1-S, DFCN1-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !   Subroutine which evaluates the function for test program
     !   used in quick check of SNLS1E.
     !
     !   Numerical approximation of Jacobian is used.
     !
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  TYPE and declarations sections added.  (WRB)
-    !***END PROLOGUE  FCN1
+    
     !     .. Scalar Arguments ..
     REAL Fjac
     INTEGER Iflag, Ldfjac, M, N
@@ -1110,36 +1148,44 @@ CONTAINS
     INTRINSIC EXP
     !     .. Data statements ..
     DATA two/2.0E0/
-    !***FIRST EXECUTABLE STATEMENT  FCN1
+    !* FIRST EXECUTABLE STATEMENT  FCN1
     IF ( Iflag/=1 ) RETURN
     DO i = 1, M
       temp = i
       Fvec(i) = two + two*temp - EXP(temp*X(1)) - EXP(temp*X(2))
     ENDDO
   END SUBROUTINE FCN1
-  !DECK FCN2
+  !** FCN2
   SUBROUTINE FCN2(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  FCN2
-    !***PURPOSE  Subsidiary to SNLS1Q.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (FCN2-S, DFCN2-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Subsidiary to SNLS1Q.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (FCN2-S, DFCN2-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !   Subroutine to evaluate function and full Jacobian for test
     !   problem in quick check of SNLS1E.
     !
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  TYPE and declarations sections added and code polished.
     !           (WRB)
-    !***END PROLOGUE  FCN2
+    
     !     .. Scalar Arguments ..
     INTEGER Iflag, Ldfjac, M, N
     !     .. Array Arguments ..
@@ -1151,7 +1197,7 @@ CONTAINS
     INTRINSIC EXP
     !     .. Data statements ..
     DATA two/2.0E0/
-    !***FIRST EXECUTABLE STATEMENT  FCN2
+    !* FIRST EXECUTABLE STATEMENT  FCN2
     IF ( Iflag==0 ) RETURN
     !
     !     Should we evaluate functions or Jacobian?
@@ -1176,29 +1222,37 @@ CONTAINS
       ENDDO
     ENDIF
   END SUBROUTINE FCN2
-  !DECK FCN3
+  !** FCN3
   SUBROUTINE FCN3(Iflag,M,N,X,Fvec,Fjrow,Nrow)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  FCN3
-    !***PURPOSE  Subsidiary to SNLS1Q.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (FCN3-S, DFCN3-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Subsidiary to SNLS1Q.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (FCN3-S, DFCN3-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !   Subroutine to evaluate the Jacobian, one row at a time, for
     !   test problem used in quick check of SNLS1E.
     !
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  TYPE and declarations sections added and code polished.
     !           (WRB)
-    !***END PROLOGUE  FCN3
+    
     !     .. Scalar Arguments ..
     INTEGER Iflag, M, N, Nrow
     !     .. Array Arguments ..
@@ -1210,7 +1264,7 @@ CONTAINS
     INTRINSIC EXP
     !     .. Data statements ..
     DATA two/2.0E0/
-    !***FIRST EXECUTABLE STATEMENT  FCN3
+    !* FIRST EXECUTABLE STATEMENT  FCN3
     IF ( Iflag==0 ) RETURN
     !
     !     Should we evaluate functions or Jacobian?
@@ -1234,24 +1288,31 @@ CONTAINS
     ENDIF
   END SUBROUTINE FCN3
 END MODULE TEST52_MOD
-!DECK TEST52
+!** TEST52
 PROGRAM TEST52
   USE TEST52_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST52
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  K1, E3, K6, L
-  !***TYPE      SINGLE PRECISION (TEST52-S, TEST53-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  K1, E3, K6, L
+  !***
+  ! **Type:**      SINGLE PRECISION (TEST52-S, TEST53-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -1263,25 +1324,28 @@ PROGRAM TEST52
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        SNLS1E   SNLS1    SCOV
   !        BVALU    CV       FC
   !        POLFIT   PCOEF    PVALUE
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  FCQX, I1MACH, PFITQX, SNLS1Q, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  FCQX, I1MACH, PFITQX, SNLS1Q, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST52
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST52
+  !* FIRST EXECUTABLE STATEMENT  TEST52
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

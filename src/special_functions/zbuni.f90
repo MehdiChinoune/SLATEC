@@ -1,13 +1,17 @@
-!DECK ZBUNI
+!** ZBUNI
 SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZBUNI
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESI and ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CBUNI-A, ZBUNI-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZBESI and ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CBUNI-A, ZBUNI-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZBUNI COMPUTES THE I BESSEL FUNCTION FOR LARGE ABS(Z).GT.
   !     FNUL AND FNU+N-1.LT.FNUL. THE ORDER IS INCREASED FROM
@@ -15,12 +19,15 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !     ACCORDING TO THE UNIFORM ASYMPTOTIC EXPANSION FOR I(FNU,Z)
   !     ON IFORM=1 AND THE EXPANSION FOR J(FNU,Z) ON IFORM=2
   !
-  !***SEE ALSO  ZBESI, ZBESK
-  !***ROUTINES CALLED  D1MACH, ZABS, ZUNI1, ZUNI2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZBESI, ZBESK
+  !***
+  ! **Routines called:**  D1MACH, ZABS, ZUNI1, ZUNI2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ZBUNI
+  
   !     COMPLEX CSCL,CSCR,CY,RZ,ST,S1,S2,Y,Z
   REAL(8) :: Alim, ax, ay, csclr, cscrr, cyi, cyr, dfnu, &
     Elim, Fnu, fnui, Fnul, gnu, raz, rzi, rzr, sti, &
@@ -29,7 +36,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   INTEGER i, iflag, iform, k, Kode, N, nl, Nlast, Nui, nw, Nz
   DIMENSION Yr(N), Yi(N), cyr(2), cyi(2), bry(3)
   EXTERNAL ZABS
-  !***FIRST EXECUTABLE STATEMENT  ZBUNI
+  !* FIRST EXECUTABLE STATEMENT  ZBUNI
   Nz = 0
   ax = ABS(Zr)*1.7321D0
   ay = ABS(Zi)

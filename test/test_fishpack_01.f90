@@ -2,15 +2,18 @@ MODULE TEST50_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK QXBLKT
+  !** QXBLKT
   SUBROUTINE QXBLKT(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QXBLKT
-    !***PURPOSE
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     !     *                                                               *
@@ -42,21 +45,23 @@ CONTAINS
     !
     !     PROGRAM TO ILLUSTRATE THE USE OF BLKTRI
     !
-    !***ROUTINES CALLED  BLKTRI
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  BLKTRI
+
+    !* REVISION HISTORY  (YYMMDD)
     !   800103  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    !***END PROLOGUE  QXBLKT
+    
     REAL am, an, bm, bn, cm, cn, deltas, deltat, ermax, err, hds, &
       hdt, s, t, tds, tdt, temp1, temp2, temp3, w
     REAL y, z
     INTEGER i, idimy, ierror, iflg, Ipass, j, Kprint, Lun, m, mp, n, np
     DIMENSION y(75,105), am(75), bm(75), cm(75), an(105), bn(105), &
       cn(105), w(1952), s(75), t(105)
-    !***FIRST EXECUTABLE STATEMENT  QXBLKT
+    !* FIRST EXECUTABLE STATEMENT  QXBLKT
     ermax = 1.E-3
     iflg = 0
     np = 1
@@ -163,15 +168,18 @@ CONTAINS
       ENDIF
     ENDDO
   END SUBROUTINE QXBLKT
-  !DECK QXCRT
+  !** QXCRT
   SUBROUTINE QXCRT(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QXCRT
-    !***PURPOSE
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     !     *                                                               *
@@ -219,22 +227,24 @@ CONTAINS
     !          THE X-INTERVAL WILL BE DIVIDED INTO 40 PANELS AND THE
     !     Y-INTERVAL WILL BE DIVIDED INTO 80 PANELS.
     !
-    !***ROUTINES CALLED  HWSCRT, PIMACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  HWSCRT, PIMACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   800103  DATE WRITTEN
     !   890718  Changed computation of PI to use PIMACH.  (WRB)
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    !***END PROLOGUE  QXCRT
+    
     REAL a, b, bda, bdb, bdc, bdd, c, d, dum, elmbda, ermax, err, &
       f, pertrb, pi, piby2, PIMACH, pisq, w, x
     REAL y, z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
       n, nbdcnd, np1
     DIMENSION f(45,82), bdb(81), w(1200), x(41), y(81)
-    !***FIRST EXECUTABLE STATEMENT  QXCRT
+    !* FIRST EXECUTABLE STATEMENT  QXCRT
     !
     !     FROM DIMENSION STATEMENT WE GET VALUE OF IDIMF.  ALSO NOTE THAT W
     !     IS DIMENSIONED 6*(N+1) + 8*(M+1).
@@ -325,15 +335,18 @@ CONTAINS
     ENDIF
     RETURN
   END SUBROUTINE QXCRT
-  !DECK QXCSP
+  !** QXCSP
   SUBROUTINE QXCSP(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QXCSP
-    !***PURPOSE
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     !     *                                                               *
@@ -365,22 +378,24 @@ CONTAINS
     !
     !     PROGRAM TO ILLUSTRATE THE USE OF HWSCSP
     !
-    !***ROUTINES CALLED  HWSCSP, PIMACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  HWSCSP, PIMACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   800103  DATE WRITTEN
     !   890718  Changed computation of PI to use PIMACH.  (WRB)
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    !***END PROLOGUE  QXCSP
+    
     REAL bdrf, bdrs, bdtf, bdts, ci4, dphi, dr, dtheta, dum, elmbda, &
       ermax, err, f, pertrb, pi, PIMACH, r, rf, rs, si
     REAL tf, theta, ts, w, z
     INTEGER i, idimf, ierror, intl, Ipass, j, Kprint, Lun, m, &
       mbdcnd, mp1, n, nbdcnd, np1
     DIMENSION f(48,33), bdtf(33), w(1200), r(33), theta(48)
-    !***FIRST EXECUTABLE STATEMENT  QXCSP
+    !* FIRST EXECUTABLE STATEMENT  QXCSP
     !
     !     THE VALUE OF IDIMF IS THE FIRST DIMENSION OF F.  SINCE M=36, N=32,
     !     L=N THEREFORE K=5 AND W IS DIMENSIONED 2*(L+1)*(K-1) + 6*(M+N)
@@ -527,15 +542,18 @@ CONTAINS
     99003 FORMAT (60X,'PASS'/)
     99004 FORMAT (60X,'FAIL'/)
   END SUBROUTINE QXCSP
-  !DECK QXCYL
+  !** QXCYL
   SUBROUTINE QXCYL(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QXCYL
-    !***PURPOSE
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     !     *                                                               *
@@ -588,21 +606,23 @@ CONTAINS
     !          THE R-INTERVAL WILL BE DIVIDED INTO 50 PANELS AND THE
     !     Z-INTERVAL WILL BE DIVIDED INTO 100 PANELS.
     !
-    !***ROUTINES CALLED  HWSCYL
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  HWSCYL
+
+    !* REVISION HISTORY  (YYMMDD)
     !   800103  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     !   930415  Test modified to use a 64 by 128 grid.  (WRB)
-    !***END PROLOGUE  QXCYL
+    
     REAL a, b, bda, bdb, bdc, bdd, c, d, elmbda, ermax, err, f, &
       pertrb, r, w, x, z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, n, nbdcnd, np1
     DIMENSION f(65,129), bda(129), bdb(129), bdc(65), bdd(65), w(1400), &
       r(65), z(129)
-    !***FIRST EXECUTABLE STATEMENT  QXCYL
+    !* FIRST EXECUTABLE STATEMENT  QXCYL
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1',20X,'SUBROUTINE HWSCYL EXAMPLE'//)
@@ -698,15 +718,18 @@ CONTAINS
     99004 FORMAT (25X,'HWSCYL TEST FAILED'/)
     RETURN
   END SUBROUTINE QXCYL
-  !DECK QXGBUN
+  !** QXGBUN
   SUBROUTINE QXGBUN(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QXGBUN
-    !***PURPOSE
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     !     *                                                               *
@@ -737,8 +760,10 @@ CONTAINS
     !
     !     PROGRAM TO ILLUSTRATE THE USE OF SUBROUTINE GENBUN
     !
-    !***ROUTINES CALLED  GENBUN, PIMACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  GENBUN, PIMACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   750701  DATE WRITTEN
     !   890718  Changed computation of PI to use PIMACH.  (WRB)
     !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -746,12 +771,12 @@ CONTAINS
     !   891009  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    !***END PROLOGUE  QXGBUN
+    
     REAL a, b, c, deltax, deltay, dum, dysq, ermax, err, f, pi, &
       PIMACH, s, t, w, x, y, z
     INTEGER i, idimy, ierror, Ipass, j, Kprint, Lun, m, mm1, mperod, n, nperod
     DIMENSION f(25,130), a(20), b(20), c(20), w(1200), x(20), y(120)
-    !***FIRST EXECUTABLE STATEMENT  QXGBUN
+    !* FIRST EXECUTABLE STATEMENT  QXGBUN
     !
     !     FROM DIMENSION STATEMENT WE GET VALUE OF IDIMY.  ALSO NOTE THAT
     !     W(.) IS DIMENSIONED 6*N + 5*M.
@@ -850,15 +875,18 @@ CONTAINS
     ENDIF
     RETURN
   END SUBROUTINE QXGBUN
-  !DECK QXPLR
+  !** QXPLR
   SUBROUTINE QXPLR(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QXPLR
-    !***PURPOSE
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     !     *                                                               *
@@ -906,21 +934,23 @@ CONTAINS
     !          THE R-INTERVAL WILL BE DIVIDED INTO 50 PANELS AND THE
     !     THETA-INTERVAL WILL BE DIVIDED INTO 48 PANELS.
     !
-    !***ROUTINES CALLED  HWSPLR, PIMACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  HWSPLR, PIMACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   800103  DATE WRITTEN
     !   890718  Changed computation of PI to use PIMACH.  (WRB)
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    !***END PROLOGUE  QXPLR
+    
     REAL a, b, bda, bdb, bdc, bdd, c, d, dum, elmbda, ermax, err, &
       f, pertrb, pi, PIMACH, r, theta, w, z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
       n, nbdcnd, np1
     DIMENSION f(100,50), bdc(51), bdd(51), w(1200), r(51), theta(49)
-    !***FIRST EXECUTABLE STATEMENT  QXPLR
+    !* FIRST EXECUTABLE STATEMENT  QXPLR
     !
     !     FROM DIMENSION STATEMENT WE GET VALUE OF IDIMF.  ALSO NOTE THAT W
     !     IS DIMENSIONED 6*(N+1) + 8*(M+1).
@@ -1010,15 +1040,18 @@ CONTAINS
     ENDIF
     RETURN
   END SUBROUTINE QXPLR
-  !DECK QXSSP
+  !** QXSSP
   SUBROUTINE QXSSP(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QXSSP
-    !***PURPOSE
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     !     *                                                               *
@@ -1051,22 +1084,24 @@ CONTAINS
     !
     !     PROGRAM TO ILLUSTRATE THE USE OF HWSSSP
     !
-    !***ROUTINES CALLED  HWSSSP, PIMACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  HWSSSP, PIMACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   800103  DATE WRITTEN
     !   890718  Changed computation of PI to use PIMACH.  (WRB)
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    !***END PROLOGUE  QXSSP
+    
     REAL bdpf, bdps, bdtf, bdts, dphi, dtheta, dum, elmbda, ermax, &
       err, f, pertrb, pf, pi, PIMACH, ps, sinp, sint, tf, ts
     REAL w, z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
       n, nbdcnd, np1
     DIMENSION f(19,73), bdtf(73), sint(19), sinp(73), w(1200)
-    !***FIRST EXECUTABLE STATEMENT  QXSSP
+    !* FIRST EXECUTABLE STATEMENT  QXSSP
     !
     !     THE VALUE OF IDIMF IS THE FIRST DIMENSION OF F.  W IS
     !     DIMENSIONED 11*(M+1)+6*(N+1)=647 SINCE M=18 AND N=72.
@@ -1149,24 +1184,31 @@ CONTAINS
     RETURN
   END SUBROUTINE QXSSP
 END MODULE TEST50_MOD
-!DECK TEST50
+!** TEST50
 PROGRAM TEST50
   USE TEST50_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST50
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  I2
-  !***TYPE      SINGLE PRECISION (TEST50-S)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  I2
+  !***
+  ! **Type:**      SINGLE PRECISION (TEST50-S)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -1178,7 +1220,7 @@ PROGRAM TEST50
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        HWSCRT
   !        HWSPLR
@@ -1188,20 +1230,23 @@ PROGRAM TEST50
   !        GENBUN
   !        BLKTRI
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  I1MACH, QXBLKT, QXCRT, QXCSP, QXCYL, QXGBUN, QXPLR,
+  !***
+  ! **Routines called:**  I1MACH, QXBLKT, QXCRT, QXCSP, QXCYL, QXGBUN, QXPLR,
   !                    QXSSP, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST50
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST50
+  !* FIRST EXECUTABLE STATEMENT  TEST50
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

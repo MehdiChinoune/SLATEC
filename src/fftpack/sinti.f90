@@ -1,14 +1,21 @@
-!DECK SINTI
+!** SINTI
 SUBROUTINE SINTI(N,Wsave)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SINTI
-  !***PURPOSE  Initialize a work array for SINT.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A3
-  !***TYPE      SINGLE PRECISION (SINTI-S)
-  !***KEYWORDS  FFTPACK, FOURIER TRANSFORM
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Initialize a work array for SINT.
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A3
+  !***
+  ! **Type:**      SINGLE PRECISION (SINTI-S)
+  !***
+  ! **Keywords:**  FFTPACK, FOURIER TRANSFORM
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !  Subroutine SINTI initializes the array WSAVE which is used in
   !  subroutine SINT.  The prime factorization of N together with
@@ -27,11 +34,14 @@ SUBROUTINE SINTI(N,Wsave)
   !          of N.  The contents of WSAVE must not be changed between
   !          calls of SINT.
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  RFFTI
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  RFFTI
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -46,11 +56,11 @@ SUBROUTINE SINTI(N,Wsave)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SINTI
+  
   REAL dt, fk, pi, Wsave
   INTEGER k, kf, ks, N, np1, ns2
   DIMENSION Wsave(*)
-  !***FIRST EXECUTABLE STATEMENT  SINTI
+  !* FIRST EXECUTABLE STATEMENT  SINTI
   IF ( N<=1 ) RETURN
   pi = 4.*ATAN(1.)
   np1 = N + 1

@@ -1,30 +1,37 @@
-!DECK CMPOSP
+!** CMPOSP
 SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CMPOSP
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CMGNBN
-  !***LIBRARY   SLATEC
-  !***TYPE      COMPLEX (POISP2-S, CMPOSP-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CMGNBN
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      COMPLEX (POISP2-S, CMPOSP-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Subroutine to solve Poisson's equation with periodic boundary
   !     conditions.
   !
-  !***SEE ALSO  CMGNBN
-  !***ROUTINES CALLED  CMPOSD, CMPOSN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CMGNBN
+  !***
+  ! **Routines called:**  CMPOSD, CMPOSN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  CMPOSP
+  
   INTEGER i, Idimq, ipstor, j, lh, M, mr, N, nr, nrm1, nrmj, nrpj
   COMPLEX A, Bb, C, Q, B, B2, B3, W, W2, W3, D, Tcos, P, s, t
   DIMENSION A(*), Bb(*), C(*), Q(Idimq,*), B(*), B2(*), B3(*), W(*), &
     W2(*), W3(*), D(*), Tcos(*), P(*)
-  !***FIRST EXECUTABLE STATEMENT  CMPOSP
+  !* FIRST EXECUTABLE STATEMENT  CMPOSP
   mr = M
   nr = (N+1)/2
   nrm1 = nr - 1

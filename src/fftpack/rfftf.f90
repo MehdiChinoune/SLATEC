@@ -1,15 +1,21 @@
-!DECK RFFTF
+!** RFFTF
 SUBROUTINE RFFTF(N,R,Wsave)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RFFTF
-  !***SUBSIDIARY
-  !***PURPOSE  Compute the forward transform of a real, periodic sequence.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A1
-  !***TYPE      SINGLE PRECISION (RFFTF-S, CFFTF-C)
-  !***KEYWORDS  FFTPACK, FOURIER TRANSFORM
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the forward transform of a real, periodic sequence.
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A1
+  !***
+  ! **Type:**      SINGLE PRECISION (RFFTF-S, CFFTF-C)
+  !***
+  ! **Keywords:**  FFTPACK, FOURIER TRANSFORM
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !   ********************************************************************
   !   *   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   *
@@ -73,11 +79,14 @@ SUBROUTINE RFFTF(N,R,Wsave)
   !   WSAVE  contains results which must not be destroyed between
   !          calls of RFFTF or RFFTB.
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  RFFTF1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  RFFTF1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -89,11 +98,11 @@ SUBROUTINE RFFTF(N,R,Wsave)
   !           because of non-standard Fortran 77 arguments in the
   !           call to CFFTB1.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  RFFTF
+  
   INTEGER N
   REAL R(*), Wsave(*)
   INTEGER :: ifac(15)
-  !***FIRST EXECUTABLE STATEMENT  RFFTF
+  !* FIRST EXECUTABLE STATEMENT  RFFTF
   IF ( N==1 ) RETURN
   ifac = INT( Wsave(2*N+1:2*N+15) )
   CALL RFFTF1(N,R,Wsave,Wsave(N+1),ifac)

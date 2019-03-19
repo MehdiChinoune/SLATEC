@@ -1,15 +1,19 @@
-!DECK DPLPFE
+!** DPLPFE
 SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,Ibb,Erdnrm,Eps,Gg,Dulnrm,Dirnrm,Amat,Basmat,Csc,Wr,&
     Ww,Bl,Bu,Rz,Rg,Colnrm,Duals,Found)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPLPFE
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SPLPFE-S, DPLPFE-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPLPFE-S, DPLPFE-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THE EDITING REQUIRED TO CONVERT THIS SUBROUTINE FROM SINGLE TO
   !     DOUBLE PRECISION INVOLVES THE FOLLOWING CHARACTER STRING CHANGES.
@@ -24,16 +28,19 @@ SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !     REVISED 811130-1100
   !     REVISED YYMMDD-HHMM
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  DASUM, DCOPY, DPRWPG, IDLOC, LA05BD
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  DASUM, DCOPY, DPRWPG, IDLOC, LA05BD
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
   !   890606  Changed references from IPLOC to IDLOC.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DPLPFE
+  
   INTEGER i, IDLOC, Ienter, ihi, il1, ilow, ipage, iu1, j, key, &
     Lbm, Lmx, lpg, Mrelas, n20002, n20050, Nvars
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), &
@@ -44,7 +51,7 @@ SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     rcost, rmax, zero
   REAL(8) :: DASUM
   LOGICAL Found, trans
-  !***FIRST EXECUTABLE STATEMENT  DPLPFE
+  !* FIRST EXECUTABLE STATEMENT  DPLPFE
   lpg = Lmx - (Nvars+4)
   zero = 0.D0
   one = 1.D0

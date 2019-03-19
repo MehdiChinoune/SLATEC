@@ -1,15 +1,22 @@
-!DECK DGEFA
+!** DGEFA
 SUBROUTINE DGEFA(A,Lda,N,Ipvt,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGEFA
-  !***PURPOSE  Factor a matrix using Gaussian elimination.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2A1
-  !***TYPE      DOUBLE PRECISION (SGEFA-S, DGEFA-D, CGEFA-C)
-  !***KEYWORDS  GENERAL MATRIX, LINEAR ALGEBRA, LINPACK,
+  !>
+  !***
+  !  Factor a matrix using Gaussian elimination.
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (SGEFA-S, DGEFA-D, CGEFA-C)
+  !***
+  ! **Keywords:**  GENERAL MATRIX, LINEAR ALGEBRA, LINPACK,
   !             MATRIX FACTORIZATION
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DGEFA factors a double precision matrix by Gaussian elimination.
   !
@@ -47,10 +54,13 @@ SUBROUTINE DGEFA(A,Lda,N,Ipvt,Info)
   !                     if called.  Use  RCOND  in DGECO for a reliable
   !                     indication of singularity.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DSCAL, IDAMAX
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DSCAL, IDAMAX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -58,7 +68,7 @@ SUBROUTINE DGEFA(A,Lda,N,Ipvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DGEFA
+  
   INTEGER Lda, N, Ipvt(*), Info
   REAL(8) :: A(Lda,*)
   !
@@ -67,7 +77,7 @@ SUBROUTINE DGEFA(A,Lda,N,Ipvt,Info)
   !
   !     GAUSSIAN ELIMINATION WITH PARTIAL PIVOTING
   !
-  !***FIRST EXECUTABLE STATEMENT  DGEFA
+  !* FIRST EXECUTABLE STATEMENT  DGEFA
   Info = 0
   nm1 = N - 1
   IF ( nm1>=1 ) THEN

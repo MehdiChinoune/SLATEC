@@ -1,23 +1,30 @@
-!DECK FCMN
+!** FCMN
 SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     Yconst,Nderiv,Mode,Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,&
     Work,Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  FCMN
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to FC
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (FCMN-S, DFCMN-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to FC
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (FCMN-S, DFCMN-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This is a companion subprogram to FC( ).
   !     The documentation for FC( ) has complete usage instructions.
   !
-  !***SEE ALSO  FC
-  !***ROUTINES CALLED  BNDACC, BNDSOL, BSPLVD, BSPLVN, LSEI, SAXPY, SCOPY,
+  !***
+  ! **See also:**  FC
+  !***
+  ! **Routines called:**  BNDACC, BNDSOL, BSPLVD, BSPLVN, LSEI, SAXPY, SCOPY,
   !                    SSCAL, SSORT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890618  Completely restructured and extensively revised (WRB & RWC)
@@ -25,7 +32,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  !***END PROLOGUE  FCMN
+  
   INTEGER Iwork(*), Mdg, Mdw, Mode, Nbkpt, Nconst, Ndata, Nderiv(*), &
     Nord
   REAL Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), Ptemp(*), &
@@ -43,7 +50,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   LOGICAL band, new, var
   CHARACTER(8) :: xern1
   !
-  !***FIRST EXECUTABLE STATEMENT  FCMN
+  !* FIRST EXECUTABLE STATEMENT  FCMN
   !
   !     Analyze input.
   !

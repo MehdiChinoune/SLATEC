@@ -1,28 +1,32 @@
-!DECK CHFCM
+!** CHFCM
 INTEGER FUNCTION CHFCM(D1,D2,Delta)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHFCM
-  !***SUBSIDIARY
-  !***PURPOSE  Check a single cubic for monotonicity.
-  !***LIBRARY   SLATEC (PCHIP)
-  !***TYPE      SINGLE PRECISION (CHFCM-S, DCHFCM-D)
-  !***AUTHOR  Fritsch, F. N., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Check a single cubic for monotonicity.
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Type:**      SINGLE PRECISION (CHFCM-S, DCHFCM-D)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !        REAL  D1, D2, DELTA
   !        INTEGER  ISMON, CHFCM
   !
   !        ISMON = CHFCM (D1, D2, DELTA)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !     D1,D2:IN  are the derivative values at the ends of an interval.
   !
   !     DELTA:IN  is the data slope over that interval.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !     ISMON : indicates the monotonicity of the cubic segment:
   !             ISMON = -3  if function is probably decreasing;
   !             ISMON = -1  if function is strictly decreasing;
@@ -34,14 +38,14 @@ INTEGER FUNCTION CHFCM(D1,D2,Delta)
   !           boundary of the monotonicity region to declare monotonicity
   !           in the presence of roundoff error.
   !
-  ! *Description:
+  !- Description:
   !
   !          CHFCM:  Cubic Hermite Function -- Check Monotonicity.
   !
   !    Called by  PCHCM  to determine the monotonicity properties of the
   !    cubic with boundary derivative values D1,D2 and chord slope DELTA.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This is essentially the same as old CHFMC, except that a
   !     new output value, -3, was added February 1989.  (Formerly, -3
   !     and +3 were lumped together in the single value 3.)  Codes that
@@ -52,8 +56,10 @@ INTEGER FUNCTION CHFCM(D1,D2,Delta)
   !
   !   REFER TO  PCHCM
   !
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820518  DATE WRITTEN
   !   820805  Converted to SLATEC library version.
   !   831201  Changed from  ISIGN  to SIGN  to correct bug that
@@ -68,7 +74,7 @@ INTEGER FUNCTION CHFCM(D1,D2,Delta)
   !   890407  Converted to new SLATEC format.
   !   890407  Modified DESCRIPTION to LDOC format.
   !   891214  Moved SAVE statements.  (WRB)
-  !***END PROLOGUE  CHFCM
+  
   REAL R1MACH
   !  Fortran intrinsics used:  SIGN.
   !  Other routines used:  R1MACH.
@@ -91,7 +97,7 @@ INTEGER FUNCTION CHFCM(D1,D2,Delta)
   !  INITIALIZE.
   DATA zero/0./, one/1.0/, two/2./, three/3./, four/4./, ten/10./
   !  MACHINE-DEPENDENT PARAMETER -- SHOULD BE ABOUT 10*UROUND.
-  !***FIRST EXECUTABLE STATEMENT  CHFCM
+  !* FIRST EXECUTABLE STATEMENT  CHFCM
   eps = ten*R1MACH(4)
   !
   !  MAKE THE CHECK.

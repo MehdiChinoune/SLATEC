@@ -1,17 +1,24 @@
-!DECK SNSQE
+!** SNSQE
 SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SNSQE
-  !***PURPOSE  An easy-to-use code to find a zero of a system of N
+  !>
+  !***
+  !  An easy-to-use code to find a zero of a system of N
   !            nonlinear functions in N variables by a modification of
   !            the Powell hybrid method.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  F2A
-  !***TYPE      SINGLE PRECISION (SNSQE-S, DNSQE-D)
-  !***KEYWORDS  EASY-TO-USE, NONLINEAR SQUARE SYSTEM,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  F2A
+  !***
+  ! **Type:**      SINGLE PRECISION (SNSQE-S, DNSQE-D)
+  !***
+  ! **Keywords:**  EASY-TO-USE, NONLINEAR SQUARE SYSTEM,
   !             POWELL HYBRID METHOD, ZEROS
-  !***AUTHOR  Hiebert, K. L., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Hiebert, K. L., (SNLA)
+  !***
+  ! **Description:**
   !
   ! 1. Purpose.
   !
@@ -323,19 +330,22 @@ SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !       -0.7042129E+00 -0.7013690E+00 -0.6918656E+00
   !       -0.6657920E+00 -0.5960342E+00 -0.4164121E+00
   !
-  !***REFERENCES  M. J. D. Powell, A hybrid method for nonlinear equa-
+  !***
+  ! **References:**  M. J. D. Powell, A hybrid method for nonlinear equa-
   !                 tions. In Numerical Methods for Nonlinear Algebraic
   !                 Equations, P. Rabinowitz, Editor.  Gordon and Breach,
   !                 1988.
-  !***ROUTINES CALLED  SNSQ, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SNSQ, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SNSQE
+  
   INTEGER Iopt, N, Nprint, Info, Lwa
   REAL Tol
   REAL X(*), Fvec(*), Wa(Lwa)
@@ -344,7 +354,7 @@ SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   REAL epsfcn, factor, one, xtol, zero
   SAVE factor, one, zero
   DATA factor, one, zero/1.0E2, 1.0E0, 0.0E0/
-  !***FIRST EXECUTABLE STATEMENT  SNSQE
+  !* FIRST EXECUTABLE STATEMENT  SNSQE
   Info = 0
   !
   !     CHECK THE INPUT PARAMETERS FOR ERRORS.

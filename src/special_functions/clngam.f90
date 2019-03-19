@@ -1,30 +1,40 @@
-!DECK CLNGAM
+!** CLNGAM
 COMPLEX FUNCTION CLNGAM(Zin)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CLNGAM
-  !***PURPOSE  Compute the logarithm of the absolute value of the Gamma
+  !>
+  !***
+  !  Compute the logarithm of the absolute value of the Gamma
   !            function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7A
-  !***TYPE      COMPLEX (ALNGAM-S, DLNGAM-D, CLNGAM-C)
-  !***KEYWORDS  ABSOLUTE VALUE, COMPLETE GAMMA FUNCTION, FNLIB, LOGARITHM,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7A
+  !***
+  ! **Type:**      COMPLEX (ALNGAM-S, DLNGAM-D, CLNGAM-C)
+  !***
+  ! **Keywords:**  ABSOLUTE VALUE, COMPLETE GAMMA FUNCTION, FNLIB, LOGARITHM,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! CLNGAM computes the natural log of the complex valued gamma function
   ! at ZIN, where ZIN is a complex number.  This is a preliminary version,
   ! which is not accurate.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  C9LGMC, CARG, CLNREL, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  C9LGMC, CARG, CLNREL, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  CLNGAM
+  
   REAL argsum, bound, cabsz, CARG, dxrel, pi, R1MACH, sq2pil, x, y
   INTEGER i, n
   COMPLEX Zin, z, corr, CLNREL, C9LGMC
@@ -33,7 +43,7 @@ COMPLEX FUNCTION CLNGAM(Zin)
   DATA pi/3.14159265358979324E0/
   DATA sq2pil/0.91893853320467274E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  CLNGAM
+  !* FIRST EXECUTABLE STATEMENT  CLNGAM
   IF ( first ) THEN
     n = INT( -0.30*LOG(R1MACH(3)) )
     ! BOUND = N*(0.1*EPS)**(-1/(2*N-1))/(PI*EXP(1))

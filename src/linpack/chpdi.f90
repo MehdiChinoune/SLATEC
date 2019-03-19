@@ -1,17 +1,24 @@
-!DECK CHPDI
+!** CHPDI
 SUBROUTINE CHPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHPDI
-  !***PURPOSE  Compute the determinant, inertia and inverse of a complex
+  !>
+  !***
+  !  Compute the determinant, inertia and inverse of a complex
   !            Hermitian matrix stored in packed form using the factors
   !            obtained from CHPFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2D1A, D3D1A
-  !***TYPE      COMPLEX (SSPDI-S, DSPDI-D, CHPDI-C, DSPDI-C)
-  !***KEYWORDS  DETERMINANT, HERMITIAN, INVERSE, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2D1A, D3D1A
+  !***
+  ! **Type:**      COMPLEX (SSPDI-S, DSPDI-D, CHPDI-C, DSPDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, HERMITIAN, INVERSE, LINEAR ALGEBRA, LINPACK,
   !             MATRIX, PACKED
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     CHPDI computes the determinant, inertia and inverse
   !     of a complex Hermitian matrix using the factors from CHPFA,
@@ -66,10 +73,13 @@ SUBROUTINE CHPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   !        and  CHPCO  has set RCOND .EQ. 0.0
   !        or  CHPFA  has set  INFO .NE. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CCOPY, CDOTC, CSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CCOPY, CDOTC, CSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -79,7 +89,7 @@ SUBROUTINE CHPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CHPDI
+  
   INTEGER N, Job
   COMPLEX Ap(*), Work(*)
   REAL Det(2)
@@ -90,7 +100,7 @@ SUBROUTINE CHPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   INTEGER ij, ik, ikp1, iks, j, jb, jk, jkp1
   INTEGER k, kk, kkp1, km1, ks, ksj, kskp1, kstep
   LOGICAL noinv, nodet, noert
-  !***FIRST EXECUTABLE STATEMENT  CHPDI
+  !* FIRST EXECUTABLE STATEMENT  CHPDI
   noinv = MOD(Job,10)==0
   nodet = MOD(Job,100)/10==0
   noert = MOD(Job,1000)/100==0

@@ -1,21 +1,28 @@
-!DECK PCHID
+!** PCHID
 REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PCHID
-  !***PURPOSE  Evaluate the definite integral of a piecewise cubic
+  !>
+  !***
+  !  Evaluate the definite integral of a piecewise cubic
   !            Hermite function over an interval whose endpoints are data
   !            points.
-  !***LIBRARY   SLATEC (PCHIP)
-  !***CATEGORY  E3, H2A1B2
-  !***TYPE      SINGLE PRECISION (PCHID-S, DPCHID-D)
-  !***KEYWORDS  CUBIC HERMITE INTERPOLATION, NUMERICAL INTEGRATION, PCHIP,
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Category:**  E3, H2A1B2
+  !***
+  ! **Type:**      SINGLE PRECISION (PCHID-S, DPCHID-D)
+  !***
+  ! **Keywords:**  CUBIC HERMITE INTERPOLATION, NUMERICAL INTEGRATION, PCHIP,
   !             QUADRATURE
-  !***AUTHOR  Fritsch, F. N., (LLNL)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             P.O. Box 808  (L-316)
   !             Livermore, CA  94550
   !             FTS 532-4275, (510) 422-4275
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !          PCHID:  Piecewise Cubic Hermite Integrator, Data limits
   !
@@ -79,9 +86,12 @@ REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !               NOTE:  The above errors are checked in the order listed,
   !                   and following arguments have **NOT** been validated.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820723  DATE WRITTEN
   !   820804  Converted to SLATEC library version.
   !   870813  Minor cosmetic changes.
@@ -93,7 +103,7 @@ REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   930504  Corrected to set VALUE=0 when IERR.ne.0.  (FNF)
-  !***END PROLOGUE  PCHID
+  
   !
   !  Programming notes:
   !  1. This routine uses a special formula that is valid only for
@@ -117,7 +127,7 @@ REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !  INITIALIZE.
   !
   DATA zero/0./, half/0.5/, six/6./
-  !***FIRST EXECUTABLE STATEMENT  PCHID
+  !* FIRST EXECUTABLE STATEMENT  PCHID
   value = zero
   !
   !  VALIDITY-CHECK ARGUMENTS.

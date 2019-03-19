@@ -1,13 +1,17 @@
-!DECK LA05AS
+!** LA05AS
 SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  LA05AS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (LA05AS-S, LA05AD-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (LA05AS-S, LA05AD-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THIS SUBPROGRAM IS A SLIGHT MODIFICATION OF A SUBPROGRAM
   !     FROM THE C. 1979 AERE HARWELL LIBRARY.  THE NAME OF THE
@@ -37,10 +41,14 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   ! FOR ROWS/COLS THAT HAVE BEEN PIVOTAL IW(I,5),IW(I,6) HOLD NEGATION OF
   !     POSITION OF ROW/COL I IN THE PIVOTAL ORDERING.
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  LA05ES, MC20AS, R1MACH, XERMSG, XSETUN
-  !***COMMON BLOCKS    LA05DS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  LA05ES, MC20AS, R1MACH, XERMSG, XSETUN
+  !***
+  ! COMMON BLOCKS    LA05DS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Corrected references to XERRWV.  (WRB)
@@ -49,7 +57,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  !***END PROLOGUE  LA05AS
+  
   REAL eps, R1MACH
   INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, &
     k, k1, k2, kc, kcost, kj, kk, kl
@@ -66,7 +74,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   ! EPS IS THE RELATIVE ACCURACY OF FLOATING-POINT COMPUTATION
   SAVE eps, first
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  LA05AS
+  !* FIRST EXECUTABLE STATEMENT  LA05AS
   IF ( first ) eps = 2.0E0*R1MACH(4)
   first = .FALSE.
   !

@@ -1,16 +1,23 @@
-!DECK CINVIT
+!** CINVIT
 SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CINVIT
-  !***PURPOSE  Compute the eigenvectors of a complex upper Hessenberg
+  !>
+  !***
+  !  Compute the eigenvectors of a complex upper Hessenberg
   !            associated with specified eigenvalues using inverse
   !            iteration.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C2B
-  !***TYPE      COMPLEX (INVIT-S, CINVIT-C)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C2B
+  !***
+  ! **Type:**      COMPLEX (INVIT-S, CINVIT-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure CXINVIT
   !     by Peters and Wilkinson.
@@ -99,19 +106,22 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  CDIV, PYTHAG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDIV, PYTHAG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CINVIT
+  
   !
   INTEGER i, j, k, M, N, s, ii, Mm, mp, Nm, uk, ip1, its, km1, &
     Ierr
@@ -121,7 +131,7 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
   REAL PYTHAG
   LOGICAL Select(N)
   !
-  !***FIRST EXECUTABLE STATEMENT  CINVIT
+  !* FIRST EXECUTABLE STATEMENT  CINVIT
   Ierr = 0
   uk = 0
   s = 1

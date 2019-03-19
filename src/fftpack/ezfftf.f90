@@ -1,15 +1,22 @@
-!DECK EZFFTF
+!** EZFFTF
 SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  EZFFTF
-  !***PURPOSE  Compute a simplified real, periodic, fast Fourier forward
+  !>
+  !***
+  !  Compute a simplified real, periodic, fast Fourier forward
   !            transform.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A1
-  !***TYPE      SINGLE PRECISION (EZFFTF-S)
-  !***KEYWORDS  FFTPACK, FOURIER TRANSFORM
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A1
+  !***
+  ! **Type:**      SINGLE PRECISION (EZFFTF-S)
+  !***
+  ! **Keywords:**  FFTPACK, FOURIER TRANSFORM
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !  Subroutine EZFFTF computes the Fourier coefficients of a real
   !  periodic sequence (Fourier analysis).  The transform is defined
@@ -54,11 +61,14 @@ SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
   !
   !                    2./N*R(I)*SIN(K*(I-1)*2*PI/N)
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  RFFTF
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  RFFTF
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -70,11 +80,11 @@ SUBROUTINE EZFFTF(N,R,Azero,A,B,Wsave)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  EZFFTF
+  
   REAL A, Azero, B, cf, cfm, R, Wsave
   INTEGER i, N, ns2, ns2m
   DIMENSION R(*), A(*), B(*), Wsave(*)
-  !***FIRST EXECUTABLE STATEMENT  EZFFTF
+  !* FIRST EXECUTABLE STATEMENT  EZFFTF
   IF ( N<2 ) THEN
     Azero = R(1)
     RETURN

@@ -1,19 +1,26 @@
-!DECK SINTRP
+!** SINTRP
 SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
     Og,Ow,Ox,Oy)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SINTRP
-  !***PURPOSE  Approximate the solution at XOUT by evaluating the
+  !>
+  !***
+  !  Approximate the solution at XOUT by evaluating the
   !            polynomial computed in STEPS at XOUT.  Must be used in
   !            conjunction with STEPS.
-  !***LIBRARY   SLATEC (DEPAC)
-  !***CATEGORY  I1A1B
-  !***TYPE      SINGLE PRECISION (SINTRP-S, DINTP-D)
-  !***KEYWORDS  ADAMS METHOD, DEPAC, INITIAL VALUE PROBLEMS, ODE,
+  !***
+  ! **Library:**   SLATEC (DEPAC)
+  !***
+  ! **Category:**  I1A1B
+  !***
+  ! **Type:**      SINGLE PRECISION (SINTRP-S, DINTP-D)
+  !***
+  ! **Keywords:**  ADAMS METHOD, DEPAC, INITIAL VALUE PROBLEMS, ODE,
   !             ORDINARY DIFFERENTIAL EQUATIONS, PREDICTOR-CORRECTOR,
   !             SMOOTH INTERPOLANT
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   The methods in subroutine  STEPS  approximate the solution near  X
   !   by a polynomial.  Subroutine  SINTRP  approximates the solution at
@@ -42,16 +49,19 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
   !   The remaining parameters are returned unaltered from their input
   !   values.  Integration with  STEPS  may be continued.
   !
-  !***REFERENCES  H. A. Watts, A smoother interpolant for DE/STEP, INTRP
+  !***
+  ! **References:**  H. A. Watts, A smoother interpolant for DE/STEP, INTRP
   !                 II, Report SAND84-0293, Sandia Laboratories, 1984.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   840201  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SINTRP
+  
   REAL alp, Alpha, c, g, gamma, gdi, gdif, Gi, h, hi, hmu, Og, &
     Ow, Ox, Oy, Phi, rmu, sigma, temp1, temp2
   REAL temp3, w, X, xi, xim1, xiq, Xout, Y, Yout, Ypout
@@ -60,7 +70,7 @@ SUBROUTINE SINTRP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,&
   DIMENSION g(13), c(13), w(13), Og(13), Ow(12), Alpha(12), Gi(11), &
     Iv(10)
   !
-  !***FIRST EXECUTABLE STATEMENT  SINTRP
+  !* FIRST EXECUTABLE STATEMENT  SINTRP
   kp1 = Kold + 1
   kp2 = Kold + 2
   !

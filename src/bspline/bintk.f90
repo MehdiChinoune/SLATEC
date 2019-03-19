@@ -1,15 +1,22 @@
-!DECK BINTK
+!** BINTK
 SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BINTK
-  !***PURPOSE  Compute the B-representation of a spline which interpolates
+  !>
+  !***
+  !  Compute the B-representation of a spline which interpolates
   !            given data.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E1A
-  !***TYPE      SINGLE PRECISION (BINTK-S, DBINTK-D)
-  !***KEYWORDS  B-SPLINE, DATA FITTING, INTERPOLATION
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E1A
+  !***
+  ! **Type:**      SINGLE PRECISION (BINTK-S, DBINTK-D)
+  !***
+  ! **Keywords:**  B-SPLINE, DATA FITTING, INTERPOLATION
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Written by Carl de Boor and modified by D. E. Amos
   !
@@ -69,7 +76,8 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
   !         Improper  input is a fatal error
   !         Singular system of equations is a fatal error
   !
-  !***REFERENCES  D. E. Amos, Computation with splines and B-splines,
+  !***
+  ! **References:**  D. E. Amos, Computation with splines and B-splines,
   !                 Report SAND78-1968, Sandia Laboratories, March 1979.
   !               Carl de Boor, Package for calculating with B-splines,
   !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
@@ -77,8 +85,10 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
   !               Carl de Boor, A Practical Guide to Splines, Applied
   !                 Mathematics Series 27, Springer-Verlag, New York,
   !                 1978.
-  !***ROUTINES CALLED  BNFAC, BNSLV, BSPVN, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  BNFAC, BNSLV, BSPVN, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -88,13 +98,13 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BINTK
+  
   !
   INTEGER iflag, iwork, K, N, i, ilp1mx, j, jj, km1, kpkm2, left, &
     lenq, np1
   REAL Bcoef(*), Y(*), Q(*), T(*), X(*), xi, Work(*)
   !     DIMENSION Q(2*K-1,N), T(N+K)
-  !***FIRST EXECUTABLE STATEMENT  BINTK
+  !* FIRST EXECUTABLE STATEMENT  BINTK
   IF ( K<1 ) THEN
     CALL XERMSG('SLATEC','BINTK','K DOES NOT SATISFY K.GE.1',2,1)
     RETURN

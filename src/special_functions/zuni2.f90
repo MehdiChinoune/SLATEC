@@ -1,13 +1,17 @@
-!DECK ZUNI2
+!** ZUNI2
 SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZUNI2
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESI and ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CUNI2-A, ZUNI2-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZBESI and ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CUNI2-A, ZUNI2-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZUNI2 COMPUTES I(FNU,Z) IN THE RIGHT HALF PLANE BY MEANS OF
   !     UNIFORM ASYMPTOTIC EXPANSION FOR J(FNU,ZN) WHERE ZN IS Z*I
@@ -19,12 +23,15 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !     FORMULA FOR ORDERS FNU TO FNU+NLAST-1 BECAUSE FNU+NLAST-1.LT.FNUL.
   !     Y(I)=CZERO FOR I=NLAST+1,N
   !
-  !***SEE ALSO  ZBESI, ZBESK
-  !***ROUTINES CALLED  D1MACH, ZABS, ZAIRY, ZUCHK, ZUNHJ, ZUOIK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZBESI, ZBESK
+  !***
+  ! **Routines called:**  D1MACH, ZABS, ZAIRY, ZUCHK, ZUNHJ, ZUOIK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ZUNI2
+  
   !     COMPLEX AI,ARG,ASUM,BSUM,CFN,CI,CID,CIP,CONE,CRSC,CSCL,CSR,CSS,
   !    *CZERO,C1,C2,DAI,PHI,RZ,S1,S2,Y,Z,ZB,ZETA1,ZETA2,ZN
   REAL(8) :: aarg, aic, aii, air, Alim, ang, aphi, argi, &
@@ -46,7 +53,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     cipi(4)/1.0D0, 0.0D0, 0.0D0, 1.0D0, -1.0D0, 0.0D0, 0.0D0, &
     -1.0D0/
   DATA hpi, aic/1.57079632679489662D+00, 1.265512123484645396D+00/
-  !***FIRST EXECUTABLE STATEMENT  ZUNI2
+  !* FIRST EXECUTABLE STATEMENT  ZUNI2
   Nz = 0
   nd = N
   Nlast = 0

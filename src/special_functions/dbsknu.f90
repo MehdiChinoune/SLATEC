@@ -1,13 +1,17 @@
-!DECK DBSKNU
+!** DBSKNU
 SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBSKNU
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (BESKNU-S, DBSKNU-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (BESKNU-S, DBSKNU-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract  **** A DOUBLE PRECISION routine ****
   !         DBSKNU computes N member sequences of K Bessel functions
@@ -66,12 +70,16 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
   !         Overflow - a fatal error
   !         Underflow with KODE=1 - a non-fatal error (NZ.NE.0)
   !
-  !***SEE ALSO  DBESK
-  !***REFERENCES  N. M. Temme, On the numerical evaluation of the modified
+  !***
+  ! **See also:**  DBESK
+  !***
+  ! **References:**  N. M. Temme, On the numerical evaluation of the modified
   !                 Bessel function of the third kind, Journal of
   !                 Computational Physics 19, (1975), pp. 324-337.
-  !***ROUTINES CALLED  D1MACH, DGAMMA, I1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, DGAMMA, I1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790201  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -83,7 +91,7 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DBSKNU
+  
   !
   INTEGER i, iflag, inu, j, k, kk, Kode, koded, N, nn, Nz
   INTEGER I1MACH
@@ -103,7 +111,7 @@ SUBROUTINE DBSKNU(X,Fnu,Kode,N,Y,Nz)
     -4.21977345555443D-02, 7.21894324666300D-03, &
     -2.15241674114900D-04, -2.01348547807000D-05, &
     1.13302723200000D-06, 6.11609500000000D-09/
-  !***FIRST EXECUTABLE STATEMENT  DBSKNU
+  !* FIRST EXECUTABLE STATEMENT  DBSKNU
   kk = -I1MACH(15)
   elim = 2.303D0*(kk*D1MACH(5)-3.0D0)
   ak = D1MACH(3)

@@ -1,24 +1,28 @@
-!DECK CDNTL
+!** CDNTL
 SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     Ml,Mu,N,Nde,Save1,T,Uround,USERS,Y,Ywt,H,Mntold,Mtrold,&
     Nfe,Rc,Yh,A,Convrg,El,Fac,Ier,Ipvt,Nq,Nwait,Rh,Rmax,&
     Save2,Tq,Trend,Iswflg,Jstate)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CDNTL
-  !***SUBSIDIARY
-  !***PURPOSE  Subroutine CDNTL is called to set parameters on the first
+  !>
+  !***
+  !  Subroutine CDNTL is called to set parameters on the first
   !            call to CDSTP, on an internal restart, or when the user has
   !            altered MINT, MITER, and/or H.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***TYPE      COMPLEX (SDNTL-S, DDNTL-D, CDNTL-C)
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Type:**      COMPLEX (SDNTL-S, DDNTL-D, CDNTL-C)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  On the first call, the order is set to 1 and the initial derivatives
   !  are calculated.  RMAX is the maximum ratio by which H can be
@@ -34,11 +38,13 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   !  the coefficient L(0)*H.  If the caller has changed MITER, RC is
   !  set to 0 to force the partials to be updated, if partials are used.
   !
-  !***ROUTINES CALLED  CDCST, CDSCL, CGBFA, CGBSL, CGEFA, CGESL, SCNRM2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDCST, CDSCL, CGBFA, CGBSL, CGEFA, CGESL, SCNRM2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  CDNTL
+  
   INTEGER i, iflag, Impl, info, Iswflg, Jstate, Jtask, Matdim, &
     Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mu, N, Nde, &
     Nfe, Nq, Nwait
@@ -49,7 +55,7 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   INTEGER Ipvt(*)
   LOGICAL Convrg, Ier
   PARAMETER (RMINIT=10000.E0)
-  !***FIRST EXECUTABLE STATEMENT  CDNTL
+  !* FIRST EXECUTABLE STATEMENT  CDNTL
   Ier = .FALSE.
   IF ( Jtask>=0 ) THEN
     IF ( Jtask==0 ) THEN

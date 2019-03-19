@@ -1,15 +1,19 @@
-!DECK DPLPCE
+!** DPLPCE
 SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
     Iwr,Ind,Ibb,Erdnrm,Eps,Tune,Gg,Amat,Basmat,Csc,Wr,Ww,&
     Primal,Erd,Erp,Singlr,Redbas)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPLPCE
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SPLPCE-S, DPLPCE-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPLPCE-S, DPLPCE-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THE EDITING REQUIRED TO CONVERT THIS SUBROUTINE FROM SINGLE TO
   !     DOUBLE PRECISION INVOLVES THE FOLLOWING CHARACTER STRING CHANGES.
@@ -26,16 +30,19 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   !     THE MAIN PART OF THE PROCEDURE (COMPUTE ERROR IN DUAL AND PRIMAL
   !     SYSTEMS).
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  DASUM, DCOPY, DPRWPG, IDLOC, LA05BD
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  DASUM, DCOPY, DPRWPG, IDLOC, LA05BD
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
   !   890606  Changed references from IPLOC to IDLOC.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DPLPCE
+  
   INTEGER i, IDLOC, ihi, il1, ilow, ipage, Itbrc, Itlp, iu1, j, &
     key, l, Lbm, Lmx, lpg, Mrelas, n20002, n20012, n20016, n20023
   INTEGER n20047, n20057, n20061, Nvars
@@ -46,7 +53,7 @@ SUBROUTINE DPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
     zero, ten, Tune
   REAL(8) :: DASUM
   LOGICAL Singlr, Redbas, trans, pagepl
-  !***FIRST EXECUTABLE STATEMENT  DPLPCE
+  !* FIRST EXECUTABLE STATEMENT  DPLPCE
   zero = 0.D0
   one = 1.D0
   ten = 10.D0

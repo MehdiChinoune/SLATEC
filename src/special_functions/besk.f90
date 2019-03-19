@@ -1,18 +1,25 @@
-!DECK BESK
+!** BESK
 SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BESK
-  !***PURPOSE  Implement forward recursion on the three term recursion
+  !>
+  !***
+  !  Implement forward recursion on the three term recursion
   !            relation for a sequence of non-negative order Bessel
   !            functions K/SUB(FNU+I-1)/(X), or scaled Bessel functions
   !            EXP(X)*K/SUB(FNU+I-1)/(X), I=1,...,N for real, positive
   !            X and non-negative orders FNU.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10B3
-  !***TYPE      SINGLE PRECISION (BESK-S, DBESK-D)
-  !***KEYWORDS  K BESSEL FUNCTION, SPECIAL FUNCTIONS
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10B3
+  !***
+  ! **Type:**      SINGLE PRECISION (BESK-S, DBESK-D)
+  !***
+  ! **Keywords:**  K BESSEL FUNCTION, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !         BESK implements forward recursion on the three term
@@ -56,15 +63,18 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   !         Overflow - a fatal error
   !         Underflow with KODE=1 -  a non-fatal error (NZ .NE. 0)
   !
-  !***REFERENCES  F. W. J. Olver, Tables of Bessel Functions of Moderate
+  !***
+  ! **References:**  F. W. J. Olver, Tables of Bessel Functions of Moderate
   !                 or Large Orders, NPL Mathematical Tables 6, Her
   !                 Majesty's Stationery Office, London, 1962.
   !               N. M. Temme, On the numerical evaluation of the modified
   !                 Bessel function of the third kind, Journal of
   !                 Computational Physics 19, (1975), pp. 324-337.
-  !***ROUTINES CALLED  ASYIK, BESK0, BESK0E, BESK1, BESK1E, BESKNU,
+  !***
+  ! **Routines called:**  ASYIK, BESK0, BESK0E, BESK1, BESK1E, BESKNU,
   !                    I1MACH, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790201  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -73,7 +83,7 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BESK
+  
   !
   INTEGER i, j, k, Kode, mz, N, nb, nd, nn, nud, nulim, Nz
   INTEGER I1MACH
@@ -83,7 +93,7 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   DIMENSION w(2), nulim(2), Y(*)
   SAVE nulim
   DATA nulim(1), nulim(2)/35, 70/
-  !***FIRST EXECUTABLE STATEMENT  BESK
+  !* FIRST EXECUTABLE STATEMENT  BESK
   nn = -I1MACH(12)
   elim = 2.303E0*(nn*R1MACH(5)-3.0E0)
   xlim = R1MACH(1)*1.0E+3

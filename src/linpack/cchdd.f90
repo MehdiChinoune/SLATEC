@@ -1,16 +1,23 @@
-!DECK CCHDD
+!** CCHDD
 SUBROUTINE CCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CCHDD
-  !***PURPOSE  Downdate an augmented Cholesky decomposition or the
+  !>
+  !***
+  !  Downdate an augmented Cholesky decomposition or the
   !            triangular factor of an augmented QR decomposition.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D7B
-  !***TYPE      COMPLEX (SCHDD-S, DCHDD-D, CCHDD-C)
-  !***KEYWORDS  CHOLESKY DECOMPOSITION, DOWNDATE, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D7B
+  !***
+  ! **Type:**      COMPLEX (SCHDD-S, DCHDD-D, CCHDD-C)
+  !***
+  ! **Keywords:**  CHOLESKY DECOMPOSITION, DOWNDATE, LINEAR ALGEBRA, LINPACK,
   !             MATRIX
-  !***AUTHOR  Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Stewart, G. W., (U. of Maryland)
+  !***
+  ! **Description:**
   !
   !     CCHDD downdates an augmented Cholesky decomposition or the
   !     triangular factor of an augmented QR decomposition.
@@ -114,10 +121,13 @@ SUBROUTINE CCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   !                             downdated.  The offending RHO's are
   !                             set to -1.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CDOTC, SCNRM2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDOTC, SCNRM2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -126,7 +136,7 @@ SUBROUTINE CCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CCHDD
+  
   REAL scale
   INTEGER Ldr, P, Ldz, Nz, Info
   COMPLEX R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
@@ -139,7 +149,7 @@ SUBROUTINE CCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   !     SOLVE THE SYSTEM CTRANS(R)*A = X, PLACING THE RESULT
   !     IN THE ARRAY S.
   !
-  !***FIRST EXECUTABLE STATEMENT  CCHDD
+  !* FIRST EXECUTABLE STATEMENT  CCHDD
   Info = 0
   S(1) = CONJG(X(1))/CONJG(R(1,1))
   IF ( P>=2 ) THEN

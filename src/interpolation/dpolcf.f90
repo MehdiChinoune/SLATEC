@@ -1,16 +1,23 @@
-!DECK DPOLCF
+!** DPOLCF
 SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPOLCF
-  !***PURPOSE  Compute the coefficients of the polynomial fit (including
+  !>
+  !***
+  !  Compute the coefficients of the polynomial fit (including
   !            Hermite polynomial fits) produced by a previous call to
   !            POLINT.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E1B
-  !***TYPE      DOUBLE PRECISION (POLCOF-S, DPOLCF-D)
-  !***KEYWORDS  COEFFICIENTS, POLYNOMIAL
-  !***AUTHOR  Huddleston, R. E., (SNLL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E1B
+  !***
+  ! **Type:**      DOUBLE PRECISION (POLCOF-S, DPOLCF-D)
+  !***
+  ! **Keywords:**  COEFFICIENTS, POLYNOMIAL
+  !***
+  ! **Author:**  Huddleston, R. E., (SNLL)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !        Subroutine DPOLCF computes the coefficients of the polynomial
@@ -52,20 +59,23 @@ SUBROUTINE DPOLCF(Xx,N,X,C,D,Work)
   !     coefficients produced by DPLINT, much more accuracy may be
   !     expected by calling DPOLVL as opposed to writing your own scheme.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890213  DATE WRITTEN
   !   891006  Cosmetic changes to prologue.  (WRB)
   !   891024  Corrected KEYWORD section.  (WRB)
   !   891024  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DPOLCF
+  
   !
   INTEGER i, im1, k, km1, km1pi, km2n, km2npi, N, nm1, nmkp1, &
     npkm1
   REAL(8) :: C(*), D(*), pone, ptwo, X(*), Xx, Work(*)
-  !***FIRST EXECUTABLE STATEMENT  DPOLCF
+  !* FIRST EXECUTABLE STATEMENT  DPOLCF
   DO k = 1, N
     D(k) = C(k)
   ENDDO

@@ -1,15 +1,22 @@
-!DECK DPOFA
+!** DPOFA
 SUBROUTINE DPOFA(A,Lda,N,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPOFA
-  !***PURPOSE  Factor a real symmetric positive definite matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1B
-  !***TYPE      DOUBLE PRECISION (SPOFA-S, DPOFA-D, CPOFA-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION,
+  !>
+  !***
+  !  Factor a real symmetric positive definite matrix.
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1B
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPOFA-S, DPOFA-D, CPOFA-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION,
   !             POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DPOFA factors a double precision symmetric positive definite
   !     matrix.
@@ -42,10 +49,13 @@ SUBROUTINE DPOFA(A,Lda,N,Info)
   !                = K  signals an error condition.  The leading minor
   !                     of order  K  is not positive definite.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -54,14 +64,14 @@ SUBROUTINE DPOFA(A,Lda,N,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DPOFA
+  
   INTEGER Lda, N, Info
   REAL(8) :: A(Lda,*)
   !
   REAL(8) :: DDOT, t
   REAL(8) :: s
   INTEGER j, jm1, k
-  !***FIRST EXECUTABLE STATEMENT  DPOFA
+  !* FIRST EXECUTABLE STATEMENT  DPOFA
   DO j = 1, N
     Info = j
     s = 0.0D0

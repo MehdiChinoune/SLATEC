@@ -1,27 +1,34 @@
-!DECK DQAWS
+!** DQAWS
 SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
     Ier,Limit,Lenw,Last,Iwork,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQAWS
-  !***PURPOSE  The routine calculates an approximation result to a given
+  !>
+  !***
+  !  The routine calculates an approximation result to a given
   !            definite integral I = Integral of F*W over (A,B),
   !            (where W shows a singular behaviour at the end points
   !            see parameter INTEGR).
   !            Hopefully satisfying following claim for accuracy
   !            ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I)).
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A2A1
-  !***TYPE      DOUBLE PRECISION (QAWS-S, DQAWS-D)
-  !***KEYWORDS  ALGEBRAIC-LOGARITHMIC END POINT SINGULARITIES,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A2A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (QAWS-S, DQAWS-D)
+  !***
+  ! **Keywords:**  ALGEBRAIC-LOGARITHMIC END POINT SINGULARITIES,
   !             AUTOMATIC INTEGRATOR, CLENSHAW-CURTIS METHOD,
   !             GLOBALLY ADAPTIVE, QUADPACK, QUADRATURE, SPECIAL-PURPOSE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Integration of functions having algebraico-logarithmic
   !        end point singularities
@@ -167,15 +174,18 @@ SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   !                     WORK(LIMIT*3+1), ..., WORK(LIMIT*3+LAST)
   !                      contain the error estimates.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DQAWSE, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DQAWSE, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DQAWS
+  
   !
   REAL(8) :: A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, F, &
     Result, Work
@@ -188,7 +198,7 @@ SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQAWS
+  !* FIRST EXECUTABLE STATEMENT  DQAWS
   Ier = 6
   Neval = 0
   Last = 0

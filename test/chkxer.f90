@@ -1,23 +1,29 @@
-!DECK CHKXER
+!** CHKXER
 SUBROUTINE CHKXER(Srnamt,Infot,Nout,Fatal,Kprint)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHKXER
-  !***SUBSIDIARY
-  !***PURPOSE  Test whether an error has been detected.
-  !***LIBRARY   SLATEC (BLAS)
-  !***AUTHOR  Du Croz, J. J., (NAG)
+  !>
+  !***
+  !  Test whether an error has been detected.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Author:**  Du Croz, J. J., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  Tests whether an error has been detected.
   !
   !  Auxiliary routine for test program for Level 2 Blas.
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  NUMXER
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  NUMXER
+
+  !* REVISION HISTORY  (YYMMDD)
   !   870810  DATE WRITTEN
   !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-  !***END PROLOGUE  CHKXER
+  
   !     .. Scalar Arguments ..
   LOGICAL Fatal
   INTEGER Infot, Kprint, Nout
@@ -27,7 +33,7 @@ SUBROUTINE CHKXER(Srnamt,Infot,Nout,Fatal,Kprint)
   !     .. External Functions ..
   INTEGER NUMXER
   EXTERNAL NUMXER
-  !***FIRST EXECUTABLE STATEMENT  CHKXER
+  !* FIRST EXECUTABLE STATEMENT  CHKXER
   IF ( NUMXER(nerr)/=Infot ) THEN
     Fatal = .TRUE.
     IF ( Kprint>=3 ) WRITE (Nout,FMT=99001) Infot, Srnamt

@@ -1,28 +1,35 @@
-!DECK DQAWO
+!** DQAWO
 SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     Leniw,Maxp1,Lenw,Last,Iwork,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQAWO
-  !***PURPOSE  Calculate an approximation to a given definite integral
+  !>
+  !***
+  !  Calculate an approximation to a given definite integral
   !            I= Integral of F(X)*W(X) over (A,B), where
   !                   W(X) = COS(OMEGA*X)
   !               or  W(X) = SIN(OMEGA*X),
   !            hopefully satisfying the following claim for accuracy
   !                ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I)).
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A2A1
-  !***TYPE      DOUBLE PRECISION (QAWO-S, DQAWO-D)
-  !***KEYWORDS  AUTOMATIC INTEGRATOR, CLENSHAW-CURTIS METHOD,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A2A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (QAWO-S, DQAWO-D)
+  !***
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, CLENSHAW-CURTIS METHOD,
   !             EXTRAPOLATION, GLOBALLY ADAPTIVE,
   !             INTEGRAND WITH OSCILLATORY COS OR SIN FACTOR, QUADPACK,
   !             QUADRATURE, SPECIAL-PURPOSE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Computation of oscillatory integrals
   !        Standard fortran subroutine
@@ -188,15 +195,18 @@ SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !                      Provide space for storing the Chebyshev moments.
   !                     Note that LIMIT = LENW/2.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DQAWOE, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DQAWOE, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DQAWO
+  
   !
   REAL(8) :: A, Abserr, B, Epsabs, Epsrel, F, Omega, Result, &
     Work
@@ -209,7 +219,7 @@ SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !
   !         CHECK VALIDITY OF LENIW, MAXP1 AND LENW.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQAWO
+  !* FIRST EXECUTABLE STATEMENT  DQAWO
   Ier = 6
   Neval = 0
   Last = 0

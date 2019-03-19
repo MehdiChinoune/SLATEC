@@ -1,15 +1,22 @@
-!DECK SGEFS
+!** SGEFS
 SUBROUTINE SGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SGEFS
-  !***PURPOSE  Solve a general system of linear equations.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2A1
-  !***TYPE      SINGLE PRECISION (SGEFS-S, DGEFS-D, CGEFS-C)
-  !***KEYWORDS  COMPLEX LINEAR EQUATIONS, GENERAL MATRIX,
+  !>
+  !***
+  !  Solve a general system of linear equations.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2A1
+  !***
+  ! **Type:**      SINGLE PRECISION (SGEFS-S, DGEFS-D, CGEFS-C)
+  !***
+  ! **Keywords:**  COMPLEX LINEAR EQUATIONS, GENERAL MATRIX,
   !             GENERAL SYSTEM OF LINEAR EQUATIONS
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !    Subroutine SGEFS solves a general NxN system of single
   !    precision linear equations using LINPACK subroutines SGECO
@@ -88,10 +95,13 @@ SUBROUTINE SGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !                      the user provides otherwise, an error message
   !                      will be printed followed by an abort.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  R1MACH, SGECO, SGESL, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  R1MACH, SGECO, SGESL, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800317  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -100,13 +110,13 @@ SUBROUTINE SGEFS(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SGEFS
+  
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*)
   REAL A(Lda,*), V(*), Work(*), R1MACH
   REAL rcond
   CHARACTER(8) :: xern1, xern2
-  !***FIRST EXECUTABLE STATEMENT  SGEFS
+  !* FIRST EXECUTABLE STATEMENT  SGEFS
   IF ( Lda<N ) THEN
     Ind = -1
     WRITE (xern1,'(I8)') Lda

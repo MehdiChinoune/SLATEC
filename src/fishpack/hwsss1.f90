@@ -1,21 +1,27 @@
-!DECK HWSSS1
+!** HWSSS1
 SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     Elmbda,F,Idimf,Pertrb,Am,Bm,Cm,Sn,Ss,Sint,D)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HWSSS1
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to HWSSSP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (HWSSS1-S)
-  !***AUTHOR  (UNKNOWN)
-  !***SEE ALSO  HWSSSP
-  !***ROUTINES CALLED  GENBUN
-  !***REVISION HISTORY  (YYMMDD)
+  !>
+  !***
+  !  Subsidiary to HWSSSP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (HWSSS1-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **See also:**  HWSSSP
+  !***
+  ! **Routines called:**  GENBUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   891009  Removed unreferenced variables.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  HWSSS1
+  
   REAL Am, at, Bdpf, Bdps, Bdtf, Bdts, Bm, cf, Cm, cnp, cp, csp, &
     ct, D, den, dfn, dfs, dnn, dns, dphi
   REAL dphi2, dsn, dss, dth, dth2, Elmbda, F, fim1, fjj, fm, fn, &
@@ -28,7 +34,7 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   DIMENSION F(Idimf,*), Bdts(*), Bdtf(*), Bdps(*), Bdpf(*), Am(*), &
     Bm(*), Cm(*), Ss(*), Sn(*), D(*), Sint(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  HWSSS1
+  !* FIRST EXECUTABLE STATEMENT  HWSSS1
   mp1 = M + 1
   np1 = N + 1
   fn = N

@@ -1,13 +1,17 @@
-!DECK DU11US
+!** DU11US
 SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DU11US
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DULSIA
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (U11US-S, DU11US-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DULSIA
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (U11US-S, DU11US-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !       This routine performs an LQ factorization of the
   !       matrix A using Householder transformations. Row
@@ -15,17 +19,20 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !       of round-off and to help detect possible rank
   !       deficiency.
   !
-  !***SEE ALSO  DULSIA
-  !***ROUTINES CALLED  DAXPY, DDOT, DNRM2, DSCAL, DSWAP, IDAMAX, ISWAP,
+  !***
+  ! **See also:**  DULSIA
+  !***
+  ! **Routines called:**  DAXPY, DDOT, DNRM2, DSCAL, DSWAP, IDAMAX, ISWAP,
   !                    XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DU11US
+  
   REAL(8) :: A, bb, Db, Eb, H, r2, rmin, sum, t, temp, tn, &
     tt, Ub, W
   INTEGER i, IDAMAX, ii, im1, imin, is, j, jm1, jmax, jp1, kk, &
@@ -37,7 +44,7 @@ SUBROUTINE DU11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !
   !        INITIALIZATION
   !
-  !***FIRST EXECUTABLE STATEMENT  DU11US
+  !* FIRST EXECUTABLE STATEMENT  DU11US
   j = 0
   Krank = M
   DO i = 1, N

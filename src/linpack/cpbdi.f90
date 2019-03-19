@@ -1,17 +1,24 @@
-!DECK CPBDI
+!** CPBDI
 SUBROUTINE CPBDI(Abd,Lda,N,M,Det)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPBDI
-  !***PURPOSE  Compute the determinant of a complex Hermitian positive
+  !>
+  !***
+  !  Compute the determinant of a complex Hermitian positive
   !            definite band matrix using the factors computed by CPBCO or
   !            CPBFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D3D2
-  !***TYPE      COMPLEX (SPBDI-S, DPBDI-D, CPBDI-C)
-  !***KEYWORDS  BANDED, DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D3D2
+  !***
+  ! **Type:**      COMPLEX (SPBDI-S, DPBDI-D, CPBDI-C)
+  !***
+  ! **Keywords:**  BANDED, DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK,
   !             MATRIX, POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CPBDI computes the determinant
   !     of a complex Hermitian positive definite band matrix
@@ -40,10 +47,13 @@ SUBROUTINE CPBDI(Abd,Lda,N,M,Det)
   !                with  1.0 .LE. DET(1) .LT. 10.0
   !                or  DET(1) .EQ. 0.0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -51,14 +61,14 @@ SUBROUTINE CPBDI(Abd,Lda,N,M,Det)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CPBDI
+  
   INTEGER Lda, N, M
   COMPLEX Abd(Lda,*)
   REAL Det(2)
   !
   REAL s
   INTEGER i
-  !***FIRST EXECUTABLE STATEMENT  CPBDI
+  !* FIRST EXECUTABLE STATEMENT  CPBDI
   !
   !     COMPUTE DETERMINANT
   !

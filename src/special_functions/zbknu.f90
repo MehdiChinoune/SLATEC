@@ -1,24 +1,31 @@
-!DECK ZBKNU
+!** ZBKNU
 SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZBKNU
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZAIRY, ZBESH, ZBESI and ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CBKNU-A, ZBKNU-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZAIRY, ZBESH, ZBESI and ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CBKNU-A, ZBKNU-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZBKNU COMPUTES THE K BESSEL FUNCTION IN THE RIGHT HALF Z PLANE.
   !
-  !***SEE ALSO  ZAIRY, ZBESH, ZBESI, ZBESK
-  !***ROUTINES CALLED  D1MACH, DGAMLN, I1MACH, ZABS, ZDIV, ZEXP, ZKSCL,
+  !***
+  ! **See also:**  ZAIRY, ZBESH, ZBESI, ZBESK
+  !***
+  ! **Routines called:**  D1MACH, DGAMLN, I1MACH, ZABS, ZDIV, ZEXP, ZKSCL,
   !                    ZLOG, ZMLT, ZSHCH, ZSQRT, ZUCHK
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP, ZLOG and ZSQRT to EXTERNAL statement.  (RWC)
-  !***END PROLOGUE  ZBKNU
+  
   !
   REAL(8) :: aa, ak, Alim, ascle, a1, a2, bb, bk, bry, caz, &
     cbi, cbr, cc, cchi, cchr, cki, ckr, coefi, &
@@ -52,7 +59,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     -4.21977345555443367D-02, 7.21894324666309954D-03, &
     -2.15241674114950973D-04, -2.01348547807882387D-05, &
     1.13302723198169588D-06, 6.11609510448141582D-09/
-  !***FIRST EXECUTABLE STATEMENT  ZBKNU
+  !* FIRST EXECUTABLE STATEMENT  ZBKNU
   caz = ZABS(Zr,Zi)
   csclr = 1.0D0/Tol
   crscr = Tol

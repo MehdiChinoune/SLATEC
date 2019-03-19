@@ -1,15 +1,21 @@
-!DECK R9AIMP
+!** R9AIMP
 SUBROUTINE R9AIMP(X,Ampl,Theta)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  R9AIMP
-  !***SUBSIDIARY
-  !***PURPOSE  Evaluate the Airy modulus and phase.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10D
-  !***TYPE      SINGLE PRECISION (R9AIMP-S, D9AIMP-D)
-  !***KEYWORDS  AIRY FUNCTION, FNLIB, MODULUS, PHASE, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Evaluate the Airy modulus and phase.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10D
+  !***
+  ! **Type:**      SINGLE PRECISION (R9AIMP-S, D9AIMP-D)
+  !***
+  ! **Keywords:**  AIRY FUNCTION, FNLIB, MODULUS, PHASE, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate the Airy modulus and phase for X .LE. -1.0
   !
@@ -37,15 +43,18 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
   !                               significant figures required  15.07
   !                                    decimal places required  17.34
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  !***END PROLOGUE  R9AIMP
+  
   REAL am21cs, am22cs, Ampl, ath1cs, ath2cs, CSEVL, eta, pi4, &
     R1MACH, sqrtx, Theta, X, xsml, z
   INTEGER INITS, nam21, nam22, nath1, nath2
@@ -196,7 +205,7 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
   DATA ath2cs(32)/ - .00000000000000002E0/
   DATA pi4/0.78539816339744831E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  R9AIMP
+  !* FIRST EXECUTABLE STATEMENT  R9AIMP
   IF ( first ) THEN
     eta = 0.1*R1MACH(3)
     nam21 = INITS(am21cs,40,eta)

@@ -1,26 +1,33 @@
-!DECK SSDCG
+!** SSDCG
 SUBROUTINE SSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSDCG
-  !***PURPOSE  Diagonally Scaled Conjugate Gradient Sparse Ax=b Solver.
+  !>
+  !***
+  !  Diagonally Scaled Conjugate Gradient Sparse Ax=b Solver.
   !            Routine to solve a symmetric positive definite linear
   !            system  Ax = b  using the Preconditioned Conjugate
   !            Gradient method.  The preconditioner is diagonal scaling.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2B4
-  !***TYPE      SINGLE PRECISION (SSDCG-S, DSDCG-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, SLAP, SPARSE,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SSDCG-S, DSDCG-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, SLAP, SPARSE,
   !             SYMMETRIC LINEAR SYSTEM
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM, ITOL, ITMAX
   !     INTEGER ITER, IERR, IUNIT, LENW, IWORK(10), LENIW
   !     REAL B(N), X(N), A(NELT), TOL, ERR, RWORK(5*N)
@@ -28,7 +35,7 @@ SUBROUTINE SSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     CALL SSDCG(N, B, X, NELT, IA, JA, A, ISYM, ITOL, TOL,
   !    $     ITMAX, ITER, ERR, IERR, IUNIT, RWORK, LENW, IWORK, LENIW )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the Matrix.
   ! B      :IN       Real B(N).
@@ -114,7 +121,7 @@ SUBROUTINE SSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   ! LENIW  :IN       Integer.
   !         Length of the integer workspace, IWORK.  LENIW >= 10.
   !
-  ! *Description:
+  !- Description:
   !       This  routine   performs preconditioned conjugate   gradient
   !       method on  the  symmetric positive definite   linear  system
   !       Ax=b.   The preconditioner is  M = DIAG(A), the  diagonal of
@@ -189,27 +196,31 @@ SUBROUTINE SSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !       |51  0 53  0 55|
   !
   !
-  ! *Side Effects:
+  !- Side Effects:
   !       The SLAP Triad format (IA, JA, A) is modified internally  to
   !       be the SLAP Column format.  See above.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  SCG, SSICCG
-  !***REFERENCES  1. Louis Hageman and David Young, Applied Iterative
+  !***
+  ! **See also:**  SCG, SSICCG
+  !***
+  ! **References:**  1. Louis Hageman and David Young, Applied Iterative
   !                  Methods, Academic Press, New York, 1981.
   !               2. Concus, Golub and O'Leary, A Generalized Conjugate
   !                  Gradient Method for the Numerical Solution of
   !                  Elliptic Partial Differential Equations, in Sparse
   !                  Matrix Computations, Bunch and Rose, Eds., Academic
   !                  Press, New York, 1979.
-  !***ROUTINES CALLED  SCG, SCHKW, SS2Y, SSDI, SSDS, SSMV
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SCG, SCHKW, SS2Y, SSDI, SSDS, SSMV
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -221,7 +232,7 @@ SUBROUTINE SSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
-  !***END PROLOGUE  SSDCG
+  
   !     .. Parameters ..
   INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
@@ -236,7 +247,7 @@ SUBROUTINE SSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER locd, locdz, lociw, locp, locr, locw, locz
   !     .. External Subroutines ..
   EXTERNAL SCG, SCHKW, SS2Y, SSDI, SSDS, SSMV
-  !***FIRST EXECUTABLE STATEMENT  SSDCG
+  !* FIRST EXECUTABLE STATEMENT  SSDCG
   !
   Ierr = 0
   IF ( N<1.OR.Nelt<1 ) THEN

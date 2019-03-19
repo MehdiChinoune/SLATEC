@@ -1,13 +1,17 @@
-!DECK DOGLEG
+!** DOGLEG
 SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DOGLEG
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SNSQ and SNSQE
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (DOGLEG-S, DDOGLG-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SNSQ and SNSQE
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (DOGLEG-S, DDOGLG-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Given an M by N matrix A, an N by N nonsingular DIAGONAL
   !     matrix D, an M-vector B, and a positive number DELTA, the
@@ -52,9 +56,12 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !
   !       WA1 and WA2 are work arrays of length N.
   !
-  !***SEE ALSO  SNSQ, SNSQE
-  !***ROUTINES CALLED  ENORM, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SNSQ, SNSQE
+  !***
+  ! **Routines called:**  ENORM, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -62,7 +69,7 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DOGLEG
+  
   INTEGER N, Lr
   REAL Delta
   REAL R(Lr), Diag(*), Qtb(*), X(*), Wa1(*), Wa2(*)
@@ -72,7 +79,7 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   REAL R1MACH, ENORM
   SAVE one, zero
   DATA one, zero/1.0E0, 0.0E0/
-  !***FIRST EXECUTABLE STATEMENT  DOGLEG
+  !* FIRST EXECUTABLE STATEMENT  DOGLEG
   epsmch = R1MACH(4)
   !
   !     FIRST, CALCULATE THE GAUSS-NEWTON DIRECTION.

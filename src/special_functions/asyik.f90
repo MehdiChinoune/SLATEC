@@ -1,13 +1,17 @@
-!DECK ASYIK
+!** ASYIK
 SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ASYIK
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BESI and BESK
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (ASYIK-S, DASYIK-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BESI and BESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (ASYIK-S, DASYIK-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !                    ASYIK computes Bessel functions I and K
   !                  for arguments X.GT.0.0 and orders FNU.GE.35
@@ -42,15 +46,18 @@ SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !         in sign of some of the terms. This change in sign is
   !         accomplished by means of the flag FLGIK = 1 or -1.
   !
-  !***SEE ALSO  BESI, BESK
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BESI, BESK
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  !***END PROLOGUE  ASYIK
+  
   !
   INTEGER In, j, jn, k, kk, Kode, l
   REAL ak, ap, Arg, c, coef, con, etx, Flgik, fn, Fnu, gln, Ra, &
@@ -96,7 +103,7 @@ SUBROUTINE ASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
     -3.75671766607634E+07, 1.32887671664218E+07, &
     -2.78561812808645E+06, 3.08186404612662E+05, &
     -1.38860897537170E+04, 1.10017140269247E+02/
-  !***FIRST EXECUTABLE STATEMENT  ASYIK
+  !* FIRST EXECUTABLE STATEMENT  ASYIK
   tol = R1MACH(3)
   tol = MAX(tol,1.0E-15)
   fn = Fnu

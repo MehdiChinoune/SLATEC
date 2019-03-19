@@ -1,16 +1,23 @@
-!DECK XSET
+!** XSET
 SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XSET
-  !***PURPOSE  To provide single-precision floating-point arithmetic
+  !>
+  !***
+  !  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  A3D
-  !***TYPE      SINGLE PRECISION (XSET-S, DXSET-D)
-  !***KEYWORDS  EXTENDED-RANGE SINGLE-PRECISION ARITHMETIC
-  !***AUTHOR  Lozier, Daniel W., (National Bureau of Standards)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  A3D
+  !***
+  ! **Type:**      SINGLE PRECISION (XSET-S, DXSET-D)
+  !***
+  ! **Keywords:**  EXTENDED-RANGE SINGLE-PRECISION ARITHMETIC
+  !***
+  ! **Author:**  Lozier, Daniel W., (National Bureau of Standards)
   !           Smith, John M., (NBS and George Mason University)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   SUBROUTINE  XSET  MUST BE CALLED PRIOR TO CALLING ANY OTHER
   ! EXTENDED-RANGE SUBROUTINE. IT CALCULATES AND STORES SEVERAL
@@ -105,7 +112,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   ! USAGE
   !                  CALL XADD(X,IX,Y,IY,Z,IZ,IERROR)
   !                  IF (IERROR.NE.0) RETURN
-  ! DESCRIPTION
+  ! **Description:**
   !                  FORMS THE EXTENDED-RANGE SUM  (Z,IZ) =
   !                  (X,IX) + (Y,IY).  (Z,IZ) IS ADJUSTED
   !                  BEFORE RETURNING. THE INPUT OPERANDS
@@ -118,7 +125,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   ! USAGE
   !                  CALL XADJ(X,IX,IERROR)
   !                  IF (IERROR.NE.0) RETURN
-  ! DESCRIPTION
+  ! **Description:**
   !                  TRANSFORMS (X,IX) SO THAT
   !                  RADIX**(-L) .LE. ABS(X) .LT. RADIX**L.
   !                  ON MOST COMPUTERS THIS TRANSFORMATION DOES
@@ -129,7 +136,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   ! USAGE
   !                  CALL XC210(K,Z,J,IERROR)
   !                  IF (IERROR.NE.0) RETURN
-  ! DESCRIPTION
+  ! **Description:**
   !                  GIVEN K THIS SUBROUTINE COMPUTES J AND Z
   !                  SUCH THAT  RADIX**K = Z*10**J, WHERE Z IS IN
   !                  THE RANGE 1/10 .LE. Z .LT. 1.
@@ -146,7 +153,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   ! USAGE
   !                  CALL XCON(X,IX,IERROR)
   !                  IF (IERROR.NE.0) RETURN
-  ! DESCRIPTION
+  ! **Description:**
   !                  CONVERTS (X,IX) = X*RADIX**IX
   !                  TO DECIMAL FORM IN PREPARATION FOR
   !                  PRINTING, SO THAT (X,IX) = X*10**IX
@@ -160,7 +167,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   ! USAGE
   !                  CALL XRED(X,IX,IERROR)
   !                  IF (IERROR.NE.0) RETURN
-  ! DESCRIPTION
+  ! **Description:**
   !                  IF
   !                  RADIX**(-2L) .LE. (ABS(X),IX) .LE. RADIX**(2L)
   !                  THEN XRED TRANSFORMS (X,IX) SO THAT IX=0.
@@ -171,12 +178,16 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !                  ARE TO BE USED IN SUBSEQUENT ORDINARY
   !                  SINGLE-PRECISION CALCULATIONS.
   !
-  !***REFERENCES  Smith, Olver and Lozier, Extended-Range Arithmetic and
+  !***
+  ! **References:**  Smith, Olver and Lozier, Extended-Range Arithmetic and
   !                 Normalized Legendre Polynomials, ACM Trans on Math
   !                 Softw, v 7, n 1, March 1981, pp 93--105.
-  !***ROUTINES CALLED  I1MACH, XERMSG
-  !***COMMON BLOCKS    XBLK1, XBLK2, XBLK3
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  I1MACH, XERMSG
+  !***
+  ! COMMON BLOCKS    XBLK1, XBLK2, XBLK3
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820712  DATE WRITTEN
   !   881020  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
@@ -185,7 +196,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  XSET
+  
   INTEGER i, I1MACH, ic, Ierror, ii, imaxex, iminex, iradx, it, j, &
     k, kk, lg102x, lgtemp, log102, log2r, lx, nb, NBItsf, nbitsx
   INTEGER np1, nrdplc
@@ -217,7 +228,7 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   ! BEEN INITIALIZED. THE USER MAY WANT TO PRE-EMPT THIS CALL, FOR
   ! EXAMPLE WHEN I1MACH IS NOT AVAILABLE. SEE CODING BELOW.
   DATA iflag/0/
-  !***FIRST EXECUTABLE STATEMENT  XSET
+  !* FIRST EXECUTABLE STATEMENT  XSET
   Ierror = 0
   IF ( iflag/=0 ) RETURN
   iradx = Irad

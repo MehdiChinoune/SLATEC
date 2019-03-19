@@ -1,13 +1,17 @@
-!DECK PCHDF
+!** PCHDF
 REAL FUNCTION PCHDF(K,X,S,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PCHDF
-  !***SUBSIDIARY
-  !***PURPOSE  Computes divided differences for PCHCE and PCHSP
-  !***LIBRARY   SLATEC (PCHIP)
-  !***TYPE      SINGLE PRECISION (PCHDF-S, DPCHDF-D)
-  !***AUTHOR  Fritsch, F. N., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Computes divided differences for PCHCE and PCHSP
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Type:**      SINGLE PRECISION (PCHDF-S, DPCHDF-D)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
+  !***
+  ! **Description:**
   !
   !          PCHDF:   PCHIP Finite Difference Formula
   !
@@ -37,11 +41,15 @@ REAL FUNCTION PCHDF(K,X,S,Ierr)
   !
   ! ----------------------------------------------------------------------
   !
-  !***SEE ALSO  PCHCE, PCHSP
-  !***REFERENCES  Carl de Boor, A Practical Guide to Splines, Springer-
+  !***
+  ! **See also:**  PCHCE, PCHSP
+  !***
+  ! **References:**  Carl de Boor, A Practical Guide to Splines, Springer-
   !                 Verlag, New York, 1978, pp. 10-16.
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820503  DATE WRITTEN
   !   820805  Converted to SLATEC library version.
   !   870813  Minor cosmetic changes.
@@ -53,7 +61,7 @@ REAL FUNCTION PCHDF(K,X,S,Ierr)
   !   910408  Updated AUTHOR and DATE WRITTEN sections in prologue.  (WRB)
   !   920429  Revised format and order of references.  (WRB,FNF)
   !   930503  Improved purpose.  (FNF)
-  !***END PROLOGUE  PCHDF
+  
   !
   !**End
   !
@@ -71,7 +79,7 @@ REAL FUNCTION PCHDF(K,X,S,Ierr)
   !
   !  CHECK FOR LEGAL VALUE OF K.
   !
-  !***FIRST EXECUTABLE STATEMENT  PCHDF
+  !* FIRST EXECUTABLE STATEMENT  PCHDF
   IF ( K<3 ) THEN
     !
     !  ERROR RETURN.

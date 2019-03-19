@@ -1,15 +1,22 @@
-!DECK PPQAD
+!** PPQAD
 SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PPQAD
-  !***PURPOSE  Compute the integral on (X1,X2) of a K-th order B-spline
+  !>
+  !***
+  !  Compute the integral on (X1,X2) of a K-th order B-spline
   !            using the piecewise polynomial (PP) representation.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  H2A2A1, E3, K6
-  !***TYPE      SINGLE PRECISION (PPQAD-S, DPPQAD-D)
-  !***KEYWORDS  B-SPLINE, DATA FITTING, INTERPOLATION, QUADRATURE, SPLINES
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  H2A2A1, E3, K6
+  !***
+  ! **Type:**      SINGLE PRECISION (PPQAD-S, DPPQAD-D)
+  !***
+  ! **Keywords:**  B-SPLINE, DATA FITTING, INTERPOLATION, QUADRATURE, SPLINES
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !         PPQAD computes the integral on (X1,X2) of a K-th order
@@ -36,18 +43,21 @@ SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   !     Error Conditions
   !         Improper input is a fatal error
   !
-  !***REFERENCES  D. E. Amos, Quadrature subroutines for splines and
+  !***
+  ! **References:**  D. E. Amos, Quadrature subroutines for splines and
   !                 B-splines, Report SAND79-1825, Sandia Laboratories,
   !                 December 1979.
-  !***ROUTINES CALLED  INTRV, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  INTRV, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  PPQAD
+  
   !
   INTEGER i, ii, il, ilo, il1, il2, im, K, Ldc, left, Lxi, mf1, &
     mf2
@@ -55,7 +65,7 @@ SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
     X1, X2
   DIMENSION Xi(*), C(Ldc,*), ss(2)
   !
-  !***FIRST EXECUTABLE STATEMENT  PPQAD
+  !* FIRST EXECUTABLE STATEMENT  PPQAD
   Pquad = 0.0E0
   IF ( K<1 ) THEN
     !

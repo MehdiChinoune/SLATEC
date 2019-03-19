@@ -1,28 +1,35 @@
-!DECK DS2Y
+!** DS2Y
 SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DS2Y
-  !***PURPOSE  SLAP Triad to SLAP Column Format Converter.
+  !>
+  !***
+  !  SLAP Triad to SLAP Column Format Converter.
   !            Routine to convert from the SLAP Triad to SLAP Column
   !            format.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D1B9
-  !***TYPE      DOUBLE PRECISION (SS2Y-S, DS2Y-D)
-  !***KEYWORDS  LINEAR SYSTEM, SLAP SPARSE
-  !***AUTHOR  Seager, Mark K., (LLNL)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D1B9
+  !***
+  ! **Type:**      DOUBLE PRECISION (SS2Y-S, DS2Y-D)
+  !***
+  ! **Keywords:**  LINEAR SYSTEM, SLAP SPARSE
+  !***
+  ! **Author:**  Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM
   !     DOUBLE PRECISION A(NELT)
   !
   !     CALL DS2Y( N, NELT, IA, JA, A, ISYM )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   ! NELT   :IN       Integer.
@@ -40,7 +47,7 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
   !         If ISYM=1, the matrix is symmetric, and only the lower
   !         triangle of the matrix is stored.
   !
-  ! *Description:
+  !- Description:
   !       The Sparse Linear Algebra Package (SLAP) utilizes two matrix
   !       data structures: 1) the  SLAP Triad  format or  2)  the SLAP
   !       Column format.  The user can hand this routine either of the
@@ -110,9 +117,12 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  QS2I1D
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  QS2I1D
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -123,7 +133,7 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
   !   910502  Corrected C***FIRST EXECUTABLE STATEMENT line.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  !***END PROLOGUE  DS2Y
+  
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
@@ -134,7 +144,7 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
   INTEGER i, ibgn, icol, iend, itemp, j
   !     .. External Subroutines ..
   EXTERNAL QS2I1D
-  !***FIRST EXECUTABLE STATEMENT  DS2Y
+  !* FIRST EXECUTABLE STATEMENT  DS2Y
   !
   !         Check to see if the (IA,JA,A) arrays are in SLAP Column
   !         format.  If it's not then transform from SLAP Triad.

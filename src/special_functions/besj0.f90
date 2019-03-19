@@ -1,16 +1,23 @@
-!DECK BESJ0
+!** BESJ0
 REAL FUNCTION BESJ0(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BESJ0
-  !***PURPOSE  Compute the Bessel function of the first kind of order
+  !>
+  !***
+  !  Compute the Bessel function of the first kind of order
   !            zero.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10A1
-  !***TYPE      SINGLE PRECISION (BESJ0-S, DBESJ0-D)
-  !***KEYWORDS  BESSEL FUNCTION, FIRST KIND, FNLIB, ORDER ZERO,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10A1
+  !***
+  ! **Type:**      SINGLE PRECISION (BESJ0-S, DBESJ0-D)
+  !***
+  ! **Keywords:**  BESSEL FUNCTION, FIRST KIND, FNLIB, ORDER ZERO,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! BESJ0(X) calculates the Bessel function of the first kind of
   ! order zero for real argument X.
@@ -33,16 +40,19 @@ REAL FUNCTION BESJ0(X)
   !                               significant figures required  15.53
   !                                    decimal places required  17.13
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890210  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  BESJ0
+  
   REAL ampl, bj0cs, bm0cs, bth0cs, CSEVL, pi4, R1MACH, &
     theta, X, xmax, xsml, y, z
   INTEGER INITS, ntj0, ntm0, ntth0
@@ -110,7 +120,7 @@ REAL FUNCTION BESJ0(X)
   DATA bth0cs(24)/.000000000000000036E0/
   DATA pi4/0.78539816339744831E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BESJ0
+  !* FIRST EXECUTABLE STATEMENT  BESJ0
   IF ( first ) THEN
     ntj0 = INITS(bj0cs,13,0.1*R1MACH(3))
     ntm0 = INITS(bm0cs,21,0.1*R1MACH(3))

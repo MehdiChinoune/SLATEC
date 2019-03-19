@@ -1,13 +1,17 @@
-!DECK DQRFAC
+!** DQRFAC
 SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQRFAC
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DNLS1, DNLS1E, DNSQ and DNSQE
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (QRFAC-S, DQRFAC-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DNLS1, DNLS1E, DNSQ and DNSQE
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (QRFAC-S, DQRFAC-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   **** Double Precision version of QRFAC ****
   !
@@ -72,9 +76,12 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !       WA is a work array of length N. If pivot is .FALSE., then WA
   !         can coincide with SIGMA.
   !
-  !***SEE ALSO  DNLS1, DNLS1E, DNSQ, DNSQE
-  !***ROUTINES CALLED  D1MACH, DENORM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DNLS1, DNLS1E, DNSQ, DNSQE
+  !***
+  ! **Routines called:**  D1MACH, DENORM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -82,7 +89,7 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DQRFAC
+  
   INTEGER M, N, Lda, Lipvt
   INTEGER Ipvt(*)
   LOGICAL Pivot
@@ -92,7 +99,7 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   REAL(8) :: ajnorm, epsmch, one, p05, sum, temp, zero
   REAL(8) :: D1MACH, DENORM
   DATA one, p05, zero/1.0D0, 5.0D-2, 0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  DQRFAC
+  !* FIRST EXECUTABLE STATEMENT  DQRFAC
   epsmch = D1MACH(4)
   !
   !     COMPUTE THE INITIAL COLUMN NORMS AND INITIALIZE SEVERAL ARRAYS.

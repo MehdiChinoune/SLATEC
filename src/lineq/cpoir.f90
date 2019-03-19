@@ -1,16 +1,23 @@
-!DECK CPOIR
+!** CPOIR
 SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPOIR
-  !***PURPOSE  Solve a positive definite Hermitian system of linear
+  !>
+  !***
+  !  Solve a positive definite Hermitian system of linear
   !            equations.  Iterative refinement is used to obtain an
   !            error estimate.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2D1B
-  !***TYPE      COMPLEX (SPOIR-S, CPOIR-C)
-  !***KEYWORDS  HERMITIAN, LINEAR EQUATIONS, POSITIVE DEFINITE, SYMMETRIC
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2D1B
+  !***
+  ! **Type:**      COMPLEX (SPOIR-S, CPOIR-C)
+  !***
+  ! **Keywords:**  HERMITIAN, LINEAR EQUATIONS, POSITIVE DEFINITE, SYMMETRIC
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !    Subroutine CPOIR solves a complex positive definite Hermitian
   !    NxN system of single precision linear equations using LINPACK
@@ -95,10 +102,13 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !                      the user provides otherwise, an error message
   !                      will be printed followed by an abort.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CCOPY, CPOFA, CPOSL, DCDOT, R1MACH, SCASUM, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CCOPY, CPOFA, CPOSL, DCDOT, R1MACH, SCASUM, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800530  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -108,14 +118,14 @@ SUBROUTINE CPOIR(A,Lda,N,V,Itask,Ind,Work)
   !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to
   !           IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CPOIR
+  
   !
   INTEGER Lda, N, Itask, Ind, info, j
   COMPLEX A(Lda,*), V(*), Work(N,*)
   REAL SCASUM, xnorm, dnorm, R1MACH
   REAL(8) :: dr1, di1, dr2, di2
   CHARACTER(8) :: xern1, xern2
-  !***FIRST EXECUTABLE STATEMENT  CPOIR
+  !* FIRST EXECUTABLE STATEMENT  CPOIR
   IF ( Lda<N ) THEN
     Ind = -1
     WRITE (xern1,'(I8)') Lda

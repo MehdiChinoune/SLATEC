@@ -2,15 +2,20 @@ MODULE TEST17_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK BLACHK
+  !** BLACHK
   SUBROUTINE BLACHK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  BLACHK
-    !***PURPOSE  Quick check for Basic Linear Algebra Subprograms.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Lawson, C. L., (JPL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for Basic Linear Algebra Subprograms.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Lawson, C. L., (JPL)
+    !***
+    ! **Description:**
     !
     !     ********************************* TBLA ***************************
     !     TEST DRIVER FOR BASIC LINEAR ALGEBRA SUBPROGRAMS.
@@ -18,13 +23,16 @@ CONTAINS
     !
     !     UPDATED BY K. HASKELL - JUNE 23,1980
     !
-    !***ROUTINES CALLED  CHECK0, CHECK1, CHECK2, HEADER
-    !***COMMON BLOCKS    COMBLA
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CHECK0, CHECK1, CHECK2, HEADER
+    !***
+    ! COMMON BLOCKS    COMBLA
+
+    !* REVISION HISTORY  (YYMMDD)
     !   751210  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  BLACHK
+    
     INTEGER ICAse, INCx, INCy, Kprint, Lun, MODe, N, NPRint
     REAL sdfac, sfac
     INTEGER Ipass, jtest(38)
@@ -35,7 +43,7 @@ CONTAINS
     DATA jtest/1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, &
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, &
       1, 1, 1, 1, 1/
-    !***FIRST EXECUTABLE STATEMENT  BLACHK
+    !* FIRST EXECUTABLE STATEMENT  BLACHK
     NPRint = Lun
     Ipass = 1
     !
@@ -77,20 +85,26 @@ CONTAINS
     99004 FORMAT (/' ****************BLAS FAILED SOME TESTS***************')
     RETURN
   END SUBROUTINE BLACHK
-  !DECK HEADER
+  !** HEADER
   SUBROUTINE HEADER(Kprint)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  HEADER
-    !***PURPOSE  Print header for BLAS quick checks.
-    !***LIBRARY   SLATEC
-    !***AUTHOR  Lawson, C. L., (JPL)
-    !***ROUTINES CALLED  (NONE)
-    !***COMMON BLOCKS    COMBLA
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Print header for BLAS quick checks.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  Lawson, C. L., (JPL)
+    !***
+    ! **Routines called:**  (NONE)
+    !***
+    ! COMMON BLOCKS    COMBLA
+
+    !* REVISION HISTORY  (YYMMDD)
     !   741212  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920210  Minor modifications to prologue and code.  (WRB)
-    !***END PROLOGUE  HEADER
+    
     INTEGER ICAse, INCx, INCy, Kprint, MODe, N, NPRint
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     LOGICAL PASs
@@ -134,22 +148,26 @@ CONTAINS
     DATA l(36)/'ISAMAX'/
     DATA l(37)/'IDAMAX'/
     DATA l(38)/'ICAMAX'/
-    !***FIRST EXECUTABLE STATEMENT  HEADER
+    !* FIRST EXECUTABLE STATEMENT  HEADER
     IF ( Kprint>=2 ) WRITE (NPRint,99001) ICAse, l(ICAse)
     !
     99001 FORMAT (' Test of subprogram number',I3,2X,A)
     RETURN
   END SUBROUTINE HEADER
-  !DECK CHECK0
+  !** CHECK0
   SUBROUTINE CHECK0(Sfac,Dfac,Kprint)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CHECK0
-    !***PURPOSE  (UNKNOWN)
-    !***LIBRARY   SLATEC
-    !***AUTHOR  Lawson, C. L., (JPL)
+    !>
+    !***
+    !  (UNKNOWN)
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  Lawson, C. L., (JPL)
     !           Hanson, R. J., (SNLA)
     !           Wisniewski, J. A., (SNLA)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !     THIS SUBROUTINE TESTS SUBPROGRAMS 12-13 AND 16-17.
     !     THESE SUBPROGRAMS HAVE NO ARRAY ARGUMENTS.
@@ -157,14 +175,17 @@ CONTAINS
     !     C. L. LAWSON, JPL, 1975 MAR 07, MAY 28
     !     R. J. HANSON, J. A. WISNIEWSKI, SANDIA LABS, APRIL 25,1977.
     !
-    !***ROUTINES CALLED  DROTG, DROTMG, DTEST, SROTG, SROTMG, STEST
-    !***COMMON BLOCKS    COMBLA
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  DROTG, DROTMG, DTEST, SROTG, SROTMG, STEST
+    !***
+    ! COMMON BLOCKS    COMBLA
+
+    !* REVISION HISTORY  (YYMMDD)
     !   750307  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  CHECK0
+    
     INTEGER i, ICAse, INCx, INCy, jump, k, Kprint, MODe, N, NPRint
     REAL sa, sb, sc, Sfac, ss, zero
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
@@ -199,7 +220,7 @@ CONTAINS
       0.D0/
     !                   4096 = 2 ** 12
     DATA d12/4096.D0/
-    !***FIRST EXECUTABLE STATEMENT  CHECK0
+    !* FIRST EXECUTABLE STATEMENT  CHECK0
     !
     !                   COMPUTE TRUE VALUES WHICH CANNOT BE PRESTORED
     !                   IN DECIMAL NOTATION.
@@ -285,14 +306,18 @@ CONTAINS
     !                     THE FOLLOWING STOP SHOULD NEVER BE REACHED.
     100  STOP
   END SUBROUTINE CHECK0
-  !DECK CHECK1
+  !** CHECK1
   SUBROUTINE CHECK1(Sfac,Dfac,Kprint)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CHECK1
-    !***PURPOSE  (UNKNOWN)
-    !***LIBRARY   SLATEC
-    !***AUTHOR  Lawson, C. L., (JPL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  (UNKNOWN)
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  Lawson, C. L., (JPL)
+    !***
+    ! **Description:**
     !
     !     THIS SUBPROGRAM TESTS THE INCREMENTING AND ACCURACY OF THE LINEAR
     !     ALGEBRA SUBPROGRAMS 26 - 38 (SNRM2 TO ICAMAX). STORED RESULTS ARE
@@ -304,16 +329,19 @@ CONTAINS
     !                      26 .LE. ICASE .LE. 38
     !     C. L. LAWSON, JPL, 1974 DEC 10, MAY 28
     !
-    !***ROUTINES CALLED  CSCAL, CSSCAL, DASUM, DNRM2, DSCAL, DTEST, ICAMAX,
+    !***
+    ! **Routines called:**  CSCAL, CSSCAL, DASUM, DNRM2, DSCAL, DTEST, ICAMAX,
     !                    IDAMAX, ISAMAX, ITEST, SASUM, SCASUM, SCNRM2,
     !                    SNRM2, SSCAL, STEST
-    !***COMMON BLOCKS    COMBLA
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! COMMON BLOCKS    COMBLA
+
+    !* REVISION HISTORY  (YYMMDD)
     !   741210  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  CHECK1
+    
     INTEGER i, ICAMAX, ICAse, IDAMAX, INCx, INCy, ISAMAX, jump, &
       Kprint, len, MODe, N, np1, NPRint
     REAL sa, SASUM, SCASUM, SCNRM2, Sfac, SNRM2, stemp
@@ -398,7 +426,7 @@ CONTAINS
     !
     DATA itrue2/0, 1, 2, 2, 3/
     DATA itrue3/0, 1, 2, 2, 2/
-    !***FIRST EXECUTABLE STATEMENT  CHECK1
+    !* FIRST EXECUTABLE STATEMENT  CHECK1
     jump = ICAse - 25
     DO INCx = 1, 2
       DO np1 = 1, 5
@@ -467,14 +495,18 @@ CONTAINS
       ENDDO
     ENDDO
   END SUBROUTINE CHECK1
-  !DECK CHECK2
+  !** CHECK2
   SUBROUTINE CHECK2(Sfac,Sdfac,Dfac,Dqfac,Kprint)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CHECK2
-    !***PURPOSE  (UNKNOWN)
-    !***LIBRARY   SLATEC
-    !***AUTHOR  Lawson, C. L., (JPL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  (UNKNOWN)
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  Lawson, C. L., (JPL)
+    !***
+    ! **Description:**
     !
     !     THIS SUBPROGRAM TESTS THE BASIC LINEAR ALGEBRA SUBPROGRAMS 1-11,
     !     14-15, AND 18-25. SUBPROGRAMS IN THIS SET EACH REQUIRE TWO ARRAYS
@@ -482,17 +514,20 @@ CONTAINS
     !
     !     C. L. LAWSON, JPL, 1975 FEB 26, APR 29, MAY 8, MAY 28
     !
-    !***ROUTINES CALLED  CAXPY, CCOPY, CDOTC, CDOTU, CSWAP, DAXPY, DCOPY,
+    !***
+    ! **Routines called:**  CAXPY, CCOPY, CDOTC, CDOTU, CSWAP, DAXPY, DCOPY,
     !                    DDOT, DQDOTA, DQDOTI, DROT, DROTM, DSDOT, DSWAP,
     !                    DTEST, SAXPY, SCOPY, SDOT, SDSDOT, SROT, SROTM,
     !                    SSWAP, STEST
-    !***COMMON BLOCKS    COMBLA
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! COMMON BLOCKS    COMBLA
+
+    !* REVISION HISTORY  (YYMMDD)
     !   750226  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  CHECK2
+    
     INTEGER i, ICAse, INCx, INCy, j, ki, kn, kni, kpar, Kprint, &
       ksize, lenx, leny, MODe, mx, my, N, NPRint
     REAL sa, sb, sc, Sdfac, SDOT, SDSDOT, Sfac, ss
@@ -833,7 +868,7 @@ CONTAINS
     DATA dpar/ - 2.D0, 0.D0, 0.D0, 0.D0, 0.D0, -1.D0, 2.D0, -3.D0, &
       -4.D0, 5.D0, 0.D0, 0.D0, 2.D0, -3.D0, 0.D0, 1.D0, 5.D0, &
       2.D0, 0.D0, -4.D0/
-    !***FIRST EXECUTABLE STATEMENT  CHECK2
+    !* FIRST EXECUTABLE STATEMENT  CHECK2
     DO ki = 1, 4
       INCx = incxs(ki)
       INCy = incys(ki)
@@ -1047,36 +1082,45 @@ CONTAINS
     !                 THE FOLLOWING STOP SHOULD NEVER BE REACHED.
     100  STOP
   END SUBROUTINE CHECK2
-  !DECK ITEST
+  !** ITEST
   SUBROUTINE ITEST(Len,Icomp,Itrue,Kprint)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  ITEST
-    !***PURPOSE  Compare arrays ICOMP and ITRUE.
-    !***LIBRARY   SLATEC
-    !***TYPE      INTEGER (ITEST-I)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Lawson, C. L., (JPL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Compare arrays ICOMP and ITRUE.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      INTEGER (ITEST-I)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Lawson, C. L., (JPL)
+    !***
+    ! **Description:**
     !
     !   This subroutine compares the arrays ICOMP and ITRUE of length LEN
     !   for equality.  In the case of an unequal compare, appropriate
     !   messages are written.
     !
-    !***ROUTINES CALLED  (NONE)
-    !***COMMON BLOCKS    COMBLA
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  (NONE)
+    !***
+    ! COMMON BLOCKS    COMBLA
+
+    !* REVISION HISTORY  (YYMMDD)
     !   741210  DATE WRITTEN
     !   890831  Modified array declarations.  (WRB)
     !   890831  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
-    !***END PROLOGUE  ITEST
+    
     INTEGER i, ICAse, id, INCx, INCy, Kprint, Len, MODe, N, NPRint
     INTEGER Icomp(*), Itrue(*)
     LOGICAL PASs
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
-    !***FIRST EXECUTABLE STATEMENT  ITEST
+    !* FIRST EXECUTABLE STATEMENT  ITEST
     DO i = 1, Len
       IF ( Icomp(i)/=Itrue(i) ) THEN
         !
@@ -1105,25 +1149,34 @@ CONTAINS
     ENDDO
     RETURN
   END SUBROUTINE ITEST
-  !DECK STEST
+  !** STEST
   SUBROUTINE STEST(Len,Scomp,Strue,Ssize,Sfac,Kprint)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  STEST
-    !***PURPOSE  Compare arrays SCOMP and STRUE.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (STEST-S, DTEST-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Lawson, C. L., (JPL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Compare arrays SCOMP and STRUE.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (STEST-S, DTEST-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Lawson, C. L., (JPL)
+    !***
+    ! **Description:**
     !
     !   This subroutine compares arrays SCOMP and STRUE of length LEN to
     !   see if the term by term differences, multiplied by SFAC, are
     !   negligible.  In the case of a significant difference, appropriate
     !   messages are written.
     !
-    !***ROUTINES CALLED  R1MACH
-    !***COMMON BLOCKS    COMBLA
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  R1MACH
+    !***
+    ! COMMON BLOCKS    COMBLA
+
+    !* REVISION HISTORY  (YYMMDD)
     !   741210  DATE WRITTEN
     !   890831  Modified array declarations.  (WRB)
     !   890831  REVISION DATE from Version 3.2
@@ -1134,14 +1187,14 @@ CONTAINS
     !   910501  Added TYPE record.  (WRB)
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
-    !***END PROLOGUE  STEST
+    
     INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
     REAL Scomp(*), Strue(*), Ssize(*), Sfac, sd, releps, R1MACH
     LOGICAL PASs
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     SAVE releps
     DATA releps/0.0E0/
-    !***FIRST EXECUTABLE STATEMENT  STEST
+    !* FIRST EXECUTABLE STATEMENT  STEST
     IF ( releps==0.0E0 ) releps = R1MACH(4)
     DO i = 1, Len
       sd = ABS(Scomp(i)-Strue(i))
@@ -1169,25 +1222,34 @@ CONTAINS
     ENDDO
     RETURN
   END SUBROUTINE STEST
-  !DECK DTEST
+  !** DTEST
   SUBROUTINE DTEST(Len,Dcomp,Dtrue,Dsize,Dfac,Kprint)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DTEST
-    !***PURPOSE  Compare arrays DCOMP and DTRUE.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (STEST-S, DTEST-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Lawson, C. L., (JPL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Compare arrays DCOMP and DTRUE.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (STEST-S, DTEST-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Lawson, C. L., (JPL)
+    !***
+    ! **Description:**
     !
     !   This subroutine compares arrays DCOMP and DTRUE of length LEN to
     !   see if the term by term differences, multiplied by DFAC, are
     !   negligible.  In the case of a significant difference, appropriate
     !   messages are written.
     !
-    !***ROUTINES CALLED  D1MACH
-    !***COMMON BLOCKS    COMBLA
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH
+    !***
+    ! COMMON BLOCKS    COMBLA
+
+    !* REVISION HISTORY  (YYMMDD)
     !   741210  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900820  Modified IF test to use function DDIFF and made cosmetic
@@ -1196,14 +1258,14 @@ CONTAINS
     !   910501  Added TYPE record.  (WRB)
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
-    !***END PROLOGUE  DTEST
+    
     INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
     REAL(8) :: Dcomp(*), Dtrue(*), Dsize(*), Dfac, dd, releps, D1MACH
     LOGICAL PASs
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     SAVE releps
     DATA releps/0.0D0/
-    !***FIRST EXECUTABLE STATEMENT  DTEST
+    !* FIRST EXECUTABLE STATEMENT  DTEST
     IF ( releps==0.0D0 ) releps = D1MACH(4)
     DO i = 1, Len
       dd = ABS(Dcomp(i)-Dtrue(i))
@@ -1234,22 +1296,31 @@ CONTAINS
 
   SUBROUTINE CTEST(Len,Ccomp,Ctrue,Csize,Cfac,Kprint)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DTEST
-    !***PURPOSE  Compare arrays DCOMP and DTRUE.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (STEST-S, DTEST-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Lawson, C. L., (JPL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Compare arrays DCOMP and DTRUE.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (STEST-S, DTEST-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Lawson, C. L., (JPL)
+    !***
+    ! **Description:**
     !
     !   This subroutine compares arrays DCOMP and DTRUE of length LEN to
     !   see if the term by term differences, multiplied by DFAC, are
     !   negligible.  In the case of a significant difference, appropriate
     !   messages are written.
     !
-    !***ROUTINES CALLED  D1MACH
-    !***COMMON BLOCKS    COMBLA
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH
+    !***
+    ! COMMON BLOCKS    COMBLA
+
+    !* REVISION HISTORY  (YYMMDD)
     !   741210  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900820  Modified IF test to use function DDIFF and made cosmetic
@@ -1258,7 +1329,7 @@ CONTAINS
     !   910501  Added TYPE record.  (WRB)
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
-    !***END PROLOGUE  DTEST
+    
     INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
     COMPLEX :: Ccomp(*), Ctrue(*), Csize(*)
     REAL :: Cfac, dd, releps, R1MACH, CABS1
@@ -1266,7 +1337,7 @@ CONTAINS
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     SAVE releps
     DATA releps/0.0/
-    !***FIRST EXECUTABLE STATEMENT  DTEST
+    !* FIRST EXECUTABLE STATEMENT  DTEST
     IF ( releps==0.0 ) releps = R1MACH(4)
     DO i = 1, Len
       dd = CABS1(Ccomp(i)-Ctrue(i))
@@ -1295,24 +1366,31 @@ CONTAINS
     RETURN
   END SUBROUTINE CTEST
 END MODULE TEST17_MOD
-!DECK TEST17
+!** TEST17
 PROGRAM TEST17
   USE TEST17_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST17
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D1
-  !***TYPE      ALL (TEST17-A)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D1
+  !***
+  ! **Type:**      ALL (TEST17-A)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -1324,23 +1402,26 @@ PROGRAM TEST17
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        BLAS SUBPROGRAMS
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  BLACHK, I1MACH, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  BLACHK, I1MACH, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST17
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST17
+  !* FIRST EXECUTABLE STATEMENT  TEST17
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

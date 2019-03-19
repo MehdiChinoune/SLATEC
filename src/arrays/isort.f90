@@ -1,19 +1,26 @@
-!DECK ISORT
+!** ISORT
 SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ISORT
-  !***PURPOSE  Sort an array and optionally make the same interchanges in
+  !>
+  !***
+  !  Sort an array and optionally make the same interchanges in
   !            an auxiliary array.  The array may be sorted in increasing
   !            or decreasing order.  A slightly modified QUICKSORT
   !            algorithm is used.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  N6A2A
-  !***TYPE      INTEGER (SSORT-S, DSORT-D, ISORT-I)
-  !***KEYWORDS  SINGLETON QUICKSORT, SORT, SORTING
-  !***AUTHOR  Jones, R. E., (SNLA)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  N6A2A
+  !***
+  ! **Type:**      INTEGER (SSORT-S, DSORT-D, ISORT-I)
+  !***
+  ! **Keywords:**  SINGLETON QUICKSORT, SORT, SORTING
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
   !           Kahaner, D. K., (NBS)
   !           Wisniewski, J. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   ISORT sorts array IX and optionally makes the same interchanges in
   !   array IY.  The array IX may be sorted in increasing order or
@@ -29,11 +36,14 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !            = -1  means sort IX in decreasing order (ignoring IY)
   !            = -2  means sort IX in decreasing order and carry IY along.
   !
-  !***REFERENCES  R. C. Singleton, Algorithm 347, An efficient algorithm
+  !***
+  ! **References:**  R. C. Singleton, Algorithm 347, An efficient algorithm
   !                 for sorting with minimal storage, Communications of
   !                 the ACM, 12, 3 (1969), pp. 185-187.
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   761118  DATE WRITTEN
   !   810801  Modified by David K. Kahaner.
   !   890531  Changed all specific intrinsics to generic.  (WRB)
@@ -47,7 +57,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   !   920519  Clarified error messages.  (DWL)
   !   920801  Declarations section rebuilt and code restructured to use
   !           IF-THEN-ELSE-ENDIF.  (RWC, WRB)
-  !***END PROLOGUE  ISORT
+  
   !     .. Scalar Arguments ..
   INTEGER Kflag, N
   !     .. Array Arguments ..
@@ -61,7 +71,7 @@ SUBROUTINE ISORT(Ix,Iy,N,Kflag)
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, INT
-  !***FIRST EXECUTABLE STATEMENT  ISORT
+  !* FIRST EXECUTABLE STATEMENT  ISORT
   nn = N
   IF ( nn<1 ) THEN
     CALL XERMSG('SLATEC','ISORT',&

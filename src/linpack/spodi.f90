@@ -1,17 +1,24 @@
-!DECK SPODI
+!** SPODI
 SUBROUTINE SPODI(A,Lda,N,Det,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPODI
-  !***PURPOSE  Compute the determinant and inverse of a certain real
+  !>
+  !***
+  !  Compute the determinant and inverse of a certain real
   !            symmetric positive definite matrix using the factors
   !            computed by SPOCO, SPOFA or SQRDC.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1B, D3B1B
-  !***TYPE      SINGLE PRECISION (SPODI-S, DPODI-D, CPODI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1B, D3B1B
+  !***
+  ! **Type:**      SINGLE PRECISION (SPODI-S, DPODI-D, CPODI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     SPODI computes the determinant and inverse of a certain
   !     real symmetric positive definite matrix (see below)
@@ -58,10 +65,13 @@ SUBROUTINE SPODI(A,Lda,N,Det,Job)
   !        It will not occur if the subroutines are called correctly
   !        and if SPOCO or SPOFA has set INFO .EQ. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SAXPY, SSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SAXPY, SSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -69,7 +79,7 @@ SUBROUTINE SPODI(A,Lda,N,Det,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SPODI
+  
   INTEGER Lda, N, Job
   REAL A(Lda,*)
   REAL Det(2)
@@ -77,7 +87,7 @@ SUBROUTINE SPODI(A,Lda,N,Det,Job)
   REAL t
   REAL s
   INTEGER i, j, jm1, k, kp1
-  !***FIRST EXECUTABLE STATEMENT  SPODI
+  !* FIRST EXECUTABLE STATEMENT  SPODI
   !
   !     COMPUTE DETERMINANT
   !

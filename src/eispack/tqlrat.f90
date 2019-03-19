@@ -1,16 +1,23 @@
-!DECK TQLRAT
+!** TQLRAT
 SUBROUTINE TQLRAT(N,D,E2,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TQLRAT
-  !***PURPOSE  Compute the eigenvalues of symmetric tridiagonal matrix
+  !>
+  !***
+  !  Compute the eigenvalues of symmetric tridiagonal matrix
   !            using a rational variant of the QL method.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A5, D4C2A
-  !***TYPE      SINGLE PRECISION (TQLRAT-S)
-  !***KEYWORDS  EIGENVALUES OF A SYMMETRIC TRIDIAGONAL MATRIX, EISPACK,
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A5, D4C2A
+  !***
+  ! **Type:**      SINGLE PRECISION (TQLRAT-S)
+  !***
+  ! **Keywords:**  EIGENVALUES OF A SYMMETRIC TRIDIAGONAL MATRIX, EISPACK,
   !             QL METHOD
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure TQLRAT.
   !
@@ -49,21 +56,24 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
   !               C. H. Reinsch, Eigenvalues of a real, symmetric, tri-
   !                 diagonal matrix, Algorithm 464, Communications of the
   !                 ACM 16, 11 (November 1973), pp. 689.
-  !***ROUTINES CALLED  PYTHAG, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  PYTHAG, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  TQLRAT
+  
   REAL R1MACH
   INTEGER i, j, l, m, N, ii, l1, mml, Ierr
   REAL D(*), E2(*)
@@ -73,7 +83,7 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
   !
   SAVE first, machep
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  TQLRAT
+  !* FIRST EXECUTABLE STATEMENT  TQLRAT
   IF ( first ) machep = R1MACH(4)
   first = .FALSE.
   !

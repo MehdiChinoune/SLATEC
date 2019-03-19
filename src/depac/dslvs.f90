@@ -1,28 +1,36 @@
-!DECK DSLVS
+!** DSLVS
 SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSLVS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DDEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SLVS-S, DSLVS-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DDEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SLVS-S, DSLVS-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   DSLVS solves the linear system in the iteration scheme for the
   !   integrator package DDEBDF.
   !
-  !***SEE ALSO  DDEBDF
-  !***ROUTINES CALLED  DGBSL, DGESL
-  !***COMMON BLOCKS    DDEBD1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DDEBDF
+  !***
+  ! **Routines called:**  DGBSL, DGESL
+  !***
+  ! COMMON BLOCKS    DDEBD1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-  !***END PROLOGUE  DSLVS
+  
   !
   INTEGER i, IER, IOWnd, IOWns, Iwm, JSTart, KFLag, L, MAXord, &
     meband, METh, MITer, ml, mu, N, NFE, NJE, NQ, NQU, NST
@@ -61,7 +69,7 @@ SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
   !-----------------------------------------------------------------------
   !     BEGIN BLOCK PERMITTING ...EXITS TO 80
   !        BEGIN BLOCK PERMITTING ...EXITS TO 60
-  !***FIRST EXECUTABLE STATEMENT  DSLVS
+  !* FIRST EXECUTABLE STATEMENT  DSLVS
   IER = 0
   SELECT CASE (MITer)
     CASE (3)

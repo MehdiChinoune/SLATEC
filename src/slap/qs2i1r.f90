@@ -1,23 +1,29 @@
-!DECK QS2I1R
+!** QS2I1R
 SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QS2I1R
-  !***SUBSIDIARY
-  !***PURPOSE  Sort an integer array, moving an integer and real array.
+  !>
+  !***
+  !  Sort an integer array, moving an integer and real array.
   !            This routine sorts the integer array IA and makes the same
   !            interchanges in the integer array JA and the real array A.
   !            The array IA may be sorted in increasing order or decreas-
   !            ing order.  A slightly modified QUICKSORT algorithm is
   !            used.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  N6A2A
-  !***TYPE      SINGLE PRECISION (QS2I1R-S, QS2I1D-D)
-  !***KEYWORDS  SINGLETON QUICKSORT, SLAP, SORT, SORTING
-  !***AUTHOR  Jones, R. E., (SNLA)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  N6A2A
+  !***
+  ! **Type:**      SINGLE PRECISION (QS2I1R-S, QS2I1D-D)
+  !***
+  ! **Keywords:**  SINGLETON QUICKSORT, SLAP, SORT, SORTING
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
   !           Kahaner, D. K., (NBS)
   !           Seager, M. K., (LLNL) seager@llnl.gov
   !           Wisniewski, J. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !     Written by Rondall E Jones
   !     Modified by John A. Wisniewski to use the Singleton QUICKSORT
   !     algorithm. date 18 November 1976.
@@ -49,12 +55,16 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
   !           = 1 means sort IA in INCREASING order.
   !           =-1 means sort IA in DECREASING order.
   !
-  !***SEE ALSO  SS2Y
-  !***REFERENCES  R. C. Singleton, Algorithm 347, An Efficient Algorithm
+  !***
+  ! **See also:**  SS2Y
+  !***
+  ! **References:**  R. C. Singleton, Algorithm 347, An Efficient Algorithm
   !                 for Sorting With Minimal Storage, Communications ACM
   !                 12:3 (1969), pp.185-7.
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   761118  DATE WRITTEN
   !   890125  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -67,7 +77,7 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of reference.  (FNF)
   !   921012  Added E0's to f.p. constants.  (FNF)
-  !***END PROLOGUE  QS2I1R
+  
   !VD$R NOVECTOR
   !VD$R NOCONCUR
   !     .. Scalar Arguments ..
@@ -84,7 +94,7 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, INT
-  !***FIRST EXECUTABLE STATEMENT  QS2I1R
+  !* FIRST EXECUTABLE STATEMENT  QS2I1R
   nn = N
   IF ( nn<1 ) THEN
     CALL XERMSG('SLATEC','QS2I1R',&

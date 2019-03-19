@@ -1,14 +1,18 @@
-!DECK C1MERG
+!** C1MERG
 SUBROUTINE C1MERG(Tcos,I1,M1,I2,M2,I3)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  C1MERG
-  !***SUBSIDIARY
-  !***PURPOSE  Merge two strings of complex numbers.  Each string is
+  !>
+  !***
+  !  Merge two strings of complex numbers.  Each string is
   !            ascending by the real part.
-  !***LIBRARY   SLATEC
-  !***TYPE      COMPLEX (S1MERG-S, D1MERG-D, C1MERG-C, I1MERG-I)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      COMPLEX (S1MERG-S, D1MERG-D, C1MERG-C, I1MERG-I)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   This subroutine merges two ascending strings of numbers in the
   !   array TCOS.  The first string is of length M1 and starts at
@@ -16,9 +20,12 @@ SUBROUTINE C1MERG(Tcos,I1,M1,I2,M2,I3)
   !   TCOS(I2+1).  The merged string goes into TCOS(I3+1).  The ordering
   !   is on the real part.
   !
-  !***SEE ALSO  CMGNBN
-  !***ROUTINES CALLED  CCOPY
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CMGNBN
+  !***
+  ! **Routines called:**  CCOPY
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
@@ -26,13 +33,13 @@ SUBROUTINE C1MERG(Tcos,I1,M1,I2,M2,I3)
   !           which was modified earlier due to compiler problems on
   !           the IBM RS6000.  (RWC)
   !   920130  Code name changed from CMPMRG to C1MERG.  (WRB)
-  !***END PROLOGUE  C1MERG
+  
   INTEGER I1, I2, I3, M1, M2
   COMPLEX Tcos(*)
   !
   INTEGER j1, j2, j3
   !
-  !***FIRST EXECUTABLE STATEMENT  C1MERG
+  !* FIRST EXECUTABLE STATEMENT  C1MERG
   IF ( M1==0.AND.M2==0 ) RETURN
   !
   IF ( M1==0.AND.M2/=0 ) THEN

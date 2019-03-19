@@ -1,15 +1,22 @@
-!DECK STRDI
+!** STRDI
 SUBROUTINE STRDI(T,Ldt,N,Det,Job,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  STRDI
-  !***PURPOSE  Compute the determinant and inverse of a triangular matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2A3, D3A3
-  !***TYPE      SINGLE PRECISION (STRDI-S, DTRDI-D, CTRDI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !>
+  !***
+  !  Compute the determinant and inverse of a triangular matrix.
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2A3, D3A3
+  !***
+  ! **Type:**      SINGLE PRECISION (STRDI-S, DTRDI-D, CTRDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             TRIANGULAR
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     STRDI computes the determinant and inverse of a real
   !     triangular matrix.
@@ -53,10 +60,13 @@ SUBROUTINE STRDI(T,Ldt,N,Det,Job,Info)
   !                Otherwise INFO contains the index of
   !                a zero diagonal element of T.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SAXPY, SSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SAXPY, SSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -64,14 +74,14 @@ SUBROUTINE STRDI(T,Ldt,N,Det,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  STRDI
+  
   INTEGER Ldt, N, Job, Info
   REAL T(Ldt,*), Det(2)
   !
   REAL temp
   REAL ten
   INTEGER i, j, k, kb, km1, kp1
-  !***FIRST EXECUTABLE STATEMENT  STRDI
+  !* FIRST EXECUTABLE STATEMENT  STRDI
   !
   !        COMPUTE DETERMINANT
   !

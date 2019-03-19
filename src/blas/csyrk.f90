@@ -1,18 +1,25 @@
-!DECK CSYRK
+!** CSYRK
 SUBROUTINE CSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CSYRK
-  !***PURPOSE  Perform symmetric rank k update of a complex symmetric
+  !>
+  !***
+  !  Perform symmetric rank k update of a complex symmetric
   !            matrix.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B6
-  !***TYPE      COMPLEX (SSYRK-S, DSYRK-D, CSYRK-C)
-  !***KEYWORDS  LEVEL 3 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J., (ANL)
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B6
+  !***
+  ! **Type:**      COMPLEX (SSYRK-S, DSYRK-D, CSYRK-C)
+  !***
+  ! **Keywords:**  LEVEL 3 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J., (ANL)
   !           Duff, I., (AERE)
   !           Du Croz, J., (NAG)
   !           Hammarling, S. (NAG)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  CSYRK  performs one of the symmetric rank k operations
   !
@@ -107,15 +114,18 @@ SUBROUTINE CSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !           max( 1, n ).
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J., Du Croz, J., Duff, I., and Hammarling, S.
+  !***
+  ! **References:**  Dongarra, J., Du Croz, J., Duff, I., and Hammarling, S.
   !                 A set of level 3 basic linear algebra subprograms.
   !                 ACM TOMS, Vol. 16, No. 1, pp. 1-17, March 1990.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890208  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  CSYRK
+  
   !     .. Scalar Arguments ..
   CHARACTER :: Uplo, Trans
   INTEGER N, K, Lda, Ldc
@@ -138,7 +148,7 @@ SUBROUTINE CSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   PARAMETER (ONE=(1.0E+0,0.0E+0))
   COMPLEX ZERO
   PARAMETER (ZERO=(0.0E+0,0.0E+0))
-  !***FIRST EXECUTABLE STATEMENT  CSYRK
+  !* FIRST EXECUTABLE STATEMENT  CSYRK
   !
   !     Test the input parameters.
   !

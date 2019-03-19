@@ -1,18 +1,25 @@
-!DECK CGERU
+!** CGERU
 SUBROUTINE CGERU(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CGERU
-  !***PURPOSE  Perform unconjugated rank 1 update of a complex general
+  !>
+  !***
+  !  Perform unconjugated rank 1 update of a complex general
   !            matrix.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B4
-  !***TYPE      COMPLEX (SGERU-S, DGERU-D, CGERU-C)
-  !***KEYWORDS  LEVEL 2 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J. J., (ANL)
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      COMPLEX (SGERU-S, DGERU-D, CGERU-C)
+  !***
+  ! **Keywords:**  LEVEL 2 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J. J., (ANL)
   !           Du Croz, J., (NAG)
   !           Hammarling, S., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  CGERU  performs the rank 1 operation
   !
@@ -71,16 +78,19 @@ SUBROUTINE CGERU(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !           max( 1, m ).
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J. J., Du Croz, J., Hammarling, S., and
+  !***
+  ! **References:**  Dongarra, J. J., Du Croz, J., Hammarling, S., and
   !                 Hanson, R. J.  An extended set of Fortran basic linear
   !                 algebra subprograms.  ACM TOMS, Vol. 14, No. 1,
   !                 pp. 1-17, March 1988.
-  !***ROUTINES CALLED  XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  CGERU
+  
   !     .. Scalar Arguments ..
   COMPLEX Alpha
   INTEGER Incx, Incy, Lda, M, N
@@ -96,7 +106,7 @@ SUBROUTINE CGERU(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
-  !***FIRST EXECUTABLE STATEMENT  CGERU
+  !* FIRST EXECUTABLE STATEMENT  CGERU
   !
   !     Test the input parameters.
   !

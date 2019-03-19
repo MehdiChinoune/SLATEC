@@ -1,15 +1,22 @@
-!DECK PPVAL
+!** PPVAL
 REAL FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PPVAL
-  !***PURPOSE  Calculate the value of the IDERIV-th derivative of the
+  !>
+  !***
+  !  Calculate the value of the IDERIV-th derivative of the
   !            B-spline from the PP-representation.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E3, K6
-  !***TYPE      SINGLE PRECISION (PPVAL-S, DPPVAL-D)
-  !***KEYWORDS  B-SPLINE, DATA FITTING, INTERPOLATION, SPLINES
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E3, K6
+  !***
+  ! **Type:**      SINGLE PRECISION (PPVAL-S, DPPVAL-D)
+  !***
+  ! **Keywords:**  B-SPLINE, DATA FITTING, INTERPOLATION, SPLINES
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Written by Carl de Boor and modified by D. E. Amos
   !
@@ -50,11 +57,14 @@ REAL FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !     Error Conditions
   !         Improper input is a fatal error
   !
-  !***REFERENCES  Carl de Boor, Package for calculating with B-splines,
+  !***
+  ! **References:**  Carl de Boor, Package for calculating with B-splines,
   !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
   !                 pp. 441-472.
-  !***ROUTINES CALLED  INTRV, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  INTRV, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -62,11 +72,11 @@ REAL FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  PPVAL
+  
   INTEGER i, Ideriv, Inppv, j, K, Ldc, Lxi, ndummy
   REAL C, dx, fltk, X, Xi
   DIMENSION Xi(*), C(Ldc,*)
-  !***FIRST EXECUTABLE STATEMENT  PPVAL
+  !* FIRST EXECUTABLE STATEMENT  PPVAL
   PPVAL = 0.0E0
   IF ( K<1 ) THEN
     CALL XERMSG('SLATEC','PPVAL','K DOES NOT SATISFY K.GE.1',2,1)

@@ -1,15 +1,22 @@
-!DECK CHU
+!** CHU
 REAL FUNCTION CHU(A,B,X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHU
-  !***PURPOSE  Compute the logarithmic confluent hypergeometric function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C11
-  !***TYPE      SINGLE PRECISION (CHU-S, DCHU-D)
-  !***KEYWORDS  FNLIB, LOGARITHMIC CONFLUENT HYPERGEOMETRIC FUNCTION,
+  !>
+  !***
+  !  Compute the logarithmic confluent hypergeometric function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C11
+  !***
+  ! **Type:**      SINGLE PRECISION (CHU-S, DCHU-D)
+  !***
+  ! **Keywords:**  FNLIB, LOGARITHMIC CONFLUENT HYPERGEOMETRIC FUNCTION,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! CHU computes the logarithmic confluent hypergeometric function,
   ! U(A,B,X).
@@ -21,17 +28,20 @@ REAL FUNCTION CHU(A,B,X)
   !
   ! This routine is not valid when 1+A-B is close to zero if X is small.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  EXPREL, GAMMA, GAMR, POCH, POCH1, R1MACH, R9CHU,
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  EXPREL, GAMMA, GAMR, POCH, POCH1, R1MACH, R9CHU,
   !                    XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  !***END PROLOGUE  CHU
+  
   REAL A, a0, aintb, alnx, B, b0, beps, c0, eps, EXPREL, &
     factor, GAMMA, GAMR, gamri1, gamrni, pch1ai, pch1i, pi, POCH
   REAL POCH1, pochai, R1MACH, R9CHU, sum, t, X, xeps1, xi, xi1, xn, xtoeps
@@ -40,7 +50,7 @@ REAL FUNCTION CHU(A,B,X)
   SAVE pi, eps
   DATA pi/3.14159265358979324E0/
   DATA eps/0.0/
-  !***FIRST EXECUTABLE STATEMENT  CHU
+  !* FIRST EXECUTABLE STATEMENT  CHU
   IF ( eps==0.0 ) eps = R1MACH(3)
   !
   IF ( X==0.0 ) CALL XERMSG('SLATEC','CHU','X IS ZERO SO CHU IS INFINITE',1,&

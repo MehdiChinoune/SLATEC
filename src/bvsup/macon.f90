@@ -1,31 +1,39 @@
-!DECK MACON
+!** MACON
 SUBROUTINE MACON
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  MACON
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (MACON-S, DMACON-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (MACON-S, DMACON-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !    Sets up machine constants using R1MACH
   !
-  !***SEE ALSO  BVSUP
-  !***ROUTINES CALLED  R1MACH
-  !***COMMON BLOCKS    ML5MCO
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **Routines called:**  R1MACH
+  !***
+  ! COMMON BLOCKS    ML5MCO
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890921  Realigned order of variables in certain COMMON blocks.
   !           (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  MACON
+  
   REAL dd, EPS, FOUru, R1MACH, SQOvfl, SRU, TWOu, URO
   INTEGER ke, LPAr
   COMMON /ML5MCO/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
-  !***FIRST EXECUTABLE STATEMENT  MACON
+  !* FIRST EXECUTABLE STATEMENT  MACON
   URO = R1MACH(4)
   SRU = SQRT(URO)
   dd = -LOG10(URO)

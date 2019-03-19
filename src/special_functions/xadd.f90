@@ -1,16 +1,23 @@
-!DECK XADD
+!** XADD
 SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XADD
-  !***PURPOSE  To provide single-precision floating-point arithmetic
+  !>
+  !***
+  !  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  A3D
-  !***TYPE      SINGLE PRECISION (XADD-S, DXADD-D)
-  !***KEYWORDS  EXTENDED-RANGE SINGLE-PRECISION ARITHMETIC
-  !***AUTHOR  Lozier, Daniel W., (National Bureau of Standards)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  A3D
+  !***
+  ! **Type:**      SINGLE PRECISION (XADD-S, DXADD-D)
+  !***
+  ! **Keywords:**  EXTENDED-RANGE SINGLE-PRECISION ARITHMETIC
+  !***
+  ! **Author:**  Lozier, Daniel W., (National Bureau of Standards)
   !           Smith, John M., (NBS and George Mason University)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !     REAL X, Y, Z
   !     INTEGER IX, IY, IZ
   !
@@ -22,11 +29,16 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !                  RADIX**(-2L).LE.ABS(X).LE.RADIX**(2L),
   !                  RADIX**(-2L).LE.ABS(Y).LE.RADIX**(2L).
   !
-  !***SEE ALSO  XSET
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  XADJ
-  !***COMMON BLOCKS    XBLK2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  XSET
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  XADJ
+  !***
+  ! COMMON BLOCKS    XBLK2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820712  DATE WRITTEN
   !   881020  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
@@ -34,7 +46,7 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  XADD
+  
   INTEGER i, i1, i2, Ierror, is, j
   REAL s, t
   REAL X, Y, Z
@@ -56,7 +68,7 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   ! THESE CONDITIONS MUST BE MET BY APPROPRIATE CODING
   ! IN SUBROUTINE XSET.
   !
-  !***FIRST EXECUTABLE STATEMENT  XADD
+  !* FIRST EXECUTABLE STATEMENT  XADD
   Ierror = 0
   IF ( X==0.0 ) THEN
     Z = Y

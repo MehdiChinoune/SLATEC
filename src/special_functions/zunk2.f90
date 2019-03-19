@@ -1,13 +1,17 @@
-!DECK ZUNK2
+!** ZUNK2
 SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZUNK2
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CUNK2-A, ZUNK2-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CUNK2-A, ZUNK2-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZUNK2 COMPUTES K(FNU,Z) AND ITS ANALYTIC CONTINUATION FROM THE
   !     RIGHT HALF PLANE TO THE LEFT HALF PLANE BY MEANS OF THE
@@ -18,12 +22,15 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     ATES THE DIRECTION OF ROTATION FOR ANALYTIC CONTINUATION.
   !     NZ=-1 MEANS AN OVERFLOW WILL OCCUR
   !
-  !***SEE ALSO  ZBESK
-  !***ROUTINES CALLED  D1MACH, ZABS, ZAIRY, ZS1S2, ZUCHK, ZUNHJ
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZBESK
+  !***
+  ! **Routines called:**  D1MACH, ZABS, ZAIRY, ZS1S2, ZUCHK, ZUNHJ
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ZUNK2
+  
   !     COMPLEX AI,ARG,ARGD,ASUM,ASUMD,BSUM,BSUMD,CFN,CI,CIP,CK,CONE,CRSC,
   !    *CR1,CR2,CS,CSCL,CSGN,CSPN,CSR,CSS,CY,CZERO,C1,C2,DAI,PHI,PHID,RZ,
   !    *S1,S2,Y,Z,ZB,ZETA1,ZETA1D,ZETA2,ZETA2D,ZN,ZR
@@ -55,7 +62,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   DATA cipr(1), cipi(1), cipr(2), cipi(2), cipr(3), cipi(3), cipr(4), &
     cipi(4)/1.0D0, 0.0D0, 0.0D0, -1.0D0, -1.0D0, 0.0D0, 0.0D0, &
     1.0D0/
-  !***FIRST EXECUTABLE STATEMENT  ZUNK2
+  !* FIRST EXECUTABLE STATEMENT  ZUNK2
   kdflg = 1
   Nz = 0
   !-----------------------------------------------------------------------

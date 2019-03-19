@@ -1,15 +1,22 @@
-!DECK DBSPEV
+!** DBSPEV
 SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBSPEV
-  !***PURPOSE  Calculate the value of the spline and its derivatives from
+  !>
+  !***
+  !  Calculate the value of the spline and its derivatives from
   !            the B-representation.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E3, K6
-  !***TYPE      DOUBLE PRECISION (BSPEV-S, DBSPEV-D)
-  !***KEYWORDS  B-SPLINE, DATA FITTING, INTERPOLATION, SPLINES
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E3, K6
+  !***
+  ! **Type:**      DOUBLE PRECISION (BSPEV-S, DBSPEV-D)
+  !***
+  ! **Keywords:**  B-SPLINE, DATA FITTING, INTERPOLATION, SPLINES
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Written by Carl de Boor and modified by D. E. Amos
   !
@@ -58,25 +65,28 @@ SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   !     Error Conditions
   !         Improper input is a fatal error.
   !
-  !***REFERENCES  Carl de Boor, Package for calculating with B-splines,
+  !***
+  ! **References:**  Carl de Boor, Package for calculating with B-splines,
   !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
   !                 pp. 441-472.
-  !***ROUTINES CALLED  DBSPVN, DINTRV, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DBSPVN, DINTRV, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DBSPEV
+  
   !
   INTEGER i, id, Inev, iwork, jj, K, kp1, kp1mn, l, left, ll, &
     mflag, N, Nderiv
   REAL(8) :: Ad, Svalue, sum, T, Work, X
   !     DIMENSION T(N+K)
   DIMENSION T(*), Ad(*), Svalue(*), Work(*)
-  !***FIRST EXECUTABLE STATEMENT  DBSPEV
+  !* FIRST EXECUTABLE STATEMENT  DBSPEV
   IF ( K<1 ) THEN
     !
     !
@@ -103,7 +113,7 @@ SUBROUTINE DBSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
         RETURN
       ENDIF
       !
-      ! *I* HAS BEEN FOUND IN (K,N) SO THAT T(I) .LE. X .LT. T(I+1)
+      !- I* HAS BEEN FOUND IN (K,N) SO THAT T(I) .LE. X .LT. T(I+1)
       !     (OR .LE. T(I+1), IF T(I) .LT. T(I+1) = T(N+1) ).
       20       kp1mn = K + 1 - id
       kp1 = K + 1

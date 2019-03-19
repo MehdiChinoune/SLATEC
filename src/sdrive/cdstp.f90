@@ -1,25 +1,29 @@
-!DECK CDSTP
+!** CDSTP
 SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Miter,Ml,Mu,N,Nde,Ywt,Uround,USERS,Avgh,Avgord,H,Hused,&
     Jtask,Mntold,Mtrold,Nfe,Nje,Nqused,Nstep,T,Y,Yh,A,Convrg,&
     Dfdy,El,Fac,Hold,Ipvt,Jstate,Jstepl,Nq,Nwait,Rc,Rmax,&
     Save1,Save2,Tq,Trend,Iswflg,Mtrsv,Mxrdsv)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CDSTP
-  !***SUBSIDIARY
-  !***PURPOSE  CDSTP performs one step of the integration of an initial
+  !>
+  !***
+  !  CDSTP performs one step of the integration of an initial
   !            value problem for a system of ordinary differential
   !            equations.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***TYPE      COMPLEX (SDSTP-S, DDSTP-D, CDSTP-C)
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Type:**      COMPLEX (SDSTP-S, DDSTP-D, CDSTP-C)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  Communication with CDSTP is done with the following variables:
   !
@@ -65,11 +69,13 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !              the YH array are as of the beginning of the last
   !              step, and H is the last step size attempted.
   !
-  !***ROUTINES CALLED  CDCOR, CDCST, CDNTL, CDPSC, CDPST, CDSCL, SCNRM2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDCOR, CDCST, CDNTL, CDPSC, CDPST, CDSCL, SCNRM2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  CDSTP
+  
   EXTERNAL F, JACOBN, FA, USERS
   INTEGER i, Ierror, Impl, Ipvt(*), Iswflg, iter, j, Jstate, &
     Jstepl, Jtask, Matdim, Maxord, Mint, Miter, Ml, Mntold, &
@@ -88,7 +94,7 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     RCTEST=.3E0,RMFAIL=2.E0,RMNORM=10.E0,TRSHLD=1.E0)
   PARAMETER (NDJSTP=10)
   DATA ier/.FALSE./
-  !***FIRST EXECUTABLE STATEMENT  CDSTP
+  !* FIRST EXECUTABLE STATEMENT  CDSTP
   nsv = N
   bnd = 0.E0
   switch = .FALSE.

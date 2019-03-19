@@ -1,27 +1,34 @@
-!DECK DSICS
+!** DSICS
 SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSICS
-  !***PURPOSE  Incompl. Cholesky Decomposition Preconditioner SLAP Set Up.
+  !>
+  !***
+  !  Incompl. Cholesky Decomposition Preconditioner SLAP Set Up.
   !            Routine to generate the Incomplete Cholesky decomposition,
   !            L*D*L-trans, of a symmetric positive definite matrix, A,
   !            which is stored in SLAP Column format.  The unit lower
   !            triangular matrix L is stored by rows, and the inverse of
   !            the diagonal matrix D is stored.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2E
-  !***TYPE      DOUBLE PRECISION (SSICS-S, DSICS-D)
-  !***KEYWORDS  INCOMPLETE CHOLESKY FACTORIZATION,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2E
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSICS-S, DSICS-D)
+  !***
+  ! **Keywords:**  INCOMPLETE CHOLESKY FACTORIZATION,
   !             ITERATIVE PRECONDITION, LINEAR SYSTEM, SLAP SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM
   !     INTEGER NEL, IEL(NEL), JEL(NEL), IWARN
   !     DOUBLE PRECISION A(NELT), EL(NEL), D(N), R(N)
@@ -29,7 +36,7 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !     CALL DSICS( N, NELT, IA, JA, A, ISYM, NEL, IEL, JEL, EL, D, R,
   !    $    IWARN )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the Matrix.
   ! NELT   :IN       Integer.
@@ -64,7 +71,7 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !         tion goes well.  It is set to the row index corresponding to
   !         the last zero pivot found.  See "Description", below.
   !
-  ! *Description
+  !- Description
   !       =================== S L A P Column format ==================
   !       This routine  requires that  the matrix A  be stored in  the
   !       SLAP Column format.  In this format the non-zeros are stored
@@ -139,12 +146,16 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !       is set to the last row where the Diagonal was fudged.  This
   !       eventuality hardly ever occurs in practice.
   !
-  !***SEE ALSO  DCG, DSICCG
-  !***REFERENCES  1. Gene Golub and Charles Van Loan, Matrix Computations,
+  !***
+  ! **See also:**  DCG, DSICCG
+  !***
+  ! **References:**  1. Gene Golub and Charles Van Loan, Matrix Computations,
   !                  Johns Hopkins University Press, Baltimore, Maryland,
   !                  1983.
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -156,7 +167,7 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of reference.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  !***END PROLOGUE  DSICS
+  
   !     .. Scalar Arguments ..
   INTEGER Isym, Iwarn, N, Nel, Nelt
   !     .. Array Arguments ..
@@ -169,7 +180,7 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
   CHARACTER xern1*8
   !     .. External Subroutines ..
   EXTERNAL XERMSG
-  !***FIRST EXECUTABLE STATEMENT  DSICS
+  !* FIRST EXECUTABLE STATEMENT  DSICS
   !
   !         Set the lower triangle in IEL, JEL, EL
   !

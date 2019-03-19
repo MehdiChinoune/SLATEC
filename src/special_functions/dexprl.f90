@@ -1,14 +1,21 @@
-!DECK DEXPRL
+!** DEXPRL
 REAL(8) FUNCTION DEXPRL(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DEXPRL
-  !***PURPOSE  Calculate the relative error exponential (EXP(X)-1)/X.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4B
-  !***TYPE      DOUBLE PRECISION (EXPREL-S, DEXPRL-D, CEXPRL-C)
-  !***KEYWORDS  ELEMENTARY FUNCTIONS, EXPONENTIAL, FIRST ORDER, FNLIB
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Calculate the relative error exponential (EXP(X)-1)/X.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4B
+  !***
+  ! **Type:**      DOUBLE PRECISION (EXPREL-S, DEXPRL-D, CEXPRL-C)
+  !***
+  ! **Keywords:**  ELEMENTARY FUNCTIONS, EXPONENTIAL, FIRST ORDER, FNLIB
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate  EXPREL(X) = (EXP(X) - 1.0) / X.   For small ABS(X) the
   ! Taylor series is used.  If X is negative the reflection formula
@@ -17,21 +24,24 @@ REAL(8) FUNCTION DEXPRL(X)
   ! evaluation for small ABS(X) is done by Chebyshev series rather than
   ! Taylor series.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DEXPRL
+  
   INTEGER i, nterms
   REAL(8) :: X, absx, alneps, xbnd, xln, xn, D1MACH
   LOGICAL first
   SAVE nterms, xbnd, first
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DEXPRL
+  !* FIRST EXECUTABLE STATEMENT  DEXPRL
   IF ( first ) THEN
     alneps = LOG(D1MACH(3))
     xn = 3.72D0 - 0.3D0*alneps

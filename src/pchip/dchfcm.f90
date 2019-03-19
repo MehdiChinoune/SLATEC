@@ -1,28 +1,32 @@
-!DECK DCHFCM
+!** DCHFCM
 INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCHFCM
-  !***SUBSIDIARY
-  !***PURPOSE  Check a single cubic for monotonicity.
-  !***LIBRARY   SLATEC (PCHIP)
-  !***TYPE      DOUBLE PRECISION (CHFCM-S, DCHFCM-D)
-  !***AUTHOR  Fritsch, F. N., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Check a single cubic for monotonicity.
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Type:**      DOUBLE PRECISION (CHFCM-S, DCHFCM-D)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !        DOUBLE PRECISION  D1, D2, DELTA
   !        INTEGER  ISMON, DCHFCM
   !
   !        ISMON = DCHFCM (D1, D2, DELTA)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !     D1,D2:IN  are the derivative values at the ends of an interval.
   !
   !     DELTA:IN  is the data slope over that interval.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !     ISMON : indicates the monotonicity of the cubic segment:
   !             ISMON = -3  if function is probably decreasing;
   !             ISMON = -1  if function is strictly decreasing;
@@ -34,14 +38,14 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !           boundary of the monotonicity region to declare monotonicity
   !           in the presence of roundoff error.
   !
-  ! *Description:
+  !- Description:
   !
   !          DCHFCM:  Cubic Hermite Function -- Check Monotonicity.
   !
   !    Called by  DPCHCM  to determine the monotonicity properties of the
   !    cubic with boundary derivative values D1,D2 and chord slope DELTA.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This is essentially the same as old DCHFMC, except that a
   !     new output value, -3, was added February 1989.  (Formerly, -3
   !     and +3 were lumped together in the single value 3.)  Codes that
@@ -52,8 +56,10 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !
   !   REFER TO  DPCHCM
   !
-  !***ROUTINES CALLED  D1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820518  DATE WRITTEN
   !   820805  Converted to SLATEC library version.
   !   831201  Changed from  ISIGN  to SIGN  to correct bug that
@@ -68,7 +74,7 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !   890407  Converted to new SLATEC format.
   !   890407  Modified DESCRIPTION to LDOC format.
   !   891214  Moved SAVE statements.  (WRB)
-  !***END PROLOGUE  DCHFCM
+  
   !
   !  Fortran intrinsics used:  DSIGN.
   !  Other routines used:  D1MACH.
@@ -102,7 +108,7 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
     ten/10.D0/
   !
   !        MACHINE-DEPENDENT PARAMETER -- SHOULD BE ABOUT 10*UROUND.
-  !***FIRST EXECUTABLE STATEMENT  DCHFCM
+  !* FIRST EXECUTABLE STATEMENT  DCHFCM
   eps = ten*D1MACH(4)
   !
   !  MAKE THE CHECK.

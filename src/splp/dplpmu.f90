@@ -1,17 +1,21 @@
-!DECK DPLPMU
+!** DPLPMU
 SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,&
     Rprnrm,Erdnrm,Dulnrm,Theta,Costsc,Xlamda,Rhsnrm,Amat,&
     Basmat,Csc,Wr,Rprim,Ww,Bu,Bl,Rhs,Erd,Erp,Rz,Rg,Colnrm,&
     Costs,Primal,Duals,Singlr,Redbas,Zerolv,Stpedg)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPLPMU
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SPLPMU-S, DPLPMU-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPLPMU-S, DPLPMU-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THE EDITING REQUIRED TO CONVERT THIS SUBROUTINE FROM SINGLE TO
   !     DOUBLE PRECISION INVOLVES THE FOLLOWING CHARACTER STRING CHANGES.
@@ -29,10 +33,13 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !     REVISED 821122-1100
   !     REVISED YYMMDD
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  DASUM, DCOPY, DDOT, DPLPDM, DPNNZR, DPRWPG, IDLOC,
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  DASUM, DCOPY, DDOT, DPLPDM, DPNNZR, DPRWPG, IDLOC,
   !                    LA05BD, LA05CD, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
@@ -41,7 +48,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DPLPMU
+  
   INTEGER i, ibas, IDLOC, Ienter, ihi, il1, Ileave, ilow, Info, &
     Iopt, ipage, iplace, iu1, j, Jstrt, k, key, Lbm, Lmx, lpg
   INTEGER Mrelas, n20002, n20018, n20121, nerr, nnegrc, Npp, npr001, &
@@ -56,7 +63,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     DASUM, DDOT, cnorm
   LOGICAL Singlr, Redbas, pagepl, trans, Zerolv, Stpedg
   !
-  !***FIRST EXECUTABLE STATEMENT  DPLPMU
+  !* FIRST EXECUTABLE STATEMENT  DPLPMU
   zero = 0.D0
   one = 1.D0
   two = 2.D0

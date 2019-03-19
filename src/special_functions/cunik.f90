@@ -1,13 +1,17 @@
-!DECK CUNIK
+!** CUNIK
 SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Sum,Cwrk)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CUNIK
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBESI and CBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CUNIK-A, ZUNIK-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBESI and CBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CUNIK-A, ZUNIK-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !        CUNIK COMPUTES PARAMETERS FOR THE UNIFORM ASYMPTOTIC
   !        EXPANSIONS OF THE I AND K FUNCTIONS ON IKFLG= 1 OR 2
@@ -24,12 +28,15 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Sum,Cwrk)
   !        ARRAY. IPMTR=0 COMPUTES ALL PARAMETERS. IPMTR=1 COMPUTES PHI,
   !        ZETA1,ZETA2.
   !
-  !***SEE ALSO  CBESI, CBESK
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBESI, CBESK
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CUNIK
+  
   COMPLEX cfn, con, cone, crfn, Cwrk, czero, Phi, s, sr, Sum, t, &
     t2, Zeta1, Zeta2, zn, Zr
   REAL ac, c, Fnu, rfn, test, Tol, tstr, tsti, R1MACH
@@ -113,7 +120,7 @@ SUBROUTINE CUNIK(Zr,Fnu,Ikflg,Ipmtr,Tol,Init,Phi,Zeta1,Zeta2,Sum,Cwrk)
     -1.19655288019618160E+12, 2.05914503232410016E+11, &
     -2.18229277575292237E+10, 1.24700929351271032E+09/
   DATA c(119), c(120)/ - 2.91883881222208134E+07, 1.18838426256783253E+05/
-  !***FIRST EXECUTABLE STATEMENT  CUNIK
+  !* FIRST EXECUTABLE STATEMENT  CUNIK
   IF ( Init==0 ) THEN
     !-----------------------------------------------------------------------
     !     INITIALIZE ALL VARIABLES

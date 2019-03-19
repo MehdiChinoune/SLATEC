@@ -1,16 +1,23 @@
-!DECK SPBDI
+!** SPBDI
 SUBROUTINE SPBDI(Abd,Lda,N,M,Det)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPBDI
-  !***PURPOSE  Compute the determinant of a symmetric positive definite
+  !>
+  !***
+  !  Compute the determinant of a symmetric positive definite
   !            band matrix using the factors computed by SPBCO or SPBFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D3B2
-  !***TYPE      SINGLE PRECISION (SPBDI-S, DPBDI-D, CPBDI-C)
-  !***KEYWORDS  BANDED, DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D3B2
+  !***
+  ! **Type:**      SINGLE PRECISION (SPBDI-S, DPBDI-D, CPBDI-C)
+  !***
+  ! **Keywords:**  BANDED, DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK,
   !             MATRIX, POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     SPBDI computes the determinant
   !     of a real symmetric positive definite band matrix
@@ -39,10 +46,13 @@ SUBROUTINE SPBDI(Abd,Lda,N,M,Det)
   !                with  1.0 .LE. DET(1) .LT. 10.0
   !                or  DET(1) .EQ. 0.0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -50,14 +60,14 @@ SUBROUTINE SPBDI(Abd,Lda,N,M,Det)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SPBDI
+  
   INTEGER Lda, N, M
   REAL Abd(Lda,*)
   REAL Det(2)
   !
   REAL s
   INTEGER i
-  !***FIRST EXECUTABLE STATEMENT  SPBDI
+  !* FIRST EXECUTABLE STATEMENT  SPBDI
   !
   !     COMPUTE DETERMINANT
   !

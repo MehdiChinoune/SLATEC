@@ -1,30 +1,36 @@
-!DECK I1MERG
+!** I1MERG
 SUBROUTINE I1MERG(Icos,I1,M1,I2,M2,I3)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  I1MERG
-  !***SUBSIDIARY
-  !***PURPOSE  Merge two strings of ascending integers.
-  !***LIBRARY   SLATEC
-  !***TYPE      INTEGER (S1MERG-S, D1MERG-D, C1MERG-C, I1MERG-I)
-  !***AUTHOR  Boland, W. Robert, (LANL)
+  !>
+  !***
+  !  Merge two strings of ascending integers.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      INTEGER (S1MERG-S, D1MERG-D, C1MERG-C, I1MERG-I)
+  !***
+  ! **Author:**  Boland, W. Robert, (LANL)
   !           Clemens, Reginald, (PLK)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   This subroutine merges two ascending strings of integers in the
   !   array ICOS.  The first string is of length M1 and starts at
   !   ICOS(I1+1).  The second string is of length M2 and starts at
   !   ICOS(I2+1).  The merged string goes into ICOS(I3+1).
   !
-  !***ROUTINES CALLED  ICOPY
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  ICOPY
+
+  !* REVISION HISTORY  (YYMMDD)
   !   920202  DATE WRITTEN
-  !***END PROLOGUE  I1MERG
+  
   INTEGER I1, I2, I3, M1, M2
   INTEGER Icos(*)
   !
   INTEGER j1, j2, j3
   !
-  !***FIRST EXECUTABLE STATEMENT  I1MERG
+  !* FIRST EXECUTABLE STATEMENT  I1MERG
   IF ( M1==0.AND.M2==0 ) RETURN
   !
   IF ( M1==0.AND.M2/=0 ) THEN

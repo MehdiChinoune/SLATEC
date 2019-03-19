@@ -1,25 +1,32 @@
-!DECK CDRIV1
+!** CDRIV1
 SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CDRIV1
-  !***PURPOSE  The function of CDRIV1 is to solve N (200 or fewer)
+  !>
+  !***
+  !  The function of CDRIV1 is to solve N (200 or fewer)
   !            ordinary differential equations of the form
   !            dY(I)/dT = F(Y(I),T), given the initial conditions
   !            Y(I) = YI.  CDRIV1 allows complex-valued differential
   !            equations.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***CATEGORY  I1A2, I1A1B
-  !***TYPE      COMPLEX (SDRIV1-S, DDRIV1-D, CDRIV1-C)
-  !***KEYWORDS  COMPLEX VALUED, GEAR'S METHOD, INITIAL VALUE PROBLEMS,
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Category:**  I1A2, I1A1B
+  !***
+  ! **Type:**      COMPLEX (SDRIV1-S, DDRIV1-D, CDRIV1-C)
+  !***
+  ! **Keywords:**  COMPLEX VALUED, GEAR'S METHOD, INITIAL VALUE PROBLEMS,
   !             ODE, ORDINARY DIFFERENTIAL EQUATIONS, SDRIVE, STIFF
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   Version 92.1
   !
@@ -281,13 +288,16 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !
   !    For other information, see Section IV of the writeup for CDRIV3.
   !
-  !***REFERENCES  C. W. Gear, Numerical Initial Value Problems in
+  !***
+  ! **References:**  C. W. Gear, Numerical Initial Value Problems in
   !                 Ordinary Differential Equations, Prentice-Hall, 1971.
-  !***ROUTINES CALLED  CDRIV3, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDRIV3, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  CDRIV1
+  
   EXTERNAL F, R1MACH
   COMPLEX Work(*), Y(*)
   REAL Eps, ewtcom(1), hmax, T, Tout, R1MACH
@@ -299,7 +309,7 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   CHARACTER intgr1*8
   PARAMETER (NROOT=0,IERROR=2,MINT=2,MITER=2,IMPL=0,MXORD=5,MXSTEP=1000)
   DATA ewtcom(1)/1.E0/
-  !***FIRST EXECUTABLE STATEMENT  CDRIV1
+  !* FIRST EXECUTABLE STATEMENT  CDRIV1
   IF ( ABS(Mstate)==0.OR.ABS(Mstate)>7 ) THEN
     WRITE (intgr1,'(I8)') Mstate
     Ierflg = 26

@@ -1,26 +1,33 @@
-!DECK SCGS
+!** SCGS
 SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SCGS
-  !***PURPOSE  Preconditioned BiConjugate Gradient Squared Ax=b Solver.
+  !>
+  !***
+  !  Preconditioned BiConjugate Gradient Squared Ax=b Solver.
   !            Routine to solve a Non-Symmetric linear system  Ax = b
   !            using the Preconditioned BiConjugate Gradient Squared
   !            method.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (SCGS-S, DCGS-D)
-  !***KEYWORDS  BICONJUGATE GRADIENT, ITERATIVE PRECONDITION,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SCGS-S, DCGS-D)
+  !***
+  ! **Keywords:**  BICONJUGATE GRADIENT, ITERATIVE PRECONDITION,
   !             NON-SYMMETRIC LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !      INTEGER N, NELT, IA(NELT), JA(NELT), ISYM, ITOL, ITMAX
   !      INTEGER ITER, IERR, IUNIT, IWORK(USER DEFINED)
   !      REAL    B(N), X(N), A(NELT), TOL, ERR, R(N), R0(N), P(N)
@@ -31,7 +38,7 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !     $     MSOLVE, ITOL, TOL, ITMAX, ITER, ERR, IERR, IUNIT,
   !     $     R, R0, P, Q, U, V1, V2, RWORK, IWORK)
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   ! B      :IN       Real B(N).
@@ -137,7 +144,7 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   ! IWORK  :WORK     Integer IWORK(USER DEFINED).
   !         Integer array that can be used for workspace in MSOLVE.
   !
-  ! *Description
+  !- Description
   !       This routine does  not care  what matrix data   structure is
   !       used for  A and M.  It simply   calls  the MATVEC and MSOLVE
   !       routines, with  the arguments as  described above.  The user
@@ -206,15 +213,17 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  SSDCGS, SSLUCS
-  !***REFERENCES  1. P. Sonneveld, CGS, a fast Lanczos-type solver
+  !***
+  ! **See also:**  SSDCGS, SSLUCS
+  !***
+  ! **References:**  1. P. Sonneveld, CGS, a fast Lanczos-type solver
   !                  for nonsymmetric linear systems, Delft University
   !                  of Technology Report 84-16, Department of Mathe-
   !                  matics and Informatics, Delft, The Netherlands.
@@ -226,8 +235,10 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !               3. Mark K. Seager, A SLAP for the Masses, in
   !                  G. F. Carey, Ed., Parallel Supercomputing: Methods,
   !                  Algorithms and Applications, Wiley, 1989, pp.135-155.
-  !***ROUTINES CALLED  ISSCGS, R1MACH, SAXPY, SDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  ISSCGS, R1MACH, SAXPY, SDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -243,7 +254,7 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  !***END PROLOGUE  SCGS
+  
   !     .. Scalar Arguments ..
   REAL Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
@@ -264,7 +275,7 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   EXTERNAL SAXPY
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
-  !***FIRST EXECUTABLE STATEMENT  SCGS
+  !* FIRST EXECUTABLE STATEMENT  SCGS
   !
   !         Check some of the input data.
   !

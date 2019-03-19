@@ -1,15 +1,22 @@
-!DECK SPOFA
+!** SPOFA
 SUBROUTINE SPOFA(A,Lda,N,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPOFA
-  !***PURPOSE  Factor a real symmetric positive definite matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1B
-  !***TYPE      SINGLE PRECISION (SPOFA-S, DPOFA-D, CPOFA-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION,
+  !>
+  !***
+  !  Factor a real symmetric positive definite matrix.
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1B
+  !***
+  ! **Type:**      SINGLE PRECISION (SPOFA-S, DPOFA-D, CPOFA-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION,
   !             POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     SPOFA factors a real symmetric positive definite matrix.
   !
@@ -41,10 +48,13 @@ SUBROUTINE SPOFA(A,Lda,N,Info)
   !                = K  signals an error condition.  The leading minor
   !                     of order  K  is not positive definite.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -52,14 +62,14 @@ SUBROUTINE SPOFA(A,Lda,N,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SPOFA
+  
   INTEGER Lda, N, Info
   REAL A(Lda,*)
   !
   REAL SDOT, t
   REAL s
   INTEGER j, jm1, k
-  !***FIRST EXECUTABLE STATEMENT  SPOFA
+  !* FIRST EXECUTABLE STATEMENT  SPOFA
   DO j = 1, N
     Info = j
     s = 0.0E0

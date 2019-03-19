@@ -1,14 +1,21 @@
-!DECK SPENC
+!** SPENC
 REAL FUNCTION SPENC(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPENC
-  !***PURPOSE  Compute a form of Spence's integral due to K. Mitchell.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C5
-  !***TYPE      SINGLE PRECISION (SPENC-S, DSPENC-D)
-  !***KEYWORDS  FNLIB, SPECIAL FUNCTIONS, SPENCE'S INTEGRAL
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute a form of Spence's integral due to K. Mitchell.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C5
+  !***
+  ! **Type:**      SINGLE PRECISION (SPENC-S, DSPENC-D)
+  !***
+  ! **Keywords:**  FNLIB, SPECIAL FUNCTIONS, SPENCE'S INTEGRAL
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate a form of Spence's function defined by
   !        integral from 0 to X of  -LOG(1-Y)/Y  DY.
@@ -31,14 +38,17 @@ REAL FUNCTION SPENC(X)
   !                               significant figures required  15.22
   !                                    decimal places required  16.81
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780201  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  SPENC
+  
   REAL aln, CSEVL, pi26, R1MACH, spencs, X, xbig
   INTEGER INITS, nspenc
   DIMENSION spencs(19)
@@ -65,7 +75,7 @@ REAL FUNCTION SPENC(X)
   DATA spencs(19)/.00000000000000006E0/
   DATA pi26/1.644934066848226E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  SPENC
+  !* FIRST EXECUTABLE STATEMENT  SPENC
   IF ( first ) THEN
     nspenc = INITS(spencs,19,0.1*R1MACH(3))
     xbig = 1.0/R1MACH(3)

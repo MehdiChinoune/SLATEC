@@ -1,15 +1,22 @@
-!DECK DE1
+!** DE1
 REAL(8) FUNCTION DE1(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DE1
-  !***PURPOSE  Compute the exponential integral E1(X).
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C5
-  !***TYPE      DOUBLE PRECISION (E1-S, DE1-D)
-  !***KEYWORDS  E1 FUNCTION, EXPONENTIAL INTEGRAL, FNLIB,
+  !>
+  !***
+  !  Compute the exponential integral E1(X).
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C5
+  !***
+  ! **Type:**      DOUBLE PRECISION (E1-S, DE1-D)
+  !***
+  ! **Keywords:**  E1 FUNCTION, EXPONENTIAL INTEGRAL, FNLIB,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DE1 calculates the double precision exponential integral, E1(X), for
   ! positive double precision argument X and the Cauchy principal value
@@ -69,9 +76,12 @@ REAL(8) FUNCTION DE1(X)
   !                               significant figures required  30.40
   !                                    decimal places required  32.20
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891115  Modified prologue description.  (WRB)
@@ -79,7 +89,7 @@ REAL(8) FUNCTION DE1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  DE1
+  
   REAL eta
   INTEGER INITDS, ntae10, ntae11, ntae12, ntae13, ntae14, nte11, nte12
   REAL(8) :: X, ae10cs(50), ae11cs(60), ae12cs(41), e11cs(29), &
@@ -407,7 +417,7 @@ REAL(8) FUNCTION DE1(X)
   DATA ae14cs(63)/ + .1127259818927510206370368804181D-30/
   DATA ae14cs(64)/ - .5069814875800460855562584719360D-31/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DE1
+  !* FIRST EXECUTABLE STATEMENT  DE1
   IF ( first ) THEN
     eta = 0.1*REAL(D1MACH(3))
     ntae10 = INITDS(ae10cs,50,eta)

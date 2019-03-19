@@ -1,18 +1,22 @@
-!DECK DRKFS
+!** DRKFS
 SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     F4,F5,Ys,Told,Dtsign,U26,Rer,Init,Ksteps,Kop,Iquit,Stiff,&
     Nonstf,Ntstep,Nstifs,Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DRKFS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DDERKF
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (DERKFS-S, DRKFS-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DDERKF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (DERKFS-S, DRKFS-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Fehlberg Fourth-Fifth Order Runge-Kutta Method
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     DRKFS integrates a system of first order ordinary differential
   !     equations as described in the comments for DDERKF .
@@ -31,11 +35,14 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !         YP - Derivative of solution vector at T
   !         KSTEPS - Counter on the number of steps attempted
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  DDERKF
-  !***ROUTINES CALLED  D1MACH, DFEHL, DHSTRT, DHVNRM, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DDERKF
+  !***
+  ! **Routines called:**  D1MACH, DFEHL, DHSTRT, DHVNRM, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -45,7 +52,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !   900510  Convert XERRWV calls to XERMSG calls, change GOTOs to
   !           IF-THEN-ELSEs.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DRKFS
+  
   !
   INTEGER Idid, Info, Init, Ipar, Iquit, k, Kop, Ksteps, ktol, &
     mxkop, mxstep, natolp, Neq, nrtolp, Nstifs, Ntstep
@@ -96,7 +103,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !
   !     ..................................................................
   !
-  !***FIRST EXECUTABLE STATEMENT  DRKFS
+  !* FIRST EXECUTABLE STATEMENT  DRKFS
   IF ( Info(1)==0 ) THEN
     !
     ! ON THE FIRST CALL, PERFORM INITIALIZATION --

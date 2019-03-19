@@ -1,13 +1,17 @@
-!DECK PROCP
+!** PROCP
 SUBROUTINE PROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PROCP
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBLKTR
-  !***LIBRARY   SLATEC
-  !***TYPE      COMPLEX (PRODP-C, PROCP-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBLKTR
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      COMPLEX (PRODP-C, PROCP-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   ! PROCP applies a sequence of matrix operations to the vector X and
   ! stores the result in Y (periodic boundary conditions).
@@ -22,20 +26,23 @@ SUBROUTINE PROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
   ! D,U,W      are working arrays.
   ! IS         determines whether or not a change in sign is made.
   !
-  !***SEE ALSO  CBLKTR
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBLKTR
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  PROCP
+  
   REAL Aa, Bd, Bm1, Bm2, rt
   INTEGER ia, ibr, id, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, Nm2
   DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), U(*), Bd(*), Bm1(*)&
     , Bm2(*), Aa(*), W(*)
   COMPLEX X, Y, A, B, C, D, U, W, den, ym, v, bh, am
-  !***FIRST EXECUTABLE STATEMENT  PROCP
+  !* FIRST EXECUTABLE STATEMENT  PROCP
   DO j = 1, M
     Y(j) = X(j)
     W(j) = Y(j)

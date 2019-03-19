@@ -1,15 +1,19 @@
-!DECK JAIRY
+!** JAIRY
 SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  JAIRY
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BESJ and BESY
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (JAIRY-S, DJAIRY-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
+  !>
+  !***
+  !  Subsidiary to BESJ and BESY
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (JAIRY-S, DJAIRY-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
   !           Daniel, S. L., (SNLA)
   !           Weston, M. K., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                  JAIRY computes the Airy function AI(X)
   !                   and its derivative DAI(X) for ASYJY
@@ -25,15 +29,18 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
   !        AI - Value of function AI(X)
   !       DAI - Value of the derivative DAI(X)
   !
-  !***SEE ALSO  BESJ, BESY
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BESJ, BESY
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
   !   891009  Removed unreferenced variable.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  !***END PROLOGUE  JAIRY
+  
   !
   INTEGER i, j, m1, m1d, m2, m2d, m3, m3d, m4, m4d, n1, n1d, &
     n2, n2d, n3, n3d, n4, n4d
@@ -193,7 +200,7 @@ SUBROUTINE JAIRY(X,Rx,C,Ai,Dai)
     -4.40995691658191E-12, -5.18674221093575E-12, &
     9.64874015137022E-13, -4.90190576608710E-14, &
     -1.77253430678112E-14, 5.55950610442662E-15, -7.11793337579530E-16/
-  !***FIRST EXECUTABLE STATEMENT  JAIRY
+  !* FIRST EXECUTABLE STATEMENT  JAIRY
   IF ( X<0.0E0 ) THEN
     !
     IF ( C>5.0E0 ) THEN

@@ -1,14 +1,21 @@
-!DECK DERF
+!** DERF
 REAL(8) FUNCTION DERF(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DERF
-  !***PURPOSE  Compute the error function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C8A, L5A1E
-  !***TYPE      DOUBLE PRECISION (ERF-S, DERF-D)
-  !***KEYWORDS  ERF, ERROR FUNCTION, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the error function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C8A, L5A1E
+  !***
+  ! **Type:**      DOUBLE PRECISION (ERF-S, DERF-D)
+  !***
+  ! **Keywords:**  ERF, ERROR FUNCTION, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DERF(X) calculates the double precision error function for double
   ! precision argument X.
@@ -19,16 +26,19 @@ REAL(8) FUNCTION DERF(X)
   !                               significant figures required  31.05
   !                                    decimal places required  32.55
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, DERFC, INITDS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, DERFC, INITDS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable name.  (RWC, WRB)
-  !***END PROLOGUE  DERF
+  
   INTEGER INITDS, nterf
   REAL(8) :: X, erfcs(21), sqeps, sqrtpi, xbig, y, D1MACH, DCSEVL, DERFC
   LOGICAL first
@@ -57,7 +67,7 @@ REAL(8) FUNCTION DERF(X)
   DATA erfcs(21)/ + .12811883993017002666666666666666D-31/
   DATA sqrtpi/1.77245385090551602729816748334115D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DERF
+  !* FIRST EXECUTABLE STATEMENT  DERF
   IF ( first ) THEN
     nterf = INITDS(erfcs,21,0.1*REAL(D1MACH(3)))
     xbig = SQRT(-LOG(sqrtpi*D1MACH(3)))

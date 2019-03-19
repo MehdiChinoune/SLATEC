@@ -1,15 +1,20 @@
-!DECK PASSB
+!** PASSB
 SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PASSB
-  !***SUBSIDIARY
-  !***PURPOSE  Calculate the fast Fourier transform of subvectors of
+  !>
+  !***
+  !  Calculate the fast Fourier transform of subvectors of
   !            arbitrary length.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***TYPE      SINGLE PRECISION (PASSB-S)
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Type:**      SINGLE PRECISION (PASSB-S)
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -19,13 +24,13 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   !   891009  Removed unreferenced variable.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  PASSB
+  
   REAL C1, C2, Cc, Ch, Ch2, Wa, wai, war
   INTEGER i, idij, idj, idl, Idl1, idlj, Ido, idot, idp, ik, inc, &
     Ip, ipp2, ipph, j, jc, k, l, L1, lc
   INTEGER Nac
   DIMENSION Ch(Ido,L1,*), Cc(Ido,Ip,*), C1(Ido,L1,*), Wa(*), C2(Idl1,*), Ch2(Idl1,*)
-  !***FIRST EXECUTABLE STATEMENT  PASSB
+  !* FIRST EXECUTABLE STATEMENT  PASSB
   idot = Ido/2
   ipp2 = Ip + 2
   ipph = (Ip+1)/2

@@ -1,15 +1,22 @@
-!DECK PSIFN
+!** PSIFN
 SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PSIFN
-  !***PURPOSE  Compute derivatives of the Psi function.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C7C
-  !***TYPE      SINGLE PRECISION (PSIFN-S, DPSIFN-D)
-  !***KEYWORDS  DERIVATIVES OF THE GAMMA FUNCTION, POLYGAMMA FUNCTION,
+  !>
+  !***
+  !  Compute derivatives of the Psi function.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C7C
+  !***
+  ! **Type:**      SINGLE PRECISION (PSIFN-S, DPSIFN-D)
+  !***
+  ! **Keywords:**  DERIVATIVES OF THE GAMMA FUNCTION, POLYGAMMA FUNCTION,
   !             PSI FUNCTION
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !         The following definitions are used in PSIFN:
   !
@@ -73,7 +80,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !
   !         DPSIFN is the Double Precision version of PSIFN.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !         The basic method of evaluation is the asymptotic expansion
   !         for large X.ge.XMIN followed by backward recursion on a two
@@ -89,7 +96,8 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !         number of terms of the series are calculated from the unit
   !         roundoff of the machine environment.
   !
-  !***REFERENCES  Handbook of Mathematical Functions, National Bureau
+  !***
+  ! **References:**  Handbook of Mathematical Functions, National Bureau
   !                 of Standards Applied Mathematics Series 55, edited
   !                 by M. Abramowitz and I. A. Stegun, equations 6.3.5,
   !                 6.3.18, 6.4.6, 6.4.9 and 6.4.10, pp.258-260, 1964.
@@ -97,14 +105,16 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
   !                 derivatives of the Psi function, Algorithm 610, ACM
   !                 Transactions on Mathematical Software 9, 4 (1983),
   !                 pp. 494-502.
-  !***ROUTINES CALLED  I1MACH, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  I1MACH, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  PSIFN
+  
   INTEGER i, Ierr, j, k, Kode, M, mm, mx, N, nmax, nn, np, nx, &
     Nz
   INTEGER I1MACH
@@ -134,7 +144,7 @@ SUBROUTINE PSIFN(X,N,Kode,M,Ans,Nz,Ierr)
     -1.37116552050883328E+13, 4.88332318973593167E+14, &
     -1.92965793419400681E+16/
   !
-  !***FIRST EXECUTABLE STATEMENT  PSIFN
+  !* FIRST EXECUTABLE STATEMENT  PSIFN
   Ierr = 0
   Nz = 0
   IF ( X<=0.0E0 ) Ierr = 1

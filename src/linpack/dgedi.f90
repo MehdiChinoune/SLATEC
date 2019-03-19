@@ -1,15 +1,22 @@
-!DECK DGEDI
+!** DGEDI
 SUBROUTINE DGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGEDI
-  !***PURPOSE  Compute the determinant and inverse of a matrix using the
+  !>
+  !***
+  !  Compute the determinant and inverse of a matrix using the
   !            factors computed by DGECO or DGEFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D3A1, D2A1
-  !***TYPE      DOUBLE PRECISION (SGEDI-S, DGEDI-D, CGEDI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D3A1, D2A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (SGEDI-S, DGEDI-D, CGEDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DGEDI computes the determinant and inverse of a matrix
   !     using the factors computed by DGECO or DGEFA.
@@ -56,10 +63,13 @@ SUBROUTINE DGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   !        and if DGECO has set RCOND .GT. 0.0 or DGEFA has set
   !        INFO .EQ. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DSCAL, DSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DSCAL, DSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -68,14 +78,14 @@ SUBROUTINE DGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DGEDI
+  
   INTEGER Lda, N, Ipvt(*), Job
   REAL(8) :: A(Lda,*), Det(2), Work(*)
   !
   REAL(8) :: t
   REAL(8) :: ten
   INTEGER i, j, k, kb, kp1, l, nm1
-  !***FIRST EXECUTABLE STATEMENT  DGEDI
+  !* FIRST EXECUTABLE STATEMENT  DGEDI
   !
   !     COMPUTE DETERMINANT
   !

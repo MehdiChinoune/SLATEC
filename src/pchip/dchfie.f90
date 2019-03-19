@@ -1,13 +1,17 @@
-!DECK DCHFIE
+!** DCHFIE
 REAL(8) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCHFIE
-  !***SUBSIDIARY
-  !***PURPOSE  Evaluates integral of a single cubic for DPCHIA
-  !***LIBRARY   SLATEC (PCHIP)
-  !***TYPE      DOUBLE PRECISION (CHFIE-S, DCHFIE-D)
-  !***AUTHOR  Fritsch, F. N., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Evaluates integral of a single cubic for DPCHIA
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Type:**      DOUBLE PRECISION (CHFIE-S, DCHFIE-D)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
+  !***
+  ! **Description:**
   !
   !          DCHFIE:  Cubic Hermite Function Integral Evaluator.
   !
@@ -35,9 +39,12 @@ REAL(8) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !
   !     A,B -- (input) endpoints of interval of integration.
   !
-  !***SEE ALSO  DPCHIA
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DPCHIA
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820730  DATE WRITTEN
   !   820805  Converted to SLATEC library version.
   !   870707  Corrected subroutine name from DCHIV to DCHFIV.
@@ -51,7 +58,7 @@ REAL(8) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
   !   930503  Corrected to set VALUE=0 when IERR.ne.0.  (FNF)
   !   930504  Eliminated IERR and changed name DCHFIV to DCHFIE.  (FNF)
-  !***END PROLOGUE  DCHFIE
+  
   !
   !  Programming notes:
   !  1. There is no error return from this routine because zero is
@@ -75,7 +82,7 @@ REAL(8) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !
   !  VALIDITY CHECK INPUT.
   !
-  !***FIRST EXECUTABLE STATEMENT  DCHFIE
+  !* FIRST EXECUTABLE STATEMENT  DCHFIE
   IF ( X1==X2 ) THEN
     DCHFIE = 0
   ELSE

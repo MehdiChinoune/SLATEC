@@ -1,15 +1,22 @@
-!DECK ASINH
+!** ASINH
 REAL FUNCTION ASINH(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ASINH
-  !***PURPOSE  Compute the arc hyperbolic sine.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4C
-  !***TYPE      SINGLE PRECISION (ASINH-S, DASINH-D, CASINH-C)
-  !***KEYWORDS  ARC HYPERBOLIC SINE, ASINH, ELEMENTARY FUNCTIONS, FNLIB,
+  !>
+  !***
+  !  Compute the arc hyperbolic sine.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4C
+  !***
+  ! **Type:**      SINGLE PRECISION (ASINH-S, DASINH-D, CASINH-C)
+  !***
+  ! **Keywords:**  ARC HYPERBOLIC SINE, ASINH, ELEMENTARY FUNCTIONS, FNLIB,
   !             INVERSE HYPERBOLIC SINE
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! ASINH(X) computes the arc hyperbolic sine of X.
   !
@@ -19,14 +26,17 @@ REAL FUNCTION ASINH(X)
   !                               significant figures required  15.60
   !                                    decimal places required  17.31
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ASINH
+  
   REAL aln2, asnhcs, CSEVL, R1MACH, sqeps, X, xmax, y
   INTEGER INITS, nterms
   DIMENSION asnhcs(20)
@@ -54,7 +64,7 @@ REAL FUNCTION ASINH(X)
   DATA asnhcs(19)/.000000000000000138E0/
   DATA asnhcs(20)/ - .000000000000000021E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  ASINH
+  !* FIRST EXECUTABLE STATEMENT  ASINH
   IF ( first ) THEN
     nterms = INITS(asnhcs,20,0.1*R1MACH(3))
     sqeps = SQRT(R1MACH(3))

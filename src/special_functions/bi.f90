@@ -1,15 +1,22 @@
-!DECK BI
+!** BI
 REAL FUNCTION BI(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BI
-  !***PURPOSE  Evaluate the Bairy function (the Airy function of the
+  !>
+  !***
+  !  Evaluate the Bairy function (the Airy function of the
   !            second kind).
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10D
-  !***TYPE      SINGLE PRECISION (BI-S, DBI-D)
-  !***KEYWORDS  BAIRY FUNCTION, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10D
+  !***
+  ! **Type:**      SINGLE PRECISION (BI-S, DBI-D)
+  !***
+  ! **Keywords:**  BAIRY FUNCTION, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! BI(X) calculates the Airy function of the second kind for real
   ! argument X.
@@ -38,9 +45,12 @@ REAL FUNCTION BI(X)
   !                        approx significant figures required  17.2
   !                                    decimal places required  18.42
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  BIE, CSEVL, INITS, R1MACH, R9AIMP, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  BIE, CSEVL, INITS, R1MACH, R9AIMP, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -48,7 +58,7 @@ REAL FUNCTION BI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  BI
+  
   REAL BIE, bif2cs, bifcs, big2cs, bigcs, CSEVL, eta, R1MACH, &
     theta, X, x3sml, xm, xmax, z
   INTEGER INITS, nbif, nbif2, nbig, nbig2
@@ -94,7 +104,7 @@ REAL FUNCTION BI(X)
   DATA big2cs(9)/.0000000000000005167E0/
   DATA big2cs(10)/.0000000000000000011E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BI
+  !* FIRST EXECUTABLE STATEMENT  BI
   IF ( first ) THEN
     eta = 0.1*R1MACH(3)
     nbif = INITS(bifcs,9,eta)

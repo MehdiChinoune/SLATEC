@@ -1,17 +1,24 @@
-!DECK SSPR2
+!** SSPR2
 SUBROUTINE SSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSPR2
-  !***PURPOSE  Perform the symmetric rank 2 operation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B4
-  !***TYPE      SINGLE PRECISION (SSPR2-S, DSPR2-D, CSPR2-C)
-  !***KEYWORDS  LEVEL 2 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J. J., (ANL)
+  !>
+  !***
+  !  Perform the symmetric rank 2 operation.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SSPR2-S, DSPR2-D, CSPR2-C)
+  !***
+  ! **Keywords:**  LEVEL 2 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J. J., (ANL)
   !           Du Croz, J., (NAG)
   !           Hammarling, S., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  SSPR2  performs the symmetric rank 2 operation
   !
@@ -84,16 +91,19 @@ SUBROUTINE SSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
   !           AP is overwritten by the lower triangular part of the
   !           updated matrix.
   !
-  !***REFERENCES  Dongarra, J. J., Du Croz, J., Hammarling, S., and
+  !***
+  ! **References:**  Dongarra, J. J., Du Croz, J., Hammarling, S., and
   !                 Hanson, R. J.  An extended set of Fortran basic linear
   !                 algebra subprograms.  ACM TOMS, Vol. 14, No. 1,
   !                 pp. 1-17, March 1988.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  SSPR2
+  
   !     .. Scalar Arguments ..
   REAL Alpha
   INTEGER Incx, Incy, N
@@ -111,7 +121,7 @@ SUBROUTINE SSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
   EXTERNAL LSAME
   !     .. External Subroutines ..
   EXTERNAL XERBLA
-  !***FIRST EXECUTABLE STATEMENT  SSPR2
+  !* FIRST EXECUTABLE STATEMENT  SSPR2
   !
   !     Test the input parameters.
   !

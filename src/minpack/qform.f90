@@ -1,13 +1,17 @@
-!DECK QFORM
+!** QFORM
 SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QFORM
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SNSQ and SNSQE
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (QFORM-S, DQFORM-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SNSQ and SNSQE
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (QFORM-S, DQFORM-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This subroutine proceeds from the computed QR factorization of
   !     an M by N matrix A to accumulate the M by M orthogonal matrix
@@ -34,9 +38,12 @@ SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
   !
   !       WA is a work array of length M.
   !
-  !***SEE ALSO  SNSQ, SNSQE
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SNSQ, SNSQE
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -44,14 +51,14 @@ SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  QFORM
+  
   INTEGER M, N, Ldq
   REAL Q(Ldq,*), Wa(*)
   INTEGER i, j, jm1, k, l, minmn, np1
   REAL one, sum, temp, zero
   SAVE one, zero
   DATA one, zero/1.0E0, 0.0E0/
-  !***FIRST EXECUTABLE STATEMENT  QFORM
+  !* FIRST EXECUTABLE STATEMENT  QFORM
   minmn = MIN(M,N)
   IF ( minmn>=2 ) THEN
     DO j = 2, minmn

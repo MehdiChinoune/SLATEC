@@ -1,14 +1,21 @@
-!DECK CBETA
+!** CBETA
 COMPLEX FUNCTION CBETA(A,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CBETA
-  !***PURPOSE  Compute the complete Beta function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7B
-  !***TYPE      COMPLEX (BETA-S, DBETA-D, CBETA-C)
-  !***KEYWORDS  COMPLETE BETA FUNCTION, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the complete Beta function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7B
+  !***
+  ! **Type:**      COMPLEX (BETA-S, DBETA-D, CBETA-C)
+  !***
+  ! **Keywords:**  COMPLETE BETA FUNCTION, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! CBETA computes the complete beta function of complex parameters A
   ! and B.
@@ -16,9 +23,12 @@ COMPLEX FUNCTION CBETA(A,B)
   !       A   complex and the real part of A positive
   !       B   complex and the real part of B positive
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CGAMMA, CLBETA, GAMLIM, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CGAMMA, CLBETA, GAMLIM, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
@@ -26,13 +36,13 @@ COMPLEX FUNCTION CBETA(A,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  !***END PROLOGUE  CBETA
+  
   REAL xmax, xmaxt, xmin
   COMPLEX A, B, CGAMMA, CLBETA
   EXTERNAL CGAMMA
   SAVE xmax
   DATA xmax/0.0/
-  !***FIRST EXECUTABLE STATEMENT  CBETA
+  !* FIRST EXECUTABLE STATEMENT  CBETA
   IF ( xmax==0.0 ) THEN
     CALL GAMLIM(xmin,xmaxt)
     xmax = xmaxt

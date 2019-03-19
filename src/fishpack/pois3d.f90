@@ -1,19 +1,26 @@
-!DECK POIS3D
+!** POIS3D
 SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  POIS3D
-  !***PURPOSE  Solve a three-dimensional block tridiagonal linear system
+  !>
+  !***
+  !  Solve a three-dimensional block tridiagonal linear system
   !            which arises from a finite difference approximation to a
   !            three-dimensional Poisson equation using the Fourier
   !            transform package FFTPAK written by Paul Swarztrauber.
-  !***LIBRARY   SLATEC (FISHPACK)
-  !***CATEGORY  I2B4B
-  !***TYPE      SINGLE PRECISION (POIS3D-S)
-  !***KEYWORDS  ELLIPTIC PDE, FISHPACK, HELMHOLTZ, POISSON
-  !***AUTHOR  Adams, J., (NCAR)
+  !***
+  ! **Library:**   SLATEC (FISHPACK)
+  !***
+  ! **Category:**  I2B4B
+  !***
+  ! **Type:**      SINGLE PRECISION (POIS3D-S)
+  !***
+  ! **Keywords:**  ELLIPTIC PDE, FISHPACK, HELMHOLTZ, POISSON
+  !***
+  ! **Author:**  Adams, J., (NCAR)
   !           Swarztrauber, P. N., (NCAR)
   !           Sweet, R., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Subroutine POIS3D solves the linear system of equations
   !
@@ -127,7 +134,7 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
   !              incorrect call to POIS3D, the user should test IERROR
   !              after the call.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !    * * * * * * *   Program Specifications    * * * * * * * * * * * *
   !
@@ -222,20 +229,23 @@ SUBROUTINE POIS3D(Lperod,L,C1,Mperod,M,C2,Nperod,N,A,B,C,Ldimf,Mdimf,F,Ierror,W)
   !
   !    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  POS3D1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  POS3D1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  POIS3D
+  
   REAL A, B, C, C1, C2, F, save, W
   INTEGER i, Ierror, iwbb, iwd, iwt, iwx, iwy, iwyrt, j, k, L, &
     Ldimf, lp, Lperod, M, Mdimf, mp, Mperod, N, nh
   INTEGER nhm1, nhmk, nhpk, nodd, np, Nperod
   DIMENSION A(*), B(*), C(*), F(Ldimf,Mdimf,*), W(*), save(6)
-  !***FIRST EXECUTABLE STATEMENT  POIS3D
+  !* FIRST EXECUTABLE STATEMENT  POIS3D
   lp = Lperod + 1
   mp = Mperod + 1
   np = Nperod + 1

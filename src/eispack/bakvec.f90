@@ -1,16 +1,23 @@
-!DECK BAKVEC
+!** BAKVEC
 SUBROUTINE BAKVEC(Nm,N,T,E,M,Z,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BAKVEC
-  !***PURPOSE  Form the eigenvectors of a certain real non-symmetric
+  !>
+  !***
+  !  Form the eigenvectors of a certain real non-symmetric
   !            tridiagonal matrix from a symmetric tridiagonal matrix
   !            output from FIGI.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C4
-  !***TYPE      SINGLE PRECISION (BAKVEC-S)
-  !***KEYWORDS  EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C4
+  !***
+  ! **Type:**      SINGLE PRECISION (BAKVEC-S)
+  !***
+  ! **Keywords:**  EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine forms the eigenvectors of a NONSYMMETRIC
   !     TRIDIAGONAL matrix by back transforming those of the
@@ -62,23 +69,26 @@ SUBROUTINE BAKVEC(Nm,N,T,E,M,Z,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BAKVEC
+  
   !
   INTEGER i, j, M, N, Nm, Ierr
   REAL T(Nm,3), E(*), Z(Nm,*)
   !
-  !***FIRST EXECUTABLE STATEMENT  BAKVEC
+  !* FIRST EXECUTABLE STATEMENT  BAKVEC
   Ierr = 0
   IF ( M/=0 ) THEN
     E(1) = 1.0E0

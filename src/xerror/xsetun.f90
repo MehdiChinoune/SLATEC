@@ -1,14 +1,21 @@
-!DECK XSETUN
+!** XSETUN
 SUBROUTINE XSETUN(Iunit)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XSETUN
-  !***PURPOSE  Set output file to which error messages are to be sent.
-  !***LIBRARY   SLATEC (XERROR)
-  !***CATEGORY  R3B
-  !***TYPE      ALL (XSETUN-A)
-  !***KEYWORDS  ERROR, XERROR
-  !***AUTHOR  Jones, R. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Set output file to which error messages are to be sent.
+  !***
+  ! **Library:**   SLATEC (XERROR)
+  !***
+  ! **Category:**  R3B
+  !***
+  ! **Type:**      ALL (XSETUN-A)
+  !***
+  ! **Keywords:**  ERROR, XERROR
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !        XSETUN sets the output file to which error messages are to
@@ -20,20 +27,23 @@ SUBROUTINE XSETUN(Iunit)
   !        IUNIT - an input parameter giving the logical unit number
   !                to which error messages are to be sent.
   !
-  !***REFERENCES  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
+  !***
+  ! **References:**  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
   !                 Error-handling Package, SAND82-0800, Sandia
   !                 Laboratories, 1982.
-  !***ROUTINES CALLED  J4SAVE
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  J4SAVE
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790801  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  XSETUN
+  
   INTEGER Iunit
   INTEGER J4SAVE
   INTEGER junk
-  !***FIRST EXECUTABLE STATEMENT  XSETUN
+  !* FIRST EXECUTABLE STATEMENT  XSETUN
   junk = J4SAVE(3,Iunit,.TRUE.)
   junk = J4SAVE(5,1,.TRUE.)
 END SUBROUTINE XSETUN

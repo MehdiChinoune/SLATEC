@@ -1,16 +1,23 @@
-!DECK CPOCO
+!** CPOCO
 SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPOCO
-  !***PURPOSE  Factor a complex Hermitian positive definite matrix
+  !>
+  !***
+  !  Factor a complex Hermitian positive definite matrix
   !            and estimate the condition number of the matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2D1B
-  !***TYPE      COMPLEX (SPOCO-S, DPOCO-D, CPOCO-C)
-  !***KEYWORDS  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2D1B
+  !***
+  ! **Type:**      COMPLEX (SPOCO-S, DPOCO-D, CPOCO-C)
+  !***
+  ! **Keywords:**  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
   !             MATRIX FACTORIZATION, POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CPOCO factors a complex Hermitian positive definite matrix
   !     and estimates the condition of the matrix.
@@ -64,10 +71,13 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
   !                = K  signals an error condition.  The leading minor
   !                     of order  K  is not positive definite.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTC, CPOFA, CSSCAL, SCASUM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTC, CPOFA, CSSCAL, SCASUM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -76,7 +86,7 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CPOCO
+  
   INTEGER Lda, N, Info
   COMPLEX A(Lda,*), Z(*)
   REAL Rcond
@@ -89,7 +99,7 @@ SUBROUTINE CPOCO(A,Lda,N,Rcond,Z,Info)
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !
-  !***FIRST EXECUTABLE STATEMENT  CPOCO
+  !* FIRST EXECUTABLE STATEMENT  CPOCO
   DO j = 1, N
     Z(j) = CMPLX(SCASUM(j,A(1,j),1),0.0E0)
     jm1 = j - 1

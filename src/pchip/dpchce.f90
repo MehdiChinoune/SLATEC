@@ -1,13 +1,17 @@
-!DECK DPCHCE
+!** DPCHCE
 SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPCHCE
-  !***SUBSIDIARY
-  !***PURPOSE  Set boundary conditions for DPCHIC
-  !***LIBRARY   SLATEC (PCHIP)
-  !***TYPE      DOUBLE PRECISION (PCHCE-S, DPCHCE-D)
-  !***AUTHOR  Fritsch, F. N., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Set boundary conditions for DPCHIC
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Type:**      DOUBLE PRECISION (PCHCE-S, DPCHCE-D)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
+  !***
+  ! **Description:**
   !
   !          DPCHCE:  DPCHIC End Derivative Setter.
   !
@@ -77,9 +81,12 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !
   !  Fortran intrinsics used:  ABS.
   !
-  !***SEE ALSO  DPCHIC
-  !***ROUTINES CALLED  DPCHDF, DPCHST, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DPCHIC
+  !***
+  ! **Routines called:**  DPCHDF, DPCHST, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820218  DATE WRITTEN
   !   820805  Converted to SLATEC library version.
   !   870707  Corrected XERROR calls for d.p. name(s).
@@ -93,7 +100,7 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
   !   930503  Improved purpose.  (FNF)
-  !***END PROLOGUE  DPCHCE
+  
   !
   !  Programming notes:
   !     1. The function DPCHST(ARG1,ARG2)  is assumed to return zero if
@@ -125,7 +132,7 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !
   DATA zero/0.D0/, half/.5D0/, two/2.D0/, three/3.D0/
   !
-  !***FIRST EXECUTABLE STATEMENT  DPCHCE
+  !* FIRST EXECUTABLE STATEMENT  DPCHCE
   ibeg = Ic(1)
   iend = Ic(2)
   Ierr = 0

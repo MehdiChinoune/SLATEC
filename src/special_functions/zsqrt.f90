@@ -1,29 +1,36 @@
-!DECK ZSQRT
+!** ZSQRT
 SUBROUTINE ZSQRT(Ar,Ai,Br,Bi)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZSQRT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
+  !>
+  !***
+  !  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
   !            ZBIRY
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (ZSQRT-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (ZSQRT-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     DOUBLE PRECISION COMPLEX SQUARE ROOT, B=CSQRT(A)
   !
-  !***SEE ALSO  ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZBIRY
-  !***ROUTINES CALLED  ZABS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZBIRY
+  !***
+  ! **Routines called:**  ZABS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ZSQRT
+  
   REAL(8) :: Ar, Ai, Br, Bi, zm, dtheta, dpi, drt
   REAL(8) :: ZABS
   EXTERNAL ZABS
   DATA drt, dpi/7.071067811865475244008443621D-1, &
     3.141592653589793238462643383D+0/
-  !***FIRST EXECUTABLE STATEMENT  ZSQRT
+  !* FIRST EXECUTABLE STATEMENT  ZSQRT
   zm = ZABS(Ar,Ai)
   zm = SQRT(zm)
   IF ( Ar==0.0D+0 ) THEN

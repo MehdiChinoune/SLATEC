@@ -1,27 +1,34 @@
-!DECK DBKISR
+!** DBKISR
 SUBROUTINE DBKISR(X,N,Sum,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBKISR
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBSKIN
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (BKISR-S, DBKISR-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBSKIN
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (BKISR-S, DBKISR-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     DBKISR computes repeated integrals of the K0 Bessel function
   !     by the series for N=0,1, and 2.
   !
-  !***SEE ALSO  DBSKIN
-  !***ROUTINES CALLED  D1MACH, DPSIXN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBSKIN
+  !***
+  ! **Routines called:**  D1MACH, DPSIXN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DBKISR
+  
   INTEGER i, Ierr, k, kk, kkn, k1, N, np
   REAL(8) :: ak, atol, bk, c, fk, fn, hx, hxs, pol, pr, &
     Sum, tkp, tol, trm, X, xln
@@ -30,7 +37,7 @@ SUBROUTINE DBKISR(X,N,Sum,Ierr)
   SAVE c
   !
   DATA c(1), c(2)/1.57079632679489662D+00, 1.0D0/
-  !***FIRST EXECUTABLE STATEMENT  DBKISR
+  !* FIRST EXECUTABLE STATEMENT  DBKISR
   Ierr = 0
   tol = MAX(D1MACH(4),1.0D-18)
   IF ( X>=tol ) THEN

@@ -1,19 +1,26 @@
-!DECK CBESH
+!** CBESH
 SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CBESH
-  !***PURPOSE  Compute a sequence of the Hankel functions H(m,a,z)
+  !>
+  !***
+  !  Compute a sequence of the Hankel functions H(m,a,z)
   !            for superscript m=1 or 2, real nonnegative orders a=b,
   !            b+1,... where b>0, and nonzero complex argument z.  A
   !            scaling option is available to help avoid overflow.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10A4
-  !***TYPE      COMPLEX (CBESH-C, ZBESH-C)
-  !***KEYWORDS  BESSEL FUNCTIONS OF COMPLEX ARGUMENT,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10A4
+  !***
+  ! **Type:**      COMPLEX (CBESH-C, ZBESH-C)
+  !***
+  ! **Keywords:**  BESSEL FUNCTIONS OF COMPLEX ARGUMENT,
   !             BESSEL FUNCTIONS OF THE THIRD KIND, H BESSEL FUNCTIONS,
   !             HANKEL FUNCTIONS
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !         On KODE=1, CBESH computes an N member sequence of complex
   !         Hankel (Bessel) functions CY(L)=H(M,FNU+L-1,Z) for super-
@@ -63,7 +70,7 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   !                    IERR=5  Algorithmic error - NO COMPUTATION
   !                            (Termination condition not met)
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !         The computation is carried out by the formula
   !
@@ -124,7 +131,8 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   !         the principal phase angle is on the order of +P, -P, PI/2-P,
   !         or -PI/2+P.
   !
-  !***REFERENCES  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
+  !***
+  ! **References:**  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
   !                 matical Functions, National Bureau of Standards
   !                 Applied Mathematics Series 55, U. S. Department
   !                 of Commerce, Tenth Printing (1972) or later.
@@ -144,14 +152,16 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   !                 Transactions on Mathematical Software, 12 (September
   !                 1986), pp. 265-273.
   !
-  !***ROUTINES CALLED  CACON, CBKNU, CBUNK, CUOIK, I1MACH, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CACON, CBKNU, CBUNK, CUOIK, I1MACH, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   890801  REVISION DATE from Version 3.2
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  !***END PROLOGUE  CBESH
+  
   !
   COMPLEX Cy, Z, zn, zt, csgn
   REAL aa, alim, aln, arg, az, cpn, dig, elim, fmm, fn, Fnu, &
@@ -163,7 +173,7 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   !
   DATA hpi/1.57079632679489662E0/
   !
-  !***FIRST EXECUTABLE STATEMENT  CBESH
+  !* FIRST EXECUTABLE STATEMENT  CBESH
   Nz = 0
   xx = REAL(Z)
   yy = AIMAG(Z)

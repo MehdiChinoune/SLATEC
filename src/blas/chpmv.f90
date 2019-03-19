@@ -1,17 +1,24 @@
-!DECK CHPMV
+!** CHPMV
 SUBROUTINE CHPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHPMV
-  !***PURPOSE  Perform the matrix-vector operation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B4
-  !***TYPE      COMPLEX (SHPMV-S, DHPMV-D, CHPMV-C)
-  !***KEYWORDS  LEVEL 2 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J. J., (ANL)
+  !>
+  !***
+  !  Perform the matrix-vector operation.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      COMPLEX (SHPMV-S, DHPMV-D, CHPMV-C)
+  !***
+  ! **Keywords:**  LEVEL 2 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J. J., (ANL)
   !           Du Croz, J., (NAG)
   !           Hammarling, S., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  CHPMV  performs the matrix-vector operation
   !
@@ -88,16 +95,19 @@ SUBROUTINE CHPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   !           Y. INCY must not be zero.
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J. J., Du Croz, J., Hammarling, S., and
+  !***
+  ! **References:**  Dongarra, J. J., Du Croz, J., Hammarling, S., and
   !                 Hanson, R. J.  An extended set of Fortran basic linear
   !                 algebra subprograms.  ACM TOMS, Vol. 14, No. 1,
   !                 pp. 1-17, March 1988.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  CHPMV
+  
   !     .. Scalar Arguments ..
   COMPLEX Alpha, Beta
   INTEGER Incx, Incy, N
@@ -119,7 +129,7 @@ SUBROUTINE CHPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, REAL
-  !***FIRST EXECUTABLE STATEMENT  CHPMV
+  !* FIRST EXECUTABLE STATEMENT  CHPMV
   !
   !     Test the input parameters.
   !

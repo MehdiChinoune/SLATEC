@@ -1,16 +1,23 @@
-!DECK SPPFA
+!** SPPFA
 SUBROUTINE SPPFA(Ap,N,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPPFA
-  !***PURPOSE  Factor a real symmetric positive definite matrix stored in
+  !>
+  !***
+  !  Factor a real symmetric positive definite matrix stored in
   !            packed form.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1B
-  !***TYPE      SINGLE PRECISION (SPPFA-S, DPPFA-D, CPPFA-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION, PACKED,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1B
+  !***
+  ! **Type:**      SINGLE PRECISION (SPPFA-S, DPPFA-D, CPPFA-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION, PACKED,
   !             POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     SPPFA factors a real symmetric positive definite matrix
   !     stored in packed form.
@@ -54,10 +61,13 @@ SUBROUTINE SPPFA(Ap,N,Info)
   !             10    CONTINUE
   !             20 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -65,14 +75,14 @@ SUBROUTINE SPPFA(Ap,N,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SPPFA
+  
   INTEGER N, Info
   REAL Ap(*)
   !
   REAL SDOT, t
   REAL s
   INTEGER j, jj, jm1, k, kj, kk
-  !***FIRST EXECUTABLE STATEMENT  SPPFA
+  !* FIRST EXECUTABLE STATEMENT  SPPFA
   jj = 0
   DO j = 1, N
     Info = j

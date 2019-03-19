@@ -1,21 +1,28 @@
-!DECK PCHSP
+!** PCHSP
 SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PCHSP
-  !***PURPOSE  Set derivatives needed to determine the Hermite represen-
+  !>
+  !***
+  !  Set derivatives needed to determine the Hermite represen-
   !            tation of the cubic spline interpolant to given data, with
   !            specified boundary conditions.
-  !***LIBRARY   SLATEC (PCHIP)
-  !***CATEGORY  E1A
-  !***TYPE      SINGLE PRECISION (PCHSP-S, DPCHSP-D)
-  !***KEYWORDS  CUBIC HERMITE INTERPOLATION, PCHIP,
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Category:**  E1A
+  !***
+  ! **Type:**      SINGLE PRECISION (PCHSP-S, DPCHSP-D)
+  !***
+  ! **Keywords:**  CUBIC HERMITE INTERPOLATION, PCHIP,
   !             PIECEWISE CUBIC INTERPOLATION, SPLINE INTERPOLATION
-  !***AUTHOR  Fritsch, F. N., (LLNL)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             P.O. Box 808  (L-316)
   !             Livermore, CA  94550
   !             FTS 532-4275, (510) 422-4275
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !          PCHSP:   Piecewise Cubic Hermite Spline
   !
@@ -123,10 +130,13 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !             (The D-array may have been changed in this case.)
   !             (             Do **NOT** use it!                )
   !
-  !***REFERENCES  Carl de Boor, A Practical Guide to Splines, Springer-
+  !***
+  ! **References:**  Carl de Boor, A Practical Guide to Splines, Springer-
   !                 Verlag, New York, 1978, pp. 53-59.
-  !***ROUTINES CALLED  PCHDF, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  PCHDF, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820503  DATE WRITTEN
   !   820804  Converted to SLATEC library version.
   !   870707  Minor cosmetic changes to prologue.
@@ -137,7 +147,7 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920429  Revised format and order of references.  (WRB,FNF)
-  !***END PROLOGUE  PCHSP
+  
   !  Programming notes:
   !
   !     To produce a double precision version, simply:
@@ -161,7 +171,7 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
-  !***FIRST EXECUTABLE STATEMENT  PCHSP
+  !* FIRST EXECUTABLE STATEMENT  PCHSP
   IF ( N<2 ) THEN
     !
     !  ERROR RETURNS.

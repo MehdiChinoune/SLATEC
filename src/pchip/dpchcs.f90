@@ -1,13 +1,17 @@
-!DECK DPCHCS
+!** DPCHCS
 SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPCHCS
-  !***SUBSIDIARY
-  !***PURPOSE  Adjusts derivative values for DPCHIC
-  !***LIBRARY   SLATEC (PCHIP)
-  !***TYPE      DOUBLE PRECISION (PCHCS-S, DPCHCS-D)
-  !***AUTHOR  Fritsch, F. N., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Adjusts derivative values for DPCHIC
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Type:**      DOUBLE PRECISION (PCHCS-S, DPCHCS-D)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
+  !***
+  ! **Description:**
   !
   !         DPCHCS:  DPCHIC Monotonicity Switch Derivative Setter.
   !
@@ -59,9 +63,12 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !
   !  Fortran intrinsics used:  ABS, MAX, MIN.
   !
-  !***SEE ALSO  DPCHIC
-  !***ROUTINES CALLED  DPCHST, DPCHSW
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DPCHIC
+  !***
+  ! **Routines called:**  DPCHST, DPCHSW
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820218  DATE WRITTEN
   !   820617  Redesigned to (1) fix  problem with lack of continuity
   !           approaching a flat-topped peak (2) be cleaner and
@@ -83,7 +90,7 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
   !   930503  Improved purpose.  (FNF)
-  !***END PROLOGUE  DPCHCS
+  
   !
   !  Programming notes:
   !     1. The function  DPCHST(ARG1,ARG2)  is assumed to return zero if
@@ -108,7 +115,7 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !
   DATA zero/0.D0/, one/1.D0/
   DATA fudge/4.D0/
-  !***FIRST EXECUTABLE STATEMENT  DPCHCS
+  !* FIRST EXECUTABLE STATEMENT  DPCHCS
   Ierr = 0
   nless1 = N - 1
   !

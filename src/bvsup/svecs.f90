@@ -1,13 +1,17 @@
-!DECK SVECS
+!** SVECS
 SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SVECS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SVECS-S, DVECS-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SVECS-S, DVECS-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !  This subroutine is used for the special structure of complex valued
   !  problems. MGSBV is called upon to obtain LNFC vectors from an
@@ -15,17 +19,21 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   !  LNFC vectors together with their imaginary product or mate vectors
   !  form an independent set.
   !
-  !***SEE ALSO  BVSUP
-  !***ROUTINES CALLED  MGSBV
-  !***COMMON BLOCKS    ML18JR
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **Routines called:**  MGSBV
+  !***
+  ! COMMON BLOCKS    ML18JR
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890921  Realigned order of variables in certain COMMON blocks.
   !           (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  SVECS
+  
   REAL AE, dum, RE, TOL, Work, Yhp
   INTEGER ICOco, idp, Iflag, INDpvt, Inhomo, INTeg, Iwork, k, kp, &
     Lnfc, LNFcc, MXNon, Ncomp, NDIsk, NEQ, NEQivp, NIC, niv, NOPg, NPS
@@ -33,7 +41,7 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   DIMENSION Yhp(Ncomp,*), Work(*), Iwork(*)
   COMMON /ML18JR/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
     NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, NUMort, LNFcc, ICOco
-  !***FIRST EXECUTABLE STATEMENT  SVECS
+  !* FIRST EXECUTABLE STATEMENT  SVECS
   IF ( Lnfc/=1 ) THEN
     niv = Lnfc
     Lnfc = 2*Lnfc

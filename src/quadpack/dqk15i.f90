@@ -1,23 +1,30 @@
-!DECK DQK15I
+!** DQK15I
 SUBROUTINE DQK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQK15I
-  !***PURPOSE  The original (infinite integration range is mapped
+  !>
+  !***
+  !  The original (infinite integration range is mapped
   !            onto the interval (0,1) and (A,B) is a part of (0,1).
   !            it is the purpose to compute
   !            I = Integral of transformed integrand over (A,B),
   !            J = Integral of ABS(Transformed Integrand) over (A,B).
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A3A2, H2A4A2
-  !***TYPE      DOUBLE PRECISION (QK15I-S, DQK15I-D)
-  !***KEYWORDS  15-POINT GAUSS-KRONROD RULES, QUADPACK, QUADRATURE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A3A2, H2A4A2
+  !***
+  ! **Type:**      DOUBLE PRECISION (QK15I-S, DQK15I-D)
+  !***
+  ! **Keywords:**  15-POINT GAUSS-KRONROD RULES, QUADPACK, QUADRATURE
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !           Integration Rule
   !           Standard Fortran subroutine
@@ -71,14 +78,17 @@ SUBROUTINE DQK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   !                       Approximation to the integral of
   !                       ABS((TRANSFORMED INTEGRAND)-I/(B-A)) over (A,B)
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DQK15I
+  
   !
   REAL(8) :: A, absc, absc1, absc2, Abserr, B, Boun, centr, &
     dinf, D1MACH, epmach, F, fc, fsum, fval1, fval2, &
@@ -144,7 +154,7 @@ SUBROUTINE DQK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   !           EPMACH IS THE LARGEST RELATIVE SPACING.
   !           UFLOW IS THE SMALLEST POSITIVE MAGNITUDE.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQK15I
+  !* FIRST EXECUTABLE STATEMENT  DQK15I
   epmach = D1MACH(4)
   uflow = D1MACH(1)
   dinf = MIN(1,Inf)

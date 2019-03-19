@@ -1,13 +1,17 @@
-!DECK TRIS4
+!** TRIS4
 SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TRIS4
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SEPX4
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (TRIS4-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SEPX4
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (TRIS4-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This subroutine solves for a non-zero eigenvector corresponding
   !     to the zero eigenvalue of the transpose of the rank
@@ -15,18 +19,21 @@ SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
   !     superdiagonal C, with A(1) in the (1,N) position, with
   !     C(N) in the (N,1) position, AND all other elements zero.
   !
-  !***SEE ALSO  SEPX4
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SEPX4
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  TRIS4
+  
   REAL A, an, B, bn, C, D, den, U, v, Z
   INTEGER j, k, N, nm1, nm2
   DIMENSION A(*), B(*), C(*), D(*), U(*), Z(*)
-  !***FIRST EXECUTABLE STATEMENT  TRIS4
+  !* FIRST EXECUTABLE STATEMENT  TRIS4
   bn = B(N)
   D(1) = A(2)/B(1)
   v = A(1)

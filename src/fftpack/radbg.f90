@@ -1,15 +1,20 @@
-!DECK RADBG
+!** RADBG
 SUBROUTINE RADBG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RADBG
-  !***SUBSIDIARY
-  !***PURPOSE  Calculate the fast Fourier transform of subvectors of
+  !>
+  !***
+  !  Calculate the fast Fourier transform of subvectors of
   !            arbitrary length.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***TYPE      SINGLE PRECISION (RADBG-S)
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Type:**      SINGLE PRECISION (RADBG-S)
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -24,13 +29,13 @@ SUBROUTINE RADBG(Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  RADBG
+  
   REAL ai1, ai2, ar1, ar1h, ar2, ar2h, arg, C1, C2, Cc, Ch, Ch2, &
     dc2, dcp, ds2, dsp, tpi, Wa
   INTEGER i, ic, idij, Idl1, Ido, idp2, ik, Ip, ipp2, ipph, is, &
     j, j2, jc, k, l, L1, lc, nbd
   DIMENSION Ch(Ido,L1,*), Cc(Ido,Ip,*), C1(Ido,L1,*), C2(Idl1,*), Ch2(Idl1,*), Wa(*)
-  !***FIRST EXECUTABLE STATEMENT  RADBG
+  !* FIRST EXECUTABLE STATEMENT  RADBG
   tpi = 8.*ATAN(1.)
   arg = tpi/Ip
   dcp = COS(arg)

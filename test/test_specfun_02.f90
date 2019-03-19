@@ -2,17 +2,22 @@ MODULE TEST03_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK DFNCK
+  !** DFNCK
   SUBROUTINE DFNCK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DFNCK
-    !***PURPOSE  Quick check for the double precision Fullerton
+    !>
+    !***
+    !  Quick check for the double precision Fullerton
     !            special functions.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Boland, W. Robert, (LANL)
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Boland, W. Robert, (LANL)
     !           Chow, Jeff, (LANL)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !     This subroutine does a quick check for the double precision
     !     routines in the Fullerton special function library.
@@ -26,7 +31,8 @@ CONTAINS
     !     IPASS    output value indicating whether tests passed or
     !              failed
     !
-    !***ROUTINES CALLED  D1MACH, D9ATN1, D9LN2R, DACOSH, DAI, DAIE, DASINH,
+    !***
+    ! **Routines called:**  D1MACH, D9ATN1, D9LN2R, DACOSH, DAI, DAIE, DASINH,
     !                    DATANH, DBESI0, DBESI1, DBESJ0, DBESJ1, DBESK0,
     !                    DBESK1, DBESKS, DBESY0, DBESY1, DBETA, DBETAI, DBI,
     !                    DBIE, DBINOM, DBSI0E, DBSI1E, DBSK0E, DBSK1E,
@@ -34,14 +40,15 @@ CONTAINS
     !                    DERF, DEXPRL, DFAC, DGAMI, DGAMIC, DGAMIT, DGAMMA,
     !                    DGAMR, DLI, DLNREL, DPOCH, DPOCH1, DPSI, DSINDG,
     !                    DSPENC
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   800801  DATE WRITTEN
     !   891115  REVISION DATE from Version 3.2
     !   891120  Checks of remainder of FNLIB routines added and code
     !           reorganized.  (WRB)
     !   900330  Prologue converted to Version 4.0 format.  (BAB)
     !   900727  Added EXTERNAL statement.  (WRB)
-    !***END PROLOGUE  DFNCK
+    
     INTEGER i, Lun, Kprint, Ipass
     REAL(8) :: y(105), v(105), errmax, errtol, abserr, relerr
     REAL(8), EXTERNAL :: D1MACH, D9ATN1, D9LN2R, DACOSH, DAI, DAIE, DASINH, &
@@ -158,7 +165,7 @@ CONTAINS
     DATA v(103)/.596347362323194074341078499290D+00/
     DATA v(104)/.757342086122175953454414369190D+00/
     DATA v(105)/.757872156141312106043351240000D+00/
-    !***FIRST EXECUTABLE STATEMENT  DFNCK
+    !* FIRST EXECUTABLE STATEMENT  DFNCK
     !
     !     Compute functional values
     !
@@ -335,24 +342,31 @@ CONTAINS
     RETURN
   END SUBROUTINE DFNCK
 END MODULE TEST03_MOD
-!DECK TEST03
+!** TEST03
 PROGRAM TEST03
   USE TEST03_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST03
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C
-  !***TYPE      DOUBLE PRECISION (TEST02-S, TEST03-D, TEST04-C)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C
+  !***
+  ! **Type:**      DOUBLE PRECISION (TEST02-S, TEST03-D, TEST04-C)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -364,23 +378,26 @@ PROGRAM TEST03
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        double precision Fullerton routines
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  DFNCK, I1MACH, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DFNCK, I1MACH, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST03
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST03
+  !* FIRST EXECUTABLE STATEMENT  TEST03
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

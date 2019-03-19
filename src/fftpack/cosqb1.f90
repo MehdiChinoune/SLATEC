@@ -1,26 +1,35 @@
-!DECK COSQB1
+!** COSQB1
 SUBROUTINE COSQB1(N,X,W,Xh)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  COSQB1
-  !***SUBSIDIARY
-  !***PURPOSE  Compute the unnormalized inverse of COSQF1.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A3
-  !***TYPE      SINGLE PRECISION (COSQB1-S)
-  !***KEYWORDS  FFTPACK, FOURIER TRANSFORM
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the unnormalized inverse of COSQF1.
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A3
+  !***
+  ! **Type:**      SINGLE PRECISION (COSQB1-S)
+  !***
+  ! **Keywords:**  FFTPACK, FOURIER TRANSFORM
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !  Subroutine COSQB1 computes the fast Fourier transform of quarter
   !  wave data. That is, COSQB1 computes a sequence from its
   !  representation in terms of a cosine series with odd wave numbers.
   !  The transform is defined below at output parameter X.
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  RFFTB
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  RFFTB
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -28,11 +37,11 @@ SUBROUTINE COSQB1(N,X,W,Xh)
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  COSQB1
+  
   INTEGER i, k, kc, modn, N, np2, ns2
   REAL W, X, Xh, xim1
   DIMENSION X(*), W(*), Xh(*)
-  !***FIRST EXECUTABLE STATEMENT  COSQB1
+  !* FIRST EXECUTABLE STATEMENT  COSQB1
   ns2 = (N+1)/2
   np2 = N + 2
   DO i = 3, N, 2

@@ -1,15 +1,21 @@
-!DECK GAMLN
+!** GAMLN
 REAL FUNCTION GAMLN(Z,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  GAMLN
-  !***SUBSIDIARY
-  !***PURPOSE  Compute the logarithm of the Gamma function
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C7A
-  !***TYPE      SINGLE PRECISION (GAMLN-S, DGAMLN-D)
-  !***KEYWORDS  LOGARITHM OF GAMMA FUNCTION
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the logarithm of the Gamma function
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C7A
+  !***
+  ! **Type:**      SINGLE PRECISION (GAMLN-S, DGAMLN-D)
+  !***
+  ! **Keywords:**  LOGARITHM OF GAMMA FUNCTION
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !         GAMLN COMPUTES THE NATURAL LOG OF THE GAMMA FUNCTION FOR
   !         Z.GT.0.  THE ASYMPTOTIC EXPANSION IS USED TO GENERATE VALUES
@@ -33,16 +39,19 @@ REAL FUNCTION GAMLN(Z,Ierr)
   !                    IERR=0, NORMAL RETURN, COMPUTATION COMPLETED
   !                    IERR=1, Z.LE.0.0E0,    NO COMPUTATION
   !
-  !***REFERENCES  COMPUTATION OF BESSEL FUNCTIONS OF COMPLEX ARGUMENT
+  !***
+  ! **References:**  COMPUTATION OF BESSEL FUNCTIONS OF COMPLEX ARGUMENT
   !                 BY D. E. AMOS, SAND83-0083, MAY, 1983.
-  !***ROUTINES CALLED  I1MACH, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  I1MACH, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   830501  REVISION DATE from Version 3.2
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   921215  GAMLN defined for Z negative.  (WRB)
-  !***END PROLOGUE  GAMLN
+  
   !
   INTEGER i, i1m, k, mz, nz, Ierr, I1MACH
   REAL cf, con, fln, fz, gln, rln, s, tlg, trm, tst, t1, wdtol, &
@@ -133,7 +142,7 @@ REAL FUNCTION GAMLN(Z,Ierr)
   !             LN(2*PI)
   DATA con/1.83787706640934548E+00/
   !
-  !***FIRST EXECUTABLE STATEMENT  GAMLN
+  !* FIRST EXECUTABLE STATEMENT  GAMLN
   Ierr = 0
   IF ( Z<=0.0E0 ) THEN
     !

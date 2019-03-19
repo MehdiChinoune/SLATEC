@@ -1,21 +1,27 @@
-!DECK DHELS
+!** DHELS
 SUBROUTINE DHELS(A,Lda,N,Q,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DHELS
-  !***SUBSIDIARY
-  !***PURPOSE  Internal routine for DGMRES.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      DOUBLE PRECISION (SHELS-S, DHELS-D)
-  !***KEYWORDS  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
+  !>
+  !***
+  !  Internal routine for DGMRES.
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (SHELS-S, DHELS-D)
+  !***
+  ! **Keywords:**  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
   !             NON-SYMMETRIC LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Brown, Peter, (LLNL), pnbrown@llnl.gov
+  !***
+  ! **Author:**  Brown, Peter, (LLNL), pnbrown@llnl.gov
   !           Hindmarsh, Alan, (LLNL), alanh@llnl.gov
   !           Seager, Mark K., (LLNL), seager@llnl.gov
   !             Lawrence Livermore National Laboratory
   !             PO Box 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !        This routine is extracted from the LINPACK routine SGESL with
   !        changes due to the fact that A is an upper Hessenberg matrix.
   !
@@ -25,13 +31,13 @@ SUBROUTINE DHELS(A,Lda,N,Q,B)
   !
   !        using the factors computed by DHEQR.
   !
-  ! *Usage:
+  !- Usage:
   !      INTEGER LDA, N
   !      DOUBLE PRECISION A(LDA,N), Q(2*N), B(N+1)
   !
   !      CALL DHELS(A, LDA, N, Q, B)
   !
-  ! *Arguments:
+  !- Arguments:
   ! A       :IN       Double Precision A(LDA,N)
   !          The output from DHEQR which contains the upper
   !          triangular factor R in the QR decomposition of A.
@@ -46,9 +52,12 @@ SUBROUTINE DHELS(A,Lda,N,Q,B)
   !          On input, B is the right hand side vector.
   !          On output, B is the solution vector X.
   !
-  !***SEE ALSO  DGMRES
-  !***ROUTINES CALLED  DAXPY
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DGMRES
+  !***
+  ! **Routines called:**  DAXPY
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -59,7 +68,7 @@ SUBROUTINE DHELS(A,Lda,N,Q,B)
   !   910502  Added C***FIRST EXECUTABLE STATEMENT line.  (FNF)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  !***END PROLOGUE  DHELS
+  
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -71,7 +80,7 @@ SUBROUTINE DHELS(A,Lda,N,Q,B)
   INTEGER iq, k, kb, kp1
   !     .. External Subroutines ..
   EXTERNAL DAXPY
-  !***FIRST EXECUTABLE STATEMENT  DHELS
+  !* FIRST EXECUTABLE STATEMENT  DHELS
   !
   !         Minimize(B-A*X,B-A*X).  First form Q*B.
   !

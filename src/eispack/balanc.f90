@@ -1,15 +1,22 @@
-!DECK BALANC
+!** BALANC
 SUBROUTINE BALANC(Nm,N,A,Low,Igh,Scale)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BALANC
-  !***PURPOSE  Balance a real general matrix and isolate eigenvalues
+  !>
+  !***
+  !  Balance a real general matrix and isolate eigenvalues
   !            whenever possible.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C1A
-  !***TYPE      SINGLE PRECISION (BALANC-S, CBAL-C)
-  !***KEYWORDS  EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C1A
+  !***
+  ! **Type:**      SINGLE PRECISION (BALANC-S, CBAL-C)
+  !***
+  ! **Keywords:**  EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure BALANCE,
   !     NUM. MATH. 13, 293-304(1969) by Parlett and Reinsch.
@@ -63,25 +70,28 @@ SUBROUTINE BALANC(Nm,N,A,Low,Igh,Scale)
   !     Applied Mathematics Division, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BALANC
+  
   !
   INTEGER i, j, k, l, m, N, jj, Nm, Igh, Low, iexc
   REAL A(Nm,*), Scale(*)
   REAL c, f, g, r, s, b2, radix
   LOGICAL noconv
   !
-  !***FIRST EXECUTABLE STATEMENT  BALANC
+  !* FIRST EXECUTABLE STATEMENT  BALANC
   radix = 16
   !
   b2 = radix*radix

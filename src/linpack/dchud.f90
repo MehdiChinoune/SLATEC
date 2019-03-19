@@ -1,16 +1,23 @@
-!DECK DCHUD
+!** DCHUD
 SUBROUTINE DCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCHUD
-  !***PURPOSE  Update an augmented Cholesky decomposition of the
+  !>
+  !***
+  !  Update an augmented Cholesky decomposition of the
   !            triangular part of an augmented QR decomposition.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D7B
-  !***TYPE      DOUBLE PRECISION (SCHUD-S, DCHUD-D, CCHUD-C)
-  !***KEYWORDS  CHOLESKY DECOMPOSITION, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D7B
+  !***
+  ! **Type:**      DOUBLE PRECISION (SCHUD-S, DCHUD-D, CCHUD-C)
+  !***
+  ! **Keywords:**  CHOLESKY DECOMPOSITION, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             UPDATE
-  !***AUTHOR  Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Stewart, G. W., (U. of Maryland)
+  !***
+  ! **Description:**
   !
   !     DCHUD updates an augmented Cholesky decomposition of the
   !     triangular part of an augmented QR decomposition.  Specifically,
@@ -96,10 +103,13 @@ SUBROUTINE DCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   !                S contains the sines of the transforming
   !                rotations.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DROTG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DROTG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -108,7 +118,7 @@ SUBROUTINE DCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DCHUD
+  
   INTEGER Ldr, P, Ldz, Nz
   REAL(8) :: Rho(*), C(*)
   REAL(8) :: R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
@@ -119,7 +129,7 @@ SUBROUTINE DCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   !
   !     UPDATE R.
   !
-  !***FIRST EXECUTABLE STATEMENT  DCHUD
+  !* FIRST EXECUTABLE STATEMENT  DCHUD
   DO j = 1, P
     xj = X(j)
     !

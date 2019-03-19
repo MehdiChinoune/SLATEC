@@ -1,17 +1,24 @@
-!DECK SNSQ
+!** SNSQ
 SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,R,Lr,Qtf,&
     Wa1,Wa2,Wa3,Wa4)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SNSQ
-  !***PURPOSE  Find a zero of a system of a N nonlinear functions in N
+  !>
+  !***
+  !  Find a zero of a system of a N nonlinear functions in N
   !            variables by a modification of the Powell hybrid method.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  F2A
-  !***TYPE      SINGLE PRECISION (SNSQ-S, DNSQ-D)
-  !***KEYWORDS  NONLINEAR SQUARE SYSTEM, POWELL HYBRID METHOD, ZEROS
-  !***AUTHOR  Hiebert, K. L., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  F2A
+  !***
+  ! **Type:**      SINGLE PRECISION (SNSQ-S, DNSQ-D)
+  !***
+  ! **Keywords:**  NONLINEAR SQUARE SYSTEM, POWELL HYBRID METHOD, ZEROS
+  !***
+  ! **Author:**  Hiebert, K. L., (SNLA)
+  !***
+  ! **Description:**
   !
   ! 1. Purpose.
   !
@@ -405,13 +412,16 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !       -0.7042129E+00 -0.7013690E+00 -0.6918656E+00
   !       -0.6657920E+00 -0.5960342E+00 -0.4164121E+00
   !
-  !***REFERENCES  M. J. D. Powell, A hybrid method for nonlinear equa-
+  !***
+  ! **References:**  M. J. D. Powell, A hybrid method for nonlinear equa-
   !                 tions. In Numerical Methods for Nonlinear Algebraic
   !                 Equations, P. Rabinowitz, Editor.  Gordon and Breach,
   !                 1988.
-  !***ROUTINES CALLED  DOGLEG, ENORM, FDJAC1, QFORM, QRFAC, R1MACH,
+  !***
+  ! **Routines called:**  DOGLEG, ENORM, FDJAC1, QFORM, QRFAC, R1MACH,
   !                    R1MPYQ, R1UPDT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -419,7 +429,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SNSQ
+  
   INTEGER Iopt, N, Maxfev, Ml, Mu, Mode, Nprint, Info, Nfev, &
     Ldfjac, Lr, Njev
   REAL Xtol, Epsfcn, Factor
@@ -436,7 +446,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   DATA one, p1, p5, p001, p0001, zero/1.0E0, 1.0E-1, 5.0E-1, &
     1.0E-3, 1.0E-4, 0.0E0/
   !
-  !***FIRST EXECUTABLE STATEMENT  SNSQ
+  !* FIRST EXECUTABLE STATEMENT  SNSQ
   epsmch = R1MACH(4)
   !
   Info = 0

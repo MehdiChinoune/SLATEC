@@ -1,28 +1,35 @@
-!DECK PSIXN
+!** PSIXN
 REAL FUNCTION PSIXN(N)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PSIXN
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to EXINT
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (PSIXN-S, DPSIXN-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to EXINT
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (PSIXN-S, DPSIXN-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     This subroutine returns values of PSI(X)=derivative of log
   !     GAMMA(X), X .GT. 0.0 at integer arguments. A table look-up is
   !     performed for N .LE. 100, and the asymptotic expansion is
   !     evaluated for N .GT. 100.
   !
-  !***SEE ALSO  EXINT
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  EXINT
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800501  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  PSIXN
+  
   INTEGER N, k
   REAL ax, b, c, fn, rfn2, trm, s, wdtol
   REAL R1MACH
@@ -101,7 +108,7 @@ REAL FUNCTION PSIXN(N)
     -4.16666666666666666E-03, 7.57575757575757576E-03, &
     -2.10927960927960928E-02/
   !
-  !***FIRST EXECUTABLE STATEMENT  PSIXN
+  !* FIRST EXECUTABLE STATEMENT  PSIXN
   IF ( N>100 ) THEN
     wdtol = MAX(R1MACH(4),1.0E-18)
     fn = N

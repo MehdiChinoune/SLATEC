@@ -1,15 +1,20 @@
-!DECK IPLOC
+!** IPLOC
 INTEGER FUNCTION IPLOC(Loc,Sx,Ix)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  IPLOC
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (IPLOC-S, IDLOC-D)
-  !***KEYWORDS  RELATIVE ADDRESS DETERMINATION FUNCTION, SLATEC
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (IPLOC-S, IDLOC-D)
+  !***
+  ! **Keywords:**  RELATIVE ADDRESS DETERMINATION FUNCTION, SLATEC
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Wisniewski, J. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   Given a "virtual" location,  IPLOC returns the relative working
   !   address of the vector component stored in SX, IX.  Any necessary
@@ -19,9 +24,12 @@ INTEGER FUNCTION IPLOC(Loc,Sx,Ix)
   !   LOC       is the "virtual" address of the data to be retrieved.
   !   SX ,IX    represent the matrix where the data is stored.
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  PRWPGE, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  PRWPGE, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810306  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890606  Restructured to match double precision version.  (WRB)
@@ -29,11 +37,11 @@ INTEGER FUNCTION IPLOC(Loc,Sx,Ix)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   910731  Added code to set IPLOC to 0 if LOC is non-positive.  (WRB)
-  !***END PROLOGUE  IPLOC
+  
   INTEGER ipage, itemp, k, key, lmx, lmxm1, Loc, lpg, np
   REAL Sx(*)
   INTEGER Ix(*)
-  !***FIRST EXECUTABLE STATEMENT  IPLOC
+  !* FIRST EXECUTABLE STATEMENT  IPLOC
   IF ( Loc<=0 ) THEN
     CALL XERMSG('SLATEC','IPLOC',&
       'A value of LOC, the first argument, .LE. 0 was encountered',55,1)

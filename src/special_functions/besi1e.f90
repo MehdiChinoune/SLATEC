@@ -1,17 +1,24 @@
-!DECK BESI1E
+!** BESI1E
 REAL FUNCTION BESI1E(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BESI1E
-  !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
+  !>
+  !***
+  !  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order one.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B1
-  !***TYPE      SINGLE PRECISION (BESI1E-S, DBSI1E-D)
-  !***KEYWORDS  EXPONENTIALLY SCALED, FIRST KIND, FNLIB,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B1
+  !***
+  ! **Type:**      SINGLE PRECISION (BESI1E-S, DBSI1E-D)
+  !***
+  ! **Keywords:**  EXPONENTIALLY SCALED, FIRST KIND, FNLIB,
   !             HYPERBOLIC BESSEL FUNCTION, MODIFIED BESSEL FUNCTION,
   !             ORDER ONE, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! BESI1E(X) calculates the exponentially scaled modified (hyperbolic)
   ! Bessel function of the first kind of order one for real argument X;
@@ -35,9 +42,12 @@ REAL FUNCTION BESI1E(X)
   !                               significant figures required  14.69
   !                                    decimal places required  17.12
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890210  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
@@ -45,7 +55,7 @@ REAL FUNCTION BESI1E(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  BESI1E
+  
   REAL ai12cs, ai1cs, bi1cs, CSEVL, R1MACH, X, xmin, xsml, y
   INTEGER INITS, ntai1, ntai12, nti1
   DIMENSION bi1cs(11), ai1cs(21), ai12cs(22)
@@ -106,7 +116,7 @@ REAL FUNCTION BESI1E(X)
   DATA ai12cs(21)/.00000000000000028E0/
   DATA ai12cs(22)/ - .00000000000000003E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BESI1E
+  !* FIRST EXECUTABLE STATEMENT  BESI1E
   IF ( first ) THEN
     nti1 = INITS(bi1cs,11,0.1*R1MACH(3))
     ntai1 = INITS(ai1cs,21,0.1*R1MACH(3))

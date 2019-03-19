@@ -1,17 +1,24 @@
-!DECK CSPCO
+!** CSPCO
 SUBROUTINE CSPCO(Ap,N,Kpvt,Rcond,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CSPCO
-  !***PURPOSE  Factor a complex symmetric matrix stored in packed form
+  !>
+  !***
+  !  Factor a complex symmetric matrix stored in packed form
   !            by elimination with symmetric pivoting and estimate the
   !            condition number of the matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2C1
-  !***TYPE      COMPLEX (SSPCO-S, DSPCO-D, CHPCO-C, CSPCO-C)
-  !***KEYWORDS  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2C1
+  !***
+  ! **Type:**      COMPLEX (SSPCO-S, DSPCO-D, CHPCO-C, CSPCO-C)
+  !***
+  ! **Keywords:**  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
   !             MATRIX FACTORIZATION, PACKED, SYMMETRIC
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CSPCO factors a complex symmetric matrix stored in packed
   !     form by elimination with symmetric pivoting and estimates
@@ -78,10 +85,13 @@ SUBROUTINE CSPCO(Ap,N,Kpvt,Rcond,Z)
   !             10    CONTINUE
   !             20 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTU, CSPFA, CSSCAL, SCASUM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTU, CSPFA, CSSCAL, SCASUM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -92,7 +102,7 @@ SUBROUTINE CSPCO(Ap,N,Kpvt,Rcond,Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CSPCO
+  
   INTEGER N, Kpvt(*)
   COMPLEX Ap(*), Z(*)
   REAL Rcond
@@ -106,7 +116,7 @@ SUBROUTINE CSPCO(Ap,N,Kpvt,Rcond,Z)
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !
-  !***FIRST EXECUTABLE STATEMENT  CSPCO
+  !* FIRST EXECUTABLE STATEMENT  CSPCO
   j1 = 1
   DO j = 1, N
     Z(j) = CMPLX(SCASUM(j,Ap(j1),1),0.0E0)

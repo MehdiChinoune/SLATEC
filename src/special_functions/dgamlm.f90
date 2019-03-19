@@ -1,15 +1,22 @@
-!DECK DGAMLM
+!** DGAMLM
 SUBROUTINE DGAMLM(Xmin,Xmax)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGAMLM
-  !***PURPOSE  Compute the minimum and maximum bounds for the argument in
+  !>
+  !***
+  !  Compute the minimum and maximum bounds for the argument in
   !            the Gamma function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7A, R2
-  !***TYPE      DOUBLE PRECISION (GAMLIM-S, DGAMLM-D)
-  !***KEYWORDS  COMPLETE GAMMA FUNCTION, FNLIB, LIMITS, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7A, R2
+  !***
+  ! **Type:**      DOUBLE PRECISION (GAMLIM-S, DGAMLM-D)
+  !***
+  ! **Keywords:**  COMPLETE GAMMA FUNCTION, FNLIB, LIMITS, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Calculate the minimum and maximum legal bounds for X in gamma(X).
   ! XMIN and XMAX are not the only bounds, but they are the only non-
@@ -21,18 +28,21 @@ SUBROUTINE DGAMLM(Xmin,Xmax)
   ! XMAX   double precision maximum legal value of X in gamma(X).  Any
   !        larger value of X might cause overflow.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DGAMLM
+  
   INTEGER i
   REAL(8) :: Xmin, Xmax, alnbig, alnsml, xln, xold, D1MACH
-  !***FIRST EXECUTABLE STATEMENT  DGAMLM
+  !* FIRST EXECUTABLE STATEMENT  DGAMLM
   alnsml = LOG(D1MACH(1))
   Xmin = -alnsml
   DO i = 1, 10

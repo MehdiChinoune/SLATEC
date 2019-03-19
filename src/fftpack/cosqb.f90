@@ -1,14 +1,21 @@
-!DECK COSQB
+!** COSQB
 SUBROUTINE COSQB(N,X,Wsave)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  COSQB
-  !***PURPOSE  Compute the unnormalized inverse cosine transform.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A3
-  !***TYPE      SINGLE PRECISION (COSQB-S)
-  !***KEYWORDS  FFTPACK, INVERSE COSINE FOURIER TRANSFORM
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the unnormalized inverse cosine transform.
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A3
+  !***
+  ! **Type:**      SINGLE PRECISION (COSQB-S)
+  !***
+  ! **Keywords:**  FFTPACK, INVERSE COSINE FOURIER TRANSFORM
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !  Subroutine COSQB computes the fast Fourier transform of quarter
   !  wave data. That is, COSQB computes a sequence from its
@@ -54,11 +61,14 @@ SUBROUTINE COSQB(N,X,Wsave)
   !  WSAVE   contains initialization calculations which must not
   !          be destroyed between calls of COSQB or COSQF.
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  COSQB1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  COSQB1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -70,11 +80,11 @@ SUBROUTINE COSQB(N,X,Wsave)
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  COSQB
+  
   INTEGER N
   REAL tsqrt2, Wsave, X, x1
   DIMENSION X(*), Wsave(*)
-  !***FIRST EXECUTABLE STATEMENT  COSQB
+  !* FIRST EXECUTABLE STATEMENT  COSQB
   tsqrt2 = 2.*SQRT(2.)
   IF ( N<2 ) THEN
     X(1) = 4.*X(1)

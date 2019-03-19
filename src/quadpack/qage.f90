@@ -1,25 +1,32 @@
-!DECK QAGE
+!** QAGE
 SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QAGE
-  !***PURPOSE  The routine calculates an approximation result to a given
+  !>
+  !***
+  !  The routine calculates an approximation result to a given
   !            definite integral   I = Integral of F over (A,B),
   !            hopefully satisfying following claim for accuracy
   !            ABS(I-RESLT).LE.MAX(EPSABS,EPSREL*ABS(I)).
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A1A1
-  !***TYPE      SINGLE PRECISION (QAGE-S, DQAGE-D)
-  !***KEYWORDS  AUTOMATIC INTEGRATOR, GAUSS-KRONROD RULES,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A1A1
+  !***
+  ! **Type:**      SINGLE PRECISION (QAGE-S, DQAGE-D)
+  !***
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, GAUSS-KRONROD RULES,
   !             GENERAL-PURPOSE, GLOBALLY ADAPTIVE, INTEGRAND EXAMINATOR,
   !             QUADPACK, QUADRATURE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Computation of a definite integral
   !        Standard fortran subroutine
@@ -146,15 +153,18 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   !                      Number of subintervals actually produced in the
   !                      subdivision process
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  QK15, QK21, QK31, QK41, QK51, QK61, QPSRT, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  QK15, QK21, QK31, QK41, QK51, QK61, QPSRT, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  QAGE
+  
   !
   REAL A, Abserr, Alist, area, area1, area12, area2, a1, a2, B, &
     Blist, b1, b2, defabs, defab1, defab2, R1MACH, Elist, &
@@ -195,7 +205,7 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   !           EPMACH  IS THE LARGEST RELATIVE SPACING.
   !           UFLOW  IS THE SMALLEST POSITIVE MAGNITUDE.
   !
-  !***FIRST EXECUTABLE STATEMENT  QAGE
+  !* FIRST EXECUTABLE STATEMENT  QAGE
   epmach = R1MACH(4)
   uflow = R1MACH(1)
   !
@@ -336,7 +346,7 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
         !           BISECTED NEXT).
         !
         CALL QPSRT(Limit,Last,maxerr,errmax,Elist,Iord,nrmax)
-        ! ***JUMP OUT OF DO-LOOP
+        !- **JUMP OUT OF DO-LOOP
         IF ( Ier/=0.OR.errsum<=errbnd ) EXIT
       ENDDO
       !

@@ -1,18 +1,25 @@
-!DECK BESI
+!** BESI
 SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BESI
-  !***PURPOSE  Compute an N member sequence of I Bessel functions
+  !>
+  !***
+  !  Compute an N member sequence of I Bessel functions
   !            I/SUB(ALPHA+K-1)/(X), K=1,...,N or scaled Bessel functions
   !            EXP(-X)*I/SUB(ALPHA+K-1)/(X), K=1,...,N for non-negative
   !            ALPHA and X.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10B3
-  !***TYPE      SINGLE PRECISION (BESI-S, DBESI-D)
-  !***KEYWORDS  I BESSEL FUNCTION, SPECIAL FUNCTIONS
-  !***AUTHOR  Amos, D. E., (SNLA)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10B3
+  !***
+  ! **Type:**      SINGLE PRECISION (BESI-S, DBESI-D)
+  !***
+  ! **Keywords:**  I BESSEL FUNCTION, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
   !           Daniel, S. L., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Abstract
   !         BESI computes an N member sequence of I Bessel functions
@@ -65,7 +72,8 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   !         Overflow with KODE=1 - a fatal error
   !         Underflow - a non-fatal error (NZ .NE. 0)
   !
-  !***REFERENCES  D. E. Amos, S. L. Daniel and M. K. Weston, CDC 6600
+  !***
+  ! **References:**  D. E. Amos, S. L. Daniel and M. K. Weston, CDC 6600
   !                 subroutines IBESS and JBESS for Bessel functions
   !                 I(NU,X) and J(NU,X), X .GE. 0, NU .GE. 0, ACM
   !                 Transactions on Mathematical Software 3, (1977),
@@ -73,8 +81,10 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   !               F. W. J. Olver, Tables of Bessel Functions of Moderate
   !                 or Large Orders, NPL Mathematical Tables 6, Her
   !                 Majesty's Stationery Office, London, 1962.
-  !***ROUTINES CALLED  ALNGAM, ASYIK, I1MACH, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  ALNGAM, ASYIK, I1MACH, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -83,7 +93,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BESI
+  
   !
   INTEGER i, ialp, in, inlim, is, i1, k, kk, km, Kode, kt, N, &
     nn, ns, Nz
@@ -97,7 +107,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   SAVE rttpi, inlim
   DATA rttpi/3.98942280401433E-01/
   DATA inlim/80/
-  !***FIRST EXECUTABLE STATEMENT  BESI
+  !* FIRST EXECUTABLE STATEMENT  BESI
   Nz = 0
   kt = 1
   !     I1MACH(15) REPLACES I1MACH(12) IN A DOUBLE PRECISION CODE

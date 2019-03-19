@@ -1,14 +1,18 @@
-!DECK PINITM
+!** PINITM
 SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PINITM
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (PINITM-S, DPINTM-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (PINITM-S, DPINTM-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Wisniewski, J. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     PINITM LIMITS THE TYPE OF STORAGE TO A SEQUENTIAL SCHEME.
   !     THE MATRIX IS STORED BY COLUMNS.
@@ -35,22 +39,25 @@ SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   !     REVISED 811130-1000
   !     REVISED YYMMDD-HHMM
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  !***END PROLOGUE  PINITM
+  
   INTEGER i, iopt, Ipagef, Ix, Lmx, lp4, M, N, n20008, n20012, nerr
   REAL Sx(Lmx), zero, one
   DIMENSION Ix(*)
   SAVE zero, one
   DATA zero, one/0.E0, 1.E0/
-  !***FIRST EXECUTABLE STATEMENT  PINITM
+  !* FIRST EXECUTABLE STATEMENT  PINITM
   iopt = 1
   !
   !     CHECK FOR INPUT ERRORS.

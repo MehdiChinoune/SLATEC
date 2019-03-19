@@ -1,15 +1,22 @@
-!DECK CHPSL
+!** CHPSL
 SUBROUTINE CHPSL(Ap,N,Kpvt,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHPSL
-  !***PURPOSE  Solve a complex Hermitian system using factors obtained
+  !>
+  !***
+  !  Solve a complex Hermitian system using factors obtained
   !            from CHPFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2D1A
-  !***TYPE      COMPLEX (SSPSL-S, DSPSL-D, CHPSL-C, CSPSL-C)
-  !***KEYWORDS  HERMITIAN, LINEAR ALGEBRA, LINPACK, MATRIX, PACKED, SOLVE
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2D1A
+  !***
+  ! **Type:**      COMPLEX (SSPSL-S, DSPSL-D, CHPSL-C, CSPSL-C)
+  !***
+  ! **Keywords:**  HERMITIAN, LINEAR ALGEBRA, LINPACK, MATRIX, PACKED, SOLVE
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     CHISL solves the complex Hermitian system
   !     A * X = B
@@ -46,10 +53,13 @@ SUBROUTINE CHPSL(Ap,N,Kpvt,B)
   !              CALL CHPSL(AP,N,KVPT,C(1,J))
   !        10 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTC
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTC
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -59,7 +69,7 @@ SUBROUTINE CHPSL(Ap,N,Kpvt,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CHPSL
+  
   INTEGER N, Kpvt(*)
   COMPLEX Ap(*), B(*)
   !
@@ -69,7 +79,7 @@ SUBROUTINE CHPSL(Ap,N,Kpvt,B)
   !     LOOP BACKWARD APPLYING THE TRANSFORMATIONS AND
   !     D INVERSE TO B.
   !
-  !***FIRST EXECUTABLE STATEMENT  CHPSL
+  !* FIRST EXECUTABLE STATEMENT  CHPSL
   k = N
   ik = (N*(N-1))/2
   DO WHILE ( k/=0 )

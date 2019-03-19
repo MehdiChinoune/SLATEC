@@ -1,15 +1,22 @@
-!DECK DGBSL
+!** DGBSL
 SUBROUTINE DGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGBSL
-  !***PURPOSE  Solve the real band system A*X=B or TRANS(A)*X=B using
+  !>
+  !***
+  !  Solve the real band system A*X=B or TRANS(A)*X=B using
   !            the factors computed by DGBCO or DGBFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2A2
-  !***TYPE      DOUBLE PRECISION (SGBSL-S, DGBSL-D, CGBSL-C)
-  !***KEYWORDS  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2A2
+  !***
+  ! **Type:**      DOUBLE PRECISION (SGBSL-S, DGBSL-D, CGBSL-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DGBSL solves the double precision band system
   !     A * X = B  or  TRANS(A) * X = B
@@ -64,10 +71,13 @@ SUBROUTINE DGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !              CALL DGBSL(ABD,LDA,N,ML,MU,IPVT,C(1,J),0)
   !        10 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -76,13 +86,13 @@ SUBROUTINE DGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DGBSL
+  
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Job
   REAL(8) :: Abd(Lda,*), B(*)
   !
   REAL(8) :: DDOT, t
   INTEGER k, kb, l, la, lb, lm, m, nm1
-  !***FIRST EXECUTABLE STATEMENT  DGBSL
+  !* FIRST EXECUTABLE STATEMENT  DGBSL
   m = Mu + Ml + 1
   nm1 = N - 1
   IF ( Job/=0 ) THEN

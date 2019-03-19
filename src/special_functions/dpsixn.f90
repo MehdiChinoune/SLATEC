@@ -1,29 +1,36 @@
-!DECK DPSIXN
+!** DPSIXN
 REAL(8) FUNCTION DPSIXN(N)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPSIXN
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DEXINT
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (PSIXN-S, DPSIXN-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DEXINT
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (PSIXN-S, DPSIXN-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     This subroutine returns values of PSI(X)=derivative of log
   !     GAMMA(X), X.GT.0.0 at integer arguments. A table look-up is
   !     performed for N .LE. 100, and the asymptotic expansion is
   !     evaluated for N.GT.100.
   !
-  !***SEE ALSO  DEXINT
-  !***ROUTINES CALLED  D1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DEXINT
+  !***
+  ! **Routines called:**  D1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800501  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DPSIXN
+  
   !
   INTEGER N, k
   REAL(8) :: ax, b, c, fn, rfn2, trm, s, wdtol
@@ -100,7 +107,7 @@ REAL(8) FUNCTION DPSIXN(N)
     -4.16666666666666666D-03, 7.57575757575757576D-03, &
     -2.10927960927960928D-02/
   !
-  !***FIRST EXECUTABLE STATEMENT  DPSIXN
+  !* FIRST EXECUTABLE STATEMENT  DPSIXN
   IF ( N>100 ) THEN
     wdtol = MAX(D1MACH(4),1.0D-18)
     fn = N

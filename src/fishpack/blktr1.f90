@@ -1,13 +1,17 @@
-!DECK BLKTR1
+!** BLKTR1
 SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BLKTR1
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BLKTRI
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (BLKTR1-S, CBLKT1-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BLKTRI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (BLKTR1-S, CBLKT1-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   ! BLKTR1 solves the linear system set up by BLKTRI.
   !
@@ -19,14 +23,18 @@ SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
   ! of PRODP and PROD. These are called in the event that some
   ! of the roots of the B sub P polynomial are complex.
   !
-  !***SEE ALSO  BLKTRI
-  !***ROUTINES CALLED  INDXA, INDXB, INDXC
-  !***COMMON BLOCKS    CBLKT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BLKTRI
+  !***
+  ! **Routines called:**  INDXA, INDXB, INDXC
+  !***
+  ! COMMON BLOCKS    CBLKT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  BLKTR1
+  
   REAL Am, An, B, Bm, Bn, Cm, Cn, CNV, dum, EPS, W1, W2, W3, Wd, Wu, Ww, Y
   INTEGER i, i1, i2, i3, i4, Idimy, idxa, idxc, if, ifd, IK, &
     im1, im2, im3, imi1, imi2, ip, ip1, ip2, ip3
@@ -36,7 +44,7 @@ SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
   DIMENSION An(*), Bn(*), Cn(*), Am(*), Bm(*), Cm(*), B(*), W1(*), &
     W2(*), W3(*), Wd(*), Ww(*), Wu(*), Y(Idimy,*)
   COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
-  !***FIRST EXECUTABLE STATEMENT  BLKTR1
+  !* FIRST EXECUTABLE STATEMENT  BLKTR1
   kdo = K - 1
   DO l = 1, kdo
     ir = l - 1

@@ -1,16 +1,23 @@
-!DECK CHPFA
+!** CHPFA
 SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHPFA
-  !***PURPOSE  Factor a complex Hermitian matrix stored in packed form by
+  !>
+  !***
+  !  Factor a complex Hermitian matrix stored in packed form by
   !            elimination with symmetric pivoting.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2D1A
-  !***TYPE      COMPLEX (SSPFA-S, DSPFA-D, CHPFA-C, DSPFA-C)
-  !***KEYWORDS  HERMITIAN, LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2D1A
+  !***
+  ! **Type:**      COMPLEX (SSPFA-S, DSPFA-D, CHPFA-C, DSPFA-C)
+  !***
+  ! **Keywords:**  HERMITIAN, LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION,
   !             PACKED
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     CHPFA factors a complex Hermitian matrix stored in
   !     packed form by elimination with symmetric pivoting.
@@ -65,10 +72,13 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
   !             10    CONTINUE
   !             20 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CSWAP, ICAMAX
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CSWAP, ICAMAX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -78,7 +88,7 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CHPFA
+  
   INTEGER N, Kpvt(*), Info
   COMPLEX Ap(*)
   !
@@ -90,7 +100,7 @@ SUBROUTINE CHPFA(Ap,N,Kpvt,Info)
     km2, kstep
   LOGICAL swap
   REAL, EXTERNAL :: CABS1
-  !***FIRST EXECUTABLE STATEMENT  CHPFA
+  !* FIRST EXECUTABLE STATEMENT  CHPFA
   !
   !     INITIALIZE
   !

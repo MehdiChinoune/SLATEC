@@ -1,19 +1,26 @@
-!DECK DULSIA
+!** DULSIA
 SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
     W,Lw,Iwork,Liw,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DULSIA
-  !***PURPOSE  Solve an underdetermined linear system of equations by
+  !>
+  !***
+  !  Solve an underdetermined linear system of equations by
   !            performing an LQ factorization of the matrix using
   !            Householder transformations.  Emphasis is put on detecting
   !            possible rank deficiency.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D9
-  !***TYPE      DOUBLE PRECISION (ULSIA-S, DULSIA-D)
-  !***KEYWORDS  LINEAR LEAST SQUARES, LQ FACTORIZATION,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D9
+  !***
+  ! **Type:**      DOUBLE PRECISION (ULSIA-S, DULSIA-D)
+  !***
+  ! **Keywords:**  LINEAR LEAST SQUARES, LQ FACTORIZATION,
   !             UNDERDETERMINED LINEAR SYSTEM
-  !***AUTHOR  Manteuffel, T. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Manteuffel, T. A., (LANL)
+  !***
+  ! **Description:**
   !
   !     DULSIA computes the minimal length solution(s) to the problem AX=B
   !     where A is an M by N matrix with M.LE.N and B is the M by NB
@@ -153,11 +160,14 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   !                   4 - Rank .LT. NP
   !                   5 - Full rank
   !
-  !***REFERENCES  T. Manteuffel, An interval analysis approach to rank
+  !***
+  ! **References:**  T. Manteuffel, An interval analysis approach to rank
   !                 determination in linear least squares problems,
   !                 Report SAND80-0655, Sandia Laboratories, June 1980.
-  !***ROUTINES CALLED  D1MACH, DU11US, DU12US, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, DU11US, DU12US, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810801  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891006  Cosmetic changes to prologue.  (WRB)
@@ -167,7 +177,7 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DULSIA
+  
   REAL(8) :: A, Ae, B, eps, Re, Rnorm, W
   INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, m1, m2, &
     m3, m4, m5, Mda, Mdb, Mode, N, Nb, Np
@@ -175,7 +185,7 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   DIMENSION A(Mda,*), B(Mdb,*), Re(*), Ae(*), Rnorm(*), W(*)
   INTEGER Iwork(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  DULSIA
+  !* FIRST EXECUTABLE STATEMENT  DULSIA
   IF ( Info<0.OR.Info>1 ) THEN
     CALL XERMSG('SLATEC','DULSIA','INFO OUT OF RANGE',2,1)
     RETURN

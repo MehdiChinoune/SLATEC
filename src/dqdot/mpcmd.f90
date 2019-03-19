@@ -1,13 +1,17 @@
-!DECK MPCMD
+!** MPCMD
 SUBROUTINE MPCMD(X,Dz)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  MPCMD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (MPCMD-A)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DQDOTA and DQDOTI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (MPCMD-A)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !  Converts multiple-precision X to double-precision DZ. Assumes
   !  X is in allowable range for double-precision numbers. There is
@@ -16,10 +20,14 @@ SUBROUTINE MPCMD(X,Dz)
   !  The argument X(*) is INTEGER array of size 30.  See the comments in
   !  the routine MPBLAS for the reason for this choice.
   !
-  !***SEE ALSO  DQDOTA, DQDOTI, MPBLAS
-  !***ROUTINES CALLED  MPCHK, MPERR
-  !***COMMON BLOCKS    MPCOM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DQDOTA, DQDOTI, MPBLAS
+  !***
+  ! **Routines called:**  MPCHK, MPERR
+  !***
+  ! COMMON BLOCKS    MPCOM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   ??????  Modified for use with BLAS.  Blank COMMON changed to named
   !           COMMON.  R given dimension 12.
@@ -27,12 +35,12 @@ SUBROUTINE MPCMD(X,Dz)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  !***END PROLOGUE  MPCMD
+  
   INTEGER i, LUN, M, MXR
   REAL(8) :: db, Dz, dz2
   COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
   INTEGER B, T, R, X(*), tm
-  !***FIRST EXECUTABLE STATEMENT  MPCMD
+  !* FIRST EXECUTABLE STATEMENT  MPCMD
   CALL MPCHK(1,4)
   Dz = 0D0
   IF ( X(1)==0 ) RETURN

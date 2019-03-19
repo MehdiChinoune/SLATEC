@@ -1,15 +1,20 @@
-!DECK PASSF2
+!** PASSF2
 SUBROUTINE PASSF2(Ido,L1,Cc,Ch,Wa1)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PASSF2
-  !***SUBSIDIARY
-  !***PURPOSE  Calculate the fast Fourier transform of subvectors of
+  !>
+  !***
+  !  Calculate the fast Fourier transform of subvectors of
   !            length two.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***TYPE      SINGLE PRECISION (PASSF2-S)
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Type:**      SINGLE PRECISION (PASSF2-S)
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -18,11 +23,11 @@ SUBROUTINE PASSF2(Ido,L1,Cc,Ch,Wa1)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  PASSF2
+  
   REAL Cc, Ch, ti2, tr2, Wa1
   INTEGER i, Ido, k, L1
   DIMENSION Cc(Ido,2,*), Ch(Ido,L1,2), Wa1(*)
-  !***FIRST EXECUTABLE STATEMENT  PASSF2
+  !* FIRST EXECUTABLE STATEMENT  PASSF2
   IF ( Ido<=2 ) THEN
     DO k = 1, L1
       Ch(1,k,1) = Cc(1,1,k) + Cc(1,2,k)

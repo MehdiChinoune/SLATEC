@@ -2,30 +2,38 @@ MODULE TEST12_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK FCNQX2
+  !** FCNQX2
   SUBROUTINE FCNQX2(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  FCNQX2
-    !***SUBSIDIARY
-    !***PURPOSE  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES DXLEGF
+    !>
+    !***
+    !  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES DXLEGF
     !            AND DXNRMP WHICH CALCULATE LEGENDRE FUNCTIONS
-    !***LIBRARY   SLATEC
-    !***CATEGORY  C3A2, C9
-    !***TYPE      DOUBLE PRECISION (FCNQX1-S, FCNQX2-D)
-    !***KEYWORDS  LEGENDRE FUNCTIONS, QUICK CHECK
-    !***AUTHOR  LOZIER, DANIEL W., (NIST)
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Category:**  C3A2, C9
+    !***
+    ! **Type:**      DOUBLE PRECISION (FCNQX1-S, FCNQX2-D)
+    !***
+    ! **Keywords:**  LEGENDRE FUNCTIONS, QUICK CHECK
+    !***
+    ! **Author:**  LOZIER, DANIEL W., (NIST)
     !           SMITH, JOHN M., (NIST AND GEORGE MASON UNIVERSITY)
-    !***REFERENCES  OLVER AND SMITH,J.COMPUT.PHYSICS,51(1983),NO.3,502-518.
+    !***
+    ! **References:**  OLVER AND SMITH,J.COMPUT.PHYSICS,51(1983),NO.3,502-518.
     !               SMITH, OLVER AND LOZIER,ACM TRANS MATH SOFTW,7(1981),
     !                 NO.1,93-105.
-    !***ROUTINES CALLED  DXCON, DXCSRT, XERCLR, DXLEGF, DXNRMP, DXSET, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  DXCON, DXCSRT, XERCLR, DXLEGF, DXNRMP, DXSET, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   881020  DATE WRITTEN
     !   900306  Added SLATEC prologue to this routine. (DWL and JMS)
     !   901019  Revisions to prologue.  (DWL and WRB)
     !   901106  Changed all specific intrinsics to generic.  (WRB)
     !   910104  Changed to print variable number of decimals. (DWL and JMS)
-    !***END PROLOGUE  FCNQX2
+    
     INTEGER i, I1MACH, ic1, ic2, id, ierr, ierror, ip, ipn, iq, ir, &
       irad, isig, isum, ix11, ix12, ix13, ix21, ix22, ix23
     INTEGER mu, mu1, mu2, n, nbits, ndec, nerr, nradpl, nu1, nudiff, NUMXER
@@ -39,7 +47,7 @@ CONTAINS
     REAL(8) :: x11, x12, x13, x21, x22, x23
     REAL nu
     !
-    !***FIRST EXECUTABLE STATEMENT  FCNQX2
+    !* FIRST EXECUTABLE STATEMENT  FCNQX2
     !
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT (' ** TEST DOUBLE PRECISION LEGENDRE FUNCTION ROUTINES',&
@@ -347,17 +355,24 @@ CONTAINS
       99019 FORMAT (/'  TESTS COMPLETED, NUMBER OF TESTS FAILED = ',I2)
     ENDIF
   END SUBROUTINE FCNQX2
-  !DECK DXCSRT
+  !** DXCSRT
   SUBROUTINE DXCSRT(Dnu1,Nudiff,Mu1,Mu2,Theta,P,Q,R,Ip,Iq,Ir,C1,Ic1,C2,Ic2,Ierror)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DXCSRT
-    !***PURPOSE  TO COMPUTE CHECK VALUES FOR LEGENDRE FUNCTIONS
-    !***LIBRARY   SLATEC
-    !***CATEGORY  C3A2, C9
-    !***TYPE      SINGLE PRECISION (XCRST-S, DXCRST-D)
-    !***KEYWORDS  LEGENDRE FUNCTIONS
-    !***AUTHOR  SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
-    !***DESCRIPTION
+    !>
+    !***
+    !  TO COMPUTE CHECK VALUES FOR LEGENDRE FUNCTIONS
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Category:**  C3A2, C9
+    !***
+    ! **Type:**      SINGLE PRECISION (XCRST-S, DXCRST-D)
+    !***
+    ! **Keywords:**  LEGENDRE FUNCTIONS
+    !***
+    ! **Author:**  SMITH, JOHN M., (NBS AND GEORGE MASON UNIVERSITY)
+    !***
+    ! **Description:**
     !
     !        SUBROUTINE DXCSRT CALCULATES CASORATI (CROSS PRODUCT)
     !        CHECK VALUES AND STORES THEM IN ARRAYS C1 AND C2 WITH
@@ -367,15 +382,19 @@ CONTAINS
     !        IN ARRAY Q, THE FIRST KIND (POSITIVE ORDER) IN ARRAY R.
     !        RESULTS SHOULD BE 1.0 TO WITHIN ROUNDOFF ERROR.
     !
-    !***SEE ALSO  FCNQX2
-    !***REFERENCES  OLVER AND SMITH,J.COMPUT.PHYSICS,51(1983),NO.3,502-518.
-    !***ROUTINES CALLED  DXADD, DXADJ, DXRED
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **See also:**  FCNQX2
+    !***
+    ! **References:**  OLVER AND SMITH,J.COMPUT.PHYSICS,51(1983),NO.3,502-518.
+    !***
+    ! **Routines called:**  DXADD, DXADJ, DXRED
+
+    !* REVISION HISTORY  (YYMMDD)
     !   820728  DATE WRITTEN
     !   890126  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
     !   901019  Revisions to prologue.  (DWL and WRB)
     !   901106  Changed all specific intrinsics to generic.  (WRB)
-    !***END PROLOGUE  DXCSRT
+    
     INTEGER i, Ic1, Ic2, Ierror, Ip, Iq, Ir, ix1, ix2, j, k, l, &
       lm1, mu, Mu1, Mu2, Nudiff
     REAL(8) :: C1, C2, dmu, dmu1, nu, Dnu1, P, Q, R, Theta, sx, x1, x2
@@ -384,7 +403,7 @@ CONTAINS
     !
     !         PLACE ALL INPUT IN ADJUSTED FORM.
     !
-    !***FIRST EXECUTABLE STATEMENT  DXCSRT
+    !* FIRST EXECUTABLE STATEMENT  DXCSRT
     Ierror = 0
     l = Nudiff + (Mu2-Mu1) + 1
     lm1 = l - 1
@@ -540,24 +559,31 @@ CONTAINS
     ENDDO
   END SUBROUTINE DXCSRT
 END MODULE TEST12_MOD
-!DECK TEST12
+!** TEST12
 PROGRAM TEST12
   USE TEST12_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST12
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  A3D, C3A2, C7C, C9
-  !***TYPE      DOUBLE PRECISION (TEST11-S, TEST12-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  A3D, C3A2, C7C, C9
+  !***
+  ! **Type:**      DOUBLE PRECISION (TEST11-S, TEST12-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -569,20 +595,23 @@ PROGRAM TEST12
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprogram
   !        DXLEGF   DXNRMP
   !
-  !***REFERENCES  Fong, Kirby W., Jefferson, Thomas H., Suyehiro,
+  !***
+  ! **References:**  Fong, Kirby W., Jefferson, Thomas H., Suyehiro,
   !                 Tokihiko, Walton, Lee, Guidelines to the SLATEC Common
   !                 Mathematical Library, March 21, 1989.
-  !***ROUTINES CALLED  FCNQX2, I1MACH, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  FCNQX2, I1MACH, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   901204  DATE WRITTEN
-  !***END PROLOGUE  TEST12
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST12
+  !* FIRST EXECUTABLE STATEMENT  TEST12
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

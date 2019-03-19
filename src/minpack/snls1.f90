@@ -1,19 +1,26 @@
-!DECK SNLS1
+!** SNLS1
 SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
     Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,Ipvt,Qtf,&
     Wa1,Wa2,Wa3,Wa4)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SNLS1
-  !***PURPOSE  Minimize the sum of the squares of M nonlinear functions
+  !>
+  !***
+  !  Minimize the sum of the squares of M nonlinear functions
   !            in N variables by a modification of the Levenberg-Marquardt
   !            algorithm.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  K1B1A1, K1B1A2
-  !***TYPE      SINGLE PRECISION (SNLS1-S, DNLS1-D)
-  !***KEYWORDS  LEVENBERG-MARQUARDT, NONLINEAR DATA FITTING,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  K1B1A1, K1B1A2
+  !***
+  ! **Type:**      SINGLE PRECISION (SNLS1-S, DNLS1-D)
+  !***
+  ! **Keywords:**  LEVENBERG-MARQUARDT, NONLINEAR DATA FITTING,
   !             NONLINEAR LEAST SQUARES
-  !***AUTHOR  Hiebert, K. L., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Hiebert, K. L., (SNLA)
+  !***
+  ! **Description:**
   !
   ! 1. Purpose.
   !
@@ -365,7 +372,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !         the storage required by the program.  There are no internally
   !         declared storage arrays.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   ! 7. Example.
   !
@@ -587,14 +594,17 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !       RETURN
   !       END
   !
-  !***REFERENCES  Jorge J. More, The Levenberg-Marquardt algorithm:
+  !***
+  ! **References:**  Jorge J. More, The Levenberg-Marquardt algorithm:
   !                 implementation and theory.  In Numerical Analysis
   !                 Proceedings (Dundee, June 28 - July 1, 1977, G. A.
   !                 Watson, Editor), Lecture Notes in Mathematics 630,
   !                 Springer-Verlag, 1978.
-  !***ROUTINES CALLED  CHKDER, ENORM, FDJAC3, LMPAR, QRFAC, R1MACH,
+  !***
+  ! **Routines called:**  CHKDER, ENORM, FDJAC3, LMPAR, QRFAC, R1MACH,
   !                    RWUPDT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -602,7 +612,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SNLS1
+  
   INTEGER Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint, Info, Nfev, &
     Njev
   INTEGER ijunk, nrow, Ipvt(*)
@@ -624,7 +634,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   DATA one, p1, p5, p25, p75, p0001, zero/1.0E0, 1.0E-1, 5.0E-1, &
     2.5E-1, 7.5E-1, 1.0E-4, 0.0E0/
   !
-  !***FIRST EXECUTABLE STATEMENT  SNLS1
+  !* FIRST EXECUTABLE STATEMENT  SNLS1
   epsmch = R1MACH(4)
   !
   Info = 0

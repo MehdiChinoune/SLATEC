@@ -1,15 +1,22 @@
-!DECK CNBDI
+!** CNBDI
 SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CNBDI
-  !***PURPOSE  Compute the determinant of a band matrix using the factors
+  !>
+  !***
+  !  Compute the determinant of a band matrix using the factors
   !            computed by CNBCO or CNBFA.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D3C2
-  !***TYPE      COMPLEX (SNBDI-S, DNBDI-D, CNBDI-C)
-  !***KEYWORDS  BANDED, DETERMINANT, LINEAR EQUATIONS, NONSYMMETRIC
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D3C2
+  !***
+  ! **Type:**      COMPLEX (SNBDI-S, DNBDI-D, CNBDI-C)
+  !***
+  ! **Keywords:**  BANDED, DETERMINANT, LINEAR EQUATIONS, NONSYMMETRIC
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !     CNBDI computes the determinant of a band matrix
   !     using the factors computed by CNBCO or CNBFA.
@@ -44,16 +51,19 @@ SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !                with  1.0 .LE. CABS1(DET(1)) .LT. 10.0
   !                or  DET(1) = 0.0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800730  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CNBDI
+  
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
   COMPLEX Abe(Lda,*), Det(2)
   !
@@ -61,7 +71,7 @@ SUBROUTINE CNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   INTEGER i
   REAL CABS1
   !
-  !***FIRST EXECUTABLE STATEMENT  CNBDI
+  !* FIRST EXECUTABLE STATEMENT  CNBDI
   Det(1) = (1.0E0,0.0E0)
   Det(2) = (0.0E0,0.0E0)
   ten = 10.0E0

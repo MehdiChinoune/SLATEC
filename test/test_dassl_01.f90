@@ -2,29 +2,35 @@ MODULE TEST48_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK EDIT2
+  !** EDIT2
   SUBROUTINE EDIT2(Y,T,Erm)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  EDIT2
-    !***SUBSIDIARY
-    !***PURPOSE  Subsidiary to SDASQC.
-    !***LIBRARY   SLATEC (DASSL)
-    !***TYPE      SINGLE PRECISION (EDIT2-S, DEDIT2-D)
-    !***AUTHOR  PETZOLD, LINDA R., (LLNL)
-    !***SEE ALSO  SDASQC
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to SDASQC.
+    !***
+    ! **Library:**   SLATEC (DASSL)
+    !***
+    ! **Type:**      SINGLE PRECISION (EDIT2-S, DEDIT2-D)
+    !***
+    ! **Author:**  PETZOLD, LINDA R., (LLNL)
+    !***
+    ! **See also:**  SDASQC
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   891013  DATE WRITTEN
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
     !   901009  Changed AMAX1 to MAX.  (FNF)
     !   901030  Removed FLOAT's; made all local declarations explicit. (FNF)
-    !***END PROLOGUE  EDIT2
+    
     REAL Y(*), T, Erm
     INTEGER i, j, k, ng
     REAL alph1, alph2, a1, a2, er, ex, yt
     DATA alph1/1.0E0/, alph2/1.0E0/, ng/5/
-    !***FIRST EXECUTABLE STATEMENT  EDIT2
+    !* FIRST EXECUTABLE STATEMENT  EDIT2
     Erm = 0.0E0
     IF ( T==0.0E0 ) RETURN
     ex = 0.0E0
@@ -42,21 +48,28 @@ CONTAINS
       a2 = a2*alph2/j
     ENDDO
   END SUBROUTINE EDIT2
-  !DECK SDASQC
+  !** SDASQC
   SUBROUTINE SDASQC(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SDASQC
-    !***PURPOSE  Quick check for SLATEC routine SDASSL.
-    !***LIBRARY   SLATEC (DASSL)
-    !***CATEGORY  I1A2
-    !***TYPE      SINGLE PRECISION (SDASQC-S, DDASQC-D)
-    !***KEYWORDS  QUICK CHECK, SDASSL
-    !***AUTHOR  PETZOLD, LINDA R., (LLNL)
+    !>
+    !***
+    !  Quick check for SLATEC routine SDASSL.
+    !***
+    ! **Library:**   SLATEC (DASSL)
+    !***
+    ! **Category:**  I1A2
+    !***
+    ! **Type:**      SINGLE PRECISION (SDASQC-S, DDASQC-D)
+    !***
+    ! **Keywords:**  QUICK CHECK, SDASSL
+    !***
+    ! **Author:**  PETZOLD, LINDA R., (LLNL)
     !             COMPUTING AND MATHEMATICS RESEARCH DIVISION
     !             LAWRENCE LIVERMORE NATIONAL LABORATORY
     !             L - 316, P.O. BOX 808,
     !             LIVERMORE, CA.    94550
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !       Demonstration program for SDASSL.
     !
     !       SDASSL is used to solve two simple problems,
@@ -68,9 +81,12 @@ CONTAINS
     !       To run the demonstration problems with full print, call
     !       SDASQC with KPRINT = 3.
     !
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  EDIT2, SDASSL, SDJAC1, SDJAC2, SDRES1, SDRES2
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  EDIT2, SDASSL, SDJAC1, SDJAC2, SDRES1, SDRES2
+
+    !* REVISION HISTORY  (YYMMDD)
     !   851113  DATE WRITTEN
     !   880608  Revised to meet new LDOC standards.
     !   880615  Revised to meet new prologue standards.
@@ -80,7 +96,7 @@ CONTAINS
     !   901009  Corrected GAMS classification code.  (FNF)
     !   901009  Changed AMAX1 to MAX.  (FNF)
     !   901030  Made all declarations explicit; added 1P's to formats. (FNF)
-    !***END PROLOGUE  SDASQC
+    
     !
     INTEGER Lun, Kprint, Ipass
     !
@@ -93,7 +109,7 @@ CONTAINS
     !
     DATA tout1/1.0E0/, dtout/1.0E0/
     !
-    !***FIRST EXECUTABLE STATEMENT  SDASQC
+    !* FIRST EXECUTABLE STATEMENT  SDASQC
     Ipass = 1
     nerr = 0
     rtol = 0.0E0
@@ -246,56 +262,68 @@ CONTAINS
       I5/1X,' NUMBER OF F-S   =',I5/1X,' NUMBER OF J-S   =',I5/1X,&
       ' ERROR OVERRUN =',1P,E10.2)
   END SUBROUTINE SDASQC
-  !DECK SDJAC1
+  !** SDJAC1
   SUBROUTINE SDJAC1(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SDJAC1
-    !***SUBSIDIARY
-    !***PURPOSE  First Jacobian evaluator for SDASQC.
-    !***LIBRARY   SLATEC (DASSL)
-    !***TYPE      SINGLE PRECISION (SDJAC1-S, DDJAC1-D)
-    !***AUTHOR  PETZOLD, LINDA R., (LLNL)
-    !***SEE ALSO  SDASQC
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  First Jacobian evaluator for SDASQC.
+    !***
+    ! **Library:**   SLATEC (DASSL)
+    !***
+    ! **Type:**      SINGLE PRECISION (SDJAC1-S, DDJAC1-D)
+    !***
+    ! **Author:**  PETZOLD, LINDA R., (LLNL)
+    !***
+    ! **See also:**  SDASQC
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   891013  DATE WRITTEN
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
-    !***END PROLOGUE  SDJAC1
+    
     INTEGER Ipar(*)
     REAL T, Y(*), Yprime(*), Pd(2,2), Cj, Rpar(*)
-    !***FIRST EXECUTABLE STATEMENT  SDJAC1
+    !* FIRST EXECUTABLE STATEMENT  SDJAC1
     Pd(1,1) = Cj + 10.0E0
     Pd(1,2) = 0.0E0
     Pd(2,1) = 1.0E0
     Pd(2,2) = 1.0E0
   END SUBROUTINE SDJAC1
-  !DECK SDJAC2
+  !** SDJAC2
   SUBROUTINE SDJAC2(T,Y,Yprime,Pd,Cj,Rpar,Ipar)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SDJAC2
-    !***SUBSIDIARY
-    !***PURPOSE  Second Jacobian evaluator for SDASQC.
-    !***LIBRARY   SLATEC (DASSL)
-    !***TYPE      SINGLE PRECISION (SDJAC2-S, DDJAC2-D)
-    !***AUTHOR  PETZOLD, LINDA R., (LLNL)
-    !***SEE ALSO  SDASQC
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Second Jacobian evaluator for SDASQC.
+    !***
+    ! **Library:**   SLATEC (DASSL)
+    !***
+    ! **Type:**      SINGLE PRECISION (SDJAC2-S, DDJAC2-D)
+    !***
+    ! **Author:**  PETZOLD, LINDA R., (LLNL)
+    !***
+    ! **See also:**  SDASQC
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   891013  DATE WRITTEN
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
     !   901001  Eliminated 7-character variable names MBANDPn by explicitly
     !           including MBAND+n in expressions.  (FNF)
     !   901030  Made all local declarations explicit.  (FNF)
-    !***END PROLOGUE  SDJAC2
+    
     INTEGER Ipar(*)
     REAL T, Y(*), Yprime(*), Pd(11,25), Cj, Rpar(*)
     INTEGER j, mband, ml, mu, neq, ng
     REAL alph1, alph2
     DATA alph1/1.0E0/, alph2/1.0E0/, ng/5/
     DATA ml/5/, mu/0/, neq/25/
-    !***FIRST EXECUTABLE STATEMENT  SDJAC2
+    !* FIRST EXECUTABLE STATEMENT  SDJAC2
     mband = ml + mu + 1
     DO j = 1, neq
       Pd(mband,j) = -2.0E0 - Cj
@@ -309,51 +337,63 @@ CONTAINS
       Pd(mband+1,j) = 0.0E0
     ENDDO
   END SUBROUTINE SDJAC2
-  !DECK SDRES1
+  !** SDRES1
   SUBROUTINE SDRES1(T,Y,Yprime,Delta,Ires,Rpar,Ipar)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SDRES1
-    !***SUBSIDIARY
-    !***PURPOSE  First residual evaluator for SDASQC.
-    !***LIBRARY   SLATEC (DASSL)
-    !***TYPE      SINGLE PRECISION (SDRES1-S, DDRES1-D)
-    !***AUTHOR  PETZOLD, LINDA R., (LLNL)
-    !***SEE ALSO  SDASQC
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  First residual evaluator for SDASQC.
+    !***
+    ! **Library:**   SLATEC (DASSL)
+    !***
+    ! **Type:**      SINGLE PRECISION (SDRES1-S, DDRES1-D)
+    !***
+    ! **Author:**  PETZOLD, LINDA R., (LLNL)
+    !***
+    ! **See also:**  SDASQC
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   891013  DATE WRITTEN
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
-    !***END PROLOGUE  SDRES1
+    
     INTEGER Ires, Ipar(*)
     REAL T, Y(*), Yprime(*), Delta(*), Rpar(*)
-    !***FIRST EXECUTABLE STATEMENT  SDRES1
+    !* FIRST EXECUTABLE STATEMENT  SDRES1
     Delta(1) = Yprime(1) + 10.0E0*Y(1)
     Delta(2) = Y(2) + Y(1) - 1.0E0
   END SUBROUTINE SDRES1
-  !DECK SDRES2
+  !** SDRES2
   SUBROUTINE SDRES2(T,Y,Yprime,Delta,Ires,Rpar,Ipar)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SDRES2
-    !***SUBSIDIARY
-    !***PURPOSE  Second residual evaluator for SDASQC.
-    !***LIBRARY   SLATEC (DASSL)
-    !***TYPE      SINGLE PRECISION (SDRES2-S, DDRES2-D)
-    !***AUTHOR  PETZOLD, LINDA R., (LLNL)
-    !***SEE ALSO  SDASQC
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Second residual evaluator for SDASQC.
+    !***
+    ! **Library:**   SLATEC (DASSL)
+    !***
+    ! **Type:**      SINGLE PRECISION (SDRES2-S, DDRES2-D)
+    !***
+    ! **Author:**  PETZOLD, LINDA R., (LLNL)
+    !***
+    ! **See also:**  SDASQC
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   891013  DATE WRITTEN
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
     !   901030  Made all local declarations explicit.  (FNF)
-    !***END PROLOGUE  SDRES2
+    
     INTEGER Ires, Ipar(*)
     REAL T, Y(*), Yprime(*), Delta(*), Rpar(*)
     INTEGER i, j, k, ng
     REAL alph1, alph2, d
     DATA alph1/1.0E0/, alph2/1.0E0/, ng/5/
-    !***FIRST EXECUTABLE STATEMENT  SDRES2
+    !* FIRST EXECUTABLE STATEMENT  SDRES2
     DO j = 1, ng
       DO i = 1, ng
         k = i + (j-1)*ng
@@ -365,24 +405,31 @@ CONTAINS
     ENDDO
   END SUBROUTINE SDRES2
 END MODULE TEST48_MOD
-!DECK TEST48
+!** TEST48
 PROGRAM TEST48
   USE TEST48_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST48
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  I1A2
-  !***TYPE      SINGLE PRECISION (TEST48-S, TEST49-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  I1A2
+  !***
+  ! **Type:**      SINGLE PRECISION (TEST48-S, TEST49-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -394,22 +441,25 @@ PROGRAM TEST48
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !       SDASSL
   !
-  !***REFERENCES  Fong, Kirby W., Jefferson, Thomas H., Suyehiro,
+  !***
+  ! **References:**  Fong, Kirby W., Jefferson, Thomas H., Suyehiro,
   !                 Tokihiko, Walton, Lee, Guidelines to the SLATEC Common
   !                 Mathematical Library, March 21, 1989.
-  !***ROUTINES CALLED  I1MACH, SDASQC, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  I1MACH, SDASQC, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   891013  DATE WRITTEN
   !   901001  Converted prologue to 4.0 format.  (FNF)
   !   901009  Corrected GAMS classification code.  (FNF)
-  !***END PROLOGUE  TEST48
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST48
+  !* FIRST EXECUTABLE STATEMENT  TEST48
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

@@ -1,15 +1,22 @@
-!DECK DATANH
+!** DATANH
 REAL(8) FUNCTION DATANH(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DATANH
-  !***PURPOSE  Compute the arc hyperbolic tangent.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4C
-  !***TYPE      DOUBLE PRECISION (ATANH-S, DATANH-D, CATANH-C)
-  !***KEYWORDS  ARC HYPERBOLIC TANGENT, ATANH, ELEMENTARY FUNCTIONS,
+  !>
+  !***
+  !  Compute the arc hyperbolic tangent.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4C
+  !***
+  ! **Type:**      DOUBLE PRECISION (ATANH-S, DATANH-D, CATANH-C)
+  !***
+  ! **Keywords:**  ARC HYPERBOLIC TANGENT, ATANH, ELEMENTARY FUNCTIONS,
   !             FNLIB, INVERSE HYPERBOLIC TANGENT
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DATANH(X) calculates the double precision arc hyperbolic
   ! tangent for double precision argument X.
@@ -20,15 +27,18 @@ REAL(8) FUNCTION DATANH(X)
   !                               significant figures required  30.00
   !                                    decimal places required  31.88
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DATANH
+  
   INTEGER INITDS, nterms
   REAL(8) :: X, atnhcs(27), dxrel, sqeps, y, DCSEVL, D1MACH
   LOGICAL first
@@ -61,7 +71,7 @@ REAL(8) FUNCTION DATANH(X)
   DATA atnhcs(26)/ + .9935374683141640465066666666666D-30/
   DATA atnhcs(27)/ + .6863462444358260053333333333333D-31/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DATANH
+  !* FIRST EXECUTABLE STATEMENT  DATANH
   IF ( first ) THEN
     nterms = INITDS(atnhcs,27,0.1*REAL(D1MACH(3)))
     dxrel = SQRT(D1MACH(4))

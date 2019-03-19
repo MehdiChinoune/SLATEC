@@ -1,22 +1,28 @@
-!DECK HWSCS1
+!** HWSCS1
 SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
     Elmbda,F,Idimf,Pertrb,W,S,An,Bn,Cn,R,Am,Bm,Cm,Sint,Bmh)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HWSCS1
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to HWSCSP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (HWSCS1-S)
-  !***AUTHOR  (UNKNOWN)
-  !***SEE ALSO  HWSCSP
-  !***ROUTINES CALLED  BLKTRI
-  !***REVISION HISTORY  (YYMMDD)
+  !>
+  !***
+  !  Subsidiary to HWSCSP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (HWSCS1-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **See also:**  HWSCSP
+  !***
+  ! **Routines called:**  BLKTRI
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891009  Removed unreferenced variables.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  HWSCS1
+  
   REAL Am, An, ar, at, Bdrf, Bdrs, Bdtf, Bdts, Bm, Bmh, Bn, Cm, &
     Cn, cr, ct, czr, dr, dr2, dth, Elmbda
   REAL F, hdr, hdth, hne, Pertrb, R, r2, Rf, rf2, Rs, rs2, rsq, &
@@ -27,7 +33,7 @@ SUBROUTINE HWSCS1(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   INTEGER mp1, munk, N, Nbdcnd, np, np1, nunk
   DIMENSION F(Idimf,*), Bdrs(*), Bdrf(*), Bdts(*), Bdtf(*), Am(*), &
     Bm(*), Cm(*), An(*), Bn(*), Cn(*), S(*), R(*), Sint(*), Bmh(*), W(*)
-  !***FIRST EXECUTABLE STATEMENT  HWSCS1
+  !* FIRST EXECUTABLE STATEMENT  HWSCS1
   mp1 = M + 1
   dth = (Tf-Ts)/M
   tdt = dth + dth

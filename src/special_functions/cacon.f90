@@ -1,13 +1,17 @@
-!DECK CACON
+!** CACON
 SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CACON
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBESH and CBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CACON-A, ZACON-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBESH and CBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CACON-A, ZACON-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     CACON APPLIES THE ANALYTIC CONTINUATION FORMULA
   !
@@ -17,12 +21,15 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   !     TO CONTINUE THE K FUNCTION FROM THE RIGHT HALF TO THE LEFT
   !     HALF Z PLANE
   !
-  !***SEE ALSO  CBESH, CBESK
-  !***ROUTINES CALLED  CBINU, CBKNU, CS1S2, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBESH, CBESK
+  !***
+  ! **Routines called:**  CBINU, CBKNU, CS1S2, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CACON
+  
   COMPLEX ck, cone, cs, cscl, cscr, csgn, cspn, css, csr, c1, c2, &
     rz, sc1, sc2, st, s1, s2, Y, Z, zn, cy
   REAL Alim, arg, ascle, as2, bscle, bry, cpn, c1i, c1m, c1r, &
@@ -31,7 +38,7 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   DIMENSION Y(N), cy(2), css(3), csr(3), bry(3)
   DATA pi/3.14159265358979324E0/
   DATA cone/(1.0E0,0.0E0)/
-  !***FIRST EXECUTABLE STATEMENT  CACON
+  !* FIRST EXECUTABLE STATEMENT  CACON
   Nz = 0
   zn = -Z
   nn = N

@@ -1,17 +1,24 @@
-!DECK BIE
+!** BIE
 REAL FUNCTION BIE(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BIE
-  !***PURPOSE  Calculate the Bairy function for a negative argument and an
+  !>
+  !***
+  !  Calculate the Bairy function for a negative argument and an
   !            exponentially scaled Bairy function for a non-negative
   !            argument.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10D
-  !***TYPE      SINGLE PRECISION (BIE-S, DBIE-D)
-  !***KEYWORDS  BAIRY FUNCTION, EXPONENTIALLY SCALED, FNLIB,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10D
+  !***
+  ! **Type:**      SINGLE PRECISION (BIE-S, DBIE-D)
+  !***
+  ! **Keywords:**  BAIRY FUNCTION, EXPONENTIALLY SCALED, FNLIB,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate BI(X) for X .LE. 0  and  BI(X)*EXP(ZETA)  where
   ! ZETA = 2/3 * X**(3/2)  for X .GE. 0.0
@@ -52,13 +59,16 @@ REAL FUNCTION BIE(X)
   !                               significant figures required  16.74
   !                                    decimal places required  18.71
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, R9AIMP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, R9AIMP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  BIE
+  
   REAL atr, bif2cs, bifcs, big2cs, bigcs, bip2cs, bipcs, btr, &
     CSEVL, eta, R1MACH, sqrtx, theta, X, x32sml, x3sml, xbig, xm, z
   INTEGER INITS, nbif, nbif2, nbig, nbig2, nbip, nbip2
@@ -160,7 +170,7 @@ REAL FUNCTION BIE(X)
   DATA atr/8.7506905708484345E0/
   DATA btr/ - 2.093836321356054E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BIE
+  !* FIRST EXECUTABLE STATEMENT  BIE
   IF ( first ) THEN
     eta = 0.1*R1MACH(3)
     nbif = INITS(bifcs,9,eta)

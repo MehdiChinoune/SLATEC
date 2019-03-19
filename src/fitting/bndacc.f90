@@ -1,17 +1,24 @@
-!DECK BNDACC
+!** BNDACC
 SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BNDACC
-  !***PURPOSE  Compute the LU factorization of a banded matrices using
+  !>
+  !***
+  !  Compute the LU factorization of a banded matrices using
   !            sequential accumulation of rows of the data matrix.
   !            Exactly one right-hand side vector is permitted.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D9
-  !***TYPE      SINGLE PRECISION (BNDACC-S, DBNDAC-D)
-  !***KEYWORDS  BANDED MATRIX, CURVE FITTING, LEAST SQUARES
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D9
+  !***
+  ! **Type:**      SINGLE PRECISION (BNDACC-S, DBNDAC-D)
+  !***
+  ! **Keywords:**  BANDED MATRIX, CURVE FITTING, LEAST SQUARES
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     These subroutines solve the least squares problem Ax = b for
   !     banded matrices A using sequential accumulation of rows of the
@@ -177,10 +184,13 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !
   !     CALL BNDACC(G,MDG,NB,IP,IR,MT,JT)
   !
-  !***REFERENCES  C. L. Lawson and R. J. Hanson, Solving Least Squares
+  !***
+  ! **References:**  C. L. Lawson and R. J. Hanson, Solving Least Squares
   !                 Problems, Prentice-Hall, Inc., 1974, Chapter 27.
-  !***ROUTINES CALLED  H12, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  H12, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891006  Cosmetic changes to prologue.  (WRB)
@@ -190,13 +200,13 @@ SUBROUTINE BNDACC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BNDACC
+  
   REAL G, rho, zero
   INTEGER i, ie, ig, ig1, ig2, iopt, Ip, Ir, j, jg, Jt, k, kh, &
     l, lp1, Mdg, mh, Mt, mu, Nb
   INTEGER nbp1, nerr
   DIMENSION G(Mdg,*)
-  !***FIRST EXECUTABLE STATEMENT  BNDACC
+  !* FIRST EXECUTABLE STATEMENT  BNDACC
   zero = 0.
   !
   !              ALG. STEPS 1-4 ARE PERFORMED EXTERNAL TO THIS SUBROUTINE.

@@ -2,15 +2,20 @@ MODULE TEST23_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK CCHQC
+  !** CCHQC
   SUBROUTINE CCHQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CCHQC
-    !***PURPOSE  Quick check for CCHDC.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CCHDC.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    QUICK CHECK FOR LINPACK SUBROUTINE CCHDC.
     !
@@ -27,14 +32,16 @@ CONTAINS
     !    NO INPUT ARGUMENTS ARE REQUIRED.  ON RETURN, NERR (INTEGER
     !    TYPE) CONTAINS THE TOTAL COUNT OF ALL FAILURES DETECTED.
     !
-    !***ROUTINES CALLED  CCHDC
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CCHDC
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801027  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    !***END PROLOGUE  CCHQC
+    
     INTEGER Kprint, Lun, Nerr
     COMPLEX a(4,4), work(4), at(5,4), af(4,4)
     INTEGER lda, p, jpvt(4), job, info, jpvtt(4), i, j, infoc, jpvtc(4)
@@ -53,7 +60,7 @@ CONTAINS
     DATA infoc/4/
     DATA jpvtc/3, 4, 1, 2/
     DATA kfail/'FACTORING JPVT INFO '/
-    !***FIRST EXECUTABLE STATEMENT  CCHQC
+    !* FIRST EXECUTABLE STATEMENT  CCHQC
     job = 1
     lda = 5
     p = 4
@@ -106,15 +113,20 @@ CONTAINS
     RETURN
     99002 FORMAT (/' *** CCHDC FAILURE - ERROR IN ',A)
   END SUBROUTINE CCHQC
-  !DECK CGBQC
+  !** CGBQC
   SUBROUTINE CGBQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CGBQC
-    !***PURPOSE  Quick check for CGBFA, CGBCO, CGBSL and CGBDI.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CGBFA, CGBCO, CGBSL and CGBDI.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    LET  A*X=B  BE A COMPLEX LINEAR SYSTEM WHERE THE MATRIX  A  IS
     !    OF THE PROPER TYPE FOR THE LINPACK SUBROUTINES BEING TESTED.
@@ -133,15 +145,17 @@ CONTAINS
     !    ON RETURN,  NERR  (INTEGER TYPE) CONTAINS THE TOTAL COUNT OF
     !    ALL FAILURES DETECTED BY CGBQC.
     !
-    !***ROUTINES CALLED  CGBCO, CGBDI, CGBFA, CGBSL
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CGBCO, CGBDI, CGBFA, CGBSL
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801015  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, moved an ARITHMETIC
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
-    !***END PROLOGUE  CGBQC
+    
     INTEGER Kprint, Lun
     COMPLEX abd(6,4), at(7,4), b(4), bt(4), c(4), det(2), dc(2), z(4)
     REAL r, rcond, rcnd, CABS1
@@ -160,7 +174,7 @@ CONTAINS
     DATA kprog/'GBFA GBCO GBSL GBDI'/
     DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
     DATA rcnd/.24099E0/
-    !***FIRST EXECUTABLE STATEMENT  CGBQC
+    !* FIRST EXECUTABLE STATEMENT  CGBQC
     lda = 7
     n = 4
     ml = 1
@@ -244,15 +258,20 @@ CONTAINS
     RETURN
     99002 FORMAT (/' *** C',A,' FAILURE - ERROR IN ',A)
   END SUBROUTINE CGBQC
-  !DECK CGECK
+  !** CGECK
   SUBROUTINE CGECK(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CGECK
-    !***PURPOSE  Quick check for CGEFA, CGECO, CGESL and CGEDI.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CGEFA, CGECO, CGESL and CGEDI.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    LET  A*X=B  BE A COMPLEX LINEAR SYSTEM WHERE THE MATRIX  A  IS
     !    OF THE PROPER TYPE FOR THE LINPACK SUBROUTINES BEING TESTED.
@@ -272,14 +291,16 @@ CONTAINS
     !    ON RETURN,  NERR  (INTEGER TYPE) CONTAINS THE TOTAL COUNT OF
     !    ALL FAILURES DETECTED BY CGECK.
     !
-    !***ROUTINES CALLED  CGECO, CGEDI, CGEFA, CGESL
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CGECO, CGEDI, CGEFA, CGESL
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801014  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    !***END PROLOGUE  CGECK
+    
     INTEGER Kprint, Lun
     COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), det(2), dc(2), z(4)
     REAL r, rcond, rcnd, CABS1
@@ -299,7 +320,7 @@ CONTAINS
     DATA kprog/'GEFA GECO GESL GEDI'/
     DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
     DATA rcnd/.24099E0/
-    !***FIRST EXECUTABLE STATEMENT  CGECK
+    !* FIRST EXECUTABLE STATEMENT  CGECK
     lda = 5
     n = 4
     Nerr = 0
@@ -393,15 +414,20 @@ CONTAINS
     RETURN
     99002 FORMAT (/' *** C',A,' FAILURE - ERROR IN ',A)
   END SUBROUTINE CGECK
-  !DECK CGTQC
+  !** CGTQC
   SUBROUTINE CGTQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CGTQC
-    !***PURPOSE  Quick check for CGTSL.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CGTSL.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    LET  A*X=B  BE A COMPLEX LINEAR SYSTEM WHERE THE MATRIX  A  IS
     !    OF THE PROPER TYPE FOR THE LINPACK SUBROUTINE BEING TESTED.
@@ -417,15 +443,17 @@ CONTAINS
     !    ON RETURN,  NERR  (INTEGER TYPE) CONTAINS THE TOTAL COUNT
     !    OF ALL FAILURES DETECTED BY CGTQC.
     !
-    !***ROUTINES CALLED  CGTSL
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CGTSL
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801024  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, moved an ARITHMETIC
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
-    !***END PROLOGUE  CGTQC
+    
     INTEGER Kprint, Lun
     COMPLEX c(4), d(4), e(4), b(4), cx(4), ct(4), dt(4), et(4), bt(4)
     CHARACTER kfail*13
@@ -437,7 +465,7 @@ CONTAINS
     DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
     DATA cx/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
     DATA kfail/'INFO SOLUTION'/
-    !***FIRST EXECUTABLE STATEMENT  CGTQC
+    !* FIRST EXECUTABLE STATEMENT  CGTQC
     n = 4
     Nerr = 0
     DO i = 1, n
@@ -470,15 +498,20 @@ CONTAINS
     RETURN
     99002 FORMAT (/' *** CGTSL FAILURE - ERROR IN ',A)
   END SUBROUTINE CGTQC
-  !DECK CHIQC
+  !** CHIQC
   SUBROUTINE CHIQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CHIQC
-    !***PURPOSE  Quick check for CHIFA, CHICO, CHISL and CHIDI.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CHIFA, CHICO, CHISL and CHIDI.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    LET  A*X=B  BE A COMPLEX LINEAR SYSTEM WHERE THE MATRIX  A  IS
     !    OF THE PROPER TYPE FOR THE LINPACK SUBROUTINES BEING TESTED.
@@ -498,14 +531,16 @@ CONTAINS
     !    ON RETURN,  NERR  (INTEGER TYPE) CONTAINS THE TOTAL COUNT OF
     !    ALL FAILURES DETECTED BY CHIQC.
     !
-    !***ROUTINES CALLED  CHICO, CHIDI, CHIFA, CHISL
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CHICO, CHIDI, CHIFA, CHISL
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801022  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    !***END PROLOGUE  CHIQC
+    
     INTEGER Kprint, Lun
     COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), z(4)
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
@@ -527,7 +562,7 @@ CONTAINS
     DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE INERTIA'/
     DATA rcnd/.24099E0/
     DATA irt/4, 0, 0/
-    !***FIRST EXECUTABLE STATEMENT  CHIQC
+    !* FIRST EXECUTABLE STATEMENT  CHIQC
     lda = 5
     n = 4
     Nerr = 0
@@ -617,15 +652,20 @@ CONTAINS
     RETURN
     99002 FORMAT (/' *** C',A,' FAILURE - ERROR IN ',A)
   END SUBROUTINE CHIQC
-  !DECK CHPQC
+  !** CHPQC
   SUBROUTINE CHPQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CHPQC
-    !***PURPOSE  Quick check for CHPFA, CHPCO, CHPSL and CHPDI.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CHPFA, CHPCO, CHPSL and CHPDI.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    LET  A*X=B  BE A COMPLEX LINEAR SYSTEM WHERE THE MATRIX  A  IS
     !    OF THE PROPER TYPE FOR THE LINPACK SUBROUTINES BEING TESTED.
@@ -645,14 +685,16 @@ CONTAINS
     !    ON RETURN,  NERR  (INTEGER TYPE) CONTAINS THE TOTAL COUNT OF
     !    ALL FAILURES DETECTED BY CHPQC.
     !
-    !***ROUTINES CALLED  CHPCO, CHPDI, CHPFA, CHPSL
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CHPCO, CHPDI, CHPFA, CHPSL
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801022  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    !***END PROLOGUE  CHPQC
+    
     INTEGER Kprint, Lun
     COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), z(4)
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
@@ -671,7 +713,7 @@ CONTAINS
     DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE INERTIA'/
     DATA rcnd/.24099E0/
     DATA irt/4, 0, 0/
-    !***FIRST EXECUTABLE STATEMENT  CHPQC
+    !* FIRST EXECUTABLE STATEMENT  CHPQC
     n = 4
     Nerr = 0
     !
@@ -757,15 +799,20 @@ CONTAINS
     RETURN
     99002 FORMAT (/' *** C',A,' FAILURE - ERROR IN ',A)
   END SUBROUTINE CHPQC
-  !DECK CPBQC
+  !** CPBQC
   SUBROUTINE CPBQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CPBQC
-    !***PURPOSE  Quick check for CPBFA, CPBCO, CPBSL and CPBDI.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CPBFA, CPBCO, CPBSL and CPBDI.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    LET  A*X=B  BE A COMPLEX LINEAR SYSTEM WHERE THE MATRIX  A  IS
     !    OF THE PROPER TYPE FOR THE LINPACK SUBROUTINES BEING TESTED.
@@ -784,14 +831,16 @@ CONTAINS
     !    ON RETURN,  NERR  (INTEGER TYPE) CONTAINS THE TOTAL COUNT OF
     !    ALL FAILURES DETECTED BY CPBQC.
     !
-    !***ROUTINES CALLED  CPBCO, CPBDI, CPBFA, CPBSL
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CPBCO, CPBDI, CPBFA, CPBSL
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801020  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    !***END PROLOGUE  CPBQC
+    
     INTEGER Kprint, Lun
     COMPLEX abd(2,4), at(3,4), b(4), bt(4), c(4), z(4)
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
@@ -805,7 +854,7 @@ CONTAINS
     DATA kprog/'PBFA PBCO PBSL PBDI'/
     DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
     DATA rcnd/.24099E0/
-    !***FIRST EXECUTABLE STATEMENT  CPBQC
+    !* FIRST EXECUTABLE STATEMENT  CPBQC
     lda = 3
     n = 4
     m = 1
@@ -879,15 +928,20 @@ CONTAINS
     RETURN
     99002 FORMAT (/' *** C',A,' FAILURE - ERROR IN ',A)
   END SUBROUTINE CPBQC
-  !DECK CPOQC
+  !** CPOQC
   SUBROUTINE CPOQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CPOQC
-    !***PURPOSE  Quick check for CPOFA, CPOCO, CPOSL and CPODI.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CPOFA, CPOCO, CPOSL and CPODI.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    LET  A*X=B  BE A COMPLEX LINEAR SYSTEM WHERE THE MATRIX  A  IS
     !    OF THE PROPER TYPE FOR THE LINPACK SUBROUTINES BEING TESTED.
@@ -907,14 +961,16 @@ CONTAINS
     !    ON RETURN,  NERR  (INTEGER TYPE) CONTAINS THE TOTAL COUNT OF
     !    ALL FAILURES DETECTED BY CPOQC.
     !
-    !***ROUTINES CALLED  CPOCO, CPODI, CPOFA, CPOSL
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CPOCO, CPODI, CPOFA, CPOSL
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801016  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    !***END PROLOGUE  CPOQC
+    
     INTEGER Kprint, Lun
     COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), z(4)
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
@@ -934,7 +990,7 @@ CONTAINS
     DATA kprog/'POFA POCO POSL PODI'/
     DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
     DATA rcnd/.24099E0/
-    !***FIRST EXECUTABLE STATEMENT  CPOQC
+    !* FIRST EXECUTABLE STATEMENT  CPOQC
     lda = 5
     n = 4
     Nerr = 0
@@ -1020,15 +1076,20 @@ CONTAINS
     RETURN
     99002 FORMAT (/' *** C',A,' FAILURE - ERROR IN ',A)
   END SUBROUTINE CPOQC
-  !DECK CPPQC
+  !** CPPQC
   SUBROUTINE CPPQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CPPQC
-    !***PURPOSE  Quick check for CPPFA, CPPCO, CPPSL and CPPDI.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CPPFA, CPPCO, CPPSL and CPPDI.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    LET  A*X=B  BE A COMPLEX LINEAR SYSTEM WHERE THE MATRIX  A  IS
     !    OF THE PROPER TYPE FOR THE LINPACK SUBROUTINES BEING TESTED.
@@ -1048,14 +1109,16 @@ CONTAINS
     !    ON RETURN,  NERR  (INTEGER TYPE) CONTAINS THE TOTAL COUNT OF
     !    ALL FAILURES DETECTED BY CPPQC.
     !
-    !***ROUTINES CALLED  CPPCO, CPPDI, CPPFA, CPPSL
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CPPCO, CPPDI, CPPFA, CPPSL
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801016  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    !***END PROLOGUE  CPPQC
+    
     INTEGER Kprint, Lun
     COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), z(4)
     REAL r, rcond, rcnd, CABS1, det(2), dc(2)
@@ -1073,7 +1136,7 @@ CONTAINS
     DATA kprog/'PPFA PPCO PPSL PPDI'/
     DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
     DATA rcnd/.24099E0/
-    !***FIRST EXECUTABLE STATEMENT  CPPQC
+    !* FIRST EXECUTABLE STATEMENT  CPPQC
     n = 4
     Nerr = 0
     !
@@ -1154,15 +1217,20 @@ CONTAINS
     RETURN
     99002 FORMAT (/' *** C',A,' FAILURE - ERROR IN ',A)
   END SUBROUTINE CPPQC
-  !DECK CPTQC
+  !** CPTQC
   SUBROUTINE CPTQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CPTQC
-    !***PURPOSE  Quick check for CPTSL.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CPTSL.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    LET  A*X=B  BE A COMPLEX LINEAR SYSTEM WHERE THE MATRIX  A  IS
     !    OF THE PROPER TYPE FOR THE LINPACK SUBROUTINE BEING TESTED.
@@ -1178,14 +1246,16 @@ CONTAINS
     !    ON RETURN,  NERR  (INTEGER TYPE) CONTAINS THE TOTAL COUNT
     !    OF ALL FAILURES DETECTED BY CPTQC.
     !
-    !***ROUTINES CALLED  CPTSL
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CPTSL
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801024  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    !***END PROLOGUE  CPTQC
+    
     INTEGER Kprint, Lun
     COMPLEX d(4), e(4), b(4), cx(4), dt(4), et(4), bt(4)
     INTEGER n, i, indx, Nerr
@@ -1194,7 +1264,7 @@ CONTAINS
     DATA e/(0.E0,-1.E0), (0.E0,0.E0), (0.E0,-1.E0), (0.E0,0.E0)/
     DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
     DATA cx/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    !***FIRST EXECUTABLE STATEMENT  CPTQC
+    !* FIRST EXECUTABLE STATEMENT  CPTQC
     n = 4
     Nerr = 0
     DO i = 1, n
@@ -1221,15 +1291,20 @@ CONTAINS
     99002 FORMAT (/' * CPTQC - TEST FOR CPTSL FOUND ',I1,' ERRORS.'/)
     RETURN
   END SUBROUTINE CPTQC
-  !DECK CQRQC
+  !** CQRQC
   SUBROUTINE CQRQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CQRQC
-    !***PURPOSE  Quick check for CQRDC and CQRSL.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CQRDC and CQRSL.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    THE RETURNED FLOATING POINT VALUES FROM CQRDC AND CQRSL FOR
     !    FACTORED X, QRAUX, QY, QTY, B, RSD, AND XB ARE COMPARED TO
@@ -1245,15 +1320,17 @@ CONTAINS
     !    NO INPUT ARGUMENTS ARE REQUIRED.  ON RETURN, NERR (INTEGER
     !    TYPE) CONTAINS THE TOTAL COUNT OF ALL FAILURES DETECTED.
     !
-    !***ROUTINES CALLED  CQRDC, CQRSL
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CQRDC, CQRSL
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801029  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, moved an ARITHMETIC
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
-    !***END PROLOGUE  CQRQC
+    
     INTEGER Kprint, Lun
     COMPLEX a(4,4), qraux(4), work(4), y(4), qy(4), qty(4), b(4), rsd(4), xb(4)
     COMPLEX at(5,4), ac(4,4), qrauxc(4), qyc(4), qtyc(4), bc(4), rsdc(4), xbc(4)
@@ -1284,7 +1361,7 @@ CONTAINS
     DATA kprog/'QRDC QRSL'/
     DATA kfail/&
       'FACTOR QRAUX  JPVT  QY        QTY       SOLUTION  RSD        XB        INFO'/
-    !***FIRST EXECUTABLE STATEMENT  CQRQC
+    !* FIRST EXECUTABLE STATEMENT  CQRQC
     ldx = 5
     n = 4
     p = 4
@@ -1368,15 +1445,20 @@ CONTAINS
     RETURN
     99002 FORMAT (/' *** C',A,' FAILURE - ERROR IN ',A)
   END SUBROUTINE CQRQC
-  !DECK CSIQC
+  !** CSIQC
   SUBROUTINE CSIQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CSIQC
-    !***PURPOSE  Quick check for CSIFA, CSICO, CSISL and CSIDI.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CSIFA, CSICO, CSISL and CSIDI.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    LET  A*X=B  BE A COMPLEX LINEAR SYSTEM WHERE THE MATRIX  A  IS
     !    OF THE PROPER TYPE FOR THE LINPACK SUBROUTINES BEING TESTED.
@@ -1396,14 +1478,16 @@ CONTAINS
     !    ON RETURN,  NERR  (INTEGER TYPE) CONTAINS THE TOTAL COUNT OF
     !    ALL FAILURES DETECTED BY CSIQC.
     !
-    !***ROUTINES CALLED  CSICO, CSIDI, CSIFA, CSISL
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CSICO, CSIDI, CSIFA, CSISL
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801021  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    !***END PROLOGUE  CSIQC
+    
     INTEGER Kprint, Lun
     COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), det(2), dc(2), z(4)
     REAL r, rcond, rcnd, CABS1
@@ -1423,7 +1507,7 @@ CONTAINS
     DATA kprog/'SIFA SICO SISL SIDI'/
     DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
     DATA rcnd/.58692E0/
-    !***FIRST EXECUTABLE STATEMENT  CSIQC
+    !* FIRST EXECUTABLE STATEMENT  CSIQC
     lda = 5
     n = 4
     Nerr = 0
@@ -1503,15 +1587,20 @@ CONTAINS
     RETURN
     99002 FORMAT (/' *** C',A,' FAILURE - ERROR IN ',A)
   END SUBROUTINE CSIQC
-  !DECK CSPQC
+  !** CSPQC
   SUBROUTINE CSPQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CSPQC
-    !***PURPOSE  Quick check for CSPFA, CSPCO, CSPSL and CSPDI.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CSPFA, CSPCO, CSPSL and CSPDI.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    LET  A*X=B  BE A COMPLEX LINEAR SYSTEM WHERE THE MATRIX  A  IS
     !    OF THE PROPER TYPE FOR THE LINPACK SUBROUTINES BEING TESTED.
@@ -1531,14 +1620,16 @@ CONTAINS
     !    ON RETURN,  NERR  (INTEGER TYPE) CONTAINS THE TOTAL COUNT OF
     !    ALL FAILURES DETECTED BY CSPQC.
     !
-    !***ROUTINES CALLED  CSPCO, CSPDI, CSPFA, CSPSL
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CSPCO, CSPDI, CSPFA, CSPSL
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801021  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    !***END PROLOGUE  CSPQC
+    
     INTEGER Kprint, Lun
     COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), det(2), dc(2), z(4)
     REAL r, rcond, rcnd, CABS1
@@ -1556,7 +1647,7 @@ CONTAINS
     DATA kprog/'SPFA SPCO SPSL SPDI'/
     DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
     DATA rcnd/.58692E0/
-    !***FIRST EXECUTABLE STATEMENT  CSPQC
+    !* FIRST EXECUTABLE STATEMENT  CSPQC
     n = 4
     Nerr = 0
     !
@@ -1632,15 +1723,20 @@ CONTAINS
     RETURN
     99002 FORMAT (/'*** C',A,' FAILURE - ERROR IN ',A)
   END SUBROUTINE CSPQC
-  !DECK CSVQC
+  !** CSVQC
   SUBROUTINE CSVQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CSVQC
-    !***PURPOSE  Quick check for CSVDC.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CSVDC.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    THE RETURNED FLOATING POINT VALUES FROM CSVDC FOR
     !    S, E, U, AND  V  ARE COMPARED TO THEIR
@@ -1656,15 +1752,17 @@ CONTAINS
     !    NO INPUT ARGUMENTS ARE REQUIRED.  ON RETURN, NERR (INTEGER
     !    TYPE) CONTAINS THE TOTAL COUNT OF ALL FAILURES DETECTED.
     !
-    !***ROUTINES CALLED  CSVDC
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CSVDC
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801031  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, moved an ARITHMETIC
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
-    !***END PROLOGUE  CSVQC
+    
     INTEGER kone, Kprint, Lun, Nerr
     COMPLEX a(4,4), work(4), s(4), e(4), u(4,4), v(4,4)
     COMPLEX at(5,4), sc(4), ec(4), uvc(4,4)
@@ -1683,7 +1781,7 @@ CONTAINS
       (.70711E0,0.E0), (0.E0,.70711E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (-.85065E0,0.E0), (0.E0,.52573E0), &
       (-.70711E0,0.E0), (0.E0,.70711E0), (0.E0,0.E0), (0.E0,0.E0)/
-    !***FIRST EXECUTABLE STATEMENT  CSVQC
+    !* FIRST EXECUTABLE STATEMENT  CSVQC
     n = 4
     p = 4
     ldx = 5
@@ -1735,15 +1833,20 @@ CONTAINS
     RETURN
     99002 FORMAT (/' *** CSVQC FAILURE - ERROR IN ',A)
   END SUBROUTINE CSVQC
-  !DECK CTRQC
+  !** CTRQC
   SUBROUTINE CTRQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CTRQC
-    !***PURPOSE  Quick check for CTRFA, CTRCO, CTRSL and CTRDI.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CTRFA, CTRCO, CTRSL and CTRDI.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    LET  A*X=B  BE A COMPLEX LINEAR SYSTEM WHERE THE MATRIX  A  IS
     !    OF THE PROPER TYPE FOR THE LINPACK SUBROUTINES BEING TESTED.
@@ -1763,14 +1866,16 @@ CONTAINS
     !    ON RETURN,  NERR  (INTEGER TYPE) CONTAINS THE TOTAL COUNT OF
     !    ALL FAILURES DETECTED BY CTRQC.
     !
-    !***ROUTINES CALLED  CTRCO, CTRDI, CTRSL
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CTRCO, CTRDI, CTRSL
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801023  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    !***END PROLOGUE  CTRQC
+    
     INTEGER Kprint, Lun
     COMPLEX a(4,4), at(5,4), b(4,2), bt(4), c(4), ainv(4,4,2), det(2), dc(2), z(4)
     REAL r, rcond, rcnd(2), CABS1
@@ -1796,7 +1901,7 @@ CONTAINS
     DATA kprog/'TRFA TRCO TRSL TRDI'/
     DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
     DATA rcnd/.45695E0, .37047E0/
-    !***FIRST EXECUTABLE STATEMENT  CTRQC
+    !* FIRST EXECUTABLE STATEMENT  CTRQC
     lda = 5
     n = 4
     Nerr = 0
@@ -1906,24 +2011,31 @@ CONTAINS
     99002 FORMAT (/' *** C',A,' FAILURE - ERROR IN ',A)
   END SUBROUTINE CTRQC
 END MODULE TEST23_MOD
-!DECK TEST23
+!** TEST23
 PROGRAM TEST23
   USE TEST23_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST23
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2
-  !***TYPE      COMPLEX (TEST23-S)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2
+  !***
+  ! **Type:**      COMPLEX (TEST23-S)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -1935,7 +2047,7 @@ PROGRAM TEST23
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        CGECO    CGEDI    CGEFA    CGESL
   !        CGBCO    CGBDI    CGBFA    CGBSL
@@ -1953,21 +2065,24 @@ PROGRAM TEST23
   !        CQRDC    CQRSL
   !        CSVDC
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  CCHQC, CGBQC, CGECK, CGTQC, CHIQC, CHPQC, CPBQC,
+  !***
+  ! **Routines called:**  CCHQC, CGBQC, CGECK, CGTQC, CHIQC, CHPQC, CPBQC,
   !                    CPOQC, CPPQC, CPTQC, CQRQC, CSIQC, CSPQC, CSVQC,
   !                    CTRQC, I1MACH, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST23
+  
   INTEGER I1MACH
   INTEGER kprint, lin, lun, nerr, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST23
+  !* FIRST EXECUTABLE STATEMENT  TEST23
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

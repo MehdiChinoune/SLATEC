@@ -1,13 +1,17 @@
-!DECK DFSPVD
+!** DFSPVD
 SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DFSPVD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DFC
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (BSPLVD-S, DFSPVD-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DFC
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (BSPLVD-S, DFSPVD-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   **** Double Precision Version of BSPLVD ****
   ! Calculates value and deriv.s of all B-splines which do not vanish at X
@@ -16,22 +20,25 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
   !  B-splines of order K+1-IDERIV, IDERIV=NDERIV, ... ,1, by repeated
   !  calls to DFSPVN
   !
-  !***SEE ALSO  DFC
-  !***ROUTINES CALLED  DFSPVN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DFC
+  !***
+  ! **Routines called:**  DFSPVN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DFSPVD
+  
   REAL(8) :: a, diff, fkmd, T, v, Vnikx, X
   INTEGER i, ideriv, idervm, Ileft, ipkmd, j, jlow, jm1, K, kmd, &
     l, m, Nderiv
   DIMENSION T(*), Vnikx(K,*)
   DIMENSION a(20,20)
-  !***FIRST EXECUTABLE STATEMENT  DFSPVD
+  !* FIRST EXECUTABLE STATEMENT  DFSPVD
   CALL DFSPVN(T,K+1-Nderiv,1,X,Ileft,Vnikx(Nderiv,Nderiv))
   IF ( Nderiv>1 ) THEN
     ideriv = Nderiv

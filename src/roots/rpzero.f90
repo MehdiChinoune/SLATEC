@@ -1,14 +1,21 @@
-!DECK RPZERO
+!** RPZERO
 SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RPZERO
-  !***PURPOSE  Find the zeros of a polynomial with real coefficients.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  F1A1A
-  !***TYPE      SINGLE PRECISION (RPZERO-S, CPZERO-C)
-  !***KEYWORDS  POLYNOMIAL ROOTS, POLYNOMIAL ZEROS, REAL ROOTS
-  !***AUTHOR  Kahaner, D. K., (NBS)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Find the zeros of a polynomial with real coefficients.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  F1A1A
+  !***
+  ! **Type:**      SINGLE PRECISION (RPZERO-S, CPZERO-C)
+  !***
+  ! **Keywords:**  POLYNOMIAL ROOTS, POLYNOMIAL ZEROS, REAL ROOTS
+  !***
+  ! **Author:**  Kahaner, D. K., (NBS)
+  !***
+  ! **Description:**
   !
   !      Find the zeros of the real polynomial
   !         P(X)= A(1)*X**N + A(2)*X**(N-1) +...+ A(N+1)
@@ -41,17 +48,20 @@ SUBROUTINE RPZERO(N,A,R,T,Iflg,S)
   !                after 25*N iterations.  Best current estimates of the
   !                zeros are in R(I).  Error bounds are not calculated.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CPZERO
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CPZERO
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810223  DATE WRITTEN
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  RPZERO
+  
   INTEGER i, Iflg, N, n1
   COMPLEX R(*), T(*)
   REAL A(*), S(*)
-  !***FIRST EXECUTABLE STATEMENT  RPZERO
+  !* FIRST EXECUTABLE STATEMENT  RPZERO
   n1 = N + 1
   DO i = 1, n1
     T(i) = CMPLX(A(i),0.0)

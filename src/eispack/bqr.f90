@@ -1,15 +1,22 @@
-!DECK BQR
+!** BQR
 SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BQR
-  !***PURPOSE  Compute some of the eigenvalues of a real symmetric
+  !>
+  !***
+  !  Compute some of the eigenvalues of a real symmetric
   !            matrix using the QR method with shifts of origin.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A6
-  !***TYPE      SINGLE PRECISION (BQR-S)
-  !***KEYWORDS  EIGENVALUES, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A6
+  !***
+  ! **Type:**      SINGLE PRECISION (BQR-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure BQR,
   !     NUM. MATH. 16, 85-92(1970) by Martin, Reinsch, and Wilkinson.
@@ -97,19 +104,22 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
   !     Applied Mathematics Division, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  PYTHAG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  PYTHAG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BQR
+  
   !
   INTEGER i, j, k, l, m, N, ii, ik, jk, jm, kj, kk, km, ll, &
     Mb, mk, mn, mz
@@ -119,7 +129,7 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
   REAL f, g, q, R, s, T, scale
   REAL PYTHAG
   !
-  !***FIRST EXECUTABLE STATEMENT  BQR
+  !* FIRST EXECUTABLE STATEMENT  BQR
   Ierr = 0
   m1 = MIN(Mb,N)
   m = m1 - 1

@@ -1,16 +1,23 @@
-!DECK ELMBAK
+!** ELMBAK
 SUBROUTINE ELMBAK(Nm,Low,Igh,A,Int,M,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ELMBAK
-  !***PURPOSE  Form the eigenvectors of a real general matrix from the
+  !>
+  !***
+  !  Form the eigenvectors of a real general matrix from the
   !            eigenvectors of the upper Hessenberg matrix output from
   !            ELMHES.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C4
-  !***TYPE      SINGLE PRECISION (ELMBAK-S, COMBAK-C)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C4
+  !***
+  ! **Type:**      SINGLE PRECISION (ELMBAK-S, COMBAK-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure ELMBAK,
   !     NUM. MATH. 12, 349-368(1968) by Martin and Wilkinson.
@@ -55,25 +62,28 @@ SUBROUTINE ELMBAK(Nm,Low,Igh,A,Int,M,Z)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  ELMBAK
+  
   !
   INTEGER i, j, M, la, mm, mp, Nm, Igh, kp1, Low, mp1
   REAL A(Nm,*), Z(Nm,*)
   REAL x
   INTEGER Int(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  ELMBAK
+  !* FIRST EXECUTABLE STATEMENT  ELMBAK
   IF ( M/=0 ) THEN
     la = Igh - 1
     kp1 = Low + 1

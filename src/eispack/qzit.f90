@@ -1,19 +1,26 @@
-!DECK QZIT
+!** QZIT
 SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QZIT
-  !***PURPOSE  The second step of the QZ algorithm for generalized
+  !>
+  !***
+  !  The second step of the QZ algorithm for generalized
   !            eigenproblems.  Accepts an upper Hessenberg and an upper
   !            triangular matrix and reduces the former to
   !            quasi-triangular form while preserving the form of the
   !            latter.  Usually preceded by QZHES and followed by QZVAL
   !            and QZVEC.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C1B3
-  !***TYPE      SINGLE PRECISION (QZIT-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C1B3
+  !***
+  ! **Type:**      SINGLE PRECISION (QZIT-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is the second step of the QZ algorithm
   !     for solving generalized matrix eigenvalue problems,
@@ -84,19 +91,22 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  QZIT
+  
   !
   INTEGER i, j, k, l, N, en, k1, k2, ld, ll, l1, na, Nm, ish, &
     itn, its, km1, lm1
@@ -108,7 +118,7 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
   REAL b12, b22, b33, b34, b44, epsa, epsb, Eps1, anorm, bnorm
   LOGICAL Matz, notlas
   !
-  !***FIRST EXECUTABLE STATEMENT  QZIT
+  !* FIRST EXECUTABLE STATEMENT  QZIT
   Ierr = 0
   !     .......... COMPUTE EPSA,EPSB ..........
   anorm = 0.0E0

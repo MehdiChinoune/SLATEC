@@ -1,15 +1,22 @@
-!DECK CBAL
+!** CBAL
 SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CBAL
-  !***PURPOSE  Balance a complex general matrix and isolate eigenvalues
+  !>
+  !***
+  !  Balance a complex general matrix and isolate eigenvalues
   !            whenever possible.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C1A
-  !***TYPE      COMPLEX (BALANC-S, CBAL-C)
-  !***KEYWORDS  EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C1A
+  !***
+  ! **Type:**      COMPLEX (BALANC-S, CBAL-C)
+  !***
+  ! **Keywords:**  EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure
   !     CBALANCE, which is a complex version of BALANCE,
@@ -67,18 +74,21 @@ SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CBAL
+  
   !
   INTEGER i, j, k, l, m, N, jj, Nm, Igh, Low, iexc
   REAL Ar(Nm,*), Ai(Nm,*), Scale(*)
@@ -88,7 +98,7 @@ SUBROUTINE CBAL(Nm,N,Ar,Ai,Low,Igh,Scale)
   !     THE FOLLOWING PORTABLE VALUE OF RADIX WORKS WELL ENOUGH
   !     FOR ALL MACHINES WHOSE BASE IS A POWER OF TWO.
   !
-  !***FIRST EXECUTABLE STATEMENT  CBAL
+  !* FIRST EXECUTABLE STATEMENT  CBAL
   radix = 16
   !
   b2 = radix*radix

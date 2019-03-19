@@ -1,15 +1,22 @@
-!DECK DBSPPP
+!** DBSPPP
 SUBROUTINE DBSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBSPPP
-  !***PURPOSE  Convert the B-representation of a B-spline to the piecewise
+  !>
+  !***
+  !  Convert the B-representation of a B-spline to the piecewise
   !            polynomial (PP) form.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E3, K6
-  !***TYPE      DOUBLE PRECISION (BSPPP-S, DBSPPP-D)
-  !***KEYWORDS  B-SPLINE, PIECEWISE POLYNOMIAL
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E3, K6
+  !***
+  ! **Type:**      DOUBLE PRECISION (BSPPP-S, DBSPPP-D)
+  !***
+  ! **Keywords:**  B-SPLINE, PIECEWISE POLYNOMIAL
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Written by Carl de Boor and modified by D. E. Amos
   !
@@ -46,25 +53,28 @@ SUBROUTINE DBSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   !     Error Conditions
   !         Improper input is a fatal error
   !
-  !***REFERENCES  Carl de Boor, Package for calculating with B-splines,
+  !***
+  ! **References:**  Carl de Boor, Package for calculating with B-splines,
   !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
   !                 pp. 441-472.
-  !***ROUTINES CALLED  DBSPDR, DBSPEV, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DBSPDR, DBSPEV, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DBSPPP
+  
   !
   INTEGER ileft, inev, K, Ldc, Lxi, N, nk
   REAL(8) :: A, C, T, Work, Xi
   !     DIMENSION T(N+K),XI(LXI+1),C(LDC,*)
   !     HERE, * = THE FINAL VALUE OF THE OUTPUT PARAMETER LXI.
   DIMENSION T(*), A(*), Work(*), Xi(*), C(Ldc,*)
-  !***FIRST EXECUTABLE STATEMENT  DBSPPP
+  !* FIRST EXECUTABLE STATEMENT  DBSPPP
   IF ( K<1 ) THEN
     CALL XERMSG('SLATEC','DBSPPP','K DOES NOT SATISFY K.GE.1',2,1)
     RETURN

@@ -1,23 +1,33 @@
-!DECK ALNGAM
+!** ALNGAM
 REAL FUNCTION ALNGAM(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ALNGAM
-  !***PURPOSE  Compute the logarithm of the absolute value of the Gamma
+  !>
+  !***
+  !  Compute the logarithm of the absolute value of the Gamma
   !            function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7A
-  !***TYPE      SINGLE PRECISION (ALNGAM-S, DLNGAM-D, CLNGAM-C)
-  !***KEYWORDS  ABSOLUTE VALUE, COMPLETE GAMMA FUNCTION, FNLIB, LOGARITHM,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7A
+  !***
+  ! **Type:**      SINGLE PRECISION (ALNGAM-S, DLNGAM-D, CLNGAM-C)
+  !***
+  ! **Keywords:**  ABSOLUTE VALUE, COMPLETE GAMMA FUNCTION, FNLIB, LOGARITHM,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! ALNGAM(X) computes the logarithm of the absolute value of the
   ! gamma function at X.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  GAMMA, R1MACH, R9LGMC, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  GAMMA, R1MACH, R9LGMC, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -26,7 +36,7 @@ REAL FUNCTION ALNGAM(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  !***END PROLOGUE  ALNGAM
+  
   REAL dxrel, GAMMA, pi, R1MACH, R9LGMC, sinpiy, sq2pil, sqpi2l, X, xmax, y
   LOGICAL first
   EXTERNAL GAMMA
@@ -35,7 +45,7 @@ REAL FUNCTION ALNGAM(X)
   DATA sqpi2l/0.22579135264472743E0/
   DATA pi/3.14159265358979324E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  ALNGAM
+  !* FIRST EXECUTABLE STATEMENT  ALNGAM
   IF ( first ) THEN
     xmax = R1MACH(2)/LOG(R1MACH(2))
     dxrel = SQRT(R1MACH(4))

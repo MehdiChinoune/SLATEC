@@ -1,15 +1,22 @@
-!DECK RGG
+!** RGG
 SUBROUTINE RGG(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RGG
-  !***PURPOSE  Compute the eigenvalues and eigenvectors for a real
+  !>
+  !***
+  !  Compute the eigenvalues and eigenvectors for a real
   !            generalized eigenproblem.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4B2
-  !***TYPE      SINGLE PRECISION (RGG-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4B2
+  !***
+  ! **Type:**      SINGLE PRECISION (RGG-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine calls the recommended sequence of
   !     subroutines from the eigensystem subroutine package (EISPACK)
@@ -72,24 +79,27 @@ SUBROUTINE RGG(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  QZHES, QZIT, QZVAL, QZVEC
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  QZHES, QZIT, QZVAL, QZVEC
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  RGG
+  
   !
   INTEGER N, Nm, Ierr, Matz
   REAL A(Nm,*), B(Nm,*), Alfr(*), Alfi(*), Beta(*), Z(Nm,*)
   LOGICAL tf
   !
-  !***FIRST EXECUTABLE STATEMENT  RGG
+  !* FIRST EXECUTABLE STATEMENT  RGG
   IF ( N>Nm ) THEN
     Ierr = 10*N
     !

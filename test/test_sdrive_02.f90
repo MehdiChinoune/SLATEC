@@ -2,34 +2,43 @@ MODULE TEST46_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK DDQCK
+  !** DDQCK
   SUBROUTINE DDQCK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DDQCK
-    !***PURPOSE  Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.
-    !***LIBRARY   SLATEC (SDRIVE)
-    !***CATEGORY  I1A2, I1A1B
-    !***TYPE      DOUBLE PRECISION (SDQCK-S, DDQCK-D, CDQCK-C)
-    !***KEYWORDS  DDRIV1, DDRIV2, DDRIV3, QUICK CHECK, SDRIVE
-    !***AUTHOR  Kahaner, D. K., (NIST)
+    !>
+    !***
+    !  Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.
+    !***
+    ! **Library:**   SLATEC (SDRIVE)
+    !***
+    ! **Category:**  I1A2, I1A1B
+    !***
+    ! **Type:**      DOUBLE PRECISION (SDQCK-S, DDQCK-D, CDQCK-C)
+    !***
+    ! **Keywords:**  DDRIV1, DDRIV2, DDRIV3, QUICK CHECK, SDRIVE
+    !***
+    ! **Author:**  Kahaner, D. K., (NIST)
     !             National Institute of Standards and Technology
     !             Gaithersburg, MD  20899
     !           Sutherland, C. D., (LANL)
     !             Mail Stop D466
     !             Los Alamos National Laboratory
     !             Los Alamos, NM  87545
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  For assistance in determining the cause of a failure of these
     !  routines contact C. D. Sutherland at commercial telephone number
     !  (505)667-6949, FTS telephone number 8-843-6949, or electronic mail
     !  address CDS@LANL.GOV .
     !
-    !***ROUTINES CALLED  D1MACH, DDF, DDRIV1, DDRIV2, DDRIV3, XERCLR
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH, DDF, DDRIV1, DDRIV2, DDRIV3, XERCLR
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
-    !***END PROLOGUE  DDQCK
+    
     REAL(8) :: ALFA, eps, ewt(1), HMAX, D1MACH, t, tout
     INTEGER ierflg, IERROR, IMPL, Ipass, Kprint, leniw, leniwx, lenw, &
       LENWMX, lenwx, LIWMX, Lun, mint, MITER, ML, mstate, MU, &
@@ -40,7 +49,7 @@ CONTAINS
     REAL(8) :: work(LENWMX), y(N+1)
     INTEGER iwork(LIWMX)
     DATA ewt(1)/.00001D0/
-    !***FIRST EXECUTABLE STATEMENT  DDQCK
+    !* FIRST EXECUTABLE STATEMENT  DDQCK
     eps = D1MACH(4)**(1.D0/3.D0)
     Ipass = 1
     !                                            Exercise DDRIV1 for problem
@@ -434,57 +443,72 @@ CONTAINS
     ENDIF
     CALL XERCLR
   END SUBROUTINE DDQCK
-  !DECK DDF
+  !** DDF
   SUBROUTINE DDF(N,T,Y,Yp)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DDF
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.
-    !***LIBRARY   SLATEC (SDRIVE)
-    !***CATEGORY  I1A2, I1A1B
-    !***TYPE      DOUBLE PRECISION (SDF-S, DDF-D, CDF-C)
-    !***KEYWORDS  DDRIV1, DDRIV2, DDRIV3, QUICK CHECK, SDRIVE
-    !***AUTHOR  Kahaner, D. K., (NIST)
+    !>
+    !***
+    !  Quick check for SLATEC routines DDRIV1, DDRIV2 and DDRIV3.
+    !***
+    ! **Library:**   SLATEC (SDRIVE)
+    !***
+    ! **Category:**  I1A2, I1A1B
+    !***
+    ! **Type:**      DOUBLE PRECISION (SDF-S, DDF-D, CDF-C)
+    !***
+    ! **Keywords:**  DDRIV1, DDRIV2, DDRIV3, QUICK CHECK, SDRIVE
+    !***
+    ! **Author:**  Kahaner, D. K., (NIST)
     !             National Institute of Standards and Technology
     !             Gaithersburg, MD  20899
     !           Sutherland, C. D., (LANL)
     !             Mail Stop D466
     !             Los Alamos National Laboratory
     !             Los Alamos, NM  87545
-    !***SEE ALSO  DDQCK
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **See also:**  DDQCK
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
-    !***END PROLOGUE  DDF
+    
     REAL(8) :: alfa, T, Y(*), Yp(*)
     INTEGER N
-    !***FIRST EXECUTABLE STATEMENT  DDF
+    !* FIRST EXECUTABLE STATEMENT  DDF
     alfa = Y(N+1)
     Yp(1) = 1.D0 + alfa*(Y(2)-Y(1)) - Y(1)*Y(3)
     Yp(2) = alfa*(Y(1)-Y(2)) - Y(2)*Y(3)
     Yp(3) = 1.D0 - Y(3)*(Y(1)+Y(2))
   END SUBROUTINE DDF
 END MODULE TEST46_MOD
-!DECK TEST46
+!** TEST46
 PROGRAM TEST46
   USE TEST46_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST46
-  !***PURPOSE  Driver for testing SLATEC subprograms
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
   !            DDRIV1  DDRIV2  DDRIV3
-  !***LIBRARY   SLATEC
-  !***CATEGORY  I1A2, I1A1B
-  !***TYPE      DOUBLE PRECISION (TEST45-S, TEST46-D, TEST47-C)
-  !***KEYWORDS  SDRIVE, QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  I1A2, I1A1B
+  !***
+  ! **Type:**      DOUBLE PRECISION (TEST45-S, TEST46-D, TEST47-C)
+  !***
+  ! **Keywords:**  SDRIVE, QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -496,20 +520,23 @@ PROGRAM TEST46
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        DDRIV1  DDRIV2  DDRIV3
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  DDQCK, I1MACH, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DDQCK, I1MACH, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   920801  DATE WRITTEN
-  !***END PROLOGUE  TEST46
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST46
+  !* FIRST EXECUTABLE STATEMENT  TEST46
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

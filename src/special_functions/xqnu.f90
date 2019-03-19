@@ -1,31 +1,38 @@
-!DECK XQNU
+!** XQNU
 SUBROUTINE XQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XQNU
-  !***SUBSIDIARY
-  !***PURPOSE  To compute the values of Legendre functions for XLEGF.
+  !>
+  !***
+  !  To compute the values of Legendre functions for XLEGF.
   !            Method: backward nu-wise recurrence for Q(MU,NU,X) for
   !            fixed mu to obtain Q(MU1,NU1,X), Q(MU1,NU1+1,X), ...,
   !            Q(MU1,NU2,X).
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C3A2, C9
-  !***TYPE      SINGLE PRECISION (XQNU-S, DXQNU-D)
-  !***KEYWORDS  LEGENDRE FUNCTIONS
-  !***AUTHOR  Smith, John M., (NBS and George Mason University)
-  !***ROUTINES CALLED  XADD, XADJ, XPQNU
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C3A2, C9
+  !***
+  ! **Type:**      SINGLE PRECISION (XQNU-S, DXQNU-D)
+  !***
+  ! **Keywords:**  LEGENDRE FUNCTIONS
+  !***
+  ! **Author:**  Smith, John M., (NBS and George Mason University)
+  !***
+  ! **Routines called:**  XADD, XADJ, XPQNU
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820728  DATE WRITTEN
   !   890126  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
   !   901106  Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  XQNU
+  
   INTEGER Id, Ierror, ipq, ipq1, ipq2, Ipqa, ipql1, ipql2, k, mu, Mu1
   DIMENSION Pqa(*), Ipqa(*)
   REAL dmu, nu, Nu1, Nu2, pq, Pqa, pq1, pq2, Sx, X, x1, x2
   REAL Theta, pql1, pql2
-  !***FIRST EXECUTABLE STATEMENT  XQNU
+  !* FIRST EXECUTABLE STATEMENT  XQNU
   Ierror = 0
   k = 0
   pq2 = 0.0

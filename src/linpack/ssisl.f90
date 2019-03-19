@@ -1,15 +1,22 @@
-!DECK SSISL
+!** SSISL
 SUBROUTINE SSISL(A,Lda,N,Kpvt,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSISL
-  !***PURPOSE  Solve a real symmetric system using the factors obtained
+  !>
+  !***
+  !  Solve a real symmetric system using the factors obtained
   !            from SSIFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1A
-  !***TYPE      SINGLE PRECISION (SSISL-S, DSISL-D, CHISL-C, CSISL-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE, SYMMETRIC
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1A
+  !***
+  ! **Type:**      SINGLE PRECISION (SSISL-S, DSISL-D, CHISL-C, CSISL-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE, SYMMETRIC
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     SSISL solves the real symmetric system
   !     A * X = B
@@ -49,10 +56,13 @@ SUBROUTINE SSISL(A,Lda,N,Kpvt,B)
   !              CALL SSISL(A,LDA,N,KPVT,C(1,J))
   !        10 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SAXPY, SDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SAXPY, SDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -62,7 +72,7 @@ SUBROUTINE SSISL(A,Lda,N,Kpvt,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SSISL
+  
   INTEGER Lda, N, Kpvt(*)
   REAL A(Lda,*), B(*)
   !
@@ -72,7 +82,7 @@ SUBROUTINE SSISL(A,Lda,N,Kpvt,B)
   !     LOOP BACKWARD APPLYING THE TRANSFORMATIONS AND
   !     D INVERSE TO B.
   !
-  !***FIRST EXECUTABLE STATEMENT  SSISL
+  !* FIRST EXECUTABLE STATEMENT  SSISL
   k = N
   DO WHILE ( k/=0 )
     IF ( Kpvt(k)<0 ) THEN

@@ -1,15 +1,22 @@
-!DECK SOS
+!** SOS
 SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SOS
-  !***PURPOSE  Solve a square system of nonlinear equations.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  F2A
-  !***TYPE      SINGLE PRECISION (SOS-S, DSOS-D)
-  !***KEYWORDS  BROWN'S METHOD, NEWTON'S METHOD, NONLINEAR EQUATIONS,
+  !>
+  !***
+  !  Solve a square system of nonlinear equations.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  F2A
+  !***
+  ! **Type:**      SINGLE PRECISION (SOS-S, DSOS-D)
+  !***
+  ! **Keywords:**  BROWN'S METHOD, NEWTON'S METHOD, NONLINEAR EQUATIONS,
   !             ROOTS, SOLUTIONS
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !     SOS solves a system of NEQ simultaneous nonlinear equations in
   !     NEQ unknowns.  That is, it solves the problem   F(X)=0
@@ -44,7 +51,7 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !     described in the references below.  It is a modification of the
   !     code SOSNLE written by H. A. Watts in 1973.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !   -Input-
   !
   !     FNC -Name of the function program which evaluates the equations.
@@ -106,7 +113,7 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !               options (by setting IFLAG=-1), you must supply values
   !               for both IW(1) and IW(2).
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !   -Output-
   !
   !     X   -Solution vector.
@@ -163,15 +170,18 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !
   !     IW(3) -Contains the number of iterations used by the process.
   !
-  ! **********************************************************************
-  !***REFERENCES  K. M. Brown, Solution of simultaneous nonlinear
+  !- *********************************************************************
+  !***
+  ! **References:**  K. M. Brown, Solution of simultaneous nonlinear
   !                 equations, Algorithm 316, Communications of the
   !                 A.C.M. 10, (1967), pp. 728-729.
   !               K. M. Brown, A quadratically convergent Newton-like
   !                 method based upon Gaussian elimination, SIAM Journal
   !                 on Numerical Analysis 6, (1969), pp. 560-569.
-  !***ROUTINES CALLED  SOSEQS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SOSEQS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -179,7 +189,7 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !   900510  Convert XERRWV calls to XERMSG calls, changed Prologue
   !           comments to agree with DSOS.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SOS
+  
   REAL Atolx, FNC, Rtolx, Rw, Tolf, X
   INTEGER Iflag, inpflg, iprint, Iw, k1, k2, k3, k4, k5, k6, Liw, &
     Lrw, mxit, nc, ncjs, Neq, nsri, nsrrc
@@ -187,7 +197,7 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
   EXTERNAL FNC
-  !***FIRST EXECUTABLE STATEMENT  SOS
+  !* FIRST EXECUTABLE STATEMENT  SOS
   inpflg = Iflag
   !
   !     CHECK FOR VALID INPUT

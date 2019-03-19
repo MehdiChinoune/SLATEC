@@ -1,16 +1,23 @@
-!DECK DPFQAD
+!** DPFQAD
 SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPFQAD
-  !***PURPOSE  Compute the integral on (X1,X2) of a product of a
+  !>
+  !***
+  !  Compute the integral on (X1,X2) of a product of a
   !            function F and the ID-th derivative of a B-spline,
   !            (PP-representation).
-  !***LIBRARY   SLATEC
-  !***CATEGORY  H2A2A1, E3, K6
-  !***TYPE      DOUBLE PRECISION (PFQAD-S, DPFQAD-D)
-  !***KEYWORDS  B-SPLINE, DATA FITTING, INTERPOLATION, QUADRATURE, SPLINES
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  H2A2A1, E3, K6
+  !***
+  ! **Type:**      DOUBLE PRECISION (PFQAD-S, DPFQAD-D)
+  !***
+  ! **Keywords:**  B-SPLINE, DATA FITTING, INTERPOLATION, QUADRATURE, SPLINES
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract    **** a double precision routine ****
   !         DPFQAD computes the integral on (X1,X2) of a product of a
@@ -56,11 +63,14 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !         Improper input is a fatal error.
   !         Some quadrature does not meet the requested tolerance.
   !
-  !***REFERENCES  D. E. Amos, Quadrature subroutines for splines and
+  !***
+  ! **References:**  D. E. Amos, Quadrature subroutines for splines and
   !                 B-splines, Report SAND79-1825, Sandia Laboratories,
   !                 December 1979.
-  !***ROUTINES CALLED  D1MACH, DINTRV, DPPGQ8, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, DINTRV, DPPGQ8, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -69,7 +79,7 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DPFQAD
+  
   !
   INTEGER Id, Ierr, iflg, ilo, il1, il2, inppv, K, Ldc, left, &
     Lxi, mf1, mf2
@@ -79,7 +89,7 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
   DIMENSION Xi(*), C(Ldc,*)
   EXTERNAL F
   !
-  !***FIRST EXECUTABLE STATEMENT  DPFQAD
+  !* FIRST EXECUTABLE STATEMENT  DPFQAD
   Ierr = 1
   Quad = 0.0D0
   IF ( K<1 ) THEN

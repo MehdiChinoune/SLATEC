@@ -2,16 +2,22 @@ MODULE TEST41_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK AVNTST
+  !** AVNTST
   SUBROUTINE AVNTST(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  AVNTST
-    !***PURPOSE  Quick check for AVINT.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (AVNTST-S, DAVNTS-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  AVINT, R1MACH, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for AVINT.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (AVNTST-S, DAVNTS-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  AVINT, R1MACH, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
@@ -20,12 +26,12 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920210  Code restructured and revised to test error returns for all
     !           values of KPRINT.  (WRB)
-    !***END PROLOGUE  AVNTST
+    
     REAL a, ans, b, del, R1MACH, rn1, sqb, tol, tol1, x, xint, y
     INTEGER i, ierr, Ipass, kontrl, Kprint, Lun, n
     DIMENSION x(501), y(501)
     LOGICAL fatal
-    !***FIRST EXECUTABLE STATEMENT  AVNTST
+    !* FIRST EXECUTABLE STATEMENT  AVNTST
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/' AVINT Quick Check')
     Ipass = 1
@@ -204,16 +210,22 @@ CONTAINS
     99010 FORMAT (/' IERR =',I2,' and it should =',I2/)
     99011 FORMAT (1X,'ANS .NE. 0')
   END SUBROUTINE AVNTST
-  !DECK QG8TST
+  !** QG8TST
   SUBROUTINE QG8TST(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QG8TST
-    !***PURPOSE  Quick check for GAUS8.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (QG8TST-S, DQG8TS-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  FQD1, FQD2, GAUS8, R1MACH, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for GAUS8.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (QG8TST-S, DQG8TS-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  FQD1, FQD2, GAUS8, R1MACH, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
@@ -222,7 +234,7 @@ CONTAINS
     !   920213  Code restructured to test GAUS8 for all values of KPRINT,
     !           second accuracy test added and testing of error returns
     !           revised.  (WRB)
-    !***END PROLOGUE  QG8TST
+    
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -236,7 +248,7 @@ CONTAINS
     EXTERNAL GAUS8, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, EXP, SQRT
-    !***FIRST EXECUTABLE STATEMENT  QG8TST
+    !* FIRST EXECUTABLE STATEMENT  QG8TST
     IF ( Kprint>=2 ) WRITE (Lun,FMT=99003)
     !
     !     Initialize variables for testing.
@@ -354,16 +366,22 @@ CONTAINS
     99008 FORMAT (/,' ***************GAUS8 PASSED ALL TESTS***************')
     99009 FORMAT (/,' ***************GAUS8 FAILED SOME TESTS**************')
   END SUBROUTINE QG8TST
-  !DECK QN79QX
+  !** QN79QX
   SUBROUTINE QN79QX(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QN79QX
-    !***PURPOSE  Quick check for QNC79.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (QN79QX-S, DQN79Q-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  FQD1, FQD2, QNC79, R1MACH, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for QNC79.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (QN79QX-S, DQN79Q-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  FQD1, FQD2, QNC79, R1MACH, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
@@ -372,7 +390,7 @@ CONTAINS
     !   920213  Code restructured to test QNC79 for all values of KPRINT,
     !           second accuracy test added and testing of error returns
     !           revised.  (WRB)
-    !***END PROLOGUE  QN79QX
+    
     INTEGER kontrl
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
@@ -387,7 +405,7 @@ CONTAINS
     EXTERNAL QNC79, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, SQRT
-    !***FIRST EXECUTABLE STATEMENT  QN79QX
+    !* FIRST EXECUTABLE STATEMENT  QN79QX
     IF ( Kprint>=2 ) WRITE (Lun,FMT=99003)
     !
     !     Initialize variables for testing.
@@ -506,68 +524,87 @@ CONTAINS
     99008 FORMAT (/' ***************QNC79 PASSED ALL TESTS****************')
     99009 FORMAT (/' ***************QNC79 FAILED SOME TESTS***************')
   END SUBROUTINE QN79QX
-  !DECK FQD1
+  !** FQD1
   REAL FUNCTION FQD1(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  FQD1
-    !***SUBSIDIARY
-    !***PURPOSE  Function evaluator for QNC79 and GAUS8 quick checks.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (FQD1-S, DFQD1-D)
-    !***AUTHOR  Boland, W. Robert, (LANL)
-    !***SEE ALSO  QG8TST, QN79QX
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Function evaluator for QNC79 and GAUS8 quick checks.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (FQD1-S, DFQD1-D)
+    !***
+    ! **Author:**  Boland, W. Robert, (LANL)
+    !***
+    ! **See also:**  QG8TST, QN79QX
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   920229  DATE WRITTEN
-    !***END PROLOGUE  FQD1
+    
     !     .. Scalar Arguments ..
     REAL X
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
-    !***FIRST EXECUTABLE STATEMENT  FQD1
+    !* FIRST EXECUTABLE STATEMENT  FQD1
     FQD1 = 0.0E0
     IF ( X>0.0E0 ) FQD1 = 1.0E0/SQRT(X)
   END FUNCTION FQD1
-  !DECK FQD2
+  !** FQD2
   REAL FUNCTION FQD2(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  FQD2
-    !***SUBSIDIARY
-    !***PURPOSE  Function evaluator for QNC79 and GAUS8 quick checks.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (FQD2-S, DFQD2-D)
-    !***AUTHOR  Boland, W. Robert, (LANL)
-    !***SEE ALSO  QG8TST, QN79QX
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Function evaluator for QNC79 and GAUS8 quick checks.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (FQD2-S, DFQD2-D)
+    !***
+    ! **Author:**  Boland, W. Robert, (LANL)
+    !***
+    ! **See also:**  QG8TST, QN79QX
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   920229  DATE WRITTEN
-    !***END PROLOGUE  FQD2
+    
     !     .. Scalar Arguments ..
     REAL X
     !     .. Intrinsic Functions ..
     INTRINSIC COS, EXP
-    !***FIRST EXECUTABLE STATEMENT  FQD2
+    !* FIRST EXECUTABLE STATEMENT  FQD2
     FQD2 = EXP(X)*COS(10.0E0*X)
   END FUNCTION FQD2
 END MODULE TEST41_MOD
-!DECK TEST41
+!** TEST41
 PROGRAM TEST41
   USE TEST41_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST41
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  H2
-  !***TYPE      SINGLE PRECISION (TEST41-S, TEST42-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  H2
+  !***
+  ! **Type:**      SINGLE PRECISION (TEST41-S, TEST42-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -579,24 +616,27 @@ PROGRAM TEST41
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        AVINT    GAUS8    QNC79
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  AVNTST, I1MACH, QG8TST, QN79QX, XERMAX, XSETF,
+  !***
+  ! **Routines called:**  AVNTST, I1MACH, QG8TST, QN79QX, XERMAX, XSETF,
   !                    XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST41
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST41
+  !* FIRST EXECUTABLE STATEMENT  TEST41
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

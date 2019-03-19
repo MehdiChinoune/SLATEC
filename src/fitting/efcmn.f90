@@ -1,23 +1,30 @@
-!DECK EFCMN
+!** EFCMN
 SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,Lw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  EFCMN
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to EFC
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (EFCMN-S, DEFCMN-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to EFC
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (EFCMN-S, DEFCMN-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
+  !***
+  ! **Description:**
   !
   !     This is a companion subprogram to EFC( ).
   !     This subprogram does weighted least squares fitting of data by
   !     B-spline curves.
   !     The documentation for EFC( ) has complete usage instructions.
   !
-  !***SEE ALSO  EFC
-  !***ROUTINES CALLED  BNDACC, BNDSOL, BSPLVN, SCOPY, SSCAL, SSORT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  EFC
+  !***
+  ! **Routines called:**  BNDACC, BNDSOL, BSPLVN, SCOPY, SSCAL, SSORT, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890618  Completely restructured and extensively revised (WRB & RWC)
@@ -26,7 +33,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  !***END PROLOGUE  EFCMN
+  
   INTEGER Lw, Mdein, Mdeout, Mdg, Mdw, Nbkpt, Ndata, Nord
   REAL Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), Ptemp(*), &
     Sddata(*), W(Mdw,*), Xdata(*), Xtemp(*), Ydata(*)
@@ -38,7 +45,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     nordm1, nordp1, np1
   CHARACTER(8) :: xern1, xern2
   !
-  !***FIRST EXECUTABLE STATEMENT  EFCMN
+  !* FIRST EXECUTABLE STATEMENT  EFCMN
   !
   !     Initialize variables and analyze input.
   !

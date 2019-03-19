@@ -1,44 +1,54 @@
-!DECK ACOS
+!** ACOS
 REAL FUNCTION ACOS(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ACOS
-  !***PURPOSE  Compute the arccosine.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4A
-  !***TYPE      SINGLE PRECISION (ACOS-S, DACOS-D)
-  !***KEYWORDS  ACOS, ARCCOSINE, ELEMENTARY FUNCTION, FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the arccosine.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      SINGLE PRECISION (ACOS-S, DACOS-D)
+  !***
+  ! **Keywords:**  ACOS, ARCCOSINE, ELEMENTARY FUNCTION, FORTRAN INTRINSIC
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      REAL ACOS, X, Y
   !      Y = ACOS(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 ACOS.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    ACOS    :    the arccosine of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    ACOS evaluates the arccosine of an argument.  The argument X
   !    must be in the interval -1.0 .LE. X .LE. +1.0.  For arguments
   !    outside the permitted interval, an error message is generated
   !    by XERMSG and the routine aborts.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ASIN, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ASIN, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900516  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  ACOS
+  
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -52,41 +62,48 @@ REAL FUNCTION ACOS(X)
   INTRINSIC ABS
   !     .. Data statements ..
   DATA pi2/1.57079632679489661923E0/
-  !***FIRST EXECUTABLE STATEMENT  ACOS
+  !* FIRST EXECUTABLE STATEMENT  ACOS
   IF ( ABS(X)>1.0E0 ) CALL XERMSG('SLATEC','ACOS','ABS(X) GREATER THAN 1',1,&
     2)
   !
   ACOS = pi2 - ASIN(X)
   !
 END FUNCTION ACOS
-!DECK ALOG
+!** ALOG
 REAL FUNCTION ALOG(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ALOG
-  !***PURPOSE  Compute the natural logarithm of a number.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4B
-  !***TYPE      SINGLE PRECISION (ALOG-S, DLOG-D, CLOG-C)
-  !***KEYWORDS  ALOG, ELEMENTARY FUNCTION, FORTRAN INTRINSIC,
+  !>
+  !***
+  !  Compute the natural logarithm of a number.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4B
+  !***
+  ! **Type:**      SINGLE PRECISION (ALOG-S, DLOG-D, CLOG-C)
+  !***
+  ! **Keywords:**  ALOG, ELEMENTARY FUNCTION, FORTRAN INTRINSIC,
   !             NATURAL LOGARITHM
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      REAL ALOG, X, Y
   !      Y = ALOG(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 ALOG.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    ALOG    :    the natural logarithm of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    ALOG evaluates the natural logarithm of an argument.  The
   !    argument X must be positive.  For a non-positive argument, an
@@ -101,14 +118,17 @@ REAL FUNCTION ALOG(X)
   !
   !    ALN2 = ALOG(2.0) - 0.625
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, R9UPAK, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, R9UPAK, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900517  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  ALOG
+  
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -142,7 +162,7 @@ REAL FUNCTION ALOG(X)
   DATA alncen(5)/ + .693147180559945309E+0/
   DATA aln2/0.068147180559945309E0/
   DATA nterms/0/
-  !***FIRST EXECUTABLE STATEMENT  ALOG
+  !* FIRST EXECUTABLE STATEMENT  ALOG
   IF ( nterms==0 ) nterms = INITS(alncs,6,28.9*R1MACH(3))
   !
   IF ( X<=0.0E0 ) CALL XERMSG('SLATEC','ALOG','X IS ZERO OR NEGATIVE',1,2)
@@ -161,48 +181,58 @@ REAL FUNCTION ALOG(X)
     nterms))
   !
 END FUNCTION ALOG
-!DECK ALOG10
+!** ALOG10
 REAL FUNCTION ALOG10(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ALOG10
-  !***PURPOSE  Compute the common base 10 logarithm.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4B
-  !***TYPE      SINGLE PRECISION (ALOG10-S, DLOG10-D)
-  !***KEYWORDS  ALOG10, BASE 10 LOGARITHM, ELEMENTARY FUNCTION,
+  !>
+  !***
+  !  Compute the common base 10 logarithm.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4B
+  !***
+  ! **Type:**      SINGLE PRECISION (ALOG10-S, DLOG10-D)
+  !***
+  ! **Keywords:**  ALOG10, BASE 10 LOGARITHM, ELEMENTARY FUNCTION,
   !             FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      REAL ALOG10, X, Y
   !      Y = ALOG10(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 ALOG.
   !
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    ALOG10  :    the  base 10, i.e. common, logarithm.
   !
-  ! *Description:
+  !- Description:
   !
   !    ALOG10 evaluates the base 10 logarithm of an argument.  The
   !    argument X must be positive.  For a non-positive argument, an
   !    error message is generated by XERMSG and the routine aborts.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ALOG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ALOG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900517  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  ALOG10
+  
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -212,37 +242,44 @@ REAL FUNCTION ALOG10(X)
   EXTERNAL ALOG
   !     .. Data statements ..
   DATA aloge/0.43429448190325182765E0/
-  !***FIRST EXECUTABLE STATEMENT  ALOG10
+  !* FIRST EXECUTABLE STATEMENT  ALOG10
   ALOG10 = aloge*ALOG(X)
   !
 END FUNCTION ALOG10
-!DECK ASIN
+!** ASIN
 REAL FUNCTION ASIN(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ASIN
-  !***PURPOSE  Compute the arcsine.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4A
-  !***TYPE      SINGLE PRECISION (ASIN-S, DASIN-D)
-  !***KEYWORDS  ARCSINE, ASIN, ELEMENTARY FUNCTION, FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the arcsine.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      SINGLE PRECISION (ASIN-S, DASIN-D)
+  !***
+  ! **Keywords:**  ARCSINE, ASIN, ELEMENTARY FUNCTION, FORTRAN INTRINSIC
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      REAL ASIN, X, Y
   !      Y = ASIN(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 ASIN.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    ASIN    :    the arcsine of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    ASIN evaluates the arcsine of an argument.  The absolute
   !    value of the argument X must be less than or equal to 1.0.
@@ -255,14 +292,17 @@ REAL FUNCTION ASIN(X)
   !                               SIGNIFICANT FIGURES REQUIRED  15.67
   !                                    DECIMAL PLACES REQUIRED  17.45
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, SQRT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, SQRT, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  ASIN
+  
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -304,7 +344,7 @@ REAL FUNCTION ASIN(X)
   DATA asincs(20)/.000000000000000016E0/
   DATA pi2/1.57079632679489661923E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  ASIN
+  !* FIRST EXECUTABLE STATEMENT  ASIN
   IF ( first ) THEN
     nterms = INITS(asincs,20,0.1*R1MACH(3))
     sqeps = SQRT(6.0E0*R1MACH(3))
@@ -324,33 +364,40 @@ REAL FUNCTION ASIN(X)
   IF ( X/=0.0E0 ) ASIN = SIGN(ASIN,X)
   !
 END FUNCTION ASIN
-!DECK ATAN
+!** ATAN
 REAL FUNCTION ATAN(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ATAN
-  !***PURPOSE  Compute the arctangent.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4A
-  !***TYPE      SINGLE PRECISION (ATAN-S, DATAN-D)
-  !***KEYWORDS  ARCTANGENT, ATAN, ELEMENTARY FUNCTION, FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the arctangent.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      SINGLE PRECISION (ATAN-S, DATAN-D)
+  !***
+  ! **Keywords:**  ARCTANGENT, ATAN, ELEMENTARY FUNCTION, FORTRAN INTRINSIC
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      REAL ATAN, X, Y
   !      Y = ATAN(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 ATAN.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    ATAN    :    the arctangent.
   !
-  ! *Description:
+  !- Description:
   !
   !    ATAN evaluates the arctangent of an argument.
   !
@@ -366,14 +413,17 @@ REAL FUNCTION ATAN(X)
   !
   !    CONPI8(N) + PI8(N) = N*PI/8.0
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, SQRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, SQRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780101  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  ATAN
+  
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -416,7 +466,7 @@ REAL FUNCTION ATAN(X)
   DATA pi8(3)/0.530972450961724644E-1/
   DATA pi8(4)/0.0707963267948966192E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  ATAN
+  !* FIRST EXECUTABLE STATEMENT  ATAN
   IF ( first ) THEN
     nterms = INITS(atancs,9,0.1*R1MACH(3))
     sqeps = SQRT(6.0E0*R1MACH(3))
@@ -449,49 +499,59 @@ REAL FUNCTION ATAN(X)
   ENDIF
   !
 END FUNCTION ATAN
-!DECK ATAN2
+!** ATAN2
 REAL FUNCTION ATAN2(Sn,Cs)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ATAN2
-  !***PURPOSE  Compute the arctangent in the proper quadrant.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4A
-  !***TYPE      SINGLE PRECISION (ATAN2-S, DATAN2-D)
-  !***KEYWORDS  ARCTANGENT, ATAN, ELEMENTARY FUNCTION, FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the arctangent in the proper quadrant.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      SINGLE PRECISION (ATAN2-S, DATAN2-D)
+  !***
+  ! **Keywords:**  ARCTANGENT, ATAN, ELEMENTARY FUNCTION, FORTRAN INTRINSIC
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      REAL ATAN2, SN, CS, Y
   !      Y = ATAN2(SN, CS)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    SN      :IN  This is an argument.  It will not be modified by
   !                 ATAN2.
   !    CS      :IN  This is an argument.  It will not be modified by
   !                 ATAN2.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    ATAN2   :    the arctangent of SN and CS in the proper quadrant.
   !
-  ! *Description:
+  !- Description:
   !
   !    ATAN2 evaluates the arctangent of two arguments in the proper
   !    quadrant.  The arguments SN and CS must not both be zero.  If
   !    both of the arguments are zero, an error message is generated
   !    by XERMSG and the routine aborts.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ATAN, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ATAN, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  ATAN2
+  
   !     .. Scalar Arguments ..
   REAL Cs, Sn
   !     .. Local Scalars ..
@@ -505,7 +565,7 @@ REAL FUNCTION ATAN2(Sn,Cs)
   INTRINSIC SIGN
   !     .. Data statements ..
   DATA pi/3.14159265358979323846E0/
-  !***FIRST EXECUTABLE STATEMENT  ATAN2
+  !* FIRST EXECUTABLE STATEMENT  ATAN2
   IF ( Cs/=0.0E0 ) THEN
     ATAN2 = ATAN(Sn/Cs)
     IF ( Cs<0.0E0 ) ATAN2 = ATAN2 + pi
@@ -517,48 +577,58 @@ REAL FUNCTION ATAN2(Sn,Cs)
   ENDIF
   !
 END FUNCTION ATAN2
-!DECK CABS
+!** CABS
 REAL FUNCTION CABS(Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CABS
-  !***PURPOSE  Compute the absolute value of a complex number.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4
-  !***TYPE      COMPLEX (CABS-C)
-  !***KEYWORDS  CABS, COMPLEX ABSOLUTE VALUE, ELEMENTARY FUNCTION,
+  !>
+  !***
+  !  Compute the absolute value of a complex number.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4
+  !***
+  ! **Type:**      COMPLEX (CABS-C)
+  !***
+  ! **Keywords:**  CABS, COMPLEX ABSOLUTE VALUE, ELEMENTARY FUNCTION,
   !             FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      REAL A, CABS
   !      COMPLEX Z
   !      A = CABS(Z)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    Z       :IN  This is the argument.  It will not be modified by
   !                 CABS.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    CABS    :    the absolute value of a complex argument.
   !
-  ! *Description:
+  !- Description:
   !
   !    CABS evaluates the absolute value of a complex argument.  If the
   !    real part of the argument Z is X and the imaginary part is Y, then
   !    CABS(Z) mathematically is SQRT(X**2+Y**2).
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  R1MACH, SQRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  R1MACH, SQRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  CABS
+  
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. Local Scalars ..
@@ -573,7 +643,7 @@ REAL FUNCTION CABS(Z)
   SAVE first, sqeps
   !     .. Data statements ..
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  CABS
+  !* FIRST EXECUTABLE STATEMENT  CABS
   IF ( first ) sqeps = SQRT(R1MACH(4))
   first = .FALSE.
   !
@@ -586,45 +656,55 @@ REAL FUNCTION CABS(Z)
   IF ( r1>r2*sqeps ) CABS = r2*SQRT(1.0E0+(r1/r2)**2)
   !
 END FUNCTION CABS
-!DECK CCOS
+!** CCOS
 COMPLEX FUNCTION CCOS(Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CCOS
-  !***PURPOSE  Compute the cosine of a complex argument.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4A
-  !***TYPE      COMPLEX (COS-S, DCOS-D, CCOS-C)
-  !***KEYWORDS  CCOS, COMPLEX COSINE, ELEMENTARY FUNCTION,
+  !>
+  !***
+  !  Compute the cosine of a complex argument.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      COMPLEX (COS-S, DCOS-D, CCOS-C)
+  !***
+  ! **Keywords:**  CCOS, COMPLEX COSINE, ELEMENTARY FUNCTION,
   !             FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      COMPLEX CCOS, Y, Z
   !      Y = CCOS(Z)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    Z       :IN  This is the argument.  It will not be modified by
   !                 CCOS.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    CCOS    :    the cosine of a complex argument.
   !
-  ! *Description:
+  !- Description:
   !
   !    CCOS evaluates the cosine of a complex argument.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  COS, COSH, SIN, SINH, XERCLR
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  COS, COSH, SIN, SINH, XERCLR
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  CCOS
+  
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. Local Scalars ..
@@ -636,7 +716,7 @@ COMPLEX FUNCTION CCOS(Z)
   EXTERNAL XERCLR
   !     .. Intrinsic Functions ..
   INTRINSIC AIMAG, CMPLX, REAL
-  !***FIRST EXECUTABLE STATEMENT  CCOS
+  !* FIRST EXECUTABLE STATEMENT  CCOS
   x = REAL(Z)
   y = AIMAG(Z)
   !
@@ -646,45 +726,55 @@ COMPLEX FUNCTION CCOS(Z)
   CCOS = CMPLX(cs*COSH(y),-SIN(x)*SINH(y))
   !
 END FUNCTION CCOS
-!DECK CEXP
+!** CEXP
 COMPLEX FUNCTION CEXP(Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CEXP
-  !***PURPOSE  Compute the complex exponential.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4B
-  !***TYPE      COMPLEX (EXP-S, DEXP-D, CEXP-C)
-  !***KEYWORDS  CEXP, COMPLEX EXPONENTIAL, ELEMENTARY FUNCTION,
+  !>
+  !***
+  !  Compute the complex exponential.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4B
+  !***
+  ! **Type:**      COMPLEX (EXP-S, DEXP-D, CEXP-C)
+  !***
+  ! **Keywords:**  CEXP, COMPLEX EXPONENTIAL, ELEMENTARY FUNCTION,
   !             FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      COMPLEX CEXP, Y, Z
   !      Y = CEXP(Z)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    Z       :IN  This is the argument.  It will not be modified by
   !                 CEXP.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    CEXP    :    the exponential of a complex argument.
   !
-  ! *Description:
+  !- Description:
   !
   !    CEXP evaluates the exponential, i.e., exp(Z) or e**Z.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  COS, EXP, SIN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  COS, EXP, SIN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  CEXP
+  
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. Local Scalars ..
@@ -694,7 +784,7 @@ COMPLEX FUNCTION CEXP(Z)
   EXTERNAL COS, EXP, SIN
   !     .. Intrinsic Functions ..
   INTRINSIC AIMAG, CMPLX, REAL
-  !***FIRST EXECUTABLE STATEMENT  CEXP
+  !* FIRST EXECUTABLE STATEMENT  CEXP
   r = EXP(REAL(Z))
   IF ( r==0.0E0 ) THEN
     CEXP = (0.0E0,0.0E0)
@@ -704,45 +794,55 @@ COMPLEX FUNCTION CEXP(Z)
   ENDIF
   !
 END FUNCTION CEXP
-!DECK CLOG
+!** CLOG
 COMPLEX FUNCTION CLOG(Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CLOG
-  !***PURPOSE  Compute the complex natural logarithm.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4B
-  !***TYPE      COMPLEX (ALOG-S, DLOG-D, CLOG-C)
-  !***KEYWORDS  CLOG, COMPLEX NATURAL LOGARITHM, ELEMENTARY FUNCTION,
+  !>
+  !***
+  !  Compute the complex natural logarithm.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4B
+  !***
+  ! **Type:**      COMPLEX (ALOG-S, DLOG-D, CLOG-C)
+  !***
+  ! **Keywords:**  CLOG, COMPLEX NATURAL LOGARITHM, ELEMENTARY FUNCTION,
   !             FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      COMPLEX CLOG, Y, Z
   !      Y = CLOG(Z)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    Z       :IN  This is the argument.  It will not be modified by
   !                 CLOG.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    CLOG    :    the natural logarithm of a complex argument.
   !
-  ! *Description:
+  !- Description:
   !
   !    CLOG evaluates the natural logarithm of a complex argument.
   !
-  !***REFERENCES  CARG
-  !***ROUTINES CALLED  ALOG, CABS, CARG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  CARG
+  !***
+  ! **Routines called:**  ALOG, CABS, CARG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  CLOG
+  
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. External Functions ..
@@ -750,37 +850,44 @@ COMPLEX FUNCTION CLOG(Z)
   EXTERNAL ALOG, CABS, CARG
   !     .. Intrinsic Functions ..
   INTRINSIC CMPLX
-  !***FIRST EXECUTABLE STATEMENT  CLOG
+  !* FIRST EXECUTABLE STATEMENT  CLOG
   CLOG = CMPLX(ALOG(CABS(Z)),CARG(Z))
   !
 END FUNCTION CLOG
-!DECK COS
+!** COS
 REAL FUNCTION COS(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  COS
-  !***PURPOSE  Compute the cosine.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4A
-  !***TYPE      SINGLE PRECISION (COS-S, DCOS-D, CCOS-C)
-  !***KEYWORDS  COS, COSINE, ELEMENTARY FUNCTION, FORTRAN INTRNSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the cosine.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      SINGLE PRECISION (COS-S, DCOS-D, CCOS-C)
+  !***
+  ! **Keywords:**  COS, COSINE, ELEMENTARY FUNCTION, FORTRAN INTRNSIC
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      REAL COS, X, Y
   !      Y = COS(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 COS.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    COS     :    the cosine of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    COS evaluates the cosine of an argument.  If the argument X is
   !    greater than the reciprocal of R1MACH(4), an error message is
@@ -801,14 +908,17 @@ REAL FUNCTION COS(X)
   !
   !    PI4REC = 4.0/PI - 1.0
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, SQRT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, SQRT, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  COS
+  
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -846,7 +956,7 @@ REAL FUNCTION COS(X)
   DATA coscs(8)/ - .000000000000000047E0/
   DATA pi4rec/ + .273239544735162686E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  COS
+  !* FIRST EXECUTABLE STATEMENT  COS
   IF ( first ) THEN
     eta = 0.1E0*R1MACH(3)
     ntsn = INITS(sincs,8,eta)
@@ -893,45 +1003,55 @@ REAL FUNCTION COS(X)
   ENDIF
   !
 END FUNCTION COS
-!DECK COSH
+!** COSH
 REAL FUNCTION COSH(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  COSH
-  !***PURPOSE  Compute the hyperbolic cosine.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4C
-  !***TYPE      SINGLE PRECISION (COSH-S, DCOSH-D)
-  !***KEYWORDS  COSH, ELEMENTARY FUNCTION, FORTRAN INTRINSIC,
+  !>
+  !***
+  !  Compute the hyperbolic cosine.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4C
+  !***
+  ! **Type:**      SINGLE PRECISION (COSH-S, DCOSH-D)
+  !***
+  ! **Keywords:**  COSH, ELEMENTARY FUNCTION, FORTRAN INTRINSIC,
   !             HYPERBOLIC COSINE
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS NATIONAL LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS NATIONAL LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      COMPLEX COSH, X, Y
   !      Y = COSH(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 COSH.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    COSH    :    the hyperbolic cosine of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    COSH evaluates the hyperbolic cosine of an argument.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  EXP, R1MACH, SQRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  EXP, R1MACH, SQRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770810  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  COSH
+  
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -943,7 +1063,7 @@ REAL FUNCTION COSH(X)
   INTRINSIC ABS
   !     .. Data statements ..
   DATA ymax/0.0/
-  !***FIRST EXECUTABLE STATEMENT  COSH
+  !* FIRST EXECUTABLE STATEMENT  COSH
   IF ( ymax==0.0E0 ) ymax = 1.0E0/SQRT(R1MACH(3))
   !
   y = EXP(ABS(X))
@@ -951,44 +1071,54 @@ REAL FUNCTION COSH(X)
   IF ( y<ymax ) COSH = 0.5E0*(y+1.0E0/y)
   !
 END FUNCTION COSH
-!DECK CSIN
+!** CSIN
 COMPLEX FUNCTION CSIN(Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CSIN
-  !***PURPOSE  Compute the complex sine.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4A
-  !***TYPE      COMPLEX (SIN-S, DSIN-D, CSIN-C)
-  !***KEYWORDS  COMPLEX SINE, CSIN, ELEMENTARY FUNCTION, FORTRAN INTRINSIC
-  !***AUTHOR  Fullerton, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the complex sine.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      COMPLEX (SIN-S, DSIN-D, CSIN-C)
+  !***
+  ! **Keywords:**  COMPLEX SINE, CSIN, ELEMENTARY FUNCTION, FORTRAN INTRINSIC
+  !***
+  ! **Author:**  Fullerton, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      COMPLEX CSIN, Y, Z
   !      Y = CSIN(Z)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    Z       :IN  This is the argument.  It will not be modified by
   !                 CSIN.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    CSIN    :    the sine of a complex argument.
   !
-  ! *Description:
+  !- Description:
   !
   !    CSIN evaluates the sine of a complex argument.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  COS, COSH, SIN, SINH, XERCLR
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  COS, COSH, SIN, SINH, XERCLR
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  CSIN
+  
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. Local Scalars ..
@@ -1000,7 +1130,7 @@ COMPLEX FUNCTION CSIN(Z)
   EXTERNAL XERCLR
   !     .. Intrinsic Functions ..
   INTRINSIC AIMAG, CMPLX, REAL
-  !***FIRST EXECUTABLE STATEMENT  CSIN
+  !* FIRST EXECUTABLE STATEMENT  CSIN
   x = REAL(Z)
   y = AIMAG(Z)
   !
@@ -1010,45 +1140,55 @@ COMPLEX FUNCTION CSIN(Z)
   CSIN = CMPLX(sn*COSH(y),COS(x)*SINH(y))
   !
 END FUNCTION CSIN
-!DECK CSQRT
+!** CSQRT
 COMPLEX FUNCTION CSQRT(Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CSQRT
-  !***PURPOSE  Compute the complex square root.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C2
-  !***TYPE      COMPLEX (SQRT-S, DSQRT-D, CSQRT-C)
-  !***KEYWORDS  COMPLEX SQUARE ROOT, CSQRT, ELEMENTARY FUNCTION,
+  !>
+  !***
+  !  Compute the complex square root.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C2
+  !***
+  ! **Type:**      COMPLEX (SQRT-S, DSQRT-D, CSQRT-C)
+  !***
+  ! **Keywords:**  COMPLEX SQUARE ROOT, CSQRT, ELEMENTARY FUNCTION,
   !             FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      COMPLEX CSQRT, Y, Z
   !      Y = CSQRT(Z)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    Z       :IN  This is the argument.  It will not be modified by
   !                 CSQRT.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    CSQRT   :    the square root of a complex argument.
   !
-  ! *Description:
+  !- Description:
   !
   !    CSQRT evaluates the square root of a complex argument.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CABS, SQRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CABS, SQRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   801001  Revisions by W. Fullerton
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  CSQRT
+  
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. Local Scalars ..
@@ -1058,7 +1198,7 @@ COMPLEX FUNCTION CSQRT(Z)
   EXTERNAL CABS, SQRT
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, AIMAG, CMPLX, REAL, SIGN
-  !***FIRST EXECUTABLE STATEMENT  CSQRT
+  !* FIRST EXECUTABLE STATEMENT  CSQRT
   x = REAL(Z)
   y = AIMAG(Z)
   r = CABS(Z)
@@ -1080,48 +1220,58 @@ COMPLEX FUNCTION CSQRT(Z)
   ENDIF
   !
 END FUNCTION CSQRT
-!DECK DACOS
+!** DACOS
 REAL(8) FUNCTION DACOS(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DACOS
-  !***PURPOSE  Compute the double precision arccosine.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4A
-  !***TYPE      DOUBLE PRECISION (ACOS-S, DACOS-D)
-  !***KEYWORDS  DACOS, DOUBLE PRECISION ARCCOSINE, ELEMENTARY FUNCTION,
+  !>
+  !***
+  !  Compute the double precision arccosine.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      DOUBLE PRECISION (ACOS-S, DACOS-D)
+  !***
+  ! **Keywords:**  DACOS, DOUBLE PRECISION ARCCOSINE, ELEMENTARY FUNCTION,
   !             FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      DOUBLE PRECISION DACOS, X, Y
   !      Y = DACOS(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 DACOS.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    DACOS   :    the double precision arccosine of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    DACOS evaluates the double precision arccosine of a double
   !    precision argument.  The argument X must be in the interval -1.0
   !    .LE. X .LE. +1.0.  For arguments outside the permitted interval,
   !    an error message is generated by XERMSG and the routine aborts.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DASIN, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DASIN, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  DACOS
+  
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -1135,41 +1285,48 @@ REAL(8) FUNCTION DACOS(X)
   INTRINSIC DABS
   !     .. Data statements ..
   DATA pi2/1.57079632679489661923132169163975D0/
-  !***FIRST EXECUTABLE STATEMENT  DACOS
+  !* FIRST EXECUTABLE STATEMENT  DACOS
   IF ( DABS(X)>1.0D0 ) CALL XERMSG('SLATEC','DACOS','DABS(X) GREATER THAN ',&
     1,2)
   !
   DACOS = pi2 - DASIN(X)
   !
 END FUNCTION DACOS
-!DECK DASIN
+!** DASIN
 REAL(8) FUNCTION DASIN(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DASIN
-  !***PURPOSE  Compute the double precision arcsine.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4A
-  !***TYPE      DOUBLE PRECISION (ASIN-S, DASIN-D)
-  !***KEYWORDS  DASIN, DOUBLE PRECISION ARCSINE, ELEMENTARY FUNCTION,
+  !>
+  !***
+  !  Compute the double precision arcsine.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      DOUBLE PRECISION (ASIN-S, DASIN-D)
+  !***
+  ! **Keywords:**  DASIN, DOUBLE PRECISION ARCSINE, ELEMENTARY FUNCTION,
   !             FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      DOUBLE PRECISION DASIN, X, Y
   !      Y = DASIN(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 DASIN.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    DASIN   :    the double precision arcsine of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    DASIN evaluates the double precision arcsine of a double precision
   !    argument.  The value for the argument X must be in the interval
@@ -1183,14 +1340,17 @@ REAL(8) FUNCTION DASIN(X)
   !                               SIGNIFICANT FIGURES REQUIRED  30.67
   !                                    DECIMAL PLACES REQUIRED  32.59
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, DSQRT, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, DSQRT, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  DASIN
+  
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -1251,7 +1411,7 @@ REAL(8) FUNCTION DASIN(X)
   DATA asincs(39)/ + .16222501166399014393173333333333D-31/
   DATA pi2/1.57079632679489661923132169163975D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DASIN
+  !* FIRST EXECUTABLE STATEMENT  DASIN
   IF ( first ) THEN
     nterms = INITDS(asincs,39,0.1*SNGL(D1MACH(3)))
     sqeps = DSQRT(6.0D0*D1MACH(3))
@@ -1270,34 +1430,41 @@ REAL(8) FUNCTION DASIN(X)
   IF ( X/=0.0D0 ) DASIN = DSIGN(DASIN,X)
   !
 END FUNCTION DASIN
-!DECK DATAN
+!** DATAN
 REAL(8) FUNCTION DATAN(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DATAN
-  !***PURPOSE  Compute the double precision arctangent.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4A
-  !***TYPE      DOUBLE PRECISION (ATAN-S, DATAN-D)
-  !***KEYWORDS  DATAN, DOUBLE PRECISION ARCTANGENT, ELEMENTARY FUNCTION,
+  !>
+  !***
+  !  Compute the double precision arctangent.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      DOUBLE PRECISION (ATAN-S, DATAN-D)
+  !***
+  ! **Keywords:**  DATAN, DOUBLE PRECISION ARCTANGENT, ELEMENTARY FUNCTION,
   !             FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      DOUBLE PRECISION DATAN, X, Y
   !      Y = DATAN(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 DATAN.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    DATAN   :    the double precision arctangent of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    DATAN evaluates the double precision arctangent of a double
   !    precision argument.
@@ -1314,14 +1481,17 @@ REAL(8) FUNCTION DATAN(X)
   !
   !    CONPI8(N) + PI8(N) = N*PI/8.0
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, DSQRT, INITDS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, DSQRT, INITDS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780101  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.
-  !***END PROLOGUE  DATAN
+  
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -1371,7 +1541,7 @@ REAL(8) FUNCTION DATAN(X)
   DATA pi8(3)/ + .53097245096172464423491268729813D-1/
   DATA pi8(4)/ + .70796326794896619231321691639751D-1/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DATAN
+  !* FIRST EXECUTABLE STATEMENT  DATAN
   IF ( first ) THEN
     nterms = INITDS(atancs,16,0.1*SNGL(D1MACH(3)))
     sqeps = DSQRT(6.0D0*D1MACH(3))
@@ -1404,52 +1574,62 @@ REAL(8) FUNCTION DATAN(X)
   ENDIF
   !
 END FUNCTION DATAN
-!DECK DATAN2
+!** DATAN2
 REAL(8) FUNCTION DATAN2(Sn,Cs)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DATAN2
-  !***PURPOSE  Compute the double precision arctangent in the
+  !>
+  !***
+  !  Compute the double precision arctangent in the
   !            proper quadrant.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4A
-  !***TYPE      DOUBLE PRECISION (ATAN2-S, DATAN2-D)
-  !***KEYWORDS  DATAN2, DOUBLE PRECISION ARCTANGENT, ELEMENTARY FUNCTION,
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      DOUBLE PRECISION (ATAN2-S, DATAN2-D)
+  !***
+  ! **Keywords:**  DATAN2, DOUBLE PRECISION ARCTANGENT, ELEMENTARY FUNCTION,
   !             FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      DOUBLE PRECISION DATAN2, SN, CS, Y
   !      Y = DATAN2(SN, CS)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    SN      :IN  This is an argument.  It will not be modified by
   !                 DATAN2.
   !    CS      :IN  This is an argument.  It will not be modified by
   !                 DATAN2.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    DATAN2  :    the double precision arctangent in the proper
   !                 quadrant.
   !
-  ! *Description:
+  !- Description:
   !
   !    DATAN2 evaluates the double precision arctangent of two double
   !    precison arguments in the proper quadrant.  The arguments SN and CS
   !    must not both be zero.  If both of the two arguments are zero,
   !    an error message is generated by XERMSG and the routine aborts.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DATAN, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DATAN, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  DATAN2
+  
   !     .. Scalar Arguments ..
   REAL(8) :: Cs, Sn
   !     .. Local Scalars ..
@@ -1463,7 +1643,7 @@ REAL(8) FUNCTION DATAN2(Sn,Cs)
   INTRINSIC DSIGN
   !     .. Data statements ..
   DATA pi/3.14159265358979323846264338327950D0/
-  !***FIRST EXECUTABLE STATEMENT  DATAN2
+  !* FIRST EXECUTABLE STATEMENT  DATAN2
   IF ( Cs/=0.0D0 ) THEN
     DATAN2 = DATAN(Sn/Cs)
     IF ( Cs<0.0D0 ) DATAN2 = DATAN2 + pi
@@ -1475,34 +1655,41 @@ REAL(8) FUNCTION DATAN2(Sn,Cs)
   ENDIF
   !
 END FUNCTION DATAN2
-!DECK DCOS
+!** DCOS
 REAL(8) FUNCTION DCOS(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCOS
-  !***PURPOSE  Compute the double precision cosine.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4A
-  !***TYPE      DOUBLE PRECISION (COS-S, DCOS-D, CCOS-C)
-  !***KEYWORDS  DCOS, DOUBLE PRECISION COSINE, ELEMENTARY FUNCTION,
+  !>
+  !***
+  !  Compute the double precision cosine.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      DOUBLE PRECISION (COS-S, DCOS-D, CCOS-C)
+  !***
+  ! **Keywords:**  DCOS, DOUBLE PRECISION COSINE, ELEMENTARY FUNCTION,
   !             FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      DOUBLE PRECISION DCOS, X, Y
   !      Y = DCOS(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 DCOS.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    DCOS    :    the double precision cosine of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    DCOS evaluates the double precision cosine of a double precision
   !    argument.  If the argument X is greater than the reciprocal
@@ -1524,14 +1711,17 @@ REAL(8) FUNCTION DCOS(X)
   !
   !    PI4REC = 4.0/PI - 1.0
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, DINT, DSQRT, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, DINT, DSQRT, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  DCOS
+  
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -1580,7 +1770,7 @@ REAL(8) FUNCTION DCOS(X)
   DATA coscs(13)/ + .579538533367466666666666666666666D-33/
   DATA pi4rec/ + .27323954473516268615107010698011D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DCOS
+  !* FIRST EXECUTABLE STATEMENT  DCOS
   IF ( first ) THEN
     eta = REAL( 0.1D0*D1MACH(3), 4 )
     ntsn = INITDS(sincs,12,eta)
@@ -1627,48 +1817,58 @@ REAL(8) FUNCTION DCOS(X)
   ENDIF
   !
 END FUNCTION DCOS
-!DECK DCOSH
+!** DCOSH
 REAL(8) FUNCTION DCOSH(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCOSH
-  !***PURPOSE  Compute the double precision hyperbolic cosine.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4C
-  !***TYPE      DOUBLE PRECISION (COSH-S, DCOSH-D)
-  !***KEYWORDS  DCOSH, DOUBLE PRECISION HYPERBOLIC COSINE,
+  !>
+  !***
+  !  Compute the double precision hyperbolic cosine.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4C
+  !***
+  ! **Type:**      DOUBLE PRECISION (COSH-S, DCOSH-D)
+  !***
+  ! **Keywords:**  DCOSH, DOUBLE PRECISION HYPERBOLIC COSINE,
   !             ELEMENTARY FUNCTION, FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      DOUBLE PRECISION DCOSH, X, Y
   !      Y = DCOSH(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 DCOSH.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    DCOSH   :    the double precision hyperbolic cosine of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    DCOSH evaluates the double precision hyperbolic cosine of a
   !    double precision argument.  If the magnitude of the argument
   !    X is too big (i.e., greater than ln(D1MACH(2) - 0.01),
   !    an error message is generated by XERMSG and the routine aborts.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DEXP, DSQRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DEXP, DSQRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770801  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  DCOSH
+  
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -1682,7 +1882,7 @@ REAL(8) FUNCTION DCOSH(X)
   SAVE ymax
   !     .. Data statements ..
   DATA ymax/0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  DCOSH
+  !* FIRST EXECUTABLE STATEMENT  DCOSH
   IF ( ymax==0.0D0 ) ymax = 1.0D0/DSQRT(D1MACH(3))
   !
   y = DEXP(DABS(X))
@@ -1690,34 +1890,41 @@ REAL(8) FUNCTION DCOSH(X)
   IF ( y<ymax ) DCOSH = 0.5D0*(y+1.0D0/y)
   !
 END FUNCTION DCOSH
-!DECK DEXP
+!** DEXP
 REAL(8) FUNCTION DEXP(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DEXP
-  !***PURPOSE  Compute the double precision exponential.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4B
-  !***TYPE      DOUBLE PRECISION (DEXP-D, CEXP-C)
-  !***KEYWORDS  DEXP, DOUBLE PRECISION EXPONENTIAL LOGARITHM,
+  !>
+  !***
+  !  Compute the double precision exponential.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4B
+  !***
+  ! **Type:**      DOUBLE PRECISION (DEXP-D, CEXP-C)
+  !***
+  ! **Keywords:**  DEXP, DOUBLE PRECISION EXPONENTIAL LOGARITHM,
   !             ELEMENTARY FUNCTION, FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      DOUBLE PRECISION DEXP, X, Y
   !      Y = DEXP(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 DEXP.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    DEXP    :    the double precision exponential of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    DEXP evaluates the double precision exponential of a double
   !    precision argument, i.e. exp(Z) or e**Z.  If the argument X is
@@ -1734,14 +1941,17 @@ REAL(8) FUNCTION DEXP(X)
   !
   !    ALN216 IS 16.0/ALOG(2.) - 23.0
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, D9PAK, DCSEVL, DINT, DLOG, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, D9PAK, DCSEVL, DINT, DLOG, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900525  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  DEXP
+  
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -1794,7 +2004,7 @@ REAL(8) FUNCTION DEXP(X)
   DATA twon16(17)/1.0D0/
   DATA aln216/ + .83120654223414517758794896030274D-1/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DEXP
+  !* FIRST EXECUTABLE STATEMENT  DEXP
   IF ( first ) THEN
     nterms = INITDS(expcs,14,0.1*SNGL(D1MACH(3)))
     xmin = DLOG(D1MACH(1)) + 0.01D0
@@ -1827,49 +2037,59 @@ REAL(8) FUNCTION DEXP(X)
   ENDIF
   !
 END FUNCTION DEXP
-!DECK DINT
+!** DINT
 REAL(8) FUNCTION DINT(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DINT
-  !***PURPOSE  Find the largest integer whose magnitude does not
+  !>
+  !***
+  !  Find the largest integer whose magnitude does not
   !            exceed the argument and convert to double precision.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C1
-  !***TYPE      DOUBLE PRECISION (DINT-D)
-  !***KEYWORDS  DINT, DOUBLE PRECISION INTEGER, ELEMENTARY FUNCTION,
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C1
+  !***
+  ! **Type:**      DOUBLE PRECISION (DINT-D)
+  !***
+  ! **Keywords:**  DINT, DOUBLE PRECISION INTEGER, ELEMENTARY FUNCTION,
   !             FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      DOUBLE PRECISION DINT, X, Y
   !      Y = DINT(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 DINT.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    DINT    :    the truncation value of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    DINT evaluates the integer value of a double precision argument.
   !    The real and integer bases are compared.  If the bases are not
   !    equal, an error message is generated by XERMSG and the routine
   !    aborts.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, I1MACH, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, I1MACH, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790801  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900525  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  DINT
+  
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -1889,7 +2109,7 @@ REAL(8) FUNCTION DINT(X)
   SAVE first, npart, scale, xbig, xmax
   !     .. Data statements ..
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT    DINT
+  !* FIRST EXECUTABLE STATEMENT    DINT
   IF ( first ) THEN
     ibase = I1MACH(7)
     ndigd = I1MACH(14)
@@ -1929,34 +2149,41 @@ REAL(8) FUNCTION DINT(X)
   ENDIF
   !
 END FUNCTION DINT
-!DECK DLOG
+!** DLOG
 REAL(8) FUNCTION DLOG(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DLOG
-  !***PURPOSE  Compute the double precision natural logarithm.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4B
-  !***TYPE      DOUBLE PRECISION (ALOG-S, DLOG-D, CLOG-C)
-  !***KEYWORDS  DLOG, DOUBLE PRECISION NATURAL LOGARITHM,
+  !>
+  !***
+  !  Compute the double precision natural logarithm.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4B
+  !***
+  ! **Type:**      DOUBLE PRECISION (ALOG-S, DLOG-D, CLOG-C)
+  !***
+  ! **Keywords:**  DLOG, DOUBLE PRECISION NATURAL LOGARITHM,
   !             ELEMENTARY FUNCTION, FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      DOUBLE PRECISION DLOG, X, Y
   !      Y = DLOG(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 DLOG.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    DLOG    :    the double precision natural logarithm of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    DLOG evaluates the double precision natural logarithm of a double
   !    precision argument.  The argument X must be positive.  For a
@@ -1971,14 +2198,17 @@ REAL(8) FUNCTION DLOG(X)
   !
   !    ALN2 = ALOG(2.0) - 0.625
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, D9UPAK, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, D9UPAK, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  DLOG
+  
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -2019,7 +2249,7 @@ REAL(8) FUNCTION DLOG(X)
   DATA alncen(5)/ + .69314718055994530941723212145817D+0/
   DATA aln2/0.06814718055994530941723212145818D0/
   DATA nterms/0/
-  !***FIRST EXECUTABLE STATEMENT  DLOG
+  !* FIRST EXECUTABLE STATEMENT  DLOG
   IF ( nterms==0 ) nterms = INITDS(alncs,11,28.9*SNGL(D1MACH(3)))
   !
   IF ( X<=0.0D0 ) CALL XERMSG('SLATEC','DLOG','X IS ZERO OR NEGATIVE',1,2)
@@ -2038,48 +2268,58 @@ REAL(8) FUNCTION DLOG(X)
     nterms))
   !
 END FUNCTION DLOG
-!DECK DLOG10
+!** DLOG10
 REAL(8) FUNCTION DLOG10(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DLOG10
-  !***PURPOSE  Compute the double precision common base 10 logarithm.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4B
-  !***TYPE      DOUBLE PRECISION (ALOG10-S, DLOG10-D)
-  !***KEYWORDS  DLOG10, DOUBLE PRECISION BASE 10 LOGARITHM,
+  !>
+  !***
+  !  Compute the double precision common base 10 logarithm.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4B
+  !***
+  ! **Type:**      DOUBLE PRECISION (ALOG10-S, DLOG10-D)
+  !***
+  ! **Keywords:**  DLOG10, DOUBLE PRECISION BASE 10 LOGARITHM,
   !             ELEMENTARY FUNCTION, FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      DOUBLE PRECISION DLOG10, X, Y
   !      Y = DLOG10(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is an argument.  It will not be modified by
   !                 DLOG10.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    DLOG10  :    the double precision base 10, i.e. common, logarithm.
   !
-  ! *Description:
+  !- Description:
   !
   !    DLOG10 evaluates the double precision base 10 logarithm of a double
   !    precision argument.  The argument X must be positive.  For a non-
   !    positive argument, an error message is generated by XERMSG and the
   !    routine aborts.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DLOG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DLOG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  DLOG10
+  
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -2089,39 +2329,46 @@ REAL(8) FUNCTION DLOG10(X)
   EXTERNAL DLOG
   !     .. Data statements ..
   DATA dloge/0.43429448190325182765112891891661D0/
-  !***FIRST EXECUTABLE STATEMENT  DLOG10
+  !* FIRST EXECUTABLE STATEMENT  DLOG10
   DLOG10 = dloge*DLOG(X)
   !
 END FUNCTION DLOG10
-!DECK DSIN
+!** DSIN
 REAL(8) FUNCTION DSIN(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSIN
-  !***PURPOSE  Compute the double precision sine.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4A
-  !***TYPE      DOUBLE PRECISION (SIN-S, DSIN-D, CSIN-C)
-  !***KEYWORDS  DOUBLE PRECISION SINE, DSIN, ELEMENTARY FUNCTION,
+  !>
+  !***
+  !  Compute the double precision sine.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      DOUBLE PRECISION (SIN-S, DSIN-D, CSIN-C)
+  !***
+  ! **Keywords:**  DOUBLE PRECISION SINE, DSIN, ELEMENTARY FUNCTION,
   !             FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      DOUBLE PRECISION DSIN, X, Y
   !      Y = DSIN(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 DSIN.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    DSIN    :    the double precision sine of a double precision
   !                 argument.
   !
-  ! *Description:
+  !- Description:
   !
   !    DSIN evaluates the double precision sine of a double precision
   !    argument.  If the magnitude of the argument X is greater than the
@@ -2142,15 +2389,18 @@ REAL(8) FUNCTION DSIN(X)
   !
   !    PI4REC = 4.0/PI - 1.0
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, DINT, DSQRT, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, DINT, DSQRT, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
   !   901219  Logic in code corrected.  (WRB)
-  !***END PROLOGUE  DSIN
+  
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -2199,7 +2449,7 @@ REAL(8) FUNCTION DSIN(X)
   DATA coscs(13)/ + .579538533367466666666666666666666D-33/
   DATA pi4rec/ + .27323954473516268615107010698011D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DSIN
+  !* FIRST EXECUTABLE STATEMENT  DSIN
   IF ( first ) THEN
     eta = REAL( 0.1D0*D1MACH(3), 4 )
     ntsn = INITDS(sincs,12,eta)
@@ -2247,34 +2497,41 @@ REAL(8) FUNCTION DSIN(X)
   ENDIF
   !
 END FUNCTION DSIN
-!DECK DSINH
+!** DSINH
 REAL(8) FUNCTION DSINH(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSINH
-  !***PURPOSE  Compute the double precision hyperbolic sine.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4C
-  !***TYPE      DOUBLE PRECISION (SINH-S, DSINH-D)
-  !***KEYWORDS  DOUBLE PRECISION HYPERBOLIC SINE, DSINH,
+  !>
+  !***
+  !  Compute the double precision hyperbolic sine.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4C
+  !***
+  ! **Type:**      DOUBLE PRECISION (SINH-S, DSINH-D)
+  !***
+  ! **Keywords:**  DOUBLE PRECISION HYPERBOLIC SINE, DSINH,
   !             ELEMENTARY FUNCTION, FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      DOUBLE PRECISION DSINH, X, Y
   !      Y = DSINH(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 DSINH.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    DSINH   :    the double precision hyperbolic sine of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    DSINH evaluates the double precision hyperbolic sine of a double
   !    precision argument.
@@ -2285,16 +2542,19 @@ REAL(8) FUNCTION DSINH(X)
   !                               SIGNIFICANT FIGURES REQUIRED  31.20
   !                                    DECIMAL PLACES REQUIRED  32.67
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, DEXP, DSQRT, INITDS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, DEXP, DSQRT, INITDS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770801  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
   !   901219  Code corrected to compute DSINH correctly when ABS(X) .GE.
   !           YMAX.  (WRB)
-  !***END PROLOGUE  DSINH
+  
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -2326,7 +2586,7 @@ REAL(8) FUNCTION DSINH(X)
   DATA sinhcs(12)/ + .18630213719570056533333333333333D-28/
   DATA sinhcs(13)/ + .77568437166506666666666666666666D-32/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DSINH
+  !* FIRST EXECUTABLE STATEMENT  DSINH
   IF ( first ) THEN
     nterms = INITDS(sinhcs,13,0.1*SNGL(D1MACH(3)))
     sqeps = DSQRT(6.0D0*D1MACH(3))
@@ -2348,46 +2608,56 @@ REAL(8) FUNCTION DSINH(X)
   ENDIF
   !
 END FUNCTION DSINH
-!DECK DSQRT
+!** DSQRT
 REAL(8) FUNCTION DSQRT(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSQRT
-  !***PURPOSE  Compute the double precision square root.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C2
-  !***TYPE      DOUBLE PRECISION (SQRT-S, DSQRT-D, CSQRT-C)
-  !***KEYWORDS  DOUBLE PRECISION SQUARE ROOT, DSQRT, ELEMENTARY FUNCTION,
+  !>
+  !***
+  !  Compute the double precision square root.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C2
+  !***
+  ! **Type:**      DOUBLE PRECISION (SQRT-S, DSQRT-D, CSQRT-C)
+  !***
+  ! **Keywords:**  DOUBLE PRECISION SQUARE ROOT, DSQRT, ELEMENTARY FUNCTION,
   !             FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      DOUBLE PRECISION DSQRT, X, Y
   !      Y = DSQRT(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 DSQRT.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    DSQRT   :    the double precision square root of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    DSQRT evaluates the double precision square root of a double
   !    precision argument.  The argument X must be positive.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ALOG, D1MACH, D9PAK, D9UPAK, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ALOG, D1MACH, D9PAK, D9UPAK, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  DSQRT
+  
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -2411,7 +2681,7 @@ REAL(8) FUNCTION DSQRT(X)
   DATA sqrt2(2)/1.0D0/
   DATA sqrt2(3)/1.41421356237309504880168872420970D0/
   DATA niter/0/
-  !***FIRST EXECUTABLE STATEMENT  DSQRT
+  !* FIRST EXECUTABLE STATEMENT  DSQRT
   IF ( niter==0 ) niter = INT( 1.443*ALOG(-0.104*ALOG(0.1*SNGL(D1MACH(3)))) ) + 1
   !
   IF ( X>0.0D0 ) THEN
@@ -2436,34 +2706,41 @@ REAL(8) FUNCTION DSQRT(X)
   ENDIF
   !
 END FUNCTION DSQRT
-!DECK DTAN
+!** DTAN
 REAL(8) FUNCTION DTAN(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DTAN
-  !***PURPOSE  Compute the double precision tangent.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4A
-  !***TYPE      DOUBLE PRECISION (TAN-S, DTAN-D)
-  !***KEYWORDS  DOUBLE PRECISION TANGENT, DTAN, ELEMENTARY FUNCTION,
+  !>
+  !***
+  !  Compute the double precision tangent.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      DOUBLE PRECISION (TAN-S, DTAN-D)
+  !***
+  ! **Keywords:**  DOUBLE PRECISION TANGENT, DTAN, ELEMENTARY FUNCTION,
   !             FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      DOUBLE PRECISION DTAN, X, Y
   !      Y = DTAN(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 DTAN.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    DTAN    :    the double precision tangent of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    DTAN evaluates the double precision tangent of a double precision
   !    argument.  If the magnitude of the argument X is greater than
@@ -2478,14 +2755,17 @@ REAL(8) FUNCTION DTAN(X)
   !
   !    PI2REC = 2/PI - 0.625
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, DINT, DSQRT, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, DINT, DSQRT, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  DTAN
+  
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -2527,7 +2807,7 @@ REAL(8) FUNCTION DTAN(X)
   DATA tancs(19)/ + .14419111371369130666666666666666D-31/
   DATA pi2rec/.011619772367581343075535053490057D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DTAN
+  !* FIRST EXECUTABLE STATEMENT  DTAN
   IF ( first ) THEN
     nterms = INITDS(tancs,19,0.1*SNGL(D1MACH(3)))
     xmax = 1.0D0/D1MACH(4)
@@ -2578,35 +2858,42 @@ REAL(8) FUNCTION DTAN(X)
   IF ( ifn==1 ) DTAN = -DTAN
   !
 END FUNCTION DTAN
-!DECK DTANH
+!** DTANH
 REAL(8) FUNCTION DTANH(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DTANH
-  !***PURPOSE  Compute the double precision hyperbolic tangent.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4C
-  !***TYPE      DOUBLE PRECISION (TANH-S, DTANH-D)
-  !***KEYWORDS  DOUBLE PRECISION HYPERBOLIC TANGENT, DTANH,
+  !>
+  !***
+  !  Compute the double precision hyperbolic tangent.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4C
+  !***
+  ! **Type:**      DOUBLE PRECISION (TANH-S, DTANH-D)
+  !***
+  ! **Keywords:**  DOUBLE PRECISION HYPERBOLIC TANGENT, DTANH,
   !             ELEMENTARY FUNCTION, FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      DOUBLE PRECISION DTANH, X, Y
   !      Y = DTANH(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 DTANH.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    DTANH   :    the double precision hyperbolic tangent of X.
   !
   !
-  ! *Description:
+  !- Description:
   !
   !    DTANH evaluates the double precision hyperbolic tangent of a
   !    double precision argument.
@@ -2617,14 +2904,17 @@ REAL(8) FUNCTION DTANH(X)
   !                               SIGNIFICANT FIGURES REQUIRED  31.25
   !                                    DECIMAL PLACES REQUIRED  32.75
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, DEXP, DLOG, DSQRT, INITDS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, DEXP, DLOG, DSQRT, INITDS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  DTANH
+  
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -2674,7 +2964,7 @@ REAL(8) FUNCTION DTANH(X)
   DATA tanhcs(30)/ - .11685527840188950118399999999999D-30/
   DATA tanhcs(31)/ + .99158055384640389120000000000000D-32/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DTANH
+  !* FIRST EXECUTABLE STATEMENT  DTANH
   IF ( first ) THEN
     nterms = INITDS(tanhcs,31,0.1*SNGL(D1MACH(3)))
     sqeps = DSQRT(3.0D0*D1MACH(3))
@@ -2694,33 +2984,40 @@ REAL(8) FUNCTION DTANH(X)
   ENDIF
   !
 END FUNCTION DTANH
-!DECK EXP
+!** EXP
 REAL FUNCTION EXP(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  EXP
-  !***PURPOSE  Compute the exponential.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4B
-  !***TYPE      SINGLE PRECISION (EXP-S, DEXP-D, CEXP-C)
-  !***KEYWORDS  ELEMENTARY FUNCTION, EXP, FORTRAN INTRINSIC
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the exponential.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4B
+  !***
+  ! **Type:**      SINGLE PRECISION (EXP-S, DEXP-D, CEXP-C)
+  !***
+  ! **Keywords:**  ELEMENTARY FUNCTION, EXP, FORTRAN INTRINSIC
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      REAL EXP, X, Y
   !      Y = EXP(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 EXP.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    EXP     :    the exponential of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    EXP evaluates the exponential of an argument, i.e. exp(Z) or
   !    e**Z.  If the argument X is too big (ln(R1MACH(2)) - 0.01),
@@ -2734,14 +3031,17 @@ REAL FUNCTION EXP(X)
   !
   !    ALN216 IS 16.0/ALOG(2.) - 23.0
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ALOG, CSEVL, INITS, R1MACH, R9PAK, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ALOG, CSEVL, INITS, R1MACH, R9PAK, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900525  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  EXP
+  
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -2788,7 +3088,7 @@ REAL FUNCTION EXP(X)
   DATA twon16(17)/1.0E0/
   DATA aln216/.083120654223414518E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  EXP
+  !* FIRST EXECUTABLE STATEMENT  EXP
   IF ( first ) THEN
     nterms = INITS(expcs,8,0.1*R1MACH(3))
     xmin = ALOG(R1MACH(1)) + 0.01E0
@@ -2820,33 +3120,40 @@ REAL FUNCTION EXP(X)
   ENDIF
   !
 END FUNCTION EXP
-!DECK SIN
+!** SIN
 REAL FUNCTION SIN(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SIN
-  !***PURPOSE  Compute the sine.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4A
-  !***TYPE      SINGLE PRECISION (SIN-S, DSIN-D, CSIN-C)
-  !***KEYWORDS  ELEMENTARY FUNCTION, FORTRAN INTRINSIC, SIN, SINE
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the sine.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      SINGLE PRECISION (SIN-S, DSIN-D, CSIN-C)
+  !***
+  ! **Keywords:**  ELEMENTARY FUNCTION, FORTRAN INTRINSIC, SIN, SINE
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      REAL SIN, X, Y
   !      Y = SIN(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 SIN.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    SIN     :    the sine of a X.
   !
-  ! *Description:
+  !- Description:
   !
   !    SIN evaluates the sine of an argument.  If the argument X is
   !    greater than the reciprocal of R1MACH(4), an error message is
@@ -2866,14 +3173,17 @@ REAL FUNCTION SIN(X)
   !
   !    PI4REC = 4.0/PI - 1.0
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, SQRT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, SQRT, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900525  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  SIN
+  
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -2911,7 +3221,7 @@ REAL FUNCTION SIN(X)
   DATA coscs(8)/ - .000000000000000047E0/
   DATA pi4rec/ + .273239544735162686E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  SIN
+  !* FIRST EXECUTABLE STATEMENT  SIN
   IF ( first ) THEN
     ntsn = INITS(sincs,8,0.1*R1MACH(3))
     ntcs = INITS(coscs,8,0.1*R1MACH(3))
@@ -2958,34 +3268,41 @@ REAL FUNCTION SIN(X)
   ENDIF
   !
 END FUNCTION SIN
-!DECK SINH
+!** SINH
 REAL FUNCTION SINH(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SINH
-  !***PURPOSE  Compute the hyperbolic sine.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4C
-  !***TYPE      SINGLE PRECISION (SINH-S, DSINH-D)
-  !***KEYWORDS  ELEMENTARY FUNCTION, FORTRAN INTRINSIC, HYPERBOLIC SINE,
+  !>
+  !***
+  !  Compute the hyperbolic sine.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4C
+  !***
+  ! **Type:**      SINGLE PRECISION (SINH-S, DSINH-D)
+  !***
+  ! **Keywords:**  ELEMENTARY FUNCTION, FORTRAN INTRINSIC, HYPERBOLIC SINE,
   !             SINH
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      REAL SINH, X, Y
   !      Y = SINH(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 SINH.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    SINH    :    the hyperbolic sine of a complex argument.
   !
-  ! *Description:
+  !- Description:
   !
   !    SINH evaluates the hyperbolic sine of an argument.
   !
@@ -2995,14 +3312,17 @@ REAL FUNCTION SINH(X)
   !                               SIGNIFICANT FIGURES REQUIRED  15.11
   !                                    DECIMAL PLACES REQUIRED  16.48
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, EXP, INITS, R1MACH, SQRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, EXP, INITS, R1MACH, SQRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770801  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900525  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  SINH
+  
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -3029,7 +3349,7 @@ REAL FUNCTION SINH(X)
   DATA sinhcs(7)/.00000000000007973E0/
   DATA sinhcs(8)/.00000000000000009E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  SINH
+  !* FIRST EXECUTABLE STATEMENT  SINH
   IF ( first ) THEN
     nterms = INITS(sinhcs,8,0.1*R1MACH(3))
     sqeps = SQRT(6.0E0*R1MACH(3))
@@ -3051,45 +3371,55 @@ REAL FUNCTION SINH(X)
   ENDIF
   !
 END FUNCTION SINH
-!DECK SQRT
+!** SQRT
 REAL FUNCTION SQRT(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SQRT
-  !***PURPOSE  Compute the square root.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C2
-  !***TYPE      SINGLE PRECISION (SQRT-S, DSQRT-D, CSQRT-C)
-  !***KEYWORDS  ELEMENTARY FUNCTION, FORTRAN INTRINSIC, SQRT, SQUARE ROOT
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the square root.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C2
+  !***
+  ! **Type:**      SINGLE PRECISION (SQRT-S, DSQRT-D, CSQRT-C)
+  !***
+  ! **Keywords:**  ELEMENTARY FUNCTION, FORTRAN INTRINSIC, SQRT, SQUARE ROOT
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      REAL SQRT, X, Y
   !      Y = SQRT(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 SQRT.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    SQRT    :    the square root of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    SQRT evaluates the square root of an argument.  The argument X
   !    must be positive.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ALOG, R1MACH, R9PAK, R9UPAK, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ALOG, R1MACH, R9PAK, R9UPAK, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900525  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  SQRT
+  
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -3109,7 +3439,7 @@ REAL FUNCTION SQRT(X)
   DATA sqrt2(2)/1.0E0/
   DATA sqrt2(3)/1.41421356237309505E0/
   DATA niter/0/
-  !***FIRST EXECUTABLE STATEMENT  SQRT
+  !* FIRST EXECUTABLE STATEMENT  SQRT
   IF ( niter==0 ) niter = INT( 1.443*ALOG(-0.104*ALOG(0.1*R1MACH(3))) ) + 1
   !
   IF ( X>0.0E0 ) THEN
@@ -3134,33 +3464,40 @@ REAL FUNCTION SQRT(X)
   ENDIF
   !
 END FUNCTION SQRT
-!DECK TAN
+!** TAN
 REAL FUNCTION TAN(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TAN
-  !***PURPOSE  Compute the tangent.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4A
-  !***TYPE      SINGLE PRECISION (TAN-S, DTAN-D)
-  !***KEYWORDS  ELEMENTARY FUNCTION, FORTRAN INTRINSIC, TAN, TANGENT
-  !***AUTHOR  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the tangent.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      SINGLE PRECISION (TAN-S, DTAN-D)
+  !***
+  ! **Keywords:**  ELEMENTARY FUNCTION, FORTRAN INTRINSIC, TAN, TANGENT
+  !***
+  ! **Author:**  FULLERTON, W., C-3, LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      DOUBLE PRECISION TAN, X, Y
   !      Y = TAN(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 TAN.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    TAN     :    the tangent of X.
   !
-  ! *Description:
+  !- Description:
   !
   !    TAN evaluates the tangent of an argument.  If the magnitude of the
   !    argument X is greater than the reciprocal of D1MACH(4), an error
@@ -3174,14 +3511,17 @@ REAL FUNCTION TAN(X)
   !
   !    PI2REC = 2/PI - 0.625
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, SQRT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, SQRT, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900525  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  TAN
+  
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -3214,7 +3554,7 @@ REAL FUNCTION TAN(X)
   DATA tancs(11)/.0000000000000000031E0/
   DATA pi2rec/.0116197723675813430E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  TAN
+  !* FIRST EXECUTABLE STATEMENT  TAN
   IF ( first ) THEN
     nterms = INITS(tancs,11,0.1*R1MACH(3))
     xmax = 1.0E0/R1MACH(4)
@@ -3266,34 +3606,41 @@ REAL FUNCTION TAN(X)
   IF ( ifn==1 ) TAN = -TAN
   !
 END FUNCTION TAN
-!DECK TANH
+!** TANH
 REAL FUNCTION TANH(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TANH
-  !***PURPOSE  Compute the hyperbolic tangent.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C4C
-  !***TYPE      SINGLE PRECISION (TANH-S, DTANH-D)
-  !***KEYWORDS  ELEMENTARY FUNCTION, FORTRAN INTRINSIC,
+  !>
+  !***
+  !  Compute the hyperbolic tangent.
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C4C
+  !***
+  ! **Type:**      SINGLE PRECISION (TANH-S, DTANH-D)
+  !***
+  ! **Keywords:**  ELEMENTARY FUNCTION, FORTRAN INTRINSIC,
   !             HYPERBOLIC TANGENT, TANH
-  !***AUTHOR  FULLERTON, W., C-3. LOS ALAMOS SCIENTIFIC LABORATORY
-  !***DESCRIPTION
+  !***
+  ! **Author:**  FULLERTON, W., C-3. LOS ALAMOS SCIENTIFIC LABORATORY
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !      REAL TANH, X, Y
   !      Y = TANH(X)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !    X       :IN  This is the argument.  It will not be modified by
   !                 TANH.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !
   !    TANH    :    the hyperbolic tangent of a complex argument.
   !
-  ! *Description:
+  !- Description:
   !
   !    TANH evaluates the hyperbolic tangent of an argument.
   !
@@ -3303,14 +3650,17 @@ REAL FUNCTION TANH(X)
   !                               SIGNIFICANT FIGURES REQUIRED  16.25
   !                                    DECIMAL PLACES REQUIRED  17.62
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ALOG, CSEVL, EXP, INITS, R1MACH, SQRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ALOG, CSEVL, EXP, INITS, R1MACH, SQRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   801001  Revisions by W. Fullerton.
   !   900525  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  !***END PROLOGUE  TANH
+  
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -3346,7 +3696,7 @@ REAL FUNCTION TANH(X)
   DATA tanhcs(16)/ - .000000000000000116E0/
   DATA tanhcs(17)/.000000000000000009E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  TANH
+  !* FIRST EXECUTABLE STATEMENT  TANH
   IF ( first ) THEN
     nterms = INITS(tanhcs,17,0.1*R1MACH(3))
     sqeps = SQRT(3.0E0*R1MACH(3))

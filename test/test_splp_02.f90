@@ -2,21 +2,27 @@ MODULE TEST38_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK DPLPQX
+  !** DPLPQX
   SUBROUTINE DPLPQX(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DPLPQX
-    !***PURPOSE  Quick check for DSPLP.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (SPLPQX-S, DPLPQX-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  DCOPY, DSPLP, DUSRMT, PASS
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for DSPLP.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (SPLPQX-S, DPLPQX-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  DCOPY, DSPLP, DUSRMT, PASS
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901013  Added additional printout on failure.  (RWC)
-    !***END PROLOGUE  DPLPQX
+    
     REAL(8) :: DUSRMT
     INTEGER i, ic, iv, ivv, j, kk, kount, Kprint, Lun, mm
     EXTERNAL DUSRMT
@@ -28,7 +34,7 @@ CONTAINS
     REAL(8) :: d(14,37)
     REAL(8) :: zero
     INTEGER mrelas, nvars, info, lw, liw
-    !***FIRST EXECUTABLE STATEMENT  DPLPQX
+    !* FIRST EXECUTABLE STATEMENT  DPLPQX
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1 DSPLP QUICK CHECK')
     icnt = 1
@@ -247,16 +253,22 @@ CONTAINS
     99004 FORMAT (/' ************ DSPLP PASSED ALL TESTS ****************')
     RETURN
   END SUBROUTINE DPLPQX
-  !DECK DBOCQX
+  !** DBOCQX
   SUBROUTINE DBOCQX(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DBOCQX
-    !***PURPOSE  Quick check for DBOCLS.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (SBOCQX-S, DBOCQX-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for DBOCLS.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (SBOCQX-S, DBOCQX-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !     MINIMAL TEST DRIVER FOR DBOCLS, BOUNDED CONSTRAINED LEAST
     !     SQUARES SOLVER.  DELIVERS THE VALUE IPASS=1 IF 8 TESTS WERE
@@ -265,13 +277,15 @@ CONTAINS
     !     RUN FOUR BOUNDED LEAST SQUARES PROBLEMS THAT COME FROM THE
     !     DIPLOME WORK OF P. ZIMMERMANN.
     !
-    !***ROUTINES CALLED  D1MACH, DBOCLS, DBOLS, DCOPY, DNRM2
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH, DBOCLS, DBOLS, DCOPY, DNRM2
+
+    !* REVISION HISTORY  (YYMMDD)
     !   850310  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message.  (RWC)
-    !***END PROLOGUE  DBOCQX
+    
     REAL(8) :: D1MACH, DNRM2, rnorm, rnormc, sr
     INTEGER i, ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
@@ -299,7 +313,7 @@ CONTAINS
       -12.D0, -5.D0, -9.D0, 708.D0, 4165.D0, -13266.D0, 8409.D0/
     DATA (xtrue(j),j=1,9)/1.D0, 2.D0, -1.D0, 3.D0, -4.D0, 1.D0, 32.D0, &
       30.D0, 31.D0/
-    !***FIRST EXECUTABLE STATEMENT  DBOCQX
+    !* FIRST EXECUTABLE STATEMENT  DBOCQX
     mdw = 11
     mrows = 6
     ncols = 5
@@ -413,24 +427,31 @@ CONTAINS
     99003 FORMAT (3I5,1P,E20.6,' TEST ',A,'ED.')
   END SUBROUTINE DBOCQX
 END MODULE TEST38_MOD
-!DECK TEST38
+!** TEST38
 PROGRAM TEST38
   USE TEST38_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST38
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  G2
-  !***TYPE      DOUBLE PRECISION (TEST37-S, TEST38-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  G2
+  !***
+  ! **Type:**      DOUBLE PRECISION (TEST37-S, TEST38-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -442,23 +463,26 @@ PROGRAM TEST38
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        DSPLP    DBOCLS
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  DBOCQX, DPLPQX, I1MACH, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DBOCQX, DPLPQX, I1MACH, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST38
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST38
+  !* FIRST EXECUTABLE STATEMENT  TEST38
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

@@ -1,26 +1,33 @@
-!DECK CSHCH
+!** CSHCH
 SUBROUTINE CSHCH(Z,Csh,Cch)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CSHCH
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBESH and CBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CSHCH-A, ZSHCH-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBESH and CBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CSHCH-A, ZSHCH-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     CSHCH COMPUTES THE COMPLEX HYPERBOLIC FUNCTIONS CSH=SINH(X+I*Y)
   !     AND CCH=COSH(X+I*Y), WHERE I**2=-1.
   !
-  !***SEE ALSO  CBESH, CBESK
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBESH, CBESK
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CSHCH
+  
   COMPLEX Cch, Csh, Z
   REAL cchi, cchr, ch, cn, cshi, cshr, sh, sn, x, y
-  !***FIRST EXECUTABLE STATEMENT  CSHCH
+  !* FIRST EXECUTABLE STATEMENT  CSHCH
   x = REAL(Z)
   y = AIMAG(Z)
   sh = SINH(x)

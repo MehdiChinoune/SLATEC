@@ -1,13 +1,17 @@
-!DECK DPCHDF
+!** DPCHDF
 REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPCHDF
-  !***SUBSIDIARY
-  !***PURPOSE  Computes divided differences for DPCHCE and DPCHSP
-  !***LIBRARY   SLATEC (PCHIP)
-  !***TYPE      DOUBLE PRECISION (PCHDF-S, DPCHDF-D)
-  !***AUTHOR  Fritsch, F. N., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Computes divided differences for DPCHCE and DPCHSP
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Type:**      DOUBLE PRECISION (PCHDF-S, DPCHDF-D)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
+  !***
+  ! **Description:**
   !
   !          DPCHDF:   DPCHIP Finite Difference Formula
   !
@@ -37,11 +41,15 @@ REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
   !
   ! ----------------------------------------------------------------------
   !
-  !***SEE ALSO  DPCHCE, DPCHSP
-  !***REFERENCES  Carl de Boor, A Practical Guide to Splines, Springer-
+  !***
+  ! **See also:**  DPCHCE, DPCHSP
+  !***
+  ! **References:**  Carl de Boor, A Practical Guide to Splines, Springer-
   !                 Verlag, New York, 1978, pp. 10-16.
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820503  DATE WRITTEN
   !   820805  Converted to SLATEC library version.
   !   870707  Corrected XERROR calls for d.p. name(s).
@@ -55,7 +63,7 @@ REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
   !   910408  Updated AUTHOR and DATE WRITTEN sections in prologue.  (WRB)
   !   920429  Revised format and order of references.  (WRB,FNF)
   !   930503  Improved purpose.  (FNF)
-  !***END PROLOGUE  DPCHDF
+  
   !
   !**End
   !
@@ -73,7 +81,7 @@ REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
   !
   !  CHECK FOR LEGAL VALUE OF K.
   !
-  !***FIRST EXECUTABLE STATEMENT  DPCHDF
+  !* FIRST EXECUTABLE STATEMENT  DPCHDF
   IF ( K<3 ) THEN
     !
     !  ERROR RETURN.

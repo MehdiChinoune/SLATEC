@@ -1,16 +1,23 @@
-!DECK DXADD
+!** DXADD
 SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DXADD
-  !***PURPOSE  To provide double-precision floating-point arithmetic
+  !>
+  !***
+  !  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  A3D
-  !***TYPE      DOUBLE PRECISION (XADD-S, DXADD-D)
-  !***KEYWORDS  EXTENDED-RANGE DOUBLE-PRECISION ARITHMETIC
-  !***AUTHOR  Lozier, Daniel W., (National Bureau of Standards)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  A3D
+  !***
+  ! **Type:**      DOUBLE PRECISION (XADD-S, DXADD-D)
+  !***
+  ! **Keywords:**  EXTENDED-RANGE DOUBLE-PRECISION ARITHMETIC
+  !***
+  ! **Author:**  Lozier, Daniel W., (National Bureau of Standards)
   !           Smith, John M., (NBS and George Mason University)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !     DOUBLE PRECISION X, Y, Z
   !     INTEGER IX, IY, IZ
   !
@@ -22,11 +29,16 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !                  RADIX**(-2L).LE.ABS(X).LE.RADIX**(2L),
   !                  RADIX**(-2L).LE.ABS(Y).LE.RADIX**(2L).
   !
-  !***SEE ALSO  DXSET
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DXADJ
-  !***COMMON BLOCKS    DXBLK2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DXSET
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DXADJ
+  !***
+  ! COMMON BLOCKS    DXBLK2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820712  DATE WRITTEN
   !   881020  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
@@ -34,7 +46,7 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  DXADD
+  
   INTEGER i, i1, i2, Ierror, is, j
   REAL(8) :: X, Y, Z
   INTEGER Ix, Iy, Iz
@@ -55,7 +67,7 @@ SUBROUTINE DXADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   ! THESE CONDITIONS MUST BE MET BY APPROPRIATE CODING
   ! IN SUBROUTINE DXSET.
   !
-  !***FIRST EXECUTABLE STATEMENT  DXADD
+  !* FIRST EXECUTABLE STATEMENT  DXADD
   Ierror = 0
   IF ( X==0.0D0 ) THEN
     Z = Y

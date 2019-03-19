@@ -1,17 +1,24 @@
-!DECK CBIRY
+!** CBIRY
 SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CBIRY
-  !***PURPOSE  Compute the Airy function Bi(z) or its derivative dBi/dz
+  !>
+  !***
+  !  Compute the Airy function Bi(z) or its derivative dBi/dz
   !            for complex argument z.  A scaling option is available
   !            to help avoid overflow.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10D
-  !***TYPE      COMPLEX (CBIRY-C, ZBIRY-C)
-  !***KEYWORDS  AIRY FUNCTION, BESSEL FUNCTION OF ORDER ONE THIRD,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10D
+  !***
+  ! **Type:**      COMPLEX (CBIRY-C, ZBIRY-C)
+  !***
+  ! **Keywords:**  AIRY FUNCTION, BESSEL FUNCTION OF ORDER ONE THIRD,
   !             BESSEL FUNCTION OF ORDER TWO THIRDS
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !         On KODE=1, CBIRY computes the complex Airy function Bi(z)
   !         or its derivative dBi/dz on ID=0 or ID=1 respectively.
@@ -51,7 +58,7 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   !                    IERR=5  Algorithmic error - NO COMPUTATION
   !                            (Termination condition not met)
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !         Bi(z) and dBi/dz are computed from I Bessel functions by
   !
@@ -103,7 +110,8 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   !         the principal phase angle is on the order of +P, -P, PI/2-P,
   !         or -PI/2+P.
   !
-  !***REFERENCES  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
+  !***
+  ! **References:**  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
   !                 matical Functions, National Bureau of Standards
   !                 Applied Mathematics Series 55, U. S. Department
   !                 of Commerce, Tenth Printing (1972) or later.
@@ -120,14 +128,16 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
   !                 Transactions on Mathematical Software, 12 (September
   !                 1986), pp. 265-273.
   !
-  !***ROUTINES CALLED  CBINU, I1MACH, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CBINU, I1MACH, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   890801  REVISION DATE from Version 3.2
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  !***END PROLOGUE  CBIRY
+  
   COMPLEX Bi, cone, csq, cy, s1, s2, trm1, trm2, Z, zta, z3
   REAL aa, ad, ak, alim, atrm, az, az3, bb, bk, ck, coef, c1, &
     c2, dig, dk, d1, d2, elim, fid, fmr, fnu, fnul, pi, rl, &
@@ -138,7 +148,7 @@ SUBROUTINE CBIRY(Z,Id,Kode,Bi,Ierr)
     6.14926627446000736E-01, 4.48288357353826359E-01, &
     5.77350269189625765E-01, 3.14159265358979324E+00/
   DATA cone/(1.0E0,0.0E0)/
-  !***FIRST EXECUTABLE STATEMENT  CBIRY
+  !* FIRST EXECUTABLE STATEMENT  CBIRY
   Ierr = 0
   nz = 0
   IF ( Id<0.OR.Id>1 ) Ierr = 1

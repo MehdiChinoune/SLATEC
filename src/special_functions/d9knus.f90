@@ -1,16 +1,22 @@
-!DECK D9KNUS
+!** D9KNUS
 SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  D9KNUS
-  !***SUBSIDIARY
-  !***PURPOSE  Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*
+  !>
+  !***
+  !  Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*
   !            K-SUB-XNU+1(X) for 0.0 .LE. XNU .LT. 1.0.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B3
-  !***TYPE      DOUBLE PRECISION (R9KNUS-S, D9KNUS-D)
-  !***KEYWORDS  BESSEL FUNCTION, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B3
+  !***
+  ! **Type:**      DOUBLE PRECISION (R9KNUS-S, D9KNUS-D)
+  !***
+  ! **Keywords:**  BESSEL FUNCTION, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Compute Bessel functions EXP(X) * K-sub-XNU (X)  and
   ! EXP(X) * K-sub-XNU+1 (X) for 0.0 .LE. XNU .LT. 1.0 .
@@ -27,9 +33,12 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !                               significant figures required  31.85
   !                                    decimal places required  33.26
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, DGAMMA, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, DGAMMA, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -39,7 +48,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  D9KNUS
+  
   REAL an, bn, eta
   INTEGER i, ii, INITDS, inu, Iswtch, n, ntc0k, nterms, ntznu1
   REAL(8) :: Xnu, X, Bknu, Bknu1, alpha(32), beta(32), a(32), &
@@ -106,7 +115,7 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   DATA sqpi2/ + 1.2533141373155002512078826424055D0/
   DATA aln2/0.69314718055994530941723212145818D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  D9KNUS
+  !* FIRST EXECUTABLE STATEMENT  D9KNUS
   IF ( first ) THEN
     eta = REAL(  0.1D0*D1MACH(3), 4 )
     ntc0k = INITDS(c0kcs,29,eta)

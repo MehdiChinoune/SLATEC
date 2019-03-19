@@ -1,33 +1,40 @@
-!DECK QWGTS
+!** QWGTS
 REAL FUNCTION QWGTS(X,A,B,Alfa,Beta,Integr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QWGTS
-  !***SUBSIDIARY
-  !***PURPOSE  This function subprogram is used together with the
+  !>
+  !***
+  !  This function subprogram is used together with the
   !            routine QAWS and defines the WEIGHT function.
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (QWGTS-S, DQWGTS-D)
-  !***KEYWORDS  ALGEBRAICO-LOGARITHMIC, END POINT SINGULARITIES,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (QWGTS-S, DQWGTS-D)
+  !***
+  ! **Keywords:**  ALGEBRAICO-LOGARITHMIC, END POINT SINGULARITIES,
   !             WEIGHT FUNCTION
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***SEE ALSO  QK15W
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  QK15W
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  QWGTS
+  
   !
   REAL A, Alfa, B, Beta, bmx, X, xma
   INTEGER Integr
-  !***FIRST EXECUTABLE STATEMENT  QWGTS
+  !* FIRST EXECUTABLE STATEMENT  QWGTS
   xma = X - A
   bmx = B - X
   QWGTS = xma**Alfa*bmx**Beta

@@ -1,13 +1,17 @@
-!DECK CRATI
+!** CRATI
 SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CRATI
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBESH, CBESI and CBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CRATI-A, ZRATI-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBESH, CBESI and CBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CRATI-A, ZRATI-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     CRATI COMPUTES RATIOS OF I BESSEL FUNCTIONS BY BACKWARD
   !     RECURRENCE.  THE STARTING INDEX IS DETERMINED BY FORWARD
@@ -16,19 +20,22 @@ SUBROUTINE CRATI(Z,Fnu,N,Cy,Tol)
   !     BESSEL FUNCTIONS I AND J OF COMPLEX ARGUMENT AND INTEGER ORDER,
   !     BY D. J. SOOKNE.
   !
-  !***SEE ALSO  CBESH, CBESI, CBESK
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBESH, CBESI, CBESK
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CRATI
+  
   COMPLEX cdfnu, cone, Cy, czero, pt, p1, p2, rz, t1, Z
   REAL ak, amagz, ap1, ap2, arg, az, dfnu, fdnu, flam, Fnu, fnup, &
     rap1, rho, test, test1, Tol
   INTEGER i, id, idnu, inu, itime, k, kk, magz, N
   DIMENSION Cy(N)
   DATA czero, cone/(0.0E0,0.0E0), (1.0E0,0.0E0)/
-  !***FIRST EXECUTABLE STATEMENT  CRATI
+  !* FIRST EXECUTABLE STATEMENT  CRATI
   az = ABS(Z)
   inu = INT( Fnu )
   idnu = inu + N - 1

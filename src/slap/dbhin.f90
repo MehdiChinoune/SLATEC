@@ -1,29 +1,36 @@
-!DECK DBHIN
+!** DBHIN
 SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBHIN
-  !***PURPOSE  Read a Sparse Linear System in the Boeing/Harwell Format.
+  !>
+  !***
+  !  Read a Sparse Linear System in the Boeing/Harwell Format.
   !            The matrix is read in and if the right hand side is also
   !            present in the input file then it too is read in.  The
   !            matrix is then modified to be in the SLAP Column format.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  N1
-  !***TYPE      DOUBLE PRECISION (SBHIN-S, DBHIN-D)
-  !***KEYWORDS  LINEAR SYSTEM, MATRIX READ, SLAP SPARSE
-  !***AUTHOR  Seager, Mark K., (LLNL)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  N1
+  !***
+  ! **Type:**      DOUBLE PRECISION (SBHIN-S, DBHIN-D)
+  !***
+  ! **Keywords:**  LINEAR SYSTEM, MATRIX READ, SLAP SPARSE
+  !***
+  ! **Author:**  Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM, IUNIT, JOB
   !     DOUBLE PRECISION A(NELT), SOLN(N), RHS(N)
   !
   !     CALL DBHIN( N, NELT, IA, JA, A, ISYM, SOLN, RHS, IUNIT, JOB )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :OUT      Integer
   !         Order of the Matrix.
   ! NELT   :INOUT    Integer.
@@ -81,7 +88,7 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !         JOB = 12 => Read in the matrix *STRUCTURE* and SOLN.
   !         JOB = 13 => Read in the matrix *STRUCTURE*, RHS and SOLN.
   !
-  ! *Description:
+  !- Description:
   !       The format for the input is as follows.  The first line contains
   !       a title to identify the data file.  On the second line (5I4) are
   !       counters: NLINE, NPLS, NRILS, NNVLS, NRHSLS.
@@ -123,19 +130,22 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Portability:
+  !- Portability:
   !         You must make sure that IUNIT is a valid Fortran logical
   !         I/O device unit number and that the unit number has been
   !         associated with a file or the console.  This is a system
   !         dependent function.
   !
-  ! *Implementation note:
+  !- Implementation note:
   !         SOLN is not read by this version.  It will simply be
   !         zeroed out if JOB = 2 or 3 and the returned value of
   !         JOB will indicate SOLN has not been read.
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   881107  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -150,7 +160,7 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !   921007  Corrected description of input format.  (FNF)
   !   921208  Added Implementation Note and code to zero out SOLN.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  !***END PROLOGUE  DBHIN
+  
   !     .. Scalar Arguments ..
   INTEGER Isym, Iunit, Job, N, Nelt
   !     .. Array Arguments ..
@@ -164,7 +174,7 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
     title*80
   !     .. Intrinsic Functions ..
   INTRINSIC MOD
-  !***FIRST EXECUTABLE STATEMENT  DBHIN
+  !* FIRST EXECUTABLE STATEMENT  DBHIN
   !
   !         Read Matrices In BOEING-HARWELL format.
   !

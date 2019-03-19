@@ -1,13 +1,17 @@
-!DECK DASYJY
+!** DASYJY
 SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DASYJY
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBESJ and DBESY
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (ASYJY-S, DASYJY-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBESJ and DBESY
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (ASYJY-S, DASYJY-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !                 DASYJY computes Bessel functions J and Y
   !               for arguments X.GT.0.0 and orders FNU .GE. 35.0
@@ -49,9 +53,12 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   !         FLGJY = -1 the Airy functions BI(X) and DBI(X) are
   !         supplied by the external function YAIRY.
   !
-  !***SEE ALSO  DBESJ, DBESY
-  !***ROUTINES CALLED  D1MACH, I1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBESJ, DBESY
+  !***
+  ! **Routines called:**  D1MACH, I1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -60,7 +67,7 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  !***END PROLOGUE  DASYJY
+  
   INTEGER i, Iflw, In, j, jn, jr, ju, k, kb, klast, kmax, kp1, &
     ks, ksp1, kstemp, l, lr, lrp1, iseta, isetb
   INTEGER I1MACH
@@ -291,7 +298,7 @@ SUBROUTINE DASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
     2.06210828235646D-02, 1.94388240897881D-02, 1.83810633800683D-02, &
     1.74293213231963D-02, 1.65685837786612D-02, 1.57865285987918D-02, &
     1.50729501494096D-02, 1.44193250839955D-02, 1.38184805735342D-02/
-  !***FIRST EXECUTABLE STATEMENT  DASYJY
+  !* FIRST EXECUTABLE STATEMENT  DASYJY
   ta = D1MACH(3)
   tol = MAX(ta,1.0D-15)
   tb = D1MACH(5)

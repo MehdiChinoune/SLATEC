@@ -1,15 +1,22 @@
-!DECK DGAMIC
+!** DGAMIC
 REAL(8) FUNCTION DGAMIC(A,X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGAMIC
-  !***PURPOSE  Calculate the complementary incomplete Gamma function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7E
-  !***TYPE      DOUBLE PRECISION (GAMIC-S, DGAMIC-D)
-  !***KEYWORDS  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB,
+  !>
+  !***
+  !  Calculate the complementary incomplete Gamma function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7E
+  !***
+  ! **Type:**      DOUBLE PRECISION (GAMIC-S, DGAMIC-D)
+  !***
+  ! **Keywords:**  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   !   Evaluate the complementary incomplete Gamma function
   !
@@ -28,22 +35,25 @@ REAL(8) FUNCTION DGAMIC(A,X)
   !   of accuracy, which is reported if the result is less than half
   !   machine precision.
   !
-  !***REFERENCES  W. Gautschi, A computational procedure for incomplete
+  !***
+  ! **References:**  W. Gautschi, A computational procedure for incomplete
   !                 gamma functions, ACM Transactions on Mathematical
   !                 Software 5, 4 (December 1979), pp. 466-481.
   !               W. Gautschi, Incomplete gamma functions, Algorithm 542,
   !                 ACM Transactions on Mathematical Software 5, 4
   !                 (December 1979), pp. 482-489.
-  !***ROUTINES CALLED  D1MACH, D9GMIC, D9GMIT, D9LGIC, D9LGIT, DLGAMS,
+  !***
+  ! **Routines called:**  D1MACH, D9GMIC, D9GMIT, D9LGIC, D9LGIT, DLGAMS,
   !                    DLNGAM, XERCLR, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  !***END PROLOGUE  DGAMIC
+  
   INTEGER izero
   REAL(8) :: A, X, aeps, ainta, algap1, alneps, alngs, alx, &
     bot, e, eps, gstar, h, sga, sgng, sgngam, sgngs, &
@@ -52,7 +62,7 @@ REAL(8) FUNCTION DGAMIC(A,X)
   LOGICAL first
   SAVE eps, sqeps, alneps, bot, first
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DGAMIC
+  !* FIRST EXECUTABLE STATEMENT  DGAMIC
   IF ( first ) THEN
     eps = 0.5D0*D1MACH(3)
     sqeps = SQRT(D1MACH(4))

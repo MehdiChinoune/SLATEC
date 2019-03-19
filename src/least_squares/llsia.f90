@@ -1,18 +1,25 @@
-!DECK LLSIA
+!** LLSIA
 SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
     Lw,Iwork,Liw,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  LLSIA
-  !***PURPOSE  Solve a linear least squares problems by performing a QR
+  !>
+  !***
+  !  Solve a linear least squares problems by performing a QR
   !            factorization of the matrix using Householder
   !            transformations.  Emphasis is put on detecting possible
   !            rank deficiency.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D9, D5
-  !***TYPE      SINGLE PRECISION (LLSIA-S, DLLSIA-D)
-  !***KEYWORDS  LINEAR LEAST SQUARES, QR FACTORIZATION
-  !***AUTHOR  Manteuffel, T. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D9, D5
+  !***
+  ! **Type:**      SINGLE PRECISION (LLSIA-S, DLLSIA-D)
+  !***
+  ! **Keywords:**  LINEAR LEAST SQUARES, QR FACTORIZATION
+  !***
+  ! **Author:**  Manteuffel, T. A., (LANL)
+  !***
+  ! **Description:**
   !
   !     LLSIA computes the least squares solution(s) to the problem AX=B
   !     where A is an M by N matrix with M.GE.N and B is the M by NB
@@ -146,11 +153,14 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !                   4 - Rank .LT. NP
   !                   5 - Full rank
   !
-  !***REFERENCES  T. Manteuffel, An interval analysis approach to rank
+  !***
+  ! **References:**  T. Manteuffel, An interval analysis approach to rank
   !                 determination in linear least squares problems,
   !                 Report SAND80-0655, Sandia Laboratories, June 1980.
-  !***ROUTINES CALLED  R1MACH, U11LS, U12LS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  R1MACH, U11LS, U12LS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810801  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891009  Removed unreferenced variable.  (WRB)
@@ -159,14 +169,14 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  LLSIA
+  
   REAL A, Ae, B, eps, R1MACH, Re, Rnorm, W
   INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
     Mode, N, n1, n2, n3, n4, n5, Nb, Np
   DIMENSION A(Mda,*), B(Mdb,*), Re(*), Ae(*), Rnorm(*), W(*)
   INTEGER Iwork(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  LLSIA
+  !* FIRST EXECUTABLE STATEMENT  LLSIA
   IF ( Info<0.OR.Info>1 ) THEN
     CALL XERMSG('SLATEC','LLSIA','INFO OUT OF RANGE',2,1)
     RETURN

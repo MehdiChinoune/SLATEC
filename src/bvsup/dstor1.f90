@@ -1,24 +1,32 @@
-!DECK DSTOR1
+!** DSTOR1
 SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSTOR1
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (STOR1-S, DSTOR1-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (STOR1-S, DSTOR1-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !             0 -- storage at output points.
   !     NTEMP =
   !             1 -- temporary storage
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  DBVSUP
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    DML8SZ
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBVSUP
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    DML8SZ
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890921  Realigned order of variables in certain COMMON blocks.
@@ -26,7 +34,7 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DSTOR1
+  
   INTEGER IGOfx, INHomo, IVP, j, NCOmp, nctnf, Ndisk, NFC, Ntape, &
     Ntemp
   REAL(8) :: C, U(*), V(*), XSAv, Yh(*), Yp(*)
@@ -38,7 +46,7 @@ SUBROUTINE DSTOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   !      *****************************************************************
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 80
-  !***FIRST EXECUTABLE STATEMENT  DSTOR1
+  !* FIRST EXECUTABLE STATEMENT  DSTOR1
   nctnf = NCOmp*NFC
   DO j = 1, nctnf
     U(j) = Yh(j)

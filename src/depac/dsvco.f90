@@ -1,25 +1,33 @@
-!DECK DSVCO
+!** DSVCO
 SUBROUTINE DSVCO(Rsav,Isav)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSVCO
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DDEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SVCO-S, DSVCO-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DDEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SVCO-S, DSVCO-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   DSVCO transfers data from a common block to arrays within the
   !   integrator package DDEBDF.
   !
-  !***SEE ALSO  DDEBDF
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    DDEBD1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DDEBDF
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    DDEBD1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820301  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DSVCO
+  
   !-----------------------------------------------------------------------
   ! THIS ROUTINE STORES IN RSAV AND ISAV THE CONTENTS OF COMMON BLOCK
   ! DDEBD1 , WHICH IS USED INTERNALLY IN THE DDEBDF PACKAGE.
@@ -34,7 +42,7 @@ SUBROUTINE DSVCO(Rsav,Isav)
   COMMON /DDEBD1/ RLS(218), ILS(33)
   DATA lenrls/218/, lenils/33/
   !
-  !***FIRST EXECUTABLE STATEMENT  DSVCO
+  !* FIRST EXECUTABLE STATEMENT  DSVCO
   DO i = 1, lenrls
     Rsav(i) = RLS(i)
   ENDDO

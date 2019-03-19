@@ -1,15 +1,22 @@
-!DECK CPTSL
+!** CPTSL
 SUBROUTINE CPTSL(N,D,E,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPTSL
-  !***PURPOSE  Solve a positive definite tridiagonal linear system.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2D2A
-  !***TYPE      COMPLEX (SPTSL-S, DPTSL-D, CPTSL-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX, POSITIVE DEFINITE, SOLVE,
+  !>
+  !***
+  !  Solve a positive definite tridiagonal linear system.
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2D2A
+  !***
+  ! **Type:**      COMPLEX (SPTSL-S, DPTSL-D, CPTSL-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX, POSITIVE DEFINITE, SOLVE,
   !             TRIDIAGONAL
-  !***AUTHOR  Dongarra, J., (ANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Dongarra, J., (ANL)
+  !***
+  ! **Description:**
   !
   !     CPTSL given a positive definite tridiagonal matrix and a right
   !     hand side will find the solution.
@@ -35,17 +42,20 @@ SUBROUTINE CPTSL(N,D,E,B)
   !
   !        B        contains the solution.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890505  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CPTSL
+  
   INTEGER N
   COMPLEX D(*), E(*), B(*)
   !
@@ -54,7 +64,7 @@ SUBROUTINE CPTSL(N,D,E,B)
   !
   !     CHECK FOR 1 X 1 CASE
   !
-  !***FIRST EXECUTABLE STATEMENT  CPTSL
+  !* FIRST EXECUTABLE STATEMENT  CPTSL
   IF ( N/=1 ) THEN
     nm1 = N - 1
     nm1d2 = nm1/2

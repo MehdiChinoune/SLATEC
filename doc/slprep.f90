@@ -1,15 +1,21 @@
-!DECK SLPREP
+!** SLPREP
 PROGRAM SLPREP
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SLPREP
-  !***PURPOSE  Prepare one direct access file and three sequential files
+  !>
+  !***
+  !  Prepare one direct access file and three sequential files
   !            for the SLATEC documentation program.
-  !***LIBRARY   (NONE)
-  !***CATEGORY  R4
-  !***KEYWORDS  DOCUMENTATION, SLADOC, SLATEC
-  !***AUTHOR  Boland, W. Robert, C-8, Los Alamos National Laboratory
+  !***
+  ! **Library:**   (NONE)
+  !***
+  ! **Category:**  R4
+  !***
+  ! **Keywords:**  DOCUMENTATION, SLADOC, SLATEC
+  !***
+  ! **Author:**  Boland, W. Robert, C-8, Los Alamos National Laboratory
   !           Bacon, Barbara A., C-10, Los Alamos National Laboratory
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   This program reads a sequential documentation file where each module
   !   in the file consists of the complete subprogram statement and a
@@ -95,15 +101,18 @@ PROGRAM SLPREP
   !      KMAXJ  - the maximum number of keyword phrases in a subroutine.
   !      LLN    - the maximum number of characters in an input line.
   !
-  !***REFERENCES  Guide to the SLATEC Common Mathematical Library.
-  !***ROUTINES CALLED  CVTCAT, FIND, FTRUN, I1MACH, IFDECK, LENSTR, PSCAT,
+  !***
+  ! **References:**  Guide to the SLATEC Common Mathematical Library.
+  !***
+  ! **Routines called:**  CVTCAT, FIND, FTRUN, I1MACH, IFDECK, LENSTR, PSCAT,
   !                    SETSIZ, SORT, UPCASE, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   870818  DATE WRITTEN
   !   880324  REVISION DATE from Version 3.2
   !   891215  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  !***END PROLOGUE  SLPREP
+  
   !
   !     System dependent parameter definitions.
   !
@@ -154,7 +163,7 @@ PROGRAM SLPREP
   !     Intrinsic functions.
   !
   INTRINSIC ABS, INDEX, MAX, MOD
-  !***FIRST EXECUTABLE STATEMENT  SLPREP
+  !* FIRST EXECUTABLE STATEMENT  SLPREP
   !     OPEN (UNIT=LU6, FILE=FOUT, STATUS='UNKNOWN', FORM='FORMATTED',
   !    +      IOSTAT = INFO)
   !     IF (INFO .NE. 0) THEN
@@ -797,17 +806,24 @@ PROGRAM SLPREP
     ' contain the keyword phrases ',/,' and their',&
     ' pointers or <cr>',/,' (The default is ''',A,''')')
 END PROGRAM SLPREP
-!DECK IFDECK
+!** IFDECK
 LOGICAL FUNCTION IFDECK(Line)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  IFDECK
-  !***PURPOSE  Determine if a line is an *DECK or *DK statement.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  R3C
-  !***TYPE      LOGICAL (IFDECK-L)
-  !***KEYWORDS  DECK
-  !***AUTHOR  Boland, W. Robert, C-8, Los Alamos National Laboratory
-  !***DESCRIPTION
+  !>
+  !***
+  !  Determine if a line is an *DECK or *DK statement.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  R3C
+  !***
+  ! **Type:**      LOGICAL (IFDECK-L)
+  !***
+  ! **Keywords:**  DECK
+  !***
+  ! **Author:**  Boland, W. Robert, C-8, Los Alamos National Laboratory
+  !***
+  ! **Description:**
   !
   !   This FUNCTION determines if a record is an  *DECK or *DK  statement.
   !   If it is, the value  .TRUE.  is returned; otherwise, the value
@@ -818,35 +834,44 @@ LOGICAL FUNCTION IFDECK(Line)
   !      LINE   - a character variable containing the string to be
   !               examined.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  UPCASE
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  UPCASE
+
+  !* REVISION HISTORY  (YYMMDD)
   !   840427  DATE WRITTEN
   !   840430  REVISION DATE from the pre-1990 prologue.
   !   891215  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  !***END PROLOGUE  IFDECK
+  
   !     .. Scalar Arguments ..
   CHARACTER*(*) Line
   !     .. Local Scalars ..
   CHARACTER(6) :: temp
   !     .. External Subroutines ..
   EXTERNAL UPCASE
-  !***FIRST EXECUTABLE STATEMENT  IFDECK
+  !* FIRST EXECUTABLE STATEMENT  IFDECK
   CALL UPCASE(Line(1:6),temp(1:6))
   IFDECK = .TRUE.
-  IF ( temp(1:6)/='!DECK '.AND.temp(1:4)/='!DK ' ) IFDECK = .FALSE.
+  IF ( temp(1:6)/='!** '.AND.temp(1:4)/='!DK ' ) IFDECK = .FALSE.
 END FUNCTION IFDECK
-!DECK IFIF
+!** IFIF
 LOGICAL FUNCTION IFIF(Line)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  IFIF
-  !***PURPOSE  Determine if a line is an  *IF  statement.
-  !***LIBRARY   (NONE)
-  !***CATEGORY  (NONE)
-  !***KEYWORDS  (NONE)
-  !***AUTHOR  Boland, W. Robert, C-8, Los Alamos National Laboratory
-  !***DESCRIPTION
+  !>
+  !***
+  !  Determine if a line is an  *IF  statement.
+  !***
+  ! **Library:**   (NONE)
+  !***
+  ! **Category:**  (NONE)
+  !***
+  ! **Keywords:**  (NONE)
+  !***
+  ! **Author:**  Boland, W. Robert, C-8, Los Alamos National Laboratory
+  !***
+  ! **Description:**
   !
   !   This FUNCTION determines if a record is an  *IF  statement.
   !   If it is, the value  .TRUE.  is returned; otherwise, the value
@@ -857,33 +882,42 @@ LOGICAL FUNCTION IFIF(Line)
   !      LINE   - a character variable containing the string to be
   !               examined.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  UPCASE
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  UPCASE
+
+  !* REVISION HISTORY  (YYMMDD)
   !   910208  DATE WRITTEN
   !   920911  Declarations section restructured.  (WRB)
-  !***END PROLOGUE  IFIF
+  
   !     .. Scalar Arguments ..
   CHARACTER*(*) Line
   !     .. Local Scalars ..
   CHARACTER(3) :: temp
   !     .. External Subroutines ..
   EXTERNAL UPCASE
-  !***FIRST EXECUTABLE STATEMENT  IFIF
+  !* FIRST EXECUTABLE STATEMENT  IFIF
   CALL UPCASE(Line(1:3),temp(1:3))
   IFIF = .TRUE.
   IF ( temp(1:3)/='!IF' ) IFIF = .FALSE.
 END FUNCTION IFIF
-!DECK IFSID
+!** IFSID
 LOGICAL FUNCTION IFSID(Line)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  IFSID
-  !***PURPOSE  Determine if a line is a special *...IDENT statement.
-  !***LIBRARY   (NONE)
-  !***CATEGORY  (NONE)
-  !***KEYWORDS  (NONE)
-  !***AUTHOR  Bacon, Barbara, C-10, (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Determine if a line is a special *...IDENT statement.
+  !***
+  ! **Library:**   (NONE)
+  !***
+  ! **Category:**  (NONE)
+  !***
+  ! **Keywords:**  (NONE)
+  !***
+  ! **Author:**  Bacon, Barbara, C-10, (LANL)
+  !***
+  ! **Description:**
   !
   !   This FUNCTION determines if a record is a  *...IDENT  statement.
   !   If it is, the value  .TRUE.  is returned; otherwise, the value
@@ -894,12 +928,15 @@ LOGICAL FUNCTION IFSID(Line)
   !     LINE   - a character variable containing the string to be
   !              examined.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  UPCASE
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  UPCASE
+
+  !* REVISION HISTORY  (YYMMDD)
   !   910211  DATE WRITTEN
   !   920911  Declarations section restructured.  (WRB)
-  !***END PROLOGUE  IFSID
+  
   !     .. Scalar Arguments ..
   CHARACTER*(*) Line
   !     .. Local Scalars ..
@@ -909,7 +946,7 @@ LOGICAL FUNCTION IFSID(Line)
   EXTERNAL UPCASE
   !     .. Intrinsic Functions ..
   INTRINSIC INDEX
-  !***FIRST EXECUTABLE STATEMENT  IFSID
+  !* FIRST EXECUTABLE STATEMENT  IFSID
   CALL UPCASE(Line(1:20),temp(1:20))
   IFSID = .FALSE.
   IF ( Line(1:1)=='!' ) THEN
@@ -927,16 +964,19 @@ LOGICAL FUNCTION IFSID(Line)
   ENDIF
   RETURN
 END FUNCTION IFSID
-!DECK PSCAT
+!** PSCAT
 SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,&
     Stmts,Nerr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PSCAT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SLPREP
-  !***LIBRARY   (NONE)
-  !***AUTHOR  Bacon, Barbara A., C-10, Los Alamos National Laboratory
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SLPREP
+  !***
+  ! **Library:**   (NONE)
+  !***
+  ! **Author:**  Bacon, Barbara A., C-10, Los Alamos National Laboratory
+  !***
+  ! **Description:**
   !
   !     Creates the data for the FCAT file consisting of two parts:
   !     1) linked lists enabling one to obtain the various categories
@@ -1119,12 +1159,14 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,&
   !       | |----->0            0      38   C14
   !       |<---->123       <---38      39   D
   !
-  !***ROUTINES CALLED  CVTCAT, LENSTR
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CVTCAT, LENSTR
+
+  !* REVISION HISTORY  (YYMMDD)
   !   891215  DATE WRITTEN
   !   891215  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  !***END PROLOGUE  PSCAT
+  
   !     .. Scalar Arguments ..
   INTEGER Istmt, Mncl, Ncat, Ncc, Nerr
   !     .. Array Arguments ..
@@ -1145,7 +1187,7 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,&
   INTRINSIC INDEX
   !     .. Data statements ..
   DATA size/1, 3, 4, 6, 7, 9, 10/
-  !***FIRST EXECUTABLE STATEMENT  PSCAT
+  !* FIRST EXECUTABLE STATEMENT  PSCAT
   Nerr = 0
   Ncc = 0
   opart1 = ' '
@@ -1346,17 +1388,23 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,&
   ENDDO
   Kptr(Ncc+1) = Istmt
 END SUBROUTINE PSCAT
-!DECK SORT
+!** SORT
 SUBROUTINE SORT(R,N,Nr,Cr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SORT
-  !***PURPOSE  Alphabetise a character array and re-order one dependent
+  !>
+  !***
+  !  Alphabetise a character array and re-order one dependent
   !            character array.
-  !***LIBRARY   (NONE)
-  !***CATEGORY  (NONE)
-  !***KEYWORDS  (NONE)
-  !***AUTHOR  Bacon, Barbara A., C-10, Los Alamos National Laboratory
-  !***DESCRIPTION
+  !***
+  ! **Library:**   (NONE)
+  !***
+  ! **Category:**  (NONE)
+  !***
+  ! **Keywords:**  (NONE)
+  !***
+  ! **Author:**  Bacon, Barbara A., C-10, Los Alamos National Laboratory
+  !***
+  ! **Description:**
   !
   !   This subroutine alphabetises a character array.  It then accordingly
   !   reorders up to one dependent character array.
@@ -1368,13 +1416,16 @@ SUBROUTINE SORT(R,N,Nr,Cr)
   !      NR     - the number (0 or 1) of dependent arrays.
   !      CR     - the dependent array of length at most 15 characters.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   891101  DATE WRITTEN
   !   891215  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  !***END PROLOGUE  SORT
+  
   !     .. Scalar Arguments ..
   INTEGER N, Nr
   !     .. Array Arguments ..
@@ -1384,7 +1435,7 @@ SUBROUTINE SORT(R,N,Nr,Cr)
   CHARACTER(15) :: it
   !     .. Intrinsic Functions ..
   INTRINSIC MOD
-  !***FIRST EXECUTABLE STATEMENT  SORT
+  !* FIRST EXECUTABLE STATEMENT  SORT
   m = N
   !     DO 5 I = 1,N
   !       IR(I) = I

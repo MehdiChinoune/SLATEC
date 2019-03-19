@@ -1,18 +1,25 @@
-!DECK DDEABM
+!** DDEABM
 SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DDEABM
-  !***PURPOSE  Solve an initial value problem in ordinary differential
+  !>
+  !***
+  !  Solve an initial value problem in ordinary differential
   !            equations using an Adams-Bashforth method.
-  !***LIBRARY   SLATEC (DEPAC)
-  !***CATEGORY  I1A1B
-  !***TYPE      DOUBLE PRECISION (DEABM-S, DDEABM-D)
-  !***KEYWORDS  ADAMS-BASHFORTH METHOD, DEPAC, INITIAL VALUE PROBLEMS,
+  !***
+  ! **Library:**   SLATEC (DEPAC)
+  !***
+  ! **Category:**  I1A1B
+  !***
+  ! **Type:**      DOUBLE PRECISION (DEABM-S, DDEABM-D)
+  !***
+  ! **Keywords:**  ADAMS-BASHFORTH METHOD, DEPAC, INITIAL VALUE PROBLEMS,
   !             ODE, ORDINARY DIFFERENTIAL EQUATIONS, PREDICTOR-CORRECTOR
-  !***AUTHOR  Shampine, L. F., (SNLA)
+  !***
+  ! **Author:**  Shampine, L. F., (SNLA)
   !           Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   This is the Adams code in the package of differential equation
   !   solvers DEPAC, consisting of the codes DDERKF, DDEABM, and DDEBDF.
@@ -25,9 +32,9 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !             Sandia Laboratories
   !             Albuquerque, New Mexico 87185
   !
-  ! **********************************************************************
-  ! * ABSTRACT *
-  ! ************
+  !- *********************************************************************
+  !-  ABSTRACT *
+  !- ***********
   !
   !   Subroutine DDEABM uses the Adams-Bashforth-Moulton
   !   Predictor-Corrector formulas of orders one through twelve to
@@ -45,9 +52,9 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   D1MACH, and the error handling routine XERMSG.  The only machine
   !   dependent parameters to be assigned appear in D1MACH.
   !
-  ! **********************************************************************
-  ! * Description of The Arguments To DDEABM (An Overview) *
-  ! **********************************************************************
+  !- *********************************************************************
+  !-  Description of The Arguments To DDEABM (An Overview) *
+  !- *********************************************************************
   !
   !   The Parameters are
   !
@@ -102,9 +109,9 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !             T, Y(*), INFO(1), RTOL, ATOL,
   !             IDID, RWORK(*) and IWORK(*).
   !
-  ! **********************************************************************
-  ! * INPUT -- What To Do On The First Call To DDEABM *
-  ! **********************************************************************
+  !- *********************************************************************
+  !-  INPUT -- What To Do On The First Call To DDEABM *
+  !- *********************************************************************
   !
   !   The first call of the code is defined to be the start of each new
   !   problem.  Read through the descriptions of all the following items,
@@ -322,9 +329,9 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !             choose to use them, dimension them in your calling program
   !             and in DF as arrays of appropriate length.
   !
-  ! **********************************************************************
-  ! * OUTPUT -- After Any Return From DDEABM *
-  ! **********************************************************************
+  !- *********************************************************************
+  !-  OUTPUT -- After Any Return From DDEABM *
+  !- *********************************************************************
   !
   !   The principal aim of the code is to return a computed solution at
   !   TOUT, although it is also possible to obtain intermediate results
@@ -417,10 +424,10 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !                        Y(*) when IDID=1 or 2, and by interpolation
   !                        when IDID=3.
   !
-  ! **********************************************************************
-  ! * INPUT -- What To Do To Continue The Integration *
-  ! *             (calls after the first)             *
-  ! **********************************************************************
+  !- *********************************************************************
+  !-  INPUT -- What To Do To Continue The Integration *
+  !-              (calls after the first)             *
+  !- *********************************************************************
   !
   !        This code is organized so that subsequent calls to continue the
   !        integration involve little (if any) additional effort on your
@@ -513,12 +520,12 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !                     problem.  An attempt to do so will result in your
   !                     run being terminated.
   !
-  ! **********************************************************************
-  ! *Long Description:
+  !- *********************************************************************
+  !- Long Description:
   !
-  ! **********************************************************************
-  ! *             DEPAC Package Overview           *
-  ! **********************************************************************
+  !- *********************************************************************
+  !-              DEPAC Package Overview           *
+  !- *********************************************************************
   !
   ! ....   You have a choice of three differential equation solvers from
   ! ....   DEPAC. The following brief descriptions are meant to aid you in
@@ -560,13 +567,16 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   ! ....   or DDEABM. Both of these codes will inform you of stiffness
   ! ....   when the cost of solving such problems becomes important.
   !
-  ! *********************************************************************
+  !- ********************************************************************
   !
-  !***REFERENCES  L. F. Shampine and H. A. Watts, DEPAC - design of a user
+  !***
+  ! **References:**  L. F. Shampine and H. A. Watts, DEPAC - design of a user
   !                 oriented package of ODE solvers, Report SAND79-2374,
   !                 Sandia Laboratories, 1979.
-  !***ROUTINES CALLED  DDES, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DDES, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -576,7 +586,7 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DDEABM
+  
   INTEGER igi, ixold
   INTEGER ialpha, ibeta, idelsn, Idid, ifouru, ig, ihold, Info, ip, &
     Ipar, iphi, ipsi, isig, itold, itstar, itwou, iv, iw, &
@@ -593,7 +603,7 @@ SUBROUTINE DDEABM(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !
   !     CHECK FOR AN APPARENT INFINITE LOOP
   !
-  !***FIRST EXECUTABLE STATEMENT  DDEABM
+  !* FIRST EXECUTABLE STATEMENT  DDEABM
   IF ( Info(1)==0 ) Iwork(Liw) = 0
   IF ( Iwork(Liw)>=5 ) THEN
     IF ( T==Rwork(21+Neq) ) THEN

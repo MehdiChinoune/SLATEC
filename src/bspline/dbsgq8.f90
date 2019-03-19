@@ -1,13 +1,17 @@
-!DECK DBSGQ8
+!** DBSGQ8
 SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBSGQ8
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBFQAD
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (BSGQ8-S, DBSGQ8-D)
-  !***AUTHOR  Jones, R. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBFQAD
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (BSGQ8-S, DBSGQ8-D)
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract    **** A DOUBLE PRECISION routine ****
   !
@@ -52,9 +56,12 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   !               2 ANS probably does not meet requested error tolerance.
   !        WORK- Work vector of length 3*K for DBVALU
   !
-  !***SEE ALSO  DBFQAD
-  !***ROUTINES CALLED  D1MACH, DBVALU, I1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBFQAD
+  !***
+  ! **Routines called:**  D1MACH, DBVALU, I1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -64,7 +71,7 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  !***END PROLOGUE  DBSGQ8
+  
   !
   INTERFACE
     REAL(8) FUNCTION FUN(X)
@@ -90,7 +97,7 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   !
   !     INITIALIZE
   !
-  !***FIRST EXECUTABLE STATEMENT  DBSGQ8
+  !* FIRST EXECUTABLE STATEMENT  DBSGQ8
   k = I1MACH(14)
   anib = D1MACH(5)*k/0.30102000D0
   nbits = INT(anib)

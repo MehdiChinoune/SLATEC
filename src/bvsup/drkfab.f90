@@ -1,35 +1,43 @@
-!DECK DRKFAB
+!** DRKFAB
 SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     W,S,Stowa,G,Work,Iwork,Nfcc)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DRKFAB
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (RKFAB-S, DRKFAB-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (RKFAB-S, DRKFAB-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     Subroutine DRKFAB integrates the initial value equations using
   !     the variable-step Runge-Kutta-Fehlberg integration scheme or
   !     the variable-order Adams method and orthonormalization
   !     determined by a linear dependence test.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  DBVSUP
-  !***ROUTINES CALLED  DBVDER, DDEABM, DDERKF, DREORT, DSTOR1
-  !***COMMON BLOCKS    DML15T, DML17B, DML18J, DML8SZ
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBVSUP
+  !***
+  ! **Routines called:**  DBVDER, DDEABM, DDERKF, DREORT, DSTOR1
+  !***
+  ! COMMON BLOCKS    DML15T, DML17B, DML18J, DML8SZ
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890921  Realigned order of variables in certain COMMON blocks.
   !           (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DRKFAB
+  
   !
   INTEGER ICOco, idid, Iflag, IGOfx, INDpvt, INFo, INHomo, INTeg, &
     ipar, ISTkop, IVP, j, jflag, jon, K1, K10, K11, K2, K3, &
@@ -61,7 +69,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 220
   !        BEGIN BLOCK PERMITTING ...EXITS TO 10
-  !***FIRST EXECUTABLE STATEMENT  DRKFAB
+  !* FIRST EXECUTABLE STATEMENT  DRKFAB
   kod = 1
   non = 1
   X = XBEg

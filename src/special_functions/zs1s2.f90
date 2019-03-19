@@ -1,13 +1,17 @@
-!DECK ZS1S2
+!** ZS1S2
 SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZS1S2
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZAIRY and ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CS1S2-A, ZS1S2-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZAIRY and ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CS1S2-A, ZS1S2-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZS1S2 TESTS FOR A POSSIBLE UNDERFLOW RESULTING FROM THE
   !     ADDITION OF THE I AND K FUNCTIONS IN THE ANALYTIC CON-
@@ -17,13 +21,16 @@ SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
   !     OF MAGNITUDE AND THE MAXIMUM MUST BE AT LEAST ONE
   !     PRECISION ABOVE THE UNDERFLOW LIMIT.
   !
-  !***SEE ALSO  ZAIRY, ZBESK
-  !***ROUTINES CALLED  ZABS, ZEXP, ZLOG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZAIRY, ZBESK
+  !***
+  ! **Routines called:**  ZABS, ZEXP, ZLOG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP and ZLOG to EXTERNAL statement.  (RWC)
-  !***END PROLOGUE  ZS1S2
+  
   !     COMPLEX CZERO,C1,S1,S1D,S2,ZR
   REAL(8) :: aa, Alim, aln, Ascle, as1, as2, c1i, c1r, s1di, &
     s1dr, S1i, S1r, S2i, S2r, zeroi, zeror, Zri, &
@@ -31,7 +38,7 @@ SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
   INTEGER Iuf, idum, Nz
   EXTERNAL ZABS, ZEXP, ZLOG
   DATA zeror, zeroi/0.0D0, 0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  ZS1S2
+  !* FIRST EXECUTABLE STATEMENT  ZS1S2
   Nz = 0
   as1 = ZABS(S1r,S1i)
   as2 = ZABS(S2r,S2i)

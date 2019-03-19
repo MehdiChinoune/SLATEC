@@ -1,20 +1,27 @@
-!DECK DHVNRM
+!** DHVNRM
 REAL(8) FUNCTION DHVNRM(V,Ncomp)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DHVNRM
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DDEABM, DDEBDF and DDERKF
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (HVNRM-S, DHVNRM-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DDEABM, DDEBDF and DDERKF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (HVNRM-S, DHVNRM-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Compute the maximum norm of the vector V(*) of length NCOMP and
   !     return the result as DHVNRM
   !
-  !***SEE ALSO  DDEABM, DDEBDF, DDERKF
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DDEABM, DDEBDF, DDERKF
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -23,12 +30,12 @@ REAL(8) FUNCTION DHVNRM(V,Ncomp)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DHVNRM
+  
   !
   INTEGER k, Ncomp
   REAL(8) :: V
   DIMENSION V(*)
-  !***FIRST EXECUTABLE STATEMENT  DHVNRM
+  !* FIRST EXECUTABLE STATEMENT  DHVNRM
   DHVNRM = 0.0D0
   DO k = 1, Ncomp
     DHVNRM = MAX(DHVNRM,ABS(V(k)))

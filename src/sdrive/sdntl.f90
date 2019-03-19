@@ -1,24 +1,28 @@
-!DECK SDNTL
+!** SDNTL
 SUBROUTINE SDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
     Ml,Mu,N,Nde,Save1,T,Uround,USERS,Y,Ywt,H,Mntold,Mtrold,&
     Nfe,Rc,Yh,A,Convrg,El,Fac,Ier,Ipvt,Nq,Nwait,Rh,Rmax,&
     Save2,Tq,Trend,Iswflg,Jstate)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SDNTL
-  !***SUBSIDIARY
-  !***PURPOSE  Subroutine SDNTL is called to set parameters on the first
+  !>
+  !***
+  !  Subroutine SDNTL is called to set parameters on the first
   !            call to SDSTP, on an internal restart, or when the user has
   !            altered MINT, MITER, and/or H.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***TYPE      SINGLE PRECISION (SDNTL-S, DDNTL-D, CDNTL-C)
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Type:**      SINGLE PRECISION (SDNTL-S, DDNTL-D, CDNTL-C)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  On the first call, the order is set to 1 and the initial derivatives
   !  are calculated.  RMAX is the maximum ratio by which H can be
@@ -33,11 +37,13 @@ SUBROUTINE SDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   !  steps.  Also, RC is reset.  RC is the ratio of new to old values of
   !  the coefficient L(0)*H.  If the caller has changed MITER, RC is
   !  set to 0 to force the partials to be updated, if partials are used.
-  !***ROUTINES CALLED  SDCST, SDSCL, SGBFA, SGBSL, SGEFA, SGESL, SNRM2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SDCST, SDSCL, SGBFA, SGBSL, SGEFA, SGESL, SNRM2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  SDNTL
+  
   INTEGER i, iflag, Impl, info, Iswflg, Jstate, Jtask, Matdim, &
     Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mu, N, Nde, &
     Nfe, Nq, Nwait
@@ -47,7 +53,7 @@ SUBROUTINE SDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   INTEGER Ipvt(*)
   LOGICAL Convrg, Ier
   PARAMETER (RMINIT=10000.E0)
-  !***FIRST EXECUTABLE STATEMENT  SDNTL
+  !* FIRST EXECUTABLE STATEMENT  SDNTL
   Ier = .FALSE.
   IF ( Jtask>=0 ) THEN
     IF ( Jtask==0 ) THEN

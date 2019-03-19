@@ -1,17 +1,24 @@
-!DECK SSPDI
+!** SSPDI
 SUBROUTINE SSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSPDI
-  !***PURPOSE  Compute the determinant, inertia, inverse of a real
+  !>
+  !***
+  !  Compute the determinant, inertia, inverse of a real
   !            symmetric matrix stored in packed form using the factors
   !            from SSPFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1A, D3B1A
-  !***TYPE      SINGLE PRECISION (SSPDI-S, DSPDI-D, CHPDI-C, CSPDI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1A, D3B1A
+  !***
+  ! **Type:**      SINGLE PRECISION (SSPDI-S, DSPDI-D, CHPDI-C, CSPDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             PACKED, SYMMETRIC
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     SSPDI computes the determinant, inertia and inverse
   !     of a real symmetric matrix using the factors from SSPFA,
@@ -66,10 +73,13 @@ SUBROUTINE SSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   !        and  SSPCO  has set RCOND .EQ. 0.0
   !        or  SSPFA  has set  INFO .NE. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SAXPY, SCOPY, SDOT, SSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SAXPY, SCOPY, SDOT, SSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -79,7 +89,7 @@ SUBROUTINE SSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SSPDI
+  
   INTEGER N, Job
   REAL Ap(*), Work(*)
   REAL Det(2)
@@ -90,7 +100,7 @@ SUBROUTINE SSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   INTEGER ij, ik, ikp1, iks, j, jb, jk, jkp1
   INTEGER k, kk, kkp1, km1, ks, ksj, kskp1, kstep
   LOGICAL noinv, nodet, noert
-  !***FIRST EXECUTABLE STATEMENT  SSPDI
+  !* FIRST EXECUTABLE STATEMENT  SSPDI
   noinv = MOD(Job,10)==0
   nodet = MOD(Job,100)/10==0
   noert = MOD(Job,1000)/100==0

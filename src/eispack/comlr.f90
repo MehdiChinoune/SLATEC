@@ -1,15 +1,22 @@
-!DECK COMLR
+!** COMLR
 SUBROUTINE COMLR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  COMLR
-  !***PURPOSE  Compute the eigenvalues of a complex upper Hessenberg
+  !>
+  !***
+  !  Compute the eigenvalues of a complex upper Hessenberg
   !            matrix using the modified LR method.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C2B
-  !***TYPE      COMPLEX (COMLR-C)
-  !***KEYWORDS  EIGENVALUES, EISPACK, LR METHOD
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C2B
+  !***
+  ! **Type:**      COMPLEX (COMLR-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EISPACK, LR METHOD
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure COMLR,
   !     NUM. MATH. 12, 369-376(1968) by Martin and Wilkinson.
@@ -65,25 +72,28 @@ SUBROUTINE COMLR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  CDIV, CSROOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDIV, CSROOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  COMLR
+  
   !
   INTEGER i, j, l, m, N, en, ll, mm, Nm, Igh, im1, itn, its, &
     Low, mp1, enm1, Ierr
   REAL Hr(Nm,*), Hi(Nm,*), Wr(*), Wi(*)
   REAL si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, s1, s2
   !
-  !***FIRST EXECUTABLE STATEMENT  COMLR
+  !* FIRST EXECUTABLE STATEMENT  COMLR
   Ierr = 0
   !     .......... STORE ROOTS ISOLATED BY CBAL ..........
   DO i = 1, N

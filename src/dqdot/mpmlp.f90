@@ -1,28 +1,35 @@
-!DECK MPMLP
+!** MPMLP
 SUBROUTINE MPMLP(U,V,W,J)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  MPMLP
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (MPMLP-A)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DQDOTA and DQDOTI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (MPMLP-A)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   ! Performs inner multiplication loop for MPMUL. Carries are not pro-
   ! pagated in inner loop, which saves time at the expense of space.
   !
-  !***SEE ALSO  DQDOTA, DQDOTI
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DQDOTA, DQDOTI
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  MPMLP
+  
   INTEGER i, J
   INTEGER U(*), V(*), W
-  !***FIRST EXECUTABLE STATEMENT  MPMLP
+  !* FIRST EXECUTABLE STATEMENT  MPMLP
   DO i = 1, J
     U(i) = U(i) + W*V(i)
   ENDDO

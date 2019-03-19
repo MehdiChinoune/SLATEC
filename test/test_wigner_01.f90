@@ -2,28 +2,36 @@ MODULE TEST15_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK QC36J
+  !** QC36J
   SUBROUTINE QC36J(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QC36J
-    !***SUBSIDIARY
-    !***PURPOSE  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES RC3JJ,
+    !>
+    !***
+    !  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES RC3JJ,
     !            RC3JM, AND RC6J, WHICH CALCULATE THE WIGNER COEFFICIENTS,
     !            3J AND 6J.
-    !***LIBRARY   SLATEC
-    !***CATEGORY  C19
-    !***TYPE      SINGLE PRECISION (QC36J-S, DQC36J-D)
-    !***KEYWORDS  3J COEFFICIENTS, 3J SYMBOLS, 6J COEFFICIENTS, 6J SYMBOLS,
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Category:**  C19
+    !***
+    ! **Type:**      SINGLE PRECISION (QC36J-S, DQC36J-D)
+    !***
+    ! **Keywords:**  3J COEFFICIENTS, 3J SYMBOLS, 6J COEFFICIENTS, 6J SYMBOLS,
     !             CLEBSCH-GORDAN COEFFICIENTS, QUICK CHECK,
     !             RACAH COEFFICIENTS, VECTOR ADDITION COEFFICIENTS,
     !             WIGNER COEFFICIENTS
-    !***AUTHOR  LOZIER, DANIEL W., (NIST)
+    !***
+    ! **Author:**  LOZIER, DANIEL W., (NIST)
     !           MCCLAIN, MARJORIE A., (NIST)
     !           SMITH, JOHN M., (NIST AND GEORGE MASON UNIVERSITY)
-    !***REFERENCES  MESSIAH, ALBERT., QUANTUM MECHANICS, VOLUME II,
+    !***
+    ! **References:**  MESSIAH, ALBERT., QUANTUM MECHANICS, VOLUME II,
     !               NORTH-HOLLAND PUBLISHING COMPANY, 1963.
-    !***ROUTINES CALLED  NUMXER, R1MACH, RC3JJ, RC3JM, RC6J, XERCLR, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  NUMXER, R1MACH, RC3JJ, RC3JM, RC6J, XERCLR, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   891129  DATE WRITTEN
     !   910415  Mixed type expressions eliminated; precision of output
     !           formats made uniform for all tests; detail added to output
@@ -35,7 +43,7 @@ CONTAINS
     !           and 4 with values stored in data statements.  This involved
     !           removing all calls to subroutine RACAH.  These changes were
     !           made by M. McClain.
-    !***END PROLOGUE  QC36J
+    
     !
     INTEGER Lun, Kprint, Ipass
     !
@@ -69,7 +77,7 @@ CONTAINS
       2.52095005479558458604E-2, 1.48399056122171330285E-2, &
       2.70857768063318559724E-3/
     !
-    !***FIRST EXECUTABLE STATEMENT  QC36J
+    !* FIRST EXECUTABLE STATEMENT  QC36J
     !
     ! --- INITIALIZATION OF TESTS
     tol = 100.0*R1MACH(3)
@@ -473,28 +481,35 @@ CONTAINS
     !
   END SUBROUTINE QC36J
 END MODULE TEST15_MOD
-!DECK TEST15
+!** TEST15
 PROGRAM TEST15
   USE TEST15_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST15
-  !***PURPOSE  Driver for testing SLATEC subprograms
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
   !            RC3JJ    RC3JM    RC6J
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C19
-  !***TYPE      SINGLE PRECISION (TEST15-S, TEST16-D)
-  !***KEYWORDS  3J COEFFICIENTS, 3J SYMBOLS, 6J COEFFICIENTS, 6J SYMBOLS,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C19
+  !***
+  ! **Type:**      SINGLE PRECISION (TEST15-S, TEST16-D)
+  !***
+  ! **Keywords:**  3J COEFFICIENTS, 3J SYMBOLS, 6J COEFFICIENTS, 6J SYMBOLS,
   !             CLEBSCH-GORDAN COEFFICIENTS, QUICK CHECK DRIVER,
   !             RACAH COEFFICIENTS, VECTOR ADDITION COEFFICIENTS,
   !             WIGNER COEFFICIENTS
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -506,20 +521,23 @@ PROGRAM TEST15
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        RC3JJ    RC3JM    RC6J
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  I1MACH, QC36J, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  I1MACH, QC36J, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   891130  DATE WRITTEN
-  !***END PROLOGUE  TEST15
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST15
+  !* FIRST EXECUTABLE STATEMENT  TEST15
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

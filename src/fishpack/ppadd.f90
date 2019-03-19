@@ -1,13 +1,17 @@
-!DECK PPADD
+!** PPADD
 SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PPADD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BLKTRI
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (PPADD-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BLKTRI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (PPADD-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   PPADD computes the eigenvalues of the periodic tridiagonal matrix
   !   with coefficients AN,BN,CN.
@@ -18,15 +22,19 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   !   BH   is used to temporarily store the roots of the B HAT polynomial
   !        which enters through BP.
   !
-  !***SEE ALSO  BLKTRI
-  !***ROUTINES CALLED  BSRH, PPSGF, PPSPF, PSGF
-  !***COMMON BLOCKS    CBLKT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BLKTRI
+  !***
+  ! **Routines called:**  BSRH, PPSGF, PPSPF, PSGF
+  !***
+  ! COMMON BLOCKS    CBLKT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  PPADD
+  
   REAL A, Bh, Bp, BSRH, C, CNV, db, EPS, PPSGF, PPSPF, psg, &
     PSGF, scnv, sgn, xl, xm, xr
   INTEGER i3, icv, Ierror, if, ig, IK, is, it, iz, j, K, modiz, &
@@ -35,7 +43,7 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   DIMENSION A(*), C(*), Bp(*), Bh(*), Cbp(*)
   COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
   EXTERNAL PSGF, PPSPF, PPSGF
-  !***FIRST EXECUTABLE STATEMENT  PPADD
+  !* FIRST EXECUTABLE STATEMENT  PPADD
   scnv = SQRT(CNV)
   iz = N
   IF ( Bp(N)<Bp(1) ) THEN

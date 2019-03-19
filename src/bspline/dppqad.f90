@@ -1,15 +1,22 @@
-!DECK DPPQAD
+!** DPPQAD
 SUBROUTINE DPPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPPQAD
-  !***PURPOSE  Compute the integral on (X1,X2) of a K-th order B-spline
+  !>
+  !***
+  !  Compute the integral on (X1,X2) of a K-th order B-spline
   !            using the piecewise polynomial (PP) representation.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  H2A2A1, E3, K6
-  !***TYPE      DOUBLE PRECISION (PPQAD-S, DPPQAD-D)
-  !***KEYWORDS  B-SPLINE, DATA FITTING, INTERPOLATION, QUADRATURE, SPLINES
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  H2A2A1, E3, K6
+  !***
+  ! **Type:**      DOUBLE PRECISION (PPQAD-S, DPPQAD-D)
+  !***
+  ! **Keywords:**  B-SPLINE, DATA FITTING, INTERPOLATION, QUADRATURE, SPLINES
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract    **** a double precision routine ****
   !         DPPQAD computes the integral on (X1,X2) of a K-th order
@@ -36,11 +43,14 @@ SUBROUTINE DPPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   !     Error Conditions
   !         Improper input is a fatal error
   !
-  !***REFERENCES  D. E. Amos, Quadrature subroutines for splines and
+  !***
+  ! **References:**  D. E. Amos, Quadrature subroutines for splines and
   !                 B-splines, Report SAND79-1825, Sandia Laboratories,
   !                 December 1979.
-  !***ROUTINES CALLED  DINTRV, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DINTRV, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -48,7 +58,7 @@ SUBROUTINE DPPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DPPQAD
+  
   !
   INTEGER i, ii, il, ilo, il1, il2, im, K, Ldc, left, Lxi, mf1, &
     mf2
@@ -56,7 +66,7 @@ SUBROUTINE DPPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
     tb, x, Xi, X1, X2
   DIMENSION Xi(*), C(Ldc,*), ss(2)
   !
-  !***FIRST EXECUTABLE STATEMENT  DPPQAD
+  !* FIRST EXECUTABLE STATEMENT  DPPQAD
   Pquad = 0.0D0
   IF ( K<1 ) THEN
     !

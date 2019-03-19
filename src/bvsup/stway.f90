@@ -1,29 +1,37 @@
-!DECK STWAY
+!** STWAY
 SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  STWAY
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (STWAY-S, DSTWAY-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (STWAY-S, DSTWAY-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !  This subroutine stores (recalls) integration data in the event
   !  that a restart is needed (the homogeneous solution vectors become
   !  too dependent to continue)
   !
-  !***SEE ALSO  BVSUP
-  !***ROUTINES CALLED  STOR1
-  !***COMMON BLOCKS    ML15TO, ML18JR, ML8SZ
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **Routines called:**  STOR1
+  !***
+  ! COMMON BLOCKS    ML15TO, ML18JR, ML8SZ
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890921  Realigned order of variables in certain COMMON blocks.
   !           (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  STWAY
+  
   REAL AE, C, PWCnd, PX, RE, Stowa, TND, TOL, U, V, X, XBEg, &
     XENd, XOP, XOT, XSAv, Yhp
   INTEGER ICOco, IGOfx, INDpvt, INFo, INHomo, Inout, INTeg, ISTkop, &
@@ -39,7 +47,7 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
     NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
     NUMort, NFCc, ICOco
   !
-  !***FIRST EXECUTABLE STATEMENT  STWAY
+  !* FIRST EXECUTABLE STATEMENT  STWAY
   IF ( Inout==1 ) THEN
     !
     !     RECALL FROM STOWA ARRAY AND ISTKOP

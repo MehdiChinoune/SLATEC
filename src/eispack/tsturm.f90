@@ -1,17 +1,24 @@
-!DECK TSTURM
+!** TSTURM
 SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
     Rv5,Rv6)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TSTURM
-  !***PURPOSE  Find those eigenvalues of a symmetric tridiagonal matrix
+  !>
+  !***
+  !  Find those eigenvalues of a symmetric tridiagonal matrix
   !            in a given interval and their associated eigenvectors by
   !            Sturm sequencing.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A5, D4C2A
-  !***TYPE      SINGLE PRECISION (TSTURM-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A5, D4C2A
+  !***
+  ! **Type:**      SINGLE PRECISION (TSTURM-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine finds those eigenvalues of a TRIDIAGONAL
   !     SYMMETRIC matrix which lie in a specified interval and their
@@ -103,18 +110,21 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  TSTURM
+  
   REAL R1MACH
   INTEGER i, j, k, M, N, p, q, r, s, ii, ip, jj, Mm, m1, m2, &
     Nm, its
@@ -128,7 +138,7 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
   !
   SAVE first, machep
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  TSTURM
+  !* FIRST EXECUTABLE STATEMENT  TSTURM
   IF ( first ) machep = R1MACH(4)
   first = .FALSE.
   !

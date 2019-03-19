@@ -1,18 +1,25 @@
-!DECK CTRSM
+!** CTRSM
 SUBROUTINE CTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CTRSM
-  !***PURPOSE  Solve a complex triangular system of equations with
+  !>
+  !***
+  !  Solve a complex triangular system of equations with
   !            multiple right-hand sides.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B6
-  !***TYPE      COMPLEX (STRSM-S, DTRSM-D, CTRSM-C)
-  !***KEYWORDS  LEVEL 3 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J., (ANL)
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B6
+  !***
+  ! **Type:**      COMPLEX (STRSM-S, DTRSM-D, CTRSM-C)
+  !***
+  ! **Keywords:**  LEVEL 3 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J., (ANL)
   !           Duff, I., (AERE)
   !           Du Croz, J., (NAG)
   !           Hammarling, S. (NAG)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  CTRSM  solves one of the matrix equations
   !
@@ -119,15 +126,18 @@ SUBROUTINE CTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !           max( 1, m ).
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J., Du Croz, J., Duff, I., and Hammarling, S.
+  !***
+  ! **References:**  Dongarra, J., Du Croz, J., Duff, I., and Hammarling, S.
   !                 A set of level 3 basic linear algebra subprograms.
   !                 ACM TOMS, Vol. 16, No. 1, pp. 1-17, March 1990.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890208  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  CTRSM
+  
   !     .. Scalar Arguments ..
   CHARACTER :: Side, Uplo, Transa, Diag
   INTEGER M, N, Lda, Ldb
@@ -150,7 +160,7 @@ SUBROUTINE CTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   PARAMETER (ONE=(1.0E+0,0.0E+0))
   COMPLEX ZERO
   PARAMETER (ZERO=(0.0E+0,0.0E+0))
-  !***FIRST EXECUTABLE STATEMENT  CTRSM
+  !* FIRST EXECUTABLE STATEMENT  CTRSM
   !
   !     Test the input parameters.
   !

@@ -1,22 +1,29 @@
-!DECK CBKNU
+!** CBKNU
 SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CBKNU
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CAIRY, CBESH, CBESI and CBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CBKNU-A, ZBKNU-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CAIRY, CBESH, CBESI and CBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CBKNU-A, ZBKNU-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     CBKNU COMPUTES THE K BESSEL FUNCTION IN THE RIGHT HALF Z PLANE
   !
-  !***SEE ALSO  CAIRY, CBESH, CBESI, CBESK
-  !***ROUTINES CALLED  CKSCL, CSHCH, CUCHK, GAMLN, I1MACH, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CAIRY, CBESH, CBESI, CBESK
+  !***
+  ! **Routines called:**  CKSCL, CSHCH, CUCHK, GAMLN, I1MACH, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CBKNU
+  
   !
   COMPLEX cch, ck, coef, cone, crsc, cs, cscl, csh, csr, css, &
     ctwo, cz, czero, f, fmu, p, pt, p1, p2, q, rz, smu, &
@@ -45,7 +52,7 @@ SUBROUTINE CBKNU(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
     -2.15241674114950973E-04, -2.01348547807882387E-05, &
     1.13302723198169588E-06, 6.11609510448141582E-09/
   !
-  !***FIRST EXECUTABLE STATEMENT  CBKNU
+  !* FIRST EXECUTABLE STATEMENT  CBKNU
   xx = REAL(Z)
   yy = AIMAG(Z)
   caz = ABS(Z)

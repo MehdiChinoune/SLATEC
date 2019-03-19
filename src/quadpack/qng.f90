@@ -1,23 +1,30 @@
-!DECK QNG
+!** QNG
 SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QNG
-  !***PURPOSE  The routine calculates an approximation result to a
+  !>
+  !***
+  !  The routine calculates an approximation result to a
   !            given definite integral I = integral of F over (A,B),
   !            hopefully satisfying following claim for accuracy
   !            ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I)).
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A1A1
-  !***TYPE      SINGLE PRECISION (QNG-S, DQNG-D)
-  !***KEYWORDS  AUTOMATIC INTEGRATOR, GAUSS-KRONROD(PATTERSON) RULES,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A1A1
+  !***
+  ! **Type:**      SINGLE PRECISION (QNG-S, DQNG-D)
+  !***
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, GAUSS-KRONROD(PATTERSON) RULES,
   !             NONADAPTIVE, QUADPACK, QUADRATURE, SMOOTH INTEGRAND
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   ! NON-ADAPTIVE INTEGRATION
   ! STANDARD FORTRAN SUBROUTINE
@@ -76,15 +83,18 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !                            EPSREL.LT.MAX(50*REL.MACH.ACC.,0.5D-28).
   !                            RESULT, ABSERR and NEVAL are set to zero.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  QNG
+  
   REAL w21b
   REAL A, absc, Abserr, B, centr, dhlgth, epmach, Epsabs, Epsrel, &
     F, fcentr, fval, fval1, fval2, fv1, fv2, fv3, fv4, hlgth, &
@@ -229,7 +239,7 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !           EPMACH IS THE LARGEST RELATIVE SPACING.
   !           UFLOW IS THE SMALLEST POSITIVE MAGNITUDE.
   !
-  !***FIRST EXECUTABLE STATEMENT  QNG
+  !* FIRST EXECUTABLE STATEMENT  QNG
   epmach = R1MACH(4)
   uflow = R1MACH(1)
   !
@@ -336,7 +346,7 @@ SUBROUTINE QNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
       IF ( resabs>uflow/(0.5E+02*epmach) )&
         Abserr = MAX((epmach*0.5E+02)*resabs,Abserr)
       IF ( Abserr<=MAX(Epsabs,Epsrel*ABS(Result)) ) Ier = 0
-      ! ***JUMP OUT OF DO-LOOP
+      !- **JUMP OUT OF DO-LOOP
       IF ( Ier==0 ) RETURN
     ENDDO
   ENDIF

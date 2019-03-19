@@ -1,13 +1,17 @@
-!DECK CHFIE
+!** CHFIE
 REAL FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHFIE
-  !***SUBSIDIARY
-  !***PURPOSE  Evaluates integral of a single cubic for PCHIA
-  !***LIBRARY   SLATEC (PCHIP)
-  !***TYPE      SINGLE PRECISION (CHFIE-S, DCHFIE-D)
-  !***AUTHOR  Fritsch, F. N., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Evaluates integral of a single cubic for PCHIA
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Type:**      SINGLE PRECISION (CHFIE-S, DCHFIE-D)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
+  !***
+  ! **Description:**
   !
   !          CHFIE:  Cubic Hermite Function Integral Evaluator.
   !
@@ -35,9 +39,12 @@ REAL FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !
   !     A,B -- (input) endpoints of interval of integration.
   !
-  !***SEE ALSO  PCHIA
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  PCHIA
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820730  DATE WRITTEN
   !   820805  Converted to SLATEC library version.
   !   870813  Minor cosmetic changes.
@@ -50,7 +57,7 @@ REAL FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
   !   930503  Corrected to set VALUE=0 when IERR.ne.0.  (FNF)
   !   930504  Eliminated IERR and changed name from CHFIV to CHFIE.  (FNF)
-  !***END PROLOGUE  CHFIE
+  
   !
   !  Programming notes:
   !  1. There is no error return from this routine because zero is
@@ -74,7 +81,7 @@ REAL FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !
   !  VALIDITY CHECK INPUT.
   !
-  !***FIRST EXECUTABLE STATEMENT  CHFIE
+  !* FIRST EXECUTABLE STATEMENT  CHFIE
   IF ( X1==X2 ) THEN
     CHFIE = 0
   ELSE

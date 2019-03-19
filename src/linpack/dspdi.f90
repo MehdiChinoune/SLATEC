@@ -1,17 +1,24 @@
-!DECK DSPDI
+!** DSPDI
 SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSPDI
-  !***PURPOSE  Compute the determinant, inertia, inverse of a real
+  !>
+  !***
+  !  Compute the determinant, inertia, inverse of a real
   !            symmetric matrix stored in packed form using the factors
   !            from DSPFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1A, D3B1A
-  !***TYPE      DOUBLE PRECISION (SSPDI-S, DSPDI-D, CHPDI-C, CSPDI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1A, D3B1A
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSPDI-S, DSPDI-D, CHPDI-C, CSPDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             PACKED, SYMMETRIC
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     DSPDI computes the determinant, inertia and inverse
   !     of a double precision symmetric matrix using the factors from
@@ -66,10 +73,13 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   !        and  DSPCO  has set RCOND .EQ. 0.0
   !        or  DSPFA  has set  INFO .NE. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DCOPY, DDOT, DSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DCOPY, DDOT, DSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -79,7 +89,7 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DSPDI
+  
   INTEGER N, Job
   REAL(8) :: Ap(*), Work(*)
   REAL(8) :: Det(2)
@@ -90,7 +100,7 @@ SUBROUTINE DSPDI(Ap,N,Kpvt,Det,Inert,Work,Job)
   INTEGER ij, ik, ikp1, iks, j, jb, jk, jkp1
   INTEGER k, kk, kkp1, km1, ks, ksj, kskp1, kstep
   LOGICAL noinv, nodet, noert
-  !***FIRST EXECUTABLE STATEMENT  DSPDI
+  !* FIRST EXECUTABLE STATEMENT  DSPDI
   noinv = MOD(Job,10)==0
   nodet = MOD(Job,100)/10==0
   noert = MOD(Job,1000)/100==0

@@ -1,15 +1,22 @@
-!DECK TRED1
+!** TRED1
 SUBROUTINE TRED1(Nm,N,A,D,E,E2)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TRED1
-  !***PURPOSE  Reduce a real symmetric matrix to symmetric tridiagonal
+  !>
+  !***
+  !  Reduce a real symmetric matrix to symmetric tridiagonal
   !            matrix using orthogonal similarity transformations.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C1B1
-  !***TYPE      SINGLE PRECISION (TRED1-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C1B1
+  !***
+  ! **Type:**      SINGLE PRECISION (TRED1-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure TRED1,
   !     NUM. MATH. 11, 181-195(1968) by Martin, Reinsch, and Wilkinson.
@@ -54,24 +61,27 @@ SUBROUTINE TRED1(Nm,N,A,D,E,E2)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  TRED1
+  
   !
   INTEGER i, j, k, l, N, ii, Nm, jp1
   REAL A(Nm,*), D(*), E(*), E2(*)
   REAL f, g, h, scale
   !
-  !***FIRST EXECUTABLE STATEMENT  TRED1
+  !* FIRST EXECUTABLE STATEMENT  TRED1
   DO i = 1, N
     D(i) = A(i,i)
   ENDDO

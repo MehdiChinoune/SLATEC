@@ -1,13 +1,17 @@
-!DECK TEVLC
+!** TEVLC
 SUBROUTINE TEVLC(N,D,E2,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEVLC
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBLKTR
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (TEVLC-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBLKTR
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (TEVLC-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This subroutine finds the eigenvalues of a symmetric tridiagonal
   !     matrix by the rational QL method.
@@ -35,19 +39,24 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
   !          J          if the J-th eigenvalue has not been
   !                     determined after 30 iterations.
   !
-  !***SEE ALSO  CBLKTR
-  !***REFERENCES  C. H. Reinsch, Eigenvalues of a real, symmetric, tri-
+  !***
+  ! **See also:**  CBLKTR
+  !***
+  ! **References:**  C. H. Reinsch, Eigenvalues of a real, symmetric, tri-
   !                 diagonal matrix, Algorithm 464, Communications of the
   !                 ACM 16, 11 (November 1973), pp. 689.
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    CCBLK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    CCBLK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   920528  DESCRIPTION revised and REFERENCES section added.  (WRB)
-  !***END PROLOGUE  TEVLC
+  
   REAL CNV, dhold
   INTEGER IK, K, NCMplx, nhalf, NM, NPP, ntop
   INTEGER i, j, l, m, N, ii, l1, mml, Ierr
@@ -55,7 +64,7 @@ SUBROUTINE TEVLC(N,D,E2,Ierr)
   REAL b, c, f, g, h, p, r, s, MAChep
   !
   COMMON /CCBLK / NPP, K, MAChep, CNV, NM, NCMplx, IK
-  !***FIRST EXECUTABLE STATEMENT  TEVLC
+  !* FIRST EXECUTABLE STATEMENT  TEVLC
   Ierr = 0
   IF ( N/=1 ) THEN
     !

@@ -1,16 +1,23 @@
-!DECK CHKDER
+!** CHKDER
 SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHKDER
-  !***PURPOSE  Check the gradients of M nonlinear functions in N
+  !>
+  !***
+  !  Check the gradients of M nonlinear functions in N
   !            variables, evaluated at a point X, for consistency
   !            with the functions themselves.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  F3, G4C
-  !***TYPE      SINGLE PRECISION (CHKDER-S, DCKDER-D)
-  !***KEYWORDS  GRADIENTS, JACOBIAN, MINPACK, NONLINEAR
-  !***AUTHOR  Hiebert, K. L. (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  F3, G4C
+  !***
+  ! **Type:**      SINGLE PRECISION (CHKDER-S, DCKDER-D)
+  !***
+  ! **Keywords:**  GRADIENTS, JACOBIAN, MINPACK, NONLINEAR
+  !***
+  ! **Author:**  Hiebert, K. L. (SNLA)
+  !***
+  ! **Description:**
   !
   !   This subroutine is a companion routine to SNLS1,SNLS1E,SNSQ,and
   !   SNSQE which may be used to check the calculation of the Jacobian.
@@ -84,12 +91,15 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !         correct, while a value of ERR(I) less than 0.5 indicates
   !         that the I-th gradient is probably incorrect.
   !
-  !***REFERENCES  M. J. D. Powell, A hybrid method for nonlinear equa-
+  !***
+  ! **References:**  M. J. D. Powell, A hybrid method for nonlinear equa-
   !                 tions. In Numerical Methods for Nonlinear Algebraic
   !                 Equations, P. Rabinowitz, Editor.  Gordon and Breach,
   !                 1988.
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -98,7 +108,7 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CHKDER
+  
   INTEGER M, N, Ldfjac, Mode
   REAL X(*), Fvec(*), Fjac(Ldfjac,*), Xp(*), Fvecp(*), Err(*)
   INTEGER i, j
@@ -107,7 +117,7 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   SAVE factor, one, zero
   !
   DATA factor, one, zero/1.0E2, 1.0E0, 0.0E0/
-  !***FIRST EXECUTABLE STATEMENT  CHKDER
+  !* FIRST EXECUTABLE STATEMENT  CHKDER
   epsmch = R1MACH(4)
   !
   eps = SQRT(epsmch)

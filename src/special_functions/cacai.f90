@@ -1,13 +1,17 @@
-!DECK CACAI
+!** CACAI
 SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CACAI
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CAIRY
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CACAI-A, ZACAI-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CAIRY
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CACAI-A, ZACAI-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     CACAI APPLIES THE ANALYTIC CONTINUATION FORMULA
   !
@@ -20,19 +24,22 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   !     RECURRENCE REMOVED. A RECURSIVE CALL TO CACON CAN RESULT IF CACON
   !     IS CALLED FROM CAIRY.
   !
-  !***SEE ALSO  CAIRY
-  !***ROUTINES CALLED  CASYI, CBKNU, CMLRI, CS1S2, CSERI, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CAIRY
+  !***
+  ! **Routines called:**  CASYI, CBKNU, CMLRI, CS1S2, CSERI, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CACAI
+  
   COMPLEX csgn, cspn, c1, c2, Y, Z, zn, cy
   REAL Alim, arg, ascle, az, cpn, dfnu, Elim, fmr, Fnu, pi, Rl, &
     sgn, spn, Tol, yy, R1MACH
   INTEGER inu, iuf, Kode, Mr, N, nn, nw, Nz
   DIMENSION Y(N), cy(2)
   DATA pi/3.14159265358979324E0/
-  !***FIRST EXECUTABLE STATEMENT  CACAI
+  !* FIRST EXECUTABLE STATEMENT  CACAI
   Nz = 0
   zn = -Z
   az = ABS(Z)

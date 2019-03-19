@@ -1,15 +1,22 @@
-!DECK FIGI
+!** FIGI
 SUBROUTINE FIGI(Nm,N,T,D,E,E2,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  FIGI
-  !***PURPOSE  Transforms certain real non-symmetric tridiagonal matrix
+  !>
+  !***
+  !  Transforms certain real non-symmetric tridiagonal matrix
   !            to symmetric tridiagonal matrix.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C1C
-  !***TYPE      SINGLE PRECISION (FIGI-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C1C
+  !***
+  ! **Type:**      SINGLE PRECISION (FIGI-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     Given a NONSYMMETRIC TRIDIAGONAL matrix such that the products
   !     of corresponding pairs of off-diagonal elements are all
@@ -62,23 +69,26 @@ SUBROUTINE FIGI(Nm,N,T,D,E,E2,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  FIGI
+  
   !
   INTEGER i, N, Nm, Ierr
   REAL T(Nm,3), D(*), E(*), E2(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  FIGI
+  !* FIRST EXECUTABLE STATEMENT  FIGI
   Ierr = 0
   !
   DO i = 1, N

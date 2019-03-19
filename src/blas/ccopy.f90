@@ -1,17 +1,24 @@
-!DECK CCOPY
+!** CCOPY
 SUBROUTINE CCOPY(N,Cx,Incx,Cy,Incy)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CCOPY
-  !***PURPOSE  Copy a vector.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1A5
-  !***TYPE      COMPLEX (SCOPY-S, DCOPY-D, CCOPY-C, ICOPY-I)
-  !***KEYWORDS  BLAS, COPY, LINEAR ALGEBRA, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !>
+  !***
+  !  Copy a vector.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1A5
+  !***
+  ! **Type:**      COMPLEX (SCOPY-S, DCOPY-D, CCOPY-C, ICOPY-I)
+  !***
+  ! **Keywords:**  BLAS, COPY, LINEAR ALGEBRA, VECTOR
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -31,22 +38,25 @@ SUBROUTINE CCOPY(N,Cx,Incx,Cy,Incy)
   !     where LX = 1 if INCX .GE. 0, else LX = 1+(1-N)*INCX, and LY is
   !     defined in a similar way using INCY.
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CCOPY
+  
   INTEGER i, Incx, Incy, kx, ky, N, ns
   COMPLEX Cx(*), Cy(*)
-  !***FIRST EXECUTABLE STATEMENT  CCOPY
+  !* FIRST EXECUTABLE STATEMENT  CCOPY
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy.AND.Incx>0 ) THEN
     !

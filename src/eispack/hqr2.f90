@@ -1,15 +1,22 @@
-!DECK HQR2
+!** HQR2
 SUBROUTINE HQR2(Nm,N,Low,Igh,H,Wr,Wi,Z,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HQR2
-  !***PURPOSE  Compute the eigenvalues and eigenvectors of a real upper
+  !>
+  !***
+  !  Compute the eigenvalues and eigenvectors of a real upper
   !            Hessenberg matrix using QR method.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C2B
-  !***TYPE      SINGLE PRECISION (HQR2-S, COMQR2-C)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C2B
+  !***
+  ! **Type:**      SINGLE PRECISION (HQR2-S, COMQR2-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure HQR2,
   !     NUM. MATH. 16, 181-204(1970) by Peters and Wilkinson.
@@ -79,19 +86,22 @@ SUBROUTINE HQR2(Nm,N,Low,Igh,H,Wr,Wi,Z,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  CDIV
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDIV
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  HQR2
+  
   !
   INTEGER i, j, k, l, m, N, en, ii, jj, ll, mm, na, Nm, nn
   INTEGER Igh, itn, its, Low, mp2, enm2, Ierr
@@ -100,7 +110,7 @@ SUBROUTINE HQR2(Nm,N,Low,Igh,H,Wr,Wi,Z,Ierr)
     s2
   LOGICAL notlas
   !
-  !***FIRST EXECUTABLE STATEMENT  HQR2
+  !* FIRST EXECUTABLE STATEMENT  HQR2
   Ierr = 0
   norm = 0.0E0
   k = 1

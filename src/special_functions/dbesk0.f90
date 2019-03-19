@@ -1,17 +1,24 @@
-!DECK DBESK0
+!** DBESK0
 REAL(8) FUNCTION DBESK0(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBESK0
-  !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
+  !>
+  !***
+  !  Compute the modified (hyperbolic) Bessel function of the
   !            third kind of order zero.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B1
-  !***TYPE      DOUBLE PRECISION (BESK0-S, DBESK0-D)
-  !***KEYWORDS  FNLIB, HYPERBOLIC BESSEL FUNCTION,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B1
+  !***
+  ! **Type:**      DOUBLE PRECISION (BESK0-S, DBESK0-D)
+  !***
+  ! **Keywords:**  FNLIB, HYPERBOLIC BESSEL FUNCTION,
   !             MODIFIED BESSEL FUNCTION, ORDER ZERO, SPECIAL FUNCTIONS,
   !             THIRD KIND
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DBESK0(X) calculates the double precision modified (hyperbolic)
   ! Bessel function of the third kind of order zero for double
@@ -24,15 +31,18 @@ REAL(8) FUNCTION DBESK0(X)
   !                               significant figures required  32.05
   !                                    decimal places required  33.11
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DBESI0, DBSK0E, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DBESI0, DBSK0E, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DBESK0
+  
   INTEGER INITDS, ntk0
   REAL(8) :: X, bk0cs(16), xmax, xmaxt, xsml, y, D1MACH, &
     DCSEVL, DBESI0, DBSK0E
@@ -55,7 +65,7 @@ REAL(8) FUNCTION DBESK0(X)
   DATA bk0cs(15)/ + .271281421807298560000000000000000D-29/
   DATA bk0cs(16)/ + .308259388791466666666666666666666D-32/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DBESK0
+  !* FIRST EXECUTABLE STATEMENT  DBESK0
   IF ( first ) THEN
     ntk0 = INITDS(bk0cs,16,0.1*REAL(D1MACH(3)))
     xsml = SQRT(4.0D0*D1MACH(3))

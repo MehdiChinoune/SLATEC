@@ -1,15 +1,22 @@
-!DECK DTRCO
+!** DTRCO
 SUBROUTINE DTRCO(T,Ldt,N,Rcond,Z,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DTRCO
-  !***PURPOSE  Estimate the condition number of a triangular matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2A3
-  !***TYPE      DOUBLE PRECISION (STRCO-S, DTRCO-D, CTRCO-C)
-  !***KEYWORDS  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
+  !>
+  !***
+  !  Estimate the condition number of a triangular matrix.
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2A3
+  !***
+  ! **Type:**      DOUBLE PRECISION (STRCO-S, DTRCO-D, CTRCO-C)
+  !***
+  ! **Keywords:**  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
   !             TRIANGULAR MATRIX
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DTRCO estimates the condition of a double precision triangular
   !     matrix.
@@ -52,10 +59,13 @@ SUBROUTINE DTRCO(T,Ldt,N,Rcond,Z,Job)
   !                an approximate null vector in the sense that
   !                NORM(A*Z) = RCOND*NORM(A)*NORM(Z) .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DASUM, DAXPY, DSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DASUM, DAXPY, DSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -64,7 +74,7 @@ SUBROUTINE DTRCO(T,Ldt,N,Rcond,Z,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DTRCO
+  
   INTEGER Ldt, N, Job
   REAL(8) :: T(Ldt,*), Z(*)
   REAL(8) :: Rcond
@@ -73,7 +83,7 @@ SUBROUTINE DTRCO(T,Ldt,N,Rcond,Z,Job)
   REAL(8) :: tnorm, ynorm, s, sm, DASUM
   INTEGER i1, j, j1, j2, k, kk, l
   LOGICAL lower
-  !***FIRST EXECUTABLE STATEMENT  DTRCO
+  !* FIRST EXECUTABLE STATEMENT  DTRCO
   lower = Job==0
   !
   !     COMPUTE 1-NORM OF T

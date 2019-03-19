@@ -1,18 +1,25 @@
-!DECK SROT
+!** SROT
 SUBROUTINE SROT(N,Sx,Incx,Sy,Incy,Sc,Ss)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SROT
-  !***PURPOSE  Apply a plane Givens rotation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1A8
-  !***TYPE      SINGLE PRECISION (SROT-S, DROT-D, CSROT-C)
-  !***KEYWORDS  BLAS, GIVENS ROTATION, GIVENS TRANSFORMATION,
+  !>
+  !***
+  !  Apply a plane Givens rotation.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1A8
+  !***
+  ! **Type:**      SINGLE PRECISION (SROT-S, DROT-D, CSROT-C)
+  !***
+  ! **Keywords:**  BLAS, GIVENS ROTATION, GIVENS TRANSFORMATION,
   !             LINEAR ALGEBRA, PLANE ROTATION, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -36,24 +43,27 @@ SUBROUTINE SROT(N,Sx,Incx,Sy,Incy,Sc,Ss)
   !     SX(LX+I*INCX), I = 0 to N-1, where LX = 1 if INCX .GE. 0, else
   !     LX = 1+(1-N)*INCX, and similarly for SY using LY and INCY.
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SROT
+  
   INTEGER i, Incx, Incy, kx, ky, N, nsteps
   REAL Sx, Sy, Sc, Ss, zero, one, w, z
   DIMENSION Sx(*), Sy(*)
   SAVE zero, one
   DATA zero, one/0.0E0, 1.0E0/
-  !***FIRST EXECUTABLE STATEMENT  SROT
+  !* FIRST EXECUTABLE STATEMENT  SROT
   IF ( .NOT.(N<=0.OR.(Ss==zero.AND.Sc==one)) ) THEN
     IF ( Incx/=Incy.OR.Incx<=0 ) THEN
       !

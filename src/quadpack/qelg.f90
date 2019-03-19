@@ -1,24 +1,29 @@
-!DECK QELG
+!** QELG
 SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QELG
-  !***SUBSIDIARY
-  !***PURPOSE  The routine determines the limit of a given sequence of
+  !>
+  !***
+  !  The routine determines the limit of a given sequence of
   !            approximations, by means of the Epsilon algorithm of
   !            P. Wynn. An estimate of the absolute error is also given.
   !            The condensed Epsilon table is computed. Only those
   !            elements needed for the computation of the next diagonal
   !            are preserved.
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (QELG-S, DQELG-D)
-  !***KEYWORDS  CONVERGENCE ACCELERATION, EPSILON ALGORITHM, EXTRAPOLATION
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (QELG-S, DQELG-D)
+  !***
+  ! **Keywords:**  CONVERGENCE ACCELERATION, EPSILON ALGORITHM, EXTRAPOLATION
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !           Epsilon algorithm
   !           Standard fortran subroutine
@@ -51,15 +56,18 @@ SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
   !                       Number of calls to the routine
   !                       (should be zero at first call)
   !
-  !***SEE ALSO  QAGIE, QAGOE, QAGPE, QAGSE
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  QAGIE, QAGOE, QAGPE, QAGSE
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  QELG
+  
   !
   REAL Abserr, delta1, delta2, delta3, R1MACH, epmach, epsinf, &
     Epstab, error, err1, err2, err3, e0, e1, e1abs, e2, e3, &
@@ -92,7 +100,7 @@ SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
   !           TABLE CAN CONTAIN. IF THIS NUMBER IS REACHED, THE UPPER
   !           DIAGONAL OF THE EPSILON TABLE IS DELETED.
   !
-  !***FIRST EXECUTABLE STATEMENT  QELG
+  !* FIRST EXECUTABLE STATEMENT  QELG
   epmach = R1MACH(4)
   oflow = R1MACH(2)
   Nres = Nres + 1
@@ -154,7 +162,7 @@ SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
           ENDIF
         ENDIF
         N = i + i - 1
-        ! ***JUMP OUT OF DO-LOOP
+        !- **JUMP OUT OF DO-LOOP
         EXIT
       ELSE
         !
@@ -165,7 +173,7 @@ SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
         !
         Result = res
         Abserr = err2 + err3
-        ! ***JUMP OUT OF DO-LOOP
+        !- **JUMP OUT OF DO-LOOP
         GOTO 100
       ENDIF
     ENDDO

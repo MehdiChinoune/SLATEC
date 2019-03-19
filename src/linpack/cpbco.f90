@@ -1,17 +1,24 @@
-!DECK CPBCO
+!** CPBCO
 SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPBCO
-  !***PURPOSE  Factor a complex Hermitian positive definite matrix stored
+  !>
+  !***
+  !  Factor a complex Hermitian positive definite matrix stored
   !            in band form and estimate the condition number of the
   !            matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2D2
-  !***TYPE      COMPLEX (SPBCO-S, DPBCO-D, CPBCO-C)
-  !***KEYWORDS  BANDED, CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2D2
+  !***
+  ! **Type:**      COMPLEX (SPBCO-S, DPBCO-D, CPBCO-C)
+  !***
+  ! **Keywords:**  BANDED, CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
   !             MATRIX FACTORIZATION, POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CPBCO factors a complex Hermitian positive definite matrix
   !     stored in band form and estimates the condition of the matrix.
@@ -102,10 +109,13 @@ SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !            * 12 23 34 45 56
   !           11 22 33 44 55 66
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTC, CPBFA, CSSCAL, SCASUM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTC, CPBFA, CSSCAL, SCASUM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -114,7 +124,7 @@ SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CPBCO
+  
   INTEGER Lda, N, M, Info
   COMPLEX Abd(Lda,*), Z(*)
   REAL Rcond
@@ -127,7 +137,7 @@ SUBROUTINE CPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !
   !     FIND NORM OF A
   !
-  !***FIRST EXECUTABLE STATEMENT  CPBCO
+  !* FIRST EXECUTABLE STATEMENT  CPBCO
   DO j = 1, N
     l = MIN(j,M+1)
     mu = MAX(M+2-j,1)

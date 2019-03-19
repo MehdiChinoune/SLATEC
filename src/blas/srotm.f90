@@ -1,17 +1,24 @@
-!DECK SROTM
+!** SROTM
 SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SROTM
-  !***PURPOSE  Apply a modified Givens transformation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1A8
-  !***TYPE      SINGLE PRECISION (SROTM-S, DROTM-D)
-  !***KEYWORDS  BLAS, LINEAR ALGEBRA, MODIFIED GIVENS ROTATION, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !>
+  !***
+  !  Apply a modified Givens transformation.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1A8
+  !***
+  ! **Type:**      SINGLE PRECISION (SROTM-S, DROTM-D)
+  !***
+  ! **Keywords:**  BLAS, LINEAR ALGEBRA, MODIFIED GIVENS ROTATION, VECTOR
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -46,24 +53,27 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
   !
   !     See SROTMG for a description of data storage in SPARAM.
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SROTM
+  
   INTEGER i, Incx, Incy, kx, ky, N, nsteps
   REAL sflag, sh11, sh12, sh21, sh22, Sparam, Sx, Sy, two, w, z, zero
   DIMENSION Sx(*), Sy(*), Sparam(5)
   SAVE zero, two
   DATA zero, two/0.0E0, 2.0E0/
-  !***FIRST EXECUTABLE STATEMENT  SROTM
+  !* FIRST EXECUTABLE STATEMENT  SROTM
   sflag = Sparam(1)
   IF ( N>0.AND.(sflag+two/=zero) ) THEN
     IF ( Incx/=Incy.OR.Incx<=0 ) THEN

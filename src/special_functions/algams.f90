@@ -1,16 +1,23 @@
-!DECK ALGAMS
+!** ALGAMS
 SUBROUTINE ALGAMS(X,Algam,Sgngam)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ALGAMS
-  !***PURPOSE  Compute the logarithm of the absolute value of the Gamma
+  !>
+  !***
+  !  Compute the logarithm of the absolute value of the Gamma
   !            function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7A
-  !***TYPE      SINGLE PRECISION (ALGAMS-S, DLGAMS-D)
-  !***KEYWORDS  ABSOLUTE VALUE OF THE LOGARITHM OF THE GAMMA FUNCTION,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7A
+  !***
+  ! **Type:**      SINGLE PRECISION (ALGAMS-S, DLGAMS-D)
+  !***
+  ! **Keywords:**  ABSOLUTE VALUE OF THE LOGARITHM OF THE GAMMA FUNCTION,
   !             FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluates the logarithm of the absolute value of the gamma
   ! function.
@@ -19,15 +26,18 @@ SUBROUTINE ALGAMS(X,Algam,Sgngam)
   !     SGNGAM      - is set to the sign of GAMMA(X) and will
   !                   be returned at +1.0 or -1.0.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ALNGAM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ALNGAM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ALGAMS
-  !***FIRST EXECUTABLE STATEMENT  ALGAMS
+  
+  !* FIRST EXECUTABLE STATEMENT  ALGAMS
   REAL Algam, ALNGAM, Sgngam, X
   INTEGER i
   Algam = ALNGAM(X)

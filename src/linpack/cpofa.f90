@@ -1,15 +1,22 @@
-!DECK CPOFA
+!** CPOFA
 SUBROUTINE CPOFA(A,Lda,N,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPOFA
-  !***PURPOSE  Factor a complex Hermitian positive definite matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2D1B
-  !***TYPE      COMPLEX (SPOFA-S, DPOFA-D, CPOFA-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION,
+  !>
+  !***
+  !  Factor a complex Hermitian positive definite matrix.
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2D1B
+  !***
+  ! **Type:**      COMPLEX (SPOFA-S, DPOFA-D, CPOFA-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION,
   !             POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CPOFA factors a complex Hermitian positive definite matrix.
   !
@@ -41,10 +48,13 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
   !                = K  signals an error condition.  The leading minor
   !                     of order  K  is not positive definite.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CDOTC
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDOTC
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -52,14 +62,14 @@ SUBROUTINE CPOFA(A,Lda,N,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CPOFA
+  
   INTEGER Lda, N, Info
   COMPLEX A(Lda,*)
   !
   COMPLEX CDOTC, t
   REAL s
   INTEGER j, jm1, k
-  !***FIRST EXECUTABLE STATEMENT  CPOFA
+  !* FIRST EXECUTABLE STATEMENT  CPOFA
   DO j = 1, N
     Info = j
     s = 0.0E0

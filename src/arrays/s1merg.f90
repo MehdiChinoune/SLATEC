@@ -1,22 +1,29 @@
-!DECK S1MERG
+!** S1MERG
 SUBROUTINE S1MERG(Tcos,I1,M1,I2,M2,I3)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  S1MERG
-  !***SUBSIDIARY
-  !***PURPOSE  Merge two strings of ascending real numbers.
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (S1MERG-S, D1MERG-D, C1MERG-C, I1MERG-I)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Merge two strings of ascending real numbers.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (S1MERG-S, D1MERG-D, C1MERG-C, I1MERG-I)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   This subroutine merges two ascending strings of numbers in the
   !   array TCOS.  The first string is of length M1 and starts at
   !   TCOS(I1+1).  The second string is of length M2 and starts at
   !   TCOS(I2+1).  The merged string goes into TCOS(I3+1).
   !
-  !***SEE ALSO  GENBUN
-  !***ROUTINES CALLED  SCOPY
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  GENBUN
+  !***
+  ! **Routines called:**  SCOPY
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
@@ -24,13 +31,13 @@ SUBROUTINE S1MERG(Tcos,I1,M1,I2,M2,I3)
   !           not compile correctly with optimization on the IBM RS6000.
   !           (RWC)
   !   920130  Code name changed from MERGE to S1MERG.  (WRB)
-  !***END PROLOGUE  S1MERG
+  
   INTEGER I1, I2, I3, M1, M2
   REAL Tcos(*)
   !
   INTEGER j1, j2, j3
   !
-  !***FIRST EXECUTABLE STATEMENT  S1MERG
+  !* FIRST EXECUTABLE STATEMENT  S1MERG
   IF ( M1==0.AND.M2==0 ) RETURN
   !
   IF ( M1==0.AND.M2/=0 ) THEN

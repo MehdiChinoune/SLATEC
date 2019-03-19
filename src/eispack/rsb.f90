@@ -1,15 +1,22 @@
-!DECK RSB
+!** RSB
 SUBROUTINE RSB(Nm,N,Mb,A,W,Matz,Z,Fv1,Fv2,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RSB
-  !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
+  !>
+  !***
+  !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a symmetric band matrix.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A6
-  !***TYPE      SINGLE PRECISION (RSB-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A6
+  !***
+  ! **Type:**      SINGLE PRECISION (RSB-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine calls the recommended sequence of
   !     subroutines from the eigensystem subroutine package (EISPACK)
@@ -71,24 +78,27 @@ SUBROUTINE RSB(Nm,N,Mb,A,W,Matz,Z,Fv1,Fv2,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  BANDR, TQL2, TQLRAT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  BANDR, TQL2, TQLRAT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  RSB
+  
   !
   INTEGER N, Mb, Nm, Ierr, Matz
   REAL A(Nm,*), W(*), Z(Nm,*), Fv1(*), Fv2(*)
   LOGICAL tf
   !
-  !***FIRST EXECUTABLE STATEMENT  RSB
+  !* FIRST EXECUTABLE STATEMENT  RSB
   IF ( N>Nm ) THEN
     Ierr = 10*N
   ELSEIF ( Mb<=0 ) THEN

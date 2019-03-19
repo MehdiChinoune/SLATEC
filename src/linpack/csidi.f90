@@ -1,16 +1,23 @@
-!DECK CSIDI
+!** CSIDI
 SUBROUTINE CSIDI(A,Lda,N,Kpvt,Det,Work,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CSIDI
-  !***PURPOSE  Compute the determinant and inverse of a complex symmetric
+  !>
+  !***
+  !  Compute the determinant and inverse of a complex symmetric
   !            matrix using the factors from CSIFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2C1, D3C1
-  !***TYPE      COMPLEX (SSIDI-S, DSIDI-D, CHIDI-C, CSIDI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2C1, D3C1
+  !***
+  ! **Type:**      COMPLEX (SSIDI-S, DSIDI-D, CHIDI-C, CSIDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             SYMMETRIC
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     CSIDI computes the determinant and inverse
   !     of a complex symmetric matrix using the factors from CSIFA.
@@ -59,10 +66,13 @@ SUBROUTINE CSIDI(A,Lda,N,Kpvt,Det,Work,Job)
   !        and  CSICO  has set RCOND .EQ. 0.0
   !        or  CSIFA  has set  INFO .NE. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CCOPY, CDOTU, CSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CCOPY, CDOTU, CSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -73,7 +83,7 @@ SUBROUTINE CSIDI(A,Lda,N,Kpvt,Det,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CSIDI
+  
   INTEGER Lda, N, Job
   COMPLEX A(Lda,*), Det(2), Work(*)
   INTEGER Kpvt(*)
@@ -84,7 +94,7 @@ SUBROUTINE CSIDI(A,Lda,N,Kpvt,Det,Work,Job)
   LOGICAL noinv, nodet
   REAL, EXTERNAL :: CABS1
   !
-  !***FIRST EXECUTABLE STATEMENT  CSIDI
+  !* FIRST EXECUTABLE STATEMENT  CSIDI
   noinv = MOD(Job,10)==0
   nodet = MOD(Job,100)/10==0
   !

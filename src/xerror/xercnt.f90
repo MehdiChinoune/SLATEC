@@ -1,15 +1,21 @@
-!DECK XERCNT
+!** XERCNT
 SUBROUTINE XERCNT(Librar,Subrou,Messg,Nerr,Level,Kontrl)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XERCNT
-  !***SUBSIDIARY
-  !***PURPOSE  Allow user control over handling of errors.
-  !***LIBRARY   SLATEC (XERROR)
-  !***CATEGORY  R3C
-  !***TYPE      ALL (XERCNT-A)
-  !***KEYWORDS  ERROR, XERROR
-  !***AUTHOR  Jones, R. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Allow user control over handling of errors.
+  !***
+  ! **Library:**   SLATEC (XERROR)
+  !***
+  ! **Category:**  R3C
+  !***
+  ! **Type:**      ALL (XERCNT-A)
+  !***
+  ! **Keywords:**  ERROR, XERROR
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !        Allows user control over handling of individual errors.
@@ -42,11 +48,14 @@ SUBROUTINE XERCNT(Librar,Subrou,Messg,Nerr,Level,Kontrl)
   !                 This changed value of control affects only
   !                 the current occurrence of the current message.
   !
-  !***REFERENCES  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
+  !***
+  ! **References:**  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
   !                 Error-handling Package, SAND82-0800, Sandia
   !                 Laboratories, 1982.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790801  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
@@ -54,8 +63,8 @@ SUBROUTINE XERCNT(Librar,Subrou,Messg,Nerr,Level,Kontrl)
   !   900510  Changed calling sequence to include LIBRARY and SUBROUTINE
   !           names, changed routine name from XERCTL to XERCNT.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  XERCNT
+  
   INTEGER Kontrl, Level, Nerr
   CHARACTER*(*) Librar, Subrou, Messg
-  !***FIRST EXECUTABLE STATEMENT  XERCNT
+  !* FIRST EXECUTABLE STATEMENT  XERCNT
 END SUBROUTINE XERCNT

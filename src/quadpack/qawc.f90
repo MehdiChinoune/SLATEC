@@ -1,26 +1,33 @@
-!DECK QAWC
+!** QAWC
 SUBROUTINE QAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
     Last,Iwork,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QAWC
-  !***PURPOSE  The routine calculates an approximation result to a
+  !>
+  !***
+  !  The routine calculates an approximation result to a
   !            Cauchy principal value I = INTEGRAL of F*W over (A,B)
   !            (W(X) = 1/((X-C), C.NE.A, C.NE.B), hopefully satisfying
   !            following claim for accuracy
   !            ABS(I-RESULT).LE.MAX(EPSABE,EPSREL*ABS(I)).
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A2A1, J4
-  !***TYPE      SINGLE PRECISION (QAWC-S, DQAWC-D)
-  !***KEYWORDS  AUTOMATIC INTEGRATOR, CAUCHY PRINCIPAL VALUE,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A2A1, J4
+  !***
+  ! **Type:**      SINGLE PRECISION (QAWC-S, DQAWC-D)
+  !***
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, CAUCHY PRINCIPAL VALUE,
   !             CLENSHAW-CURTIS METHOD, GLOBALLY ADAPTIVE, QUADPACK,
   !             QUADRATURE, SPECIAL-PURPOSE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Computation of a Cauchy principal value
   !        Standard fortran subroutine
@@ -146,15 +153,18 @@ SUBROUTINE QAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                    WORK(LIMIT*3+1), ..., WORK(LIMIT*3+LAST)
   !                     contain the error estimates.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  QAWCE, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  QAWCE, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  QAWC
+  
   INTEGER Last
   REAL A, Abserr, B, C, Epsabs, Epsrel, F, Result, Work
   INTEGER Ier, Iwork, Lenw, Limit, lvl, l1, l2, l3, Neval
@@ -165,7 +175,7 @@ SUBROUTINE QAWC(F,A,B,C,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.
   !
-  !***FIRST EXECUTABLE STATEMENT  QAWC
+  !* FIRST EXECUTABLE STATEMENT  QAWC
   Ier = 6
   Neval = 0
   Last = 0

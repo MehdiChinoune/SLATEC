@@ -1,15 +1,22 @@
-!DECK DSISL
+!** DSISL
 SUBROUTINE DSISL(A,Lda,N,Kpvt,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSISL
-  !***PURPOSE  Solve a real symmetric system using the factors obtained
+  !>
+  !***
+  !  Solve a real symmetric system using the factors obtained
   !            from SSIFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1A
-  !***TYPE      DOUBLE PRECISION (SSISL-S, DSISL-D, CHISL-C, CSISL-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE, SYMMETRIC
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1A
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSISL-S, DSISL-D, CHISL-C, CSISL-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE, SYMMETRIC
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     DSISL solves the double precision symmetric system
   !     A * X = B
@@ -49,10 +56,13 @@ SUBROUTINE DSISL(A,Lda,N,Kpvt,B)
   !              CALL DSISL(A,LDA,N,KPVT,C(1,J))
   !        10 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -62,7 +72,7 @@ SUBROUTINE DSISL(A,Lda,N,Kpvt,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DSISL
+  
   INTEGER Lda, N, Kpvt(*)
   REAL(8) :: A(Lda,*), B(*)
   !
@@ -72,7 +82,7 @@ SUBROUTINE DSISL(A,Lda,N,Kpvt,B)
   !     LOOP BACKWARD APPLYING THE TRANSFORMATIONS AND
   !     D INVERSE TO B.
   !
-  !***FIRST EXECUTABLE STATEMENT  DSISL
+  !* FIRST EXECUTABLE STATEMENT  DSISL
   k = N
   DO WHILE ( k/=0 )
     IF ( Kpvt(k)<0 ) THEN

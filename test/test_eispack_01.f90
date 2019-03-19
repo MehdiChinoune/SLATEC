@@ -2,28 +2,35 @@ MODULE TEST24_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK EISQX1
+  !** EISQX1
   SUBROUTINE EISQX1(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  EISQX1
-    !***PURPOSE  Quick check for SGEEV and CGEEV.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for SGEEV and CGEEV.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !     THIS QUICK CHECK ROUTINE IS WRITTEN FOR EISPACK DRIVERS
     !     SGEEV AND CGEEV.  THE EIGENVALUES OF INPUT MATRIX A(.,.)
     !     ARE STORED IN EK(.).  RELERR IS THE RELATIVE ACCURACY
     !     REQUIRED FOR THEM TO PASS.
     !
-    !***ROUTINES CALLED  CGEEV, R1MACH, SGEEV
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CGEEV, R1MACH, SGEEV
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900405  CALL to XERROR replaced by message to LUN.  (WRB)
-    !***END PROLOGUE  EISQX1
+    
     INTEGER info
     REAL R1MACH
     INTEGER Kprint, Ipass, Lun
@@ -34,7 +41,7 @@ CONTAINS
     DATA lda, n, ldv/3*3/
     DATA a/1., -2., 6., -1., 0., -3., 2., 5., 6./
     DATA ek/ - 1., 3., 5./
-    !***FIRST EXECUTABLE STATEMENT  EISQX1
+    !* FIRST EXECUTABLE STATEMENT  EISQX1
     Ipass = 1
     relerr = SQRT(R1MACH(4))
     DO j = 1, n
@@ -87,28 +94,35 @@ CONTAINS
     99003 FORMAT (1X,'Eigenvalue iteration failed to converge in ',A5,', INFO = ',&
       I4)
   END SUBROUTINE EISQX1
-  !DECK EISQX2
+  !** EISQX2
   SUBROUTINE EISQX2(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  EISQX2
-    !***PURPOSE  Quick check for SSIEV, CHIEV and SSPEV.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Kahaner, D. K., (NBS)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for SSIEV, CHIEV and SSPEV.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Kahaner, D. K., (NBS)
+    !***
+    ! **Description:**
     !
     !     THIS QUICK CHECK ROUTINE IS WRITTEN FOR EISPACK DRIVERS
     !     SSIEV, CHIEV AND SSPEV.  THE EIGENVALUES OF INPUT MATRIX
     !     A(.,.) ARE STORED IN EK(.).  RELERR IS THE RELATIVE
     !     ACCURACY REQUIRED FOR THEM TO PASS.
     !
-    !***ROUTINES CALLED  CHIEV, R1MACH, SSIEV, SSPEV
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CHIEV, R1MACH, SSIEV, SSPEV
+
+    !* REVISION HISTORY  (YYMMDD)
     !   800808  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900405  CALL to XERROR replaced by message to LUN.  (WRB)
-    !***END PROLOGUE  EISQX2
+    
     INTEGER info
     REAL R1MACH
     INTEGER Kprint, Ipass, Lun
@@ -120,7 +134,7 @@ CONTAINS
     DATA lda, n, ldv/3*4/
     DATA ap/5., 4., 5., 1., 1., 4., 1., 1., 2., 4./
     DATA ek/1., 2., 5., 10./
-    !***FIRST EXECUTABLE STATEMENT  EISQX2
+    !* FIRST EXECUTABLE STATEMENT  EISQX2
     Ipass = 1
     relerr = SQRT(R1MACH(4))
     id = 0
@@ -187,24 +201,31 @@ CONTAINS
       I4)
   END SUBROUTINE EISQX2
 END MODULE TEST24_MOD
-!DECK TEST24
+!** TEST24
 PROGRAM TEST24
   USE TEST24_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST24
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2
-  !***TYPE      ALL (TEST24-A)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2
+  !***
+  ! **Type:**      ALL (TEST24-A)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -216,25 +237,28 @@ PROGRAM TEST24
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        SGEEV    CGEEV
   !        SSIEV    CHIEV
   !        SSPEV
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  EISQX1, EISQX2, I1MACH, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  EISQX1, EISQX2, I1MACH, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST24
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST24
+  !* FIRST EXECUTABLE STATEMENT  TEST24
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

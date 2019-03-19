@@ -1,15 +1,22 @@
-!DECK BISECT
+!** BISECT
 SUBROUTINE BISECT(N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Ind,Ierr,Rv4,Rv5)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BISECT
-  !***PURPOSE  Compute the eigenvalues of a symmetric tridiagonal matrix
+  !>
+  !***
+  !  Compute the eigenvalues of a symmetric tridiagonal matrix
   !            in a given interval using Sturm sequencing.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A5, D4C2A
-  !***TYPE      SINGLE PRECISION (BISECT-S)
-  !***KEYWORDS  EIGENVALUES, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A5, D4C2A
+  !***
+  ! **Type:**      SINGLE PRECISION (BISECT-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the bisection technique
   !     in the ALGOL procedure TRISTURM by Peters and Wilkinson.
@@ -94,19 +101,22 @@ SUBROUTINE BISECT(N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Ind,Ierr,Rv4,Rv5)
   !     Applied Mathematics Division, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BISECT
+  
   REAL R1MACH
   INTEGER i, j, k, l, M, N, p, q, r, s, ii, Mm, m1, m2, tag, &
     Ierr, isturm
@@ -117,7 +127,7 @@ SUBROUTINE BISECT(N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Ind,Ierr,Rv4,Rv5)
   !
   SAVE first, machep
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BISECT
+  !* FIRST EXECUTABLE STATEMENT  BISECT
   IF ( first ) machep = R1MACH(4)
   first = .FALSE.
   !

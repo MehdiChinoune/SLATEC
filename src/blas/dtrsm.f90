@@ -1,17 +1,24 @@
-!DECK DTRSM
+!** DTRSM
 SUBROUTINE DTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DTRSM
-  !***PURPOSE  Solve one of the matrix equations.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B6
-  !***TYPE      DOUBLE PRECISION (STRSM-S, DTRSM-D, CTRSM-C)
-  !***KEYWORDS  LEVEL 3 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J., (ANL)
+  !>
+  !***
+  !  Solve one of the matrix equations.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B6
+  !***
+  ! **Type:**      DOUBLE PRECISION (STRSM-S, DTRSM-D, CTRSM-C)
+  !***
+  ! **Keywords:**  LEVEL 3 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J., (ANL)
   !           Duff, I., (AERE)
   !           Du Croz, J., (NAG)
   !           Hammarling, S. (NAG)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  DTRSM  solves one of the matrix equations
   !
@@ -118,15 +125,18 @@ SUBROUTINE DTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !           max( 1, m ).
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J., Du Croz, J., Duff, I., and Hammarling, S.
+  !***
+  ! **References:**  Dongarra, J., Du Croz, J., Duff, I., and Hammarling, S.
   !                 A set of level 3 basic linear algebra subprograms.
   !                 ACM TOMS, Vol. 16, No. 1, pp. 1-17, March 1990.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890208  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  DTRSM
+  
   !     .. Scalar Arguments ..
   CHARACTER :: Side, Uplo, Transa, Diag
   INTEGER M, N, Lda, Ldb
@@ -148,7 +158,7 @@ SUBROUTINE DTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !     .. Parameters ..
   REAL(8) :: ONE, ZERO
   PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
-  !***FIRST EXECUTABLE STATEMENT  DTRSM
+  !* FIRST EXECUTABLE STATEMENT  DTRSM
   !
   !     Test the input parameters.
   !

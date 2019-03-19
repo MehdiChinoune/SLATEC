@@ -1,17 +1,24 @@
-!DECK CTRSL
+!** CTRSL
 SUBROUTINE CTRSL(T,Ldt,N,B,Job,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CTRSL
-  !***PURPOSE  Solve a system of the form  T*X=B or CTRANS(T)*X=B, where
+  !>
+  !***
+  !  Solve a system of the form  T*X=B or CTRANS(T)*X=B, where
   !            T is a triangular matrix.  Here CTRANS(T) is the conjugate
   !            transpose.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2C3
-  !***TYPE      COMPLEX (STRSL-S, DTRSL-D, CTRSL-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, TRIANGULAR LINEAR SYSTEM,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2C3
+  !***
+  ! **Type:**      COMPLEX (STRSL-S, DTRSL-D, CTRSL-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, TRIANGULAR LINEAR SYSTEM,
   !             TRIANGULAR MATRIX
-  !***AUTHOR  Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Stewart, G. W., (U. of Maryland)
+  !***
+  ! **Description:**
   !
   !     CTRSL solves systems of the form
   !
@@ -58,10 +65,13 @@ SUBROUTINE CTRSL(T,Ldt,N,B,Job,Info)
   !                   Otherwise INFO contains the index of
   !                   the first zero diagonal element of T.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTC
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTC
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -69,7 +79,7 @@ SUBROUTINE CTRSL(T,Ldt,N,B,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CTRSL
+  
   INTEGER Ldt, N, Job, Info
   COMPLEX T(Ldt,*), B(*)
   !
@@ -77,7 +87,7 @@ SUBROUTINE CTRSL(T,Ldt,N,B,Job,Info)
   COMPLEX CDOTC, temp
   INTEGER case, j, jj
   REAL, EXTERNAL :: CABS1
-  !***FIRST EXECUTABLE STATEMENT  CTRSL
+  !* FIRST EXECUTABLE STATEMENT  CTRSL
   !
   !        CHECK FOR ZERO DIAGONAL ELEMENTS.
   !

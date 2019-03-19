@@ -1,15 +1,22 @@
-!DECK POCH1
+!** POCH1
 REAL FUNCTION POCH1(A,X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  POCH1
-  !***PURPOSE  Calculate a generalization of Pochhammer's symbol starting
+  !>
+  !***
+  !  Calculate a generalization of Pochhammer's symbol starting
   !            from first order.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C1, C7A
-  !***TYPE      SINGLE PRECISION (POCH1-S, DPOCH1-D)
-  !***KEYWORDS  FIRST ORDER, FNLIB, POCHHAMMER, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C1, C7A
+  !***
+  ! **Type:**      SINGLE PRECISION (POCH1-S, DPOCH1-D)
+  !***
+  ! **Keywords:**  FIRST ORDER, FNLIB, POCHHAMMER, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate a generalization of Pochhammer's symbol for special
   ! situations that require especially accurate values when X is small in
@@ -37,16 +44,19 @@ REAL FUNCTION POCH1(A,X)
   !        POCH1(A,X) = (POCH(A,X) - 1) / X
   !                   = EXPREL(Q)*(Q/X + Q*POLY1(A,X)) + POLY1(A,X)
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  COT, EXPREL, POCH, PSI, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  COT, EXPREL, POCH, PSI, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  !***END PROLOGUE  POCH1
+  
   REAL A, absa, absx, alneps, alnvar, b, bern, binv, bp, COT, &
     EXPREL, gbern, gbk, pi, POCH, poly1, PSI, q, R1MACH
   REAL rho, sinpx2, sinpxx, sqtbig, term, trig, var, var2, X
@@ -66,7 +76,7 @@ REAL FUNCTION POCH1(A,X)
   DATA bern(9)/.85860620562778446E-14/
   DATA pi/3.14159265358979324E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  POCH1
+  !* FIRST EXECUTABLE STATEMENT  POCH1
   IF ( first ) THEN
     sqtbig = 1.0/SQRT(24.0*R1MACH(1))
     alneps = LOG(R1MACH(3))

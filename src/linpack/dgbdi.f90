@@ -1,16 +1,23 @@
-!DECK DGBDI
+!** DGBDI
 SUBROUTINE DGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGBDI
-  !***PURPOSE  Compute the determinant of a band matrix using the factors
+  !>
+  !***
+  !  Compute the determinant of a band matrix using the factors
   !            computed by DGBCO or DGBFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D3A2
-  !***TYPE      DOUBLE PRECISION (SGBDI-S, DGBDI-D, CGBDI-C)
-  !***KEYWORDS  BANDED, DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D3A2
+  !***
+  ! **Type:**      DOUBLE PRECISION (SGBDI-S, DGBDI-D, CGBDI-C)
+  !***
+  ! **Keywords:**  BANDED, DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK,
   !             MATRIX
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DGBDI computes the determinant of a band matrix
   !     using the factors computed by DGBCO or DGBFA.
@@ -44,10 +51,13 @@ SUBROUTINE DGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
   !                with  1.0 .LE. ABS(DET(1)) .LT. 10.0
   !                or  DET(1) = 0.0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -56,13 +66,13 @@ SUBROUTINE DGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DGBDI
+  
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
   REAL(8) :: Abd(Lda,*), Det(2)
   !
   REAL(8) :: ten
   INTEGER i, m
-  !***FIRST EXECUTABLE STATEMENT  DGBDI
+  !* FIRST EXECUTABLE STATEMENT  DGBDI
   m = Ml + Mu + 1
   Det(1) = 1.0D0
   Det(2) = 0.0D0

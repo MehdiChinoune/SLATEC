@@ -1,14 +1,21 @@
-!DECK AAAAAA
+!** AAAAAA
 SUBROUTINE AAAAAA(Ver)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  AAAAAA
-  !***PURPOSE  SLATEC Common Mathematical Library disclaimer and version.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  Z
-  !***TYPE      ALL (AAAAAA-A)
-  !***KEYWORDS  DISCLAIMER, DOCUMENTATION, VERSION
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  SLATEC Common Mathematical Library disclaimer and version.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  Z
+  !***
+  ! **Type:**      ALL (AAAAAA-A)
+  !***
+  ! **Keywords:**  DISCLAIMER, DOCUMENTATION, VERSION
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
   !   The SLATEC Common Mathematical Library is issued by the following
   !
@@ -37,26 +44,29 @@ SUBROUTINE AAAAAA(Ver)
   !   or process disclosed, or represents that its use would not infringe
   !   upon privately owned rights.
   !
-  ! *Usage:
+  !- Usage:
   !
   !        CHARACTER * 16 VER
   !
   !        CALL AAAAAA (VER)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !     VER:OUT   will contain the version number of the SLATEC CML.
   !
-  ! *Description:
+  !- Description:
   !
   !   This routine contains the SLATEC Common Mathematical Library
   !   disclaimer and can be used to return the library version number.
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800424  DATE WRITTEN
   !   890414  REVISION DATE from Version 3.2
   !   890713  Routine modified to return version number.  (WRB)
@@ -64,8 +74,8 @@ SUBROUTINE AAAAAA(Ver)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   921215  Updated for Version 4.0.  (WRB)
   !   930701  Updated for Version 4.1.  (WRB)
-  !***END PROLOGUE  AAAAAA
+  
   CHARACTER*(*) Ver
-  !***FIRST EXECUTABLE STATEMENT  AAAAAA
+  !* FIRST EXECUTABLE STATEMENT  AAAAAA
   Ver = ' 4.1'
 END SUBROUTINE AAAAAA

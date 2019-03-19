@@ -1,17 +1,24 @@
-!DECK BESK1
+!** BESK1
 REAL FUNCTION BESK1(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BESK1
-  !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
+  !>
+  !***
+  !  Compute the modified (hyperbolic) Bessel function of the
   !            third kind of order one.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B1
-  !***TYPE      SINGLE PRECISION (BESK1-S, DBESK1-D)
-  !***KEYWORDS  FNLIB, HYPERBOLIC BESSEL FUNCTION,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B1
+  !***
+  ! **Type:**      SINGLE PRECISION (BESK1-S, DBESK1-D)
+  !***
+  ! **Keywords:**  FNLIB, HYPERBOLIC BESSEL FUNCTION,
   !             MODIFIED BESSEL FUNCTION, ORDER ONE, SPECIAL FUNCTIONS,
   !             THIRD KIND
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! BESK1(X) computes the modified (hyperbolic) Bessel function of third
   ! kind of order one for real argument X, where X .GT. 0.
@@ -22,9 +29,12 @@ REAL FUNCTION BESK1(X)
   !                               significant figures required  16.73
   !                                    decimal places required  17.67
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  BESI1, BESK1E, CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  BESI1, BESK1E, CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -32,7 +42,7 @@ REAL FUNCTION BESK1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  BESK1
+  
   REAL BESI1, BESK1E, bk1cs, CSEVL, R1MACH, X, xmax, xmaxt, &
     xmin, xsml, y
   INTEGER INITS, ntk1
@@ -51,7 +61,7 @@ REAL FUNCTION BESK1(X)
   DATA bk1cs(10)/ - .0000000000000024274E0/
   DATA bk1cs(11)/ - .0000000000000000070E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BESK1
+  !* FIRST EXECUTABLE STATEMENT  BESK1
   IF ( first ) THEN
     ntk1 = INITS(bk1cs,11,0.1*R1MACH(3))
     xmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+.01)

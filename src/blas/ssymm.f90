@@ -1,17 +1,24 @@
-!DECK SSYMM
+!** SSYMM
 SUBROUTINE SSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSYMM
-  !***PURPOSE  Multiply a real general matrix by a real symmetric matrix.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B6
-  !***TYPE      SINGLE PRECISION (SSYMM-S, DSYMM-D, CSYMM-C)
-  !***KEYWORDS  LEVEL 3 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J., (ANL)
+  !>
+  !***
+  !  Multiply a real general matrix by a real symmetric matrix.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B6
+  !***
+  ! **Type:**      SINGLE PRECISION (SSYMM-S, DSYMM-D, CSYMM-C)
+  !***
+  ! **Keywords:**  LEVEL 3 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J., (ANL)
   !           Duff, I., (AERE)
   !           Du Croz, J., (NAG)
   !           Hammarling, S. (NAG)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  SSYMM  performs one of the matrix-matrix operations
   !
@@ -124,15 +131,18 @@ SUBROUTINE SSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !           max( 1, m ).
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J., Du Croz, J., Duff, I., and Hammarling, S.
+  !***
+  ! **References:**  Dongarra, J., Du Croz, J., Duff, I., and Hammarling, S.
   !                 A set of level 3 basic linear algebra subprograms.
   !                 ACM TOMS, Vol. 16, No. 1, pp. 1-17, March 1990.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890208  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  SSYMM
+  
   !     .. Scalar Arguments ..
   CHARACTER :: Side, Uplo
   INTEGER M, N, Lda, Ldb, Ldc
@@ -153,7 +163,7 @@ SUBROUTINE SSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !     .. Parameters ..
   REAL ONE, ZERO
   PARAMETER (ONE=1.0E+0,ZERO=0.0E+0)
-  !***FIRST EXECUTABLE STATEMENT  SSYMM
+  !* FIRST EXECUTABLE STATEMENT  SSYMM
   !
   !     Set NROWA as the number of rows of A.
   !

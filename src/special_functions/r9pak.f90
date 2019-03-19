@@ -1,14 +1,21 @@
-!DECK R9PAK
+!** R9PAK
 REAL FUNCTION R9PAK(Y,N)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  R9PAK
-  !***PURPOSE  Pack a base 2 exponent into a floating point number.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  A6B
-  !***TYPE      SINGLE PRECISION (R9PAK-S, D9PAK-D)
-  !***KEYWORDS  FNLIB, PACK
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Pack a base 2 exponent into a floating point number.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  A6B
+  !***
+  ! **Type:**      SINGLE PRECISION (R9PAK-S, D9PAK-D)
+  !***
+  ! **Keywords:**  FNLIB, PACK
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Pack a base 2 exponent into floating point number Y.  This
   ! routine is almost the inverse of R9UPAK.  It is not exactly
@@ -17,9 +24,12 @@ REAL FUNCTION R9PAK(Y,N)
   ! could compute
   !       R9PAK = Y * 2.0**N .
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  I1MACH, R1MACH, R9UPAK, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  I1MACH, R1MACH, R9UPAK, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -27,14 +37,14 @@ REAL FUNCTION R9PAK(Y,N)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   901009  Routine used I1MACH(7) where it should use I1MACH(10),
   !           Corrected (RWC)
-  !***END PROLOGUE  R9PAK
+  
   REAL a1n210, a1n2b, R1MACH, Y
   INTEGER I1MACH, N, nmax, nmin, nsum, ny
   LOGICAL first
   SAVE nmin, nmax, a1n210, first
   DATA a1n210/3.321928094887362E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  R9PAK
+  !* FIRST EXECUTABLE STATEMENT  R9PAK
   IF ( first ) THEN
     a1n2b = 1.0
     IF ( I1MACH(10)/=2 ) a1n2b = R1MACH(5)*a1n210

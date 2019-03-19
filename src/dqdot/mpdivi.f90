@@ -1,13 +1,17 @@
-!DECK MPDIVI
+!** MPDIVI
 SUBROUTINE MPDIVI(X,Iy,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  MPDIVI
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (MPDIVI-A)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DQDOTA and DQDOTI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (MPDIVI-A)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !  Divides 'mp' X by the single-precision integer IY giving 'mp' Z.
   !  This is much faster than division by an 'mp' number.
@@ -16,10 +20,14 @@ SUBROUTINE MPDIVI(X,Iy,Z)
   !  INTEGER arrays of size 30.  See the comments in the routine MPBLAS
   !  for the reason for this choice.
   !
-  !***SEE ALSO  DQDOTA, DQDOTI, MPBLAS
-  !***ROUTINES CALLED  MPCHK, MPERR, MPNZR, MPSTR, MPUNFL
-  !***COMMON BLOCKS    MPCOM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DQDOTA, DQDOTI, MPBLAS
+  !***
+  ! **Routines called:**  MPCHK, MPERR, MPNZR, MPSTR, MPUNFL
+  !***
+  ! COMMON BLOCKS    MPCOM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   ??????  Modified for use with BLAS.  Blank COMMON changed to named
   !           COMMON.  R given dimension 12.
@@ -27,11 +35,11 @@ SUBROUTINE MPDIVI(X,Iy,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  !***END PROLOGUE  MPDIVI
+  
   INTEGER i, i2, iq, iqj, ir, Iy, j, j1, j11, j2, k, kh, LUN, M, MXR
   COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
   INTEGER B, T, R, X(*), Z(*), rs, re, r1, c, c2, b2
-  !***FIRST EXECUTABLE STATEMENT  MPDIVI
+  !* FIRST EXECUTABLE STATEMENT  MPDIVI
   rs = X(1)
   j = Iy
   IF ( j<0 ) THEN

@@ -1,16 +1,23 @@
-!DECK SPOCO
+!** SPOCO
 SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPOCO
-  !***PURPOSE  Factor a real symmetric positive definite matrix
+  !>
+  !***
+  !  Factor a real symmetric positive definite matrix
   !            and estimate the condition number of the matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1B
-  !***TYPE      SINGLE PRECISION (SPOCO-S, DPOCO-D, CPOCO-C)
-  !***KEYWORDS  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1B
+  !***
+  ! **Type:**      SINGLE PRECISION (SPOCO-S, DPOCO-D, CPOCO-C)
+  !***
+  ! **Keywords:**  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
   !             MATRIX FACTORIZATION, POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     SPOCO factors a real symmetric positive definite matrix
   !     and estimates the condition of the matrix.
@@ -64,10 +71,13 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
   !                = K  signals an error condition.  The leading minor
   !                     of order  K  is not positive definite.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SASUM, SAXPY, SDOT, SPOFA, SSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SASUM, SAXPY, SDOT, SPOFA, SSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -76,7 +86,7 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SPOCO
+  
   INTEGER Lda, N, Info
   REAL A(Lda,*), Z(*)
   REAL Rcond
@@ -87,7 +97,7 @@ SUBROUTINE SPOCO(A,Lda,N,Rcond,Z,Info)
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !
-  !***FIRST EXECUTABLE STATEMENT  SPOCO
+  !* FIRST EXECUTABLE STATEMENT  SPOCO
   DO j = 1, N
     Z(j) = SASUM(j,A(1,j),1)
     jm1 = j - 1

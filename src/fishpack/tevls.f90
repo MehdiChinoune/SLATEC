@@ -1,13 +1,17 @@
-!DECK TEVLS
+!** TEVLS
 SUBROUTINE TEVLS(N,D,E2,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEVLS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BLKTRI
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (TEVLS-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BLKTRI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (TEVLS-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This subroutine finds the eigenvalues of a symmetric tridiagonal
   !     matrix by the rational QL method.
@@ -35,19 +39,24 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
   !          J          if the J-th eigenvalue has not been
   !                     determined after 30 iterations.
   !
-  !***SEE ALSO  BLKTRI
-  !***REFERENCES  C. H. Reinsch, Eigenvalues of a real, symmetric, tri-
+  !***
+  ! **See also:**  BLKTRI
+  !***
+  ! **References:**  C. H. Reinsch, Eigenvalues of a real, symmetric, tri-
   !                 diagonal matrix, Algorithm 464, Communications of the
   !                 ACM 16, 11 (November 1973), pp. 689.
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    CBLKT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    CBLKT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   920528  DESCRIPTION revised and REFERENCES section added.  (WRB)
-  !***END PROLOGUE  TEVLS
+  
   REAL CNV, dhold
   INTEGER IK, K, NCMplx, nhalf, NM, NPP, ntop
   INTEGER i, j, l, m, N, ii, l1, mml, Ierr
@@ -55,7 +64,7 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
   REAL b, c, f, g, h, p, r, s, MAChep
   !
   COMMON /CBLKT / NPP, K, MAChep, CNV, NM, NCMplx, IK
-  !***FIRST EXECUTABLE STATEMENT  TEVLS
+  !* FIRST EXECUTABLE STATEMENT  TEVLS
   Ierr = 0
   IF ( N/=1 ) THEN
     !

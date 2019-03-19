@@ -1,14 +1,21 @@
-!DECK DCOPYM
+!** DCOPYM
 SUBROUTINE DCOPYM(N,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCOPYM
-  !***PURPOSE  Copy the negative of a vector to a vector.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1A5
-  !***TYPE      DOUBLE PRECISION (SCOPYM-S, DCOPYM-D)
-  !***KEYWORDS  BLAS, COPY, VECTOR
-  !***AUTHOR  Kahaner, D. K., (NBS)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Copy the negative of a vector to a vector.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1A5
+  !***
+  ! **Type:**      DOUBLE PRECISION (SCOPYM-S, DCOPYM-D)
+  !***
+  ! **Keywords:**  BLAS, COPY, VECTOR
+  !***
+  ! **Author:**  Kahaner, D. K., (NBS)
+  !***
+  ! **Description:**
   !
   !       Description of Parameters
   !           The * Flags Output Variables
@@ -26,17 +33,20 @@ SUBROUTINE DCOPYM(N,Dx,Incx,Dy,Incy)
   !     INCX .GE. 0, else LX = 1+(1-N)*INCX, and LY is defined
   !     in a similar way using INCY.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
-  !***END PROLOGUE  DCOPYM
+  
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   REAL(8) :: Dx(*), Dy(*)
-  !***FIRST EXECUTABLE STATEMENT  DCOPYM
+  !* FIRST EXECUTABLE STATEMENT  DCOPYM
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy ) THEN
     IF ( Incx<1 ) THEN

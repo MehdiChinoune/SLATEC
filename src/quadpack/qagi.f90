@@ -1,27 +1,34 @@
-!DECK QAGI
+!** QAGI
 SUBROUTINE QAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
     Lenw,Last,Iwork,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QAGI
-  !***PURPOSE  The routine calculates an approximation result to a given
+  !>
+  !***
+  !  The routine calculates an approximation result to a given
   !            INTEGRAL   I = Integral of F over (BOUND,+INFINITY)
   !                    OR I = Integral of F over (-INFINITY,BOUND)
   !                    OR I = Integral of F over (-INFINITY,+INFINITY)
   !            Hopefully satisfying following claim for accuracy
   !            ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I)).
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A3A1, H2A4A1
-  !***TYPE      SINGLE PRECISION (QAGI-S, DQAGI-D)
-  !***KEYWORDS  AUTOMATIC INTEGRATOR, EXTRAPOLATION, GENERAL-PURPOSE,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A3A1, H2A4A1
+  !***
+  ! **Type:**      SINGLE PRECISION (QAGI-S, DQAGI-D)
+  !***
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, EXTRAPOLATION, GENERAL-PURPOSE,
   !             GLOBALLY ADAPTIVE, INFINITE INTERVALS, QUADPACK,
   !             QUADRATURE, TRANSFORMATION
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Integration over infinite intervals
   !        Standard fortran subroutine
@@ -159,15 +166,18 @@ SUBROUTINE QAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
   !                    WORK(LIMIT*3+1), ..., WORK(LIMIT*3)
   !                     contain the error estimates.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  QAGIE, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  QAGIE, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  QAGI
+  
   REAL Bound
   INTEGER Inf, Last
   REAL Abserr, Epsabs, Epsrel, F, Result, Work
@@ -179,7 +189,7 @@ SUBROUTINE QAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.
   !
-  !***FIRST EXECUTABLE STATEMENT  QAGI
+  !* FIRST EXECUTABLE STATEMENT  QAGI
   Ier = 6
   Neval = 0
   Last = 0

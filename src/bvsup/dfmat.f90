@@ -1,20 +1,26 @@
-!DECK DFMAT
+!** DFMAT
 SUBROUTINE DFMAT(X,Y,Yp)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DFMAT
-  !***PURPOSE  Subsidiary to
-  !***LIBRARY   SLATEC
-  !***AUTHOR  (UNKNOWN)
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    DSAVEX
-  !***REVISION HISTORY  (YYMMDD)
+  !>
+  !***
+  !  Subsidiary to
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    DSAVEX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DFMAT
+  
   REAL(8) :: X, Y, Yp, XSAve, TERm, tanx
   DIMENSION Y(*), Yp(*)
   COMMON /DSAVEX/ XSAve, TERm
-  !***FIRST EXECUTABLE STATEMENT  DFMAT
+  !* FIRST EXECUTABLE STATEMENT  DFMAT
   Yp(1) = Y(2)
   IF ( X/=XSAve ) THEN
     XSAve = X

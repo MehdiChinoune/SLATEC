@@ -1,25 +1,32 @@
-!DECK DQAGSE
+!** DQAGSE
 SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
     Blist,Rlist,Elist,Iord,Last)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQAGSE
-  !***PURPOSE  The routine calculates an approximation result to a given
+  !>
+  !***
+  !  The routine calculates an approximation result to a given
   !            definite integral I = Integral of F over (A,B),
   !            hopefully satisfying following claim for accuracy
   !            ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I)).
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A1A1
-  !***TYPE      DOUBLE PRECISION (QAGSE-S, DQAGSE-D)
-  !***KEYWORDS  AUTOMATIC INTEGRATOR, END POINT SINGULARITIES,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A1A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (QAGSE-S, DQAGSE-D)
+  !***
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, END POINT SINGULARITIES,
   !             EXTRAPOLATION, GENERAL-PURPOSE, GLOBALLY ADAPTIVE,
   !             QUADPACK, QUADRATURE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Computation of a definite integral
   !        Standard fortran subroutine
@@ -148,15 +155,18 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
   !                     Number of subintervals actually produced in the
   !                     subdivision process
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DQELG, DQK21, DQPSRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DQELG, DQK21, DQPSRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DQAGSE
+  
   !
   REAL(8) :: A, abseps, Abserr, Alist, area, area1, area12, &
     area2, a1, a2, B, Blist, b1, b2, correc, defabs, &
@@ -225,7 +235,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
   !           UFLOW IS THE SMALLEST POSITIVE MAGNITUDE.
   !           OFLOW IS THE LARGEST POSITIVE MAGNITUDE.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQAGSE
+  !* FIRST EXECUTABLE STATEMENT  DQAGSE
   epmach = D1MACH(4)
   !
   !            TEST ON VALIDITY OF PARAMETERS
@@ -361,9 +371,9 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
         !           WITH NRMAX-TH LARGEST ERROR ESTIMATE (TO BE BISECTED NEXT).
         !
         CALL DQPSRT(Limit,Last,maxerr,errmax,Elist,Iord,nrmax)
-        ! ***JUMP OUT OF DO-LOOP
+        !- **JUMP OUT OF DO-LOOP
         IF ( errsum<=errbnd ) GOTO 50
-        ! ***JUMP OUT OF DO-LOOP
+        !- **JUMP OUT OF DO-LOOP
         IF ( Ier/=0 ) EXIT
         IF ( Last==2 ) THEN
           small = ABS(B-A)*0.375D+00
@@ -394,7 +404,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
             DO k = id, jupbnd
               maxerr = Iord(nrmax)
               errmax = Elist(maxerr)
-              ! ***JUMP OUT OF DO-LOOP
+              !- **JUMP OUT OF DO-LOOP
               IF ( ABS(Blist(maxerr)-Alist(maxerr))>small ) GOTO 20
               nrmax = nrmax + 1
             ENDDO
@@ -413,7 +423,7 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
             Result = reseps
             correc = erlarg
             ertest = MAX(Epsabs,Epsrel*ABS(reseps))
-            ! ***JUMP OUT OF DO-LOOP
+            !- **JUMP OUT OF DO-LOOP
             IF ( Abserr<=ertest ) EXIT
           ENDIF
           !

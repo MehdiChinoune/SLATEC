@@ -1,14 +1,18 @@
-!DECK YAIRY
+!** YAIRY
 SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  YAIRY
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BESJ and BESY
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (YAIRY-S, DYAIRY-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
+  !>
+  !***
+  !  Subsidiary to BESJ and BESY
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (YAIRY-S, DYAIRY-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
   !           Daniel, S. L., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                  YAIRY computes the Airy function BI(X)
   !                   and its derivative DBI(X) for ASYJY
@@ -23,14 +27,17 @@ SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
   !        BI  - Value of function BI(X)
   !       DBI  - Value of the derivative DBI(X)
   !
-  !***SEE ALSO  BESJ, BESY
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BESJ, BESY
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  !***END PROLOGUE  YAIRY
+  
   !
   INTEGER i, j, m1, m1d, m2, m2d, m3, m3d, m4d, n1, n1d, n2, &
     n2d, n3, n3d, n4d
@@ -207,7 +214,7 @@ SUBROUTINE YAIRY(X,Rx,C,Bi,Dbi)
     -1.44752826642035E-10, 4.53724043420422E-11, &
     -3.99655065847223E-12, -3.24089119830323E-13, &
     1.62098952568741E-13, -2.40765247974057E-14, 1.69384811284491E-16/
-  !***FIRST EXECUTABLE STATEMENT  YAIRY
+  !* FIRST EXECUTABLE STATEMENT  YAIRY
   ax = ABS(X)
   Rx = SQRT(ax)
   C = con1*ax*Rx

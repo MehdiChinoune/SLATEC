@@ -1,17 +1,24 @@
-!DECK SSYR2
+!** SSYR2
 SUBROUTINE SSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSYR2
-  !***PURPOSE  Perform symmetric rank 2 update of a real symmetric matrix.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B4
-  !***TYPE      SINGLE PRECISION (SSYR2-S, DSYR2-D, CSYR2-C)
-  !***KEYWORDS  LEVEL 2 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J. J., (ANL)
+  !>
+  !***
+  !  Perform symmetric rank 2 update of a real symmetric matrix.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SSYR2-S, DSYR2-D, CSYR2-C)
+  !***
+  ! **Keywords:**  LEVEL 2 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J. J., (ANL)
   !           Du Croz, J., (NAG)
   !           Hammarling, S., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  SSYR2  performs the symmetric rank 2 operation
   !
@@ -87,16 +94,19 @@ SUBROUTINE SSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !           max( 1, n ).
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J. J., Du Croz, J., Hammarling, S., and
+  !***
+  ! **References:**  Dongarra, J. J., Du Croz, J., Hammarling, S., and
   !                 Hanson, R. J.  An extended set of Fortran basic linear
   !                 algebra subprograms.  ACM TOMS, Vol. 14, No. 1,
   !                 pp. 1-17, March 1988.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  SSYR2
+  
   !     .. Scalar Arguments ..
   REAL Alpha
   INTEGER Incx, Incy, Lda, N
@@ -116,7 +126,7 @@ SUBROUTINE SSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
-  !***FIRST EXECUTABLE STATEMENT  SSYR2
+  !* FIRST EXECUTABLE STATEMENT  SSYR2
   !
   !     Test the input parameters.
   !

@@ -1,24 +1,29 @@
-!DECK DQCHEB
+!** DQCHEB
 SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQCHEB
-  !***SUBSIDIARY
-  !***PURPOSE  This routine computes the CHEBYSHEV series expansion
+  !>
+  !***
+  !  This routine computes the CHEBYSHEV series expansion
   !            of degrees 12 and 24 of a function using A
   !            FAST FOURIER TRANSFORM METHOD
   !            F(X) = SUM(K=1,..,13) (CHEB12(K)*T(K-1,X)),
   !            F(X) = SUM(K=1,..,25) (CHEB24(K)*T(K-1,X)),
   !            Where T(K,X) is the CHEBYSHEV POLYNOMIAL OF DEGREE K.
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (QCHEB-S, DQCHEB-D)
-  !***KEYWORDS  CHEBYSHEV SERIES EXPANSION, FAST FOURIER TRANSFORM
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (QCHEB-S, DQCHEB-D)
+  !***
+  ! **Keywords:**  CHEBYSHEV SERIES EXPANSION, FAST FOURIER TRANSFORM
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Chebyshev Series Expansion
   !        Standard Fortran Subroutine
@@ -47,14 +52,17 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   !                    Vector of dimension 25 containing the
   !                    CHEBYSHEV Coefficients for degree 24
   !
-  !***SEE ALSO  DQC25C, DQC25F, DQC25S
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DQC25C, DQC25F, DQC25S
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810101  DATE WRITTEN
   !   830518  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DQCHEB
+  
   !
   REAL(8) :: alam, alam1, alam2, Cheb12, Cheb24, Fval, part1, &
     part2, part3, v, X
@@ -62,7 +70,7 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   !
   DIMENSION Cheb12(13), Cheb24(25), Fval(25), v(12), X(11)
   !
-  !***FIRST EXECUTABLE STATEMENT  DQCHEB
+  !* FIRST EXECUTABLE STATEMENT  DQCHEB
   DO i = 1, 12
     j = 26 - i
     v(i) = Fval(i) - Fval(j)

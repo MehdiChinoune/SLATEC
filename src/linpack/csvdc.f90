@@ -1,16 +1,23 @@
-!DECK CSVDC
+!** CSVDC
 SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CSVDC
-  !***PURPOSE  Perform the singular value decomposition of a rectangular
+  !>
+  !***
+  !  Perform the singular value decomposition of a rectangular
   !            matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D6
-  !***TYPE      COMPLEX (SSVDC-S, DSVDC-D, CSVDC-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D6
+  !***
+  ! **Type:**      COMPLEX (SSVDC-S, DSVDC-D, CSVDC-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX,
   !             SINGULAR VALUE DECOMPOSITION
-  !***AUTHOR  Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Stewart, G. W., (U. of Maryland)
+  !***
+  ! **Description:**
   !
   !     CSVDC is a subroutine to reduce a complex NxP matrix X by
   !     unitary transformations U and V to diagonal form.  The
@@ -98,10 +105,13 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !                   is the conjugate-transpose of U).  Thus the
   !                   singular values of X and B are the same.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTC, CSCAL, CSROT, CSWAP, SCNRM2, SROTG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTC, CSCAL, CSROT, CSWAP, SCNRM2, SROTG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790319  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -109,7 +119,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CSVDC
+  
   INTEGER Ldx, N, P, Ldu, Ldv, Job, Info
   COMPLEX X(Ldx,*), S(*), E(*), U(Ldu,*), V(Ldv,*), Work(*)
   !
@@ -123,7 +133,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   LOGICAL wantu, wantv
   REAL, EXTERNAL :: CABS1
   COMPLEX, EXTERNAL :: CSIGN
-  !***FIRST EXECUTABLE STATEMENT  CSVDC
+  !* FIRST EXECUTABLE STATEMENT  CSVDC
   !
   !     SET THE MAXIMUM NUMBER OF ITERATIONS.
   !

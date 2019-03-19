@@ -1,17 +1,24 @@
-!DECK CHPR2
+!** CHPR2
 SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHPR2
-  !***PURPOSE  Perform the hermitian rank 2 operation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B4
-  !***TYPE      COMPLEX (SHPR2-S, DHPR2-D, CHPR2-C)
-  !***KEYWORDS  LEVEL 2 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J. J., (ANL)
+  !>
+  !***
+  !  Perform the hermitian rank 2 operation.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      COMPLEX (SHPR2-S, DHPR2-D, CHPR2-C)
+  !***
+  ! **Keywords:**  LEVEL 2 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J. J., (ANL)
   !           Du Croz, J., (NAG)
   !           Hammarling, S., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  CHPR2  performs the hermitian rank 2 operation
   !
@@ -87,16 +94,19 @@ SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
   !           not be set, they are assumed to be zero, and on exit they
   !           are set to zero.
   !
-  !***REFERENCES  Dongarra, J. J., Du Croz, J., Hammarling, S., and
+  !***
+  ! **References:**  Dongarra, J. J., Du Croz, J., Hammarling, S., and
   !                 Hanson, R. J.  An extended set of Fortran basic linear
   !                 algebra subprograms.  ACM TOMS, Vol. 14, No. 1,
   !                 pp. 1-17, March 1988.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  CHPR2
+  
   !     .. Scalar Arguments ..
   COMPLEX Alpha
   INTEGER Incx, Incy, N
@@ -116,7 +126,7 @@ SUBROUTINE CHPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, REAL
-  !***FIRST EXECUTABLE STATEMENT  CHPR2
+  !* FIRST EXECUTABLE STATEMENT  CHPR2
   !
   !     Test the input parameters.
   !

@@ -1,18 +1,25 @@
-!DECK CBESJ
+!** CBESJ
 SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CBESJ
-  !***PURPOSE  Compute a sequence of the Bessel functions J(a,z) for
+  !>
+  !***
+  !  Compute a sequence of the Bessel functions J(a,z) for
   !            complex argument z and real nonnegative orders a=b,b+1,
   !            b+2,... where b>0.  A scaling option is available to
   !            help avoid overflow.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10A4
-  !***TYPE      COMPLEX (CBESJ-C, ZBESJ-C)
-  !***KEYWORDS  BESSEL FUNCTIONS OF COMPLEX ARGUMENT,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10A4
+  !***
+  ! **Type:**      COMPLEX (CBESJ-C, ZBESJ-C)
+  !***
+  ! **Keywords:**  BESSEL FUNCTIONS OF COMPLEX ARGUMENT,
   !             BESSEL FUNCTIONS OF THE FIRST KIND, J BESSEL FUNCTIONS
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !         On KODE=1, CBESJ computes an N member sequence of complex
   !         Bessel functions CY(L)=J(FNU+L-1,Z) for real nonnegative
@@ -56,7 +63,7 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !                    IERR=5  Algorithmic error - NO COMPUTATION
   !                            (Termination condition not met)
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !         The computation is carried out by the formulae
   !
@@ -120,7 +127,8 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !         the principal phase angle is on the order of +P, -P, PI/2-P,
   !         or -PI/2+P.
   !
-  !***REFERENCES  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
+  !***
+  ! **References:**  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
   !                 matical Functions, National Bureau of Standards
   !                 Applied Mathematics Series 55, U. S. Department
   !                 of Commerce, Tenth Printing (1972) or later.
@@ -140,14 +148,16 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !                 Transactions on Mathematical Software, 12 (September
   !                 1986), pp. 265-273.
   !
-  !***ROUTINES CALLED  CBINU, I1MACH, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CBINU, I1MACH, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   890801  REVISION DATE from Version 3.2
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  !***END PROLOGUE  CBESJ
+  
   !
   COMPLEX ci, csgn, Cy, Z, zn
   REAL aa, alim, arg, dig, elim, Fnu, fnul, hpi, rl, r1, r1m5, &
@@ -157,7 +167,7 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   DIMENSION Cy(N)
   DATA hpi/1.57079632679489662E0/
   !
-  !***FIRST EXECUTABLE STATEMENT  CBESJ
+  !* FIRST EXECUTABLE STATEMENT  CBESJ
   Ierr = 0
   Nz = 0
   IF ( Fnu<0.0E0 ) Ierr = 1

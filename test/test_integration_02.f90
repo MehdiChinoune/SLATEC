@@ -2,16 +2,22 @@ MODULE TEST42_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK DAVNTS
+  !** DAVNTS
   SUBROUTINE DAVNTS(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DAVNTS
-    !***PURPOSE  Quick check for DAVINT.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (AVNTST-S, DAVNTS-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  D1MACH, DAVINT, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for DAVINT.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (AVNTST-S, DAVNTS-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DAVINT, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
@@ -20,13 +26,13 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920210  Code restructured and revised to test error returns for all
     !           values of KPRINT.  (WRB)
-    !***END PROLOGUE  DAVNTS
+    
     INTEGER kontrl
     REAL(8) :: D1MACH
     INTEGER i, ierr, Ipass, Kprint, Lun, n
     REAL(8) :: a, ans, b, del, rn1, sqb, tol, tol1, x(501), xint, y(501)
     LOGICAL fatal
-    !***FIRST EXECUTABLE STATEMENT  DAVNTS
+    !* FIRST EXECUTABLE STATEMENT  DAVNTS
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/' DAVINT Quick Check')
     Ipass = 1
@@ -206,16 +212,22 @@ CONTAINS
     99010 FORMAT (/' IERR =',I2,' and it should =',I2/)
     99011 FORMAT (1X,'ANS .NE. 0')
   END SUBROUTINE DAVNTS
-  !DECK DQG8TS
+  !** DQG8TS
   SUBROUTINE DQG8TS(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DQG8TS
-    !***PURPOSE  Quick check for DGAUS8.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (QG8TST-S, DQG8TS-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  D1MACH, DFQD1, DFQD2, DGAUS8, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for DGAUS8.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (QG8TST-S, DQG8TS-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DFQD1, DFQD2, DGAUS8, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Changed usage of D1MACH(3) to D1MACH(4).  (RWC)
@@ -224,7 +236,7 @@ CONTAINS
     !   920213  Code restructured to test DGAUS8 for all values of KPRINT,
     !           second accuracy test added and testing of error returns
     !           revised.  (WRB)
-    !***END PROLOGUE  DQG8TS
+    
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -238,7 +250,7 @@ CONTAINS
     EXTERNAL DGAUS8, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, EXP, SQRT
-    !***FIRST EXECUTABLE STATEMENT  DQG8TS
+    !* FIRST EXECUTABLE STATEMENT  DQG8TS
     IF ( Kprint>=2 ) WRITE (Lun,FMT=99003)
     !
     !     Initialize variables for testing.
@@ -356,16 +368,22 @@ CONTAINS
     99008 FORMAT (/,' ***************DGAUS8 PASSED ALL TESTS**************')
     99009 FORMAT (/,' ***************DGAUS8 FAILED SOME TESTS*************')
   END SUBROUTINE DQG8TS
-  !DECK DQN79Q
+  !** DQN79Q
   SUBROUTINE DQN79Q(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DQN79Q
-    !***PURPOSE  Quick check for DQNC79.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (QN79QX-S, DQN79Q-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  D1MACH, DFQD1, DFQD2, DQNC79, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for DQNC79.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (QN79QX-S, DQN79Q-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DFQD1, DFQD2, DQNC79, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Changed usage of D1MACH(3) to D1MACH(4).  (RWC)
@@ -374,7 +392,7 @@ CONTAINS
     !   920213  Code restructured to test DQNC79 for all values of KPRINT,
     !           second accuracy test added and testing of error returns
     !           revised.  (WRB)
-    !***END PROLOGUE  DQN79Q
+    
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -388,7 +406,7 @@ CONTAINS
     EXTERNAL DQNC79, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, SQRT
-    !***FIRST EXECUTABLE STATEMENT  DQN79Q
+    !* FIRST EXECUTABLE STATEMENT  DQN79Q
     IF ( Kprint>=2 ) WRITE (Lun,FMT=99003)
     !
     !     Initialize variables for testing.
@@ -507,68 +525,87 @@ CONTAINS
     99008 FORMAT (/' ***************DQNC79 PASSED ALL TESTS***************')
     99009 FORMAT (/' ***************DQNC79 FAILED SOME TESTS**************')
   END SUBROUTINE DQN79Q
-  !DECK DFQD1
+  !** DFQD1
   REAL(8) FUNCTION DFQD1(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DFQD1
-    !***SUBSIDIARY
-    !***PURPOSE  Function evaluator for DQNC79 and DGAUS8 quick checks.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (FQD1-S, DFQD1-D)
-    !***AUTHOR  Boland, W. Robert, (LANL)
-    !***SEE ALSO  DQG8TS, DQN79Q
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Function evaluator for DQNC79 and DGAUS8 quick checks.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (FQD1-S, DFQD1-D)
+    !***
+    ! **Author:**  Boland, W. Robert, (LANL)
+    !***
+    ! **See also:**  DQG8TS, DQN79Q
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   920229  DATE WRITTEN
-    !***END PROLOGUE  DFQD1
+    
     !     .. Scalar Arguments ..
     REAL(8) :: X
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
-    !***FIRST EXECUTABLE STATEMENT  DFQD1
+    !* FIRST EXECUTABLE STATEMENT  DFQD1
     DFQD1 = 0.0D0
     IF ( X>0.0D0 ) DFQD1 = 1.0D0/SQRT(X)
   END FUNCTION DFQD1
-  !DECK DFQD2
+  !** DFQD2
   REAL(8) FUNCTION DFQD2(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DFQD2
-    !***SUBSIDIARY
-    !***PURPOSE  Function evaluator for DQNC79 and DGAUS8 quick checks.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (FQD2-S, DFQD2-D)
-    !***AUTHOR  Boland, W. Robert, (LANL)
-    !***SEE ALSO  DQG8TS, DQN79Q
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Function evaluator for DQNC79 and DGAUS8 quick checks.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (FQD2-S, DFQD2-D)
+    !***
+    ! **Author:**  Boland, W. Robert, (LANL)
+    !***
+    ! **See also:**  DQG8TS, DQN79Q
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   920229  DATE WRITTEN
-    !***END PROLOGUE  DFQD2
+    
     !     .. Scalar Arguments ..
     REAL(8) :: X
     !     .. Intrinsic Functions ..
     INTRINSIC COS, EXP
-    !***FIRST EXECUTABLE STATEMENT  DFQD2
+    !* FIRST EXECUTABLE STATEMENT  DFQD2
     DFQD2 = EXP(X)*COS(10.0D0*X)
   END FUNCTION DFQD2
 END MODULE TEST42_MOD
-!DECK TEST42
+!** TEST42
 PROGRAM TEST42
   USE TEST42_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST42
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  H2
-  !***TYPE      DOUBLE PRECISION (TEST41-S, TEST42-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  H2
+  !***
+  ! **Type:**      DOUBLE PRECISION (TEST41-S, TEST42-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -580,24 +617,27 @@ PROGRAM TEST42
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        DAVINT   DGAUS8   DQNC79
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  DAVNTS, DQG8TS, DQN79Q, I1MACH, XERMAX, XSETF,
+  !***
+  ! **Routines called:**  DAVNTS, DQG8TS, DQN79Q, I1MACH, XERMAX, XSETF,
   !                    XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST42
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST42
+  !* FIRST EXECUTABLE STATEMENT  TEST42
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

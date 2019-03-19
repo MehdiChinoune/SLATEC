@@ -1,15 +1,22 @@
-!DECK PCOEF
+!** PCOEF
 SUBROUTINE PCOEF(L,C,Tc,A)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PCOEF
-  !***PURPOSE  Convert the POLFIT coefficients to Taylor series form.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  K1A1A2
-  !***TYPE      SINGLE PRECISION (PCOEF-S, DPCOEF-D)
-  !***KEYWORDS  CURVE FITTING, DATA FITTING, LEAST SQUARES, POLYNOMIAL FIT
-  !***AUTHOR  Shampine, L. F., (SNLA)
+  !>
+  !***
+  !  Convert the POLFIT coefficients to Taylor series form.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  K1A1A2
+  !***
+  ! **Type:**      SINGLE PRECISION (PCOEF-S, DPCOEF-D)
+  !***
+  ! **Keywords:**  CURVE FITTING, DATA FITTING, LEAST SQUARES, POLYNOMIAL FIT
+  !***
+  ! **Author:**  Shampine, L. F., (SNLA)
   !           Davenport, S. M., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Written BY L. F. Shampine and S. M. Davenport.
   !
@@ -45,21 +52,24 @@ SUBROUTINE PCOEF(L,C,Tc,A)
   !                  i.e.
   !                    P(X) = TC(1)*(X-C)**N + ... + TC(N)*(X-C) + TC(N+1)
   !
-  !***REFERENCES  L. F. Shampine, S. M. Davenport and R. E. Huddleston,
+  !***
+  ! **References:**  L. F. Shampine, S. M. Davenport and R. E. Huddleston,
   !                 Curve fitting by polynomials in one variable, Report
   !                 SLA-74-0270, Sandia Laboratories, June 1974.
-  !***ROUTINES CALLED  PVALUE
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  PVALUE
+
+  !* REVISION HISTORY  (YYMMDD)
   !   740601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  PCOEF
+  
   REAL A, C, fac, save, Tc
   INTEGER i, L, ll, llp1, llp2, new, nr
   DIMENSION A(*), Tc(*)
-  !***FIRST EXECUTABLE STATEMENT  PCOEF
+  !* FIRST EXECUTABLE STATEMENT  PCOEF
   ll = ABS(L)
   llp1 = ll + 1
   CALL PVALUE(ll,ll,C,Tc(1),Tc(2),A)

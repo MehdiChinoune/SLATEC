@@ -1,15 +1,22 @@
-!DECK DBSPVD
+!** DBSPVD
 SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBSPVD
-  !***PURPOSE  Calculate the value and all derivatives of order less than
+  !>
+  !***
+  !  Calculate the value and all derivatives of order less than
   !            NDERIV of all basis functions which do not vanish at X.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E3, K6
-  !***TYPE      DOUBLE PRECISION (BSPVD-S, DBSPVD-D)
-  !***KEYWORDS  DIFFERENTIATION OF B-SPLINE, EVALUATION OF B-SPLINE
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E3, K6
+  !***
+  ! **Type:**      DOUBLE PRECISION (BSPVD-S, DBSPVD-D)
+  !***
+  ! **Keywords:**  DIFFERENTIATION OF B-SPLINE, EVALUATION OF B-SPLINE
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Written by Carl de Boor and modified by D. E. Amos
   !
@@ -59,11 +66,14 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !     Error Conditions
   !         Improper input is a fatal error
   !
-  !***REFERENCES  Carl de Boor, Package for calculating with B-splines,
+  !***
+  ! **References:**  Carl de Boor, Package for calculating with B-splines,
   !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
   !                 pp. 441-472.
-  !***ROUTINES CALLED  DBSPVN, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DBSPVN, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -71,7 +81,7 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DBSPVD
+  
   INTEGER iwork, Ldvnik
   INTEGER i, ideriv, Ileft, ipkmd, j, jj, jlow, jm, jp1mid, K, &
     kmd, kp1, l, ldummy, m, mhigh, Nderiv
@@ -81,7 +91,7 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !     A(I,K) = W0RK(I+K*(K-1)/2)  I=1.K
   !     WORK(1) AND WORK((K+1)*(K+2)/2) ARE NOT USED.
   DIMENSION T(*), Vnikx(Ldvnik,*), Work(*)
-  !***FIRST EXECUTABLE STATEMENT  DBSPVD
+  !* FIRST EXECUTABLE STATEMENT  DBSPVD
   IF ( K<1 ) THEN
     !
     !

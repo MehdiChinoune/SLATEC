@@ -1,13 +1,17 @@
-!DECK DPCHSW
+!** DPCHSW
 SUBROUTINE DPCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPCHSW
-  !***SUBSIDIARY
-  !***PURPOSE  Limits excursion from data for DPCHCS
-  !***LIBRARY   SLATEC (PCHIP)
-  !***TYPE      DOUBLE PRECISION (PCHSW-S, DPCHSW-D)
-  !***AUTHOR  Fritsch, F. N., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Limits excursion from data for DPCHCS
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Type:**      DOUBLE PRECISION (PCHSW-S, DPCHSW-D)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
+  !***
+  ! **Description:**
   !
   !         DPCHSW:  DPCHCS Switch Excursion Limiter.
   !
@@ -53,9 +57,12 @@ SUBROUTINE DPCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !
   !  Fortran intrinsics used:  ABS, SIGN, SQRT.
   !
-  !***SEE ALSO  DPCHCS
-  !***ROUTINES CALLED  D1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DPCHCS
+  !***
+  ! **Routines called:**  D1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820218  DATE WRITTEN
   !   820805  Converted to SLATEC library version.
   !   870707  Corrected XERROR calls for d.p. name(s).
@@ -72,7 +79,7 @@ SUBROUTINE DPCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !   910408  Updated AUTHOR and DATE WRITTEN sections in prologue.  (WRB)
   !   920526  Eliminated possible divide by zero problem.  (FNF)
   !   930503  Improved purpose.  (FNF)
-  !***END PROLOGUE  DPCHSW
+  
   !
   !**End
   !
@@ -104,7 +111,7 @@ SUBROUTINE DPCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !     SIMILARLY,  P(XHAT)-F2 = D*H*(PHI-RHO) .
   !
   !      SMALL SHOULD BE A FEW ORDERS OF MAGNITUDE GREATER THAN MACHEPS.
-  !***FIRST EXECUTABLE STATEMENT  DPCHSW
+  !* FIRST EXECUTABLE STATEMENT  DPCHSW
   small = fact*D1MACH(4)
   !
   !  DO MAIN CALCULATION.

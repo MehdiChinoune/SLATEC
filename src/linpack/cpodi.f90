@@ -1,17 +1,24 @@
-!DECK CPODI
+!** CPODI
 SUBROUTINE CPODI(A,Lda,N,Det,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPODI
-  !***PURPOSE  Compute the determinant and inverse of a certain complex
+  !>
+  !***
+  !  Compute the determinant and inverse of a certain complex
   !            Hermitian positive definite matrix using the factors
   !            computed by CPOCO, CPOFA, or CQRDC.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2D1B, D3D1B
-  !***TYPE      COMPLEX (SPODI-S, DPODI-D, CPODI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2D1B, D3D1B
+  !***
+  ! **Type:**      COMPLEX (SPODI-S, DPODI-D, CPODI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CPODI computes the determinant and inverse of a certain
   !     complex Hermitian positive definite matrix (see below)
@@ -58,10 +65,13 @@ SUBROUTINE CPODI(A,Lda,N,Det,Job)
   !        It will not occur if the subroutines are called correctly
   !        and if CPOCO or CPOFA has set INFO .EQ. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -69,7 +79,7 @@ SUBROUTINE CPODI(A,Lda,N,Det,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CPODI
+  
   INTEGER Lda, N, Job
   COMPLEX A(Lda,*)
   REAL Det(2)
@@ -77,7 +87,7 @@ SUBROUTINE CPODI(A,Lda,N,Det,Job)
   COMPLEX t
   REAL s
   INTEGER i, j, jm1, k, kp1
-  !***FIRST EXECUTABLE STATEMENT  CPODI
+  !* FIRST EXECUTABLE STATEMENT  CPODI
   !
   !     COMPUTE DETERMINANT
   !

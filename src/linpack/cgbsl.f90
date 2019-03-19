@@ -1,15 +1,22 @@
-!DECK CGBSL
+!** CGBSL
 SUBROUTINE CGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CGBSL
-  !***PURPOSE  Solve the complex band system A*X=B or CTRANS(A)*X=B using
+  !>
+  !***
+  !  Solve the complex band system A*X=B or CTRANS(A)*X=B using
   !            the factors computed by CGBCO or CGBFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2C2
-  !***TYPE      COMPLEX (SGBSL-S, DGBSL-D, CGBSL-C)
-  !***KEYWORDS  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2C2
+  !***
+  ! **Type:**      COMPLEX (SGBSL-S, DGBSL-D, CGBSL-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CGBSL solves the complex band system
   !     A * X = B  or  CTRANS(A) * X = B
@@ -64,10 +71,13 @@ SUBROUTINE CGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !              CALL CGBSL(ABD,LDA,N,ML,MU,IPVT,C(1,J),0)
   !        10 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTC
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTC
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -76,13 +86,13 @@ SUBROUTINE CGBSL(Abd,Lda,N,Ml,Mu,Ipvt,B,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CGBSL
+  
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Job
   COMPLEX Abd(Lda,*), B(*)
   !
   COMPLEX CDOTC, t
   INTEGER k, kb, l, la, lb, lm, m, nm1
-  !***FIRST EXECUTABLE STATEMENT  CGBSL
+  !* FIRST EXECUTABLE STATEMENT  CGBSL
   m = Mu + Ml + 1
   nm1 = N - 1
   IF ( Job/=0 ) THEN

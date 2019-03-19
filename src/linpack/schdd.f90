@@ -1,16 +1,23 @@
-!DECK SCHDD
+!** SCHDD
 SUBROUTINE SCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SCHDD
-  !***PURPOSE  Downdate an augmented Cholesky decomposition or the
+  !>
+  !***
+  !  Downdate an augmented Cholesky decomposition or the
   !            triangular factor of an augmented QR decomposition.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D7B
-  !***TYPE      SINGLE PRECISION (SCHDD-S, DCHDD-D, CCHDD-C)
-  !***KEYWORDS  CHOLESKY DECOMPOSITION, DOWNDATE, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D7B
+  !***
+  ! **Type:**      SINGLE PRECISION (SCHDD-S, DCHDD-D, CCHDD-C)
+  !***
+  ! **Keywords:**  CHOLESKY DECOMPOSITION, DOWNDATE, LINEAR ALGEBRA, LINPACK,
   !             MATRIX
-  !***AUTHOR  Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Stewart, G. W., (U. of Maryland)
+  !***
+  ! **Description:**
   !
   !     SCHDD downdates an augmented Cholesky decomposition or the
   !     triangular factor of an augmented QR decomposition.
@@ -114,10 +121,13 @@ SUBROUTINE SCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   !                             downdated.  The offending RHOs are
   !                             set to -1.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SDOT, SNRM2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SDOT, SNRM2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -125,7 +135,7 @@ SUBROUTINE SCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SCHDD
+  
   REAL scale
   INTEGER Ldr, P, Ldz, Nz, Info
   REAL R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
@@ -138,7 +148,7 @@ SUBROUTINE SCHDD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S,Info)
   !     SOLVE THE SYSTEM TRANS(R)*A = X, PLACING THE RESULT
   !     IN THE ARRAY S.
   !
-  !***FIRST EXECUTABLE STATEMENT  SCHDD
+  !* FIRST EXECUTABLE STATEMENT  SCHDD
   Info = 0
   S(1) = X(1)/R(1,1)
   IF ( P>=2 ) THEN

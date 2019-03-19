@@ -1,19 +1,26 @@
-!DECK HSTCRT
+!** HSTCRT
 SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HSTCRT
-  !***PURPOSE  Solve the standard five-point finite difference
+  !>
+  !***
+  !  Solve the standard five-point finite difference
   !            approximation on a staggered grid to the Helmholtz equation
   !            in Cartesian coordinates.
-  !***LIBRARY   SLATEC (FISHPACK)
-  !***CATEGORY  I2B1A1A
-  !***TYPE      SINGLE PRECISION (HSTCRT-S)
-  !***KEYWORDS  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE
-  !***AUTHOR  Adams, J., (NCAR)
+  !***
+  ! **Library:**   SLATEC (FISHPACK)
+  !***
+  ! **Category:**  I2B1A1A
+  !***
+  ! **Type:**      SINGLE PRECISION (HSTCRT-S)
+  !***
+  ! **Keywords:**  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE
+  !***
+  ! **Author:**  Adams, J., (NCAR)
   !           Swarztrauber, P. N., (NCAR)
   !           Sweet, R., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !      HSTCRT solves the standard five-point finite difference
   !      approximation on a staggered grid to the Helmholtz equation in
@@ -197,7 +204,7 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !    W
   !      W(1) contains the required length of W.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !     * * * * * * *   Program Specifications    * * * * * * * * * * * *
   !
@@ -269,26 +276,29 @@ SUBROUTINE HSTCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   !
-  !***REFERENCES  U. Schumann and R. Sweet, A direct method for the
+  !***
+  ! **References:**  U. Schumann and R. Sweet, A direct method for the
   !                 solution of Poisson's equation with Neumann boundary
   !                 conditions on a staggered grid of arbitrary size,
   !                 Journal of Computational Physics 20, (1976),
   !                 pp. 171-182.
-  !***ROUTINES CALLED  GENBUN, POISTG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  GENBUN, POISTG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  HSTCRT
+  
   REAL A, B, Bda, Bdb, Bdc, Bdd, C, D, deltax, deltay, delxsq, &
     delysq, Elmbda, F, Pertrb, s, st2, twdelx, twdely, twdysq
   REAL W
   INTEGER i, id2, id3, id4, Idimf, ierr1, Ierror, j, M, Mbdcnd, &
     mp, mperod, N, Nbdcnd, np, nperod
   DIMENSION F(Idimf,*), Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
-  !***FIRST EXECUTABLE STATEMENT  HSTCRT
+  !* FIRST EXECUTABLE STATEMENT  HSTCRT
   Ierror = 0
   IF ( A>=B ) Ierror = 1
   IF ( Mbdcnd<0.OR.Mbdcnd>4 ) Ierror = 2

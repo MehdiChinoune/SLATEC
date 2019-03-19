@@ -1,15 +1,22 @@
-!DECK DTRDI
+!** DTRDI
 SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DTRDI
-  !***PURPOSE  Compute the determinant and inverse of a triangular matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2A3, D3A3
-  !***TYPE      DOUBLE PRECISION (STRDI-S, DTRDI-D, CTRDI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK,
+  !>
+  !***
+  !  Compute the determinant and inverse of a triangular matrix.
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2A3, D3A3
+  !***
+  ! **Type:**      DOUBLE PRECISION (STRDI-S, DTRDI-D, CTRDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK,
   !             TRIANGULAR MATRIX
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DTRDI computes the determinant and inverse of a double precision
   !     triangular matrix.
@@ -54,10 +61,13 @@ SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
   !                a zero diagonal element of T.
   !
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -66,14 +76,14 @@ SUBROUTINE DTRDI(T,Ldt,N,Det,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DTRDI
+  
   INTEGER Ldt, N, Job, Info
   REAL(8) :: T(Ldt,*), Det(2)
   !
   REAL(8) :: temp
   REAL(8) :: ten
   INTEGER i, j, k, kb, km1, kp1
-  !***FIRST EXECUTABLE STATEMENT  DTRDI
+  !* FIRST EXECUTABLE STATEMENT  DTRDI
   !
   !        COMPUTE DETERMINANT
   !

@@ -1,15 +1,22 @@
-!DECK BFQAD
+!** BFQAD
 SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BFQAD
-  !***PURPOSE  Compute the integral of a product of a function and a
+  !>
+  !***
+  !  Compute the integral of a product of a function and a
   !            derivative of a B-spline.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  H2A2A1, E3, K6
-  !***TYPE      SINGLE PRECISION (BFQAD-S, DBFQAD-D)
-  !***KEYWORDS  INTEGRAL OF B-SPLINE, QUADRATURE
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  H2A2A1, E3, K6
+  !***
+  ! **Type:**      SINGLE PRECISION (BFQAD-S, DBFQAD-D)
+  !***
+  ! **Keywords:**  INTEGRAL OF B-SPLINE, QUADRATURE
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !         BFQAD computes the integral on (X1,X2) of a product of a
@@ -51,11 +58,14 @@ SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   !         less than 0.1 is a fatal error.
   !         Some quadrature fails to meet the requested tolerance.
   !
-  !***REFERENCES  D. E. Amos, Quadrature subroutines for splines and
+  !***
+  ! **References:**  D. E. Amos, Quadrature subroutines for splines and
   !                 B-splines, Report SAND79-1825, Sandia Laboratories,
   !                 December 1979.
-  !***ROUTINES CALLED  BSGQ8, INTRV, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  BSGQ8, INTRV, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -64,14 +74,14 @@ SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BFQAD
+  
   INTEGER inbv
   INTEGER Id, Ierr, iflg, ilo, il1, il2, K, left, mflag, N, npk, np1
   REAL a, aa, ans, b, bb, Bcoef, q, Quad, T, ta, tb, Tol, Work, wtol, X1, X2
   REAL R1MACH, F
   DIMENSION T(*), Bcoef(*), Work(*)
   EXTERNAL F
-  !***FIRST EXECUTABLE STATEMENT  BFQAD
+  !* FIRST EXECUTABLE STATEMENT  BFQAD
   Ierr = 1
   Quad = 0.0E0
   IF ( K<1 ) THEN

@@ -1,14 +1,18 @@
-!DECK DPINTM
+!** DPINTM
 SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPINTM
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (PINITM-S, DPINTM-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (PINITM-S, DPINTM-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Wisniewski, J. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     DPINTM LIMITS THE TYPE OF STORAGE TO A SEQUENTIAL SCHEME.
   !     THE MATRIX IS STORED BY COLUMNS.
@@ -35,22 +39,25 @@ SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   !     REVISED 811130-1000
   !     REVISED YYMMDD-HHMM
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  !***END PROLOGUE  DPINTM
+  
   INTEGER i, iopt, Ipagef, Ix, Lmx, lp4, M, N, n20008, n20012, nerr
   REAL(8) :: Sx(*), zero, one
   DIMENSION Ix(*)
   SAVE zero, one
   DATA zero, one/0.D0, 1.D0/
-  !***FIRST EXECUTABLE STATEMENT  DPINTM
+  !* FIRST EXECUTABLE STATEMENT  DPINTM
   iopt = 1
   !
   !     CHECK FOR INPUT ERRORS.

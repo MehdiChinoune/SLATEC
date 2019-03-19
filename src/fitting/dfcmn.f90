@@ -1,23 +1,30 @@
-!DECK DFCMN
+!** DFCMN
 SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     Yconst,Nderiv,Mode,Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,&
     Work,Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DFCMN
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to FC
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (FCMN-S, DFCMN-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to FC
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (FCMN-S, DFCMN-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This is a companion subprogram to DFC( ).
   !     The documentation for DFC( ) has complete usage instructions.
   !
-  !***SEE ALSO  DFC
-  !***ROUTINES CALLED  DAXPY, DBNDAC, DBNDSL, DCOPY, DFSPVD, DFSPVN,
+  !***
+  ! **See also:**  DFC
+  !***
+  ! **Routines called:**  DAXPY, DBNDAC, DBNDSL, DCOPY, DFSPVD, DFSPVN,
   !                    DLSEI, DSCAL, DSORT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890618  Completely restructured and extensively revised (WRB & RWC)
@@ -26,7 +33,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
-  !***END PROLOGUE  DFCMN
+  
   INTEGER Iwork(*), Mdg, Mdw, Mode, Nbkpt, Nconst, Ndata, Nderiv(*), &
     Nord
   REAL(8) :: Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), &
@@ -44,7 +51,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   LOGICAL band, new, var
   CHARACTER(8) :: xern1
   !
-  !***FIRST EXECUTABLE STATEMENT  DFCMN
+  !* FIRST EXECUTABLE STATEMENT  DFCMN
   !
   !     Analyze input.
   !

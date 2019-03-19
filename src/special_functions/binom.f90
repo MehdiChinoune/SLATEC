@@ -1,20 +1,30 @@
-!DECK BINOM
+!** BINOM
 REAL FUNCTION BINOM(N,M)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BINOM
-  !***PURPOSE  Compute the binomial coefficients.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C1
-  !***TYPE      SINGLE PRECISION (BINOM-S, DBINOM-D)
-  !***KEYWORDS  BINOMIAL COEFFICIENTS, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the binomial coefficients.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C1
+  !***
+  ! **Type:**      SINGLE PRECISION (BINOM-S, DBINOM-D)
+  !***
+  ! **Keywords:**  BINOMIAL COEFFICIENTS, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! BINOM(N,M) calculates the binomial coefficient (N!)/((M!)*(N-M)!).
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ALNREL, R1MACH, R9LGMC, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ALNREL, R1MACH, R9LGMC, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -22,14 +32,14 @@ REAL FUNCTION BINOM(N,M)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  BINOM
+  
   REAL ALNREL, bilnmx, corr, fintmx, R1MACH, R9LGMC, sq2pil, xk, xn, xnk
   INTEGER i, k, M, N
   LOGICAL first
   SAVE sq2pil, bilnmx, fintmx, first
   DATA sq2pil/0.91893853320467274E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BINOM
+  !* FIRST EXECUTABLE STATEMENT  BINOM
   IF ( first ) THEN
     bilnmx = LOG(R1MACH(2))
     fintmx = 0.9/R1MACH(3)

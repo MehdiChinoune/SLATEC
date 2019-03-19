@@ -1,13 +1,17 @@
-!DECK LA05ES
+!** LA05ES
 SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Ia,Reals)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  LA05ES
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (LA05ES-S, LA05ED-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (LA05ES-S, LA05ED-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THIS SUBPROGRAM IS A SLIGHT MODIFICATION OF A SUBPROGRAM
   !     FROM THE C. 1979 AERE HARWELL LIBRARY.  THE NAME OF THE
@@ -21,15 +25,19 @@ SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Ia,Reals)
   !     THE USER AND AERE-UK.  ANY USAGE OF THE SANDIA WRITTEN CODES
   !     SPLP( ) (WHICH USES THE HARWELL SUBROUTINES) IS PERMITTED.
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    LA05DS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    LA05DS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  LA05ES
+  
   INTEGER Ia, ipi, j, k, kl, kn, LCOl, LENl, LENu, LP, LROw, N, NCP, nz
   REAL SMAll
   LOGICAL Reals
@@ -37,7 +45,7 @@ SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Ia,Reals)
   INTEGER Irn(*), Iw(*)
   INTEGER Ip(*)
   COMMON /LA05DS/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
-  !***FIRST EXECUTABLE STATEMENT  LA05ES
+  !* FIRST EXECUTABLE STATEMENT  LA05ES
   NCP = NCP + 1
   !     COMPRESS FILE OF POSITIVE INTEGERS. ENTRY J STARTS AT IRN(IP(J))
   !  AND CONTAINS IW(J) INTEGERS,J=1,N. OTHER COMPONENTS OF IRN ARE ZERO.

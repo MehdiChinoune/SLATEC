@@ -2,23 +2,31 @@ MODULE TEST27_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK LSEIQX
+  !** LSEIQX
   SUBROUTINE LSEIQX(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  LSEIQX
-    !***PURPOSE  Quick check for LSEI.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (LSEIQX-S, DLSEIT-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Hanson, R. J., (SNLA)
+    !>
+    !***
+    !  Quick check for LSEI.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (LSEIQX-S, DLSEIT-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Hanson, R. J., (SNLA)
     !           Haskell, Karen, (SNLA)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !   The sample problem solved is from a paper by J. Stoer, in
     !   SIAM Journal of Numerical Analysis, June 1971.
     !
-    !***ROUTINES CALLED  LSEI, R1MACH, SAXPY, SCOPY, SDOT, SNRM2, SVOUT
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  LSEI, R1MACH, SAXPY, SCOPY, SDOT, SNRM2, SVOUT
+
+    !* REVISION HISTORY  (YYMMDD)
     !   790216  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
@@ -28,7 +36,7 @@ CONTAINS
     !   920722  Initialized IP(1) and IP(2) for CALL to LSEI.  (BKS, WRB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    !***END PROLOGUE  LSEIQX
+    
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -90,7 +98,7 @@ CONTAINS
     !     Define the vector that is the known solution.
     !
     DATA sol(1), sol(2), sol(3), sol(4), sol(5)/1., 2., -1., 3., -4./
-    !***FIRST EXECUTABLE STATEMENT  LSEIQX
+    !* FIRST EXECUTABLE STATEMENT  LSEIQX
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1TEST OF SUBROUTINE LSEI')
@@ -254,15 +262,20 @@ CONTAINS
     99008 FORMAT (/' ****************LSEI FAILED SOME TESTS**************')
     RETURN
   END SUBROUTINE LSEIQX
-  !DECK QCGLSS
+  !** QCGLSS
   SUBROUTINE QCGLSS(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QCGLSS
-    !***PURPOSE  Quick check for SGLSS.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (QCGLSS-S, DQCGLS-D)
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for SGLSS.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (QCGLSS-S, DQCGLS-D)
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !      QUICK CHECK SUBROUTINE  QCGLSS  TESTS THE EXECUTION
     !      OF THE GENERAL LINEAR SYSTEM SOLVER, SGLSS .  THE
@@ -284,15 +297,17 @@ CONTAINS
     !      (INTEGER TYPE) CONTAINS THE COUNT OF THE NUMBER OF
     !      PROBLEMS DETECTED BY  QCGLSS .
     !
-    !***ROUTINES CALLED  R1MACH, SGLSS
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  R1MACH, SGLSS
+
+    !* REVISION HISTORY  (YYMMDD)
     !   811026  DATE WRITTEN
     !   820801  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
-    !***END PROLOGUE  QCGLSS
+    
     INTEGER i, Ipass, j, kk, Kprint
     REAL R1MACH, rnorm
     REAL aa(4,4,2), a(4,4), bb(4,2), b(4), xx(4,4), delmax, delx, r
@@ -311,7 +326,7 @@ CONTAINS
       .3333333333333286/
     DATA inf/0, 1, 0, 2/
     DATA list/'L', 'U'/
-    !***FIRST EXECUTABLE STATEMENT  QCGLSS
+    !* FIRST EXECUTABLE STATEMENT  QCGLSS
     info = 0
     nerr = 0
     r = SQRT(R1MACH(4))
@@ -398,24 +413,31 @@ CONTAINS
     RETURN
   END SUBROUTINE QCGLSS
 END MODULE TEST27_MOD
-!DECK TEST27
+!** TEST27
 PROGRAM TEST27
   USE TEST27_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST27
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D5, D9
-  !***TYPE      SINGLE PRECISION (TEST27-S, TEST28-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D5, D9
+  !***
+  ! **Type:**      SINGLE PRECISION (TEST27-S, TEST28-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -427,23 +449,26 @@ PROGRAM TEST27
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        LSEI     SGLSS
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  I1MACH, LSEIQX, QCGLSS, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  I1MACH, LSEIQX, QCGLSS, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST27
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST27
+  !* FIRST EXECUTABLE STATEMENT  TEST27
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

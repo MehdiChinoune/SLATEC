@@ -1,15 +1,22 @@
-!DECK CNBSL
+!** CNBSL
 SUBROUTINE CNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CNBSL
-  !***PURPOSE  Solve a complex band system using the factors computed by
+  !>
+  !***
+  !  Solve a complex band system using the factors computed by
   !            CNBCO or CNBFA.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2C2
-  !***TYPE      COMPLEX (SNBSL-S, DNBSL-D, CNBSL-C)
-  !***KEYWORDS  BANDED, LINEAR EQUATIONS, NONSYMMETRIC, SOLVE
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2C2
+  !***
+  ! **Type:**      COMPLEX (SNBSL-S, DNBSL-D, CNBSL-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR EQUATIONS, NONSYMMETRIC, SOLVE
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !     CNBSL solves the complex band system
   !     A * X = B  or  CTRANS(A) * X = B
@@ -65,23 +72,26 @@ SUBROUTINE CNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !             CALL CNBSL(ABE,LDA,N,ML,MU,IPVT,C(1,J),0)
   !        10 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTC
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTC
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800730  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CNBSL
+  
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Job
   COMPLEX Abe(Lda,*), B(*)
   !
   COMPLEX CDOTC, t
   INTEGER k, kb, l, lb, ldb, lm, m, mlm, nm1
-  !***FIRST EXECUTABLE STATEMENT  CNBSL
+  !* FIRST EXECUTABLE STATEMENT  CNBSL
   m = Mu + Ml + 1
   nm1 = N - 1
   ldb = 1 - Lda

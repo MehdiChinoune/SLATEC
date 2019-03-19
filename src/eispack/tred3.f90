@@ -1,16 +1,23 @@
-!DECK TRED3
+!** TRED3
 SUBROUTINE TRED3(N,Nv,A,D,E,E2)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TRED3
-  !***PURPOSE  Reduce a real symmetric matrix stored in packed form to
+  !>
+  !***
+  !  Reduce a real symmetric matrix stored in packed form to
   !            symmetric tridiagonal matrix using orthogonal
   !            transformations.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C1B1
-  !***TYPE      SINGLE PRECISION (TRED3-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C1B1
+  !***
+  ! **Type:**      SINGLE PRECISION (TRED3-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure TRED3,
   !     NUM. MATH. 11, 181-195(1968) by Martin, Reinsch, and Wilkinson.
@@ -53,25 +60,28 @@ SUBROUTINE TRED3(N,Nv,A,D,E,E2)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  TRED3
+  
   !
   INTEGER i, j, k, l, N, ii, iz, jk, Nv
   REAL A(*), D(*), E(*), E2(*)
   REAL f, g, h, hh, scale
   !
   !     .......... FOR I=N STEP -1 UNTIL 1 DO -- ..........
-  !***FIRST EXECUTABLE STATEMENT  TRED3
+  !* FIRST EXECUTABLE STATEMENT  TRED3
   DO ii = 1, N
     i = N + 1 - ii
     l = i - 1

@@ -2,25 +2,30 @@ MODULE TEST43_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK JAC
+  !** JAC
   SUBROUTINE JAC(T,U,Pd,Nrowpd,Rpar,Ipar)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  JAC
-    !***SUBSIDIARY
-    !***PURPOSE  Evaluate Jacobian for DEBDF quick check.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (JAC-S, DJAC-D)
-    !***AUTHOR  Chow, Jeff (LANL)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Evaluate Jacobian for DEBDF quick check.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (JAC-S, DJAC-D)
+    !***
+    ! **Author:**  Chow, Jeff (LANL)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   810801  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Minor clean-up of prologue and code.  (WRB)
-    !***END PROLOGUE  JAC
+    
     INTEGER Ipar, Nrowpd
     REAL Pd, r, r5, Rpar, rsq, T, U, u1sq, u2sq, u1u2
     DIMENSION U(*), Pd(Nrowpd,*), Rpar(*), Ipar(*)
-    !***FIRST EXECUTABLE STATEMENT  JAC
+    !* FIRST EXECUTABLE STATEMENT  JAC
     u1sq = U(1)*U(1)
     u2sq = U(2)*U(2)
     u1u2 = U(1)*U(2)
@@ -34,21 +39,26 @@ CONTAINS
     Pd(1,3) = 1.E0
     Pd(2,4) = 1.E0
   END SUBROUTINE JAC
-  !DECK FDEQC
+  !** FDEQC
   SUBROUTINE FDEQC(T,U,Uprime,Rpar,Ipar)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  FDEQC
-    !***SUBSIDIARY
-    !***PURPOSE  Derivative evaluator for DEPAC quick checks.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (FDEQC-S, DFDEQC-D)
-    !***AUTHOR  Chow, Jeff, (LANL)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Derivative evaluator for DEPAC quick checks.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (FDEQC-S, DFDEQC-D)
+    !***
+    ! **Author:**  Chow, Jeff, (LANL)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   810801  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Name changed from F to FDEQC.  (WRB)
-    !***END PROLOGUE  FDEQC
+    
     !
     !     Declare arguments.
     !
@@ -58,7 +68,7 @@ CONTAINS
     !     Declare local variables.
     !
     REAL r, rsq, r3
-    !***FIRST EXECUTABLE STATEMENT  FDEQC
+    !* FIRST EXECUTABLE STATEMENT  FDEQC
     rsq = U(1)*U(1) + U(2)*U(2)
     r = SQRT(rsq)
     r3 = rsq*r
@@ -67,25 +77,30 @@ CONTAINS
     Uprime(3) = -(U(1)/r3)
     Uprime(4) = -(U(2)/r3)
   END SUBROUTINE FDEQC
-  !DECK QXABM
+  !** QXABM
   SUBROUTINE QXABM(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QXABM
-    !***SUBSIDIARY
-    !***PURPOSE  Test the DEPAC routine DEABM.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (QXABM-S, QXDABM-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Chow, Jeff, (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Test the DEPAC routine DEABM.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (QXABM-S, QXDABM-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Chow, Jeff, (LANL)
+    !***
+    ! **Description:**
     !
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL QXABM (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN   :IN  is the unit number to which output is to be written.
     !
@@ -95,7 +110,7 @@ CONTAINS
     !     IPASS:OUT  will contain a pass/fail flag.  IPASS=1 is good.
     !                IPASS=0 indicates one or more tests failed.
     !
-    ! *Description:
+    !- Description:
     !
     !   DEABM is tested by solving the equations of motion of a body
     !   moving in a plane about a spherical earth, namely
@@ -107,13 +122,15 @@ CONTAINS
     !           Y(0) = 0
     !           (D/DT)Y(0) = 1.
     !
-    !***ROUTINES CALLED  DEABM, FDEQC, R1MACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  DEABM, FDEQC, R1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   810801  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-    !***END PROLOGUE  QXABM
+    
     !
     !     Declare arguments.
     !
@@ -123,7 +140,7 @@ CONTAINS
     !
     INTEGER idid, info(15), ipar, iwork(51), n, liw, lrw
     REAL abserr, r, R1MACH, relerr, reltol, rpar, rwork(214), t, tout, u(4)
-    !***FIRST EXECUTABLE STATEMENT  QXABM
+    !* FIRST EXECUTABLE STATEMENT  QXABM
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     ! FORMATs.
@@ -175,24 +192,30 @@ CONTAINS
       ENDIF
     ENDDO
   END SUBROUTINE QXABM
-  !DECK QXBDF
+  !** QXBDF
   SUBROUTINE QXBDF(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QXBDF
-    !***PURPOSE  Test the DEPAC routine DEBDF.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (QXBDF-S, QXDBDF-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Chow, Jeff, (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Test the DEPAC routine DEBDF.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (QXBDF-S, QXDBDF-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Chow, Jeff, (LANL)
+    !***
+    ! **Description:**
     !
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL QXBDF (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN   :IN  is the unit number to which output is to be written.
     !
@@ -202,7 +225,7 @@ CONTAINS
     !     IPASS:OUT  will contain a pass/fail flag.  IPASS=1 is good.
     !                IPASS=0 indicates one or more tests failed.
     !
-    ! *Description:
+    !- Description:
     !
     !   DEBDF is tested by solving the equations of motion of a body
     !   moving in a plane about a spherical earth, namely
@@ -214,13 +237,15 @@ CONTAINS
     !           Y(0) = 0
     !           (D/DT)Y(0) = 1.
     !
-    !***ROUTINES CALLED  DEBDF, FDEQC, JAC, R1MACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  DEBDF, FDEQC, JAC, R1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   810801  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-    !***END PROLOGUE  QXBDF
+    
     !
     !     Declare arguments.
     !
@@ -230,7 +255,7 @@ CONTAINS
     !
     INTEGER idid, info(15), ipar, iwork(60), n, liw, lrw
     REAL abserr, r, R1MACH, relerr, reltol, rpar, rwork(306), t, tout, u(4)
-    !***FIRST EXECUTABLE STATEMENT  QXBDF
+    !* FIRST EXECUTABLE STATEMENT  QXBDF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     ! FORMATs.
@@ -284,24 +309,30 @@ CONTAINS
       ENDIF
     ENDDO
   END SUBROUTINE QXBDF
-  !DECK QXRKF
+  !** QXRKF
   SUBROUTINE QXRKF(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QXRKF
-    !***PURPOSE  Test the DEPAC routine DERKF.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (QXRKF-S, QXDRKF-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Chow, Jeff, (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Test the DEPAC routine DERKF.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (QXRKF-S, QXDRKF-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Chow, Jeff, (LANL)
+    !***
+    ! **Description:**
     !
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL QXRKF (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN   :IN  is the unit number to which output is to be written.
     !
@@ -311,7 +342,7 @@ CONTAINS
     !     IPASS:OUT  will contain a pass/fail flag.  IPASS=1 is good.
     !                IPASS=0 indicates one or more tests failed.
     !
-    ! *Description:
+    !- Description:
     !
     !   DERKF is tested by solving the equations of motion of a body
     !   moving in a plane about a spherical earth, namely
@@ -323,13 +354,15 @@ CONTAINS
     !           Y(0) = 0
     !           (D/DT)Y(0) = 1.
     !
-    !***ROUTINES CALLED  DERKF, FDEQC, R1MACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  DERKF, FDEQC, R1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   810801  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-    !***END PROLOGUE  QXRKF
+    
     !
     !     Declare arguments.
     !
@@ -339,7 +372,7 @@ CONTAINS
     !
     INTEGER idid, info(15), ipar, iwork(34), n, liw, lrw
     REAL abserr, r, R1MACH, relerr, reltol, rpar, rwork(61), t, tout, u(4)
-    !***FIRST EXECUTABLE STATEMENT  QXRKF
+    !* FIRST EXECUTABLE STATEMENT  QXRKF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     ! FORMATs.
@@ -391,23 +424,30 @@ CONTAINS
       ENDIF
     ENDDO
   END SUBROUTINE QXRKF
-  !DECK QXBVSP
+  !** QXBVSP
   SUBROUTINE QXBVSP(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QXBVSP
-    !***PURPOSE  Quick check for BVSUP.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (QXBVSP-S, QXDBVS-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  BVSUP, PASS
-    !***COMMON BLOCKS    SAVEX
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for BVSUP.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (QXBVSP-S, QXDBVS-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  BVSUP, PASS
+    !***
+    ! COMMON BLOCKS    SAVEX
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901014  Made editorial changes and added correct result to
     !           output.  (RWC)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    !***END PROLOGUE  QXBVSP
+    
     INTEGER numort, nxpts
     REAL a, abser, ae, alpha, b, beta, re, reler, sve, TERm, tol, &
       work, xpts, XSAve, y, yans
@@ -438,7 +478,7 @@ CONTAINS
       xpts(8), xpts(9), xpts(10), xpts(11), xpts(12), xpts(13), &
       xpts(14), xpts(15)/60., 55., 50., 45., 40., 38., 36., 34., &
       32., 31., 30.8, 30.6, 30.4, 30.2, 30./
-    !***FIRST EXECUTABLE STATEMENT  QXBVSP
+    !* FIRST EXECUTABLE STATEMENT  QXBVSP
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       !
@@ -655,24 +695,31 @@ CONTAINS
     99013 FORMAT (/' IFLAG SHOULD BE -2, IFLAG =',I3)
   END SUBROUTINE QXBVSP
 END MODULE TEST43_MOD
-!DECK TEST43
+!** TEST43
 PROGRAM TEST43
   USE TEST43_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST43
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  I1
-  !***TYPE      SINGLE PRECISION (TEST43-S, TEST44-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  I1
+  !***
+  ! **Type:**      SINGLE PRECISION (TEST43-S, TEST44-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -684,24 +731,27 @@ PROGRAM TEST43
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        DEABM    DEBDF    DERKF    BVSUP
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  I1MACH, QXABM, QXBDF, QXBVSP, QXRKF, XERMAX, XSETF,
+  !***
+  ! **Routines called:**  I1MACH, QXABM, QXBDF, QXBVSP, QXRKF, XERMAX, XSETF,
   !                    XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST43
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST43
+  !* FIRST EXECUTABLE STATEMENT  TEST43
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

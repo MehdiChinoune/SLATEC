@@ -1,13 +1,17 @@
-!DECK DU11LS
+!** DU11LS
 SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DU11LS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DLLSIA
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (U11LS-S, DU11LS-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DLLSIA
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (U11LS-S, DU11LS-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   **** Double Precision version of U11LS ****
   !
@@ -17,10 +21,13 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !       of round-off and to help detect possible rank
   !       deficiency.
   !
-  !***SEE ALSO  DLLSIA
-  !***ROUTINES CALLED  DAXPY, DDOT, DNRM2, DSCAL, DSWAP, IDAMAX, ISWAP,
+  !***
+  ! **See also:**  DLLSIA
+  !***
+  ! **Routines called:**  DAXPY, DDOT, DNRM2, DSCAL, DSWAP, IDAMAX, ISWAP,
   !                    XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -28,7 +35,7 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DU11LS
+  
   REAL(8) :: A, bb, Db, Eb, H, r2, rmin, sum, t, temp, tn, &
     tt, Ub, W
   INTEGER i, IDAMAX, ii, im1, imin, is, j, jm1, jmax, jp1, kk, &
@@ -40,7 +47,7 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !
   !        INITIALIZATION
   !
-  !***FIRST EXECUTABLE STATEMENT  DU11LS
+  !* FIRST EXECUTABLE STATEMENT  DU11LS
   j = 0
   Krank = N
   DO i = 1, N

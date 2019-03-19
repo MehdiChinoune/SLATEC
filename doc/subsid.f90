@@ -1,26 +1,32 @@
-!DECK CVTCAT
+!** CVTCAT
 CHARACTER(10) FUNCTION CVTCAT(Categ)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CVTCAT
-  !***SUBSIDIARY
-  !***PURPOSE  Expand a GAMS category
-  !***LIBRARY   (NONE)
-  !***AUTHOR  Boland, W. Robert, C-8, Los Alamos National Laboratory
-  !***DESCRIPTION
+  !>
+  !***
+  !  Expand a GAMS category
+  !***
+  ! **Library:**   (NONE)
+  !***
+  ! **Author:**  Boland, W. Robert, C-8, Los Alamos National Laboratory
+  !***
+  ! **Description:**
   !
   !   Function to expand a GAMS category name by adding a zero before a
   !   one digit character.
   !   E.G.,  D2D1A   becomes   D02D01A
   !
-  !***SEE ALSO  SLADOC
-  !***ROUTINES CALLED  LENSTR
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SLADOC
+  !***
+  ! **Routines called:**  LENSTR
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871201  DATE WRITTEN
   !   891208  Prologue converted to Version 4.0 format.  (BAB)
   !   900202  Corrected error which occurred when expression I+1 exceeded
   !           length of input category (L).  (WRB)
   !   920911  Declarations section restructured.  (WRB)
-  !***END PROLOGUE  CVTCAT
+  
   !     .. Scalar Arguments ..
   CHARACTER*(*) Categ
   !     .. Local Scalars ..
@@ -28,7 +34,7 @@ CHARACTER(10) FUNCTION CVTCAT(Categ)
   !     .. External Functions ..
   INTEGER LENSTR
   EXTERNAL LENSTR
-  !***FIRST EXECUTABLE STATEMENT  CVTCAT
+  !* FIRST EXECUTABLE STATEMENT  CVTCAT
   l = LENSTR(Categ)
   CVTCAT(1:1) = Categ(1:1)
   CVTCAT(2:10) = '        '
@@ -56,17 +62,23 @@ CHARACTER(10) FUNCTION CVTCAT(Categ)
     ENDIF
   ENDDO
 END FUNCTION CVTCAT
-!DECK FIND
+!** FIND
 INTEGER FUNCTION FIND(X,N,T)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  FIND
-  !***PURPOSE  Use a binary search to locate a phrase within a character
+  !>
+  !***
+  !  Use a binary search to locate a phrase within a character
   !            array.
-  !***LIBRARY   (NONE)
-  !***CATEGORY  (NONE)
-  !***KEYWORDS  BINARY SEARCH
-  !***AUTHOR  Bacon, Barbara A., C-10, Los Alamos National Laboratory
-  !***DESCRIPTION
+  !***
+  ! **Library:**   (NONE)
+  !***
+  ! **Category:**  (NONE)
+  !***
+  ! **Keywords:**  BINARY SEARCH
+  !***
+  ! **Author:**  Bacon, Barbara A., C-10, Los Alamos National Laboratory
+  !***
+  ! **Description:**
   !
   !   This function attempts to find the member of the array matching
   !   the input phrase.  If the phrase is located, the subscript of the
@@ -93,13 +105,16 @@ INTEGER FUNCTION FIND(X,N,T)
   !   10 CONTINUE
   !      FIND = 0
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   891101  DATE WRITTEN
   !   891208  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  !***END PROLOGUE  FIND
+  
   !     .. Parameters ..
   REAL B
   PARAMETER (B=0.6931)
@@ -112,7 +127,7 @@ INTEGER FUNCTION FIND(X,N,T)
   INTEGER i, k, m
   !     .. Intrinsic Functions ..
   INTRINSIC LOG, REAL
-  !***FIRST EXECUTABLE STATEMENT  FIND
+  !* FIRST EXECUTABLE STATEMENT  FIND
   IF ( N==0 ) THEN
     FIND = 0
     RETURN
@@ -143,18 +158,25 @@ INTEGER FUNCTION FIND(X,N,T)
   FIND = -i
   RETURN
 END FUNCTION FIND
-!DECK LENSTR
+!** LENSTR
 INTEGER FUNCTION LENSTR(String)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  LENSTR
-  !***PURPOSE  Find the position of the last non-blank character in a
+  !>
+  !***
+  !  Find the position of the last non-blank character in a
   !            string.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  N3
-  !***TYPE      CHARACTER (LENSTR-H)
-  !***KEYWORDS  POSITION OF LAST NON-BLANK CHARACTER
-  !***AUTHOR  Berkbigler, Kathryn, C-3, Los Alamos National Laboratory
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  N3
+  !***
+  ! **Type:**      CHARACTER (LENSTR-H)
+  !***
+  ! **Keywords:**  POSITION OF LAST NON-BLANK CHARACTER
+  !***
+  ! **Author:**  Berkbigler, Kathryn, C-3, Los Alamos National Laboratory
+  !***
+  ! **Description:**
   !
   !   This function finds the position of the last non-blank character in
   !   a string.
@@ -164,21 +186,24 @@ INTEGER FUNCTION LENSTR(String)
   !      STRING - a character variable which contains the string to be
   !               examined.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830124  DATE WRITTEN
   !   830324  REVISION DATE from the pre-1990 prologue.
   !   891208  Prologue converted to the 1990 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  !***END PROLOGUE  LENSTR
+  
   !     .. Scalar Arguments ..
   CHARACTER*(*) String
   !     .. Local Scalars ..
   INTEGER i, l
   !     .. Intrinsic Functions ..
   INTRINSIC LEN
-  !***FIRST EXECUTABLE STATEMENT  LENSTR
+  !* FIRST EXECUTABLE STATEMENT  LENSTR
   l = LEN(String)
   DO i = l, 1, -1
     IF ( String(i:i)/=' ' ) THEN
@@ -188,18 +213,25 @@ INTEGER FUNCTION LENSTR(String)
   ENDDO
   LENSTR = 0
 END FUNCTION LENSTR
-!DECK UPCASE
+!** UPCASE
 SUBROUTINE UPCASE(Str1,Str2)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  UPCASE
-  !***PURPOSE  Convert all lower case alphabetic characters in a character
+  !>
+  !***
+  !  Convert all lower case alphabetic characters in a character
   !            string to upper case.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  N3
-  !***TYPE      CHARACTER (UPCASE-H)
-  !***KEYWORDS  CONVERT CHARACTERS, UPPER CASE
-  !***AUTHOR  Boland, W. Robert, C-8, Los Alamos National Laboratory
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  N3
+  !***
+  ! **Type:**      CHARACTER (UPCASE-H)
+  !***
+  ! **Keywords:**  CONVERT CHARACTERS, UPPER CASE
+  !***
+  ! **Author:**  Boland, W. Robert, C-8, Los Alamos National Laboratory
+  !***
+  ! **Description:**
   !
   !   This routine converts all the lower case alphabetic characters
   !   in a character string to UPPER case.  If the output string is
@@ -217,15 +249,18 @@ SUBROUTINE UPCASE(Str1,Str2)
   !     STR2   - a character string which has all alphabetic
   !              characters in upper case.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  LENSTR, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  LENSTR, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830308  DATE WRITTEN
   !   870902  REVISION DATE from the pre-1990 prologue.
   !   891208  Prologue converted to the 1990 format.  (BAB)
   !   901101  Correctly check the lengths of STR1 and STR2.  (WRB)
   !   920911  Declarations section restructured.  (WRB)
-  !***END PROLOGUE  UPCASE
+  
   !     .. Parameters ..
   CHARACTER(41) :: MSG
   PARAMETER (MSG='Input string is longer than output string')
@@ -240,7 +275,7 @@ SUBROUTINE UPCASE(Str1,Str2)
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC CHAR, ICHAR, LEN
-  !***FIRST EXECUTABLE STATEMENT  UPCASE
+  !* FIRST EXECUTABLE STATEMENT  UPCASE
   m = LENSTR(Str1)
   n = LEN(Str2)
   IF ( m>n ) THEN

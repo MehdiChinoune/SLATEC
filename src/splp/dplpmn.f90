@@ -1,27 +1,35 @@
-!DECK DPLPMN
+!** DPLPMN
 SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Amat,Csc,Colnrm,Erd,Erp,Basmat,Wr,Rz,Rg,&
     Rprim,Rhs,Ww,Lmx,Lbm,Ibasis,Ibb,Imat,Ibrc,Ipr,Iwr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPLPMN
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SPLPMN-S, DPLPMN-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPLPMN-S, DPLPMN-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     MARVEL OPTION(S).. OUTPUT=YES/NO TO ELIMINATE PRINTED OUTPUT.
   !     THIS DOES NOT APPLY TO THE CALLS TO THE ERROR PROCESSOR.
   !
   !     MAIN SUBROUTINE FOR DSPLP PACKAGE.
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  DASUM, DCOPY, DDOT, DPINCW, DPINIT, DPINTM, DPLPCE,
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  DASUM, DCOPY, DDOT, DPINCW, DPINIT, DPINTM, DPLPCE,
   !                    DPLPDM, DPLPFE, DPLPFL, DPLPMU, DPLPUP, DPNNZR,
   !                    DPOPT, DPRWPG, DVOUT, IVOUT, LA05BD, SCLOSM, XERMSG
-  !***COMMON BLOCKS    LA05DD
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! COMMON BLOCKS    LA05DD
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
@@ -30,7 +38,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  !***END PROLOGUE  DPLPMN
+  
   INTEGER i, ibas, idg, ienter, ileave, Info, iopt, ipage, ipagef, &
     iplace, isave, itbrc, itlp, j, jstrt, k, key, kprint ,Lbm, LCOl
   INTEGER LENl, LENu, Lmx, LP, lpg, lpr, lpr1, lprg, LROw, Mrelas, &
@@ -179,7 +187,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   EXTERNAL DUSRMT
   !
   !     SET LP=0 SO NO ERROR MESSAGES WILL PRINT WITHIN LA05 () PACKAGE.
-  !***FIRST EXECUTABLE STATEMENT  DPLPMN
+  !* FIRST EXECUTABLE STATEMENT  DPLPMN
   LP = 0
   !
   !     THE VALUES ZERO AND ONE.

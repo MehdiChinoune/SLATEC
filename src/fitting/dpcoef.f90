@@ -1,15 +1,22 @@
-!DECK DPCOEF
+!** DPCOEF
 SUBROUTINE DPCOEF(L,C,Tc,A)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPCOEF
-  !***PURPOSE  Convert the DPOLFT coefficients to Taylor series form.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  K1A1A2
-  !***TYPE      DOUBLE PRECISION (PCOEF-S, DPCOEF-D)
-  !***KEYWORDS  CURVE FITTING, DATA FITTING, LEAST SQUARES, POLYNOMIAL FIT
-  !***AUTHOR  Shampine, L. F., (SNLA)
+  !>
+  !***
+  !  Convert the DPOLFT coefficients to Taylor series form.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  K1A1A2
+  !***
+  ! **Type:**      DOUBLE PRECISION (PCOEF-S, DPCOEF-D)
+  !***
+  ! **Keywords:**  CURVE FITTING, DATA FITTING, LEAST SQUARES, POLYNOMIAL FIT
+  !***
+  ! **Author:**  Shampine, L. F., (SNLA)
   !           Davenport, S. M., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Abstract
   !
@@ -43,22 +50,25 @@ SUBROUTINE DPCOEF(L,C,Tc,A)
   !                  i.e.
   !                    P(X) = TC(1)*(X-C)**N + ... + TC(N)*(X-C) + TC(N+1)
   !
-  !***REFERENCES  L. F. Shampine, S. M. Davenport and R. E. Huddleston,
+  !***
+  ! **References:**  L. F. Shampine, S. M. Davenport and R. E. Huddleston,
   !                 Curve fitting by polynomials in one variable, Report
   !                 SLA-74-0270, Sandia Laboratories, June 1974.
-  !***ROUTINES CALLED  DP1VLU
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DP1VLU
+
+  !* REVISION HISTORY  (YYMMDD)
   !   740601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891006  Cosmetic changes to prologue.  (WRB)
   !   891006  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DPCOEF
+  
   !
   INTEGER i, L, ll, llp1, llp2, new, nr
   REAL(8) :: A(*), C, fac, save, Tc(*)
-  !***FIRST EXECUTABLE STATEMENT  DPCOEF
+  !* FIRST EXECUTABLE STATEMENT  DPCOEF
   ll = ABS(L)
   llp1 = ll + 1
   CALL DP1VLU(ll,ll,C,Tc(1),Tc(2),A)

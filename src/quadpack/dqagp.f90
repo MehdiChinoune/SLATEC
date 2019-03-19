@@ -1,27 +1,34 @@
-!DECK DQAGP
+!** DQAGP
 SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
     Leniw,Lenw,Last,Iwork,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQAGP
-  !***PURPOSE  The routine calculates an approximation result to a given
+  !>
+  !***
+  !  The routine calculates an approximation result to a given
   !            definite integral I = Integral of F over (A,B),
   !            hopefully satisfying following claim for accuracy
   !            break points of the integration interval, where local
   !            difficulties of the integrand may occur (e.g.
   !            SINGULARITIES, DISCONTINUITIES), are provided by the user.
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A2A1
-  !***TYPE      DOUBLE PRECISION (QAGP-S, DQAGP-D)
-  !***KEYWORDS  AUTOMATIC INTEGRATOR, EXTRAPOLATION, GENERAL-PURPOSE,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A2A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (QAGP-S, DQAGP-D)
+  !***
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, EXTRAPOLATION, GENERAL-PURPOSE,
   !             GLOBALLY ADAPTIVE, QUADPACK, QUADRATURE,
   !             SINGULARITIES AT USER SPECIFIED POINTS
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Computation of a definite integral
   !        Standard fortran subroutine
@@ -187,15 +194,18 @@ SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !                     break points sorted in an ascending sequence.
   !                    note that LIMIT = (LENIW-NPTS2)/2.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DQAGPE, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DQAGPE, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DQAGP
+  
   !
   REAL(8) :: A, Abserr, B, Epsabs, Epsrel, F, Points, Result, &
     Work
@@ -208,7 +218,7 @@ SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQAGP
+  !* FIRST EXECUTABLE STATEMENT  DQAGP
   Ier = 6
   Neval = 0
   Last = 0

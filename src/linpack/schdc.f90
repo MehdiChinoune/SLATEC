@@ -1,19 +1,26 @@
-!DECK SCHDC
+!** SCHDC
 SUBROUTINE SCHDC(A,Lda,P,Work,Jpvt,Job,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SCHDC
-  !***PURPOSE  Compute the Cholesky decomposition of a positive definite
+  !>
+  !***
+  !  Compute the Cholesky decomposition of a positive definite
   !            matrix.  A pivoting option allows the user to estimate the
   !            condition number of a positive definite matrix or determine
   !            the rank of a positive semidefinite matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1B
-  !***TYPE      SINGLE PRECISION (SCHDC-S, DCHDC-D, CCHDC-C)
-  !***KEYWORDS  CHOLESKY DECOMPOSITION, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1B
+  !***
+  ! **Type:**      SINGLE PRECISION (SCHDC-S, DCHDC-D, CCHDC-C)
+  !***
+  ! **Keywords:**  CHOLESKY DECOMPOSITION, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             POSITIVE DEFINITE
-  !***AUTHOR  Dongarra, J., (ANL)
+  !***
+  ! **Author:**  Dongarra, J., (ANL)
   !           Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     SCHDC computes the Cholesky decomposition of a positive definite
   !     matrix.  A pivoting option allows the user to estimate the
@@ -85,17 +92,20 @@ SUBROUTINE SCHDC(A,Lda,P,Work,Jpvt,Job,Info)
   !     element to be positive.  Indefinite systems will always cause
   !     INFO to be less than P.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SAXPY, SSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SAXPY, SSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790319  DATE WRITTEN
   !   890313  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SCHDC
+  
   INTEGER Lda, P, Jpvt(*), Job, Info
   REAL A(Lda,*), Work(*)
   !
@@ -103,7 +113,7 @@ SUBROUTINE SCHDC(A,Lda,P,Work,Jpvt,Job,Info)
   REAL temp
   REAL maxdia
   LOGICAL swapk, negk
-  !***FIRST EXECUTABLE STATEMENT  SCHDC
+  !* FIRST EXECUTABLE STATEMENT  SCHDC
   pl = 1
   pu = 0
   Info = P

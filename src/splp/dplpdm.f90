@@ -1,25 +1,33 @@
-!DECK DPLPDM
+!** DPLPDM
 SUBROUTINE DPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
     Ipr,Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,&
     Singlr,Redbas)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPLPDM
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SPLPDM-S, DPLPDM-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPLPDM-S, DPLPDM-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THIS SUBPROGRAM IS FROM THE DSPLP( ) PACKAGE.  IT PERFORMS THE
   !     TASK OF DEFINING THE ENTRIES OF THE BASIS MATRIX AND
   !     DECOMPOSING IT USING THE LA05 PACKAGE.
   !     IT IS THE MAIN PART OF THE PROCEDURE (DECOMPOSE BASIS MATRIX).
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  DASUM, DPNNZR, LA05AD, XERMSG
-  !***COMMON BLOCKS    LA05DD
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  DASUM, DPNNZR, LA05AD, XERMSG
+  !***
+  ! COMMON BLOCKS    LA05DD
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890605  Added DASUM to list of DOUBLE PRECISION variables.
   !   890605  Removed unreferenced labels.  (WRB)
@@ -29,7 +37,7 @@ SUBROUTINE DPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls, convert do-it-yourself
   !           DO loops to DO loops.  (RWC)
-  !***END PROLOGUE  DPLPDM
+  
   INTEGER i, Info, Iopt, iplace, j, k, Lbm, LCOl, LENl, LENu, &
     Lmx, LP, LROw, Mrelas, NCP, Nredc, Nvars, nzbm
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), &
@@ -42,7 +50,7 @@ SUBROUTINE DPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !     COMMON BLOCK USED BY LA05 () PACKAGE..
   COMMON /LA05DD/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
   !
-  !***FIRST EXECUTABLE STATEMENT  DPLPDM
+  !* FIRST EXECUTABLE STATEMENT  DPLPDM
   zero = 0.D0
   one = 1.D0
   !

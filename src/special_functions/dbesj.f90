@@ -1,18 +1,25 @@
-!DECK DBESJ
+!** DBESJ
 SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBESJ
-  !***PURPOSE  Compute an N member sequence of J Bessel functions
+  !>
+  !***
+  !  Compute an N member sequence of J Bessel functions
   !            J/SUB(ALPHA+K-1)/(X), K=1,...,N for non-negative ALPHA
   !            and X.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10A3
-  !***TYPE      DOUBLE PRECISION (BESJ-S, DBESJ-D)
-  !***KEYWORDS  J BESSEL FUNCTION, SPECIAL FUNCTIONS
-  !***AUTHOR  Amos, D. E., (SNLA)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10A3
+  !***
+  ! **Type:**      DOUBLE PRECISION (BESJ-S, DBESJ-D)
+  !***
+  ! **Keywords:**  J BESSEL FUNCTION, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
   !           Daniel, S. L., (SNLA)
   !           Weston, M. K., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Abstract  **** a double precision routine ****
   !         DBESJ computes an N member sequence of J Bessel functions
@@ -59,7 +66,8 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   !         Improper input arguments - a fatal error
   !         Underflow  - a non-fatal error (NZ .NE. 0)
   !
-  !***REFERENCES  D. E. Amos, S. L. Daniel and M. K. Weston, CDC 6600
+  !***
+  ! **References:**  D. E. Amos, S. L. Daniel and M. K. Weston, CDC 6600
   !                 subroutines IBESS and JBESS for Bessel functions
   !                 I(NU,X) and J(NU,X), X .GE. 0, NU .GE. 0, ACM
   !                 Transactions on Mathematical Software 3, (1977),
@@ -67,8 +75,10 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   !               F. W. J. Olver, Tables of Bessel Functions of Moderate
   !                 or Large Orders, NPL Mathematical Tables 6, Her
   !                 Majesty's Stationery Office, London, 1962.
-  !***ROUTINES CALLED  D1MACH, DASYJY, DJAIRY, DLNGAM, I1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, DASYJY, DJAIRY, DLNGAM, I1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -78,7 +88,7 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DBESJ
+  
   EXTERNAL DJAIRY
   INTEGER i, ialp, idalp, iflw, in, inlim, is, i1, i2, k, kk, &
     km, kt, N, nn, ns, Nz
@@ -99,7 +109,7 @@ SUBROUTINE DBESJ(X,Alpha,N,Y,Nz)
     2.65693932265030D-01, 1.24578576865586D-01, 7.70133747430388D-04/
   DATA inlim/150/
   DATA fnulim(1), fnulim(2)/100.0D0, 60.0D0/
-  !***FIRST EXECUTABLE STATEMENT  DBESJ
+  !* FIRST EXECUTABLE STATEMENT  DBESJ
   Nz = 0
   kt = 1
   ns = 0

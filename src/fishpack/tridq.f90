@@ -1,24 +1,30 @@
-!DECK TRIDQ
+!** TRIDQ
 SUBROUTINE TRIDQ(Mr,A,B,C,Y,D)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TRIDQ
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to POIS3D
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (TRIDQ-S)
-  !***AUTHOR  (UNKNOWN)
-  !***SEE ALSO  POIS3D
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !>
+  !***
+  !  Subsidiary to POIS3D
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (TRIDQ-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **See also:**  POIS3D
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900308  Renamed routine from TRID to TRIDQ.  (WRB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  TRIDQ
+  
   REAL A, B, C, D, Y, z
   INTEGER i, ip, m, mm1, Mr
   DIMENSION A(*), B(*), C(*), Y(*), D(*)
-  !***FIRST EXECUTABLE STATEMENT  TRIDQ
+  !* FIRST EXECUTABLE STATEMENT  TRIDQ
   m = Mr
   mm1 = m - 1
   z = 1./B(1)

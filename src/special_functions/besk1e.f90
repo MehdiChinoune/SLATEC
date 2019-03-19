@@ -1,17 +1,24 @@
-!DECK BESK1E
+!** BESK1E
 REAL FUNCTION BESK1E(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BESK1E
-  !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
+  !>
+  !***
+  !  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the third kind of order one.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B1
-  !***TYPE      SINGLE PRECISION (BESK1E-S, DBSK1E-D)
-  !***KEYWORDS  EXPONENTIALLY SCALED, FNLIB, HYPERBOLIC BESSEL FUNCTION,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B1
+  !***
+  ! **Type:**      SINGLE PRECISION (BESK1E-S, DBSK1E-D)
+  !***
+  ! **Keywords:**  EXPONENTIALLY SCALED, FNLIB, HYPERBOLIC BESSEL FUNCTION,
   !             MODIFIED BESSEL FUNCTION, ORDER ONE, SPECIAL FUNCTIONS,
   !             THIRD KIND
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! BESK1E(X) computes the exponentially scaled modified (hyperbolic)
   ! Bessel function of third kind of order one for real argument
@@ -35,9 +42,12 @@ REAL FUNCTION BESK1E(X)
   !                               significant figures required  15.22
   !                                    decimal places required  17.16
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  BESI1, CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  BESI1, CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -45,7 +55,7 @@ REAL FUNCTION BESK1E(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  BESK1E
+  
   REAL ak12cs, ak1cs, BESI1, bk1cs, CSEVL, R1MACH, X, xmin, xsml, y
   INTEGER INITS, ntak1, ntak12, ntk1
   DIMENSION bk1cs(11), ak1cs(17), ak12cs(14)
@@ -94,7 +104,7 @@ REAL FUNCTION BESK1E(X)
   DATA ak12cs(13)/ - .00000000000000022E0/
   DATA ak12cs(14)/.00000000000000002E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BESK1E
+  !* FIRST EXECUTABLE STATEMENT  BESK1E
   IF ( first ) THEN
     ntk1 = INITS(bk1cs,11,0.1*R1MACH(3))
     ntak1 = INITS(ak1cs,17,0.1*R1MACH(3))

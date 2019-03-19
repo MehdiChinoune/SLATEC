@@ -1,28 +1,35 @@
-!DECK CWRSK
+!** CWRSK
 SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CWRSK
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBESI and CBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CWRSK-A, ZWRSK-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBESI and CBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CWRSK-A, ZWRSK-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     CWRSK COMPUTES THE I BESSEL FUNCTION FOR RE(Z).GE.0.0 BY
   !     NORMALIZING THE I FUNCTION RATIOS FROM CRATI BY THE WRONSKIAN
   !
-  !***SEE ALSO  CBESI, CBESK
-  !***ROUTINES CALLED  CBKNU, CRATI, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBESI, CBESK
+  !***
+  ! **Routines called:**  CBKNU, CRATI, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CWRSK
+  
   COMPLEX cinu, cscl, ct, Cw, c1, c2, rct, st, Y, Zr
   REAL act, acw, Alim, ascle, Elim, Fnu, s1, s2, Tol, yy, R1MACH
   INTEGER i, Kode, N, nw, Nz
   DIMENSION Y(N), Cw(2)
-  !***FIRST EXECUTABLE STATEMENT  CWRSK
+  !* FIRST EXECUTABLE STATEMENT  CWRSK
   !-----------------------------------------------------------------------
   !     I(FNU+I-1,Z) BY BACKWARD RECURRENCE FOR RATIOS
   !     Y(I)=I(FNU+I,Z)/I(FNU+I-1,Z) FROM CRATI NORMALIZED BY THE

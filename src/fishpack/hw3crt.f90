@@ -1,19 +1,26 @@
-!DECK HW3CRT
+!** HW3CRT
 SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
     N,Nbdcnd,Bdzs,Bdzf,Elmbda,Ldimf,Mdimf,F,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HW3CRT
-  !***PURPOSE  Solve the standard seven-point finite difference
+  !>
+  !***
+  !  Solve the standard seven-point finite difference
   !            approximation to the Helmholtz equation in Cartesian
   !            coordinates.
-  !***LIBRARY   SLATEC (FISHPACK)
-  !***CATEGORY  I2B1A1A
-  !***TYPE      SINGLE PRECISION (HW3CRT-S)
-  !***KEYWORDS  CARTESIAN, ELLIPTIC, FISHPACK, HELMHOLTZ, PDE
-  !***AUTHOR  Adams, J., (NCAR)
+  !***
+  ! **Library:**   SLATEC (FISHPACK)
+  !***
+  ! **Category:**  I2B1A1A
+  !***
+  ! **Type:**      SINGLE PRECISION (HW3CRT-S)
+  !***
+  ! **Keywords:**  CARTESIAN, ELLIPTIC, FISHPACK, HELMHOLTZ, PDE
+  !***
+  ! **Author:**  Adams, J., (NCAR)
   !           Swarztrauber, P. N., (NCAR)
   !           Sweet, R., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Subroutine HW3CRT solves the standard seven-point finite
   !     difference approximation to the Helmholtz equation in Cartesian
@@ -275,7 +282,7 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
   !        Since this is the only means of indicating a possibly incorrect
   !        call to HW3CRT, the user should test IERROR after the call.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !    * * * * * * *   Program Specifications    * * * * * * * * * * * *
   !
@@ -352,14 +359,17 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
   !
   !    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  POIS3D
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  POIS3D
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  HW3CRT
+  
   REAL Bdxf, Bdxs, Bdyf, Bdys, Bdzf, Bdzs, c1, c2, c3, dx, dy, &
     dz, Elmbda, F, Pertrb, s, s1, s2, twbydx, twbydy
   REAL twbydz, W, Xf, xlp, Xs, Yf, ylp, Ys, Zf, zlp, Zs
@@ -369,7 +379,7 @@ SUBROUTINE HW3CRT(Xs,Xf,L,Lbdcnd,Bdxs,Bdxf,Ys,Yf,M,Mbdcnd,Bdys,Bdyf,Zs,Zf,&
     np1, nperod, nstart, nstop, nstpm1, nunk
   DIMENSION Bdxs(Mdimf,*), Bdxf(Mdimf,*), Bdys(Ldimf,*), Bdyf(Ldimf,*), &
     Bdzs(Ldimf,*), Bdzf(Ldimf,*), F(Ldimf,Mdimf,*), W(*)
-  !***FIRST EXECUTABLE STATEMENT  HW3CRT
+  !* FIRST EXECUTABLE STATEMENT  HW3CRT
   Ierror = 0
   IF ( Xf<=Xs ) Ierror = 1
   IF ( L<5 ) Ierror = 2

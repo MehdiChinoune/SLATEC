@@ -1,16 +1,22 @@
-!DECK D9B0MP
+!** D9B0MP
 SUBROUTINE D9B0MP(X,Ampl,Theta)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  D9B0MP
-  !***SUBSIDIARY
-  !***PURPOSE  Evaluate the modulus and phase for the J0 and Y0 Bessel
+  !>
+  !***
+  !  Evaluate the modulus and phase for the J0 and Y0 Bessel
   !            functions.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10A1
-  !***TYPE      DOUBLE PRECISION (D9B0MP-D)
-  !***KEYWORDS  BESSEL FUNCTION, FNLIB, MODULUS, PHASE, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (D9B0MP-D)
+  !***
+  ! **Keywords:**  BESSEL FUNCTION, FNLIB, MODULUS, PHASE, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate the modulus and phase for the Bessel J0 and Y0 functions.
   !
@@ -38,9 +44,12 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
   !                               significant figures required  30.61
   !                                    decimal places required  32.32
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -48,7 +57,7 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  D9B0MP
+  
   REAL eta
   INTEGER INITDS, nbm0, nbm02, nbt02, nbth0
   REAL(8) :: X, Ampl, Theta, bm0cs(37), bt02cs(39), bm02cs(40), &
@@ -218,7 +227,7 @@ SUBROUTINE D9B0MP(X,Ampl,Theta)
   DATA bt02cs(39)/ - .29860056267039913454250666666666D-31/
   DATA pi4/0.785398163397448309615660845819876D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  D9B0MP
+  !* FIRST EXECUTABLE STATEMENT  D9B0MP
   IF ( first ) THEN
     eta = 0.1*REAL(D1MACH(3))
     nbm0 = INITDS(bm0cs,37,eta)

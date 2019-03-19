@@ -1,16 +1,23 @@
-!DECK DPPDI
+!** DPPDI
 SUBROUTINE DPPDI(Ap,N,Det,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPPDI
-  !***PURPOSE  Compute the determinant and inverse of a real symmetric
+  !>
+  !***
+  !  Compute the determinant and inverse of a real symmetric
   !            positive definite matrix using factors from DPPCO or DPPFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1B, D3B1B
-  !***TYPE      DOUBLE PRECISION (SPPDI-S, DPPDI-D, CPPDI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1B, D3B1B
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPPDI-S, DPPDI-D, CPPDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             PACKED, POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DPPDI computes the determinant and inverse
   !     of a double precision symmetric positive definite matrix
@@ -48,10 +55,13 @@ SUBROUTINE DPPDI(Ap,N,Det,Job)
   !        It will not occur if the subroutines are called correctly
   !        and if DPOCO or DPOFA has set INFO .EQ. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -59,7 +69,7 @@ SUBROUTINE DPPDI(Ap,N,Det,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DPPDI
+  
   INTEGER N, Job
   REAL(8) :: Ap(*)
   REAL(8) :: Det(2)
@@ -67,7 +77,7 @@ SUBROUTINE DPPDI(Ap,N,Det,Job)
   REAL(8) :: t
   REAL(8) :: s
   INTEGER i, ii, j, jj, jm1, j1, k, kj, kk, kp1, k1
-  !***FIRST EXECUTABLE STATEMENT  DPPDI
+  !* FIRST EXECUTABLE STATEMENT  DPPDI
   !
   !     COMPUTE DETERMINANT
   !

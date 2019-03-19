@@ -1,27 +1,34 @@
-!DECK DCGN
+!** DCGN
 SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Atp,Atz,Dz,Atdz,Rwork,&
     Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCGN
-  !***PURPOSE  Preconditioned CG Sparse Ax=b Solver for Normal Equations.
+  !>
+  !***
+  !  Preconditioned CG Sparse Ax=b Solver for Normal Equations.
   !            Routine to solve a general linear system  Ax = b  using the
   !            Preconditioned Conjugate Gradient method applied to the
   !            normal equations  AA'y = b, x=A'y.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      DOUBLE PRECISION (SCGN-S, DCGN-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM SOLVE,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (SCGN-S, DCGN-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM SOLVE,
   !             NORMAL EQUATIONS., SLAP, SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER  N, NELT, IA(NELT), JA(NELT), ISYM, ITOL, ITMAX
   !     INTEGER  ITER, IERR, IUNIT, IWORK(USER DEFINED)
   !     DOUBLE PRECISION B(N), X(N), A(NELT), TOL, ERR, R(N), Z(N)
@@ -33,7 +40,7 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   !    $     MSOLVE, ITOL, TOL, ITMAX, ITER, ERR, IERR, IUNIT, R,
   !    $     Z, P, ATP, ATZ, DZ, ATDZ, RWORK, IWORK)
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   ! B      :IN       Double Precision B(N).
@@ -154,7 +161,7 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   ! IWORK  :WORK     Integer IWORK(USER DEFINED).
   !         Integer array that can be used by  MSOLVE.
   !
-  ! *Description:
+  !- Description:
   !       This  routine applies the  preconditioned conjugate gradient
   !       (PCG) method to a non-symmetric system of equations Ax=b. To
   !       do this the normal equations are solved:
@@ -240,19 +247,23 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  DSDCGN, DSLUCN, ISDCGN
-  !***REFERENCES  1. Mark K. Seager, A SLAP for the Masses, in
+  !***
+  ! **See also:**  DSDCGN, DSLUCN, ISDCGN
+  !***
+  ! **References:**  1. Mark K. Seager, A SLAP for the Masses, in
   !                  G. F. Carey, Ed., Parallel Supercomputing: Methods,
   !                  Algorithms and Applications, Wiley, 1989, pp.135-155.
-  !***ROUTINES CALLED  D1MACH, DAXPY, DCOPY, DDOT, ISDCGN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, DAXPY, DCOPY, DDOT, ISDCGN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -269,7 +280,7 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   !   920929  Corrected format of reference.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  !***END PROLOGUE  DCGN
+  
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
@@ -288,7 +299,7 @@ SUBROUTINE DCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,Tol,&
   EXTERNAL D1MACH, DDOT, ISDCGN
   !     .. External Subroutines ..
   EXTERNAL DAXPY, DCOPY
-  !***FIRST EXECUTABLE STATEMENT  DCGN
+  !* FIRST EXECUTABLE STATEMENT  DCGN
   !
   !         Check user input.
   !

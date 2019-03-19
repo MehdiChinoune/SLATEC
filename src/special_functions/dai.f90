@@ -1,14 +1,21 @@
-!DECK DAI
+!** DAI
 REAL(8) FUNCTION DAI(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DAI
-  !***PURPOSE  Evaluate the Airy function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10D
-  !***TYPE      DOUBLE PRECISION (AI-S, DAI-D)
-  !***KEYWORDS  AIRY FUNCTION, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Evaluate the Airy function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10D
+  !***
+  ! **Type:**      DOUBLE PRECISION (AI-S, DAI-D)
+  !***
+  ! **Keywords:**  AIRY FUNCTION, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DAI(X) calculates the double precision Airy function for double
   ! precision argument X.
@@ -25,16 +32,19 @@ REAL(8) FUNCTION DAI(X)
   !                               significant figures required  31.50
   !                                    decimal places required  33.68
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, D9AIMP, DAIE, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, D9AIMP, DAIE, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  DAI
+  
   INTEGER INITDS, naif, naig
   REAL(8) :: X, aifcs(13), aigcs(13), theta, xm, xmax, x3sml, &
     z, D1MACH, DCSEVL, DAIE, xmaxt
@@ -67,7 +77,7 @@ REAL(8) FUNCTION DAI(X)
   DATA aigcs(12)/ + .19900855034518869333333333333333D-29/
   DATA aigcs(13)/ + .74702885256533333333333333333333D-33/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DAI
+  !* FIRST EXECUTABLE STATEMENT  DAI
   IF ( first ) THEN
     naif = INITDS(aifcs,13,0.1*REAL(D1MACH(3)))
     naig = INITDS(aigcs,13,0.1*REAL(D1MACH(3)))

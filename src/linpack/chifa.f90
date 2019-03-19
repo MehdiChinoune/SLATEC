@@ -1,15 +1,22 @@
-!DECK CHIFA
+!** CHIFA
 SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHIFA
-  !***PURPOSE  Factor a complex Hermitian matrix by elimination
+  !>
+  !***
+  !  Factor a complex Hermitian matrix by elimination
   !            (symmetric pivoting).
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2D1A
-  !***TYPE      COMPLEX (SSIFA-S, DSIFA-D, CHIFA-C, CSIFA-C)
-  !***KEYWORDS  HERMITIAN, LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2D1A
+  !***
+  ! **Type:**      COMPLEX (SSIFA-S, DSIFA-D, CHIFA-C, CSIFA-C)
+  !***
+  ! **Keywords:**  HERMITIAN, LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     CHIFA factors a complex Hermitian matrix by elimination
   !     with symmetric pivoting.
@@ -52,10 +59,13 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
   !                     but it does indicate that CHISL or CHIDI may
   !                     divide by zero if called.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CSWAP, ICAMAX
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CSWAP, ICAMAX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -65,7 +75,7 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CHIFA
+  
   INTEGER Lda, N, Kpvt(*), Info
   COMPLEX A(Lda,*)
   !
@@ -74,7 +84,7 @@ SUBROUTINE CHIFA(A,Lda,N,Kpvt,Info)
   INTEGER imax, imaxp1, j, jj, jmax, k, km1, km2, kstep, ICAMAX
   LOGICAL swap
   REAL, EXTERNAL :: CABS1
-  !***FIRST EXECUTABLE STATEMENT  CHIFA
+  !* FIRST EXECUTABLE STATEMENT  CHIFA
   !
   !     INITIALIZE
   !

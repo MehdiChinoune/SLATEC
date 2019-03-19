@@ -1,15 +1,22 @@
-!DECK XSETUA
+!** XSETUA
 SUBROUTINE XSETUA(Iunita,N)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XSETUA
-  !***PURPOSE  Set logical unit numbers (up to 5) to which error
+  !>
+  !***
+  !  Set logical unit numbers (up to 5) to which error
   !            messages are to be sent.
-  !***LIBRARY   SLATEC (XERROR)
-  !***CATEGORY  R3B
-  !***TYPE      ALL (XSETUA-A)
-  !***KEYWORDS  ERROR, XERROR
-  !***AUTHOR  Jones, R. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (XERROR)
+  !***
+  ! **Category:**  R3B
+  !***
+  ! **Type:**      ALL (XSETUA-A)
+  !***
+  ! **Keywords:**  ERROR, XERROR
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !        XSETUA may be called to declare a list of up to five
@@ -28,21 +35,24 @@ SUBROUTINE XSETUA(Iunita,N)
   !        N     - the number of unit numbers provided in IUNIT
   !                must have 1 .LE. N .LE. 5.
   !
-  !***REFERENCES  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
+  !***
+  ! **References:**  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
   !                 Error-handling Package, SAND82-0800, Sandia
   !                 Laboratories, 1982.
-  !***ROUTINES CALLED  J4SAVE, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  J4SAVE, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790801  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900510  Change call to XERRWV to XERMSG.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  XSETUA
+  
   INTEGER i, index, Iunita, J4SAVE, junk, N
   DIMENSION Iunita(5)
   CHARACTER(8) :: xern1
-  !***FIRST EXECUTABLE STATEMENT  XSETUA
+  !* FIRST EXECUTABLE STATEMENT  XSETUA
   !
   IF ( N<1.OR.N>5 ) THEN
     WRITE (xern1,'(I8)') N

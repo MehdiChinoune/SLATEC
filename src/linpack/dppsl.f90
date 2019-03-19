@@ -1,16 +1,23 @@
-!DECK DPPSL
+!** DPPSL
 SUBROUTINE DPPSL(Ap,N,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPPSL
-  !***PURPOSE  Solve the real symmetric positive definite system using
+  !>
+  !***
+  !  Solve the real symmetric positive definite system using
   !            the factors computed by DPPCO or DPPFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1B
-  !***TYPE      DOUBLE PRECISION (SPPSL-S, DPPSL-D, CPPSL-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX, PACKED,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1B
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPPSL-S, DPPSL-D, CPPSL-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX, PACKED,
   !             POSITIVE DEFINITE, SOLVE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DPPSL solves the double precision symmetric positive definite
   !     system A * X = B
@@ -47,10 +54,13 @@ SUBROUTINE DPPSL(Ap,N,B)
   !              CALL DPPSL(AP,N,C(1,J))
   !        10 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -58,13 +68,13 @@ SUBROUTINE DPPSL(Ap,N,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DPPSL
+  
   INTEGER N
   REAL(8) :: Ap(*), B(*)
   !
   REAL(8) :: DDOT, t
   INTEGER k, kb, kk
-  !***FIRST EXECUTABLE STATEMENT  DPPSL
+  !* FIRST EXECUTABLE STATEMENT  DPPSL
   kk = 0
   DO k = 1, N
     t = DDOT(k-1,Ap(kk+1),1,B(1),1)

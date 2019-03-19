@@ -1,30 +1,37 @@
-!DECK SS2LT
+!** SS2LT
 SUBROUTINE SS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SS2LT
-  !***PURPOSE  Lower Triangle Preconditioner SLAP Set Up.
+  !>
+  !***
+  !  Lower Triangle Preconditioner SLAP Set Up.
   !            Routine to store the lower triangle of a matrix stored
   !            in the SLAP Column format.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2E
-  !***TYPE      SINGLE PRECISION (SS2LT-S, DS2LT-D)
-  !***KEYWORDS  LINEAR SYSTEM, LOWER TRIANGLE, SLAP SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2E
+  !***
+  ! **Type:**      SINGLE PRECISION (SS2LT-S, DS2LT-D)
+  !***
+  ! **Keywords:**  LINEAR SYSTEM, LOWER TRIANGLE, SLAP SPARSE
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM
   !     INTEGER NEL, IEL(NEL), JEL(NEL)
   !     REAL    A(NELT), EL(NEL)
   !
   !     CALL SS2LT( N, NELT, IA, JA, A, ISYM, NEL, IEL, JEL, EL )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   ! NELT   :IN       Integer.
@@ -49,7 +56,7 @@ SUBROUTINE SS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
   !         stored in SLAP Column format.  See "Description", below,
   !         for more details bout the SLAP Column format.
   !
-  ! *Description
+  !- Description
   !       =================== S L A P Column format ==================
   !       This routine  requires that  the matrix A  be stored in  the
   !       SLAP Column format.  In this format the non-zeros are stored
@@ -79,9 +86,12 @@ SUBROUTINE SS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -91,7 +101,7 @@ SUBROUTINE SS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  !***END PROLOGUE  SS2LT
+  
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nel, Nelt
   !     .. Array Arguments ..
@@ -99,7 +109,7 @@ SUBROUTINE SS2LT(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El)
   INTEGER Ia(Nelt), Iel(Nel), Ja(Nelt), Jel(Nel)
   !     .. Local Scalars ..
   INTEGER i, icol, j, jbgn, jend
-  !***FIRST EXECUTABLE STATEMENT  SS2LT
+  !* FIRST EXECUTABLE STATEMENT  SS2LT
   IF ( Isym==0 ) THEN
     !
     !         The matrix is stored non-symmetricly.  Pick out the lower

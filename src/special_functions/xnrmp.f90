@@ -1,15 +1,22 @@
-!DECK XNRMP
+!** XNRMP
 SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XNRMP
-  !***PURPOSE  Compute normalized Legendre polynomials.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C3A2, C9
-  !***TYPE      SINGLE PRECISION (XNRMP-S, DXNRMP-D)
-  !***KEYWORDS  LEGENDRE FUNCTIONS
-  !***AUTHOR  Lozier, Daniel W., (National Bureau of Standards)
+  !>
+  !***
+  !  Compute normalized Legendre polynomials.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C3A2, C9
+  !***
+  ! **Type:**      SINGLE PRECISION (XNRMP-S, DXNRMP-D)
+  !***
+  ! **Keywords:**  LEGENDRE FUNCTIONS
+  !***
+  ! **Author:**  Lozier, Daniel W., (National Bureau of Standards)
   !           Smith, John M., (NBS and George Mason University)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        SUBROUTINE TO CALCULATE NORMALIZED LEGENDRE POLYNOMIALS
   !        (DXNRMP is double-precision version)
@@ -112,12 +119,16 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !        If IERROR=108, an overflow or underflow of an extended-range
   !        number was detected in XC210.
   !
-  !***SEE ALSO  XSET
-  !***REFERENCES  Smith, Olver and Lozier, Extended-Range Arithmetic and
+  !***
+  ! **See also:**  XSET
+  !***
+  ! **References:**  Smith, Olver and Lozier, Extended-Range Arithmetic and
   !                 Normalized Legendre Polynomials, ACM Trans on Math
   !                 Softw, v 7, n 1, March 1981, pp 93--105.
-  !***ROUTINES CALLED  XADD, XADJ, XERMSG, XRED, XSET
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XADD, XADJ, XERMSG, XRED, XSET
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820712  DATE WRITTEN
   !   881020  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
@@ -126,7 +137,7 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  XNRMP
+  
   INTEGER i, Ierror, ip, ip1, ip2, j, k, mu
   INTEGER Nu, Mu1, Mu2, Mode, Ipn, Isig
   REAL Sarg, Spn
@@ -134,7 +145,7 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   REAL c1, c2, p, p1, p2, p3, s, sx, t, tx, x, rk
   ! CALL XSET TO INITIALIZE EXTENDED-RANGE ARITHMETIC (SEE XSET
   ! LISTING FOR DETAILS)
-  !***FIRST EXECUTABLE STATEMENT  XNRMP
+  !* FIRST EXECUTABLE STATEMENT  XNRMP
   Ierror = 0
   CALL XSET(0,0,0.0,0,Ierror)
   IF ( Ierror/=0 ) RETURN

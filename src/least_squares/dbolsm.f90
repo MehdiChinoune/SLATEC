@@ -1,14 +1,18 @@
-!DECK DBOLSM
+!** DBOLSM
 SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     Scl,Ibasis,Ibb)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBOLSM
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBOCLS and DBOLS
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SBOLSM-S, DBOLSM-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBOCLS and DBOLS
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SBOLSM-S, DBOLSM-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !            **** Double Precision Version of SBOLSM ****
   !   **** All INPUT and OUTPUT real variables are DOUBLE PRECISION ****
@@ -388,17 +392,20 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !    -38    THE ROW SEPARATOR TO APPLY WEIGHTING (...) MUST LIE BETWEEN
   !           0 AND MINPUT = .... WEIGHT = ... MUST BE POSITIVE.
   !
-  !***SEE ALSO  DBOCLS, DBOLS
-  !***ROUTINES CALLED  D1MACH, DAXPY, DCOPY, DDOT, DMOUT, DNRM2, DROT,
+  !***
+  ! **See also:**  DBOCLS, DBOLS
+  !***
+  ! **Routines called:**  D1MACH, DAXPY, DCOPY, DDOT, DMOUT, DNRM2, DROT,
   !                    DROTG, DSWAP, DVOUT, IVOUT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   821220  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920422  Fixed usage of MINPUT.  (WRB)
   !   901009  Editorial changes, code now reads from top to bottom.  (RWC)
-  !***END PROLOGUE  DBOLSM
+  
   !
   !     PURPOSE
   !     -------
@@ -436,7 +443,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   PARAMETER (ZERO=0.0D0,ONE=1.0D0,TWO=2.0D0)
   !
-  !***FIRST EXECUTABLE STATEMENT  DBOLSM
+  !* FIRST EXECUTABLE STATEMENT  DBOLSM
   !
   !     Verify that the problem dimensions are defined properly.
   !

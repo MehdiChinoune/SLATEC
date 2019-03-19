@@ -1,15 +1,22 @@
-!DECK IMTQL2
+!** IMTQL2
 SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  IMTQL2
-  !***PURPOSE  Compute the eigenvalues and eigenvectors of a symmetric
+  !>
+  !***
+  !  Compute the eigenvalues and eigenvectors of a symmetric
   !            tridiagonal matrix using the implicit QL method.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A5, D4C2A
-  !***TYPE      SINGLE PRECISION (IMTQL2-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A5, D4C2A
+  !***
+  ! **Type:**      SINGLE PRECISION (IMTQL2-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure IMTQL2,
   !     NUM. MATH. 12, 377-383(1968) by Martin and Wilkinson,
@@ -74,25 +81,28 @@ SUBROUTINE IMTQL2(Nm,N,D,E,Z,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  PYTHAG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  PYTHAG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  IMTQL2
+  
   !
   INTEGER i, j, k, l, m, N, ii, Nm, mml, Ierr
   REAL D(*), E(*), Z(Nm,*)
   REAL b, c, f, g, p, r, s, s1, s2
   REAL PYTHAG
   !
-  !***FIRST EXECUTABLE STATEMENT  IMTQL2
+  !* FIRST EXECUTABLE STATEMENT  IMTQL2
   Ierr = 0
   IF ( N/=1 ) THEN
     !

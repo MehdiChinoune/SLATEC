@@ -1,15 +1,21 @@
-!DECK DGAMLN
+!** DGAMLN
 REAL(8) FUNCTION DGAMLN(Z,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGAMLN
-  !***SUBSIDIARY
-  !***PURPOSE  Compute the logarithm of the Gamma function
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C7A
-  !***TYPE      DOUBLE PRECISION (GAMLN-S, DGAMLN-D)
-  !***KEYWORDS  LOGARITHM OF GAMMA FUNCTION
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the logarithm of the Gamma function
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C7A
+  !***
+  ! **Type:**      DOUBLE PRECISION (GAMLN-S, DGAMLN-D)
+  !***
+  ! **Keywords:**  LOGARITHM OF GAMMA FUNCTION
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !               **** A DOUBLE PRECISION ROUTINE ****
   !         DGAMLN COMPUTES THE NATURAL LOG OF THE GAMMA FUNCTION FOR
@@ -35,16 +41,19 @@ REAL(8) FUNCTION DGAMLN(Z,Ierr)
   !                     IERR=1, Z.LE.0.0D0,    NO COMPUTATION
   !
   !
-  !***REFERENCES  COMPUTATION OF BESSEL FUNCTIONS OF COMPLEX ARGUMENT
+  !***
+  ! **References:**  COMPUTATION OF BESSEL FUNCTIONS OF COMPLEX ARGUMENT
   !                 BY D. E. AMOS, SAND83-0083, MAY, 1983.
-  !***ROUTINES CALLED  D1MACH, I1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, I1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   830501  REVISION DATE from Version 3.2
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   921215  DGAMLN defined for Z negative.  (WRB)
-  !***END PROLOGUE  DGAMLN
+  
   REAL(8) :: cf, con, fln, fz, gln, rln, s, tlg, trm, tst, &
     t1, wdtol, Z, zdmy, zinc, zm, zmin, zp, zsq, &
     D1MACH
@@ -134,7 +143,7 @@ REAL(8) FUNCTION DGAMLN(Z,Ierr)
   !             LN(2*PI)
   DATA con/1.83787706640934548D+00/
   !
-  !***FIRST EXECUTABLE STATEMENT  DGAMLN
+  !* FIRST EXECUTABLE STATEMENT  DGAMLN
   Ierr = 0
   IF ( Z<=0.0D0 ) THEN
     !

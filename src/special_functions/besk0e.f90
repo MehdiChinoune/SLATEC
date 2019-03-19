@@ -1,17 +1,24 @@
-!DECK BESK0E
+!** BESK0E
 REAL FUNCTION BESK0E(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BESK0E
-  !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
+  !>
+  !***
+  !  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the third kind of order zero.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B1
-  !***TYPE      SINGLE PRECISION (BESK0E-S, DBSK0E-D)
-  !***KEYWORDS  EXPONENTIALLY SCALED, FNLIB, HYPERBOLIC BESSEL FUNCTION,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B1
+  !***
+  ! **Type:**      SINGLE PRECISION (BESK0E-S, DBSK0E-D)
+  !***
+  ! **Keywords:**  EXPONENTIALLY SCALED, FNLIB, HYPERBOLIC BESSEL FUNCTION,
   !             MODIFIED BESSEL FUNCTION, ORDER ZERO, SPECIAL FUNCTIONS,
   !             THIRD KIND
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! BESK0E(X) computes the exponentially scaled modified (hyperbolic)
   ! Bessel function of third kind of order zero for real argument
@@ -35,9 +42,12 @@ REAL FUNCTION BESK0E(X)
   !                               significant figures required  14.67
   !                                    decimal places required  17.20
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  BESI0, CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  BESI0, CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -45,7 +55,7 @@ REAL FUNCTION BESK0E(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  BESK0E
+  
   REAL ak02cs, ak0cs, BESI0, bk0cs, CSEVL, R1MACH, X, xsml, y
   INTEGER INITS, ntak0, ntak02, ntk0
   DIMENSION bk0cs(11), ak0cs(17), ak02cs(14)
@@ -94,7 +104,7 @@ REAL FUNCTION BESK0E(X)
   DATA ak02cs(13)/.00000000000000020E0/
   DATA ak02cs(14)/ - .00000000000000002E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BESK0E
+  !* FIRST EXECUTABLE STATEMENT  BESK0E
   IF ( first ) THEN
     ntk0 = INITS(bk0cs,11,0.1*R1MACH(3))
     ntak0 = INITS(ak0cs,17,0.1*R1MACH(3))

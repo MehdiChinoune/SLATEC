@@ -1,14 +1,21 @@
-!DECK BETAI
+!** BETAI
 REAL FUNCTION BETAI(X,Pin,Qin)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BETAI
-  !***PURPOSE  Calculate the incomplete Beta function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7F
-  !***TYPE      SINGLE PRECISION (BETAI-S, DBETAI-D)
-  !***KEYWORDS  FNLIB, INCOMPLETE BETA FUNCTION, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Calculate the incomplete Beta function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7F
+  !***
+  ! **Type:**      SINGLE PRECISION (BETAI-S, DBETAI-D)
+  !***
+  ! **Keywords:**  FNLIB, INCOMPLETE BETA FUNCTION, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   !   BETAI calculates the REAL incomplete beta function.
   !
@@ -21,11 +28,14 @@ REAL FUNCTION BETAI(X,Pin,Qin)
   !   PIN    first beta distribution parameter.  PIN must be .GT. 0.0.
   !   QIN    second beta distribution parameter.  QIN must be .GT. 0.0.
   !
-  !***REFERENCES  Nancy E. Bosten and E. L. Battiste, Remark on Algorithm
+  !***
+  ! **References:**  Nancy E. Bosten and E. L. Battiste, Remark on Algorithm
   !                 179, Communications of the ACM 17, 3 (March 1974),
   !                 pp. 156.
-  !***ROUTINES CALLED  ALBETA, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  ALBETA, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -34,14 +44,14 @@ REAL FUNCTION BETAI(X,Pin,Qin)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  !***END PROLOGUE  BETAI
+  
   REAL ALBETA, alneps, alnsml, c, eps, finsum, p, p1, Pin, ps, q, &
     Qin, R1MACH, sml, term, X, xb, y
   INTEGER i, ib, n
   LOGICAL first
   SAVE eps, alneps, sml, alnsml, first
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BETAI
+  !* FIRST EXECUTABLE STATEMENT  BETAI
   IF ( first ) THEN
     eps = R1MACH(3)
     alneps = LOG(eps)

@@ -1,32 +1,39 @@
-!DECK CMPTRX
+!** CMPTRX
 SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CMPTRX
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CMGNBN
-  !***LIBRARY   SLATEC
-  !***TYPE      COMPLEX (TRIX-S, CMPTRX-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CMGNBN
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      COMPLEX (TRIX-S, CMPTRX-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Subroutine to solve a system of linear equations where the
   !     coefficient matrix is a rational function in the matrix given by
   !     tridiagonal  ( . . ., A(I), B(I), C(I), . . . ).
   !
-  !***SEE ALSO  CMGNBN
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CMGNBN
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  CMPTRX
+  
   INTEGER i, Idegbr, Idegcr, ip, k, l, lint, M, mm1
   COMPLEX A, B, C, Y, Tcos, D, W, x, xx, z
   DIMENSION A(*), B(*), C(*), Y(*), Tcos(*), D(*), W(*)
   INTEGER kb, kc
-  !***FIRST EXECUTABLE STATEMENT  CMPTRX
+  !* FIRST EXECUTABLE STATEMENT  CMPTRX
   mm1 = M - 1
   kb = Idegbr + 1
   kc = Idegcr + 1

@@ -1,15 +1,22 @@
-!DECK DERFC
+!** DERFC
 REAL(8) FUNCTION DERFC(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DERFC
-  !***PURPOSE  Compute the complementary error function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C8A, L5A1E
-  !***TYPE      DOUBLE PRECISION (ERFC-S, DERFC-D)
-  !***KEYWORDS  COMPLEMENTARY ERROR FUNCTION, ERFC, FNLIB,
+  !>
+  !***
+  !  Compute the complementary error function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C8A, L5A1E
+  !***
+  ! **Type:**      DOUBLE PRECISION (ERFC-S, DERFC-D)
+  !***
+  ! **Keywords:**  COMPLEMENTARY ERROR FUNCTION, ERFC, FNLIB,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DERFC(X) calculates the double precision complementary error function
   ! for double precision argument X.
@@ -32,16 +39,19 @@ REAL(8) FUNCTION DERFC(X)
   !                               significant figures required  29.47
   !                                    decimal places required  31.70
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  DERFC
+  
   REAL eta
   INTEGER INITDS, nterc2, nterf, nterfc
   REAL(8) :: X, erfcs(21), erfccs(59), erc2cs(49), sqeps, &
@@ -180,7 +190,7 @@ REAL(8) FUNCTION DERFC(X)
   DATA erfccs(59)/ + .152587726411035756763200828211D-30/
   DATA sqrtpi/1.77245385090551602729816748334115D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DERFC
+  !* FIRST EXECUTABLE STATEMENT  DERFC
   IF ( first ) THEN
     eta = 0.1*REAL(D1MACH(3))
     nterf = INITDS(erfcs,21,eta)

@@ -1,16 +1,23 @@
-!DECK BANDV
+!** BANDV
 SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BANDV
-  !***PURPOSE  Form the eigenvectors of a real symmetric band matrix
+  !>
+  !***
+  !  Form the eigenvectors of a real symmetric band matrix
   !            associated with a set of ordered approximate eigenvalues
   !            by inverse iteration.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C3
-  !***TYPE      SINGLE PRECISION (BANDV-S)
-  !***KEYWORDS  EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C3
+  !***
+  ! **Type:**      SINGLE PRECISION (BANDV-S)
+  !***
+  ! **Keywords:**  EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine finds those eigenvectors of a REAL SYMMETRIC
   !     BAND matrix corresponding to specified eigenvalues, using inverse
@@ -108,19 +115,22 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
   !     Applied Mathematics Division, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BANDV
+  
   !
   INTEGER i, j, k, M, N, r, ii, ij, jj, kj, mb, m1, Nm, Nv, &
     ij1, its, kj1, Mbw, m21
@@ -129,7 +139,7 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
   REAL u, v, uk, xu, x0, x1, E21, eps2, eps3, eps4, norm, order, &
     s
   !
-  !***FIRST EXECUTABLE STATEMENT  BANDV
+  !* FIRST EXECUTABLE STATEMENT  BANDV
   Ierr = 0
   IF ( M/=0 ) THEN
     mb = Mbw

@@ -1,15 +1,22 @@
-!DECK BSKIN
+!** BSKIN
 SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BSKIN
-  !***PURPOSE  Compute repeated integrals of the K-zero Bessel function.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10F
-  !***TYPE      SINGLE PRECISION (BSKIN-S, DBSKIN-D)
-  !***KEYWORDS  BICKLEY FUNCTIONS, EXPONENTIAL INTEGRAL,
+  !>
+  !***
+  !  Compute repeated integrals of the K-zero Bessel function.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10F
+  !***
+  ! **Type:**      SINGLE PRECISION (BSKIN-S, DBSKIN-D)
+  !***
+  ! **Keywords:**  BICKLEY FUNCTIONS, EXPONENTIAL INTEGRAL,
   !             INTEGRALS OF BESSEL FUNCTIONS, K-ZERO BESSEL FUNCTION
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !         The following definitions are used in BSKIN:
   !
@@ -58,7 +65,7 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !
   !      DBSKIN is the double precision version of BSKIN.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !         Numerical recurrence on
   !
@@ -76,22 +83,25 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !         sequence depending on the relation of INT(X+0.5) to the
   !         indices N,...,N+M-1.
   !
-  !***REFERENCES  D. E. Amos, Uniform asymptotic expansions for
+  !***
+  ! **References:**  D. E. Amos, Uniform asymptotic expansions for
   !                 exponential integrals E(N,X) and Bickley functions
   !                 KI(N,X), ACM Transactions on Mathematical Software,
   !                 1983.
   !               D. E. Amos, A portable Fortran subroutine for the
   !                 Bickley functions KI(N,X), Algorithm 609, ACM
   !                 Transactions on Mathematical Software, 1983.
-  !***ROUTINES CALLED  BKIAS, BKISR, EXINT, GAMRN, I1MACH, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  BKIAS, BKISR, EXINT, GAMRN, I1MACH, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891009  Removed unreferenced statement label.  (WRB)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BSKIN
+  
   INTEGER i, icase, Ierr, il, i1m, k, kk, Kode, ktrms, M, m3, N, &
     ne, nflg, nl, nlim, nn, np, ns, nt, Nz
   INTEGER I1MACH
@@ -139,7 +149,7 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !-----------------------------------------------------------------------
   DATA hrtpi/8.86226925452758014E-01/
   !
-  !***FIRST EXECUTABLE STATEMENT  BSKIN
+  !* FIRST EXECUTABLE STATEMENT  BSKIN
   Ierr = 0
   Nz = 0
   IF ( X<0.0E0 ) Ierr = 1

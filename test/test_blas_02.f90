@@ -2,26 +2,32 @@ MODULE TEST18_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK SBEG
+  !** SBEG
   REAL FUNCTION SBEG(Reset)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SBEG
-    !***SUBSIDIARY
-    !***PURPOSE  Generate random numbers.
-    !***LIBRARY   SLATEC (BLAS)
-    !***AUTHOR  Du Croz, J. (NAG)
+    !>
+    !***
+    !  Generate random numbers.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Author:**  Du Croz, J. (NAG)
     !           Hanson, R. J. (SNLA)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Generates random numbers uniformly distributed between -0.5 and 0.5.
     !
     !  Auxiliary routine for test program for Level 2 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SBEG
+    
     !     .. Scalar Arguments ..
     LOGICAL Reset
     !     .. Local Scalars ..
@@ -30,7 +36,7 @@ CONTAINS
     SAVE i, ic, mi
     !     .. Intrinsic Functions ..
     INTRINSIC REAL
-    ! ***FIRST EXECUTABLE STATEMENT  SBEG
+    !- **FIRST EXECUTABLE STATEMENT  SBEG
     IF ( Reset ) THEN
       !        Initialize local variables.
       mi = 891
@@ -60,34 +66,44 @@ CONTAINS
     !     End of SBEG.
     !
   END FUNCTION SBEG
-  !DECK SBLAT2
+  !** SBLAT2
   SUBROUTINE SBLAT2(Nout,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SBLAT2
-    !***PURPOSE  Driver for testing Level 2 BLAS single precision
+    !>
+    !***
+    !  Driver for testing Level 2 BLAS single precision
     !            subroutines.
-    !***LIBRARY   SLATEC (BLAS)
-    !***CATEGORY  A3A
-    !***TYPE      SINGLE PRECISION (SBLAT2-S, DBLAT2-D, CBLAT2-C)
-    !***KEYWORDS  BLAS, QUICK CHECK DRIVER
-    !***AUTHOR  Du Croz, J. J., (NAG)
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Category:**  A3A
+    !***
+    ! **Type:**      SINGLE PRECISION (SBLAT2-S, DBLAT2-D, CBLAT2-C)
+    !***
+    ! **Keywords:**  BLAS, QUICK CHECK DRIVER
+    !***
+    ! **Author:**  Du Croz, J. J., (NAG)
     !           Hanson, R. J., (SNLA)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Test program for the REAL             Level 2 Blas.
     !
-    !***REFERENCES  Dongarra, J. J., Du Croz, J. J., Hammarling, S. and
+    !***
+    ! **References:**  Dongarra, J. J., Du Croz, J. J., Hammarling, S. and
     !                 Hanson, R. J.  An  extended  set of Fortran Basic
     !                 Linear Algebra Subprograms. ACM TOMS, Vol. 14, No. 1,
     !                 pp. 1-17, March 1988.
-    !***ROUTINES CALLED  LSE, R1MACH, SCHK12, SCHK22, SCHK32, SCHK42,
+    !***
+    ! **Routines called:**  LSE, R1MACH, SCHK12, SCHK22, SCHK32, SCHK42,
     !                    SCHK52, SCHK62, SCHKE2, SMVCH, XERCLR
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
     !   930315  Removed unused variables.  (WRB)
     !   930618  Code modified to improve PASS/FAIL reporting.  (BKS, WRB)
-    !***END PROLOGUE  SBLAT2
+    
     !     .. Parameters ..
     INTEGER NSUBS
     PARAMETER (NSUBS=16)
@@ -125,7 +141,7 @@ CONTAINS
     DATA inc/1, 2, -1, -2/
     DATA alf/0.0, 1.0, 0.7/
     DATA bet/0.0, 1.0, 0.9/
-    !***FIRST EXECUTABLE STATEMENT  SBLAT2
+    !* FIRST EXECUTABLE STATEMENT  SBLAT2
     !
     !     Set the flag that indicates whether error exits are to be tested.
     !
@@ -268,36 +284,46 @@ CONTAINS
     !     End of SBLAT2.
     !
   END SUBROUTINE SBLAT2
-  !DECK SBLAT3
+  !** SBLAT3
   SUBROUTINE SBLAT3(Nout,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SBLAT3
-    !***PURPOSE  Driver for testing Level 3 BLAS single precision
+    !>
+    !***
+    !  Driver for testing Level 3 BLAS single precision
     !            subroutines.
-    !***LIBRARY   SLATEC (BLAS)
-    !***CATEGORY  A3A
-    !***TYPE      SINGLE PRECISION (SBLAT3-S, DBLAT3-D, CBLAT3-C)
-    !***KEYWORDS  BLAS, QUICK CHECK DRIVER
-    !***AUTHOR  Dongarra, J. J., (ANL)
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Category:**  A3A
+    !***
+    ! **Type:**      SINGLE PRECISION (SBLAT3-S, DBLAT3-D, CBLAT3-C)
+    !***
+    ! **Keywords:**  BLAS, QUICK CHECK DRIVER
+    !***
+    ! **Author:**  Dongarra, J. J., (ANL)
     !           Duff, I., (AERE)
     !           Du Croz, J., (NAG)
     !           Hammarling, S., (NAG)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Test program for the REAL             Level 3 Blas.
     !
-    !***REFERENCES  Dongarra, J., Du Croz, J., Duff, I., and Hammarling, S.
+    !***
+    ! **References:**  Dongarra, J., Du Croz, J., Duff, I., and Hammarling, S.
     !                 A set of level 3 basic linear algebra subprograms.
     !                 ACM TOMS, Vol. 16, No. 1, pp. 1-17, March 1990.
-    !***ROUTINES CALLED  LSE, R1MACH, SCHK13, SCHK23, SCHK33, SCHK43,
+    !***
+    ! **Routines called:**  LSE, R1MACH, SCHK13, SCHK23, SCHK33, SCHK43,
     !                    SCHK53, SCHKE3, SMMCH, XERCLR
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
     !   930315  Removed unused variables.  (WRB)
     !   930618  Code modified to improve PASS/FAIL reporting.  (BKS, WRB)
     !   930701  Call to SCHKE5 changed to call to SCHKE3.  (BKS)
-    !***END PROLOGUE  SBLAT3
+    
     !     .. Parameters ..
     INTEGER NSUBS
     PARAMETER (NSUBS=6)
@@ -331,7 +357,7 @@ CONTAINS
     DATA idim/0, 1, 2, 3, 5, 9/
     DATA alf/0.0, 1.0, 0.7/
     DATA bet/0.0, 1.0, 1.3/
-    !***FIRST EXECUTABLE STATEMENT  SBLAT3
+    !* FIRST EXECUTABLE STATEMENT  SBLAT3
     !
     !     Set the flag that indicates whether error exits are to be tested.
     !
@@ -490,16 +516,19 @@ CONTAINS
     !     End of SBLAT3.
     !
   END SUBROUTINE SBLAT3
-  !DECK SMAKE2
+  !** SMAKE2
   SUBROUTINE SMAKE2(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Kl,Ku,Reset,Transl)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SMAKE2
-    !***SUBSIDIARY
-    !***PURPOSE  Generate values for an M by N matrix A.
-    !***LIBRARY   SLATEC (BLAS)
-    !***AUTHOR  Du Croz, J. J., (NAG)
+    !>
+    !***
+    !  Generate values for an M by N matrix A.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Author:**  Du Croz, J. J., (NAG)
     !           Hanson, R. J., (SNLA)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Generates values for an M by N matrix A within the bandwidth
     !  defined by KL and KU.
@@ -509,12 +538,15 @@ CONTAINS
     !  TYPE is 'GE', 'GB', 'SY', 'SB', 'SP', 'TR', 'TB' OR 'TP'.
     !
     !  Auxiliary routine for test program for Level 2 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  SBEG
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  SBEG
+
+    !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SMAKE2
+    
     !     .. Parameters ..
     REAL ZERO, ONE
     PARAMETER (ZERO=0.0,ONE=1.0)
@@ -533,7 +565,7 @@ CONTAINS
     LOGICAL gen, lower, sym, tri, unit, upper
     !     .. Intrinsic Functions ..
     INTRINSIC MAX, MIN
-    !***FIRST EXECUTABLE STATEMENT  SMAKE2
+    !* FIRST EXECUTABLE STATEMENT  SMAKE2
     gen = Type(1:1)=='G'
     sym = Type(1:1)=='S'
     tri = Type(1:1)=='T'
@@ -666,18 +698,21 @@ CONTAINS
     !     End of SMAKE2.
     !
   END SUBROUTINE SMAKE2
-  !DECK SMAKE3
+  !** SMAKE3
   SUBROUTINE SMAKE3(Type,Uplo,Diag,M,N,A,Nmax,Aa,Lda,Reset,Transl)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SMAKE3
-    !***SUBSIDIARY
-    !***PURPOSE  Generate values for an M by N matrix A.
-    !***LIBRARY   SLATEC (BLAS)
-    !***AUTHOR  Dongarra, J. J., (ANL)
+    !>
+    !***
+    !  Generate values for an M by N matrix A.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Author:**  Dongarra, J. J., (ANL)
     !           Duff, I., (AERE)
     !           Du Croz, J., (NAG)
     !           Hammarling, S., (NAG)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Generates values for an M by N matrix A within the bandwidth
     !  defined by KL and KU.
@@ -687,12 +722,15 @@ CONTAINS
     !  TYPE is 'GE', 'SY' or  'TR'.
     !
     !  Auxiliary routine for test program for Level 3 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  SBEG
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  SBEG
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SMAKE3
+    
     !     .. Parameters ..
     REAL ZERO, ONE
     PARAMETER (ZERO=0.0,ONE=1.0)
@@ -709,7 +747,7 @@ CONTAINS
     !     .. Local Scalars ..
     INTEGER i, ibeg, iend, j
     LOGICAL gen, lower, sym, tri, unit, upper
-    !***FIRST EXECUTABLE STATEMENT  SMAKE3
+    !* FIRST EXECUTABLE STATEMENT  SMAKE3
     gen = Type=='GE'
     sym = Type=='SY'
     tri = Type=='TR'
@@ -781,29 +819,35 @@ CONTAINS
     !     End of SMAKE3.
     !
   END SUBROUTINE SMAKE3
-  !DECK SMMCH
+  !** SMMCH
   SUBROUTINE SMMCH(Transa,Transb,M,N,Kk,Alpha,A,Lda,B,Ldb,Beta,C,Ldc,Ct,G,&
       Cc,Ldcc,Eps,Err,Ftl,Nout,Mv,Kprint)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SMMCH
-    !***SUBSIDIARY
-    !***PURPOSE  Check the results of the computational tests.
-    !***LIBRARY   SLATEC (BLAS)
-    !***AUTHOR  Dongarra, J. J., (ANL)
+    !>
+    !***
+    !  Check the results of the computational tests.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Author:**  Dongarra, J. J., (ANL)
     !           Duff, I., (AERE)
     !           Du Croz, J., (NAG)
     !           Hammarling, S., (NAG)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Checks the results of the computational tests.
     !
     !  Auxiliary routine for test program for Level 3 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SMMCH
+    
     !     .. Parameters ..
     REAL ZERO, ONE
     PARAMETER (ZERO=0.0,ONE=1.0)
@@ -820,7 +864,7 @@ CONTAINS
     LOGICAL trana, tranb
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, SQRT
-    !***FIRST EXECUTABLE STATEMENT  SMMCH
+    !* FIRST EXECUTABLE STATEMENT  SMMCH
     trana = Transa=='T' .OR. Transa=='C'
     tranb = Transb=='T' .OR. Transb=='C'
     !
@@ -900,27 +944,33 @@ CONTAINS
     !     End of SMMCH.
     !
   END SUBROUTINE SMMCH
-  !DECK SMVCH
+  !** SMVCH
   SUBROUTINE SMVCH(Trans,M,N,Alpha,A,Nmax,X,Incx,Beta,Y,Incy,Yt,G,Yy,Eps,&
       Err,Ftl,Nout,Mv,Kprint)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SMVCH
-    !***SUBSIDIARY
-    !***PURPOSE  Check the results of the computational tests.
-    !***LIBRARY   SLATEC (BLAS)
-    !***AUTHOR  Du Croz, J. J., (NAG)
+    !>
+    !***
+    !  Check the results of the computational tests.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Author:**  Du Croz, J. J., (NAG)
     !           Hanson, R. J., (SNLA)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Checks the results of the computational tests.
     !
     !  Auxiliary routine for test program for Level 2 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SMVCH
+    
     !     .. Parameters ..
     REAL ZERO, ONE
     PARAMETER (ZERO=0.0,ONE=1.0)
@@ -937,7 +987,7 @@ CONTAINS
     LOGICAL tran
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, SQRT
-    !***FIRST EXECUTABLE STATEMENT  SMVCH
+    !* FIRST EXECUTABLE STATEMENT  SMVCH
     tran = Trans=='T' .OR. Trans=='C'
     IF ( tran ) THEN
       ml = N
@@ -1018,33 +1068,39 @@ CONTAINS
     !     End of SMVCH.
     !
   END SUBROUTINE SMVCH
-  !DECK LSE
+  !** LSE
   LOGICAL FUNCTION LSE(Ri,Rj,Lr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  LSE
-    !***SUBSIDIARY
-    !***PURPOSE  Test if two arrays are identical.
-    !***LIBRARY   SLATEC (BLAS)
-    !***AUTHOR  Du Croz, J. J., (NAG)
+    !>
+    !***
+    !  Test if two arrays are identical.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Author:**  Du Croz, J. J., (NAG)
     !           Hanson, R. J., (SNLA)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Tests if two arrays are identical.
     !
     !  Auxiliary routine for test program for Level 2 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  LSE
+    
     !     .. Scalar Arguments ..
     INTEGER Lr
     !     .. Array Arguments ..
     REAL Ri(*), Rj(*)
     !     .. Local Scalars ..
     INTEGER i
-    !***FIRST EXECUTABLE STATEMENT  LSE
+    !* FIRST EXECUTABLE STATEMENT  LSE
     LSE = .TRUE.
     DO i = 1, Lr
       IF ( Ri(i)/=Rj(i) ) THEN
@@ -1056,28 +1112,34 @@ CONTAINS
     !     End of LSE.
     !
   END FUNCTION LSE
-  !DECK LSERES
+  !** LSERES
   LOGICAL FUNCTION LSERES(Type,Uplo,M,N,Aa,As,Lda)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  LSERES
-    !***SUBSIDIARY
-    !***PURPOSE  Test if selected elements in two arrays are equal.
-    !***LIBRARY   SLATEC (BLAS)
-    !***AUTHOR  Du Croz, J. J., (NAG)
+    !>
+    !***
+    !  Test if selected elements in two arrays are equal.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Author:**  Du Croz, J. J., (NAG)
     !           Hanson, R. J., (SNLA)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Tests if selected elements in two arrays are equal.
     !
     !  TYPE is 'GE', 'SY' or 'SP'.
     !
     !  Auxiliary routine for test program for Level 2 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  LSERES
+    
     !     .. Scalar Arguments ..
     INTEGER Lda, M, N
     CHARACTER :: Uplo
@@ -1087,7 +1149,7 @@ CONTAINS
     !     .. Local Scalars ..
     INTEGER i, ibeg, iend, j
     LOGICAL upper
-    !***FIRST EXECUTABLE STATEMENT  LSERES
+    !* FIRST EXECUTABLE STATEMENT  LSERES
     upper = Uplo=='U'
     IF ( Type=='GE' ) THEN
       DO j = 1, N
@@ -1121,29 +1183,36 @@ CONTAINS
     !
     RETURN
   END FUNCTION LSERES
-  !DECK SCHK12
+  !** SCHK12
   SUBROUTINE SCHK12(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
       Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,&
       Y,Yy,Ys,Yt,G)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SCHK12
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SGEMV and SGBMV.
-    !***LIBRARY   SLATEC (BLAS)
-    !***KEYWORDS  BLAS, QUICK CHECK SERVICE ROUTINE
-    !***AUTHOR  Du Croz, J. (NAG)
+    !>
+    !***
+    !  Quick check for SGEMV and SGBMV.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Keywords:**  BLAS, QUICK CHECK SERVICE ROUTINE
+    !***
+    ! **Author:**  Du Croz, J. (NAG)
     !           Hanson, R. J. (SNLA)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Quick check for SGEMV and SGBMV.
     !
     !  Auxiliary routine for test program for Level 2 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  LSE, LSERES, NUMXER, SGBMV, SGEMV, SMAKE2, SMVCH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  LSE, LSERES, NUMXER, SGBMV, SGEMV, SMAKE2, SMVCH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SCHK12
+    
     !     .. Parameters ..
     REAL ZERO, HALF
     PARAMETER (ZERO=0.0,HALF=0.5)
@@ -1176,7 +1245,7 @@ CONTAINS
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
     DATA ich/'NTC'/
-    !***FIRST EXECUTABLE STATEMENT  SCHK12
+    !* FIRST EXECUTABLE STATEMENT  SCHK12
     full = Sname(3:3)=='E'
     banded = Sname(3:3)=='B'
     !     Define the number of arguments.
@@ -1428,30 +1497,37 @@ CONTAINS
     !     End of SCHK12.
     !
   END SUBROUTINE SCHK12
-  !DECK SCHK13
+  !** SCHK13
   SUBROUTINE SCHK13(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SCHK13
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SGEMM.
-    !***LIBRARY   SLATEC (BLAS)
-    !***KEYWORDS  BLAS, QUICK CHECK SERVICE ROUTINE
-    !***AUTHOR  Dongarra, J. J., (ANL)
+    !>
+    !***
+    !  Quick check for SGEMM.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Keywords:**  BLAS, QUICK CHECK SERVICE ROUTINE
+    !***
+    ! **Author:**  Dongarra, J. J., (ANL)
     !           Duff, I., (AERE)
     !           Du Croz, J., (NAG)
     !           Hammarling, S., (NAG)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Quick check for SGEMM.
     !
     !  Auxiliary routine for test program for Level 3 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  LSE, LSERES, NUMXER, SGEMM, SMAKE3, SMMCH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  LSE, LSERES, NUMXER, SGEMM, SMAKE3, SMMCH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SCHK13
+    
     !     .. Parameters ..
     REAL ZERO
     PARAMETER (ZERO=0.0)
@@ -1484,7 +1560,7 @@ CONTAINS
     INTRINSIC MAX
     !     .. Data statements ..
     DATA ich/'NTC'/
-    !***FIRST EXECUTABLE STATEMENT  SCHK13
+    !* FIRST EXECUTABLE STATEMENT  SCHK13
     nargs = 13
     !
     nc = 0
@@ -1693,30 +1769,37 @@ CONTAINS
     !     End of SCHK13.
     !
   END SUBROUTINE SCHK13
-  !DECK SCHK22
+  !** SCHK22
   SUBROUTINE SCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
       Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,&
       Y,Yy,Ys,Yt,G)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SCHK22
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SSYMV, SSBMV and SSPMV.
-    !***LIBRARY   SLATEC (BLAS)
-    !***KEYWORDS  BLAS, QUICK CHECK SERVICE ROUTINE
-    !***AUTHOR  Du Croz, J. (NAG)
+    !>
+    !***
+    !  Quick check for SSYMV, SSBMV and SSPMV.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Keywords:**  BLAS, QUICK CHECK SERVICE ROUTINE
+    !***
+    ! **Author:**  Du Croz, J. (NAG)
     !           Hanson, R. J. (SNLA)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Quick check for SSYMV, SSBMV and SSPMV.
     !
     !  Auxiliary routine for test program for Level 2 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  LSE, LSERES, NUMXER, SMAKE2, SMVCH, SSBMV, SSPMV,
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  LSE, LSERES, NUMXER, SMAKE2, SMVCH, SSBMV, SSPMV,
     !                    SSYMV
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SCHK22
+    
     !     .. Parameters ..
     REAL ZERO, HALF
     PARAMETER (ZERO=0.0,HALF=0.5)
@@ -1749,7 +1832,7 @@ CONTAINS
     INTRINSIC ABS, MAX
     !     .. Data statements ..
     DATA ich/'UL'/
-    !***FIRST EXECUTABLE STATEMENT  SCHK22
+    !* FIRST EXECUTABLE STATEMENT  SCHK22
     full = Sname(3:3)=='Y'
     banded = Sname(3:3)=='B'
     packed = Sname(3:3)=='P'
@@ -2002,30 +2085,37 @@ CONTAINS
     !     End of SCHK22.
     !
   END SUBROUTINE SCHK22
-  !DECK SCHK23
+  !** SCHK23
   SUBROUTINE SCHK23(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SCHK23
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SSYMM.
-    !***LIBRARY   SLATEC (BLAS)
-    !***KEYWORDS  BLAS, QUICK CHECK SERVICE ROUTINE
-    !***AUTHOR  Dongarra, J. J., (ANL)
+    !>
+    !***
+    !  Quick check for SSYMM.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Keywords:**  BLAS, QUICK CHECK SERVICE ROUTINE
+    !***
+    ! **Author:**  Dongarra, J. J., (ANL)
     !           Duff, I., (AERE)
     !           Du Croz, J., (NAG)
     !           Hammarling, S., (NAG)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Quick check for SSYMM.
     !
     !  Auxiliary routine for test program for Level 3 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  LSE, LSERES, NUMXER, SMAKE3, SMMCH, SSYMM
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  LSE, LSERES, NUMXER, SMAKE3, SMMCH, SSYMM
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SCHK23
+    
     !     .. Parameters ..
     REAL ZERO
     PARAMETER (ZERO=0.0)
@@ -2057,7 +2147,7 @@ CONTAINS
     INTRINSIC MAX
     !     .. Data statements ..
     DATA ichs/'LR'/, ichu/'UL'/
-    !***FIRST EXECUTABLE STATEMENT  SCHK23
+    !* FIRST EXECUTABLE STATEMENT  SCHK23
     nargs = 12
     !
     nc = 0
@@ -2253,30 +2343,37 @@ CONTAINS
     !     End of SCHK23.
     !
   END SUBROUTINE SCHK23
-  !DECK SCHK32
+  !** SCHK32
   SUBROUTINE SCHK32(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Xt,G,Z)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SCHK32
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for STRMV, STBMV, STPMV, STRSV, STBSV and
+    !>
+    !***
+    !  Quick check for STRMV, STBMV, STPMV, STRSV, STBSV and
     !            STPSV.
-    !***LIBRARY   SLATEC (BLAS)
-    !***KEYWORDS  BLAS, QUICK CHECK SERVICE ROUTINE
-    !***AUTHOR  Du Croz, J. (NAG)
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Keywords:**  BLAS, QUICK CHECK SERVICE ROUTINE
+    !***
+    ! **Author:**  Du Croz, J. (NAG)
     !           Hanson, R. J. (SNLA)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Quick check for STRMV, STBMV, STPMV, STRSV, STBSV and STPSV.
     !
     !  Auxiliary routine for test program for Level 2 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  LSE, LSERES, NUMXER, SMAKE2, SMVCH, STBMV, STBSV,
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  LSE, LSERES, NUMXER, SMAKE2, SMVCH, STBMV, STBSV,
     !                    STPMV, STPSV, STRMV, STRSV
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SCHK32
+    
     !     .. Parameters ..
     REAL ZERO, HALF, ONE
     PARAMETER (ZERO=0.0,HALF=0.5,ONE=1.0)
@@ -2308,7 +2405,7 @@ CONTAINS
     INTRINSIC ABS, MAX
     !     .. Data statements ..
     DATA ichu/'UL'/, icht/'NTC'/, ichd/'UN'/
-    !***FIRST EXECUTABLE STATEMENT  SCHK32
+    !* FIRST EXECUTABLE STATEMENT  SCHK32
     full = Sname(3:3)=='R'
     banded = Sname(3:3)=='B'
     packed = Sname(3:3)=='P'
@@ -2560,30 +2657,37 @@ CONTAINS
     !     End of SCHK32.
     !
   END SUBROUTINE SCHK32
-  !DECK SCHK33
+  !** SCHK33
   SUBROUTINE SCHK33(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
       Nmax,A,Aa,As,B,Bb,Bs,Ct,G,C)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SCHK33
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for STRMM and STRSM.
-    !***LIBRARY   SLATEC (BLAS)
-    !***KEYWORDS  BLAS, QUICK CHECK SERVICE ROUTINE
-    !***AUTHOR  Dongarra, J. J., (ANL)
+    !>
+    !***
+    !  Quick check for STRMM and STRSM.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Keywords:**  BLAS, QUICK CHECK SERVICE ROUTINE
+    !***
+    ! **Author:**  Dongarra, J. J., (ANL)
     !           Duff, I., (AERE)
     !           Du Croz, J., (NAG)
     !           Hammarling, S., (NAG)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Quick check for STRMM and STRSM.
     !
     !  Auxiliary routine for test program for Level 3 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  LSE, LSERES, NUMXER, SMAKE3, SMMCH, STRMM, STRSM
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  LSE, LSERES, NUMXER, SMAKE3, SMMCH, STRMM, STRSM
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SCHK33
+    
     !     .. Parameters ..
     REAL ZERO, ONE
     PARAMETER (ZERO=0.0,ONE=1.0)
@@ -2616,7 +2720,7 @@ CONTAINS
     INTRINSIC MAX
     !     .. Data statements ..
     DATA icht/'NTC'/, ichu/'UL'/, ichd/'UN'/, ichs/'LR'/
-    !***FIRST EXECUTABLE STATEMENT  SCHK33
+    !* FIRST EXECUTABLE STATEMENT  SCHK33
     nargs = 11
     !
     nc = 0
@@ -2835,28 +2939,35 @@ CONTAINS
     !     End of SCHK33.
     !
   END SUBROUTINE SCHK33
-  !DECK SCHK42
+  !** SCHK42
   SUBROUTINE SCHK42(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SCHK42
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SGER.
-    !***LIBRARY   SLATEC (BLAS)
-    !***KEYWORDS  BLAS, QUICK CHECK SERVICE ROUTINE
-    !***AUTHOR  Du Croz, J. (NAG)
+    !>
+    !***
+    !  Quick check for SGER.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Keywords:**  BLAS, QUICK CHECK SERVICE ROUTINE
+    !***
+    ! **Author:**  Du Croz, J. (NAG)
     !           Hanson, R. J. (SNLA)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Quick check for SGER.
     !
     !  Auxiliary routine for test program for Level 2 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  LSE, LSERES, NUMXER, SGER, SMAKE2, SMVCH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  LSE, LSERES, NUMXER, SGER, SMAKE2, SMVCH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SCHK42
+    
     !     .. Parameters ..
     REAL ZERO, HALF, ONE
     PARAMETER (ZERO=0.0,HALF=0.5,ONE=1.0)
@@ -2886,7 +2997,7 @@ CONTAINS
     EXTERNAL SGER
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
-    !***FIRST EXECUTABLE STATEMENT SCHK42
+    !* FIRST EXECUTABLE STATEMENT SCHK42
     !     Define the number of arguments.
     nargs = 9
     !
@@ -3076,30 +3187,37 @@ CONTAINS
     !     End of SCHK42.
     !
   END SUBROUTINE SCHK42
-  !DECK SCHK43
+  !** SCHK43
   SUBROUTINE SCHK43(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
       Nbet,Bet,Nmax,A,Aa,As,B,Bb,Bs,C,Cc,Cs,Ct,G)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SCHK43
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SSYRK.
-    !***LIBRARY   SLATEC (BLAS)
-    !***KEYWORDS  BLAS, QUICK CHECK SERVICE ROUTINE
-    !***AUTHOR  Dongarra, J. J., (ANL)
+    !>
+    !***
+    !  Quick check for SSYRK.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Keywords:**  BLAS, QUICK CHECK SERVICE ROUTINE
+    !***
+    ! **Author:**  Dongarra, J. J., (ANL)
     !           Duff, I., (AERE)
     !           Du Croz, J., (NAG)
     !           Hammarling, S., (NAG)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Quick check for SSYRK.
     !
     !  Auxiliary routine for test program for Level 3 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  LSE, LSERES, NUMXER, SMAKE3, SMMCH, SSYRK
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  LSE, LSERES, NUMXER, SMAKE3, SMMCH, SSYRK
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SCHK43
+    
     !     .. Parameters ..
     REAL ZERO, ONE
     PARAMETER (ZERO=0.0,ONE=1.0)
@@ -3133,7 +3251,7 @@ CONTAINS
     INTRINSIC MAX
     !     .. Data statements ..
     DATA icht/'NTC'/, ichu/'UL'/
-    !***FIRST EXECUTABLE STATEMENT  SCHK43
+    !* FIRST EXECUTABLE STATEMENT  SCHK43
     nargs = 10
     !
     nc = 0
@@ -3327,28 +3445,35 @@ CONTAINS
     !     End of SCHK43.
     !
   END SUBROUTINE SCHK43
-  !DECK SCHK52
+  !** SCHK52
   SUBROUTINE SCHK52(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SCHK52
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SSYR and SSPR.
-    !***LIBRARY   SLATEC (BLAS)
-    !***KEYWORDS  BLAS, QUICK CHECK SERVICE ROUTINE
-    !***AUTHOR  Du Croz, J. (NAG)
+    !>
+    !***
+    !  Quick check for SSYR and SSPR.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Keywords:**  BLAS, QUICK CHECK SERVICE ROUTINE
+    !***
+    ! **Author:**  Du Croz, J. (NAG)
     !           Hanson, R. J. (SNLA)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Quick check for SSYR and SSPR.
     !
     !  Auxiliary routine for test program for Level 2 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  LSE, LSERES, NUMXER, SMAKE2, SMVCH, SSPR, SSYR
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  LSE, LSERES, NUMXER, SMAKE2, SMVCH, SSPR, SSYR
+
+    !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SCHK52
+    
     !     .. Parameters ..
     REAL ZERO, HALF, ONE
     PARAMETER (ZERO=0.0,HALF=0.5,ONE=1.0)
@@ -3381,7 +3506,7 @@ CONTAINS
     INTRINSIC ABS, MAX
     !     .. Data statements ..
     DATA ich/'UL'/
-    !***FIRST EXECUTABLE STATEMENT  SCHK52
+    !* FIRST EXECUTABLE STATEMENT  SCHK52
     full = Sname(3:3)=='Y'
     packed = Sname(3:3)=='P'
     !     Define the number of arguments.
@@ -3579,30 +3704,37 @@ CONTAINS
     !     End of SCHK52.
     !
   END SUBROUTINE SCHK52
-  !DECK SCHK53
+  !** SCHK53
   SUBROUTINE SCHK53(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
       Nbet,Bet,Nmax,Ab,Aa,As,Bb,Bs,C,Cc,Cs,Ct,G,W)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SCHK53
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SSYR2K.
-    !***LIBRARY   SLATEC (BLAS)
-    !***KEYWORDS  BLAS, QUICK CHECK SERVICE ROUTINE
-    !***AUTHOR  Dongarra, J. J., (ANL)
+    !>
+    !***
+    !  Quick check for SSYR2K.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Keywords:**  BLAS, QUICK CHECK SERVICE ROUTINE
+    !***
+    ! **Author:**  Dongarra, J. J., (ANL)
     !           Duff, I., (AERE)
     !           Du Croz, J., (NAG)
     !           Hammarling, S., (NAG)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Quick check for SSYR2K.
     !
     !  Auxiliary routine for test program for Level 3 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  LSE, LSERES, NUMXER, SMAKE3, SMMCH, SSYR2K
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  LSE, LSERES, NUMXER, SMAKE3, SMMCH, SSYR2K
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SCHK53
+    
     !     .. Parameters ..
     REAL ZERO
     PARAMETER (ZERO=0.0)
@@ -3636,7 +3768,7 @@ CONTAINS
     INTRINSIC MAX
     !     .. Data statements ..
     DATA icht/'NTC'/, ichu/'UL'/
-    !***FIRST EXECUTABLE STATEMENT  SCHK53
+    !* FIRST EXECUTABLE STATEMENT  SCHK53
     nargs = 12
     !
     nc = 0
@@ -3864,28 +3996,35 @@ CONTAINS
     !     End of SCHK53.
     !
   END SUBROUTINE SCHK53
-  !DECK SCHK62
+  !** SCHK62
   SUBROUTINE SCHK62(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nalf,Alf,&
       Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G,Z)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SCHK62
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SSYR2 and SSPR2.
-    !***LIBRARY   SLATEC (BLAS)
-    !***KEYWORDS  BLAS, QUICK CHECK SERVICE ROUTINE
-    !***AUTHOR  Du Croz, J. (NAG)
+    !>
+    !***
+    !  Quick check for SSYR2 and SSPR2.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Keywords:**  BLAS, QUICK CHECK SERVICE ROUTINE
+    !***
+    ! **Author:**  Du Croz, J. (NAG)
     !           Hanson, R. J. (SNLA)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Quick check for SSYR2 and SSPR2.
     !
     !  Auxiliary routine for test program for Level 2 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  LSE, LSERES, NUMXER, SMAKE2, SMVCH, SSPR2, SSYR2
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  LSE, LSERES, NUMXER, SMAKE2, SMVCH, SSPR2, SSYR2
+
+    !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SCHK62
+    
     !     .. Parameters ..
     REAL ZERO, HALF, ONE
     PARAMETER (ZERO=0.0,HALF=0.5,ONE=1.0)
@@ -3919,7 +4058,7 @@ CONTAINS
     INTRINSIC ABS, MAX
     !     .. Data statements ..
     DATA ich/'UL'/
-    !***FIRST EXECUTABLE STATEMENT  SCHK62
+    !* FIRST EXECUTABLE STATEMENT  SCHK62
     full = Sname(3:3)=='Y'
     packed = Sname(3:3)=='P'
     !     Define the number of arguments.
@@ -4149,29 +4288,35 @@ CONTAINS
     !     End of SCHK62.
     !
   END SUBROUTINE SCHK62
-  !DECK SCHKE2
+  !** SCHKE2
   SUBROUTINE SCHKE2(Isnum,Srnamt,Nout,Kprint,Fatal)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SCHKE2
-    !***SUBSIDIARY
-    !***PURPOSE  Test the error exits from the Level 2 Blas.
-    !***LIBRARY   SLATEC (BLAS)
-    !***AUTHOR  Du Croz, J. J., (NAG)
+    !>
+    !***
+    !  Test the error exits from the Level 2 Blas.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Author:**  Du Croz, J. J., (NAG)
     !           Hanson, R. J., (SNLA)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Tests the error exits from the Level 2 Blas.
     !  ALPHA, BETA, A, X and Y should not need to be defined.
     !
     !  Auxiliary routine for test program for Level 2 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  CHKXER, SGBMV, SGEMV, SGER, SSBMV, SSPMV, SSPR,
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  CHKXER, SGBMV, SGEMV, SGER, SSBMV, SSPMV, SSPR,
     !                    SSPR2, SSYMV, SSYR, SSYR2, STBMV, STBSV, STPMV,
     !                    STPSV, STRMV, STRSV, XERCLR, XERDMP, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-    !***END PROLOGUE  SCHKE2
+    
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     INTEGER Isnum, Kprint, Nout
@@ -4187,7 +4332,7 @@ CONTAINS
     EXTERNAL CHKXER, SGBMV, SGEMV, SGER, SSBMV, SSPMV, SSPR, SSPR2, &
       SSYMV, SSYR, SSYR2, STBMV, STBSV, STPMV, STPSV, STRMV, &
       STRSV
-    !***FIRST EXECUTABLE STATEMENT  SCHKE2
+    !* FIRST EXECUTABLE STATEMENT  SCHKE2
     CALL XGETF(kontrl)
     IF ( Kprint<=2 ) THEN
       CALL XSETF(0)
@@ -4574,31 +4719,37 @@ CONTAINS
     !     End of SCHKE2.
     !
   END SUBROUTINE SCHKE2
-  !DECK SCHKE3
+  !** SCHKE3
   SUBROUTINE SCHKE3(Isnum,Srnamt,Nout,Kprint,Fatal)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SCHKE3
-    !***SUBSIDIARY
-    !***PURPOSE  Test the error exits from the Level 3 Blas.
-    !***LIBRARY   SLATEC (BLAS)
-    !***AUTHOR  Dongarra, J. J., (ANL)
+    !>
+    !***
+    !  Test the error exits from the Level 3 Blas.
+    !***
+    ! **Library:**   SLATEC (BLAS)
+    !***
+    ! **Author:**  Dongarra, J. J., (ANL)
     !           Duff, I., (AERE)
     !           Du Croz, J., (NAG)
     !           Hammarling, S., (NAG)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  Tests the error exits from the Level 3 Blas.
     !  ALPHA, BETA, A, X and Y should not need to be defined.
     !
     !  Auxiliary routine for test program for Level 3 Blas.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  CHKXER, SGEMM, SSYMM, SSYR2K, SSYRK, STRMM, STRSM,
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  CHKXER, SGEMM, SSYMM, SSYR2K, SSYRK, STRMM, STRSM,
     !                    XERCLR, XERDMP, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
     !   930701  Name changed from SCHKE5 to SCHKE3.  (BKS)
-    !***END PROLOGUE  SCHKE3
+    
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     INTEGER Isnum, Kprint, Nout
@@ -4612,7 +4763,7 @@ CONTAINS
     REAL a(1,1), b(1,1), c(1,1)
     !     .. External Subroutines ..
     EXTERNAL CHKXER, SGEMM, SSYMM, SSYR2K, SSYRK, STRMM, STRSM
-    !***FIRST EXECUTABLE STATEMENT  SCHKE3
+    !* FIRST EXECUTABLE STATEMENT  SCHKE3
     CALL XGETF(kontrl)
     IF ( Kprint<=2 ) THEN
       CALL XSETF(0)
@@ -5294,24 +5445,31 @@ CONTAINS
     !
   END SUBROUTINE SCHKE3
 END MODULE TEST18_MOD
-!DECK TEST18
+!** TEST18
 PROGRAM TEST18
   USE TEST18_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST18
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D1B
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***TYPE      SINGLE PRECISION (TEST18-S, TEST19-D, TEST20-C)
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D1B
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Type:**      SINGLE PRECISION (TEST18-S, TEST19-D, TEST20-C)
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -5323,22 +5481,25 @@ PROGRAM TEST18
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        single precision Levels 2 and 3 BLAS routines
   !
-  !***REFERENCES  Kirby W. Fong,  Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong,  Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  I1MACH, SBLAT2, SBLAT3, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  I1MACH, SBLAT2, SBLAT3, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   920601  DATE WRITTEN
-  !***END PROLOGUE  TEST18
+  
   INTEGER ipass, kprint, lin, lun, nfail
   !     .. External Functions ..
   INTEGER I1MACH
   EXTERNAL I1MACH
-  !***FIRST EXECUTABLE STATEMENT  TEST18
+  !* FIRST EXECUTABLE STATEMENT  TEST18
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

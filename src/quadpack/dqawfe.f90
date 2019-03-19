@@ -1,28 +1,35 @@
-!DECK DQAWFE
+!** DQAWFE
 SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
     Abserr,Neval,Ier,Rslst,Erlst,Ierlst,Lst,Alist,Blist,&
     Rlist,Elist,Iord,Nnlog,Chebmo)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQAWFE
-  !***PURPOSE  The routine calculates an approximation result to a
+  !>
+  !***
+  !  The routine calculates an approximation result to a
   !            given Fourier integral
   !            I = Integral of F(X)*W(X) over (A,INFINITY)
   !            where W(X)=COS(OMEGA*X) or W(X)=SIN(OMEGA*X),
   !            hopefully satisfying following claim for accuracy
   !            ABS(I-RESULT).LE.EPSABS.
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A3A1
-  !***TYPE      DOUBLE PRECISION (QAWFE-S, DQAWFE-D)
-  !***KEYWORDS  AUTOMATIC INTEGRATOR, CONVERGENCE ACCELERATION,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A3A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (QAWFE-S, DQAWFE-D)
+  !***
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, CONVERGENCE ACCELERATION,
   !             FOURIER INTEGRALS, INTEGRATION BETWEEN ZEROS, QUADPACK,
   !             QUADRATURE, SPECIAL-PURPOSE INTEGRAL
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Computation of Fourier integrals
   !        Standard fortran subroutine
@@ -197,16 +204,19 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
   !                     space for the Chebyshev moments needed within the
   !                     cycles
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DQAGIE, DQAWOE, DQELG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DQAGIE, DQAWOE, DQELG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891009  Removed unreferenced variable.  (WRB)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DQAWFE
+  
   !
   REAL(8) :: A, abseps, Abserr, Alist, Blist, Chebmo, correc, &
     cycle, c1, c2, dl, drl, D1MACH, Elist, Erlst, &
@@ -251,7 +261,7 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
   !           TEST ON VALIDITY OF PARAMETERS
   !           ------------------------------
   !
-  !***FIRST EXECUTABLE STATEMENT  DQAWFE
+  !* FIRST EXECUTABLE STATEMENT  DQAWFE
   Result = 0.0D+00
   Abserr = 0.0D+00
   Neval = 0

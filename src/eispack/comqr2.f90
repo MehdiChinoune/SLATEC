@@ -1,15 +1,22 @@
-!DECK COMQR2
+!** COMQR2
 SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  COMQR2
-  !***PURPOSE  Compute the eigenvalues and eigenvectors of a complex upper
+  !>
+  !***
+  !  Compute the eigenvalues and eigenvectors of a complex upper
   !            Hessenberg matrix.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C2B
-  !***TYPE      COMPLEX (HQR2-S, COMQR2-C)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C2B
+  !***
+  ! **Type:**      COMPLEX (HQR2-S, COMQR2-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of a unitary analogue of the
   !     ALGOL procedure  COMLR2, NUM. MATH. 16, 181-204(1970) by Peters
@@ -88,19 +95,22 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  CDIV, CSROOT, PYTHAG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDIV, CSROOT, PYTHAG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  COMQR2
+  
   !
   INTEGER i, j, k, l, m, N, en, ii, jj, ll, Nm, nn, Igh, ip1
   INTEGER itn, its, Low, lp1, enm1, iend, Ierr
@@ -109,7 +119,7 @@ SUBROUTINE COMQR2(Nm,N,Low,Igh,Ortr,Orti,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   REAL si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, norm, s1, s2
   REAL PYTHAG
   !
-  !***FIRST EXECUTABLE STATEMENT  COMQR2
+  !* FIRST EXECUTABLE STATEMENT  COMQR2
   Ierr = 0
   !     .......... INITIALIZE EIGENVECTOR MATRIX ..........
   DO i = 1, N

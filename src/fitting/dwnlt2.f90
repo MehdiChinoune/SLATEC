@@ -1,14 +1,18 @@
-!DECK DWNLT2
+!** DWNLT2
 LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scale,Wic)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DWNLT2
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to WNLIT
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (WNLT2-S, DWNLT2-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to WNLIT
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (WNLT2-S, DWNLT2-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Haskell, K. H., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     To test independence of incoming column.
   !
@@ -28,20 +32,23 @@ LOGICAL FUNCTION DWNLT2(Me,Mend,Ir,Factor,Tau,Scale,Wic)
   !                  RN = inverse weighted length of A2
   !     Call the column independent when RN .GT. TAU*SN
   !
-  !***SEE ALSO  DWNLIT
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DWNLIT
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
   !   900604  DP version created from SP version.  (RWC)
-  !***END PROLOGUE  DWNLT2
+  
   REAL(8) :: Factor, Scale(*), Tau, Wic(*)
   INTEGER Ir, Me, Mend
   !
   REAL(8) :: rn, sn, t
   INTEGER j
   !
-  !***FIRST EXECUTABLE STATEMENT  DWNLT2
+  !* FIRST EXECUTABLE STATEMENT  DWNLT2
   sn = 0.E0
   rn = 0.E0
   DO j = 1, Mend

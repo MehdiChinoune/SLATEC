@@ -1,15 +1,22 @@
-!DECK RFFTB1
+!** RFFTB1
 SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RFFTB1
-  !***PURPOSE  Compute the backward fast Fourier transform of a real
+  !>
+  !***
+  !  Compute the backward fast Fourier transform of a real
   !            coefficient array.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A1
-  !***TYPE      SINGLE PRECISION (RFFTB1-S, CFFTB1-C)
-  !***KEYWORDS  FFTPACK, FOURIER TRANSFORM
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A1
+  !***
+  ! **Type:**      SINGLE PRECISION (RFFTB1-S, CFFTB1-C)
+  !***
+  ! **Keywords:**  FFTPACK, FOURIER TRANSFORM
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !   Subroutine RFFTB1 computes the real periodic sequence from its
   !   Fourier coefficients (Fourier synthesis).  The transform is defined
@@ -69,11 +76,14 @@ SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
   !           not be destroyed between calls of subroutine RFFTF1 or
   !           RFFTB1.
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  RADB2, RADB3, RADB4, RADB5, RADBG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  RADB2, RADB3, RADB4, RADB5, RADBG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -82,11 +92,11 @@ SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  RFFTB1
+  
   REAL C, Ch, Wa
   INTEGER i, idl1, ido, Ifac, ip, iw, ix2, ix3, ix4, k1, l1, l2, N, na, nf
   DIMENSION Ch(*), C(*), Wa(*), Ifac(*)
-  !***FIRST EXECUTABLE STATEMENT  RFFTB1
+  !* FIRST EXECUTABLE STATEMENT  RFFTB1
   nf = Ifac(2)
   na = 0
   l1 = 1

@@ -1,15 +1,22 @@
-!DECK CSIFA
+!** CSIFA
 SUBROUTINE CSIFA(A,Lda,N,Kpvt,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CSIFA
-  !***PURPOSE  Factor a complex symmetric matrix by elimination with
+  !>
+  !***
+  !  Factor a complex symmetric matrix by elimination with
   !            symmetric pivoting.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2C1
-  !***TYPE      COMPLEX (SSIFA-S, DSIFA-D, CHIFA-C, CSIFA-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION, SYMMETRIC
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2C1
+  !***
+  ! **Type:**      COMPLEX (SSIFA-S, DSIFA-D, CHIFA-C, CSIFA-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION, SYMMETRIC
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     CSIFA factors a complex symmetric matrix by elimination
   !     with symmetric pivoting.
@@ -51,10 +58,13 @@ SUBROUTINE CSIFA(A,Lda,N,Kpvt,Info)
   !                     but it does indicate that CSISL or CSIDI may
   !                     divide by zero if called.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CSWAP, ICAMAX
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CSWAP, ICAMAX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -65,7 +75,7 @@ SUBROUTINE CSIFA(A,Lda,N,Kpvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CSIFA
+  
   INTEGER Lda, N, Kpvt(*), Info
   COMPLEX A(Lda,*)
   !
@@ -74,7 +84,7 @@ SUBROUTINE CSIFA(A,Lda,N,Kpvt,Info)
   INTEGER imax, imaxp1, j, jj, jmax, k, km1, km2, kstep, ICAMAX
   LOGICAL swap
   REAL, EXTERNAL :: CABS1
-  !***FIRST EXECUTABLE STATEMENT  CSIFA
+  !* FIRST EXECUTABLE STATEMENT  CSIFA
   !
   !     INITIALIZE
   !

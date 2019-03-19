@@ -1,14 +1,18 @@
-!DECK ZUCHK
+!** ZUCHK
 SUBROUTINE ZUCHK(Yr,Yi,Nz,Ascle,Tol)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZUCHK
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SERI, ZUOIK, ZUNK1, ZUNK2, ZUNI1, ZUNI2 and
+  !>
+  !***
+  !  Subsidiary to SERI, ZUOIK, ZUNK1, ZUNK2, ZUNI1, ZUNI2 and
   !            ZKSCL
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CUCHK-A, ZUCHK-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CUCHK-A, ZUCHK-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !      Y ENTERS AS A SCALED QUANTITY WHOSE MAGNITUDE IS GREATER THAN
   !      EXP(-ALIM)=ASCLE=1.0E+3*D1MACH(1)/TOL. THE TEST IS MADE TO SEE
@@ -18,17 +22,20 @@ SUBROUTINE ZUCHK(Yr,Yi,Nz,Ascle,Tol)
   !      OF THE LARGEST COMPONENT; OTHERWISE THE PHASE ANGLE DOES NOT HAVE
   !      ABSOLUTE ACCURACY AND AN UNDERFLOW IS ASSUMED.
   !
-  !***SEE ALSO  SERI, ZKSCL, ZUNI1, ZUNI2, ZUNK1, ZUNK2, ZUOIK
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SERI, ZKSCL, ZUNI1, ZUNI2, ZUNK1, ZUNK2, ZUOIK
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   ??????  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ZUCHK
+  
   !
   !     COMPLEX Y
   REAL(8) :: Ascle, ss, st, Tol, wr, wi, Yr, Yi
   INTEGER Nz
-  !***FIRST EXECUTABLE STATEMENT  ZUCHK
+  !* FIRST EXECUTABLE STATEMENT  ZUCHK
   Nz = 0
   wr = ABS(Yr)
   wi = ABS(Yi)

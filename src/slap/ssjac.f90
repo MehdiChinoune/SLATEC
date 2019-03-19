@@ -1,24 +1,31 @@
-!DECK SSJAC
+!** SSJAC
 SUBROUTINE SSJAC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSJAC
-  !***PURPOSE  Jacobi's Method Iterative Sparse Ax = b Solver.
+  !>
+  !***
+  !  Jacobi's Method Iterative Sparse Ax = b Solver.
   !            Routine to solve a general linear system  Ax = b  using
   !            Jacobi iteration.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (SSJAC-S, DSJAC-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SSJAC-S, DSJAC-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, LINEAR SYSTEM, SLAP, SPARSE
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER  N, NELT, IA(NELT), JA(NELT), ISYM, ITOL, ITMAX
   !     INTEGER  ITER, IERR, IUNIT, LENW, IWORK(LENIW), LENIW
   !     REAL     B(N), X(N), A(NELT), TOL, ERR, RWORK(LENW)
@@ -26,7 +33,7 @@ SUBROUTINE SSJAC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     CALL SSJAC(N, B, X, NELT, IA, JA, A, ISYM, ITOL, TOL,
   !    $     ITMAX, ITER, ERR, IERR, IUNIT, RWORK, LENW, IWORK, LENIW )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the Matrix.
   ! B      :IN       Real B(N).
@@ -112,7 +119,7 @@ SUBROUTINE SSJAC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   ! LENIW  :IN       Integer.
   !         Length of the integer workspace, IWORK.  LENIW >= 10.
   !
-  ! *Description:
+  !- Description:
   !       Jacobi's method solves the linear system Ax=b with the
   !       basic iterative method (where A = L + D + U):
   !
@@ -186,21 +193,25 @@ SUBROUTINE SSJAC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Side Effects:
+  !- Side Effects:
   !       The SLAP Triad format (IA, JA, A) is modified internally to be
   !       the SLAP Column format.  See above.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  SSGS, SIR
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  SCHKW, SIR, SS2Y, SSDI, SSDS, SSMV
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SSGS, SIR
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  SCHKW, SIR, SS2Y, SSDI, SSDS, SSMV
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -212,7 +223,7 @@ SUBROUTINE SSJAC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   910506  Corrected error in C***ROUTINES CALLED list.  (FNF)
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
-  !***END PROLOGUE  SSJAC
+  
   !     .. Parameters ..
   INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
@@ -227,7 +238,7 @@ SUBROUTINE SSJAC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER locd, locdz, lociw, locr, locw, locz
   !     .. External Subroutines ..
   EXTERNAL SCHKW, SIR, SS2Y, SSDI, SSDS, SSMV
-  !***FIRST EXECUTABLE STATEMENT  SSJAC
+  !* FIRST EXECUTABLE STATEMENT  SSJAC
   !
   Ierr = 0
   IF ( N<1.OR.Nelt<1 ) THEN

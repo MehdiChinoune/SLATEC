@@ -1,15 +1,19 @@
-!DECK BVDER
+!** BVDER
 SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BVDER
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (BVDER-S, DBVDER-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (BVDER-S, DBVDER-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     NFC = Number of base solution vectors
   !
   !     NCOMP = Number of components per solution vector
@@ -40,12 +44,16 @@ SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
   !             the first dependent variable for the initial value
   !             problem is in position  Y(NOFST + 1).
   !             See example in SAND77-1328.
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  BVSUP
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    ML8SZ, MLIVP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    ML8SZ, MLIVP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890921  Realigned order of variables in certain COMMON blocks.
   !           (WRB)
@@ -54,24 +62,24 @@ SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
   !   910701  Corrected ROUTINES CALLED section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920618  Minor restructuring of code.  (RWC, WRB)
-  !***END PROLOGUE  BVDER
+  
   REAL C, G, X, XSAv, Y, Yp
   INTEGER IGOfx, INHomo, Ipar, IVP, j, k, l, na, NCOmp, NFC, NOFst
   DIMENSION Y(*), Yp(*), G(*)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   COMMON /ML8SZ / C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     The COMMON block below is used to communicate with the user
   !     supplied subroutine FMAT.  The user should not alter this
   !     COMMON block.
   !
   COMMON /MLIVP / NOFst
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***FIRST EXECUTABLE STATEMENT  BVDER
+  !* FIRST EXECUTABLE STATEMENT  BVDER
   IF ( IVP>0 ) CALL UIVP(X,Y(IVP+1),Yp(IVP+1))
   NOFst = IVP
   na = 1

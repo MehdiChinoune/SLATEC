@@ -1,16 +1,23 @@
-!DECK DSIDI
+!** DSIDI
 SUBROUTINE DSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSIDI
-  !***PURPOSE  Compute the determinant, inertia and inverse of a real
+  !>
+  !***
+  !  Compute the determinant, inertia and inverse of a real
   !            symmetric matrix using the factors from DSIFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1A, D3B1A
-  !***TYPE      DOUBLE PRECISION (SSIDI-S, DSIDI-D, CHIDI-C, CSIDI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1A, D3B1A
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSIDI-S, DSIDI-D, CHIDI-C, CSIDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             SYMMETRIC
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     DSIDI computes the determinant, inertia and inverse
   !     of a double precision symmetric matrix using the factors from
@@ -67,10 +74,13 @@ SUBROUTINE DSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   !        and  DSICO  has set RCOND .EQ. 0.0
   !        or  DSIFA  has set  INFO .NE. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DCOPY, DDOT, DSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DCOPY, DDOT, DSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -80,7 +90,7 @@ SUBROUTINE DSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DSIDI
+  
   INTEGER Lda, N, Job
   REAL(8) :: A(Lda,*), Work(*)
   REAL(8) :: Det(2)
@@ -90,7 +100,7 @@ SUBROUTINE DSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   REAL(8) :: ten, d, t, ak, akp1
   INTEGER j, jb, k, km1, ks, kstep
   LOGICAL noinv, nodet, noert
-  !***FIRST EXECUTABLE STATEMENT  DSIDI
+  !* FIRST EXECUTABLE STATEMENT  DSIDI
   noinv = MOD(Job,10)==0
   nodet = MOD(Job,100)/10==0
   noert = MOD(Job,1000)/100==0

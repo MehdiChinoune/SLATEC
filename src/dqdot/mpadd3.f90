@@ -1,13 +1,17 @@
-!DECK MPADD3
+!** MPADD3
 SUBROUTINE MPADD3(X,Y,S,Med,Re)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  MPADD3
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (MPADD3-A)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DQDOTA and DQDOTI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (MPADD3-A)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   Called by MPADD2; does inner loops of addition
   !
@@ -15,10 +19,14 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
   !   INTEGER arrays of size 30.  See the comments in the routine MPBLAS
   !   for the reason for this choice.
   !
-  !***SEE ALSO  DQDOTA, DQDOTI, MPBLAS
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    MPCOM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DQDOTA, DQDOTI, MPBLAS
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    MPCOM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   ??????  Modified for use with BLAS.  Blank COMMON changed to named
   !           COMMON.  R given dimension 12.
@@ -26,11 +34,11 @@ SUBROUTINE MPADD3(X,Y,S,Med,Re)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  !***END PROLOGUE  MPADD3
+  
   INTEGER i, i2, i2p, j, LUN, M, Med, MXR
   COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
   INTEGER B, T, R, X(*), Y(*), S, Re, c, ted
-  !***FIRST EXECUTABLE STATEMENT  MPADD3
+  !* FIRST EXECUTABLE STATEMENT  MPADD3
   ted = T + Med
   i2 = T + 4
   i = i2

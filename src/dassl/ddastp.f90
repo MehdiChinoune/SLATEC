@@ -1,15 +1,19 @@
-!DECK DDASTP
+!** DDASTP
 SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
     Delta,E,Wm,Iwm,Alpha,Beta,Gamma,Psi,Sigma,Cj,Cjold,Hold,&
     S,Hmin,Uround,Iphase,Jcalc,K,Kold,Ns,Nonneg,Ntemp)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DDASTP
-  !***SUBSIDIARY
-  !***PURPOSE  Perform one step of the DDASSL integration.
-  !***LIBRARY   SLATEC (DASSL)
-  !***TYPE      DOUBLE PRECISION (SDASTP-S, DDASTP-D)
-  !***AUTHOR  Petzold, Linda R., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Perform one step of the DDASSL integration.
+  !***
+  ! **Library:**   SLATEC (DASSL)
+  !***
+  ! **Type:**      DOUBLE PRECISION (SDASTP-S, DDASTP-D)
+  !***
+  ! **Author:**  Petzold, Linda R., (LLNL)
+  !***
+  ! **Description:**
   !-----------------------------------------------------------------------
   !     DDASTP SOLVES A SYSTEM OF DIFFERENTIAL/
   !     ALGEBRAIC EQUATIONS OF THE FORM
@@ -83,14 +87,16 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   !     CONTINUE FROM STEP TO STEP.
   !
   !-----------------------------------------------------------------------
-  !***ROUTINES CALLED  DDAJAC, DDANRM, DDASLV, DDATRP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DDAJAC, DDANRM, DDASLV, DDATRP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830315  DATE WRITTEN
   !   901009  Finished conversion to SLATEC 4.0 format (F.N.Fritsch)
   !   901019  Merged changes made by C. Ulrich with SLATEC 4.0 format.
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
-  !***END PROLOGUE  DDASTP
+  
   !
   INTEGER Neq, Jstart, Idid, Ipar(*), Iwm(*), Iphase, Jcalc, K, &
     Kold, Ns, Nonneg, Ntemp
@@ -133,7 +139,7 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   !-----------------------------------------------------------------------
   !
   !     INITIALIZATIONS FOR ALL CALLS
-  !***FIRST EXECUTABLE STATEMENT  DDASTP
+  !* FIRST EXECUTABLE STATEMENT  DDASTP
   Idid = 1
   xold = X
   ncf = 0

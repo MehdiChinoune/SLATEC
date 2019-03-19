@@ -1,13 +1,17 @@
-!DECK SREADP
+!** SREADP
 SUBROUTINE SREADP(Ipage,List,Rlist,Lpage,Irec)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SREADP
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SREADP-S, DREADP-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SREADP-S, DREADP-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     READ RECORD NUMBER IRECN, OF LENGTH LPG, FROM UNIT
   !     NUMBER IPAGEF INTO THE STORAGE ARRAY, LIST(*).
@@ -17,20 +21,23 @@ SUBROUTINE SREADP(Ipage,List,Rlist,Lpage,Irec)
   !     TO CONVERT THIS PROGRAM UNIT TO DOUBLE PRECISION CHANGE
   !     /REAL (12 BLANKS)/ TO /DOUBLE PRECISION/.
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890605  Corrected references to XERRWV.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  !***END PROLOGUE  SREADP
+  
   INTEGER i, Ipage, ipagef, Irec, irecn, Lpage, lpg
   INTEGER List(*)
   REAL Rlist(*)
   CHARACTER(8) :: xern1, xern2
-  !***FIRST EXECUTABLE STATEMENT  SREADP
+  !* FIRST EXECUTABLE STATEMENT  SREADP
   ipagef = Ipage
   lpg = Lpage
   irecn = Irec

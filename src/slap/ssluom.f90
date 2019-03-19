@@ -1,25 +1,32 @@
-!DECK SSLUOM
+!** SSLUOM
 SUBROUTINE SSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSLUOM
-  !***PURPOSE  Incomplete LU Orthomin Sparse Iterative Ax=b Solver.
+  !>
+  !***
+  !  Incomplete LU Orthomin Sparse Iterative Ax=b Solver.
   !            Routine to solve a general linear system  Ax = b  using
   !            the Orthomin method with Incomplete LU decomposition.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (SSLUOM-S, DSLUOM-D)
-  !***KEYWORDS  ITERATIVE INCOMPLETE LU PRECONDITION,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SSLUOM-S, DSLUOM-D)
+  !***
+  ! **Keywords:**  ITERATIVE INCOMPLETE LU PRECONDITION,
   !             NON-SYMMETRIC LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM, NSAVE, ITOL, ITMAX
   !     INTEGER ITER, IERR, IUNIT, LENW, IWORK(NL+NU+4*N+2), LENIW
   !     REAL B(N), X(N), A(NELT), TOL, ERR
@@ -28,7 +35,7 @@ SUBROUTINE SSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !     CALL SSLUOM(N, B, X, NELT, IA, JA, A, ISYM, NSAVE, ITOL, TOL,
   !    $     ITMAX, ITER, ERR, IERR, IUNIT, RWORK, LENW, IWORK, LENIW )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the matrix.
   ! B      :IN       Real B(N).
@@ -128,7 +135,7 @@ SUBROUTINE SSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !         Length of the integer workspace, IWORK.
   !         LENIW >= NL+NU+4*N+12.
   !
-  ! *Description:
+  !- Description:
   !       This routine is  simply a driver  for  the SOMN routine.  It
   !       calls the SSILUS routine  to set  up the preconditioning and
   !       then  calls   SOMN  with the appropriate  MATVEC  and MSOLVE
@@ -198,21 +205,25 @@ SUBROUTINE SSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Side Effects:
+  !- Side Effects:
   !       The SLAP Triad format (IA, JA,  A) is modified internally to
   !       be the SLAP Column format.  See above.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  SOMN, SSDOMN
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  SCHKW, SOMN, SS2Y, SSILUS, SSLUI, SSMV
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SOMN, SSDOMN
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  SCHKW, SOMN, SS2Y, SSILUS, SSLUI, SSMV
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -225,7 +236,7 @@ SUBROUTINE SSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !   920511  Added complete declaration section.  (WRB)
   !   921019  Corrected NEL to NL.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  !***END PROLOGUE  SSLUOM
+  
   !     .. Parameters ..
   INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
@@ -242,7 +253,7 @@ SUBROUTINE SSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     locnr, locp, locr, locu, locw, locz, nl, nu
   !     .. External Subroutines ..
   EXTERNAL SCHKW, SOMN, SS2Y, SSILUS, SSLUI, SSMV
-  !***FIRST EXECUTABLE STATEMENT  SSLUOM
+  !* FIRST EXECUTABLE STATEMENT  SSLUOM
   !
   Ierr = 0
   IF ( N<1.OR.Nelt<1 ) THEN

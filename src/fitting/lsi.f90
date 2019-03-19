@@ -1,13 +1,17 @@
-!DECK LSI
+!** LSI
 SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  LSI
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to LSEI
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (LSI-S, DLSI-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to LSEI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (LSI-S, DLSI-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
+  !***
+  ! **Description:**
   !
   !     This is a companion subprogram to LSEI.  The documentation for
   !     LSEI has complete usage instructions.
@@ -46,16 +50,18 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !      IP(MG+2*N+1)
   !              Integer working storage
   !
-  !***ROUTINES CALLED  H12, HFTI, LPDP, R1MACH, SASUM, SAXPY, SCOPY, SDOT,
+  !***
+  ! **Routines called:**  H12, HFTI, LPDP, R1MACH, SASUM, SAXPY, SCOPY, SDOT,
   !                    SSCAL, SSWAP
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890618  Completely restructured and extensively revised (WRB & RWC)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   920422  Changed CALL to HFTI to include variable MA.  (WRB)
-  !***END PROLOGUE  LSI
+  
   INTEGER Ip(*), Ma, Mdw, Mg, Mode, N
   REAL Prgopt(*), Rnorm, W(Mdw,*), Ws(*), X(*)
   !
@@ -71,7 +77,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   SAVE srelpr, first
   DATA first/.TRUE./
   !
-  !***FIRST EXECUTABLE STATEMENT  LSI
+  !* FIRST EXECUTABLE STATEMENT  LSI
   !
   !     Set the nominal tolerance used in the code.
   !

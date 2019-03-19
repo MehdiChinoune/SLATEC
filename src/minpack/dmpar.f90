@@ -1,13 +1,17 @@
-!DECK DMPAR
+!** DMPAR
 SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DMPAR
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DNLS1 and DNLS1E
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (LMPAR-S, DMPAR-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DNLS1 and DNLS1E
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (LMPAR-S, DMPAR-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   **** Double Precision version of LMPAR ****
   !
@@ -91,9 +95,12 @@ SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !
   !       WA1 and WA2 are work arrays of length N.
   !
-  !***SEE ALSO  DNLS1, DNLS1E
-  !***ROUTINES CALLED  D1MACH, DENORM, DQRSLV
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DNLS1, DNLS1E
+  !***
+  ! **Routines called:**  D1MACH, DENORM, DQRSLV
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -101,7 +108,7 @@ SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DMPAR
+  
   INTEGER N, Ldr
   INTEGER Ipvt(*)
   REAL(8) :: Delta, Par
@@ -113,7 +120,7 @@ SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   REAL(8) :: D1MACH, DENORM
   SAVE p1, p001, zero
   DATA p1, p001, zero/1.0D-1, 1.0D-3, 0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  DMPAR
+  !* FIRST EXECUTABLE STATEMENT  DMPAR
   dwarf = D1MACH(1)
   !
   !     COMPUTE AND STORE IN X THE GAUSS-NEWTON DIRECTION. IF THE

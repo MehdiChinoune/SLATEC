@@ -1,15 +1,22 @@
-!DECK GAMIC
+!** GAMIC
 REAL FUNCTION GAMIC(A,X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  GAMIC
-  !***PURPOSE  Calculate the complementary incomplete Gamma function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7E
-  !***TYPE      SINGLE PRECISION (GAMIC-S, DGAMIC-D)
-  !***KEYWORDS  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB,
+  !>
+  !***
+  !  Calculate the complementary incomplete Gamma function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7E
+  !***
+  ! **Type:**      SINGLE PRECISION (GAMIC-S, DGAMIC-D)
+  !***
+  ! **Keywords:**  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   !   Evaluate the complementary incomplete gamma function
   !
@@ -28,22 +35,25 @@ REAL FUNCTION GAMIC(A,X)
   !   of accuracy, which is reported if the result is less than half
   !   machine precision.
   !
-  !***REFERENCES  W. Gautschi, A computational procedure for incomplete
+  !***
+  ! **References:**  W. Gautschi, A computational procedure for incomplete
   !                 gamma functions, ACM Transactions on Mathematical
   !                 Software 5, 4 (December 1979), pp. 466-481.
   !               W. Gautschi, Incomplete gamma functions, Algorithm 542,
   !                 ACM Transactions on Mathematical Software 5, 4
   !                 (December 1979), pp. 482-489.
-  !***ROUTINES CALLED  ALGAMS, ALNGAM, R1MACH, R9GMIC, R9GMIT, R9LGIC,
+  !***
+  ! **Routines called:**  ALGAMS, ALNGAM, R1MACH, R9GMIC, R9GMIT, R9LGIC,
   !                    R9LGIT, XERCLR, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  !***END PROLOGUE  GAMIC
+  
   REAL A, aeps, algap1, alneps, ALNGAM, alngs, alx, bot, e, eps, &
     fm, gstar, h, R1MACH, R9GMIC, R9GMIT, R9LGIC, R9LGIT, sga, sgng
   REAL sgngam, sgngs, sqeps, t, X
@@ -51,7 +61,7 @@ REAL FUNCTION GAMIC(A,X)
   LOGICAL first
   SAVE eps, sqeps, alneps, bot, first
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  GAMIC
+  !* FIRST EXECUTABLE STATEMENT  GAMIC
   IF ( first ) THEN
     eps = 0.5*R1MACH(3)
     sqeps = SQRT(R1MACH(4))

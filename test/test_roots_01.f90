@@ -2,27 +2,34 @@ MODULE TEST34_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK CPRPQX
+  !** CPRPQX
   SUBROUTINE CPRPQX(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CPRPQX
-    !***PURPOSE  Quick check for CPZERO and RPZERO.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Kahaner, D. K., (NBS)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CPZERO and RPZERO.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Kahaner, D. K., (NBS)
+    !***
+    ! **Description:**
     !
     !     THIS QUICK CHECK ROUTINE IS WRITTEN FOR CPZERO AND RPZERO.
     !     THE ZEROS OF POLYNOMIAL WITH COEFFICIENTS A(.) ARE STORED
     !     IN ZK(.).  RELERR IS THE RELATIVE ACCURACY REQUIRED FOR
     !     THEM TO PASS.
     !
-    !***ROUTINES CALLED  CPZERO, R1MACH, RPZERO
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CPZERO, R1MACH, RPZERO
+
+    !* REVISION HISTORY  (YYMMDD)
     !   810223  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  CPRPQX
+    
     REAL R1MACH
     INTEGER Kprint, Ipass, Lun
     INTEGER ideg, idegp1, info, i, j, id
@@ -32,7 +39,7 @@ CONTAINS
     DATA a/1., -3.7, 7.4, -10.8, 10.8, -6.8/
     DATA zk/(1.7,0.), (1.,1.), (1.,-1.), (0.,1.4142135623730950488), &
       (0.,-1.4142135623730950488)/
-    !***FIRST EXECUTABLE STATEMENT  CPRPQX
+    !* FIRST EXECUTABLE STATEMENT  CPRPQX
     Ipass = 1
     idegp1 = ideg + 1
     relerr = SQRT(R1MACH(4))
@@ -86,16 +93,22 @@ CONTAINS
     99006 FORMAT (' CPRPQX FAILS SOME TESTS.')
     RETURN
   END SUBROUTINE CPRPQX
-  !DECK FZTEST
+  !** FZTEST
   SUBROUTINE FZTEST(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  FZTEST
-    !***PURPOSE  Quick check for FZERO.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (FZTEST-S, DFZTST-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  FZERO, R1MACH, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for FZERO.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (FZTEST-S, DFZTST-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  FZERO, R1MACH, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
@@ -103,7 +116,7 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920212  Code completely restructured to test IFLAG for all values
     !           of KPRINT.  (WRB)
-    !***END PROLOGUE  FZTEST
+    
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -117,7 +130,7 @@ CONTAINS
     EXTERNAL FZERO, XERCLR, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, MAX, SIN, SQRT, TAN
-    !***FIRST EXECUTABLE STATEMENT  FZTEST
+    !* FIRST EXECUTABLE STATEMENT  FZTEST
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/' FZERO QUICK CHECK')
     Ipass = 1
@@ -203,18 +216,24 @@ CONTAINS
       F20.14/' IFLAG =',I2)
     99008 FORMAT (/' IFLAG test FAILED.  IFLAG =',I2,', but should ','have been',I2)
   END SUBROUTINE FZTEST
-  !DECK DFZTST
+  !** DFZTST
   SUBROUTINE DFZTST(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DFZTST
-    !***PURPOSE  Quick check for DFZERO.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (FZTEST-S, DFZTST-D)
-    !***AUTHOR  Boland, W. Robert, (LANL)
-    !***ROUTINES CALLED  D1MACH, DFZERO, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for DFZERO.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (FZTEST-S, DFZTST-D)
+    !***
+    ! **Author:**  Boland, W. Robert, (LANL)
+    !***
+    ! **Routines called:**  D1MACH, DFZERO, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   920212  DATE WRITTEN
-    !***END PROLOGUE  DFZTST
+    
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -228,7 +247,7 @@ CONTAINS
     EXTERNAL DFZERO, XERCLR, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, DSIN, DTAN, MAX, SQRT
-    !***FIRST EXECUTABLE STATEMENT  DFZTST
+    !* FIRST EXECUTABLE STATEMENT  DFZTST
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1'/' DFZERO QUICK CHECK')
     Ipass = 1
@@ -314,23 +333,29 @@ CONTAINS
       F20.14/' IFLAG =',I2)
     99008 FORMAT (/' IFLAG test FAILED.  IFLAG =',I2,', but should ','have been',I2)
   END SUBROUTINE DFZTST
-  !DECK RQRTST
+  !** RQRTST
   SUBROUTINE RQRTST(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  RQRTST
-    !***PURPOSE  Quick check for RPQR79.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (RQRTST-S, CQRTST-C)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  NUMXER, PASS, R1MACH, RPQR79, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for RPQR79.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (RQRTST-S, CQRTST-C)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  NUMXER, PASS, R1MACH, RPQR79, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs
     !           and changed TOL from sqrt R1MACH(3) to sqrt R1MACH(4) for
     !           the IBM 370 mainframes.  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
-    !***END PROLOGUE  RQRTST
+    
     REAL beta, R1MACH, tol, work
     INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr, NUMXER
     INTEGER itmp(7)
@@ -343,7 +368,7 @@ CONTAINS
       (1.4142135623731,-1.4142135623731), (0.0,2.0), (0.0,-2.0), &
       (-2.0,0.0), (-1.4142135623731,1.4142135623731), &
       (-1.4142135623731,-1.4142135623731)/
-    !***FIRST EXECUTABLE STATEMENT  RQRTST
+    !* FIRST EXECUTABLE STATEMENT  RQRTST
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1',/,' RPQR79 QUICK CHECK')
@@ -443,21 +468,27 @@ CONTAINS
     99010 FORMAT (/' **************RPQR79 FAILED SOME TESTS*************')
     RETURN
   END SUBROUTINE RQRTST
-  !DECK CQRTST
+  !** CQRTST
   SUBROUTINE CQRTST(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CQRTST
-    !***PURPOSE  Quick check for CPQR79.
-    !***LIBRARY   SLATEC
-    !***TYPE      COMPLEX (RQRTST-S, CQRTST-C)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  CPQR79, NUMXER, PASS, R1MACH, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for CPQR79.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      COMPLEX (RQRTST-S, CQRTST-C)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  CPQR79, NUMXER, PASS, R1MACH, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
-    !***END PROLOGUE  CQRTST
+    
     INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr, NUMXER
     REAL R1MACH, tol
     INTEGER itest(2), itmp(7)
@@ -472,7 +503,7 @@ CONTAINS
     DATA chk1/(4.0,2.0), (3.0,0.0), (-2.0,0.0), (2.0,0.0), (0.0,-1.0), &
       (-1.0,0.0), (0.0,1.0), (1.0,0.0)/
     DATA chk2/(-2.0,-1.0)/
-    !***FIRST EXECUTABLE STATEMENT  CQRTST
+    !* FIRST EXECUTABLE STATEMENT  CQRTST
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1',/,' CPQR79 QUICK CHECK')
@@ -591,24 +622,31 @@ CONTAINS
     99011 FORMAT (I6,3X,1P,2E22.14)
   END SUBROUTINE CQRTST
 END MODULE TEST34_MOD
-!DECK TEST34
+!** TEST34
 PROGRAM TEST34
   USE TEST34_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST34
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  F1A
-  !***TYPE      ALL (TEST34-A)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  F1A
+  !***
+  ! **Type:**      ALL (TEST34-A)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -620,26 +658,29 @@ PROGRAM TEST34
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        RPZERO   CPZERO
   !        FZERO    DFZERO
   !        RPQR79   CPQR79
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  CPRPQX, CQRTST, DFZTST, FZTEST, I1MACH, RQRTST,
+  !***
+  ! **Routines called:**  CPRPQX, CQRTST, DFZTST, FZTEST, I1MACH, RQRTST,
   !                    XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST34
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST34
+  !* FIRST EXECUTABLE STATEMENT  TEST34
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

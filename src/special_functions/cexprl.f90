@@ -1,14 +1,21 @@
-!DECK CEXPRL
+!** CEXPRL
 COMPLEX FUNCTION CEXPRL(Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CEXPRL
-  !***PURPOSE  Calculate the relative error exponential (EXP(X)-1)/X.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4B
-  !***TYPE      COMPLEX (EXPREL-S, DEXPRL-D, CEXPRL-C)
-  !***KEYWORDS  ELEMENTARY FUNCTIONS, EXPONENTIAL, FIRST ORDER, FNLIB
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Calculate the relative error exponential (EXP(X)-1)/X.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4B
+  !***
+  ! **Type:**      COMPLEX (EXPREL-S, DEXPRL-D, CEXPRL-C)
+  !***
+  ! **Keywords:**  ELEMENTARY FUNCTIONS, EXPONENTIAL, FIRST ORDER, FNLIB
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate  (EXP(Z)-1)/Z .  For small ABS(Z), we use the Taylor
   ! series.  We could instead use the expression
@@ -16,21 +23,24 @@ COMPLEX FUNCTION CEXPRL(Z)
   !                  = (X*EXPREL(X) * (1 - 2*SIN(Y/2)**2) - 2*SIN(Y/2)**2
   !                                    + I*SIN(Y)*(1+X*EXPREL(X))) / Z
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CEXPRL
+  
   REAL alneps, r, R1MACH, rbnd, xln, xn
   INTEGER i, nterms
   COMPLEX Z
   LOGICAL first
   SAVE nterms, rbnd, first
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  CEXPRL
+  !* FIRST EXECUTABLE STATEMENT  CEXPRL
   IF ( first ) THEN
     alneps = LOG(R1MACH(3))
     xn = 3.72 - 0.3*alneps

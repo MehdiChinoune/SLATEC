@@ -1,17 +1,24 @@
-!DECK SGER
+!** SGER
 SUBROUTINE SGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SGER
-  !***PURPOSE  Perform rank 1 update of a real general matrix.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B4
-  !***TYPE      SINGLE PRECISION (SGER-S)
-  !***KEYWORDS  LEVEL 2 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J. J., (ANL)
+  !>
+  !***
+  !  Perform rank 1 update of a real general matrix.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SGER-S)
+  !***
+  ! **Keywords:**  LEVEL 2 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J. J., (ANL)
   !           Du Croz, J., (NAG)
   !           Hammarling, S., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  SGER   performs the rank 1 operation
   !
@@ -70,16 +77,19 @@ SUBROUTINE SGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !           max( 1, m ).
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J. J., Du Croz, J., Hammarling, S., and
+  !***
+  ! **References:**  Dongarra, J. J., Du Croz, J., Hammarling, S., and
   !                 Hanson, R. J.  An extended set of Fortran basic linear
   !                 algebra subprograms.  ACM TOMS, Vol. 14, No. 1,
   !                 pp. 1-17, March 1988.
-  !***ROUTINES CALLED  XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  SGER
+  
   !     .. Scalar Arguments ..
   REAL Alpha
   INTEGER Incx, Incy, Lda, M, N
@@ -95,7 +105,7 @@ SUBROUTINE SGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
-  !***FIRST EXECUTABLE STATEMENT  SGER
+  !* FIRST EXECUTABLE STATEMENT  SGER
   !
   !     Test the input parameters.
   !

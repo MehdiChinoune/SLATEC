@@ -1,13 +1,17 @@
-!DECK DQFORM
+!** DQFORM
 SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQFORM
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DNSQ and DNSQE
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (QFORM-S, DQFORM-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DNSQ and DNSQE
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (QFORM-S, DQFORM-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This subroutine proceeds from the computed QR factorization of
   !     an M by N matrix A to accumulate the M by M orthogonal matrix
@@ -34,9 +38,12 @@ SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
   !
   !       WA is a work array of length M.
   !
-  !***SEE ALSO  DNSQ, DNSQE
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DNSQ, DNSQE
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -44,7 +51,7 @@ SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DQFORM
+  
   INTEGER i, j, jm1, k, l, Ldq, M, minmn, N, np1
   REAL(8) :: one, Q(Ldq,*), sum, temp, Wa(*), zero
   SAVE one, zero
@@ -52,7 +59,7 @@ SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
   !
   !     ZERO OUT UPPER TRIANGLE OF Q IN THE FIRST MIN(M,N) COLUMNS.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQFORM
+  !* FIRST EXECUTABLE STATEMENT  DQFORM
   minmn = MIN(M,N)
   IF ( minmn>=2 ) THEN
     DO j = 2, minmn

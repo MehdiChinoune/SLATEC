@@ -1,30 +1,37 @@
-!DECK TRIX
+!** TRIX
 SUBROUTINE TRIX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TRIX
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to GENBUN
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (TRIX-S, CMPTRX-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to GENBUN
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (TRIX-S, CMPTRX-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Subroutine to solve a system of linear equations where the
   !     coefficient matrix is a rational function in the matrix given by
   !     TRIDIAGONAL  ( . . ., A(I), B(I), C(I), . . . ).
   !
-  !***SEE ALSO  GENBUN
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  GENBUN
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  TRIX
+  
   REAL A, B, C, D, Tcos, W, x, xx, Y, z
   INTEGER i, Idegbr, Idegcr, ip, k, l, lint, M, mm1
   DIMENSION A(*), B(*), C(*), Y(*), Tcos(*), D(*), W(*)
   INTEGER kb, kc
-  !***FIRST EXECUTABLE STATEMENT  TRIX
+  !* FIRST EXECUTABLE STATEMENT  TRIX
   mm1 = M - 1
   kb = Idegbr + 1
   kc = Idegcr + 1

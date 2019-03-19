@@ -1,25 +1,32 @@
-!DECK QAG
+!** QAG
 SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
     Last,Iwork,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QAG
-  !***PURPOSE  The routine calculates an approximation result to a given
+  !>
+  !***
+  !  The routine calculates an approximation result to a given
   !            definite integral I = integral of F over (A,B),
   !            hopefully satisfying following claim for accuracy
   !            ABS(I-RESULT)LE.MAX(EPSABS,EPSREL*ABS(I)).
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A1A1
-  !***TYPE      SINGLE PRECISION (QAG-S, DQAG-D)
-  !***KEYWORDS  AUTOMATIC INTEGRATOR, GAUSS-KRONROD RULES,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A1A1
+  !***
+  ! **Type:**      SINGLE PRECISION (QAG-S, DQAG-D)
+  !***
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, GAUSS-KRONROD RULES,
   !             GENERAL-PURPOSE, GLOBALLY ADAPTIVE, INTEGRAND EXAMINATOR,
   !             QUADPACK, QUADRATURE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Computation of a definite integral
   !        Standard fortran subroutine
@@ -150,15 +157,18 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !                    WORK(LIMIT*3+1), ..., WORK(LIMIT*3+LAST) contain
   !                     the error estimates.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  QAGE, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  QAGE, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  QAG
+  
   INTEGER Last
   REAL A, Abserr, B, Epsabs, Epsrel, F, Result, Work
   INTEGER Ier, Iwork, Key, Lenw, Limit, lvl, l1, l2, l3, Neval
@@ -166,7 +176,7 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   DIMENSION Iwork(*), Work(*)
   !
   EXTERNAL F
-  !***FIRST EXECUTABLE STATEMENT  QAG
+  !* FIRST EXECUTABLE STATEMENT  QAG
   Ier = 6
   Neval = 0
   Last = 0

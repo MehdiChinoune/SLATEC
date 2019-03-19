@@ -1,13 +1,17 @@
-!DECK PCHST
+!** PCHST
 REAL FUNCTION PCHST(Arg1,Arg2)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PCHST
-  !***SUBSIDIARY
-  !***PURPOSE  PCHIP Sign-Testing Routine
-  !***LIBRARY   SLATEC (PCHIP)
-  !***TYPE      SINGLE PRECISION (PCHST-S, DPCHST-D)
-  !***AUTHOR  Fritsch, F. N., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  PCHIP Sign-Testing Routine
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Type:**      SINGLE PRECISION (PCHST-S, DPCHST-D)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
+  !***
+  ! **Description:**
   !
   !         PCHST:  PCHIP Sign-Testing Routine.
   !
@@ -21,9 +25,12 @@ REAL FUNCTION PCHST(Arg1,Arg2)
   !
   !  Fortran intrinsics used:  SIGN.
   !
-  !***SEE ALSO  PCHCE, PCHCI, PCHCS, PCHIM
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  PCHCE, PCHCI, PCHCS, PCHIM
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811103  DATE WRITTEN
   !   820805  Converted to SLATEC library version.
   !   870813  Minor cosmetic changes.
@@ -33,7 +40,7 @@ REAL FUNCTION PCHST(Arg1,Arg2)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR and DATE WRITTEN sections in prologue.  (WRB)
   !   930503  Improved purpose.  (FNF)
-  !***END PROLOGUE  PCHST
+  
   !
   !**End
   !
@@ -49,7 +56,7 @@ REAL FUNCTION PCHST(Arg1,Arg2)
   !
   !  PERFORM THE TEST.
   !
-  !***FIRST EXECUTABLE STATEMENT  PCHST
+  !* FIRST EXECUTABLE STATEMENT  PCHST
   PCHST = SIGN(one,Arg1)*SIGN(one,Arg2)
   IF ( (Arg1==zero).OR.(Arg2==zero) ) PCHST = zero
   !

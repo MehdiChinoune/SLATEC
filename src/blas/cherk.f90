@@ -1,18 +1,25 @@
-!DECK CHERK
+!** CHERK
 SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHERK
-  !***PURPOSE  Perform Hermitian rank k update of a complex Hermitian
+  !>
+  !***
+  !  Perform Hermitian rank k update of a complex Hermitian
   !            matrix.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B6
-  !***TYPE      COMPLEX (SHERK-S, DHERK-D, CHERK-C)
-  !***KEYWORDS  LEVEL 3 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J., (ANL)
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B6
+  !***
+  ! **Type:**      COMPLEX (SHERK-S, DHERK-D, CHERK-C)
+  !***
+  ! **Keywords:**  LEVEL 3 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J., (ANL)
   !           Duff, I., (AERE)
   !           Du Croz, J., (NAG)
   !           Hammarling, S. (NAG)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  CHERK  performs one of the hermitian rank k operations
   !
@@ -110,15 +117,18 @@ SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !           max( 1, n ).
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J., Du Croz, J., Duff, I., and Hammarling, S.
+  !***
+  ! **References:**  Dongarra, J., Du Croz, J., Duff, I., and Hammarling, S.
   !                 A set of level 3 basic linear algebra subprograms.
   !                 ACM TOMS, Vol. 16, No. 1, pp. 1-17, March 1990.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890208  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  CHERK
+  
   !     .. Scalar Arguments ..
   CHARACTER :: Uplo, Trans
   INTEGER N, K, Lda, Ldc
@@ -140,7 +150,7 @@ SUBROUTINE CHERK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !     .. Parameters ..
   REAL ONE, ZERO
   PARAMETER (ONE=1.0E+0,ZERO=0.0E+0)
-  !***FIRST EXECUTABLE STATEMENT  CHERK
+  !* FIRST EXECUTABLE STATEMENT  CHERK
   !
   !     Test the input parameters.
   !

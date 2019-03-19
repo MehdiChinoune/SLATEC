@@ -1,17 +1,24 @@
-!DECK DROTM
+!** DROTM
 SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DROTM
-  !***PURPOSE  Apply a modified Givens transformation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1A8
-  !***TYPE      DOUBLE PRECISION (SROTM-S, DROTM-D)
-  !***KEYWORDS  BLAS, LINEAR ALGEBRA, MODIFIED GIVENS ROTATION, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !>
+  !***
+  !  Apply a modified Givens transformation.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1A8
+  !***
+  ! **Type:**      DOUBLE PRECISION (SROTM-S, DROTM-D)
+  !***
+  ! **Keywords:**  BLAS, LINEAR ALGEBRA, MODIFIED GIVENS ROTATION, VECTOR
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -46,25 +53,28 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
   !
   !     See DROTMG for a description of data storage in DPARAM.
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DROTM
+  
   INTEGER i, Incx, Incy, kx, ky, N, nsteps
   REAL(8) :: dflag, dh12, dh22, Dx, two, z, dh11, dh21, &
     Dparam, Dy, w, zero
   DIMENSION Dx(*), Dy(*), Dparam(5)
   SAVE zero, two
   DATA zero, two/0.0D0, 2.0D0/
-  !***FIRST EXECUTABLE STATEMENT  DROTM
+  !* FIRST EXECUTABLE STATEMENT  DROTM
   dflag = Dparam(1)
   IF ( N>0.AND.(dflag+two/=zero) ) THEN
     IF ( Incx/=Incy.OR.Incx<=0 ) THEN

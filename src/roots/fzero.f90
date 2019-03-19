@@ -1,17 +1,24 @@
-!DECK FZERO
+!** FZERO
 SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  FZERO
-  !***PURPOSE  Search for a zero of a function F(X) in a given interval
+  !>
+  !***
+  !  Search for a zero of a function F(X) in a given interval
   !            (B,C).  It is designed primarily for problems where F(B)
   !            and F(C) have opposite signs.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  F1B
-  !***TYPE      SINGLE PRECISION (FZERO-S, DFZERO-D)
-  !***KEYWORDS  BISECTION, NONLINEAR EQUATIONS, ROOTS, ZEROS
-  !***AUTHOR  Shampine, L. F., (SNLA)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  F1B
+  !***
+  ! **Type:**      SINGLE PRECISION (FZERO-S, DFZERO-D)
+  !***
+  ! **Keywords:**  BISECTION, NONLINEAR EQUATIONS, ROOTS, ZEROS
+  !***
+  ! **Author:**  Shampine, L. F., (SNLA)
   !           Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     FZERO searches for a zero of a REAL function F(X) between the
   !     given REAL values B and C until the width of the interval (B,C)
@@ -78,26 +85,29 @@ SUBROUTINE FZERO(F,B,C,R,Re,Ae,Iflag)
   !
   !                5  Too many (.GT. 500) function evaluations used.
   !
-  !***REFERENCES  L. F. Shampine and H. A. Watts, FZERO, a root-solving
+  !***
+  ! **References:**  L. F. Shampine and H. A. Watts, FZERO, a root-solving
   !                 code, Report SC-TM-70-631, Sandia Laboratories,
   !                 September 1970.
   !               T. J. Dekker, Finding a zero by means of successive
   !                 linear interpolation, Constructive Aspects of the
   !                 Fundamental Theorem of Algebra, edited by B. Dejon
   !                 and P. Henrici, Wiley-Interscience, 1969.
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   700901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  FZERO
+  
   REAL F, R1MACH
   REAL a, acbs, acmb, Ae, aw, B, C, cmb, er, fa, fb, fc, fx, &
     fz, p, q, R, Re, rw, t, tol, z
   INTEGER ic, Iflag, kount
-  !***FIRST EXECUTABLE STATEMENT  FZERO
+  !* FIRST EXECUTABLE STATEMENT  FZERO
   !
   !   ER is two times the computer unit roundoff value which is defined
   !   here by the function R1MACH.

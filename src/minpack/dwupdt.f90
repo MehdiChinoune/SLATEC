@@ -1,13 +1,17 @@
-!DECK DWUPDT
+!** DWUPDT
 SUBROUTINE DWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DWUPDT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DNLS1 and DNLS1E
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (RWUPDT-S, DWUPDT-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DNLS1 and DNLS1E
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (RWUPDT-S, DWUPDT-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Given an N by N upper triangular matrix R, this subroutine
   !     computes the QR decomposition of the matrix formed when a row
@@ -59,9 +63,12 @@ SUBROUTINE DWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
   !
   !     **********
   !
-  !***SEE ALSO  DNLS1, DNLS1E
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DNLS1, DNLS1E
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -69,7 +76,7 @@ SUBROUTINE DWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DWUPDT
+  
   INTEGER N, Ldr
   REAL(8) :: Alpha
   REAL(8) :: R(Ldr,*), W(*), B(*), Cos(*), Sin(*)
@@ -77,7 +84,7 @@ SUBROUTINE DWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
   REAL(8) :: cotan, one, p5, p25, rowj, tan, temp, zero
   SAVE one, p5, p25, zero
   DATA one, p5, p25, zero/1.0D0, 5.0D-1, 2.5D-1, 0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  DWUPDT
+  !* FIRST EXECUTABLE STATEMENT  DWUPDT
   DO j = 1, N
     rowj = W(j)
     jm1 = j - 1

@@ -1,25 +1,32 @@
-!DECK DSDBCG
+!** DSDBCG
 SUBROUTINE DSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSDBCG
-  !***PURPOSE  Diagonally Scaled BiConjugate Gradient Sparse Ax=b Solver.
+  !>
+  !***
+  !  Diagonally Scaled BiConjugate Gradient Sparse Ax=b Solver.
   !            Routine to solve a linear system  Ax = b  using the
   !            BiConjugate Gradient method with diagonal scaling.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      DOUBLE PRECISION (SSDBCG-S, DSDBCG-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM, SLAP,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSDBCG-S, DSDBCG-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM, SLAP,
   !             SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM, ITOL, ITMAX
   !     INTEGER ITER, IERR, IUNIT, LENW, IWORK(10), LENIW
   !     DOUBLE PRECISION B(N), X(N), A(NELT), TOL, ERR, RWORK(8*N)
@@ -27,7 +34,7 @@ SUBROUTINE DSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     CALL DSDBCG(N, B, X, NELT, IA, JA, A, ISYM, ITOL, TOL,
   !    $     ITMAX, ITER, ERR, IERR, IUNIT, RWORK, LENW, IWORK, LENIW )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   ! B      :IN       Double Precision B(N).
@@ -114,7 +121,7 @@ SUBROUTINE DSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !         IWORK(9)  Amount of Integer workspace actually used.
   !         IWORK(10) Amount of Double Precision workspace actually used.
   !
-  ! *Description:
+  !- Description:
   !       This  routine performs  preconditioned  BiConjugate gradient
   !       method on the Non-Symmetric positive definite  linear system
   !       Ax=b. The preconditioner is M = DIAG(A), the diagonal of the
@@ -186,21 +193,25 @@ SUBROUTINE DSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Side Effects:
+  !- Side Effects:
   !       The SLAP Triad format (IA, JA, A) is  modified internally to
   !       be   the SLAP  Column format.   See above.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  DBCG, DLUBCG
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DBCG, DCHKW, DS2Y, DSDI, DSDS, DSMTV, DSMV
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBCG, DLUBCG
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DBCG, DCHKW, DS2Y, DSDI, DSDS, DSMTV, DSMV
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -212,7 +223,7 @@ SUBROUTINE DSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   920407  COMMON BLOCK renamed DSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  !***END PROLOGUE  DSDBCG
+  
   !     .. Parameters ..
   INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
@@ -228,7 +239,7 @@ SUBROUTINE DSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     locz, loczz
   !     .. External Subroutines ..
   EXTERNAL DBCG, DCHKW, DS2Y, DSDI, DSDS, DSMTV, DSMV
-  !***FIRST EXECUTABLE STATEMENT  DSDBCG
+  !* FIRST EXECUTABLE STATEMENT  DSDBCG
   !
   Ierr = 0
   IF ( N<1.OR.Nelt<1 ) THEN

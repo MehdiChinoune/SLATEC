@@ -1,18 +1,22 @@
-!DECK DCOEF
+!** DCOEF
 SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
     Cvec,Work,Iwork,Iflag,Nfcc)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCOEF
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SCOEF-S, DCOEF-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SCOEF-S, DCOEF-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   ! INPUT to DCOEF
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     YH = matrix of homogeneous solutions.
   !     YP = vector containing particular solution.
@@ -37,9 +41,9 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !     IWORK = integer array of internal storage. Dimension must be GE
   !             3+NFCC
   !
-  ! **********************************************************************
+  !- *********************************************************************
   ! OUTPUT from DCOEF
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     COEF = array containing superposition constants.
   !     IFLAG = indicator of success from DSUDS in solving the
@@ -50,19 +54,23 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !           = 3 for this value of an eigenparameter, the boundary
   !               equations have only the zero solution.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     Subroutine DCOEF solves for the superposition constants from the
   !     linear equations defined by the boundary conditions at X = XFINAL.
   !
   !                          B*YP + B*YH*COEF = BETA
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  DBVSUP
-  !***ROUTINES CALLED  DDOT, DSUDS, XGETF, XSETF
-  !***COMMON BLOCKS    DML5MC
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBVSUP
+  !***
+  ! **Routines called:**  DDOT, DSUDS, XGETF, XSETF
+  !***
+  ! COMMON BLOCKS    DML5MC
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -72,7 +80,7 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DCOEF
+  
   !
   REAL(8) :: DDOT
   INTEGER i, Iflag, Inhomo, Iwork(*), j, k, kflag, ki, l, LPAr, &
@@ -83,7 +91,7 @@ SUBROUTINE DCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
     Yh(Ncomp,*), Yp(*), ypn
   !
   COMMON /DML5MC/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
-  !***FIRST EXECUTABLE STATEMENT  DCOEF
+  !* FIRST EXECUTABLE STATEMENT  DCOEF
   !
   !     SET UP MATRIX  B*YH  AND VECTOR  BETA - B*YP
   !

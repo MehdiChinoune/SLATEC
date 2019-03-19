@@ -1,15 +1,19 @@
-!DECK SPINIT
+!** SPINIT
 SUBROUTINE SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
     Costsc,Colnrm,Xlamda,Anorm,Rhs,Rhsnrm,Ibasis,Ibb,Imat,&
     Lopt)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPINIT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SPINIT-S, DPINIT-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SPINIT-S, DPINIT-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THE EDITING REQUIRED TO CONVERT THIS SUBROUTINE FROM SINGLE TO
   !     DOUBLE PRECISION INVOLVES THE FOLLOWING CHARACTER STRING CHANGES.
@@ -21,15 +25,18 @@ SUBROUTINE SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
   !
   !     INITIALIZATION SUBROUTINE FOR SPLP(*) PACKAGE.
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  PNNZRS, SASUM, SCOPY
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  PNNZRS, SASUM, SCOPY
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  SPINIT
+  
   INTEGER i, Info, ip, iplace, j, Mrelas, n20007, n20019, n20028, &
     n20041, n20056, n20066, n20070, n20074, n20078, Nvars
   REAL SASUM
@@ -39,7 +46,7 @@ SUBROUTINE SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
   INTEGER Ibasis(*), Ibb(*), Imat(*), Ind(*)
   LOGICAL contin, usrbas, colscp, cstscp, minprb, Lopt(8)
   !
-  !***FIRST EXECUTABLE STATEMENT  SPINIT
+  !* FIRST EXECUTABLE STATEMENT  SPINIT
   zero = 0.
   one = 1.
   contin = Lopt(1)

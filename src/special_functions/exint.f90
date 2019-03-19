@@ -1,15 +1,22 @@
-!DECK EXINT
+!** EXINT
 SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  EXINT
-  !***PURPOSE  Compute an M member sequence of exponential integrals
+  !>
+  !***
+  !  Compute an M member sequence of exponential integrals
   !            E(N+K,X), K=0,1,...,M-1 for N .GE. 1 and X .GE. 0.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C5
-  !***TYPE      SINGLE PRECISION (EXINT-S, DEXINT-D)
-  !***KEYWORDS  EXPONENTIAL INTEGRAL, SPECIAL FUNCTIONS
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C5
+  !***
+  ! **Type:**      SINGLE PRECISION (EXINT-S, DEXINT-D)
+  !***
+  ! **Keywords:**  EXPONENTIAL INTEGRAL, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !         EXINT computes M member sequences of exponential integrals
   !         E(N+K,X), K=0,1,...,M-1 for N .GE. 1 and X .GE. 0.  The
@@ -73,14 +80,17 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !                   IERR=2, error,         no computation
   !                           algorithm termination condition not met
   !
-  !***REFERENCES  M. Abramowitz and I. A. Stegun, Handbook of
+  !***
+  ! **References:**  M. Abramowitz and I. A. Stegun, Handbook of
   !                 Mathematical Functions, NBS AMS Series 55, U.S. Dept.
   !                 of Commerce, 1955.
   !               D. E. Amos, Computation of exponential integrals, ACM
   !                 Transactions on Mathematical Software 6, (1980),
   !                 pp. 365-377 and pp. 420-428.
-  !***ROUTINES CALLED  I1MACH, PSIXN, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  I1MACH, PSIXN, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800501  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -92,7 +102,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !   920207  Updated with code with a revision date of 880811 from
   !           D. Amos.  Included correction of argument list.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  EXINT
+  
   REAL a, aa, aams, ah, ak, at, b, bk, bt, cc, cnorm, ct, em, &
     emx, En, etol, fnm, fx, pt, p1, p2, s, Tol, tx, X, xcut, &
     xlim, xtol, y, yt, y1, y2
@@ -101,7 +111,7 @@ SUBROUTINE EXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
     kk, kn, Kode, ks, M, ml, mu, N, nd, nm, Nz
   INTEGER I1MACH
   DIMENSION En(*), a(99), b(99), y(2)
-  !***FIRST EXECUTABLE STATEMENT  EXINT
+  !* FIRST EXECUTABLE STATEMENT  EXINT
   Ierr = 0
   Nz = 0
   etol = MAX(R1MACH(4),0.5E-18)

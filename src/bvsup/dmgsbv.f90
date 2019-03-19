@@ -1,21 +1,25 @@
-!DECK DMGSBV
+!** DMGSBV
 SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DMGSBV
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (MGSBV-S, DMGSBV-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (MGSBV-S, DMGSBV-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   ! Orthogonalize a set of N double precision vectors and determine their
   ! rank.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   ! INPUT
-  ! **********************************************************************
+  !- *********************************************************************
   !   M = dimension of vectors.
   !   N = no. of vectors.
   !   A = array whose first N cols contain the vectors.
@@ -25,9 +29,9 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   V = particular solution vector (not included in the pivoting).
   !   INDPVT = 1 means pivoting will not be used.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   ! OUTPUT
-  ! **********************************************************************
+  !- *********************************************************************
   !   NIV = no. of linear independent vectors in input set.
   !     A = matrix whose first NIV cols. contain NIV orthogonal vectors
   !         which span the vector space determined by the input vectors.
@@ -48,12 +52,16 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   WCND = worst case (smallest) norm decrement value of the
   !          vectors being orthogonalized  (represents a test
   !          for linear dependence of the vectors).
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  DBVSUP
-  !***ROUTINES CALLED  DDOT, DPRVEC
-  !***COMMON BLOCKS    DML18J, DML5MC
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBVSUP
+  !***
+  ! **Routines called:**  DDOT, DPRVEC
+  !***
+  ! COMMON BLOCKS    DML18J, DML5MC
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -63,7 +71,7 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DMGSBV
+  
   !
   REAL(8) :: DDOT, DPRVEC
   INTEGER i, Ia, ICOco, Iflag, INDpvt, Inhomo, INTeg, Ip(*), ip1, &
@@ -82,7 +90,7 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !
   COMMON /DML5MC/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
   !
-  !***FIRST EXECUTABLE STATEMENT  DMGSBV
+  !* FIRST EXECUTABLE STATEMENT  DMGSBV
   IF ( M>0.AND.N>0.AND.Ia>=M ) THEN
     !        BEGIN BLOCK PERMITTING ...EXITS TO 270
     !           BEGIN BLOCK PERMITTING ...EXITS TO 260

@@ -1,18 +1,22 @@
-!DECK HSTART
+!** HSTART
 SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     Rpar,Ipar,H)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HSTART
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DEABM, DEBDF and DERKF
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (HSTART-S, DHSTRT-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DEABM, DEBDF and DERKF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (HSTART-S, DHSTRT-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   HSTART computes a starting step size to be used in solving initial
   !   value problems in ordinary differential equations.
-  ! **********************************************************************
+  !- *********************************************************************
   !  Abstract
   !
   !     Subroutine HSTART computes a starting step size to be used by an
@@ -31,7 +35,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !     prevent unnecessary underflows or overflows from occurring, and
   !     also, would not alter the vector or number of components.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !  On Input you must provide the following
   !
   !      F -- This is a subroutine of the form
@@ -115,7 +119,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !             between your program and the F subroutine.  They are not
   !             used or altered by HSTART.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !  On Output  (after the return from HSTART),
   !
   !      H -- Is an appropriate starting step size to be attempted by the
@@ -124,11 +128,14 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !           All parameters in the call list remain unchanged except for
   !           the working arrays SPY(*),PV(*),YP(*) and SF(*).
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  DEABM, DEBDF, DERKF
-  !***ROUTINES CALLED  HVNRM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DEABM, DEBDF, DERKF
+  !***
+  ! **Routines called:**  HVNRM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800501  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891024  Changed references from VNORM to HVNRM.  (WRB)
@@ -136,7 +143,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  HSTART
+  
   REAL A, absdx, B, Big, da, delf, delx, delxb, dely, dfdub, &
     dfdxb, dx, dy, Etol, fbnd, H, HVNRM, power, Pv, relper
   REAL Rpar, Sf, Small, Spy, srydpb, wtj, Y, ydpb, ynorm, Yp, ypnorm, Yprime
@@ -146,7 +153,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !
   !.......................................................................
   !
-  !***FIRST EXECUTABLE STATEMENT  HSTART
+  !* FIRST EXECUTABLE STATEMENT  HSTART
   dx = B - A
   absdx = ABS(dx)
   relper = Small**0.375

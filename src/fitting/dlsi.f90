@@ -1,13 +1,17 @@
-!DECK DLSI
+!** DLSI
 SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DLSI
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DLSEI
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (LSI-S, DLSI-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DLSEI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (LSI-S, DLSI-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
+  !***
+  ! **Description:**
   !
   !     This is a companion subprogram to DLSEI.  The documentation for
   !     DLSEI has complete usage instructions.
@@ -46,9 +50,11 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !      IP(MG+2*N+1)
   !              Integer working storage
   !
-  !***ROUTINES CALLED  D1MACH, DASUM, DAXPY, DCOPY, DDOT, DH12, DHFTI,
+  !***
+  ! **Routines called:**  D1MACH, DASUM, DAXPY, DCOPY, DDOT, DH12, DHFTI,
   !                    DLPDP, DSCAL, DSWAP
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890618  Completely restructured and extensively revised (WRB & RWC)
@@ -56,7 +62,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   !   900328  Added TYPE section.  (WRB)
   !   900604  DP version created from SP version.  (RWC)
   !   920422  Changed CALL to DHFTI to include variable MA.  (WRB)
-  !***END PROLOGUE  DLSI
+  
   INTEGER Ip(*), Ma, Mdw, Mg, Mode, N
   REAL(8) :: Prgopt(*), Rnorm, W(Mdw,*), Ws(*), X(*)
   !
@@ -72,7 +78,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   SAVE drelpr, first
   DATA first/.TRUE./
   !
-  !***FIRST EXECUTABLE STATEMENT  DLSI
+  !* FIRST EXECUTABLE STATEMENT  DLSI
   !
   !     Set the nominal tolerance used in the code.
   !

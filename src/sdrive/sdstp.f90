@@ -1,25 +1,29 @@
-!DECK SDSTP
+!** SDSTP
 SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Miter,Ml,Mu,N,Nde,Ywt,Uround,USERS,Avgh,Avgord,H,Hused,&
     Jtask,Mntold,Mtrold,Nfe,Nje,Nqused,Nstep,T,Y,Yh,A,Convrg,&
     Dfdy,El,Fac,Hold,Ipvt,Jstate,Jstepl,Nq,Nwait,Rc,Rmax,&
     Save1,Save2,Tq,Trend,Iswflg,Mtrsv,Mxrdsv)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SDSTP
-  !***SUBSIDIARY
-  !***PURPOSE  SDSTP performs one step of the integration of an initial
+  !>
+  !***
+  !  SDSTP performs one step of the integration of an initial
   !            value problem for a system of ordinary differential
   !            equations.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***TYPE      SINGLE PRECISION (SDSTP-S, DDSTP-D, CDSTP-C)
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Type:**      SINGLE PRECISION (SDSTP-S, DDSTP-D, CDSTP-C)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  Communication with SDSTP is done with the following variables:
   !
@@ -64,11 +68,13 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !              On a return with JSTATE .GT. 1, the values of T and
   !              the YH array are as of the beginning of the last
   !              step, and H is the last step size attempted.
-  !***ROUTINES CALLED  SDCOR, SDCST, SDNTL, SDPSC, SDPST, SDSCL, SNRM2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SDCOR, SDCST, SDNTL, SDPSC, SDPST, SDSCL, SNRM2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  SDSTP
+  
   EXTERNAL F, JACOBN, FA, USERS
   INTEGER i, Ierror, Impl, Ipvt(*), Iswflg, iter, j, Jstate, &
     Jstepl, Jtask, Matdim, Maxord, Mint, Miter, Ml, Mntold, &
@@ -86,7 +92,7 @@ SUBROUTINE SDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     RCTEST=.3E0,RMFAIL=2.E0,RMNORM=10.E0,TRSHLD=1.E0)
   PARAMETER (NDJSTP=10)
   DATA ier/.FALSE./
-  !***FIRST EXECUTABLE STATEMENT  SDSTP
+  !* FIRST EXECUTABLE STATEMENT  SDSTP
   nsv = N
   bnd = 0.E0
   switch = .FALSE.

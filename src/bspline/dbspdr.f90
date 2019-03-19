@@ -1,16 +1,23 @@
-!DECK DBSPDR
+!** DBSPDR
 SUBROUTINE DBSPDR(T,A,N,K,Nderiv,Ad)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBSPDR
-  !***PURPOSE  Use the B-representation to construct a divided difference
+  !>
+  !***
+  !  Use the B-representation to construct a divided difference
   !            table preparatory to a (right) derivative calculation.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E3, K6
-  !***TYPE      DOUBLE PRECISION (BSPDR-S, DBSPDR-D)
-  !***KEYWORDS  B-SPLINE, DATA FITTING, DIFFERENTIATION OF SPLINES,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E3, K6
+  !***
+  ! **Type:**      DOUBLE PRECISION (BSPDR-S, DBSPDR-D)
+  !***
+  ! **Keywords:**  B-SPLINE, DATA FITTING, DIFFERENTIATION OF SPLINES,
   !             INTERPOLATION
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Written by Carl de Boor and modified by D. E. Amos
   !
@@ -46,11 +53,14 @@ SUBROUTINE DBSPDR(T,A,N,K,Nderiv,Ad)
   !     Error Conditions
   !         Improper input is a fatal error
   !
-  !***REFERENCES  Carl de Boor, Package for calculating with B-splines,
+  !***
+  ! **References:**  Carl de Boor, Package for calculating with B-splines,
   !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
   !                 pp. 441-472.
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -58,14 +68,14 @@ SUBROUTINE DBSPDR(T,A,N,K,Nderiv,Ad)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DBSPDR
+  
   !
   !
   INTEGER i, id, ii, ipkmid, jj, jm, K, kmid, N, Nderiv
   REAL(8) :: A, Ad, diff, fkmid, T
   !     DIMENSION T(N+K), AD((2*N-NDERIV+1)*NDERIV/2)
   DIMENSION T(*), A(*), Ad(*)
-  !***FIRST EXECUTABLE STATEMENT  DBSPDR
+  !* FIRST EXECUTABLE STATEMENT  DBSPDR
   IF ( K<1 ) THEN
     !
     !

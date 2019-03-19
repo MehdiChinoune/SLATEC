@@ -1,13 +1,17 @@
-!DECK SUDS
+!** SUDS
 SUBROUTINE SUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SUDS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SUDS-S, DSUDS-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SUDS-S, DSUDS-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !     SUDS solves the underdetermined system of linear equations A Z = B
   !     where A is NEQ by NUK and NEQ .LE. NUK. In particular, if rank A
@@ -27,9 +31,9 @@ SUBROUTINE SUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   !     orthogonal transformations. In the process, ORTHOR calls upon
   !     subroutine CSCALE for scaling.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !   INPUT
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     A -- Contains the matrix of NEQ equations in NUK unknowns and must
   !          be dimensioned NRDA by NUK. The original A is destroyed.
@@ -63,9 +67,9 @@ SUBROUTINE SUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   !                 no scaling will be attempted
   !              For most problems scaling will probably not be necessary
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !   OUTPUT
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     IFLAG -- Status indicator
   !            =1 If solution was obtained
@@ -89,25 +93,29 @@ SUBROUTINE SUDS(A,X,B,Neq,Nuk,Nrda,Iflag,Mlso,Work,Iwork)
   !                         IWORK(1) Contains the numerically determined
   !                         rank of the matrix A
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  BVSUP
-  !***REFERENCES  H. A. Watts, Solving linear least squares problems
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **References:**  H. A. Watts, Solving linear least squares problems
   !                 using SODS/SUDS/CODS, Sandia Report SAND77-0683,
   !                 Sandia Laboratories, 1977.
-  !***ROUTINES CALLED  LSSUDS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSSUDS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SUDS
+  
   REAL A, B, Work, X
   INTEGER Iflag, il, ip, is, Iwork, ks, kt, ku, kv, Mlso, Neq, Nrda, Nuk
   DIMENSION A(Nrda,*), X(*), B(*), Work(*), Iwork(*)
-  !***FIRST EXECUTABLE STATEMENT  SUDS
+  !* FIRST EXECUTABLE STATEMENT  SUDS
   is = 2
   ip = 3
   il = ip + Neq

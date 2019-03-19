@@ -1,18 +1,25 @@
-!DECK CBESI
+!** CBESI
 SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CBESI
-  !***PURPOSE  Compute a sequence of the Bessel functions I(a,z) for
+  !>
+  !***
+  !  Compute a sequence of the Bessel functions I(a,z) for
   !            complex argument z and real nonnegative orders a=b,b+1,
   !            b+2,... where b>0.  A scaling option is available to
   !            help avoid overflow.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10B4
-  !***TYPE      COMPLEX (CBESI-C, ZBESI-C)
-  !***KEYWORDS  BESSEL FUNCTIONS OF COMPLEX ARGUMENT, I BESSEL FUNCTIONS,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10B4
+  !***
+  ! **Type:**      COMPLEX (CBESI-C, ZBESI-C)
+  !***
+  ! **Keywords:**  BESSEL FUNCTIONS OF COMPLEX ARGUMENT, I BESSEL FUNCTIONS,
   !             MODIFIED BESSEL FUNCTIONS
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !         On KODE=1, CBESI computes an N-member sequence of complex
   !         Bessel functions CY(L)=I(FNU+L-1,Z) for real nonnegative
@@ -54,7 +61,7 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !                    IERR=5  Algorithmic error - NO COMPUTATION
   !                            (Termination condition not met)
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !         The computation of I(a,z) is carried out by the power series
   !         for small abs(z), the asymptotic expansion for large abs(z),
@@ -123,7 +130,8 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !         the principal phase angle is on the order of +P, -P, PI/2-P,
   !         or -PI/2+P.
   !
-  !***REFERENCES  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
+  !***
+  ! **References:**  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
   !                 matical Functions, National Bureau of Standards
   !                 Applied Mathematics Series 55, U. S. Department
   !                 of Commerce, Tenth Printing (1972) or later.
@@ -143,14 +151,16 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !                 Transactions on Mathematical Software, 12 (September
   !                 1986), pp. 265-273.
   !
-  !***ROUTINES CALLED  CBINU, I1MACH, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CBINU, I1MACH, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   890801  REVISION DATE from Version 3.2
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  !***END PROLOGUE  CBESI
+  
   COMPLEX cone, csgn, Cy, Z, zn
   REAL aa, alim, arg, dig, elim, Fnu, fnul, pi, rl, r1m5, s1, &
     s2, tol, xx, yy, R1MACH, az, fn, bb, ascle, rtol, atol
@@ -159,7 +169,7 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   DATA pi/3.14159265358979324E0/
   DATA cone/(1.0E0,0.0E0)/
   !
-  !***FIRST EXECUTABLE STATEMENT  CBESI
+  !* FIRST EXECUTABLE STATEMENT  CBESI
   Ierr = 0
   Nz = 0
   IF ( Fnu<0.0E0 ) Ierr = 1

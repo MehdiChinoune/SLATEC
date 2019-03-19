@@ -1,19 +1,26 @@
-!DECK DXPMU
+!** DXPMU
 SUBROUTINE DXPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DXPMU
-  !***SUBSIDIARY
-  !***PURPOSE  To compute the values of Legendre functions for DXLEGF.
+  !>
+  !***
+  !  To compute the values of Legendre functions for DXLEGF.
   !            Method: backward mu-wise recurrence for P(-MU,NU,X) for
   !            fixed nu to obtain P(-MU2,NU1,X), P(-(MU2-1),NU1,X), ...,
   !            P(-MU1,NU1,X) and store in ascending mu order.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C3A2, C9
-  !***TYPE      DOUBLE PRECISION (XPMU-S, DXPMU-D)
-  !***KEYWORDS  LEGENDRE FUNCTIONS
-  !***AUTHOR  Smith, John M., (NBS and George Mason University)
-  !***ROUTINES CALLED  DXADD, DXADJ, DXPQNU
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C3A2, C9
+  !***
+  ! **Type:**      DOUBLE PRECISION (XPMU-S, DXPMU-D)
+  !***
+  ! **Keywords:**  LEGENDRE FUNCTIONS
+  !***
+  ! **Author:**  Smith, John M., (NBS and George Mason University)
+  !***
+  ! **Routines called:**  DXADD, DXADJ, DXPQNU
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820728  DATE WRITTEN
   !   890126  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
@@ -21,14 +28,14 @@ SUBROUTINE DXPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  DXPMU
+  
   INTEGER Id, Ierror, ip0, Ipqa, j, mu, Mu1, Mu2, n
   REAL(8) :: Pqa, Nu1, Nu2, p0, X, Sx, Theta, x1, x2
   DIMENSION Pqa(*), Ipqa(*)
   !
   !        CALL DXPQNU TO OBTAIN P(-MU2,NU,X)
   !
-  !***FIRST EXECUTABLE STATEMENT  DXPMU
+  !* FIRST EXECUTABLE STATEMENT  DXPMU
   Ierror = 0
   CALL DXPQNU(Nu1,Nu2,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   IF ( Ierror/=0 ) RETURN

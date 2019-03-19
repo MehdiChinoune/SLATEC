@@ -1,15 +1,19 @@
-!DECK DBKSOL
+!** DBKSOL
 SUBROUTINE DBKSOL(N,A,X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBKSOL
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (BKSOL-S, DBKSOL-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (BKSOL-S, DBKSOL-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     Solution of an upper triangular linear system by
   !     back-substitution
   !
@@ -19,23 +23,26 @@ SUBROUTINE DBKSOL(N,A,X)
   !     and contains the solution on return.
   !     The actual diagonal of A is unity while a diagonal
   !     scaling matrix is stored there.
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  DBVSUP
-  !***ROUTINES CALLED  DDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBVSUP
+  !***
+  ! **Routines called:**  DDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DBKSOL
+  
   !
   REAL(8) :: DDOT
   INTEGER j, k, m, N, nm1
   REAL(8) :: A(*), X(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  DBKSOL
+  !* FIRST EXECUTABLE STATEMENT  DBKSOL
   m = (N*(N+1))/2
   X(N) = X(N)*A(m)
   nm1 = N - 1

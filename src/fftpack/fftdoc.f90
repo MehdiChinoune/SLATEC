@@ -1,15 +1,22 @@
-!DECK FFTDOC
+!** FFTDOC
 SUBROUTINE FFTDOC
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  FFTDOC
-  !***PURPOSE  Documentation for FFTPACK, a collection of Fast Fourier
+  !>
+  !***
+  !  Documentation for FFTPACK, a collection of Fast Fourier
   !            Transform routines.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  J1, Z
-  !***TYPE      ALL (FFTDOC-A)
-  !***KEYWORDS  DOCUMENTATION, FAST FOURIER TRANSFORM, FFT
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  J1, Z
+  !***
+  ! **Type:**      ALL (FFTDOC-A)
+  !***
+  ! **Keywords:**  DOCUMENTATION, FAST FOURIER TRANSFORM, FFT
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   !                       Version 3  June 1979
@@ -54,13 +61,16 @@ SUBROUTINE FFTDOC
   !     18.  CFFTF     Forward transform of a complex periodic sequence
   !     19.  CFFTB     Unnormalized inverse of CFFTF
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780201  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900723  PURPOSE section revised.  (WRB)
-  !***END PROLOGUE  FFTDOC
-  !***FIRST EXECUTABLE STATEMENT  FFTDOC
+  
+  !* FIRST EXECUTABLE STATEMENT  FFTDOC
 END SUBROUTINE FFTDOC

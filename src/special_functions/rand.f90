@@ -1,14 +1,21 @@
-!DECK RAND
+!** RAND
 REAL FUNCTION RAND(R)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RAND
-  !***PURPOSE  Generate a uniformly distributed random number.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  L6A21
-  !***TYPE      SINGLE PRECISION (RAND-S)
-  !***KEYWORDS  FNLIB, RANDOM NUMBER, SPECIAL FUNCTIONS, UNIFORM
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Generate a uniformly distributed random number.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  L6A21
+  !***
+  ! **Type:**      SINGLE PRECISION (RAND-S)
+  !***
+  ! **Keywords:**  FNLIB, RANDOM NUMBER, SPECIAL FUNCTIONS, UNIFORM
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   !      This pseudo-random number generator is portable among a wide
   ! variety of computers.  RAND(R) undoubtedly is not as good as many
@@ -85,21 +92,24 @@ REAL FUNCTION RAND(R)
   !             Output Value --
   ! RAND   a pseudo-random number between 0. and 1.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  RAND
+  
   INTEGER ia0, ia1, ia1ma0, ic, ix0, ix1, iy0, iy1
   REAL R
   SAVE ia1, ia0, ia1ma0, ic, ix1, ix0
   DATA ia1, ia0, ia1ma0/1536, 1029, 507/
   DATA ic/1731/
   DATA ix1, ix0/0, 0/
-  !***FIRST EXECUTABLE STATEMENT  RAND
+  !* FIRST EXECUTABLE STATEMENT  RAND
   IF ( R>=0. ) THEN
     IF ( R>0. ) THEN
       !

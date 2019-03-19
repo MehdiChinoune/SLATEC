@@ -1,23 +1,30 @@
-!DECK DSLI
+!** DSLI
 SUBROUTINE DSLI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSLI
-  !***PURPOSE  SLAP MSOLVE for Lower Triangle Matrix.
+  !>
+  !***
+  !  SLAP MSOLVE for Lower Triangle Matrix.
   !            This routine acts as an interface between the SLAP generic
   !            MSOLVE calling convention and the routine that actually
   !                      -1
   !            computes L  B = X.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A3
-  !***TYPE      DOUBLE PRECISION (SSLI-S, DSLI-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, LINEAR SYSTEM SOLVE, SLAP, SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A3
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSLI-S, DSLI-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, LINEAR SYSTEM SOLVE, SLAP, SPARSE
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !       It is assumed that RWORK and IWORK have initialized with
   !       the information required for DSLI2:
   !          IWORK(1) = NEL
@@ -25,9 +32,12 @@ SUBROUTINE DSLI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !          IWORK(3) = Starting location of JEL in IWORK.
   !          IWORK(4) = Starting location of EL in RWORK.
   !       See the DESCRIPTION of DSLI2 for details.
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DSLI2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DSLI2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -38,7 +48,7 @@ SUBROUTINE DSLI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  !***END PROLOGUE  DSLI
+  
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
@@ -48,7 +58,7 @@ SUBROUTINE DSLI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   INTEGER locel, lociel, locjel, nel
   !     .. External Subroutines ..
   EXTERNAL DSLI2
-  !***FIRST EXECUTABLE STATEMENT  DSLI
+  !* FIRST EXECUTABLE STATEMENT  DSLI
   !
   nel = Iwork(1)
   lociel = Iwork(2)

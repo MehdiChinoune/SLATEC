@@ -1,16 +1,23 @@
-!DECK DQNC79
+!** DQNC79
 SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQNC79
-  !***PURPOSE  Integrate a function using a 7-point adaptive Newton-Cotes
+  !>
+  !***
+  !  Integrate a function using a 7-point adaptive Newton-Cotes
   !            quadrature rule.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  H2A1A1
-  !***TYPE      DOUBLE PRECISION (QNC79-S, DQNC79-D)
-  !***KEYWORDS  ADAPTIVE QUADRATURE, INTEGRATION, NEWTON-COTES
-  !***AUTHOR  Kahaner, D. K., (NBS)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  H2A1A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (QNC79-S, DQNC79-D)
+  !***
+  ! **Keywords:**  ADAPTIVE QUADRATURE, INTEGRATION, NEWTON-COTES
+  !***
+  ! **Author:**  Kahaner, D. K., (NBS)
   !           Jones, R. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Abstract  *** a DOUBLE PRECISION routine ***
   !       DQNC79 is a general purpose program for evaluation of
@@ -60,9 +67,12 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !              difficult problem; other programs may be more efficient.
   !              DQNC79 will gracefully give up if K exceeds 2000.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, I1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, I1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -72,7 +82,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !   920218  Code redone to parallel QNC79.  (WRB)
   !   930120  Increase array size 80->99, and KMX 2000->5000 for SUN -r8
   !           wordlength.  (RWC)
-  !***END PROLOGUE  DQNC79
+  
   !     .. Scalar Arguments ..
   REAL(8) :: A, Ans, B, Err
   INTEGER Ierr, K
@@ -102,7 +112,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !     .. Data statements ..
   DATA kml/7/, kmx/5000/, nlmn/2/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DQNC79
+  !* FIRST EXECUTABLE STATEMENT  DQNC79
   IF ( first ) THEN
     w1 = 41.0D0/140.0D0
     w2 = 216.0D0/140.0D0

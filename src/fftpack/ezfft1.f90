@@ -1,15 +1,20 @@
-!DECK EZFFT1
+!** EZFFT1
 SUBROUTINE EZFFT1(N,Wa,Ifac)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  EZFFT1
-  !***SUBSIDIARY
-  !***PURPOSE  EZFFTI calls EZFFT1 with appropriate work array
+  !>
+  !***
+  !  EZFFTI calls EZFFT1 with appropriate work array
   !            partitioning.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***TYPE      SINGLE PRECISION (EZFFT1-S)
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Type:**      SINGLE PRECISION (EZFFT1-S)
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -24,14 +29,14 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  EZFFT1
+  
   REAL arg1, argh, ch1, ch1h, dch1, dsh1, sh1, tpi, Wa
   INTEGER i, ib, ido, Ifac, ii, ip, ipm, is, j, k1, l1, l2, N, &
     nf, nfm1, nl, nq, nr, ntry, ntryh
   DIMENSION Wa(*), Ifac(*), ntryh(4)
   SAVE ntryh
   DATA ntryh(1), ntryh(2), ntryh(3), ntryh(4)/4, 2, 3, 5/
-  !***FIRST EXECUTABLE STATEMENT  EZFFT1
+  !* FIRST EXECUTABLE STATEMENT  EZFFT1
   tpi = 8.*ATAN(1.)
   nl = N
   nf = 0

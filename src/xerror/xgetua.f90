@@ -1,15 +1,22 @@
-!DECK XGETUA
+!** XGETUA
 SUBROUTINE XGETUA(Iunita,N)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XGETUA
-  !***PURPOSE  Return unit number(s) to which error messages are being
+  !>
+  !***
+  !  Return unit number(s) to which error messages are being
   !            sent.
-  !***LIBRARY   SLATEC (XERROR)
-  !***CATEGORY  R3C
-  !***TYPE      ALL (XGETUA-A)
-  !***KEYWORDS  ERROR, XERROR
-  !***AUTHOR  Jones, R. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (XERROR)
+  !***
+  ! **Category:**  R3C
+  !***
+  ! **Type:**      ALL (XGETUA-A)
+  !***
+  ! **Keywords:**  ERROR, XERROR
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !        XGETUA may be called to determine the unit number or numbers
@@ -30,19 +37,22 @@ SUBROUTINE XGETUA(Iunita,N)
   !                error messages are being sent.  N will be in the
   !                range from 1 to 5.
   !
-  !***REFERENCES  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
+  !***
+  ! **References:**  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
   !                 Error-handling Package, SAND82-0800, Sandia
   !                 Laboratories, 1982.
-  !***ROUTINES CALLED  J4SAVE
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  J4SAVE
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790801  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  XGETUA
+  
   INTEGER i, index, Iunita, J4SAVE, N
   DIMENSION Iunita(5)
-  !***FIRST EXECUTABLE STATEMENT  XGETUA
+  !* FIRST EXECUTABLE STATEMENT  XGETUA
   N = J4SAVE(5,0,.FALSE.)
   DO i = 1, N
     index = i + 4

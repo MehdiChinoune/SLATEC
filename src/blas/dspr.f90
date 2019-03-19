@@ -1,17 +1,24 @@
-!DECK DSPR
+!** DSPR
 SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSPR
-  !***PURPOSE  Perform the symmetric rank 1 operation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B4
-  !***TYPE      DOUBLE PRECISION (DSPR-D)
-  !***KEYWORDS  LEVEL 2 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J. J., (ANL)
+  !>
+  !***
+  !  Perform the symmetric rank 1 operation.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (DSPR-D)
+  !***
+  ! **Keywords:**  LEVEL 2 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J. J., (ANL)
   !           Du Croz, J., (NAG)
   !           Hammarling, S., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  DSPR    performs the symmetric rank 1 operation
   !
@@ -73,16 +80,19 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
   !           AP is overwritten by the lower triangular part of the
   !           updated matrix.
   !
-  !***REFERENCES  Dongarra, J. J., Du Croz, J., Hammarling, S., and
+  !***
+  ! **References:**  Dongarra, J. J., Du Croz, J., Hammarling, S., and
   !                 Hanson, R. J.  An extended set of Fortran basic linear
   !                 algebra subprograms.  ACM TOMS, Vol. 14, No. 1,
   !                 pp. 1-17, March 1988.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  DSPR
+  
   !     .. Scalar Arguments ..
   REAL(8) :: Alpha
   INTEGER Incx, N
@@ -100,7 +110,7 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
   EXTERNAL LSAME
   !     .. External Subroutines ..
   EXTERNAL XERBLA
-  !***FIRST EXECUTABLE STATEMENT  DSPR
+  !* FIRST EXECUTABLE STATEMENT  DSPR
   !
   !     Test the input parameters.
   !

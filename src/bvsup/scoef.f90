@@ -1,18 +1,22 @@
-!DECK SCOEF
+!** SCOEF
 SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
     Cvec,Work,Iwork,Iflag,Nfcc)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SCOEF
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SCOEF-S, DCOEF-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SCOEF-S, DCOEF-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   ! INPUT TO SCOEF
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     YH = Matrix of homogeneous solutions.
   !     YP = Vector containing particular solution.
@@ -36,9 +40,9 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !     IWORK = Integer array of internal storage. Dimension must be .GE.
   !             3+NFCC
   !
-  ! **********************************************************************
+  !- *********************************************************************
   ! OUTPUT FROM SCOEF
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     COEF = Array containing superposition constants.
   !     IFLAG = Indicator of success from SUDS in solving the
@@ -49,19 +53,23 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !           = 3 For this value of an eigenparameter, the boundary
   !               equations have only the zero solution.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     Subroutine SCOEF solves for the superposition constants from the
   !     linear equations defined by the boundary conditions at X = Xfinal.
   !
   !                          B*YP + B*YH*COEF = BETA
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  BVSUP
-  !***ROUTINES CALLED  SDOT, SUDS, XGETF, XSETF
-  !***COMMON BLOCKS    ML5MCO
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **Routines called:**  SDOT, SUDS, XGETF, XSETF
+  !***
+  ! COMMON BLOCKS    ML5MCO
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -70,7 +78,7 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  SCOEF
+  
   REAL Ae, B, bbn, Beta, bn, brn, By, bykl, bys, Coef, cons, &
     Cvec, EPS, FOUru, gam, Re, SDOT, SQOvfl, SRU, TWOu
   REAL un, URO, Work, Yh, Yp, ypn
@@ -83,7 +91,7 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !
   !     SET UP MATRIX  B*YH  AND VECTOR  BETA - B*YP
   !
-  !***FIRST EXECUTABLE STATEMENT  SCOEF
+  !* FIRST EXECUTABLE STATEMENT  SCOEF
   ncomp2 = Ncomp/2
   DO k = 1, Nfcc
     DO j = 1, Nfc
@@ -113,7 +121,7 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   cons = ABS(Cvec(1))
   bys = ABS(By(1,1))
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     SOLVE LINEAR SYSTEM
   !
   Iflag = 0
@@ -129,7 +137,7 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
       CALL XSETF(nf)
       IF ( Nfcc==1 ) THEN
         !
-        ! **********************************************************************
+        !- *********************************************************************
         !     TESTING FOR EXISTENCE AND UNIQUENESS OF BOUNDARY-VALUE PROBLEM
         !     SOLUTION IN A SCALAR CASE
         !

@@ -1,14 +1,21 @@
-!DECK AI
+!** AI
 REAL FUNCTION AI(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  AI
-  !***PURPOSE  Evaluate the Airy function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10D
-  !***TYPE      SINGLE PRECISION (AI-S, DAI-D)
-  !***KEYWORDS  AIRY FUNCTION, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Evaluate the Airy function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10D
+  !***
+  ! **Type:**      SINGLE PRECISION (AI-S, DAI-D)
+  !***
+  ! **Keywords:**  AIRY FUNCTION, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! AI(X) computes the Airy function Ai(X)
   ! Series for AIF        on the interval -1.00000D+00 to  1.00000D+00
@@ -23,9 +30,12 @@ REAL FUNCTION AI(X)
   !                               significant figures required  15.19
   !                                    decimal places required  17.27
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  AIE, CSEVL, INITS, R1MACH, R9AIMP, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  AIE, CSEVL, INITS, R1MACH, R9AIMP, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -34,7 +44,7 @@ REAL FUNCTION AI(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  AI
+  
   REAL AIE, aifcs, aigcs, CSEVL, R1MACH, theta, X, x3sml, xm, &
     xmax, xmaxt, z
   INTEGER INITS, naif, naig
@@ -59,7 +69,7 @@ REAL FUNCTION AI(X)
   DATA aigcs(7)/.00000000000001392E0/
   DATA aigcs(8)/.00000000000000001E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  AI
+  !* FIRST EXECUTABLE STATEMENT  AI
   IF ( first ) THEN
     naif = INITS(aifcs,9,0.1*R1MACH(3))
     naig = INITS(aigcs,8,0.1*R1MACH(3))

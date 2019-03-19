@@ -1,22 +1,32 @@
-!DECK CATAN
+!** CATAN
 COMPLEX FUNCTION CATAN(Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CATAN
-  !***PURPOSE  Compute the complex arc tangent.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4A
-  !***TYPE      COMPLEX (CATAN-C)
-  !***KEYWORDS  ARC TANGENT, ELEMENTARY FUNCTIONS, FNLIB, TRIGONOMETRIC
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the complex arc tangent.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      COMPLEX (CATAN-C)
+  !***
+  ! **Keywords:**  ARC TANGENT, ELEMENTARY FUNCTIONS, FNLIB, TRIGONOMETRIC
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! CATAN(Z) calculates the complex trigonometric arc tangent of Z.
   ! The result is in units of radians, and the real part is in the first
   ! or fourth quadrant.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -24,7 +34,7 @@ COMPLEX FUNCTION CATAN(Z)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  CATAN
+  
   INTEGER i, nterms
   REAL pi2, r, R1MACH, r2, rmax, rmin, sqeps, twoi, x, xans, y, yans
   COMPLEX Z, z2
@@ -32,7 +42,7 @@ COMPLEX FUNCTION CATAN(Z)
   SAVE pi2, nterms, sqeps, rmin, rmax, first
   DATA pi2/1.57079632679489661923E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  CATAN
+  !* FIRST EXECUTABLE STATEMENT  CATAN
   IF ( first ) THEN
     ! NTERMS = LOG(EPS)/LOG(RBND) WHERE RBND = 0.1
     nterms = INT( -0.4343*LOG(R1MACH(3)) ) + 1

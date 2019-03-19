@@ -1,26 +1,33 @@
-!DECK BKIAS
+!** BKIAS
 SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BKIAS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BSKIN
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (BKIAS-S, DBKIAS-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BSKIN
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (BKIAS-S, DBKIAS-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     BKIAS computes repeated integrals of the K0 Bessel function
   !     by the asymptotic expansion
   !
-  !***SEE ALSO  BSKIN
-  !***ROUTINES CALLED  BDIFF, GAMRN, HKSEQ, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BSKIN
+  !***
+  ! **Routines called:**  BDIFF, GAMRN, HKSEQ, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  BKIAS
+  
   INTEGER i, ii, Ind, j, jmi, jn, k, kk, km, Ktrms, mm, mp, Ms, &
     N, Ierr
   REAL Ans, b, bnd, den1, den2, den3, er, err, fj, fk, fln, fm1, &
@@ -117,7 +124,7 @@ SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
     408000.0E0/
   DATA hrtpi/8.86226925452758014E-01/
   !
-  !***FIRST EXECUTABLE STATEMENT  BKIAS
+  !* FIRST EXECUTABLE STATEMENT  BKIAS
   Ierr = 0
   tol = MAX(R1MACH(4),1.0E-18)
   fln = N

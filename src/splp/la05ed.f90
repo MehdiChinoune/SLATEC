@@ -1,13 +1,17 @@
-!DECK LA05ED
+!** LA05ED
 SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Ia,Reals)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  LA05ED
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (LA05ES-S, LA05ED-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (LA05ES-S, LA05ED-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THIS SUBPROGRAM IS A SLIGHT MODIFICATION OF A SUBPROGRAM
   !     FROM THE C. 1979 AERE HARWELL LIBRARY.  THE NAME OF THE
@@ -21,22 +25,26 @@ SUBROUTINE LA05ED(A,Irn,Ip,N,Iw,Ia,Reals)
   !     THE USER AND AERE-UK.  ANY USAGE OF THE SANDIA WRITTEN CODES
   !     DSPLP( ) (WHICH USES THE HARWELL SUBROUTINES) IS PERMITTED.
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    LA05DD
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    LA05DD
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  LA05ED
+  
   INTEGER Ia, ipi, j, k, kl, kn, LCOl, LENl, LENu, LP, LROw, N, NCP, nz
   LOGICAL Reals
   REAL(8) :: A(*), SMAll
   INTEGER Irn(*), Iw(*)
   INTEGER Ip(*)
   COMMON /LA05DD/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
-  !***FIRST EXECUTABLE STATEMENT  LA05ED
+  !* FIRST EXECUTABLE STATEMENT  LA05ED
   NCP = NCP + 1
   !     COMPRESS FILE OF POSITIVE INTEGERS. ENTRY J STARTS AT IRN(IP(J))
   !  AND CONTAINS IW(J) INTEGERS,J=1,N. OTHER COMPONENTS OF IRN ARE ZERO.

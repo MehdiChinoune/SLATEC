@@ -1,36 +1,45 @@
-!DECK R9GMIT
+!** R9GMIT
 REAL FUNCTION R9GMIT(A,X,Algap1,Sgngam,Alx)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  R9GMIT
-  !***SUBSIDIARY
-  !***PURPOSE  Compute Tricomi's incomplete Gamma function for small
+  !>
+  !***
+  !  Compute Tricomi's incomplete Gamma function for small
   !            arguments.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7E
-  !***TYPE      SINGLE PRECISION (R9GMIT-S, D9GMIT-D)
-  !***KEYWORDS  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB, SMALL X,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7E
+  !***
+  ! **Type:**      SINGLE PRECISION (R9GMIT-S, D9GMIT-D)
+  !***
+  ! **Keywords:**  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB, SMALL X,
   !             SPECIAL FUNCTIONS, TRICOMI
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Compute Tricomi's incomplete gamma function for small X.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ALNGAM, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ALNGAM, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  !***END PROLOGUE  R9GMIT
+  
   REAL A, ae, aeps, alg2, Algap1, algs, ALNGAM, Alx, bot, eps, &
     fk, R1MACH, s, sgng2, Sgngam, t, te, X
   INTEGER k, m, ma
   SAVE eps, bot
   DATA eps, bot/2*0.0/
-  !***FIRST EXECUTABLE STATEMENT  R9GMIT
+  !* FIRST EXECUTABLE STATEMENT  R9GMIT
   IF ( eps==0.0 ) eps = 0.5*R1MACH(3)
   IF ( bot==0.0 ) bot = LOG(R1MACH(1))
   !

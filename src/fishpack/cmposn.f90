@@ -1,13 +1,17 @@
-!DECK CMPOSN
+!** CMPOSN
 SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CMPOSN
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CMGNBN
-  !***LIBRARY   SLATEC
-  !***TYPE      COMPLEX (POISN2-S, CMPOSN-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CMGNBN
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      COMPLEX (POISN2-S, CMPOSN-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Subroutine to solve Poisson's equation with Neumann boundary
   !     conditions.
@@ -18,16 +22,19 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !     MIXBND = 2 if have Neumann boundary conditions at bottom and
   !     Dirichlet condition at top.  (For this case, must have ISTAG = 1)
   !
-  !***SEE ALSO  CMGNBN
-  !***ROUTINES CALLED  C1MERG, CMPCSG, CMPTR3, CMPTRX
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CMGNBN
+  !***
+  ! **Routines called:**  C1MERG, CMPCSG, CMPTR3, CMPTRX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   920130  Modified to use merge routine C1MERG rather than deleted
   !           routine CMPMRG.  (WRB)
-  !***END PROLOGUE  CMPOSN
+  
   REAL fden, fistag, fnum
   INTEGER i, i1, i2, i2r, i2rby2, Idimq, ii, ip, ipstor, Istag, &
     j, jm1, jm2, jm3, jp1, jp2, jp3, jr, jr2, jstart
@@ -40,7 +47,7 @@ SUBROUTINE CMPOSN(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   EQUIVALENCE (k(2),k2)
   EQUIVALENCE (k(3),k3)
   EQUIVALENCE (k(4),k4)
-  !***FIRST EXECUTABLE STATEMENT  CMPOSN
+  !* FIRST EXECUTABLE STATEMENT  CMPOSN
   fistag = 3 - Istag
   fnum = 1./Istag
   fden = 0.5*(Istag-1)

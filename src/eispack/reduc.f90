@@ -1,15 +1,22 @@
-!DECK REDUC
+!** REDUC
 SUBROUTINE REDUC(Nm,N,A,B,Dl,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  REDUC
-  !***PURPOSE  Reduce a generalized symmetric eigenproblem to a standard
+  !>
+  !***
+  !  Reduce a generalized symmetric eigenproblem to a standard
   !            symmetric eigenproblem using Cholesky factorization.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C1C
-  !***TYPE      SINGLE PRECISION (REDUC-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C1C
+  !***
+  ! **Type:**      SINGLE PRECISION (REDUC-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure REDUC1,
   !     NUM. MATH. 11, 99-110(1968) by Martin and Wilkinson.
@@ -59,25 +66,28 @@ SUBROUTINE REDUC(Nm,N,A,B,Dl,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  REDUC
+  
   !
   INTEGER i, j, k, N, i1, j1, Nm, nn, Ierr
   REAL A(Nm,*), B(Nm,*), Dl(*)
   REAL x, y
   !
-  !***FIRST EXECUTABLE STATEMENT  REDUC
+  !* FIRST EXECUTABLE STATEMENT  REDUC
   Ierr = 0
   nn = ABS(N)
   IF ( N>=0 ) THEN

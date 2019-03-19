@@ -1,18 +1,23 @@
-!DECK DGVEC
+!** DGVEC
 SUBROUTINE DGVEC(X,G)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGVEC
-  !***PURPOSE  Subsidiary to
-  !***LIBRARY   SLATEC
-  !***AUTHOR  (UNKNOWN)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !>
+  !***
+  !  Subsidiary to
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DGVEC
+  
   REAL(8) :: X, G
   DIMENSION G(*)
-  !***FIRST EXECUTABLE STATEMENT  DGVEC
+  !* FIRST EXECUTABLE STATEMENT  DGVEC
   G(1) = 0.0D0
   G(2) = 1.0D0 + COS(X)
 END SUBROUTINE DGVEC

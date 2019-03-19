@@ -1,16 +1,23 @@
-!DECK DBESI1
+!** DBESI1
 REAL(8) FUNCTION DBESI1(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBESI1
-  !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
+  !>
+  !***
+  !  Compute the modified (hyperbolic) Bessel function of the
   !            first kind of order one.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B1
-  !***TYPE      DOUBLE PRECISION (BESI1-S, DBESI1-D)
-  !***KEYWORDS  FIRST KIND, FNLIB, HYPERBOLIC BESSEL FUNCTION,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B1
+  !***
+  ! **Type:**      DOUBLE PRECISION (BESI1-S, DBESI1-D)
+  !***
+  ! **Keywords:**  FIRST KIND, FNLIB, HYPERBOLIC BESSEL FUNCTION,
   !             MODIFIED BESSEL FUNCTION, ORDER ONE, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DBESI1(X) calculates the double precision modified (hyperbolic)
   ! Bessel function of the first kind of order one and double precision
@@ -22,15 +29,18 @@ REAL(8) FUNCTION DBESI1(X)
   !                               significant figures required  31.45
   !                                    decimal places required  32.46
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DBSI1E, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DBSI1E, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DBESI1
+  
   INTEGER INITDS, nti1
   REAL(8) :: X, bi1cs(17), xmax, xmin, xsml, y, D1MACH, DCSEVL, DBSI1E
   LOGICAL first
@@ -53,7 +63,7 @@ REAL(8) FUNCTION DBESI1(X)
   DATA bi1cs(16)/ + .69732310939194709333333333333333D-29/
   DATA bi1cs(17)/ + .14367948220620800000000000000000D-31/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DBESI1
+  !* FIRST EXECUTABLE STATEMENT  DBESI1
   IF ( first ) THEN
     nti1 = INITDS(bi1cs,17,0.1*REAL(D1MACH(3)))
     xmin = 2.0D0*D1MACH(1)

@@ -1,20 +1,27 @@
-!DECK HSTCSP
+!** HSTCSP
 SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HSTCSP
-  !***PURPOSE  Solve the standard five-point finite difference
+  !>
+  !***
+  !  Solve the standard five-point finite difference
   !            approximation on a staggered grid to the modified Helmholtz
   !            equation in spherical coordinates assuming axisymmetry
   !            (no dependence on longitude).
-  !***LIBRARY   SLATEC (FISHPACK)
-  !***CATEGORY  I2B1A1A
-  !***TYPE      SINGLE PRECISION (HSTCSP-S)
-  !***KEYWORDS  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE, SPHERICAL
-  !***AUTHOR  Adams, J., (NCAR)
+  !***
+  ! **Library:**   SLATEC (FISHPACK)
+  !***
+  ! **Category:**  I2B1A1A
+  !***
+  ! **Type:**      SINGLE PRECISION (HSTCSP-S)
+  !***
+  ! **Keywords:**  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE, SPHERICAL
+  !***
+  ! **Author:**  Adams, J., (NCAR)
   !           Swarztrauber, P. N., (NCAR)
   !           Sweet, R., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     HSTCSP solves the standard five-point finite difference
   !     approximation on a staggered grid to the modified Helmholtz
@@ -311,7 +318,7 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     intermediate values that must not be destroyed if HSTCSP
   !     will be called again with INTL = 1.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !    * * * * * * *   Program Specifications    * * * * * * * * * * * *
   !
@@ -382,25 +389,28 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   !
-  !***REFERENCES  P. N. Swarztrauber and R. Sweet, Efficient Fortran
+  !***
+  ! **References:**  P. N. Swarztrauber and R. Sweet, Efficient Fortran
   !                 subprograms for the solution of elliptic equations,
   !                 NCAR TN/IA-109, July 1975, 138 pp.
   !               P. N. Swarztrauber, A direct method for the discrete
   !                 solution of separable elliptic equations, SIAM Journal
   !                 on Numerical Analysis 11, (1974), pp. 1136-1150.
-  !***ROUTINES CALLED  HSTCS1, PIMACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  HSTCS1, PIMACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  HSTCSP
+  
   REAL A, B, Bda, Bdb, Bdc, Bdd, C, D, dum, Elmbda, F, Pertrb, pi, PIMACH, W
   INTEGER Idimf, ierr1, Ierror, Intl, iwan, iwbm, iwbn, iwcm, iwcn, &
     iwrsq, iwsnth, iwwrk, M, Mbdcnd, N, Nbdcnd
   DIMENSION F(Idimf,*), Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
-  !***FIRST EXECUTABLE STATEMENT  HSTCSP
+  !* FIRST EXECUTABLE STATEMENT  HSTCSP
   pi = PIMACH(dum)
   !
   !     CHECK FOR INVALID INPUT PARAMETERS

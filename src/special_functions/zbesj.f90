@@ -1,18 +1,25 @@
-!DECK ZBESJ
+!** ZBESJ
 SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZBESJ
-  !***PURPOSE  Compute a sequence of the Bessel functions J(a,z) for
+  !>
+  !***
+  !  Compute a sequence of the Bessel functions J(a,z) for
   !            complex argument z and real nonnegative orders a=b,b+1,
   !            b+2,... where b>0.  A scaling option is available to
   !            help avoid overflow.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10A4
-  !***TYPE      COMPLEX (CBESJ-C, ZBESJ-C)
-  !***KEYWORDS  BESSEL FUNCTIONS OF COMPLEX ARGUMENT,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10A4
+  !***
+  ! **Type:**      COMPLEX (CBESJ-C, ZBESJ-C)
+  !***
+  ! **Keywords:**  BESSEL FUNCTIONS OF COMPLEX ARGUMENT,
   !             BESSEL FUNCTIONS OF THE FIRST KIND, J BESSEL FUNCTIONS
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !                      ***A DOUBLE PRECISION ROUTINE***
   !         On KODE=1, ZBESJ computes an N member sequence of complex
@@ -60,7 +67,7 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !                    IERR=5  Algorithmic error - NO COMPUTATION
   !                            (Termination condition not met)
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !         The computation is carried out by the formulae
   !
@@ -125,7 +132,8 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !         the principal phase angle is on the order of +P, -P, PI/2-P,
   !         or -PI/2+P.
   !
-  !***REFERENCES  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
+  !***
+  ! **References:**  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
   !                 matical Functions, National Bureau of Standards
   !                 Applied Mathematics Series 55, U. S. Department
   !                 of Commerce, Tenth Printing (1972) or later.
@@ -145,14 +153,16 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !                 Transactions on Mathematical Software, 12 (September
   !                 1986), pp. 265-273.
   !
-  !***ROUTINES CALLED  D1MACH, I1MACH, ZABS, ZBINU
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, I1MACH, ZABS, ZBINU
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   890801  REVISION DATE from Version 3.2
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  !***END PROLOGUE  ZBESJ
+  
   !
   !     COMPLEX CI,CSGN,CY,Z,ZN
   REAL(8) :: aa, alim, arg, cii, csgni, csgnr, Cyi, Cyr, dig, &
@@ -165,7 +175,7 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   EXTERNAL ZABS
   DATA hpi/1.57079632679489662D0/
   !
-  !***FIRST EXECUTABLE STATEMENT  ZBESJ
+  !* FIRST EXECUTABLE STATEMENT  ZBESJ
   Ierr = 0
   Nz = 0
   IF ( Fnu<0.0D0 ) Ierr = 1

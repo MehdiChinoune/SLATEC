@@ -1,27 +1,34 @@
-!DECK CDRIV2
+!** CDRIV2
 SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     Leniw,G,Ierflg)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CDRIV2
-  !***PURPOSE  The function of CDRIV2 is to solve N ordinary differential
+  !>
+  !***
+  !  The function of CDRIV2 is to solve N ordinary differential
   !            equations of the form dY(I)/dT = F(Y(I),T), given the
   !            initial conditions Y(I) = YI.  The program has options to
   !            allow the solution of both stiff and non-stiff differential
   !            equations.  CDRIV2 allows complex-valued differential
   !            equations.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***CATEGORY  I1A2, I1A1B
-  !***TYPE      COMPLEX (SDRIV2-S, DDRIV2-D, CDRIV2-C)
-  !***KEYWORDS  COMPLEX VALUED, GEAR'S METHOD, INITIAL VALUE PROBLEMS,
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Category:**  I1A2, I1A1B
+  !***
+  ! **Type:**      COMPLEX (SDRIV2-S, DDRIV2-D, CDRIV2-C)
+  !***
+  ! **Keywords:**  COMPLEX VALUED, GEAR'S METHOD, INITIAL VALUE PROBLEMS,
   !             ODE, ORDINARY DIFFERENTIAL EQUATIONS, SDRIVE, STIFF
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  I.  PARAMETERS  .....................................................
   !
@@ -332,13 +339,16 @@ SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   !          100  FORMAT(...)
   !               END (Sample)
   !
-  !***REFERENCES  C. W. Gear, Numerical Initial Value Problems in
+  !***
+  ! **References:**  C. W. Gear, Numerical Initial Value Problems in
   !                 Ordinary Differential Equations, Prentice-Hall, 1971.
-  !***ROUTINES CALLED  CDRIV3, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDRIV3, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  CDRIV2
+  
   EXTERNAL F, G
   COMPLEX Work(*), Y(*)
   REAL Eps, Ewt, ewtcom(1), G, hmax, T, Tout
@@ -347,7 +357,7 @@ SUBROUTINE CDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     Mstate, mu, mxord, MXSTEP, N, nde, Nroot, nstate, ntask
   CHARACTER intgr1*8
   PARAMETER (IMPL=0,MXSTEP=1000)
-  !***FIRST EXECUTABLE STATEMENT  CDRIV2
+  !* FIRST EXECUTABLE STATEMENT  CDRIV2
   IF ( ABS(Mstate)==9 ) THEN
     Ierflg = 999
     CALL XERMSG('SLATEC','CDRIV2',&

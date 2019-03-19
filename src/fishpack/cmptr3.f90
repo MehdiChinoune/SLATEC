@@ -1,24 +1,31 @@
-!DECK CMPTR3
+!** CMPTR3
 SUBROUTINE CMPTR3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CMPTR3
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CMGNBN
-  !***LIBRARY   SLATEC
-  !***TYPE      COMPLEX (TRI3-S, CMPTR3-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CMGNBN
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      COMPLEX (TRI3-S, CMPTR3-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Subroutine to solve tridiagonal systems.
   !
-  !***SEE ALSO  CMGNBN
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CMGNBN
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  CMPTR3
+  
   INTEGER i, ip, K, k1, k2, k2k3k4, k3, k4, kint1, kint2, kint3, &
     l1, l2, l3, lint1, lint2, lint3, M, mm1, n
   COMPLEX A, B, C, Y1, Y2, Y3, Tcos, D, W1, W2, W3, x, xx, z
@@ -26,7 +33,7 @@ SUBROUTINE CMPTR3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
     D(*), W1(*), W2(*), W3(*)
   INTEGER k1p1, k2p1, k3p1, k4p1
   !
-  !***FIRST EXECUTABLE STATEMENT  CMPTR3
+  !* FIRST EXECUTABLE STATEMENT  CMPTR3
   mm1 = M - 1
   k1 = K(1)
   k2 = K(2)

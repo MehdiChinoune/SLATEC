@@ -1,31 +1,41 @@
-!DECK DGAMR
+!** DGAMR
 REAL(8) FUNCTION DGAMR(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGAMR
-  !***PURPOSE  Compute the reciprocal of the Gamma function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7A
-  !***TYPE      DOUBLE PRECISION (GAMR-S, DGAMR-D, CGAMR-C)
-  !***KEYWORDS  FNLIB, RECIPROCAL GAMMA FUNCTION, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the reciprocal of the Gamma function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7A
+  !***
+  ! **Type:**      DOUBLE PRECISION (GAMR-S, DGAMR-D, CGAMR-C)
+  !***
+  ! **Keywords:**  FNLIB, RECIPROCAL GAMMA FUNCTION, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DGAMR(X) calculates the double precision reciprocal of the
   ! complete Gamma function for double precision argument X.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DGAMMA, DLGAMS, XERCLR, XGETF, XSETF
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DGAMMA, DLGAMS, XERCLR, XGETF, XSETF
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  !***END PROLOGUE  DGAMR
+  
   INTEGER irold
   REAL(8) :: X, alngx, sgngx, DGAMMA
   EXTERNAL DGAMMA
-  !***FIRST EXECUTABLE STATEMENT  DGAMR
+  !* FIRST EXECUTABLE STATEMENT  DGAMR
   DGAMR = 0.0D0
   IF ( X<=0.0D0.AND.AINT(X)==X ) RETURN
   !

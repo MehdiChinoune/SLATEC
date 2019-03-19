@@ -1,18 +1,25 @@
-!DECK CHER
+!** CHER
 SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHER
-  !***PURPOSE  Perform Hermitian rank 1 update of a complex Hermitian
+  !>
+  !***
+  !  Perform Hermitian rank 1 update of a complex Hermitian
   !            matrix.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B4
-  !***TYPE      COMPLEX (SHER-S, DHER-D, CHER-C)
-  !***KEYWORDS  LEVEL 2 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J. J., (ANL)
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      COMPLEX (SHER-S, DHER-D, CHER-C)
+  !***
+  ! **Keywords:**  LEVEL 2 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J. J., (ANL)
   !           Du Croz, J., (NAG)
   !           Hammarling, S., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  CHER   performs the hermitian rank 1 operation
   !
@@ -80,16 +87,19 @@ SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
   !           max( 1, n ).
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J. J., Du Croz, J., Hammarling, S., and
+  !***
+  ! **References:**  Dongarra, J. J., Du Croz, J., Hammarling, S., and
   !                 Hanson, R. J.  An extended set of Fortran basic linear
   !                 algebra subprograms.  ACM TOMS, Vol. 14, No. 1,
   !                 pp. 1-17, March 1988.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  CHER
+  
   !     .. Scalar Arguments ..
   REAL Alpha
   INTEGER Incx, Lda, N
@@ -109,7 +119,7 @@ SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX, REAL
-  !***FIRST EXECUTABLE STATEMENT  CHER
+  !* FIRST EXECUTABLE STATEMENT  CHER
   !
   !     Test the input parameters.
   !

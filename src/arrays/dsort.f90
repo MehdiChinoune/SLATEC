@@ -1,18 +1,25 @@
-!DECK DSORT
+!** DSORT
 SUBROUTINE DSORT(Dx,Dy,N,Kflag)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSORT
-  !***PURPOSE  Sort an array and optionally make the same interchanges in
+  !>
+  !***
+  !  Sort an array and optionally make the same interchanges in
   !            an auxiliary array.  The array may be sorted in increasing
   !            or decreasing order.  A slightly modified QUICKSORT
   !            algorithm is used.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  N6A2B
-  !***TYPE      DOUBLE PRECISION (SSORT-S, DSORT-D, ISORT-I)
-  !***KEYWORDS  SINGLETON QUICKSORT, SORT, SORTING
-  !***AUTHOR  Jones, R. E., (SNLA)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  N6A2B
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSORT-S, DSORT-D, ISORT-I)
+  !***
+  ! **Keywords:**  SINGLETON QUICKSORT, SORT, SORTING
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
   !           Wisniewski, J. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   DSORT sorts array DX and optionally makes the same interchanges in
   !   array DY.  The array DX may be sorted in increasing order or
@@ -28,11 +35,14 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
   !            = -1  means sort DX in decreasing order (ignoring DY)
   !            = -2  means sort DX in decreasing order and carry DY along.
   !
-  !***REFERENCES  R. C. Singleton, Algorithm 347, An efficient algorithm
+  !***
+  ! **References:**  R. C. Singleton, Algorithm 347, An efficient algorithm
   !                 for sorting with minimal storage, Communications of
   !                 the ACM, 12, 3 (1969), pp. 185-187.
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   761101  DATE WRITTEN
   !   761118  Modified to use the Singleton quicksort algorithm.  (JAW)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
@@ -48,7 +58,7 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
   !   920519  Clarified error messages.  (DWL)
   !   920801  Declarations section rebuilt and code restructured to use
   !           IF-THEN-ELSE-ENDIF.  (RWC, WRB)
-  !***END PROLOGUE  DSORT
+  
   !     .. Scalar Arguments ..
   INTEGER Kflag, N
   !     .. Array Arguments ..
@@ -62,7 +72,7 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, INT
-  !***FIRST EXECUTABLE STATEMENT  DSORT
+  !* FIRST EXECUTABLE STATEMENT  DSORT
   nn = N
   IF ( nn<1 ) THEN
     CALL XERMSG('SLATEC','DSORT',&

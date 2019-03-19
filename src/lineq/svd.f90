@@ -1,14 +1,18 @@
-!DECK SVD
+!** SVD
 SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SVD
-  !***SUBSIDIARY
-  !***PURPOSE  Perform the singular value decomposition of a rectangular
+  !>
+  !***
+  !  Perform the singular value decomposition of a rectangular
   !            matrix.
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SVD-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SVD-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure SVD,
   !     NUM. MATH. 14, 403-420(1970) by Golub and Reinsch.
@@ -80,15 +84,18 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***SEE ALSO  EISDOC
-  !***ROUTINES CALLED  PYTHAG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  EISDOC
+  !***
+  ! **Routines called:**  PYTHAG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  SVD
+  
   !
   INTEGER i, j, k, l, M, N, ii, i1, kk, k1, ll, l1, mn, Nm, &
     its, Ierr
@@ -97,7 +104,7 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
   REAL PYTHAG
   LOGICAL Matu, Matv
   !
-  !***FIRST EXECUTABLE STATEMENT  SVD
+  !* FIRST EXECUTABLE STATEMENT  SVD
   Ierr = 0
   !
   DO i = 1, M

@@ -1,26 +1,33 @@
-!DECK DWNLT3
+!** DWNLT3
 SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DWNLT3
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to WNLIT
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (WNLT3-S, DWNLT3-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to WNLIT
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (WNLT3-S, DWNLT3-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Haskell, K. H., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Perform column interchange.
   !     Exchange elements of permuted index vector and perform column
   !     interchanges.
   !
-  !***SEE ALSO  DWNLIT
-  !***ROUTINES CALLED  DSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DWNLIT
+  !***
+  ! **Routines called:**  DSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
   !   900604  DP version created from SP version.  (RWC)
-  !***END PROLOGUE  DWNLT3
+  
   INTEGER I, Imax, Ipivot(*), M, Mdw
   REAL(8) :: H(*), W(Mdw,*)
   !
@@ -29,7 +36,7 @@ SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   REAL(8) :: t
   INTEGER itemp
   !
-  !***FIRST EXECUTABLE STATEMENT  DWNLT3
+  !* FIRST EXECUTABLE STATEMENT  DWNLT3
   IF ( Imax/=I ) THEN
     itemp = Ipivot(I)
     Ipivot(I) = Ipivot(Imax)

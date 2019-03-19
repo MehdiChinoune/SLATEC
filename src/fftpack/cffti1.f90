@@ -1,15 +1,22 @@
-!DECK CFFTI1
+!** CFFTI1
 SUBROUTINE CFFTI1(N,Wa,Ifac)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CFFTI1
-  !***PURPOSE  Initialize a real and an integer work array for CFFTF1 and
+  !>
+  !***
+  !  Initialize a real and an integer work array for CFFTF1 and
   !            CFFTB1.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A2
-  !***TYPE      COMPLEX (RFFTI1-S, CFFTI1-C)
-  !***KEYWORDS  FFTPACK, FOURIER TRANSFORM
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A2
+  !***
+  ! **Type:**      COMPLEX (RFFTI1-S, CFFTI1-C)
+  !***
+  ! **Keywords:**  FFTPACK, FOURIER TRANSFORM
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !  Subroutine CFFTI1 initializes the work arrays WA and IFAC which are
   !  used in both CFFTF1 and CFFTB1.  The prime factorization of N and a
@@ -32,11 +39,14 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
   !          WA and IFAC must not be changed between calls of CFFTF1 or
   !          CFFTB1.
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -51,7 +61,7 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CFFTI1
+  
   REAL arg, argh, argld, fi, tpi, Wa
   INTEGER i, i1, ib, ido, idot, Ifac, ii, ip, ipm, j, k1, l1, &
     l2, ld, N, nf, nl, nq, nr, ntry
@@ -59,7 +69,7 @@ SUBROUTINE CFFTI1(N,Wa,Ifac)
   DIMENSION Wa(*), Ifac(*), ntryh(4)
   SAVE ntryh
   DATA ntryh(1), ntryh(2), ntryh(3), ntryh(4)/3, 4, 2, 5/
-  !***FIRST EXECUTABLE STATEMENT  CFFTI1
+  !* FIRST EXECUTABLE STATEMENT  CFFTI1
   nl = N
   nf = 0
   j = 0

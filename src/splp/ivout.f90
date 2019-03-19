@@ -1,14 +1,18 @@
-!DECK IVOUT
+!** IVOUT
 SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  IVOUT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      INTEGER (IVOUT-I)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      INTEGER (IVOUT-I)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Wisniewski, J. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     INTEGER VECTOR OUTPUT ROUTINE.
   !
@@ -42,21 +46,24 @@ SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
   !     IDIGIT = -6
   !     CALL IVOUT(N,ICOSTS,'(''1COSTS OF PURCHASES'')',IDIGIT)
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  I1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  I1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
-  !***END PROLOGUE  IVOUT
+  
   INTEGER i, I1MACH, Idigit, Ix, j, k1, k2, lout, N, ndigit
   DIMENSION Ix(*)
   CHARACTER Ifmt*(*)
   !
   !     GET THE UNIT NUMBER WHERE OUTPUT WILL BE WRITTEN.
-  !***FIRST EXECUTABLE STATEMENT  IVOUT
+  !* FIRST EXECUTABLE STATEMENT  IVOUT
   j = 2
   lout = I1MACH(j)
   WRITE (lout,Ifmt)

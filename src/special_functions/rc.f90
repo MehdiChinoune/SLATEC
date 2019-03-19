@@ -1,18 +1,24 @@
-!DECK RC
+!** RC
 REAL FUNCTION RC(X,Y,Ier)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RC
-  !***PURPOSE  Calculate an approximation to
+  !>
+  !***
+  !  Calculate an approximation to
   !             RC(X,Y) = Integral from zero to infinity of
   !                              -1/2     -1
   !                    (1/2)(t+X)    (t+Y)  dt,
   !            where X is nonnegative and Y is positive.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C14
-  !***TYPE      SINGLE PRECISION (RC-S, DRC-D)
-  !***KEYWORDS  DUPLICATION THEOREM, ELEMENTARY FUNCTIONS,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C14
+  !***
+  ! **Type:**      SINGLE PRECISION (RC-S, DRC-D)
+  !***
+  ! **Keywords:**  DUPLICATION THEOREM, ELEMENTARY FUNCTIONS,
   !             ELLIPTIC INTEGRAL, TAYLOR SERIES
-  !***AUTHOR  Carlson, B. C.
+  !***
+  ! **Author:**  Carlson, B. C.
   !             Ames Laboratory-DOE
   !             Iowa State University
   !             Ames, IA  50011
@@ -23,7 +29,8 @@ REAL FUNCTION RC(X,Y,Ier)
   !           Pexton, R. L.
   !             Lawrence Livermore National Laboratory
   !             Livermore, CA  94550
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   1.     RC
   !          Standard FORTRAN function routine
@@ -137,7 +144,7 @@ REAL FUNCTION RC(X,Y,Ier)
   !                    decimal digits of accuracy at the expense of one or
   !                    two more iterations of the duplication theorem.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !   RC Special Comments
   !
@@ -242,7 +249,8 @@ REAL FUNCTION RC(X,Y,Ier)
   !
   !   --------------------------------------------------------------------
   !
-  !***REFERENCES  B. C. Carlson and E. M. Notis, Algorithms for incomplete
+  !***
+  ! **References:**  B. C. Carlson and E. M. Notis, Algorithms for incomplete
   !                 elliptic integrals, ACM Transactions on Mathematical
   !                 Software 7, 3 (September 1981), pp. 398-403.
   !               B. C. Carlson, Computing elliptic integrals by
@@ -251,8 +259,10 @@ REAL FUNCTION RC(X,Y,Ier)
   !               B. C. Carlson, Elliptic integrals of the first kind,
   !                 SIAM Journal of Mathematical Analysis 8, (1977),
   !                 pp. 231-242.
-  !***ROUTINES CALLED  R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891009  Removed unreferenced statement labels.  (WRB)
@@ -264,7 +274,7 @@ REAL FUNCTION RC(X,Y,Ier)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  RC
+  
   REAL R1MACH
   CHARACTER(16) :: xern3, xern4, xern5
   INTEGER Ier
@@ -274,7 +284,7 @@ REAL FUNCTION RC(X,Y,Ier)
   SAVE errtol, lolim, uplim, c1, c2, first
   DATA first/.TRUE./
   !
-  !***FIRST EXECUTABLE STATEMENT  RC
+  !* FIRST EXECUTABLE STATEMENT  RC
   IF ( first ) THEN
     errtol = (R1MACH(3)/16.0E0)**(1.0E0/6.0E0)
     lolim = 5.0E0*R1MACH(1)

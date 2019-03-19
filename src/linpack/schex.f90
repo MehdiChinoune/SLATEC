@@ -1,18 +1,25 @@
-!DECK SCHEX
+!** SCHEX
 SUBROUTINE SCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SCHEX
-  !***PURPOSE  Update the Cholesky factorization  A=TRANS(R)*R  of A
+  !>
+  !***
+  !  Update the Cholesky factorization  A=TRANS(R)*R  of A
   !            positive definite matrix A of order P under diagonal
   !            permutations of the form TRANS(E)*A*E, where E is a
   !            permutation matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D7B
-  !***TYPE      SINGLE PRECISION (SCHEX-S, DCHEX-D, CCHEX-C)
-  !***KEYWORDS  CHOLESKY DECOMPOSITION, EXCHANGE, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D7B
+  !***
+  ! **Type:**      SINGLE PRECISION (SCHEX-S, DCHEX-D, CCHEX-C)
+  !***
+  ! **Keywords:**  CHOLESKY DECOMPOSITION, EXCHANGE, LINEAR ALGEBRA, LINPACK,
   !             MATRIX, POSITIVE DEFINITE
-  !***AUTHOR  Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Stewart, G. W., (U. of Maryland)
+  !***
+  ! **Description:**
   !
   !     SCHEX updates the Cholesky factorization
   !
@@ -116,10 +123,13 @@ SUBROUTINE SCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
   !         S      REAL(P).
   !                S contains the sines of the transforming rotations.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SROTG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SROTG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -127,7 +137,7 @@ SUBROUTINE SCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SCHEX
+  
   INTEGER Ldr, P, K, L, Ldz, Nz, Job
   REAL R(Ldr,*), Z(Ldz,*), S(*)
   REAL C(*)
@@ -137,7 +147,7 @@ SUBROUTINE SCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
   !
   !     INITIALIZE
   !
-  !***FIRST EXECUTABLE STATEMENT  SCHEX
+  !* FIRST EXECUTABLE STATEMENT  SCHEX
   km1 = K - 1
   kp1 = K + 1
   lmk = L - K

@@ -1,13 +1,17 @@
-!DECK FDJAC1
+!** FDJAC1
 SUBROUTINE FDJAC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  FDJAC1
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SNSQ and SNSQE
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (FDJAC1-S, DFDJC1-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SNSQ and SNSQE
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (FDJAC1-S, DFDJC1-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This subroutine computes a forward-difference approximation
   !     to the N by N Jacobian matrix associated with a specified
@@ -80,9 +84,12 @@ SUBROUTINE FDJAC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !         least N, then the Jacobian is considered dense, and WA2 is
   !         not referenced.
   !
-  !***SEE ALSO  SNSQ, SNSQE
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SNSQ, SNSQE
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -90,7 +97,7 @@ SUBROUTINE FDJAC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  FDJAC1
+  
   INTEGER N, Ldfjac, Iflag, Ml, Mu
   REAL Epsfcn
   REAL X(*), Fvec(*), Fjac(Ldfjac,*), Wa1(*), Wa2(*)
@@ -99,7 +106,7 @@ SUBROUTINE FDJAC1(FCN,N,X,Fvec,Fjac,Ldfjac,Iflag,Ml,Mu,Epsfcn,Wa1,Wa2)
   REAL R1MACH
   SAVE zero
   DATA zero/0.0E0/
-  !***FIRST EXECUTABLE STATEMENT  FDJAC1
+  !* FIRST EXECUTABLE STATEMENT  FDJAC1
   epsmch = R1MACH(4)
   !
   eps = SQRT(MAX(Epsfcn,epsmch))

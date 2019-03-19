@@ -1,14 +1,21 @@
-!DECK DGBFA
+!** DGBFA
 SUBROUTINE DGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGBFA
-  !***PURPOSE  Factor a band matrix using Gaussian elimination.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2A2
-  !***TYPE      DOUBLE PRECISION (SGBFA-S, DGBFA-D, CGBFA-C)
-  !***KEYWORDS  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Factor a band matrix using Gaussian elimination.
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2A2
+  !***
+  ! **Type:**      DOUBLE PRECISION (SGBFA-S, DGBFA-D, CGBFA-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DGBFA factors a double precision band matrix by elimination.
   !
@@ -82,10 +89,13 @@ SUBROUTINE DGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !           The  ML+MU by ML+MU  upper left triangle and the
   !           ML by ML  lower right triangle are not referenced.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DSCAL, IDAMAX
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DSCAL, IDAMAX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -94,7 +104,7 @@ SUBROUTINE DGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DGBFA
+  
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
   REAL(8) :: Abd(Lda,*)
   !
@@ -102,7 +112,7 @@ SUBROUTINE DGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   INTEGER i, IDAMAX, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, &
     mm, nm1
   !
-  !***FIRST EXECUTABLE STATEMENT  DGBFA
+  !* FIRST EXECUTABLE STATEMENT  DGBFA
   m = Ml + Mu + 1
   Info = 0
   !

@@ -1,13 +1,17 @@
-!DECK CSERI
+!** CSERI
 SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CSERI
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBESI and CBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CSERI-A, ZSERI-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBESI and CBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CSERI-A, ZSERI-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     CSERI COMPUTES THE I BESSEL FUNCTION FOR REAL(Z).GE.0.0 BY
   !     MEANS OF THE POWER SERIES FOR LARGE ABS(Z) IN THE
@@ -17,12 +21,15 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   !     CONDITION ABS(Z).LE.2*SQRT(FNU+1) WAS VIOLATED AND THE
   !     COMPUTATION MUST BE COMPLETED IN ANOTHER ROUTINE WITH N=N-ABS(NZ).
   !
-  !***SEE ALSO  CBESI, CBESK
-  !***ROUTINES CALLED  CUCHK, GAMLN, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBESI, CBESK
+  !***
+  ! **Routines called:**  CUCHK, GAMLN, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CSERI
+  
   COMPLEX ak1, ck, coef, cone, crsc, cz, czero, hz, rz, s1, s2, &
     w, Y, Z
   REAL aa, acz, ak, Alim, arm, ascle, atol, az, dfnu, Elim, Fnu, &
@@ -30,7 +37,7 @@ SUBROUTINE CSERI(Z,Fnu,Kode,N,Y,Nz,Tol,Elim,Alim)
   INTEGER i, ib, idum, iflag, il, k, Kode, l, m, N, nn, nw, Nz
   DIMENSION Y(N), w(2)
   DATA czero, cone/(0.0E0,0.0E0), (1.0E0,0.0E0)/
-  !***FIRST EXECUTABLE STATEMENT  CSERI
+  !* FIRST EXECUTABLE STATEMENT  CSERI
   Nz = 0
   az = ABS(Z)
   IF ( az==0.0E0 ) GOTO 500

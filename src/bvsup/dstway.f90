@@ -1,22 +1,30 @@
-!DECK DSTWAY
+!** DSTWAY
 SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSTWAY
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (STWAY-S, DSTWAY-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (STWAY-S, DSTWAY-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !  This subroutine stores (recalls) integration data in the event
   !  that a restart is needed (the homogeneous solution vectors become
   !  too dependent to continue).
   !
-  !***SEE ALSO  DBVSUP
-  !***ROUTINES CALLED  DSTOR1
-  !***COMMON BLOCKS    DML15T, DML18J, DML8SZ
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBVSUP
+  !***
+  ! **Routines called:**  DSTOR1
+  !***
+  ! COMMON BLOCKS    DML15T, DML18J, DML8SZ
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890921  Realigned order of variables in certain COMMON blocks.
@@ -24,7 +32,7 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DSTWAY
+  
   !
   INTEGER ICOco, IGOfx, INDpvt, INFo, INHomo, Inout, INTeg, ISTkop, &
     IVP, j, k, KNSwot, ko, KOP, ks, ksj, LOTjp, MNSwot, &
@@ -40,7 +48,7 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
     NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
     NUMort, NFCc, ICOco
   !
-  !***FIRST EXECUTABLE STATEMENT  DSTWAY
+  !* FIRST EXECUTABLE STATEMENT  DSTWAY
   IF ( Inout==1 ) THEN
     !
     !        RECALL FROM STOWA ARRAY AND ISTKOP

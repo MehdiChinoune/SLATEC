@@ -1,17 +1,24 @@
-!DECK SSPMV
+!** SSPMV
 SUBROUTINE SSPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSPMV
-  !***PURPOSE  Perform the matrix-vector operation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B4
-  !***TYPE      SINGLE PRECISION (SSPMV-S, DSPMV-D, CSPMV-C)
-  !***KEYWORDS  LEVEL 2 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J. J., (ANL)
+  !>
+  !***
+  !  Perform the matrix-vector operation.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SSPMV-S, DSPMV-D, CSPMV-C)
+  !***
+  ! **Keywords:**  LEVEL 2 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J. J., (ANL)
   !           Du Croz, J., (NAG)
   !           Hammarling, S., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  SSPMV  performs the matrix-vector operation
   !
@@ -86,16 +93,19 @@ SUBROUTINE SSPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   !           Y. INCY must not be zero.
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J. J., Du Croz, J., Hammarling, S., and
+  !***
+  ! **References:**  Dongarra, J. J., Du Croz, J., Hammarling, S., and
   !                 Hanson, R. J.  An extended set of Fortran basic linear
   !                 algebra subprograms.  ACM TOMS, Vol. 14, No. 1,
   !                 pp. 1-17, March 1988.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  SSPMV
+  
   !     .. Scalar Arguments ..
   REAL Alpha, Beta
   INTEGER Incx, Incy, N
@@ -113,7 +123,7 @@ SUBROUTINE SSPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   EXTERNAL LSAME
   !     .. External Subroutines ..
   EXTERNAL XERBLA
-  !***FIRST EXECUTABLE STATEMENT  SSPMV
+  !* FIRST EXECUTABLE STATEMENT  SSPMV
   !
   !     Test the input parameters.
   !

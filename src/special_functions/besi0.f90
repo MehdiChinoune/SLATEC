@@ -1,16 +1,23 @@
-!DECK BESI0
+!** BESI0
 REAL FUNCTION BESI0(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BESI0
-  !***PURPOSE  Compute the hyperbolic Bessel function of the first kind
+  !>
+  !***
+  !  Compute the hyperbolic Bessel function of the first kind
   !            of order zero.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B1
-  !***TYPE      SINGLE PRECISION (BESI0-S, DBESI0-D)
-  !***KEYWORDS  FIRST KIND, FNLIB, HYPERBOLIC BESSEL FUNCTION,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B1
+  !***
+  ! **Type:**      SINGLE PRECISION (BESI0-S, DBESI0-D)
+  !***
+  ! **Keywords:**  FIRST KIND, FNLIB, HYPERBOLIC BESSEL FUNCTION,
   !             MODIFIED BESSEL FUNCTION, ORDER ZERO, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! BESI0(X) computes the modified (hyperbolic) Bessel function
   ! of the first kind of order zero and real argument X.
@@ -21,9 +28,12 @@ REAL FUNCTION BESI0(X)
   !                               significant figures required  17.90
   !                                    decimal places required  18.15
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  BESI0E, CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  BESI0E, CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -31,7 +41,7 @@ REAL FUNCTION BESI0(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  BESI0
+  
   REAL BESI0E, bi0cs, CSEVL, R1MACH, X, xmax, xsml, y
   INTEGER INITS, nti0
   DIMENSION bi0cs(12)
@@ -50,7 +60,7 @@ REAL FUNCTION BESI0(X)
   DATA bi0cs(11)/.00000000000000053339E0/
   DATA bi0cs(12)/.00000000000000000245E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BESI0
+  !* FIRST EXECUTABLE STATEMENT  BESI0
   IF ( first ) THEN
     nti0 = INITS(bi0cs,12,0.1*R1MACH(3))
     xsml = SQRT(4.5*R1MACH(3))

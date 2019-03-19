@@ -1,25 +1,32 @@
-!DECK BCRH
+!** BCRH
 REAL FUNCTION BCRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BCRH
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBLKTR
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (BCRH-S, BSRH-S)
-  !***AUTHOR  (UNKNOWN)
-  !***SEE ALSO  CBLKTR
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    CCBLK
-  !***REVISION HISTORY  (YYMMDD)
+  !>
+  !***
+  !  Subsidiary to CBLKTR
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (BCRH-S, BSRH-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **See also:**  CBLKTR
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    CCBLK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  BCRH
+  
   REAL A, Bh, C, CNV, dx, EPS, F, Sgn, x, xl, Xll, xr, Xrr
   INTEGER IK, Iz, K, NCMplx, NM, NPP
   DIMENSION A(*), C(*), Bh(*)
   COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
-  !***FIRST EXECUTABLE STATEMENT  BCRH
+  !* FIRST EXECUTABLE STATEMENT  BCRH
   xl = Xll
   xr = Xrr
   dx = .5*ABS(xr-xl)

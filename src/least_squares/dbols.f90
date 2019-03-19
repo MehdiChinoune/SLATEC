@@ -1,16 +1,23 @@
-!DECK DBOLS
+!** DBOLS
 SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBOLS
-  !***PURPOSE  Solve the problem
+  !>
+  !***
+  !  Solve the problem
   !                 E*X = F (in the least  squares  sense)
   !            with bounds on selected X values.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  K1A2A, G2E, G2H1, G2H2
-  !***TYPE      DOUBLE PRECISION (SBOLS-S, DBOLS-D)
-  !***KEYWORDS  BOUNDS, CONSTRAINTS, INEQUALITY, LEAST SQUARES, LINEAR
-  !***AUTHOR  Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  K1A2A, G2E, G2H1, G2H2
+  !***
+  ! **Type:**      DOUBLE PRECISION (SBOLS-S, DBOLS-D)
+  !***
+  ! **Keywords:**  BOUNDS, CONSTRAINTS, INEQUALITY, LEAST SQUARES, LINEAR
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
+  !***
+  ! **Description:**
   !
   !   **** All INPUT and OUTPUT real variables are DOUBLE PRECISION ****
   !
@@ -398,18 +405,21 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   ! ERROR NUMBER =        17
   ! (NORMALLY A RETURN TO THE USER TAKES PLACE FOLLOWING THIS MESSAGE.)
   !
-  !***REFERENCES  R. J. Hanson, Linear least squares with bounds and
+  !***
+  ! **References:**  R. J. Hanson, Linear least squares with bounds and
   !                 linear constraints, Report SAND82-1517, Sandia
   !                 Laboratories, August 1982.
-  !***ROUTINES CALLED  DBOLSM, DCOPY, DNRM2, DROT, DROTG, IDAMAX, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DBOLSM, DCOPY, DNRM2, DROT, DROTG, IDAMAX, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   821220  DATE WRITTEN
   !   891006  Cosmetic changes to prologue.  (WRB)
   !   891006  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DBOLS
+  
   !
   !     SOLVE LINEAR LEAST SQUARES SYSTEM WITH BOUNDS ON
   !     SELECTED VARIABLES.
@@ -436,7 +446,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   CHARACTER(16) :: xern3, xern4
   SAVE igo, locacc, lopt, iscale
   DATA igo/0/
-  !***FIRST EXECUTABLE STATEMENT  DBOLS
+  !* FIRST EXECUTABLE STATEMENT  DBOLS
   nerr = 0
   Mode = 0
   IF ( igo==0 ) THEN

@@ -1,13 +1,17 @@
-!DECK CMPOSD
+!** CMPOSD
 SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CMPOSD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CMGNBN
-  !***LIBRARY   SLATEC
-  !***TYPE      COMPLEX (POISD2-S, CMPOSD-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CMGNBN
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      COMPLEX (POISD2-S, CMPOSD-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Subroutine to solve Poisson's equation for Dirichlet boundary
   !     conditions.
@@ -15,23 +19,26 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !     ISTAG = 1 if the last diagonal block is the matrix A.
   !     ISTAG = 2 if the last diagonal block is the matrix A+I.
   !
-  !***SEE ALSO  CMGNBN
-  !***ROUTINES CALLED  C1MERG, CMPCSG, CMPTRX
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CMGNBN
+  !***
+  ! **Routines called:**  C1MERG, CMPCSG, CMPTRX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   920130  Modified to use merge routine C1MERG rather than deleted
   !           routine CMPMRG.  (WRB)
-  !***END PROLOGUE  CMPOSD
+  
   REAL fi
   INTEGER i, ideg, Idimq, ip, ip1, ipstor, irreg, Istag, j, jdeg, &
     jm1, jm2, jm3, jp1, jp2, jp3, jsh, jsp, jst, jstsav
   INTEGER kr, krpi, l, lr, m, Mr, n, nodd, noddpr, Nr, nun
   COMPLEX Ba, Bb, Bc, Q, B, W, D, Tcos, P, t
   DIMENSION Q(Idimq,*), Ba(*), Bb(*), Bc(*), Tcos(*), B(*), D(*), W(*), P(*)
-  !***FIRST EXECUTABLE STATEMENT  CMPOSD
+  !* FIRST EXECUTABLE STATEMENT  CMPOSD
   m = Mr
   n = Nr
   fi = 1./Istag

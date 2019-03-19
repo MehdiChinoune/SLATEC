@@ -1,16 +1,23 @@
-!DECK SNBCO
+!** SNBCO
 SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SNBCO
-  !***PURPOSE  Factor a band matrix using Gaussian elimination and
+  !>
+  !***
+  !  Factor a band matrix using Gaussian elimination and
   !            estimate the condition number.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2A2
-  !***TYPE      SINGLE PRECISION (SNBCO-S, DNBCO-D, CNBCO-C)
-  !***KEYWORDS  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2A2
+  !***
+  ! **Type:**      SINGLE PRECISION (SNBCO-S, DNBCO-D, CNBCO-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION,
   !             NONSYMMETRIC
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !     SNBCO factors a real band matrix by Gaussian
   !     elimination and estimates the condition of the matrix.
@@ -115,17 +122,20 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !           54 55 56  *  +
   !           65 66  *  *  +
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SASUM, SAXPY, SDOT, SNBFA, SSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SASUM, SAXPY, SDOT, SNBFA, SSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800723  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SNBCO
+  
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
   REAL Abe(Lda,*), Z(*)
   REAL Rcond
@@ -134,7 +144,7 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   REAL anorm, s, SASUM, sm, ynorm
   INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, &
     mm, nl, nu
-  !***FIRST EXECUTABLE STATEMENT  SNBCO
+  !* FIRST EXECUTABLE STATEMENT  SNBCO
   ml1 = Ml + 1
   ldb = Lda - 1
   anorm = 0.0E0

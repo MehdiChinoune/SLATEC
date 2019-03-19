@@ -1,15 +1,22 @@
-!DECK CGEFA
+!** CGEFA
 SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CGEFA
-  !***PURPOSE  Factor a matrix using Gaussian elimination.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2C1
-  !***TYPE      COMPLEX (SGEFA-S, DGEFA-D, CGEFA-C)
-  !***KEYWORDS  GENERAL MATRIX, LINEAR ALGEBRA, LINPACK,
+  !>
+  !***
+  !  Factor a matrix using Gaussian elimination.
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2C1
+  !***
+  ! **Type:**      COMPLEX (SGEFA-S, DGEFA-D, CGEFA-C)
+  !***
+  ! **Keywords:**  GENERAL MATRIX, LINEAR ALGEBRA, LINPACK,
   !             MATRIX FACTORIZATION
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CGEFA factors a complex matrix by Gaussian elimination.
   !
@@ -47,10 +54,13 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
   !                     if called.  Use  RCOND  in CGECO for a reliable
   !                     indication of singularity.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CSCAL, ICAMAX
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CSCAL, ICAMAX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -58,7 +68,7 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CGEFA
+  
   INTEGER Lda, N, Ipvt(*), Info
   COMPLEX A(Lda,*)
   !
@@ -68,7 +78,7 @@ SUBROUTINE CGEFA(A,Lda,N,Ipvt,Info)
   !
   !     GAUSSIAN ELIMINATION WITH PARTIAL PIVOTING
   !
-  !***FIRST EXECUTABLE STATEMENT  CGEFA
+  !* FIRST EXECUTABLE STATEMENT  CGEFA
   Info = 0
   nm1 = N - 1
   IF ( nm1>=1 ) THEN

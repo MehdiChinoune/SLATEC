@@ -1,16 +1,23 @@
-!DECK CORTB
+!** CORTB
 SUBROUTINE CORTB(Nm,Low,Igh,Ar,Ai,Ortr,Orti,M,Zr,Zi)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CORTB
-  !***PURPOSE  Form the eigenvectors of a complex general matrix from
+  !>
+  !***
+  !  Form the eigenvectors of a complex general matrix from
   !            eigenvectors of upper Hessenberg matrix output from
   !            CORTH.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C4
-  !***TYPE      COMPLEX (ORTBAK-S, CORTB-C)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C4
+  !***
+  ! **Type:**      COMPLEX (ORTBAK-S, CORTB-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of a complex analogue of
   !     the ALGOL procedure ORTBAK, NUM. MATH. 12, 349-368(1968)
@@ -64,25 +71,28 @@ SUBROUTINE CORTB(Nm,Low,Igh,Ar,Ai,Ortr,Orti,M,Zr,Zi)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CORTB
+  
   !
   INTEGER i, j, M, la, mm, mp, Nm, Igh, kp1, Low, mp1
   REAL Ar(Nm,*), Ai(Nm,*), Ortr(*), Orti(*)
   REAL Zr(Nm,*), Zi(Nm,*)
   REAL h, gi, gr
   !
-  !***FIRST EXECUTABLE STATEMENT  CORTB
+  !* FIRST EXECUTABLE STATEMENT  CORTB
   IF ( M/=0 ) THEN
     la = Igh - 1
     kp1 = Low + 1

@@ -1,16 +1,23 @@
-!DECK HPPERM
+!** HPPERM
 SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HPPERM
-  !***PURPOSE  Rearrange a given array according to a prescribed
+  !>
+  !***
+  !  Rearrange a given array according to a prescribed
   !            permutation vector.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  N8
-  !***TYPE      CHARACTER (SPPERM-S, DPPERM-D, IPPERM-I, HPPERM-H)
-  !***KEYWORDS  APPLICATION OF PERMUTATION TO DATA VECTOR
-  !***AUTHOR  McClain, M. A., (NIST)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  N8
+  !***
+  ! **Type:**      CHARACTER (SPPERM-S, DPPERM-D, IPPERM-I, HPPERM-H)
+  !***
+  ! **Keywords:**  APPLICATION OF PERMUTATION TO DATA VECTOR
+  !***
+  ! **Author:**  McClain, M. A., (NIST)
   !           Rhoads, G. S., (NBS)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !         HPPERM rearranges the data vector HX according to the
   !         permutation IPERM: HX(I) <--- HX(IPERM(I)).  IPERM could come
@@ -30,16 +37,19 @@ SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
   !             =  2  if work array is not long enough,
   !             =  3  if IPERM is not a valid permutation.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   901004  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text and to add
   !           check for length of work array.
-  !***END PROLOGUE  HPPERM
+  
   INTEGER N, Iperm(*), i, Ier, indx, indx0, istrt
   CHARACTER*(*) Hx(*), Work
-  !***FIRST EXECUTABLE STATEMENT  HPPERM
+  !* FIRST EXECUTABLE STATEMENT  HPPERM
   Ier = 0
   IF ( N<1 ) THEN
     Ier = 1

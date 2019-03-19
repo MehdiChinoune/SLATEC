@@ -1,20 +1,24 @@
-!DECK MGSBV
+!** MGSBV
 SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  MGSBV
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (MGSBV-S, DMGSBV-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (MGSBV-S, DMGSBV-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   ! Orthogonalize a set of N real vectors and determine their rank
   !
-  ! **********************************************************************
+  !- *********************************************************************
   ! INPUT
-  ! **********************************************************************
+  !- *********************************************************************
   !   M = Dimension of vectors
   !   N = No. of vectors
   !   A = Array whose first N cols contain the vectors
@@ -24,9 +28,9 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   V = Particular solution vector (not included in the pivoting)
   !   INDPVT = 1 Means pivoting will not be used
   !
-  ! **********************************************************************
+  !- *********************************************************************
   ! OUTPUT
-  ! **********************************************************************
+  !- *********************************************************************
   !   NIV = No. of linear independent vectors in input set
   !     A = Matrix whose first NIV cols. contain NIV orthogonal vectors
   !         which span the vector space determined by the input vectors
@@ -47,12 +51,16 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   WCND = Worst case (smallest) norm decrement value of the
   !          vectors being orthogonalized  (represents a test
   !          for linear dependence of the vectors)
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  BVSUP
-  !***ROUTINES CALLED  PRVEC, SDOT
-  !***COMMON BLOCKS    ML18JR, ML5MCO
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **Routines called:**  PRVEC, SDOT
+  !***
+  ! COMMON BLOCKS    ML18JR, ML5MCO
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -61,7 +69,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  MGSBV
+  
   REAL A, AE, dot, EPS, FOUru, P, pjp, PRVEC, psave, RE, ry, S, &
     SDOT, SQOvfl, SRU, sv, t, TOL, TWOu, URO
   REAL V, vl, vnorm, W, Wcnd, y
@@ -78,7 +86,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !
   COMMON /ML5MCO/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
   !
-  !***FIRST EXECUTABLE STATEMENT  MGSBV
+  !* FIRST EXECUTABLE STATEMENT  MGSBV
   IF ( M>0.AND.N>0.AND.Ia>=M ) THEN
     !
     jp = 0
@@ -121,7 +129,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
     Niv = 0
     !
     IF ( y/=0.0 ) THEN
-      ! **********************************************************************
+      !- *********************************************************************
       DO nr = 1, N
         IF ( nivn==Niv ) EXIT
         Niv = nr
@@ -269,7 +277,7 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
           ENDIF
         ENDIF
       ENDDO
-      ! **********************************************************************
+      !- *********************************************************************
       !
       !     TEST FOR LINEAR DEPENDENCE OF PARTICULAR SOLUTION
       !

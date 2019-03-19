@@ -1,20 +1,27 @@
-!DECK HSTSSP
+!** HSTSSP
 SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HSTSSP
-  !***PURPOSE  Solve the standard five-point finite difference
+  !>
+  !***
+  !  Solve the standard five-point finite difference
   !            approximation on a staggered grid to the Helmholtz
   !            equation in spherical coordinates and on the surface of
   !            the unit sphere (radius of 1).
-  !***LIBRARY   SLATEC (FISHPACK)
-  !***CATEGORY  I2B1A1A
-  !***TYPE      SINGLE PRECISION (HSTSSP-S)
-  !***KEYWORDS  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE, SPHERICAL
-  !***AUTHOR  Adams, J., (NCAR)
+  !***
+  ! **Library:**   SLATEC (FISHPACK)
+  !***
+  ! **Category:**  I2B1A1A
+  !***
+  ! **Type:**      SINGLE PRECISION (HSTSSP-S)
+  !***
+  ! **Keywords:**  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE, SPHERICAL
+  !***
+  ! **Author:**  Adams, J., (NCAR)
   !           Swarztrauber, P. N., (NCAR)
   !           Sweet, R., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     HSTSSP solves the standard five-point finite difference
   !     approximation on a staggered grid to the Helmholtz equation in
@@ -281,7 +288,7 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   W
   !     W(1) contains the required length of W.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !    * * * * * * *   Program Specifications    * * * * * * * * * * * *
   !
@@ -353,26 +360,29 @@ SUBROUTINE HSTSSP(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   !
-  !***REFERENCES  U. Schumann and R. Sweet, A direct method for the
+  !***
+  ! **References:**  U. Schumann and R. Sweet, A direct method for the
   !                 solution of Poisson's equation with Neumann boundary
   !                 conditions on a staggered grid of arbitrary size,
   !                 Journal of Computational Physics 20, (1976),
   !                 pp. 171-182.
-  !***ROUTINES CALLED  GENBUN, PIMACH, POISTG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  GENBUN, PIMACH, POISTG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  HSTSSP
+  
   REAL A, a1, a2, a3, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, &
     deltht, dlrsq, dlthsq, dum, Elmbda, F, Pertrb, pi
   REAL PIMACH, W
   INTEGER i, Idimf, ierr1, Ierror, isw, iwb, iwc, iwr, iws, j, &
     jsw, k, lp, M, mb, Mbdcnd, mm1, N, Nbdcnd, np
   DIMENSION F(Idimf,*), Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
-  !***FIRST EXECUTABLE STATEMENT  HSTSSP
+  !* FIRST EXECUTABLE STATEMENT  HSTSSP
   Ierror = 0
   pi = PIMACH(dum)
   IF ( A<0..OR.B>pi ) Ierror = 1

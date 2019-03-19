@@ -1,26 +1,33 @@
-!DECK DQAWCE
+!** DQAWCE
 SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQAWCE
-  !***PURPOSE  The routine calculates an approximation result to a
+  !>
+  !***
+  !  The routine calculates an approximation result to a
   !            CAUCHY PRINCIPAL VALUE I = Integral of F*W over (A,B)
   !            (W(X) = 1/(X-C), (C.NE.A, C.NE.B), hopefully satisfying
   !            following claim for accuracy
   !            ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I))
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A2A1, J4
-  !***TYPE      DOUBLE PRECISION (QAWCE-S, DQAWCE-D)
-  !***KEYWORDS  AUTOMATIC INTEGRATOR, CAUCHY PRINCIPAL VALUE,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A2A1, J4
+  !***
+  ! **Type:**      DOUBLE PRECISION (QAWCE-S, DQAWCE-D)
+  !***
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, CAUCHY PRINCIPAL VALUE,
   !             CLENSHAW-CURTIS METHOD, QUADPACK, QUADRATURE,
   !             SPECIAL-PURPOSE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Computation of a CAUCHY PRINCIPAL VALUE
   !        Standard fortran subroutine
@@ -139,15 +146,18 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !                      Number of subintervals actually produced in
   !                      the subdivision process
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DQC25C, DQPSRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DQC25C, DQPSRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DQAWCE
+  
   !
   REAL(8) :: A, aa, Abserr, Alist, area, area1, area12, area2, &
     a1, a2, B, bb, Blist, b1, b2, C, D1MACH, Elist, &
@@ -188,7 +198,7 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !           EPMACH IS THE LARGEST RELATIVE SPACING.
   !           UFLOW IS THE SMALLEST POSITIVE MAGNITUDE.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQAWCE
+  !* FIRST EXECUTABLE STATEMENT  DQAWCE
   epmach = D1MACH(4)
   uflow = D1MACH(1)
   !
@@ -322,7 +332,7 @@ SUBROUTINE DQAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
         !           WITH NRMAX-TH LARGEST ERROR ESTIMATE (TO BE BISECTED NEXT).
         !
         CALL DQPSRT(Limit,Last,maxerr,errmax,Elist,Iord,nrmax)
-        ! ***JUMP OUT OF DO-LOOP
+        !- **JUMP OUT OF DO-LOOP
         IF ( Ier/=0.OR.errsum<=errbnd ) EXIT
       ENDDO
       !

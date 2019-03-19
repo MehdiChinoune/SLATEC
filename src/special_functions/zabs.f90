@@ -1,26 +1,33 @@
-!DECK ZABS
+!** ZABS
 REAL(8) FUNCTION ZABS(Zr,Zi)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZABS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
+  !>
+  !***
+  !  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
   !            ZBIRY
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (ZABS-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (ZABS-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZABS COMPUTES THE ABSOLUTE VALUE OR MAGNITUDE OF A DOUBLE
   !     PRECISION COMPLEX VARIABLE CMPLX(ZR,ZI)
   !
-  !***SEE ALSO  ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZBIRY
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZBIRY
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ZABS
+  
   REAL(8) :: Zr, Zi, u, v, q, s
-  !***FIRST EXECUTABLE STATEMENT  ZABS
+  !* FIRST EXECUTABLE STATEMENT  ZABS
   u = ABS(Zr)
   v = ABS(Zi)
   s = u + v

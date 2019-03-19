@@ -1,19 +1,26 @@
-!DECK DLSEI
+!** DLSEI
 SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DLSEI
-  !***PURPOSE  Solve a linearly constrained least squares problem with
+  !>
+  !***
+  !  Solve a linearly constrained least squares problem with
   !            equality and inequality constraints, and optionally compute
   !            a covariance matrix.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  K1A2A, D9
-  !***TYPE      DOUBLE PRECISION (LSEI-S, DLSEI-D)
-  !***KEYWORDS  CONSTRAINED LEAST SQUARES, CURVE FITTING, DATA FITTING,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  K1A2A, D9
+  !***
+  ! **Type:**      DOUBLE PRECISION (LSEI-S, DLSEI-D)
+  !***
+  ! **Keywords:**  CONSTRAINED LEAST SQUARES, CURVE FITTING, DATA FITTING,
   !             EQUALITY CONSTRAINTS, INEQUALITY CONSTRAINTS,
   !             QUADRATIC PROGRAMMING
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Haskell, K. H., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Abstract
   !
@@ -355,7 +362,8 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !                              Their required minimal lengths are
   !                              given above.
   !
-  !***REFERENCES  K. H. Haskell and R. J. Hanson, An algorithm for
+  !***
+  ! **References:**  K. H. Haskell and R. J. Hanson, An algorithm for
   !                 linear least squares problems with equality and
   !                 nonnegativity constraints, Report SAND77-0552, Sandia
   !                 Laboratories, June 1978.
@@ -370,9 +378,11 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !               R. J. Hanson and K. H. Haskell, Two algorithms for the
   !                 linearly constrained least squares problem, ACM
   !                 Transactions on Mathematical Software, September 1982.
-  !***ROUTINES CALLED  D1MACH, DASUM, DAXPY, DCOPY, DDOT, DH12, DLSI,
+  !***
+  ! **Routines called:**  D1MACH, DASUM, DAXPY, DCOPY, DDOT, DH12, DLSI,
   !                    DNRM2, DSCAL, DSWAP, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890618  Completely restructured and extensively revised (WRB & RWC)
@@ -382,7 +392,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DLSEI
+  
   INTEGER Ip(3), Ma, Mdw, Me, Mg, Mode, N
   REAL(8) :: Prgopt(*), Rnorme, Rnorml, W(Mdw,*), Ws(*), X(*)
   !
@@ -400,7 +410,7 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   SAVE first, drelpr
   !
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DLSEI
+  !* FIRST EXECUTABLE STATEMENT  DLSEI
   !
   !     Set the nominal tolerance used in the code for the equality
   !     constraint equations.

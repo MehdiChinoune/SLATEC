@@ -1,16 +1,23 @@
-!DECK CPPSL
+!** CPPSL
 SUBROUTINE CPPSL(Ap,N,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPPSL
-  !***PURPOSE  Solve the complex Hermitian positive definite system using
+  !>
+  !***
+  !  Solve the complex Hermitian positive definite system using
   !            the factors computed by CPPCO or CPPFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2D1B
-  !***TYPE      COMPLEX (SPPSL-S, DPPSL-D, CPPSL-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX, PACKED,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2D1B
+  !***
+  ! **Type:**      COMPLEX (SPPSL-S, DPPSL-D, CPPSL-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX, PACKED,
   !             POSITIVE DEFINITE, SOLVE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CPPSL solves the complex Hermitian positive definite system
   !     A * X = B
@@ -47,10 +54,13 @@ SUBROUTINE CPPSL(Ap,N,B)
   !              CALL CPPSL(AP,N,C(1,J))
   !        10 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTC
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTC
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -58,13 +68,13 @@ SUBROUTINE CPPSL(Ap,N,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CPPSL
+  
   INTEGER N
   COMPLEX Ap(*), B(*)
   !
   COMPLEX CDOTC, t
   INTEGER k, kb, kk
-  !***FIRST EXECUTABLE STATEMENT  CPPSL
+  !* FIRST EXECUTABLE STATEMENT  CPPSL
   kk = 0
   DO k = 1, N
     t = CDOTC(k-1,Ap(kk+1),1,B(1),1)

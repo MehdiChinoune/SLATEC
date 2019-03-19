@@ -1,20 +1,27 @@
-!DECK DEBDF
+!** DEBDF
 SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar,JAC)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DEBDF
-  !***PURPOSE  Solve an initial value problem in ordinary differential
+  !>
+  !***
+  !  Solve an initial value problem in ordinary differential
   !            equations using backward differentiation formulas.  It is
   !            intended primarily for stiff problems.
-  !***LIBRARY   SLATEC (DEPAC)
-  !***CATEGORY  I1A2
-  !***TYPE      SINGLE PRECISION (DEBDF-S, DDEBDF-D)
-  !***KEYWORDS  BACKWARD DIFFERENTIATION FORMULAS, DEPAC,
+  !***
+  ! **Library:**   SLATEC (DEPAC)
+  !***
+  ! **Category:**  I1A2
+  !***
+  ! **Type:**      SINGLE PRECISION (DEBDF-S, DDEBDF-D)
+  !***
+  ! **Keywords:**  BACKWARD DIFFERENTIATION FORMULAS, DEPAC,
   !             INITIAL VALUE PROBLEMS, ODE,
   !             ORDINARY DIFFERENTIAL EQUATIONS, STIFF
-  !***AUTHOR  Shampine, L. F., (SNLA)
+  !***
+  ! **Author:**  Shampine, L. F., (SNLA)
   !           Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   This is the backward differentiation code in the package of
   !   differential equation solvers DEPAC, consisting of the codes
@@ -27,9 +34,9 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !             Lawrence Livermore Laboratory
   !             Livermore, California 94550
   !
-  ! **********************************************************************
-  ! **             DEPAC PACKAGE OVERVIEW           **
-  ! **********************************************************************
+  !- *********************************************************************
+  !- *             DEPAC PACKAGE OVERVIEW           **
+  !- *********************************************************************
   !
   !        You have a choice of three differential equation solvers from
   !        DEPAC.  The following brief descriptions are meant to aid you
@@ -71,9 +78,9 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !        or DEABM.  Both of these codes will inform you of stiffness
   !        when the cost of solving such problems becomes important.
   !
-  ! **********************************************************************
-  ! ** ABSTRACT **
-  ! **********************************************************************
+  !- *********************************************************************
+  !- * ABSTRACT **
+  !- *********************************************************************
   !
   !   Subroutine DEBDF uses the backward differentiation formulas of
   !   orders one through five to integrate a system of NEQ first order
@@ -86,9 +93,9 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   The solution at each intermediate step on the way to TOUT.  This is
   !   the intermediate-output mode of operation.
   !
-  ! **********************************************************************
-  ! ** DESCRIPTION OF THE ARGUMENTS TO DEBDF (AN OVERVIEW) **
-  ! **********************************************************************
+  !- *********************************************************************
+  !- * DESCRIPTION OF THE ARGUMENTS TO DEBDF (AN OVERVIEW) **
+  !- *********************************************************************
   !
   !   The Parameters are:
   !
@@ -146,9 +153,9 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !             T, Y(*), INFO(1), RTOL, ATOL,
   !             IDID, RWORK(*) and IWORK(*).
   !
-  ! **********************************************************************
-  ! * INPUT -- What To Do On The First Call To DEBDF *
-  ! **********************************************************************
+  !- *********************************************************************
+  !-  INPUT -- What To Do On The First Call To DEBDF *
+  !- *********************************************************************
   !
   !   The first call of the code is defined to be the start of each new
   !   problem.  Read through the descriptions of all the following items,
@@ -492,9 +499,9 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !             in your calling program and in JAC as arrays of
   !             appropriate length.
   !
-  ! **********************************************************************
-  ! * OUTPUT -- After any return from DDEBDF *
-  ! **********************************************************************
+  !- *********************************************************************
+  !-  OUTPUT -- After any return from DDEBDF *
+  !- *********************************************************************
   !
   !   The principal aim of the code is to return a computed solution at
   !   TOUT, although it is also possible to obtain intermediate results
@@ -594,10 +601,10 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !                        Y(*), except at the initial point of
   !                        integration.
   !
-  ! **********************************************************************
-  ! ** INPUT -- What To Do To Continue The Integration **
-  ! **             (calls after the first)             **
-  ! **********************************************************************
+  !- *********************************************************************
+  !- * INPUT -- What To Do To Continue The Integration **
+  !- *             (calls after the first)             **
+  !- *********************************************************************
   !
   !        This code is organized so that subsequent calls to continue the
   !        integration involve little (if any) additional effort on your
@@ -704,7 +711,7 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !                     problem.  An attempt to do so will result in your
   !                     run being terminated.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !         ***** Warning *****
   !
@@ -718,12 +725,16 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !     To restore the necessary values before the next call to DEBDF,
   !     simply call    RSCO(RWORK(22+NEQ),IWORK(21+NEQ)).
   !
-  !***REFERENCES  L. F. Shampine and H. A. Watts, DEPAC - design of a user
+  !***
+  ! **References:**  L. F. Shampine and H. A. Watts, DEPAC - design of a user
   !                 oriented package of ODE solvers, Report SAND79-2374,
   !                 Sandia Laboratories, 1979.
-  !***ROUTINES CALLED  LSOD, XERMSG
-  !***COMMON BLOCKS    DEBDF1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSOD, XERMSG
+  !***
+  ! COMMON BLOCKS    DEBDF1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891024  Changed references from VNORM to HVNRM.  (WRB)
@@ -734,7 +745,7 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   900510  Convert XERRWV calls to XERMSG calls, change Prologue
   !           comments to agree with DDEBDF.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DEBDF
+  
   !
   !
   REAL Atol, EL0, H, HMIn, HMXi, HU, ROWns, Rpar, Rtol, Rwork, &
@@ -763,7 +774,7 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !
   !        CHECK FOR AN APPARENT INFINITE LOOP
   !
-  !***FIRST EXECUTABLE STATEMENT  DEBDF
+  !* FIRST EXECUTABLE STATEMENT  DEBDF
   IF ( Info(1)==0 ) Iwork(Liw) = 0
   !
   IF ( Iwork(Liw)>=5 ) THEN

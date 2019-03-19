@@ -1,13 +1,17 @@
-!DECK QRSOLV
+!** QRSOLV
 SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QRSOLV
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SNLS1 and SNLS1E
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (QRSOLV-S, DQRSLV-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SNLS1 and SNLS1E
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (QRSOLV-S, DQRSLV-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Given an M by N matrix A, an N by N diagonal matrix D,
   !     and an M-vector B, the problem is to determine an X which
@@ -74,16 +78,19 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !
   !       WA is a work array of length N.
   !
-  !***SEE ALSO  SNLS1, SNLS1E
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SNLS1, SNLS1E
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  QRSOLV
+  
   INTEGER N, Ldr
   INTEGER Ipvt(*)
   REAL R(Ldr,*), Diag(*), Qtb(*), X(*), Sigma(*), Wa(*)
@@ -91,7 +98,7 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   REAL cos, cotan, p5, p25, qtbpj, sin, sum, tan, temp, zero
   SAVE p5, p25, zero
   DATA p5, p25, zero/5.0E-1, 2.5E-1, 0.0E0/
-  !***FIRST EXECUTABLE STATEMENT  QRSOLV
+  !* FIRST EXECUTABLE STATEMENT  QRSOLV
   DO j = 1, N
     DO i = j, N
       R(i,j) = R(j,i)

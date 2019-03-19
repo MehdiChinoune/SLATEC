@@ -1,17 +1,24 @@
-!DECK DBSK0E
+!** DBSK0E
 REAL(8) FUNCTION DBSK0E(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBSK0E
-  !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
+  !>
+  !***
+  !  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the third kind of order zero.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B1
-  !***TYPE      DOUBLE PRECISION (BESK0E-S, DBSK0E-D)
-  !***KEYWORDS  EXPONENTIALLY SCALED, FNLIB, HYPERBOLIC BESSEL FUNCTION,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B1
+  !***
+  ! **Type:**      DOUBLE PRECISION (BESK0E-S, DBSK0E-D)
+  !***
+  ! **Keywords:**  EXPONENTIALLY SCALED, FNLIB, HYPERBOLIC BESSEL FUNCTION,
   !             MODIFIED BESSEL FUNCTION, ORDER ZERO, SPECIAL FUNCTIONS,
   !             THIRD KIND
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DBSK0E(X) computes the double precision exponentially scaled
   ! modified (hyperbolic) Bessel function of the third kind of
@@ -35,15 +42,18 @@ REAL(8) FUNCTION DBSK0E(X)
   !                               significant figures required  29.68
   !                                    decimal places required  32.40
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DBESI0, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DBESI0, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DBSK0E
+  
   REAL eta
   INTEGER INITDS, ntak0, ntak02, ntk0
   REAL(8) :: X, bk0cs(16), ak0cs(38), ak02cs(33), xsml, y, &
@@ -138,7 +148,7 @@ REAL(8) FUNCTION DBSK0E(X)
   DATA ak02cs(32)/ - .1145035994347681332155733333333D-30/
   DATA ak02cs(33)/ + .2301266594249682802005333333333D-31/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DBSK0E
+  !* FIRST EXECUTABLE STATEMENT  DBSK0E
   IF ( first ) THEN
     eta = 0.1*REAL(D1MACH(3))
     ntk0 = INITDS(bk0cs,16,eta)

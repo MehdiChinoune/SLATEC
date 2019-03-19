@@ -1,27 +1,34 @@
-!DECK DGMRES
+!** DGMRES
 SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
     Iter,Err,Ierr,Iunit,Sb,Sx,Rgwk,Lrgw,Igwk,Ligw,Rwork,&
     Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGMRES
-  !***PURPOSE  Preconditioned GMRES iterative sparse Ax=b solver.
+  !>
+  !***
+  !  Preconditioned GMRES iterative sparse Ax=b solver.
   !            This routine uses the generalized minimum residual
   !            (GMRES) method with preconditioning to solve
   !            non-symmetric linear systems of the form: Ax = b.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      DOUBLE PRECISION (SGMRES-S, DGMRES-D)
-  !***KEYWORDS  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (SGMRES-S, DGMRES-D)
+  !***
+  ! **Keywords:**  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
   !             NON-SYMMETRIC LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Brown, Peter, (LLNL), pnbrown@llnl.gov
+  !***
+  ! **Author:**  Brown, Peter, (LLNL), pnbrown@llnl.gov
   !           Hindmarsh, Alan, (LLNL), alanh@llnl.gov
   !           Seager, Mark K., (LLNL), seager@llnl.gov
   !             Lawrence Livermore National Laboratory
   !             PO Box 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !      INTEGER   N, NELT, IA(NELT), JA(NELT), ISYM, ITOL, ITMAX
   !      INTEGER   ITER, IERR, IUNIT, LRGW, IGWK(LIGW), LIGW
   !      INTEGER   IWORK(USER DEFINED)
@@ -33,7 +40,7 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   !     $     ITOL, TOL, ITMAX, ITER, ERR, IERR, IUNIT, SB, SX,
   !     $     RGWK, LRGW, IGWK, LIGW, RWORK, IWORK)
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the Matrix.
   ! B      :IN       Double Precision B(N).
@@ -233,7 +240,7 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   ! IWORK  :WORK     Integer IWORK(USER DEFINED).
   !         Integer array that can be used for workspace in MSOLVE.
   !
-  ! *Description:
+  !- Description:
   !       DGMRES solves a linear system A*X = B rewritten in the form:
   !
   !        (SB*A*(M-inverse)*(SX-inverse))*(SX*M*X) = SB*B,
@@ -357,22 +364,25 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***REFERENCES  1. Peter N. Brown and A. C. Hindmarsh, Reduced Storage
+  !***
+  ! **References:**  1. Peter N. Brown and A. C. Hindmarsh, Reduced Storage
   !                  Matrix Methods in Stiff ODE Systems, Lawrence Liver-
   !                  more National Laboratory Report UCRL-95088, Rev. 1,
   !                  Livermore, California, June 1987.
   !               2. Mark K. Seager, A SLAP for the Masses, in
   !                  G. F. Carey, Ed., Parallel Supercomputing: Methods,
   !                  Algorithms and Applications, Wiley, 1989, pp.135-155.
-  !***ROUTINES CALLED  D1MACH, DCOPY, DNRM2, DPIGMR
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, DCOPY, DNRM2, DPIGMR
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -387,7 +397,7 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921026  Added check for valid value of ITOL.  (FNF)
-  !***END PROLOGUE  DGMRES
+  
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -411,7 +421,7 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   EXTERNAL DCOPY, DPIGMR
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
-  !***FIRST EXECUTABLE STATEMENT  DGMRES
+  !* FIRST EXECUTABLE STATEMENT  DGMRES
   Ierr = 0
   !   ------------------------------------------------------------------
   !         Load method parameters with user values or defaults.

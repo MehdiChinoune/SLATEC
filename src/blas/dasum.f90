@@ -1,18 +1,25 @@
-!DECK DASUM
+!** DASUM
 REAL(8) FUNCTION DASUM(N,Dx,Incx)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DASUM
-  !***PURPOSE  Compute the sum of the magnitudes of the elements of a
+  !>
+  !***
+  !  Compute the sum of the magnitudes of the elements of a
   !            vector.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1A3A
-  !***TYPE      DOUBLE PRECISION (SASUM-S, DASUM-D, SCASUM-C)
-  !***KEYWORDS  BLAS, LINEAR ALGEBRA, SUM OF MAGNITUDES OF A VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1A3A
+  !***
+  ! **Type:**      DOUBLE PRECISION (SASUM-S, DASUM-D, SCASUM-C)
+  !***
+  ! **Keywords:**  BLAS, LINEAR ALGEBRA, SUM OF MAGNITUDES OF A VECTOR
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -29,12 +36,15 @@ REAL(8) FUNCTION DASUM(N,Dx,Incx)
   !     DASUM = sum from 0 to N-1 of ABS(DX(IX+I*INCX)),
   !     where IX = 1 if INCX .GE. 0, else IX = 1+(1-N)*INCX.
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -43,10 +53,10 @@ REAL(8) FUNCTION DASUM(N,Dx,Incx)
   !   900821  Modified to correct problem with a negative increment.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DASUM
+  
   REAL(8) :: Dx(*)
   INTEGER i, Incx, ix, m, mp1, N
-  !***FIRST EXECUTABLE STATEMENT  DASUM
+  !* FIRST EXECUTABLE STATEMENT  DASUM
   DASUM = 0.0D0
   IF ( N<=0 ) RETURN
   !

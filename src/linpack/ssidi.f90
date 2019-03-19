@@ -1,16 +1,23 @@
-!DECK SSIDI
+!** SSIDI
 SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSIDI
-  !***PURPOSE  Compute the determinant, inertia and inverse of a real
+  !>
+  !***
+  !  Compute the determinant, inertia and inverse of a real
   !            symmetric matrix using the factors from SSIFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1A, D3B1A
-  !***TYPE      SINGLE PRECISION (SSIDI-S, DSIDI-D, CHIDI-C, CSIDI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1A, D3B1A
+  !***
+  ! **Type:**      SINGLE PRECISION (SSIDI-S, DSIDI-D, CHIDI-C, CSIDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             SYMMETRIC
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     SSIDI computes the determinant, inertia and inverse
   !     of a real symmetric matrix using the factors from SSIFA.
@@ -66,10 +73,13 @@ SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   !        and  SSICO  has set RCOND .EQ. 0.0
   !        or  SSIFA  has set  INFO .NE. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SAXPY, SCOPY, SDOT, SSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SAXPY, SCOPY, SDOT, SSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -79,7 +89,7 @@ SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SSIDI
+  
   INTEGER Lda, N, Job
   REAL A(Lda,*), Work(*)
   REAL Det(2)
@@ -89,7 +99,7 @@ SUBROUTINE SSIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   REAL ten, d, t, ak, akp1
   INTEGER j, jb, k, km1, ks, kstep
   LOGICAL noinv, nodet, noert
-  !***FIRST EXECUTABLE STATEMENT  SSIDI
+  !* FIRST EXECUTABLE STATEMENT  SSIDI
   noinv = MOD(Job,10)==0
   nodet = MOD(Job,100)/10==0
   noert = MOD(Job,1000)/100==0

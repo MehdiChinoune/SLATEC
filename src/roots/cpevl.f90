@@ -1,13 +1,17 @@
-!DECK CPEVL
+!** CPEVL
 SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPEVL
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CPZERO
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (CPEVL-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CPZERO
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (CPEVL-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !        Evaluate a complex polynomial and its derivatives.
   !        Optionally compute error bounds for these values.
@@ -34,22 +38,25 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   !        B =  B(I) contains the bounds on the real and imaginary parts
   !              of C(I) if they were requested.
   !
-  !***SEE ALSO  CPZERO
-  !***ROUTINES CALLED  I1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CPZERO
+  !***
+  ! **Routines called:**  I1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810223  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  CPEVL
+  
   REAL d1, r, s
   INTEGER i, I1MACH, j, M, mini, N, np1
   COMPLEX A(*), C(*), Z, ci, cim1, B(*), bi, bim1, t
   LOGICAL Kbd
   SAVE d1
   DATA d1/0.0/
-  !***FIRST EXECUTABLE STATEMENT  CPEVL
+  !* FIRST EXECUTABLE STATEMENT  CPEVL
   IF ( d1==0.0 ) d1 = REAL(I1MACH(10))**(1-I1MACH(11))
   np1 = N + 1
   DO j = 1, np1

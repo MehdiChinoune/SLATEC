@@ -1,15 +1,22 @@
-!DECK DBESJ1
+!** DBESJ1
 REAL(8) FUNCTION DBESJ1(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBESJ1
-  !***PURPOSE  Compute the Bessel function of the first kind of order one.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10A1
-  !***TYPE      DOUBLE PRECISION (BESJ1-S, DBESJ1-D)
-  !***KEYWORDS  BESSEL FUNCTION, FIRST KIND, FNLIB, ORDER ONE,
+  !>
+  !***
+  !  Compute the Bessel function of the first kind of order one.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (BESJ1-S, DBESJ1-D)
+  !***
+  ! **Keywords:**  BESSEL FUNCTION, FIRST KIND, FNLIB, ORDER ONE,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DBESJ1(X) calculates the double precision Bessel function of the
   ! first kind of order one for double precision argument X.
@@ -20,9 +27,12 @@ REAL(8) FUNCTION DBESJ1(X)
   !                               significant figures required  32.36
   !                                    decimal places required  33.57
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, D9B1MP, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, D9B1MP, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -30,7 +40,7 @@ REAL(8) FUNCTION DBESJ1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   910401  Corrected error in code which caused values to have the
   !           wrong sign for arguments less than 4.0.  (WRB)
-  !***END PROLOGUE  DBESJ1
+  
   INTEGER INITDS, ntj1
   REAL(8) :: X, bj1cs(19), ampl, theta, xsml, xmin, y, D1MACH, DCSEVL
   LOGICAL first
@@ -55,7 +65,7 @@ REAL(8) FUNCTION DBESJ1(X)
   DATA bj1cs(18)/ - .395201221265134933333333333333333D-30/
   DATA bj1cs(19)/ + .116167808226645333333333333333333D-32/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DBESJ1
+  !* FIRST EXECUTABLE STATEMENT  DBESJ1
   IF ( first ) THEN
     ntj1 = INITDS(bj1cs,19,0.1*REAL(D1MACH(3)))
     !

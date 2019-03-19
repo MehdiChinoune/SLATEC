@@ -2,17 +2,22 @@ MODULE TEST02_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK SFNCK
+  !** SFNCK
   SUBROUTINE SFNCK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SFNCK
-    !***PURPOSE  Quick check for the single precision Fullerton
+    !>
+    !***
+    !  Quick check for the single precision Fullerton
     !            special functions.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Boland, W. Robert, (LANL)
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Boland, W. Robert, (LANL)
     !           Chow, Jeff, (LANL)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !     This subroutine does a quick check for the single precision
     !     routines in the Fullerton special function library.
@@ -26,21 +31,23 @@ CONTAINS
     !     IPASS    output value indicating whether tests passed or
     !              failed
     !
-    !***ROUTINES CALLED  ACOSH, AI, AIE, ALI, ALNREL, ASINH, ATANH, BESI0,
+    !***
+    ! **Routines called:**  ACOSH, AI, AIE, ALI, ALNREL, ASINH, ATANH, BESI0,
     !                    BESI0E, BESI1, BESI1E, BESJ0, BESJ1, BESK0, BESK0E,
     !                    BESK1, BESK1E, BESKES, BESKS, BESY0, BESY1, BETA,
     !                    BETAI, BI, BIE, BINOM, CBRT, CHU, COSDG, COT, DAWS,
     !                    E1, EI, ERF, EXPREL, FAC, GAMI, GAMIC, GAMIT,
     !                    GAMMA, GAMR, POCH, POCH1, PSI, R1MACH, R9ATN1,
     !                    R9LN2R, SINDG, SPENC
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   800901  DATE WRITTEN
     !   891115  REVISION DATE from Version 3.2
     !   891120  Checks of remainder of FNLIB routines added and code
     !           reorganized.  (WRB)
     !   900330  Prologue converted to Version 4.0 format.  (BAB)
     !   900727  Added EXTERNAL statement.  (WRB)
-    !***END PROLOGUE  SFNCK
+    
     INTEGER i, Lun, Kprint, Ipass
     REAL y(105), v(105), errmax, errtol, abserr, relerr
     REAL, EXTERNAL :: ACOSH, AI, AIE, ALI, ALNREL, ASINH, ATANH, BESI0, BESI0E, &
@@ -157,7 +164,7 @@ CONTAINS
     DATA v(103)/.596347362323194074341078499290E+00/
     DATA v(104)/.757342086122175953454414369190E+00/
     DATA v(105)/.757872156141312106043351240000E+00/
-    !***FIRST EXECUTABLE STATEMENT  SFNCK
+    !* FIRST EXECUTABLE STATEMENT  SFNCK
     !
     !     Exercise routines in Category C1.
     !
@@ -333,24 +340,31 @@ CONTAINS
     RETURN
   END SUBROUTINE SFNCK
 END MODULE TEST02_MOD
-!DECK TEST02
+!** TEST02
 PROGRAM TEST02
   USE TEST02_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST02
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C
-  !***TYPE      SINGLE PRECISION (TEST02-S, TEST03-D, TEST04-C)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C
+  !***
+  ! **Type:**      SINGLE PRECISION (TEST02-S, TEST03-D, TEST04-C)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -362,23 +376,26 @@ PROGRAM TEST02
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        single precision Fullerton routines
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  I1MACH, SFNCK, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  I1MACH, SFNCK, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST02
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST02
+  !* FIRST EXECUTABLE STATEMENT  TEST02
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

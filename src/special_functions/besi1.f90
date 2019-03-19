@@ -1,16 +1,23 @@
-!DECK BESI1
+!** BESI1
 REAL FUNCTION BESI1(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BESI1
-  !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
+  !>
+  !***
+  !  Compute the modified (hyperbolic) Bessel function of the
   !            first kind of order one.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B1
-  !***TYPE      SINGLE PRECISION (BESI1-S, DBESI1-D)
-  !***KEYWORDS  FIRST KIND, FNLIB, HYPERBOLIC BESSEL FUNCTION,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B1
+  !***
+  ! **Type:**      SINGLE PRECISION (BESI1-S, DBESI1-D)
+  !***
+  ! **Keywords:**  FIRST KIND, FNLIB, HYPERBOLIC BESSEL FUNCTION,
   !             MODIFIED BESSEL FUNCTION, ORDER ONE, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! BESI1(X) calculates the modified (hyperbolic) Bessel function
   ! of the first kind of order one for real argument X.
@@ -21,9 +28,12 @@ REAL FUNCTION BESI1(X)
   !                               significant figures required  16.23
   !                                    decimal places required  17.14
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  BESI1E, CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  BESI1E, CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -31,7 +41,7 @@ REAL FUNCTION BESI1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  BESI1
+  
   REAL BESI1E, bi1cs, CSEVL, R1MACH, X, xmax, xmin, xsml, y
   INTEGER INITS, nti1
   DIMENSION bi1cs(11)
@@ -49,7 +59,7 @@ REAL FUNCTION BESI1(X)
   DATA bi1cs(10)/.000000000000004741E0/
   DATA bi1cs(11)/.000000000000000024E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BESI1
+  !* FIRST EXECUTABLE STATEMENT  BESI1
   IF ( first ) THEN
     nti1 = INITS(bi1cs,11,0.1*R1MACH(3))
     xmin = 2.0*R1MACH(1)

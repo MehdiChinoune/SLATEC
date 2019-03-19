@@ -1,15 +1,19 @@
-!DECK BKSOL
+!** BKSOL
 SUBROUTINE BKSOL(N,A,X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BKSOL
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (BKSOL-S, DBKSOL-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (BKSOL-S, DBKSOL-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     Solution of an upper triangular linear system by
   !     back-substitution
   !
@@ -19,20 +23,23 @@ SUBROUTINE BKSOL(N,A,X)
   !     and contains the solution on return.
   !     The actual diagonal of A is unity while a diagonal
   !     scaling matrix is stored there.
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  BVSUP
-  !***ROUTINES CALLED  SDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **Routines called:**  SDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  BKSOL
+  
   REAL A, SDOT, X
   INTEGER j, k, m, N, nm1
   DIMENSION A(*), X(*)
-  !***FIRST EXECUTABLE STATEMENT  BKSOL
+  !* FIRST EXECUTABLE STATEMENT  BKSOL
   m = (N*(N+1))/2
   X(N) = X(N)*A(m)
   IF ( N/=1 ) THEN

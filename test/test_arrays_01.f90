@@ -2,24 +2,32 @@ MODULE TEST54_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK ISRTQC
+  !** ISRTQC
   SUBROUTINE ISRTQC(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  ISRTQC
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SLATEC routines ISORT, IPSORT, IPPERM
-    !***LIBRARY   SLATEC
-    !***CATEGORY  N6A
-    !***TYPE      INTEGER (SSRTQC-S, DSRTQC-D, ISRTQC-I, HSRTQC-H)
-    !***KEYWORDS  IPPERM, IPSORT, ISORT, QUICK CHECK
-    !***AUTHOR  Boisvert, Ronald, (NIST)
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  IPPERM, IPSORT, ISORT
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for SLATEC routines ISORT, IPSORT, IPPERM
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Category:**  N6A
+    !***
+    ! **Type:**      INTEGER (SSRTQC-S, DSRTQC-D, ISRTQC-I, HSRTQC-H)
+    !***
+    ! **Keywords:**  IPPERM, IPSORT, ISORT, QUICK CHECK
+    !***
+    ! **Author:**  Boisvert, Ronald, (NIST)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  IPPERM, IPSORT, ISORT
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890620  DATE WRITTEN
     !   901005  Included test of IPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-    !***END PROLOGUE  ISRTQC
+    
     !
     INTEGER N, NTEST
     PARAMETER (N=9,NTEST=4)
@@ -57,7 +65,7 @@ CONTAINS
     DATA (ix(i,4),i=1,N)/3, 5, 4, 1, 2, 9, 6, 7, 8/
     DATA (xs(i,4),i=1,N)/ - 1, 1, 29, 36, 54, 55, 80, 98, 99/
     !
-    !***FIRST EXECUTABLE STATEMENT  ISRTQC
+    !* FIRST EXECUTABLE STATEMENT  ISRTQC
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001) '================='
       WRITE (Lun,99002) 'OUTPUT FROM ISRTQC'
@@ -306,24 +314,32 @@ CONTAINS
     99003 FORMAT (1X,A,9I4)
     99004 FORMAT (1X,A,9I4)
   END SUBROUTINE ISRTQC
-  !DECK HSRTQC
+  !** HSRTQC
   SUBROUTINE HSRTQC(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  HSRTQC
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SLATEC routine HPSORT, HPPERM
-    !***LIBRARY   SLATEC
-    !***CATEGORY  N6A
-    !***TYPE      CHARACTER (SSRTQC-S, DSRTQC-D, ISRTQC-I, HSRTQC-H)
-    !***KEYWORDS  HPPERM, HPSORT, QUICK CHECK
-    !***AUTHOR  Boisvert, Ronald, (NIST)
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  HPPERM, HPSORT
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for SLATEC routine HPSORT, HPPERM
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Category:**  N6A
+    !***
+    ! **Type:**      CHARACTER (SSRTQC-S, DSRTQC-D, ISRTQC-I, HSRTQC-H)
+    !***
+    ! **Keywords:**  HPPERM, HPSORT, QUICK CHECK
+    !***
+    ! **Author:**  Boisvert, Ronald, (NIST)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  HPPERM, HPSORT
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890620  DATE WRITTEN
     !   901005  Included test of HPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-    !***END PROLOGUE  HSRTQC
+    
     !
     INTEGER N, NTEST
     PARAMETER (N=9,NTEST=4)
@@ -370,7 +386,7 @@ CONTAINS
     DATA (xs(i,4),i=1,N)/'AA', 'AB', 'AC', 'AD', 'AZ', 'ZA', 'ZX', &
       'ZY', 'ZZ'/
     !
-    !***FIRST EXECUTABLE STATEMENT  HSRTQC
+    !* FIRST EXECUTABLE STATEMENT  HSRTQC
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001) '================='
       WRITE (Lun,99002) 'OUTPUT FROM HSRTQC'
@@ -602,24 +618,32 @@ CONTAINS
     99003 FORMAT (1X,A,9(2X,A2))
     99004 FORMAT (1X,A,9I4)
   END SUBROUTINE HSRTQC
-  !DECK SSRTQC
+  !** SSRTQC
   SUBROUTINE SSRTQC(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SSRTQC
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SLATEC routines SSORT, SPSORT, SPPERM
-    !***LIBRARY   SLATEC
-    !***CATEGORY  N6A
-    !***TYPE      SINGLE PRECISION (SSRTQC-S, DSRTQC-D, ISRTQC-I, HSRTQC-H)
-    !***KEYWORDS  QUICK CHECK, SPPERM, SPSORT, SSORT
-    !***AUTHOR  Boisvert, Ronald, (NIST)
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  SPPERM, SPSORT, SSORT
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for SLATEC routines SSORT, SPSORT, SPPERM
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Category:**  N6A
+    !***
+    ! **Type:**      SINGLE PRECISION (SSRTQC-S, DSRTQC-D, ISRTQC-I, HSRTQC-H)
+    !***
+    ! **Keywords:**  QUICK CHECK, SPPERM, SPSORT, SSORT
+    !***
+    ! **Author:**  Boisvert, Ronald, (NIST)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  SPPERM, SPSORT, SSORT
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890620  DATE WRITTEN
     !   901005  Included test of SPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-    !***END PROLOGUE  SSRTQC
+    
     !
     INTEGER N, NTEST
     PARAMETER (N=9,NTEST=4)
@@ -658,7 +682,7 @@ CONTAINS
     DATA (ix(i,4),i=1,N)/3, 5, 4, 1, 2, 9, 6, 7, 8/
     DATA (xs(i,4),i=1,N)/ - 1., 1., 29., 36., 54., 55., 80., 98., 99./
     !
-    !***FIRST EXECUTABLE STATEMENT  SSRTQC
+    !* FIRST EXECUTABLE STATEMENT  SSRTQC
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001) '================='
       WRITE (Lun,99002) 'OUTPUT FROM SSRTQC'
@@ -907,24 +931,32 @@ CONTAINS
     99003 FORMAT (1X,A,9F4.0)
     99004 FORMAT (1X,A,9I4)
   END SUBROUTINE SSRTQC
-  !DECK DSRTQC
+  !** DSRTQC
   SUBROUTINE DSRTQC(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DSRTQC
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SLATEC routines DSORT, DPSORT, DPPERM
-    !***LIBRARY   SLATEC
-    !***CATEGORY  N6A
-    !***TYPE      DOUBLE PRECISION (SSRTQC-S, DSRTQC-D, ISRTQC-I, HSRTQC-H)
-    !***KEYWORDS  DPPERM, DPSORT, DSORT, QUICK CHECK
-    !***AUTHOR  Boisvert, Ronald, (NIST)
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  DPPERM, DPSORT, DSORT
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for SLATEC routines DSORT, DPSORT, DPPERM
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Category:**  N6A
+    !***
+    ! **Type:**      DOUBLE PRECISION (SSRTQC-S, DSRTQC-D, ISRTQC-I, HSRTQC-H)
+    !***
+    ! **Keywords:**  DPPERM, DPSORT, DSORT, QUICK CHECK
+    !***
+    ! **Author:**  Boisvert, Ronald, (NIST)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  DPPERM, DPSORT, DSORT
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890620  DATE WRITTEN
     !   901005  Included test of DPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-    !***END PROLOGUE  DSRTQC
+    
     !
     INTEGER N, NTEST
     PARAMETER (N=9,NTEST=4)
@@ -968,7 +1000,7 @@ CONTAINS
     DATA (xs(i,4),i=1,N)/ - 1D0, 1D0, 29D0, 36D0, 54D0, 55D0, 80D0, &
       98D0, 99D0/
     !
-    !***FIRST EXECUTABLE STATEMENT  DSRTQC
+    !* FIRST EXECUTABLE STATEMENT  DSRTQC
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001) '================='
       WRITE (Lun,99002) 'OUTPUT FROM DSRTQC'
@@ -1218,24 +1250,31 @@ CONTAINS
     99004 FORMAT (1X,A,9I4)
   END SUBROUTINE DSRTQC
 END MODULE TEST54_MOD
-!DECK TEST54
+!** TEST54
 PROGRAM TEST54
   USE TEST54_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST54
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  N6A
-  !***TYPE      ALL (TEST54-A)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  N6A
+  !***
+  ! **Type:**      ALL (TEST54-A)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -1247,22 +1286,25 @@ PROGRAM TEST54
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        ISORT   SSORT   DSORT
   !        IPSORT  SPSORT  DPSORT  HPSORT
   !        IPPERM  SPPERM  DPPERM  HPPERM
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  DSRTQC, HSRTQC, I1MACH, ISRTQC, SSRTQC, XERMAX,
+  !***
+  ! **Routines called:**  DSRTQC, HSRTQC, I1MACH, ISRTQC, SSRTQC, XERMAX,
   !                    XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890620  DATE WRITTEN
-  !***END PROLOGUE  TEST54
+  
   INTEGER lun, I1MACH, lin, nfail, kprint, ipass
-  !***FIRST EXECUTABLE STATEMENT  TEST54
+  !* FIRST EXECUTABLE STATEMENT  TEST54
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

@@ -1,15 +1,22 @@
-!DECK COMLR2
+!** COMLR2
 SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  COMLR2
-  !***PURPOSE  Compute the eigenvalues and eigenvectors of a complex upper
+  !>
+  !***
+  !  Compute the eigenvalues and eigenvectors of a complex upper
   !            Hessenberg matrix using the modified LR method.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C2B
-  !***TYPE      COMPLEX (COMLR2-C)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK, LR METHOD
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C2B
+  !***
+  ! **Type:**      COMPLEX (COMLR2-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK, LR METHOD
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure COMLR2,
   !     NUM. MATH. 16, 181-204(1970) by Peters and Wilkinson.
@@ -87,19 +94,22 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  CDIV, CSROOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDIV, CSROOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  COMLR2
+  
   !
   INTEGER i, j, k, l, m, N, en, ii, jj, ll, mm, Nm, nn, Igh, &
     im1, ip1
@@ -108,7 +118,7 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   REAL si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, norm, s1, s2
   INTEGER Int(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  COMLR2
+  !* FIRST EXECUTABLE STATEMENT  COMLR2
   Ierr = 0
   !     .......... INITIALIZE EIGENVECTOR MATRIX ..........
   DO i = 1, N

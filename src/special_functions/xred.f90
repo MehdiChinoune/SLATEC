@@ -1,16 +1,23 @@
-!DECK XRED
+!** XRED
 SUBROUTINE XRED(X,Ix,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XRED
-  !***PURPOSE  To provide single-precision floating-point arithmetic
+  !>
+  !***
+  !  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  A3D
-  !***TYPE      SINGLE PRECISION (XRED-S, DXRED-D)
-  !***KEYWORDS  EXTENDED-RANGE SINGLE-PRECISION ARITHMETIC
-  !***AUTHOR  Lozier, Daniel W., (National Bureau of Standards)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  A3D
+  !***
+  ! **Type:**      SINGLE PRECISION (XRED-S, DXRED-D)
+  !***
+  ! **Keywords:**  EXTENDED-RANGE SINGLE-PRECISION ARITHMETIC
+  !***
+  ! **Author:**  Lozier, Daniel W., (National Bureau of Standards)
   !           Smith, John M., (NBS and George Mason University)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !     REAL X
   !     INTEGER IX
   !
@@ -24,11 +31,16 @@ SUBROUTINE XRED(X,Ix,Ierror)
   !                  ARE TO BE USED IN SUBSEQUENT ORDINARY
   !                  SINGLE-PRECISION CALCULATIONS.
   !
-  !***SEE ALSO  XSET
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    XBLK2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  XSET
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    XBLK2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820712  DATE WRITTEN
   !   881020  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
@@ -36,7 +48,7 @@ SUBROUTINE XRED(X,Ix,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  XRED
+  
   INTEGER i, Ierror, ixa, ixa1, ixa2
   REAL X
   INTEGER Ix
@@ -45,7 +57,7 @@ SUBROUTINE XRED(X,Ix,Ierror)
   COMMON /XBLK2 / RADix, RADixl, RAD2l, DLG10r, L, L2, KMAx
   SAVE /XBLK2 /
   !
-  !***FIRST EXECUTABLE STATEMENT  XRED
+  !* FIRST EXECUTABLE STATEMENT  XRED
   Ierror = 0
   IF ( X==0.0 ) THEN
     Ix = 0

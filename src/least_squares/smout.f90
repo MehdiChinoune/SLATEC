@@ -1,13 +1,17 @@
-!DECK SMOUT
+!** SMOUT
 SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SMOUT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to FC and SBOCLS
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SMOUT-S, DMOUT-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to FC and SBOCLS
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SMOUT-S, DMOUT-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     SINGLE PRECISION MATRIX OUTPUT ROUTINE.
   !
@@ -46,23 +50,26 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
   !     IDIGIT = -6
   !     CALL SMOUT(M,N,LDTABL,TABLEU,21H(16H1SIMPLEX TABLEAU),IDIGIT)
   !
-  !***SEE ALSO  FC, SBOCLS
-  !***ROUTINES CALLED  I1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  FC, SBOCLS
+  !***
+  ! **Routines called:**  I1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891107  Added comma after 1P edit descriptor in FORMAT
   !           statements.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  SMOUT
+  
   REAL A
   INTEGER i, I1MACH, Idigit, j, k1, k2, Lda, lout, M, N, ndigit
   DIMENSION A(Lda,*)
   CHARACTER Ifmt*(*), icol*3
   SAVE icol
   DATA icol/'COL'/
-  !***FIRST EXECUTABLE STATEMENT  SMOUT
+  !* FIRST EXECUTABLE STATEMENT  SMOUT
   lout = I1MACH(2)
   WRITE (lout,Ifmt)
   IF ( M<=0.OR.N<=0.OR.Lda<=0 ) RETURN

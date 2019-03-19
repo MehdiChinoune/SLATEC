@@ -1,13 +1,17 @@
-!DECK D1MPYQ
+!** D1MPYQ
 SUBROUTINE D1MPYQ(M,N,A,Lda,V,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  D1MPYQ
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DNSQ and DNSQE
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (R1MPYQ-S, D1MPYQ-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DNSQ and DNSQE
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (R1MPYQ-S, D1MPYQ-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Given an M by N matrix A, this subroutine computes A*Q where
   !     Q is the product of 2*(N - 1) transformations
@@ -46,9 +50,12 @@ SUBROUTINE D1MPYQ(M,N,A,Lda,V,W)
   !         information necessary to recover the Givens rotation GW(I)
   !         described above.
   !
-  !***SEE ALSO  DNSQ, DNSQE
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DNSQ, DNSQE
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -56,7 +63,7 @@ SUBROUTINE D1MPYQ(M,N,A,Lda,V,W)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  D1MPYQ
+  
   INTEGER i, j, Lda, M, N, nm1, nmj
   REAL(8) :: A(Lda,*), cos, one, sin, temp, V(*), W(*)
   SAVE one
@@ -64,7 +71,7 @@ SUBROUTINE D1MPYQ(M,N,A,Lda,V,W)
   !
   !     APPLY THE FIRST SET OF GIVENS ROTATIONS TO A.
   !
-  !***FIRST EXECUTABLE STATEMENT  D1MPYQ
+  !* FIRST EXECUTABLE STATEMENT  D1MPYQ
   nm1 = N - 1
   IF ( nm1>=1 ) THEN
     DO nmj = 1, nm1

@@ -1,15 +1,22 @@
-!DECK GAMIT
+!** GAMIT
 REAL FUNCTION GAMIT(A,X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  GAMIT
-  !***PURPOSE  Calculate Tricomi's form of the incomplete Gamma function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7E
-  !***TYPE      SINGLE PRECISION (GAMIT-S, DGAMIT-D)
-  !***KEYWORDS  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB,
+  !>
+  !***
+  !  Calculate Tricomi's form of the incomplete Gamma function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7E
+  !***
+  ! **Type:**      SINGLE PRECISION (GAMIT-S, DGAMIT-D)
+  !***
+  ! **Keywords:**  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB,
   !             SPECIAL FUNCTIONS, TRICOMI
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   !   Evaluate Tricomi's incomplete gamma function defined by
   !
@@ -33,28 +40,31 @@ REAL FUNCTION GAMIT(A,X)
   !   a loss of accuracy, which is reported if the result is less than
   !   half machine precision.
   !
-  !***REFERENCES  W. Gautschi, A computational procedure for incomplete
+  !***
+  ! **References:**  W. Gautschi, A computational procedure for incomplete
   !                 gamma functions, ACM Transactions on Mathematical
   !                 Software 5, 4 (December 1979), pp. 466-481.
   !               W. Gautschi, Incomplete gamma functions, Algorithm 542,
   !                 ACM Transactions on Mathematical Software 5, 4
   !                 (December 1979), pp. 482-489.
-  !***ROUTINES CALLED  ALGAMS, ALNGAM, GAMR, R1MACH, R9GMIT, R9LGIC,
+  !***
+  ! **Routines called:**  ALGAMS, ALNGAM, GAMR, R1MACH, R9GMIT, R9LGIC,
   !                    R9LGIT, XERCLR, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  !***END PROLOGUE  GAMIT
+  
   REAL A, aeps, ainta, algap1, alneps, alng, ALNGAM, alx, bot, &
     GAMR, h, R1MACH, R9GMIT, R9LGIC, R9LGIT, sga, sgngam, sqeps, t, X
   LOGICAL first
   SAVE alneps, sqeps, bot, first
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  GAMIT
+  !* FIRST EXECUTABLE STATEMENT  GAMIT
   IF ( first ) THEN
     alneps = -LOG(R1MACH(3))
     sqeps = SQRT(R1MACH(4))

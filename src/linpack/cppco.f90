@@ -1,17 +1,24 @@
-!DECK CPPCO
+!** CPPCO
 SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPPCO
-  !***PURPOSE  Factor a complex Hermitian positive definite matrix stored
+  !>
+  !***
+  !  Factor a complex Hermitian positive definite matrix stored
   !            in packed form and estimate the condition number of the
   !            matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2D1B
-  !***TYPE      COMPLEX (SPPCO-S, DPPCO-D, CPPCO-C)
-  !***KEYWORDS  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2D1B
+  !***
+  ! **Type:**      COMPLEX (SPPCO-S, DPPCO-D, CPPCO-C)
+  !***
+  ! **Keywords:**  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
   !             MATRIX FACTORIZATION, PACKED, POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CPPCO factors a complex Hermitian positive definite matrix
   !     stored in packed form and estimates the condition of the matrix.
@@ -76,10 +83,13 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
   !             10    CONTINUE
   !             20 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTC, CPPFA, CSSCAL, SCASUM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTC, CPPFA, CSSCAL, SCASUM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -88,7 +98,7 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CPPCO
+  
   INTEGER N, Info
   COMPLEX Ap(*), Z(*)
   REAL Rcond
@@ -101,7 +111,7 @@ SUBROUTINE CPPCO(Ap,N,Rcond,Z,Info)
   !
   !     FIND NORM OF A
   !
-  !***FIRST EXECUTABLE STATEMENT  CPPCO
+  !* FIRST EXECUTABLE STATEMENT  CPPCO
   j1 = 1
   DO j = 1, N
     Z(j) = CMPLX(SCASUM(j,Ap(j1),1),0.0E0)

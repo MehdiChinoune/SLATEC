@@ -1,14 +1,18 @@
-!DECK LSSUDS
+!** LSSUDS
 SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     Kpivot,S,Div,Td,Isflg,Scales)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  LSSUDS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (LSSUDS-S, DLSSUD-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (LSSUDS-S, DLSSUD-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !    LSSUDS solves the underdetermined system of equations  A Z = B,
   !    where A is N by M and N .LE. M.  In particular, if rank A equals
@@ -22,9 +26,9 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !    If the system of equations are not compatible, only the least
   !    squares solution of minimal length is computed.
   !
-  ! *********************************************************************
+  !- ********************************************************************
   !   INPUT
-  ! *********************************************************************
+  !- ********************************************************************
   !
   !     A -- Contains the matrix of N equations in M unknowns, A remains
   !          unchanged, must be dimensioned NRDA by M.
@@ -65,9 +69,9 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !      DIV,TD,SCALES    storage (except for SCALES which is M).
   !     ISFLG -- Storage for an internal variable.
   !
-  ! *********************************************************************
+  !- ********************************************************************
   !   OUTPUT
-  ! *********************************************************************
+  !- ********************************************************************
   !
   !     IFLAG -- Status indicator
   !            =1 if solution was obtained.
@@ -94,15 +98,19 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !               deficient problems.
   !     SCALES -- Contains the column scaling parameters.
   !
-  ! *********************************************************************
+  !- ********************************************************************
   !
-  !***SEE ALSO  BVSUP
-  !***REFERENCES  H. A. Watts, Solving linear least squares problems
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **References:**  H. A. Watts, Solving linear least squares problems
   !                 using SODS/SUDS/CODS, Sandia Report SAND77-0683,
   !                 Sandia Laboratories, 1977.
-  !***ROUTINES CALLED  J4SAVE, OHTROL, ORTHOR, R1MACH, SDOT, XERMAX,
+  !***
+  ! **Routines called:**  J4SAVE, OHTROL, ORTHOR, R1MACH, SDOT, XERMAX,
   !                    XERMSG, XGETF, XSETF
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -112,7 +120,7 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   900510  Fixed an error message.  (RWC)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  LSSUDS
+  
   REAL A, B, Diag, Div, gam, gamma, Q, R1MACH, res, S, Scales, &
     SDOT, ss, Td, U, uro, X
   INTEGER i, Iflag, Irank, irp, Iscale, Isflg, j, J4SAVE, jr, k, &
@@ -121,15 +129,15 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   DIMENSION A(Nrda,*), X(*), B(*), U(Nrdu,*), Q(Nrda,*), Diag(*), &
     Kpivot(*), S(*), Div(*), Td(*), Scales(*)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     MACHINE PRECISION (COMPUTER UNIT ROUNDOFF VALUE) IS DEFINED
   !     BY THE FUNCTION R1MACH.
   !
-  !***FIRST EXECUTABLE STATEMENT  LSSUDS
+  !* FIRST EXECUTABLE STATEMENT  LSSUDS
   uro = R1MACH(4)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   IF ( N>=1.AND.M>=N.AND.Nrda>=N ) THEN
     IF ( Nrdu==0.OR.Nrdu>=M ) THEN

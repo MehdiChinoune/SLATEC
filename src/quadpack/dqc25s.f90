@@ -1,23 +1,30 @@
-!DECK DQC25S
+!** DQC25S
 SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     Integr,Nev)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQC25S
-  !***PURPOSE  To compute I = Integral of F*W over (BL,BR), with error
+  !>
+  !***
+  !  To compute I = Integral of F*W over (BL,BR), with error
   !            estimate, where the weight function W has a singular
   !            behaviour of ALGEBRAICO-LOGARITHMIC type at the points
   !            A and/or B. (BL,BR) is a part of (A,B).
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A2A2
-  !***TYPE      DOUBLE PRECISION (QC25S-S, DQC25S-D)
-  !***KEYWORDS  25-POINT CLENSHAW-CURTIS INTEGRATION, QUADPACK, QUADRATURE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A2A2
+  !***
+  ! **Type:**      DOUBLE PRECISION (QC25S-S, DQC25S-D)
+  !***
+  ! **Keywords:**  25-POINT CLENSHAW-CURTIS INTEGRATION, QUADPACK, QUADRATURE
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Integration rules for integrands having ALGEBRAICO-LOGARITHMIC
   !        end point singularities
@@ -79,14 +86,17 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
   !           NEV    - Integer
   !                    Number of integrand evaluations
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DQCHEB, DQK15W, DQWGTS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DQCHEB, DQK15W, DQWGTS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DQC25S
+  
   !
   REAL(8) :: A, Abserr, Alfa, B, Beta, Bl, Br, centr, cheb12, &
     cheb24, dc, F, factor, fix, fval, hlgth, resabs, &
@@ -131,7 +141,7 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
   !           HLGTH  - HALF-LENGTH OF THE INTERVAL (BL,BR)
   !           CENTR  - MID POINT OF THE INTERVAL (BL,BR)
   !
-  !***FIRST EXECUTABLE STATEMENT  DQC25S
+  !* FIRST EXECUTABLE STATEMENT  DQC25S
   Nev = 25
   IF ( Bl==A.AND.(Alfa/=0.0D+00.OR.Integr==2.OR.Integr==4) ) THEN
     !

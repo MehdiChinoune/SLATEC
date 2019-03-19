@@ -1,16 +1,23 @@
-!DECK D1MACH
+!** D1MACH
 REAL(8) FUNCTION D1MACH(I)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  D1MACH
-  !***PURPOSE  Return floating point machine dependent constants.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  R1
-  !***TYPE      DOUBLE PRECISION (R1MACH-S, D1MACH-D)
-  !***KEYWORDS  MACHINE CONSTANTS
-  !***AUTHOR  Fox, P. A., (Bell Labs)
+  !>
+  !***
+  !  Return floating point machine dependent constants.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  R1
+  !***
+  ! **Type:**      DOUBLE PRECISION (R1MACH-S, D1MACH-D)
+  !***
+  ! **Keywords:**  MACHINE CONSTANTS
+  !***
+  ! **Author:**  Fox, P. A., (Bell Labs)
   !           Hall, A. D., (Bell Labs)
   !           Schryer, N. L., (Bell Labs)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   D1MACH can be used to obtain machine-dependent parameters for the
   !   local machine environment.  It is a function subprogram with one
@@ -48,11 +55,14 @@ REAL(8) FUNCTION D1MACH(I)
   !   column 1.  Also, the values of D1MACH(1) - D1MACH(4) should be
   !   checked for consistency with the local operating system.
   !
-  !***REFERENCES  P. A. Fox, A. D. Hall and N. L. Schryer, Framework for
+  !***
+  ! **References:**  P. A. Fox, A. D. Hall and N. L. Schryer, Framework for
   !                 a portable library, ACM Transactions on Mathematical
   !                 Software 4, 2 (June 1978), pp. 177-188.
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
   !   890213  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
@@ -68,11 +78,11 @@ REAL(8) FUNCTION D1MACH(I)
   !   920625  Added CONVEX -p8 and -pd8 compiler option constants.
   !           (BKS, WRB)
   !   930201  Added DEC Alpha and SGI constants.  (RWC and WRB)
-  !***END PROLOGUE  D1MACH
+  
   INTEGER I
   REAL(8), SAVE :: dmach(5)
   LOGICAL :: FIRST = .TRUE.
-  !***FIRST EXECUTABLE STATEMENT  D1MACH
+  !* FIRST EXECUTABLE STATEMENT  D1MACH
   !IF ( I<1 .OR. I>5 ) CALL XERMSG('SLATEC','D1MACH','I OUT OF BOUNDS',1,2)
 
   IF(FIRST) THEN

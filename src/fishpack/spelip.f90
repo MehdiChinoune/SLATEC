@@ -1,30 +1,38 @@
-!DECK SPELIP
+!** SPELIP
 SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     Nbdcnd,Bdc,Gama,Bdd,Xnu,COFX,COFY,An,Bn,Cn,Dn,Un,Zn,Am,&
     Bm,Cm,Dm,Um,Zm,Grhs,Usol,Idmn,W,Pertrb,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPELIP
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SEPELI
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SPELIP-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SEPELI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SPELIP-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     SPELIP sets up vectors and arrays for input to BLKTRI
   !     and computes a second order solution in USOL.  A return jump to
   !     SEPELI occurs if IORDER=2.  If IORDER=4 a fourth order
   !     solution is generated in USOL.
   !
-  !***SEE ALSO  SEPELI
-  !***ROUTINES CALLED  BLKTRI, CHKSNG, DEFER, MINSOL, ORTHOG, TRISP
-  !***COMMON BLOCKS    SPLPCM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SEPELI
+  !***
+  ! **Routines called:**  BLKTRI, CHKSNG, DEFER, MINSOL, ORTHOG, TRISP
+  !***
+  ! COMMON BLOCKS    SPLPCM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  SPELIP
+  
   REAL A, ai, AIT, Alpha, Am, An, ax1, axi, B, Bda, Bdb, Bdc, &
     Bdd, Beta, bi, BIT, Bm, Bn, bxi, C
   REAL ci, CIT, Cm, Cn, cxi, cxm, D, DIT, dj, DLX, DLX4, DLY, &
@@ -43,7 +51,7 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     DLY4
   LOGICAL singlr
   EXTERNAL COFX, COFY
-  !***FIRST EXECUTABLE STATEMENT  SPELIP
+  !* FIRST EXECUTABLE STATEMENT  SPELIP
   KSWx = Mbdcnd + 1
   KSWy = Nbdcnd + 1
   K = M + 1

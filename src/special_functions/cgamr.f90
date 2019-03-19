@@ -1,29 +1,39 @@
-!DECK CGAMR
+!** CGAMR
 COMPLEX FUNCTION CGAMR(Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CGAMR
-  !***PURPOSE  Compute the reciprocal of the Gamma function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7A
-  !***TYPE      COMPLEX (GAMR-S, DGAMR-D, CGAMR-C)
-  !***KEYWORDS  FNLIB, RECIPROCAL GAMMA FUNCTION, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the reciprocal of the Gamma function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7A
+  !***
+  ! **Type:**      COMPLEX (GAMR-S, DGAMR-D, CGAMR-C)
+  !***
+  ! **Keywords:**  FNLIB, RECIPROCAL GAMMA FUNCTION, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! CGAMR(Z) calculates the reciprocal gamma function for COMPLEX
   ! argument Z.  This is a preliminary version that is not accurate.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CLNGAM, XERCLR, XGETF, XSETF
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CLNGAM, XERCLR, XGETF, XSETF
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CGAMR
+  
   INTEGER irold
   REAL x
   COMPLEX Z, CLNGAM
-  !***FIRST EXECUTABLE STATEMENT  CGAMR
+  !* FIRST EXECUTABLE STATEMENT  CGAMR
   CGAMR = (0.0,0.0)
   x = REAL(Z)
   IF ( x<=0.0.AND.AINT(x)==x.AND.AIMAG(Z)==0.0 ) RETURN

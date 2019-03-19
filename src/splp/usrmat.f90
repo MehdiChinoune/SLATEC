@@ -1,28 +1,35 @@
-!DECK USRMAT
+!** USRMAT
 SUBROUTINE USRMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  USRMAT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (USRMAT-S, DUSRMT-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (USRMAT-S, DUSRMT-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   The user may supply this code
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  USRMAT
+  
   REAL Aij, Dattrv, Prgopt
   INTEGER I, Iflag, Indcat, J, l
   DIMENSION Prgopt(*), Dattrv(*), Iflag(10)
   !
-  !***FIRST EXECUTABLE STATEMENT  USRMAT
+  !* FIRST EXECUTABLE STATEMENT  USRMAT
   IF ( Iflag(1)==1 ) THEN
     !
     !     THIS IS THE INITIALIZATION STEP.  THE VALUES OF IFLAG(K),K=2,3,4,

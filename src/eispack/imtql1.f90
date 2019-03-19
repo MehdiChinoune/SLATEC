@@ -1,15 +1,22 @@
-!DECK IMTQL1
+!** IMTQL1
 SUBROUTINE IMTQL1(N,D,E,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  IMTQL1
-  !***PURPOSE  Compute the eigenvalues of a symmetric tridiagonal matrix
+  !>
+  !***
+  !  Compute the eigenvalues of a symmetric tridiagonal matrix
   !            using the implicit QL method.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A5, D4C2A
-  !***TYPE      SINGLE PRECISION (IMTQL1-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A5, D4C2A
+  !***
+  ! **Type:**      SINGLE PRECISION (IMTQL1-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure IMTQL1,
   !     NUM. MATH. 12, 377-383(1968) by Martin and Wilkinson,
@@ -54,25 +61,28 @@ SUBROUTINE IMTQL1(N,D,E,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  PYTHAG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  PYTHAG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  IMTQL1
+  
   !
   INTEGER i, j, l, m, N, ii, mml, Ierr
   REAL D(*), E(*)
   REAL b, c, f, g, p, r, s, s1, s2
   REAL PYTHAG
   !
-  !***FIRST EXECUTABLE STATEMENT  IMTQL1
+  !* FIRST EXECUTABLE STATEMENT  IMTQL1
   Ierr = 0
   IF ( N/=1 ) THEN
     !

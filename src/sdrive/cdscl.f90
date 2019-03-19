@@ -1,28 +1,33 @@
-!DECK CDSCL
+!** CDSCL
 SUBROUTINE CDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CDSCL
-  !***SUBSIDIARY
-  !***PURPOSE  Subroutine CDSCL rescales the YH array whenever the step
+  !>
+  !***
+  !  Subroutine CDSCL rescales the YH array whenever the step
   !            size is changed.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***TYPE      COMPLEX (SDSCL-S, DDSCL-D, CDSCL-C)
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Type:**      COMPLEX (SDSCL-S, DDSCL-D, CDSCL-C)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  CDSCL
+  
   INTEGER i, j, N, Nq
   COMPLEX Yh(N,*)
   REAL H, Hmax, Rc, Rh, Rmax, r1
-  !***FIRST EXECUTABLE STATEMENT  CDSCL
+  !* FIRST EXECUTABLE STATEMENT  CDSCL
   IF ( H<1.E0 ) THEN
     Rh = MIN(ABS(H)*Rh,ABS(H)*Rmax,Hmax)/ABS(H)
   ELSE

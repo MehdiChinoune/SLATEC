@@ -1,13 +1,17 @@
-!DECK MPMUL2
+!** MPMUL2
 SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  MPMUL2
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (MPMUL2-A)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DQDOTA and DQDOTI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (MPMUL2-A)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !  Multiplies 'mp' X by single-precision integer IY giving 'mp' Z.
   !  Multiplication by 1 may be used to normalize a number even if some
@@ -18,10 +22,14 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
   !  INTEGER arrays of size 30.  See the comments in the routine MPBLAS
   !  for the reason for this choice.
   !
-  !***SEE ALSO  DQDOTA, DQDOTI, MPBLAS
-  !***ROUTINES CALLED  MPCHK, MPERR, MPNZR, MPOVFL, MPSTR
-  !***COMMON BLOCKS    MPCOM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DQDOTA, DQDOTI, MPBLAS
+  !***
+  ! **Routines called:**  MPCHK, MPERR, MPNZR, MPOVFL, MPSTR
+  !***
+  ! COMMON BLOCKS    MPCOM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   ??????  Modified for use with BLAS.  Blank COMMON changed to named
   !           COMMON.  R given dimension 12.
@@ -29,12 +37,12 @@ SUBROUTINE MPMUL2(X,Iy,Z,Trunc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  !***END PROLOGUE  MPMUL2
+  
   INTEGER i, ij, is, ix, Iy, j, j1, j2, LUN, M, MXR
   COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
   INTEGER B, T, R, X(*), Z(*), Trunc, re, rs
   INTEGER c, c1, c2, ri, t1, t3, t4
-  !***FIRST EXECUTABLE STATEMENT  MPMUL2
+  !* FIRST EXECUTABLE STATEMENT  MPMUL2
   rs = X(1)
   IF ( rs/=0 ) THEN
     j = Iy

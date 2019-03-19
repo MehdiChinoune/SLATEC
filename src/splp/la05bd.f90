@@ -1,13 +1,17 @@
-!DECK LA05BD
+!** LA05BD
 SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  LA05BD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (LA05BS-S, LA05BD-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (LA05BS-S, LA05BD-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THIS SUBPROGRAM IS A SLIGHT MODIFICATION OF A SUBPROGRAM
   !     FROM THE C. 1979 AERE HARWELL LIBRARY.  THE NAME OF THE
@@ -25,10 +29,14 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   ! IW(I,1),IW(I,2) ARE LENGTHS OF ROW/COL I OF U.
   ! IW(.,3),IW(.,4) HOLD ROW/COL NUMBERS IN PIVOTAL ORDER.
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  XERMSG, XSETUN
-  !***COMMON BLOCKS    LA05DD
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  XERMSG, XSETUN
+  !***
+  ! COMMON BLOCKS    LA05DD
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -36,7 +44,7 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900402  Added TYPE section.  (WRB)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
-  !***END PROLOGUE  LA05BD
+  
   INTEGER i, Ia, ii, j, k, k2, kk, kl, kll, kp, kpc, l1, LCOl, &
     LENl, LENu, LP, LROw, N, n1, NCP
   INTEGER nz
@@ -45,7 +53,7 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   INTEGER Ind(Ia,2), Iw(N,8)
   INTEGER Ip(N,2)
   COMMON /LA05DD/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
-  !***FIRST EXECUTABLE STATEMENT  LA05BD
+  !* FIRST EXECUTABLE STATEMENT  LA05BD
   IF ( G<0.D0 ) THEN
     !
     CALL XSETUN(LP)

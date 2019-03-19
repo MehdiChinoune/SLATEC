@@ -1,14 +1,18 @@
-!DECK DMOUT
+!** DMOUT
 SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DMOUT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBOCLS and DFC
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SMOUT-S, DMOUT-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to DBOCLS and DFC
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SMOUT-S, DMOUT-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Wisniewski, J. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     DOUBLE PRECISION MATRIX OUTPUT ROUTINE.
   !
@@ -47,9 +51,12 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   !     IDIGIT = -6
   !     CALL DMOUT(M,N,LDTABL,TABLEU,21H(16H1SIMPLEX TABLEAU),IDIGIT)
   !
-  !***SEE ALSO  DBOCLS, DFC
-  !***ROUTINES CALLED  I1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBOCLS, DFC
+  !***
+  ! **Routines called:**  I1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   821220  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891107  Added comma after 1P edit descriptor in FORMAT
@@ -57,13 +64,13 @@ SUBROUTINE DMOUT(M,N,Lda,A,Ifmt,Idigit)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
-  !***END PROLOGUE  DMOUT
+  
   INTEGER i, I1MACH, Idigit, j, k1, k2, Lda, lout, M, N, ndigit
   REAL(8) :: A(Lda,*)
   CHARACTER Ifmt*(*), icol*3
   SAVE icol
   DATA icol/'COL'/
-  !***FIRST EXECUTABLE STATEMENT  DMOUT
+  !* FIRST EXECUTABLE STATEMENT  DMOUT
   lout = I1MACH(2)
   WRITE (lout,Ifmt)
   IF ( M<=0.OR.N<=0.OR.Lda<=0 ) RETURN

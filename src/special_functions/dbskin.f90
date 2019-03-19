@@ -1,15 +1,22 @@
-!DECK DBSKIN
+!** DBSKIN
 SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBSKIN
-  !***PURPOSE  Compute repeated integrals of the K-zero Bessel function.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10F
-  !***TYPE      DOUBLE PRECISION (BSKIN-S, DBSKIN-D)
-  !***KEYWORDS  BICKLEY FUNCTIONS, EXPONENTIAL INTEGRAL,
+  !>
+  !***
+  !  Compute repeated integrals of the K-zero Bessel function.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10F
+  !***
+  ! **Type:**      DOUBLE PRECISION (BSKIN-S, DBSKIN-D)
+  !***
+  ! **Keywords:**  BICKLEY FUNCTIONS, EXPONENTIAL INTEGRAL,
   !             INTEGRALS OF BESSEL FUNCTIONS, K-ZERO BESSEL FUNCTION
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !         The following definitions are used in DBSKIN:
   !
@@ -59,7 +66,7 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !
   !         BSKIN is the single precision version of DBSKIN.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !         Numerical recurrence on
   !
@@ -77,15 +84,18 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !         sequence depending on the relation of INT(X+0.5) to the
   !         indices N,...,N+M-1.
   !
-  !***REFERENCES  D. E. Amos, Uniform asymptotic expansions for
+  !***
+  ! **References:**  D. E. Amos, Uniform asymptotic expansions for
   !                 exponential integrals E(N,X) and Bickley functions
   !                 KI(N,X), ACM Transactions on Mathematical Software,
   !                 1983.
   !               D. E. Amos, A portable Fortran subroutine for the
   !                 Bickley functions KI(N,X), Algorithm 609, ACM
   !                 Transactions on Mathematical Software, 1983.
-  !***ROUTINES CALLED  D1MACH, DBKIAS, DBKISR, DEXINT, DGAMRN, I1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, DBKIAS, DBKISR, DEXINT, DGAMRN, I1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -94,7 +104,7 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DBSKIN
+  
   INTEGER i, icase, Ierr, il, i1m, k, kk, Kode, ktrms, M, m3, N, &
     ne, nflg, nl, nlim, nn, np, ns, nt, Nz
   INTEGER I1MACH
@@ -142,7 +152,7 @@ SUBROUTINE DBSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !-----------------------------------------------------------------------
   DATA hrtpi/8.86226925452758014D-01/
   !
-  !***FIRST EXECUTABLE STATEMENT  DBSKIN
+  !* FIRST EXECUTABLE STATEMENT  DBSKIN
   Ierr = 0
   Nz = 0
   IF ( X<0.0D0 ) Ierr = 1

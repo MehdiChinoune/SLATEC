@@ -1,15 +1,22 @@
-!DECK XERMAX
+!** XERMAX
 SUBROUTINE XERMAX(Max)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XERMAX
-  !***PURPOSE  Set maximum number of times any error message is to be
+  !>
+  !***
+  !  Set maximum number of times any error message is to be
   !            printed.
-  !***LIBRARY   SLATEC (XERROR)
-  !***CATEGORY  R3C
-  !***TYPE      ALL (XERMAX-A)
-  !***KEYWORDS  ERROR, XERROR
-  !***AUTHOR  Jones, R. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (XERROR)
+  !***
+  ! **Category:**  R3C
+  !***
+  ! **Type:**      ALL (XERMAX-A)
+  !***
+  ! **Keywords:**  ERROR, XERROR
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !        XERMAX sets the maximum number of times any message
@@ -24,17 +31,20 @@ SUBROUTINE XERMAX(Max)
   !        MAX - the maximum number of times any one message
   !              is to be printed.
   !
-  !***REFERENCES  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
+  !***
+  ! **References:**  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
   !                 Error-handling Package, SAND82-0800, Sandia
   !                 Laboratories, 1982.
-  !***ROUTINES CALLED  J4SAVE
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  J4SAVE
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790801  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  XERMAX
+  
   INTEGER J4SAVE, junk, Max
-  !***FIRST EXECUTABLE STATEMENT  XERMAX
+  !* FIRST EXECUTABLE STATEMENT  XERMAX
   junk = J4SAVE(4,Max,.TRUE.)
 END SUBROUTINE XERMAX

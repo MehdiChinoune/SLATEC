@@ -1,15 +1,22 @@
-!DECK CNBFS
+!** CNBFS
 SUBROUTINE CNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CNBFS
-  !***PURPOSE  Solve a general nonsymmetric banded system of linear
+  !>
+  !***
+  !  Solve a general nonsymmetric banded system of linear
   !            equations.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2C2
-  !***TYPE      COMPLEX (SNBFS-S, DNBFS-D, CNBFS-C)
-  !***KEYWORDS  BANDED, LINEAR EQUATIONS, NONSYMMETRIC
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2C2
+  !***
+  ! **Type:**      COMPLEX (SNBFS-S, DNBFS-D, CNBFS-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR EQUATIONS, NONSYMMETRIC
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !    Subroutine CNBFS solves a general nonsymmetric banded NxN
   !    system of single precision complex linear equations using
@@ -157,10 +164,13 @@ SUBROUTINE CNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !                      the user provides otherwise, an error message
   !                      will be printed followed by an abort.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CNBCO, CNBSL, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CNBCO, CNBSL, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800813  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -170,14 +180,14 @@ SUBROUTINE CNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to
   !           IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CNBFS
+  
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*), Ml, Mu
   COMPLEX Abe(Lda,*), V(*), Work(*)
   REAL rcond
   REAL R1MACH
   CHARACTER(8) :: xern1, xern2
-  !***FIRST EXECUTABLE STATEMENT  CNBFS
+  !* FIRST EXECUTABLE STATEMENT  CNBFS
   IF ( Lda<N ) THEN
     Ind = -1
     WRITE (xern1,'(I8)') Lda

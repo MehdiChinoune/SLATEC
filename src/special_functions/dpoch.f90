@@ -1,14 +1,21 @@
-!DECK DPOCH
+!** DPOCH
 REAL(8) FUNCTION DPOCH(A,X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPOCH
-  !***PURPOSE  Evaluate a generalization of Pochhammer's symbol.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C1, C7A
-  !***TYPE      DOUBLE PRECISION (POCH-S, DPOCH-D)
-  !***KEYWORDS  FNLIB, POCHHAMMER, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Evaluate a generalization of Pochhammer's symbol.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C1, C7A
+  !***
+  ! **Type:**      DOUBLE PRECISION (POCH-S, DPOCH-D)
+  !***
+  ! **Keywords:**  FNLIB, POCHHAMMER, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate a double precision generalization of Pochhammer's symbol
   ! (A)-sub-X = GAMMA(A+X)/GAMMA(A) for double precision A and X.
@@ -17,9 +24,12 @@ REAL(8) FUNCTION DPOCH(A,X)
   ! properly and may not properly handle the case when the result is
   ! computed to less than half of double precision.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D9LGMC, DFAC, DGAMMA, DGAMR, DLGAMS, DLNREL, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D9LGMC, DFAC, DGAMMA, DGAMR, DLGAMS, DLNREL, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -27,7 +37,7 @@ REAL(8) FUNCTION DPOCH(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  !***END PROLOGUE  DPOCH
+  
   INTEGER i, ia, n
   REAL(8) :: A, X, absa, absax, alnga, alngax, ax, b, pi, &
     sgnga, sgngax, DFAC, DLNREL, D9LGMC, DGAMMA, &
@@ -35,7 +45,7 @@ REAL(8) FUNCTION DPOCH(A,X)
   EXTERNAL DGAMMA
   SAVE pi
   DATA pi/3.141592653589793238462643383279503D0/
-  !***FIRST EXECUTABLE STATEMENT  DPOCH
+  !* FIRST EXECUTABLE STATEMENT  DPOCH
   ax = A + X
   IF ( ax<=0.0D0 ) THEN
     IF ( AINT(ax)==ax ) THEN

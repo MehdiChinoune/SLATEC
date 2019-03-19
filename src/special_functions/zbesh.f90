@@ -1,19 +1,26 @@
-!DECK ZBESH
+!** ZBESH
 SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZBESH
-  !***PURPOSE  Compute a sequence of the Hankel functions H(m,a,z)
+  !>
+  !***
+  !  Compute a sequence of the Hankel functions H(m,a,z)
   !            for superscript m=1 or 2, real nonnegative orders a=b,
   !            b+1,... where b>0, and nonzero complex argument z.  A
   !            scaling option is available to help avoid overflow.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10A4
-  !***TYPE      COMPLEX (CBESH-C, ZBESH-C)
-  !***KEYWORDS  BESSEL FUNCTIONS OF COMPLEX ARGUMENT,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10A4
+  !***
+  ! **Type:**      COMPLEX (CBESH-C, ZBESH-C)
+  !***
+  ! **Keywords:**  BESSEL FUNCTIONS OF COMPLEX ARGUMENT,
   !             BESSEL FUNCTIONS OF THE THIRD KIND, H BESSEL FUNCTIONS,
   !             HANKEL FUNCTIONS
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !                      ***A DOUBLE PRECISION ROUTINE***
   !         On KODE=1, ZBESH computes an N member sequence of complex
@@ -67,7 +74,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   !                    IERR=5  Algorithmic error - NO COMPUTATION
   !                            (Termination condition not met)
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !         The computation is carried out by the formula
   !
@@ -129,7 +136,8 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   !         the principal phase angle is on the order of +P, -P, PI/2-P,
   !         or -PI/2+P.
   !
-  !***REFERENCES  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
+  !***
+  ! **References:**  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
   !                 matical Functions, National Bureau of Standards
   !                 Applied Mathematics Series 55, U. S. Department
   !                 of Commerce, Tenth Printing (1972) or later.
@@ -149,14 +157,16 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   !                 Transactions on Mathematical Software, 12 (September
   !                 1986), pp. 265-273.
   !
-  !***ROUTINES CALLED  D1MACH, I1MACH, ZABS, ZACON, ZBKNU, ZBUNK, ZUOIK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, I1MACH, ZABS, ZACON, ZBKNU, ZBUNK, ZUOIK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   890801  REVISION DATE from Version 3.2
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  !***END PROLOGUE  ZBESH
+  
   !
   !     COMPLEX CY,Z,ZN,ZT,CSGN
   REAL(8) :: aa, alim, aln, arg, az, Cyi, Cyr, dig, elim, &
@@ -170,7 +180,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   !
   DATA hpi/1.57079632679489662D0/
   !
-  !***FIRST EXECUTABLE STATEMENT  ZBESH
+  !* FIRST EXECUTABLE STATEMENT  ZBESH
   Ierr = 0
   Nz = 0
   IF ( Zr==0.0D0.AND.Zi==0.0D0 ) Ierr = 1

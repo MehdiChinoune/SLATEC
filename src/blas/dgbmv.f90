@@ -1,17 +1,24 @@
-!DECK DGBMV
+!** DGBMV
 SUBROUTINE DGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGBMV
-  !***PURPOSE  Perform one of the matrix-vector operations.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B4
-  !***TYPE      DOUBLE PRECISION (SGBMV-S, DGBMV-D, CGBMV-C)
-  !***KEYWORDS  LEVEL 2 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J. J., (ANL)
+  !>
+  !***
+  !  Perform one of the matrix-vector operations.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (SGBMV-S, DGBMV-D, CGBMV-C)
+  !***
+  ! **Keywords:**  LEVEL 2 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J. J., (ANL)
   !           Du Croz, J., (NAG)
   !           Hammarling, S., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  DGBMV  performs one of the matrix-vector operations
   !
@@ -117,16 +124,19 @@ SUBROUTINE DGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !           Y. INCY must not be zero.
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J. J., Du Croz, J., Hammarling, S., and
+  !***
+  ! **References:**  Dongarra, J. J., Du Croz, J., Hammarling, S., and
   !                 Hanson, R. J.  An extended set of Fortran basic linear
   !                 algebra subprograms.  ACM TOMS, Vol. 14, No. 1,
   !                 pp. 1-17, March 1988.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  DGBMV
+  
   !     .. Scalar Arguments ..
   REAL(8) :: Alpha, Beta
   INTEGER Incx, Incy, Kl, Ku, Lda, M, N
@@ -146,7 +156,7 @@ SUBROUTINE DGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, MIN
-  !***FIRST EXECUTABLE STATEMENT  DGBMV
+  !* FIRST EXECUTABLE STATEMENT  DGBMV
   !
   !     Test the input parameters.
   !

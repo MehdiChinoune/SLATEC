@@ -1,15 +1,22 @@
-!DECK AVINT
+!** AVINT
 SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  AVINT
-  !***PURPOSE  Integrate a function tabulated at arbitrarily spaced
+  !>
+  !***
+  !  Integrate a function tabulated at arbitrarily spaced
   !            abscissas using overlapping parabolas.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  H2A1B2
-  !***TYPE      SINGLE PRECISION (AVINT-S, DAVINT-D)
-  !***KEYWORDS  INTEGRATION, QUADRATURE, TABULATED DATA
-  !***AUTHOR  Jones, R. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  H2A1B2
+  !***
+  ! **Type:**      SINGLE PRECISION (AVINT-S, DAVINT-D)
+  !***
+  ! **Keywords:**  INTEGRATION, QUADRATURE, TABULATED DATA
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !         AVINT integrates a function tabulated at arbitrarily spaced
@@ -59,11 +66,14 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !     Adaptation and modifications for Sandia Mathematical Program
   !     Library by Rondall E. Jones.
   !
-  !***REFERENCES  R. E. Jones, Approximate integrator of functions
+  !***
+  ! **References:**  R. E. Jones, Approximate integrator of functions
   !                 tabulated at arbitrarily spaced abscissas,
   !                 Report SC-M-69-335, Sandia Laboratories, 1969.
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   690901  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -72,14 +82,14 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  AVINT
+  
   REAL Ans, fl, fr, slope, X, Xlo, Xup, Y
   INTEGER i, Ierr, inlft, inrt, istart, istop, N
   REAL(8) :: r3, rp5, sum, syl, syl2, syl3, syu, syu2, syu3, &
     x1, x2, x3, x12, x13, x23, term1, term2, term3, &
     a, b, c, ca, cb, cc
   DIMENSION X(*), Y(*)
-  !***FIRST EXECUTABLE STATEMENT  AVINT
+  !* FIRST EXECUTABLE STATEMENT  AVINT
   Ierr = 1
   Ans = 0.0
   IF ( Xlo<Xup ) THEN

@@ -1,17 +1,24 @@
-!DECK SSPCO
+!** SSPCO
 SUBROUTINE SSPCO(Ap,N,Kpvt,Rcond,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSPCO
-  !***PURPOSE  Factor a real symmetric matrix stored in packed form
+  !>
+  !***
+  !  Factor a real symmetric matrix stored in packed form
   !            by elimination with symmetric pivoting and estimate the
   !            condition number of the matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1A
-  !***TYPE      SINGLE PRECISION (SSPCO-S, DSPCO-D, CHPCO-C, CSPCO-C)
-  !***KEYWORDS  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1A
+  !***
+  ! **Type:**      SINGLE PRECISION (SSPCO-S, DSPCO-D, CHPCO-C, CSPCO-C)
+  !***
+  ! **Keywords:**  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
   !             MATRIX FACTORIZATION, PACKED, SYMMETRIC
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     SSPCO factors a real symmetric matrix stored in packed
   !     form by elimination with symmetric pivoting and estimates
@@ -79,10 +86,13 @@ SUBROUTINE SSPCO(Ap,N,Kpvt,Rcond,Z)
   !             10    CONTINUE
   !             20 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SASUM, SAXPY, SDOT, SSCAL, SSPFA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SASUM, SAXPY, SDOT, SSCAL, SSPFA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -92,7 +102,7 @@ SUBROUTINE SSPCO(Ap,N,Kpvt,Rcond,Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SSPCO
+  
   INTEGER N, Kpvt(*)
   REAL Ap(*), Z(*)
   REAL Rcond
@@ -104,7 +114,7 @@ SUBROUTINE SSPCO(Ap,N,Kpvt,Rcond,Z)
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !
-  !***FIRST EXECUTABLE STATEMENT  SSPCO
+  !* FIRST EXECUTABLE STATEMENT  SSPCO
   j1 = 1
   DO j = 1, N
     Z(j) = SASUM(j,Ap(j1),1)

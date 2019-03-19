@@ -1,15 +1,22 @@
-!DECK DXLEGF
+!** DXLEGF
 SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DXLEGF
-  !***PURPOSE  Compute normalized Legendre polynomials and associated
+  !>
+  !***
+  !  Compute normalized Legendre polynomials and associated
   !            Legendre functions.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C3A2, C9
-  !***TYPE      DOUBLE PRECISION (XLEGF-S, DXLEGF-D)
-  !***KEYWORDS  LEGENDRE FUNCTIONS
-  !***AUTHOR  Smith, John M., (NBS and George Mason University)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C3A2, C9
+  !***
+  ! **Type:**      DOUBLE PRECISION (XLEGF-S, DXLEGF-D)
+  !***
+  ! **Keywords:**  LEGENDRE FUNCTIONS
+  !***
+  ! **Author:**  Smith, John M., (NBS and George Mason University)
+  !***
+  ! **Description:**
   !
   !   DXLEGF: Extended-range Double-precision Legendre Functions
   !
@@ -106,15 +113,19 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !   If IERROR=208, an overflow or underflow of an extended-range number
   ! was detected in DXC210.
   !
-  !***SEE ALSO  DXSET
-  !***REFERENCES  Olver and Smith, Associated Legendre Functions on the
+  !***
+  ! **See also:**  DXSET
+  !***
+  ! **References:**  Olver and Smith, Associated Legendre Functions on the
   !                 Cut, J Comp Phys, v 51, n 3, Sept 1983, pp 502--518.
   !               Smith, Olver and Lozier, Extended-Range Arithmetic and
   !                 Normalized Legendre Polynomials, ACM Trans on Math
   !                 Softw, v 7, n 1, March 1981, pp 93--105.
-  !***ROUTINES CALLED  DXPMU, DXPMUP, DXPNRM, DXPQNU, DXQMU, DXQNU, DXRED,
+  !***
+  ! **Routines called:**  DXPMU, DXPMUP, DXPNRM, DXPQNU, DXQMU, DXQNU, DXRED,
   !                    DXSET, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820728  DATE WRITTEN
   !   890126  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
@@ -123,12 +134,12 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  DXLEGF
+  
   INTEGER i, Id, Ierror, Ipqa, l, Mu1, Mu2, Nudiff
   REAL(8) :: Pqa, Dnu1, dnu2, sx, Theta, x, pi2
   DIMENSION Pqa(*), Ipqa(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  DXLEGF
+  !* FIRST EXECUTABLE STATEMENT  DXLEGF
   Ierror = 0
   CALL DXSET(0,0,0.0D0,0,Ierror)
   IF ( Ierror/=0 ) RETURN

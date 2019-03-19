@@ -1,15 +1,22 @@
-!DECK DBSPVN
+!** DBSPVN
 SUBROUTINE DBSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBSPVN
-  !***PURPOSE  Calculate the value of all (possibly) nonzero basis
+  !>
+  !***
+  !  Calculate the value of all (possibly) nonzero basis
   !            functions at X.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E3, K6
-  !***TYPE      DOUBLE PRECISION (BSPVN-S, DBSPVN-D)
-  !***KEYWORDS  EVALUATION OF B-SPLINE
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E3, K6
+  !***
+  ! **Type:**      DOUBLE PRECISION (BSPVN-S, DBSPVN-D)
+  !***
+  ! **Keywords:**  EVALUATION OF B-SPLINE
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Written by Carl de Boor and modified by D. E. Amos
   !
@@ -57,18 +64,21 @@ SUBROUTINE DBSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
   !     Error Conditions
   !         Improper input is a fatal error.
   !
-  !***REFERENCES  Carl de Boor, Package for calculating with B-splines,
+  !***
+  ! **References:**  Carl de Boor, Package for calculating with B-splines,
   !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
   !                 pp. 441-472.
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DBSPVN
+  
   !
   INTEGER Ileft, imjp1, Index, ipj, Iwork, Jhigh, jp1, jp1ml, K, l
   REAL(8) :: T, vm, vmprev, Vnikx, Work, X
@@ -76,7 +86,7 @@ SUBROUTINE DBSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
   DIMENSION T(*), Vnikx(*), Work(*)
   !     CONTENT OF J, DELTAM, DELTAP IS EXPECTED UNCHANGED BETWEEN CALLS.
   !     WORK(I) = DELTAP(I), WORK(K+I) = DELTAM(I), I = 1,K
-  !***FIRST EXECUTABLE STATEMENT  DBSPVN
+  !* FIRST EXECUTABLE STATEMENT  DBSPVN
   IF ( K<1 ) THEN
     !
     !

@@ -1,21 +1,28 @@
-!DECK DQK15W
+!** DQK15W
 SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQK15W
-  !***PURPOSE  To compute I = Integral of F*W over (A,B), with error
+  !>
+  !***
+  !  To compute I = Integral of F*W over (A,B), with error
   !                           estimate
   !                       J = Integral of ABS(F*W) over (A,B)
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A2A2
-  !***TYPE      DOUBLE PRECISION (QK15W-S, DQK15W-D)
-  !***KEYWORDS  15-POINT GAUSS-KRONROD RULES, QUADPACK, QUADRATURE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A2A2
+  !***
+  ! **Type:**      DOUBLE PRECISION (QK15W-S, DQK15W-D)
+  !***
+  ! **Keywords:**  15-POINT GAUSS-KRONROD RULES, QUADPACK, QUADRATURE
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !           Integration rules
   !           Standard fortran subroutine
@@ -63,14 +70,17 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   !              RESASC - Double precision
   !                       Approximation to the integral of ABS(F-I/(B-A))
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DQK15W
+  
   !
   REAL(8) :: A, absc, absc1, absc2, Abserr, B, centr, dhlgth, &
     D1MACH, epmach, F, fc, fsum, fval1, fval2, fv1, &
@@ -131,7 +141,7 @@ SUBROUTINE DQK15W(F,W,P1,P2,P3,P4,Kp,A,B,Result,Abserr,Resabs,Resasc)
   !           EPMACH IS THE LARGEST RELATIVE SPACING.
   !           UFLOW IS THE SMALLEST POSITIVE MAGNITUDE.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQK15W
+  !* FIRST EXECUTABLE STATEMENT  DQK15W
   epmach = D1MACH(4)
   uflow = D1MACH(1)
   !

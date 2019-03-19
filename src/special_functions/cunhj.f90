@@ -1,13 +1,17 @@
-!DECK CUNHJ
+!** CUNHJ
 SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CUNHJ
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBESI and CBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CUNHJ-A, ZUNHJ-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBESI and CBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CUNHJ-A, ZUNHJ-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     REFERENCES
   !         HANDBOOK OF MATHEMATICAL FUNCTIONS BY M. ABRAMOWITZ AND I.A.
@@ -35,12 +39,15 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
   !         MUST BE SPECIFIED. IPMTR=0 RETURNS ALL PARAMETERS. IPMTR=
   !         1 COMPUTES ALL EXCEPT ASUM AND BSUM.
   !
-  !***SEE ALSO  CBESI, CBESK
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBESI, CBESK
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CUNHJ
+  
   COMPLEX Arg, Asum, Bsum, cfnu, cone, cr, czero, dr, p, Phi, &
     przth, ptfn, rfn13, rtzta, rzth, suma, sumb, tfn, t2, &
     up, w, w2, Z, za, zb, zc, zeta, Zeta1, Zeta2, zth
@@ -430,7 +437,7 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
     6.66666666666666667E-01, 1.57079632679489662E+00, &
     3.14159265358979324E+00, 4.71238898038468986E+00/
   DATA czero, cone/(0.0E0,0.0E0), (1.0E0,0.0E0)/
-  !***FIRST EXECUTABLE STATEMENT  CUNHJ
+  !* FIRST EXECUTABLE STATEMENT  CUNHJ
   rfnu = 1.0E0/Fnu
   !     ZB = Z*CMPLX(RFNU,0.0E0)
   !-----------------------------------------------------------------------

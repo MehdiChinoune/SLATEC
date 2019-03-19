@@ -1,14 +1,18 @@
-!DECK DPLPUP
+!** DPLPUP
 SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
     Imat,Sizeup,Asmall,Abig)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPLPUP
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SPLPUP-S, DPLPUP-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPLPUP-S, DPLPUP-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THE EDITING REQUIRED TO CONVERT THIS SUBROUTINE FROM SINGLE TO
   !     DOUBLE PRECISION INVOLVES THE FOLLOWING CHARACTER STRING CHANGES.
@@ -22,9 +26,12 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
   !     THIS SUBROUTINE COLLECTS INFORMATION ABOUT THE BOUNDS AND MATRIX
   !     FROM THE USER.  IT IS PART OF THE DSPLP( ) PACKAGE.
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  DPCHNG, DPNNZR, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  DPCHNG, DPNNZR, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Corrected references to XERRWV.  (WRB)
@@ -36,7 +43,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
   !   900510  Convert XERRWV calls to XERMSG calls, changed do-it-yourself
   !           DO loops to DO loops.  (RWC)
   !   900602  Get rid of ASSIGNed GOTOs.  (RWC)
-  !***END PROLOGUE  DPLPUP
+  
   INTEGER i, indcat, index, Info, iplace, itcnt, itmax, j, Mrelas, Nvars
   REAL(8) :: Abig, aij, Amat(*), amn, amx, Asmall, Bl(*), &
     Bu(*), Dattrv(*), Prgopt(*), xval, zero
@@ -45,7 +52,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
   !
-  !***FIRST EXECUTABLE STATEMENT  DPLPUP
+  !* FIRST EXECUTABLE STATEMENT  DPLPUP
   zero = 0.D0
   !
   !     CHECK USER-SUPPLIED BOUNDS

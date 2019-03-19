@@ -1,20 +1,27 @@
-!DECK DQC25C
+!** DQC25C
 SUBROUTINE DQC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQC25C
-  !***PURPOSE  To compute I = Integral of F*W over (A,B) with
+  !>
+  !***
+  !  To compute I = Integral of F*W over (A,B) with
   !            error estimate, where W(X) = 1/(X-C)
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A2A2, J4
-  !***TYPE      DOUBLE PRECISION (QC25C-S, DQC25C-D)
-  !***KEYWORDS  25-POINT CLENSHAW-CURTIS INTEGRATION, QUADPACK, QUADRATURE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A2A2, J4
+  !***
+  ! **Type:**      DOUBLE PRECISION (QC25C-S, DQC25C-D)
+  !***
+  ! **Keywords:**  25-POINT CLENSHAW-CURTIS INTEGRATION, QUADPACK, QUADRATURE
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Integration rules for the computation of CAUCHY
   !        PRINCIPAL VALUE integrals
@@ -57,14 +64,17 @@ SUBROUTINE DQC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !
   ! ......................................................................
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DQCHEB, DQK15W, DQWGTC
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DQCHEB, DQK15W, DQWGTC
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DQC25C
+  
   !
   REAL(8) :: A, Abserr, ak22, amom0, amom1, amom2, B, C, cc, &
     centr, cheb12, cheb24, DQWGTC, F, fval, hlgth, &
@@ -109,7 +119,7 @@ SUBROUTINE DQC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !
   !           CHECK THE POSITION OF C.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQC25C
+  !* FIRST EXECUTABLE STATEMENT  DQC25C
   cc = (0.2D+01*C-B-A)/(B-A)
   IF ( ABS(cc)<0.11D+01 ) THEN
     !

@@ -1,30 +1,40 @@
-!DECK GAMR
+!** GAMR
 REAL FUNCTION GAMR(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  GAMR
-  !***PURPOSE  Compute the reciprocal of the Gamma function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7A
-  !***TYPE      SINGLE PRECISION (GAMR-S, DGAMR-D, CGAMR-C)
-  !***KEYWORDS  FNLIB, RECIPROCAL GAMMA FUNCTION, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the reciprocal of the Gamma function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7A
+  !***
+  ! **Type:**      SINGLE PRECISION (GAMR-S, DGAMR-D, CGAMR-C)
+  !***
+  ! **Keywords:**  FNLIB, RECIPROCAL GAMMA FUNCTION, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! GAMR is a single precision function that evaluates the reciprocal
   ! of the gamma function for single precision argument X.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ALGAMS, GAMMA, XERCLR, XGETF, XSETF
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ALGAMS, GAMMA, XERCLR, XGETF, XSETF
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  !***END PROLOGUE  GAMR
+  
   REAL alngx, GAMMA, sgngx, X
   INTEGER irold
   EXTERNAL GAMMA
-  !***FIRST EXECUTABLE STATEMENT  GAMR
+  !* FIRST EXECUTABLE STATEMENT  GAMR
   GAMR = 0.0
   IF ( X<=0.0.AND.AINT(X)==X ) RETURN
   !

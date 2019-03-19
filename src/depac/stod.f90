@@ -1,13 +1,17 @@
-!DECK STOD
+!** STOD
 SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  STOD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (STOD-S, DSTOD-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (STOD-S, DSTOD-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   STOD integrates a system of first order odes over one step in the
   !   integrator package DEBDF.
@@ -75,17 +79,21 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   ! N      = The number of first-order differential equations.
   ! ----------------------------------------------------------------------
   !
-  !***SEE ALSO  DEBDF
-  !***ROUTINES CALLED  CFOD, PJAC, SLVS, VNWRMS
-  !***COMMON BLOCKS    DEBDF1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DEBDF
+  !***
+  ! **Routines called:**  CFOD, PJAC, SLVS, VNWRMS
+  !***
+  ! COMMON BLOCKS    DEBDF1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-  !***END PROLOGUE  STOD
+  
   INTEGER IOD, Ipar, KSTeps
   REAL Rpar
   EXTERNAL F, JAC
@@ -108,7 +116,7 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
     METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
   !
   !
-  !***FIRST EXECUTABLE STATEMENT  STOD
+  !* FIRST EXECUTABLE STATEMENT  STOD
   KFLag = 0
   told = TN
   ncf = 0

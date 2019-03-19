@@ -1,17 +1,24 @@
-!DECK DROTMG
+!** DROTMG
 SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DROTMG
-  !***PURPOSE  Construct a modified Givens transformation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B10
-  !***TYPE      DOUBLE PRECISION (SROTMG-S, DROTMG-D)
-  !***KEYWORDS  BLAS, LINEAR ALGEBRA, MODIFIED GIVENS ROTATION, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !>
+  !***
+  !  Construct a modified Givens transformation.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B10
+  !***
+  ! **Type:**      DOUBLE PRECISION (SROTMG-S, DROTMG-D)
+  !***
+  ! **Keywords:**  BLAS, LINEAR ALGEBRA, MODIFIED GIVENS ROTATION, VECTOR
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -45,19 +52,22 @@ SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
   !     respectively.  (Values of 1.D0, -1.D0, or 0.D0 implied by the
   !     value of DPARAM(1) are not stored in DPARAM.)
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920316  Prologue corrected.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DROTMG
+  
   INTEGER igo
   REAL(8) :: gam, one, rgamsq, Dd1, Dd2, dh11, dh12, dh21, &
     dh22, Dparam, dp1, dp2, dq1, dq2, du, Dy1, zero, &
@@ -66,7 +76,7 @@ SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
   SAVE zero, one, two, gam, gamsq, rgamsq
   DATA zero, one, two/0.0D0, 1.0D0, 2.0D0/
   DATA gam, gamsq, rgamsq/4096.0D0, 16777216.D0, 5.9604645D-8/
-  !***FIRST EXECUTABLE STATEMENT  DROTMG
+  !* FIRST EXECUTABLE STATEMENT  DROTMG
   IF ( .NOT.Dd1<zero ) THEN
     !     CASE-DD1-NONNEGATIVE
     dp2 = Dd2*Dy1

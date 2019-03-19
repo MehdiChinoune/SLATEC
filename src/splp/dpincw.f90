@@ -1,15 +1,19 @@
-!DECK DPINCW
+!** DPINCW
 SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,Ibb,Costsc,Gg,Erdnrm,Dulnrm,Amat,Basmat,Csc,Wr,Ww,&
     Rz,Rg,Costs,Colnrm,Duals,Stpedg)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPINCW
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SPINCW-S, DPINCW-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPINCW-S, DPINCW-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THE EDITING REQUIRED TO CONVERT THIS SUBROUTINE FROM SINGLE TO
   !     DOUBLE PRECISION INVOLVES THE FOLLOWING CHARACTER STRING CHANGES.
@@ -21,16 +25,19 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !     IT IMPLEMENTS THE PROCEDURE (INITIALIZE REDUCED COSTS AND
   !     STEEPEST EDGE WEIGHTS).
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  DCOPY, DDOT, DPRWPG, IDLOC, LA05BD
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  DCOPY, DDOT, DPRWPG, IDLOC, LA05BD
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
   !   890606  Changed references from IPLOC to IDLOC.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DPINCW
+  
   INTEGER i, IDLOC, ihi, il1, ilow, ipage, iu1, j, Jstrt, key, &
     Lbm, Lmx, lpg, Mrelas, nnegrc, Npp, Nvars
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
@@ -39,7 +46,7 @@ SUBROUTINE DPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Erdnrm, Dulnrm, Gg, one, rzj, scalr, zero, rcost, cnorm
   REAL(8) :: DDOT
   LOGICAL Stpedg, pagepl, trans
-  !***FIRST EXECUTABLE STATEMENT  DPINCW
+  !* FIRST EXECUTABLE STATEMENT  DPINCW
   lpg = Lmx - (Nvars+4)
   zero = 0.D0
   one = 1.D0

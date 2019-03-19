@@ -1,17 +1,24 @@
-!DECK BESI0E
+!** BESI0E
 REAL FUNCTION BESI0E(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BESI0E
-  !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
+  !>
+  !***
+  !  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order zero.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B1
-  !***TYPE      SINGLE PRECISION (BESI0E-S, DBSI0E-D)
-  !***KEYWORDS  EXPONENTIALLY SCALED, FIRST KIND, FNLIB,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B1
+  !***
+  ! **Type:**      SINGLE PRECISION (BESI0E-S, DBSI0E-D)
+  !***
+  ! **Keywords:**  EXPONENTIALLY SCALED, FIRST KIND, FNLIB,
   !             HYPERBOLIC BESSEL FUNCTION, MODIFIED BESSEL FUNCTION,
   !             ORDER ZERO, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! BESI0E(X) calculates the exponentially scaled modified (hyperbolic)
   ! Bessel function of the first kind of order zero for real argument X;
@@ -38,13 +45,16 @@ REAL FUNCTION BESI0E(X)
   !                               significant figures required  14.86
   !                                    decimal places required  17.09
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890313  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  BESI0E
+  
   REAL ai02cs, ai0cs, bi0cs, CSEVL, R1MACH, X, xsml, y
   INTEGER INITS, ntai0, ntai02, nti0
   DIMENSION bi0cs(12), ai0cs(21), ai02cs(22)
@@ -106,7 +116,7 @@ REAL FUNCTION BESI0E(X)
   DATA ai02cs(21)/ - .00000000000000027E0/
   DATA ai02cs(22)/.00000000000000003E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BESI0E
+  !* FIRST EXECUTABLE STATEMENT  BESI0E
   IF ( first ) THEN
     nti0 = INITS(bi0cs,12,0.1*R1MACH(3))
     ntai0 = INITS(ai0cs,21,0.1*R1MACH(3))

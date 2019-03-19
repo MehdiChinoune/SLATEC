@@ -1,13 +1,17 @@
-!DECK CBUNI
+!** CBUNI
 SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CBUNI
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBESI and CBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CBUNI-A, ZBUNI-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBESI and CBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CBUNI-A, ZBUNI-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     CBUNI COMPUTES THE I BESSEL FUNCTION FOR LARGE ABS(Z).GT.
   !     FNUL AND FNU+N-1.LT.FNUL. THE ORDER IS INCREASED FROM
@@ -15,18 +19,21 @@ SUBROUTINE CBUNI(Z,Fnu,Kode,N,Y,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
   !     ACCORDING TO THE UNIFORM ASYMPTOTIC EXPANSION FOR I(FNU,Z)
   !     ON IFORM=1 AND THE EXPANSION FOR J(FNU,Z) ON IFORM=2
   !
-  !***SEE ALSO  CBESI, CBESK
-  !***ROUTINES CALLED  CUNI1, CUNI2, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBESI, CBESK
+  !***
+  ! **Routines called:**  CUNI1, CUNI2, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CBUNI
+  
   COMPLEX cscl, cscr, cy, rz, st, s1, s2, Y, Z
   REAL Alim, ax, ay, dfnu, Elim, Fnu, fnui, Fnul, gnu, Tol, xx, &
     yy, ascle, bry, str, sti, stm, R1MACH
   INTEGER i, iflag, iform, k, Kode, N, nl, Nlast, Nui, nw, Nz
   DIMENSION Y(N), cy(2), bry(3)
-  !***FIRST EXECUTABLE STATEMENT  CBUNI
+  !* FIRST EXECUTABLE STATEMENT  CBUNI
   Nz = 0
   xx = REAL(Z)
   yy = AIMAG(Z)

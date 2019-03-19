@@ -1,34 +1,40 @@
-!DECK SHEQR
+!** SHEQR
 SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SHEQR
-  !***SUBSIDIARY
-  !***PURPOSE  Internal routine for SGMRES.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (SHEQR-S, DHEQR-D)
-  !***KEYWORDS  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
+  !>
+  !***
+  !  Internal routine for SGMRES.
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SHEQR-S, DHEQR-D)
+  !***
+  ! **Keywords:**  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
   !             NON-SYMMETRIC LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Brown, Peter, (LLNL), pnbrown@llnl.gov
+  !***
+  ! **Author:**  Brown, Peter, (LLNL), pnbrown@llnl.gov
   !           Hindmarsh, Alan, (LLNL), alanh@llnl.gov
   !           Seager, Mark K., (LLNL), seager@llnl.gov
   !             Lawrence Livermore National Laboratory
   !             PO Box 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !        This   routine  performs  a QR   decomposition  of an  upper
   !        Hessenberg matrix A using Givens  rotations.  There  are two
   !        options  available: 1)  Performing  a fresh decomposition 2)
   !        updating the QR factors by adding a row and  a column to the
   !        matrix A.
   !
-  ! *Usage:
+  !- Usage:
   !      INTEGER LDA, N, INFO, IJOB
   !      REAL A(LDA,N), Q(2*N)
   !
   !      CALL SHEQR(A, LDA, N, Q, INFO, IJOB)
   !
-  ! *Arguments:
+  !- Arguments:
   ! A      :INOUT    Real A(LDA,N)
   !         On input, the matrix to be decomposed.
   !         On output, the upper triangular matrix R.
@@ -55,9 +61,12 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
   !                 will be updated by the addition of a row
   !                 and a column.
   !
-  !***SEE ALSO  SGMRES
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SGMRES
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871001  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -67,7 +76,7 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  !***END PROLOGUE  SHEQR
+  
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -79,7 +88,7 @@ SUBROUTINE SHEQR(A,Lda,N,Q,Info,Ijob)
   INTEGER i, iq, j, k, km1, kp1, nm1
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, SQRT
-  !***FIRST EXECUTABLE STATEMENT  SHEQR
+  !* FIRST EXECUTABLE STATEMENT  SHEQR
   IF ( Ijob>1 ) THEN
     !   -------------------------------------------------------------------
     !         The old factorization of a will be updated.  A row and a

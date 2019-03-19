@@ -1,13 +1,17 @@
-!DECK DASYIK
+!** DASYIK
 SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DASYIK
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBESI and DBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (ASYIK-S, DASYIK-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBESI and DBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (ASYIK-S, DASYIK-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !                    DASYIK computes Bessel functions I and K
   !                  for arguments X.GT.0.0 and orders FNU.GE.35
@@ -42,16 +46,19 @@ SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
   !         in sign of some of the terms. This change in sign is
   !         accomplished by means of the FLAG FLGIK = 1 or -1.
   !
-  !***SEE ALSO  DBESI, DBESK
-  !***ROUTINES CALLED  D1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBESI, DBESK
+  !***
+  ! **Routines called:**  D1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  !***END PROLOGUE  DASYIK
+  
   !
   INTEGER In, j, jn, k, kk, Kode, l
   REAL(8) :: ak, ap, Arg, c, coef, con, etx, Flgik, fn, Fnu, &
@@ -97,7 +104,7 @@ SUBROUTINE DASYIK(X,Fnu,Kode,Flgik,Ra,Arg,In,Y)
     -3.75671766607634D+07, 1.32887671664218D+07, &
     -2.78561812808645D+06, 3.08186404612662D+05, &
     -1.38860897537170D+04, 1.10017140269247D+02/
-  !***FIRST EXECUTABLE STATEMENT  DASYIK
+  !* FIRST EXECUTABLE STATEMENT  DASYIK
   tol = D1MACH(3)
   tol = MAX(tol,1.0D-15)
   fn = Fnu

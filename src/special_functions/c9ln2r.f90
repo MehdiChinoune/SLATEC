@@ -1,16 +1,22 @@
-!DECK C9LN2R
+!** C9LN2R
 COMPLEX FUNCTION C9LN2R(Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  C9LN2R
-  !***SUBSIDIARY
-  !***PURPOSE  Evaluate LOG(1+Z) from second order relative accuracy so
+  !>
+  !***
+  !  Evaluate LOG(1+Z) from second order relative accuracy so
   !            that  LOG(1+Z) = Z - Z**2/2 + Z**3*C9LN2R(Z).
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4B
-  !***TYPE      COMPLEX (R9LN2R-S, D9LN2R-D, C9LN2R-C)
-  !***KEYWORDS  ELEMENTARY FUNCTIONS, FNLIB, LOGARITHM, SECOND ORDER
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4B
+  !***
+  ! **Type:**      COMPLEX (R9LN2R-S, D9LN2R-D, C9LN2R-C)
+  !***
+  ! **Keywords:**  ELEMENTARY FUNCTIONS, FNLIB, LOGARITHM, SECOND ORDER
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate  LOG(1+Z)  from 2-nd order with relative error accuracy so
   ! that     LOG(1+Z) = Z - Z**2/2 + Z**3*C9LN2R(Z).
@@ -37,18 +43,21 @@ COMPLEX FUNCTION C9LN2R(Z)
   !        + 0.5*(2*XZ+ABS(Z))**3 * R9LN2R(2*X+ABS(Z)**2)
   !        + I*YZ/(1+X) * (XZ**2 + (YZ/(1+X))**2*R9ATN1(Y/(1+X)) ))
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  R9ATN1, R9LN2R
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  R9ATN1, R9LN2R
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  !***END PROLOGUE  C9LN2R
+  
   REAL aipart, arg, cabsz, R9ATN1, R9LN2R, rpart, x, xz, y, y1x, yz
   COMPLEX Z
-  !***FIRST EXECUTABLE STATEMENT  C9LN2R
+  !* FIRST EXECUTABLE STATEMENT  C9LN2R
   x = REAL(Z)
   y = AIMAG(Z)
   !

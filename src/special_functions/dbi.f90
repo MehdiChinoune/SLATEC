@@ -1,15 +1,22 @@
-!DECK DBI
+!** DBI
 REAL(8) FUNCTION DBI(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBI
-  !***PURPOSE  Evaluate the Bairy function (the Airy function of the
+  !>
+  !***
+  !  Evaluate the Bairy function (the Airy function of the
   !            second kind).
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10D
-  !***TYPE      DOUBLE PRECISION (BI-S, DBI-D)
-  !***KEYWORDS  BAIRY FUNCTION, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10D
+  !***
+  ! **Type:**      DOUBLE PRECISION (BI-S, DBI-D)
+  !***
+  ! **Keywords:**  BAIRY FUNCTION, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DBI(X) calculates the double precision Airy function of the
   ! second kind for double precision argument X.
@@ -38,15 +45,18 @@ REAL(8) FUNCTION DBI(X)
   !                        approx significant figures required  31.6
   !                                    decimal places required  32.90
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, D9AIMP, DBIE, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, D9AIMP, DBIE, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DBI
+  
   REAL eta
   INTEGER INITDS, nbif, nbif2, nbig, nbig2
   REAL(8) :: X, bifcs(13), bigcs(13), bif2cs(15), big2cs(15), &
@@ -111,7 +121,7 @@ REAL(8) FUNCTION DBI(X)
   DATA big2cs(14)/ + .507884996513522346666666666666666D-29/
   DATA big2cs(15)/ + .491020674696533333333333333333333D-32/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DBI
+  !* FIRST EXECUTABLE STATEMENT  DBI
   IF ( first ) THEN
     eta = 0.1*REAL(D1MACH(3))
     nbif = INITDS(bifcs,13,eta)

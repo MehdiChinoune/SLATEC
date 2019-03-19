@@ -1,14 +1,18 @@
-!DECK DPLPFL
+!** DPLPFL
 SUBROUTINE DPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
     Rprnrm,Csc,Ww,Bl,Bu,Erp,Rprim,Primal,Finite,Zerolv)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPLPFL
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SPLPFL-S, DPLPFL-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPLPFL-S, DPLPFL-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THE EDITING REQUIRED TO CONVERT THIS SUBROUTINE FROM SINGLE TO
   !     DOUBLE PRECISION INVOLVES THE FOLLOWING CHARACTER STRING CHANGES.
@@ -21,22 +25,25 @@ SUBROUTINE DPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
   !     REVISED 811130-1045
   !     REVISED YYMMDD-HHMM
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DPLPFL
+  
   INTEGER i, Ienter, Ileave, j, Mrelas, n20005, n20036, Nvars
   INTEGER Ibasis(*), Ind(*), Ibb(*)
   REAL(8) :: Csc(*), Ww(*), Bl(*), Bu(*), Erp(*), Rprim(*), &
     Primal(*), bound, Dirnrm, ratio, Rprnrm, Theta, &
     zero
   LOGICAL Finite, Zerolv
-  !***FIRST EXECUTABLE STATEMENT  DPLPFL
+  !* FIRST EXECUTABLE STATEMENT  DPLPFL
   zero = 0.D0
   !
   !     SEE IF THE ENTERING VARIABLE IS RESTRICTING THE STEP LENGTH

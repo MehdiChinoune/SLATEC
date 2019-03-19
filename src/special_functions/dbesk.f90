@@ -1,18 +1,25 @@
-!DECK DBESK
+!** DBESK
 SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBESK
-  !***PURPOSE  Implement forward recursion on the three term recursion
+  !>
+  !***
+  !  Implement forward recursion on the three term recursion
   !            relation for a sequence of non-negative order Bessel
   !            functions K/SUB(FNU+I-1)/(X), or scaled Bessel functions
   !            EXP(X)*K/SUB(FNU+I-1)/(X), I=1,...,N for real, positive
   !            X and non-negative orders FNU.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10B3
-  !***TYPE      DOUBLE PRECISION (BESK-S, DBESK-D)
-  !***KEYWORDS  K BESSEL FUNCTION, SPECIAL FUNCTIONS
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10B3
+  !***
+  ! **Type:**      DOUBLE PRECISION (BESK-S, DBESK-D)
+  !***
+  ! **Keywords:**  K BESSEL FUNCTION, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract  **** a double precision routine ****
   !         DBESK implements forward recursion on the three term
@@ -60,15 +67,18 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   !         Overflow - a fatal error
   !         Underflow with KODE=1 -  a non-fatal error (NZ .NE. 0)
   !
-  !***REFERENCES  F. W. J. Olver, Tables of Bessel Functions of Moderate
+  !***
+  ! **References:**  F. W. J. Olver, Tables of Bessel Functions of Moderate
   !                 or Large Orders, NPL Mathematical Tables 6, Her
   !                 Majesty's Stationery Office, London, 1962.
   !               N. M. Temme, On the numerical evaluation of the modified
   !                 Bessel function of the third kind, Journal of
   !                 Computational Physics 19, (1975), pp. 324-337.
-  !***ROUTINES CALLED  D1MACH, DASYIK, DBESK0, DBESK1, DBSK0E, DBSK1E,
+  !***
+  ! **Routines called:**  D1MACH, DASYIK, DBESK0, DBESK1, DBSK0E, DBSK1E,
   !                    DBSKNU, I1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790201  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -76,7 +86,7 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DBESK
+  
   !
   INTEGER i, j, k, Kode, mz, N, nb, nd, nn, nud, nulim, Nz
   INTEGER I1MACH
@@ -87,7 +97,7 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   DIMENSION w(2), nulim(2), Y(*)
   SAVE nulim
   DATA nulim(1), nulim(2)/35, 70/
-  !***FIRST EXECUTABLE STATEMENT  DBESK
+  !* FIRST EXECUTABLE STATEMENT  DBESK
   nn = -I1MACH(15)
   elim = 2.303D0*(nn*D1MACH(5)-3.0D0)
   xlim = D1MACH(1)*1.0D+3

@@ -1,14 +1,18 @@
-!DECK DPNNZR
+!** DPNNZR
 SUBROUTINE DPNNZR(I,Xval,Iplace,Sx,Ix,Ircx)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPNNZR
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (PNNZRS-S, DPNNZR-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (PNNZRS-S, DPNNZR-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Wisniewski, J. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     DPNNZR LIMITS THE TYPE OF STORAGE TO A SEQUENTIAL SCHEME.
   !     SPARSE MATRIX NON ZERO RETRIEVAL SUBROUTINE.
@@ -44,9 +48,12 @@ SUBROUTINE DPNNZR(I,Xval,Iplace,Sx,Ix,Ircx)
   !     REVISED 811130-1000
   !     REVISED YYMMDD-HHMM
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  IDLOC, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  IDLOC, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
@@ -55,7 +62,7 @@ SUBROUTINE DPNNZR(I,Xval,Iplace,Sx,Ix,Ircx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  !***END PROLOGUE  DPNNZR
+  
   INTEGER I, i1, idiff, IDLOC, iend, ii, il, ilast, iopt, ipl, &
     Iplace, ipploc, Ircx, istart, Ix, j, l, ll, lmx, lpg
   INTEGER n20046, nerr, np
@@ -63,7 +70,7 @@ SUBROUTINE DPNNZR(I,Xval,Iplace,Sx,Ix,Ircx)
   REAL(8) :: Xval, Sx(*), zero
   SAVE zero
   DATA zero/0.D0/
-  !***FIRST EXECUTABLE STATEMENT  DPNNZR
+  !* FIRST EXECUTABLE STATEMENT  DPNNZR
   iopt = 1
   !
   !     CHECK VALIDITY OF ROW/COL. INDEX.

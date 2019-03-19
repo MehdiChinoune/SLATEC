@@ -1,14 +1,19 @@
-!DECK DPCHKT
+!** DPCHKT
 SUBROUTINE DPCHKT(N,X,Knotyp,T)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPCHKT
-  !***SUBSIDIARY
-  !***PURPOSE  Compute B-spline knot sequence for DPCHBS.
-  !***LIBRARY   SLATEC (PCHIP)
-  !***CATEGORY  E3
-  !***TYPE      DOUBLE PRECISION (PCHKT-S, DPCHKT-D)
-  !***AUTHOR  Fritsch, F. N., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute B-spline knot sequence for DPCHBS.
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Category:**  E3
+  !***
+  ! **Type:**      DOUBLE PRECISION (PCHKT-S, DPCHKT-D)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
+  !***
+  ! **Description:**
   !
   !     Set a knot sequence for the B-spline representation of a PCH
   !     function with breakpoints X.  All knots will be at least double.
@@ -25,9 +30,12 @@ SUBROUTINE DPCHKT(N,X,Knotyp,T)
   !     2. X(i).LT.X(i+1), i=1,...,N .  (not checked)
   !     3. 0.LE.KNOTYP.LE.2 .  (Acts like KNOTYP=0 for any other value.)
   !
-  !***SEE ALSO  DPCHBS
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DPCHBS
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   870701  DATE WRITTEN
   !   900405  Converted Fortran to upper case.
   !   900410  Converted prologue to SLATEC 4.0 format.
@@ -35,7 +43,7 @@ SUBROUTINE DPCHKT(N,X,Knotyp,T)
   !   900430  Produced double precision version.
   !   930514  Changed NKNOTS from an output to an input variable.  (FNF)
   !   930604  Removed unused variable NKNOTS from argument list.  (FNF)
-  !***END PROLOGUE  DPCHKT
+  
   !
   !*Internal Notes:
   !
@@ -53,7 +61,7 @@ SUBROUTINE DPCHKT(N,X,Knotyp,T)
   !
   INTEGER j, k, ndim
   REAL(8) :: hbeg, hend
-  !***FIRST EXECUTABLE STATEMENT  DPCHKT
+  !* FIRST EXECUTABLE STATEMENT  DPCHKT
   !
   !  Initialize.
   !

@@ -1,17 +1,24 @@
-!DECK STBMV
+!** STBMV
 SUBROUTINE STBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  STBMV
-  !***PURPOSE  Multiply a real vector by a real triangular band matrix.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B4
-  !***TYPE      SINGLE PRECISION (STBMV-S, DTBMV-D, CTBMV-C)
-  !***KEYWORDS  LEVEL 2 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J. J., (ANL)
+  !>
+  !***
+  !  Multiply a real vector by a real triangular band matrix.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      SINGLE PRECISION (STBMV-S, DTBMV-D, CTBMV-C)
+  !***
+  ! **Keywords:**  LEVEL 2 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J. J., (ANL)
   !           Du Croz, J., (NAG)
   !           Hammarling, S., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  STBMV  performs one of the matrix-vector operations
   !
@@ -128,16 +135,19 @@ SUBROUTINE STBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   !           X. INCX must not be zero.
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J. J., Du Croz, J., Hammarling, S., and
+  !***
+  ! **References:**  Dongarra, J. J., Du Croz, J., Hammarling, S., and
   !                 Hanson, R. J.  An extended set of Fortran basic linear
   !                 algebra subprograms.  ACM TOMS, Vol. 14, No. 1,
   !                 pp. 1-17, March 1988.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  STBMV
+  
   !     .. Scalar Arguments ..
   INTEGER Incx, K, Lda, N
   CHARACTER :: Diag, Trans, Uplo
@@ -157,7 +167,7 @@ SUBROUTINE STBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, MIN
-  !***FIRST EXECUTABLE STATEMENT  STBMV
+  !* FIRST EXECUTABLE STATEMENT  STBMV
   !
   !     Test the input parameters.
   !

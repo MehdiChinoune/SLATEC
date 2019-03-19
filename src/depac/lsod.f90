@@ -1,30 +1,38 @@
-!DECK LSOD
+!** LSOD
 SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     Wm,Iwm,JAC,Intout,Tstop,Tolfac,Delsgn,Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  LSOD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (LSOD-S, DLSOD-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (LSOD-S, DLSOD-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   DEBDF  merely allocates storage for  LSOD  to relieve the user of
   !   the inconvenience of a long call list.  Consequently  LSOD  is used
   !   as described in the comments for  DEBDF .
   !
-  !***SEE ALSO  DEBDF
-  !***ROUTINES CALLED  HSTART, INTYD, R1MACH, STOD, VNWRMS, XERMSG
-  !***COMMON BLOCKS    DEBDF1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DEBDF
+  !***
+  ! **Routines called:**  HSTART, INTYD, R1MACH, STOD, VNWRMS, XERMSG
+  !***
+  ! COMMON BLOCKS    DEBDF1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  !***END PROLOGUE  LSOD
+  
   REAL absdel, Acor, Atol, big, del, Delsgn, dt, EL0, Ewt, H, ha, &
     HMIn, HMXi, HU, R1MACH, ROWns, Rpar, Rtol, Savf, T
   REAL tol, TOLd, Tolfac, Tout, Tstop, U, VNWRMS, Wm, X, Y, Yh , Yh1, Ypout
@@ -59,7 +67,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !
   !.......................................................................
   !
-  !***FIRST EXECUTABLE STATEMENT  LSOD
+  !* FIRST EXECUTABLE STATEMENT  LSOD
   IF ( IBEgin==0 ) THEN
     !
     !        ON THE FIRST CALL, PERFORM INITIALIZATION --

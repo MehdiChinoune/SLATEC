@@ -1,27 +1,34 @@
-!DECK CSCALE
+!** CSCALE
 SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
     Iscale,Ic)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CSCALE
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (CSCALE-S, DCSCAL-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (CSCALE-S, DCSCAL-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !     This routine scales the matrix A by columns when needed
   !
-  !***SEE ALSO  BVSUP
-  !***ROUTINES CALLED  SDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **Routines called:**  SDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  CSCALE
+  
   REAL A, alog2, Anorm, ascale, Cols, Colsav, cs, p, Rows, Rowsav, &
     s, Scales, SDOT, ten20, ten4
   INTEGER Ic, ip, Iscale, j, k, Ncol, Nrda, Nrow
@@ -30,7 +37,7 @@ SUBROUTINE CSCALE(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
   SAVE ten4, ten20
   DATA ten4, ten20/1.E+4, 1.E+20/
   !
-  !***FIRST EXECUTABLE STATEMENT  CSCALE
+  !* FIRST EXECUTABLE STATEMENT  CSCALE
   IF ( Iscale==(-1) ) THEN
     !
     IF ( Ic/=0 ) THEN

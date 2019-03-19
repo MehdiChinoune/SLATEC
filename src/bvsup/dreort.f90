@@ -1,17 +1,21 @@
-!DECK DREORT
+!** DREORT
 SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DREORT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (REORT-S, DREORT-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (REORT-S, DREORT-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !   INPUT
-  ! *********
+  !- ********
   !     Y, YP and YHP = homogeneous solution matrix and particular
   !                     solution vector to be orthonormalized.
   !     IFLAG = 1 --  store YHP into Y and YP, test for
@@ -22,9 +26,9 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !                   (preset orthonormalization mode)
   !             3 --  store YHP into Y and YP, reorthonormalization
   !                   (when INHOMO=3 and X=XEND).
-  ! **********************************************************************
+  !- *********************************************************************
   !   OUTPUT
-  ! *********
+  !- ********
   !     Y, YP = orthonormalized solutions.
   !     NIV = number of independent vectors returned from DMGSBV.
   !     IFLAG = 0 --  reorthonormalization was performed.
@@ -33,12 +37,16 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !            30 --  solutions are linearly dependent, problem must
   !                   be restarted from the beginning.
   !     W, P, IP = orthonormalization information.
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  DBVSUP
-  !***ROUTINES CALLED  DDOT, DMGSBV, DSTOR1, DSTWAY
-  !***COMMON BLOCKS    DML15T, DML18J, DML8SZ
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBVSUP
+  !***
+  ! **Routines called:**  DDOT, DMGSBV, DSTOR1, DSTWAY
+  !***
+  ! COMMON BLOCKS    DML15T, DML18J, DML8SZ
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -47,7 +55,7 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DREORT
+  
   !
   REAL(8) :: DDOT
   INTEGER ICOco, Iflag, IGOfx, ijk, INDpvt, INFo, INHomo, INTeg, &
@@ -69,10 +77,10 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
     NUMort, NFCc, ICOco
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     BEGIN BLOCK PERMITTING ...EXITS TO 210
   !        BEGIN BLOCK PERMITTING ...EXITS TO 10
-  !***FIRST EXECUTABLE STATEMENT  DREORT
+  !* FIRST EXECUTABLE STATEMENT  DREORT
   nfcp = NFC + 1
   !
   !           CHECK TO SEE IF ORTHONORMALIZATION TEST IS TO BE PERFORMED

@@ -1,25 +1,32 @@
-!DECK ZMLT
+!** ZMLT
 SUBROUTINE ZMLT(Ar,Ai,Br,Bi,Cr,Ci)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZMLT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
+  !>
+  !***
+  !  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
   !            ZBIRY
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (ZMLT-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (ZMLT-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     DOUBLE PRECISION COMPLEX MULTIPLY, C=A*B.
   !
-  !***SEE ALSO  ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZBIRY
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZBIRY
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ZMLT
+  
   REAL(8) :: Ar, Ai, Br, Bi, Cr, Ci, ca, cb
-  !***FIRST EXECUTABLE STATEMENT  ZMLT
+  !* FIRST EXECUTABLE STATEMENT  ZMLT
   ca = Ar*Br - Ai*Bi
   cb = Ar*Bi + Ai*Br
   Cr = ca

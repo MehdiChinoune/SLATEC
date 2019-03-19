@@ -1,33 +1,39 @@
-!DECK DORTH
+!** DORTH
 SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DORTH
-  !***SUBSIDIARY
-  !***PURPOSE  Internal routine for DGMRES.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      DOUBLE PRECISION (SORTH-S, DORTH-D)
-  !***KEYWORDS  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
+  !>
+  !***
+  !  Internal routine for DGMRES.
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (SORTH-S, DORTH-D)
+  !***
+  ! **Keywords:**  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
   !             NON-SYMMETRIC LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Brown, Peter, (LLNL), pnbrown@llnl.gov
+  !***
+  ! **Author:**  Brown, Peter, (LLNL), pnbrown@llnl.gov
   !           Hindmarsh, Alan, (LLNL), alanh@llnl.gov
   !           Seager, Mark K., (LLNL), seager@llnl.gov
   !             Lawrence Livermore National Laboratory
   !             PO Box 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !        This routine  orthogonalizes  the  vector  VNEW  against the
   !        previous KMP  vectors in the   V array.  It uses  a modified
   !        Gram-Schmidt   orthogonalization procedure with  conditional
   !        reorthogonalization.
   !
-  ! *Usage:
+  !- Usage:
   !      INTEGER N, LL, LDHES, KMP
   !      DOUBLE PRECISION VNEW(N), V(N,LL), HES(LDHES,LL), SNORMW
   !
   !      CALL DORTH(VNEW, V, HES, N, LL, LDHES, KMP, SNORMW)
   !
-  ! *Arguments:
+  !- Arguments:
   ! VNEW   :INOUT    Double Precision VNEW(N)
   !         On input, the vector of length N containing a scaled
   !         product of the Jacobian and the vector V(*,LL).
@@ -54,9 +60,12 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   ! SNORMW :OUT      DOUBLE PRECISION
   !         Scalar containing the l-2 norm of VNEW.
   !
-  !***SEE ALSO  DGMRES
-  !***ROUTINES CALLED  DAXPY, DDOT, DNRM2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DGMRES
+  !***
+  ! **Routines called:**  DAXPY, DDOT, DNRM2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -66,7 +75,7 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  !***END PROLOGUE  DORTH
+  
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -84,7 +93,7 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   EXTERNAL DAXPY
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, SQRT
-  !***FIRST EXECUTABLE STATEMENT  DORTH
+  !* FIRST EXECUTABLE STATEMENT  DORTH
   !
   !         Get norm of unaltered VNEW for later use.
   !

@@ -1,28 +1,35 @@
-!DECK CHKPR4
+!** CHKPR4
 SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHKPR4
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SEPX4
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (CHKPR4-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SEPX4
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (CHKPR4-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This program checks the input parameters for errors.
   !
-  !***SEE ALSO  SEPX4
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SEPX4
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  CHKPR4
+  
   REAL A, ai, B, bi, C, ci, D, dlx, xi
   INTEGER i, Idmn, Ierror, Iorder, M, Mbdcnd, N, Nbdcnd
   EXTERNAL COFX
-  !***FIRST EXECUTABLE STATEMENT  CHKPR4
+  !* FIRST EXECUTABLE STATEMENT  CHKPR4
   Ierror = 1
   IF ( A>=B.OR.C>=D ) RETURN
   !

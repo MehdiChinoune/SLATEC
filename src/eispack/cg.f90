@@ -1,15 +1,22 @@
-!DECK CG
+!** CG
 SUBROUTINE CG(Nm,N,Ar,Ai,Wr,Wi,Matz,Zr,Zi,Fv1,Fv2,Fv3,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CG
-  !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
+  !>
+  !***
+  !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a complex general matrix.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A4
-  !***TYPE      COMPLEX (RG-S, CG-C)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A4
+  !***
+  ! **Type:**      COMPLEX (RG-S, CG-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine calls the recommended sequence of
   !     subroutines from the eigensystem subroutine package (EISPACK)
@@ -61,24 +68,27 @@ SUBROUTINE CG(Nm,N,Ar,Ai,Wr,Wi,Matz,Zr,Zi,Fv1,Fv2,Fv3,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  CBABK2, CBAL, COMQR, COMQR2, CORTH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CBABK2, CBAL, COMQR, COMQR2, CORTH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CG
+  
   !
   INTEGER N, Nm, is1, is2, Ierr, Matz
   REAL Ar(Nm,*), Ai(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
   REAL Fv1(*), Fv2(*), Fv3(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  CG
+  !* FIRST EXECUTABLE STATEMENT  CG
   IF ( N<=Nm ) THEN
     !
     CALL CBAL(Nm,N,Ar,Ai,is1,is2,Fv1)

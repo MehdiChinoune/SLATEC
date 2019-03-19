@@ -1,24 +1,29 @@
-!DECK DQPSRT
+!** DQPSRT
 SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQPSRT
-  !***SUBSIDIARY
-  !***PURPOSE  This routine maintains the descending ordering in the
+  !>
+  !***
+  !  This routine maintains the descending ordering in the
   !            list of the local error estimated resulting from the
   !            interval subdivision process. At each call two error
   !            estimates are inserted using the sequential search
   !            method, top-down for the largest error estimate and
   !            bottom-up for the smallest error estimate.
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (QPSRT-S, DQPSRT-D)
-  !***KEYWORDS  SEQUENTIAL SORTING
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (QPSRT-S, DQPSRT-D)
+  !***
+  ! **Keywords:**  SEQUENTIAL SORTING
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !           Ordering routine
   !           Standard fortran subroutine
@@ -56,15 +61,18 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !              NRMAX  - Integer
   !                       MAXERR = IORD(NRMAX)
   !
-  !***SEE ALSO  DQAGE, DQAGIE, DQAGPE, DQAWSE
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DQAGE, DQAGIE, DQAGPE, DQAWSE
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DQPSRT
+  
   !
   REAL(8) :: Elist, Ermax, errmax, errmin
   INTEGER i, ibeg, ido, Iord, isucc, j, jbnd, jupbn, k, Last, &
@@ -74,7 +82,7 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !           CHECK WHETHER THE LIST CONTAINS MORE THAN
   !           TWO ERROR ESTIMATES.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQPSRT
+  !* FIRST EXECUTABLE STATEMENT  DQPSRT
   IF ( Last>2 ) THEN
     !
     !           THIS PART OF THE ROUTINE IS ONLY EXECUTED IF, DUE TO A
@@ -87,7 +95,7 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
       ido = Nrmax - 1
       DO i = 1, ido
         isucc = Iord(Nrmax-1)
-        ! ***JUMP OUT OF DO-LOOP
+        !- **JUMP OUT OF DO-LOOP
         IF ( errmax<=Elist(isucc) ) EXIT
         Iord(Nrmax) = isucc
         Nrmax = Nrmax - 1
@@ -110,7 +118,7 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
     IF ( ibeg<=jbnd ) THEN
       DO i = ibeg, jbnd
         isucc = Iord(i)
-        ! ***JUMP OUT OF DO-LOOP
+        !- **JUMP OUT OF DO-LOOP
         IF ( errmax>=Elist(isucc) ) GOTO 100
         Iord(i-1) = isucc
       ENDDO
@@ -129,7 +137,7 @@ SUBROUTINE DQPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   k = jbnd
   DO j = i, jbnd
     isucc = Iord(k)
-    ! ***JUMP OUT OF DO-LOOP
+    !- **JUMP OUT OF DO-LOOP
     IF ( errmin<Elist(isucc) ) GOTO 200
     Iord(k+1) = isucc
     k = k - 1

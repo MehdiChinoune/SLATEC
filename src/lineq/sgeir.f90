@@ -1,16 +1,23 @@
-!DECK SGEIR
+!** SGEIR
 SUBROUTINE SGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SGEIR
-  !***PURPOSE  Solve a general system of linear equations.  Iterative
+  !>
+  !***
+  !  Solve a general system of linear equations.  Iterative
   !            refinement is used to obtain an error estimate.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2A1
-  !***TYPE      SINGLE PRECISION (SGEIR-S, CGEIR-C)
-  !***KEYWORDS  COMPLEX LINEAR EQUATIONS, GENERAL MATRIX,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2A1
+  !***
+  ! **Type:**      SINGLE PRECISION (SGEIR-S, CGEIR-C)
+  !***
+  ! **Keywords:**  COMPLEX LINEAR EQUATIONS, GENERAL MATRIX,
   !             GENERAL SYSTEM OF LINEAR EQUATIONS
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !    Subroutine SGEIR solves a general NxN system of single
   !    precision linear equations using LINPACK subroutines SGEFA and
@@ -93,10 +100,13 @@ SUBROUTINE SGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !                      the user provides otherwise, an error message
   !                      will be printed followed by an abort.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  R1MACH, SASUM, SCOPY, SDSDOT, SGEFA, SGESL, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  R1MACH, SASUM, SCOPY, SDSDOT, SGEFA, SGESL, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800430  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -105,12 +115,12 @@ SUBROUTINE SGEIR(A,Lda,N,V,Itask,Ind,Work,Iwork)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SGEIR
+  
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*), info, j
   REAL A(Lda,*), V(*), Work(N,*), xnorm, dnorm, SDSDOT, SASUM, R1MACH
   CHARACTER(8) :: xern1, xern2
-  !***FIRST EXECUTABLE STATEMENT  SGEIR
+  !* FIRST EXECUTABLE STATEMENT  SGEIR
   IF ( Lda<N ) THEN
     Ind = -1
     WRITE (xern1,'(I8)') Lda

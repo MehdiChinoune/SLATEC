@@ -1,19 +1,26 @@
-!DECK ICAMAX
+!** ICAMAX
 INTEGER FUNCTION ICAMAX(N,Cx,Incx)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ICAMAX
-  !***PURPOSE  Find the smallest index of the component of a complex
+  !>
+  !***
+  !  Find the smallest index of the component of a complex
   !            vector having the maximum sum of magnitudes of real
   !            and imaginary parts.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1A2
-  !***TYPE      COMPLEX (ISAMAX-S, IDAMAX-D, ICAMAX-C)
-  !***KEYWORDS  BLAS, LINEAR ALGEBRA, MAXIMUM COMPONENT, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1A2
+  !***
+  ! **Type:**      COMPLEX (ISAMAX-S, IDAMAX-D, ICAMAX-C)
+  !***
+  ! **Keywords:**  BLAS, LINEAR ALGEBRA, MAXIMUM COMPONENT, VECTOR
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -32,24 +39,27 @@ INTEGER FUNCTION ICAMAX(N,Cx,Incx)
   !     ABS(REAL(CX(IX+(I-1)*INCX))) + ABS(IMAG(CX(IX+(I-1)*INCX))),
   !     where IX = 1 if INCX .GE. 0, else IX = 1+(1-N)*INCX.
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900821  Modified to correct problem with a negative increment.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  ICAMAX
+  
   COMPLEX Cx(*)
   REAL smax, xmag
   INTEGER i, Incx, ix, N
   REAL, EXTERNAL :: CABS1
-  !***FIRST EXECUTABLE STATEMENT  ICAMAX
+  !* FIRST EXECUTABLE STATEMENT  ICAMAX
   ICAMAX = 0
   IF ( N<=0 ) RETURN
   ICAMAX = 1

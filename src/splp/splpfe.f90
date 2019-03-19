@@ -1,15 +1,19 @@
-!DECK SPLPFE
+!** SPLPFE
 SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,Ibb,Erdnrm,Eps,Gg,Dulnrm,Dirnrm,Amat,Basmat,Csc,Wr,&
     Ww,Bl,Bu,Rz,Rg,Colnrm,Duals,Found)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPLPFE
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SPLPFE-S, DPLPFE-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SPLPFE-S, DPLPFE-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THE EDITING REQUIRED TO CONVERT THIS SUBROUTINE FROM SINGLE TO
   !     DOUBLE PRECISION INVOLVES THE FOLLOWING CHARACTER STRING CHANGES.
@@ -24,15 +28,18 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !     REVISED 811130-1100
   !     REVISED YYMMDD-HHMM
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  IPLOC, LA05BS, PRWPGE, SASUM, SCOPY
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  IPLOC, LA05BS, PRWPGE, SASUM, SCOPY
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  SPLPFE
+  
   INTEGER i, Ienter, ihi, il1, ilow, ipage, IPLOC, iu1, j, key, &
     Lbm, Lmx, lpg, Mrelas, n20002, n20050, Nvars
   REAL SASUM
@@ -42,7 +49,7 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Rz(*), Rg(*), Colnrm(*), Duals(*), cnorm, Dirnrm, Dulnrm, &
     Eps, Erdnrm, Gg, one, ratio, rcost, rmax, zero
   LOGICAL Found, trans
-  !***FIRST EXECUTABLE STATEMENT  SPLPFE
+  !* FIRST EXECUTABLE STATEMENT  SPLPFE
   lpg = Lmx - (Nvars+4)
   zero = 0.E0
   one = 1.E0

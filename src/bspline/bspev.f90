@@ -1,15 +1,22 @@
-!DECK BSPEV
+!** BSPEV
 SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BSPEV
-  !***PURPOSE  Calculate the value of the spline and its derivatives from
+  !>
+  !***
+  !  Calculate the value of the spline and its derivatives from
   !            the B-representation.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E3, K6
-  !***TYPE      SINGLE PRECISION (BSPEV-S, DBSPEV-D)
-  !***KEYWORDS  B-SPLINE, DATA FITTING, INTERPOLATION, SPLINES
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E3, K6
+  !***
+  ! **Type:**      SINGLE PRECISION (BSPEV-S, DBSPEV-D)
+  !***
+  ! **Keywords:**  B-SPLINE, DATA FITTING, INTERPOLATION, SPLINES
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Written by Carl de Boor and modified by D. E. Amos
   !
@@ -57,11 +64,14 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   !     Error Conditions
   !         Improper input is a fatal error.
   !
-  !***REFERENCES  Carl de Boor, Package for calculating with B-splines,
+  !***
+  ! **References:**  Carl de Boor, Package for calculating with B-splines,
   !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
   !                 pp. 441-472.
-  !***ROUTINES CALLED  BSPVN, INTRV, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  BSPVN, INTRV, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -70,14 +80,14 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BSPEV
+  
   !
   INTEGER i, id, Inev, iwork, jj, K, kp1, kp1mn, l, left, ll, &
     mflag, N, Nderiv
   REAL Ad, Svalue, sum, T, Work, X
   !     DIMENSION T(N+K)
   DIMENSION T(*), Ad(*), Svalue(*), Work(*)
-  !***FIRST EXECUTABLE STATEMENT  BSPEV
+  !* FIRST EXECUTABLE STATEMENT  BSPEV
   IF ( K<1 ) THEN
     !
     !
@@ -105,7 +115,7 @@ SUBROUTINE BSPEV(T,Ad,N,K,Nderiv,X,Inev,Svalue,Work)
         RETURN
       ENDIF
       !
-      ! *I* HAS BEEN FOUND IN (K,N) SO THAT T(I) .LE. X .LT. T(I+1)
+      !- I* HAS BEEN FOUND IN (K,N) SO THAT T(I) .LE. X .LT. T(I+1)
       !     (OR .LE. T(I+1), IF T(I) .LT. T(I+1) = T(N+1) ).
       20       kp1mn = K + 1 - id
       kp1 = K + 1

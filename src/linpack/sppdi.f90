@@ -1,16 +1,23 @@
-!DECK SPPDI
+!** SPPDI
 SUBROUTINE SPPDI(Ap,N,Det,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPPDI
-  !***PURPOSE  Compute the determinant and inverse of a real symmetric
+  !>
+  !***
+  !  Compute the determinant and inverse of a real symmetric
   !            positive definite matrix using factors from SPPCO or SPPFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1B, D3B1B
-  !***TYPE      SINGLE PRECISION (SPPDI-S, DPPDI-D, CPPDI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1B, D3B1B
+  !***
+  ! **Type:**      SINGLE PRECISION (SPPDI-S, DPPDI-D, CPPDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             PACKED, POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     SPPDI computes the determinant and inverse
   !     of a real symmetric positive definite matrix
@@ -48,10 +55,13 @@ SUBROUTINE SPPDI(Ap,N,Det,Job)
   !        It will not occur if the subroutines are called correctly
   !        and if SPOCO or SPOFA has set INFO .EQ. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SAXPY, SSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SAXPY, SSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -59,7 +69,7 @@ SUBROUTINE SPPDI(Ap,N,Det,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SPPDI
+  
   INTEGER N, Job
   REAL Ap(*)
   REAL Det(2)
@@ -67,7 +77,7 @@ SUBROUTINE SPPDI(Ap,N,Det,Job)
   REAL t
   REAL s
   INTEGER i, ii, j, jj, jm1, j1, k, kj, kk, kp1, k1
-  !***FIRST EXECUTABLE STATEMENT  SPPDI
+  !* FIRST EXECUTABLE STATEMENT  SPPDI
   !
   !     COMPUTE DETERMINANT
   !

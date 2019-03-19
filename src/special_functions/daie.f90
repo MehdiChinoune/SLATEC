@@ -1,17 +1,24 @@
-!DECK DAIE
+!** DAIE
 REAL(8) FUNCTION DAIE(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DAIE
-  !***PURPOSE  Calculate the Airy function for a negative argument and an
+  !>
+  !***
+  !  Calculate the Airy function for a negative argument and an
   !            exponentially scaled Airy function for a non-negative
   !            argument.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10D
-  !***TYPE      DOUBLE PRECISION (AIE-S, DAIE-D)
-  !***KEYWORDS  EXPONENTIALLY SCALED AIRY FUNCTION, FNLIB,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10D
+  !***
+  ! **Type:**      DOUBLE PRECISION (AIE-S, DAIE-D)
+  !***
+  ! **Keywords:**  EXPONENTIALLY SCALED AIRY FUNCTION, FNLIB,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DAIE(X) calculates the Airy function or the exponentially scaled
   ! Airy function depending on the value of the argument.  The function
@@ -44,15 +51,18 @@ REAL(8) FUNCTION DAIE(X)
   !                               significant figures required  28.74
   !                                    decimal places required  32.24
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, D9AIMP, DCSEVL, INITDS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, D9AIMP, DCSEVL, INITDS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  DAIE
+  
   REAL eta
   INTEGER INITDS, naif, naig, naip1, naip2
   REAL(8) :: X, aifcs(13), aigcs(13), aip1cs(57), aip2cs(37), &
@@ -181,7 +191,7 @@ REAL(8) FUNCTION DAIE(X)
   DATA aip2cs(36)/ - .134457433014553385789030399999D-30/
   DATA aip2cs(37)/ + .347570964526601147340117333333D-31/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DAIE
+  !* FIRST EXECUTABLE STATEMENT  DAIE
   IF ( first ) THEN
     eta = 0.1*REAL(D1MACH(3))
     naif = INITDS(aifcs,13,eta)

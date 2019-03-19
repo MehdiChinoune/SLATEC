@@ -1,13 +1,17 @@
-!DECK ORTHOR
+!** ORTHOR
 SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ORTHOR
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (ORTHOR-S, DORTHR-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (ORTHOR-S, DORTHR-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   Reduction of the matrix A to lower triangular form by a sequence of
   !   orthogonal HOUSEHOLDER transformations post-multiplying A
@@ -15,9 +19,9 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !   Modeled after the ALGOL codes in the articles in the REFERENCES
   !   section.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !   INPUT
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     A -- Contains the matrix to be decomposed, must be dimensioned
   !           NRDA by N
@@ -35,9 +39,9 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !     DIAG,KPIVOT,ROWS -- Arrays of length at least N used internally
   !         ,RS,SCALES         (except for SCALES which is M)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !   OUTPUT
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     IFLAG - status indicator
   !            =1 for successful decomposition
@@ -53,17 +57,21 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !               recorded here.
   !     SCALES -- contains the column scaling parameters
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  BVSUP
-  !***REFERENCES  G. Golub, Numerical methods for solving linear least
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **References:**  G. Golub, Numerical methods for solving linear least
   !                 squares problems, Numerische Mathematik 7, (1965),
   !                 pp. 206-216.
   !               P. Businger and G. Golub, Linear least squares
   !                 solutions by Householder transformations, Numerische
   !                 Mathematik  7, (1965), pp. 269-276.
-  !***ROUTINES CALLED  CSCALE, R1MACH, SDOT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CSCALE, R1MACH, SDOT, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -72,7 +80,7 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  ORTHOR
+  
   REAL A, acc, akk, anorm, as, asave, Diag, diagk, dum, R1MACH, &
     Rows, Rs, rss, sad, Scales, SDOT, sig, sigma, sruro, uro
   INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot, l, M, mk, N, Nrda
@@ -80,14 +88,14 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !
   ! END OF ABSTRACT
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     MACHINE PRECISION (COMPUTER UNIT ROUNDOFF VALUE) IS DEFINED
   !     BY THE FUNCTION R1MACH.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***FIRST EXECUTABLE STATEMENT  ORTHOR
+  !* FIRST EXECUTABLE STATEMENT  ORTHOR
   uro = R1MACH(4)
   IF ( M>=N.AND.N>=1.AND.Nrda>=N ) THEN
     !

@@ -1,17 +1,21 @@
-!DECK SPLPMU
+!** SPLPMU
 SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,&
     Rprnrm,Erdnrm,Dulnrm,Theta,Costsc,Xlamda,Rhsnrm,Amat,&
     Basmat,Csc,Wr,Rprim,Ww,Bu,Bl,Rhs,Erd,Erp,Rz,Rg,Colnrm,&
     Costs,Primal,Duals,Singlr,Redbas,Zerolv,Stpedg)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPLPMU
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SPLPMU-S, DPLPMU-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SPLPMU-S, DPLPMU-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THE EDITING REQUIRED TO CONVERT THIS SUBROUTINE FROM SINGLE TO
   !     DOUBLE PRECISION INVOLVES THE FOLLOWING CHARACTER STRING CHANGES.
@@ -29,10 +33,13 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !     REVISED 821122-1100
   !     REVISED YYMMDD
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  IPLOC, LA05BS, LA05CS, PNNZRS, PRWPGE, SASUM,
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  IPLOC, LA05BS, LA05CS, PNNZRS, PRWPGE, SASUM,
   !                    SCOPY, SDOT, SPLPDM, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
@@ -40,7 +47,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  SPLPMU
+  
   REAL cnorm
   INTEGER i, ibas, Ienter, ihi, il1, Ileave, ilow, Info, Iopt, &
     ipage, iplace, IPLOC, iu1, j, Jstrt, k, key, Lbm, Lmx, lpg
@@ -55,7 +62,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     Costs(*), Primal(*), Duals(*), Colnrm(*), rcost, SASUM, SDOT
   LOGICAL Singlr, Redbas, pagepl, trans, Zerolv, Stpedg
   !
-  !***FIRST EXECUTABLE STATEMENT  SPLPMU
+  !* FIRST EXECUTABLE STATEMENT  SPLPMU
   zero = 0.E0
   one = 1.E0
   two = 2.E0

@@ -1,14 +1,18 @@
-!DECK DVOUT
+!** DVOUT
 SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DVOUT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SVOUT-S, DVOUT-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SVOUT-S, DVOUT-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Wisniewski, J. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     DOUBLE PRECISION VECTOR OUTPUT ROUTINE.
   !
@@ -42,9 +46,12 @@ SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
   !     IDIGIT = -6
   !     CALL DVOUT(N,COSTS,'(''1COSTS OF PURCHASES'')',IDIGIT)
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  I1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  I1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891107  Added comma after 1P edit descriptor in FORMAT
@@ -52,11 +59,11 @@ SUBROUTINE DVOUT(N,Dx,Ifmt,Idigit)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
-  !***END PROLOGUE  DVOUT
+  
   INTEGER i, I1MACH, Idigit, k1, k2, lout, N, ndigit
   REAL(8) :: Dx(*)
   CHARACTER Ifmt*(*)
-  !***FIRST EXECUTABLE STATEMENT  DVOUT
+  !* FIRST EXECUTABLE STATEMENT  DVOUT
   lout = I1MACH(2)
   WRITE (lout,Ifmt)
   IF ( N<=0 ) RETURN

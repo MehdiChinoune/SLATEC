@@ -1,13 +1,17 @@
-!DECK MPADD2
+!** MPADD2
 SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  MPADD2
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (MPADD2-A)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DQDOTA and DQDOTI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (MPADD2-A)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !  Called by MPADD, MPSUB etc.
   !  X, Y and Z are MP numbers, Y1 and TRUNC are integers.
@@ -21,8 +25,10 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   !  30.  See the comments in the routine MPBLAS for the reason for this
   !  choice.
   !
-  !***SEE ALSO  DQDOTA, DQDOTI, MPBLAS
-  !***REFERENCES  H. Kuki and W. J. Cody, A statistical study of floating
+  !***
+  ! **See also:**  DQDOTA, DQDOTI, MPBLAS
+  !***
+  ! **References:**  H. Kuki and W. J. Cody, A statistical study of floating
   !                 point number systems, Communications of the ACM 16, 4
   !                 (April 1973), pp. 223-230.
   !               R. P. Brent, On the precision attainable with various
@@ -34,9 +40,12 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   !               R. P. Brent, MP, a Fortran multiple-precision arithmetic
   !                 package, Algorithm 524, ACM Transactions on Mathema-
   !                 tical Software 4, 1 (March 1978), pp. 71-81.
-  !***ROUTINES CALLED  MPADD3, MPCHK, MPERR, MPNZR, MPSTR
-  !***COMMON BLOCKS    MPCOM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  MPADD3, MPCHK, MPERR, MPNZR, MPSTR
+  !***
+  ! COMMON BLOCKS    MPCOM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   ??????  Modified for use with BLAS.  Blank COMMON changed to named
   !           COMMON.  R given dimension 12.
@@ -45,12 +54,12 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   !   900402  Added TYPE section.  (WRB)
   !   920528  Added a REFERENCES section revised.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  !***END PROLOGUE  MPADD2
+  
   INTEGER j, LUN, M, med, MXR
   COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
   INTEGER B, T, R, X(*), Y(*), Z(*), Y1(*), Trunc
   INTEGER s, ed, rs, re
-  !***FIRST EXECUTABLE STATEMENT  MPADD2
+  !* FIRST EXECUTABLE STATEMENT  MPADD2
   IF ( X(1)/=0 ) THEN
     IF ( Y1(1)==0 ) GOTO 100
     ! COMPARE SIGNS

@@ -1,29 +1,36 @@
-!DECK DRC6J
+!** DRC6J
 SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DRC6J
-  !***PURPOSE  Evaluate the 6j symbol h(L1) = {L1 L2 L3}
+  !>
+  !***
+  !  Evaluate the 6j symbol h(L1) = {L1 L2 L3}
   !                                           {L4 L5 L6}
   !            for all allowed values of L1, the other parameters
   !            being held fixed.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C19
-  !***TYPE      DOUBLE PRECISION (RC6J-S, DRC6J-D)
-  !***KEYWORDS  6J COEFFICIENTS, 6J SYMBOLS, CLEBSCH-GORDAN COEFFICIENTS,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C19
+  !***
+  ! **Type:**      DOUBLE PRECISION (RC6J-S, DRC6J-D)
+  !***
+  ! **Keywords:**  6J COEFFICIENTS, 6J SYMBOLS, CLEBSCH-GORDAN COEFFICIENTS,
   !             RACAH COEFFICIENTS, VECTOR ADDITION COEFFICIENTS,
   !             WIGNER COEFFICIENTS
-  !***AUTHOR  Gordon, R. G., Harvard University
+  !***
+  ! **Author:**  Gordon, R. G., Harvard University
   !           Schulten, K., Max Planck Institute
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !        DOUBLE PRECISION L2, L3, L4, L5, L6, L1MIN, L1MAX, SIXCOF(NDIM)
   !        INTEGER NDIM, IER
   !
   !        CALL DRC6J(L2, L3, L4, L5, L6, L1MIN, L1MAX, SIXCOF, NDIM, IER)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !     L2 :IN      Parameter in 6j symbol.
   !
@@ -54,7 +61,7 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !                 IER=5 L1MAX less than L1MIN.
   !                 IER=6 NDIM less than L1MAX-L1MIN+1.
   !
-  ! *Description:
+  !- Description:
   !
   !     The definition and properties of 6j symbols can be found, for
   !  example, in Appendix C of Volume II of A. Messiah. Although the
@@ -91,7 +98,8 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !    The algorithm is suited to applications in which large quantum
   !  numbers arise, such as in molecular dynamics.
   !
-  !***REFERENCES  1. Messiah, Albert., Quantum Mechanics, Volume II,
+  !***
+  ! **References:**  1. Messiah, Albert., Quantum Mechanics, Volume II,
   !                  North-Holland Publishing Company, 1963.
   !               2. Schulten, Klaus and Gordon, Roy G., Exact recursive
   !                  evaluation of 3j and 6j coefficients for quantum-
@@ -105,8 +113,10 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !               4. Schulten, Klaus and Gordon, Roy G., Recursive
   !                  evaluation of 3j and 6j coefficients, Computer
   !                  Phys Comm, v 11, 1976, pp. 269-278.
-  !***ROUTINES CALLED  D1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
   !   880515  SLATEC prologue added by G. C. Nielson, NBS; parameters
   !           HUGE and TINY revised to depend on D1MACH.
@@ -124,7 +134,7 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   !   910415  Mixed type expressions eliminated; variable C1 initialized;
   !           description of SIXCOF expanded. These changes were done by
   !           D. W. Lozier.
-  !***END PROLOGUE  DRC6J
+  
   !
   INTEGER Ndim, Ier
   REAL(8) :: L2, L3, L4, L5, L6, L1min, L1max, Sixcof(Ndim)
@@ -140,7 +150,7 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   DATA zero, eps, one, two, three/0.0D0, 0.01D0, 1.0D0, 2.0D0, &
     3.0D0/
   !
-  !***FIRST EXECUTABLE STATEMENT  DRC6J
+  !* FIRST EXECUTABLE STATEMENT  DRC6J
   Ier = 0
   !  HUGE is the square root of one twentieth of the largest floating
   !  point number, approximately.

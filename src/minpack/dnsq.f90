@@ -1,17 +1,24 @@
-!DECK DNSQ
+!** DNSQ
 SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,R,Lr,Qtf,&
     Wa1,Wa2,Wa3,Wa4)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DNSQ
-  !***PURPOSE  Find a zero of a system of a N nonlinear functions in N
+  !>
+  !***
+  !  Find a zero of a system of a N nonlinear functions in N
   !            variables by a modification of the Powell hybrid method.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  F2A
-  !***TYPE      DOUBLE PRECISION (SNSQ-S, DNSQ-D)
-  !***KEYWORDS  NONLINEAR SQUARE SYSTEM, POWELL HYBRID METHOD, ZEROS
-  !***AUTHOR  Hiebert, K. L. (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  F2A
+  !***
+  ! **Type:**      DOUBLE PRECISION (SNSQ-S, DNSQ-D)
+  !***
+  ! **Keywords:**  NONLINEAR SQUARE SYSTEM, POWELL HYBRID METHOD, ZEROS
+  !***
+  ! **Author:**  Hiebert, K. L. (SNLA)
+  !***
+  ! **Description:**
   !
   ! 1. Purpose.
   !
@@ -302,7 +309,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !         storage locations, in addition to the storage required by the
   !         program.  There are no internally declared storage arrays.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   ! 7. Example.
   !
@@ -406,13 +413,16 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !       -0.7042129E+00 -0.7013690E+00 -0.6918656E+00
   !       -0.6657920E+00 -0.5960342E+00 -0.4164121E+00
   !
-  !***REFERENCES  M. J. D. Powell, A hybrid method for nonlinear equa-
+  !***
+  ! **References:**  M. J. D. Powell, A hybrid method for nonlinear equa-
   !                 tions. In Numerical Methods for Nonlinear Algebraic
   !                 Equations, P. Rabinowitz, Editor.  Gordon and Breach,
   !                 1988.
-  !***ROUTINES CALLED  D1MACH, D1MPYQ, D1UPDT, DDOGLG, DENORM, DFDJC1,
+  !***
+  ! **Routines called:**  D1MACH, D1MPYQ, D1UPDT, DDOGLG, DENORM, DFDJC1,
   !                    DQFORM, DQRFAC, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -420,7 +430,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DNSQ
+  
   REAL(8) :: D1MACH, DENORM
   INTEGER i, iflag, Info, Iopt, iter, iwa(1), j, jm1, l, Ldfjac, &
     Lr, Maxfev, Ml, Mode, Mu, N, ncfail, ncsuc, Nfev, Njev, &
@@ -437,7 +447,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     1.0D-3, 1.0D-4, 0.0D0/
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 320
-  !***FIRST EXECUTABLE STATEMENT  DNSQ
+  !* FIRST EXECUTABLE STATEMENT  DNSQ
   epsmch = D1MACH(4)
   !
   Info = 0

@@ -1,13 +1,17 @@
-!DECK LA05CS
+!** LA05CS
 SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  LA05CS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (LA05CS-S, LA05CD-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (LA05CS-S, LA05CD-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THIS SUBPROGRAM IS A SLIGHT MODIFICATION OF A SUBPROGRAM
   !     FROM THE C. 1979 AERE HARWELL LIBRARY.  THE NAME OF THE
@@ -21,10 +25,14 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   !     THE USER AND AERE-UK.  ANY USAGE OF THE SANDIA WRITTEN CODES
   !     SPLP( ) (WHICH USES THE HARWELL SUBROUTINES) IS PERMITTED.
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  LA05ES, XERMSG, XSETUN
-  !***COMMON BLOCKS    LA05DS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  LA05ES, XERMSG, XSETUN
+  !***
+  ! COMMON BLOCKS    LA05DS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Corrected references to XERRWV.  (WRB)
@@ -35,7 +43,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
   !   920422  Changed upper limit on DO from LAST to LAST-1.  (WRB)
-  !***END PROLOGUE  LA05CS
+  
   INTEGER i, Ia, ii, ij, im, in, ins, ipp, ir, is, j, jm, jns, &
     jp, k, kj, kk, kl, km, knp
   INTEGER kp, kpl, kq, kr, krl, ks, l, last, last1, last2, LCOl, &
@@ -47,7 +55,7 @@ SUBROUTINE LA05CS(A,Ind,Ia,N,Ip,Iw,W,G,U,Mm)
   CHARACTER(8) :: xern1
   !
   COMMON /LA05DS/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
-  !***FIRST EXECUTABLE STATEMENT  LA05CS
+  !* FIRST EXECUTABLE STATEMENT  LA05CS
   CALL XSETUN(LP)
   IF ( G<0.0E0 ) THEN
     !

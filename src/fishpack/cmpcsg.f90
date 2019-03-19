@@ -1,13 +1,17 @@
-!DECK CMPCSG
+!** CMPCSG
 SUBROUTINE CMPCSG(N,Ijump,Fnum,Fden,A)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CMPCSG
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CMGNBN
-  !***LIBRARY   SLATEC
-  !***TYPE      COMPLEX (COSGEN-S, CMPCSG-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CMGNBN
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      COMPLEX (COSGEN-S, CMPCSG-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This subroutine computes required cosine values in ascending
   !     order.  When IJUMP .GT. 1 the routine computes values
@@ -28,21 +32,24 @@ SUBROUTINE CMPCSG(N,Ijump,Fnum,Fden,A)
   !        FNUM = 0.5, FDEN = 0.5, for B-R and C-R when ISTAG = 2
   !                                in CMPOSN only.
   !
-  !***SEE ALSO  CMGNBN
-  !***ROUTINES CALLED  PIMACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CMGNBN
+  !***
+  ! **Routines called:**  PIMACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  CMPCSG
+  
   REAL dum, Fden, Fnum, pi, pibyn, PIMACH, x, y
   INTEGER i, Ijump, k, k1, k2, k3, k4, k5, N, np1
   COMPLEX A
   DIMENSION A(*)
   !
   !
-  !***FIRST EXECUTABLE STATEMENT  CMPCSG
+  !* FIRST EXECUTABLE STATEMENT  CMPCSG
   pi = PIMACH(dum)
   IF ( N/=0 ) THEN
     IF ( Ijump==1 ) THEN

@@ -1,32 +1,42 @@
-!DECK CTAN
+!** CTAN
 COMPLEX FUNCTION CTAN(Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CTAN
-  !***PURPOSE  Compute the complex tangent.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4A
-  !***TYPE      COMPLEX (CTAN-C)
-  !***KEYWORDS  ELEMENTARY FUNCTIONS, FNLIB, TANGENT, TRIGONOMETRIC
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the complex tangent.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      COMPLEX (CTAN-C)
+  !***
+  ! **Keywords:**  ELEMENTARY FUNCTIONS, FNLIB, TANGENT, TRIGONOMETRIC
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! CTAN(Z) calculates the complex trigonometric tangent of complex
   ! argument Z.  Z is in units of radians.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  R1MACH, XERCLR, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  R1MACH, XERCLR, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  CTAN
+  
   REAL den, R1MACH, sn2x, sqeps, x2, y2
   COMPLEX Z
   SAVE sqeps
   DATA sqeps/0./
-  !***FIRST EXECUTABLE STATEMENT  CTAN
+  !* FIRST EXECUTABLE STATEMENT  CTAN
   IF ( sqeps==0. ) sqeps = SQRT(R1MACH(4))
   !
   x2 = 2.0*REAL(Z)

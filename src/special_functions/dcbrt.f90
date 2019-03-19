@@ -1,26 +1,36 @@
-!DECK DCBRT
+!** DCBRT
 REAL(8) FUNCTION DCBRT(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCBRT
-  !***PURPOSE  Compute the cube root.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C2
-  !***TYPE      DOUBLE PRECISION (CBRT-S, DCBRT-D, CCBRT-C)
-  !***KEYWORDS  CUBE ROOT, ELEMENTARY FUNCTIONS, FNLIB, ROOTS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the cube root.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C2
+  !***
+  ! **Type:**      DOUBLE PRECISION (CBRT-S, DCBRT-D, CCBRT-C)
+  !***
+  ! **Keywords:**  CUBE ROOT, ELEMENTARY FUNCTIONS, FNLIB, ROOTS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DCBRT(X) calculates the double precision cube root for
   ! double precision argument X.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, D9PAK, D9UPAK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, D9PAK, D9UPAK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DCBRT
+  
   INTEGER irem, iter, ixpnt, n, niter
   REAL z
   REAL(8) :: X, cbrt2(5), y, cbrtsq, D9PAK, D1MACH
@@ -31,7 +41,7 @@ REAL(8) FUNCTION DCBRT(X)
   DATA cbrt2(4)/1.25992104989487316476721060727823D0/
   DATA cbrt2(5)/1.58740105196819947475170563927231D0/
   DATA niter/0/
-  !***FIRST EXECUTABLE STATEMENT  DCBRT
+  !* FIRST EXECUTABLE STATEMENT  DCBRT
   IF ( niter==0 ) niter = INT( 1.443*LOG(-.106*LOG(0.1*REAL(D1MACH(3)))) )
   !
   DCBRT = 0.D0

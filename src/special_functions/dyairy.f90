@@ -1,14 +1,18 @@
-!DECK DYAIRY
+!** DYAIRY
 SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DYAIRY
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBESJ and DBESY
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (YAIRY-S, DYAIRY-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
+  !>
+  !***
+  !  Subsidiary to DBESJ and DBESY
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (YAIRY-S, DYAIRY-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
   !           Daniel, S. L., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                  DYAIRY computes the Airy function BI(X)
   !                   and its derivative DBI(X) for DASYJY
@@ -23,15 +27,18 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
   !        BI  - Value of function BI(X)
   !       DBI  - Value of the derivative DBI(X)
   !
-  !***SEE ALSO  DBESJ, DBESY
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBESJ, DBESY
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  !***END PROLOGUE  DYAIRY
+  
   !
   INTEGER i, j, m1, m1d, m2, m2d, m3, m3d, m4d, n1, n1d, n2, &
     n2d, n3, n3d, n4d
@@ -209,7 +216,7 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
     -1.44752826642035D-10, 4.53724043420422D-11, &
     -3.99655065847223D-12, -3.24089119830323D-13, &
     1.62098952568741D-13, -2.40765247974057D-14, 1.69384811284491D-16/
-  !***FIRST EXECUTABLE STATEMENT  DYAIRY
+  !* FIRST EXECUTABLE STATEMENT  DYAIRY
   ax = ABS(X)
   Rx = SQRT(ax)
   C = con1*ax*Rx

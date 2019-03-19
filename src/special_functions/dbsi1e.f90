@@ -1,17 +1,24 @@
-!DECK DBSI1E
+!** DBSI1E
 REAL(8) FUNCTION DBSI1E(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBSI1E
-  !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
+  !>
+  !***
+  !  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order one.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B1
-  !***TYPE      DOUBLE PRECISION (BESI1E-S, DBSI1E-D)
-  !***KEYWORDS  EXPONENTIALLY SCALED, FIRST KIND, FNLIB,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B1
+  !***
+  ! **Type:**      DOUBLE PRECISION (BESI1E-S, DBSI1E-D)
+  !***
+  ! **Keywords:**  EXPONENTIALLY SCALED, FIRST KIND, FNLIB,
   !             HYPERBOLIC BESSEL FUNCTION, MODIFIED BESSEL FUNCTION,
   !             ORDER ONE, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DBSI1E(X) calculates the double precision exponentially scaled
   ! modified (hyperbolic) Bessel function of the first kind of order
@@ -36,15 +43,18 @@ REAL(8) FUNCTION DBSI1E(X)
   !                               significant figures required  29.97
   !                                    decimal places required  32.66
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DBSI1E
+  
   REAL eta
   INTEGER INITDS, ntai1, ntai12, nti1
   REAL(8) :: X, bi1cs(17), ai1cs(46), ai12cs(69), xmin, xsml, y, D1MACH, DCSEVL
@@ -183,7 +193,7 @@ REAL(8) FUNCTION DBSI1E(X)
   DATA ai12cs(68)/ + .1619029596080341510617909803614D-30/
   DATA ai12cs(69)/ - .1834079908804941413901308439210D-31/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DBSI1E
+  !* FIRST EXECUTABLE STATEMENT  DBSI1E
   IF ( first ) THEN
     eta = 0.1*REAL(D1MACH(3))
     nti1 = INITDS(bi1cs,17,eta)

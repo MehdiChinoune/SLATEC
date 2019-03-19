@@ -1,14 +1,21 @@
-!DECK SINT
+!** SINT
 SUBROUTINE SINT(N,X,Wsave)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SINT
-  !***PURPOSE  Compute the sine transform of a real, odd sequence.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A3
-  !***TYPE      SINGLE PRECISION (SINT-S)
-  !***KEYWORDS  FFTPACK, FOURIER TRANSFORM
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the sine transform of a real, odd sequence.
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A3
+  !***
+  ! **Type:**      SINGLE PRECISION (SINT-S)
+  !***
+  ! **Keywords:**  FFTPACK, FOURIER TRANSFORM
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !  Subroutine SINT computes the discrete Fourier sine transform
   !  of an odd sequence X(I).  The transform is defined below at
@@ -53,11 +60,14 @@ SUBROUTINE SINT(N,X,Wsave)
   !  WSAVE   contains initialization calculations which must not be
   !          destroyed between calls of SINT.
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  RFFTF
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  RFFTF
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -70,11 +80,11 @@ SUBROUTINE SINT(N,X,Wsave)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SINT
+  
   INTEGER i, k, kc, kw, modn, N, nf, np1, ns2
   REAL sqrt3, t1, t2, Wsave, X, xh
   DIMENSION X(*), Wsave(*)
-  !***FIRST EXECUTABLE STATEMENT  SINT
+  !* FIRST EXECUTABLE STATEMENT  SINT
   sqrt3 = SQRT(3.)
   IF ( N<2 ) THEN
     X(1) = X(1) + X(1)

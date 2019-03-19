@@ -1,13 +1,17 @@
-!DECK MPCDM
+!** MPCDM
 SUBROUTINE MPCDM(Dx,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  MPCDM
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (MPCDM-A)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DQDOTA and DQDOTI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (MPCDM-A)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   ! Converts double-precision number DX to multiple-precision Z.
   ! Some numbers will not convert exactly on machines with base
@@ -19,10 +23,14 @@ SUBROUTINE MPCDM(Dx,Z)
   ! arrays of size 30.  See the comments in the routine MPBLAS for the
   ! for the reason for this choice.
   !
-  !***SEE ALSO  DQDOTA, DQDOTI, MPBLAS
-  !***ROUTINES CALLED  MPCHK, MPDIVI, MPMULI, MPNZR
-  !***COMMON BLOCKS    MPCOM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DQDOTA, DQDOTI, MPBLAS
+  !***
+  ! **Routines called:**  MPCHK, MPDIVI, MPMULI, MPNZR
+  !***
+  ! COMMON BLOCKS    MPCOM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   ??????  Modified for use with BLAS.  Blank COMMON changed to named
   !           COMMON.  R given dimension 12.
@@ -31,12 +39,12 @@ SUBROUTINE MPCDM(Dx,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  !***END PROLOGUE  MPCDM
+  
   INTEGER i, i2, ib, ie, k, LUN, M, MXR
   REAL(8) :: db, dj, Dx
   COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
   INTEGER B, T, R, Z(*), rs, re, tp
-  !***FIRST EXECUTABLE STATEMENT  MPCDM
+  !* FIRST EXECUTABLE STATEMENT  MPCDM
   CALL MPCHK(1,4)
   i2 = T + 4
   ! CHECK SIGN

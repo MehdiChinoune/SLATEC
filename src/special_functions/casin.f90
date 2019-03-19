@@ -1,27 +1,37 @@
-!DECK CASIN
+!** CASIN
 COMPLEX FUNCTION CASIN(Zinp)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CASIN
-  !***PURPOSE  Compute the complex arc sine.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4A
-  !***TYPE      COMPLEX (CASIN-C)
-  !***KEYWORDS  ARC SINE, ELEMENTARY FUNCTIONS, FNLIB, TRIGONOMETRIC
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the complex arc sine.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      COMPLEX (CASIN-C)
+  !***
+  ! **Keywords:**  ARC SINE, ELEMENTARY FUNCTIONS, FNLIB, TRIGONOMETRIC
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! CASIN(ZINP) calculates the complex trigonometric arc sine of ZINP.
   ! The result is in units of radians, and the real part is in the first
   ! or fourth quadrant.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CASIN
+  
   INTEGER i, nterms
   REAL pi, pi2, r, R1MACH, rmin, twoi
   COMPLEX Zinp, z, z2, sqzp1, ci
@@ -31,7 +41,7 @@ COMPLEX FUNCTION CASIN(Zinp)
   DATA pi/3.14159265358979324E0/
   DATA ci/(0.,1.)/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  CASIN
+  !* FIRST EXECUTABLE STATEMENT  CASIN
   IF ( first ) THEN
     ! NTERMS = LOG(EPS)/LOG(RMAX)  WHERE RMAX = 0.1
     nterms = INT( -0.4343*LOG(R1MACH(3)) )

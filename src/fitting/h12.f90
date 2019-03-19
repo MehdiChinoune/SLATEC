@@ -1,13 +1,17 @@
-!DECK H12
+!** H12
 SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  H12
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to HFTI, LSEI and WNNLS
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (H12-S, DH12-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to HFTI, LSEI and WNNLS
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (H12-S, DH12-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     C.L.Lawson and R.J.Hanson, Jet Propulsion Laboratory, 1973 Jun 12
   !     to appear in 'Solving Least Squares Problems', Prentice-Hall, 1974
@@ -36,20 +40,23 @@ SUBROUTINE H12(Mode,Lpivot,L1,M,U,Iue,Up,C,Ice,Icv,Ncv)
   !     NCV    Number of vectors in C() to be transformed. If NCV .LE. 0
   !            no operations will be done on C().
   !
-  !***SEE ALSO  HFTI, LSEI, WNNLS
-  !***ROUTINES CALLED  SAXPY, SDOT, SSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  HFTI, LSEI, WNNLS
+  !***
+  ! **Routines called:**  SAXPY, SDOT, SSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  H12
+  
   REAL b, C, cl, clinv, one, SDOT, sm, U, ul1m1, Up
   INTEGER i, i2, i3, i4, Ice, Icv, incr, Iue, j, kl1, kl2, klp, &
     L1, l1m1, Lpivot, M, mml1p2, Mode, Ncv
   DIMENSION U(Iue,*), C(*)
-  !***FIRST EXECUTABLE STATEMENT  H12
+  !* FIRST EXECUTABLE STATEMENT  H12
   one = 1.
   !
   IF ( 0>=Lpivot.OR.Lpivot>=L1.OR.L1>M ) RETURN

@@ -1,14 +1,18 @@
-!DECK CBLKT1
+!** CBLKT1
 SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
     CPRDCT)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CBLKT1
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBLKTR
-  !***LIBRARY   SLATEC
-  !***TYPE      COMPLEX (BLKTR1-S, CBLKT1-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBLKTR
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      COMPLEX (BLKTR1-S, CBLKT1-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   ! CBLKT1 solves the linear system of routine CBLKTR.
   !
@@ -19,14 +23,18 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
   ! CPRDCT is either CPROCP or CPROC which are called if some of the zeros
   ! of the B polynomials are complex.
   !
-  !***SEE ALSO  CBLKTR
-  !***ROUTINES CALLED  INXCA, INXCB, INXCC
-  !***COMMON BLOCKS    CCBLK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBLKTR
+  !***
+  ! **Routines called:**  INXCA, INXCB, INXCC
+  !***
+  ! COMMON BLOCKS    CCBLK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  CBLKT1
+  
   !
   EXTERNAL :: PRDCT, CPRDCT
   REAL CNV, dum, EPS
@@ -38,7 +46,7 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
   REAL :: An(*), Bn(*), Cn(*),  B(*)
   COMPLEX Am(*), Bm(*), Cm(*), W1(*), W2(*), W3(*), Wd(*), Ww(*), Wu(*), Y(Idimy,*)
   COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
-  !***FIRST EXECUTABLE STATEMENT  CBLKT1
+  !* FIRST EXECUTABLE STATEMENT  CBLKT1
   kdo = K - 1
   DO l = 1, kdo
     ir = l - 1

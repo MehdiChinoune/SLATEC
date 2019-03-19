@@ -1,33 +1,41 @@
-!DECK DY
+!** DY
 SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DY
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SEPELI
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (DY-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SEPELI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (DY-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This program computes second order finite difference
   !     approximations to the third and fourth Y
   !     partial derivatives of U at the (I,J) mesh point.
   !
-  !***SEE ALSO  SEPELI
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    SPLPCM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SEPELI
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    SPLPCM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DY
+  
   REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, TDLx3, TDLy3, U, Uyyy, Uyyyy
   INTEGER I, Idmn, IS, J, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
   COMMON /SPLPCM/ KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
     IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
     DLY4
   DIMENSION U(Idmn,*)
-  !***FIRST EXECUTABLE STATEMENT  DY
+  !* FIRST EXECUTABLE STATEMENT  DY
   IF ( J>2.AND.J<(L-1) ) THEN
     !
     !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS ON THE INTERIOR

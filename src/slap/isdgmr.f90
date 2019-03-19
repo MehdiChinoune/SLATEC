@@ -1,30 +1,36 @@
-!DECK ISDGMR
+!** ISDGMR
 INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
     Itmax,Iter,Err,Iunit,R,Z,Dz,Rwork,Iwork,Rnrm,Bnrm,&
     Sb,Sx,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,Snormw,Prod,&
     R0nrm,Hes,Jpre)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ISDGMR
-  !***SUBSIDIARY
-  !***PURPOSE  Generalized Minimum Residual Stop Test.
+  !>
+  !***
+  !  Generalized Minimum Residual Stop Test.
   !            This routine calculates the stop test for the Generalized
   !            Minimum RESidual (GMRES) iteration scheme.  It returns a
   !            non-zero if the error estimate (the type of which is
   !            determined by ITOL) is less than the user specified
   !            tolerance TOL.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      DOUBLE PRECISION (ISSGMR-S, ISDGMR-D)
-  !***KEYWORDS  GMRES, LINEAR SYSTEM, SLAP, SPARSE, STOP TEST
-  !***AUTHOR  Brown, Peter, (LLNL), pnbrown@llnl.gov
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (ISSGMR-S, ISDGMR-D)
+  !***
+  ! **Keywords:**  GMRES, LINEAR SYSTEM, SLAP, SPARSE, STOP TEST
+  !***
+  ! **Author:**  Brown, Peter, (LLNL), pnbrown@llnl.gov
   !           Hindmarsh, Alan, (LLNL), alanh@llnl.gov
   !           Seager, Mark K., (LLNL), seager@llnl.gov
   !             Lawrence Livermore National Laboratory
   !             PO Box 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !      INTEGER N, NELT, IA(NELT), JA(NELT), ISYM, NMSL, ITOL
   !      INTEGER ITMAX, ITER, IUNIT, IWORK(USER DEFINED), JSCAL
   !      INTEGER KMP, LGMR, MAXL, MAXLP1, JPRE
@@ -41,7 +47,7 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   !     $     KMP, LGMR, MAXL, MAXLP1, V, Q, SNORMW, PROD, R0NRM,
   !     $     HES, JPRE) .NE. 0) THEN ITERATION DONE
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the Matrix.
   ! B      :IN       Double Precision B(N).
@@ -215,7 +221,7 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   !         Preconditioner type flag.
   !         (See description of IGWK(4) in DGMRES.)
   !
-  ! *Description
+  !- Description
   !       When using the GMRES solver,  the preferred value  for ITOL
   !       is 0.  This is due to the fact that when ITOL=0 the norm of
   !       the residual required in the stopping test is  obtained for
@@ -230,7 +236,7 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   !       approximate solution XL.  Hence, these values of  ITOL will
   !       not be as efficient as ITOL=0.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
@@ -241,10 +247,14 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   !     The calling routine should make such a test before calling
   !     ISDGMR, as is done in DGMRES.
   !
-  !***SEE ALSO  DGMRES
-  !***ROUTINES CALLED  D1MACH, DCOPY, DNRM2, DRLCAL, DSCAL, DXLCAL
-  !***COMMON BLOCKS    DSLBLK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DGMRES
+  !***
+  ! **Routines called:**  D1MACH, DCOPY, DNRM2, DRLCAL, DSCAL, DXLCAL
+  !***
+  ! COMMON BLOCKS    DSLBLK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -259,7 +269,7 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   !   920511  Added complete declaration section.  (WRB)
   !   921026  Corrected D to E in output format.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  !***END PROLOGUE  ISDGMR
+  
   !     .. Scalar Arguments ..
   REAL(8) :: Bnrm, Err, Prod, R0nrm, Rnrm, Snormw, Tol
   INTEGER Isym, Iter, Itmax, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, &
@@ -286,7 +296,7 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   COMMON /DSLBLK/ SOLn
   !     .. Save statement ..
   SAVE solnrm
-  !***FIRST EXECUTABLE STATEMENT  ISDGMR
+  !* FIRST EXECUTABLE STATEMENT  ISDGMR
   ISDGMR = 0
   !
   !       Use input from DPIGMR to determine if stop conditions are met.

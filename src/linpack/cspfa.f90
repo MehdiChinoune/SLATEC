@@ -1,16 +1,23 @@
-!DECK CSPFA
+!** CSPFA
 SUBROUTINE CSPFA(Ap,N,Kpvt,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CSPFA
-  !***PURPOSE  Factor a complex symmetric matrix stored in packed form by
+  !>
+  !***
+  !  Factor a complex symmetric matrix stored in packed form by
   !            elimination with symmetric pivoting.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2C1
-  !***TYPE      COMPLEX (SSPFA-S, DSPFA-D, CHPFA-C, CSPFA-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION, PACKED,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2C1
+  !***
+  ! **Type:**      COMPLEX (SSPFA-S, DSPFA-D, CHPFA-C, CSPFA-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION, PACKED,
   !             SYMMETRIC
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     CSPFA factors a complex symmetric matrix stored in
   !     packed form by elimination with symmetric pivoting.
@@ -64,10 +71,13 @@ SUBROUTINE CSPFA(Ap,N,Kpvt,Info)
   !             10    CONTINUE
   !             20 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CSWAP, ICAMAX
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CSWAP, ICAMAX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -78,7 +88,7 @@ SUBROUTINE CSPFA(Ap,N,Kpvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CSPFA
+  
   INTEGER N, Kpvt(*), Info
   COMPLEX Ap(*)
   !
@@ -89,7 +99,7 @@ SUBROUTINE CSPFA(Ap,N,Kpvt,Info)
     km2, kstep
   LOGICAL swap
   REAL, EXTERNAL :: CABS1
-  !***FIRST EXECUTABLE STATEMENT  CSPFA
+  !* FIRST EXECUTABLE STATEMENT  CSPFA
   !
   !     INITIALIZE
   !

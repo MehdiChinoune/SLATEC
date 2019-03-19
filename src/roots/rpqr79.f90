@@ -1,14 +1,21 @@
-!DECK RPQR79
+!** RPQR79
 SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RPQR79
-  !***PURPOSE  Find the zeros of a polynomial with real coefficients.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  F1A1A
-  !***TYPE      SINGLE PRECISION (RPQR79-S, CPQR79-C)
-  !***KEYWORDS  COMPLEX POLYNOMIAL, POLYNOMIAL ROOTS, POLYNOMIAL ZEROS
-  !***AUTHOR  Vandevender, W. H., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Find the zeros of a polynomial with real coefficients.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  F1A1A
+  !***
+  ! **Type:**      SINGLE PRECISION (RPQR79-S, CPQR79-C)
+  !***
+  ! **Keywords:**  COMPLEX POLYNOMIAL, POLYNOMIAL ROOTS, POLYNOMIAL ZEROS
+  !***
+  ! **Author:**  Vandevender, W. H., (SNLA)
+  !***
+  ! **Description:**
   !
   !   Abstract
   !       This routine computes all zeros of a polynomial of degree NDEG
@@ -39,20 +46,23 @@ SUBROUTINE RPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !          2  COEFF(1)=0.0
   !          3  NDEG is invalid (less than or equal to 0)
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  HQR, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  HQR, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800601  DATE WRITTEN
   !   890505  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   911010  Code reworked and simplified.  (RWC and WRB)
-  !***END PROLOGUE  RPQR79
+  
   INTEGER km1, kwend
   REAL Coeff(*), Work(*), scale
   COMPLEX Root(*)
   INTEGER Ndeg, Ierr, k, kh, kwr, kwi, kcol
-  !***FIRST EXECUTABLE STATEMENT  RPQR79
+  !* FIRST EXECUTABLE STATEMENT  RPQR79
   Ierr = 0
   IF ( ABS(Coeff(1))==0.0 ) THEN
     Ierr = 2

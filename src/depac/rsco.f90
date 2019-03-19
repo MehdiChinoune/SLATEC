@@ -1,26 +1,34 @@
-!DECK RSCO
+!** RSCO
 SUBROUTINE RSCO(Rsav,Isav)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RSCO
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (RSCO-S, DRSCO-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (RSCO-S, DRSCO-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   RSCO transfers data from arrays to a common block within the
   !   integrator package DEBDF.
   !
-  !***SEE ALSO  DEBDF
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    DEBDF1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DEBDF
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    DEBDF1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  RSCO
+  
   !
   !
   !-----------------------------------------------------------------------
@@ -36,7 +44,7 @@ SUBROUTINE RSCO(Rsav,Isav)
   SAVE lenrls, lenils
   DATA lenrls/218/, lenils/33/
   !
-  !***FIRST EXECUTABLE STATEMENT  RSCO
+  !* FIRST EXECUTABLE STATEMENT  RSCO
   DO i = 1, lenrls
     RLS(i) = Rsav(i)
   ENDDO

@@ -1,16 +1,23 @@
-!DECK POLYVL
+!** POLYVL
 SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  POLYVL
-  !***PURPOSE  Calculate the value of a polynomial and its first NDER
+  !>
+  !***
+  !  Calculate the value of a polynomial and its first NDER
   !            derivatives where the polynomial was produced by a previous
   !            call to POLINT.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E3
-  !***TYPE      SINGLE PRECISION (POLYVL-S, DPOLVL-D)
-  !***KEYWORDS  POLYNOMIAL EVALUATION
-  !***AUTHOR  Huddleston, R. E., (SNLL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E3
+  !***
+  ! **Type:**      SINGLE PRECISION (POLYVL-S, DPOLVL-D)
+  !***
+  ! **Keywords:**  POLYNOMIAL EVALUATION
+  !***
+  ! **Author:**  Huddleston, R. E., (SNLL)
+  !***
+  ! **Description:**
   !
   !     Written by Robert E. Huddleston, Sandia Laboratories, Livermore
   !
@@ -63,22 +70,25 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   !             .GT. 0.  If NDER=0, WORK does not need to be a dimensioned
   !             variable.
   !
-  !***REFERENCES  L. F. Shampine, S. M. Davenport and R. E. Huddleston,
+  !***
+  ! **References:**  L. F. Shampine, S. M. Davenport and R. E. Huddleston,
   !                 Curve fitting by polynomials in one variable, Report
   !                 SLA-74-0270, Sandia Laboratories, June 1974.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   740601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  POLYVL
+  
   REAL C, fac, pione, pitwo, pone, ptwo, Work, X, xk, Xx, Yfit, Yp
   INTEGER i, Ierr, im1, izero, k, km1, km1pi, km2pn, km2pni, m, &
     mm, N, Nder, ndr, nmkp1, npkm1
   DIMENSION Yp(*), X(*), C(*), Work(*)
-  !***FIRST EXECUTABLE STATEMENT  POLYVL
+  !* FIRST EXECUTABLE STATEMENT  POLYVL
   Ierr = 1
   IF ( Nder<=0 ) THEN
     !

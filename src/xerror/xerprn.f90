@@ -1,15 +1,21 @@
-!DECK XERPRN
+!** XERPRN
 SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XERPRN
-  !***SUBSIDIARY
-  !***PURPOSE  Print error messages processed by XERMSG.
-  !***LIBRARY   SLATEC (XERROR)
-  !***CATEGORY  R3C
-  !***TYPE      ALL (XERPRN-A)
-  !***KEYWORDS  ERROR MESSAGES, PRINTING, XERROR
-  !***AUTHOR  Fong, Kirby, (NMFECC at LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Print error messages processed by XERMSG.
+  !***
+  ! **Library:**   SLATEC (XERROR)
+  !***
+  ! **Category:**  R3C
+  !***
+  ! **Type:**      ALL (XERPRN-A)
+  !***
+  ! **Keywords:**  ERROR MESSAGES, PRINTING, XERROR
+  !***
+  ! **Author:**  Fong, Kirby, (NMFECC at LLNL)
+  !***
+  ! **Description:**
   !
   ! This routine sends one or more lines to each of the (up to five)
   ! logical units to which error messages are to be sent.  This routine
@@ -55,11 +61,14 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   !         been adjusted to fall between 0 and 16 and NWRAP has been
   !         adjusted to fall between 16 and 132.
   !
-  !***REFERENCES  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
+  !***
+  ! **References:**  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
   !                 Error-handling Package, SAND82-0800, Sandia
   !                 Laboratories, 1982.
-  !***ROUTINES CALLED  I1MACH, XGETUA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  I1MACH, XGETUA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   880621  DATE WRITTEN
   !   880708  REVISED AFTER THE SLATEC CML SUBCOMMITTEE MEETING OF
   !           JUNE 29 AND 30 TO CHANGE THE NAME TO XERPRN AND TO REWORK
@@ -74,7 +83,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   !   891214  Prologue converted to Version 4.0 format.  (WRB)
   !   900510  Added code to break messages between words.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  XERPRN
+  
   INTEGER i, I1MACH, idelta, lenmsg, lpiece, lpref, lwrap, n, nextc
   CHARACTER*(*) Prefix, Messg
   INTEGER Npref, Nwrap
@@ -82,7 +91,7 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   INTEGER iu(5), nunit
   CHARACTER(2) :: NEWLIN
   PARAMETER (NEWLIN='$$')
-  !***FIRST EXECUTABLE STATEMENT  XERPRN
+  !* FIRST EXECUTABLE STATEMENT  XERPRN
   CALL XGETUA(iu,nunit)
   !
   !       A ZERO VALUE FOR A LOGICAL UNIT NUMBER MEANS TO USE THE STANDARD

@@ -1,14 +1,20 @@
-!DECK SLADOC
+!** SLADOC
 PROGRAM SLADOC
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SLADOC
-  !***PURPOSE   Retrieve documentation for the SLATEC library.
-  !***LIBRARY   (NONE)
-  !***CATEGORY  R4
-  !***KEYWORDS  DOCUMENTATION, SLATEC
-  !***AUTHOR  Boland, W. Robert, C-8, Los Alamos National Laboratory
+  !>
+  !***
+  !   Retrieve documentation for the SLATEC library.
+  !***
+  ! **Library:**   (NONE)
+  !***
+  ! **Category:**  R4
+  !***
+  ! **Keywords:**  DOCUMENTATION, SLATEC
+  !***
+  ! **Author:**  Boland, W. Robert, C-8, Los Alamos National Laboratory
   !           Bacon, Barbara A., C-10, Los Alamos National Laboratory
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   This program retrieves SLATEC type documentation by routine name.
   !   The search for name can be narrowed by using keyword(s) or
@@ -76,9 +82,12 @@ PROGRAM SLADOC
   !   incorporated into the code for those few systems which interpret a
   !   null line as an end-of-file signal.
   !
-  !***REFERENCES  Guide to the SLATEC Common Mathematical Library.
-  !***ROUTINES CALLED  I1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  Guide to the SLATEC Common Mathematical Library.
+  !***
+  ! **Routines called:**  I1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   870819  DATE WRITTEN
   !   880325  REVISION DATE from Version 3.2
   !   891215  Prologue converted to Version 4.0 format.  (BAB)
@@ -87,7 +96,7 @@ PROGRAM SLADOC
   !           A format.  (WRB)
   !   920825  Added view option.  (BKS, WRB)
   !   920911  Declarations section restructured.  (WRB)
-  !***END PROLOGUE  SLADOC
+  
   !
   !     System dependent parameter definitions.
   !
@@ -201,7 +210,7 @@ PROGRAM SLADOC
   DATA llu18, llu19, llu14/.FALSE., .FALSE., .FALSE./
   !
   DATA forma(1:60) /'(/,1X,A,''category does not exist in this library.'',/)'/
-  !***FIRST EXECUTABLE STATEMENT  SLADOC
+  !* FIRST EXECUTABLE STATEMENT  SLADOC
   WRITE (UNIT=msg,FMT=99039) LCAT, MLCAT
   fmt1 = '(1X, A'//msg(1:2)//', '//msg(3:4)//'X, A, 3I8)'
   fname = FLIS
@@ -1606,26 +1615,32 @@ PROGRAM SLADOC
   99046 FORMAT (1X,A,1X,A)
   99047 FORMAT ('(1X, ',I2,'X, A)')
 END PROGRAM SLADOC
-!DECK CHARIN
+!** CHARIN
 SUBROUTINE CHARIN(Cardin,Lcard,Iopt,Lb,Lt)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHARIN
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SLADOC
-  !***LIBRARY   (NONE)
-  !***AUTHOR  Chow, Jeff, C-10, Los Alamos National Laboratory
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SLADOC
+  !***
+  ! **Library:**   (NONE)
+  !***
+  ! **Author:**  Chow, Jeff, C-10, Los Alamos National Laboratory
+  !***
+  ! **Description:**
   !
   !   Locate a phrase terminated by a comma or a blank.
   !
-  !***SEE ALSO  SLADOC
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SLADOC
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   870827  DATE WRITTEN
   !   891208  Changed to check only for a blank or comma.
   !   891208  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  !***END PROLOGUE  CHARIN
+  
   !     .. Parameters ..
   INTEGER LAST
   PARAMETER (LAST=2)
@@ -1637,7 +1652,7 @@ SUBROUTINE CHARIN(Cardin,Lcard,Iopt,Lb,Lt)
   CHARACTER(2) :: specia
   !     .. Data statements ..
   DATA specia/' ,'/
-  !***FIRST EXECUTABLE STATEMENT  CHARIN
+  !* FIRST EXECUTABLE STATEMENT  CHARIN
   IF ( Iopt/=2 ) THEN
     l1 = Lcard
     l2 = 1
@@ -1694,26 +1709,32 @@ SUBROUTINE CHARIN(Cardin,Lcard,Iopt,Lb,Lt)
     Lt = le - Lb + 1
   ENDIF
 END SUBROUTINE CHARIN
-!DECK MINOR
+!** MINOR
 INTEGER FUNCTION MINOR(Kat,Kats,Ncc,Tclass,Iptr,Jptr,Kptr,Ntry)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  MINOR
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SLADOC
-  !***LIBRARY   (NONE)
-  !***AUTHOR  Bacon, Barbara A., C-10, Los Alamos National Laboratory
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SLADOC
+  !***
+  ! **Library:**   (NONE)
+  !***
+  ! **Author:**  Bacon, Barbara A., C-10, Los Alamos National Laboratory
+  !***
+  ! **Description:**
   !
   !   Function to locate all the subcategories of a given category in the
   !   SLATEC library.
   !
-  !***SEE ALSO  SLADOC
-  !***ROUTINES CALLED  FIND, UNDOCL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SLADOC
+  !***
+  ! **Routines called:**  FIND, UNDOCL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871201  DATE WRITTEN
   !   891208  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  !***END PROLOGUE  MINOR
+  
   !     .. Parameters ..
   INTEGER IALPHA
   PARAMETER (IALPHA=26)
@@ -1736,7 +1757,7 @@ INTEGER FUNCTION MINOR(Kat,Kats,Ncc,Tclass,Iptr,Jptr,Kptr,Ntry)
   !     .. Common blocks ..
   COMMON /CATGRY/ I1, I2, I3, LMSg
   COMMON /KLASS / CLAss
-  !***FIRST EXECUTABLE STATEMENT  MINOR
+  !* FIRST EXECUTABLE STATEMENT  MINOR
   MINOR = 0
   ifind = FIND(Tclass,Ncc,Kat)
   IF ( ifind<=0 ) THEN
@@ -1762,25 +1783,31 @@ INTEGER FUNCTION MINOR(Kat,Kats,Ncc,Tclass,Iptr,Jptr,Kptr,Ntry)
   ENDDO
   RETURN
 END FUNCTION MINOR
-!DECK RBLNKS
+!** RBLNKS
 SUBROUTINE RBLNKS(L1,L2)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RBLNKS
-  !***SUBSIDIARY
-  !***PURPOSE  Remove leading blanks from a character string.
-  !***LIBRARY   (NONE)
-  !***AUTHOR  Bacon, Barbara A., C-10, Los Alamos National Laboratory
-  !***DESCRIPTION
+  !>
+  !***
+  !  Remove leading blanks from a character string.
+  !***
+  ! **Library:**   (NONE)
+  !***
+  ! **Author:**  Bacon, Barbara A., C-10, Los Alamos National Laboratory
+  !***
+  ! **Description:**
   !
   !   Subroutine to remove leading blanks from a character string
   !
-  !***SEE ALSO  SLADOC
-  !***ROUTINES CALLED  LENSTR
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SLADOC
+  !***
+  ! **Routines called:**  LENSTR
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871201  DATE WRITTEN
   !   891208  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  !***END PROLOGUE  RBLNKS
+  
   !     .. Scalar Arguments ..
   CHARACTER(72) :: L1, L2
   !     .. Local Scalars ..
@@ -1788,7 +1815,7 @@ SUBROUTINE RBLNKS(L1,L2)
   !     .. External Functions ..
   INTEGER LENSTR
   EXTERNAL LENSTR
-  !***FIRST EXECUTABLE STATEMENT  RBLNKS
+  !* FIRST EXECUTABLE STATEMENT  RBLNKS
   leng = LENSTR(L1)
   DO i = 1, leng
     IF ( L1(i:i)/=' ' ) GOTO 100
@@ -1808,27 +1835,33 @@ SUBROUTINE RBLNKS(L1,L2)
     k = k + 1
   ENDDO
 END SUBROUTINE RBLNKS
-!DECK UNDOCL
+!** UNDOCL
 SUBROUTINE UNDOCL(Kat,Cat)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  UNDOCL
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SLADOC
-  !***LIBRARY   (NONE)
-  !***AUTHOR  Bacon, Barbara A., C-10, Los Alamos National Laboratory
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SLADOC
+  !***
+  ! **Library:**   (NONE)
+  !***
+  ! **Author:**  Bacon, Barbara A., C-10, Los Alamos National Laboratory
+  !***
+  ! **Description:**
   !
   !   Subroutine to collapse a GAMS category name by removing the
   !   zero before a numerical part.
   !   E.G., D02D01A   becomes   D2D1A
   !
-  !***SEE ALSO  SLADOC
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SLADOC
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871201  DATE WRITTEN
   !   891208  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  !***END PROLOGUE  UNDOCL
+  
   !     .. Scalar Arguments ..
   CHARACTER*(*) Cat, Kat
   !     .. Local Scalars ..
@@ -1836,7 +1869,7 @@ SUBROUTINE UNDOCL(Kat,Cat)
   !     .. External Functions ..
   INTEGER LENSTR
   EXTERNAL LENSTR
-  !***FIRST EXECUTABLE STATEMENT  UNDOCL
+  !* FIRST EXECUTABLE STATEMENT  UNDOCL
   leng = LENSTR(Kat)
   weny = 1
   ik = 1

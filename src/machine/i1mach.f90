@@ -1,17 +1,24 @@
-!DECK I1MACH
+!** I1MACH
 INTEGER FUNCTION I1MACH(I)
   use ISO_FORTRAN_ENV
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  I1MACH
-  !***PURPOSE  Return integer machine dependent constants.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  R1
-  !***TYPE      INTEGER (I1MACH-I)
-  !***KEYWORDS  MACHINE CONSTANTS
-  !***AUTHOR  Fox, P. A., (Bell Labs)
+  !>
+  !***
+  !  Return integer machine dependent constants.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  R1
+  !***
+  ! **Type:**      INTEGER (I1MACH-I)
+  !***
+  ! **Keywords:**  MACHINE CONSTANTS
+  !***
+  ! **Author:**  Fox, P. A., (Bell Labs)
   !           Hall, A. D., (Bell Labs)
   !           Schryer, N. L., (Bell Labs)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   I1MACH can be used to obtain machine-dependent parameters for the
   !   local machine environment.  It is a function subprogram with one
@@ -67,11 +74,14 @@ INTEGER FUNCTION I1MACH(I)
   !   column 1.  Also, the values of I1MACH(1) - I1MACH(4) should be
   !   checked for consistency with the local operating system.
   !
-  !***REFERENCES  P. A. Fox, A. D. Hall and N. L. Schryer, Framework for
+  !***
+  ! **References:**  P. A. Fox, A. D. Hall and N. L. Schryer, Framework for
   !                 a portable library, ACM Transactions on Mathematical
   !                 Software 4, 2 (June 1978), pp. 177-188.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
   !   891012  Added VAX G-floating constants.  (WRB)
   !   891012  REVISION DATE from Version 3.2
@@ -90,7 +100,7 @@ INTEGER FUNCTION I1MACH(I)
   !   930201  Added DEC Alpha and SGI constants.  (RWC and WRB)
   !   930618  Corrected I1MACH(5) for Convex -p8 and -pd8 compiler
   !           options.  (DWL, RWC and WRB).
-  !***END PROLOGUE  I1MACH
+  
   INTEGER I
   INTEGER, PARAMETER :: imach(16) = (/ INPUT_UNIT, OUTPUT_UNIT, OUTPUT_UNIT, &
     ERROR_UNIT, NUMERIC_STORAGE_SIZE, CHARACTER_STORAGE_SIZE, &
@@ -98,7 +108,7 @@ INTEGER FUNCTION I1MACH(I)
     DIGITS(1.), MINEXPONENT(1.), MAXEXPONENT(1.), &
     DIGITS(1.D0), MINEXPONENT(1.D0), MAXEXPONENT(1.D0) /)
 
-  !***FIRST EXECUTABLE STATEMENT  I1MACH
+  !* FIRST EXECUTABLE STATEMENT  I1MACH
   !IF ( I<1 .OR. I>16 ) CALL XERMSG('SLATEC','I1MACH','I OUT OF BOUNDS',1,2)
 
   I1MACH = imach(I)

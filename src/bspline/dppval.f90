@@ -1,15 +1,22 @@
-!DECK DPPVAL
+!** DPPVAL
 REAL(8) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPPVAL
-  !***PURPOSE  Calculate the value of the IDERIV-th derivative of the
+  !>
+  !***
+  !  Calculate the value of the IDERIV-th derivative of the
   !            B-spline from the PP-representation.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E3, K6
-  !***TYPE      DOUBLE PRECISION (PPVAL-S, DPPVAL-D)
-  !***KEYWORDS  B-SPLINE, DATA FITTING, INTERPOLATION, SPLINES
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E3, K6
+  !***
+  ! **Type:**      DOUBLE PRECISION (PPVAL-S, DPPVAL-D)
+  !***
+  ! **Keywords:**  B-SPLINE, DATA FITTING, INTERPOLATION, SPLINES
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Written by Carl de Boor and modified by D. E. Amos
   !
@@ -51,23 +58,26 @@ REAL(8) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !     Error Conditions
   !         Improper input is a fatal error
   !
-  !***REFERENCES  Carl de Boor, Package for calculating with B-splines,
+  !***
+  ! **References:**  Carl de Boor, Package for calculating with B-splines,
   !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
   !                 pp. 441-472.
-  !***ROUTINES CALLED  DINTRV, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DINTRV, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DPPVAL
+  
   !
   INTEGER i, Ideriv, Inppv, j, K, Ldc, Lxi, ndummy, kk
   REAL(8) :: C, dx, X, Xi
   DIMENSION Xi(*), C(Ldc,*)
-  !***FIRST EXECUTABLE STATEMENT  DPPVAL
+  !* FIRST EXECUTABLE STATEMENT  DPPVAL
   DPPVAL = 0.0D0
   IF ( K<1 ) THEN
     CALL XERMSG('SLATEC','DPPVAL','K DOES NOT SATISFY K.GE.1',2,1)

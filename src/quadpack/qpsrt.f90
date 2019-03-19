@@ -1,15 +1,20 @@
-!DECK QPSRT
+!** QPSRT
 SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QPSRT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to QAGE, QAGIE, QAGPE, QAGSE, QAWCE, QAWOE and
+  !>
+  !***
+  !  Subsidiary to QAGE, QAGIE, QAGPE, QAGSE, QAWCE, QAWOE and
   !            QAWSE
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (QPSRT-S, DQPSRT-D)
-  !***KEYWORDS  SEQUENTIAL SORTING
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (QPSRT-S, DQPSRT-D)
+  !***
+  ! **Keywords:**  SEQUENTIAL SORTING
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   ! 1.        QPSRT
   !           Ordering Routine
@@ -60,14 +65,17 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !              NRMAX  - INTEGER
   !                       MAXERR = IORD(NRMAX)
   !
-  !***SEE ALSO  QAGE, QAGIE, QAGPE, QAGSE, QAWCE, QAWOE, QAWSE
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  QAGE, QAGIE, QAGPE, QAGSE, QAWCE, QAWOE, QAWSE
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  QPSRT
+  
   !
   REAL Elist, Ermax, errmax, errmin
   INTEGER i, ibeg, ido, Iord, isucc, j, jbnd, jupbn, k, Last, &
@@ -77,7 +85,7 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   !           CHECK WHETHER THE LIST CONTAINS MORE THAN
   !           TWO ERROR ESTIMATES.
   !
-  !***FIRST EXECUTABLE STATEMENT  QPSRT
+  !* FIRST EXECUTABLE STATEMENT  QPSRT
   IF ( Last>2 ) THEN
     !
     !           THIS PART OF THE ROUTINE IS ONLY EXECUTED
@@ -91,7 +99,7 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
       ido = Nrmax - 1
       DO i = 1, ido
         isucc = Iord(Nrmax-1)
-        ! ***JUMP OUT OF DO-LOOP
+        !- **JUMP OUT OF DO-LOOP
         IF ( errmax<=Elist(isucc) ) EXIT
         Iord(Nrmax) = isucc
         Nrmax = Nrmax - 1
@@ -115,7 +123,7 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
     IF ( ibeg<=jbnd ) THEN
       DO i = ibeg, jbnd
         isucc = Iord(i)
-        ! ***JUMP OUT OF DO-LOOP
+        !- **JUMP OUT OF DO-LOOP
         IF ( errmax>=Elist(isucc) ) GOTO 100
         Iord(i-1) = isucc
       ENDDO
@@ -134,7 +142,7 @@ SUBROUTINE QPSRT(Limit,Last,Maxerr,Ermax,Elist,Iord,Nrmax)
   k = jbnd
   DO j = i, jbnd
     isucc = Iord(k)
-    ! ***JUMP OUT OF DO-LOOP
+    !- **JUMP OUT OF DO-LOOP
     IF ( errmin<Elist(isucc) ) GOTO 200
     Iord(k+1) = isucc
     k = k - 1

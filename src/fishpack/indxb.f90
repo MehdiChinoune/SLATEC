@@ -1,25 +1,32 @@
-!DECK INDXB
+!** INDXB
 SUBROUTINE INDXB(I,Ir,Idx,Idp)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  INDXB
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BLKTRI
-  !***LIBRARY   SLATEC
-  !***TYPE      INTEGER (INDXB-I)
-  !***AUTHOR  (UNKNOWN)
-  !***SEE ALSO  BLKTRI
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    CBLKT
-  !***REVISION HISTORY  (YYMMDD)
+  !>
+  !***
+  !  Subsidiary to BLKTRI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      INTEGER (INDXB-I)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **See also:**  BLKTRI
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    CBLKT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   920422  Added statement so IDX would always be defined.  (WRB)
-  !***END PROLOGUE  INDXB
+  
   REAL CNV, EPS
   INTEGER I, id, Idp, Idx, IK, ipl, Ir, izh, K, NCMplx, NM, NPP
   COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
-  !***FIRST EXECUTABLE STATEMENT  INDXB
+  !* FIRST EXECUTABLE STATEMENT  INDXB
   Idx = max(I,1)
   Idp = 0
   IF ( Ir<0 ) RETURN

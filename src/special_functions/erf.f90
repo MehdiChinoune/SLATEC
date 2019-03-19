@@ -1,14 +1,21 @@
-!DECK ERF
+!** ERF
 REAL FUNCTION ERF(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ERF
-  !***PURPOSE  Compute the error function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C8A, L5A1E
-  !***TYPE      SINGLE PRECISION (ERF-S, DERF-D)
-  !***KEYWORDS  ERF, ERROR FUNCTION, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the error function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C8A, L5A1E
+  !***
+  ! **Type:**      SINGLE PRECISION (ERF-S, DERF-D)
+  !***
+  ! **Keywords:**  ERF, ERROR FUNCTION, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! ERF(X) calculates the single precision error function for
   ! single precision argument X.
@@ -19,16 +26,19 @@ REAL FUNCTION ERF(X)
   !                               significant figures required  16.31
   !                                    decimal places required  17.71
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, ERFC, INITS, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, ERFC, INITS, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable name.  (RWC, WRB)
-  !***END PROLOGUE  ERF
+  
   REAL CSEVL, ERFC, erfcs, R1MACH, sqeps, sqrtpi, X, xbig, y
   INTEGER INITS, nterf
   DIMENSION erfcs(13)
@@ -50,7 +60,7 @@ REAL FUNCTION ERF(X)
   DATA erfcs(13)/.000000000000000007E0/
   DATA sqrtpi/1.7724538509055160E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  ERF
+  !* FIRST EXECUTABLE STATEMENT  ERF
   IF ( first ) THEN
     nterf = INITS(erfcs,13,0.1*R1MACH(3))
     xbig = SQRT(-LOG(sqrtpi*R1MACH(3)))

@@ -1,14 +1,18 @@
-!DECK SBOLSM
+!** SBOLSM
 SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     Scl,Ibasis,Ibb)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SBOLSM
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SBOCLS and SBOLS
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SBOLSM-S, DBOLSM-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SBOCLS and SBOLS
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SBOLSM-S, DBOLSM-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !          Solve E*X = F (least squares sense) with bounds on
   !            selected X values.
@@ -385,17 +389,20 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !    -38    THE ROW SEPARATOR TO APPLY WEIGHTING (...) MUST LIE BETWEEN
   !           0 AND MINPUT = .... WEIGHT = ... MUST BE POSITIVE.
   !
-  !***SEE ALSO  SBOCLS, SBOLS
-  !***ROUTINES CALLED  IVOUT, R1MACH, SAXPY, SCOPY, SDOT, SMOUT, SNRM2,
+  !***
+  ! **See also:**  SBOCLS, SBOLS
+  !***
+  ! **Routines called:**  IVOUT, R1MACH, SAXPY, SCOPY, SDOT, SMOUT, SNRM2,
   !                    SROT, SROTG, SSWAP, SVOUT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   821220  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920422  Fixed usage of MINPUT.  (WRB)
   !   901009  Editorial changes, code now reads from top to bottom.  (RWC)
-  !***END PROLOGUE  SBOLSM
+  
   !
   !     PURPOSE
   !     -------
@@ -434,7 +441,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   PARAMETER (ZERO=0.0E0,ONE=1.0E0,TWO=2.0E0)
   !
-  !***FIRST EXECUTABLE STATEMENT  SBOLSM
+  !* FIRST EXECUTABLE STATEMENT  SBOLSM
   !
   !     Verify that the problem dimensions are defined properly.
   !

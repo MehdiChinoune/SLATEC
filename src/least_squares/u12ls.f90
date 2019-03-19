@@ -1,13 +1,17 @@
-!DECK U12LS
+!** U12LS
 SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  U12LS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to LLSIA
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (U12LS-S, DU12LS-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to LLSIA
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (U12LS-S, DU12LS-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !        Given the Householder QR factorization of A, this
   !        subroutine solves the system AX=B. If the system
@@ -16,20 +20,23 @@ SUBROUTINE U12LS(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ic,Ir)
   !
   !       Note - If MODE.NE.2, W is never accessed.
   !
-  !***SEE ALSO  LLSIA
-  !***ROUTINES CALLED  SAXPY, SDOT, SNRM2, SSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  LLSIA
+  !***
+  ! **Routines called:**  SAXPY, SDOT, SNRM2, SSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  U12LS
+  
   REAL A, B, bb, H, Rnorm, SDOT, SNRM2, tt, W
   INTEGER i, ij, im1, j, jb, k, kp1, Krank, M, Mda, Mdb, Mode, N, Nb, nmk
   DIMENSION A(Mda,*), B(Mdb,*), Rnorm(*), H(*), W(*)
   INTEGER Ic(*), Ir(*)
-  !***FIRST EXECUTABLE STATEMENT  U12LS
+  !* FIRST EXECUTABLE STATEMENT  U12LS
   k = Krank
   kp1 = k + 1
   !

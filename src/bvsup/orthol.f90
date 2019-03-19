@@ -1,13 +1,17 @@
-!DECK ORTHOL
+!** ORTHOL
 SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ORTHOL
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (ORTHOL-S)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (ORTHOL-S)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   Reduction of the matrix A to upper triangular form by a sequence of
   !   orthogonal HOUSEHOLDER transformations pre-multiplying A
@@ -15,9 +19,9 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   !   Modeled after the ALGOL codes in the articles in the REFERENCES
   !   section.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !   INPUT
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     A -- Contains the matrix to be decomposed, must be dimensioned
   !           NRDA by N
@@ -35,9 +39,9 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   !     DIAG,KPIVOT,COLS -- Arrays of length at least n used internally
   !         ,CS,SCALES
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !   OUTPUT
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     IFLAG - Status indicator
   !            =1 for successful decomposition
@@ -53,17 +57,21 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   !               recorded here.
   !     SCALES -- Contains the column scaling parameters
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  BVSUP
-  !***REFERENCES  G. Golub, Numerical methods for solving linear least
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **References:**  G. Golub, Numerical methods for solving linear least
   !                 squares problems, Numerische Mathematik 7, (1965),
   !                 pp. 206-216.
   !               P. Businger and G. Golub, Linear least squares
   !                 solutions by Householder transformations, Numerische
   !                 Mathematik  7, (1965), pp. 269-276.
-  !***ROUTINES CALLED  CSCALE, R1MACH, SDOT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CSCALE, R1MACH, SDOT, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -72,22 +80,22 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   !   900402  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  ORTHOL
+  
   REAL A, acc, akk, anorm, as, asave, Cols, Cs, css, Diag, diagk, &
     dum, R1MACH, sad, sc, Scales, SDOT, sig, sigma, sruro
   REAL uro
   INTEGER Iflag, Irank, Iscale, j, jcol, k, kp, Kpivot, l, M, mk, N, Nrda
   DIMENSION A(Nrda,*), Diag(*), Kpivot(*), Cols(*), Cs(*), Scales(*)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     MACHINE PRECISION (COMPUTER UNIT ROUNDOFF VALUE) IS DEFINED
   !     BY THE FUNCTION R1MACH.
   !
-  !***FIRST EXECUTABLE STATEMENT  ORTHOL
+  !* FIRST EXECUTABLE STATEMENT  ORTHOL
   uro = R1MACH(3)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   IF ( M>=N.AND.N>=1.AND.Nrda>=M ) THEN
     !

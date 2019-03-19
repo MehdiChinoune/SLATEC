@@ -1,28 +1,35 @@
-!DECK DDRIV3
+!** DDRIV3
 SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Miter,Impl,Ml,Mu,Mxord,Hmax,Work,Lenw,Iwork,Leniw,&
     JACOBN,FA,Nde,Mxstep,G,USERS,Ierflg)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DDRIV3
-  !***PURPOSE  The function of DDRIV3 is to solve N ordinary differential
+  !>
+  !***
+  !  The function of DDRIV3 is to solve N ordinary differential
   !            equations of the form dY(I)/dT = F(Y(I),T), given the
   !            initial conditions Y(I) = YI.  The program has options to
   !            allow the solution of both stiff and non-stiff differential
   !            equations.  Other important options are available.  DDRIV3
   !            uses double precision arithmetic.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***CATEGORY  I1A2, I1A1B
-  !***TYPE      DOUBLE PRECISION (SDRIV3-S, DDRIV3-D, CDRIV3-C)
-  !***KEYWORDS  DOUBLE PRECISION, GEAR'S METHOD, INITIAL VALUE PROBLEMS,
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Category:**  I1A2, I1A1B
+  !***
+  ! **Type:**      DOUBLE PRECISION (SDRIV3-S, DDRIV3-D, CDRIV3-C)
+  !***
+  ! **Keywords:**  DOUBLE PRECISION, GEAR'S METHOD, INITIAL VALUE PROBLEMS,
   !             ODE, ORDINARY DIFFERENTIAL EQUATIONS, SDRIVE, STIFF
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  I.  ABSTRACT  .......................................................
   !
@@ -714,14 +721,17 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !       right hand side of the differential equations in place of the
   !       corresponding name in the call sequence of DDRIV3.
   !
-  !***REFERENCES  C. W. Gear, Numerical Initial Value Problems in
+  !***
+  ! **References:**  C. W. Gear, Numerical Initial Value Problems in
   !                 Ordinary Differential Equations, Prentice-Hall, 1971.
-  !***ROUTINES CALLED  D1MACH, DDNTP, DDSTP, DDZRO, DGBFA, DGBSL, DGEFA,
+  !***
+  ! **Routines called:**  D1MACH, DDNTP, DDSTP, DDZRO, DGBFA, DGBSL, DGEFA,
   !                    DGESL, DNRM2, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  DDRIV3
+  
   EXTERNAL F, JACOBN, FA, G, USERS
   REAL(8) :: ae, big, Eps, Ewt(*), G, glast, gnow, h, Hmax, &
     hsign, hused, NROUND, re, D1MACH, size, DNRM2, &
@@ -746,7 +756,7 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     IMNTLD=10,IMTRLD=11,INQ=12,INRTLD=13,INDTRT=14,INWAIT=15,&
     IMNT=16,IMTRSV=17,IMTR=18,IMXRDS=19,IMXORD=20,INDPRT=21,&
     IJSTPL=22,INDPVT=51)
-  !***FIRST EXECUTABLE STATEMENT  DDRIV3
+  !* FIRST EXECUTABLE STATEMENT  DDRIV3
   IF ( Nstate==12 ) THEN
     Ierflg = 999
     CALL XERMSG('SLATEC','DDRIV3',&

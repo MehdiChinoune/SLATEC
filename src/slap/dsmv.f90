@@ -1,29 +1,36 @@
-!DECK DSMV
+!** DSMV
 SUBROUTINE DSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSMV
-  !***PURPOSE  SLAP Column Format Sparse Matrix Vector Product.
+  !>
+  !***
+  !  SLAP Column Format Sparse Matrix Vector Product.
   !            Routine to calculate the sparse matrix vector product:
   !            Y = A*X.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D1B4
-  !***TYPE      DOUBLE PRECISION (SSMV-S, DSMV-D)
-  !***KEYWORDS  MATRIX VECTOR MULTIPLY, SLAP, SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSMV-S, DSMV-D)
+  !***
+  ! **Keywords:**  MATRIX VECTOR MULTIPLY, SLAP, SPARSE
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER  N, NELT, IA(NELT), JA(NELT), ISYM
   !     DOUBLE PRECISION X(N), Y(N), A(NELT)
   !
   !     CALL DSMV(N, X, Y, NELT, IA, JA, A, ISYM )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the Matrix.
   ! X      :IN       Double Precision X(N).
@@ -43,7 +50,7 @@ SUBROUTINE DSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !         If ISYM=1, the matrix is symmetric, and only the upper
   !         or lower triangle of the matrix is stored.
   !
-  ! *Description
+  !- Description
   !       =================== S L A P Column format ==================
   !       This routine  requires that  the matrix A  be stored in  the
   !       SLAP Column format.  In this format the non-zeros are stored
@@ -82,17 +89,21 @@ SUBROUTINE DSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !       Alliant FX/Fortran and CRI CFT/CFT77 compilers  are supplied
   !       with the standard SLAP distribution.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This   routine   assumes  that  the matrix A is stored in SLAP
   !     Column format.  It does not check  for  this (for  speed)  and
   !     evil, ugly, ornery and nasty things  will happen if the matrix
   !     data  structure  is,  in fact, not SLAP Column.  Beware of the
   !     wrong data structure!!!
   !
-  !***SEE ALSO  DSMTV
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSMTV
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -102,7 +113,7 @@ SUBROUTINE DSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  !***END PROLOGUE  DSMV
+  
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
@@ -110,7 +121,7 @@ SUBROUTINE DSMV(N,X,Y,Nelt,Ia,Ja,A,Isym)
   INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER i, ibgn, icol, iend, irow, j, jbgn, jend
-  !***FIRST EXECUTABLE STATEMENT  DSMV
+  !* FIRST EXECUTABLE STATEMENT  DSMV
   !
   !         Zero out the result vector.
   !

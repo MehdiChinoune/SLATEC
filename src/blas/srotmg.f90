@@ -1,17 +1,24 @@
-!DECK SROTMG
+!** SROTMG
 SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SROTMG
-  !***PURPOSE  Construct a modified Givens transformation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B10
-  !***TYPE      SINGLE PRECISION (SROTMG-S, DROTMG-D)
-  !***KEYWORDS  BLAS, LINEAR ALGEBRA, MODIFIED GIVENS ROTATION, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !>
+  !***
+  !  Construct a modified Givens transformation.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B10
+  !***
+  ! **Type:**      SINGLE PRECISION (SROTMG-S, DROTMG-D)
+  !***
+  ! **Keywords:**  BLAS, LINEAR ALGEBRA, MODIFIED GIVENS ROTATION, VECTOR
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -45,18 +52,21 @@ SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
   !     respectively.  (Values of 1.E0, -1.E0, or 0.E0 implied by the
   !     value of SPARAM(1) are not stored in SPARAM.)
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780301  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920316  Prologue corrected.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SROTMG
+  
   REAL gam, gamsq, one, rgamsq, Sd1, Sd2, sflag, sh11, sh12, sh21, &
     sh22, sp1, sp2, Sparam, sq1, sq2, stemp, su, Sx1, Sy1
   REAL two, zero
@@ -65,7 +75,7 @@ SUBROUTINE SROTMG(Sd1,Sd2,Sx1,Sy1,Sparam)
   SAVE zero, one, two, gam, gamsq, rgamsq
   DATA zero, one, two/0.0E0, 1.0E0, 2.0E0/
   DATA gam, gamsq, rgamsq/4096.0E0, 1.67772E7, 5.96046E-8/
-  !***FIRST EXECUTABLE STATEMENT  SROTMG
+  !* FIRST EXECUTABLE STATEMENT  SROTMG
   IF ( .NOT.Sd1<zero ) THEN
     !     CASE-SD1-NONNEGATIVE
     sp2 = Sd2*Sy1

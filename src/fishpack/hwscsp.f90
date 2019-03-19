@@ -1,19 +1,26 @@
-!DECK HWSCSP
+!** HWSCSP
 SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
     Elmbda,F,Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HWSCSP
-  !***PURPOSE  Solve a finite difference approximation to the modified
+  !>
+  !***
+  !  Solve a finite difference approximation to the modified
   !            Helmholtz equation in spherical coordinates assuming
   !            axisymmetry  (no dependence on longitude).
-  !***LIBRARY   SLATEC (FISHPACK)
-  !***CATEGORY  I2B1A1A
-  !***TYPE      SINGLE PRECISION (HWSCSP-S)
-  !***KEYWORDS  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE, SPHERICAL
-  !***AUTHOR  Adams, J., (NCAR)
+  !***
+  ! **Library:**   SLATEC (FISHPACK)
+  !***
+  ! **Category:**  I2B1A1A
+  !***
+  ! **Type:**      SINGLE PRECISION (HWSCSP-S)
+  !***
+  ! **Keywords:**  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE, SPHERICAL
+  !***
+  ! **Author:**  Adams, J., (NCAR)
   !           Swarztrauber, P. N., (NCAR)
   !           Sweet, R., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Subroutine HWSCSP solves a finite difference approximation to the
   !       modified Helmholtz equation in spherical coordinates assuming
@@ -281,7 +288,7 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   !       HWSCSP will be called again with INTL = 1.  W(1) contains the
   !       number of locations which W must have.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !     * * * * * * *   Program Specifications    * * * * * * * * * * * *
   !
@@ -334,24 +341,27 @@ SUBROUTINE HWSCSP(Intl,Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Rs,Rf,N,Nbdcnd,Bdrs,Bdrf,&
   !
   !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   !
-  !***REFERENCES  P. N. Swarztrauber and R. Sweet, Efficient Fortran
+  !***
+  ! **References:**  P. N. Swarztrauber and R. Sweet, Efficient Fortran
   !                 subprograms for the solution of elliptic equations,
   !                 NCAR TN/IA-109, July 1975, 138 pp.
-  !***ROUTINES CALLED  HWSCS1, PIMACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  HWSCS1, PIMACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  HWSCSP
+  
   REAL Bdrf, Bdrs, Bdtf, Bdts, dum, Elmbda, F, Pertrb, pi, PIMACH, &
     Rf, Rs, Tf, Ts, W
   INTEGER i1, i10, i2, i3, i4, i5, i6, i7, i8, i9, Idimf, &
     Ierror, Intl, k, l, M, Mbdcnd, mp1, N, Nbdcnd
   INTEGER nck, np1
   DIMENSION F(Idimf,*), Bdts(*), Bdtf(*), Bdrs(*), Bdrf(*), W(*)
-  !***FIRST EXECUTABLE STATEMENT  HWSCSP
+  !* FIRST EXECUTABLE STATEMENT  HWSCSP
   pi = PIMACH(dum)
   Ierror = 0
   IF ( Ts<0..OR.Tf>pi ) Ierror = 1

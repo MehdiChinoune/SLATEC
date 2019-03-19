@@ -1,13 +1,17 @@
-!DECK DFDJC3
+!** DFDJC3
 SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DFDJC3
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DNLS1 and DNLS1E
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (FDJAC3-S, DFDJC3-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DNLS1 and DNLS1E
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (FDJAC3-S, DFDJC3-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !  **** Double Precision version of FDJAC3 ****
   !
@@ -70,9 +74,12 @@ SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   !
   !       WA is a work array of length M.
   !
-  !***SEE ALSO  DNLS1, DNLS1E
-  !***ROUTINES CALLED  D1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DNLS1, DNLS1E
+  !***
+  ! **Routines called:**  D1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -80,7 +87,7 @@ SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DFDJC3
+  
   EXTERNAL :: FCN
   INTEGER M, N, Ldfjac, Iflag
   REAL(8) :: Epsfcn
@@ -90,7 +97,7 @@ SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   REAL(8) :: D1MACH
   SAVE zero
   DATA zero/0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  DFDJC3
+  !* FIRST EXECUTABLE STATEMENT  DFDJC3
   epsmch = D1MACH(4)
   !
   eps = SQRT(MAX(Epsfcn,epsmch))

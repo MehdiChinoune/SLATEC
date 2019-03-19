@@ -1,20 +1,26 @@
-!DECK DRJ
+!** DRJ
 REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DRJ
-  !***PURPOSE  Compute the incomplete or complete (X or Y or Z is zero)
+  !>
+  !***
+  !  Compute the incomplete or complete (X or Y or Z is zero)
   !            elliptic integral of the 3rd kind.  For X, Y, and Z non-
   !            negative, at most one of them zero, and P positive,
   !             RJ(X,Y,Z,P) = Integral from zero to infinity of
   !                              -1/2     -1/2     -1/2     -1
   !                    (3/2)(t+X)    (t+Y)    (t+Z)    (t+P)  dt.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C14
-  !***TYPE      DOUBLE PRECISION (RJ-S, DRJ-D)
-  !***KEYWORDS  COMPLETE ELLIPTIC INTEGRAL, DUPLICATION THEOREM,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C14
+  !***
+  ! **Type:**      DOUBLE PRECISION (RJ-S, DRJ-D)
+  !***
+  ! **Keywords:**  COMPLETE ELLIPTIC INTEGRAL, DUPLICATION THEOREM,
   !             INCOMPLETE ELLIPTIC INTEGRAL, INTEGRAL OF THE THIRD KIND,
   !             TAYLOR SERIES
-  !***AUTHOR  Carlson, B. C.
+  !***
+  ! **Author:**  Carlson, B. C.
   !             Ames Laboratory-DOE
   !             Iowa State University
   !             Ames, IA  50011
@@ -25,7 +31,8 @@ REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
   !           Pexton, R. L.
   !             Lawrence Livermore National Laboratory
   !             Livermore, CA  94550
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   1.     DRJ
   !          Standard FORTRAN function routine
@@ -147,7 +154,7 @@ REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
   !                    decimal digits of accuracy at the expense of one or
   !                    two more iterations of the duplication theorem.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !   DRJ Special Comments
   !
@@ -273,7 +280,8 @@ REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
   !
   !  ---------------------------------------------------------------------
   !
-  !***REFERENCES  B. C. Carlson and E. M. Notis, Algorithms for incomplete
+  !***
+  ! **References:**  B. C. Carlson and E. M. Notis, Algorithms for incomplete
   !                 elliptic integrals, ACM Transactions on Mathematical
   !                 Software 7, 3 (September 1981), pp. 398-403.
   !               B. C. Carlson, Computing elliptic integrals by
@@ -282,8 +290,10 @@ REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
   !               B. C. Carlson, Elliptic integrals of the first kind,
   !                 SIAM Journal of Mathematical Analysis 8, (1977),
   !                 pp. 231-242.
-  !***ROUTINES CALLED  D1MACH, DRC, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, DRC, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891009  Removed unreferenced statement labels.  (WRB)
@@ -295,7 +305,7 @@ REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC)).
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DRJ
+  
   INTEGER Ier
   CHARACTER(16) :: xern3, xern4, xern5, xern6, xern7
   REAL(8) :: alfa, beta, c1, c2, c3, c4, ea, eb, ec, e2, e3
@@ -308,7 +318,7 @@ REAL(8) FUNCTION DRJ(X,Y,Z,P,Ier)
   SAVE errtol, lolim, uplim, c1, c2, c3, c4, first
   DATA first/.TRUE./
   !
-  !***FIRST EXECUTABLE STATEMENT  DRJ
+  !* FIRST EXECUTABLE STATEMENT  DRJ
   IF ( first ) THEN
     errtol = (D1MACH(3)/3.0D0)**(1.0D0/6.0D0)
     lolim = (5.0D0*D1MACH(1))**(1.0D0/3.0D0)

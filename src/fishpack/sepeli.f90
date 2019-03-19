@@ -1,21 +1,28 @@
-!DECK SEPELI
+!** SEPELI
 SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     Nbdcnd,Bdc,Gama,Bdd,Xnu,COFX,COFY,Grhs,Usol,Idmn,W,Pertrb,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SEPELI
-  !***PURPOSE  Discretize and solve a second and, optionally, a fourth
+  !>
+  !***
+  !  Discretize and solve a second and, optionally, a fourth
   !            order finite difference approximation on a uniform grid to
   !            the general separable elliptic partial differential
   !            equation on a rectangle with any combination of periodic or
   !            mixed boundary conditions.
-  !***LIBRARY   SLATEC (FISHPACK)
-  !***CATEGORY  I2B1A2
-  !***TYPE      SINGLE PRECISION (SEPELI-S)
-  !***KEYWORDS  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE, SEPARABLE
-  !***AUTHOR  Adams, J., (NCAR)
+  !***
+  ! **Library:**   SLATEC (FISHPACK)
+  !***
+  ! **Category:**  I2B1A2
+  !***
+  ! **Type:**      SINGLE PRECISION (SEPELI-S)
+  !***
+  ! **Keywords:**  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE, SEPARABLE
+  !***
+  ! **Author:**  Adams, J., (NCAR)
   !           Swarztrauber, P. N., (NCAR)
   !           Sweet, R., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   ! Dimension of           BDA(N+1), BDB(N+1), BDC(M+1), BDD(M+1),
   ! Arguments              USOL(IDMN,N+1), GRHS(IDMN,N+1),
@@ -452,20 +459,23 @@ SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !                          Equations'.  NCAR Technical Note
   !                          NCAR-TN/IA-109, pp. 135-137.
   !
-  !***REFERENCES  H. B. Keller, Numerical Methods for Two-point
+  !***
+  ! **References:**  H. B. Keller, Numerical Methods for Two-point
   !                 Boundary-value Problems, Blaisdel, Waltham, Mass.,
   !                 1968.
   !               P. N. Swarztrauber and R. Sweet, Efficient Fortran
   !                 subprograms for the solution of elliptic equations,
   !                 NCAR TN/IA-109, July 1975, 138 pp.
-  !***ROUTINES CALLED  CHKPRM, SPELIP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CHKPRM, SPELIP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SEPELI
+  
   REAL A, Alpha, B, Bda, Bdb, Bdc, Bdd, Beta, C, D, &
     Gama, Grhs, Pertrb, Usol, W, Xnu
   INTEGER i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
@@ -474,7 +484,7 @@ SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
   DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   EXTERNAL COFX, COFY
-  !***FIRST EXECUTABLE STATEMENT  SEPELI
+  !* FIRST EXECUTABLE STATEMENT  SEPELI
   CALL CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
   IF ( Ierror/=0 ) RETURN
   !

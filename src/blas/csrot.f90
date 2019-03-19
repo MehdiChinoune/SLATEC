@@ -1,15 +1,22 @@
-!DECK CSROT
+!** CSROT
 SUBROUTINE CSROT(N,Cx,Incx,Cy,Incy,C,S)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CSROT
-  !***PURPOSE  Apply a plane Givens rotation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B10
-  !***TYPE      COMPLEX (SROT-S, DROT-D, CSROT-C)
-  !***KEYWORDS  BLAS, GIVENS ROTATION, GIVENS TRANSFORMATION,
+  !>
+  !***
+  !  Apply a plane Givens rotation.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B10
+  !***
+  ! **Type:**      COMPLEX (SROT-S, DROT-D, CSROT-C)
+  !***
+  ! **Keywords:**  BLAS, GIVENS ROTATION, GIVENS TRANSFORMATION,
   !             LINEAR ALGEBRA, PLANE ROTATION, VECTOR
-  !***AUTHOR  Dongarra, J., (ANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Dongarra, J., (ANL)
+  !***
+  ! **Description:**
   !
   !     CSROT applies the complex Givens rotation
   !
@@ -42,21 +49,24 @@ SUBROUTINE CSROT(N,Cx,Incx,Cy,Incy,C,S)
   !
   !        S      (real)  sine term of the rotation.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810223  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CSROT
+  
   COMPLEX Cx(*), Cy(*), ctemp
   REAL C, S
   INTEGER i, Incx, Incy, ix, iy, N
-  !***FIRST EXECUTABLE STATEMENT  CSROT
+  !* FIRST EXECUTABLE STATEMENT  CSROT
   IF ( N<=0 ) RETURN
   IF ( Incx==1.AND.Incy==1 ) THEN
     !

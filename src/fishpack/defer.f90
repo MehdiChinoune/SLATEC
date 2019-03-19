@@ -1,13 +1,17 @@
-!DECK DEFER
+!** DEFER
 SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DEFER
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SEPELI
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (DEFER-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SEPELI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (DEFER-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This subroutine first approximates the truncation error given by
   !     TRUN1(X,Y)=DLX**2*TX+DLY**2*TY where
@@ -24,15 +28,19 @@ SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
   !     and then transferred to USOL to be used as a new right
   !     hand side when calling BLKTRI for a fourth order solution.
   !
-  !***SEE ALSO  SEPELI
-  !***ROUTINES CALLED  DX, DY
-  !***COMMON BLOCKS    SPLPCM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SEPELI
+  !***
+  ! **Routines called:**  DX, DY
+  !***
+  ! COMMON BLOCKS    SPLPCM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DEFER
+  
   REAL ai, AIT, bi, BIT, ci, CIT, DIT, dj, DLX, DLX4, DLY, DLY4, &
     ej, fj, Grhs, TDLx3, TDLy3, tx, ty, Usol
   REAL uxxx, uxxxx, uyyy, uyyyy, xi, yj
@@ -41,7 +49,7 @@ SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
     IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
   EXTERNAL COFX, COFY
-  !***FIRST EXECUTABLE STATEMENT  DEFER
+  !* FIRST EXECUTABLE STATEMENT  DEFER
   DO j = JS, NS
     yj = CIT + (j-1)*DLY
     CALL COFY(yj,dj,ej,fj)

@@ -1,13 +1,17 @@
-!DECK DQRSLV
+!** DQRSLV
 SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQRSLV
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DNLS1 and DNLS1E
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (QRSOLV-S, DQRSLV-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DNLS1 and DNLS1E
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (QRSOLV-S, DQRSLV-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !  **** Double Precision version of QRSOLV ****
   !
@@ -76,9 +80,12 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !
   !       WA is a work array of length N.
   !
-  !***SEE ALSO  DNLS1, DNLS1E
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DNLS1, DNLS1E
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -86,7 +93,7 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DQRSLV
+  
   INTEGER N, Ldr
   INTEGER Ipvt(*)
   REAL(8) :: R(Ldr,*), Diag(*), Qtb(*), X(*), Sigma(*), Wa(*)
@@ -95,7 +102,7 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
     zero
   SAVE p5, p25, zero
   DATA p5, p25, zero/5.0D-1, 2.5D-1, 0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  DQRSLV
+  !* FIRST EXECUTABLE STATEMENT  DQRSLV
   DO j = 1, N
     DO i = j, N
       R(i,j) = R(j,i)

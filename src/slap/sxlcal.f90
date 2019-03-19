@@ -1,28 +1,34 @@
-!DECK SXLCAL
+!** SXLCAL
 SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
     MSOLVE,Nmsl,Rpar,Ipar,Nelt,Ia,Ja,A,Isym)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SXLCAL
-  !***SUBSIDIARY
-  !***PURPOSE  Internal routine for SGMRES.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (SXLCAL-S, DXLCAL-D)
-  !***KEYWORDS  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
+  !>
+  !***
+  !  Internal routine for SGMRES.
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SXLCAL-S, DXLCAL-D)
+  !***
+  ! **Keywords:**  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
   !             NON-SYMMETRIC LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Brown, Peter, (LLNL), pnbrown@llnl.gov
+  !***
+  ! **Author:**  Brown, Peter, (LLNL), pnbrown@llnl.gov
   !           Hindmarsh, Alan, (LLNL), alanh@llnl.gov
   !           Seager, Mark K., (LLNL), seager@llnl.gov
   !             Lawrence Livermore National Laboratory
   !             PO Box 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !        This  routine computes the solution  XL,  the current SGMRES
   !        iterate, given the  V(I)'s and  the  QR factorization of the
   !        Hessenberg  matrix HES.   This routine  is  only called when
   !        ITOL=11.
   !
-  ! *Usage:
+  !- Usage:
   !      INTEGER N, LGMR, MAXLP1, JSCAL, JPRE, NMSL, IPAR(USER DEFINED)
   !      INTEGER NELT, IA(NELT), JA(NELT), ISYM
   !      REAL X(N), XL(N), ZL(N), HES(MAXLP1,MAXL), Q(2*MAXL),
@@ -34,7 +40,7 @@ SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   !     $     WK, SZ, JSCAL, JPRE, MSOLVE, NMSL, RPAR, IPAR,
   !     $     NELT, IA, JA, A, ISYM)
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         The order of the matrix A, and the lengths
   !         of the vectors SR, SZ, R0 and Z.
@@ -121,9 +127,12 @@ SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   !         stored.  If ISYM=1, the matrix is symmetric and
   !         only the upper or lower triangular part is stored.
   !
-  !***SEE ALSO  SGMRES
-  !***ROUTINES CALLED  SAXPY, SCOPY, SHELS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SGMRES
+  !***
+  ! **Routines called:**  SAXPY, SCOPY, SHELS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871001  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -134,7 +143,7 @@ SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   !   910502  Removed MSOLVE from ROUTINES CALLED list.  (FNF)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  !***END PROLOGUE  SXLCAL
+  
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -150,7 +159,7 @@ SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
   INTEGER i, k, ll, llp1
   !     .. External Subroutines ..
   EXTERNAL SAXPY, SCOPY, SHELS
-  !***FIRST EXECUTABLE STATEMENT  SXLCAL
+  !* FIRST EXECUTABLE STATEMENT  SXLCAL
   ll = Lgmr
   llp1 = ll + 1
   DO k = 1, llp1

@@ -1,18 +1,25 @@
-!DECK SDSDOT
+!** SDSDOT
 REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SDSDOT
-  !***PURPOSE  Compute the inner product of two vectors with extended
+  !>
+  !***
+  !  Compute the inner product of two vectors with extended
   !            precision accumulation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1A4
-  !***TYPE      SINGLE PRECISION (SDSDOT-S, CDCDOT-C)
-  !***KEYWORDS  BLAS, DOT PRODUCT, INNER PRODUCT, LINEAR ALGEBRA, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1A4
+  !***
+  ! **Type:**      SINGLE PRECISION (SDSDOT-S, CDCDOT-C)
+  !***
+  ! **Keywords:**  BLAS, DOT PRODUCT, INNER PRODUCT, LINEAR ALGEBRA, VECTOR
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -33,12 +40,15 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
   !     where LX = 1 if INCX .GE. 0, else LX = 1+(1-N)*INCX, and LY is
   !     defined in a similar way using INCY.
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -46,11 +56,11 @@ REAL FUNCTION SDSDOT(N,Sb,Sx,Incx,Sy,Incy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SDSDOT
+  
   INTEGER i, Incx, Incy, kx, ky, N, ns
   REAL Sx(*), Sy(*), Sb
   REAL(8) :: dsdot
-  !***FIRST EXECUTABLE STATEMENT  SDSDOT
+  !* FIRST EXECUTABLE STATEMENT  SDSDOT
   dsdot = Sb
   IF ( N>0 ) THEN
     IF ( Incx==Incy.AND.Incx>0 ) THEN

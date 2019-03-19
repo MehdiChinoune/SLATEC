@@ -1,38 +1,47 @@
-!DECK D9LGIT
+!** D9LGIT
 REAL(8) FUNCTION D9LGIT(A,X,Algap1)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  D9LGIT
-  !***SUBSIDIARY
-  !***PURPOSE  Compute the logarithm of Tricomi's incomplete Gamma
+  !>
+  !***
+  !  Compute the logarithm of Tricomi's incomplete Gamma
   !            function with Perron's continued fraction for large X and
   !            A .GE. X.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7E
-  !***TYPE      DOUBLE PRECISION (R9LGIT-S, D9LGIT-D)
-  !***KEYWORDS  FNLIB, INCOMPLETE GAMMA FUNCTION, LOGARITHM,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7E
+  !***
+  ! **Type:**      DOUBLE PRECISION (R9LGIT-S, D9LGIT-D)
+  !***
+  ! **Keywords:**  FNLIB, INCOMPLETE GAMMA FUNCTION, LOGARITHM,
   !             PERRON'S CONTINUED FRACTION, SPECIAL FUNCTIONS, TRICOMI
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Compute the log of Tricomi's incomplete gamma function with Perron's
   ! continued fraction for large X and for A .GE. X.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  !***END PROLOGUE  D9LGIT
+  
   INTEGER k
   REAL(8) :: A, X, Algap1, ax, a1x, eps, fk, hstar, p, r, s, sqeps, t, D1MACH
   LOGICAL first
   SAVE eps, sqeps, first
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  D9LGIT
+  !* FIRST EXECUTABLE STATEMENT  D9LGIT
   IF ( first ) THEN
     eps = 0.5D0*D1MACH(3)
     sqeps = SQRT(D1MACH(4))

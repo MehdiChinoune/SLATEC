@@ -1,14 +1,21 @@
-!DECK DSPENC
+!** DSPENC
 REAL(8) FUNCTION DSPENC(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSPENC
-  !***PURPOSE  Compute a form of Spence's integral due to K. Mitchell.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C5
-  !***TYPE      DOUBLE PRECISION (SPENC-S, DSPENC-D)
-  !***KEYWORDS  FNLIB, SPECIAL FUNCTIONS, SPENCE'S INTEGRAL
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute a form of Spence's integral due to K. Mitchell.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C5
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPENC-S, DSPENC-D)
+  !***
+  ! **Keywords:**  FNLIB, SPECIAL FUNCTIONS, SPENCE'S INTEGRAL
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DSPENC(X) calculates the double precision Spence's integral
   ! for double precision argument X.  Spence's function defined by
@@ -34,15 +41,18 @@ REAL(8) FUNCTION DSPENC(X)
   !                               significant figures required  30.37
   !                                    decimal places required  32.11
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, INITDS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, INITDS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780201  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891115  Corrected third argument in reference to INITDS.  (WRB)
   !   891115  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DSPENC
+  
   INTEGER INITDS, nspenc
   REAL(8) :: X, spencs(38), aln, pi26, xbig, D1MACH, DCSEVL
   LOGICAL first
@@ -87,7 +97,7 @@ REAL(8) FUNCTION DSPENC(X)
   DATA spencs(38)/ + .4742646808928671061333333333333D-31/
   DATA pi26/ + 1.644934066848226436472415166646025189219D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DSPENC
+  !* FIRST EXECUTABLE STATEMENT  DSPENC
   IF ( first ) THEN
     nspenc = INITDS(spencs,38,0.1*REAL(D1MACH(3)))
     xbig = 1.0D0/D1MACH(3)

@@ -1,16 +1,23 @@
-!DECK DNBCO
+!** DNBCO
 SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DNBCO
-  !***PURPOSE  Factor a band matrix using Gaussian elimination and
+  !>
+  !***
+  !  Factor a band matrix using Gaussian elimination and
   !            estimate the condition number.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2A2
-  !***TYPE      DOUBLE PRECISION (SNBCO-S, DNBCO-D, CNBCO-C)
-  !***KEYWORDS  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2A2
+  !***
+  ! **Type:**      DOUBLE PRECISION (SNBCO-S, DNBCO-D, CNBCO-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION,
   !             NONSYMMETRIC
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !     DNBCO factors a double precision band matrix by Gaussian
   !     elimination and estimates the condition of the matrix.
@@ -115,17 +122,20 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !           54 55 56  *  +
   !           65 66  *  *  +
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DASUM, DAXPY, DDOT, DNBFA, DSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DASUM, DAXPY, DDOT, DNBFA, DSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800728  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DNBCO
+  
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
   REAL(8) :: Abe(Lda,*), Z(*)
   REAL(8) :: Rcond
@@ -134,7 +144,7 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   REAL(8) :: anorm, s, DASUM, sm, ynorm
   INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, &
     mm, nl, nu
-  !***FIRST EXECUTABLE STATEMENT  DNBCO
+  !* FIRST EXECUTABLE STATEMENT  DNBCO
   ml1 = Ml + 1
   ldb = Lda - 1
   anorm = 0.0D0

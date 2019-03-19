@@ -1,17 +1,24 @@
-!DECK CSWAP
+!** CSWAP
 SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CSWAP
-  !***PURPOSE  Interchange two vectors.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1A5
-  !***TYPE      COMPLEX (SSWAP-S, DSWAP-D, CSWAP-C, ISWAP-I)
-  !***KEYWORDS  BLAS, INTERCHANGE, LINEAR ALGEBRA, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !>
+  !***
+  !  Interchange two vectors.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1A5
+  !***
+  ! **Type:**      COMPLEX (SSWAP-S, DSWAP-D, CSWAP-C, ISWAP-I)
+  !***
+  ! **Keywords:**  BLAS, INTERCHANGE, LINEAR ALGEBRA, VECTOR
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -32,22 +39,25 @@ SUBROUTINE CSWAP(N,Cx,Incx,Cy,Incy)
   !     where LX = 1 if INCX .GE. 0, else LX = 1+(1-N)*INCX, and LY is
   !     defined in a similar way using INCY.
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CSWAP
+  
   INTEGER i, Incx, Incy, kx, ky, N, ns
   COMPLEX Cx(*), Cy(*), ctemp
-  !***FIRST EXECUTABLE STATEMENT  CSWAP
+  !* FIRST EXECUTABLE STATEMENT  CSWAP
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy.AND.Incx>0 ) THEN
     !

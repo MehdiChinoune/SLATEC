@@ -1,16 +1,23 @@
-!DECK POLCOF
+!** POLCOF
 SUBROUTINE POLCOF(Xx,N,X,C,D,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  POLCOF
-  !***PURPOSE  Compute the coefficients of the polynomial fit (including
+  !>
+  !***
+  !  Compute the coefficients of the polynomial fit (including
   !            Hermite polynomial fits) produced by a previous call to
   !            POLINT.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E1B
-  !***TYPE      SINGLE PRECISION (POLCOF-S, DPOLCF-D)
-  !***KEYWORDS  COEFFICIENTS, POLYNOMIAL
-  !***AUTHOR  Huddleston, R. E., (SNLL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E1B
+  !***
+  ! **Type:**      SINGLE PRECISION (POLCOF-S, DPOLCF-D)
+  !***
+  ! **Keywords:**  COEFFICIENTS, POLYNOMIAL
+  !***
+  ! **Author:**  Huddleston, R. E., (SNLL)
+  !***
+  ! **Description:**
   !
   !     Written by Robert E. Huddleston, Sandia Laboratories, Livermore
   !
@@ -52,18 +59,21 @@ SUBROUTINE POLCOF(Xx,N,X,C,D,Work)
   !     coefficients produced by POLINT, much more accuracy may be
   !     expected by calling POLYVL as opposed to writing your own scheme.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890213  DATE WRITTEN
   !   891024  Corrected KEYWORD section.  (WRB)
   !   891024  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  POLCOF
+  
   REAL C, D, pone, ptwo, Work, X, Xx
   INTEGER i, im1, k, km1, km1pi, km2n, km2npi, N, nm1, nmkp1, npkm1
   DIMENSION X(*), C(*), D(*), Work(*)
-  !***FIRST EXECUTABLE STATEMENT  POLCOF
+  !* FIRST EXECUTABLE STATEMENT  POLCOF
   DO k = 1, N
     D(k) = C(k)
   ENDDO

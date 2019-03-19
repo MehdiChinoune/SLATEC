@@ -1,13 +1,17 @@
-!DECK ZUOIK
+!** ZUOIK
 SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZUOIK
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESH, ZBESI and ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CUOIK-A, ZUOIK-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZBESH, ZBESI and ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CUOIK-A, ZUOIK-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZUOIK COMPUTES THE LEADING TERMS OF THE UNIFORM ASYMPTOTIC
   !     EXPANSIONS FOR THE I AND K FUNCTIONS AND COMPARES THEM
@@ -29,13 +33,16 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   !     IKFLG=2 AND 0.LT.NUF.LT.N NOT CONSIDERED. Y MUST BE SET BY
   !             ANOTHER ROUTINE
   !
-  !***SEE ALSO  ZBESH, ZBESI, ZBESK
-  !***ROUTINES CALLED  D1MACH, ZABS, ZLOG, ZUCHK, ZUNHJ, ZUNIK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZBESH, ZBESI, ZBESK
+  !***
+  ! **Routines called:**  D1MACH, ZABS, ZLOG, ZUCHK, ZUNHJ, ZUNIK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
-  !***END PROLOGUE  ZUOIK
+  
   !     COMPLEX ARG,ASUM,BSUM,CWRK,CZ,CZERO,PHI,SUM,Y,Z,ZB,ZETA1,ZETA2,ZN,
   !    *ZR
   REAL(8) :: aarg, aic, Alim, aphi, argi, argr, asumi, asumr, &
@@ -49,7 +56,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
   EXTERNAL ZABS, ZLOG
   DATA zeror, zeroi/0.0D0, 0.0D0/
   DATA aic/1.265512123484645396D+00/
-  !***FIRST EXECUTABLE STATEMENT  ZUOIK
+  !* FIRST EXECUTABLE STATEMENT  ZUOIK
   Nuf = 0
   nn = N
   zrr = Zr

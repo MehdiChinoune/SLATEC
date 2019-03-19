@@ -1,30 +1,37 @@
-!DECK POISP2
+!** POISP2
 SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  POISP2
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to GENBUN
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (POISP2-S, CMPOSP-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to GENBUN
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (POISP2-S, CMPOSP-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Subroutine to solve Poisson equation with periodic boundary
   !     conditions.
   !
-  !***SEE ALSO  GENBUN
-  !***ROUTINES CALLED  POISD2, POISN2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  GENBUN
+  !***
+  ! **Routines called:**  POISD2, POISN2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  POISP2
+  
   REAL A, B, B2, B3, Bb, C, D, P, Q, s, t, Tcos, W, W2, W3
   INTEGER i, Idimq, ipstor, j, lh, M, mr, N, nr, nrm1, nrmj, nrpj
   DIMENSION A(*), Bb(*), C(*), Q(Idimq,*), B(*), B2(*), B3(*), W(*), &
     W2(*), W3(*), D(*), Tcos(*), P(*)
-  !***FIRST EXECUTABLE STATEMENT  POISP2
+  !* FIRST EXECUTABLE STATEMENT  POISP2
   mr = M
   nr = (N+1)/2
   nrm1 = nr - 1

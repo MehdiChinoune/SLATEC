@@ -1,31 +1,38 @@
-!DECK SSLUI2
+!** SSLUI2
 SUBROUTINE SSLUI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSLUI2
-  !***PURPOSE  SLAP Backsolve for LDU Factorization.
+  !>
+  !***
+  !  SLAP Backsolve for LDU Factorization.
   !            Routine to solve a system of the form  L*D*U X = B,
   !            where L is a unit lower triangular matrix, D is a diagonal
   !            matrix, and U is a unit upper triangular matrix.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2E
-  !***TYPE      SINGLE PRECISION (SSLUI2-S, DSLUI2-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM SOLVE,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2E
+  !***
+  ! **Type:**      SINGLE PRECISION (SSLUI2-S, DSLUI2-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM SOLVE,
   !             SLAP, SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, IL(NL), JL(NL), IU(NU), JU(NU)
   !     REAL    B(N), X(N), L(NL), DINV(N), U(NU)
   !
   !     CALL SSLUI2( N, B, X, IL, JL, L, DINV, IU, JU, U )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   ! B      :IN       Real B(N).
@@ -53,7 +60,7 @@ SUBROUTINE SSLUI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   !         "Description", below   for  more   details about  the SLAP
   !         format.  (NU is the number of non-zeros in the U array.)
   !
-  ! *Description:
+  !- Description:
   !       This routine is supplied with  the SLAP package as a routine
   !       to  perform  the  MSOLVE operation  in   the  SIR and   SBCG
   !       iteration routines for  the  drivers SSILUR and SSLUBC.   It
@@ -138,10 +145,14 @@ SUBROUTINE SSLUI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   !       Alliant FX/Fortran and CRI CFT/CFT77 compilers  are supplied
   !       with the standard SLAP distribution.
   !
-  !***SEE ALSO  SSILUS
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SSILUS
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -152,7 +163,7 @@ SUBROUTINE SSLUI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  !***END PROLOGUE  SSLUI2
+  
   !     .. Scalar Arguments ..
   INTEGER N
   !     .. Array Arguments ..
@@ -160,7 +171,7 @@ SUBROUTINE SSLUI2(N,B,X,Il,Jl,L,Dinv,Iu,Ju,U)
   INTEGER Il(*), Iu(*), Jl(*), Ju(*)
   !     .. Local Scalars ..
   INTEGER i, icol, irow, j, jbgn, jend
-  !***FIRST EXECUTABLE STATEMENT  SSLUI2
+  !* FIRST EXECUTABLE STATEMENT  SSLUI2
   !
   !         Solve  L*Y = B,  storing result in X, L stored by rows.
   !

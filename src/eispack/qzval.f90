@@ -1,19 +1,26 @@
-!DECK QZVAL
+!** QZVAL
 SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QZVAL
-  !***PURPOSE  The third step of the QZ algorithm for generalized
+  !>
+  !***
+  !  The third step of the QZ algorithm for generalized
   !            eigenproblems.  Accepts a pair of real matrices, one in
   !            quasi-triangular form and the other in upper triangular
   !            form and computes the eigenvalues of the associated
   !            eigenproblem.  Usually preceded by QZHES, QZIT, and
   !            followed by QZVEC.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C2C
-  !***TYPE      SINGLE PRECISION (QZVAL-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C2C
+  !***
+  ! **Type:**      SINGLE PRECISION (QZVAL-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is the third step of the QZ algorithm
   !     for solving generalized matrix eigenvalue problems,
@@ -84,18 +91,21 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  QZVAL
+  
   !
   INTEGER i, j, N, en, na, Nm, nn, isw
   REAL A(Nm,*), B(Nm,*), Alfr(*), Alfi(*), Beta(*), Z(Nm,*)
@@ -107,7 +117,7 @@ SUBROUTINE QZVAL(Nm,N,A,B,Alfr,Alfi,Beta,Matz,Z)
   REAL a22i, a22r, epsb
   LOGICAL Matz
   !
-  !***FIRST EXECUTABLE STATEMENT  QZVAL
+  !* FIRST EXECUTABLE STATEMENT  QZVAL
   epsb = B(N,1)
   isw = 1
   !     .......... FIND EIGENVALUES OF QUASI-TRIANGULAR MATRICES.

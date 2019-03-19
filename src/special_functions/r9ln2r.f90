@@ -1,16 +1,22 @@
-!DECK R9LN2R
+!** R9LN2R
 REAL FUNCTION R9LN2R(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  R9LN2R
-  !***SUBSIDIARY
-  !***PURPOSE  Evaluate LOG(1+X) from second order relative accuracy so
+  !>
+  !***
+  !  Evaluate LOG(1+X) from second order relative accuracy so
   !            that LOG(1+X) = X - X**2/2 + X**3*R9LN2R(X).
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4B
-  !***TYPE      SINGLE PRECISION (R9LN2R-S, D9LN2R-D, C9LN2R-C)
-  !***KEYWORDS  ELEMENTARY FUNCTIONS, FNLIB, LOGARITHM, SECOND ORDER
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4B
+  !***
+  ! **Type:**      SINGLE PRECISION (R9LN2R-S, D9LN2R-D, C9LN2R-C)
+  !***
+  ! **Keywords:**  ELEMENTARY FUNCTIONS, FNLIB, LOGARITHM, SECOND ORDER
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate  LOG(1+X)  from 2-nd order with relative error accuracy so
   ! that    LOG(1+X) = X - X**2/2 + X**3*R9LN2R(X)
@@ -27,16 +33,19 @@ REAL FUNCTION R9LN2R(X)
   !                               significant figures required  15.95
   !                                    decimal places required  17.50
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  !***END PROLOGUE  R9LN2R
+  
   REAL CSEVL, eps, R1MACH, sqeps, txbig, txmax, X, xbig, xmax, xmin
   INTEGER INITS, ntln21, ntln22
   REAL ln21cs(26), ln22cs(20)
@@ -89,7 +98,7 @@ REAL FUNCTION R9LN2R(X)
   DATA ln22cs(19)/.000000000000000100E0/
   DATA ln22cs(20)/ - .000000000000000014E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  R9LN2R
+  !* FIRST EXECUTABLE STATEMENT  R9LN2R
   IF ( first ) THEN
     eps = R1MACH(3)
     ntln21 = INITS(ln21cs,26,0.1*eps)

@@ -1,14 +1,18 @@
-!DECK DLPDP
+!** DLPDP
 SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DLPDP
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DLSEI
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (LPDP-S, DLPDP-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to DLSEI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (LPDP-S, DLPDP-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Haskell, K. H., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  **** Double Precision version of LPDP ****
   !     DIMENSION A(MDA,N+1),PRGOPT(*),X(N),WS((M+2)*(N+7)),IS(M+N+1),
@@ -39,15 +43,18 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !
   !          MODE=2  The inequalities are inconsistent.
   !
-  !***SEE ALSO  DLSEI
-  !***ROUTINES CALLED  DCOPY, DDOT, DNRM2, DSCAL, DWNNLS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DLSEI
+  !***
+  ! **Routines called:**  DCOPY, DDOT, DNRM2, DSCAL, DWNNLS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  !***END PROLOGUE  DLPDP
+  
   !
   INTEGER i, Is(*), iw, ix, j, l, M, Mda, Mode, modew, n, N1, &
     N2, np1
@@ -55,7 +62,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
     sc, Wnorm, Ws(*), X(*), ynorm, zero
   SAVE zero, one, fac
   DATA zero, one/0.0D0, 1.0D0/, fac/0.1D0/
-  !***FIRST EXECUTABLE STATEMENT  DLPDP
+  !* FIRST EXECUTABLE STATEMENT  DLPDP
   n = N1 + N2
   Mode = 1
   IF ( M>0 ) THEN

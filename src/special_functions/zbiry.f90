@@ -1,17 +1,24 @@
-!DECK ZBIRY
+!** ZBIRY
 SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZBIRY
-  !***PURPOSE  Compute the Airy function Bi(z) or its derivative dBi/dz
+  !>
+  !***
+  !  Compute the Airy function Bi(z) or its derivative dBi/dz
   !            for complex argument z.  A scaling option is available
   !            to help avoid overflow.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10D
-  !***TYPE      COMPLEX (CBIRY-C, ZBIRY-C)
-  !***KEYWORDS  AIRY FUNCTION, BESSEL FUNCTION OF ORDER ONE THIRD,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10D
+  !***
+  ! **Type:**      COMPLEX (CBIRY-C, ZBIRY-C)
+  !***
+  ! **Keywords:**  AIRY FUNCTION, BESSEL FUNCTION OF ORDER ONE THIRD,
   !             BESSEL FUNCTION OF ORDER TWO THIRDS
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !                      ***A DOUBLE PRECISION ROUTINE***
   !         On KODE=1, ZBIRY computes the complex Airy function Bi(z)
@@ -54,7 +61,7 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
   !                    IERR=5  Algorithmic error - NO COMPUTATION
   !                            (Termination condition not met)
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !         Bi(z) and dBi/dz are computed from I Bessel functions by
   !
@@ -107,7 +114,8 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
   !         the principal phase angle is on the order of +P, -P, PI/2-P,
   !         or -PI/2+P.
   !
-  !***REFERENCES  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
+  !***
+  ! **References:**  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
   !                 matical Functions, National Bureau of Standards
   !                 Applied Mathematics Series 55, U. S. Department
   !                 of Commerce, Tenth Printing (1972) or later.
@@ -124,15 +132,17 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
   !                 Transactions on Mathematical Software, 12 (September
   !                 1986), pp. 265-273.
   !
-  !***ROUTINES CALLED  D1MACH, I1MACH, ZABS, ZBINU, ZDIV, ZSQRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, I1MACH, ZABS, ZBINU, ZDIV, ZSQRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   890801  REVISION DATE from Version 3.2
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
   !   930122  Added ZSQRT to EXTERNAL statement.  (RWC)
-  !***END PROLOGUE  ZBIRY
+  
   !     COMPLEX BI,CONE,CSQ,CY,S1,S2,TRM1,TRM2,Z,ZTA,Z3
   REAL(8) :: aa, ad, ak, alim, atrm, az, az3, bb, Bii, Bir, &
     bk, cc, ck, coef, conei, coner, csqi, csqr, cyi, &
@@ -148,7 +158,7 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
     6.14926627446000736D-01, 4.48288357353826359D-01, &
     5.77350269189625765D-01, 3.14159265358979324D+00/
   DATA coner, conei/1.0D0, 0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  ZBIRY
+  !* FIRST EXECUTABLE STATEMENT  ZBIRY
   Ierr = 0
   nz = 0
   IF ( Id<0.OR.Id>1 ) Ierr = 1

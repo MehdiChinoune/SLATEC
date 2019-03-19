@@ -1,23 +1,30 @@
-!DECK PCHFD
+!** PCHFD
 SUBROUTINE PCHFD(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,De,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PCHFD
-  !***PURPOSE  Evaluate a piecewise cubic Hermite function and its first
+  !>
+  !***
+  !  Evaluate a piecewise cubic Hermite function and its first
   !            derivative at an array of points.  May be used by itself
   !            for Hermite interpolation, or as an evaluator for PCHIM
   !            or PCHIC.  If only function values are required, use
   !            PCHFE instead.
-  !***LIBRARY   SLATEC (PCHIP)
-  !***CATEGORY  E3, H1
-  !***TYPE      SINGLE PRECISION (PCHFD-S, DPCHFD-D)
-  !***KEYWORDS  CUBIC HERMITE DIFFERENTIATION, CUBIC HERMITE EVALUATION,
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Category:**  E3, H1
+  !***
+  ! **Type:**      SINGLE PRECISION (PCHFD-S, DPCHFD-D)
+  !***
+  ! **Keywords:**  CUBIC HERMITE DIFFERENTIATION, CUBIC HERMITE EVALUATION,
   !             HERMITE INTERPOLATION, PCHIP, PIECEWISE CUBIC EVALUATION
-  !***AUTHOR  Fritsch, F. N., (LLNL)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             P.O. Box 808  (L-316)
   !             Livermore, CA  94550
   !             FTS 532-4275, (510) 422-4275
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !          PCHFD:  Piecewise Cubic Hermite Function and Derivative
   !                  evaluator
@@ -106,9 +113,12 @@ SUBROUTINE PCHFD(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,De,Ierr)
   !                         routine CHFDV.  NB: this should never happen.
   !                         Notify the author **IMMEDIATELY** if it does.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CHFDV, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CHFDV, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811020  DATE WRITTEN
   !   820803  Minor cosmetic changes for release 1.
   !   870707  Minor cosmetic changes to prologue.
@@ -117,7 +127,7 @@ SUBROUTINE PCHFD(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,De,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  PCHFD
+  
   !  Programming notes:
   !
   !     1. To produce a double precision version, simply:
@@ -152,7 +162,7 @@ SUBROUTINE PCHFD(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,De,Ierr)
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
-  !***FIRST EXECUTABLE STATEMENT  PCHFD
+  !* FIRST EXECUTABLE STATEMENT  PCHFD
   IF ( .NOT.(Skip) ) THEN
     !
     IF ( N<2 ) THEN

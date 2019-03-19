@@ -1,15 +1,22 @@
-!DECK SPOFS
+!** SPOFS
 SUBROUTINE SPOFS(A,Lda,N,V,Itask,Ind,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPOFS
-  !***PURPOSE  Solve a positive definite symmetric system of linear
+  !>
+  !***
+  !  Solve a positive definite symmetric system of linear
   !            equations.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2B1B
-  !***TYPE      SINGLE PRECISION (SPOFS-S, DPOFS-D, CPOFS-C)
-  !***KEYWORDS  HERMITIAN, LINEAR EQUATIONS, POSITIVE DEFINITE, SYMMETRIC
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2B1B
+  !***
+  ! **Type:**      SINGLE PRECISION (SPOFS-S, DPOFS-D, CPOFS-C)
+  !***
+  ! **Keywords:**  HERMITIAN, LINEAR EQUATIONS, POSITIVE DEFINITE, SYMMETRIC
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !    Subroutine SPOFS solves a real positive definite symmetric
   !    NxN system of single precision linear equations using
@@ -87,10 +94,13 @@ SUBROUTINE SPOFS(A,Lda,N,V,Itask,Ind,Work)
   !                      the user provides otherwise, an error message
   !                      will be printed followed by an abort.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  R1MACH, SPOCO, SPOSL, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  R1MACH, SPOCO, SPOSL, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800509  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -99,13 +109,13 @@ SUBROUTINE SPOFS(A,Lda,N,V,Itask,Ind,Work)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SPOFS
+  
   !
   INTEGER Lda, N, Itask, Ind, info
   REAL A(Lda,*), V(*), Work(*), R1MACH
   REAL rcond
   CHARACTER(8) :: xern1, xern2
-  !***FIRST EXECUTABLE STATEMENT  SPOFS
+  !* FIRST EXECUTABLE STATEMENT  SPOFS
   IF ( Lda<N ) THEN
     Ind = -1
     WRITE (xern1,'(I8)') Lda

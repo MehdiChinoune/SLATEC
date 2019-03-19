@@ -1,29 +1,36 @@
-!DECK SSLI2
+!** SSLI2
 SUBROUTINE SSLI2(N,B,X,Nel,Iel,Jel,El)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSLI2
-  !***PURPOSE  SLAP Lower Triangle Matrix Backsolve.
+  !>
+  !***
+  !  SLAP Lower Triangle Matrix Backsolve.
   !            Routine to solve a system of the form  Lx = b, where L
   !            is a lower triangular matrix.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A3
-  !***TYPE      SINGLE PRECISION (SSLI2-S, DSLI2-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, LINEAR SYSTEM SOLVE, SLAP, SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A3
+  !***
+  ! **Type:**      SINGLE PRECISION (SSLI2-S, DSLI2-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, LINEAR SYSTEM SOLVE, SLAP, SPARSE
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NEL, IEL(NEL), JEL(NEL)
   !     REAL    B(N), X(N), EL(NEL)
   !
   !     CALL SSLI2( N, B, X, NEL, IEL, JEL, EL )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   ! B      :IN       Real B(N).
@@ -42,7 +49,7 @@ SUBROUTINE SSLI2(N,B,X,Nel,Iel,Jel,El)
   !         "Description", below, for more details about the  SLAP Row
   !         format.
   !
-  ! *Description:
+  !- Description:
   !       This routine is supplied with the SLAP package  as a routine
   !       to perform the MSOLVE operation in the SIR iteration routine
   !       for the driver routine SSGS.  It must be called via the SLAP
@@ -88,10 +95,14 @@ SUBROUTINE SSLI2(N,B,X,Nel,Iel,Jel,El)
   !       Alliant FX/Fortran and CRI CFT/CFT77 compilers  are supplied
   !       with the standard SLAP distribution.
   !
-  !***SEE ALSO  SSLI
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SSLI
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -102,7 +113,7 @@ SUBROUTINE SSLI2(N,B,X,Nel,Iel,Jel,El)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  !***END PROLOGUE  SSLI2
+  
   !     .. Scalar Arguments ..
   INTEGER N, Nel
   !     .. Array Arguments ..
@@ -110,7 +121,7 @@ SUBROUTINE SSLI2(N,B,X,Nel,Iel,Jel,El)
   INTEGER Iel(Nel), Jel(Nel)
   !     .. Local Scalars ..
   INTEGER i, icol, j, jbgn, jend
-  !***FIRST EXECUTABLE STATEMENT  SSLI2
+  !* FIRST EXECUTABLE STATEMENT  SSLI2
   !
   !         Initialize the solution by copying the right hands side
   !         into it.

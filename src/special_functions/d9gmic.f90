@@ -1,24 +1,33 @@
-!DECK D9GMIC
+!** D9GMIC
 REAL(8) FUNCTION D9GMIC(A,X,Alx)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  D9GMIC
-  !***SUBSIDIARY
-  !***PURPOSE  Compute the complementary incomplete Gamma function for A
+  !>
+  !***
+  !  Compute the complementary incomplete Gamma function for A
   !            near a negative integer and X small.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7E
-  !***TYPE      DOUBLE PRECISION (R9GMIC-S, D9GMIC-D)
-  !***KEYWORDS  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB, SMALL X,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7E
+  !***
+  ! **Type:**      DOUBLE PRECISION (R9GMIC-S, D9GMIC-D)
+  !***
+  ! **Keywords:**  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB, SMALL X,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Compute the complementary incomplete gamma function for A near
   ! a negative integer and for small X.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DLNGAM, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DLNGAM, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -26,7 +35,7 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  !***END PROLOGUE  D9GMIC
+  
   INTEGER k, m, mm1
   REAL(8) :: A, X, Alx, alng, bot, eps, euler, fk, fkp1, fm, &
     s, sgng, t, te, D1MACH, DLNGAM
@@ -34,7 +43,7 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
   SAVE euler, eps, bot, first
   DATA euler/0.57721566490153286060651209008240D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  D9GMIC
+  !* FIRST EXECUTABLE STATEMENT  D9GMIC
   IF ( first ) THEN
     eps = 0.5D0*D1MACH(3)
     bot = LOG(D1MACH(1))

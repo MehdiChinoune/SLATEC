@@ -1,13 +1,17 @@
-!DECK U11US
+!** U11US
 SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  U11US
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ULSIA
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (U11US-S, DU11US-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ULSIA
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (U11US-S, DU11US-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !       This routine performs an LQ factorization of the
   !       matrix A using Householder transformations. Row
@@ -15,17 +19,20 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !       of round-off and to help detect possible rank
   !       deficiency.
   !
-  !***SEE ALSO  ULSIA
-  !***ROUTINES CALLED  ISAMAX, ISWAP, SAXPY, SDOT, SNRM2, SSCAL, SSWAP,
+  !***
+  ! **See also:**  ULSIA
+  !***
+  ! **Routines called:**  ISAMAX, ISWAP, SAXPY, SDOT, SNRM2, SSCAL, SSWAP,
   !                    XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  U11US
+  
   REAL A, bb, Db, Eb, H, r2, rmin, SDOT, SNRM2, sum, t, temp, tn, tt, Ub, W
   INTEGER i, ii, im1, imin, is, ISAMAX, j, jm1, jmax, jp1, kk, &
     km1, kmi, kp1, Krank, Ksure, kz, l, lm1, M
@@ -35,7 +42,7 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !
   !        INITIALIZATION
   !
-  !***FIRST EXECUTABLE STATEMENT  U11US
+  !* FIRST EXECUTABLE STATEMENT  U11US
   j = 0
   Krank = M
   DO i = 1, N

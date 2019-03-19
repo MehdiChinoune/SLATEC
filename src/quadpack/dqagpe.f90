@@ -1,28 +1,35 @@
-!DECK DQAGPE
+!** DQAGPE
 SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     Neval,Ier,Alist,Blist,Rlist,Elist,Pts,Iord,Level,Ndin,&
     Last)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQAGPE
-  !***PURPOSE  Approximate a given definite integral I = Integral of F
+  !>
+  !***
+  !  Approximate a given definite integral I = Integral of F
   !            over (A,B), hopefully satisfying the accuracy claim:
   !                 ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I)).
   !            Break points of the integration interval, where local
   !            difficulties of the integrand may occur (e.g. singularities
   !            or discontinuities) are provided by the user.
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A2A1
-  !***TYPE      DOUBLE PRECISION (QAGPE-S, DQAGPE-D)
-  !***KEYWORDS  AUTOMATIC INTEGRATOR, EXTRAPOLATION, GENERAL-PURPOSE,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A2A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (QAGPE-S, DQAGPE-D)
+  !***
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, EXTRAPOLATION, GENERAL-PURPOSE,
   !             GLOBALLY ADAPTIVE, QUADPACK, QUADRATURE,
   !             SINGULARITIES AT USER SPECIFIED POINTS
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Computation of a definite integral
   !        Standard fortran subroutine
@@ -190,15 +197,18 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !                     Number of subintervals actually produced in the
   !                     subdivisions process
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DQELG, DQK21, DQPSRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DQELG, DQK21, DQPSRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DQAGPE
+  
   REAL(8) :: A, abseps, Abserr, Alist, area, area1, area12, &
     area2, a1, a2, B, Blist, b1, b2, correc, defabs, &
     defab1, defab2, dres, D1MACH, Elist, epmach, &
@@ -269,7 +279,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !           UFLOW IS THE SMALLEST POSITIVE MAGNITUDE.
   !           OFLOW IS THE LARGEST POSITIVE MAGNITUDE.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQAGPE
+  !* FIRST EXECUTABLE STATEMENT  DQAGPE
   epmach = D1MACH(4)
   !
   !            TEST ON VALIDITY OF PARAMETERS
@@ -478,9 +488,9 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
     !           WITH NRMAX-TH LARGEST ERROR ESTIMATE (TO BE BISECTED NEXT).
     !
     CALL DQPSRT(Limit,Last,maxerr,errmax,Elist,Iord,nrmax)
-    ! ***JUMP OUT OF DO-LOOP
+    !- **JUMP OUT OF DO-LOOP
     IF ( errsum<=errbnd ) GOTO 200
-    ! ***JUMP OUT OF DO-LOOP
+    !- **JUMP OUT OF DO-LOOP
     IF ( Ier/=0 ) EXIT
     IF ( .NOT.(noext) ) THEN
       erlarg = erlarg - erlast
@@ -506,7 +516,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
         DO k = id, jupbnd
           maxerr = Iord(nrmax)
           errmax = Elist(maxerr)
-          ! ***JUMP OUT OF DO-LOOP
+          !- **JUMP OUT OF DO-LOOP
           IF ( Level(maxerr)+1<=levmax ) GOTO 100
           nrmax = nrmax + 1
         ENDDO
@@ -526,7 +536,7 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
           Result = reseps
           correc = erlarg
           ertest = MAX(Epsabs,Epsrel*ABS(reseps))
-          ! ***JUMP OUT OF DO-LOOP
+          !- **JUMP OUT OF DO-LOOP
           IF ( Abserr<ertest ) EXIT
         ENDIF
         !

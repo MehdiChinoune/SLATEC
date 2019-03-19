@@ -1,16 +1,23 @@
-!DECK COMHES
+!** COMHES
 SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  COMHES
-  !***PURPOSE  Reduce a complex general matrix to complex upper Hessenberg
+  !>
+  !***
+  !  Reduce a complex general matrix to complex upper Hessenberg
   !            form using stabilized elementary similarity
   !            transformations.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C1B2
-  !***TYPE      COMPLEX (ELMHES-S, COMHES-C)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C1B2
+  !***
+  ! **Type:**      COMPLEX (ELMHES-S, COMHES-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure COMHES,
   !     NUM. MATH. 12, 349-368(1968) by Martin and Wilkinson.
@@ -56,25 +63,28 @@ SUBROUTINE COMHES(Nm,N,Low,Igh,Ar,Ai,Int)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  CDIV
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDIV
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  COMHES
+  
   !
   INTEGER i, j, m, N, la, Nm, Igh, kp1, Low, mm1, mp1
   REAL Ar(Nm,*), Ai(Nm,*)
   REAL xr, xi, yr, yi
   INTEGER Int(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  COMHES
+  !* FIRST EXECUTABLE STATEMENT  COMHES
   la = Igh - 1
   kp1 = Low + 1
   IF ( la>=kp1 ) THEN

@@ -1,15 +1,22 @@
-!DECK E1
+!** E1
 REAL FUNCTION E1(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  E1
-  !***PURPOSE  Compute the exponential integral E1(X).
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C5
-  !***TYPE      SINGLE PRECISION (E1-S, DE1-D)
-  !***KEYWORDS  E1 FUNCTION, EXPONENTIAL INTEGRAL, FNLIB,
+  !>
+  !***
+  !  Compute the exponential integral E1(X).
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C5
+  !***
+  ! **Type:**      SINGLE PRECISION (E1-S, DE1-D)
+  !***
+  ! **Keywords:**  E1 FUNCTION, EXPONENTIAL INTEGRAL, FNLIB,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! E1 calculates the single precision exponential integral, E1(X), for
   ! positive single precision argument X and the Cauchy principal value
@@ -62,9 +69,12 @@ REAL FUNCTION E1(X)
   !                               significant figures required  15.38
   !                                    decimal places required  16.97
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891115  Modified prologue description.  (WRB)
@@ -72,7 +82,7 @@ REAL FUNCTION E1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  E1
+  
   REAL ae11cs, ae12cs, ae13cs, ae14cs, CSEVL, e11cs, e12cs, &
     eta, R1MACH, X, xmax, xmaxt
   INTEGER INITS, ntae11, ntae12, ntae13, ntae14, nte11, nte12
@@ -232,7 +242,7 @@ REAL FUNCTION E1(X)
   DATA ae14cs(25)/.00000000000000016E0/
   DATA ae14cs(26)/ - .00000000000000005E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  E1
+  !* FIRST EXECUTABLE STATEMENT  E1
   IF ( first ) THEN
     eta = 0.1*R1MACH(3)
     ntae11 = INITS(ae11cs,39,eta)

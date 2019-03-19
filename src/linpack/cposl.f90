@@ -1,15 +1,22 @@
-!DECK CPOSL
+!** CPOSL
 SUBROUTINE CPOSL(A,Lda,N,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPOSL
-  !***PURPOSE  Solve the complex Hermitian positive definite linear system
+  !>
+  !***
+  !  Solve the complex Hermitian positive definite linear system
   !            using the factors computed by CPOCO or CPOFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2D1B
-  !***TYPE      COMPLEX (SPOSL-S, DPOSL-D, CPOSL-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX, POSITIVE DEFINITE, SOLVE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2D1B
+  !***
+  ! **Type:**      COMPLEX (SPOSL-S, DPOSL-D, CPOSL-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX, POSITIVE DEFINITE, SOLVE
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CPOSL solves the COMPLEX Hermitian positive definite system
   !     A * X = B
@@ -49,10 +56,13 @@ SUBROUTINE CPOSL(A,Lda,N,B)
   !              CALL CPOSL(A,LDA,N,C(1,J))
   !        10 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTC
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTC
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -60,7 +70,7 @@ SUBROUTINE CPOSL(A,Lda,N,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CPOSL
+  
   INTEGER Lda, N
   COMPLEX A(Lda,*), B(*)
   !
@@ -69,7 +79,7 @@ SUBROUTINE CPOSL(A,Lda,N,B)
   !
   !     SOLVE CTRANS(R)*Y = B
   !
-  !***FIRST EXECUTABLE STATEMENT  CPOSL
+  !* FIRST EXECUTABLE STATEMENT  CPOSL
   DO k = 1, N
     t = CDOTC(k-1,A(1,k),1,B(1),1)
     B(k) = (B(k)-t)/A(k,k)

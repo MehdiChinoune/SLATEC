@@ -1,17 +1,23 @@
-!DECK LSAME
+!** LSAME
 LOGICAL FUNCTION LSAME(Ca,Cb)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  LSAME
-  !***SUBSIDIARY
-  !***PURPOSE  Test two characters to determine if they are the same
+  !>
+  !***
+  !  Test two characters to determine if they are the same
   !            letter, except for case.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  R, N3
-  !***TYPE      LOGICAL (LSAME-L)
-  !***KEYWORDS  CHARACTER COMPARISON, LEVEL 2 BLAS, LEVEL 3 BLAS
-  !***AUTHOR  Hanson, R., (SNLA)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  R, N3
+  !***
+  ! **Type:**      LOGICAL (LSAME-L)
+  !***
+  ! **Keywords:**  CHARACTER COMPARISON, LEVEL 2 BLAS, LEVEL 3 BLAS
+  !***
+  ! **Author:**  Hanson, R., (SNLA)
   !           Du Croz, J., (NAG)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  LSAME  tests if CA is the same letter as CB regardless of case.
   !  CB is assumed to be an upper case letter. LSAME returns .TRUE. if
@@ -32,15 +38,18 @@ LOGICAL FUNCTION LSAME(Ca,Cb)
   !           On entry, CA and CB specify characters to be compared.
   !           Unchanged on exit.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   860720  DATE WRITTEN
   !   910606  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
   !   910607  Modified to handle ASCII and EBCDIC codes.  (WRB)
   !   930201  Tests for equality and equivalence combined.  (RWC and WRB)
-  !***END PROLOGUE  LSAME
+  
   !     .. Scalar Arguments ..
   CHARACTER Ca*1, Cb*1
   !     .. Local Scalars ..
@@ -52,7 +61,7 @@ LOGICAL FUNCTION LSAME(Ca,Cb)
   SAVE first, ioff
   !     .. Data statements ..
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  LSAME
+  !* FIRST EXECUTABLE STATEMENT  LSAME
   IF ( first ) ioff = ICHAR('a') - ICHAR('A')
   !
   first = .FALSE.

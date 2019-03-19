@@ -1,15 +1,19 @@
-!DECK DJAIRY
+!** DJAIRY
 SUBROUTINE DJAIRY(X,Rx,C,Ai,Dai)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DJAIRY
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBESJ and DBESY
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (JAIRY-S, DJAIRY-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
+  !>
+  !***
+  !  Subsidiary to DBESJ and DBESY
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (JAIRY-S, DJAIRY-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
   !           Daniel, S. L., (SNLA)
   !           Weston, M. K., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                  DJAIRY computes the Airy function AI(X)
   !                   and its derivative DAI(X) for DASYJY
@@ -25,16 +29,19 @@ SUBROUTINE DJAIRY(X,Rx,C,Ai,Dai)
   !        AI - Value of function AI(X)
   !       DAI - Value of the derivative DAI(X)
   !
-  !***SEE ALSO  DBESJ, DBESY
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBESJ, DBESY
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891009  Removed unreferenced variable.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  !***END PROLOGUE  DJAIRY
+  
   !
   INTEGER i, j, m1, m1d, m2, m2d, m3, m3d, m4, m4d, n1, n1d, &
     n2, n2d, n3, n3d, n4, n4d
@@ -194,7 +201,7 @@ SUBROUTINE DJAIRY(X,Rx,C,Ai,Dai)
     -4.40995691658191D-12, -5.18674221093575D-12, &
     9.64874015137022D-13, -4.90190576608710D-14, &
     -1.77253430678112D-14, 5.55950610442662D-15, -7.11793337579530D-16/
-  !***FIRST EXECUTABLE STATEMENT  DJAIRY
+  !* FIRST EXECUTABLE STATEMENT  DJAIRY
   IF ( X<0.0D0 ) THEN
     !
     IF ( C>5.0D0 ) THEN

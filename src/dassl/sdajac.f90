@@ -1,15 +1,19 @@
-!DECK SDAJAC
+!** SDAJAC
 SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
     Uround,JAC,Rpar,Ipar,Ntemp)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SDAJAC
-  !***SUBSIDIARY
-  !***PURPOSE  Compute the iteration matrix for SDASSL and form the
+  !>
+  !***
+  !  Compute the iteration matrix for SDASSL and form the
   !            LU-decomposition.
-  !***LIBRARY   SLATEC (DASSL)
-  !***TYPE      SINGLE PRECISION (SDAJAC-S, DDAJAC-D)
-  !***AUTHOR  Petzold, Linda R., (LLNL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (DASSL)
+  !***
+  ! **Type:**      SINGLE PRECISION (SDAJAC-S, DDAJAC-D)
+  !***
+  ! **Author:**  Petzold, Linda R., (LLNL)
+  !***
+  ! **Description:**
   !-----------------------------------------------------------------------
   !     THIS ROUTINE COMPUTES THE ITERATION MATRIX
   !     PD=DG/DY+CJ*DG/DYPRIME (WHERE G(X,Y,YPRIME)=0).
@@ -45,8 +49,10 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   !                TO EVALUATE THE ITERATION MATRIX (THIS ROUTINE
   !                IS ONLY USED IF IWM(MTYPE) IS 1 OR 4)
   !-----------------------------------------------------------------------
-  !***ROUTINES CALLED  SGBFA, SGEFA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SGBFA, SGEFA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830315  DATE WRITTEN
   !   901009  Finished conversion to SLATEC 4.0 format (F.N.Fritsch)
   !   901010  Modified three MAX calls to be all on one line.  (FNF)
@@ -54,7 +60,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
   !   901101  Corrected PURPOSE.  (FNF)
-  !***END PROLOGUE  SDAJAC
+  
   !
   INTEGER Neq, Ier, Iwm(*), Ires, Ipar(*), Ntemp
   REAL X, Y(*), Yprime(*), Delta(*), Cj, H, Wt(*), E(*), Wm(*), &
@@ -74,7 +80,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   PARAMETER (LMTYPE=4)
   PARAMETER (LIPVT=21)
   !
-  !***FIRST EXECUTABLE STATEMENT  SDAJAC
+  !* FIRST EXECUTABLE STATEMENT  SDAJAC
   Ier = 0
   npdm1 = NPD - 1
   mtype = Iwm(LMTYPE)

@@ -1,13 +1,17 @@
-!DECK PCHCI
+!** PCHCI
 SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PCHCI
-  !***SUBSIDIARY
-  !***PURPOSE  Set interior derivatives for PCHIC
-  !***LIBRARY   SLATEC (PCHIP)
-  !***TYPE      SINGLE PRECISION (PCHCI-S, DPCHCI-D)
-  !***AUTHOR  Fritsch, F. N., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Set interior derivatives for PCHIC
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Type:**      SINGLE PRECISION (PCHCI-S, DPCHCI-D)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
+  !***
+  ! **Description:**
   !
   !          PCHCI:  PCHIC Initial Derivative Setter.
   !
@@ -62,9 +66,12 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
   !
   !  Fortran intrinsics used:  ABS, MAX, MIN.
   !
-  !***SEE ALSO  PCHIC
-  !***ROUTINES CALLED  PCHST
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  PCHIC
+  !***
+  ! **Routines called:**  PCHST
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820218  DATE WRITTEN
   !   820601  Modified end conditions to be continuous functions of
   !           data when monotonicity switches in next interval.
@@ -80,7 +87,7 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
   !   930503  Improved purpose.  (FNF)
-  !***END PROLOGUE  PCHCI
+  
   !
   !  Programming notes:
   !     1. The function  PCHST(ARG1,ARG2)  is assumed to return zero if
@@ -104,7 +111,7 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
   !  INITIALIZE.
   !
   DATA zero/0./, three/3./
-  !***FIRST EXECUTABLE STATEMENT  PCHCI
+  !* FIRST EXECUTABLE STATEMENT  PCHCI
   nless1 = N - 1
   del1 = Slope(1)
   !

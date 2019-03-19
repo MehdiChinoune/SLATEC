@@ -1,16 +1,23 @@
-!DECK CGBCO
+!** CGBCO
 SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CGBCO
-  !***PURPOSE  Factor a band matrix by Gaussian elimination and
+  !>
+  !***
+  !  Factor a band matrix by Gaussian elimination and
   !            estimate the condition number of the matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2C2
-  !***TYPE      COMPLEX (SGBCO-S, DGBCO-D, CGBCO-C)
-  !***KEYWORDS  BANDED, CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2C2
+  !***
+  ! **Type:**      COMPLEX (SGBCO-S, DGBCO-D, CGBCO-C)
+  !***
+  ! **Keywords:**  BANDED, CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
   !             MATRIX FACTORIZATION
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CGBCO factors a complex band matrix by Gaussian
   !     elimination and estimates the condition of the matrix.
@@ -115,10 +122,13 @@ SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !           11 22 33 44 55 66
   !           21 32 43 54 65  *
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTC, CGBFA, CSSCAL, SCASUM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTC, CGBFA, CSSCAL, SCASUM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -127,7 +137,7 @@ SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CGBCO
+  
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
   COMPLEX Abd(Lda,*), Z(*)
   REAL Rcond
@@ -140,7 +150,7 @@ SUBROUTINE CGBCO(Abd,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !     COMPUTE 1-NORM OF A
   !
-  !***FIRST EXECUTABLE STATEMENT  CGBCO
+  !* FIRST EXECUTABLE STATEMENT  CGBCO
   anorm = 0.0E0
   l = Ml + 1
   is = l + Mu

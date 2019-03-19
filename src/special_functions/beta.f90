@@ -1,14 +1,21 @@
-!DECK BETA
+!** BETA
 REAL FUNCTION BETA(A,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BETA
-  !***PURPOSE  Compute the complete Beta function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7B
-  !***TYPE      SINGLE PRECISION (BETA-S, DBETA-D, CBETA-C)
-  !***KEYWORDS  COMPLETE BETA FUNCTION, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the complete Beta function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7B
+  !***
+  ! **Type:**      SINGLE PRECISION (BETA-S, DBETA-D, CBETA-C)
+  !***
+  ! **Keywords:**  COMPLETE BETA FUNCTION, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! BETA computes the complete beta function.
   !
@@ -16,9 +23,12 @@ REAL FUNCTION BETA(A,B)
   !       A   real and positive
   !       B   real and positive
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ALBETA, GAMLIM, GAMMA, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ALBETA, GAMLIM, GAMMA, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -27,12 +37,12 @@ REAL FUNCTION BETA(A,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  !***END PROLOGUE  BETA
+  
   REAL A, ALBETA, alnsml, B, GAMMA, R1MACH, xmax, xmin
   EXTERNAL GAMMA
   SAVE xmax, alnsml
   DATA xmax, alnsml/0., 0./
-  !***FIRST EXECUTABLE STATEMENT  BETA
+  !* FIRST EXECUTABLE STATEMENT  BETA
   IF ( alnsml==0.0 ) THEN
     CALL GAMLIM(xmin,xmax)
     alnsml = LOG(R1MACH(1))

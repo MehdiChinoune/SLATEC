@@ -1,16 +1,23 @@
-!DECK CGECO
+!** CGECO
 SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CGECO
-  !***PURPOSE  Factor a matrix using Gaussian elimination and estimate
+  !>
+  !***
+  !  Factor a matrix using Gaussian elimination and estimate
   !            the condition number of the matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2C1
-  !***TYPE      COMPLEX (SGECO-S, DGECO-D, CGECO-C)
-  !***KEYWORDS  CONDITION NUMBER, GENERAL MATRIX, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2C1
+  !***
+  ! **Type:**      COMPLEX (SGECO-S, DGECO-D, CGECO-C)
+  !***
+  ! **Keywords:**  CONDITION NUMBER, GENERAL MATRIX, LINEAR ALGEBRA, LINPACK,
   !             MATRIX FACTORIZATION
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CGECO factors a complex matrix by Gaussian elimination
   !     and estimates the condition of the matrix.
@@ -61,10 +68,13 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !                an approximate null vector in the sense that
   !                NORM(A*Z) = RCOND*NORM(A)*NORM(Z) .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTC, CGEFA, CSSCAL, SCASUM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTC, CGEFA, CSSCAL, SCASUM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -73,7 +83,7 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CGECO
+  
   INTEGER Lda, N, Ipvt(*)
   COMPLEX A(Lda,*), Z(*)
   REAL Rcond
@@ -86,7 +96,7 @@ SUBROUTINE CGECO(A,Lda,N,Ipvt,Rcond,Z)
   !
   !     COMPUTE 1-NORM OF A
   !
-  !***FIRST EXECUTABLE STATEMENT  CGECO
+  !* FIRST EXECUTABLE STATEMENT  CGECO
   anorm = 0.0E0
   DO j = 1, N
     anorm = MAX(anorm,SCASUM(N,A(1,j),1))

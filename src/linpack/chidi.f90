@@ -1,16 +1,23 @@
-!DECK CHIDI
+!** CHIDI
 SUBROUTINE CHIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHIDI
-  !***PURPOSE  Compute the determinant, inertia and inverse of a complex
+  !>
+  !***
+  !  Compute the determinant, inertia and inverse of a complex
   !            Hermitian matrix using the factors obtained from CHIFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2D1A, D3D1A
-  !***TYPE      COMPLEX (SSIDI-S, DSISI-D, CHIDI-C, CSIDI-C)
-  !***KEYWORDS  DETERMINANT, HERMITIAN, INVERSE, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2D1A, D3D1A
+  !***
+  ! **Type:**      COMPLEX (SSIDI-S, DSISI-D, CHIDI-C, CSIDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, HERMITIAN, INVERSE, LINEAR ALGEBRA, LINPACK,
   !             MATRIX
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     CHIDI computes the determinant, inertia and inverse
   !     of a complex Hermitian matrix using the factors from CHIFA.
@@ -66,10 +73,13 @@ SUBROUTINE CHIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   !        and  CHICO  has set RCOND .EQ. 0.0
   !        or  CHIFA  has set  INFO .NE. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CCOPY, CDOTC, CSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CCOPY, CDOTC, CSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -79,7 +89,7 @@ SUBROUTINE CHIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CHIDI
+  
   INTEGER Lda, N, Job
   COMPLEX A(Lda,*), Work(*)
   REAL Det(2)
@@ -89,7 +99,7 @@ SUBROUTINE CHIDI(A,Lda,N,Kpvt,Det,Inert,Work,Job)
   REAL ten, d, t, ak, akp1
   INTEGER j, jb, k, km1, ks, kstep
   LOGICAL noinv, nodet, noert
-  !***FIRST EXECUTABLE STATEMENT  CHIDI
+  !* FIRST EXECUTABLE STATEMENT  CHIDI
   noinv = MOD(Job,10)==0
   nodet = MOD(Job,100)/10==0
   noert = MOD(Job,1000)/100==0

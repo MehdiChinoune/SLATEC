@@ -1,13 +1,17 @@
-!DECK R1UPDT
+!** R1UPDT
 SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  R1UPDT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SNSQ and SNSQE
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (R1UPDT-S, D1UPDT-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SNSQ and SNSQE
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (R1UPDT-S, D1UPDT-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Given an M by N lower trapezoidal matrix S, an M-vector U,
   !     and an N-vector V, the problem is to determine an
@@ -62,16 +66,19 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   !         of the diagonal elements of the output S are zero. Otherwise
   !         SING is set .FALSE.
   !
-  !***SEE ALSO  SNSQ, SNSQE
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SNSQ, SNSQE
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  R1UPDT
+  
   INTEGER M, N, Ls
   LOGICAL Sing
   REAL S(*), U(*), V(*), W(*)
@@ -80,7 +87,7 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   REAL R1MACH
   SAVE one, p5, p25, zero
   DATA one, p5, p25, zero/1.0E0, 5.0E-1, 2.5E-1, 0.0E0/
-  !***FIRST EXECUTABLE STATEMENT  R1UPDT
+  !* FIRST EXECUTABLE STATEMENT  R1UPDT
   giant = R1MACH(2)
   !
   !     INITIALIZE THE DIAGONAL ELEMENT POINTER.

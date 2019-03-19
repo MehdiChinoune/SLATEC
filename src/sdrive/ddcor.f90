@@ -1,20 +1,24 @@
-!DECK DDCOR
+!** DDCOR
 SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     Nq,T,USERS,Y,Yh,Ywt,Evalfa,Save1,Save2,A,D,Jstate)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DDCOR
-  !***SUBSIDIARY
-  !***PURPOSE  Subroutine DDCOR computes corrections to the Y array.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***TYPE      DOUBLE PRECISION (SDCOR-S, DDCOR-D, CDCOR-C)
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !>
+  !***
+  !  Subroutine DDCOR computes corrections to the Y array.
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Type:**      DOUBLE PRECISION (SDCOR-S, DDCOR-D, CDCOR-C)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  In the case of functional iteration, update Y directly from the
   !  result of the last call to F.
@@ -23,18 +27,20 @@ SUBROUTINE DDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !  coefficient matrix, using the LU decomposition if MITER is 1, 2, 4,
   !  or 5.
   !
-  !***ROUTINES CALLED  DGBSL, DGESL, DNRM2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DGBSL, DGESL, DNRM2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  DDCOR
+  
   INTEGER i, Ierror, iflag, Impl, j, Jstate, Matdim, Miter, Ml, &
     Mu, mw, N, Nde, Nq
   REAL(8) :: A(Matdim,*), D, Dfdy(Matdim,*), El(13,12), H, &
     Save1(*), Save2(*), DNRM2, T, Y(*), Yh(N,*), Ywt(*)
   INTEGER Ipvt(*)
   LOGICAL Evalfa
-  !***FIRST EXECUTABLE STATEMENT  DDCOR
+  !* FIRST EXECUTABLE STATEMENT  DDCOR
   IF ( Miter==0 ) THEN
     IF ( Ierror==1.OR.Ierror==5 ) THEN
       DO i = 1, N

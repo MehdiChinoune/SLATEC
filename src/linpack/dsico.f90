@@ -1,16 +1,23 @@
-!DECK DSICO
+!** DSICO
 SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSICO
-  !***PURPOSE  Factor a symmetric matrix by elimination with symmetric
+  !>
+  !***
+  !  Factor a symmetric matrix by elimination with symmetric
   !            pivoting and estimate the condition number of the matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1A
-  !***TYPE      DOUBLE PRECISION (SSICO-S, DSICO-D, CHICO-C, CSICO-C)
-  !***KEYWORDS  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1A
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSICO-S, DSICO-D, CHICO-C, CSICO-C)
+  !***
+  ! **Keywords:**  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
   !             MATRIX FACTORIZATION, SYMMETRIC
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DSICO factors a double precision symmetric matrix by elimination
   !     with symmetric pivoting and estimates the condition of the
@@ -66,10 +73,13 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
   !                an approximate null vector in the sense that
   !                NORM(A*Z) = RCOND*NORM(A)*NORM(Z) .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DASUM, DAXPY, DDOT, DSCAL, DSIFA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DASUM, DAXPY, DDOT, DSCAL, DSIFA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -79,7 +89,7 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DSICO
+  
   INTEGER Lda, N, Kpvt(*)
   REAL(8) :: A(Lda,*), Z(*)
   REAL(8) :: Rcond
@@ -90,7 +100,7 @@ SUBROUTINE DSICO(A,Lda,N,Kpvt,Rcond,Z)
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !
-  !***FIRST EXECUTABLE STATEMENT  DSICO
+  !* FIRST EXECUTABLE STATEMENT  DSICO
   DO j = 1, N
     Z(j) = DASUM(j,A(1,j),1)
     jm1 = j - 1

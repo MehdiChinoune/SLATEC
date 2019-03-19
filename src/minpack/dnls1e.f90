@@ -1,17 +1,24 @@
-!DECK DNLS1E
+!** DNLS1E
 SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DNLS1E
-  !***PURPOSE  An easy-to-use code which minimizes the sum of the squares
+  !>
+  !***
+  !  An easy-to-use code which minimizes the sum of the squares
   !            of M nonlinear functions in N variables by a modification
   !            of the Levenberg-Marquardt algorithm.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  K1B1A1, K1B1A2
-  !***TYPE      DOUBLE PRECISION (SNLS1E-S, DNLS1E-D)
-  !***KEYWORDS  EASY-TO-USE, LEVENBERG-MARQUARDT, NONLINEAR DATA FITTING,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  K1B1A1, K1B1A2
+  !***
+  ! **Type:**      DOUBLE PRECISION (SNLS1E-S, DNLS1E-D)
+  !***
+  ! **Keywords:**  EASY-TO-USE, LEVENBERG-MARQUARDT, NONLINEAR DATA FITTING,
   !             NONLINEAR LEAST SQUARES
-  !***AUTHOR  Hiebert, K. L., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Hiebert, K. L., (SNLA)
+  !***
+  ! **Description:**
   !
   ! 1. Purpose.
   !
@@ -280,7 +287,7 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !         the storage required by the program.  There are no internally
   !         declared storage arrays.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   ! 7. Example.
   !
@@ -477,13 +484,16 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !       RETURN
   !       END
   !
-  !***REFERENCES  Jorge J. More, The Levenberg-Marquardt algorithm:
+  !***
+  ! **References:**  Jorge J. More, The Levenberg-Marquardt algorithm:
   !                 implementation and theory.  In Numerical Analysis
   !                 Proceedings (Dundee, June 28 - July 1, 1977, G. A.
   !                 Watson, Editor), Lecture Notes in Mathematics 630,
   !                 Springer-Verlag, 1978.
-  !***ROUTINES CALLED  DNLS1, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DNLS1, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891006  Cosmetic changes to prologue.  (WRB)
@@ -491,7 +501,7 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DNLS1E
+  
   INTEGER M, N, Nprint, Info, Lwa, Iopt
   INTEGER index, Iw(*)
   REAL(8) :: Tol
@@ -501,7 +511,7 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   REAL(8) :: factor, ftol, gtol, xtol, zero, epsfcn
   SAVE factor, zero
   DATA factor, zero/1.0D2, 0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  DNLS1E
+  !* FIRST EXECUTABLE STATEMENT  DNLS1E
   Info = 0
   !
   !     CHECK THE INPUT PARAMETERS FOR ERRORS.

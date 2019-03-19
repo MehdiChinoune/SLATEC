@@ -1,13 +1,17 @@
-!DECK FULMAT
+!** FULMAT
 SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  FULMAT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (FULMAT-S, DFULMT-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (FULMAT-S, DFULMT-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     DECODES A STANDARD TWO-DIMENSIONAL FORTRAN ARRAY PASSED
   !     IN THE ARRAY DATTRV(IA,*).  THE ROW DIMENSION IA AND THE
@@ -26,19 +30,22 @@ SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !      PRGOPT(07)=1
   !     CALL SPLP(  ... FULMAT INSTEAD OF USRMAT...)
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  FULMAT
+  
   INTEGER I, Indcat, J, key, level, lp, nerr, next
   REAL Aij, zero, Dattrv(*), Prgopt(*)
   INTEGER Iflag(10)
   SAVE zero
-  !***FIRST EXECUTABLE STATEMENT  FULMAT
+  !* FIRST EXECUTABLE STATEMENT  FULMAT
   IF ( Iflag(1)==1 ) THEN
     !     INITIALIZE POINTERS TO PROCESS FULL TWO-DIMENSIONAL FORTRAN
     !     ARRAYS.

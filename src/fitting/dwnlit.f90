@@ -1,14 +1,18 @@
-!DECK DWNLIT
+!** DWNLIT
 SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DWNLIT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DWNNLS
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (WNLIT-S, DWNLIT-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to DWNNLS
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (WNLIT-S, DWNLIT-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Haskell, K. H., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     This is a companion subprogram to DWNNLS( ).
   !     The documentation for DWNNLS( ) has complete usage instructions.
@@ -19,10 +23,13 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
   !     Triangularize L1 by L1 subsystem, where L1=MIN(M,L), with
   !     col interchanges.
   !
-  !***SEE ALSO  DWNNLS
-  !***ROUTINES CALLED  DCOPY, DH12, DROTM, DROTMG, DSCAL, DSWAP, DWNLT1,
+  !***
+  ! **See also:**  DWNNLS
+  !***
+  ! **Routines called:**  DCOPY, DH12, DROTM, DROTMG, DSCAL, DSWAP, DWNLT1,
   !                    DWNLT2, DWNLT3, IDAMAX
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890618  Completely restructured and revised.  (WRB & RWC)
@@ -30,7 +37,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900604  DP version created from SP version. .  (RWC)
-  !***END PROLOGUE  DWNLIT
+  
   INTEGER Idope(*), Ipivot(*), Itype(*), L, M, Mdw, N
   REAL(8) :: Dope(*), H(*), Rnorm, Scale(*), W(Mdw,*)
   LOGICAL Done
@@ -46,7 +53,7 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
     me, mend, niv, nsoln
   LOGICAL indep, recalc
   !
-  !***FIRST EXECUTABLE STATEMENT  DWNLIT
+  !* FIRST EXECUTABLE STATEMENT  DWNLIT
   me = Idope(1)
   nsoln = Idope(2)
   l1 = Idope(3)

@@ -1,21 +1,28 @@
-!DECK DBVSUP
+!** DBVSUP
 SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Igofx,Re,Ae,Iflag,Work,Ndw,Iwork,Ndiw,Neqivp)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBVSUP
-  !***PURPOSE  Solve a linear two-point boundary value problem using
+  !>
+  !***
+  !  Solve a linear two-point boundary value problem using
   !            superposition coupled with an orthonormalization procedure
   !            and a variable-step integration scheme.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  I1B1
-  !***TYPE      DOUBLE PRECISION (BVSUP-S, DBVSUP-D)
-  !***KEYWORDS  ORTHONORMALIZATION, SHOOTING,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  I1B1
+  !***
+  ! **Type:**      DOUBLE PRECISION (BVSUP-S, DBVSUP-D)
+  !***
+  ! **Keywords:**  ORTHONORMALIZATION, SHOOTING,
   !             TWO-POINT BOUNDARY VALUE PROBLEM
-  !***AUTHOR  Scott, M. R., (SNLA)
+  !***
+  ! **Author:**  Scott, M. R., (SNLA)
   !           Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     Subroutine DBVSUP solves a linear two-point boundary-value problem
   !     of the form
@@ -27,7 +34,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !                        DU/DX = F(X,U)
   !                      U(XINITIAL) = ETA
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     ABSTRACT
   !        The method of solution uses superposition coupled with an
   !     orthonormalization procedure and a variable-step integration
@@ -38,9 +45,9 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     intermediate (orthogonalized) solutions, defined on the various
   !     subintervals, to obtain the desired solutions.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     INPUT to DBVSUP
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     NROWY = actual row dimension of Y in calling program.
   !             NROWY must be .GE. NCOMP
@@ -90,7 +97,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !
   !     AE = absolute error tolerance used by the integrator.
   !          (see one of the integrators)
-  ! **NOTE-  RE and AE should not both be zero.
+  !- *NOTE-  RE and AE should not both be zero.
   !
   !     IFLAG = a status parameter used principally for output.
   !             However, for efficient solution of problems which
@@ -118,7 +125,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !            An estimate for NDIW can be computed from the following
   !            NDIW = 68 + NCOMP * (1 + expected number of
   !                                            orthonormalizations)
-  ! **NOTE --  the amount of storage required is problem dependent and may
+  !- *NOTE --  the amount of storage required is problem dependent and may
   !            be difficult to predict in advance.  Experience has shown
   !            that for most problems 20 or fewer orthonormalizations
   !            should suffice. If the problem cannot be completed with the
@@ -129,7 +136,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !
   !     NEQIVP = number of auxiliary initial value equations being added
   !              to the boundary value problem.
-  ! **NOTE -- Occasionally the coefficients  matrix  and/or  G  may be
+  !- *NOTE -- Occasionally the coefficients  matrix  and/or  G  may be
   !           functions which depend on the independent variable  X  and
   !           on  U, the solution of an auxiliary initial value problem.
   !           In order to avoid the difficulties associated with
@@ -228,7 +235,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     flexibility in use of code.  See SAND75-0198, SAND77-1328,
   !     SAND77-1690, SAND78-0522, and SAND78-1501 for more information.
   !
-  ! ****CAUTION -- The user must zero out IWORK(1),...,IWORK(15)
+  !- ***CAUTION -- The user must zero out IWORK(1),...,IWORK(15)
   !                prior to calling DBVSUP. These locations define
   !                optional input and must be zero unless set to special
   !                values by the user as described below.
@@ -264,7 +271,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !                 ******************************************************
   !                 *** COMPLEX*16 VALUED PROBLEM ***
   !                 ******************************************************
-  ! **NOTE***
+  !- *NOTE***
   !       Suppose the original boundary value problem is NC equations
   !     of the form
   !                   DW/DX = MAT(X,U)*W(X) + H(X,U)
@@ -286,9 +293,9 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     similarly. Further details can be found in SAND78-1501.
   !
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     OUTPUT from DBVSUP
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     Y(NROWY,NXPTS) = solution at specified output points.
   !
@@ -358,16 +365,17 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     IWORK(17) = numerically estimated rank of the boundary
   !                 condition matrix defined from B*Y(XFINAL)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     Necessary machine constants are defined in the Function
   !     Routine D1MACH. The user must make sure that the values
   !     set in D1MACH are relevant to the computer being used.
   !
-  ! **********************************************************************
-  ! **********************************************************************
+  !- *********************************************************************
+  !- *********************************************************************
   !
-  !***REFERENCES  M. R. Scott and H. A. Watts, SUPORT - a computer code
+  !***
+  ! **References:**  M. R. Scott and H. A. Watts, SUPORT - a computer code
   !                 for two-point boundary-value problems via
   !                 orthonormalization, SIAM Journal of Numerical
   !                 Analysis 14, (1977), pp. 40-70.
@@ -390,9 +398,12 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !                 solution of complex*16 valued boundary problems,
   !                 Report SAND78-1501, Sandia Laboratories,
   !                 Albuquerque, New Mexico, 1978.
-  !***ROUTINES CALLED  DEXBVP, DMACON, XERMSG
-  !***COMMON BLOCKS    DML15T, DML17B, DML18J, DML5MC, DML8SZ
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DEXBVP, DMACON, XERMSG
+  !***
+  ! COMMON BLOCKS    DML15T, DML17B, DML18J, DML5MC, DML8SZ
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -403,8 +414,8 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   900510  Convert XERRWV calls to XERMSG calls, remove some extraneous
   !           comments.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DBVSUP
-  ! **********************************************************************
+  
+  !- *********************************************************************
   !
   INTEGER ICOco, Iflag, Igofx, IGOfxd, INDpvt, INFo, INHomo, INTeg, &
     is, ISTkop, IVP, Iwork(*), j, k, K1, K10, K11, K2, K3, &
@@ -457,7 +468,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !      *****************************************************************
   !          SET UP MACHINE DEPENDENT CONSTANTS.
   !
-  !***FIRST EXECUTABLE STATEMENT  DBVSUP
+  !* FIRST EXECUTABLE STATEMENT  DBVSUP
   CALL DMACON
   !
   !                       ************************************************

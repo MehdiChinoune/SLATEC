@@ -1,17 +1,24 @@
-!DECK DCOV
+!** DCOV
 SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCOV
-  !***PURPOSE  Calculate the covariance matrix for a nonlinear data
+  !>
+  !***
+  !  Calculate the covariance matrix for a nonlinear data
   !            fitting problem.  It is intended to be used after a
   !            successful return from either DNLS1 or DNLS1E.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  K1B1
-  !***TYPE      DOUBLE PRECISION (SCOV-S, DCOV-D)
-  !***KEYWORDS  COVARIANCE MATRIX, NONLINEAR DATA FITTING,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  K1B1
+  !***
+  ! **Type:**      DOUBLE PRECISION (SCOV-S, DCOV-D)
+  !***
+  ! **Keywords:**  COVARIANCE MATRIX, NONLINEAR DATA FITTING,
   !             NONLINEAR LEAST SQUARES
-  !***AUTHOR  Hiebert, K. L., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Hiebert, K. L., (SNLA)
+  !***
+  ! **Description:**
   !
   !  1. Purpose.
   !
@@ -137,9 +144,12 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !
   !     WA4 is a work array of length M.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DENORM, DFDJC3, DQRFAC, DWUPDT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DENORM, DFDJC3, DQRFAC, DWUPDT, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810522  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891006  Cosmetic changes to prologue.  (WRB)
@@ -147,7 +157,7 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Fixed an error message.  (RWC)
-  !***END PROLOGUE  DCOV
+  
   !
   !     REVISED 850601-1100
   !     REVISED YYMMDD HHMM
@@ -161,7 +171,7 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   LOGICAL sing
   SAVE zero, one
   DATA zero/0.D0/, one/1.D0/
-  !***FIRST EXECUTABLE STATEMENT  DCOV
+  !* FIRST EXECUTABLE STATEMENT  DCOV
   sing = .FALSE.
   iflag = 0
   IF ( M>0.AND.N>0 ) THEN

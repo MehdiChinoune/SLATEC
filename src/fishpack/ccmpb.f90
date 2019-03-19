@@ -1,28 +1,36 @@
-!DECK CCMPB
+!** CCMPB
 SUBROUTINE CCMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CCMPB
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBLKTR
-  !***LIBRARY   SLATEC
-  !***TYPE      COMPLEX (COMPB-S, CCMPB-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBLKTR
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      COMPLEX (COMPB-S, CCMPB-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     CCMPB computes the roots of the B polynomials using subroutine
   !     TEVLC which is a modification the EISPACK program TQLRAT.
   !     IERROR is set to 4 if either TEVLC fails or if A(J+1)*C(J) is
   !     less than zero for some J.  AH,BH are temporary work arrays.
   !
-  !***SEE ALSO  CBLKTR
-  !***ROUTINES CALLED  CPADD, INXCB, R1MACH, TEVLC
-  !***COMMON BLOCKS    CCBLK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBLKTR
+  !***
+  ! **Routines called:**  CPADD, INXCB, R1MACH, TEVLC
+  !***
+  ! COMMON BLOCKS    CCBLK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  CCMPB
+  
   REAL Ah, An, arg, B, Bh, Bn, bnorm, Cn, CNV, d1, d2, d3, EPS, R1MACH
   INTEGER i, i2, i4, ib, Ierror, if, ifd, IK, ipl, ir, j, j1, &
     j2, jf, js, K, kdo, l, l1, l2
@@ -30,7 +38,7 @@ SUBROUTINE CCMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
   COMPLEX :: Bc
   DIMENSION An(*), Bn(*), Cn(*), B(*), Ah(*), Bh(*), Bc(500)
   COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
-  !***FIRST EXECUTABLE STATEMENT  CCMPB
+  !* FIRST EXECUTABLE STATEMENT  CCMPB
   EPS = R1MACH(4)
   bnorm = ABS(Bn(1))
   DO j = 2, NM

@@ -2,15 +2,20 @@ MODULE TEST08_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK DQCKIN
+  !** DQCKIN
   SUBROUTINE DQCKIN(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DQCKIN
-    !***PURPOSE  Quick check for DBSKIN.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Amos, D. E., (SNLA)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for DBSKIN.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Amos, D. E., (SNLA)
+    !***
+    ! **Description:**
     !
     !     ABSTRACT     * A DOUBLE PRECISION ROUTINE *
     !     DQCKIN IS A QUICK CHECK ROUTINE WHICH EXERCISES THE MAJOR
@@ -31,13 +36,15 @@ CONTAINS
     !     DQCKIN OR DBSKIN CAN BE EXECUTED.  FIFTEEN MACHINE ENVIRONMENTS
     !     CAN BE DEFINED IN I1MACH AND D1MACH.
     !
-    !***ROUTINES CALLED  D1MACH, DBSKIN, I1MACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH, DBSKIN, I1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   820601  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DQCKIN
+    
     INTEGER Ipass, Kprint, nz
     INTEGER i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, &
       mm, n, ndel, nn
@@ -45,7 +52,7 @@ CONTAINS
     REAL(8) :: aix, er, tol, v, x, xinc, y
     REAL(8) :: D1MACH
     DIMENSION v(1), y(10)
-    !***FIRST EXECUTABLE STATEMENT  DQCKIN
+    !* FIRST EXECUTABLE STATEMENT  DQCKIN
     tol = 1000.0D0*MAX(D1MACH(4),1.0D-18)
     iflg = 0
     IF ( Kprint>=3 ) WRITE (Lun,99001)
@@ -125,15 +132,20 @@ CONTAINS
     Ipass = 0
     IF ( iflg==0 ) Ipass = 1
   END SUBROUTINE DQCKIN
-  !DECK DQCPSI
+  !** DQCPSI
   SUBROUTINE DQCPSI(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DQCPSI
-    !***PURPOSE  Quick check for DPSIFN.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Amos, D. E., (SNLA)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for DPSIFN.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Amos, D. E., (SNLA)
+    !***
+    ! **Description:**
     !
     !     ABSTRACT  * A DOUBLE PRECISION ROUTINE *
     !     DQCPSI IS A QUICK CHECK ROUTINE WHICH EXERCISES THE MAJOR
@@ -153,20 +165,22 @@ CONTAINS
     !     PROLOGUE IN EACH FUNCTION FOR THE MACHINE ENVIRONMENT BEFORE
     !     DQCPSI OR DPSIFN CAN BE EXECUTED.
     !
-    !***ROUTINES CALLED  D1MACH, DPSIFN
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH, DPSIFN
+
+    !* REVISION HISTORY  (YYMMDD)
     !   820601  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DQCPSI
+    
     INTEGER Ipass, Kprint
     INTEGER i, ierr, iflg, ix, kode, Lun, m, n, nm, nn, nz
     REAL(8) :: er, euler, psi1, psi2, r1m4, s, tol, x
     REAL(8) :: D1MACH
     DIMENSION psi1(3), psi2(20)
     DATA euler/0.5772156649015328606D0/
-    !***FIRST EXECUTABLE STATEMENT  DQCPSI
+    !* FIRST EXECUTABLE STATEMENT  DQCPSI
     r1m4 = D1MACH(4)
     tol = 1000.0D0*MAX(r1m4,1.0D-18)
     IF ( Kprint>=3 ) WRITE (Lun,99001)
@@ -259,24 +273,31 @@ CONTAINS
     99005 FORMAT (4E15.6,2I5)
   END SUBROUTINE DQCPSI
 END MODULE TEST08_MOD
-!DECK TEST08
+!** TEST08
 PROGRAM TEST08
   USE TEST08_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST08
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C
-  !***TYPE      DOUBLE PRECISION (TEST07-S, TEST08-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C
+  !***
+  ! **Type:**      DOUBLE PRECISION (TEST07-S, TEST08-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -288,23 +309,26 @@ PROGRAM TEST08
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        DBSKIN   DPSIFN
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  DQCKIN, DQCPSI, I1MACH, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DQCKIN, DQCPSI, I1MACH, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST08
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST08
+  !* FIRST EXECUTABLE STATEMENT  TEST08
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

@@ -2,24 +2,31 @@ MODULE TEST53_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK DCMPAR
+  !** DCMPAR
   SUBROUTINE DCMPAR(Icnt,Itest)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DCMPAR
-    !***PURPOSE  Compare values in COMMON block DCHECK for quick check
+    !>
+    !***
+    !  Compare values in COMMON block DCHECK for quick check
     !            routine DPFITT.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (CMPARE-S, DCMPAR-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***COMMON BLOCKS    DCHECK
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CMPARE-S, DCMPAR-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+    !***
+    ! COMMON BLOCKS    DCHECK
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890921  Realigned order of variables in the COMMON block.
     !           (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920214  Minor improvements to code for readability.  (WRB)
-    !***END PROLOGUE  DCMPAR
+    
     !     .. Scalar Arguments ..
     INTEGER Icnt
     !     .. Array Arguments ..
@@ -38,7 +45,7 @@ CONTAINS
     INTRINSIC ABS
     !     .. Common blocks ..
     COMMON /DCHECK/ EPS, R, RP, SVEps, TOL, NORdp, NORd, IERp, IERr
-    !***FIRST EXECUTABLE STATEMENT  DCMPAR
+    !* FIRST EXECUTABLE STATEMENT  DCMPAR
     Icnt = Icnt + 1
     itemp(1) = 0
     itemp(2) = 0
@@ -59,18 +66,25 @@ CONTAINS
     !
     Itest(Icnt) = itemp(1)*itemp(2)*itemp(3)*itemp(4)
   END SUBROUTINE DCMPAR
-  !DECK DPFITT
+  !** DPFITT
   SUBROUTINE DPFITT(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DPFITT
-    !***PURPOSE  Quick check for DPOLFT, DPCOEF and DP1VLU.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (PFITQX-S, DPFITT-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  D1MACH, DCMPAR, DP1VLU, DPCOEF, DPOLFT, PASS,
+    !>
+    !***
+    !  Quick check for DPOLFT, DPCOEF and DP1VLU.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (PFITQX-S, DPFITT-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DCMPAR, DP1VLU, DPCOEF, DPOLFT, PASS,
     !                    XERCLR, XGETF, XSETF
-    !***COMMON BLOCKS    DCHECK
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! COMMON BLOCKS    DCHECK
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890921  Realigned order of variables in the COMMON block.
@@ -84,7 +98,7 @@ CONTAINS
     !   900911  Test problem changed and cosmetic changes to code.  (WRB)
     !   920214  Code restructured to test for all values of KPRINT and to
     !           provide more PASS/FAIL information.  (WRB)
-    !***END PROLOGUE  DPFITT
+    
     INTEGER kontrl
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
@@ -108,7 +122,7 @@ CONTAINS
     INTRINSIC ABS, SQRT
     !     .. Common blocks ..
     COMMON /DCHECK/ EPS, R, RP, SVEps, TOL, NORdp, NORd, IERp, IERr
-    !***FIRST EXECUTABLE STATEMENT  DPFITT
+    !* FIRST EXECUTABLE STATEMENT  DPFITT
     IF ( Kprint>=2 ) WRITE (Lun,FMT=99002)
     !
     !     Initialize variables for testing passage or failure of tests
@@ -444,30 +458,38 @@ CONTAINS
     99019 FORMAT (/' ***************DPOLFT PASSED ALL TESTS***************')
     99020 FORMAT (/' ***************DPOLFT FAILED SOME TESTS**************')
   END SUBROUTINE DPFITT
-  !DECK DNLS1Q
+  !** DNLS1Q
   SUBROUTINE DNLS1Q(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DNLS1Q
-    !***PURPOSE  Quick check for DNLS1E, DNLS1 and DCOV.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (SNLS1Q-S, DNLS1Q-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for DNLS1E, DNLS1 and DCOV.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (SNLS1Q-S, DNLS1Q-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !   This subroutine performs a quick check on the subroutines DNLS1E
     !   (and DNLS1) and DCOV.
     !
-    !***ROUTINES CALLED  DENORM, DFCN1, DFCN2, DFCN3, DFDJC3, PASS, D1MACH,
+    !***
+    ! **Routines called:**  DENORM, DFCN1, DFCN2, DFCN3, DFDJC3, PASS, D1MACH,
     !                    DCOV, DNLS1E
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    !***END PROLOGUE  DNLS1Q
+    
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -488,7 +510,7 @@ CONTAINS
     EXTERNAL DFDJC3, PASS, DCOV, DNLS1E, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
-    !***FIRST EXECUTABLE STATEMENT  DNLS1Q
+    !* FIRST EXECUTABLE STATEMENT  DNLS1Q
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1'/' Test DNLS1E, DNLS1 and DCOV')
@@ -728,16 +750,22 @@ CONTAINS
       I5/' RETURNED PRODUCT OF (J-TRANS*J)*COVARIANCE MATRIX/SIGMA'/&
       ' (SHOULD = THE IDENTITY -- 1.0, 0.0, 1.0)'/3D20.9/)
   END SUBROUTINE DNLS1Q
-  !DECK DFCQX
+  !** DFCQX
   SUBROUTINE DFCQX(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DFCQX
-    !***PURPOSE  Quick check for DFC.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (FCQX-S, DFCQX-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Hanson, R. J., (SNLA)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for DFC.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (FCQX-S, DFCQX-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Hanson, R. J., (SNLA)
+    !***
+    ! **Description:**
     !
     !   Quick check subprogram for the subroutine DFC.
     !
@@ -755,9 +783,11 @@ CONTAINS
     !   The dimensions in the following arrays are as small as possible for
     !   the problem being solved.
     !
-    !***ROUTINES CALLED  D1MACH, DBVALU, DCOPY, DCV, DFC, DMOUT, DVOUT,
+    !***
+    ! **Routines called:**  D1MACH, DBVALU, DCOPY, DCV, DFC, DMOUT, DVOUT,
     !                    IVOUT
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   780801  DATE WRITTEN
     !   890718  Changed references from DBVLUE to DBVALU.  (WRB)
     !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -769,7 +799,7 @@ CONTAINS
     !           FORMATs.  (RWC)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    !***END PROLOGUE  DFCQX
+    
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -840,7 +870,7 @@ CONTAINS
     DATA check(46), check(47), check(48), check(49), check(50), check(51)&
       /9.894902905D-01, 9.926011645D-01, 9.954598055D-01, &
       9.978139804D-01, 9.994114563D-01, 1.000000000D+00/
-    !***FIRST EXECUTABLE STATEMENT  DFCQX
+    !* FIRST EXECUTABLE STATEMENT  DFCQX
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1'/' Test DFC')
@@ -1081,30 +1111,38 @@ CONTAINS
     99011 FORMAT (/' ***************DFC FAILED SOME TESTS*****************')
     RETURN
   END SUBROUTINE DFCQX
-  !DECK DFCN1
+  !** DFCN1
   SUBROUTINE DFCN1(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DFCN1
-    !***PURPOSE  Subsidiary to DNLS1Q.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (FCN1-S, DFCN1-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Subsidiary to DNLS1Q.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (FCN1-S, DFCN1-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !   Subroutine which evaluates the function for test program
     !   used in quick check of DNLS1E.
     !
     !   Numerical approximation of Jacobian is used.
     !
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  TYPE and declarations sections added.  (WRB)
-    !***END PROLOGUE  DFCN1
+    
     !     .. Scalar Arguments ..
     REAL(8) :: Fjac
     INTEGER Iflag, Ldfjac, M, N
@@ -1117,36 +1155,44 @@ CONTAINS
     INTRINSIC EXP
     !     .. Data statements ..
     DATA two/2.0D0/
-    !***FIRST EXECUTABLE STATEMENT  DFCN1
+    !* FIRST EXECUTABLE STATEMENT  DFCN1
     IF ( Iflag/=1 ) RETURN
     DO i = 1, M
       temp = i
       Fvec(i) = two + two*temp - EXP(temp*X(1)) - EXP(temp*X(2))
     ENDDO
   END SUBROUTINE DFCN1
-  !DECK DFCN2
+  !** DFCN2
   SUBROUTINE DFCN2(Iflag,M,N,X,Fvec,Fjac,Ldfjac)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DFCN2
-    !***PURPOSE  Subsidiary to DNLS1Q.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (FCN2-S, DFCN2-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Subsidiary to DNLS1Q.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (FCN2-S, DFCN2-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !   Subroutine to evaluate function and full Jacobian for test
     !   problem in quick check of DNLS1E.
     !
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  TYPE and declarations sections added and code polished.
     !           (WRB)
-    !***END PROLOGUE  DFCN2
+    
     !     .. Scalar Arguments ..
     INTEGER Iflag, Ldfjac, M, N
     !     .. Array Arguments ..
@@ -1158,7 +1204,7 @@ CONTAINS
     INTRINSIC EXP
     !     .. Data statements ..
     DATA two/2.0D0/
-    !***FIRST EXECUTABLE STATEMENT  DFCN2
+    !* FIRST EXECUTABLE STATEMENT  DFCN2
     IF ( Iflag==0 ) RETURN
     !
     !     Should we evaluate function or Jacobian?
@@ -1183,29 +1229,37 @@ CONTAINS
       ENDDO
     ENDIF
   END SUBROUTINE DFCN2
-  !DECK DFCN3
+  !** DFCN3
   SUBROUTINE DFCN3(Iflag,M,N,X,Fvec,Fjrow,Nrow)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DFCN3
-    !***PURPOSE  Subsidiary to DNLS1Q.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (FCN3-S, DFCN3-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Subsidiary to DNLS1Q.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (FCN3-S, DFCN3-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !   Subroutine to evaluate the Jacobian, one row at a time, for
     !   test problem used in quick check of DNLS1E.
     !
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  TYPE and declarations sections added and code polished.
     !           (WRB)
-    !***END PROLOGUE  DFCN3
+    
     !     .. Scalar Arguments ..
     INTEGER Iflag, M, N, Nrow
     !     .. Array Arguments ..
@@ -1217,7 +1271,7 @@ CONTAINS
     INTRINSIC EXP
     !     .. Data statements ..
     DATA two/2.0D0/
-    !***FIRST EXECUTABLE STATEMENT  DFCN3
+    !* FIRST EXECUTABLE STATEMENT  DFCN3
     IF ( Iflag==0 ) RETURN
     !
     !     Should we evaluate functions or Jacobian?
@@ -1241,24 +1295,31 @@ CONTAINS
     ENDIF
   END SUBROUTINE DFCN3
 END MODULE TEST53_MOD
-!DECK TEST53
+!** TEST53
 PROGRAM TEST53
   USE TEST53_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST53
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  K1, E3, K6, L
-  !***TYPE      DOUBLE PRECISION (TEST52-S, TEST53-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  K1, E3, K6, L
+  !***
+  ! **Type:**      DOUBLE PRECISION (TEST52-S, TEST53-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -1270,26 +1331,29 @@ PROGRAM TEST53
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        DNLS1E   DNLS1    DCOV
   !        DBVALU   DCV      DFC
   !        DPOLFT   DPCOEF   DP1VLU
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  DFCQX, DNLS1Q, DPFITT, I1MACH, XERMAX, XSETF,
+  !***
+  ! **Routines called:**  DFCQX, DNLS1Q, DPFITT, I1MACH, XERMAX, XSETF,
   !                    XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST53
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST53
+  !* FIRST EXECUTABLE STATEMENT  TEST53
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

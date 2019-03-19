@@ -1,16 +1,23 @@
-!DECK HTRIBK
+!** HTRIBK
 SUBROUTINE HTRIBK(Nm,N,Ar,Ai,Tau,M,Zr,Zi)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HTRIBK
-  !***PURPOSE  Form the eigenvectors of a complex Hermitian matrix from
+  !>
+  !***
+  !  Form the eigenvectors of a complex Hermitian matrix from
   !            the eigenvectors of a real symmetric tridiagonal matrix
   !            output from HTRIDI.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C4
-  !***TYPE      SINGLE PRECISION (HTRIBK-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C4
+  !***
+  ! **Type:**      SINGLE PRECISION (HTRIBK-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of a complex analogue of
   !     the ALGOL procedure TRBAK1, NUM. MATH. 11, 181-195(1968)
@@ -61,24 +68,27 @@ SUBROUTINE HTRIBK(Nm,N,Ar,Ai,Tau,M,Zr,Zi)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  HTRIBK
+  
   !
   INTEGER i, j, k, l, M, N, Nm
   REAL Ar(Nm,*), Ai(Nm,*), Tau(2,*), Zr(Nm,*), Zi(Nm,*)
   REAL h, s, si
   !
-  !***FIRST EXECUTABLE STATEMENT  HTRIBK
+  !* FIRST EXECUTABLE STATEMENT  HTRIBK
   IF ( M/=0 ) THEN
     !     .......... TRANSFORM THE EIGENVECTORS OF THE REAL SYMMETRIC
     !                TRIDIAGONAL MATRIX TO THOSE OF THE HERMITIAN

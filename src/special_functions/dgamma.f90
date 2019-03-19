@@ -1,14 +1,21 @@
-!DECK DGAMMA
+!** DGAMMA
 REAL(8) FUNCTION DGAMMA(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGAMMA
-  !***PURPOSE  Compute the complete Gamma function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7A
-  !***TYPE      DOUBLE PRECISION (GAMMA-S, DGAMMA-D, CGAMMA-C)
-  !***KEYWORDS  COMPLETE GAMMA FUNCTION, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the complete Gamma function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7A
+  !***
+  ! **Type:**      DOUBLE PRECISION (GAMMA-S, DGAMMA-D, CGAMMA-C)
+  !***
+  ! **Keywords:**  COMPLETE GAMMA FUNCTION, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DGAMMA(X) calculates the double precision complete Gamma function
   ! for double precision argument X.
@@ -19,9 +26,12 @@ REAL(8) FUNCTION DGAMMA(X)
   !                               significant figures required  30.00
   !                                    decimal places required  32.05
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, D9LGMC, DCSEVL, DGAMLM, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, D9LGMC, DCSEVL, DGAMLM, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -29,7 +39,7 @@ REAL(8) FUNCTION DGAMMA(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable name.  (RWC, WRB)
-  !***END PROLOGUE  DGAMMA
+  
   INTEGER i, INITDS, n, ngam
   REAL(8) :: X, gamcs(42), dxrel, pi, sinpiy, sq2pil, xmax, &
     xmin, y, D9LGMC, DCSEVL, D1MACH
@@ -81,7 +91,7 @@ REAL(8) FUNCTION DGAMMA(X)
   DATA pi/3.14159265358979323846264338327950D0/
   DATA sq2pil/0.91893853320467274178032973640562D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DGAMMA
+  !* FIRST EXECUTABLE STATEMENT  DGAMMA
   IF ( first ) THEN
     ngam = INITDS(gamcs,42,0.1*REAL(D1MACH(3)))
     !

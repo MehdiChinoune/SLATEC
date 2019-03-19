@@ -1,13 +1,17 @@
-!DECK DEFE4
+!** DEFE4
 SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DEFE4
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SEPX4
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (DEFE4-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SEPX4
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (DEFE4-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This subroutine first approximates the truncation error given by
   !     TRUN1(X,Y)=DLX**2*TX+DLY**2*TY where
@@ -24,15 +28,19 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
   !     and then transferred to USOL to be used as a new right
   !     hand side when calling BLKTRI for a fourth order solution.
   !
-  !***SEE ALSO  SEPX4
-  !***ROUTINES CALLED  DX4, DY4
-  !***COMMON BLOCKS    SPL4
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SEPX4
+  !***
+  ! **Routines called:**  DX4, DY4
+  !***
+  ! COMMON BLOCKS    SPL4
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DEFE4
+  
   REAL ai, AIT, bi, BIT, ci, CIT, DIT, DLX, DLX4, DLY, DLY4, &
     Grhs, TDLx3, TDLy3, tx, ty, Usol, uxxx, uxxxx, uyyy
   REAL uyyyy, xi
@@ -41,7 +49,7 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
     IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
   EXTERNAL COFX
-  !***FIRST EXECUTABLE STATEMENT  DEFE4
+  !* FIRST EXECUTABLE STATEMENT  DEFE4
   DO i = IS, MS
     xi = AIT + (i-1)*DLX
     CALL COFX(xi,ai,bi,ci)

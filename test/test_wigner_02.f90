@@ -2,29 +2,37 @@ MODULE TEST16_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK DQC36J
+  !** DQC36J
   SUBROUTINE DQC36J(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DQC36J
-    !***SUBSIDIARY
-    !***PURPOSE  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES DRC3JJ,
+    !>
+    !***
+    !  THIS IS A QUICK CHECK PROGRAM FOR THE SUBROUTINES DRC3JJ,
     !            DRC3JM, AND DRC6J, WHICH CALCULATE THE WIGNER COEFFICIENTS,
     !            3J AND 6J.
-    !***LIBRARY   SLATEC
-    !***CATEGORY  C19
-    !***TYPE      DOUBLE PRECISION (QC36J-S, DQC36J-D)
-    !***KEYWORDS  3J COEFFICIENTS, 3J SYMBOLS, 6J COEFFICIENTS, 6J SYMBOLS,
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Category:**  C19
+    !***
+    ! **Type:**      DOUBLE PRECISION (QC36J-S, DQC36J-D)
+    !***
+    ! **Keywords:**  3J COEFFICIENTS, 3J SYMBOLS, 6J COEFFICIENTS, 6J SYMBOLS,
     !             CLEBSCH-GORDAN COEFFICIENTS, QUICK CHECK,
     !             RACAH COEFFICIENTS, VECTOR ADDITION COEFFICIENTS,
     !             WIGNER COEFFICIENTS
-    !***AUTHOR  LOZIER, DANIEL W., (NIST)
+    !***
+    ! **Author:**  LOZIER, DANIEL W., (NIST)
     !           MCCLAIN, MARJORIE A., (NIST)
     !           SMITH, JOHN M., (NIST AND GEORGE MASON UNIVERSITY)
-    !***REFERENCES  MESSIAH, ALBERT., QUANTUM MECHANICS, VOLUME II,
+    !***
+    ! **References:**  MESSIAH, ALBERT., QUANTUM MECHANICS, VOLUME II,
     !               NORTH-HOLLAND PUBLISHING COMPANY, 1963.
-    !***ROUTINES CALLED  D1MACH, DRC3JJ, DRC3JM, DRC6J, NUMXER, XERCLR,
+    !***
+    ! **Routines called:**  D1MACH, DRC3JJ, DRC3JM, DRC6J, NUMXER, XERCLR,
     !                     XSETF
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   891129  DATE WRITTEN
     !   910415  Mixed type expressions eliminated; precision of output
     !           formats made uniform for all tests; detail added to output
@@ -36,7 +44,7 @@ CONTAINS
     !           and 4 with values stored in data statements.  This involved
     !           removing all calls to subroutine DRACAH.  These changes were
     !           made by M. McClain.
-    !***END PROLOGUE  DQC36J
+    
     !
     INTEGER Lun, Kprint, Ipass
     !
@@ -89,7 +97,7 @@ CONTAINS
       1.4839905612217133028540464232557124565509D-2, &
       2.7085776806331855972407001825016114677027D-3/
     !
-    !***FIRST EXECUTABLE STATEMENT  DQC36J
+    !* FIRST EXECUTABLE STATEMENT  DQC36J
     !
     ! --- INITIALIZATION OF TESTS
     tol = 100.0D0*D1MACH(3)
@@ -494,28 +502,35 @@ CONTAINS
     !
   END SUBROUTINE DQC36J
 END MODULE TEST16_MOD
-!DECK TEST16
+!** TEST16
 PROGRAM TEST16
   USE TEST16_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST16
-  !***PURPOSE  Driver for testing SLATEC subprograms
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
   !            DRC3JJ   DRC3JM   DRC6J
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C19
-  !***TYPE      DOUBLE PRECISION (TEST15-S, TEST16-D)
-  !***KEYWORDS  3J COEFFICIENTS, 3J SYMBOLS, 6J COEFFICIENTS, 6J SYMBOLS,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C19
+  !***
+  ! **Type:**      DOUBLE PRECISION (TEST15-S, TEST16-D)
+  !***
+  ! **Keywords:**  3J COEFFICIENTS, 3J SYMBOLS, 6J COEFFICIENTS, 6J SYMBOLS,
   !             CLEBSCH-GORDAN COEFFICIENTS, QUICK CHECK DRIVER,
   !             RACAH COEFFICIENTS, VECTOR ADDITION COEFFICIENTS,
   !             WIGNER COEFFICIENTS
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -527,20 +542,23 @@ PROGRAM TEST16
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        DRC3JJ   DRC3JM   DRC6J
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  DQC36J, I1MACH, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DQC36J, I1MACH, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   891130  DATE WRITTEN
-  !***END PROLOGUE  TEST16
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST16
+  !* FIRST EXECUTABLE STATEMENT  TEST16
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

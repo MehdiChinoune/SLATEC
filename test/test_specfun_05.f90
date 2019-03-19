@@ -2,23 +2,31 @@ MODULE TEST06_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK DBIKCK
+  !** DBIKCK
   SUBROUTINE DBIKCK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DBIKCK
-    !***PURPOSE  Quick check for DBESI and DBESK.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (BIKCK-S, DBIKCK-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Amos, D. E., (SNLA)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for DBESI and DBESK.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (BIKCK-S, DBIKCK-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Amos, D. E., (SNLA)
+    !***
+    ! **Description:**
     !
     !   DBIKCK is a quick check routine for DBESI and DBESK.  The main loops
     !   evaluate the Wronskian and test the error.  Underflow and overflow
     !   diagnostics are checked in addition to illegal arguments.
     !
-    !***ROUTINES CALLED  D1MACH, DBESI, DBESK, NUMXER, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH, DBESI, DBESK, NUMXER, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   750101  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891004  Removed unreachable code.  (WRB)
@@ -32,14 +40,14 @@ CONTAINS
     !   910801  Editorial changes, some restructing and modifications to
     !           obtain more information when there is failure of the
     !           Wronskian.  (WRB)
-    !***END PROLOGUE  DBIKCK
+    
     INTEGER Kprint, NUMXER
     INTEGER i, Ipass, ix, k, kode, kontrl, Lun, m, n, nerr, nu, nw, ny
     REAL(8) :: alp, del, er, fnu, fnup, rx, tol, x
     REAL(8) :: fn(3), w(5), xx(5), y(5)
     REAL(8) :: D1MACH
     LOGICAL fatal
-    !***FIRST EXECUTABLE STATEMENT  DBIKCK
+    !* FIRST EXECUTABLE STATEMENT  DBIKCK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT (/' QUICK CHECKS FOR DBESI AND DBESK'//)
     !
@@ -265,23 +273,31 @@ CONTAINS
     99011 FORMAT (/' *********DBESI OR DBESK FAILED SOME TESTS***********')
     RETURN
   END SUBROUTINE DBIKCK
-  !DECK DBJYCK
+  !** DBJYCK
   SUBROUTINE DBJYCK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DBJYCK
-    !***PURPOSE  Quick check for DBESJ and DBESY.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (BJYCK-S, DBJYCK-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Amos, D. E., (SNLA)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for DBESJ and DBESY.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (BJYCK-S, DBJYCK-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Amos, D. E., (SNLA)
+    !***
+    ! **Description:**
     !
     !   DBJYCK is a quick check routine for DBESJ and DBESY.  The main loops
     !   evaluate the Wronskian and test the error.  Underflow and overflow
     !   diagnostics are checked in addition to illegal arguments.
     !
-    !***ROUTINES CALLED  D1MACH, DBESJ, DBESY, NUMXER, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH, DBESJ, DBESY, NUMXER, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   750101  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891004  Removed unreachable code.  (WRB)
@@ -295,14 +311,14 @@ CONTAINS
     !   910801  Editorial changes, some restructing and modifications to
     !           obtain more information when there is failure of the
     !           Wronskian.  (WRB)
-    !***END PROLOGUE  DBJYCK
+    
     INTEGER Kprint, NUMXER
     INTEGER i, Ipass, ix, k, kontrl, Lun, m, n, nerr, nu, ny
     REAL(8) :: alp, del, er, fnu, fnup, rhpi, rx, tol, x
     REAL(8) :: fn(3), w(5), xx(5), y(5)
     REAL(8) :: D1MACH
     LOGICAL fatal
-    !***FIRST EXECUTABLE STATEMENT  DBJYCK
+    !* FIRST EXECUTABLE STATEMENT  DBJYCK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT (/' QUICK CHECKS FOR DBESJ AND DBESY'//)
     !
@@ -494,23 +510,32 @@ CONTAINS
     99010 FORMAT (/' *********DBESJ OR DBESY FAILED SOME TESTS*********')
     RETURN
   END SUBROUTINE DBJYCK
-  !DECK DEG8CK
+  !** DEG8CK
   SUBROUTINE DEG8CK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DEG8CK
-    !***PURPOSE  Quick check for DEXINT and DGAUS8.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (EG8CK-S, DEG8CK-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Amos, D. E., (SNLA)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for DEXINT and DGAUS8.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (EG8CK-S, DEG8CK-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Amos, D. E., (SNLA)
+    !***
+    ! **Description:**
     !
     !   DEG8CK is a quick check routine for DEXINT and DGAUS8.  Exponential
     !   integrals from DEXINT are checked against quadratures from DGAUS8.
     !
-    !***ROUTINES CALLED  D1MACH, DEXINT, DFEIN, DGAUS8
-    !***COMMON BLOCKS    DFEINX
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH, DEXINT, DFEIN, DGAUS8
+    !***
+    ! COMMON BLOCKS    DFEINX
+
+    !* REVISION HISTORY  (YYMMDD)
     !   800501  DATE WRITTEN
     !   890718  Added check when testing error conditions.  (WRB)
     !   890718  REVISION DATE from Version 3.2
@@ -518,7 +543,7 @@ CONTAINS
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
     !   920206  Corrected argument list in CALL to DEXINT.  (WRB)
-    !***END PROLOGUE  DEG8CK
+    
     INTEGER Kprint
     COMMON /DFEINX/ X, A, FKM
     INTEGER i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
@@ -528,7 +553,7 @@ CONTAINS
     REAL(8) :: D1MACH
     DIMENSION en(4), y(4), xx(5)
     LOGICAL fatal
-    !***FIRST EXECUTABLE STATEMENT  DEG8CK
+    !* FIRST EXECUTABLE STATEMENT  DEG8CK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1'/' QUICK CHECK FOR DEXINT AND DGAUS8'/)
@@ -673,44 +698,57 @@ CONTAINS
     99009 FORMAT (/' *********DEXINT OR DGAUS8 FAILED SOME TESTS*********')
     RETURN
   END SUBROUTINE DEG8CK
-  !DECK DFEIN
+  !** DFEIN
   REAL(8) FUNCTION DFEIN(T)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DFEIN
-    !***PURPOSE  Subsidiary to DEG8CK.
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***COMMON BLOCKS    DFEINX
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to DEG8CK.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+    !***
+    ! COMMON BLOCKS    DFEINX
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DFEIN
+    
     COMMON /DFEINX/ X, A, FKM
     REAL(8) :: X, A, FKM, T, aln
-    !***FIRST EXECUTABLE STATEMENT  DFEIN
+    !* FIRST EXECUTABLE STATEMENT  DFEIN
     aln = (FKM-T)*X - A*LOG(T)
     DFEIN = EXP(aln)
   END FUNCTION DFEIN
 END MODULE TEST06_MOD
-!DECK TEST06
+!** TEST06
 PROGRAM TEST06
   USE TEST06_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST06
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C
-  !***TYPE      DOUBLE PRECISION (TEST05-S, TEST06-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C
+  !***
+  ! **Type:**      DOUBLE PRECISION (TEST05-S, TEST06-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -722,26 +760,29 @@ PROGRAM TEST06
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        DEXINT   DGAUS8
   !        DBESI    DBESK
   !        DBESJ    DBESY
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  DBIKCK, DBJYCK, DEG8CK, I1MACH, XERMAX, XSETF,
+  !***
+  ! **Routines called:**  DBIKCK, DBJYCK, DEG8CK, I1MACH, XERMAX, XSETF,
   !                    XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST06
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST06
+  !* FIRST EXECUTABLE STATEMENT  TEST06
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

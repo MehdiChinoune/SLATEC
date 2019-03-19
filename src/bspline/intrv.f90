@@ -1,16 +1,23 @@
-!DECK INTRV
+!** INTRV
 SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  INTRV
-  !***PURPOSE  Compute the largest integer ILEFT in 1 .LE. ILEFT .LE. LXT
+  !>
+  !***
+  !  Compute the largest integer ILEFT in 1 .LE. ILEFT .LE. LXT
   !            such that XT(ILEFT) .LE. X where XT(*) is a subdivision
   !            of the X interval.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E3, K6
-  !***TYPE      SINGLE PRECISION (INTRV-S, DINTRV-D)
-  !***KEYWORDS  B-SPLINE, DATA FITTING, INTERPOLATION, SPLINES
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E3, K6
+  !***
+  ! **Type:**      SINGLE PRECISION (INTRV-S, DINTRV-D)
+  !***
+  ! **Keywords:**  B-SPLINE, DATA FITTING, INTERPOLATION, SPLINES
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Written by Carl de Boor and modified by D. E. Amos
   !
@@ -48,22 +55,25 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   !     Error Conditions
   !         None
   !
-  !***REFERENCES  Carl de Boor, Package for calculating with B-splines,
+  !***
+  ! **References:**  Carl de Boor, Package for calculating with B-splines,
   !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
   !                 pp. 441-472.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  INTRV
+  
   !
   INTEGER ihi, Ileft, Ilo, istep, Lxt, Mflag, middle
   REAL X, Xt
   DIMENSION Xt(*)
-  !***FIRST EXECUTABLE STATEMENT  INTRV
+  !* FIRST EXECUTABLE STATEMENT  INTRV
   ihi = Ilo + 1
   IF ( ihi>=Lxt ) THEN
     IF ( X>=Xt(Lxt) ) GOTO 300
@@ -73,7 +83,7 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   ENDIF
   !
   IF ( X>=Xt(ihi) ) THEN
-    ! *** NOW X .GE. XT(ILO) . FIND UPPER BOUND
+    !- ** NOW X .GE. XT(ILO) . FIND UPPER BOUND
     istep = 1
     DO
       Ilo = ihi
@@ -90,7 +100,7 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   ELSE
     IF ( X>=Xt(Ilo) ) GOTO 200
     !
-    ! *** NOW X .LT. XT(IHI) . FIND LOWER BOUND
+    !- ** NOW X .LT. XT(IHI) . FIND LOWER BOUND
     istep = 1
     DO
       ihi = Ilo
@@ -107,7 +117,7 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   ENDIF
   DO
     !
-    ! *** NOW XT(ILO) .LE. X .LT. XT(IHI) . NARROW THE INTERVAL
+    !- ** NOW XT(ILO) .LE. X .LT. XT(IHI) . NARROW THE INTERVAL
     middle = (Ilo+ihi)/2
     IF ( middle==Ilo ) GOTO 200
     !     NOTE. IT IS ASSUMED THAT MIDDLE = ILO IN CASE IHI = ILO+1
@@ -117,7 +127,7 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
       Ilo = middle
     ENDIF
   ENDDO
-  ! *** SET OUTPUT AND RETURN
+  !- ** SET OUTPUT AND RETURN
   100  Mflag = -1
   Ileft = 1
   RETURN

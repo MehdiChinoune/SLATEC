@@ -1,17 +1,24 @@
-!DECK DGEMM
+!** DGEMM
 SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGEMM
-  !***PURPOSE  Perform one of the matrix-matrix operations.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B6
-  !***TYPE      DOUBLE PRECISION (SGEMM-S, DGEMM-D, CGEMM-C)
-  !***KEYWORDS  LEVEL 3 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J., (ANL)
+  !>
+  !***
+  !  Perform one of the matrix-matrix operations.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B6
+  !***
+  ! **Type:**      DOUBLE PRECISION (SGEMM-S, DGEMM-D, CGEMM-C)
+  !***
+  ! **Keywords:**  LEVEL 3 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J., (ANL)
   !           Duff, I., (AERE)
   !           Du Croz, J., (NAG)
   !           Hammarling, S. (NAG)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  DGEMM  performs one of the matrix-matrix operations
   !
@@ -120,15 +127,18 @@ SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !           max( 1, m ).
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J., Du Croz, J., Duff, I., and Hammarling, S.
+  !***
+  ! **References:**  Dongarra, J., Du Croz, J., Duff, I., and Hammarling, S.
   !                 A set of level 3 basic linear algebra subprograms.
   !                 ACM TOMS, Vol. 16, No. 1, pp. 1-17, March 1990.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890208  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  DGEMM
+  
   !     .. Scalar Arguments ..
   CHARACTER :: Transa, Transb
   INTEGER M, N, K, Lda, Ldb, Ldc
@@ -149,7 +159,7 @@ SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !     .. Parameters ..
   REAL(8) :: ONE, ZERO
   PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
-  !***FIRST EXECUTABLE STATEMENT  DGEMM
+  !* FIRST EXECUTABLE STATEMENT  DGEMM
   !
   !     Set  NOTA  and  NOTB  as  true if  A  and  B  respectively are not
   !     transposed and set  NROWA, NCOLA and  NROWB  as the number of rows

@@ -1,28 +1,35 @@
-!DECK DUSRMT
+!** DUSRMT
 SUBROUTINE DUSRMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DUSRMT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (USRMAT-S, DUSRMT-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (USRMAT-S, DUSRMT-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   The user may supply this code
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DUSRMT
+  
   INTEGER I, Indcat, J, l
   REAL(8) :: Prgopt(*), Dattrv(*), Aij
   INTEGER Iflag(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  DUSRMT
+  !* FIRST EXECUTABLE STATEMENT  DUSRMT
   IF ( Iflag(1)==1 ) THEN
     !
     !     THIS IS THE INITIALIZATION STEP.  THE VALUES OF IFLAG(K),K=2,3,4,

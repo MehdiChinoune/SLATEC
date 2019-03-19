@@ -1,14 +1,21 @@
-!DECK COSQF
+!** COSQF
 SUBROUTINE COSQF(N,X,Wsave)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  COSQF
-  !***PURPOSE  Compute the forward cosine transform with odd wave numbers.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A3
-  !***TYPE      SINGLE PRECISION (COSQF-S)
-  !***KEYWORDS  COSINE FOURIER TRANSFORM, FFTPACK
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the forward cosine transform with odd wave numbers.
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A3
+  !***
+  ! **Type:**      SINGLE PRECISION (COSQF-S)
+  !***
+  ! **Keywords:**  COSINE FOURIER TRANSFORM, FFTPACK
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !  Subroutine COSQF computes the fast Fourier transform of quarter
   !  wave data. That is, COSQF computes the coefficients in a cosine
@@ -54,11 +61,14 @@ SUBROUTINE COSQF(N,X,Wsave)
   !  WSAVE   contains initialization calculations which must not
   !          be destroyed between calls of COSQF or COSQB.
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  COSQF1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  COSQF1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -70,11 +80,11 @@ SUBROUTINE COSQF(N,X,Wsave)
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  COSQF
+  
   INTEGER N
   REAL sqrt2, tsqx, Wsave, X
   DIMENSION X(*), Wsave(*)
-  !***FIRST EXECUTABLE STATEMENT  COSQF
+  !* FIRST EXECUTABLE STATEMENT  COSQF
   sqrt2 = SQRT(2.)
   IF ( N<2 ) THEN
   ELSEIF ( N==2 ) THEN

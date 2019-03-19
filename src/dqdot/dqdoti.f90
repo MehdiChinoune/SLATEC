@@ -1,18 +1,25 @@
-!DECK DQDOTI
+!** DQDOTI
 REAL(8) FUNCTION DQDOTI(N,Db,Qc,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQDOTI
-  !***PURPOSE  Compute the inner product of two vectors with extended
+  !>
+  !***
+  !  Compute the inner product of two vectors with extended
   !            precision accumulation and result.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D1A4
-  !***TYPE      DOUBLE PRECISION (DQDOTI-D)
-  !***KEYWORDS  DOT PRODUCT, INNER PRODUCT
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D1A4
+  !***
+  ! **Type:**      DOUBLE PRECISION (DQDOTI-D)
+  !***
+  ! **Keywords:**  DOT PRODUCT, INNER PRODUCT
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of parameters
@@ -48,27 +55,31 @@ REAL(8) FUNCTION DQDOTI(N,Db,Qc,Dx,Incx,Dy,Incy)
   !    arrays of size 30.  See the comments in the routine MPBLAS for the
   !    reason for this choice.
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  MPADD, MPBLAS, MPCDM, MPCMD, MPMUL
-  !***COMMON BLOCKS    MPCOM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  MPADD, MPBLAS, MPCDM, MPCMD, MPMUL
+  !***
+  ! COMMON BLOCKS    MPCOM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   930124  Increased Array sizes for SUN -r8.  (RWC)
-  !***END PROLOGUE  DQDOTI
+  
   INTEGER i, i1, Incx, Incy, ix, iy, MPB, MPLun, MPM, MPMxr, MPR, MPT, N
   REAL(8) :: Dx(*), Dy(*), Db
   INTEGER Qc(30), qx(30), qy(30)
   COMMON /MPCOM / MPB, MPT, MPM, MPLun, MPMxr, MPR(30)
   SAVE i1
   DATA i1/0/
-  !***FIRST EXECUTABLE STATEMENT  DQDOTI
+  !* FIRST EXECUTABLE STATEMENT  DQDOTI
   IF ( i1==0 ) CALL MPBLAS(i1)
   Qc(1) = 0
   IF ( Db/=0.D0 ) THEN

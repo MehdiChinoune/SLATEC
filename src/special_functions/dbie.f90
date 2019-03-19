@@ -1,17 +1,24 @@
-!DECK DBIE
+!** DBIE
 REAL(8) FUNCTION DBIE(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBIE
-  !***PURPOSE  Calculate the Bairy function for a negative argument and an
+  !>
+  !***
+  !  Calculate the Bairy function for a negative argument and an
   !            exponentially scaled Bairy function for a non-negative
   !            argument.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10D
-  !***TYPE      DOUBLE PRECISION (BIE-S, DBIE-D)
-  !***KEYWORDS  BAIRY FUNCTION, EXPONENTIALLY SCALED, FNLIB,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10D
+  !***
+  ! **Type:**      DOUBLE PRECISION (BIE-S, DBIE-D)
+  !***
+  ! **Keywords:**  BAIRY FUNCTION, EXPONENTIALLY SCALED, FNLIB,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DBIE(X) calculates the double precision Airy function of the
   ! second kind or the double precision exponentially scaled Airy
@@ -63,14 +70,17 @@ REAL(8) FUNCTION DBIE(X)
   !                               significant figures required  31.15
   !                                    decimal places required  33.37
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, D9AIMP, DCSEVL, INITDS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, D9AIMP, DCSEVL, INITDS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DBIE
+  
   REAL eta
   INTEGER INITDS, nbif, nbif2, nbig, nbig2, nbip1, nbip2
   REAL(8) :: X, bifcs(13), bigcs(13), bif2cs(15), big2cs(15), &
@@ -274,7 +284,7 @@ REAL(8) FUNCTION DBIE(X)
   DATA atr/8.75069057084843450880771988210148D0/
   DATA btr/ - 2.09383632135605431360096498526268D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DBIE
+  !* FIRST EXECUTABLE STATEMENT  DBIE
   IF ( first ) THEN
     eta = 0.1*REAL(D1MACH(3))
     nbif = INITDS(bifcs,13,eta)

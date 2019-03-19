@@ -1,16 +1,23 @@
-!DECK DPBSL
+!** DPBSL
 SUBROUTINE DPBSL(Abd,Lda,N,M,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPBSL
-  !***PURPOSE  Solve a real symmetric positive definite band system
+  !>
+  !***
+  !  Solve a real symmetric positive definite band system
   !            using the factors computed by DPBCO or DPBFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B2
-  !***TYPE      DOUBLE PRECISION (SPBSL-S, DPBSL-D, CPBSL-C)
-  !***KEYWORDS  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B2
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPBSL-S, DPBSL-D, CPBSL-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             POSITIVE DEFINITE, SOLVE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DPBSL solves the double precision symmetric positive definite
   !     band system  A*X = B
@@ -53,10 +60,13 @@ SUBROUTINE DPBSL(Abd,Lda,N,M,B)
   !              CALL DPBSL(ABD,LDA,N,C(1,J))
   !        10 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -65,7 +75,7 @@ SUBROUTINE DPBSL(Abd,Lda,N,M,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DPBSL
+  
   INTEGER Lda, N, M
   REAL(8) :: Abd(Lda,*), B(*)
   !
@@ -74,7 +84,7 @@ SUBROUTINE DPBSL(Abd,Lda,N,M,B)
   !
   !     SOLVE TRANS(R)*Y = B
   !
-  !***FIRST EXECUTABLE STATEMENT  DPBSL
+  !* FIRST EXECUTABLE STATEMENT  DPBSL
   DO k = 1, N
     lm = MIN(k-1,M)
     la = M + 1 - lm

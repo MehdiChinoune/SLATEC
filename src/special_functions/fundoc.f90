@@ -1,15 +1,22 @@
-!DECK FUNDOC
+!** FUNDOC
 SUBROUTINE FUNDOC
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  FUNDOC
-  !***PURPOSE  Documentation for FNLIB, a collection of routines for
+  !>
+  !***
+  !  Documentation for FNLIB, a collection of routines for
   !            evaluating elementary and special functions.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C, Z
-  !***TYPE      ALL (FUNDOC-A)
-  !***KEYWORDS  DOCUMENTATION, ELEMENTARY FUNCTIONS, SPECIAL FUNCTIONS
-  !***AUTHOR  Kahaner, D. K., (NBS)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C, Z
+  !***
+  ! **Type:**      ALL (FUNDOC-A)
+  !***
+  ! **Keywords:**  DOCUMENTATION, ELEMENTARY FUNCTIONS, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Kahaner, D. K., (NBS)
+  !***
+  ! **Description:**
   !
   ! The SLATEC Library --  Elementary And Special Functions
   !
@@ -205,14 +212,17 @@ SUBROUTINE FUNDOC
   !                          0 to x of
   !                          ((ln \1-y\) / y)dy
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801015  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Routine name changed from FNLIBD to FUNDOC.  (WRB)
   !   900723  PURPOSE section revised.  (WRB)
-  !***END PROLOGUE  FUNDOC
-  !***FIRST EXECUTABLE STATEMENT  FUNDOC
+  
+  !* FIRST EXECUTABLE STATEMENT  FUNDOC
 END SUBROUTINE FUNDOC

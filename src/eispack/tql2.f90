@@ -1,15 +1,22 @@
-!DECK TQL2
+!** TQL2
 SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TQL2
-  !***PURPOSE  Compute the eigenvalues and eigenvectors of symmetric
+  !>
+  !***
+  !  Compute the eigenvalues and eigenvectors of symmetric
   !            tridiagonal matrix.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A5, D4C2A
-  !***TYPE      SINGLE PRECISION (TQL2-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A5, D4C2A
+  !***
+  ! **Type:**      SINGLE PRECISION (TQL2-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure TQL2,
   !     NUM. MATH. 11, 293-306(1968) by Bowdler, Martin, Reinsch, and
@@ -69,25 +76,28 @@ SUBROUTINE TQL2(Nm,N,D,E,Z,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  PYTHAG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  PYTHAG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  TQL2
+  
   !
   INTEGER i, j, k, l, m, N, ii, l1, l2, Nm, mml, Ierr
   REAL D(*), E(*), Z(Nm,*)
   REAL b, c, c2, c3, dl1, el1, f, g, h, p, r, s, s2
   REAL PYTHAG
   !
-  !***FIRST EXECUTABLE STATEMENT  TQL2
+  !* FIRST EXECUTABLE STATEMENT  TQL2
   Ierr = 0
   IF ( N/=1 ) THEN
     !

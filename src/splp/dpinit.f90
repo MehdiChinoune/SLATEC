@@ -1,14 +1,18 @@
-!DECK DPINIT
+!** DPINIT
 SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
     Costsc,Colnrm,Xlamda,Anorm,Rhs,Rhsnrm,Ibasis,Ibb,Imat,Lopt)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPINIT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SPINIT-S, DPINIT-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPINIT-S, DPINIT-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THE EDITING REQUIRED TO CONVERT THIS SUBROUTINE FROM SINGLE TO
   !     DOUBLE PRECISION INVOLVES THE FOLLOWING CHARACTER STRING CHANGES.
@@ -20,16 +24,19 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
   !
   !     INITIALIZATION SUBROUTINE FOR DSPLP(*) PACKAGE.
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  DASUM, DCOPY, DPNNZR
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  DASUM, DCOPY, DPNNZR
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
   !   891009  Removed unreferenced variable.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DPINIT
+  
   INTEGER i, Info, ip, iplace, j, Mrelas, n20007, n20019, n20028, &
     n20041, n20056, n20066, n20070, n20074, n20078, Nvars
   REAL(8) :: aij, Amat(*), Anorm, Bl(*), Bu(*), cmax, Colnrm(*)&
@@ -39,7 +46,7 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
   INTEGER Ibasis(*), Ibb(*), Imat(*), Ind(*)
   LOGICAL contin, usrbas, colscp, cstscp, minprb, Lopt(8)
   !
-  !***FIRST EXECUTABLE STATEMENT  DPINIT
+  !* FIRST EXECUTABLE STATEMENT  DPINIT
   zero = 0.D0
   one = 1.D0
   contin = Lopt(1)

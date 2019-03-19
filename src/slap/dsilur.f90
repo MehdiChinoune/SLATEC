@@ -1,24 +1,31 @@
-!DECK DSILUR
+!** DSILUR
 SUBROUTINE DSILUR(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSILUR
-  !***PURPOSE  Incomplete LU Iterative Refinement Sparse Ax = b Solver.
+  !>
+  !***
+  !  Incomplete LU Iterative Refinement Sparse Ax = b Solver.
   !            Routine to solve a general linear system  Ax = b  using
   !            the incomplete LU decomposition with iterative refinement.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      DOUBLE PRECISION (SSILUR-S, DSILUR-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSILUR-S, DSILUR-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, LINEAR SYSTEM, SLAP, SPARSE
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM, ITOL, ITMAX
   !     INTEGER ITER, IERR, IUNIT, LENW, IWORK(NL+NU+4*N+2), LENIW
   !     DOUBLE PRECISION B(N), X(N), A(NELT), TOL, ERR, RWORK(NL+NU+4*N)
@@ -26,7 +33,7 @@ SUBROUTINE DSILUR(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     CALL DSILUR(N, B, X, NELT, IA, JA, A, ISYM, ITOL, TOL,
   !    $     ITMAX, ITER, ERR, IERR, IUNIT, RWORK, LENW, IWORK, LENIW)
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   ! B      :IN       Double Precision B(N).
@@ -124,7 +131,7 @@ SUBROUTINE DSILUR(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !         NU is the number of non-zeros in the upper triangle of the
   !         matrix (including the diagonal).
   !
-  ! *Description
+  !- Description
   !       The Sparse Linear Algebra Package (SLAP) utilizes two matrix
   !       data structures: 1) the  SLAP Triad  format or  2)  the SLAP
   !       Column format.  The user can hand this routine either of the
@@ -190,21 +197,25 @@ SUBROUTINE DSILUR(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Side Effects:
+  !- Side Effects:
   !       The SLAP Triad format (IA, JA, A) is modified internally to be
   !       the SLAP Column format.  See above.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  DSJAC, DSGS, DIR
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DCHKW, DIR, DS2Y, DSILUS, DSLUI, DSMV
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSJAC, DSGS, DIR
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DCHKW, DIR, DS2Y, DSILUS, DSLUI, DSMV
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -216,7 +227,7 @@ SUBROUTINE DSILUR(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   920407  COMMON BLOCK renamed DSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   921019  Corrected NEL to NL.  (FNF)
-  !***END PROLOGUE  DSILUR
+  
   !     .. Parameters ..
   INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
@@ -233,7 +244,7 @@ SUBROUTINE DSILUR(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     nl, nu
   !     .. External Subroutines ..
   EXTERNAL DCHKW, DIR, DS2Y, DSILUS, DSLUI, DSMV
-  !***FIRST EXECUTABLE STATEMENT  DSILUR
+  !* FIRST EXECUTABLE STATEMENT  DSILUR
   !
   Ierr = 0
   IF ( N<1.OR.Nelt<1 ) THEN

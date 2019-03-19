@@ -1,26 +1,33 @@
-!DECK SCG
+!** SCG
 SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SCG
-  !***PURPOSE  Preconditioned Conjugate Gradient Sparse Ax=b Solver.
+  !>
+  !***
+  !  Preconditioned Conjugate Gradient Sparse Ax=b Solver.
   !            Routine to solve a symmetric positive definite linear
   !            system  Ax = b  using the Preconditioned Conjugate
   !            Gradient method.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2B4
-  !***TYPE      SINGLE PRECISION (SCG-S, DCG-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, SLAP, SPARSE,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SCG-S, DCG-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, SLAP, SPARSE,
   !             SYMMETRIC LINEAR SYSTEM
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER  N, NELT, IA(NELT), JA(NELT), ISYM, ITOL, ITMAX
   !     INTEGER  ITER, IERR, IUNIT, IWORK(USER DEFINED)
   !     REAL     B(N), X(N), A(NELT), TOL, ERR, R(N), Z(N)
@@ -31,7 +38,7 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !    $     ITOL, TOL, ITMAX, ITER, ERR, IERR, IUNIT, R, Z, P, DZ,
   !    $     RWORK, IWORK )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the Matrix.
   ! B      :IN       Real B(N).
@@ -141,7 +148,7 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   ! IWORK  :WORK     Integer IWORK(USER DEFINED).
   !         Integer array that can be used by  MSOLVE.
   !
-  ! *Description
+  !- Description
   !       This routine does  not care  what matrix data   structure is
   !       used for  A and M.  It simply   calls  the MATVEC and MSOLVE
   !       routines, with  the arguments as  described above.  The user
@@ -210,15 +217,17 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  SSDCG, SSICCG
-  !***REFERENCES  1. Louis Hageman and David Young, Applied Iterative
+  !***
+  ! **See also:**  SSDCG, SSICCG
+  !***
+  ! **References:**  1. Louis Hageman and David Young, Applied Iterative
   !                  Methods, Academic Press, New York, 1981.
   !               2. Concus, Golub and O'Leary, A Generalized Conjugate
   !                  Gradient Method for the Numerical Solution of
@@ -228,8 +237,10 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !               3. Mark K. Seager, A SLAP for the Masses, in
   !                  G. F. Carey, Ed., Parallel Supercomputing: Methods,
   !                  Algorithms and Applications, Wiley, 1989, pp.135-155.
-  !***ROUTINES CALLED  ISSCG, R1MACH, SAXPY, SCOPY, SDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  ISSCG, R1MACH, SAXPY, SCOPY, SDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -244,7 +255,7 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
-  !***END PROLOGUE  SCG
+  
   !     .. Scalar Arguments ..
   REAL Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
@@ -262,7 +273,7 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   EXTERNAL R1MACH, SDOT, ISSCG
   !     .. External Subroutines ..
   EXTERNAL SAXPY, SCOPY
-  !***FIRST EXECUTABLE STATEMENT  SCG
+  !* FIRST EXECUTABLE STATEMENT  SCG
   !
   !         Check some of the input data.
   !

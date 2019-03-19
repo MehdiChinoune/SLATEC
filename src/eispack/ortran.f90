@@ -1,15 +1,22 @@
-!DECK ORTRAN
+!** ORTRAN
 SUBROUTINE ORTRAN(Nm,N,Low,Igh,A,Ort,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ORTRAN
-  !***PURPOSE  Accumulate orthogonal similarity transformations in the
+  !>
+  !***
+  !  Accumulate orthogonal similarity transformations in the
   !            reduction of real general matrix by ORTHES.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C4
-  !***TYPE      SINGLE PRECISION (ORTRAN-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C4
+  !***
+  ! **Type:**      SINGLE PRECISION (ORTRAN-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure ORTRANS,
   !     NUM. MATH. 16, 181-204(1970) by Peters and Wilkinson.
@@ -54,25 +61,28 @@ SUBROUTINE ORTRAN(Nm,N,Low,Igh,A,Ort,Z)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  ORTRAN
+  
   !
   INTEGER i, j, N, kl, mm, mp, Nm, Igh, Low, mp1
   REAL A(Nm,*), Ort(*), Z(Nm,*)
   REAL g
   !
   !     .......... INITIALIZE Z TO IDENTITY MATRIX ..........
-  !***FIRST EXECUTABLE STATEMENT  ORTRAN
+  !* FIRST EXECUTABLE STATEMENT  ORTRAN
   DO i = 1, N
     !
     DO j = 1, N

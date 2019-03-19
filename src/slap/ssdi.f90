@@ -1,29 +1,36 @@
-!DECK SSDI
+!** SSDI
 SUBROUTINE SSDI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSDI
-  !***PURPOSE  Diagonal Matrix Vector Multiply.
+  !>
+  !***
+  !  Diagonal Matrix Vector Multiply.
   !            Routine to calculate the product  X = DIAG*B, where DIAG
   !            is a diagonal matrix.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D1B4
-  !***TYPE      SINGLE PRECISION (SSDI-S, DSDI-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, LINEAR SYSTEM SOLVE, SLAP, SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SSDI-S, DSDI-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, LINEAR SYSTEM SOLVE, SLAP, SPARSE
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER  N, NELT, IA(NELT), JA(NELT), ISYM, IWORK(10)
   !     REAL B(N), X(N), A(NELT), RWORK(USER DEFINED)
   !
   !     CALL SSDI (N, B, X, NELT, IA, JA, A, ISYM, RWORK, IWORK)
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   ! B      :IN       Real B(N).
@@ -46,7 +53,7 @@ SUBROUTINE SSDI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !         to scale B by.  This is usually set up by the SLAP pre-
   !         conditioner setup routines SSDS or SSD2S.
   !
-  ! *Description:
+  !- Description:
   !         This routine is supplied with the SLAP package to perform
   !         the  MSOLVE  operation for iterative drivers that require
   !         diagonal  Scaling  (e.g., SSDCG, SSDBCG).   It  conforms
@@ -54,10 +61,14 @@ SUBROUTINE SSDI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !         require an interface routine as do some of the other pre-
   !         conditioners supplied with SLAP.
   !
-  !***SEE ALSO  SSDS, SSD2S
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SSDS, SSD2S
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -67,7 +78,7 @@ SUBROUTINE SSDI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  !***END PROLOGUE  SSDI
+  
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
@@ -75,7 +86,7 @@ SUBROUTINE SSDI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER i, locd
-  !***FIRST EXECUTABLE STATEMENT  SSDI
+  !* FIRST EXECUTABLE STATEMENT  SSDI
   !
   !         Determine where the inverse of the diagonal
   !         is in the work array and then scale by it.

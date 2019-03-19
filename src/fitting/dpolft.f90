@@ -1,17 +1,24 @@
-!DECK DPOLFT
+!** DPOLFT
 SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPOLFT
-  !***PURPOSE  Fit discrete data in a least squares sense by polynomials
+  !>
+  !***
+  !  Fit discrete data in a least squares sense by polynomials
   !            in one variable.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  K1A1A2
-  !***TYPE      DOUBLE PRECISION (POLFIT-S, DPOLFT-D)
-  !***KEYWORDS  CURVE FITTING, DATA FITTING, LEAST SQUARES, POLYNOMIAL FIT
-  !***AUTHOR  Shampine, L. F., (SNLA)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  K1A1A2
+  !***
+  ! **Type:**      DOUBLE PRECISION (POLFIT-S, DPOLFT-D)
+  !***
+  ! **Keywords:**  CURVE FITTING, DATA FITTING, LEAST SQUARES, POLYNOMIAL FIT
+  !***
+  ! **Author:**  Shampine, L. F., (SNLA)
   !           Davenport, S. M., (SNLA)
   !           Huddleston, R. E., (SNLL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Abstract
   !
@@ -109,11 +116,14 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !            expressed as powers of (X-C) using  DP1VLU  and  DPCOEF
   !            after just one call to  DPOLFT .
   !
-  !***REFERENCES  L. F. Shampine, S. M. Davenport and R. E. Huddleston,
+  !***
+  ! **References:**  L. F. Shampine, S. M. Davenport and R. E. Huddleston,
   !                 Curve fitting by polynomials in one variable, Report
   !                 SLA-74-0270, Sandia Laboratories, June 1974.
-  !***ROUTINES CALLED  DP1VLU, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DP1VLU, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   740601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891006  Cosmetic changes to prologue.  (WRB)
@@ -123,7 +133,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !   900911  Added variable YP to DOUBLE PRECISION declaration.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920527  Corrected erroneous statements in DESCRIPTION.  (WRB)
-  !***END PROLOGUE  DPOLFT
+  
   INTEGER N
   INTEGER i, idegf, Ierr, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, &
     k3pi, k4, k4pi, k5, k5pi, ksig, m, Maxdeg, mop1, Ndeg, &
@@ -139,7 +149,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     -2.4648165D0, -3.3846535D0, -1.2973162D0, -3.3381146D0, &
     -1.7812271D0, -3.2578406D0, -1.6589279D0, -1.6282703D0, &
     -1.3152745D0, -3.2640179D0, -1.9829776D0/
-  !***FIRST EXECUTABLE STATEMENT  DPOLFT
+  !* FIRST EXECUTABLE STATEMENT  DPOLFT
   m = ABS(N)
   IF ( m==0 ) GOTO 700
   IF ( Maxdeg<0 ) GOTO 700

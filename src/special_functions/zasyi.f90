@@ -1,26 +1,33 @@
-!DECK ZASYI
+!** ZASYI
 SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZASYI
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESI and ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CASYI-A, ZASYI-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZBESI and ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CASYI-A, ZASYI-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZASYI COMPUTES THE I BESSEL FUNCTION FOR REAL(Z).GE.0.0 BY
   !     MEANS OF THE ASYMPTOTIC EXPANSION FOR LARGE ABS(Z) IN THE
   !     REGION ABS(Z).GT.MAX(RL,FNU*FNU/2). NZ=0 IS A NORMAL RETURN.
   !     NZ.LT.0 INDICATES AN OVERFLOW ON KODE=1.
   !
-  !***SEE ALSO  ZBESI, ZBESK
-  !***ROUTINES CALLED  D1MACH, ZABS, ZDIV, ZEXP, ZMLT, ZSQRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZBESI, ZBESK
+  !***
+  ! **Routines called:**  D1MACH, ZABS, ZDIV, ZEXP, ZMLT, ZSQRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
-  !***END PROLOGUE  ZASYI
+  
   !     COMPLEX AK1,CK,CONE,CS1,CS2,CZ,CZERO,DK,EZ,P1,RZ,S2,Y,Z
   REAL(8) :: aa, aez, ak, ak1i, ak1r, Alim, arg, arm, atol, &
     az, bb, bk, cki, ckr, conei, coner, cs1i, cs1r, &
@@ -34,7 +41,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   EXTERNAL ZABS, ZEXP, ZSQRT
   DATA pi, rtpi/3.14159265358979324D0, 0.159154943091895336D0/
   DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  ZASYI
+  !* FIRST EXECUTABLE STATEMENT  ZASYI
   Nz = 0
   az = ZABS(Zr,Zi)
   arm = 1.0D+3*D1MACH(1)

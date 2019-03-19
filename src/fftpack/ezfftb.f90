@@ -1,15 +1,22 @@
-!DECK EZFFTB
+!** EZFFTB
 SUBROUTINE EZFFTB(N,R,Azero,A,B,Wsave)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  EZFFTB
-  !***PURPOSE  A simplified real, periodic, backward fast Fourier
+  !>
+  !***
+  !  A simplified real, periodic, backward fast Fourier
   !            transform.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A1
-  !***TYPE      SINGLE PRECISION (EZFFTB-S)
-  !***KEYWORDS  FFTPACK, FOURIER TRANSFORM
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A1
+  !***
+  ! **Type:**      SINGLE PRECISION (EZFFTB-S)
+  !***
+  ! **Keywords:**  FFTPACK, FOURIER TRANSFORM
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !  Subroutine EZFFTB computes a real periodic sequence from its
   !  Fourier coefficients (Fourier synthesis).  The transform is
@@ -86,11 +93,14 @@ SUBROUTINE EZFFTB(N,R,Azero,A,B,Wsave)
   !
   !               SIN(BETA(K))=-B(K)/ALPHA(K)
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  RFFTB
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  RFFTB
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -99,11 +109,11 @@ SUBROUTINE EZFFTB(N,R,Azero,A,B,Wsave)
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  EZFFTB
+  
   REAL A, Azero, B, R, Wsave
   INTEGER i, N, ns2
   DIMENSION R(*), A(*), B(*), Wsave(*)
-  !***FIRST EXECUTABLE STATEMENT  EZFFTB
+  !* FIRST EXECUTABLE STATEMENT  EZFFTB
   IF ( N<2 ) THEN
     R(1) = Azero
     RETURN

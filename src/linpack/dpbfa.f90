@@ -1,16 +1,23 @@
-!DECK DPBFA
+!** DPBFA
 SUBROUTINE DPBFA(Abd,Lda,N,M,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPBFA
-  !***PURPOSE  Factor a real symmetric positive definite matrix stored in
+  !>
+  !***
+  !  Factor a real symmetric positive definite matrix stored in
   !            in band form.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B2
-  !***TYPE      DOUBLE PRECISION (SPBFA-S, DPBFA-D, CPBFA-C)
-  !***KEYWORDS  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B2
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPBFA-S, DPBFA-D, CPBFA-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION,
   !             POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DPBFA factors a double precision symmetric positive definite
   !     matrix stored in band form.
@@ -61,10 +68,13 @@ SUBROUTINE DPBFA(Abd,Lda,N,M,Info)
   !                10    CONTINUE
   !                20 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -73,14 +83,14 @@ SUBROUTINE DPBFA(Abd,Lda,N,M,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DPBFA
+  
   INTEGER Lda, N, M, Info
   REAL(8) :: Abd(Lda,*)
   !
   REAL(8) :: DDOT, t
   REAL(8) :: s
   INTEGER ik, j, jk, k, mu
-  !***FIRST EXECUTABLE STATEMENT  DPBFA
+  !* FIRST EXECUTABLE STATEMENT  DPBFA
   DO j = 1, N
     Info = j
     s = 0.0D0

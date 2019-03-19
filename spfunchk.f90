@@ -1,21 +1,28 @@
-!DECK TESTI
+!** TESTI
 PROGRAM TESTI
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TESTI
-  !***PURPOSE  Driver for testing SLATEC subprogram
+  !>
+  !***
+  !  Driver for testing SLATEC subprogram
   !            Fullerton intrinsics.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  Z
-  !***TYPE      ALL (TESTI-A)
-  !***KEYWORDS  FULLERTON INTRINSIC FUNCTIONS, QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  Z
+  !***
+  ! **Type:**      ALL (TESTI-A)
+  !***
+  ! **Keywords:**  FULLERTON INTRINSIC FUNCTIONS, QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (UNIT=LIN, FMT='(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -27,17 +34,20 @@ PROGRAM TESTI
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprogram
   !
-  !***REFERENCES  Fong, Kirby W., Jefferson, Thomas H., Suyehiro,
+  !***
+  ! **References:**  Fong, Kirby W., Jefferson, Thomas H., Suyehiro,
   !                 Tokihiko, Walton, Lee, Guidelines to the SLATEC Common
   !                 Mathematical Library, March 21, 1989.
-  !***ROUTINES CALLED  I1MACH, QCINTC, QCINTD, QCINTS, XERMAX, XSETF,
+  !***
+  ! **Routines called:**  I1MACH, QCINTC, QCINTD, QCINTS, XERMAX, XSETF,
   !                    XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   900709  DATE WRITTEN
-  !***END PROLOGUE  TESTI
+  
   !     .. Local Scalars ..
   INTEGER ipass, kprint, lin, lun, nfail, narg
   CHARACTER :: arg1
@@ -46,7 +56,7 @@ PROGRAM TESTI
   EXTERNAL I1MACH
   !     .. External Subroutines ..
   EXTERNAL QCINTC, QCINTD, QCINTS, XERMAX, XSETF, XSETUN
-  !***FIRST EXECUTABLE STATEMENT  TESTI
+  !* FIRST EXECUTABLE STATEMENT  TESTI
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0
@@ -97,19 +107,26 @@ PROGRAM TESTI
   99002 FORMAT (/' ************* WARNING -- ',I5,&
     ' TEST(S) FAILED IN PROGRAM TESTI *************')
 END PROGRAM TESTI
-!DECK QCINTC
+!** QCINTC
 SUBROUTINE QCINTC(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QCINTC
-  !***PURPOSE  Quick check for the complex Fullerton elementary
+  !>
+  !***
+  !  Quick check for the complex Fullerton elementary
   !            intrinsic functions.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C
-  !***TYPE      COMPLEX (QCINTS-S, QCINTD-D, QCINTC-C)
-  !***KEYWORDS  QUICK CHECK
-  !***AUTHOR  Boland, W. Robert, (LANL)
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C
+  !***
+  ! **Type:**      COMPLEX (QCINTS-S, QCINTD-D, QCINTC-C)
+  !***
+  ! **Keywords:**  QUICK CHECK
+  !***
+  ! **Author:**  Boland, W. Robert, (LANL)
   !           Rivera, Shawn M., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   This subroutine does a quick check for the complex
   !   Fullerton elementary intrinsic functions.
@@ -123,10 +140,12 @@ SUBROUTINE QCINTC(Lun,Kprint,Ipass)
   !   IPASS    output INTEGER value indicating whether tests passed or
   !            failed
   !
-  !***ROUTINES CALLED  CABS, CCOS, CEXP, CLOG, CSIN, CSQRT, R1MACH, SQRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CABS, CCOS, CEXP, CLOG, CSIN, CSQRT, R1MACH, SQRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   900717  DATE WRITTEN
-  !***END PROLOGUE  QCINTC
+  
   !     .. Scalar Arguments ..
   INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
@@ -165,7 +184,7 @@ SUBROUTINE QCINTC(Lun,Kprint,Ipass)
   DATA c(19)/(2.313710397461,0.1488899476095)/
   DATA c(20)/(6.907755278982,0.00000000000000)/
   !
-  !***FIRST EXECUTABLE STATEMENT  QCINTC
+  !* FIRST EXECUTABLE STATEMENT  QCINTC
   !
   IF ( Kprint>=2 ) WRITE (UNIT=Lun,FMT=99001)
   !
@@ -216,19 +235,26 @@ SUBROUTINE QCINTC(Lun,Kprint,Ipass)
     E22.14,', ',E22.14,'  ) '/' and true result = (',E22.14,', ',&
     E22.14,'  )')
 END SUBROUTINE QCINTC
-!DECK QCINTD
+!** QCINTD
 SUBROUTINE QCINTD(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QCINTD
-  !***PURPOSE  Quick check for the double precision Fullerton
+  !>
+  !***
+  !  Quick check for the double precision Fullerton
   !            elementary intrinsic functions.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C
-  !***TYPE      DOUBLE PRECISION (QCINTS-S, QCINTD-D, QCINTC-C)
-  !***KEYWORDS  QUICK CHECK
-  !***AUTHOR  Boland, W. Robert, (LANL)
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C
+  !***
+  ! **Type:**      DOUBLE PRECISION (QCINTS-S, QCINTD-D, QCINTC-C)
+  !***
+  ! **Keywords:**  QUICK CHECK
+  !***
+  ! **Author:**  Boland, W. Robert, (LANL)
   !           Rivera, Shawn M., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   This subroutine does a quick check for the double precision
   !   Fullerton intrinsic functions.
@@ -242,13 +268,16 @@ SUBROUTINE QCINTD(Lun,Kprint,Ipass)
   !   IPASS    output INTEGER value indicating whether tests passed or
   !            failed
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DACOS, DASIN, DATAN, DATAN2, DCOS, DCOSH,
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DACOS, DASIN, DATAN, DATAN2, DCOS, DCOSH,
   !                    DEXP, DINT, DLOG, DLOG10, DSIN, DSINH, DSQRT, DTAN,
   !                    DTANH
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   900717  DATE WRITTEN
-  !***END PROLOGUE  QCINTD
+  
   !     .. Scalar Arguments ..
   INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
@@ -329,7 +358,7 @@ SUBROUTINE QCINTD(Lun,Kprint,Ipass)
   DATA v(59)/0.0D0/
   DATA v(60)/0.462117157260009758592318483D0/
   !
-  !***FIRST EXECUTABLE STATEMENT  QCINTD
+  !* FIRST EXECUTABLE STATEMENT  QCINTD
   !
   IF ( Kprint>=2 ) WRITE (UNIT=Lun,FMT=99001)
   !
@@ -425,19 +454,26 @@ SUBROUTINE QCINTD(Lun,Kprint,Ipass)
   99003 FORMAT (' For I  = ',I3,'  test fails with ',/' computed result = ',1P,&
     E38.30,/' and true result = ',E38.30)
 END SUBROUTINE QCINTD
-!DECK QCINTS
+!** QCINTS
 SUBROUTINE QCINTS(Lun,Kprint,Ipass)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QCINTS
-  !***PURPOSE  Quick check for the single precision Fullerton
+  !>
+  !***
+  !  Quick check for the single precision Fullerton
   !            elementary intrinsic functions.
-  !***LIBRARY   FNLIB
-  !***CATEGORY  C
-  !***TYPE      SINGLE PRECISION (QCINTS-S, QCINTD-D, QCTINC-C)
-  !***KEYWORDS  QUICK CHECK
-  !***AUTHOR  Boland, W. Robert, (LANL)
+  !***
+  ! **Library:**   FNLIB
+  !***
+  ! **Category:**  C
+  !***
+  ! **Type:**      SINGLE PRECISION (QCINTS-S, QCINTD-D, QCTINC-C)
+  !***
+  ! **Keywords:**  QUICK CHECK
+  !***
+  ! **Author:**  Boland, W. Robert, (LANL)
   !           Rivera, Shawn M., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   This subroutine does a quick check for the single precision
   !   Fullerton intrinsic functions.
@@ -451,12 +487,15 @@ SUBROUTINE QCINTS(Lun,Kprint,Ipass)
   !   IPASS    output INTEGER value indicating whether tests passed or
   !            failed
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ACOS, ALOG, ALOG10, ASIN, ATAN, ATAN2, CABS, COS,
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ACOS, ALOG, ALOG10, ASIN, ATAN, ATAN2, CABS, COS,
   !                    COSH, EXP, R1MACH, SIN, SINH, SQRT, TAN, TANH
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   900711  DATE WRITTEN
-  !***END PROLOGUE  QCINTS
+  
   !     .. Scalar Arguments ..
   INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
@@ -536,7 +575,7 @@ SUBROUTINE QCINTS(Lun,Kprint,Ipass)
   DATA v(59)/0.0/
   DATA v(60)/0.46211715726/
   !
-  !***FIRST EXECUTABLE STATEMENT  QCINTS
+  !* FIRST EXECUTABLE STATEMENT  QCINTS
   !
   IF ( Kprint>=2 ) WRITE (UNIT=Lun,FMT=99001)
   !

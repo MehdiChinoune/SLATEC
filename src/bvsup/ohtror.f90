@@ -1,13 +1,17 @@
-!DECK OHTROR
+!** OHTROR
 SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  OHTROR
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (OHTROR-S)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (OHTROR-S)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !     For a rank deficient problem, additional orthogonal
   !     HOUSEHOLDER transformations are applied to the right side
@@ -17,19 +21,22 @@ SUBROUTINE OHTROR(Q,N,Nrda,Diag,Irank,Div,Td)
   !     triangular matrix while the remainder of the matrix
   !     has been zeroed out.
   !
-  !***SEE ALSO  BVSUP
-  !***ROUTINES CALLED  SDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **Routines called:**  SDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  OHTROR
+  
   REAL dd, Diag, diagk, Div, Q, qs, SDOT, sig, sqd, Td, tdv
   INTEGER Irank, irp, j, k, kir, kirm, l, N, nmir, Nrda
   DIMENSION Q(Nrda,*), Diag(*), Div(*), Td(*)
-  !***FIRST EXECUTABLE STATEMENT  OHTROR
+  !* FIRST EXECUTABLE STATEMENT  OHTROR
   nmir = N - Irank
   irp = Irank + 1
   DO k = 1, Irank

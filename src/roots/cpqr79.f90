@@ -1,14 +1,21 @@
-!DECK CPQR79
+!** CPQR79
 SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPQR79
-  !***PURPOSE  Find the zeros of a polynomial with complex coefficients.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  F1A1B
-  !***TYPE      COMPLEX (RPQR79-S, CPQR79-C)
-  !***KEYWORDS  COMPLEX POLYNOMIAL, POLYNOMIAL ROOTS, POLYNOMIAL ZEROS
-  !***AUTHOR  Vandevender, W. H., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Find the zeros of a polynomial with complex coefficients.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  F1A1B
+  !***
+  ! **Type:**      COMPLEX (RPQR79-S, CPQR79-C)
+  !***
+  ! **Keywords:**  COMPLEX POLYNOMIAL, POLYNOMIAL ROOTS, POLYNOMIAL ZEROS
+  !***
+  ! **Author:**  Vandevender, W. H., (SNLA)
+  !***
+  ! **Description:**
   !
   !   Abstract
   !       This routine computes all zeros of a polynomial of degree NDEG
@@ -39,9 +46,12 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !          2  COEFF(1)=0.0
   !          3  NDEG is invalid (less than or equal to 0)
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  COMQR, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  COMQR, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791201  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -50,12 +60,12 @@ SUBROUTINE CPQR79(Ndeg,Coeff,Root,Ierr,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   911010  Code reworked and simplified.  (RWC and WRB)
-  !***END PROLOGUE  CPQR79
+  
   INTEGER km1
   COMPLEX Coeff(*), Root(*), scale, c
   REAL Work(*)
   INTEGER Ndeg, Ierr, k, khr, khi, kwr, kwi, kad, kj
-  !***FIRST EXECUTABLE STATEMENT  CPQR79
+  !* FIRST EXECUTABLE STATEMENT  CPQR79
   Ierr = 0
   IF ( ABS(Coeff(1))==0.0 ) THEN
     Ierr = 2

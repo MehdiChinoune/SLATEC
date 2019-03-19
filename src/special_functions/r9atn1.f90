@@ -1,17 +1,23 @@
-!DECK R9ATN1
+!** R9ATN1
 REAL FUNCTION R9ATN1(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  R9ATN1
-  !***SUBSIDIARY
-  !***PURPOSE  Evaluate ATAN(X) from first order relative accuracy so that
+  !>
+  !***
+  !  Evaluate ATAN(X) from first order relative accuracy so that
   !            ATAN(X) = X + X**3*R9ATN1(X).
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4A
-  !***TYPE      SINGLE PRECISION (R9ATN1-S, D9ATN1-D)
-  !***KEYWORDS  ARC TANGENT, ELEMENTARY FUNCTIONS, FIRST ORDER, FNLIB,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      SINGLE PRECISION (R9ATN1-S, D9ATN1-D)
+  !***
+  ! **Keywords:**  ARC TANGENT, ELEMENTARY FUNCTIONS, FIRST ORDER, FNLIB,
   !             TRIGONOMETRIC
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate  ATAN(X)  from first order, that is, evaluate
   ! (ATAN(X)-X)/X**3  with relative error accuracy so that
@@ -23,15 +29,18 @@ REAL FUNCTION R9ATN1(X)
   !                               significant figures required  15.44
   !                                    decimal places required  17.32
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780401  DATE WRITTEN
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  !***END PROLOGUE  R9ATN1
+  
   REAL atn1cs, CSEVL, eps, R1MACH, X, xbig, xmax, xsml, y
   INTEGER INITS, ntatn1
   DIMENSION atn1cs(21)
@@ -59,7 +68,7 @@ REAL FUNCTION R9ATN1(X)
   DATA atn1cs(20)/.00000000000000013E0/
   DATA atn1cs(21)/ - .00000000000000002E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  R9ATN1
+  !* FIRST EXECUTABLE STATEMENT  R9ATN1
   IF ( first ) THEN
     eps = R1MACH(3)
     ntatn1 = INITS(atn1cs,21,0.1*eps)

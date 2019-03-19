@@ -1,16 +1,22 @@
-!DECK R9KNUS
+!** R9KNUS
 SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  R9KNUS
-  !***SUBSIDIARY
-  !***PURPOSE  Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*
+  !>
+  !***
+  !  Compute Bessel functions EXP(X)*K-SUB-XNU(X) and EXP(X)*
   !            K-SUB-XNU+1(X) for 0.0 .LE. XNU .LT. 1.0.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B3
-  !***TYPE      SINGLE PRECISION (R9KNUS-S, D9KNUS-D)
-  !***KEYWORDS  BESSEL FUNCTION, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B3
+  !***
+  ! **Type:**      SINGLE PRECISION (R9KNUS-S, D9KNUS-D)
+  !***
+  ! **Keywords:**  BESSEL FUNCTION, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Compute Bessel functions EXP(X) * K-sub-XNU (X)  and
   ! EXP(X) * K-sub-XNU+1 (X) for 0.0 .LE. XNU .LT. 1.0 .
@@ -27,9 +33,12 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !                               significant figures required  16.08
   !                                    decimal places required  17.38
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, GAMMA, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, GAMMA, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -38,7 +47,7 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  R9KNUS
+  
   REAL a, a0, aln2, alnbig, alneps, alnsml, alnz, alpha, an, b0, &
     beta, Bknu, bknu0, Bknu1, bknud, bn, c0, c0kcs, CSEVL, euler
   REAL expx, GAMMA, p1, p2, p3, qq, R1MACH, result, sqpi2, sqrtx, &
@@ -82,7 +91,7 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   DATA sqpi2/1.2533141373155003E0/
   DATA aln2/0.69314718055994531E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  R9KNUS
+  !* FIRST EXECUTABLE STATEMENT  R9KNUS
   IF ( first ) THEN
     ntc0k = INITS(c0kcs,16,0.1*R1MACH(3))
     ntznu1 = INITS(znu1cs,12,0.1*R1MACH(3))

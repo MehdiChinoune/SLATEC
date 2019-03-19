@@ -1,15 +1,22 @@
-!DECK DNBFA
+!** DNBFA
 SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DNBFA
-  !***PURPOSE  Factor a band matrix by elimination.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2A2
-  !***TYPE      DOUBLE PRECISION (SNBFA-S, DNBFA-D, CNBFA-C)
-  !***KEYWORDS  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION,
+  !>
+  !***
+  !  Factor a band matrix by elimination.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2A2
+  !***
+  ! **Type:**      DOUBLE PRECISION (SNBFA-S, DNBFA-D, CNBFA-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION,
   !             NONSYMMETRIC
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !     DNBFA factors a double precision band matrix by elimination.
   !
@@ -101,24 +108,27 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   !           54 55 56  *  +
   !           65 66  *  *  +
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DSCAL, DSWAP, IDAMAX
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DSCAL, DSWAP, IDAMAX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800728  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DNBFA
+  
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
   REAL(8) :: Abe(Lda,*)
   !
   INTEGER ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp, &
     IDAMAX
   REAL(8) :: t
-  !***FIRST EXECUTABLE STATEMENT  DNBFA
+  !* FIRST EXECUTABLE STATEMENT  DNBFA
   ml1 = Ml + 1
   mb = Ml + Mu
   m = Ml + Mu + 1

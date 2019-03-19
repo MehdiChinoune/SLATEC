@@ -1,13 +1,17 @@
-!DECK RWUPDT
+!** RWUPDT
 SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RWUPDT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SNLS1 and SNLS1E
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (RWUPDT-S, DWUPDT-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SNLS1 and SNLS1E
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (RWUPDT-S, DWUPDT-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Given an N by N upper triangular matrix R, this subroutine
   !     computes the QR decomposition of the matrix formed when a row
@@ -57,16 +61,19 @@ SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
   !       SIN is an output array of length N which contains the
   !         sines of the transforming Givens rotations.
   !
-  !***SEE ALSO  SNLS1, SNLS1E
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SNLS1, SNLS1E
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  RWUPDT
+  
   INTEGER N, Ldr
   REAL Alpha
   REAL R(Ldr,*), W(*), B(*), Cos(*), Sin(*)
@@ -74,7 +81,7 @@ SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
   REAL cotan, one, p5, p25, rowj, tan, temp, zero
   SAVE one, p5, p25, zero
   DATA one, p5, p25, zero/1.0E0, 5.0E-1, 2.5E-1, 0.0E0/
-  !***FIRST EXECUTABLE STATEMENT  RWUPDT
+  !* FIRST EXECUTABLE STATEMENT  RWUPDT
   DO j = 1, N
     rowj = W(j)
     jm1 = j - 1

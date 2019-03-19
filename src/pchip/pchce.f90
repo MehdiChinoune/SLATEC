@@ -1,13 +1,17 @@
-!DECK PCHCE
+!** PCHCE
 SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PCHCE
-  !***SUBSIDIARY
-  !***PURPOSE  Set boundary conditions for PCHIC
-  !***LIBRARY   SLATEC (PCHIP)
-  !***TYPE      SINGLE PRECISION (PCHCE-S, DPCHCE-D)
-  !***AUTHOR  Fritsch, F. N., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Set boundary conditions for PCHIC
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Type:**      SINGLE PRECISION (PCHCE-S, DPCHCE-D)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
+  !***
+  ! **Description:**
   !
   !          PCHCE:  PCHIC End Derivative Setter.
   !
@@ -77,9 +81,12 @@ SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !
   !  Fortran intrinsics used:  ABS.
   !
-  !***SEE ALSO  PCHIC
-  !***ROUTINES CALLED  PCHDF, PCHST, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  PCHIC
+  !***
+  ! **Routines called:**  PCHDF, PCHST, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820218  DATE WRITTEN
   !   820805  Converted to SLATEC library version.
   !   870707  Minor corrections made to prologue..
@@ -92,7 +99,7 @@ SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
   !   930503  Improved purpose.  (FNF)
-  !***END PROLOGUE  PCHCE
+  
   !
   !  Programming notes:
   !     1. The function  PCHST(ARG1,ARG2)  is assumed to return zero if
@@ -124,7 +131,7 @@ SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !
   DATA zero/0./, half/0.5/, two/2./, three/3./
   !
-  !***FIRST EXECUTABLE STATEMENT  PCHCE
+  !* FIRST EXECUTABLE STATEMENT  PCHCE
   ibeg = Ic(1)
   iend = Ic(2)
   Ierr = 0

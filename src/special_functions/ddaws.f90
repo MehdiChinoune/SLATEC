@@ -1,14 +1,21 @@
-!DECK DDAWS
+!** DDAWS
 REAL(8) FUNCTION DDAWS(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DDAWS
-  !***PURPOSE  Compute Dawson's function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C8C
-  !***TYPE      DOUBLE PRECISION (DAWS-S, DDAWS-D)
-  !***KEYWORDS  DAWSON'S FUNCTION, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute Dawson's function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C8C
+  !***
+  ! **Type:**      DOUBLE PRECISION (DAWS-S, DDAWS-D)
+  !***
+  ! **Keywords:**  DAWSON'S FUNCTION, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DDAWS(X) calculates the double precision Dawson's integral
   ! for double precision argument X.
@@ -31,16 +38,19 @@ REAL(8) FUNCTION DDAWS(X)
   !                               significant figures required  29.79
   !                                    decimal places required  32.64
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  DDAWS
+  
   REAL eps
   INTEGER INITDS, ntdaw, ntdaw2, ntdawa
   REAL(8) :: X, dawcs(21), daw2cs(45), dawacs(75), xbig, xmax, &
@@ -189,7 +199,7 @@ REAL(8) FUNCTION DDAWS(X)
   DATA dawacs(74)/ - .6120087296881677722911435593001D-31/
   DATA dawacs(75)/ + .1966024640193164686956230217896D-31/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DDAWS
+  !* FIRST EXECUTABLE STATEMENT  DDAWS
   IF ( first ) THEN
     eps = REAL( D1MACH(3), 4 )
     ntdaw = INITDS(dawcs,21,0.1*eps)

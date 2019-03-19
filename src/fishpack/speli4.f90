@@ -1,31 +1,39 @@
-!DECK SPELI4
+!** SPELI4
 SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     Bdd,COFX,An,Bn,Cn,Dn,Un,Zn,Am,Bm,Cm,Dm,Um,Zm,Grhs,Usol,&
     Idmn,W,Pertrb,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPELI4
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SEPX4
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SPELI4-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SEPX4
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SPELI4-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     SPELI4 sets up vectors and arrays for input to BLKTRI
   !     and computes a second order solution in USOL.  A return jump to
   !     SEPX4 occurs if IORDER=2.  If IORDER=4 a fourth order
   !     solution is generated in USOL.
   !
-  !***SEE ALSO  SEPX4
-  !***ROUTINES CALLED  CHKSN4, DEFE4, GENBUN, MINSO4, ORTHO4, TRIS4
-  !***COMMON BLOCKS    SPL4
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SEPX4
+  !***
+  ! **Routines called:**  CHKSN4, DEFE4, GENBUN, MINSO4, ORTHO4, TRIS4
+  !***
+  ! COMMON BLOCKS    SPL4
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891009  Removed unreferenced variable.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  SPELI4
+  
   REAL A, ai, AIT, Alpha, Am, An, ax1, axi, B, Bda, Bdb, Bdc, &
     Bdd, Beta, bi, BIT, Bm, Bn, bxi, C
   REAL ci, CIT, Cm, Cn, cxi, cxm, D, DIT, DLX, DLX4, DLY, DLY4, &
@@ -42,7 +50,7 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   LOGICAL singlr
   EXTERNAL COFX
-  !***FIRST EXECUTABLE STATEMENT  SPELI4
+  !* FIRST EXECUTABLE STATEMENT  SPELI4
   KSWx = Mbdcnd + 1
   KSWy = Nbdcnd + 1
   K = M + 1

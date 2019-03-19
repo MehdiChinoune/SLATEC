@@ -1,13 +1,17 @@
-!DECK ZSERI
+!** ZSERI
 SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZSERI
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESI and ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CSERI-A, ZSERI-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZBESI and ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CSERI-A, ZSERI-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZSERI COMPUTES THE I BESSEL FUNCTION FOR REAL(Z).GE.0.0 BY
   !     MEANS OF THE POWER SERIES FOR LARGE ABS(Z) IN THE
@@ -17,13 +21,16 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     CONDITION ABS(Z).LE.2*SQRT(FNU+1) WAS VIOLATED AND THE
   !     COMPUTATION MUST BE COMPLETED IN ANOTHER ROUTINE WITH N=N-ABS(NZ).
   !
-  !***SEE ALSO  ZBESI, ZBESK
-  !***ROUTINES CALLED  D1MACH, DGAMLN, ZABS, ZDIV, ZLOG, ZMLT, ZUCHK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZBESI, ZBESK
+  !***
+  ! **Routines called:**  D1MACH, DGAMLN, ZABS, ZDIV, ZLOG, ZMLT, ZUCHK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
-  !***END PROLOGUE  ZSERI
+  
   !     COMPLEX AK1,CK,COEF,CONE,CRSC,CSCL,CZ,CZERO,HZ,RZ,S1,S2,Y,Z
   REAL(8) :: aa, acz, ak, ak1i, ak1r, Alim, arm, ascle, atol, &
     az, cki, ckr, coefi, coefr, conei, coner, crscr, &
@@ -35,7 +42,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   DIMENSION Yr(N), Yi(N), wr(2), wi(2)
   EXTERNAL ZABS, ZLOG
   DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  ZSERI
+  !* FIRST EXECUTABLE STATEMENT  ZSERI
   Nz = 0
   az = ZABS(Zr,Zi)
   IF ( az==0.0D0 ) GOTO 500

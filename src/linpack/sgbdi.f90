@@ -1,16 +1,23 @@
-!DECK SGBDI
+!** SGBDI
 SUBROUTINE SGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SGBDI
-  !***PURPOSE  Compute the determinant of a band matrix using the factors
+  !>
+  !***
+  !  Compute the determinant of a band matrix using the factors
   !            computed by SGBCO or SGBFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D3A2
-  !***TYPE      SINGLE PRECISION (SGBDI-S, DGBDI-D, CGBDI-C)
-  !***KEYWORDS  BANDED, DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D3A2
+  !***
+  ! **Type:**      SINGLE PRECISION (SGBDI-S, DGBDI-D, CGBDI-C)
+  !***
+  ! **Keywords:**  BANDED, DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK,
   !             MATRIX
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     SGBDI computes the determinant of a band matrix
   !     using the factors computed by SBGCO or SGBFA.
@@ -44,10 +51,13 @@ SUBROUTINE SGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
   !                with  1.0 .LE. ABS(DET(1)) .LT. 10.0
   !                or  DET(1) = 0.0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -55,13 +65,13 @@ SUBROUTINE SGBDI(Abd,Lda,N,Ml,Mu,Ipvt,Det)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SGBDI
+  
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
   REAL Abd(Lda,*), Det(2)
   !
   REAL ten
   INTEGER i, m
-  !***FIRST EXECUTABLE STATEMENT  SGBDI
+  !* FIRST EXECUTABLE STATEMENT  SGBDI
   m = Ml + Mu + 1
   Det(1) = 1.0E0
   Det(2) = 0.0E0

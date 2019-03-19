@@ -1,13 +1,17 @@
-!DECK BESKNU
+!** BESKNU
 SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BESKNU
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BESK
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (BESKNU-S, DBSKNU-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (BESKNU-S, DBSKNU-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !         BESKNU computes N member sequences of K Bessel functions
@@ -62,12 +66,16 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
   !         Overflow - a fatal error
   !         Underflow with KODE=1 - a non-fatal error (NZ.NE.0)
   !
-  !***SEE ALSO  BESK
-  !***REFERENCES  N. M. Temme, On the numerical evaluation of the modified
+  !***
+  ! **See also:**  BESK
+  !***
+  ! **References:**  N. M. Temme, On the numerical evaluation of the modified
   !                 Bessel function of the third kind, Journal of
   !                 Computational Physics 19, (1975), pp. 324-337.
-  !***ROUTINES CALLED  GAMMA, I1MACH, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  GAMMA, I1MACH, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790201  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
@@ -78,7 +86,7 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BESKNU
+  
   !
   INTEGER i, iflag, inu, j, k, kk, Kode, koded, N, nn, Nz
   INTEGER I1MACH
@@ -97,7 +105,7 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
     -4.21977345555443E-02, 7.21894324666300E-03, &
     -2.15241674114900E-04, -2.01348547807000E-05, &
     1.13302723200000E-06, 6.11609500000000E-09/
-  !***FIRST EXECUTABLE STATEMENT  BESKNU
+  !* FIRST EXECUTABLE STATEMENT  BESKNU
   kk = -I1MACH(12)
   elim = 2.303E0*(kk*R1MACH(5)-3.0E0)
   ak = R1MACH(3)

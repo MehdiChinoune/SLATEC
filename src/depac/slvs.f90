@@ -1,27 +1,35 @@
-!DECK SLVS
+!** SLVS
 SUBROUTINE SLVS(Wm,Iwm,X,Tem)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SLVS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SLVS-S, DSLVS-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SLVS-S, DSLVS-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   SLVS solves the linear system in the iteration scheme for the
   !   integrator package DEBDF.
   !
-  !***SEE ALSO  DEBDF
-  !***ROUTINES CALLED  SGBSL, SGESL
-  !***COMMON BLOCKS    DEBDF1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DEBDF
+  !***
+  ! **Routines called:**  SGBSL, SGESL
+  !***
+  ! COMMON BLOCKS    DEBDF1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-  !***END PROLOGUE  SLVS
+  
   !
   !LLL. OPTIMIZE
   INTEGER Iwm, i, IER, IOWnd, IOWns, JSTart, KFLag, L, MAXord, &
@@ -56,7 +64,7 @@ SUBROUTINE SLVS(Wm,Iwm,X,Tem)
   !       IER = -1 IF A SINGULAR MATRIX AROSE WITH MITER = 3.
   ! THIS ROUTINE ALSO USES THE COMMON VARIABLES EL0, H, MITER, AND N.
   !-----------------------------------------------------------------------
-  !***FIRST EXECUTABLE STATEMENT  SLVS
+  !* FIRST EXECUTABLE STATEMENT  SLVS
   IER = 0
   SELECT CASE (MITer)
     CASE (3)

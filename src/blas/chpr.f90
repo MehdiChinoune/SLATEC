@@ -1,17 +1,24 @@
-!DECK CHPR
+!** CHPR
 SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHPR
-  !***PURPOSE  Perform the hermitian rank 1 operation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B4
-  !***TYPE      COMPLEX (CHPR-C)
-  !***KEYWORDS  LEVEL 2 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J. J., (ANL)
+  !>
+  !***
+  !  Perform the hermitian rank 1 operation.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      COMPLEX (CHPR-C)
+  !***
+  ! **Keywords:**  LEVEL 2 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J. J., (ANL)
   !           Du Croz, J., (NAG)
   !           Hammarling, S., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  CHPR    performs the hermitian rank 1 operation
   !
@@ -76,16 +83,19 @@ SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
   !           not be set, they are assumed to be zero, and on exit they
   !           are set to zero.
   !
-  !***REFERENCES  Dongarra, J. J., Du Croz, J., Hammarling, S., and
+  !***
+  ! **References:**  Dongarra, J. J., Du Croz, J., Hammarling, S., and
   !                 Hanson, R. J.  An extended set of Fortran basic linear
   !                 algebra subprograms.  ACM TOMS, Vol. 14, No. 1,
   !                 pp. 1-17, March 1988.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  CHPR
+  
   !     .. Scalar Arguments ..
   REAL Alpha
   INTEGER Incx, N
@@ -105,7 +115,7 @@ SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, REAL
-  !***FIRST EXECUTABLE STATEMENT  CHPR
+  !* FIRST EXECUTABLE STATEMENT  CHPR
   !
   !     Test the input parameters.
   !

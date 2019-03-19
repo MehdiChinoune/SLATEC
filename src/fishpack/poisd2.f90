@@ -1,13 +1,17 @@
-!DECK POISD2
+!** POISD2
 SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  POISD2
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to GENBUN
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (POISD2-S, CMPOSD-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to GENBUN
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (POISD2-S, CMPOSD-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Subroutine to solve Poisson's equation for Dirichlet boundary
   !     conditions.
@@ -15,22 +19,25 @@ SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !     ISTAG = 1 if the last diagonal block is the matrix A.
   !     ISTAG = 2 if the last diagonal block is the matrix A+I.
   !
-  !***SEE ALSO  GENBUN
-  !***ROUTINES CALLED  COSGEN, S1MERG, TRIX
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  GENBUN
+  !***
+  ! **Routines called:**  COSGEN, S1MERG, TRIX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   920130  Modified to use merge routine S1MERG rather than deleted
   !           routine MERGE.  (WRB)
-  !***END PROLOGUE  POISD2
+  
   REAL B, Ba, Bb, Bc, D, fi, P, Q, t, Tcos, W
   INTEGER i, ideg, Idimq, ip, ip1, ipstor, irreg, Istag, j, jdeg, &
     jm1, jm2, jm3, jp1, jp2, jp3, jsh, jsp, jst, jstsav
   INTEGER kr, krpi, l, lr, m, Mr, n, nodd, noddpr, Nr, nun
   DIMENSION Q(Idimq,*), Ba(*), Bb(*), Bc(*), Tcos(*), B(*), D(*), W(*), P(*)
-  !***FIRST EXECUTABLE STATEMENT  POISD2
+  !* FIRST EXECUTABLE STATEMENT  POISD2
   m = Mr
   n = Nr
   jsh = 0

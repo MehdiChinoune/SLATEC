@@ -1,15 +1,21 @@
-!DECK D9AIMP
+!** D9AIMP
 SUBROUTINE D9AIMP(X,Ampl,Theta)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  D9AIMP
-  !***SUBSIDIARY
-  !***PURPOSE  Evaluate the Airy modulus and phase.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10D
-  !***TYPE      DOUBLE PRECISION (R9AIMP-S, D9AIMP-D)
-  !***KEYWORDS  AIRY FUNCTION, FNLIB, MODULUS, PHASE, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Evaluate the Airy modulus and phase.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10D
+  !***
+  ! **Type:**      DOUBLE PRECISION (R9AIMP-S, D9AIMP-D)
+  !***
+  ! **Keywords:**  AIRY FUNCTION, FNLIB, MODULUS, PHASE, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate the Airy modulus and phase for X .LE. -1.0
   !
@@ -49,16 +55,19 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
   !                               significant figures required  29.79
   !                                    decimal places required  32.23
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  !***END PROLOGUE  D9AIMP
+  
   REAL eta
   INTEGER INITDS, nam20, nam21, nam22, nath0, nath1, nath2
   REAL(8) :: X, Ampl, Theta, am20cs(57), ath0cs(53), am21cs(60), &
@@ -442,7 +451,7 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
   DATA ath2cs(72)/ - .4970947029753336916550570105023D-31/
   DATA pi4/0.78539816339744830961566084581988D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  D9AIMP
+  !* FIRST EXECUTABLE STATEMENT  D9AIMP
   IF ( first ) THEN
     eta = 0.1*REAL(D1MACH(3))
     nam20 = INITDS(am20cs,57,eta)

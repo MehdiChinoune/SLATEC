@@ -1,14 +1,21 @@
-!DECK COST
+!** COST
 SUBROUTINE COST(N,X,Wsave)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  COST
-  !***PURPOSE  Compute the cosine transform of a real, even sequence.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A3
-  !***TYPE      SINGLE PRECISION (COST-S)
-  !***KEYWORDS  COSINE FOURIER TRANSFORM, FFTPACK
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the cosine transform of a real, even sequence.
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A3
+  !***
+  ! **Type:**      SINGLE PRECISION (COST-S)
+  !***
+  ! **Keywords:**  COSINE FOURIER TRANSFORM, FFTPACK
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !  Subroutine COST computes the discrete Fourier cosine transform
   !  of an even sequence X(I).  The transform is defined below at output
@@ -55,11 +62,14 @@ SUBROUTINE COST(N,X,Wsave)
   !  WSAVE   contains initialization calculations which must not be
   !          destroyed between calls of COST.
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  RFFTF
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  RFFTF
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -68,11 +78,11 @@ SUBROUTINE COST(N,X,Wsave)
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  COST
+  
   REAL c1, t1, t2, tx2, Wsave, X, x1h, x1p3, xi, xim2
   INTEGER i, k, kc, modn, N, nm1, np1, ns2
   DIMENSION X(*), Wsave(*)
-  !***FIRST EXECUTABLE STATEMENT  COST
+  !* FIRST EXECUTABLE STATEMENT  COST
   nm1 = N - 1
   np1 = N + 1
   ns2 = N/2

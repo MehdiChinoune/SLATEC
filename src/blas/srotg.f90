@@ -1,18 +1,25 @@
-!DECK SROTG
+!** SROTG
 SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SROTG
-  !***PURPOSE  Construct a plane Givens rotation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B10
-  !***TYPE      SINGLE PRECISION (SROTG-S, DROTG-D, CROTG-C)
-  !***KEYWORDS  BLAS, GIVENS ROTATION, GIVENS TRANSFORMATION,
+  !>
+  !***
+  !  Construct a plane Givens rotation.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B10
+  !***
+  ! **Type:**      SINGLE PRECISION (SROTG-S, DROTG-D, CROTG-C)
+  !***
+  ! **Keywords:**  BLAS, GIVENS ROTATION, GIVENS TRANSFORMATION,
   !             LINEAR ALGEBRA, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -46,22 +53,25 @@ SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
   !     Normally, the subprogram SROT(N,SX,INCX,SY,INCY,SC,SS) will
   !     next be called to apply the transformation to a 2 by N matrix.
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SROTG
+  
   REAL r, Sa, Sb, Sc, Ss, u, v
-  !***FIRST EXECUTABLE STATEMENT  SROTG
+  !* FIRST EXECUTABLE STATEMENT  SROTG
   IF ( ABS(Sa)>ABS(Sb) ) THEN
     !
-    ! *** HERE ABS(SA) .GT. ABS(SB) ***
+    !- ** HERE ABS(SA) .GT. ABS(SB) ***
     !
     u = Sa + Sa
     v = Sb/u
@@ -78,11 +88,11 @@ SUBROUTINE SROTG(Sa,Sb,Sc,Ss)
     Sa = r
     RETURN
     !
-    ! *** HERE ABS(SA) .LE. ABS(SB) ***
+    !- ** HERE ABS(SA) .LE. ABS(SB) ***
     !
   ELSEIF ( Sb==0.0E0 ) THEN
     !
-    ! *** HERE SA = SB = 0.0 ***
+    !- ** HERE SA = SB = 0.0 ***
     !
     Sc = 1.0E0
     Ss = 0.0E0

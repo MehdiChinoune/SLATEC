@@ -1,13 +1,17 @@
-!DECK SDASLV
+!** SDASLV
 SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SDASLV
-  !***SUBSIDIARY
-  !***PURPOSE  Linear system solver for SDASSL.
-  !***LIBRARY   SLATEC (DASSL)
-  !***TYPE      SINGLE PRECISION (SDASLV-S, DDASLV-D)
-  !***AUTHOR  Petzold, Linda R., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Linear system solver for SDASSL.
+  !***
+  ! **Library:**   SLATEC (DASSL)
+  !***
+  ! **Type:**      SINGLE PRECISION (SDASLV-S, DDASLV-D)
+  !***
+  ! **Author:**  Petzold, Linda R., (LLNL)
+  !***
+  ! **Description:**
   !-----------------------------------------------------------------------
   !     THIS ROUTINE MANAGES THE SOLUTION OF THE LINEAR
   !     SYSTEM ARISING IN THE NEWTON ITERATION.
@@ -20,14 +24,16 @@ SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
   !     FOR A BANDED MATRIX,THE LINPACK ROUTINE
   !     SGBSL IS CALLED.
   !-----------------------------------------------------------------------
-  !***ROUTINES CALLED  SGBSL, SGESL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SGBSL, SGESL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830315  DATE WRITTEN
   !   901009  Finished conversion to SLATEC 4.0 format (F.N.Fritsch)
   !   901019  Merged changes made by C. Ulrich with SLATEC 4.0 format.
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
-  !***END PROLOGUE  SDASLV
+  
   !
   INTEGER Neq, Iwm(*)
   REAL Delta(*), Wm(*)
@@ -41,7 +47,7 @@ SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
   PARAMETER (LMTYPE=4)
   PARAMETER (LIPVT=21)
   !
-  !***FIRST EXECUTABLE STATEMENT  SDASLV
+  !* FIRST EXECUTABLE STATEMENT  SDASLV
   mtype = Iwm(LMTYPE)
   SELECT CASE (mtype)
     CASE (3)

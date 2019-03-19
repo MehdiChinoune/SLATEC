@@ -1,16 +1,23 @@
-!DECK CSPDI
+!** CSPDI
 SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CSPDI
-  !***PURPOSE  Compute the determinant and inverse of a complex symmetric
+  !>
+  !***
+  !  Compute the determinant and inverse of a complex symmetric
   !            matrix stored in packed form using the factors from CSPFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2C1, D3C1
-  !***TYPE      COMPLEX (SSPDI-S, DSPDI-D, CHPDI-C, CSPDI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2C1, D3C1
+  !***
+  ! **Type:**      COMPLEX (SSPDI-S, DSPDI-D, CHPDI-C, CSPDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             PACKED, SYMMETRIC
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     CSPDI computes the determinant and inverse
   !     of a complex symmetric matrix using the factors from CSPFA,
@@ -58,10 +65,13 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
   !        and  CSPCO  has set RCOND .EQ. 0.0
   !        or  CSPFA  has set  INFO .NE. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CCOPY, CDOTU, CSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CCOPY, CDOTU, CSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -72,7 +82,7 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CSPDI
+  
   INTEGER N, Job
   COMPLEX Ap(*), Work(*), Det(2)
   INTEGER Kpvt(*)
@@ -84,7 +94,7 @@ SUBROUTINE CSPDI(Ap,N,Kpvt,Det,Work,Job)
   LOGICAL noinv, nodet
   REAL, EXTERNAL :: CABS1
   !
-  !***FIRST EXECUTABLE STATEMENT  CSPDI
+  !* FIRST EXECUTABLE STATEMENT  CSPDI
   noinv = MOD(Job,10)==0
   nodet = MOD(Job,100)/10==0
   !

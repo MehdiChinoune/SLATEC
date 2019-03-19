@@ -1,15 +1,22 @@
-!DECK BALBAK
+!** BALBAK
 SUBROUTINE BALBAK(Nm,N,Low,Igh,Scale,M,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BALBAK
-  !***PURPOSE  Form the eigenvectors of a real general matrix from the
+  !>
+  !***
+  !  Form the eigenvectors of a real general matrix from the
   !            eigenvectors of matrix output from BALANC.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C4
-  !***TYPE      SINGLE PRECISION (BALBAK-S, CBABK2-C)
-  !***KEYWORDS  EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C4
+  !***
+  ! **Type:**      SINGLE PRECISION (BALBAK-S, CBABK2-C)
+  !***
+  ! **Keywords:**  EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure BALBAK,
   !     NUM. MATH. 13, 293-304(1969) by Parlett and Reinsch.
@@ -51,24 +58,27 @@ SUBROUTINE BALBAK(Nm,N,Low,Igh,Scale,M,Z)
   !     Applied Mathematics Division, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BALBAK
+  
   !
   INTEGER i, j, k, M, N, ii, Nm, Igh, Low
   REAL Scale(*), Z(Nm,*)
   REAL s
   !
-  !***FIRST EXECUTABLE STATEMENT  BALBAK
+  !* FIRST EXECUTABLE STATEMENT  BALBAK
   IF ( M/=0 ) THEN
     IF ( Igh/=Low ) THEN
       !

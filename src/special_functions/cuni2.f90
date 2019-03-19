@@ -1,13 +1,17 @@
-!DECK CUNI2
+!** CUNI2
 SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CUNI2
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBESI and CBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CUNI2-A, ZUNI2-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBESI and CBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CUNI2-A, ZUNI2-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     CUNI2 COMPUTES I(FNU,Z) IN THE RIGHT HALF PLANE BY MEANS OF
   !     UNIFORM ASYMPTOTIC EXPANSION FOR J(FNU,ZN) WHERE ZN IS Z*I
@@ -19,12 +23,15 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !     FORMULA FOR ORDERS FNU TO FNU+NLAST-1 BECAUSE FNU+NLAST-1.LT.FNUL.
   !     Y(I)=CZERO FOR I=NLAST+1,N
   !
-  !***SEE ALSO  CBESI, CBESK
-  !***ROUTINES CALLED  CAIRY, CUCHK, CUNHJ, CUOIK, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBESI, CBESK
+  !***
+  ! **Routines called:**  CAIRY, CUCHK, CUNHJ, CUOIK, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CUNI2
+  
   COMPLEX ai, arg, asum, bsum, cfn, ci, cid, cip, cone, crsc, &
     cscl, csr, css, cy, czero, c1, c2, dai, phi, rz, s1, &
     s2, Y, Z, zb, zeta1, zeta2, zn, zar
@@ -37,7 +44,7 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   DATA cip(1), cip(2), cip(3), cip(4)/(1.0E0,0.0E0), (0.0E0,1.0E0), &
     (-1.0E0,0.0E0), (0.0E0,-1.0E0)/
   DATA hpi, aic/1.57079632679489662E+00, 1.265512123484645396E+00/
-  !***FIRST EXECUTABLE STATEMENT  CUNI2
+  !* FIRST EXECUTABLE STATEMENT  CUNI2
   Nz = 0
   nd = N
   Nlast = 0

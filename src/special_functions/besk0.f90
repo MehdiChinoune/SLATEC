@@ -1,17 +1,24 @@
-!DECK BESK0
+!** BESK0
 REAL FUNCTION BESK0(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BESK0
-  !***PURPOSE  Compute the modified (hyperbolic) Bessel function of the
+  !>
+  !***
+  !  Compute the modified (hyperbolic) Bessel function of the
   !            third kind of order zero.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B1
-  !***TYPE      SINGLE PRECISION (BESK0-S, DBESK0-D)
-  !***KEYWORDS  FNLIB, HYPERBOLIC BESSEL FUNCTION,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B1
+  !***
+  ! **Type:**      SINGLE PRECISION (BESK0-S, DBESK0-D)
+  !***
+  ! **Keywords:**  FNLIB, HYPERBOLIC BESSEL FUNCTION,
   !             MODIFIED BESSEL FUNCTION, ORDER ZERO, SPECIAL FUNCTIONS,
   !             THIRD KIND
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! BESK0(X) calculates the modified (hyperbolic) Bessel function
   ! of the third kind of order zero for real argument X .GT. 0.0.
@@ -22,9 +29,12 @@ REAL FUNCTION BESK0(X)
   !                               significant figures required  17.99
   !                                    decimal places required  18.97
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  BESI0, BESK0E, CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  BESI0, BESK0E, CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -32,7 +42,7 @@ REAL FUNCTION BESK0(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  BESK0
+  
   REAL BESI0, BESK0E, bk0cs, CSEVL, R1MACH, X, xmax, xmaxt, xsml, y
   INTEGER INITS, ntk0
   DIMENSION bk0cs(11)
@@ -50,7 +60,7 @@ REAL FUNCTION BESK0(X)
   DATA bk0cs(10)/.00000000000000013744E0/
   DATA bk0cs(11)/.00000000000000000035E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BESK0
+  !* FIRST EXECUTABLE STATEMENT  BESK0
   IF ( first ) THEN
     ntk0 = INITS(bk0cs,11,0.1*R1MACH(3))
     xsml = SQRT(4.0*R1MACH(3))

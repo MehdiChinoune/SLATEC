@@ -1,13 +1,17 @@
-!DECK CUNI1
+!** CUNI1
 SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CUNI1
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBESI and CBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CUNI1-A, ZUNI1-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBESI and CBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CUNI1-A, ZUNI1-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     CUNI1 COMPUTES I(FNU,Z)  BY MEANS OF THE UNIFORM ASYMPTOTIC
   !     EXPANSION FOR I(FNU,Z) IN -PI/3.LE.ARG Z.LE.PI/3.
@@ -18,12 +22,15 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !     FORMULA FOR ORDERS FNU TO FNU+NLAST-1 BECAUSE FNU+NLAST-1.LT.FNUL.
   !     Y(I)=CZERO FOR I=NLAST+1,N
   !
-  !***SEE ALSO  CBESI, CBESK
-  !***ROUTINES CALLED  CUCHK, CUNIK, CUOIK, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBESI, CBESK
+  !***
+  ! **Routines called:**  CUCHK, CUNIK, CUOIK, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CUNI1
+  
   COMPLEX cfn, cone, crsc, cscl, csr, css, cwrk, czero, c1, c2, &
     phi, rz, sum, s1, s2, Y, Z, zeta1, zeta2, cy
   REAL Alim, aphi, ascle, bry, c2i, c2m, c2r, Elim, fn, Fnu, &
@@ -32,7 +39,7 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
     Nz
   DIMENSION bry(3), Y(N), cwrk(16), css(3), csr(3), cy(2)
   DATA czero, cone/(0.0E0,0.0E0), (1.0E0,0.0E0)/
-  !***FIRST EXECUTABLE STATEMENT  CUNI1
+  !* FIRST EXECUTABLE STATEMENT  CUNI1
   Nz = 0
   nd = N
   Nlast = 0

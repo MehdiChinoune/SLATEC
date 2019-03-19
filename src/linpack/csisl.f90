@@ -1,15 +1,22 @@
-!DECK CSISL
+!** CSISL
 SUBROUTINE CSISL(A,Lda,N,Kpvt,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CSISL
-  !***PURPOSE  Solve a complex symmetric system using the factors obtained
+  !>
+  !***
+  !  Solve a complex symmetric system using the factors obtained
   !            from CSIFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2C1
-  !***TYPE      COMPLEX (SSISL-S, DSISL-D, CHISL-C, CSISL-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE, SYMMETRIC
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2C1
+  !***
+  ! **Type:**      COMPLEX (SSISL-S, DSISL-D, CHISL-C, CSISL-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE, SYMMETRIC
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     CSISL solves the complex symmetric system
   !     A * X = B
@@ -49,10 +56,13 @@ SUBROUTINE CSISL(A,Lda,N,Kpvt,B)
   !              CALL CSISL(A,LDA,N,KVPT,C(1,j))
   !        10 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTU
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTU
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -63,7 +73,7 @@ SUBROUTINE CSISL(A,Lda,N,Kpvt,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CSISL
+  
   INTEGER Lda, N, Kpvt(*)
   COMPLEX A(Lda,*), B(*)
   !
@@ -73,7 +83,7 @@ SUBROUTINE CSISL(A,Lda,N,Kpvt,B)
   !     LOOP BACKWARD APPLYING THE TRANSFORMATIONS AND
   !     D INVERSE TO B.
   !
-  !***FIRST EXECUTABLE STATEMENT  CSISL
+  !* FIRST EXECUTABLE STATEMENT  CSISL
   k = N
   DO WHILE ( k/=0 )
     IF ( Kpvt(k)<0 ) THEN

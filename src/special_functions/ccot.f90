@@ -1,20 +1,30 @@
-!DECK CCOT
+!** CCOT
 COMPLEX FUNCTION CCOT(Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CCOT
-  !***PURPOSE  Compute the cotangent.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4A
-  !***TYPE      COMPLEX (COT-S, DCOT-D, CCOT-C)
-  !***KEYWORDS  COTANGENT, ELEMENTARY FUNCTIONS, FNLIB, TRIGONOMETRIC
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the cotangent.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      COMPLEX (COT-S, DCOT-D, CCOT-C)
+  !***
+  ! **Keywords:**  COTANGENT, ELEMENTARY FUNCTIONS, FNLIB, TRIGONOMETRIC
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! CCOT(Z) calculates the complex trigonometric cotangent of Z.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  R1MACH, XERCLR, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  R1MACH, XERCLR, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -22,12 +32,12 @@ COMPLEX FUNCTION CCOT(Z)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  CCOT
+  
   REAL den, R1MACH, sn2x, sqeps, x2, y2
   COMPLEX Z
   SAVE sqeps
   DATA sqeps/0./
-  !***FIRST EXECUTABLE STATEMENT  CCOT
+  !* FIRST EXECUTABLE STATEMENT  CCOT
   IF ( sqeps==0. ) sqeps = SQRT(R1MACH(4))
   !
   x2 = 2.0*REAL(Z)

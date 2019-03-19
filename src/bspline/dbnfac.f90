@@ -1,13 +1,17 @@
-!DECK DBNFAC
+!** DBNFAC
 SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBNFAC
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBINT4 and DBINTK
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (BNFAC-S, DBNFAC-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBINT4 and DBINTK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (BNFAC-S, DBNFAC-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !  DBNFAC is the BANFAC routine from
   !        * A Practical Guide to Splines *  by C. de Boor
@@ -18,7 +22,7 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   !  matrix  A  of order  NROW  with  (NBANDL + 1 + NBANDU) bands or diag-
   !  onals in the work array  W .
   !
-  ! *****  I N P U T  ****** W is double precision
+  !- ****  I N P U T  ****** W is double precision
   !  W.....Work array of size  (NROWW,NROW)  containing the interesting
   !        part of a banded matrix  A, with the diagonals or bands of  A
   !        stored in the rows of  W, while columns of  A  correspond to
@@ -45,7 +49,7 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   !  NBANDL.....Number of bands of  A  below the main diagonal
   !  NBANDU.....Number of bands of  A  above the main diagonal .
   !
-  ! *****  O U T P U T  ****** W is double precision
+  !- ****  O U T P U T  ****** W is double precision
   !  IFLAG.....Integer indicating success( = 1) or failure ( = 2) .
   !     If  IFLAG = 1, then
   !  W.....contains the LU-factorization of  A  into a unit lower triangu-
@@ -61,28 +65,31 @@ SUBROUTINE DBNFAC(W,Nroww,Nrow,Nbandl,Nbandu,Iflag)
   !        that  A  does not have an LU-factorization. This implies that
   !        A  is singular in case it is totally positive .
   !
-  ! *****  M E T H O D  ******
+  !- ****  M E T H O D  ******
   !     Gauss elimination  W I T H O U T  pivoting is used. The routine is
   !  intended for use with matrices  A  which do not require row inter-
   !  changes during factorization, especially for the  T O T A L L Y
   !  P O S I T I V E  matrices which occur in spline calculations.
   !     The routine should NOT be used for an arbitrary banded matrix.
   !
-  !***SEE ALSO  DBINT4, DBINTK
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBINT4, DBINTK
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DBNFAC
+  
   !
   INTEGER Iflag, Nbandl, Nbandu, Nrow, Nroww, i, ipk, j, jmax, k, &
     kmax, middle, midmk, nrowm1
   REAL(8) :: W(Nroww,*), factor, pivot
   !
-  !***FIRST EXECUTABLE STATEMENT  DBNFAC
+  !* FIRST EXECUTABLE STATEMENT  DBNFAC
   Iflag = 1
   middle = Nbandu + 1
   !                         W(MIDDLE,.) CONTAINS THE MAIN DIAGONAL OF  A .

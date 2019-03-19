@@ -1,21 +1,31 @@
-!DECK ACOSH
+!** ACOSH
 REAL FUNCTION ACOSH(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ACOSH
-  !***PURPOSE  Compute the arc hyperbolic cosine.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4C
-  !***TYPE      SINGLE PRECISION (ACOSH-S, DACOSH-D, CACOSH-C)
-  !***KEYWORDS  ACOSH, ARC HYPERBOLIC COSINE, ELEMENTARY FUNCTIONS, FNLIB,
+  !>
+  !***
+  !  Compute the arc hyperbolic cosine.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4C
+  !***
+  ! **Type:**      SINGLE PRECISION (ACOSH-S, DACOSH-D, CACOSH-C)
+  !***
+  ! **Keywords:**  ACOSH, ARC HYPERBOLIC COSINE, ELEMENTARY FUNCTIONS, FNLIB,
   !             INVERSE HYPERBOLIC COSINE
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! ACOSH(X) computes the arc hyperbolic cosine of X.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -23,12 +33,12 @@ REAL FUNCTION ACOSH(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  ACOSH
+  
   REAL aln2, R1MACH, X, xmax
   SAVE aln2, xmax
   DATA aln2/0.69314718055994530942E0/
   DATA xmax/0./
-  !***FIRST EXECUTABLE STATEMENT  ACOSH
+  !* FIRST EXECUTABLE STATEMENT  ACOSH
   IF ( xmax==0. ) xmax = 1.0/SQRT(R1MACH(3))
   !
   IF ( X<1.0 ) CALL XERMSG('SLATEC','ACOSH','X LESS THAN 1',1,2)

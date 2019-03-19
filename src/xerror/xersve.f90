@@ -1,24 +1,30 @@
-!DECK XERSVE
+!** XERSVE
 SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XERSVE
-  !***SUBSIDIARY
-  !***PURPOSE  Record that an error has occurred.
-  !***LIBRARY   SLATEC (XERROR)
-  !***CATEGORY  R3
-  !***TYPE      ALL (XERSVE-A)
-  !***KEYWORDS  ERROR, XERROR
-  !***AUTHOR  Jones, R. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Record that an error has occurred.
+  !***
+  ! **Library:**   SLATEC (XERROR)
+  !***
+  ! **Category:**  R3
+  !***
+  ! **Type:**      ALL (XERSVE-A)
+  !***
+  ! **Keywords:**  ERROR, XERROR
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !        INTEGER  KFLAG, NERR, LEVEL, ICOUNT
   !        CHARACTER * (len) LIBRAR, SUBROU, MESSG
   !
   !        CALL XERSVE (LIBRAR, SUBROU, MESSG, KFLAG, NERR, LEVEL, ICOUNT)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !        LIBRAR :IN    is the library that the message is from.
   !        SUBROU :IN    is the subroutine that the message is from.
@@ -36,16 +42,19 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
   !                      contain this message specifically.  When KFLAG=0,
   !                      ICOUNT will not be altered.
   !
-  ! *Description:
+  !- Description:
   !
   !   Record that this error occurred and possibly dump and clear the
   !   tables.
   !
-  !***REFERENCES  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
+  !***
+  ! **References:**  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
   !                 Error-handling Package, SAND82-0800, Sandia
   !                 Laboratories, 1982.
-  !***ROUTINES CALLED  I1MACH, XGETUA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  I1MACH, XGETUA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800319  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
@@ -56,7 +65,7 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
   !           XERSVE.  (RWC)
   !   910626  Added LIBTAB and SUBTAB to SAVE statement.  (BKS)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  XERSVE
+  
   INTEGER i, I1MACH, Icount, iunit, Kflag, kount, kountx, kunit, &
     LENTAB, Level, levtab, Nerr, nertab, nmsg, nunit
   PARAMETER (LENTAB=10)
@@ -67,7 +76,7 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
   DIMENSION nertab(LENTAB), levtab(LENTAB), kount(LENTAB)
   SAVE libtab, subtab, mestab, nertab, levtab, kount, kountx, nmsg
   DATA kountx/0/, nmsg/0/
-  !***FIRST EXECUTABLE STATEMENT  XERSVE
+  !* FIRST EXECUTABLE STATEMENT  XERSVE
   !
   IF ( Kflag<=0 ) THEN
     !

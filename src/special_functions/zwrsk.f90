@@ -1,23 +1,30 @@
-!DECK ZWRSK
+!** ZWRSK
 SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZWRSK
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESI and ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CWRSK-A, ZWRSK-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZBESI and ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CWRSK-A, ZWRSK-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZWRSK COMPUTES THE I BESSEL FUNCTION FOR RE(Z).GE.0.0 BY
   !     NORMALIZING THE I FUNCTION RATIOS FROM ZRATI BY THE WRONSKIAN
   !
-  !***SEE ALSO  ZBESI, ZBESK
-  !***ROUTINES CALLED  D1MACH, ZABS, ZBKNU, ZRATI
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZBESI, ZBESK
+  !***
+  ! **Routines called:**  D1MACH, ZABS, ZBKNU, ZRATI
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ZWRSK
+  
   !     COMPLEX CINU,CSCL,CT,CW,C1,C2,RCT,ST,Y,ZR
   REAL(8) :: act, acw, Alim, ascle, cinui, cinur, csclr, cti, &
     ctr, Cwi, Cwr, c1i, c1r, c2i, c2r, Elim, Fnu, &
@@ -26,7 +33,7 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   INTEGER i, Kode, N, nw, Nz
   DIMENSION Yr(N), Yi(N), Cwr(2), Cwi(2)
   EXTERNAL ZABS
-  !***FIRST EXECUTABLE STATEMENT  ZWRSK
+  !* FIRST EXECUTABLE STATEMENT  ZWRSK
   !-----------------------------------------------------------------------
   !     I(FNU+I-1,Z) BY BACKWARD RECURRENCE FOR RATIOS
   !     Y(I)=I(FNU+I,Z)/I(FNU+I-1,Z) FROM CRATI NORMALIZED BY THE

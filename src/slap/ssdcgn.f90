@@ -1,27 +1,34 @@
-!DECK SSDCGN
+!** SSDCGN
 SUBROUTINE SSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSDCGN
-  !***PURPOSE  Diagonally Scaled CG Sparse Ax=b Solver for Normal Eqn's.
+  !>
+  !***
+  !  Diagonally Scaled CG Sparse Ax=b Solver for Normal Eqn's.
   !            Routine to solve a general linear system  Ax = b  using
   !            diagonal scaling with the Conjugate Gradient method
   !            applied to the the normal equations, viz.,  AA'y = b,
   !            where  x = A'y.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (SSDCGN-S, DSDCGN-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM SOLVE,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SSDCGN-S, DSDCGN-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM SOLVE,
   !             SLAP, SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM, ITOL, ITMAX
   !     INTEGER ITER, IERR, IUNIT, LENW, IWORK(10), LENIW
   !     REAL B(N), X(N), A(NELT), TOL, ERR, RWORK(8*N)
@@ -29,7 +36,7 @@ SUBROUTINE SSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     CALL SSDCGN(N, B, X, NELT, IA, JA, A, ISYM, ITOL, TOL,
   !    $     ITMAX, ITER, ERR, IERR, IUNIT, RWORK, LENW, IWORK, LENIW)
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   ! B      :IN       Real B(N).
@@ -115,7 +122,7 @@ SUBROUTINE SSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   ! LENIW  :IN       Integer.
   !         Length of the integer workspace, IWORK.  LENIW >= 10.
   !
-  ! *Description:
+  !- Description:
   !       This  routine is simply a driver  for the  SCGN routine.  It
   !       calls the   SSD2S  routine to set up the preconditioning and
   !       then calls SCGN with the appropriate   MATVEC  and    MSOLVE
@@ -185,21 +192,25 @@ SUBROUTINE SSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Side Effects:
+  !- Side Effects:
   !       The SLAP Triad format (IA, JA, A) is modified internally to be
   !       the SLAP Column format.  See above.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  SCGN, SSD2S, SSMV, SSMTV, SSDI
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  SCGN, SCHKW, SS2Y, SSD2S, SSDI, SSMTV, SSMV
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SCGN, SSD2S, SSMV, SSMTV, SSDI
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  SCGN, SCHKW, SS2Y, SSD2S, SSDI, SSMTV, SSMV
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -211,7 +222,7 @@ SUBROUTINE SSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  !***END PROLOGUE  SSDCGN
+  
   !     .. Parameters ..
   INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
@@ -227,7 +238,7 @@ SUBROUTINE SSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     locw, locz
   !     .. External Subroutines ..
   EXTERNAL SCGN, SCHKW, SS2Y, SSD2S, SSDI, SSMTV, SSMV
-  !***FIRST EXECUTABLE STATEMENT  SSDCGN
+  !* FIRST EXECUTABLE STATEMENT  SSDCGN
   !
   Ierr = 0
   IF ( N<1.OR.Nelt<1 ) THEN

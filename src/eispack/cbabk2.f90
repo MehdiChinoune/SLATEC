@@ -1,15 +1,22 @@
-!DECK CBABK2
+!** CBABK2
 SUBROUTINE CBABK2(Nm,N,Low,Igh,Scale,M,Zr,Zi)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CBABK2
-  !***PURPOSE  Form the eigenvectors of a complex general matrix from the
+  !>
+  !***
+  !  Form the eigenvectors of a complex general matrix from the
   !            eigenvectors of matrix output from CBAL.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C4
-  !***TYPE      COMPLEX (BALBAK-S, CBABK2-C)
-  !***KEYWORDS  EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C4
+  !***
+  ! **Type:**      COMPLEX (BALBAK-S, CBABK2-C)
+  !***
+  ! **Keywords:**  EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure
   !     CBABK2, which is a complex version of BALBAK,
@@ -53,24 +60,27 @@ SUBROUTINE CBABK2(Nm,N,Low,Igh,Scale,M,Zr,Zi)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CBABK2
+  
   !
   INTEGER i, j, k, M, N, ii, Nm, Igh, Low
   REAL Scale(*), Zr(Nm,*), Zi(Nm,*)
   REAL s
   !
-  !***FIRST EXECUTABLE STATEMENT  CBABK2
+  !* FIRST EXECUTABLE STATEMENT  CBABK2
   IF ( M/=0 ) THEN
     IF ( Igh/=Low ) THEN
       !

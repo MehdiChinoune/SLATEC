@@ -1,16 +1,23 @@
-!DECK ALBETA
+!** ALBETA
 REAL FUNCTION ALBETA(A,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ALBETA
-  !***PURPOSE  Compute the natural logarithm of the complete Beta
+  !>
+  !***
+  !  Compute the natural logarithm of the complete Beta
   !            function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7B
-  !***TYPE      SINGLE PRECISION (ALBETA-S, DLBETA-D, CLBETA-C)
-  !***KEYWORDS  FNLIB, LOGARITHM OF THE COMPLETE BETA FUNCTION,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7B
+  !***
+  ! **Type:**      SINGLE PRECISION (ALBETA-S, DLBETA-D, CLBETA-C)
+  !***
+  ! **Keywords:**  FNLIB, LOGARITHM OF THE COMPLETE BETA FUNCTION,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! ALBETA computes the natural log of the complete beta function.
   !
@@ -18,9 +25,12 @@ REAL FUNCTION ALBETA(A,B)
   !       A   real and positive
   !       B   real and positive
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ALNGAM, ALNREL, GAMMA, R9LGMC, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ALNGAM, ALNREL, GAMMA, R9LGMC, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -29,12 +39,12 @@ REAL FUNCTION ALBETA(A,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  !***END PROLOGUE  ALBETA
+  
   REAL A, ALNGAM, ALNREL, B, corr, GAMMA, p, q, R9LGMC, sq2pil
   EXTERNAL GAMMA
   SAVE sq2pil
   DATA sq2pil/0.91893853320467274E0/
-  !***FIRST EXECUTABLE STATEMENT  ALBETA
+  !* FIRST EXECUTABLE STATEMENT  ALBETA
   p = MIN(A,B)
   q = MAX(A,B)
   !

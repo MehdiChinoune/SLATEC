@@ -1,27 +1,34 @@
-!DECK DBKIAS
+!** DBKIAS
 SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBKIAS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBSKIN
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (BKIAS-S, DBKIAS-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBSKIN
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (BKIAS-S, DBKIAS-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     DBKIAS computes repeated integrals of the K0 Bessel function
   !     by the asymptotic expansion
   !
-  !***SEE ALSO  DBSKIN
-  !***ROUTINES CALLED  D1MACH, DBDIFF, DGAMRN, DHKSEQ
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBSKIN
+  !***
+  ! **Routines called:**  D1MACH, DBDIFF, DGAMRN, DHKSEQ
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DBKIAS
+  
   INTEGER i, ii, Ind, j, jmi, jn, k, kk, km, Ktrms, mm, mp, Ms, &
     N, Ierr
   REAL(8) :: Ans, b, bnd, den1, den2, den3, er, err, fj, fk, &
@@ -119,7 +126,7 @@ SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
     408000.0D0/
   DATA hrtpi/8.86226925452758014D-01/
   !
-  !***FIRST EXECUTABLE STATEMENT  DBKIAS
+  !* FIRST EXECUTABLE STATEMENT  DBKIAS
   Ierr = 0
   tol = MAX(D1MACH(4),1.0D-18)
   fln = N

@@ -1,18 +1,25 @@
-!DECK SSIEV
+!** SSIEV
 SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSIEV
-  !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
+  !>
+  !***
+  !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real symmetric matrix.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D4A1
-  !***TYPE      SINGLE PRECISION (SSIEV-S, CHIEV-C)
-  !***KEYWORDS  COMPLEX HERMITIAN, EIGENVALUES, EIGENVECTORS, MATRIX,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D4A1
+  !***
+  ! **Type:**      SINGLE PRECISION (SSIEV-S, CHIEV-C)
+  !***
+  ! **Keywords:**  COMPLEX HERMITIAN, EIGENVALUES, EIGENVECTORS, MATRIX,
   !             SYMMETRIC
-  !***AUTHOR  Kahaner, D. K., (NBS)
+  !***
+  ! **Author:**  Kahaner, D. K., (NBS)
   !           Moler, C. B., (U. of New Mexico)
   !           Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Abstract
   !      SSIEV computes the eigenvalues and, optionally, the eigenvectors
@@ -65,9 +72,12 @@ SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
   !          No. 1   recoverable  N is greater than LDA
   !          No. 2   recoverable  N is less than one
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  IMTQL2, TQLRAT, TRED1, TRED2, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  IMTQL2, TQLRAT, TRED1, TRED2, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800808  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -75,11 +85,11 @@ SUBROUTINE SSIEV(A,Lda,N,E,Work,Job,Info)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  SSIEV
+  
   INTEGER i, j
   INTEGER Info, Job, Lda, N
   REAL A(Lda,*), E(*), Work(*)
-  !***FIRST EXECUTABLE STATEMENT  SSIEV
+  !* FIRST EXECUTABLE STATEMENT  SSIEV
   IF ( N>Lda ) CALL XERMSG('SLATEC','SSIEV','N .GT. LDA.',1,1)
   IF ( N>Lda ) RETURN
   IF ( N<1 ) CALL XERMSG('SLATEC','SSIEV','N .LT. 1',2,1)

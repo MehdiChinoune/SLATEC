@@ -1,16 +1,23 @@
-!DECK REBAK
+!** REBAK
 SUBROUTINE REBAK(Nm,N,B,Dl,M,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  REBAK
-  !***PURPOSE  Form the eigenvectors of a generalized symmetric
+  !>
+  !***
+  !  Form the eigenvectors of a generalized symmetric
   !            eigensystem from the eigenvectors of derived matrix output
   !            from REDUC or REDUC2.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C4
-  !***TYPE      SINGLE PRECISION (REBAK-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C4
+  !***
+  ! **Type:**      SINGLE PRECISION (REBAK-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure REBAKA,
   !     NUM. MATH. 11, 99-110(1968) by Martin and Wilkinson.
@@ -53,24 +60,27 @@ SUBROUTINE REBAK(Nm,N,B,Dl,M,Z)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  REBAK
+  
   !
   INTEGER i, j, k, M, N, i1, ii, Nm
   REAL B(Nm,*), Dl(*), Z(Nm,*)
   REAL x
   !
-  !***FIRST EXECUTABLE STATEMENT  REBAK
+  !* FIRST EXECUTABLE STATEMENT  REBAK
   IF ( M/=0 ) THEN
     !
     DO j = 1, M

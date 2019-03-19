@@ -1,28 +1,36 @@
-!DECK PJAC
+!** PJAC
 SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PJAC
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (PJAC-S, DPJAC-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (PJAC-S, DPJAC-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   PJAC sets up the iteration matrix (involving the Jacobian) for the
   !   integration package DEBDF.
   !
-  !***SEE ALSO  DEBDF
-  !***ROUTINES CALLED  SGBFA, SGEFA, VNWRMS
-  !***COMMON BLOCKS    DEBDF1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DEBDF
+  !***
+  ! **Routines called:**  SGBFA, SGEFA, VNWRMS
+  !***
+  ! COMMON BLOCKS    DEBDF1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-  !***END PROLOGUE  PJAC
+  
   INTEGER Ipar
   REAL Rpar
   !
@@ -72,7 +80,7 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
   ! THIS ROUTINE ALSO USES THE COMMON VARIABLES EL0, H, TN, UROUND,
   ! MITER, N, NFE, AND NJE.
   !-----------------------------------------------------------------------
-  !***FIRST EXECUTABLE STATEMENT  PJAC
+  !* FIRST EXECUTABLE STATEMENT  PJAC
   NJE = NJE + 1
   hl0 = H*EL0
   SELECT CASE (MITer)

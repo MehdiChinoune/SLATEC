@@ -1,28 +1,36 @@
-!DECK SPLPMN
+!** SPLPMN
 SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Amat,Csc,Colnrm,Erd,Erp,Basmat,Wr,Rz,Rg,&
     Rprim,Rhs,Ww,Lmx,Lbm,Ibasis,Ibb,Imat,Ibrc,Ipr,Iwr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPLPMN
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SPLPMN-S, DPLPMN-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SPLPMN-S, DPLPMN-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     MARVEL OPTION(S).. OUTPUT=YES/NO TO ELIMINATE PRINTED OUTPUT.
   !     THIS DOES NOT APPLY TO THE CALLS TO THE ERROR PROCESSOR.
   !
   !     MAIN SUBROUTINE FOR SPLP PACKAGE.
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  IVOUT, LA05BS, PINITM, PNNZRS, PRWPGE, SASUM,
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  IVOUT, LA05BS, PINITM, PNNZRS, PRWPGE, SASUM,
   !                    SCLOSM, SCOPY, SDOT, SPINCW, SPINIT, SPLPCE,
   !                    SPLPDM, SPLPFE, SPLPFL, SPLPMU, SPLPUP, SPOPT,
   !                    SVOUT, XERMSG
-  !***COMMON BLOCKS    LA05DS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! COMMON BLOCKS    LA05DS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Corrected references to XERRWV.  (WRB)
@@ -32,7 +40,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  !***END PROLOGUE  SPLPMN
+  
   INTEGER i, ibas, idg, ienter, ileave, Info, iopt, ipage, ipagef, &
     iplace, isave, itbrc, itlp, j, jstrt, k, key, kprint, &
     Lbm, LCOl
@@ -181,7 +189,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   EXTERNAL USRMAT
   !
   !     SET LP=0 SO NO ERROR MESSAGES WILL PRINT WITHIN LA05 () PACKAGE.
-  !***FIRST EXECUTABLE STATEMENT  SPLPMN
+  !* FIRST EXECUTABLE STATEMENT  SPLPMN
   LP = 0
   !
   !     THE VALUES ZERO AND ONE.

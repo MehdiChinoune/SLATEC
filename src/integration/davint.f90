@@ -1,15 +1,22 @@
-!DECK DAVINT
+!** DAVINT
 SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DAVINT
-  !***PURPOSE  Integrate a function tabulated at arbitrarily spaced
+  !>
+  !***
+  !  Integrate a function tabulated at arbitrarily spaced
   !            abscissas using overlapping parabolas.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  H2A1B2
-  !***TYPE      DOUBLE PRECISION (AVINT-S, DAVINT-D)
-  !***KEYWORDS  INTEGRATION, QUADRATURE, TABULATED DATA
-  !***AUTHOR  Jones, R. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  H2A1B2
+  !***
+  ! **Type:**      DOUBLE PRECISION (AVINT-S, DAVINT-D)
+  !***
+  ! **Keywords:**  INTEGRATION, QUADRATURE, TABULATED DATA
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !         DAVINT integrates a function tabulated at arbitrarily spaced
@@ -58,18 +65,21 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !    Original program from *Numerical Integration* by Davis & Rabinowitz
   !    Adaptation and modifications by Rondall E Jones.
   !
-  !***REFERENCES  R. E. Jones, Approximate integrator of functions
+  !***
+  ! **References:**  R. E. Jones, Approximate integrator of functions
   !                 tabulated at arbitrarily spaced abscissas,
   !                 Report SC-M-69-335, Sandia Laboratories, 1969.
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   690901  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DAVINT
+  
   !
   INTEGER i, Ierr, inlft, inrt, istart, istop, N
   REAL(8) :: a, Ans, b, c, ca, cb, cc, fl, fr, r3, rp5, &
@@ -79,7 +89,7 @@ SUBROUTINE DAVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   DIMENSION X(*), Y(*)
   !     BEGIN BLOCK PERMITTING ...EXITS TO 190
   !        BEGIN BLOCK PERMITTING ...EXITS TO 180
-  !***FIRST EXECUTABLE STATEMENT  DAVINT
+  !* FIRST EXECUTABLE STATEMENT  DAVINT
   Ierr = 1
   Ans = 0.0D0
   IF ( Xlo>Xup ) THEN

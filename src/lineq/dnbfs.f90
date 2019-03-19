@@ -1,15 +1,22 @@
-!DECK DNBFS
+!** DNBFS
 SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DNBFS
-  !***PURPOSE  Solve a general nonsymmetric banded system of linear
+  !>
+  !***
+  !  Solve a general nonsymmetric banded system of linear
   !            equations.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2A2
-  !***TYPE      DOUBLE PRECISION (SNBFS-S, DNBFS-D, CNBFS-C)
-  !***KEYWORDS  BANDED, LINEAR EQUATIONS, NONSYMMETRIC
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2A2
+  !***
+  ! **Type:**      DOUBLE PRECISION (SNBFS-S, DNBFS-D, CNBFS-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR EQUATIONS, NONSYMMETRIC
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !    Subroutine DNBFS solves a general nonsymmetric banded NxN
   !    system of double precision real linear equations using
@@ -157,10 +164,13 @@ SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !                      the user provides otherwise, an error message
   !                      will be printed followed by an abort.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  D1MACH, DNBCO, DNBSL, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, DNBCO, DNBSL, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800812  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -170,13 +180,13 @@ SUBROUTINE DNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !   900510  Convert XERRWV calls to XERMSG calls, changed GOTOs to
   !           IF-THEN-ELSEs.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DNBFS
+  
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*), Ml, Mu
   REAL(8) :: Abe(Lda,*), V(*), Work(*), D1MACH
   REAL(8) :: rcond
   CHARACTER(8) :: xern1, xern2
-  !***FIRST EXECUTABLE STATEMENT  DNBFS
+  !* FIRST EXECUTABLE STATEMENT  DNBFS
   IF ( Lda<N ) THEN
     Ind = -1
     WRITE (xern1,'(I8)') Lda

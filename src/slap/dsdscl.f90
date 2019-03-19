@@ -1,21 +1,28 @@
-!DECK DSDSCL
+!** DSDSCL
 SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSDSCL
-  !***PURPOSE  Diagonal Scaling of system Ax = b.
+  !>
+  !***
+  !  Diagonal Scaling of system Ax = b.
   !            This routine scales (and unscales) the system  Ax = b
   !            by symmetric diagonal scaling.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2E
-  !***TYPE      DOUBLE PRECISION (SSDSCL-S, DSDSCL-D)
-  !***KEYWORDS  DIAGONAL, SLAP SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2E
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSDSCL-S, DSDSCL-D)
+  !***
+  ! **Keywords:**  DIAGONAL, SLAP SPARSE
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !    This routine scales (and unscales) the system Ax = b by symmetric
   !    diagonal scaling.  The new system is:
@@ -25,13 +32,13 @@ SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   !    is selected this process is reversed.  The true solution is also
   !    scaled or unscaled if ITOL is set appropriately, see below.
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM, JOB, ITOL
   !     DOUBLE PRECISION A(NELT), X(N), B(N), DINV(N)
   !
   !     CALL DSDSCL( N, NELT, IA, JA, A, ISYM, X, B, DINV, JOB, ITOL )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   ! NELT   :IN       Integer.
@@ -66,12 +73,12 @@ SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   !         then the true solution must also be scaled.  If ITOL is not
   !         11 then this vector is not referenced.
   !
-  ! *Common Blocks:
+  !- Common Blocks:
   ! SOLN    :INOUT   Double Precision SOLN(N).  COMMON BLOCK /DSLBLK/
   !         The true solution, SOLN, is scaled (or unscaled) if ITOL is
   !         set to 11, see above.
   !
-  ! *Description
+  !- Description
   !       =================== S L A P Column format ==================
   !       This routine  requires that  the matrix A  be stored in  the
   !       SLAP Column format.  In this format the non-zeros are stored
@@ -111,7 +118,7 @@ SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   !       supplied with the standard SLAP distribution.
   !
   !
-  ! *Cautions:
+  !- Cautions:
   !       This routine assumes that the diagonal of A is all  non-zero
   !       and that the operation DINV = 1.0/DIAG(A)  will  not  under-
   !       flow or overflow. This is done so that the loop  vectorizes.
@@ -119,11 +126,16 @@ SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   !       have numerical difficulties  and  must  be fixed before this
   !       routine is called.
   !
-  !***SEE ALSO  DSDCG
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    DSLBLK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSDCG
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    DSLBLK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -136,7 +148,7 @@ SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  !***END PROLOGUE  DSDSCL
+  
   !     .. Scalar Arguments ..
   INTEGER Isym, Itol, Job, N, Nelt
   !     .. Array Arguments ..
@@ -151,7 +163,7 @@ SUBROUTINE DSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   INTRINSIC SQRT
   !     .. Common blocks ..
   COMMON /DSLBLK/ SOLn
-  !***FIRST EXECUTABLE STATEMENT  DSDSCL
+  !* FIRST EXECUTABLE STATEMENT  DSDSCL
   !
   !         SCALING...
   !

@@ -1,14 +1,18 @@
-!DECK PRWVIR
+!** PRWVIR
 SUBROUTINE PRWVIR(Key,Ipage,Lpg,Sx,Ix)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PRWVIR
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (PRWVIR-S, DPRWVR-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (PRWVIR-S, DPRWVR-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Wisniewski, J. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     PRWVIR LIMITS THE TYPE OF STORAGE TO A SEQUENTIAL SPARSE MATRIX
   !     STORAGE SCHEME.  THE PAGE STORAGE IS ON RANDOM ACCESS DISK.
@@ -25,22 +29,25 @@ SUBROUTINE PRWVIR(Key,Ipage,Lpg,Sx,Ix)
   !     SANDIA LABS. REPT. SAND78-0785.
   !     MODIFICATIONS BY K.L. HIEBERT AND R.J. HANSON
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  SOPENM, SREADP, SWRITP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  SOPENM, SREADP, SWRITP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   891009  Removed unreferenced variables.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  !***END PROLOGUE  PRWVIR
+  
   INTEGER iaddr, Ipage, ipagef, istart, Ix, Key, Lpg
   DIMENSION Ix(*)
   REAL Sx(*), zero, one
   LOGICAL first
   SAVE zero, one
   DATA zero, one/0.E0, 1.E0/
-  !***FIRST EXECUTABLE STATEMENT  PRWVIR
+  !* FIRST EXECUTABLE STATEMENT  PRWVIR
   !
   !     COMPUTE STARTING ADDRESS OF PAGE.
   !

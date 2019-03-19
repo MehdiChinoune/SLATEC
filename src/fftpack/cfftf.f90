@@ -1,16 +1,22 @@
-!DECK CFFTF
+!** CFFTF
 SUBROUTINE CFFTF(N,C,Wsave)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CFFTF
-  !***SUBSIDIARY
-  !***PURPOSE  Compute the forward transform of a complex, periodic
+  !>
+  !***
+  !  Compute the forward transform of a complex, periodic
   !            sequence.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A2
-  !***TYPE      COMPLEX (RFFTF-S, CFFTF-C)
-  !***KEYWORDS  FFTPACK, FOURIER TRANSFORM
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A2
+  !***
+  ! **Type:**      COMPLEX (RFFTF-S, CFFTF-C)
+  !***
+  ! **Keywords:**  FFTPACK, FOURIER TRANSFORM
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !  ********************************************************************
   !  *   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   *
@@ -63,11 +69,14 @@ SUBROUTINE CFFTF(N,C,Wsave)
   !  WSAVE   contains initialization calculations which must not be
   !          destroyed between calls of subroutine CFFTF or CFFTB
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  CFFTF1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CFFTF1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -79,13 +88,13 @@ SUBROUTINE CFFTF(N,C,Wsave)
   !           because of non-standard Fortran 77 arguments in the
   !           call to CFFTB1.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CFFTF
+  
   INTEGER N
   REAL Wsave(*)
   COMPLEX C(*)
   REAL :: RC(2*N)
   INTEGER :: ifac(15), i
-  !***FIRST EXECUTABLE STATEMENT  CFFTF
+  !* FIRST EXECUTABLE STATEMENT  CFFTF
   RC = [ ( [REAL(C(i)), AIMAG(C(i))], i=1,N ) ]
   IF ( N==1 ) RETURN
   ifac = INT( Wsave(4*N+1:4*N+15) )

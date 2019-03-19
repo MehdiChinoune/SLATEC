@@ -1,16 +1,23 @@
-!DECK CV
+!** CV
 REAL FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CV
-  !***PURPOSE  Evaluate the variance function of the curve obtained
+  !>
+  !***
+  !  Evaluate the variance function of the curve obtained
   !            by the constrained B-spline fitting subprogram FC.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  L7A3
-  !***TYPE      SINGLE PRECISION (CV-S, DCV-D)
-  !***KEYWORDS  ANALYSIS OF COVARIANCE, B-SPLINE,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  L7A3
+  !***
+  ! **Type:**      SINGLE PRECISION (CV-S, DCV-D)
+  !***
+  ! **Keywords:**  ANALYSIS OF COVARIANCE, B-SPLINE,
   !             CONSTRAINED LEAST SQUARES, CURVE FITTING
-  !***AUTHOR  Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
+  !***
+  ! **Description:**
   !
   !     CV( ) is a companion function subprogram for FC( ).  The
   !     documentation for FC( ) has complete usage instructions.
@@ -86,22 +93,25 @@ REAL FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !             be modified by the user if the variance function is
   !             desired.
   !
-  !***REFERENCES  R. J. Hanson, Constrained least squares curve fitting
+  !***
+  ! **References:**  R. J. Hanson, Constrained least squares curve fitting
   !                 to discrete data using B-splines, a users guide,
   !                 Report SAND78-1291, Sandia Laboratories, December
   !                 1978.
-  !***ROUTINES CALLED  BSPLVN, SDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  BSPLVN, SDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CV
+  
   REAL Bkpt, SDOT, v, W, Xval, zero
   INTEGER i, ileft, ip, is, last, mdg, mdw, n, Nbkpt, Nconst, Ndata, Nord
   DIMENSION Bkpt(Nbkpt), W(*), v(40)
-  !***FIRST EXECUTABLE STATEMENT  CV
+  !* FIRST EXECUTABLE STATEMENT  CV
   zero = 0.
   mdg = Nbkpt - Nord + 3
   mdw = Nbkpt - Nord + 1 + Nconst

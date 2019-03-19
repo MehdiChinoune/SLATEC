@@ -1,28 +1,35 @@
-!DECK DSILUS
+!** DSILUS
 SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
     Ncol)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSILUS
-  !***PURPOSE  Incomplete LU Decomposition Preconditioner SLAP Set Up.
+  !>
+  !***
+  !  Incomplete LU Decomposition Preconditioner SLAP Set Up.
   !            Routine to generate the incomplete LDU decomposition of a
   !            matrix.  The unit lower triangular factor L is stored by
   !            rows and the unit upper triangular factor U is stored by
   !            columns.  The inverse of the diagonal matrix D is stored.
   !            No fill in is allowed.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2E
-  !***TYPE      DOUBLE PRECISION (SSILUS-S, DSILUS-D)
-  !***KEYWORDS  INCOMPLETE LU FACTORIZATION, ITERATIVE PRECONDITION,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2E
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSILUS-S, DSILUS-D)
+  !***
+  ! **Keywords:**  INCOMPLETE LU FACTORIZATION, ITERATIVE PRECONDITION,
   !             NON-SYMMETRIC LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM
   !     INTEGER NL, IL(NL), JL(NL), NU, IU(NU), JU(NU)
   !     INTEGER NROW(N), NCOL(N)
@@ -31,7 +38,7 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
   !     CALL DSILUS( N, NELT, IA, JA, A, ISYM, NL, IL, JL, L,
   !    $    DINV, NU, IU, JU, U, NROW, NCOL )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   ! NELT   :IN       Integer.
@@ -72,7 +79,7 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
   !         NCOL(I) is the number of non-zero elements in the I-th
   !         column of U.
   !
-  ! *Description
+  !- Description
   !       IL, JL, L should contain the unit  lower triangular factor of
   !       the incomplete decomposition of the A matrix  stored in SLAP
   !       Row format.  IU, JU, U should contain  the unit upper factor
@@ -142,12 +149,16 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  !***SEE ALSO  SILUR
-  !***REFERENCES  1. Gene Golub and Charles Van Loan, Matrix Computations,
+  !***
+  ! **See also:**  SILUR
+  !***
+  ! **References:**  1. Gene Golub and Charles Van Loan, Matrix Computations,
   !                  Johns Hopkins University Press, Baltimore, Maryland,
   !                  1983.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -158,7 +169,7 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of reference.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  !***END PROLOGUE  DSILUS
+  
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nelt, Nl, Nu
   !     .. Array Arguments ..
@@ -169,7 +180,7 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
   INTEGER i, ibgn, icol, iend, indx, indx1, indx2, indxc1, indxc2, &
     indxr1, indxr2, irow, itemp, j, jbgn, jend, jtemp, k, &
     kc, kr
-  !***FIRST EXECUTABLE STATEMENT  DSILUS
+  !* FIRST EXECUTABLE STATEMENT  DSILUS
   !
   !         Count number of elements in each row of the lower triangle.
   !

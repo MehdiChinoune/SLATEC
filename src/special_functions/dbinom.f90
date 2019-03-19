@@ -1,27 +1,37 @@
-!DECK DBINOM
+!** DBINOM
 REAL(8) FUNCTION DBINOM(N,M)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBINOM
-  !***PURPOSE  Compute the binomial coefficients.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C1
-  !***TYPE      DOUBLE PRECISION (BINOM-S, DBINOM-D)
-  !***KEYWORDS  BINOMIAL COEFFICIENTS, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the binomial coefficients.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C1
+  !***
+  ! **Type:**      DOUBLE PRECISION (BINOM-S, DBINOM-D)
+  !***
+  ! **Keywords:**  BINOMIAL COEFFICIENTS, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DBINOM(N,M) calculates the double precision binomial coefficient
   ! for integer arguments N and M.  The result is (N!)/((M!)(N-M)!).
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, D9LGMC, DLNREL, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, D9LGMC, DLNREL, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DBINOM
+  
   INTEGER i, k, M, N
   REAL(8) :: corr, fintmx, sq2pil, xk, xn, xnk, D9LGMC, &
     DLNREL, D1MACH, bilnmx
@@ -29,7 +39,7 @@ REAL(8) FUNCTION DBINOM(N,M)
   SAVE sq2pil, bilnmx, fintmx, first
   DATA sq2pil/0.91893853320467274178032973640562D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DBINOM
+  !* FIRST EXECUTABLE STATEMENT  DBINOM
   IF ( first ) THEN
     bilnmx = LOG(D1MACH(2)) - 0.0001D0
     fintmx = 0.9D0/D1MACH(3)

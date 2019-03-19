@@ -1,15 +1,22 @@
-!DECK EISDOC
+!** EISDOC
 SUBROUTINE EISDOC
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  EISDOC
-  !***PURPOSE  Documentation for EISPACK, a collection of subprograms for
+  !>
+  !***
+  !  Documentation for EISPACK, a collection of subprograms for
   !            solving matrix eigen-problems.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4, Z
-  !***TYPE      ALL (EISDOC-A)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Vandevender, W. H., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4, Z
+  !***
+  ! **Type:**      ALL (EISDOC-A)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Vandevender, W. H., (SNLA)
+  !***
+  ! **Description:**
   !
   !                 **********EISPACK Routines**********
   !
@@ -263,17 +270,20 @@ SUBROUTINE EISDOC
   !                      of rectangular matrix and solve related
   !                      Linear Least Squares problem.
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811101  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900723  PURPOSE section revised.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  EISDOC
-  !***FIRST EXECUTABLE STATEMENT  EISDOC
+  
+  !* FIRST EXECUTABLE STATEMENT  EISDOC
 END SUBROUTINE EISDOC

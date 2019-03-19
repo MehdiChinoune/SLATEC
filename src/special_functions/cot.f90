@@ -1,14 +1,21 @@
-!DECK COT
+!** COT
 REAL FUNCTION COT(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  COT
-  !***PURPOSE  Compute the cotangent.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4A
-  !***TYPE      SINGLE PRECISION (COT-S, DCOT-D, CCOT-C)
-  !***KEYWORDS  COTANGENT, ELEMENTARY FUNCTIONS, FNLIB, TRIGONOMETRIC
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the cotangent.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      SINGLE PRECISION (COT-S, DCOT-D, CCOT-C)
+  !***
+  ! **Keywords:**  COTANGENT, ELEMENTARY FUNCTIONS, FNLIB, TRIGONOMETRIC
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! COT(X) calculates the cotangent of the real argument X.  X is in
   ! units of radians.
@@ -19,16 +26,19 @@ REAL FUNCTION COT(X)
   !                               significant figures required  15.51
   !                                    decimal places required  16.88
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  COT
+  
   REAL ainty, ainty2, cotcs, CSEVL, pi2rec, prodbg, R1MACH, &
     sqeps, X, xmax, xmin, xsml, y, yrem
   INTEGER ifn, INITS, nterms
@@ -45,7 +55,7 @@ REAL FUNCTION COT(X)
   DATA cotcs(8)/ - .000000000000000037E0/
   DATA pi2rec/.0116197723675813430E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  COT
+  !* FIRST EXECUTABLE STATEMENT  COT
   IF ( first ) THEN
     nterms = INITS(cotcs,8,0.1*R1MACH(3))
     xmax = 1.0/R1MACH(4)

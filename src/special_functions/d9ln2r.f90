@@ -1,16 +1,22 @@
-!DECK D9LN2R
+!** D9LN2R
 REAL(8) FUNCTION D9LN2R(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  D9LN2R
-  !***SUBSIDIARY
-  !***PURPOSE  Evaluate LOG(1+X) from second order relative accuracy so
+  !>
+  !***
+  !  Evaluate LOG(1+X) from second order relative accuracy so
   !            that LOG(1+X) = X - X**2/2 + X**3*D9LN2R(X)
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4B
-  !***TYPE      DOUBLE PRECISION (R9LN2R-S, D9LN2R-D, C9LN2R-C)
-  !***KEYWORDS  ELEMENTARY FUNCTIONS, FNLIB, LOGARITHM, SECOND ORDER
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4B
+  !***
+  ! **Type:**      DOUBLE PRECISION (R9LN2R-S, D9LN2R-D, C9LN2R-C)
+  !***
+  ! **Keywords:**  ELEMENTARY FUNCTIONS, FNLIB, LOGARITHM, SECOND ORDER
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate  LOG(1+X)  from 2-nd order with relative error accuracy so
   ! that    LOG(1+X) = X - X**2/2 + X**3*D9LN2R(X)
@@ -27,9 +33,12 @@ REAL(8) FUNCTION D9LN2R(X)
   !                               significant figures required  30.32
   !                                    decimal places required  32.00
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -37,7 +46,7 @@ REAL(8) FUNCTION D9LN2R(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  !***END PROLOGUE  D9LN2R
+  
   REAL eps, sqeps
   INTEGER INITDS, ntln21, ntln22
   REAL(8) :: X, xbig, txbig, xmax, txmax, xmin, ln21cs(50), &
@@ -132,7 +141,7 @@ REAL(8) FUNCTION D9LN2R(X)
   DATA ln22cs(36)/ - .4235973185184957027669333333333D-30/
   DATA ln22cs(37)/ + .6095532614003832040106666666666D-31/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  D9LN2R
+  !* FIRST EXECUTABLE STATEMENT  D9LN2R
   IF ( first ) THEN
     eps = REAL(  D1MACH(3), 4 )
     ntln21 = INITDS(ln21cs,50,0.1*eps)

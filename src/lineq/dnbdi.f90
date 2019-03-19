@@ -1,15 +1,22 @@
-!DECK DNBDI
+!** DNBDI
 SUBROUTINE DNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DNBDI
-  !***PURPOSE  Compute the determinant of a band matrix using the factors
+  !>
+  !***
+  !  Compute the determinant of a band matrix using the factors
   !            computed by DNBCO or DNBFA.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D3A2
-  !***TYPE      DOUBLE PRECISION (SNBDI-S, DNBDI-D, CNBDI-C)
-  !***KEYWORDS  BANDED, DETERMINANT, LINEAR EQUATIONS, NONSYMMETRIC
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D3A2
+  !***
+  ! **Type:**      DOUBLE PRECISION (SNBDI-S, DNBDI-D, CNBDI-C)
+  !***
+  ! **Keywords:**  BANDED, DETERMINANT, LINEAR EQUATIONS, NONSYMMETRIC
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !     DNBDI computes the determinant of a band matrix
   !     using the factors computed by DNBCO or DNBFA.
@@ -44,23 +51,26 @@ SUBROUTINE DNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !                with  1.0 .LE. ABS(DET(1)) .LT. 10.0
   !                or  DET(1) = 0.0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800728  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DNBDI
+  
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
   REAL(8) :: Abe(Lda,*), Det(2)
   !
   REAL(8) :: ten
   INTEGER i
-  !***FIRST EXECUTABLE STATEMENT  DNBDI
+  !* FIRST EXECUTABLE STATEMENT  DNBDI
   Det(1) = 1.0D0
   Det(2) = 0.0D0
   ten = 10.0D0

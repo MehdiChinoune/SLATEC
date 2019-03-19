@@ -1,30 +1,36 @@
-!DECK SRLCAL
+!** SRLCAL
 SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SRLCAL
-  !***SUBSIDIARY
-  !***PURPOSE  Internal routine for SGMRES.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (SRLCAL-S, DRLCAL-D)
-  !***KEYWORDS  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
+  !>
+  !***
+  !  Internal routine for SGMRES.
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SRLCAL-S, DRLCAL-D)
+  !***
+  ! **Keywords:**  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
   !             NON-SYMMETRIC LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Brown, Peter, (LLNL), pnbrown@llnl.gov
+  !***
+  ! **Author:**  Brown, Peter, (LLNL), pnbrown@llnl.gov
   !           Hindmarsh, Alan, (LLNL), alanh@llnl.gov
   !           Seager, Mark K., (LLNL), seager@llnl.gov
   !             Lawrence Livermore National Laboratory
   !             PO Box 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !         This routine calculates the scaled residual RL from the
   !         V(I)'s.
-  ! *Usage:
+  !- Usage:
   !      INTEGER N, KMP, LL, MAXL
   !      REAL V(N,LL), Q(2*MAXL), RL(N), SNORMW, PROD, R0NORM
   !
   !      CALL SRLCAL(N, KMP, LL, MAXL, V, Q, RL, SNORMW, PROD, R0NRM)
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         The order of the matrix A, and the lengths
   !         of the vectors SR, SZ, R0 and Z.
@@ -56,9 +62,12 @@ SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   ! R0NRM  :IN       Real
   !         The scaled norm of initial residual R0.
   !
-  !***SEE ALSO  SGMRES
-  !***ROUTINES CALLED  SCOPY, SSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SGMRES
+  !***
+  ! **Routines called:**  SCOPY, SSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871001  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -68,7 +77,7 @@ SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  !***END PROLOGUE  SRLCAL
+  
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -81,7 +90,7 @@ SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   INTEGER i, i2, ip1, k, llm1, llp1
   !     .. External Subroutines ..
   EXTERNAL SCOPY, SSCAL
-  !***FIRST EXECUTABLE STATEMENT  SRLCAL
+  !* FIRST EXECUTABLE STATEMENT  SRLCAL
   IF ( Kmp==Maxl ) THEN
     !
     !         calculate RL.  Start by copying V(*,1) into RL.

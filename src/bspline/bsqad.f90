@@ -1,15 +1,22 @@
-!DECK BSQAD
+!** BSQAD
 SUBROUTINE BSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BSQAD
-  !***PURPOSE  Compute the integral of a K-th order B-spline using the
+  !>
+  !***
+  !  Compute the integral of a K-th order B-spline using the
   !            B-representation.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  H2A2A1, E3, K6
-  !***TYPE      SINGLE PRECISION (BSQAD-S, DBSQAD-D)
-  !***KEYWORDS  INTEGRAL OF B-SPLINES, QUADRATURE
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  H2A2A1, E3, K6
+  !***
+  ! **Type:**      SINGLE PRECISION (BSQAD-S, DBSQAD-D)
+  !***
+  ! **Keywords:**  INTEGRAL OF B-SPLINES, QUADRATURE
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !         BSQAD computes the integral on (X1,X2) of a K-th order
@@ -37,11 +44,14 @@ SUBROUTINE BSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
   !     Error Conditions
   !         Improper input is a fatal error
   !
-  !***REFERENCES  D. E. Amos, Quadrature subroutines for splines and
+  !***
+  ! **References:**  D. E. Amos, Quadrature subroutines for splines and
   !                 B-splines, Report SAND79-1825, Sandia Laboratories,
   !                 December 1979.
-  !***ROUTINES CALLED  BVALU, INTRV, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  BVALU, INTRV, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -50,7 +60,7 @@ SUBROUTINE BSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BSQAD
+  
   !
   INTEGER i, il1, il2, ilo, inbv, jf, K, left, m, mf, mflag, N, &
     npk, np1
@@ -73,7 +83,7 @@ SUBROUTINE BSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
     2.19086362515982044E-01, 1.49451349150580593E-01, &
     6.66713443086881376E-02/
   !
-  !***FIRST EXECUTABLE STATEMENT  BSQAD
+  !* FIRST EXECUTABLE STATEMENT  BSQAD
   Bquad = 0.0E0
   IF ( K<1.OR.K>20 ) THEN
     CALL XERMSG('SLATEC','BSQAD','K DOES NOT SATISFY 1.LE.K.LE.20',2,1)

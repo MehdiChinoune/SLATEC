@@ -1,18 +1,25 @@
-!DECK DCHEX
+!** DCHEX
 SUBROUTINE DCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCHEX
-  !***PURPOSE  Update the Cholesky factorization  A=TRANS(R)*R  of a
+  !>
+  !***
+  !  Update the Cholesky factorization  A=TRANS(R)*R  of a
   !            positive definite matrix A of order P under diagonal
   !            permutations of the form  TRANS(E)*A*E, where E is a
   !            permutation matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D7B
-  !***TYPE      DOUBLE PRECISION (SCHEX-S, DCHEX-D, CCHEX-C)
-  !***KEYWORDS  CHOLESKY DECOMPOSITION, EXCHANGE, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D7B
+  !***
+  ! **Type:**      DOUBLE PRECISION (SCHEX-S, DCHEX-D, CCHEX-C)
+  !***
+  ! **Keywords:**  CHOLESKY DECOMPOSITION, EXCHANGE, LINEAR ALGEBRA, LINPACK,
   !             MATRIX, POSITIVE DEFINITE
-  !***AUTHOR  Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Stewart, G. W., (U. of Maryland)
+  !***
+  ! **Description:**
   !
   !     DCHEX updates the Cholesky factorization
   !
@@ -116,10 +123,13 @@ SUBROUTINE DCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
   !         S      DOUBLE PRECISION(P).
   !                S contains the sines of the transforming rotations.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DROTG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DROTG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -128,7 +138,7 @@ SUBROUTINE DCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DCHEX
+  
   INTEGER Ldr, P, K, L, Ldz, Nz, Job
   REAL(8) :: R(Ldr,*), Z(Ldz,*), S(*)
   REAL(8) :: C(*)
@@ -138,7 +148,7 @@ SUBROUTINE DCHEX(R,Ldr,P,K,L,Z,Ldz,Nz,C,S,Job)
   !
   !     INITIALIZE
   !
-  !***FIRST EXECUTABLE STATEMENT  DCHEX
+  !* FIRST EXECUTABLE STATEMENT  DCHEX
   km1 = K - 1
   kp1 = K + 1
   lmk = L - K

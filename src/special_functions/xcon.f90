@@ -1,16 +1,23 @@
-!DECK XCON
+!** XCON
 SUBROUTINE XCON(X,Ix,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XCON
-  !***PURPOSE  To provide single-precision floating-point arithmetic
+  !>
+  !***
+  !  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  A3D
-  !***TYPE      SINGLE PRECISION (XCON-S, DXCON-D)
-  !***KEYWORDS  EXTENDED-RANGE SINGLE-PRECISION ARITHMETIC
-  !***AUTHOR  Lozier, Daniel W., (National Bureau of Standards)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  A3D
+  !***
+  ! **Type:**      SINGLE PRECISION (XCON-S, DXCON-D)
+  !***
+  ! **Keywords:**  EXTENDED-RANGE SINGLE-PRECISION ARITHMETIC
+  !***
+  ! **Author:**  Lozier, Daniel W., (National Bureau of Standards)
   !           Smith, John M., (NBS and George Mason University)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !     REAL X
   !     INTEGER IX
   !
@@ -23,11 +30,16 @@ SUBROUTINE XCON(X,Ix,Ierror)
   !                  AND RADIX**(2L) THEN THE REDUCED
   !                  FORM WITH IX = 0 IS RETURNED.
   !
-  !***SEE ALSO  XSET
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  XADJ, XC210, XRED
-  !***COMMON BLOCKS    XBLK2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  XSET
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  XADJ, XC210, XRED
+  !***
+  ! COMMON BLOCKS    XBLK2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820712  DATE WRITTEN
   !   881020  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
@@ -35,7 +47,7 @@ SUBROUTINE XCON(X,Ix,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  XCON
+  
   INTEGER i, i1, icase, Ierror, ispace, itemp, j, j1, j2
   REAL X
   INTEGER Ix
@@ -67,7 +79,7 @@ SUBROUTINE XCON(X,Ix,Ierror)
   ! WHEN (ABS(X),IX) .LT. RADIX**(-2L) AND 1/10 .LE. ABS(X)
   ! .LT. 10**(ISPACE-1) WHEN (ABS(X),IX) .GT. RADIX**(2L).
   !
-  !***FIRST EXECUTABLE STATEMENT  XCON
+  !* FIRST EXECUTABLE STATEMENT  XCON
   Ierror = 0
   CALL XRED(X,Ix,Ierror)
   IF ( Ierror/=0 ) RETURN

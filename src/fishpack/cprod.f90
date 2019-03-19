@@ -1,13 +1,17 @@
-!DECK CPROD
+!** CPROD
 SUBROUTINE CPROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,W,Y)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPROD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BLKTRI
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (CPROD-S, CPROC-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BLKTRI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (CPROD-S, CPROC-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   ! PROD applies a sequence of matrix operations to the vector X and
   ! stores the result in YY.   (COMPLEX case)
@@ -21,20 +25,23 @@ SUBROUTINE CPROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,W,Y)
   ! D,W,Y      are working arrays.
   ! ISGN       determines whether or not a change in sign is made.
   !
-  !***SEE ALSO  BLKTRI
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BLKTRI
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  CPROD
+  
   REAL A, Aa, B, Bm1, Bm2, C, rt, X, Yy
   INTEGER ia, id, iflg, j, k, M, m1, m2, mm, Na, Nd, Nm1, Nm2
   COMPLEX Y, D, W, Bd, crt, den, y1, y2
   DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), W(*), Bd(*), Bm1(*)&
     , Bm2(*), Aa(*), Yy(*)
-  !***FIRST EXECUTABLE STATEMENT  CPROD
+  !* FIRST EXECUTABLE STATEMENT  CPROD
   DO j = 1, M
     Y(j) = CMPLX(X(j),0.)
   ENDDO

@@ -1,22 +1,29 @@
-!DECK QPDOC
+!** QPDOC
 SUBROUTINE QPDOC
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QPDOC
-  !***PURPOSE  Documentation for QUADPACK, a package of subprograms for
+  !>
+  !***
+  !  Documentation for QUADPACK, a package of subprograms for
   !            automatic evaluation of one-dimensional definite integrals.
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2, Z
-  !***TYPE      ALL (QPDOC-A)
-  !***KEYWORDS  DOCUMENTATION, GUIDELINES FOR SELECTION, QUADPACK,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2, Z
+  !***
+  ! **Type:**      ALL (QPDOC-A)
+  !***
+  ! **Keywords:**  DOCUMENTATION, GUIDELINES FOR SELECTION, QUADPACK,
   !             QUADRATURE, SURVEY OF INTEGRATORS
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           Kahaner, D. K., (NBS)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   ! 1. Introduction
   !    ------------
@@ -231,7 +238,7 @@ SUBROUTINE QPDOC
   !        a special case. Yet for the latter we have an automatic
   !        integrator available, QAWF.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   ! 4. Example Programs
   !    ----------------
@@ -478,14 +485,17 @@ SUBROUTINE QPDOC
   !            RETURN
   !            END
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900723  PURPOSE section revised.  (WRB)
-  !***END PROLOGUE  QPDOC
-  !***FIRST EXECUTABLE STATEMENT  QPDOC
+  
+  !* FIRST EXECUTABLE STATEMENT  QPDOC
 END SUBROUTINE QPDOC

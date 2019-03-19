@@ -1,13 +1,17 @@
-!DECK QRFAC
+!** QRFAC
 SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QRFAC
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SNLS1, SNLS1E, SNSQ and SNSQE
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (QRFAC-S, DQRFAC-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SNLS1, SNLS1E, SNSQ and SNSQE
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (QRFAC-S, DQRFAC-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This subroutine uses Householder transformations with column
   !     pivoting (optional) to compute a QR factorization of the
@@ -70,9 +74,12 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !       WA is a work array of length N. If pivot is .FALSE., then WA
   !         can coincide with SIGMA.
   !
-  !***SEE ALSO  SNLS1, SNLS1E, SNSQ, SNSQE
-  !***ROUTINES CALLED  ENORM, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SNLS1, SNLS1E, SNSQ, SNSQE
+  !***
+  ! **Routines called:**  ENORM, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -80,7 +87,7 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  QRFAC
+  
   INTEGER M, N, Lda, Lipvt
   INTEGER Ipvt(*)
   LOGICAL Pivot
@@ -90,7 +97,7 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   REAL R1MACH, ENORM
   SAVE one, p05, zero
   DATA one, p05, zero/1.0E0, 5.0E-2, 0.0E0/
-  !***FIRST EXECUTABLE STATEMENT  QRFAC
+  !* FIRST EXECUTABLE STATEMENT  QRFAC
   epsmch = R1MACH(4)
   !
   !     COMPUTE THE INITIAL COLUMN NORMS AND INITIALIZE SEVERAL ARRAYS.

@@ -1,18 +1,24 @@
-!DECK R9LGMC
+!** R9LGMC
 REAL FUNCTION R9LGMC(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  R9LGMC
-  !***SUBSIDIARY
-  !***PURPOSE  Compute the log Gamma correction factor so that
+  !>
+  !***
+  !  Compute the log Gamma correction factor so that
   !            LOG(GAMMA(X)) = LOG(SQRT(2*PI)) + (X-.5)*LOG(X) - X
   !            + R9LGMC(X).
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7E
-  !***TYPE      SINGLE PRECISION (R9LGMC-S, D9LGMC-D, C9LGMC-C)
-  !***KEYWORDS  COMPLETE GAMMA FUNCTION, CORRECTION TERM, FNLIB,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7E
+  !***
+  ! **Type:**      SINGLE PRECISION (R9LGMC-S, D9LGMC-D, C9LGMC-C)
+  !***
+  ! **Keywords:**  COMPLETE GAMMA FUNCTION, CORRECTION TERM, FNLIB,
   !             LOG GAMMA, LOGARITHM, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Compute the log gamma correction factor for X .GE. 10.0 so that
   !  LOG (GAMMA(X)) = LOG(SQRT(2*PI)) + (X-.5)*LOG(X) - X + R9LGMC(X)
@@ -23,16 +29,19 @@ REAL FUNCTION R9LGMC(X)
   !                               significant figures required  14.39
   !                                    decimal places required  15.86
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  !***END PROLOGUE  R9LGMC
+  
   REAL algmcs, CSEVL, R1MACH, X, xbig, xmax
   INTEGER INITS, nalgm
   DIMENSION algmcs(6)
@@ -45,7 +54,7 @@ REAL FUNCTION R9LGMC(X)
   DATA algmcs(5)/.0000000000000622E0/
   DATA algmcs(6)/ - .0000000000000003E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  R9LGMC
+  !* FIRST EXECUTABLE STATEMENT  R9LGMC
   IF ( first ) THEN
     nalgm = INITS(algmcs,6,R1MACH(3))
     xbig = 1.0/SQRT(R1MACH(3))

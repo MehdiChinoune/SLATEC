@@ -1,16 +1,23 @@
-!DECK BANDR
+!** BANDR
 SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BANDR
-  !***PURPOSE  Reduce a real symmetric band matrix to symmetric
+  !>
+  !***
+  !  Reduce a real symmetric band matrix to symmetric
   !            tridiagonal matrix and, optionally, accumulate
   !            orthogonal similarity transformations.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C1B1
-  !***TYPE      SINGLE PRECISION (BANDR-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C1B1
+  !***
+  ! **Type:**      SINGLE PRECISION (BANDR-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure BANDRD,
   !     NUM. MATH. 12, 231-241(1968) by Schwarz.
@@ -73,19 +80,22 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
   !     Applied Mathematics Division, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BANDR
+  
   !
   INTEGER j, k, l, N, r, i1, i2, j1, j2, kr, Mb, mr, m1, Nm, &
     n2, r1, ugl, maxl, maxr
@@ -93,7 +103,7 @@ SUBROUTINE BANDR(Nm,N,Mb,A,D,E,E2,Matz,Z)
   REAL g, u, b1, b2, c2, f1, f2, s2, dmin, dminrt
   LOGICAL Matz
   !
-  !***FIRST EXECUTABLE STATEMENT  BANDR
+  !* FIRST EXECUTABLE STATEMENT  BANDR
   dmin = 2.0E0**(-64)
   dminrt = 2.0E0**(-32)
   !     .......... INITIALIZE DIAGONAL SCALING MATRIX ..........

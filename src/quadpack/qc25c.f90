@@ -1,20 +1,27 @@
-!DECK QC25C
+!** QC25C
 SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QC25C
-  !***PURPOSE  To compute I = Integral of F*W over (A,B) with
+  !>
+  !***
+  !  To compute I = Integral of F*W over (A,B) with
   !            error estimate, where W(X) = 1/(X-C)
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A2A2, J4
-  !***TYPE      SINGLE PRECISION (QC25C-S, DQC25C-D)
-  !***KEYWORDS  25-POINT CLENSHAW-CURTIS INTEGRATION, QUADPACK, QUADRATURE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A2A2, J4
+  !***
+  ! **Type:**      SINGLE PRECISION (QC25C-S, DQC25C-D)
+  !***
+  ! **Keywords:**  25-POINT CLENSHAW-CURTIS INTEGRATION, QUADPACK, QUADRATURE
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Integration rules for the computation of CAUCHY
   !        PRINCIPAL VALUE integrals
@@ -55,14 +62,17 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !           NEVAL  - Integer
   !                    Number of integrand evaluations
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  QCHEB, QK15W, QWGTC
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  QCHEB, QK15W, QWGTC
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  QC25C
+  
   !
   REAL A, Abserr, ak22, amom0, amom1, amom2, B, C, cc, centr, &
     cheb12, cheb24, QWGTC, F, fval, hlgth, p2, p3, p4, resabs, &
@@ -106,7 +116,7 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !
   !           CHECK THE POSITION OF C.
   !
-  !***FIRST EXECUTABLE STATEMENT  QC25C
+  !* FIRST EXECUTABLE STATEMENT  QC25C
   cc = (0.2E+01*C-B-A)/(B-A)
   IF ( ABS(cc)<0.11E+01 ) THEN
     !

@@ -1,14 +1,21 @@
-!DECK DPSI
+!** DPSI
 REAL(8) FUNCTION DPSI(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPSI
-  !***PURPOSE  Compute the Psi (or Digamma) function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7C
-  !***TYPE      DOUBLE PRECISION (PSI-S, DPSI-D, CPSI-C)
-  !***KEYWORDS  DIGAMMA FUNCTION, FNLIB, PSI FUNCTION, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the Psi (or Digamma) function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7C
+  !***
+  ! **Type:**      DOUBLE PRECISION (PSI-S, DPSI-D, CPSI-C)
+  !***
+  ! **Keywords:**  DIGAMMA FUNCTION, FNLIB, PSI FUNCTION, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DPSI calculates the double precision Psi (or Digamma) function for
   ! double precision argument X.  PSI(X) is the logarithmic derivative
@@ -27,9 +34,12 @@ REAL(8) FUNCTION DPSI(X)
   !                               significant figures required  28.88
   !                                    decimal places required  32.71
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCOT, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCOT, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -38,7 +48,7 @@ REAL(8) FUNCTION DPSI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable name.  (RWC, WRB)
-  !***END PROLOGUE  DPSI
+  
   INTEGER i, INITDS, n, ntapsi, ntpsi
   REAL(8) :: X, psics(42), apsics(16), aux, dxrel, pi, xbig, &
     y, DCOT, DCSEVL, D1MACH
@@ -105,7 +115,7 @@ REAL(8) FUNCTION DPSI(X)
   DATA apsics(16)/ - .775195892523335680000000000000D-32/
   DATA pi/3.14159265358979323846264338327950D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DPSI
+  !* FIRST EXECUTABLE STATEMENT  DPSI
   IF ( first ) THEN
     ntpsi = INITDS(psics,42,0.1*REAL(D1MACH(3)))
     ntapsi = INITDS(apsics,16,0.1*REAL(D1MACH(3)))

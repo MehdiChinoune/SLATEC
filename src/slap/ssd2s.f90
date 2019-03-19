@@ -1,29 +1,36 @@
-!DECK SSD2S
+!** SSD2S
 SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSD2S
-  !***PURPOSE  Diagonal Scaling Preconditioner SLAP Normal Eqns Set Up.
+  !>
+  !***
+  !  Diagonal Scaling Preconditioner SLAP Normal Eqns Set Up.
   !            Routine to compute the inverse of the diagonal of the
   !            matrix A*A', where A is stored in SLAP-Column format.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2E
-  !***TYPE      SINGLE PRECISION (SSD2S-S, DSD2S-D)
-  !***KEYWORDS  DIAGONAL, SLAP SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2E
+  !***
+  ! **Type:**      SINGLE PRECISION (SSD2S-S, DSD2S-D)
+  !***
+  ! **Keywords:**  DIAGONAL, SLAP SPARSE
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM
   !     REAL    A(NELT), DINV(N)
   !
   !     CALL SSD2S( N, NELT, IA, JA, A, ISYM, DINV )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   ! NELT   :IN       Integer.
@@ -41,7 +48,7 @@ SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   ! DINV   :OUT      Real DINV(N).
   !         Upon return this array holds 1./DIAG(A*A').
   !
-  ! *Description
+  !- Description
   !       =================== S L A P Column format ==================
   !       This routine  requires that  the matrix A  be stored in  the
   !       SLAP Column format.  In this format the non-zeros are stored
@@ -80,7 +87,7 @@ SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !       supplied with the standard SLAP distribution.
   !
   !
-  ! *Cautions:
+  !- Cautions:
   !       This routine assumes that the diagonal of A is all  non-zero
   !       and that the operation DINV = 1.0/DIAG(A*A') will not under-
   !       flow or overflow. This is done so that the loop  vectorizes.
@@ -88,10 +95,14 @@ SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !       have numerical difficulties  and  must  be fixed before this
   !       routine is called.
   !
-  !***SEE ALSO  SSDCGN
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SSDCGN
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -102,7 +113,7 @@ SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  !***END PROLOGUE  SSD2S
+  
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
@@ -110,7 +121,7 @@ SUBROUTINE SSD2S(N,Nelt,Ia,Ja,A,Isym,Dinv)
   INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER i, k, kbgn, kend
-  !***FIRST EXECUTABLE STATEMENT  SSD2S
+  !* FIRST EXECUTABLE STATEMENT  SSD2S
   DO i = 1, N
     Dinv(i) = 0
   ENDDO

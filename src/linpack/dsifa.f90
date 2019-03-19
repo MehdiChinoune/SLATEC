@@ -1,15 +1,22 @@
-!DECK DSIFA
+!** DSIFA
 SUBROUTINE DSIFA(A,Lda,N,Kpvt,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSIFA
-  !***PURPOSE  Factor a real symmetric matrix by elimination with
+  !>
+  !***
+  !  Factor a real symmetric matrix by elimination with
   !            symmetric pivoting.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1A
-  !***TYPE      DOUBLE PRECISION (SSIFA-S, DSIFA-D, CHIFA-C, CSIFA-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION, SYMMETRIC
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1A
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSIFA-S, DSIFA-D, CHIFA-C, CSIFA-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION, SYMMETRIC
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     DSIFA factors a double precision symmetric matrix by elimination
   !     with symmetric pivoting.
@@ -52,10 +59,13 @@ SUBROUTINE DSIFA(A,Lda,N,Kpvt,Info)
   !                     but it does indicate that DSISL or DSIDI may
   !                     divide by zero if called.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DSWAP, IDAMAX
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DSWAP, IDAMAX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -65,7 +75,7 @@ SUBROUTINE DSIFA(A,Lda,N,Kpvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DSIFA
+  
   INTEGER Lda, N, Kpvt(*), Info
   REAL(8) :: A(Lda,*)
   !
@@ -73,7 +83,7 @@ SUBROUTINE DSIFA(A,Lda,N,Kpvt,Info)
   REAL(8) :: absakk, alpha, colmax, rowmax
   INTEGER imax, imaxp1, j, jj, jmax, k, km1, km2, kstep, IDAMAX
   LOGICAL swap
-  !***FIRST EXECUTABLE STATEMENT  DSIFA
+  !* FIRST EXECUTABLE STATEMENT  DSIFA
   !
   !     INITIALIZE
   !

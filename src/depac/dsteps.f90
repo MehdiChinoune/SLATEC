@@ -1,20 +1,27 @@
-!DECK DSTEPS
+!** DSTEPS
 SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     Psi,Alpha,Beta,Sig,V,W,G,Phase1,Ns,Nornd,Ksteps,Twou,&
     Fouru,Xold,Kprev,Ivc,Iv,Kgi,Gi,Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSTEPS
-  !***PURPOSE  Integrate a system of first order ordinary differential
+  !>
+  !***
+  !  Integrate a system of first order ordinary differential
   !            equations one step.
-  !***LIBRARY   SLATEC (DEPAC)
-  !***CATEGORY  I1A1B
-  !***TYPE      DOUBLE PRECISION (STEPS-S, DSTEPS-D)
-  !***KEYWORDS  ADAMS METHOD, DEPAC, INITIAL VALUE PROBLEMS, ODE,
+  !***
+  ! **Library:**   SLATEC (DEPAC)
+  !***
+  ! **Category:**  I1A1B
+  !***
+  ! **Type:**      DOUBLE PRECISION (STEPS-S, DSTEPS-D)
+  !***
+  ! **Keywords:**  ADAMS METHOD, DEPAC, INITIAL VALUE PROBLEMS, ODE,
   !             ORDINARY DIFFERENTIAL EQUATIONS, PREDICTOR-CORRECTOR
-  !***AUTHOR  Shampine, L. F., (SNLA)
+  !***
+  ! **Author:**  Shampine, L. F., (SNLA)
   !           Gordon, M. K., (SNLA)
   !             MODIFIED BY H.A. WATTS
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   Written by L. F. Shampine and M. K. Gordon
   !
@@ -160,18 +167,21 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !   just calls the code again.  A restart is neither required nor
   !   desirable.
   !
-  !***REFERENCES  L. F. Shampine and M. K. Gordon, Solving ordinary
+  !***
+  ! **References:**  L. F. Shampine and M. K. Gordon, Solving ordinary
   !                 differential equations with ODE, STEP, and INTRP,
   !                 Report SLA-73-1060, Sandia Laboratories, 1973.
-  !***ROUTINES CALLED  D1MACH, DHSTRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, DHSTRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   740101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DSTEPS
+  
   INTEGER Iv, Ivc, jv, Kgi, Kprev
   INTEGER i, ifail, im1, ip1, Ipar, iq, j, K, km1, km2, knew, &
     Kold, kp1, kp2, Ksteps, l, limit1, limit2, Neqn, Ns, &
@@ -208,7 +218,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
   !
   !   IF STEP SIZE IS TOO SMALL, DETERMINE AN ACCEPTABLE ONE
   !
-  !***FIRST EXECUTABLE STATEMENT  DSTEPS
+  !* FIRST EXECUTABLE STATEMENT  DSTEPS
   Crash = .TRUE.
   IF ( ABS(H)>=Fouru*ABS(X) ) THEN
     p5eps = 0.5D0*Eps

@@ -1,24 +1,31 @@
-!DECK DES
+!** DES
 SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     Alpha,Beta,Psi,V,W,Sig,G,Gi,H,Eps,X,Xold,Hold,Told,Delsgn,&
     Tstop,Twou,Fouru,Start,Phase1,Nornd,Stiff,Intout,Ns,Kord,&
     Kold,Init,Ksteps,Kle4,Iquit,Kprev,Ivc,Iv,Kgi,Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DES
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DEABM
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (DES-S, DDES-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DEABM
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (DES-S, DDES-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   DEABM  merely allocates storage for  DES  to relieve the user of the
   !   inconvenience of a long call list.  Consequently  DES  is used as
   !   described in the comments for  DEABM .
   !
-  !***SEE ALSO  DEABM
-  !***ROUTINES CALLED  R1MACH, SINTRP, STEPS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DEABM
+  !***
+  ! **Routines called:**  R1MACH, SINTRP, STEPS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800501  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -27,7 +34,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !   900510  Convert XERRWV calls to XERMSG calls, replace GOTOs with
   !           IF-THEN-ELSEs.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DES
+  
   REAL a, absdel, Alpha, Atol, Beta, del, Delsgn, dt, Eps, Fouru, &
     G, Gi, H, ha, Hold, P, Phi, Psi, R1MACH, Rpar
   REAL Rtol, Sig, T, Told, Tout, Tstop, Twou, u, V, W, Wt, X, Xold, Y, Yp, Ypout, Yy
@@ -56,7 +63,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !
   !.......................................................................
   !
-  !***FIRST EXECUTABLE STATEMENT  DES
+  !* FIRST EXECUTABLE STATEMENT  DES
   IF ( Info(1)==0 ) THEN
     !
     ! ON THE FIRST CALL, PERFORM INITIALIZATION --

@@ -1,16 +1,23 @@
-!DECK DXRED
+!** DXRED
 SUBROUTINE DXRED(X,Ix,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DXRED
-  !***PURPOSE  To provide double-precision floating-point arithmetic
+  !>
+  !***
+  !  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  A3D
-  !***TYPE      DOUBLE PRECISION (XRED-S, DXRED-D)
-  !***KEYWORDS  EXTENDED-RANGE DOUBLE-PRECISION ARITHMETIC
-  !***AUTHOR  Lozier, Daniel W., (National Bureau of Standards)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  A3D
+  !***
+  ! **Type:**      DOUBLE PRECISION (XRED-S, DXRED-D)
+  !***
+  ! **Keywords:**  EXTENDED-RANGE DOUBLE-PRECISION ARITHMETIC
+  !***
+  ! **Author:**  Lozier, Daniel W., (National Bureau of Standards)
   !           Smith, John M., (NBS and George Mason University)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !     DOUBLE PRECISION X
   !     INTEGER IX
   !
@@ -24,11 +31,16 @@ SUBROUTINE DXRED(X,Ix,Ierror)
   !                  ARE TO BE USED IN SUBSEQUENT ORDINARY
   !                  DOUBLE-PRECISION CALCULATIONS.
   !
-  !***SEE ALSO  DXSET
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    DXBLK2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DXSET
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    DXBLK2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820712  DATE WRITTEN
   !   881020  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
@@ -36,7 +48,7 @@ SUBROUTINE DXRED(X,Ix,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  DXRED
+  
   INTEGER i, Ierror, ixa, ixa1, ixa2
   REAL(8) :: X
   INTEGER Ix
@@ -45,7 +57,7 @@ SUBROUTINE DXRED(X,Ix,Ierror)
   COMMON /DXBLK2/ RADix, RADixl, RAD2l, DLG10r, L, L2, KMAx
   SAVE /DXBLK2/
   !
-  !***FIRST EXECUTABLE STATEMENT  DXRED
+  !* FIRST EXECUTABLE STATEMENT  DXRED
   Ierror = 0
   IF ( X==0.0D0 ) THEN
     Ix = 0

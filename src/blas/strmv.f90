@@ -1,17 +1,24 @@
-!DECK STRMV
+!** STRMV
 SUBROUTINE STRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  STRMV
-  !***PURPOSE  Multiply a real vector by a real triangular matrix.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B4
-  !***TYPE      SINGLE PRECISION (STRMV-S, DTRMV-D, CTRMV-C)
-  !***KEYWORDS  LEVEL 2 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J. J., (ANL)
+  !>
+  !***
+  !  Multiply a real vector by a real triangular matrix.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      SINGLE PRECISION (STRMV-S, DTRMV-D, CTRMV-C)
+  !***
+  ! **Keywords:**  LEVEL 2 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J. J., (ANL)
   !           Du Croz, J., (NAG)
   !           Hammarling, S., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  STRMV  performs one of the matrix-vector operations
   !
@@ -91,16 +98,19 @@ SUBROUTINE STRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   !           X. INCX must not be zero.
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J. J., Du Croz, J., Hammarling, S., and
+  !***
+  ! **References:**  Dongarra, J. J., Du Croz, J., Hammarling, S., and
   !                 Hanson, R. J.  An extended set of Fortran basic linear
   !                 algebra subprograms.  ACM TOMS, Vol. 14, No. 1,
   !                 pp. 1-17, March 1988.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  STRMV
+  
   !     .. Scalar Arguments ..
   INTEGER Incx, Lda, N
   CHARACTER :: Diag, Trans, Uplo
@@ -120,7 +130,7 @@ SUBROUTINE STRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
-  !***FIRST EXECUTABLE STATEMENT  STRMV
+  !* FIRST EXECUTABLE STATEMENT  STRMV
   !
   !     Test the input parameters.
   !

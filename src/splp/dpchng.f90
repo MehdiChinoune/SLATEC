@@ -1,14 +1,18 @@
-!DECK DPCHNG
+!** DPCHNG
 SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPCHNG
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (PCHNGS-S, DPCHNG-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (PCHNGS-S, DPCHNG-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Wisniewski, J. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     SUBROUTINE DPCHNG CHANGES ELEMENT II IN VECTOR +/- IRCX TO THE
   !     VALUE XVAL.
@@ -42,9 +46,12 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !     REVISED 811130-1000
   !     REVISED YYMMDD-HHMM
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  DPRWPG, IDLOC, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  DPRWPG, IDLOC, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890606  Changed references from IPLOC to IDLOC.  (WRB)
@@ -52,7 +59,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  !***END PROLOGUE  DPCHNG
+  
   INTEGER i, iend, Ii, il, ilast, iopt, ipl, Iplace, Ircx, istart, &
     Ix, ixlast, j, jj, jstart, k, key, ll, lmx, lpg
   INTEGER n20055, nerr, np
@@ -61,7 +68,7 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   REAL(8) :: Sx(*), Xval, zero, one, sxlast, sxval
   SAVE zero, one
   DATA zero, one/0.D0, 1.D0/
-  !***FIRST EXECUTABLE STATEMENT  DPCHNG
+  !* FIRST EXECUTABLE STATEMENT  DPCHNG
   iopt = 1
   !
   !     DETERMINE NULL-CASES..

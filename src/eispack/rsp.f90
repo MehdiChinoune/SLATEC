@@ -1,16 +1,23 @@
-!DECK RSP
+!** RSP
 SUBROUTINE RSP(Nm,N,Nv,A,W,Matz,Z,Fv1,Fv2,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RSP
-  !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
+  !>
+  !***
+  !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real symmetric matrix packed into a one dimensional
   !            array.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A1
-  !***TYPE      SINGLE PRECISION (RSP-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A1
+  !***
+  ! **Type:**      SINGLE PRECISION (RSP-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine calls the recommended sequence of
   !     subroutines from the eigensystem subroutine package (EISPACK)
@@ -66,23 +73,26 @@ SUBROUTINE RSP(Nm,N,Nv,A,W,Matz,Z,Fv1,Fv2,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  TQL2, TQLRAT, TRBAK3, TRED3
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  TQL2, TQLRAT, TRBAK3, TRED3
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  RSP
+  
   !
   INTEGER i, j, N, Nm, Nv, Ierr, Matz
   REAL A(*), W(*), Z(Nm,*), Fv1(*), Fv2(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  RSP
+  !* FIRST EXECUTABLE STATEMENT  RSP
   IF ( N>Nm ) THEN
     Ierr = 10*N
   ELSEIF ( Nv>=(N*(N+1))/2 ) THEN

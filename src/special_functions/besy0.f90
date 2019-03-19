@@ -1,16 +1,23 @@
-!DECK BESY0
+!** BESY0
 REAL FUNCTION BESY0(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BESY0
-  !***PURPOSE  Compute the Bessel function of the second kind of order
+  !>
+  !***
+  !  Compute the Bessel function of the second kind of order
   !            zero.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10A1
-  !***TYPE      SINGLE PRECISION (BESY0-S, DBESY0-D)
-  !***KEYWORDS  BESSEL FUNCTION, FNLIB, ORDER ZERO, SECOND KIND,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10A1
+  !***
+  ! **Type:**      SINGLE PRECISION (BESY0-S, DBESY0-D)
+  !***
+  ! **Keywords:**  BESSEL FUNCTION, FNLIB, ORDER ZERO, SECOND KIND,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! BESY0(X) calculates the Bessel function of the second kind
   ! of order zero for real argument X.
@@ -33,9 +40,12 @@ REAL FUNCTION BESY0(X)
   !                               significant figures required  15.53
   !                                    decimal places required  17.13
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  BESJ0, CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  BESJ0, CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -43,7 +53,7 @@ REAL FUNCTION BESY0(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  BESY0
+  
   REAL ampl, BESJ0, bm0cs, bth0cs, by0cs, CSEVL, pi4, &
     R1MACH, theta, twodpi, X, xmax, xsml, y, z
   INTEGER INITS, ntm0, ntth0, nty0
@@ -111,7 +121,7 @@ REAL FUNCTION BESY0(X)
   DATA twodpi/0.63661977236758134E0/
   DATA pi4/0.78539816339744831E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BESY0
+  !* FIRST EXECUTABLE STATEMENT  BESY0
   IF ( first ) THEN
     nty0 = INITS(by0cs,13,0.1*R1MACH(3))
     ntm0 = INITS(bm0cs,21,0.1*R1MACH(3))

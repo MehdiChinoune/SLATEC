@@ -2,15 +2,20 @@ MODULE TEST22_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK SQCK
+  !** SQCK
   SUBROUTINE SQCK(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SQCK
-    !***PURPOSE  Quick check for SPOFS, SPOIR, SNBFS and SNBIR.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for SPOFS, SPOIR, SNBFS and SNBIR.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    QUICK CHECK SUBROUTINE SQCK TESTS THE EXECUTION OF THE
     !    SLATEC SUBROUTINES SPOFS, SPOIR, SNBFS AND SNBIR.
@@ -31,8 +36,10 @@ CONTAINS
     !    ON RETURN, NERR (INTEGER TYPE) CONTAINS THE TOTAL COUNT
     !    OF ALL PROBLEMS DETECTED BY SQCK.
     !
-    !***ROUTINES CALLED  R1MACH, SNBFS, SNBIR, SPOFS, SPOIR
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  R1MACH, SNBFS, SNBIR, SPOFS, SPOIR
+
+    !* REVISION HISTORY  (YYMMDD)
     !   800930  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891009  Removed unreferenced statement label.  (WRB)
@@ -44,7 +51,7 @@ CONTAINS
     !   901009  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           fixed code to test all four routines.  (RWC)
-    !***END PROLOGUE  SQCK
+    
     INTEGER Kprint, Lun
     REAL a(4,4), at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), &
       work(35), r, delx, delmax, sign, R1MACH
@@ -54,7 +61,7 @@ CONTAINS
     DATA a/5.0E0, 4.0E0, 1.0E0, 1.0E0, 4.0E0, 5.0E0, 1.0E0, 1.0E0, &
       1.0E0, 1.0E0, 4.0E0, 2.0E0, 1.0E0, 1.0E0, 2.0E0, 4.0E0/
     DATA list/'POFS', 'POIR', 'NBFS', 'NBIR'/
-    !***FIRST EXECUTABLE STATEMENT  SQCK
+    !* FIRST EXECUTABLE STATEMENT  SQCK
     IF ( Kprint>=3 ) WRITE (Lun,99001)
     !
     99001 FORMAT (/' *    SQCK - QUICK CHECK FOR SPOFS, SPOIR, SNBFS AND ','SNBIR'/)
@@ -183,15 +190,20 @@ CONTAINS
     99005 FORMAT ('     SQCK DETECTED NO PROBLEMS.'/)
     RETURN
   END SUBROUTINE SQCK
-  !DECK DQCK
+  !** DQCK
   SUBROUTINE DQCK(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DQCK
-    !***PURPOSE  Quick check for DPOFS AND DNBFS.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for DPOFS AND DNBFS.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    QUICK CHECK SUBROUTINE DQCK TESTS THE EXECUTION OF THE
     !    SLATEC SUBROUTINES DPOFS AND DNBFS.
@@ -212,8 +224,10 @@ CONTAINS
     !    ON RETURN, NERR (INTEGER TYPE) CONTAINS THE TOTAL COUNT
     !    OF ALL PROBLEMS DETECTED BY DQCK.
     !
-    !***ROUTINES CALLED  D1MACH, DNBFS, DPOFS
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH, DNBFS, DPOFS
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801002  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
@@ -221,7 +235,7 @@ CONTAINS
     !   901009  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
-    !***END PROLOGUE  DQCK
+    
     INTEGER Kprint, Lun
     REAL(8) :: a(4,4), at(5,4), abe(5,7), abet(5,7), b(4), bt(4), &
       c(4), work(35), sign, D1MACH
@@ -232,7 +246,7 @@ CONTAINS
     DATA a/5.0D0, 4.0D0, 1.0D0, 1.0D0, 4.0D0, 5.0D0, 1.0D0, 1.0D0, &
       1.0D0, 1.0D0, 4.0D0, 2.0D0, 1.0D0, 1.0D0, 2.0D0, 4.0D0/
     DATA list/'POFS', 'NBFS'/
-    !***FIRST EXECUTABLE STATEMENT  DQCK
+    !* FIRST EXECUTABLE STATEMENT  DQCK
     IF ( Kprint>=3 ) WRITE (Lun,99001)
     !
     99001 FORMAT (/' *    DQCK - QUICK CHECK FOR  DPOFS AND DNBFS'/)
@@ -359,15 +373,20 @@ CONTAINS
     99005 FORMAT ('     DQCK DETECTED NO PROBLEMS.'/)
     RETURN
   END SUBROUTINE DQCK
-  !DECK CQCK
+  !** CQCK
   SUBROUTINE CQCK(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CQCK
-    !***PURPOSE  Quick check for CPOFS, CPOIR, CNBFS and CNBIR.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Voorhees, E. A., (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CPOFS, CPOIR, CNBFS and CNBIR.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Voorhees, E. A., (LANL)
+    !***
+    ! **Description:**
     !
     !    QUICK CHECK SUBROUTINE CQCK TESTS THE EXECUTION OF THE
     !    SLATEC SUBROUTINES CPOFS, CPOIR, CNBFS AND CNBIR.
@@ -388,8 +407,10 @@ CONTAINS
     !    ON RETURN, NERR (INTEGER TYPE) CONTAINS THE TOTAL COUNT
     !    OF ALL PROBLEMS DETECTED BY CQCK.
     !
-    !***ROUTINES CALLED  CNBFS, CNBIR, CPOFS, CPOIR, R1MACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CNBFS, CNBIR, CPOFS, CPOIR, R1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801002  DATE WRITTEN
     !   891009  Removed unreferenced statement labels.  (WRB)
     !   891009  REVISION DATE from Version 3.2
@@ -397,7 +418,7 @@ CONTAINS
     !   901009  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
-    !***END PROLOGUE  CQCK
+    
     INTEGER Kprint, Lun
     REAL r, delx, delmax, R1MACH
     COMPLEX a(4,4), at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), work(35)
@@ -411,7 +432,7 @@ CONTAINS
     DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
     DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
     DATA list/'POFS', 'POIR', 'NBFS', 'NBIR'/
-    !***FIRST EXECUTABLE STATEMENT  CQCK
+    !* FIRST EXECUTABLE STATEMENT  CQCK
     IF ( Kprint>=3 ) WRITE (Lun,99001)
     !
     99001 FORMAT (/' *    CQCK - QUICK CHECK FOR CPOFS, CPOIR, CNBFS AND ','CNBIR'/)
@@ -515,24 +536,31 @@ CONTAINS
     RETURN
   END SUBROUTINE CQCK
 END MODULE TEST22_MOD
-!DECK TEST22
+!** TEST22
 PROGRAM TEST22
   USE TEST22_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST22
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2
-  !***TYPE      ALL (TEST22-A)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2
+  !***
+  ! **Type:**      ALL (TEST22-A)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -544,25 +572,28 @@ PROGRAM TEST22
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        SNBFS    SNBIR    SPOFS    SPOIR
   !        DNBFS             DPOFS
   !        CNBFS    CNBIR    CPOFS    CPOIR
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  CQCK, DQCK, I1MACH, SQCK, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CQCK, DQCK, I1MACH, SQCK, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST22
+  
   INTEGER I1MACH
   INTEGER kprint, lin, lun, nerr, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST22
+  !* FIRST EXECUTABLE STATEMENT  TEST22
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

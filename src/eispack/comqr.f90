@@ -1,15 +1,22 @@
-!DECK COMQR
+!** COMQR
 SUBROUTINE COMQR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  COMQR
-  !***PURPOSE  Compute the eigenvalues of complex upper Hessenberg matrix
+  !>
+  !***
+  !  Compute the eigenvalues of complex upper Hessenberg matrix
   !            using the QR method.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C2B
-  !***TYPE      COMPLEX (HQR-S, COMQR-C)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C2B
+  !***
+  ! **Type:**      COMPLEX (HQR-S, COMQR-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of a unitary analogue of the
   !     ALGOL procedure  COMLR, NUM. MATH. 12, 369-376(1968) by Martin
@@ -69,19 +76,22 @@ SUBROUTINE COMQR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  CDIV, CSROOT, PYTHAG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDIV, CSROOT, PYTHAG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  COMQR
+  
   !
   INTEGER i, j, l, N, en, ll, Nm, Igh, itn, its, Low, lp1, &
     enm1, Ierr
@@ -89,7 +99,7 @@ SUBROUTINE COMQR(Nm,N,Low,Igh,Hr,Hi,Wr,Wi,Ierr)
   REAL si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, norm, s1, s2
   REAL PYTHAG
   !
-  !***FIRST EXECUTABLE STATEMENT  COMQR
+  !* FIRST EXECUTABLE STATEMENT  COMQR
   Ierr = 0
   IF ( Low/=Igh ) THEN
     !     .......... CREATE REAL SUBDIAGONAL ELEMENTS ..........

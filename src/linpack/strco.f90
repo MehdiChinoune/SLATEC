@@ -1,15 +1,22 @@
-!DECK STRCO
+!** STRCO
 SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  STRCO
-  !***PURPOSE  Estimate the condition number of a triangular matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2A3
-  !***TYPE      SINGLE PRECISION (STRCO-S, DTRCO-D, CTRCO-C)
-  !***KEYWORDS  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
+  !>
+  !***
+  !  Estimate the condition number of a triangular matrix.
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2A3
+  !***
+  ! **Type:**      SINGLE PRECISION (STRCO-S, DTRCO-D, CTRCO-C)
+  !***
+  ! **Keywords:**  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
   !             TRIANGULAR MATRIX
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     STRCO estimates the condition of a real triangular matrix.
   !
@@ -51,10 +58,13 @@ SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
   !                an approximate null vector in the sense that
   !                NORM(A*Z) = RCOND*NORM(A)*NORM(Z) .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SASUM, SAXPY, SSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SASUM, SAXPY, SSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -63,7 +73,7 @@ SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  STRCO
+  
   INTEGER Ldt, N, Job
   REAL T(Ldt,*), Z(*)
   REAL Rcond
@@ -72,7 +82,7 @@ SUBROUTINE STRCO(T,Ldt,N,Rcond,Z,Job)
   REAL tnorm, ynorm, s, sm, SASUM
   INTEGER i1, j, j1, j2, k, kk, l
   LOGICAL lower
-  !***FIRST EXECUTABLE STATEMENT  STRCO
+  !* FIRST EXECUTABLE STATEMENT  STRCO
   lower = Job==0
   !
   !     COMPUTE 1-NORM OF T

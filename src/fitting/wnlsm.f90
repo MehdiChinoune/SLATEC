@@ -1,15 +1,19 @@
-!DECK WNLSM
+!** WNLSM
 SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
     Scale,Z,Temp,D)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  WNLSM
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to WNNLS
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (WNLSM-S, DWNLSM-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to WNNLS
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (WNLSM-S, DWNLSM-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Haskell, K. H., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     This is a companion subprogram to WNNLS.
   !     The documentation for WNNLS has complete usage instructions.
@@ -54,10 +58,13 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !         column scaling for the matrix (E).
   !                                       (A)
   !
-  !***SEE ALSO  WNNLS
-  !***ROUTINES CALLED  H12, ISAMAX, R1MACH, SASUM, SAXPY, SCOPY, SNRM2,
+  !***
+  ! **See also:**  WNNLS
+  !***
+  ! **Routines called:**  H12, ISAMAX, R1MACH, SASUM, SAXPY, SCOPY, SNRM2,
   !                    SROTM, SROTMG, SSCAL, SSWAP, WNLIT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890618  Completely restructured and revised.  (WRB & RWC)
@@ -65,7 +72,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Fixed an error message.  (RWC)
-  !***END PROLOGUE  WNLSM
+  
   INTEGER Ipivot(*), Itype(*), L, Ma, Mdw, Mme, Mode, N
   REAL D(*), H(*), Prgopt(*), Rnorm, Scale(*), Temp(*), W(Mdw,*), &
     Wd(*), X(*), Z(*)
@@ -84,7 +91,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !
   SAVE srelpr, first
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  WNLSM
+  !* FIRST EXECUTABLE STATEMENT  WNLSM
   !
   !     Initialize variables.
   !     SRELPR is the precision for the particular machine

@@ -1,13 +1,17 @@
-!DECK CUNK1
+!** CUNK1
 SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CUNK1
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CUNK1-A, ZUNK1-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CUNK1-A, ZUNK1-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     CUNK1 COMPUTES K(FNU,Z) AND ITS ANALYTIC CONTINUATION FROM THE
   !     RIGHT HALF PLANE TO THE LEFT HALF PLANE BY MEANS OF THE
@@ -15,12 +19,15 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !     MR INDICATES THE DIRECTION OF ROTATION FOR ANALYTIC CONTINUATION.
   !     NZ=-1 MEANS AN OVERFLOW WILL OCCUR
   !
-  !***SEE ALSO  CBESK
-  !***ROUTINES CALLED  CS1S2, CUCHK, CUNIK, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBESK
+  !***
+  ! **Routines called:**  CS1S2, CUCHK, CUNIK, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CUNK1
+  
   COMPLEX cfn, ck, cone, crsc, cs, cscl, csgn, cspn, csr, css, &
     cwrk, cy, czero, c1, c2, phi, rz, sum, s1, s2, Y, Z, &
     zeta1, zeta2, zr, phid, zeta1d, zeta2d, sumd
@@ -32,7 +39,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     , cy(2), cwrk(16,3), css(3), csr(3)
   DATA czero, cone/(0.0E0,0.0E0), (1.0E0,0.0E0)/
   DATA pi/3.14159265358979324E0/
-  !***FIRST EXECUTABLE STATEMENT  CUNK1
+  !* FIRST EXECUTABLE STATEMENT  CUNK1
   kdflg = 1
   Nz = 0
   !-----------------------------------------------------------------------

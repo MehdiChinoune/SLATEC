@@ -1,24 +1,31 @@
-!DECK CFOD
+!** CFOD
 SUBROUTINE CFOD(Meth,Elco,Tesco)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CFOD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (CFOD-S, DCFOD-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (CFOD-S, DCFOD-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   CFOD defines coefficients needed in the integrator package DEBDF
   !
-  !***SEE ALSO  DEBDF
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DEBDF
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  CFOD
+  
   !
   !
   !LLL. OPTIMIZE
@@ -54,7 +61,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
   !-----------------------------------------------------------------------
   DIMENSION pc(12)
   !
-  !***FIRST EXECUTABLE STATEMENT  CFOD
+  !* FIRST EXECUTABLE STATEMENT  CFOD
   IF ( Meth==2 ) THEN
     !
     pc(1) = 1.0E0

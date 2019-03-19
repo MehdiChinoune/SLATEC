@@ -1,20 +1,27 @@
-!DECK FC
+!** FC
 SUBROUTINE FC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
     Yconst,Nderiv,Mode,Coeff,W,Iw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  FC
-  !***PURPOSE  Fit a piecewise polynomial curve to discrete data.
+  !>
+  !***
+  !  Fit a piecewise polynomial curve to discrete data.
   !            The piecewise polynomials are represented as B-splines.
   !            The fitting is done in a weighted least squares sense.
   !            Equality and inequality constraints can be imposed on the
   !            fitted curve.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  K1A1A1, K1A2A, L8A3
-  !***TYPE      SINGLE PRECISION (FC-S, DFC-D)
-  !***KEYWORDS  B-SPLINE, CONSTRAINED LEAST SQUARES, CURVE FITTING,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  K1A1A1, K1A2A, L8A3
+  !***
+  ! **Type:**      SINGLE PRECISION (FC-S, DFC-D)
+  !***
+  ! **Keywords:**  B-SPLINE, CONSTRAINED LEAST SQUARES, CURVE FITTING,
   !             WEIGHTED LEAST SQUARES
-  !***AUTHOR  Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
+  !***
+  ! **Description:**
   !
   !      This subprogram fits a piecewise polynomial curve
   !      to discrete data.  The piecewise polynomials are
@@ -357,12 +364,15 @@ SUBROUTINE FC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   !                         BVALU( ) expects the breakpoint array BKPT(*)
   !                         to be sorted.
   !
-  !***REFERENCES  R. J. Hanson, Constrained least squares curve fitting
+  !***
+  ! **References:**  R. J. Hanson, Constrained least squares curve fitting
   !                 to discrete data using B-splines, a users guide,
   !                 Report SAND78-1291, Sandia Laboratories, December
   !                 1978.
-  !***ROUTINES CALLED  FCMN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  FCMN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -371,7 +381,7 @@ SUBROUTINE FC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   !   900607  Editorial changes to Prologue to make Prologues for EFC,
   !           DEFC, FC, and DFC look as much the same as possible.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  FC
+  
   REAL Bkpt(*), Coeff(*), Sddata(*), W(*), Xconst(*), Xdata(*), &
     Yconst(*), Ydata(*)
   INTEGER Iw(*), Mode, Nbkpt, Nconst, Ndata, Nderiv(*), Nord
@@ -380,7 +390,7 @@ SUBROUTINE FC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   !
   INTEGER i1, i2, i3, i4, i5, i6, i7, mdg, mdw
   !
-  !***FIRST EXECUTABLE STATEMENT  FC
+  !* FIRST EXECUTABLE STATEMENT  FC
   IF ( Nord<1 .OR. Nord>20 ) THEN
     CALL XERMSG('SLATEC','FCMN',&
       'IN FC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.',2,1)

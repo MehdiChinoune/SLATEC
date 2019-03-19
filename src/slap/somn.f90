@@ -1,26 +1,33 @@
-!DECK SOMN
+!** SOMN
 SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,&
     Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SOMN
-  !***PURPOSE  Preconditioned Orthomin Sparse Iterative Ax=b Solver.
+  !>
+  !***
+  !  Preconditioned Orthomin Sparse Iterative Ax=b Solver.
   !            Routine to solve a general linear system  Ax = b  using
   !            the Preconditioned Orthomin method.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (SOMN-S, DOMN-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SOMN-S, DOMN-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM,
   !             ORTHOMIN, SLAP, SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER  N, NELT, IA(NELT), JA(NELT), ISYM, NSAVE, ITOL, ITMAX
   !     INTEGER  ITER, IERR, IUNIT, IWORK(USER DEFINED)
   !     REAL     B(N), X(N), A(NELT), TOL, ERR, R(N), Z(N)
@@ -32,7 +39,7 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !    $     NSAVE, ITOL, TOL, ITMAX, ITER, ERR, IERR, IUNIT, R,
   !    $     Z, P, AP, EMAP, DZ, CSAV, RWORK, IWORK)
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the Matrix.
   ! B      :IN       Real B(N).
@@ -145,7 +152,7 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   ! IWORK  :WORK     Integer IWORK(USER DEFINED).
   !         Integer array that can be used for workspace in MSOLVE.
   !
-  ! *Description
+  !- Description
   !       This routine does  not care  what matrix data   structure is
   !       used for  A and M.  It simply   calls  the MATVEC and MSOLVE
   !       routines, with  the arguments as  described above.  The user
@@ -213,19 +220,23 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  SSDOMN, SSLUOM, ISSOMN
-  !***REFERENCES  1. Mark K. Seager, A SLAP for the Masses, in
+  !***
+  ! **See also:**  SSDOMN, SSLUOM, ISSOMN
+  !***
+  ! **References:**  1. Mark K. Seager, A SLAP for the Masses, in
   !                  G. F. Carey, Ed., Parallel Supercomputing: Methods,
   !                  Algorithms and Applications, Wiley, 1989, pp.135-155.
-  !***ROUTINES CALLED  ISSOMN, R1MACH, SAXPY, SCOPY, SDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  ISSOMN, R1MACH, SAXPY, SCOPY, SDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -242,7 +253,7 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930326  Removed unused variable.  (FNF)
-  !***END PROLOGUE  SOMN
+  
   !     .. Scalar Arguments ..
   REAL Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt, Nsave
@@ -263,7 +274,7 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   EXTERNAL SAXPY, SCOPY
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, MIN, MOD
-  !***FIRST EXECUTABLE STATEMENT  SOMN
+  !* FIRST EXECUTABLE STATEMENT  SOMN
   !
   !         Check some of the input data.
   !

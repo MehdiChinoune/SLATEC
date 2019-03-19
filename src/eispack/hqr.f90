@@ -1,15 +1,22 @@
-!DECK HQR
+!** HQR
 SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HQR
-  !***PURPOSE  Compute the eigenvalues of a real upper Hessenberg matrix
+  !>
+  !***
+  !  Compute the eigenvalues of a real upper Hessenberg matrix
   !            using the QR method.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C2B
-  !***TYPE      SINGLE PRECISION (HQR-S, COMQR-C)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C2B
+  !***
+  ! **Type:**      SINGLE PRECISION (HQR-S, COMQR-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure HQR,
   !     NUM. MATH. 14, 219-231(1970) by Martin, Peters, and Wilkinson.
@@ -62,19 +69,22 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  HQR
+  
   !
   INTEGER i, j, k, l, m, N, en, ll, mm, na, Nm, Igh, itn, its, &
     Low, mp2, enm2, Ierr
@@ -82,7 +92,7 @@ SUBROUTINE HQR(Nm,N,Low,Igh,H,Wr,Wi,Ierr)
   REAL p, q, r, s, t, w, x, y, zz, norm, s1, s2
   LOGICAL notlas
   !
-  !***FIRST EXECUTABLE STATEMENT  HQR
+  !* FIRST EXECUTABLE STATEMENT  HQR
   Ierr = 0
   norm = 0.0E0
   k = 1

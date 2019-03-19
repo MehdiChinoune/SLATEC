@@ -1,17 +1,24 @@
-!DECK POLFIT
+!** POLFIT
 SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  POLFIT
-  !***PURPOSE  Fit discrete data in a least squares sense by polynomials
+  !>
+  !***
+  !  Fit discrete data in a least squares sense by polynomials
   !            in one variable.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  K1A1A2
-  !***TYPE      SINGLE PRECISION (POLFIT-S, DPOLFT-D)
-  !***KEYWORDS  CURVE FITTING, DATA FITTING, LEAST SQUARES, POLYNOMIAL FIT
-  !***AUTHOR  Shampine, L. F., (SNLA)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  K1A1A2
+  !***
+  ! **Type:**      SINGLE PRECISION (POLFIT-S, DPOLFT-D)
+  !***
+  ! **Keywords:**  CURVE FITTING, DATA FITTING, LEAST SQUARES, POLYNOMIAL FIT
+  !***
+  ! **Author:**  Shampine, L. F., (SNLA)
   !           Davenport, S. M., (SNLA)
   !           Huddleston, R. E., (SNLL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Abstract
   !
@@ -109,11 +116,14 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !            expressed as powers of (X-C) using  PVALUE  and  PCOEF
   !            after just one call to  POLFIT .
   !
-  !***REFERENCES  L. F. Shampine, S. M. Davenport and R. E. Huddleston,
+  !***
+  ! **References:**  L. F. Shampine, S. M. Davenport and R. E. Huddleston,
   !                 Curve fitting by polynomials in one variable, Report
   !                 SLA-74-0270, Sandia Laboratories, June 1974.
-  !***ROUTINES CALLED  PVALUE, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  PVALUE, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   740601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -121,7 +131,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920527  Corrected erroneous statements in DESCRIPTION.  (WRB)
-  !***END PROLOGUE  POLFIT
+  
   REAL A, co, degf, den, Eps, etst, f, fcrit, R, sig, sigj, &
     sigjm1, sigpas, temp, W, w1, w11, X, xm, Y
   REAL yp
@@ -137,7 +147,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     -2.4648165, -3.3846535, -1.2973162, -3.3381146, -1.7812271, &
     -3.2578406, -1.6589279, -1.6282703, -1.3152745, -3.2640179, &
     -1.9829776/
-  !***FIRST EXECUTABLE STATEMENT  POLFIT
+  !* FIRST EXECUTABLE STATEMENT  POLFIT
   m = ABS(N)
   IF ( m==0 ) GOTO 700
   IF ( Maxdeg<0 ) GOTO 700

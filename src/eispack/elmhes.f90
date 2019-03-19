@@ -1,15 +1,22 @@
-!DECK ELMHES
+!** ELMHES
 SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Int)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ELMHES
-  !***PURPOSE  Reduce a real general matrix to upper Hessenberg form
+  !>
+  !***
+  !  Reduce a real general matrix to upper Hessenberg form
   !            using stabilized elementary similarity transformations.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C1B2
-  !***TYPE      SINGLE PRECISION (ELMHES-S, COMHES-C)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C1B2
+  !***
+  ! **Type:**      SINGLE PRECISION (ELMHES-S, COMHES-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure ELMHES,
   !     NUM. MATH. 12, 349-368(1968) by Martin and Wilkinson.
@@ -50,25 +57,28 @@ SUBROUTINE ELMHES(Nm,N,Low,Igh,A,Int)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  ELMHES
+  
   !
   INTEGER i, j, m, N, la, Nm, Igh, kp1, Low, mm1, mp1
   REAL A(Nm,*)
   REAL x, y
   INTEGER Int(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  ELMHES
+  !* FIRST EXECUTABLE STATEMENT  ELMHES
   la = Igh - 1
   kp1 = Low + 1
   IF ( la>=kp1 ) THEN

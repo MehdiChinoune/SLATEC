@@ -1,14 +1,18 @@
-!DECK ZUNIK
+!** ZUNIK
 SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
     Zeta2r,Zeta2i,Sumr,Sumi,Cwrkr,Cwrki)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZUNIK
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESI and ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CUNIK-A, ZUNIK-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZBESI and ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CUNIK-A, ZUNIK-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !        ZUNIK COMPUTES PARAMETERS FOR THE UNIFORM ASYMPTOTIC
   !        EXPANSIONS OF THE I AND K FUNCTIONS ON IKFLG= 1 OR 2
@@ -25,13 +29,16 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
   !        ARRAY. IPMTR=0 COMPUTES ALL PARAMETERS. IPMTR=1 COMPUTES PHI,
   !        ZETA1,ZETA2.
   !
-  !***SEE ALSO  ZBESI, ZBESK
-  !***ROUTINES CALLED  D1MACH, ZDIV, ZLOG, ZSQRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZBESI, ZBESK
+  !***
+  ! **Routines called:**  D1MACH, ZDIV, ZLOG, ZSQRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added EXTERNAL statement with ZLOG and ZSQRT.  (RWC)
-  !***END PROLOGUE  ZUNIK
+  
   !     COMPLEX CFN,CON,CONE,CRFN,CWRK,CZERO,PHI,S,SR,SUM,T,T2,ZETA1,
   !    *ZETA2,ZN,ZR
   REAL(8) :: ac, c, con, conei, coner, crfni, crfnr, Cwrki, &
@@ -119,7 +126,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
     -1.19655288019618160D+12, 2.05914503232410016D+11, &
     -2.18229277575292237D+10, 1.24700929351271032D+09/
   DATA c(119), c(120)/ - 2.91883881222208134D+07, 1.18838426256783253D+05/
-  !***FIRST EXECUTABLE STATEMENT  ZUNIK
+  !* FIRST EXECUTABLE STATEMENT  ZUNIK
   IF ( Init==0 ) THEN
     !-----------------------------------------------------------------------
     !     INITIALIZE ALL VARIABLES

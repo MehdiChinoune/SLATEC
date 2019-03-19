@@ -1,17 +1,24 @@
-!DECK DBSI0E
+!** DBSI0E
 REAL(8) FUNCTION DBSI0E(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBSI0E
-  !***PURPOSE  Compute the exponentially scaled modified (hyperbolic)
+  !>
+  !***
+  !  Compute the exponentially scaled modified (hyperbolic)
   !            Bessel function of the first kind of order zero.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B1
-  !***TYPE      DOUBLE PRECISION (BESI0E-S, DBSI0E-D)
-  !***KEYWORDS  EXPONENTIALLY SCALED, FIRST KIND, FNLIB,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B1
+  !***
+  ! **Type:**      DOUBLE PRECISION (BESI0E-S, DBSI0E-D)
+  !***
+  ! **Keywords:**  EXPONENTIALLY SCALED, FIRST KIND, FNLIB,
   !             HYPERBOLIC BESSEL FUNCTION, MODIFIED BESSEL FUNCTION,
   !             ORDER ZERO, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DBSI0E(X) calculates the double precision exponentially scaled
   ! modified (hyperbolic) Bessel function of the first kind of order
@@ -36,14 +43,17 @@ REAL(8) FUNCTION DBSI0E(X)
   !                               significant figures required  30.15
   !                                    decimal places required  32.63
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, INITDS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, INITDS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DBSI0E
+  
   REAL eta
   INTEGER INITDS, ntai0, ntai02, nti0
   REAL(8) :: X, bi0cs(18), ai0cs(46), ai02cs(69), xsml, y, D1MACH, DCSEVL
@@ -183,7 +193,7 @@ REAL(8) FUNCTION DBSI0E(X)
   DATA ai02cs(68)/ - .1605454124919743200584465949655D-30/
   DATA ai02cs(69)/ + .1965352984594290603938848073318D-31/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DBSI0E
+  !* FIRST EXECUTABLE STATEMENT  DBSI0E
   IF ( first ) THEN
     eta = 0.1*REAL(D1MACH(3))
     nti0 = INITDS(bi0cs,18,eta)

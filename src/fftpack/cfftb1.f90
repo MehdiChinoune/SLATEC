@@ -1,14 +1,21 @@
-!DECK CFFTB1
+!** CFFTB1
 SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CFFTB1
-  !***PURPOSE  Compute the unnormalized inverse of CFFTF1.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A2
-  !***TYPE      COMPLEX (RFFTB1-S, CFFTB1-C)
-  !***KEYWORDS  FFTPACK, FOURIER TRANSFORM
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the unnormalized inverse of CFFTF1.
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A2
+  !***
+  ! **Type:**      COMPLEX (RFFTB1-S, CFFTB1-C)
+  !***
+  ! **Keywords:**  FFTPACK, FOURIER TRANSFORM
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !  Subroutine CFFTB1 computes the backward complex discrete Fourier
   !  transform (the Fourier synthesis).  Equivalently, CFFTB1 computes
@@ -55,11 +62,14 @@ SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
   !  NOTE:   WA and IFAC contain initialization calculations which must
   !          not be destroyed between calls of subroutine CFFTF1 or CFFTB1
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  PASSB, PASSB2, PASSB3, PASSB4, PASSB5
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  PASSB, PASSB2, PASSB3, PASSB4, PASSB5
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -68,12 +78,12 @@ SUBROUTINE CFFTB1(N,C,Ch,Wa,Ifac)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CFFTB1
+  
   REAL C, Ch, Wa
   INTEGER i, idl1, ido, idot, Ifac, ip, iw, ix2, ix3, ix4, k1, &
     l1, l2, N, n2, na, nac, nf
   DIMENSION Ch(*), C(*), Wa(*), Ifac(*)
-  !***FIRST EXECUTABLE STATEMENT  CFFTB1
+  !* FIRST EXECUTABLE STATEMENT  CFFTB1
   nf = Ifac(2)
   na = 0
   l1 = 1

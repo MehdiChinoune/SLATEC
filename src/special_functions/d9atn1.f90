@@ -1,17 +1,23 @@
-!DECK D9ATN1
+!** D9ATN1
 REAL(8) FUNCTION D9ATN1(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  D9ATN1
-  !***SUBSIDIARY
-  !***PURPOSE  Evaluate DATAN(X) from first order relative accuracy so
+  !>
+  !***
+  !  Evaluate DATAN(X) from first order relative accuracy so
   !            that DATAN(X) = X + X**3*D9ATN1(X).
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4A
-  !***TYPE      DOUBLE PRECISION (R9ATN1-S, D9ATN1-D)
-  !***KEYWORDS  ARC TANGENT, ELEMENTARY FUNCTIONS, FIRST ORDER, FNLIB,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      DOUBLE PRECISION (R9ATN1-S, D9ATN1-D)
+  !***
+  ! **Keywords:**  ARC TANGENT, ELEMENTARY FUNCTIONS, FIRST ORDER, FNLIB,
   !             TRIGONOMETRIC
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate  DATAN(X)  from first order, that is, evaluate
   ! (DATAN(X)-X)/X**3  with relative error accuracy so that
@@ -23,9 +29,12 @@ REAL(8) FUNCTION D9ATN1(X)
   !                               significant figures required  30.26
   !                                    decimal places required  32.27
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891115  Corrected third argument in reference to INITDS.  (WRB)
@@ -33,7 +42,7 @@ REAL(8) FUNCTION D9ATN1(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  !***END PROLOGUE  D9ATN1
+  
   INTEGER INITDS, ntatn1
   REAL(8) :: X, xbig, xmax, xsml, y, atn1cs(40), eps, DCSEVL, D1MACH
   LOGICAL first
@@ -79,7 +88,7 @@ REAL(8) FUNCTION D9ATN1(X)
   DATA atn1cs(39)/ - .2022404543449897579315199999999D-30/
   DATA atn1cs(40)/ + .3385428713046493843073706666666D-31/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  D9ATN1
+  !* FIRST EXECUTABLE STATEMENT  D9ATN1
   IF ( first ) THEN
     eps = D1MACH(3)
     ntatn1 = INITDS(atn1cs,40,0.1*REAL(eps))

@@ -1,13 +1,17 @@
-!DECK DBSYNU
+!** DBSYNU
 SUBROUTINE DBSYNU(X,Fnu,N,Y)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBSYNU
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBESY
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (BESYNU-S, DBSYNU-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBESY
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (BESYNU-S, DBSYNU-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract  **** A DOUBLE PRECISION routine ****
   !         DBSYNU computes N member sequences of Y Bessel functions
@@ -49,15 +53,19 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
   !         Improper input arguments - a fatal error
   !         Overflow - a fatal error
   !
-  !***SEE ALSO  DBESY
-  !***REFERENCES  N. M. Temme, On the numerical evaluation of the ordinary
+  !***
+  ! **See also:**  DBESY
+  !***
+  ! **References:**  N. M. Temme, On the numerical evaluation of the ordinary
   !                 Bessel function of the second kind, Journal of
   !                 Computational Physics 21, (1976), pp. 343-350.
   !               N. M. Temme, On the numerical evaluation of the modified
   !                 Bessel function of the third kind, Journal of
   !                 Computational Physics 19, (1975), pp. 324-337.
-  !***ROUTINES CALLED  D1MACH, DGAMMA, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, DGAMMA, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800501  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -69,7 +77,7 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DBSYNU
+  
   !
   INTEGER i, inu, j, k, kk, N, nn
   REAL(8) :: a, ak, arg, a1, a2, bk, cb, cbk, cc, cck, ck, &
@@ -91,7 +99,7 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
     -4.21977345555443D-02, 7.21894324666300D-03, &
     -2.15241674114900D-04, -2.01348547807000D-05, &
     1.13302723200000D-06, 6.11609500000000D-09/
-  !***FIRST EXECUTABLE STATEMENT  DBSYNU
+  !* FIRST EXECUTABLE STATEMENT  DBSYNU
   ak = D1MACH(3)
   tol = MAX(ak,1.0D-15)
   IF ( X<=0.0D0 ) THEN

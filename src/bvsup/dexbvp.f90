@@ -1,22 +1,30 @@
-!DECK DEXBVP
+!** DEXBVP
 SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,&
     Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DEXBVP
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (EXBVP-S, DEXBVP-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (EXBVP-S, DEXBVP-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !  This subroutine is used to execute the basic technique for solving
   !  the two-point boundary value problem.
   !
-  !***SEE ALSO  DBVSUP
-  !***ROUTINES CALLED  DBVPOR, XERMSG
-  !***COMMON BLOCKS    DML15T, DML17B, DML18J, DML5MC, DML8SZ
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBVSUP
+  !***
+  ! **Routines called:**  DBVPOR, XERMSG
+  !***
+  ! COMMON BLOCKS    DML15T, DML17B, DML18J, DML5MC, DML8SZ
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -28,7 +36,7 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DEXBVP
+  
   !
   INTEGER ICOco, iexp, Iflag, IGOfx, inc, INDpvt, INFo, INHomo, &
     INTeg, ISTkop, IVP, Iwork(*), K1, K10, K11, K2, K3, K4, &
@@ -56,7 +64,7 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,&
   !
   COMMON /DML5MC/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
   !
-  !***FIRST EXECUTABLE STATEMENT  DEXBVP
+  !* FIRST EXECUTABLE STATEMENT  DEXBVP
   kotc = 1
   iexp = 0
   IF ( Iwork(7)==-1 ) iexp = Iwork(8)
@@ -69,23 +77,23 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,&
     Iwork(8) = iexp
     MXNon = Iwork(2)
     !
-    ! **********************************************************************
-    ! **********************************************************************
+    !- *********************************************************************
+    !- *********************************************************************
     !
     CALL DBVPOR(Y,Nrowy,NCOmp,Xpts,NXPts,A,Nrowa,Alpha,NIC,B,Nrowb,Beta,NFC,&
       Iflag,Work(1),MXNon,Work(K1),NTP,Iwork(18),Work(K2),&
       Iwork(16),Work(K3),Work(K4),Work(K5),Work(K6),Work(K7),&
       Work(K8),Work(K9),Work(K10),Iwork(L1),NFCc)
     !
-    ! **********************************************************************
-    ! **********************************************************************
+    !- *********************************************************************
+    !- *********************************************************************
     !     IF DMGSBV RETURNS WITH MESSAGE OF DEPENDENT VECTORS, WE REDUCE
     !     ORTHONORMALIZATION TOLERANCE AND TRY AGAIN. THIS IS DONE
     !     A MAXIMUM OF 2 TIMES.
     !
     IF ( Iflag/=30 ) THEN
       !
-      ! **********************************************************************
+      !- *********************************************************************
       !     IF DBVPOR RETURNS MESSAGE THAT THE MAXIMUM NUMBER OF
       !     ORTHONORMALIZATIONS HAS BEEN ATTAINED AND WE CANNOT CONTINUE, THEN
       !     WE ESTIMATE THE NEW STORAGE REQUIREMENTS IN ORDER TO SOLVE PROBLEM

@@ -2,25 +2,32 @@ MODULE TEST25_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK SLAPQC
+  !** SLAPQC
   SUBROUTINE SLAPQC(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SLAPQC
-    !***PURPOSE  Quick check for testing Sparse Linear Algebra Package
+    !>
+    !***
+    !  Quick check for testing Sparse Linear Algebra Package
     !            (SLAP) Version 2.0.2.
-    !***LIBRARY   SLATEC (SLAP)
-    !***CATEGORY  D2A4, D2B4
-    !***TYPE      SINGLE PRECISION (SLAPQC-S, DLAPQC-D)
-    !***KEYWORDS  QUICK CHECK, SLAP
-    !***AUTHOR  Mark K. Seager (LLNL)
+    !***
+    ! **Library:**   SLATEC (SLAP)
+    !***
+    ! **Category:**  D2A4, D2B4
+    !***
+    ! **Type:**      SINGLE PRECISION (SLAPQC-S, DLAPQC-D)
+    !***
+    ! **Keywords:**  QUICK CHECK, SLAP
+    !***
+    ! **Author:**  Mark K. Seager (LLNL)
     !             seager@llnl.gov
     !             Lawrence Livermore National Laboratory
     !             PO BOX 808, L-300
     !             Livermore, CA 94550
     !             (510) 423-3141
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
-    ! *Arguments:
+    !- Arguments:
     !     KPRINT = 0  Quick checks - No printing.
     !                 Driver       - Short pass or fail message printed.
     !              1  Quick checks - No message printed for passed tests,
@@ -36,7 +43,7 @@ CONTAINS
     !                                                       --------------
     !                 Driver       - Pass or fail message printed.
     !
-    ! *Description:
+    !- Description:
     !         This is a SLATEC Quick Check program to test the *SLAP*
     !         Version 2.0.2 package.  It generates a "random" matrix (See
     !         SRMGEN) and then runs all the various methods with all the
@@ -54,14 +61,18 @@ CONTAINS
     !         **** to the program for I/O.
     !         *************************************************************
     !
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  OUTERR, R1MACH, SCPPLT, SRMGEN, SS2Y,
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  OUTERR, R1MACH, SCPPLT, SRMGEN, SS2Y,
     !                    SSDBCG, SSDCG, SSDCGN, SSDCGS, SSDGMR, SSDOMN,
     !                    SSGS, SSICCG, SSILUR, SSJAC, SSLUBC, SSLUCN,
     !                    SSLUCS, SSLUGM, SSLUOM, VFILL, XERMAX, XSETF,
     !                    XSETUN
-    !***COMMON BLOCKS    SSLBLK
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! COMMON BLOCKS    SSLBLK
+
+    !* REVISION HISTORY  (YYMMDD)
     !   880601  DATE WRITTEN
     !   881213  Revised to meet the new SLATEC prologue standards.
     !   890920  Modified to reduce single/double differences and to meet
@@ -76,7 +87,7 @@ CONTAINS
     !   920602  Reduced problem size for a shorter-running test and
     !           corrected lower limit in "DO 80" statement.  (FNF)
     !   921021  Added 1P's to output formats.  (FNF)
-    !***END PROLOGUE  SLAPQC
+    
     !
     !     The problem size, MAXN, should be large enough that the
     !     iterative methods do 10-15 iterations, just to be sure that
@@ -114,7 +125,7 @@ CONTAINS
     !     The following lines are for the braindamaged Sun FPE handler.
     !
     !$$$      integer oldmode, fpmode
-    !***FIRST EXECUTABLE STATEMENT  SLAPQC
+    !* FIRST EXECUTABLE STATEMENT  SLAPQC
     !$$$      oldmode = fpmode( 62464 )
     !
     !     Maximum problem sizes.
@@ -384,26 +395,30 @@ CONTAINS
     99008 FORMAT (/1X,A6,' : ITOL = ',I2,'   ISYM = ',I1)
     99009 FORMAT (/1X,A6,' : ITOL = ',I2,'   ISYM = ',I1,' NSAVE = ',I2)
   END SUBROUTINE SLAPQC
-  !DECK SRMGEN
+  !** SRMGEN
   SUBROUTINE SRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Soln,Dsum,Itmp,&
       Idiag)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SRMGEN
-    !***SUBSIDIARY
-    !***PURPOSE  This routine generates a "Random" symmetric or
+    !>
+    !***
+    !  This routine generates a "Random" symmetric or
     !            non-symmetric matrix of size N for use in the SLAP
     !            Quick Checks.
-    !***LIBRARY   SLATEC (SLAP)
-    !***TYPE      SINGLE PRECISION (SRMGEN-S, DRMGEN-D)
-    !***AUTHOR  Seager, Mark K., (LLNL)
+    !***
+    ! **Library:**   SLATEC (SLAP)
+    !***
+    ! **Type:**      SINGLE PRECISION (SRMGEN-S, DRMGEN-D)
+    !***
+    ! **Author:**  Seager, Mark K., (LLNL)
     !             seager@llnl.gov
     !             Lawrence Livermore National Laboratory
     !             PO BOX 808, L-300
     !             Livermore, CA 94550
     !             (510) 423-3141
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
-    ! *Usage:
+    !- Usage:
     !       INTEGER NELTMX, IERR, N, NELT, ISYM,
     !       INTEGER IA(NELTMX), JA(NELTMX), ITMP(N), IDIAG(N)
     !       REAL    FACTOR, A(NELTMX), F(N), SOLN(N), DSUM(N)
@@ -411,7 +426,7 @@ CONTAINS
     !       CALL SRMGEN( NELTMX, FACTOR, IERR, N, NELT, ISYM,
     !      $     IA, JA, A, F, SOLN, DSUM, ITMP, IDIAG )
     !
-    ! *Arguments:
+    !- Arguments:
     !
     ! NELTMX :IN       Integer.
     !         Maximum number of non-zeros that can be created by this
@@ -449,7 +464,7 @@ CONTAINS
     ! ITMP   :WORK     Integer ITMP(N).
     ! IDIAG  :WORK     Integer IDIAG(N).
     !
-    ! *Description
+    !- Description
     !         The matrix is generated by choosing a random number of
     !         entries for each column and then chosing negative random
     !         numbers for each off diagonal.   The diagonal elements
@@ -459,13 +474,15 @@ CONTAINS
     !         stored) the upper triangle elements are chosen so that they
     !         are FACTOR times the corresponding lower triangular element.
     !
-    !***ROUTINES CALLED  ISMPL, RAND
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  ISMPL, RAND
+
+    !* REVISION HISTORY  (YYMMDD)
     !   881120  DATE WRITTEN
     !   890919  Replaced SMPL with ISMPL.  (MKS)
     !   890920  Minor changes to reduce single/double differences.  (FNF)
     !   920511  Added complete declaration section.  (WRB)
-    !***END PROLOGUE  SRMGEN
+    
     !     .. Scalar Arguments ..
     REAL Factor
     INTEGER Ierr, Isym, N, Nelt, Neltmx
@@ -482,7 +499,7 @@ CONTAINS
     EXTERNAL ISMPL
     !     .. Intrinsic Functions ..
     INTRINSIC INT
-    !***FIRST EXECUTABLE STATEMENT  SRMGEN
+    !* FIRST EXECUTABLE STATEMENT  SRMGEN
     !
     !     Start by setting the random number generator seed.  This is done
     !     for reproducibility in debugging.
@@ -590,42 +607,49 @@ CONTAINS
     ENDDO
     !------------- LAST LINE OF SRMGEN FOLLOWS ----------------------------
   END SUBROUTINE SRMGEN
-  !DECK VFILL
+  !** VFILL
   SUBROUTINE VFILL(N,V,Val)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  VFILL
-    !***SUBSIDIARY
-    !***PURPOSE  Fill a vector with a value.
-    !***LIBRARY   SLATEC (SLAP)
-    !***TYPE      SINGLE PRECISION (VFILL-S, DFILL-D)
-    !***AUTHOR  Seager, Mark K., (LLNL)
+    !>
+    !***
+    !  Fill a vector with a value.
+    !***
+    ! **Library:**   SLATEC (SLAP)
+    !***
+    ! **Type:**      SINGLE PRECISION (VFILL-S, DFILL-D)
+    !***
+    ! **Author:**  Seager, Mark K., (LLNL)
     !             Lawrence Livermore National Laboratory
     !             PO BOX 808, L-300
     !             Livermore, CA 94550 (510) 423-3141
     !             seager@llnl.gov
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
-    ! *Usage:
+    !- Usage:
     !     INTEGER  N
     !     REAL     V(N), VAL
     !
     !     CALL VFILL( N, V, VAL )
     !
-    ! *Arguments:
+    !- Arguments:
     ! N      :IN       Integer.
     !         Length of the vector
     ! V      :OUT      Real V(N).
     !         Vector to be set.
     ! VAL    :IN       Real.
     !         Value to seed the vector with.
-    !***REFERENCES  (NONE)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **References:**  (NONE)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   871119  DATE WRITTEN
     !   881213  Previous REVISION DATE
     !   890920  Converted prologue to SLATEC 4.0 format.  (FNF)
     !   920511  Added complete declaration section.  (WRB)
-    !***END PROLOGUE  VFILL
+    
     !     .. Scalar Arguments ..
     REAL Val
     INTEGER N
@@ -635,7 +659,7 @@ CONTAINS
     INTEGER i, is, nr
     !     .. Intrinsic Functions ..
     INTRINSIC MOD
-    !***FIRST EXECUTABLE STATEMENT  VFILL
+    !* FIRST EXECUTABLE STATEMENT  VFILL
     IF ( N<=0 ) RETURN
     nr = MOD(N,4)
     !
@@ -665,32 +689,37 @@ CONTAINS
     ENDDO
     !------------- LAST LINE OF VFILL FOLLOWS -----------------------------
   END SUBROUTINE VFILL
-  !DECK OUTERR
+  !** OUTERR
   SUBROUTINE OUTERR(Method,Ierr,Iout,Nfail,Istdo,Iter,Err)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  OUTERR
-    !***SUBSIDIARY
-    !***PURPOSE  Output error messages for the SLAP Quick Check.
-    !***LIBRARY   SLATEC (SLAP)
-    !***TYPE      SINGLE PRECISION (OUTERR-S, DUTERR-D)
-    !***AUTHOR  Seager, Mark K., (LLNL)
+    !>
+    !***
+    !  Output error messages for the SLAP Quick Check.
+    !***
+    ! **Library:**   SLATEC (SLAP)
+    !***
+    ! **Type:**      SINGLE PRECISION (OUTERR-S, DUTERR-D)
+    !***
+    ! **Author:**  Seager, Mark K., (LLNL)
     !             Lawrence Livermore National Laboratory
     !             PO BOX 808, L-300
     !             Livermore, CA 94550 (510) 423-3141
     !             seager@llnl.gov
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   881010  DATE WRITTEN
     !   881213  Previous REVISION DATE
     !   890920  Converted prologue to SLATEC 4.0 format.  (FNF)
     !   920511  Added complete declaration section.  (WRB)
     !   921021  Added 1P's to output formats.  (FNF)
-    !***END PROLOGUE  OUTERR
+    
     !     .. Scalar Arguments ..
     REAL Err
     INTEGER Ierr, Iout, Istdo, Iter, Nfail
     CHARACTER Method*6
-    !***FIRST EXECUTABLE STATEMENT  OUTERR
+    !* FIRST EXECUTABLE STATEMENT  OUTERR
     IF ( Ierr/=0 ) Nfail = Nfail + 1
     IF ( Iout==1.AND.Ierr/=0 ) THEN
       WRITE (Istdo,99001) Method
@@ -723,24 +752,31 @@ CONTAINS
     !------------- LAST LINE OF OUTERR FOLLOWS ----------------------------
   END SUBROUTINE OUTERR
 END MODULE TEST25_MOD
-!DECK TEST25
+!** TEST25
 PROGRAM TEST25
   USE TEST25_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST25
-  !***PURPOSE  Driver for testing SLATEC subprograms.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (TEST25-S, TEST26-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (TEST25-S, TEST26-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -752,18 +788,21 @@ PROGRAM TEST25
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !       Single precision SLAP subprograms
   !
-  !***REFERENCES  Fong, Kirby W., Jefferson, Thomas H., Suyehiro,
+  !***
+  ! **References:**  Fong, Kirby W., Jefferson, Thomas H., Suyehiro,
   !                 Tokihiko, Walton, Lee, Guidelines to the SLATEC Common
   !                 Mathematical Library, March 21, 1989.
-  !***ROUTINES CALLED  I1MACH, SLAPQC, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  I1MACH, SLAPQC, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   920401  DATE WRITTEN
   !   920511  Added complete declaration section.  (WRB)
-  !***END PROLOGUE  TEST25
+  
   !     .. Local Scalars ..
   INTEGER ipass, kprint, lin, lun, nfail
   !     .. External Functions ..
@@ -771,7 +810,7 @@ PROGRAM TEST25
   EXTERNAL I1MACH
   !     .. External Subroutines ..
   EXTERNAL XERMAX, XSETF, XSETUN
-  !***FIRST EXECUTABLE STATEMENT  TEST25
+  !* FIRST EXECUTABLE STATEMENT  TEST25
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

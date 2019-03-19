@@ -1,26 +1,33 @@
-!DECK SSICCG
+!** SSICCG
 SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSICCG
-  !***PURPOSE  Incomplete Cholesky Conjugate Gradient Sparse Ax=b Solver.
+  !>
+  !***
+  !  Incomplete Cholesky Conjugate Gradient Sparse Ax=b Solver.
   !            Routine to solve a symmetric positive definite linear
   !            system  Ax = b  using the incomplete Cholesky
   !            Preconditioned Conjugate Gradient method.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2B4
-  !***TYPE      SINGLE PRECISION (SSICCG-S, DSICCG-D)
-  !***KEYWORDS  INCOMPLETE CHOLESKY, ITERATIVE PRECONDITION, SLAP, SPARSE,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SSICCG-S, DSICCG-D)
+  !***
+  ! **Keywords:**  INCOMPLETE CHOLESKY, ITERATIVE PRECONDITION, SLAP, SPARSE,
   !             SYMMETRIC LINEAR SYSTEM
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM, ITOL, ITMAX
   !     INTEGER ITER, IERR, IUNIT, LENW, IWORK(NL+2*N+1), LENIW
   !     REAL B(N), X(N), A(NELT), TOL, ERR, RWORK(NL+5*N)
@@ -28,7 +35,7 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     CALL SSICCG(N, B, X, NELT, IA, JA, A, ISYM, ITOL, TOL,
   !    $     ITMAX, ITER, ERR, IERR, IUNIT, RWORK, LENW, IWORK, LENIW )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the Matrix.
   ! B      :IN       Real B(N).
@@ -121,7 +128,7 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !         NL is the number of non-zeros in the lower triangle of the
   !         matrix (including the diagonal).
   !
-  ! *Description:
+  !- Description:
   !       This routine  performs  preconditioned  conjugate   gradient
   !       method on the   symmetric positive  definite  linear  system
   !       Ax=b.   The preconditioner  is  the incomplete Cholesky (IC)
@@ -197,27 +204,31 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Side Effects:
+  !- Side Effects:
   !       The SLAP Triad format (IA, JA, A) is modified internally to be
   !       the SLAP Column format.  See above.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  SCG, SSLLTI
-  !***REFERENCES  1. Louis Hageman and David Young, Applied Iterative
+  !***
+  ! **See also:**  SCG, SSLLTI
+  !***
+  ! **References:**  1. Louis Hageman and David Young, Applied Iterative
   !                  Methods, Academic Press, New York, 1981.
   !               2. Concus, Golub and O'Leary, A Generalized Conjugate
   !                  Gradient Method for the Numerical Solution of
   !                  Elliptic Partial Differential Equations, in Sparse
   !                  Matrix Computations, Bunch and Rose, Eds., Academic
   !                  Press, New York, 1979.
-  !***ROUTINES CALLED  SCG, SCHKW, SS2Y, SSICS, SSLLTI, SSMV, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SCG, SCHKW, SS2Y, SSICS, SSLLTI, SSMV, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -231,7 +242,7 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
   !   921019  Corrected NEL to NL.  (FNF)
-  !***END PROLOGUE  SSICCG
+  
   !     .. Parameters ..
   INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
@@ -248,7 +259,7 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   CHARACTER xern1*8
   !     .. External Subroutines ..
   EXTERNAL SCG, SCHKW, SS2Y, SSICS, SSLLTI, SSMV, XERMSG
-  !***FIRST EXECUTABLE STATEMENT  SSICCG
+  !* FIRST EXECUTABLE STATEMENT  SSICCG
   !
   Ierr = 0
   IF ( N<1.OR.Nelt<1 ) THEN

@@ -1,28 +1,35 @@
-!DECK SCPPLT
+!** SCPPLT
 SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SCPPLT
-  !***PURPOSE  Printer Plot of SLAP Column Format Matrix.
+  !>
+  !***
+  !  Printer Plot of SLAP Column Format Matrix.
   !            Routine to print out a SLAP Column format matrix in a
   !            "printer plot" graphical representation.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  N1
-  !***TYPE      SINGLE PRECISION (SCPPLT-S, DCPPLT-D)
-  !***KEYWORDS  DIAGNOSTICS, LINEAR SYSTEM, SLAP SPARSE
-  !***AUTHOR  Seager, Mark K., (LLNL)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  N1
+  !***
+  ! **Type:**      SINGLE PRECISION (SCPPLT-S, DCPPLT-D)
+  !***
+  ! **Keywords:**  DIAGNOSTICS, LINEAR SYSTEM, SLAP SPARSE
+  !***
+  ! **Author:**  Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM, IUNIT
   !     REAL    A(NELT)
   !
   !     CALL SCPPLT( N, NELT, IA, JA, A, ISYM, IUNIT )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   !         If N.gt.MAXORD, only the leading MAXORD x MAXORD
@@ -45,7 +52,7 @@ SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   !         to a file or the console or you will get a nasty message
   !         from the Fortran I/O libraries.
   !
-  ! *Description:
+  !- Description:
   !       This routine prints out a SLAP  Column format matrix  to the
   !       Fortran logical I/O unit   number  IUNIT.  The  numbers them
   !       selves  are not printed  out, but   rather  a one  character
@@ -89,22 +96,25 @@ SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  ! *Portability:
+  !- Portability:
   !     This routine, as distributed, can generate lines up to 229
   !     characters long.  Some Fortran systems have more restricted
   !     line lengths.  Change parameter MAXORD and the large number
   !     in FORMAT 1010 to reduce this line length.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -116,7 +126,7 @@ SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   !   921007  Replaced hard-wired 225 with parameter MAXORD.  (FNF)
   !   921021  Corrected syntax of CHARACTER declaration.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  !***END PROLOGUE  SCPPLT
+  
   !     .. Scalar Arguments ..
   INTEGER Isym, Iunit, N, Nelt
   !     .. Array Arguments ..
@@ -131,7 +141,7 @@ SUBROUTINE SCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   CHARACTER chmat(MAXORD)*(MAXORD)
   !     .. Intrinsic Functions ..
   INTRINSIC MIN, MOD, REAL
-  !***FIRST EXECUTABLE STATEMENT  SCPPLT
+  !* FIRST EXECUTABLE STATEMENT  SCPPLT
   !
   !         Set up the character matrix...
   !

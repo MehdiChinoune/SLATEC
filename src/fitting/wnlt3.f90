@@ -1,25 +1,32 @@
-!DECK WNLT3
+!** WNLT3
 SUBROUTINE WNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  WNLT3
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to WNLIT
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (WNLT3-S, DWNLT3-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to WNLIT
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (WNLT3-S, DWNLT3-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Haskell, K. H., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Perform column interchange.
   !     Exchange elements of permuted index vector and perform column
   !     interchanges.
   !
-  !***SEE ALSO  WNLIT
-  !***ROUTINES CALLED  SSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  WNLIT
+  !***
+  ! **Routines called:**  SSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890620  Code extracted from WNLT and made a subroutine.  (RWC))
-  !***END PROLOGUE  WNLT3
+  
   INTEGER I, Imax, Ipivot(*), M, Mdw
   REAL H(*), W(Mdw,*)
   !
@@ -28,7 +35,7 @@ SUBROUTINE WNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   REAL t
   INTEGER itemp
   !
-  !***FIRST EXECUTABLE STATEMENT  WNLT3
+  !* FIRST EXECUTABLE STATEMENT  WNLT3
   IF ( Imax/=I ) THEN
     itemp = Ipivot(I)
     Ipivot(I) = Ipivot(Imax)

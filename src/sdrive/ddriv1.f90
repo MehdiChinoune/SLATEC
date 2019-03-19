@@ -1,24 +1,31 @@
-!DECK DDRIV1
+!** DDRIV1
 SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DDRIV1
-  !***PURPOSE  The function of DDRIV1 is to solve N (200 or fewer)
+  !>
+  !***
+  !  The function of DDRIV1 is to solve N (200 or fewer)
   !            ordinary differential equations of the form
   !            dY(I)/dT = F(Y(I),T), given the initial conditions
   !            Y(I) = YI.  DDRIV1 uses double precision arithmetic.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***CATEGORY  I1A2, I1A1B
-  !***TYPE      DOUBLE PRECISION (SDRIV1-S, DDRIV1-D, CDRIV1-C)
-  !***KEYWORDS  DOUBLE PRECISION, GEAR'S METHOD, INITIAL VALUE PROBLEMS,
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Category:**  I1A2, I1A1B
+  !***
+  ! **Type:**      DOUBLE PRECISION (SDRIV1-S, DDRIV1-D, CDRIV1-C)
+  !***
+  ! **Keywords:**  DOUBLE PRECISION, GEAR'S METHOD, INITIAL VALUE PROBLEMS,
   !             ODE, ORDINARY DIFFERENTIAL EQUATIONS, SDRIVE, STIFF
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   Version 92.1
   !
@@ -280,13 +287,16 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !
   !    For other information, see Section IV of the writeup for DDRIV3.
   !
-  !***REFERENCES  C. W. Gear, Numerical Initial Value Problems in
+  !***
+  ! **References:**  C. W. Gear, Numerical Initial Value Problems in
   !                 Ordinary Differential Equations, Prentice-Hall, 1971.
-  !***ROUTINES CALLED  DDRIV3, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DDRIV3, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  DDRIV1
+  
   EXTERNAL F, D1MACH
   REAL(8) :: Eps, ewtcom(1), hmax, T, Tout, Work(*), Y(*), D1MACH
   INTEGER i, IDLIW, Ierflg, IERROR, IMPL, leniw, Lenw, lenwcm, &
@@ -297,7 +307,7 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   CHARACTER intgr1*8
   PARAMETER (NROOT=0,IERROR=2,MINT=2,MITER=2,IMPL=0,MXORD=5,MXSTEP=1000)
   DATA ewtcom(1)/1.D0/
-  !***FIRST EXECUTABLE STATEMENT  DDRIV1
+  !* FIRST EXECUTABLE STATEMENT  DDRIV1
   IF ( ABS(Mstate)==0.OR.ABS(Mstate)>7 ) THEN
     WRITE (intgr1,'(I8)') Mstate
     Ierflg = 26

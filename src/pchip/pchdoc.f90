@@ -1,21 +1,28 @@
-!DECK PCHDOC
+!** PCHDOC
 SUBROUTINE PCHDOC
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PCHDOC
-  !***PURPOSE  Documentation for PCHIP, a Fortran package for piecewise
+  !>
+  !***
+  !  Documentation for PCHIP, a Fortran package for piecewise
   !            cubic Hermite interpolation of data.
-  !***LIBRARY   SLATEC (PCHIP)
-  !***CATEGORY  E1A, Z
-  !***TYPE      ALL (PCHDOC-A)
-  !***KEYWORDS  CUBIC HERMITE INTERPOLATION, DOCUMENTATION,
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Category:**  E1A, Z
+  !***
+  ! **Type:**      ALL (PCHDOC-A)
+  !***
+  ! **Keywords:**  CUBIC HERMITE INTERPOLATION, DOCUMENTATION,
   !             MONOTONE INTERPOLATION, PCHIP,
   !             PIECEWISE CUBIC INTERPOLATION
-  !***AUTHOR  Fritsch, F. N., (LLNL)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             P.O. Box 808  (L-316)
   !             Livermore, CA  94550
   !             FTS 532-4275, (510) 422-4275
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !            PCHIP:  Piecewise Cubic Hermite Interpolation Package
   !
@@ -178,7 +185,8 @@ SUBROUTINE PCHDOC
   !   (This example assumes the usual columnwise storage of 2-D arrays
   !    in Fortran.)
   !
-  !***REFERENCES  1. Carl de Boor, A Practical Guide to Splines, Springer-
+  !***
+  ! **References:**  1. Carl de Boor, A Practical Guide to Splines, Springer-
   !                 Verlag, New York, 1978 (esp. Chapter IV, pp.49-62).
   !               2. F. N. Fritsch, Piecewise Cubic Hermite Interpolation
   !                 Package, Report UCRL-87285, Lawrence Livermore Natio-
@@ -191,8 +199,10 @@ SUBROUTINE PCHDOC
   !               4. F. N. Fritsch and R. E. Carlson, Monotone piecewise
   !                 cubic interpolation, SIAM Journal on Numerical Ana-
   !                 lysis 17, 2 (April 1980), pp. 238-246.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811106  DATE WRITTEN
   !   870930  Updated Reference 3.
   !   890414  Changed PCHMC and CHFMC to PCHCM and CHFCM, respectively,
@@ -204,10 +214,10 @@ SUBROUTINE PCHDOC
   !           2. Added description of PCHBS.  (FNF)
   !   920429  Revised format and order of references.  (WRB,FNF)
   !   930505  Changed CHFIV to CHFIE.  (FNF)
-  !***END PROLOGUE  PCHDOC
+  
   !-----------------------------------------------------------------------
   !     THIS IS A DUMMY SUBROUTINE, AND SHOULD NEVER BE CALLED.
   !
-  !***FIRST EXECUTABLE STATEMENT  PCHDOC
+  !* FIRST EXECUTABLE STATEMENT  PCHDOC
   !------------- LAST LINE OF PCHDOC FOLLOWS -----------------------------
 END SUBROUTINE PCHDOC

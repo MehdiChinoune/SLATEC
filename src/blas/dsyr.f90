@@ -1,17 +1,24 @@
-!DECK DSYR
+!** DSYR
 SUBROUTINE DSYR(Uplo,N,Alpha,X,Incx,A,Lda)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSYR
-  !***PURPOSE  Perform the symmetric rank 1 operation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B4
-  !***TYPE      DOUBLE PRECISION (DSYR-D)
-  !***KEYWORDS  LEVEL 2 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J. J., (ANL)
+  !>
+  !***
+  !  Perform the symmetric rank 1 operation.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (DSYR-D)
+  !***
+  ! **Keywords:**  LEVEL 2 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J. J., (ANL)
   !           Du Croz, J., (NAG)
   !           Hammarling, S., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  DSYR   performs the symmetric rank 1 operation
   !
@@ -76,16 +83,19 @@ SUBROUTINE DSYR(Uplo,N,Alpha,X,Incx,A,Lda)
   !           max( 1, n ).
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J. J., Du Croz, J., Hammarling, S., and
+  !***
+  ! **References:**  Dongarra, J. J., Du Croz, J., Hammarling, S., and
   !                 Hanson, R. J.  An extended set of Fortran basic linear
   !                 algebra subprograms.  ACM TOMS, Vol. 14, No. 1,
   !                 pp. 1-17, March 1988.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  DSYR
+  
   !     .. Scalar Arguments ..
   REAL(8) :: Alpha
   INTEGER Incx, Lda, N
@@ -105,7 +115,7 @@ SUBROUTINE DSYR(Uplo,N,Alpha,X,Incx,A,Lda)
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
-  !***FIRST EXECUTABLE STATEMENT  DSYR
+  !* FIRST EXECUTABLE STATEMENT  DSYR
   !
   !     Test the input parameters.
   !

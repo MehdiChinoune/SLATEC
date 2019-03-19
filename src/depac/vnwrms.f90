@@ -1,26 +1,33 @@
-!DECK VNWRMS
+!** VNWRMS
 REAL FUNCTION VNWRMS(N,V,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  VNWRMS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (VNWRMS-S, DVNRMS-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (VNWRMS-S, DVNRMS-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   VNWRMS computes a weighted root-mean-square vector norm for the
   !   integrator package DEBDF.
   !
-  !***SEE ALSO  DEBDF
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DEBDF
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  VNWRMS
+  
   !
   !
   !LLL. OPTIMIZE
@@ -33,7 +40,7 @@ REAL FUNCTION VNWRMS(N,V,W)
   INTEGER N, i
   REAL V, W, sum
   DIMENSION V(*), W(*)
-  !***FIRST EXECUTABLE STATEMENT  VNWRMS
+  !* FIRST EXECUTABLE STATEMENT  VNWRMS
   sum = 0.0E0
   DO i = 1, N
     sum = sum + (V(i)/W(i))**2

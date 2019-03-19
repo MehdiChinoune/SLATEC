@@ -1,15 +1,22 @@
-!DECK DGAMIT
+!** DGAMIT
 REAL(8) FUNCTION DGAMIT(A,X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGAMIT
-  !***PURPOSE  Calculate Tricomi's form of the incomplete Gamma function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7E
-  !***TYPE      DOUBLE PRECISION (GAMIT-S, DGAMIT-D)
-  !***KEYWORDS  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB,
+  !>
+  !***
+  !  Calculate Tricomi's form of the incomplete Gamma function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7E
+  !***
+  ! **Type:**      DOUBLE PRECISION (GAMIT-S, DGAMIT-D)
+  !***
+  ! **Keywords:**  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB,
   !             SPECIAL FUNCTIONS, TRICOMI
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   !   Evaluate Tricomi's incomplete Gamma function defined by
   !
@@ -33,29 +40,32 @@ REAL(8) FUNCTION DGAMIT(A,X)
   !   a loss of accuracy, which is reported if the result is less than
   !   half machine precision.
   !
-  !***REFERENCES  W. Gautschi, A computational procedure for incomplete
+  !***
+  ! **References:**  W. Gautschi, A computational procedure for incomplete
   !                 gamma functions, ACM Transactions on Mathematical
   !                 Software 5, 4 (December 1979), pp. 466-481.
   !               W. Gautschi, Incomplete gamma functions, Algorithm 542,
   !                 ACM Transactions on Mathematical Software 5, 4
   !                 (December 1979), pp. 482-489.
-  !***ROUTINES CALLED  D1MACH, D9GMIT, D9LGIC, D9LGIT, DGAMR, DLGAMS,
+  !***
+  ! **Routines called:**  D1MACH, D9GMIT, D9LGIC, D9LGIT, DGAMR, DLGAMS,
   !                    DLNGAM, XERCLR, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  !***END PROLOGUE  DGAMIT
+  
   REAL(8) :: A, X, aeps, ainta, algap1, alneps, alng, alx, &
     bot, h, sga, sgngam, sqeps, t, D1MACH, DGAMR, &
     D9GMIT, D9LGIT, DLNGAM, D9LGIC
   LOGICAL first
   SAVE alneps, sqeps, bot, first
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DGAMIT
+  !* FIRST EXECUTABLE STATEMENT  DGAMIT
   IF ( first ) THEN
     alneps = -LOG(D1MACH(3))
     sqeps = SQRT(D1MACH(4))

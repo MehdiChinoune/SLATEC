@@ -1,17 +1,24 @@
-!DECK DBNDSL
+!** DBNDSL
 SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBNDSL
-  !***PURPOSE  Solve the least squares problem for a banded matrix using
+  !>
+  !***
+  !  Solve the least squares problem for a banded matrix using
   !            sequential accumulation of rows of the data matrix.
   !            Exactly one right-hand side vector is permitted.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D9
-  !***TYPE      DOUBLE PRECISION (BNDSOL-S, DBNDSL-D)
-  !***KEYWORDS  BANDED MATRIX, CURVE FITTING, LEAST SQUARES
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D9
+  !***
+  ! **Type:**      DOUBLE PRECISION (BNDSOL-S, DBNDSL-D)
+  !***
+  ! **Keywords:**  BANDED MATRIX, CURVE FITTING, LEAST SQUARES
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     These subroutines solve the least squares problem Ax = b for
   !     banded matrices A using sequential accumulation of rows of the
@@ -175,10 +182,13 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !
   !     CALL DBNDAC(G,MDG,NB,IP,IR,MT,JT)
   !
-  !***REFERENCES  C. L. Lawson and R. J. Hanson, Solving Least Squares
+  !***
+  ! **References:**  C. L. Lawson and R. J. Hanson, Solving Least Squares
   !                 Problems, Prentice-Hall, Inc., 1974, Chapter 27.
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -187,12 +197,12 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DBNDSL
+  
   REAL(8) :: G, Rnorm, rsq, s, X, zero
   INTEGER i, i1, i2, ie, ii, iopt, Ip, Ir, irm1, ix, j, jg, l, &
     Mdg, Mode, N, Nb, nerr, np1
   DIMENSION G(Mdg,*), X(*)
-  !***FIRST EXECUTABLE STATEMENT  DBNDSL
+  !* FIRST EXECUTABLE STATEMENT  DBNDSL
   zero = 0.D0
   !
   Rnorm = zero

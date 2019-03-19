@@ -1,16 +1,23 @@
-!DECK SPOIR
+!** SPOIR
 SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPOIR
-  !***PURPOSE  Solve a positive definite symmetric system of linear
+  !>
+  !***
+  !  Solve a positive definite symmetric system of linear
   !            equations.  Iterative refinement is used to obtain an error
   !            estimate.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2B1B
-  !***TYPE      SINGLE PRECISION (SPOIR-S, CPOIR-C)
-  !***KEYWORDS  HERMITIAN, LINEAR EQUATIONS, POSITIVE DEFINITE, SYMMETRIC
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2B1B
+  !***
+  ! **Type:**      SINGLE PRECISION (SPOIR-S, CPOIR-C)
+  !***
+  ! **Keywords:**  HERMITIAN, LINEAR EQUATIONS, POSITIVE DEFINITE, SYMMETRIC
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !    Subroutine SPOIR solves a real positive definite symmetric
   !    NxN system of single precision linear equations using LINPACK
@@ -92,10 +99,13 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   !                      the user provides otherwise, an error message
   !                      will be printed followed by an abort.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DSDOT, R1MACH, SASUM, SCOPY, SPOFA, SPOSL, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DSDOT, R1MACH, SASUM, SCOPY, SPOFA, SPOSL, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800528  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -104,13 +114,13 @@ SUBROUTINE SPOIR(A,Lda,N,V,Itask,Ind,Work)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SPOIR
+  
   !
   INTEGER Lda, N, Itask, Ind, info, j
   REAL A(Lda,*), V(*), Work(N,*), SASUM, xnorm, dnorm, R1MACH
   REAL(8) :: DSDOT
   CHARACTER(8) :: xern1, xern2
-  !***FIRST EXECUTABLE STATEMENT  SPOIR
+  !* FIRST EXECUTABLE STATEMENT  SPOIR
   IF ( Lda<N ) THEN
     Ind = -1
     WRITE (xern1,'(I8)') Lda

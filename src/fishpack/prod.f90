@@ -1,13 +1,17 @@
-!DECK PROD
+!** PROD
 SUBROUTINE PROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PROD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BLKTRI
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (PROD-S, PROC-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BLKTRI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (PROD-S, PROC-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   ! PROD applies a sequence of matrix operations to the vector X and
   ! stores the result in Y.
@@ -22,18 +26,21 @@ SUBROUTINE PROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   ! D,W,U      are working arrays.
   ! IS         determines whether or not a change in sign is made.
   !
-  !***SEE ALSO  BLKTRI
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BLKTRI
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  PROD
+  
   REAL A, Aa, B, Bd, Bm1, Bm2, C, D, den, rt, U, W, X, Y
   INTEGER ia, ibr, id, j, k, M, m1, m2, mm, Na, Nd, Nm1, Nm2
   DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), W(*), Bd(*), Bm1(*)&
     , Bm2(*), Aa(*), U(*)
-  !***FIRST EXECUTABLE STATEMENT  PROD
+  !* FIRST EXECUTABLE STATEMENT  PROD
   DO j = 1, M
     W(j) = X(j)
     Y(j) = W(j)

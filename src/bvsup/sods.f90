@@ -1,13 +1,17 @@
-!DECK SODS
+!** SODS
 SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SODS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SODS-S)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SODS-S)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !     SODS solves the overdetermined system of linear equations A X = B,
   !     where A is NEQ by NUK and NEQ .GE. NUK. If rank A = NUK,
@@ -22,9 +26,9 @@ SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   !     orthogonal transformations. In the process, ORTHOL calls upon
   !     subroutine CSCALE for scaling.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !   Input
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     A -- Contains the matrix of NEQ equations in NUK unknowns and must
   !          be dimensioned NRDA by NUK. The original A is destroyed
@@ -53,9 +57,9 @@ SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   !                 no scaling will be attempted
   !              For most problems scaling will probably not be necessary
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !   OUTPUT
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     IFLAG -- Status indicator
   !            =1 If solution was obtained
@@ -76,10 +80,12 @@ SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   !                         IWORK(1) contains the numerically determined
   !                         rank of the matrix A
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  BVSUP
-  !***REFERENCES  G. Golub, Numerical methods for solving linear least
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **References:**  G. Golub, Numerical methods for solving linear least
   !                 squares problems, Numerische Mathematik 7, (1965),
   !                 pp. 206-216.
   !               P. Businger and G. Golub, Linear least squares
@@ -88,20 +94,22 @@ SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   !               H. A. Watts, Solving linear least squares problems
   !                 using SODS/SUDS/CODS, Sandia Report SAND77-0683,
   !                 Sandia Laboratories, 1977.
-  !***ROUTINES CALLED  LSSODS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSSODS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SODS
+  
   REAL A, B, Work, X
   INTEGER Iflag, ip, is, iter, Iwork, kc, kd, ks, kt, kv, kz, Neq, Nrda, Nuk
   DIMENSION A(Nrda,*), X(*), B(*), Work(*), Iwork(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  SODS
+  !* FIRST EXECUTABLE STATEMENT  SODS
   iter = 0
   is = 2
   ip = 3

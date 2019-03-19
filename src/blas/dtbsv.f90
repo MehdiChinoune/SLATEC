@@ -1,17 +1,24 @@
-!DECK DTBSV
+!** DTBSV
 SUBROUTINE DTBSV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DTBSV
-  !***PURPOSE  Solve one of the systems of equations.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B4
-  !***TYPE      DOUBLE PRECISION (STBSV-S, DTBSV-D, CTBSV-C)
-  !***KEYWORDS  LEVEL 2 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J. J., (ANL)
+  !>
+  !***
+  !  Solve one of the systems of equations.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (STBSV-S, DTBSV-D, CTBSV-C)
+  !***
+  ! **Keywords:**  LEVEL 2 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J. J., (ANL)
   !           Du Croz, J., (NAG)
   !           Hammarling, S., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  DTBSV  solves one of the systems of equations
   !
@@ -132,16 +139,19 @@ SUBROUTINE DTBSV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   !           X. INCX must not be zero.
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J. J., Du Croz, J., Hammarling, S., and
+  !***
+  ! **References:**  Dongarra, J. J., Du Croz, J., Hammarling, S., and
   !                 Hanson, R. J.  An extended set of Fortran basic linear
   !                 algebra subprograms.  ACM TOMS, Vol. 14, No. 1,
   !                 pp. 1-17, March 1988.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  DTBSV
+  
   !     .. Scalar Arguments ..
   INTEGER Incx, K, Lda, N
   CHARACTER :: Diag, Trans, Uplo
@@ -161,7 +171,7 @@ SUBROUTINE DTBSV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, MIN
-  !***FIRST EXECUTABLE STATEMENT  DTBSV
+  !* FIRST EXECUTABLE STATEMENT  DTBSV
   !
   !     Test the input parameters.
   !

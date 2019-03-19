@@ -2,29 +2,35 @@ MODULE TEST10_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK ZQCAI
+  !** ZQCAI
   SUBROUTINE ZQCAI(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  ZQCAI
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SLATEC subroutines
+    !>
+    !***
+    !  Quick check for SLATEC subroutines
     !            ZAIRY, ZBIRY
-    !***LIBRARY   SLATEC
-    !***CATEGORY  C10D
-    !***TYPE      COMPLEX (CQCAI-C, ZQCAI-Z)
-    !***KEYWORDS  QUICK CHECK, ZAIRY, ZBIRY
-    !***AUTHOR  Amos, Don, (SNL)
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Category:**  C10D
+    !***
+    ! **Type:**      COMPLEX (CQCAI-C, ZQCAI-Z)
+    !***
+    ! **Keywords:**  QUICK CHECK, ZAIRY, ZBIRY
+    !***
+    ! **Author:**  Amos, Don, (SNL)
     !           Goudy, Sue, (SNL)
     !           Walton, Lee, (SNL)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL ZQCAI (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN    :IN  is the unit number to which output is to be written.
     !
@@ -34,7 +40,7 @@ CONTAINS
     !     IPASS  :OUT indicates whether the test passed or failed.
     !                 A value of one is good, indicating no failures.
     !
-    ! *Description:
+    !- Description:
     !
     !               *** A DOUBLE PRECISION ROUTINE ***
     !
@@ -45,18 +51,21 @@ CONTAINS
     !    and ZBIRY and checks them against the Wronskian evaluation
     !    in the Z plane.
     !
-    !***REFERENCES  Abramowitz, M. and Stegun, I. A., Handbook
+    !***
+    ! **References:**  Abramowitz, M. and Stegun, I. A., Handbook
     !                 of Mathematical Functions, Dover Publications,
     !                 New York, 1964.
     !               Amos, D. E., A Subroutine Package for Bessel
     !                 Functions of a Complex Argument and Nonnegative
     !                 Order, SAND85-1018, May, 1985.
-    !***ROUTINES CALLED  ZAIRY, ZBIRY, ZABS, ZSQRT, ZEXP, I1MACH, D1MACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  ZAIRY, ZBIRY, ZABS, ZSQRT, ZEXP, I1MACH, D1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
-    !***END PROLOGUE  ZQCAI
+    
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -95,7 +104,7 @@ CONTAINS
       kdo, keps, kode, k1, k2, lflg, nz1, nz2, nz3, nz4
     DIMENSION kdo(20), keps(20), t(20), wr(20), wi(20), yr(20), yi(20)
     !
-    !***FIRST EXECUTABLE STATEMENT  ZQCAI
+    !* FIRST EXECUTABLE STATEMENT  ZQCAI
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       99001 FORMAT (' QUICK CHECK ROUTINE FOR THE AIRY FUNCTIONS FROM ',&
@@ -401,29 +410,35 @@ CONTAINS
       99019 FORMAT (/' ****** ZAIRY  FAILED SOME TESTS ******'/)
     ENDIF
   END SUBROUTINE ZQCAI
-  !DECK ZQCBH
+  !** ZQCBH
   SUBROUTINE ZQCBH(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  ZQCBH
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SLATEC subroutine
+    !>
+    !***
+    !  Quick check for SLATEC subroutine
     !            ZBESH
-    !***LIBRARY   SLATEC
-    !***CATEGORY  C10A4
-    !***TYPE      COMPLEX (CQCBH-C, ZQCBH-Z)
-    !***KEYWORDS  QUICK CHECK, ZBESH
-    !***AUTHOR  Amos, Don, (SNL)
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Category:**  C10A4
+    !***
+    ! **Type:**      COMPLEX (CQCBH-C, ZQCBH-Z)
+    !***
+    ! **Keywords:**  QUICK CHECK, ZBESH
+    !***
+    ! **Author:**  Amos, Don, (SNL)
     !           Goudy, Sue, (SNL)
     !           Walton, Lee, (SNL)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL ZQCBH (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN    :IN  is the unit number to which output is to be written.
     !
@@ -433,7 +448,7 @@ CONTAINS
     !     IPASS  :OUT indicates whether the test passed or failed.
     !                 A value of one is good, indicating no failures.
     !
-    ! *Description:
+    !- Description:
     !
     !                 *** A DOUBLE PRECISION ROUTINE ***
     !
@@ -444,17 +459,20 @@ CONTAINS
     !    from CBESH and checks them against the Wronskian evaluation
     !    in the (Z,FNU) space.
     !
-    !***REFERENCES  Abramowitz, M. and Stegun, I. A., Handbook
+    !***
+    ! **References:**  Abramowitz, M. and Stegun, I. A., Handbook
     !                 of Mathematical Functions, Dover Publications,
     !                 New York, 1964.
     !               Amos, D. E., A Subroutine Package for Bessel
     !                 Functions of a Complex Argument and Nonnegative
     !                 Order, SAND85-1018, May, 1985.
-    !***ROUTINES CALLED  ZBESH, ZUOIK, ZABS, ZDIV, I1MACH, D1MACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  ZBESH, ZUOIK, ZABS, ZDIV, I1MACH, D1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
-    !***END PROLOGUE  ZQCBH
+    
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -493,7 +511,7 @@ CONTAINS
     DIMENSION aer(20), kdo(20), keps(20), t(20), wr(20), wi(20), xnu(20)&
       , yr(20), yi(20)
     !
-    !***FIRST EXECUTABLE STATEMENT  ZQCBH
+    !* FIRST EXECUTABLE STATEMENT  ZQCBH
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       99001 FORMAT (' QUICK CHECK ROUTINE FOR THE H BESSEL FUNCTIONS FROM ',&
@@ -772,29 +790,35 @@ CONTAINS
       99017 FORMAT (/' ****** ZBESH  FAILED SOME TESTS ******'/)
     ENDIF
   END SUBROUTINE ZQCBH
-  !DECK ZQCBI
+  !** ZQCBI
   SUBROUTINE ZQCBI(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  ZQCBI
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SLATEC subroutine
+    !>
+    !***
+    !  Quick check for SLATEC subroutine
     !            ZBESI
-    !***LIBRARY   SLATEC
-    !***CATEGORY  C10B4
-    !***TYPE      COMPLEX (CQCBI-C, ZQCBI-Z)
-    !***KEYWORDS  QUICK CHECK, ZBESI
-    !***AUTHOR  Amos, Don, (SNL)
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Category:**  C10B4
+    !***
+    ! **Type:**      COMPLEX (CQCBI-C, ZQCBI-Z)
+    !***
+    ! **Keywords:**  QUICK CHECK, ZBESI
+    !***
+    ! **Author:**  Amos, Don, (SNL)
     !           Goudy, Sue, (SNL)
     !           Walton, Lee, (SNL)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL ZQCBI (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN    :IN  is the unit number to which output is to be written.
     !
@@ -804,7 +828,7 @@ CONTAINS
     !     IPASS  :OUT indicates whether the test passed or failed.
     !                 A value of one is good, indicating no failures.
     !
-    ! *Description:
+    !- Description:
     !
     !                 *** A DOUBLE PRECISION ROUTINE ***
     !
@@ -816,17 +840,20 @@ CONTAINS
     !    another formula applies. The terminated value is checked by
     !    the formula appropriate to that region.
     !
-    !***REFERENCES  Abramowitz, M. and Stegun, I. A., Handbook
+    !***
+    ! **References:**  Abramowitz, M. and Stegun, I. A., Handbook
     !                 of Mathematical Functions, Dover Publications,
     !                 New York, 1964.
     !               Amos, D. E., A Subroutine Package for Bessel
     !                 Functions of a Complex Argument and Nonnegative
     !                 Order, SAND85-1018, May, 1985.
-    !***ROUTINES CALLED  ZBESI, ZBESK, ZWRSK, ZABS, ZDIV, I1MACH, D1MACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  ZBESI, ZBESK, ZWRSK, ZABS, ZDIV, I1MACH, D1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
-    !***END PROLOGUE  ZQCBI
+    
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -866,7 +893,7 @@ CONTAINS
     DIMENSION aer(20), ckr(2), cki(2), kdo(20), keps(20), t(20), wr(20)&
       , wi(20), yr(20), yi(20)
     !
-    !***FIRST EXECUTABLE STATEMENT  ZQCBI
+    !* FIRST EXECUTABLE STATEMENT  ZQCBI
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       99001 FORMAT (' QUICK CHECK ROUTINE FOR THE I BESSEL FUNCTION FROM ','ZBESI'/)
@@ -1298,29 +1325,35 @@ CONTAINS
     99023 FORMAT (' RESULTS:',15X,'1/Z=',2D12.4/10X,'WRON(ZBESI,ZBESK)=',2D12.4)
     99024 FORMAT (' RELATIVE ERROR:',9X,'ER=',D12.4/)
   END SUBROUTINE ZQCBI
-  !DECK ZQCBJ
+  !** ZQCBJ
   SUBROUTINE ZQCBJ(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  ZQCBJ
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SLATEC subroutine
+    !>
+    !***
+    !  Quick check for SLATEC subroutine
     !            ZBESJ
-    !***LIBRARY   SLATEC
-    !***CATEGORY  C10A4
-    !***TYPE      COMPLEX (CQCBJ-C, ZQCBJ-Z)
-    !***KEYWORDS  QUICK CHECK, ZBESJ
-    !***AUTHOR  Amos, Don, (SNL)
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Category:**  C10A4
+    !***
+    ! **Type:**      COMPLEX (CQCBJ-C, ZQCBJ-Z)
+    !***
+    ! **Keywords:**  QUICK CHECK, ZBESJ
+    !***
+    ! **Author:**  Amos, Don, (SNL)
     !           Goudy, Sue, (SNL)
     !           Walton, Lee, (SNL)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL ZQCBJ (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN    :IN  is the unit number to which output is to be written.
     !
@@ -1330,7 +1363,7 @@ CONTAINS
     !     IPASS  :OUT indicates whether the test passed or failed.
     !                 A value of one is good, indicating no failures.
     !
-    ! *Description:
+    !- Description:
     !
     !                 *** A DOUBLE PRECISION ROUTINE ***
     !
@@ -1348,18 +1381,21 @@ CONTAINS
     !    N+16 are checked against a corresponding N member sequence where
     !    both sequences are generated by ZBESJ beginning at order FNU.
     !
-    !***REFERENCES  Abramowitz, M. and Stegun, I. A., Handbook
+    !***
+    ! **References:**  Abramowitz, M. and Stegun, I. A., Handbook
     !                 of Mathematical Functions, Dover Publications,
     !                 New York, 1964.
     !               Amos, D. E., A Subroutine Package for Bessel
     !                 Functions of a Complex Argument and Nonnegative
     !                 Order, SAND85-1018, May, 1985.
-    !***ROUTINES CALLED  ZBESH, ZBESJ, ZABS, ZEXP, I1MACH, D1MACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  ZBESH, ZBESJ, ZABS, ZEXP, I1MACH, D1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !   930122  Added ZEXP to EXTERNAL statement.  (RWC)
-    !***END PROLOGUE  ZQCBJ
+    
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -1398,7 +1434,7 @@ CONTAINS
     DIMENSION aer(20), kdo(20), keps(20), t(20), vr(20), vi(20), wr(20)&
       , wi(20), xnu(20), yr(20), yi(20)
     !
-    !***FIRST EXECUTABLE STATEMENT  ZQCBJ
+    !* FIRST EXECUTABLE STATEMENT  ZQCBJ
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       99001 FORMAT (' QUICK CHECK ROUTINE FOR THE J BESSEL FUNCTION FROM ','ZBESJ'/)
@@ -1713,29 +1749,35 @@ CONTAINS
       99023 FORMAT (/' ****** ZBESJ  FAILED SOME TESTS ******'/)
     ENDIF
   END SUBROUTINE ZQCBJ
-  !DECK ZQCBK
+  !** ZQCBK
   SUBROUTINE ZQCBK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  ZQCBK
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SLATEC subroutine
+    !>
+    !***
+    !  Quick check for SLATEC subroutine
     !            ZBESK
-    !***LIBRARY   SLATEC
-    !***CATEGORY  C10B4
-    !***TYPE      COMPLEX (CQCBK-C, ZQCBK-Z)
-    !***KEYWORDS  QUICK CHECK, ZBESK
-    !***AUTHOR  Amos, Don, (SNL)
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Category:**  C10B4
+    !***
+    ! **Type:**      COMPLEX (CQCBK-C, ZQCBK-Z)
+    !***
+    ! **Keywords:**  QUICK CHECK, ZBESK
+    !***
+    ! **Author:**  Amos, Don, (SNL)
     !           Goudy, Sue, (SNL)
     !           Walton, Lee, (SNL)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL ZQCBK (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN    :IN  is the unit number to which output is to be written.
     !
@@ -1745,7 +1787,7 @@ CONTAINS
     !     IPASS  :OUT indicates whether the test passed or failed.
     !                 A value of one is good, indicating no failures.
     !
-    ! *Description:
+    !- Description:
     !
     !                  *** A DOUBLE PRECISION ROUTINE ***
     !
@@ -1756,18 +1798,21 @@ CONTAINS
     !    ZBESI and ZBESK and checks them against the Wronskian evaluation
     !    in the (Z,FNU) space.
     !
-    !***REFERENCES  Abramowitz, M. and Stegun, I. A., Handbook
+    !***
+    ! **References:**  Abramowitz, M. and Stegun, I. A., Handbook
     !                 of Mathematical Functions, Dover Publications,
     !                 New York, 1964.
     !               Amos, D. E., A Subroutine Package for Bessel
     !                 Functions of a Complex Argument and Nonnegative
     !                 Order, SAND85-1018, May, 1985.
-    !***ROUTINES CALLED  ZBESI, ZBESK, ZABS, ZDIV, ZEXP, I1MACH, D1MACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  ZBESI, ZBESK, ZABS, ZDIV, ZEXP, I1MACH, D1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standard
     !   930122  Added ZEXP to EXTERNAL Statement.  (RWC)
-    !***END PROLOGUE  ZQCBK
+    
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -1806,7 +1851,7 @@ CONTAINS
     DIMENSION aer(20), kdo(20), keps(20), t(20), wr(20), wi(20), xnu(20)&
       , yr(20), yi(20)
     !
-    !***FIRST EXECUTABLE STATEMENT  ZQCBK
+    !* FIRST EXECUTABLE STATEMENT  ZQCBK
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       99001 FORMAT (' QUICK CHECK ROUTINE FOR THE K BESSEL FUNCTION FROM ','ZBESK'/)
@@ -2104,29 +2149,35 @@ CONTAINS
       99017 FORMAT (/' ****** ZBESK  FAILED SOME TESTS ******'/)
     ENDIF
   END SUBROUTINE ZQCBK
-  !DECK ZQCBY
+  !** ZQCBY
   SUBROUTINE ZQCBY(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  ZQCBY
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SLATEC subroutine
+    !>
+    !***
+    !  Quick check for SLATEC subroutine
     !            ZBESY
-    !***LIBRARY   SLATEC
-    !***CATEGORY  C10A4
-    !***TYPE      COMPLEX (CQCBY-C, ZQCBY-Z)
-    !***KEYWORDS  QUICK CHECK, ZBESY
-    !***AUTHOR  Amos, Don, (SNL)
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Category:**  C10A4
+    !***
+    ! **Type:**      COMPLEX (CQCBY-C, ZQCBY-Z)
+    !***
+    ! **Keywords:**  QUICK CHECK, ZBESY
+    !***
+    ! **Author:**  Amos, Don, (SNL)
     !           Goudy, Sue, (SNL)
     !           Walton, Lee, (SNL)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL ZQCBY (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN    :IN  is the unit number to which output is to be written.
     !
@@ -2136,7 +2187,7 @@ CONTAINS
     !     IPASS  :OUT indicates whether the test passed or failed.
     !                 A value of one is good, indicating no failures.
     !
-    ! *Description:
+    !- Description:
     !
     !                 *** A DOUBLE PRECISION ROUTINE ***
     !
@@ -2152,18 +2203,21 @@ CONTAINS
     !
     !    and -PI.LT.ARG(Z).LE.PI/2, in the (Z,FNU) space.
     !
-    !***REFERENCES  Abramowitz, M. and Stegun, I. A., Handbook
+    !***
+    ! **References:**  Abramowitz, M. and Stegun, I. A., Handbook
     !                 of Mathematical Functions, Dover Publications,
     !                 New York, 1964.
     !               Amos, D. E., A Subroutine Package for Bessel
     !                 Functions of a Complex Argument and Nonnegative
     !                 Order, SAND85-1018, May, 1985.
-    !***ROUTINES CALLED  ZBESI, ZBESK, ZBESY, ZABS, ZEXP, I1MACH, D1MACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  ZBESI, ZBESK, ZBESY, ZABS, ZEXP, I1MACH, D1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !   930122  Added ZEXP to EXTERNAL Statement.  (RWC)
-    !***END PROLOGUE  ZQCBY
+    
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -2207,7 +2261,7 @@ CONTAINS
       cipi(4)/1.0D0, 0.0D0, 0.0D0, 1.0D0, -1.0D0, 0.0D0, 0.0D0, &
       -1.0D0/
     !
-    !***FIRST EXECUTABLE STATEMENT  ZQCBY
+    !* FIRST EXECUTABLE STATEMENT  ZQCBY
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       99001 FORMAT (' QUICK CHECK ROUTINE FOR THE Y BESSEL FUNCTION FROM ','ZBESY'/)
@@ -2536,24 +2590,31 @@ CONTAINS
     ENDIF
   END SUBROUTINE ZQCBY
 END MODULE TEST10_MOD
-!DECK TEST10
+!** TEST10
 PROGRAM TEST10
   USE TEST10_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST10
-  !***PURPOSE  Driver for testing SLATEC subprograms.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C7A, C10A4, C10B4, C10D
-  !***TYPE      DOUBLE PRECISION (TEST09-S, TEST10-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C7A, C10A4, C10B4, C10D
+  !***
+  ! **Type:**      DOUBLE PRECISION (TEST09-S, TEST10-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -2565,23 +2626,26 @@ PROGRAM TEST10
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !               ZABS, ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZBIRY,
   !               ZDIV, ZEXP, ZSQRT, ZUOIK, ZWRSK
   !
-  !***REFERENCES  Fong, Kirby W., Jefferson, Thomas H., Suyehiro,
+  !***
+  ! **References:**  Fong, Kirby W., Jefferson, Thomas H., Suyehiro,
   !                 Tokihiko, Walton, Lee, Guidelines to the SLATEC Common
   !                 Mathematical Library, March 21, 1989.
-  !***ROUTINES CALLED  I1MACH, XERMAX, XSETF, XSETUN, ZQCAI, ZQCBH, ZQCBI,
+  !***
+  ! **Routines called:**  I1MACH, XERMAX, XSETF, XSETUN, ZQCAI, ZQCBH, ZQCBI,
   !                    ZQCBJ, ZQCBK, ZQCBY
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   910411  DATE WRITTEN
   !   920128  Category corrected.  (WRB)
-  !***END PROLOGUE  TEST10
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST10
+  !* FIRST EXECUTABLE STATEMENT  TEST10
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

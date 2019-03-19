@@ -1,18 +1,25 @@
-!DECK POISTG
+!** POISTG
 SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  POISTG
-  !***PURPOSE  Solve a block tridiagonal system of linear equations
+  !>
+  !***
+  !  Solve a block tridiagonal system of linear equations
   !            that results from a staggered grid finite difference
   !            approximation to 2-D elliptic PDE's.
-  !***LIBRARY   SLATEC (FISHPACK)
-  !***CATEGORY  I2B4B
-  !***TYPE      SINGLE PRECISION (POISTG-S)
-  !***KEYWORDS  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE, TRIDIAGONAL
-  !***AUTHOR  Adams, J., (NCAR)
+  !***
+  ! **Library:**   SLATEC (FISHPACK)
+  !***
+  ! **Category:**  I2B4B
+  !***
+  ! **Type:**      SINGLE PRECISION (POISTG-S)
+  !***
+  ! **Keywords:**  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE, TRIDIAGONAL
+  !***
+  ! **Author:**  Adams, J., (NCAR)
   !           Swarztrauber, P. N., (NCAR)
   !           Sweet, R., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Subroutine POISTG solves the linear system of equations
   !
@@ -103,7 +110,7 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !   W
   !     W(1) contains the required length of W.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !     * * * * * * *   Program Specifications    * * * * * * * * * * * *
   !
@@ -206,25 +213,28 @@ SUBROUTINE POISTG(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !
   !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   !
-  !***REFERENCES  U. Schumann and R. Sweet, A direct method for the
+  !***
+  ! **References:**  U. Schumann and R. Sweet, A direct method for the
   !                 solution of Poisson's equation with Neumann boundary
   !                 conditions on a staggered grid of arbitrary size,
   !                 Journal of Computational Physics 20, (1976),
   !                 pp. 171-182.
-  !***ROUTINES CALLED  POSTG2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  POSTG2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  POISTG
+  
   REAL A, a1, B, C, W, Y
   INTEGER i, Idimy, Ierror, ipstor, irev, iwb2, iwb3, iwba, iwbb, &
     iwbc, iwd, iwp, iwtcos, iww1, iww2, iww3, j, k, M, mh
   INTEGER mhm1, mhmi, mhpi, modd, mp, Mperod, mskip, N, nby2, np, Nperod
   DIMENSION Y(Idimy,*)
   DIMENSION W(*), B(*), A(*), C(*)
-  !***FIRST EXECUTABLE STATEMENT  POISTG
+  !* FIRST EXECUTABLE STATEMENT  POISTG
   Ierror = 0
   IF ( M<=2 ) Ierror = 1
   IF ( N<=2 ) Ierror = 2

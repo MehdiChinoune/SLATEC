@@ -1,17 +1,24 @@
-!DECK CQRDC
+!** CQRDC
 SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CQRDC
-  !***PURPOSE  Use Householder transformations to compute the QR
+  !>
+  !***
+  !  Use Householder transformations to compute the QR
   !            factorization of an N by P matrix.  Column pivoting is a
   !            users option.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D5
-  !***TYPE      COMPLEX (SQRDC-S, DQRDC-D, CQRDC-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX, ORTHOGONAL TRIANGULAR,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D5
+  !***
+  ! **Type:**      COMPLEX (SQRDC-S, DQRDC-D, CQRDC-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX, ORTHOGONAL TRIANGULAR,
   !             QR DECOMPOSITION
-  !***AUTHOR  Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Stewart, G. W., (U. of Maryland)
+  !***
+  ! **Description:**
   !
   !     CQRDC uses Householder transformations to compute the QR
   !     factorization of an N by P matrix X.  Column pivoting
@@ -84,10 +91,13 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   !                original matrix that has been interchanged into
   !                the K-th column, if pivoting was requested.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTC, CSCAL, CSWAP, SCNRM2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTC, CSCAL, CSWAP, SCNRM2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -96,7 +106,7 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CQRDC
+  
   INTEGER jj
   INTEGER Ldx, N, P, Job
   INTEGER Jpvt(*)
@@ -109,7 +119,7 @@ SUBROUTINE CQRDC(X,Ldx,N,P,Qraux,Jpvt,Work,Job)
   REAL, EXTERNAL :: CABS1
   COMPLEX, EXTERNAL :: CSIGN
   !
-  !***FIRST EXECUTABLE STATEMENT  CQRDC
+  !* FIRST EXECUTABLE STATEMENT  CQRDC
   pl = 1
   pu = 0
   IF ( Job/=0 ) THEN

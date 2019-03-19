@@ -1,13 +1,17 @@
-!DECK ZACAI
+!** ZACAI
 SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZACAI
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZAIRY
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CACAI-A, ZACAI-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZAIRY
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CACAI-A, ZACAI-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZACAI APPLIES THE ANALYTIC CONTINUATION FORMULA
   !
@@ -20,12 +24,15 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !     RECURRENCE REMOVED. A RECURSIVE CALL TO ZACON CAN RESULT IF ZACON
   !     IS CALLED FROM ZAIRY.
   !
-  !***SEE ALSO  ZAIRY
-  !***ROUTINES CALLED  D1MACH, ZABS, ZASYI, ZBKNU, ZMLRI, ZS1S2, ZSERI
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZAIRY
+  !***
+  ! **Routines called:**  D1MACH, ZABS, ZASYI, ZBKNU, ZMLRI, ZS1S2, ZSERI
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ZACAI
+  
   !     COMPLEX CSGN,CSPN,C1,C2,Y,Z,ZN,CY
   REAL(8) :: Alim, arg, ascle, az, csgnr, csgni, cspnr, cspni, &
     c1r, c1i, c2r, c2i, cyr, cyi, dfnu, Elim, fmr, &
@@ -35,7 +42,7 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   DIMENSION Yr(N), Yi(N), cyr(2), cyi(2)
   EXTERNAL ZABS
   DATA pi/3.14159265358979324D0/
-  !***FIRST EXECUTABLE STATEMENT  ZACAI
+  !* FIRST EXECUTABLE STATEMENT  ZACAI
   Nz = 0
   znr = -Zr
   zni = -Zi

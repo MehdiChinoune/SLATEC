@@ -1,13 +1,17 @@
-!DECK SDATRP
+!** SDATRP
 SUBROUTINE SDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SDATRP
-  !***SUBSIDIARY
-  !***PURPOSE  Interpolation routine for SDASSL.
-  !***LIBRARY   SLATEC (DASSL)
-  !***TYPE      SINGLE PRECISION (SDATRP-S, DDATRP-D)
-  !***AUTHOR  Petzold, Linda R., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Interpolation routine for SDASSL.
+  !***
+  ! **Library:**   SLATEC (DASSL)
+  !***
+  ! **Type:**      SINGLE PRECISION (SDATRP-S, DDATRP-D)
+  !***
+  ! **Author:**  Petzold, Linda R., (LLNL)
+  !***
+  ! **Description:**
   !-----------------------------------------------------------------------
   !     THE METHODS IN SUBROUTINE SDASTP USE POLYNOMIALS
   !     TO APPROXIMATE THE SOLUTION. SDATRP APPROXIMATES THE
@@ -28,14 +32,16 @@ SUBROUTINE SDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
   !     PHI   ARRAY OF SCALED DIVIDED DIFFERENCES OF Y
   !     PSI   ARRAY OF PAST STEPSIZE HISTORY
   !-----------------------------------------------------------------------
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830315  DATE WRITTEN
   !   901009  Finished conversion to SLATEC 4.0 format (F.N.Fritsch)
   !   901019  Merged changes made by C. Ulrich with SLATEC 4.0 format.
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
-  !***END PROLOGUE  SDATRP
+  
   !
   INTEGER Neq, Kold
   REAL X, Xout, Yout(*), Ypout(*), Phi(Neq,*), Psi(*)
@@ -43,7 +49,7 @@ SUBROUTINE SDATRP(X,Xout,Yout,Ypout,Neq,Kold,Phi,Psi)
   INTEGER i, j, koldp1
   REAL c, d, gamma, temp1
   !
-  !***FIRST EXECUTABLE STATEMENT  SDATRP
+  !* FIRST EXECUTABLE STATEMENT  SDATRP
   koldp1 = Kold + 1
   temp1 = Xout - X
   DO i = 1, Neq

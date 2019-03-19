@@ -1,23 +1,30 @@
-!DECK DCHFEV
+!** DCHFEV
 SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCHFEV
-  !***PURPOSE  Evaluate a cubic polynomial given in Hermite form at an
+  !>
+  !***
+  !  Evaluate a cubic polynomial given in Hermite form at an
   !            array of points.  While designed for use by DPCHFE, it may
   !            be useful directly as an evaluator for a piecewise cubic
   !            Hermite function in applications, such as graphing, where
   !            the interval is known in advance.
-  !***LIBRARY   SLATEC (PCHIP)
-  !***CATEGORY  E3
-  !***TYPE      DOUBLE PRECISION (CHFEV-S, DCHFEV-D)
-  !***KEYWORDS  CUBIC HERMITE EVALUATION, CUBIC POLYNOMIAL EVALUATION,
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Category:**  E3
+  !***
+  ! **Type:**      DOUBLE PRECISION (CHFEV-S, DCHFEV-D)
+  !***
+  ! **Keywords:**  CUBIC HERMITE EVALUATION, CUBIC POLYNOMIAL EVALUATION,
   !             PCHIP
-  !***AUTHOR  Fritsch, F. N., (LLNL)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             P.O. Box 808  (L-316)
   !             Livermore, CA  94550
   !             FTS 532-4275, (510) 422-4275
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !          DCHFEV:  Cubic Hermite Function EValuator
   !
@@ -66,9 +73,12 @@ SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !              IERR = -2  if X1.EQ.X2 .
   !                (The FE-array has not been changed in either case.)
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811019  DATE WRITTEN
   !   820803  Minor cosmetic changes for release 1.
   !   870813  Corrected XERROR calls for d.p. names(s).
@@ -81,7 +91,7 @@ SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !   891006  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DCHFEV
+  
   !  Programming notes:
   !
   !     To produce a single precision version, simply:
@@ -103,7 +113,7 @@ SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
-  !***FIRST EXECUTABLE STATEMENT  DCHFEV
+  !* FIRST EXECUTABLE STATEMENT  DCHFEV
   IF ( Ne<1 ) THEN
     !
     !  ERROR RETURNS.

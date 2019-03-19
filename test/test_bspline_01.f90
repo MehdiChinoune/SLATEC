@@ -2,16 +2,22 @@ MODULE TEST30_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK BSPCK
+  !** BSPCK
   SUBROUTINE BSPCK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  BSPCK
-    !***PURPOSE  Quick check for the B-Spline package.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (BSPCK-S, DBSPCK-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for the B-Spline package.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (BSPCK-S, DBSPCK-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !   BSPCK is a quick check routine for the B-Spline package which
     !   tests consistency between results from higher level routines.
@@ -20,10 +26,12 @@ CONTAINS
     !   BNSLV, BSGQ8, BSPDR, BSPEV, BSPPP, BSPVD, BSPVN, BSQAD, BVALU,
     !   INTRV, PFQAD, PPGQ8, PPQAD and PPVAL.
     !
-    !***ROUTINES CALLED  BFQAD, BINT4, BINTK, BSPDR, BSPEV, BSPPP, BSPVD,
+    !***
+    ! **Routines called:**  BFQAD, BINT4, BINTK, BSPDR, BSPEV, BSPPP, BSPVD,
     !                    BSPVN, BSQAD, BVALU, FB, INTRV, PFQAD, PPQAD,
     !                    PPVAL, R1MACH
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891004  Removed unreachable code.  (WRB)
@@ -32,7 +40,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    !***END PROLOGUE  BSPCK
+    
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -54,7 +62,7 @@ CONTAINS
       BSQAD, INTRV, PFQAD, PPQAD, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SIN
-    !***FIRST EXECUTABLE STATEMENT  BSPCK
+    !* FIRST EXECUTABLE STATEMENT  BSPCK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1 QUICK CHECK FOR SPLINE ROUTINES',//)
@@ -452,43 +460,56 @@ CONTAINS
     99015 FORMAT (/' *********B-SPLINE PACKAGE FAILED SOME TESTS**********')
     RETURN
   END SUBROUTINE BSPCK
-  !DECK FB
+  !** FB
   REAL FUNCTION FB(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  FB
-    !***PURPOSE  Subsidiary to BSPCK.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (FB-S, DFB-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to BSPCK.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (FB-S, DFB-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Added TYPE statement.  (WRB)
-    !***END PROLOGUE  FB
+    
     REAL X
-    !***FIRST EXECUTABLE STATEMENT  FB
+    !* FIRST EXECUTABLE STATEMENT  FB
     FB = 1.0E0
   END FUNCTION FB
 END MODULE TEST30_MOD
-!DECK TEST30
+!** TEST30
 PROGRAM TEST30
   USE TEST30_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST30
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E, E1A, E3
-  !***TYPE      SINGLE PRECISION (TEST30-S, TEST31-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E, E1A, E3
+  !***
+  ! **Type:**      SINGLE PRECISION (TEST30-S, TEST31-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -500,25 +521,28 @@ PROGRAM TEST30
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        BFQAD    BINT4    BINTK    BSPDR    BSPEV    BSPPP
   !        BSPVD    BSPVN    BSQAD    BVALU    INTRV    PFQAD
   !        PPQAD    PPVAL
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  BSPCK, I1MACH, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  BSPCK, I1MACH, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST30
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST30
+  !* FIRST EXECUTABLE STATEMENT  TEST30
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

@@ -1,22 +1,29 @@
-!DECK DPCHCM
+!** DPCHCM
 SUBROUTINE DPCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPCHCM
-  !***PURPOSE  Check a cubic Hermite function for monotonicity.
-  !***LIBRARY   SLATEC (PCHIP)
-  !***CATEGORY  E3
-  !***TYPE      DOUBLE PRECISION (PCHCM-S, DPCHCM-D)
-  !***KEYWORDS  CUBIC HERMITE INTERPOLATION, MONOTONE INTERPOLATION,
+  !>
+  !***
+  !  Check a cubic Hermite function for monotonicity.
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Category:**  E3
+  !***
+  ! **Type:**      DOUBLE PRECISION (PCHCM-S, DPCHCM-D)
+  !***
+  ! **Keywords:**  CUBIC HERMITE INTERPOLATION, MONOTONE INTERPOLATION,
   !             PCHIP, PIECEWISE CUBIC INTERPOLATION, UTILITY ROUTINE
-  !***AUTHOR  Fritsch, F. N., (LLNL)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
   !             Computing & Mathematics Research Division
   !             Lawrence Livermore National Laboratory
   !             P.O. Box 808  (L-316)
   !             Livermore, CA  94550
   !             FTS 532-4275, (510) 422-4275
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !        PARAMETER  (INCFD = ...)
   !        INTEGER  N, ISMON(N), IERR
@@ -25,7 +32,7 @@ SUBROUTINE DPCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !
   !        CALL  DPCHCM (N, X, F, D, INCFD, SKIP, ISMON, IERR)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !     N:IN  is the number of data points.  (Error return if N.LT.2 .)
   !
@@ -77,7 +84,7 @@ SUBROUTINE DPCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !               NOTE:  The above errors are checked in the order listed,
   !                   and following arguments have **NOT** been validated.
   !
-  ! *Description:
+  !- Description:
   !
   !          DPCHCM:  Piecewise Cubic Hermite -- Check Monotonicity.
   !
@@ -87,7 +94,7 @@ SUBROUTINE DPCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !     To provide compatibility with DPCHIM and DPCHIC, includes an
   !     increment between successive values of the F- and D-arrays.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This provides the same capability as old DPCHMC, except that a
   !     new output value, -3, was added February 1989.  (Formerly, -3
   !     and +3 were lumped together in the single value 3.)  Codes that
@@ -96,11 +103,14 @@ SUBROUTINE DPCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !     "IF (IABS(ISMON).GE.3)".  Codes that declare monotonicity via
   !     "IF (ISMON.LE.1)" should change to "IF (IABS(ISMON).LE.1)".
   !
-  !***REFERENCES  F. N. Fritsch and R. E. Carlson, Monotone piecewise
+  !***
+  ! **References:**  F. N. Fritsch and R. E. Carlson, Monotone piecewise
   !                 cubic interpolation, SIAM Journal on Numerical Ana-
   !                 lysis 17, 2 (April 1980), pp. 238-246.
-  !***ROUTINES CALLED  DCHFCM, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DCHFCM, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820518  DATE WRITTEN
   !   820804  Converted to SLATEC library version.
   !   831201  Reversed order of subscripts of F and D, so that the
@@ -117,7 +127,7 @@ SUBROUTINE DPCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !   890407  Modified DESCRIPTION to LDOC format.
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920429  Revised format and order of references.  (WRB,FNF)
-  !***END PROLOGUE  DPCHCM
+  
   !
   !  Fortran intrinsics used:  ISIGN.
   !  Other routines used:  CHFCM, XERMSG.
@@ -151,7 +161,7 @@ SUBROUTINE DPCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
-  !***FIRST EXECUTABLE STATEMENT  DPCHCM
+  !* FIRST EXECUTABLE STATEMENT  DPCHCM
   IF ( .NOT.(Skip) ) THEN
     !
     IF ( N<2 ) THEN

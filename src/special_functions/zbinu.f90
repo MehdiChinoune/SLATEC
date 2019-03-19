@@ -1,29 +1,36 @@
-!DECK ZBINU
+!** ZBINU
 SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZBINU
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK and ZBIRY
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CBINU-A, ZBINU-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK and ZBIRY
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CBINU-A, ZBINU-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZBINU COMPUTES THE I FUNCTION IN THE RIGHT HALF Z PLANE
   !
-  !***SEE ALSO  ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK, ZBIRY
-  !***ROUTINES CALLED  ZABS, ZASYI, ZBUNI, ZMLRI, ZSERI, ZUOIK, ZWRSK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK, ZBIRY
+  !***
+  ! **Routines called:**  ZABS, ZASYI, ZBUNI, ZMLRI, ZSERI, ZUOIK, ZWRSK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ZBINU
+  
   REAL(8) :: Alim, az, cwi, cwr, Cyi, Cyr, dfnu, Elim, Fnu, &
     Fnul, Rl, Tol, zeroi, zeror, Zi, Zr, ZABS
   INTEGER i, inw, Kode, N, nlast, nn, nui, nw, Nz
   DIMENSION Cyr(N), Cyi(N), cwr(2), cwi(2)
   EXTERNAL ZABS
   DATA zeror, zeroi/0.0D0, 0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  ZBINU
+  !* FIRST EXECUTABLE STATEMENT  ZBINU
   Nz = 0
   az = ZABS(Zr,Zi)
   nn = N

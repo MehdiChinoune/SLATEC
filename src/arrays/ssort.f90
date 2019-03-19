@@ -1,18 +1,25 @@
-!DECK SSORT
+!** SSORT
 SUBROUTINE SSORT(X,Y,N,Kflag)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSORT
-  !***PURPOSE  Sort an array and optionally make the same interchanges in
+  !>
+  !***
+  !  Sort an array and optionally make the same interchanges in
   !            an auxiliary array.  The array may be sorted in increasing
   !            or decreasing order.  A slightly modified QUICKSORT
   !            algorithm is used.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  N6A2B
-  !***TYPE      SINGLE PRECISION (SSORT-S, DSORT-D, ISORT-I)
-  !***KEYWORDS  SINGLETON QUICKSORT, SORT, SORTING
-  !***AUTHOR  Jones, R. E., (SNLA)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  N6A2B
+  !***
+  ! **Type:**      SINGLE PRECISION (SSORT-S, DSORT-D, ISORT-I)
+  !***
+  ! **Keywords:**  SINGLETON QUICKSORT, SORT, SORTING
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
   !           Wisniewski, J. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   SSORT sorts array X and optionally makes the same interchanges in
   !   array Y.  The array X may be sorted in increasing order or
@@ -28,11 +35,14 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   !            = -1  means sort X in decreasing order (ignoring Y)
   !            = -2  means sort X in decreasing order and carry Y along.
   !
-  !***REFERENCES  R. C. Singleton, Algorithm 347, An efficient algorithm
+  !***
+  ! **References:**  R. C. Singleton, Algorithm 347, An efficient algorithm
   !                 for sorting with minimal storage, Communications of
   !                 the ACM, 12, 3 (1969), pp. 185-187.
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   761101  DATE WRITTEN
   !   761118  Modified to use the Singleton quicksort algorithm.  (JAW)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
@@ -47,7 +57,7 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   !   920519  Clarified error messages.  (DWL)
   !   920801  Declarations section rebuilt and code restructured to use
   !           IF-THEN-ELSE-ENDIF.  (RWC, WRB)
-  !***END PROLOGUE  SSORT
+  
   !     .. Scalar Arguments ..
   INTEGER Kflag, N
   !     .. Array Arguments ..
@@ -61,7 +71,7 @@ SUBROUTINE SSORT(X,Y,N,Kflag)
   EXTERNAL XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, INT
-  !***FIRST EXECUTABLE STATEMENT  SSORT
+  !* FIRST EXECUTABLE STATEMENT  SSORT
   nn = N
   IF ( nn<1 ) THEN
     CALL XERMSG('SLATEC','SSORT',&

@@ -1,27 +1,37 @@
-!DECK DASINH
+!** DASINH
 REAL(8) FUNCTION DASINH(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DASINH
-  !***PURPOSE  Compute the arc hyperbolic sine.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4C
-  !***TYPE      DOUBLE PRECISION (ASINH-S, DASINH-D, CASINH-C)
-  !***KEYWORDS  ARC HYPERBOLIC SINE, ASINH, ELEMENTARY FUNCTIONS, FNLIB,
+  !>
+  !***
+  !  Compute the arc hyperbolic sine.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4C
+  !***
+  ! **Type:**      DOUBLE PRECISION (ASINH-S, DASINH-D, CASINH-C)
+  !***
+  ! **Keywords:**  ARC HYPERBOLIC SINE, ASINH, ELEMENTARY FUNCTIONS, FNLIB,
   !             INVERSE HYPERBOLIC SINE
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DASINH(X) calculates the double precision arc hyperbolic
   ! sine for double precision argument X.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, INITDS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, INITDS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DASINH
+  
   INTEGER INITDS, nterms
   REAL(8) :: X, asnhcs(39), aln2, sqeps, xmax, y, DCSEVL, D1MACH
   LOGICAL first
@@ -67,7 +77,7 @@ REAL(8) FUNCTION DASINH(X)
   DATA asnhcs(39)/ + .22629868426552784104106666666666D-31/
   DATA aln2/0.69314718055994530941723212145818D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DASINH
+  !* FIRST EXECUTABLE STATEMENT  DASINH
   IF ( first ) THEN
     nterms = INITDS(asnhcs,39,0.1*REAL(D1MACH(3)))
     sqeps = SQRT(D1MACH(3))

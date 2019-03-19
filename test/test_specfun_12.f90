@@ -2,30 +2,37 @@ MODULE TEST13_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK QCRC
+  !** QCRC
   SUBROUTINE QCRC(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QCRC
-    !***PURPOSE  Quick check for RC.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Pexton, R. L., (LLNL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for RC.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Pexton, R. L., (LLNL)
+    !***
+    ! **Description:**
     !
     !            QUICK TEST FOR CARLSON INTEGRAL RC
     !
-    !***ROUTINES CALLED  NUMXER, R1MACH, RC, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  NUMXER, R1MACH, RC, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   790801  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    !***END PROLOGUE  QCRC
+    
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4, NUMXER
     REAL pi, trc, RC, dif, R1MACH
     EXTERNAL NUMXER, R1MACH, RC, XERCLR, XGETF, XSETF
-    !***FIRST EXECUTABLE STATEMENT  QCRC
+    !* FIRST EXECUTABLE STATEMENT  QCRC
     CALL XERCLR
     CALL XGETF(contrl)
     IF ( Kprint>=3 ) THEN
@@ -101,30 +108,37 @@ CONTAINS
     CALL XSETF(contrl)
     99006 FORMAT (' RC - FAILED')
   END SUBROUTINE QCRC
-  !DECK QCRD
+  !** QCRD
   SUBROUTINE QCRD(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QCRD
-    !***PURPOSE  Quick check for RD.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Pexton, R. L., (LLNL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for RD.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Pexton, R. L., (LLNL)
+    !***
+    ! **Description:**
     !
     !            QUICK TEST FOR CARLSON INTEGRAL RD
     !
-    !***ROUTINES CALLED  NUMXER, R1MACH, RD, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  NUMXER, R1MACH, RD, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   790801  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    !***END PROLOGUE  QCRD
+    
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4, NUMXER
     REAL blem, trd, RD, dif, R1MACH
     EXTERNAL NUMXER, R1MACH, RD, XERCLR, XGETF, XSETF
-    !***FIRST EXECUTABLE STATEMENT  QCRD
+    !* FIRST EXECUTABLE STATEMENT  QCRD
     CALL XERCLR
     CALL XGETF(contrl)
     IF ( Kprint>=3 ) THEN
@@ -201,30 +215,37 @@ CONTAINS
     CALL XSETF(contrl)
     99006 FORMAT (' RD - FAILED')
   END SUBROUTINE QCRD
-  !DECK QCRF
+  !** QCRF
   SUBROUTINE QCRF(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QCRF
-    !***PURPOSE  Quick check for RF.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Pexton, R. L., (LLNL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for RF.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Pexton, R. L., (LLNL)
+    !***
+    ! **Description:**
     !
     !            QUICK TEST FOR CARLSON INTEGRAL RF
     !
-    !***ROUTINES CALLED  NUMXER, R1MACH, RF, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  NUMXER, R1MACH, RF, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   790801  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    !***END PROLOGUE  QCRF
+    
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4, NUMXER
     REAL alem, trf, RF, dif, R1MACH
     EXTERNAL NUMXER, R1MACH, RF, XERCLR, XGETF, XSETF
-    !***FIRST EXECUTABLE STATEMENT  QCRF
+    !* FIRST EXECUTABLE STATEMENT  QCRF
     CALL XERCLR
     CALL XGETF(contrl)
     IF ( Kprint>=3 ) THEN
@@ -301,30 +322,37 @@ CONTAINS
     CALL XSETF(contrl)
     99006 FORMAT (' RF - FAILED')
   END SUBROUTINE QCRF
-  !DECK QCRJ
+  !** QCRJ
   SUBROUTINE QCRJ(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QCRJ
-    !***PURPOSE  Quick check for RJ.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Pexton, R. L., (LLNL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for RJ.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Pexton, R. L., (LLNL)
+    !***
+    ! **Description:**
     !
     !            QUICK TEST FOR CARLSON INTEGRAL RJ
     !
-    !***ROUTINES CALLED  NUMXER, R1MACH, RJ, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  NUMXER, R1MACH, RJ, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   790801  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    !***END PROLOGUE  QCRJ
+    
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4, NUMXER
     REAL consj, trj, RJ, dif, R1MACH
     EXTERNAL NUMXER, R1MACH, RJ, XERCLR, XGETF, XSETF
-    !***FIRST EXECUTABLE STATEMENT  QCRJ
+    !* FIRST EXECUTABLE STATEMENT  QCRJ
     CALL XERCLR
     CALL XGETF(contrl)
     IF ( Kprint>=3 ) THEN
@@ -401,24 +429,31 @@ CONTAINS
     99006 FORMAT (' RJ - FAILED')
   END SUBROUTINE QCRJ
 END MODULE TEST13_MOD
-!DECK TEST13
+!** TEST13
 PROGRAM TEST13
   USE TEST13_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST13
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C14
-  !***TYPE      SINGLE PRECISION (TEST13-S, TEST14-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C14
+  !***
+  ! **Type:**      SINGLE PRECISION (TEST13-S, TEST14-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -430,24 +465,27 @@ PROGRAM TEST13
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        RC       RD       RF       RJ
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  I1MACH, QCRC, QCRD, QCRF, QCRJ, XERMAX, XSETF,
+  !***
+  ! **Routines called:**  I1MACH, QCRC, QCRD, QCRF, QCRJ, XERMAX, XSETF,
   !                    XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST13
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST13
+  !* FIRST EXECUTABLE STATEMENT  TEST13
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

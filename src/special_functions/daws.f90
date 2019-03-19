@@ -1,14 +1,21 @@
-!DECK DAWS
+!** DAWS
 REAL FUNCTION DAWS(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DAWS
-  !***PURPOSE  Compute Dawson's function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C8C
-  !***TYPE      SINGLE PRECISION (DAWS-S, DDAWS-D)
-  !***KEYWORDS  DAWSON'S FUNCTION, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute Dawson's function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C8C
+  !***
+  ! **Type:**      SINGLE PRECISION (DAWS-S, DDAWS-D)
+  !***
+  ! **Keywords:**  DAWSON'S FUNCTION, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DAWS(X) calculates Dawson's integral for real argument X.
   !
@@ -30,16 +37,19 @@ REAL FUNCTION DAWS(X)
   !                               significant figures required  14.73
   !                                    decimal places required  17.36
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  DAWS
+  
   REAL CSEVL, daw2cs, dawacs, dawcs, eps, R1MACH, X, xbig, xmax, xsml, y
   INTEGER INITS, ntdaw, ntdaw2, ntdawa
   DIMENSION dawcs(13), daw2cs(29), dawacs(26)
@@ -114,7 +124,7 @@ REAL FUNCTION DAWS(X)
   DATA dawacs(25)/ - .00000000000000006E0/
   DATA dawacs(26)/.00000000000000002E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DAWS
+  !* FIRST EXECUTABLE STATEMENT  DAWS
   IF ( first ) THEN
     eps = R1MACH(3)
     ntdaw = INITS(dawcs,13,0.1*eps)

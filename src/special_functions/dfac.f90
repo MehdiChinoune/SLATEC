@@ -1,27 +1,37 @@
-!DECK DFAC
+!** DFAC
 REAL(8) FUNCTION DFAC(N)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DFAC
-  !***PURPOSE  Compute the factorial function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C1
-  !***TYPE      DOUBLE PRECISION (FAC-S, DFAC-D)
-  !***KEYWORDS  FACTORIAL, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the factorial function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C1
+  !***
+  ! **Type:**      DOUBLE PRECISION (FAC-S, DFAC-D)
+  !***
+  ! **Keywords:**  FACTORIAL, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DFAC(N) calculates the double precision factorial for integer
   ! argument N.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D9LGMC, DGAMLM, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D9LGMC, DGAMLM, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DFAC
+  
   INTEGER N, nmax
   REAL(8) :: facn(31), sq2pil, x, xmax, xmin, D9LGMC
   SAVE facn, sq2pil, nmax
@@ -58,7 +68,7 @@ REAL(8) FUNCTION DFAC(N)
   DATA facn(31)/ + .265252859812191058636308480000000D+33/
   DATA sq2pil/0.91893853320467274178032973640562D0/
   DATA nmax/0/
-  !***FIRST EXECUTABLE STATEMENT  DFAC
+  !* FIRST EXECUTABLE STATEMENT  DFAC
   IF ( nmax==0 ) THEN
     CALL DGAMLM(xmin,xmax)
     nmax = INT( xmax ) - 1

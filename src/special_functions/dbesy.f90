@@ -1,17 +1,24 @@
-!DECK DBESY
+!** DBESY
 SUBROUTINE DBESY(X,Fnu,N,Y)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBESY
-  !***PURPOSE  Implement forward recursion on the three term recursion
+  !>
+  !***
+  !  Implement forward recursion on the three term recursion
   !            relation for a sequence of non-negative order Bessel
   !            functions Y/SUB(FNU+I-1)/(X), I=1,...,N for real, positive
   !            X and non-negative orders FNU.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10A3
-  !***TYPE      DOUBLE PRECISION (BESY-S, DBESY-D)
-  !***KEYWORDS  SPECIAL FUNCTIONS, Y BESSEL FUNCTION
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10A3
+  !***
+  ! **Type:**      DOUBLE PRECISION (BESY-S, DBESY-D)
+  !***
+  ! **Keywords:**  SPECIAL FUNCTIONS, Y BESSEL FUNCTION
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract  **** a double precision routine ****
   !         DBESY implements forward recursion on the three term
@@ -48,7 +55,8 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
   !         Improper input arguments - a fatal error
   !         Overflow - a fatal error
   !
-  !***REFERENCES  F. W. J. Olver, Tables of Bessel Functions of Moderate
+  !***
+  ! **References:**  F. W. J. Olver, Tables of Bessel Functions of Moderate
   !                 or Large Orders, NPL Mathematical Tables 6, Her
   !                 Majesty's Stationery Office, London, 1962.
   !               N. M. Temme, On the numerical evaluation of the modified
@@ -57,9 +65,11 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
   !               N. M. Temme, On the numerical evaluation of the ordinary
   !                 Bessel function of the second kind, Journal of
   !                 Computational Physics 21, (1976), pp. 343-350.
-  !***ROUTINES CALLED  D1MACH, DASYJY, DBESY0, DBESY1, DBSYNU, DYAIRY,
+  !***
+  ! **Routines called:**  D1MACH, DASYJY, DBESY0, DBESY1, DBSYNU, DYAIRY,
   !                    I1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800501  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -67,7 +77,7 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DBESY
+  
   !
   EXTERNAL DYAIRY
   INTEGER i, iflw, j, N, nb, nd, nn, nud, nulim
@@ -78,7 +88,7 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
   DIMENSION w(2), nulim(2), Y(*), wk(7)
   SAVE nulim
   DATA nulim(1), nulim(2)/70, 100/
-  !***FIRST EXECUTABLE STATEMENT  DBESY
+  !* FIRST EXECUTABLE STATEMENT  DBESY
   nn = -I1MACH(15)
   elim = 2.303D0*(nn*D1MACH(5)-3.0D0)
   xlim = D1MACH(1)*1.0D+3

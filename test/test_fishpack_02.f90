@@ -2,15 +2,20 @@ MODULE TEST51_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK FFTQX
+  !** FFTQX
   SUBROUTINE FFTQX(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  FFTQX
-    !***PURPOSE  Quick check for the NCAR FFT routines.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Swarztrauber, P. N., (NCAR)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for the NCAR FFT routines.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Swarztrauber, P. N., (NCAR)
+    !***
+    ! **Description:**
     !
     !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     !
@@ -61,11 +66,13 @@ CONTAINS
     !     18.  CFFTF     FORWARD TRANSFORM OF A COMPLEX PERIODIC SEQUENCE
     !     19.  CFFTB     UNNORMALIZED INVERSE OF CFFTF
     !
-    !***ROUTINES CALLED  CFFTB, CFFTF, CFFTI, COSQB, COSQF, COSQI, COST,
+    !***
+    ! **Routines called:**  CFFTB, CFFTF, CFFTI, COSQB, COSQF, COSQI, COST,
     !                    COSTI, EZFFTB, EZFFTF, EZFFTI, PIMACH, R1MACH,
     !                    RFFTB, RFFTF, RFFTI, SINQB, SINQF, SINQI, SINT,
     !                    SINTI
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   790601  DATE WRITTEN
     !   890718  Changed computation of PI to use PIMACH.  (WRB)
     !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -78,7 +85,7 @@ CONTAINS
     !   920618  Code upgraded to "Version 4".  (BKS, WRB)
     !   930315  Modified RFFT* tests to compute "slow-transform" in DOUBLE
     !           PRECISION.  (WRB)
-    !***END PROLOGUE  FFTQX
+    
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -105,7 +112,7 @@ CONTAINS
     !     .. Data statements ..
     DATA nd(1), nd(2), nd(3), nd(4), nd(5), nd(6), nd(7)/120, 54, 49, &
       32, 4, 3, 2/
-    !***FIRST EXECUTABLE STATEMENT  FFTQX
+    !* FIRST EXECUTABLE STATEMENT  FFTQX
     sqrt2 = SQRT(2.0)
     errmax = 2.0*SQRT(R1MACH(4))
     nns = 7
@@ -638,24 +645,31 @@ CONTAINS
     RETURN
   END SUBROUTINE FFTQX
 END MODULE TEST51_MOD
-!DECK TEST51
+!** TEST51
 PROGRAM TEST51
   USE TEST51_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST51
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  J1
-  !***TYPE      SINGLE PRECISION (TEST51-S)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  J1
+  !***
+  ! **Type:**      SINGLE PRECISION (TEST51-S)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -667,25 +681,28 @@ PROGRAM TEST51
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        COSQB    COSQF    COSQI    COST     COSTI    EZFFTB
   !        EZFFTF   RFFTB    RFFTF    RFFTI    SINQB    SINQF
   !        SINQI    SINT     SINTI
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  FFTQX, I1MACH, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  FFTQX, I1MACH, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST51
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST51
+  !* FIRST EXECUTABLE STATEMENT  TEST51
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

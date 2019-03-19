@@ -2,16 +2,22 @@ MODULE TEST31_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK DBSPCK
+  !** DBSPCK
   SUBROUTINE DBSPCK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DBSPCK
-    !***PURPOSE  Quick check for the B-Spline package.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (BSPCK-S, DBSPCK-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for the B-Spline package.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (BSPCK-S, DBSPCK-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !   DBSPCK is a quick check routine for the B-Spline package which
     !   tests consistency between results from higher level routines.
@@ -20,10 +26,12 @@ CONTAINS
     !   DBNSLV, DBSGQ8, DBSPDR, DBSPEV, DBSPPP, DBSPVD, DBSPVN, DBSQAD,
     !   DBVALU, DINTRV, DPFQAD, DPPGQ8, DPPQAD and DPPVAL.
     !
-    !***ROUTINES CALLED  D1MACH, DBFQAD, DBINT4, DBINTK, DBSPDR, DBSPEV,
+    !***
+    ! **Routines called:**  D1MACH, DBFQAD, DBINT4, DBINTK, DBSPDR, DBSPEV,
     !                    DBSPPP, DBSPVD, DBSPVN, DBSQAD, DBVALU, DFB,
     !                    DINTRV, DPFQAD, DPPQAD, DPPVAL
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891004  Removed unreachable code.  (WRB)
@@ -32,7 +40,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    !***END PROLOGUE  DBSPCK
+    
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -53,7 +61,7 @@ CONTAINS
       DBSPVN, DBSQAD, DINTRV, DPFQAD, DPPQAD, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, SIN
-    !***FIRST EXECUTABLE STATEMENT  DBSPCK
+    !* FIRST EXECUTABLE STATEMENT  DBSPCK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1 QUICK CHECK FOR SPLINE ROUTINES',//)
@@ -451,43 +459,56 @@ CONTAINS
     99015 FORMAT (/' *********B-SPLINE PACKAGE FAILED SOME TESTS**********')
     RETURN
   END SUBROUTINE DBSPCK
-  !DECK DFB
+  !** DFB
   REAL(8) FUNCTION DFB(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DFB
-    !***PURPOSE  Subsidiary to DBSPCK.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (FB-S, DFB-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to DBSPCK.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (FB-S, DFB-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Added TYPE statement.  (WRB)
-    !***END PROLOGUE  DFB
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DFB
+    !* FIRST EXECUTABLE STATEMENT  DFB
     DFB = 1.0D0
   END FUNCTION DFB
 END MODULE TEST31_MOD
-!DECK TEST31
+!** TEST31
 PROGRAM TEST31
   USE TEST31_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST31
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E, E1A, E3
-  !***TYPE      DOUBLE PRECISION (TEST30-S, TEST31-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E, E1A, E3
+  !***
+  ! **Type:**      DOUBLE PRECISION (TEST30-S, TEST31-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -499,25 +520,28 @@ PROGRAM TEST31
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        DBFQAD   DBINT4   DBINTK   DBSPDR   DBSPEV   DBSPPP
   !        DBSPVD   DBSPVN   DBSQAD   DBVALU   DINTRV   DPFQAD
   !        DPPQAD   DPPVAL
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  DBSPCK, I1MACH, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DBSPCK, I1MACH, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST31
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST31
+  !* FIRST EXECUTABLE STATEMENT  TEST31
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

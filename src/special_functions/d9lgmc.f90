@@ -1,18 +1,24 @@
-!DECK D9LGMC
+!** D9LGMC
 REAL(8) FUNCTION D9LGMC(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  D9LGMC
-  !***SUBSIDIARY
-  !***PURPOSE  Compute the log Gamma correction factor so that
+  !>
+  !***
+  !  Compute the log Gamma correction factor so that
   !            LOG(DGAMMA(X)) = LOG(SQRT(2*PI)) + (X-5.)*LOG(X) - X
   !            + D9LGMC(X).
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7E
-  !***TYPE      DOUBLE PRECISION (R9LGMC-S, D9LGMC-D, C9LGMC-C)
-  !***KEYWORDS  COMPLETE GAMMA FUNCTION, CORRECTION TERM, FNLIB,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7E
+  !***
+  ! **Type:**      DOUBLE PRECISION (R9LGMC-S, D9LGMC-D, C9LGMC-C)
+  !***
+  ! **Keywords:**  COMPLETE GAMMA FUNCTION, CORRECTION TERM, FNLIB,
   !             LOG GAMMA, LOGARITHM, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Compute the log gamma correction factor for X .GE. 10. so that
   ! LOG (DGAMMA(X)) = LOG(SQRT(2*PI)) + (X-.5)*LOG(X) - X + D9lGMC(X)
@@ -23,16 +29,19 @@ REAL(8) FUNCTION D9LGMC(X)
   !                               significant figures required  29.81
   !                                    decimal places required  31.48
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  !***END PROLOGUE  D9LGMC
+  
   INTEGER INITDS, nalgm
   REAL(8) :: X, algmcs(15), xbig, xmax, DCSEVL, D1MACH
   LOGICAL first
@@ -53,7 +62,7 @@ REAL(8) FUNCTION D9LGMC(X)
   DATA algmcs(14)/ - .3401102254316748799999999999999D-29/
   DATA algmcs(15)/ + .1276642195630062933333333333333D-30/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  D9LGMC
+  !* FIRST EXECUTABLE STATEMENT  D9LGMC
   IF ( first ) THEN
     nalgm = INITDS(algmcs,15,REAL(D1MACH(3)))
     xbig = 1.0D0/SQRT(D1MACH(3))

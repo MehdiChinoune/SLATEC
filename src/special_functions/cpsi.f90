@@ -1,28 +1,38 @@
-!DECK CPSI
+!** CPSI
 COMPLEX FUNCTION CPSI(Zin)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPSI
-  !***PURPOSE  Compute the Psi (or Digamma) function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7C
-  !***TYPE      COMPLEX (PSI-S, DPSI-D, CPSI-C)
-  !***KEYWORDS  DIGAMMA FUNCTION, FNLIB, PSI FUNCTION, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the Psi (or Digamma) function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7C
+  !***
+  ! **Type:**      COMPLEX (PSI-S, DPSI-D, CPSI-C)
+  !***
+  ! **Keywords:**  DIGAMMA FUNCTION, FNLIB, PSI FUNCTION, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! PSI(X) calculates the psi (or digamma) function of X.  PSI(X)
   ! is the logarithmic derivative of the gamma function of X.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CCOT, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CCOT, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780501  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  !***END PROLOGUE  CPSI
+  
   REAL bern, bound, cabsz, dxrel, pi, R1MACH, rbig, rmin, x, y
   INTEGER i, n, ndx, nterm
   COMPLEX Zin, z, z2inv, corr, CCOT
@@ -45,7 +55,7 @@ COMPLEX FUNCTION CPSI(Zin)
   DATA bern(13)/.54827583333333333E5/
   DATA pi/3.141592653589793E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  CPSI
+  !* FIRST EXECUTABLE STATEMENT  CPSI
   IF ( first ) THEN
     nterm = INT( -0.30*LOG(R1MACH(3)) )
     ! MAYBE BOUND = N*(0.1*EPS)**(-1/(2*N-1)) / (PI*EXP(1))

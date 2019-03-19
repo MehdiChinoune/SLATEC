@@ -1,30 +1,38 @@
-!DECK DLSOD
+!** DLSOD
 SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     Acor,Wm,Iwm,DJAC,Intout,Tstop,Tolfac,Delsgn,Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DLSOD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DDEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (LSOD-S, DLSOD-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DDEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (LSOD-S, DLSOD-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   DDEBDF  merely allocates storage for  DLSOD  to relieve the user of
   !   the inconvenience of a long call list.  Consequently  DLSOD  is used
   !   as described in the comments for  DDEBDF .
   !
-  !***SEE ALSO  DDEBDF
-  !***ROUTINES CALLED  D1MACH, DHSTRT, DINTYD, DSTOD, DVNRMS, XERMSG
-  !***COMMON BLOCKS    DDEBD1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DDEBDF
+  !***
+  ! **Routines called:**  D1MACH, DHSTRT, DINTYD, DSTOD, DVNRMS, XERMSG
+  !***
+  ! COMMON BLOCKS    DDEBD1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  !***END PROLOGUE  DLSOD
+  
   !
   INTEGER IBAnd, IBEgin, Idid, IER, IINteg, IJAc, INIt, intflg, &
     IOWns, Ipar, IQUit, ITOl, ITStop, Iwm, JSTart, k, KFLag, &
@@ -63,7 +71,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !
   !     ..................................................................
   !
-  !***FIRST EXECUTABLE STATEMENT  DLSOD
+  !* FIRST EXECUTABLE STATEMENT  DLSOD
   IF ( IBEgin==0 ) THEN
     !
     !        ON THE FIRST CALL, PERFORM INITIALIZATION --

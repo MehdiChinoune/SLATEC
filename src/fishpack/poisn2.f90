@@ -1,13 +1,17 @@
-!DECK POISN2
+!** POISN2
 SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  POISN2
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to GENBUN
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (POISN2-S, CMPOSN-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to GENBUN
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (POISN2-S, CMPOSN-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Subroutine to solve Poisson's equation with Neumann boundary
   !     conditions.
@@ -18,16 +22,19 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !     MIXBND = 2 if have Neumann boundary conditions at bottom and
   !     Dirichlet condition at top.  (for this case, must have ISTAG = 1.)
   !
-  !***SEE ALSO  GENBUN
-  !***ROUTINES CALLED  COSGEN, S1MERG, TRI3, TRIX
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  GENBUN
+  !***
+  ! **Routines called:**  COSGEN, S1MERG, TRI3, TRIX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   920130  Modified to use merge routine S1MERG rather than deleted
   !           routine MERGE.  (WRB)
-  !***END PROLOGUE  POISN2
+  
   REAL A, B, B2, B3, Bb, C, D, fden, fi, fistag, fnum, P, Q, &
     t, Tcos, W, W2, W3
   INTEGER i, i1, i2, i2r, i2rby2, Idimq, ii, ip, ipstor, Istag, &
@@ -40,7 +47,7 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   EQUIVALENCE (k(2),k2)
   EQUIVALENCE (k(3),k3)
   EQUIVALENCE (k(4),k4)
-  !***FIRST EXECUTABLE STATEMENT  POISN2
+  !* FIRST EXECUTABLE STATEMENT  POISN2
   fistag = 3 - Istag
   fnum = 1./Istag
   fden = 0.5*(Istag-1)

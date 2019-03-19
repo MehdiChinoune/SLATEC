@@ -1,17 +1,24 @@
-!DECK DHFTI
+!** DHFTI
 SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DHFTI
-  !***PURPOSE  Solve a least squares problem for banded matrices using
+  !>
+  !***
+  !  Solve a least squares problem for banded matrices using
   !            sequential accumulation of rows of the data matrix.
   !            Exactly one right-hand side vector is permitted.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D9
-  !***TYPE      DOUBLE PRECISION (HFTI-S, DHFTI-D)
-  !***KEYWORDS  CURVE FITTING, LEAST SQUARES
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D9
+  !***
+  ! **Type:**      DOUBLE PRECISION (HFTI-S, DHFTI-D)
+  !***
+  ! **Keywords:**  CURVE FITTING, LEAST SQUARES
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     DIMENSION A(MDA,N),(B(MDB,NB) or B(M)),RNORM(NB),H(N),G(N),IP(N)
   !
@@ -122,10 +129,13 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !                       The contents of arrays H(*),G(*) and IP(*)
   !                       are not generally required by the user.
   !
-  !***REFERENCES  C. L. Lawson and R. J. Hanson, Solving Least Squares
+  !***
+  ! **References:**  C. L. Lawson and R. J. Hanson, Solving Least Squares
   !                 Problems, Prentice-Hall, Inc., 1974, Chapter 14.
-  !***ROUTINES CALLED  D1MACH, DH12, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, DH12, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891006  Cosmetic changes to prologue.  (WRB)
@@ -134,7 +144,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   901005  Replace usage of DDIFF with usage of D1MACH.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DHFTI
+  
   INTEGER i, ii, iopt, Ip(*), ip1, j, jb, jj, k, kp1, Krank, l, &
     ldiag, lmax, M, Mda, Mdb, N, Nb, nerr
   REAL(8) :: A, B, D1MACH, dzero, factor, G, H, hmax, releps, &
@@ -143,7 +153,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   SAVE releps
   DATA releps/0.D0/
   !     BEGIN BLOCK PERMITTING ...EXITS TO 360
-  !***FIRST EXECUTABLE STATEMENT  DHFTI
+  !* FIRST EXECUTABLE STATEMENT  DHFTI
   IF ( releps==0.D0 ) releps = D1MACH(4)
   szero = 0.0D0
   dzero = 0.0D0

@@ -1,13 +1,17 @@
-!DECK SPOPT
+!** SPOPT
 SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPOPT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SPOPT-S, DPOPT-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SPOPT-S, DPOPT-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THE EDITING REQUIRED TO CONVERT THIS SUBROUTINE FROM SINGLE TO
   !     DOUBLE PRECISION INVOLVES THE FOLLOWING CHARACTER STRING CHANGES.
@@ -22,16 +26,19 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !     THIS SUBROUTINE PROCESSES THE OPTION VECTOR, PRGOPT(*),
   !     AND VALIDATES ANY MODIFIED DATA.
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  SPOPT
+  
   INTEGER i, iadbig, ictmax, ictopt, idg, Info, iopt, ipagef, &
     isave, itbrc, itest, j, key, kprint, last, lds, lprg, &
     Mrelas, mxitlp, n20043
@@ -42,7 +49,7 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   LOGICAL contin, usrbas, sizeup, savedt, colscp, cstscp, minprb, &
     stpedg, Lopt(8)
   !
-  !***FIRST EXECUTABLE STATEMENT  SPOPT
+  !* FIRST EXECUTABLE STATEMENT  SPOPT
   iopt = 1
   zero = 0.E0
   one = 1.E0

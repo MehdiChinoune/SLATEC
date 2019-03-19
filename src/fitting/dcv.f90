@@ -1,16 +1,23 @@
-!DECK DCV
+!** DCV
 REAL(8) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCV
-  !***PURPOSE  Evaluate the variance function of the curve obtained
+  !>
+  !***
+  !  Evaluate the variance function of the curve obtained
   !            by the constrained B-spline fitting subprogram DFC.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  L7A3
-  !***TYPE      DOUBLE PRECISION (CV-S, DCV-D)
-  !***KEYWORDS  ANALYSIS OF COVARIANCE, B-SPLINE,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  L7A3
+  !***
+  ! **Type:**      DOUBLE PRECISION (CV-S, DCV-D)
+  !***
+  ! **Keywords:**  ANALYSIS OF COVARIANCE, B-SPLINE,
   !             CONSTRAINED LEAST SQUARES, CURVE FITTING
-  !***AUTHOR  Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
+  !***
+  ! **Description:**
   !
   !     DCV( ) is a companion function subprogram for DFC( ).  The
   !     documentation for DFC( ) has complete usage instructions.
@@ -87,12 +94,15 @@ REAL(8) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !             must not be modified by the user if the variance function
   !             is desired.
   !
-  !***REFERENCES  R. J. Hanson, Constrained least squares curve fitting
+  !***
+  ! **References:**  R. J. Hanson, Constrained least squares curve fitting
   !                 to discrete data using B-splines, a users guide,
   !                 Report SAND78-1291, Sandia Laboratories, December
   !                 1978.
-  !***ROUTINES CALLED  DDOT, DFSPVN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DDOT, DFSPVN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -101,12 +111,12 @@ REAL(8) FUNCTION DCV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !   891006  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DCV
+  
   INTEGER i, ileft, ip, is, last, mdg, mdw, n, Nbkpt, Nconst, &
     Ndata, Nord
   REAL(8) :: Bkpt, DDOT, v, W, Xval, zero
   DIMENSION Bkpt(*), W(*), v(40)
-  !***FIRST EXECUTABLE STATEMENT  DCV
+  !* FIRST EXECUTABLE STATEMENT  DCV
   zero = 0.0D0
   mdg = Nbkpt - Nord + 3
   mdw = Nbkpt - Nord + 1 + Nconst

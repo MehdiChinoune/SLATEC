@@ -1,13 +1,17 @@
-!DECK DENORM
+!** DENORM
 REAL(8) FUNCTION DENORM(N,X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DENORM
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DNSQ and DNSQE
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (ENORM-S, DENORM-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DNSQ and DNSQE
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (ENORM-S, DENORM-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Given an N-vector X, this function calculates the
   !     Euclidean norm of X.
@@ -34,9 +38,12 @@ REAL(8) FUNCTION DENORM(N,X)
   !
   !       X is an input array of length N.
   !
-  !***SEE ALSO  DNSQ, DNSQE
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DNSQ, DNSQE
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -44,13 +51,13 @@ REAL(8) FUNCTION DENORM(N,X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DENORM
+  
   INTEGER i, N
   REAL(8) :: agiant, floatn, one, rdwarf, rgiant, s1, s2, s3, &
     X(*), x1max, x3max, xabs, zero
   SAVE one, zero, rdwarf, rgiant
   DATA one, zero, rdwarf, rgiant/1.0D0, 0.0D0, 3.834D-20, 1.304D19/
-  !***FIRST EXECUTABLE STATEMENT  DENORM
+  !* FIRST EXECUTABLE STATEMENT  DENORM
   s1 = zero
   s2 = zero
   s3 = zero

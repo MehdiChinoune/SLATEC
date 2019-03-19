@@ -1,25 +1,33 @@
-!DECK SPLPDM
+!** SPLPDM
 SUBROUTINE SPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
     Ipr,Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,&
     Singlr,Redbas)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPLPDM
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SPLPDM-S, DPLPDM-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SPLPDM-S, DPLPDM-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THIS SUBPROGRAM IS FROM THE SPLP( ) PACKAGE.  IT PERFORMS THE
   !     TASK OF DEFINING THE ENTRIES OF THE BASIS MATRIX AND
   !     DECOMPOSING IT USING THE LA05 PACKAGE.
   !     IT IS THE MAIN PART OF THE PROCEDURE (DECOMPOSE BASIS MATRIX).
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  LA05AS, PNNZRS, SASUM, XERMSG
-  !***COMMON BLOCKS    LA05DS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  LA05AS, PNNZRS, SASUM, XERMSG
+  !***
+  ! COMMON BLOCKS    LA05DS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890605  Corrected references to XERRWV.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
@@ -28,7 +36,7 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls, changed do-it-yourself
   !           DO loops to DO loops.  (RWC)
-  !***END PROLOGUE  SPLPDM
+  
   REAL aij, SASUM
   INTEGER i, Info, Iopt, iplace, j, k, Lbm, LCOl, LENl, LENu, &
     Lmx, LP, LROw, Mrelas, NCP, Nredc, Nvars, nzbm
@@ -42,7 +50,7 @@ SUBROUTINE SPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !     COMMON BLOCK USED BY LA05 () PACKAGE..
   COMMON /LA05DS/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
   !
-  !***FIRST EXECUTABLE STATEMENT  SPLPDM
+  !* FIRST EXECUTABLE STATEMENT  SPLPDM
   zero = 0.E0
   one = 1.E0
   !

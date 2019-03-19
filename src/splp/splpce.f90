@@ -1,15 +1,19 @@
-!DECK SPLPCE
+!** SPLPCE
 SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
     Iwr,Ind,Ibb,Erdnrm,Eps,Tune,Gg,Amat,Basmat,Csc,Wr,Ww,&
     Primal,Erd,Erp,Singlr,Redbas)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPLPCE
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SPLPCE-S, DPLPCE-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SPLPCE-S, DPLPCE-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THE EDITING REQUIRED TO CONVERT THIS SUBROUTINE FROM SINGLE TO
   !     DOUBLE PRECISION INVOLVES THE FOLLOWING CHARACTER STRING CHANGES.
@@ -26,15 +30,18 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   !     THE MAIN PART OF THE PROCEDURE (COMPUTE ERROR IN DUAL AND PRIMAL
   !     SYSTEMS).
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  IPLOC, LA05BS, PRWPGE, SASUM, SCOPY
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  IPLOC, LA05BS, PRWPGE, SASUM, SCOPY
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  SPLPCE
+  
   INTEGER i, ihi, il1, ilow, ipage, IPLOC, Itbrc, Itlp, iu1, j, &
     key, l, Lbm, Lmx, lpg, Mrelas, n20002, n20012, n20016, &
     n20023
@@ -45,7 +52,7 @@ SUBROUTINE SPLPCE(Mrelas,Nvars,Lmx,Lbm,Itlp,Itbrc,Ibasis,Imat,Ibrc,Ipr,&
   REAL Amat(*), Basmat(*), Csc(*), Wr(*), Ww(*), Primal(*), Erd(*), &
     Erp(*), Eps, Erdnrm, factor, Gg, one, zero, ten, Tune
   LOGICAL Singlr, Redbas, trans, pagepl
-  !***FIRST EXECUTABLE STATEMENT  SPLPCE
+  !* FIRST EXECUTABLE STATEMENT  SPLPCE
   zero = 0.E0
   one = 1.E0
   ten = 10.E0

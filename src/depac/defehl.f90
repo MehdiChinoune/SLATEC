@@ -1,16 +1,20 @@
-!DECK DEFEHL
+!** DEFEHL
 SUBROUTINE DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DEFEHL
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DERKF
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (DEFEHL-S, DFEHL-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DERKF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (DEFEHL-S, DFEHL-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Fehlberg Fourth-Fifth order Runge-Kutta Method
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !    DEFEHL integrates a system of NEQ first order
   !    ordinary differential equations of the form
@@ -35,24 +39,27 @@ SUBROUTINE DEFEHL(F,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   !    line 222 and extending to the last line just before the return
   !    statement.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  DERKF
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DERKF
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800501  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891009  Removed unreferenced statement label.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DEFEHL
+  
   REAL ch, F1, F2, F3, F4, F5, H, Rpar, T, Y, Yp, Ys
   INTEGER Ipar, k, Neq
   DIMENSION Y(*), Yp(*), F1(*), F2(*), F3(*), F4(*), F5(*), Ys(*), &
     Rpar(*), Ipar(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  DEFEHL
+  !* FIRST EXECUTABLE STATEMENT  DEFEHL
   ch = H/4.
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*Yp(k)

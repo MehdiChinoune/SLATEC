@@ -1,18 +1,22 @@
-!DECK DERKFS
+!** DERKFS
 SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     F4,F5,Ys,Told,Dtsign,U26,Rer,Init,Ksteps,Kop,Iquit,&
     Stiff,Nonstf,Ntstep,Nstifs,Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DERKFS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DERKF
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (DERKFS-S, DRKFS-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DERKF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (DERKFS-S, DRKFS-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Fehlberg Fourth-Fifth order Runge-Kutta Method
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     DERKFS integrates a system of first order ordinary differential
   !     equations as described in the comments for DERKF .
@@ -31,11 +35,14 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !         YP - Derivative of solution vector at T
   !         KSTEPS - Counter on the number of steps attempted
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  DERKF
-  !***ROUTINES CALLED  DEFEHL, HSTART, HVNRM, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DERKF
+  !***
+  ! **Routines called:**  DEFEHL, HSTART, HVNRM, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800501  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -46,7 +53,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !   900510  Convert XERRWV calls to XERMSG calls, replace GOTOs with
   !           IF-THEN-ELSEs.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DERKFS
+  
   REAL a, Atol, big, dt, Dtsign, dy, ee, eeoet, es, estiff, &
     esttol, et, F1, F2, F3, F4, F5, H, hmin, HVNRM
   INTEGER Idid, Info, Init, Ipar, Iquit, k, Kop, Ksteps, ktol, &
@@ -95,7 +102,7 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !
   !.......................................................................
   !
-  !***FIRST EXECUTABLE STATEMENT  DERKFS
+  !* FIRST EXECUTABLE STATEMENT  DERKFS
   IF ( Info(1)==0 ) THEN
     !
     ! ON THE FIRST CALL, PERFORM INITIALIZATION --
@@ -323,8 +330,8 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   ELSEIF ( ABS(dt)>U26*ABS(T) ) THEN
     DO
       !
-      ! **********************************************************************
-      ! **********************************************************************
+      !- *********************************************************************
+      !- *********************************************************************
       !     STEP BY STEP INTEGRATION
       !
       hfaild = .FALSE.
@@ -372,9 +379,9 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
         ENDIF
         !
         !
-        ! **********************************************************************
+        !- *********************************************************************
         !     CORE INTEGRATOR FOR TAKING A SINGLE STEP
-        ! **********************************************************************
+        !- *********************************************************************
         !     TO AVOID PROBLEMS WITH ZERO CROSSINGS, RELATIVE ERROR IS MEASURED
         !     USING THE AVERAGE OF THE MAGNITUDES OF THE SOLUTION AT THE
         !     BEGINNING AND END OF A STEP.
@@ -500,9 +507,9 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
               ENDIF
             ENDIF
             !
-            ! **********************************************************************
+            !- *********************************************************************
             !     END OF CORE INTEGRATOR
-            ! **********************************************************************
+            !- *********************************************************************
             !
             !
             !     SHOULD WE TAKE ANOTHER STEP
@@ -510,8 +517,8 @@ SUBROUTINE DERKFS(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
             IF ( output ) GOTO 200
             IF ( Info(3)==0 ) GOTO 150
             !
-            ! **********************************************************************
-            ! **********************************************************************
+            !- *********************************************************************
+            !- *********************************************************************
             !
             !     INTEGRATION SUCCESSFULLY COMPLETED
             !

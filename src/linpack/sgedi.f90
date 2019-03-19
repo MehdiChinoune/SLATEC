@@ -1,15 +1,22 @@
-!DECK SGEDI
+!** SGEDI
 SUBROUTINE SGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SGEDI
-  !***PURPOSE  Compute the determinant and inverse of a matrix using the
+  !>
+  !***
+  !  Compute the determinant and inverse of a matrix using the
   !            factors computed by SGECO or SGEFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2A1, D3A1
-  !***TYPE      SINGLE PRECISION (SGEDI-S, DGEDI-D, CGEDI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2A1, D3A1
+  !***
+  ! **Type:**      SINGLE PRECISION (SGEDI-S, DGEDI-D, CGEDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     SGEDI computes the determinant and inverse of a matrix
   !     using the factors computed by SGECO or SGEFA.
@@ -56,10 +63,13 @@ SUBROUTINE SGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   !        and if SGECO has set RCOND .GT. 0.0 or SGEFA has set
   !        INFO .EQ. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SAXPY, SSCAL, SSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SAXPY, SSCAL, SSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -67,14 +77,14 @@ SUBROUTINE SGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SGEDI
+  
   INTEGER Lda, N, Ipvt(*), Job
   REAL A(Lda,*), Det(2), Work(*)
   !
   REAL t
   REAL ten
   INTEGER i, j, k, kb, kp1, l, nm1
-  !***FIRST EXECUTABLE STATEMENT  SGEDI
+  !* FIRST EXECUTABLE STATEMENT  SGEDI
   !
   !     COMPUTE DETERMINANT
   !

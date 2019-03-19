@@ -1,15 +1,22 @@
-!DECK DCHU
+!** DCHU
 REAL(8) FUNCTION DCHU(A,B,X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCHU
-  !***PURPOSE  Compute the logarithmic confluent hypergeometric function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C11
-  !***TYPE      DOUBLE PRECISION (CHU-S, DCHU-D)
-  !***KEYWORDS  FNLIB, LOGARITHMIC CONFLUENT HYPERGEOMETRIC FUNCTION,
+  !>
+  !***
+  !  Compute the logarithmic confluent hypergeometric function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C11
+  !***
+  ! **Type:**      DOUBLE PRECISION (CHU-S, DCHU-D)
+  !***
+  ! **Keywords:**  FNLIB, LOGARITHMIC CONFLUENT HYPERGEOMETRIC FUNCTION,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DCHU(A,B,X) calculates the double precision logarithmic confluent
   ! hypergeometric function U(A,B,X) for double precision arguments
@@ -17,17 +24,20 @@ REAL(8) FUNCTION DCHU(A,B,X)
   !
   ! This routine is not valid when 1+A-B is close to zero if X is small.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, D9CHU, DEXPRL, DGAMMA, DGAMR, DPOCH,
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, D9CHU, DEXPRL, DGAMMA, DGAMR, DPOCH,
   !                    DPOCH1, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  !***END PROLOGUE  DCHU
+  
   INTEGER i, istrt, m, n
   REAL(8) :: A, B, X, aintb, alnx, a0, beps, b0, c0, eps, &
     factor, gamri1, gamrni, pch1ai, pch1i, pi, pochai, &
@@ -37,7 +47,7 @@ REAL(8) FUNCTION DCHU(A,B,X)
   SAVE pi, eps
   DATA pi/3.141592653589793238462643383279503D0/
   DATA eps/0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  DCHU
+  !* FIRST EXECUTABLE STATEMENT  DCHU
   IF ( eps==0.0D0 ) eps = D1MACH(3)
   !
   IF ( X==0.0D0 ) CALL XERMSG('SLATEC','DCHU',&

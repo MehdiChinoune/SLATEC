@@ -1,16 +1,23 @@
-!DECK DXC210
+!** DXC210
 SUBROUTINE DXC210(K,Z,J,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DXC210
-  !***PURPOSE  To provide double-precision floating-point arithmetic
+  !>
+  !***
+  !  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  A3D
-  !***TYPE      DOUBLE PRECISION (XC210-S, DXC210-D)
-  !***KEYWORDS  EXTENDED-RANGE DOUBLE-PRECISION ARITHMETIC
-  !***AUTHOR  Lozier, Daniel W., (National Bureau of Standards)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  A3D
+  !***
+  ! **Type:**      DOUBLE PRECISION (XC210-S, DXC210-D)
+  !***
+  ! **Keywords:**  EXTENDED-RANGE DOUBLE-PRECISION ARITHMETIC
+  !***
+  ! **Author:**  Lozier, Daniel W., (National Bureau of Standards)
   !           Smith, John M., (NBS and George Mason University)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !     INTEGER K, J
   !     DOUBLE PRECISION Z
   !
@@ -26,11 +33,16 @@ SUBROUTINE DXC210(K,Z,J,Ierror)
   !                  DXCON WHEN NECESSARY. THE USER SHOULD
   !                  NEVER NEED TO CALL DXC210 DIRECTLY.
   !
-  !***SEE ALSO  DXSET
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  XERMSG
-  !***COMMON BLOCKS    DXBLK3
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DXSET
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  XERMSG
+  !***
+  ! COMMON BLOCKS    DXBLK3
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820712  DATE WRITTEN
   !   890126  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
@@ -39,7 +51,7 @@ SUBROUTINE DXC210(K,Z,J,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  DXC210
+  
   INTEGER i, ic, id, Ierror, ii, it, ja, ka, ka1, ka2, m, nm1, np1
   REAL(8) :: Z
   INTEGER K, J
@@ -59,7 +71,7 @@ SUBROUTINE DXC210(K,Z,J,Ierror)
   ! THESE CONDITIONS MUST BE MET BY APPROPRIATE CODING
   ! IN SUBROUTINE DXSET.
   !
-  !***FIRST EXECUTABLE STATEMENT  DXC210
+  !* FIRST EXECUTABLE STATEMENT  DXC210
   Ierror = 0
   IF ( K==0 ) THEN
     J = 0

@@ -1,13 +1,17 @@
-!DECK ZRATI
+!** ZRATI
 SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZRATI
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESH, ZBESI and ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CRATI-A, ZRATI-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZBESH, ZBESI and ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CRATI-A, ZRATI-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZRATI COMPUTES RATIOS OF I BESSEL FUNCTIONS BY BACKWARD
   !     RECURRENCE.  THE STARTING INDEX IS DETERMINED BY FORWARD
@@ -16,12 +20,15 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
   !     BESSEL FUNCTIONS I AND J OF COMPLEX ARGUMENT AND INTEGER ORDER,
   !     BY D. J. SOOKNE.
   !
-  !***SEE ALSO  ZBESH, ZBESI, ZBESK
-  !***ROUTINES CALLED  ZABS, ZDIV
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZBESH, ZBESI, ZBESK
+  !***
+  ! **Routines called:**  ZABS, ZDIV
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ZRATI
+  
   REAL(8) :: ak, amagz, ap1, ap2, arg, az, cdfnui, cdfnur, &
     conei, coner, Cyi, Cyr, czeroi, czeror, dfnu, &
     fdnu, flam, Fnu, fnup, pti, ptr, p1i, p1r, p2i, &
@@ -32,7 +39,7 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
   EXTERNAL ZABS
   DATA czeror, czeroi, coner, conei, rt2/0.0D0, 0.0D0, 1.0D0, 0.0D0, &
     1.41421356237309505D0/
-  !***FIRST EXECUTABLE STATEMENT  ZRATI
+  !* FIRST EXECUTABLE STATEMENT  ZRATI
   az = ZABS(Zr,Zi)
   inu = INT( Fnu )
   idnu = inu + N - 1

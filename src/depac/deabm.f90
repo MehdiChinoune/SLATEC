@@ -1,18 +1,25 @@
-!DECK DEABM
+!** DEABM
 SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DEABM
-  !***PURPOSE  Solve an initial value problem in ordinary differential
+  !>
+  !***
+  !  Solve an initial value problem in ordinary differential
   !            equations using an Adams-Bashforth method.
-  !***LIBRARY   SLATEC (DEPAC)
-  !***CATEGORY  I1A1B
-  !***TYPE      SINGLE PRECISION (DEABM-S, DDEABM-D)
-  !***KEYWORDS  ADAMS-BASHFORTH METHOD, DEPAC, INITIAL VALUE PROBLEMS,
+  !***
+  ! **Library:**   SLATEC (DEPAC)
+  !***
+  ! **Category:**  I1A1B
+  !***
+  ! **Type:**      SINGLE PRECISION (DEABM-S, DDEABM-D)
+  !***
+  ! **Keywords:**  ADAMS-BASHFORTH METHOD, DEPAC, INITIAL VALUE PROBLEMS,
   !             ODE, ORDINARY DIFFERENTIAL EQUATIONS, PREDICTOR-CORRECTOR
-  !***AUTHOR  Shampine, L. F., (SNLA)
+  !***
+  ! **Author:**  Shampine, L. F., (SNLA)
   !           Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   This is the Adams code in the package of differential equation
   !   solvers DEPAC, consisting of the codes DERKF, DEABM, and DEBDF.
@@ -25,9 +32,9 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !             Sandia Laboratories
   !             Albuquerque, New Mexico 87185
   !
-  ! **********************************************************************
-  ! **             DEPAC PACKAGE OVERVIEW           **
-  ! **************************************************
+  !- *********************************************************************
+  !- *             DEPAC PACKAGE OVERVIEW           **
+  !- *************************************************
   !
   !        You have a choice of three differential equation solvers from
   !        DEPAC.  The following brief descriptions are meant to aid you
@@ -69,9 +76,9 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !        or DEABM.  Both of these codes will inform you of stiffness
   !        when the cost of solving such problems becomes important.
   !
-  ! **********************************************************************
-  ! ** ABSTRACT **
-  ! **************
+  !- *********************************************************************
+  !- * ABSTRACT **
+  !- *************
   !
   !   Subroutine DEABM uses the Adams-Bashforth-Moulton predictor-
   !   corrector formulas of orders one through twelve to integrate a
@@ -89,9 +96,9 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   the error handling routine XERMSG.  The only machine dependent
   !   parameters to be assigned appear in R1MACH.
   !
-  ! **********************************************************************
-  ! ** DESCRIPTION OF THE ARGUMENTS TO DEABM (AN OVERVIEW) **
-  ! *********************************************************
+  !- *********************************************************************
+  !- * DESCRIPTION OF THE ARGUMENTS TO DEABM (AN OVERVIEW) **
+  !- ********************************************************
   !
   !   The parameters are
   !
@@ -141,9 +148,9 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !             T, Y(*), INFO(1), RTOL, ATOL,
   !             IDID, RWORK(*) and IWORK(*).
   !
-  ! **********************************************************************
-  ! ** INPUT -- WHAT TO DO ON THE FIRST CALL TO DEABM **
-  ! ****************************************************
+  !- *********************************************************************
+  !- * INPUT -- WHAT TO DO ON THE FIRST CALL TO DEABM **
+  !- ***************************************************
   !
   !   The first call of the code is defined to be the start of each new
   !   problem.  Read through the descriptions of all the following items,
@@ -360,9 +367,9 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !             them, dimension them in your calling program and in F as
   !             arrays of appropriate length.
   !
-  ! **********************************************************************
-  ! ** OUTPUT -- AFTER ANY RETURN FROM DEABM **
-  ! *******************************************
+  !- *********************************************************************
+  !- * OUTPUT -- AFTER ANY RETURN FROM DEABM **
+  !- ******************************************
   !
   !   The principal aim of the code is to return a computed solution at
   !   TOUT, although it is also possible to obtain intermediate results
@@ -454,10 +461,10 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !                        the differential equation using T and Y(*) when
   !                        IDID=1 or 2, and by interpolation when IDID=3.
   !
-  ! **********************************************************************
-  ! ** INPUT -- WHAT TO DO TO CONTINUE THE INTEGRATION **
-  ! **             (CALLS AFTER THE FIRST)             **
-  ! *****************************************************
+  !- *********************************************************************
+  !- * INPUT -- WHAT TO DO TO CONTINUE THE INTEGRATION **
+  !- *             (CALLS AFTER THE FIRST)             **
+  !- ****************************************************
   !
   !        This code is organized so that subsequent calls to continue the
   !        integration involve little (if any) additional effort on your
@@ -549,13 +556,16 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !                     problem.  An attempt to do so will result in your
   !                     run being terminated.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***REFERENCES  L. F. Shampine and H. A. Watts, DEPAC - design of a user
+  !***
+  ! **References:**  L. F. Shampine and H. A. Watts, DEPAC - design of a user
   !                 oriented package of ODE solvers, Report SAND79-2374,
   !                 Sandia Laboratories, 1979.
-  !***ROUTINES CALLED  DES, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DES, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800501  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891024  Changed references from VNORM to HVNRM.  (WRB)
@@ -563,7 +573,7 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DEABM
+  
   REAL Atol, Rpar, Rtol, Rwork, T, Tout, Y
   INTEGER ialpha, ibeta, idelsn, Idid, ifouru, ig, igi, ihold, &
     Info, ip, Ipar, iphi, ipsi, isig, itold, itstar, itwou, iv, iw, Iwork
@@ -580,7 +590,7 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !
   !     CHECK FOR AN APPARENT INFINITE LOOP
   !
-  !***FIRST EXECUTABLE STATEMENT  DEABM
+  !* FIRST EXECUTABLE STATEMENT  DEABM
   IF ( Info(1)==0 ) Iwork(Liw) = 0
   IF ( Iwork(Liw)>=5 ) THEN
     IF ( T==Rwork(21+Neq) ) THEN

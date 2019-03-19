@@ -1,19 +1,23 @@
-!DECK BVPOR
+!** BVPOR
 SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,W,Niv,Yhp,U,V,Coef,S,Stowa,G,&
     Work,Iwork,Nfcc)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BVPOR
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (BVPOR-S, DBVPOR-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (BVPOR-S, DBVPOR-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     INPUT to BVPOR    (items not defined in BVSUP comments)
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     NOPG = 0 -- Orthonormalization points not pre-assigned
   !          = 1 -- Orthonormalization points pre-assigned
@@ -47,9 +51,9 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !           = 1 Calculate superposition coefficients and obtain
   !               solution to the boundary value problem
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     OUTPUT from BVPOR
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     Y(NROWY,NXPTS) = Solution at specified output points.
   !
@@ -61,7 +65,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !        this parameter will be meaningful only when MGSBV returns with
   !           MFLAG = 2.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     The following variables are in the argument list because of
   !     variable dimensioning. In general, they contain no information of
@@ -83,7 +87,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     WORK(KKKWS)
   !     IWORK(LLLIWS)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     Subroutines used by BVPOR
   !         LSSUDS -- Solves an underdetermined system of linear
   !                   equations.  This routine is used to get a full
@@ -114,13 +118,17 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !
   !         BKSOL -- Solves an upper triangular set of linear equations.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  BVSUP
-  !***ROUTINES CALLED  BKSOL, LSSUDS, RKFAB, SCOEF, SDOT, STOR1, STWAY,
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **Routines called:**  BKSOL, LSSUDS, RKFAB, SCOEF, SDOT, STOR1, STWAY,
   !                    SVECS
-  !***COMMON BLOCKS    ML15TO, ML18JR, ML8SZ
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! COMMON BLOCKS    ML15TO, ML18JR, ML8SZ
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -129,7 +137,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  BVPOR
+  
   REAL A, AE, Alpha, B, Beta, C, Coef, G, P, PWCnd, PX, RE, S, &
     SDOT, Stowa, TND, TOL, U, V, W
   REAL Work, X, XBEg, XENd, XOP, XOT, Xpts, XSAv, Y, Yhp, Z
@@ -148,7 +156,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     , Coef(*), Z(*), Yhp(Ncomp,*), Xpts(*), S(*), Work(*), &
     Iwork(*), Stowa(*), G(*)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   COMMON /ML8SZ / C, XSAv, IGOfx, INHomo, IVP, NCOmpd, NFCd
   COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
@@ -157,14 +165,14 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     NTApe, NEQ, INDpvt, INTeg, NPS, NTPd, NEQivp, &
     NUMort, NFCcd, ICOco
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***FIRST EXECUTABLE STATEMENT  BVPOR
+  !* FIRST EXECUTABLE STATEMENT  BVPOR
   nfcp1 = Nfc + 1
   NUMort = 0
   C = 1.0
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     CALCULATE INITIAL CONDITIONS WHICH SATISFY
   !                   A*YH(XINITIAL)=0  AND  A*YP(XINITIAL)=ALPHA.
   !     WHEN NFC .NE. NFCC LSSUDS DEFINES VALUES YHP IN A MATRIX OF SIZE
@@ -185,7 +193,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     IF ( Nfc/=Nfcc ) CALL SVECS(Ncomp,Nfc,Yhp,Work,Iwork,INHomo,Iflag)
     IF ( Iflag==1 ) THEN
       !
-      ! **********************************************************************
+      !- *********************************************************************
       !     DETERMINE THE NUMBER OF DIFFERENTIAL EQUATIONS TO BE INTEGRATED,
       !     INITIALIZE VARIABLES FOR AUXILIARY INITIAL VALUE PROBLEM AND
       !     STORE INITIAL CONDITIONS.
@@ -204,7 +212,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       ENDIF
       CALL STOR1(U,Yhp,V,Yhp(1,nfcp1),0,NDIsk,NTApe)
       !
-      ! **********************************************************************
+      !- *********************************************************************
       !     SET UP DATA FOR THE ORTHONORMALIZATION TESTING PROCEDURE AND
       !     SAVE INITIAL CONDITIONS IN CASE A RESTART IS NECESSARY.
       !
@@ -220,17 +228,17 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       KOP = 1
       CALL STWAY(U,V,Yhp,0,Stowa)
       !
-      ! **********************************************************************
-      ! ******** FORWARD INTEGRATION OF ALL INITIAL VALUE EQUATIONS **********
-      ! **********************************************************************
+      !- *********************************************************************
+      !- ******* FORWARD INTEGRATION OF ALL INITIAL VALUE EQUATIONS **********
+      !- *********************************************************************
       !
       CALL RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,W,&
         S,Stowa,G,Work,Iwork,Nfcc)
       IF ( Iflag==0.AND.ICOco/=0 ) THEN
         !
-        ! **********************************************************************
-        ! **************** BACKWARD SWEEP TO OBTAIN SOLUTION *******************
-        ! **********************************************************************
+        !- *********************************************************************
+        !- *************** BACKWARD SWEEP TO OBTAIN SOLUTION *******************
+        !- *********************************************************************
         !
         !     CALCULATE SUPERPOSITION COEFFICIENTS AT XFINAL.
         !
@@ -244,7 +252,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
         CALL SCOEF(U(1,1,kod),V(1,kod),Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,&
           INHomo,RE,AE,Work,Work(i1),Work(i2),Iwork,Iflag,Nfcc)
         !
-        ! **********************************************************************
+        !- *********************************************************************
         !     CALCULATE SOLUTION AT OUTPUT POINTS BY RECURRING BACKWARDS.
         !     AS WE RECUR BACKWARDS FROM XFINAL TO XINITIAL WE MUST CALCULATE
         !     NEW SUPERPOSITION COEFFICIENTS EACH TIME WE CROSS A POINT OF
@@ -312,7 +320,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Iflag = -4
   ENDIF
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   Mxnon = NUMort
 END SUBROUTINE BVPOR

@@ -1,25 +1,32 @@
-!DECK CASYI
+!** CASYI
 SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CASYI
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBESI and CBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CASYI-A, ZASYI-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBESI and CBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CASYI-A, ZASYI-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     CASYI COMPUTES THE I BESSEL FUNCTION FOR REAL(Z).GE.0.0 BY
   !     MEANS OF THE ASYMPTOTIC EXPANSION FOR LARGE ABS(Z) IN THE
   !     REGION ABS(Z).GT.MAX(RL,FNU*FNU/2). NZ=0 IS A NORMAL RETURN.
   !     NZ.LT.0 INDICATES AN OVERFLOW ON KODE=1.
   !
-  !***SEE ALSO  CBESI, CBESK
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBESI, CBESK
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CASYI
+  
   COMPLEX ak1, ck, cone, cs1, cs2, cz, czero, dk, ez, p1, rz, &
     s2, Y, Z
   REAL aa, acz, aez, ak, Alim, arg, arm, atol, az, bb, bk, dfnu, &
@@ -29,7 +36,7 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   DIMENSION Y(N)
   DATA pi, rtpi/3.14159265358979324E0, 0.159154943091895336E0/
   DATA czero, cone/(0.0E0,0.0E0), (1.0E0,0.0E0)/
-  !***FIRST EXECUTABLE STATEMENT  CASYI
+  !* FIRST EXECUTABLE STATEMENT  CASYI
   Nz = 0
   az = ABS(Z)
   x = REAL(Z)

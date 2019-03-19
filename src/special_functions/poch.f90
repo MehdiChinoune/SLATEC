@@ -1,14 +1,21 @@
-!DECK POCH
+!** POCH
 REAL FUNCTION POCH(A,X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  POCH
-  !***PURPOSE  Evaluate a generalization of Pochhammer's symbol.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C1, C7A
-  !***TYPE      SINGLE PRECISION (POCH-S, DPOCH-D)
-  !***KEYWORDS  FNLIB, POCHHAMMER, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Evaluate a generalization of Pochhammer's symbol.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C1, C7A
+  !***
+  ! **Type:**      SINGLE PRECISION (POCH-S, DPOCH-D)
+  !***
+  ! **Keywords:**  FNLIB, POCHHAMMER, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate a generalization of Pochhammer's symbol
   ! (A)-sub-X = GAMMA(A+X)/GAMMA(A).  For X a non-negative integer,
@@ -17,23 +24,26 @@ REAL FUNCTION POCH(A,X)
   ! less than half precision is probably incorrect.  Grossly incorrect
   ! arguments are not handled properly.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ALGAMS, ALNREL, FAC, GAMMA, GAMR, R9LGMC, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ALGAMS, ALNREL, FAC, GAMMA, GAMR, R9LGMC, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  !***END PROLOGUE  POCH
+  
   REAL A, absa, absax, alnga, alngax, ALNREL, ax, b, COT, FAC, &
     GAMMA, GAMR, pi, R9LGMC, sgnga, sgngax, X
   INTEGER i, n
   EXTERNAL GAMMA
   SAVE pi
   DATA pi/3.141592653589793238E0/
-  !***FIRST EXECUTABLE STATEMENT  POCH
+  !* FIRST EXECUTABLE STATEMENT  POCH
   ax = A + X
   IF ( ax<=0.0 ) THEN
     IF ( AINT(ax)==ax ) THEN

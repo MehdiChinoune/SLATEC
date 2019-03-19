@@ -1,24 +1,31 @@
-!DECK CHFDV
+!** CHFDV
 SUBROUTINE CHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHFDV
-  !***PURPOSE  Evaluate a cubic polynomial given in Hermite form and its
+  !>
+  !***
+  !  Evaluate a cubic polynomial given in Hermite form and its
   !            first derivative at an array of points.  While designed for
   !            use by PCHFD, it may be useful directly as an evaluator
   !            for a piecewise cubic Hermite function in applications,
   !            such as graphing, where the interval is known in advance.
   !            If only function values are required, use CHFEV instead.
-  !***LIBRARY   SLATEC (PCHIP)
-  !***CATEGORY  E3, H1
-  !***TYPE      SINGLE PRECISION (CHFDV-S, DCHFDV-D)
-  !***KEYWORDS  CUBIC HERMITE DIFFERENTIATION, CUBIC HERMITE EVALUATION,
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Category:**  E3, H1
+  !***
+  ! **Type:**      SINGLE PRECISION (CHFDV-S, DCHFDV-D)
+  !***
+  ! **Keywords:**  CUBIC HERMITE DIFFERENTIATION, CUBIC HERMITE EVALUATION,
   !             CUBIC POLYNOMIAL EVALUATION, PCHIP
-  !***AUTHOR  Fritsch, F. N., (LLNL)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             P.O. Box 808  (L-316)
   !             Livermore, CA  94550
   !             FTS 532-4275, (510) 422-4275
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        CHFDV:  Cubic Hermite Function and Derivative Evaluator
   !
@@ -72,9 +79,12 @@ SUBROUTINE CHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !              IERR = -2  if X1.EQ.X2 .
   !                (Output arrays have not been changed in either case.)
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811019  DATE WRITTEN
   !   820803  Minor cosmetic changes for release 1.
   !   890411  Added SAVE statements (Vers. 3.2).
@@ -83,7 +93,7 @@ SUBROUTINE CHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  CHFDV
+  
   !  Programming notes:
   !
   !     To produce a double precision version, simply:
@@ -106,7 +116,7 @@ SUBROUTINE CHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
-  !***FIRST EXECUTABLE STATEMENT  CHFDV
+  !* FIRST EXECUTABLE STATEMENT  CHFDV
   IF ( Ne<1 ) THEN
     !
     !  ERROR RETURNS.

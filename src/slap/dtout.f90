@@ -1,28 +1,35 @@
-!DECK DTOUT
+!** DTOUT
 SUBROUTINE DTOUT(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DTOUT
-  !***PURPOSE  Write out SLAP Triad Format Linear System.
+  !>
+  !***
+  !  Write out SLAP Triad Format Linear System.
   !            Routine to write out a SLAP Triad format matrix and right
   !            hand side and solution to the system, if known.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  N1
-  !***TYPE      DOUBLE PRECISION (STOUT-S, DTOUT-D)
-  !***KEYWORDS  DIAGNOSTICS, LINEAR SYSTEM, SLAP SPARSE
-  !***AUTHOR  Seager, Mark K., (LLNL)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  N1
+  !***
+  ! **Type:**      DOUBLE PRECISION (STOUT-S, DTOUT-D)
+  !***
+  ! **Keywords:**  DIAGNOSTICS, LINEAR SYSTEM, SLAP SPARSE
+  !***
+  ! **Author:**  Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM, IUNIT, JOB
   !     DOUBLE PRECISION A(NELT), SOLN(N), RHS(N)
   !
   !     CALL DTOUT( N, NELT, IA, JA, A, ISYM, SOLN, RHS, IUNIT, JOB )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         Order of the Matrix.
   ! NELT   :IN       Integer.
@@ -56,7 +63,7 @@ SUBROUTINE DTOUT(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !             = 2 => Print matrix and SOLN.
   !             = 3 => Print matrix, RHS and SOLN.
   !
-  ! *Description:
+  !- Description:
   !       The format for the output is as follows.  On  the first line
   !       are counters and flags: N, NELT, ISYM, IRHS, ISOLN.  N, NELT
   !       and ISYM are described above.  IRHS is  a flag indicating if
@@ -95,15 +102,18 @@ SUBROUTINE DTOUT(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -114,7 +124,7 @@ SUBROUTINE DTOUT(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !   920511  Added complete declaration section.  (WRB)
   !   921007  Changed E's to D's in formats.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  !***END PROLOGUE  DTOUT
+  
   !     .. Scalar Arguments ..
   INTEGER Isym, Iunit, Job, N, Nelt
   !     .. Array Arguments ..
@@ -122,7 +132,7 @@ SUBROUTINE DTOUT(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER i, irhs, isoln
-  !***FIRST EXECUTABLE STATEMENT  DTOUT
+  !* FIRST EXECUTABLE STATEMENT  DTOUT
   !
   !         If RHS and SOLN are to be printed also.
   !         Write out the information heading.

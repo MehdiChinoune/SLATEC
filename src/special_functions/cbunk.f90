@@ -1,29 +1,36 @@
-!DECK CBUNK
+!** CBUNK
 SUBROUTINE CBUNK(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CBUNK
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBESH and CBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CBUNK-A, ZBUNK-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBESH and CBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CBUNK-A, ZBUNK-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     CBUNK COMPUTES THE K BESSEL FUNCTION FOR FNU.GT.FNUL.
   !     ACCORDING TO THE UNIFORM ASYMPTOTIC EXPANSION FOR K(FNU,Z)
   !     IN CUNK1 AND THE EXPANSION FOR H(2,FNU,Z) IN CUNK2
   !
-  !***SEE ALSO  CBESH, CBESK
-  !***ROUTINES CALLED  CUNK1, CUNK2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBESH, CBESK
+  !***
+  ! **Routines called:**  CUNK1, CUNK2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CBUNK
+  
   COMPLEX Y, Z
   REAL Alim, ax, ay, Elim, Fnu, Tol, xx, yy
   INTEGER Kode, Mr, N, Nz
   DIMENSION Y(N)
-  !***FIRST EXECUTABLE STATEMENT  CBUNK
+  !* FIRST EXECUTABLE STATEMENT  CBUNK
   Nz = 0
   xx = REAL(Z)
   yy = AIMAG(Z)

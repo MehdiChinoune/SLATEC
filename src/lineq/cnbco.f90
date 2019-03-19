@@ -1,16 +1,23 @@
-!DECK CNBCO
+!** CNBCO
 SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CNBCO
-  !***PURPOSE  Factor a band matrix using Gaussian elimination and
+  !>
+  !***
+  !  Factor a band matrix using Gaussian elimination and
   !            estimate the condition number.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2C2
-  !***TYPE      COMPLEX (SNBCO-S, DNBCO-D, CNBCO-C)
-  !***KEYWORDS  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2C2
+  !***
+  ! **Type:**      COMPLEX (SNBCO-S, DNBCO-D, CNBCO-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR EQUATIONS, MATRIX FACTORIZATION,
   !             NONSYMMETRIC
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !     CNBCO factors a complex band matrix by Gaussian
   !     elimination and estimates the condition of the matrix.
@@ -115,17 +122,20 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !           54 55 56  *  +
   !           65 66  *  *  +
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTC, CNBFA, CSSCAL, SCASUM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTC, CNBFA, CSSCAL, SCASUM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800730  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CNBCO
+  
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
   COMPLEX Abe(Lda,*), Z(*)
   REAL Rcond
@@ -139,7 +149,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   !     COMPUTE 1-NORM OF A
   !
-  !***FIRST EXECUTABLE STATEMENT  CNBCO
+  !* FIRST EXECUTABLE STATEMENT  CNBCO
   ml1 = Ml + 1
   ldb = Lda - 1
   anorm = 0.0E0

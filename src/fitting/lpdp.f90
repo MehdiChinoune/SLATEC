@@ -1,14 +1,18 @@
-!DECK LPDP
+!** LPDP
 SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  LPDP
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to LSEI
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (LPDP-S, DLPDP-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to LSEI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (LPDP-S, DLPDP-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Haskell, K. H., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     DIMENSION A(MDA,N+1),PRGOPT(*),X(N),WS((M+2)*(N+7)),IS(M+N+1),
   !     where N=N1+N2.  This is a slight overestimate for WS(*).
@@ -38,14 +42,17 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !
   !          MODE=2  The inequalities are inconsistent.
   !
-  !***SEE ALSO  LSEI
-  !***ROUTINES CALLED  SCOPY, SDOT, SNRM2, SSCAL, WNNLS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  LSEI
+  !***
+  ! **Routines called:**  SCOPY, SDOT, SNRM2, SSCAL, WNNLS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  !***END PROLOGUE  LPDP
+  
   !
   !     SUBROUTINES CALLED
   !
@@ -65,7 +72,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   REAL SDOT, SNRM2
   SAVE zero, one, fac
   DATA zero, one/0.E0, 1.E0/, fac/0.1E0/
-  !***FIRST EXECUTABLE STATEMENT  LPDP
+  !* FIRST EXECUTABLE STATEMENT  LPDP
   n = N1 + N2
   Mode = 1
   IF ( M>0 ) THEN

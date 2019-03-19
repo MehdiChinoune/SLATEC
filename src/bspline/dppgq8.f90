@@ -1,13 +1,17 @@
-!DECK DPPGQ8
+!** DPPGQ8
 SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPPGQ8
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DPFQAD
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (PPGQ8-S, DPPGQ8-D)
-  !***AUTHOR  Jones, R. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DPFQAD
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (PPGQ8-S, DPPGQ8-D)
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract    **** A DOUBLE PRECISION routine ****
   !
@@ -53,9 +57,12 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   !            --Abnormal Code
   !               2 ANS probably does not meet requested error tolerance.
   !
-  !***SEE ALSO  DPFQAD
-  !***ROUTINES CALLED  D1MACH, DPPVAL, I1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DPFQAD
+  !***
+  ! **Routines called:**  D1MACH, DPPVAL, I1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -65,7 +72,7 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  !***END PROLOGUE  DPPGQ8
+  
   !
   INTERFACE
     REAL(8) FUNCTION FUN(X)
@@ -91,7 +98,7 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   !
   !     INITIALIZE
   !
-  !***FIRST EXECUTABLE STATEMENT  DPPGQ8
+  !* FIRST EXECUTABLE STATEMENT  DPPGQ8
   k = I1MACH(14)
   anib = D1MACH(5)*k/0.30102000D0
   nbits = INT(anib)

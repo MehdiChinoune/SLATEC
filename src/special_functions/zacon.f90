@@ -1,13 +1,17 @@
-!DECK ZACON
+!** ZACON
 SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZACON
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESH and ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CACON-A, ZACON-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZBESH and ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CACON-A, ZACON-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZACON APPLIES THE ANALYTIC CONTINUATION FORMULA
   !
@@ -17,12 +21,15 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
   !     TO CONTINUE THE K FUNCTION FROM THE RIGHT HALF TO THE LEFT
   !     HALF Z PLANE
   !
-  !***SEE ALSO  ZBESH, ZBESK
-  !***ROUTINES CALLED  D1MACH, ZABS, ZBINU, ZBKNU, ZMLT, ZS1S2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZBESH, ZBESK
+  !***
+  ! **Routines called:**  D1MACH, ZABS, ZBINU, ZBKNU, ZMLT, ZS1S2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ZACON
+  
   !     COMPLEX CK,CONE,CSCL,CSCR,CSGN,CSPN,CY,CZERO,C1,C2,RZ,SC1,SC2,ST,
   !    *S1,S2,Y,Z,ZN
   REAL(8) :: Alim, arg, ascle, as2, azn, bry, bscle, cki, &
@@ -38,7 +45,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
   EXTERNAL ZABS
   DATA pi/3.14159265358979324D0/
   DATA zeror, coner/0.0D0, 1.0D0/
-  !***FIRST EXECUTABLE STATEMENT  ZACON
+  !* FIRST EXECUTABLE STATEMENT  ZACON
   Nz = 0
   znr = -Zr
   zni = -Zi

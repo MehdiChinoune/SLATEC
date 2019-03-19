@@ -1,15 +1,22 @@
-!DECK SPOSL
+!** SPOSL
 SUBROUTINE SPOSL(A,Lda,N,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPOSL
-  !***PURPOSE  Solve the real symmetric positive definite linear system
+  !>
+  !***
+  !  Solve the real symmetric positive definite linear system
   !            using the factors computed by SPOCO or SPOFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1B
-  !***TYPE      SINGLE PRECISION (SPOSL-S, DPOSL-D, CPOSL-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX, POSITIVE DEFINITE, SOLVE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1B
+  !***
+  ! **Type:**      SINGLE PRECISION (SPOSL-S, DPOSL-D, CPOSL-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX, POSITIVE DEFINITE, SOLVE
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     SPOSL solves the real symmetric positive definite system
   !     A * X = B
@@ -49,10 +56,13 @@ SUBROUTINE SPOSL(A,Lda,N,B)
   !              CALL SPOSL(A,LDA,N,C(1,J))
   !        10 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SAXPY, SDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SAXPY, SDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -60,7 +70,7 @@ SUBROUTINE SPOSL(A,Lda,N,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SPOSL
+  
   INTEGER Lda, N
   REAL A(Lda,*), B(*)
   !
@@ -69,7 +79,7 @@ SUBROUTINE SPOSL(A,Lda,N,B)
   !
   !     SOLVE TRANS(R)*Y = B
   !
-  !***FIRST EXECUTABLE STATEMENT  SPOSL
+  !* FIRST EXECUTABLE STATEMENT  SPOSL
   DO k = 1, N
     t = SDOT(k-1,A(1,k),1,B(1),1)
     B(k) = (B(k)-t)/A(k,k)

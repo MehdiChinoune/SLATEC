@@ -1,18 +1,25 @@
-!DECK DGAUS8
+!** DGAUS8
 SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGAUS8
-  !***PURPOSE  Integrate a real function of one variable over a finite
+  !>
+  !***
+  !  Integrate a real function of one variable over a finite
   !            interval using an adaptive 8-point Legendre-Gauss
   !            algorithm.  Intended primarily for high accuracy
   !            integration or integration of smooth functions.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  H2A1A1
-  !***TYPE      DOUBLE PRECISION (GAUS8-S, DGAUS8-D)
-  !***KEYWORDS  ADAPTIVE QUADRATURE, AUTOMATIC INTEGRATOR,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  H2A1A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (GAUS8-S, DGAUS8-D)
+  !***
+  ! **Keywords:**  ADAPTIVE QUADRATURE, AUTOMATIC INTEGRATOR,
   !             GAUSS QUADRATURE, NUMERICAL INTEGRATION
-  !***AUTHOR  Jones, R. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract  *** a DOUBLE PRECISION routine ***
   !        DGAUS8 integrates real functions of one variable over finite
@@ -65,9 +72,12 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
   !            --Abnormal code
   !               2 ANS probably does not meet requested error tolerance.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, I1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, I1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810223  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -76,7 +86,7 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  DGAUS8
+  
   INTERFACE
     REAL(8) FUNCTION FUN(X)
       REAL(8), INTENT(IN) :: X
@@ -97,7 +107,7 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
     2.22381034453374471D-01, 1.01228536290376259D-01/
   DATA sq2/1.41421356D0/
   DATA nlmn/1/, kmx/5000/, kml/6/
-  !***FIRST EXECUTABLE STATEMENT  DGAUS8
+  !* FIRST EXECUTABLE STATEMENT  DGAUS8
   !
   !     Initialize
   !

@@ -1,13 +1,17 @@
-!DECK ENORM
+!** ENORM
 REAL FUNCTION ENORM(N,X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ENORM
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SNLS1, SNLS1E, SNSQ and SNSQE
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (ENORM-S, DENORM-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SNLS1, SNLS1E, SNSQ and SNSQE
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (ENORM-S, DENORM-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Given an N-vector X, this function calculates the
   !     Euclidean norm of X.
@@ -34,16 +38,19 @@ REAL FUNCTION ENORM(N,X)
   !
   !       X is an input array of length N.
   !
-  !***SEE ALSO  SNLS1, SNLS1E, SNSQ, SNSQE
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SNLS1, SNLS1E, SNSQ, SNSQE
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  ENORM
+  
   INTEGER N
   REAL X(*)
   INTEGER i
@@ -51,7 +58,7 @@ REAL FUNCTION ENORM(N,X)
     x1max, x3max, zero
   SAVE one, zero, rdwarf, rgiant
   DATA one, zero, rdwarf, rgiant/1.0E0, 0.0E0, 3.834E-20, 1.304E19/
-  !***FIRST EXECUTABLE STATEMENT  ENORM
+  !* FIRST EXECUTABLE STATEMENT  ENORM
   s1 = zero
   s2 = zero
   s3 = zero

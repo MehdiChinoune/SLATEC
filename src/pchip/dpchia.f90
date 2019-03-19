@@ -1,20 +1,27 @@
-!DECK DPCHIA
+!** DPCHIA
 REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPCHIA
-  !***PURPOSE  Evaluate the definite integral of a piecewise cubic
+  !>
+  !***
+  !  Evaluate the definite integral of a piecewise cubic
   !            Hermite function over an arbitrary interval.
-  !***LIBRARY   SLATEC (PCHIP)
-  !***CATEGORY  E3, H2A1B2
-  !***TYPE      DOUBLE PRECISION (PCHIA-S, DPCHIA-D)
-  !***KEYWORDS  CUBIC HERMITE INTERPOLATION, NUMERICAL INTEGRATION, PCHIP,
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Category:**  E3, H2A1B2
+  !***
+  ! **Type:**      DOUBLE PRECISION (PCHIA-S, DPCHIA-D)
+  !***
+  ! **Keywords:**  CUBIC HERMITE INTERPOLATION, NUMERICAL INTEGRATION, PCHIP,
   !             QUADRATURE
-  !***AUTHOR  Fritsch, F. N., (LLNL)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             P.O. Box 808  (L-316)
   !             Livermore, CA  94550
   !             FTS 532-4275, (510) 422-4275
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !          DPCHIA:  Piecewise Cubic Hermite Integrator, Arbitrary limits
   !
@@ -87,9 +94,12 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !              IERR = -4  in case of an error return from DPCHID (which
   !                         should never occur).
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DCHFIE, DPCHID, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DCHFIE, DPCHID, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820730  DATE WRITTEN
   !   820804  Converted to SLATEC library version.
   !   870707  Corrected XERROR calls for d.p. name(s).
@@ -106,7 +116,7 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   930503  Corrected to set VALUE=0 when IERR.lt.0.  (FNF)
   !   930504  Changed DCHFIV to DCHFIE.  (FNF)
-  !***END PROLOGUE  DPCHIA
+  
   !
   !  Programming notes:
   !  1. The error flag from DPCHID is tested, because a logic flaw
@@ -129,7 +139,7 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !  INITIALIZE.
   !
   DATA zero/0.D0/
-  !***FIRST EXECUTABLE STATEMENT  DPCHIA
+  !* FIRST EXECUTABLE STATEMENT  DPCHIA
   value = zero
   !
   !  VALIDITY-CHECK ARGUMENTS.

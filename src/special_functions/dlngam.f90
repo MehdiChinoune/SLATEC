@@ -1,31 +1,41 @@
-!DECK DLNGAM
+!** DLNGAM
 REAL(8) FUNCTION DLNGAM(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DLNGAM
-  !***PURPOSE  Compute the logarithm of the absolute value of the Gamma
+  !>
+  !***
+  !  Compute the logarithm of the absolute value of the Gamma
   !            function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7A
-  !***TYPE      DOUBLE PRECISION (ALNGAM-S, DLNGAM-D, CLNGAM-C)
-  !***KEYWORDS  ABSOLUTE VALUE, COMPLETE GAMMA FUNCTION, FNLIB, LOGARITHM,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7A
+  !***
+  ! **Type:**      DOUBLE PRECISION (ALNGAM-S, DLNGAM-D, CLNGAM-C)
+  !***
+  ! **Keywords:**  ABSOLUTE VALUE, COMPLETE GAMMA FUNCTION, FNLIB, LOGARITHM,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DLNGAM(X) calculates the double precision logarithm of the
   ! absolute value of the Gamma function for double precision
   ! argument X.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, D9LGMC, DGAMMA, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, D9LGMC, DGAMMA, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  !***END PROLOGUE  DLNGAM
+  
   REAL(8) :: X, dxrel, pi, sinpiy, sqpi2l, sq2pil, xmax, y, &
     DGAMMA, D9LGMC, D1MACH, temp
   LOGICAL first
@@ -35,7 +45,7 @@ REAL(8) FUNCTION DLNGAM(X)
   DATA sqpi2l/ + .225791352644727432363097614947441D+0/
   DATA pi/3.14159265358979323846264338327950D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DLNGAM
+  !* FIRST EXECUTABLE STATEMENT  DLNGAM
   IF ( first ) THEN
     temp = 1.D0/LOG(D1MACH(2))
     xmax = temp*D1MACH(2)

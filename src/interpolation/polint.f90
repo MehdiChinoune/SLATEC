@@ -1,15 +1,22 @@
-!DECK POLINT
+!** POLINT
 SUBROUTINE POLINT(N,X,Y,C)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  POLINT
-  !***PURPOSE  Produce the polynomial which interpolates a set of discrete
+  !>
+  !***
+  !  Produce the polynomial which interpolates a set of discrete
   !            data points.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E1B
-  !***TYPE      SINGLE PRECISION (POLINT-S, DPLINT-D)
-  !***KEYWORDS  POLYNOMIAL INTERPOLATION
-  !***AUTHOR  Huddleston, R. E., (SNLL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E1B
+  !***
+  ! **Type:**      SINGLE PRECISION (POLINT-S, DPLINT-D)
+  !***
+  ! **Keywords:**  POLYNOMIAL INTERPOLATION
+  !***
+  ! **Author:**  Huddleston, R. E., (SNLL)
+  !***
+  ! **Description:**
   !
   !     Written by Robert E. Huddleston, Sandia Laboratories, Livermore
   !
@@ -29,21 +36,24 @@ SUBROUTINE POLINT(N,X,Y,C)
   !     Arrays X,Y, and C must be dimensioned at least N in the calling
   !     program.
   !
-  !***REFERENCES  L. F. Shampine, S. M. Davenport and R. E. Huddleston,
+  !***
+  ! **References:**  L. F. Shampine, S. M. Davenport and R. E. Huddleston,
   !                 Curve fitting by polynomials in one variable, Report
   !                 SLA-74-0270, Sandia Laboratories, June 1974.
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   740601  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  POLINT
+  
   REAL C, dif, X, Y
   INTEGER i, k, km1, N
   DIMENSION X(*), Y(*), C(*)
-  !***FIRST EXECUTABLE STATEMENT  POLINT
+  !* FIRST EXECUTABLE STATEMENT  POLINT
   IF ( N<=0 ) THEN
     CALL XERMSG('SLATEC','POLINT','N IS ZERO OR NEGATIVE.',2,1)
     RETURN

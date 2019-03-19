@@ -1,27 +1,37 @@
-!DECK GAMMA
+!** GAMMA
 REAL FUNCTION GAMMA(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  GAMMA
-  !***PURPOSE  Compute the complete Gamma function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7A
-  !***TYPE      SINGLE PRECISION (GAMMA-S, DGAMMA-D, CGAMMA-C)
-  !***KEYWORDS  COMPLETE GAMMA FUNCTION, FNLIB, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the complete Gamma function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7A
+  !***
+  ! **Type:**      SINGLE PRECISION (GAMMA-S, DGAMMA-D, CGAMMA-C)
+  !***
+  ! **Keywords:**  COMPLETE GAMMA FUNCTION, FNLIB, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! GAMMA computes the gamma function at X, where X is not 0, -1, -2, ....
   ! GAMMA and X are single precision.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, GAMLIM, INITS, R1MACH, R9LGMC, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, GAMLIM, INITS, R1MACH, R9LGMC, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  GAMMA
+  
   REAL CSEVL, dxrel, gcs, pi, R1MACH, R9LGMC, sinpiy, &
     sq2pil, X, xmax, xmin, y
   INTEGER i, INITS, n, ngcs
@@ -58,7 +68,7 @@ REAL FUNCTION GAMMA(X)
   !
   ! LANL DEPENDENT CODE REMOVED 81.02.04
   !
-  !***FIRST EXECUTABLE STATEMENT  GAMMA
+  !* FIRST EXECUTABLE STATEMENT  GAMMA
   IF ( first ) THEN
     !
     ! ---------------------------------------------------------------------

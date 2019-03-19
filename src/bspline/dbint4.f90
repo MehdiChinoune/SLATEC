@@ -1,15 +1,22 @@
-!DECK DBINT4
+!** DBINT4
 SUBROUTINE DBINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBINT4
-  !***PURPOSE  Compute the B-representation of a cubic spline
+  !>
+  !***
+  !  Compute the B-representation of a cubic spline
   !            which interpolates given data.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E1A
-  !***TYPE      DOUBLE PRECISION (BINT4-S, DBINT4-D)
-  !***KEYWORDS  B-SPLINE, CUBIC SPLINES, DATA FITTING, INTERPOLATION
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E1A
+  !***
+  ! **Type:**      DOUBLE PRECISION (BINT4-S, DBINT4-D)
+  !***
+  ! **Keywords:**  B-SPLINE, CUBIC SPLINES, DATA FITTING, INTERPOLATION
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract    **** a double precision routine ****
   !
@@ -80,7 +87,8 @@ SUBROUTINE DBINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !         Improper  input is a fatal error
   !         Singular system of equations is a fatal error
   !
-  !***REFERENCES  D. E. Amos, Computation with splines and B-splines,
+  !***
+  ! **References:**  D. E. Amos, Computation with splines and B-splines,
   !                 Report SAND78-1968, Sandia Laboratories, March 1979.
   !               Carl de Boor, Package for calculating with B-splines,
   !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
@@ -88,8 +96,10 @@ SUBROUTINE DBINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !               Carl de Boor, A Practical Guide to Splines, Applied
   !                 Mathematics Series 27, Springer-Verlag, New York,
   !                 1978.
-  !***ROUTINES CALLED  D1MACH, DBNFAC, DBNSLV, DBSPVD, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, DBNFAC, DBNSLV, DBSPVD, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -98,7 +108,7 @@ SUBROUTINE DBINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DBINT4
+  
   !
   INTEGER i, Ibcl, Ibcr, iflag, ilb, ileft, it, iub, iw, iwp, j, &
     jw, K, Kntopt, N, Ndata, ndm, np, nwrow
@@ -106,7 +116,7 @@ SUBROUTINE DBINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
     wdtol, work, X, xl, Y
   REAL(8) :: D1MACH
   DIMENSION X(*), Y(*), T(*), Bcoef(*), W(5,*), vnikx(4,4), work(15)
-  !***FIRST EXECUTABLE STATEMENT  DBINT4
+  !* FIRST EXECUTABLE STATEMENT  DBINT4
   wdtol = D1MACH(4)
   tol = SQRT(wdtol)
   IF ( Ndata<2 ) THEN

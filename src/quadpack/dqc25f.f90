@@ -1,27 +1,34 @@
-!DECK DQC25F
+!** DQC25F
 SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
     Neval,Resabs,Resasc,Momcom,Chebmo)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQC25F
-  !***PURPOSE  To compute the integral I=Integral of F(X) over (A,B)
+  !>
+  !***
+  !  To compute the integral I=Integral of F(X) over (A,B)
   !            Where W(X) = COS(OMEGA*X) or W(X)=SIN(OMEGA*X) and to
   !            compute J = Integral of ABS(F) over (A,B). For small value
   !            of OMEGA or small intervals (A,B) the 15-point GAUSS-KRONRO
   !            Rule is used. Otherwise a generalized CLENSHAW-CURTIS
   !            method is used.
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A2A2
-  !***TYPE      DOUBLE PRECISION (QC25F-S, DQC25F-D)
-  !***KEYWORDS  CLENSHAW-CURTIS METHOD, GAUSS-KRONROD RULES,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A2A2
+  !***
+  ! **Type:**      DOUBLE PRECISION (QC25F-S, DQC25F-D)
+  !***
+  ! **Keywords:**  CLENSHAW-CURTIS METHOD, GAUSS-KRONROD RULES,
   !             INTEGRATION RULES FOR FUNCTIONS WITH COS OR SIN FACTOR,
   !             QUADPACK, QUADRATURE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Integration rules for functions with COS or SIN factor
   !        Standard fortran subroutine
@@ -99,14 +106,17 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
   !
   ! ......................................................................
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DGTSL, DQCHEB, DQK15W, DQWGTF
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DGTSL, DQCHEB, DQK15W, DQWGTF
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DQC25F
+  
   !
   REAL(8) :: A, Abserr, ac, an, an2, as, asap, ass, B, &
     centr, Chebmo, cheb12, cheb24, conc, cons, cospar, &
@@ -162,7 +172,7 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
   !
   !           OFLOW IS THE LARGEST POSITIVE MAGNITUDE.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQC25F
+  !* FIRST EXECUTABLE STATEMENT  DQC25F
   oflow = D1MACH(2)
   !
   centr = 0.5D+00*(B+A)
@@ -248,8 +258,8 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
         !           SOLVE THE TRIDIAGONAL SYSTEM BY MEANS OF GAUSSIAN
         !           ELIMINATION WITH PARTIAL PIVOTING.
         !
-        ! ***       CALL TO DGTSL MUST BE REPLACED BY CALL TO
-        ! ***       DOUBLE PRECISION VERSION OF LINPACK ROUTINE SGTSL
+        !- **       CALL TO DGTSL MUST BE REPLACED BY CALL TO
+        !- **       DOUBLE PRECISION VERSION OF LINPACK ROUTINE SGTSL
         !
         CALL DGTSL(noequ,d1,d,d2,v(4),iers)
       ENDIF
@@ -305,8 +315,8 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
         !           SOLVE THE TRIDIAGONAL SYSTEM BY MEANS OF GAUSSIAN
         !           ELIMINATION WITH PARTIAL PIVOTING.
         !
-        ! ***       CALL TO DGTSL MUST BE REPLACED BY CALL TO
-        ! ***       DOUBLE PRECISION VERSION OF LINPACK ROUTINE SGTSL
+        !- **       CALL TO DGTSL MUST BE REPLACED BY CALL TO
+        !- **       DOUBLE PRECISION VERSION OF LINPACK ROUTINE SGTSL
         !
         CALL DGTSL(noequ,d1,d,d2,v(3),iers)
       ENDIF

@@ -1,14 +1,21 @@
-!DECK CGBFA
+!** CGBFA
 SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CGBFA
-  !***PURPOSE  Factor a band matrix using Gaussian elimination.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2C2
-  !***TYPE      COMPLEX (SGBFA-S, DGBFA-D, CGBFA-C)
-  !***KEYWORDS  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Factor a band matrix using Gaussian elimination.
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2C2
+  !***
+  ! **Type:**      COMPLEX (SGBFA-S, DGBFA-D, CGBFA-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CGBFA factors a complex band matrix by elimination.
   !
@@ -82,10 +89,13 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !           The  ML+MU by ML+MU  upper left triangle and the
   !           ML by ML  lower right triangle are not referenced.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CSCAL, ICAMAX
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CSCAL, ICAMAX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -94,7 +104,7 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CGBFA
+  
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
   COMPLEX Abd(Lda,*)
   !
@@ -103,7 +113,7 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
     mm, nm1
   REAL, EXTERNAL :: CABS1
   !
-  !***FIRST EXECUTABLE STATEMENT  CGBFA
+  !* FIRST EXECUTABLE STATEMENT  CGBFA
   m = Ml + Mu + 1
   Info = 0
   !

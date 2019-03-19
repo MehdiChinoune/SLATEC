@@ -1,31 +1,41 @@
-!DECK D9UPAK
+!** D9UPAK
 SUBROUTINE D9UPAK(X,Y,N)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  D9UPAK
-  !***PURPOSE  Unpack a floating point number X so that X = Y*2**N.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  A6B
-  !***TYPE      DOUBLE PRECISION (R9UPAK-S, D9UPAK-D)
-  !***KEYWORDS  FNLIB, UNPACK
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Unpack a floating point number X so that X = Y*2**N.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  A6B
+  !***
+  ! **Type:**      DOUBLE PRECISION (R9UPAK-S, D9UPAK-D)
+  !***
+  ! **Keywords:**  FNLIB, UNPACK
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   !   Unpack a floating point number X so that X = Y*2.0**N, where
   !   0.5 .LE. ABS(Y) .LT. 1.0.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900820  Corrected code to find Y between 0.5 and 1.0 rather than
   !           between 0.05 and 1.0.  (WRB)
-  !***END PROLOGUE  D9UPAK
+  
   INTEGER N
   REAL(8) :: X, Y, absx
-  !***FIRST EXECUTABLE STATEMENT  D9UPAK
+  !* FIRST EXECUTABLE STATEMENT  D9UPAK
   absx = ABS(X)
   N = 0
   IF ( X==0.0D0 ) THEN

@@ -1,14 +1,18 @@
-!DECK DLSSUD
+!** DLSSUD
 SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
     Kpivot,S,Div,Td,Isflg,Scales)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DLSSUD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBVSUP and DSUDS
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (LSSUDS-S, DLSSUD-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBVSUP and DSUDS
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (LSSUDS-S, DLSSUD-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !    DLSSUD solves the underdetermined system of equations  A Z = B,
   !    where A is N by M and N .LE. M.  In particular, if rank A equals
@@ -22,9 +26,9 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !    If the system of equations are not compatible, only the least
   !    squares solution of minimal length is computed.
   !
-  ! *********************************************************************
+  !- ********************************************************************
   !   INPUT
-  ! *********************************************************************
+  !- ********************************************************************
   !
   !     A -- Contains the matrix of N equations in M unknowns, A remains
   !          unchanged, must be dimensioned NRDA by M.
@@ -65,9 +69,9 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !      DIV,TD,SCALES    storage (except for SCALES which is M).
   !     ISFLG -- Storage for an internal variable.
   !
-  ! *********************************************************************
+  !- ********************************************************************
   !   OUTPUT
-  ! *********************************************************************
+  !- ********************************************************************
   !
   !     IFLAG -- Status indicator
   !            =1 if solution was obtained.
@@ -94,15 +98,19 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !               deficient problems.
   !     SCALES -- Contains the column scaling parameters.
   !
-  ! *********************************************************************
+  !- ********************************************************************
   !
-  !***SEE ALSO  DBVSUP, DSUDS
-  !***REFERENCES  H. A. Watts, Solving linear least squares problems
+  !***
+  ! **See also:**  DBVSUP, DSUDS
+  !***
+  ! **References:**  H. A. Watts, Solving linear least squares problems
   !                 using SODS/SUDS/CODS, Sandia Report SAND77-0683,
   !                 Sandia Laboratories, 1977.
-  !***ROUTINES CALLED  D1MACH, DDOT, DOHTRL, DORTHR, J4SAVE, XERMAX,
+  !***
+  ! **Routines called:**  D1MACH, DDOT, DOHTRL, DORTHR, J4SAVE, XERMAX,
   !                    XERMSG, XGETF, XSETF
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
@@ -110,7 +118,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DLSSUD
+  
   INTEGER J4SAVE
   REAL(8) :: DDOT, D1MACH
   INTEGER i, Iflag, Irank, irp, Iscale, Isflg, j, jr, k, kp, &
@@ -129,7 +137,7 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 310
   !        BEGIN BLOCK PERMITTING ...EXITS TO 80
-  !***FIRST EXECUTABLE STATEMENT  DLSSUD
+  !* FIRST EXECUTABLE STATEMENT  DLSSUD
   uro = D1MACH(4)
   !
   IF ( N>=1.AND.M>=N.AND.Nrda>=N ) THEN

@@ -1,27 +1,34 @@
-!DECK CDIV
+!** CDIV
 SUBROUTINE CDIV(Ar,Ai,Br,Bi,Cr,Ci)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CDIV
-  !***SUBSIDIARY
-  !***PURPOSE  Compute the complex quotient of two complex numbers.
-  !***LIBRARY   SLATEC
-  !***TYPE      COMPLEX (CDIV-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the complex quotient of two complex numbers.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      COMPLEX (CDIV-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Complex division, (CR,CI) = (AR,AI)/(BR,BI)
   !
-  !***SEE ALSO  EISDOC
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  EISDOC
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811101  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  CDIV
+  
   REAL Ar, Ai, Br, Bi, Cr, Ci
   !
   REAL s, ars, ais, brs, bis
-  !***FIRST EXECUTABLE STATEMENT  CDIV
+  !* FIRST EXECUTABLE STATEMENT  CDIV
   s = ABS(Br) + ABS(Bi)
   ars = Ar/s
   ais = Ai/s

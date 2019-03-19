@@ -1,15 +1,22 @@
-!DECK CTRDI
+!** CTRDI
 SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CTRDI
-  !***PURPOSE  Compute the determinant and inverse of a triangular matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2C3, D3C3
-  !***TYPE      COMPLEX (STRDI-S, DTRDI-D, CTRDI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK,
+  !>
+  !***
+  !  Compute the determinant and inverse of a triangular matrix.
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2C3, D3C3
+  !***
+  ! **Type:**      COMPLEX (STRDI-S, DTRDI-D, CTRDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK,
   !             TRIANGULAR MATRIX
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CTRDI computes the determinant and inverse of a complex
   !     triangular matrix.
@@ -54,10 +61,13 @@ SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
   !                a zero diagonal element of T.
   !
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -65,7 +75,7 @@ SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CTRDI
+  
   INTEGER Ldt, N, Job, Info
   COMPLEX T(Ldt,*), Det(2)
   !
@@ -73,7 +83,7 @@ SUBROUTINE CTRDI(T,Ldt,N,Det,Job,Info)
   REAL ten
   INTEGER i, j, k, kb, km1, kp1
   REAL, EXTERNAL :: CABS1
-  !***FIRST EXECUTABLE STATEMENT  CTRDI
+  !* FIRST EXECUTABLE STATEMENT  CTRDI
   !
   !        COMPUTE DETERMINANT
   !

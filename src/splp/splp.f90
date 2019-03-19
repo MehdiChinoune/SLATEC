@@ -1,19 +1,26 @@
-!DECK SPLP
+!** SPLP
 SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Ibasis,Work,Lw,Iwork,Liw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPLP
-  !***PURPOSE  Solve linear programming problems involving at
+  !>
+  !***
+  !  Solve linear programming problems involving at
   !            most a few thousand constraints and variables.
   !            Takes advantage of sparsity in the constraint matrix.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  G2A2
-  !***TYPE      SINGLE PRECISION (SPLP-S, DSPLP-D)
-  !***KEYWORDS  LINEAR CONSTRAINTS, LINEAR OPTIMIZATION,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  G2A2
+  !***
+  ! **Type:**      SINGLE PRECISION (SPLP-S, DSPLP-D)
+  !***
+  ! **Keywords:**  LINEAR CONSTRAINTS, LINEAR OPTIMIZATION,
   !             LINEAR PROGRAMMING, LP, SPARSE CONSTRAINTS
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Hiebert, K. L., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     These are the short usage instructions; for details about
   !     other features, options and methods for defining the matrix
@@ -290,7 +297,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     X(IBASIS(I)).  A value of IBASIS(I) between NVARS+1 and NVARS+
   !     MRELAS corresponds to the variable W(IBASIS(I)-NVARS).
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !     SUBROUTINE SPLP(USRMAT,MRELAS,NVARS,COSTS,PRGOPT,DATTRV,
   !    *           BL,BU,IND,INFO,PRIMAL,DUALS,IBASIS,WORK,LW,IWORK,LIW)
@@ -1524,11 +1531,14 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !     |------------------------------------------------------|
   !     |End of List of SPLP( ) Error and Diagnostic Messages. |
   !     |------------------------------------------------------|
-  !***REFERENCES  R. J. Hanson and K. L. Hiebert, A sparse linear
+  !***
+  ! **References:**  R. J. Hanson and K. L. Hiebert, A sparse linear
   !                 programming subprogram, Report SAND81-0297, Sandia
   !                 National Laboratories, 1981.
-  !***ROUTINES CALLED  SPLPMN, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SPLPMN, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890605  Corrected references to XERRWV.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
@@ -1537,7 +1547,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SPLP
+  
   INTEGER iadbig, ictmax, ictopt, Info, iopt, key, lamat, last, &
     lbasma, lbm, lcolnr, lcsc, lerd, lerp, libb, librc, &
     limat, lipr, Liw, liwork
@@ -1551,7 +1561,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !
   EXTERNAL USRMAT
   !
-  !***FIRST EXECUTABLE STATEMENT  SPLP
+  !* FIRST EXECUTABLE STATEMENT  SPLP
   zero = 0.E0
   iopt = 1
   !

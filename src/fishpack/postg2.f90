@@ -1,26 +1,33 @@
-!DECK POSTG2
+!** POSTG2
 SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  POSTG2
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to POISTG
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (POSTG2-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to POISTG
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (POSTG2-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Subroutine to solve Poisson's equation on a staggered grid.
   !
-  !***SEE ALSO  POISTG
-  !***ROUTINES CALLED  COSGEN, S1MERG, TRI3, TRIX
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  POISTG
+  !***
+  ! **Routines called:**  COSGEN, S1MERG, TRI3, TRIX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   920130  Modified to use merge routine S1MERG rather than deleted
   !           routine MERGE.  (WRB)
-  !***END PROLOGUE  POSTG2
+  
   REAL A, B, B2, B3, Bb, C, D, fi, fnum, fnum2, P, Q, t, Tcos, W, W2, W3
   INTEGER i, i2r, i2rby2, Idimq, ii, ijump, ip, ipstor, j, jm1, &
     jm2, jm3, jp1, jp2, jp3, jr, jstart, jstep, jstop, k
@@ -32,7 +39,7 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
   EQUIVALENCE (k(2),k2)
   EQUIVALENCE (k(3),k3)
   EQUIVALENCE (k(4),k4)
-  !***FIRST EXECUTABLE STATEMENT  POSTG2
+  !* FIRST EXECUTABLE STATEMENT  POSTG2
   np = Nperod
   fnum = 0.5*(np/3)
   fnum2 = 0.5*(np/2)

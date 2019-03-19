@@ -1,27 +1,34 @@
-!DECK DSLUGM
+!** DSLUGM
 SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSLUGM
-  !***PURPOSE  Incomplete LU GMRES iterative sparse Ax=b solver.
+  !>
+  !***
+  !  Incomplete LU GMRES iterative sparse Ax=b solver.
   !            This routine uses the generalized minimum residual
   !            (GMRES) method with incomplete LU factorization for
   !            preconditioning to solve possibly non-symmetric linear
   !            systems of the form: Ax = b.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      DOUBLE PRECISION (SSLUGM-S, DSLUGM-D)
-  !***KEYWORDS  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSLUGM-S, DSLUGM-D)
+  !***
+  ! **Keywords:**  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
   !             NON-SYMMETRIC LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Brown, Peter, (LLNL), pnbrown@llnl.gov
+  !***
+  ! **Author:**  Brown, Peter, (LLNL), pnbrown@llnl.gov
   !           Hindmarsh, Alan, (LLNL), alanh@llnl.gov
   !           Seager, Mark K., (LLNL), seager@llnl.gov
   !             Lawrence Livermore National Laboratory
   !             PO Box 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !      INTEGER   N, NELT, IA(NELT), JA(NELT), ISYM, NSAVE, ITOL
   !      INTEGER   ITMAX, ITER, IERR, IUNIT, LENW, IWORK(LENIW), LENIW
   !      DOUBLE PRECISION B(N), X(N), A(NELT), TOL, ERR, RWORK(LENW)
@@ -30,7 +37,7 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !     $     ITOL, TOL, ITMAX, ITER, ERR, IERR, IUNIT,
   !     $     RWORK, LENW, IWORK, LENIW)
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the Matrix.
   ! B      :IN       Double Precision B(N).
@@ -172,7 +179,7 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !         Length of the integer workspace, IWORK.
   !         LENIW >= NL+NU+4*N+32.
   !
-  ! *Description:
+  !- Description:
   !       DSLUGM solves a linear system A*X = B rewritten in the form:
   !
   !        (SB*A*(M-inverse)*(SX-inverse))*(SX*M*X) = SB*B,
@@ -296,23 +303,26 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Side Effects:
+  !- Side Effects:
   !       The SLAP Triad format (IA, JA, A) is modified internally to be
   !       the SLAP Column format.  See above.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***REFERENCES  1. Peter N. Brown and A. C. Hindmarsh, Reduced Storage
+  !***
+  ! **References:**  1. Peter N. Brown and A. C. Hindmarsh, Reduced Storage
   !                  Matrix Methods in Stiff ODE Systems, Lawrence Liver-
   !                  more National Laboratory Report UCRL-95088, Rev. 1,
   !                  Livermore, California, June 1987.
-  !***ROUTINES CALLED  DCHKW, DGMRES, DS2Y, DSILUS, DSLUI, DSMV
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DCHKW, DGMRES, DS2Y, DSILUS, DSLUI, DSMV
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -324,7 +334,7 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
   !   921019  Corrected NEL to NL.  (FNF)
-  !***END PROLOGUE  DSLUGM
+  
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Parameters ..
@@ -343,7 +353,7 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     myitol, nl, nu
   !     .. External Subroutines ..
   EXTERNAL DCHKW, DGMRES, DS2Y, DSILUS, DSLUI, DSMV
-  !***FIRST EXECUTABLE STATEMENT  DSLUGM
+  !* FIRST EXECUTABLE STATEMENT  DSLUGM
   !
   Ierr = 0
   Err = 0

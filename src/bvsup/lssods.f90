@@ -1,14 +1,18 @@
-!DECK LSSODS
+!** LSSODS
 SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
     Resnrm,Xnorm,Z,R,Div,Td,Scales)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  LSSODS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (LSSODS-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (LSSODS-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     LSSODS solves the same problem as SODS (in fact, it is called by
   !     SODS) but is somewhat more flexible in its use. In particular,
@@ -20,9 +24,9 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !     Modeled after the ALGOL codes in the articles in the REFERENCES
   !     section.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !   INPUT
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     A -- Contains the matrix of M equations in N unknowns and must
   !          be dimensioned NRDA by N. A remains unchanged
@@ -57,9 +61,9 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   ! DIAG,KPIVOT,Z,R, -- Arrays of length N (except for R which is M)
   !   DIV,TD,SCALES     used for internal storage
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !   OUTPUT
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !  IFLAG -- Status indicator
   !            =1 if solution was obtained
@@ -94,18 +98,22 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !           deficient problems
   ! SCALES -- Contains the column scaling parameters
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  BVSUP
-  !***REFERENCES  G. Golub, Numerical methods for solving linear least
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **References:**  G. Golub, Numerical methods for solving linear least
   !                 squares problems, Numerische Mathematik 7, (1965),
   !                 pp. 206-216.
   !               P. Businger and G. Golub, Linear least squares
   !                 solutions by Householder transformations, Numerische
   !                 Mathematik  7, (1965), pp. 269-276.
-  !***ROUTINES CALLED  J4SAVE, OHTROR, ORTHOL, R1MACH, SDOT, SDSDOT,
+  !***
+  ! **Routines called:**  J4SAVE, OHTROR, ORTHOL, R1MACH, SDOT, SDSDOT,
   !                    XERMAX, XERMSG, XGETF, XSETF
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -114,7 +122,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !   900402  Added TYPE section.  (WRB)
   !   910408  Updated the REFERENCES section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  LSSODS
+  
   REAL A, acc, B, Diag, Div, gam, gamma, Q, R, R1MACH, Resnrm, &
     Scales, SDOT, SDSDOT, Td, uro, X, Xnorm, Z, znorm
   REAL znrm0
@@ -124,15 +132,15 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   DIMENSION A(Nrda,*), X(*), B(*), Q(Nrda,*), Diag(*), Z(*), Kpivot(*)&
     , R(*), Div(*), Td(*), Scales(*)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     MACHINE PRECISION (COMPUTER UNIT ROUNDOFF VALUE) IS DEFINED
   !     THE FUNCTION R1MACH.
   !
-  !***FIRST EXECUTABLE STATEMENT  LSSODS
+  !* FIRST EXECUTABLE STATEMENT  LSSODS
   uro = R1MACH(3)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   IF ( N>=1.AND.M>=N.AND.Nrda>=M ) THEN
     IF ( Iter>=0 ) THEN
@@ -208,10 +216,10 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
       R(k) = B(k)
     ENDDO
     !
-    ! **********************************************************************
+    !- *********************************************************************
     !     SOLUTION SECTION
     !     ITERATIVE REFINEMENT OF THE RESIDUAL VECTOR
-    ! **********************************************************************
+    !- *********************************************************************
     !
     DO it = 1, iterp
       Iter = it - 1
@@ -321,9 +329,9 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
         ENDIF
       ENDIF
     ENDDO
-    ! **********************************************************************
+    !- *********************************************************************
     !
-    ! **********************************************************************
+    !- *********************************************************************
     Iflag = 6
     CALL XERMSG('SLATEC','LSSODS',&
       'CONVERGENCE HAS NOT BEEN OBTAINED WITH ALLOWABLE NUMBER OF ITERATIVE IMPROVEMENT STEPS.',8,1)

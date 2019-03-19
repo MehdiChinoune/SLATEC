@@ -1,14 +1,21 @@
-!DECK DLNREL
+!** DLNREL
 REAL(8) FUNCTION DLNREL(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DLNREL
-  !***PURPOSE  Evaluate ln(1+X) accurate in the sense of relative error.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4B
-  !***TYPE      DOUBLE PRECISION (ALNREL-S, DLNREL-D, CLNREL-C)
-  !***KEYWORDS  ELEMENTARY FUNCTIONS, FNLIB, LOGARITHM
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Evaluate ln(1+X) accurate in the sense of relative error.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4B
+  !***
+  ! **Type:**      DOUBLE PRECISION (ALNREL-S, DLNREL-D, CLNREL-C)
+  !***
+  ! **Keywords:**  ELEMENTARY FUNCTIONS, FNLIB, LOGARITHM
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DLNREL(X) calculates the double precision natural logarithm of
   ! (1.0+X) for double precision argument X.  This routine should
@@ -22,15 +29,18 @@ REAL(8) FUNCTION DLNREL(X)
   !                               significant figures required  30.93
   !                                    decimal places required  32.01
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DLNREL
+  
   INTEGER INITDS, nlnrel
   REAL(8) :: alnrcs(43), X, xmin, DCSEVL, D1MACH
   LOGICAL first
@@ -79,7 +89,7 @@ REAL(8) FUNCTION DLNREL(X)
   DATA alnrcs(42)/ - .33410026677731010351377066666666D-30/
   DATA alnrcs(43)/ + .63533936180236187354180266666666D-31/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DLNREL
+  !* FIRST EXECUTABLE STATEMENT  DLNREL
   IF ( first ) THEN
     nlnrel = INITDS(alnrcs,43,0.1*REAL(D1MACH(3)))
     xmin = -1.0D0 + SQRT(D1MACH(4))

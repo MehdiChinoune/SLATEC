@@ -1,25 +1,33 @@
-!DECK ORTHO4
+!** ORTHO4
 SUBROUTINE ORTHO4(Usol,Idmn,Zn,Zm,Pertrb)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ORTHO4
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SEPX4
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (ORTHO4-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SEPX4
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (ORTHO4-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This subroutine orthogonalizes the array USOL with respect to
   !     the constant array in a weighted least squares norm.
   !
-  !***SEE ALSO  SEPX4
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    SPL4
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SEPX4
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    SPL4
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  ORTHO4
+  
   REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, ete, Pertrb, &
     TDLx3, TDLy3, Usol, ute, Zm, Zn
   INTEGER i, Idmn, ifnl, ii, IS, istr, j, jfnl, jj, JS, jstr, K, &
@@ -27,7 +35,7 @@ SUBROUTINE ORTHO4(Usol,Idmn,Zn,Zm,Pertrb)
   COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
     IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   DIMENSION Usol(Idmn,*), Zn(*), Zm(*)
-  !***FIRST EXECUTABLE STATEMENT  ORTHO4
+  !* FIRST EXECUTABLE STATEMENT  ORTHO4
   istr = IS
   ifnl = MS
   jstr = JS

@@ -1,14 +1,18 @@
-!DECK PCHNGS
+!** PCHNGS
 SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PCHNGS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (PCHNGS-S, DPCHNG-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (PCHNGS-S, DPCHNG-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Wisniewski, J. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     PCHNGS LIMITS THE TYPE OF STORAGE TO A SEQUENTIAL SCHEME.
   !     SPARSE MATRIX ELEMENT ALTERATION SUBROUTINE.
@@ -43,16 +47,19 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !     REVISED 811130-1000
   !     REVISED YYMMDD-HHMM
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  IPLOC, PRWPGE, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  IPLOC, PRWPGE, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  !***END PROLOGUE  PCHNGS
+  
   INTEGER i, iend, Ii, il, ilast, iopt, ipl, Iplace, Ircx, istart, &
     Ix, ixlast, j, jj, jstart, k, key, ll, lmx, lpg
   INTEGER n20055, nerr, np
@@ -61,7 +68,7 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   REAL Sx(*), Xval, zero, one, sxlast, sxval
   SAVE zero, one
   DATA zero, one/0.E0, 1.E0/
-  !***FIRST EXECUTABLE STATEMENT  PCHNGS
+  !* FIRST EXECUTABLE STATEMENT  PCHNGS
   iopt = 1
   !
   !     DETERMINE NULL-CASES..

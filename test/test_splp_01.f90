@@ -2,21 +2,27 @@ MODULE TEST37_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK SPLPQX
+  !** SPLPQX
   SUBROUTINE SPLPQX(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SPLPQX
-    !***PURPOSE  Quick check for SPLP.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (SPLPQX-S, DPLPQX-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  PASS, SCOPY, SPLP, USRMAT
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for SPLP.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (SPLPQX-S, DPLPQX-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  PASS, SCOPY, SPLP, USRMAT
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901013  Added additional printout on failure.  (RWC)
-    !***END PROLOGUE  SPLPQX
+    
     REAL bl, bu, d, dattrv, duals, prgopt, primal, USRMAT, work, zero
     INTEGER i, ibasis, ic, icnt, ind, info, Ipass, isoln, iv, ivv, &
       iwork, j, kk, kount, Kprint, liw, Lun, lw, mm, mrelas
@@ -27,7 +33,7 @@ CONTAINS
     DIMENSION ind(60), primal(60), duals(60), ibasis(60)
     DIMENSION work(800), iwork(900), isoln(14)
     DIMENSION d(14,37)
-    !***FIRST EXECUTABLE STATEMENT  SPLPQX
+    !* FIRST EXECUTABLE STATEMENT  SPLPQX
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1 SPLP QUICK CHECK')
     icnt = 1
@@ -255,16 +261,22 @@ CONTAINS
     99004 FORMAT (/' ************ SPLP PASSED ALL TESTS *****************')
     RETURN
   END SUBROUTINE SPLPQX
-  !DECK SBOCQX
+  !** SBOCQX
   SUBROUTINE SBOCQX(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SBOCQX
-    !***PURPOSE  Quick check for SBOCLS.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (SBOCQX-S, DBOCQX-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  (UNKNOWN)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for SBOCLS.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (SBOCQX-S, DBOCQX-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Description:**
     !
     !     MINIMAL TEST DRIVER FOR SBOCLS, BOUNDED CONSTRAINED LEAST
     !     SQUARES SOLVER.  DELIVERS THE VALUE IPASS=1 IF 8 TESTS WERE
@@ -273,13 +285,15 @@ CONTAINS
     !     RUN FOUR BOUNDED LEAST SQUARES PROBLEMS THAT COME FROM THE
     !     DIPLOME WORK OF P. ZIMMERMANN.
     !
-    !***ROUTINES CALLED  R1MACH, SBOCLS, SBOLS, SCOPY, SNRM2
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  R1MACH, SBOCLS, SBOLS, SCOPY, SNRM2
+
+    !* REVISION HISTORY  (YYMMDD)
     !   850310  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901013  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    !***END PROLOGUE  SBOCQX
+    
     INTEGER i, ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
     REAL R1MACH, rnorm, rnormc, SNRM2, sr
@@ -303,7 +317,7 @@ CONTAINS
     DATA ((rhs(i,j),i=1,6),j=1,2)/51., -61., -56., 69., 10., -12., -5., &
       -9., 708., 4165., -13266., 8409./
     DATA (xtrue(j),j=1,9)/1., 2., -1., 3., -4., 1., 32., 30., 31./
-    !***FIRST EXECUTABLE STATEMENT  SBOCQX
+    !* FIRST EXECUTABLE STATEMENT  SBOCQX
     mdw = 11
     mrows = 6
     ncols = 5
@@ -417,24 +431,31 @@ CONTAINS
     99003 FORMAT (3I5,1P,E20.6,' TEST ',A,'ED.')
   END SUBROUTINE SBOCQX
 END MODULE TEST37_MOD
-!DECK TEST37
+!** TEST37
 PROGRAM TEST37
   USE TEST37_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST37
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  G2
-  !***TYPE      SINGLE PRECISION (TEST37-S, TEST38-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  G2
+  !***
+  ! **Type:**      SINGLE PRECISION (TEST37-S, TEST38-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -446,23 +467,26 @@ PROGRAM TEST37
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        SPLP     SBOCLS
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  I1MACH, SBOCQX, SPLPQX, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  I1MACH, SBOCQX, SPLPQX, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST37
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST37
+  !* FIRST EXECUTABLE STATEMENT  TEST37
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

@@ -1,27 +1,34 @@
-!DECK MPUNFL
+!** MPUNFL
 SUBROUTINE MPUNFL(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  MPUNFL
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (MPUNFL-A)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DQDOTA and DQDOTI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (MPUNFL-A)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   ! Called on multiple-precision underflow, i.e.  when the
   ! exponent of 'mp' number X would be less than -M.
   !
-  !***SEE ALSO  DQDOTA, DQDOTI
-  !***ROUTINES CALLED  MPCHK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DQDOTA, DQDOTI
+  !***
+  ! **Routines called:**  MPCHK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  MPUNFL
+  
   INTEGER X(*)
-  !***FIRST EXECUTABLE STATEMENT  MPUNFL
+  !* FIRST EXECUTABLE STATEMENT  MPUNFL
   CALL MPCHK(1,4)
   ! THE UNDERFLOWING NUMBER IS SET TO ZERO
   ! AN ALTERNATIVE WOULD BE TO CALL MPMINR (X) AND RETURN,

@@ -1,16 +1,23 @@
-!DECK IPPERM
+!** IPPERM
 SUBROUTINE IPPERM(Ix,N,Iperm,Ier)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  IPPERM
-  !***PURPOSE  Rearrange a given array according to a prescribed
+  !>
+  !***
+  !  Rearrange a given array according to a prescribed
   !            permutation vector.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  N8
-  !***TYPE      INTEGER (SPPERM-S, DPPERM-D, IPPERM-I, HPPERM-H)
-  !***KEYWORDS  APPLICATION OF PERMUTATION TO DATA VECTOR
-  !***AUTHOR  McClain, M. A., (NIST)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  N8
+  !***
+  ! **Type:**      INTEGER (SPPERM-S, DPPERM-D, IPPERM-I, HPPERM-H)
+  !***
+  ! **Keywords:**  APPLICATION OF PERMUTATION TO DATA VECTOR
+  !***
+  ! **Author:**  McClain, M. A., (NIST)
   !           Rhoads, G. S., (NBS)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !         IPPERM rearranges the data vector IX according to the
   !         permutation IPERM: IX(I) <--- IX(IPERM(I)).  IPERM could come
@@ -26,14 +33,17 @@ SUBROUTINE IPPERM(Ix,N,Iperm,Ier)
   !             =  1  if N is zero or negative,
   !             =  2  if IPERM is not a valid permutation.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   900618  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text.
-  !***END PROLOGUE  IPPERM
+  
   INTEGER Ix(*), N, Iperm(*), i, Ier, indx, indx0, itemp, istrt
-  !***FIRST EXECUTABLE STATEMENT  IPPERM
+  !* FIRST EXECUTABLE STATEMENT  IPPERM
   Ier = 0
   IF ( N<1 ) THEN
     Ier = 1

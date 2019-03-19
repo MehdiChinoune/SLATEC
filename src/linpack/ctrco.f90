@@ -1,15 +1,22 @@
-!DECK CTRCO
+!** CTRCO
 SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CTRCO
-  !***PURPOSE  Estimate the condition number of a triangular matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2C3
-  !***TYPE      COMPLEX (STRCO-S, DTRCO-D, CTRCO-C)
-  !***KEYWORDS  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
+  !>
+  !***
+  !  Estimate the condition number of a triangular matrix.
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2C3
+  !***
+  ! **Type:**      COMPLEX (STRCO-S, DTRCO-D, CTRCO-C)
+  !***
+  ! **Keywords:**  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
   !             TRIANGULAR MATRIX
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CTRCO estimates the condition of a complex triangular matrix.
   !
@@ -51,10 +58,13 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
   !                an approximate null vector in the sense that
   !                NORM(A*Z) = RCOND*NORM(A)*NORM(Z) .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CSSCAL, SCASUM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CSSCAL, SCASUM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -63,7 +73,7 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CTRCO
+  
   INTEGER Ldt, N, Job
   COMPLEX T(Ldt,*), Z(*)
   REAL Rcond
@@ -75,7 +85,7 @@ SUBROUTINE CTRCO(T,Ldt,N,Rcond,Z,Job)
   REAL, EXTERNAL :: CABS1
   COMPLEX, EXTERNAL :: CSIGN1
   !
-  !***FIRST EXECUTABLE STATEMENT  CTRCO
+  !* FIRST EXECUTABLE STATEMENT  CTRCO
   lower = Job==0
   !
   !     COMPUTE 1-NORM OF T

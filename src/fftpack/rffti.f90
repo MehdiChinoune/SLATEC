@@ -1,15 +1,21 @@
-!DECK RFFTI
+!** RFFTI
 SUBROUTINE RFFTI(N,Wsave)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RFFTI
-  !***SUBSIDIARY
-  !***PURPOSE  Initialize a work array for RFFTF and RFFTB.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A1
-  !***TYPE      SINGLE PRECISION (RFFTI-S, CFFTI-C)
-  !***KEYWORDS  FFTPACK, FOURIER TRANSFORM
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Initialize a work array for RFFTF and RFFTB.
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A1
+  !***
+  ! **Type:**      SINGLE PRECISION (RFFTI-S, CFFTI-C)
+  !***
+  ! **Keywords:**  FFTPACK, FOURIER TRANSFORM
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !   ********************************************************************
   !   *   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   NOTICE   *
@@ -38,11 +44,14 @@ SUBROUTINE RFFTI(N,Wsave)
   !           are required for different values of N.  The contents of
   !           WSAVE must not be changed between calls of RFFTF or RFFTB.
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  RFFTI1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  RFFTI1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -54,11 +63,11 @@ SUBROUTINE RFFTI(N,Wsave)
   !           because of non-standard Fortran 77 arguments in the
   !           call to CFFTB1.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  RFFTI
+  
   INTEGER N
   REAL Wsave(*)
   INTEGER :: ifac(15)
-  !***FIRST EXECUTABLE STATEMENT  RFFTI
+  !* FIRST EXECUTABLE STATEMENT  RFFTI
   IF ( N==1 ) RETURN
   ifac = INT( Wsave(2*N+1:2*N+15) )
   CALL RFFTI1(N,Wsave(N+1),ifac)

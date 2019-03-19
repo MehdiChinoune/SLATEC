@@ -1,29 +1,36 @@
-!DECK SSDS
+!** SSDS
 SUBROUTINE SSDS(N,Nelt,Ia,Ja,A,Isym,Dinv)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSDS
-  !***PURPOSE  Diagonal Scaling Preconditioner SLAP Set Up.
+  !>
+  !***
+  !  Diagonal Scaling Preconditioner SLAP Set Up.
   !            Routine to compute the inverse of the diagonal of a matrix
   !            stored in the SLAP Column format.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2E
-  !***TYPE      SINGLE PRECISION (SSDS-S, DSDS-D)
-  !***KEYWORDS  DIAGONAL, SLAP SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2E
+  !***
+  ! **Type:**      SINGLE PRECISION (SSDS-S, DSDS-D)
+  !***
+  ! **Keywords:**  DIAGONAL, SLAP SPARSE
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM
   !     REAL    A(NELT), DINV(N)
   !
   !     CALL SSDS( N, NELT, IA, JA, A, ISYM, DINV )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the Matrix.
   ! NELT   :IN       Integer.
@@ -41,7 +48,7 @@ SUBROUTINE SSDS(N,Nelt,Ia,Ja,A,Isym,Dinv)
   ! DINV   :OUT      Real DINV(N).
   !         Upon return this array holds 1./DIAG(A).
   !
-  ! *Description
+  !- Description
   !       =================== S L A P Column format ==================
   !       This routine  requires that  the matrix A  be stored in  the
   !       SLAP Column format.  In this format the non-zeros are stored
@@ -80,16 +87,19 @@ SUBROUTINE SSDS(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !       supplied with the standard SLAP distribution.
   !
   !
-  ! *Cautions:
+  !- Cautions:
   !       This routine assumes that the diagonal of A is all  non-zero
   !       and that the operation DINV = 1.0/DIAG(A) will not underflow
   !       or overflow.    This  is done so that the  loop  vectorizes.
   !       Matrices  with zero or near zero or very  large entries will
   !       have numerical difficulties  and  must  be fixed before this
   !       routine is called.
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -99,7 +109,7 @@ SUBROUTINE SSDS(N,Nelt,Ia,Ja,A,Isym,Dinv)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  !***END PROLOGUE  SSDS
+  
   !     .. Scalar Arguments ..
   INTEGER Isym, N, Nelt
   !     .. Array Arguments ..
@@ -107,7 +117,7 @@ SUBROUTINE SSDS(N,Nelt,Ia,Ja,A,Isym,Dinv)
   INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER icol
-  !***FIRST EXECUTABLE STATEMENT  SSDS
+  !* FIRST EXECUTABLE STATEMENT  SSDS
   !
   !         Assume the Diagonal elements are the first in each column.
   !         This loop should *VECTORIZE*.  If it does not you may have

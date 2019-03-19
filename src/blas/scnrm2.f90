@@ -1,18 +1,25 @@
-!DECK SCNRM2
+!** SCNRM2
 REAL FUNCTION SCNRM2(N,Cx,Incx)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SCNRM2
-  !***PURPOSE  Compute the unitary norm of a complex vector.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1A3B
-  !***TYPE      COMPLEX (SNRM2-S, DNRM2-D, SCNRM2-C)
-  !***KEYWORDS  BLAS, EUCLIDEAN LENGTH, EUCLIDEAN NORM, L2,
+  !>
+  !***
+  !  Compute the unitary norm of a complex vector.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1A3B
+  !***
+  ! **Type:**      COMPLEX (SNRM2-S, DNRM2-D, SCNRM2-C)
+  !***
+  ! **Keywords:**  BLAS, EUCLIDEAN LENGTH, EUCLIDEAN NORM, L2,
   !             LINEAR ALGEBRA, UNITARY, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -61,19 +68,22 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
   !     DATA CUTLO, CUTHI /8.232D-11,  1.304D19/
   !     DATA CUTLO, CUTHI /4.441E-16,  1.304E19/
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SCNRM2
+  
   INTEGER i, Incx, N, nn
   LOGICAL imag, scale
   INTEGER next
@@ -83,7 +93,7 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
   DATA zero, one/0.0E0, 1.0E0/
   !
   DATA cutlo, cuthi/4.441E-16, 1.304E19/
-  !***FIRST EXECUTABLE STATEMENT  SCNRM2
+  !* FIRST EXECUTABLE STATEMENT  SCNRM2
   IF ( N>0 ) THEN
     !
     next = 20

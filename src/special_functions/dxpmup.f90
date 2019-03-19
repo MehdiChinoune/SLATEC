@@ -1,20 +1,27 @@
-!DECK DXPMUP
+!** DXPMUP
 SUBROUTINE DXPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DXPMUP
-  !***SUBSIDIARY
-  !***PURPOSE  To compute the values of Legendre functions for DXLEGF.
+  !>
+  !***
+  !  To compute the values of Legendre functions for DXLEGF.
   !            This subroutine transforms an array of Legendre functions
   !            of the first kind of negative order stored in array PQA
   !            into Legendre functions of the first kind of positive
   !            order stored in array PQA. The original array is destroyed.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C3A2, C9
-  !***TYPE      DOUBLE PRECISION (XPMUP-S, DXPMUP-D)
-  !***KEYWORDS  LEGENDRE FUNCTIONS
-  !***AUTHOR  Smith, John M., (NBS and George Mason University)
-  !***ROUTINES CALLED  DXADJ
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C3A2, C9
+  !***
+  ! **Type:**      DOUBLE PRECISION (XPMUP-S, DXPMUP-D)
+  !***
+  ! **Keywords:**  LEGENDRE FUNCTIONS
+  !***
+  ! **Author:**  Smith, John M., (NBS and George Mason University)
+  !***
+  ! **Routines called:**  DXADJ
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820728  DATE WRITTEN
   !   890126  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
@@ -22,11 +29,11 @@ SUBROUTINE DXPMUP(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  DXPMUP
+  
   INTEGER i, Ierror, Ipqa, iprod, j, k, l, mu, Mu1, Mu2, n
   REAL(8) :: dmu, nu, Nu1, Nu2, Pqa, prod
   DIMENSION Pqa(*), Ipqa(*)
-  !***FIRST EXECUTABLE STATEMENT  DXPMUP
+  !* FIRST EXECUTABLE STATEMENT  DXPMUP
   Ierror = 0
   nu = Nu1
   mu = Mu1

@@ -1,13 +1,17 @@
-!DECK PPGQ8
+!** PPGQ8
 SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PPGQ8
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to PFQAD
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (PPGQ8-S, DPPGQ8-D)
-  !***AUTHOR  Jones, R. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to PFQAD
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (PPGQ8-S, DPPGQ8-D)
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !        PPGQ8, a modification of GAUS8, integrates the
@@ -51,9 +55,12 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   !            --Abnormal code
   !               2 ANS probably does not meet requested error tolerance.
   !
-  !***SEE ALSO  PFQAD
-  !***ROUTINES CALLED  I1MACH, PPVAL, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  PFQAD
+  !***
+  ! **Routines called:**  I1MACH, PPVAL, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
@@ -62,7 +69,7 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  !***END PROLOGUE  PPGQ8
+  
   !
   INTERFACE
     REAL FUNCTION FUN(X)
@@ -88,7 +95,7 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
   !
   !     INITIALIZE
   !
-  !***FIRST EXECUTABLE STATEMENT  PPGQ8
+  !* FIRST EXECUTABLE STATEMENT  PPGQ8
   k = I1MACH(11)
   anib = R1MACH(5)*k/0.30102000E0
   nbits = INT(anib)

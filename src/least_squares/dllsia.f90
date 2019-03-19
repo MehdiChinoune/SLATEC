@@ -1,18 +1,25 @@
-!DECK DLLSIA
+!** DLLSIA
 SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
     W,Lw,Iwork,Liw,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DLLSIA
-  !***PURPOSE  Solve linear least squares problems by performing a QR
+  !>
+  !***
+  !  Solve linear least squares problems by performing a QR
   !            factorization of the input matrix using Householder
   !            transformations.  Emphasis is put on detecting possible
   !            rank deficiency.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D9, D5
-  !***TYPE      DOUBLE PRECISION (LLSIA-S, DLLSIA-D)
-  !***KEYWORDS  LINEAR LEAST SQUARES, QR FACTORIZATION
-  !***AUTHOR  Manteuffel, T. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D9, D5
+  !***
+  ! **Type:**      DOUBLE PRECISION (LLSIA-S, DLLSIA-D)
+  !***
+  ! **Keywords:**  LINEAR LEAST SQUARES, QR FACTORIZATION
+  !***
+  ! **Author:**  Manteuffel, T. A., (LANL)
+  !***
+  ! **Description:**
   !
   !     DLLSIA computes the least squares solution(s) to the problem AX=B
   !     where A is an M by N matrix with M.GE.N and B is the M by NB
@@ -146,11 +153,14 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   !                   4 - Rank .LT. NP
   !                   5 - Full rank
   !
-  !***REFERENCES  T. Manteuffel, An interval analysis approach to rank
+  !***
+  ! **References:**  T. Manteuffel, An interval analysis approach to rank
   !                 determination in linear least squares problems,
   !                 Report SAND80-0655, Sandia Laboratories, June 1980.
-  !***ROUTINES CALLED  D1MACH, DU11LS, DU12LS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, DU11LS, DU12LS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810801  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891006  Cosmetic changes to prologue.  (WRB)
@@ -160,7 +170,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DLLSIA
+  
   REAL(8) :: A, Ae, B, eps, Re, Rnorm, W
   INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
     Mode, N, n1, n2, n3, n4, n5, Nb, Np
@@ -168,7 +178,7 @@ SUBROUTINE DLLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   DIMENSION A(Mda,*), B(Mdb,*), Re(*), Ae(*), Rnorm(*), W(*)
   INTEGER Iwork(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  DLLSIA
+  !* FIRST EXECUTABLE STATEMENT  DLLSIA
   IF ( Info<0.OR.Info>1 ) THEN
     CALL XERMSG('SLATEC','DLLSIA','INFO OUT OF RANGE',2,1)
     RETURN

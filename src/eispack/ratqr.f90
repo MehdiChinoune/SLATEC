@@ -1,16 +1,23 @@
-!DECK RATQR
+!** RATQR
 SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RATQR
-  !***PURPOSE  Compute the largest or smallest eigenvalues of a symmetric
+  !>
+  !***
+  !  Compute the largest or smallest eigenvalues of a symmetric
   !            tridiagonal matrix using the rational QR method with Newton
   !            correction.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A5, D4C2A
-  !***TYPE      SINGLE PRECISION (RATQR-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A5, D4C2A
+  !***
+  ! **Type:**      SINGLE PRECISION (RATQR-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure RATQR,
   !     NUM. MATH. 11, 264-272(1968) by REINSCH and BAUER.
@@ -111,19 +118,22 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  RATQR
+  
   REAL R1MACH
   INTEGER i, j, k, M, N, ii, jj, k1, Idef, Ierr, jdef
   REAL D(*), E(*), E2(*), W(*), Bd(*)
@@ -133,7 +143,7 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
   !
   SAVE first, machep
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  RATQR
+  !* FIRST EXECUTABLE STATEMENT  RATQR
   IF ( first ) machep = R1MACH(4)
   first = .FALSE.
   !

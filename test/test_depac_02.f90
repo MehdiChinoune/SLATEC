@@ -2,26 +2,31 @@ MODULE TEST44_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK DJAC
+  !** DJAC
   SUBROUTINE DJAC(T,U,Pd,Nrowpd,Rpar,Ipar)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DJAC
-    !***SUBSIDIARY
-    !***PURPOSE  Evaluate Jacobian for DDEBDF quick check.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (JAC-S, DJAC-D)
-    !***AUTHOR  Chow, Jeff (LANL)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Evaluate Jacobian for DDEBDF quick check.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (JAC-S, DJAC-D)
+    !***
+    ! **Author:**  Chow, Jeff (LANL)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   810801  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Minor clean-up of prologue and code and name changed from
     !           DDJAC to DJAC.  (WRB)
-    !***END PROLOGUE  DJAC
+    
     INTEGER Ipar, Nrowpd
     REAL(8) :: Pd, r, r5, Rpar, rsq, T, U, u1sq, u2sq, u1u2
     DIMENSION U(*), Pd(Nrowpd,*), Rpar(*), Ipar(*)
-    !***FIRST EXECUTABLE STATEMENT  DJAC
+    !* FIRST EXECUTABLE STATEMENT  DJAC
     u1sq = U(1)*U(1)
     u2sq = U(2)*U(2)
     u1u2 = U(1)*U(2)
@@ -35,21 +40,26 @@ CONTAINS
     Pd(1,3) = 1.D0
     Pd(2,4) = 1.D0
   END SUBROUTINE DJAC
-  !DECK DFDEQC
+  !** DFDEQC
   SUBROUTINE DFDEQC(T,U,Uprime,Rpar,Ipar)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DFDEQC
-    !***SUBSIDIARY
-    !***PURPOSE  Derivative evaluator for DDEPAC quick checks.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (FDEQC-S, DFDEQC-D)
-    !***AUTHOR  Chow, Jeff, (LANL)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Derivative evaluator for DDEPAC quick checks.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (FDEQC-S, DFDEQC-D)
+    !***
+    ! **Author:**  Chow, Jeff, (LANL)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   810801  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Name changed from DDF to DFDEQC.  (WRB)
-    !***END PROLOGUE  DFDEQC
+    
     !
     !     Declare arguments.
     !
@@ -59,7 +69,7 @@ CONTAINS
     !     Declare local variables.
     !
     REAL(8) :: r, rsq, r3
-    !***FIRST EXECUTABLE STATEMENT  DFDEQC
+    !* FIRST EXECUTABLE STATEMENT  DFDEQC
     rsq = U(1)*U(1) + U(2)*U(2)
     r = SQRT(rsq)
     r3 = rsq*r
@@ -68,24 +78,30 @@ CONTAINS
     Uprime(3) = -(U(1)/r3)
     Uprime(4) = -(U(2)/r3)
   END SUBROUTINE DFDEQC
-  !DECK QXDABM
+  !** QXDABM
   SUBROUTINE QXDABM(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QXDABM
-    !***PURPOSE  Test the DEPAC routine DDEABM.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (QXABM-S, QXDABM-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Chow, Jeff, (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Test the DEPAC routine DDEABM.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (QXABM-S, QXDABM-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Chow, Jeff, (LANL)
+    !***
+    ! **Description:**
     !
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL QXDABM (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN   :IN  is the unit number to which output is to be written.
     !
@@ -95,7 +111,7 @@ CONTAINS
     !     IPASS:OUT  will contain a pass/fail flag.  IPASS=1 is good.
     !                IPASS=0 indicates one or more tests failed.
     !
-    ! *Description:
+    !- Description:
     !
     !   DDEABM is tested by solving the equations of motion of a body
     !   moving in a plane about a spherical earth, namely
@@ -107,13 +123,15 @@ CONTAINS
     !           Y(0) = 0
     !           (D/DT)Y(0) = 1.
     !
-    !***ROUTINES CALLED  D1MACH, DDEABM, DFDEQC
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH, DDEABM, DFDEQC
+
+    !* REVISION HISTORY  (YYMMDD)
     !   810801  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-    !***END PROLOGUE  QXDABM
+    
     !
     !     Declare arguments.
     !
@@ -124,7 +142,7 @@ CONTAINS
     INTEGER idid, info(15), ipar, iwork(51), n, liw, lrw, nstep
     REAL(8) :: abserr, D1MACH, r, relerr, reltol, rpar, rwork(214)&
       , t, tout, u(4)
-    !***FIRST EXECUTABLE STATEMENT  QXDABM
+    !* FIRST EXECUTABLE STATEMENT  QXDABM
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     ! FORMATs.
@@ -185,24 +203,30 @@ CONTAINS
       ENDIF
     ENDDO
   END SUBROUTINE QXDABM
-  !DECK QXDBDF
+  !** QXDBDF
   SUBROUTINE QXDBDF(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QXDBDF
-    !***PURPOSE  Test the DEPAC routine DDEBDF.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (QXBDF-S, QXDBDF-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Chow, Jeff, (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Test the DEPAC routine DDEBDF.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (QXBDF-S, QXDBDF-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Chow, Jeff, (LANL)
+    !***
+    ! **Description:**
     !
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL QXDBDF (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN   :IN  is the unit number to which output is to be written.
     !
@@ -212,7 +236,7 @@ CONTAINS
     !     IPASS:OUT  will contain a pass/fail flag.  IPASS=1 is good.
     !                IPASS=0 indicates one or more tests failed.
     !
-    ! *Description:
+    !- Description:
     !
     !   DDEBDF is tested by solving the equations of motion of a body
     !   moving in a plane about a spherical earth, namely
@@ -224,13 +248,15 @@ CONTAINS
     !           Y(0) = 0
     !           (D/DT)Y(0) = 1.
     !
-    !***ROUTINES CALLED  D1MACH, DDEBDF, DFDEQC, DJAC
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH, DDEBDF, DFDEQC, DJAC
+
+    !* REVISION HISTORY  (YYMMDD)
     !   810801  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-    !***END PROLOGUE  QXDBDF
+    
     !
     !     Declare arguments.
     !
@@ -241,7 +267,7 @@ CONTAINS
     INTEGER idid, info(15), ipar, iwork(60), n, liw, lrw, nstep
     REAL(8) :: abserr, D1MACH, r, reltol, relerr, rpar, rwork(306)&
       , t, tout, u(4)
-    !***FIRST EXECUTABLE STATEMENT  QXDBDF
+    !* FIRST EXECUTABLE STATEMENT  QXDBDF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     ! FORMATs.
@@ -304,23 +330,30 @@ CONTAINS
       ENDIF
     ENDDO
   END SUBROUTINE QXDBDF
-  !DECK QXDBVS
+  !** QXDBVS
   SUBROUTINE QXDBVS(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QXDBVS
-    !***PURPOSE  Quick check for DBVSUP.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (QXBVSP-S, QXDBVS-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  DBVSUP, PASS
-    !***COMMON BLOCKS    DSAVEX
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for DBVSUP.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (QXBVSP-S, QXDBVS-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  DBVSUP, PASS
+    !***
+    ! COMMON BLOCKS    DSAVEX
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901014  Made editorial changes and added correct result to
     !           output. (RWC)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    !***END PROLOGUE  QXDBVS
+    
     INTEGER i, iflag, igofx, Ipass, ipss, j, kont, kount, Kprint, l, &
       Lun, ncomp, ndiw, ndw, neqivp, nfc, nic, nrowa, nrowb, nrowy
     INTEGER numort, nxpts
@@ -351,7 +384,7 @@ CONTAINS
       xpts(14), xpts(15)/60.0D+00, 55.0D+00, 50.0D+00, 45.0D+00, &
       40.0D+00, 38.0D+00, 36.0D+00, 34.0D+00, 32.0D+00, 31.0D+00, &
       30.8D+00, 30.6D+00, 30.4D+00, 30.2D+00, 30.0D+00/
-    !***FIRST EXECUTABLE STATEMENT  QXDBVS
+    !* FIRST EXECUTABLE STATEMENT  QXDBVS
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
       !
@@ -567,24 +600,30 @@ CONTAINS
     RETURN
     99013 FORMAT (/' IFLAG SHOULD BE -2, IFLAG =',I3)
   END SUBROUTINE QXDBVS
-  !DECK QXDRKF
+  !** QXDRKF
   SUBROUTINE QXDRKF(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QXDRKF
-    !***PURPOSE  Test the DEPAC routine DDERKF.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (QXRKF-S, QXDRKF-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Chow, Jeff, (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Test the DEPAC routine DDERKF.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (QXRKF-S, QXDRKF-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Chow, Jeff, (LANL)
+    !***
+    ! **Description:**
     !
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL QXDRKF (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN   :IN  is the unit number to which output is to be written.
     !
@@ -594,7 +633,7 @@ CONTAINS
     !     IPASS:OUT  will contain a pass/fail flag.  IPASS=1 is good.
     !                IPASS=0 indicates one or more tests failed.
     !
-    ! *Description:
+    !- Description:
     !
     !   DDERKF is tested by solving the equations of motion of a body
     !   moving in a plane about a spherical earth, namely
@@ -606,13 +645,15 @@ CONTAINS
     !           Y(0) = 0
     !           (D/DT)Y(0) = 1.
     !
-    !***ROUTINES CALLED  D1MACH, DDERKF, DFDEQC
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH, DDERKF, DFDEQC
+
+    !* REVISION HISTORY  (YYMMDD)
     !   810801  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-    !***END PROLOGUE  QXDRKF
+    
     !
     !     Declare arguments.
     !
@@ -622,7 +663,7 @@ CONTAINS
     !
     INTEGER idid, info(15), ipar, iwork(34), n, liw, lrw, nstep
     REAL(8) :: abserr, D1MACH, r, relerr, reltol, rpar, rwork(61), t, tout, u(4)
-    !***FIRST EXECUTABLE STATEMENT  QXDRKF
+    !* FIRST EXECUTABLE STATEMENT  QXDRKF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     ! FORMATs.
@@ -684,24 +725,31 @@ CONTAINS
     ENDDO
   END SUBROUTINE QXDRKF
 END MODULE TEST44_MOD
-!DECK TEST44
+!** TEST44
 PROGRAM TEST44
   USE TEST44_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST44
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  I1
-  !***TYPE      DOUBLE PRECISION (TEST43-S, TEST44-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  I1
+  !***
+  ! **Type:**      DOUBLE PRECISION (TEST43-S, TEST44-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -713,24 +761,27 @@ PROGRAM TEST44
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        DDEABM   DDEBDF   DDERKF   DBVSUP
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  I1MACH, QXDABM, QXDBDF, QXDBVS, QXDRKF, XERMAX,
+  !***
+  ! **Routines called:**  I1MACH, QXDABM, QXDBDF, QXDBVS, QXDRKF, XERMAX,
   !                    XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST44
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST44
+  !* FIRST EXECUTABLE STATEMENT  TEST44
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

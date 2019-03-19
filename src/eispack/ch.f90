@@ -1,15 +1,22 @@
-!DECK CH
+!** CH
 SUBROUTINE CH(Nm,N,Ar,Ai,W,Matz,Zr,Zi,Fv1,Fv2,Fm1,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CH
-  !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
+  !>
+  !***
+  !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a complex Hermitian matrix.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A3
-  !***TYPE      COMPLEX (RS-S, CH-C)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A3
+  !***
+  ! **Type:**      COMPLEX (RS-S, CH-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine calls the recommended sequence of
   !     subroutines from the eigensystem subroutine package (EISPACK)
@@ -64,24 +71,27 @@ SUBROUTINE CH(Nm,N,Ar,Ai,W,Matz,Zr,Zi,Fv1,Fv2,Fm1,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  HTRIBK, HTRIDI, TQL2, TQLRAT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  HTRIBK, HTRIDI, TQL2, TQLRAT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CH
+  
   !
   INTEGER i, j, N, Nm, Ierr, Matz
   REAL Ar(Nm,*), Ai(Nm,*), W(*), Zr(Nm,*), Zi(Nm,*)
   REAL Fv1(*), Fv2(*), Fm1(2,*)
   !
-  !***FIRST EXECUTABLE STATEMENT  CH
+  !* FIRST EXECUTABLE STATEMENT  CH
   IF ( N<=Nm ) THEN
     !
     CALL HTRIDI(Nm,N,Ar,Ai,W,Fv1,Fv2,Fm1)

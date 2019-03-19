@@ -1,15 +1,22 @@
-!DECK TRED2
+!** TRED2
 SUBROUTINE TRED2(Nm,N,A,D,E,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TRED2
-  !***PURPOSE  Reduce a real symmetric matrix to a symmetric tridiagonal
+  !>
+  !***
+  !  Reduce a real symmetric matrix to a symmetric tridiagonal
   !            matrix using and accumulating orthogonal transformations.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C1B1
-  !***TYPE      SINGLE PRECISION (TRED2-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C1B1
+  !***
+  ! **Type:**      SINGLE PRECISION (TRED2-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure TRED2,
   !     NUM. MATH. 11, 181-195(1968) by Martin, Reinsch, and Wilkinson.
@@ -52,24 +59,27 @@ SUBROUTINE TRED2(Nm,N,A,D,E,Z)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  TRED2
+  
   !
   INTEGER i, j, k, l, N, ii, Nm, jp1
   REAL A(Nm,*), D(*), E(*), Z(Nm,*)
   REAL f, g, h, hh, scale
   !
-  !***FIRST EXECUTABLE STATEMENT  TRED2
+  !* FIRST EXECUTABLE STATEMENT  TRED2
   DO i = 1, N
     !
     DO j = 1, i

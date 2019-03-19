@@ -1,15 +1,22 @@
-!DECK SNBDI
+!** SNBDI
 SUBROUTINE SNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SNBDI
-  !***PURPOSE  Compute the determinant of a band matrix using the factors
+  !>
+  !***
+  !  Compute the determinant of a band matrix using the factors
   !            computed by SNBCO or SNBFA.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D3A2
-  !***TYPE      SINGLE PRECISION (SNBDI-S, DNBDI-D, CNBDI-C)
-  !***KEYWORDS  BANDED, DETERMINANT, LINEAR EQUATIONS, NONSYMMETRIC
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D3A2
+  !***
+  ! **Type:**      SINGLE PRECISION (SNBDI-S, DNBDI-D, CNBDI-C)
+  !***
+  ! **Keywords:**  BANDED, DETERMINANT, LINEAR EQUATIONS, NONSYMMETRIC
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !     SNBDI computes the determinant of a band matrix
   !     using the factors computed by SNBCO or SNBFA.
@@ -44,22 +51,25 @@ SUBROUTINE SNBDI(Abe,Lda,N,Ml,Mu,Ipvt,Det)
   !                with  1.0 .LE. ABS(DET(1)) .LT. 10.0
   !                or  DET(1) = 0.0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800725  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SNBDI
+  
   INTEGER Lda, N, Ml, Mu, Ipvt(*)
   REAL Abe(Lda,*), Det(2)
   !
   REAL ten
   INTEGER i
-  !***FIRST EXECUTABLE STATEMENT  SNBDI
+  !* FIRST EXECUTABLE STATEMENT  SNBDI
   Det(1) = 1.0E0
   Det(2) = 0.0E0
   ten = 10.0E0

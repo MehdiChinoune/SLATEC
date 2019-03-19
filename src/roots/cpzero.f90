@@ -1,14 +1,21 @@
-!DECK CPZERO
+!** CPZERO
 SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPZERO
-  !***PURPOSE  Find the zeros of a polynomial with complex coefficients.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  F1A1B
-  !***TYPE      COMPLEX (RPZERO-S, CPZERO-C)
-  !***KEYWORDS  POLYNOMIAL ROOTS, POLYNOMIAL ZEROS, REAL ROOTS
-  !***AUTHOR  Kahaner, D. K., (NBS)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Find the zeros of a polynomial with complex coefficients.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  F1A1B
+  !***
+  ! **Type:**      COMPLEX (RPZERO-S, CPZERO-C)
+  !***
+  ! **Keywords:**  POLYNOMIAL ROOTS, POLYNOMIAL ZEROS, REAL ROOTS
+  !***
+  ! **Author:**  Kahaner, D. K., (NBS)
+  !***
+  ! **Description:**
   !
   !      Find the zeros of the complex polynomial
   !         P(Z)= A(1)*Z**N + A(2)*Z**(N-1) +...+ A(N+1)
@@ -41,19 +48,22 @@ SUBROUTINE CPZERO(In,A,R,T,Iflg,S)
   !                after 25*N iterations.  Best current estimates of the
   !                zeros are in R(I).  Error bounds are not calculated.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CPEVL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CPEVL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810223  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CPZERO
+  
   INTEGER i, Iflg, imax, In, j, n, n1, nit, nmax, nr
   REAL u, v, x
   REAL S(*)
   COMPLEX R(*), T(*), A(*), pn(1), temp(1)
-  !***FIRST EXECUTABLE STATEMENT  CPZERO
+  !* FIRST EXECUTABLE STATEMENT  CPZERO
   IF ( In<=0.OR.ABS(A(1))==0.0 ) THEN
     Iflg = 1
     RETURN

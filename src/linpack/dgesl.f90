@@ -1,15 +1,22 @@
-!DECK DGESL
+!** DGESL
 SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DGESL
-  !***PURPOSE  Solve the real system A*X=B or TRANS(A)*X=B using the
+  !>
+  !***
+  !  Solve the real system A*X=B or TRANS(A)*X=B using the
   !            factors computed by DGECO or DGEFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2A1
-  !***TYPE      DOUBLE PRECISION (SGESL-S, DGESL-D, CGESL-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (SGESL-S, DGESL-D, CGESL-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DGESL solves the double precision system
   !     A * X = B  or  TRANS(A) * X = B
@@ -58,10 +65,13 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
   !              CALL DGESL(A,LDA,N,IPVT,C(1,J),0)
   !        10 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -69,13 +79,13 @@ SUBROUTINE DGESL(A,Lda,N,Ipvt,B,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DGESL
+  
   INTEGER Lda, N, Ipvt(*), Job
   REAL(8) :: A(Lda,*), B(*)
   !
   REAL(8) :: DDOT, t
   INTEGER k, kb, l, nm1
-  !***FIRST EXECUTABLE STATEMENT  DGESL
+  !* FIRST EXECUTABLE STATEMENT  DGESL
   nm1 = N - 1
   IF ( Job/=0 ) THEN
     !

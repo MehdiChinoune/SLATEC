@@ -1,25 +1,33 @@
-!DECK SVCO
+!** SVCO
 SUBROUTINE SVCO(Rsav,Isav)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SVCO
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SVCO-S, DSVCO-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SVCO-S, DSVCO-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   SVCO transfers data from a common block to arrays within the
   !   integrator package DEBDF.
   !
-  !***SEE ALSO  DEBDF
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    DEBDF1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DEBDF
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    DEBDF1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  SVCO
+  
   !
   !
   !-----------------------------------------------------------------------
@@ -36,7 +44,7 @@ SUBROUTINE SVCO(Rsav,Isav)
   SAVE lenrls, lenils
   DATA lenrls/218/, lenils/33/
   !
-  !***FIRST EXECUTABLE STATEMENT  SVCO
+  !* FIRST EXECUTABLE STATEMENT  SVCO
   DO i = 1, lenrls
     Rsav(i) = RLS(i)
   ENDDO

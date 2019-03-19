@@ -1,13 +1,17 @@
-!DECK CUOIK
+!** CUOIK
 SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CUOIK
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBESH, CBESI and CBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CUOIK-A, ZUOIK-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBESH, CBESI and CBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CUOIK-A, ZUOIK-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     CUOIK COMPUTES THE LEADING TERMS OF THE UNIFORM ASYMPTOTIC
   !     EXPANSIONS FOR THE I AND K FUNCTIONS AND COMPARES THEM
@@ -29,12 +33,15 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   !     IKFLG=2 AND 0.LT.NUF.LT.N NOT CONSIDERED. Y MUST BE SET BY
   !             ANOTHER ROUTINE
   !
-  !***SEE ALSO  CBESH, CBESI, CBESK
-  !***ROUTINES CALLED  CUCHK, CUNHJ, CUNIK, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBESH, CBESI, CBESK
+  !***
+  ! **Routines called:**  CUCHK, CUNHJ, CUNIK, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CUOIK
+  
   COMPLEX arg, asum, bsum, cwrk, cz, czero, phi, sum, Y, Z, zb, &
     zeta1, zeta2, zn, zr
   REAL aarg, aic, Alim, aphi, ascle, ax, ay, Elim, fnn, Fnu, gnn, &
@@ -43,7 +50,7 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   DIMENSION Y(N), cwrk(16)
   DATA czero/(0.0E0,0.0E0)/
   DATA aic/1.265512123484645396E+00/
-  !***FIRST EXECUTABLE STATEMENT  CUOIK
+  !* FIRST EXECUTABLE STATEMENT  CUOIK
   Nuf = 0
   nn = N
   x = REAL(Z)

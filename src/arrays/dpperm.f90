@@ -1,16 +1,23 @@
-!DECK DPPERM
+!** DPPERM
 SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPPERM
-  !***PURPOSE  Rearrange a given array according to a prescribed
+  !>
+  !***
+  !  Rearrange a given array according to a prescribed
   !            permutation vector.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  N8
-  !***TYPE      DOUBLE PRECISION (SPPERM-S, DPPERM-D, IPPERM-I, HPPERM-H)
-  !***KEYWORDS  PERMUTATION, REARRANGEMENT
-  !***AUTHOR  McClain, M. A., (NIST)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  N8
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPPERM-S, DPPERM-D, IPPERM-I, HPPERM-H)
+  !***
+  ! **Keywords:**  PERMUTATION, REARRANGEMENT
+  !***
+  ! **Author:**  McClain, M. A., (NIST)
   !           Rhoads, G. S., (NBS)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !         DPPERM rearranges the data vector DX according to the
   !         permutation IPERM: DX(I) <--- DX(IPERM(I)).  IPERM could come
@@ -27,15 +34,18 @@ SUBROUTINE DPPERM(Dx,N,Iperm,Ier)
   !             =  1  if N is zero or negative,
   !             =  2  if IPERM is not a valid permutation.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   901004  DATE WRITTEN
   !   920507  Modified by M. McClain to revise prologue text.
-  !***END PROLOGUE  DPPERM
+  
   INTEGER N, Iperm(*), i, Ier, indx, indx0, istrt
   REAL(8) :: Dx(*), dtemp
-  !***FIRST EXECUTABLE STATEMENT  DPPERM
+  !* FIRST EXECUTABLE STATEMENT  DPPERM
   Ier = 0
   IF ( N<1 ) THEN
     Ier = 1

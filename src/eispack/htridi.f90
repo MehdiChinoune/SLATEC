@@ -1,16 +1,23 @@
-!DECK HTRIDI
+!** HTRIDI
 SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HTRIDI
-  !***PURPOSE  Reduce a complex Hermitian matrix to a real symmetric
+  !>
+  !***
+  !  Reduce a complex Hermitian matrix to a real symmetric
   !            tridiagonal matrix using unitary similarity
   !            transformations.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C1B1
-  !***TYPE      SINGLE PRECISION (HTRIDI-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C1B1
+  !***
+  ! **Type:**      SINGLE PRECISION (HTRIDI-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of a complex analogue of
   !     the ALGOL procedure TRED1, NUM. MATH. 11, 181-195(1968)
@@ -64,25 +71,28 @@ SUBROUTINE HTRIDI(Nm,N,Ar,Ai,D,E,E2,Tau)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  PYTHAG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  PYTHAG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  HTRIDI
+  
   !
   INTEGER i, j, k, l, N, ii, Nm, jp1
   REAL Ar(Nm,*), Ai(Nm,*), D(*), E(*), E2(*), Tau(2,*)
   REAL f, g, h, fi, gi, hh, si, scale
   REAL PYTHAG
   !
-  !***FIRST EXECUTABLE STATEMENT  HTRIDI
+  !* FIRST EXECUTABLE STATEMENT  HTRIDI
   Tau(1,N) = 1.0E0
   Tau(2,N) = 0.0E0
   !

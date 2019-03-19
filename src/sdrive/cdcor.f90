@@ -1,20 +1,24 @@
-!DECK CDCOR
+!** CDCOR
 SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
     Nq,T,USERS,Y,Yh,Ywt,Evalfa,Save1,Save2,A,D,Jstate)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CDCOR
-  !***SUBSIDIARY
-  !***PURPOSE  Subroutine CDCOR computes corrections to the Y array.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***TYPE      COMPLEX (SDCOR-S, DDCOR-D, CDCOR-C)
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !>
+  !***
+  !  Subroutine CDCOR computes corrections to the Y array.
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Type:**      COMPLEX (SDCOR-S, DDCOR-D, CDCOR-C)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  In the case of functional iteration, update Y directly from the
   !  result of the last call to F.
@@ -23,11 +27,13 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !  coefficient matrix, using the LU decomposition if MITER is 1, 2, 4,
   !  or 5.
   !
-  !***ROUTINES CALLED  CGBSL, CGESL, SCNRM2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CGBSL, CGESL, SCNRM2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  CDCOR
+  
   INTEGER i, Ierror, iflag, Impl, j, Jstate, Matdim, Miter, Ml, &
     Mu, mw, N, Nde, Nq
   COMPLEX A(Matdim,*), Dfdy(Matdim,*), Save1(*), Save2(*), Y(*), &
@@ -35,7 +41,7 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   REAL D, El(13,12), H, SCNRM2, T
   INTEGER Ipvt(*)
   LOGICAL Evalfa
-  !***FIRST EXECUTABLE STATEMENT  CDCOR
+  !* FIRST EXECUTABLE STATEMENT  CDCOR
   IF ( Miter==0 ) THEN
     IF ( Ierror==1.OR.Ierror==5 ) THEN
       DO i = 1, N

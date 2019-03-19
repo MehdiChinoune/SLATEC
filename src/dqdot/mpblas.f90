@@ -1,13 +1,17 @@
-!DECK MPBLAS
+!** MPBLAS
 SUBROUTINE MPBLAS(I1)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  MPBLAS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (MPBLAS-A)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DQDOTA and DQDOTI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (MPBLAS-A)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This subroutine is called to set up Brent's 'mp' package
   !     for use by the extended precision inner products from the BLAS.
@@ -20,16 +24,21 @@ SUBROUTINE MPBLAS(I1)
   !     to be slightly longer than the longest INTEGER array needed on
   !     any machine that we are currently aware of.
   !
-  !***SEE ALSO  DQDOTA, DQDOTI
-  !***REFERENCES  R. P. Brent, A Fortran multiple-precision arithmetic
+  !***
+  ! **See also:**  DQDOTA, DQDOTI
+  !***
+  ! **References:**  R. P. Brent, A Fortran multiple-precision arithmetic
   !                 package, ACM Transactions on Mathematical Software 4,
   !                 1 (March 1978), pp. 57-70.
   !               R. P. Brent, MP, a Fortran multiple-precision arithmetic
   !                 package, Algorithm 524, ACM Transactions on Mathema-
   !                 tical Software 4, 1 (March 1978), pp. 71-81.
-  !***ROUTINES CALLED  I1MACH, XERMSG
-  !***COMMON BLOCKS    MPCOM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  I1MACH, XERMSG
+  !***
+  ! COMMON BLOCKS    MPCOM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -38,10 +47,10 @@ SUBROUTINE MPBLAS(I1)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8, and calculate
   !               size for Quad Precision for 2x DP.  (RWC)
-  !***END PROLOGUE  MPBLAS
+  
   INTEGER I1, I1MACH, MPB, mpbexp, MPLun, MPM, MPMxr, MPR, MPT
   COMMON /MPCOM / MPB, MPT, MPM, MPLun, MPMxr, MPR(30)
-  !***FIRST EXECUTABLE STATEMENT  MPBLAS
+  !* FIRST EXECUTABLE STATEMENT  MPBLAS
   I1 = 1
   !
   !     For full extended precision accuracy, MPB should be as large as

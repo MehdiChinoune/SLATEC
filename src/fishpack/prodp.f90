@@ -1,13 +1,17 @@
-!DECK PRODP
+!** PRODP
 SUBROUTINE PRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PRODP
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BLKTRI
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (PRODP-S, PROCP-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BLKTRI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (PRODP-S, PROCP-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   ! PRODP applies a sequence of matrix operations to the vector X and
   ! stores the result in Y (periodic boundary conditions).
@@ -22,18 +26,21 @@ SUBROUTINE PRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
   ! D,W,U      are working arrays.
   ! IS         determines whether or not a change in sign is made.
   !
-  !***SEE ALSO  BLKTRI
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BLKTRI
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  PRODP
+  
   REAL A, Aa, am, B, Bd, bh, Bm1, Bm2, C, D, den, rt, U, v, W, X, Y, ym
   INTEGER ia, ibr, id, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, Nm2
   DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), U(*), Bd(*), Bm1(*)&
     , Bm2(*), Aa(*), W(*)
-  !***FIRST EXECUTABLE STATEMENT  PRODP
+  !* FIRST EXECUTABLE STATEMENT  PRODP
   DO j = 1, M
     Y(j) = X(j)
     W(j) = Y(j)

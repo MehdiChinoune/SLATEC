@@ -1,27 +1,32 @@
-!DECK DDSCL
+!** DDSCL
 SUBROUTINE DDSCL(Hmax,N,Nq,Rmax,H,Rc,Rh,Yh)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DDSCL
-  !***SUBSIDIARY
-  !***PURPOSE  Subroutine DDSCL rescales the YH array whenever the step
+  !>
+  !***
+  !  Subroutine DDSCL rescales the YH array whenever the step
   !            size is changed.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***TYPE      DOUBLE PRECISION (SDSCL-S, DDSCL-D, CDSCL-C)
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Type:**      DOUBLE PRECISION (SDSCL-S, DDSCL-D, CDSCL-C)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  DDSCL
+  
   INTEGER i, j, N, Nq
   REAL(8) :: H, Hmax, Rc, Rh, Rmax, r1, Yh(N,*)
-  !***FIRST EXECUTABLE STATEMENT  DDSCL
+  !* FIRST EXECUTABLE STATEMENT  DDSCL
   IF ( H<1.D0 ) THEN
     Rh = MIN(ABS(H)*Rh,ABS(H)*Rmax,Hmax)/ABS(H)
   ELSE

@@ -1,16 +1,23 @@
-!DECK IMTQLV
+!** IMTQLV
 SUBROUTINE IMTQLV(N,D,E,E2,W,Ind,Ierr,Rv1)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  IMTQLV
-  !***PURPOSE  Compute the eigenvalues of a symmetric tridiagonal matrix
+  !>
+  !***
+  !  Compute the eigenvalues of a symmetric tridiagonal matrix
   !            using the implicit QL method.  Eigenvectors may be computed
   !            later.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A5, D4C2A
-  !***TYPE      SINGLE PRECISION (IMTQLV-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A5, D4C2A
+  !***
+  ! **Type:**      SINGLE PRECISION (IMTQLV-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a variant of  IMTQL1  which is a translation of
   !     ALGOL procedure IMTQL1, NUM. MATH. 12, 377-383(1968) by Martin and
@@ -75,18 +82,21 @@ SUBROUTINE IMTQLV(N,D,E,E2,W,Ind,Ierr,Rv1)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  PYTHAG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  PYTHAG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  IMTQLV
+  
   !
   INTEGER i, j, k, l, m, N, ii, mml, tag, Ierr
   REAL D(*), E(*), E2(*), W(*), Rv1(*)
@@ -94,7 +104,7 @@ SUBROUTINE IMTQLV(N,D,E,E2,W,Ind,Ierr,Rv1)
   REAL PYTHAG
   INTEGER Ind(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  IMTQLV
+  !* FIRST EXECUTABLE STATEMENT  IMTQLV
   Ierr = 0
   k = 0
   tag = 0

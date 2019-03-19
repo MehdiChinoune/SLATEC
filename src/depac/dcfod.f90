@@ -1,24 +1,31 @@
-!DECK DCFOD
+!** DCFOD
 SUBROUTINE DCFOD(Meth,Elco,Tesco)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCFOD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DDEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (CFOD-S, DCFOD-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DDEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (CFOD-S, DCFOD-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !   DCFOD defines coefficients needed in the integrator package DDEBDF
   !
-  !***SEE ALSO  DDEBDF
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DDEBDF
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820301  DATE WRITTEN
   !   890911  Removed unnecessary intrinsics.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DCFOD
+  
   !
   !
   INTEGER i, ib, Meth, nq, nqm1, nqp1
@@ -53,7 +60,7 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
   !     ------------------------------------------------------------------
   DIMENSION pc(12)
   !
-  !***FIRST EXECUTABLE STATEMENT  DCFOD
+  !* FIRST EXECUTABLE STATEMENT  DCFOD
   IF ( Meth==2 ) THEN
     !
     pc(1) = 1.0D0

@@ -1,13 +1,17 @@
-!DECK DDOGLG
+!** DDOGLG
 SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DDOGLG
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DNSQ and DNSQE
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (DOGLEG-S, DDOGLG-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DNSQ and DNSQE
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (DOGLEG-S, DDOGLG-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Given an M by N matrix A, an N by N nonsingular diagonal
   !     matrix D, an M-vector B, and a positive number DELTA, the
@@ -52,9 +56,12 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !
   !       WA1 and WA2 are work arrays of length N.
   !
-  !***SEE ALSO  DNSQ, DNSQE
-  !***ROUTINES CALLED  D1MACH, DENORM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DNSQ, DNSQE
+  !***
+  ! **Routines called:**  D1MACH, DENORM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -62,7 +69,7 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DDOGLG
+  
   REAL(8) :: D1MACH, DENORM
   INTEGER i, j, jj, jp1, k, l, Lr, N
   REAL(8) :: alpha, bnorm, Delta, Diag(*), epsmch, gnorm, one, &
@@ -73,7 +80,7 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !
   !     EPSMCH IS THE MACHINE PRECISION.
   !
-  !***FIRST EXECUTABLE STATEMENT  DDOGLG
+  !* FIRST EXECUTABLE STATEMENT  DDOGLG
   epsmch = D1MACH(4)
   !
   !     FIRST, CALCULATE THE GAUSS-NEWTON DIRECTION.

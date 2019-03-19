@@ -1,26 +1,34 @@
-!DECK DRSCO
+!** DRSCO
 SUBROUTINE DRSCO(Rsav,Isav)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DRSCO
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DDEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (RSCO-S, DRSCO-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DDEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (RSCO-S, DRSCO-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   DRSCO transfers data from arrays to a common block within the
   !   integrator package DDEBDF.
   !
-  !***SEE ALSO  DDEBDF
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    DDEBD1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DDEBDF
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    DDEBD1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820301  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DRSCO
+  
   !-----------------------------------------------------------------------
   ! THIS ROUTINE RESTORES FROM RSAV AND ISAV THE CONTENTS OF COMMON
   ! BLOCK DDEBD1 , WHICH IS USED INTERNALLY IN THE DDEBDF
@@ -35,7 +43,7 @@ SUBROUTINE DRSCO(Rsav,Isav)
   COMMON /DDEBD1/ RLS(218), ILS(33)
   DATA lenrls/218/, lenils/33/
   !
-  !***FIRST EXECUTABLE STATEMENT  DRSCO
+  !* FIRST EXECUTABLE STATEMENT  DRSCO
   DO i = 1, lenrls
     RLS(i) = Rsav(i)
   ENDDO

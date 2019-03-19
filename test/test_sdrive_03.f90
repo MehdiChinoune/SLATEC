@@ -2,34 +2,43 @@ MODULE TEST47_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK CDQCK
+  !** CDQCK
   SUBROUTINE CDQCK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CDQCK
-    !***PURPOSE  Quick check for SLATEC routines CDRIV1, CDRIV2 and CDRIV3.
-    !***LIBRARY   SLATEC (SDRIVE)
-    !***CATEGORY  I1A2, I1A1B
-    !***TYPE      COMPLEX (SDQCK-S, DDQCK-D, CDQCK-C)
-    !***KEYWORDS  CDRIV1, CDRIV2, CDRIV3, QUICK CHECK, SDRIVE
-    !***AUTHOR  Kahaner, D. K., (NIST)
+    !>
+    !***
+    !  Quick check for SLATEC routines CDRIV1, CDRIV2 and CDRIV3.
+    !***
+    ! **Library:**   SLATEC (SDRIVE)
+    !***
+    ! **Category:**  I1A2, I1A1B
+    !***
+    ! **Type:**      COMPLEX (SDQCK-S, DDQCK-D, CDQCK-C)
+    !***
+    ! **Keywords:**  CDRIV1, CDRIV2, CDRIV3, QUICK CHECK, SDRIVE
+    !***
+    ! **Author:**  Kahaner, D. K., (NIST)
     !             National Institute of Standards and Technology
     !             Gaithersburg, MD  20899
     !           Sutherland, C. D., (LANL)
     !             Mail Stop D466
     !             Los Alamos National Laboratory
     !             Los Alamos, NM  87545
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !  For assistance in determining the cause of a failure of these
     !  routines contact C. D. Sutherland at commercial telephone number
     !  (505)667-6949, FTS telephone number 8-843-6949, or electronic mail
     !  address CDS@LANL.GOV .
     !
-    !***ROUTINES CALLED  CDF, CDRIV1, CDRIV2, CDRIV3, R1MACH, XERCLR
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CDF, CDRIV1, CDRIV2, CDRIV3, R1MACH, XERCLR
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
-    !***END PROLOGUE  CDQCK
+    
     REAL eps, ewt(1), HMAX, R1MACH, t, tout
     INTEGER ierflg, IERROR, IMPL, Ipass, Kprint, leniw, leniwx, lenw, &
       LENWMX, lenwx, LIWMX, Lun, mint, MITER, ML, mstate, MU, &
@@ -40,7 +49,7 @@ CONTAINS
     COMPLEX alfa, work(LENWMX), y(N+1)
     INTEGER iwork(LIWMX)
     DATA ewt(1)/.00001E0/
-    !***FIRST EXECUTABLE STATEMENT  CDQCK
+    !* FIRST EXECUTABLE STATEMENT  CDQCK
     alfa = (1.E0,1.E0)
     eps = R1MACH(4)**(1.E0/3.E0)
     Ipass = 1
@@ -442,58 +451,73 @@ CONTAINS
     ENDIF
     CALL XERCLR
   END SUBROUTINE CDQCK
-  !DECK CDF
+  !** CDF
   SUBROUTINE CDF(N,T,Y,Yp)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CDF
-    !***SUBSIDIARY
-    !***PURPOSE  Quick check for SLATEC routines CDRIV1, CDRIV2 and CDRIV3.
-    !***LIBRARY   SLATEC (SDRIVE)
-    !***CATEGORY  I1A2, I1A1B
-    !***TYPE      COMPLEX (SDF-S, DDF-D, CDF-C)
-    !***KEYWORDS  CDRIV1, CDRIV2, CDRIV3, QUICK CHECK, SDRIVE
-    !***AUTHOR  Kahaner, D. K., (NIST)
+    !>
+    !***
+    !  Quick check for SLATEC routines CDRIV1, CDRIV2 and CDRIV3.
+    !***
+    ! **Library:**   SLATEC (SDRIVE)
+    !***
+    ! **Category:**  I1A2, I1A1B
+    !***
+    ! **Type:**      COMPLEX (SDF-S, DDF-D, CDF-C)
+    !***
+    ! **Keywords:**  CDRIV1, CDRIV2, CDRIV3, QUICK CHECK, SDRIVE
+    !***
+    ! **Author:**  Kahaner, D. K., (NIST)
     !             National Institute of Standards and Technology
     !             Gaithersburg, MD  20899
     !           Sutherland, C. D., (LANL)
     !             Mail Stop D466
     !             Los Alamos National Laboratory
     !             Los Alamos, NM  87545
-    !***SEE ALSO  CDQCK
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **See also:**  CDQCK
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
-    !***END PROLOGUE  CDF
+    
     REAL T
     COMPLEX alfa, Y(*), Yp(*)
     INTEGER N
-    !***FIRST EXECUTABLE STATEMENT  CDF
+    !* FIRST EXECUTABLE STATEMENT  CDF
     alfa = Y(N+1)
     Yp(1) = 1.E0 + alfa*(Y(2)-Y(1)) - Y(1)*Y(3)
     Yp(2) = alfa*(Y(1)-Y(2)) - Y(2)*Y(3)
     Yp(3) = 1.E0 - Y(3)*(Y(1)+Y(2))
   END SUBROUTINE CDF
 END MODULE TEST47_MOD
-!DECK TEST47
+!** TEST47
 PROGRAM TEST47
   USE TEST47_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST47
-  !***PURPOSE  Driver for testing SLATEC subprograms
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
   !            CDRIV1  CDRIV2  CDRIV3
-  !***LIBRARY   SLATEC
-  !***CATEGORY  I1A2, I1A1B
-  !***TYPE      COMPLEX (TEST45-S, TEST46-D, TEST47-C)
-  !***KEYWORDS  SDRIVE, QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  I1A2, I1A1B
+  !***
+  ! **Type:**      COMPLEX (TEST45-S, TEST46-D, TEST47-C)
+  !***
+  ! **Keywords:**  SDRIVE, QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -505,20 +529,23 @@ PROGRAM TEST47
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        CDRIV1  CDRIV2  CDRIV3
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  CDQCK, I1MACH, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDQCK, I1MACH, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   920801  DATE WRITTEN
-  !***END PROLOGUE  TEST47
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST47
+  !* FIRST EXECUTABLE STATEMENT  TEST47
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

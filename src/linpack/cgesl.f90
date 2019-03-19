@@ -1,15 +1,22 @@
-!DECK CGESL
+!** CGESL
 SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CGESL
-  !***PURPOSE  Solve the complex system A*X=B or CTRANS(A)*X=B using the
+  !>
+  !***
+  !  Solve the complex system A*X=B or CTRANS(A)*X=B using the
   !            factors computed by CGECO or CGEFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2C1
-  !***TYPE      COMPLEX (SGESL-S, DGESL-D, CGESL-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2C1
+  !***
+  ! **Type:**      COMPLEX (SGESL-S, DGESL-D, CGESL-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX, SOLVE
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CGESL solves the complex system
   !     A * X = B  or  CTRANS(A) * X = B
@@ -58,10 +65,13 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
   !              CALL CGESL(A,LDA,N,IPVT,C(1,J),0)
   !        10 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CDOTC
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CDOTC
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -69,13 +79,13 @@ SUBROUTINE CGESL(A,Lda,N,Ipvt,B,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CGESL
+  
   INTEGER Lda, N, Ipvt(*), Job
   COMPLEX A(Lda,*), B(*)
   !
   COMPLEX CDOTC, t
   INTEGER k, kb, l, nm1
-  !***FIRST EXECUTABLE STATEMENT  CGESL
+  !* FIRST EXECUTABLE STATEMENT  CGESL
   nm1 = N - 1
   IF ( Job/=0 ) THEN
     !

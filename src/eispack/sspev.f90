@@ -1,17 +1,24 @@
-!DECK SSPEV
+!** SSPEV
 SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSPEV
-  !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
+  !>
+  !***
+  !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real symmetric matrix stored in packed form.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A1
-  !***TYPE      SINGLE PRECISION (SSPEV-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK, PACKED, SYMMETRIC
-  !***AUTHOR  Kahaner, D. K., (NBS)
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A1
+  !***
+  ! **Type:**      SINGLE PRECISION (SSPEV-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK, PACKED, SYMMETRIC
+  !***
+  ! **Author:**  Kahaner, D. K., (NBS)
   !           Moler, C. B., (U. of New Mexico)
   !           Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Abstract
   !      SSPEV computes the eigenvalues and, optionally, the eigenvectors
@@ -72,9 +79,12 @@ SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
   !          No. 1   recoverable  N is greater than LDV and JOB is nonzero
   !          No. 2   recoverable  N is less than one
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  IMTQL2, TQLRAT, TRBAK3, TRED3, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  IMTQL2, TQLRAT, TRBAK3, TRED3, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800808  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -82,11 +92,11 @@ SUBROUTINE SSPEV(A,N,E,V,Ldv,Work,Job,Info)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  SSPEV
+  
   INTEGER Job
   INTEGER i, Info, j, Ldv, m, N
   REAL A(*), E(*), V(Ldv,*), Work(*)
-  !***FIRST EXECUTABLE STATEMENT  SSPEV
+  !* FIRST EXECUTABLE STATEMENT  SSPEV
   IF ( N>Ldv ) CALL XERMSG('SLATEC','SSPEV','N .GT. LDV.',1,1)
   IF ( N>Ldv ) RETURN
   IF ( N<1 ) CALL XERMSG('SLATEC','SSPEV','N .LT. 1',2,1)

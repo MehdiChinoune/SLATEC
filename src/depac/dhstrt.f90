@@ -1,19 +1,23 @@
-!DECK DHSTRT
+!** DHSTRT
 SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     Rpar,Ipar,H)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DHSTRT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DDEABM, DDEBDF and DDERKF
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (HSTART-S, DHSTRT-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DDEABM, DDEBDF and DDERKF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (HSTART-S, DHSTRT-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   DHSTRT computes a starting step size to be used in solving initial
   !   value problems in ordinary differential equations.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !  ABSTRACT
   !
   !     Subroutine DHSTRT computes a starting step size to be used by an
@@ -32,7 +36,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !     prevent unnecessary underflows or overflows from occurring, and
   !     also, would not alter the vector or number of components.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !  On input you must provide the following
   !
   !      DF -- This is a subroutine of the form
@@ -119,7 +123,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !             communication between your program and the DF subroutine.
   !             They are not used or altered by DHSTRT.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !  On Output  (after the return from DHSTRT),
   !
   !      H -- is an appropriate starting step size to be attempted by the
@@ -128,11 +132,14 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !           All parameters in the call list remain unchanged except for
   !           the working arrays SPY(*),PV(*),YP(*), and SF(*).
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  DDEABM, DDEBDF, DDERKF
-  !***ROUTINES CALLED  DHVNRM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DDEABM, DDEBDF, DDERKF
+  !***
+  ! **Routines called:**  DHVNRM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -141,7 +148,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DHSTRT
+  
   !
   INTEGER Ipar, j, k, lk, Morder, Neq
   REAL(8) :: A, absdx, B, Big, da, delf, dely, dfdub, dfdxb, &
@@ -155,7 +162,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !     ..................................................................
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 160
-  !***FIRST EXECUTABLE STATEMENT  DHSTRT
+  !* FIRST EXECUTABLE STATEMENT  DHSTRT
   dx = B - A
   absdx = ABS(dx)
   relper = Small**0.375D0

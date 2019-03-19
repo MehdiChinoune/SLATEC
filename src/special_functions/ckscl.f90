@@ -1,31 +1,38 @@
-!DECK CKSCL
+!** CKSCL
 SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CKSCL
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBKNU, CUNK1 and CUNK2
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CKSCL-A, ZKSCL-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBKNU, CUNK1 and CUNK2
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CKSCL-A, ZKSCL-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     SET K FUNCTIONS TO ZERO ON UNDERFLOW, CONTINUE RECURRENCE
   !     ON SCALED FUNCTIONS UNTIL TWO MEMBERS COME ON SCALE, THEN
   !     RETURN WITH MIN(NZ+2,N) VALUES SCALED BY 1/TOL.
   !
-  !***SEE ALSO  CBKNU, CUNK1, CUNK2
-  !***ROUTINES CALLED  CUCHK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBKNU, CUNK1, CUNK2
+  !***
+  ! **Routines called:**  CUCHK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   ??????  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CKSCL
+  
   COMPLEX ck, cs, cy, czero, Rz, s1, s2, Y, Zr, zd, celm
   REAL aa, Ascle, acs, as, csi, csr, Elim, fn, Fnu, Tol, xx, &
     zri, elm, alas, helim
   INTEGER i, ic, k, kk, N, nn, nw, Nz
   DIMENSION Y(N), cy(2)
   DATA czero/(0.0E0,0.0E0)/
-  !***FIRST EXECUTABLE STATEMENT  CUCHK
+  !* FIRST EXECUTABLE STATEMENT  CUCHK
   Nz = 0
   ic = 0
   xx = REAL(Zr)

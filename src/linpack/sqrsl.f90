@@ -1,16 +1,23 @@
-!DECK SQRSL
+!** SQRSL
 SUBROUTINE SQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SQRSL
-  !***PURPOSE  Apply the output of SQRDC to compute coordinate transfor-
+  !>
+  !***
+  !  Apply the output of SQRDC to compute coordinate transfor-
   !            mations, projections, and least squares solutions.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D9, D2A1
-  !***TYPE      SINGLE PRECISION (SQRSL-S, DQRSL-D, CQRSL-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX, ORTHOGONAL TRIANGULAR,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D9, D2A1
+  !***
+  ! **Type:**      SINGLE PRECISION (SQRSL-S, DQRSL-D, CQRSL-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX, ORTHOGONAL TRIANGULAR,
   !             SOLVE
-  !***AUTHOR  Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Stewart, G. W., (U. of Maryland)
+  !***
+  ! **Description:**
   !
   !     SQRSL applies the output of SQRDC to compute coordinate
   !     transformations, projections, and least squares solutions.
@@ -142,10 +149,13 @@ SUBROUTINE SQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   !     In any group the value returned in the array allocated to
   !     the group corresponds to the last member of the group.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SAXPY, SCOPY, SDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SAXPY, SCOPY, SDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -154,14 +164,14 @@ SUBROUTINE SQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SQRSL
+  
   INTEGER Ldx, N, K, Job, Info
   REAL X(Ldx,*), Qraux(*), Y(*), Qy(*), Qty(*), B(*), Rsd(*), Xb(*)
   !
   INTEGER i, j, jj, ju, kp1
   REAL SDOT, t, temp
   LOGICAL cb, cqy, cqty, cr, cxb
-  !***FIRST EXECUTABLE STATEMENT  SQRSL
+  !* FIRST EXECUTABLE STATEMENT  SQRSL
   !
   !     SET INFO FLAG.
   !

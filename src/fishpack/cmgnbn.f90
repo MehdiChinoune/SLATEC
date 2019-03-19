@@ -1,18 +1,25 @@
-!DECK CMGNBN
+!** CMGNBN
 SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CMGNBN
-  !***PURPOSE  Solve a complex block tridiagonal linear system of
+  !>
+  !***
+  !  Solve a complex block tridiagonal linear system of
   !            equations by a cyclic reduction algorithm.
-  !***LIBRARY   SLATEC (FISHPACK)
-  !***CATEGORY  I2B4B
-  !***TYPE      COMPLEX (GENBUN-S, CMGNBN-C)
-  !***KEYWORDS  CYCLIC REDUCTION, ELLIPTIC PDE, FISHPACK,
+  !***
+  ! **Library:**   SLATEC (FISHPACK)
+  !***
+  ! **Category:**  I2B4B
+  !***
+  ! **Type:**      COMPLEX (GENBUN-S, CMGNBN-C)
+  !***
+  ! **Keywords:**  CYCLIC REDUCTION, ELLIPTIC PDE, FISHPACK,
   !             TRIDIAGONAL LINEAR SYSTEM
-  !***AUTHOR  Adams, J., (NCAR)
+  !***
+  ! **Author:**  Adams, J., (NCAR)
   !           Swarztrauber, P. N., (NCAR)
   !           Sweet, R., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Subroutine CMGNBN solves the complex linear system of equations
   !
@@ -107,7 +114,7 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !     W
   !       W(1) contains the required length of W.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !     * * * * * * *   Program Specifications    * * * * * * * * * * * *
   !
@@ -210,25 +217,28 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !
   !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   !
-  !***REFERENCES  R. Sweet, A cyclic reduction algorithm for solving
+  !***
+  ! **References:**  R. Sweet, A cyclic reduction algorithm for solving
   !                 block tridiagonal systems of arbitrary dimensions,
   !                 SIAM Journal on Numerical Analysis 14, (September
   !                 1977), pp. 706-720.
-  !***ROUTINES CALLED  CMPOSD, CMPOSN, CMPOSP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CMPOSD, CMPOSN, CMPOSP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CMGNBN
+  
   INTEGER i, Idimy, Ierror, ipstor, irev, iwb2, iwb3, iwba, iwbb, &
     iwbc, iwd, iwp, iwtcos, iww1, iww2, iww3, j, k, M, mh
   INTEGER mhm1, mhmi, mhpi, modd, mp, Mperod, mskip, N, nby2, np, Nperod
   COMPLEX A, B, C, Y, W, a1
   DIMENSION Y(Idimy,*)
   DIMENSION W(*), B(*), A(*), C(*)
-  !***FIRST EXECUTABLE STATEMENT  CMGNBN
+  !* FIRST EXECUTABLE STATEMENT  CMGNBN
   Ierror = 0
   IF ( M<=2 ) Ierror = 1
   IF ( N<=2 ) Ierror = 2

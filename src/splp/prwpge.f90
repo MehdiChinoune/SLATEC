@@ -1,14 +1,18 @@
-!DECK PRWPGE
+!** PRWPGE
 SUBROUTINE PRWPGE(Key,Ipage,Lpg,Sx,Ix)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PRWPGE
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (PRWPGE-S, DPRWPG-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (PRWPGE-S, DPRWPG-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Wisniewski, J. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     PRWPGE LIMITS THE TYPE OF STORAGE TO A SEQUENTIAL SCHEME.
   !     VIRTUAL MEMORY PAGE READ/WRITE SUBROUTINE.
@@ -30,9 +34,12 @@ SUBROUTINE PRWPGE(Key,Ipage,Lpg,Sx,Ix)
   !     REVISED 811130-1000
   !     REVISED YYMMDD-HHMM
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  PRWVIR, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  PRWVIR, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
@@ -40,11 +47,11 @@ SUBROUTINE PRWPGE(Key,Ipage,Lpg,Sx,Ix)
   !   900510  Fixed error messages and replaced GOTOs with
   !           IF-THEN-ELSE.  (RWC)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  !***END PROLOGUE  PRWPGE
+  
   INTEGER Ipage, Ix, Key, Lpg
   REAL Sx(*)
   DIMENSION Ix(*)
-  !***FIRST EXECUTABLE STATEMENT  PRWPGE
+  !* FIRST EXECUTABLE STATEMENT  PRWPGE
   !
   !     CHECK IF IPAGE IS IN RANGE.
   !

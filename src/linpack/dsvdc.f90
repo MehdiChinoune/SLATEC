@@ -1,16 +1,23 @@
-!DECK DSVDC
+!** DSVDC
 SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSVDC
-  !***PURPOSE  Perform the singular value decomposition of a rectangular
+  !>
+  !***
+  !  Perform the singular value decomposition of a rectangular
   !            matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D6
-  !***TYPE      DOUBLE PRECISION (SSVDC-S, DSVDC-D, CSVDC-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D6
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSVDC-S, DSVDC-D, CSVDC-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX,
   !             SINGULAR VALUE DECOMPOSITION
-  !***AUTHOR  Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Stewart, G. W., (U. of Maryland)
+  !***
+  ! **Description:**
   !
   !     DSVDC is a subroutine to reduce a double precision NxP matrix X
   !     by orthogonal transformations U and V to diagonal form.  The
@@ -98,10 +105,13 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !                   is the transpose of U).  Thus the singular
   !                   values of X and B are the same.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DDOT, DNRM2, DROT, DROTG, DSCAL, DSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DDOT, DNRM2, DROT, DROTG, DSCAL, DSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790319  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -109,7 +119,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DSVDC
+  
   INTEGER Ldx, N, P, Ldu, Ldv, Job, Info
   REAL(8) :: X(Ldx,*), S(*), E(*), U(Ldu,*), V(Ldv,*), Work(*)
   !
@@ -121,7 +131,7 @@ SUBROUTINE DSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   REAL(8) :: b, c, cs, el, emm1, f, g, DNRM2, scale, shift, &
     sl, sm, sn, smm1, t1, test, ztest
   LOGICAL wantu, wantv
-  !***FIRST EXECUTABLE STATEMENT  DSVDC
+  !* FIRST EXECUTABLE STATEMENT  DSVDC
   !
   !     SET THE MAXIMUM NUMBER OF ITERATIONS.
   !

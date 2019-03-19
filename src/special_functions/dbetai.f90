@@ -1,14 +1,21 @@
-!DECK DBETAI
+!** DBETAI
 REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBETAI
-  !***PURPOSE  Calculate the incomplete Beta function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7F
-  !***TYPE      DOUBLE PRECISION (BETAI-S, DBETAI-D)
-  !***KEYWORDS  FNLIB, INCOMPLETE BETA FUNCTION, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Calculate the incomplete Beta function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7F
+  !***
+  ! **Type:**      DOUBLE PRECISION (BETAI-S, DBETAI-D)
+  !***
+  ! **Keywords:**  FNLIB, INCOMPLETE BETA FUNCTION, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   !   DBETAI calculates the DOUBLE PRECISION incomplete beta function.
   !
@@ -21,11 +28,14 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   !   PIN    first beta distribution parameter.  PIN must be .GT. 0.0.
   !   QIN    second beta distribution parameter.  QIN must be .GT. 0.0.
   !
-  !***REFERENCES  Nancy E. Bosten and E. L. Battiste, Remark on Algorithm
+  !***
+  ! **References:**  Nancy E. Bosten and E. L. Battiste, Remark on Algorithm
   !                 179, Communications of the ACM 17, 3 (March 1974),
   !                 pp. 156.
-  !***ROUTINES CALLED  D1MACH, DLBETA, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, DLBETA, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -33,14 +43,14 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  !***END PROLOGUE  DBETAI
+  
   INTEGER i, ib, n
   REAL(8) :: X, Pin, Qin, alneps, alnsml, c, eps, finsum, p, &
     ps, q, sml, term, xb, xi, y, D1MACH, DLBETA, p1
   LOGICAL first
   SAVE eps, alneps, sml, alnsml, first
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DBETAI
+  !* FIRST EXECUTABLE STATEMENT  DBETAI
   IF ( first ) THEN
     eps = D1MACH(3)
     alneps = LOG(eps)

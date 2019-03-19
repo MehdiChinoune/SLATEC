@@ -1,26 +1,34 @@
-!DECK DHKSEQ
+!** DHKSEQ
 SUBROUTINE DHKSEQ(X,M,H,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DHKSEQ
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBSKIN
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (HKSEQ-S, DHKSEQ-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBSKIN
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (HKSEQ-S, DHKSEQ-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !   DHKSEQ is an adaptation of subroutine DPSIFN described in the
   !   reference below.  DHKSEQ generates the sequence
   !   H(K,X) = (-X)**(K+1)*(PSI(K,X) PSI(K,X+0.5))/GAMMA(K+1), for
   !            K=0,...,M.
   !
-  !***SEE ALSO  DBSKIN
-  !***REFERENCES  D. E. Amos, A portable Fortran subroutine for
+  !***
+  ! **See also:**  DBSKIN
+  !***
+  ! **References:**  D. E. Amos, A portable Fortran subroutine for
   !                 derivatives of the Psi function, Algorithm 610, ACM
   !                 Transactions on Mathematical Software 9, 4 (1983),
   !                 pp. 494-502.
-  !***ROUTINES CALLED  D1MACH, I1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, I1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -28,7 +36,7 @@ SUBROUTINE DHKSEQ(X,M,H,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  !***END PROLOGUE  DHKSEQ
+  
   INTEGER i, Ierr, j, k, M, mx, nx
   INTEGER I1MACH
   REAL(8) :: b, fk, fln, fn, fnp, H, hrx, rln, rxsq, r1m5, &
@@ -55,7 +63,7 @@ SUBROUTINE DHKSEQ(X,M,H,Ierr)
     -2.74233104097776039D+13, 9.76664637943633248D+14, &
     -3.85931586838450360D+16/
   !
-  !***FIRST EXECUTABLE STATEMENT  DHKSEQ
+  !* FIRST EXECUTABLE STATEMENT  DHKSEQ
   Ierr = 0
   wdtol = MAX(D1MACH(4),1.0D-18)
   fn = M - 1

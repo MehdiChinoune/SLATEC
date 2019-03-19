@@ -1,15 +1,22 @@
-!DECK RT
+!** RT
 SUBROUTINE RT(Nm,N,A,W,Matz,Z,Fv1,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RT
-  !***PURPOSE  Compute the eigenvalues and eigenvectors of a special real
+  !>
+  !***
+  !  Compute the eigenvalues and eigenvectors of a special real
   !            tridiagonal matrix.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A5
-  !***TYPE      SINGLE PRECISION (RT-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A5
+  !***
+  ! **Type:**      SINGLE PRECISION (RT-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine calls the recommended sequence of subroutines
   !     from the eigensystem subroutine package (EISPACK) to find the
@@ -68,23 +75,26 @@ SUBROUTINE RT(Nm,N,A,W,Matz,Z,Fv1,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  FIGI, FIGI2, IMTQL1, IMTQL2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  FIGI, FIGI2, IMTQL1, IMTQL2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  RT
+  
   !
   INTEGER N, Nm, Ierr, Matz
   REAL A(Nm,3), W(*), Z(Nm,*), Fv1(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  RT
+  !* FIRST EXECUTABLE STATEMENT  RT
   IF ( N>Nm ) THEN
     Ierr = 10*N
     !

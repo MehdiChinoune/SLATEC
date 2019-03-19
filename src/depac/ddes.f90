@@ -1,24 +1,31 @@
-!DECK DDES
+!** DDES
 SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     Alpha,Beta,Psi,V,W,Sig,G,Gi,H,Eps,X,Xold,Hold,Told,Delsgn,&
     Tstop,Twou,Fouru,Start,Phase1,Nornd,Stiff,Intout,Ns,Kord,&
     Kold,Init,Ksteps,Kle4,Iquit,Kprev,Ivc,Iv,Kgi,Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DDES
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DDEABM
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (DES-S, DDES-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DDEABM
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (DES-S, DDES-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   DDEABM merely allocates storage for DDES to relieve the user of the
   !   inconvenience of a long call list.  Consequently  DDES  is used as
   !   described in the comments for  DDEABM .
   !
-  !***SEE ALSO  DDEABM
-  !***ROUTINES CALLED  D1MACH, DINTP, DSTEPS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DDEABM
+  !***
+  ! **Routines called:**  D1MACH, DINTP, DSTEPS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -27,7 +34,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTOs to
   !           IF-THEN-ELSE.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DDES
+  
   !
   INTEGER Idid, Info, Init, Ipar, Iquit, Iv, Ivc, k, Kgi, Kle4, &
     Kold, Kord, Kprev, Ksteps, l, ltol, maxnum, natolp, Neq, nrtolp, Ns
@@ -57,7 +64,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !
   !.......................................................................
   !
-  !***FIRST EXECUTABLE STATEMENT  DDES
+  !* FIRST EXECUTABLE STATEMENT  DDES
   IF ( Info(1)==0 ) THEN
     !
     ! ON THE FIRST CALL, PERFORM INITIALIZATION --

@@ -1,13 +1,17 @@
-!DECK CPRODP
+!** CPRODP
 SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPRODP
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BLKTRI
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (CPRODP-S, CPROCP-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BLKTRI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (CPRODP-S, CPROCP-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   ! PRODP applies a sequence of matrix operations to the vector X and
   ! stores the result in YY. (Periodic boundary conditions and COMPLEX
@@ -23,20 +27,23 @@ SUBROUTINE CPRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,U,Y)
   ! D,U,Y          are working arrays.
   ! ISGN           determines whether or not a change in sign is made.
   !
-  !***SEE ALSO  BLKTRI
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BLKTRI
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  CPRODP
+  
   REAL A, Aa, B, Bm1, Bm2, C, rt, X, Yy
   INTEGER ia, id, iflg, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, Nm2
   COMPLEX Y, D, U, v, den, bh, ym, am, y1, y2, yh, Bd, crt
   DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), U(*), Bd(*), Bm1(*)&
     , Bm2(*), Aa(*), Yy(*)
-  !***FIRST EXECUTABLE STATEMENT  CPRODP
+  !* FIRST EXECUTABLE STATEMENT  CPRODP
   DO j = 1, M
     Y(j) = CMPLX(X(j),0.)
   ENDDO

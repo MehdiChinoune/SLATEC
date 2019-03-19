@@ -1,24 +1,30 @@
-!DECK POS3D1
+!** POS3D1
 SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  POS3D1
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to POIS3D
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (POS3D1-S)
-  !***AUTHOR  (UNKNOWN)
-  !***SEE ALSO  POIS3D
-  !***ROUTINES CALLED  COSQB, COSQF, COSQI, COST, COSTI, PIMACH, RFFTB,
+  !>
+  !***
+  !  Subsidiary to POIS3D
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (POS3D1-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **See also:**  POIS3D
+  !***
+  ! **Routines called:**  COSQB, COSQF, COSQI, COST, COSTI, PIMACH, RFFTB,
   !                    RFFTF, RFFTI, SINQB, SINQF, SINQI, SINT, SINTI,
   !                    TRIDQ
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891009  Removed unreferenced variable.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900308  Changed call to TRID to call to TRIDQ.  (WRB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  POS3D1
+  
   REAL A, B, Bb, C, C1, C2, D, di, dj, dum, dx, dy, F, pi, &
     PIMACH, scalx, scaly, T, Wx, Wy
   REAL Xrt, Yrt
@@ -26,7 +32,7 @@ SUBROUTINE POS3D1(Lp,L,Mp,M,N,A,B,C,Ldimf,Mdimf,F,Xrt,Yrt,T,D,Wx,Wy,C1,C2,Bb)
     mr, mrdel, N, nr
   DIMENSION A(*), B(*), C(*), F(Ldimf,Mdimf,*), Xrt(*), Yrt(*), T(*), &
     D(*), Wx(*), Wy(*), Bb(*)
-  !***FIRST EXECUTABLE STATEMENT  POS3D1
+  !* FIRST EXECUTABLE STATEMENT  POS3D1
   pi = PIMACH(dum)
   lr = L
   mr = M

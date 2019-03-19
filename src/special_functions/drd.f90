@@ -1,20 +1,26 @@
-!DECK DRD
+!** DRD
 REAL(8) FUNCTION DRD(X,Y,Z,Ier)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DRD
-  !***PURPOSE  Compute the incomplete or complete elliptic integral of
+  !>
+  !***
+  !  Compute the incomplete or complete elliptic integral of
   !            the 2nd kind. For X and Y nonnegative, X+Y and Z positive,
   !            DRD(X,Y,Z) = Integral from zero to infinity of
   !                                -1/2     -1/2     -3/2
   !                      (3/2)(t+X)    (t+Y)    (t+Z)    dt.
   !            If X or Y is zero, the integral is complete.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C14
-  !***TYPE      DOUBLE PRECISION (RD-S, DRD-D)
-  !***KEYWORDS  COMPLETE ELLIPTIC INTEGRAL, DUPLICATION THEOREM,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C14
+  !***
+  ! **Type:**      DOUBLE PRECISION (RD-S, DRD-D)
+  !***
+  ! **Keywords:**  COMPLETE ELLIPTIC INTEGRAL, DUPLICATION THEOREM,
   !             INCOMPLETE ELLIPTIC INTEGRAL, INTEGRAL OF THE SECOND KIND,
   !             TAYLOR SERIES
-  !***AUTHOR  Carlson, B. C.
+  !***
+  ! **Author:**  Carlson, B. C.
   !             Ames Laboratory-DOE
   !             Iowa State University
   !             Ames, IA  50011
@@ -25,7 +31,8 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
   !           Pexton, R. L.
   !             Lawrence Livermore National Laboratory
   !             Livermore, CA  94550
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   1.     DRD
   !          Evaluate an INCOMPLETE (or COMPLETE) ELLIPTIC INTEGRAL
@@ -149,7 +156,7 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
   !                    decimal digits of accuracy at the expense of one or
   !                    two more iterations of the duplication theorem.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !   DRD Special Comments
   !
@@ -289,7 +296,8 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
   !
   ! ---------------------------------------------------------------------
   !
-  !***REFERENCES  B. C. Carlson and E. M. Notis, Algorithms for incomplete
+  !***
+  ! **References:**  B. C. Carlson and E. M. Notis, Algorithms for incomplete
   !                 elliptic integrals, ACM Transactions on Mathematical
   !                 Software 7, 3 (September 1981), pp. 398-403.
   !               B. C. Carlson, Computing elliptic integrals by
@@ -298,8 +306,10 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
   !               B. C. Carlson, Elliptic integrals of the first kind,
   !                 SIAM Journal of Mathematical Analysis 8, (1977),
   !                 pp. 231-242.
-  !***ROUTINES CALLED  D1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -309,7 +319,7 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
   !           (WRB)
   !   900510  Modify calls to XERMSG to put in standard form.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DRD
+  
   CHARACTER(16) :: xern3, xern4, xern5, xern6
   INTEGER Ier
   REAL(8) :: lolim, tuplim, uplim, epslon, errtol, D1MACH
@@ -321,7 +331,7 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
   SAVE errtol, lolim, uplim, c1, c2, c3, c4, first
   DATA first/.TRUE./
   !
-  !***FIRST EXECUTABLE STATEMENT  DRD
+  !* FIRST EXECUTABLE STATEMENT  DRD
   IF ( first ) THEN
     errtol = (D1MACH(3)/3.0D0)**(1.0D0/6.0D0)
     lolim = 2.0D0/(D1MACH(2))**(2.0D0/3.0D0)

@@ -1,13 +1,17 @@
-!DECK BSGQ8
+!** BSGQ8
 SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BSGQ8
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BFQAD
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (BSGQ8-S, DBSGQ8-D)
-  !***AUTHOR  Jones, R. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BFQAD
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (BSGQ8-S, DBSGQ8-D)
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !        BSGQ8, a modification of GAUS8, integrates the
@@ -51,9 +55,12 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   !               2 ANS probably does not meet requested error tolerance.
   !        WORK- Work vector of length 3*K for BVALU
   !
-  !***SEE ALSO  BFQAD
-  !***ROUTINES CALLED  BVALU, I1MACH, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BFQAD
+  !***
+  ! **Routines called:**  BVALU, I1MACH, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
@@ -62,7 +69,7 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  !***END PROLOGUE  BSGQ8
+  
   !
   INTERFACE
     REAL FUNCTION FUN(X)
@@ -88,7 +95,7 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   !
   !     INITIALIZE
   !
-  !***FIRST EXECUTABLE STATEMENT  BSGQ8
+  !* FIRST EXECUTABLE STATEMENT  BSGQ8
   k = I1MACH(11)
   anib = R1MACH(5)*k/0.30102000E0
   nbits = INT(anib)

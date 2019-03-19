@@ -1,16 +1,23 @@
-!DECK CPPDI
+!** CPPDI
 SUBROUTINE CPPDI(Ap,N,Det,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPPDI
-  !***PURPOSE  Compute the determinant and inverse of a complex Hermitian
+  !>
+  !***
+  !  Compute the determinant and inverse of a complex Hermitian
   !            positive definite matrix using factors from CPPCO or CPPFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2D1B, D3D1B
-  !***TYPE      COMPLEX (SPPDI-S, DPPDI-D, CPPDI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2D1B, D3D1B
+  !***
+  ! **Type:**      COMPLEX (SPPDI-S, DPPDI-D, CPPDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             PACKED, POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CPPDI computes the determinant and inverse
   !     of a complex Hermitian positive definite matrix
@@ -48,10 +55,13 @@ SUBROUTINE CPPDI(Ap,N,Det,Job)
   !        It will not occur if the subroutines are called correctly
   !        and if CPOCO or CPOFA has set INFO .EQ. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -59,7 +69,7 @@ SUBROUTINE CPPDI(Ap,N,Det,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CPPDI
+  
   INTEGER N, Job
   COMPLEX Ap(*)
   REAL Det(2)
@@ -67,7 +77,7 @@ SUBROUTINE CPPDI(Ap,N,Det,Job)
   COMPLEX t
   REAL s
   INTEGER i, ii, j, jj, jm1, j1, k, kj, kk, kp1, k1
-  !***FIRST EXECUTABLE STATEMENT  CPPDI
+  !* FIRST EXECUTABLE STATEMENT  CPPDI
   !
   !     COMPUTE DETERMINANT
   !

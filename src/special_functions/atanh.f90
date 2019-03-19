@@ -1,15 +1,22 @@
-!DECK ATANH
+!** ATANH
 REAL FUNCTION ATANH(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ATANH
-  !***PURPOSE  Compute the arc hyperbolic tangent.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4C
-  !***TYPE      SINGLE PRECISION (ATANH-S, DATANH-D, CATANH-C)
-  !***KEYWORDS  ARC HYPERBOLIC TANGENT, ATANH, ELEMENTARY FUNCTIONS,
+  !>
+  !***
+  !  Compute the arc hyperbolic tangent.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4C
+  !***
+  ! **Type:**      SINGLE PRECISION (ATANH-S, DATANH-D, CATANH-C)
+  !***
+  ! **Keywords:**  ARC HYPERBOLIC TANGENT, ATANH, ELEMENTARY FUNCTIONS,
   !             FNLIB, INVERSE HYPERBOLIC TANGENT
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! ATANH(X) computes the arc hyperbolic tangent of X.
   !
@@ -19,9 +26,12 @@ REAL FUNCTION ATANH(X)
   !                               significant figures required  16.01
   !                                    decimal places required  17.76
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -29,7 +39,7 @@ REAL FUNCTION ATANH(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  ATANH
+  
   REAL atnhcs, CSEVL, dxrel, R1MACH, sqeps, X, y
   INTEGER INITS, nterms
   DIMENSION atnhcs(15)
@@ -51,7 +61,7 @@ REAL FUNCTION ATANH(X)
   DATA atnhcs(14)/.000000000000000100E0/
   DATA atnhcs(15)/.000000000000000006E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  ATANH
+  !* FIRST EXECUTABLE STATEMENT  ATANH
   IF ( first ) THEN
     nterms = INITS(atnhcs,15,0.1*R1MACH(3))
     dxrel = SQRT(R1MACH(4))

@@ -1,26 +1,33 @@
-!DECK DWNLT1
+!** DWNLT1
 SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scale,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DWNLT1
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to WNLIT
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (WNLT1-S, DWNLT1-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to WNLIT
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (WNLT1-S, DWNLT1-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Haskell, K. H., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     To update the column Sum Of Squares and find the pivot column.
   !     The column Sum of Squares Vector will be updated at each step.
   !     When numerically necessary, these values will be recomputed.
   !
-  !***SEE ALSO  DWNLIT
-  !***ROUTINES CALLED  IDAMAX
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DWNLIT
+  !***
+  ! **Routines called:**  IDAMAX
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
   !   900604  DP version created from SP version.  (RWC)
-  !***END PROLOGUE  DWNLT1
+  
   INTEGER I, Imax, Ir, Lend, Mdw, Mend
   REAL(8) :: H(*), Hbar, Scale(*), W(Mdw,*)
   LOGICAL Recalc
@@ -30,7 +37,7 @@ SUBROUTINE DWNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scale,W)
   !
   INTEGER j, k
   !
-  !***FIRST EXECUTABLE STATEMENT  DWNLT1
+  !* FIRST EXECUTABLE STATEMENT  DWNLT1
   IF ( Ir/=1.AND.(.NOT.Recalc) ) THEN
     !
     !        Update column SS=sum of squares.

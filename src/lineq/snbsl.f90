@@ -1,15 +1,22 @@
-!DECK SNBSL
+!** SNBSL
 SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SNBSL
-  !***PURPOSE  Solve a real band system using the factors computed by
+  !>
+  !***
+  !  Solve a real band system using the factors computed by
   !            SNBCO or SNBFA.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2A2
-  !***TYPE      SINGLE PRECISION (SNBSL-S, DNBSL-D, CNBSL-C)
-  !***KEYWORDS  BANDED, LINEAR EQUATIONS, NONSYMMETRIC, SOLVE
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2A2
+  !***
+  ! **Type:**      SINGLE PRECISION (SNBSL-S, DNBSL-D, CNBSL-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR EQUATIONS, NONSYMMETRIC, SOLVE
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !     SNBSL solves the real band system
   !     A * X = B  or  TRANS(A) * X = B
@@ -65,23 +72,26 @@ SUBROUTINE SNBSL(Abe,Lda,N,Ml,Mu,Ipvt,B,Job)
   !             CALL SNBSL(ABE,LDA,N,ML,MU,IPVT,C(1,J),0)
   !        10 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SAXPY, SDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SAXPY, SDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800717  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SNBSL
+  
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Job
   REAL Abe(Lda,*), B(*)
   !
   REAL SDOT, t
   INTEGER k, kb, l, lb, ldb, lm, m, mlm, nm1
-  !***FIRST EXECUTABLE STATEMENT  SNBSL
+  !* FIRST EXECUTABLE STATEMENT  SNBSL
   m = Mu + Ml + 1
   nm1 = N - 1
   ldb = 1 - Lda

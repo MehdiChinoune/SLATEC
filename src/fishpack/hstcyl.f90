@@ -1,19 +1,26 @@
-!DECK HSTCYL
+!** HSTCYL
 SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HSTCYL
-  !***PURPOSE  Solve the standard five-point finite difference
+  !>
+  !***
+  !  Solve the standard five-point finite difference
   !            approximation on a staggered grid to the modified
   !            Helmholtz equation in cylindrical coordinates.
-  !***LIBRARY   SLATEC (FISHPACK)
-  !***CATEGORY  I2B1A1A
-  !***TYPE      SINGLE PRECISION (HSTCYL-S)
-  !***KEYWORDS  CYLINDRICAL, ELLIPTIC, FISHPACK, HELMHOLTZ, PDE
-  !***AUTHOR  Adams, J., (NCAR)
+  !***
+  ! **Library:**   SLATEC (FISHPACK)
+  !***
+  ! **Category:**  I2B1A1A
+  !***
+  ! **Type:**      SINGLE PRECISION (HSTCYL-S)
+  !***
+  ! **Keywords:**  CYLINDRICAL, ELLIPTIC, FISHPACK, HELMHOLTZ, PDE
+  !***
+  ! **Author:**  Adams, J., (NCAR)
   !           Swarztrauber, P. N., (NCAR)
   !           Sweet, R., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !      HSTCYL solves the standard five-point finite difference
   !      approximation on a staggered grid to the modified Helmholtz
@@ -232,7 +239,7 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !    W
   !      W(1) contains the required length of W.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !     * * * * * * *   Program Specifications    * * * * * * * * * * * *
   !
@@ -304,25 +311,28 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   !
-  !***REFERENCES  U. Schumann and R. Sweet, A direct method for the
+  !***
+  ! **References:**  U. Schumann and R. Sweet, A direct method for the
   !                 solution of Poisson's equation with Neumann boundary
   !                 conditions on a staggered grid of arbitrary size,
   !                 Journal of Computational Physics 20, (1976),
   !                 pp. 171-182.
-  !***ROUTINES CALLED  GENBUN, POISTG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  GENBUN, POISTG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  HSTCYL
+  
   REAL A, a1, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, deltht, &
     dlrsq, dlthsq, Elmbda, F, Pertrb, W
   INTEGER i, Idimf, ierr1, Ierror, iwb, iwc, iwr, j, k, lp, M, &
     Mbdcnd, N, Nbdcnd, np
   DIMENSION F(Idimf,*), Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
-  !***FIRST EXECUTABLE STATEMENT  HSTCYL
+  !* FIRST EXECUTABLE STATEMENT  HSTCYL
   Ierror = 0
   IF ( A<0. ) Ierror = 1
   IF ( A>=B ) Ierror = 2

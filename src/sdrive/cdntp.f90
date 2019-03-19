@@ -1,29 +1,34 @@
-!DECK CDNTP
+!** CDNTP
 SUBROUTINE CDNTP(H,K,N,Nq,T,Tout,Yh,Y)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CDNTP
-  !***SUBSIDIARY
-  !***PURPOSE  Subroutine CDNTP interpolates the K-th derivative of Y at
+  !>
+  !***
+  !  Subroutine CDNTP interpolates the K-th derivative of Y at
   !            TOUT, using the data in the YH array.  If K has a value
   !            greater than NQ, the NQ-th derivative is calculated.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***TYPE      COMPLEX (SDNTP-S, DDNTP-D, CDNTP-C)
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Type:**      COMPLEX (SDNTP-S, DDNTP-D, CDNTP-C)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  CDNTP
+  
   INTEGER i, j, jj, K, kk, kused, N, Nq
   COMPLEX Y(*), Yh(N,*)
   REAL factor, H, r, T, Tout
-  !***FIRST EXECUTABLE STATEMENT  CDNTP
+  !* FIRST EXECUTABLE STATEMENT  CDNTP
   IF ( K==0 ) THEN
     DO i = 1, N
       Y(i) = Yh(i,Nq+1)

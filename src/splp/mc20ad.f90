@@ -1,13 +1,17 @@
-!DECK MC20AD
+!** MC20AD
 SUBROUTINE MC20AD(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  MC20AD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (MC20AS-S, MC20AD-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (MC20AS-S, MC20AD-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THIS SUBPROGRAM IS A SLIGHT MODIFICATION OF A SUBPROGRAM
   !     FROM THE C. 1979 AERE HARWELL LIBRARY.  THE NAME OF THE
@@ -21,20 +25,23 @@ SUBROUTINE MC20AD(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   !     THE USER AND AERE-UK.  ANY USAGE OF THE SANDIA WRITTEN CODES
   !     DSPLP( ) (WHICH USES THE HARWELL SUBROUTINES) IS PERMITTED.
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  MC20AD
+  
   INTEGER i, ice, icep, j, ja, jb, jce, jcep, Jdisp, Jptr, k, &
     kr, loc, Maxa, Nc, null
   INTEGER Inum(*), Jnum(*)
   REAL(8) :: A(*), ace, acep
   DIMENSION Jptr(Nc)
-  !***FIRST EXECUTABLE STATEMENT  MC20AD
+  !* FIRST EXECUTABLE STATEMENT  MC20AD
   null = -Jdisp
   !**      CLEAR JPTR
   DO j = 1, Nc

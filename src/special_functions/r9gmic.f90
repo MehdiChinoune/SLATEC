@@ -1,38 +1,47 @@
-!DECK R9GMIC
+!** R9GMIC
 REAL FUNCTION R9GMIC(A,X,Alx)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  R9GMIC
-  !***SUBSIDIARY
-  !***PURPOSE  Compute the complementary incomplete Gamma function for A
+  !>
+  !***
+  !  Compute the complementary incomplete Gamma function for A
   !            near a negative integer and for small X.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7E
-  !***TYPE      SINGLE PRECISION (R9GMIC-S, D9GMIC-D)
-  !***KEYWORDS  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB, SMALL X,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7E
+  !***
+  ! **Type:**      SINGLE PRECISION (R9GMIC-S, D9GMIC-D)
+  !***
+  ! **Keywords:**  COMPLEMENTARY INCOMPLETE GAMMA FUNCTION, FNLIB, SMALL X,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Compute the complementary incomplete gamma function for A near
   ! a negative integer and for small X.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ALNGAM, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ALNGAM, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  !***END PROLOGUE  R9GMIC
+  
   REAL A, alng, ALNGAM, Alx, bot, eps, euler, fk, fkp1, fm, &
     R1MACH, s, sgng, t, te, X
   INTEGER k, m, ma, mm1
   SAVE euler, eps, bot
   DATA euler/.5772156649015329E0/
   DATA eps, bot/2*0.0/
-  !***FIRST EXECUTABLE STATEMENT  R9GMIC
+  !* FIRST EXECUTABLE STATEMENT  R9GMIC
   IF ( eps==0.0 ) eps = 0.5*R1MACH(3)
   IF ( bot==0.0 ) bot = LOG(R1MACH(1))
   !

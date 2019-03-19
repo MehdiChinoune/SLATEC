@@ -1,23 +1,30 @@
-!DECK PCHIC
+!** PCHIC
 SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PCHIC
-  !***PURPOSE  Set derivatives needed to determine a piecewise monotone
+  !>
+  !***
+  !  Set derivatives needed to determine a piecewise monotone
   !            piecewise cubic Hermite interpolant to given data.
   !            User control is available over boundary conditions and/or
   !            treatment of points where monotonicity switches direction.
-  !***LIBRARY   SLATEC (PCHIP)
-  !***CATEGORY  E1A
-  !***TYPE      SINGLE PRECISION (PCHIC-S, DPCHIC-D)
-  !***KEYWORDS  CUBIC HERMITE INTERPOLATION, MONOTONE INTERPOLATION,
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Category:**  E1A
+  !***
+  ! **Type:**      SINGLE PRECISION (PCHIC-S, DPCHIC-D)
+  !***
+  ! **Keywords:**  CUBIC HERMITE INTERPOLATION, MONOTONE INTERPOLATION,
   !             PCHIP, PIECEWISE CUBIC INTERPOLATION,
   !             SHAPE-PRESERVING INTERPOLATION
-  !***AUTHOR  Fritsch, F. N., (LLNL)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             P.O. Box 808  (L-316)
   !             Livermore, CA  94550
   !             FTS 532-4275, (510) 422-4275
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !         PCHIC:  Piecewise Cubic Hermite Interpolation Coefficients.
   !
@@ -174,7 +181,8 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !               NOTE:  The above errors are checked in the order listed,
   !                   and following arguments have **NOT** been validated.
   !
-  !***REFERENCES  1. F. N. Fritsch, Piecewise Cubic Hermite Interpolation
+  !***
+  ! **References:**  1. F. N. Fritsch, Piecewise Cubic Hermite Interpolation
   !                 Package, Report UCRL-87285, Lawrence Livermore Nation-
   !                 al Laboratory, July 1982.  [Poster presented at the
   !                 SIAM 30th Anniversary Meeting, 19-23 July 1982.]
@@ -185,8 +193,10 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !               3. F. N. Fritsch and R. E. Carlson, Monotone piecewise
   !                 cubic interpolation, SIAM Journal on Numerical Ana-
   !                 lysis 17, 2 (April 1980), pp. 238-246.
-  !***ROUTINES CALLED  PCHCE, PCHCI, PCHCS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  PCHCE, PCHCI, PCHCS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820218  DATE WRITTEN
   !   820804  Converted to SLATEC library version.
   !   870813  Updated Reference 2.
@@ -198,7 +208,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920429  Revised format and order of references.  (WRB,FNF)
-  !***END PROLOGUE  PCHIC
+  
   !  Programming notes:
   !
   !     To produce a double precision version, simply:
@@ -223,7 +233,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
-  !***FIRST EXECUTABLE STATEMENT  PCHIC
+  !* FIRST EXECUTABLE STATEMENT  PCHIC
   IF ( N<2 ) THEN
     !
     !  ERROR RETURNS.

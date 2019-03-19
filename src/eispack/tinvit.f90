@@ -1,16 +1,23 @@
-!DECK TINVIT
+!** TINVIT
 SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TINVIT
-  !***PURPOSE  Compute the eigenvectors of symmetric tridiagonal matrix
+  !>
+  !***
+  !  Compute the eigenvectors of symmetric tridiagonal matrix
   !            corresponding to specified eigenvalues, using inverse
   !            iteration.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C3
-  !***TYPE      SINGLE PRECISION (TINVIT-S)
-  !***KEYWORDS  EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C3
+  !***
+  ! **Type:**      SINGLE PRECISION (TINVIT-S)
+  !***
+  ! **Keywords:**  EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the inverse iteration tech-
   !     nique in the ALGOL procedure TRISTURM by Peters and Wilkinson.
@@ -92,19 +99,22 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  TINVIT
+  
   !
   INTEGER i, j, M, N, p, q, r, s, ii, ip, jj, Nm, its, tag, &
     Ierr, group
@@ -113,7 +123,7 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
   REAL Rv1(*), Rv2(*), Rv3(*), Rv4(*), Rv6(*)
   REAL u, v, uk, xu, x0, x1, eps2, eps3, eps4, norm, order
   !
-  !***FIRST EXECUTABLE STATEMENT  TINVIT
+  !* FIRST EXECUTABLE STATEMENT  TINVIT
   Ierr = 0
   IF ( M==0 ) RETURN
   tag = 0

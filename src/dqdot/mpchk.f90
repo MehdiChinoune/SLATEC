@@ -1,22 +1,30 @@
-!DECK MPCHK
+!** MPCHK
 SUBROUTINE MPCHK(I,J)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  MPCHK
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (MPCHK-A)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DQDOTA and DQDOTI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (MPCHK-A)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !  Checks legality of B, T, M, MXR and LUN which should be set
   !  in COMMON. The condition on MXR (the dimension of the EP arrays)
   !  is that  MXR .GE. (I*T + J)
   !
-  !***SEE ALSO  DQDOTA, DQDOTI, MPBLAS
-  !***ROUTINES CALLED  I1MACH, MPERR
-  !***COMMON BLOCKS    MPCOM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DQDOTA, DQDOTI, MPBLAS
+  !***
+  ! **Routines called:**  I1MACH, MPERR
+  !***
+  ! COMMON BLOCKS    MPCOM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   ??????  Modified for use with BLAS.  Blank COMMON changed to named
   !           COMMON.  R given dimension 12.
@@ -25,11 +33,11 @@ SUBROUTINE MPCHK(I,J)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  !***END PROLOGUE  MPCHK
+  
   INTEGER I, I1MACH, ib, J, LUN, M, mx, MXR
   COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
   INTEGER B, T, R
-  !***FIRST EXECUTABLE STATEMENT  MPCHK
+  !* FIRST EXECUTABLE STATEMENT  MPCHK
   LUN = I1MACH(4)
   ! NOW CHECK LEGALITY OF B, T AND M
   IF ( B<=1 ) THEN

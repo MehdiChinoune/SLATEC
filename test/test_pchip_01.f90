@@ -2,24 +2,31 @@ MODULE TEST32_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK FDTRUE
+  !** FDTRUE
   SUBROUTINE FDTRUE(X,F,D)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  FDTRUE
-    !***SUBSIDIARY
-    !***PURPOSE  Compute exact function values for EVCHCK.
-    !***LIBRARY   SLATEC (PCHIP)
-    !***TYPE      SINGLE PRECISION (FDTRUE-S, DFDTRU-D)
-    !***KEYWORDS  PCHIP EVALUATOR QUICK CHECK
-    !***AUTHOR  Fritsch, F. N., (LLNL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Compute exact function values for EVCHCK.
+    !***
+    ! **Library:**   SLATEC (PCHIP)
+    !***
+    ! **Type:**      SINGLE PRECISION (FDTRUE-S, DFDTRU-D)
+    !***
+    ! **Keywords:**  PCHIP EVALUATOR QUICK CHECK
+    !***
+    ! **Author:**  Fritsch, F. N., (LLNL)
+    !***
+    ! **Description:**
     !
     !        COMPUTE EXACT FUNCTION VALUES IN DOUBLE PRECISION.
     !
     !                   F(X) = X*(X+1)*(X-2)
     !
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   820601  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   890706  Cosmetic changes to prologue.  (WRB)
@@ -27,11 +34,11 @@ CONTAINS
     !   900315  Revised prologue.  (FNF)
     !   900316  Deleted variables ONE and TWO.  (FNF)
     !   900321  Changed name of d.p. version from DFTRUE to DFDTRU.
-    !***END PROLOGUE  FDTRUE
+    
     REAL X, F, D
     REAL(8) :: fact1, fact2, xx
     !
-    !***FIRST EXECUTABLE STATEMENT  FDTRUE
+    !* FIRST EXECUTABLE STATEMENT  FDTRUE
     xx = X
     fact1 = xx + 1
     fact2 = xx - 2
@@ -40,17 +47,22 @@ CONTAINS
     !
     !------------- LAST LINE OF FDTRUE FOLLOWS -----------------------------
   END SUBROUTINE FDTRUE
-  !DECK EVCHCK
+  !** EVCHCK
   SUBROUTINE EVCHCK(Lout,Kprint,Npts,Xev,Fev,Dev,Fev2,Fail)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  EVCHCK
-    !***SUBSIDIARY
-    !***PURPOSE  Test evaluation accuracy of CHFDV and CHFEV for PCHQK1.
-    !***LIBRARY   SLATEC (PCHIP)
-    !***TYPE      SINGLE PRECISION (EVCHCK-S, DEVCHK-D)
-    !***KEYWORDS  PCHIP EVALUATOR QUICK CHECK
-    !***AUTHOR  Fritsch, F. N., (LLNL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Test evaluation accuracy of CHFDV and CHFEV for PCHQK1.
+    !***
+    ! **Library:**   SLATEC (PCHIP)
+    !***
+    ! **Type:**      SINGLE PRECISION (EVCHCK-S, DEVCHK-D)
+    !***
+    ! **Keywords:**  PCHIP EVALUATOR QUICK CHECK
+    !***
+    ! **Author:**  Fritsch, F. N., (LLNL)
+    !***
+    ! **Description:**
     !
     ! -------- CODE TO TEST EVALUATION ACCURACY OF CHFDV AND CHFEV --------
     !
@@ -71,8 +83,10 @@ CONTAINS
     !     SLATEC LIBRARY ROUTINES USED:  CHFDV, CHFEV, R1MACH, RAND.
     !     OTHER ROUTINES USED:  FDTRUE.
     !
-    !***ROUTINES CALLED  CHFDV, CHFEV, FDTRUE, R1MACH, RAND
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CHFDV, CHFEV, FDTRUE, R1MACH, RAND
+
+    !* REVISION HISTORY  (YYMMDD)
     !   820601  DATE WRITTEN
     !   820624  CONVERTED TO QUICK CHECK FOR SLATEC LIBRARY.
     !   820630  1. MODIFIED DEFINITIONS OF RELATIVE ERROR AND TEST
@@ -97,7 +111,7 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   910801  Added EXTERNAL statement for RAND due to problem on IBM
     !           RS 6000.  (WRB)
-    !***END PROLOGUE  EVCHCK
+    
     !
     !  Declare arguments.
     !
@@ -130,7 +144,7 @@ CONTAINS
     DATA left/ - 1.5E0, 2.0E-10, 1.0E0/
     DATA right/2.5E0, 3.0E-10, 1.0E+8/
     !
-    !***FIRST EXECUTABLE STATEMENT  EVCHCK
+    !* FIRST EXECUTABLE STATEMENT  EVCHCK
     machep = R1MACH(4)
     eps1 = four*machep
     eps2 = ten*machep
@@ -387,17 +401,22 @@ CONTAINS
       RERR = err/MAX(ABS(value),floor)
     END FUNCTION RERR
   END SUBROUTINE EVCHCK
-  !DECK EVERCK
+  !** EVERCK
   SUBROUTINE EVERCK(Lout,Kprint,Fail)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  EVERCK
-    !***SUBSIDIARY
-    !***PURPOSE  Test error returns from PCHIP evaluators for PCHQK1.
-    !***LIBRARY   SLATEC (PCHIP)
-    !***TYPE      SINGLE PRECISION (EVERCK-S, DEVERK-D)
-    !***KEYWORDS  PCHIP EVALUATOR QUICK CHECK
-    !***AUTHOR  Fritsch, F. N., (LLNL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Test error returns from PCHIP evaluators for PCHQK1.
+    !***
+    ! **Library:**   SLATEC (PCHIP)
+    !***
+    ! **Type:**      SINGLE PRECISION (EVERCK-S, DEVERK-D)
+    !***
+    ! **Keywords:**  PCHIP EVALUATOR QUICK CHECK
+    !***
+    ! **Author:**  Fritsch, F. N., (LLNL)
+    !***
+    ! **Description:**
     !
     ! --------- CODE TO TEST ERROR RETURNS FROM PCHIP EVALUATORS. ---------
     !
@@ -407,9 +426,11 @@ CONTAINS
     !                                    XERDMP, XGETF, XSETF.
     !     OTHER ROUTINES USED:  COMP.
     !
-    !***ROUTINES CALLED  CHFDV, CHFEV, COMP, PCHFD, PCHFE, XERDMP, XGETF,
+    !***
+    ! **Routines called:**  CHFDV, CHFEV, COMP, PCHFD, PCHFE, XERDMP, XGETF,
     !                    XSETF
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   820601  DATE WRITTEN
     !   820715  CONVERTED TO QUICK CHECK FOR SLATEC LIBRARY.
     !   890207  ADDED CALLS TO ERROR HANDLER.
@@ -426,7 +447,7 @@ CONTAINS
     !   900322  Made miscellaneous cosmetic changes.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930504  Removed parens from constants in WRITE statements.  (FNF)
-    !***END PROLOGUE  EVERCK
+    
     !
     !  Declare arguments.
     !
@@ -442,7 +463,7 @@ CONTAINS
     !  INITIALIZE.
     !
     PARAMETER (N=10)
-    !***FIRST EXECUTABLE STATEMENT  EVERCK
+    !* FIRST EXECUTABLE STATEMENT  EVERCK
     nerr = 0
     !
     CALL XGETF(kontrl)
@@ -545,18 +566,23 @@ CONTAINS
     99005 FORMAT (/' THIS CALL SHOULD RETURN IERR =',I3)
     !------------- LAST LINE OF EVERCK FOLLOWS -----------------------------
   END SUBROUTINE EVERCK
-  !DECK EVPCCK
+  !** EVPCCK
   SUBROUTINE EVPCCK(Lout,Kprint,X,Y,F,Fx,Fy,Xe,Ye,Fe,De,Fe2,Fail)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  EVPCCK
-    !***SUBSIDIARY
-    !***PURPOSE  Test usage of increment argument in PCHFD and PCHFE for
+    !>
+    !***
+    !  Test usage of increment argument in PCHFD and PCHFE for
     !            PCHQK1.
-    !***LIBRARY   SLATEC (PCHIP)
-    !***TYPE      SINGLE PRECISION (EVPCCK-S, DEVPCK-D)
-    !***KEYWORDS  PCHIP EVALUATOR QUICK CHECK
-    !***AUTHOR  Fritsch, F. N., (LLNL)
-    !***DESCRIPTION
+    !***
+    ! **Library:**   SLATEC (PCHIP)
+    !***
+    ! **Type:**      SINGLE PRECISION (EVPCCK-S, DEVPCK-D)
+    !***
+    ! **Keywords:**  PCHIP EVALUATOR QUICK CHECK
+    !***
+    ! **Author:**  Fritsch, F. N., (LLNL)
+    !***
+    ! **Description:**
     !
     ! ---- CODE TO TEST USAGE OF INCREMENT ARGUMENT IN PCHFD AND PCHFE ----
     !
@@ -576,8 +602,10 @@ CONTAINS
     !     FORTRAN LIBRARY ROUTINES USED:  (WRITE).
     !     SLATEC LIBRARY ROUTINES USED:  PCHFD, PCHFE, R1MACH.
     !
-    !***ROUTINES CALLED  PCHFD, PCHFE, R1MACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  PCHFD, PCHFE, R1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   820601  DATE WRITTEN
     !   820714  CONVERTED TO QUICK CHECK FOR SLATEC LIBRARY.
     !   820715  1. CORRECTED SOME FORMATS.
@@ -603,7 +631,7 @@ CONTAINS
     !              line length.
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-    !***END PROLOGUE  EVPCCK
+    
     !
     !  Declare arguments.
     !
@@ -626,7 +654,7 @@ CONTAINS
     !
     !  INITIALIZE.
     !
-    !***FIRST EXECUTABLE STATEMENT  EVPCCK
+    !* FIRST EXECUTABLE STATEMENT  EVPCCK
     machep = R1MACH(4)
     tol = 10.E0*machep
     !
@@ -885,27 +913,33 @@ CONTAINS
       DFDY = 2.E0*ax*ay*(ax*ax+1.E0)
     END FUNCTION DFDY
   END SUBROUTINE EVPCCK
-  !DECK PCHQK1
+  !** PCHQK1
   SUBROUTINE PCHQK1(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  PCHQK1
-    !***PURPOSE  Test the PCHIP evaluators CHFDV, CHFEV, PCHFD and PCHFE.
-    !***LIBRARY   SLATEC (PCHIP)
-    !***TYPE      SINGLE PRECISION (PCHQK1-S, DPCHQ1-D)
-    !***KEYWORDS  PCHIP EVALUATOR QUICK CHECK
-    !***AUTHOR  Fritsch, F. N., (LLNL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Test the PCHIP evaluators CHFDV, CHFEV, PCHFD and PCHFE.
+    !***
+    ! **Library:**   SLATEC (PCHIP)
+    !***
+    ! **Type:**      SINGLE PRECISION (PCHQK1-S, DPCHQ1-D)
+    !***
+    ! **Keywords:**  PCHIP EVALUATOR QUICK CHECK
+    !***
+    ! **Author:**  Fritsch, F. N., (LLNL)
+    !***
+    ! **Description:**
     !
     !              PCHIP QUICK CHECK NUMBER 1
     !
     !     TESTS THE EVALUATORS:  CHFDV, CHFEV, PCHFD, PCHFE.
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL PCHQK1 (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN   :IN  is the unit number to which output is to be written.
     !
@@ -915,15 +949,17 @@ CONTAINS
     !     IPASS:OUT  will contain a pass/fail flag.  IPASS=1 is good.
     !                IPASS=0 indicates one or more tests failed.
     !
-    ! *Description:
+    !- Description:
     !
     !   This routine carries out three tests of the PCH evaluators:
     !     EVCHCK tests the single-cubic evaluators.
     !     EVPCCK tests the full PCH evaluators.
     !     EVERCK exercises the error returns in all evaluators.
     !
-    !***ROUTINES CALLED  EVCHCK, EVERCK, EVPCCK
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  EVCHCK, EVERCK, EVPCCK
+
+    !* REVISION HISTORY  (YYMMDD)
     !   820601  DATE WRITTEN
     !   890306  Changed IPASS to the more accurate name IFAIL.  (FNF)
     !   890618  REVISION DATE from Version 3.2
@@ -936,7 +972,7 @@ CONTAINS
     !   900321  Removed IFAIL from call sequence for SLATEC standards and
     !           made miscellaneous cosmetic changes.  (FNF)
     !   930317  Improved output formats.  (FNF)
-    !***END PROLOGUE  PCHQK1
+    
     !
     !  Declare arguments.
     !
@@ -948,7 +984,7 @@ CONTAINS
     REAL work(4000)
     LOGICAL fail
     !
-    !***FIRST EXECUTABLE STATEMENT  PCHQK1
+    !* FIRST EXECUTABLE STATEMENT  PCHQK1
     IF ( Kprint>=2 ) WRITE (Lun,99001) Kprint
     !
     ! FORMATS.
@@ -1012,27 +1048,33 @@ CONTAINS
     RETURN
     !------------- LAST LINE OF PCHQK1 FOLLOWS -----------------------------
   END SUBROUTINE PCHQK1
-  !DECK PCHQK2
+  !** PCHQK2
   SUBROUTINE PCHQK2(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  PCHQK2
-    !***PURPOSE  Test the PCHIP integrators PCHIA and PCHID.
-    !***LIBRARY   SLATEC (PCHIP)
-    !***TYPE      SINGLE PRECISION (PCHQK2-S, DPCHQ2-D)
-    !***KEYWORDS  PCHIP INTEGRATOR QUICK CHECK
-    !***AUTHOR  Fritsch, F. N., (LLNL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Test the PCHIP integrators PCHIA and PCHID.
+    !***
+    ! **Library:**   SLATEC (PCHIP)
+    !***
+    ! **Type:**      SINGLE PRECISION (PCHQK2-S, DPCHQ2-D)
+    !***
+    ! **Keywords:**  PCHIP INTEGRATOR QUICK CHECK
+    !***
+    ! **Author:**  Fritsch, F. N., (LLNL)
+    !***
+    ! **Description:**
     !
     !              PCHIP QUICK CHECK NUMBER 2
     !
     !     TESTS THE INTEGRATORS:  PCHIA, PCHID.
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL PCHQK2 (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN   :IN  is the unit number to which output is to be written.
     !
@@ -1042,14 +1084,16 @@ CONTAINS
     !     IPASS:OUT  will contain a pass/fail flag.  IPASS=1 is good.
     !                IPASS=0 indicates one or more tests failed.
     !
-    ! *Description:
+    !- Description:
     !
     !   This routine constructs data from a cubic, integrates it with PCHIA
     !   and compares the results with the correct answer.
     !   Since PCHIA calls PCHID, this tests both integrators.
     !
-    !***ROUTINES CALLED  PCHIA, R1MACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  PCHIA, R1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   820601  DATE WRITTEN
     !   890306  Changed IPASS to the more accurate name IFAIL.  (FNF)
     !   890316  Added declarations as in DPCHQ2.  (FNF)
@@ -1066,7 +1110,7 @@ CONTAINS
     !   901130  Added 1P's to formats; changed to allow KPRINT.gt.3.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-    !***END PROLOGUE  PCHQK2
+    
     !
     !  Declare arguments.
     !
@@ -1100,7 +1144,7 @@ CONTAINS
     !
     !  SET PASS/FAIL TOLERANCE.
     !
-    !***FIRST EXECUTABLE STATEMENT  PCHQK2
+    !* FIRST EXECUTABLE STATEMENT  PCHQK2
     machep = R1MACH(4)
     tol = 100.E0*machep
     !
@@ -1206,27 +1250,33 @@ CONTAINS
       ANTDER = ax**3*(thrqtr*ax-two)
     END FUNCTION ANTDER
   END SUBROUTINE PCHQK2
-  !DECK PCHQK3
+  !** PCHQK3
   SUBROUTINE PCHQK3(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  PCHQK3
-    !***PURPOSE  Test the PCHIP interpolators PCHIC, PCHIM, PCHSP.
-    !***LIBRARY   SLATEC (PCHIP)
-    !***TYPE      SINGLE PRECISION (PCHQK3-S, DPCHQ3-D)
-    !***KEYWORDS  PCHIP INTERPOLATOR QUICK CHECK
-    !***AUTHOR  Fritsch, F. N., (LLNL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Test the PCHIP interpolators PCHIC, PCHIM, PCHSP.
+    !***
+    ! **Library:**   SLATEC (PCHIP)
+    !***
+    ! **Type:**      SINGLE PRECISION (PCHQK3-S, DPCHQ3-D)
+    !***
+    ! **Keywords:**  PCHIP INTERPOLATOR QUICK CHECK
+    !***
+    ! **Author:**  Fritsch, F. N., (LLNL)
+    !***
+    ! **Description:**
     !
     !              PCHIP QUICK CHECK NUMBER 3
     !
     !     TESTS THE INTERPOLATORS:  PCHIC, PCHIM, PCHSP.
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL PCHQK3 (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN   :IN  is the unit number to which output is to be written.
     !
@@ -1236,21 +1286,23 @@ CONTAINS
     !     IPASS:OUT  will contain a pass/fail flag.  IPASS=1 is good.
     !                IPASS=0 indicates one or more tests failed.
     !
-    ! *Description:
+    !- Description:
     !
     !   This routine interpolates a constructed data set with all three
     !    PCHIP interpolators and compares the results with those obtained
     !   on a Cray X/MP.  Two different values of the  PCHIC parameter SWITCH
     !   are used.
     !
-    ! *Remarks:
+    !- Remarks:
     !     1. The Cray results are given only to nine significant figures,
     !        so don't expect them to match to more.
     !     2. The results will depend to some extent on the accuracy of
     !        the EXP function.
     !
-    !***ROUTINES CALLED  COMP, PCHIC, PCHIM, PCHSP, R1MACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  COMP, PCHIC, PCHIM, PCHSP, R1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   900309  DATE WRITTEN
     !   900314  Converted to a subroutine and added a SLATEC 4.0 prologue.
     !   900315  Revised prologue and improved some output formats.  (FNF)
@@ -1271,7 +1323,7 @@ CONTAINS
     !           3. Added 1P's to formats.
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-    !***END PROLOGUE  PCHQK3
+    
     !
     !*Internal Notes:
     !
@@ -1313,7 +1365,7 @@ CONTAINS
       7.63864934E-01, 1.92614386E-02, -7.65324380E-01, -7.28209035E-01, &
       -7.98445427E-02, -2.85983446E-02/
     !
-    !***FIRST EXECUTABLE STATEMENT  PCHQK3
+    !* FIRST EXECUTABLE STATEMENT  PCHQK3
     ifail = 0
     !
     !        Set tolerances.
@@ -1532,27 +1584,33 @@ CONTAINS
     99016 FORMAT (/5X,'  ALL  PCH',A2,' RESULTS OK.')
     !------------- LAST LINE OF PCHQK3 FOLLOWS -----------------------------
   END SUBROUTINE PCHQK3
-  !DECK PCHQK4
+  !** PCHQK4
   SUBROUTINE PCHQK4(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  PCHQK4
-    !***PURPOSE  Test the PCHIP monotonicity checker PCHCM.
-    !***LIBRARY   SLATEC (PCHIP)
-    !***TYPE      SINGLE PRECISION (PCHQK4-S, DPCHQ4-D)
-    !***KEYWORDS  PCHIP MONOTONICITY CHECKER QUICK CHECK
-    !***AUTHOR  Fritsch, F. N., (LLNL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Test the PCHIP monotonicity checker PCHCM.
+    !***
+    ! **Library:**   SLATEC (PCHIP)
+    !***
+    ! **Type:**      SINGLE PRECISION (PCHQK4-S, DPCHQ4-D)
+    !***
+    ! **Keywords:**  PCHIP MONOTONICITY CHECKER QUICK CHECK
+    !***
+    ! **Author:**  Fritsch, F. N., (LLNL)
+    !***
+    ! **Description:**
     !
     !              PCHIP QUICK CHECK NUMBER 4
     !
     !     TESTS THE MONOTONICITY CHECKER:  PCHCM.
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL PCHQK4 (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN   :IN  is the unit number to which output is to be written.
     !
@@ -1562,15 +1620,17 @@ CONTAINS
     !     IPASS:OUT  will contain a pass/fail flag.  IPASS=1 is good.
     !                IPASS=0 indicates one or more tests failed.
     !
-    ! *Description:
+    !- Description:
     !
     !   This routine tests a constructed data set with three different
     !   INCFD settings and compares with the expected results.  It then
     !   runs a special test to check for bug in overall monotonicity found
     !   in PCHMC.  Finally, it reverses the data and repeats all tests.
     !
-    !***ROUTINES CALLED  PCHCM
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  PCHCM
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   890306  Changed LOUT to LUN and added it to call list.  (FNF)
     !   890316  Removed DATA statements to suit new quick check standards.
@@ -1584,7 +1644,7 @@ CONTAINS
     !   900322  Added declarations so all variables are declared.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-    !***END PROLOGUE  PCHQK4
+    
     !
     !*Internal Notes:
     !
@@ -1618,7 +1678,7 @@ CONTAINS
     !
     DATA ns/16, 8, 6/
     !
-    !***FIRST EXECUTABLE STATEMENT  PCHQK4
+    !* FIRST EXECUTABLE STATEMENT  PCHQK4
     IF ( Kprint>=3 ) WRITE (Lun,99001)
     !
     ! FORMATS.
@@ -1782,27 +1842,33 @@ CONTAINS
     99012 FORMAT (' *** Failed -- expect:',16I3)
     !------------- LAST LINE OF PCHQK4 FOLLOWS -----------------------------
   END SUBROUTINE PCHQK4
-  !DECK PCHQK5
+  !** PCHQK5
   SUBROUTINE PCHQK5(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  PCHQK5
-    !***PURPOSE  Test the PCH to B-spline conversion routine PCHBS.
-    !***LIBRARY   SLATEC (PCHIP)
-    !***TYPE      SINGLE PRECISION (PCHQK5-S, DPCHQ5-D)
-    !***KEYWORDS  PCHIP CONVERSION ROUTINE QUICK CHECK
-    !***AUTHOR  Fritsch, F. N., (LLNL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Test the PCH to B-spline conversion routine PCHBS.
+    !***
+    ! **Library:**   SLATEC (PCHIP)
+    !***
+    ! **Type:**      SINGLE PRECISION (PCHQK5-S, DPCHQ5-D)
+    !***
+    ! **Keywords:**  PCHIP CONVERSION ROUTINE QUICK CHECK
+    !***
+    ! **Author:**  Fritsch, F. N., (LLNL)
+    !***
+    ! **Description:**
     !
     !              PCHIP QUICK CHECK NUMBER 5
     !
     !     TESTS THE CONVERSION ROUTINE:  PCHBS.
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL PCHQK5 (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN   :IN  is the unit number to which output is to be written.
     !
@@ -1812,23 +1878,25 @@ CONTAINS
     !     IPASS:OUT  will contain a pass/fail flag.  IPASS=1 is good.
     !                IPASS=0 indicates one or more tests failed.
     !
-    ! *Description:
+    !- Description:
     !
     !   This routine tests a constructed data set with four different
     !   KNOTYP settings.  It computes the function and derivatives of the
     !   resulting B-representation via BVALU and compares with PCH data.
     !
-    ! *Caution:
+    !- Caution:
     !   This routine assumes BVALU has already been successfully tested.
     !
-    !***ROUTINES CALLED  BVALU, PCHBS, R1MACH
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  BVALU, PCHBS, R1MACH
+
+    !* REVISION HISTORY  (YYMMDD)
     !   900411  DATE WRITTEN
     !   900412  Corrected minor errors in initial implementation.
     !   900430  Corrected errors in prologue.
     !   900501  Corrected declarations.
     !   930317  Improved output formats.  (FNF)
-    !***END PROLOGUE  PCHQK5
+    
     !
     !*Internal Notes:
     !  TOL  is the tolerance to use for quantities that should only
@@ -1868,7 +1936,7 @@ CONTAINS
     !
     !  Initialize.
     !
-    !***FIRST EXECUTABLE STATEMENT  PCHQK5
+    !* FIRST EXECUTABLE STATEMENT  PCHQK5
     ifail = 0
     tol = 100*R1MACH(4)
     tolz = ZERO
@@ -1984,24 +2052,31 @@ CONTAINS
     END FUNCTION RELERR
   END SUBROUTINE PCHQK5
 END MODULE TEST32_MOD
-!DECK TEST32
+!** TEST32
 PROGRAM TEST32
   USE TEST32_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST32
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E1A
-  !***TYPE      SINGLE PRECISION (TEST32-S, TEST33-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E1A
+  !***
+  ! **Type:**      SINGLE PRECISION (TEST32-S, TEST33-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -2013,16 +2088,19 @@ PROGRAM TEST32
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        PCHIP
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  I1MACH, PCHQK1, PCHQK2, PCHQK3, PCHQK4, PCHQK5,
+  !***
+  ! **Routines called:**  I1MACH, PCHQK1, PCHQK2, PCHQK3, PCHQK4, PCHQK5,
   !                    XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900314  Added new quick checks PCHQK3, PCHQK4.  (FNF)
@@ -2030,10 +2108,10 @@ PROGRAM TEST32
   !   900321  Moved IPASS to call sequences for SLATEC standards.  (FNF)
   !   900524  Cosmetic changes to code.  (WRB)
   !   930318  Added new quick check PCHQK5.  (WRB,FNF)
-  !***END PROLOGUE  TEST32
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST32
+  !* FIRST EXECUTABLE STATEMENT  TEST32
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

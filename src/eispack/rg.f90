@@ -1,15 +1,22 @@
-!DECK RG
+!** RG
 SUBROUTINE RG(Nm,N,A,Wr,Wi,Matz,Z,Iv1,Fv1,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RG
-  !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
+  !>
+  !***
+  !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a real general matrix.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A2
-  !***TYPE      SINGLE PRECISION (RG-S, CG-C)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A2
+  !***
+  ! **Type:**      SINGLE PRECISION (RG-S, CG-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine calls the recommended sequence of
   !     subroutines from the eigensystem subroutine package (EISPACK)
@@ -69,25 +76,28 @@ SUBROUTINE RG(Nm,N,A,Wr,Wi,Matz,Z,Iv1,Fv1,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  BALANC, BALBAK, ELMHES, ELTRAN, HQR, HQR2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  BALANC, BALBAK, ELMHES, ELTRAN, HQR, HQR2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   921103  Corrected description of IV1.  (DWL, FNF and WRB)
-  !***END PROLOGUE  RG
+  
   !
   INTEGER N, Nm, is1, is2, Ierr, Matz
   REAL A(Nm,*), Wr(*), Wi(*), Z(Nm,*), Fv1(*)
   INTEGER Iv1(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  RG
+  !* FIRST EXECUTABLE STATEMENT  RG
   IF ( N<=Nm ) THEN
     !
     CALL BALANC(Nm,N,A,is1,is2,Fv1)

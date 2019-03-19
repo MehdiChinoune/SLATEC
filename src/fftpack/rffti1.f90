@@ -1,15 +1,22 @@
-!DECK RFFTI1
+!** RFFTI1
 SUBROUTINE RFFTI1(N,Wa,Ifac)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RFFTI1
-  !***PURPOSE  Initialize a real and an integer work array for RFFTF1 and
+  !>
+  !***
+  !  Initialize a real and an integer work array for RFFTF1 and
   !            RFFTB1.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A1
-  !***TYPE      SINGLE PRECISION (RFFTI1-S, CFFTI1-C)
-  !***KEYWORDS  FFTPACK, FOURIER TRANSFORM
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A1
+  !***
+  ! **Type:**      SINGLE PRECISION (RFFTI1-S, CFFTI1-C)
+  !***
+  ! **Keywords:**  FFTPACK, FOURIER TRANSFORM
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !   Subroutine RFFTI1 initializes the work arrays WA and IFAC which are
   !   used in both RFFTF1 and RFFTB1.  The prime factorization of N and a
@@ -31,11 +38,14 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
   !   for different values of N.  The contents of WA and IFAC must not be
   !   changed between calls of RFFTF1 or RFFTB1.
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -50,7 +60,7 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  RFFTI1
+  
   REAL arg, argh, argld, fi, tpi, Wa
   INTEGER i, ib, ido, Ifac, ii, ip, ipm, is, j, k1, l1, l2, ld, &
     N, nf, nfm1, nl, nq, nr, ntry
@@ -58,7 +68,7 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
   DIMENSION Wa(*), Ifac(*), ntryh(4)
   SAVE ntryh
   DATA ntryh(1), ntryh(2), ntryh(3), ntryh(4)/4, 2, 3, 5/
-  !***FIRST EXECUTABLE STATEMENT  RFFTI1
+  !* FIRST EXECUTABLE STATEMENT  RFFTI1
   nl = N
   nf = 0
   j = 0

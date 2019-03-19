@@ -1,16 +1,23 @@
-!DECK BSPDR
+!** BSPDR
 SUBROUTINE BSPDR(T,A,N,K,Nderiv,Ad)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BSPDR
-  !***PURPOSE  Use the B-representation to construct a divided difference
+  !>
+  !***
+  !  Use the B-representation to construct a divided difference
   !            table preparatory to a (right) derivative calculation.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E3
-  !***TYPE      SINGLE PRECISION (BSPDR-S, DBSPDR-D)
-  !***KEYWORDS  B-SPLINE, DATA FITTING, DIFFERENTIATION OF SPLINES,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E3
+  !***
+  ! **Type:**      SINGLE PRECISION (BSPDR-S, DBSPDR-D)
+  !***
+  ! **Keywords:**  B-SPLINE, DATA FITTING, DIFFERENTIATION OF SPLINES,
   !             INTERPOLATION
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Written by Carl de Boor and modified by D. E. Amos
   !
@@ -45,11 +52,14 @@ SUBROUTINE BSPDR(T,A,N,K,Nderiv,Ad)
   !     Error Conditions
   !         Improper input is a fatal error
   !
-  !***REFERENCES  Carl de Boor, Package for calculating with B-splines,
+  !***
+  ! **References:**  Carl de Boor, Package for calculating with B-splines,
   !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
   !                 pp. 441-472.
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -58,13 +68,13 @@ SUBROUTINE BSPDR(T,A,N,K,Nderiv,Ad)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BSPDR
+  
   !
   INTEGER i, id, ii, ipkmid, jj, jm, K, kmid, N, Nderiv
   REAL A, Ad, diff, fkmid, T
   !     DIMENSION T(N+K), AD((2*N-NDERIV+1)*NDERIV/2)
   DIMENSION T(*), A(*), Ad(*)
-  !***FIRST EXECUTABLE STATEMENT  BSPDR
+  !* FIRST EXECUTABLE STATEMENT  BSPDR
   IF ( K<1 ) THEN
     !
     !

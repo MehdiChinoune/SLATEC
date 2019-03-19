@@ -1,16 +1,23 @@
-!DECK SSPFA
+!** SSPFA
 SUBROUTINE SSPFA(Ap,N,Kpvt,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSPFA
-  !***PURPOSE  Factor a real symmetric matrix stored in packed form by
+  !>
+  !***
+  !  Factor a real symmetric matrix stored in packed form by
   !            elimination with symmetric pivoting.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1A
-  !***TYPE      SINGLE PRECISION (SSPFA-S, DSPFA-D, CHPFA-C, CSPFA-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION, PACKED,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1A
+  !***
+  ! **Type:**      SINGLE PRECISION (SSPFA-S, DSPFA-D, CHPFA-C, CSPFA-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION, PACKED,
   !             SYMMETRIC
-  !***AUTHOR  Bunch, J., (UCSD)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Bunch, J., (UCSD)
+  !***
+  ! **Description:**
   !
   !     SSPFA factors a real symmetric matrix stored in
   !     packed form by elimination with symmetric pivoting.
@@ -65,10 +72,13 @@ SUBROUTINE SSPFA(Ap,N,Kpvt,Info)
   !             10    CONTINUE
   !             20 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  ISAMAX, SAXPY, SSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  ISAMAX, SAXPY, SSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -78,7 +88,7 @@ SUBROUTINE SSPFA(Ap,N,Kpvt,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SSPFA
+  
   INTEGER N, Kpvt(*), Info
   REAL Ap(*)
   !
@@ -88,7 +98,7 @@ SUBROUTINE SSPFA(Ap,N,Kpvt,Info)
   INTEGER j, jj, jk, jkm1, jmax, jmim, k, kk, km1, km1k, km1km1, &
     km2, kstep
   LOGICAL swap
-  !***FIRST EXECUTABLE STATEMENT  SSPFA
+  !* FIRST EXECUTABLE STATEMENT  SSPFA
   !
   !     INITIALIZE
   !

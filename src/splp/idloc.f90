@@ -1,15 +1,20 @@
-!DECK IDLOC
+!** IDLOC
 INTEGER FUNCTION IDLOC(Loc,Sx,Ix)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  IDLOC
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (IPLOC-S, IDLOC-D)
-  !***KEYWORDS  RELATIVE ADDRESS DETERMINATION FUNCTION, SLATEC
-  !***AUTHOR  Boland, W. Robert, (LANL)
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (IPLOC-S, IDLOC-D)
+  !***
+  ! **Keywords:**  RELATIVE ADDRESS DETERMINATION FUNCTION, SLATEC
+  !***
+  ! **Author:**  Boland, W. Robert, (LANL)
   !           Nicol, Tom, (University of British Columbia)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   Given a "virtual" location,  IDLOC returns the relative working
   !   address of the vector component stored in SX, IX.  Any necessary
@@ -19,19 +24,22 @@ INTEGER FUNCTION IDLOC(Loc,Sx,Ix)
   !   LOC       is the "virtual" address of the data to be retrieved.
   !   SX ,IX    represent the matrix where the data is stored.
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  DPRWPG, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  DPRWPG, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890606  DATE WRITTEN
   !   890606  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   910731  Added code to set IDLOC to 0 if LOC is non-positive.  (WRB)
-  !***END PROLOGUE  IDLOC
+  
   INTEGER ipage, itemp, k, key, lmx, lmxm1, Loc, lpg, np
   REAL(8) :: Sx(*)
   INTEGER Ix(*)
-  !***FIRST EXECUTABLE STATEMENT  IDLOC
+  !* FIRST EXECUTABLE STATEMENT  IDLOC
   IF ( Loc<=0 ) THEN
     CALL XERMSG('SLATEC','IDLOC',&
       'A value of LOC, the first argument, .LE. 0 was encountered',55,1)

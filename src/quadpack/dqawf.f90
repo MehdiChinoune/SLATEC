@@ -1,26 +1,33 @@
-!DECK DQAWF
+!** DQAWF
 SUBROUTINE DQAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
     Lst,Leniw,Maxp1,Lenw,Iwork,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQAWF
-  !***PURPOSE  The routine calculates an approximation result to a given
+  !>
+  !***
+  !  The routine calculates an approximation result to a given
   !            Fourier integral I=Integral of F(X)*W(X) over (A,INFINITY)
   !            where W(X) = COS(OMEGA*X) or W(X) = SIN(OMEGA*X).
   !            Hopefully satisfying following claim for accuracy
   !            ABS(I-RESULT).LE.EPSABS.
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A3A1
-  !***TYPE      DOUBLE PRECISION (QAWF-S, DQAWF-D)
-  !***KEYWORDS  AUTOMATIC INTEGRATOR, CONVERGENCE ACCELERATION,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A3A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (QAWF-S, DQAWF-D)
+  !***
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, CONVERGENCE ACCELERATION,
   !             FOURIER INTEGRALS, INTEGRATION BETWEEN ZEROS, QUADPACK,
   !             QUADRATURE, SPECIAL-PURPOSE INTEGRAL
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Computation of Fourier integrals
   !        Standard fortran subroutine
@@ -191,16 +198,19 @@ SUBROUTINE DQAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !                     further elements of WORK have no specific
   !                     meaning for the user.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DQAWFE, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DQAWFE, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891009  Removed unreferenced variable.  (WRB)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DQAWF
+  
   !
   REAL(8) :: A, Abserr, Epsabs, F, Omega, Result, Work
   INTEGER Ier, Integr, Iwork, Leniw, Lenw, limit, Limlst, ll2, lvl, &
@@ -212,7 +222,7 @@ SUBROUTINE DQAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !
   !         CHECK VALIDITY OF LIMLST, LENIW, MAXP1 AND LENW.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQAWF
+  !* FIRST EXECUTABLE STATEMENT  DQAWF
   Ier = 6
   Neval = 0
   Result = 0.0D+00

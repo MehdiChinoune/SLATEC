@@ -2,17 +2,22 @@ MODULE TEST04_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK CFNCK
+  !** CFNCK
   SUBROUTINE CFNCK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CFNCK
-    !***PURPOSE  Quick check for the complex Fullerton special functions.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Boland, W. Robert, (LANL)
+    !>
+    !***
+    !  Quick check for the complex Fullerton special functions.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Boland, W. Robert, (LANL)
     !           Chow, Jeff, (LANL)
     !           Rivera, Shawn, (LANL)
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !     This subroutine does a quick check for the complex
     !     routines in the Fullerton special function library.
@@ -26,18 +31,20 @@ CONTAINS
     !     IPASS    output value indicating whether tests passed or
     !              failed
     !
-    !***ROUTINES CALLED  C0LGMC, CACOS, CACOSH, CASIN, CASINH, CATAN,
+    !***
+    ! **Routines called:**  C0LGMC, CACOS, CACOSH, CASIN, CASINH, CATAN,
     !                    CATAN2, CATANH, CBETA, CCBRT, CCOSH, CCOT, CEXPRL,
     !                    CGAMMA, CGAMR, CLBETA, CLNGAM, CLNREL, CLOG10,
     !                    CPSI, CSINH, CTAN, CTANH, R1MACH
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   800901  DATE WRITTEN
     !   891115  REVISION DATE from Version 3.2
     !   891120  Checks of remainder of FNLIB routines added and code
     !           reorganized.  (WRB)
     !   900330  Prologue converted to Version 4.0 format.  (BAB)
     !   900727  Added EXTERNAL statement.  (WRB)
-    !***END PROLOGUE  CFNCK
+    
     INTEGER i, Lun, Kprint, Ipass
     REAL sqrt2, sqrt3, pi, errmax, errtol, abserr, relerr
     REAL, EXTERNAL :: R1MACH
@@ -103,7 +110,7 @@ CONTAINS
     DATA c(46)/(-.164841998888369E1,.785398163397448E0)/
     DATA c(47)/(-.196351002602143E1,.000000000000000E0)/
     DATA c(48)/(.161278484461574E1,.147079632679497E1)/
-    !***FIRST EXECUTABLE STATEMENT  CFNCK
+    !* FIRST EXECUTABLE STATEMENT  CFNCK
     !
     !     Compute functional values
     !
@@ -195,24 +202,31 @@ CONTAINS
     RETURN
   END SUBROUTINE CFNCK
 END MODULE TEST04_MOD
-!DECK TEST04
+!** TEST04
 PROGRAM TEST04
   USE TEST04_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST04
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C
-  !***TYPE      COMPLEX (TEST02-S, TEST03-D, TEST04-C)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C
+  !***
+  ! **Type:**      COMPLEX (TEST02-S, TEST03-D, TEST04-C)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -224,23 +238,26 @@ PROGRAM TEST04
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        complex Fullerton routines
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  CFNCK, I1MACH, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CFNCK, I1MACH, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST04
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST04
+  !* FIRST EXECUTABLE STATEMENT  TEST04
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

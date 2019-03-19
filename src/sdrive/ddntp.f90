@@ -1,28 +1,33 @@
-!DECK DDNTP
+!** DDNTP
 SUBROUTINE DDNTP(H,K,N,Nq,T,Tout,Yh,Y)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DDNTP
-  !***SUBSIDIARY
-  !***PURPOSE  Subroutine DDNTP interpolates the K-th derivative of Y at
+  !>
+  !***
+  !  Subroutine DDNTP interpolates the K-th derivative of Y at
   !            TOUT, using the data in the YH array.  If K has a value
   !            greater than NQ, the NQ-th derivative is calculated.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***TYPE      DOUBLE PRECISION (SDNTP-S, DDNTP-D, CDNTP-C)
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Type:**      DOUBLE PRECISION (SDNTP-S, DDNTP-D, CDNTP-C)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  DDNTP
+  
   INTEGER i, j, jj, K, kk, kused, N, Nq
   REAL(8) :: factor, H, r, T, Tout, Y(*), Yh(N,*)
-  !***FIRST EXECUTABLE STATEMENT  DDNTP
+  !* FIRST EXECUTABLE STATEMENT  DDNTP
   IF ( K==0 ) THEN
     DO i = 1, N
       Y(i) = Yh(i,Nq+1)

@@ -1,14 +1,18 @@
-!DECK DPRWVR
+!** DPRWVR
 SUBROUTINE DPRWVR(Key,Ipage,Lpg,Sx,Ix)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPRWVR
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (PRWVIR-S, DPRWVR-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (PRWVIR-S, DPRWVR-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Wisniewski, J. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     DPRWVR LIMITS THE TYPE OF STORAGE TO A SEQUENTIAL SPARSE MATRIX
   !     STORAGE SCHEME.  THE PAGE STORAGE IS ON RANDOM ACCESS DISK.
@@ -25,22 +29,25 @@ SUBROUTINE DPRWVR(Key,Ipage,Lpg,Sx,Ix)
   !     SANDIA LABS. REPT. SAND78-0785.
   !     MODIFICATIONS BY K.L. HIEBERT AND R.J. HANSON
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  DREADP, DWRITP, SOPENM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  DREADP, DWRITP, SOPENM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   891009  Removed unreferenced variables.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  !***END PROLOGUE  DPRWVR
+  
   INTEGER iaddr, Ipage, ipagef, istart, Ix, Key, Lpg
   DIMENSION Ix(*)
   REAL(8) :: Sx(*), zero, one
   LOGICAL first
   SAVE zero, one
   DATA zero, one/0.D0, 1.D0/
-  !***FIRST EXECUTABLE STATEMENT  DPRWVR
+  !* FIRST EXECUTABLE STATEMENT  DPRWVR
   !
   !     COMPUTE STARTING ADDRESS OF PAGE.
   !

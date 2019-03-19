@@ -1,14 +1,18 @@
-!DECK ZUNHJ
+!** ZUNHJ
 SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     Zeta2r,Zeta2i,Asumr,Asumi,Bsumr,Bsumi)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZUNHJ
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESI and ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CUNHJ-A, ZUNHJ-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZBESI and ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CUNHJ-A, ZUNHJ-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     REFERENCES
   !         HANDBOOK OF MATHEMATICAL FUNCTIONS BY M. ABRAMOWITZ AND I.A.
@@ -36,13 +40,16 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
   !         MUST BE SPECIFIED. IPMTR=0 RETURNS ALL PARAMETERS. IPMTR=
   !         1 COMPUTES ALL EXCEPT ASUM AND BSUM.
   !
-  !***SEE ALSO  ZBESI, ZBESK
-  !***ROUTINES CALLED  D1MACH, ZABS, ZDIV, ZLOG, ZSQRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZBESI, ZBESK
+  !***
+  ! **Routines called:**  D1MACH, ZABS, ZDIV, ZLOG, ZSQRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZLOG and ZSQRT to EXTERNAL statement.  (RWC)
-  !***END PROLOGUE  ZUNHJ
+  
   !     COMPLEX ARG,ASUM,BSUM,CFNU,CONE,CR,CZERO,DR,P,PHI,PRZTH,PTFN,
   !    *RFN13,RTZTA,RZTH,SUMA,SUMB,TFN,T2,UP,W,W2,Z,ZA,ZB,ZC,ZETA,ZETA1,
   !    *ZETA2,ZTH
@@ -442,7 +449,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     6.66666666666666667D-01, 1.57079632679489662D+00, &
     3.14159265358979324D+00, 4.71238898038468986D+00/
   DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  ZUNHJ
+  !* FIRST EXECUTABLE STATEMENT  ZUNHJ
   rfnu = 1.0D0/Fnu
   !-----------------------------------------------------------------------
   !     OVERFLOW TEST (Z/FNU TOO SMALL)

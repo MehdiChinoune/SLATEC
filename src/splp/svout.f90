@@ -1,13 +1,17 @@
-!DECK SVOUT
+!** SVOUT
 SUBROUTINE SVOUT(N,Sx,Ifmt,Idigit)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SVOUT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SVOUT-S, DVOUT-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SVOUT-S, DVOUT-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     SINGLE PRECISION VECTOR OUTPUT ROUTINE.
   !
@@ -41,23 +45,26 @@ SUBROUTINE SVOUT(N,Sx,Ifmt,Idigit)
   !     IDIGIT = -6
   !     CALL SVOUT(N,COSTS,'(''1COSTS OF PURCHASES'')',IDIGIT)
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  I1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  I1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891107  Added comma after 1P edit descriptor in FORMAT
   !           statements.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  SVOUT
+  
   INTEGER i, I1MACH, Idigit, j, k1, k2, lout, N, ndigit
   REAL Sx
   DIMENSION Sx(*)
   CHARACTER Ifmt*(*)
   !
   !     GET THE UNIT NUMBER WHERE OUTPUT WILL BE WRITTEN.
-  !***FIRST EXECUTABLE STATEMENT  SVOUT
+  !* FIRST EXECUTABLE STATEMENT  SVOUT
   j = 2
   lout = I1MACH(j)
   WRITE (lout,Ifmt)

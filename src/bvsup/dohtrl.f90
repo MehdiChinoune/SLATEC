@@ -1,13 +1,17 @@
-!DECK DOHTRL
+!** DOHTRL
 SUBROUTINE DOHTRL(Q,N,Nrda,Diag,Irank,Div,Td)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DOHTRL
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBVSUP and DSUDS
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (OHTROL-S, DOHTRL-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBVSUP and DSUDS
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (OHTROL-S, DOHTRL-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !     For a rank deficient problem, additional orthogonal
   !     HOUSEHOLDER transformations are applied to the left side
@@ -17,21 +21,24 @@ SUBROUTINE DOHTRL(Q,N,Nrda,Diag,Irank,Div,Td)
   !     triangular matrix while the remainder of the matrix
   !     has been zeroed out.
   !
-  !***SEE ALSO  DBVSUP, DSUDS
-  !***ROUTINES CALLED  DDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBVSUP, DSUDS
+  !***
+  ! **Routines called:**  DDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DOHTRL
+  
   REAL(8) :: DDOT
   INTEGER Irank, irp, j, k, kir, kirm, l, N, nmir, Nrda
   REAL(8) :: dd, Diag(*), diagk, Div(*), Q(Nrda,*), qs, sig, &
     sqd, Td(*), tdv
-  !***FIRST EXECUTABLE STATEMENT  DOHTRL
+  !* FIRST EXECUTABLE STATEMENT  DOHTRL
   nmir = N - Irank
   irp = Irank + 1
   DO k = 1, Irank

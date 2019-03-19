@@ -1,13 +1,17 @@
-!DECK D1UPDT
+!** D1UPDT
 SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  D1UPDT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DNSQ and DNSQE
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (R1UPDT-S, D1UPDT-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DNSQ and DNSQE
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (R1UPDT-S, D1UPDT-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Given an M by N lower trapezoidal matrix S, an M-vector U,
   !     and an N-vector V, the problem is to determine an
@@ -62,9 +66,12 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !         of the diagonal elements of the output S are zero. Otherwise
   !         SING is set FALSE.
   !
-  !***SEE ALSO  DNSQ, DNSQE
-  !***ROUTINES CALLED  D1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DNSQ, DNSQE
+  !***
+  ! **Routines called:**  D1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -72,7 +79,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  D1UPDT
+  
   REAL(8) :: D1MACH
   INTEGER i, j, jj, l, Ls, M, N, nm1, nmj
   REAL(8) :: cos, cotan, giant, one, p25, p5, S(*), sin, tan, &
@@ -83,7 +90,7 @@ SUBROUTINE D1UPDT(M,N,S,Ls,U,V,W,Sing)
   !
   !     GIANT IS THE LARGEST MAGNITUDE.
   !
-  !***FIRST EXECUTABLE STATEMENT  D1UPDT
+  !* FIRST EXECUTABLE STATEMENT  D1UPDT
   giant = D1MACH(2)
   !
   !     INITIALIZE THE DIAGONAL ELEMENT POINTER.

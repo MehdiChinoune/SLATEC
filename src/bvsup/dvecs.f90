@@ -1,13 +1,17 @@
-!DECK DVECS
+!** DVECS
 SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DVECS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SVECS-S, DVECS-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SVECS-S, DVECS-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !  This subroutine is used for the special structure of COMPLEX*16
   !  valued problems. DMGSBV is called upon to obtain LNFC vectors from an
@@ -15,10 +19,14 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   !  LNFC vectors together with their imaginary product or mate vectors
   !  form an independent set.
   !
-  !***SEE ALSO  DBVSUP
-  !***ROUTINES CALLED  DMGSBV
-  !***COMMON BLOCKS    DML18J
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBVSUP
+  !***
+  ! **Routines called:**  DMGSBV
+  !***
+  ! COMMON BLOCKS    DML18J
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890921  Realigned order of variables in certain COMMON blocks.
@@ -27,7 +35,7 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DVECS
+  
   !
   INTEGER ICOco, idp, Iflag, INDpvt, Inhomo, INTeg, Iwork(*), k, &
     kp, Lnfc, LNFcc, MXNon, Ncomp, NDIsk, NEQ, NEQivp, NIC, &
@@ -36,7 +44,7 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   COMMON /DML18J/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
     NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
     NUMort, LNFcc, ICOco
-  !***FIRST EXECUTABLE STATEMENT  DVECS
+  !* FIRST EXECUTABLE STATEMENT  DVECS
   IF ( Lnfc/=1 ) THEN
     niv = Lnfc
     Lnfc = 2*Lnfc

@@ -1,17 +1,24 @@
-!DECK DPODI
+!** DPODI
 SUBROUTINE DPODI(A,Lda,N,Det,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPODI
-  !***PURPOSE  Compute the determinant and inverse of a certain real
+  !>
+  !***
+  !  Compute the determinant and inverse of a certain real
   !            symmetric positive definite matrix using the factors
   !            computed by DPOCO, DPOFA or DQRDC.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1B, D3B1B
-  !***TYPE      DOUBLE PRECISION (SPODI-S, DPODI-D, CPODI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1B, D3B1B
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPODI-S, DPODI-D, CPODI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DPODI computes the determinant and inverse of a certain
   !     double precision symmetric positive definite matrix (see below)
@@ -58,10 +65,13 @@ SUBROUTINE DPODI(A,Lda,N,Det,Job)
   !        It will not occur if the subroutines are called correctly
   !        and if DPOCO or DPOFA has set INFO .EQ. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -69,7 +79,7 @@ SUBROUTINE DPODI(A,Lda,N,Det,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DPODI
+  
   INTEGER Lda, N, Job
   REAL(8) :: A(Lda,*)
   REAL(8) :: Det(2)
@@ -77,7 +87,7 @@ SUBROUTINE DPODI(A,Lda,N,Det,Job)
   REAL(8) :: t
   REAL(8) :: s
   INTEGER i, j, jm1, k, kp1
-  !***FIRST EXECUTABLE STATEMENT  DPODI
+  !* FIRST EXECUTABLE STATEMENT  DPODI
   !
   !     COMPUTE DETERMINANT
   !

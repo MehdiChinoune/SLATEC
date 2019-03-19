@@ -2,30 +2,37 @@ MODULE TEST14_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK QCDRC
+  !** QCDRC
   SUBROUTINE QCDRC(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QCDRC
-    !***PURPOSE  Quick check for DRC.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Pexton, R. L., (LLNL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for DRC.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Pexton, R. L., (LLNL)
+    !***
+    ! **Description:**
     !
     !            QUICK TEST FOR CARLSON INTEGRAL DRC
     !
-    !***ROUTINES CALLED  D1MACH, DRC, NUMXER, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH, DRC, NUMXER, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   790801  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    !***END PROLOGUE  QCDRC
+    
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4, NUMXER
     REAL(8) :: pi, trc, DRC, dif, D1MACH
     EXTERNAL D1MACH, DRC, NUMXER, XERCLR, XGETF, XSETF
-    !***FIRST EXECUTABLE STATEMENT  QCDRC
+    !* FIRST EXECUTABLE STATEMENT  QCDRC
     CALL XERCLR
     CALL XGETF(contrl)
     IF ( Kprint>=3 ) THEN
@@ -101,31 +108,38 @@ CONTAINS
     CALL XSETF(contrl)
     99006 FORMAT (' DRC - FAILED')
   END SUBROUTINE QCDRC
-  !DECK QCDRD
+  !** QCDRD
   SUBROUTINE QCDRD(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QCDRD
-    !***PURPOSE  Quick check for DRD.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Pexton, R. L., (LLNL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for DRD.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Pexton, R. L., (LLNL)
+    !***
+    ! **Description:**
     !
     !            QUICK TEST FOR CARLSON INTEGRAL DRD
     !
-    !***ROUTINES CALLED  D1MACH, DRD, NUMXER, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH, DRD, NUMXER, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   790801  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930214  Added more digits to BLEM.  (WRB)
-    !***END PROLOGUE  QCDRD
+    
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4, NUMXER
     REAL(8) :: blem, trd, DRD, dif, D1MACH
     EXTERNAL D1MACH, DRD, NUMXER, XERCLR, XGETF, XSETF
-    !***FIRST EXECUTABLE STATEMENT  QCDRD
+    !* FIRST EXECUTABLE STATEMENT  QCDRD
     CALL XERCLR
     CALL XGETF(contrl)
     IF ( Kprint>=3 ) THEN
@@ -202,31 +216,38 @@ CONTAINS
     CALL XSETF(contrl)
     99006 FORMAT (' DRD - FAILED')
   END SUBROUTINE QCDRD
-  !DECK QCDRF
+  !** QCDRF
   SUBROUTINE QCDRF(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QCDRF
-    !***PURPOSE  Quick check for DRF.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Pexton, R. L., (LLNL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for DRF.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Pexton, R. L., (LLNL)
+    !***
+    ! **Description:**
     !
     !            QUICK TEST FOR CARLSON INTEGRAL DRF
     !
-    !***ROUTINES CALLED  D1MACH, DRF, NUMXER, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH, DRF, NUMXER, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   790801  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930214  Added more digits to ALEM.  (WRB)
-    !***END PROLOGUE  QCDRF
+    
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4, NUMXER
     REAL(8) :: alem, trf, DRF, dif, D1MACH
     EXTERNAL D1MACH, DRF, NUMXER, XERCLR, XGETF, XSETF
-    !***FIRST EXECUTABLE STATEMENT  QCDRF
+    !* FIRST EXECUTABLE STATEMENT  QCDRF
     CALL XERCLR
     CALL XGETF(contrl)
     IF ( Kprint>=3 ) THEN
@@ -303,31 +324,38 @@ CONTAINS
     CALL XSETF(contrl)
     99006 FORMAT (' DRF - FAILED')
   END SUBROUTINE QCDRF
-  !DECK QCDRJ
+  !** QCDRJ
   SUBROUTINE QCDRJ(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QCDRJ
-    !***PURPOSE  Quick check for DRJ.
-    !***LIBRARY   SLATEC
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Pexton, R. L., (LLNL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for DRJ.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Pexton, R. L., (LLNL)
+    !***
+    ! **Description:**
     !
     !            QUICK TEST FOR CARLSON INTEGRAL DRJ
     !
-    !***ROUTINES CALLED  D1MACH, DRJ, NUMXER, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH, DRJ, NUMXER, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   790801  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930214  Added more digits to CONSJ.  (WRB)
-    !***END PROLOGUE  QCDRJ
+    
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
     INTEGER ipass1, ipass2, ipass3, ipass4, NUMXER
     REAL(8) :: consj, trj, DRJ, dif, D1MACH
     EXTERNAL D1MACH, DRJ, NUMXER, XERCLR, XGETF, XSETF
-    !***FIRST EXECUTABLE STATEMENT  QCDRJ
+    !* FIRST EXECUTABLE STATEMENT  QCDRJ
     CALL XERCLR
     CALL XGETF(contrl)
     IF ( Kprint>=3 ) THEN
@@ -404,24 +432,31 @@ CONTAINS
     99006 FORMAT (' DRJ - FAILED')
   END SUBROUTINE QCDRJ
 END MODULE TEST14_MOD
-!DECK TEST14
+!** TEST14
 PROGRAM TEST14
   USE TEST14_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST14
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C14
-  !***TYPE      DOUBLE PRECISION (TEST13-S, TEST14-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C14
+  !***
+  ! **Type:**      DOUBLE PRECISION (TEST13-S, TEST14-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -433,24 +468,27 @@ PROGRAM TEST14
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        DRC      DRD      DRF      DRJ
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  I1MACH, QCDRC, QCDRD, QCDRF, QCDRJ, XERMAX, XSETF,
+  !***
+  ! **Routines called:**  I1MACH, QCDRC, QCDRD, QCDRF, QCDRJ, XERMAX, XSETF,
   !                    XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST14
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST14
+  !* FIRST EXECUTABLE STATEMENT  TEST14
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

@@ -1,21 +1,28 @@
-!DECK DPCHFE
+!** DPCHFE
 SUBROUTINE DPCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPCHFE
-  !***PURPOSE  Evaluate a piecewise cubic Hermite function at an array of
+  !>
+  !***
+  !  Evaluate a piecewise cubic Hermite function at an array of
   !            points.  May be used by itself for Hermite interpolation,
   !            or as an evaluator for DPCHIM or DPCHIC.
-  !***LIBRARY   SLATEC (PCHIP)
-  !***CATEGORY  E3
-  !***TYPE      DOUBLE PRECISION (PCHFE-S, DPCHFE-D)
-  !***KEYWORDS  CUBIC HERMITE EVALUATION, HERMITE INTERPOLATION, PCHIP,
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Category:**  E3
+  !***
+  ! **Type:**      DOUBLE PRECISION (PCHFE-S, DPCHFE-D)
+  !***
+  ! **Keywords:**  CUBIC HERMITE EVALUATION, HERMITE INTERPOLATION, PCHIP,
   !             PIECEWISE CUBIC EVALUATION
-  !***AUTHOR  Fritsch, F. N., (LLNL)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             P.O. Box 808  (L-316)
   !             Livermore, CA  94550
   !             FTS 532-4275, (510) 422-4275
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !          DPCHFE:  Piecewise Cubic Hermite Function Evaluator
   !
@@ -94,9 +101,12 @@ SUBROUTINE DPCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   !               NOTE:  The above errors are checked in the order listed,
   !                   and following arguments have **NOT** been validated.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DCHFEV, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DCHFEV, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811020  DATE WRITTEN
   !   820803  Minor cosmetic changes for release 1.
   !   870707  Corrected XERROR calls for d.p. name(s).
@@ -107,7 +117,7 @@ SUBROUTINE DPCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   !   891006  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DPCHFE
+  
   !  Programming notes:
   !
   !     1. To produce a single precision version, simply:
@@ -142,7 +152,7 @@ SUBROUTINE DPCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !
-  !***FIRST EXECUTABLE STATEMENT  DPCHFE
+  !* FIRST EXECUTABLE STATEMENT  DPCHFE
   IF ( .NOT.(Skip) ) THEN
     !
     IF ( N<2 ) THEN

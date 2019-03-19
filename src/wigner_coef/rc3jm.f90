@@ -1,29 +1,36 @@
-!DECK RC3JM
+!** RC3JM
 SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RC3JM
-  !***PURPOSE  Evaluate the 3j symbol g(M2) = (L1 L2   L3  )
+  !>
+  !***
+  !  Evaluate the 3j symbol g(M2) = (L1 L2   L3  )
   !                                           (M1 M2 -M1-M2)
   !            for all allowed values of M2, the other parameters
   !            being held fixed.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C19
-  !***TYPE      SINGLE PRECISION (RC3JM-S, DRC3JM-D)
-  !***KEYWORDS  3J COEFFICIENTS, 3J SYMBOLS, CLEBSCH-GORDAN COEFFICIENTS,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C19
+  !***
+  ! **Type:**      SINGLE PRECISION (RC3JM-S, DRC3JM-D)
+  !***
+  ! **Keywords:**  3J COEFFICIENTS, 3J SYMBOLS, CLEBSCH-GORDAN COEFFICIENTS,
   !             RACAH COEFFICIENTS, VECTOR ADDITION COEFFICIENTS,
   !             WIGNER COEFFICIENTS
-  !***AUTHOR  Gordon, R. G., Harvard University
+  !***
+  ! **Author:**  Gordon, R. G., Harvard University
   !           Schulten, K., Max Planck Institute
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !        REAL L1, L2, L3, M1, M2MIN, M2MAX, THRCOF(NDIM)
   !        INTEGER NDIM, IER
   !
   !        CALL RC3JM (L1, L2, L3, M1, M2MIN, M2MAX, THRCOF, NDIM, IER)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !     L1 :IN      Parameter in 3j symbol.
   !
@@ -52,7 +59,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !                 IER=5 M2MAX less than M2MIN.
   !                 IER=6 NDIM less than M2MAX-M2MIN+1.
   !
-  ! *Description:
+  !- Description:
   !
   !     Although conventionally the parameters of the vector addition
   !  coefficients satisfy certain restrictions, such as being integers
@@ -87,7 +94,8 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !    The algorithm is suited to applications in which large quantum
   !  numbers arise, such as in molecular dynamics.
   !
-  !***REFERENCES  1. Abramowitz, M., and Stegun, I. A., Eds., Handbook
+  !***
+  ! **References:**  1. Abramowitz, M., and Stegun, I. A., Eds., Handbook
   !                  of Mathematical Functions with Formulas, Graphs
   !                  and Mathematical Tables, NBS Applied Mathematics
   !                  Series 55, June 1964 and subsequent printings.
@@ -105,8 +113,10 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !               5. Schulten, Klaus and Gordon, Roy G., Recursive
   !                  evaluation of 3j and 6j coefficients, Computer
   !                  Phys Comm, v 11, 1976, pp. 269-278.
-  !***ROUTINES CALLED  R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
   !   880515  SLATEC prologue added by G. C. Nielson, NBS; parameters
   !           HUGE and TINY revised to depend on R1MACH.
@@ -124,7 +134,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !   910415  Mixed type expressions eliminated; variable C1 initialized;
   !           description of THRCOF expanded. These changes were done by
   !           D. W. Lozier.
-  !***END PROLOGUE  RC3JM
+  
   !
   INTEGER Ndim, Ier
   REAL L1, L2, L3, M1, M2min, M2max, Thrcof(Ndim)
@@ -138,7 +148,7 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !
   DATA zero, eps, one, two/0.0, 0.01, 1.0, 2.0/
   !
-  !***FIRST EXECUTABLE STATEMENT  RC3JM
+  !* FIRST EXECUTABLE STATEMENT  RC3JM
   Ier = 0
   !  HUGE is the square root of one twentieth of the largest floating
   !  point number, approximately.

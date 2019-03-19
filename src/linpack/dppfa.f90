@@ -1,16 +1,23 @@
-!DECK DPPFA
+!** DPPFA
 SUBROUTINE DPPFA(Ap,N,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPPFA
-  !***PURPOSE  Factor a real symmetric positive definite matrix stored in
+  !>
+  !***
+  !  Factor a real symmetric positive definite matrix stored in
   !            packed form.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1B
-  !***TYPE      DOUBLE PRECISION (SPPFA-S, DPPFA-D, CPPFA-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION, PACKED,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1B
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPPFA-S, DPPFA-D, CPPFA-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION, PACKED,
   !             POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DPPFA factors a double precision symmetric positive definite
   !     matrix stored in packed form.
@@ -54,10 +61,13 @@ SUBROUTINE DPPFA(Ap,N,Info)
   !             10    CONTINUE
   !             20 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -66,14 +76,14 @@ SUBROUTINE DPPFA(Ap,N,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DPPFA
+  
   INTEGER N, Info
   REAL(8) :: Ap(*)
   !
   REAL(8) :: DDOT, t
   REAL(8) :: s
   INTEGER j, jj, jm1, k, kj, kk
-  !***FIRST EXECUTABLE STATEMENT  DPPFA
+  !* FIRST EXECUTABLE STATEMENT  DPPFA
   jj = 0
   DO j = 1, N
     Info = j

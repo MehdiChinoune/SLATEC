@@ -1,19 +1,26 @@
-!DECK DDERKF
+!** DDERKF
 SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DDERKF
-  !***PURPOSE  Solve an initial value problem in ordinary differential
+  !>
+  !***
+  !  Solve an initial value problem in ordinary differential
   !            equations using a Runge-Kutta-Fehlberg scheme.
-  !***LIBRARY   SLATEC (DEPAC)
-  !***CATEGORY  I1A1A
-  !***TYPE      DOUBLE PRECISION (DERKF-S, DDERKF-D)
-  !***KEYWORDS  DEPAC, INITIAL VALUE PROBLEMS, ODE,
+  !***
+  ! **Library:**   SLATEC (DEPAC)
+  !***
+  ! **Category:**  I1A1A
+  !***
+  ! **Type:**      DOUBLE PRECISION (DERKF-S, DDERKF-D)
+  !***
+  ! **Keywords:**  DEPAC, INITIAL VALUE PROBLEMS, ODE,
   !             ORDINARY DIFFERENTIAL EQUATIONS, RKF,
   !             RUNGE-KUTTA-FEHLBERG METHODS
-  !***AUTHOR  Watts, H. A., (SNLA)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
   !           Shampine, L. F., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   This is the Runge-Kutta code in the package of differential equation
   !   solvers DEPAC, consisting of the codes DDERKF, DDEABM, and DDEBDF.
@@ -26,9 +33,9 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !             Sandia Laboratories
   !             Albuquerque, New Mexico 87185
   !
-  ! **********************************************************************
-  ! **            DDEPAC PACKAGE OVERVIEW           **
-  ! **********************************************************************
+  !- *********************************************************************
+  !- *            DDEPAC PACKAGE OVERVIEW           **
+  !- *********************************************************************
   !
   !        You have a choice of three differential equation solvers from
   !        DDEPAC.  The following brief descriptions are meant to aid you
@@ -70,9 +77,9 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !        or DDEABM.  Both of these codes will inform you of stiffness
   !        when the cost of solving such problems becomes important.
   !
-  ! **********************************************************************
-  ! ** ABSTRACT **
-  ! **********************************************************************
+  !- *********************************************************************
+  !- * ABSTRACT **
+  !- *********************************************************************
   !
   !   Subroutine DDERKF uses a Runge-Kutta-Fehlberg (4,5) method to
   !   integrate a system of NEQ first order ordinary differential
@@ -89,9 +96,9 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   the error handling routine XERMSG. The only machine dependent
   !   parameters to be assigned appear in D1MACH.
   !
-  ! **********************************************************************
-  ! ** DESCRIPTION OF THE ARGUMENTS TO DDERKF (AN OVERVIEW) **
-  ! **********************************************************************
+  !- *********************************************************************
+  !- * DESCRIPTION OF THE ARGUMENTS TO DDERKF (AN OVERVIEW) **
+  !- *********************************************************************
   !
   !   The Parameters are:
   !
@@ -146,9 +153,9 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !             T, Y(*), INFO(1), RTOL, ATOL,
   !             IDID, RWORK(*) and IWORK(*).
   !
-  ! **********************************************************************
-  ! ** INPUT -- What to do On The First Call To DDERKF **
-  ! **********************************************************************
+  !- *********************************************************************
+  !- * INPUT -- What to do On The First Call To DDERKF **
+  !- *********************************************************************
   !
   !   The first call of the code is defined to be the start of each new
   !   problem.  Read through the descriptions of all the following items,
@@ -347,9 +354,9 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !             choose to use them, dimension them in your calling program
   !             and in DF as arrays of appropriate length.
   !
-  ! **********************************************************************
-  ! ** OUTPUT -- After any return from DDERKF **
-  ! **********************************************************************
+  !- *********************************************************************
+  !- * OUTPUT -- After any return from DDERKF **
+  !- *********************************************************************
   !
   !   The principal aim of the code is to return a computed solution at
   !   TOUT, although it is also possible to obtain intermediate results
@@ -435,10 +442,10 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !                        evaluate the differential equation using T and
   !                        Y(*).
   !
-  ! **********************************************************************
-  ! ** INPUT -- What To Do To Continue The Integration **
-  ! **             (calls after the first)             **
-  ! **********************************************************************
+  !- *********************************************************************
+  !- * INPUT -- What To Do To Continue The Integration **
+  !- *             (calls after the first)             **
+  !- *********************************************************************
   !
   !        This code is organized so that subsequent calls to continue the
   !        integration involve little (if any) additional effort on your
@@ -535,12 +542,12 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !                     problem.  An attempt to do so will result in your
   !                     run being terminated.
   !
-  ! **********************************************************************
-  ! *Long Description:
+  !- *********************************************************************
+  !- Long Description:
   !
-  ! **********************************************************************
-  ! **             DEPAC Package Overview           **
-  ! **********************************************************************
+  !- *********************************************************************
+  !- *             DEPAC Package Overview           **
+  !- *********************************************************************
   !
   ! ....   You have a choice of three differential equation solvers from
   ! ....   DEPAC. The following brief descriptions are meant to aid you in
@@ -582,17 +589,20 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   ! ....   or DDEABM. Both of these codes will inform you of stiffness
   ! ....   when the cost of solving such problems becomes important.
   !
-  ! *********************************************************************
+  !- ********************************************************************
   !
-  !***REFERENCES  L. F. Shampine and H. A. Watts, DEPAC - design of a user
+  !***
+  ! **References:**  L. F. Shampine and H. A. Watts, DEPAC - design of a user
   !                 oriented package of ODE solvers, Report SAND79-2374,
   !                 Sandia Laboratories, 1979.
   !               L. F. Shampine and H. A. Watts, Practical solution of
   !                 ordinary differential equations by Runge-Kutta
   !                 methods, Report SAND76-0585, Sandia Laboratories,
   !                 1976.
-  !***ROUTINES CALLED  DRKFS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DRKFS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820301  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891024  Changed references from DVNORM to DHVNRM.  (WRB)
@@ -601,7 +611,7 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   900510  Convert XERRWV calls to XERMSG calls, make Prologue comments
   !           consistent with DERKF.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DDERKF
+  
   !
   INTEGER Idid, Info, Ipar, Iwork, kdi, kf1, kf2, kf3, kf4, kf5, &
     kh, krer, ktf, kto, ktstar, ku, kyp, kys, Liw, Lrw, Neq
@@ -617,7 +627,7 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !
   !     CHECK FOR AN APPARENT INFINITE LOOP
   !
-  !***FIRST EXECUTABLE STATEMENT  DDERKF
+  !* FIRST EXECUTABLE STATEMENT  DDERKF
   IF ( Info(1)==0 ) Iwork(Liw) = 0
   IF ( Iwork(Liw)>=5 ) THEN
     IF ( T==Rwork(21+Neq) ) THEN
@@ -663,12 +673,12 @@ SUBROUTINE DDERKF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   ku = kdi + 1
   krer = ku + 1
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     THIS INTERFACING ROUTINE MERELY RELIEVES THE USER OF A LONG
   !     CALLING LIST VIA THE SPLITTING APART OF TWO WORKING STORAGE
   !     ARRAYS. IF THIS IS NOT COMPATIBLE WITH THE USERS COMPILER,
   !     S/HE MUST USE DRKFS DIRECTLY.
-  ! **********************************************************************
+  !- *********************************************************************
   !
   Rwork(ktstar) = T
   IF ( Info(1)/=0 ) THEN

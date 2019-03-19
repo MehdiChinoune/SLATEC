@@ -1,16 +1,23 @@
-!DECK CQRSL
+!** CQRSL
 SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CQRSL
-  !***PURPOSE  Apply the output of CQRDC to compute coordinate transfor-
+  !>
+  !***
+  !  Apply the output of CQRDC to compute coordinate transfor-
   !            mations, projections, and least squares solutions.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D9, D2C1
-  !***TYPE      COMPLEX (SQRSL-S, DQRSL-D, CQRSL-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, MATRIX, ORTHOGONAL TRIANGULAR,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D9, D2C1
+  !***
+  ! **Type:**      COMPLEX (SQRSL-S, DQRSL-D, CQRSL-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, MATRIX, ORTHOGONAL TRIANGULAR,
   !             SOLVE
-  !***AUTHOR  Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Stewart, G. W., (U. of Maryland)
+  !***
+  ! **Description:**
   !
   !     CQRSL applies the output of CQRDC to compute coordinate
   !     transformations, projections, and least squares solutions.
@@ -142,10 +149,13 @@ SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   !     In any group the value returned in the array allocated to
   !     the group corresponds to the last member of the group.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CCOPY, CDOTC
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CCOPY, CDOTC
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -154,7 +164,7 @@ SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CQRSL
+  
   INTEGER Ldx, N, K, Job, Info
   COMPLEX X(Ldx,*), Qraux(*), Y(*), Qy(*), Qty(*), B(*), Rsd(*), &
     Xb(*)
@@ -163,7 +173,7 @@ SUBROUTINE CQRSL(X,Ldx,N,K,Qraux,Y,Qy,Qty,B,Rsd,Xb,Job,Info)
   COMPLEX CDOTC, t, temp
   LOGICAL cb, cqy, cqty, cr, cxb
   REAL, EXTERNAL :: CABS1
-  !***FIRST EXECUTABLE STATEMENT  CQRSL
+  !* FIRST EXECUTABLE STATEMENT  CQRSL
   !
   !     SET INFO FLAG.
   !

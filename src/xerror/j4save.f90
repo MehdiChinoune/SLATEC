@@ -1,15 +1,20 @@
-!DECK J4SAVE
+!** J4SAVE
 INTEGER FUNCTION J4SAVE(Iwhich,Ivalue,Iset)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  J4SAVE
-  !***SUBSIDIARY
-  !***PURPOSE  Save or recall global variables needed by error
+  !>
+  !***
+  !  Save or recall global variables needed by error
   !            handling routines.
-  !***LIBRARY   SLATEC (XERROR)
-  !***TYPE      INTEGER (J4SAVE-I)
-  !***KEYWORDS  ERROR MESSAGES, ERROR NUMBER, RECALL, SAVE, XERROR
-  !***AUTHOR  Jones, R. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (XERROR)
+  !***
+  ! **Type:**      INTEGER (J4SAVE-I)
+  !***
+  ! **Keywords:**  ERROR MESSAGES, ERROR NUMBER, RECALL, SAVE, XERROR
+  !***
+  ! **Author:**  Jones, R. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !        J4SAVE saves and recalls several global variables needed
@@ -40,19 +45,23 @@ INTEGER FUNCTION J4SAVE(Iwhich,Ivalue,Iset)
   !        The (old) value of the IWHICH-th parameter will be returned
   !        in the function value, J4SAVE.
   !
-  !***SEE ALSO  XERMSG
-  !***REFERENCES  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
+  !***
+  ! **See also:**  XERMSG
+  !***
+  ! **References:**  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
   !                 Error-handling Package, SAND82-0800, Sandia
   !                 Laboratories, 1982.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790801  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900205  Minor modifications to prologue.  (WRB)
   !   900402  Added TYPE section.  (WRB)
   !   910411  Added KEYWORDS section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  J4SAVE
+  
   INTEGER Ivalue, Iwhich
   LOGICAL Iset
   INTEGER iparam(9)
@@ -60,7 +69,7 @@ INTEGER FUNCTION J4SAVE(Iwhich,Ivalue,Iset)
   DATA iparam(1), iparam(2), iparam(3), iparam(4)/0, 2, 0, 10/
   DATA iparam(5)/1/
   DATA iparam(6), iparam(7), iparam(8), iparam(9)/0, 0, 0, 0/
-  !***FIRST EXECUTABLE STATEMENT  J4SAVE
+  !* FIRST EXECUTABLE STATEMENT  J4SAVE
   J4SAVE = iparam(Iwhich)
   IF ( Iset ) iparam(Iwhich) = Ivalue
 END FUNCTION J4SAVE

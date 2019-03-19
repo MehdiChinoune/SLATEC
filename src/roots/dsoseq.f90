@@ -1,20 +1,24 @@
-!DECK DSOSEQ
+!** DSOSEQ
 SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     Iprint,Fmax,C,Nc,B,P,Temp,X,Y,Fac,Is)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSOSEQ
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSOS
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SOSEQS-S, DSOSEQ-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSOS
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SOSEQS-S, DSOSEQ-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     DSOSEQ solves a system of N simultaneous nonlinear equations.
   !     See the comments in the interfacing routine DSOS for a more
   !     detailed description of some of the items in the calling list.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !   -Input-
   !
   !     FNC- Function subprogram which evaluates the equations
@@ -66,28 +70,31 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !          derivatives.
   !     IS  -Records the pivotal information (column interchanges)
   !
-  ! **********************************************************************
-  ! *** Three machine dependent parameters appear in this subroutine.
+  !- *********************************************************************
+  !- ** Three machine dependent parameters appear in this subroutine.
   !
-  ! *** The smallest positive magnitude, zero, is defined by the function
-  ! *** routine D1MACH(1).
+  !- ** The smallest positive magnitude, zero, is defined by the function
+  !- ** routine D1MACH(1).
   !
-  ! *** URO, the computer unit roundoff value, is defined by D1MACH(3) for
-  ! *** machines that round or D1MACH(4) for machines that truncate.
-  ! *** URO is the smallest positive number such that 1.+URO  .GT.  1.
+  !- ** URO, the computer unit roundoff value, is defined by D1MACH(3) for
+  !- ** machines that round or D1MACH(4) for machines that truncate.
+  !- ** URO is the smallest positive number such that 1.+URO  .GT.  1.
   !
-  ! *** The output tape unit number, LOUN, is defined by the function
-  ! *** I1MACH(2).
-  ! **********************************************************************
+  !- ** The output tape unit number, LOUN, is defined by the function
+  !- ** I1MACH(2).
+  !- *********************************************************************
   !
-  !***SEE ALSO  DSOS
-  !***ROUTINES CALLED  D1MACH, DSOSSL, I1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSOS
+  !***
+  ! **Routines called:**  D1MACH, DSOSSL, I1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DSOSEQ
+  
   !
   !
   INTEGER I1MACH
@@ -104,7 +111,7 @@ SUBROUTINE DSOSEQ(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !     BEGIN BLOCK PERMITTING ...EXITS TO 430
   !        BEGIN BLOCK PERMITTING ...EXITS TO 410
   !           BEGIN BLOCK PERMITTING ...EXITS TO 390
-  !***FIRST EXECUTABLE STATEMENT  DSOSEQ
+  !* FIRST EXECUTABLE STATEMENT  DSOSEQ
   uro = D1MACH(4)
   loun = I1MACH(2)
   zero = D1MACH(1)

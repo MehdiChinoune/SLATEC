@@ -1,33 +1,39 @@
-!DECK SORTH
+!** SORTH
 SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SORTH
-  !***SUBSIDIARY
-  !***PURPOSE  Internal routine for SGMRES.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (SORTH-S, DORTH-D)
-  !***KEYWORDS  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
+  !>
+  !***
+  !  Internal routine for SGMRES.
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SORTH-S, DORTH-D)
+  !***
+  ! **Keywords:**  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
   !             NON-SYMMETRIC LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Brown, Peter, (LLNL), pnbrown@llnl.gov
+  !***
+  ! **Author:**  Brown, Peter, (LLNL), pnbrown@llnl.gov
   !           Hindmarsh, Alan, (LLNL), alanh@llnl.gov
   !           Seager, Mark K., (LLNL), seager@llnl.gov
   !             Lawrence Livermore National Laboratory
   !             PO Box 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !        This routine  orthogonalizes  the  vector  VNEW  against the
   !        previous KMP  vectors in the   V array.  It uses  a modified
   !        Gram-Schmidt   orthogonalization procedure with  conditional
   !        reorthogonalization.
   !
-  ! *Usage:
+  !- Usage:
   !      INTEGER N, LL, LDHES, KMP
   !      REAL VNEW(N), V(N,LL), HES(LDHES,LL), SNORMW
   !
   !      CALL SORTH(VNEW, V, HES, N, LL, LDHES, KMP, SNORMW)
   !
-  ! *Arguments:
+  !- Arguments:
   ! VNEW   :INOUT    Real VNEW(N)
   !         On input, the vector of length N containing a scaled
   !         product of the Jacobian and the vector V(*,LL).
@@ -54,9 +60,12 @@ SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   ! SNORMW :OUT      REAL
   !         Scalar containing the l-2 norm of VNEW.
   !
-  !***SEE ALSO  SGMRES
-  !***ROUTINES CALLED  SAXPY, SDOT, SNRM2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SGMRES
+  !***
+  ! **Routines called:**  SAXPY, SDOT, SNRM2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871001  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -66,7 +75,7 @@ SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  !***END PROLOGUE  SORTH
+  
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -84,7 +93,7 @@ SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   EXTERNAL SAXPY
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, SQRT
-  !***FIRST EXECUTABLE STATEMENT  SORTH
+  !* FIRST EXECUTABLE STATEMENT  SORTH
   !
   !         Get norm of unaltered VNEW for later use.
   !

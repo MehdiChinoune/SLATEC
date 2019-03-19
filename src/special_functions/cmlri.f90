@@ -1,23 +1,30 @@
-!DECK CMLRI
+!** CMLRI
 SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CMLRI
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBESI and CBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CMLRI-A, ZMLRI-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBESI and CBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CMLRI-A, ZMLRI-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     CMLRI COMPUTES THE I BESSEL FUNCTION FOR RE(Z).GE.0.0 BY THE
   !     MILLER ALGORITHM NORMALIZED BY A NEUMANN SERIES.
   !
-  !***SEE ALSO  CBESI, CBESK
-  !***ROUTINES CALLED  GAMLN, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBESI, CBESK
+  !***
+  ! **Routines called:**  GAMLN, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CMLRI
+  
   COMPLEX ck, cnorm, cone, ctwo, czero, pt, p1, p2, rz, sum, Y, Z
   REAL ack, ak, ap, at, az, bk, fkap, fkk, flam, fnf, Fnu, rho, &
     rho2, scle, tfnf, Tol, tst, x, GAMLN, R1MACH
@@ -26,7 +33,7 @@ SUBROUTINE CMLRI(Z,Fnu,Kode,N,Y,Nz,Tol)
   DIMENSION Y(N)
   DATA czero, cone, ctwo/(0.0E0,0.0E0), (1.0E0,0.0E0), (2.0E0,0.0E0)/
   scle = 1.0E+3*R1MACH(1)/Tol
-  !***FIRST EXECUTABLE STATEMENT  CMLRI
+  !* FIRST EXECUTABLE STATEMENT  CMLRI
   Nz = 0
   az = ABS(Z)
   x = REAL(Z)

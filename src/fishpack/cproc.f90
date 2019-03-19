@@ -1,13 +1,17 @@
-!DECK CPROC
+!** CPROC
 SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPROC
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to CBLKTR
-  !***LIBRARY   SLATEC
-  !***TYPE      COMPLEX (CPROD-S, CPROC-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to CBLKTR
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      COMPLEX (CPROD-S, CPROC-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   ! PROC applies a sequence of matrix operations to the vector X and
   ! stores the result in Y.
@@ -21,20 +25,23 @@ SUBROUTINE CPROC(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,Yy)
   ! D,W    are work arrays.
   ! ISGN   determines whether or not a change in sign is made.
   !
-  !***SEE ALSO  CBLKTR
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CBLKTR
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  CPROC
+  
   REAL Aa, Bm1, Bm2, rt, Yy
   INTEGER ia, id, iflg, j, k, M, m1, m2, mm, Na, Nd, Nm1, Nm2
   COMPLEX Y, D, W, Bd, crt, den, y1, y2, X, A, B, C
   DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), W(*), Bd(*), Bm1(*)&
     , Bm2(*), Aa(*), Yy(*)
-  !***FIRST EXECUTABLE STATEMENT  CPROC
+  !* FIRST EXECUTABLE STATEMENT  CPROC
   DO j = 1, M
     Y(j) = X(j)
   ENDDO

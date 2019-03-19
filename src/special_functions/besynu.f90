@@ -1,13 +1,17 @@
-!DECK BESYNU
+!** BESYNU
 SUBROUTINE BESYNU(X,Fnu,N,Y)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BESYNU
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BESY
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (BESYNU-S, DBSYNU-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BESY
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (BESYNU-S, DBSYNU-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !         BESYNU computes N member sequences of Y Bessel functions
@@ -45,15 +49,19 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
   !         Improper input arguments - a fatal error
   !         Overflow - a fatal error
   !
-  !***SEE ALSO  BESY
-  !***REFERENCES  N. M. Temme, On the numerical evaluation of the ordinary
+  !***
+  ! **See also:**  BESY
+  !***
+  ! **References:**  N. M. Temme, On the numerical evaluation of the ordinary
   !                 Bessel function of the second kind, Journal of
   !                 Computational Physics 21, (1976), pp. 343-350.
   !               N. M. Temme, On the numerical evaluation of the modified
   !                 Bessel function of the third kind, Journal of
   !                 Computational Physics 19, (1975), pp. 324-337.
-  !***ROUTINES CALLED  GAMMA, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  GAMMA, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800501  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
@@ -64,7 +72,7 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BESYNU
+  
   !
   INTEGER i, inu, j, k, kk, N, nn
   REAL a, ak, arg, a1, a2, bk, cb, cbk, cc, cck, ck, coef, cpt, &
@@ -85,7 +93,7 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
     -4.21977345555443E-02, 7.21894324666300E-03, &
     -2.15241674114900E-04, -2.01348547807000E-05, &
     1.13302723200000E-06, 6.11609500000000E-09/
-  !***FIRST EXECUTABLE STATEMENT  BESYNU
+  !* FIRST EXECUTABLE STATEMENT  BESYNU
   ak = R1MACH(3)
   tol = MAX(ak,1.0E-15)
   IF ( X<=0.0E0 ) THEN

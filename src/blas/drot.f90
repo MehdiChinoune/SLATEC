@@ -1,18 +1,25 @@
-!DECK DROT
+!** DROT
 SUBROUTINE DROT(N,Dx,Incx,Dy,Incy,Dc,Ds)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DROT
-  !***PURPOSE  Apply a plane Givens rotation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1A8
-  !***TYPE      DOUBLE PRECISION (SROT-S, DROT-D, CSROT-C)
-  !***KEYWORDS  BLAS, GIVENS ROTATION, GIVENS TRANSFORMATION,
+  !>
+  !***
+  !  Apply a plane Givens rotation.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1A8
+  !***
+  ! **Type:**      DOUBLE PRECISION (SROT-S, DROT-D, CSROT-C)
+  !***
+  ! **Keywords:**  BLAS, GIVENS ROTATION, GIVENS TRANSFORMATION,
   !             LINEAR ALGEBRA, PLANE ROTATION, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -36,24 +43,27 @@ SUBROUTINE DROT(N,Dx,Incx,Dy,Incy,Dc,Ds)
   !     DX(LX+I*INCX), I = 0 to N-1, where LX = 1 if INCX .GE. 0, else
   !     LX = 1+(1-N)*INCX, and similarly for DY using LY and INCY.
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DROT
+  
   INTEGER i, Incx, Incy, kx, ky, N, nsteps
   REAL(8) :: Dx, Dy, Dc, Ds, zero, one, w, z
   DIMENSION Dx(*), Dy(*)
   SAVE zero, one
   DATA zero, one/0.0D0, 1.0D0/
-  !***FIRST EXECUTABLE STATEMENT  DROT
+  !* FIRST EXECUTABLE STATEMENT  DROT
   IF ( .NOT.(N<=0.OR.(Ds==zero.AND.Dc==one)) ) THEN
     IF ( Incx/=Incy.OR.Incx<=0 ) THEN
       !

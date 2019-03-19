@@ -1,18 +1,25 @@
-!DECK CBLKTR
+!** CBLKTR
 SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CBLKTR
-  !***PURPOSE  Solve a block tridiagonal system of linear equations
+  !>
+  !***
+  !  Solve a block tridiagonal system of linear equations
   !            (usually resulting from the discretization of separable
   !            two-dimensional elliptic equations).
-  !***LIBRARY   SLATEC (FISHPACK)
-  !***CATEGORY  I2B4B
-  !***TYPE      COMPLEX (BLKTRI-S, CBLKTR-C)
-  !***KEYWORDS  ELLIPTIC PDE, FISHPACK, TRIDIAGONAL LINEAR SYSTEM
-  !***AUTHOR  Adams, J., (NCAR)
+  !***
+  ! **Library:**   SLATEC (FISHPACK)
+  !***
+  ! **Category:**  I2B4B
+  !***
+  ! **Type:**      COMPLEX (BLKTRI-S, CBLKTR-C)
+  !***
+  ! **Keywords:**  ELLIPTIC PDE, FISHPACK, TRIDIAGONAL LINEAR SYSTEM
+  !***
+  ! **Author:**  Adams, J., (NCAR)
   !           Swarztrauber, P. N., (NCAR)
   !           Sweet, R., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Subroutine CBLKTR is a complex version of subroutine BLKTRI.
   !     Both subroutines solve a system of linear equations of the form
@@ -126,7 +133,7 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   !       CBLKTR will be called again with IFLG=1.  W(1) contains the
   !       number of locations required by W in floating point format.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !     * * * * * * *   Program Specifications    * * * * * * * * * * * *
   !
@@ -181,21 +188,25 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   !
   !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   !
-  !***REFERENCES  P. N. Swarztrauber and R. Sweet, Efficient Fortran
+  !***
+  ! **References:**  P. N. Swarztrauber and R. Sweet, Efficient Fortran
   !                 subprograms for the solution of elliptic equations,
   !                 NCAR TN/IA-109, July 1975, 138 pp.
   !               P. N. Swarztrauber, A direct method for the discrete
   !                 solution of separable elliptic equations, SIAM Journal
   !                 on Numerical Analysis 11, (1974), pp. 1136-1150.
-  !***ROUTINES CALLED  CBLKT1, CCMPB, CPROC, CPROCP, PROC, PROCP
-  !***COMMON BLOCKS    CCBLK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CBLKT1, CCMPB, CPROC, CPROCP, PROC, PROCP
+  !***
+  ! COMMON BLOCKS    CCBLK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CBLKTR
+  
   !
   REAL CNV, EPS
   INTEGER Idimy, Ierror, Iflg, IK, iw1, iw2, iw3, iwah, iwbh, iwd, &
@@ -207,7 +218,7 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   INTEGER :: i
   EXTERNAL PROC, PROCP, CPROC, CPROCP
   COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
-  !***FIRST EXECUTABLE STATEMENT  CBLKTR
+  !* FIRST EXECUTABLE STATEMENT  CBLKTR
   WC = [ ( CMPLX(W(i),W(i+1)), i=1,199,2 ) ]
   NM = N
   m2 = M + M

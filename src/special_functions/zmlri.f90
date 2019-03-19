@@ -1,24 +1,31 @@
-!DECK ZMLRI
+!** ZMLRI
 SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZMLRI
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESI and ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CMLRI-A, ZMLRI-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZBESI and ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CMLRI-A, ZMLRI-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZMLRI COMPUTES THE I BESSEL FUNCTION FOR RE(Z).GE.0.0 BY THE
   !     MILLER ALGORITHM NORMALIZED BY A NEUMANN SERIES.
   !
-  !***SEE ALSO  ZBESI, ZBESK
-  !***ROUTINES CALLED  D1MACH, DGAMLN, ZABS, ZEXP, ZLOG, ZMLT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZBESI, ZBESK
+  !***
+  ! **Routines called:**  D1MACH, DGAMLN, ZABS, ZEXP, ZLOG, ZMLT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP and ZLOG to EXTERNAL statement.  (RWC)
-  !***END PROLOGUE  ZMLRI
+  
   !     COMPLEX CK,CNORM,CONE,CTWO,CZERO,PT,P1,P2,RZ,SUM,Y,Z
   REAL(8) :: ack, ak, ap, at, az, bk, cki, ckr, cnormi, &
     cnormr, conei, coner, fkap, fkk, flam, fnf, Fnu, &
@@ -31,7 +38,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   DIMENSION Yr(N), Yi(N)
   EXTERNAL ZABS, ZEXP, ZLOG
   DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  ZMLRI
+  !* FIRST EXECUTABLE STATEMENT  ZMLRI
   scle = D1MACH(1)/Tol
   Nz = 0
   az = ZABS(Zr,Zi)

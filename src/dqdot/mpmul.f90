@@ -1,13 +1,17 @@
-!DECK MPMUL
+!** MPMUL
 SUBROUTINE MPMUL(X,Y,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  MPMUL
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DQDOTA and DQDOTI
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (MPMUL-A)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DQDOTA and DQDOTI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (MPMUL-A)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !  Multiplies X and Y, returning result in Z, for 'mp' X, Y and Z.
   !  The simple o(t**2) algorithm is used, with four guard digits and
@@ -23,10 +27,14 @@ SUBROUTINE MPMUL(X,Y,Z)
   !  all INTEGER arrays of size 30.  See the comments in the routine
   !  MPBLAS for the reason for this choice.
   !
-  !***SEE ALSO  DQDOTA, DQDOTI, MPBLAS
-  !***ROUTINES CALLED  MPCHK, MPERR, MPMLP, MPNZR
-  !***COMMON BLOCKS    MPCOM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DQDOTA, DQDOTI, MPBLAS
+  !***
+  ! **Routines called:**  MPCHK, MPERR, MPMLP, MPNZR
+  !***
+  ! COMMON BLOCKS    MPCOM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   ??????  Modified for use with BLAS.  Blank COMMON changed to named
   !           COMMON.  R given dimension 12.
@@ -34,11 +42,11 @@ SUBROUTINE MPMUL(X,Y,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  !***END PROLOGUE  MPMUL
+  
   INTEGER i, i2, i2p, j, j1, LUN, M, MXR
   COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
   INTEGER B, T, R, X(*), Y(*), Z(*), rs, re, xi, c, ri
-  !***FIRST EXECUTABLE STATEMENT  MPMUL
+  !* FIRST EXECUTABLE STATEMENT  MPMUL
   CALL MPCHK(1,4)
   i2 = T + 4
   i2p = i2 + 1

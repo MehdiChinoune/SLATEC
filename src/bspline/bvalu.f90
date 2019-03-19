@@ -1,15 +1,22 @@
-!DECK BVALU
+!** BVALU
 REAL FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BVALU
-  !***PURPOSE  Evaluate the B-representation of a B-spline at X for the
+  !>
+  !***
+  !  Evaluate the B-representation of a B-spline at X for the
   !            function value or any of its derivatives.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E3, K6
-  !***TYPE      SINGLE PRECISION (BVALU-S, DBVALU-D)
-  !***KEYWORDS  DIFFERENTIATION OF B-SPLINE, EVALUATION OF B-SPLINE
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E3, K6
+  !***
+  ! **Type:**      SINGLE PRECISION (BVALU-S, DBVALU-D)
+  !***
+  ! **Keywords:**  DIFFERENTIATION OF B-SPLINE, EVALUATION OF B-SPLINE
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Written by Carl de Boor and modified by D. E. Amos
   !
@@ -53,11 +60,14 @@ REAL FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !     Error Conditions
   !         An improper input is a fatal error
   !
-  !***REFERENCES  Carl de Boor, Package for calculating with B-splines,
+  !***
+  ! **References:**  Carl de Boor, Package for calculating with B-splines,
   !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
   !                 pp. 441-472.
-  !***ROUTINES CALLED  INTRV, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  INTRV, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -66,14 +76,14 @@ REAL FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BVALU
+  
   INTEGER i, Ideriv, iderp1, ihi, ihmkmj, ilo, imk, imkpj, Inbv, &
     ipj, ip1, ip1mj, j, jj, j1, j2, K, kmider, kmj, km1, &
     kpk, mflag, N
   REAL A, fkmj, T, Work, X
   !     DIMENSION T(N+K), WORK(3*K)
   DIMENSION T(*), A(*), Work(*)
-  !***FIRST EXECUTABLE STATEMENT  BVALU
+  !* FIRST EXECUTABLE STATEMENT  BVALU
   BVALU = 0.0E0
   IF ( K<1 ) THEN
     CALL XERMSG('SLATEC','BVALU','K DOES NOT SATISFY K.GE.1',2,1)
@@ -90,7 +100,7 @@ REAL FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   ELSE
     kmider = K - Ideriv
     !
-    ! *** FIND *I* IN (K,N) SUCH THAT T(I) .LE. X .LT. T(I+1)
+    !- ** FIND *I* IN (K,N) SUCH THAT T(I) .LE. X .LT. T(I+1)
     !     (OR, .LE. T(I+1) IF T(I) .LT. T(I+1) = T(N+1)).
     km1 = K - 1
     CALL INTRV(T,N+1,X,Inbv,i,mflag)
@@ -116,7 +126,7 @@ REAL FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
         ENDIF
       ENDIF
       !
-      ! *** DIFFERENCE THE COEFFICIENTS *IDERIV* TIMES
+      !- ** DIFFERENCE THE COEFFICIENTS *IDERIV* TIMES
       !     WORK(I) = AJ(I), WORK(K+I) = DP(I), WORK(K+K+I) = DM(I), I=1.K
       !
       20       imk = i - K
@@ -136,7 +146,7 @@ REAL FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
         ENDDO
       ENDIF
       !
-      ! *** COMPUTE VALUE AT *X* IN (T(I),(T(I+1)) OF IDERIV-TH DERIVATIVE,
+      !- ** COMPUTE VALUE AT *X* IN (T(I),(T(I+1)) OF IDERIV-TH DERIVATIVE,
       !     GIVEN ITS RELEVANT B-SPLINE COEFF. IN AJ(1),...,AJ(K-IDERIV).
       IF ( Ideriv/=km1 ) THEN
         ip1 = i + 1

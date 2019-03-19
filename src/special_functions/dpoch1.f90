@@ -1,15 +1,22 @@
-!DECK DPOCH1
+!** DPOCH1
 REAL(8) FUNCTION DPOCH1(A,X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPOCH1
-  !***PURPOSE  Calculate a generalization of Pochhammer's symbol starting
+  !>
+  !***
+  !  Calculate a generalization of Pochhammer's symbol starting
   !            from first order.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C1, C7A
-  !***TYPE      DOUBLE PRECISION (POCH1-S, DPOCH1-D)
-  !***KEYWORDS  FIRST ORDER, FNLIB, POCHHAMMER, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C1, C7A
+  !***
+  ! **Type:**      DOUBLE PRECISION (POCH1-S, DPOCH1-D)
+  !***
+  ! **Keywords:**  FIRST ORDER, FNLIB, POCHHAMMER, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate a double precision generalization of Pochhammer's symbol
   ! for double precision A and X for special situations that require
@@ -38,9 +45,12 @@ REAL(8) FUNCTION DPOCH1(A,X)
   !        POCH1(A,X) = (POCH(A,X) - 1) / X
   !                   = EXPREL(Q)*(Q/X + Q*POLY1(A,X)) + POLY1(A,X)
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCOT, DEXPRL, DPOCH, DPSI, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCOT, DEXPRL, DPOCH, DPSI, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -48,7 +58,7 @@ REAL(8) FUNCTION DPOCH1(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  !***END PROLOGUE  DPOCH1
+  
   INTEGER i, ii, incr, j, k, ndx, nterms
   REAL(8) :: A, X, absa, absx, alneps, alnvar, b, bern(20), &
     binv, bp, gbern(21), gbk, pi, poly1, q, rho, &
@@ -79,7 +89,7 @@ REAL(8) FUNCTION DPOCH1(A,X)
   DATA bern(20)/ - .236502241570062993455963519636983D-31/
   DATA pi/3.141592653589793238462643383279503D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DPOCH1
+  !* FIRST EXECUTABLE STATEMENT  DPOCH1
   IF ( first ) THEN
     sqtbig = 1.0D0/SQRT(24.0D0*D1MACH(1))
     alneps = LOG(D1MACH(3))

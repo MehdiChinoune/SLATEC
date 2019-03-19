@@ -1,14 +1,18 @@
-!DECK SDAINI
+!** SDAINI
 SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
     Wm,Iwm,Hmin,Uround,Nonneg,Ntemp)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SDAINI
-  !***SUBSIDIARY
-  !***PURPOSE  Initialization routine for SDASSL.
-  !***LIBRARY   SLATEC (DASSL)
-  !***TYPE      SINGLE PRECISION (SDAINI-S, DDAINI-D)
-  !***AUTHOR  Petzold, Linda R., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Initialization routine for SDASSL.
+  !***
+  ! **Library:**   SLATEC (DASSL)
+  !***
+  ! **Type:**      SINGLE PRECISION (SDAINI-S, DDAINI-D)
+  !***
+  ! **Author:**  Petzold, Linda R., (LLNL)
+  !***
+  ! **Description:**
   !-----------------------------------------------------------------
   !     SDAINI TAKES ONE STEP OF SIZE H OR SMALLER
   !     WITH THE BACKWARD EULER METHOD, TO
@@ -44,15 +48,17 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   !                  MATRIX INFORMATION
   !
   !-----------------------------------------------------------------
-  !***ROUTINES CALLED  SDAJAC, SDANRM, SDASLV
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SDAJAC, SDANRM, SDASLV
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830315  DATE WRITTEN
   !   901009  Finished conversion to SLATEC 4.0 format (F.N.Fritsch)
   !   901019  Merged changes made by C. Ulrich with SLATEC 4.0 format.
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
   !   901030  Minor corrections to declarations.  (FNF)
-  !***END PROLOGUE  SDAINI
+  
   !
   INTEGER Neq, Idid, Ipar(*), Iwm(*), Nonneg, Ntemp
   REAL X, Y(*), Yprime(*), H, Wt(*), Rpar(*), Phi(Neq,*), Delta(*), &
@@ -79,7 +85,7 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   !     INITIALIZATIONS.
   !---------------------------------------------------
   !
-  !***FIRST EXECUTABLE STATEMENT  SDAINI
+  !* FIRST EXECUTABLE STATEMENT  SDAINI
   Idid = 1
   nef = 0
   ncf = 0

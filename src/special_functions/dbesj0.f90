@@ -1,16 +1,23 @@
-!DECK DBESJ0
+!** DBESJ0
 REAL(8) FUNCTION DBESJ0(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBESJ0
-  !***PURPOSE  Compute the Bessel function of the first kind of order
+  !>
+  !***
+  !  Compute the Bessel function of the first kind of order
   !            zero.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10A1
-  !***TYPE      DOUBLE PRECISION (BESJ0-S, DBESJ0-D)
-  !***KEYWORDS  BESSEL FUNCTION, FIRST KIND, FNLIB, ORDER ZERO,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (BESJ0-S, DBESJ0-D)
+  !***
+  ! **Keywords:**  BESSEL FUNCTION, FIRST KIND, FNLIB, ORDER ZERO,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DBESJ0(X) calculates the double precision Bessel function of
   ! the first kind of order zero for double precision argument X.
@@ -21,14 +28,17 @@ REAL(8) FUNCTION DBESJ0(X)
   !                               significant figures required  31.21
   !                                    decimal places required  32.00
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, D9B0MP, DCSEVL, INITDS
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, D9B0MP, DCSEVL, INITDS
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DBESJ0
+  
   INTEGER INITDS, ntj0
   REAL(8) :: X, bj0cs(19), ampl, theta, xsml, y, D1MACH, DCSEVL
   LOGICAL first
@@ -53,7 +63,7 @@ REAL(8) FUNCTION DBESJ0(X)
   DATA bj0cs(18)/ - .14143836005240913919999999999999D-28/
   DATA bj0cs(19)/ + .43910905496698880000000000000000D-31/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DBESJ0
+  !* FIRST EXECUTABLE STATEMENT  DBESJ0
   IF ( first ) THEN
     ntj0 = INITDS(bj0cs,19,0.1*REAL(D1MACH(3)))
     xsml = SQRT(8.0D0*D1MACH(3))

@@ -1,13 +1,17 @@
-!DECK LA05AD
+!** LA05AD
 SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  LA05AD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (LA05AS-S, LA05AD-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (LA05AS-S, LA05AD-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THIS SUBPROGRAM IS A SLIGHT MODIFICATION OF A SUBPROGRAM
   !     FROM THE C. 1979 AERE HARWELL LIBRARY.  THE NAME OF THE
@@ -37,10 +41,14 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   ! FOR ROWS/COLS THAT HAVE BEEN PIVOTAL IW(I,5),IW(I,6) HOLD NEGATION OF
   !     POSITION OF ROW/COL I IN THE PIVOTAL ORDERING.
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  D1MACH, LA05ED, MC20AD, XERMSG, XSETUN
-  !***COMMON BLOCKS    LA05DD
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  D1MACH, LA05ED, MC20AD, XERMSG, XSETUN
+  !***
+  ! COMMON BLOCKS    LA05DD
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Added D1MACH to list of DOUBLE PRECISION variables.
@@ -51,7 +59,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  !***END PROLOGUE  LA05AD
+  
   INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, &
     k, k1, k2, kc, kcost, kj, kk, kl
   INTEGER klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, LCOl, &
@@ -68,7 +76,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   ! EPS IS THE RELATIVE ACCURACY OF FLOATING-POINT COMPUTATION
   SAVE eps, first
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  LA05AD
+  !* FIRST EXECUTABLE STATEMENT  LA05AD
   IF ( first ) eps = 2.0D0*D1MACH(4)
   first = .FALSE.
   !

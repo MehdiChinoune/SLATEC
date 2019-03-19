@@ -1,17 +1,24 @@
-!DECK DSPCO
+!** DSPCO
 SUBROUTINE DSPCO(Ap,N,Kpvt,Rcond,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSPCO
-  !***PURPOSE  Factor a real symmetric matrix stored in packed form
+  !>
+  !***
+  !  Factor a real symmetric matrix stored in packed form
   !            by elimination with symmetric pivoting and estimate the
   !            condition number of the matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1A
-  !***TYPE      DOUBLE PRECISION (SSPCO-S, DSPCO-D, CHPCO-C, CSPCO-C)
-  !***KEYWORDS  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1A
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSPCO-S, DSPCO-D, CHPCO-C, CSPCO-C)
+  !***
+  ! **Keywords:**  CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
   !             MATRIX FACTORIZATION, PACKED, SYMMETRIC
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     DSPCO factors a double precision symmetric matrix stored in
   !     packed form by elimination with symmetric pivoting and estimates
@@ -79,10 +86,13 @@ SUBROUTINE DSPCO(Ap,N,Kpvt,Rcond,Z)
   !             10    CONTINUE
   !             20 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DASUM, DAXPY, DDOT, DSCAL, DSPFA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DASUM, DAXPY, DDOT, DSCAL, DSPFA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -92,7 +102,7 @@ SUBROUTINE DSPCO(Ap,N,Kpvt,Rcond,Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DSPCO
+  
   INTEGER N, Kpvt(*)
   REAL(8) :: Ap(*), Z(*)
   REAL(8) :: Rcond
@@ -104,7 +114,7 @@ SUBROUTINE DSPCO(Ap,N,Kpvt,Rcond,Z)
   !
   !     FIND NORM OF A USING ONLY UPPER HALF
   !
-  !***FIRST EXECUTABLE STATEMENT  DSPCO
+  !* FIRST EXECUTABLE STATEMENT  DSPCO
   j1 = 1
   DO j = 1, N
     Z(j) = DASUM(j,Ap(j1),1)

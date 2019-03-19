@@ -1,26 +1,33 @@
-!DECK DDRIV2
+!** DDRIV2
 SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     Leniw,G,Ierflg)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DDRIV2
-  !***PURPOSE  The function of DDRIV2 is to solve N ordinary differential
+  !>
+  !***
+  !  The function of DDRIV2 is to solve N ordinary differential
   !            equations of the form dY(I)/dT = F(Y(I),T), given the
   !            initial conditions Y(I) = YI.  The program has options to
   !            allow the solution of both stiff and non-stiff differential
   !            equations.  DDRIV2 uses double precision arithmetic.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***CATEGORY  I1A2, I1A1B
-  !***TYPE      DOUBLE PRECISION (SDRIV2-S, DDRIV2-D, CDRIV2-C)
-  !***KEYWORDS  DOUBLE PRECISION, GEAR'S METHOD, INITIAL VALUE PROBLEMS,
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Category:**  I1A2, I1A1B
+  !***
+  ! **Type:**      DOUBLE PRECISION (SDRIV2-S, DDRIV2-D, CDRIV2-C)
+  !***
+  ! **Keywords:**  DOUBLE PRECISION, GEAR'S METHOD, INITIAL VALUE PROBLEMS,
   !             ODE, ORDINARY DIFFERENTIAL EQUATIONS, SDRIVE, STIFF
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  I.  PARAMETERS  .....................................................
   !
@@ -334,13 +341,16 @@ SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   !          100  FORMAT(...)
   !               END (Sample)
   !
-  !***REFERENCES  C. W. Gear, Numerical Initial Value Problems in
+  !***
+  ! **References:**  C. W. Gear, Numerical Initial Value Problems in
   !                 Ordinary Differential Equations, Prentice-Hall, 1971.
-  !***ROUTINES CALLED  DDRIV3, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DDRIV3, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  DDRIV2
+  
   EXTERNAL F, G
   REAL(8) :: Eps, Ewt, ewtcom(1), G, hmax, T, Tout, Work(*), &
     Y(*)
@@ -349,7 +359,7 @@ SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
     Mstate, mu, mxord, MXSTEP, N, nde, Nroot, nstate, ntask
   CHARACTER intgr1*8
   PARAMETER (IMPL=0,MXSTEP=1000)
-  !***FIRST EXECUTABLE STATEMENT  DDRIV2
+  !* FIRST EXECUTABLE STATEMENT  DDRIV2
   IF ( ABS(Mstate)==9 ) THEN
     Ierflg = 999
     CALL XERMSG('SLATEC','DDRIV2',&

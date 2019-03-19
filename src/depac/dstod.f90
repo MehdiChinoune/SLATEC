@@ -1,13 +1,17 @@
-!DECK DSTOD
+!** DSTOD
 SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSTOD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DDEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (STOD-S, DSTOD-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DDEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (STOD-S, DSTOD-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   DSTOD integrates a system of first order odes over one step in the
   !   integrator package DDEBDF.
@@ -75,10 +79,14 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   ! N      = The number of first-order differential equations.
   ! ----------------------------------------------------------------------
   !
-  !***SEE ALSO  DDEBDF
-  !***ROUTINES CALLED  DCFOD, DPJAC, DSLVS, DVNRMS
-  !***COMMON BLOCKS    DDEBD1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DDEBDF
+  !***
+  ! **Routines called:**  DCFOD, DPJAC, DSLVS, DVNRMS
+  !***
+  ! COMMON BLOCKS    DDEBD1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -86,7 +94,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-  !***END PROLOGUE  DSTOD
+  
   !
   INTEGER i, i1, IALth, IER, IOD, IOWnd, Ipar, IPUp, iredo, iret, &
     Iwm, j, jb, JSTart, KFLag, KSTeps, L, LMAx, m, MAXord, &
@@ -110,7 +118,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 690
   !        BEGIN BLOCK PERMITTING ...EXITS TO 60
-  !***FIRST EXECUTABLE STATEMENT  DSTOD
+  !* FIRST EXECUTABLE STATEMENT  DSTOD
   KFLag = 0
   told = TN
   ncf = 0

@@ -2,22 +2,28 @@ MODULE TEST40_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK CDQAG
+  !** CDQAG
   SUBROUTINE CDQAG(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CDQAG
-    !***PURPOSE  Quick check for DQAG.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (CQAG-S, CDQAG-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  D1MACH, DF1G, DF2G, DF3G, DPRIN, DQAG
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for DQAG.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQAG-S, CDQAG-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DF1G, DF2G, DF3G, DPRIN, DQAG
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    !***END PROLOGUE  CDQAG
+    
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv, Lun
@@ -30,7 +36,7 @@ CONTAINS
     DATA exact1/0.1154700538379252D+01/
     DATA exact2/0.11780972450996172D+00/
     DATA exact3/0.1855802D+02/
-    !***FIRST EXECUTABLE STATEMENT  CDQAG
+    !* FIRST EXECUTABLE STATEMENT  CDQAG
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAG QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
@@ -112,23 +118,29 @@ CONTAINS
       ENDIF
     ENDIF
   END SUBROUTINE CDQAG
-  !DECK CDQAGI
+  !** CDQAGI
   SUBROUTINE CDQAGI(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CDQAGI
-    !***PURPOSE  Quick check for DQAGI.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (CQAGI-S, CDQAGI-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  D1MACH, DPRIN, DQAGI, DT0, DT1, DT2, DT3, DT4, DT5
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for DQAGI.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQAGI-S, CDQAGI-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DPRIN, DQAGI, DT0, DT1, DT2, DT3, DT4, DT5
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891009  Removed unreferenced variables.  (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    !***END PROLOGUE  CDQAGI
+    
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv, inf
@@ -142,7 +154,7 @@ CONTAINS
     DATA exact2/0.909864525656D-02/
     DATA exact3/0.31415926535897932D+01/
     DATA exact4/0.19984914554328673D+04/
-    !***FIRST EXECUTABLE STATEMENT  CDQAGI
+    !* FIRST EXECUTABLE STATEMENT  CDQAGI
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAGI QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
@@ -243,22 +255,28 @@ CONTAINS
       ENDIF
     ENDIF
   END SUBROUTINE CDQAGI
-  !DECK CDQAGP
+  !** CDQAGP
   SUBROUTINE CDQAGP(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CDQAGP
-    !***PURPOSE  Quick check for DQAGP.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (CQAGP-S, CDQAGP-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  D1MACH, DF1P, DF2P, DF3P, DF4P, DPRIN, DQAGP
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for DQAGP.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQAGP-S, CDQAGP-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DF1P, DF2P, DF3P, DF4P, DPRIN, DQAGP
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    !***END PROLOGUE  CDQAGP
+    
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv
@@ -272,7 +290,7 @@ CONTAINS
     DATA exact3/0.31415926535897932D+01/
     DATA p1/0.1428571428571428D+00/
     DATA p2/0.6666666666666667D+00/
-    !***FIRST EXECUTABLE STATEMENT  CDQAGP
+    !* FIRST EXECUTABLE STATEMENT  CDQAGP
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAGP QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
@@ -384,24 +402,30 @@ CONTAINS
       ENDIF
     ENDIF
   END SUBROUTINE CDQAGP
-  !DECK CDQAGS
+  !** CDQAGS
   SUBROUTINE CDQAGS(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CDQAGS
-    !***PURPOSE  Quick check for DQAGS.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (CQAGS-S, CDQAGS-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  D1MACH, DF0S, DF1S, DF2S, DF3S, DF4S, DF5S, DPRIN,
+    !>
+    !***
+    !  Quick check for DQAGS.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQAGS-S, CDQAGS-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DF0S, DF1S, DF2S, DF3S, DF4S, DF5S, DPRIN,
     !                    DQAGS
-    !***REVISION HISTORY  (YYMMDD)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   911114  Modified test on IER=4 to allow IER=5.  (WRB)
-    !***END PROLOGUE  CDQAGS
+    
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv, Lun
@@ -415,7 +439,7 @@ CONTAINS
     DATA exact2/0.909864525656D-02/
     DATA exact3/0.31415926535897932D+01/
     DATA exact4/0.19984914554328673D+04/
-    !***FIRST EXECUTABLE STATEMENT  CDQAGS
+    !* FIRST EXECUTABLE STATEMENT  CDQAGS
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAGS QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
@@ -521,22 +545,28 @@ CONTAINS
       ENDIF
     ENDIF
   END SUBROUTINE CDQAGS
-  !DECK CDQAWC
+  !** CDQAWC
   SUBROUTINE CDQAWC(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CDQAWC
-    !***PURPOSE  Quick check for DQAWC.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (CQAWC-S, CDQAWC-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  D1MACH, DF0C, DF1C, DPRIN, DQAWC
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for DQAWC.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQAWC-S, CDQAWC-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DF0C, DF1C, DPRIN, DQAWC
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    !***END PROLOGUE  CDQAWC
+    
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv, Lun
@@ -546,7 +576,7 @@ CONTAINS
     DIMENSION work(800), iwork(200), ierv(2)
     DATA exact0/ - 0.6284617285065624D+03/
     DATA exact1/0.1855802D+01/
-    !***FIRST EXECUTABLE STATEMENT  CDQAWC
+    !* FIRST EXECUTABLE STATEMENT  CDQAWC
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAWC QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
@@ -622,22 +652,28 @@ CONTAINS
       ENDIF
     ENDIF
   END SUBROUTINE CDQAWC
-  !DECK CDQAWF
+  !** CDQAWF
   SUBROUTINE CDQAWF(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CDQAWF
-    !***PURPOSE  Quick check for DQAWF.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (CQAWF-S, CDQAWF-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  D1MACH, DF0F, DF1F, DPRIN, DQAWF
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for DQAWF.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQAWF-S, CDQAWF-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DF0F, DF1F, DPRIN, DQAWF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    !***END PROLOGUE  CDQAWF
+    
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv, integr, iwork, leniw, Lun, maxp1
@@ -647,7 +683,7 @@ CONTAINS
     DIMENSION ierv(4), iwork(450), work(1425)
     DATA exact0/0.1422552162575912D+01/
     DATA pi/0.31415926535897932D+01/
-    !***FIRST EXECUTABLE STATEMENT  CDQAWF
+    !* FIRST EXECUTABLE STATEMENT  CDQAWF
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAWF QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
@@ -735,22 +771,28 @@ CONTAINS
       ENDIF
     ENDIF
   END SUBROUTINE CDQAWF
-  !DECK CDQAWO
+  !** CDQAWO
   SUBROUTINE CDQAWO(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CDQAWO
-    !***PURPOSE  Quick check for DQAWO.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (CQAWO-S, CDQAWO-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  D1MACH, DF0O, DF1O, DF2O, DPRIN, DQAWO
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for DQAWO.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQAWO-S, CDQAWO-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DF0O, DF1O, DF2O, DPRIN, DQAWO
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    !***END PROLOGUE  CDQAWO
+    
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER leniw
@@ -761,7 +803,7 @@ CONTAINS
     DIMENSION work(1325), iwork(400), ierv(4)
     DATA exact0/0.1042872789432789D+05/
     DATA pi/0.31415926535897932D+01/
-    !***FIRST EXECUTABLE STATEMENT  CDQAWO
+    !* FIRST EXECUTABLE STATEMENT  CDQAWO
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAWO QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
@@ -861,22 +903,28 @@ CONTAINS
       ENDIF
     ENDIF
   END SUBROUTINE CDQAWO
-  !DECK CDQAWS
+  !** CDQAWS
   SUBROUTINE CDQAWS(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CDQAWS
-    !***PURPOSE  Quick check for DQAWS.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (CQAWS-S, CDQAWS-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  D1MACH, DF0WS, DF1WS, DPRIN, DQAWS
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for DQAWS.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQAWS-S, CDQAWS-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DF0WS, DF1WS, DPRIN, DQAWS
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    !***END PROLOGUE  CDQAWS
+    
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv, Lun
@@ -887,7 +935,7 @@ CONTAINS
     DIMENSION work(800), iwork(200), ierv(2)
     DATA exact0/0.5350190569223644D+00/
     DATA exact1/0.1998491554328673D+04/
-    !***FIRST EXECUTABLE STATEMENT  CDQAWS
+    !* FIRST EXECUTABLE STATEMENT  CDQAWS
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQAWS QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
@@ -964,22 +1012,28 @@ CONTAINS
       ENDIF
     ENDIF
   END SUBROUTINE CDQAWS
-  !DECK CDQNG
+  !** CDQNG
   SUBROUTINE CDQNG(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CDQNG
-    !***PURPOSE  Quick check for DQNG.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (CQNG-S, CDQNG-D)
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  D1MACH, DF1N, DF2N, DPRIN, DQNG
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Quick check for DQNG.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (CQNG-S, CDQNG-D)
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  D1MACH, DF1N, DF2N, DPRIN, DQNG
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    !***END PROLOGUE  CDQNG
+    
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER Lun
@@ -989,7 +1043,7 @@ CONTAINS
     DIMENSION ierv(1)
     DATA exact1/0.7281029132255818D+00/
     DATA exact2/0.1D+02/
-    !***FIRST EXECUTABLE STATEMENT  CDQNG
+    !* FIRST EXECUTABLE STATEMENT  CDQNG
     IF ( Kprint>=2 ) WRITE (Lun,'(''1DQNG QUICK CHECK''/)')
     !
     ! TEST ON IER = 0
@@ -1041,188 +1095,243 @@ CONTAINS
       ENDIF
     ENDIF
   END SUBROUTINE CDQNG
-  !DECK DF0C
+  !** DF0C
   REAL(8) FUNCTION DF0C(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF0C
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF0C
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF0C
+    !* FIRST EXECUTABLE STATEMENT  DF0C
     DF0C = 1.D0/(X*X+1.D-4)
   END FUNCTION DF0C
-  !DECK DF0F
+  !** DF0F
   REAL(8) FUNCTION DF0F(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF0F
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF0F
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF0F
+    !* FIRST EXECUTABLE STATEMENT  DF0F
     DF0F = 0.0D+00
     IF ( X/=0.0D+00 ) DF0F = SIN(0.5D+02*X)/(X*SQRT(X))
   END FUNCTION DF0F
-  !DECK DF0O
+  !** DF0O
   REAL(8) FUNCTION DF0O(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF0O
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF0O
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF0O
+    !* FIRST EXECUTABLE STATEMENT  DF0O
     DF0O = (0.2D+01*SIN(X))**14
   END FUNCTION DF0O
-  !DECK DF0S
+  !** DF0S
   REAL(8) FUNCTION DF0S(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF0S
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF0S
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF0S
+    !* FIRST EXECUTABLE STATEMENT  DF0S
     DF0S = 0.0D+00
     IF ( X/=0.0D+00 ) DF0S = 0.1D+01/SQRT(X)
   END FUNCTION DF0S
-  !DECK DF0WS
+  !** DF0WS
   REAL(8) FUNCTION DF0WS(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF0WS
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF0WS
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF0WS
+    !* FIRST EXECUTABLE STATEMENT  DF0WS
     DF0WS = SIN(0.1D+02*X)
   END FUNCTION DF0WS
-  !DECK DF1C
+  !** DF1C
   REAL(8) FUNCTION DF1C(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF1C
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF1C
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF1C
+    !* FIRST EXECUTABLE STATEMENT  DF1C
     DF1C = 0.0D+00
     IF ( X/=0.33D+00 ) DF1C = (X-0.5D+00)*ABS(X-0.33D+00)**(-0.9D+00)
   END FUNCTION DF1C
-  !DECK DF1F
+  !** DF1F
   REAL(8) FUNCTION DF1F(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF1F
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF1F
+    
     REAL(8) :: X, x1, y
-    !***FIRST EXECUTABLE STATEMENT  DF1F
+    !* FIRST EXECUTABLE STATEMENT  DF1F
     x1 = X + 0.1D+01
     DF1F = 0.5D+01/x1/x1
     y = 0.5D+01/x1
     IF ( y>3.1415926535897932D0 ) DF1F = 0.0D0
   END FUNCTION DF1F
-  !DECK DF1G
+  !** DF1G
   REAL(8) FUNCTION DF1G(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF1G
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF1G
+    
     REAL(8) :: pi, X
     DATA pi/3.1415926535897932D0/
-    !***FIRST EXECUTABLE STATEMENT  DF1G
+    !* FIRST EXECUTABLE STATEMENT  DF1G
     DF1G = 2.0D0/(2.0D0+SIN(10.0D0*pi*X))
   END FUNCTION DF1G
-  !DECK DF1N
+  !** DF1N
   REAL(8) FUNCTION DF1N(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF1N
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF1N
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF1N
+    !* FIRST EXECUTABLE STATEMENT  DF1N
     DF1N = 1.0D0/(X**4+X**2+1.0D0)
   END FUNCTION DF1N
-  !DECK DF1O
+  !** DF1O
   REAL(8) FUNCTION DF1O(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF1O
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF1O
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF1O
+    !* FIRST EXECUTABLE STATEMENT  DF1O
     DF1O = 0.1D+01
     IF ( X>0.31415926535897932D+01 ) DF1O = 0.0D+00
   END FUNCTION DF1O
-  !DECK DF1P
+  !** DF1P
   REAL(8) FUNCTION DF1P(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF1P
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF1P
+    
     REAL(8) :: alfa1, alfa2, p1, p2, X, d1, d2
-    !***FIRST EXECUTABLE STATEMENT  DF1P
+    !* FIRST EXECUTABLE STATEMENT  DF1P
     !  P1 = 1/7, P2 = 2/3
     DATA p1/0.1428571428571428D+00/
     DATA p2/0.6666666666666667D+00/
@@ -1233,368 +1342,468 @@ CONTAINS
     DF1P = 0.0D+00
     IF ( d1/=0.0D+00.AND.d2/=0.0D+00 ) DF1P = d1**alfa1 + d2**alfa2
   END FUNCTION DF1P
-  !DECK DF1S
+  !** DF1S
   REAL(8) FUNCTION DF1S(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF1S
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF1S
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF1S
+    !* FIRST EXECUTABLE STATEMENT  DF1S
     DF1S = 0.2D+01/(0.2D+01+SIN(0.314159D+02*X))
   END FUNCTION DF1S
-  !DECK DF1WS
+  !** DF1WS
   REAL(8) FUNCTION DF1WS(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF1WS
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF1WS
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF1WS
+    !* FIRST EXECUTABLE STATEMENT  DF1WS
     DF1WS = 0.00D+00
     IF ( X-0.33D+00/=0.00D+00 ) DF1WS = ABS(X-0.33D+00)**(-0.999D+00)
   END FUNCTION DF1WS
-  !DECK DF2G
+  !** DF2G
   REAL(8) FUNCTION DF2G(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF2G
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF2G
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF2G
+    !* FIRST EXECUTABLE STATEMENT  DF2G
     DF2G = X*SIN(0.3D+02*X)*COS(0.5D+02*X)
   END FUNCTION DF2G
-  !DECK DF2N
+  !** DF2N
   REAL(8) FUNCTION DF2N(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF2N
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF2N
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF2N
+    !* FIRST EXECUTABLE STATEMENT  DF2N
     DF2N = X**(-0.9D+00)
   END FUNCTION DF2N
-  !DECK DF2O
+  !** DF2O
   REAL(8) FUNCTION DF2O(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF2O
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF2O
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF2O
+    !* FIRST EXECUTABLE STATEMENT  DF2O
     DF2O = 0.0D+00
     IF ( X/=0.0D+00 ) DF2O = 0.1D+01/(X*X*SQRT(X))
   END FUNCTION DF2O
-  !DECK DF2P
+  !** DF2P
   REAL(8) FUNCTION DF2P(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF2P
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF2P
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF2P
+    !* FIRST EXECUTABLE STATEMENT  DF2P
     DF2P = SIN(0.314159D+03*X)/(0.314159D+01*X)
   END FUNCTION DF2P
-  !DECK DF2S
+  !** DF2S
   REAL(8) FUNCTION DF2S(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF2S
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF2S
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF2S
+    !* FIRST EXECUTABLE STATEMENT  DF2S
     DF2S = 0.1D+03
     IF ( X/=0.0D+00 ) DF2S = SIN(0.314159D+03*X)/(0.314159D+01*X)
   END FUNCTION DF2S
-  !DECK DF3G
+  !** DF3G
   REAL(8) FUNCTION DF3G(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF3G
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF3G
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF3G
+    !* FIRST EXECUTABLE STATEMENT  DF3G
     DF3G = ABS(X-0.33D+00)**(-.90D+00)
   END FUNCTION DF3G
-  !DECK DF3P
+  !** DF3P
   REAL(8) FUNCTION DF3P(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF3P
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF3P
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF3P
+    !* FIRST EXECUTABLE STATEMENT  DF3P
     DF3P = 0.1D+01
     IF ( X>0.31415926535897932D+01 ) DF3P = 0.0D+00
   END FUNCTION DF3P
-  !DECK DF3S
+  !** DF3S
   REAL(8) FUNCTION DF3S(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF3S
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF3S
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF3S
+    !* FIRST EXECUTABLE STATEMENT  DF3S
     DF3S = 0.1D+01
     IF ( X>0.31415926535897932D+01 ) DF3S = 0.0D+00
   END FUNCTION DF3S
-  !DECK DF4P
+  !** DF4P
   REAL(8) FUNCTION DF4P(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF4P
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF4P
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF4P
+    !* FIRST EXECUTABLE STATEMENT  DF4P
     DF4P = 0.0D+00
     IF ( X>0.0D+00 ) DF4P = 0.1D+01/(X*SQRT(X))
   END FUNCTION DF4P
-  !DECK DF4S
+  !** DF4S
   REAL(8) FUNCTION DF4S(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF4S
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF4S
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF4S
+    !* FIRST EXECUTABLE STATEMENT  DF4S
     DF4S = 0.00D+00
     IF ( X-0.33D+00/=0.00D+00 ) DF4S = ABS(X-0.33D+00)**(-0.999D+00)
   END FUNCTION DF4S
-  !DECK DF5S
+  !** DF5S
   REAL(8) FUNCTION DF5S(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DF5S
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DF5S
+    
     REAL(8) :: X
-    !***FIRST EXECUTABLE STATEMENT  DF5S
+    !* FIRST EXECUTABLE STATEMENT  DF5S
     DF5S = 0.0D+00
     IF ( X/=0.0D+00 ) DF5S = 1.0D+00/(X*SQRT(X))
   END FUNCTION DF5S
-  !DECK DT0
+  !** DT0
   REAL(8) FUNCTION DT0(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DT0
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  DF0S
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  DF0S
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DT0
+    
     REAL(8) :: a, b, X, x1, y
-    !***FIRST EXECUTABLE STATEMENT  DT0
+    !* FIRST EXECUTABLE STATEMENT  DT0
     a = 0.0D+00
     b = 0.1D+01
     x1 = X + 0.1D+01
     y = (b-a)/x1 + a
     DT0 = (b-a)*DF0S(y)/x1/x1
   END FUNCTION DT0
-  !DECK DT1
+  !** DT1
   REAL(8) FUNCTION DT1(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DT1
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  DF1S
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  DF1S
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DT1
+    
     REAL(8) :: a, b, X, x1, y
-    !***FIRST EXECUTABLE STATEMENT  DT1
+    !* FIRST EXECUTABLE STATEMENT  DT1
     a = 0.0D+00
     b = 0.1D+01
     x1 = X + 0.1D+01
     y = (b-a)/x1 + a
     DT1 = (b-a)*DF1S(y)/x1/x1
   END FUNCTION DT1
-  !DECK DT2
+  !** DT2
   REAL(8) FUNCTION DT2(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DT2
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  DF2S
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  DF2S
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DT2
+    
     REAL(8) :: a, b, X, x1, y
-    !***FIRST EXECUTABLE STATEMENT  DT2
+    !* FIRST EXECUTABLE STATEMENT  DT2
     a = 0.1D+00
     b = 0.1D+01
     x1 = X + 0.1D+01
     y = (b-a)/x1 + a
     DT2 = (b-a)*DF2S(y)/x1/x1
   END FUNCTION DT2
-  !DECK DT3
+  !** DT3
   REAL(8) FUNCTION DT3(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DT3
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  DF3S
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  DF3S
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DT3
+    
     REAL(8) :: a, b, X, x1, y
-    !***FIRST EXECUTABLE STATEMENT  DT3
+    !* FIRST EXECUTABLE STATEMENT  DT3
     a = 0.0D+00
     b = 0.5D+01
     x1 = X + 0.1D+01
     y = (b-a)/x1 + a
     DT3 = (b-a)*DF3S(y)/x1/x1
   END FUNCTION DT3
-  !DECK DT4
+  !** DT4
   REAL(8) FUNCTION DT4(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DT4
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  DF4S
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  DF4S
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DT4
+    
     REAL(8) :: a, b, X, x1, y
-    !***FIRST EXECUTABLE STATEMENT  DT4
+    !* FIRST EXECUTABLE STATEMENT  DT4
     a = 0.0D+00
     b = 0.1D+01
     x1 = X + 0.1D+01
     y = (b-a)/x1 + a
     DT4 = (b-a)*DF4S(y)/x1/x1
   END FUNCTION DT4
-  !DECK DT5
+  !** DT5
   REAL(8) FUNCTION DT5(X)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DT5
-    !***PURPOSE  Subsidiary to
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  DF5S
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  DF5S
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  DT5
+    
     REAL(8) :: a, b, X, x1, y
-    !***FIRST EXECUTABLE STATEMENT  DT5
+    !* FIRST EXECUTABLE STATEMENT  DT5
     a = 0.0D+00
     b = 0.1D+01
     x1 = X + 0.1D+01
     y = (b-a)/x1 + a
     DT5 = (b-a)*DF5S(y)/x1/x1
   END FUNCTION DT5
-  !DECK DPRIN
+  !** DPRIN
   SUBROUTINE DPRIN(Lun,Num1,Kprint,Ip,Exact,Result,Abserr,Neval,Ierv,Lierv)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DPRIN
-    !***SUBSIDIARY
-    !***PURPOSE  Subsidiary to CDQAG, CDQAG, CDQAGI, CDQAGP, CDQAGS, CDQAWC,
+    !>
+    !***
+    !  Subsidiary to CDQAG, CDQAG, CDQAGI, CDQAGP, CDQAGS, CDQAWC,
     !            CDQAWF, CDQAWO, CDQAWS, and CDQNG.
-    !***LIBRARY   SLATEC
-    !***AUTHOR  Piessens, Robert
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  Piessens, Robert
     !             Applied Mathematics and Programming Division
     !             K. U. Leuven
     !           de Doncker, Elise
     !             Applied Mathematics and Programming Division
     !             K. U. Leuven
-    !***DESCRIPTION
+    !***
+    ! **Description:**
     !
     !   This program is called by the (double precision) Quadpack quick
     !   check routines for printing out their messages.
     !
-    !***ROUTINES CALLED  (NONE)
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  (NONE)
+
+    !* REVISION HISTORY  (YYMMDD)
     !   811027  DATE WRITTEN
     !   890831  Modified array declarations.  (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910627  Code completely rewritten.  (WRB)
-    !***END PROLOGUE  DPRIN
+    
     !     .. Scalar Arguments ..
     REAL(8) :: Abserr, Exact, Result
     INTEGER Ip, Kprint, Lierv, Lun, Neval, Num1
@@ -1605,7 +1814,7 @@ CONTAINS
     INTEGER ier, k
     !     .. Intrinsic Functions ..
     INTRINSIC ABS
-    !***FIRST EXECUTABLE STATEMENT  DPRIN
+    !* FIRST EXECUTABLE STATEMENT  DPRIN
     ier = Ierv(1)
     error = ABS(Exact-Result)
     !
@@ -1651,24 +1860,31 @@ CONTAINS
     99010 FORMAT (5X,'INFINITY',4X,D15.7,11X,D9.2,I5,4X,I6)
   END SUBROUTINE DPRIN
 END MODULE TEST40_MOD
-!DECK TEST40
+!** TEST40
 PROGRAM TEST40
   USE TEST40_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST40
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  H2
-  !***TYPE      DOUBLE PRECISION (TEST39-S, TEST40-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  H2
+  !***
+  ! **Type:**      DOUBLE PRECISION (TEST39-S, TEST40-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -1680,26 +1896,29 @@ PROGRAM TEST40
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        DQAG     DQAGI    DQAGP    DQAGS    DQAWC
   !        DQAWF    DQAWO    DQAWS    DQNG
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  CDQAG, CDQAGI, CDQAGP, CDQAGS, CDQAWC, CDQAWF,
+  !***
+  ! **Routines called:**  CDQAG, CDQAGI, CDQAGP, CDQAGS, CDQAWC, CDQAWF,
   !                    CDQAWO, CDQAWS, CDQNG, I1MACH, XERMAX, XSETF,
   !                    XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST40
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST40
+  !* FIRST EXECUTABLE STATEMENT  TEST40
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

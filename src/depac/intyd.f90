@@ -1,13 +1,17 @@
-!DECK INTYD
+!** INTYD
 SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  INTYD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (INTYD-S, DINTYD-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (INTYD-S, DINTYD-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   INTYD approximates the solution and derivatives at T by polynomial
   !   interpolation. Must be used in conjunction with the integrator
@@ -33,16 +37,20 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
   ! IFLAG is returned negative if either K or T is out of bounds.
   ! ----------------------------------------------------------------------
   !
-  !***SEE ALSO  DEBDF
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    DEBDF1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DEBDF
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    DEBDF1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  INTYD
+  
   !
   !LLL. OPTIMIZE
   INTEGER K, Nyh, Iflag, i, ic, IER, IOWnd, IOWns, j, jb, jb2, &
@@ -55,7 +63,7 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
     UROund, IOWnd(14), IOWns(6), IER, JSTart, KFLag, L, &
     METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
   !
-  !***FIRST EXECUTABLE STATEMENT  INTYD
+  !* FIRST EXECUTABLE STATEMENT  INTYD
   Iflag = 0
   IF ( K<0.OR.K>NQ ) THEN
     !

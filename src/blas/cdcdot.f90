@@ -1,18 +1,25 @@
-!DECK CDCDOT
+!** CDCDOT
 COMPLEX FUNCTION CDCDOT(N,Cb,Cx,Incx,Cy,Incy)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CDCDOT
-  !***PURPOSE  Compute the inner product of two vectors with extended
+  !>
+  !***
+  !  Compute the inner product of two vectors with extended
   !            precision accumulation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1A4
-  !***TYPE      COMPLEX (SDSDOT-S, CDCDOT-C)
-  !***KEYWORDS  BLAS, DOT PRODUCT, INNER PRODUCT, LINEAR ALGEBRA, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1A4
+  !***
+  ! **Type:**      COMPLEX (SDSDOT-S, CDCDOT-C)
+  !***
+  ! **Keywords:**  BLAS, DOT PRODUCT, INNER PRODUCT, LINEAR ALGEBRA, VECTOR
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -33,23 +40,26 @@ COMPLEX FUNCTION CDCDOT(N,Cb,Cx,Incx,Cy,Incy)
   !     where LX = 1 if INCX .GE. 0, else LX = 1+(1-N)*INCX, and LY is
   !     defined in a similar way using INCY.
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CDCDOT
+  
   INTEGER N, Incx, Incy, i, kx, ky
   COMPLEX Cx(*), Cy(*), Cb
   REAL(8) :: dsdotr, dsdoti, dt1, dt2, dt3, dt4
-  !***FIRST EXECUTABLE STATEMENT  CDCDOT
+  !* FIRST EXECUTABLE STATEMENT  CDCDOT
   dsdotr = REAL(REAL(Cb), 8)
   dsdoti = REAL(AIMAG(Cb), 8)
   IF ( N>0 ) THEN

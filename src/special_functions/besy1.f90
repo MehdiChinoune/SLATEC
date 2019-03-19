@@ -1,16 +1,23 @@
-!DECK BESY1
+!** BESY1
 REAL FUNCTION BESY1(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BESY1
-  !***PURPOSE  Compute the Bessel function of the second kind of order
+  !>
+  !***
+  !  Compute the Bessel function of the second kind of order
   !            one.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10A1
-  !***TYPE      SINGLE PRECISION (BESY1-S, DBESY1-D)
-  !***KEYWORDS  BESSEL FUNCTION, FNLIB, ORDER ONE, SECOND KIND,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10A1
+  !***
+  ! **Type:**      SINGLE PRECISION (BESY1-S, DBESY1-D)
+  !***
+  ! **Keywords:**  BESSEL FUNCTION, FNLIB, ORDER ONE, SECOND KIND,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! BESY1(X) calculates the Bessel function of the second kind of
   ! order one for real argument X.
@@ -33,9 +40,12 @@ REAL FUNCTION BESY1(X)
   !                               significant figures required  15.96
   !                                    decimal places required  17.08
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  BESJ1, CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  BESJ1, CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -43,7 +53,7 @@ REAL FUNCTION BESY1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  BESY1
+  
   REAL ampl, BESJ1, bm1cs, bth1cs, by1cs, CSEVL, pi4, &
     R1MACH, theta, twodpi, X, xmax, xmin, xsml, y, z
   INTEGER INITS, ntm1, ntth1, nty1
@@ -113,7 +123,7 @@ REAL FUNCTION BESY1(X)
   DATA twodpi/0.63661977236758134E0/
   DATA pi4/0.78539816339744831E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BESY1
+  !* FIRST EXECUTABLE STATEMENT  BESY1
   IF ( first ) THEN
     nty1 = INITS(by1cs,14,0.1*R1MACH(3))
     ntm1 = INITS(bm1cs,21,0.1*R1MACH(3))

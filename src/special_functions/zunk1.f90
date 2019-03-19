@@ -1,13 +1,17 @@
-!DECK ZUNK1
+!** ZUNK1
 SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZUNK1
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CUNK1-A, ZUNK1-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CUNK1-A, ZUNK1-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZUNK1 COMPUTES K(FNU,Z) AND ITS ANALYTIC CONTINUATION FROM THE
   !     RIGHT HALF PLANE TO THE LEFT HALF PLANE BY MEANS OF THE
@@ -15,12 +19,15 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !     MR INDICATES THE DIRECTION OF ROTATION FOR ANALYTIC CONTINUATION.
   !     NZ=-1 MEANS AN OVERFLOW WILL OCCUR
   !
-  !***SEE ALSO  ZBESK
-  !***ROUTINES CALLED  D1MACH, ZABS, ZS1S2, ZUCHK, ZUNIK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZBESK
+  !***
+  ! **Routines called:**  D1MACH, ZABS, ZS1S2, ZUCHK, ZUNIK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ZUNK1
+  
   !     COMPLEX CFN,CK,CONE,CRSC,CS,CSCL,CSGN,CSPN,CSR,CSS,CWRK,CY,CZERO,
   !    *C1,C2,PHI,PHID,RZ,SUM,SUMD,S1,S2,Y,Z,ZETA1,ZETA1D,ZETA2,ZETA2D,ZR
   REAL(8) :: Alim, ang, aphi, asc, ascle, bry, cki, ckr, &
@@ -41,7 +48,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   EXTERNAL ZABS
   DATA zeror, zeroi, coner/0.0D0, 0.0D0, 1.0D0/
   DATA pi/3.14159265358979324D0/
-  !***FIRST EXECUTABLE STATEMENT  ZUNK1
+  !* FIRST EXECUTABLE STATEMENT  ZUNK1
   kdflg = 1
   Nz = 0
   !-----------------------------------------------------------------------

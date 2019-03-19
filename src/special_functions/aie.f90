@@ -1,17 +1,24 @@
-!DECK AIE
+!** AIE
 REAL FUNCTION AIE(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  AIE
-  !***PURPOSE  Calculate the Airy function for a negative argument and an
+  !>
+  !***
+  !  Calculate the Airy function for a negative argument and an
   !            exponentially scaled Airy function for a non-negative
   !            argument.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10D
-  !***TYPE      SINGLE PRECISION (AIE-S, DAIE-D)
-  !***KEYWORDS  EXPONENTIALLY SCALED AIRY FUNCTION, FNLIB,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10D
+  !***
+  ! **Type:**      SINGLE PRECISION (AIE-S, DAIE-D)
+  !***
+  ! **Keywords:**  EXPONENTIALLY SCALED AIRY FUNCTION, FNLIB,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! AIE(X) computes the exponentially scaled Airy function for
   ! non-negative X.  It evaluates AI(X) for X .LE. 0.0 and
@@ -35,14 +42,17 @@ REAL FUNCTION AIE(X)
   !                               significant figures required  14.41
   !                                    decimal places required  17.06
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, R9AIMP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, R9AIMP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  AIE
+  
   REAL aifcs, aigcs, aipcs, CSEVL, eta, R1MACH, sqrtx, theta, &
     X, x32sml, x3sml, xbig, xm, z
   INTEGER INITS, naif, naig, naip
@@ -101,7 +111,7 @@ REAL FUNCTION AIE(X)
   DATA aipcs(33)/.0000000000000001E0/
   DATA aipcs(34)/ - .0000000000000000E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  AIE
+  !* FIRST EXECUTABLE STATEMENT  AIE
   IF ( first ) THEN
     eta = 0.1*R1MACH(3)
     naif = INITS(aifcs,9,eta)

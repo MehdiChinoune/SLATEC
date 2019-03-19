@@ -1,13 +1,17 @@
-!DECK DPCHST
+!** DPCHST
 REAL(8) FUNCTION DPCHST(Arg1,Arg2)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPCHST
-  !***SUBSIDIARY
-  !***PURPOSE  DPCHIP Sign-Testing Routine
-  !***LIBRARY   SLATEC (PCHIP)
-  !***TYPE      DOUBLE PRECISION (PCHST-S, DPCHST-D)
-  !***AUTHOR  Fritsch, F. N., (LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  DPCHIP Sign-Testing Routine
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Type:**      DOUBLE PRECISION (PCHST-S, DPCHST-D)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
+  !***
+  ! **Description:**
   !
   !         DPCHST:  DPCHIP Sign-Testing Routine.
   !
@@ -22,9 +26,12 @@ REAL(8) FUNCTION DPCHST(Arg1,Arg2)
   !
   !  Fortran intrinsics used:  SIGN.
   !
-  !***SEE ALSO  DPCHCE, DPCHCI, DPCHCS, DPCHIM
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DPCHCE, DPCHCI, DPCHCS, DPCHIM
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811103  DATE WRITTEN
   !   820805  Converted to SLATEC library version.
   !   870813  Minor cosmetic changes.
@@ -35,7 +42,7 @@ REAL(8) FUNCTION DPCHST(Arg1,Arg2)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR and DATE WRITTEN sections in prologue.  (WRB)
   !   930503  Improved purpose.  (FNF)
-  !***END PROLOGUE  DPCHST
+  
   !
   !**End
   !
@@ -51,7 +58,7 @@ REAL(8) FUNCTION DPCHST(Arg1,Arg2)
   !
   !  PERFORM THE TEST.
   !
-  !***FIRST EXECUTABLE STATEMENT  DPCHST
+  !* FIRST EXECUTABLE STATEMENT  DPCHST
   DPCHST = SIGN(one,Arg1)*SIGN(one,Arg2)
   IF ( (Arg1==zero).OR.(Arg2==zero) ) DPCHST = zero
   !

@@ -1,23 +1,27 @@
-!DECK CDZRO
+!** CDZRO
 SUBROUTINE CDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CDZRO
-  !***SUBSIDIARY
-  !***PURPOSE  CDZRO searches for a zero of a function F(N, T, Y, IROOT)
+  !>
+  !***
+  !  CDZRO searches for a zero of a function F(N, T, Y, IROOT)
   !            between the given values B and C until the width of the
   !            interval (B, C) has collapsed to within a tolerance
   !            specified by the stopping criterion,
   !              ABS(B - C) .LE. 2.*(RW*ABS(B) + AE).
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***TYPE      COMPLEX (SDZRO-S, DDZRO-D, CDZRO-C)
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Type:**      COMPLEX (SDZRO-S, DDZRO-D, CDZRO-C)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     This is a special purpose version of ZEROIN, modified for use with
   !     the CDRIV package.
@@ -43,22 +47,25 @@ SUBROUTINE CDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   !                given interval (B, C) contains the origin, then a
   !                nonzero value should be chosen for AE.
   !
-  !***REFERENCES  L. F. Shampine and H. A. Watts, ZEROIN, a root-solving
+  !***
+  ! **References:**  L. F. Shampine and H. A. Watts, ZEROIN, a root-solving
   !                 routine, SC-TM-70-631, Sept 1970.
   !               T. J. Dekker, Finding a zero by means of successive
   !                 linear interpolation, Constructive Aspects of the
   !                 Fundamental Theorem of Algebra, edited by B. Dejon
   !                 and P. Henrici, 1969.
-  !***ROUTINES CALLED  CDNTP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDNTP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  CDZRO
+  
   INTEGER ic, Iroot, kount, N, Nq
   COMPLEX Y(*), Yh(N,*)
   REAL a, acbs, acmb, Ae, B, C, cmb, er, F, fa, Fb, Fc, H, p, &
     q, Re, rw, T, tol, Uround
-  !***FIRST EXECUTABLE STATEMENT  CDZRO
+  !* FIRST EXECUTABLE STATEMENT  CDZRO
   er = 4.E0*Uround
   rw = MAX(Re,er)
   ic = 0

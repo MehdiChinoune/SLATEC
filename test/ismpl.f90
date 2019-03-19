@@ -1,26 +1,31 @@
-!DECK ISMPL
+!** ISMPL
 SUBROUTINE ISMPL(N,M,Indx)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ISMPL
-  !***SUBSIDIARY
-  !***PURPOSE  Generate integer sample.
+  !>
+  !***
+  !  Generate integer sample.
   !            This routine picks M "random" integers in the range 1 to
   !            N without any repetitions.
-  !***LIBRARY   SLATEC (SLAP)
-  !***TYPE      INTEGER (ISMPL-I)
-  !***AUTHOR  Seager, Mark K., (LLNL)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Type:**      INTEGER (ISMPL-I)
+  !***
+  ! **Author:**  Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-300
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***ROUTINES CALLED  RAND
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  RAND
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890919  Changed to integer name ISMPL.  (MKS)
   !   890920  Converted prologue to SLATEC 4.0 format.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  !***END PROLOGUE  ISMPL
+  
   !     .. Scalar Arguments ..
   INTEGER M, N
   !     .. Array Arguments ..
@@ -33,7 +38,7 @@ SUBROUTINE ISMPL(N,M,Indx)
   EXTERNAL RAND
   !     .. Intrinsic Functions ..
   INTRINSIC INT
-  !***FIRST EXECUTABLE STATEMENT  ISMPL
+  !* FIRST EXECUTABLE STATEMENT  ISMPL
   !
   !     Check the input
   !

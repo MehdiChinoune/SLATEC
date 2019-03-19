@@ -1,17 +1,23 @@
-!DECK R9CHU
+!** R9CHU
 REAL FUNCTION R9CHU(A,B,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  R9CHU
-  !***SUBSIDIARY
-  !***PURPOSE  Evaluate for large Z  Z**A * U(A,B,Z) where U is the
+  !>
+  !***
+  !  Evaluate for large Z  Z**A * U(A,B,Z) where U is the
   !            logarithmic confluent hypergeometric function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C11
-  !***TYPE      SINGLE PRECISION (R9CHU-S, D9CHU-D)
-  !***KEYWORDS  FNLIB, LOGARITHMIC CONFLUENT HYPERGEOMETRIC FUNCTION,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C11
+  !***
+  ! **Type:**      SINGLE PRECISION (R9CHU-S, D9CHU-D)
+  !***
+  ! **Keywords:**  FNLIB, LOGARITHMIC CONFLUENT HYPERGEOMETRIC FUNCTION,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate for large Z  Z**A * U(A,B,Z)  where U is the logarithmic
   ! confluent hypergeometric function.  A rational approximation due to Y.
@@ -20,15 +26,18 @@ REAL FUNCTION R9CHU(A,B,Z)
   ! A warning is provided when the computed result is less than half
   ! precision.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770801  DATE WRITTEN
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  !***END PROLOGUE  R9CHU
+  
   REAL A, aa, ab, anbn, B, bb, bp, c2, ct1, ct2, ct3, d1z, eps, &
     g1, g2, g3, R1MACH, sab, sqeps
   REAL x2i1, Z
@@ -37,7 +46,7 @@ REAL FUNCTION R9CHU(A,B,Z)
   LOGICAL first
   SAVE eps, sqeps, first
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  R9CHU
+  !* FIRST EXECUTABLE STATEMENT  R9CHU
   IF ( first ) THEN
     eps = 4.0*R1MACH(4)
     sqeps = SQRT(R1MACH(4))

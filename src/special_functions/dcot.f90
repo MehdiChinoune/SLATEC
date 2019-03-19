@@ -1,14 +1,21 @@
-!DECK DCOT
+!** DCOT
 REAL(8) FUNCTION DCOT(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCOT
-  !***PURPOSE  Compute the cotangent.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4A
-  !***TYPE      DOUBLE PRECISION (COT-S, DCOT-D, CCOT-C)
-  !***KEYWORDS  COTANGENT, ELEMENTARY FUNCTIONS, FNLIB, TRIGONOMETRIC
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the cotangent.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4A
+  !***
+  ! **Type:**      DOUBLE PRECISION (COT-S, DCOT-D, CCOT-C)
+  !***
+  ! **Keywords:**  COTANGENT, ELEMENTARY FUNCTIONS, FNLIB, TRIGONOMETRIC
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DCOT(X) calculates the double precision trigonometric cotangent
   ! for double precision argument X.  X is in units of radians.
@@ -19,16 +26,19 @@ REAL(8) FUNCTION DCOT(X)
   !                               significant figures required  32.34
   !                                    decimal places required  33.85
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  DCOT
+  
   INTEGER ifn, INITDS, nterms
   REAL(8) :: X, cotcs(15), ainty, ainty2, pi2rec, sqeps, xmax, &
     xmin, xsml, y, yrem, prodbg, DCSEVL, D1MACH
@@ -51,7 +61,7 @@ REAL(8) FUNCTION DCOT(X)
   DATA cotcs(15)/ - .551800436872533333333333333333333D-33/
   DATA pi2rec/.011619772367581343075535053490057D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DCOT
+  !* FIRST EXECUTABLE STATEMENT  DCOT
   IF ( first ) THEN
     nterms = INITDS(cotcs,15,0.1*REAL(D1MACH(3)))
     xmax = 1.0D0/D1MACH(4)

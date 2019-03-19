@@ -1,26 +1,33 @@
-!DECK SSDGMR
+!** SSDGMR
 SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSDGMR
-  !***PURPOSE  Diagonally Scaled GMRES Iterative Sparse Ax=b Solver.
+  !>
+  !***
+  !  Diagonally Scaled GMRES Iterative Sparse Ax=b Solver.
   !            This routine uses the generalized minimum residual
   !            (GMRES) method with diagonal scaling to solve possibly
   !            non-symmetric linear systems of the form: Ax = b.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (SSDGMR-S, DSDGMR-D)
-  !***KEYWORDS  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SSDGMR-S, DSDGMR-D)
+  !***
+  ! **Keywords:**  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
   !             NON-SYMMETRIC LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Brown, Peter, (LLNL), pnbrown@llnl.gov
+  !***
+  ! **Author:**  Brown, Peter, (LLNL), pnbrown@llnl.gov
   !           Hindmarsh, Alan, (LLNL), alanh@llnl.gov
   !           Seager, Mark K., (LLNL), seager@llnl.gov
   !             Lawrence Livermore National Laboratory
   !             PO Box 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !      INTEGER   N, NELT, IA(NELT), JA(NELT), ISYM, NSAVE, ITOL
   !      INTEGER   ITMAX, ITER, IERR, IUNIT, LENW, IWORK(LENIW), LENIW
   !      REAL      B(N), X(N), A(NELT), TOL, ERR, RWORK(LENW)
@@ -29,7 +36,7 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !     $     ITOL, TOL, ITMAX, ITER, ERR, IERR, IUNIT,
   !     $     RWORK, LENW, IWORK, LENIW)
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the Matrix.
   ! B      :IN       Real B(N).
@@ -166,7 +173,7 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   ! LENIW  :IN       Integer.
   !         Length of the integer workspace IWORK.  LENIW >= 30.
   !
-  ! *Description:
+  !- Description:
   !       SSDGMR solves a linear system A*X = B rewritten in the form:
   !
   !        (SB*A*(M-inverse)*(SX-inverse))*(SX*M*X) = SB*B,
@@ -289,23 +296,26 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Side Effects:
+  !- Side Effects:
   !       The SLAP Triad format (IA, JA, A) is modified internally to be
   !       the SLAP Column format.  See above.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***REFERENCES  1. Peter N. Brown and A. C. Hindmarsh, Reduced Storage
+  !***
+  ! **References:**  1. Peter N. Brown and A. C. Hindmarsh, Reduced Storage
   !                  Matrix Methods in Stiff ODE Systems, Lawrence Liver-
   !                  more National Laboratory Report UCRL-95088, Rev. 1,
   !                  Livermore, California, June 1987.
-  !***ROUTINES CALLED  SCHKW, SGMRES, SS2Y, SSDI, SSDS, SSMV
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SCHKW, SGMRES, SS2Y, SSDI, SSDS, SSMV
+
+  !* REVISION HISTORY  (YYMMDD)
   !   880615  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -316,7 +326,7 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
-  !***END PROLOGUE  SSDGMR
+  
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Parameters ..
@@ -333,7 +343,7 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   INTEGER locdin, locigw, lociw, locrgw, locw, myitol
   !     .. External Subroutines ..
   EXTERNAL SCHKW, SGMRES, SS2Y, SSDI, SSDS, SSMV
-  !***FIRST EXECUTABLE STATEMENT  SSDGMR
+  !* FIRST EXECUTABLE STATEMENT  SSDGMR
   !
   Ierr = 0
   Err = 0

@@ -1,20 +1,27 @@
-!DECK STEPS
+!** STEPS
 SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
     Alpha,Beta,Sig,V,W,G,Phase1,Ns,Nornd,Ksteps,Twou,Fouru,&
     Xold,Kprev,Ivc,Iv,Kgi,Gi,Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  STEPS
-  !***PURPOSE  Integrate a system of first order ordinary differential
+  !>
+  !***
+  !  Integrate a system of first order ordinary differential
   !            equations one step.
-  !***LIBRARY   SLATEC (DEPAC)
-  !***CATEGORY  I1A1B
-  !***TYPE      SINGLE PRECISION (STEPS-S, DSTEPS-D)
-  !***KEYWORDS  ADAMS METHOD, DEPAC, INITIAL VALUE PROBLEMS, ODE,
+  !***
+  ! **Library:**   SLATEC (DEPAC)
+  !***
+  ! **Category:**  I1A1B
+  !***
+  ! **Type:**      SINGLE PRECISION (STEPS-S, DSTEPS-D)
+  !***
+  ! **Keywords:**  ADAMS METHOD, DEPAC, INITIAL VALUE PROBLEMS, ODE,
   !             ORDINARY DIFFERENTIAL EQUATIONS, PREDICTOR-CORRECTOR
-  !***AUTHOR  Shampine, L. F., (SNLA)
+  !***
+  ! **Author:**  Shampine, L. F., (SNLA)
   !           Gordon, M. K., (SNLA)
   !             MODIFIED BY H.A. WATTS
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   Written by L. F. Shampine and M. K. Gordon
   !
@@ -160,18 +167,21 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   !   just calls the code again.  A restart is neither required nor
   !   desirable.
   !
-  !***REFERENCES  L. F. Shampine and M. K. Gordon, Solving ordinary
+  !***
+  ! **References:**  L. F. Shampine and M. K. Gordon, Solving ordinary
   !                 differential equations with ODE, STEP, and INTRP,
   !                 Report SLA-73-1060, Sandia Laboratories, 1973.
-  !***ROUTINES CALLED  HSTART, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  HSTART, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   740101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  STEPS
+  
   REAL absh, Alpha, Beta, big, Eps, erk, erkm1, erkm2, erkp1, err, &
     Fouru, G, Gi, gstr, H, hnew, Hold, P, p5eps, Phi
   REAL Psi, r, R1MACH, reali, realns, rho, round, Rpar, Sig, tau, &
@@ -206,7 +216,7 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   !
   !   IF STEP SIZE IS TOO SMALL, DETERMINE AN ACCEPTABLE ONE
   !
-  !***FIRST EXECUTABLE STATEMENT  STEPS
+  !* FIRST EXECUTABLE STATEMENT  STEPS
   Crash = .TRUE.
   IF ( ABS(H)>=Fouru*ABS(X) ) THEN
     p5eps = 0.5*Eps

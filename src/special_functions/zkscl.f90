@@ -1,25 +1,32 @@
-!DECK ZKSCL
+!** ZKSCL
 SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZKSCL
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CKSCL-A, ZKSCL-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CKSCL-A, ZKSCL-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     SET K FUNCTIONS TO ZERO ON UNDERFLOW, CONTINUE RECURRENCE
   !     ON SCALED FUNCTIONS UNTIL TWO MEMBERS COME ON SCALE, THEN
   !     RETURN WITH MIN(NZ+2,N) VALUES SCALED BY 1/TOL.
   !
-  !***SEE ALSO  ZBESK
-  !***ROUTINES CALLED  ZABS, ZLOG, ZUCHK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZBESK
+  !***
+  ! **Routines called:**  ZABS, ZLOG, ZUCHK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
-  !***END PROLOGUE  ZKSCL
+  
   !     COMPLEX CK,CS,CY,CZERO,RZ,S1,S2,Y,ZR,ZD,CELM
   REAL(8) :: acs, as, Ascle, cki, ckr, csi, csr, cyi, cyr, &
     Elim, fn, Fnu, Rzi, Rzr, str, s1i, s1r, s2i, &
@@ -29,7 +36,7 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
   DIMENSION Yr(N), Yi(N), cyr(2), cyi(2)
   EXTERNAL ZABS, ZLOG
   DATA zeror, zeroi/0.0D0, 0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  ZKSCL
+  !* FIRST EXECUTABLE STATEMENT  ZKSCL
   Nz = 0
   ic = 0
   nn = MIN(2,N)

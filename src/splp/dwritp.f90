@@ -1,13 +1,17 @@
-!DECK DWRITP
+!** DWRITP
 SUBROUTINE DWRITP(Ipage,List,Rlist,Lpage,Irec)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DWRITP
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SWRITP-S, DWRITP-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SWRITP-S, DWRITP-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     WRITE RECORD NUMBER IRECN, OF LENGTH LPG, FROM STORAGE
   !     ARRAY LIST(*) ONTO UNIT NUMBER IPAGEF.
@@ -17,20 +21,23 @@ SUBROUTINE DWRITP(Ipage,List,Rlist,Lpage,Irec)
   !     TO CHANGE THIS PROGRAM UNIT TO DOUBLE PRECISION CHANGE
   !     /REAL (12 BLANKS)/ TO /DOUBLE PRECISION/.
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890605  Corrected references to XERRWV.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  !***END PROLOGUE  DWRITP
+  
   INTEGER i, Ipage, ipagef, Irec, irecn, Lpage, lpg
   INTEGER List(*)
   REAL(8) :: Rlist(*)
   CHARACTER(8) :: xern1, xern2
-  !***FIRST EXECUTABLE STATEMENT  DWRITP
+  !* FIRST EXECUTABLE STATEMENT  DWRITP
   ipagef = Ipage
   lpg = Lpage
   irecn = Irec

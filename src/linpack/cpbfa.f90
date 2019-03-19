@@ -1,16 +1,23 @@
-!DECK CPBFA
+!** CPBFA
 SUBROUTINE CPBFA(Abd,Lda,N,M,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CPBFA
-  !***PURPOSE  Factor a complex Hermitian positive definite matrix stored
+  !>
+  !***
+  !  Factor a complex Hermitian positive definite matrix stored
   !            in band form.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2D2
-  !***TYPE      COMPLEX (SPBFA-S, DPBFA-D, CPBFA-C)
-  !***KEYWORDS  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2D2
+  !***
+  ! **Type:**      COMPLEX (SPBFA-S, DPBFA-D, CPBFA-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX FACTORIZATION,
   !             POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CPBFA factors a complex Hermitian positive definite matrix
   !     stored in band form.
@@ -61,10 +68,13 @@ SUBROUTINE CPBFA(Abd,Lda,N,M,Info)
   !                10    CONTINUE
   !                20 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CDOTC
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CDOTC
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -73,14 +83,14 @@ SUBROUTINE CPBFA(Abd,Lda,N,M,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CPBFA
+  
   INTEGER Lda, N, M, Info
   COMPLEX Abd(Lda,*)
   !
   COMPLEX CDOTC, t
   REAL s
   INTEGER ik, j, jk, k, mu
-  !***FIRST EXECUTABLE STATEMENT  CPBFA
+  !* FIRST EXECUTABLE STATEMENT  CPBFA
   DO j = 1, N
     Info = j
     s = 0.0E0

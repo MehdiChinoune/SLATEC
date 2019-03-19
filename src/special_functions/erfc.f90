@@ -1,15 +1,22 @@
-!DECK ERFC
+!** ERFC
 REAL FUNCTION ERFC(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ERFC
-  !***PURPOSE  Compute the complementary error function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C8A, L5A1E
-  !***TYPE      SINGLE PRECISION (ERFC-S, DERFC-D)
-  !***KEYWORDS  COMPLEMENTARY ERROR FUNCTION, ERFC, FNLIB,
+  !>
+  !***
+  !  Compute the complementary error function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C8A, L5A1E
+  !***
+  ! **Type:**      SINGLE PRECISION (ERFC-S, DERFC-D)
+  !***
+  ! **Keywords:**  COMPLEMENTARY ERROR FUNCTION, ERFC, FNLIB,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! ERFC(X) calculates the single precision complementary error
   ! function for single precision argument X.
@@ -32,16 +39,19 @@ REAL FUNCTION ERFC(X)
   !                        approx significant figures required  15.0
   !                                    decimal places required  16.96
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  ERFC
+  
   REAL CSEVL, erc2cs, erfccs, erfcs, eta, R1MACH, sqeps, &
     sqrtpi, txmax, X, xmax, xsml, y
   INTEGER INITS, nterc2, nterf, nterfc
@@ -110,7 +120,7 @@ REAL FUNCTION ERFC(X)
   DATA erfccs(24)/ - .000000000000000048E0/
   DATA sqrtpi/1.7724538509055160E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  ERFC
+  !* FIRST EXECUTABLE STATEMENT  ERFC
   IF ( first ) THEN
     eta = 0.1*R1MACH(3)
     nterf = INITS(erfcs,13,eta)

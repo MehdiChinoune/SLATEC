@@ -1,16 +1,23 @@
-!DECK CNBIR
+!** CNBIR
 SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CNBIR
-  !***PURPOSE  Solve a general nonsymmetric banded system of linear
+  !>
+  !***
+  !  Solve a general nonsymmetric banded system of linear
   !            equations.  Iterative refinement is used to obtain an error
   !            estimate.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2C2
-  !***TYPE      COMPLEX (SNBIR-S, CNBIR-C)
-  !***KEYWORDS  BANDED, LINEAR EQUATIONS, NONSYMMETRIC
-  !***AUTHOR  Voorhees, E. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2C2
+  !***
+  ! **Type:**      COMPLEX (SNBIR-S, CNBIR-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR EQUATIONS, NONSYMMETRIC
+  !***
+  ! **Author:**  Voorhees, E. A., (LANL)
+  !***
+  ! **Description:**
   !
   !    Subroutine CNBIR solves a general nonsymmetric banded NxN
   !    system of single precision complex linear equations using
@@ -158,10 +165,13 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !                      the user provides otherwise, an error message
   !                      will be printed followed by an abort.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CCOPY, CDCDOT, CNBFA, CNBSL, R1MACH, SCASUM, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CCOPY, CDCDOT, CNBFA, CNBSL, R1MACH, SCASUM, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800819  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -171,14 +181,14 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !   900510  Convert XERRWV calls to XERMSG calls, cvt GOTO's to
   !           IF-THEN-ELSE.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CNBIR
+  
   !
   INTEGER Lda, N, Itask, Ind, Iwork(*), info, j, k, kk, l, m, &
     Ml, Mu, nc
   COMPLEX Abe(Lda,*), V(*), Work(N,*), CDCDOT
   REAL xnorm, dnorm, SCASUM, R1MACH
   CHARACTER(8) :: xern1, xern2
-  !***FIRST EXECUTABLE STATEMENT  CNBIR
+  !* FIRST EXECUTABLE STATEMENT  CNBIR
   IF ( Lda<N ) THEN
     Ind = -1
     WRITE (xern1,'(I8)') Lda

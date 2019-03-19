@@ -1,25 +1,29 @@
-!DECK DDSTP
+!** DDSTP
 SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     Miter,Ml,Mu,N,Nde,Ywt,Uround,USERS,Avgh,Avgord,H,Hused,&
     Jtask,Mntold,Mtrold,Nfe,Nje,Nqused,Nstep,T,Y,Yh,A,Convrg,&
     Dfdy,El,Fac,Hold,Ipvt,Jstate,Jstepl,Nq,Nwait,Rc,Rmax,&
     Save1,Save2,Tq,Trend,Iswflg,Mtrsv,Mxrdsv)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DDSTP
-  !***SUBSIDIARY
-  !***PURPOSE  DDSTP performs one step of the integration of an initial
+  !>
+  !***
+  !  DDSTP performs one step of the integration of an initial
   !            value problem for a system of ordinary differential
   !            equations.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***TYPE      DOUBLE PRECISION (SDSTP-S, DDSTP-D, CDSTP-C)
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Type:**      DOUBLE PRECISION (SDSTP-S, DDSTP-D, CDSTP-C)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  Communication with DDSTP is done with the following variables:
   !
@@ -65,11 +69,13 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !              the YH array are as of the beginning of the last
   !              step, and H is the last step size attempted.
   !
-  !***ROUTINES CALLED  DDCOR, DDCST, DDNTL, DDPSC, DDPST, DDSCL, DNRM2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DDCOR, DDCST, DDNTL, DDPSC, DDPST, DDSCL, DNRM2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  DDSTP
+  
   EXTERNAL F, JACOBN, FA, USERS
   INTEGER i, Ierror, Impl, Ipvt(*), Iswflg, iter, j, Jstate, &
     Jstepl, Jtask, Matdim, Maxord, Mint, Miter, Ml, Mntold, &
@@ -88,7 +94,7 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     RCTEST=.3D0,RMFAIL=2.D0,RMNORM=10.D0,TRSHLD=1.D0)
   PARAMETER (NDJSTP=10)
   DATA ier/.FALSE./
-  !***FIRST EXECUTABLE STATEMENT  DDSTP
+  !* FIRST EXECUTABLE STATEMENT  DDSTP
   nsv = N
   bnd = 0.D0
   switch = .FALSE.

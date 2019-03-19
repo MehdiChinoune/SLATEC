@@ -1,13 +1,17 @@
-!DECK R1MPYQ
+!** R1MPYQ
 SUBROUTINE R1MPYQ(M,N,A,Lda,V,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  R1MPYQ
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SNSQ and SNSQE
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (R1MPYQ-S, D1MPYQ-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SNSQ and SNSQE
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (R1MPYQ-S, D1MPYQ-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Given an M by N matrix A, this subroutine computes A*Q where
   !     Q is the product of 2*(N - 1) transformations
@@ -46,23 +50,26 @@ SUBROUTINE R1MPYQ(M,N,A,Lda,V,W)
   !         information necessary to recover the Givens rotation GW(I)
   !         described above.
   !
-  !***SEE ALSO  SNSQ, SNSQE
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SNSQ, SNSQE
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  R1MPYQ
+  
   INTEGER M, N, Lda
   REAL A(Lda,*), V(*), W(*)
   INTEGER i, j, nmj, nm1
   REAL cos, one, sin, temp
   SAVE one
   DATA one/1.0E0/
-  !***FIRST EXECUTABLE STATEMENT  R1MPYQ
+  !* FIRST EXECUTABLE STATEMENT  R1MPYQ
   nm1 = N - 1
   IF ( nm1>=1 ) THEN
     DO nmj = 1, nm1

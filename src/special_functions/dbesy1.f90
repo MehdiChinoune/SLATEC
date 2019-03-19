@@ -1,16 +1,23 @@
-!DECK DBESY1
+!** DBESY1
 REAL(8) FUNCTION DBESY1(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBESY1
-  !***PURPOSE  Compute the Bessel function of the second kind of order
+  !>
+  !***
+  !  Compute the Bessel function of the second kind of order
   !            one.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10A1
-  !***TYPE      DOUBLE PRECISION (BESY1-S, DBESY1-D)
-  !***KEYWORDS  BESSEL FUNCTION, FNLIB, ORDER ONE, SECOND KIND,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (BESY1-S, DBESY1-D)
+  !***
+  ! **Keywords:**  BESSEL FUNCTION, FNLIB, ORDER ONE, SECOND KIND,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DBESY1(X) calculates the double precision Bessel function of the
   ! second kind of order for double precision argument X.
@@ -21,15 +28,18 @@ REAL(8) FUNCTION DBESY1(X)
   !                               significant figures required  32.17
   !                                    decimal places required  32.71
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, D9B1MP, DBESJ1, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, D9B1MP, DBESJ1, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DBESY1
+  
   INTEGER INITDS, nty1
   REAL(8) :: X, by1cs(20), ampl, theta, twodpi, xmin, xsml, y, &
     D1MACH, DCSEVL, DBESJ1
@@ -57,7 +67,7 @@ REAL(8) FUNCTION DBESY1(X)
   DATA by1cs(20)/ - .864754113893717333333333333333333D-32/
   DATA twodpi/0.636619772367581343075535053490057D0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DBESY1
+  !* FIRST EXECUTABLE STATEMENT  DBESY1
   IF ( first ) THEN
     nty1 = INITDS(by1cs,20,0.1*REAL(D1MACH(3)))
     !

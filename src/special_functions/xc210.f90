@@ -1,16 +1,23 @@
-!DECK XC210
+!** XC210
 SUBROUTINE XC210(K,Z,J,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XC210
-  !***PURPOSE  To provide single-precision floating-point arithmetic
+  !>
+  !***
+  !  To provide single-precision floating-point arithmetic
   !            with an extended exponent range.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  A3D
-  !***TYPE      SINGLE PRECISION (XC210-S, DXC210-D)
-  !***KEYWORDS  EXTENDED-RANGE SINGLE-PRECISION ARITHMETIC
-  !***AUTHOR  Lozier, Daniel W., (National Bureau of Standards)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  A3D
+  !***
+  ! **Type:**      SINGLE PRECISION (XC210-S, DXC210-D)
+  !***
+  ! **Keywords:**  EXTENDED-RANGE SINGLE-PRECISION ARITHMETIC
+  !***
+  ! **Author:**  Lozier, Daniel W., (National Bureau of Standards)
   !           Smith, John M., (NBS and George Mason University)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !     INTEGER K, J
   !     REAL Z
   !
@@ -26,11 +33,16 @@ SUBROUTINE XC210(K,Z,J,Ierror)
   !                  XCON WHEN NECESSARY. THE USER SHOULD
   !                  NEVER NEED TO CALL XC210 DIRECTLY.
   !
-  !***SEE ALSO  XSET
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  XERMSG
-  !***COMMON BLOCKS    XBLK3
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  XSET
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  XERMSG
+  !***
+  ! COMMON BLOCKS    XBLK3
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820712  DATE WRITTEN
   !   890126  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
@@ -39,7 +51,7 @@ SUBROUTINE XC210(K,Z,J,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  XC210
+  
   INTEGER i, ic, id, Ierror, ii, it, ja, ka, ka1, ka2, m, nm1, np1
   INTEGER K, J
   REAL Z
@@ -59,7 +71,7 @@ SUBROUTINE XC210(K,Z,J,Ierror)
   ! THESE CONDITIONS MUST BE MET BY APPROPRIATE CODING
   ! IN SUBROUTINE XSET.
   !
-  !***FIRST EXECUTABLE STATEMENT  XC210
+  !* FIRST EXECUTABLE STATEMENT  XC210
   Ierror = 0
   IF ( K==0 ) THEN
     J = 0

@@ -1,19 +1,23 @@
-!DECK DDCST
+!** DDCST
 SUBROUTINE DDCST(Maxord,Mint,Iswflg,El,Tq)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DDCST
-  !***SUBSIDIARY
-  !***PURPOSE  DDCST sets coefficients used by the core integrator DDSTP.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***TYPE      DOUBLE PRECISION (SDCST-S, DDCST-D, CDCST-C)
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !>
+  !***
+  !  DDCST sets coefficients used by the core integrator DDSTP.
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Type:**      DOUBLE PRECISION (SDCST-S, DDCST-D, CDCST-C)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  DDCST is called by DDNTL.  The array EL determines the basic method.
   !  The array TQ is involved in adjusting the step size in relation
@@ -29,14 +33,16 @@ SUBROUTINE DDCST(Maxord,Mint,Iswflg,El,Tq)
   !    where      K = factorial(NQ)*(1 + 1/2 + ... + 1/NQ).
   !  For each order NQ, there are three components of TQ.
   !
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  DDCST
+  
   REAL(8) :: El(13,12), factrl(12), gamma(14), sum, Tq(3,12)
   INTEGER i, Iswflg, j, Maxord, Mint, mxrd
-  !***FIRST EXECUTABLE STATEMENT  DDCST
+  !* FIRST EXECUTABLE STATEMENT  DDCST
   factrl(1) = 1.D0
   DO i = 2, Maxord
     factrl(i) = i*factrl(i-1)

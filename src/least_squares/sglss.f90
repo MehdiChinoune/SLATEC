@@ -1,18 +1,25 @@
-!DECK SGLSS
+!** SGLSS
 SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SGLSS
-  !***PURPOSE  Solve a linear least squares problems by performing a QR
+  !>
+  !***
+  !  Solve a linear least squares problems by performing a QR
   !            factorization of the matrix using Householder
   !            transformations.  Emphasis is put on detecting possible
   !            rank deficiency.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D9, D5
-  !***TYPE      SINGLE PRECISION (SGLSS-S, DGLSS-D)
-  !***KEYWORDS  LINEAR LEAST SQUARES, LQ FACTORIZATION, QR FACTORIZATION,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D9, D5
+  !***
+  ! **Type:**      SINGLE PRECISION (SGLSS-S, DGLSS-D)
+  !***
+  ! **Keywords:**  LINEAR LEAST SQUARES, LQ FACTORIZATION, QR FACTORIZATION,
   !             UNDERDETERMINED LINEAR SYSTEMS
-  !***AUTHOR  Manteuffel, T. A., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Manteuffel, T. A., (LANL)
+  !***
+  ! **Description:**
   !
   !     SGLSS solves both underdetermined and overdetermined
   !     LINEAR systems AX = B, where A is an M by N matrix
@@ -106,23 +113,26 @@ SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !                   0 - Full rank
   !                   N.GT.0 - Reduced rank  rank=MIN(M,N)-INFO
   !
-  !***REFERENCES  T. Manteuffel, An interval analysis approach to rank
+  !***
+  ! **References:**  T. Manteuffel, An interval analysis approach to rank
   !                 determination in linear least squares problems,
   !                 Report SAND80-0655, Sandia Laboratories, June 1980.
-  !***ROUTINES CALLED  LLSIA, ULSIA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LLSIA, ULSIA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810801  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SGLSS
+  
   REAL A, ae, B, re, Rnorm, Work
   INTEGER Info, key, krank, ksure, Liw, Lw, M, Mda, Mdb, mode, N, Nb, np
   DIMENSION A(Mda,*), B(Mdb,*), Rnorm(*), Work(*)
   INTEGER Iwork(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  SGLSS
+  !* FIRST EXECUTABLE STATEMENT  SGLSS
   re = 0.
   ae = 0.
   key = 0

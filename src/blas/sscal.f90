@@ -1,17 +1,24 @@
-!DECK SSCAL
+!** SSCAL
 SUBROUTINE SSCAL(N,Sa,Sx,Incx)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SSCAL
-  !***PURPOSE  Multiply a vector by a constant.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1A6
-  !***TYPE      SINGLE PRECISION (SSCAL-S, DSCAL-D, CSCAL-C)
-  !***KEYWORDS  BLAS, LINEAR ALGEBRA, SCALE, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !>
+  !***
+  !  Multiply a vector by a constant.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1A6
+  !***
+  ! **Type:**      SINGLE PRECISION (SSCAL-S, DSCAL-D, CSCAL-C)
+  !***
+  ! **Keywords:**  BLAS, LINEAR ALGEBRA, SCALE, VECTOR
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -29,12 +36,15 @@ SUBROUTINE SSCAL(N,Sa,Sx,Incx)
   !     For I = 0 to N-1, replace SX(IX+I*INCX) with  SA * SX(IX+I*INCX),
   !     where IX = 1 if INCX .GE. 0, else IX = 1+(1-N)*INCX.
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -42,10 +52,10 @@ SUBROUTINE SSCAL(N,Sa,Sx,Incx)
   !   900821  Modified to correct problem with a negative increment.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SSCAL
+  
   REAL Sa, Sx(*)
   INTEGER i, Incx, ix, m, mp1, N
-  !***FIRST EXECUTABLE STATEMENT  SSCAL
+  !* FIRST EXECUTABLE STATEMENT  SSCAL
   IF ( N<=0 ) RETURN
   IF ( Incx==1 ) THEN
     !

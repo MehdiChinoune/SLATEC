@@ -1,16 +1,23 @@
-!DECK DXADJ
+!** DXADJ
 SUBROUTINE DXADJ(X,Ix,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DXADJ
-  !***PURPOSE  To provide double-precision floating-point arithmetic
+  !>
+  !***
+  !  To provide double-precision floating-point arithmetic
   !            with an extended exponent range.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  A3D
-  !***TYPE      DOUBLE PRECISION (XADJ-S, DXADJ-D)
-  !***KEYWORDS  EXTENDED-RANGE DOUBLE-PRECISION ARITHMETIC
-  !***AUTHOR  Lozier, Daniel W., (National Bureau of Standards)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  A3D
+  !***
+  ! **Type:**      DOUBLE PRECISION (XADJ-S, DXADJ-D)
+  !***
+  ! **Keywords:**  EXTENDED-RANGE DOUBLE-PRECISION ARITHMETIC
+  !***
+  ! **Author:**  Lozier, Daniel W., (National Bureau of Standards)
   !           Smith, John M., (NBS and George Mason University)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !     DOUBLE PRECISION X
   !     INTEGER IX
   !
@@ -20,11 +27,16 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
   !                  NOT CHANGE THE MANTISSA OF X PROVIDED RADIX IS
   !                  THE NUMBER BASE OF DOUBLE-PRECISION ARITHMETIC.
   !
-  !***SEE ALSO  DXSET
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  XERMSG
-  !***COMMON BLOCKS    DXBLK2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DXSET
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  XERMSG
+  !***
+  ! COMMON BLOCKS    DXBLK2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820712  DATE WRITTEN
   !   881020  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
@@ -33,7 +45,7 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  DXADJ
+  
   INTEGER Ierror
   REAL(8) :: X
   INTEGER Ix
@@ -49,7 +61,7 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
   ! THIS CONDITION MUST BE MET BY APPROPRIATE CODING
   ! IN SUBROUTINE DXSET.
   !
-  !***FIRST EXECUTABLE STATEMENT  DXADJ
+  !* FIRST EXECUTABLE STATEMENT  DXADJ
   Ierror = 0
   IF ( X==0.0D0 ) THEN
     Ix = 0

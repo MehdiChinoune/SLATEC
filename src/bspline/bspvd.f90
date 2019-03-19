@@ -1,15 +1,22 @@
-!DECK BSPVD
+!** BSPVD
 SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BSPVD
-  !***PURPOSE  Calculate the value and all derivatives of order less than
+  !>
+  !***
+  !  Calculate the value and all derivatives of order less than
   !            NDERIV of all basis functions which do not vanish at X.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E3, K6
-  !***TYPE      SINGLE PRECISION (BSPVD-S, DBSPVD-D)
-  !***KEYWORDS  DIFFERENTIATION OF B-SPLINE, EVALUATION OF B-SPLINE
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E3, K6
+  !***
+  ! **Type:**      SINGLE PRECISION (BSPVD-S, DBSPVD-D)
+  !***
+  ! **Keywords:**  DIFFERENTIATION OF B-SPLINE, EVALUATION OF B-SPLINE
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Written by Carl de Boor and modified by D. E. Amos
   !
@@ -58,11 +65,14 @@ SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !     Error Conditions
   !         Improper input is a fatal error
   !
-  !***REFERENCES  Carl de Boor, Package for calculating with B-splines,
+  !***
+  ! **References:**  Carl de Boor, Package for calculating with B-splines,
   !                 SIAM Journal on Numerical Analysis 14, 3 (June 1977),
   !                 pp. 441-472.
-  !***ROUTINES CALLED  BSPVN, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  BSPVN, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -72,7 +82,7 @@ SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BSPVD
+  
   INTEGER iwork, Ldvnik
   INTEGER i, ideriv, Ileft, ipkmd, j, jj, jlow, jm, jp1mid, K, &
     kmd, kp1, l, ldummy, m, mhigh, Nderiv
@@ -82,7 +92,7 @@ SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   !     A(I,K) = W0RK(I+K*(K-1)/2)  I=1.K
   !     WORK(1) AND WORK((K+1)*(K+2)/2) ARE NOT USED.
   DIMENSION T(*), Vnikx(Ldvnik,*), Work(*)
-  !***FIRST EXECUTABLE STATEMENT  BSPVD
+  !* FIRST EXECUTABLE STATEMENT  BSPVD
   IF ( K<1 ) THEN
     !
     !

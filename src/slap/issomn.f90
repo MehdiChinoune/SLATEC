@@ -1,29 +1,35 @@
-!DECK ISSOMN
+!** ISSOMN
 INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,&
     Rwork,Iwork,Ak,Bnrm,Solnrm)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ISSOMN
-  !***SUBSIDIARY
-  !***PURPOSE  Preconditioned Orthomin Stop Test.
+  !>
+  !***
+  !  Preconditioned Orthomin Stop Test.
   !            This routine calculates the stop test for the Orthomin
   !            iteration scheme.  It returns a non-zero if the error
   !            estimate (the type of which is determined by ITOL) is
   !            less than the user specified tolerance TOL.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (ISSOMN-S, ISDOMN-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (ISSOMN-S, ISDOMN-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM,
   !             ORTHOMIN, SLAP, SPARSE, STOP TEST
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER  N, NELT, IA(NELT), JA(NELT), ISYM, NSAVE, ITOL, ITMAX
   !     INTEGER  ITER, IERR, IUNIT, IWORK(USER DEFINED)
   !     REAL     B(N), X(N), A(NELT), TOL, ERR, R(N), Z(N)
@@ -37,7 +43,7 @@ INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   !    $     EMAP, DZ, CSAV, RWORK, IWORK, AK, BNRM, SOLNRM)
   !    $     .NE.0 ) THEN ITERATION CONVERGED
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the matrix.
   ! B      :IN       Real B(N).
@@ -137,24 +143,28 @@ INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   ! SOLNRM :OUT      Real.
   !         True solution norm, if ITOL = 11.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !       0 : Error estimate (determined by ITOL) is *NOT* less than the
   !           specified tolerance, TOL.  The iteration must continue.
   !       1 : Error estimate (determined by ITOL) is less than the
   !           specified tolerance, TOL.  The iteration can be considered
   !           complete.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  SOMN, SSDOMN, SSLUOM
-  !***ROUTINES CALLED  R1MACH, SNRM2
-  !***COMMON BLOCKS    SSLBLK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SOMN, SSDOMN, SSLUOM
+  !***
+  ! **Routines called:**  R1MACH, SNRM2
+  !***
+  ! COMMON BLOCKS    SSLBLK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -170,7 +180,7 @@ INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   !   920930  Corrected to not print AK when ITER=0.  (FNF)
   !   921026  Changed 1.0E10 to R1MACH(2).  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  !***END PROLOGUE  ISSOMN
+  
   !     .. Scalar Arguments ..
   REAL Ak, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt, Nsave
@@ -189,7 +199,7 @@ INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   EXTERNAL R1MACH, SNRM2
   !     .. Common blocks ..
   COMMON /SSLBLK/ SOLn
-  !***FIRST EXECUTABLE STATEMENT  ISSOMN
+  !* FIRST EXECUTABLE STATEMENT  ISSOMN
   ISSOMN = 0
   !
   IF ( Itol==1 ) THEN

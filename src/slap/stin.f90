@@ -1,28 +1,35 @@
-!DECK STIN
+!** STIN
 SUBROUTINE STIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  STIN
-  !***PURPOSE  Read in SLAP Triad Format Linear System.
+  !>
+  !***
+  !  Read in SLAP Triad Format Linear System.
   !            Routine to read in a SLAP Triad format matrix and right
   !            hand side and solution to the system, if known.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  N1
-  !***TYPE      SINGLE PRECISION (STIN-S, DTIN-D)
-  !***KEYWORDS  DIAGNOSTICS, LINEAR SYSTEM, SLAP SPARSE
-  !***AUTHOR  Seager, Mark K., (LLNL)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  N1
+  !***
+  ! **Type:**      SINGLE PRECISION (STIN-S, DTIN-D)
+  !***
+  ! **Keywords:**  DIAGNOSTICS, LINEAR SYSTEM, SLAP SPARSE
+  !***
+  ! **Author:**  Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM, IUNIT, JOB
   !     REAL    A(NELT), SOLN(N), RHS(N)
   !
   !     CALL STIN( N, NELT, IA, JA, A, ISYM, SOLN, RHS, IUNIT, JOB )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :OUT      Integer
   !         Order of the Matrix.
   ! NELT   :INOUT    Integer.
@@ -69,7 +76,7 @@ SUBROUTINE STIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !         JOB = 2 => Read in the matrix and SOLN.
   !         JOB = 3 => Read in the matrix, RHS and SOLN.
   !
-  ! *Description:
+  !- Description:
   !       The format for the  input is as follows.  On  the first line
   !       are counters and flags: N, NELT, ISYM, IRHS, ISOLN.  N, NELT
   !       and ISYM are described above.  IRHS is  a flag indicating if
@@ -108,15 +115,18 @@ SUBROUTINE STIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -126,7 +136,7 @@ SUBROUTINE STIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   920511  Added complete declaration section.  (WRB)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  !***END PROLOGUE  STIN
+  
   !     .. Scalar Arguments ..
   INTEGER Isym, Iunit, Job, N, Nelt
   !     .. Array Arguments ..
@@ -136,7 +146,7 @@ SUBROUTINE STIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   INTEGER i, irhs, isoln, jobret, neltmx
   !     .. Intrinsic Functions ..
   INTRINSIC MIN
-  !***FIRST EXECUTABLE STATEMENT  STIN
+  !* FIRST EXECUTABLE STATEMENT  STIN
   !
   !         Read in the information heading.
   !

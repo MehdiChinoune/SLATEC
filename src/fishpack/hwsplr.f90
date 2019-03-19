@@ -1,18 +1,25 @@
-!DECK HWSPLR
+!** HWSPLR
 SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
     Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HWSPLR
-  !***PURPOSE  Solve a finite difference approximation to the Helmholtz
+  !>
+  !***
+  !  Solve a finite difference approximation to the Helmholtz
   !            equation in polar coordinates.
-  !***LIBRARY   SLATEC (FISHPACK)
-  !***CATEGORY  I2B1A1A
-  !***TYPE      SINGLE PRECISION (HWSPLR-S)
-  !***KEYWORDS  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE, POLAR
-  !***AUTHOR  Adams, J., (NCAR)
+  !***
+  ! **Library:**   SLATEC (FISHPACK)
+  !***
+  ! **Category:**  I2B1A1A
+  !***
+  ! **Type:**      SINGLE PRECISION (HWSPLR-S)
+  !***
+  ! **Keywords:**  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE, POLAR
+  !***
+  ! **Author:**  Adams, J., (NCAR)
   !           Swarztrauber, P. N., (NCAR)
   !           Sweet, R., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Subroutine HWSPLR solves a finite difference approximation to the
   !     Helmholtz equation in polar coordinates:
@@ -223,7 +230,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !     W
   !       W(1) contains the required length of W.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !     * * * * * * *   Program Specifications    * * * * * * * * * * * *
   !
@@ -298,17 +305,20 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !
   !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   !
-  !***REFERENCES  P. N. Swarztrauber and R. Sweet, Efficient Fortran
+  !***
+  ! **References:**  P. N. Swarztrauber and R. Sweet, Efficient Fortran
   !                 subprograms for the solution of elliptic equations,
   !                 NCAR TN/IA-109, July 1975, 138 pp.
-  !***ROUTINES CALLED  GENBUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  GENBUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  HWSPLR
+  
   REAL A, a1, a2, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, deltht, &
     dlrby2, dlrsq, dlthsq, Elmbda, F, Pertrb, r, s
   REAL s1, s2, W, ypole
@@ -317,7 +327,7 @@ SUBROUTINE HWSPLR(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   INTEGER mstop, munk, N, Nbdcnd, np, np1, nstart, nstop, nunk
   DIMENSION F(Idimf,*)
   DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
-  !***FIRST EXECUTABLE STATEMENT  HWSPLR
+  !* FIRST EXECUTABLE STATEMENT  HWSPLR
   Ierror = 0
   IF ( A<0. ) Ierror = 1
   IF ( A>=B ) Ierror = 2

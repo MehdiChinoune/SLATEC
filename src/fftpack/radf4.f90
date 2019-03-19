@@ -1,15 +1,20 @@
-!DECK RADF4
+!** RADF4
 SUBROUTINE RADF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RADF4
-  !***SUBSIDIARY
-  !***PURPOSE  Calculate the fast Fourier transform of subvectors of
+  !>
+  !***
+  !  Calculate the fast Fourier transform of subvectors of
   !            length four.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***TYPE      SINGLE PRECISION (RADF4-S)
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Type:**      SINGLE PRECISION (RADF4-S)
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -21,12 +26,12 @@ SUBROUTINE RADF4(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  RADF4
+  
   REAL Cc, Ch, ci2, ci3, ci4, cr2, cr3, cr4, hsqt2, ti1, ti2, &
     ti3, ti4, tr1, tr2, tr3, tr4, Wa1, Wa2, Wa3
   INTEGER i, ic, Ido, idp2, k, L1
   DIMENSION Cc(Ido,L1,4), Ch(Ido,4,*), Wa1(*), Wa2(*), Wa3(*)
-  !***FIRST EXECUTABLE STATEMENT  RADF4
+  !* FIRST EXECUTABLE STATEMENT  RADF4
   hsqt2 = .5*SQRT(2.)
   DO k = 1, L1
     tr1 = Cc(1,k,2) + Cc(1,k,4)

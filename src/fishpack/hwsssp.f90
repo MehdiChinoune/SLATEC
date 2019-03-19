@@ -1,19 +1,26 @@
-!DECK HWSSSP
+!** HWSSSP
 SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
     Elmbda,F,Idimf,Pertrb,Ierror,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HWSSSP
-  !***PURPOSE  Solve a finite difference approximation to the Helmholtz
+  !>
+  !***
+  !  Solve a finite difference approximation to the Helmholtz
   !            equation in spherical coordinates and on the surface of the
   !            unit sphere (radius of 1).
-  !***LIBRARY   SLATEC (FISHPACK)
-  !***CATEGORY  I2B1A1A
-  !***TYPE      SINGLE PRECISION (HWSSSP-S)
-  !***KEYWORDS  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE, SPHERICAL
-  !***AUTHOR  Adams, J., (NCAR)
+  !***
+  ! **Library:**   SLATEC (FISHPACK)
+  !***
+  ! **Category:**  I2B1A1A
+  !***
+  ! **Type:**      SINGLE PRECISION (HWSSSP-S)
+  !***
+  ! **Keywords:**  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE, SPHERICAL
+  !***
+  ! **Author:**  Adams, J., (NCAR)
   !           Swarztrauber, P. N., (NCAR)
   !           Sweet, R., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Subroutine HWSSSP solves a finite difference approximation to the
   !     Helmholtz equation in spherical coordinates and on the surface of
@@ -270,7 +277,7 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !       HWSSSP will be called again with INTL = 1. W(1) contains the
   !       required length of W .
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !     * * * * * * *   Program Specifications    * * * * * * * * * * * *
   !
@@ -351,26 +358,29 @@ SUBROUTINE HWSSSP(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !
   !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   !
-  !***REFERENCES  P. N. Swarztrauber and R. Sweet, Efficient Fortran
+  !***
+  ! **References:**  P. N. Swarztrauber and R. Sweet, Efficient Fortran
   !                 subprograms for the solution of elliptic equations,
   !                 NCAR TN/IA-109, July 1975, 138 pp.
   !               P. N. Swarztrauber, The direct solution of the discrete
   !                 Poisson equation on the surface of a sphere, SIAM
   !                 Journal on Numerical Analysis 15 (1974), pp. 212-215.
-  !***ROUTINES CALLED  HWSSS1, PIMACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  HWSSS1, PIMACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891009  Removed unreferenced variable.  (WRB)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  HWSSSP
+  
   REAL Bdpf, Bdps, Bdtf, Bdts, dum, Elmbda, F, Pertrb, Pf, pi, &
     PIMACH, Ps, Tf, tpi, Ts, W
   INTEGER Idimf, Ierror, M, Mbdcnd, N, Nbdcnd
   DIMENSION F(Idimf,*), Bdts(*), Bdtf(*), Bdps(*), Bdpf(*), W(*)
-  !***FIRST EXECUTABLE STATEMENT  HWSSSP
+  !* FIRST EXECUTABLE STATEMENT  HWSSSP
   pi = PIMACH(dum)
   tpi = 2.*pi
   Ierror = 0

@@ -1,28 +1,36 @@
-!DECK RKFAB
+!** RKFAB
 SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     W,S,Stowa,G,Work,Iwork,Nfcc)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RKFAB
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (RKFAB-S, DRKFAB-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (RKFAB-S, DRKFAB-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     Subroutine RKFAB integrates the initial value equations using
   !     the variable-step RUNGE-KUTTA-FEHLBERG integration scheme or
   !     the variable-order ADAMS method and orthonormalization
   !     determined by a linear dependence test.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  BVSUP
-  !***ROUTINES CALLED  BVDER, DEABM, DERKF, REORT, STOR1
-  !***COMMON BLOCKS    ML15TO, ML17BW, ML18JR, ML8SZ
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **Routines called:**  BVDER, DEABM, DERKF, REORT, STOR1
+  !***
+  ! COMMON BLOCKS    ML15TO, ML17BW, ML18JR, ML8SZ
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890921  Realigned order of variables in certain COMMON blocks.
@@ -30,7 +38,7 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  RKFAB
+  
   REAL AE, C, G, P, PWCnd, PX, RE, S, Stowa, TND, TOL, &
     U, V, W, Work, X, XBEg, XENd, XOP
   REAL XOT, Xpts, XSAv, xxop, Yhp, Z
@@ -48,7 +56,7 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     , Z(*), Yhp(Ncomp,*), Xpts(*), S(*), Stowa(*), Work(*), &
     Iwork(*), G(*)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   COMMON /ML8SZ / C, XSAv, IGOfx, INHomo, IVP, NCOmpd, NFCd
   COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
@@ -61,10 +69,10 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !
   EXTERNAL BVDER
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !  INITIALIZATION OF COUNTERS AND VARIABLES.
   !
-  !***FIRST EXECUTABLE STATEMENT  RKFAB
+  !* FIRST EXECUTABLE STATEMENT  RKFAB
   kod = 1
   non = 1
   X = XBEg
@@ -80,9 +88,9 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   ENDIF
   nfcp1 = Nfc + 1
   !
-  ! **********************************************************************
-  ! *****BEGINNING OF INTEGRATION LOOP AT OUTPUT POINTS.******************
-  ! **********************************************************************
+  !- *********************************************************************
+  !- ****BEGINNING OF INTEGRATION LOOP AT OUTPUT POINTS.******************
+  !- *********************************************************************
   !
   DO kopp = 2, Nxpts
     KOP = kopp
@@ -98,7 +106,7 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
       IF ( XENd<XBEg.AND.XOP<Z(jon) ) xxop = Z(jon)
     ENDIF
     !
-    ! **********************************************************************
+    !- *********************************************************************
     150    IF ( INTeg==2 ) THEN
     !     DEABM INTEGRATOR
     !
@@ -112,7 +120,7 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   ENDIF
   IF ( idid>=1 ) THEN
     !
-    ! **********************************************************************
+    !- *********************************************************************
     !     GRAM-SCHMIDT ORTHOGONALIZATION TEST FOR ORTHONORMALIZATION
     !     (TEMPORARILY USING U AND V IN THE TEST)
     !
@@ -134,7 +142,7 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
       !
       IF ( jflag==0 ) THEN
         !
-        ! **********************************************************************
+        !- *********************************************************************
         !     STORE ORTHONORMALIZED VECTORS INTO SOLUTION VECTORS.
         !
         IF ( NUMort>=Mxnon ) THEN
@@ -147,7 +155,7 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
         NUMort = NUMort + 1
         CALL STOR1(Yhp,U(1,1,kod),Yhp(1,nfcp1),V(1,kod),1,NDIsk,NTApe)
         !
-        ! **********************************************************************
+        !- *********************************************************************
         !     STORE ORTHONORMALIZATION INFORMATION, INITIALIZE
         !     INTEGRATION FLAG, AND CONTINUE INTEGRATION TO THE NEXT
         !     ORTHONORMALIZATION POINT OR OUTPUT POINT.
@@ -173,7 +181,7 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     RETURN
   ENDIF
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     CONTINUE INTEGRATION IF WE ARE NOT AT AN OUTPUT POINT.
   !
   200    IF ( idid==1 ) GOTO 150
@@ -183,8 +191,8 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !
   CALL STOR1(U(1,1,kod),Yhp,V(1,kod),Yhp(1,nfcp1),0,NDIsk,NTApe)
   ENDDO
-  ! **********************************************************************
-  ! **********************************************************************
+  !- *********************************************************************
+  !- *********************************************************************
   !
   Iflag = 0
 END SUBROUTINE RKFAB

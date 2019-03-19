@@ -1,22 +1,29 @@
-!DECK DPCHBS
+!** DPCHBS
 SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPCHBS
-  !***PURPOSE  Piecewise Cubic Hermite to B-Spline converter.
-  !***LIBRARY   SLATEC (PCHIP)
-  !***CATEGORY  E3
-  !***TYPE      DOUBLE PRECISION (PCHBS-S, DPCHBS-D)
-  !***KEYWORDS  B-SPLINES, CONVERSION, CUBIC HERMITE INTERPOLATION,
+  !>
+  !***
+  !  Piecewise Cubic Hermite to B-Spline converter.
+  !***
+  ! **Library:**   SLATEC (PCHIP)
+  !***
+  ! **Category:**  E3
+  !***
+  ! **Type:**      DOUBLE PRECISION (PCHBS-S, DPCHBS-D)
+  !***
+  ! **Keywords:**  B-SPLINES, CONVERSION, CUBIC HERMITE INTERPOLATION,
   !             PIECEWISE CUBIC INTERPOLATION
-  !***AUTHOR  Fritsch, F. N., (LLNL)
+  !***
+  ! **Author:**  Fritsch, F. N., (LLNL)
   !             Computing and Mathematics Research Division
   !             Lawrence Livermore National Laboratory
   !             P.O. Box 808  (L-316)
   !             Livermore, CA  94550
   !             FTS 532-4275, (510) 422-4275
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !
   !        INTEGER  N, INCFD, KNOTYP, NKNOTS, NDIM, KORD, IERR
   !        PARAMETER  (INCFD = ...)
@@ -26,7 +33,7 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !        CALL DPCHBS (N, X, F, D, INCFD, KNOTYP, NKNOTS, T, BCOEF,
   !       *             NDIM, KORD, IERR)
   !
-  ! *Arguments:
+  !- Arguments:
   !
   !     N:IN  is the number of data points, N.ge.2 .  (not checked)
   !
@@ -91,7 +98,7 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !              IERR = -4  if KNOTYP.GT.2 .
   !              IERR = -5  if KNOTYP.LT.0 and NKNOTS.NE.(2*N+4).
   !
-  ! *Description:
+  !- Description:
   !     DPCHBS computes the B-spline representation of the PCH function
   !     determined by N,X,F,D.  To be compatible with the rest of PCHIP,
   !     DPCHBS includes INCFD, the increment between successive values of
@@ -100,12 +107,12 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !     The output is the B-representation for the function:  NKNOTS, T,
   !     BCOEF, NDIM, KORD.
   !
-  ! *Caution:
+  !- Caution:
   !     Since it is assumed that the input PCH function has been
   !     computed by one of the other routines in the package PCHIP,
   !     input arguments N, X, INCFD are **not** checked for validity.
   !
-  ! *Restrictions/assumptions:
+  !- Restrictions/assumptions:
   !     1. N.GE.2 .  (not checked)
   !     2. X(i).LT.X(i+1), i=1,...,N .  (not checked)
   !     3. INCFD.GT.0 .  (not checked)
@@ -115,25 +122,28 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !
   !       * Indicates this applies only if KNOTYP.LT.0 .
   !
-  ! *Portability:
+  !- Portability:
   !     Argument INCFD is used only to cause the compiler to generate
   !     efficient code for the subscript expressions (1+(I-1)*INCFD) .
   !     The normal usage, in which DPCHBS is called with one-dimensional
   !     arrays F and D, is probably non-Fortran 77, in the strict sense,
   !     but it works on all systems on which DPCHBS has been tested.
   !
-  ! *See Also:
+  !- See Also:
   !     PCHIC, PCHIM, or PCHSP can be used to determine an interpolating
   !        PCH function from a set of data.
   !     The B-spline routine DBVALU can be used to evaluate the
   !        B-representation that is output by DPCHBS.
   !        (See BSPDOC for more information.)
   !
-  !***REFERENCES  F. N. Fritsch, "Representations for parametric cubic
+  !***
+  ! **References:**  F. N. Fritsch, "Representations for parametric cubic
   !                 splines," Computer Aided Geometric Design 6 (1989),
   !                 pp.79-82.
-  !***ROUTINES CALLED  DPCHKT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DPCHKT, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   870701  DATE WRITTEN
   !   900405  Converted Fortran to upper case.
   !   900405  Removed requirement that X be dimensioned N+1.
@@ -150,7 +160,7 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   !   930514  Corrected problems with dimensioning of arguments and
   !           clarified DESCRIPTION.  (FNF)
   !   930604  Removed  NKNOTS from DPCHKT call list.  (FNF)
-  !***END PROLOGUE  DPCHBS
+  
   !
   !*Internal Notes:
   !
@@ -166,7 +176,7 @@ SUBROUTINE DPCHBS(N,X,F,D,Incfd,Knotyp,Nknots,T,Bcoef,Ndim,Kord,Ierr)
   INTEGER k, kk
   REAL(8) :: dov3, hnew, hold
   CHARACTER(8) :: libnam, subnam
-  !***FIRST EXECUTABLE STATEMENT  DPCHBS
+  !* FIRST EXECUTABLE STATEMENT  DPCHBS
   !
   !  Initialize.
   !

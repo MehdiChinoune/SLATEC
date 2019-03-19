@@ -1,19 +1,26 @@
-!DECK DINTP
+!** DINTP
 SUBROUTINE DINTP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,Og,&
     Ow,Ox,Oy)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DINTP
-  !***PURPOSE  Approximate the solution at XOUT by evaluating the
+  !>
+  !***
+  !  Approximate the solution at XOUT by evaluating the
   !            polynomial computed in DSTEPS at XOUT.  Must be used in
   !            conjunction with DSTEPS.
-  !***LIBRARY   SLATEC (DEPAC)
-  !***CATEGORY  I1A1B
-  !***TYPE      DOUBLE PRECISION (SINTRP-S, DINTP-D)
-  !***KEYWORDS  ADAMS METHOD, DEPAC, INITIAL VALUE PROBLEMS, ODE,
+  !***
+  ! **Library:**   SLATEC (DEPAC)
+  !***
+  ! **Category:**  I1A1B
+  !***
+  ! **Type:**      DOUBLE PRECISION (SINTRP-S, DINTP-D)
+  !***
+  ! **Keywords:**  ADAMS METHOD, DEPAC, INITIAL VALUE PROBLEMS, ODE,
   !             ORDINARY DIFFERENTIAL EQUATIONS, PREDICTOR-CORRECTOR,
   !             SMOOTH INTERPOLANT
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   The methods in subroutine  DSTEPS  approximate the solution near  X
   !   by a polynomial.  Subroutine  DINTP  approximates the solution at
@@ -42,16 +49,19 @@ SUBROUTINE DINTP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,Og,&
   !   The remaining parameters are returned unaltered from their input
   !   values.  Integration with  DSTEPS  may be continued.
   !
-  !***REFERENCES  H. A. Watts, A smoother interpolant for DE/STEP, INTRP
+  !***
+  ! **References:**  H. A. Watts, A smoother interpolant for DE/STEP, INTRP
   !                 II, Report SAND84-0293, Sandia Laboratories, 1984.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   840201  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DINTP
+  
   !
   INTEGER i, iq, Iv, Ivc, iw, j, jq, Kgi, Kold, kp1, kp2, l, m, &
     Neqn
@@ -64,7 +74,7 @@ SUBROUTINE DINTP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,Og,&
   DIMENSION g(13), c(13), w(13), Og(13), Ow(12), Alpha(12), Gi(11), &
     Iv(10)
   !
-  !***FIRST EXECUTABLE STATEMENT  DINTP
+  !* FIRST EXECUTABLE STATEMENT  DINTP
   kp1 = Kold + 1
   kp2 = Kold + 2
   !

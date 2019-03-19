@@ -1,21 +1,25 @@
-!DECK DORTHR
+!** DORTHR
 SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
     Rs)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DORTHR
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBVSUP and DSUDS
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (ORTHOR-S, DORTHR-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBVSUP and DSUDS
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (ORTHOR-S, DORTHR-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   Reduction of the matrix A to lower triangular form by a sequence of
   !   orthogonal HOUSEHOLDER transformations post-multiplying A.
   !
-  ! *********************************************************************
+  !- ********************************************************************
   !   INPUT
-  ! *********************************************************************
+  !- ********************************************************************
   !
   !     A -- Contains the matrix to be decomposed, must be dimensioned
   !           NRDA by N.
@@ -33,9 +37,9 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
   !     DIAG,KPIVOT,ROWS, -- Arrays of length at least N used internally
   !          RS,SCALES         (except for SCALES which is M).
   !
-  ! *********************************************************************
+  !- ********************************************************************
   !   OUTPUT
-  ! *********************************************************************
+  !- ********************************************************************
   !
   !     IFLAG - Status indicator
   !            =1 for successful decomposition.
@@ -51,17 +55,21 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
   !               recorded here.
   !     SCALES -- Contains the column scaling parameters.
   !
-  ! *********************************************************************
+  !- ********************************************************************
   !
-  !***SEE ALSO  DBVSUP, DSUDS
-  !***REFERENCES  G. Golub, Numerical methods for solving linear least
+  !***
+  ! **See also:**  DBVSUP, DSUDS
+  !***
+  ! **References:**  G. Golub, Numerical methods for solving linear least
   !                 squares problems, Numerische Mathematik 7, (1965),
   !                 pp. 206-216.
   !               P. Businger and G. Golub, Linear least squares
   !                 solutions by Householder transformations, Numerische
   !                 Mathematik  7, (1965), pp. 269-276.
-  !***ROUTINES CALLED  D1MACH, DCSCAL, DDOT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, DCSCAL, DDOT, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
@@ -69,7 +77,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DORTHR
+  
   REAL(8) :: DDOT, D1MACH
   INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot(*), l, M, &
     mk, N, Nrda
@@ -84,7 +92,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
   !
   !     ******************************************************************
   !
-  !***FIRST EXECUTABLE STATEMENT  DORTHR
+  !* FIRST EXECUTABLE STATEMENT  DORTHR
   uro = D1MACH(4)
   IF ( M>=N.AND.N>=1.AND.Nrda>=N ) THEN
     !

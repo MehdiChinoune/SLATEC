@@ -1,17 +1,24 @@
-!DECK CGEEV
+!** CGEEV
 SUBROUTINE CGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CGEEV
-  !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
+  !>
+  !***
+  !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a complex general matrix.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D4A4
-  !***TYPE      COMPLEX (SGEEV-S, CGEEV-C)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, GENERAL MATRIX
-  !***AUTHOR  Kahaner, D. K., (NBS)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D4A4
+  !***
+  ! **Type:**      COMPLEX (SGEEV-S, CGEEV-C)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, GENERAL MATRIX
+  !***
+  ! **Author:**  Kahaner, D. K., (NBS)
   !           Moler, C. B., (U. of New Mexico)
   !           Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Abstract
   !      CGEEV computes the eigenvalues and, optionally,
@@ -84,9 +91,12 @@ SUBROUTINE CGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !           No. 5  warning      LDA < LDV,  elements of V other than the
   !                               N by N output elements have been changed
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CBABK2, CBAL, COMQR, COMQR2, CORTH, SCOPY, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CBABK2, CBAL, COMQR, COMQR2, CORTH, SCOPY, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800808  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -94,11 +104,11 @@ SUBROUTINE CGEEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  CGEEV
+  
   INTEGER Job, m
   INTEGER i, ihi, ilo, Info, j, k, l, Lda, Ldv, mdim, N
   REAL A(*), E(*), Work(*), V(*)
-  !***FIRST EXECUTABLE STATEMENT  CGEEV
+  !* FIRST EXECUTABLE STATEMENT  CGEEV
   IF ( N>Lda ) CALL XERMSG('SLATEC','CGEEV','N .GT. LDA.',1,1)
   IF ( N>Lda ) RETURN
   IF ( N<1 ) CALL XERMSG('SLATEC','CGEEV','N .LT. 1',2,1)

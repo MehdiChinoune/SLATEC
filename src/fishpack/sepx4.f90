@@ -1,21 +1,28 @@
-!DECK SEPX4
+!** SEPX4
 SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     Bdd,COFX,Grhs,Usol,Idmn,W,Pertrb,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SEPX4
-  !***PURPOSE  Solve for either the second or fourth order finite
+  !>
+  !***
+  !  Solve for either the second or fourth order finite
   !            difference approximation to the solution of a separable
   !            elliptic partial differential equation on a rectangle.
   !            Any combination of periodic or mixed boundary conditions is
   !            allowed.
-  !***LIBRARY   SLATEC (FISHPACK)
-  !***CATEGORY  I2B1A2
-  !***TYPE      SINGLE PRECISION (SEPX4-S)
-  !***KEYWORDS  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE, SEPARABLE
-  !***AUTHOR  Adams, J., (NCAR)
+  !***
+  ! **Library:**   SLATEC (FISHPACK)
+  !***
+  ! **Category:**  I2B1A2
+  !***
+  ! **Type:**      SINGLE PRECISION (SEPX4-S)
+  !***
+  ! **Keywords:**  ELLIPTIC, FISHPACK, HELMHOLTZ, PDE, SEPARABLE
+  !***
+  ! **Author:**  Adams, J., (NCAR)
   !           Swarztrauber, P. N., (NCAR)
   !           Sweet, R., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   ! Purpose                SEPX4 solves for either the second-order
   !                        finite difference approximation or a
@@ -337,7 +344,7 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !                          = 12 If MBDCND=0 and AF(X)=CF(X)=constant
   !                               or BF(X)=0 for all X is not true.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   ! Dimension of           BDA(N+1), BDB(N+1), BDC(M+1), BDD(M+1),
   ! Arguments              USOL(IDMN,N+1), GRHS(IDMN,N+1),
@@ -388,21 +395,24 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !                          Equations'.  NCAR Technical Note
   !                          NCAR-TN/IA-109, pp. 135-137.
   !
-  !***REFERENCES  H. B. Keller, Numerical Methods for Two-point
+  !***
+  ! **References:**  H. B. Keller, Numerical Methods for Two-point
   !                 Boundary-value Problems, Blaisdel, Waltham, Mass.,
   !                 1968.
   !               P. N. Swarztrauber and R. Sweet, Efficient Fortran
   !                 subprograms for the solution of elliptic equations,
   !                 NCAR TN/IA-109, July 1975, 138 pp.
-  !***ROUTINES CALLED  CHKPR4, SPELI4
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CHKPR4, SPELI4
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920122  Minor corrections and modifications to prologue.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SEPX4
+  
   REAL A, Alpha, B, Bda, Bdb, Bdc, Bdd, Beta, C, D, Grhs, Pertrb, Usol, W
   INTEGER i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
     i9, Idmn, Ierror, Iorder, k, l, length, linput
@@ -410,7 +420,7 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
   DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   EXTERNAL COFX
-  !***FIRST EXECUTABLE STATEMENT  SEPX4
+  !* FIRST EXECUTABLE STATEMENT  SEPX4
   CALL CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   IF ( Ierror/=0 ) RETURN
   !

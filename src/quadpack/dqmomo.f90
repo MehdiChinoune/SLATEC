@@ -1,22 +1,29 @@
-!DECK DQMOMO
+!** DQMOMO
 SUBROUTINE DQMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQMOMO
-  !***PURPOSE  This routine computes modified Chebyshev moments.  The K-th
+  !>
+  !***
+  !  This routine computes modified Chebyshev moments.  The K-th
   !            modified Chebyshev moment is defined as the integral over
   !            (-1,1) of W(X)*T(K,X), where T(K,X) is the Chebyshev
   !            polynomial of degree K.
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A2A1, C3A2
-  !***TYPE      DOUBLE PRECISION (QMOMO-S, DQMOMO-D)
-  !***KEYWORDS  MODIFIED CHEBYSHEV MOMENTS, QUADPACK, QUADRATURE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A2A1, C3A2
+  !***
+  ! **Type:**      DOUBLE PRECISION (QMOMO-S, DQMOMO-D)
+  !***
+  ! **Keywords:**  MODIFIED CHEBYSHEV MOMENTS, QUADPACK, QUADRATURE
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        MODIFIED CHEBYSHEV MOMENTS
   !        STANDARD FORTRAN SUBROUTINE
@@ -57,14 +64,17 @@ SUBROUTINE DQMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
   !                           = 3 compute RI, RJ, RH
   !                           = 4 compute RI, RJ, RG, RH
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820101  DATE WRITTEN
   !   891009  Removed unreferenced statement label.  (WRB)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DQMOMO
+  
   !
   REAL(8) :: Alfa, alfp1, alfp2, an, anm1, Beta, betp1, betp2, &
     ralf, rbet, Rg, Rh, Ri, Rj
@@ -73,7 +83,7 @@ SUBROUTINE DQMOMO(Alfa,Beta,Ri,Rj,Rg,Rh,Integr)
   DIMENSION Rg(25), Rh(25), Ri(25), Rj(25)
   !
   !
-  !***FIRST EXECUTABLE STATEMENT  DQMOMO
+  !* FIRST EXECUTABLE STATEMENT  DQMOMO
   alfp1 = Alfa + 0.1D+01
   betp1 = Beta + 0.1D+01
   alfp2 = Alfa + 0.2D+01

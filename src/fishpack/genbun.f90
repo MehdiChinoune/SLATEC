@@ -1,19 +1,26 @@
-!DECK GENBUN
+!** GENBUN
 SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  GENBUN
-  !***PURPOSE  Solve by a cyclic reduction algorithm the linear system
+  !>
+  !***
+  !  Solve by a cyclic reduction algorithm the linear system
   !            of equations that results from a finite difference
   !            approximation to certain 2-d elliptic PDE's on a centered
   !            grid .
-  !***LIBRARY   SLATEC (FISHPACK)
-  !***CATEGORY  I2B4B
-  !***TYPE      SINGLE PRECISION (GENBUN-S, CMGNBN-C)
-  !***KEYWORDS  ELLIPTIC, FISHPACK, PDE, TRIDIAGONAL
-  !***AUTHOR  Adams, J., (NCAR)
+  !***
+  ! **Library:**   SLATEC (FISHPACK)
+  !***
+  ! **Category:**  I2B4B
+  !***
+  ! **Type:**      SINGLE PRECISION (GENBUN-S, CMGNBN-C)
+  !***
+  ! **Keywords:**  ELLIPTIC, FISHPACK, PDE, TRIDIAGONAL
+  !***
+  ! **Author:**  Adams, J., (NCAR)
   !           Swarztrauber, P. N., (NCAR)
   !           Sweet, R., (NCAR)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Subroutine GENBUN solves the linear system of equations
   !
@@ -108,7 +115,7 @@ SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !     W
   !       W(1) contains the required length of W.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !     * * * * * * *   Program Specifications    * * * * * * * * * * * *
   !
@@ -214,24 +221,27 @@ SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !
   !     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   !
-  !***REFERENCES  R. Sweet, A cyclic reduction algorithm for solving
+  !***
+  ! **References:**  R. Sweet, A cyclic reduction algorithm for solving
   !                 block tridiagonal systems of arbitrary dimensions,
   !                 SIAM Journal on Numerical Analysis 14, (September
   !                 1977), pp. 706-720.
-  !***ROUTINES CALLED  POISD2, POISN2, POISP2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  POISD2, POISN2, POISP2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  GENBUN
+  
   REAL A, a1, B, C, W, Y
   INTEGER i, Idimy, Ierror, ipstor, irev, iwb2, iwb3, iwba, iwbb, &
     iwbc, iwd, iwp, iwtcos, iww1, iww2, iww3, j, k, M, mh
   INTEGER mhm1, mhmi, mhpi, modd, mp, mp1, Mperod, mskip, N, nby2, np, Nperod
   DIMENSION Y(Idimy,*)
   DIMENSION W(*), B(*), A(*), C(*)
-  !***FIRST EXECUTABLE STATEMENT  GENBUN
+  !* FIRST EXECUTABLE STATEMENT  GENBUN
   Ierror = 0
   IF ( M<=2 ) Ierror = 1
   IF ( N<=2 ) Ierror = 2

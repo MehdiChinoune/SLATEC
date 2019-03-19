@@ -1,14 +1,18 @@
-!DECK CUCHK
+!** CUCHK
 SUBROUTINE CUCHK(Y,Nz,Ascle,Tol)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CUCHK
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SERI, CUOIK, CUNK1, CUNK2, CUNI1, CUNI2 and
+  !>
+  !***
+  !  Subsidiary to SERI, CUOIK, CUNK1, CUNK2, CUNI1, CUNI2 and
   !            CKSCL
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CUCHK-A, ZUCHK-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CUCHK-A, ZUCHK-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !      Y ENTERS AS A SCALED QUANTITY WHOSE MAGNITUDE IS GREATER THAN
   !      EXP(-ALIM)=ASCLE=1.0E+3*R1MACH(1)/TOL. THE TEST IS MADE TO SEE
@@ -18,17 +22,20 @@ SUBROUTINE CUCHK(Y,Nz,Ascle,Tol)
   !      OF THE LARGEST COMPONENT; OTHERWISE THE PHASE ANGLE DOES NOT HAVE
   !      ABSOLUTE ACCURACY AND AN UNDERFLOW IS ASSUMED.
   !
-  !***SEE ALSO  CKSCL, CUNI1, CUNI2, CUNK1, CUNK2, CUOIK, SERI
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  CKSCL, CUNI1, CUNI2, CUNK1, CUNK2, CUOIK, SERI
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   ??????  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  CUCHK
+  
   !
   COMPLEX Y
   REAL Ascle, ss, st, Tol, yr, yi
   INTEGER Nz
-  !***FIRST EXECUTABLE STATEMENT  CUCHK
+  !* FIRST EXECUTABLE STATEMENT  CUCHK
   Nz = 0
   yr = REAL(Y)
   yi = AIMAG(Y)

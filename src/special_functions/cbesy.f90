@@ -1,19 +1,26 @@
-!DECK CBESY
+!** CBESY
 SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CBESY
-  !***PURPOSE  Compute a sequence of the Bessel functions Y(a,z) for
+  !>
+  !***
+  !  Compute a sequence of the Bessel functions Y(a,z) for
   !            complex argument z and real nonnegative orders a=b,b+1,
   !            b+2,... where b>0.  A scaling option is available to
   !            help avoid overflow.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10A4
-  !***TYPE      COMPLEX (CBESY-C, ZBESY-C)
-  !***KEYWORDS  BESSEL FUNCTIONS OF COMPLEX ARGUMENT,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10A4
+  !***
+  ! **Type:**      COMPLEX (CBESY-C, ZBESY-C)
+  !***
+  ! **Keywords:**  BESSEL FUNCTIONS OF COMPLEX ARGUMENT,
   !             BESSEL FUNCTIONS OF SECOND KIND, WEBER'S FUNCTION,
   !             Y BESSEL FUNCTIONS
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !         On KODE=1, CBESY computes an N member sequence of complex
   !         Bessel functions CY(L)=Y(FNU+L-1,Z) for real nonnegative
@@ -62,7 +69,7 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   !                    IERR=5  Algorithmic error - NO COMPUTATION
   !                            (Termination condition not met)
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !         The computation is carried out by the formula
   !
@@ -123,7 +130,8 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   !         the principal phase angle is on the order of +P, -P, PI/2-P,
   !         or -PI/2+P.
   !
-  !***REFERENCES  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
+  !***
+  ! **References:**  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
   !                 matical Functions, National Bureau of Standards
   !                 Applied Mathematics Series 55, U. S. Department
   !                 of Commerce, Tenth Printing (1972) or later.
@@ -143,21 +151,23 @@ SUBROUTINE CBESY(Z,Fnu,Kode,N,Cy,Nz,Cwrk,Ierr)
   !                 Transactions on Mathematical Software, 12 (September
   !                 1986), pp. 265-273.
   !
-  !***ROUTINES CALLED  CBESH, I1MACH, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CBESH, I1MACH, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   890801  REVISION DATE from Version 3.2
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  !***END PROLOGUE  CBESY
+  
   !
   COMPLEX Cwrk, Cy, c1, c2, ex, hci, Z, zu, zv
   REAL elim, ey, Fnu, r1, r2, tay, xx, yy, R1MACH, r1m5, ascle, &
     rtol, atol, tol, aa, bb
   INTEGER i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2, I1MACH
   DIMENSION Cy(N), Cwrk(N)
-  !***FIRST EXECUTABLE STATEMENT  CBESY
+  !* FIRST EXECUTABLE STATEMENT  CBESY
   xx = REAL(Z)
   yy = AIMAG(Z)
   Ierr = 0

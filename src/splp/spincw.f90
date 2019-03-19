@@ -1,15 +1,19 @@
-!DECK SPINCW
+!** SPINCW
 SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Ind,Ibb,Costsc,Gg,Erdnrm,Dulnrm,Amat,Basmat,Csc,Wr,Ww,&
     Rz,Rg,Costs,Colnrm,Duals,Stpedg)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPINCW
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SPINCW-S, DPINCW-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SPINCW-S, DPINCW-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THE EDITING REQUIRED TO CONVERT THIS SUBROUTINE FROM SINGLE TO
   !     DOUBLE PRECISION INVOLVES THE FOLLOWING CHARACTER STRING CHANGES.
@@ -21,15 +25,18 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   !     IT IMPLEMENTS THE PROCEDURE (INITIALIZE REDUCED COSTS AND
   !     STEEPEST EDGE WEIGHTS).
   !
-  !***SEE ALSO  SPLP
-  !***ROUTINES CALLED  IPLOC, LA05BS, PRWPGE, SCOPY, SDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SPLP
+  !***
+  ! **Routines called:**  IPLOC, LA05BS, PRWPGE, SCOPY, SDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  SPINCW
+  
   REAL cnorm, SDOT
   INTEGER i, ihi, il1, ilow, ipage, IPLOC, iu1, j, Jstrt, key, &
     Lbm, Lmx, lpg, Mrelas, nnegrc, Npp, Nvars
@@ -39,7 +46,7 @@ SUBROUTINE SPINCW(Mrelas,Nvars,Lmx,Lbm,Npp,Jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,&
     Costs(*), Colnrm(*), Duals(*), Costsc, Erdnrm, Dulnrm, Gg, &
     one, rzj, scalr, zero, rcost
   LOGICAL Stpedg, pagepl, trans
-  !***FIRST EXECUTABLE STATEMENT  SPINCW
+  !* FIRST EXECUTABLE STATEMENT  SPINCW
   lpg = Lmx - (Nvars+4)
   zero = 0.
   one = 1.

@@ -1,19 +1,26 @@
-!DECK DBOCLS
+!** DBOCLS
 SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     Mode,Rw,Iw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBOCLS
-  !***PURPOSE  Solve the bounded and constrained least squares
+  !>
+  !***
+  !  Solve the bounded and constrained least squares
   !            problem consisting of solving the equation
   !                      E*X = F  (in the least squares sense)
   !             subject to the linear constraints
   !                            C*X = Y.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  K1A2A, G2E, G2H1, G2H2
-  !***TYPE      DOUBLE PRECISION (SBOCLS-S, DBOCLS-D)
-  !***KEYWORDS  BOUNDS, CONSTRAINTS, INEQUALITY, LEAST SQUARES, LINEAR
-  !***AUTHOR  Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  K1A2A, G2E, G2H1, G2H2
+  !***
+  ! **Type:**      DOUBLE PRECISION (SBOCLS-S, DBOCLS-D)
+  !***
+  ! **Keywords:**  BOUNDS, CONSTRAINTS, INEQUALITY, LEAST SQUARES, LINEAR
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
+  !***
+  ! **Description:**
   !
   !   **** All INPUT and OUTPUT real variables are DOUBLE PRECISION ****
   !
@@ -510,12 +517,15 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   ! ERROR NUMBER =        57
   !           LINEAR CONSTRAINTS, SNLA REPT. SAND82-1517, AUG., (1982).
   !
-  !***REFERENCES  R. J. Hanson, Linear least squares with bounds and
+  !***
+  ! **References:**  R. J. Hanson, Linear least squares with bounds and
   !                 linear constraints, Report SAND82-1517, Sandia
   !                 Laboratories, August 1982.
-  !***ROUTINES CALLED  D1MACH, DASUM, DBOLS, DCOPY, DDOT, DNRM2, DSCAL,
+  !***
+  ! **Routines called:**  D1MACH, DASUM, DBOLS, DCOPY, DDOT, DNRM2, DSCAL,
   !                    XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   821220  DATE WRITTEN
   !   891006  Cosmetic changes to prologue.  (WRB)
   !   891006  REVISION DATE from Version 3.2
@@ -523,7 +533,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   910819  Added variable M for MOUT+MCON in reference to DBOLS.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DBOCLS
+  
   !     REVISED 850604-0900
   !     REVISED YYMMDD-HHMM
   !
@@ -571,7 +581,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   CHARACTER(16) :: xern3, xern4
   SAVE igo, accum, checkl
   DATA igo/0/
-  !***FIRST EXECUTABLE STATEMENT  DBOCLS
+  !* FIRST EXECUTABLE STATEMENT  DBOCLS
   nerr = 0
   Mode = 0
   IF ( igo==0 ) THEN

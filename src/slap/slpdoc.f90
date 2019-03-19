@@ -1,27 +1,34 @@
-!DECK SLPDOC
+!** SLPDOC
 SUBROUTINE SLPDOC
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SLPDOC
-  !***PURPOSE  Sparse Linear Algebra Package Version 2.0.2 Documentation.
+  !>
+  !***
+  !  Sparse Linear Algebra Package Version 2.0.2 Documentation.
   !            Routines to solve large sparse symmetric and nonsymmetric
   !            positive definite linear systems, Ax = b, using precondi-
   !            tioned iterative methods.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4, Z
-  !***TYPE      SINGLE PRECISION (SLPDOC-S, DLPDOC-D)
-  !***KEYWORDS  BICONJUGATE GRADIENT SQUARED, DOCUMENTATION,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4, Z
+  !***
+  ! **Type:**      SINGLE PRECISION (SLPDOC-S, DLPDOC-D)
+  !***
+  ! **Keywords:**  BICONJUGATE GRADIENT SQUARED, DOCUMENTATION,
   !             GENERALIZED MINIMUM RESIDUAL, ITERATIVE IMPROVEMENT,
   !             NORMAL EQUATIONS, ORTHOMIN,
   !             PRECONDITIONED CONJUGATE GRADIENT, SLAP,
   !             SPARSE ITERATIVE METHODS
-  !***AUTHOR  Seager, Mark. K., (LLNL)
+  !***
+  ! **Author:**  Seager, Mark. K., (LLNL)
   !             User Systems Division
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550
   !             (FTS) 543-3141, (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !                                 The
   !                    Sparse Linear Algebra Package
   !
@@ -428,11 +435,14 @@ SUBROUTINE SLPDOC
   !    STOUT: Write out SLAP Triad Format Linear System.
   !
   !
-  !***REFERENCES  1. Mark K. Seager, A SLAP for the Masses, in
+  !***
+  ! **References:**  1. Mark K. Seager, A SLAP for the Masses, in
   !                  G. F. Carey, Ed., Parallel Supercomputing: Methods,
   !                  Algorithms and Applications, Wiley, 1989, pp.135-155.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   880715  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -450,8 +460,8 @@ SUBROUTINE SLPDOC
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of reference.  (FNF)
   !   921019  Improved one-line descriptions, reordering some.  (FNF)
-  !***END PROLOGUE  SLPDOC
-  !***FIRST EXECUTABLE STATEMENT  SLPDOC
+  
+  !* FIRST EXECUTABLE STATEMENT  SLPDOC
   !
   !     This is a *DUMMY* subroutine and should never be called.
   !

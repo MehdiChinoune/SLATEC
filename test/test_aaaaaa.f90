@@ -2,23 +2,28 @@ MODULE TEST01_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK QC6A
+  !** QC6A
   SUBROUTINE QC6A(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  QC6A
-    !***PURPOSE  Test subroutine AAAAAA.
-    !***LIBRARY   SLATEC
-    !***TYPE      ALL (QC6A-A)
-    !***AUTHOR  Boland, W. Robert, (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Test subroutine AAAAAA.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      ALL (QC6A-A)
+    !***
+    ! **Author:**  Boland, W. Robert, (LANL)
+    !***
+    ! **Description:**
     !
-    ! *Usage:
+    !- Usage:
     !
     !        INTEGER  LUN, KPRINT, IPASS
     !
     !        CALL  QC6A (LUN, KPRINT, IPASS)
     !
-    ! *Arguments:
+    !- Arguments:
     !
     !     LUN   :IN  is the unit number to which output is to be written.
     !
@@ -28,18 +33,20 @@ CONTAINS
     !     IPASS:OUT  indicates whether the test passed or failed.
     !                A value of one is good, indicating no failures.
     !
-    ! *Description:
+    !- Description:
     !
     !   This routine tests the SLATEC routine AAAAAA to see if the version
     !   number in the SLATEC library source is the same as the quick check
     !   version number.
     !
-    !***ROUTINES CALLED  AAAAAA
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  AAAAAA
+
+    !* REVISION HISTORY  (YYMMDD)
     !   890713  DATE WRITTEN
     !   921215  Updated for Version 4.0.  (WRB)
     !   930701  Updated for Version 4.1.  (WRB)
-    !***END PROLOGUE  QC6A
+    
     !
     !*Internal Notes:
     !
@@ -56,7 +63,7 @@ CONTAINS
     CHARACTER(16) :: ver, VERSN
     PARAMETER (VERSN=' 4.1')
     !
-    !***FIRST EXECUTABLE STATEMENT  QC6A
+    !* FIRST EXECUTABLE STATEMENT  QC6A
     IF ( Kprint>=3 ) WRITE (Lun,99001)
     !
     ! FORMATs.
@@ -89,25 +96,31 @@ CONTAINS
     !------------- LAST LINE OF QC6A FOLLOWS -----------------------------
   END SUBROUTINE QC6A
 END MODULE TEST01_MOD
-!DECK TEST01
+!** TEST01
 PROGRAM TEST01
   USE TEST01_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST01
-  !***PURPOSE  Driver for testing SLATEC subprogram
-  !            AAAAAA
-  !***LIBRARY   SLATEC
-  !***CATEGORY  Z
-  !***TYPE      ALL (TEST01-A)
-  !***KEYWORDS  AAAAAA, QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprogram  AAAAAA
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  Z
+  !***
+  ! **Type:**      ALL (TEST01-A)
+  !***
+  ! **Keywords:**  AAAAAA, QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -119,21 +132,24 @@ PROGRAM TEST01
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprogram
   !        AAAAAA
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  I1MACH, QC6A, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  I1MACH, QC6A, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890713  DATE WRITTEN
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST01
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST01
+  !* FIRST EXECUTABLE STATEMENT  TEST01
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

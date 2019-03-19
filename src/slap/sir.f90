@@ -1,24 +1,31 @@
-!DECK SIR
+!** SIR
 SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SIR
-  !***PURPOSE  Preconditioned Iterative Refinement Sparse Ax = b Solver.
+  !>
+  !***
+  !  Preconditioned Iterative Refinement Sparse Ax = b Solver.
   !            Routine to solve a general linear system  Ax = b  using
   !            iterative refinement with a matrix splitting.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (SIR-S, DIR-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SIR-S, DIR-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, LINEAR SYSTEM, SLAP, SPARSE
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER  N, NELT, IA(NELT), JA(NELT), ISYM, ITOL, ITMAX
   !     INTEGER  ITER, IERR, IUNIT, IWORK(USER DEFINED)
   !     REAL     B(N), X(N), A(NELT), TOL, ERR, R(N), Z(N), DZ(N),
@@ -28,7 +35,7 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !     CALL SIR(N, B, X, NELT, IA, JA, A, ISYM, MATVEC, MSOLVE, ITOL,
   !    $     TOL, ITMAX, ITER, ERR, IERR, IUNIT, R, Z, DZ, RWORK, IWORK)
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the Matrix.
   ! B      :IN       Real B(N).
@@ -133,7 +140,7 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   ! IWORK  :WORK     Integer IWORK(USER DEFINED).
   !         Integer array that can be used by  MSOLVE.
   !
-  ! *Description:
+  !- Description:
   !       The basic algorithm for iterative refinement (also known as
   !       iterative improvement) is:
   !
@@ -221,25 +228,29 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Examples:
+  !- Examples:
   !       See the SLAP routines SSJAC, SSGS
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  SSJAC, SSGS
-  !***REFERENCES  1. Gene Golub and Charles Van Loan, Matrix Computations,
+  !***
+  ! **See also:**  SSJAC, SSGS
+  !***
+  ! **References:**  1. Gene Golub and Charles Van Loan, Matrix Computations,
   !                  Johns Hopkins University Press, Baltimore, Maryland,
   !                  1983.
   !               2. Mark K. Seager, A SLAP for the Masses, in
   !                  G. F. Carey, Ed., Parallel Supercomputing: Methods,
   !                  Algorithms and Applications, Wiley, 1989, pp.135-155.
-  !***ROUTINES CALLED  ISSIR, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  ISSIR, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871119  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -254,7 +265,7 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
-  !***END PROLOGUE  SIR
+  
   !     .. Scalar Arguments ..
   REAL Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
@@ -270,7 +281,7 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   REAL R1MACH
   INTEGER ISSIR
   EXTERNAL R1MACH, ISSIR
-  !***FIRST EXECUTABLE STATEMENT  SIR
+  !* FIRST EXECUTABLE STATEMENT  SIR
   !
   !         Check some of the input data.
   !

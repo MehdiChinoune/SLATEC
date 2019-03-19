@@ -1,14 +1,21 @@
-!DECK COSQI
+!** COSQI
 SUBROUTINE COSQI(N,Wsave)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  COSQI
-  !***PURPOSE  Initialize a work array for COSQF and COSQB.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A3
-  !***TYPE      SINGLE PRECISION (COSQI-S)
-  !***KEYWORDS  COSINE FOURIER TRANSFORM, FFTPACK
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Initialize a work array for COSQF and COSQB.
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A3
+  !***
+  ! **Type:**      SINGLE PRECISION (COSQI-S)
+  !***
+  ! **Keywords:**  COSINE FOURIER TRANSFORM, FFTPACK
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !  Subroutine COSQI initializes the work array WSAVE which is used in
   !  both COSQF1 and COSQB1.  The prime factorization of N together with
@@ -28,11 +35,14 @@ SUBROUTINE COSQI(N,Wsave)
   !          are required for different values of N.  The contents of
   !          WSAVE must not be changed between calls of COSQF1 or COSQB1.
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  RFFTI
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  RFFTI
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -47,11 +57,11 @@ SUBROUTINE COSQI(N,Wsave)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  COSQI
+  
   REAL dt, fk, pih, Wsave
   INTEGER k, N
   DIMENSION Wsave(*)
-  !***FIRST EXECUTABLE STATEMENT  COSQI
+  !* FIRST EXECUTABLE STATEMENT  COSQI
   pih = 2.*ATAN(1.)
   dt = pih/N
   fk = 0.

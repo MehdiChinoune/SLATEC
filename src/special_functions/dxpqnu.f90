@@ -1,21 +1,29 @@
-!DECK DXPQNU
+!** DXPQNU
 SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DXPQNU
-  !***SUBSIDIARY
-  !***PURPOSE  To compute the values of Legendre functions for DXLEGF.
+  !>
+  !***
+  !  To compute the values of Legendre functions for DXLEGF.
   !            This subroutine calculates initial values of P or Q using
   !            power series, then performs forward nu-wise recurrence to
   !            obtain P(-MU,NU,X), Q(0,NU,X), or Q(1,NU,X). The nu-wise
   !            recurrence is stable for P for all mu and for Q for mu=0,1.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C3A2, C9
-  !***TYPE      DOUBLE PRECISION (XPQNU-S, DXPQNU-D)
-  !***KEYWORDS  LEGENDRE FUNCTIONS
-  !***AUTHOR  Smith, John M., (NBS and George Mason University)
-  !***ROUTINES CALLED  DXADD, DXADJ, DXPSI
-  !***COMMON BLOCKS    DXBLK1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C3A2, C9
+  !***
+  ! **Type:**      DOUBLE PRECISION (XPQNU-S, DXPQNU-D)
+  !***
+  ! **Keywords:**  LEGENDRE FUNCTIONS
+  !***
+  ! **Author:**  Smith, John M., (NBS and George Mason University)
+  !***
+  ! **Routines called:**  DXADD, DXADJ, DXPSI
+  !***
+  ! COMMON BLOCKS    DXBLK1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820728  DATE WRITTEN
   !   890126  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
@@ -23,7 +31,7 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  DXPQNU
+  
   INTEGER i, ia, Id, Ierror, if, ipq, ipq1, ipq2, Ipqa, ipsik, &
     ipsix, ix1, ixs, j, j0, k, Mu, NBItsf
   REAL(8) :: a, nu, Nu1, Nu2, pq, Pqa, DXPSI, r, Theta, w, &
@@ -39,7 +47,7 @@ SUBROUTINE DXPQNU(Nu1,Nu2,Mu,Theta,Id,Pqa,Ipqa,Ierror)
   !        IPSIK, IPSIX ARE VALUES OF K AND X RESPECTIVELY
   !        USED IN THE CALCULATION OF THE DXPSI FUNCTION.
   !
-  !***FIRST EXECUTABLE STATEMENT  DXPQNU
+  !* FIRST EXECUTABLE STATEMENT  DXPQNU
   Ierror = 0
   j0 = NBItsf
   ipsik = 1 + (NBItsf/10)

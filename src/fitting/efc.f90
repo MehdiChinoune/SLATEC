@@ -1,17 +1,24 @@
-!DECK EFC
+!** EFC
 SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,&
     Coeff,Lw,W)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  EFC
-  !***PURPOSE  Fit a piecewise polynomial curve to discrete data.
+  !>
+  !***
+  !  Fit a piecewise polynomial curve to discrete data.
   !            The piecewise polynomials are represented as B-splines.
   !            The fitting is done in a weighted least squares sense.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  K1A1A1, K1A2A, L8A3
-  !***TYPE      SINGLE PRECISION (EFC-S, DEFC-D)
-  !***KEYWORDS  B-SPLINE, CURVE FITTING, WEIGHTED LEAST SQUARES
-  !***AUTHOR  Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  K1A1A1, K1A2A, L8A3
+  !***
+  ! **Type:**      SINGLE PRECISION (EFC-S, DEFC-D)
+  !***
+  ! **Keywords:**  B-SPLINE, CURVE FITTING, WEIGHTED LEAST SQUARES
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
+  !***
+  ! **Description:**
   !
   !      This subprogram fits a piecewise polynomial curve
   !      to discrete data.  The piecewise polynomials are
@@ -193,12 +200,15 @@ SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,&
   !                         BVALU( ) expects the breakpoint array BKPT(*)
   !                         to be sorted.
   !
-  !***REFERENCES  R. J. Hanson, Constrained least squares curve fitting
+  !***
+  ! **References:**  R. J. Hanson, Constrained least squares curve fitting
   !                 to discrete data using B-splines, a users guide,
   !                 Report SAND78-1291, Sandia Laboratories, December
   !                 1978.
-  !***ROUTINES CALLED  EFCMN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  EFCMN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -207,7 +217,7 @@ SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,&
   !   900607  Editorial changes to Prologue to make Prologues for EFC,
   !           DEFC, FC, and DFC look as much the same as possible.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  EFC
+  
   !
   !      SUBROUTINE           FUNCTION/REMARKS
   !
@@ -237,7 +247,7 @@ SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,&
   !
   INTEGER lbf, lbkpt, lg, lptemp, lww, lxtemp, mdg, mdw
   !
-  !***FIRST EXECUTABLE STATEMENT  EFC
+  !* FIRST EXECUTABLE STATEMENT  EFC
   !     LWW=1               USAGE IN EFCMN( ) OF W(*)..
   !     LWW,...,LG-1        W(*,*)
   !

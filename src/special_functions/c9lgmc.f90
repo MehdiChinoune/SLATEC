@@ -1,27 +1,36 @@
-!DECK C9LGMC
+!** C9LGMC
 COMPLEX FUNCTION C9LGMC(Zin)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  C9LGMC
-  !***SUBSIDIARY
-  !***PURPOSE  Compute the log gamma correction factor so that
+  !>
+  !***
+  !  Compute the log gamma correction factor so that
   !            LOG(CGAMMA(Z)) = 0.5*LOG(2.*PI) + (Z-0.5)*LOG(Z) - Z
   !            + C9LGMC(Z).
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7A
-  !***TYPE      COMPLEX (R9LGMC-S, D9LGMC-D, C9LGMC-C)
-  !***KEYWORDS  COMPLETE GAMMA FUNCTION, CORRECTION TERM, FNLIB,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7A
+  !***
+  ! **Type:**      COMPLEX (R9LGMC-S, D9LGMC-D, C9LGMC-C)
+  !***
+  ! **Keywords:**  COMPLETE GAMMA FUNCTION, CORRECTION TERM, FNLIB,
   !             LOG GAMMA, LOGARITHM, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Compute the LOG GAMMA correction term for large ABS(Z) when REAL(Z)
   ! .GE. 0.0 and for large ABS(AIMAG(Y)) when REAL(Z) .LT. 0.0.  We find
   ! C9LGMC so that
   !   LOG(Z) = 0.5*LOG(2.*PI) + (Z-0.5)*LOG(Z) - Z + C9LGMC(Z)
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -30,7 +39,7 @@ COMPLEX FUNCTION C9LGMC(Zin)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  !***END PROLOGUE  C9LGMC
+  
   REAL bern, bound, cabsz, R1MACH, x, xbig, xmax, y
   INTEGER i, ndx, nterm
   COMPLEX Zin, z, z2inv
@@ -49,7 +58,7 @@ COMPLEX FUNCTION C9LGMC(Zin)
   DATA bern(10)/ - 1.3924322169059011E0/
   DATA bern(11)/13.402864044168392E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  C9LGMC
+  !* FIRST EXECUTABLE STATEMENT  C9LGMC
   IF ( first ) THEN
     nterm = INT( -0.30*LOG(R1MACH(3)) )
     bound = 0.1170*nterm*(0.1*R1MACH(3))**(-1./(2*nterm-1))

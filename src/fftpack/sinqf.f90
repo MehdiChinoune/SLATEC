@@ -1,14 +1,21 @@
-!DECK SINQF
+!** SINQF
 SUBROUTINE SINQF(N,X,Wsave)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SINQF
-  !***PURPOSE  Compute the forward sine transform with odd wave numbers.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***CATEGORY  J1A3
-  !***TYPE      SINGLE PRECISION (SINQF-S)
-  !***KEYWORDS  FFTPACK, FOURIER TRANSFORM
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the forward sine transform with odd wave numbers.
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Category:**  J1A3
+  !***
+  ! **Type:**      SINGLE PRECISION (SINQF-S)
+  !***
+  ! **Keywords:**  FFTPACK, FOURIER TRANSFORM
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Description:**
   !
   !  Subroutine SINQF computes the fast Fourier transform of quarter
   !  wave data.  That is, SINQF computes the coefficients in a sine
@@ -55,11 +62,14 @@ SUBROUTINE SINQF(N,X,Wsave)
   !  WSAVE   contains initialization calculations which must not
   !          be destroyed between calls of SINQF or SINQB.
   !
-  !***REFERENCES  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
+  !***
+  ! **References:**  P. N. Swarztrauber, Vectorizing the FFTs, in Parallel
   !                 Computations (G. Rodrigue, ed.), Academic Press,
   !                 1982, pp. 51-83.
-  !***ROUTINES CALLED  COSQF
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  COSQF
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -68,11 +78,11 @@ SUBROUTINE SINQF(N,X,Wsave)
   !   881128  Modified by Dick Valent to meet prologue standards.
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SINQF
+  
   INTEGER k, kc, N, ns2
   REAL Wsave, X, xhold
   DIMENSION X(*), Wsave(*)
-  !***FIRST EXECUTABLE STATEMENT  SINQF
+  !* FIRST EXECUTABLE STATEMENT  SINQF
   IF ( N==1 ) RETURN
   ns2 = N/2
   DO k = 1, ns2

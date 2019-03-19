@@ -1,15 +1,22 @@
-!DECK RSG
+!** RSG
 SUBROUTINE RSG(Nm,N,A,B,W,Matz,Z,Fv1,Fv2,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RSG
-  !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
+  !>
+  !***
+  !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a symmetric generalized eigenproblem.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4B1
-  !***TYPE      SINGLE PRECISION (RSG-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4B1
+  !***
+  ! **Type:**      SINGLE PRECISION (RSG-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine calls the recommended sequence of
   !     subroutines from the eigensystem subroutine package (EISPACK)
@@ -60,23 +67,26 @@ SUBROUTINE RSG(Nm,N,A,B,W,Matz,Z,Fv1,Fv2,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  REBAK, REDUC, TQL2, TQLRAT, TRED1, TRED2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  REBAK, REDUC, TQL2, TQLRAT, TRED1, TRED2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  RSG
+  
   !
   INTEGER N, Nm, Ierr, Matz
   REAL A(Nm,*), B(Nm,*), W(*), Z(Nm,*), Fv1(*), Fv2(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  RSG
+  !* FIRST EXECUTABLE STATEMENT  RSG
   IF ( N<=Nm ) THEN
     !
     CALL REDUC(Nm,N,A,B,Fv2,Ierr)

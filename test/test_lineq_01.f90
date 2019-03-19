@@ -2,16 +2,22 @@ MODULE TEST21_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK SGEQC
+  !** SGEQC
   SUBROUTINE SGEQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  SGEQC
-    !***PURPOSE  Quick check for SGEFS and SGEIR.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (SGEQC-S, DGEQC-D, CGEQC-C)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Jacobsen, Nancy, (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for SGEFS and SGEIR.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (SGEQC-S, DGEQC-D, CGEQC-C)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Jacobsen, Nancy, (LANL)
+    !***
+    ! **Description:**
     !
     !   Let A*X=B be a SINGLE PRECISION linear system where the
     !   matrix is of the proper type for the Linpack subroutines
@@ -27,14 +33,16 @@ CONTAINS
     !   On return, NERR (INTEGER type) contains the total count of
     !   all failures detected.
     !
-    !***ROUTINES CALLED  R1MACH, SGEFS, SGEIR
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  R1MACH, SGEFS, SGEIR
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801022  DATE WRITTEN
     !   891009  Removed unreferenced statement label.  (WRB)
     !   891009  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920601  Code reworked and TYPE section added.  (RWC, WRB)
-    !***END PROLOGUE  SGEQC
+    
     !     .. Scalar Arguments ..
     INTEGER Kprint, Lun, Nerr
     !     .. Local Scalars ..
@@ -58,7 +66,7 @@ CONTAINS
     DATA b/0.0E0, 3.5E0, 3.6E0, 2.4E0/
     DATA bxex/0.10E+01, 0.10E+01, -0.10E+01, 0.10E+01/
     DATA list/'GEFS', 'GEIR'/
-    !***FIRST EXECUTABLE STATEMENT  SGEQC
+    !* FIRST EXECUTABLE STATEMENT  SGEQC
     n = 4
     lda = 5
     Nerr = 0
@@ -142,16 +150,22 @@ CONTAINS
     99006 FORMAT (/,5X,'S',A,' Singular test PASSED')
     99007 FORMAT (/,5X,'S',A,' Singular test FAILED, IND=',I3)
   END SUBROUTINE SGEQC
-  !DECK DGEQC
+  !** DGEQC
   SUBROUTINE DGEQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  DGEQC
-    !***PURPOSE  Quick check for DGEFS.
-    !***LIBRARY   SLATEC
-    !***TYPE      DOUBLE PRECISION (SGEQC-S, DGEQC-D, CGEQC-C)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Jacobsen, Nancy, (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for DGEFS.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      DOUBLE PRECISION (SGEQC-S, DGEQC-D, CGEQC-C)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Jacobsen, Nancy, (LANL)
+    !***
+    ! **Description:**
     !
     !   Let A*X=B be a DOUBLE PRECISION linear system where the
     !   matrix is of the proper type for the Linpack subroutines
@@ -167,14 +181,16 @@ CONTAINS
     !   On return, NERR (INTEGER type) contains the total count of
     !   all failures detected.
     !
-    !***ROUTINES CALLED  D1MACH, DGEFS
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  D1MACH, DGEFS
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801022  DATE WRITTEN
     !   891009  Removed unreferenced statement label.  (WRB)
     !   891009  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920601  Code reworked and TYPE section added.  (RWC, WRB)
-    !***END PROLOGUE  DGEQC
+    
     !     .. Scalar Arguments ..
     INTEGER Kprint, Lun, Nerr
     !     .. Local Scalars ..
@@ -199,7 +215,7 @@ CONTAINS
     DATA b/0.0D0, 3.5D0, 3.6D0, 2.4D0/
     DATA bxex/0.10D+01, 0.10D+01, -0.10D+01, 0.10D+01/
     DATA list/'GEFS', 'GEIR'/
-    !***FIRST EXECUTABLE STATEMENT  DGEQC
+    !* FIRST EXECUTABLE STATEMENT  DGEQC
     n = 4
     lda = 5
     Nerr = 0
@@ -273,16 +289,22 @@ CONTAINS
     99006 FORMAT (/,5X,'D',A,' Singular test PASSED')
     99007 FORMAT (/,5X,'D',A,' Singular test FAILED, IND=',I3)
   END SUBROUTINE DGEQC
-  !DECK CGEQC
+  !** CGEQC
   SUBROUTINE CGEQC(Lun,Kprint,Nerr)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  CGEQC
-    !***PURPOSE  Quick check for CGEFS and CGEIR.
-    !***LIBRARY   SLATEC
-    !***TYPE      COMPLEX (SGEQC-S, DGEQC-D, CGEQC-C)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Jacobsen, Nancy, (LANL)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for CGEFS and CGEIR.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      COMPLEX (SGEQC-S, DGEQC-D, CGEQC-C)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Jacobsen, Nancy, (LANL)
+    !***
+    ! **Description:**
     !
     !   Let A*X=B be a COMPLEX linear system where the
     !   matrix is of the proper type for the Linpack subroutines
@@ -298,13 +320,15 @@ CONTAINS
     !   On return, NERR (INTEGER type) contains the total count of
     !   all failures detected.
     !
-    !***ROUTINES CALLED  CGEFS, CGEIR
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  CGEFS, CGEIR
+
+    !* REVISION HISTORY  (YYMMDD)
     !   801029  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920601  Code reworked and TYPE section added.  (RWC, WRB)
-    !***END PROLOGUE  CGEQC
+    
     !     .. Scalar Arguments ..
     INTEGER Kprint, Lun, Nerr
     !     .. Local Scalars ..
@@ -325,7 +349,7 @@ CONTAINS
     DATA bxex/(.21459E-01,.209012E+01), (.261373E+01,-.162231E+01), &
       (.785407E+00,.109871E+01)/
     DATA list/'GEFS', 'GEIR'/
-    !***FIRST EXECUTABLE STATEMENT  CGEQC
+    !* FIRST EXECUTABLE STATEMENT  CGEQC
     n = 3
     lda = 5
     Nerr = 0
@@ -407,24 +431,31 @@ CONTAINS
     99007 FORMAT (/,5X,'C',A,' Singular test FAILED, IND=',I3)
   END SUBROUTINE CGEQC
 END MODULE TEST21_MOD
-!DECK TEST21
+!** TEST21
 PROGRAM TEST21
   USE TEST21_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST21
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D2
-  !***TYPE      ALL (TEST21-A)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D2
+  !***
+  ! **Type:**      ALL (TEST21-A)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -436,25 +467,28 @@ PROGRAM TEST21
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        SGEFS    SGEIR
   !        DGEFS
   !        CGEFS    CGEIR
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  CGEQC, DGEQC, I1MACH, SGEQC, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CGEQC, DGEQC, I1MACH, SGEQC, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST21
+  
   INTEGER I1MACH
   INTEGER kprint, lin, lun, nerr, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST21
+  !* FIRST EXECUTABLE STATEMENT  TEST21
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

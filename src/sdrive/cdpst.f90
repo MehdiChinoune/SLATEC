@@ -1,32 +1,38 @@
-!DECK CDPST
+!** CDPST
 SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
     T,USERS,Y,Yh,Ywt,Uround,Nfe,Nje,A,Dfdy,Fac,Ier,Ipvt,&
     Save1,Iswflg,Bnd,Jstate)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CDPST
-  !***SUBSIDIARY
-  !***PURPOSE  Subroutine CDPST evaluates the Jacobian matrix of the right
+  !>
+  !***
+  !  Subroutine CDPST evaluates the Jacobian matrix of the right
   !            hand side of the differential equations.
-  !***LIBRARY   SLATEC (SDRIVE)
-  !***TYPE      COMPLEX (SDPST-S, DDPST-D, CDPST-C)
-  !***AUTHOR  Kahaner, D. K., (NIST)
+  !***
+  ! **Library:**   SLATEC (SDRIVE)
+  !***
+  ! **Type:**      COMPLEX (SDPST-S, DDPST-D, CDPST-C)
+  !***
+  ! **Author:**  Kahaner, D. K., (NIST)
   !             National Institute of Standards and Technology
   !             Gaithersburg, MD  20899
   !           Sutherland, C. D., (LANL)
   !             Mail Stop D466
   !             Los Alamos National Laboratory
   !             Los Alamos, NM  87545
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  If MITER is 1, 2, 4, or 5, the matrix
   !  P = I - L(0)*H*Jacobian is stored in DFDY and subjected to LU
   !  decomposition, with the results also stored in DFDY.
   !
-  !***ROUTINES CALLED  CGBFA, CGEFA, SCNRM2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CGBFA, CGEFA, SCNRM2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  !***END PROLOGUE  CDPST
+  
   INTEGER i, iflag, imax, Impl, info, Iswflg, j, j2, Jstate, k, &
     Matdim, Miter, Ml, Mu, mw, N, Nde, Nfe, Nje, Nq
   COMPLEX A(Matdim,*), cfctr, Dfdy(Matdim,*), dy, Fac(*), Save1(*), &
@@ -36,7 +42,7 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   INTEGER Ipvt(*)
   LOGICAL Ier
   PARAMETER (FACMAX=.5E0,BU=0.5E0)
-  !***FIRST EXECUTABLE STATEMENT  CDPST
+  !* FIRST EXECUTABLE STATEMENT  CDPST
   Nje = Nje + 1
   Ier = .FALSE.
   IF ( Miter==1.OR.Miter==2 ) THEN

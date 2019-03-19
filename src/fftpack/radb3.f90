@@ -1,15 +1,20 @@
-!DECK RADB3
+!** RADB3
 SUBROUTINE RADB3(Ido,L1,Cc,Ch,Wa1,Wa2)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RADB3
-  !***SUBSIDIARY
-  !***PURPOSE  Calculate the fast Fourier transform of subvectors of
+  !>
+  !***
+  !  Calculate the fast Fourier transform of subvectors of
   !            length three.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***TYPE      SINGLE PRECISION (RADB3-S)
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Type:**      SINGLE PRECISION (RADB3-S)
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -21,12 +26,12 @@ SUBROUTINE RADB3(Ido,L1,Cc,Ch,Wa1,Wa2)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  RADB3
+  
   REAL Cc, Ch, ci2, ci3, cr2, cr3, di2, di3, dr2, dr3, taui, &
     taur, ti2, tr2, Wa1, Wa2
   INTEGER i, ic, Ido, idp2, k, L1
   DIMENSION Cc(Ido,3,*), Ch(Ido,L1,3), Wa1(*), Wa2(*)
-  !***FIRST EXECUTABLE STATEMENT  RADB3
+  !* FIRST EXECUTABLE STATEMENT  RADB3
   taur = -.5
   taui = .5*SQRT(3.)
   DO k = 1, L1

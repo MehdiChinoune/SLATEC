@@ -1,16 +1,23 @@
-!DECK SCHUD
+!** SCHUD
 SUBROUTINE SCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SCHUD
-  !***PURPOSE  Update an augmented Cholesky decomposition of the
+  !>
+  !***
+  !  Update an augmented Cholesky decomposition of the
   !            triangular part of an augmented QR decomposition.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D7B
-  !***TYPE      SINGLE PRECISION (SCHUD-S, DCHUD-D, CCHUD-C)
-  !***KEYWORDS  CHOLESKY DECOMPOSITION, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D7B
+  !***
+  ! **Type:**      SINGLE PRECISION (SCHUD-S, DCHUD-D, CCHUD-C)
+  !***
+  ! **Keywords:**  CHOLESKY DECOMPOSITION, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             UPDATE
-  !***AUTHOR  Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Stewart, G. W., (U. of Maryland)
+  !***
+  ! **Description:**
   !
   !     SCHUD updates an augmented Cholesky decomposition of the
   !     triangular part of an augmented QR decomposition.  Specifically,
@@ -96,10 +103,13 @@ SUBROUTINE SCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   !                S contains the sines of the transforming
   !                rotations.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SROTG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SROTG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -107,7 +117,7 @@ SUBROUTINE SCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SCHUD
+  
   INTEGER Ldr, P, Ldz, Nz
   REAL Rho(*), C(*)
   REAL R(Ldr,*), X(*), Z(Ldz,*), Y(*), S(*)
@@ -118,7 +128,7 @@ SUBROUTINE SCHUD(R,Ldr,P,X,Z,Ldz,Nz,Y,Rho,C,S)
   !
   !     UPDATE R.
   !
-  !***FIRST EXECUTABLE STATEMENT  SCHUD
+  !* FIRST EXECUTABLE STATEMENT  SCHUD
   DO j = 1, P
     xj = X(j)
     !

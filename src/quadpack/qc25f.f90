@@ -1,26 +1,33 @@
-!DECK QC25F
+!** QC25F
 SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
     Resabs,Resasc,Momcom,Chebmo)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QC25F
-  !***PURPOSE  To compute the integral I=Integral of F(X) over (A,B)
+  !>
+  !***
+  !  To compute the integral I=Integral of F(X) over (A,B)
   !            Where W(X) = COS(OMEGA*X) Or (WX)=SIN(OMEGA*X)
   !            and to compute J=Integral of ABS(F) over (A,B). For small
   !            value of OMEGA or small intervals (A,B) 15-point GAUSS-
   !            KRONROD Rule used. Otherwise generalized CLENSHAW-CURTIS us
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A2A2
-  !***TYPE      SINGLE PRECISION (QC25F-S, DQC25F-D)
-  !***KEYWORDS  CLENSHAW-CURTIS METHOD, GAUSS-KRONROD RULES,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A2A2
+  !***
+  ! **Type:**      SINGLE PRECISION (QC25F-S, DQC25F-D)
+  !***
+  ! **Keywords:**  CLENSHAW-CURTIS METHOD, GAUSS-KRONROD RULES,
   !             INTEGRATION RULES FOR FUNCTIONS WITH COS OR SIN FACTOR,
   !             QUADPACK, QUADRATURE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Integration rules for functions with COS or SIN factor
   !        Standard fortran subroutine
@@ -96,13 +103,16 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
   !                    the modified Chebyshev moments for the first MOMCOM
   !                    MOMCOM interval lengths
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  QCHEB, QK15W, QWGTF, R1MACH, SGTSL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  QCHEB, QK15W, QWGTF, R1MACH, SGTSL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810101  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  QC25F
+  
   !
   REAL A, Abserr, ac, an, an2, as, asap, ass, B, centr, Chebmo, &
     cheb12, cheb24, conc, cons, cospar, d, QWGTF, d1, R1MACH, &
@@ -158,7 +168,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
   !
   !           OFLOW IS THE LARGEST POSITIVE MAGNITUDE.
   !
-  !***FIRST EXECUTABLE STATEMENT  QC25F
+  !* FIRST EXECUTABLE STATEMENT  QC25F
   oflow = R1MACH(2)
   !
   centr = 0.5E+00*(B+A)

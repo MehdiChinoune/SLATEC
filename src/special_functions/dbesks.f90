@@ -1,17 +1,24 @@
-!DECK DBESKS
+!** DBESKS
 SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBESKS
-  !***PURPOSE  Compute a sequence of modified Bessel functions of the
+  !>
+  !***
+  !  Compute a sequence of modified Bessel functions of the
   !            third kind of fractional order.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B3
-  !***TYPE      DOUBLE PRECISION (BESKS-S, DBESKS-D)
-  !***KEYWORDS  FNLIB, FRACTIONAL ORDER, MODIFIED BESSEL FUNCTION,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B3
+  !***
+  ! **Type:**      DOUBLE PRECISION (BESKS-S, DBESKS-D)
+  !***
+  ! **Keywords:**  FNLIB, FRACTIONAL ORDER, MODIFIED BESSEL FUNCTION,
   !             SEQUENCE OF BESSEL FUNCTIONS, SPECIAL FUNCTIONS,
   !             THIRD KIND
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DBESKS computes a sequence of modified Bessel functions of the third
   ! kind of order XNU + I at X, where X .GT. 0, XNU lies in (-1,1),
@@ -20,21 +27,24 @@ SUBROUTINE DBESKS(Xnu,X,Nin,Bk)
   ! the results at X for order starting at XNU.  XNU, X, and BK are
   ! double precision.  NIN is an integer.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DBSKES, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DBSKES, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DBESKS
+  
   INTEGER i, n, Nin
   REAL(8) :: Xnu, X, Bk(*), expxi, xmax, D1MACH
   SAVE xmax
   DATA xmax/0.D0/
-  !***FIRST EXECUTABLE STATEMENT  DBESKS
+  !* FIRST EXECUTABLE STATEMENT  DBESKS
   IF ( xmax==0.D0 ) xmax = -LOG(D1MACH(1))
   !
   IF ( X>xmax ) CALL XERMSG('SLATEC','DBESKS','X SO BIG BESSEL K UNDERFLOWS'&

@@ -1,16 +1,23 @@
-!DECK DBESI0
+!** DBESI0
 REAL(8) FUNCTION DBESI0(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBESI0
-  !***PURPOSE  Compute the hyperbolic Bessel function of the first kind
+  !>
+  !***
+  !  Compute the hyperbolic Bessel function of the first kind
   !            of order zero.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B1
-  !***TYPE      DOUBLE PRECISION (BESI0-S, DBESI0-D)
-  !***KEYWORDS  FIRST KIND, FNLIB, HYPERBOLIC BESSEL FUNCTION,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B1
+  !***
+  ! **Type:**      DOUBLE PRECISION (BESI0-S, DBESI0-D)
+  !***
+  ! **Keywords:**  FIRST KIND, FNLIB, HYPERBOLIC BESSEL FUNCTION,
   !             MODIFIED BESSEL FUNCTION, ORDER ZERO, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DBESI0(X) calculates the double precision modified (hyperbolic)
   ! Bessel function of the first kind of order zero and double
@@ -22,15 +29,18 @@ REAL(8) FUNCTION DBESI0(X)
   !                               significant figures required  33.31
   !                                    decimal places required  33.65
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DBSI0E, DCSEVL, INITDS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DBSI0E, DCSEVL, INITDS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DBESI0
+  
   INTEGER INITDS, nti0
   REAL(8) :: X, bi0cs(18), xmax, xsml, y, D1MACH, DCSEVL, DBSI0E
   LOGICAL first
@@ -54,7 +64,7 @@ REAL(8) FUNCTION DBESI0(X)
   DATA bi0cs(17)/ + .4903034603242837333333333333333333D-30/
   DATA bi0cs(18)/ + .9508172606122666666666666666666666D-33/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  DBESI0
+  !* FIRST EXECUTABLE STATEMENT  DBESI0
   IF ( first ) THEN
     nti0 = INITDS(bi0cs,18,0.1*REAL(D1MACH(3)))
     xsml = SQRT(4.5D0*D1MACH(3))

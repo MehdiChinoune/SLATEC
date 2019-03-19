@@ -1,17 +1,24 @@
-!DECK DDOT
+!** DDOT
 REAL(8) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DDOT
-  !***PURPOSE  Compute the inner product of two vectors.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1A4
-  !***TYPE      DOUBLE PRECISION (SDOT-S, DDOT-D, CDOTU-C)
-  !***KEYWORDS  BLAS, INNER PRODUCT, LINEAR ALGEBRA, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !>
+  !***
+  !  Compute the inner product of two vectors.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1A4
+  !***
+  ! **Type:**      DOUBLE PRECISION (SDOT-S, DDOT-D, CDOTU-C)
+  !***
+  ! **Keywords:**  BLAS, INNER PRODUCT, LINEAR ALGEBRA, VECTOR
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -31,22 +38,25 @@ REAL(8) FUNCTION DDOT(N,Dx,Incx,Dy,Incy)
   !     where LX = 1 if INCX .GE. 0, else LX = 1+(1-N)*INCX, and LY is
   !     defined in a similar way using INCY.
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DDOT
+  
   INTEGER i, Incx, Incy, ix, iy, m, mp1, N, ns
   REAL(8) :: Dx(*), Dy(*)
-  !***FIRST EXECUTABLE STATEMENT  DDOT
+  !* FIRST EXECUTABLE STATEMENT  DDOT
   DDOT = 0.0D0
   IF ( N<=0 ) RETURN
   IF ( Incx==Incy ) THEN

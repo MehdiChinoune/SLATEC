@@ -1,17 +1,21 @@
-!DECK REORT
+!** REORT
 SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  REORT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (REORT-S, DREORT-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (REORT-S, DREORT-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !   INPUT
-  ! *********
+  !- ********
   !     Y, YP and YHP = homogeneous solution matrix and particular
   !                     solution vector to be orthonormalized.
   !     IFLAG = 1 --  store YHP into Y and YP, test for
@@ -22,9 +26,9 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !                   (preset orthonormalization mode)
   !             3 --  store YHP into Y and YP, reorthonormalization
   !                   (when INHOMO=3 and X=XEND).
-  ! **********************************************************************
+  !- *********************************************************************
   !   OUTPUT
-  ! *********
+  !- ********
   !     Y, YP = orthonormalized solutions.
   !     NIV = number of independent vectors returned from DMGSBV.
   !     IFLAG = 0 --  reorthonormalization was performed.
@@ -33,12 +37,16 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !            30 --  solutions are linearly dependent, problem must
   !                   be restarted from the beginning.
   !     W, P, IP = orthonormalization information.
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  BVSUP
-  !***ROUTINES CALLED  MGSBV, SDOT, STOR1, STWAY
-  !***COMMON BLOCKS    ML15TO, ML18JR, ML8SZ
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BVSUP
+  !***
+  ! **Routines called:**  MGSBV, SDOT, STOR1, STWAY
+  !***
+  ! COMMON BLOCKS    ML15TO, ML18JR, ML8SZ
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -47,7 +55,7 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  REORT
+  
   REAL AE, C, dnd, dndt, dx, P, PWCnd, PX, RE, S, SDOT, srp, &
     Stowa, TND, TOL, vnorm, W, wcnd, X, XBEg
   REAL XENd, XOP, XOT, XSAv, Y, Yhp, Yp, ypnm
@@ -58,7 +66,7 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   DIMENSION Y(Ncomp,*), Yp(*), W(*), S(*), P(*), Ip(*), Stowa(*), &
     Yhp(Ncomp,*)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   COMMON /ML8SZ / C, XSAv, IGOfx, INHomo, IVP, NCOmpd, NFC
   COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
@@ -67,8 +75,8 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
     NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
     NUMort, NFCc, ICOco
   !
-  ! **********************************************************************
-  !***FIRST EXECUTABLE STATEMENT  REORT
+  !- *********************************************************************
+  !* FIRST EXECUTABLE STATEMENT  REORT
   nfcp = NFC + 1
   !
   !     CHECK TO SEE IF ORTHONORMALIZATION TEST IS TO BE PERFORMED

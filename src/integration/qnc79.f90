@@ -1,16 +1,23 @@
-!DECK QNC79
+!** QNC79
 SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QNC79
-  !***PURPOSE  Integrate a function using a 7-point adaptive Newton-Cotes
+  !>
+  !***
+  !  Integrate a function using a 7-point adaptive Newton-Cotes
   !            quadrature rule.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  H2A1A1
-  !***TYPE      SINGLE PRECISION (QNC79-S, DQNC79-D)
-  !***KEYWORDS  ADAPTIVE QUADRATURE, INTEGRATION, NEWTON-COTES
-  !***AUTHOR  Kahaner, D. K., (NBS)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  H2A1A1
+  !***
+  ! **Type:**      SINGLE PRECISION (QNC79-S, DQNC79-D)
+  !***
+  ! **Keywords:**  ADAPTIVE QUADRATURE, INTEGRATION, NEWTON-COTES
+  !***
+  ! **Author:**  Kahaner, D. K., (NBS)
   !           Jones, R. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Abstract
   !       QNC79 is a general purpose program for evaluation of
@@ -60,16 +67,19 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   !              difficult problem; other programs may be more efficient.
   !              QNC79 will gracefully give up if K exceeds 2000.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  I1MACH, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  I1MACH, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920218  Code and prologue polished.  (WRB)
-  !***END PROLOGUE  QNC79
+  
   !     .. Scalar Arguments ..
   REAL A, Ans, B, Err
   INTEGER Ierr, K
@@ -98,7 +108,7 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   !     .. Data statements ..
   DATA kml/7/, kmx/2000/, nlmn/2/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  QNC79
+  !* FIRST EXECUTABLE STATEMENT  QNC79
   IF ( first ) THEN
     w1 = 41.0E0/140.0E0
     w2 = 216.0E0/140.0E0

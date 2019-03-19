@@ -1,16 +1,23 @@
-!DECK DCKDER
+!** DCKDER
 SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCKDER
-  !***PURPOSE  Check the gradients of M nonlinear functions in N
+  !>
+  !***
+  !  Check the gradients of M nonlinear functions in N
   !            variables, evaluated at a point X, for consistency
   !            with the functions themselves.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  F3, G4C
-  !***TYPE      DOUBLE PRECISION (CHKDER-S, DCKDER-D)
-  !***KEYWORDS  GRADIENTS, JACOBIAN, MINPACK, NONLINEAR
-  !***AUTHOR  Hiebert, K. L. (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  F3, G4C
+  !***
+  ! **Type:**      DOUBLE PRECISION (CHKDER-S, DCKDER-D)
+  !***
+  ! **Keywords:**  GRADIENTS, JACOBIAN, MINPACK, NONLINEAR
+  !***
+  ! **Author:**  Hiebert, K. L. (SNLA)
+  !***
+  ! **Description:**
   !
   !   This subroutine is a companion routine to DNSQ and DNSQE. It may
   !   be used to check the coding of the Jacobian calculation.
@@ -84,12 +91,15 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !         correct, while a value of ERR(I) less than 0.5 indicates
   !         that the I-th gradient is probably incorrect.
   !
-  !***REFERENCES  M. J. D. Powell, A hybrid method for nonlinear equa-
+  !***
+  ! **References:**  M. J. D. Powell, A hybrid method for nonlinear equa-
   !                 tions. In Numerical Methods for Nonlinear Algebraic
   !                 Equations, P. Rabinowitz, Editor.  Gordon and Breach,
   !                 1988.
-  !***ROUTINES CALLED  D1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -98,7 +108,7 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DCKDER
+  
   INTEGER i, j, Ldfjac, M, Mode, N
   REAL(8) :: D1MACH, eps, epsf, epslog, epsmch, Err(*), factor, &
     Fjac(Ldfjac,*), Fvec(*), Fvecp(*), one, temp, X(*), &
@@ -108,7 +118,7 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !
   !     EPSMCH IS THE MACHINE PRECISION.
   !
-  !***FIRST EXECUTABLE STATEMENT  DCKDER
+  !* FIRST EXECUTABLE STATEMENT  DCKDER
   epsmch = D1MACH(4)
   !
   eps = SQRT(epsmch)

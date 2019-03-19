@@ -1,16 +1,23 @@
-!DECK TQL1
+!** TQL1
 SUBROUTINE TQL1(N,D,E,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TQL1
-  !***PURPOSE  Compute the eigenvalues of symmetric tridiagonal matrix by
+  !>
+  !***
+  !  Compute the eigenvalues of symmetric tridiagonal matrix by
   !            the QL method.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4A5, D4C2A
-  !***TYPE      SINGLE PRECISION (TQL1-S)
-  !***KEYWORDS  EIGENVALUES OF A SYMMETRIC TRIDIAGONAL MATRIX, EISPACK,
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4A5, D4C2A
+  !***
+  ! **Type:**      SINGLE PRECISION (TQL1-S)
+  !***
+  ! **Keywords:**  EIGENVALUES OF A SYMMETRIC TRIDIAGONAL MATRIX, EISPACK,
   !             QL METHOD
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure TQL1,
   !     NUM. MATH. 11, 293-306(1968) by Bowdler, Martin, Reinsch, and
@@ -52,25 +59,28 @@ SUBROUTINE TQL1(N,D,E,Ierr)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  PYTHAG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  PYTHAG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  TQL1
+  
   !
   INTEGER i, j, l, m, N, ii, l1, l2, mml, Ierr
   REAL D(*), E(*)
   REAL b, c, c2, c3, dl1, el1, f, g, h, p, r, s, s2
   REAL PYTHAG
   !
-  !***FIRST EXECUTABLE STATEMENT  TQL1
+  !* FIRST EXECUTABLE STATEMENT  TQL1
   Ierr = 0
   IF ( N/=1 ) THEN
     !

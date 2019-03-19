@@ -1,27 +1,34 @@
-!DECK TRI3
+!** TRI3
 SUBROUTINE TRI3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TRI3
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to GENBUN
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (TRI3-S, CMPTR3-C)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to GENBUN
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (TRI3-S, CMPTR3-C)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Subroutine to solve three linear systems whose common coefficient
   !     matrix is a rational function in the matrix given by
   !
   !                  TRIDIAGONAL (...,A(I),B(I),C(I),...)
   !
-  !***SEE ALSO  GENBUN
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  GENBUN
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  TRI3
+  
   REAL A, B, C, D, Tcos, W1, W2, W3, x, xx, Y1, Y2, Y3, z
   INTEGER i, ip, K, k1, k2, k2k3k4, k3, k4, kint1, kint2, kint3, &
     l1, l2, l3, lint1, lint2, lint3, M, mm1, n
@@ -29,7 +36,7 @@ SUBROUTINE TRI3(M,A,B,C,K,Y1,Y2,Y3,Tcos,D,W1,W2,W3)
     D(*), W1(*), W2(*), W3(*)
   INTEGER k1p1, k2p1, k3p1, k4p1
   !
-  !***FIRST EXECUTABLE STATEMENT  TRI3
+  !* FIRST EXECUTABLE STATEMENT  TRI3
   mm1 = M - 1
   k1 = K(1)
   k2 = K(2)

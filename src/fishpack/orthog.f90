@@ -1,25 +1,33 @@
-!DECK ORTHOG
+!** ORTHOG
 SUBROUTINE ORTHOG(Usol,Idmn,Zn,Zm,Pertrb)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ORTHOG
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SEPELI
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (ORTHOG-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SEPELI
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (ORTHOG-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     This subroutine orthogonalizes the array USOL with respect to
   !     the constant array in a weighted least squares norm.
   !
-  !***SEE ALSO  SEPELI
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    SPLPCM
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SEPELI
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    SPLPCM
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  ORTHOG
+  
   REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, ete, Pertrb, &
     TDLx3, TDLy3, Usol, ute, Zm, Zn
   INTEGER i, Idmn, ifnl, ii, IS, istr, j, jfnl, jj, JS, jstr, K, &
@@ -27,7 +35,7 @@ SUBROUTINE ORTHOG(Usol,Idmn,Zn,Zm,Pertrb)
   COMMON /SPLPCM/ KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
     IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   DIMENSION Usol(Idmn,*), Zn(*), Zm(*)
-  !***FIRST EXECUTABLE STATEMENT  ORTHOG
+  !* FIRST EXECUTABLE STATEMENT  ORTHOG
   istr = IS
   ifnl = MS
   jstr = JS

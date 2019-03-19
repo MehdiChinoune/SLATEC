@@ -1,17 +1,24 @@
-!DECK HFTI
+!** HFTI
 SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HFTI
-  !***PURPOSE  Solve a linear least squares problems by performing a QR
+  !>
+  !***
+  !  Solve a linear least squares problems by performing a QR
   !            factorization of the matrix using Householder
   !            transformations.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D9
-  !***TYPE      SINGLE PRECISION (HFTI-S, DHFTI-D)
-  !***KEYWORDS  CURVE FITTING, LINEAR LEAST SQUARES, QR FACTORIZATION
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D9
+  !***
+  ! **Type:**      SINGLE PRECISION (HFTI-S, DHFTI-D)
+  !***
+  ! **Keywords:**  CURVE FITTING, LINEAR LEAST SQUARES, QR FACTORIZATION
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     DIMENSION A(MDA,N),(B(MDB,NB) or B(M)),RNORM(NB),H(N),G(N),IP(N)
   !
@@ -122,10 +129,13 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !                       The contents of arrays H(*),G(*) and IP(*)
   !                       are not generally required by the user.
   !
-  !***REFERENCES  C. L. Lawson and R. J. Hanson, Solving Least Squares
+  !***
+  ! **References:**  C. L. Lawson and R. J. Hanson, Solving Least Squares
   !                 Problems, Prentice-Hall, Inc., 1974, Chapter 14.
-  !***ROUTINES CALLED  H12, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  H12, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891006  Cosmetic changes to prologue.  (WRB)
@@ -134,7 +144,7 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   901005  Replace usage of DIFF with usage of R1MACH.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  HFTI
+  
   REAL A, B, factor, G, H, hmax, R1MACH, releps, Rnorm, sm1, &
     szero, Tau, tmp
   INTEGER i, ii, iopt, ip1, j, jb, jj, k, kp1, Krank, l, ldiag, &
@@ -144,7 +154,7 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   REAL(8) :: sm, dzero
   SAVE releps
   DATA releps/0.E0/
-  !***FIRST EXECUTABLE STATEMENT  HFTI
+  !* FIRST EXECUTABLE STATEMENT  HFTI
   IF ( releps==0 ) releps = R1MACH(4)
   szero = 0.
   dzero = 0.D0

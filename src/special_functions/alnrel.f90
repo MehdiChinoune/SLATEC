@@ -1,14 +1,21 @@
-!DECK ALNREL
+!** ALNREL
 REAL FUNCTION ALNREL(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ALNREL
-  !***PURPOSE  Evaluate ln(1+X) accurate in the sense of relative error.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4B
-  !***TYPE      SINGLE PRECISION (ALNREL-S, DLNREL-D, CLNREL-C)
-  !***KEYWORDS  ELEMENTARY FUNCTIONS, FNLIB, LOGARITHM
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Evaluate ln(1+X) accurate in the sense of relative error.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4B
+  !***
+  ! **Type:**      SINGLE PRECISION (ALNREL-S, DLNREL-D, CLNREL-C)
+  !***
+  ! **Keywords:**  ELEMENTARY FUNCTIONS, FNLIB, LOGARITHM
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! ALNREL(X) evaluates ln(1+X) accurately in the sense of relative
   ! error when X is very small.  This routine must be used to
@@ -21,9 +28,12 @@ REAL FUNCTION ALNREL(X)
   !                               significant figures required  16.44
   !                                    decimal places required  17.40
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -31,7 +41,7 @@ REAL FUNCTION ALNREL(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  ALNREL
+  
   REAL alnrcs, CSEVL, R1MACH, X, xmin
   INTEGER INITS, nlnrel
   DIMENSION alnrcs(23)
@@ -61,7 +71,7 @@ REAL FUNCTION ALNREL(X)
   DATA alnrcs(22)/ - .000000000000000103E0/
   DATA alnrcs(23)/.000000000000000019E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  ALNREL
+  !* FIRST EXECUTABLE STATEMENT  ALNREL
   IF ( first ) THEN
     nlnrel = INITS(alnrcs,23,0.1*R1MACH(3))
     xmin = -1.0 + SQRT(R1MACH(4))

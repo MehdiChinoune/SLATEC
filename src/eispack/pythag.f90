@@ -1,29 +1,36 @@
-!DECK PYTHAG
+!** PYTHAG
 REAL FUNCTION PYTHAG(A,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PYTHAG
-  !***SUBSIDIARY
-  !***PURPOSE  Compute the complex square root of a complex number without
+  !>
+  !***
+  !  Compute the complex square root of a complex number without
   !            destructive overflow or underflow.
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (PYTHAG-S)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (PYTHAG-S)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Finds sqrt(A**2+B**2) without overflow or destructive underflow
   !
-  !***SEE ALSO  EISDOC
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  EISDOC
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  PYTHAG
+  
   REAL A, B
   !
   REAL p, q, r, s, t
-  !***FIRST EXECUTABLE STATEMENT  PYTHAG
+  !* FIRST EXECUTABLE STATEMENT  PYTHAG
   p = MAX(ABS(A),ABS(B))
   q = MIN(ABS(A),ABS(B))
   IF ( q==0.0E0 ) THEN

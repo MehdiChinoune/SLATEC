@@ -1,15 +1,20 @@
-!DECK RADB5
+!** RADB5
 SUBROUTINE RADB5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RADB5
-  !***SUBSIDIARY
-  !***PURPOSE  Calculate the fast Fourier transform of subvectors of
+  !>
+  !***
+  !  Calculate the fast Fourier transform of subvectors of
   !            length five.
-  !***LIBRARY   SLATEC (FFTPACK)
-  !***TYPE      SINGLE PRECISION (RADB5-S)
-  !***AUTHOR  Swarztrauber, P. N., (NCAR)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Library:**   SLATEC (FFTPACK)
+  !***
+  ! **Type:**      SINGLE PRECISION (RADB5-S)
+  !***
+  ! **Author:**  Swarztrauber, P. N., (NCAR)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   830401  Modified to use SLATEC library source file format.
   !   860115  Modified by Ron Boisvert to adhere to Fortran 77 by
@@ -21,14 +26,14 @@ SUBROUTINE RADB5(Ido,L1,Cc,Ch,Wa1,Wa2,Wa3,Wa4)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  !***END PROLOGUE  RADB5
+  
   REAL Cc, Ch, ci2, ci3, ci4, ci5, cr2, cr3, cr4, cr5, di2, di3, &
     di4, di5, dr2, dr3, dr4, dr5, pi, ti11
   REAL ti12, ti2, ti3, ti4, ti5, tr11, tr12, tr2, tr3, tr4, tr5, &
     Wa1, Wa2, Wa3, Wa4
   INTEGER i, ic, Ido, idp2, k, L1
   DIMENSION Cc(Ido,5,*), Ch(Ido,L1,5), Wa1(*), Wa2(*), Wa3(*), Wa4(*)
-  !***FIRST EXECUTABLE STATEMENT  RADB5
+  !* FIRST EXECUTABLE STATEMENT  RADB5
   pi = 4.*ATAN(1.)
   tr11 = SIN(.1*pi)
   ti11 = SIN(.4*pi)

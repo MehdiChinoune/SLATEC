@@ -1,13 +1,17 @@
-!DECK DPOPT
+!** DPOPT
 SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPOPT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DSPLP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (SPOPT-S, DPOPT-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DSPLP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (SPOPT-S, DPOPT-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     THE EDITING REQUIRED TO CONVERT THIS SUBROUTINE FROM SINGLE TO
   !     DOUBLE PRECISION INVOLVES THE FOLLOWING CHARACTER STRING CHANGES.
@@ -21,9 +25,12 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !     THIS SUBROUTINE PROCESSES THE OPTION VECTOR, PRGOPT(*),
   !     AND VALIDATES ANY MODIFIED DATA.
   !
-  !***SEE ALSO  DSPLP
-  !***ROUTINES CALLED  D1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DSPLP
+  !***
+  ! **Routines called:**  D1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   811215  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890605  Removed unreferenced labels.  (WRB)
@@ -31,7 +38,7 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Fixed an error message.  (RWC)
-  !***END PROLOGUE  DPOPT
+  
   INTEGER i, iadbig, ictmax, ictopt, idg, Info, iopt, ipagef, &
     isave, itbrc, itest, j, key, kprint, last, lds, lprg, &
     Mrelas, mxitlp, n20043
@@ -42,7 +49,7 @@ SUBROUTINE DPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   LOGICAL contin, usrbas, sizeup, savedt, colscp, cstscp, minprb, &
     stpedg, Lopt(8)
   !
-  !***FIRST EXECUTABLE STATEMENT  DPOPT
+  !* FIRST EXECUTABLE STATEMENT  DPOPT
   iopt = 1
   zero = 0.D0
   one = 1.D0

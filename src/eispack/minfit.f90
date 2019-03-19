@@ -1,15 +1,22 @@
-!DECK MINFIT
+!** MINFIT
 SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  MINFIT
-  !***PURPOSE  Compute the singular value decomposition of a rectangular
+  !>
+  !***
+  !  Compute the singular value decomposition of a rectangular
   !            matrix and solve the related linear least squares problem.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D9
-  !***TYPE      SINGLE PRECISION (MINFIT-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D9
+  !***
+  ! **Type:**      SINGLE PRECISION (MINFIT-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure MINFIT,
   !     NUM. MATH. 14, 403-420(1970) by Golub and Reinsch.
@@ -79,19 +86,22 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  PYTHAG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  PYTHAG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  MINFIT
+  
   !
   INTEGER i, j, k, l, M, N, ii, Ip, i1, kk, k1, ll, l1, m1, &
     Nm, its, Ierr
@@ -99,7 +109,7 @@ SUBROUTINE MINFIT(Nm,M,N,A,W,Ip,B,Ierr,Rv1)
   REAL c, f, g, h, s, x, y, z, scale, s1
   REAL PYTHAG
   !
-  !***FIRST EXECUTABLE STATEMENT  MINFIT
+  !* FIRST EXECUTABLE STATEMENT  MINFIT
   Ierr = 0
   !     .......... HOUSEHOLDER REDUCTION TO BIDIAGONAL FORM ..........
   g = 0.0E0

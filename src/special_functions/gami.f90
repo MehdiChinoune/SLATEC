@@ -1,14 +1,21 @@
-!DECK GAMI
+!** GAMI
 REAL FUNCTION GAMI(A,X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  GAMI
-  !***PURPOSE  Evaluate the incomplete Gamma function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7E
-  !***TYPE      SINGLE PRECISION (GAMI-S, DGAMI-D)
-  !***KEYWORDS  FNLIB, INCOMPLETE GAMMA FUNCTION, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Evaluate the incomplete Gamma function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7E
+  !***
+  ! **Type:**      SINGLE PRECISION (GAMI-S, DGAMI-D)
+  !***
+  ! **Keywords:**  FNLIB, INCOMPLETE GAMMA FUNCTION, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate the incomplete gamma function defined by
   !
@@ -19,17 +26,20 @@ REAL FUNCTION GAMI(A,X)
   ! when GAMI is very large or very small, because logarithmic variables
   ! are used.  GAMI, A, and X are single precision.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  ALNGAM, GAMIT, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  ALNGAM, GAMIT, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  GAMI
+  
   REAL A, ALNGAM, factor, GAMIT, X
-  !***FIRST EXECUTABLE STATEMENT  GAMI
+  !* FIRST EXECUTABLE STATEMENT  GAMI
   IF ( A<=0.0 ) CALL XERMSG('SLATEC','GAMI','A MUST BE GT ZERO',1,2)
   IF ( X<0.0 ) CALL XERMSG('SLATEC','GAMI','X MUST BE GE ZERO',2,2)
   !

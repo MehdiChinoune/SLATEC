@@ -1,15 +1,22 @@
-!DECK CGEDI
+!** CGEDI
 SUBROUTINE CGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CGEDI
-  !***PURPOSE  Compute the determinant and inverse of a matrix using the
+  !>
+  !***
+  !  Compute the determinant and inverse of a matrix using the
   !            factors computed by CGECO or CGEFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2C1, D3C1
-  !***TYPE      COMPLEX (SGEDI-S, DGEDI-D, CGEDI-C)
-  !***KEYWORDS  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2C1, D3C1
+  !***
+  ! **Type:**      COMPLEX (SGEDI-S, DGEDI-D, CGEDI-C)
+  !***
+  ! **Keywords:**  DETERMINANT, INVERSE, LINEAR ALGEBRA, LINPACK, MATRIX
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     CGEDI computes the determinant and inverse of a matrix
   !     using the factors computed by CGECO or CGEFA.
@@ -56,10 +63,13 @@ SUBROUTINE CGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   !        and if CGECO has set RCOND .GT. 0.0 or CGEFA has set
   !        INFO .EQ. 0 .
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  CAXPY, CSCAL, CSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CAXPY, CSCAL, CSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -67,7 +77,7 @@ SUBROUTINE CGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  CGEDI
+  
   INTEGER Lda, N, Ipvt(*), Job
   COMPLEX A(Lda,*), Det(2), Work(*)
   !
@@ -75,7 +85,7 @@ SUBROUTINE CGEDI(A,Lda,N,Ipvt,Det,Work,Job)
   REAL ten
   INTEGER i, j, k, kb, kp1, l, nm1
   REAL, EXTERNAL :: CABS1
-  !***FIRST EXECUTABLE STATEMENT  CGEDI
+  !* FIRST EXECUTABLE STATEMENT  CGEDI
   !
   !     COMPUTE DETERMINANT
   !

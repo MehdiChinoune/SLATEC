@@ -1,15 +1,19 @@
-!DECK DBVDER
+!** DBVDER
 SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBVDER
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBVSUP
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (BVDER-S, DBVDER-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBVSUP
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (BVDER-S, DBVDER-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     NFC = Number of base solution vectors
   !
   !     NCOMP = Number of components per solution vector
@@ -40,12 +44,16 @@ SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
   !             the first dependent variable for the initial value
   !             problem is in position  Y(NOFST + 1).
   !             See example in SAND77-1328.
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  DBVSUP
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    DML8SZ, DMLIVP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBVSUP
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    DML8SZ, DMLIVP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890921  Realigned order of variables in certain COMMON blocks.
@@ -55,23 +63,23 @@ SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
   !   910701  Corrected ROUTINES CALLED section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920618  Minor restructuring of code.  (RWC, WRB)
-  !***END PROLOGUE  DBVDER
+  
   INTEGER IGOfx, INHomo, Ipar, IVP, j, k, l, na, NCOmp, NFC, NOFst
   REAL(8) :: C, G(*), X, XSAv, Y(*), Yp(*)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   COMMON /DML8SZ/ C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     The COMMON block below is used to communicate with the user
   !     supplied subroutine DFMAT.  The user should not alter this
   !     COMMON block.
   !
   COMMON /DMLIVP/ NOFst
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***FIRST EXECUTABLE STATEMENT  DBVDER
+  !* FIRST EXECUTABLE STATEMENT  DBVDER
   IF ( IVP>0 ) CALL DUIVP(X,Y(IVP+1),Yp(IVP+1))
   NOFst = IVP
   na = 1

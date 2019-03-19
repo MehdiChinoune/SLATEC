@@ -1,25 +1,32 @@
-!DECK DQAGE
+!** DQAGE
 SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
     Alist,Blist,Rlist,Elist,Iord,Last)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQAGE
-  !***PURPOSE  The routine calculates an approximation result to a given
+  !>
+  !***
+  !  The routine calculates an approximation result to a given
   !            definite integral   I = Integral of F over (A,B),
   !            hopefully satisfying following claim for accuracy
   !            ABS(I-RESLT).LE.MAX(EPSABS,EPSREL*ABS(I)).
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A1A1
-  !***TYPE      DOUBLE PRECISION (QAGE-S, DQAGE-D)
-  !***KEYWORDS  AUTOMATIC INTEGRATOR, GAUSS-KRONROD RULES,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A1A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (QAGE-S, DQAGE-D)
+  !***
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, GAUSS-KRONROD RULES,
   !             GENERAL-PURPOSE, GLOBALLY ADAPTIVE, INTEGRAND EXAMINATOR,
   !             QUADPACK, QUADRATURE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Computation of a definite integral
   !        Standard fortran subroutine
@@ -146,16 +153,19 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   !                      Number of subintervals actually produced in the
   !                      subdivision process
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DQK15, DQK21, DQK31, DQK41, DQK51, DQK61,
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DQK15, DQK21, DQK31, DQK41, DQK51, DQK61,
   !                    DQPSRT
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DQAGE
+  
   !
   REAL(8) :: A, Abserr, Alist, area, area1, area12, area2, a1, &
     a2, B, Blist, b1, b2, defabs, defab1, defab2, &
@@ -197,7 +207,7 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   !           EPMACH  IS THE LARGEST RELATIVE SPACING.
   !           UFLOW  IS THE SMALLEST POSITIVE MAGNITUDE.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQAGE
+  !* FIRST EXECUTABLE STATEMENT  DQAGE
   epmach = D1MACH(4)
   uflow = D1MACH(1)
   !
@@ -336,7 +346,7 @@ SUBROUTINE DQAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
         !           WITH THE LARGEST ERROR ESTIMATE (TO BE BISECTED NEXT).
         !
         CALL DQPSRT(Limit,Last,maxerr,errmax,Elist,Iord,nrmax)
-        ! ***JUMP OUT OF DO-LOOP
+        !- **JUMP OUT OF DO-LOOP
         IF ( Ier/=0.OR.errsum<=errbnd ) EXIT
       ENDDO
       !

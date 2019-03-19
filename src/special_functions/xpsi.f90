@@ -1,16 +1,23 @@
-!DECK XPSI
+!** XPSI
 REAL FUNCTION XPSI(A,Ipsik,Ipsix)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XPSI
-  !***SUBSIDIARY
-  !***PURPOSE  To compute values of the Psi function for XLEGF.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C7C
-  !***TYPE      SINGLE PRECISION (XPSI-S, DXPSI-D)
-  !***KEYWORDS  PSI FUNCTION
-  !***AUTHOR  Smith, John M., (NBS and George Mason University)
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !>
+  !***
+  !  To compute values of the Psi function for XLEGF.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C7C
+  !***
+  ! **Type:**      SINGLE PRECISION (XPSI-S, DXPSI-D)
+  !***
+  ! **Keywords:**  PSI FUNCTION
+  !***
+  ! **Author:**  Smith, John M., (NBS and George Mason University)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820728  DATE WRITTEN
   !   890126  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
   !   901019  Revisions to prologue.  (DWL and WRB)
@@ -18,7 +25,7 @@ REAL FUNCTION XPSI(A,Ipsik,Ipsix)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  !***END PROLOGUE  XPSI
+  
   INTEGER i, Ipsik, Ipsix, k, k1, m, n
   REAL A, b, c, cnum, cdenom
   DIMENSION cnum(12), cdenom(12)
@@ -36,7 +43,7 @@ REAL FUNCTION XPSI(A,Ipsik,Ipsix)
     , cdenom(7), cdenom(8), cdenom(9), cdenom(10), cdenom(11), &
     cdenom(12)/12., 120., 252., 240., 132., 32760., 12., 8160., &
     14364., 6600., 276., 65520./
-  !***FIRST EXECUTABLE STATEMENT  XPSI
+  !* FIRST EXECUTABLE STATEMENT  XPSI
   n = MAX(0,Ipsix-INT(A))
   b = n + A
   k1 = Ipsik - 1

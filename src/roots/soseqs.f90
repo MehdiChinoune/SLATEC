@@ -1,20 +1,24 @@
-!DECK SOSEQS
+!** SOSEQS
 SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     Iprint,Fmax,C,Nc,B,P,Temp,X,Y,Fac,Is)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SOSEQS
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SOS
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (SOSEQS-S, DSOSEQ-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SOS
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (SOSEQS-S, DSOSEQ-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     SOSEQS solves a system of N simultaneous nonlinear equations.
   !     See the comments in the interfacing routine SOS for a more
   !     detailed description of some of the items in the calling list.
   !
-  ! ********************************************************************
+  !- *******************************************************************
   !
   !   -INPUT-
   !     FNC -Function subprogram which evaluates the equations
@@ -66,29 +70,32 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
   !          derivatives.
   !     IS  -Records the pivotal information (column interchanges)
   !
-  ! **********************************************************************
-  ! *** Three machine dependent parameters appear in this subroutine.
+  !- *********************************************************************
+  !- ** Three machine dependent parameters appear in this subroutine.
   !
-  ! *** The smallest positive magnitude, zero, is defined by the function
-  ! *** routine R1MACH(1).
+  !- ** The smallest positive magnitude, zero, is defined by the function
+  !- ** routine R1MACH(1).
   !
-  ! *** URO, The computer unit roundoff value, is defined by R1MACH(3) for
-  ! *** machines that round or R1MACH(4) for machines that truncate.
-  ! *** URO is the smallest positive number such that 1.+URO  .GT.  1.
+  !- ** URO, The computer unit roundoff value, is defined by R1MACH(3) for
+  !- ** machines that round or R1MACH(4) for machines that truncate.
+  !- ** URO is the smallest positive number such that 1.+URO  .GT.  1.
   !
-  ! *** The output tape unit number, LOUN, is defined by the function
-  ! *** I1MACH(2).
-  ! **********************************************************************
+  !- ** The output tape unit number, LOUN, is defined by the function
+  !- ** I1MACH(2).
+  !- *********************************************************************
   !
-  !***SEE ALSO  SOS
-  !***ROUTINES CALLED  I1MACH, R1MACH, SOSSOL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SOS
+  !***
+  ! **Routines called:**  I1MACH, R1MACH, SOSSOL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   801001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  SOSEQS
+  
   REAL Atolx, B, C, csv, f, Fac, fact, fdif, Fmax, fmin, fmxs, &
     fn1, fn2, FNC, fp, h, hx, P, pmax, R1MACH
   REAL re, Rtolx, S, sruro, Temp, test, Tolf, uro, X, xnorm, Y, &
@@ -97,7 +104,7 @@ SUBROUTINE SOSEQS(FNC,N,S,Rtolx,Atolx,Tolf,Iflag,Mxit,Ncjs,Nsrrc,Nsri,&
     itry, j, jk, js, k, kd, kj, kk, km1, kn
   INTEGER ksv, l, loun, ls, m, mit, mm, Mxit, N, Nc, Ncjs, np1, Nsri, Nsrrc
   DIMENSION S(*), C(Nc), B(*), Is(*), P(*), Temp(*), X(*), Y(*), Fac(*)
-  !***FIRST EXECUTABLE STATEMENT  SOSEQS
+  !* FIRST EXECUTABLE STATEMENT  SOSEQS
   uro = R1MACH(4)
   loun = I1MACH(2)
   zero = R1MACH(1)

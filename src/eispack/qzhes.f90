@@ -1,18 +1,25 @@
-!DECK QZHES
+!** QZHES
 SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QZHES
-  !***PURPOSE  The first step of the QZ algorithm for solving generalized
+  !>
+  !***
+  !  The first step of the QZ algorithm for solving generalized
   !            matrix eigenproblems.  Accepts a pair of real general
   !            matrices and reduces one of them to upper Hessenberg
   !            and the other to upper triangular form using orthogonal
   !            transformations. Usually followed by QZIT, QZVAL, QZVEC.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C1B3
-  !***TYPE      SINGLE PRECISION (QZHES-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C1B3
+  !***
+  ! **Type:**      SINGLE PRECISION (QZHES-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is the first step of the QZ algorithm
   !     for solving generalized matrix eigenvalue problems,
@@ -59,18 +66,21 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  QZHES
+  
   !
   INTEGER i, j, k, l, N, lb, l1, Nm, nk1, nm1, nm2
   REAL A(Nm,*), B(Nm,*), Z(Nm,*)
@@ -78,7 +88,7 @@ SUBROUTINE QZHES(Nm,N,A,B,Matz,Z)
   LOGICAL Matz
   !
   !     .......... INITIALIZE Z ..........
-  !***FIRST EXECUTABLE STATEMENT  QZHES
+  !* FIRST EXECUTABLE STATEMENT  QZHES
   IF ( Matz ) THEN
     !
     DO i = 1, N

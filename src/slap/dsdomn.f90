@@ -1,25 +1,32 @@
-!DECK DSDOMN
+!** DSDOMN
 SUBROUTINE DSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     Ierr,Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSDOMN
-  !***PURPOSE  Diagonally Scaled Orthomin Sparse Iterative Ax=b Solver.
+  !>
+  !***
+  !  Diagonally Scaled Orthomin Sparse Iterative Ax=b Solver.
   !            Routine to solve a general linear system  Ax = b  using
   !            the Orthomin method with diagonal scaling.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      DOUBLE PRECISION (SSDOMN-S, DSDOMN-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM SOLVE,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSDOMN-S, DSDOMN-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM SOLVE,
   !             SLAP, SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM, NSAVE, ITOL, ITMAX
   !     INTEGER ITER, IERR, IUNIT, LENW, IWORK(10), LENIW
   !     DOUBLE PRECISION B(N), X(N), A(NELT), TOL, ERR
@@ -28,7 +35,7 @@ SUBROUTINE DSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !     CALL DSDOMN(N, B, X, NELT, IA, JA, A, ISYM, NSAVE, ITOL, TOL,
   !    $     ITMAX, ITER, ERR, IERR, IUNIT, RWORK, LENW, IWORK, LENIW )
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the Matrix.
   ! B      :IN       Double Precision B(N).
@@ -107,7 +114,7 @@ SUBROUTINE DSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   ! LENIW  :IN       Integer.
   !         Length of the integer workspace, IWORK.  LENIW >= 10.
   !
-  ! *Description:
+  !- Description:
   !       This routine  is simply a driver  for  the DOMN routine.  It
   !       calls the DSDS  routine  to set  up the  preconditioning and
   !       then   calls DOMN with the   appropriate   MATVEC and MSOLVE
@@ -176,21 +183,25 @@ SUBROUTINE DSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Side Effects:
+  !- Side Effects:
   !       The SLAP Triad format (IA, JA, A)  is modified internally to
   !       be the SLAP Column format.  See above.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  DOMN, DSLUOM
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  DCHKW, DOMN, DS2Y, DSDI, DSDS, DSMV
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DOMN, DSLUOM
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  DCHKW, DOMN, DS2Y, DSDI, DSDS, DSMV
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -202,7 +213,7 @@ SUBROUTINE DSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !   920407  COMMON BLOCK renamed DSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  !***END PROLOGUE  DSDOMN
+  
   !     .. Parameters ..
   INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
@@ -218,7 +229,7 @@ SUBROUTINE DSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     locw, locz
   !     .. External Subroutines ..
   EXTERNAL DCHKW, DOMN, DS2Y, DSDI, DSDS, DSMV
-  !***FIRST EXECUTABLE STATEMENT  DSDOMN
+  !* FIRST EXECUTABLE STATEMENT  DSDOMN
   !
   Ierr = 0
   IF ( N<1.OR.Nelt<1 ) THEN

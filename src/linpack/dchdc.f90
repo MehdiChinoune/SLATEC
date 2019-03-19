@@ -1,19 +1,26 @@
-!DECK DCHDC
+!** DCHDC
 SUBROUTINE DCHDC(A,Lda,P,Work,Jpvt,Job,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DCHDC
-  !***PURPOSE  Compute the Cholesky decomposition of a positive definite
+  !>
+  !***
+  !  Compute the Cholesky decomposition of a positive definite
   !            matrix.  A pivoting option allows the user to estimate the
   !            condition number of a positive definite matrix or determine
   !            the rank of a positive semidefinite matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B1B
-  !***TYPE      DOUBLE PRECISION (SCHDC-S, DCHDC-D, CCHDC-C)
-  !***KEYWORDS  CHOLESKY DECOMPOSITION, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B1B
+  !***
+  ! **Type:**      DOUBLE PRECISION (SCHDC-S, DCHDC-D, CCHDC-C)
+  !***
+  ! **Keywords:**  CHOLESKY DECOMPOSITION, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             POSITIVE DEFINITE
-  !***AUTHOR  Dongarra, J., (ANL)
+  !***
+  ! **Author:**  Dongarra, J., (ANL)
   !           Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     DCHDC computes the Cholesky decomposition of a positive definite
   !     matrix.  A pivoting option allows the user to estimate the
@@ -85,10 +92,13 @@ SUBROUTINE DCHDC(A,Lda,P,Work,Jpvt,Job,Info)
   !     element to be positive.  Indefinite systems will always cause
   !     INFO to be less than P.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  DAXPY, DSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DAXPY, DSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790319  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -97,7 +107,7 @@ SUBROUTINE DCHDC(A,Lda,P,Work,Jpvt,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DCHDC
+  
   INTEGER Lda, P, Jpvt(*), Job, Info
   REAL(8) :: A(Lda,*), Work(*)
   !
@@ -105,7 +115,7 @@ SUBROUTINE DCHDC(A,Lda,P,Work,Jpvt,Job,Info)
   REAL(8) :: temp
   REAL(8) :: maxdia
   LOGICAL swapk, negk
-  !***FIRST EXECUTABLE STATEMENT  DCHDC
+  !* FIRST EXECUTABLE STATEMENT  DCHDC
   pl = 1
   pu = 0
   Info = P

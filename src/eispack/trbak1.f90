@@ -1,16 +1,23 @@
-!DECK TRBAK1
+!** TRBAK1
 SUBROUTINE TRBAK1(Nm,N,A,E,M,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TRBAK1
-  !***PURPOSE  Form the eigenvectors of real symmetric matrix from
+  !>
+  !***
+  !  Form the eigenvectors of real symmetric matrix from
   !            the eigenvectors of a symmetric tridiagonal matrix formed
   !            by TRED1.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C4
-  !***TYPE      SINGLE PRECISION (TRBAK1-S)
-  !***KEYWORDS  EIGENVECTORS OF A REAL SYMMETRIC MATRIX, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C4
+  !***
+  ! **Type:**      SINGLE PRECISION (TRBAK1-S)
+  !***
+  ! **Keywords:**  EIGENVECTORS OF A REAL SYMMETRIC MATRIX, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is a translation of the ALGOL procedure TRBAK1,
   !     NUM. MATH. 11, 181-195(1968) by Martin, Reinsch, and Wilkinson.
@@ -57,24 +64,27 @@ SUBROUTINE TRBAK1(Nm,N,A,E,M,Z)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  TRBAK1
+  
   !
   INTEGER i, j, k, l, M, N, Nm
   REAL A(Nm,*), E(*), Z(Nm,*)
   REAL s
   !
-  !***FIRST EXECUTABLE STATEMENT  TRBAK1
+  !* FIRST EXECUTABLE STATEMENT  TRBAK1
   IF ( M/=0 ) THEN
     IF ( N/=1 ) THEN
       !

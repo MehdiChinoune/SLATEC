@@ -1,17 +1,24 @@
-!DECK ZAIRY
+!** ZAIRY
 SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZAIRY
-  !***PURPOSE  Compute the Airy function Ai(z) or its derivative dAi/dz
+  !>
+  !***
+  !  Compute the Airy function Ai(z) or its derivative dAi/dz
   !            for complex argument z.  A scaling option is available
   !            to help avoid underflow and overflow.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10D
-  !***TYPE      COMPLEX (CAIRY-C, ZAIRY-C)
-  !***KEYWORDS  AIRY FUNCTION, BESSEL FUNCTION OF ORDER ONE THIRD,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10D
+  !***
+  ! **Type:**      COMPLEX (CAIRY-C, ZAIRY-C)
+  !***
+  ! **Keywords:**  AIRY FUNCTION, BESSEL FUNCTION OF ORDER ONE THIRD,
   !             BESSEL FUNCTION OF ORDER TWO THIRDS
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !                      ***A DOUBLE PRECISION ROUTINE***
   !         On KODE=1, ZAIRY computes the complex Airy function Ai(z)
@@ -58,7 +65,7 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
   !                    IERR=5  Algorithmic error - NO COMPUTATION
   !                            (Termination condition not met)
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !         Ai(z) and dAi/dz are computed from K Bessel functions by
   !
@@ -111,7 +118,8 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
   !         the principal phase angle is on the order of +P, -P, PI/2-P,
   !         or -PI/2+P.
   !
-  !***REFERENCES  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
+  !***
+  ! **References:**  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
   !                 matical Functions, National Bureau of Standards
   !                 Applied Mathematics Series 55, U. S. Department
   !                 of Commerce, Tenth Printing (1972) or later.
@@ -128,15 +136,17 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
   !                 Transactions on Mathematical Software, 12 (September
   !                 1986), pp. 265-273.
   !
-  !***ROUTINES CALLED  D1MACH, I1MACH, ZABS, ZACAI, ZBKNU, ZEXP, ZSQRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  D1MACH, I1MACH, ZABS, ZACAI, ZBKNU, ZEXP, ZSQRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   890801  REVISION DATE from Version 3.2
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
   !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
-  !***END PROLOGUE  ZAIRY
+  
   !     COMPLEX AI,CONE,CSQ,CY,S1,S2,TRM1,TRM2,Z,ZTA,Z3
   REAL(8) :: aa, ad, Aii, Air, ak, alim, atrm, az, az3, bk, &
     cc, ck, coef, conei, coner, csqi, csqr, cyi, &
@@ -152,7 +162,7 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
     3.55028053887817240D-01, 2.58819403792806799D-01, &
     1.83776298473930683D-01/
   DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
-  !***FIRST EXECUTABLE STATEMENT  ZAIRY
+  !* FIRST EXECUTABLE STATEMENT  ZAIRY
   Ierr = 0
   Nz = 0
   IF ( Id<0.OR.Id>1 ) Ierr = 1

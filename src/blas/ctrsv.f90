@@ -1,17 +1,24 @@
-!DECK CTRSV
+!** CTRSV
 SUBROUTINE CTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CTRSV
-  !***PURPOSE  Solve a complex triangular system of equations.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B4
-  !***TYPE      COMPLEX (STRSV-S, DTRSV-D, CTRSV-C)
-  !***KEYWORDS  LEVEL 2 BLAS, LINEAR ALGEBRA
-  !***AUTHOR  Dongarra, J. J., (ANL)
+  !>
+  !***
+  !  Solve a complex triangular system of equations.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B4
+  !***
+  ! **Type:**      COMPLEX (STRSV-S, DTRSV-D, CTRSV-C)
+  !***
+  ! **Keywords:**  LEVEL 2 BLAS, LINEAR ALGEBRA
+  !***
+  ! **Author:**  Dongarra, J. J., (ANL)
   !           Du Croz, J., (NAG)
   !           Hammarling, S., (NAG)
   !           Hanson, R. J., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !  CTRSV  solves one of the systems of equations
   !
@@ -94,16 +101,19 @@ SUBROUTINE CTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   !           X. INCX must not be zero.
   !           Unchanged on exit.
   !
-  !***REFERENCES  Dongarra, J. J., Du Croz, J., Hammarling, S., and
+  !***
+  ! **References:**  Dongarra, J. J., Du Croz, J., Hammarling, S., and
   !                 Hanson, R. J.  An extended set of Fortran basic linear
   !                 algebra subprograms.  ACM TOMS, Vol. 14, No. 1,
   !                 pp. 1-17, March 1988.
-  !***ROUTINES CALLED  LSAME, XERBLA
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  LSAME, XERBLA
+
+  !* REVISION HISTORY  (YYMMDD)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  !***END PROLOGUE  CTRSV
+  
   !     .. Scalar Arguments ..
   INTEGER Incx, Lda, N
   CHARACTER :: Diag, Trans, Uplo
@@ -123,7 +133,7 @@ SUBROUTINE CTRSV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   EXTERNAL XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX
-  !***FIRST EXECUTABLE STATEMENT  CTRSV
+  !* FIRST EXECUTABLE STATEMENT  CTRSV
   !
   !     Test the input parameters.
   !

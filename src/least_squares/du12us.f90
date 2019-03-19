@@ -1,13 +1,17 @@
-!DECK DU12US
+!** DU12US
 SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DU12US
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DULSIA
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (U12US-S, DU12US-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DULSIA
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (U12US-S, DU12US-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !        Given the Householder LQ factorization of A, this
   !        subroutine solves the system AX=B. If the system
@@ -16,22 +20,25 @@ SUBROUTINE DU12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   !
   !       Note - If MODE.NE.2, W is never accessed.
   !
-  !***SEE ALSO  DULSIA
-  !***ROUTINES CALLED  DAXPY, DDOT, DNRM2, DSWAP
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DULSIA
+  !***
+  ! **Routines called:**  DAXPY, DDOT, DNRM2, DSWAP
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DU12US
+  
   REAL(8) :: A, B, bb, H, Rnorm, tt, W
   INTEGER i, ij, ip1, j, jb, k, kp1, Krank, M, Mda, Mdb, mmk, &
     Mode, N, Nb
   REAL(8) :: DDOT, DNRM2
   DIMENSION A(Mda,*), B(Mdb,*), Rnorm(*), H(*), W(*)
   INTEGER Ic(*), Ir(*)
-  !***FIRST EXECUTABLE STATEMENT  DU12US
+  !* FIRST EXECUTABLE STATEMENT  DU12US
   k = Krank
   kp1 = k + 1
   !

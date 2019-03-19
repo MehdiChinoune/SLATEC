@@ -1,28 +1,34 @@
-!DECK SPIGMR
+!** SPIGMR
 SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     MSOLVE,Nmsl,Z,V,Hes,Q,Lgmr,Rpar,Ipar,Wk,Dl,Rhol,Nrmax,B,&
     Bnrm,X,Xl,Itol,Tol,Nelt,Ia,Ja,A,Isym,Iunit,Iflag,Err)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPIGMR
-  !***SUBSIDIARY
-  !***PURPOSE  Internal routine for SGMRES.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (SPIGMR-S, DPIGMR-D)
-  !***KEYWORDS  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
+  !>
+  !***
+  !  Internal routine for SGMRES.
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SPIGMR-S, DPIGMR-D)
+  !***
+  ! **Keywords:**  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
   !             NON-SYMMETRIC LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Brown, Peter, (LLNL), pnbrown@llnl.gov
+  !***
+  ! **Author:**  Brown, Peter, (LLNL), pnbrown@llnl.gov
   !           Hindmarsh, Alan, (LLNL), alanh@llnl.gov
   !           Seager, Mark K., (LLNL), seager@llnl.gov
   !             Lawrence Livermore National Laboratory
   !             PO Box 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !         This routine solves the linear system A * Z = R0 using a
   !         scaled preconditioned version of the generalized minimum
   !         residual method.  An initial guess of Z = 0 is assumed.
   !
-  ! *Usage:
+  !- Usage:
   !      INTEGER N, JSCAL, MAXL, MAXLP1, KMP, NRSTS, JPRE, NMSL, LGMR
   !      INTEGER IPAR(USER DEFINED), NRMAX, ITOL, NELT, IA(NELT), JA(NELT)
   !      INTEGER ISYM, IUNIT, IFLAG
@@ -36,7 +42,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !     $     RPAR, IPAR, WK, DL, RHOL, NRMAX, B, BNRM, X, XL,
   !     $     ITOL, TOL, NELT, IA, JA, A, ISYM, IUNIT, IFLAG, ERR)
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         The order of the matrix A, and the lengths
   !         of the vectors SR, SZ, R0 and Z.
@@ -185,17 +191,20 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !         Error estimate of error in final approximate solution, as
   !         defined by ITOL.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  SGMRES
-  !***ROUTINES CALLED  ISSGMR, SAXPY, SCOPY, SHELS, SHEQR, SNRM2, SORTH,
+  !***
+  ! **See also:**  SGMRES
+  !***
+  ! **Routines called:**  ISSGMR, SAXPY, SCOPY, SHELS, SHEQR, SNRM2, SORTH,
   !                    SRLCAL, SSCAL
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871001  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -206,7 +215,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !   910502  Removed MATVEC and MSOLVE from ROUTINES CALLED list.  (FNF)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  !***END PROLOGUE  SPIGMR
+  
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -230,7 +239,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   EXTERNAL SAXPY, SCOPY, SHELS, SHEQR, SORTH, SRLCAL, SSCAL
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
-  !***FIRST EXECUTABLE STATEMENT  SPIGMR
+  !* FIRST EXECUTABLE STATEMENT  SPIGMR
   !
   !         Zero out the Z array.
   !

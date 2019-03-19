@@ -1,33 +1,41 @@
-!DECK HKSEQ
+!** HKSEQ
 SUBROUTINE HKSEQ(X,M,H,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  HKSEQ
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BSKIN
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (HKSEQ-S, DHKSEQ-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BSKIN
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (HKSEQ-S, DHKSEQ-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !   HKSEQ is an adaptation of subroutine PSIFN described in the
   !   reference below.  HKSEQ generates the sequence
   !   H(K,X) = (-X)**(K+1)*(PSI(K,X) PSI(K,X+0.5))/GAMMA(K+1), for
   !            K=0,...,M.
   !
-  !***SEE ALSO  BSKIN
-  !***REFERENCES  D. E. Amos, A portable Fortran subroutine for
+  !***
+  ! **See also:**  BSKIN
+  !***
+  ! **References:**  D. E. Amos, A portable Fortran subroutine for
   !                 derivatives of the Psi function, Algorithm 610, ACM
   !                 Transactions on Mathematical Software 9, 4 (1983),
   !                 pp. 494-502.
-  !***ROUTINES CALLED  I1MACH, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  I1MACH, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  !***END PROLOGUE  HKSEQ
+  
   INTEGER i, Ierr, j, k, M, mx, nx
   INTEGER I1MACH
   REAL b, fk, fln, fn, fnp, H, hrx, rln, rxsq, r1m5, s, slope, &
@@ -54,7 +62,7 @@ SUBROUTINE HKSEQ(X,M,H,Ierr)
     -2.74233104097776039E+13, 9.76664637943633248E+14, &
     -3.85931586838450360E+16/
   !
-  !***FIRST EXECUTABLE STATEMENT  HKSEQ
+  !* FIRST EXECUTABLE STATEMENT  HKSEQ
   Ierr = 0
   wdtol = MAX(R1MACH(4),1.0E-18)
   fn = M - 1

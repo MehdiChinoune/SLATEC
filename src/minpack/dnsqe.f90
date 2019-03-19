@@ -1,17 +1,24 @@
-!DECK DNSQE
+!** DNSQE
 SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DNSQE
-  !***PURPOSE  An easy-to-use code to find a zero of a system of N
+  !>
+  !***
+  !  An easy-to-use code to find a zero of a system of N
   !            nonlinear functions in N variables by a modification of
   !            the Powell hybrid method.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  F2A
-  !***TYPE      DOUBLE PRECISION (SNSQE-S, DNSQE-D)
-  !***KEYWORDS  EASY-TO-USE, NONLINEAR SQUARE SYSTEM,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  F2A
+  !***
+  ! **Type:**      DOUBLE PRECISION (SNSQE-S, DNSQE-D)
+  !***
+  ! **Keywords:**  EASY-TO-USE, NONLINEAR SQUARE SYSTEM,
   !             POWELL HYBRID METHOD, ZEROS
-  !***AUTHOR  Hiebert, K. L. (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Hiebert, K. L. (SNLA)
+  !***
+  ! **Description:**
   !
   ! 1. Purpose.
   !
@@ -238,7 +245,7 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !         storage locations, in addition to the storage required by the
   !         program.  There are no internally declared storage arrays.
   !
-  ! *Long Description:
+  !- Long Description:
   !
   ! 7. Example.
   !
@@ -319,12 +326,15 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !       -0.7042129E+00 -0.7013690E+00 -0.6918656E+00
   !       -0.6657920E+00 -0.5960342E+00 -0.4164121E+00
   !
-  !***REFERENCES  M. J. D. Powell, A hybrid method for nonlinear equa-
+  !***
+  ! **References:**  M. J. D. Powell, A hybrid method for nonlinear equa-
   !                 tions. In Numerical Methods for Nonlinear Algebraic
   !                 Equations, P. Rabinowitz, Editor.  Gordon and Breach,
   !                 1988.
-  !***ROUTINES CALLED  DNSQ, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DNSQ, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -332,7 +342,7 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DNSQE
+  
   INTEGER index, Info, Iopt, j, lr, Lwa, maxfev, ml, mode, mu, N, &
     nfev, njev, Nprint
   REAL(8) :: epsfcn, factor, Fvec(*), one, Tol, Wa(*), X(*), &
@@ -341,7 +351,7 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   SAVE factor, one, zero
   DATA factor, one, zero/1.0D2, 1.0D0, 0.0D0/
   !     BEGIN BLOCK PERMITTING ...EXITS TO 20
-  !***FIRST EXECUTABLE STATEMENT  DNSQE
+  !* FIRST EXECUTABLE STATEMENT  DNSQE
   Info = 0
   !
   !        CHECK THE INPUT PARAMETERS FOR ERRORS.

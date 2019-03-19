@@ -1,21 +1,29 @@
-!DECK DPJAC
+!** DPJAC
 SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DPJAC
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DDEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (PJAC-S, DPJAC-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DDEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (PJAC-S, DPJAC-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   DPJAC sets up the iteration matrix (involving the Jacobian) for the
   !   integration package DDEBDF.
   !
-  !***SEE ALSO  DDEBDF
-  !***ROUTINES CALLED  DGBFA, DGEFA, DVNRMS
-  !***COMMON BLOCKS    DDEBD1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DDEBDF
+  !***
+  ! **Routines called:**  DGBFA, DGEFA, DVNRMS
+  !***
+  ! COMMON BLOCKS    DDEBD1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
@@ -23,7 +31,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-  !***END PROLOGUE  DPJAC
+  
   !
   INTEGER i, i1, i2, IER, ii, IOWnd, IOWns, Ipar, Iwm, j, j1, &
     jj, JSTart, KFLag, L, lenp, MAXord, mba, mband, meb1, &
@@ -77,7 +85,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   !        BEGIN BLOCK PERMITTING ...EXITS TO 220
   !           BEGIN BLOCK PERMITTING ...EXITS TO 130
   !              BEGIN BLOCK PERMITTING ...EXITS TO 70
-  !***FIRST EXECUTABLE STATEMENT  DPJAC
+  !* FIRST EXECUTABLE STATEMENT  DPJAC
   NJE = NJE + 1
   hl0 = H*EL0
   SELECT CASE (MITer)

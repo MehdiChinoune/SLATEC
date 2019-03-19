@@ -1,17 +1,24 @@
-!DECK CAIRY
+!** CAIRY
 SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CAIRY
-  !***PURPOSE  Compute the Airy function Ai(z) or its derivative dAi/dz
+  !>
+  !***
+  !  Compute the Airy function Ai(z) or its derivative dAi/dz
   !            for complex argument z.  A scaling option is available
   !            to help avoid underflow and overflow.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C10D
-  !***TYPE      COMPLEX (CAIRY-C, ZAIRY-C)
-  !***KEYWORDS  AIRY FUNCTION, BESSEL FUNCTION OF ORDER ONE THIRD,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C10D
+  !***
+  ! **Type:**      COMPLEX (CAIRY-C, ZAIRY-C)
+  !***
+  ! **Keywords:**  AIRY FUNCTION, BESSEL FUNCTION OF ORDER ONE THIRD,
   !             BESSEL FUNCTION OF ORDER TWO THIRDS
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !         On KODE=1, CAIRY computes the complex Airy function Ai(z)
   !         or its derivative dAi/dz on ID=0 or ID=1 respectively. On
@@ -55,7 +62,7 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   !                    IERR=5  Algorithmic error - NO COMPUTATION
   !                            (Termination condition not met)
   !
-  ! *Long Description:
+  !- Long Description:
   !
   !         Ai(z) and dAi/dz are computed from K Bessel functions by
   !
@@ -107,7 +114,8 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   !         the principal phase angle is on the order of +P, -P, PI/2-P,
   !         or -PI/2+P.
   !
-  !***REFERENCES  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
+  !***
+  ! **References:**  1. M. Abramowitz and I. A. Stegun, Handbook of Mathe-
   !                 matical Functions, National Bureau of Standards
   !                 Applied Mathematics Series 55, U. S. Department
   !                 of Commerce, Tenth Printing (1972) or later.
@@ -124,14 +132,16 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   !                 Transactions on Mathematical Software, 12 (September
   !                 1986), pp. 265-273.
   !
-  !***ROUTINES CALLED  CACAI, CBKNU, I1MACH, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  CACAI, CBKNU, I1MACH, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   890801  REVISION DATE from Version 3.2
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  !***END PROLOGUE  CAIRY
+  
   COMPLEX Ai, cone, csq, cy, s1, s2, trm1, trm2, Z, zta, z3
   REAL aa, ad, ak, alim, atrm, az, az3, bk, ck, coef, c1, c2, &
     dig, dk, d1, d2, elim, fid, fnu, rl, r1m5, sfac, tol, &
@@ -142,7 +152,7 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
     3.55028053887817240E-01, 2.58819403792806799E-01, &
     1.83776298473930683E-01/
   DATA cone/(1.0E0,0.0E0)/
-  !***FIRST EXECUTABLE STATEMENT  CAIRY
+  !* FIRST EXECUTABLE STATEMENT  CAIRY
   Ierr = 0
   Nz = 0
   IF ( Id<0.OR.Id>1 ) Ierr = 1

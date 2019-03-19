@@ -1,14 +1,18 @@
-!DECK D1MERG
+!** D1MERG
 SUBROUTINE D1MERG(Tcos,I1,M1,I2,M2,I3)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  D1MERG
-  !***SUBSIDIARY
-  !***PURPOSE  Merge two strings of ascending double precision numbers.
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (S1MERG-S, D1MERG-D, CMERGE-C, I1MERG-I)
-  !***AUTHOR  Boland, W. Robert, (LANL)
+  !>
+  !***
+  !  Merge two strings of ascending double precision numbers.
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (S1MERG-S, D1MERG-D, CMERGE-C, I1MERG-I)
+  !***
+  ! **Author:**  Boland, W. Robert, (LANL)
   !           Clemens, Reginald, (PLK)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !   This subroutine merges two ascending strings of numbers in the
   !   array TCOS.  The first string is of length M1 and starts at
@@ -18,16 +22,18 @@ SUBROUTINE D1MERG(Tcos,I1,M1,I2,M2,I3)
   !   This routine is currently unused, but was added to complete
   !   the set of routines S1MERG and C1MERG (both of which are used).
   !
-  !***ROUTINES CALLED  DCOPY
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DCOPY
+
+  !* REVISION HISTORY  (YYMMDD)
   !   910819  DATE WRITTEN
-  !***END PROLOGUE  D1MERG
+  
   INTEGER I1, I2, I3, M1, M2
   REAL(8) :: Tcos(*)
   !
   INTEGER j1, j2, j3
   !
-  !***FIRST EXECUTABLE STATEMENT  D1MERG
+  !* FIRST EXECUTABLE STATEMENT  D1MERG
   IF ( M1==0.AND.M2==0 ) RETURN
   !
   IF ( M1==0.AND.M2/=0 ) THEN

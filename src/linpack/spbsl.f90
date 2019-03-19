@@ -1,16 +1,23 @@
-!DECK SPBSL
+!** SPBSL
 SUBROUTINE SPBSL(Abd,Lda,N,M,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPBSL
-  !***PURPOSE  Solve a real symmetric positive definite band system
+  !>
+  !***
+  !  Solve a real symmetric positive definite band system
   !            using the factors computed by SPBCO or SPBFA.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B2
-  !***TYPE      SINGLE PRECISION (SPBSL-S, DPBSL-D, CPBSL-C)
-  !***KEYWORDS  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B2
+  !***
+  ! **Type:**      SINGLE PRECISION (SPBSL-S, DPBSL-D, CPBSL-C)
+  !***
+  ! **Keywords:**  BANDED, LINEAR ALGEBRA, LINPACK, MATRIX,
   !             POSITIVE DEFINITE, SOLVE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     SPBSL solves the real symmetric positive definite band
   !     system  A*X = B
@@ -53,10 +60,13 @@ SUBROUTINE SPBSL(Abd,Lda,N,M,B)
   !              CALL SPBSL(ABD,LDA,N,C(1,J))
   !        10 CONTINUE
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SAXPY, SDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SAXPY, SDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -65,7 +75,7 @@ SUBROUTINE SPBSL(Abd,Lda,N,M,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SPBSL
+  
   INTEGER Lda, N, M
   REAL Abd(Lda,*), B(*)
   !
@@ -74,7 +84,7 @@ SUBROUTINE SPBSL(Abd,Lda,N,M,B)
   !
   !     SOLVE TRANS(R)*Y = B
   !
-  !***FIRST EXECUTABLE STATEMENT  SPBSL
+  !* FIRST EXECUTABLE STATEMENT  SPBSL
   DO k = 1, N
     lm = MIN(k-1,M)
     la = M + 1 - lm

@@ -1,21 +1,28 @@
-!DECK BVSUP
+!** BVSUP
 SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Igofx,Re,Ae,Iflag,Work,Ndw,Iwork,Ndiw,Neqivp)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BVSUP
-  !***PURPOSE  Solve a linear two-point boundary value problem using
+  !>
+  !***
+  !  Solve a linear two-point boundary value problem using
   !            superposition coupled with an orthonormalization procedure
   !            and a variable-step integration scheme.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  I1B1
-  !***TYPE      SINGLE PRECISION (BVSUP-S, DBVSUP-D)
-  !***KEYWORDS  ORTHONORMALIZATION, SHOOTING,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  I1B1
+  !***
+  ! **Type:**      SINGLE PRECISION (BVSUP-S, DBVSUP-D)
+  !***
+  ! **Keywords:**  ORTHONORMALIZATION, SHOOTING,
   !             TWO-POINT BOUNDARY VALUE PROBLEM
-  !***AUTHOR  Scott, M. R., (SNLA)
+  !***
+  ! **Author:**  Scott, M. R., (SNLA)
   !           Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     Subroutine BVSUP solves a LINEAR two-point boundary-value problem
   !     of the form
   !                        dY/dX = MATRIX(X,U)*Y(X) + G(X,U)
@@ -26,7 +33,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !                        dU/dX = F(X,U)
   !                      U(Xinitial) = ETA
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     Abstract
   !        The method of solution uses superposition coupled with an
   !     orthonormalization procedure and a variable-step integration
@@ -37,9 +44,9 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     intermediate (orthogonalized) solutions, defined on the various
   !     subintervals, to obtain the desired solutions.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     INPUT to BVSUP
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     NROWY = Actual row dimension of Y in calling program.
   !             NROWY must be .GE. NCOMP
@@ -89,7 +96,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !
   !     AE = Absolute error tolerance used by the integrator
   !          (see one of the integrators)
-  ! **NOTE-  RE and AE should not both be zero.
+  !- *NOTE-  RE and AE should not both be zero.
   !
   !     IFLAG = A status parameter used principally for output.
   !             However, for efficient solution of problems which
@@ -117,7 +124,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !            An estimate for NDIW can be computed from the following
   !            NDIW = 68 + NCOMP * (1 + expected number of
   !                                        orthonormalizations)
-  ! **NOTE --  The amount of storage required is problem dependent and may
+  !- *NOTE --  The amount of storage required is problem dependent and may
   !            be difficult to predict in advance. Experience has shown
   !            that for most problems 20 or fewer orthonormalizations
   !            should suffice. If the problem cannot be completed with the
@@ -128,7 +135,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !
   !     NEQIVP = Number of auxiliary initial value equations being added
   !              to the boundary value problem.
-  ! **NOTE -- Occasionally the coefficients  MATRIX  and/or  G  may be
+  !- *NOTE -- Occasionally the coefficients  MATRIX  and/or  G  may be
   !           functions which depend on the independent variable  X  and
   !           on  U, the solution of an auxiliary initial value problem.
   !           In order to avoid the difficulties associated with
@@ -226,7 +233,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     flexibility in use of the code.  See SAND75-0198, SAND77-1328 ,
   !     SAND77-1690,SAND78-0522, and SAND78-1501 for more information.
   !
-  ! ****CAUTION -- The user MUST zero out IWORK(1),...,IWORK(15)
+  !- ***CAUTION -- The user MUST zero out IWORK(1),...,IWORK(15)
   !                prior to calling BVSUP. These locations define optional
   !                input and MUST be zero UNLESS set to special values by
   !                the user as described below.
@@ -262,7 +269,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !                 ******************************
   !                 *** COMPLEX VALUED PROBLEM ***
   !                 ******************************
-  ! **NOTE***
+  !- *NOTE***
   !       Suppose the original boundary value problem is NC equations
   !     of the form
   !                   dW/dX = MAT(X,U)*W(X) + H(X,U)
@@ -284,9 +291,9 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     similarly. Further details can be found in SAND78-1501.
   !
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     OUTPUT from BVSUP
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     Y(NROWY,NXPTS) = Solution at specified output points.
   !
@@ -356,15 +363,16 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     IWORK(17) = Numerically estimated rank of the boundary
   !                 condition matrix defined from B*Y(Xfinal)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !     Necessary machine constants are defined in the function
   !     routine R1MACH. The user must make sure that the values
   !     set in R1MACH are relevant to the computer being used.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***REFERENCES  M. R. Scott and H. A. Watts, SUPORT - a computer code
+  !***
+  ! **References:**  M. R. Scott and H. A. Watts, SUPORT - a computer code
   !                 for two-point boundary-value problems via
   !                 orthonormalization, SIAM Journal of Numerical
   !                 Analysis 14, (1977), pp. 40-70.
@@ -387,9 +395,12 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !                 solution of complex*16 valued boundary problems,
   !                 Report SAND78-1501, Sandia Laboratories,
   !                 Albuquerque, New Mexico, 1978.
-  !***ROUTINES CALLED  EXBVP, MACON, XERMSG
-  !***COMMON BLOCKS    ML15TO, ML17BW, ML18JR, ML5MCO, ML8SZ
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  EXBVP, MACON, XERMSG
+  !***
+  ! COMMON BLOCKS    ML15TO, ML17BW, ML18JR, ML5MCO, ML8SZ
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -399,7 +410,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BVSUP
+  
   REAL A, Ae, AED, Alpha, B, Beta, C, EPS, FOUru, PWCnd, PX, Re, &
     RED, SQOvfl, SRU, TND, TOL, TWOu, URO, Work
   REAL X, XBEg, XENd, XOP, XOT, Xpts, XSAv, Y
@@ -419,14 +430,14 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Work(*), Iwork(*), Xpts(*)
   CHARACTER(8) :: xern1, xern2, xern3, xern4
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     THE COMMON BLOCK BELOW IS USED TO COMMUNICATE WITH SUBROUTINE
   !     BVDER.  THE USER SHOULD NOT ALTER OR USE THIS COMMON BLOCK IN THE
   !     CALLING PROGRAM.
   !
   COMMON /ML8SZ / C, XSAv, IGOfxd, INHomo, IVP, NCOmpd, NFCd
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     THESE COMMON BLOCKS AID IN REDUCING THE NUMBER OF SUBROUTINE
   !     ARGUMENTS PREVALENT IN THIS MODULAR STRUCTURE
   !
@@ -436,7 +447,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   COMMON /ML17BW/ KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, &
     K7, K8, K9, K10, K11, L1, L2, KKKint, LLLint
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     THIS COMMON BLOCK IS USED IN SUBROUTINES BVSUP,BVPOR,RKFAB,
   !     REORT, AND STWAY. IT CONTAINS INFORMATION NECESSARY
   !     FOR THE ORTHONORMALIZATION TESTING PROCEDURE AND A BACKUP
@@ -445,19 +456,19 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
     , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     THIS COMMON BLOCK CONTAINS THE MACHINE DEPENDENT PARAMETERS
   !     USED BY THE CODE
   !
   COMMON /ML5MCO/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     SET UP MACHINE DEPENDENT CONSTANTS.
   !
-  !***FIRST EXECUTABLE STATEMENT  BVSUP
+  !* FIRST EXECUTABLE STATEMENT  BVSUP
   CALL MACON
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     TEST FOR INVALID INPUT
   !
   IF ( Nrowy>=Ncomp ) THEN
@@ -482,7 +493,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                           ENDIF
                         ENDDO
                         !
-                        ! **********************************************************************
+                        !- *********************************************************************
                         !     CHECK FOR DISK STORAGE
                         !
                         kpts = Nxpts
@@ -493,13 +504,13 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
                           NDIsk = 1
                         ENDIF
                         !
-                        ! **********************************************************************
+                        !- *********************************************************************
                         !     SET INTEG PARAMETER ACCORDING TO CHOICE OF INTEGRATOR.
                         !
                         INTeg = 1
                         IF ( Iwork(9)==2 ) INTeg = 2
                         !
-                        ! **********************************************************************
+                        !- *********************************************************************
                         !     COMPUTE INHOMO
                         !
                         IF ( Igofx==1 ) GOTO 300
@@ -529,7 +540,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   GOTO 400
   300  INHomo = 1
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     TO TAKE ADVANTAGE OF THE SPECIAL STRUCTURE WHEN SOLVING A
   !     COMPLEX VALUED PROBLEM,WE INTRODUCE NFCC=NFC WHILE CHANGING
   !     THE INTERNAL VALUE OF NFC
@@ -537,7 +548,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   400  NFCc = Nfc
   IF ( Iflag==13 ) Nfc = Nfc/2
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     DETERMINE NECESSARY STORAGE REQUIREMENTS
   !
   ! FOR BASIC ARRAYS IN BVPOR
@@ -584,7 +595,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   NEEdw = kkkyhp + kkku + kkkv + kkkcoe + kkks + kkksto + kkkg + KKKzpw +&
     kkkws
   NEEdiw = 17 + lllip + llliws
-  ! **********************************************************************
+  !- *********************************************************************
   !     COMPUTE THE NUMBER OF POSSIBLE ORTHONORMALIZATIONS WITH THE
   !     ALLOTTED STORAGE
   !
@@ -610,7 +621,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
       !
       Iwork(2) = MXNon
       !
-      ! **********************************************************************
+      !- *********************************************************************
       !     CHECK FOR PRE-ASSIGNED ORTHONORMALIZATION POINTS
       !
       NOPg = 0
@@ -642,7 +653,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   ENDIF
   RETURN
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     ALLOCATE STORAGE FROM WORK AND IWORK ARRAYS
   !
   !  (Z)
@@ -677,19 +688,19 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !            REQUIRED INTEGER WORK SPACE STARTS AT IWORK(L1)
   !            AND EXTENDS TO IWORK(L2-1)
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     SET INDICATOR FOR NORMALIZATION OF PARTICULAR SOLUTION
   !
   NPS = 0
   IF ( Iwork(10)==1 ) NPS = 1
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     SET PIVOTING PARAMETER
   !
   INDpvt = 0
   IF ( Iwork(15)==1 ) INDpvt = 1
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !     SET OTHER COMMON BLOCK PARAMETERS
   !
   NFCd = Nfc
@@ -708,7 +719,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   ICOco = 1
   IF ( INHomo==3.AND.NOPg==1 ) Work(MXNon+1) = XENd
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
   CALL EXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
   Nfc = NFCc

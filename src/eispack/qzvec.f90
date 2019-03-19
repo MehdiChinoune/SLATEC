@@ -1,19 +1,26 @@
-!DECK QZVEC
+!** QZVEC
 SUBROUTINE QZVEC(Nm,N,A,B,Alfr,Alfi,Beta,Z)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  QZVEC
-  !***PURPOSE  The optional fourth step of the QZ algorithm for
+  !>
+  !***
+  !  The optional fourth step of the QZ algorithm for
   !            generalized eigenproblems.  Accepts a matrix in
   !            quasi-triangular form and another in upper triangular
   !            and computes the eigenvectors of the triangular problem
   !            and transforms them back to the original coordinates
   !            Usually preceded by QZHES, QZIT, and QZVAL.
-  !***LIBRARY   SLATEC (EISPACK)
-  !***CATEGORY  D4C3
-  !***TYPE      SINGLE PRECISION (QZVEC-S)
-  !***KEYWORDS  EIGENVALUES, EIGENVECTORS, EISPACK
-  !***AUTHOR  Smith, B. T., et al.
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC (EISPACK)
+  !***
+  ! **Category:**  D4C3
+  !***
+  ! **Type:**      SINGLE PRECISION (QZVEC-S)
+  !***
+  ! **Keywords:**  EIGENVALUES, EIGENVECTORS, EISPACK
+  !***
+  ! **Author:**  Smith, B. T., et al.
+  !***
+  ! **Description:**
   !
   !     This subroutine is the optional fourth step of the QZ algorithm
   !     for solving generalized matrix eigenvalue problems,
@@ -80,18 +87,21 @@ SUBROUTINE QZVEC(Nm,N,A,B,Alfr,Alfi,Beta,Z)
   !     APPLIED MATHEMATICS DIVISION, ARGONNE NATIONAL LABORATORY
   !     ------------------------------------------------------------------
   !
-  !***REFERENCES  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
+  !***
+  ! **References:**  B. T. Smith, J. M. Boyle, J. J. Dongarra, B. S. Garbow,
   !                 Y. Ikebe, V. C. Klema and C. B. Moler, Matrix Eigen-
   !                 system Routines - EISPACK Guide, Springer-Verlag,
   !                 1976.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   760101  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  QZVEC
+  
   !
   INTEGER i, j, k, m, N, en, ii, jj, na, Nm, nn, isw, enm2
   REAL A(Nm,*), B(Nm,*), Alfr(*), Alfi(*), Beta(*), Z(Nm,*)
@@ -99,7 +109,7 @@ SUBROUTINE QZVEC(Nm,N,A,B,Alfr,Alfi,Beta,Z)
     t1, t2
   REAL w1, x1, zz, z1, alfm, almi, almr, betm, epsb
   !
-  !***FIRST EXECUTABLE STATEMENT  QZVEC
+  !* FIRST EXECUTABLE STATEMENT  QZVEC
   epsb = B(N,1)
   isw = 1
   !     .......... FOR EN=N STEP -1 UNTIL 1 DO -- ..........

@@ -1,14 +1,21 @@
-!DECK EXPREL
+!** EXPREL
 REAL FUNCTION EXPREL(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  EXPREL
-  !***PURPOSE  Calculate the relative error exponential (EXP(X)-1)/X.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C4B
-  !***TYPE      SINGLE PRECISION (EXPREL-S, DEXPRL-D, CEXPRL-C)
-  !***KEYWORDS  ELEMENTARY FUNCTIONS, EXPONENTIAL, FIRST ORDER, FNLIB
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Calculate the relative error exponential (EXP(X)-1)/X.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C4B
+  !***
+  ! **Type:**      SINGLE PRECISION (EXPREL-S, DEXPRL-D, CEXPRL-C)
+  !***
+  ! **Keywords:**  ELEMENTARY FUNCTIONS, EXPONENTIAL, FIRST ORDER, FNLIB
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! Evaluate  EXPREL(X) = (EXP(X) - 1.0) / X.   For small ABS(X) the
   ! Taylor series is used.  If X is negative, the reflection formula
@@ -17,20 +24,23 @@ REAL FUNCTION EXPREL(X)
   ! evaluation for small ABS(X) is done by Chebyshev series rather than
   ! Taylor series.  EXPREL and X are single precision.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770801  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  EXPREL
+  
   REAL absx, alneps, R1MACH, X, xbnd, xln, xn
   INTEGER i, nterms
   LOGICAL first
   SAVE nterms, xbnd, first
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  EXPREL
+  !* FIRST EXECUTABLE STATEMENT  EXPREL
   IF ( first ) THEN
     alneps = LOG(R1MACH(3))
     xn = 3.72 - 0.3*alneps

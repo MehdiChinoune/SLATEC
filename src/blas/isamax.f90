@@ -1,18 +1,25 @@
-!DECK ISAMAX
+!** ISAMAX
 INTEGER FUNCTION ISAMAX(N,Sx,Incx)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ISAMAX
-  !***PURPOSE  Find the smallest index of that component of a vector
+  !>
+  !***
+  !  Find the smallest index of that component of a vector
   !            having the maximum magnitude.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1A2
-  !***TYPE      SINGLE PRECISION (ISAMAX-S, IDAMAX-D, ICAMAX-C)
-  !***KEYWORDS  BLAS, LINEAR ALGEBRA, MAXIMUM COMPONENT, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1A2
+  !***
+  ! **Type:**      SINGLE PRECISION (ISAMAX-S, IDAMAX-D, ICAMAX-C)
+  !***
+  ! **Keywords:**  BLAS, LINEAR ALGEBRA, MAXIMUM COMPONENT, VECTOR
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -29,12 +36,15 @@ INTEGER FUNCTION ISAMAX(N,Sx,Incx)
   !     ISAMAX = first I, I = 1 to N, to maximize  ABS(SX(IX+(I-1)*INCX)),
   !     where IX = 1 if INCX .GE. 0, else IX = 1+(1-N)*INCX.
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
@@ -42,10 +52,10 @@ INTEGER FUNCTION ISAMAX(N,Sx,Incx)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920618  Slight restructuring of code.  (RWC, WRB)
-  !***END PROLOGUE  ISAMAX
+  
   REAL Sx(*), smax, xmag
   INTEGER i, Incx, ix, N
-  !***FIRST EXECUTABLE STATEMENT  ISAMAX
+  !* FIRST EXECUTABLE STATEMENT  ISAMAX
   ISAMAX = 0
   IF ( N<=0 ) RETURN
   ISAMAX = 1

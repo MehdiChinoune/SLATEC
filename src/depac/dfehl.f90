@@ -1,16 +1,20 @@
-!DECK DFEHL
+!** DFEHL
 SUBROUTINE DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DFEHL
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DDERKF
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (DEFEHL-S, DFEHL-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DDERKF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (DEFEHL-S, DFEHL-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Fehlberg Fourth-Fifth Order Runge-Kutta Method
-  ! **********************************************************************
+  !- *********************************************************************
   !
   !    DFEHL integrates a system of NEQ first order
   !    ordinary differential equations of the form
@@ -35,24 +39,27 @@ SUBROUTINE DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   !    line 222 and extending to the last line just before the return
   !    statement.
   !
-  ! **********************************************************************
+  !- *********************************************************************
   !
-  !***SEE ALSO  DDERKF
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DDERKF
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820301  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DFEHL
+  
   !
   INTEGER Ipar, k, Neq
   REAL(8) :: ch, F1, F2, F3, F4, F5, H, Rpar, T, Y, Yp, Ys
   DIMENSION Y(*), Yp(*), F1(*), F2(*), F3(*), F4(*), F5(*), Ys(*), &
     Rpar(*), Ipar(*)
   !
-  !***FIRST EXECUTABLE STATEMENT  DFEHL
+  !* FIRST EXECUTABLE STATEMENT  DFEHL
   ch = H/4.0D0
   DO k = 1, Neq
     Ys(k) = Y(k) + ch*Yp(k)

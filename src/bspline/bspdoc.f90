@@ -1,16 +1,23 @@
-!DECK BSPDOC
+!** BSPDOC
 SUBROUTINE BSPDOC
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BSPDOC
-  !***PURPOSE  Documentation for BSPLINE, a package of subprograms for
+  !>
+  !***
+  !  Documentation for BSPLINE, a package of subprograms for
   !            working with piecewise polynomial functions
   !            in B-representation.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  E, E1A, K, Z
-  !***TYPE      ALL (BSPDOC-A)
-  !***KEYWORDS  B-SPLINE, DOCUMENTATION, SPLINES
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  E, E1A, K, Z
+  !***
+  ! **Type:**      ALL (BSPDOC-A)
+  !***
+  ! **Keywords:**  B-SPLINE, DOCUMENTATION, SPLINES
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !     Abstract
   !         BSPDOC is a non-executable, B-spline documentary routine.
@@ -263,7 +270,8 @@ SUBROUTINE BSPDOC
   !
   !                      I1MACH, R1MACH, D1MACH
   !
-  !***REFERENCES  1. D. E. Amos, Computation with splines and
+  !***
+  ! **References:**  1. D. E. Amos, Computation with splines and
   !                 B-splines, Report SAND78-1968, Sandia
   !                 Laboratories, March 1979.
   !               2. D. E. Amos, Quadrature subroutines for splines and
@@ -284,13 +292,15 @@ SUBROUTINE BSPDOC
   !               7. F. N. Fritsch and R. E. Carlson, Monotone piecewise
   !                 cubic interpolation, SIAM Journal on Numerical Ana-
   !                 lysis 17, 2 (April 1980), pp. 238-246.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   810223  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900723  PURPOSE section revised.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  BSPDOC
-  !***FIRST EXECUTABLE STATEMENT  BSPDOC
+  
+  !* FIRST EXECUTABLE STATEMENT  BSPDOC
 END SUBROUTINE BSPDOC

@@ -1,18 +1,25 @@
-!DECK CHIEV
+!** CHIEV
 SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  CHIEV
-  !***PURPOSE  Compute the eigenvalues and, optionally, the eigenvectors
+  !>
+  !***
+  !  Compute the eigenvalues and, optionally, the eigenvectors
   !            of a complex Hermitian matrix.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  D4A3
-  !***TYPE      COMPLEX (SSIEV-S, CHIEV-C)
-  !***KEYWORDS  COMPLEX HERMITIAN, EIGENVALUES, EIGENVECTORS, MATRIX,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  D4A3
+  !***
+  ! **Type:**      COMPLEX (SSIEV-S, CHIEV-C)
+  !***
+  ! **Keywords:**  COMPLEX HERMITIAN, EIGENVALUES, EIGENVECTORS, MATRIX,
   !             SYMMETRIC
-  !***AUTHOR  Kahaner, D. K., (NBS)
+  !***
+  ! **Author:**  Kahaner, D. K., (NBS)
   !           Moler, C. B., (U. of New Mexico)
   !           Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     David Kahaner, Cleve Moler, G. W. Stewart,
   !       N.B.S.         U.N.M.      N.B.S./U.MD.
@@ -87,19 +94,22 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
   !                               N by N output elements have been changed
   !           No. 6  recoverable  nonreal element on diagonal of A.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  HTRIBK, HTRIDI, IMTQL2, SCOPY, SCOPYM, TQLRAT,
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  HTRIBK, HTRIDI, IMTQL2, SCOPY, SCOPYM, TQLRAT,
   !                    XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800808  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  CHIEV
+  
   INTEGER i, Info, j, Job, k, l, Lda, Ldv, m, mdim, N
   REAL A(*), E(*), Work(*), V(*)
-  !***FIRST EXECUTABLE STATEMENT  CHIEV
+  !* FIRST EXECUTABLE STATEMENT  CHIEV
   IF ( N>Lda ) CALL XERMSG('SLATEC','CHIEV','N .GT. LDA.',1,1)
   IF ( N>Lda ) RETURN
   IF ( N<1 ) CALL XERMSG('SLATEC','CHIEV','N .LT. 1',2,1)

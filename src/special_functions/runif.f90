@@ -1,14 +1,21 @@
-!DECK RUNIF
+!** RUNIF
 REAL FUNCTION RUNIF(T,N)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  RUNIF
-  !***PURPOSE  Generate a uniformly distributed random number.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  L6A21
-  !***TYPE      SINGLE PRECISION (RUNIF-S)
-  !***KEYWORDS  FNLIB, RANDOM NUMBER, SPECIAL FUNCTIONS, UNIFORM
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Generate a uniformly distributed random number.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  L6A21
+  !***
+  ! **Type:**      SINGLE PRECISION (RUNIF-S)
+  !***
+  ! **Keywords:**  FNLIB, RANDOM NUMBER, SPECIAL FUNCTIONS, UNIFORM
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! This random number generator is portable among a wide variety of
   ! computers.  It generates a random number between 0.0 and 1.0 accord-
@@ -44,23 +51,26 @@ REAL FUNCTION RUNIF(T,N)
   !             Output Value --
   ! RUNIF  a random number between 0.0 and 1.0.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  RAND
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  RAND
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   910819  Added EXTERNAL statement for RAND due to problem on IBM
   !           RS 6000.  (WRB)
-  !***END PROLOGUE  RUNIF
+  
   REAL dummy, floatn, RAND, T
   INTEGER i, j, N, nold
   DIMENSION T(*)
   EXTERNAL RAND
   SAVE nold, floatn
   DATA nold/ - 1/
-  !***FIRST EXECUTABLE STATEMENT  RUNIF
+  !* FIRST EXECUTABLE STATEMENT  RUNIF
   IF ( N/=nold ) THEN
     !
     nold = ABS(N)

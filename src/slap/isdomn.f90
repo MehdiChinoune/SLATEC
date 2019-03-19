@@ -1,29 +1,35 @@
-!DECK ISDOMN
+!** ISDOMN
 INTEGER FUNCTION ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,&
     Rwork,Iwork,Ak,Bnrm,Solnrm)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ISDOMN
-  !***SUBSIDIARY
-  !***PURPOSE  Preconditioned Orthomin Stop Test.
+  !>
+  !***
+  !  Preconditioned Orthomin Stop Test.
   !            This routine calculates the stop test for the Orthomin
   !            iteration scheme.  It returns a non-zero if the error
   !            estimate (the type of which is determined by ITOL) is
   !            less than the user specified tolerance TOL.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      DOUBLE PRECISION (ISSOMN-S, ISDOMN-D)
-  !***KEYWORDS  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (ISSOMN-S, ISDOMN-D)
+  !***
+  ! **Keywords:**  ITERATIVE PRECONDITION, NON-SYMMETRIC LINEAR SYSTEM,
   !             ORTHOMIN, SLAP, SPARSE, STOP TEST
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER  N, NELT, IA(NELT), JA(NELT), ISYM, NSAVE, ITOL, ITMAX
   !     INTEGER  ITER, IERR, IUNIT, IWORK(USER DEFINED)
   !     DOUBLE PRECISION B(N), X(N), A(NELT), TOL, ERR, R(N), Z(N)
@@ -37,7 +43,7 @@ INTEGER FUNCTION ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   !    $     EMAP, DZ, CSAV, RWORK, IWORK, AK, BNRM, SOLNRM)
   !    $     .NE.0 ) THEN ITERATION CONVERGED
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the matrix.
   ! B      :IN       Double Precision B(N).
@@ -138,24 +144,28 @@ INTEGER FUNCTION ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   ! SOLNRM :OUT      Double Precision.
   !         True solution norm, if ITOL = 11.
   !
-  ! *Function Return Values:
+  !- Function Return Values:
   !       0 : Error estimate (determined by ITOL) is *NOT* less than the
   !           specified tolerance, TOL.  The iteration must continue.
   !       1 : Error estimate (determined by ITOL) is less than the
   !           specified tolerance, TOL.  The iteration can be considered
   !           complete.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  DOMN, DSDOMN, DSLUOM
-  !***ROUTINES CALLED  D1MACH, DNRM2
-  !***COMMON BLOCKS    DSLBLK
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DOMN, DSDOMN, DSLUOM
+  !***
+  ! **Routines called:**  D1MACH, DNRM2
+  !***
+  ! COMMON BLOCKS    DSLBLK
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -172,7 +182,7 @@ INTEGER FUNCTION ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   !   921026  Changed 1.0E10 to D1MACH(2) and corrected D to E in
   !           output format.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  !***END PROLOGUE  ISDOMN
+  
   !     .. Scalar Arguments ..
   REAL(8) :: Ak, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt, Nsave
@@ -192,7 +202,7 @@ INTEGER FUNCTION ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   EXTERNAL D1MACH, DNRM2
   !     .. Common blocks ..
   COMMON /DSLBLK/ SOLn
-  !***FIRST EXECUTABLE STATEMENT  ISDOMN
+  !* FIRST EXECUTABLE STATEMENT  ISDOMN
   ISDOMN = 0
   !
   IF ( Itol==1 ) THEN

@@ -1,14 +1,21 @@
-!DECK PSI
+!** PSI
 REAL FUNCTION PSI(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  PSI
-  !***PURPOSE  Compute the Psi (or Digamma) function.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C7C
-  !***TYPE      SINGLE PRECISION (PSI-S, DPSI-D, CPSI-C)
-  !***KEYWORDS  DIGAMMA FUNCTION, FNLIB, PSI FUNCTION, SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Compute the Psi (or Digamma) function.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C7C
+  !***
+  ! **Type:**      SINGLE PRECISION (PSI-S, DPSI-D, CPSI-C)
+  !***
+  ! **Keywords:**  DIGAMMA FUNCTION, FNLIB, PSI FUNCTION, SPECIAL FUNCTIONS
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! PSI(X) calculates the psi (or digamma) function for real argument X.
   ! PSI(X) is the logarithmic derivative of the gamma function of X.
@@ -25,9 +32,12 @@ REAL FUNCTION PSI(X)
   !                               significant figures required  14.42
   !                                    decimal places required  16.86
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  COT, CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  COT, CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770401  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
@@ -35,7 +45,7 @@ REAL FUNCTION PSI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  !***END PROLOGUE  PSI
+  
   REAL apsics, aux, COT, CSEVL, dxrel, pi, psics, R1MACH, X, xbig, y
   INTEGER i, INITS, n, ntapsi, ntpsi
   DIMENSION psics(23), apsics(16)
@@ -83,7 +93,7 @@ REAL FUNCTION PSI(X)
   DATA apsics(16)/ - .0000000000000000E0/
   DATA pi/3.14159265358979324E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  PSI
+  !* FIRST EXECUTABLE STATEMENT  PSI
   IF ( first ) THEN
     ntpsi = INITS(psics,23,0.1*R1MACH(3))
     ntapsi = INITS(apsics,16,0.1*R1MACH(3))

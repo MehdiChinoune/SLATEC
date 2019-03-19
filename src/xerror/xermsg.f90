@@ -1,14 +1,21 @@
-!DECK XERMSG
+!** XERMSG
 SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  XERMSG
-  !***PURPOSE  Process error messages for SLATEC and other libraries.
-  !***LIBRARY   SLATEC (XERROR)
-  !***CATEGORY  R3C
-  !***TYPE      ALL (XERMSG-A)
-  !***KEYWORDS  ERROR MESSAGE, XERROR
-  !***AUTHOR  Fong, Kirby, (NMFECC at LLNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Process error messages for SLATEC and other libraries.
+  !***
+  ! **Library:**   SLATEC (XERROR)
+  !***
+  ! **Category:**  R3C
+  !***
+  ! **Type:**      ALL (XERMSG-A)
+  !***
+  ! **Keywords:**  ERROR MESSAGE, XERROR
+  !***
+  ! **Author:**  Fong, Kirby, (NMFECC at LLNL)
+  !***
+  ! **Description:**
   !
   !   XERMSG processes a diagnostic message in a manner determined by the
   !   value of LEVEL and the current value of the library error control
@@ -147,11 +154,14 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   !    errors.  After a call to XERMSG with a recoverable error, the user
   !    must be given a chance to call NUMXER or XERCLR to retrieve or
   !    clear the error number.
-  !***REFERENCES  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
+  !***
+  ! **References:**  R. E. Jones and D. K. Kahaner, XERROR, the SLATEC
   !                 Error-handling Package, SAND82-0800, Sandia
   !                 Laboratories, 1982.
-  !***ROUTINES CALLED  FDUMP, J4SAVE, XERCNT, XERHLT, XERPRN, XERSVE
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  FDUMP, J4SAVE, XERCNT, XERHLT, XERPRN, XERSVE
+
+  !* REVISION HISTORY  (YYMMDD)
   !   880101  DATE WRITTEN
   !   880621  REVISED AS DIRECTED AT SLATEC CML MEETING OF FEBRUARY 1988.
   !           THERE ARE TWO BASIC CHANGES.
@@ -184,14 +194,14 @@ SUBROUTINE XERMSG(Librar,Subrou,Messg,Nerr,Level)
   !           LEVEL=-1 logic, changed calls to XERSAV to XERSVE, and
   !           XERCTL to XERCNT.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  XERMSG
+  
   INTEGER i, J4SAVE, kdummy, kount, lerr, Level, lkntrl, llevel, &
     ltemp, maxmes, mkntrl, Nerr
   CHARACTER*(*) Librar, Subrou, Messg
   CHARACTER(8) :: xlibr, xsubr
   CHARACTER(72) :: temp
   CHARACTER(20) :: lfirst
-  !***FIRST EXECUTABLE STATEMENT  XERMSG
+  !* FIRST EXECUTABLE STATEMENT  XERMSG
   lkntrl = J4SAVE(2,0,.FALSE.)
   maxmes = J4SAVE(4,0,.FALSE.)
   !

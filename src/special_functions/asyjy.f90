@@ -1,13 +1,17 @@
-!DECK ASYJY
+!** ASYJY
 SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ASYJY
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to BESJ and BESY
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (ASYJY-S, DASYJY-D)
-  !***AUTHOR  Amos, D. E., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to BESJ and BESY
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (ASYJY-S, DASYJY-D)
+  !***
+  ! **Author:**  Amos, D. E., (SNLA)
+  !***
+  ! **Description:**
   !
   !                 ASYJY computes Bessel functions J and Y
   !               for arguments X.GT.0.0 and orders FNU.GE.35.0
@@ -49,16 +53,19 @@ SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
   !         FLGJY = -1 the AIRY functions BI(X) and DBI(X) are
   !         supplied by the external function YAIRY.
   !
-  !***SEE ALSO  BESJ, BESY
-  !***ROUTINES CALLED  I1MACH, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  BESJ, BESY
+  !***
+  ! **Routines called:**  I1MACH, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   750101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891009  Removed unreferenced variable.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  !***END PROLOGUE  ASYJY
+  
   INTEGER i, Iflw, In, j, jn, jr, ju, k, kb, klast, kmax, kp1, &
     ks, ksp1, kstemp, l, lr, lrp1, iseta, isetb
   INTEGER I1MACH
@@ -288,7 +295,7 @@ SUBROUTINE ASYJY(FUNJY,X,Fnu,Flgjy,In,Y,Wk,Iflw)
     2.06210828235646E-02, 1.94388240897881E-02, 1.83810633800683E-02, &
     1.74293213231963E-02, 1.65685837786612E-02, 1.57865285987918E-02, &
     1.50729501494096E-02, 1.44193250839955E-02, 1.38184805735342E-02/
-  !***FIRST EXECUTABLE STATEMENT  ASYJY
+  !* FIRST EXECUTABLE STATEMENT  ASYJY
   ta = R1MACH(3)
   tol = MAX(ta,1.0E-15)
   tb = R1MACH(5)

@@ -1,16 +1,23 @@
-!DECK STRSL
+!** STRSL
 SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  STRSL
-  !***PURPOSE  Solve a system of the form  T*X=B or TRANS(T)*X=B, where
+  !>
+  !***
+  !  Solve a system of the form  T*X=B or TRANS(T)*X=B, where
   !            T is a triangular matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2A3
-  !***TYPE      SINGLE PRECISION (STRSL-S, DTRSL-D, CTRSL-C)
-  !***KEYWORDS  LINEAR ALGEBRA, LINPACK, TRIANGULAR LINEAR SYSTEM,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2A3
+  !***
+  ! **Type:**      SINGLE PRECISION (STRSL-S, DTRSL-D, CTRSL-C)
+  !***
+  ! **Keywords:**  LINEAR ALGEBRA, LINPACK, TRIANGULAR LINEAR SYSTEM,
   !             TRIANGULAR MATRIX
-  !***AUTHOR  Stewart, G. W., (U. of Maryland)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Stewart, G. W., (U. of Maryland)
+  !***
+  ! **Description:**
   !
   !     STRSL solves systems of the form
   !
@@ -57,10 +64,13 @@ SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
   !                   Otherwise INFO contains the index of
   !                   the first zero diagonal element of T.
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SAXPY, SDOT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SAXPY, SDOT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
@@ -68,14 +78,14 @@ SUBROUTINE STRSL(T,Ldt,N,B,Job,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  STRSL
+  
   INTEGER Ldt, N, Job, Info
   REAL T(Ldt,*), B(*)
   !
   !
   REAL SDOT, temp
   INTEGER case, j, jj
-  !***FIRST EXECUTABLE STATEMENT  STRSL
+  !* FIRST EXECUTABLE STATEMENT  STRSL
   !
   !        CHECK FOR ZERO DIAGONAL ELEMENTS.
   !

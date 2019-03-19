@@ -1,18 +1,25 @@
-!DECK DROTG
+!** DROTG
 SUBROUTINE DROTG(Da,Db,Dc,Ds)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DROTG
-  !***PURPOSE  Construct a plane Givens rotation.
-  !***LIBRARY   SLATEC (BLAS)
-  !***CATEGORY  D1B10
-  !***TYPE      DOUBLE PRECISION (SROTG-S, DROTG-D, CROTG-C)
-  !***KEYWORDS  BLAS, GIVENS ROTATION, GIVENS TRANSFORMATION,
+  !>
+  !***
+  !  Construct a plane Givens rotation.
+  !***
+  ! **Library:**   SLATEC (BLAS)
+  !***
+  ! **Category:**  D1B10
+  !***
+  ! **Type:**      DOUBLE PRECISION (SROTG-S, DROTG-D, CROTG-C)
+  !***
+  ! **Keywords:**  BLAS, GIVENS ROTATION, GIVENS TRANSFORMATION,
   !             LINEAR ALGEBRA, VECTOR
-  !***AUTHOR  Lawson, C. L., (JPL)
+  !***
+  ! **Author:**  Lawson, C. L., (JPL)
   !           Hanson, R. J., (SNLA)
   !           Kincaid, D. R., (U. of Texas)
   !           Krogh, F. T., (JPL)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !                B L A S  Subprogram
   !    Description of Parameters
@@ -46,23 +53,26 @@ SUBROUTINE DROTG(Da,Db,Dc,Ds)
   !     Normally, the subprogram DROT(N,DX,INCX,DY,INCY,DC,DS) will
   !     next be called to apply the transformation to a 2 by N matrix.
   !
-  !***REFERENCES  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
+  !***
+  ! **References:**  C. L. Lawson, R. J. Hanson, D. R. Kincaid and F. T.
   !                 Krogh, Basic linear algebra subprograms for Fortran
   !                 usage, Algorithm No. 539, Transactions on Mathematical
   !                 Software 5, 3 (September 1979), pp. 308-323.
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   791001  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DROTG
+  
   REAL(8) :: Da, Db, Dc, Ds, u, v, r
-  !***FIRST EXECUTABLE STATEMENT  DROTG
+  !* FIRST EXECUTABLE STATEMENT  DROTG
   IF ( ABS(Da)>ABS(Db) ) THEN
     !
-    ! *** HERE ABS(DA) .GT. ABS(DB) ***
+    !- ** HERE ABS(DA) .GT. ABS(DB) ***
     !
     u = Da + Da
     v = Db/u
@@ -79,11 +89,11 @@ SUBROUTINE DROTG(Da,Db,Dc,Ds)
     Da = r
     RETURN
     !
-    ! *** HERE ABS(DA) .LE. ABS(DB) ***
+    !- ** HERE ABS(DA) .LE. ABS(DB) ***
     !
   ELSEIF ( Db==0.0D0 ) THEN
     !
-    ! *** HERE DA = DB = 0.0 ***
+    !- ** HERE DA = DB = 0.0 ***
     !
     Dc = 1.0D0
     Ds = 0.0D0

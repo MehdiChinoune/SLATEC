@@ -1,29 +1,36 @@
-!DECK DQAWOE
+!** DQAWOE
 SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
     Result,Abserr,Neval,Ier,Last,Alist,Blist,Rlist,Elist,&
     Iord,Nnlog,Momcom,Chebmo)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DQAWOE
-  !***PURPOSE  Calculate an approximation to a given definite integral
+  !>
+  !***
+  !  Calculate an approximation to a given definite integral
   !            I = Integral of F(X)*W(X) over (A,B), where
   !                     W(X) = COS(OMEGA*X)
   !                 or  W(X)=SIN(OMEGA*X),
   !            hopefully satisfying the following claim for accuracy
   !                 ABS(I-RESULT).LE.MAX(EPSABS,EPSREL*ABS(I)).
-  !***LIBRARY   SLATEC (QUADPACK)
-  !***CATEGORY  H2A2A1
-  !***TYPE      DOUBLE PRECISION (QAWOE-S, DQAWOE-D)
-  !***KEYWORDS  AUTOMATIC INTEGRATOR, CLENSHAW-CURTIS METHOD,
+  !***
+  ! **Library:**   SLATEC (QUADPACK)
+  !***
+  ! **Category:**  H2A2A1
+  !***
+  ! **Type:**      DOUBLE PRECISION (QAWOE-S, DQAWOE-D)
+  !***
+  ! **Keywords:**  AUTOMATIC INTEGRATOR, CLENSHAW-CURTIS METHOD,
   !             EXTRAPOLATION, GLOBALLY ADAPTIVE,
   !             INTEGRAND WITH OSCILLATORY COS OR SIN FACTOR, QUADPACK,
   !             QUADRATURE, SPECIAL-PURPOSE
-  !***AUTHOR  Piessens, Robert
+  !***
+  ! **Author:**  Piessens, Robert
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
   !           de Doncker, Elise
   !             Applied Mathematics and Programming Division
   !             K. U. Leuven
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !        Computation of Oscillatory integrals
   !        Standard fortran subroutine
@@ -204,15 +211,18 @@ SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
   !                     Array of dimension (MAXP1,25) containing the
   !                     Chebyshev moments
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, DQC25F, DQELG, DQPSRT
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, DQC25F, DQELG, DQPSRT
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800101  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  DQAWOE
+  
   !
   REAL(8) :: A, abseps, Abserr, Alist, area, area1, area12, &
     area2, a1, a2, B, Blist, b1, b2, Chebmo, correc, &
@@ -283,7 +293,7 @@ SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
   !           UFLOW IS THE SMALLEST POSITIVE MAGNITUDE.
   !           OFLOW IS THE LARGEST POSITIVE MAGNITUDE.
   !
-  !***FIRST EXECUTABLE STATEMENT  DQAWOE
+  !* FIRST EXECUTABLE STATEMENT  DQAWOE
   epmach = D1MACH(4)
   !
   !         TEST ON VALIDITY OF PARAMETERS
@@ -440,7 +450,7 @@ SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
         !           WITH NRMAX-TH LARGEST ERROR ESTIMATE (TO BISECTED NEXT).
         !
         CALL DQPSRT(Limit,Last,maxerr,errmax,Elist,Iord,nrmax)
-        ! ***JUMP OUT OF DO-LOOP
+        !- **JUMP OUT OF DO-LOOP
         IF ( errsum<=errbnd ) GOTO 50
         IF ( Ier/=0 ) EXIT
         IF ( Last==2.AND.extall ) THEN
@@ -505,7 +515,7 @@ SUBROUTINE DQAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
             Result = reseps
             correc = erlarg
             ertest = MAX(Epsabs,Epsrel*ABS(reseps))
-            ! ***JUMP OUT OF DO-LOOP
+            !- **JUMP OUT OF DO-LOOP
             IF ( Abserr<=ertest ) EXIT
           ENDIF
           !

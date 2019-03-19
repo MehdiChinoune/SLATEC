@@ -1,29 +1,36 @@
-!DECK ZBUNK
+!** ZBUNK
 SUBROUTINE ZBUNK(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZBUNK
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESH and ZBESK
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (CBUNI-A, ZBUNI-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to ZBESH and ZBESK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (CBUNI-A, ZBUNI-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     ZBUNK COMPUTES THE K BESSEL FUNCTION FOR FNU.GT.FNUL.
   !     ACCORDING TO THE UNIFORM ASYMPTOTIC EXPANSION FOR K(FNU,Z)
   !     IN ZUNK1 AND THE EXPANSION FOR H(2,FNU,Z) IN ZUNK2
   !
-  !***SEE ALSO  ZBESH, ZBESK
-  !***ROUTINES CALLED  ZUNK1, ZUNK2
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZBESH, ZBESK
+  !***
+  ! **Routines called:**  ZUNK1, ZUNK2
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ZBUNK
+  
   !     COMPLEX Y,Z
   REAL(8) :: Alim, ax, ay, Elim, Fnu, Tol, Yi, Yr, Zi, Zr
   INTEGER Kode, Mr, N, Nz
   DIMENSION Yr(N), Yi(N)
-  !***FIRST EXECUTABLE STATEMENT  ZBUNK
+  !* FIRST EXECUTABLE STATEMENT  ZBUNK
   Nz = 0
   ax = ABS(Zr)*1.7321D0
   ay = ABS(Zi)

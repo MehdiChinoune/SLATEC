@@ -2,23 +2,31 @@ MODULE TEST05_MOD
   IMPLICIT NONE
 
 CONTAINS
-  !DECK BIKCK
+  !** BIKCK
   SUBROUTINE BIKCK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  BIKCK
-    !***PURPOSE  Quick check for BESI and BESK.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (BIKCK-S, DBIKCK-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Amos, D. E., (SNLA)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for BESI and BESK.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (BIKCK-S, DBIKCK-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Amos, D. E., (SNLA)
+    !***
+    ! **Description:**
     !
     !   BIKCK is a quick check routine for BESI and BESK.  The main loops
     !   evaluate the Wronskian and test the error.  Underflow and overflow
     !   diagnostics are checked in addition to illegal arguments.
     !
-    !***ROUTINES CALLED  BESI, BESK, NUMXER, R1MACH, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  BESI, BESK, NUMXER, R1MACH, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   750101  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891004  Removed unreachable code.  (WRB)
@@ -30,14 +38,14 @@ CONTAINS
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
-    !***END PROLOGUE  BIKCK
+    
     INTEGER Ipass, Kprint, NUMXER
     INTEGER i, ix, k, kontrl, kode, Lun, m, n, nerr, nu, nw, ny
     REAL alp, del, er, fnu, fnup, rx, tol, x
     REAL fn(3), w(5), xx(5), y(5)
     REAL R1MACH
     LOGICAL fatal
-    !***FIRST EXECUTABLE STATEMENT  BIKCK
+    !* FIRST EXECUTABLE STATEMENT  BIKCK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT (/' QUICK CHECKS FOR BESI AND BESK'//)
@@ -264,23 +272,31 @@ CONTAINS
     99011 FORMAT (/' **********BESI OR BESK FAILED SOME TESTS************')
     RETURN
   END SUBROUTINE BIKCK
-  !DECK BJYCK
+  !** BJYCK
   SUBROUTINE BJYCK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  BJYCK
-    !***PURPOSE  Quick check for BESJ and BESY.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (BJYCK-S, DBJYCK-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Amos, D. E., (SNLA)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for BESJ and BESY.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (BJYCK-S, DBJYCK-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Amos, D. E., (SNLA)
+    !***
+    ! **Description:**
     !
     !   BJYCK is a quick check routine for BESJ and BESY.  The main loops
     !   evaluate the Wronskian and test the error.  Underflow and overflow
     !   diagnostics are checked in addition to illegal arguments.
     !
-    !***ROUTINES CALLED  BESJ, BESY, NUMXER, R1MACH, XERCLR, XGETF, XSETF
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  BESJ, BESY, NUMXER, R1MACH, XERCLR, XGETF, XSETF
+
+    !* REVISION HISTORY  (YYMMDD)
     !   750101  DATE WRITTEN
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891004  Removed unreachable code.  (WRB)
@@ -292,14 +308,14 @@ CONTAINS
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
-    !***END PROLOGUE  BJYCK
+    
     INTEGER Ipass, Kprint, NUMXER
     INTEGER i, ix, k, kontrl, Lun, m, n, nerr, nu, ny
     REAL alp, del, er, fnu, fnup, rhpi, rx, tol, x
     REAL fn(3), w(5), xx(5), y(5)
     REAL R1MACH
     LOGICAL fatal
-    !***FIRST EXECUTABLE STATEMENT  BJYCK
+    !* FIRST EXECUTABLE STATEMENT  BJYCK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT (/' QUICK CHECKS FOR BESJ AND BESY'//)
@@ -493,23 +509,32 @@ CONTAINS
     99010 FORMAT (/' **********BESJ OR BESY FAILED SOME TESTS**********')
     RETURN
   END SUBROUTINE BJYCK
-  !DECK EG8CK
+  !** EG8CK
   SUBROUTINE EG8CK(Lun,Kprint,Ipass)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  EG8CK
-    !***PURPOSE  Quick check for EXINT and GAUS8.
-    !***LIBRARY   SLATEC
-    !***TYPE      SINGLE PRECISION (EG8CK-S, DEG8CK-D)
-    !***KEYWORDS  QUICK CHECK
-    !***AUTHOR  Amos, D. E., (SNLA)
-    !***DESCRIPTION
+    !>
+    !***
+    !  Quick check for EXINT and GAUS8.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Type:**      SINGLE PRECISION (EG8CK-S, DEG8CK-D)
+    !***
+    ! **Keywords:**  QUICK CHECK
+    !***
+    ! **Author:**  Amos, D. E., (SNLA)
+    !***
+    ! **Description:**
     !
     !   EG8CK is a quick check routine for EXINT and GAUS8.  Exponential
     !   integrals from EXINT are checked against quadratures from GAUS8.
     !
-    !***ROUTINES CALLED  EXINT, FEIN, GAUS8, R1MACH
-    !***COMMON BLOCKS    FEINX
-    !***REVISION HISTORY  (YYMMDD)
+    !***
+    ! **Routines called:**  EXINT, FEIN, GAUS8, R1MACH
+    !***
+    ! COMMON BLOCKS    FEINX
+
+    !* REVISION HISTORY  (YYMMDD)
     !   800501  DATE WRITTEN
     !   890718  Added check when testing error conditions.  (WRB)
     !   890718  REVISION DATE from Version 3.2
@@ -517,7 +542,7 @@ CONTAINS
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
     !   920206  Corrected argument list in CALL to EXINT.  (WRB)
-    !***END PROLOGUE  EG8CK
+    
     INTEGER Kprint
     COMMON /FEINX / X, A, FKM
     INTEGER i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
@@ -526,7 +551,7 @@ CONTAINS
     REAL R1MACH
     DIMENSION en(4), y(4), xx(5)
     LOGICAL fatal
-    !***FIRST EXECUTABLE STATEMENT  EG8CK
+    !* FIRST EXECUTABLE STATEMENT  EG8CK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
     99001 FORMAT ('1'/' QUICK CHECK FOR EXINT AND GAUS8'/)
@@ -671,44 +696,57 @@ CONTAINS
     99009 FORMAT (/' **********EXINT OR GAUS8 FAILED SOME TESTS**********')
     RETURN
   END SUBROUTINE EG8CK
-  !DECK FEIN
+  !** FEIN
   REAL FUNCTION FEIN(T)
     IMPLICIT NONE
-    !***BEGIN PROLOGUE  FEIN
-    !***PURPOSE  Subsidiary to EG8CK.
-    !***LIBRARY   SLATEC
-    !***AUTHOR  (UNKNOWN)
-    !***ROUTINES CALLED  (NONE)
-    !***COMMON BLOCKS    FEINX
-    !***REVISION HISTORY  (YYMMDD)
+    !>
+    !***
+    !  Subsidiary to EG8CK.
+    !***
+    ! **Library:**   SLATEC
+    !***
+    ! **Author:**  (UNKNOWN)
+    !***
+    ! **Routines called:**  (NONE)
+    !***
+    ! COMMON BLOCKS    FEINX
+
+    !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    !***END PROLOGUE  FEIN
+    
     COMMON /FEINX / X, A, FKM
     REAL X, A, FKM, T, aln
-    !***FIRST EXECUTABLE STATEMENT  FEIN
+    !* FIRST EXECUTABLE STATEMENT  FEIN
     aln = (FKM-T)*X - A*LOG(T)
     FEIN = EXP(aln)
   END FUNCTION FEIN
 END MODULE TEST05_MOD
-!DECK TEST05
+!** TEST05
 PROGRAM TEST05
   USE TEST05_MOD
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  TEST05
-  !***PURPOSE  Driver for testing SLATEC subprograms
-  !***LIBRARY   SLATEC
-  !***CATEGORY  C
-  !***TYPE      SINGLE PRECISION (TEST05-S, TEST06-D)
-  !***KEYWORDS  QUICK CHECK DRIVER
-  !***AUTHOR  SLATEC Common Mathematical Library Committee
-  !***DESCRIPTION
+  !>
+  !***
+  !  Driver for testing SLATEC subprograms
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  C
+  !***
+  ! **Type:**      SINGLE PRECISION (TEST05-S, TEST06-D)
+  !***
+  ! **Keywords:**  QUICK CHECK DRIVER
+  !***
+  ! **Author:**  SLATEC Common Mathematical Library Committee
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     One input data record is required
   !         READ (LIN, '(I1)') KPRINT
   !
-  ! *Arguments:
+  !- Arguments:
   !     KPRINT = 0  Quick checks - No printing.
   !                 Driver       - Short pass or fail message printed.
   !              1  Quick checks - No message printed for passed tests,
@@ -720,25 +758,28 @@ PROGRAM TEST05
   !              3  Quick checks - Print complete quick check results.
   !                 Driver       - Pass or fail message printed.
   !
-  ! *Description:
+  !- Description:
   !     Driver for testing SLATEC subprograms
   !        EXINT    GAUS8
   !        BESI     BESK
   !        BESJ     BESY
   !
-  !***REFERENCES  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
+  !***
+  ! **References:**  Kirby W. Fong, Thomas H. Jefferson, Tokihiko Suyehiro
   !                 and Lee Walton, Guide to the SLATEC Common Mathema-
   !                 tical Library, April 10, 1990.
-  !***ROUTINES CALLED  BIKCK, BJYCK, EG8CK, I1MACH, XERMAX, XSETF, XSETUN
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  BIKCK, BJYCK, EG8CK, I1MACH, XERMAX, XSETF, XSETUN
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890618  DATE WRITTEN
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  !***END PROLOGUE  TEST05
+  
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
-  !***FIRST EXECUTABLE STATEMENT  TEST05
+  !* FIRST EXECUTABLE STATEMENT  TEST05
   lun = I1MACH(2)
   lin = I1MACH(1)
   nfail = 0

@@ -1,14 +1,18 @@
-!DECK WNLIT
+!** WNLIT
 SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  WNLIT
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to WNNLS
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (WNLIT-S, DWNLIT-D)
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !>
+  !***
+  !  Subsidiary to WNNLS
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (WNLIT-S, DWNLIT-D)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Haskell, K. H., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     This is a companion subprogram to WNNLS( ).
   !     The documentation for WNNLS( ) has complete usage instructions.
@@ -19,17 +23,20 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
   !     Triangularize L1 by L1 subsystem, where L1=MIN(M,L), with
   !     col interchanges.
   !
-  !***SEE ALSO  WNNLS
-  !***ROUTINES CALLED  H12, ISAMAX, SCOPY, SROTM, SROTMG, SSCAL, SSWAP,
+  !***
+  ! **See also:**  WNNLS
+  !***
+  ! **Routines called:**  H12, ISAMAX, SCOPY, SROTM, SROTMG, SSCAL, SSWAP,
   !                    WNLT1, WNLT2, WNLT3
-  !***REVISION HISTORY  (YYMMDD)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890618  Completely restructured and revised.  (WRB & RWC)
   !   890620  Revised to make WNLT1, WNLT2, and WNLT3 subroutines.  (RWC)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  WNLIT
+  
   INTEGER Idope(*), Ipivot(*), Itype(*), L, M, Mdw, N
   REAL Dope(*), H(*), Rnorm, Scale(*), W(Mdw,*)
   LOGICAL Done
@@ -44,7 +51,7 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
     me, mend, niv, nsoln
   LOGICAL indep, recalc
   !
-  !***FIRST EXECUTABLE STATEMENT  WNLIT
+  !* FIRST EXECUTABLE STATEMENT  WNLIT
   me = Idope(1)
   nsoln = Idope(2)
   l1 = Idope(3)

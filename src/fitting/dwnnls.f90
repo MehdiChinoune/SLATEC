@@ -1,19 +1,26 @@
-!DECK DWNNLS
+!** DWNNLS
 SUBROUTINE DWNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DWNNLS
-  !***PURPOSE  Solve a linearly constrained least squares problem with
+  !>
+  !***
+  !  Solve a linearly constrained least squares problem with
   !            equality constraints and nonnegativity constraints on
   !            selected variables.
-  !***LIBRARY   SLATEC
-  !***CATEGORY  K1A2A
-  !***TYPE      DOUBLE PRECISION (WNNLS-S, DWNNLS-D)
-  !***KEYWORDS  CONSTRAINED LEAST SQUARES, CURVE FITTING, DATA FITTING,
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Category:**  K1A2A
+  !***
+  ! **Type:**      DOUBLE PRECISION (WNNLS-S, DWNNLS-D)
+  !***
+  ! **Keywords:**  CONSTRAINED LEAST SQUARES, CURVE FITTING, DATA FITTING,
   !             EQUALITY CONSTRAINTS, INEQUALITY CONSTRAINTS,
   !             NONNEGATIVITY CONSTRAINTS, QUADRATIC PROGRAMMING
-  !***AUTHOR  Hanson, R. J., (SNLA)
+  !***
+  ! **Author:**  Hanson, R. J., (SNLA)
   !           Haskell, K. H., (SNLA)
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
   !     Abstract
   !
@@ -237,7 +244,8 @@ SUBROUTINE DWNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !     IWORK(*)     An integer-valued working array of length at least
   !                  M+N.
   !
-  !***REFERENCES  K. H. Haskell and R. J. Hanson, An algorithm for
+  !***
+  ! **References:**  K. H. Haskell and R. J. Hanson, An algorithm for
   !                 linear least squares problems with equality and
   !                 nonnegativity constraints, Report SAND77-0552, Sandia
   !                 Laboratories, June 1978.
@@ -254,8 +262,10 @@ SUBROUTINE DWNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !                 Transactions on Mathematical Software, September 1982.
   !               C. L. Lawson and R. J. Hanson, Solving Least Squares
   !                 Problems, Prentice-Hall, Inc., 1974.
-  !***ROUTINES CALLED  DWNLSM, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DWNLSM, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890618  Completely restructured and revised.  (WRB & RWC)
@@ -265,12 +275,12 @@ SUBROUTINE DWNNLS(W,Mdw,Me,Ma,N,L,Prgopt,X,Rnorm,Mode,Iwork,Work)
   !   900510  Convert XERRWV calls to XERMSG calls, change Prologue
   !           comments to agree with WNNLS.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  DWNNLS
+  
   INTEGER Iwork(*), L, l1, l2, l3, l4, l5, liw, lw, Ma, Mdw, Me, &
     Mode, N
   REAL(8) :: Prgopt(*), Rnorm, W(Mdw,*), Work(*), X(*)
   CHARACTER(8) :: xern1
-  !***FIRST EXECUTABLE STATEMENT  DWNNLS
+  !* FIRST EXECUTABLE STATEMENT  DWNNLS
   Mode = 0
   IF ( Ma+Me<=0.OR.N<=0 ) RETURN
   !

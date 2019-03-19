@@ -1,16 +1,23 @@
-!DECK SPBCO
+!** SPBCO
 SUBROUTINE SPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SPBCO
-  !***PURPOSE  Factor a real symmetric positive definite matrix stored in
+  !>
+  !***
+  !  Factor a real symmetric positive definite matrix stored in
   !            band form and estimate the condition number of the matrix.
-  !***LIBRARY   SLATEC (LINPACK)
-  !***CATEGORY  D2B2
-  !***TYPE      SINGLE PRECISION (SPBCO-S, DPBCO-D, CPBCO-C)
-  !***KEYWORDS  BANDED, CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
+  !***
+  ! **Library:**   SLATEC (LINPACK)
+  !***
+  ! **Category:**  D2B2
+  !***
+  ! **Type:**      SINGLE PRECISION (SPBCO-S, DPBCO-D, CPBCO-C)
+  !***
+  ! **Keywords:**  BANDED, CONDITION NUMBER, LINEAR ALGEBRA, LINPACK,
   !             MATRIX FACTORIZATION, POSITIVE DEFINITE
-  !***AUTHOR  Moler, C. B., (U. of New Mexico)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Moler, C. B., (U. of New Mexico)
+  !***
+  ! **Description:**
   !
   !     SPBCO factors a real symmetric positive definite matrix
   !     stored in band form and estimates the condition of the matrix.
@@ -101,10 +108,13 @@ SUBROUTINE SPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !            * 12 23 34 45 56
   !           11 22 33 44 55 66
   !
-  !***REFERENCES  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
+  !***
+  ! **References:**  J. J. Dongarra, J. R. Bunch, C. B. Moler, and G. W.
   !                 Stewart, LINPACK Users' Guide, SIAM, 1979.
-  !***ROUTINES CALLED  SASUM, SAXPY, SDOT, SPBFA, SSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  SASUM, SAXPY, SDOT, SPBFA, SSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780814  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -113,7 +123,7 @@ SUBROUTINE SPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  !***END PROLOGUE  SPBCO
+  
   INTEGER Lda, N, M, Info
   REAL Abd(Lda,*), Z(*)
   REAL Rcond
@@ -124,7 +134,7 @@ SUBROUTINE SPBCO(Abd,Lda,N,M,Rcond,Z,Info)
   !
   !     FIND NORM OF A
   !
-  !***FIRST EXECUTABLE STATEMENT  SPBCO
+  !* FIRST EXECUTABLE STATEMENT  SPBCO
   DO j = 1, N
     l = MIN(j,M+1)
     mu = MAX(M+2-j,1)

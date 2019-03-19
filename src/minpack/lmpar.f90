@@ -1,13 +1,17 @@
-!DECK LMPAR
+!** LMPAR
 SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  LMPAR
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to SNLS1 and SNLS1E
-  !***LIBRARY   SLATEC
-  !***TYPE      SINGLE PRECISION (LMPAR-S, DMPAR-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to SNLS1 and SNLS1E
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      SINGLE PRECISION (LMPAR-S, DMPAR-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !     Given an M by N matrix A, an N by N nonsingular DIAGONAL
   !     matrix D, an M-vector B, and a positive number DELTA,
@@ -89,9 +93,12 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !
   !       WA1 and WA2 are work arrays of length N.
   !
-  !***SEE ALSO  SNLS1, SNLS1E
-  !***ROUTINES CALLED  ENORM, QRSOLV, R1MACH
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SNLS1, SNLS1E
+  !***
+  ! **Routines called:**  ENORM, QRSOLV, R1MACH
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800301  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
@@ -99,7 +106,7 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  LMPAR
+  
   INTEGER N, Ldr
   INTEGER Ipvt(*)
   REAL Delta, Par
@@ -110,7 +117,7 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   REAL R1MACH, ENORM
   SAVE p1, p001, zero
   DATA p1, p001, zero/1.0E-1, 1.0E-3, 0.0E0/
-  !***FIRST EXECUTABLE STATEMENT  LMPAR
+  !* FIRST EXECUTABLE STATEMENT  LMPAR
   dwarf = R1MACH(1)
   !
   !     COMPUTE AND STORE IN X THE GAUSS-NEWTON DIRECTION. IF THE

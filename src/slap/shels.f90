@@ -1,21 +1,27 @@
-!DECK SHELS
+!** SHELS
 SUBROUTINE SHELS(A,Lda,N,Q,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  SHELS
-  !***SUBSIDIARY
-  !***PURPOSE  Internal routine for SGMRES.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      SINGLE PRECISION (SHELS-S, DHELS-D)
-  !***KEYWORDS  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
+  !>
+  !***
+  !  Internal routine for SGMRES.
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      SINGLE PRECISION (SHELS-S, DHELS-D)
+  !***
+  ! **Keywords:**  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
   !             NON-SYMMETRIC LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Brown, Peter, (LLNL), pnbrown@llnl.gov
+  !***
+  ! **Author:**  Brown, Peter, (LLNL), pnbrown@llnl.gov
   !           Hindmarsh, Alan, (LLNL), alanh@llnl.gov
   !           Seager, Mark K., (LLNL), seager@llnl.gov
   !             Lawrence Livermore National Laboratory
   !             PO Box 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !        This routine is extracted from the LINPACK routine SGESL with
   !        changes due to the fact that A is an upper Hessenberg matrix.
   !
@@ -25,13 +31,13 @@ SUBROUTINE SHELS(A,Lda,N,Q,B)
   !
   !        using the factors computed by SHEQR.
   !
-  ! *Usage:
+  !- Usage:
   !      INTEGER LDA, N
   !      REAL A(LDA,N), Q(2*N), B(N+1)
   !
   !      CALL SHELS(A, LDA, N, Q, B)
   !
-  ! *Arguments:
+  !- Arguments:
   ! A       :IN       Real A(LDA,N)
   !          The output from SHEQR which contains the upper
   !          triangular factor R in the QR decomposition of A.
@@ -46,9 +52,12 @@ SUBROUTINE SHELS(A,Lda,N,Q,B)
   !          On input, B is the right hand side vector.
   !          On output, B is the solution vector X.
   !
-  !***SEE ALSO  SGMRES
-  !***ROUTINES CALLED  SAXPY
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  SGMRES
+  !***
+  ! **Routines called:**  SAXPY
+
+  !* REVISION HISTORY  (YYMMDD)
   !   871001  DATE WRITTEN
   !   881213  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -59,7 +68,7 @@ SUBROUTINE SHELS(A,Lda,N,Q,B)
   !   910502  Added C***FIRST EXECUTABLE STATEMENT line.  (FNF)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  !***END PROLOGUE  SHELS
+  
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -71,7 +80,7 @@ SUBROUTINE SHELS(A,Lda,N,Q,B)
   INTEGER iq, k, kb, kp1
   !     .. External Subroutines ..
   EXTERNAL SAXPY
-  !***FIRST EXECUTABLE STATEMENT  SHELS
+  !* FIRST EXECUTABLE STATEMENT  SHELS
   !
   !         Minimize(B-A*X,B-A*X).  First form Q*B.
   !

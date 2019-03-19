@@ -1,26 +1,33 @@
-!DECK DSLUCS
+!** DSLUCS
 SUBROUTINE DSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     Iunit,Rwork,Lenw,Iwork,Leniw)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DSLUCS
-  !***PURPOSE  Incomplete LU BiConjugate Gradient Squared Ax=b Solver.
+  !>
+  !***
+  !  Incomplete LU BiConjugate Gradient Squared Ax=b Solver.
   !            Routine to solve a linear system  Ax = b  using the
   !            BiConjugate Gradient Squared method with Incomplete LU
   !            decomposition preconditioning.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      DOUBLE PRECISION (SSLUCS-S, DSLUCS-D)
-  !***KEYWORDS  ITERATIVE INCOMPLETE LU PRECONDITION,
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (SSLUCS-S, DSLUCS-D)
+  !***
+  ! **Keywords:**  ITERATIVE INCOMPLETE LU PRECONDITION,
   !             NON-SYMMETRIC LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Greenbaum, Anne, (Courant Institute)
+  !***
+  ! **Author:**  Greenbaum, Anne, (Courant Institute)
   !           Seager, Mark K., (LLNL)
   !             Lawrence Livermore National Laboratory
   !             PO BOX 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
   !             seager@llnl.gov
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !
-  ! *Usage:
+  !- Usage:
   !     INTEGER N, NELT, IA(NELT), JA(NELT), ISYM, ITOL, ITMAX
   !     INTEGER ITER, IERR, IUNIT, LENW, IWORK(NL+NU+4*N+2), LENIW
   !     DOUBLE PRECISION B(N), X(N), A(NELT), TOL, ERR, RWORK(NL+NU+8*N)
@@ -28,7 +35,7 @@ SUBROUTINE DSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     CALL DSLUCS(N, B, X, NELT, IA, JA, A, ISYM, ITOL, TOL,
   !    $     ITMAX, ITER, ERR, IERR, IUNIT, RWORK, LENW, IWORK, LENIW)
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer.
   !         Order of the Matrix.
   ! B      :IN       Double Precision B(N).
@@ -114,7 +121,7 @@ SUBROUTINE DSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !         Length of the integer workspace, IWORK.
   !         LENIW >= NL+NU+4*N+12.
   !
-  ! *Description:
+  !- Description:
   !       This routine is simply a  driver for the DCGSN  routine.  It
   !       calls the DSILUS routine to set  up the  preconditioning and
   !       then  calls DCGSN with  the appropriate   MATVEC, MTTVEC and
@@ -185,19 +192,21 @@ SUBROUTINE DSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !       | 0  0  0 44  0|
   !       |51  0 53  0 55|
   !
-  ! *Side Effects:
+  !- Side Effects:
   !       The SLAP Triad format (IA, JA,  A) is modified internally to
   !       be the SLAP Column format.  See above.
   !
-  ! *Cautions:
+  !- Cautions:
   !     This routine will attempt to write to the Fortran logical output
   !     unit IUNIT, if IUNIT .ne. 0.  Thus, the user must make sure that
   !     this logical unit is attached to a file or terminal before calling
   !     this routine with a non-zero value for IUNIT.  This routine does
   !     not check for the validity of a non-zero IUNIT unit number.
   !
-  !***SEE ALSO  DCGS, DSDCGS
-  !***REFERENCES  1. P. Sonneveld, CGS, a fast Lanczos-type solver
+  !***
+  ! **See also:**  DCGS, DSDCGS
+  !***
+  ! **References:**  1. P. Sonneveld, CGS, a fast Lanczos-type solver
   !                  for nonsymmetric linear systems, Delft University
   !                  of Technology Report 84-16, Department of Mathe-
   !                  matics and Informatics, Delft, The Netherlands.
@@ -206,8 +215,10 @@ SUBROUTINE DSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !                  gradients squared,  Delft University of Technology
   !                  Report 86-21, Department of Mathematics and Informa-
   !                  tics, Delft, The Netherlands.
-  !***ROUTINES CALLED  DCGS, DCHKW, DS2Y, DSILUS, DSLUI, DSMV
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **Routines called:**  DCGS, DCHKW, DS2Y, DSILUS, DSLUI, DSMV
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -219,7 +230,7 @@ SUBROUTINE DSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  !***END PROLOGUE  DSLUCS
+  
   !     .. Parameters ..
   INTEGER LOCRB, LOCIB
   PARAMETER (LOCRB=1,LOCIB=11)
@@ -236,7 +247,7 @@ SUBROUTINE DSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     locuu, locv1, locv2, locw, nl, nu
   !     .. External Subroutines ..
   EXTERNAL DCGS, DCHKW, DS2Y, DSILUS, DSLUI, DSMV
-  !***FIRST EXECUTABLE STATEMENT  DSLUCS
+  !* FIRST EXECUTABLE STATEMENT  DSLUCS
   !
   Ierr = 0
   IF ( N<1.OR.Nelt<1 ) THEN

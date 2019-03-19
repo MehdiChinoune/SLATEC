@@ -1,30 +1,36 @@
-!DECK DRLCAL
+!** DRLCAL
 SUBROUTINE DRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DRLCAL
-  !***SUBSIDIARY
-  !***PURPOSE  Internal routine for DGMRES.
-  !***LIBRARY   SLATEC (SLAP)
-  !***CATEGORY  D2A4, D2B4
-  !***TYPE      DOUBLE PRECISION (SRLCAL-S, DRLCAL-D)
-  !***KEYWORDS  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
+  !>
+  !***
+  !  Internal routine for DGMRES.
+  !***
+  ! **Library:**   SLATEC (SLAP)
+  !***
+  ! **Category:**  D2A4, D2B4
+  !***
+  ! **Type:**      DOUBLE PRECISION (SRLCAL-S, DRLCAL-D)
+  !***
+  ! **Keywords:**  GENERALIZED MINIMUM RESIDUAL, ITERATIVE PRECONDITION,
   !             NON-SYMMETRIC LINEAR SYSTEM, SLAP, SPARSE
-  !***AUTHOR  Brown, Peter, (LLNL), pnbrown@llnl.gov
+  !***
+  ! **Author:**  Brown, Peter, (LLNL), pnbrown@llnl.gov
   !           Hindmarsh, Alan, (LLNL), alanh@llnl.gov
   !           Seager, Mark K., (LLNL), seager@llnl.gov
   !             Lawrence Livermore National Laboratory
   !             PO Box 808, L-60
   !             Livermore, CA 94550 (510) 423-3141
-  !***DESCRIPTION
+  !***
+  ! **Description:**
   !         This routine calculates the scaled residual RL from the
   !         V(I)'s.
-  ! *Usage:
+  !- Usage:
   !      INTEGER N, KMP, LL, MAXL
   !      DOUBLE PRECISION V(N,LL), Q(2*MAXL), RL(N), SNORMW, PROD, R0NORM
   !
   !      CALL DRLCAL(N, KMP, LL, MAXL, V, Q, RL, SNORMW, PROD, R0NRM)
   !
-  ! *Arguments:
+  !- Arguments:
   ! N      :IN       Integer
   !         The order of the matrix A, and the lengths
   !         of the vectors SR, SZ, R0 and Z.
@@ -57,9 +63,12 @@ SUBROUTINE DRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   ! R0NRM  :IN       Double Precision
   !         The scaled norm of initial residual R0.
   !
-  !***SEE ALSO  DGMRES
-  !***ROUTINES CALLED  DCOPY, DSCAL
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DGMRES
+  !***
+  ! **Routines called:**  DCOPY, DSCAL
+
+  !* REVISION HISTORY  (YYMMDD)
   !   890404  DATE WRITTEN
   !   890404  Previous REVISION DATE
   !   890915  Made changes requested at July 1989 CML Meeting.  (MKS)
@@ -69,7 +78,7 @@ SUBROUTINE DRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  !***END PROLOGUE  DRLCAL
+  
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -82,7 +91,7 @@ SUBROUTINE DRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   INTEGER i, i2, ip1, k, llm1, llp1
   !     .. External Subroutines ..
   EXTERNAL DCOPY, DSCAL
-  !***FIRST EXECUTABLE STATEMENT  DRLCAL
+  !* FIRST EXECUTABLE STATEMENT  DRLCAL
   IF ( Kmp==Maxl ) THEN
     !
     !         calculate RL.  Start by copying V(*,1) into RL.

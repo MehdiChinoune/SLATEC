@@ -1,17 +1,24 @@
-!DECK DBSKES
+!** DBSKES
 SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBSKES
-  !***PURPOSE  Compute a sequence of exponentially scaled modified Bessel
+  !>
+  !***
+  !  Compute a sequence of exponentially scaled modified Bessel
   !            functions of the third kind of fractional order.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10B3
-  !***TYPE      DOUBLE PRECISION (BESKES-S, DBSKES-D)
-  !***KEYWORDS  EXPONENTIALLY SCALED, FNLIB, FRACTIONAL ORDER,
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10B3
+  !***
+  ! **Type:**      DOUBLE PRECISION (BESKES-S, DBSKES-D)
+  !***
+  ! **Keywords:**  EXPONENTIALLY SCALED, FNLIB, FRACTIONAL ORDER,
   !             MODIFIED BESSEL FUNCTION, SEQUENCE OF BESSEL FUNCTIONS,
   !             SPECIAL FUNCTIONS, THIRD KIND
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! DBSKES(XNU,X,NIN,BKE) computes a double precision sequence
   ! of exponentially scaled modified Bessel functions
@@ -21,22 +28,25 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   ! vector BKE(.) contains the results at X for order starting at XNU.
   ! XNU, X, and BKE are double precision.  NIN is integer.
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  D1MACH, D9KNUS, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  D1MACH, D9KNUS, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   770601  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890911  Removed unnecessary intrinsics.  (WRB)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  !***END PROLOGUE  DBSKES
+  
   INTEGER i, iswtch, n, Nin
   REAL(8) :: Xnu, X, Bke(*), bknu1, v, vincr, vend, alnbig, &
     D1MACH, direct
   SAVE alnbig
   DATA alnbig/0.D0/
-  !***FIRST EXECUTABLE STATEMENT  DBSKES
+  !* FIRST EXECUTABLE STATEMENT  DBSKES
   IF ( alnbig==0.D0 ) alnbig = LOG(D1MACH(2))
   !
   v = ABS(Xnu)

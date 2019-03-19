@@ -1,25 +1,32 @@
-!DECK ZEXP
+!** ZEXP
 SUBROUTINE ZEXP(Ar,Ai,Br,Bi)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  ZEXP
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
+  !>
+  !***
+  !  Subsidiary to ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZAIRY and
   !            ZBIRY
-  !***LIBRARY   SLATEC
-  !***TYPE      ALL (ZEXP-A)
-  !***AUTHOR  Amos, D. E., (SNL)
-  !***DESCRIPTION
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      ALL (ZEXP-A)
+  !***
+  ! **Author:**  Amos, D. E., (SNL)
+  !***
+  ! **Description:**
   !
   !     DOUBLE PRECISION COMPLEX EXPONENTIAL FUNCTION B=EXP(A)
   !
-  !***SEE ALSO  ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZBIRY
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  ZAIRY, ZBESH, ZBESI, ZBESJ, ZBESK, ZBESY, ZBIRY
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  !***END PROLOGUE  ZEXP
+  
   REAL(8) :: Ar, Ai, Br, Bi, zm, ca, cb
-  !***FIRST EXECUTABLE STATEMENT  ZEXP
+  !* FIRST EXECUTABLE STATEMENT  ZEXP
   zm = EXP(Ar)
   ca = zm*COS(Ai)
   cb = zm*SIN(Ai)

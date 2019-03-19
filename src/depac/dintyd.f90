@@ -1,13 +1,17 @@
-!DECK DINTYD
+!** DINTYD
 SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DINTYD
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DDEBDF
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (INTYD-S, DINTYD-D)
-  !***AUTHOR  Watts, H. A., (SNLA)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DDEBDF
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (INTYD-S, DINTYD-D)
+  !***
+  ! **Author:**  Watts, H. A., (SNLA)
+  !***
+  ! **Description:**
   !
   !   DINTYD approximates the solution and derivatives at T by polynomial
   !   interpolation. Must be used in conjunction with the integrator
@@ -33,16 +37,20 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   ! IFLAG is returned negative if either K or T is out of bounds.
   ! ----------------------------------------------------------------------
   !
-  !***SEE ALSO  DDEBDF
-  !***ROUTINES CALLED  (NONE)
-  !***COMMON BLOCKS    DDEBD1
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DDEBDF
+  !***
+  ! **Routines called:**  (NONE)
+  !***
+  ! COMMON BLOCKS    DDEBD1
+
+  !* REVISION HISTORY  (YYMMDD)
   !   820301  DATE WRITTEN
   !   890911  Removed unnecessary intrinsics.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  !***END PROLOGUE  DINTYD
+  
   !
   INTEGER i, ic, IER, Iflag, IOWnd, IOWns, j, jb, jb2, jj, jj1, &
     jp1, JSTart, K, KFLag, L, MAXord, METh, MITer, N, NFE, &
@@ -55,7 +63,7 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
     METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 130
-  !***FIRST EXECUTABLE STATEMENT  DINTYD
+  !* FIRST EXECUTABLE STATEMENT  DINTYD
   Iflag = 0
   IF ( K<0.OR.K>NQ ) THEN
     !

@@ -1,13 +1,17 @@
-!DECK DBNSLV
+!** DBNSLV
 SUBROUTINE DBNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  DBNSLV
-  !***SUBSIDIARY
-  !***PURPOSE  Subsidiary to DBINT4 and DBINTK
-  !***LIBRARY   SLATEC
-  !***TYPE      DOUBLE PRECISION (BNSLV-S, DBNSLV-D)
-  !***AUTHOR  (UNKNOWN)
-  !***DESCRIPTION
+  !>
+  !***
+  !  Subsidiary to DBINT4 and DBINTK
+  !***
+  ! **Library:**   SLATEC
+  !***
+  ! **Type:**      DOUBLE PRECISION (BNSLV-S, DBNSLV-D)
+  !***
+  ! **Author:**  (UNKNOWN)
+  !***
+  ! **Description:**
   !
   !  DBNSLV is the BANSLV routine from
   !        * A Practical Guide to Splines *  by C. de Boor
@@ -18,34 +22,37 @@ SUBROUTINE DBNSLV(W,Nroww,Nrow,Nbandl,Nbandu,B)
   !  linear system  A*X = B  in place of  B, given the LU-factorization
   !  for  A  in the work array  W from DBNFAC.
   !
-  ! *****  I N P U T  ****** W,B are DOUBLE PRECISION
+  !- ****  I N P U T  ****** W,B are DOUBLE PRECISION
   !  W, NROWW,NROW,NBANDL,NBANDU.....Describe the LU-factorization of a
   !        banded matrix  A  of order  NROW  as constructed in  DBNFAC .
   !        For details, see  DBNFAC .
   !  B.....Right side of the system to be solved .
   !
-  ! *****  O U T P U T  ****** B is DOUBLE PRECISION
+  !- ****  O U T P U T  ****** B is DOUBLE PRECISION
   !  B.....Contains the solution  X, of order  NROW .
   !
-  ! *****  M E T H O D  ******
+  !- ****  M E T H O D  ******
   !     (With  A = L*U, as stored in  W,) the unit lower triangular system
   !  L(U*X) = B  is solved for  Y = U*X, and  Y  stored in  B . Then the
   !  upper triangular system  U*X = Y  is solved for  X  . The calcul-
   !  ations are so arranged that the innermost loops stay within columns.
   !
-  !***SEE ALSO  DBINT4, DBINTK
-  !***ROUTINES CALLED  (NONE)
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **See also:**  DBINT4, DBINTK
+  !***
+  ! **Routines called:**  (NONE)
+
+  !* REVISION HISTORY  (YYMMDD)
   !   800901  DATE WRITTEN
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  !***END PROLOGUE  DBNSLV
+  
   !
   INTEGER Nbandl, Nbandu, Nrow, Nroww, i, j, jmax, middle, nrowm1
   REAL(8) :: W(Nroww,*), B(*)
-  !***FIRST EXECUTABLE STATEMENT  DBNSLV
+  !* FIRST EXECUTABLE STATEMENT  DBNSLV
   middle = Nbandu + 1
   IF ( Nrow==1 ) THEN
     B(1) = B(1)/W(middle,1)

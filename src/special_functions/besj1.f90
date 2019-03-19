@@ -1,15 +1,22 @@
-!DECK BESJ1
+!** BESJ1
 REAL FUNCTION BESJ1(X)
   IMPLICIT NONE
-  !***BEGIN PROLOGUE  BESJ1
-  !***PURPOSE  Compute the Bessel function of the first kind of order one.
-  !***LIBRARY   SLATEC (FNLIB)
-  !***CATEGORY  C10A1
-  !***TYPE      SINGLE PRECISION (BESJ1-S, DBESJ1-D)
-  !***KEYWORDS  BESSEL FUNCTION, FIRST KIND, FNLIB, ORDER ONE,
+  !>
+  !***
+  !  Compute the Bessel function of the first kind of order one.
+  !***
+  ! **Library:**   SLATEC (FNLIB)
+  !***
+  ! **Category:**  C10A1
+  !***
+  ! **Type:**      SINGLE PRECISION (BESJ1-S, DBESJ1-D)
+  !***
+  ! **Keywords:**  BESSEL FUNCTION, FIRST KIND, FNLIB, ORDER ONE,
   !             SPECIAL FUNCTIONS
-  !***AUTHOR  Fullerton, W., (LANL)
-  !***DESCRIPTION
+  !***
+  ! **Author:**  Fullerton, W., (LANL)
+  !***
+  ! **Description:**
   !
   ! BESJ1(X) calculates the Bessel function of the first kind of
   ! order one for real argument X.
@@ -32,16 +39,19 @@ REAL FUNCTION BESJ1(X)
   !                               significant figures required  15.96
   !                                    decimal places required  17.08
   !
-  !***REFERENCES  (NONE)
-  !***ROUTINES CALLED  CSEVL, INITS, R1MACH, XERMSG
-  !***REVISION HISTORY  (YYMMDD)
+  !***
+  ! **References:**  (NONE)
+  !***
+  ! **Routines called:**  CSEVL, INITS, R1MACH, XERMSG
+
+  !* REVISION HISTORY  (YYMMDD)
   !   780601  DATE WRITTEN
   !   890210  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  !***END PROLOGUE  BESJ1
+  
   REAL ampl, bj1cs, bm1cs, bth1cs, CSEVL, pi4, R1MACH, &
     theta, X, xmax, xmin, xsml, y, z
   INTEGER INITS, ntj1, ntm1, ntth1
@@ -108,7 +118,7 @@ REAL FUNCTION BESJ1(X)
   DATA bth1cs(24)/ - .000000000000000040E0/
   DATA pi4/0.78539816339744831E0/
   DATA first/.TRUE./
-  !***FIRST EXECUTABLE STATEMENT  BESJ1
+  !* FIRST EXECUTABLE STATEMENT  BESJ1
   IF ( first ) THEN
     ntj1 = INITS(bj1cs,12,0.1*R1MACH(3))
     ntm1 = INITS(bm1cs,21,0.1*R1MACH(3))
