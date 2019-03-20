@@ -166,7 +166,7 @@ add_library(get_argument OBJECT get_argument.f90)
 
 foreach( tst ${tests} )
   STRING(REPLACE ".f90" "" exe ${tst})
-  target_link_libraries(${exe} get_argument)
+  target_link_libraries(${exe} $<TARGET_OBJECTS:get_argument>)
   add_test(NAME ${exe} COMMAND ./${exe} 1 WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
   set_tests_properties(${exe} PROPERTIES FAIL_REGULAR_EXPRESSION "[^a-z]Error;ERROR;Failed;FAILED")
 endforeach()
