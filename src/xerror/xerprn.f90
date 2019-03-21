@@ -83,14 +83,13 @@ SUBROUTINE XERPRN(Prefix,Npref,Messg,Nwrap)
   !   891214  Prologue converted to Version 4.0 format.  (WRB)
   !   900510  Added code to break messages between words.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, I1MACH, idelta, lenmsg, lpiece, lpref, lwrap, n, nextc
   CHARACTER*(*) Prefix, Messg
   INTEGER Npref, Nwrap
   CHARACTER(148) :: cbuff
   INTEGER iu(5), nunit
-  CHARACTER(2) :: NEWLIN
-  PARAMETER (NEWLIN='$$')
+  CHARACTER(2), PARAMETER :: NEWLIN = '$$'
   !* FIRST EXECUTABLE STATEMENT  XERPRN
   CALL XGETUA(iu,nunit)
   !

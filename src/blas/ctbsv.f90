@@ -151,15 +151,14 @@ SUBROUTINE CTBSV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Incx, K, Lda, N
   CHARACTER :: Diag, Trans, Uplo
   !     .. Array Arguments ..
   COMPLEX A(Lda,*), X(*)
   !     .. Parameters ..
-  COMPLEX ZERO
-  PARAMETER (ZERO=(0.0E+0,0.0E+0))
+  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !     .. Local Scalars ..
   COMPLEX temp
   INTEGER i, info, ix, j, jx, kplus1, kx, l

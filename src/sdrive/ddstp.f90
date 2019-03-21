@@ -75,24 +75,20 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  
+
   EXTERNAL F, JACOBN, FA, USERS
-  INTEGER i, Ierror, Impl, Ipvt(*), Iswflg, iter, j, Jstate, &
-    Jstepl, Jtask, Matdim, Maxord, Mint, Miter, Ml, Mntold, &
-    Mtrold, Mtrsv, Mu, MXFAIL, MXITER, Mxrdsv, MXTRY, N, Nde, &
-    NDJSTP, nfail, Nfe, Nje, Nq, Nqused, Nstep, nsv, ntry, &
-    Nwait
-  REAL(8) :: A(Matdim,*), Avgh, Avgord, BIAS1, BIAS2, BIAS3, &
-    bnd, ctest, d, denom, Dfdy(Matdim,*), d1, El(13,12)&
-    , Eps, erdn, erup, etest, Fac(*), H, Hmax, hn, &
-    Hold, hs, Hused, numer, Rc, RCTEST, rh, rh1, &
-    rh2, rh3, Rmax, RMFAIL, RMNORM, Save1(*), Save2(*)&
-    , DNRM2, T, told, Tq(3,12), Trend, TRSHLD, Uround, &
-    Y(*), Yh(N,*), Ywt(*), y0nrm
+  INTEGER i, Ierror, Impl, Ipvt(*), Iswflg, iter, j, Jstate, Jstepl, Jtask, Matdim, &
+    Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mtrsv, Mu, Mxrdsv, N, Nde, nfail, &
+    Nfe, Nje, Nq, Nqused, Nstep, nsv, ntry, Nwait
+  REAL(8) :: A(Matdim,*), Avgh, Avgord, bnd, ctest, d, denom, Dfdy(Matdim,*), d1, &
+    El(13,12), Eps, erdn, erup, etest, Fac(*), H, Hmax, hn, Hold, hs, Hused, &
+    numer, Rc, rh, rh1, rh2, rh3, Rmax, Save1(*), Save2(*), DNRM2, T, told, &
+    Tq(3,12), Trend, Uround, Y(*), Yh(N,*), Ywt(*), y0nrm
   LOGICAL Convrg, evalfa, evaljc, ier, switch
-  PARAMETER (BIAS1=1.3D0,BIAS2=1.2D0,BIAS3=1.4D0,MXFAIL=3,MXITER=3,MXTRY=50,&
-    RCTEST=.3D0,RMFAIL=2.D0,RMNORM=10.D0,TRSHLD=1.D0)
-  PARAMETER (NDJSTP=10)
+  INTEGER, PARAMETER :: MXFAIL = 3, MXITER = 3, MXTRY = 50
+  REAL(8), PARAMETER :: BIAS1 = 1.3D0, BIAS2 = 1.2D0, BIAS3 = 1.4D0, RCTEST = 0.3D0, &
+    RMFAIL = 2.D0, RMNORM = 10.D0, TRSHLD = 1.D0
+  INTEGER, PARAMETER :: NDJSTP = 10
   DATA ier/.FALSE./
   !* FIRST EXECUTABLE STATEMENT  DDSTP
   nsv = N

@@ -46,7 +46,7 @@ CONTAINS
     !   890713  DATE WRITTEN
     !   921215  Updated for Version 4.0.  (WRB)
     !   930701  Updated for Version 4.1.  (WRB)
-    
+
     !
     !*Internal Notes:
     !
@@ -60,8 +60,8 @@ CONTAINS
     !
     !  DECLARE VARIABLES.
     !
-    CHARACTER(16) :: ver, VERSN
-    PARAMETER (VERSN=' 4.1')
+    CHARACTER(16) :: ver
+    CHARACTER(16), PARAMETER :: VERSN = ' 4.1'
     !
     !* FIRST EXECUTABLE STATEMENT  QC6A
     IF ( Kprint>=3 ) WRITE (Lun,99001)
@@ -146,7 +146,7 @@ PROGRAM TEST01
   !* REVISION HISTORY  (YYMMDD)
   !   890713  DATE WRITTEN
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST01

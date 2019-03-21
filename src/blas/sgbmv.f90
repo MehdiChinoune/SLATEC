@@ -136,19 +136,17 @@ SUBROUTINE SGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   REAL Alpha, Beta
   INTEGER Incx, Incy, Kl, Ku, Lda, M, N
   CHARACTER :: Trans
   !     .. Array Arguments ..
   REAL A(Lda,*), X(*), Y(*)
-  REAL ONE, ZERO
-  PARAMETER (ONE=1.0E+0,ZERO=0.0E+0)
+  REAL, PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
   !     .. Local Scalars ..
   REAL temp
-  INTEGER i, info, ix, iy, j, jx, jy, k, kup1, kx, ky, lenx, &
-    leny
+  INTEGER i, info, ix, iy, j, jx, jy, k, kup1, kx, ky, lenx, leny
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME

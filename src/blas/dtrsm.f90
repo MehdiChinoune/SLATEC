@@ -136,7 +136,7 @@ SUBROUTINE DTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !   890208  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   CHARACTER :: Side, Uplo, Transa, Diag
   INTEGER M, N, Lda, Ldb
@@ -156,8 +156,7 @@ SUBROUTINE DTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   INTEGER i, info, j, k, nrowa
   REAL(8) :: temp
   !     .. Parameters ..
-  REAL(8) :: ONE, ZERO
-  PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
+  REAL(8), PARAMETER :: ONE = 1.0D+0, ZERO = 0.0D+0
   !* FIRST EXECUTABLE STATEMENT  DTRSM
   !
   !     Test the input parameters.

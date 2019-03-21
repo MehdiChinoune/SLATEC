@@ -112,7 +112,7 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   COMPLEX Alpha, Beta
   INTEGER Incx, Incy, Lda, M, N
@@ -120,10 +120,8 @@ SUBROUTINE CGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !     .. Array Arguments ..
   COMPLEX A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
-  COMPLEX ONE
-  PARAMETER (ONE=(1.0E+0,0.0E+0))
-  COMPLEX ZERO
-  PARAMETER (ZERO=(0.0E+0,0.0E+0))
+  COMPLEX, PARAMETER :: ONE = (1.0E+0,0.0E+0)
+  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !     .. Local Scalars ..
   COMPLEX temp
   INTEGER i, info, ix, iy, j, jx, jy, kx, ky, lenx, leny

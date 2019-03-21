@@ -112,25 +112,21 @@ PROGRAM SLPREP
   !   880324  REVISION DATE from Version 3.2
   !   891215  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  
+
   !
   !     System dependent parameter definitions.
   !
-  INTEGER MXLFN
-  PARAMETER (MXLFN=32)
-  CHARACTER(MXLFN) :: finp, fclass, fcat, fdaf, fkwd, ftbl, FOUT, &
-    flog, FERR, FINPUT
-  CHARACTER(MXLFN) :: DFINP, DFCLAS, DFCAT, DFDAF, DFKWD, DFTBL, DFLOG
-  PARAMETER (DFINP='slainp',DFCLAS='class',DFCAT='slacat',DFDAF='sladaf',&
-    DFKWD='slakwd',DFTBL='slatbl',DFLOG='slalog',FOUT='/dev/tty',&
-    FINPUT='/dev/tty',FERR='/dev/tty')
+  INTEGER, PARAMETER :: MXLFN = 32
+  CHARACTER(MXLFN) :: finp, fclass, fcat, fdaf, fkwd, ftbl, flog
+  CHARACTER(MXLFN), PARAMETER :: DFINP = 'slainp', DFCLAS = 'class', &
+    DFCAT = 'slacat', DFDAF = 'sladaf', DFKWD = 'slakwd', DFTBL = 'slatbl', &
+    DFLOG = 'slalog', FOUT = '/dev/tty', FINPUT = '/dev/tty', FERR = '/dev/tty'
   !
   !     Library dependent parameter definitions.
   !
-  INTEGER MXLRN, MXNRN, MXLCAT, MXNCAT, MXNKWD, MXNCL
-  PARAMETER (MXLRN=6,MXNRN=1600,MXLCAT=10,MXNCAT=750,MXNKWD=500,MXNCL=751)
-  INTEGER KMAXI, KMAXJ, LLN
-  PARAMETER (KMAXI=60,KMAXJ=40,LLN=80)
+  INTEGER, PARAMETER :: MXLRN = 6, MXNRN = 1600, MXLCAT = 10, MXNCAT = 750, &
+    MXNKWD = 500, MXNCL = 751
+  INTEGER, PARAMETER :: KMAXI = 60, KMAXJ = 40, LLN = 80
   !
   !     Other declarations.
   !
@@ -139,9 +135,8 @@ PROGRAM SLPREP
     mxnca, mxnkw, ncat, ncc, nclass, nerr, nextl, nkwd, &
     nstmts, ntcat, ntkwd, numr, numrr
   !
-  INTEGER LU5, LU6, LU12, LU13, LU14, LU15, LU17, LU18, LU19
-  PARAMETER (LU12=12,LU13=13,LU14=14,LU15=15,LU6=6,LU17=17,LU18=18,LU19=19,&
-    LU5=5)
+  INTEGER, PARAMETER :: LU12 = 12, LU13 = 13, LU14 = 14, LU15 = 15, LU6 = 6, &
+    LU17 = 17, LU18 = 18, LU19 = 19, LU5 = 5
   CHARACTER(LLN) :: line, line_big
   CHARACTER(80) :: clline
   CHARACTER(80) :: msg
@@ -844,7 +839,7 @@ LOGICAL FUNCTION IFDECK(Line)
   !   840430  REVISION DATE from the pre-1990 prologue.
   !   891215  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  
+
   !     .. Scalar Arguments ..
   CHARACTER*(*) Line
   !     .. Local Scalars ..
@@ -890,7 +885,7 @@ LOGICAL FUNCTION IFIF(Line)
   !* REVISION HISTORY  (YYMMDD)
   !   910208  DATE WRITTEN
   !   920911  Declarations section restructured.  (WRB)
-  
+
   !     .. Scalar Arguments ..
   CHARACTER*(*) Line
   !     .. Local Scalars ..
@@ -936,7 +931,7 @@ LOGICAL FUNCTION IFSID(Line)
   !* REVISION HISTORY  (YYMMDD)
   !   910211  DATE WRITTEN
   !   920911  Declarations section restructured.  (WRB)
-  
+
   !     .. Scalar Arguments ..
   CHARACTER*(*) Line
   !     .. Local Scalars ..
@@ -1166,7 +1161,7 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,&
   !   891215  DATE WRITTEN
   !   891215  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Istmt, Mncl, Ncat, Ncc, Nerr
   !     .. Array Arguments ..
@@ -1425,7 +1420,7 @@ SUBROUTINE SORT(R,N,Nr,Cr)
   !   891101  DATE WRITTEN
   !   891215  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER N, Nr
   !     .. Array Arguments ..

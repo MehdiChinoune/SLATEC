@@ -27,7 +27,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
-    
+
     !     .. Scalar Arguments ..
     LOGICAL Reset
     !     .. Local Scalars ..
@@ -103,27 +103,23 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
     !   930315  Removed unused variables.  (WRB)
     !   930618  Code modified to improve PASS/FAIL reporting.  (BKS, WRB)
-    
+
     !     .. Parameters ..
-    INTEGER NSUBS
-    PARAMETER (NSUBS=16)
-    REAL(8) :: ZERO, ONE
-    PARAMETER (ZERO=0.0D0,ONE=1.0D0)
-    INTEGER NMAX, INCMAX
-    PARAMETER (NMAX=65,INCMAX=2)
+    INTEGER, PARAMETER :: NSUBS = 16
+    REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
+    INTEGER, PARAMETER :: NMAX = 65, INCMAX = 2
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint
     !     .. Local Scalars ..
     REAL(8) :: eps, err, thresh
-    INTEGER i, isnum, j, n, NALF, NBET, NIDIM, NINC, NKB, Nout
-    PARAMETER (NIDIM=6,NKB=4,NINC=4,NALF=3,NBET=3)
+    INTEGER i, isnum, j, n, Nout
+    INTEGER, PARAMETER :: NIDIM = 6, NKB = 4, NINC = 4, NALF = 3, NBET = 3
     LOGICAL same, tsterr, ftl, ftl1, ftl2
     CHARACTER :: trans
     !     .. Local Arrays ..
-    REAL(8) :: a(NMAX,NMAX), aa(NMAX*NMAX), alf(NALF), as(NMAX*NMAX)&
-      , bet(NBET), g(NMAX), x(NMAX), xs(NMAX*INCMAX), &
-      xx(NMAX*INCMAX), y(NMAX), ys(NMAX*INCMAX), yt(NMAX), &
-      yy(NMAX*INCMAX), z(2*NMAX)
+    REAL(8) :: a(NMAX,NMAX), aa(NMAX*NMAX), alf(NALF), as(NMAX*NMAX), bet(NBET), &
+      g(NMAX), x(NMAX), xs(NMAX*INCMAX), xx(NMAX*INCMAX), y(NMAX), ys(NMAX*INCMAX), &
+      yt(NMAX), yy(NMAX*INCMAX), z(2*NMAX)
     INTEGER idim(NIDIM), inc(NINC), kb(NKB)
     LOGICAL ltest(NSUBS)
     CHARACTER(6) :: snames(NSUBS)
@@ -318,20 +314,17 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
     !   930315  Removed unused variables.  (WRB)
     !   930618  Code modified to improve PASS/FAIL reporting.  (BKS, WRB)
-    
+
     !     .. Parameters ..
-    INTEGER NSUBS
-    PARAMETER (NSUBS=6)
-    REAL(8) :: ZERO, ONE
-    PARAMETER (ZERO=0.0D0,ONE=1.0D0)
-    INTEGER NMAX
-    PARAMETER (NMAX=65)
+    INTEGER, PARAMETER :: NSUBS = 6
+    REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
+    INTEGER, PARAMETER :: NMAX = 65
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint
     !     .. Local Scalars ..
     REAL(8) :: eps, err, thresh
-    INTEGER i, isnum, j, n, NALF, NBET, NIDIM, Nout
-    PARAMETER (NIDIM=6,NALF=3,NBET=3)
+    INTEGER i, isnum, j, n, Nout
+    INTEGER, PARAMETER :: NIDIM = 6, NALF = 3, NBET = 3
     LOGICAL same, tsterr, ftl, ftl1, ftl2
     CHARACTER :: transa, transb
     !     .. Local Arrays ..
@@ -539,12 +532,10 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-    
+
     !     .. Parameters ..
-    REAL(8) :: ZERO, ONE
-    PARAMETER (ZERO=0.0D0,ONE=1.0D0)
-    REAL(8) :: ROGUE
-    PARAMETER (ROGUE=-1.0D10)
+    REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
+    REAL(8), PARAMETER :: ROGUE = -1.0D10
     !     .. Scalar Arguments ..
     REAL(8) :: Transl
     INTEGER Kl, Ku, Lda, M, N, Nmax
@@ -723,12 +714,10 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-    
+
     !     .. Parameters ..
-    REAL(8) :: ZERO, ONE
-    PARAMETER (ZERO=0.0D0,ONE=1.0D0)
-    REAL(8) :: ROGUE
-    PARAMETER (ROGUE=-1.0D10)
+    REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
+    REAL(8), PARAMETER :: ROGUE = -1.0D10
     !     .. Scalar Arguments ..
     REAL(8) :: Transl
     INTEGER Lda, M, N, Nmax
@@ -842,10 +831,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-    
+
     !     .. Parameters ..
-    REAL(8) :: ZERO, ONE
-    PARAMETER (ZERO=0.0D0,ONE=1.0D0)
+    REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
     LOGICAL Ftl
     REAL(8) :: Alpha, Beta, Eps, Err
@@ -967,10 +955,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-    
+
     !     .. Parameters ..
-    REAL(8) :: ZERO, ONE
-    PARAMETER (ZERO=0.0D0,ONE=1.0D0)
+    REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
     REAL(8) :: Alpha, Beta, Eps, Err
     INTEGER Incx, Incy, Kprint, M, N, Nmax, Nout
@@ -1090,7 +1077,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Lr
     !     .. Array Arguments ..
@@ -1136,7 +1123,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Lda, M, N
     CHARACTER :: Uplo
@@ -1209,10 +1196,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-    
+
     !     .. Parameters ..
-    REAL(8) :: ZERO, HALF
-    PARAMETER (ZERO=0.0D0,HALF=0.5D0)
+    REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     REAL(8) :: Eps, Thresh
@@ -1525,10 +1511,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-    
+
     !     .. Parameters ..
-    REAL(8) :: ZERO
-    PARAMETER (ZERO=0.0D0)
+    REAL(8), PARAMETER :: ZERO = 0.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     REAL(8) :: Eps, Thresh
@@ -1796,10 +1781,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-    
+
     !     .. Parameters ..
-    REAL(8) :: ZERO, HALF
-    PARAMETER (ZERO=0.0D0,HALF=0.5D0)
+    REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     REAL(8) :: Eps, Thresh
@@ -2113,10 +2097,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-    
+
     !     .. Parameters ..
-    REAL(8) :: ZERO
-    PARAMETER (ZERO=0.0D0)
+    REAL(8), PARAMETER :: ZERO = 0.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     REAL(8) :: Eps, Thresh
@@ -2370,10 +2353,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-    
+
     !     .. Parameters ..
-    REAL(8) :: ZERO, HALF, ONE
-    PARAMETER (ZERO=0.0D0,HALF=0.5D0,ONE=1.0D0)
+    REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     REAL(8) :: Eps, Thresh
@@ -2685,10 +2667,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-    
+
     !     .. Parameters ..
-    REAL(8) :: ZERO, ONE
-    PARAMETER (ZERO=0.0D0,ONE=1.0D0)
+    REAL(8), PARAMETER :: ZERO = 0.0D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     REAL(8) :: Eps, Thresh
@@ -2962,10 +2943,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-    
+
     !     .. Parameters ..
-    REAL(8) :: ZERO, HALF, ONE
-    PARAMETER (ZERO=0.0D0,HALF=0.5D0,ONE=1.0D0)
+    REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     REAL(8) :: Eps, Thresh
@@ -3213,10 +3193,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-    
+
     !     .. Parameters ..
-    REAL(8) :: ZERO
-    PARAMETER (ZERO=0.0D0)
+    REAL(8), PARAMETER :: ZERO = 0.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     REAL(8) :: Eps, Thresh
@@ -3468,10 +3447,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-    
+
     !     .. Parameters ..
-    REAL(8) :: ZERO, HALF, ONE
-    PARAMETER (ZERO=0.0D0,HALF=0.5D0,ONE=1.0D0)
+    REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     REAL(8) :: Eps, Thresh
@@ -3731,10 +3709,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-    
+
     !     .. Parameters ..
-    REAL(8) :: ZERO
-    PARAMETER (ZERO=0.0D0)
+    REAL(8), PARAMETER :: ZERO = 0.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     REAL(8) :: Eps, Thresh
@@ -4019,10 +3996,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910619  Modified to meet SLATEC code and prologue standards. (BKS)
-    
+
     !     .. Parameters ..
-    REAL(8) :: ZERO, HALF, ONE
-    PARAMETER (ZERO=0.0D0,HALF=0.5D0,ONE=1.0D0)
+    REAL(8), PARAMETER :: ZERO = 0.0D0, HALF = 0.5D0, ONE = 1.0D0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     REAL(8) :: Eps, Thresh
@@ -4312,7 +4288,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   870810  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Isnum, Nout
     LOGICAL Fatal
@@ -4743,7 +4719,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890208  DATE WRITTEN
     !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-    
+
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     INTEGER Isnum, Nout
@@ -5487,7 +5463,7 @@ PROGRAM TEST19
 
   !* REVISION HISTORY  (YYMMDD)
   !   920601  DATE WRITTEN
-  
+
   INTEGER ipass, kprint, lin, lun, nfail
   !     .. External Functions ..
   INTEGER I1MACH

@@ -27,10 +27,9 @@ CONTAINS
     !   890620  DATE WRITTEN
     !   901005  Included test of IPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-    
+
     !
-    INTEGER N, NTEST
-    PARAMETER (N=9,NTEST=4)
+    INTEGER , PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL fail
     INTEGER x(N,NTEST), xs(N,NTEST), y(N), yc(N)
@@ -339,10 +338,9 @@ CONTAINS
     !   890620  DATE WRITTEN
     !   901005  Included test of HPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-    
+
     !
-    INTEGER N, NTEST
-    PARAMETER (N=9,NTEST=4)
+    INTEGER , PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL fail
     CHARACTER :: short
@@ -643,10 +641,9 @@ CONTAINS
     !   890620  DATE WRITTEN
     !   901005  Included test of SPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-    
+
     !
-    INTEGER N, NTEST
-    PARAMETER (N=9,NTEST=4)
+    INTEGER , PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL fail
     REAL x(N,NTEST), xs(N,NTEST), y(N), yc(N)
@@ -956,10 +953,9 @@ CONTAINS
     !   890620  DATE WRITTEN
     !   901005  Included test of DPPERM.  (MAM)
     !   920511  Added error message tests.  (MAM)
-    
+
     !
-    INTEGER N, NTEST
-    PARAMETER (N=9,NTEST=4)
+    INTEGER , PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL fail
     REAL(8) :: x(N,NTEST), xs(N,NTEST), y(N), yc(N)
@@ -1302,7 +1298,7 @@ PROGRAM TEST54
 
   !* REVISION HISTORY  (YYMMDD)
   !   890620  DATE WRITTEN
-  
+
   INTEGER lun, I1MACH, lin, nfail, kprint, ipass
   !* FIRST EXECUTABLE STATEMENT  TEST54
   lun = I1MACH(2)

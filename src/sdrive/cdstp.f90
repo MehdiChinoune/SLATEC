@@ -75,24 +75,21 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  
+
   EXTERNAL F, JACOBN, FA, USERS
-  INTEGER i, Ierror, Impl, Ipvt(*), Iswflg, iter, j, Jstate, &
-    Jstepl, Jtask, Matdim, Maxord, Mint, Miter, Ml, Mntold, &
-    Mtrold, Mtrsv, Mu, MXFAIL, MXITER, Mxrdsv, MXTRY, N, Nde, &
-    NDJSTP, nfail, Nfe, Nje, Nq, Nqused, Nstep, nsv, ntry, &
-    Nwait
+  INTEGER i, Ierror, Impl, Ipvt(*), Iswflg, iter, j, Jstate, Jstepl, Jtask, &
+    Matdim, Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mtrsv, Mu, Mxrdsv, N, Nde, &
+    nfail, Nfe, Nje, Nq, Nqused, Nstep, nsv, ntry, Nwait
   COMPLEX A(Matdim,*), Dfdy(Matdim,*), Fac(*), Save1(*), Save2(*), &
     Y(*), Yh(N,*), Ywt(*)
-  REAL Avgh, Avgord, BIAS1, BIAS2, BIAS3, bnd, ctest, d, denom, &
-    d1, El(13,12), Eps, erdn, erup, etest, H, Hmax, hn, Hold, &
-    hs, Hused, numer, Rc, RCTEST, rh, rh1, rh2, rh3, Rmax, &
-    RMFAIL, RMNORM, SCNRM2, T, told, Tq(3,12), Trend, TRSHLD, &
-    Uround, y0nrm
+  REAL Avgh, Avgord, bnd, ctest, d, denom, d1, El(13,12), Eps, erdn, erup, etest, &
+    H, Hmax, hn, Hold, hs, Hused, numer, Rc, rh, rh1, rh2, rh3, Rmax, SCNRM2, T, &
+    told, Tq(3,12), Trend, Uround, y0nrm
   LOGICAL Convrg, evalfa, evaljc, ier, switch
-  PARAMETER (BIAS1=1.3E0,BIAS2=1.2E0,BIAS3=1.4E0,MXFAIL=3,MXITER=3,MXTRY=50,&
-    RCTEST=.3E0,RMFAIL=2.E0,RMNORM=10.E0,TRSHLD=1.E0)
-  PARAMETER (NDJSTP=10)
+  INTEGER, PARAMETER :: MXFAIL = 3, MXITER = 3, MXTRY = 50
+  REAL, PARAMETER :: BIAS1 = 1.3E0, BIAS2 = 1.2E0, BIAS3 = 1.4E0, RCTEST = 0.3E0, &
+    RMFAIL = 2.E0, RMNORM = 10.E0, TRSHLD = 1.E0
+  INTEGER, PARAMETER :: NDJSTP = 10
   DATA ier/.FALSE./
   !* FIRST EXECUTABLE STATEMENT  CDSTP
   nsv = N

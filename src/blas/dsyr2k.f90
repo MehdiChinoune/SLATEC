@@ -144,7 +144,7 @@ SUBROUTINE DSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !   890208  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   CHARACTER :: Uplo, Trans
   INTEGER N, K, Lda, Ldb, Ldc
@@ -164,8 +164,7 @@ SUBROUTINE DSYR2K(Uplo,Trans,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   INTEGER i, info, j, l, nrowa
   REAL(8) :: temp1, temp2
   !     .. Parameters ..
-  REAL(8) :: ONE, ZERO
-  PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
+  REAL(8), PARAMETER :: ONE = 1.0D+0, ZERO = 0.0D+0
   !* FIRST EXECUTABLE STATEMENT  DSYR2K
   !
   !     Test the input parameters.

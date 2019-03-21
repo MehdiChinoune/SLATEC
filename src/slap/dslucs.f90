@@ -230,10 +230,9 @@ SUBROUTINE DSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  
+
   !     .. Parameters ..
-  INTEGER LOCRB, LOCIB
-  PARAMETER (LOCRB=1,LOCIB=11)
+  INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &

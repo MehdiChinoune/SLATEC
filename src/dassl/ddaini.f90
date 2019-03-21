@@ -58,7 +58,7 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
   !   901030  Minor corrections to declarations.  (FNF)
-  
+
   !
   INTEGER Neq, Idid, Ipar(*), Iwm(*), Nonneg, Ntemp
   REAL(8) :: X, Y(*), Yprime(*), H, Wt(*), Rpar(*), Phi(Neq,*), &
@@ -68,14 +68,12 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   EXTERNAL DDAJAC, DDANRM, DDASLV
   REAL(8) :: DDANRM
   !
-  INTEGER i, ier, ires, jcalc, LNJE, LNRE, m, maxit, mjac, ncf, &
-    nef, nsf
-  REAL(8) :: cj, damp, delnrm, err, oldnrm, r, rate, s, xold, &
-    ynorm
+  INTEGER i, ier, ires, jcalc, m, maxit, mjac, ncf, nef, nsf
+  REAL(8) :: cj, damp, delnrm, err, oldnrm, r, rate, s, xold, ynorm
   LOGICAL convgd
   !
-  PARAMETER (LNRE=12)
-  PARAMETER (LNJE=13)
+  INTEGER, PARAMETER :: LNRE = 12
+  INTEGER, PARAMETER :: LNJE = 13
   !
   DATA maxit/10/, mjac/5/
   DATA damp/0.75D0/

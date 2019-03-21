@@ -159,7 +159,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !    X(*)
   !    ----
   !     This array is used to pass data associated with options 4,5 and
-  !     6. Ignore this parameter (on input) if no options are used.
+  !     6. Ignore this , PARAMETER :: on input) if no options are used.
   !     Otherwise see below: IOPT(*) CONTENTS.
   !
   !
@@ -531,7 +531,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   910819  Added variable M for MOUT+MCON in reference to SBOLS.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !     REVISED 850604-0900
   !     REVISED YYMMDD-HHMM
   !

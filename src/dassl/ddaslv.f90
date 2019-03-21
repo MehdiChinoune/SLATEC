@@ -33,19 +33,19 @@ SUBROUTINE DDASLV(Neq,Delta,Wm,Iwm)
   !   901019  Merged changes made by C. Ulrich with SLATEC 4.0 format.
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
-  
+
   !
   INTEGER Neq, Iwm(*)
   REAL(8) :: Delta(*), Wm(*)
   !
   EXTERNAL DGBSL, DGESL
   !
-  INTEGER LIPVT, LML, LMU, LMTYPE, meband, mtype, NPD
-  PARAMETER (NPD=1)
-  PARAMETER (LML=1)
-  PARAMETER (LMU=2)
-  PARAMETER (LMTYPE=4)
-  PARAMETER (LIPVT=21)
+  INTEGER meband, mtype
+  INTEGER, PARAMETER :: NPD = 1
+  INTEGER, PARAMETER :: LML = 1
+  INTEGER, PARAMETER :: LMU = 2
+  INTEGER, PARAMETER :: LMTYPE = 4
+  INTEGER, PARAMETER :: LIPVT = 21
   !
   !* FIRST EXECUTABLE STATEMENT  DDASLV
   mtype = Iwm(LMTYPE)

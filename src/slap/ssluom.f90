@@ -236,10 +236,9 @@ SUBROUTINE SSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !   920511  Added complete declaration section.  (WRB)
   !   921019  Corrected NEL to NL.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  
+
   !     .. Parameters ..
-  INTEGER LOCRB, LOCIB
-  PARAMETER (LOCRB=1,LOCIB=11)
+  INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &

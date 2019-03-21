@@ -96,55 +96,46 @@ PROGRAM SLADOC
   !           A format.  (WRB)
   !   920825  Added view option.  (BKS, WRB)
   !   920911  Declarations section restructured.  (WRB)
-  
+
   !
   !     System dependent parameter definitions.
   !
-  INTEGER MXLFN
-  PARAMETER (MXLFN=32)
-  CHARACTER(MXLFN) :: FIN, FCAT, FDAF, FKWD, FTBL, FLIS, FOUT, FERR
+  INTEGER, PARAMETER :: MXLFN = 32
   CHARACTER(MXLFN) :: temp
-  PARAMETER (FIN='/dev/tty',FCAT='slacat',FDAF='sladaf',FKWD='slakwd',&
-    FTBL='slatbl',FLIS='slalis',FOUT='/dev/tty',FERR='/dev/tty')
+  CHARACTER(MXLFN), PARAMETER :: FIN = '/dev/tty', FCAT = 'slacat', FDAF = 'sladaf', &
+    FKWD = 'slakwd', FTBL = 'slatbl', FLIS = 'slalis', FOUT = '/dev/tty', &
+    FERR ='/dev/tty'
   !
   !     Library dependent parameter definitions.
   !
-  INTEGER MXLCAT, MXNCAT, MXLRN, MXNCL, MXNRN, MXLKAT
-  PARAMETER (MXLKAT=7)
-  PARAMETER (MXLCAT=10,MXLRN=6,MXNRN=1900)
-  PARAMETER (MXNCAT=750,MXNCL=750)
+  INTEGER , PARAMETER :: MXLKAT = 7, MXLCAT = 10, MXLRN = 6, MXNRN = 1900, &
+    MXNCAT = 750, MXNCL = 750
   CHARACTER(MXLCAT) :: tclass(MXNCAT), tcl
   INTEGER iptr(MXNCAT), jptr(MXNCAT), kptr(MXNCAT)
   CHARACTER(80) :: stmts(MXNCL)
-  INTEGER LUTIL, LLIB
-  PARAMETER (LUTIL=6,LLIB=6)
-  CHARACTER(LUTIL) :: UTIL
-  CHARACTER(LLIB) :: LIB
-  PARAMETER (UTIL='SLADOC',LIB='SLATEC')
-  INTEGER LLN
-  PARAMETER (LLN=80)
+  INTEGER, PARAMETER :: LUTIL = 6, LLIB = 6
+  CHARACTER(LUTIL), PARAMETER :: UTIL = 'SLADOC'
+  CHARACTER(LLIB), PARAMETER :: LIB = 'SLATEC'
+  INTEGER, PARAMETER :: LLN = 80
   !
   !     Other declarations.
   !
   INTEGER ierror, ifind, ii, ij, il, ilen, in, inext, ir, irec, &
     istart, istmt, itemp, jcl, jj, lb2, leng, lftbl, lkats, &
-    ll, ls, lt2, ltcl, ncc, nerr, nlines, npd, ntkwd, ntry, &
-    num
+    ll, ls, lt2, ltcl, ncc, nerr, nlines, npd, ntkwd, ntry, num
   CHARACTER(LLN) :: line, linesv
   !
   CHARACTER(MXLRN) :: rtname(MXNRN), rtnin
   CHARACTER(MXLRN) :: cname(MXNRN/2)
   !
-  INTEGER LCAT, LCATLS, MLCAT, SEVEN
-  PARAMETER (LCAT=6,LCATLS=72,MLCAT=MXLCAT-LCAT,SEVEN=7)
+  INTEGER, PARAMETER :: LCAT = 6, LCATLS = 72, MLCAT = MXLCAT-LCAT, SEVEN = 7
   CHARACTER(MXLCAT) :: cat(MXNRN), kat
   CHARACTER(MXLKAT) :: kats
   !
   !     KMAXI - maximum length of a keyword phrase.
   !     MXKWDS - maximum number of keyword phrases
   !
-  INTEGER KMAXI, MXKWDS
-  PARAMETER (KMAXI=60,MXKWDS=500)
+  INTEGER, PARAMETER :: KMAXI = 60, MXKWDS = 500
   CHARACTER(KMAXI) :: kwrd
   CHARACTER(KMAXI) :: tkwd(MXKWDS)
   !
@@ -154,8 +145,8 @@ PROGRAM SLADOC
   !
   INTEGER iptrl(10*MXKWDS), iptrr(10*MXKWDS)
   !
-  INTEGER LU13, LU14, LU5, LU6, LU17, LU18, LU19
-  PARAMETER (LU13=13,LU14=14,LU5=5,LU6=6,LU17=17,LU18=18,LU19=19)
+  INTEGER, PARAMETER :: LU13 = 13, LU14 = 14, LU5 = 5, LU6 = 6, LU17 = 17, &
+    LU18 = 18, LU19 = 19
   CHARACTER(MXLFN) :: fname, fnamsv, fn
   LOGICAL llu13, llu18, llu19, llu14
   LOGICAL found, lexist
@@ -178,8 +169,7 @@ PROGRAM SLADOC
   CHARACTER(80) :: msg
   CHARACTER form*25
   CHARACTER forma*60
-  INTEGER IALPHA
-  PARAMETER (IALPHA=26)
+  INTEGER, PARAMETER :: IALPHA = 26
   INTEGER I1(IALPHA), I2(IALPHA), I3(IALPHA), LMSg(IALPHA)
   CHARACTER(7) :: CLAss(IALPHA)
   !
@@ -1640,10 +1630,9 @@ SUBROUTINE CHARIN(Cardin,Lcard,Iopt,Lb,Lt)
   !   891208  Changed to check only for a blank or comma.
   !   891208  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  
+
   !     .. Parameters ..
-  INTEGER LAST
-  PARAMETER (LAST=2)
+  INTEGER, PARAMETER :: LAST = 2
   !     .. Scalar Arguments ..
   INTEGER Iopt, Lb, Lcard, Lt
   CHARACTER*(*) Cardin
@@ -1734,10 +1723,9 @@ INTEGER FUNCTION MINOR(Kat,Kats,Ncc,Tclass,Iptr,Jptr,Kptr,Ntry)
   !   871201  DATE WRITTEN
   !   891208  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  
+
   !     .. Parameters ..
-  INTEGER IALPHA
-  PARAMETER (IALPHA=26)
+  INTEGER, PARAMETER :: IALPHA = 26
   !     .. Scalar Arguments ..
   INTEGER Ncc, Ntry
   CHARACTER*(*) Kat, Kats
@@ -1807,7 +1795,7 @@ SUBROUTINE RBLNKS(L1,L2)
   !   871201  DATE WRITTEN
   !   891208  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  
+
   !     .. Scalar Arguments ..
   CHARACTER(72) :: L1, L2
   !     .. Local Scalars ..
@@ -1861,7 +1849,7 @@ SUBROUTINE UNDOCL(Kat,Cat)
   !   871201  DATE WRITTEN
   !   891208  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  
+
   !     .. Scalar Arguments ..
   CHARACTER*(*) Cat, Kat
   !     .. Local Scalars ..

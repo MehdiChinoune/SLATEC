@@ -32,16 +32,16 @@ SUBROUTINE CDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  
+
   INTEGER i, iflag, imax, Impl, info, Iswflg, j, j2, Jstate, k, &
     Matdim, Miter, Ml, Mu, mw, N, Nde, Nfe, Nje, Nq
   COMPLEX A(Matdim,*), cfctr, Dfdy(Matdim,*), dy, Fac(*), Save1(*), &
     Save2(*), Y(*), Yh(N,*), yj, ys, Ywt(*)
-  REAL bl, Bnd, bp, br, BU, dfdymx, diff, El(13,12), FACMAX, &
-    facmin, factor, H, scale, SCNRM2, T, Uround, zmax, zmin
+  REAL bl, Bnd, bp, br, dfdymx, diff, El(13,12), facmin, factor, H, scale, &
+    SCNRM2, T, Uround, zmax, zmin
   INTEGER Ipvt(*)
   LOGICAL Ier
-  PARAMETER (FACMAX=.5E0,BU=0.5E0)
+  REAL, PARAMETER :: FACMAX = 0.5E0, BU = 0.5E0
   !* FIRST EXECUTABLE STATEMENT  CDPST
   Nje = Nje + 1
   Ier = .FALSE.

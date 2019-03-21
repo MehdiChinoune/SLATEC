@@ -34,7 +34,7 @@ CONTAINS
     !   900315  Revised prologue.  (FNF)
     !   900316  Deleted variables ONE and TWO.  (FNF)
     !   900321  Changed name of d.p. version from DFTRUE to DFDTRU.
-    
+
     REAL X, F, D
     REAL(8) :: fact1, fact2, xx
     !
@@ -111,7 +111,7 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   910801  Added EXTERNAL statement for RAND due to problem on IBM
     !           RS 6000.  (WRB)
-    
+
     !
     !  Declare arguments.
     !
@@ -447,7 +447,7 @@ CONTAINS
     !   900322  Made miscellaneous cosmetic changes.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930504  Removed parens from constants in WRITE statements.  (FNF)
-    
+
     !
     !  Declare arguments.
     !
@@ -456,13 +456,13 @@ CONTAINS
     !
     !  DECLARATIONS.
     !
-    INTEGER i, ierr, kontrl, N, nerr, next(2)
+    INTEGER i, ierr, kontrl, nerr, next(2)
     REAL d(10), dum, f(10), temp, x(10)
     LOGICAL COMP, skip
     !
     !  INITIALIZE.
     !
-    PARAMETER (N=10)
+    INTEGER, PARAMETER :: N = 10
     !* FIRST EXECUTABLE STATEMENT  EVERCK
     nerr = 0
     !
@@ -631,7 +631,7 @@ CONTAINS
     !              line length.
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-    
+
     !
     !  Declare arguments.
     !
@@ -972,7 +972,7 @@ CONTAINS
     !   900321  Removed IFAIL from call sequence for SLATEC standards and
     !           made miscellaneous cosmetic changes.  (FNF)
     !   930317  Improved output formats.  (FNF)
-    
+
     !
     !  Declare arguments.
     !
@@ -1110,7 +1110,7 @@ CONTAINS
     !   901130  Added 1P's to formats; changed to allow KPRINT.gt.3.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-    
+
     !
     !  Declare arguments.
     !
@@ -1323,7 +1323,7 @@ CONTAINS
     !           3. Added 1P's to formats.
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-    
+
     !
     !*Internal Notes:
     !
@@ -1342,19 +1342,18 @@ CONTAINS
     !
     !  Declare variables.
     !
-    INTEGER i, ic(2), ierr, ifail, N, nbad, nbadz, NWK
-    PARAMETER (N=9,NWK=2*N)
-    REAL d(N), dc(N), dc5, dc6, dm(N), ds(N), err, f(N), MONE, tol, &
-      told, tolz, vc(2), x(N), wk(NWK), ZERO
-    PARAMETER (ZERO=0.0E0,MONE=-1.0E0)
+    INTEGER i, ic(2), ierr, ifail, nbad, nbadz
+    INTEGER, PARAMETER :: N = 9, NWK = 2*N
+    REAL d(N), dc(N), dc5, dc6, dm(N), ds(N), err, f(N), tol, &
+      told, tolz, vc(2), x(N), wk(NWK)
+    REAL, PARAMETER :: ZERO = 0.0E0, MONE = -1.0E0
     CHARACTER(6) :: result
     !
     !  Initialize.
     !
     !       Data.
     DATA ic/0, 0/
-    DATA x/ - 2.2E0, -1.2E0, -1.0E0, -0.5E0, -0.01E0, 0.5E0, 1.0E0, &
-      2.0E0, 2.2E0/
+    DATA x/ - 2.2E0, -1.2E0, -1.0E0, -0.5E0, -0.01E0, 0.5E0, 1.0E0, 2.0E0, 2.2E0/
     !
     !       Results generated on Cray X/MP (9 sign. figs.)
     DATA dm/0., 3.80027352E-01, 7.17253009E-01, 5.82014161E-01, 0., &
@@ -1644,7 +1643,7 @@ CONTAINS
     !   900322  Added declarations so all variables are declared.  (FNF)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930317  Improved output formats.  (FNF)
-    
+
     !
     !*Internal Notes:
     !
@@ -1659,8 +1658,7 @@ CONTAINS
     !
     !  DECLARE VARIABLES.
     !
-    INTEGER MAXN, MAXN2, MAXN3, NB
-    PARAMETER (MAXN=16,MAXN2=8,MAXN3=6,NB=7)
+    INTEGER, PARAMETER :: MAXN = 16, MAXN2 = 8, MAXN3 = 6, NB = 7
     INTEGER i, ierr, ifail, incfd, ismex1(MAXN), ismex2(MAXN2), &
       ismex3(MAXN3), ismexb(NB), ismon(MAXN), k, n, ns(3)
     REAL d(MAXN), db(NB), f(MAXN), fb(NB), x(MAXN)
@@ -1896,7 +1894,7 @@ CONTAINS
     !   900430  Corrected errors in prologue.
     !   900501  Corrected declarations.
     !   930317  Improved output formats.  (FNF)
-    
+
     !
     !*Internal Notes:
     !  TOL  is the tolerance to use for quantities that should only
@@ -1917,12 +1915,12 @@ CONTAINS
     !
     !  Declare variables.
     !
-    INTEGER i, ierr, ifail, inbv, j, knotyp, k, N, ndim, nknots
-    PARAMETER (N=9)
+    INTEGER i, ierr, ifail, inbv, j, knotyp, k, ndim, nknots
+    INTEGER, PARAMETER :: N = 9
     REAL bcoef(2*N), d(N), dcalc, derr, dermax, f(N), fcalc, ferr, &
       fermax, t(2*N+4), terr, termax, tol, tolz, tsave(2*N+4), &
-      work(16*N), x(N), ZERO
-    PARAMETER (ZERO=0.0E0)
+      work(16*N), x(N)
+    REAL, PARAMETER :: ZERO = 0.0E0
     LOGICAL fail
     !
     !  Define test data.
@@ -2108,7 +2106,7 @@ PROGRAM TEST32
   !   900321  Moved IPASS to call sequences for SLATEC standards.  (FNF)
   !   900524  Cosmetic changes to code.  (WRB)
   !   930318  Added new quick check PCHQK5.  (WRB,FNF)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST32

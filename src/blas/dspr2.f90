@@ -103,7 +103,7 @@ SUBROUTINE DSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: Alpha
   INTEGER Incx, Incy, N
@@ -111,8 +111,7 @@ SUBROUTINE DSPR2(Uplo,N,Alpha,X,Incx,Y,Incy,Ap)
   !     .. Array Arguments ..
   REAL(8) :: Ap(*), X(*), Y(*)
   !     .. Parameters ..
-  REAL(8) :: ZERO
-  PARAMETER (ZERO=0.0D+0)
+  REAL(8), PARAMETER :: ZERO = 0.0D+0
   !     .. Local Scalars ..
   REAL(8) :: temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, k, kk, kx, ky

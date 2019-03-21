@@ -136,19 +136,17 @@ SUBROUTINE DGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: Alpha, Beta
   INTEGER Incx, Incy, Kl, Ku, Lda, M, N
   CHARACTER :: Trans
   !     .. Array Arguments ..
   REAL(8) :: A(Lda,*), X(*), Y(*)
-  REAL(8) :: ONE, ZERO
-  PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
+  REAL(8), PARAMETER :: ONE = 1.0D+0, ZERO = 0.0D+0
   !     .. Local Scalars ..
   REAL(8) :: temp
-  INTEGER i, info, ix, iy, j, jx, jy, k, kup1, kx, ky, lenx, &
-    leny
+  INTEGER i, info, ix, iy, j, jx, jy, k, kup1, kx, ky, lenx, leny
   !     .. External Functions ..
   LOGICAL LSAME
   EXTERNAL LSAME

@@ -137,7 +137,7 @@ SUBROUTINE CTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   !   890208  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   CHARACTER :: Side, Uplo, Transa, Diag
   INTEGER M, N, Lda, Ldb
@@ -156,10 +156,8 @@ SUBROUTINE CTRSM(Side,Uplo,Transa,Diag,M,N,Alpha,A,Lda,B,Ldb)
   INTEGER i, info, j, k, nrowa
   COMPLEX temp
   !     .. Parameters ..
-  COMPLEX ONE
-  PARAMETER (ONE=(1.0E+0,0.0E+0))
-  COMPLEX ZERO
-  PARAMETER (ZERO=(0.0E+0,0.0E+0))
+  COMPLEX, PARAMETER :: ONE = (1.0E+0,0.0E+0)
+  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !* FIRST EXECUTABLE STATEMENT  CTRSM
   !
   !     Test the input parameters.

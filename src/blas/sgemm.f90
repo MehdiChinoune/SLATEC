@@ -138,7 +138,7 @@ SUBROUTINE SGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !   890208  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   CHARACTER :: Transa, Transb
   INTEGER M, N, K, Lda, Ldb, Ldc
@@ -157,8 +157,7 @@ SUBROUTINE SGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   INTEGER i, info, j, l, ncola, nrowa, nrowb
   REAL temp
   !     .. Parameters ..
-  REAL ONE, ZERO
-  PARAMETER (ONE=1.0E+0,ZERO=0.0E+0)
+  REAL, PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
   !* FIRST EXECUTABLE STATEMENT  SGEMM
   !
   !     Set  NOTA  and  NOTB  as  true if  A  and  B  respectively are not

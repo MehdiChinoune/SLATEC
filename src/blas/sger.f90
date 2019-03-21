@@ -89,15 +89,14 @@ SUBROUTINE SGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   REAL Alpha
   INTEGER Incx, Incy, Lda, M, N
   !     .. Array Arguments ..
   REAL A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
-  REAL ZERO
-  PARAMETER (ZERO=0.0E+0)
+  REAL, PARAMETER :: ZERO = 0.0E+0
   !     .. Local Scalars ..
   REAL temp
   INTEGER i, info, ix, j, jy, kx

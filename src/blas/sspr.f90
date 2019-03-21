@@ -92,7 +92,7 @@ SUBROUTINE SSPR(Uplo,N,Alpha,X,Incx,Ap)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   REAL Alpha
   INTEGER Incx, N
@@ -100,8 +100,7 @@ SUBROUTINE SSPR(Uplo,N,Alpha,X,Incx,Ap)
   !     .. Array Arguments ..
   REAL Ap(*), X(*)
   !     .. Parameters ..
-  REAL ZERO
-  PARAMETER (ZERO=0.0E+0)
+  REAL, PARAMETER :: ZERO = 0.0E+0
   !     .. Local Scalars ..
   REAL temp
   INTEGER i, info, ix, j, jx, k, kk, kx

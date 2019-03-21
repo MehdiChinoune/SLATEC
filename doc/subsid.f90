@@ -26,7 +26,7 @@ CHARACTER(10) FUNCTION CVTCAT(Categ)
   !   900202  Corrected error which occurred when expression I+1 exceeded
   !           length of input category (L).  (WRB)
   !   920911  Declarations section restructured.  (WRB)
-  
+
   !     .. Scalar Arguments ..
   CHARACTER*(*) Categ
   !     .. Local Scalars ..
@@ -114,10 +114,9 @@ INTEGER FUNCTION FIND(X,N,T)
   !   891101  DATE WRITTEN
   !   891208  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  
+
   !     .. Parameters ..
-  REAL B
-  PARAMETER (B=0.6931)
+  REAL, PARAMETER :: B = 0.6931
   !     .. Scalar Arguments ..
   INTEGER N
   CHARACTER*(*) T
@@ -196,7 +195,7 @@ INTEGER FUNCTION LENSTR(String)
   !   830324  REVISION DATE from the pre-1990 prologue.
   !   891208  Prologue converted to the 1990 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
-  
+
   !     .. Scalar Arguments ..
   CHARACTER*(*) String
   !     .. Local Scalars ..
@@ -260,10 +259,9 @@ SUBROUTINE UPCASE(Str1,Str2)
   !   891208  Prologue converted to the 1990 format.  (BAB)
   !   901101  Correctly check the lengths of STR1 and STR2.  (WRB)
   !   920911  Declarations section restructured.  (WRB)
-  
+
   !     .. Parameters ..
-  CHARACTER(41) :: MSG
-  PARAMETER (MSG='Input string is longer than output string')
+  CHARACTER(41), PARAMETER :: MSG = 'Input string is longer than output string'
   !     .. Scalar Arguments ..
   CHARACTER*(*) Str1, Str2
   !     .. Local Scalars ..

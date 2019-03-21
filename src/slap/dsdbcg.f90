@@ -223,14 +223,12 @@ SUBROUTINE DSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   920407  COMMON BLOCK renamed DSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  
+
   !     .. Parameters ..
-  INTEGER LOCRB, LOCIB
-  PARAMETER (LOCRB=1,LOCIB=11)
+  INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
-    Nelt
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
   !     .. Array Arguments ..
   REAL(8) :: A(N), B(N), Rwork(Lenw), X(N)
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)

@@ -96,7 +96,7 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   !   901019  Merged changes made by C. Ulrich with SLATEC 4.0 format.
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
-  
+
   !
   INTEGER Neq, Jstart, Idid, Ipar(*), Iwm(*), Iphase, Jcalc, K, &
     Kold, Ns, Nonneg, Ntemp
@@ -108,20 +108,19 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   EXTERNAL SDAJAC, SDANRM, SDASLV, SDATRP
   REAL SDANRM
   !
-  INTEGER i, ier, ires, j, j1, kdiff, km1, knew, kp1, kp2, LCTF, &
-    LETF, LMXORD, LNJE, LNRE, LNST, m, maxit, ncf, nef, nsf, &
-    nsp1
+  INTEGER i, ier, ires, j, j1, kdiff, km1, knew, kp1, kp2, m, maxit, ncf, nef, &
+    nsf, nsp1
   REAL alpha0, alphas, cjlast, ck, delnrm, enorm, erk, erkm1, &
     erkm2, erkp1, err, est, hnew, oldnrm, pnorm, r, rate, &
     temp1, temp2, terk, terkm1, terkm2, terkp1, xold, xrate
   LOGICAL convgd
   !
-  PARAMETER (LMXORD=3)
-  PARAMETER (LNST=11)
-  PARAMETER (LNRE=12)
-  PARAMETER (LNJE=13)
-  PARAMETER (LETF=14)
-  PARAMETER (LCTF=15)
+  INTEGER, PARAMETER :: LMXORD = 3
+  INTEGER, PARAMETER :: LNST = 11
+  INTEGER, PARAMETER :: LNRE = 12
+  INTEGER, PARAMETER :: LNJE = 13
+  INTEGER, PARAMETER :: LETF = 14
+  INTEGER, PARAMETER :: LCTF = 15
   !
   DATA maxit/4/
   DATA xrate/0.25E0/

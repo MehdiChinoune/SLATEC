@@ -138,7 +138,7 @@ SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !   890208  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   CHARACTER :: Transa, Transb
   INTEGER M, N, K, Lda, Ldb, Ldc
@@ -157,8 +157,7 @@ SUBROUTINE DGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   INTEGER i, info, j, l, ncola, nrowa, nrowb
   REAL(8) :: temp
   !     .. Parameters ..
-  REAL(8) :: ONE, ZERO
-  PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
+  REAL(8), PARAMETER :: ONE = 1.0D+0, ZERO = 0.0D+0
   !* FIRST EXECUTABLE STATEMENT  DGEMM
   !
   !     Set  NOTA  and  NOTB  as  true if  A  and  B  respectively are not

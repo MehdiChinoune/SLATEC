@@ -402,7 +402,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920422  Fixed usage of MINPUT.  (WRB)
   !   901009  Editorial changes, code now reads from top to bottom.  (RWC)
-  
+
   !
   !     PURPOSE
   !     -------
@@ -429,17 +429,17 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   REAL W(Mdw,*), Bl(*), Bu(*)
   REAL X(*), Rw(*), Ww(*), Scl(*)
   REAL alpha, beta, bou, colabv, colblo
-  REAL cl1, cl2, cl3, ONE, big
+  REAL cl1, cl2, cl3, big
   REAL fac, Rnorm, sc, ss, t, tolind, wt
-  REAL TWO, t1, t2, wbig, wlarge, wmag, xnew
-  REAL ZERO, SDOT, SNRM2
+  REAL t1, t2, wbig, wlarge, wmag, xnew
+  REAL SDOT, SNRM2
   REAL R1MACH, tolsze
   INTEGER Ibasis(*), Ibb(*), Ind(*), Iopt(*)
   LOGICAL found, constr
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
   !
-  PARAMETER (ZERO=0.0E0,ONE=1.0E0,TWO=2.0E0)
+  REAL, PARAMETER :: ZERO = 0.0E0, ONE = 1.0E0, TWO = 2.0E0
   !
   !* FIRST EXECUTABLE STATEMENT  SBOLSM
   !

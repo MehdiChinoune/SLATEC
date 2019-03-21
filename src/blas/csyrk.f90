@@ -125,7 +125,7 @@ SUBROUTINE CSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !   890208  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   CHARACTER :: Uplo, Trans
   INTEGER N, K, Lda, Ldc
@@ -144,10 +144,8 @@ SUBROUTINE CSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   INTEGER i, info, j, l, nrowa
   COMPLEX temp
   !     .. Parameters ..
-  COMPLEX ONE
-  PARAMETER (ONE=(1.0E+0,0.0E+0))
-  COMPLEX ZERO
-  PARAMETER (ZERO=(0.0E+0,0.0E+0))
+  COMPLEX, PARAMETER :: ONE = (1.0E+0,0.0E+0)
+  COMPLEX, PARAMETER :: ZERO = (0.0E+0,0.0E+0)
   !* FIRST EXECUTABLE STATEMENT  CSYRK
   !
   !     Test the input parameters.

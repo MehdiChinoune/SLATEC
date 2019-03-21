@@ -86,18 +86,17 @@ CONTAINS
     !   920602  Reduced problem size for a shorter-running test and
     !           corrected lower limit in "DO 80" statement.  (FNF)
     !   921021  Changed E's to 1P,D's in output formats.  (FNF)
-    
+
     !
     !     The problem size, MAXN, should be large enough that the
     !     iterative methods do 10-15 iterations, just to be sure that
     !     the truncated methods run to the end of their ropes and enter
     !     their error recovery mode.  Thus, for a more thorough test change
     !     the following PARAMETER statement to:
-    !     PARAMETER (MAXN=69, MXNELT=5000, MAXIW=5000, MAXRW=5000)
+    !     , PARAMETER :: MAXN=69, MXNELT=5000, MAXIW=5000, MAXRW=5000)
     !
     !     .. Parameters ..
-    INTEGER MAXN, MXNELT, MAXIW, MAXRW
-    PARAMETER (MAXN=25,MXNELT=500,MAXIW=1000,MAXRW=1000)
+    INTEGER, PARAMETER :: MAXN = 25, MXNELT = 500, MAXIW = 1000, MAXRW = 1000
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Arrays in Common ..
@@ -481,7 +480,7 @@ CONTAINS
     !   890919  Replaced DMPL with ISMPL.  (MKS)
     !   890920  Minor changes to reduce single/double differences.  (FNF)
     !   920511  Added complete declaration section.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     REAL(8) :: Factor
     INTEGER Ierr, Isym, N, Nelt, Neltmx
@@ -647,7 +646,7 @@ CONTAINS
     !   890404  DATE WRITTEN
     !   890920  Converted prologue to SLATEC 4.0 format.  (FNF)
     !   920511  Added complete declaration section.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     REAL(8) :: Val
     INTEGER N
@@ -711,7 +710,7 @@ CONTAINS
     !   890920  Converted prologue to SLATEC 4.0 format.  (FNF)
     !   920511  Added complete declaration section.  (WRB)
     !   921021  Changed E's to 1P,D's in output formats.  (FNF)
-    
+
     !     .. Scalar Arguments ..
     REAL(8) :: Err
     INTEGER Ierr, Iout, Istdo, Iter, Nfail
@@ -799,7 +798,7 @@ PROGRAM TEST26
   !* REVISION HISTORY  (YYMMDD)
   !   920401  DATE WRITTEN
   !   920511  Added complete declaration section.  (WRB)
-  
+
   !     .. Local Scalars ..
   INTEGER ipass, kprint, lin, lun, nfail
   !     .. External Functions ..

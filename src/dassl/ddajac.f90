@@ -60,7 +60,7 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   !   901026  Added explicit declarations for all variables and minor
   !           cosmetic changes to prologue.  (FNF)
   !   901101  Corrected PURPOSE.  (FNF)
-  
+
   !
   INTEGER Neq, Ier, Iwm(*), Ires, Ipar(*), Ntemp
   REAL(8) :: X, Y(*), Yprime(*), Delta(*), Cj, H, Wt(*), E(*), &
@@ -69,16 +69,15 @@ SUBROUTINE DDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
   !
   EXTERNAL DGBFA, DGEFA
   !
-  INTEGER i, i1, i2, ii, ipsave, isave, j, k, l, lenpd, LIPVT, &
-    LML, LMTYPE, LMU, mba, mband, meb1, meband, msave, mtype, &
-    n, NPD, npdm1, nrow
+  INTEGER i, i1, i2, ii, ipsave, isave, j, k, l, lenpd, mba, mband, meb1, &
+    meband, msave, mtype, n, npdm1, nrow
   REAL(8) :: del, delinv, squr, ypsave, ysave
   !
-  PARAMETER (NPD=1)
-  PARAMETER (LML=1)
-  PARAMETER (LMU=2)
-  PARAMETER (LMTYPE=4)
-  PARAMETER (LIPVT=21)
+  INTEGER, PARAMETER :: NPD = 1
+  INTEGER, PARAMETER :: LML = 1
+  INTEGER, PARAMETER :: LMU = 2
+  INTEGER, PARAMETER :: LMTYPE = 4
+  INTEGER, PARAMETER :: LIPVT = 21
   !
   !* FIRST EXECUTABLE STATEMENT  DDAJAC
   Ier = 0

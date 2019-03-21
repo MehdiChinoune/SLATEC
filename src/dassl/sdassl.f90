@@ -929,7 +929,7 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !           be of more uniform format.  (FNF)
   !   910624  Fixed minor bug related to HMAX (six lines after label
   !           525).  (LRP)
-  
+
   !
   !**End
   !
@@ -946,12 +946,8 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !
   !     Declare local variables.
   !
-  INTEGER i, itemp, LALPHA, LBETA, LCJ, LCJOLD, LCTF, LDELTA, &
-    leniw, lenpd, lenrw, le, LETF, LGAMMA, LH, LHMAX, LHOLD, &
-    LIPVT, LJCALC, LK, LKOLD, LIWM, LML, LMTYPE, LMU, LMXORD, &
-    LNJE, LNPD, LNRE, LNS, LNST, LNSTL, lpd, LPHASE, lphi, &
-    LPSI, LROUND, LS, LSIGMA, LTN, LTSTOP, lwm, lwt, mband, &
-    msave, mxord, NPD, ntemp, nzflg
+  INTEGER i, itemp, leniw, lenpd, lenrw, le, lpd, lphi, lwm, lwt, mband, msave, &
+    mxord, ntemp, nzflg
   REAL atoli, h, hmax, hmin, ho, r, rh, rtoli, tdist, tn, tnext, &
     tstop, uround, ypnorm
   LOGICAL done
@@ -961,17 +957,17 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   CHARACTER(16) :: xern3, xern4
   !
   !     SET POINTERS INTO IWORK
-  PARAMETER (LML=1,LMU=2,LMXORD=3,LMTYPE=4,LNST=11,LNRE=12,LNJE=13,LETF=14,&
-    LCTF=15,LNPD=16,LIPVT=21,LJCALC=5,LPHASE=6,LK=7,LKOLD=8,LNS=9,&
-    LNSTL=10,LIWM=1)
+  INTEGER, PARAMETER :: LML = 1, LMU = 2, LMXORD = 3, LMTYPE = 4, LNST = 11, &
+    LNRE = 12, LNJE = 13, LETF = 14, LCTF = 15, LNPD = 16, LIPVT = 21, LJCALC = 5, &
+    LPHASE = 6, LK = 7, LKOLD = 8, LNS = 9, LNSTL = 10, LIWM = 1
   !
   !     SET RELATIVE OFFSET INTO RWORK
-  PARAMETER (NPD=1)
+  INTEGER, PARAMETER :: NPD = 1
   !
   !     SET POINTERS INTO RWORK
-  PARAMETER (LTSTOP=1,LHMAX=2,LH=3,LTN=4,LCJ=5,LCJOLD=6,LHOLD=7,LS=8,&
-    LROUND=9,LALPHA=11,LBETA=17,LGAMMA=23,LPSI=29,LSIGMA=35,&
-    LDELTA=41)
+  INTEGER, PARAMETER :: LTSTOP = 1, LHMAX = 2, LH = 3, LTN = 4, LCJ = 5, LCJOLD = 6, &
+    LHOLD = 7, LS = 8, LROUND = 9, LALPHA = 11, LBETA = 17, LGAMMA = 23, LPSI = 29, &
+    LSIGMA = 35, LDELTA = 41
   !
   !* FIRST EXECUTABLE STATEMENT  SDASSL
   IF ( Info(1)==0 ) THEN

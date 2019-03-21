@@ -44,14 +44,14 @@ CONTAINS
     !           and 4 with values stored in data statements.  This involved
     !           removing all calls to subroutine DRACAH.  These changes were
     !           made by M. McClain.
-    
+
     !
     INTEGER Lun, Kprint, Ipass
     !
     CHARACTER string*36, fmt*30, fmt2*13
-    INTEGER ipass1, ipass2, ipass3, ipass4, ipass5, NDIM, ier, index, &
+    INTEGER ipass1, ipass2, ipass3, ipass4, ipass5, ier, index, &
       i, first, last, nsig, NUMXER, nerr, ierjj, ierjm
-    PARAMETER (NDIM=15)
+    INTEGER, PARAMETER :: NDIM = 15
     REAL(8) :: tol, l1, l2, l3, m1, m2, m3, l1min, l1max, &
       m2min, m2max, diff(NDIM), D1MACH, x, jjval, jmval, &
       thrcof(NDIM), sixcof(NDIM), r3jj(8), r3jm(14), &
@@ -555,7 +555,7 @@ PROGRAM TEST16
 
   !* REVISION HISTORY  (YYMMDD)
   !   891130  DATE WRITTEN
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST16

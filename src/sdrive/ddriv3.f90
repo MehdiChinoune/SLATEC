@@ -731,31 +731,24 @@ SUBROUTINE DDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  
+
   EXTERNAL F, JACOBN, FA, G, USERS
-  REAL(8) :: ae, big, Eps, Ewt(*), G, glast, gnow, h, Hmax, &
-    hsign, hused, NROUND, re, D1MACH, size, DNRM2, &
-    sum, T, tlast, Tout, troot, uround, Work(*), Y(*)
-  INTEGER i, ia, IAVGH, IAVGRD, ICNVRG, idfdy, IEL, Ierflg, Ierror, &
-    ifac, iflag, ignow, IH, IHMAX, IHOLD, IHSIGN, IHUSED, &
-    IJROOT, IJSTPL, IJTASK, IMNT, IMNTLD, Impl, IMTR, IMTRLD, &
-    IMTRSV, imxerr, IMXORD, IMXRDS, INDMXR, INDPRT, INDPVT, &
-    INDTRT, INFE, info, INJE, INQ, INQUSE, INROOT, INRTLD, &
-    INSTEP, INWAIT, IRC, IRMAX, iroot, IMACH1, IMACH4, isave1, &
-    isave2, IT, ITOUT, ITQ, ITREND, itroot, Iwork(*), IYH, &
-    iywt, j, jstate, jtroot, lenchk, Leniw, Lenw, liwchk, &
-    matdim, maxord, Mint, Miter, Ml, Mu, Mxord, Mxstep, N, &
+  REAL(8) :: ae, big, Eps, Ewt(*), G, glast, gnow, h, Hmax, hsign, hused, re, &
+    D1MACH, size, DNRM2, sum, T, tlast, Tout, troot, uround, Work(*), Y(*)
+  INTEGER i, ia, idfdy, Ierflg, Ierror, ifac, iflag, ignow, Impl, imxerr, info, &
+    iroot, isave1, isave2, itroot, Iwork(*), iywt, j, jstate, jtroot, lenchk, &
+    Leniw, Lenw, liwchk, matdim, maxord, Mint, Miter, Ml, Mu, Mxord, Mxstep, N, &
     Nde, ndecom, npar, Nroot, Nstate, nstepl, Ntask
   LOGICAL convrg
   CHARACTER intgr1*8, intgr2*8, rl1*16, rl2*16
-  PARAMETER (NROUND=20.D0)
-  PARAMETER (IAVGH=1,IHUSED=2,IAVGRD=3,IEL=4,IH=160,IHMAX=161,IHOLD=162,&
-    IHSIGN=163,IRC=164,IRMAX=165,IT=166,ITOUT=167,ITQ=168,&
-    ITREND=204,IMACH1=205,IMACH4=206,IYH=251,INDMXR=1,INQUSE=2,&
-    INSTEP=3,INFE=4,INJE=5,INROOT=6,ICNVRG=7,IJROOT=8,IJTASK=9,&
-    IMNTLD=10,IMTRLD=11,INQ=12,INRTLD=13,INDTRT=14,INWAIT=15,&
-    IMNT=16,IMTRSV=17,IMTR=18,IMXRDS=19,IMXORD=20,INDPRT=21,&
-    IJSTPL=22,INDPVT=51)
+  REAL(8), PARAMETER :: NROUND = 20.D0
+  INTEGER, PARAMETER :: IAVGH = 1, IHUSED = 2, IAVGRD = 3, IEL = 4, IH = 160, &
+    IHMAX = 161, IHOLD = 162, IHSIGN = 163, IRC = 164, IRMAX = 165, IT = 166, &
+    ITOUT = 167, ITQ = 168, ITREND = 204, IMACH1 = 205, IMACH4 = 206, IYH = 251, &
+    INDMXR = 1, INQUSE = 2, INSTEP = 3, INFE = 4, INJE = 5, INROOT = 6, ICNVRG = 7, &
+    IJROOT = 8, IJTASK = 9, IMNTLD = 10, IMTRLD = 11, INQ = 12, INRTLD = 13, &
+    INDTRT = 14, INWAIT = 15, IMNT = 16, IMTRSV = 17, IMTR = 18, IMXRDS = 19, &
+    IMXORD = 20, INDPRT = 21, IJSTPL = 22, INDPVT = 51
   !* FIRST EXECUTABLE STATEMENT  DDRIV3
   IF ( Nstate==12 ) THEN
     Ierflg = 999

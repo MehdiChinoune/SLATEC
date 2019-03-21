@@ -128,15 +128,14 @@ SUBROUTINE DCPPLT(N,Nelt,Ia,Ja,A,Isym,Iunit)
   !   921021  Corrected syntax of CHARACTER declaration.  (FNF)
   !   921026  Corrected D to E in output format.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Isym, Iunit, N, Nelt
   !     .. Array Arguments ..
   REAL(8) :: A(Nelt)
   INTEGER Ia(Nelt), Ja(Nelt)
   !     .. Parameters ..
-  INTEGER MAXORD
-  PARAMETER (MAXORD=225)
+  INTEGER, PARAMETER :: MAXORD = 225
   !     .. Local Scalars ..
   INTEGER i, icol, irow, j, jbgn, jend, nmax
   !     .. Local Arrays ..

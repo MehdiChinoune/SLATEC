@@ -38,14 +38,13 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
-    
-    REAL eps, ewt(1), HMAX, R1MACH, t, tout
-    INTEGER ierflg, IERROR, IMPL, Ipass, Kprint, leniw, leniwx, lenw, &
-      LENWMX, lenwx, LIWMX, Lun, mint, MITER, ML, mstate, MU, &
-      MXORD, MXSTEP, N, nde, nfe, nje, NROOT, nstate, nstep, &
-      NTASK, nx
-    PARAMETER (HMAX=15.E0,IERROR=3,IMPL=0,LENWMX=342,LIWMX=53,MITER=5,ML=2,&
-      MU=2,MXORD=5,MXSTEP=1000,N=3,NROOT=0,NTASK=1)
+
+    REAL eps, ewt(1), R1MACH, t, tout
+    INTEGER ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, Lun, mint, &
+      mstate, nde, nfe, nje, nstate, nstep, nx
+    REAL, PARAMETER :: HMAX = 15.E0
+    INTEGER, PARAMETER :: IERROR = 3, IMPL = 0, LENWMX = 342, LIWMX = 53, &
+      MITER = 5, ML = 2, MU = 2, MXORD = 5, MXSTEP = 1000, N = 3, NROOT = 0, NTASK = 1
     COMPLEX alfa, work(LENWMX), y(N+1)
     INTEGER iwork(LIWMX)
     DATA ewt(1)/.00001E0/
@@ -481,7 +480,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
-    
+
     REAL T
     COMPLEX alfa, Y(*), Yp(*)
     INTEGER N
@@ -542,7 +541,7 @@ PROGRAM TEST47
 
   !* REVISION HISTORY  (YYMMDD)
   !   920801  DATE WRITTEN
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST47

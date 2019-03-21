@@ -142,7 +142,7 @@ SUBROUTINE SSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !   890208  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   CHARACTER :: Side, Uplo
   INTEGER M, N, Lda, Ldb, Ldc
@@ -161,8 +161,7 @@ SUBROUTINE SSYMM(Side,Uplo,M,N,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   INTEGER i, info, j, k, nrowa
   REAL temp1, temp2
   !     .. Parameters ..
-  REAL ONE, ZERO
-  PARAMETER (ONE=1.0E+0,ZERO=0.0E+0)
+  REAL, PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
   !* FIRST EXECUTABLE STATEMENT  SSYMM
   !
   !     Set NROWA as the number of rows of A.

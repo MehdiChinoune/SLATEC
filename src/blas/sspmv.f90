@@ -105,7 +105,7 @@ SUBROUTINE SSPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   REAL Alpha, Beta
   INTEGER Incx, Incy, N
@@ -113,8 +113,7 @@ SUBROUTINE SSPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   !     .. Array Arguments ..
   REAL Ap(*), X(*), Y(*)
   !     .. Parameters ..
-  REAL ONE, ZERO
-  PARAMETER (ONE=1.0E+0,ZERO=0.0E+0)
+  REAL, PARAMETER :: ONE = 1.0E+0, ZERO = 0.0E+0
   !     .. Local Scalars ..
   REAL temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, k, kk, kx, ky

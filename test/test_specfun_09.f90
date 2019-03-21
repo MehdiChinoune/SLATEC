@@ -65,7 +65,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !   930122  Added ZEXP and ZSQRT to EXTERNAL statement.  (RWC)
-    
+
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -76,10 +76,7 @@ CONTAINS
     !**End
     !
     !  Set test complexity parameter.
-    !
-    INTEGER MQC
-    PARAMETER (MQC=1)
-    !
+    INTEGER, PARAMETER :: MQC = 1
     !  Declare arguments.
     !
     INTEGER Lun, Kprint, Ipass
@@ -472,7 +469,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
-    
+
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -483,10 +480,7 @@ CONTAINS
     !**End
     !
     !  Set test complexity parameter.
-    !
-    INTEGER MQC
-    PARAMETER (MQC=1)
-    !
+    INTEGER, PARAMETER :: MQC = 1
     !  Declare arguments.
     !
     INTEGER Lun, Kprint, Ipass
@@ -853,7 +847,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
-    
+
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -864,10 +858,7 @@ CONTAINS
     !**End
     !
     !  Set test complexity parameter.
-    !
-    INTEGER MQC
-    PARAMETER (MQC=1)
-    !
+    INTEGER, PARAMETER :: MQC = 1
     !  Declare arguments.
     !
     INTEGER Lun, Kprint, Ipass
@@ -1395,7 +1386,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !   930122  Added ZEXP to EXTERNAL statement.  (RWC)
-    
+
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -1406,10 +1397,7 @@ CONTAINS
     !**End
     !
     !  Set test complexity parameter.
-    !
-    INTEGER MQC
-    PARAMETER (MQC=1)
-    !
+    INTEGER, PARAMETER :: MQC = 1
     !  Declare arguments.
     !
     INTEGER Lun, Kprint, Ipass
@@ -1812,7 +1800,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standard
     !   930122  Added ZEXP to EXTERNAL Statement.  (RWC)
-    
+
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -1823,10 +1811,7 @@ CONTAINS
     !**End
     !
     !  Set test complexity parameter.
-    !
-    INTEGER MQC
-    PARAMETER (MQC=1)
-    !
+    INTEGER, PARAMETER :: MQC = 1
     !  Declare arguments.
     !
     INTEGER Lun, Kprint, Ipass
@@ -2217,7 +2202,7 @@ CONTAINS
     !   830501  DATE WRITTEN
     !   890831  Revised to meet new SLATEC standards
     !   930122  Added ZEXP to EXTERNAL Statement.  (RWC)
-    
+
     !
     !*Internal Notes:
     !   Machine constants are defined by functions I1MACH and D1MACH.
@@ -2228,16 +2213,10 @@ CONTAINS
     !**End
     !
     !  Set test complexity parameter.
-    !
-    INTEGER MQC
-    PARAMETER (MQC=1)
-    !
+    INTEGER, PARAMETER :: MQC = 1
     !  Declare arguments.
-    !
     INTEGER Lun, Kprint, Ipass
-    !
     !  Declare external functions.
-    !
     INTEGER I1MACH
     REAL(8) :: D1MACH, ZABS
     EXTERNAL I1MACH, D1MACH, ZABS, ZEXP
@@ -2642,7 +2621,7 @@ PROGRAM TEST10
   !* REVISION HISTORY  (YYMMDD)
   !   910411  DATE WRITTEN
   !   920128  Category corrected.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST10

@@ -225,10 +225,9 @@ SUBROUTINE SSILUR(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   921019  Corrected NEL to NL.  (FNF)
-  
+
   !     .. Parameters ..
-  INTEGER LOCRB, LOCIB
-  PARAMETER (LOCRB=1,LOCIB=11)
+  INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &

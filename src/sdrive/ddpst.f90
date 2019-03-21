@@ -32,16 +32,15 @@ SUBROUTINE DDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  
+
   INTEGER i, iflag, imax, Impl, info, Iswflg, j, j2, Jstate, k, &
     Matdim, Miter, Ml, Mu, mw, N, Nde, Nfe, Nje, Nq
-  REAL(8) :: A(Matdim,*), bl, Bnd, bp, br, BU, Dfdy(Matdim,*), &
-    dfdymx, diff, dy, El(13,12), Fac(*), FACMAX, &
-    facmin, factor, H, Save1(*), Save2(*), scale, &
+  REAL(8) :: A(Matdim,*), bl, Bnd, bp, br, Dfdy(Matdim,*), dfdymx, diff, dy, &
+    El(13,12), Fac(*), facmin, factor, H, Save1(*), Save2(*), scale, &
     DNRM2, T, Uround, Y(*), Yh(N,*), yj, ys, Ywt(*)
   INTEGER Ipvt(*)
   LOGICAL Ier
-  PARAMETER (FACMAX=.5D0,BU=0.5D0)
+  REAL(8), PARAMETER :: FACMAX = 0.5D0, BU = 0.5D0
   !* FIRST EXECUTABLE STATEMENT  DDPST
   Nje = Nje + 1
   Ier = .FALSE.

@@ -347,14 +347,14 @@ SUBROUTINE SDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   !* REVISION HISTORY  (YYMMDD)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
-  
+
   EXTERNAL F, G
   REAL Eps, Ewt, ewtcom(1), G, hmax, T, Tout, Work(*), Y(*)
   INTEGER Iwork(*)
-  INTEGER Ierflg, ierror, IMPL, Leniw, Lenw, Mint, miter, ml, &
-    Mstate, mu, mxord, MXSTEP, N, nde, Nroot, nstate, ntask
+  INTEGER Ierflg, ierror, Leniw, Lenw, Mint, miter, ml, Mstate, mu, mxord, N, &
+    nde, Nroot, nstate, ntask
   CHARACTER intgr1*8
-  PARAMETER (IMPL=0,MXSTEP=1000)
+  INTEGER, PARAMETER :: IMPL = 0, MXSTEP = 1000
   !* FIRST EXECUTABLE STATEMENT  SDRIV2
   IF ( ABS(Mstate)==9 ) THEN
     Ierflg = 999

@@ -327,12 +327,11 @@ SUBROUTINE DSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !   920407  COMMON BLOCK renamed DSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
-  
+
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Parameters ..
-  INTEGER LOCRB, LOCIB
-  PARAMETER (LOCRB=1,LOCIB=11)
+  INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &

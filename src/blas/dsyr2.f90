@@ -106,7 +106,7 @@ SUBROUTINE DSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: Alpha
   INTEGER Incx, Incy, Lda, N
@@ -114,8 +114,7 @@ SUBROUTINE DSYR2(Uplo,N,Alpha,X,Incx,Y,Incy,A,Lda)
   !     .. Array Arguments ..
   REAL(8) :: A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
-  REAL(8) :: ZERO
-  PARAMETER (ZERO=0.0D+0)
+  REAL(8), PARAMETER :: ZERO = 0.0D+0
   !     .. Local Scalars ..
   REAL(8) :: temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, kx, ky

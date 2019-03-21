@@ -110,7 +110,7 @@ SUBROUTINE DGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: Alpha, Beta
   INTEGER Incx, Incy, Lda, M, N
@@ -118,8 +118,7 @@ SUBROUTINE DGEMV(Trans,M,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   !     .. Array Arguments ..
   REAL(8) :: A(Lda,*), X(*), Y(*)
   !     .. Parameters ..
-  REAL(8) :: ONE, ZERO
-  PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
+  REAL(8), PARAMETER :: ONE = 1.0D+0, ZERO = 0.0D+0
   !     .. Local Scalars ..
   REAL(8) :: temp
   INTEGER i, info, ix, iy, j, jx, jy, kx, ky, lenx, leny

@@ -110,15 +110,14 @@ SUBROUTINE DTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
   !   861022  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Incx, N
   CHARACTER :: Diag, Trans, Uplo
   !     .. Array Arguments ..
   REAL(8) :: Ap(*), X(*)
   !     .. Parameters ..
-  REAL(8) :: ZERO
-  PARAMETER (ZERO=0.0D+0)
+  REAL(8), PARAMETER :: ZERO = 0.0D+0
   !     .. Local Scalars ..
   REAL(8) :: temp
   INTEGER i, info, ix, j, jx, k, kk, kx

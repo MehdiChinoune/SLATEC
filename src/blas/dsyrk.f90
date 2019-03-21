@@ -126,7 +126,7 @@ SUBROUTINE DSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   !   890208  DATE WRITTEN
   !   910605  Modified to meet SLATEC prologue standards.  Only comment
   !           lines were modified.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   CHARACTER :: Uplo, Trans
   INTEGER N, K, Lda, Ldc
@@ -145,8 +145,7 @@ SUBROUTINE DSYRK(Uplo,Trans,N,K,Alpha,A,Lda,Beta,C,Ldc)
   INTEGER i, info, j, l, nrowa
   REAL(8) :: temp
   !     .. Parameters ..
-  REAL(8) :: ONE, ZERO
-  PARAMETER (ONE=1.0D+0,ZERO=0.0D+0)
+  REAL(8), PARAMETER :: ONE = 1.0D+0, ZERO = 0.0D+0
   !* FIRST EXECUTABLE STATEMENT  DSYRK
   !
   !     Test the input parameters.
