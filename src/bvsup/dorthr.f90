@@ -77,7 +77,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL(8) :: DDOT, D1MACH
   INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot(*), l, M, &
     mk, N, Nrda
@@ -94,6 +94,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
   !
   !* FIRST EXECUTABLE STATEMENT  DORTHR
   uro = D1MACH(4)
+  dum = 0.D0
   IF ( M>=N.AND.N>=1.AND.Nrda>=N ) THEN
     !
     acc = 10.0D0*uro

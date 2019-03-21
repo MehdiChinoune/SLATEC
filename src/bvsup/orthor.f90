@@ -80,7 +80,7 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL A, acc, akk, anorm, as, asave, Diag, diagk, dum, R1MACH, &
     Rows, Rs, rss, sad, Scales, SDOT, sig, sigma, sruro, uro
   INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot, l, M, mk, N, Nrda
@@ -97,6 +97,7 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !
   !* FIRST EXECUTABLE STATEMENT  ORTHOR
   uro = R1MACH(4)
+  dum = 0.
   IF ( M>=N.AND.N>=1.AND.Nrda>=N ) THEN
     !
     acc = 10.*uro

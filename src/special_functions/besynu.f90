@@ -72,7 +72,7 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, inu, j, k, kk, N, nn
   REAL a, ak, arg, a1, a2, bk, cb, cbk, cc, cck, ck, coef, cpt, &
@@ -96,6 +96,7 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
   !* FIRST EXECUTABLE STATEMENT  BESYNU
   ak = R1MACH(3)
   tol = MAX(ak,1.0E-15)
+  s2 = 0.
   IF ( X<=0.0E0 ) THEN
     !
     !

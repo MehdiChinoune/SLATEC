@@ -38,7 +38,7 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   REAL AE, C, G, P, PWCnd, PX, RE, S, Stowa, TND, TOL, &
     U, V, W, Work, X, XBEg, XENd, XOP
   REAL XOT, Xpts, XSAv, xxop, Yhp, Z
@@ -82,6 +82,7 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   INFo(3) = 1
   INFo(4) = 1
   Work(1) = XENd
+  ipar = 0
   IF ( NOPg/=0 ) THEN
     INFo(3) = 0
     IF ( X==Z(1) ) jon = 2

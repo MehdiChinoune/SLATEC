@@ -33,7 +33,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
-  
+
   INTEGER Iwork(*), Mdg, Mdw, Mode, Nbkpt, Nconst, Ndata, Nderiv(*), &
     Nord
   REAL(8) :: Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), &
@@ -55,6 +55,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   !     Analyze input.
   !
+  dummy = 0.D0
   IF ( Nord<1.OR.Nord>20 ) THEN
     CALL XERMSG('SLATEC','DFCMN',&
       'IN DFC, THE ORDER OF THE B-SPLINE MUST BE 1 THRU 20.',2,1)
@@ -110,8 +111,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     var = .TRUE.
     new = .FALSE.
   ELSE
-    CALL XERMSG('SLATEC','DFCMN','IN DFC, INPUT VALUE OF MODE MUST BE 1-4.',&
-      2,1)
+    CALL XERMSG('SLATEC','DFCMN','IN DFC, INPUT VALUE OF MODE MUST BE 1-4.',2,1)
     Mode = -1
     RETURN
   ENDIF

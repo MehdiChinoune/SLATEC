@@ -149,7 +149,7 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Fixed an error message.  (RWC)
-  
+
   !
   !     REVISED 820707-1100
   !     REVISED YYMMDD HHMM
@@ -166,6 +166,7 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !* FIRST EXECUTABLE STATEMENT  SCOV
   sing = .FALSE.
   iflag = 0
+  idum = 0
   IF ( M>0.AND.N>0 ) THEN
     !
     !     CALCULATE SIGMA = (SUM OF THE SQUARED RESIDUALS) / (M-N)

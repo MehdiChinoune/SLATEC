@@ -37,7 +37,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   !
   INTEGER ICOco, idid, Iflag, IGOfx, INDpvt, INFo, INHomo, INTeg, &
     ipar, ISTkop, IVP, j, jflag, jon, K1, K10, K11, K2, K3, &
@@ -79,6 +79,7 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   INFo(3) = 1
   INFo(4) = 1
   Work(1) = XENd
+  ipar = 0
   !        ...EXIT
   IF ( NOPg/=0 ) THEN
     INFo(3) = 0

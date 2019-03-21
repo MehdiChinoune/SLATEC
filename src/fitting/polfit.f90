@@ -131,7 +131,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920527  Corrected erroneous statements in DESCRIPTION.  (WRB)
-  
+
   REAL A, co, degf, den, Eps, etst, f, fcrit, R, sig, sigj, &
     sigjm1, sigpas, temp, W, w1, w11, X, xm, Y
   REAL yp
@@ -149,6 +149,7 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
     -1.9829776/
   !* FIRST EXECUTABLE STATEMENT  POLFIT
   m = ABS(N)
+  yp = 0.
   IF ( m==0 ) GOTO 700
   IF ( Maxdeg<0 ) GOTO 700
   A(1) = Maxdeg

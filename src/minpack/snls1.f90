@@ -612,7 +612,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint, Info, Nfev, &
     Njev
   INTEGER ijunk, nrow, Ipvt(*)
@@ -636,6 +636,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !
   !* FIRST EXECUTABLE STATEMENT  SNLS1
   epsmch = R1MACH(4)
+  err = 0.
   !
   Info = 0
   iflag = 0
