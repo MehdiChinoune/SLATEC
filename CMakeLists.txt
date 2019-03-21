@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.7)
 
 project(slatec Fortran)
 
+set ( CMAKE_CONFIGURATION_TYPES "Debug" "Release" "CodeCoverage" )
+
 enable_testing()
 
 set( CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}" )
@@ -14,12 +16,14 @@ endif()
 if ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "GNU" )
 
   set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -O3 -std=f2003 -fimplicit-none" )
-  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -fcheck=all -g -Og -std=f2003" )
+  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -Wall -Wno-maybe-uninitialized -fcheck=all -g -Og -std=f2018" )
+  set ( CMAKE_Fortran_FLAGS_CODECOVERAGE "--coverage -g -O0" )
 
 elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Intel" )
 
-  set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -warn all -O3" )
-  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -warn all -g" )
+  set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -O3" )
+  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -warn all -check all -stand f18 -g" )
+  set ( CMAKE_Fortran_FLAGS_CODECOVERAGE "-prof-gen:srcpos -prof-dir=${CMAKE_BINARY_DIR}/prof/ -g -O0" )
 
 elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Flang" )
 
