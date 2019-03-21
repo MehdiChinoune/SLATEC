@@ -1,6 +1,5 @@
 !** DORTHR
-SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,&
-    Rs)
+SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   IMPLICIT NONE
   !>
   !***
