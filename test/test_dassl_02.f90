@@ -101,7 +101,7 @@ CONTAINS
     !
     INTEGER Lun, Kprint, Ipass
     !
-    EXTERNAL DDASSL
+    EXTERNAL :: DDASSL
     !
     INTEGER i, idid, info(15), iout, ipar(1), ires, iwork(45), j190, &
       j290, liw, lrw, ml, mu, neq, nerr, nfe, nje, nout, nqu, nst

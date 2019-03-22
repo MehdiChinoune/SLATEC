@@ -157,18 +157,18 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   REAL erro12
   REAL A, aa, Abserr, Alist, area, area1, area12, area2, a1, a2, &
-    B, bb, Blist, b1, b2, C, R1MACH, Elist, epmach, Epsabs, &
-    Epsrel, errbnd, errmax, error1, error2, errsum, F, Result, &
-    Rlist, uflow
+    B, bb, Blist, b1, b2, C, Elist, epmach, Epsabs, &
+    Epsrel, errbnd, errmax, error1, error2, errsum, Result, Rlist, uflow
   INTEGER Ier, Iord, iroff1, iroff2, k, krule, Last, Limit, maxerr, &
     nev, Neval, nrmax
   !
   DIMENSION Alist(*), Blist(*), Rlist(*), Elist(*), Iord(*)
   !
-  EXTERNAL F
+  REAL, EXTERNAL :: F
+  REAL, EXTERNAL :: R1MACH
   !
   !            LIST OF MAJOR VARIABLES
   !            -----------------------

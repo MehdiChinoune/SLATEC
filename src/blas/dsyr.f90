@@ -108,10 +108,9 @@ SUBROUTINE DSYR(Uplo,N,Alpha,X,Incx,A,Lda)
   REAL(8) :: temp
   INTEGER i, info, ix, j, jx, kx
   !     .. External Functions ..
-  LOGICAL LSAME
-  EXTERNAL LSAME
+  LOGICAL, EXTERNAL :: LSAME
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !* FIRST EXECUTABLE STATEMENT  DSYR

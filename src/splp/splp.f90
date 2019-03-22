@@ -1559,7 +1559,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   INTEGER Ibasis(*), Ind(*), Iwork(*)
   CHARACTER(8) :: xern1, xern2
   !
-  EXTERNAL USRMAT
+  EXTERNAL :: USRMAT
   !
   !* FIRST EXECUTABLE STATEMENT  SPLP
   zero = 0.E0

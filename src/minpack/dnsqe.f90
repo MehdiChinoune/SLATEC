@@ -347,7 +347,7 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
     nfev, njev, Nprint
   REAL(8) :: epsfcn, factor, Fvec(*), one, Tol, Wa(*), X(*), &
     xtol, zero
-  EXTERNAL FCN, JAC
+  EXTERNAL :: FCN, JAC
   SAVE factor, one, zero
   DATA factor, one, zero/1.0D2, 1.0D0, 0.0D0/
   !     BEGIN BLOCK PERMITTING ...EXITS TO 20

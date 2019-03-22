@@ -57,12 +57,11 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
     , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
   COMMON /DML18J/ AE, RE, TOL, NXPtsd, NIC, NOPg, MXNond, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTPd, NEQivp, &
-    NUMort, NFCcd, ICOco
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTPd, NEQivp, NUMort, NFCcd, ICOco
   COMMON /DML17B/ KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, &
     K7, K8, K9, K10, K11, L1, L2, KKKint, LLLint
   !
-  EXTERNAL DBVDER
+  EXTERNAL :: DBVDER
   !
   !      *****************************************************************
   !       INITIALIZATION OF COUNTERS AND VARIABLES.

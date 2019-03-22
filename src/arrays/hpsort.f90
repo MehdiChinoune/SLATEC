@@ -129,7 +129,7 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
   !     .. Local Arrays ..
   INTEGER il(21), iu(21)
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, INT, LEN
   !* FIRST EXECUTABLE STATEMENT  HPSORT

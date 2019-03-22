@@ -70,13 +70,12 @@ SUBROUTINE DQK31(F,A,B,Result,Abserr,Resabs,Resasc)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
-  REAL(8) :: A, absc, Abserr, B, centr, dhlgth, D1MACH, &
-    epmach, F, fc, fsum, fval1, fval2, fv1, fv2, &
-    hlgth, Resabs, Resasc, resg, resk, reskh, Result, &
-    uflow, wg, wgk, xgk
+
+  REAL(8) :: A, absc, Abserr, B, centr, dhlgth, epmach, fc, fsum, fval1, fval2, &
+    fv1, fv2, hlgth, Resabs, Resasc, resg, resk, reskh, Result, uflow, wg, wgk, xgk
   INTEGER j, jtw, jtwm1
-  EXTERNAL F
+  REAL(8), EXTERNAL :: F
+  REAL(8), EXTERNAL :: D1MACH
   !
   DIMENSION fv1(15), fv2(15), xgk(16), wgk(16), wg(8)
   !

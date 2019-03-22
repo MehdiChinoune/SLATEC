@@ -163,7 +163,7 @@ INTEGER FUNCTION ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   921026  Changed 1.0E10 to R1MACH(2).  (FNF)
-  
+
   !     .. Scalar Arguments ..
   REAL Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
@@ -171,14 +171,13 @@ INTEGER FUNCTION ISSIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   REAL A(Nelt), B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MSOLVE
+  EXTERNAL :: MSOLVE
   !     .. Arrays in Common ..
   REAL SOLn(25)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
-  REAL R1MACH, SNRM2
-  EXTERNAL R1MACH, SNRM2
+  REAL, EXTERNAL :: R1MACH, SNRM2
   !     .. Common blocks ..
   COMMON /SSLBLK/ SOLn
   !* FIRST EXECUTABLE STATEMENT  ISSIR

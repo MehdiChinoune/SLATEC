@@ -236,7 +236,7 @@ SUBROUTINE DSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER locdin, locdz, lociw, locp, locpp, locr, locrr, locw, &
     locz, loczz
   !     .. External Subroutines ..
-  EXTERNAL DBCG, DCHKW, DS2Y, DSDI, DSDS, DSMTV, DSMV
+  EXTERNAL :: DBCG, DCHKW, DS2Y, DSDI, DSDS, DSMTV, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSDBCG
   !
   Ierr = 0

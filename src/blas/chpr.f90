@@ -108,10 +108,9 @@ SUBROUTINE CHPR(Uplo,N,Alpha,X,Incx,Ap)
   COMPLEX temp
   INTEGER i, info, ix, j, jx, k, kk, kx
   !     .. External Functions ..
-  LOGICAL LSAME
-  EXTERNAL LSAME
+  LOGICAL, EXTERNAL :: LSAME
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, REAL
   !* FIRST EXECUTABLE STATEMENT  CHPR

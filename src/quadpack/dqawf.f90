@@ -210,15 +210,15 @@ SUBROUTINE DQAWF(F,A,Omega,Integr,Epsabs,Result,Abserr,Neval,Ier,Limlst,&
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  
+
   !
-  REAL(8) :: A, Abserr, Epsabs, F, Omega, Result, Work
+  REAL(8) :: A, Abserr, Epsabs, Omega, Result, Work
   INTEGER Ier, Integr, Iwork, Leniw, Lenw, limit, Limlst, ll2, lvl, &
     Lst, l1, l2, l3, l4, l5, l6, Maxp1, Neval
   !
   DIMENSION Iwork(*), Work(*)
   !
-  EXTERNAL F
+  REAL(8), EXTERNAL :: F
   !
   !         CHECK VALIDITY OF LIMLST, LENIW, MAXP1 AND LENW.
   !

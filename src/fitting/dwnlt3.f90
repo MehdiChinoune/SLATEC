@@ -31,7 +31,7 @@ SUBROUTINE DWNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   INTEGER I, Imax, Ipivot(*), M, Mdw
   REAL(8) :: H(*), W(Mdw,*)
   !
-  EXTERNAL DSWAP
+  EXTERNAL :: DSWAP
   !
   REAL(8) :: t
   INTEGER itemp

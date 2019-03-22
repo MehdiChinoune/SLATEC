@@ -40,7 +40,7 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     Zi, Zr, DGAMLN, D1MACH, ZABS
   INTEGER i, ib, idum, iflag, il, k, Kode, l, m, N, nn, Nz, nw
   DIMENSION Yr(N), Yi(N), wr(2), wi(2)
-  EXTERNAL ZABS, ZLOG
+  EXTERNAL :: ZABS, ZLOG
   DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
   !* FIRST EXECUTABLE STATEMENT  ZSERI
   Nz = 0

@@ -483,7 +483,7 @@ SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   INTEGER linput, ll, logb2n, loutpt, M, Mbdcnd, N, Nbdcnd
   DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
   DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
-  EXTERNAL COFX, COFY
+  EXTERNAL :: COFX, COFY
   !* FIRST EXECUTABLE STATEMENT  SEPELI
   CALL CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
   IF ( Ierror/=0 ) RETURN

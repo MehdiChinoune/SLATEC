@@ -123,10 +123,9 @@ SUBROUTINE CTRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   INTEGER i, info, ix, j, jx, kx
   LOGICAL noconj, nounit
   !     .. External Functions ..
-  LOGICAL LSAME
-  EXTERNAL LSAME
+  LOGICAL, EXTERNAL :: LSAME
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX
   !* FIRST EXECUTABLE STATEMENT  CTRMV

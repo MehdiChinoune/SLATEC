@@ -63,10 +63,10 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   INTEGER Neq, Idid, Ipar(*), Iwm(*), Nonneg, Ntemp
   REAL X, Y(*), Yprime(*), H, Wt(*), Rpar(*), Phi(Neq,*), Delta(*), &
     E(*), Wm(*), Hmin, Uround
-  EXTERNAL RES, JAC
+  EXTERNAL :: RES, JAC
   !
-  EXTERNAL SDAJAC, SDANRM, SDASLV
-  REAL SDANRM
+  EXTERNAL :: SDAJAC, SDASLV
+  REAL, EXTERNAL :: SDANRM
   !
   INTEGER i, ier, ires, jcalc, m, maxit, mjac, ncf, nef, nsf
   REAL cj, damp, delnrm, err, oldnrm, r, rate, s, xold, ynorm

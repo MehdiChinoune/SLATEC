@@ -181,9 +181,8 @@ PROGRAM SLADOC
   !
   !     External functions.
   !
-  INTEGER FIND, LENSTR, MINOR
-  CHARACTER(10) :: CVTCAT
-  EXTERNAL CVTCAT, FIND, LENSTR, MINOR
+  INTEGER, EXTERNAL :: FIND, LENSTR, MINOR
+  CHARACTER(10), EXTERNAL :: CVTCAT
   !
   !     Intrinsic functions.
   !
@@ -1738,10 +1737,9 @@ INTEGER FUNCTION MINOR(Kat,Kats,Ncc,Tclass,Iptr,Jptr,Kptr,Ntry)
   !     .. Local Scalars ..
   INTEGER ifind
   !     .. External Functions ..
-  INTEGER FIND
-  EXTERNAL FIND
+  INTEGER, EXTERNAL :: FIND
   !     .. External Subroutines ..
-  EXTERNAL UNDOCL
+  EXTERNAL :: UNDOCL
   !     .. Common blocks ..
   COMMON /CATGRY/ I1, I2, I3, LMSg
   COMMON /KLASS / CLAss
@@ -1801,8 +1799,7 @@ SUBROUTINE RBLNKS(L1,L2)
   !     .. Local Scalars ..
   INTEGER i, j, k, leng
   !     .. External Functions ..
-  INTEGER LENSTR
-  EXTERNAL LENSTR
+  INTEGER, EXTERNAL :: LENSTR
   !* FIRST EXECUTABLE STATEMENT  RBLNKS
   leng = LENSTR(L1)
   DO i = 1, leng
@@ -1855,8 +1852,7 @@ SUBROUTINE UNDOCL(Kat,Cat)
   !     .. Local Scalars ..
   INTEGER ic, ik, leng, weny
   !     .. External Functions ..
-  INTEGER LENSTR
-  EXTERNAL LENSTR
+  INTEGER, EXTERNAL :: LENSTR
   !* FIRST EXECUTABLE STATEMENT  UNDOCL
   leng = LENSTR(Kat)
   weny = 1

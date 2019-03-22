@@ -133,8 +133,7 @@ CONTAINS
     !
     REAL R1MACH
     !       The following should stay REAL (no D.P. equivalent).
-    REAL RAND
-    EXTERNAL RAND
+    REAL, EXTERNAL :: RAND
     !
     !  INITIALIZE.
     !
@@ -1910,8 +1909,8 @@ CONTAINS
     !
     !  Declare externals.
     !
-    REAL BVALU, R1MACH
-    EXTERNAL BVALU, PCHBS, R1MACH
+    REAL, EXTERNAL :: BVALU, R1MACH
+    EXTERNAL :: PCHBS
     !
     !  Declare variables.
     !

@@ -154,10 +154,9 @@ SUBROUTINE CGBMV(Trans,M,N,Kl,Ku,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   INTEGER i, info, ix, iy, j, jx, jy, k, kup1, kx, ky, lenx, leny
   LOGICAL noconj
   !     .. External Functions ..
-  LOGICAL LSAME
-  EXTERNAL LSAME
+  LOGICAL, EXTERNAL :: LSAME
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX, MIN
   !* FIRST EXECUTABLE STATEMENT  CGBMV

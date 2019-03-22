@@ -112,11 +112,11 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
   !   810101  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !
   REAL A, Abserr, ac, an, an2, as, asap, ass, B, centr, Chebmo, &
-    cheb12, cheb24, conc, cons, cospar, d, QWGTF, d1, R1MACH, &
-    d2, estc, ests, F, fval, hlgth, oflow, Omega, parint, par2, &
+    cheb12, cheb24, conc, cons, cospar, d, d1, &
+    d2, estc, ests, fval, hlgth, oflow, Omega, parint, par2, &
     par22, p2, p3, p4, Resabs, Resasc, resc12, resc24, ress12, &
     ress24, Result, sinpar, v, x
   INTEGER i, iers, Integr, isym, j, k, Ksave, m, Maxp1, Momcom, &
@@ -125,7 +125,8 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
   DIMENSION Chebmo(Maxp1,25), cheb12(13), cheb24(25), d(25), d1(25), &
     d2(25), fval(25), v(28), x(11)
   !
-  EXTERNAL F, QWGTF
+  REAL, EXTERNAL :: F
+  REAL, EXTERNAL :: R1MACH, QWGTF
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24)
   !           K = 1, ...,11, TO BE USED FOR THE CHEBYSHEV EXPANSION OF F

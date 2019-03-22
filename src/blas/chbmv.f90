@@ -156,10 +156,9 @@ SUBROUTINE CHBMV(Uplo,N,K,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   COMPLEX temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, kplus1, kx, ky, l
   !     .. External Functions ..
-  LOGICAL LSAME
-  EXTERNAL LSAME
+  LOGICAL, EXTERNAL :: LSAME
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX, MIN, REAL
   !* FIRST EXECUTABLE STATEMENT  CHBMV

@@ -38,7 +38,7 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     zeror, Zi, Zr, D1MACH, ZABS
   INTEGER i, ib, il, inu, j, jl, k, Kode, koded, m, N, nn, Nz
   DIMENSION Yr(N), Yi(N)
-  EXTERNAL ZABS, ZEXP, ZSQRT
+  EXTERNAL :: ZABS, ZEXP, ZSQRT
   DATA pi, rtpi/3.14159265358979324D0, 0.159154943091895336D0/
   DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
   !* FIRST EXECUTABLE STATEMENT  ZASYI

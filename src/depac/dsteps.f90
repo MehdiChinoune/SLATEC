@@ -197,7 +197,7 @@ SUBROUTINE DSTEPS(DF,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,&
     , Beta(12), Sig(13), V(12), W(12), G(13), Gi(11), Iv(10), &
     Rpar(*), Ipar(*)
   DIMENSION two(13), gstr(13)
-  EXTERNAL DF
+  EXTERNAL :: DF
   SAVE two, gstr
   !
   DATA two(1), two(2), two(3), two(4), two(5), two(6), two(7), two(8)&

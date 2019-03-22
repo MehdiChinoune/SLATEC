@@ -391,13 +391,12 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Ip(3), Ma, Mdw, Me, Mg, Mode, N
   REAL Prgopt(*), Rnorme, Rnorml, W(Mdw,*), Ws(*), X(*)
   !
-  EXTERNAL H12, LSI, R1MACH, SASUM, SAXPY, SCOPY, SDOT, SNRM2, &
-    SSCAL, SSWAP, XERMSG
-  REAL R1MACH, SASUM, SDOT, SNRM2
+  REAL, EXTERNAL :: R1MACH, SASUM, SDOT, SNRM2
+  EXTERNAL :: H12, LSI, SAXPY, SCOPY, SSCAL, SSWAP, XERMSG
   !
   REAL enorm, fnorm, gam, rb, rn, rnmax, size, sn, snmax, srelpr, &
     t, tau, uj, up, vj, xnorm, xnrme

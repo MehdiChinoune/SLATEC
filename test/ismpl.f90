@@ -25,7 +25,7 @@ SUBROUTINE ISMPL(N,M,Indx)
   !   890919  Changed to integer name ISMPL.  (MKS)
   !   890920  Converted prologue to SLATEC 4.0 format.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER M, N
   !     .. Array Arguments ..
@@ -34,8 +34,7 @@ SUBROUTINE ISMPL(N,M,Indx)
   REAL dummy
   INTEGER i, id, j
   !     .. External Functions ..
-  REAL RAND
-  EXTERNAL RAND
+  REAL, EXTERNAL :: RAND
   !     .. Intrinsic Functions ..
   INTRINSIC INT
   !* FIRST EXECUTABLE STATEMENT  ISMPL

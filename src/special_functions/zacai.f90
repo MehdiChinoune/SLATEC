@@ -40,7 +40,7 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
     znr, zni, D1MACH, ZABS
   INTEGER inu, iuf, Kode, Mr, N, nn, nw, Nz
   DIMENSION Yr(N), Yi(N), cyr(2), cyi(2)
-  EXTERNAL ZABS
+  EXTERNAL :: ZABS
   DATA pi/3.14159265358979324D0/
   !* FIRST EXECUTABLE STATEMENT  ZACAI
   Nz = 0

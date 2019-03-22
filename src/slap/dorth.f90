@@ -75,7 +75,7 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  
+
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -87,10 +87,9 @@ SUBROUTINE DORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   REAL(8) :: arg, sumdsq, tem, vnrm
   INTEGER i, i0
   !     .. External Functions ..
-  REAL(8) :: DDOT, DNRM2
-  EXTERNAL DDOT, DNRM2
+  REAL(8), EXTERNAL :: DDOT, DNRM2
   !     .. External Subroutines ..
-  EXTERNAL DAXPY
+  EXTERNAL :: DAXPY
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, SQRT
   !* FIRST EXECUTABLE STATEMENT  DORTH

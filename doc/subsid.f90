@@ -32,8 +32,7 @@ CHARACTER(10) FUNCTION CVTCAT(Categ)
   !     .. Local Scalars ..
   INTEGER i, ii, l
   !     .. External Functions ..
-  INTEGER LENSTR
-  EXTERNAL LENSTR
+  INTEGER, EXTERNAL :: LENSTR
   !* FIRST EXECUTABLE STATEMENT  CVTCAT
   l = LENSTR(Categ)
   CVTCAT(1:1) = Categ(1:1)
@@ -267,10 +266,9 @@ SUBROUTINE UPCASE(Str1,Str2)
   !     .. Local Scalars ..
   INTEGER i, l, m, n
   !     .. External Functions ..
-  INTEGER LENSTR
-  EXTERNAL LENSTR
+  INTEGER, EXTERNAL :: LENSTR
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC CHAR, ICHAR, LEN
   !* FIRST EXECUTABLE STATEMENT  UPCASE

@@ -243,7 +243,7 @@ SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,&
   REAL Bkpt(*), Coeff(*), Sddata(*), W(*), Xdata(*), Ydata(*)
   INTEGER Lw, Mdein, Mdeout, Nbkpt, Ndata, Nord
   !
-  EXTERNAL EFCMN
+  EXTERNAL :: EFCMN
   !
   INTEGER lbf, lbkpt, lg, lptemp, lww, lxtemp, mdg, mdw
   !

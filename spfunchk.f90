@@ -47,15 +47,14 @@ PROGRAM TESTI
 
   !* REVISION HISTORY  (YYMMDD)
   !   900709  DATE WRITTEN
-  
+
   !     .. Local Scalars ..
   INTEGER ipass, kprint, lin, lun, nfail, narg
   CHARACTER :: arg1
   !     .. External Functions ..
-  INTEGER I1MACH
-  EXTERNAL I1MACH
+  INTEGER, EXTERNAL :: I1MACH
   !     .. External Subroutines ..
-  EXTERNAL QCINTC, QCINTD, QCINTS, XERMAX, XSETF, XSETUN
+  EXTERNAL :: QCINTC, QCINTD, QCINTS, XERMAX, XSETF, XSETUN
   !* FIRST EXECUTABLE STATEMENT  TESTI
   lun = I1MACH(2)
   lin = I1MACH(1)
@@ -145,7 +144,7 @@ SUBROUTINE QCINTC(Lun,Kprint,Ipass)
 
   !* REVISION HISTORY  (YYMMDD)
   !   900717  DATE WRITTEN
-  
+
   !     .. Scalar Arguments ..
   INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
@@ -154,9 +153,8 @@ SUBROUTINE QCINTC(Lun,Kprint,Ipass)
   !     .. Local Arrays ..
   COMPLEX c(20), w(20)
   !     .. External Functions ..
-  COMPLEX CCOS, CEXP, CLOG, CSIN, CSQRT
-  REAL CABS, R1MACH, SQRT
-  EXTERNAL CCOS, CEXP, CLOG, CSIN, CSQRT, CABS, R1MACH, SQRT
+  COMPLEX, EXTERNAL :: CCOS, CEXP, CLOG, CSIN, CSQRT
+  REAL, EXTERNAL :: CABS, R1MACH, SQRT
   !     .. Intrinsic Functions ..
   INTRINSIC CMPLX
   !
@@ -277,7 +275,7 @@ SUBROUTINE QCINTD(Lun,Kprint,Ipass)
 
   !* REVISION HISTORY  (YYMMDD)
   !   900717  DATE WRITTEN
-  
+
   !     .. Scalar Arguments ..
   INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
@@ -286,11 +284,8 @@ SUBROUTINE QCINTD(Lun,Kprint,Ipass)
   !     .. Local Arrays ..
   REAL(8) :: v(60), y(60)
   !     .. External Functions ..
-  REAL(8) :: D1MACH, DACOS, DASIN, DATAN, DATAN2, DCOS, DCOSH, &
-    DEXP, DINT, DLOG, DLOG10, DSIN, DSINH, DSQRT, &
-    DTAN, DTANH
-  EXTERNAL D1MACH, DACOS, DASIN, DATAN, DATAN2, DCOS, DCOSH, DEXP, &
-    DINT, DLOG, DLOG10, DSIN, DSINH, DSQRT, DTAN, DTANH
+  REAL(8), EXTERNAL :: D1MACH, DACOS, DASIN, DATAN, DATAN2, DCOS, DCOSH, &
+    DEXP, DINT, DLOG, DLOG10, DSIN, DSINH, DSQRT, DTAN, DTANH
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !
@@ -495,7 +490,7 @@ SUBROUTINE QCINTS(Lun,Kprint,Ipass)
 
   !* REVISION HISTORY  (YYMMDD)
   !   900711  DATE WRITTEN
-  
+
   !     .. Scalar Arguments ..
   INTEGER Ipass, Kprint, Lun
   !     .. Local Scalars ..
@@ -504,9 +499,7 @@ SUBROUTINE QCINTS(Lun,Kprint,Ipass)
   !     .. Local Arrays ..
   REAL v(60), y(60)
   !     .. External Functions ..
-  REAL ACOS, ALOG, ALOG10, ASIN, ATAN, ATAN2, CABS, COS, COSH, &
-    EXP, R1MACH, SIN, SINH, SQRT, TAN, TANH
-  EXTERNAL ACOS, ALOG, ALOG10, ASIN, ATAN, ATAN2, CABS, COS, COSH, &
+  REAL, EXTERNAL :: ACOS, ALOG, ALOG10, ASIN, ATAN, ATAN2, CABS, COS, COSH, &
     EXP, R1MACH, SIN, SINH, SQRT, TAN, TANH
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, CMPLX

@@ -31,10 +31,10 @@ REAL(8) FUNCTION DGAMR(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  
+
   INTEGER irold
-  REAL(8) :: X, alngx, sgngx, DGAMMA
-  EXTERNAL DGAMMA
+  REAL(8) :: X, alngx, sgngx
+  REAL(8), EXTERNAL :: DGAMMA
   !* FIRST EXECUTABLE STATEMENT  DGAMR
   DGAMR = 0.0D0
   IF ( X<=0.0D0.AND.AINT(X)==X ) RETURN

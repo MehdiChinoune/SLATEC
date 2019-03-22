@@ -74,7 +74,7 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   !   910506  Made subsidiary.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
   !   921015  Added code to initialize ITER and ERR when IERR=0.  (FNF)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: Err
   INTEGER Ierr, Iter, Leniw, Lenw, Lociw, Locw
@@ -82,10 +82,9 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   !     .. Local Scalars ..
   CHARACTER xern1*8, xern2*8, xernam*8
   !     .. External Functions ..
-  REAL(8) :: D1MACH
-  EXTERNAL D1MACH
+  REAL(8), EXTERNAL :: D1MACH
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !* FIRST EXECUTABLE STATEMENT  DCHKW
   !
   !         Check the Integer workspace situation.

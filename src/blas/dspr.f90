@@ -105,10 +105,9 @@ SUBROUTINE DSPR(Uplo,N,Alpha,X,Incx,Ap)
   REAL(8) :: temp
   INTEGER i, info, ix, j, jx, k, kk, kx
   !     .. External Functions ..
-  LOGICAL LSAME
-  EXTERNAL LSAME
+  LOGICAL, EXTERNAL :: LSAME
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !* FIRST EXECUTABLE STATEMENT  DSPR
   !
   !     Test the input parameters.

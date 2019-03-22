@@ -43,18 +43,14 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     U, V, W, Work, X, XBEg, XENd, XOP
   REAL XOT, Xpts, XSAv, xxop, Yhp, Z
   INTEGER ICOco, idid, Iflag, IGOfx, INDpvt, INFo, INHomo, INTeg, &
-    Ip, ipar, ISTkop, IVP, Iwork, j, jflag, jon, K1, K10, &
-    K11, K2
+    Ip, ipar, ISTkop, IVP, Iwork, j, jflag, jon, K1, K10, K11, K2
   INTEGER K3, K4, K5, K6, K7, K8, K9, KKKint, KKKzpw, KNSwot, &
-    kod, KOP, kopp, L1, L2, LLLint, LOTjp, MNSwot, Mxnon, &
-    MXNond
+    kod, KOP, kopp, L1, L2, LLLint, LOTjp, MNSwot, Mxnon, MXNond
   INTEGER Ncomp, NCOmpd, NDIsk, NEEdiw, NEEdw, NEQ, NEQivp, Nfc, &
-    Nfcc, NFCcd, NFCd, nfcp1, NIC, Niv, non, NOPg, NPS, &
-    NSWot, NTApe, Ntp
+    Nfcc, NFCcd, NFCd, nfcp1, NIC, Niv, non, NOPg, NPS, NSWot, NTApe, Ntp
   INTEGER NTPd, NUMort, Nxpts, NXPtsd
   DIMENSION P(Ntp,*), Ip(Nfcc,*), U(Ncomp,Nfc,*), V(Ncomp,*), W(Nfcc,*)&
-    , Z(*), Yhp(Ncomp,*), Xpts(*), S(*), Stowa(*), Work(*), &
-    Iwork(*), G(*)
+    , Z(*), Yhp(Ncomp,*), Xpts(*), S(*), Stowa(*), Work(*), Iwork(*), G(*)
   !
   !- *********************************************************************
   !
@@ -62,12 +58,11 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
     , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
   COMMON /ML18JR/ AE, RE, TOL, NXPtsd, NIC, NOPg, MXNond, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTPd, NEQivp, &
-    NUMort, NFCcd, ICOco
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTPd, NEQivp, NUMort, NFCcd, ICOco
   COMMON /ML17BW/ KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, &
     K7, K8, K9, K10, K11, L1, L2, KKKint, LLLint
   !
-  EXTERNAL BVDER
+  EXTERNAL :: BVDER
   !
   !- *********************************************************************
   !  INITIALIZATION OF COUNTERS AND VARIABLES.

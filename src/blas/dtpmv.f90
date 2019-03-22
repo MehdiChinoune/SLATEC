@@ -120,10 +120,9 @@ SUBROUTINE DTPMV(Uplo,Trans,Diag,N,Ap,X,Incx)
   INTEGER i, info, ix, j, jx, k, kk, kx
   LOGICAL nounit
   !     .. External Functions ..
-  LOGICAL LSAME
-  EXTERNAL LSAME
+  LOGICAL, EXTERNAL :: LSAME
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !* FIRST EXECUTABLE STATEMENT  DTPMV
   !
   !     Test the input parameters.

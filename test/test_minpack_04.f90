@@ -26,7 +26,7 @@ CONTAINS
     !           (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920214  Minor improvements to code for readability.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Icnt
     !     .. Array Arguments ..
@@ -98,7 +98,7 @@ CONTAINS
     !   900911  Test problem changed and cosmetic changes to code.  (WRB)
     !   920214  Code restructured to test for all values of KPRINT and to
     !           provide more PASS/FAIL information.  (WRB)
-    
+
     INTEGER kontrl
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
@@ -114,10 +114,9 @@ CONTAINS
     REAL(8) :: a(97), tc(5), w(11), x(11), y(11), yp(5)
     INTEGER itest(9)
     !     .. External Functions ..
-    REAL(8) :: D1MACH
-    EXTERNAL D1MACH
+    REAL(8), EXTERNAL :: D1MACH
     !     .. External Subroutines ..
-    EXTERNAL PASS, DPCOEF, DPOLFT, DP1VLU
+    EXTERNAL :: PASS, DPCOEF, DPOLFT, DP1VLU
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !     .. Common blocks ..
@@ -489,7 +488,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -499,15 +498,13 @@ CONTAINS
       nerr, nprint
     LOGICAL fatal
     !     .. Local Arrays ..
-    REAL(8) :: fjac(10,2), fjrow(2), fjtj(3), fvec(10), wa(40), &
-      x(2)
+    REAL(8) :: fjac(10,2), fjrow(2), fjtj(3), fvec(10), wa(40), x(2)
     INTEGER iw(2)
     !     .. External Functions ..
-    REAL(8) :: D1MACH, DENORM
-    INTEGER NUMXER
-    EXTERNAL D1MACH, DENORM, NUMXER
+    REAL(8), EXTERNAL :: D1MACH, DENORM
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL DFDJC3, PASS, DCOV, DNLS1E, XGETF, XSETF
+    EXTERNAL :: DFDJC3, PASS, DCOV, DNLS1E, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !* FIRST EXECUTABLE STATEMENT  DNLS1Q
@@ -799,7 +796,7 @@ CONTAINS
     !           FORMATs.  (RWC)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -809,15 +806,13 @@ CONTAINS
     LOGICAL fatal
     !     .. Local Arrays ..
     REAL(8) :: bkpt(13), check(51), coefck(9), coeff(9), sddata(9), &
-      v(51,5), w(529), work(12), xconst(11), xdata(9), &
-      yconst(11), ydata(9)
+      v(51,5), w(529), work(12), xconst(11), xdata(9), yconst(11), ydata(9)
     INTEGER iw(30), nderiv(11)
     !     .. External Functions ..
-    REAL(8) :: D1MACH, DBVALU, DCV
-    INTEGER NUMXER
-    EXTERNAL DBVALU, DCV, NUMXER, D1MACH
+    REAL(8), EXTERNAL :: D1MACH, DBVALU, DCV
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL DCOPY, DFC, DMOUT, DVOUT, IVOUT, XGETF, XSETF
+    EXTERNAL :: DCOPY, DFC, DMOUT, DVOUT, IVOUT, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, REAL, SQRT
     !     .. Data statements ..
@@ -1142,7 +1137,7 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  TYPE and declarations sections added.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     REAL(8) :: Fjac
     INTEGER Iflag, Ldfjac, M, N
@@ -1192,7 +1187,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  TYPE and declarations sections added and code polished.
     !           (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Iflag, Ldfjac, M, N
     !     .. Array Arguments ..
@@ -1259,7 +1254,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  TYPE and declarations sections added and code polished.
     !           (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Iflag, M, N, Nrow
     !     .. Array Arguments ..
@@ -1350,7 +1345,7 @@ PROGRAM TEST53
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST53

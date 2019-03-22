@@ -397,7 +397,7 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921026  Added check for valid value of ITOL.  (FNF)
-  
+
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -408,17 +408,16 @@ SUBROUTINE DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
     X(N)
   INTEGER Ia(Nelt), Igwk(Ligw), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC, MSOLVE
+  EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
   REAL(8) :: bnrm, rhol, sum
   INTEGER i, iflag, jpre, jscal, kmp, ldl, lgmr, lhes, lq, lr, &
     lv, lw, lxl, lz, lzm1, maxl, maxlp1, nms, nmsl, nrmax, &
     nrsts
   !     .. External Functions ..
-  REAL(8) :: D1MACH, DNRM2
-  EXTERNAL D1MACH, DNRM2
+  REAL(8), EXTERNAL :: D1MACH, DNRM2
   !     .. External Subroutines ..
-  EXTERNAL DCOPY, DPIGMR
+  EXTERNAL :: DCOPY, DPIGMR
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
   !* FIRST EXECUTABLE STATEMENT  DGMRES

@@ -205,15 +205,14 @@ SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  
+
   INTEGER l4, Last
-  REAL A, Abserr, B, Epsabs, Epsrel, F, Points, Result, Work
-  INTEGER Ier, Iwork, Leniw, Lenw, limit, lvl, l1, l2, l3, Neval, &
-    Npts2
+  REAL A, Abserr, B, Epsabs, Epsrel, Points, Result, Work
+  INTEGER Ier, Iwork, Leniw, Lenw, limit, lvl, l1, l2, l3, Neval, Npts2
   !
   DIMENSION Iwork(*), Points(*), Work(*)
   !
-  EXTERNAL F
+  REAL, EXTERNAL :: F
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.
   !

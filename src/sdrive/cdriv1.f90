@@ -298,13 +298,14 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  EXTERNAL F, R1MACH
+  EXTERNAL :: F
   COMPLEX Work(*), Y(*)
-  REAL Eps, ewtcom(1), hmax, T, Tout, R1MACH
+  REAL Eps, ewtcom(1), hmax, T, Tout
   INTEGER i, Ierflg, leniw, Lenw, lenwcm, lnwchk, ml, Mstate, mu, N, nde, nstate, ntask
   INTEGER, PARAMETER :: MXN = 200, IDLIW = 50
   INTEGER iwork(IDLIW+MXN)
   CHARACTER intgr1*8
+  REAL, EXTERNAL :: R1MACH
   INTEGER, PARAMETER :: NROOT = 0, IERROR = 2, MINT = 2, MITER = 2, IMPL = 0, &
     MXORD = 5, MXSTEP = 1000
   DATA ewtcom(1)/1.E0/

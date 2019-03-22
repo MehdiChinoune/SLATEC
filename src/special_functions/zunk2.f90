@@ -53,7 +53,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     bsumi(2), phir(2), phii(2), argr(2), argi(2), zeta1r(2), &
     zeta1i(2), zeta2r(2), zeta2i(2), cyr(2), cyi(2), cipr(4), &
     cipi(4), cssr(3), csrr(3)
-  EXTERNAL ZABS
+  EXTERNAL :: ZABS
   DATA zeror, zeroi, coner, cr1r, cr1i, cr2r, cr2i/0.0D0, 0.0D0, &
     1.0D0, 1.0D0, 1.73205080756887729D0, -0.5D0, &
     -8.66025403784438647D-01/

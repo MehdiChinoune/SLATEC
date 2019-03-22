@@ -733,10 +733,10 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  EXTERNAL F, JACOBN, FA, G, USERS
+  EXTERNAL :: F, JACOBN, FA, G, USERS
   COMPLEX Work(*), Y(*)
   REAL ae, avgh, avgord, big, el(13,12), Eps, Ewt(*), G, glast, gnow, h, Hmax, &
-    hold, hsign, hused, rc, re, rmax, R1MACH, SCNRM2, size, sum, T, tlast, Tout, &
+    hold, hsign, hused, rc, re, rmax, size, sum, T, tlast, Tout, &
     tq(3,12), trend, troot, uround
   INTEGER i, ia, idfdy, Ierflg, Ierror, ifac, iflag, ignow, Impl, imxerr, info, &
     iroot, isave1, isave2, itroot, Iwork(*), iywt, j, jstate, jtroot, lenchk, &
@@ -744,6 +744,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Nde, ndecom, npar, Nroot, Nstate, nstepl, Ntask
   LOGICAL convrg
   CHARACTER intgr1*8, intgr2*8, rl1*16, rl2*16
+  REAL, EXTERNAL :: R1MACH, SCNRM2
   REAL, PARAMETER :: NROUND = 20.E0
   INTEGER, PARAMETER :: IAVGH = 1, IHUSED = 2, IAVGRD = 3, IEL = 4, IH = 160, &
     IHMAX = 161, IHOLD = 162, IHSIGN = 163, IRC = 164, IRMAX = 165, IT = 166, &

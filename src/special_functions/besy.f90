@@ -74,14 +74,14 @@ SUBROUTINE BESY(X,Fnu,N,Y)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
-  EXTERNAL YAIRY
   INTEGER i, iflw, j, N, nb, nd, nn, nud, nulim
-  INTEGER I1MACH
   REAL azn, cn, dnu, elim, flgjy, fn, Fnu, ran, s, s1, s2, tm, &
     trx, w, wk, w2n, X, xlim, xxn, Y
-  REAL BESY0, BESY1, R1MACH
+  INTEGER, EXTERNAL :: I1MACH
+  REAL, EXTERNAL :: BESY0, BESY1, R1MACH
+  EXTERNAL :: YAIRY
   DIMENSION w(2), nulim(2), Y(*), wk(7)
   SAVE nulim
   DATA nulim(1), nulim(2)/70, 100/

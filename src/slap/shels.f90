@@ -79,7 +79,7 @@ SUBROUTINE SHELS(A,Lda,N,Q,B)
   REAL c, s, t, t1, t2
   INTEGER iq, k, kb, kp1
   !     .. External Subroutines ..
-  EXTERNAL SAXPY
+  EXTERNAL :: SAXPY
   !* FIRST EXECUTABLE STATEMENT  SHELS
   !
   !         Minimize(B-A*X,B-A*X).  First form Q*B.

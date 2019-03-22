@@ -28,7 +28,7 @@ SUBROUTINE CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   
   REAL A, ai, B, bi, C, ci, D, dlx, xi
   INTEGER i, Idmn, Ierror, Iorder, M, Mbdcnd, N, Nbdcnd
-  EXTERNAL COFX
+  EXTERNAL :: COFX
   !* FIRST EXECUTABLE STATEMENT  CHKPR4
   Ierror = 1
   IF ( A>=B.OR.C>=D ) RETURN

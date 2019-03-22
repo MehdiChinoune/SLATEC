@@ -440,7 +440,7 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     p001, p1, p5, pnorm, prered, Qtf(*), R(*), ratio, &
     sum, temp, Wa1(*), Wa2(*), Wa3(*), Wa4(*), X(*), &
     xnorm, Xtol, zero
-  EXTERNAL FCN
+  EXTERNAL :: FCN
   LOGICAL jeval, sing
   SAVE one, p1, p5, p001, p0001, zero
   DATA one, p1, p5, p001, p0001, zero/1.0D0, 1.0D-1, 5.0D-1, &

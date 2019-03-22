@@ -91,7 +91,7 @@ SUBROUTINE QS2I1R(Ia,Ja,A,N,Kflag)
   !     .. Local Arrays ..
   INTEGER il(21), iu(21)
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, INT
   !* FIRST EXECUTABLE STATEMENT  QS2I1R

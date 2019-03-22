@@ -254,7 +254,7 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930326  Removed unused variable.  (FNF)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt, Nsave
@@ -264,16 +264,15 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
     Z(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC, MSOLVE
+  EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
   REAL(8) :: ak, akden, aknum, bkl, bnrm, fuzz, solnrm
   INTEGER i, ip, ipo, k, l, lmax
   !     .. External Functions ..
-  REAL(8) :: D1MACH, DDOT
-  INTEGER ISDOMN
-  EXTERNAL D1MACH, DDOT, ISDOMN
+  REAL(8), EXTERNAL :: D1MACH, DDOT
+  INTEGER, EXTERNAL :: ISDOMN
   !     .. External Subroutines ..
-  EXTERNAL DAXPY, DCOPY
+  EXTERNAL :: DAXPY, DCOPY
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, MIN, MOD
   !* FIRST EXECUTABLE STATEMENT  DOMN

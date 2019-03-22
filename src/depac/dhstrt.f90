@@ -157,7 +157,7 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
     tolsum, Y, ydpb, Yp, Yprime
   DIMENSION Y(*), Yprime(*), Etol(*), Spy(*), Pv(*), Yp(*), Sf(*), &
     Rpar(*), Ipar(*)
-  EXTERNAL DF
+  EXTERNAL :: DF
   !
   !     ..................................................................
   !

@@ -256,7 +256,7 @@ SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
@@ -265,17 +265,16 @@ SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     U(N), V1(N), V2(N), X(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC, MSOLVE
+  EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
   REAL(8) :: ak, akm, bk, bnrm, fuzz, rhon, rhonm1, sigma, &
     solnrm, tolmin
   INTEGER i, k
   !     .. External Functions ..
-  REAL(8) :: D1MACH, DDOT
-  INTEGER ISDCGS
-  EXTERNAL D1MACH, DDOT, ISDCGS
+  REAL(8), EXTERNAL :: D1MACH, DDOT
+  INTEGER, EXTERNAL :: ISDCGS
   !     .. External Subroutines ..
-  EXTERNAL DAXPY
+  EXTERNAL :: DAXPY
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !* FIRST EXECUTABLE STATEMENT  DCGS

@@ -216,20 +216,19 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !   891009  Removed unreferenced variable.  (WRB)
   !   891009  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
-  REAL F
+
   INTEGER last, Limlst, momcom
-  REAL A, abseps, Abserr, Alist, Blist, Chebmo, correc, cycle, c1, &
-    c2, dl, drl, Elist, ep, eps, epsa, Epsabs, Erlst, errsum, &
-    fact, Omega, p, pi, p1, psum, reseps, Result, res3la, &
-    Rlist, Rslst, R1MACH, uflow
+  REAL A, abseps, Abserr, Alist, Blist, Chebmo, correc, cycle, c1, c2, dl, drl, &
+    Elist, ep, eps, epsa, Epsabs, Erlst, errsum, fact, Omega, p, pi, p1, psum, &
+    reseps, Result, res3la, Rlist, Rslst, uflow
   INTEGER Ier, Ierlst, Integr, Iord, ktmin, l, Lst, Limit, ll, &
     Maxp1, nev, Neval, Nnlog, nres, numrl2
   !
   DIMENSION Alist(*), Blist(*), Chebmo(Maxp1,25), Elist(*), Erlst(*), &
     Ierlst(*), Iord(*), Nnlog(*), psum(52), res3la(3), Rlist(*), Rslst(*)
   !
-  EXTERNAL F
+  REAL, EXTERNAL :: F
+  REAL, EXTERNAL :: R1MACH
   !
   !
   !            THE DIMENSION OF  PSUM  IS DETERMINED BY THE VALUE OF

@@ -94,16 +94,16 @@ SUBROUTINE DQNG(F,A,B,Epsabs,Epsrel,Result,Abserr,Neval,Ier)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  
+
   !
-  REAL(8) :: A, absc, Abserr, B, centr, dhlgth, D1MACH, &
-    epmach, Epsabs, Epsrel, F, fcentr, fval, fval1, &
+  REAL(8) :: A, absc, Abserr, B, centr, dhlgth, &
+    epmach, Epsabs, Epsrel, fcentr, fval, fval1, &
     fval2, fv1, fv2, fv3, fv4, hlgth, Result, res10, &
     res21, res43, res87, resabs, resasc, reskh, &
-    savfun, uflow, w10, w21a, w21b, w43a, w43b, w87a, &
-    w87b, x1, x2, x3, x4
+    savfun, uflow, w10, w21a, w21b, w43a, w43b, w87a, w87b, x1, x2, x3, x4
   INTEGER Ier, ipx, k, l, Neval
-  EXTERNAL F
+  REAL(8), EXTERNAL :: F
+  REAL(8), EXTERNAL :: D1MACH
   !
   DIMENSION fv1(5), fv2(5), fv3(5), fv4(5), x1(5), x2(5), x3(11), &
     x4(22), w10(5), w21a(5), w21b(6), w43a(10), w43b(12), &

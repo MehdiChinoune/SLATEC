@@ -103,10 +103,10 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   REAL(8) :: X, Y(*), Yprime(*), H, Wt(*), Rpar(*), Phi(Neq,*), &
     Delta(*), E(*), Wm(*), Alpha(*), Beta(*), Gamma(*), &
     Psi(*), Sigma(*), Cj, Cjold, Hold, S, Hmin, Uround
-  EXTERNAL RES, JAC
+  EXTERNAL :: RES, JAC
   !
-  EXTERNAL DDAJAC, DDANRM, DDASLV, DDATRP
-  REAL(8) :: DDANRM
+  EXTERNAL :: DDAJAC, DDASLV, DDATRP
+  REAL(8), EXTERNAL :: DDANRM
   !
   INTEGER i, ier, ires, j, j1, kdiff, km1, knew, kp1, kp2, m, maxit, ncf, nef, &
     nsf, nsp1

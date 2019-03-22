@@ -59,7 +59,7 @@ SUBROUTINE DSLLTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !     .. Local Scalars ..
   INTEGER locdin, locel, lociel, locjel, nel
   !     .. External Subroutines ..
-  EXTERNAL DLLTI2
+  EXTERNAL :: DLLTI2
   !* FIRST EXECUTABLE STATEMENT  DSLLTI
   nel = Iwork(1)
   lociel = Iwork(3)

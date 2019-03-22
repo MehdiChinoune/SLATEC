@@ -60,7 +60,7 @@ SUBROUTINE SSMMTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !     .. Local Scalars ..
   INTEGER locdin, locil, lociu, locjl, locju, locl, locu
   !     .. External Subroutines ..
-  EXTERNAL SSMMI2
+  EXTERNAL :: SSMMI2
   !* FIRST EXECUTABLE STATEMENT  SSMMTI
   !
   !         Pull out the locations of the arrays holding the ILU

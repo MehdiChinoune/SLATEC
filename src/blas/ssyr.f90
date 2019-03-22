@@ -108,10 +108,9 @@ SUBROUTINE SSYR(Uplo,N,Alpha,X,Incx,A,Lda)
   REAL temp
   INTEGER i, info, ix, j, jx, kx
   !     .. External Functions ..
-  LOGICAL LSAME
-  EXTERNAL LSAME
+  LOGICAL, EXTERNAL :: LSAME
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !* FIRST EXECUTABLE STATEMENT  SSYR

@@ -96,17 +96,17 @@ SUBROUTINE QC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !
   REAL A, Abserr, Alfa, B, Beta, Bl, Br, centr, cheb12, cheb24, &
-    dc, F, factor, fix, fval, hlgth, resabs, Resasc, Result, &
-    res12, res24, Rg, Rh, Ri, Rj, u, QWGTS, x
+    dc, factor, fix, fval, hlgth, resabs, Resasc, Result, &
+    res12, res24, Rg, Rh, Ri, Rj, u, x
   INTEGER i, Integr, isym, Nev
   !
   DIMENSION cheb12(13), cheb24(25), fval(25), Rg(25), Rh(25), Ri(25), &
     Rj(25), x(11)
   !
-  EXTERNAL F, QWGTS
+  REAL, EXTERNAL :: F, QWGTS
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24)
   !           K = 1, ..., 11, TO BE USED FOR THE COMPUTATION OF THE

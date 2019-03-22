@@ -123,10 +123,9 @@ SUBROUTINE CTPSV(Uplo,Trans,Diag,N,Ap,X,Incx)
   INTEGER i, info, ix, j, jx, k, kk, kx
   LOGICAL noconj, nounit
   !     .. External Functions ..
-  LOGICAL LSAME
-  EXTERNAL LSAME
+  LOGICAL, EXTERNAL :: LSAME
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG
   !* FIRST EXECUTABLE STATEMENT  CTPSV

@@ -118,10 +118,9 @@ SUBROUTINE DSPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   REAL(8) :: temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, k, kk, kx, ky
   !     .. External Functions ..
-  LOGICAL LSAME
-  EXTERNAL LSAME
+  LOGICAL, EXTERNAL :: LSAME
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !* FIRST EXECUTABLE STATEMENT  DSPMV
   !
   !     Test the input parameters.

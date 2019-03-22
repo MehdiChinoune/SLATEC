@@ -172,7 +172,7 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, N, nl, Nz, &
     I1MACH
   DIMENSION Cyr(N), Cyi(N)
-  EXTERNAL ZABS
+  EXTERNAL :: ZABS
   DATA hpi/1.57079632679489662D0/
   !
   !* FIRST EXECUTABLE STATEMENT  ZBESJ

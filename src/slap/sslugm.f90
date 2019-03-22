@@ -350,7 +350,7 @@ SUBROUTINE SSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     locjl, locju, locl, locnc, locnr, locrgw, locu, locw, &
     myitol, nl, nu
   !     .. External Subroutines ..
-  EXTERNAL SCHKW, SGMRES, SS2Y, SSILUS, SSLUI, SSMV
+  EXTERNAL :: SCHKW, SGMRES, SS2Y, SSILUS, SSLUI, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSLUGM
   !
   Ierr = 0

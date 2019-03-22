@@ -31,7 +31,7 @@ CONTAINS
     !   891009  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -41,10 +41,9 @@ CONTAINS
     REAL fvec(2), wa(19), x(2)
     INTEGER itest(3)
     !     .. External Functions ..
-    REAL ENORM, R1MACH
-    EXTERNAL ENORM, R1MACH
+    REAL, EXTERNAL :: ENORM, R1MACH
     !     .. External Subroutines ..
-    EXTERNAL PASS, SNSQE
+    EXTERNAL :: PASS, SNSQE
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  SNSQQK
@@ -143,7 +142,7 @@ CONTAINS
     !   801001  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     INTEGER K
     REAL X
     DIMENSION X(2)
@@ -183,7 +182,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -193,10 +192,9 @@ CONTAINS
     REAL fvec(2), wa(17), x(2)
     INTEGER itest(2), iw(6)
     !     .. External Functions ..
-    REAL R1MACH, SNRM2
-    EXTERNAL R1MACH, SNRM2
+    REAL, EXTERNAL :: R1MACH, SNRM2
     !     .. External Subroutines ..
-    EXTERNAL PASS, SOS
+    EXTERNAL :: PASS, SOS
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  SOSNQX
@@ -283,7 +281,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  TYPE and declarations sections added.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Iflag, N
     !     .. Array Arguments ..
@@ -318,7 +316,7 @@ CONTAINS
     !   890831  Modified array declarations.  (WRB)
     !   890831  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL Fjac, Fvec, X
     INTEGER Iflag, Ldfjac, N
     DIMENSION X(*), Fvec(*), Fjac(Ldfjac,*)
@@ -381,7 +379,7 @@ PROGRAM TEST35
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST35

@@ -123,10 +123,9 @@ SUBROUTINE STRMV(Uplo,Trans,Diag,N,A,Lda,X,Incx)
   INTEGER i, info, ix, j, jx, kx
   LOGICAL nounit
   !     .. External Functions ..
-  LOGICAL LSAME
-  EXTERNAL LSAME
+  LOGICAL, EXTERNAL :: LSAME
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !* FIRST EXECUTABLE STATEMENT  STRMV

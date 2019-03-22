@@ -242,7 +242,7 @@ SUBROUTINE DSILUR(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     locjl, locju, locl, locnc, locnr, locr, locu, locw, locz, &
     nl, nu
   !     .. External Subroutines ..
-  EXTERNAL DCHKW, DIR, DS2Y, DSILUS, DSLUI, DSMV
+  EXTERNAL :: DCHKW, DIR, DS2Y, DSILUS, DSLUI, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSILUR
   !
   Ierr = 0

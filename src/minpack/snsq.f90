@@ -435,7 +435,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   REAL Xtol, Epsfcn, Factor
   REAL X(*), Fvec(*), Diag(*), Fjac(Ldfjac,*), R(Lr), Qtf(*), Wa1(*), &
     Wa2(*), Wa3(*), Wa4(*)
-  EXTERNAL FCN
+  EXTERNAL :: FCN
   INTEGER i, iflag, iter, j, jm1, l, ncfail, ncsuc, nslow1, nslow2
   INTEGER iwa(1)
   LOGICAL jeval, sing

@@ -68,7 +68,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   DIMENSION Y(*), Yp(*), F1(*), F2(*), F3(*), F4(*), F5(*), Ys(*), &
     Info(15), Rtol(*), Atol(*), Rpar(*), Ipar(*)
   !
-  EXTERNAL DF
+  EXTERNAL :: DF
   !
   !     ..................................................................
   !

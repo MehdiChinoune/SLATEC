@@ -143,7 +143,7 @@ SUBROUTINE DS2Y(N,Nelt,Ia,Ja,A,Isym)
   REAL(8) :: temp
   INTEGER i, ibgn, icol, iend, itemp, j
   !     .. External Subroutines ..
-  EXTERNAL QS2I1D
+  EXTERNAL :: QS2I1D
   !* FIRST EXECUTABLE STATEMENT  DS2Y
   !
   !         Check to see if the (IA,JA,A) arrays are in SLAP Column

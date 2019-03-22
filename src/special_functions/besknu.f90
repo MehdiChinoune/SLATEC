@@ -86,17 +86,16 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   INTEGER i, iflag, inu, j, k, kk, Kode, koded, N, nn, Nz
-  INTEGER I1MACH
   REAL a, ak, a1, a2, b, bk, cc, ck, coef, cx, dk, dnu, dnu2, &
     elim, etest, ex, f, fc, fhs, fk, fks, flrx, fmu, Fnu, g1, &
     g2, p, pi, pt, p1, p2, q, rthpi, rx, s, smu, sqk, st, &
     s1, s2, tm, tol, t1, t2, X, x1, x2, Y
-  REAL GAMMA, R1MACH
   DIMENSION a(160), b(160), Y(*), cc(8)
-  EXTERNAL GAMMA
+  INTEGER, EXTERNAL :: I1MACH
+  REAL, EXTERNAL :: GAMMA, R1MACH
   SAVE x1, x2, pi, rthpi, cc
   DATA x1, x2/2.0E0, 17.0E0/
   DATA pi, rthpi/3.14159265358979E+00, 1.25331413731550E+00/

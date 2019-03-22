@@ -48,23 +48,21 @@ REAL FUNCTION ACOS(X)
   !   801001  Revisions by W. Fullerton.
   !   900516  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
   REAL pi2
   !     .. External Functions ..
-  REAL ASIN
-  EXTERNAL ASIN
+  REAL, EXTERNAL :: ASIN
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !     .. Data statements ..
   DATA pi2/1.57079632679489661923E0/
   !* FIRST EXECUTABLE STATEMENT  ACOS
-  IF ( ABS(X)>1.0E0 ) CALL XERMSG('SLATEC','ACOS','ABS(X) GREATER THAN 1',1,&
-    2)
+  IF ( ABS(X)>1.0E0 ) CALL XERMSG('SLATEC','ACOS','ABS(X) GREATER THAN 1',1,2)
   !
   ACOS = pi2 - ASIN(X)
   !
@@ -128,7 +126,7 @@ REAL FUNCTION ALOG(X)
   !   801001  Revisions by W. Fullerton.
   !   900517  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -137,11 +135,10 @@ REAL FUNCTION ALOG(X)
   !     .. Local Arrays ..
   REAL alncen(5), alncs(6), center(4)
   !     .. External Functions ..
-  REAL CSEVL, R1MACH
-  INTEGER INITS
-  EXTERNAL CSEVL, R1MACH, INITS
+  REAL, EXTERNAL :: CSEVL, R1MACH
+  INTEGER, EXTERNAL :: INITS
   !     .. External Subroutines ..
-  EXTERNAL R9UPAK, XERMSG
+  EXTERNAL :: R9UPAK, XERMSG
   !     .. Save statement ..
   SAVE nterms
   !     .. Data statements ..
@@ -232,14 +229,13 @@ REAL FUNCTION ALOG10(X)
   !   801001  Revisions by W. Fullerton.
   !   900517  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
   REAL aloge
   !     .. External Functions ..
-  REAL ALOG
-  EXTERNAL ALOG
+  REAL, EXTERNAL :: ALOG
   !     .. Data statements ..
   DATA aloge/0.43429448190325182765E0/
   !* FIRST EXECUTABLE STATEMENT  ALOG10
@@ -302,7 +298,7 @@ REAL FUNCTION ASIN(X)
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -312,11 +308,10 @@ REAL FUNCTION ASIN(X)
   !     .. Local Arrays ..
   REAL asincs(20)
   !     .. External Functions ..
-  REAL CSEVL, R1MACH, SQRT
-  INTEGER INITS
-  EXTERNAL CSEVL, R1MACH, SQRT, INITS
+  REAL, EXTERNAL :: CSEVL, R1MACH, SQRT
+  INTEGER, EXTERNAL :: INITS
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, SIGN
   !     .. Save statement ..
@@ -423,7 +418,7 @@ REAL FUNCTION ATAN(X)
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -433,9 +428,8 @@ REAL FUNCTION ATAN(X)
   !     .. Local Arrays ..
   REAL atancs(9), conpi8(4), pi8(4), tanp8(3)
   !     .. External Functions ..
-  REAL CSEVL, R1MACH, SQRT
-  INTEGER INITS
-  EXTERNAL CSEVL, R1MACH, SQRT, INITS
+  REAL, EXTERNAL :: CSEVL, R1MACH, SQRT
+  INTEGER, EXTERNAL :: INITS
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, SIGN
   !     .. Save statement ..
@@ -551,16 +545,15 @@ REAL FUNCTION ATAN2(Sn,Cs)
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL Cs, Sn
   !     .. Local Scalars ..
   REAL pi
   !     .. External Functions ..
-  REAL ATAN
-  EXTERNAL ATAN
+  REAL, EXTERNAL :: ATAN
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC SIGN
   !     .. Data statements ..
@@ -628,15 +621,14 @@ REAL FUNCTION CABS(Z)
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. Local Scalars ..
   REAL r1, r2, sqeps, x, y
   LOGICAL first
   !     .. External Functions ..
-  REAL R1MACH, SQRT
-  EXTERNAL R1MACH, SQRT
+  REAL, EXTERNAL :: R1MACH, SQRT
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, AIMAG, MAX, MIN, REAL
   !     .. Save statement ..
@@ -704,16 +696,15 @@ COMPLEX FUNCTION CCOS(Z)
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. Local Scalars ..
   REAL cs, x, y
   !     .. External Functions ..
-  REAL COS, COSH, SIN, SINH
-  EXTERNAL COS, COSH, SIN, SINH
+  REAL, EXTERNAL :: COS, COSH, SIN, SINH
   !     .. External Subroutines ..
-  EXTERNAL XERCLR
+  EXTERNAL :: XERCLR
   !     .. Intrinsic Functions ..
   INTRINSIC AIMAG, CMPLX, REAL
   !* FIRST EXECUTABLE STATEMENT  CCOS
@@ -774,14 +765,13 @@ COMPLEX FUNCTION CEXP(Z)
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. Local Scalars ..
   REAL r, y
   !     .. External Functions ..
-  REAL COS, EXP, SIN
-  EXTERNAL COS, EXP, SIN
+  REAL, EXTERNAL :: COS, EXP, SIN
   !     .. Intrinsic Functions ..
   INTRINSIC AIMAG, CMPLX, REAL
   !* FIRST EXECUTABLE STATEMENT  CEXP
@@ -842,12 +832,11 @@ COMPLEX FUNCTION CLOG(Z)
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. External Functions ..
-  REAL ALOG, CABS, CARG
-  EXTERNAL ALOG, CABS, CARG
+  REAL, EXTERNAL :: ALOG, CABS, CARG
   !     .. Intrinsic Functions ..
   INTRINSIC CMPLX
   !* FIRST EXECUTABLE STATEMENT  CLOG
@@ -918,7 +907,7 @@ REAL FUNCTION COS(X)
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -928,11 +917,10 @@ REAL FUNCTION COS(X)
   !     .. Local Arrays ..
   REAL coscs(8), sincs(8)
   !     .. External Functions ..
-  REAL CSEVL, R1MACH, SQRT
-  INTEGER INITS
-  EXTERNAL CSEVL, R1MACH, SQRT, INITS
+  REAL, EXTERNAL :: CSEVL, R1MACH, SQRT
+  INTEGER, EXTERNAL :: INITS
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, AINT, AMOD, MOD
   !     .. Save statement ..
@@ -1051,14 +1039,13 @@ REAL FUNCTION COSH(X)
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
   REAL y, ymax
   !     .. External Functions ..
-  REAL EXP, R1MACH, SQRT
-  EXTERNAL EXP, R1MACH, SQRT
+  REAL, EXTERNAL :: EXP, R1MACH, SQRT
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !     .. Data statements ..
@@ -1118,16 +1105,15 @@ COMPLEX FUNCTION CSIN(Z)
   !   801001  Revisions by W. Fullerton.
   !   900518  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. Local Scalars ..
   REAL sn, x, y
   !     .. External Functions ..
-  REAL COS, COSH, SIN, SINH
-  EXTERNAL COS, COSH, SIN, SINH
+  REAL, EXTERNAL :: COS, COSH, SIN, SINH
   !     .. External Subroutines ..
-  EXTERNAL XERCLR
+  EXTERNAL :: XERCLR
   !     .. Intrinsic Functions ..
   INTRINSIC AIMAG, CMPLX, REAL
   !* FIRST EXECUTABLE STATEMENT  CSIN
@@ -1188,14 +1174,13 @@ COMPLEX FUNCTION CSQRT(Z)
   !   801001  Revisions by W. Fullerton
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   COMPLEX Z
   !     .. Local Scalars ..
   REAL r, x, xtmp, y, ytmp
   !     .. External Functions ..
-  REAL CABS, SQRT
-  EXTERNAL CABS, SQRT
+  REAL, EXTERNAL :: CABS, SQRT
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, AIMAG, CMPLX, REAL, SIGN
   !* FIRST EXECUTABLE STATEMENT  CSQRT
@@ -1271,16 +1256,15 @@ REAL(8) FUNCTION DACOS(X)
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
   REAL(8) :: pi2
   !     .. External Functions ..
-  REAL(8) :: DASIN
-  EXTERNAL DASIN
+  REAL(8), EXTERNAL :: DASIN
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC DABS
   !     .. Data statements ..
@@ -1350,7 +1334,7 @@ REAL(8) FUNCTION DASIN(X)
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -1360,11 +1344,10 @@ REAL(8) FUNCTION DASIN(X)
   !     .. Local Arrays ..
   REAL(8) :: asincs(39)
   !     .. External Functions ..
-  REAL(8) :: D1MACH, DCSEVL, DSQRT
-  INTEGER INITDS
-  EXTERNAL D1MACH, DCSEVL, DSQRT, INITDS
+  REAL(8), EXTERNAL :: D1MACH, DCSEVL, DSQRT
+  INTEGER, EXTERNAL :: INITDS
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC DABS, DSIGN, SNGL
   !     .. Save statement ..
@@ -1491,7 +1474,7 @@ REAL(8) FUNCTION DATAN(X)
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -1501,9 +1484,8 @@ REAL(8) FUNCTION DATAN(X)
   !     .. Local Arrays ..
   REAL(8) :: atancs(16), conpi8(4), pi8(4), tanp8(3)
   !     .. External Functions ..
-  REAL(8) :: D1MACH, DCSEVL, DSQRT
-  INTEGER INITDS
-  EXTERNAL D1MACH, DCSEVL, DSQRT, INITDS
+  REAL(8), EXTERNAL :: D1MACH, DCSEVL, DSQRT
+  INTEGER, EXTERNAL :: INITDS
   !     .. Intrinsic Functions ..
   INTRINSIC DABS, DSIGN, SNGL
   !     .. Save statement ..
@@ -1629,16 +1611,15 @@ REAL(8) FUNCTION DATAN2(Sn,Cs)
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: Cs, Sn
   !     .. Local Scalars ..
   REAL(8) :: pi
   !     .. External Functions ..
-  REAL(8) :: DATAN
-  EXTERNAL DATAN
+  REAL(8), EXTERNAL :: DATAN
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC DSIGN
   !     .. Data statements ..
@@ -1721,7 +1702,7 @@ REAL(8) FUNCTION DCOS(X)
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -1733,11 +1714,10 @@ REAL(8) FUNCTION DCOS(X)
   !     .. Local Arrays ..
   REAL(8) :: coscs(13), sincs(12)
   !     .. External Functions ..
-  REAL(8) :: D1MACH, DCSEVL, DINT, DSQRT
-  INTEGER INITDS
-  EXTERNAL D1MACH, DCSEVL, DINT, DSQRT, INITDS
+  REAL(8), EXTERNAL :: D1MACH, DCSEVL, DINT, DSQRT
+  INTEGER, EXTERNAL :: INITDS
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC DABS, DMOD, MOD
   !     .. Save statement ..
@@ -1868,14 +1848,13 @@ REAL(8) FUNCTION DCOSH(X)
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
   REAL(8) :: y, ymax
   !     .. External Functions ..
-  REAL(8) :: D1MACH, DEXP, DSQRT
-  EXTERNAL D1MACH, DEXP, DSQRT
+  REAL(8), EXTERNAL :: D1MACH, DEXP, DSQRT
   !     .. Intrinsic Functions ..
   INTRINSIC DABS
   !     .. Save statement ..
@@ -1951,7 +1930,7 @@ REAL(8) FUNCTION DEXP(X)
   !   801001  Revisions by W. Fullerton.
   !   900525  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -1961,11 +1940,10 @@ REAL(8) FUNCTION DEXP(X)
   !     .. Local Arrays ..
   REAL(8) :: expcs(14), twon16(17)
   !     .. External Functions ..
-  REAL(8) :: D1MACH, D9PAK, DCSEVL, DINT, DLOG
-  INTEGER INITDS
-  EXTERNAL D1MACH, D9PAK, DCSEVL, DINT, DLOG, INITDS
+  REAL(8), EXTERNAL :: D1MACH, D9PAK, DCSEVL, DINT, DLOG
+  INTEGER, EXTERNAL :: INITDS
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC SNGL
   !     .. Save statement ..
@@ -2089,7 +2067,7 @@ REAL(8) FUNCTION DINT(X)
   !   801001  Revisions by W. Fullerton.
   !   900525  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -2097,12 +2075,11 @@ REAL(8) FUNCTION DINT(X)
   INTEGER i, ibase, ipart, ndigd, ndigi, npart
   LOGICAL first
   !     .. External Functions ..
-  REAL(8) :: D1MACH
-  REAL R1MACH
+  REAL(8), EXTERNAL :: D1MACH
+  REAL, EXTERNAL :: R1MACH
   INTEGER I1MACH
-  EXTERNAL D1MACH, R1MACH, I1MACH
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC AMIN1, DABS, INT, MIN0, REAL, SNGL
   !     .. Save statement ..
@@ -2208,7 +2185,7 @@ REAL(8) FUNCTION DLOG(X)
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -2217,11 +2194,10 @@ REAL(8) FUNCTION DLOG(X)
   !     .. Local Arrays ..
   REAL(8) :: alncen(5), alncs(11), center(4)
   !     .. External Functions ..
-  REAL(8) :: D1MACH, DCSEVL
-  INTEGER INITDS
-  EXTERNAL D1MACH, DCSEVL, INITDS
+  REAL(8), EXTERNAL :: D1MACH, DCSEVL
+  INTEGER, EXTERNAL :: INITDS
   !     .. External Subroutines ..
-  EXTERNAL D9UPAK, XERMSG
+  EXTERNAL :: D9UPAK, XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC SNGL
   !     .. Save statement ..
@@ -2319,14 +2295,13 @@ REAL(8) FUNCTION DLOG10(X)
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
   REAL(8) :: dloge
   !     .. External Functions ..
-  REAL(8) :: DLOG
-  EXTERNAL DLOG
+  REAL(8), EXTERNAL :: DLOG
   !     .. Data statements ..
   DATA dloge/0.43429448190325182765112891891661D0/
   !* FIRST EXECUTABLE STATEMENT  DLOG10
@@ -2400,7 +2375,7 @@ REAL(8) FUNCTION DSIN(X)
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
   !   901219  Logic in code corrected.  (WRB)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -2412,11 +2387,10 @@ REAL(8) FUNCTION DSIN(X)
   !     .. Local Arrays ..
   REAL(8) :: coscs(13), sincs(12)
   !     .. External Functions ..
-  REAL(8) :: D1MACH, DCSEVL, DINT, DSQRT
-  INTEGER INITDS
-  EXTERNAL D1MACH, DCSEVL, DINT, DSQRT, INITDS
+  REAL(8), EXTERNAL :: D1MACH, DCSEVL, DINT, DSQRT
+  INTEGER, EXTERNAL :: INITDS
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, DMOD, MOD
   !     .. Save statement ..
@@ -2554,7 +2528,7 @@ REAL(8) FUNCTION DSINH(X)
   !           standards.  (SMR)
   !   901219  Code corrected to compute DSINH correctly when ABS(X) .GE.
   !           YMAX.  (WRB)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -2564,9 +2538,8 @@ REAL(8) FUNCTION DSINH(X)
   !     .. Local Arrays ..
   REAL(8) :: sinhcs(13)
   !     .. External Functions ..
-  REAL(8) :: D1MACH, DCSEVL, DEXP, DSQRT
-  INTEGER INITDS
-  EXTERNAL D1MACH, DCSEVL, DEXP, DSQRT, INITDS
+  REAL(8), EXTERNAL :: D1MACH, DCSEVL, DEXP, DSQRT
+  INTEGER, EXTERNAL :: INITDS
   !     .. Intrinsic Functions ..
   INTRINSIC DABS, DSIGN, SNGL
   !     .. Save statement ..
@@ -2657,7 +2630,7 @@ REAL(8) FUNCTION DSQRT(X)
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -2667,11 +2640,10 @@ REAL(8) FUNCTION DSQRT(X)
   !     .. Local Arrays ..
   REAL(8) :: sqrt2(3)
   !     .. External Functions ..
-  REAL(8) :: D1MACH, D9PAK
-  REAL ALOG
-  EXTERNAL D1MACH, D9PAK, ALOG
+  REAL(8), EXTERNAL :: D1MACH, D9PAK
+  REAL, EXTERNAL :: ALOG
   !     .. External Subroutines ..
-  EXTERNAL D9UPAK, XERMSG
+  EXTERNAL :: D9UPAK, XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC SNGL
   !     .. Save statement ..
@@ -2765,7 +2737,7 @@ REAL(8) FUNCTION DTAN(X)
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -2776,11 +2748,10 @@ REAL(8) FUNCTION DTAN(X)
   !     .. Local Arrays ..
   REAL(8) :: tancs(19)
   !     .. External Functions ..
-  REAL(8) :: D1MACH, DCSEVL, DINT, DSQRT
-  INTEGER INITDS
-  EXTERNAL D1MACH, DCSEVL, DINT, DSQRT, INITDS
+  REAL(8), EXTERNAL :: D1MACH, DCSEVL, DINT, DSQRT
+  INTEGER, EXTERNAL :: INITDS
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC DABS, DMOD, DSIGN, SNGL
   !     .. Save statement ..
@@ -2914,7 +2885,7 @@ REAL(8) FUNCTION DTANH(X)
   !   801001  Revisions by W. Fullerton.
   !   900524  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
@@ -2924,9 +2895,8 @@ REAL(8) FUNCTION DTANH(X)
   !     .. Local Arrays ..
   REAL(8) :: tanhcs(31)
   !     .. External Functions ..
-  REAL(8) :: D1MACH, DCSEVL, DEXP, DLOG, DSQRT
-  INTEGER INITDS
-  EXTERNAL D1MACH, DCSEVL, DEXP, DLOG, DSQRT, INITDS
+  REAL(8), EXTERNAL :: D1MACH, DCSEVL, DEXP, DLOG, DSQRT
+  INTEGER, EXTERNAL :: INITDS
   !     .. Intrinsic Functions ..
   INTRINSIC DABS, DSIGN, SNGL
   !     .. Save statement ..
@@ -3041,7 +3011,7 @@ REAL FUNCTION EXP(X)
   !   801001  Revisions by W. Fullerton.
   !   900525  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -3051,11 +3021,10 @@ REAL FUNCTION EXP(X)
   !     .. Local Arrays ..
   REAL expcs(8), twon16(17)
   !     .. External Functions ..
-  REAL ALOG, CSEVL, R1MACH, R9PAK
-  INTEGER INITS
-  EXTERNAL ALOG, CSEVL, R1MACH, R9PAK, INITS
+  REAL, EXTERNAL :: ALOG, CSEVL, R1MACH, R9PAK
+  INTEGER, EXTERNAL :: INITS
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC AINT
   !     .. Save statement ..
@@ -3183,7 +3152,7 @@ REAL FUNCTION SIN(X)
   !   801001  Revisions by W. Fullerton.
   !   900525  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -3193,11 +3162,10 @@ REAL FUNCTION SIN(X)
   !     .. Local Arrays ..
   REAL coscs(8), sincs(8)
   !     .. External Functions ..
-  REAL CSEVL, R1MACH, SQRT
-  INTEGER INITS
-  EXTERNAL CSEVL, R1MACH, SQRT, INITS
+  REAL, EXTERNAL :: CSEVL, R1MACH, SQRT
+  INTEGER, EXTERNAL :: INITS
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, AINT, AMOD, MOD
   !     .. Save statement ..
@@ -3322,7 +3290,7 @@ REAL FUNCTION SINH(X)
   !   801001  Revisions by W. Fullerton.
   !   900525  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -3332,9 +3300,8 @@ REAL FUNCTION SINH(X)
   !     .. Local Arrays ..
   REAL sinhcs(8)
   !     .. External Functions ..
-  REAL CSEVL, EXP, R1MACH, SQRT
-  INTEGER INITS
-  EXTERNAL CSEVL, EXP, R1MACH, SQRT, INITS
+  REAL, EXTERNAL :: CSEVL, EXP, R1MACH, SQRT
+  INTEGER, EXTERNAL :: INITS
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, SIGN
   !     .. Save statement ..
@@ -3419,7 +3386,7 @@ REAL FUNCTION SQRT(X)
   !   801001  Revisions by W. Fullerton.
   !   900525  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -3428,10 +3395,9 @@ REAL FUNCTION SQRT(X)
   !     .. Local Arrays ..
   REAL sqrt2(3)
   !     .. External Functions ..
-  REAL ALOG, R1MACH, R9PAK
-  EXTERNAL ALOG, R1MACH, R9PAK
+  REAL, EXTERNAL :: ALOG, R1MACH, R9PAK
   !     .. External Subroutines ..
-  EXTERNAL R9UPAK, XERMSG
+  EXTERNAL :: R9UPAK, XERMSG
   !     .. Save statement ..
   SAVE niter
   !     .. Data statements ..
@@ -3521,7 +3487,7 @@ REAL FUNCTION TAN(X)
   !   801001  Revisions by W. Fullerton.
   !   900525  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -3531,11 +3497,10 @@ REAL FUNCTION TAN(X)
   !     .. Local Arrays ..
   REAL tancs(11)
   !     .. External Functions ..
-  REAL CSEVL, R1MACH, SQRT
-  INTEGER INITS
-  EXTERNAL CSEVL, R1MACH, SQRT, INITS
+  REAL, EXTERNAL :: CSEVL, R1MACH, SQRT
+  INTEGER, EXTERNAL :: INITS
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, AINT, AMOD, SIGN
   !     .. Save statement ..
@@ -3660,7 +3625,7 @@ REAL FUNCTION TANH(X)
   !   801001  Revisions by W. Fullerton.
   !   900525  Prologue and code revised to conform to 1990 SLATEC
   !           standards.  (SMR)
-  
+
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
@@ -3670,9 +3635,8 @@ REAL FUNCTION TANH(X)
   !     .. Local Arrays ..
   REAL tanhcs(17)
   !     .. External Functions ..
-  REAL ALOG, CSEVL, EXP, R1MACH, SQRT
-  INTEGER INITS
-  EXTERNAL ALOG, CSEVL, EXP, R1MACH, SQRT, INITS
+  REAL, EXTERNAL :: ALOG, CSEVL, EXP, R1MACH, SQRT
+  INTEGER, EXTERNAL :: INITS
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, SIGN
   !     .. Save statement ..

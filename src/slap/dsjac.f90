@@ -235,7 +235,7 @@ SUBROUTINE DSJAC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     .. Local Scalars ..
   INTEGER locd, locdz, lociw, locr, locw, locz
   !     .. External Subroutines ..
-  EXTERNAL DCHKW, DIR, DS2Y, DSDI, DSDS, DSMV
+  EXTERNAL :: DCHKW, DIR, DS2Y, DSDI, DSDS, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSJAC
   !
   Ierr = 0

@@ -34,7 +34,7 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
     zdr, zdi, celmr, elm, helim, alas
   INTEGER i, ic, idum, kk, N, nn, nw, Nz
   DIMENSION Yr(N), Yi(N), cyr(2), cyi(2)
-  EXTERNAL ZABS, ZLOG
+  EXTERNAL :: ZABS, ZLOG
   DATA zeror, zeroi/0.0D0, 0.0D0/
   !* FIRST EXECUTABLE STATEMENT  ZKSCL
   Nz = 0

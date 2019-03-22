@@ -43,7 +43,7 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     idum, I1MACH, j, ic, inub, nw
   DIMENSION Yr(N), Yi(N), cc(8), cssr(3), csrr(3), bry(3), cyr(2), &
     cyi(2)
-  EXTERNAL ZABS, ZEXP, ZLOG, ZSQRT
+  EXTERNAL :: ZABS, ZEXP, ZLOG, ZSQRT
   !     COMPLEX Z,Y,A,B,RZ,SMU,FU,FMU,F,FLRZ,CZ,S1,S2,CSH,CCH
   !     COMPLEX CK,P,Q,COEF,P1,P2,CBK,PT,CZERO,CONE,CTWO,ST,EZ,CS,DK
   !

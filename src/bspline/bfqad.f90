@@ -74,13 +74,13 @@ SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER inbv
   INTEGER Id, Ierr, iflg, ilo, il1, il2, K, left, mflag, N, npk, np1
   REAL a, aa, ans, b, bb, Bcoef, q, Quad, T, ta, tb, Tol, Work, wtol, X1, X2
-  REAL R1MACH, F
   DIMENSION T(*), Bcoef(*), Work(*)
-  EXTERNAL F
+  REAL, EXTERNAL :: R1MACH
+  REAL, EXTERNAL :: F
   !* FIRST EXECUTABLE STATEMENT  BFQAD
   Ierr = 1
   Quad = 0.0E0

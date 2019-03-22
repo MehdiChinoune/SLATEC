@@ -82,8 +82,7 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
     rs2, rthpi, rx, s, sa, sb, smu, ss, st, s1, s2, tb, tm, &
     tol, t1, t2, X, x1, x2, Y
   DIMENSION a(120), rb(120), cb(120), Y(*), cc(8)
-  REAL GAMMA, R1MACH
-  EXTERNAL GAMMA
+  REAL, EXTERNAL :: GAMMA, R1MACH
   SAVE x1, x2, pi, rthpi, hpi, cc
   DATA x1, x2/3.0E0, 20.0E0/
   DATA pi, rthpi/3.14159265358979E+00, 7.97884560802865E-01/

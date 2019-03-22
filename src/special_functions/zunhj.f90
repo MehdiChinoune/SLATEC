@@ -70,7 +70,7 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
   DIMENSION ar(14), br(14), c(105), alfa(180), beta(210), gama(30), &
     ap(30), pr(30), pi(30), upr(14), upi(14), crr(14), cri(14)&
     , drr(14), dri(14)
-  EXTERNAL ZABS, ZLOG, ZSQRT
+  EXTERNAL :: ZABS, ZLOG, ZSQRT
   DATA ar(1), ar(2), ar(3), ar(4), ar(5), ar(6), ar(7), ar(8), &
     ar(9), ar(10), ar(11), ar(12), ar(13), ar(14)&
     /1.00000000000000000D+00, 1.04166666666666667D-01, &

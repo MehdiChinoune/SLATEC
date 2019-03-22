@@ -36,7 +36,7 @@ CONTAINS
     !   920722  Initialized IP(1) and IP(2) for CALL to LSEI.  (BKS, WRB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -49,11 +49,10 @@ CONTAINS
       , work(105), x(5)
     INTEGER ip(17)
     !     .. External Functions ..
-    REAL R1MACH, SDOT, SNRM2
-    INTEGER NUMXER
-    EXTERNAL NUMXER, R1MACH, SDOT, SNRM2
+    REAL, EXTERNAL :: R1MACH, SDOT, SNRM2
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL LSEI, SAXPY, SCOPY, SVOUT, XGETF, XSETF
+    EXTERNAL :: LSEI, SAXPY, SCOPY, SVOUT, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !     .. Data statements ..
@@ -307,7 +306,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
-    
+
     INTEGER i, Ipass, j, kk, Kprint
     REAL R1MACH, rnorm
     REAL aa(4,4,2), a(4,4), bb(4,2), b(4), xx(4,4), delmax, delx, r
@@ -465,7 +464,7 @@ PROGRAM TEST27
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST27

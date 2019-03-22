@@ -38,7 +38,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   REAL Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), Ptemp(*), &
     Sddata(*), W(Mdw,*), Xdata(*), Xtemp(*), Ydata(*)
   !
-  EXTERNAL BNDACC, BNDSOL, BSPLVN, SCOPY, SSCAL, SSORT, XERMSG
+  EXTERNAL :: BNDACC, BNDSOL, BSPLVN, SCOPY, SSCAL, SSORT, XERMSG
   !
   REAL dummy, rnorm, xmax, xmin, xval
   INTEGER i, idata, ileft, intseq, ip, ir, irow, l, mt, n, nb, &

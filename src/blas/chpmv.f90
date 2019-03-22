@@ -121,10 +121,9 @@ SUBROUTINE CHPMV(Uplo,N,Alpha,Ap,X,Incx,Beta,Y,Incy)
   COMPLEX temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, k, kk, kx, ky
   !     .. External Functions ..
-  LOGICAL LSAME
-  EXTERNAL LSAME
+  LOGICAL, EXTERNAL :: LSAME
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, REAL
   !* FIRST EXECUTABLE STATEMENT  CHPMV

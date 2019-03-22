@@ -56,14 +56,13 @@ REAL FUNCTION POCH1(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  
-  REAL A, absa, absx, alneps, alnvar, b, bern, binv, bp, COT, &
-    EXPREL, gbern, gbk, pi, POCH, poly1, PSI, q, R1MACH
-  REAL rho, sinpx2, sinpxx, sqtbig, term, trig, var, var2, X
+
+  REAL A, absa, absx, alneps, alnvar, b, bern, binv, bp, gbern, gbk, pi, poly1, &
+    q, rho, sinpx2, sinpxx, sqtbig, term, trig, var, var2, X
   INTEGER i, ii, incr, j, k, ndx, nterms
   DIMENSION bern(9), gbern(10)
   LOGICAL first
-  EXTERNAL COT
+  REAL, EXTERNAL :: EXPREL, COT, POCH, PSI, R1MACH
   SAVE bern, pi, sqtbig, alneps, first
   DATA bern(1)/.83333333333333333E-01/
   DATA bern(2)/ - .13888888888888889E-02/

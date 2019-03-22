@@ -23,7 +23,7 @@ SUBROUTINE CHKXER(Srnamt,Infot,Nout,Fatal,Kprint)
   !* REVISION HISTORY  (YYMMDD)
   !   870810  DATE WRITTEN
   !   910620  Modified to meet SLATEC code and prologue standards.  (BKS)
-  
+
   !     .. Scalar Arguments ..
   LOGICAL Fatal
   INTEGER Infot, Kprint, Nout
@@ -31,8 +31,7 @@ SUBROUTINE CHKXER(Srnamt,Infot,Nout,Fatal,Kprint)
   !     .. Local Scalars ..
   INTEGER nerr
   !     .. External Functions ..
-  INTEGER NUMXER
-  EXTERNAL NUMXER
+  INTEGER, EXTERNAL :: NUMXER
   !* FIRST EXECUTABLE STATEMENT  CHKXER
   IF ( NUMXER(nerr)/=Infot ) THEN
     Fatal = .TRUE.

@@ -105,7 +105,7 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
     exup, H, HMIn, HMXi, HOLd, HU, r, RC, rh, rhdn, &
     rhsm, rhup, RMAx, ROWnd, Rpar, Savf, TESco, TN, &
     told, UROund, Wm, Y, Yh, Yh1
-  EXTERNAL DF, DJAC
+  EXTERNAL :: DF, DJAC
   !
   DIMENSION Y(*), Yh(Nyh,*), Yh1(*), Ewt(*), Savf(*), Acor(*), Wm(*), &
     Iwm(*), Rpar(*), Ipar(*)

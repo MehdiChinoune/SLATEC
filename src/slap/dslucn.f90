@@ -250,7 +250,7 @@ SUBROUTINE DSLUCN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     locdz, locil, lociu, lociw, locjl, locju, locl, locnc, &
     locnr, locp, locr, locu, locw, locz, nl, nu
   !     .. External Subroutines ..
-  EXTERNAL DCGN, DCHKW, DS2Y, DSILUS, DSMMTI, DSMTV, DSMV
+  EXTERNAL :: DCGN, DCHKW, DS2Y, DSILUS, DSMMTI, DSMTV, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSLUCN
   !
   Ierr = 0

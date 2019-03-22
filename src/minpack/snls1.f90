@@ -620,7 +620,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   REAL X(*), Fvec(*), Fjac(Ldfjac,*), Diag(*), Qtf(*), Wa1(*), Wa2(*)&
     , Wa3(*), Wa4(*)
   LOGICAL sing
-  EXTERNAL FCN
+  EXTERNAL :: FCN
   INTEGER i, iflag, iter, j, l, modech
   REAL actred, delta, dirder, epsmch, fnorm, fnorm1, gnorm, one, &
     par, pnorm, prered, p1, p5, p25, p75, p0001, ratio, sum, &

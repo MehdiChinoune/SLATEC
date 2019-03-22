@@ -124,10 +124,9 @@ SUBROUTINE CHEMV(Uplo,N,Alpha,A,Lda,X,Incx,Beta,Y,Incy)
   COMPLEX temp1, temp2
   INTEGER i, info, ix, iy, j, jx, jy, kx, ky
   !     .. External Functions ..
-  LOGICAL LSAME
-  EXTERNAL LSAME
+  LOGICAL, EXTERNAL :: LSAME
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX, REAL
   !* FIRST EXECUTABLE STATEMENT  CHEMV

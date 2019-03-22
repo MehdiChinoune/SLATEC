@@ -40,7 +40,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -54,10 +54,10 @@ CONTAINS
     REAL(8) :: adif(52), bc(13), c(4,10), cc(4,4), q(3), qq(77), &
       qsave(2), sv(4), t(17), w(65), x(11), xi(11), y(11)
     !     .. External Functions ..
-    REAL(8) :: D1MACH, DBVALU, DPPVAL
-    INTEGER NUMXER
+    REAL(8), EXTERNAL :: D1MACH, DBVALU, DPPVAL
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL DBFQAD, DBINT4, DBINTK, DBSPDR, DBSPEV, DBSPPP, DBSPVD, &
+    EXTERNAL :: DBFQAD, DBINT4, DBINTK, DBSPDR, DBSPEV, DBSPPP, DBSPVD, &
       DBSPVN, DBSQAD, DINTRV, DPFQAD, DPPQAD, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, SIN
@@ -478,7 +478,7 @@ CONTAINS
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Added TYPE statement.  (WRB)
-    
+
     REAL(8) :: X
     !* FIRST EXECUTABLE STATEMENT  DFB
     DFB = 1.0D0
@@ -538,7 +538,7 @@ PROGRAM TEST31
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST31

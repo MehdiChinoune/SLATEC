@@ -586,7 +586,7 @@ SUBROUTINE DEABM(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
   !
-  EXTERNAL F
+  EXTERNAL :: F
   !
   !     CHECK FOR AN APPARENT INFINITE LOOP
   !

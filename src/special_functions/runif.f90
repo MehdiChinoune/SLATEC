@@ -67,7 +67,7 @@ REAL FUNCTION RUNIF(T,N)
   REAL dummy, floatn, RAND, T
   INTEGER i, j, N, nold
   DIMENSION T(*)
-  EXTERNAL RAND
+  EXTERNAL :: RAND
   SAVE nold, floatn
   DATA nold/ - 1/
   !* FIRST EXECUTABLE STATEMENT  RUNIF

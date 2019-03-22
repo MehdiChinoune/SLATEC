@@ -26,7 +26,7 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920210  Code restructured and revised to test error returns for all
     !           values of KPRINT.  (WRB)
-    
+
     REAL a, ans, b, del, R1MACH, rn1, sqb, tol, tol1, x, xint, y
     INTEGER i, ierr, Ipass, kontrl, Kprint, Lun, n
     DIMENSION x(501), y(501)
@@ -234,7 +234,7 @@ CONTAINS
     !   920213  Code restructured to test GAUS8 for all values of KPRINT,
     !           second accuracy test added and testing of error returns
     !           revised.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -242,10 +242,9 @@ CONTAINS
     REAL a, ans, b, cor, err, req, tol
     LOGICAL fatal
     !     .. External Functions ..
-    REAL R1MACH
-    EXTERNAL R1MACH
+    REAL, EXTERNAL :: R1MACH
     !     .. External Subroutines ..
-    EXTERNAL GAUS8, XGETF, XSETF
+    EXTERNAL :: GAUS8, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, EXP, SQRT
     !* FIRST EXECUTABLE STATEMENT  QG8TST
@@ -390,7 +389,7 @@ CONTAINS
     !   920213  Code restructured to test QNC79 for all values of KPRINT,
     !           second accuracy test added and testing of error returns
     !           revised.  (WRB)
-    
+
     INTEGER kontrl
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
@@ -399,10 +398,9 @@ CONTAINS
     REAL a, ans, b, cor, err, req, tol
     LOGICAL fatal
     !     .. External Functions ..
-    REAL R1MACH
-    EXTERNAL R1MACH
+    REAL, EXTERNAL :: R1MACH
     !     .. External Subroutines ..
-    EXTERNAL QNC79, XGETF, XSETF
+    EXTERNAL :: QNC79, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, SQRT
     !* FIRST EXECUTABLE STATEMENT  QN79QX
@@ -543,7 +541,7 @@ CONTAINS
 
     !* REVISION HISTORY  (YYMMDD)
     !   920229  DATE WRITTEN
-    
+
     !     .. Scalar Arguments ..
     REAL X
     !     .. Intrinsic Functions ..
@@ -571,7 +569,7 @@ CONTAINS
 
     !* REVISION HISTORY  (YYMMDD)
     !   920229  DATE WRITTEN
-    
+
     !     .. Scalar Arguments ..
     REAL X
     !     .. Intrinsic Functions ..
@@ -633,7 +631,7 @@ PROGRAM TEST41
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST41

@@ -205,7 +205,7 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
   !   920930  Corrected to not print AK,BK when ITER=0.  (FNF)
   !   921026  Changed 1.0E10 to R1MACH(2).  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  
+
   !     .. Scalar Arguments ..
   REAL Ak, Bk, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
@@ -214,14 +214,13 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
     Rwork(*), X(N), Z(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC, MSOLVE, MTTVEC
+  EXTERNAL :: MATVEC, MSOLVE, MTTVEC
   !     .. Arrays in Common ..
   REAL SOLn(25)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
-  REAL R1MACH, SNRM2
-  EXTERNAL R1MACH, SNRM2
+  REAL, EXTERNAL :: R1MACH, SNRM2
   !     .. Common blocks ..
   COMMON /SSLBLK/ SOLn
   !* FIRST EXECUTABLE STATEMENT  ISSCGN

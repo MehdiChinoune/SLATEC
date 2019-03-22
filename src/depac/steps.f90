@@ -181,10 +181,10 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL absh, Alpha, Beta, big, Eps, erk, erkm1, erkm2, erkp1, err, &
     Fouru, G, Gi, gstr, H, hnew, Hold, P, p5eps, Phi
-  REAL Psi, r, R1MACH, reali, realns, rho, round, Rpar, Sig, tau, &
+  REAL Psi, r, reali, realns, rho, round, Rpar, Sig, tau, &
     temp1, temp2, temp3, temp4, temp5, temp6, two, Twou, u, V
   REAL W, Wt, X, Xold, Y, Yp
   INTEGER i, ifail, im1, ip1, Ipar, iq, Iv, Ivc, j, jv, K, Kgi, &
@@ -192,16 +192,15 @@ SUBROUTINE STEPS(F,Neqn,Y,X,H,Eps,Wt,Start,Hold,K,Kold,Crash,Phi,P,Yp,Psi,&
   INTEGER l, limit1, limit2, Neqn, Ns, nsm2, nsp1, nsp2
   LOGICAL Start, Crash, Phase1, Nornd
   DIMENSION Y(*), Wt(*), Phi(Neqn,16), P(*), Yp(*), Psi(12), Alpha(12)&
-    , Beta(12), Sig(13), V(12), W(12), G(13), Gi(11), Iv(10), &
-    Rpar(*), Ipar(*)
+    , Beta(12), Sig(13), V(12), W(12), G(13), Gi(11), Iv(10), Rpar(*), Ipar(*)
   DIMENSION two(13), gstr(13)
-  EXTERNAL F
+  EXTERNAL :: F
+  REAL, EXTERNAL :: R1MACH
   SAVE two, gstr
   !
   DATA two(1), two(2), two(3), two(4), two(5), two(6), two(7), two(8)&
     , two(9), two(10), two(11), two(12), two(13)/2.0, 4.0, 8.0, &
-    16.0, 32.0, 64.0, 128.0, 256.0, 512.0, 1024.0, 2048.0, &
-    4096.0, 8192.0/
+    16.0, 32.0, 64.0, 128.0, 256.0, 512.0, 1024.0, 2048.0, 4096.0, 8192.0/
   DATA gstr(1), gstr(2), gstr(3), gstr(4), gstr(5), gstr(6), gstr(7), &
     gstr(8), gstr(9), gstr(10), gstr(11), gstr(12), gstr(13)/0.500, &
     0.0833, 0.0417, 0.0264, 0.0188, 0.0143, 0.0114, 0.00936, &

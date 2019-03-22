@@ -219,7 +219,7 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !   910502  Removed MATVEC and MSOLVE from ROUTINES CALLED list.  (FNF)
   !   910506  Made subsidiary to DGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  
+
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -232,16 +232,15 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     Z(*)
   INTEGER Ia(Nelt), Ipar(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC, MSOLVE
+  EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
   REAL(8) :: c, dlnrm, prod, r0nrm, rho, s, snormw, tem
   INTEGER i, i2, info, ip1, iter, itmax, j, k, ll, llp1
   !     .. External Functions ..
-  REAL(8) :: DNRM2
-  INTEGER ISDGMR
-  EXTERNAL DNRM2, ISDGMR
+  REAL(8), EXTERNAL :: DNRM2
+  INTEGER, EXTERNAL :: ISDGMR
   !     .. External Subroutines ..
-  EXTERNAL DAXPY, DCOPY, DHELS, DHEQR, DORTH, DRLCAL, DSCAL
+  EXTERNAL :: DAXPY, DCOPY, DHELS, DHEQR, DORTH, DRLCAL, DSCAL
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !* FIRST EXECUTABLE STATEMENT  DPIGMR

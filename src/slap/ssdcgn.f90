@@ -236,7 +236,7 @@ SUBROUTINE SSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER locatd, locatp, locatz, locd, locdz, lociw, locp, locr, &
     locw, locz
   !     .. External Subroutines ..
-  EXTERNAL SCGN, SCHKW, SS2Y, SSD2S, SSDI, SSMTV, SSMV
+  EXTERNAL :: SCGN, SCHKW, SS2Y, SSD2S, SSDI, SSMTV, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSDCGN
   !
   Ierr = 0

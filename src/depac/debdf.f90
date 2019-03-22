@@ -770,7 +770,7 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     IOWns(6), IER, JSTart, KFLag, L, METh, MITer, &
     MAXord, N, NQ, NST, NFE, NJE, NQU
   !
-  EXTERNAL F, JAC
+  EXTERNAL :: F, JAC
   !
   !        CHECK FOR AN APPARENT INFINITE LOOP
   !

@@ -267,7 +267,7 @@ INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   !   920407  COMMON BLOCK renamed SSLBLK.  (WRB)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  
+
   !     .. Scalar Arguments ..
   REAL Bnrm, Err, Prod, R0nrm, Rnrm, Snormw, Tol
   INTEGER Isym, Iter, Itmax, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, &
@@ -277,17 +277,16 @@ INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
     Sb(*), Sx(*), V(N,*), X(*), Xl(*), Z(*)
   INTEGER Ia(*), Iwork(*), Ja(*)
   !     .. Subroutine Arguments ..
-  EXTERNAL MSOLVE
+  EXTERNAL :: MSOLVE
   !     .. Arrays in Common ..
   REAL SOLn(25)
   !     .. Local Scalars ..
   REAL dxnrm, fuzz, rat, ratmax, solnrm, tem
   INTEGER i, ielmax
   !     .. External Functions ..
-  REAL R1MACH, SNRM2
-  EXTERNAL R1MACH, SNRM2
+  REAL, EXTERNAL :: R1MACH, SNRM2
   !     .. External Subroutines ..
-  EXTERNAL SCOPY, SRLCAL, SSCAL, SXLCAL
+  EXTERNAL :: SCOPY, SRLCAL, SSCAL, SXLCAL
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, MAX, SQRT
   !     .. Common blocks ..

@@ -57,7 +57,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     , IER, JSTart, KFLag, LDUm, METh, MITer, MAXord, &
     N, NQ, NST, NFE, NJE, NQU
   !
-  EXTERNAL DF, DJAC
+  EXTERNAL :: DF, DJAC
   !
   !     ..................................................................
   !

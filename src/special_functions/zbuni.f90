@@ -35,7 +35,7 @@ SUBROUTINE ZBUNI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nui,Nlast,Fnul,Tol,Elim,Alim)
     ZABS, ascle, bry, c1r, c1i, c1m, D1MACH
   INTEGER i, iflag, iform, k, Kode, N, nl, Nlast, Nui, nw, Nz
   DIMENSION Yr(N), Yi(N), cyr(2), cyi(2), bry(3)
-  EXTERNAL ZABS
+  EXTERNAL :: ZABS
   !* FIRST EXECUTABLE STATEMENT  ZBUNI
   Nz = 0
   ax = ABS(Zr)*1.7321D0

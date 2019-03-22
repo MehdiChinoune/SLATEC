@@ -160,10 +160,9 @@ SUBROUTINE STBMV(Uplo,Trans,Diag,N,K,A,Lda,X,Incx)
   INTEGER i, info, ix, j, jx, kplus1, kx, l
   LOGICAL nounit
   !     .. External Functions ..
-  LOGICAL LSAME
-  EXTERNAL LSAME
+  LOGICAL, EXTERNAL :: LSAME
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, MIN
   !* FIRST EXECUTABLE STATEMENT  STBMV

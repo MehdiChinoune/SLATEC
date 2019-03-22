@@ -349,7 +349,7 @@ SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   INTEGER Iopt, N, Nprint, Info, Lwa
   REAL Tol
   REAL X(*), Fvec(*), Wa(Lwa)
-  EXTERNAL FCN, JAC
+  EXTERNAL :: FCN, JAC
   INTEGER index, j, lr, maxfev, ml, mode, mu, nfev, njev
   REAL epsfcn, factor, one, xtol, zero
   SAVE factor, one, zero

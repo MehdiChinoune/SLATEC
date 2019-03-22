@@ -74,7 +74,7 @@ SUBROUTINE SCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   !   910506  Made subsidiary.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
   !   921015  Added code to initialize ITER and ERR when IERR=0.  (FNF)
-  
+
   !     .. Scalar Arguments ..
   REAL Err
   INTEGER Ierr, Iter, Leniw, Lenw, Lociw, Locw
@@ -82,10 +82,9 @@ SUBROUTINE SCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
   !     .. Local Scalars ..
   CHARACTER xern1*8, xern2*8, xernam*8
   !     .. External Functions ..
-  REAL R1MACH
-  EXTERNAL R1MACH
+  REAL, EXTERNAL :: R1MACH
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !* FIRST EXECUTABLE STATEMENT  SCHKW
   !
   !         Check the Integer workspace situation.

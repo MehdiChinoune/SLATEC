@@ -79,13 +79,13 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920218  Code and prologue polished.  (WRB)
-  
+
   !     .. Scalar Arguments ..
   REAL A, Ans, B, Err
   INTEGER Ierr, K
   !     .. Function Arguments ..
   REAL FUN
-  EXTERNAL FUN
+  EXTERNAL :: FUN
   !     .. Local Scalars ..
   REAL ae, area, bank, blocal, c, ce, ee, ef, eps, q13, q7, q7l, &
     sq2, test, tol, vr, w1, w2, w3, w4
@@ -96,11 +96,10 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
     , f7(40), hh(40), q7r(40), vl(40)
   INTEGER lr(40)
   !     .. External Functions ..
-  REAL R1MACH
-  INTEGER I1MACH
-  EXTERNAL R1MACH, I1MACH
+  REAL, EXTERNAL :: R1MACH
+  INTEGER, EXTERNAL :: I1MACH
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, LOG, MAX, MIN, SIGN, SQRT
   !     .. Save statement ..

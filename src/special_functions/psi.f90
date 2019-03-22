@@ -45,12 +45,13 @@ REAL FUNCTION PSI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  
-  REAL apsics, aux, COT, CSEVL, dxrel, pi, psics, R1MACH, X, xbig, y
-  INTEGER i, INITS, n, ntapsi, ntpsi
+
+  REAL apsics, aux, dxrel, pi, psics, X, xbig, y
+  INTEGER i, n, ntapsi, ntpsi
   DIMENSION psics(23), apsics(16)
   LOGICAL first
-  EXTERNAL COT
+  INTEGER, EXTERNAL :: INITS
+  REAL, EXTERNAL :: CSEVL, COT, R1MACH
   SAVE psics, apsics, pi, ntpsi, ntapsi, xbig, dxrel, first
   DATA psics(1)/ - .038057080835217922E0/
   DATA psics(2)/.49141539302938713E0/

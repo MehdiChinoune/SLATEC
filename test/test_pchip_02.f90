@@ -138,8 +138,7 @@ CONTAINS
     !
     REAL(8) :: D1MACH
     !       The following should stay REAL (no D.P. equivalent).
-    REAL RAND
-    EXTERNAL RAND
+    REAL, EXTERNAL :: RAND
     !
     !  INITIALIZE.
     !
@@ -1919,8 +1918,8 @@ CONTAINS
     !
     !  Declare externals.
     !
-    REAL(8) :: DBVALU, D1MACH
-    EXTERNAL DBVALU, DPCHBS, D1MACH
+    REAL(8), EXTERNAL :: DBVALU, D1MACH
+    EXTERNAL :: DPCHBS
     !
     !  Declare variables.
     !

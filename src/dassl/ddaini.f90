@@ -63,10 +63,10 @@ SUBROUTINE DDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   INTEGER Neq, Idid, Ipar(*), Iwm(*), Nonneg, Ntemp
   REAL(8) :: X, Y(*), Yprime(*), H, Wt(*), Rpar(*), Phi(Neq,*), &
     Delta(*), E(*), Wm(*), Hmin, Uround
-  EXTERNAL RES, JAC
+  EXTERNAL :: RES, JAC
   !
-  EXTERNAL DDAJAC, DDANRM, DDASLV
-  REAL(8) :: DDANRM
+  EXTERNAL :: DDAJAC, DDASLV
+  REAL(8), EXTERNAL :: DDANRM
   !
   INTEGER i, ier, ires, jcalc, m, maxit, mjac, ncf, nef, nsf
   REAL(8) :: cj, damp, delnrm, err, oldnrm, r, rate, s, xold, ynorm

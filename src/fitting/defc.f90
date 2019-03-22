@@ -217,7 +217,7 @@ SUBROUTINE DEFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,&
   !   900607  Editorial changes to Prologue to make Prologues for EFC,
   !           DEFC, FC, and DFC look as much the same as possible.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   !      SUBROUTINE           FUNCTION/REMARKS
   !
@@ -240,11 +240,10 @@ SUBROUTINE DEFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,&
   !                         WRITTEN BY R. HANSON, SANDIA NATL. LABS.,
   !                         ALB., N. M., AUGUST-SEPTEMBER, 1980.
   !
-  REAL(8) :: Bkpt(*), Coeff(*), W(*), Sddata(*), Xdata(*), &
-    Ydata(*)
+  REAL(8) :: Bkpt(*), Coeff(*), W(*), Sddata(*), Xdata(*), Ydata(*)
   INTEGER Lw, Mdein, Mdeout, Nbkpt, Ndata, Nord
   !
-  EXTERNAL DEFCMN
+  EXTERNAL :: DEFCMN
   !
   INTEGER lbf, lbkpt, lg, lptemp, lww, lxtemp, mdg, mdw
   !

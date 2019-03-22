@@ -173,7 +173,7 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
     ZABS, ascle, rtol, atol, sti
   INTEGER i, Ierr, inu, k, Kode, k1, k2, N, Nz, nn, I1MACH
   DIMENSION Cyr(N), Cyi(N)
-  EXTERNAL ZABS
+  EXTERNAL :: ZABS
   DATA pi/3.14159265358979324D0/
   DATA coner, conei/1.0D0, 0.0D0/
   !

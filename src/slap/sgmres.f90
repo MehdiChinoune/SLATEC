@@ -395,7 +395,7 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921026  Added check for valid value of ITOL.  (FNF)
-  
+
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -405,17 +405,16 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   REAL A(Nelt), B(N), Rgwk(Lrgw), Rwork(*), Sb(N), Sx(N), X(N)
   INTEGER Ia(Nelt), Igwk(Ligw), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC, MSOLVE
+  EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
   REAL bnrm, rhol, sum
   INTEGER i, iflag, jpre, jscal, kmp, ldl, lgmr, lhes, lq, lr, &
     lv, lw, lxl, lz, lzm1, maxl, maxlp1, nms, nmsl, nrmax, &
     nrsts
   !     .. External Functions ..
-  REAL R1MACH, SNRM2
-  EXTERNAL R1MACH, SNRM2
+  REAL, EXTERNAL :: R1MACH, SNRM2
   !     .. External Subroutines ..
-  EXTERNAL SCOPY, SPIGMR
+  EXTERNAL :: SCOPY, SPIGMR
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
   !* FIRST EXECUTABLE STATEMENT  SGMRES

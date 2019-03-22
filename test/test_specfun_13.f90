@@ -27,11 +27,13 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    
+
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
-    INTEGER ipass1, ipass2, ipass3, ipass4, NUMXER
-    REAL(8) :: pi, trc, DRC, dif, D1MACH
-    EXTERNAL D1MACH, DRC, NUMXER, XERCLR, XGETF, XSETF
+    INTEGER ipass1, ipass2, ipass3, ipass4
+    REAL(8) :: pi, trc, dif
+    REAL(8), EXTERNAL :: D1MACH, DRC
+    INTEGER, EXTERNAL :: NUMXER
+    EXTERNAL :: XERCLR, XGETF, XSETF
     !* FIRST EXECUTABLE STATEMENT  QCDRC
     CALL XERCLR
     CALL XGETF(contrl)
@@ -134,11 +136,13 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930214  Added more digits to BLEM.  (WRB)
-    
+
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
-    INTEGER ipass1, ipass2, ipass3, ipass4, NUMXER
-    REAL(8) :: blem, trd, DRD, dif, D1MACH
-    EXTERNAL D1MACH, DRD, NUMXER, XERCLR, XGETF, XSETF
+    INTEGER ipass1, ipass2, ipass3, ipass4
+    REAL(8) :: blem, trd, dif
+    REAL(8), EXTERNAL :: D1MACH, DRD
+    INTEGER, EXTERNAL :: NUMXER
+    EXTERNAL :: XERCLR, XGETF, XSETF
     !* FIRST EXECUTABLE STATEMENT  QCDRD
     CALL XERCLR
     CALL XGETF(contrl)
@@ -242,11 +246,13 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930214  Added more digits to ALEM.  (WRB)
-    
+
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
-    INTEGER ipass1, ipass2, ipass3, ipass4, NUMXER
-    REAL(8) :: alem, trf, DRF, dif, D1MACH
-    EXTERNAL D1MACH, DRF, NUMXER, XERCLR, XGETF, XSETF
+    INTEGER ipass1, ipass2, ipass3, ipass4
+    REAL(8) :: alem, trf, dif
+    REAL(8), EXTERNAL :: D1MACH, DRF
+    INTEGER, EXTERNAL :: NUMXER
+    EXTERNAL :: XERCLR, XGETF, XSETF
     !* FIRST EXECUTABLE STATEMENT  QCDRF
     CALL XERCLR
     CALL XGETF(contrl)
@@ -350,11 +356,13 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   930214  Added more digits to CONSJ.  (WRB)
-    
+
     INTEGER Kprint, Ipass, contrl, kontrl, Lun, ier
-    INTEGER ipass1, ipass2, ipass3, ipass4, NUMXER
-    REAL(8) :: consj, trj, DRJ, dif, D1MACH
-    EXTERNAL D1MACH, DRJ, NUMXER, XERCLR, XGETF, XSETF
+    INTEGER ipass1, ipass2, ipass3, ipass4
+    REAL(8) :: consj, trj, dif
+    REAL(8), EXTERNAL :: D1MACH, DRJ
+    INTEGER, EXTERNAL :: NUMXER
+    EXTERNAL :: XERCLR, XGETF, XSETF
     !* FIRST EXECUTABLE STATEMENT  QCDRJ
     CALL XERCLR
     CALL XGETF(contrl)
@@ -485,7 +493,7 @@ PROGRAM TEST14
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST14

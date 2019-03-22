@@ -48,7 +48,7 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
     zni, znr, Zri, Zrr, D1MACH
   INTEGER i, idum, Ikflg, Init, Ipmtr, j, k, l
   DIMENSION c(120), Cwrkr(16), Cwrki(16), con(2)
-  EXTERNAL ZLOG, ZSQRT
+  EXTERNAL :: ZLOG, ZSQRT
   DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
   DATA con(1), con(2)/3.98942280401432678D-01, 1.25331413731550025D+00/
   DATA c(1), c(2), c(3), c(4), c(5), c(6), c(7), c(8), c(9), &

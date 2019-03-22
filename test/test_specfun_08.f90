@@ -81,9 +81,8 @@ CONTAINS
     !
     !  Declare external functions.
     !
-    INTEGER I1MACH
-    REAL R1MACH
-    EXTERNAL I1MACH, R1MACH
+    INTEGER, EXTERNAL :: I1MACH
+    REAL, EXTERNAL :: R1MACH
     !
     !  Declare local variables.
     !
@@ -456,9 +455,8 @@ CONTAINS
     !
     !  Declare external functions.
     !
-    INTEGER I1MACH
-    REAL R1MACH
-    EXTERNAL I1MACH, R1MACH
+    INTEGER, EXTERNAL :: I1MACH
+    REAL, EXTERNAL :: R1MACH
     !
     !  Declare local variables.
     !
@@ -824,9 +822,8 @@ CONTAINS
     !
     !  Declare external functions.
     !
-    INTEGER I1MACH
-    REAL R1MACH
-    EXTERNAL I1MACH, R1MACH
+    INTEGER, EXTERNAL :: I1MACH
+    REAL, EXTERNAL :: R1MACH
     !
     !  Declare local variables.
     !
@@ -1330,9 +1327,8 @@ CONTAINS
     !
     !  Declare external functions.
     !
-    INTEGER I1MACH
-    REAL R1MACH
-    EXTERNAL I1MACH, R1MACH
+    INTEGER, EXTERNAL :: I1MACH
+    REAL, EXTERNAL :: R1MACH
     !
     !  Declare local variables.
     !
@@ -1728,9 +1724,8 @@ CONTAINS
     !
     !  Declare external functions.
     !
-    INTEGER I1MACH
-    REAL R1MACH
-    EXTERNAL I1MACH, R1MACH
+    INTEGER, EXTERNAL :: I1MACH
+    REAL, EXTERNAL :: R1MACH
     !
     !  Declare local variables.
     !
@@ -2106,9 +2101,8 @@ CONTAINS
     !
     !  Declare external functions.
     !
-    INTEGER I1MACH
-    REAL R1MACH
-    EXTERNAL I1MACH, R1MACH
+    INTEGER, EXTERNAL :: I1MACH
+    REAL, EXTERNAL :: R1MACH
     !
     !  Declare local variables.
     !

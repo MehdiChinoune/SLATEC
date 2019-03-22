@@ -341,7 +341,7 @@ SUBROUTINE SSDGMR(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   !     .. Local Scalars ..
   INTEGER locdin, locigw, lociw, locrgw, locw, myitol
   !     .. External Subroutines ..
-  EXTERNAL SCHKW, SGMRES, SS2Y, SSDI, SSDS, SSMV
+  EXTERNAL :: SCHKW, SGMRES, SS2Y, SSDI, SSDS, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSDGMR
   !
   Ierr = 0

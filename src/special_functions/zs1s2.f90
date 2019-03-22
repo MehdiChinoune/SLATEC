@@ -36,7 +36,7 @@ SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
     s1dr, S1i, S1r, S2i, S2r, zeroi, zeror, Zri, &
     Zrr, ZABS
   INTEGER Iuf, idum, Nz
-  EXTERNAL ZABS, ZEXP, ZLOG
+  EXTERNAL :: ZABS, ZEXP, ZLOG
   DATA zeror, zeroi/0.0D0, 0.0D0/
   !* FIRST EXECUTABLE STATEMENT  ZS1S2
   Nz = 0

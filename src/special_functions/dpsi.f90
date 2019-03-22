@@ -48,12 +48,12 @@ REAL(8) FUNCTION DPSI(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable name.  (RWC, WRB)
-  
-  INTEGER i, INITDS, n, ntapsi, ntpsi
-  REAL(8) :: X, psics(42), apsics(16), aux, dxrel, pi, xbig, &
-    y, DCOT, DCSEVL, D1MACH
+
+  INTEGER i, n, ntapsi, ntpsi
+  REAL(8) :: X, psics(42), apsics(16), aux, dxrel, pi, xbig, y
   LOGICAL first
-  EXTERNAL DCOT
+  INTEGER, EXTERNAL :: INITDS
+  REAL(8), EXTERNAL :: DCOT, DCSEVL, D1MACH
   SAVE psics, apsics, pi, ntpsi, ntapsi, xbig, dxrel, first
   DATA psics(1)/ - .38057080835217921520437677667039D-1/
   DATA psics(2)/ + .49141539302938712748204699654277D+0/

@@ -149,7 +149,7 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   REAL Rpar, Sf, Small, Spy, srydpb, wtj, Y, ydpb, ynorm, Yp, ypnorm, Yprime
   INTEGER icase, Ipar, j, k, lk, Morder, Neq
   DIMENSION Y(*), Yprime(*), Etol(*), Spy(*), Pv(*), Yp(*), Sf(*), Rpar(*), Ipar(*)
-  EXTERNAL F
+  EXTERNAL :: F
   !
   !.......................................................................
   !

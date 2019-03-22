@@ -257,7 +257,7 @@ SUBROUTINE SSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     locw, locz, nl
   CHARACTER xern1*8
   !     .. External Subroutines ..
-  EXTERNAL SCG, SCHKW, SS2Y, SSICS, SSLLTI, SSMV, XERMSG
+  EXTERNAL :: SCG, SCHKW, SS2Y, SSICS, SSLLTI, SSMV, XERMSG
   !* FIRST EXECUTABLE STATEMENT  SSICCG
   !
   Ierr = 0

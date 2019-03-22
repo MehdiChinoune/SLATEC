@@ -89,7 +89,7 @@ SUBROUTINE SRLCAL(N,Kmp,Ll,Maxl,V,Q,Rl,Snormw,Prod,R0nrm)
   REAL c, s, tem
   INTEGER i, i2, ip1, k, llm1, llp1
   !     .. External Subroutines ..
-  EXTERNAL SCOPY, SSCAL
+  EXTERNAL :: SCOPY, SSCAL
   !* FIRST EXECUTABLE STATEMENT  SRLCAL
   IF ( Kmp==Maxl ) THEN
     !

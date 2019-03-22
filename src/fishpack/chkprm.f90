@@ -28,7 +28,7 @@ SUBROUTINE CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
   
   REAL A, ai, B, bi, C, ci, D, dj, dlx, dly, ej, fj, xi, yj
   INTEGER i, Idmn, Ierror, Intl, Iorder, j, M, Mbdcnd, N, Nbdcnd
-  EXTERNAL COFX, COFY
+  EXTERNAL :: COFX, COFY
   !* FIRST EXECUTABLE STATEMENT  CHKPRM
   Ierror = 1
   IF ( A>=B.OR.C>=D ) RETURN

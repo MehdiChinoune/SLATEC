@@ -251,7 +251,7 @@ SUBROUTINE DSLUBC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     locjl, locju, locl, locnc, locnr, locp, locpp, locr, &
     locrr, locu, locw, locz, loczz, nl, nu
   !     .. External Subroutines ..
-  EXTERNAL DBCG, DCHKW, DS2Y, DSILUS, DSLUI, DSLUTI, DSMTV, DSMV
+  EXTERNAL :: DBCG, DCHKW, DS2Y, DSILUS, DSLUI, DSLUTI, DSMTV, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSLUBC
   !
   Ierr = 0

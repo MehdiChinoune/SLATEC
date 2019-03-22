@@ -158,7 +158,7 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   INTEGER i, idum, iflag, Info, Iopt, j, k, kp1, Ldr, M, N, nm1, &
     nrow
   REAL X(*), R(Ldr,*), Fvec(*), Wa1(*), Wa2(*), Wa3(*), Wa4(*)
-  EXTERNAL FCN
+  EXTERNAL :: FCN
   REAL one, sigma, temp, zero
   LOGICAL sing
   SAVE zero, one

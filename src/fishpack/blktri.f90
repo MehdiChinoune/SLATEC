@@ -211,7 +211,7 @@ SUBROUTINE BLKTRI(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
     iwu, iww, K, M, Mp, N, NCMplx, nh, nl, NM
   INTEGER Np, NPP
   DIMENSION An(*), Bn(*), Cn(*), Am(*), Bm(*), Cm(*), Y(Idimy,*), W(*)
-  EXTERNAL PROD, PRODP, CPROD, CPRODP
+  EXTERNAL :: PROD, PRODP, CPROD, CPRODP
   COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
   !* FIRST EXECUTABLE STATEMENT  BLKTRI
   NM = N

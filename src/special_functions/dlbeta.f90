@@ -35,10 +35,9 @@ REAL(8) FUNCTION DLBETA(A,B)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  
-  REAL(8) :: A, B, p, q, corr, sq2pil, D9LGMC, DGAMMA, &
-    DLNGAM, DLNREL
-  EXTERNAL DGAMMA
+
+  REAL(8) :: A, B, p, q, corr, sq2pil
+  REAL(8), EXTERNAL :: DGAMMA, D9LGMC, DLNGAM, DLNREL
   SAVE sq2pil
   DATA sq2pil/0.91893853320467274178032973640562D0/
   !* FIRST EXECUTABLE STATEMENT  DLBETA

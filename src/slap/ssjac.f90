@@ -236,7 +236,7 @@ SUBROUTINE SSJAC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     .. Local Scalars ..
   INTEGER locd, locdz, lociw, locr, locw, locz
   !     .. External Subroutines ..
-  EXTERNAL SCHKW, SIR, SS2Y, SSDI, SSDS, SSMV
+  EXTERNAL :: SCHKW, SIR, SS2Y, SSDI, SSDS, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSJAC
   !
   Ierr = 0

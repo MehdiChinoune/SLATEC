@@ -32,7 +32,7 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
+
   REAL A, ai, AIT, Alpha, Am, An, ax1, axi, B, Bda, Bdb, Bdc, &
     Bdd, Beta, bi, BIT, Bm, Bn, bxi, C
   REAL ci, CIT, Cm, Cn, cxi, cxm, D, DIT, dj, DLX, DLX4, DLY, &
@@ -47,10 +47,9 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   DIMENSION An(*), Bn(*), Cn(*), Dn(*), Un(*), Zn(*)
   DIMENSION Am(*), Bm(*), Cm(*), Dm(*), Um(*), Zm(*)
   COMMON /SPLPCM/ KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
-    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
-    DLY4
+    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   LOGICAL singlr
-  EXTERNAL COFX, COFY
+  EXTERNAL :: COFX, COFY
   !* FIRST EXECUTABLE STATEMENT  SPELIP
   KSWx = Mbdcnd + 1
   KSWy = Nbdcnd + 1

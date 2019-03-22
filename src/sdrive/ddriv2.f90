@@ -351,7 +351,7 @@ SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  EXTERNAL F, G
+  EXTERNAL :: F, G
   REAL(8) :: Eps, Ewt, ewtcom(1), G, hmax, T, Tout, Work(*), Y(*)
   INTEGER Iwork(*)
   INTEGER Ierflg, ierror, Leniw, Lenw, Mint, miter, ml, Mstate, mu, mxord, N, &

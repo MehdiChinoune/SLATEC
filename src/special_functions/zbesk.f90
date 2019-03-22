@@ -171,7 +171,7 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
     D1MACH, ZABS, bb
   INTEGER Ierr, k, Kode, k1, k2, mr, N, nn, nuf, nw, Nz, I1MACH
   DIMENSION Cyr(N), Cyi(N)
-  EXTERNAL ZABS
+  EXTERNAL :: ZABS
   !* FIRST EXECUTABLE STATEMENT  ZBESK
   Ierr = 0
   Nz = 0

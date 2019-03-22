@@ -269,7 +269,7 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   !   920511  Added complete declaration section.  (WRB)
   !   921026  Corrected D to E in output format.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: Bnrm, Err, Prod, R0nrm, Rnrm, Snormw, Tol
   INTEGER Isym, Iter, Itmax, Itol, Iunit, Jpre, Jscal, Kmp, Lgmr, &
@@ -279,17 +279,16 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
     Rwork(*), Sb(*), Sx(*), V(N,*), X(*), Xl(*), Z(*)
   INTEGER Ia(*), Iwork(*), Ja(*)
   !     .. Subroutine Arguments ..
-  EXTERNAL MSOLVE
+  EXTERNAL :: MSOLVE
   !     .. Arrays in Common ..
   REAL(8) :: SOLn(25)
   !     .. Local Scalars ..
   REAL(8) :: dxnrm, fuzz, rat, ratmax, solnrm, tem
   INTEGER i, ielmax
   !     .. External Functions ..
-  REAL(8) :: D1MACH, DNRM2
-  EXTERNAL D1MACH, DNRM2
+  REAL(8), EXTERNAL :: D1MACH, DNRM2
   !     .. External Subroutines ..
-  EXTERNAL DCOPY, DRLCAL, DSCAL, DXLCAL
+  EXTERNAL :: DCOPY, DRLCAL, DSCAL, DXLCAL
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, MAX, SQRT
   !     .. Common blocks ..

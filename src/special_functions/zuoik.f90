@@ -53,7 +53,7 @@ SUBROUTINE ZUOIK(Zr,Zi,Fnu,Kode,Ikflg,N,Yr,Yi,Nuf,Tol,Elim,Alim)
     zni, znr, Zr, zri, zrr, D1MACH, ZABS
   INTEGER i, idum, iform, Ikflg, init, Kode, N, nn, Nuf, nw
   DIMENSION Yr(N), Yi(N), cwrkr(16), cwrki(16)
-  EXTERNAL ZABS, ZLOG
+  EXTERNAL :: ZABS, ZLOG
   DATA zeror, zeroi/0.0D0, 0.0D0/
   DATA aic/1.265512123484645396D+00/
   !* FIRST EXECUTABLE STATEMENT  ZUOIK

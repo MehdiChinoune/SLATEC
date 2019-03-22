@@ -88,14 +88,15 @@ SUBROUTINE DQK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !
   REAL(8) :: A, absc, absc1, absc2, Abserr, B, Boun, centr, &
-    dinf, D1MACH, epmach, F, fc, fsum, fval1, fval2, &
+    dinf, epmach, fc, fsum, fval1, fval2, &
     fv1, fv2, hlgth, Resabs, Resasc, resg, resk, &
     reskh, Result, tabsc1, tabsc2, uflow, wg, wgk, xgk
   INTEGER Inf, j
-  EXTERNAL F
+  REAL(8), EXTERNAL :: F
+  REAL(8), EXTERNAL :: D1MACH
   !
   DIMENSION fv1(7), fv2(7), xgk(8), wgk(8), wg(8)
   !

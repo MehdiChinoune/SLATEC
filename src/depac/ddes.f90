@@ -50,7 +50,7 @@ SUBROUTINE DDES(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
   !
-  EXTERNAL DF
+  EXTERNAL :: DF
   !
   !.......................................................................
   !

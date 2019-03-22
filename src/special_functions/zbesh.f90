@@ -176,7 +176,7 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, M, mm, mr, &
     N, nn, nuf, nw, Nz, I1MACH
   DIMENSION Cyr(N), Cyi(N)
-  EXTERNAL ZABS
+  EXTERNAL :: ZABS
   !
   DATA hpi/1.57079632679489662D0/
   !

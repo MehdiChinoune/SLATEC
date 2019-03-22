@@ -185,16 +185,14 @@ SUBROUTINE DQAWS(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Result,Abserr,Neval,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  
+
   !
-  REAL(8) :: A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, F, &
-    Result, Work
-  INTEGER Ier, Integr, Iwork, Last, Lenw, Limit, lvl, l1, l2, l3, &
-    Neval
+  REAL(8) :: A, Abserr, Alfa, B, Beta, Epsabs, Epsrel, Result, Work
+  INTEGER Ier, Integr, Iwork, Last, Lenw, Limit, lvl, l1, l2, l3, Neval
   !
   DIMENSION Iwork(*), Work(*)
   !
-  EXTERNAL F
+  REAL(8), EXTERNAL :: F
   !
   !         CHECK VALIDITY OF LIMIT AND LENW.
   !

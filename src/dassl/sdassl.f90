@@ -937,12 +937,12 @@ SUBROUTINE SDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !
   INTEGER Neq, Info(15), Idid, Lrw, Iwork(*), Liw, Ipar(*)
   REAL T, Y(*), Yprime(*), Tout, Rtol(*), Atol(*), Rwork(*), Rpar(*)
-  EXTERNAL RES, JAC
+  EXTERNAL :: RES, JAC
   !
   !     Declare externals.
   !
-  EXTERNAL R1MACH, SDAINI, SDANRM, SDASTP, SDATRP, SDAWTS, XERMSG
-  REAL R1MACH, SDANRM
+  EXTERNAL :: SDAINI, SDASTP, SDATRP, SDAWTS, XERMSG
+  REAL, EXTERNAL :: R1MACH, SDANRM
   !
   !     Declare local variables.
   !

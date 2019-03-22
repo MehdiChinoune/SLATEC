@@ -58,14 +58,12 @@ REAL(8) FUNCTION DPOCH1(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  
+
   INTEGER i, ii, incr, j, k, ndx, nterms
-  REAL(8) :: A, X, absa, absx, alneps, alnvar, b, bern(20), &
-    binv, bp, gbern(21), gbk, pi, poly1, q, rho, &
-    sinpxx, sinpx2, sqtbig, term, trig, var, var2, &
-    D1MACH, DPSI, DEXPRL, DCOT, DPOCH
+  REAL(8) :: A, X, absa, absx, alneps, alnvar, b, bern(20), binv, bp, gbern(21), &
+    gbk, pi, poly1, q, rho, sinpxx, sinpx2, sqtbig, term, trig, var, var2
   LOGICAL first
-  EXTERNAL DCOT
+  REAL(8), EXTERNAL :: DCOT, D1MACH, DPSI, DEXPRL, DPOCH
   SAVE bern, pi, sqtbig, alneps, first
   DATA bern(1)/ + .833333333333333333333333333333333D-1/
   DATA bern(2)/ - .138888888888888888888888888888888D-2/

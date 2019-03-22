@@ -29,7 +29,7 @@ CONTAINS
     !   810223  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL R1MACH
     INTEGER Kprint, Ipass, Lun
     INTEGER ideg, idegp1, info, i, j, id
@@ -116,7 +116,7 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920212  Code completely restructured to test IFLAG for all values
     !           of KPRINT.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -124,10 +124,9 @@ CONTAINS
     REAL ae, b, c, pi, r, re, tol
     LOGICAL fatal
     !     .. External Functions ..
-    REAL R1MACH
-    EXTERNAL R1MACH
+    REAL, EXTERNAL :: R1MACH
     !     .. External Subroutines ..
-    EXTERNAL FZERO, XERCLR, XGETF, XSETF
+    EXTERNAL :: FZERO, XERCLR, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, MAX, SIN, SQRT, TAN
     !* FIRST EXECUTABLE STATEMENT  FZTEST
@@ -233,7 +232,7 @@ CONTAINS
 
     !* REVISION HISTORY  (YYMMDD)
     !   920212  DATE WRITTEN
-    
+
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -241,10 +240,9 @@ CONTAINS
     REAL(8) :: ae, b, c, pi, r, re, tol
     LOGICAL fatal
     !     .. External Functions ..
-    REAL(8) :: D1MACH
-    EXTERNAL D1MACH
+    REAL(8), EXTERNAL :: D1MACH
     !     .. External Subroutines ..
-    EXTERNAL DFZERO, XERCLR, XGETF, XSETF
+    EXTERNAL :: DFZERO, XERCLR, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, ATAN, DSIN, DTAN, MAX, SQRT
     !* FIRST EXECUTABLE STATEMENT  DFZTST
@@ -355,7 +353,7 @@ CONTAINS
     !           and changed TOL from sqrt R1MACH(3) to sqrt R1MACH(4) for
     !           the IBM 370 mainframes.  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
-    
+
     REAL beta, R1MACH, tol, work
     INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr, NUMXER
     INTEGER itmp(7)
@@ -488,7 +486,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901205  Changed usage of R1MACH(3) to R1MACH(4).  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
-    
+
     INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr, NUMXER
     REAL R1MACH, tol
     INTEGER itest(2), itmp(7)
@@ -677,7 +675,7 @@ PROGRAM TEST34
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST34

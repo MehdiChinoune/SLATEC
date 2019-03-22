@@ -166,7 +166,7 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
     nrow
   REAL(8) :: X(*), R(Ldr,*), Fvec(*), Wa1(*), Wa2(*), Wa3(*), &
     Wa4(*)
-  EXTERNAL FCN
+  EXTERNAL :: FCN
   REAL(8) :: one, sigma, temp, zero, DENORM
   LOGICAL sing
   SAVE zero, one

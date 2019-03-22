@@ -102,7 +102,7 @@ SUBROUTINE CGERC(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   COMPLEX temp
   INTEGER i, info, ix, j, jy, kx
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX
   !* FIRST EXECUTABLE STATEMENT  CGERC

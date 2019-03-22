@@ -53,7 +53,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
     , IER, JSTart, KFLag, LDUm, METh, MITer, MAXord, &
     N, NQ, NST, NFE, NJE, NQU
   !
-  EXTERNAL F, JAC
+  EXTERNAL :: F, JAC
   !
   !.......................................................................
   !

@@ -26,7 +26,7 @@ CONTAINS
     !           (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920214  Minor improvements to code for readability.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Icnt
     !     .. Array Arguments ..
@@ -95,7 +95,7 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920214  Code restructured to test for all values of KPRINT and to
     !           provide more PASS/FAIL information.  (WRB)
-    
+
     INTEGER kontrl
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
@@ -111,10 +111,9 @@ CONTAINS
     REAL a(97), tc(5), w(11), x(11), y(11), yp(5)
     INTEGER itest(9)
     !     .. External Functions ..
-    REAL R1MACH
-    EXTERNAL R1MACH
+    REAL, EXTERNAL :: R1MACH
     !     .. External Subroutines ..
-    EXTERNAL PASS, PCOEF, POLFIT, PVALUE
+    EXTERNAL :: PASS, PCOEF, POLFIT, PVALUE
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !     .. Common blocks ..
@@ -486,7 +485,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -499,11 +498,10 @@ CONTAINS
     REAL fjac(10,2), fjrow(2), fjtj(3), fvec(10), wa(40), x(2)
     INTEGER iw(2)
     !     .. External Functions ..
-    REAL ENORM, R1MACH
-    INTEGER NUMXER
-    EXTERNAL ENORM, NUMXER, R1MACH
+    REAL, EXTERNAL :: ENORM, R1MACH
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL FDJAC3, PASS, SCOV, SNLS1E, XGETF, XSETF
+    EXTERNAL :: FDJAC3, PASS, SCOV, SNLS1E, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !* FIRST EXECUTABLE STATEMENT  SNLS1Q
@@ -794,7 +792,7 @@ CONTAINS
     !           FORMATs.  (RWC)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -807,11 +805,10 @@ CONTAINS
       w(529), work(12), xconst(11), xdata(9), yconst(11), ydata(9)
     INTEGER iw(30), nderiv(11)
     !     .. External Functions ..
-    REAL BVALU, CV, R1MACH
-    INTEGER NUMXER
-    EXTERNAL BVALU, CV, NUMXER, R1MACH
+    REAL, EXTERNAL :: BVALU, CV, R1MACH
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL FC, IVOUT, SCOPY, SMOUT, SVOUT, XGETF, XSETF
+    EXTERNAL :: FC, IVOUT, SCOPY, SMOUT, SVOUT, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, REAL, SQRT
     !     .. Data statements ..
@@ -1135,7 +1132,7 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  TYPE and declarations sections added.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     REAL Fjac
     INTEGER Iflag, Ldfjac, M, N
@@ -1185,7 +1182,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  TYPE and declarations sections added and code polished.
     !           (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Iflag, Ldfjac, M, N
     !     .. Array Arguments ..
@@ -1252,7 +1249,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  TYPE and declarations sections added and code polished.
     !           (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Iflag, M, N, Nrow
     !     .. Array Arguments ..
@@ -1342,7 +1339,7 @@ PROGRAM TEST52
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST52

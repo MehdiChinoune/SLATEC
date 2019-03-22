@@ -297,12 +297,13 @@ SUBROUTINE DDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
 
-  EXTERNAL F, D1MACH
-  REAL(8) :: Eps, ewtcom(1), hmax, T, Tout, Work(*), Y(*), D1MACH
+  EXTERNAL :: F
+  REAL(8) :: Eps, ewtcom(1), hmax, T, Tout, Work(*), Y(*)
   INTEGER i, Ierflg, leniw, Lenw, lenwcm, lnwchk, ml, Mstate, mu, N, nde, nstate, ntask
   INTEGER, PARAMETER :: MXN = 200, IDLIW = 50
   INTEGER iwork(IDLIW+MXN)
   CHARACTER intgr1*8
+  REAL(8), EXTERNAL :: D1MACH
   INTEGER, PARAMETER :: NROOT = 0, IERROR = 2, MINT = 2, MITER = 2, IMPL = 0, &
     MXORD = 5, MXSTEP = 1000
   DATA ewtcom(1)/1.D0/

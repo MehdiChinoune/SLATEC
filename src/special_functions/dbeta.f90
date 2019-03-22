@@ -32,10 +32,10 @@ REAL(8) FUNCTION DBETA(A,B)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  
-  REAL(8) :: A, B, alnsml, xmax, xmin, DLBETA, DGAMMA, D1MACH
+
+  REAL(8) :: A, B, alnsml, xmax, xmin
   LOGICAL first
-  EXTERNAL DGAMMA
+  REAL(8), EXTERNAL :: DLBETA, DGAMMA, D1MACH
   SAVE xmax, alnsml, first
   DATA first/.TRUE./
   !* FIRST EXECUTABLE STATEMENT  DBETA

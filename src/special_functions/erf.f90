@@ -38,12 +38,13 @@ REAL FUNCTION ERF(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable name.  (RWC, WRB)
-  
-  REAL CSEVL, ERFC, erfcs, R1MACH, sqeps, sqrtpi, X, xbig, y
-  INTEGER INITS, nterf
+
+  REAL erfcs, sqeps, sqrtpi, X, xbig, y
+  INTEGER nterf
   DIMENSION erfcs(13)
   LOGICAL first
-  EXTERNAL ERFC
+  INTEGER, EXTERNAL ::  INITS
+  REAL, EXTERNAL :: CSEVL, ERFC, R1MACH
   SAVE erfcs, sqrtpi, nterf, xbig, sqeps, first
   DATA erfcs(1)/ - .049046121234691808E0/
   DATA erfcs(2)/ - .14226120510371364E0/

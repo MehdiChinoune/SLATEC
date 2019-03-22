@@ -251,7 +251,7 @@ SUBROUTINE SSLUOM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
     locema, locil, lociu, lociw, locjl, locju, locl, locnc, &
     locnr, locp, locr, locu, locw, locz, nl, nu
   !     .. External Subroutines ..
-  EXTERNAL SCHKW, SOMN, SS2Y, SSILUS, SSLUI, SSMV
+  EXTERNAL :: SCHKW, SOMN, SS2Y, SSILUS, SSLUI, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSLUOM
   !
   Ierr = 0

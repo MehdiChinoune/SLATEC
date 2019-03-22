@@ -249,7 +249,7 @@ SUBROUTINE SSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER locdin, lociw, locp, locq, locr, locr0, locu, locv1, &
     locv2, locw
   !     .. External Subroutines ..
-  EXTERNAL SCGS, SCHKW, SS2Y, SSDI, SSDS, SSMV
+  EXTERNAL :: SCGS, SCHKW, SS2Y, SSDI, SSDS, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSDCGS
   !
   Ierr = 0

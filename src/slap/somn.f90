@@ -253,7 +253,7 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930326  Removed unused variable.  (FNF)
-  
+
   !     .. Scalar Arguments ..
   REAL Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt, Nsave
@@ -262,16 +262,15 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
     Emap(N,0:Nsave), P(N,0:Nsave), R(N), Rwork(*), X(N), Z(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC, MSOLVE
+  EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
   REAL ak, akden, aknum, bkl, bnrm, fuzz, solnrm
   INTEGER i, ip, ipo, k, l, lmax
   !     .. External Functions ..
-  REAL R1MACH, SDOT
-  INTEGER ISSOMN
-  EXTERNAL R1MACH, SDOT, ISSOMN
+  REAL, EXTERNAL :: R1MACH, SDOT
+  INTEGER, EXTERNAL :: ISSOMN
   !     .. External Subroutines ..
-  EXTERNAL SAXPY, SCOPY
+  EXTERNAL :: SAXPY, SCOPY
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, MIN, MOD
   !* FIRST EXECUTABLE STATEMENT  SOMN

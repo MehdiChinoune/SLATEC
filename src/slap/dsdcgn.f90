@@ -237,7 +237,7 @@ SUBROUTINE DSDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER locatd, locatp, locatz, locd, locdz, lociw, locp, locr, &
     locw, locz
   !     .. External Subroutines ..
-  EXTERNAL DCGN, DCHKW, DS2Y, DSD2S, DSDI, DSMTV, DSMV
+  EXTERNAL :: DCGN, DCHKW, DS2Y, DSD2S, DSDI, DSMTV, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSDCGN
   !
   Ierr = 0

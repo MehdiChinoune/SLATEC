@@ -76,19 +76,17 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900510  Fixed an error message.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
   !   900911  Restriction on value of ALAMDA included.  (WRB)
-  
+
   INTEGER Ipivot(*), Itype(*), L, Ma, Mdw, Mme, Mode, N
   REAL(8) :: D(*), H(*), Prgopt(*), Rnorm, Scale(*), Temp(*), &
     W(Mdw,*), Wd(*), X(*), Z(*)
   !
-  EXTERNAL D1MACH, DASUM, DAXPY, DCOPY, DH12, DNRM2, DROTM, DROTMG, &
-    DSCAL, DSWAP, DWNLIT, IDAMAX, XERMSG
-  REAL(8) :: D1MACH, DASUM, DNRM2
-  INTEGER IDAMAX
+  EXTERNAL :: DAXPY, DCOPY, DH12, DROTM, DROTMG, DSCAL, DSWAP, DWNLIT, XERMSG
+  REAL(8), EXTERNAL :: D1MACH, DASUM, DNRM2
+  INTEGER, EXTERNAL :: IDAMAX
   !
   REAL(8) :: alamda, alpha, alsq, amax, blowup, bnorm, dope(3), &
-    drelpr, eanorm, fac, sm, sparam(5), t, tau, wmax, &
-    z2, zz
+    drelpr, eanorm, fac, sm, sparam(5), t, tau, wmax, z2, zz
   INTEGER i, idope(3), imax, isol, itemp, iter, itmax, iwmax, j, &
     jcon, jp, key, krank, l1, last, link, m, me, next, niv, &
     nlink, nopt, nsoln, ntimes

@@ -506,7 +506,7 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   INTEGER index, Iw(*)
   REAL(8) :: Tol
   REAL(8) :: X(*), Fvec(*), Wa(*)
-  EXTERNAL FCN
+  EXTERNAL :: FCN
   INTEGER maxfev, mode, nfev, njev
   REAL(8) :: factor, ftol, gtol, xtol, zero, epsfcn
   SAVE factor, zero

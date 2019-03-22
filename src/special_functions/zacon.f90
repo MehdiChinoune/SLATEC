@@ -42,7 +42,7 @@ SUBROUTINE ZACON(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Fnul,Tol,Elim,Alim)
     ZABS
   INTEGER i, inu, iuf, kflag, Kode, Mr, N, nn, nw, Nz
   DIMENSION Yr(N), Yi(N), cyr(2), cyi(2), cssr(3), csrr(3), bry(3)
-  EXTERNAL ZABS
+  EXTERNAL :: ZABS
   DATA pi/3.14159265358979324D0/
   DATA zeror, coner/0.0D0, 1.0D0/
   !* FIRST EXECUTABLE STATEMENT  ZACON

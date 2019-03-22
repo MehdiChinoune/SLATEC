@@ -227,7 +227,7 @@ SUBROUTINE DSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   INTEGER locap, loccsa, locdin, locdz, locema, lociw, locp, locr, &
     locw, locz
   !     .. External Subroutines ..
-  EXTERNAL DCHKW, DOMN, DS2Y, DSDI, DSDS, DSMV
+  EXTERNAL :: DCHKW, DOMN, DS2Y, DSDI, DSDS, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSDOMN
   !
   Ierr = 0

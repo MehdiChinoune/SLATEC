@@ -42,7 +42,7 @@ CONTAINS
     !   891009  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920601  Code reworked and TYPE section added.  (RWC, WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Kprint, Lun, Nerr
     !     .. Local Scalars ..
@@ -53,10 +53,9 @@ CONTAINS
     INTEGER iwork(4)
     CHARACTER list(2)*4
     !     .. External Functions ..
-    REAL R1MACH
-    EXTERNAL R1MACH
+    REAL, EXTERNAL :: R1MACH
     !     .. External Subroutines ..
-    EXTERNAL SGEFS, SGEIR
+    EXTERNAL :: SGEFS, SGEIR
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
@@ -190,7 +189,7 @@ CONTAINS
     !   891009  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920601  Code reworked and TYPE section added.  (RWC, WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Kprint, Lun, Nerr
     !     .. Local Scalars ..
@@ -202,10 +201,9 @@ CONTAINS
     INTEGER iwork(4)
     CHARACTER list(2)*4
     !     .. External Functions ..
-    REAL(8) :: D1MACH
-    EXTERNAL D1MACH
+    REAL(8), EXTERNAL :: D1MACH
     !     .. External Subroutines ..
-    EXTERNAL DGEFS
+    EXTERNAL :: DGEFS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
@@ -328,7 +326,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920601  Code reworked and TYPE section added.  (RWC, WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Kprint, Lun, Nerr
     !     .. Local Scalars ..
@@ -338,7 +336,7 @@ CONTAINS
     INTEGER iwork(3)
     CHARACTER list(2)*4
     !     .. External Subroutines ..
-    EXTERNAL CGEFS, CGEIR
+    EXTERNAL :: CGEFS, CGEIR
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, AIMAG, REAL
     REAL CABS1
@@ -485,7 +483,7 @@ PROGRAM TEST21
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER kprint, lin, lun, nerr, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST21

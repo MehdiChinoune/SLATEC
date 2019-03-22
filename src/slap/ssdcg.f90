@@ -245,7 +245,7 @@ SUBROUTINE SSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     .. Local Scalars ..
   INTEGER locd, locdz, lociw, locp, locr, locw, locz
   !     .. External Subroutines ..
-  EXTERNAL SCG, SCHKW, SS2Y, SSDI, SSDS, SSMV
+  EXTERNAL :: SCG, SCHKW, SS2Y, SSDI, SSDS, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSDCG
   !
   Ierr = 0

@@ -274,7 +274,7 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   !   920929  Corrected format of reference.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  
+
   !     .. Scalar Arguments ..
   REAL Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
@@ -283,16 +283,15 @@ SUBROUTINE SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
     X(N), Z(N), Zz(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC, MSOLVE, MTSOLV, MTTVEC
+  EXTERNAL :: MATVEC, MSOLVE, MTSOLV, MTTVEC
   !     .. Local Scalars ..
   REAL ak, akden, bk, bkden, bknum, bnrm, fuzz, solnrm, tolmin
   INTEGER i, k
   !     .. External Functions ..
-  REAL R1MACH, SDOT
-  INTEGER ISSBCG
-  EXTERNAL R1MACH, SDOT, ISSBCG
+  REAL, EXTERNAL :: R1MACH, SDOT
+  INTEGER, EXTERNAL :: ISSBCG
   !     .. External Subroutines ..
-  EXTERNAL SAXPY, SCOPY
+  EXTERNAL :: SAXPY, SCOPY
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !* FIRST EXECUTABLE STATEMENT  SBCG

@@ -1561,7 +1561,7 @@ SUBROUTINE DSPLP(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   INTEGER Ibasis(*), Ind(*), Iwork(*)
   CHARACTER(8) :: xern1, xern2
   !
-  EXTERNAL DUSRMT
+  EXTERNAL :: DUSRMT
   !
   !* FIRST EXECUTABLE STATEMENT  DSPLP
   zero = 0.D0

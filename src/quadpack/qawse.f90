@@ -178,17 +178,17 @@ SUBROUTINE QAWSE(F,A,B,Alfa,Beta,Integr,Epsabs,Epsrel,Limit,Result,Abserr,&
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !
   REAL A, Abserr, Alfa, Alist, area, area1, area12, area2, a1, a2, &
-    B, Beta, Blist, b1, b2, centre, R1MACH, Elist, epmach, &
+    B, Beta, Blist, b1, b2, centre, Elist, epmach, &
     Epsabs, Epsrel, errbnd, errmax, error1, erro12, error2, &
-    errsum, F, resas1, resas2, Result, rg, rh, ri, rj, Rlist, &
-    uflow
+    errsum, resas1, resas2, Result, rg, rh, ri, rj, Rlist, uflow
   INTEGER Ier, Integr, Iord, iroff1, iroff2, k, Last, Limit, &
     maxerr, nev, Neval, nrmax
   !
-  EXTERNAL F
+  REAL, EXTERNAL :: F
+  REAL, EXTERNAL :: R1MACH
   !
   DIMENSION Alist(*), Blist(*), Rlist(*), Elist(*), Iord(*), ri(25), &
     rj(25), rh(25), rg(25)

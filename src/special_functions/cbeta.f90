@@ -36,10 +36,10 @@ COMPLEX FUNCTION CBETA(A,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  
+
   REAL xmax, xmaxt, xmin
-  COMPLEX A, B, CGAMMA, CLBETA
-  EXTERNAL CGAMMA
+  COMPLEX A, B
+  COMPLEX, EXTERNAL :: CGAMMA, CLBETA
   SAVE xmax
   DATA xmax/0.0/
   !* FIRST EXECUTABLE STATEMENT  CBETA

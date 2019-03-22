@@ -91,7 +91,7 @@ SUBROUTINE DPSORT(Dx,N,Iperm,Kflag,Ier)
   !     .. Local Arrays ..
   INTEGER il(21), iu(21)
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, INT
   !* FIRST EXECUTABLE STATEMENT  DPSORT

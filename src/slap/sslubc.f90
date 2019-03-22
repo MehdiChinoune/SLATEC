@@ -249,7 +249,7 @@ SUBROUTINE SSLUBC(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     locjl, locju, locl, locnc, locnr, locp, locpp, locr, &
     locrr, locu, locw, locz, loczz, nl, nu
   !     .. External Subroutines ..
-  EXTERNAL SBCG, SCHKW, SS2Y, SSILUS, SSLUI, SSLUTI, SSMTV, SSMV
+  EXTERNAL :: SBCG, SCHKW, SS2Y, SSILUS, SSLUI, SSLUTI, SSMTV, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSLUBC
   !
   Ierr = 0

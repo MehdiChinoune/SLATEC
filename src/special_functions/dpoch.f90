@@ -37,12 +37,10 @@ REAL(8) FUNCTION DPOCH(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  
+
   INTEGER i, ia, n
-  REAL(8) :: A, X, absa, absax, alnga, alngax, ax, b, pi, &
-    sgnga, sgngax, DFAC, DLNREL, D9LGMC, DGAMMA, &
-    DGAMR, DCOT
-  EXTERNAL DGAMMA
+  REAL(8) :: A, X, absa, absax, alnga, alngax, ax, b, pi, sgnga, sgngax
+  REAL(8), EXTERNAL :: DGAMMA, DFAC, DLNREL, D9LGMC, DGAMR, DCOT
   SAVE pi
   DATA pi/3.141592653589793238462643383279503D0/
   !* FIRST EXECUTABLE STATEMENT  DPOCH

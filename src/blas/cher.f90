@@ -112,10 +112,9 @@ SUBROUTINE CHER(Uplo,N,Alpha,X,Incx,A,Lda)
   COMPLEX temp
   INTEGER i, info, ix, j, jx, kx
   !     .. External Functions ..
-  LOGICAL LSAME
-  EXTERNAL LSAME
+  LOGICAL, EXTERNAL :: LSAME
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC CONJG, MAX, REAL
   !* FIRST EXECUTABLE STATEMENT  CHER

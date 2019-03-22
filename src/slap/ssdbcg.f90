@@ -235,7 +235,7 @@ SUBROUTINE SSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER locdin, locdz, lociw, locp, locpp, locr, locrr, locw, &
     locz, loczz
   !     .. External Subroutines ..
-  EXTERNAL SBCG, SCHKW, SS2Y, SSDI, SSDS, SSMTV, SSMV
+  EXTERNAL :: SBCG, SCHKW, SS2Y, SSDI, SSDS, SSMTV, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSDBCG
   !
   Ierr = 0

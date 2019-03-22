@@ -156,11 +156,11 @@ SUBROUTINE DXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
     , Wk(N), X(N), Xl(N), Zl(N)
   INTEGER Ia(Nelt), Ipar(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MSOLVE
+  EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
   INTEGER i, k, ll, llp1
   !     .. External Subroutines ..
-  EXTERNAL DAXPY, DCOPY, DHELS
+  EXTERNAL :: DAXPY, DCOPY, DHELS
   !* FIRST EXECUTABLE STATEMENT  DXLCAL
   ll = Lgmr
   llp1 = ll + 1

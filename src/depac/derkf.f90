@@ -616,7 +616,7 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   DIMENSION Y(*), Info(15), Rtol(*), Atol(*), Rwork(*), Iwork(*), &
     Rpar(*), Ipar(*)
   !
-  EXTERNAL F
+  EXTERNAL :: F
   !
   !     CHECK FOR AN APPARENT INFINITE LOOP
   !

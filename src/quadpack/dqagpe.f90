@@ -1,7 +1,6 @@
 !** DQAGPE
 SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
-    Neval,Ier,Alist,Blist,Rlist,Elist,Pts,Iord,Level,Ndin,&
-    Last)
+    Neval,Ier,Alist,Blist,Rlist,Elist,Pts,Iord,Level,Ndin,Last)
   IMPLICIT NONE
   !>
   !***
@@ -208,12 +207,12 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   REAL(8) :: A, abseps, Abserr, Alist, area, area1, area12, &
     area2, a1, a2, B, Blist, b1, b2, correc, defabs, &
-    defab1, defab2, dres, D1MACH, Elist, epmach, &
+    defab1, defab2, dres, Elist, epmach, &
     Epsabs, Epsrel, erlarg, erlast, errbnd, errmax, &
-    error1, erro12, error2, errsum, ertest, F, oflow, &
+    error1, erro12, error2, errsum, ertest, oflow, &
     Points, Pts, resa, resabs, reseps, Result, res3la, &
     Rlist, rlist2, sign, temp, uflow
   INTEGER i, id, Ier, ierro, ind1, ind2, Iord, ip1, iroff1, &
@@ -226,7 +225,8 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   DIMENSION Alist(*), Blist(*), Elist(*), Iord(*), Level(*), Ndin(*), &
     Points(*), Pts(*), res3la(3), Rlist(*), rlist2(52)
   !
-  EXTERNAL F
+  REAL(8), EXTERNAL :: F
+  REAL(8), EXTERNAL :: D1MACH
   !
   !            THE DIMENSION OF RLIST2 IS DETERMINED BY THE VALUE OF
   !            LIMEXP IN SUBROUTINE EPSALG (RLIST2 SHOULD BE OF DIMENSION

@@ -36,7 +36,7 @@ CONTAINS
     !   920722  Initialized IP(1) and IP(2) for CALL to DLSEI.  (BKS, WRB)
     !   930214  Declarations sections added, code revised to test error
     !           returns for all values of KPRINT and code polished.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -50,11 +50,10 @@ CONTAINS
       prgopt(4), sol(5), work(105), x(5)
     INTEGER ip(17)
     !     .. External Functions ..
-    REAL(8) :: D1MACH, DDOT, DNRM2
-    INTEGER NUMXER
-    EXTERNAL NUMXER, D1MACH, DDOT, DNRM2
+    REAL(8), EXTERNAL :: D1MACH, DDOT, DNRM2
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL DAXPY, DCOPY, DLSEI, DVOUT, XGETF, XSETF
+    EXTERNAL :: DAXPY, DCOPY, DLSEI, DVOUT, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !     .. Data statements ..
@@ -308,7 +307,7 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
-    
+
     REAL(8) :: a, aa, b, bb, D1MACH, delmax, delx, r, rnorm, work, xx
     INTEGER i, Ipass, j, kk, Kprint
     DIMENSION aa(4,4,2), a(4,4), bb(4,2), b(4), xx(4,4)
@@ -468,7 +467,7 @@ PROGRAM TEST28
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST28

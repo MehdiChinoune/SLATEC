@@ -43,7 +43,7 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     Nz
   DIMENSION bry(3), Yr(N), Yi(N), cwrkr(16), cwrki(16), cssr(3), &
     csrr(3), cyr(2), cyi(2)
-  EXTERNAL ZABS
+  EXTERNAL :: ZABS
   DATA zeror, zeroi, coner/0.0D0, 0.0D0, 1.0D0/
   !* FIRST EXECUTABLE STATEMENT  ZUNI1
   Nz = 0

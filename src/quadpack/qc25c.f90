@@ -72,16 +72,17 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !
   REAL A, Abserr, ak22, amom0, amom1, amom2, B, C, cc, centr, &
-    cheb12, cheb24, QWGTC, F, fval, hlgth, p2, p3, p4, resabs, &
+    cheb12, cheb24, fval, hlgth, p2, p3, p4, resabs, &
     resasc, Result, res12, res24, u, x
   INTEGER i, isym, k, kp, Krul, Neval
   !
   DIMENSION x(11), fval(25), cheb12(13), cheb24(25)
   !
-  EXTERNAL F, QWGTC
+  REAL, EXTERNAL :: F
+  REAL, EXTERNAL :: QWGTC
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24),
   !           K = 1, ..., 11, TO BE USED FOR THE CHEBYSHEV SERIES
@@ -108,7 +109,7 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !                    TO THE USE OF CHEB12
   !           RES24  - APPROXIMATION TO THE INTEGRAL CORRESPONDING
   !                    TO THE USE OF CHEB24
-  !           QWGTC - EXTERNAL FUNCTION SUBPROGRAM DEFINING
+  !           QWGTC - REAL, EXTERNAL :: FUNCTION SUBPROGRAM DEFINING
   !                    THE WEIGHT FUNCTION
   !           HLGTH  - HALF-LENGTH OF THE INTERVAL
   !           CENTR  - MID POINT OF THE INTERVAL

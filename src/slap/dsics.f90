@@ -179,7 +179,7 @@ SUBROUTINE DSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
     irow, irr, j, jbgn, jeltmp, jend
   CHARACTER xern1*8
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !* FIRST EXECUTABLE STATEMENT  DSICS
   !
   !         Set the lower triangle in IEL, JEL, EL

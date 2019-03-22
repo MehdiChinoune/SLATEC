@@ -96,7 +96,7 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   
   INTEGER IOD, Ipar, KSTeps
   REAL Rpar
-  EXTERNAL F, JAC
+  EXTERNAL :: F, JAC
   !
   !LLL. OPTIMIZE
   INTEGER Neq, Nyh, Iwm, i, i1, IALth, IER, IOWnd, iredo, iret, &

@@ -75,7 +75,7 @@ SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   !   910411  Prologue converted to Version 4.0 format.  (BAB)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  
+
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -87,10 +87,9 @@ SUBROUTINE SORTH(Vnew,V,Hes,N,Ll,Ldhes,Kmp,Snormw)
   REAL arg, sumdsq, tem, vnrm
   INTEGER i, i0
   !     .. External Functions ..
-  REAL SDOT, SNRM2
-  EXTERNAL SDOT, SNRM2
+  REAL, EXTERNAL :: SDOT, SNRM2
   !     .. External Subroutines ..
-  EXTERNAL SAXPY
+  EXTERNAL :: SAXPY
   !     .. Intrinsic Functions ..
   INTRINSIC MAX, SQRT
   !* FIRST EXECUTABLE STATEMENT  SORTH

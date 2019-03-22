@@ -30,10 +30,10 @@ REAL FUNCTION GAMR(X)
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  
-  REAL alngx, GAMMA, sgngx, X
+
+  REAL alngx, sgngx, X
   INTEGER irold
-  EXTERNAL GAMMA
+  REAL, EXTERNAL :: GAMMA
   !* FIRST EXECUTABLE STATEMENT  GAMR
   GAMR = 0.0
   IF ( X<=0.0.AND.AINT(X)==X ) RETURN

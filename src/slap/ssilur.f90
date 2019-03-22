@@ -240,7 +240,7 @@ SUBROUTINE SSILUR(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     locjl, locju, locl, locnc, locnr, locr, locu, locw, locz, &
     nl, nu
   !     .. External Subroutines ..
-  EXTERNAL SCHKW, SIR, SS2Y, SSILUS, SSLUI, SSMV
+  EXTERNAL :: SCHKW, SIR, SS2Y, SSILUS, SSLUI, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSILUR
   !
   Ierr = 0

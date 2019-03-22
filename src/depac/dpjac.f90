@@ -40,7 +40,7 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   REAL(8) :: con, di, DVNRMS, EL0, Ewt, fac, Ftem, H, hl0, &
     HMIn, HMXi, HU, r, r0, ROWnd, ROWns, Rpar, Savf, &
     srur, TN, UROund, Wm, Y, Yh, yi, yj, yjj
-  EXTERNAL DF, DJAC
+  EXTERNAL :: DF, DJAC
   DIMENSION Y(*), Yh(Nyh,*), Ewt(*), Ftem(*), Savf(*), Wm(*), Iwm(*), &
     Rpar(*), Ipar(*)
   COMMON /DDEBD1/ ROWnd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &

@@ -83,7 +83,7 @@ SUBROUTINE PFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
     X1, X2
   REAL R1MACH, F
   DIMENSION Xi(*), C(Ldc,*)
-  EXTERNAL F
+  EXTERNAL :: F
   !
   !* FIRST EXECUTABLE STATEMENT  PFQAD
   Ierr = 1

@@ -38,7 +38,7 @@ SUBROUTINE SDASLV(Neq,Delta,Wm,Iwm)
   INTEGER Neq, Iwm(*)
   REAL Delta(*), Wm(*)
   !
-  EXTERNAL SGBSL, SGESL
+  EXTERNAL :: SGBSL, SGESL
   !
   INTEGER meband, mtype
   INTEGER, PARAMETER :: NPD = 1

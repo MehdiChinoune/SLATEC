@@ -177,7 +177,7 @@ SUBROUTINE SSICS(N,Nelt,Ia,Ja,A,Isym,Nel,Iel,Jel,El,D,R,Iwarn)
     irow, irr, j, jbgn, jeltmp, jend
   CHARACTER xern1*8
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !* FIRST EXECUTABLE STATEMENT  SSICS
   !
   !         Set the lower triangle in IEL, JEL, EL

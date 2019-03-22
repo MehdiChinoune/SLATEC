@@ -36,7 +36,7 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
     Tol, tti, ttr, t1i, t1r, Zi, Zr, ZABS
   INTEGER i, id, idnu, inu, itime, k, kk, magz, N
   DIMENSION Cyr(N), Cyi(N)
-  EXTERNAL ZABS
+  EXTERNAL :: ZABS
   DATA czeror, czeroi, coner, conei, rt2/0.0D0, 0.0D0, 1.0D0, 0.0D0, &
     1.41421356237309505D0/
   !* FIRST EXECUTABLE STATEMENT  ZRATI

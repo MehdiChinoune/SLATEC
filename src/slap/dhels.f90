@@ -79,7 +79,7 @@ SUBROUTINE DHELS(A,Lda,N,Q,B)
   REAL(8) :: c, s, t, t1, t2
   INTEGER iq, k, kb, kp1
   !     .. External Subroutines ..
-  EXTERNAL DAXPY
+  EXTERNAL :: DAXPY
   !* FIRST EXECUTABLE STATEMENT  DHELS
   !
   !         Minimize(B-A*X,B-A*X).  First form Q*B.

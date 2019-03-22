@@ -103,10 +103,10 @@ SUBROUTINE SDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   REAL X, Y(*), Yprime(*), H, Wt(*), Rpar(*), Phi(Neq,*), Delta(*), &
     E(*), Wm(*), Alpha(*), Beta(*), Gamma(*), Psi(*), Sigma(*), &
     Cj, Cjold, Hold, S, Hmin, Uround
-  EXTERNAL RES, JAC
+  EXTERNAL :: RES, JAC
   !
-  EXTERNAL SDAJAC, SDANRM, SDASLV, SDATRP
-  REAL SDANRM
+  EXTERNAL :: SDAJAC, SDASLV, SDATRP
+  REAL, EXTERNAL :: SDANRM
   !
   INTEGER i, ier, ires, j, j1, kdiff, km1, knew, kp1, kp2, m, maxit, ncf, nef, &
     nsf, nsp1

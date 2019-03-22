@@ -49,7 +49,7 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
     IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   LOGICAL singlr
-  EXTERNAL COFX
+  EXTERNAL :: COFX
   !* FIRST EXECUTABLE STATEMENT  SPELI4
   KSWx = Mbdcnd + 1
   KSWy = Nbdcnd + 1

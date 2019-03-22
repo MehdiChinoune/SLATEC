@@ -124,8 +124,7 @@ CONTAINS
     LOGICAL ltest(NSUBS)
     CHARACTER(6) :: snames(NSUBS)
     !     .. External Functions ..
-    REAL R1MACH
-    EXTERNAL R1MACH
+    REAL, EXTERNAL :: R1MACH
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
@@ -336,8 +335,7 @@ CONTAINS
     LOGICAL ltest(NSUBS)
     CHARACTER(6) :: snames(NSUBS)
     !     .. External Functions ..
-    REAL R1MACH
-    EXTERNAL R1MACH
+    REAL, EXTERNAL :: R1MACH
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
@@ -1221,10 +1219,9 @@ CONTAINS
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
-    INTEGER NUMXER
-    EXTERNAL NUMXER
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL DGBMV, DGEMV
+    EXTERNAL :: DGBMV, DGEMV
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
@@ -1536,10 +1533,9 @@ CONTAINS
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
-    INTEGER NUMXER
-    EXTERNAL NUMXER
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL DGEMM
+    EXTERNAL :: DGEMM
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
@@ -1806,10 +1802,9 @@ CONTAINS
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
-    INTEGER NUMXER
-    EXTERNAL NUMXER
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL  DSBMV, DSPMV, DSYMV
+    EXTERNAL ::  DSBMV, DSPMV, DSYMV
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
@@ -2121,10 +2116,9 @@ CONTAINS
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
-    INTEGER NUMXER
-    EXTERNAL NUMXER
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL DSYMM
+    EXTERNAL :: DSYMM
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
@@ -2377,10 +2371,9 @@ CONTAINS
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
-    INTEGER NUMXER
-    EXTERNAL NUMXER
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL DTBMV, DTBSV, DTPMV, DTPSV, DTRMV, DTRSV
+    EXTERNAL :: DTBMV, DTBSV, DTPMV, DTPSV, DTRMV, DTRSV
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
@@ -2691,10 +2684,9 @@ CONTAINS
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
-    INTEGER NUMXER
-    EXTERNAL NUMXER
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL DTRMM, DTRSM
+    EXTERNAL :: DTRMM, DTRSM
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
@@ -2967,10 +2959,9 @@ CONTAINS
     REAL(8) :: w(1)
     LOGICAL isame(13)
     !     .. External Functions ..
-    INTEGER NUMXER
-    EXTERNAL NUMXER
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL DGER
+    EXTERNAL :: DGER
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !* FIRST EXECUTABLE STATEMENT  DCHK42
@@ -3219,10 +3210,9 @@ CONTAINS
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
-    INTEGER NUMXER
-    EXTERNAL NUMXER
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL DSYRK
+    EXTERNAL :: DSYRK
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
@@ -3472,10 +3462,9 @@ CONTAINS
     REAL(8) :: w(1)
     LOGICAL isame(13)
     !     .. External Functions ..
-    INTEGER NUMXER
-    EXTERNAL NUMXER
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL DSPR, DSYR
+    EXTERNAL :: DSPR, DSYR
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
@@ -3735,10 +3724,9 @@ CONTAINS
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
-    INTEGER NUMXER
-    EXTERNAL NUMXER
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL DSYR2K
+    EXTERNAL :: DSYR2K
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
@@ -4022,10 +4010,9 @@ CONTAINS
     REAL(8) :: w(2)
     LOGICAL isame(13)
     !     .. External Functions ..
-    INTEGER NUMXER
-    EXTERNAL NUMXER
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL DSPR2, DSYR2
+    EXTERNAL :: DSPR2, DSYR2
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
@@ -4300,7 +4287,7 @@ CONTAINS
     !     .. Local Arrays ..
     REAL(8) :: a(1,1), x(1), y(1)
     !     .. External Subroutines ..
-    EXTERNAL CHKXER, DGBMV, DGEMV, DGER, DSBMV, DSPMV, DSPR, DSPR2, &
+    EXTERNAL :: CHKXER, DGBMV, DGEMV, DGER, DSBMV, DSPMV, DSPR, DSPR2, &
       DSYMV, DSYR, DSYR2, DTBMV, DTBSV, DTPMV, DTPSV, DTRMV, &
       DTRSV
     !* FIRST EXECUTABLE STATEMENT  DCHKE2
@@ -4731,7 +4718,7 @@ CONTAINS
     !     .. Local Arrays ..
     REAL(8) :: a(1,1), b(1,1), c(1,1)
     !     .. External Subroutines ..
-    EXTERNAL CHKXER, DGEMM, DSYMM, DTRMM, DTRSM, DSYRK, DSYR2K
+    EXTERNAL :: CHKXER, DGEMM, DSYMM, DTRMM, DTRSM, DSYRK, DSYR2K
     !* FIRST EXECUTABLE STATEMENT  DCHKE3
     CALL XGETF(kontrl)
     IF ( Kprint<=2 ) THEN
@@ -5466,8 +5453,7 @@ PROGRAM TEST19
 
   INTEGER ipass, kprint, lin, lun, nfail
   !     .. External Functions ..
-  INTEGER I1MACH
-  EXTERNAL I1MACH
+  INTEGER, EXTERNAL :: I1MACH
   !* FIRST EXECUTABLE STATEMENT  TEST19
   lun = I1MACH(2)
   lin = I1MACH(1)

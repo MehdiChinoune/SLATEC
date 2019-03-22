@@ -222,13 +222,13 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !
   REAL A, abseps, Abserr, Alist, area, area1, area12, area2, a1, &
     a2, B, Blist, b1, b2, Chebmo, correc, defab1, defab2, &
-    defabs, domega, R1MACH, dres, Elist, epmach, Epsabs, Epsrel, &
+    defabs, domega, dres, Elist, epmach, Epsabs, Epsrel, &
     erlarg, erlast, errbnd, errmax, error1, erro12, error2, &
-    errsum, ertest, F, oflow, Omega, resabs, reseps, Result, &
+    errsum, ertest, oflow, Omega, resabs, reseps, Result, &
     res3la, Rlist, rlist2, small, uflow, width
   INTEGER Icall, id, Ier, ierro, Integr, Iord, iroff1, iroff2, &
     iroff3, jupbnd, k, ksgn, ktmin, Last, Limit, maxerr, &
@@ -239,7 +239,8 @@ SUBROUTINE QAWOE(F,A,B,Omega,Integr,Epsabs,Epsrel,Limit,Icall,Maxp1,&
   DIMENSION Alist(*), Blist(*), Rlist(*), Elist(*), Iord(*), rlist2(52)&
     , res3la(3), Chebmo(Maxp1,25), Nnlog(*)
   !
-  EXTERNAL F
+  REAL, EXTERNAL :: F
+  REAL, EXTERNAL :: R1MACH
   !
   !            THE DIMENSION OF RLIST2 IS DETERMINED BY  THE VALUE OF
   !            LIMEXP IN SUBROUTINE QELG (RLIST2 SHOULD BE OF

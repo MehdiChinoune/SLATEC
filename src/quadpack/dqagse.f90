@@ -166,13 +166,13 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
   !   890831  Modified array declarations.  (WRB)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !
   REAL(8) :: A, abseps, Abserr, Alist, area, area1, area12, &
     area2, a1, a2, B, Blist, b1, b2, correc, defabs, &
-    defab1, defab2, D1MACH, dres, Elist, epmach, &
+    defab1, defab2, dres, Elist, epmach, &
     Epsabs, Epsrel, erlarg, erlast, errbnd, errmax, &
-    error1, error2, erro12, errsum, ertest, F, oflow, &
+    error1, error2, erro12, errsum, ertest,oflow, &
     resabs, reseps, Result, res3la, Rlist, rlist2, small, uflow
   INTEGER id, Ier, ierro, Iord, iroff1, iroff2, iroff3, jupbnd, k, &
     ksgn, ktmin, Last, Limit, maxerr, Neval, nres, nrmax, numrl2
@@ -180,7 +180,8 @@ SUBROUTINE DQAGSE(F,A,B,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,Alist,&
   !
   DIMENSION Alist(*), Blist(*), Elist(*), Iord(*), res3la(3), Rlist(*), rlist2(52)
   !
-  EXTERNAL F
+  REAL(8), EXTERNAL :: F
+  REAL(8), EXTERNAL :: D1MACH
   !
   !            THE DIMENSION OF RLIST2 IS DETERMINED BY THE VALUE OF
   !            LIMEXP IN SUBROUTINE DQELG (RLIST2 SHOULD BE OF DIMENSION

@@ -255,7 +255,7 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
-  
+
   !     .. Scalar Arguments ..
   REAL Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
@@ -263,16 +263,15 @@ SUBROUTINE SCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   REAL A(Nelt), B(N), Dz(N), P(N), R(N), Rwork(*), X(N), Z(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC, MSOLVE
+  EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
   REAL ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
   INTEGER i, k
   !     .. External Functions ..
-  REAL R1MACH, SDOT
-  INTEGER ISSCG
-  EXTERNAL R1MACH, SDOT, ISSCG
+  REAL, EXTERNAL :: R1MACH, SDOT
+  INTEGER, EXTERNAL :: ISSCG
   !     .. External Subroutines ..
-  EXTERNAL SAXPY, SCOPY
+  EXTERNAL :: SAXPY, SCOPY
   !* FIRST EXECUTABLE STATEMENT  SCG
   !
   !         Check some of the input data.

@@ -27,7 +27,7 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
     !   920212  Code completely restructured to test errors for all values
     !           of KPRINT.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -37,11 +37,10 @@ CONTAINS
     !     .. Local Arrays ..
     REAL c(6), d(6), dchk(6), w(12), x(6), xchk(6), y(6)
     !     .. External Functions ..
-    REAL R1MACH
-    INTEGER NUMXER
-    EXTERNAL R1MACH, NUMXER
+    REAL, EXTERNAL :: R1MACH
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL POLCOF, POLINT, POLYVL, XERCLR, XGETF, XSETF
+    EXTERNAL :: POLCOF, POLINT, POLYVL, XERCLR, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !     .. Data statements ..
@@ -170,7 +169,7 @@ CONTAINS
 
     !* REVISION HISTORY  (YYMMDD)
     !   920212  DATE WRITTEN
-    
+
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -180,11 +179,10 @@ CONTAINS
     !     .. Local Arrays ..
     REAL(8) :: c(6), d(6), dchk(6), w(12), x(6), xchk(6), y(6)
     !     .. External Functions ..
-    REAL(8) :: D1MACH
-    INTEGER NUMXER
-    EXTERNAL D1MACH, NUMXER
+    REAL(8), EXTERNAL :: D1MACH
+    INTEGER, EXTERNAL :: NUMXER
     !     .. External Subroutines ..
-    EXTERNAL DPOLCF, DPLINT, DPOLVL, XERCLR, XGETF, XSETF
+    EXTERNAL :: DPOLCF, DPLINT, DPOLVL, XERCLR, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !     .. Data statements ..
@@ -348,7 +346,7 @@ PROGRAM TEST29
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
   !   920225  Added CALL to DPNTCK.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST29

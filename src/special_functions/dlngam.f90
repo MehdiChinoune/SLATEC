@@ -35,11 +35,10 @@ REAL(8) FUNCTION DLNGAM(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  
-  REAL(8) :: X, dxrel, pi, sinpiy, sqpi2l, sq2pil, xmax, y, &
-    DGAMMA, D9LGMC, D1MACH, temp
+
+  REAL(8) :: X, dxrel, pi, sinpiy, sqpi2l, sq2pil, xmax, y, temp
   LOGICAL first
-  EXTERNAL DGAMMA
+  REAL(8), EXTERNAL :: DGAMMA, D9LGMC, D1MACH
   SAVE sq2pil, sqpi2l, pi, xmax, dxrel, first
   DATA sq2pil/0.91893853320467274178032973640562D0/
   DATA sqpi2l/ + .225791352644727432363097614947441D+0/

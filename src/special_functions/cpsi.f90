@@ -32,13 +32,14 @@ COMPLEX FUNCTION CPSI(Zin)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  
-  REAL bern, bound, cabsz, dxrel, pi, R1MACH, rbig, rmin, x, y
+
+  REAL bern, bound, cabsz, dxrel, pi, rbig, rmin, x, y
   INTEGER i, n, ndx, nterm
-  COMPLEX Zin, z, z2inv, corr, CCOT
+  COMPLEX Zin, z, z2inv, corr
   DIMENSION bern(13)
   LOGICAL first
-  EXTERNAL CCOT
+  REAL, EXTERNAL :: R1MACH
+  COMPLEX, EXTERNAL :: CCOT
   SAVE bern, pi, nterm, bound, dxrel, rmin, rbig, first
   DATA bern(1)/.83333333333333333E-1/
   DATA bern(2)/ - .83333333333333333E-2/

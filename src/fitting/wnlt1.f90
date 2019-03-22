@@ -26,13 +26,12 @@ SUBROUTINE WNLT1(I,Lend,Mend,Ir,Mdw,Recalc,Imax,Hbar,H,Scale,W)
   !* REVISION HISTORY  (YYMMDD)
   !   790701  DATE WRITTEN
   !   890620  Code extracted from WNLIT and made a subroutine.  (RWC))
-  
+
   INTEGER I, Imax, Ir, Lend, Mdw, Mend
   REAL H(*), Hbar, Scale(*), W(Mdw,*)
   LOGICAL Recalc
   !
-  EXTERNAL ISAMAX
-  INTEGER ISAMAX
+  INTEGER, EXTERNAL :: ISAMAX
   !
   INTEGER j, k
   !

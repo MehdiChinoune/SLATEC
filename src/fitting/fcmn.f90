@@ -33,20 +33,16 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
 
-  INTEGER Iwork(*), Mdg, Mdw, Mode, Nbkpt, Nconst, Ndata, Nderiv(*), &
-    Nord
-  REAL Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), Ptemp(*), &
-    Sddata(*), W(Mdw,*), Work(*), Xconst(*), Xdata(*), Xtemp(*), &
-    Yconst(*), Ydata(*)
+  INTEGER Iwork(*), Mdg, Mdw, Mode, Nbkpt, Nconst, Ndata, Nderiv(*), Nord
+  REAL Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), Ptemp(*), Sddata(*), &
+    W(Mdw,*), Work(*), Xconst(*), Xdata(*), Xtemp(*), Yconst(*), Ydata(*)
   !
-  EXTERNAL BNDACC, BNDSOL, BSPLVD, BSPLVN, LSEI, SAXPY, SCOPY, &
+  EXTERNAL :: BNDACC, BNDSOL, BSPLVD, BSPLVN, LSEI, SAXPY, SCOPY, &
     SSCAL, SSORT, XERMSG
   !
-  REAL dummy, prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, &
-    yval
-  INTEGER i, idata, ideriv, ileft, intrvl, intw1, ip, ir, irow, &
-    itype, iw1, iw2, l, lw, mt, n, nb, neqcon, nincon, &
-    nordm1, nordp1, np1
+  REAL dummy, prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, yval
+  INTEGER i, idata, ideriv, ileft, intrvl, intw1, ip, ir, irow, itype, iw1, iw2, &
+    l, lw, mt, n, nb, neqcon, nincon, nordm1, nordp1, np1
   LOGICAL band, new, var
   CHARACTER(8) :: xern1
   !

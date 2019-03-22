@@ -30,7 +30,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -40,10 +40,9 @@ CONTAINS
     REAL(8) :: fvec(2), wa(19), x(2)
     INTEGER itest(3)
     !     .. External Functions ..
-    REAL(8) :: D1MACH, DENORM
-    EXTERNAL D1MACH, DENORM
+    REAL(8), EXTERNAL :: D1MACH, DENORM
     !     .. External Subroutines ..
-    EXTERNAL DNSQE, PASS
+    EXTERNAL :: DNSQE, PASS
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  DNSQQK
@@ -142,7 +141,7 @@ CONTAINS
     !   801001  DATE WRITTEN
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     INTEGER K
     REAL(8) :: X(2)
     !* FIRST EXECUTABLE STATEMENT  DSOSFN
@@ -181,7 +180,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920310  Code cleaned up and TYPE section added.  (RWC, WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
@@ -191,10 +190,9 @@ CONTAINS
     REAL(8) :: fvec(2), wa(17), x(2)
     INTEGER itest(2), iw(6)
     !     .. External Functions ..
-    REAL(8) :: D1MACH, DNRM2
-    EXTERNAL D1MACH, DNRM2
+    REAL(8), EXTERNAL :: D1MACH, DNRM2
     !     .. External Subroutines ..
-    EXTERNAL DSOS, PASS
+    EXTERNAL :: DSOS, PASS
     !     .. Intrinsic Functions ..
     INTRINSIC SQRT
     !* FIRST EXECUTABLE STATEMENT  DSOSQX
@@ -282,7 +280,7 @@ CONTAINS
     !   890831  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   930214  TYPE and declarations sections added.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     INTEGER Iflag, N
     !     .. Array Arguments ..
@@ -315,7 +313,7 @@ CONTAINS
     !   890831  Modified array declarations.  (WRB)
     !   890831  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     INTEGER Iflag, Ldfjac, N
     REAL(8) :: Fjac(Ldfjac,*), Fvec(*), X(*)
     !* FIRST EXECUTABLE STATEMENT  DQJAC2
@@ -377,7 +375,7 @@ PROGRAM TEST36
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST36

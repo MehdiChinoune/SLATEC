@@ -116,11 +116,11 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !
   REAL(8) :: A, Abserr, ac, an, an2, as, asap, ass, B, &
     centr, Chebmo, cheb12, cheb24, conc, cons, cospar, &
-    d, DQWGTF, d1, D1MACH, d2, estc, ests, F, fval, &
+    d, d1, d2, estc, ests, fval, &
     hlgth, oflow, Omega, parint, par2, par22, p2, p3, &
     p4, Resabs, Resasc, resc12, resc24, ress12, &
     ress24, Result, sinpar, v, x
@@ -130,7 +130,8 @@ SUBROUTINE DQC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,&
   DIMENSION Chebmo(Maxp1,25), cheb12(13), cheb24(25), d(25), d1(25), &
     d2(25), fval(25), v(28), x(11)
   !
-  EXTERNAL F, DQWGTF
+  REAL(8), EXTERNAL :: F
+  REAL(8), EXTERNAL :: DQWGTF, D1MACH
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24)
   !           K = 1, ...,11, TO BE USED FOR THE CHEBYSHEV EXPANSION OF F

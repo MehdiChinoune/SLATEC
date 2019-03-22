@@ -942,12 +942,12 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   INTEGER Neq, Info(15), Idid, Lrw, Iwork(*), Liw, Ipar(*)
   REAL(8) :: T, Y(*), Yprime(*), Tout, Rtol(*), Atol(*), &
     Rwork(*), Rpar(*)
-  EXTERNAL RES, JAC
+  EXTERNAL :: RES, JAC
   !
   !     Declare externals.
   !
-  EXTERNAL D1MACH, DDAINI, DDANRM, DDASTP, DDATRP, DDAWTS, XERMSG
-  REAL(8) :: D1MACH, DDANRM
+  EXTERNAL :: DDAINI, DDASTP, DDATRP, DDAWTS, XERMSG
+  REAL(8), EXTERNAL :: D1MACH, DDANRM
   !
   !     Declare local variables.
   !

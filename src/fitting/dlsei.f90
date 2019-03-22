@@ -392,19 +392,17 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   900604  DP version created from SP version.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Ip(3), Ma, Mdw, Me, Mg, Mode, N
   REAL(8) :: Prgopt(*), Rnorme, Rnorml, W(Mdw,*), Ws(*), X(*)
   !
-  EXTERNAL D1MACH, DASUM, DAXPY, DCOPY, DDOT, DH12, DLSI, DNRM2, &
-    DSCAL, DSWAP, XERMSG
-  REAL(8) :: D1MACH, DASUM, DDOT, DNRM2
+  EXTERNAL :: DAXPY, DCOPY, DH12, DLSI, DSCAL, DSWAP, XERMSG
+  REAL(8), EXTERNAL :: D1MACH, DASUM, DDOT, DNRM2
   !
   REAL(8) :: drelpr, enorm, fnorm, gam, rb, rn, rnmax, size, &
     sn, snmax, t, tau, uj, up, vj, xnorm, xnrme
   INTEGER i, imax, j, jp1, k, key, kranke, last, lchk, link, m, &
-    mapke1, mdeqc, mend, mep1, n1, n2, next, nlink, nopt, &
-    np1, ntimes
+    mapke1, mdeqc, mend, mep1, n1, n2, next, nlink, nopt, np1, ntimes
   LOGICAL cov, first
   CHARACTER(8) :: xern1, xern2, xern3, xern4
   SAVE first, drelpr

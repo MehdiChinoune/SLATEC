@@ -168,14 +168,14 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  
+
   INTEGER Last
-  REAL A, Abserr, B, Epsabs, Epsrel, F, Result, Work
+  REAL A, Abserr, B, Epsabs, Epsrel, Result, Work
   INTEGER Ier, Iwork, Key, Lenw, Limit, lvl, l1, l2, l3, Neval
   !
   DIMENSION Iwork(*), Work(*)
   !
-  EXTERNAL F
+  REAL, EXTERNAL :: F
   !* FIRST EXECUTABLE STATEMENT  QAG
   Ier = 6
   Neval = 0

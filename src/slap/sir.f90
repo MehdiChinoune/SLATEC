@@ -265,7 +265,7 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
-  
+
   !     .. Scalar Arguments ..
   REAL Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
@@ -273,14 +273,13 @@ SUBROUTINE SIR(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   REAL A(Nelt), B(N), Dz(N), R(N), Rwork(*), X(N), Z(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC, MSOLVE
+  EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
   REAL bnrm, solnrm, tolmin
   INTEGER i, k
   !     .. External Functions ..
-  REAL R1MACH
-  INTEGER ISSIR
-  EXTERNAL R1MACH, ISSIR
+  REAL, EXTERNAL :: R1MACH
+  INTEGER, EXTERNAL :: ISSIR
   !* FIRST EXECUTABLE STATEMENT  SIR
   !
   !         Check some of the input data.

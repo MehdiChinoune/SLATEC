@@ -30,7 +30,7 @@ SUBROUTINE WNLT3(I,Imax,M,Mdw,Ipivot,H,W)
   INTEGER I, Imax, Ipivot(*), M, Mdw
   REAL H(*), W(Mdw,*)
   !
-  EXTERNAL SSWAP
+  EXTERNAL :: SSWAP
   !
   REAL t
   INTEGER itemp

@@ -57,7 +57,7 @@ SUBROUTINE SSLI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !     .. Local Scalars ..
   INTEGER locel, lociel, locjel, nel
   !     .. External Subroutines ..
-  EXTERNAL SSLI2
+  EXTERNAL :: SSLI2
   !* FIRST EXECUTABLE STATEMENT  SSLI
   !
   nel = Iwork(1)

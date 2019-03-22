@@ -57,7 +57,7 @@ SUBROUTINE DSLI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !     .. Local Scalars ..
   INTEGER locel, lociel, locjel, nel
   !     .. External Subroutines ..
-  EXTERNAL DSLI2
+  EXTERNAL :: DSLI2
   !* FIRST EXECUTABLE STATEMENT  DSLI
   !
   nel = Iwork(1)

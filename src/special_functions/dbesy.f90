@@ -77,15 +77,15 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
-  EXTERNAL DYAIRY
   INTEGER i, iflw, j, N, nb, nd, nn, nud, nulim
-  INTEGER I1MACH
   REAL(8) :: azn, cn, dnu, elim, flgjy, fn, Fnu, ran, s, s1, &
     s2, tm, trx, w, wk, w2n, X, xlim, xxn, Y
-  REAL(8) :: DBESY0, DBESY1, D1MACH
   DIMENSION w(2), nulim(2), Y(*), wk(7)
+  INTEGER, EXTERNAL :: I1MACH
+  REAL(8), EXTERNAL :: DBESY0, DBESY1, D1MACH
+  EXTERNAL :: DYAIRY
   SAVE nulim
   DATA nulim(1), nulim(2)/70, 100/
   !* FIRST EXECUTABLE STATEMENT  DBESY

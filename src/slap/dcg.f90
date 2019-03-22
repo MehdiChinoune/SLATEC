@@ -256,7 +256,7 @@ SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !   920511  Added complete declaration section.  (WRB)
   !   920929  Corrected format of references.  (FNF)
   !   921019  Changed 500.0 to 500 to reduce SP/DP differences.  (FNF)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
@@ -265,16 +265,15 @@ SUBROUTINE DCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
     Z(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC, MSOLVE
+  EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
   REAL(8) :: ak, akden, bk, bkden, bknum, bnrm, solnrm, tolmin
   INTEGER i, k
   !     .. External Functions ..
-  REAL(8) :: D1MACH, DDOT
-  INTEGER ISDCG
-  EXTERNAL D1MACH, DDOT, ISDCG
+  REAL(8), EXTERNAL :: D1MACH, DDOT
+  INTEGER, EXTERNAL :: ISDCG
   !     .. External Subroutines ..
-  EXTERNAL DAXPY, DCOPY
+  EXTERNAL :: DAXPY, DCOPY
   !* FIRST EXECUTABLE STATEMENT  DCG
   !
   !         Check some of the input data.

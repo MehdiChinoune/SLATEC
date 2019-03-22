@@ -47,16 +47,17 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  
+
   REAL a, a0, aln2, alnbig, alneps, alnsml, alnz, alpha, an, b0, &
     beta, Bknu, bknu0, Bknu1, bknud, bn, c0, c0kcs, CSEVL, euler
-  REAL expx, GAMMA, p1, p2, p3, qq, R1MACH, result, sqpi2, sqrtx, &
+  REAL expx, p1, p2, p3, qq, result, sqpi2, sqrtx, &
     v, vlnz, X, x2n, x2tov, xi, xmu, Xnu, xnusml, xsml
   REAL z, znu1cs, ztov
-  INTEGER i, ii, INITS, inu, Iswtch, n, ntc0k, nterms, ntznu1
+  INTEGER i, ii, inu, Iswtch, n, ntc0k, nterms, ntznu1
   DIMENSION alpha(15), beta(15), a(15), c0kcs(16), znu1cs(12)
   LOGICAL first
-  EXTERNAL GAMMA
+  INTEGER, EXTERNAL :: INITS
+  REAL, EXTERNAL :: GAMMA, R1MACH
   SAVE c0kcs, znu1cs, euler, sqpi2, aln2, ntc0k, ntznu1, xnusml, &
     xsml, alnsml, alnbig, alneps, first
   DATA c0kcs(1)/.060183057242626108E0/

@@ -419,7 +419,7 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   INTEGER log2n, loutpt, M, Mbdcnd, N, Nbdcnd
   DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
   DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
-  EXTERNAL COFX
+  EXTERNAL :: COFX
   !* FIRST EXECUTABLE STATEMENT  SEPX4
   CALL CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)
   IF ( Ierror/=0 ) RETURN

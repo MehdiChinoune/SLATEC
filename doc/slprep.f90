@@ -147,16 +147,11 @@ PROGRAM SLPREP
   INTEGER iptr(MXNCAT), jptr(MXNCAT), kptr(MXNCAT)
   CHARACTER(80) :: class(MXNCL+1), stmts(MXNCL)
   INTEGER iptrl(7*MXNRN), iptrr(7*MXNRN)
-  !
   !     External functions.
-  !
-  INTEGER FIND, LENSTR
-  LOGICAL IFDECK, IFIF, IFSID
-  CHARACTER(10) :: CVTCAT
-  EXTERNAL CVTCAT, FIND, IFDECK, IFIF, IFSID, LENSTR
-  !
+  INTEGER, EXTERNAL :: FIND, LENSTR
+  LOGICAL, EXTERNAL :: IFDECK, IFIF, IFSID
+  CHARACTER(10), EXTERNAL :: CVTCAT
   !     Intrinsic functions.
-  !
   INTRINSIC ABS, INDEX, MAX, MOD
   !* FIRST EXECUTABLE STATEMENT  SLPREP
   !     OPEN (UNIT=LU6, FILE=FOUT, STATUS='UNKNOWN', FORM='FORMATTED',
@@ -845,7 +840,7 @@ LOGICAL FUNCTION IFDECK(Line)
   !     .. Local Scalars ..
   CHARACTER(6) :: temp
   !     .. External Subroutines ..
-  EXTERNAL UPCASE
+  EXTERNAL :: UPCASE
   !* FIRST EXECUTABLE STATEMENT  IFDECK
   CALL UPCASE(Line(1:6),temp(1:6))
   IFDECK = .TRUE.
@@ -891,7 +886,7 @@ LOGICAL FUNCTION IFIF(Line)
   !     .. Local Scalars ..
   CHARACTER(3) :: temp
   !     .. External Subroutines ..
-  EXTERNAL UPCASE
+  EXTERNAL :: UPCASE
   !* FIRST EXECUTABLE STATEMENT  IFIF
   CALL UPCASE(Line(1:3),temp(1:3))
   IFIF = .TRUE.
@@ -938,7 +933,7 @@ LOGICAL FUNCTION IFSID(Line)
   INTEGER i, id
   CHARACTER(20) :: temp
   !     .. External Subroutines ..
-  EXTERNAL UPCASE
+  EXTERNAL :: UPCASE
   !     .. Intrinsic Functions ..
   INTRINSIC INDEX
   !* FIRST EXECUTABLE STATEMENT  IFSID
@@ -1175,9 +1170,8 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,&
   !     .. Local Arrays ..
   INTEGER size(7)
   !     .. External Functions ..
-  INTEGER LENSTR
-  CHARACTER(10) :: CVTCAT
-  EXTERNAL LENSTR, CVTCAT
+  INTEGER, EXTERNAL :: LENSTR
+  CHARACTER(10), EXTERNAL :: CVTCAT
   !     .. Intrinsic Functions ..
   INTRINSIC INDEX
   !     .. Data statements ..

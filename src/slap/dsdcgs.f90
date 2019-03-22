@@ -250,7 +250,7 @@ SUBROUTINE DSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER locdin, lociw, locp, locq, locr, locr0, locu, locv1, &
     locv2, locw
   !     .. External Subroutines ..
-  EXTERNAL DCGS, DCHKW, DS2Y, DSDI, DSDS, DSMV
+  EXTERNAL :: DCGS, DCHKW, DS2Y, DSDI, DSDS, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSDCGS
   !
   Ierr = 0

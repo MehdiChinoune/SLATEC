@@ -72,15 +72,14 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Fixed an error message.  (RWC)
-  
+
   INTEGER Ipivot(*), Itype(*), L, Ma, Mdw, Mme, Mode, N
   REAL D(*), H(*), Prgopt(*), Rnorm, Scale(*), Temp(*), W(Mdw,*), &
     Wd(*), X(*), Z(*)
   !
-  EXTERNAL H12, ISAMAX, R1MACH, SASUM, SAXPY, SCOPY, SNRM2, SROTM, &
-    SROTMG, SSCAL, SSWAP, WNLIT, XERMSG
-  REAL R1MACH, SASUM, SNRM2
-  INTEGER ISAMAX
+  INTEGER, EXTERNAL :: ISAMAX
+  REAL, EXTERNAL :: R1MACH, SASUM, SNRM2
+  EXTERNAL :: H12, SAXPY, SCOPY, SROTM, SROTMG, SSCAL, SSWAP, WNLIT, XERMSG
   !
   REAL alamda, alpha, alsq, amax, blowup, bnorm, dope(3), eanorm, &
     fac, sm, sparam(5), srelpr, t, tau, wmax, z2, zz

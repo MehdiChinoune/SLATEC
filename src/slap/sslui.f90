@@ -61,7 +61,7 @@ SUBROUTINE SSLUI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !     .. Local Scalars ..
   INTEGER locdin, locil, lociu, locjl, locju, locl, locu
   !     .. External Subroutines ..
-  EXTERNAL SSLUI2
+  EXTERNAL :: SSLUI2
   !* FIRST EXECUTABLE STATEMENT  SSLUI
   !
   !         Pull out the locations of the arrays holding the ILU

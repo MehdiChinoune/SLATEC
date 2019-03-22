@@ -32,7 +32,7 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
     Zrr, ZABS, D1MACH
   INTEGER i, Kode, N, nw, Nz
   DIMENSION Yr(N), Yi(N), Cwr(2), Cwi(2)
-  EXTERNAL ZABS
+  EXTERNAL :: ZABS
   !* FIRST EXECUTABLE STATEMENT  ZWRSK
   !-----------------------------------------------------------------------
   !     I(FNU+I-1,Z) BY BACKWARD RECURRENCE FOR RATIOS

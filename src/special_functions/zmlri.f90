@@ -36,7 +36,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   INTEGER i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, &
     Nz
   DIMENSION Yr(N), Yi(N)
-  EXTERNAL ZABS, ZEXP, ZLOG
+  EXTERNAL :: ZABS, ZEXP, ZLOG
   DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
   !* FIRST EXECUTABLE STATEMENT  ZMLRI
   scle = D1MACH(1)/Tol

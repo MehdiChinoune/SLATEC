@@ -82,17 +82,16 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !   920218  Code redone to parallel QNC79.  (WRB)
   !   930120  Increase array size 80->99, and KMX 2000->5000 for SUN -r8
   !           wordlength.  (RWC)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: A, Ans, B, Err
   INTEGER Ierr, K
   !     .. Function Arguments ..
   REAL(8) :: FUN
-  EXTERNAL FUN
+  EXTERNAL :: FUN
   !     .. Local Scalars ..
   REAL(8) :: ae, area, bank, blocal, c, ce, ee, ef, eps, &
-    q13, q7, q7l, sq2, test, tol, vr, w1, w2, w3, &
-    w4
+    q13, q7, q7l, sq2, test, tol, vr, w1, w2, w3, w4
   INTEGER i, kml, kmx, l, lmn, lmx, nbits, nib, nlmn, nlmx
   LOGICAL first
   !     .. Local Arrays ..
@@ -100,11 +99,10 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
     f5(99), f6(99), f7(99), hh(99), q7r(99), vl(99)
   INTEGER lr(99)
   !     .. External Functions ..
-  REAL(8) :: D1MACH
-  INTEGER I1MACH
-  EXTERNAL D1MACH, I1MACH
+  REAL(8), EXTERNAL :: D1MACH
+  INTEGER, EXTERNAL :: I1MACH
   !     .. External Subroutines ..
-  EXTERNAL XERMSG
+  EXTERNAL :: XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, LOG, MAX, MIN, SIGN, SQRT
   !     .. Save statement ..

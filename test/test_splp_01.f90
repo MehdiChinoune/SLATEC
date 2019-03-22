@@ -22,12 +22,12 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901013  Added additional printout on failure.  (RWC)
-    
-    REAL bl, bu, d, dattrv, duals, prgopt, primal, USRMAT, work, zero
+
+    REAL bl, bu, d, dattrv, duals, prgopt, primal, work, zero
     INTEGER i, ibasis, ic, icnt, ind, info, Ipass, isoln, iv, ivv, &
       iwork, j, kk, kount, Kprint, liw, Lun, lw, mm, mrelas
     INTEGER nvars
-    EXTERNAL USRMAT
+    REAL, EXTERNAL :: USRMAT
     REAL costs(37)
     DIMENSION prgopt(50), dattrv(210), bl(60), bu(60)
     DIMENSION ind(60), primal(60), duals(60), ibasis(60)
@@ -293,7 +293,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901013  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
-    
+
     INTEGER i, ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
     REAL R1MACH, rnorm, rnormc, SNRM2, sr
@@ -483,7 +483,7 @@ PROGRAM TEST37
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST37

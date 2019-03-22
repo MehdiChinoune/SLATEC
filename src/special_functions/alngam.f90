@@ -36,10 +36,10 @@ REAL FUNCTION ALNGAM(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  
-  REAL dxrel, GAMMA, pi, R1MACH, R9LGMC, sinpiy, sq2pil, sqpi2l, X, xmax, y
+
+  REAL dxrel, pi, sinpiy, sq2pil, sqpi2l, X, xmax, y
   LOGICAL first
-  EXTERNAL GAMMA
+  REAL, EXTERNAL :: R1MACH, R9LGMC, GAMMA
   SAVE sq2pil, sqpi2l, pi, xmax, dxrel, first
   DATA sq2pil/0.91893853320467274E0/
   DATA sqpi2l/0.22579135264472743E0/

@@ -215,7 +215,7 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
   !   910502  Removed MATVEC and MSOLVE from ROUTINES CALLED list.  (FNF)
   !   910506  Made subsidiary to SGMRES.  (FNF)
   !   920511  Added complete declaration section.  (WRB)
-  
+
   !         The following is for optimized compilation on LLNL/LTSS Crays.
   !LLL. OPTIMIZE
   !     .. Scalar Arguments ..
@@ -227,16 +227,15 @@ SUBROUTINE SPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     Sr(*), Sz(*), V(N,*), Wk(*), X(*), Xl(*), Z(*)
   INTEGER Ia(Nelt), Ipar(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC, MSOLVE
+  EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
   REAL c, dlnrm, prod, r0nrm, rho, s, snormw, tem
   INTEGER i, i2, info, ip1, iter, itmax, j, k, ll, llp1
   !     .. External Functions ..
-  REAL SNRM2
-  INTEGER ISSGMR
-  EXTERNAL SNRM2, ISSGMR
+  REAL, EXTERNAL :: SNRM2
+  INTEGER, EXTERNAL :: ISSGMR
   !     .. External Subroutines ..
-  EXTERNAL SAXPY, SCOPY, SHELS, SHEQR, SORTH, SRLCAL, SSCAL
+  EXTERNAL :: SAXPY, SCOPY, SHELS, SHEQR, SORTH, SRLCAL, SSCAL
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !* FIRST EXECUTABLE STATEMENT  SPIGMR

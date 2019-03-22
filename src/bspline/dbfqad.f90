@@ -77,15 +77,14 @@ SUBROUTINE DBFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER inbv
-  INTEGER Id, Ierr, iflg, ilo, il1, il2, K, left, mflag, N, npk, &
-    np1
+  INTEGER Id, Ierr, iflg, ilo, il1, il2, K, left, mflag, N, npk, np1
   REAL(8) :: a, aa, ans, b, bb, Bcoef, q, Quad, T, ta, tb, &
     Tol, Work, wtol, X1, X2
-  REAL(8) :: D1MACH, F
   DIMENSION T(*), Bcoef(*), Work(*)
-  EXTERNAL F
+  REAL(8), EXTERNAL :: D1MACH
+  REAL(8), EXTERNAL :: F
   !* FIRST EXECUTABLE STATEMENT  DBFQAD
   Ierr = 1
   Quad = 0.0D0

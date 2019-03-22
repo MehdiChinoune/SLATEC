@@ -110,12 +110,10 @@ CONTAINS
     REAL a(MXNELT), f(MAXN), rwork(MAXRW), xiter(MAXN)
     INTEGER ia(MXNELT), iwork(MAXIW), ja(MXNELT)
     !     .. External Functions ..
-    REAL R1MACH
-    EXTERNAL R1MACH
+    REAL, EXTERNAL :: R1MACH
     !     .. External Subroutines ..
-    EXTERNAL SCPPLT, SS2Y, SSDBCG, SSDCG, SSDCGN, &
-      SSDCGS, SSDGMR, SSDOMN, SSGS, SSICCG, SSILUR, SSJAC, &
-      SSLUBC, SSLUCN, SSLUCS, SSLUGM, SSLUOM
+    EXTERNAL :: SCPPLT, SS2Y, SSDBCG, SSDCG, SSDCGN, SSDCGS, SSDGMR, SSDOMN, SSGS, &
+      SSICCG, SSILUR, SSJAC, SSLUBC, SSLUCN, SSLUCS, SSLUGM, SSLUOM
     !     .. Intrinsic Functions ..
     INTRINSIC MAX, REAL
     !     .. Common blocks ..
@@ -492,10 +490,9 @@ CONTAINS
     REAL dummy
     INTEGER i, icol, inum, irow, iseed, k, nl
     !     .. External Functions ..
-    REAL RAND
-    EXTERNAL RAND
+    REAL, EXTERNAL :: RAND
     !     .. External Subroutines ..
-    EXTERNAL ISMPL
+    EXTERNAL :: ISMPL
     !     .. Intrinsic Functions ..
     INTRINSIC INT
     !* FIRST EXECUTABLE STATEMENT  SRMGEN
@@ -805,10 +802,9 @@ PROGRAM TEST25
   !     .. Local Scalars ..
   INTEGER ipass, kprint, lin, lun, nfail
   !     .. External Functions ..
-  INTEGER I1MACH
-  EXTERNAL I1MACH
+  INTEGER, EXTERNAL :: I1MACH
   !     .. External Subroutines ..
-  EXTERNAL XERMAX, XSETF, XSETUN
+  EXTERNAL :: XERMAX, XSETF, XSETUN
   !* FIRST EXECUTABLE STATEMENT  TEST25
   lun = I1MACH(2)
   lin = I1MACH(1)

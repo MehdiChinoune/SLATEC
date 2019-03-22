@@ -154,11 +154,11 @@ SUBROUTINE SXLCAL(N,Lgmr,X,Xl,Zl,Hes,Maxlp1,Q,V,R0nrm,Wk,Sz,Jscal,Jpre,&
     X(N), Xl(N), Zl(N)
   INTEGER Ia(Nelt), Ipar(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MSOLVE
+  EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
   INTEGER i, k, ll, llp1
   !     .. External Subroutines ..
-  EXTERNAL SAXPY, SCOPY, SHELS
+  EXTERNAL :: SAXPY, SCOPY, SHELS
   !* FIRST EXECUTABLE STATEMENT  SXLCAL
   ll = Lgmr
   llp1 = ll + 1

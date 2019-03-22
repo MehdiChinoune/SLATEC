@@ -515,7 +515,7 @@ SUBROUTINE SNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   INTEGER index, Iw(*)
   REAL Tol
   REAL X(*), Fvec(*), Wa(*)
-  EXTERNAL FCN
+  EXTERNAL :: FCN
   INTEGER maxfev, mode, nfev, njev
   REAL factor, ftol, gtol, xtol, zero, epsfcn
   SAVE factor, zero

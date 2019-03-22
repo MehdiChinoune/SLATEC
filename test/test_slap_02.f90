@@ -109,12 +109,10 @@ CONTAINS
     REAL(8) :: a(MXNELT), f(MAXN), rwork(MAXRW), xiter(MAXN)
     INTEGER ia(MXNELT), iwork(MAXIW), ja(MXNELT)
     !     .. External Functions ..
-    REAL(8) :: D1MACH
-    EXTERNAL D1MACH
+    REAL(8), EXTERNAL :: D1MACH
     !     .. External Subroutines ..
-    EXTERNAL DCPPLT, DS2Y, DSDBCG, DSDCG, DSDCGN, &
-      DSDCGS, DSDGMR, DSDOMN, DSGS, DSICCG, DSILUR, DSJAC, &
-      DSLUBC, DSLUCN, DSLUCS, DSLUGM, DSLUOM
+    EXTERNAL :: DCPPLT, DS2Y, DSDBCG, DSDCG, DSDCGN, DSDCGS, DSDGMR, DSDOMN, DSGS, &
+      DSICCG, DSILUR, DSJAC, DSLUBC, DSLUCN, DSLUCS, DSLUGM, DSLUOM
     !     .. Intrinsic Functions ..
     INTRINSIC MAX, REAL
     !     .. Common blocks ..
@@ -491,10 +489,9 @@ CONTAINS
     REAL dummy
     INTEGER i, icol, inum, irow, iseed, k, nl
     !     .. External Functions ..
-    REAL RAND
-    EXTERNAL RAND
+    REAL, EXTERNAL :: RAND
     !     .. External Subroutines ..
-    EXTERNAL ISMPL
+    EXTERNAL :: ISMPL
     !     .. Intrinsic Functions ..
     INTRINSIC INT
     !* FIRST EXECUTABLE STATEMENT  DRMGEN
@@ -802,10 +799,9 @@ PROGRAM TEST26
   !     .. Local Scalars ..
   INTEGER ipass, kprint, lin, lun, nfail
   !     .. External Functions ..
-  INTEGER I1MACH
-  EXTERNAL I1MACH
+  INTEGER, EXTERNAL :: I1MACH
   !     .. External Subroutines ..
-  EXTERNAL XERMAX, XSETF, XSETUN
+  EXTERNAL :: XERMAX, XSETF, XSETUN
   !* FIRST EXECUTABLE STATEMENT  TEST26
   lun = I1MACH(2)
   lin = I1MACH(1)

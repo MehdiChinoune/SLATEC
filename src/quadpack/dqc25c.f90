@@ -74,17 +74,16 @@ SUBROUTINE DQC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !
-  REAL(8) :: A, Abserr, ak22, amom0, amom1, amom2, B, C, cc, &
-    centr, cheb12, cheb24, DQWGTC, F, fval, hlgth, &
-    p2, p3, p4, resabs, resasc, Result, res12, res24, &
-    u, x
+  REAL(8) :: A, Abserr, ak22, amom0, amom1, amom2, B, C, cc, centr, cheb12, &
+    cheb24, fval, hlgth, p2, p3, p4, resabs, resasc, Result, res12, res24, u, x
   INTEGER i, isym, k, kp, Krul, Neval
   !
   DIMENSION x(11), fval(25), cheb12(13), cheb24(25)
   !
-  EXTERNAL F, DQWGTC
+  REAL(8), EXTERNAL :: F
+  REAL(8), EXTERNAL :: DQWGTC
   !
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24),
   !           K = 1, ..., 11, TO BE USED FOR THE CHEBYSHEV SERIES

@@ -48,18 +48,17 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  
+
   REAL an, bn, eta
-  INTEGER i, ii, INITDS, inu, Iswtch, n, ntc0k, nterms, ntznu1
-  REAL(8) :: Xnu, X, Bknu, Bknu1, alpha(32), beta(32), a(32), &
-    c0kcs(29), znu1cs(20), alnz, aln2, a0, bknud, &
-    bknu0, b0, c0, euler, expx, p1, p2, p3, qq, &
-    result, sqpi2, sqrtx, v, vlnz, xi, xmu, xnusml, &
-    xsml, x2n, x2tov, z, ztov, alnsml, alnbig
+  INTEGER i, ii, inu, Iswtch, n, ntc0k, nterms, ntznu1
+  REAL(8) :: Xnu, X, Bknu, Bknu1, alpha(32), beta(32), a(32), c0kcs(29), &
+    znu1cs(20), alnz, aln2, a0, bknud, bknu0, b0, c0, euler, expx, p1, p2, p3, &
+    qq, result, sqpi2, sqrtx, v, vlnz, xi, xmu, xnusml, xsml, x2n, x2tov, z, &
+    ztov, alnsml, alnbig
   REAL alneps
-  REAL(8) :: D1MACH, DCSEVL, DGAMMA
   LOGICAL first
-  EXTERNAL DGAMMA
+  INTEGER, EXTERNAL :: INITDS
+  REAL(8), EXTERNAL :: D1MACH, DCSEVL, DGAMMA
   SAVE c0kcs, znu1cs, euler, sqpi2, aln2, ntc0k, ntznu1, xnusml, &
     xsml, alnsml, alnbig, alneps, first
   DATA c0kcs(1)/ + .60183057242626108387577445180329D-1/

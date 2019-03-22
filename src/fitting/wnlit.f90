@@ -36,15 +36,14 @@ SUBROUTINE WNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
   !   890620  Revised to make WNLT1, WNLT2, and WNLT3 subroutines.  (RWC)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER Idope(*), Ipivot(*), Itype(*), L, M, Mdw, N
   REAL Dope(*), H(*), Rnorm, Scale(*), W(Mdw,*)
   LOGICAL Done
   !
-  EXTERNAL H12, ISAMAX, SCOPY, SROTM, SROTMG, SSCAL, SSWAP, WNLT1, &
-    WNLT2, WNLT3
-  INTEGER ISAMAX
-  LOGICAL WNLT2
+  EXTERNAL :: H12, SCOPY, SROTM, SROTMG, SSCAL, SSWAP, WNLT1, WNLT3
+  INTEGER, EXTERNAL :: ISAMAX
+  LOGICAL, EXTERNAL :: WNLT2
   !
   REAL alsq, amax, eanorm, factor, hbar, rn, sparam(5), t, tau
   INTEGER i, i1, imax, ir, j, j1, jj, jp, krank, l1, lb, lend, &

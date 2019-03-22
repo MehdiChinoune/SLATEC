@@ -243,7 +243,7 @@ SUBROUTINE SSLUCS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     locju, locl, locnc, locnr, locp, locq, locr, locr0, locu, &
     locuu, locv1, locv2, locw, nl, nu
   !     .. External Subroutines ..
-  EXTERNAL SCGS, SCHKW, SS2Y, SSILUS, SSLUI, SSMV
+  EXTERNAL :: SCGS, SCHKW, SS2Y, SSILUS, SSLUI, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSLUCS
   !
   Ierr = 0

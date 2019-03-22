@@ -206,16 +206,15 @@ SUBROUTINE QAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  
+
   INTEGER Iwork, Last, Lenw, limit
   REAL Work
-  REAL A, Abserr, B, Epsabs, Epsrel, F, Omega, Result
-  INTEGER Ier, Integr, Leniw, lvl, l1, l2, l3, l4, Maxp1, momcom, &
-    Neval
+  REAL A, Abserr, B, Epsabs, Epsrel, Omega, Result
+  INTEGER Ier, Integr, Leniw, lvl, l1, l2, l3, l4, Maxp1, momcom, Neval
   !
   DIMENSION Iwork(*), Work(*)
   !
-  EXTERNAL F
+  REAL, EXTERNAL :: F
   !
   !         CHECK VALIDITY OF LENIW, MAXP1 AND LENW.
   !

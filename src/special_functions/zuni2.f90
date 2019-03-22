@@ -47,7 +47,7 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
     Nlast, nn, nuf, nw, Nz, idum
   DIMENSION bry(3), Yr(N), Yi(N), cipr(4), cipi(4), cssr(3), csrr(3), &
     cyr(2), cyi(2)
-  EXTERNAL ZABS
+  EXTERNAL :: ZABS
   DATA zeror, zeroi, coner/0.0D0, 0.0D0, 1.0D0/
   DATA cipr(1), cipi(1), cipr(2), cipi(2), cipr(3), cipi(3), cipr(4), &
     cipi(4)/1.0D0, 0.0D0, 0.0D0, 1.0D0, -1.0D0, 0.0D0, 0.0D0, &

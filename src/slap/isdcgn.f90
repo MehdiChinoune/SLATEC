@@ -206,7 +206,7 @@ INTEGER FUNCTION ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
   !   921026  Changed 1.0E10 to D1MACH(2) and corrected D to E in
   !           output format.  (FNF)
   !   921113  Corrected C***CATEGORY line.  (FNF)
-  
+
   !     .. Scalar Arguments ..
   REAL(8) :: Ak, Bk, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
@@ -215,14 +215,13 @@ INTEGER FUNCTION ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
     R(N), Rwork(*), X(N), Z(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
-  EXTERNAL MATVEC, MSOLVE, MTTVEC
+  EXTERNAL :: MATVEC, MSOLVE, MTTVEC
   !     .. Arrays in Common ..
   REAL(8) :: SOLn(25)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
-  REAL(8) :: D1MACH, DNRM2
-  EXTERNAL D1MACH, DNRM2
+  REAL(8), EXTERNAL :: D1MACH, DNRM2
   !     .. Common blocks ..
   COMMON /DSLBLK/ SOLn
   !* FIRST EXECUTABLE STATEMENT  ISDCGN

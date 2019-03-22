@@ -37,9 +37,9 @@ REAL FUNCTION BETA(A,B)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
-  
-  REAL A, ALBETA, alnsml, B, GAMMA, R1MACH, xmax, xmin
-  EXTERNAL GAMMA
+
+  REAL A, alnsml, B, xmax, xmin
+  REAL, EXTERNAL :: ALBETA, GAMMA, R1MACH
   SAVE xmax, alnsml
   DATA xmax, alnsml/0., 0./
   !* FIRST EXECUTABLE STATEMENT  BETA

@@ -38,11 +38,12 @@ REAL(8) FUNCTION DERF(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable name.  (RWC, WRB)
-  
-  INTEGER INITDS, nterf
-  REAL(8) :: X, erfcs(21), sqeps, sqrtpi, xbig, y, D1MACH, DCSEVL, DERFC
+
+  INTEGER nterf
+  REAL(8) :: X, erfcs(21), sqeps, sqrtpi, xbig, y
   LOGICAL first
-  EXTERNAL DERFC
+  INTEGER, EXTERNAL :: INITDS
+  REAL(8), EXTERNAL :: DERFC, D1MACH, DCSEVL
   SAVE erfcs, sqrtpi, nterf, xbig, sqeps, first
   DATA erfcs(1)/ - .49046121234691808039984544033376D-1/
   DATA erfcs(2)/ - .14226120510371364237824741899631D+0/

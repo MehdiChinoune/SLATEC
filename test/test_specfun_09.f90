@@ -83,9 +83,9 @@ CONTAINS
     !
     !  Declare external functions.
     !
-    INTEGER I1MACH
-    REAL(8) :: D1MACH, ZABS
-    EXTERNAL I1MACH, D1MACH, ZABS, ZEXP, ZSQRT
+    INTEGER, EXTERNAL :: I1MACH
+    REAL(8), EXTERNAL :: D1MACH, ZABS
+    EXTERNAL :: ZEXP, ZSQRT
     !
     !  Declare local variables.
     !
@@ -487,9 +487,8 @@ CONTAINS
     !
     !  Declare external functions.
     !
-    INTEGER I1MACH
-    REAL(8) :: D1MACH, ZABS
-    EXTERNAL I1MACH, D1MACH, ZABS
+    INTEGER, EXTERNAL :: I1MACH
+    REAL(8), EXTERNAL :: D1MACH, ZABS
     !
     !  Declare local variables.
     !
@@ -865,9 +864,8 @@ CONTAINS
     !
     !  Declare external functions.
     !
-    INTEGER I1MACH
-    REAL(8) :: D1MACH, ZABS
-    EXTERNAL I1MACH, D1MACH, ZABS
+    INTEGER, EXTERNAL :: I1MACH
+    REAL(8), EXTERNAL :: D1MACH, ZABS
     !
     !  Declare local variables.
     !
@@ -1404,9 +1402,9 @@ CONTAINS
     !
     !  Declare external functions.
     !
-    INTEGER I1MACH
-    REAL(8) :: D1MACH, ZABS
-    EXTERNAL I1MACH, D1MACH, ZABS, ZEXP
+    INTEGER, EXTERNAL :: I1MACH
+    REAL(8), EXTERNAL :: D1MACH, ZABS
+    EXTERNAL :: ZEXP
     !
     !  Declare local variables.
     !
@@ -1818,9 +1816,9 @@ CONTAINS
     !
     !  Declare external functions.
     !
-    INTEGER I1MACH
-    REAL(8) :: D1MACH, ZABS
-    EXTERNAL I1MACH, D1MACH, ZABS, ZEXP
+    INTEGER, EXTERNAL :: I1MACH
+    REAL(8), EXTERNAL :: D1MACH, ZABS
+    EXTERNAL :: ZEXP
     !
     !  Declare local variables.
     !
@@ -2217,9 +2215,9 @@ CONTAINS
     !  Declare arguments.
     INTEGER Lun, Kprint, Ipass
     !  Declare external functions.
-    INTEGER I1MACH
-    REAL(8) :: D1MACH, ZABS
-    EXTERNAL I1MACH, D1MACH, ZABS, ZEXP
+    INTEGER, EXTERNAL :: I1MACH
+    REAL(8), EXTERNAL :: D1MACH, ZABS
+    EXTERNAL :: ZEXP
     !
     !  Declare local variables.
     !
@@ -2622,7 +2620,7 @@ PROGRAM TEST10
   !   910411  DATE WRITTEN
   !   920128  Category corrected.  (WRB)
 
-  INTEGER I1MACH
+  INTEGER, EXTERNAL :: I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST10
   lun = I1MACH(2)

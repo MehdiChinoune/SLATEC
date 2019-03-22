@@ -248,7 +248,7 @@ SUBROUTINE SSLUCN(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
     locdz, locil, lociu, lociw, locjl, locju, locl, locnc, &
     locnr, locp, locr, locu, locw, locz, nl, nu
   !     .. External Subroutines ..
-  EXTERNAL SCGN, SCHKW, SS2Y, SSILUS, SSMMTI, SSMTV, SSMV
+  EXTERNAL :: SCGN, SCHKW, SS2Y, SSILUS, SSMMTI, SSMTV, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSLUCN
   !
   Ierr = 0

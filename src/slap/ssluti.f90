@@ -60,7 +60,7 @@ SUBROUTINE SSLUTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !     .. Local Scalars ..
   INTEGER locdin, locil, lociu, locjl, locju, locl, locu
   !     .. External Subroutines ..
-  EXTERNAL SSLUI4
+  EXTERNAL :: SSLUI4
   !* FIRST EXECUTABLE STATEMENT  SSLUTI
   !
   !         Pull out the pointers to the L, D and U matrices and call

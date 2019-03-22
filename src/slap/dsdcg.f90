@@ -244,7 +244,7 @@ SUBROUTINE DSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !     .. Local Scalars ..
   INTEGER locd, locdz, lociw, locp, locr, locw, locz
   !     .. External Subroutines ..
-  EXTERNAL DCG, DCHKW, DS2Y, DSDI, DSDS, DSMV
+  EXTERNAL :: DCG, DCHKW, DS2Y, DSDI, DSDS, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSDCG
   !
   Ierr = 0

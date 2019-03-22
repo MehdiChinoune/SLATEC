@@ -101,7 +101,7 @@ SUBROUTINE DGER(M,N,Alpha,X,Incx,Y,Incy,A,Lda)
   REAL(8) :: temp
   INTEGER i, info, ix, j, jy, kx
   !     .. External Subroutines ..
-  EXTERNAL XERBLA
+  EXTERNAL :: XERBLA
   !     .. Intrinsic Functions ..
   INTRINSIC MAX
   !* FIRST EXECUTABLE STATEMENT  DGER

@@ -45,7 +45,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     , zeta1i(2), zeta2r(2), zeta2i(2), cyr(2), cyi(2), &
     cwrkr(16,3), cwrki(16,3), cssr(3), csrr(3), phir(2), &
     phii(2)
-  EXTERNAL ZABS
+  EXTERNAL :: ZABS
   DATA zeror, zeroi, coner/0.0D0, 0.0D0, 1.0D0/
   DATA pi/3.14159265358979324D0/
   !* FIRST EXECUTABLE STATEMENT  ZUNK1

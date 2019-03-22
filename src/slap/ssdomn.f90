@@ -226,7 +226,7 @@ SUBROUTINE SSDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   INTEGER locap, loccsa, locdin, locdz, locema, lociw, locp, locr, &
     locw, locz
   !     .. External Subroutines ..
-  EXTERNAL SCHKW, SOMN, SS2Y, SSDI, SSDS, SSMV
+  EXTERNAL :: SCHKW, SOMN, SS2Y, SSDI, SSDS, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSDOMN
   !
   Ierr = 0

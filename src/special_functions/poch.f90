@@ -36,11 +36,10 @@ REAL FUNCTION POCH(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
-  
-  REAL A, absa, absax, alnga, alngax, ALNREL, ax, b, COT, FAC, &
-    GAMMA, GAMR, pi, R9LGMC, sgnga, sgngax, X
+
+  REAL A, absa, absax, alnga, alngax, ax, b, pi, sgnga, sgngax, X
   INTEGER i, n
-  EXTERNAL GAMMA
+  REAL, EXTERNAL :: ALNREL, COT, FAC, R9LGMC, GAMR, GAMMA
   SAVE pi
   DATA pi/3.141592653589793238E0/
   !* FIRST EXECUTABLE STATEMENT  POCH
