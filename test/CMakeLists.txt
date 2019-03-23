@@ -105,10 +105,10 @@ target_link_libraries(test_sdrive_02 sdrive )
 add_executable(test_sdrive_03 test_sdrive_03.f90)
 target_link_libraries(test_sdrive_03 sdrive )
 
-add_executable(test_slap_01 test_slap_01.f90 ismpl.f90)
+add_executable(test_slap_01 test_slap_01.f90)
 target_link_libraries(test_slap_01 slap special_functions)
 
-add_executable(test_slap_02 test_slap_02.f90 ismpl.f90)
+add_executable(test_slap_02 test_slap_02.f90)
 target_link_libraries(test_slap_02 slap special_functions)
 
 add_executable(test_specfun_01 test_specfun_01.f90)
