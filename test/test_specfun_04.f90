@@ -84,8 +84,7 @@ CONTAINS
                           IF ( er>tol ) THEN
                             Ipass = 0
                             IF ( Kprint>=2 ) WRITE (Lun,99002) kode, m, n, &
-                              nu, ix, i, x, er, tol, y(i), y(i+1), &
-                              w(i), w(i+1)
+                              nu, ix, i, x, er, tol, y(i), y(i+1), w(i), w(i+1)
                             99002 FORMAT (/' ERROR IN QUICK CHECK OF WRONSKIAN',&
                               1P/' KODE = ',I1,', M = ',I1,', N = ',I1,&
                               ', NU = ',I1,', IX = ',I1,', I = ',&
@@ -547,9 +546,8 @@ CONTAINS
     COMMON /FEINX / X, A, FKM
     INTEGER i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
       kode, kx, Lun, m, n, nm, nz
-    REAL A, ans, atol, bb, en, er, ex, FKM, sig, sum, tol, t1, t2, X, xx, y
+    REAL A, ans, atol, bb, en(4), er, ex, FKM, sig, sum, tol, t1, t2, X, xx(5), y(4)
     REAL R1MACH
-    DIMENSION en(4), y(4), xx(5)
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  EG8CK
     IF ( Kprint>=2 ) WRITE (Lun,99001)

@@ -74,8 +74,7 @@ REAL FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   INTEGER i, Ideriv, Inppv, j, K, Ldc, Lxi, ndummy
-  REAL C, dx, fltk, X, Xi
-  DIMENSION Xi(*), C(Ldc,*)
+  REAL C(Ldc,*), dx, fltk, X, Xi(*)
   !* FIRST EXECUTABLE STATEMENT  PPVAL
   PPVAL = 0.0E0
   IF ( K<1 ) THEN
@@ -90,8 +89,7 @@ REAL FUNCTION PPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
     CALL XERMSG('SLATEC','PPVAL','LXI DOES NOT SATISFY LXI.GE.1',2,1)
     RETURN
   ELSEIF ( Ideriv<0.OR.Ideriv>=K ) THEN
-    CALL XERMSG('SLATEC','PPVAL','IDERIV DOES NOT SATISFY 0.LE.IDERIV.LT.K',&
-      2,1)
+    CALL XERMSG('SLATEC','PPVAL','IDERIV DOES NOT SATISFY 0.LE.IDERIV.LT.K',2,1)
     RETURN
   ELSE
     i = K - Ideriv

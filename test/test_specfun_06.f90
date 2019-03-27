@@ -48,9 +48,8 @@ CONTAINS
     INTEGER Ipass, Kprint
     INTEGER i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, mm, n, ndel, nn, nz
     INTEGER I1MACH
-    REAL aix, er, tol, v, x, xinc, y
+    REAL aix, er, tol, v(1), x, xinc, y(10)
     REAL R1MACH
-    DIMENSION v(1), y(10)
     !* FIRST EXECUTABLE STATEMENT  QCKIN
     tol = 1000.0E0*MAX(R1MACH(4),1.0E-18)
     iflg = 0
@@ -176,9 +175,8 @@ CONTAINS
     
     INTEGER Ipass, Kprint
     INTEGER i, ierr, iflg, ix, kode, Lun, m, n, nm, nn, nz
-    REAL er, euler, psi1, psi2, r1m4, s, tol, x
+    REAL er, euler, psi1(3), psi2(20), r1m4, s, tol, x
     REAL R1MACH
-    DIMENSION psi1(3), psi2(20)
     DATA euler/0.5772156649015328606E0/
     !* FIRST EXECUTABLE STATEMENT  QCPSI
     r1m4 = R1MACH(4)
@@ -203,8 +201,7 @@ CONTAINS
               IF ( Kprint>=2 ) WRITE (Lun,99004)
             ENDIF
             iflg = iflg + 1
-            IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), er, &
-              kode, n
+            IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), er, kode, n
             IF ( iflg>200 ) GOTO 100
           ENDIF
           s = s + 1.0E0/x
@@ -248,8 +245,7 @@ CONTAINS
                   IF ( Kprint>=2 ) WRITE (Lun,99004)
                 ENDIF
                 iflg = iflg + 1
-                IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), &
-                  er, kode, nm
+                IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), er, kode, nm
               ENDIF
             ENDDO
           ENDDO

@@ -82,9 +82,8 @@ SUBROUTINE BSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
   
   !
   INTEGER Ileft, imjp1, Index, ipj, Iwork, Jhigh, jp1, jp1ml, K, l
-  REAL T, vm, vmprev, Vnikx, Work, X
+  REAL T(*), vm, vmprev, Vnikx(*), Work(*), X
   !     DIMENSION T(ILEFT+JHIGH)
-  DIMENSION T(*), Vnikx(*), Work(*)
   !     CONTENT OF J, DELTAM, DELTAP IS EXPECTED UNCHANGED BETWEEN CALLS.
   !     WORK(I) = DELTAP(I), WORK(K+I) = DELTAM(I), I = 1,K
   !* FIRST EXECUTABLE STATEMENT  BSPVN
@@ -94,8 +93,7 @@ SUBROUTINE BSPVN(T,Jhigh,K,Index,X,Ileft,Vnikx,Work,Iwork)
     CALL XERMSG('SLATEC','BSPVN','K DOES NOT SATISFY K.GE.1',2,1)
     RETURN
   ELSEIF ( Jhigh>K.OR.Jhigh<1 ) THEN
-    CALL XERMSG('SLATEC','BSPVN','JHIGH DOES NOT SATISFY 1.LE.JHIGH.LE.K',2,&
-      1)
+    CALL XERMSG('SLATEC','BSPVN','JHIGH DOES NOT SATISFY 1.LE.JHIGH.LE.K',2,1)
     RETURN
   ELSEIF ( Index<1.OR.Index>2 ) THEN
     CALL XERMSG('SLATEC','BSPVN','INDEX IS NOT 1 OR 2',2,1)

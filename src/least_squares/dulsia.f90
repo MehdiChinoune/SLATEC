@@ -178,11 +178,10 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL(8) :: A, Ae, B, eps, Re, Rnorm, W
   INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, m1, m2, &
     m3, m4, m5, Mda, Mdb, Mode, N, Nb, Np
+  REAL(8) :: A(Mda,*), Ae(*), B(Mdb,*), eps, Re(*), Rnorm(*), W(*)
   REAL(8) :: D1MACH
-  DIMENSION A(Mda,*), B(Mdb,*), Re(*), Ae(*), Rnorm(*), W(*)
   INTEGER Iwork(*)
   !
   !* FIRST EXECUTABLE STATEMENT  DULSIA
@@ -197,8 +196,7 @@ SUBROUTINE DULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,&
       !     ERROR MESSAGES
       !
       CALL XERMSG('SLATEC','DULSIA',&
-        'SOLUTION ONLY (INFO=1) BUT NO RIGHT HAND SIDE (NB=0)',1,&
-        0)
+        'SOLUTION ONLY (INFO=1) BUT NO RIGHT HAND SIDE (NB=0)',1,0)
       RETURN
     ELSEIF ( M<1 ) THEN
       CALL XERMSG('SLATEC','DULSIA','M.LT.1',2,1)

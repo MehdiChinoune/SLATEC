@@ -62,13 +62,11 @@ SUBROUTINE SMOUT(M,N,Lda,A,Ifmt,Idigit)
   !           statements.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
-  REAL A
+
   INTEGER i, I1MACH, Idigit, j, k1, k2, Lda, lout, M, N, ndigit
-  DIMENSION A(Lda,*)
-  CHARACTER Ifmt*(*), icol*3
-  SAVE icol
-  DATA icol/'COL'/
+  REAL A(Lda,*)
+  CHARACTER Ifmt*(*)
+  CHARACTER(3), PARAMETER :: icol = 'COL'
   !* FIRST EXECUTABLE STATEMENT  SMOUT
   lout = I1MACH(2)
   WRITE (lout,Ifmt)

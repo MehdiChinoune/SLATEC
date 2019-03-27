@@ -31,10 +31,8 @@ SUBROUTINE BSPLVD(T,K,X,Ileft,Vnikx,Nderiv)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   
-  REAL a, diff, fkmd, T, v, Vnikx, X
   INTEGER i, ideriv, idervm, Ileft, ipkmd, j, jlow, jm1, K, kmd, l, m, Nderiv
-  DIMENSION T(*), Vnikx(K,*)
-  DIMENSION a(20,20)
+  REAL a(20,20), diff, fkmd, T(*), v, Vnikx(K,*), X
   !* FIRST EXECUTABLE STATEMENT  BSPLVD
   CALL BSPLVN(T,K+1-Nderiv,1,X,Ileft,Vnikx(Nderiv,Nderiv))
   IF ( Nderiv>1 ) THEN

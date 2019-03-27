@@ -113,17 +113,15 @@ SUBROUTINE TRIDIB(N,Eps1,D,E,E2,Lb,Ub,M11,M,W,Ind,Ierr,Rv4,Rv5)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL R1MACH
-  INTEGER i, j, k, l, M, N, p, q, r, s, ii, m1, m2, M11, m22, &
-    tag, Ierr, isturm
+  INTEGER i, j, k, l, M, N, p, q, r, s, ii, m1, m2, M11, m22, tag, Ierr, isturm
   REAL D(*), E(*), E2(*), W(*), Rv4(*), Rv5(*)
   REAL u, v, Lb, t1, t2, Ub, xu, x0, x1, Eps1, machep, s1, s2
   INTEGER Ind(*)
-  LOGICAL first
   !
-  SAVE first, machep
-  DATA first/.TRUE./
+  SAVE machep
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  TRIDIB
   IF ( first ) machep = R1MACH(4)
   first = .FALSE.

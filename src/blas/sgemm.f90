@@ -207,8 +207,7 @@ SUBROUTINE SGEMM(Transa,Transb,M,N,K,Alpha,A,Lda,B,Ldb,Beta,C,Ldc)
   !
   !     Quick return if possible.
   !
-  IF ( (M==0).OR.(N==0).OR.(((Alpha==ZERO).OR.(K==0)).AND.(Beta==ONE)) )&
-    RETURN
+  IF ( (M==0).OR.(N==0).OR.(((Alpha==ZERO).OR.(K==0)).AND.(Beta==ONE)) ) RETURN
   !
   !     And if  alpha.eq.zero.
   !

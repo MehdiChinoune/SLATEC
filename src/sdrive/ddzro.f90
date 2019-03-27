@@ -63,8 +63,7 @@ SUBROUTINE DDZRO(Ae,F,H,N,Nq,Iroot,Re,T,Yh,Uround,B,C,Fb,Fc,Y)
   
   INTEGER ic, Iroot, kount, N, Nq
   REAL(8) :: a, acbs, acmb, Ae, B, C, cmb, er, F, fa, Fb, &
-    Fc, H, p, q, Re, rw, T, tol, Uround, Y(*), &
-    Yh(N,*)
+    Fc, H, p, q, Re, rw, T, tol, Uround, Y(*), Yh(N,*)
   !* FIRST EXECUTABLE STATEMENT  DDZRO
   er = 4.D0*Uround
   rw = MAX(Re,er)

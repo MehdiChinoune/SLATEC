@@ -200,10 +200,9 @@ SUBROUTINE BNDSOL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL G, Rnorm, rsq, s, X, zero
   INTEGER i, i1, i2, ie, ii, iopt, Ip, Ir, irm1, ix, j, jg, l, &
     Mdg, Mode, N, Nb, nerr, np1
-  DIMENSION G(Mdg,*), X(*)
+  REAL G(Mdg,*), Rnorm, rsq, s, X(*), zero
   !* FIRST EXECUTABLE STATEMENT  BNDSOL
   zero = 0.
   !

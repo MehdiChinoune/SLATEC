@@ -1,7 +1,6 @@
 !** SNLS1
 SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
-    Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,Ipvt,Qtf,&
-    Wa1,Wa2,Wa3,Wa4)
+    Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,Ipvt,Qtf,Wa1,Wa2,Wa3,Wa4)
   IMPLICIT NONE
   !>
   !***
@@ -613,12 +612,11 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint, Info, Nfev, &
-    Njev
+  INTEGER Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint, Info, Nfev, Njev
   INTEGER ijunk, nrow, Ipvt(*)
   REAL Ftol, Xtol, Gtol, Factor, Epsfcn
-  REAL X(*), Fvec(*), Fjac(Ldfjac,*), Diag(*), Qtf(*), Wa1(*), Wa2(*)&
-    , Wa3(*), Wa4(*)
+  REAL X(*), Fvec(*), Fjac(Ldfjac,*), Diag(*), Qtf(*), Wa1(*), Wa2(*), &
+    Wa3(*), Wa4(*)
   LOGICAL sing
   EXTERNAL :: FCN
   INTEGER i, iflag, iter, j, l, modech
@@ -729,8 +727,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
           WRITE (xern1,'(I8)') i
           WRITE (xern3,'(1PE15.6)') err
           CALL XERMSG('SLATEC','SNLS1','DERIVATIVE OF FUNCTION '//xern1//&
-            ' MAY BE WRONG, ERR = '//xern3//' TOO CLOSE TO 0.',7,&
-            0)
+            ' MAY BE WRONG, ERR = '//xern3//' TOO CLOSE TO 0.',7,0)
         ENDIF
       ENDIF
       !
@@ -806,8 +803,7 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
             WRITE (xern1,'(I8)') i
             WRITE (xern3,'(1PE15.6)') err
             CALL XERMSG('SLATEC','SNLS1','DERIVATIVE OF FUNCTION '//&
-              xern1//' MAY BE WRONG, ERR = '//xern3//&
-              ' TOO CLOSE TO 0.',7,0)
+              xern1//' MAY BE WRONG, ERR = '//xern3//' TOO CLOSE TO 0.',7,0)
           ENDIF
         ENDDO
         !
@@ -983,15 +979,13 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       !
       IF ( ABS(actred)<=Ftol.AND.prered<=Ftol.AND.p5*ratio<=one ) Info = 1
       IF ( delta<=Xtol*xnorm ) Info = 2
-      IF ( ABS(actred)<=Ftol.AND.prered<=Ftol.AND.p5*ratio<=one.AND.&
-        Info==2 ) Info = 3
+      IF ( ABS(actred)<=Ftol.AND.prered<=Ftol.AND.p5*ratio<=one.AND.Info==2 ) Info = 3
       IF ( Info/=0 ) EXIT
       !
       !           TESTS FOR TERMINATION AND STRINGENT TOLERANCES.
       !
       IF ( Nfev>=Maxfev ) Info = 5
-      IF ( ABS(actred)<=epsmch.AND.prered<=epsmch.AND.p5*ratio<=one )&
-        Info = 6
+      IF ( ABS(actred)<=epsmch.AND.prered<=epsmch.AND.p5*ratio<=one ) Info = 6
       IF ( delta<=epsmch*xnorm ) Info = 7
       IF ( gnorm<=epsmch ) Info = 8
       IF ( Info/=0 ) EXIT

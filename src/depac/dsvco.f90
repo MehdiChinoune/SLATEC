@@ -35,9 +35,8 @@ SUBROUTINE DSVCO(Rsav,Isav)
   ! RSAV = DOUBLE PRECISION ARRAY OF LENGTH 218 OR MORE.
   ! ISAV = INTEGER ARRAY OF LENGTH 33 OR MORE.
   !-----------------------------------------------------------------------
-  INTEGER i, ILS, Isav, lenils, lenrls
-  REAL(8) :: RLS, Rsav
-  DIMENSION Rsav(*), Isav(*)
+  INTEGER i, ILS, Isav(*), lenils, lenrls
+  REAL(8) :: RLS, Rsav(*)
   SAVE lenrls, lenils
   COMMON /DDEBD1/ RLS(218), ILS(33)
   DATA lenrls/218/, lenils/33/

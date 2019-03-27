@@ -72,8 +72,7 @@ SUBROUTINE DINTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   
   !
   INTEGER ihi, Ileft, Ilo, istep, Lxt, Mflag, middle
-  REAL(8) :: X, Xt
-  DIMENSION Xt(*)
+  REAL(8) :: X, Xt(*)
   !* FIRST EXECUTABLE STATEMENT  DINTRV
   ihi = Ilo + 1
   IF ( ihi>=Lxt ) THEN

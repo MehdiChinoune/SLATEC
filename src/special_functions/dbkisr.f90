@@ -28,15 +28,13 @@ SUBROUTINE DBKISR(X,N,Sum,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   INTEGER i, Ierr, k, kk, kkn, k1, N, np
-  REAL(8) :: ak, atol, bk, c, fk, fn, hx, hxs, pol, pr, &
+  REAL(8) :: ak, atol, bk, fk, fn, hx, hxs, pol, pr, &
     Sum, tkp, tol, trm, X, xln
   REAL(8) :: DPSIXN, D1MACH
-  DIMENSION c(2)
-  SAVE c
   !
-  DATA c(1), c(2)/1.57079632679489662D+00, 1.0D0/
+  REAL(8), PARAMETER :: c(2) = [ 1.57079632679489662D+00, 1.0D0 ]
   !* FIRST EXECUTABLE STATEMENT  DBKISR
   Ierr = 0
   tol = MAX(D1MACH(4),1.0D-18)

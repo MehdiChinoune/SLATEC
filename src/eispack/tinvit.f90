@@ -116,8 +116,7 @@ SUBROUTINE TINVIT(Nm,N,D,E,E2,M,W,Ind,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv6)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   !
-  INTEGER i, j, M, N, p, q, r, s, ii, ip, jj, Nm, its, tag, &
-    Ierr, group
+  INTEGER i, j, M, N, p, q, r, s, ii, ip, jj, Nm, its, tag, Ierr, group
   INTEGER Ind(*)
   REAL D(*), E(*), E2(*), W(*), Z(Nm,*)
   REAL Rv1(*), Rv2(*), Rv3(*), Rv4(*), Rv6(*)

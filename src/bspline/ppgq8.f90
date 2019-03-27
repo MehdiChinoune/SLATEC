@@ -77,14 +77,12 @@ SUBROUTINE PPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
     END FUNCTION
   END INTERFACE
   INTEGER Id, Ierr, Inppv, k, Kk, kml, kmx, l, Ldc, lmn, lmx, &
-    lr, Lxi, mxl, nbits, nib, nlmn, nlmx
+    lr(30), Lxi, mxl, nbits, nib, nlmn, nlmx
   INTEGER I1MACH
-  REAL A, aa, ae, anib, Ans, area, B, be, C, cc, ee, ef, eps, &
-    Err, est, gl, glr, gr, hh, sq2, tol, vl, vr, w1, w2, w3, &
-    w4, Xi, x1, x2, x3, x4
+  REAL A, aa(30), ae, anib, Ans, area, B, be, C(Ldc,*), cc, ee, ef, eps, &
+    Err, est, gl, glr, gr(30), hh(30), sq2, tol, vl(30), vr, w1, w2, w3, w4, &
+    Xi(*), x1, x2, x3, x4
   REAL R1MACH
-  DIMENSION Xi(*), C(Ldc,*)
-  DIMENSION aa(30), hh(30), lr(30), vl(30), gr(30)
   SAVE x1, x2, x3, x4, w1, w2, w3, w4, sq2, nlmn, kmx, kml
   DATA x1, x2, x3, x4/1.83434642495649805E-01, 5.25532409916328986E-01, &
     7.96666477413626740E-01, 9.60289856497536232E-01/

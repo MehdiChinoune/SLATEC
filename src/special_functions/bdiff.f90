@@ -29,8 +29,7 @@ SUBROUTINE BDIFF(L,V)
   !   900328  Added TYPE section.  (WRB)
   
   INTEGER i, j, k, L
-  REAL V
-  DIMENSION V(*)
+  REAL V(*)
   !* FIRST EXECUTABLE STATEMENT  BDIFF
   IF ( L==1 ) RETURN
   DO j = 2, L

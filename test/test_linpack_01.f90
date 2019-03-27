@@ -41,25 +41,26 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    
+
     INTEGER Kprint, Lun, Nerr
-    COMPLEX a(4,4), work(4), at(5,4), af(4,4)
-    INTEGER lda, p, jpvt(4), job, info, jpvtt(4), i, j, infoc, jpvtc(4)
-    CHARACTER(20) :: kfail
+    COMPLEX work(4), at(5,4)
+    INTEGER lda, p, job, info, jpvtt(4), i, j, infoc
     INTEGER indx
     REAL delx
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,-1.E0), (4.E0,0.E0)/
-    DATA jpvt/0, -1, 1, 0/
-    DATA af/(1.73205E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+      (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
+    INTEGER, PARAMETER :: jpvt(4) = [ 0, -1, 1, 0 ]
+    COMPLEX, PARAMETER :: af(4,4) = RESHAPE( [ &
+      (1.73205E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-.57735E0), (1.91485E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (1.41421E0,0.E0), (0.E0,1.E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-.70711E0), (1.22475E0,0.E0)/
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-.70711E0), (1.22475E0,0.E0) ], [4,4] )
     DATA infoc/4/
-    DATA jpvtc/3, 4, 1, 2/
-    DATA kfail/'FACTORING JPVT INFO '/
+    INTEGER, PARAMETER :: jpvtc(4) = [ 3, 4, 1, 2 ]
+    CHARACTER(20), PARAMETER :: kfail = 'FACTORING JPVT INFO '
     !* FIRST EXECUTABLE STATEMENT  CCHQC
     job = 1
     lda = 5
@@ -155,24 +156,23 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, moved an ARITHMETIC
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
-    
+
     INTEGER Kprint, Lun
-    COMPLEX abd(6,4), at(7,4), b(4), bt(4), c(4), det(2), dc(2), z(4)
+    COMPLEX at(7,4), bt(4), det(2), z(4)
     REAL r, rcond, rcnd, CABS1
-    CHARACTER kfail*39, kprog*19
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
     INTEGER ml, mu
-    DATA abd/(0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0)&
-      , (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0), &
-      (0.E0,0.E0)/
-    DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
-    DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA dc/(3.3E0,0.E0), (1.0E0,0.E0)/
-    DATA kprog/'GBFA GBCO GBSL GBDI'/
-    DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
+    COMPLEX, PARAMETER :: abd(6,4) = RESHAPE( [ &
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (2.E0,0.E0), (0.E0,1.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0), (0.E0,0.E0) ], &
+      [6,4] )
+    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX, PARAMETER :: dc(2) = [ (3.3E0,0.E0), (1.0E0,0.E0) ]
+    CHARACTER(19), PARAMETER :: kprog = 'GBFA GBCO GBSL GBDI'
+    CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
     DATA rcnd/.24099E0/
     !* FIRST EXECUTABLE STATEMENT  CGBQC
     lda = 7
@@ -300,25 +300,26 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    
+
     INTEGER Kprint, Lun
-    COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), det(2), dc(2), z(4)
+    COMPLEX at(5,4), bt(4), det(2), z(4)
     REAL r, rcond, rcnd, CABS1
-    CHARACTER kprog*19, kfail*39
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,-1.E0), (4.E0,0.E0)/
-    DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
-    DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA ainv/(.66667E0,0.E0), (0.E0,-.33333E0), (0.E0,0.E0), (0.E0,0.E0), &
+    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+      (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
+    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX, PARAMETER :: ainv(4,4) = RESHAPE( [ &
+      (.66667E0,0.E0), (0.E0,-.33333E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,.33333E0), (.66667E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,-.09091E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0)/
-    DATA dc/(3.3E0,0.E0), (1.0E0,0.E0)/
-    DATA kprog/'GEFA GECO GESL GEDI'/
-    DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0) ], [4,4] )
+    COMPLEX, PARAMETER :: dc(2) = [ (3.3E0,0.E0), (1.0E0,0.E0) ]
+    CHARACTER(19), PARAMETER :: kprog = 'GEFA GECO GESL GEDI'
+    CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
     DATA rcnd/.24099E0/
     !* FIRST EXECUTABLE STATEMENT  CGECK
     lda = 5
@@ -453,18 +454,17 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, moved an ARITHMETIC
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
-    
+
     INTEGER Kprint, Lun
-    COMPLEX c(4), d(4), e(4), b(4), cx(4), ct(4), dt(4), et(4), bt(4)
-    CHARACTER kfail*13
+    COMPLEX ct(4), dt(4), et(4), bt(4)
     INTEGER n, info, i, indx, Nerr
     REAL delx, CABS1
-    DATA c/(0.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,1.E0)/
-    DATA d/(2.E0,0.E0), (2.E0,0.E0), (3.E0,0.E0), (4.E0,0.E0)/
-    DATA e/(0.E0,-1.E0), (0.E0,0.E0), (0.E0,-1.E0), (0.E0,0.E0)/
-    DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
-    DATA cx/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA kfail/'INFO SOLUTION'/
+    COMPLEX, PARAMETER :: c(4) = [ (0.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,1.E0) ]
+    COMPLEX, PARAMETER :: d(4) = [ (2.E0,0.E0), (2.E0,0.E0), (3.E0,0.E0), (4.E0,0.E0) ]
+    COMPLEX, PARAMETER :: e(4) = [ (0.E0,-1.E0), (0.E0,0.E0), (0.E0,-1.E0), (0.E0,0.E0) ]
+    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX, PARAMETER :: cx(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    CHARACTER(13), PARAMETER :: kfail = 'INFO SOLUTION'
     !* FIRST EXECUTABLE STATEMENT  CGTQC
     n = 4
     Nerr = 0
@@ -540,28 +540,28 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    
+
     INTEGER Kprint, Lun
-    COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), z(4)
-    REAL r, rcond, rcnd, CABS1, det(2), dc(2)
-    CHARACTER kprog*19, kfail*47
-    INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
-    INTEGER inert(3), irt(3)
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,-1.E0), (4.E0,0.E0)/
-    DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
-    DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA ainv/(.66667E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+    COMPLEX at(5,4), bt(4), z(4)
+    REAL r, rcond, rcnd, CABS1, det(2)
+    INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr, inert(3)
+    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+      (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
+    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX, PARAMETER :: ainv(4,4) = RESHAPE( [ &
+      (.66667E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,.33333E0), (.66667E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,1.E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0)/
-    DATA dc/3.3E0, 1.0E0/
-    DATA kprog/'HIFA HICO HISL HIDI'/
-    DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE INERTIA'/
-    DATA rcnd/.24099E0/
-    DATA irt/4, 0, 0/
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0) ], [4,4] )
+    REAL, PARAMETER :: dc(2) = [ 3.3E0, 1.0E0 ]
+    CHARACTER(19), PARAMETER :: kprog = 'HIFA HICO HISL HIDI'
+    CHARACTER(47), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE INERTIA'
+    DATA rcnd /.24099E0/
+    INTEGER, PARAMETER :: irt(3) = [ 4, 0, 0 ]
     !* FIRST EXECUTABLE STATEMENT  CHIQC
     lda = 5
     n = 4
@@ -694,25 +694,24 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    
+
     INTEGER Kprint, Lun
-    COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), z(4)
-    REAL r, rcond, rcnd, CABS1, det(2), dc(2)
-    CHARACTER kprog*19, kfail*47
-    INTEGER n, ipvt(4), info, i, j, indx, Nerr
-    INTEGER inert(3), irt(3)
-    DATA ap/(2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0)/
-    DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
-    DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA ainv/(.66667E0,0.E0), (0.E0,.33333E0), (.66667E0,0.E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,0.E0), &
-      (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0)/
-    DATA dc/3.3E0, 1.0E0/
-    DATA kprog/'HPFA HPCO HPSL HPDI'/
-    DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE INERTIA'/
-    DATA rcnd/.24099E0/
-    DATA irt/4, 0, 0/
+    COMPLEX at(10), bt(4), z(4)
+    REAL r, rcond, rcnd, CABS1, det(2)
+    INTEGER n, ipvt(4), info, i, j, indx, Nerr, inert(3)
+    COMPLEX, PARAMETER :: ap(10) = [ (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,-1.E0), (4.E0,0.E0) ]
+    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX, PARAMETER :: ainv(10) = [ (.66667E0,0.E0), (0.E0,.33333E0), &
+      (.66667E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0) ]
+    REAL, PARAMETER :: dc(2) = [ 3.3E0, 1.0E0 ]
+    CHARACTER(19), PARAMETER :: kprog = 'HPFA HPCO HPSL HPDI'
+    CHARACTER(47), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE INERTIA'
+    DATA rcnd /.24099E0/
+    INTEGER, PARAMETER :: irt(3) = [ 4, 0, 0 ]
     !* FIRST EXECUTABLE STATEMENT  CHPQC
     n = 4
     Nerr = 0
@@ -840,19 +839,19 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    
+
     INTEGER Kprint, Lun
-    COMPLEX abd(2,4), at(3,4), b(4), bt(4), c(4), z(4)
-    REAL r, rcond, rcnd, CABS1, det(2), dc(2)
-    CHARACTER kprog*19, kfail*39
+    COMPLEX at(3,4), bt(4), z(4)
+    REAL r, rcond, rcnd, CABS1, det(2)
     INTEGER lda, n, info, i, j, indx, Nerr, m
-    DATA abd/(0.E0,0.E0), (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
-      (0.E0,0.E0), (3.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0)/
-    DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
-    DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA dc/3.3E0, 1.0E0/
-    DATA kprog/'PBFA PBCO PBSL PBDI'/
-    DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
+    COMPLEX, PARAMETER :: abd(2,4) = RESHAPE( [ (0.E0,0.E0), (2.E0,0.E0), &
+      (0.E0,-1.E0), (2.E0,0.E0),   (0.E0,0.E0), (3.E0,0.E0), &
+      (0.E0,-1.E0), (4.E0,0.E0) ], [2,4] )
+    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    REAL, PARAMETER :: dc(2) = [ 3.3E0, 1.0E0 ]
+    CHARACTER(19), PARAMETER :: kprog = 'PBFA PBCO PBSL PBDI'
+    CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
     DATA rcnd/.24099E0/
     !* FIRST EXECUTABLE STATEMENT  CPBQC
     lda = 3
@@ -970,25 +969,26 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    
+
     INTEGER Kprint, Lun
-    COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), z(4)
-    REAL r, rcond, rcnd, CABS1, det(2), dc(2)
-    CHARACTER kprog*19, kfail*39
+    COMPLEX at(5,4), bt(4), z(4)
+    REAL r, rcond, rcnd, CABS1, det(2)
     INTEGER lda, n, info, i, j, indx, Nerr
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,-1.E0), (4.E0,0.E0)/
-    DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
-    DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA ainv/(.66667E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+      (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
+    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX, PARAMETER :: ainv(4,4) = RESHAPE( [ &
+      (.66667E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,.33333E0), (.66667E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,1.E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0)/
-    DATA dc/3.3E0, 1.0E0/
-    DATA kprog/'POFA POCO POSL PODI'/
-    DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0) ], [4,4] )
+    REAL, PARAMETER :: dc(2) = [ 3.3E0, 1.0E0 ]
+    CHARACTER(19), PARAMETER :: kprog = 'POFA POCO POSL PODI'
+    CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
     DATA rcnd/.24099E0/
     !* FIRST EXECUTABLE STATEMENT  CPOQC
     lda = 5
@@ -1118,23 +1118,22 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    
+
     INTEGER Kprint, Lun
-    COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), z(4)
-    REAL r, rcond, rcnd, CABS1, det(2), dc(2)
-    CHARACTER kprog*19, kfail*39
+    COMPLEX at(10), bt(4), z(4)
+    REAL r, rcond, rcnd, CABS1, det(2)
     INTEGER n, info, i, j, indx, Nerr
-    DATA ap/(2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0)&
-      , (4.E0,0.E0)/
-    DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
-    DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA ainv/(.66667E0,0.E0), (0.E0,.33333E0), (.66667E0,0.E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,0.E0), &
-      (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0)/
-    DATA dc/3.3E0, 1.0E0/
-    DATA kprog/'PPFA PPCO PPSL PPDI'/
-    DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
+    COMPLEX, PARAMETER :: ap(10) = [ (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,-1.E0), (4.E0,0.E0) ]
+    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX, PARAMETER :: ainv(10) = [ (.66667E0,0.E0), (0.E0,.33333E0), &
+      (.66667E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (.36364E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,.09091E0), (.27273E0,0.E0) ]
+    REAL, PARAMETER :: dc(2) = [ 3.3E0, 1.0E0 ]
+    CHARACTER(19), PARAMETER :: kprog = 'PPFA PPCO PPSL PPDI'
+    CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
     DATA rcnd/.24099E0/
     !* FIRST EXECUTABLE STATEMENT  CPPQC
     n = 4
@@ -1255,15 +1254,15 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    
+
     INTEGER Kprint, Lun
-    COMPLEX d(4), e(4), b(4), cx(4), dt(4), et(4), bt(4)
+    COMPLEX dt(4), et(4), bt(4)
     INTEGER n, i, indx, Nerr
     REAL delx, CABS1
-    DATA d/(2.E0,0.E0), (2.E0,0.E0), (3.E0,0.E0), (4.E0,0.E0)/
-    DATA e/(0.E0,-1.E0), (0.E0,0.E0), (0.E0,-1.E0), (0.E0,0.E0)/
-    DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
-    DATA cx/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
+    COMPLEX, PARAMETER :: d(4) = [ (2.E0,0.E0), (2.E0,0.E0), (3.E0,0.E0), (4.E0,0.E0) ]
+    COMPLEX, PARAMETER :: e(4) = [ (0.E0,-1.E0), (0.E0,0.E0), (0.E0,-1.E0), (0.E0,0.E0) ]
+    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX, PARAMETER :: cx(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
     !* FIRST EXECUTABLE STATEMENT  CPTQC
     n = 4
     Nerr = 0
@@ -1330,37 +1329,36 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, moved an ARITHMETIC
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
-    
+
     INTEGER Kprint, Lun
-    COMPLEX a(4,4), qraux(4), work(4), y(4), qy(4), qty(4), b(4), rsd(4), xb(4)
-    COMPLEX at(5,4), ac(4,4), qrauxc(4), qyc(4), qtyc(4), bc(4), rsdc(4), xbc(4)
-    CHARACTER kprog*9, kfail*75
-    INTEGER ldx, n, p, jpvt(4), job, k, info
-    INTEGER jpvtt(4), jpvtc(4), i, j, indx(5), Nerr, l
+    COMPLEX qraux(4), work(4), qy(4), qty(4), b(4), rsd(4), xb(4), at(5,4)
+    INTEGER ldx, n, p, job, k, infO, jpvtt(4), i, j, indx(5), Nerr, l
     REAL CABS1
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,-1.E0), (4.E0,0.E0)/
-    DATA jpvt/0, -1, 1, 0/
-    DATA y/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
-    DATA ac/(-3.16228E0,0.E0), (0.E0,0.E0), (.94868E0,0.E0), &
-      (0.E0,.31623E0), (0.E0,2.21359E0), (-3.47851E0,0.E0), &
-      (0.E0,.31623E0), (.94868E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (2.23607E0,0.E0), (0.E0,.70711E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,-1.78885E0), (-1.34164E0,0.E0)/
-    DATA qrauxc/(1.E0,0.E0), (1.E0,0.E0), (1.70711E0,0.E0), (0.E0,0.E0)/
-    DATA jpvtc/3, 4, 1, 2/
-    DATA qyc/(0.E0,-5.81378E0), (-2.68328E0,0.E0), (-1.89737E0,-1.58114E0), &
-      (1.58114E0,-3.79473E0)/
-    DATA qtyc/(0.E0,5.37587E0), (-3.47851E0,0.E0), (4.02492E0,2.23607E0), &
-      (0.E0,-1.34164E0)/
-    DATA bc/(0.E0,-1.E0), (1.E0,0.E0), (1.E0,1.E0), (0.E0,1.E0)/
-    DATA rsdc/(0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)/
-    DATA xbc/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
-    DATA kprog/'QRDC QRSL'/
-    DATA kfail/&
-      'FACTOR QRAUX  JPVT  QY        QTY       SOLUTION  RSD        XB        INFO'/
+    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+      (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0),  (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
+    INTEGER, PARAMETER :: jpvt(4) = [ 0, -1, 1, 0 ]
+    COMPLEX, PARAMETER :: y(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    COMPLEX, PARAMETER :: ac(4,4) = RESHAPE( [ &
+      (-3.16228E0,0.E0), (0.E0,0.E0), (.94868E0,0.E0), (0.E0,.31623E0), &
+      (0.E0,2.21359E0), (-3.47851E0,0.E0), (0.E0,.31623E0), (.94868E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (2.23607E0,0.E0), (0.E0,.70711E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.78885E0), (-1.34164E0,0.E0) ], [4,4] )
+    COMPLEX, PARAMETER :: qrauxc(4) = [ (1.E0,0.E0), (1.E0,0.E0), &
+      (1.70711E0,0.E0), (0.E0,0.E0) ]
+    INTEGER, PARAMETER :: jpvtc(4) = [ 3, 4, 1, 2 ]
+    COMPLEX, PARAMETER :: qyc(4) = [ (0.E0,-5.81378E0), (-2.68328E0,0.E0), &
+      (-1.89737E0,-1.58114E0), (1.58114E0,-3.79473E0) ]
+    COMPLEX, PARAMETER :: qtyc(4) = [ (0.E0,5.37587E0), (-3.47851E0,0.E0), &
+      (4.02492E0,2.23607E0), (0.E0,-1.34164E0) ]
+    COMPLEX, PARAMETER :: bc(4) = [ (0.E0,-1.E0), (1.E0,0.E0), (1.E0,1.E0), (0.E0,1.E0) ]
+    COMPLEX, PARAMETER :: rsdc(4) = [ (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ]
+    COMPLEX, PARAMETER :: xbc(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    CHARACTER(9), PARAMETER :: kprog = 'QRDC QRSL'
+    CHARACTER(75), PARAMETER :: kfail = 'FACTOR QRAUX  JPVT  QY        QTY       &
+      &SOLUTION  RSD        XB        INFO'
     !* FIRST EXECUTABLE STATEMENT  CQRQC
     ldx = 5
     n = 4
@@ -1487,25 +1485,26 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    
+
     INTEGER Kprint, Lun
-    COMPLEX a(4,4), at(5,4), b(4), bt(4), c(4), ainv(4,4), det(2), dc(2), z(4)
+    COMPLEX at(5,4), bt(4), det(2), z(4)
     REAL r, rcond, rcnd, CABS1
-    CHARACTER kprog*19, kfail*39
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,-1.E0), (4.E0,0.E0)/
-    DATA b/(3.E0,2.E0), (1.E0,1.E0), (0.E0,-4.E0), (3.E0,0.E0)/
-    DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA ainv/(.40000E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+      (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
+    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (1.E0,1.E0), (0.E0,-4.E0), (3.E0,0.E0) ]
+    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX, PARAMETER :: ainv(4,4) = RESHAPE( [ &
+      (.40000E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,.20000E0), (.40000E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (.30769E0,0.E0), (0.E0,1.E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (0.E0,.07692E0), (.23077E0,0.E0)/
-    DATA dc/(6.5E0,0.E0), (1.0E0,0.E0)/
-    DATA kprog/'SIFA SICO SISL SIDI'/
-    DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,.07692E0), (.23077E0,0.E0) ], [4,4] )
+    COMPLEX, PARAMETER :: dc(2) = [ (6.5E0,0.E0), (1.0E0,0.E0) ]
+    CHARACTER(19), PARAMETER :: kprog = 'SIFA SICO SISL SIDI'
+    CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
     DATA rcnd/.58692E0/
     !* FIRST EXECUTABLE STATEMENT  CSIQC
     lda = 5
@@ -1629,23 +1628,22 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    
+
     INTEGER Kprint, Lun
-    COMPLEX ap(10), at(10), b(4), bt(4), c(4), ainv(10), det(2), dc(2), z(4)
+    COMPLEX at(10), bt(4), det(2), z(4)
     REAL r, rcond, rcnd, CABS1
-    CHARACTER kprog*19, kfail*39
     INTEGER n, ipvt(4), info, i, j, indx, Nerr
-    DATA ap/(2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0)&
-      , (4.E0,0.E0)/
-    DATA b/(3.E0,2.E0), (1.E0,1.E0), (0.E0,-4.E0), (3.E0,0.E0)/
-    DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA ainv/(.4E0,0.E0), (0.E0,.2E0), (.4E0,0.E0), (0.E0,0.E0), &
-      (0.E0,0.E0), (.30769E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,.07692E0), (.23077E0,0.E0)/
-    DATA dc/(6.5E0,0.E0), (1.0E0,0.E0)/
-    DATA kprog/'SPFA SPCO SPSL SPDI'/
-    DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
+    COMPLEX, PARAMETER :: ap(10) = [ (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,-1.E0), (4.E0,0.E0) ]
+    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (1.E0,1.E0), (0.E0,-4.E0), (3.E0,0.E0) ]
+    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX, PARAMETER :: ainv(10) = [ (.4E0,0.E0), (0.E0,.2E0), (.4E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (.30769E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,.07692E0), (.23077E0,0.E0) ]
+    COMPLEX, PARAMETER :: dc(2) = [ (6.5E0,0.E0), (1.0E0,0.E0) ]
+    CHARACTER(19), PARAMETER :: kprog = 'SPFA SPCO SPSL SPDI'
+    CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
     DATA rcnd/.58692E0/
     !* FIRST EXECUTABLE STATEMENT  CSPQC
     n = 4
@@ -1762,25 +1760,26 @@ CONTAINS
     !   901010  Restructured using IF-THEN-ELSE-ENDIF, moved an ARITHMETIC
     !           STATEMENT FUNCTION ahead of the FIRST EXECUTABLE STATEMENT
     !           record and cleaned up FORMATs.  (RWC)
-    
+
     INTEGER kone, Kprint, Lun, Nerr
-    COMPLEX a(4,4), work(4), s(4), e(4), u(4,4), v(4,4)
-    COMPLEX at(5,4), sc(4), ec(4), uvc(4,4)
+    COMPLEX work(4), s(4), e(4), u(4,4), v(4,4), at(5,4)
     INTEGER ldx, n, p, ldu, ldv, job, info
-    CHARACTER kfail*12
     INTEGER i, j, indx(4)
     REAL CABS1
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,-1.E0), (4.E0,0.E0)/
-    DATA kfail/'S E U V INFO'/
-    DATA sc/(4.61803E0,0.E0), (3.0E0,0.E0), (2.38197E0,0.E0), (1.E0,0.E0)/
-    DATA ec/(0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)/
-    DATA uvc/(0.E0,0.E0), (0.E0,0.E0), (-.52573E0,0.E0), (0.E0,-.85065E0), &
+    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+      (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
+    CHARACTER(12), PARAMETER :: kfail = 'S E U V INFO'
+    COMPLEX, PARAMETER :: sc(4) = [ (4.61803E0,0.E0), (3.0E0,0.E0), &
+      (2.38197E0,0.E0), (1.E0,0.E0) ]
+    COMPLEX, PARAMETER :: ec(4) = [ (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0) ]
+    COMPLEX, PARAMETER :: uvc(4,4) = RESHAPE( [ &
+      (0.E0,0.E0), (0.E0,0.E0), (-.52573E0,0.E0), (0.E0,-.85065E0), &
       (.70711E0,0.E0), (0.E0,.70711E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (-.85065E0,0.E0), (0.E0,.52573E0), &
-      (-.70711E0,0.E0), (0.E0,.70711E0), (0.E0,0.E0), (0.E0,0.E0)/
+      (-.70711E0,0.E0), (0.E0,.70711E0), (0.E0,0.E0), (0.E0,0.E0) ], [4,4] )
     !* FIRST EXECUTABLE STATEMENT  CSVQC
     n = 4
     p = 4
@@ -1875,32 +1874,34 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Restructured using IF-THEN-ELSE-ENDIF and cleaned up
     !           FORMATs.  (RWC)
-    
+
     INTEGER Kprint, Lun
-    COMPLEX a(4,4), at(5,4), b(4,2), bt(4), c(4), ainv(4,4,2), det(2), dc(2), z(4)
-    REAL r, rcond, rcnd(2), CABS1
-    CHARACTER kprog*19, kfail*39
+    COMPLEX at(5,4), bt(4), det(2), z(4)
+    REAL r, rcond, CABS1
     INTEGER lda, n, info, i, j, indx, Nerr
     INTEGER job, k, kk
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,-1.E0), (4.E0,0.E0)/
-    DATA b/(2.E0,2.E0), (-1.E0,3.E0), (0.E0,-3.E0), (5.E0,0.E0), &
-      (3.E0,2.E0), (0.E0,2.E0), (0.E0,-4.E0), (4.E0,0.E0)/
-    DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA ainv/(.50000E0,0.E0), (0.E0,-.25000E0), (0.E0,0.E0), (0.E0,0.E0), &
+    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+      (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
+    COMPLEX, PARAMETER :: b(4,2) = RESHAPE( [ &
+      (2.E0,2.E0), (-1.E0,3.E0), (0.E0,-3.E0), (5.E0,0.E0), &
+      (3.E0,2.E0), (0.E0,2.E0), (0.E0,-4.E0), (4.E0,0.E0) ], [4,2] )
+    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX, PARAMETER :: ainv(4,4,2) = RESHAPE( [ &
+      (.50000E0,0.E0), (0.E0,-.25000E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,-1.00000E0), (.50000E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (.33333E0,0.E0), (0.E0,-.083333E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.00000E0), (.25000E0,0.E0), &
       (.50000E0,0.E0), (0.E0,1.00000E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,.25000E0), (.50000E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (.33333E0,0.E0), (0.E0,1.00000E0), &
-      (0.E0,0.E0), (0.E0,0.E0), (0.E0,.083333E0), (.25000E0,0.E0)/
-    DATA dc/(4.8E0,0.E0), (1.0E0,0.E0)/
-    DATA kprog/'TRFA TRCO TRSL TRDI'/
-    DATA kfail/'INFO RCOND SOLUTION DETERMINANT INVERSE'/
-    DATA rcnd/.45695E0, .37047E0/
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,.083333E0), (.25000E0,0.E0) ], [4,4,2] )
+    COMPLEX, PARAMETER :: dc(2) = [ (4.8E0,0.E0), (1.0E0,0.E0) ]
+    CHARACTER(19), PARAMETER :: kprog = 'TRFA TRCO TRSL TRDI'
+    CHARACTER(39), PARAMETER :: kfail  = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
+    REAL, PARAMETER :: rcnd(2) = [ .45695E0, .37047E0 ]
     !* FIRST EXECUTABLE STATEMENT  CTRQC
     lda = 5
     n = 4
@@ -2079,7 +2080,7 @@ PROGRAM TEST23
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER kprint, lin, lun, nerr, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST23

@@ -78,8 +78,7 @@ SUBROUTINE SINQB(N,X,Wsave)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   INTEGER k, kc, N, ns2
-  REAL Wsave, X, xhold
-  DIMENSION X(*), Wsave(*)
+  REAL Wsave(*), X(*), xhold
   !* FIRST EXECUTABLE STATEMENT  SINQB
   IF ( N>1 ) THEN
     ns2 = N/2

@@ -30,9 +30,8 @@ SUBROUTINE XPNRM(Nu1,Nu2,Mu1,Mu2,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   
-  INTEGER i, Ierror, Ipqa, iprod, j, k, l, mu, Mu1, Mu2
-  REAL c1, dmu, nu, Nu1, Nu2, Pqa, prod
-  DIMENSION Pqa(*), Ipqa(*)
+  INTEGER i, Ierror, Ipqa(*), iprod, j, k, l, mu, Mu1, Mu2
+  REAL c1, dmu, nu, Nu1, Nu2, Pqa(*), prod
   !* FIRST EXECUTABLE STATEMENT  XPNRM
   Ierror = 0
   l = INT( (Mu2-Mu1) + (Nu2-Nu1+1.5) )

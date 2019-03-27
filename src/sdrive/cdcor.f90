@@ -34,10 +34,8 @@ SUBROUTINE CDCOR(Dfdy,El,FA,H,Ierror,Impl,Ipvt,Matdim,Miter,Ml,Mu,N,Nde,&
   !   790601  DATE WRITTEN
   !   900329  Initial submission to SLATEC.
   
-  INTEGER i, Ierror, iflag, Impl, j, Jstate, Matdim, Miter, Ml, &
-    Mu, mw, N, Nde, Nq
-  COMPLEX A(Matdim,*), Dfdy(Matdim,*), Save1(*), Save2(*), Y(*), &
-    Yh(N,*), Ywt(*)
+  INTEGER i, Ierror, iflag, Impl, j, Jstate, Matdim, Miter, Ml, Mu, mw, N, Nde, Nq
+  COMPLEX A(Matdim,*), Dfdy(Matdim,*), Save1(*), Save2(*), Y(*), Yh(N,*), Ywt(*)
   REAL D, El(13,12), H, SCNRM2, T
   INTEGER Ipvt(*)
   LOGICAL Evalfa

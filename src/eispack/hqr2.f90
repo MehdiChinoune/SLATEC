@@ -106,8 +106,7 @@ SUBROUTINE HQR2(Nm,N,Low,Igh,H,Wr,Wi,Z,Ierr)
   INTEGER i, j, k, l, m, N, en, ii, jj, ll, mm, na, Nm, nn
   INTEGER Igh, itn, its, Low, mp2, enm2, Ierr
   REAL H(Nm,*), Wr(*), Wi(*), Z(Nm,*)
-  REAL p, q, r, s, t, w, x, y, ra, sa, vi, vr, zz, norm, s1, &
-    s2
+  REAL p, q, r, s, t, w, x, y, ra, sa, vi, vr, zz, norm, s1, s2
   LOGICAL notlas
   !
   !* FIRST EXECUTABLE STATEMENT  HQR2
@@ -190,11 +189,9 @@ SUBROUTINE HQR2(Nm,N,Low,Igh,H,Wr,Wi,Z,Ierr)
                       ENDIF
                     ENDDO
                   ENDIF
-                  CALL CDIV(x*r-zz*ra+q*sa,x*s-zz*sa-q*ra,vr,vi,H(i,na),&
-                    H(i,en))
+                  CALL CDIV(x*r-zz*ra+q*sa,x*s-zz*sa-q*ra,vr,vi,H(i,na),H(i,en))
                   IF ( ABS(x)<=ABS(zz)+ABS(q) ) THEN
-                    CALL CDIV(-r-y*H(i,na),-s-y*H(i,en),zz,q,H(i+1,na),&
-                      H(i+1,en))
+                    CALL CDIV(-r-y*H(i,na),-s-y*H(i,en),zz,q,H(i+1,na),H(i+1,en))
                   ELSE
                     H(i+1,na) = (-ra-w*H(i,na)+q*H(i,en))/x
                     H(i+1,en) = (-sa-w*H(i,en)-q*H(i,na))/x

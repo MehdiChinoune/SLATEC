@@ -25,11 +25,10 @@ SUBROUTINE PASSB(Nac,Ido,Ip,L1,Idl1,Cc,C1,C2,Ch,Ch2,Wa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   
-  REAL C1, C2, Cc, Ch, Ch2, Wa, wai, war
   INTEGER i, idij, idj, idl, Idl1, idlj, Ido, idot, idp, ik, inc, &
     Ip, ipp2, ipph, j, jc, k, l, L1, lc
+  REAL C1(Ido,L1,*), C2(Idl1,*), Cc(Ido,Ip,*), Ch(Ido,L1,*), Ch2(Idl1,*), Wa(*), wai, war
   INTEGER Nac
-  DIMENSION Ch(Ido,L1,*), Cc(Ido,Ip,*), C1(Ido,L1,*), Wa(*), C2(Idl1,*), Ch2(Idl1,*)
   !* FIRST EXECUTABLE STATEMENT  PASSB
   idot = Ido/2
   ipp2 = Ip + 2

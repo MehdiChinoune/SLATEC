@@ -28,10 +28,8 @@ SUBROUTINE DXQNU(Nu1,Nu2,Mu1,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   
-  INTEGER Id, Ierror, ipq, ipq1, ipq2, Ipqa, ipql1, ipql2, k, mu, Mu1
-  DIMENSION Pqa(*), Ipqa(*)
-  REAL(8) :: dmu, nu, Nu1, Nu2, pq, Pqa, pq1, pq2, Sx, X, &
-    x1, x2
+  INTEGER Id, Ierror, ipq, ipq1, ipq2, Ipqa(*), ipql1, ipql2, k, mu, Mu1
+  REAL(8) :: dmu, nu, Nu1, Nu2, pq, Pqa(*), pq1, pq2, Sx, X, x1, x2
   REAL(8) :: Theta, pql1, pql2
   !* FIRST EXECUTABLE STATEMENT  DXQNU
   Ierror = 0

@@ -199,11 +199,10 @@ SUBROUTINE DBNDAC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL(8) :: G, rho, zero
   INTEGER i, ie, ig, ig1, ig2, iopt, Ip, Ir, j, jg, Jt, k, kh, &
     l, lp1, Mdg, mh, Mt, mu, Nb
+  REAL(8) :: G(Mdg,*), rho, zero
   INTEGER nbp1, nerr
-  DIMENSION G(Mdg,*)
   !* FIRST EXECUTABLE STATEMENT  DBNDAC
   zero = 0.D0
   !
@@ -266,8 +265,7 @@ SUBROUTINE DBNDAC(G,Mdg,Nb,Ip,Ir,Mt,Jt)
     kh = MIN(nbp1,mh)
     !                                             ALG. STEP 20
     DO i = 1, kh
-      CALL DH12(1,i,MAX(i+1,Ir-Ip+1),mh,G(Ip,i),1,rho,G(Ip,i+1),1,Mdg,&
-        nbp1-i)
+      CALL DH12(1,i,MAX(i+1,Ir-Ip+1),mh,G(Ip,i),1,rho,G(Ip,i+1),1,Mdg,nbp1-i)
     ENDDO
     !                                             ALG. STEP 21
     Ir = Ip + kh

@@ -96,19 +96,16 @@ SUBROUTINE DSTOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   !   920422  Changed DIMENSION statement.  (WRB)
   
   !
-  INTEGER i, i1, IALth, IER, IOD, IOWnd, Ipar, IPUp, iredo, iret, &
-    Iwm, j, jb, JSTart, KFLag, KSTeps, L, LMAx, m, MAXord, &
+  INTEGER i, i1, IALth, IER, IOD, IOWnd, Ipar(*), IPUp, iredo, iret, &
+    Iwm(*), j, jb, JSTart, KFLag, KSTeps, L, LMAx, m, MAXord, &
     MEO, METh, MITer, N, ncf, Neq, newq, NFE, NJE, NQ, &
     NQNyh, NQU, NST, NSTepj, Nyh
-  REAL(8) :: Acor, CONit, CRAte, dcon, ddn, del, delp, dsm, &
-    dup, DVNRMS, EL, EL0, ELCo, Ewt, exdn, exsm, &
+  REAL(8) :: Acor(*), CONit, CRAte, dcon, ddn, del, delp, dsm, &
+    dup, DVNRMS, EL, EL0, ELCo, Ewt(*), exdn, exsm, &
     exup, H, HMIn, HMXi, HOLd, HU, r, RC, rh, rhdn, &
-    rhsm, rhup, RMAx, ROWnd, Rpar, Savf, TESco, TN, &
-    told, UROund, Wm, Y, Yh, Yh1
+    rhsm, rhup, RMAx, ROWnd, Rpar(*), Savf(*), TESco, TN, &
+    told, UROund, Wm(*), Y(*), Yh(Nyh,*), Yh1(*)
   EXTERNAL :: DF, DJAC
-  !
-  DIMENSION Y(*), Yh(Nyh,*), Yh1(*), Ewt(*), Savf(*), Acor(*), Wm(*), &
-    Iwm(*), Rpar(*), Ipar(*)
   COMMON /DDEBD1/ ROWnd, CONit, CRAte, EL(13), ELCo(13,12), HOLd, RC, &
     RMAx, TESco(3,12), EL0, H, HMIn, HMXi, HU, TN, &
     UROund, IOWnd(7), KSTeps, IOD(6), IALth, IPUp, &

@@ -245,8 +245,7 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
     !
     !     N.LT.2 RETURN.
     Ierr = -1
-    CALL XERMSG('SLATEC','DPCHIC','NUMBER OF DATA POINTS LESS THAN TWO',&
-      Ierr,1)
+    CALL XERMSG('SLATEC','DPCHIC','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
     RETURN
   ELSEIF ( Incfd<1 ) THEN
     !
@@ -313,8 +312,7 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
               !
               !     ERROR RETURN FROM DPCHCS.
               Ierr = -8
-              CALL XERMSG('SLATEC','DPCHIC','ERROR RETURN FROM DPCHCS',Ierr,&
-                1)
+              CALL XERMSG('SLATEC','DPCHIC','ERROR RETURN FROM DPCHCS',Ierr,1)
               RETURN
             ENDIF
           ENDIF

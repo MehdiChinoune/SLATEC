@@ -36,10 +36,9 @@ SUBROUTINE PRODP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   
-  REAL A, Aa, am, B, Bd, bh, Bm1, Bm2, C, D, den, rt, U, v, W, X, Y, ym
+  REAL A(*), Aa(*), am, B(*), Bd(*), bh, Bm1(*), Bm2(*), C(*), D(*), den, rt, &
+    U(*), v, W(*), X(*), Y(*), ym
   INTEGER ia, ibr, id, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, Nm2
-  DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), U(*), Bd(*), Bm1(*)&
-    , Bm2(*), Aa(*), W(*)
   !* FIRST EXECUTABLE STATEMENT  PRODP
   DO j = 1, M
     Y(j) = X(j)

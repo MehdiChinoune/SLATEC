@@ -190,10 +190,9 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
   !           comments to agree with DSOS.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL Atolx, Rtolx, Rw, Tolf, X
-  INTEGER Iflag, inpflg, iprint, Iw, k1, k2, k3, k4, k5, k6, Liw, &
+  REAL Atolx, Rtolx, Rw(*), Tolf, X(*)
+  INTEGER Iflag, inpflg, iprint, Iw(*), k1, k2, k3, k4, k5, k6, Liw, &
     Lrw, mxit, nc, ncjs, Neq, nsri, nsrrc
-  DIMENSION X(*), Rw(*), Iw(*)
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
   REAL, EXTERNAL :: FNC
@@ -267,8 +266,7 @@ SUBROUTINE SOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
     k6 = k5 + Neq
     !
     CALL SOSEQS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,mxit,ncjs,nsrrc,nsri,&
-      iprint,Rw(1),Rw(2),nc,Rw(k1),Rw(k2),Rw(k3),Rw(k4),Rw(k5),&
-      Rw(k6),Iw(4))
+      iprint,Rw(1),Rw(2),nc,Rw(k1),Rw(k2),Rw(k3),Rw(k4),Rw(k5),Rw(k6),Iw(4))
     !
     Iw(3) = mxit
   ENDIF

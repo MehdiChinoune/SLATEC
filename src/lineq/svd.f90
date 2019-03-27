@@ -97,8 +97,7 @@ SUBROUTINE SVD(Nm,M,N,A,W,Matu,U,Matv,V,Ierr,Rv1)
   !   900402  Added TYPE section.  (WRB)
   
   !
-  INTEGER i, j, k, l, M, N, ii, i1, kk, k1, ll, l1, mn, Nm, &
-    its, Ierr
+  INTEGER i, j, k, l, M, N, ii, i1, kk, k1, ll, l1, mn, Nm, its, Ierr
   REAL A(Nm,*), W(*), U(Nm,*), V(Nm,*), Rv1(*)
   REAL c, f, g, h, s, x, y, z, scale, s1
   REAL PYTHAG

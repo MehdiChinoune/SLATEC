@@ -1,6 +1,5 @@
 !** DSILUS
-SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
-    Ncol)
+SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,Ncol)
   IMPLICIT NONE
   !>
   !***
@@ -178,8 +177,7 @@ SUBROUTINE DSILUS(N,Nelt,Ia,Ja,A,Isym,Nl,Il,Jl,L,Dinv,Nu,Iu,Ju,U,Nrow,&
   !     .. Local Scalars ..
   REAL(8) :: temp
   INTEGER i, ibgn, icol, iend, indx, indx1, indx2, indxc1, indxc2, &
-    indxr1, indxr2, irow, itemp, j, jbgn, jend, jtemp, k, &
-    kc, kr
+    indxr1, indxr2, irow, itemp, j, jbgn, jend, jtemp, k, kc, kr
   !* FIRST EXECUTABLE STATEMENT  DSILUS
   !
   !         Count number of elements in each row of the lower triangle.

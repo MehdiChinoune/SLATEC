@@ -21,18 +21,16 @@ SUBROUTINE HWSSS1(Ts,Tf,M,Mbdcnd,Bdts,Bdtf,Ps,Pf,N,Nbdcnd,Bdps,Bdpf,&
   !   891009  Removed unreferenced variables.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  REAL Am, at, Bdpf, Bdps, Bdtf, Bdts, Bm, cf, Cm, cnp, cp, csp, &
-    ct, D, den, dfn, dfs, dnn, dns, dphi
-  REAL dphi2, dsn, dss, dth, dth2, Elmbda, F, fim1, fjj, fm, fn, &
-    hdth, hld, hne, Pertrb, Pf, Ps, rtn, rts, Sint
-  REAL Sn, Ss, sum, sum1, sum2, t1, tdp, tdt, Tf, theta, Ts, wp, &
-    wpf, wps, wtf, wts, yhld
+
   INTEGER i, Idimf, ierror, ii, iid, inp, ising, isp, itf, itfm, &
     its, itsp, j, jpf, jpfm, jps, jpsp, M, Mbdcnd, mbr
+  REAL Am(*), at, Bdpf(*), Bdps(*), Bdtf(*), Bdts(*), Bm(*), cf, Cm(*), cnp, cp, csp, &
+    ct, D(*), den, dfn, dfs, dnn, dns, dphi
+  REAL dphi2, dsn, dss, dth, dth2, Elmbda, F(Idimf,*), fim1, fjj, fm, fn, &
+    hdth, hld, hne, Pertrb, Pf, Ps, rtn, rts, Sint(*)
+  REAL Sn(*), Ss(*), sum, sum1, sum2, t1, tdp, tdt, Tf, theta, Ts, wp, &
+    wpf, wps, wtf, wts, yhld
   INTEGER mp1, munk, N, Nbdcnd, nbr, np1, nunk
-  DIMENSION F(Idimf,*), Bdts(*), Bdtf(*), Bdps(*), Bdpf(*), Am(*), &
-    Bm(*), Cm(*), Ss(*), Sn(*), D(*), Sint(*)
   !
   !* FIRST EXECUTABLE STATEMENT  HWSSS1
   mp1 = M + 1

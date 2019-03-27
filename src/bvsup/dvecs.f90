@@ -42,8 +42,7 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
     niv, NOPg, NPS, NTApe, NTP, NUMort, NXPts
   REAL(8) :: AE, dum, RE, TOL, Work(*), Yhp(Ncomp,*)
   COMMON /DML18J/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
-    NUMort, LNFcc, ICOco
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, NUMort, LNFcc, ICOco
   !* FIRST EXECUTABLE STATEMENT  DVECS
   IF ( Lnfc/=1 ) THEN
     niv = Lnfc

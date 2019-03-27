@@ -125,8 +125,7 @@ SUBROUTINE SNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
   REAL Abe(Lda,*)
   !
-  INTEGER ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp, &
-    ISAMAX
+  INTEGER ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp, ISAMAX
   REAL t
   !* FIRST EXECUTABLE STATEMENT  SNBFA
   ml1 = Ml + 1

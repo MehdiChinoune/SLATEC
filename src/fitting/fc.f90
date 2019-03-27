@@ -427,6 +427,5 @@ SUBROUTINE FC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,&
   i6 = i5 + Nord*Nord
   i7 = i6 + mdw*(Nbkpt-Nord+1)
   CALL FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Nconst,Xconst,Yconst,&
-    Nderiv,Mode,Coeff,W(i5),W(i2),W(i3),W(i4),W(i1),mdg,W(i6),mdw,&
-    W(i7),Iw)
+    Nderiv,Mode,Coeff,W(i5),W(i2),W(i3),W(i4),W(i1),mdg,W(i6),mdw,W(i7),Iw)
 END SUBROUTINE FC

@@ -81,11 +81,9 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL A, acc, akk, anorm, as, asave, Cols, Cs, css, Diag, diagk, &
-    dum, R1MACH, sad, sc, Scales, SDOT, sig, sigma, sruro
-  REAL uro
-  INTEGER Iflag, Irank, Iscale, j, jcol, k, kp, Kpivot, l, M, mk, N, Nrda
-  DIMENSION A(Nrda,*), Diag(*), Kpivot(*), Cols(*), Cs(*), Scales(*)
+  INTEGER Iflag, Irank, Iscale, j, jcol, k, kp, Kpivot(*), l, M, mk, N, Nrda
+  REAL A(Nrda,*), acc, akk, anorm, as, asave, Cols(*), Cs(*), css, Diag(*), diagk, &
+    dum, R1MACH, sad, sc, Scales(*), SDOT, sig, sigma, sruro, uro
   !
   !- *********************************************************************
   !
@@ -195,8 +193,7 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
         Iflag = 3
         Irank = k - 1
         CALL XERMSG('SLATEC','ORTHOL',&
-          'RANK OF MATRIX IS LESS THAN THE NUMBER OF COLUMNS.',1,&
-          1)
+          'RANK OF MATRIX IS LESS THAN THE NUMBER OF COLUMNS.',1,1)
         RETURN
       ENDIF
     ENDDO

@@ -108,9 +108,8 @@ REAL FUNCTION CV(Xval,Ndata,Nconst,Nord,Nbkpt,Bkpt,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL Bkpt, SDOT, v, W, Xval, zero
   INTEGER i, ileft, ip, is, last, mdg, mdw, n, Nbkpt, Nconst, Ndata, Nord
-  DIMENSION Bkpt(Nbkpt), W(*), v(40)
+  REAL Bkpt(Nbkpt), SDOT, v(40), W(*), Xval, zero
   !* FIRST EXECUTABLE STATEMENT  CV
   zero = 0.
   mdg = Nbkpt - Nord + 3

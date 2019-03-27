@@ -341,15 +341,13 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
-    Nelt, Nsave
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt, Nsave
   !     .. Array Arguments ..
   REAL(8) :: A(Nelt), B(N), Rwork(Lenw), X(N)
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER icol, j, jbgn, jend, locdin, locigw, locil, lociu, lociw, &
-    locjl, locju, locl, locnc, locnr, locrgw, locu, locw, &
-    myitol, nl, nu
+    locjl, locju, locl, locnc, locnr, locrgw, locu, locw, myitol, nl, nu
   !     .. External Subroutines ..
   EXTERNAL :: DCHKW, DGMRES, DS2Y, DSILUS, DSLUI, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSLUGM
@@ -431,8 +429,7 @@ SUBROUTINE DSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   myitol = 0
   !
   CALL DGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSLUI,myitol,Tol,Itmax,Iter,Err,&
-    Ierr,Iunit,Rwork,Rwork,Rwork(locrgw),Lenw-locrgw,Iwork(locigw)&
-    ,20,Rwork,Iwork)
+    Ierr,Iunit,Rwork,Rwork,Rwork(locrgw),Lenw-locrgw,Iwork(locigw),20,Rwork,Iwork)
   !
   IF ( Iter>Itmax ) Ierr = 2
   !------------- LAST LINE OF DSLUGM FOLLOWS ----------------------------

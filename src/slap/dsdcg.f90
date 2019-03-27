@@ -280,7 +280,6 @@ SUBROUTINE DSDCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !
   !         Do the Preconditioned Conjugate Gradient.
   CALL DCG(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSDI,Itol,Tol,Itmax,Iter,Err,Ierr,&
-    Iunit,Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locdz),Rwork,&
-    Iwork)
+    Iunit,Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locdz),Rwork,Iwork)
   !------------- LAST LINE OF DSDCG FOLLOWS -----------------------------
 END SUBROUTINE DSDCG

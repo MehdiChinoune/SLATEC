@@ -1,7 +1,6 @@
 !** ISSCG
 INTEGER FUNCTION ISSCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
-    Err,Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork,Ak,Bk,Bnrm,&
-    Solnrm)
+    Err,Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   IMPLICIT NONE
   !>
   !***
@@ -221,9 +220,8 @@ INTEGER FUNCTION ISSCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   IF ( Iunit/=0 ) THEN
     IF ( Iter==0 ) THEN
       WRITE (Iunit,99001) N, Itol
-      99001 FORMAT (' Preconditioned Conjugate Gradient for ','N, ITOL = ',I5,I5,&
-        /' ITER','   Error Estimate','            Alpha',&
-        '             Beta')
+      99001 FORMAT (' Preconditioned Conjugate Gradient for N, ITOL = ',I5,I5,&
+        /' ITER   Error Estimate            Alpha             Beta')
       WRITE (Iunit,99002) Iter, Err
     ELSE
       WRITE (Iunit,99002) Iter, Err, Ak, Bk

@@ -43,12 +43,10 @@ SUBROUTINE DPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   
   INTEGER i, IDLOC, Ienter, ihi, il1, ilow, ipage, iu1, j, key, &
     Lbm, Lmx, lpg, Mrelas, n20002, n20050, Nvars
-  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), &
-    Ibb(*)
+  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
   REAL(8) :: Amat(*), Basmat(*), Csc(*), Wr(*), Ww(*), Bl(*), &
     Bu(*), Rz(*), Rg(*), Colnrm(*), Duals(*), cnorm, &
-    Dirnrm, Dulnrm, Eps, Erdnrm, Gg, one, ratio, &
-    rcost, rmax, zero
+    Dirnrm, Dulnrm, Eps, Erdnrm, Gg, one, ratio, rcost, rmax, zero
   REAL(8) :: DASUM
   LOGICAL Found, trans
   !* FIRST EXECUTABLE STATEMENT  DPLPFE

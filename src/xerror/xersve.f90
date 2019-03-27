@@ -66,14 +66,13 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
   !   910626  Added LIBTAB and SUBTAB to SAVE statement.  (BKS)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i, I1MACH, Icount, iunit, Kflag, kount, kountx, kunit, &
-    Level, levtab, Nerr, nertab, nmsg, nunit
   INTEGER, PARAMETER :: LENTAB = 10
+  INTEGER i, I1MACH, Icount, iunit, Kflag, kount(LENTAB), kountx, kunit, &
+    Level, levtab(LENTAB), Nerr, nertab(LENTAB), nmsg, nunit
   INTEGER lun(5)
   CHARACTER*(*) Librar, Subrou, Messg
   CHARACTER(8) :: libtab(LENTAB), subtab(LENTAB), lib, sub
   CHARACTER(20) :: mestab(LENTAB), mes
-  DIMENSION nertab(LENTAB), levtab(LENTAB), kount(LENTAB)
   SAVE libtab, subtab, mestab, nertab, levtab, kount, kountx, nmsg
   DATA kountx/0/, nmsg/0/
   !* FIRST EXECUTABLE STATEMENT  XERSVE

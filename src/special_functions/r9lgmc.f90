@@ -41,26 +41,21 @@ REAL FUNCTION R9LGMC(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  
-  REAL algmcs, CSEVL, R1MACH, X, xbig, xmax
+
+  REAL CSEVL, R1MACH, X, xbig, xmax
   INTEGER INITS, nalgm
-  DIMENSION algmcs(6)
-  LOGICAL first
-  SAVE algmcs, nalgm, xbig, xmax, first
-  DATA algmcs(1)/.166638948045186E0/
-  DATA algmcs(2)/ - .0000138494817606E0/
-  DATA algmcs(3)/.0000000098108256E0/
-  DATA algmcs(4)/ - .0000000000180912E0/
-  DATA algmcs(5)/.0000000000000622E0/
-  DATA algmcs(6)/ - .0000000000000003E0/
-  DATA first/.TRUE./
+  SAVE nalgm, xbig, xmax
+  REAL, PARAMETER :: algmcs(6) = [ .166638948045186E0,-.0000138494817606E0, &
+    .0000000098108256E0,-.0000000000180912E0, .0000000000000622E0, &
+    -.0000000000000003E0 ]
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9LGMC
   IF ( first ) THEN
     nalgm = INITS(algmcs,6,R1MACH(3))
     xbig = 1.0/SQRT(R1MACH(3))
     xmax = EXP(MIN(LOG(R1MACH(2)/12.0),-LOG(12.0*R1MACH(1))))
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   IF ( X<10.0 ) CALL XERMSG('SLATEC','R9LGMC','X MUST BE GE 10',1,2)
   IF ( X>=xmax ) THEN

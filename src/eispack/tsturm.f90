@@ -1,6 +1,5 @@
 !** TSTURM
-SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
-    Rv5,Rv6)
+SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
   IMPLICIT NONE
   !>
   !***
@@ -124,20 +123,17 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,&
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL R1MACH
-  INTEGER i, j, k, M, N, p, q, r, s, ii, ip, jj, Mm, m1, m2, &
-    Nm, its
+  INTEGER i, j, k, M, N, p, q, r, s, ii, ip, jj, Mm, m1, m2, Nm, its
   INTEGER Ierr, group, isturm
   REAL D(*), E(*), E2(*), W(*), Z(Nm,*)
   REAL Rv1(*), Rv2(*), Rv3(*), Rv4(*), Rv5(*), Rv6(*)
-  REAL u, v, Lb, t1, t2, Ub, uk, xu, x0, x1, Eps1, eps2, eps3, &
-    eps4
+  REAL u, v, Lb, t1, t2, Ub, uk, xu, x0, x1, Eps1, eps2, eps3, eps4
   REAL norm, machep, s1, s2
-  LOGICAL first
   !
-  SAVE first, machep
-  DATA first/.TRUE./
+  SAVE machep
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  TSTURM
   IF ( first ) machep = R1MACH(4)
   first = .FALSE.

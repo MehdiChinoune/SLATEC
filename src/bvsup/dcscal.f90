@@ -1,6 +1,5 @@
 !** DCSCAL
-SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
-    Iscale,Ic)
+SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,Iscale,Ic)
   IMPLICIT NONE
   !>
   !***
@@ -33,9 +32,8 @@ SUBROUTINE DCSCAL(A,Nrda,Nrow,Ncol,Cols,Colsav,Rows,Rowsav,Anorm,Scales,&
   
   REAL(8) :: DDOT
   INTEGER Ic, ip, Iscale, j, k, Ncol, Nrda, Nrow
-  REAL(8) :: A(Nrda,*), alog2, Anorm, ascale, Cols(*), Colsav(*)&
-    , cs, p, Rows(*), Rowsav(*), s, Scales(*), ten20, &
-    ten4
+  REAL(8) :: A(Nrda,*), alog2, Anorm, ascale, Cols(*), Colsav(*), &
+    cs, p, Rows(*), Rowsav(*), s, Scales(*), ten20, ten4
   !
   SAVE ten4, ten20
   DATA ten4, ten20/1.0D4, 1.0D20/

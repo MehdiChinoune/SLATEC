@@ -142,8 +142,7 @@ PROGRAM SLPREP
   CHARACTER(80) :: msg
   CHARACTER(KMAXI) :: kwrds(KMAXJ), tkwd(MXNKWD)
   CHARACTER(MXLRN) :: rtname
-  CHARACTER(MXLCAT) :: tcat(MXNCAT), etcat(MXNCAT), categ(15), &
-    tclass(MXNCAT)
+  CHARACTER(MXLCAT) :: tcat(MXNCAT), etcat(MXNCAT), categ(15), tclass(MXNCAT)
   INTEGER iptr(MXNCAT), jptr(MXNCAT), kptr(MXNCAT)
   CHARACTER(80) :: class(MXNCL+1), stmts(MXNCL)
   INTEGER iptrl(7*MXNRN), iptrr(7*MXNRN)
@@ -261,8 +260,7 @@ PROGRAM SLPREP
   !
   !     Write the names of all files to the transaction log file.
   !
-  WRITE (UNIT=LU12,FMT=99010) finp, FOUT, fclass, fcat, fdaf, ftbl, &
-    fkwd
+  WRITE (UNIT=LU12,FMT=99010) finp, FOUT, fclass, fcat, fdaf, ftbl, fkwd
   !
   !     IRD is the "READ" line number and IWR is the "WRITE" line number.
   !
@@ -663,8 +661,7 @@ PROGRAM SLPREP
   1000 nclass = i
   class(i+1) = '@'
   mncl = MXNCL
-  CALL PSCAT(etcat,ntcat,class,mncl,ncc,tclass,iptr,jptr,kptr,nstmts,stmts,&
-    nerr)
+  CALL PSCAT(etcat,ntcat,class,mncl,ncc,tclass,iptr,jptr,kptr,nstmts,stmts,nerr)
   IF ( nerr/=0 ) THEN
     msg = 'Could not locate '//tclass(nerr)//' in GAMS file.'
     line = 'Input file completely read.'
@@ -721,15 +718,13 @@ PROGRAM SLPREP
   !     Normal termination.
   !
   WRITE (UNIT=LU6,FMT=99007) numr, ird, iwr, ntcat, ntkwd, mxlr, &
-    mxnca, mxnkw, mxlkw, numrr, ntkwd, &
-    inext - ichng
+    mxnca, mxnkw, mxlkw, numrr, ntkwd, inext - ichng
   WRITE (UNIT=LU6,FMT=99008) nclass, ncc, nstmts
   !
   !     Write summary information to the transaction log file also.
   !
   WRITE (UNIT=LU12,FMT=99007) numr, ird, iwr, ntcat, ntkwd, mxlr, &
-    mxnca, mxnkw, mxlkw, numrr, ntkwd, &
-    inext - ichng
+    mxnca, mxnkw, mxlkw, numrr, ntkwd, inext - ichng
   WRITE (UNIT=LU12,FMT=99008) nclass, ncc, nstmts
   CLOSE (UNIT=LU14)
   !
@@ -955,8 +950,7 @@ LOGICAL FUNCTION IFSID(Line)
   RETURN
 END FUNCTION IFSID
 !** PSCAT
-SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,&
-    Stmts,Nerr)
+SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,Stmts,Nerr)
   IMPLICIT NONE
   !>
   !***
@@ -1164,18 +1158,15 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,&
   CHARACTER*(*) Class(*), Ecat(*), Stmts(*), Tclass(*)
   !     .. Local Scalars ..
   INTEGER i, iclass, ilen, iper, istart, j, k, nlen
-  CHARACTER :: opart1, opart3, opart5, opart7, part1, part3, part5, &
-    part7
+  CHARACTER :: opart1, opart3, opart5, opart7, part1, part3, part5, part7
   CHARACTER(2) :: opart2, opart4, opart6, part2, part4, part6
-  !     .. Local Arrays ..
-  INTEGER size(7)
   !     .. External Functions ..
   INTEGER, EXTERNAL :: LENSTR
   CHARACTER(10), EXTERNAL :: CVTCAT
   !     .. Intrinsic Functions ..
   INTRINSIC INDEX
   !     .. Data statements ..
-  DATA size/1, 3, 4, 6, 7, 9, 10/
+  INTEGER, PARAMETER :: size(7) = [ 1, 3, 4, 6, 7, 9, 10 ]
   !* FIRST EXECUTABLE STATEMENT  PSCAT
   Nerr = 0
   Ncc = 0
@@ -1276,8 +1267,7 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,&
                 IF ( opart6/=part6 ) THEN
                   opart6 = part6
                   Ncc = Ncc + 1
-                  Tclass(Ncc) = opart1//opart2//opart3//opart4//opart5//&
-                    opart6
+                  Tclass(Ncc) = opart1//opart2//opart3//opart4//opart5//opart6
                   CYCLE
                 ENDIF
                 IF ( part7/=' ' ) THEN
@@ -1332,8 +1322,7 @@ SUBROUTINE PSCAT(Ecat,Ncat,Class,Mncl,Ncc,Tclass,Iptr,Jptr,Kptr,Istmt,&
       IF ( ilen==size(j) ) THEN
         nlen = LENSTR(Tclass(i+1))
         IF ( ilen<nlen ) THEN
-          IF ( Tclass(i)(1:size(j))==Tclass(i+1)(1:size(j)) ) Jptr(i)&
-            = i + 1
+          IF ( Tclass(i)(1:size(j))==Tclass(i+1)(1:size(j)) ) Jptr(i) = i + 1
         ENDIF
       ENDIF
     ENDDO

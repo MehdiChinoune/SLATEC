@@ -30,9 +30,8 @@ SUBROUTINE TRIS4(N,A,B,C,D,U,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   
-  REAL A, an, B, bn, C, D, den, U, v, Z
+  REAL A(*), an, B(*), bn, C(*), D(*), den, U(*), v, Z(*)
   INTEGER j, k, N, nm1, nm2
-  DIMENSION A(*), B(*), C(*), D(*), U(*), Z(*)
   !* FIRST EXECUTABLE STATEMENT  TRIS4
   bn = B(N)
   D(1) = A(2)/B(1)

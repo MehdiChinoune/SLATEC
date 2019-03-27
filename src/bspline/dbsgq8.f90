@@ -78,15 +78,13 @@ SUBROUTINE DBSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
       REAL(8), INTENT(IN) :: X
     END FUNCTION
   END INTERFACE
-  INTEGER Id, Ierr, Inbv, k, Kk, kml, kmx, l, lmn, lmx, lr, mxl, &
+  INTEGER Id, Ierr, Inbv, k, Kk, kml, kmx, l, lmn, lmx, lr(60), mxl, &
     N, nbits, nib, nlmn, nlmx
   INTEGER I1MACH
-  REAL(8) :: A, aa, ae, anib, Ans, area, B, Bc, c, ce, ee, &
-    ef, eps, Err, est, gl, glr, gr, hh, sq2, tol, &
-    vl, vr, Work, w1, w2, w3, w4, Xt, x1, x2, x3, x4
+  REAL(8) :: A, aa(60), ae, anib, Ans, area, B, Bc(*), c, ce, ee, &
+    ef, eps, Err, est, gl, glr, gr(60), hh(60), sq2, tol, &
+    vl(60), vr, Work(*), w1, w2, w3, w4, Xt(*), x1, x2, x3, x4
   REAL(8) :: D1MACH
-  DIMENSION Xt(*), Bc(*), Work(*)
-  DIMENSION aa(60), hh(60), lr(60), vl(60), gr(60)
   SAVE x1, x2, x3, x4, w1, w2, w3, w4, sq2, nlmn, kmx, kml
   DATA x1, x2, x3, x4/1.83434642495649805D-01, 5.25532409916328986D-01, &
     7.96666477413626740D-01, 9.60289856497536232D-01/

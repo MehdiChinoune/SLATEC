@@ -38,23 +38,16 @@ REAL FUNCTION COT(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
-  
-  REAL ainty, ainty2, cotcs, CSEVL, pi2rec, prodbg, R1MACH, &
+
+  REAL ainty, ainty2, CSEVL, pi2rec, prodbg, R1MACH, &
     sqeps, X, xmax, xmin, xsml, y, yrem
   INTEGER ifn, INITS, nterms
-  DIMENSION cotcs(8)
-  LOGICAL first
-  SAVE cotcs, pi2rec, nterms, xmax, xsml, xmin, sqeps, first
-  DATA cotcs(1)/.24025916098295630E0/
-  DATA cotcs(2)/ - .016533031601500228E0/
-  DATA cotcs(3)/ - .000042998391931724E0/
-  DATA cotcs(4)/ - .000000159283223327E0/
-  DATA cotcs(5)/ - .000000000619109313E0/
-  DATA cotcs(6)/ - .000000000002430197E0/
-  DATA cotcs(7)/ - .000000000000009560E0/
-  DATA cotcs(8)/ - .000000000000000037E0/
+  SAVE pi2rec, nterms, xmax, xsml, xmin, sqeps
+  REAL, PARAMETER :: cotcs(8) = [ .24025916098295630E0,-.016533031601500228E0, &
+    -.000042998391931724E0,-.000000159283223327E0,-.000000000619109313E0, &
+    -.000000000002430197E0,-.000000000000009560E0,-.000000000000000037E0 ]
   DATA pi2rec/.0116197723675813430E0/
-  DATA first/.TRUE./
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  COT
   IF ( first ) THEN
     nterms = INITS(cotcs,8,0.1*R1MACH(3))
@@ -62,13 +55,12 @@ REAL FUNCTION COT(X)
     xsml = SQRT(3.0*R1MACH(3))
     xmin = EXP(MAX(LOG(R1MACH(1)),-LOG(R1MACH(2)))+0.01)
     sqeps = SQRT(R1MACH(4))
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   y = ABS(X)
   IF ( ABS(X)<xmin ) CALL XERMSG('SLATEC','COT',&
-    'ABS(X) IS ZERO OR SO SMALL COT OVERFLOWS',&
-    2,2)
+    'ABS(X) IS ZERO OR SO SMALL COT OVERFLOWS',2,2)
   IF ( y>xmax ) CALL XERMSG('SLATEC','COT',&
     'NO PRECISION BECAUSE ABS(X) IS TOO BIG',3,2)
   !

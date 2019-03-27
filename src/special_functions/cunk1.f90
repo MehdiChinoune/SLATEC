@@ -28,16 +28,14 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   
-  COMPLEX cfn, ck, cone, crsc, cs, cscl, csgn, cspn, csr, css, &
-    cwrk, cy, czero, c1, c2, phi, rz, sum, s1, s2, Y, Z, &
-    zeta1, zeta2, zr, phid, zeta1d, zeta2d, sumd
-  REAL Alim, ang, aphi, asc, ascle, bry, cpn, c2i, c2m, c2r, &
-    Elim, fmr, fn, fnf, Fnu, pi, rs1, sgn, spn, Tol, x, R1MACH
-  INTEGER i, ib, iflag, ifn, il, init, inu, iuf, k, kdflg, kflag, &
+  INTEGER i, ib, iflag, ifn, il, init(2), inu, iuf, k, kdflg, kflag, &
     kk, Kode, Mr, N, nw, Nz, j, ipard, initd, ic, m
-  DIMENSION bry(3), init(2), Y(N), sum(2), phi(2), zeta1(2), zeta2(2)&
-    , cy(2), cwrk(16,3), css(3), csr(3)
-  DATA czero, cone/(0.0E0,0.0E0), (1.0E0,0.0E0)/
+  COMPLEX cfn, ck, crsc, cs, cscl, csgn, cspn, csr(3), css(3), &
+    cwrk(16,3), cy(2), c1, c2, phi(2), rz, sum(2), s1, s2, Y(N), Z, &
+    zeta1(2), zeta2(2), zr, phid, zeta1d, zeta2d, sumd
+  REAL Alim, ang, aphi, asc, ascle, bry(3), cpn, c2i, c2m, c2r, &
+    Elim, fmr, fn, fnf, Fnu, pi, rs1, sgn, spn, Tol, x, R1MACH
+  COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
   DATA pi/3.14159265358979324E0/
   !* FIRST EXECUTABLE STATEMENT  CUNK1
   kdflg = 1
@@ -68,8 +66,7 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
     j = 3 - j
     fn = Fnu + (i-1)
     init(j) = 0
-    CALL CUNIK(zr,fn,2,0,Tol,init(j),phi(j),zeta1(j),zeta2(j),sum(j),&
-      cwrk(1,j))
+    CALL CUNIK(zr,fn,2,0,Tol,init(j),phi(j),zeta1(j),zeta2(j),sum(j),cwrk(1,j))
     IF ( Kode==1 ) THEN
       s1 = zeta1(j) - zeta2(j)
     ELSE

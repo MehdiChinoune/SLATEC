@@ -25,18 +25,16 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP and ZLOG to EXTERNAL statement.  (RWC)
-  
+
   !     COMPLEX CK,CNORM,CONE,CTWO,CZERO,PT,P1,P2,RZ,SUM,Y,Z
+  INTEGER i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, Nz
   REAL(8) :: ack, ak, ap, at, az, bk, cki, ckr, cnormi, &
     cnormr, conei, coner, fkap, fkk, flam, fnf, Fnu, &
     pti, ptr, p1i, p1r, p2i, p2r, raz, rho, rho2, &
     rzi, rzr, scle, sti, str, sumi, sumr, tfnf, Tol, &
-    tst, Yi, Yr, zeroi, zeror, Zi, Zr, DGAMLN, &
-    D1MACH, ZABS
-  INTEGER i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, &
-    Nz
-  DIMENSION Yr(N), Yi(N)
-  EXTERNAL :: ZABS, ZEXP, ZLOG
+    tst, Yi(N), Yr(N), zeroi, zeror, Zi, Zr
+  REAL(8), EXTERNAL :: DGAMLN, D1MACH, ZABS
+  EXTERNAL :: ZEXP, ZLOG
   DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
   !* FIRST EXECUTABLE STATEMENT  ZMLRI
   scle = D1MACH(1)/Tol
@@ -137,8 +135,7 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
   p2i = zeroi
   fnf = Fnu - ifnu
   tfnf = fnf + fnf
-  bk = DGAMLN(fkk+tfnf+1.0D0,idum) - DGAMLN(fkk+1.0D0,idum)&
-    - DGAMLN(tfnf+1.0D0,idum)
+  bk = DGAMLN(fkk+tfnf+1.0D0,idum) - DGAMLN(fkk+1.0D0,idum) - DGAMLN(tfnf+1.0D0,idum)
   bk = EXP(bk)
   sumr = zeror
   sumi = zeroi

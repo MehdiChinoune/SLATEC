@@ -1,6 +1,5 @@
 !** DERKF
-SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
-    Rpar,Ipar)
+SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,Rpar,Ipar)
   IMPLICIT NONE
   !>
   !***
@@ -605,16 +604,13 @@ SUBROUTINE DERKF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !           comments to agree with DDERKF.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL Atol, Rpar, Rtol, Rwork, T, Tout, Y
-  INTEGER Idid, Info, Ipar, Iwork, kdi, kf1, kf2, kf3, kf4, kf5, &
+  REAL Atol(*), Rpar(*), Rtol(*), Rwork(*), T, Tout, Y(*)
+  INTEGER Idid, Info(15), Ipar(*), Iwork(*), kdi, kf1, kf2, kf3, kf4, kf5, &
     kh, krer, ktf, kto, ktstar, ku, kyp, kys, Liw, Lrw
   INTEGER Neq
   LOGICAL stiff, nonstf
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
-  !
-  DIMENSION Y(*), Info(15), Rtol(*), Atol(*), Rwork(*), Iwork(*), &
-    Rpar(*), Ipar(*)
   !
   EXTERNAL :: F
   !

@@ -70,9 +70,8 @@ SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
   
   INTEGER igo
   REAL(8) :: gam, one, rgamsq, Dd1, Dd2, dh11, dh12, dh21, &
-    dh22, Dparam, dp1, dp2, dq1, dq2, du, Dy1, zero, &
+    dh22, Dparam(5), dp1, dp2, dq1, dq2, du, Dy1, zero, &
     gamsq, dflag, dtemp, Dx1, two
-  DIMENSION Dparam(5)
   SAVE zero, one, two, gam, gamsq, rgamsq
   DATA zero, one, two/0.0D0, 1.0D0, 2.0D0/
   DATA gam, gamsq, rgamsq/4096.0D0, 16777216.D0, 5.9604645D-8/

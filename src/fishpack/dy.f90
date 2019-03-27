@@ -29,12 +29,10 @@ SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   
-  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, TDLx3, TDLy3, U, Uyyy, Uyyyy
   INTEGER I, Idmn, IS, J, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
+  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, TDLx3, TDLy3, U(Idmn,*), Uyyy, Uyyyy
   COMMON /SPLPCM/ KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
-    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, &
-    DLY4
-  DIMENSION U(Idmn,*)
+    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   !* FIRST EXECUTABLE STATEMENT  DY
   IF ( J>2.AND.J<(L-1) ) THEN
     !
@@ -57,8 +55,7 @@ SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
           Uyyyy = (U(I,L-1)-4.0*U(I,1)+6.0*U(I,2)-4.0*U(I,3)+U(I,4))/DLY4
           RETURN
         ELSE
-          Uyyy = (-3.0*U(I,1)+10.0*U(I,2)-12.0*U(I,3)+6.0*U(I,4)-U(I,5))&
-            /TDLy3
+          Uyyy = (-3.0*U(I,1)+10.0*U(I,2)-12.0*U(I,3)+6.0*U(I,4)-U(I,5))/TDLy3
           Uyyyy = (2.0*U(I,1)-9.0*U(I,2)+16.0*U(I,3)-14.0*U(I,4)+6.0*U(I,5)&
             -U(I,6))/DLY4
           RETURN
@@ -72,8 +69,7 @@ SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
           !     PERIODIC AT Y=D-DLY
           !
           Uyyy = (-U(I,L-3)+2.0*U(I,L-2)-2.0*U(I,1)+U(I,2))/TDLy3
-          Uyyyy = (U(I,L-3)-4.0*U(I,L-2)+6.0*U(I,L-1)-4.0*U(I,1)+U(I,2))&
-            /DLY4
+          Uyyyy = (U(I,L-3)-4.0*U(I,L-2)+6.0*U(I,L-1)-4.0*U(I,1)+U(I,2))/DLY4
           RETURN
         ELSE
           Uyyy = (U(I,L-4)-6.0*U(I,L-3)+12.0*U(I,L-2)-10.0*U(I,L-1)&
@@ -97,8 +93,7 @@ SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
     !     COMPUTE PARTIAL DERIVATIVE APPROXIMATIONS AT Y=C
     !
     IF ( KSWy/=1 ) THEN
-      Uyyy = (-5.0*U(I,1)+18.0*U(I,2)-24.0*U(I,3)+14.0*U(I,4)-3.0*U(I,5))&
-        /TDLy3
+      Uyyy = (-5.0*U(I,1)+18.0*U(I,2)-24.0*U(I,3)+14.0*U(I,4)-3.0*U(I,5))/TDLy3
       Uyyyy = (3.0*U(I,1)-14.0*U(I,2)+26.0*U(I,3)-24.0*U(I,4)+11.0*U(I,5)&
         -2.0*U(I,6))/DLY4
       RETURN

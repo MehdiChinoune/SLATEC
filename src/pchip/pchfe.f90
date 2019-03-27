@@ -159,8 +159,7 @@ SUBROUTINE PCHFE(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,Ierr)
       !
       !     N.LT.2 RETURN.
       Ierr = -1
-      CALL XERMSG('SLATEC','PCHFE','NUMBER OF DATA POINTS LESS THAN TWO',&
-        Ierr,1)
+      CALL XERMSG('SLATEC','PCHFE','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
       RETURN
     ELSEIF ( Incfd<1 ) THEN
       !

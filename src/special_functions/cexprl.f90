@@ -33,13 +33,12 @@ COMPLEX FUNCTION CEXPRL(Z)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   REAL alneps, r, R1MACH, rbnd, xln, xn
   INTEGER i, nterms
   COMPLEX Z
-  LOGICAL first
-  SAVE nterms, rbnd, first
-  DATA first/.TRUE./
+  SAVE nterms, rbnd
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  CEXPRL
   IF ( first ) THEN
     alneps = LOG(R1MACH(3))
@@ -47,8 +46,8 @@ COMPLEX FUNCTION CEXPRL(Z)
     xln = LOG((xn+1.0)/1.36)
     nterms = INT( xn - (xn*xln+alneps)/(xln+1.36) + 1.5 )
     rbnd = R1MACH(3)
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   r = ABS(Z)
   IF ( r>0.5 ) CEXPRL = (EXP(Z)-1.0)/Z

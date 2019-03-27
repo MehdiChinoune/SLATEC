@@ -34,12 +34,11 @@ REAL FUNCTION EXPREL(X)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   REAL absx, alneps, R1MACH, X, xbnd, xln, xn
   INTEGER i, nterms
-  LOGICAL first
-  SAVE nterms, xbnd, first
-  DATA first/.TRUE./
+  SAVE nterms, xbnd
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  EXPREL
   IF ( first ) THEN
     alneps = LOG(R1MACH(3))
@@ -47,8 +46,8 @@ REAL FUNCTION EXPREL(X)
     xln = LOG((xn+1.0)/1.36)
     nterms = INT( xn - (xn*xln+alneps)/(xln+1.36) + 1.5 )
     xbnd = R1MACH(3)
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   absx = ABS(X)
   IF ( absx>0.5 ) EXPREL = (EXP(X)-1.0)/X

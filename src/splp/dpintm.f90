@@ -52,9 +52,8 @@ SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   
-  INTEGER i, iopt, Ipagef, Ix, Lmx, lp4, M, N, n20008, n20012, nerr
+  INTEGER i, iopt, Ipagef, Ix(*), Lmx, lp4, M, N, n20008, n20012, nerr
   REAL(8) :: Sx(*), zero, one
-  DIMENSION Ix(*)
   SAVE zero, one
   DATA zero, one/0.D0, 1.D0/
   !* FIRST EXECUTABLE STATEMENT  DPINTM
@@ -64,8 +63,7 @@ SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   !
   IF ( M<=0.OR.N<=0 ) THEN
     nerr = 55
-    CALL XERMSG('SLATEC','DPINTM','MATRIX DIMENSION M OR N .LE. 0',nerr,&
-      iopt)
+    CALL XERMSG('SLATEC','DPINTM','MATRIX DIMENSION M OR N .LE. 0',nerr,iopt)
   ENDIF
   !
   !     VERIFY IF VALUE OF LMX IS LARGE ENOUGH.

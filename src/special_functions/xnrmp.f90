@@ -139,9 +139,8 @@ SUBROUTINE XNRMP(Nu,Mu1,Mu2,Sarg,Mode,Spn,Ipn,Isig,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   
   INTEGER i, Ierror, ip, ip1, ip2, j, k, mu
-  INTEGER Nu, Mu1, Mu2, Mode, Ipn, Isig
-  REAL Sarg, Spn
-  DIMENSION Spn(*), Ipn(*)
+  INTEGER Nu, Mu1, Mu2, Mode, Ipn(*), Isig
+  REAL Sarg, Spn(*)
   REAL c1, c2, p, p1, p2, p3, s, sx, t, tx, x, rk
   ! CALL XSET TO INITIALIZE EXTENDED-RANGE ARITHMETIC (SEE XSET
   ! LISTING FOR DETAILS)

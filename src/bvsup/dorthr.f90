@@ -78,11 +78,9 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   REAL(8) :: DDOT, D1MACH
-  INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot(*), l, M, &
-    mk, N, Nrda
+  INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot(*), l, M, mk, N, Nrda
   REAL(8) :: A(Nrda,*), acc, akk, anorm, as, asave, Diag(*), &
-    diagk, dum, Rows(*), Rs(*), rss, sad, Scales(*), &
-    sig, sigma, sruro, uro
+    diagk, dum, Rows(*), Rs(*), rss, sad, Scales(*), sig, sigma, sruro, uro
   !
   !     ******************************************************************
   !

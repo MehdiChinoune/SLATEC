@@ -122,11 +122,9 @@ SUBROUTINE DLSSUD(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   INTEGER J4SAVE
   REAL(8) :: DDOT, D1MACH
   INTEGER i, Iflag, Irank, irp, Iscale, Isflg, j, jr, k, kp, &
-    Kpivot(*), l, M, maxmes, mj, Mlso, N, nfat, nfatal, &
-    nmir, Nrda, Nrdu, nu
+    Kpivot(*), l, M, maxmes, mj, Mlso, N, nfat, nfatal, nmir, Nrda, Nrdu, nu
   REAL(8) :: A(Nrda,*), B(*), Diag(*), Div(*), gam, gamma, &
-    Q(Nrda,*), res, S(*), Scales(*), ss, Td(*), &
-    U(Nrdu,*), uro, X(*)
+    Q(Nrda,*), res, S(*), Scales(*), ss, Td(*), U(Nrdu,*), uro, X(*)
   !
   !     ******************************************************************
   !

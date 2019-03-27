@@ -207,11 +207,8 @@ SUBROUTINE DQAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
   !
-  REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Points, Result, Work
-  INTEGER Ier, Iwork, Last, Leniw, Lenw, limit, lvl, l1, l2, l3, &
-    l4, Neval, Npts2
-  !
-  DIMENSION Iwork(*), Points(*), Work(*)
+  REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Points(*), Result, Work(*)
+  INTEGER Ier, Iwork(*), Last, Leniw, Lenw, limit, lvl, l1, l2, l3, l4, Neval, Npts2
   !
   REAL(8), EXTERNAL :: F
   !

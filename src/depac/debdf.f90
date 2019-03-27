@@ -748,21 +748,16 @@ SUBROUTINE DEBDF(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   
   !
   !
-  REAL Atol, EL0, H, HMIn, HMXi, HU, ROWns, Rpar, Rtol, Rwork, &
-    T, TN, TOLd, Tout, UROund, Y
+  REAL Atol(*), EL0, H, HMIn, HMXi, HU, ROWns, Rpar(*), Rtol(*), Rwork(*), &
+    T, TN, TOLd, Tout, UROund, Y(*)
   INTEGER IACor, IBAnd, IBEgin, icomi, icomr, idelsn, Idid, IER, &
-    IEWt, iinout, IINteg, IJAc, ilrw, Info, INIt, IOWns, &
-    Ipar, IQUit, ISAvf, ITOl
-  INTEGER itstar, ITStop, IWM, Iwork, IYH, iypout, JSTart, &
-    KFLag, KSTeps, L, Liw, Lrw, MAXord, METh, MITer, ml, mu, &
-    N, Neq
+    IEWt, iinout, IINteg, IJAc, ilrw, Info(15), INIt, IOWns, Ipar(*), IQUit, ISAvf, ITOl
+  INTEGER itstar, ITStop, IWM, Iwork(*), IYH, iypout, JSTart, &
+    KFLag, KSTeps, L, Liw, Lrw, MAXord, METh, MITer, ml, mu, N, Neq
   INTEGER NFE, NJE, NQ, NQU, NST
   LOGICAL intout
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3
-  !
-  DIMENSION Y(*), Info(15), Rtol(*), Atol(*), Rwork(*), Iwork(*), &
-    Rpar(*), Ipar(*)
   !
   COMMON /DEBDF1/ TOLd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
     UROund, IQUit, INIt, IYH, IEWt, IACor, ISAvf, IWM, &

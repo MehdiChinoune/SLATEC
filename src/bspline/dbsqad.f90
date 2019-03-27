@@ -65,29 +65,21 @@ SUBROUTINE DBSQAD(T,Bcoef,N,K,X1,X2,Bquad,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
-  INTEGER i, il1, il2, ilo, inbv, jf, K, left, m, mf, mflag, N, &
-    npk, np1
-  REAL(8) :: a, aa, b, bb, Bcoef, bma, bpa, Bquad, c1, gpts, &
-    gwts, gx, q, sum, T, ta, tb, Work, X1, X2, y1, &
-    y2
+  INTEGER i, il1, il2, ilo, inbv, jf, K, left, m, mf, mflag, N, npk, np1
+  REAL(8) :: a, aa, b, bb, Bcoef(*), bma, bpa, Bquad, c1, gx, q, sum(5), T(*), &
+    ta, tb, Work(*), X1, X2, y1, y2
   REAL(8) :: DBVALU
-  DIMENSION T(*), Bcoef(*), gpts(9), gwts(9), sum(5), Work(*)
   !
-  SAVE gpts, gwts
-  DATA gpts(1), gpts(2), gpts(3), gpts(4), gpts(5), gpts(6), gpts(7), &
-    gpts(8), gpts(9)/5.77350269189625764D-01, 2.38619186083196909D-01, &
-    6.61209386466264514D-01, 9.32469514203152028D-01, &
-    1.48874338981631211D-01, 4.33395394129247191D-01, &
-    6.79409568299024406D-01, 8.65063366688984511D-01, &
-    9.73906528517171720D-01/
-  DATA gwts(1), gwts(2), gwts(3), gwts(4), gwts(5), gwts(6), gwts(7), &
-    gwts(8), gwts(9)/1.00000000000000000D+00, 4.67913934572691047D-01, &
-    3.60761573048138608D-01, 1.71324492379170345D-01, &
-    2.95524224714752870D-01, 2.69266719309996355D-01, &
-    2.19086362515982044D-01, 1.49451349150580593D-01, &
-    6.66713443086881376D-02/
+  REAL(8), PARAMETER :: gpts(9) = [ 5.77350269189625764D-01, 2.38619186083196909D-01, &
+    6.61209386466264514D-01, 9.32469514203152028D-01, 1.48874338981631211D-01, &
+    4.33395394129247191D-01, 6.79409568299024406D-01, 8.65063366688984511D-01, &
+    9.73906528517171720D-01 ]
+  REAL(8), PARAMETER :: gwts(9) = [ 1.00000000000000000D+00, 4.67913934572691047D-01, &
+    3.60761573048138608D-01, 1.71324492379170345D-01, 2.95524224714752870D-01, &
+    2.69266719309996355D-01, 2.19086362515982044D-01, 1.49451349150580593D-01, &
+    6.66713443086881376D-02 ]
   !
   !* FIRST EXECUTABLE STATEMENT  DBSQAD
   Bquad = 0.0D0

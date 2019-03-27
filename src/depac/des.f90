@@ -35,17 +35,14 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !           IF-THEN-ELSEs.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
   
-  REAL a, absdel, Alpha, Atol, Beta, del, Delsgn, dt, Eps, Fouru, &
-    G, Gi, H, ha, Hold, P, Phi, Psi, R1MACH, Rpar
-  REAL Rtol, Sig, T, Told, Tout, Tstop, Twou, u, V, W, Wt, X, Xold, Y, Yp, Ypout, Yy
-  INTEGER Idid, Info, Init, Ipar, Iquit, Iv, Ivc, k, Kgi, Kle4, &
+  INTEGER Idid, Info(15), Init, Ipar(*), Iquit, Iv(10), Ivc, k, Kgi, Kle4, &
     Kold, Kord, Kprev, Ksteps, l, ltol, maxnum, natolp, Neq, nrtolp
+  REAL a, absdel, Alpha(12), Atol(*), Beta(12), del, Delsgn, dt, Eps, Fouru, &
+    G(13), Gi(11), H, ha, Hold, P(*), Phi(Neq,16), Psi(12), R1MACH, Rpar(*)
+  REAL Rtol(*), Sig(13), T, Told, Tout, Tstop, Twou, u, V(12), W(12), Wt(*), &
+    X, Xold, Y(*), Yp(*), Ypout(*), Yy(*)
   INTEGER Ns
   LOGICAL Stiff, crash, Start, Phase1, Nornd, Intout
-  !
-  DIMENSION Y(*), Yy(*), Wt(*), Phi(Neq,16), P(*), Yp(*), Ypout(*), &
-    Psi(12), Alpha(12), Beta(12), Sig(13), V(12), W(12), &
-    G(13), Gi(11), Iv(10), Info(15), Rtol(*), Atol(*), Rpar(*), Ipar(*)
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
   !
@@ -112,8 +109,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
     WRITE (xern1,'(I8)') Info(2)
     CALL XERMSG('SLATEC','DES','IN DEABM, INFO(2) MUST BE 0 OR 1 INDICATING&
       & SCALAR AND VECTOR ERROR TOLERANCES, RESPECTIVELY.&
-      & YOU HAVE CALLED THE CODE WITH INFO(2) = '//&
-      xern1,4,1)
+      & YOU HAVE CALLED THE CODE WITH INFO(2) = '//xern1,4,1)
     Idid = -33
   ENDIF
   !
@@ -170,8 +166,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   ENDDO
   !
   IF ( Info(4)==1 ) THEN
-    IF ( SIGN(1.,Tout-T)/=SIGN(1.,Tstop-T).OR.ABS(Tout-T)>ABS(Tstop-T) )&
-        THEN
+    IF ( SIGN(1.,Tout-T)/=SIGN(1.,Tstop-T).OR.ABS(Tout-T)>ABS(Tstop-T) ) THEN
       WRITE (xern3,'(1PE15.6)') Tout
       WRITE (xern4,'(1PE15.6)') Tstop
       CALL XERMSG('SLATEC','DES','IN DEABM, YOU HAVE CALLED THE CODE WITH  TOUT = '&

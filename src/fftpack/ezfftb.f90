@@ -110,9 +110,8 @@ SUBROUTINE EZFFTB(N,R,Azero,A,B,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL A, Azero, B, R, Wsave
+  REAL A(*), Azero, B(*), R(*), Wsave(*)
   INTEGER i, N, ns2
-  DIMENSION R(*), A(*), B(*), Wsave(*)
   !* FIRST EXECUTABLE STATEMENT  EZFFTB
   IF ( N<2 ) THEN
     R(1) = Azero

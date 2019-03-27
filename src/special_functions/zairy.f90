@@ -149,15 +149,14 @@ SUBROUTINE ZAIRY(Zr,Zi,Id,Kode,Air,Aii,Nz,Ierr)
   
   !     COMPLEX AI,CONE,CSQ,CY,S1,S2,TRM1,TRM2,Z,ZTA,Z3
   REAL(8) :: aa, ad, Aii, Air, ak, alim, atrm, az, az3, bk, &
-    cc, ck, coef, conei, coner, csqi, csqr, cyi, &
-    cyr, c1, c2, dig, dk, d1, d2, elim, fid, fnu, &
+    cc, ck, coef, conei, coner, csqi, csqr, cyi(1), &
+    cyr(1), c1, c2, dig, dk, d1, d2, elim, fid, fnu, &
     ptr, rl, r1m5, sfac, sti, str, s1i, s1r, s2i, &
     s2r, tol, trm1i, trm1r, trm2i, trm2r, tth, zeroi, &
-    zeror, Zi, Zr, ztai, ztar, z3i, z3r, D1MACH, &
-    ZABS, alaz, bb
+    zeror, Zi, Zr, ztai, ztar, z3i, z3r, alaz, bb
   INTEGER Id, Ierr, iflag, k, Kode, k1, k2, mr, nn, Nz, I1MACH
-  DIMENSION cyr(1), cyi(1)
-  EXTERNAL :: ZABS, ZEXP, ZSQRT
+  REAL(8), EXTERNAL :: D1MACH, ZABS
+  EXTERNAL :: ZEXP, ZSQRT
   DATA tth, c1, c2, coef/6.66666666666666667D-01, &
     3.55028053887817240D-01, 2.58819403792806799D-01, &
     1.83776298473930683D-01/

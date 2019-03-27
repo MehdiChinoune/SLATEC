@@ -41,15 +41,13 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
-  COMPLEX arg, asum, bsum, cwrk, cz, czero, phi, sum, Y, Z, zb, &
-    zeta1, zeta2, zn, zr
+
+  INTEGER i, iform, Ikflg, init, Kode, N, nn, Nuf, nw
+  COMPLEX arg, asum, bsum, cwrk(16), cz, phi, sum, Y(N), Z, zb, zeta1, zeta2, zn, zr
   REAL aarg, aic, Alim, aphi, ascle, ax, ay, Elim, fnn, Fnu, gnn, &
     gnu, rcz, Tol, x, yy, R1MACH
-  INTEGER i, iform, Ikflg, init, Kode, N, nn, Nuf, nw
-  DIMENSION Y(N), cwrk(16)
-  DATA czero/(0.0E0,0.0E0)/
-  DATA aic/1.265512123484645396E+00/
+  COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0)
+  DATA aic /1.265512123484645396E+00/
   !* FIRST EXECUTABLE STATEMENT  CUOIK
   Nuf = 0
   nn = N
@@ -106,8 +104,7 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
         IF ( rcz>(-Elim) ) THEN
           ascle = 1.0E+3*R1MACH(1)/Tol
           cz = cz + CLOG(phi)
-          IF ( iform/=1 ) cz = cz - CMPLX(0.25E0,0.0E0)*CLOG(arg)&
-            - CMPLX(aic,0.0E0)
+          IF ( iform/=1 ) cz = cz - CMPLX(0.25E0,0.0E0)*CLOG(arg)- CMPLX(aic,0.0E0)
           ax = EXP(rcz)/Tol
           ay = AIMAG(cz)
           cz = CMPLX(ax,0.0E0)*CMPLX(COS(ay),SIN(ay))
@@ -154,8 +151,7 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
     IF ( rcz>(-Elim) ) THEN
       ascle = 1.0E+3*R1MACH(1)/Tol
       cz = cz + CLOG(phi)
-      IF ( iform/=1 ) cz = cz - CMPLX(0.25E0,0.0E0)*CLOG(arg)&
-        - CMPLX(aic,0.0E0)
+      IF ( iform/=1 ) cz = cz - CMPLX(0.25E0,0.0E0)*CLOG(arg)- CMPLX(aic,0.0E0)
       ax = EXP(rcz)/Tol
       ay = AIMAG(cz)
       cz = CMPLX(ax,0.0E0)*CMPLX(COS(ay),SIN(ay))

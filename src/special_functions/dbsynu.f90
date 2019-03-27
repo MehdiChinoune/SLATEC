@@ -80,22 +80,19 @@ SUBROUTINE DBSYNU(X,Fnu,N,Y)
 
   !
   INTEGER i, inu, j, k, kk, N, nn
-  REAL(8) :: a, ak, arg, a1, a2, bk, cb, cbk, cc, cck, ck, coef, cpt, cp1, cp2, &
+  REAL(8) :: a(120), ak, arg, a1, a2, bk, cb(120), cbk, cck, ck, coef, cpt, cp1, cp2, &
     cs, cs1, cs2, cx, dnu, dnu2, etest, etx, f, fc, fhs, fk, fks, flrx, fmu, fn, &
-    Fnu, fx, g, g1, g2, hpi, p, pi, pt, q, rb, rbk, rck, relb, rpt, rp1, rp2, rs, &
+    Fnu, fx, g, g1, g2, hpi, p, pi, pt, q, rb(120), rbk, rck, relb, rpt, rp1, rp2, rs, &
     rs1, rs2, rthpi, rx, s, sa, sb, smu, ss, st, s1, s2, tb, tm, tol, t1, t2, &
-    X, x1, x2, Y
-  DIMENSION a(120), rb(120), cb(120), Y(*), cc(8)
+    X, x1, x2, Y(*)
   REAL(8), EXTERNAL :: DGAMMA, D1MACH
-  SAVE x1, x2, pi, rthpi, hpi, cc
+  SAVE x1, x2, pi, rthpi, hpi
   DATA x1, x2/3.0D0, 20.0D0/
   DATA pi, rthpi/3.14159265358979D+00, 7.97884560802865D-01/
   DATA hpi/1.57079632679490D+00/
-  DATA cc(1), cc(2), cc(3), cc(4), cc(5), cc(6), cc(7), &
-    cc(8)/5.77215664901533D-01, -4.20026350340952D-02, &
-    -4.21977345555443D-02, 7.21894324666300D-03, &
-    -2.15241674114900D-04, -2.01348547807000D-05, &
-    1.13302723200000D-06, 6.11609500000000D-09/
+  REAL(8), PARAMETER :: cc(8) = [ 5.77215664901533D-01, -4.20026350340952D-02, &
+    -4.21977345555443D-02, 7.21894324666300D-03, -2.15241674114900D-04, &
+    -2.01348547807000D-05, 1.13302723200000D-06, 6.11609500000000D-09 ]
   !* FIRST EXECUTABLE STATEMENT  DBSYNU
   ak = D1MACH(3)
   tol = MAX(ak,1.0D-15)

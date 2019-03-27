@@ -1,7 +1,6 @@
 !** SNSQ
 SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
-    Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,R,Lr,Qtf,&
-    Wa1,Wa2,Wa3,Wa4)
+    Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,R,Lr,Qtf,Wa1,Wa2,Wa3,Wa4)
   IMPLICIT NONE
   !>
   !***
@@ -430,8 +429,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  INTEGER Iopt, N, Maxfev, Ml, Mu, Mode, Nprint, Info, Nfev, &
-    Ldfjac, Lr, Njev
+  INTEGER Iopt, N, Maxfev, Ml, Mu, Mode, Nprint, Info, Nfev, Ldfjac, Lr, Njev
   REAL Xtol, Epsfcn, Factor
   REAL X(*), Fvec(*), Diag(*), Fjac(Ldfjac,*), R(Lr), Qtf(*), Wa1(*), &
     Wa2(*), Wa3(*), Wa4(*)
@@ -443,8 +441,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
     p1, p5, p001, p0001, ratio, sum, temp, xnorm, zero
   REAL R1MACH, ENORM
   SAVE one, p1, p5, p001, p0001, zero
-  DATA one, p1, p5, p001, p0001, zero/1.0E0, 1.0E-1, 5.0E-1, &
-    1.0E-3, 1.0E-4, 0.0E0/
+  DATA one, p1, p5, p001, p0001, zero/1.0E0, 1.0E-1, 5.0E-1, 1.0E-3, 1.0E-4, 0.0E0/
   !
   !* FIRST EXECUTABLE STATEMENT  SNSQ
   epsmch = R1MACH(4)

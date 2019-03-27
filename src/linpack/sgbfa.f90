@@ -109,8 +109,7 @@ SUBROUTINE SGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   REAL Abd(Lda,*)
   !
   REAL t
-  INTEGER i, ISAMAX, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, &
-    mm, nm1
+  INTEGER i, ISAMAX, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, mm, nm1
   !
   !* FIRST EXECUTABLE STATEMENT  SGBFA
   m = Ml + Mu + 1

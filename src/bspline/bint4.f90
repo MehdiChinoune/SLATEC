@@ -110,10 +110,9 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !
   INTEGER i, Ibcl, Ibcr, iflag, ilb, ileft, it, iub, iw, iwp, j, &
     jw, K, Kntopt, N, Ndata, ndm, np, nwrow
-  REAL Bcoef, Fbcl, Fbcr, T, tol, txn, tx1, vnikx, W, wdtol, &
-    work, X, xl, Y
+  REAL Bcoef(*), Fbcl, Fbcr, T(*), tol, txn, tx1, vnikx(4,4), W(5,*), wdtol, &
+    work(15), X(*), xl, Y(*)
   REAL R1MACH
-  DIMENSION X(*), Y(*), T(*), Bcoef(*), W(5,*), vnikx(4,4), work(15)
   !* FIRST EXECUTABLE STATEMENT  BINT4
   wdtol = R1MACH(4)
   tol = SQRT(wdtol)
@@ -227,15 +226,14 @@ SUBROUTINE BINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
       IF ( iflag==2 ) THEN
         !
         !
-        CALL XERMSG('SLATEC','BINT4','THE SYSTEM OF EQUATIONS IS SINGULAR',&
-          2,1)
+        CALL XERMSG('SLATEC','BINT4','THE SYSTEM OF EQUATIONS IS SINGULAR', 2,1)
         RETURN
       ELSE
         CALL BNSLV(W(iwp,1),nwrow,N,ilb,iub,Bcoef)
         RETURN
       ENDIF
     ENDIF
-    50     CALL XERMSG('SLATEC','BINT4','X VALUES ARE NOT DISTINCT OR NOT ORDERED',&
+    50 CALL XERMSG('SLATEC','BINT4','X VALUES ARE NOT DISTINCT OR NOT ORDERED',&
       2,1)
     RETURN
   ENDIF

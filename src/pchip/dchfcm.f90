@@ -104,8 +104,7 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !
   !  INITIALIZE.
   !
-  DATA zero/0.D0/, one/1.D0/, two/2.D0/, three/3.D0/, four/4.D0/, &
-    ten/10.D0/
+  DATA zero/0.D0/, one/1.D0/, two/2.D0/, three/3.D0/, four/4.D0/, ten/10.D0/
   !
   !        MACHINE-DEPENDENT PARAMETER -- SHOULD BE ABOUT 10*UROUND.
   !* FIRST EXECUTABLE STATEMENT  DCHFCM

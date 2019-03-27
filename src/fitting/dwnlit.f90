@@ -46,10 +46,8 @@ SUBROUTINE DWNLIT(W,Mdw,M,N,L,Ipivot,Itype,H,Scale,Rnorm,Idope,Dope,Done)
   INTEGER, EXTERNAL :: IDAMAX
   LOGICAL, EXTERNAL :: DWNLT2
   !
-  REAL(8) :: alsq, amax, eanorm, factor, hbar, rn, sparam(5), &
-    t, tau
-  INTEGER i, i1, imax, ir, j, j1, jj, jp, krank, l1, lb, lend, &
-    me, mend, niv, nsoln
+  REAL(8) :: alsq, amax, eanorm, factor, hbar, rn, sparam(5), t, tau
+  INTEGER i, i1, imax, ir, j, j1, jj, jp, krank, l1, lb, lend, me, mend, niv, nsoln
   LOGICAL indep, recalc
   !
   !* FIRST EXECUTABLE STATEMENT  DWNLIT

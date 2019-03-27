@@ -38,21 +38,20 @@ REAL(8) FUNCTION D9PAK(Y,N)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   901009  Routine used I1MACH(7) where it should use I1MACH(10),
   !           Corrected (RWC)
-  
+
   INTEGER I1MACH, N, nmax, nmin, nsum, ny
   REAL(8) :: Y, a1n2b, a1n210, D1MACH
-  LOGICAL first
-  SAVE nmin, nmax, a1n210, first
+  SAVE nmin, nmax, a1n210
   DATA a1n210/3.321928094887362347870319429489D0/
-  DATA first/.TRUE./
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9PAK
   IF ( first ) THEN
     a1n2b = 1.0D0
     IF ( I1MACH(10)/=2 ) a1n2b = D1MACH(5)*a1n210
     nmin = INT( a1n2b*I1MACH(15) )
     nmax = INT( a1n2b*I1MACH(16) )
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   CALL D9UPAK(Y,D9PAK,ny)
   !

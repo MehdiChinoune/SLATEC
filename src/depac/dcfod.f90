@@ -29,9 +29,8 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
   !
   !
   INTEGER i, ib, Meth, nq, nqm1, nqp1
-  REAL(8) :: agamq, Elco, fnq, fnqm1, pc, pint, ragq, rq1fac, &
-    rqfac, Tesco, tsign, xpin
-  DIMENSION Elco(13,12), Tesco(3,12)
+  REAL(8) :: agamq, Elco(13,12), fnq, fnqm1, pc(12), pint, ragq, rq1fac, &
+    rqfac, Tesco(3,12), tsign, xpin
   !     ------------------------------------------------------------------
   !      DCFOD  IS CALLED BY THE INTEGRATOR ROUTINE TO SET COEFFICIENTS
   !      NEEDED THERE.  THE COEFFICIENTS FOR THE CURRENT METHOD, AS
@@ -58,8 +57,7 @@ SUBROUTINE DCFOD(Meth,Elco,Tesco)
   !      SIZE AT ORDER NQ - 1 IF K = 1, AT ORDER NQ IF K = 2, AND AT ORDER
   !      NQ + 1 IF K = 3.
   !     ------------------------------------------------------------------
-  DIMENSION pc(12)
-  !
+
   !* FIRST EXECUTABLE STATEMENT  DCFOD
   IF ( Meth==2 ) THEN
     !

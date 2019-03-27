@@ -751,18 +751,15 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   INTEGER IACor, IBAnd, IBEgin, icomi, icomr, idelsn, Idid, IER, &
-    IEWt, iinout, IINteg, IJAc, ilrw, Info, INIt, IOWns, &
-    Ipar, IQUit, ISAvf, ITOl, itstar, ITStop, IWM, Iwork, &
+    IEWt, iinout, IINteg, IJAc, ilrw, Info(15), INIt, IOWns, &
+    Ipar(*), IQUit, ISAvf, ITOl, itstar, ITStop, IWM, Iwork(*), &
     IYH, iypout, JSTart, KFLag, KSTeps, L, Liw, Lrw, MAXord, &
     METh, MITer, ml, mu, N, Neq, NFE, NJE, NQ, NQU, NST
-  REAL(8) :: Atol, EL0, H, HMIn, HMXi, HU, ROWns, Rpar, Rtol, &
-    Rwork, T, TN, TOLd, Tout, UROund, Y
+  REAL(8) :: Atol(*), EL0, H, HMIn, HMXi, HU, ROWns, Rpar(*), Rtol(*), &
+    Rwork(*), T, TN, TOLd, Tout, UROund, Y(*)
   LOGICAL intout
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3
-  !
-  DIMENSION Y(*), Info(15), Rtol(*), Atol(*), Rwork(*), Iwork(*), &
-    Rpar(*), Ipar(*)
   !
   COMMON /DDEBD1/ TOLd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
     UROund, IQUit, INIt, IYH, IEWt, IACor, ISAvf, IWM, &
@@ -805,8 +802,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     WRITE (xern1,'(I8)') Info(2)
     CALL XERMSG('SLATEC','DDEBDF','INFO(2) MUST BE 0 OR 1 INDICATING SCALAR&
       & AND VECTOR ERROR TOLERANCES, RESPECTIVELY.&
-      & YOU HAVE CALLED THE CODE WITH INFO(2) = '//&
-      xern1,4,1)
+      & YOU HAVE CALLED THE CODE WITH INFO(2) = '//xern1,4,1)
     Idid = -33
   ENDIF
   !
@@ -914,8 +910,7 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !
   CALL DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Rwork(iypout),Rwork(IYH),&
     Rwork(IYH),Rwork(IEWt),Rwork(ISAvf),Rwork(IACor),Rwork(IWM),&
-    Iwork(1),DJAC,intout,Rwork(1),Rwork(12),Rwork(idelsn),Rpar,&
-    Ipar)
+    Iwork(1),DJAC,intout,Rwork(1),Rwork(12),Rwork(idelsn),Rpar,Ipar)
   !
   Iwork(iinout) = -1
   IF ( intout ) Iwork(iinout) = 1

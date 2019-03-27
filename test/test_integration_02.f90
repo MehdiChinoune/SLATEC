@@ -104,8 +104,7 @@ CONTAINS
     !
     IF ( Kprint>=3 ) THEN
       WRITE (Lun,99004)
-      99004 FORMAT (/' Test error returns from DAVINT'/' 4 error messages expected'/&
-        )
+      99004 FORMAT (/' Test error returns from DAVINT'/' 4 error messages expected'/ )
     ENDIF
     DO i = 1, 20
       x(i) = (i-1)/19.0D0 - 0.01D0
@@ -265,12 +264,10 @@ CONTAINS
     CALL DGAUS8(DFQD1,a,b,err,ans,ierr)
     cor = 2.0D0
     IF ( ABS(ans-cor)<=tol.AND.ierr==1 ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, &
-        ierr
+      IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, ierr
     ELSE
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, &
-        ierr
+      IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, ierr
     ENDIF
     !
     !     Second accuracy test.
@@ -281,12 +278,10 @@ CONTAINS
     CALL DGAUS8(DFQD2,a,b,err,ans,ierr)
     cor = (EXP(b)-1.0D0)/101.0D0
     IF ( ABS(ans-cor)<=tol.AND.ierr==1 ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, &
-        ierr
+      IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, ierr
     ELSE
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, &
-        ierr
+      IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, ierr
     ENDIF
     !
     !     Test error returns.
@@ -313,11 +308,9 @@ CONTAINS
     !     See if test passed.
     !
     IF ( ierr==2 ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, &
-        err, cor
+      IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, err, cor
     ELSE
-      IF ( Kprint>=2 ) WRITE (Lun,FMT=99006) 'FAILED', req, ans, ierr, &
-        err, cor
+      IF ( Kprint>=2 ) WRITE (Lun,FMT=99006) 'FAILED', req, ans, ierr, err, cor
       Ipass = 0
       fatal = .TRUE.
     ENDIF
@@ -420,12 +413,10 @@ CONTAINS
     CALL DQNC79(DFQD1,a,b,err,ans,ierr,nfct)
     cor = 2.0D0
     IF ( ABS(ans-cor)<=tol.AND.ierr==1 ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, &
-        ierr, nfct
+      IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, ierr, nfct
     ELSE
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, &
-        ierr, nfct
+      IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, ierr, nfct
     ENDIF
     !
     !     Second accuracy test.
@@ -436,12 +427,10 @@ CONTAINS
     CALL DQNC79(DFQD2,a,b,err,ans,ierr,nfct)
     cor = (EXP(b)-1.0D0)/101.0D0
     IF ( ABS(ans-cor)<=tol.AND.ierr==1 ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, &
-        ierr, nfct
+      IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, ierr, nfct
     ELSE
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, &
-        ierr, nfct
+      IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, ierr, nfct
     ENDIF
     !
     !     Test error returns.
@@ -468,11 +457,9 @@ CONTAINS
     !     See if test passed.
     !
     IF ( ierr==2 ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, &
-        err, cor
+      IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, err, cor
     ELSE
-      IF ( Kprint>=2 ) WRITE (Lun,FMT=99006) 'FAILED', req, ans, ierr, &
-        err, cor
+      IF ( Kprint>=2 ) WRITE (Lun,FMT=99006) 'FAILED', req, ans, ierr, err, cor
       Ipass = 0
       fatal = .TRUE.
     ENDIF

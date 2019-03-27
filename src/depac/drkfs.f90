@@ -54,19 +54,15 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !   910722  Updated AUTHOR section.  (ALS)
   
   !
-  INTEGER Idid, Info, Init, Ipar, Iquit, k, Kop, Ksteps, ktol, &
+  INTEGER Idid, Info(15), Init, Ipar(*), Iquit, k, Kop, Ksteps, ktol, &
     mxkop, mxstep, natolp, Neq, nrtolp, Nstifs, Ntstep
-  REAL(8) :: a, Atol, big, D1MACH, dt, Dtsign, DHVNRM, dy, &
-    ee, eeoet, es, estiff, esttol, et, F1, F2, F3, &
-    F4, F5, H, hmin, remin, Rer, Rpar, Rtol, s, T, &
-    tol, Told, Tolfac, Tout, u, U26, ute, Y, yavg, &
-    Yp, Ys
+  REAL(8) :: a, Atol(*), big, D1MACH, dt, Dtsign, DHVNRM, dy, &
+    ee, eeoet, es, estiff, esttol, et, F1(*), F2(*), F3(*), &
+    F4(*), F5(*), H, hmin, remin, Rer, Rpar(*), Rtol(*), s, T, &
+    tol, Told, Tolfac, Tout, u, U26, ute, Y(*), yavg, Yp(*), Ys(*)
   LOGICAL hfaild, output, Stiff, Nonstf
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
-  !
-  DIMENSION Y(*), Yp(*), F1(*), F2(*), F3(*), F4(*), F5(*), Ys(*), &
-    Info(15), Rtol(*), Atol(*), Rpar(*), Ipar(*)
   !
   EXTERNAL :: DF
   !
@@ -150,8 +146,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
     WRITE (xern1,'(I8)') Info(2)
     CALL XERMSG('SLATEC','DRKFS','IN DDERKF, INFO(2) MUST BE 0 OR 1 INDICATING&
       & SCALAR AND VECTOR ERROR TOLERANCES, RESPECTIVELY.&
-      & YOU HAVE CALLED THE CODE WITH INFO(2) = '//&
-      xern1,4,1)
+      & YOU HAVE CALLED THE CODE WITH INFO(2) = '//xern1,4,1)
     Idid = -33
   ENDIF
   !
@@ -476,8 +471,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
                 IF ( .NOT.(Stiff.OR.Nonstf) ) THEN
                   es = ABS&
                     (H*(0.055455D0*Yp(k)-0.035493D0*F1(k)-0.036571D0*F2&
-                    (k)+0.023107D0*F3(k)-0.009515D0*F4(k)&
-                    +0.003017D0*F5(k)))
+                    (k)+0.023107D0*F3(k)-0.009515D0*F4(k)+0.003017D0*F5(k)))
                   estiff = MAX(estiff,es/et)
                 ENDIF
                 eeoet = MAX(eeoet,ee/et)

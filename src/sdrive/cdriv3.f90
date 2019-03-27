@@ -763,8 +763,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     WRITE (intgr1,'(I8)') Nstate
     Ierflg = 26
     CALL XERMSG('SLATEC','CDRIV3',&
-      'Illegal input.  Improper value for NSTATE(= '//intgr1//&
-      ').',Ierflg,1)
+      'Illegal input.  Improper value for NSTATE(= '//intgr1//').',Ierflg,1)
     Nstate = 12
     RETURN
   ENDIF
@@ -804,16 +803,14 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     WRITE (intgr1,'(I8)') Miter
     Ierflg = 24
     CALL XERMSG('SLATEC','CDRIV3',&
-      'Illegal input.  Improper value for MITER(= '//intgr1//').',&
-      Ierflg,1)
+      'Illegal input.  Improper value for MITER(= '//intgr1//').',Ierflg,1)
     Nstate = 12
     RETURN
   ELSEIF ( Impl<0.OR.Impl>3 ) THEN
     WRITE (intgr1,'(I8)') Impl
     Ierflg = 25
     CALL XERMSG('SLATEC','CDRIV3',&
-      'Illegal input.  Improper value for IMPL(= '//intgr1//').',&
-      Ierflg,1)
+      'Illegal input.  Improper value for IMPL(= '//intgr1//').',Ierflg,1)
     Nstate = 12
     RETURN
   ELSEIF ( Mint==3.AND.(Miter==0.OR.Miter==3.OR.Impl/=0) ) THEN
@@ -822,8 +819,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     Ierflg = 29
     CALL XERMSG('SLATEC','CDRIV3',&
       'Illegal input.  For MINT = 3, the value of MITER, '//&
-      intgr1//', and/or IMPL, '//intgr2//', is not allowed.',&
-      Ierflg,1)
+      intgr1//', and/or IMPL, '//intgr2//', is not allowed.',Ierflg,1)
     Nstate = 12
     RETURN
   ELSEIF ( (Impl>=1.AND.Impl<=3).AND.Miter==0 ) THEN
@@ -854,8 +850,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
     CALL XERMSG('SLATEC','CDRIV3',&
       'Illegal input.  Insufficient storage allocated for the IWORK array.&
       & Based on the value of the input parameters involved, the required storage is '&
-      //intgr1//' .',Ierflg,&
-      1)
+      //intgr1//' .',Ierflg,1)
     Nstate = 12
     RETURN
   ENDIF
@@ -1343,8 +1338,7 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       WRITE (rl2,'(E16.8)') Tout
       Ierflg = 3
       CALL XERMSG('SLATEC','CDRIV3','At T, '//rl1//', '//intgr1//&
-        ' steps have been taken without reaching TOUT, '//&
-        rl2//' .',Ierflg,0)
+        ' steps have been taken without reaching TOUT, '//rl2//' .',Ierflg,0)
       Nstate = 3
       GOTO 400
     ENDIF
@@ -1376,10 +1370,9 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
       !
       WRITE (rl1,'(E16.8)') T
       Ierflg = 42
-      CALL XERMSG('SLATEC','CDRIV3',&
-        'At T, '//rl1//', the step size has been reduced about 50 '&
-        //&
-        'times without advancing the solution.  Often this occurs if the problem setup is incorrect.',Ierflg,1)
+      CALL XERMSG('SLATEC','CDRIV3','At T, '//rl1//', the step size has been&
+        & reduced about 50 times without advancing the solution.&
+        & Often this occurs if the problem setup is incorrect.',Ierflg,1)
       Nstate = 12
       RETURN
     CASE (4,5)
@@ -1564,15 +1557,14 @@ SUBROUTINE CDRIV3(N,T,Y,F,Nstate,Tout,Ntask,Nroot,Eps,Ewt,Ierror,Mint,&
   600  WRITE (rl1,'(E16.8)') T
   Ierflg = 41
   CALL XERMSG('SLATEC','CDRIV3',&
-    'At T, '//rl1//', the attempted step size has gone to zero.  Often this occurs if the problem setup is incorrect.',&
-    Ierflg,1)
+    'At T, '//rl1//', the attempted step size has gone to zero.&
+    & Often this occurs if the problem setup is incorrect.',Ierflg,1)
   Nstate = 12
   RETURN
   !
   700  WRITE (rl1,'(E16.8)') T
   Ierflg = 43
   CALL XERMSG('SLATEC','CDRIV3',&
-    'At T, '//rl1//', while solving A*YDOT = F, A is singular.',&
-    Ierflg,1)
+    'At T, '//rl1//', while solving A*YDOT = F, A is singular.',Ierflg,1)
   Nstate = 12
 END SUBROUTINE CDRIV3

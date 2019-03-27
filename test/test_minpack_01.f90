@@ -144,8 +144,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
     INTEGER K
-    REAL X
-    DIMENSION X(2)
+    REAL X(2)
     !* FIRST EXECUTABLE STATEMENT  SOSFNC
     IF ( K==1 ) THEN
       SOSFNC = 1.E0 - X(1)
@@ -317,9 +316,8 @@ CONTAINS
     !   890831  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    REAL Fjac, Fvec, X
     INTEGER Iflag, Ldfjac, N
-    DIMENSION X(*), Fvec(*), Fjac(Ldfjac,*)
+    REAL Fjac(Ldfjac,*), Fvec(*), X(*)
     !* FIRST EXECUTABLE STATEMENT  SQJAC2
     Fjac(1,1) = -1.E0
     Fjac(1,2) = 0.E0

@@ -33,8 +33,7 @@ REAL(8) FUNCTION DHVNRM(V,Ncomp)
   
   !
   INTEGER k, Ncomp
-  REAL(8) :: V
-  DIMENSION V(*)
+  REAL(8) :: V(*)
   !* FIRST EXECUTABLE STATEMENT  DHVNRM
   DHVNRM = 0.0D0
   DO k = 1, Ncomp

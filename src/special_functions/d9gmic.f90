@@ -35,20 +35,19 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  
+
   INTEGER k, m, mm1
   REAL(8) :: A, X, Alx, alng, bot, eps, euler, fk, fkp1, fm, &
     s, sgng, t, te, D1MACH, DLNGAM
-  LOGICAL first
-  SAVE euler, eps, bot, first
+  SAVE euler, eps, bot
   DATA euler/0.57721566490153286060651209008240D0/
-  DATA first/.TRUE./
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9GMIC
   IF ( first ) THEN
     eps = 0.5D0*D1MACH(3)
     bot = LOG(D1MACH(1))
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   IF ( A>0.D0 ) CALL XERMSG('SLATEC','D9GMIC',&
     'A MUST BE NEAR A NEGATIVE INTEGER',2,2)

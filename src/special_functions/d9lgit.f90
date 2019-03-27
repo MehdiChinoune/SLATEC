@@ -35,18 +35,17 @@ REAL(8) FUNCTION D9LGIT(A,X,Algap1)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  
+
   INTEGER k
   REAL(8) :: A, X, Algap1, ax, a1x, eps, fk, hstar, p, r, s, sqeps, t, D1MACH
-  LOGICAL first
-  SAVE eps, sqeps, first
-  DATA first/.TRUE./
+  SAVE eps, sqeps
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9LGIT
   IF ( first ) THEN
     eps = 0.5D0*D1MACH(3)
     sqeps = SQRT(D1MACH(4))
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   IF ( X<=0.D0.OR.A<X ) CALL XERMSG('SLATEC','D9LGIT',&
     'X SHOULD BE GT 0.0 AND LE A',2,2)

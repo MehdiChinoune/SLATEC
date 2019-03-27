@@ -64,11 +64,9 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   !   900328  Added TYPE section.  (WRB)
   
   !
-  REAL(8) :: alam, alam1, alam2, Cheb12, Cheb24, Fval, part1, &
-    part2, part3, v, X
+  REAL(8) :: alam, alam1, alam2, Cheb12(13), Cheb24(25), Fval(25), part1, &
+    part2, part3, v(12), X(11)
   INTEGER i, j
-  !
-  DIMENSION Cheb12(13), Cheb24(25), Fval(25), v(12), X(11)
   !
   !* FIRST EXECUTABLE STATEMENT  DQCHEB
   DO i = 1, 12
@@ -95,24 +93,20 @@ SUBROUTINE DQCHEB(X,Fval,Cheb12,Cheb24)
   alam2 = X(2)*v(3) + part3 + X(10)*v(11)
   Cheb12(2) = alam1 + alam2
   Cheb12(12) = alam1 - alam2
-  alam = X(1)*v(2) + X(3)*v(4) + X(5)*v(6) + X(7)*v(8) + X(9)*v(10) + X(11)&
-    *v(12)
+  alam = X(1)*v(2) + X(3)*v(4) + X(5)*v(6) + X(7)*v(8) + X(9)*v(10) + X(11)*v(12)
   Cheb24(2) = Cheb12(2) + alam
   Cheb24(24) = Cheb12(2) - alam
-  alam = X(11)*v(2) - X(9)*v(4) + X(7)*v(6) - X(5)*v(8) + X(3)*v(10) - X(1)&
-    *v(12)
+  alam = X(11)*v(2) - X(9)*v(4) + X(7)*v(6) - X(5)*v(8) + X(3)*v(10) - X(1)*v(12)
   Cheb24(12) = Cheb12(12) + alam
   Cheb24(14) = Cheb12(12) - alam
   alam1 = v(1) - part1 + part2
   alam2 = X(10)*v(3) - part3 + X(2)*v(11)
   Cheb12(6) = alam1 + alam2
   Cheb12(8) = alam1 - alam2
-  alam = X(5)*v(2) - X(9)*v(4) - X(1)*v(6) - X(11)*v(8) + X(3)*v(10) + X(7)&
-    *v(12)
+  alam = X(5)*v(2) - X(9)*v(4) - X(1)*v(6) - X(11)*v(8) + X(3)*v(10) + X(7)*v(12)
   Cheb24(6) = Cheb12(6) + alam
   Cheb24(20) = Cheb12(6) - alam
-  alam = X(7)*v(2) - X(3)*v(4) - X(11)*v(6) + X(1)*v(8) - X(9)*v(10) - X(5)&
-    *v(12)
+  alam = X(7)*v(2) - X(3)*v(4) - X(11)*v(6) + X(1)*v(8) - X(9)*v(10) - X(5)*v(12)
   Cheb24(8) = Cheb12(8) + alam
   Cheb24(18) = Cheb12(8) - alam
   DO i = 1, 6

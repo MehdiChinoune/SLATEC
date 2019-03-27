@@ -165,15 +165,13 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  
+
   !     COMPLEX CONE,CSGN,CW,CY,CZERO,Z,ZN
-  REAL(8) :: aa, alim, arg, conei, coner, csgni, csgnr, Cyi, &
-    Cyr, dig, elim, Fnu, fnul, pi, rl, r1m5, str, &
-    tol, Zi, zni, znr, Zr, D1MACH, az, bb, fn, &
-    ZABS, ascle, rtol, atol, sti
   INTEGER i, Ierr, inu, k, Kode, k1, k2, N, Nz, nn, I1MACH
-  DIMENSION Cyr(N), Cyi(N)
-  EXTERNAL :: ZABS
+  REAL(8) :: aa, alim, arg, conei, coner, csgni, csgnr, Cyi(N), &
+    Cyr(N), dig, elim, Fnu, fnul, pi, rl, r1m5, str, &
+    tol, Zi, zni, znr, Zr, az, bb, fn, ascle, rtol, atol, sti
+  REAL(8), EXTERNAL :: ZABS, D1MACH
   DATA pi/3.14159265358979324D0/
   DATA coner, conei/1.0D0, 0.0D0/
   !

@@ -111,8 +111,7 @@ SUBROUTINE COMLR2(Nm,N,Low,Igh,Int,Hr,Hi,Wr,Wi,Zr,Zi,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   !
-  INTEGER i, j, k, l, m, N, en, ii, jj, ll, mm, Nm, nn, Igh, &
-    im1, ip1
+  INTEGER i, j, k, l, m, N, en, ii, jj, ll, mm, Nm, nn, Igh, im1, ip1
   INTEGER itn, its, Low, mp1, enm1, iend, Ierr
   REAL Hr(Nm,*), Hi(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
   REAL si, sr, ti, tr, xi, xr, yi, yr, zzi, zzr, norm, s1, s2

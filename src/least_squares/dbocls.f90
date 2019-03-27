@@ -591,8 +591,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     !     SEE THAT MDW IS .GT.0. GROSS CHECK ONLY.
     IF ( Mdw<=0 ) THEN
       WRITE (xern1,'(I8)') Mdw
-      CALL XERMSG('SLATEC','DBOCLS','MDW = '//xern1//' MUST BE POSITIVE.',&
-        53,1)
+      CALL XERMSG('SLATEC','DBOCLS','MDW = '//xern1//' MUST BE POSITIVE.',53,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
     ENDIF
@@ -821,8 +820,8 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
               WRITE (xern1,'(I8)') j
               WRITE (xern3,'(1PE15.6)') Rw(j)
               CALL XERMSG('SLATEC','DBOCLS',&
-                'EACH PROVIDED COLUMN SCALE FACTOR MUST BE POSITIVE.$$COMPONENT '//xern1//' NOW = '//xern3,&
-                50,1)
+                'EACH PROVIDED COLUMN SCALE FACTOR MUST BE POSITIVE.$$COMPONENT '&
+                //xern1//' NOW = '//xern3,50,1)
               !     DO(RETURN TO USER PROGRAM UNIT)
               GOTO 100
             ENDIF
@@ -894,8 +893,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
         WRITE (xern1,'(I8)') lmdw
         WRITE (xern2,'(I8)') mdwl
         CALL XERMSG('SLATEC','DBOCLS','THE ROW DIMENSION OF W(,) = '//&
-          xern1//' MUST BE .GE. THE NUMBER OF EFFECTIVE ROWS = '//&
-          xern2,41,1)
+          xern1//' MUST BE .GE. THE NUMBER OF EFFECTIVE ROWS = '//xern2,41,1)
         !     DO(RETURN TO USER PROGRAM UNIT)
         GOTO 100
       ENDIF
@@ -981,8 +979,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   irw = Ncols + 1
   iiw = 1
   IF ( accum.OR.pretri ) THEN
-    CALL DBOLS(W(Mcon+1,1),Mdw,mout,Ncols,Bl,Bu,Ind,jopt,X,Rnorm,Mode,&
-      Rw(irw),Iw(iiw))
+    CALL DBOLS(W(Mcon+1,1),Mdw,mout,Ncols,Bl,Bu,Ind,jopt,X,Rnorm,Mode,Rw(irw),Iw(iiw))
   ELSE
     mout = Mrows
   ENDIF
@@ -1017,8 +1014,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
     jopt(01) = 99
     irw = Ncols + 1
     iiw = 1
-    CALL DBOLS(W,Mdw,Mcon,Ncols+Mcon,Bl,Bu,Ind,jopt,X,Rnormc,modec,Rw(irw),&
-      Iw(iiw))
+    CALL DBOLS(W,Mdw,Mcon,Ncols+Mcon,Bl,Bu,Ind,jopt,X,Rnormc,modec,Rw(irw),Iw(iiw))
     !
     !     ENLARGE THE BOUNDS SET, IF REQUIRED, TO INCLUDE POINTS THAT
     !     CAN BE REACHED.
@@ -1119,8 +1115,7 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !     WHEN MAKING LINEAR INDEPENDENCE TEST.
   X(2*(Ncols+Mcon)+2) = one/wt
   m = mout + Mcon
-  CALL DBOLS(W,Mdw,m,Ncols+Mcon,Bl,Bu,Ind,Iopt(lbou),X,Rnorm,Mode,Rw(lrw),&
-    Iw(liw))
+  CALL DBOLS(W,Mdw,m,Ncols+Mcon,Bl,Bu,Ind,Iopt(lbou),X,Rnorm,Mode,Rw(lrw),Iw(liw))
   Rnorm = Rnorm/wt
   !     END PROCEDURE
   !     PROCEDURE(RETURN TO USER PROGRAM UNIT)

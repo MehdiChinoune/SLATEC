@@ -23,10 +23,9 @@ SUBROUTINE RADB2(Ido,L1,Cc,Ch,Wa1)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  REAL Cc, Ch, ti2, tr2, Wa1
+
   INTEGER i, ic, Ido, idp2, k, L1
-  DIMENSION Cc(Ido,2,*), Ch(Ido,L1,2), Wa1(*)
+  REAL Cc(Ido,2,*), Ch(Ido,L1,2), ti2, tr2, Wa1(*)
   !* FIRST EXECUTABLE STATEMENT  RADB2
   DO k = 1, L1
     Ch(1,k,1) = Cc(1,1,k) + Cc(Ido,2,k)

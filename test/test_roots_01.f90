@@ -33,12 +33,12 @@ CONTAINS
     REAL R1MACH
     INTEGER Kprint, Ipass, Lun
     INTEGER ideg, idegp1, info, i, j, id
-    REAL a(6), err, erri, relerr
-    COMPLEX ac(6), z(5), zk(5), w(21)
+    REAL err, erri, relerr
+    COMPLEX ac(6), z(5), w(21)
     DATA ideg/5/
-    DATA a/1., -3.7, 7.4, -10.8, 10.8, -6.8/
-    DATA zk/(1.7,0.), (1.,1.), (1.,-1.), (0.,1.4142135623730950488), &
-      (0.,-1.4142135623730950488)/
+    REAL, PARAMETER :: a(6) = [ 1., -3.7, 7.4, -10.8, 10.8, -6.8 ]
+    COMPLEX, PARAMETER :: zk(5) = [ (1.7,0.), (1.,1.), (1.,-1.), &
+      (0.,1.4142135623730950488), (0.,-1.4142135623730950488) ]
     !* FIRST EXECUTABLE STATEMENT  CPRPQX
     Ipass = 1
     idegp1 = ideg + 1
@@ -354,18 +354,17 @@ CONTAINS
     !           the IBM 370 mainframes.  (RWC)
     !   911010  Code reworked and simplified.  (RWC and WRB)
 
-    REAL beta, R1MACH, tol, work
+    REAL beta, R1MACH, tol, work(63)
     INTEGER i, ierr, Ipass, j, kontrl, Kprint, Lun, nerr, NUMXER
     INTEGER itmp(7)
-    COMPLEX root(7), chk(7)
-    DIMENSION work(63)
+    COMPLEX root(7)
     REAL coef(8)
     LOGICAL fatal
     !
-    DATA chk/(1.4142135623731,1.4142135623731), &
+    COMPLEX, PARAMETER :: chk(7) = [ (1.4142135623731,1.4142135623731), &
       (1.4142135623731,-1.4142135623731), (0.0,2.0), (0.0,-2.0), &
       (-2.0,0.0), (-1.4142135623731,1.4142135623731), &
-      (-1.4142135623731,-1.4142135623731)/
+      (-1.4142135623731,-1.4142135623731) ]
     !* FIRST EXECUTABLE STATEMENT  RQRTST
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -491,16 +490,16 @@ CONTAINS
     REAL R1MACH, tol
     INTEGER itest(2), itmp(7)
     REAL work(144)
-    COMPLEX coeff1(9), coeff2(2), coeff3(2), root(8), chk1(8), chk2
+    COMPLEX root(8)
     LOGICAL fatal
     !
-    DATA coeff1/(1.0,0.0), (-7.0,-2.0), (8.0,6.0), (28.0,8.0), &
-      (-49.0,-24.0), (7.0,2.0), (-8.0,-6.0), (-28.0,-8.0), (48.0,24.0)/
-    DATA coeff2/(1.0,1.0), (1.0,3.0)/
-    DATA coeff3/(0.0,0.0), (1.0,3.0)/
-    DATA chk1/(4.0,2.0), (3.0,0.0), (-2.0,0.0), (2.0,0.0), (0.0,-1.0), &
-      (-1.0,0.0), (0.0,1.0), (1.0,0.0)/
-    DATA chk2/(-2.0,-1.0)/
+    COMPLEX, PARAMETER :: coeff1(9) = [ (1.0,0.0), (-7.0,-2.0), (8.0,6.0), &
+      (28.0,8.0), (-49.0,-24.0), (7.0,2.0), (-8.0,-6.0), (-28.0,-8.0), (48.0,24.0) ]
+    COMPLEX, PARAMETER :: coeff2(2) = [ (1.0,1.0), (1.0,3.0) ]
+    COMPLEX, PARAMETER :: coeff3(2) = [ (0.0,0.0), (1.0,3.0) ]
+    COMPLEX, PARAMETER :: chk1(8) = [ (4.0,2.0), (3.0,0.0), (-2.0,0.0), &
+      (2.0,0.0), (0.0,-1.0), (-1.0,0.0), (0.0,1.0), (1.0,0.0) ]
+    COMPLEX, PARAMETER :: chk2 = (-2.0,-1.0)
     !* FIRST EXECUTABLE STATEMENT  CQRTST
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !

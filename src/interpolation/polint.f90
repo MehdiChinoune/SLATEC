@@ -50,9 +50,8 @@ SUBROUTINE POLINT(N,X,Y,C)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL C, dif, X, Y
+  REAL C(*), dif, X(*), Y(*)
   INTEGER i, k, km1, N
-  DIMENSION X(*), Y(*), C(*)
   !* FIRST EXECUTABLE STATEMENT  POLINT
   IF ( N<=0 ) THEN
     CALL XERMSG('SLATEC','POLINT','N IS ZERO OR NEGATIVE.',2,1)

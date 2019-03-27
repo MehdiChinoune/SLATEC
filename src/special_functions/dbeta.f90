@@ -34,16 +34,15 @@ REAL(8) FUNCTION DBETA(A,B)
   !   900727  Added EXTERNAL statement.  (WRB)
 
   REAL(8) :: A, B, alnsml, xmax, xmin
-  LOGICAL first
   REAL(8), EXTERNAL :: DLBETA, DGAMMA, D1MACH
-  SAVE xmax, alnsml, first
-  DATA first/.TRUE./
+  SAVE xmax, alnsml
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBETA
   IF ( first ) THEN
     CALL DGAMLM(xmin,xmax)
     alnsml = LOG(D1MACH(1))
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   IF ( A<=0.D0.OR.B<=0.D0 )&
     CALL XERMSG('SLATEC','DBETA','BOTH ARGUMENTS MUST BE GT 0',2,2)

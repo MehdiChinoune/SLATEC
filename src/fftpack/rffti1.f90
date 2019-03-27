@@ -60,14 +60,11 @@ SUBROUTINE RFFTI1(N,Wa,Ifac)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  REAL arg, argh, argld, fi, tpi, Wa
-  INTEGER i, ib, ido, Ifac, ii, ip, ipm, is, j, k1, l1, l2, ld, &
+
+  REAL arg, argh, argld, fi, tpi, Wa(*)
+  INTEGER i, ib, ido, Ifac(*), ii, ip, ipm, is, j, k1, l1, l2, ld, &
     N, nf, nfm1, nl, nq, nr, ntry
-  INTEGER ntryh
-  DIMENSION Wa(*), Ifac(*), ntryh(4)
-  SAVE ntryh
-  DATA ntryh(1), ntryh(2), ntryh(3), ntryh(4)/4, 2, 3, 5/
+  INTEGER, PARAMETER :: ntryh(4) = [ 4, 2, 3, 5 ]
   !* FIRST EXECUTABLE STATEMENT  RFFTI1
   nl = N
   nf = 0

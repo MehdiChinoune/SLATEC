@@ -139,16 +139,14 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   INTEGER Ndim, Ier
   REAL(8) :: L2, L3, L4, L5, L6, L1min, L1max, Sixcof(Ndim)
   !
-  INTEGER i, index, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, &
-    nstep2
+  INTEGER i, index, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
   REAL(8) :: a1, a1s, a2, a2s, c1, c1old, c2, cnorm, D1MACH, &
     denom, dv, eps, huge, l1, newfac, oldfac, one, &
     ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, &
     sumbac, sumfor, sumuni, three, thresh, tiny, two, &
     x, x1, x2, x3, y, y1, y2, y3, zero
   !
-  DATA zero, eps, one, two, three/0.0D0, 0.01D0, 1.0D0, 2.0D0, &
-    3.0D0/
+  DATA zero, eps, one, two, three/0.0D0, 0.01D0, 1.0D0, 2.0D0, 3.0D0/
   !
   !* FIRST EXECUTABLE STATEMENT  DRC6J
   Ier = 0
@@ -165,8 +163,7 @@ SUBROUTINE DRC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   IF ( (MOD(L2+L3+L5+L6+eps,one)>=eps+eps).OR.&
       (MOD(L4+L2+L6+eps,one)>=eps+eps) ) THEN
     Ier = 1
-    CALL XERMSG('SLATEC','DRC6J','L2+L3+L5+L6 or L4+L2+L6 not integer.',&
-      Ier,1)
+    CALL XERMSG('SLATEC','DRC6J','L2+L3+L5+L6 or L4+L2+L6 not integer.',Ier,1)
     RETURN
   ELSEIF ( (L4+L2-L6<zero).OR.(L4-L2+L6<zero).OR.(-L4+L2+L6<zero) ) THEN
     Ier = 2

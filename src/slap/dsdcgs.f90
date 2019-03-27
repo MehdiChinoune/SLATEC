@@ -241,14 +241,12 @@ SUBROUTINE DSDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
-    Nelt
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
   !     .. Array Arguments ..
   REAL(8) :: A(N), B(N), Rwork(Lenw), X(N)
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin, lociw, locp, locq, locr, locr0, locu, locv1, &
-    locv2, locw
+  INTEGER locdin, lociw, locp, locq, locr, locr0, locu, locv1, locv2, locw
   !     .. External Subroutines ..
   EXTERNAL :: DCGS, DCHKW, DS2Y, DSDI, DSDS, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSDCGS

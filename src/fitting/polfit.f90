@@ -132,21 +132,17 @@ SUBROUTINE POLFIT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920527  Corrected erroneous statements in DESCRIPTION.  (WRB)
 
-  REAL A, co, degf, den, Eps, etst, f, fcrit, R, sig, sigj, &
-    sigjm1, sigpas, temp, W, w1, w11, X, xm, Y
+  REAL A(*), degf, den, Eps, etst, f, fcrit, R(*), sig, sigj, &
+    sigjm1, sigpas, temp, W(*), w1, w11, X(*), xm, Y(*)
   REAL yp
   INTEGER i, idegf, Ierr, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, &
     k3pi, k4, k4pi, k5, k5pi, ksig, m, Maxdeg, mop1
   INTEGER N, Ndeg, nder, nfail
   REAL(8) :: temd1, temd2
-  DIMENSION X(*), Y(*), W(*), R(*), A(*)
-  DIMENSION co(4,3)
-  SAVE co
-  DATA co(1,1), co(2,1), co(3,1), co(4,1), co(1,2), co(2,2), co(3,2), &
-    co(4,2), co(1,3), co(2,3), co(3,3), co(4,3)/ - 13.086850, &
-    -2.4648165, -3.3846535, -1.2973162, -3.3381146, -1.7812271, &
-    -3.2578406, -1.6589279, -1.6282703, -1.3152745, -3.2640179, &
-    -1.9829776/
+  REAL, PARAMETER :: co(4,3) = RESHAPE( [ &
+    -13.086850, -2.4648165, -3.3846535, -1.2973162, &
+    -3.3381146, -1.7812271, -3.2578406, -1.6589279, &
+    -1.6282703, -1.3152745, -3.2640179, -1.9829776 ], [4,3] )
   !* FIRST EXECUTABLE STATEMENT  POLFIT
   m = ABS(N)
   yp = 0.

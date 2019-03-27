@@ -207,12 +207,10 @@ SUBROUTINE QAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
-  INTEGER Iwork, Last, Lenw, limit
-  REAL Work
+  INTEGER Iwork(*), Last, Lenw, limit
+  REAL Work(*)
   REAL A, Abserr, B, Epsabs, Epsrel, Omega, Result
   INTEGER Ier, Integr, Leniw, lvl, l1, l2, l3, l4, Maxp1, momcom, Neval
-  !
-  DIMENSION Iwork(*), Work(*)
   !
   REAL, EXTERNAL :: F
   !

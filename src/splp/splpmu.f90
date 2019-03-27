@@ -53,8 +53,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     ipage, iplace, IPLOC, iu1, j, Jstrt, k, key, Lbm, Lmx, lpg
   INTEGER Mrelas, n20002, n20018, n20121, nerr, nnegrc, Npp, npr001, &
     npr003, Nredc, Nvars
-  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), &
-    Ibb(*)
+  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
   REAL aij, alpha, Anorm, Costsc, Erdnrm, Dulnrm, Eps, gamma, Gg, &
     gq, one, Rprnrm, rzj, scalr, Theta, two, Uu, wp, Xlamda, &
     Rhsnrm, zero, Amat(*), Basmat(*), Csc(*), Wr(*), Rprim(*), &
@@ -175,8 +174,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     !     LA05CS( ) IS NOTED.  THIS WILL PROBABLY BE DUE TO
     !     SPACE BEING EXHAUSTED, GG=-7.
     CALL SPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,Ipr,&
-      Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,&
-      Redbas)
+      Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,Redbas)
     IF ( .NOT.(Singlr) ) THEN
       !     PROCEDURE (COMPUTE NEW PRIMAL)
       !

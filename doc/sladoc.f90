@@ -168,7 +168,6 @@ PROGRAM SLADOC
   CHARACTER(LUTIL+LLIB+54) :: fmt2
   CHARACTER(80) :: msg
   CHARACTER form*25
-  CHARACTER forma*60
   INTEGER, PARAMETER :: IALPHA = 26
   INTEGER I1(IALPHA), I2(IALPHA), I3(IALPHA), LMSg(IALPHA)
   CHARACTER(7) :: CLAss(IALPHA)
@@ -198,7 +197,7 @@ PROGRAM SLADOC
   !
   DATA llu18, llu19, llu14/.FALSE., .FALSE., .FALSE./
   !
-  DATA forma(1:60) /'(/,1X,A,''category does not exist in this library.'',/)'/
+  CHARACTER(60) :: forma = '(/,1X,A,''category does not exist in this library.'',/)'
   !* FIRST EXECUTABLE STATEMENT  SLADOC
   WRITE (UNIT=msg,FMT=99039) LCAT, MLCAT
   fmt1 = '(1X, A'//msg(1:2)//', '//msg(3:4)//'X, A, 3I8)'
@@ -330,8 +329,7 @@ PROGRAM SLADOC
           ENDIF
           ncc = ncc - 1
           DO j = 1, ncc
-            READ (UNIT=LU14,FMT=99040) iptr(j), jptr(j), kptr(j), &
-              tclass(j)
+            READ (UNIT=LU14,FMT=99040) iptr(j), jptr(j), kptr(j), tclass(j)
           ENDDO
           READ (UNIT=LU14,FMT=99038) kptr(ncc+1)
           istmt = kptr(ncc+1)
@@ -746,8 +744,7 @@ PROGRAM SLADOC
             ENDIF
             ncc = ncc - 1
             DO j = 1, ncc
-              READ (UNIT=LU14,FMT=99040) iptr(j), jptr(j), kptr(j), &
-                tclass(j)
+              READ (UNIT=LU14,FMT=99040) iptr(j), jptr(j), kptr(j), tclass(j)
             ENDDO
             READ (UNIT=LU14,FMT=99038) kptr(ncc+1)
             istmt = kptr(ncc+1)
@@ -903,8 +900,7 @@ PROGRAM SLADOC
                   WRITE (UNIT=form,FMT=99045) ltcl
                   DO jj = 1, itemp
                     ii = ii + 1
-                    WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)&
-                      (1:LENSTR(stmts(ii)))
+                    WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)(1:LENSTR(stmts(ii)))
                   ENDDO
                 ELSE
                   WRITE (UNIT=LU6,FMT=99036) irec, tkwd(irec)
@@ -952,8 +948,7 @@ PROGRAM SLADOC
                   WRITE (UNIT=form,FMT=99045) ltcl
                   DO jj = 1, itemp
                     ii = ii + 1
-                    WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)&
-                      (1:LENSTR(stmts(ii)))
+                    WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)(1:LENSTR(stmts(ii)))
                   ENDDO
                 ELSE
                   WRITE (UNIT=LU6,FMT=99036) irec, tkwd(irec)
@@ -979,8 +974,7 @@ PROGRAM SLADOC
                   WRITE (UNIT=form,FMT=99045) ltcl
                   DO jj = 1, itemp
                     ii = ii + 1
-                    WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)&
-                      (1:LENSTR(stmts(ii)))
+                    WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)(1:LENSTR(stmts(ii)))
                   ENDDO
                 ELSE
                   WRITE (UNIT=LU6,FMT=99036) irec, tkwd(irec)
@@ -1006,8 +1000,7 @@ PROGRAM SLADOC
                   WRITE (UNIT=form,FMT=99045) ltcl
                   DO jj = 1, itemp
                     ii = ii + 1
-                    WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)&
-                      (1:LENSTR(stmts(ii)))
+                    WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)(1:LENSTR(stmts(ii)))
                   ENDDO
                 ELSE
                   WRITE (UNIT=LU6,FMT=99036) irec, tkwd(irec)
@@ -1032,8 +1025,7 @@ PROGRAM SLADOC
                   WRITE (UNIT=form,FMT=99045) ltcl
                   DO jj = 1, itemp
                     ii = ii + 1
-                    WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)&
-                      (1:LENSTR(stmts(ii)))
+                    WRITE (UNIT=LU6,FMT=form) ii, stmts(ii)(1:LENSTR(stmts(ii)))
                   ENDDO
                 ELSE
                   WRITE (UNIT=LU6,FMT=99036) irec, tkwd(irec)
@@ -1556,13 +1548,10 @@ PROGRAM SLADOC
   99021 FORMAT (' Input a routine name for its purpose')
   99022 FORMAT (' ',A,' ... ',I6,' lines of documentation')
   99023 FORMAT (/' If you wish to see the full documentation,'/&
-    '     type''b''          to browse through the ',&
-    'documentation'/&
+    '     type''b''          to browse through the documentation'/&
     '     type''t''          to have it written on your ',&
-    'terminal'/'     type''f,filename'' to have it written on file '&
-    ,'''filename'''/&
-    '     type''f       '' to have it written on file ','''',A,&
-    '''')
+    'terminal'/'     type''f,filename'' to have it written on file ''filename'''/&
+    '     type''f       '' to have it written on file ','''',A,'''')
   99024 FORMAT (' If you do not wish to see the full documentation,'/&
     '     type anything else')
   99025 FORMAT (' Routine name not found')
@@ -1637,9 +1626,8 @@ SUBROUTINE CHARIN(Cardin,Lcard,Iopt,Lb,Lt)
   CHARACTER*(*) Cardin
   !     .. Local Scalars ..
   INTEGER i, l, l1, l2, l3, l9, lbp1, le, match
-  CHARACTER(2) :: specia
   !     .. Data statements ..
-  DATA specia/' ,'/
+  CHARACTER(2), PARAMETER :: specia = ' ,'
   !* FIRST EXECUTABLE STATEMENT  CHARIN
   IF ( Iopt/=2 ) THEN
     l1 = Lcard

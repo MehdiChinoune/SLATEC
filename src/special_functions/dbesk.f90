@@ -86,17 +86,14 @@ SUBROUTINE DBESK(X,Fnu,Kode,N,Y,Nz)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
-  INTEGER i, j, k, Kode, mz, N, nb, nd, nn, nud, nulim, Nz
+  INTEGER i, j, k, Kode, mz, N, nb, nd, nn, nud, Nz
   INTEGER I1MACH
   REAL(8) :: cn, dnu, elim, etx, flgik, fn, fnn, Fnu, gln, &
-    gnu, rtz, s, s1, s2, t, tm, trx, w, X, xlim, &
-    Y, zn
+    gnu, rtz, s, s1, s2, t, tm, trx, w(2), X, xlim, Y(*), zn
   REAL(8) :: DBESK0, DBESK1, DBSK1E, DBSK0E, D1MACH
-  DIMENSION w(2), nulim(2), Y(*)
-  SAVE nulim
-  DATA nulim(1), nulim(2)/35, 70/
+  INTEGER, PARAMETER :: nulim(2) = [ 35, 70 ]
   !* FIRST EXECUTABLE STATEMENT  DBESK
   nn = -I1MACH(15)
   elim = 2.303D0*(nn*D1MACH(5)-3.0D0)

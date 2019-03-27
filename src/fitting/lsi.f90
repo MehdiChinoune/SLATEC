@@ -71,10 +71,10 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   REAL anorm, fac, gam, rb, srelpr, tau, tol, xnorm, temp(1)
   INTEGER i, j, k, key, krank, krm1, krp1, l, last, link, m, &
     map1, mdlpdp, minman, n1, n2, n3, next, np1
-  LOGICAL cov, first, sclcov
+  LOGICAL cov, sclcov
   !
-  SAVE srelpr, first
-  DATA first/.TRUE./
+  SAVE srelpr
+  LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  LSI
   !
@@ -157,8 +157,7 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
           !
           IF ( krank>0.AND.krank<N ) THEN
             DO i = krank, 1, -1
-              CALL H12(2,i,krank+1,N,W(i,1),Mdw,Ws(n1+i-1),W(map1,1),Mdw,1,&
-                Mg)
+              CALL H12(2,i,krank+1,N,W(i,1),Mdw,Ws(n1+i-1),W(map1,1),Mdw,1,Mg)
             ENDDO
           ENDIF
           !

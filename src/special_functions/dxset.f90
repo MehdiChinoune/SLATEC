@@ -196,9 +196,9 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  
+
   INTEGER i, I1MACH, ic, Ierror, ii, imaxex, iminex, iradx, it, j, &
-    k, kk, lg102x, lgtemp, log102, log2r, lx, nb, NBItsf, nbitsx
+    k, kk, lg102x, lgtemp(20), log2r, lx, nb, NBItsf, nbitsx
   INTEGER np1, nrdplc
   INTEGER Irad, Nradpl, Nbits
   REAL(8) :: Dzero, dzerox
@@ -214,13 +214,10 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   INTEGER iflag
   SAVE iflag
   !
-  DIMENSION log102(20), lgtemp(20)
-  SAVE log102
-  !
   !   LOG102 CONTAINS THE FIRST 60 DIGITS OF LOG10(2) FOR USE IN
   ! CONVERSION OF EXTENDED-RANGE NUMBERS TO BASE 10 .
-  DATA log102/301, 029, 995, 663, 981, 195, 213, 738, 894, 724, &
-    493, 026, 768, 189, 881, 462, 108, 541, 310, 428/
+  INTEGER, PARAMETER :: log102(20) = [ 301, 029, 995, 663, 981, 195, 213, 738, &
+    894, 724, 493, 026, 768, 189, 881, 462, 108, 541, 310, 428 ]
   !
   ! FOLLOWING CODING PREVENTS DXSET FROM BEING EXECUTED MORE THAN ONCE.
   ! THIS IS IMPORTANT BECAUSE SOME SUBROUTINES (SUCH AS DXNRMP AND

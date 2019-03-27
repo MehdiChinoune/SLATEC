@@ -34,11 +34,10 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   
-  REAL AE, dum, RE, TOL, Work, Yhp
-  INTEGER ICOco, idp, Iflag, INDpvt, Inhomo, INTeg, Iwork, k, kp, &
+  INTEGER ICOco, idp, Iflag, INDpvt, Inhomo, INTeg, Iwork(*), k, kp, &
     Lnfc, LNFcc, MXNon, Ncomp, NDIsk, NEQ, NEQivp, NIC, niv, NOPg, NPS
+  REAL AE, dum, RE, TOL, Work(*), Yhp(Ncomp,*)
   INTEGER NTApe, NTP, NUMort, NXPts
-  DIMENSION Yhp(Ncomp,*), Work(*), Iwork(*)
   COMMON /ML18JR/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
     NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, NUMort, LNFcc, ICOco
   !* FIRST EXECUTABLE STATEMENT  SVECS

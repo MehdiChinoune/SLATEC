@@ -180,10 +180,8 @@ SUBROUTINE QAGI(F,Bound,Inf,Epsabs,Epsrel,Result,Abserr,Neval,Ier,Limit,&
 
   REAL Bound
   INTEGER Inf, Last
-  REAL Abserr, Epsabs, Epsrel, Result, Work
-  INTEGER Ier, Iwork, Lenw, Limit, lvl, l1, l2, l3, Neval
-  !
-  DIMENSION Iwork(*), Work(*)
+  REAL Abserr, Epsabs, Epsrel, Result, Work(*)
+  INTEGER Ier, Iwork(*), Lenw, Limit, lvl, l1, l2, l3, Neval
   !
   REAL, EXTERNAL :: F
   !

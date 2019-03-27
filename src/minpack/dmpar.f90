@@ -112,11 +112,9 @@ SUBROUTINE DMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   INTEGER N, Ldr
   INTEGER Ipvt(*)
   REAL(8) :: Delta, Par
-  REAL(8) :: R(Ldr,*), Diag(*), Qtb(*), X(*), Sigma(*), Wa1(*), &
-    Wa2(*)
+  REAL(8) :: R(Ldr,*), Diag(*), Qtb(*), X(*), Sigma(*), Wa1(*), Wa2(*)
   INTEGER i, iter, j, jm1, jp1, k, l, nsing
-  REAL(8) :: dxnorm, dwarf, fp, gnorm, parc, parl, paru, p1, &
-    p001, sum, temp, zero
+  REAL(8) :: dxnorm, dwarf, fp, gnorm, parc, parl, paru, p1, p001, sum, temp, zero
   REAL(8) :: D1MACH, DENORM
   SAVE p1, p001, zero
   DATA p1, p001, zero/1.0D-1, 1.0D-3, 0.0D0/

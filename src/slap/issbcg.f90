@@ -1,7 +1,6 @@
 !** ISSBCG
 INTEGER FUNCTION ISSBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
-    Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork,&
-    Ak,Bk,Bnrm,Solnrm)
+    Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   IMPLICIT NONE
   !>
   !***
@@ -186,8 +185,7 @@ INTEGER FUNCTION ISSBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
   REAL Ak, Bk, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt), B(N), Dz(N), P(N), Pp(N), R(N), Rr(N), Rwork(*), &
-    X(N), Z(N), Zz(N)
+  REAL A(Nelt), B(N), Dz(N), P(N), Pp(N), R(N), Rr(N), Rwork(*), X(N), Z(N), Zz(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MSOLVE
@@ -232,8 +230,7 @@ INTEGER FUNCTION ISSBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
     IF ( Iter==0 ) THEN
       WRITE (Iunit,99001) N, Itol
       99001 FORMAT (' Preconditioned BiConjugate Gradient for N, ITOL = ',I5,I5,&
-        /' ITER','   Error Estimate','            Alpha',&
-        '             Beta')
+        /' ITER   Error Estimate            Alpha             Beta')
       WRITE (Iunit,99002) Iter, Err
     ELSE
       WRITE (Iunit,99002) Iter, Err, Ak, Bk

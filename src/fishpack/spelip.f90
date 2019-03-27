@@ -33,19 +33,15 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  REAL A, ai, AIT, Alpha, Am, An, ax1, axi, B, Bda, Bdb, Bdc, &
-    Bdd, Beta, bi, BIT, Bm, Bn, bxi, C
-  REAL ci, CIT, Cm, Cn, cxi, cxm, D, DIT, dj, DLX, DLX4, DLY, &
-    DLY4, Dm, Dn, dy1, dyj, ej, eyj, fj
-  REAL fyj, fyn, Gama, Grhs, Pertrb, prtrb, TDLx3, TDLy3, Um, Un, &
-    Usol, W, xi, Xnu, yj, Zm, Zn
   INTEGER i, i1, Idmn, Ierror, Intl, iord, Iorder, IS, j, JS, K, &
     KSWx, KSWy, L, M, Mbdcnd, MIT, mp, MS, N
+  REAL A, ai, AIT, Alpha, Am(*), An(*), ax1, axi, B, Bda(*), Bdb(*), Bdc(*), &
+    Bdd(*), Beta, bi, BIT, Bm(*), Bn(*), bxi, C
+  REAL ci, CIT, Cm(*), Cn(*), cxi, cxm, D, DIT, dj, DLX, DLX4, DLY, &
+    DLY4, Dm(*), Dn(*), dy1, dyj, ej, eyj, fj
+  REAL fyj, fyn, Gama, Grhs(Idmn,*), Pertrb, prtrb, TDLx3, TDLy3, Um(*), Un(*), &
+    Usol(Idmn,*), W(*), xi, Xnu, yj, Zm(*), Zn(*)
   INTEGER Nbdcnd, NIT, np, NS
-  DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
-  DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
-  DIMENSION An(*), Bn(*), Cn(*), Dn(*), Un(*), Zn(*)
-  DIMENSION Am(*), Bm(*), Cm(*), Dm(*), Um(*), Zm(*)
   COMMON /SPLPCM/ KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
     IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   LOGICAL singlr

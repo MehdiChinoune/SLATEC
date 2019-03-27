@@ -32,13 +32,12 @@ SUBROUTINE MINSOL(Usol,Idmn,Zn,Zm,Pertb)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   
-  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, ete, Pertb, &
-    pertrb, TDLx3, TDLy3, Usol, ute, Zm, Zn
   INTEGER i, Idmn, ifnl, ii, IS, istr, j, jfnl, jj, JS, jstr, K, &
     KSWx, KSWy, L, MIT, MS, NIT, NS
+  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, ete, Pertb, &
+    pertrb, TDLx3, TDLy3, Usol(Idmn,*), ute, Zm(*), Zn(*)
   COMMON /SPLPCM/ KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
     IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
-  DIMENSION Usol(Idmn,*), Zn(*), Zm(*)
   !* FIRST EXECUTABLE STATEMENT  MINSOL
   istr = 1
   ifnl = K

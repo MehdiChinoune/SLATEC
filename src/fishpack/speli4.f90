@@ -1,7 +1,6 @@
 !** SPELI4
 SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
-    Bdd,COFX,An,Bn,Cn,Dn,Un,Zn,Am,Bm,Cm,Dm,Um,Zm,Grhs,Usol,&
-    Idmn,W,Pertrb,Ierror)
+    Bdd,COFX,An,Bn,Cn,Dn,Un,Zn,Am,Bm,Cm,Dm,Um,Zm,Grhs,Usol,Idmn,W,Pertrb,Ierror)
   IMPLICIT NONE
   !>
   !***
@@ -33,19 +32,16 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !   891009  Removed unreferenced variable.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  REAL A, ai, AIT, Alpha, Am, An, ax1, axi, B, Bda, Bdb, Bdc, &
-    Bdd, Beta, bi, BIT, Bm, Bn, bxi, C
-  REAL ci, CIT, Cm, Cn, cxi, cxm, D, DIT, DLX, DLX4, DLY, DLY4, &
-    Dm, Dn, dy1, dyj, eyj, fyj, fyn, gama
-  REAL Grhs, Pertrb, prtrb, TDLx3, TDLy3, Um, Un, Usol, W, xi, xnu, Zm, Zn
+
   INTEGER i, Idmn, ieror, Ierror, iord, Iorder, IS, j, JS, K, &
     KSWx, KSWy, L, M, Mbdcnd, MIT, mp, MS, N, Nbdcnd
+  REAL A, ai, AIT, Alpha, Am(*), An(*), ax1, axi, B, Bda(*), Bdb(*), Bdc(*), &
+    Bdd(*), Beta, bi, BIT, Bm(*), Bn(*), bxi, C
+  REAL ci, CIT, Cm(*), Cn(*), cxi, cxm, D, DIT, DLX, DLX4, DLY, DLY4, &
+    Dm(*), Dn(*), dy1, dyj, eyj, fyj, fyn, gama
+  REAL Grhs(Idmn,*), Pertrb, prtrb, TDLx3, TDLy3, Um(*), Un(*), Usol(Idmn,*), &
+    W(*), xi, xnu, Zm(*), Zn(*)
   INTEGER NIT, np, NS
-  DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
-  DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
-  DIMENSION An(*), Bn(*), Cn(*), Dn(*), Un(*), Zn(*)
-  DIMENSION Am(*), Bm(*), Cm(*), Dm(*), Um(*), Zm(*)
   COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
     IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
   LOGICAL singlr
@@ -89,14 +85,10 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
       Usol(i,L) = DLY**2*Grhs(i,L)
     ENDDO
   ENDIF
-  IF ( KSWx/=2.AND.KSWx/=3.AND.KSWy/=2.AND.KSWy/=3 ) Usol(1,1)&
-    = DLY**2*Grhs(1,1)
-  IF ( KSWx/=2.AND.KSWx/=5.AND.KSWy/=2.AND.KSWy/=3 ) Usol(K,1)&
-    = DLY**2*Grhs(K,1)
-  IF ( KSWx/=2.AND.KSWx/=3.AND.KSWy/=2.AND.KSWy/=5 ) Usol(1,L)&
-    = DLY**2*Grhs(1,L)
-  IF ( KSWx/=2.AND.KSWx/=5.AND.KSWy/=2.AND.KSWy/=5 ) Usol(K,L)&
-    = DLY**2*Grhs(K,L)
+  IF ( KSWx/=2.AND.KSWx/=3.AND.KSWy/=2.AND.KSWy/=3 ) Usol(1,1) = DLY**2*Grhs(1,1)
+  IF ( KSWx/=2.AND.KSWx/=5.AND.KSWy/=2.AND.KSWy/=3 ) Usol(K,1) = DLY**2*Grhs(K,1)
+  IF ( KSWx/=2.AND.KSWx/=3.AND.KSWy/=2.AND.KSWy/=5 ) Usol(1,L) = DLY**2*Grhs(1,L)
+  IF ( KSWx/=2.AND.KSWx/=5.AND.KSWy/=2.AND.KSWy/=5 ) Usol(K,L) = DLY**2*Grhs(K,L)
   !
   !     SET SWITCHES FOR PERIODIC OR NON-PERIODIC BOUNDARIES
   !

@@ -1,7 +1,6 @@
 !** SGMRES
 SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
-    Iter,Err,Ierr,Iunit,Sb,Sx,Rgwk,Lrgw,Igwk,Ligw,Rwork,&
-    Iwork)
+    Iter,Err,Ierr,Iunit,Sb,Sx,Rgwk,Lrgw,Igwk,Ligw,Rwork,Iwork)
   IMPLICIT NONE
   !>
   !***
@@ -409,8 +408,7 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
   !     .. Local Scalars ..
   REAL bnrm, rhol, sum
   INTEGER i, iflag, jpre, jscal, kmp, ldl, lgmr, lhes, lq, lr, &
-    lv, lw, lxl, lz, lzm1, maxl, maxlp1, nms, nmsl, nrmax, &
-    nrsts
+    lv, lw, lxl, lz, lzm1, maxl, maxlp1, nms, nmsl, nrmax, nrsts
   !     .. External Functions ..
   REAL, EXTERNAL :: R1MACH, SNRM2
   !     .. External Subroutines ..
@@ -506,8 +504,7 @@ SUBROUTINE SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,&
             CALL SPIGMR(N,Rgwk(lr),Sb,Sx,jscal,maxl,maxlp1,kmp,nrsts,jpre,&
               MATVEC,MSOLVE,nmsl,Rgwk(lz),Rgwk(lv),Rgwk(lhes),&
               Rgwk(lq),lgmr,Rwork,Iwork,Rgwk(lw),Rgwk(ldl),rhol,&
-              nrmax,B,bnrm,X,Rgwk(lxl),Itol,Tol,Nelt,Ia,Ja,A,Isym,&
-              Iunit,iflag,Err)
+              nrmax,B,bnrm,X,Rgwk(lxl),Itol,Tol,Nelt,Ia,Ja,A,Isym,Iunit,iflag,Err)
             Iter = Iter + lgmr
             nms = nms + nmsl
             !

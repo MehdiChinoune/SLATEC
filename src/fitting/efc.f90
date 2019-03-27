@@ -1,6 +1,5 @@
 !** EFC
-SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,&
-    Coeff,Lw,W)
+SUBROUTINE EFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W)
   IMPLICIT NONE
   !>
   !***

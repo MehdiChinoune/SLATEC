@@ -319,17 +319,15 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
   !           (WRB)
   !   900510  Modify calls to XERMSG to put in standard form.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   CHARACTER(16) :: xern3, xern4, xern5, xern6
   INTEGER Ier
   REAL(8) :: lolim, tuplim, uplim, epslon, errtol, D1MACH
   REAL(8) :: c1, c2, c3, c4, ea, eb, ec, ed, ef, lamda
   REAL(8) :: mu, power4, sigma, s1, s2, X, xn, xndev
-  REAL(8) :: xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, &
-    znroot
-  LOGICAL first
-  SAVE errtol, lolim, uplim, c1, c2, c3, c4, first
-  DATA first/.TRUE./
+  REAL(8) :: xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, znroot
+  SAVE errtol, lolim, uplim, c1, c2, c3, c4
+  LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  DRD
   IF ( first ) THEN
@@ -343,8 +341,8 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
     c2 = 1.0D0/6.0D0
     c3 = 9.0D0/22.0D0
     c4 = 3.0D0/26.0D0
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   !         CALL ERROR HANDLER IF NECESSARY.
   !

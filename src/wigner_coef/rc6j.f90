@@ -139,8 +139,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   INTEGER Ndim, Ier
   REAL L2, L3, L4, L5, L6, L1min, L1max, Sixcof(Ndim)
   !
-  INTEGER i, index, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, &
-    nstep2
+  INTEGER i, index, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
   REAL a1, a1s, a2, a2s, c1, c1old, c2, cnorm, R1MACH, denom, dv, &
     eps, huge, l1, newfac, oldfac, one, ratio, sign1, sign2, &
     srhuge, srtiny, sum1, sum2, sumbac, sumfor, sumuni, three, &
@@ -163,8 +162,7 @@ SUBROUTINE RC6J(L2,L3,L4,L5,L6,L1min,L1max,Sixcof,Ndim,Ier)
   IF ( (MOD(L2+L3+L5+L6+eps,one)>=eps+eps).OR.&
       (MOD(L4+L2+L6+eps,one)>=eps+eps) ) THEN
     Ier = 1
-    CALL XERMSG('SLATEC','RC6J','L2+L3+L5+L6 or L4+L2+L6 not integer.',&
-      Ier,1)
+    CALL XERMSG('SLATEC','RC6J','L2+L3+L5+L6 or L4+L2+L6 not integer.',Ier,1)
     RETURN
   ELSEIF ( (L4+L2-L6<zero).OR.(L4-L2+L6<zero).OR.(-L4+L2+L6<zero) ) THEN
     Ier = 2

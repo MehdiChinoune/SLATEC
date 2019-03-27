@@ -35,7 +35,7 @@ CONTAINS
     INTEGER i, ierr, kontrl, n, nerr
     LOGICAL fatal
     !     .. Local Arrays ..
-    REAL c(6), d(6), dchk(6), w(12), x(6), xchk(6), y(6)
+    REAL c(6), d(6), w(12)
     !     .. External Functions ..
     REAL, EXTERNAL :: R1MACH
     INTEGER, EXTERNAL :: NUMXER
@@ -44,10 +44,10 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
     !     .. Data statements ..
-    DATA x/1.0E0, 2.0E0, 3.0E0, -1.0E0, -2.0E0, -3.0E0/
-    DATA y/0.0E0, 9.0E0, 64.0E0, 0.0E0, 9.0E0, 64.0E0/
-    DATA xchk/1.0E0, 0.0E0, -2.0E0, 0.0E0, 1.0E0, 0.0E0/
-    DATA dchk/1.0E0, 0.0E0, -4.0E0, 0.0E0, 24.0E0, 0.0E0/
+    REAL :: x(6) = [ 1.0E0, 2.0E0, 3.0E0, -1.0E0, -2.0E0, -3.0E0 ]
+    REAL, PARAMETER :: y(6) = [ .0E0, 9.0E0, 64.0E0, 0.0E0, 9.0E0, 64.0E0 ]
+    REAL, PARAMETER :: xchk(6) = [ 1.0E0, 0.0E0, -2.0E0, 0.0E0, 1.0E0, 0.0E0 ]
+    REAL, PARAMETER :: dchk(6) = [ 1.0E0, 0.0E0, -4.0E0, 0.0E0, 24.0E0, 0.0E0 ]
     !* FIRST EXECUTABLE STATEMENT  PNTCHK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -177,7 +177,12 @@ CONTAINS
     INTEGER i, ierr, kontrl, n, nerr
     LOGICAL fatal
     !     .. Local Arrays ..
-    REAL(8) :: c(6), d(6), dchk(6), w(12), x(6), xchk(6), y(6)
+    REAL(8) :: c(6), d(6), w(12)
+    !     .. Data statements ..
+    REAL(8) :: x(6) = [ 1.0D0, 2.0D0, 3.0D0, -1.0D0, -2.0D0, -3.0D0 ]
+    REAL(8), PARAMETER :: y(6) = [ 0.0D0, 9.0D0, 64.0D0, 0.0D0, 9.0D0, 64.0D0 ]
+    REAL(8), PARAMETER :: xchk(6) = [ 1.0D0, 0.0D0, -2.0D0, 0.0D0, 1.0D0, 0.0D0 ]
+    REAL(8), PARAMETER :: dchk(6) = [ 1.0D0, 0.0D0, -4.0D0, 0.0D0, 24.0D0, 0.0D0 ]
     !     .. External Functions ..
     REAL(8), EXTERNAL :: D1MACH
     INTEGER, EXTERNAL :: NUMXER
@@ -185,11 +190,6 @@ CONTAINS
     EXTERNAL :: DPOLCF, DPLINT, DPOLVL, XERCLR, XGETF, XSETF
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
-    !     .. Data statements ..
-    DATA x/1.0D0, 2.0D0, 3.0D0, -1.0D0, -2.0D0, -3.0D0/
-    DATA y/0.0D0, 9.0D0, 64.0D0, 0.0D0, 9.0D0, 64.0D0/
-    DATA xchk/1.0D0, 0.0D0, -2.0D0, 0.0D0, 1.0D0, 0.0D0/
-    DATA dchk/1.0D0, 0.0D0, -4.0D0, 0.0D0, 24.0D0, 0.0D0/
     !* FIRST EXECUTABLE STATEMENT  DPNTCK
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !

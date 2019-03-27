@@ -63,9 +63,8 @@ SUBROUTINE PNNZRS(I,Xval,Iplace,Sx,Ix,Ircx)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   
   INTEGER I, i1, idiff, iend, ii, il, ilast, iopt, ipl, Iplace, &
-    IPLOC, ipploc, Ircx, istart, Ix, j, l, ll, lmx, lpg
+    IPLOC, ipploc, Ircx, istart, Ix(*), j, l, ll, lmx, lpg
   INTEGER n20046, nerr, np
-  DIMENSION Ix(*)
   REAL Xval, Sx(*), zero
   SAVE zero
   DATA zero/0.E0/

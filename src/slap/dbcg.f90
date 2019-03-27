@@ -1,7 +1,6 @@
 !** DBCG
 SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
-    Tol,Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,&
-    Iwork)
+    Tol,Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork)
   IMPLICIT NONE
   !>
   !***
@@ -286,8 +285,7 @@ SUBROUTINE DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,MTSOLV,Itol,&
   !     .. Subroutine Arguments ..
   EXTERNAL :: MATVEC, MSOLVE, MTSOLV, MTTVEC
   !     .. Local Scalars ..
-  REAL(8) :: ak, akden, bk, bkden, bknum, bnrm, fuzz, solnrm, &
-    tolmin
+  REAL(8) :: ak, akden, bk, bkden, bknum, bnrm, fuzz, solnrm, tolmin
   INTEGER i, k
   !     .. External Functions ..
   REAL(8), EXTERNAL :: D1MACH, DDOT

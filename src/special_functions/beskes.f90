@@ -42,9 +42,8 @@ SUBROUTINE BESKES(Xnu,X,Nin,Bke)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   
-  REAL alnbig, Bke, bknu1, direct, R1MACH, v, vend, vincr, X, Xnu
+  REAL alnbig, Bke(*), bknu1, direct, R1MACH, v, vend, vincr, X, Xnu
   INTEGER i, iswtch, n, Nin
-  DIMENSION Bke(*)
   SAVE alnbig
   DATA alnbig/0./
   !* FIRST EXECUTABLE STATEMENT  BESKES

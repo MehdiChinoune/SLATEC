@@ -32,20 +32,18 @@ SUBROUTINE STWAY(U,V,Yhp,Inout,Stowa)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   
-  REAL AE, C, PWCnd, PX, RE, Stowa, TND, TOL, U, V, X, XBEg, &
-    XENd, XOP, XOT, XSAv, Yhp
+  REAL AE, C, PWCnd, PX, RE, Stowa(*), TND, TOL, U(*), V(*), X, XBEg, &
+    XENd, XOP, XOT, XSAv, Yhp(*)
   INTEGER ICOco, IGOfx, INDpvt, INFo, INHomo, Inout, INTeg, ISTkop, &
     IVP, j, k, KNSwot, ko, KOP, ks, ksj, LOTjp, MNSwot, MXNon, NCOmp
   INTEGER NDIsk, NEQ, NEQivp, NFC, NFCc, NIC, NOPg, NPS, NSWot, &
     NTApe, NTP, NUMort, NXPts
-  DIMENSION U(*), V(*), Yhp(*), Stowa(*)
   !
   COMMON /ML8SZ / C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
-  COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
-    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
+  COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15), &
+    ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
   COMMON /ML18JR/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
-    NUMort, NFCc, ICOco
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, NUMort, NFCc, ICOco
   !
   !* FIRST EXECUTABLE STATEMENT  STWAY
   IF ( Inout==1 ) THEN

@@ -55,8 +55,7 @@ REAL FUNCTION ALBETA(A,B)
     ! P AND Q ARE BIG.
     !
     corr = R9LGMC(p) + R9LGMC(q) - R9LGMC(p+q)
-    ALBETA = -0.5*LOG(q) + sq2pil + corr + (p-0.5)*LOG(p/(p+q))&
-      + q*ALNREL(-p/(p+q))
+    ALBETA = -0.5*LOG(q) + sq2pil + corr + (p-0.5)*LOG(p/(p+q))+ q*ALNREL(-p/(p+q))
     RETURN
   ELSEIF ( q<10.0 ) THEN
     !

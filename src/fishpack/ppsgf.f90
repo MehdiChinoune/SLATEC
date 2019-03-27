@@ -20,9 +20,8 @@ REAL FUNCTION PPSGF(X,Iz,C,A,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   
-  REAL A, Bh, C, sum, X
+  REAL A(*), Bh(*), C(*), sum, X
   INTEGER Iz, j
-  DIMENSION A(*), C(*), Bh(*)
   !* FIRST EXECUTABLE STATEMENT  PPSGF
   sum = 0.
   DO j = 1, Iz

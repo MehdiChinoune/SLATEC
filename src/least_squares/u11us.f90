@@ -33,11 +33,11 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   
-  REAL A, bb, Db, Eb, H, r2, rmin, SDOT, SNRM2, sum, t, temp, tn, tt, Ub, W
+  INTEGER Mda, mmk, Mode, N, nn, Np
+  REAL A(Mda,*), bb, Db(*), Eb(*), H(*), r2, rmin, SDOT, SNRM2, sum, t, temp, &
+    tn, tt, Ub(*), W(*)
   INTEGER i, ii, im1, imin, is, ISAMAX, j, jm1, jmax, jp1, kk, &
     km1, kmi, kp1, Krank, Ksure, kz, l, lm1, M
-  INTEGER Mda, mmk, Mode, N, nn, Np
-  DIMENSION A(Mda,*), Ub(*), Db(*), H(*), W(*), Eb(*)
   INTEGER Ic(*), Ir(*)
   !
   !        INITIALIZATION
@@ -91,8 +91,7 @@ SUBROUTINE U11US(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ir,Ic)
         CALL ISWAP(1,Ir(i),1,Ir(kk),1)
         CALL SSWAP(N,A(i,1),Mda,A(kk,1),Mda)
       ELSE
-        CALL XERMSG('SLATEC','U11US','FIRST NP ROWS ARE LINEARLY DEPENDENT',&
-          8,0)
+        CALL XERMSG('SLATEC','U11US','FIRST NP ROWS ARE LINEARLY DEPENDENT',8,0)
         Krank = i - 1
         RETURN
       ENDIF

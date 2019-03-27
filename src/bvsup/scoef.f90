@@ -78,14 +78,12 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
-  REAL Ae, B, bbn, Beta, bn, brn, By, bykl, bys, Coef, cons, &
-    Cvec, EPS, FOUru, gam, Re, SDOT, SQOvfl, SRU, TWOu
-  REAL un, URO, Work, Yh, Yp, ypn
-  INTEGER i, Iflag, Inhomo, Iwork, j, k, kflag, ki, l, LPAr, &
+
+  INTEGER i, Iflag, Inhomo, Iwork(*), j, k, kflag, ki, l, LPAr, &
     mlso, Ncomp, ncomp2, nf, Nfc, Nfcc, nfccm1, Nic, Nrowb
-  DIMENSION Yh(Ncomp,*), Yp(*), B(Nrowb,*), Beta(*), Coef(*), &
-    By(Nfcc,*), Cvec(*), Work(*), Iwork(*)
+  REAL Ae, B(Nrowb,*), bbn, Beta(*), bn, brn, By(Nfcc,*), bykl, bys, Coef(*), cons, &
+    Cvec(*), EPS, FOUru, gam, Re, SDOT, SQOvfl, SRU, TWOu
+  REAL un, URO, Work(*), Yh(Ncomp,*), Yp(*), ypn
   !
   COMMON /ML5MCO/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
   !

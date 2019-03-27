@@ -111,8 +111,7 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   
   INTEGER i, j, Ldfjac, M, Mode, N
   REAL(8) :: D1MACH, eps, epsf, epslog, epsmch, Err(*), factor, &
-    Fjac(Ldfjac,*), Fvec(*), Fvecp(*), one, temp, X(*), &
-    Xp(*), zero
+    Fjac(Ldfjac,*), Fvec(*), Fvecp(*), one, temp, X(*), Xp(*), zero
   SAVE factor, one, zero
   DATA factor, one, zero/1.0D2, 1.0D0, 0.0D0/
   !
@@ -142,8 +141,7 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
     DO i = 1, M
       temp = one
       IF ( Fvec(i)/=zero.AND.Fvecp(i)/=zero.AND.ABS(Fvecp(i)-Fvec(i))&
-        >=epsf*ABS(Fvec(i)) )&
-        temp = eps*ABS((Fvecp(i)-Fvec(i))/eps-Err(i))&
+        >=epsf*ABS(Fvec(i)) ) temp = eps*ABS((Fvecp(i)-Fvec(i))/eps-Err(i))&
         /(ABS(Fvec(i))+ABS(Fvecp(i)))
       Err(i) = one
       IF ( temp>epsmch.AND.temp<eps ) Err(i) = (LOG10(temp)-epslog)/epslog

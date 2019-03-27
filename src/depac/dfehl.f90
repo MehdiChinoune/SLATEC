@@ -54,10 +54,8 @@ SUBROUTINE DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   !   910722  Updated AUTHOR section.  (ALS)
   
   !
-  INTEGER Ipar, k, Neq
-  REAL(8) :: ch, F1, F2, F3, F4, F5, H, Rpar, T, Y, Yp, Ys
-  DIMENSION Y(*), Yp(*), F1(*), F2(*), F3(*), F4(*), F5(*), Ys(*), &
-    Rpar(*), Ipar(*)
+  INTEGER Ipar(*), k, Neq
+  REAL(8) :: ch, F1(*), F2(*), F3(*), F4(*), F5(*), H, Rpar(*), T, Y(*), Yp(*), Ys(*)
   !
   !* FIRST EXECUTABLE STATEMENT  DFEHL
   ch = H/4.0D0
@@ -80,9 +78,7 @@ SUBROUTINE DFEHL(DF,Neq,T,Y,H,Yp,F1,F2,F3,F4,F5,Ys,Rpar,Ipar)
   !
   ch = H/4104.0D0
   DO k = 1, Neq
-    Ys(k) = Y(k)&
-      + ch*((8341.0D0*Yp(k)-845.0D0*F3(k))+(29440.0D0*F2(k)-32832.0D0*&
-      F1(k)))
+    Ys(k) = Y(k) + ch*((8341.0D0*Yp(k)-845.0D0*F3(k))+(29440.0D0*F2(k)-32832.0D0*F1(k)))
   ENDDO
   CALL DF(T+H,Ys,F4,Rpar,Ipar)
   !

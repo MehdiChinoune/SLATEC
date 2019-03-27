@@ -100,8 +100,7 @@ SUBROUTINE BINTK(X,Y,T,N,K,Bcoef,Q,Work)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   !
-  INTEGER iflag, iwork, K, N, i, ilp1mx, j, jj, km1, kpkm2, left, &
-    lenq, np1
+  INTEGER iflag, iwork, K, N, i, ilp1mx, j, jj, km1, kpkm2, left, lenq, np1
   REAL Bcoef(*), Y(*), Q(*), T(*), X(*), xi, Work(*)
   !     DIMENSION Q(2*K-1,N), T(N+K)
   !* FIRST EXECUTABLE STATEMENT  BINTK

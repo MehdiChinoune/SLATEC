@@ -340,15 +340,13 @@ SUBROUTINE SSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
-    Nelt, Nsave
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt, Nsave
   !     .. Array Arguments ..
   REAL A(Nelt), B(N), Rwork(Lenw), X(N)
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
   INTEGER icol, j, jbgn, jend, locdin, locigw, locil, lociu, lociw, &
-    locjl, locju, locl, locnc, locnr, locrgw, locu, locw, &
-    myitol, nl, nu
+    locjl, locju, locl, locnc, locnr, locrgw, locu, locw, myitol, nl, nu
   !     .. External Subroutines ..
   EXTERNAL :: SCHKW, SGMRES, SS2Y, SSILUS, SSLUI, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSLUGM
@@ -430,8 +428,7 @@ SUBROUTINE SSLUGM(N,B,X,Nelt,Ia,Ja,A,Isym,Nsave,Itol,Tol,Itmax,Iter,Err,&
   myitol = 0
   !
   CALL SGMRES(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSLUI,myitol,Tol,Itmax,Iter,Err,&
-    Ierr,Iunit,Rwork,Rwork,Rwork(locrgw),Lenw-locrgw,Iwork(locigw)&
-    ,20,Rwork,Iwork)
+    Ierr,Iunit,Rwork,Rwork,Rwork(locrgw),Lenw-locrgw,Iwork(locigw),20,Rwork,Iwork)
   !
   IF ( Iter>Itmax ) Ierr = 2
   !------------- LAST LINE OF SSLUGM FOLLOWS ----------------------------

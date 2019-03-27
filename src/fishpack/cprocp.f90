@@ -37,11 +37,10 @@ SUBROUTINE CPROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,Yy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   
-  REAL Aa, Bm1, Bm2, rt, Yy
+  REAL Aa(*), Bm1(*), Bm2(*), rt, Yy(*)
   INTEGER ia, id, iflg, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, Nm2
-  COMPLEX Y, D, U, v, den, bh, ym, am, y1, y2, yh, Bd, crt, X, A, B, C
-  DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), U(*), Bd(*), Bm1(*)&
-    , Bm2(*), Aa(*), Yy(*)
+  COMPLEX Y(*), D(*), U(*), v, den, bh, ym, am, y1, y2, yh, Bd(*), crt, X(*), &
+    A(*), B(*), C(*)
   !* FIRST EXECUTABLE STATEMENT  CPROCP
   DO j = 1, M
     Y(j) = X(j)

@@ -1,7 +1,6 @@
 !** ISDCGS
 INTEGER FUNCTION ISDCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
-    Itmax,Iter,Err,Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,&
-    Iwork,Ak,Bk,Bnrm,Solnrm)
+    Itmax,Iter,Err,Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   IMPLICIT NONE
   !>
   !***

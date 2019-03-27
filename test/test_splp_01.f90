@@ -23,16 +23,13 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901013  Added additional printout on failure.  (RWC)
 
-    REAL bl, bu, d, dattrv, duals, prgopt, primal, work, zero
-    INTEGER i, ibasis, ic, icnt, ind, info, Ipass, isoln, iv, ivv, &
-      iwork, j, kk, kount, Kprint, liw, Lun, lw, mm, mrelas
+    REAL bl(60), bu(60), d(14,37), dattrv(210), duals(60), prgopt(50), &
+      primal(60), work(800), zero
+    INTEGER i, ibasis(60), ic, icnt, ind(60), info, Ipass, isoln(14), iv, ivv, &
+      iwork(900), j, kk, kount, Kprint, liw, Lun, lw, mm, mrelas
     INTEGER nvars
     REAL, EXTERNAL :: USRMAT
     REAL costs(37)
-    DIMENSION prgopt(50), dattrv(210), bl(60), bu(60)
-    DIMENSION ind(60), primal(60), duals(60), ibasis(60)
-    DIMENSION work(800), iwork(900), isoln(14)
-    DIMENSION d(14,37)
     !* FIRST EXECUTABLE STATEMENT  SPLPQX
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     99001 FORMAT ('1 SPLP QUICK CHECK')
@@ -297,26 +294,23 @@ CONTAINS
     INTEGER i, ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
     REAL R1MACH, rnorm, rnormc, SNRM2, sr
-    REAL d(6,5), w(11,11), bl(5,2), bu(5,2), x(30), rw(55), xtrue(9)
-    REAL c(5,5)
-    REAL bl1(10), bu1(10)
+    REAL w(11,11), x(30), rw(55), bl1(10), bu1(10)
     INTEGER ind(10), iw(20), iopt(40)
-    REAL rhs(6,2)
     CHARACTER(4) :: msg
     !
-    DATA ((c(i,j),i=1,5),j=1,5)/1., 10., 4., 8., 1., 1., 10., 2., &
-      -1., 1., 1., -3., -3., 2., 1., 1., 5., 5., 5., 1., 1., &
-      4., -1., -3., 1./
-    DATA ((d(i,j),i=1,6),j=1,5)/ - 74., 14., 66., -12., 3., 4., 80., &
-      -69., -72., 66., 8., -12., 18., 21., -5., -30., -7., 4., &
-      -11., 28., 7., -23., -4., 4., -4., 0., 1., 3., 1., 0./
-    DATA ((bl(i,j),i=1,5),j=1,2)/1., 0., -1., 1., -4., -1., 0., -3., &
-      1., -6./
-    DATA ((bu(i,j),i=1,5),j=1,2)/3., 2., 1., 3., -2., 3., 4., 1., 5., &
-      -2./
-    DATA ((rhs(i,j),i=1,6),j=1,2)/51., -61., -56., 69., 10., -12., -5., &
-      -9., 708., 4165., -13266., 8409./
-    DATA (xtrue(j),j=1,9)/1., 2., -1., 3., -4., 1., 32., 30., 31./
+    REAL, PARAMETER :: c(5,5) = RESHAPE( [ 1., 10., 4., 8., 1., &
+      1., 10., 2., -1., 1.,    1., -3., -3., 2., 1.,    1.,5., 5., 5., 1., &
+      1.,  4., -1., -3., 1. ], [5,5] )
+    REAL, PARAMETER :: d(6,5) = RESHAPE( [ -74., 14., 66., -12., 3., 4., &
+      80., -69., -72., 66., 8., -12.,    18., 21., -5., -30., -7., 4., &
+      -11., 28., 7., -23., -4., 4.,     -4., 0., 1., 3., 1., 0. ], [6,5] )
+    REAL, PARAMETER :: bl(5,2) = RESHAPE( [ 1., 0., -1., 1., -4., &
+      -1., 0., -3., 1., -6. ], [5,2] )
+    REAL, PARAMETER :: bu(5,2) = RESHAPE( [ 3., 2., 1., 3., -2., &
+      3., 4., 1., 5., -2. ], [5,2] )
+    REAL, PARAMETER :: rhs(6,2) = RESHAPE( [ 51., -61., -56., 69., 10., -12., &
+      -5., -9., 708., 4165., -13266., 8409. ], [6,2] )
+    REAL, PARAMETER :: xtrue(9) = [ 1., 2., -1., 3., -4., 1., 32., 30., 31. ]
     !* FIRST EXECUTABLE STATEMENT  SBOCQX
     mdw = 11
     mrows = 6
@@ -422,8 +416,7 @@ CONTAINS
     !          THE VALUE OF IPASS=0 SAYS THAT SBOCLS() HAS NOT PASSED.
     !
     IF ( Kprint>=3 ) WRITE (Lun,&
-      '('' IPASS VALUE. (A 1 IS GOOD, 0 IS BAD.)'',I4)')&
-      Ipass
+      '('' IPASS VALUE. (A 1 IS GOOD, 0 IS BAD.)'',I4)') Ipass
     IF ( Kprint>=2.AND.Ipass==0 ) WRITE (Lun,99002)
     !
     99002 FORMAT (' ERROR IN SBOCLS OR SBOLS')

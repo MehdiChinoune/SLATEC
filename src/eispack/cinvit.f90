@@ -123,8 +123,7 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   !
-  INTEGER i, j, k, M, N, s, ii, Mm, mp, Nm, uk, ip1, its, km1, &
-    Ierr
+  INTEGER i, j, k, M, N, s, ii, Mm, mp, Nm, uk, ip1, its, km1, Ierr
   REAL Ar(Nm,*), Ai(Nm,*), Wr(*), Wi(*), Zr(Nm,*), Zi(Nm,*)
   REAL Rm1(N,*), Rm2(N,*), Rv1(*), Rv2(*)
   REAL x, y, eps3, norm, normv, growto, ilambd, rlambd, ukroot
@@ -214,8 +213,7 @@ SUBROUTINE CINVIT(Nm,N,Ar,Ai,Wr,Wi,Select,Mm,M,Zr,Zi,Ierr,Rm1,Rm2,Rv1,Rv2)
       !
       DO i = 2, uk
         mp = i - 1
-        IF ( PYTHAG(Rm1(i,mp),Rm2(i,mp))>PYTHAG(Rm1(mp,mp),Rm2(mp,mp)) )&
-            THEN
+        IF ( PYTHAG(Rm1(i,mp),Rm2(i,mp))>PYTHAG(Rm1(mp,mp),Rm2(mp,mp)) ) THEN
           !
           DO j = mp, uk
             y = Rm1(i,j)

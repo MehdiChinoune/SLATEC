@@ -39,8 +39,8 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
   
   INTEGER i, Info, ip, iplace, j, Mrelas, n20007, n20019, n20028, &
     n20041, n20056, n20066, n20070, n20074, n20078, Nvars
-  REAL(8) :: aij, Amat(*), Anorm, Bl(*), Bu(*), cmax, Colnrm(*)&
-    , Costs(*), Costsc, Csc(*), csum, one, Primal(*), &
+  REAL(8) :: aij, Amat(*), Anorm, Bl(*), Bu(*), cmax, Colnrm(*), &
+    Costs(*), Costsc, Csc(*), csum, one, Primal(*), &
     Rhs(*), Rhsnrm, scalr, testsc, Xlamda, zero
   REAL(8) :: DASUM
   INTEGER Ibasis(*), Ibb(*), Imat(*), Ind(*)

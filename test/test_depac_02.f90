@@ -22,10 +22,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Minor clean-up of prologue and code and name changed from
     !           DDJAC to DJAC.  (WRB)
-    
-    INTEGER Ipar, Nrowpd
-    REAL(8) :: Pd, r, r5, Rpar, rsq, T, U, u1sq, u2sq, u1u2
-    DIMENSION U(*), Pd(Nrowpd,*), Rpar(*), Ipar(*)
+
+    INTEGER Ipar(*), Nrowpd
+    REAL(8) :: Pd(Nrowpd,*), r, r5, Rpar(*), rsq, T, U(*), u1sq, u2sq, u1u2
     !* FIRST EXECUTABLE STATEMENT  DJAC
     u1sq = U(1)*U(1)
     u2sq = U(2)*U(2)
@@ -59,7 +58,7 @@ CONTAINS
     !   810801  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Name changed from DDF to DFDEQC.  (WRB)
-    
+
     !
     !     Declare arguments.
     !
@@ -131,7 +130,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-    
+
     !
     !     Declare arguments.
     !
@@ -140,8 +139,7 @@ CONTAINS
     !     Declare local variables.
     !
     INTEGER idid, info(15), ipar, iwork(51), n, liw, lrw, nstep
-    REAL(8) :: abserr, D1MACH, r, relerr, reltol, rpar, rwork(214)&
-      , t, tout, u(4)
+    REAL(8) :: abserr, D1MACH, r, relerr, reltol, rpar, rwork(214), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXDABM
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -256,7 +254,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-    
+
     !
     !     Declare arguments.
     !
@@ -265,8 +263,7 @@ CONTAINS
     !     Declare local variables.
     !
     INTEGER idid, info(15), ipar, iwork(60), n, liw, lrw, nstep
-    REAL(8) :: abserr, D1MACH, r, reltol, relerr, rpar, rwork(306)&
-      , t, tout, u(4)
+    REAL(8) :: abserr, D1MACH, r, reltol, relerr, rpar, rwork(306), t, tout, u(4)
     !* FIRST EXECUTABLE STATEMENT  QXDBDF
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -353,37 +350,27 @@ CONTAINS
     !   901014  Made editorial changes and added correct result to
     !           output. (RWC)
     !   910708  Minor modifications in use of KPRINT.  (WRB)
-    
+
     INTEGER i, iflag, igofx, Ipass, ipss, j, kont, kount, Kprint, l, &
       Lun, ncomp, ndiw, ndw, neqivp, nfc, nic, nrowa, nrowb, nrowy
     INTEGER numort, nxpts
     INTEGER itmp(9), iwork(100)
     REAL(8) :: work(1000), ae, re, XSAve, sve, TERm, tol
-    REAL(8) :: y(4,15), xpts(15), a(2,4), alpha(2), b(2,4), beta(2)&
-      , yans(2,15), reler, abser
+    REAL(8) :: y(4,15), a(2,4), alpha(2), b(2,4), beta(2), reler, abser
     CHARACTER(4) :: msg
     COMMON /DSAVEX/ XSAve, TERm
-    DATA yans(1,1), yans(2,1), yans(1,2), yans(2,2), yans(1,3), yans(2,3)&
-      , yans(1,4), yans(2,4), yans(1,5), yans(2,5), yans(1,6), &
-      yans(2,6), yans(1,7), yans(2,7), yans(1,8), yans(2,8), yans(1,9)&
-      , yans(2,9), yans(1,10), yans(2,10), yans(1,11), yans(2,11), &
-      yans(1,12), yans(2,12), yans(1,13), yans(2,13), yans(1,14), &
-      yans(2,14), yans(1,15), yans(2,15)/5.000000000D+00, &
-      -6.888880126D-01, 8.609248635D+00, -1.083092311D+00, &
-      1.674923836D+01, -2.072210073D+00, 3.351098494D+01, &
-      -4.479263780D+00, 6.601103894D+01, -8.909222513D+00, &
-      8.579580988D+01, -1.098742758D+01, 1.106536877D+02, &
-      -1.402469444D+01, 1.421228220D+02, -1.742236546D+01, &
-      1.803383474D+02, -2.086465851D+01, 2.017054332D+02, &
-      -1.990879843D+01, 2.051622475D+02, -1.324886978D+01, &
-      2.059197452D+02, 1.051529813D+01, 1.972191446D+02, &
-      9.320592785D+01, 1.556894846D+02, 3.801682434D+02, &
-      1.818989404D-12, 1.379853993D+03/
-    DATA xpts(1), xpts(2), xpts(3), xpts(4), xpts(5), xpts(6), xpts(7), &
-      xpts(8), xpts(9), xpts(10), xpts(11), xpts(12), xpts(13), &
-      xpts(14), xpts(15)/60.0D+00, 55.0D+00, 50.0D+00, 45.0D+00, &
+    REAL(8), PARAMETER :: yans(2,15) = RESHAPE( [ &
+      5.000000000D+00, -6.888880126D-01,   8.609248635D+00, -1.083092311D+00, &
+      1.674923836D+01, -2.072210073D+00,   3.351098494D+01, -4.479263780D+00, &
+      6.601103894D+01, -8.909222513D+00,   8.579580988D+01, -1.098742758D+01, &
+      1.106536877D+02, -1.402469444D+01,   1.421228220D+02, -1.742236546D+01, &
+      1.803383474D+02, -2.086465851D+01,   2.017054332D+02, -1.990879843D+01, &
+      2.051622475D+02, -1.324886978D+01,   2.059197452D+02, 1.051529813D+01, &
+      1.972191446D+02, 9.320592785D+01,    1.556894846D+02, 3.801682434D+02, &
+      1.818989404D-12, 1.379853993D+03 ], [2,15] )
+    REAL(8) :: xpts(15) = [ 60.0D+00, 55.0D+00, 50.0D+00, 45.0D+00, &
       40.0D+00, 38.0D+00, 36.0D+00, 34.0D+00, 32.0D+00, 31.0D+00, &
-      30.8D+00, 30.6D+00, 30.4D+00, 30.2D+00, 30.0D+00/
+      30.8D+00, 30.6D+00, 30.4D+00, 30.2D+00, 30.0D+00 ]
     !* FIRST EXECUTABLE STATEMENT  QXDBVS
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
@@ -653,7 +640,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900415  Code extensively revised.  (WRB)
-    
+
     !
     !     Declare arguments.
     !
@@ -778,7 +765,7 @@ PROGRAM TEST44
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST44

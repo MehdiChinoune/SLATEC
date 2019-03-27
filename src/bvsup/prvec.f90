@@ -28,8 +28,7 @@ REAL FUNCTION PRVEC(M,U,V)
   !   910722  Updated AUTHOR section.  (ALS)
   
   INTEGER M, n, np
-  REAL SDOT, U, V, vp
-  DIMENSION U(*), V(*)
+  REAL SDOT, U(*), V(*), vp
   !* FIRST EXECUTABLE STATEMENT  PRVEC
   n = M/2
   np = n + 1

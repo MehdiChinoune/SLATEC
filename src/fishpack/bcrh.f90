@@ -22,9 +22,8 @@ REAL FUNCTION BCRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   
-  REAL A, Bh, C, CNV, dx, EPS, F, Sgn, x, xl, Xll, xr, Xrr
+  REAL A(*), Bh(*), C(*), CNV, dx, EPS, F, Sgn, x, xl, Xll, xr, Xrr
   INTEGER IK, Iz, K, NCMplx, NM, NPP
-  DIMENSION A(*), C(*), Bh(*)
   COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
   !* FIRST EXECUTABLE STATEMENT  BCRH
   xl = Xll

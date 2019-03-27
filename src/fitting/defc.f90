@@ -1,6 +1,5 @@
 !** DEFC
-SUBROUTINE DEFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,&
-    Coeff,Lw,W)
+SUBROUTINE DEFC(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkpt,Mdein,Mdeout,Coeff,Lw,W)
   IMPLICIT NONE
   !>
   !***

@@ -49,9 +49,8 @@ CONTAINS
     REAL errcmp, errmax
     INTEGER i, ind, itask, j, kprog, lda, n
     !     .. Local Arrays ..
-    REAL a(5,4), atemp(5,4), b(4), btemp(4), bxex(4), work(20)
+    REAL atemp(5,4), btemp(4), work(20)
     INTEGER iwork(4)
-    CHARACTER list(2)*4
     !     .. External Functions ..
     REAL, EXTERNAL :: R1MACH
     !     .. External Subroutines ..
@@ -59,12 +58,12 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
-    DATA a/5.0E0, 1.0E0, 0.3E0, 2.1E0, 0.0E0, -1.0E0, -0.5E0, 1.0E0, &
-      1.0E0, 0.0E0, 4.5E0, -1.0E0, -1.7E0, 2.0E0, 0.0E0, 0.5E0, &
-      2.0E0, 0.6E0, 1.3E0, 0.0E0/
-    DATA b/0.0E0, 3.5E0, 3.6E0, 2.4E0/
-    DATA bxex/0.10E+01, 0.10E+01, -0.10E+01, 0.10E+01/
-    DATA list/'GEFS', 'GEIR'/
+    REAL, PARAMETER :: a(5,4) = RESHAPE( [ 5.0E0, 1.0E0, 0.3E0, 2.1E0, 0.0E0, &
+      -1.0E0, -0.5E0, 1.0E0, 1.0E0, 0.0E0, 4.5E0, -1.0E0, -1.7E0, 2.0E0, 0.0E0, &
+      0.5E0, 2.0E0, 0.6E0, 1.3E0, 0.0E0 ], [5,4] )
+    REAL, PARAMETER :: b(4) = [ 0.0E0, 3.5E0, 3.6E0, 2.4E0 ]
+    REAL, PARAMETER :: bxex(4) = [ 0.10E+01, 0.10E+01, -0.10E+01, 0.10E+01 ]
+    CHARACTER(4), PARAMETER :: list(2) = [ 'GEFS', 'GEIR' ]
     !* FIRST EXECUTABLE STATEMENT  SGEQC
     n = 4
     lda = 5
@@ -196,10 +195,8 @@ CONTAINS
     REAL(8) :: errcmp, errmax
     INTEGER i, ind, itask, j, kprog, lda, n
     !     .. Local Arrays ..
-    REAL(8) :: a(5,4), atemp(5,4), b(4), btemp(4), bxex(4), &
-      work(20)
+    REAL(8) :: atemp(5,4), btemp(4), work(20)
     INTEGER iwork(4)
-    CHARACTER list(2)*4
     !     .. External Functions ..
     REAL(8), EXTERNAL :: D1MACH
     !     .. External Subroutines ..
@@ -207,12 +204,13 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
-    DATA a/5.0D0, 1.0D0, 0.3D0, 2.1D0, 0.0D0, -1.0D0, -0.5D0, 1.0D0, &
-      1.0D0, 0.0D0, 4.5D0, -1.0D0, -1.7D0, 2.0D0, 0.0D0, 0.5D0, &
-      2.0D0, 0.6D0, 1.3D0, 0.0D0/
-    DATA b/0.0D0, 3.5D0, 3.6D0, 2.4D0/
-    DATA bxex/0.10D+01, 0.10D+01, -0.10D+01, 0.10D+01/
-    DATA list/'GEFS', 'GEIR'/
+    REAL(8), PARAMETER :: a(5,4) = RESHAPE( [ 5.0D0, 1.0D0, 0.3D0, 2.1D0, 0.0D0, &
+      -1.0D0, -0.5D0, 1.0D0, 1.0D0, 0.0D0, &
+      4.5D0,  -1.0D0, -1.7D0, 2.0D0, 0.0D0, &
+      0.5D0, 2.0D0, 0.6D0, 1.3D0, 0.0D0 ], [5,4] )
+    REAL(8), PARAMETER :: b(4) = [ 0.0D0, 3.5D0, 3.6D0, 2.4D0 ]
+    REAL(8), PARAMETER :: bxex(4) = [ 0.10D+01, 0.10D+01, -0.10D+01, 0.10D+01 ]
+    CHARACTER(4), PARAMETER :: list(2) = [ 'GEFS', 'GEIR' ]
     !* FIRST EXECUTABLE STATEMENT  DGEQC
     n = 4
     lda = 5
@@ -332,21 +330,20 @@ CONTAINS
     !     .. Local Scalars ..
     INTEGER i, ind, indx, itask, j, kprog, lda, n
     !     .. Local Arrays ..
-    COMPLEX a(3,3), atemp(5,3), b(3), btemp(3), bxex(3), work(12)
+    COMPLEX atemp(5,3), btemp(3), work(12)
     INTEGER iwork(3)
-    CHARACTER list(2)*4
     !     .. External Subroutines ..
     EXTERNAL :: CGEFS, CGEIR
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, AIMAG, REAL
     REAL CABS1
     !     .. Data statements ..
-    DATA a/(2.,3.), (1.,1.), (1.,2.), (2.,0.), (1.,-1.), (0.,0.), &
-      (0.,0.), (2.,5.), (3.,2.)/
-    DATA b/(-1.,1.), (-5.,4.), (-4.,7.)/
-    DATA bxex/(.21459E-01,.209012E+01), (.261373E+01,-.162231E+01), &
-      (.785407E+00,.109871E+01)/
-    DATA list/'GEFS', 'GEIR'/
+    COMPLEX, PARAMETER :: a(3,3) = RESHAPE( [ (2.,3.), (1.,1.), (1.,2.), &
+      (2.,0.), (1.,-1.), (0.,0.),   (0.,0.), (2.,5.), (3.,2.) ], [3,3] )
+    COMPLEX, PARAMETER :: b(3) = [ (-1.,1.), (-5.,4.), (-4.,7.) ]
+    COMPLEX, PARAMETER :: bxex(3) = [ (.21459E-01,.209012E+01), &
+      (.261373E+01,-.162231E+01), (.785407E+00,.109871E+01) ]
+    CHARACTER(4), PARAMETER :: list(2) = [ 'GEFS', 'GEIR' ]
     !* FIRST EXECUTABLE STATEMENT  CGEQC
     n = 3
     lda = 5

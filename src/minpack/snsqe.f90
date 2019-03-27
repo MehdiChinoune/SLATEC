@@ -381,8 +381,7 @@ SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
       Wa(2*N+1),Wa(3*N+1),Wa(4*N+1),Wa(5*N+1))
     IF ( Info==5 ) Info = 4
   ENDIF
-  IF ( Info==0 ) CALL XERMSG('SLATEC','SNSQE','INVALID INPUT PARAMETER.',2,&
-    1)
+  IF ( Info==0 ) CALL XERMSG('SLATEC','SNSQE','INVALID INPUT PARAMETER.',2,1)
   !
   !     LAST CARD OF SUBROUTINE SNSQE.
   !

@@ -28,9 +28,8 @@ SUBROUTINE CMPOSP(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   900402  Added TYPE section.  (WRB)
   
   INTEGER i, Idimq, ipstor, j, lh, M, mr, N, nr, nrm1, nrmj, nrpj
-  COMPLEX A, Bb, C, Q, B, B2, B3, W, W2, W3, D, Tcos, P, s, t
-  DIMENSION A(*), Bb(*), C(*), Q(Idimq,*), B(*), B2(*), B3(*), W(*), &
-    W2(*), W3(*), D(*), Tcos(*), P(*)
+  COMPLEX A(*), Bb(*), C(*), Q(Idimq,*), B(*), B2(*), B3(*), W(*), W2(*), &
+    W3(*), D(*), Tcos(*), P(*), s, t
   !* FIRST EXECUTABLE STATEMENT  CMPOSP
   mr = M
   nr = (N+1)/2

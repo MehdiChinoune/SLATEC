@@ -207,10 +207,8 @@ SUBROUTINE QAGP(F,A,B,Npts2,Points,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
   INTEGER l4, Last
-  REAL A, Abserr, B, Epsabs, Epsrel, Points, Result, Work
-  INTEGER Ier, Iwork, Leniw, Lenw, limit, lvl, l1, l2, l3, Neval, Npts2
-  !
-  DIMENSION Iwork(*), Points(*), Work(*)
+  REAL A, Abserr, B, Epsabs, Epsrel, Points(*), Result, Work(*)
+  INTEGER Ier, Iwork(*), Leniw, Lenw, limit, lvl, l1, l2, l3, Neval, Npts2
   !
   REAL, EXTERNAL :: F
   !

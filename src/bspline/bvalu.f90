@@ -76,13 +76,11 @@ REAL FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Ideriv, iderp1, ihi, ihmkmj, ilo, imk, imkpj, Inbv, &
-    ipj, ip1, ip1mj, j, jj, j1, j2, K, kmider, kmj, km1, &
-    kpk, mflag, N
-  REAL A, fkmj, T, Work, X
+    ipj, ip1, ip1mj, j, jj, j1, j2, K, kmider, kmj, km1, kpk, mflag, N
+  REAL A(*), fkmj, T(*), Work(*), X
   !     DIMENSION T(N+K), WORK(3*K)
-  DIMENSION T(*), A(*), Work(*)
   !* FIRST EXECUTABLE STATEMENT  BVALU
   BVALU = 0.0E0
   IF ( K<1 ) THEN
@@ -94,8 +92,7 @@ REAL FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
     CALL XERMSG('SLATEC','BVALU','N DOES NOT SATISFY N.GE.K',2,1)
     RETURN
   ELSEIF ( Ideriv<0.OR.Ideriv>=K ) THEN
-    CALL XERMSG('SLATEC','BVALU','IDERIV DOES NOT SATISFY 0.LE.IDERIV.LT.K',&
-      2,1)
+    CALL XERMSG('SLATEC','BVALU','IDERIV DOES NOT SATISFY 0.LE.IDERIV.LT.K',2,1)
     RETURN
   ELSE
     kmider = K - Ideriv
@@ -105,8 +102,7 @@ REAL FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
     km1 = K - 1
     CALL INTRV(T,N+1,X,Inbv,i,mflag)
     IF ( X<T(K) ) THEN
-      CALL XERMSG('SLATEC','BVALU','X IS N0T GREATER THAN OR EQUAL TO T(K)',&
-        2,1)
+      CALL XERMSG('SLATEC','BVALU','X IS N0T GREATER THAN OR EQUAL TO T(K)',2,1)
       RETURN
     ELSE
       IF ( mflag/=0 ) THEN
@@ -120,8 +116,7 @@ REAL FUNCTION BVALU(T,A,N,K,Ideriv,X,Inbv,Work)
             IF ( X/=T(i) ) GOTO 20
           ENDDO
           CALL XERMSG('SLATEC','BVALU',&
-            'A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)',2,&
-            1)
+            'A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)',2,1)
           RETURN
         ENDIF
       ENDIF

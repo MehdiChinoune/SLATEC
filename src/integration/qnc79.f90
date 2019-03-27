@@ -90,10 +90,9 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   REAL ae, area, bank, blocal, c, ce, ee, ef, eps, q13, q7, q7l, &
     sq2, test, tol, vr, w1, w2, w3, w4
   INTEGER i, kml, kmx, l, lmn, lmx, nbits, nib, nlmn, nlmx
-  LOGICAL first
   !     .. Local Arrays ..
-  REAL aa(40), f(13), f1(40), f2(40), f3(40), f4(40), f5(40), f6(40)&
-    , f7(40), hh(40), q7r(40), vl(40)
+  REAL aa(40), f(13), f1(40), f2(40), f3(40), f4(40), f5(40), f6(40), &
+    f7(40), hh(40), q7r(40), vl(40)
   INTEGER lr(40)
   !     .. External Functions ..
   REAL, EXTERNAL :: R1MACH
@@ -103,10 +102,10 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, LOG, MAX, MIN, SIGN, SQRT
   !     .. Save statement ..
-  SAVE nbits, nlmx, first, sq2, w1, w2, w3, w4
+  SAVE nbits, nlmx, sq2, w1, w2, w3, w4
   !     .. Data statements ..
   DATA kml/7/, kmx/2000/, nlmn/2/
-  DATA first/.TRUE./
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  QNC79
   IF ( first ) THEN
     w1 = 41.0E0/140.0E0
@@ -116,8 +115,8 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
     nbits = INT( R1MACH(5)*I1MACH(11)/0.30102000E0 )
     nlmx = MIN(40,(nbits*4)/5)
     sq2 = SQRT(2.0E0)
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   Ans = 0.0E0
   Ierr = 1
   ce = 0.0E0

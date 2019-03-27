@@ -125,8 +125,7 @@ SUBROUTINE CSVDC(X,Ldx,N,P,S,E,U,Ldu,V,Ldv,Work,Job,Info)
   !
   !
   INTEGER i, iter, j, jobu, k, kase, kk, l, ll, lls, lm1, lp1, &
-    ls, lu, m, maxit, mm, mm1, mp1, nct, nctp1, ncu, nrt, &
-    nrtp1
+    ls, lu, m, maxit, mm, mm1, mp1, nct, nctp1, ncu, nrt, nrtp1
   COMPLEX CDOTC, t, r
   REAL b, c, cs, el, emm1, f, g, SCNRM2, scale, shift, sl, sm, &
     sn, smm1, t1, test, ztest

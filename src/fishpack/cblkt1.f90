@@ -1,6 +1,5 @@
 !** CBLKT1
-SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
-    CPRDCT)
+SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT)
   IMPLICIT NONE
   !>
   !***
@@ -73,8 +72,7 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
           CALL INXCB(ipi2,ir,ip2,np2)
           CALL INXCB(ipi1,irm1,ip1,np1)
           CALL INXCB(ipi3,irm1,ip3,np3)
-          CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),W3,W1,M,Am,Bm,Cm,Wd,&
-            Ww,Wu)
+          CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),W3,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
           IF ( ipi2<=NM ) THEN
             CALL PRDCT(np2,B(ip2),np1,B(ip1),np3,B(ip3),0,dum,Y(1,ipi2),W3,&
               M,Am,Bm,Cm,Wd,Ww,Wu)
@@ -103,8 +101,7 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
     CALL INXCB(i-i1,K-2,im1,nm1)
     CALL INXCB(i+i1,K-2,ip1,np1)
     CALL INXCB(i,K-1,iz,nz)
-    CALL PRDCT(nz,B(iz),nm1,B(im1),np1,B(ip1),0,dum,Y(1,i),W1,M,Am,Bm,Cm,Wd,&
-      Ww,Wu)
+    CALL PRDCT(nz,B(iz),nm1,B(im1),np1,B(ip1),0,dum,Y(1,i),W1,M,Am,Bm,Cm,Wd,Ww,Wu)
     izr = i
     DO j = 1, M
       W2(j) = W1(j)
@@ -119,13 +116,11 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
       CALL INXCB(i,ir,iz,nz)
       CALL INXCB(i-i1,ir-1,im1,nm1)
       CALL INXCB(i+i1,ir-1,ip1,np1)
-      CALL PRDCT(np1,B(ip1),0,dum,0,dum,nc,Cn(idxc),W1,W1,M,Am,Bm,Cm,Wd,Ww,&
-        Wu)
+      CALL PRDCT(np1,B(ip1),0,dum,0,dum,nc,Cn(idxc),W1,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
       DO j = 1, M
         W1(j) = Y(j,i) + W1(j)
       ENDDO
-      CALL PRDCT(nz,B(iz),nm1,B(im1),np1,B(ip1),0,dum,W1,W1,M,Am,Bm,Cm,Wd,&
-        Ww,Wu)
+      CALL PRDCT(nz,B(iz),nm1,B(im1),np1,B(ip1),0,dum,W1,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
     ENDDO
     DO ll = 2, K
       l = K - ll + 1
@@ -141,8 +136,7 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
           CALL INXCB(i,ir,iz,nz)
           CALL INXCB(i-i1,ir-1,im1,nm1)
           CALL INXCB(i+i1,ir-1,ip1,np1)
-          CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),W2,W2,M,Am,Bm,Cm,Wd,&
-            Ww,Wu)
+          CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),W2,W2,M,Am,Bm,Cm,Wd,Ww,Wu)
           DO j = 1, M
             W2(j) = Y(j,i) + W2(j)
           ENDDO
@@ -182,10 +176,8 @@ SUBROUTINE CBLKT1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,&
       CALL INXCB(i-i2,ir,im2,nm2)
       CALL INXCB(i-i2-i1,ir-1,im3,nm3)
       CALL INXCB(i-i1,ir-1,im1,nm1)
-      CALL PRDCT(nm2,B(im2),nm3,B(im3),nm1,B(im1),0,dum,W1,W1,M,Am,Bm,Cm,Wd,&
-        Ww,Wu)
-      CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),W1,W1,M,Am,Bm,Cm,Wd,Ww,&
-        Wu)
+      CALL PRDCT(nm2,B(im2),nm3,B(im3),nm1,B(im1),0,dum,W1,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
+      CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),W1,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
       DO j = 1, M
         Y(j,i) = Y(j,i) - W1(j)
       ENDDO

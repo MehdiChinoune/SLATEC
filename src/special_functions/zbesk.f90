@@ -163,15 +163,13 @@ SUBROUTINE ZBESK(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  
+
   !
   !     COMPLEX CY,Z
-  REAL(8) :: aa, alim, aln, arg, az, Cyi, Cyr, dig, elim, &
-    fn, Fnu, fnul, rl, r1m5, tol, ufl, Zi, Zr, &
-    D1MACH, ZABS, bb
   INTEGER Ierr, k, Kode, k1, k2, mr, N, nn, nuf, nw, Nz, I1MACH
-  DIMENSION Cyr(N), Cyi(N)
-  EXTERNAL :: ZABS
+  REAL(8) :: aa, alim, aln, arg, az, Cyi(N), Cyr(N), dig, elim, &
+    fn, Fnu, fnul, rl, r1m5, tol, ufl, Zi, Zr, bb
+  REAL(8), EXTERNAL :: D1MACH, ZABS
   !* FIRST EXECUTABLE STATEMENT  ZBESK
   Ierr = 0
   Nz = 0

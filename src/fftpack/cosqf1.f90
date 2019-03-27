@@ -39,8 +39,7 @@ SUBROUTINE COSQF1(N,X,W,Xh)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   INTEGER i, k, kc, modn, N, np2, ns2
-  REAL W, X, Xh, xim1
-  DIMENSION X(*), W(*), Xh(*)
+  REAL W(*), X(*), Xh(*), xim1
   !* FIRST EXECUTABLE STATEMENT  COSQF1
   ns2 = (N+1)/2
   np2 = N + 2

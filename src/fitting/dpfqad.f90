@@ -82,9 +82,8 @@ SUBROUTINE DPFQAD(F,Ldc,C,Xi,Lxi,K,Id,X1,X2,Tol,Quad,Ierr)
 
   !
   INTEGER Id, Ierr, iflg, ilo, il1, il2, inppv, K, Ldc, left, Lxi, mf1, mf2
-  REAL(8) :: a, aa, ans, b, bb, C, q, Quad, ta, tb, Tol, wtol, Xi, X1, X2
+  REAL(8) :: a, aa, ans, b, bb, C(Ldc,*), q, Quad, ta, tb, Tol, wtol, Xi(*), X1, X2
   REAL(8), EXTERNAL :: D1MACH, F
-  DIMENSION Xi(*), C(Ldc,*)
   !
   !* FIRST EXECUTABLE STATEMENT  DPFQAD
   Ierr = 1

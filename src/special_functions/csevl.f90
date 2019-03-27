@@ -45,19 +45,17 @@ REAL FUNCTION CSEVL(X,Cs,N)
   !   900329  Prologued revised extensively and code rewritten to allow
   !           X to be slightly outside interval (-1,+1).  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL R1MACH
   INTEGER i, N, ni
   REAL b0, b1, b2, Cs(*), onepl, twox, X
-  LOGICAL first
-  SAVE first, onepl
-  DATA first/.TRUE./
+  SAVE onepl
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  CSEVL
   IF ( first ) onepl = 1.0E0 + R1MACH(4)
   first = .FALSE.
   IF ( N<1 ) CALL XERMSG('SLATEC','CSEVL','NUMBER OF TERMS .LE. 0',2,2)
-  IF ( N>1000 ) CALL XERMSG('SLATEC','CSEVL','NUMBER OF TERMS .GT. 1000',3,&
-    2)
+  IF ( N>1000 ) CALL XERMSG('SLATEC','CSEVL','NUMBER OF TERMS .GT. 1000',3,2)
   IF ( ABS(X)>onepl ) CALL XERMSG('SLATEC','CSEVL',&
     'X OUTSIDE THE INTERVAL (-1,+1)',1,1)
   !

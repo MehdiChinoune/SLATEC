@@ -1,7 +1,6 @@
 !** DBVPOR
 SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
-    Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,W,Niv,Yhp,U,V,Coef,S,Stowa,G,&
-    Work,Iwork,Nfcc)
+    Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,W,Niv,Yhp,U,V,Coef,S,Stowa,G,Work,Iwork,Nfcc)
   IMPLICIT NONE
   !>
   !***
@@ -155,11 +154,10 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     ******************************************************************
   !
   COMMON /DML8SZ/ C, XSAv, IGOfx, INHomo, IVP, NCOmpd, NFCd
-  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
-    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
+  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15), &
+    ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
   COMMON /DML18J/ AE, RE, TOL, NXPtsd, NICd, NOPg, MXNond, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTPd, NEQivp, &
-    NUMort, NFCcd, ICOco
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTPd, NEQivp, NUMort, NFCcd, ICOco
   !
   !      *****************************************************************
   !
@@ -184,8 +182,7 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   kwc = kwt + Nic
   Iflag = 0
   CALL DLSSUD(A,Yhp(1,Nfcc+1),Alpha,Nic,Ncomp,Nrowa,Yhp,Ncomp,Iflag,1,ira,0,&
-    Work(1),Work(ndw+1),Iwork,Work(kws),Work(kwd),Work(kwt),isflg,&
-    Work(kwc))
+    Work(1),Work(ndw+1),Iwork,Work(kws),Work(kwd),Work(kwt),isflg,Work(kwc))
   IF ( Iflag==1 ) THEN
     IF ( Nfc/=Nfcc ) CALL DVECS(Ncomp,Nfc,Yhp,Work,Iwork,INHomo,Iflag)
     IF ( Iflag==1 ) THEN

@@ -1,7 +1,6 @@
 !** DOMN
 SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
-    Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,&
-    Iwork)
+    Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,Iwork)
   IMPLICIT NONE
   !>
   !***
@@ -260,8 +259,7 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt, Nsave
   !     .. Array Arguments ..
   REAL(8) :: A(Nelt), Ap(N,0:Nsave), B(N), Csav(Nsave), Dz(N), &
-    Emap(N,0:Nsave), P(N,0:Nsave), R(N), Rwork(*), X(N), &
-    Z(N)
+    Emap(N,0:Nsave), P(N,0:Nsave), R(N), Rwork(*), X(N), Z(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MATVEC, MSOLVE
@@ -301,8 +299,7 @@ SUBROUTINE DOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !
   IF ( ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,Itmax,Iter,Err,&
-      Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,Iwork,ak,bnrm,solnrm)==0 )&
-      THEN
+      Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,Iwork,ak,bnrm,solnrm)==0 ) THEN
     IF ( Ierr/=0 ) RETURN
     !
     !

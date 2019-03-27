@@ -198,10 +198,9 @@ SUBROUTINE DBNDSL(Mode,G,Mdg,Nb,Ip,Ir,X,N,Rnorm)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL(8) :: G, Rnorm, rsq, s, X, zero
   INTEGER i, i1, i2, ie, ii, iopt, Ip, Ir, irm1, ix, j, jg, l, &
     Mdg, Mode, N, Nb, nerr, np1
-  DIMENSION G(Mdg,*), X(*)
+  REAL(8) :: G(Mdg,*), Rnorm, rsq, s, X(*), zero
   !* FIRST EXECUTABLE STATEMENT  DBNDSL
   zero = 0.D0
   !

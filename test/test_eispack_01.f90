@@ -30,17 +30,17 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900405  CALL to XERROR replaced by message to LUN.  (WRB)
-    
+
     INTEGER info
     REAL R1MACH
     INTEGER Kprint, Ipass, Lun
     INTEGER lda, n, ldv, job, i, j, id
-    REAL a(3,3), ek(3), w(9)
+    REAL w(9)
     REAL err, erri, relerr, recj
     COMPLEX ac(3,3), ec(3), vc(3,3)
     DATA lda, n, ldv/3*3/
-    DATA a/1., -2., 6., -1., 0., -3., 2., 5., 6./
-    DATA ek/ - 1., 3., 5./
+    REAL :: a(3,3) = RESHAPE( [ 1., -2., 6., -1., 0., -3., 2., 5., 6. ], [3,3] )
+    REAL, PARAMETER :: ek(3) = [ -1., 3., 5. ]
     !* FIRST EXECUTABLE STATEMENT  EISQX1
     Ipass = 1
     relerr = SQRT(R1MACH(4))
@@ -122,18 +122,18 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   900405  CALL to XERROR replaced by message to LUN.  (WRB)
-    
+
     INTEGER info
     REAL R1MACH
     INTEGER Kprint, Ipass, Lun
     INTEGER lda, n, ldv, job, i, j, id
-    REAL a1(4,4), a2(10), ap(10), e(4), v(4,4), ek(4), w(16)
+    REAL a1(4,4), a2(10), e(4), v(4,4), w(16)
     REAL err, erri, relerr
     COMPLEX ac(4,4), vc(4,4)
     EQUIVALENCE (v,vc)
     DATA lda, n, ldv/3*4/
-    DATA ap/5., 4., 5., 1., 1., 4., 1., 1., 2., 4./
-    DATA ek/1., 2., 5., 10./
+    REAL, PARAMETER :: ap(10) = [ 5., 4., 5., 1., 1., 4., 1., 1., 2., 4. ]
+    REAL, PARAMETER :: ek(4) = [ 1., 2., 5., 10. ]
     !* FIRST EXECUTABLE STATEMENT  EISQX2
     Ipass = 1
     relerr = SQRT(R1MACH(4))
@@ -255,7 +255,7 @@ PROGRAM TEST24
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST24

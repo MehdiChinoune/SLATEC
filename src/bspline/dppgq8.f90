@@ -80,14 +80,12 @@ SUBROUTINE DPPGQ8(FUN,Ldc,C,Xi,Lxi,Kk,Id,A,B,Inppv,Err,Ans,Ierr)
     END FUNCTION
   END INTERFACE
   INTEGER Id, Ierr, Inppv, k, Kk, kml, kmx, l, Ldc, lmn, lmx, &
-    lr, Lxi, mxl, nbits, nib, nlmn, nlmx
+    lr(60), Lxi, mxl, nbits, nib, nlmn, nlmx
   INTEGER I1MACH
-  REAL(8) :: A, aa, ae, anib, Ans, area, B, be, C, cc, ee, &
-    ef, eps, Err, est, gl, glr, gr, hh, sq2, tol, &
-    vl, vr, w1, w2, w3, w4, Xi, x1, x2, x3, x4
+  REAL(8) :: A, aa(60), ae, anib, Ans, area, B, be, C(Ldc,*), cc, ee, &
+    ef, eps, Err, est, gl, glr, gr(60), hh(60), sq2, tol, &
+    vl(60), vr, w1, w2, w3, w4, Xi(*), x1, x2, x3, x4
   REAL(8) :: D1MACH
-  DIMENSION Xi(*), C(Ldc,*)
-  DIMENSION aa(60), hh(60), lr(60), vl(60), gr(60)
   SAVE x1, x2, x3, x4, w1, w2, w3, w4, sq2, nlmn, kmx, kml
   DATA x1, x2, x3, x4/1.83434642495649805D-01, 5.25532409916328986D-01, &
     7.96666477413626740D-01, 9.60289856497536232D-01/

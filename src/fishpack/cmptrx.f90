@@ -30,8 +30,7 @@ SUBROUTINE CMPTRX(Idegbr,Idegcr,M,A,B,C,Y,Tcos,D,W)
   !   900402  Added TYPE section.  (WRB)
   
   INTEGER i, Idegbr, Idegcr, ip, k, l, lint, M, mm1
-  COMPLEX A, B, C, Y, Tcos, D, W, x, xx, z
-  DIMENSION A(*), B(*), C(*), Y(*), Tcos(*), D(*), W(*)
+  COMPLEX A(*), B(*), C(*), Y(*), Tcos(*), D(*), W(*), x, xx, z
   INTEGER kb, kc
   !* FIRST EXECUTABLE STATEMENT  CMPTRX
   mm1 = M - 1

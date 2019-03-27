@@ -36,10 +36,9 @@ SUBROUTINE PROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,W,U)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   
-  REAL A, Aa, B, Bd, Bm1, Bm2, C, D, den, rt, U, W, X, Y
+  REAL A(*), Aa(*), B(*), Bd(*), Bm1(*), Bm2(*), C(*), D(*), den, rt, U(*), &
+    W(*), X(*), Y(*)
   INTEGER ia, ibr, id, j, k, M, m1, m2, mm, Na, Nd, Nm1, Nm2
-  DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), W(*), Bd(*), Bm1(*)&
-    , Bm2(*), Aa(*), U(*)
   !* FIRST EXECUTABLE STATEMENT  PROD
   DO j = 1, M
     W(j) = X(j)

@@ -52,9 +52,8 @@ SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   
-  INTEGER i, iopt, Ipagef, Ix, Lmx, lp4, M, N, n20008, n20012, nerr
+  INTEGER i, iopt, Ipagef, Ix(*), Lmx, lp4, M, N, n20008, n20012, nerr
   REAL Sx(Lmx), zero, one
-  DIMENSION Ix(*)
   SAVE zero, one
   DATA zero, one/0.E0, 1.E0/
   !* FIRST EXECUTABLE STATEMENT  PINITM
@@ -64,16 +63,14 @@ SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   !
   IF ( M<=0.OR.N<=0 ) THEN
     nerr = 55
-    CALL XERMSG('SLATEC','PINITM','MATRIX DIMENSION M OR N .LE. 0.',nerr,&
-      iopt)
+    CALL XERMSG('SLATEC','PINITM','MATRIX DIMENSION M OR N .LE. 0.',nerr,iopt)
   ENDIF
   !
   !     VERIFY IF VALUE OF LMX IS LARGE ENOUGH.
   !
   IF ( Lmx<N+7 ) THEN
     nerr = 55
-    CALL XERMSG('SLATEC','PINITM','THE VALUE OF LMX IS TOO SMALL.',nerr,&
-      iopt)
+    CALL XERMSG('SLATEC','PINITM','THE VALUE OF LMX IS TOO SMALL.',nerr,iopt)
   ENDIF
   !
   !     INITIALIZE DATA STRUCTURE INDEPENDENT VALUES.

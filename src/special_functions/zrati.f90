@@ -28,15 +28,14 @@ SUBROUTINE ZRATI(Zr,Zi,Fnu,N,Cyr,Cyi,Tol)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
+  INTEGER i, id, idnu, inu, itime, k, kk, magz, N
   REAL(8) :: ak, amagz, ap1, ap2, arg, az, cdfnui, cdfnur, &
-    conei, coner, Cyi, Cyr, czeroi, czeror, dfnu, &
+    conei, coner, Cyi(N), Cyr(N), czeroi, czeror, dfnu, &
     fdnu, flam, Fnu, fnup, pti, ptr, p1i, p1r, p2i, &
     p2r, rak, rap1, rho, rt2, rzi, rzr, test, test1, &
-    Tol, tti, ttr, t1i, t1r, Zi, Zr, ZABS
-  INTEGER i, id, idnu, inu, itime, k, kk, magz, N
-  DIMENSION Cyr(N), Cyi(N)
-  EXTERNAL :: ZABS
+    Tol, tti, ttr, t1i, t1r, Zi, Zr
+  REAL(8), EXTERNAL :: ZABS
   DATA czeror, czeroi, coner, conei, rt2/0.0D0, 0.0D0, 1.0D0, 0.0D0, &
     1.41421356237309505D0/
   !* FIRST EXECUTABLE STATEMENT  ZRATI

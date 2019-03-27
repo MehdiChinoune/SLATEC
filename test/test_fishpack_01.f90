@@ -55,12 +55,10 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     
-    REAL am, an, bm, bn, cm, cn, deltas, deltat, ermax, err, hds, &
-      hdt, s, t, tds, tdt, temp1, temp2, temp3, w
-    REAL y, z
+    REAL am(75), an(105), bm(75), bn(105), cm(75), cn(105), deltas, deltat, &
+      ermax, err, hds, hdt, s(75), t(105), tds, tdt, temp1, temp2, temp3, w(1952)
+    REAL y(75,105), z
     INTEGER i, idimy, ierror, iflg, Ipass, j, Kprint, Lun, m, mp, n, np
-    DIMENSION y(75,105), am(75), bm(75), cm(75), an(105), bn(105), &
-      cn(105), w(1952), s(75), t(105)
     !* FIRST EXECUTABLE STATEMENT  QXBLKT
     ermax = 1.E-3
     iflg = 0
@@ -238,12 +236,11 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     
-    REAL a, b, bda, bdb, bdc, bdd, c, d, dum, elmbda, ermax, err, &
-      f, pertrb, pi, piby2, PIMACH, pisq, w, x
-    REAL y, z
+    REAL a, b, bda, bdb(81), bdc, bdd, c, d, dum, elmbda, ermax, err, &
+      f(45,82), pertrb, pi, piby2, PIMACH, pisq, w(1200), x(41)
+    REAL y(81), z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
       n, nbdcnd, np1
-    DIMENSION f(45,82), bdb(81), w(1200), x(41), y(81)
     !* FIRST EXECUTABLE STATEMENT  QXCRT
     !
     !     FROM DIMENSION STATEMENT WE GET VALUE OF IDIMF.  ALSO NOTE THAT W
@@ -389,12 +386,11 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     
-    REAL bdrf, bdrs, bdtf, bdts, ci4, dphi, dr, dtheta, dum, elmbda, &
-      ermax, err, f, pertrb, pi, PIMACH, r, rf, rs, si
-    REAL tf, theta, ts, w, z
+    REAL bdrf, bdrs, bdtf(33), bdts, ci4, dphi, dr, dtheta, dum, elmbda, &
+      ermax, err, f(48,33), pertrb, pi, PIMACH, r(33), rf, rs, si
+    REAL tf, theta(48), ts, w(1200), z
     INTEGER i, idimf, ierror, intl, Ipass, j, Kprint, Lun, m, &
       mbdcnd, mp1, n, nbdcnd, np1
-    DIMENSION f(48,33), bdtf(33), w(1200), r(33), theta(48)
     !* FIRST EXECUTABLE STATEMENT  QXCSP
     !
     !     THE VALUE OF IDIMF IS THE FIRST DIMENSION OF F.  SINCE M=36, N=32,
@@ -617,11 +613,9 @@ CONTAINS
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     !   930415  Test modified to use a 64 by 128 grid.  (WRB)
     
-    REAL a, b, bda, bdb, bdc, bdd, c, d, elmbda, ermax, err, f, &
-      pertrb, r, w, x, z
+    REAL a, b, bda(129), bdb(129), bdc(65), bdd(65), c, d, elmbda, ermax, err, &
+      f(65,129), pertrb, r(65), w(1400), x, z(129)
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, n, nbdcnd, np1
-    DIMENSION f(65,129), bda(129), bdb(129), bdc(65), bdd(65), w(1400), &
-      r(65), z(129)
     !* FIRST EXECUTABLE STATEMENT  QXCYL
     IF ( Kprint>=2 ) WRITE (Lun,99001)
     !
@@ -772,10 +766,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     
-    REAL a, b, c, deltax, deltay, dum, dysq, ermax, err, f, pi, &
-      PIMACH, s, t, w, x, y, z
+    REAL a(20), b(20), c(20), deltax, deltay, dum, dysq, ermax, err, f(25,130), pi, &
+      PIMACH, s, t, w(1200), x(20), y(120), z
     INTEGER i, idimy, ierror, Ipass, j, Kprint, Lun, m, mm1, mperod, n, nperod
-    DIMENSION f(25,130), a(20), b(20), c(20), w(1200), x(20), y(120)
     !* FIRST EXECUTABLE STATEMENT  QXGBUN
     !
     !     FROM DIMENSION STATEMENT WE GET VALUE OF IDIMY.  ALSO NOTE THAT
@@ -945,11 +938,10 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     
-    REAL a, b, bda, bdb, bdc, bdd, c, d, dum, elmbda, ermax, err, &
-      f, pertrb, pi, PIMACH, r, theta, w, z
+    REAL a, b, bda, bdb, bdc(51), bdd(51), c, d, dum, elmbda, ermax, err, &
+      f(100,50), pertrb, pi, PIMACH, r(51), theta(49), w(1200), z
     INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
       n, nbdcnd, np1
-    DIMENSION f(100,50), bdc(51), bdd(51), w(1200), r(51), theta(49)
     !* FIRST EXECUTABLE STATEMENT  QXPLR
     !
     !     FROM DIMENSION STATEMENT WE GET VALUE OF IDIMF.  ALSO NOTE THAT W
@@ -1095,12 +1087,10 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901010  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
     
-    REAL bdpf, bdps, bdtf, bdts, dphi, dtheta, dum, elmbda, ermax, &
-      err, f, pertrb, pf, pi, PIMACH, ps, sinp, sint, tf, ts
-    REAL w, z
-    INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, &
-      n, nbdcnd, np1
-    DIMENSION f(19,73), bdtf(73), sint(19), sinp(73), w(1200)
+    REAL bdpf, bdps, bdtf(73), bdts, dphi, dtheta, dum, elmbda, ermax, &
+      err, f(19,73), pertrb, pf, pi, PIMACH, ps, sinp(73), sint(19), tf, ts
+    REAL w(1200), z
+    INTEGER i, idimf, ierror, Ipass, j, Kprint, Lun, m, mbdcnd, mp1, n, nbdcnd, np1
     !* FIRST EXECUTABLE STATEMENT  QXSSP
     !
     !     THE VALUE OF IDIMF IS THE FIRST DIMENSION OF F.  W IS

@@ -235,12 +235,10 @@ SUBROUTINE GENBUN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL A, a1, B, C, W, Y
   INTEGER i, Idimy, Ierror, ipstor, irev, iwb2, iwb3, iwba, iwbb, &
     iwbc, iwd, iwp, iwtcos, iww1, iww2, iww3, j, k, M, mh
+  REAL A(*), a1, B(*), C(*), W(*), Y(Idimy,*)
   INTEGER mhm1, mhmi, mhpi, modd, mp, mp1, Mperod, mskip, N, nby2, np, Nperod
-  DIMENSION Y(Idimy,*)
-  DIMENSION W(*), B(*), A(*), C(*)
   !* FIRST EXECUTABLE STATEMENT  GENBUN
   Ierror = 0
   IF ( M<=2 ) Ierror = 1

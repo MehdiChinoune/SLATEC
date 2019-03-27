@@ -53,22 +53,21 @@ REAL FUNCTION GAMIC(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  
+
   REAL A, aeps, algap1, alneps, ALNGAM, alngs, alx, bot, e, eps, &
     fm, gstar, h, R1MACH, R9GMIC, R9GMIT, R9LGIC, R9LGIT, sga, sgng
   REAL sgngam, sgngs, sqeps, t, X
   INTEGER izero, ma
-  LOGICAL first
-  SAVE eps, sqeps, alneps, bot, first
-  DATA first/.TRUE./
+  SAVE eps, sqeps, alneps, bot
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  GAMIC
   IF ( first ) THEN
     eps = 0.5*R1MACH(3)
     sqeps = SQRT(R1MACH(4))
     alneps = -LOG(R1MACH(3))
     bot = LOG(R1MACH(1))
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   IF ( X<0.0 ) CALL XERMSG('SLATEC','GAMIC','X IS NEGATIVE',2,2)
   !

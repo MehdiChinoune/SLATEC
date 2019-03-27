@@ -90,10 +90,10 @@ SUBROUTINE DWNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   INTEGER i, idope(3), imax, isol, itemp, iter, itmax, iwmax, j, &
     jcon, jp, key, krank, l1, last, link, m, me, next, niv, &
     nlink, nopt, nsoln, ntimes
-  LOGICAL done, feasbl, first, hitcon, pos
+  LOGICAL done, feasbl, hitcon, pos
   !
-  SAVE drelpr, first
-  DATA first/.TRUE./
+  SAVE drelpr
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DWNLSM
   !
   !     Initialize variables.

@@ -76,11 +76,10 @@ SUBROUTINE DQC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   !
-  REAL(8) :: A, Abserr, ak22, amom0, amom1, amom2, B, C, cc, centr, cheb12, &
-    cheb24, fval, hlgth, p2, p3, p4, resabs, resasc, Result, res12, res24, u, x
+  REAL(8) :: A, Abserr, ak22, amom0, amom1, amom2, B, C, cc, centr, cheb12(13), &
+    cheb24(25), fval(25), hlgth, p2, p3, p4, resabs, resasc, Result, res12, &
+    res24, u
   INTEGER i, isym, k, kp, Krul, Neval
-  !
-  DIMENSION x(11), fval(25), cheb12(13), cheb24(25)
   !
   REAL(8), EXTERNAL :: F
   REAL(8), EXTERNAL :: DQWGTC
@@ -89,14 +88,10 @@ SUBROUTINE DQC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !           K = 1, ..., 11, TO BE USED FOR THE CHEBYSHEV SERIES
   !           EXPANSION OF F
   !
-  SAVE x
-  DATA x(1), x(2), x(3), x(4), x(5), x(6), x(7), x(8), x(9), &
-    x(10), x(11)/0.9914448613738104D+00, 0.9659258262890683D+00, &
-    0.9238795325112868D+00, 0.8660254037844386D+00, &
-    0.7933533402912352D+00, 0.7071067811865475D+00, &
-    0.6087614290087206D+00, 0.5000000000000000D+00, &
-    0.3826834323650898D+00, 0.2588190451025208D+00, &
-    0.1305261922200516D+00/
+  REAL(8), PARAMETER :: x(11) = [ 0.9914448613738104D+00, 0.9659258262890683D+00, &
+    0.9238795325112868D+00, 0.8660254037844386D+00, 0.7933533402912352D+00, &
+    0.7071067811865475D+00, 0.6087614290087206D+00, 0.5000000000000000D+00, &
+    0.3826834323650898D+00, 0.2588190451025208D+00, 0.1305261922200516D+00 ]
   !
   !           LIST OF MAJOR VARIABLES
   !           ----------------------

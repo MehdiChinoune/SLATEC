@@ -940,8 +940,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !     Declare arguments.
   !
   INTEGER Neq, Info(15), Idid, Lrw, Iwork(*), Liw, Ipar(*)
-  REAL(8) :: T, Y(*), Yprime(*), Tout, Rtol(*), Atol(*), &
-    Rwork(*), Rpar(*)
+  REAL(8) :: T, Y(*), Yprime(*), Tout, Rtol(*), Atol(*), Rwork(*), Rpar(*)
   EXTERNAL :: RES, JAC
   !
   !     Declare externals.
@@ -1002,8 +1001,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         IF ( mxord<1.OR.mxord>5 ) THEN
           !
           WRITE (xern1,'(I8)') mxord
-          CALL XERMSG('SLATEC','DDASSL','MAXORD = '//xern1//' NOT IN RANGE',&
-            3,1)
+          CALL XERMSG('SLATEC','DDASSL','MAXORD = '//xern1//' NOT IN RANGE',3,1)
           GOTO 1200
         ENDIF
       ENDIF
@@ -1071,8 +1069,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           IF ( hmax<=0.0D0 ) THEN
             !
             WRITE (xern3,'(1P,D15.6)') hmax
-            CALL XERMSG('SLATEC','DDASSL','HMAX = '//xern3//' .LT. 0.0',10,&
-              1)
+            CALL XERMSG('SLATEC','DDASSL','HMAX = '//xern3//' .LT. 0.0',10,1)
             GOTO 1200
           ENDIF
         ENDIF
@@ -1130,8 +1127,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   ENDDO
   IF ( nzflg==0 ) THEN
     !
-    CALL XERMSG('SLATEC','DDASSL','ALL ELEMENTS OF RTOL AND ATOL ARE ZERO',&
-      8,1)
+    CALL XERMSG('SLATEC','DDASSL','ALL ELEMENTS OF RTOL AND ATOL ARE ZERO',8,1)
     GOTO 1200
   ELSE
     !
@@ -1169,14 +1165,12 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           IF ( (tstop-Tout)*h<0.0D0 ) GOTO 700
           IF ( (tn-T)*h>0.0D0 ) THEN
             IF ( (tn-Tout)*h>0.0D0 ) THEN
-              CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
-                Rwork(LPSI))
+              CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
               T = Tout
               Idid = 3
               done = .TRUE.
             ELSE
-              CALL DDATRP(tn,tn,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
-                Rwork(LPSI))
+              CALL DDATRP(tn,tn,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
               T = tn
               Idid = 1
               done = .TRUE.
@@ -1188,8 +1182,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
           IF ( (tn-tstop)*h>0.0D0 ) GOTO 1000
           IF ( (tstop-Tout)*h<0.0D0 ) GOTO 700
           IF ( (tn-Tout)*h>=0.0D0 ) THEN
-            CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
-              Rwork(LPSI))
+            CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
             T = Tout
             Idid = 3
             done = .TRUE.
@@ -1204,8 +1197,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
             Rwork(LH) = h
           ENDIF
         ELSE
-          CALL DDATRP(tn,tstop,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
-            Rwork(LPSI))
+          CALL DDATRP(tn,tstop,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
           Idid = 2
           T = tstop
           done = .TRUE.
@@ -1213,22 +1205,19 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       ELSEIF ( Info(3)==1 ) THEN
         IF ( (tn-T)*h>0.0D0 ) THEN
           IF ( (tn-Tout)*h>0.0D0 ) THEN
-            CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
-              Rwork(LPSI))
+            CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
             T = Tout
             Idid = 3
             done = .TRUE.
           ELSE
-            CALL DDATRP(tn,tn,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
-              Rwork(LPSI))
+            CALL DDATRP(tn,tn,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
             T = tn
             Idid = 1
             done = .TRUE.
           ENDIF
         ENDIF
       ELSEIF ( (tn-Tout)*h>=0.0D0 ) THEN
-        CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
-          Rwork(LPSI))
+        CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
         T = Tout
         Idid = 3
         done = .TRUE.
@@ -1265,8 +1254,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         WRITE (xern3,'(1P,D15.6)') Tout
         WRITE (xern4,'(1P,D15.6)') T
         CALL XERMSG('SLATEC','DDASSL','TOUT = '//xern3//&
-          ' TOO CLOSE TO T = '//xern4//' TO START INTEGRATION',14,&
-          1)
+          ' TOO CLOSE TO T = '//xern4//' TO START INTEGRATION',14,1)
         GOTO 1200
       ELSE
         !
@@ -1414,16 +1402,13 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         WRITE (xern3,'(1P,D15.6)') tn
         WRITE (xern4,'(1P,D15.6)') h
         CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
-          xern4//&
-          ' THE ERROR TEST FAILED REPEATEDLY OR WITH ABS(H)=HMIN',&
-          Idid,1)
+          xern4//' THE ERROR TEST FAILED REPEATEDLY OR WITH ABS(H)=HMIN',Idid,1)
       CASE (7)
         !
         !     CORRECTOR CONVERGENCE FAILED REPEATEDLY OR WITH H=HMIN
         WRITE (xern3,'(1P,D15.6)') tn
         WRITE (xern4,'(1P,D15.6)') h
-        CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
-          xern4//&
+        CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//xern4//&
           ' THE CORRECTOR FAILED TO CONVERGE REPEATEDLY OR WITH ABS(H)=HMIN',Idid,1)
       CASE (8)
         !
@@ -1437,16 +1422,14 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !     CORRECTOR FAILURE PRECEDED BY ERROR TEST FAILURES.
         WRITE (xern3,'(1P,D15.6)') tn
         WRITE (xern4,'(1P,D15.6)') h
-        CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
-          xern4//&
+        CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//xern4//&
           ' THE CORRECTOR COULD NOT CONVERGE.  ALSO, THE ERROR TEST FAILED REPEATEDLY.',Idid,1)
       CASE (10)
         !
         !     CORRECTOR FAILURE BECAUSE IRES = -1
         WRITE (xern3,'(1P,D15.6)') tn
         WRITE (xern4,'(1P,D15.6)') h
-        CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//&
-          xern4//&
+        CALL XERMSG('SLATEC','DDASSL','AT T = '//xern3//' AND STEPSIZE H = '//xern4//&
           ' THE CORRECTOR COULD NOT CONVERGE BECAUSE IRES WAS EQUAL TO MINUS ONE',Idid,1)
       CASE (11)
         !
@@ -1468,8 +1451,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
         !     REACHING TOUT
         WRITE (xern3,'(1P,D15.6)') tn
         CALL XERMSG('SLATEC','DDASSL','AT CURRENT T = '//xern3//&
-          ' 500 STEPS TAKEN ON THIS CALL BEFORE REACHING TOUT',&
-          Idid,1)
+          ' 500 STEPS TAKEN ON THIS CALL BEFORE REACHING TOUT',Idid,1)
     END SELECT
     !
     Info(1) = -1
@@ -1486,13 +1468,11 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   ELSEIF ( Info(4)/=0 ) THEN
     IF ( Info(3)/=0 ) THEN
       IF ( (tn-Tout)*h>=0.0D0 ) THEN
-        CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
-          Rwork(LPSI))
+        CALL DDATRP(tn,Tout,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
         T = Tout
         Idid = 3
       ELSEIF ( ABS(tn-tstop)<=100.0D0*uround*(ABS(tn)+ABS(h)) ) THEN
-        CALL DDATRP(tn,tstop,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
-          Rwork(LPSI))
+        CALL DDATRP(tn,tstop,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
         Idid = 2
         T = tstop
       ELSE
@@ -1501,8 +1481,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
       ENDIF
     ELSEIF ( (tn-Tout)*h<0.0D0 ) THEN
       IF ( ABS(tn-tstop)<=100.0D0*uround*(ABS(tn)+ABS(h)) ) THEN
-        CALL DDATRP(tn,tstop,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),&
-          Rwork(LPSI))
+        CALL DDATRP(tn,tstop,Y,Yprime,Neq,Iwork(LKOLD),Rwork(lphi),Rwork(LPSI))
         Idid = 2
         T = tstop
       ELSE
@@ -1566,8 +1545,7 @@ SUBROUTINE DDASSL(RES,Neq,T,Y,Yprime,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,&
   !
   800  WRITE (xern3,'(1P,D15.6)') Tout
   WRITE (xern4,'(1P,D15.6)') T
-  CALL XERMSG('SLATEC','DDASSL','TOUT = '//xern3//' BEHIND T = '//xern4,11,&
-    1)
+  CALL XERMSG('SLATEC','DDASSL','TOUT = '//xern3//' BEHIND T = '//xern4,11,1)
   GOTO 1200
   !
   900  CALL XERMSG('SLATEC','DDASSL','SOME ELEMENT OF WT IS .LE. 0.0',13,1)

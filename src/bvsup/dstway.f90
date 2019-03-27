@@ -42,11 +42,10 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
     V(*), X, XBEg, XENd, XOP, XOT, XSAv, Yhp(*)
   !
   COMMON /DML8SZ/ C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
-  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
-    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
+  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15), &
+    ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
   COMMON /DML18J/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
-    NUMort, NFCc, ICOco
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, NUMort, NFCc, ICOco
   !
   !* FIRST EXECUTABLE STATEMENT  DSTWAY
   IF ( Inout==1 ) THEN

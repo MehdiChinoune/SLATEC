@@ -163,13 +163,12 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   
   !
-  COMPLEX Cy, Z, zn, zt, csgn
+  INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, M, mm, mr, &
+    N, nn, nuf, nw, Nz, I1MACH
+  COMPLEX Cy(N), Z, zn, zt, csgn
   REAL aa, alim, aln, arg, az, cpn, dig, elim, fmm, fn, Fnu, &
     fnul, hpi, rhpi, rl, r1m5, sgn, spn, tol, ufl, xn, xx, &
     yn, yy, R1MACH, bb, ascle, rtol, atol
-  INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, M, mm, mr, &
-    N, nn, nuf, nw, Nz, I1MACH
-  DIMENSION Cy(N)
   !
   DATA hpi/1.57079632679489662E0/
   !

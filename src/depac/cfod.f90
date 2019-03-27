@@ -30,9 +30,8 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
   !
   !LLL. OPTIMIZE
   INTEGER Meth, i, ib, nq, nqm1, nqp1
-  REAL Elco, Tesco, agamq, fnq, fnqm1, pc, pint, ragq, rqfac, &
+  REAL Elco(13,12), Tesco(3,12), agamq, fnq, fnqm1, pc(12), pint, ragq, rqfac, &
     rq1fac, tsign, xpin
-  DIMENSION Elco(13,12), Tesco(3,12)
   !-----------------------------------------------------------------------
   ! CFOD  IS CALLED BY THE INTEGRATOR ROUTINE TO SET COEFFICIENTS
   ! NEEDED THERE.  THE COEFFICIENTS FOR THE CURRENT METHOD, AS
@@ -59,8 +58,7 @@ SUBROUTINE CFOD(Meth,Elco,Tesco)
   ! SIZE AT ORDER NQ - 1 IF K = 1, AT ORDER NQ IF K = 2, AND AT ORDER
   ! NQ + 1 IF K = 3.
   !-----------------------------------------------------------------------
-  DIMENSION pc(12)
-  !
+
   !* FIRST EXECUTABLE STATEMENT  CFOD
   IF ( Meth==2 ) THEN
     !

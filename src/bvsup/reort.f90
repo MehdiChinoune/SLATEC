@@ -55,25 +55,22 @@ SUBROUTINE REORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
-  REAL AE, C, dnd, dndt, dx, P, PWCnd, PX, RE, S, SDOT, srp, &
-    Stowa, TND, TOL, vnorm, W, wcnd, X, XBEg
-  REAL XENd, XOP, XOT, XSAv, Y, Yhp, Yp, ypnm
-  INTEGER ICOco, Iflag, IGOfx, ijk, INDpvt, INFo, INHomo, INTeg, &
-    Ip, ISTkop, IVP, j, k, kk, KNSwot, KOP, l, LOTjp, mflag, MNSwot
+
   INTEGER MXNon, Ncomp, NCOmpd, NDIsk, NEQ, NEQivp, NFC, NFCc, &
     nfcp, NIC, Niv, NOPg, NPS, NSWot, NTApe, NTP, NUMort, NXPts
-  DIMENSION Y(Ncomp,*), Yp(*), W(*), S(*), P(*), Ip(*), Stowa(*), &
-    Yhp(Ncomp,*)
+  REAL AE, C, dnd, dndt, dx, P(*), PWCnd, PX, RE, S(*), SDOT, srp, &
+    Stowa(*), TND, TOL, vnorm, W(*), wcnd, X, XBEg
+  REAL XENd, XOP, XOT, XSAv, Y(Ncomp,*), Yhp(Ncomp,*), Yp(*), ypnm
+  INTEGER ICOco, Iflag, IGOfx, ijk, INDpvt, INFo, INHomo, INTeg, &
+    Ip(*), ISTkop, IVP, j, k, kk, KNSwot, KOP, l, LOTjp, mflag, MNSwot
   !
   !- *********************************************************************
   !
   COMMON /ML8SZ / C, XSAv, IGOfx, INHomo, IVP, NCOmpd, NFC
-  COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
-    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
+  COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15), &
+    ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
   COMMON /ML18JR/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
-    NUMort, NFCc, ICOco
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, NUMort, NFCc, ICOco
   !
   !- *********************************************************************
   !* FIRST EXECUTABLE STATEMENT  REORT

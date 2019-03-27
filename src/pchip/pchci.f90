@@ -103,8 +103,7 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, nless1
-  REAL del1, del2, dmax, dmin, drat1, drat2, hsum, hsumt3, three, &
-    w1, w2, zero
+  REAL del1, del2, dmax, dmin, drat1, drat2, hsum, hsumt3, three, w1, w2, zero
   SAVE zero, three
   REAL PCHST
   !

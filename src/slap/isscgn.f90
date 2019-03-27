@@ -210,8 +210,7 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
   REAL Ak, Bk, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL A(N), Atdz(N), Atp(N), Atz(N), B(N), Dz(N), P(N), R(N), &
-    Rwork(*), X(N), Z(N)
+  REAL A(N), Atdz(N), Atp(N), Atz(N), B(N), Dz(N), P(N), R(N), Rwork(*), X(N), Z(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MATVEC, MSOLVE, MTTVEC
@@ -256,9 +255,8 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
   IF ( Iunit/=0 ) THEN
     IF ( Iter==0 ) THEN
       WRITE (Iunit,99001) N, Itol
-      99001 FORMAT (' PCG Applied to the Normal Equations for ','N, ITOL = ',I5,&
-        I5,/' ITER','   Error Estimate','            Alpha',&
-        '             Beta')
+      99001 FORMAT (' PCG Applied to the Normal Equations for N, ITOL = ',I5,&
+        I5,/' ITER   Error Estimate            Alpha             Beta')
       WRITE (Iunit,99002) Iter, Err
     ELSE
       WRITE (Iunit,99002) Iter, Err, Ak, Bk

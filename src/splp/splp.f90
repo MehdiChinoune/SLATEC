@@ -1642,8 +1642,8 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       IF ( Lw<lwork.OR.Liw<liwork ) THEN
         WRITE (xern1,'(I8)') lwork
         WRITE (xern2,'(I8)') liwork
-        CALL XERMSG('SLATEC','SPLP','WORK OR IWORK IS NOT LONG ENOUGH. LW MUST BE = '//xern1//' AND LIW MUST BE = '//&
-          xern2,4,1)
+        CALL XERMSG('SLATEC','SPLP','WORK OR IWORK IS NOT LONG ENOUGH. LW MUST BE = '&
+          //xern1//' AND LIW MUST BE = '//xern2,4,1)
         Info = -4
         RETURN
       ENDIF
@@ -1652,8 +1652,7 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         Primal,Duals,Work(lamat),Work(lcsc),Work(lcolnr),&
         Work(lerd),Work(lerp),Work(lbasma),Work(lwr),Work(lrz),&
         Work(lrg),Work(lrprim),Work(lrhs),Work(lww),lmx,lbm,&
-        Ibasis,Iwork(libb),Iwork(limat),Iwork(librc),Iwork(lipr),&
-        Iwork(liwr))
+        Ibasis,Iwork(libb),Iwork(limat),Iwork(librc),Iwork(lipr),Iwork(liwr))
       RETURN
     ELSEIF ( ictopt<=ictmax ) THEN
       key = INT( Prgopt(last+1) )
@@ -1672,15 +1671,13 @@ SUBROUTINE SPLP(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
       last = next
     ELSE
       nerr = 15
-      CALL XERMSG('SLATEC','SPLP','OPTION ARRAY PROCESSING IS CYCLING.',&
-        nerr,iopt)
+      CALL XERMSG('SLATEC','SPLP','OPTION ARRAY PROCESSING IS CYCLING.',nerr,iopt)
       Info = -nerr
       RETURN
     ENDIF
   ENDDO
   nerr = 21
-  CALL XERMSG('SLATEC','SPLP','USER-DEFINED VALUE OF LBM MUST BE .GE. 0.',&
-    nerr,iopt)
+  CALL XERMSG('SLATEC','SPLP','USER-DEFINED VALUE OF LBM MUST BE .GE. 0.',nerr,iopt)
   Info = -nerr
   RETURN
   !

@@ -36,13 +36,11 @@ SUBROUTINE DU11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   
-  REAL(8) :: A, bb, Db, Eb, H, r2, rmin, sum, t, temp, tn, &
-    tt, Ub, W
+  INTEGER Mda, mm, Mode, N, nmk, Np
+  REAL(8) :: A(Mda,*), bb, Db(*), Eb(*), H(*), r2, rmin, sum, t, temp, tn, tt, Ub(*), W(*)
   INTEGER i, IDAMAX, ii, im1, imin, is, j, jm1, jmax, jp1, kk, &
     km1, kmi, kp1, Krank, Ksure, kz, l, lm1, M
-  INTEGER Mda, mm, Mode, N, nmk, Np
   REAL(8) :: DDOT, DNRM2
-  DIMENSION A(Mda,*), Ub(*), Db(*), H(*), W(*), Eb(*)
   INTEGER Ic(*), Ir(*)
   !
   !        INITIALIZATION

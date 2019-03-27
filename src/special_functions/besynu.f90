@@ -75,23 +75,20 @@ SUBROUTINE BESYNU(X,Fnu,N,Y)
 
   !
   INTEGER i, inu, j, k, kk, N, nn
-  REAL a, ak, arg, a1, a2, bk, cb, cbk, cc, cck, ck, coef, cpt, &
+  REAL a(120), ak, arg, a1, a2, bk, cb(120), cbk, cck, ck, coef, cpt, &
     cp1, cp2, cs, cs1, cs2, cx, dnu, dnu2, etest, etx, f, fc, &
     fhs, fk, fks, flrx, fmu, fn, Fnu, fx, g, g1, g2, hpi, p, &
-    pi, pt, q, rb, rbk, rck, relb, rpt, rp1, rp2, rs, rs1, &
+    pi, pt, q, rb(120), rbk, rck, relb, rpt, rp1, rp2, rs, rs1, &
     rs2, rthpi, rx, s, sa, sb, smu, ss, st, s1, s2, tb, tm, &
-    tol, t1, t2, X, x1, x2, Y
-  DIMENSION a(120), rb(120), cb(120), Y(*), cc(8)
+    tol, t1, t2, X, x1, x2, Y(*)
   REAL, EXTERNAL :: GAMMA, R1MACH
-  SAVE x1, x2, pi, rthpi, hpi, cc
+  SAVE x1, x2, pi, rthpi, hpi
   DATA x1, x2/3.0E0, 20.0E0/
   DATA pi, rthpi/3.14159265358979E+00, 7.97884560802865E-01/
   DATA hpi/1.57079632679490E+00/
-  DATA cc(1), cc(2), cc(3), cc(4), cc(5), cc(6), cc(7), &
-    cc(8)/5.77215664901533E-01, -4.20026350340952E-02, &
-    -4.21977345555443E-02, 7.21894324666300E-03, &
-    -2.15241674114900E-04, -2.01348547807000E-05, &
-    1.13302723200000E-06, 6.11609500000000E-09/
+  REAL, PARAMETER :: cc(8) = [ 5.77215664901533E-01, -4.20026350340952E-02, &
+    -4.21977345555443E-02, 7.21894324666300E-03, -2.15241674114900E-04, &
+    -2.01348547807000E-05, 1.13302723200000E-06, 6.11609500000000E-09 ]
   !* FIRST EXECUTABLE STATEMENT  BESYNU
   ak = R1MACH(3)
   tol = MAX(ak,1.0E-15)

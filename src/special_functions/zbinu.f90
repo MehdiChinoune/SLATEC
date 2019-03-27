@@ -23,12 +23,11 @@ SUBROUTINE ZBINU(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Rl,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
-  REAL(8) :: Alim, az, cwi, cwr, Cyi, Cyr, dfnu, Elim, Fnu, &
-    Fnul, Rl, Tol, zeroi, zeror, Zi, Zr, ZABS
+
   INTEGER i, inw, Kode, N, nlast, nn, nui, nw, Nz
-  DIMENSION Cyr(N), Cyi(N), cwr(2), cwi(2)
-  EXTERNAL :: ZABS
+  REAL(8) :: Alim, az, cwi(2), cwr(2), Cyi(N), Cyr(N), dfnu, Elim, Fnu, &
+    Fnul, Rl, Tol, zeroi, zeror, Zi, Zr
+  REAL(8), EXTERNAL :: ZABS
   DATA zeror, zeroi/0.0D0, 0.0D0/
   !* FIRST EXECUTABLE STATEMENT  ZBINU
   Nz = 0

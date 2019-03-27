@@ -121,10 +121,8 @@ SUBROUTINE BQR(Nm,N,Mb,A,T,R,Ierr,Nv,Rv)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   !
-  INTEGER i, j, k, l, m, N, ii, ik, jk, jm, kj, kk, km, ll, &
-    Mb, mk, mn, mz
-  INTEGER m1, m2, m3, m4, ni, Nm, Nv, its, kj1, m21, m31, Ierr, &
-    imult
+  INTEGER i, j, k, l, m, N, ii, ik, jk, jm, kj, kk, km, ll, Mb, mk, mn, mz
+  INTEGER m1, m2, m3, m4, ni, Nm, Nv, its, kj1, m21, m31, Ierr, imult
   REAL A(Nm,*), Rv(*)
   REAL f, g, q, R, s, T, scale
   REAL PYTHAG

@@ -147,9 +147,8 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   
   INTEGER i, ii, iopt, Ip(*), ip1, j, jb, jj, k, kp1, Krank, l, &
     ldiag, lmax, M, Mda, Mdb, N, Nb, nerr
-  REAL(8) :: A, B, D1MACH, dzero, factor, G, H, hmax, releps, &
-    Rnorm, sm, sm1, szero, Tau, tmp
-  DIMENSION A(Mda,*), B(Mdb,*), H(*), G(*), Rnorm(*)
+  REAL(8) :: A(Mda,*), B(Mdb,*), D1MACH, dzero, factor, G(*), H(*), hmax, releps, &
+    Rnorm(*), sm, sm1, szero, Tau, tmp
   SAVE releps
   DATA releps/0.D0/
   !     BEGIN BLOCK PERMITTING ...EXITS TO 360
@@ -230,8 +229,7 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
         nerr = 2
         iopt = 2
         CALL XERMSG('SLATEC','DHFTI',&
-          'MDB.LT.MAX(M,N).AND.NB.GT.1. PROBABLE ERROR.',nerr,&
-          iopt)
+          'MDB.LT.MAX(M,N).AND.NB.GT.1. PROBABLE ERROR.',nerr,iopt)
         !     ...............EXIT
         RETURN
       ENDIF

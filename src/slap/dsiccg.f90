@@ -249,14 +249,12 @@ SUBROUTINE DSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER, PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL(8) :: Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
-    Nelt
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
   !     .. Array Arguments ..
   REAL(8) :: A(Nelt), B(N), Rwork(Lenw), X(N)
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin, locdz, locel, lociel, lociw, locjel, locp, locr, &
-    locw, locz, nl
+  INTEGER locdin, locdz, locel, lociel, lociw, locjel, locp, locr, locw, locz, nl
   CHARACTER xern1*8
   !     .. External Subroutines ..
   EXTERNAL :: DCG, DCHKW, DS2Y, DSICS, DSLLTI, DSMV, XERMSG
@@ -310,15 +308,12 @@ SUBROUTINE DSICCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   IF ( Ierr/=0 ) THEN
     WRITE (xern1,'(I8)') Ierr
     CALL XERMSG('SLATEC','DSICCG','IC factorization broke down on step '//&
-      xern1//&
-      '.  Diagonal was set to unity and factorization proceeded.',&
-      1,1)
+      xern1//'.  Diagonal was set to unity and factorization proceeded.',1,1)
     Ierr = 7
   ENDIF
   !
   !         Do the Preconditioned Conjugate Gradient.
   CALL DCG(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSLLTI,Itol,Tol,Itmax,Iter,Err,Ierr,&
-    Iunit,Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locdz),Rwork(1),&
-    Iwork(1))
+    Iunit,Rwork(locr),Rwork(locz),Rwork(locp),Rwork(locdz),Rwork(1),Iwork(1))
   !------------- LAST LINE OF DSICCG FOLLOWS ----------------------------
 END SUBROUTINE DSICCG

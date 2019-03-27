@@ -141,8 +141,7 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
     DO i = 1, M
       temp = one
       IF ( Fvec(i)/=zero.AND.Fvecp(i)/=zero.AND.ABS(Fvecp(i)-Fvec(i))&
-        >=epsf*ABS(Fvec(i)) )&
-        temp = eps*ABS((Fvecp(i)-Fvec(i))/eps-Err(i))&
+        >=epsf*ABS(Fvec(i)) ) temp = eps*ABS((Fvecp(i)-Fvec(i))/eps-Err(i))&
         /(ABS(Fvec(i))+ABS(Fvecp(i)))
       Err(i) = one
       IF ( temp>epsmch.AND.temp<eps ) Err(i) = (LOG10(temp)-epslog)/epslog

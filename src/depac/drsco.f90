@@ -36,9 +36,8 @@ SUBROUTINE DRSCO(Rsav,Isav)
   ! OF SUBROUTINE DSVCO OR THE EQUIVALENT.
   !-----------------------------------------------------------------------
   !
-  INTEGER i, ILS, Isav, lenils, lenrls
-  REAL(8) :: RLS, Rsav
-  DIMENSION Rsav(*), Isav(*)
+  INTEGER i, ILS, Isav(*), lenils, lenrls
+  REAL(8) :: RLS, Rsav(*)
   SAVE lenrls, lenils
   COMMON /DDEBD1/ RLS(218), ILS(33)
   DATA lenrls/218/, lenils/33/

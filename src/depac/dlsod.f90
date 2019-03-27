@@ -35,27 +35,21 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   
   !
   INTEGER IBAnd, IBEgin, Idid, IER, IINteg, IJAc, INIt, intflg, &
-    IOWns, Ipar, IQUit, ITOl, ITStop, Iwm, JSTart, k, KFLag, &
+    IOWns, Ipar, IQUit, ITOl, ITStop, Iwm(*), JSTart, k, KFLag, &
     KSTeps, l, LACor, LDUm, LEWt, LSAvf, ltol, LWM, LYH, &
-    maxnum, MAXord, METh, MITer, N, natolp, Neq, NFE, NJE, &
-    NQ, NQU, nrtolp, NST
-  REAL(8) :: absdel, Acor, Atol, big, D1MACH, del, Delsgn, dt, &
-    DVNRMS, EL0, Ewt, H, ha, HMIn, HMXi, HU, ROWns, &
-    Rpar, Rtol, Savf, T, tol, TOLd, Tolfac, Tout, &
-    Tstop, U, Wm, X, Y, Yh, Yh1, Ypout
+    maxnum, MAXord, METh, MITer, N, natolp, Neq, NFE, NJE, NQ, NQU, nrtolp, NST
+  REAL(8) :: absdel, Acor(*), Atol(*), big, D1MACH, del, Delsgn, dt, &
+    DVNRMS, EL0, Ewt(*), H, ha, HMIn, HMXi, HU, ROWns, &
+    Rpar(*), Rtol(*), Savf(*), T, tol, TOLd, Tolfac, Tout, &
+    Tstop, U, Wm(*), X, Y(*), Yh(Neq,6), Yh1(*), Ypout(*)
   LOGICAL Intout
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
   !
-  DIMENSION Y(*), Ypout(*), Yh(Neq,6), Yh1(*), Ewt(*), Savf(*), &
-    Acor(*), Wm(*), Iwm(*), Rtol(*), Atol(*), Rpar(*), Ipar(*)
-  !
-  !
   COMMON /DDEBD1/ TOLd, ROWns(210), EL0, H, HMIn, HMXi, HU, X, U, &
     IQUit, INIt, LYH, LEWt, LACor, LSAvf, LWM, KSTeps, &
-    IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, IOWns(6)&
-    , IER, JSTart, KFLag, LDUm, METh, MITer, MAXord, &
-    N, NQ, NST, NFE, NJE, NQU
+    IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, IOWns(6), &
+    IER, JSTart, KFLag, LDUm, METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
   !
   EXTERNAL :: DF, DJAC
   !
@@ -121,8 +115,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   IF ( Neq<1 ) THEN
     WRITE (xern1,'(I8)') Neq
     CALL XERMSG('SLATEC','DLSOD',&
-      'IN DDEBDF, THE NUMBER OF EQUATIONS MUST BE A POSITIVE INTEGER.$$YOU HAVE CALLED THE CODE WITH NEQ = '//&
-      xern1,6,1)
+      'IN DDEBDF, THE NUMBER OF EQUATIONS MUST BE A POSITIVE INTEGER.$$YOU HAVE CALLED THE CODE WITH NEQ = '//xern1,6,1)
     Idid = -33
   ENDIF
   !
@@ -186,9 +179,8 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
       WRITE (xern3,'(1PE15.6)') TOLd
       WRITE (xern4,'(1PE15.6)') T
       CALL XERMSG('SLATEC','DLSOD',&
-        'IN DDEBDF, YOU HAVE CHANGED THE VALUE OF T FROM '//&
-        xern3//' TO '//xern4//&
-        '  THIS IS NOT ALLOWED ON CONTINUATION CALLS.',10,1)
+        'IN DDEBDF, YOU HAVE CHANGED THE VALUE OF T FROM '//xern3//' TO '&
+        //xern4//'  THIS IS NOT ALLOWED ON CONTINUATION CALLS.',10,1)
       Idid = -33
     ENDIF
     !

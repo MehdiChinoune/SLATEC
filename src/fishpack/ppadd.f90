@@ -35,11 +35,10 @@ SUBROUTINE PPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  REAL A, Bh, Bp, BSRH, C, CNV, db, EPS, psg, scnv, sgn, xl, xm, xr
+  REAL A(*), Bh(*), Bp(*), BSRH, C(*), CNV, db, EPS, psg, scnv, sgn, xl, xm, xr
   INTEGER i3, icv, Ierror, if, ig, IK, is, it, iz, j, K, modiz, &
     N, NCMplx, nhalf, NM, NPP, nt
-  COMPLEX cx, fsg, hsg, dd, f, fp, fpp, cdis, r1, r2, r3, Cbp
-  DIMENSION A(*), C(*), Bp(*), Bh(*), Cbp(*)
+  COMPLEX cx, fsg, hsg, dd, f, fp, fpp, cdis, r1, r2, r3, Cbp(*)
   COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
   REAL, EXTERNAL :: PSGF, PPSPF, PPSGF
   !* FIRST EXECUTABLE STATEMENT  PPADD

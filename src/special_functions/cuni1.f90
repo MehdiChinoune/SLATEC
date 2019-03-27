@@ -31,14 +31,12 @@ SUBROUTINE CUNI1(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   
-  COMPLEX cfn, cone, crsc, cscl, csr, css, cwrk, czero, c1, c2, &
-    phi, rz, sum, s1, s2, Y, Z, zeta1, zeta2, cy
-  REAL Alim, aphi, ascle, bry, c2i, c2m, c2r, Elim, fn, Fnu, &
+  INTEGER i, iflag, init, k, Kode, m, N, nd, Nlast, nn, nuf, nw, Nz
+  COMPLEX cfn, crsc, cscl, csr(3), css(3), cwrk(16), c1, c2, &
+    phi, rz, sum, s1, s2, Y(N), Z, zeta1, zeta2, cy(2)
+  REAL Alim, aphi, ascle, bry(3), c2i, c2m, c2r, Elim, fn, Fnu, &
     Fnul, rs1, Tol, yy, R1MACH
-  INTEGER i, iflag, init, k, Kode, m, N, nd, Nlast, nn, nuf, nw, &
-    Nz
-  DIMENSION bry(3), Y(N), cwrk(16), css(3), csr(3), cy(2)
-  DATA czero, cone/(0.0E0,0.0E0), (1.0E0,0.0E0)/
+  COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CUNI1
   Nz = 0
   nd = N

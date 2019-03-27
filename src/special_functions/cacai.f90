@@ -33,11 +33,10 @@ SUBROUTINE CACAI(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   
-  COMPLEX csgn, cspn, c1, c2, Y, Z, zn, cy
+  INTEGER inu, iuf, Kode, Mr, N, nn, nw, Nz
+  COMPLEX csgn, cspn, c1, c2, Y(N), Z, zn, cy(2)
   REAL Alim, arg, ascle, az, cpn, dfnu, Elim, fmr, Fnu, pi, Rl, &
     sgn, spn, Tol, yy, R1MACH
-  INTEGER inu, iuf, Kode, Mr, N, nn, nw, Nz
-  DIMENSION Y(N), cy(2)
   DATA pi/3.14159265358979324E0/
   !* FIRST EXECUTABLE STATEMENT  CACAI
   Nz = 0

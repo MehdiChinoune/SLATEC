@@ -159,8 +159,7 @@ CONTAINS
       !
       DO isym = 0, 1
         IF ( Kprint>=2 ) WRITE (Lun,99001) n, kase, isym
-        99001 FORMAT ('1'/' Running tests with  N =',I3,',  KASE =',I2,',  ISYM =',&
-          I2)
+        99001 FORMAT ('1'/' Running tests with  N =',I3,',  KASE =',I2,',  ISYM =',I2)
         !
         !         Set up a random matrix.
         !

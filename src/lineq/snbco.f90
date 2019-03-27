@@ -142,8 +142,7 @@ SUBROUTINE SNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   REAL SDOT, ek, t, wk, wkm
   REAL anorm, s, SASUM, sm, ynorm
-  INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, &
-    mm, nl, nu
+  INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, mm, nl, nu
   !* FIRST EXECUTABLE STATEMENT  SNBCO
   ml1 = Ml + 1
   ldb = Lda - 1

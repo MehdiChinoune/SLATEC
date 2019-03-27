@@ -125,8 +125,7 @@ SUBROUTINE DNBFA(Abe,Lda,N,Ml,Mu,Ipvt,Info)
   INTEGER Lda, N, Ml, Mu, Ipvt(*), Info
   REAL(8) :: Abe(Lda,*)
   !
-  INTEGER ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp, &
-    IDAMAX
+  INTEGER ml1, mb, m, n1, ldb, i, j, k, l, lm, lm1, lm2, mp, IDAMAX
   REAL(8) :: t
   !* FIRST EXECUTABLE STATEMENT  DNBFA
   ml1 = Ml + 1

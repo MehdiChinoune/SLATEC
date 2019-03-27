@@ -1,7 +1,6 @@
 !** ISDBCG
 INTEGER FUNCTION ISDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
-    Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork,&
-    Ak,Bk,Bnrm,Solnrm)
+    Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   IMPLICIT NONE
   !>
   !***
@@ -234,8 +233,7 @@ INTEGER FUNCTION ISDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
     IF ( Iter==0 ) THEN
       WRITE (Iunit,99001) N, Itol
       99001 FORMAT (' Preconditioned BiConjugate Gradient for N, ITOL = ',I5,I5,&
-        /' ITER','   Error Estimate','            Alpha',&
-        '             Beta')
+        /' ITER   Error Estimate            Alpha             Beta')
       WRITE (Iunit,99002) Iter, Err
     ELSE
       WRITE (Iunit,99002) Iter, Err, Ak, Bk

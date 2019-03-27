@@ -17,8 +17,7 @@ SUBROUTINE FMAT(X,Y,Yp)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   
-  REAL tanx, TERm, X, XSAve, Y, Yp
-  DIMENSION Y(*), Yp(*)
+  REAL tanx, TERm, X, XSAve, Y(*), Yp(*)
   COMMON /SAVEX / XSAve, TERm
   !* FIRST EXECUTABLE STATEMENT  FMAT
   Yp(1) = Y(2)

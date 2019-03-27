@@ -37,20 +37,19 @@ REAL(8) FUNCTION DLNGAM(X)
   !   900727  Added EXTERNAL statement.  (WRB)
 
   REAL(8) :: X, dxrel, pi, sinpiy, sqpi2l, sq2pil, xmax, y, temp
-  LOGICAL first
   REAL(8), EXTERNAL :: DGAMMA, D9LGMC, D1MACH
-  SAVE sq2pil, sqpi2l, pi, xmax, dxrel, first
+  SAVE sq2pil, sqpi2l, pi, xmax, dxrel
   DATA sq2pil/0.91893853320467274178032973640562D0/
-  DATA sqpi2l/ + .225791352644727432363097614947441D+0/
+  DATA sqpi2l/+.225791352644727432363097614947441D+0/
   DATA pi/3.14159265358979323846264338327950D0/
-  DATA first/.TRUE./
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DLNGAM
   IF ( first ) THEN
     temp = 1.D0/LOG(D1MACH(2))
     xmax = temp*D1MACH(2)
     dxrel = SQRT(D1MACH(4))
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   y = ABS(X)
   IF ( y>10.D0 ) THEN

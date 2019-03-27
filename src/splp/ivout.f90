@@ -58,8 +58,7 @@ SUBROUTINE IVOUT(N,Ix,Ifmt,Idigit)
   !   900402  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR section.  (WRB)
   
-  INTEGER i, I1MACH, Idigit, Ix, j, k1, k2, lout, N, ndigit
-  DIMENSION Ix(*)
+  INTEGER i, I1MACH, Idigit, Ix(*), j, k1, k2, lout, N, ndigit
   CHARACTER Ifmt*(*)
   !
   !     GET THE UNIT NUMBER WHERE OUTPUT WILL BE WRITTEN.

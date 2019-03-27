@@ -27,13 +27,10 @@ SUBROUTINE CASYI(Z,Fnu,Kode,N,Y,Nz,Rl,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   
-  COMPLEX ak1, ck, cone, cs1, cs2, cz, czero, dk, ez, p1, rz, &
-    s2, Y, Z
-  REAL aa, acz, aez, ak, Alim, arg, arm, atol, az, bb, bk, dfnu, &
-    dnu2, Elim, fdn, Fnu, pi, Rl, rtpi, rtr1, s, sgn, sqk, &
-    Tol, x, yy, R1MACH
   INTEGER i, ib, il, inu, j, jl, k, Kode, koded, m, N, nn, Nz
-  DIMENSION Y(N)
+  COMPLEX ak1, ck, cone, cs1, cs2, cz, czero, dk, ez, p1, rz, s2, Y(N), Z
+  REAL aa, acz, aez, ak, Alim, arg, arm, atol, az, bb, bk, dfnu, &
+    dnu2, Elim, fdn, Fnu, pi, Rl, rtpi, rtr1, s, sgn, sqk, Tol, x, yy, R1MACH
   DATA pi, rtpi/3.14159265358979324E0, 0.159154943091895336E0/
   DATA czero, cone/(0.0E0,0.0E0), (1.0E0,0.0E0)/
   !* FIRST EXECUTABLE STATEMENT  CASYI

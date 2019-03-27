@@ -35,12 +35,11 @@ SUBROUTINE MC20AD(Nc,Maxa,A,Inum,Jptr,Jnum,Jdisp)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  INTEGER i, ice, icep, j, ja, jb, jce, jcep, Jdisp, Jptr, k, &
-    kr, loc, Maxa, Nc, null
+
+  INTEGER i, ice, icep, j, ja, jb, jce, jcep, Nc, Jdisp, Jptr(Nc), k, &
+    kr, loc, Maxa, null
   INTEGER Inum(*), Jnum(*)
   REAL(8) :: A(*), ace, acep
-  DIMENSION Jptr(Nc)
   !* FIRST EXECUTABLE STATEMENT  MC20AD
   null = -Jdisp
   !**      CLEAR JPTR

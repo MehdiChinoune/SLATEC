@@ -48,9 +48,8 @@ SUBROUTINE PRWPGE(Key,Ipage,Lpg,Sx,Ix)
   !           IF-THEN-ELSE.  (RWC)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   
-  INTEGER Ipage, Ix, Key, Lpg
+  INTEGER Ipage, Ix(*), Key, Lpg
   REAL Sx(*)
-  DIMENSION Ix(*)
   !* FIRST EXECUTABLE STATEMENT  PRWPGE
   !
   !     CHECK IF IPAGE IS IN RANGE.

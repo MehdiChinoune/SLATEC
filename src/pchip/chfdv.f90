@@ -109,8 +109,7 @@ SUBROUTINE CHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i
-  REAL c2, c2t2, c3, c3t3, del1, del2, delta, h, x, xmi, xma, &
-    zero
+  REAL c2, c2t2, c3, c3t3, del1, del2, delta, h, x, xmi, xma, zero
   SAVE zero
   DATA zero/0./
   !

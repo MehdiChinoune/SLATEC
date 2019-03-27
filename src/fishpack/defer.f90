@@ -41,13 +41,12 @@ SUBROUTINE DEFER(COFX,COFY,Idmn,Usol,Grhs)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   
-  REAL ai, AIT, bi, BIT, ci, CIT, DIT, dj, DLX, DLX4, DLY, DLY4, &
-    ej, fj, Grhs, TDLx3, TDLy3, tx, ty, Usol
-  REAL uxxx, uxxxx, uyyy, uyyyy, xi, yj
   INTEGER i, Idmn, IS, j, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
+  REAL ai, AIT, bi, BIT, ci, CIT, DIT, dj, DLX, DLX4, DLY, DLY4, &
+    ej, fj, Grhs(Idmn,*), TDLx3, TDLy3, tx, ty, Usol(Idmn,*)
+  REAL uxxx, uxxxx, uyyy, uyyyy, xi, yj
   COMMON /SPLPCM/ KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
     IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
-  DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
   EXTERNAL :: COFX, COFY
   !* FIRST EXECUTABLE STATEMENT  DEFER
   DO j = JS, NS

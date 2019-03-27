@@ -26,12 +26,10 @@ CONTAINS
     
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    INTEGER ierv, Lun
+    INTEGER ierv(2), Lun
     REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, exact1, &
-      exact2, exact3, pi, result, uflow, work
-    INTEGER ier, ip, Ipass, iwork, key, Kprint, last, lenw, limit, &
-      neval
-    DIMENSION ierv(2), iwork(100), work(400)
+      exact2, exact3, pi, result, uflow, work(400)
+    INTEGER ier, ip, Ipass, iwork(100), key, Kprint, last, lenw, limit, neval
     DATA pi/0.31415926535897932E+01/
     DATA exact1/0.1154700538379252E+01/
     DATA exact2/0.11780972450996172E+00/
@@ -143,12 +141,10 @@ CONTAINS
     
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    INTEGER ierv, inf
+    INTEGER ierv(4), inf
     REAL abserr, bound, R1MACH, epmach, epsabs, epsrel, error, exact0, &
-      exact1, exact2, exact3, exact4, oflow, result, uflow, work
-    INTEGER ier, ip, Ipass, iwork, Kprint, last, lenw, limit, Lun, &
-      neval
-    DIMENSION work(800), iwork(200), ierv(4)
+      exact1, exact2, exact3, exact4, oflow, result, uflow, work(800)
+    INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, Lun, neval
     DATA exact0/2.0E+00/, exact1/0.115470066904E1/
     DATA exact2/0.909864525656E-02/
     DATA exact3/0.31415926535897932E+01/
@@ -277,13 +273,11 @@ CONTAINS
     
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    INTEGER ierv
+    INTEGER ierv(4)
     REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, exact1, &
-      exact2, exact3, oflow, points, p1, p2, &
-      result, uflow, work
-    INTEGER ier, ip, Ipass, iwork, Kprint, last, leniw, lenw, limit, &
+      exact2, exact3, oflow, points(5), p1, p2, result, uflow, work(405)
+    INTEGER ier, ip, Ipass, iwork(205), Kprint, last, leniw, lenw, limit, &
       Lun, neval, npts2
-    DIMENSION ierv(4), iwork(205), points(5), work(405)
     DATA exact1/0.4285277667368085E+01/
     DATA exact2/0.909864525656E-2/
     DATA exact3/0.31415926535897932E+01/
@@ -426,11 +420,10 @@ CONTAINS
     
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    INTEGER ierv, Lun
+    INTEGER ierv(5), Lun
     REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, exact0, &
-      exact1, exact2, exact3, exact4, oflow, result, uflow, work
-    INTEGER ier, ip, Ipass, iwork, Kprint, last, lenw, limit, neval
-    DIMENSION ierv(5), iwork(200), work(800)
+      exact1, exact2, exact3, exact4, oflow, result, uflow, work(800)
+    INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
     DATA exact0/0.2E+01/
     DATA exact1/0.115470066904E+01/
     DATA exact2/0.909864525656E-02/
@@ -460,8 +453,7 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    CALL QAGS(F1S,a,b,epsabs,epsrel,result,abserr,neval,ier,1,4,last,iwork,&
-      work)
+    CALL QAGS(F1S,a,b,epsabs,epsrel,result,abserr,neval,ier,1,4,last,iwork,work)
     ierv(1) = ier
     ip = 0
     IF ( ier==1 ) ip = 1
@@ -568,12 +560,11 @@ CONTAINS
     
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    INTEGER ierv, Lun
+    INTEGER ierv(2), Lun
     REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, exact0, &
-      exact1, c, result, uflow, work
-    INTEGER ier, ip, Ipass, iwork, Kprint, last, lenw, limit, neval
-    DIMENSION work(800), iwork(200), ierv(2)
-    DATA exact0/ - 0.6284617285065624E+03/
+      exact1, c, result, uflow, work(800)
+    INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
+    DATA exact0/-0.6284617285065624E+03/
     DATA exact1/0.1855802E+01/
     !* FIRST EXECUTABLE STATEMENT  CQAWC
     IF ( Kprint>=2 ) WRITE (Lun,'(''1QAWC QUICK CHECK''/)')
@@ -600,8 +591,7 @@ CONTAINS
     !
     ! TEST ON IER = 1
     !
-    CALL QAWC(F0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,1,4,last,iwork,&
-      work)
+    CALL QAWC(F0C,a,b,c,epsabs,epsrel,result,abserr,neval,ier,1,4,last,iwork,work)
     ierv(1) = ier
     ip = 0
     IF ( ier==1 ) ip = 1
@@ -675,11 +665,10 @@ CONTAINS
     
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    INTEGER ierv, integr, iwork, leniw, Lun, maxp1
+    INTEGER ierv(3), integr, iwork(450), leniw, Lun, maxp1
     REAL a, abserr, R1MACH, epsabs, epmach, error, exact0, &
-      omega, pi, result, uflow, work
+      omega, pi, result, uflow, work(1425)
     INTEGER ier, ip, Ipass, Kprint, lenw, limit, limlst, lst, neval
-    DIMENSION ierv(3), iwork(450), work(1425)
     DATA exact0/0.1422552162575912E+01/
     DATA pi/0.31415926535897932E+01/
     !* FIRST EXECUTABLE STATEMENT  CQAWF
@@ -795,10 +784,9 @@ CONTAINS
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER leniw
     REAL a, abserr, b, epmach, epsabs, epsrel, error, exact0, &
-      oflow, omega, pi, result, R1MACH, uflow, work
-    INTEGER ier, ierv, integr, ip, Ipass, iwork, Kprint, last, lenw, &
+      oflow, omega, pi, result, R1MACH, uflow, work(1325)
+    INTEGER ier, ierv(4), integr, ip, Ipass, iwork(400), Kprint, last, lenw, &
       Lun, maxp1, neval
-    DIMENSION work(1325), iwork(400), ierv(4)
     DATA exact0/0.1042872789432789E+05/
     DATA pi/0.31415926535897932E+01/
     !* FIRST EXECUTABLE STATEMENT  CQAWO
@@ -924,12 +912,10 @@ CONTAINS
     
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
-    INTEGER ierv, Lun
+    INTEGER ierv(2), Lun
     REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, exact0, &
-      exact1, alfa, beta, result, uflow, work
-    INTEGER ier, ip, Ipass, iwork, Kprint, last, lenw, limit, neval, &
-      integr
-    DIMENSION work(800), iwork(200), ierv(2)
+      exact1, alfa, beta, result, uflow, work(800)
+    INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval, integr
     DATA exact0/0.5350190569223644E+00/
     DATA exact1/0.1998491554328673E+04/
     !* FIRST EXECUTABLE STATEMENT  CQAWS
@@ -1036,8 +1022,7 @@ CONTAINS
     INTEGER Lun
     REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, exact1, error, &
       exact2, result, uflow
-    INTEGER ier, ierv, ip, Ipass, Kprint, neval
-    DIMENSION ierv(1)
+    INTEGER ier, ierv(1), ip, Ipass, Kprint, neval
     DATA exact1/0.7281029132255818E+00/
     DATA exact2/0.1E+02/
     !* FIRST EXECUTABLE STATEMENT  CQNG
@@ -1058,8 +1043,7 @@ CONTAINS
     error = ABS(exact1-result)
     IF ( ier==0.AND.error<=abserr.AND.abserr<=epsrel*ABS(exact1) ) ip = 1
     IF ( ip==0 ) Ipass = 0
-    IF ( Kprint/=0 ) CALL CPRIN(Lun,0,Kprint,ip,exact1,result,abserr,neval,&
-      ierv,1)
+    IF ( Kprint/=0 ) CALL CPRIN(Lun,0,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 1
     !
@@ -1068,8 +1052,7 @@ CONTAINS
     ip = 0
     IF ( ier==1 ) ip = 1
     IF ( ip==0 ) Ipass = 0
-    IF ( Kprint/=0 ) CALL CPRIN(Lun,1,Kprint,ip,exact2,result,abserr,neval,&
-      ierv,1)
+    IF ( Kprint/=0 ) CALL CPRIN(Lun,1,Kprint,ip,exact2,result,abserr,neval,ierv,1)
     !
     ! TEST ON IER = 6
     !
@@ -1080,8 +1063,7 @@ CONTAINS
     ip = 0
     IF ( ier==6.AND.result==0.0E+00.AND.abserr==0.0E+00.AND.neval==0 ) ip = 1
     IF ( ip==0 ) Ipass = 0
-    IF ( Kprint/=0 ) CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,&
-      ierv,1)
+    IF ( Kprint/=0 ) CALL CPRIN(Lun,6,Kprint,ip,exact1,result,abserr,neval,ierv,1)
     !
     IF ( Kprint>=1 ) THEN
       IF ( Ipass==0 ) THEN
@@ -1831,8 +1813,7 @@ CONTAINS
         WRITE (UNIT=Lun,FMT=99007)
         WRITE (UNIT=Lun,FMT=99008)
         IF ( Num1/=5 ) THEN
-          WRITE (UNIT=Lun,FMT=99009) Exact, Result, error, Abserr, ier, &
-            Neval
+          WRITE (UNIT=Lun,FMT=99009) Exact, Result, error, Abserr, ier, Neval
         ELSE
           WRITE (Lun,FMT=99010) Result, Abserr, ier, Neval
         ENDIF

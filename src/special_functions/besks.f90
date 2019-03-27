@@ -40,9 +40,8 @@ SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   
-  REAL Bk, expxi, R1MACH, X, xmax, Xnu
+  REAL Bk(*), expxi, R1MACH, X, xmax, Xnu
   INTEGER i, n, Nin
-  DIMENSION Bk(*)
   SAVE xmax
   DATA xmax/0.0/
   !* FIRST EXECUTABLE STATEMENT  BESKS

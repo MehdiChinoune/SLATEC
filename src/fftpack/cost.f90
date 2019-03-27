@@ -79,9 +79,8 @@ SUBROUTINE COST(N,X,Wsave)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL c1, t1, t2, tx2, Wsave, X, x1h, x1p3, xi, xim2
+  REAL c1, t1, t2, tx2, Wsave(*), X(*), x1h, x1p3, xi, xim2
   INTEGER i, k, kc, modn, N, nm1, np1, ns2
-  DIMENSION X(*), Wsave(*)
   !* FIRST EXECUTABLE STATEMENT  COST
   nm1 = N - 1
   np1 = N + 1

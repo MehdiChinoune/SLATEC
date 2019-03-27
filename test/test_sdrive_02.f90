@@ -47,7 +47,7 @@ CONTAINS
       MITER = 5, ML = 2, MU = 2, MXORD = 5, MXSTEP = 1000, N = 3, NROOT = 0, NTASK = 1
     REAL(8) :: work(LENWMX), y(N+1)
     INTEGER iwork(LIWMX)
-    DATA ewt(1)/.00001D0/
+    DATA ewt /.00001D0/
     !* FIRST EXECUTABLE STATEMENT  DDQCK
     eps = D1MACH(4)**(1.D0/3.D0)
     Ipass = 1
@@ -81,10 +81,8 @@ CONTAINS
         WRITE (Lun,*) ' Y(2) ', y(2)
         WRITE (Lun,*) ' Y(3) ', y(3)
         WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
-          nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
-          nje
+        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
       ENDIF
       Ipass = 0
@@ -92,12 +90,10 @@ CONTAINS
         >eps**(2.D0/3.D0).OR.ABS(1.D0-y(3))>eps**(2.D0/3.D0) ) THEN
       IF ( Kprint==1 ) THEN
         WRITE (Lun,&
-          '('' DDRIV1:The solution determined is not  accurate enough.'&
-          ' //)')
+          '('' DDRIV1:The solution determined is not  accurate enough.'' //)')
       ELSEIF ( Kprint==2 ) THEN
         WRITE (Lun,&
-          '('' DDRIV1:The solution determined is not accurate enough.'&
-          ')')
+          '('' DDRIV1:The solution determined is not accurate enough.'')')
         WRITE (Lun,&
           '('' The values of parameters, results, and statistical quantities are:'')')
         WRITE (Lun,*) ' EPS = ', eps
@@ -106,10 +102,8 @@ CONTAINS
         WRITE (Lun,*) ' Y(2) ', y(2)
         WRITE (Lun,*) ' Y(3) ', y(3)
         WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
-          nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
-          nje
+        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
       ENDIF
       Ipass = 0
@@ -155,10 +149,8 @@ CONTAINS
         WRITE (Lun,*) ' Y(2) ', y(2)
         WRITE (Lun,*) ' Y(3) ', y(3)
         WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
-          nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
-          nje
+        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
       ENDIF
       Ipass = 0
@@ -193,28 +185,23 @@ CONTAINS
     IF ( mstate/=2 ) THEN
       IF ( Kprint==1 ) THEN
         WRITE (Lun,&
-          '('' While using DDRIV2, a solution was not obtained.'' //)'&
-          )
+          '('' While using DDRIV2, a solution was not obtained.'' //)' )
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,&
-          '('' While using DDRIV2, a solution was not obtained.'')'&
-          )
+          '('' While using DDRIV2, a solution was not obtained.'')')
         WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
         WRITE (Lun,&
           '('' The values of parameters, results, and statistical quant&
           &ities are:'')')
         WRITE (Lun,*) ' EPS = ', eps, ', EWT ', ewt
-        WRITE (Lun,*) ' MINT = ', mint, ', LENW ', lenw, ', LENIW ', &
-          leniw
+        WRITE (Lun,*) ' MINT = ', mint, ', LENW ', lenw, ', LENIW ', leniw
         WRITE (Lun,*) ' T ', t
         WRITE (Lun,*) ' Y(1) ', y(1)
         WRITE (Lun,*) ' Y(2) ', y(2)
         WRITE (Lun,*) ' Y(3) ', y(3)
         WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
-          nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
-          nje
+        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
       ENDIF
       Ipass = 0
@@ -234,10 +221,8 @@ CONTAINS
         WRITE (Lun,*) ' Y(2) ', y(2)
         WRITE (Lun,*) ' Y(3) ', y(3)
         WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
-          nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
-          nje
+        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
       ENDIF
       Ipass = 0
@@ -286,10 +271,8 @@ CONTAINS
         WRITE (Lun,*) ' Y(2) ', y(2)
         WRITE (Lun,*) ' Y(3) ', y(3)
         WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
-          nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
-          nje
+        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
       ENDIF
       Ipass = 0
@@ -325,28 +308,22 @@ CONTAINS
     IF ( nstate/=2 ) THEN
       IF ( Kprint==1 ) THEN
         WRITE (Lun,&
-          '('' While using DDRIV3, a solution was not obtained.'' //)'&
-          )
+          '('' While using DDRIV3, a solution was not obtained.'' //)' )
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,&
-          '('' While using DDRIV3, a solution was not obtained.'')'&
-          )
+          '('' While using DDRIV3, a solution was not obtained.'')' )
         WRITE (Lun,*) ' MSTATE = ', mstate, ', Error number = ', ierflg
         WRITE (Lun,&
           '('' The values of parameters, results, and statistical quantities are:'')')
-        WRITE (Lun,*) ' EPS = ', eps, ', EWT = ', ewt, ', IERROR = ', &
-          IERROR
-        WRITE (Lun,*) ' MINT = ', mint, ', MITER = ', MITER, ', IMPL = ', &
-          IMPL
+        WRITE (Lun,*) ' EPS = ', eps, ', EWT = ', ewt, ', IERROR = ', IERROR
+        WRITE (Lun,*) ' MINT = ', mint, ', MITER = ', MITER, ', IMPL = ', IMPL
         WRITE (Lun,*) ' T ', t
         WRITE (Lun,*) ' Y(1) ', y(1)
         WRITE (Lun,*) ' Y(2) ', y(2)
         WRITE (Lun,*) ' Y(3) ', y(3)
         WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
-          nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
-          nje
+        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
       ENDIF
       Ipass = 0
@@ -354,27 +331,21 @@ CONTAINS
         >eps**(2.D0/3.D0).OR.ABS(1.D0-y(3))>eps**(2.D0/3.D0) ) THEN
       IF ( Kprint==1 ) THEN
         WRITE (Lun,&
-          '('' DDRIV3:The solution determined is not accurate enough.'&
-          ' //)')
+          '('' DDRIV3:The solution determined is not accurate enough.'' //)')
       ELSEIF ( Kprint>=2 ) THEN
         WRITE (Lun,&
-          '('' DDRIV3:The solution determined is not accurate enough.'&
-          ')')
+          '('' DDRIV3:The solution determined is not accurate enough.'')')
         WRITE (Lun,&
           '('' The values of parameters, results, and statistical quantities are:'')')
-        WRITE (Lun,*) ' EPS = ', eps, ', EWT = ', ewt, ', IERROR = ', &
-          IERROR
-        WRITE (Lun,*) ' MINT = ', mint, ', MITER = ', MITER, ', IMPL = ', &
-          IMPL
+        WRITE (Lun,*) ' EPS = ', eps, ', EWT = ', ewt, ', IERROR = ', IERROR
+        WRITE (Lun,*) ' MINT = ', mint, ', MITER = ', MITER, ', IMPL = ', IMPL
         WRITE (Lun,*) ' T ', t
         WRITE (Lun,*) ' Y(1) ', y(1)
         WRITE (Lun,*) ' Y(2) ', y(2)
         WRITE (Lun,*) ' Y(3) ', y(3)
         WRITE (Lun,*) ' Number of steps taken is  ', nstep
-        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', &
-          nfe
-        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', &
-          nje
+        WRITE (Lun,*) ' Number of evaluations of the right hand side is  ', nfe
+        WRITE (Lun,*) ' Number of evaluations of the Jacobian matrix is  ', nje
         WRITE (Lun,'(//)')
       ENDIF
       Ipass = 0
@@ -418,8 +389,7 @@ CONTAINS
         WRITE (Lun,&
           '('' The values of parameters, results, and statistical quantities are:'')')
         WRITE (Lun,*) ' EPS = ', eps, ', EWT = ', ewt, ', IERROR = ', IERROR
-        WRITE (Lun,*) ' MINT = ', mint, ', MITER = ', MITER, ', IMPL = ', &
-          IMPL
+        WRITE (Lun,*) ' MINT = ', mint, ', MITER = ', MITER, ', IMPL = ', IMPL
         WRITE (Lun,*) ' T ', t
         WRITE (Lun,*) ' Y(1) ', y(1)
         WRITE (Lun,*) ' Y(2) ', y(2)

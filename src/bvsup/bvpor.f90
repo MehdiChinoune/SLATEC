@@ -1,7 +1,6 @@
 !** BVPOR
 SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
-    Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,W,Niv,Yhp,U,V,Coef,S,Stowa,G,&
-    Work,Iwork,Nfcc)
+    Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,W,Niv,Yhp,U,V,Coef,S,Stowa,G,Work,Iwork,Nfcc)
   IMPLICIT NONE
   !>
   !***
@@ -137,33 +136,26 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
-  REAL A, AE, Alpha, B, Beta, C, Coef, G, P, PWCnd, PX, RE, S, &
-    SDOT, Stowa, TND, TOL, U, V, W
-  REAL Work, X, XBEg, XENd, XOP, XOT, Xpts, XSAv, Y, Yhp, Z
-  INTEGER i, i1, i2, ic, ICOco, Iflag, IGOfx, INDpvt, INFo, &
-    INHomo, INTeg, Ip, ira, isflg, ISTkop, IVP, Iwork, j, k, &
-    KNSwot
+
   INTEGER kod, KOP, kpts, kwc, kwd, kws, kwt, l, LOTjp, m, &
-    MNSwot, Mxnon, MXNond, n, Ncomp, ncomp2, NCOmpd, NDIsk, &
-    ndw, NEQ
+    MNSwot, Mxnon, MXNond, n, Ncomp, ncomp2, NCOmpd, NDIsk, ndw, NEQ
   INTEGER NEQivp, Nfc, Nfcc, NFCcd, NFCd, nfcp1, nfcp2, Nic, NICd, &
-    Niv, nn, non, NOPg, NPS, Nrowa, Nrowb, Nrowy, NSWot, &
-    NTApe, Ntp
+    Niv, nn, non, NOPg, NPS, Nrowa, Nrowb, Nrowy, NSWot, NTApe, Ntp
+  REAL A(Nrowa,*), AE, Alpha(*), B(Nrowb,*), Beta(*), C, Coef(*), G(*), &
+    P(Ntp,*), PWCnd, PX, RE, S(*), SDOT, Stowa(*), TND, TOL, U(Ncomp,Nfc,*), &
+    V(Ncomp,*), W(Nfcc,*)
+  REAL Work(*), X, XBEg, XENd, XOP, XOT, Xpts(*), XSAv, Y(Nrowy,*), Yhp(Ncomp,*), Z(*)
+  INTEGER i, i1, i2, ic, ICOco, Iflag, IGOfx, INDpvt, INFo, &
+    INHomo, INTeg, Ip(Nfcc,*), ira, isflg, ISTkop, IVP, Iwork(*), j, k, KNSwot
   INTEGER NTPd, NUMort, Nxpts, NXPtsd
-  DIMENSION Y(Nrowy,*), A(Nrowa,*), Alpha(*), B(Nrowb,*), Beta(*), &
-    P(Ntp,*), Ip(Nfcc,*), U(Ncomp,Nfc,*), V(Ncomp,*), W(Nfcc,*)&
-    , Coef(*), Z(*), Yhp(Ncomp,*), Xpts(*), S(*), Work(*), &
-    Iwork(*), Stowa(*), G(*)
   !
   !- *********************************************************************
   !
   COMMON /ML8SZ / C, XSAv, IGOfx, INHomo, IVP, NCOmpd, NFCd
-  COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
-    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
+  COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15), &
+    ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
   COMMON /ML18JR/ AE, RE, TOL, NXPtsd, NICd, NOPg, MXNond, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTPd, NEQivp, &
-    NUMort, NFCcd, ICOco
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTPd, NEQivp, NUMort, NFCcd, ICOco
   !
   !- *********************************************************************
   !
@@ -187,8 +179,7 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   kwc = kwt + Nic
   Iflag = 0
   CALL LSSUDS(A,Yhp(1,Nfcc+1),Alpha,Nic,Ncomp,Nrowa,Yhp,Ncomp,Iflag,1,ira,0,&
-    Work(1),Work(ndw+1),Iwork,Work(kws),Work(kwd),Work(kwt),isflg,&
-    Work(kwc))
+    Work(1),Work(ndw+1),Iwork,Work(kws),Work(kwd),Work(kwt),isflg,Work(kwc))
   IF ( Iflag==1 ) THEN
     IF ( Nfc/=Nfcc ) CALL SVECS(Ncomp,Nfc,Yhp,Work,Iwork,INHomo,Iflag)
     IF ( Iflag==1 ) THEN

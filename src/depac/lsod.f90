@@ -32,26 +32,22 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  
-  REAL absdel, Acor, Atol, big, del, Delsgn, dt, EL0, Ewt, H, ha, &
-    HMIn, HMXi, HU, R1MACH, ROWns, Rpar, Rtol, Savf, T
-  REAL tol, TOLd, Tolfac, Tout, Tstop, U, VNWRMS, Wm, X, Y, Yh , Yh1, Ypout
-  INTEGER IBAnd, IBEgin, Idid, IER, IINteg, IJAc, INIt, intflg, &
-    IOWns, Ipar, IQUit, ITOl, ITStop, Iwm, JSTart, k, KFLag, KSTeps, l
+
   INTEGER LACor, LDUm, LEWt, LSAvf, ltol, LWM, LYH, maxnum, MAXord, &
     METh, MITer, N, natolp, Neq, NFE, NJE, NQ, NQU, nrtolp, NST
+  REAL absdel, Acor(*), Atol(*), big, del, Delsgn, dt, EL0, Ewt(*), H, ha, &
+    HMIn, HMXi, HU, R1MACH, ROWns, Rpar(*), Rtol(*), Savf(*), T
+  REAL tol, TOLd, Tolfac, Tout, Tstop, U, VNWRMS, Wm(*), X, Y(*), Yh(Neq,6) , Yh1(*), Ypout(*)
+  INTEGER IBAnd, IBEgin, Idid, IER, IINteg, IJAc, INIt, intflg, &
+    IOWns, Ipar(*), IQUit, ITOl, ITStop, Iwm(*), JSTart, k, KFLag, KSTeps, l
   LOGICAL Intout
-  !
-  DIMENSION Y(*), Ypout(*), Yh(Neq,6), Yh1(*), Ewt(*), Savf(*), &
-    Acor(*), Wm(*), Iwm(*), Rtol(*), Atol(*), Rpar(*), Ipar(*)
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
   !
   COMMON /DEBDF1/ TOLd, ROWns(210), EL0, H, HMIn, HMXi, HU, X, U, &
     IQUit, INIt, LYH, LEWt, LACor, LSAvf, LWM, KSTeps, &
-    IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, IOWns(6)&
-    , IER, JSTart, KFLag, LDUm, METh, MITer, MAXord, &
-    N, NQ, NST, NFE, NJE, NQU
+    IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, IOWns(6), &
+    IER, JSTart, KFLag, LDUm, METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
   !
   EXTERNAL :: F, JAC
   !
@@ -154,8 +150,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   ENDDO
   !
   IF ( ITStop==1 ) THEN
-    IF ( SIGN(1.,Tout-T)/=SIGN(1.,Tstop-T).OR.ABS(Tout-T)>ABS(Tstop-T) )&
-        THEN
+    IF ( SIGN(1.,Tout-T)/=SIGN(1.,Tstop-T).OR.ABS(Tout-T)>ABS(Tstop-T) ) THEN
       WRITE (xern3,'(1PE15.6)') Tout
       WRITE (xern4,'(1PE15.6)') Tstop
       CALL XERMSG('SLATEC','LSOD','IN DEBDF, YOU HAVE CALLED THE CODE WITH TOUT = '&
@@ -180,8 +175,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
       WRITE (xern3,'(1PE15.6)') TOLd
       WRITE (xern4,'(1PE15.6)') T
       CALL XERMSG('SLATEC','LSOD',&
-        'IN DEBDF, YOU HAVE CHANGED THE VALUE OF T FROM '//xern3//&
-        ' TO '//xern4//&
+        'IN DEBDF, YOU HAVE CHANGED THE VALUE OF T FROM '//xern3//' TO '//xern4//&
         '  THIS IS NOT ALLOWED ON CONTINUATION CALLS.',10,1)
       Idid = -33
     ENDIF

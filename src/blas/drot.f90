@@ -59,8 +59,7 @@ SUBROUTINE DROT(N,Dx,Incx,Dy,Incy,Dc,Ds)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   INTEGER i, Incx, Incy, kx, ky, N, nsteps
-  REAL(8) :: Dx, Dy, Dc, Ds, zero, one, w, z
-  DIMENSION Dx(*), Dy(*)
+  REAL(8) :: Dx(*), Dy(*), Dc, Ds, zero, one, w, z
   SAVE zero, one
   DATA zero, one/0.0D0, 1.0D0/
   !* FIRST EXECUTABLE STATEMENT  DROT

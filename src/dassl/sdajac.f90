@@ -63,8 +63,7 @@ SUBROUTINE SDAJAC(Neq,X,Y,Yprime,Delta,Cj,H,Ier,Wt,E,Wm,Iwm,RES,Ires,&
 
   !
   INTEGER Neq, Ier, Iwm(*), Ires, Ipar(*), Ntemp
-  REAL X, Y(*), Yprime(*), Delta(*), Cj, H, Wt(*), E(*), Wm(*), &
-    Uround, Rpar(*)
+  REAL X, Y(*), Yprime(*), Delta(*), Cj, H, Wt(*), E(*), Wm(*), Uround, Rpar(*)
   EXTERNAL :: RES, JAC
   !
   EXTERNAL :: SGBFA, SGEFA

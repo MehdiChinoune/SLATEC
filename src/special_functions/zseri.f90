@@ -30,17 +30,16 @@ SUBROUTINE ZSERI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZLOG to EXTERNAL statement.  (RWC)
-  
+
   !     COMPLEX AK1,CK,COEF,CONE,CRSC,CSCL,CZ,CZERO,HZ,RZ,S1,S2,Y,Z
+  INTEGER i, ib, idum, iflag, il, k, Kode, l, m, N, nn, Nz, nw
   REAL(8) :: aa, acz, ak, ak1i, ak1r, Alim, arm, ascle, atol, &
     az, cki, ckr, coefi, coefr, conei, coner, crscr, &
     czi, czr, dfnu, Elim, Fnu, fnup, hzi, hzr, raz, &
     rs, rtr1, rzi, rzr, s, ss, sti, str, s1i, s1r, &
-    s2i, s2r, Tol, Yi, Yr, wi, wr, zeroi, zeror, &
-    Zi, Zr, DGAMLN, D1MACH, ZABS
-  INTEGER i, ib, idum, iflag, il, k, Kode, l, m, N, nn, Nz, nw
-  DIMENSION Yr(N), Yi(N), wr(2), wi(2)
-  EXTERNAL :: ZABS, ZLOG
+    s2i, s2r, Tol, Yi(N), Yr(N), wi(2), wr(2), zeroi, zeror, Zi, Zr
+  REAL(8), EXTERNAL :: DGAMLN, D1MACH, ZABS
+  EXTERNAL :: ZLOG
   DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
   !* FIRST EXECUTABLE STATEMENT  ZSERI
   Nz = 0

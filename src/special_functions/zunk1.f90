@@ -27,25 +27,21 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !     COMPLEX CFN,CK,CONE,CRSC,CS,CSCL,CSGN,CSPN,CSR,CSS,CWRK,CY,CZERO,
   !    *C1,C2,PHI,PHID,RZ,SUM,SUMD,S1,S2,Y,Z,ZETA1,ZETA1D,ZETA2,ZETA2D,ZR
-  REAL(8) :: Alim, ang, aphi, asc, ascle, bry, cki, ckr, &
-    coner, crsc, cscl, csgni, cspni, cspnr, csr, &
-    csrr, cssr, cwrki, cwrkr, cyi, cyr, c1i, c1r, &
-    c2i, c2m, c2r, Elim, fmr, fn, fnf, Fnu, phidi, &
-    phidr, phii, phir, pi, rast, razr, rs1, rzi, &
-    rzr, sgn, sti, str, sumdi, sumdr, sumi, sumr, &
-    s1i, s1r, s2i, s2r, Tol, Yi, Yr, zeroi, zeror, &
-    zeta1i, zeta1r, zeta2i, zeta2r, zet1di, zet1dr, &
-    zet2di, zet2dr, Zi, Zr, zri, zrr, D1MACH, ZABS
-  INTEGER i, ib, iflag, ifn, il, init, inu, iuf, k, kdflg, kflag, &
+  INTEGER i, ib, iflag, ifn, il, init(2), inu, iuf, k, kdflg, kflag, &
     kk, Kode, Mr, N, nw, Nz, initd, ic, ipard, j, m
-  DIMENSION bry(3), init(2), Yr(N), Yi(N), sumr(2), sumi(2), zeta1r(2)&
-    , zeta1i(2), zeta2r(2), zeta2i(2), cyr(2), cyi(2), &
-    cwrkr(16,3), cwrki(16,3), cssr(3), csrr(3), phir(2), &
-    phii(2)
-  EXTERNAL :: ZABS
+  REAL(8) :: Alim, ang, aphi, asc, ascle, bry(3), cki, ckr, &
+    coner, crsc, cscl, csgni, cspni, cspnr, csr, &
+    csrr(3), cssr(3), cwrki(16,3), cwrkr(16,3), cyi(2), cyr(2), c1i, c1r, &
+    c2i, c2m, c2r, Elim, fmr, fn, fnf, Fnu, phidi, &
+    phidr, phii(2), phir(2), pi, rast, razr, rs1, rzi, &
+    rzr, sgn, sti, str, sumdi, sumdr, sumi(2), sumr(2), &
+    s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), zeroi, zeror, &
+    zeta1i(2), zeta1r(2), zeta2i(2), zeta2r(2), zet1di, zet1dr, &
+    zet2di, zet2dr, Zi, Zr, zri, zrr
+  REAL(8), EXTERNAL :: ZABS, D1MACH
   DATA zeror, zeroi, coner/0.0D0, 0.0D0, 1.0D0/
   DATA pi/3.14159265358979324D0/
   !* FIRST EXECUTABLE STATEMENT  ZUNK1
@@ -81,8 +77,7 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     fn = Fnu + (i-1)
     init(j) = 0
     CALL ZUNIK(zrr,zri,fn,2,0,Tol,init(j),phir(j),phii(j),zeta1r(j),&
-      zeta1i(j),zeta2r(j),zeta2i(j),sumr(j),sumi(j),cwrkr(1,j),&
-      cwrki(1,j))
+      zeta1i(j),zeta2r(j),zeta2i(j),sumr(j),sumi(j),cwrkr(1,j),cwrki(1,j))
     IF ( Kode==1 ) THEN
       s1r = zeta1r(j) - zeta2r(j)
       s1i = zeta1i(j) - zeta2i(j)

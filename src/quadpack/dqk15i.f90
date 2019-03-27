@@ -90,15 +90,12 @@ SUBROUTINE DQK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   !
-  REAL(8) :: A, absc, absc1, absc2, Abserr, B, Boun, centr, &
-    dinf, epmach, fc, fsum, fval1, fval2, &
-    fv1, fv2, hlgth, Resabs, Resasc, resg, resk, &
-    reskh, Result, tabsc1, tabsc2, uflow, wg, wgk, xgk
+  REAL(8) :: A, absc, absc1, absc2, Abserr, B, Boun, centr, dinf, epmach, fc, &
+    fsum, fval1, fval2, fv1(7), fv2(7), hlgth, Resabs, Resasc, resg, resk, &
+    reskh, Result, tabsc1, tabsc2, uflow
   INTEGER Inf, j
   REAL(8), EXTERNAL :: F
   REAL(8), EXTERNAL :: D1MACH
-  !
-  DIMENSION fv1(7), fv2(7), xgk(8), wgk(8), wg(8)
   !
   !           THE ABSCISSAE AND WEIGHTS ARE SUPPLIED FOR THE INTERVAL
   !           (-1,1).  BECAUSE OF SYMMETRY ONLY THE POSITIVE ABSCISSAE AND
@@ -116,25 +113,15 @@ SUBROUTINE DQK15I(F,Boun,Inf,A,B,Result,Abserr,Resabs,Resasc)
   !                    TO THE ABSCISSAE XGK(2), XGK(4), ...
   !                    WG(1), WG(3), ... ARE SET TO ZERO.
   !
-  SAVE xgk, wgk, wg
-  DATA xgk(1), xgk(2), xgk(3), xgk(4), xgk(5), xgk(6), xgk(7), xgk(8)&
-    /0.9914553711208126D+00, 0.9491079123427585D+00, &
-    0.8648644233597691D+00, 0.7415311855993944D+00, &
-    0.5860872354676911D+00, 0.4058451513773972D+00, &
-    0.2077849550078985D+00, 0.0000000000000000D+00/
-  !
-  DATA wgk(1), wgk(2), wgk(3), wgk(4), wgk(5), wgk(6), wgk(7), wgk(8)&
-    /0.2293532201052922D-01, 0.6309209262997855D-01, &
-    0.1047900103222502D+00, 0.1406532597155259D+00, &
-    0.1690047266392679D+00, 0.1903505780647854D+00, &
-    0.2044329400752989D+00, 0.2094821410847278D+00/
-  !
-  DATA wg(1), wg(2), wg(3), wg(4), wg(5), wg(6), wg(7), &
-    wg(8)/0.0000000000000000D+00, 0.1294849661688697D+00, &
-    0.0000000000000000D+00, 0.2797053914892767D+00, &
-    0.0000000000000000D+00, 0.3818300505051189D+00, &
-    0.0000000000000000D+00, 0.4179591836734694D+00/
-  !
+  REAL(8), PARAMETER :: xgk(8) = [ 0.9914553711208126D+00, 0.9491079123427585D+00, &
+    0.8648644233597691D+00, 0.7415311855993944D+00, 0.5860872354676911D+00, &
+    0.4058451513773972D+00, 0.2077849550078985D+00, 0.0000000000000000D+00 ]
+  REAL(8), PARAMETER :: wgk(8) = [ 0.2293532201052922D-01, 0.6309209262997855D-01, &
+    0.1047900103222502D+00, 0.1406532597155259D+00, 0.1690047266392679D+00, &
+    0.1903505780647854D+00, 0.2044329400752989D+00, 0.2094821410847278D+00 ]
+  REAL(8), PARAMETER :: wg(8) = [ 0.0000000000000000D+00, 0.1294849661688697D+00, &
+    0.0000000000000000D+00, 0.2797053914892767D+00, 0.0000000000000000D+00, &
+    0.3818300505051189D+00, 0.0000000000000000D+00, 0.4179591836734694D+00 ]
   !
   !           LIST OF MAJOR VARIABLES
   !           -----------------------

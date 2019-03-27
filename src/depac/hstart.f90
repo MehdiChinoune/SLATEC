@@ -145,10 +145,10 @@ SUBROUTINE HSTART(F,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !   910722  Updated AUTHOR section.  (ALS)
   
   REAL A, absdx, B, Big, da, delf, delx, delxb, dely, dfdub, &
-    dfdxb, dx, dy, Etol, fbnd, H, HVNRM, power, Pv, relper
-  REAL Rpar, Sf, Small, Spy, srydpb, wtj, Y, ydpb, ynorm, Yp, ypnorm, Yprime
-  INTEGER icase, Ipar, j, k, lk, Morder, Neq
-  DIMENSION Y(*), Yprime(*), Etol(*), Spy(*), Pv(*), Yp(*), Sf(*), Rpar(*), Ipar(*)
+    dfdxb, dx, dy, Etol(*), fbnd, H, HVNRM, power, Pv(*), relper
+  REAL Rpar(*), Sf(*), Small, Spy(*), srydpb, wtj, Y(*), ydpb, ynorm, &
+    Yp(*), ypnorm, Yprime(*)
+  INTEGER icase, Ipar(*), j, k, lk, Morder, Neq
   EXTERNAL :: F
   !
   !.......................................................................

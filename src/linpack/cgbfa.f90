@@ -109,8 +109,7 @@ SUBROUTINE CGBFA(Abd,Lda,N,Ml,Mu,Ipvt,Info)
   COMPLEX Abd(Lda,*)
   !
   COMPLEX t
-  INTEGER i, ICAMAX, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, &
-    mm, nm1
+  INTEGER i, ICAMAX, i0, j, ju, jz, j0, j1, k, kp1, l, lm, m, mm, nm1
   REAL, EXTERNAL :: CABS1
   !
   !* FIRST EXECUTABLE STATEMENT  CGBFA

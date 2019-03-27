@@ -258,17 +258,15 @@ REAL(8) FUNCTION DRF(X,Y,Z,Ier)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   CHARACTER(16) :: xern3, xern4, xern5, xern6
   INTEGER Ier
   REAL(8) :: lolim, uplim, epslon, errtol, D1MACH
   REAL(8) :: c1, c2, c3, e2, e3, lamda
   REAL(8) :: mu, s, X, xn, xndev
-  REAL(8) :: xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, &
-    znroot
-  LOGICAL first
-  SAVE errtol, lolim, uplim, c1, c2, c3, first
-  DATA first/.TRUE./
+  REAL(8) :: xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, znroot
+  SAVE errtol, lolim, uplim, c1, c2, c3
+  LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  DRF
   !
@@ -280,8 +278,8 @@ REAL(8) FUNCTION DRF(X,Y,Z,Ier)
     c1 = 1.0D0/24.0D0
     c2 = 3.0D0/44.0D0
     c3 = 1.0D0/14.0D0
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   !         CALL ERROR HANDLER IF NECESSARY.
   !
@@ -314,8 +312,7 @@ REAL(8) FUNCTION DRF(X,Y,Z,Ier)
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') lolim
     CALL XERMSG('SLATEC','DRF','MIN(X+Y,X+Z,Y+Z).LT.LOLIM WHERE X = '//&
-      xern3//' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//&
-      xern6,2,1)
+      xern3//' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//xern6,2,1)
     RETURN
   ENDIF
   !

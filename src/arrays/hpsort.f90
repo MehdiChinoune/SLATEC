@@ -124,8 +124,7 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
   CHARACTER*(*) Hx(*)
   !     .. Local Scalars ..
   REAL r
-  INTEGER i, ij, indx, indx0, ir, istrt, j, k, kk, l, lm, lmt, &
-    m, nn, nn2
+  INTEGER i, ij, indx, indx0, ir, istrt, j, k, kk, l, lm, lmt, m, nn, nn2
   !     .. Local Arrays ..
   INTEGER il(21), iu(21)
   !     .. External Subroutines ..
@@ -138,16 +137,14 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
   IF ( nn<1 ) THEN
     Ier = 1
     CALL XERMSG('SLATEC','HPSORT',&
-      'The number of values to be sorted, N, is not positive.',&
-      Ier,1)
+      'The number of values to be sorted, N, is not positive.',Ier,1)
     RETURN
   ENDIF
   kk = ABS(Kflag)
   IF ( kk/=1.AND.kk/=2 ) THEN
     Ier = 2
     CALL XERMSG('SLATEC','HPSORT',&
-      'The sort control parameter, KFLAG, is not 2, 1, -1, or -2.'&
-      ,Ier,1)
+      'The sort control parameter, KFLAG, is not 2, 1, -1, or -2.',Ier,1)
     RETURN
   ENDIF
   !
@@ -160,8 +157,7 @@ SUBROUTINE HPSORT(Hx,N,Strbeg,Strend,Iperm,Kflag,Work,Ier)
   IF ( Strbeg>Strend ) THEN
     Ier = 4
     CALL XERMSG('SLATEC','HPSORT',&
-      'The string beginning, STRBEG, is beyond its end, STREND.',&
-      Ier,1)
+      'The string beginning, STRBEG, is beyond its end, STREND.',Ier,1)
     RETURN
   ENDIF
   IF ( Strbeg<1.OR.Strbeg>LEN(Hx(1)) ) THEN

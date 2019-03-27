@@ -30,20 +30,17 @@ SUBROUTINE ZUNI1(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !     COMPLEX CFN,CONE,CRSC,CSCL,CSR,CSS,CWRK,CZERO,C1,C2,PHI,RZ,SUM,S1,
   !    *S2,Y,Z,ZETA1,ZETA2
-  REAL(8) :: Alim, aphi, ascle, bry, coner, crsc, cscl, csrr, &
-    cssr, cwrki, cwrkr, c1r, c2i, c2m, c2r, Elim, &
+  INTEGER i, iflag, init, k, Kode, m, N, nd, Nlast, nn, nuf, nw, Nz
+  REAL(8) :: Alim, aphi, ascle, bry(3), coner, crsc, cscl, csrr(3), &
+    cssr(3), cwrki(16), cwrkr(16), c1r, c2i, c2m, c2r, Elim, &
     fn, Fnu, Fnul, phii, phir, rast, rs1, rzi, rzr, &
     sti, str, sumi, sumr, s1i, s1r, s2i, s2r, Tol, &
-    Yi, Yr, zeroi, zeror, zeta1i, zeta1r, zeta2i, &
-    zeta2r, Zi, Zr, cyr, cyi, D1MACH, ZABS
-  INTEGER i, iflag, init, k, Kode, m, N, nd, Nlast, nn, nuf, nw, &
-    Nz
-  DIMENSION bry(3), Yr(N), Yi(N), cwrkr(16), cwrki(16), cssr(3), &
-    csrr(3), cyr(2), cyi(2)
-  EXTERNAL :: ZABS
+    Yi(N), Yr(N), zeroi, zeror, zeta1i, zeta1r, zeta2i, &
+    zeta2r, Zi, Zr, cyr(2), cyi(2)
+  REAL(8), EXTERNAL :: D1MACH, ZABS
   DATA zeror, zeroi, coner/0.0D0, 0.0D0, 1.0D0/
   !* FIRST EXECUTABLE STATEMENT  ZUNI1
   Nz = 0

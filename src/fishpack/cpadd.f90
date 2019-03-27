@@ -35,11 +35,10 @@ SUBROUTINE CPADD(N,Ierror,A,C,Cbp,Bp,Bh)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  REAL A, BCRH, Bh, Bp, C, CNV, db, EPS, psg, scnv, sgn, xl, xm, xr
+  REAL A(*), BCRH, Bh(*), Bp(*), C(*), CNV, db, EPS, psg, scnv, sgn, xl, xm, xr
   INTEGER i3, icv, Ierror, if, ig, IK, is, it, iz, j, K, modiz, &
     N, NCMplx, nhalf, NM, NPP, nt
-  COMPLEX cx, fsg, hsg, dd, f, fp, fpp, cdis, r1, r2, r3, Cbp
-  DIMENSION A(*), C(*), Bp(*), Bh(*), Cbp(*)
+  COMPLEX cx, fsg, hsg, dd, f, fp, fpp, cdis, r1, r2, r3, Cbp(*)
   COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
   REAL, EXTERNAL :: PGSF, PPPSF, PPGSF
   !* FIRST EXECUTABLE STATEMENT  CPADD

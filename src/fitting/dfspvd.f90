@@ -32,12 +32,9 @@ SUBROUTINE DFSPVD(T,K,X,Ileft,Vnikx,Nderiv)
   !   890911  Removed unnecessary intrinsics.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
-  REAL(8) :: a, diff, fkmd, T, v, Vnikx, X
-  INTEGER i, ideriv, idervm, Ileft, ipkmd, j, jlow, jm1, K, kmd, &
-    l, m, Nderiv
-  DIMENSION T(*), Vnikx(K,*)
-  DIMENSION a(20,20)
+
+  INTEGER i, ideriv, idervm, Ileft, ipkmd, j, jlow, jm1, K, kmd, l, m, Nderiv
+  REAL(8) :: a(20,20), diff, fkmd, T(*), v, Vnikx(K,*), X
   !* FIRST EXECUTABLE STATEMENT  DFSPVD
   CALL DFSPVN(T,K+1-Nderiv,1,X,Ileft,Vnikx(Nderiv,Nderiv))
   IF ( Nderiv>1 ) THEN

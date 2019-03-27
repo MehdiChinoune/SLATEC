@@ -83,8 +83,7 @@ SUBROUTINE DSORT(Dx,Dy,N,Kflag)
   kk = ABS(Kflag)
   IF ( kk/=1.AND.kk/=2 ) THEN
     CALL XERMSG('SLATEC','DSORT',&
-      'The sort control parameter, K, is not 2, 1, -1, or -2.',2,&
-      1)
+      'The sort control parameter, K, is not 2, 1, -1, or -2.',2,1)
     RETURN
   ENDIF
   !

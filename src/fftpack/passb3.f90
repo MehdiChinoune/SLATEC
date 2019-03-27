@@ -27,10 +27,9 @@ SUBROUTINE PASSB3(Ido,L1,Cc,Ch,Wa1,Wa2)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   
-  REAL Cc, Ch, ci2, ci3, cr2, cr3, di2, di3, dr2, dr3, taui, &
-    taur, ti2, tr2, Wa1, Wa2
   INTEGER i, Ido, k, L1
-  DIMENSION Cc(Ido,3,*), Ch(Ido,L1,3), Wa1(*), Wa2(*)
+  REAL Cc(Ido,3,*), Ch(Ido,L1,3), ci2, ci3, cr2, cr3, di2, di3, dr2, dr3, taui, &
+    taur, ti2, tr2, Wa1(*), Wa2(*)
   !* FIRST EXECUTABLE STATEMENT  PASSB3
   taur = -.5
   taui = .5*SQRT(3.)

@@ -33,16 +33,13 @@ CONTAINS
     !   901019  Revisions to prologue.  (DWL and WRB)
     !   901106  Changed all specific intrinsics to generic.  (WRB)
     !   910104  Changed to print variable number of decimals. (DWL and JMS)
-    
-    INTEGER i, I1MACH, ic1, ic2, id, ierr, ierror, ip, ipn, iq, ir, &
-      irad, isig, isum, ix11, ix12, ix13, ix21, ix22, ix23
+
+    INTEGER i, I1MACH, ic1(10), ic2(10), id, ierr, ierror, ip(10), ipn(10), &
+      iq(10), ir(10), irad, isig, isum, ix11, ix12, ix13, ix21, ix22, ix23
     INTEGER mu, mu1, mu2, n, nbits, ndec, nerr, nradpl, nu1, nudiff, NUMXER
     CHARACTER(34) :: fmt, fmtf, fmti
     INTEGER Lun, Kprint, Ipass
-    DIMENSION p(10), q(10), r(10), c1(10), c2(10), ip(10), iq(10), &
-      ir(10)
-    DIMENSION ic1(10), ic2(10), pn(10), ipn(10)
-    REAL p, q, r, c1, c2, pn
+    REAL p(10), q(10), r(10), c1(10), c2(10), pn(10)
     REAL deg, theta, dnu1, dzero
     REAL x11, x12, x13, x21, x22, x23
     REAL nu
@@ -229,8 +226,7 @@ CONTAINS
     IF ( Kprint>2 ) THEN
       WRITE (Lun,99010) deg, mu2, dnu1
       99010 FORMAT (/' TEST 3, COMPARISON OF VALUES FROM TEST 1 AND TEST 2',&
-        ' WITH THETA = ',F3.1,' DEGREES,'/'         MU = ',I4,&
-        ' AND NU = ',F6.1)
+        ' WITH THETA = ',F3.1,' DEGREES,'/'         MU = ',I4,' AND NU = ',F6.1)
       WRITE (Lun,'(A)') '          P(-MU,NU)'
       WRITE (Lun,fmt) x11, ix11
       WRITE (Lun,fmt) x21, ix21
@@ -274,8 +270,7 @@ CONTAINS
     mu2 = 10
     IF ( Kprint>2 ) WRITE (Lun,99013) deg, mu1, dnu1
     99013 FORMAT (/' TEST 4, COMPARISON OF VALUES FROM XLEGF AND XNRMP',&
-      ' WITH THETA = ',F3.1,' DEGREES,'/'         MU = ',I4,&
-      ' AND NU = ',F6.1)
+      ' WITH THETA = ',F3.1,' DEGREES,'/'         MU = ',I4,' AND NU = ',F6.1)
     CALL XLEGF(dnu1,nudiff,mu1,mu2,theta,4,pn,ipn,ierror)
     isum = isum + ierror
     x11 = pn(1)
@@ -390,12 +385,10 @@ CONTAINS
     !   890126  Revised to meet SLATEC CML recommendations.  (DWL and JMS)
     !   901019  Revisions to prologue.  (DWL and WRB)
     !   901106  Changed all specific intrinsics to generic.  (WRB)
-    
-    INTEGER i, Ic1, Ic2, Ierror, Ip, Iq, Ir, ix1, ix2, j, k, l, &
+
+    INTEGER i, Ic1(*), Ic2(*), Ierror, Ip(*), Iq(*), Ir(*), ix1, ix2, j, k, l, &
       lm1, mu, Mu1, Mu2, Nudiff
-    REAL C1, C2, dmu, dmu1, nu, Dnu1, P, Q, R, Theta, sx, x1, x2
-    DIMENSION P(*), Ip(*), Q(*), Iq(*), R(*), Ir(*)
-    DIMENSION C1(*), Ic1(*), C2(*), Ic2(*)
+    REAL C1(*), C2(*), dmu, dmu1, nu, Dnu1, P(*), Q(*), R(*), Theta, sx, x1, x2
     !
     !         PLACE ALL INPUT IN ADJUSTED FORM.
     !
@@ -604,7 +597,7 @@ PROGRAM TEST11
 
   !* REVISION HISTORY  (YYMMDD)
   !   901204  DATE WRITTEN
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST11

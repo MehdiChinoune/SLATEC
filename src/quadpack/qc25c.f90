@@ -75,11 +75,9 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
 
   !
   REAL A, Abserr, ak22, amom0, amom1, amom2, B, C, cc, centr, &
-    cheb12, cheb24, fval, hlgth, p2, p3, p4, resabs, &
-    resasc, Result, res12, res24, u, x
+    cheb12(13), cheb24(25), fval(25), hlgth, p2, p3, p4, resabs, &
+    resasc, Result, res12, res24, u
   INTEGER i, isym, k, kp, Krul, Neval
-  !
-  DIMENSION x(11), fval(25), cheb12(13), cheb24(25)
   !
   REAL, EXTERNAL :: F
   REAL, EXTERNAL :: QWGTC
@@ -88,14 +86,10 @@ SUBROUTINE QC25C(F,A,B,C,Result,Abserr,Krul,Neval)
   !           K = 1, ..., 11, TO BE USED FOR THE CHEBYSHEV SERIES
   !           EXPANSION OF F
   !
-  SAVE x
-  DATA x(1), x(2), x(3), x(4), x(5), x(6), x(7), x(8), x(9), &
-    x(10), x(11)/0.9914448613738104E+00, 0.9659258262890683E+00, &
-    0.9238795325112868E+00, 0.8660254037844386E+00, &
-    0.7933533402912352E+00, 0.7071067811865475E+00, &
-    0.6087614290087206E+00, 0.5000000000000000E+00, &
-    0.3826834323650898E+00, 0.2588190451025208E+00, &
-    0.1305261922200516E+00/
+  REAL, PARAMETER :: x(11) = [ 0.9914448613738104E+00, 0.9659258262890683E+00, &
+    0.9238795325112868E+00, 0.8660254037844386E+00, 0.7933533402912352E+00, &
+    0.7071067811865475E+00, 0.6087614290087206E+00, 0.5000000000000000E+00, &
+    0.3826834323650898E+00, 0.2588190451025208E+00, 0.1305261922200516E+00 ]
   !
   !           LIST OF MAJOR VARIABLES
   !           ----------------------

@@ -93,7 +93,6 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   REAL(8) :: ae, area, bank, blocal, c, ce, ee, ef, eps, &
     q13, q7, q7l, sq2, test, tol, vr, w1, w2, w3, w4
   INTEGER i, kml, kmx, l, lmn, lmx, nbits, nib, nlmn, nlmx
-  LOGICAL first
   !     .. Local Arrays ..
   REAL(8) :: aa(99), f(13), f1(99), f2(99), f3(99), f4(99), &
     f5(99), f6(99), f7(99), hh(99), q7r(99), vl(99)
@@ -106,10 +105,10 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, LOG, MAX, MIN, SIGN, SQRT
   !     .. Save statement ..
-  SAVE nbits, nlmx, first, sq2, w1, w2, w3, w4
+  SAVE nbits, nlmx, sq2, w1, w2, w3, w4
   !     .. Data statements ..
   DATA kml/7/, kmx/5000/, nlmn/2/
-  DATA first/.TRUE./
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DQNC79
   IF ( first ) THEN
     w1 = 41.0D0/140.0D0
@@ -119,8 +118,8 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
     nbits = INT( D1MACH(5)*I1MACH(14)/0.30102000D0 )
     nlmx = MIN(99,(nbits*4)/5)
     sq2 = SQRT(2.0D0)
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   Ans = 0.0D0
   Ierr = 1
   ce = 0.0D0

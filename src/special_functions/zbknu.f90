@@ -25,25 +25,22 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP, ZLOG and ZSQRT to EXTERNAL statement.  (RWC)
-  
+
   !
-  REAL(8) :: aa, ak, Alim, ascle, a1, a2, bb, bk, bry, caz, &
-    cbi, cbr, cc, cchi, cchr, cki, ckr, coefi, &
+  INTEGER i, iflag, inu, k, kflag, kk, kmax, Kode, koded, N, Nz, &
+    idum, I1MACH, j, ic, inub, nw
+  REAL(8) :: aa, ak, Alim, ascle, a1, a2, bb, bk, bry(3), caz, &
+    cbi, cbr, cchi, cchr, cki, ckr, coefi, &
     coefr, conei, coner, crscr, csclr, cshi, cshr, &
-    csi, csr, csrr, cssr, ctwor, czeroi, czeror, czi, &
+    csi, csr, csrr(3), cssr(3), ctwor, czeroi, czeror, czi, &
     czr, dnu, dnu2, dpi, Elim, etest, fc, fhs, fi, &
     fk, fks, fmui, fmur, Fnu, fpi, fr, g1, g2, hpi, &
     pi, pr, pti, ptr, p1i, p1r, p2i, p2m, p2r, qi, &
     qr, rak, rcaz, rthpi, rzi, rzr, r1, s, smui, &
-    smur, spi, sti, str, s1i, s1r, s2i, s2r, tm, &
-    Tol, tth, t1, t2, Yi, Yr, Zi, Zr, DGAMLN, &
-    D1MACH, ZABS, elm, celmr, zdr, zdi, as, alas, &
-    helim, cyr, cyi
-  INTEGER i, iflag, inu, k, kflag, kk, kmax, Kode, koded, N, Nz, &
-    idum, I1MACH, j, ic, inub, nw
-  DIMENSION Yr(N), Yi(N), cc(8), cssr(3), csrr(3), bry(3), cyr(2), &
-    cyi(2)
-  EXTERNAL :: ZABS, ZEXP, ZLOG, ZSQRT
+    smur, spi, sti, str, s1i, s1r, s2i, s2r, tm, Tol, tth, t1, t2, &
+    Yi(N), Yr(N), Zi, Zr, elm, celmr, zdr, zdi, as, alas, helim, cyr(2), cyi(2)
+  REAL(8), EXTERNAL :: D1MACH, DGAMLN, ZABS
+  EXTERNAL :: ZEXP, ZLOG, ZSQRT
   !     COMPLEX Z,Y,A,B,RZ,SMU,FU,FMU,F,FLRZ,CZ,S1,S2,CSH,CCH
   !     COMPLEX CK,P,Q,COEF,P1,P2,CBK,PT,CZERO,CONE,CTWO,ST,EZ,CS,DK
   !
@@ -54,11 +51,9 @@ SUBROUTINE ZBKNU(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol,Elim,Alim)
     1.25331413731550025D0, 1.90985931710274403D0, &
     1.57079632679489662D0, 1.89769999331517738D0, &
     6.66666666666666666D-01/
-  DATA cc(1), cc(2), cc(3), cc(4), cc(5), cc(6), cc(7), &
-    cc(8)/5.77215664901532861D-01, -4.20026350340952355D-02, &
-    -4.21977345555443367D-02, 7.21894324666309954D-03, &
-    -2.15241674114950973D-04, -2.01348547807882387D-05, &
-    1.13302723198169588D-06, 6.11609510448141582D-09/
+  REAL(8), PARAMETER :: cc(8) = [ 5.77215664901532861D-01, -4.20026350340952355D-02, &
+    -4.21977345555443367D-02, 7.21894324666309954D-03,-2.15241674114950973D-04, &
+    -2.01348547807882387D-05, 1.13302723198169588D-06, 6.11609510448141582D-09 ]
   !* FIRST EXECUTABLE STATEMENT  ZBKNU
   caz = ZABS(Zr,Zi)
   csclr = 1.0D0/Tol

@@ -71,9 +71,8 @@ SUBROUTINE BSPDR(T,A,N,K,Nderiv,Ad)
   
   !
   INTEGER i, id, ii, ipkmid, jj, jm, K, kmid, N, Nderiv
-  REAL A, Ad, diff, fkmid, T
+  REAL A(*), Ad(*), diff, fkmid, T(*)
   !     DIMENSION T(N+K), AD((2*N-NDERIV+1)*NDERIV/2)
-  DIMENSION T(*), A(*), Ad(*)
   !* FIRST EXECUTABLE STATEMENT  BSPDR
   IF ( K<1 ) THEN
     !
@@ -84,8 +83,7 @@ SUBROUTINE BSPDR(T,A,N,K,Nderiv,Ad)
     CALL XERMSG('SLATEC','BSPDR','N DOES NOT SATISFY N.GE.K',2,1)
     RETURN
   ELSEIF ( Nderiv<1.OR.Nderiv>K ) THEN
-    CALL XERMSG('SLATEC','BSPDR','NDERIV DOES NOT SATISFY 1.LE.NDERIV.LE.K',&
-      2,1)
+    CALL XERMSG('SLATEC','BSPDR','NDERIV DOES NOT SATISFY 1.LE.NDERIV.LE.K',2,1)
     RETURN
   ENDIF
   DO i = 1, N

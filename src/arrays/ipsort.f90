@@ -87,8 +87,7 @@ SUBROUTINE IPSORT(Ix,N,Iperm,Kflag,Ier)
   INTEGER Iperm(*), Ix(*)
   !     .. Local Scalars ..
   REAL r
-  INTEGER i, ij, indx, indx0, istrt, itemp, j, k, kk, l, lm, &
-    lmt, m, nn
+  INTEGER i, ij, indx, indx0, istrt, itemp, j, k, kk, l, lm, lmt, m, nn
   !     .. Local Arrays ..
   INTEGER il(21), iu(21)
   !     .. External Subroutines ..
@@ -101,8 +100,7 @@ SUBROUTINE IPSORT(Ix,N,Iperm,Kflag,Ier)
   IF ( nn<1 ) THEN
     Ier = 1
     CALL XERMSG('SLATEC','IPSORT',&
-      'The number of values to be sorted, N, is not positive.',&
-      Ier,1)
+      'The number of values to be sorted, N, is not positive.',Ier,1)
     RETURN
   ENDIF
   kk = ABS(Kflag)

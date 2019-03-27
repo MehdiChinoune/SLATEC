@@ -37,10 +37,9 @@ SUBROUTINE RSCO(Rsav,Isav)
   ! PACKAGE.  THIS PRESUMES THAT RSAV AND ISAV WERE LOADED BY MEANS
   ! OF SUBROUTINE SVCO OR THE EQUIVALENT.
   !-----------------------------------------------------------------------
-  INTEGER Isav, i, ILS, lenils, lenrls
-  REAL Rsav, RLS
-  DIMENSION Rsav(*), Isav(*)
-  COMMON /DEBDF1/ RLS(218), ILS(33)
+  INTEGER Isav(*), i, ILS(33), lenils, lenrls
+  REAL Rsav(*), RLS(218)
+  COMMON /DEBDF1/ RLS, ILS
   SAVE lenrls, lenils
   DATA lenrls/218/, lenils/33/
   !

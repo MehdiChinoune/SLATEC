@@ -51,9 +51,9 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   REAL(8) :: abig, aij, Amat(*), anorm, asmall, Basmat(*), &
     Bl(*), Bu(*), Colnrm(*), Costs(*), costsc, Csc(*), &
     Dattrv(*), dirnrm, Duals(*), dulnrm, eps, tune, &
-    Erd(*), erdnrm, Erp(*), factor, gg, one, Prgopt(*)&
-    , Primal(*), resnrm, Rg(*), Rhs(*), rhsnrm, ropt(07)&
-    , Rprim(*), rprnrm, Rz(*), rzj, scalr, scosts, &
+    Erd(*), erdnrm, Erp(*), factor, gg, one, Prgopt(*), &
+    Primal(*), resnrm, Rg(*), Rhs(*), rhsnrm, ropt(07), &
+    Rprim(*), rprnrm, Rz(*), rzj, scalr, scosts, &
     size, SMAll, theta, tolls, upbnd, uu, Wr(*), &
     Ww(*), xlamda, xval, zero, rdum(01), tolabs
   REAL(8) :: DDOT, DASUM
@@ -258,8 +258,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         '(''0NON-BASIC INDICES THAT ARE NEGATIVE SHOW VARIABLES EXCHANGED AT A ZERO''/&
         &'' STEP LENGTH'')',idg)
       CALL IVOUT(0,idum,'('' WHEN COL. NO. LEAVING=COL. NO. ENTERING, THE ENTERING &
-        &VARIABLE MOVED''/&
-        &'' TO ITS BOUND.  IT REMAINS NON-BASIC.''/&
+        &VARIABLE MOVED''/'' TO ITS BOUND.  IT REMAINS NON-BASIC.''/&
         &'' WHEN COL. NO. OF BASIS EXCHANGED IS NEGATIVE, THE LEAVING''/&
         &'' VARIABLE IS AT ITS UPPER BOUND.'')',idg)
     ENDIF
@@ -286,8 +285,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ELSE
     nerr = 23
     CALL XERMSG('SLATEC','DPLPMN',&
-      'IN DSPLP,  A SINGULAR INITIAL BASIS WAS ENCOUNTERED.',nerr,&
-      iopt)
+      'IN DSPLP,  A SINGULAR INITIAL BASIS WAS ENCOUNTERED.',nerr,iopt)
     Info = -nerr
     GOTO 4600
   ENDIF
@@ -303,8 +301,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   IF ( .NOT.feas ) THEN
     nerr = 24
     CALL XERMSG('SLATEC','DPLPMN',&
-      'IN DSPLP, AN INFEASIBLE INITIAL BASIS WAS ENCOUNTERED.',&
-      nerr,iopt)
+      'IN DSPLP, AN INFEASIBLE INITIAL BASIS WAS ENCOUNTERED.',nerr,iopt)
     Info = -nerr
     GOTO 4600
   ENDIF
@@ -389,8 +386,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ELSEIF ( feas.AND.unbnd ) THEN
     nerr = 2
     CALL XERMSG('SLATEC','DPLPMN',&
-      'IN DSPLP, THE PROBLEM APPEARS TO HAVE NO FINITE SOLUTION.',&
-      nerr,iopt)
+      'IN DSPLP, THE PROBLEM APPEARS TO HAVE NO FINITE SOLUTION.',nerr,iopt)
     Info = -nerr
   ELSEIF ( (.NOT.feas).AND.unbnd ) THEN
     nerr = 3
@@ -590,8 +586,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         rdum(1) = theta
         CALL DVOUT(1,rdum,'('' LENGTH OF THE EXCHANGE STEP'')',idg)
         IF ( kprint>=3 ) THEN
-          CALL DVOUT(Mrelas,Rprim,'('' BASIC (INTERNAL) PRIMAL SOLN.'')',&
-            idg)
+          CALL DVOUT(Mrelas,Rprim,'('' BASIC (INTERNAL) PRIMAL SOLN.'')',idg)
           CALL IVOUT(Nvars+Mrelas,Ibasis,&
             '('' VARIABLE INDICES IN POSITIONS 1-MRELAS ARE BASIC.'')',idg)
           CALL IVOUT(Nvars+Mrelas,Ibb,'('' IBB ARRAY'')',idg)
@@ -708,8 +703,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   3000 CONTINUE
   IF ( (2-ntries)>=0 ) THEN
     CALL DPLPCE(Mrelas,Nvars,Lmx,Lbm,itlp,itbrc,Ibasis,Imat,Ibrc,Ipr,Iwr,&
-      Ind,Ibb,erdnrm,eps,tune,gg,Amat,Basmat,Csc,Wr,Ww,Primal,Erd,&
-      Erp,singlr,redbas)
+      Ind,Ibb,erdnrm,eps,tune,gg,Amat,Basmat,Csc,Wr,Ww,Primal,Erd,Erp,singlr,redbas)
     IF ( .NOT.singlr ) THEN
       !++  CODE FOR OUTPUT=YES IS ACTIVE
       IF ( kprint>=3 ) THEN
@@ -805,8 +799,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
   !     PROCEDURE (INITIALIZE REDUCED COSTS AND STEEPEST EDGE WEIGHTS)
   3200 CALL DPINCW(Mrelas,Nvars,Lmx,Lbm,npp,jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,Ind,&
-    Ibb,costsc,gg,erdnrm,dulnrm,Amat,Basmat,Csc,Wr,Ww,Rz,Rg,Costs,&
-    Colnrm,Duals,stpedg)
+    Ibb,costsc,gg,erdnrm,dulnrm,Amat,Basmat,Csc,Wr,Ww,Rz,Rg,Costs,Colnrm,Duals,stpedg)
   !
   SELECT CASE(npr014)
     CASE(2100)
@@ -901,8 +894,7 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
   !     PROCEDURE (FIND VARIABLE TO ENTER BASIS AND GET SEARCH DIRECTION)
   4200 CALL DPLPFE(Mrelas,Nvars,Lmx,Lbm,ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,Ind,Ibb,&
-    erdnrm,eps,gg,dulnrm,dirnrm,Amat,Basmat,Csc,Wr,Ww,Bl,Bu,Rz,Rg,&
-    Colnrm,Duals,found)
+    erdnrm,eps,gg,dulnrm,dirnrm,Amat,Basmat,Csc,Wr,Ww,Bl,Bu,Rz,Rg,Colnrm,Duals,found)
   SELECT CASE(npr015)
     CASE(2200)
       GOTO 2200

@@ -32,11 +32,10 @@ SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
   !   920422  Changed DIMENSION statement.  (WRB)
   
   !
-  INTEGER i, IER, IOWnd, IOWns, Iwm, JSTart, KFLag, L, MAXord, &
+  INTEGER i, IER, IOWnd, IOWns, Iwm(*), JSTart, KFLag, L, MAXord, &
     meband, METh, MITer, ml, mu, N, NFE, NJE, NQ, NQU, NST
   REAL(8) :: di, EL0, H, hl0, HMIn, HMXi, HU, phl0, r, &
-    ROWnd, ROWns, Tem, TN, UROund, Wm, X
-  DIMENSION Wm(*), Iwm(*), X(*), Tem(*)
+    ROWnd, ROWns, Tem(*), TN, UROund, Wm(*), X(*)
   COMMON /DDEBD1/ ROWnd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
     UROund, IOWnd(14), IOWns(6), IER, JSTart, KFLag, L, &
     METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU

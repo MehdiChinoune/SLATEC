@@ -178,8 +178,7 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
     !
     !     N.LT.2 RETURN.
     Ierr = -1
-    CALL XERMSG('SLATEC','PCHSP','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,&
-      1)
+    CALL XERMSG('SLATEC','PCHSP','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
     RETURN
   ELSE
     IF ( Incfd<1 ) THEN
@@ -306,8 +305,7 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
           DO j = 2, nm1
             IF ( Wk(2,j-1)==zero ) GOTO 50
             g = -Wk(1,j+1)/Wk(2,j-1)
-            D(1,j) = g*D(1,j-1) + three*(Wk(1,j)*Wk(2,j+1)+Wk(1,j+1)*Wk(2,j)&
-              )
+            D(1,j) = g*D(1,j-1) + three*(Wk(1,j)*Wk(2,j+1)+Wk(1,j+1)*Wk(2,j) )
             Wk(2,j) = g*Wk(1,j-1) + two*(Wk(1,j)+Wk(1,j+1))
           ENDDO
         ENDIF

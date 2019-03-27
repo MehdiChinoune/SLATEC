@@ -30,25 +30,23 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
-  COMPLEX ai, arg, asum, bsum, cfn, ci, cip, ck, cone, crsc, cr1, &
-    cr2, cs, cscl, csgn, cspn, csr, css, cy, czero, c1, c2, &
-    dai, phi, rz, s1, s2, Y, Z, zb, zeta1, zeta2, zn, zr, &
-    phid, argd, zeta1d, zeta2d, asumd, bsumd
-  REAL aarg, aic, Alim, ang, aphi, asc, ascle, bry, car, cpn, &
-    c2i, c2m, c2r, Elim, fmr, fn, fnf, Fnu, hpi, pi, rs1, &
-    sar, sgn, spn, Tol, x, yy, R1MACH
+
   INTEGER i, ib, iflag, ifn, il, in, inu, iuf, k, kdflg, kflag, &
     kk, Kode, Mr, N, nai, ndai, nw, Nz, idum, j, ipard, ic
-  DIMENSION bry(3), Y(N), asum(2), bsum(2), phi(2), arg(2), zeta1(2), &
-    zeta2(2), cy(2), cip(4), css(3), csr(3)
+  COMPLEX ai, arg(2), asum(2), bsum(2), cfn, ci, ck, cone, crsc, cr1, &
+    cr2, cs, cscl, csgn, cspn, csr(3), css(3), cy(2), czero, c1, c2, &
+    dai, phi(2), rz, s1, s2, Y(N), Z, zb, zeta1(2), zeta2(2), zn, zr, &
+    phid, argd, zeta1d, zeta2d, asumd, bsumd
+  REAL aarg, aic, Alim, ang, aphi, asc, ascle, bry(3), car, cpn, &
+    c2i, c2m, c2r, Elim, fmr, fn, fnf, Fnu, hpi, pi, rs1, &
+    sar, sgn, spn, Tol, x, yy, R1MACH
   DATA czero, cone, ci, cr1, cr2/(0.0E0,0.0E0), (1.0E0,0.0E0), &
     (0.0E0,1.0E0), (1.0E0,1.73205080756887729E0), &
     (-0.5E0,-8.66025403784438647E-01)/
   DATA hpi, pi, aic/1.57079632679489662E+00, 3.14159265358979324E+00, &
     1.26551212348464539E+00/
-  DATA cip(1), cip(2), cip(3), cip(4)/(1.0E0,0.0E0), (0.0E0,-1.0E0), &
-    (-1.0E0,0.0E0), (0.0E0,1.0E0)/
+  COMPLEX, PARAMETER :: cip(4) = [ (1.0E0,0.0E0), (0.0E0,-1.0E0), &
+    (-1.0E0,0.0E0), (0.0E0,1.0E0) ]
   !* FIRST EXECUTABLE STATEMENT  CUNK2
   kdflg = 1
   Nz = 0

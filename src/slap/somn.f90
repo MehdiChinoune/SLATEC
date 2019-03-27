@@ -1,7 +1,6 @@
 !** SOMN
 SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
-    Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,&
-    Iwork)
+    Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,Iwork)
   IMPLICIT NONE
   !>
   !***
@@ -299,8 +298,7 @@ SUBROUTINE SOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Nsave,Itol,Tol,&
   CALL MSOLVE(N,R,Z,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   !
   IF ( ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,Itmax,Iter,Err,&
-      Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,Iwork,ak,bnrm,solnrm)==0 )&
-      THEN
+      Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,Rwork,Iwork,ak,bnrm,solnrm)==0 ) THEN
     IF ( Ierr/=0 ) RETURN
     !
     !

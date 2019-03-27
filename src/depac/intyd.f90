@@ -56,9 +56,7 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
   INTEGER K, Nyh, Iflag, i, ic, IER, IOWnd, IOWns, j, jb, jb2, &
     jj, jj1, jp1, JSTart, KFLag, L, MAXord, METh, MITer, N, &
     NFE, NJE, NQ, NQU, NST
-  REAL T, Yh, Dky, ROWnd, ROWns, EL0, H, HMIn, HMXi, HU, TN, &
-    UROund, c, r, s, tp
-  DIMENSION Yh(Nyh,*), Dky(*)
+  REAL T, Yh(Nyh,*), Dky(*), ROWnd, ROWns, EL0, H, HMIn, HMXi, HU, TN, UROund, c, r, s, tp
   COMMON /DEBDF1/ ROWnd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
     UROund, IOWnd(14), IOWns(6), IER, JSTart, KFLag, L, &
     METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU

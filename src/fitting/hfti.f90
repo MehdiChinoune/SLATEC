@@ -145,11 +145,10 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !   901005  Replace usage of DIFF with usage of R1MACH.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL A, B, factor, G, H, hmax, R1MACH, releps, Rnorm, sm1, &
-    szero, Tau, tmp
   INTEGER i, ii, iopt, ip1, j, jb, jj, k, kp1, Krank, l, ldiag, &
     lmax, M, Mda, Mdb, N, Nb, nerr
-  DIMENSION A(Mda,*), B(Mdb,*), H(*), G(*), Rnorm(*)
+  REAL A(Mda,*), B(Mdb,*), factor, G(*), H(*), hmax, R1MACH, releps, Rnorm(*), &
+    sm1, szero, Tau, tmp
   INTEGER Ip(*)
   REAL(8) :: sm, dzero
   SAVE releps
@@ -223,8 +222,7 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
         nerr = 2
         iopt = 2
         CALL XERMSG('SLATEC','HFTI',&
-          'MDB.LT.MAX(M,N).AND.NB.GT.1. PROBABLE ERROR.',nerr,&
-          iopt)
+          'MDB.LT.MAX(M,N).AND.NB.GT.1. PROBABLE ERROR.',nerr,iopt)
         RETURN
       ENDIF
       20       k = j - 1

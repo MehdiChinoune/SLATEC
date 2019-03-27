@@ -33,9 +33,8 @@ SUBROUTINE OHTROL(Q,N,Nrda,Diag,Irank,Div,Td)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   
-  REAL dd, Diag, diagk, Div, Q, qs, SDOT, sig, sqd, Td, tdv
   INTEGER Irank, irp, j, k, kir, kirm, l, N, nmir, Nrda
-  DIMENSION Q(Nrda,*), Diag(*), Div(*), Td(*)
+  REAL dd, Diag(*), diagk, Div(*), Q(Nrda,*), qs, SDOT, sig, sqd, Td(*), tdv
   !* FIRST EXECUTABLE STATEMENT  OHTROL
   nmir = N - Irank
   irp = Irank + 1

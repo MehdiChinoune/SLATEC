@@ -59,11 +59,8 @@ SUBROUTINE PPQAD(Ldc,C,Xi,Lxi,K,X1,X2,Pquad)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   !
-  INTEGER i, ii, il, ilo, il1, il2, im, K, Ldc, left, Lxi, mf1, &
-    mf2
-  REAL a, aa, bb, C, dx, flk, Pquad, q, s, ss, ta, tb, x, Xi, &
-    X1, X2
-  DIMENSION Xi(*), C(Ldc,*), ss(2)
+  INTEGER i, ii, il, ilo, il1, il2, im, K, Ldc, left, Lxi, mf1, mf2
+  REAL a, aa, bb, C(Ldc,*), dx, flk, Pquad, q, s, ss(2), ta, tb, x, Xi(*), X1, X2
   !
   !* FIRST EXECUTABLE STATEMENT  PPQAD
   Pquad = 0.0E0

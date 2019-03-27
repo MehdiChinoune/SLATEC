@@ -1,7 +1,6 @@
 !** DNLS1
 SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
-    Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,Ipvt,Qtf,&
-    Wa1,Wa2,Wa3,Wa4)
+    Epsfcn,Diag,Mode,Factor,Nprint,Info,Nfev,Njev,Ipvt,Qtf,Wa1,Wa2,Wa3,Wa4)
   IMPLICIT NONE
   !>
   !***
@@ -608,8 +607,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   !   920205  Corrected XERN1 declaration.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint, Info, Nfev, &
-    Njev
+  INTEGER Iopt, M, N, Ldfjac, Maxfev, Mode, Nprint, Info, Nfev, Njev
   INTEGER ijunk, nrow, Ipvt(*)
   REAL(8) :: Ftol, Xtol, Gtol, Factor, Epsfcn
   REAL(8) :: X(*), Fvec(*), Fjac(Ldfjac,*), Diag(*), Qtf(*), &
@@ -619,8 +617,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   INTEGER i, iflag, iter, j, l, modech
   REAL(8) :: actred, delta, dirder, epsmch, fnorm, fnorm1, &
     gnorm, one, par, pnorm, prered, p1, p5, p25, &
-    p75, p0001, ratio, sum, temp, temp1, temp2, &
-    xnorm, zero
+    p75, p0001, ratio, sum, temp, temp1, temp2, xnorm, zero
   REAL(8) :: D1MACH, DENORM, err, chklim
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
@@ -724,8 +721,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
           WRITE (xern1,'(I8)') i
           WRITE (xern3,'(1PE15.6)') err
           CALL XERMSG('SLATEC','DNLS1','DERIVATIVE OF FUNCTION '//xern1//&
-            ' MAY BE WRONG, ERR = '//xern3//' TOO CLOSE TO 0.',7,&
-            0)
+            ' MAY BE WRONG, ERR = '//xern3//' TOO CLOSE TO 0.',7,0)
         ENDIF
       ENDIF
       !
@@ -801,8 +797,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
             WRITE (xern1,'(I8)') i
             WRITE (xern3,'(1PE15.6)') err
             CALL XERMSG('SLATEC','DNLS1','DERIVATIVE OF FUNCTION '//&
-              xern1//' MAY BE WRONG, ERR = '//xern3//&
-              ' TOO CLOSE TO 0.',7,0)
+              xern1//' MAY BE WRONG, ERR = '//xern3//' TOO CLOSE TO 0.',7,0)
           ENDIF
         ENDDO
         !
@@ -985,8 +980,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
       !           TESTS FOR TERMINATION AND STRINGENT TOLERANCES.
       !
       IF ( Nfev>=Maxfev ) Info = 5
-      IF ( ABS(actred)<=epsmch.AND.prered<=epsmch.AND.p5*ratio<=one )&
-        Info = 6
+      IF ( ABS(actred)<=epsmch.AND.prered<=epsmch.AND.p5*ratio<=one ) Info = 6
       IF ( delta<=epsmch*xnorm ) Info = 7
       IF ( gnorm<=epsmch ) Info = 8
       IF ( Info/=0 ) EXIT

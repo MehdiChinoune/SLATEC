@@ -177,10 +177,9 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL A, Ae, B, eps, R1MACH, Re, Rnorm, W
   INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, m1, m2, &
     m3, m4, m5, Mda, Mdb, Mode, N, Nb, Np
-  DIMENSION A(Mda,*), B(Mdb,*), Re(*), Ae(*), Rnorm(*), W(*)
+  REAL A(Mda,*), Ae(*), B(Mdb,*), eps, R1MACH, Re(*), Rnorm(*), W(*)
   INTEGER Iwork(*)
   !
   !* FIRST EXECUTABLE STATEMENT  ULSIA
@@ -195,8 +194,7 @@ SUBROUTINE ULSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
       !     ERROR MESSAGES
       !
       CALL XERMSG('SLATEC','ULSIA',&
-        'SOLUTION ONLY (INFO=1) BUT NO RIGHT HAND SIDE (NB=0)',1,&
-        0)
+        'SOLUTION ONLY (INFO=1) BUT NO RIGHT HAND SIDE (NB=0)',1,0)
       RETURN
     ELSEIF ( M<1 ) THEN
       CALL XERMSG('SLATEC','ULSIA','M.LT.1',2,1)

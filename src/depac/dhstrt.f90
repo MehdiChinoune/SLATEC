@@ -150,13 +150,11 @@ SUBROUTINE DHSTRT(DF,Neq,A,B,Y,Yprime,Etol,Morder,Small,Big,Spy,Pv,Yp,Sf,&
   !   910722  Updated AUTHOR section.  (ALS)
   
   !
-  INTEGER Ipar, j, k, lk, Morder, Neq
+  INTEGER Ipar(*), j, k, lk, Morder, Neq
   REAL(8) :: A, absdx, B, Big, da, delf, dely, dfdub, dfdxb, &
-    DHVNRM, dx, dy, Etol, fbnd, H, Pv, relper, Rpar, &
-    Sf, Small, Spy, srydpb, tolexp, tolmin, tolp, &
-    tolsum, Y, ydpb, Yp, Yprime
-  DIMENSION Y(*), Yprime(*), Etol(*), Spy(*), Pv(*), Yp(*), Sf(*), &
-    Rpar(*), Ipar(*)
+    DHVNRM, dx, dy, Etol(*), fbnd, H, Pv(*), relper, Rpar(*), &
+    Sf(*), Small, Spy(*), srydpb, tolexp, tolmin, tolp, &
+    tolsum, Y(*), ydpb, Yp(*), Yprime(*)
   EXTERNAL :: DF
   !
   !     ..................................................................

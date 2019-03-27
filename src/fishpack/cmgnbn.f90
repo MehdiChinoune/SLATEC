@@ -235,9 +235,7 @@ SUBROUTINE CMGNBN(Nperod,N,Mperod,M,A,B,C,Idimy,Y,Ierror,W)
   INTEGER i, Idimy, Ierror, ipstor, irev, iwb2, iwb3, iwba, iwbb, &
     iwbc, iwd, iwp, iwtcos, iww1, iww2, iww3, j, k, M, mh
   INTEGER mhm1, mhmi, mhpi, modd, mp, Mperod, mskip, N, nby2, np, Nperod
-  COMPLEX A, B, C, Y, W, a1
-  DIMENSION Y(Idimy,*)
-  DIMENSION W(*), B(*), A(*), C(*)
+  COMPLEX A(*), B(*), C(*), Y(Idimy,*), W(*), a1
   !* FIRST EXECUTABLE STATEMENT  CMGNBN
   Ierror = 0
   IF ( M<=2 ) Ierror = 1

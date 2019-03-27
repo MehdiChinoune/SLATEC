@@ -32,11 +32,10 @@ SUBROUTINE SLVS(Wm,Iwm,X,Tem)
   
   !
   !LLL. OPTIMIZE
-  INTEGER Iwm, i, IER, IOWnd, IOWns, JSTart, KFLag, L, MAXord, &
+  INTEGER Iwm(*), i, IER, IOWnd, IOWns, JSTart, KFLag, L, MAXord, &
     meband, METh, MITer, ml, mu, N, NFE, NJE, NQ, NQU, NST
-  REAL Wm, X, Tem, ROWnd, ROWns, EL0, H, HMIn, HMXi, HU, TN, &
+  REAL Wm(*), X(*), Tem(*), ROWnd, ROWns, EL0, H, HMIn, HMXi, HU, TN, &
     UROund, di, hl0, phl0, r
-  DIMENSION Wm(*), Iwm(*), X(*), Tem(*)
   COMMON /DEBDF1/ ROWnd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
     UROund, IOWnd(14), IOWns(6), IER, JSTart, KFLag, L, &
     METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU

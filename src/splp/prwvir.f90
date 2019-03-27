@@ -40,11 +40,10 @@ SUBROUTINE PRWVIR(Key,Ipage,Lpg,Sx,Ix)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  
-  INTEGER iaddr, Ipage, ipagef, istart, Ix, Key, Lpg
-  DIMENSION Ix(*)
+
+  INTEGER iaddr, Ipage, ipagef, istart, Ix(*), Key, Lpg
+  LOGICAL :: first
   REAL Sx(*), zero, one
-  LOGICAL first
   SAVE zero, one
   DATA zero, one/0.E0, 1.E0/
   !* FIRST EXECUTABLE STATEMENT  PRWVIR

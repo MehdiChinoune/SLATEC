@@ -345,8 +345,7 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   
   INTEGER index, Info, Iopt, j, lr, Lwa, maxfev, ml, mode, mu, N, &
     nfev, njev, Nprint
-  REAL(8) :: epsfcn, factor, Fvec(*), one, Tol, Wa(*), X(*), &
-    xtol, zero
+  REAL(8) :: epsfcn, factor, Fvec(*), one, Tol, Wa(*), X(*), xtol, zero
   EXTERNAL :: FCN, JAC
   SAVE factor, one, zero
   DATA factor, one, zero/1.0D2, 1.0D0, 0.0D0/
@@ -379,8 +378,7 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
       Wa(2*N+1),Wa(3*N+1),Wa(4*N+1),Wa(5*N+1))
     IF ( Info==5 ) Info = 4
   ENDIF
-  IF ( Info==0 ) CALL XERMSG('SLATEC','DNSQE','INVALID INPUT PARAMETER.',2,&
-    1)
+  IF ( Info==0 ) CALL XERMSG('SLATEC','DNSQE','INVALID INPUT PARAMETER.',2,1)
   !
   !     LAST CARD OF SUBROUTINE DNSQE.
   !

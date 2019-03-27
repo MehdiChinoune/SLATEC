@@ -233,8 +233,7 @@ SUBROUTINE DSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   REAL(8) :: A(N), B(N), Rwork(Lenw), X(N)
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin, locdz, lociw, locp, locpp, locr, locrr, locw, &
-    locz, loczz
+  INTEGER locdin, locdz, lociw, locp, locpp, locr, locrr, locw, locz, loczz
   !     .. External Subroutines ..
   EXTERNAL :: DBCG, DCHKW, DS2Y, DSDI, DSDS, DSMTV, DSMV
   !* FIRST EXECUTABLE STATEMENT  DSDBCG
@@ -275,7 +274,6 @@ SUBROUTINE DSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !         Perform the Diagonally Scaled BiConjugate gradient algorithm.
   CALL DBCG(N,B,X,Nelt,Ia,Ja,A,Isym,DSMV,DSMTV,DSDI,DSDI,Itol,Tol,Itmax,&
     Iter,Err,Ierr,Iunit,Rwork(locr),Rwork(locz),Rwork(locp),&
-    Rwork(locrr),Rwork(loczz),Rwork(locpp),Rwork(locdz),Rwork(1),&
-    Iwork(1))
+    Rwork(locrr),Rwork(loczz),Rwork(locpp),Rwork(locdz),Rwork(1),Iwork(1))
   !------------- LAST LINE OF DSDBCG FOLLOWS ----------------------------
 END SUBROUTINE DSDBCG

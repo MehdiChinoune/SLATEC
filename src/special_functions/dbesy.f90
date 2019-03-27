@@ -79,15 +79,13 @@ SUBROUTINE DBESY(X,Fnu,N,Y)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   !
-  INTEGER i, iflw, j, N, nb, nd, nn, nud, nulim
+  INTEGER i, iflw, j, N, nb, nd, nn, nud
   REAL(8) :: azn, cn, dnu, elim, flgjy, fn, Fnu, ran, s, s1, &
-    s2, tm, trx, w, wk, w2n, X, xlim, xxn, Y
-  DIMENSION w(2), nulim(2), Y(*), wk(7)
+    s2, tm, trx, w(2), wk(7), w2n, X, xlim, xxn, Y(*)
   INTEGER, EXTERNAL :: I1MACH
   REAL(8), EXTERNAL :: DBESY0, DBESY1, D1MACH
   EXTERNAL :: DYAIRY
-  SAVE nulim
-  DATA nulim(1), nulim(2)/70, 100/
+  INTEGER, PARAMETER :: nulim(2) = [ 70, 100 ]
   !* FIRST EXECUTABLE STATEMENT  DBESY
   nn = -I1MACH(15)
   elim = 2.303D0*(nn*D1MACH(5)-3.0D0)

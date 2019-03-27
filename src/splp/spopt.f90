@@ -46,8 +46,7 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
   REAL abig, asmall, costsc, Csc(*), eps, one, Prgopt(*), Ropt(07), &
     tolls, tune, zero, R1MACH, tolabs
   INTEGER Ibasis(*), Intopt(08)
-  LOGICAL contin, usrbas, sizeup, savedt, colscp, cstscp, minprb, &
-    stpedg, Lopt(8)
+  LOGICAL contin, usrbas, sizeup, savedt, colscp, cstscp, minprb, stpedg, Lopt(8)
   !
   !* FIRST EXECUTABLE STATEMENT  SPOPT
   iopt = 1
@@ -97,8 +96,7 @@ SUBROUTINE SPOPT(Prgopt,Mrelas,Nvars,Info,Csc,Ibasis,Ropt,Intopt,Lopt)
       !     WORKING WITH UNDEFINED DATA.
       nerr = 14
       CALL XERMSG('SLATEC','SPOPT',&
-        'IN SPLP, THE USER OPTION ARRAY HAS UNDEFINED DATA.',nerr,&
-        iopt)
+        'IN SPLP, THE USER OPTION ARRAY HAS UNDEFINED DATA.',nerr,iopt)
       Info = -nerr
       RETURN
     ELSEIF ( next==1 ) THEN

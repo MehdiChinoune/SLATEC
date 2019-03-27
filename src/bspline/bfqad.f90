@@ -77,8 +77,7 @@ SUBROUTINE BFQAD(F,T,Bcoef,N,K,Id,X1,X2,Tol,Quad,Ierr,Work)
 
   INTEGER inbv
   INTEGER Id, Ierr, iflg, ilo, il1, il2, K, left, mflag, N, npk, np1
-  REAL a, aa, ans, b, bb, Bcoef, q, Quad, T, ta, tb, Tol, Work, wtol, X1, X2
-  DIMENSION T(*), Bcoef(*), Work(*)
+  REAL a, aa, ans, b, bb, Bcoef(*), q, Quad, T(*), ta, tb, Tol, Work(*), wtol, X1, X2
   REAL, EXTERNAL :: R1MACH
   REAL, EXTERNAL :: F
   !* FIRST EXECUTABLE STATEMENT  BFQAD

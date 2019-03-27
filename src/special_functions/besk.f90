@@ -83,16 +83,14 @@ SUBROUTINE BESK(X,Fnu,Kode,N,Y,Nz)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
-  INTEGER i, j, k, Kode, mz, N, nb, nd, nn, nud, nulim, Nz
+  INTEGER i, j, k, Kode, mz, N, nb, nd, nn, nud, Nz
   INTEGER I1MACH
   REAL cn, dnu, elim, etx, flgik, fn, fnn, Fnu, gln, gnu, rtz, &
-    s, s1, s2, t, tm, trx, w, X, xlim, Y, zn
+    s, s1, s2, t, tm, trx, w(2), X, xlim, Y(*), zn
   REAL BESK0, BESK1, BESK1E, BESK0E, R1MACH
-  DIMENSION w(2), nulim(2), Y(*)
-  SAVE nulim
-  DATA nulim(1), nulim(2)/35, 70/
+  INTEGER, PARAMETER :: nulim(2) = [ 35, 70 ]
   !* FIRST EXECUTABLE STATEMENT  BESK
   nn = -I1MACH(12)
   elim = 2.303E0*(nn*R1MACH(5)-3.0E0)

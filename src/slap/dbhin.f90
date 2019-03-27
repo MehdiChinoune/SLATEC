@@ -170,8 +170,7 @@ SUBROUTINE DBHIN(N,Nelt,Ia,Ja,A,Isym,Soln,Rhs,Iunit,Job)
   REAL(8) :: temp
   INTEGER i, ibgn, icol, iend, itemp, j, jobret, ncol, nele, nind, &
     nline, nnvls, npls, nrhsls, nrils, nrow
-  CHARACTER code*3, pntfmt*16, rinfmt*16, nvlfmt*20, rhsfmt*20, &
-    title*80
+  CHARACTER code*3, pntfmt*16, rinfmt*16, nvlfmt*20, rhsfmt*20, title*80
   !     .. Intrinsic Functions ..
   INTRINSIC MOD
   !* FIRST EXECUTABLE STATEMENT  DBHIN

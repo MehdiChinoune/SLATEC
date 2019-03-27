@@ -48,8 +48,7 @@ SUBROUTINE DGAMLM(Xmin,Xmax)
   DO i = 1, 10
     xold = Xmin
     xln = LOG(Xmin)
-    Xmin = Xmin - Xmin*((Xmin+0.5D0)*xln-Xmin-0.2258D0+alnsml)&
-      /(Xmin*xln+0.5D0)
+    Xmin = Xmin - Xmin*((Xmin+0.5D0)*xln-Xmin-0.2258D0+alnsml)/(Xmin*xln+0.5D0)
     IF ( ABS(Xmin-xold)<0.005D0 ) GOTO 100
   ENDDO
   CALL XERMSG('SLATEC','DGAMLM','UNABLE TO FIND XMIN',1,2)
@@ -61,8 +60,7 @@ SUBROUTINE DGAMLM(Xmin,Xmax)
   DO i = 1, 10
     xold = Xmax
     xln = LOG(Xmax)
-    Xmax = Xmax - Xmax*((Xmax-0.5D0)*xln-Xmax+0.9189D0-alnbig)&
-      /(Xmax*xln-0.5D0)
+    Xmax = Xmax - Xmax*((Xmax-0.5D0)*xln-Xmax+0.9189D0-alnbig)/(Xmax*xln-0.5D0)
     IF ( ABS(Xmax-xold)<0.005D0 ) GOTO 200
   ENDDO
   CALL XERMSG('SLATEC','DGAMLM','UNABLE TO FIND XMAX',2,2)

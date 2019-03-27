@@ -99,8 +99,7 @@ SUBROUTINE SPSORT(X,N,Iperm,Kflag,Ier)
   IF ( nn<1 ) THEN
     Ier = 1
     CALL XERMSG('SLATEC','SPSORT',&
-      'The number of values to be sorted, N, is not positive.',&
-      Ier,1)
+      'The number of values to be sorted, N, is not positive.',Ier,1)
     RETURN
   ENDIF
   kk = ABS(Kflag)

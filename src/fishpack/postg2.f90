@@ -27,14 +27,12 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   900402  Added TYPE section.  (WRB)
   !   920130  Modified to use merge routine S1MERG rather than deleted
   !           routine MERGE.  (WRB)
-  
-  REAL A, B, B2, B3, Bb, C, D, fi, fnum, fnum2, P, Q, t, Tcos, W, W2, W3
+
+  INTEGER k1, k2, k3, k4, kr, lr, M, mr, N, nlast, nlastp, np, Nperod, nr, nrod, nrodpr
   INTEGER i, i2r, i2rby2, Idimq, ii, ijump, ip, ipstor, j, jm1, &
-    jm2, jm3, jp1, jp2, jp3, jr, jstart, jstep, jstop, k
-  INTEGER k1, k2, k3, k4, kr, lr, M, mr, N, nlast, nlastp, np, &
-    Nperod, nr, nrod, nrodpr
-  DIMENSION A(*), Bb(*), C(*), Q(Idimq,*), B(*), B2(*), B3(*), W(*), &
-    W2(*), W3(*), D(*), Tcos(*), k(4), P(*)
+    jm2, jm3, jp1, jp2, jp3, jr, jstart, jstep, jstop, k(4)
+  REAL A(*), B(*), B2(*), B3(*), Bb(*), C(*), D(*), fi, fnum, fnum2, P(*), &
+    Q(Idimq,*), t, Tcos(*), W(*), W2(*), W3(*)
   EQUIVALENCE (k(1),k1)
   EQUIVALENCE (k(2),k2)
   EQUIVALENCE (k(3),k3)

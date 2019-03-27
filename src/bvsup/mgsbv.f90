@@ -70,15 +70,14 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   
-  REAL A, AE, dot, EPS, FOUru, P, pjp, PRVEC, psave, RE, ry, S, &
-    SDOT, SQOvfl, SRU, sv, t, TOL, TWOu, URO
-  REAL V, vl, vnorm, W, Wcnd, y
-  INTEGER i, Ia, ICOco, Iflag, INDpvt, Inhomo, INTeg, Ip, ip1, ix, &
+  INTEGER i, Ia, ICOco, Iflag, INDpvt, Inhomo, INTeg, Ip(*), ip1, ix, &
     iz, j, jk, jp, jq, jy, jz, k, kd, kj
+  REAL A(Ia,*), AE, dot, EPS, FOUru, P(*), pjp, PRVEC, psave, RE, ry, S(*), &
+    SDOT, SQOvfl, SRU, sv, t, TOL, TWOu, URO
+  REAL V(*), vl, vnorm, W(*), Wcnd, y
   INTEGER kp, l, lix, LPAr, lr, M, m2, MXNon, N, NDIsk, NEQ, &
     NEQivp, NFCc, NIC, Niv, nivn, nmnr, nn, NOPg, np1
   INTEGER NPS, nr, nrm1, NTApe, NTP, NUMort, NXPts
-  DIMENSION A(Ia,*), V(*), W(*), P(*), Ip(*), S(*)
   !
   !
   COMMON /ML18JR/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &

@@ -66,8 +66,7 @@ SUBROUTINE SSLLTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   locjel = Iwork(2)
   locel = Iwork(4)
   locdin = Iwork(5)
-  CALL SLLTI2(N,B,X,nel,Iwork(lociel),Iwork(locjel),Rwork(locel),&
-    Rwork(locdin))
+  CALL SLLTI2(N,B,X,nel,Iwork(lociel),Iwork(locjel),Rwork(locel),Rwork(locdin))
   !
   !------------- LAST LINE OF SSLLTI FOLLOWS ----------------------------
 END SUBROUTINE SSLLTI

@@ -170,10 +170,8 @@ SUBROUTINE QAG(F,A,B,Epsabs,Epsrel,Key,Result,Abserr,Neval,Ier,Limit,Lenw,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
   INTEGER Last
-  REAL A, Abserr, B, Epsabs, Epsrel, Result, Work
-  INTEGER Ier, Iwork, Key, Lenw, Limit, lvl, l1, l2, l3, Neval
-  !
-  DIMENSION Iwork(*), Work(*)
+  REAL A, Abserr, B, Epsabs, Epsrel, Result, Work(*)
+  INTEGER Ier, Iwork(*), Key, Lenw, Limit, lvl, l1, l2, l3, Neval
   !
   REAL, EXTERNAL :: F
   !* FIRST EXECUTABLE STATEMENT  QAG

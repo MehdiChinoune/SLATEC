@@ -34,9 +34,8 @@ SUBROUTINE STOR1(U,Yh,V,Yp,Ntemp,Ndisk,Ntape)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   
-  REAL C, U, V, XSAv, Yh, Yp
+  REAL C, U(*), V(*), XSAv, Yh(*), Yp(*)
   INTEGER IGOfx, INHomo, IVP, j, NCOmp, nctnf, Ndisk, NFC, Ntape, Ntemp
-  DIMENSION U(*), Yh(*), V(*), Yp(*)
   !
   !- *********************************************************************
   !

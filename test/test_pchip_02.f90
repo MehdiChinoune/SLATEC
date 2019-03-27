@@ -126,14 +126,11 @@ CONTAINS
     !  DECLARATIONS.
     !
     INTEGER i, ierr, iint, next(2), next2(2), nint
-    REAL(8) :: aed, aed2, aedmax, aedmin, aef, aef2, aefmax, &
-      aefmin, check(2), checkf(2), checkd(2), d1, d2, &
-      dermax, dtrue, dx, eps1, eps2, f1, f2, fact, &
-      fermax, floord, floorf, four, ftrue, left(3), &
-      machep, one, red, red2, redmax, redmin, ref, &
-      ref2, refmax, refmin, right(3), small, ten, tol1, &
-      tol2, x1, x2, xadmax, xadmin, xafmax, xafmin, &
-      xrdmax, xrdmin, xrfmax, xrfmin, zero
+    REAL(8) :: aed, aed2, aedmax, aedmin, aef, aef2, aefmax, aefmin, check(2), &
+      checkf(2), checkd(2), d1, d2, dermax, dtrue, dx, eps1, eps2, f1, f2, fact, &
+      fermax, floord, floorf, four, ftrue, machep, one, red, red2, redmax, redmin, &
+      ref, ref2, refmax, refmin, small, ten, tol1, tol2, x1, x2, xadmax, xadmin, &
+      xafmax, xafmin, xrdmax, xrdmin, xrfmax, xrfmin, zero
     LOGICAL failoc, failnx
     !
     REAL(8) :: D1MACH
@@ -145,8 +142,8 @@ CONTAINS
     DATA zero/0.D0/, one/1.D0/, four/4.D0/, ten/10.D0/
     DATA small/1.0D-10/
     DATA nint/3/
-    DATA left/ - 1.5D0, 2.0D-10, 1.0D0/
-    DATA right/2.5D0, 3.0D-10, 1.0D+8/
+    REAL(8), PARAMETER :: left(3) = [ -1.5D0, 2.0D-10, 1.0D0 ]
+    REAL(8), PARAMETER :: right(3) = [ 2.5D0, 3.0D-10, 1.0D+8 ]
     !
     !* FIRST EXECUTABLE STATEMENT  DEVCHK
     machep = D1MACH(4)
@@ -638,16 +635,15 @@ CONTAINS
     !
     INTEGER Lout, Kprint
     LOGICAL Fail
-    REAL(8) :: X(10), Y(10), F(10,10), Fx(10,10), Fy(10,10), Xe(51)&
-      , Ye(51), Fe(51), De(51), Fe2(51)
+    REAL(8) :: X(10), Y(10), F(10,10), Fx(10,10), Fy(10,10), Xe(51), &
+      Ye(51), Fe(51), De(51), Fe2(51)
     !
     !  DECLARATIONS.
     !
     INTEGER i, ier2, ierr, inc, j, k, ne, nerr, nmax, nx, ny
     LOGICAL faild, faile, failoc, skip
     REAL(8) :: dermax, derr, dtrue, dx, fdiff, fdifmx, fermax, &
-      ferr, ftrue, machep, tol, pdermx, pdifmx, pfermx, &
-      zero
+      ferr, ftrue, machep, tol, pdermx, pdifmx, pfermx, zero
     REAL(8) :: D1MACH
     !
     DATA nmax/10/, nx/4/, ny/6/
@@ -774,8 +770,7 @@ CONTAINS
         !
         IF ( (ierr/=13).AND.(Kprint>=2) ) WRITE (Lout,99009) 'D', ierr, 13
         !
-        IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E', ier2, &
-          ierr
+        IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E', ier2, ierr
       ENDIF
       !
       IF ( failoc ) nerr = nerr + 1
@@ -863,8 +858,7 @@ CONTAINS
         !
         IF ( (ierr/=20).AND.(Kprint>=2) ) WRITE (Lout,99009) 'D', ierr, 20
         !
-        IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E', ier2, &
-          ierr
+        IF ( (ier2/=ierr).AND.(Kprint>=2) ) WRITE (Lout,99009) 'E', ier2, ierr
       ENDIF
       !
       IF ( failoc ) nerr = nerr + 1
@@ -1123,9 +1117,8 @@ CONTAINS
     !
     !  DECLARE VARIABLES.
     !
-    INTEGER i, ierexp(17), ierr, ifail, n, npairs
-    REAL(8) :: a(17), b(17), calc, d(7), errmax, error, f(7), &
-      machep, one, three, thrqtr, tol, true, two, x(7)
+    INTEGER i, ierr, ifail, n, npairs
+    REAL(8) :: calc, d(7), errmax, error, f(7), machep, one, three, thrqtr, tol, true, two
     LOGICAL fail, skip
     !
     !  DECLARE EXTERNALS.
@@ -1136,16 +1129,14 @@ CONTAINS
     !
     DATA thrqtr/0.75D0/, one/1.D0/, two/2.D0/, three/3.D0/
     DATA n/7/
-    DATA x/ - 4.D0, -2.D0, -0.9D0, 0.D0, 0.9D0, 2.D0, 4.D0/
+    REAL(8), PARAMETER :: x(7) = [ -4.D0, -2.D0, -0.9D0, 0.D0, 0.9D0, 2.D0, 4.D0 ]
     DATA npairs/17/
-    DATA a/ - 3.0D0, 3.0D0, -0.5D0, -0.5D0, -0.5D0, -4.0D0, -4.0D0, &
-      3.0D0, -5.0D0, -5.0D0, -6.0D0, 6.0D0, -1.5D0, -1.5D0, -3.0D0, &
-      3.0D0, 0.5D0/
-    DATA b/3.0D0, -3.0D0, 1.0D0, 2.0D0, 5.0D0, -0.5D0, 4.0D0, 5.0D0, &
-      -3.0D0, 5.0D0, -5.0D0, 5.0D0, -0.5D0, -1.0D0, -2.5D0, 3.5D0, &
-      0.5D0/
-    DATA ierexp/0, 0, 0, 0, 2, 0, 0, 2, 1, 3, 3, 3, 0, 0, 0, &
-      0, 0/
+    REAL(8), PARAMETER :: a(17) = [ -3.0D0, 3.0D0, -0.5D0, -0.5D0, -0.5D0, -4.0D0, &
+      -4.0D0, 3.0D0, -5.0D0, -5.0D0, -6.0D0, 6.0D0, -1.5D0, -1.5D0, -3.0D0, 3.0D0, 0.5D0 ]
+    REAL(8), PARAMETER :: b(17) =  [ 3.0D0, -3.0D0, 1.0D0, 2.0D0, 5.0D0, -0.5D0, &
+      4.0D0, 5.0D0, -3.0D0, 5.0D0, -5.0D0, 5.0D0, -0.5D0, -1.0D0, -2.5D0, 3.5D0, 0.5D0 ]
+    INTEGER, PARAMETER :: ierexp(17) = [ 0, 0, 0, 0, 2, 0, 0, 2, 1, 3, 3, 3, 0, &
+      0, 0, 0, 0 ]
     !
     !  SET PASS/FAIL TOLERANCE.
     !
@@ -1189,8 +1180,7 @@ CONTAINS
         error = calc - true
         IF ( Kprint>=3 ) THEN
           IF ( fail ) THEN
-            WRITE (Lun,99005) a(i), b(i), ierr, true, calc, error, &
-              ierexp(i)
+            WRITE (Lun,99005) a(i), b(i), ierr, true, calc, error, ierexp(i)
             99005 FORMAT (2F6.1,I5,1P,2D20.10,D15.5,'  (',I1,') *****')
           ELSE
             WRITE (Lun,99010) a(i), b(i), ierr, true, calc, error
@@ -1348,28 +1338,28 @@ CONTAINS
     !
     !  Declare variables.
     !
-    INTEGER i, ic(2), ierr, ifail, nbad, nbadz
+    INTEGER i, ierr, ifail, nbad, nbadz
     INTEGER, PARAMETER :: N = 9, NWK = 2*N
-    REAL(8) :: d(N), dc(N), dc5, dc6, dm(N), ds(N), err, f(N), &
-      tol, told, tolz, vc(2), x(N), wk(NWK)
+    REAL(8) :: d(N), dc(N), dc5, dc6, err, f(N), &
+      tol, told, tolz, vc(2), wk(NWK)
     REAL(8), PARAMETER :: ZERO = 0.0D0, MONE = -1.0D0
     CHARACTER(6) :: result
     !
     !  Initialize.
     !
     !       Data.
-    DATA ic/0, 0/
-    DATA x/ - 2.2D0, -1.2D0, -1.0D0, -0.5D0, -0.01D0, 0.5D0, 1.0D0, &
-      2.0D0, 2.2D0/
+    INTEGER, PARAMETER :: ic(2) = [ 0, 0 ]
+    REAL(8), PARAMETER :: x(N) = [ -2.2D0, -1.2D0, -1.0D0, -0.5D0, -0.01D0, 0.5D0, &
+      1.0D0, 2.0D0, 2.2D0 ]
     !
     !       Results generated on Cray X/MP (9 sign. figs.)
-    DATA dm/0., 3.80027352D-01, 7.17253009D-01, 5.82014161D-01, 0., &
-      -5.68208031D-01, -5.13501618D-01, -7.77910977D-02, &
-      -2.45611117D-03/
+    REAL(8), PARAMETER :: dm(N) = [ 0.D0, 3.80027352D-01, 7.17253009D-01, &
+      5.82014161D-01, 0.D0, -5.68208031D-01, -5.13501618D-01, -7.77910977D-02, &
+      -2.45611117D-03 ]
     DATA dc5, dc6/1.76950158D-02, -5.69579814D-01/
-    DATA ds/ - 5.16830792D-02, 5.71455855D-01, 7.40530225D-01, &
+    REAL(8), PARAMETER :: ds(N) = [ -5.16830792D-02, 5.71455855D-01, 7.40530225D-01, &
       7.63864934D-01, 1.92614386D-02, -7.65324380D-01, -7.28209035D-01, &
-      -7.98445427D-02, -2.85983446D-02/
+      -7.98445427D-02, -2.85983446D-02 ]
     !
     !* FIRST EXECUTABLE STATEMENT  DPCHQ3
     ifail = 0
@@ -1667,22 +1657,21 @@ CONTAINS
     !  DECLARE VARIABLES.
     !
     INTEGER, PARAMETER :: MAXN = 16, MAXN2 = 8, MAXN3 = 6, NB = 7
-    INTEGER i, ierr, ifail, incfd, ismex1(MAXN), ismex2(MAXN2), &
-      ismex3(MAXN3), ismexb(NB), ismon(MAXN), k, n, ns(3)
+    INTEGER i, ierr, ifail, incfd, ismon(MAXN), k, n
     REAL(8) :: d(MAXN), db(NB), f(MAXN), fb(NB), x(MAXN)
     LOGICAL skip
     !
     !  DEFINE EXPECTED RESULTS.
     !
-    DATA ismex1/1, 1, -1, 1, 1, -1, 1, 1, -1, 1, 1, -1, 1, 1, &
-      -1, 2/
-    DATA ismex2/1, 2, 2, 1, 2, 2, 1, 2/
-    DATA ismex3/1, 1, 1, 1, 1, 1/
-    DATA ismexb/1, 3, 1, -1, -3, -1, 2/
+    INTEGER :: ismex1(MAXN) = [ 1, 1, -1, 1, 1, -1, 1, 1, -1, 1, 1, &
+      -1, 1, 1, -1, 2 ]
+    INTEGER :: ismex2(MAXN2) = [ 1, 2, 2, 1, 2, 2, 1, 2 ]
+    INTEGER :: ismex3(MAXN3) = [ 1, 1, 1, 1, 1, 1 ]
+    INTEGER :: ismexb(NB) = [ 1, 3, 1, -1, -3, -1, 2 ]
     !
     !  DEFINE TEST DATA.
     !
-    DATA ns/16, 8, 6/
+    INTEGER, PARAMETER :: ns(3) = [ 16, 8, 6 ]
     !
     !* FIRST EXECUTABLE STATEMENT  DPCHQ4
     IF ( Kprint>=3 ) WRITE (Lun,99001)
@@ -1925,20 +1914,19 @@ CONTAINS
     !
     INTEGER i, ierr, ifail, inbv, j, knotyp, k, ndim, nknots
     INTEGER, PARAMETER :: N = 9
-    REAL(8) :: bcoef(2*N), d(N), dcalc, derr, dermax, f(N), &
-      fcalc, ferr, fermax, t(2*N+4), terr, termax, tol, &
-      tolz, tsave(2*N+4), work(16*N), x(N)
+    REAL(8) :: bcoef(2*N), dcalc, derr, dermax, fcalc, ferr, fermax, t(2*N+4), &
+      terr, termax, tol, tolz, tsave(2*N+4), work(16*N)
     REAL(8), PARAMETER :: ZERO = 0.0D0
     LOGICAL fail
     !
     !  Define test data.
     !
-    DATA x/ - 2.2D0, -1.2D0, -1.0D0, -0.5D0, -0.01D0, 0.5D0, 1.0D0, &
-      2.0D0, 2.2D0/
-    DATA f/0.0079D0, 0.2369D0, 0.3679D0, 0.7788D0, 0.9999D0, 0.7788D0, &
-      0.3679D0, 0.1083D0, 0.0079D0/
-    DATA d/0.0000D0, 0.3800D0, 0.7173D0, 0.5820D0, 0.0177D0, -0.5696D0, &
-      -0.5135D0, -0.0778D0, -0.0025D0/
+    REAL(8), PARAMETER :: x(N) = [ -2.2D0, -1.2D0, -1.0D0, -0.5D0, -0.01D0, 0.5D0, &
+      1.0D0, 2.0D0, 2.2D0 ]
+    REAL(8), PARAMETER :: f(N) = [ 0.0079D0, 0.2369D0, 0.3679D0, 0.7788D0, 0.9999D0, &
+      0.7788D0, 0.3679D0, 0.1083D0, 0.0079D0 ]
+    REAL(8), PARAMETER :: d(N) = [ 0.0000D0, 0.3800D0, 0.7173D0, 0.5820D0, 0.0177D0, &
+      -0.5696D0, -0.5135D0, -0.0778D0, -0.0025D0 ]
     !
     !  Initialize.
     !

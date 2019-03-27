@@ -1,6 +1,5 @@
 !** DEXBVP
-SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,&
-    Iwork)
+SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,Iwork)
   IMPLICIT NONE
   !>
   !***
@@ -43,8 +42,7 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,&
     K5, K6, K7, K8, K9, KKKint, KKKzpw, KNSwot, KOP, kotc, &
     L1, L2, LLLint, LOTjp, LPAr, MNSwot, MXNon, NCOmp, NDIsk, &
     NEEdiw, NEEdw, NEQ, NEQivp, NFC, NFCc, NIC, NOPg, NPS, &
-    Nrowa, Nrowb, Nrowy, nsafiw, nsafw, NSWot, NTApe, NTP, &
-    NUMort, NXPts
+    Nrowa, Nrowb, Nrowy, nsafiw, nsafw, NSWot, NTApe, NTP, NUMort, NXPts
   REAL(8) :: A(Nrowa,*), AE, Alpha(*), B(Nrowb,*), Beta(*), C, &
     EPS, FOUru, PWCnd, PX, RE, SQOvfl, SRU, TND, &
     TOL, TWOu, URO, Work(*), X, XBEg, XENd, xl, XOP, &
@@ -55,10 +53,9 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,&
   !
   COMMON /DML8SZ/ C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
   COMMON /DML18J/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, &
-    NUMort, NFCc, ICOco
-  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
-    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, NUMort, NFCc, ICOco
+  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15), &
+    ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
   COMMON /DML17B/ KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, &
     K7, K8, K9, K10, K11, L1, L2, KKKint, LLLint
   !
@@ -114,9 +111,7 @@ SUBROUTINE DEXBVP(Y,Nrowy,Xpts,A,Nrowa,Alpha,B,Nrowb,Beta,Iflag,Work,&
         WRITE (xern2,'(I8)') nsafiw
         CALL XERMSG('SLATEC','DEXBVP',&
           'IN DBVSUP, PREDICTED STORAGE ALLOCATION FOR WORK ARRAY IS '&
-          //xern1//&
-          ', PREDICTED STORAGE ALLOCATION FOR IWORK ARRAY IS '//xern2,&
-          1,0)
+          //xern1//', PREDICTED STORAGE ALLOCATION FOR IWORK ARRAY IS '//xern2,1,0)
       ENDIF
       !
       Iwork(1) = MXNon

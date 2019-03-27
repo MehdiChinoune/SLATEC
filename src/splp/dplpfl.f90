@@ -40,8 +40,7 @@ SUBROUTINE DPLPFL(Mrelas,Nvars,Ienter,Ileave,Ibasis,Ind,Ibb,Theta,Dirnrm,&
   INTEGER i, Ienter, Ileave, j, Mrelas, n20005, n20036, Nvars
   INTEGER Ibasis(*), Ind(*), Ibb(*)
   REAL(8) :: Csc(*), Ww(*), Bl(*), Bu(*), Erp(*), Rprim(*), &
-    Primal(*), bound, Dirnrm, ratio, Rprnrm, Theta, &
-    zero
+    Primal(*), bound, Dirnrm, ratio, Rprnrm, Theta, zero
   LOGICAL Finite, Zerolv
   !* FIRST EXECUTABLE STATEMENT  DPLPFL
   zero = 0.D0

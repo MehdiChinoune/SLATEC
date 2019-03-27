@@ -70,10 +70,9 @@ SUBROUTINE DBSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   
   !
   INTEGER ileft, inev, K, Ldc, Lxi, N, nk
-  REAL(8) :: A, C, T, Work, Xi
+  REAL(8) :: A(*), C(Ldc,*), T(*), Work(*), Xi(*)
   !     DIMENSION T(N+K),XI(LXI+1),C(LDC,*)
   !     HERE, * = THE FINAL VALUE OF THE OUTPUT PARAMETER LXI.
-  DIMENSION T(*), A(*), Work(*), Xi(*), C(Ldc,*)
   !* FIRST EXECUTABLE STATEMENT  DBSPPP
   IF ( K<1 ) THEN
     CALL XERMSG('SLATEC','DBSPPP','K DOES NOT SATISFY K.GE.1',2,1)

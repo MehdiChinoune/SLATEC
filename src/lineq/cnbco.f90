@@ -142,8 +142,7 @@ SUBROUTINE CNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   COMPLEX CDOTC, ek, t, wk, wkm
   REAL anorm, s, SCASUM, sm, ynorm
-  INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, &
-    mm, nl, nu
+  INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, mm, nl, nu
   COMPLEX CSIGN1
   REAL CABS1
   !

@@ -42,8 +42,7 @@ SUBROUTINE DBSKES(Xnu,X,Nin,Bke)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   
   INTEGER i, iswtch, n, Nin
-  REAL(8) :: Xnu, X, Bke(*), bknu1, v, vincr, vend, alnbig, &
-    D1MACH, direct
+  REAL(8) :: Xnu, X, Bke(*), bknu1, v, vincr, vend, alnbig, D1MACH, direct
   SAVE alnbig
   DATA alnbig/0.D0/
   !* FIRST EXECUTABLE STATEMENT  DBSKES

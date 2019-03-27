@@ -90,16 +90,13 @@ CONTAINS
     !  Declare local variables.
     !
     REAL(8) :: con1r, con1i, con2r, con2i, con3r, con3i, cvr, &
-      cvi, cwr, cwi, cyr, cyi, wr, wi, yr, yi, zr, &
-      zi, zrr, zri
+      cvi, cwr, cwi, cyr, cyi, wr(20), wi(20), yr(20), yi(20), zr, zi, zrr, zri
     REAL(8) :: aa, ab, acw, acy, alim, arg, atol, av, azrr, &
       a1, a2, ct, c23, dig, elim, eps, er, ertol, &
       film, fnul, fpi, hpi, pi, pi3, ptr, r, rl, rm, &
-      rpi, rtpi, r1m4, r1m5, slak, spi, st, sti, str, &
-      t, tol, tpi, tpi3, ts
+      rpi, rtpi, r1m4, r1m5, slak, spi, st, sti, str, t(20), tol, tpi, tpi3, ts
     INTEGER i, icase, icl, ierr, il, ir, irb, irset, it, itl, k, &
-      kdo, keps, kode, k1, k2, lflg, nz1, nz2, nz3, nz4
-    DIMENSION kdo(20), keps(20), t(20), wr(20), wi(20), yr(20), yi(20)
+      kdo(20), keps(20), kode, k1, k2, lflg, nz1, nz2, nz3, nz4
     !
     !* FIRST EXECUTABLE STATEMENT  ZQCAI
     IF ( Kprint>=2 ) THEN
@@ -372,8 +369,7 @@ CONTAINS
                     WRITE (Lun,99013) wr(1), wi(1), wr(2), wi(2)
                     99013 FORMAT (31X,'W(1)=',2D12.4/31X,'W(2)=',2D12.4)
                   ELSE
-                    WRITE (Lun,99014) nz3, wr(1), wi(1), nz4, wr(2), &
-                      wi(2)
+                    WRITE (Lun,99014) nz3, wr(1), wi(1), nz4, wr(2), wi(2)
                     99014 FORMAT (20X,'NZ3=',I3,4X,'W(1)=',2D12.4/20X,'NZ4=',I3,4X,&
                       'W(2)=',2D12.4)
                   ENDIF
@@ -492,23 +488,18 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    REAL(8) :: cvr, cvi, cwr, cwi, cyr, cyi, wr, wi, yr, yi, &
+    REAL(8) :: cvr, cvi, cwr, cwi, cyr, cyi, wr(20), wi(20), yr(20), yi(20), &
       zr, zi, znr, zni
-    REAL(8) :: aa, ab, acw, acy, aer, alim, atol, av, aw, ay, &
-      az, ct, dig, elim, eps, er, ertol, film, fnu, &
-      fnul, fpi, hpi, pi, r, rfpi, rl, rm, r1m4, &
-      r1m5, r2, slak, st, t, tol, ts, xnu
-    INTEGER i, icase, ierr, il, ir, irb, it, itl, k, kdo, keps, &
-      kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz1, &
-      nz2, n1
-    DIMENSION aer(20), kdo(20), keps(20), t(20), wr(20), wi(20), xnu(20)&
-      , yr(20), yi(20)
+    REAL(8) :: aa, ab, acw, acy, aer(20), alim, atol, av, aw, ay, &
+      az, ct, dig, elim, eps, er, ertol, film, fnu, fnul, fpi, hpi, pi, r, rfpi, &
+      rl, rm, r1m4, r1m5, r2, slak, st, t(20), tol, ts, xnu(20)
+    INTEGER i, icase, ierr, il, ir, irb, it, itl, k, kdo(20), keps(20), &
+      kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz1, nz2, n1
     !
     !* FIRST EXECUTABLE STATEMENT  ZQCBH
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
-      99001 FORMAT (' QUICK CHECK ROUTINE FOR THE H BESSEL FUNCTIONS FROM ',&
-        'ZBESH'/)
+      99001 FORMAT (' QUICK CHECK ROUTINE FOR THE H BESSEL FUNCTIONS FROM ','ZBESH'/)
     ENDIF
     !-----------------------------------------------------------------------
     !     Set parameters related to machine constants.
@@ -751,8 +742,7 @@ CONTAINS
                         99012 FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2D12.4/11X,&
                           'NZ2=',I3,4X,'W(KK)=',2D12.4)
                         WRITE (Lun,99013) it, ir, icase
-                        99013 FORMAT ('    CASE:   IT=',I3,4X,'IR=',I3,4X,'ICASE=',&
-                          I3/)
+                        99013 FORMAT ('    CASE:   IT=',I3,4X,'IR=',I3,4X,'ICASE=',I3/)
                       ENDIF
                     ENDIF
                   ENDIF
@@ -869,18 +859,14 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    REAL(8) :: ckr, cki, coner, conei, csgnr, csgni, cwr, cwi, &
-      cyr, cyi, wr, wi, yr, yi, zr, zi, znr, zni, &
-      ztr, zti
-    REAL(8) :: aa, ab, aer, alim, arg, atol, aw, carg, ct, &
+    REAL(8) :: ckr(20), cki(20), coner, conei, csgnr, csgni, cwr, cwi, &
+      cyr, cyi, wr(20), wi(20), yr(20), yi(20), zr, zi, znr, zni, ztr, zti
+    REAL(8) :: aa, ab, aer(20), alim, arg, atol, aw, carg, ct, &
       dig, elim, eps, er, ertol, film, fnu, fnul, gnu, &
       hpi, pi, r, rl, rlt, rm, r1, r1m4, r1m5, r2, &
-      sarg, slak, st, sti, str, t, tol, ts, zscr, zzr
-    INTEGER i, icase, ierr, il, inu, iprnt, ir, it, itl, k, kdo, &
-      keps, kk, kode, k1, k2, lflg, mflg, n, nl, nzi, nzk, &
-      nz1, nz2, n1
-    DIMENSION aer(20), ckr(2), cki(2), kdo(20), keps(20), t(20), wr(20)&
-      , wi(20), yr(20), yi(20)
+      sarg, slak, st, sti, str, t(20), tol, ts, zscr, zzr
+    INTEGER i, icase, ierr, il, inu, iprnt, ir, it, itl, k, kdo(20), &
+      keps(20), kk, kode, k1, k2, lflg, mflg, n, nl, nzi, nzk, nz1, nz2, n1
     !
     !* FIRST EXECUTABLE STATEMENT  ZQCBI
     IF ( Kprint>=2 ) THEN
@@ -1056,8 +1042,7 @@ CONTAINS
                 znr = zr
                 zni = zi
                 IF ( zr>=0.0D0 ) THEN
-                  CALL ZWRSK(znr,zni,fnu,kode,n,wr,wi,nz2,ckr,cki,tol,elim,&
-                    alim)
+                  CALL ZWRSK(znr,zni,fnu,kode,n,wr,wi,nz2,ckr,cki,tol,elim,alim)
                   IF ( nz2/=0 ) CYCLE
                 ELSE
                   znr = -zr
@@ -1073,8 +1058,7 @@ CONTAINS
                     csgnr = -csgnr
                     csgni = -csgni
                   ENDIF
-                  CALL ZWRSK(znr,zni,fnu,kode,n,wr,wi,nz2,ckr,cki,tol,elim,&
-                    alim)
+                  CALL ZWRSK(znr,zni,fnu,kode,n,wr,wi,nz2,ckr,cki,tol,elim,alim)
                   IF ( nz2/=0 ) CYCLE
                   DO i = 1, n
                     str = wr(i)*csgnr - wi(i)*csgni
@@ -1152,8 +1136,7 @@ CONTAINS
                     99011 FORMAT ('   ERROR:  AER(K)=',4D12.4)
                     kk = MAX(nz1,nz2) + 1
                     kk = MIN(n,kk)
-                    WRITE (Lun,99012) nz1, yr(kk), yi(kk), nz2, wr(kk), &
-                      wi(kk)
+                    WRITE (Lun,99012) nz1, yr(kk), yi(kk), nz2, wr(kk), wi(kk)
                     99012 FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2D12.4,/11X,&
                       'NZ2=',I3,4X,'W(KK)=',2D12.4)
                     WRITE (Lun,99013) it, ir, icase
@@ -1409,16 +1392,12 @@ CONTAINS
     !  Declare local variables.
     !
     REAL(8) :: coe1r, coe1i, coe2r, coe2i, cwr, cwi, halfr, &
-      halfi, vr, vi, wr, wi, yr, yi, zr, zi
-    REAL(8) :: aa, ab, aer, ai, alim, ar, atol, av, cc, ct, &
+      halfi, vr(20), vi(20), wr(20), wi(20), yr(20), yi(20), zr, zi
+    REAL(8) :: aa, ab, aer(20), ai, alim, ar, atol, av, cc, ct, &
       dd, dig, elim, eps, er, ertol, film, fnu, fnul, &
-      gnu, hpi, pi, r, rl, rm, r1m4, r1m5, r2, slak, &
-      st, str, t, tol, ts, xnu
-    INTEGER i, icase, ierr, il, ir, irb, it, itl, k, kdo, keps, &
-      kk, kode, k1, k2, lflg, m, mflg, n, nl, nu, nul, nz, &
-      nz1, nz2
-    DIMENSION aer(20), kdo(20), keps(20), t(20), vr(20), vi(20), wr(20)&
-      , wi(20), xnu(20), yr(20), yi(20)
+      gnu, hpi, pi, r, rl, rm, r1m4, r1m5, r2, slak, st, str, t(20), tol, ts, xnu(20)
+    INTEGER i, icase, ierr, il, ir, irb, it, itl, k, kdo(20), keps(20), &
+      kk, kode, k1, k2, lflg, m, mflg, n, nl, nu, nul, nz, nz1, nz2
     !
     !* FIRST EXECUTABLE STATEMENT  ZQCBJ
     IF ( Kprint>=2 ) THEN
@@ -1823,16 +1802,12 @@ CONTAINS
     !  Declare local variables.
     !
     REAL(8) :: coner, conei, csgnr, csgni, cvr, cvi, cwr, cwi, &
-      cyr, cyi, wr, wi, yr, yi, zr, zi, znr, zni
-    REAL(8) :: aa, ab, aer, alim, arg, atol, axx, ct, dig, &
+      cyr, cyi, wr(20), wi(20), yr(20), yi(20), zr, zi, znr, zni
+    REAL(8) :: aa, ab, aer(20), alim, arg, atol, axx, ct, dig, &
       elim, eps, er, ertol, ffnu, film, fnu, fnul, &
-      hpi, pi, r, rl, rm, r1m4, r1m5, r2, slak, st, &
-      sti, str, t, tol, ts, xnu
-    INTEGER i, icase, ierr, ifnu, il, ir, irb, it, itl, k, kdo, &
-      keps, kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, &
-      nz1, nz2, n1
-    DIMENSION aer(20), kdo(20), keps(20), t(20), wr(20), wi(20), xnu(20)&
-      , yr(20), yi(20)
+      hpi, pi, r, rl, rm, r1m4, r1m5, r2, slak, st, sti, str, t(20), tol, ts, xnu(20)
+    INTEGER i, icase, ierr, ifnu, il, ir, irb, it, itl, k, kdo(20), &
+      keps(20), kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz1, nz2, n1
     !
     !* FIRST EXECUTABLE STATEMENT  ZQCBK
     IF ( Kprint>=2 ) THEN
@@ -2096,13 +2071,11 @@ CONTAINS
                       99011 FORMAT ('   ERROR:  AER(K)=',4D12.4)
                       kk = MAX(nz1,nz2) + 1
                       kk = MIN(n,kk)
-                      WRITE (Lun,99012) nz1, yr(kk), yi(kk), nz2, wr(kk), &
-                        wi(kk)
+                      WRITE (Lun,99012) nz1, yr(kk), yi(kk), nz2, wr(kk), wi(kk)
                       99012 FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2D12.4,/11X,&
                         'NZ2=',I3,4X,'W(KK)=',2D12.4)
                       WRITE (Lun,99013) it, ir, icase
-                      99013 FORMAT ('    CASE:   IT=',I3,4X,'IR=',I3,4X,'ICASE=',&
-                        I3/)
+                      99013 FORMAT ('    CASE:   IT=',I3,4X,'IR=',I3,4X,'ICASE=',I3/)
                     ENDIF
                   ENDIF
                 ENDIF
@@ -2221,22 +2194,17 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    REAL(8) :: cipr, cipi, coe1r, coe1i, coe2r, coe2i, csgnr, &
-      csgni, cspnr, cspni, cwr, cwi, cwrkr, cwrki, vr, &
-      vi, wr, wi, yr, yi, zr, zi, znr, zni
-    REAL(8) :: aa, ab, aer, ai, alim, ar, arg, atol, av, cc, &
+    REAL(8) :: coe1r, coe1i, coe2r, coe2i, csgnr, csgni, cspnr, cspni, cwr, &
+      cwi, cwrkr(20), cwrki(20), vr(20), vi(20), wr(20), wi(20), yr(20), yi(20), &
+      zr, zi, znr, zni
+    REAL(8) :: aa, ab, aer(20), ai, alim, ar, arg, atol, av, cc, &
       ct, dig, elim, eps, er, ertol, ffnu, film, fnu, &
       fnul, hpi, pi, ptr, r, rhpi, rl, rm, r1m4, &
-      r1m5, r2, slak, st, sti, str, t, tol, ts, xnu
+      r1m5, r2, slak, st, sti, str, t(20), tol, ts, xnu(20)
     INTEGER i, icase, ierr, ifnu, il, ir, irb, it, itl, i4, k, &
-      kdo, keps, kk, kode, k1, k2, lflg, mflg, n, nl, nu, &
-      nul, nz, nz1, nz2
-    DIMENSION aer(20), cipr(4), cipi(4), cwrkr(20), cwrki(20), kdo(20), &
-      keps(20), t(20), vr(20), vi(20), wr(20), wi(20), xnu(20), &
-      yr(20), yi(20)
-    DATA cipr(1), cipi(1), cipr(2), cipi(2), cipr(3), cipi(3), cipr(4), &
-      cipi(4)/1.0D0, 0.0D0, 0.0D0, 1.0D0, -1.0D0, 0.0D0, 0.0D0, &
-      -1.0D0/
+      kdo(20), keps(20), kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz, nz1, nz2
+    REAL(8), PARAMETER :: cipr(4) = [ 1.0D0, 0.0D0, -1.0D0, 0.0D0 ]
+    REAL(8), PARAMETER :: cipi(4) = [ 0.0D0, 1.0D0, 0.0D0, -1.0D0 ]
     !
     !* FIRST EXECUTABLE STATEMENT  ZQCBY
     IF ( Kprint>=2 ) THEN
@@ -2522,8 +2490,7 @@ CONTAINS
                         IF ( Kprint>=3 ) THEN
                           WRITE (Lun,99012) (aer(k),k=1,n)
                           99012 FORMAT ('   ERROR:   AER(K)=',4D12.4)
-                          WRITE (Lun,99013) zr, zi, coe1r, coe1i, coe2r, &
-                            coe2r
+                          WRITE (Lun,99013) zr, zi, coe1r, coe1i, coe2r, coe2r
                           99013 FORMAT (12X,'Z=',2D12.4/12X,'COE1=',2D12.4,3X,&
                             'COE2=',2D12.4)
                           kk = MAX(nz1,nz2) + 1

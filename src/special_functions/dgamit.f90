@@ -58,20 +58,19 @@ REAL(8) FUNCTION DGAMIT(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  
+
   REAL(8) :: A, X, aeps, ainta, algap1, alneps, alng, alx, &
     bot, h, sga, sgngam, sqeps, t, D1MACH, DGAMR, &
     D9GMIT, D9LGIT, DLNGAM, D9LGIC
-  LOGICAL first
-  SAVE alneps, sqeps, bot, first
-  DATA first/.TRUE./
+  SAVE alneps, sqeps, bot
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DGAMIT
   IF ( first ) THEN
     alneps = -LOG(D1MACH(3))
     sqeps = SQRT(D1MACH(4))
     bot = LOG(D1MACH(1))
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   IF ( X<0.D0 ) CALL XERMSG('SLATEC','DGAMIT','X IS NEGATIVE',2,2)
   !

@@ -174,8 +174,7 @@ SUBROUTINE DPCHFD(N,X,F,D,Incfd,Skip,Ne,Xe,Fe,De,Ierr)
       !
       !     N.LT.2 RETURN.
       Ierr = -1
-      CALL XERMSG('SLATEC','DPCHFD','NUMBER OF DATA POINTS LESS THAN TWO',&
-        Ierr,1)
+      CALL XERMSG('SLATEC','DPCHFD','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
       RETURN
     ELSEIF ( Incfd<1 ) THEN
       !

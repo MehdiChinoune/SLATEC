@@ -29,9 +29,8 @@ SUBROUTINE DXPMU(Nu1,Nu2,Mu1,Mu2,Theta,X,Sx,Id,Pqa,Ipqa,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   
-  INTEGER Id, Ierror, ip0, Ipqa, j, mu, Mu1, Mu2, n
-  REAL(8) :: Pqa, Nu1, Nu2, p0, X, Sx, Theta, x1, x2
-  DIMENSION Pqa(*), Ipqa(*)
+  INTEGER Id, Ierror, ip0, Ipqa(*), j, mu, Mu1, Mu2, n
+  REAL(8) :: Pqa(*), Nu1, Nu2, p0, X, Sx, Theta, x1, x2
   !
   !        CALL DXPQNU TO OBTAIN P(-MU2,NU,X)
   !

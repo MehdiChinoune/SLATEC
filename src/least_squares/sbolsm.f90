@@ -904,8 +904,7 @@ SUBROUTINE SBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       IF ( mval>=nsetb.AND.mval<mrows ) THEN
         CALL SROTG(W(nsetb,nsetb),W(mval+1,nsetb),sc,ss)
         W(mval+1,nsetb) = ZERO
-        CALL SROT(Ncols-nsetb+1,W(nsetb,nsetb+1),Mdw,W(mval+1,nsetb+1),Mdw,&
-          sc,ss)
+        CALL SROT(Ncols-nsetb+1,W(nsetb,nsetb+1),Mdw,W(mval+1,nsetb+1),Mdw,sc,ss)
       ENDIF
     ENDIF
     !

@@ -74,8 +74,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   !   900510  Fixed an error message.  (RWC)
 
   INTEGER Ipivot(*), Itype(*), L, Ma, Mdw, Mme, Mode, N
-  REAL D(*), H(*), Prgopt(*), Rnorm, Scale(*), Temp(*), W(Mdw,*), &
-    Wd(*), X(*), Z(*)
+  REAL D(*), H(*), Prgopt(*), Rnorm, Scale(*), Temp(*), W(Mdw,*), Wd(*), X(*), Z(*)
   !
   INTEGER, EXTERNAL :: ISAMAX
   REAL, EXTERNAL :: R1MACH, SASUM, SNRM2
@@ -86,10 +85,10 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   INTEGER i, idope(3), imax, isol, itemp, iter, itmax, iwmax, j, &
     jcon, jp, key, krank, l1, last, link, m, me, next, niv, &
     nlink, nopt, nsoln, ntimes
-  LOGICAL done, feasbl, first, hitcon, pos
+  LOGICAL done, feasbl, hitcon, pos
   !
-  SAVE srelpr, first
-  DATA first/.TRUE./
+  SAVE srelpr
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  WNLSM
   !
   !     Initialize variables.
@@ -131,8 +130,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   last = 1
   link = INT( Prgopt(1) )
   IF ( link<=0.OR.link>nlink ) THEN
-    CALL XERMSG('SLATEC','WNLSM','WNNLS, THE OPTION VECTOR IS UNDEFINED',3,&
-      1)
+    CALL XERMSG('SLATEC','WNLSM','WNNLS, THE OPTION VECTOR IS UNDEFINED',3,1)
     RETURN
   ENDIF
   DO
@@ -141,8 +139,7 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
       ntimes = ntimes + 1
       IF ( ntimes>nopt ) THEN
         CALL XERMSG('SLATEC','WNLSM',&
-          'WNNLS, THE LINKS IN THE OPTION VECTOR ARE CYCLING.',3,&
-          1)
+          'WNNLS, THE LINKS IN THE OPTION VECTOR ARE CYCLING.',3, 1)
         RETURN
       ENDIF
       !

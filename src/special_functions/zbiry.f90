@@ -145,15 +145,14 @@ SUBROUTINE ZBIRY(Zr,Zi,Id,Kode,Bir,Bii,Ierr)
   
   !     COMPLEX BI,CONE,CSQ,CY,S1,S2,TRM1,TRM2,Z,ZTA,Z3
   REAL(8) :: aa, ad, ak, alim, atrm, az, az3, bb, Bii, Bir, &
-    bk, cc, ck, coef, conei, coner, csqi, csqr, cyi, &
-    cyr, c1, c2, dig, dk, d1, d2, eaa, elim, fid, &
+    bk, cc, ck, coef, conei, coner, csqi, csqr, cyi(2), &
+    cyr(2), c1, c2, dig, dk, d1, d2, eaa, elim, fid, &
     fmr, fnu, fnul, pi, rl, r1m5, sfac, sti, str, &
     s1i, s1r, s2i, s2r, tol, trm1i, trm1r, trm2i, &
-    trm2r, tth, Zi, Zr, ztai, ztar, z3i, z3r, &
-    D1MACH, ZABS
+    trm2r, tth, Zi, Zr, ztai, ztar, z3i, z3r
   INTEGER Id, Ierr, k, Kode, k1, k2, nz, I1MACH
-  DIMENSION cyr(2), cyi(2)
-  EXTERNAL :: ZABS, ZSQRT
+  REAL(8), EXTERNAL :: ZABS, D1MACH
+  EXTERNAL :: ZSQRT
   DATA tth, c1, c2, coef, pi/6.66666666666666667D-01, &
     6.14926627446000736D-01, 4.48288357353826359D-01, &
     5.77350269189625765D-01, 3.14159265358979324D+00/

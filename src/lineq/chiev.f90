@@ -143,8 +143,7 @@ SUBROUTINE CHIEV(A,Lda,N,E,V,Ldv,Work,Job,Info)
     DO j = 1, N
       k = (j-1)*(mdim+2) + 1
       IF ( A(k+1)/=0.0 )&
-        CALL XERMSG('SLATEC','CHIEV','NONREAL ELEMENT ON DIAGONAL OF A',&
-        6,1)
+        CALL XERMSG('SLATEC','CHIEV','NONREAL ELEMENT ON DIAGONAL OF A',6,1)
       IF ( A(k+1)/=0.0 ) RETURN
       CALL SCOPY(N-j+1,A(k),mdim,A(k),2)
       CALL SCOPYM(N-j+1,A(k+1),mdim,A(k+1),2)

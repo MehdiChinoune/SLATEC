@@ -183,8 +183,7 @@ SUBROUTINE CNBIR(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   !
-  INTEGER Lda, N, Itask, Ind, Iwork(*), info, j, k, kk, l, m, &
-    Ml, Mu, nc
+  INTEGER Lda, N, Itask, Ind, Iwork(*), info, j, k, kk, l, m, Ml, Mu, nc
   COMPLEX Abe(Lda,*), V(*), Work(N,*), CDCDOT
   REAL xnorm, dnorm, SCASUM, R1MACH
   CHARACTER(8) :: xern1, xern2

@@ -95,15 +95,13 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   !
-  INTEGER i, ialp, in, inlim, is, i1, k, kk, km, Kode, kt, N, &
-    nn, ns, Nz
+  INTEGER i, ialp, in, inlim, is, i1, k, kk, km, Kode, kt, N, nn, ns, Nz
   INTEGER I1MACH
   REAL ain, ak, akm, Alpha, ans, ap, arg, atol, tolln, dfn, dtm, &
     dx, earg, elim, etx, flgik, fn, fnf, fni, fnp1, fnu, gln, &
-    ra, rttpi, s, sx, sxo2, s1, s2, t, ta, tb, temp, tfn, &
-    tm, tol, trx, t2, X, xo2, xo2l, Y, z
+    ra, rttpi, s, sx, sxo2, s1, s2, t, ta, tb, temp(3), tfn, &
+    tm, tol, trx, t2, X, xo2, xo2l, Y(*), z
   REAL R1MACH, ALNGAM
-  DIMENSION Y(*), temp(3)
   SAVE rttpi, inlim
   DATA rttpi/3.98942280401433E-01/
   DATA inlim/80/
@@ -188,8 +186,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
         earg = rttpi/SQRT(X)
         IF ( Kode==2 ) GOTO 1000
         IF ( X>elim ) THEN
-          CALL XERMSG('SLATEC','BESI','OVERFLOW, X TOO LARGE FOR KODE = 1.',&
-            6,1)
+          CALL XERMSG('SLATEC','BESI','OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
           RETURN
         ELSE
           earg = earg*EXP(X)
@@ -210,8 +207,7 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
         IF ( Kode==2 ) GOTO 100
         IF ( Alpha<1.0E0 ) THEN
           IF ( X<=elim ) GOTO 100
-          CALL XERMSG('SLATEC','BESI','OVERFLOW, X TOO LARGE FOR KODE = 1.',&
-            6,1)
+          CALL XERMSG('SLATEC','BESI','OVERFLOW, X TOO LARGE FOR KODE = 1.',6,1)
           RETURN
         ELSE
           z = X/Alpha

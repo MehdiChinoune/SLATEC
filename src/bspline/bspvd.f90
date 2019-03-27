@@ -86,12 +86,11 @@ SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   INTEGER iwork, Ldvnik
   INTEGER i, ideriv, Ileft, ipkmd, j, jj, jlow, jm, jp1mid, K, &
     kmd, kp1, l, ldummy, m, mhigh, Nderiv
-  REAL factor, fkmd, T, v, Vnikx, Work, X
+  REAL factor, fkmd, T(*), v, Vnikx(Ldvnik,*), Work(*), X
   !     DIMENSION T(ILEFT+K), WORK((K+1)*(K+2)/2)
   !     A(I,J) = WORK(I+J*(J+1)/2),  I=1,J+1  J=1,K-1
   !     A(I,K) = W0RK(I+K*(K-1)/2)  I=1.K
   !     WORK(1) AND WORK((K+1)*(K+2)/2) ARE NOT USED.
-  DIMENSION T(*), Vnikx(Ldvnik,*), Work(*)
   !* FIRST EXECUTABLE STATEMENT  BSPVD
   IF ( K<1 ) THEN
     !
@@ -99,8 +98,7 @@ SUBROUTINE BSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
     CALL XERMSG('SLATEC','BSPVD','K DOES NOT SATISFY K.GE.1',2,1)
     RETURN
   ELSEIF ( Nderiv<1.OR.Nderiv>K ) THEN
-    CALL XERMSG('SLATEC','BSPVD','NDERIV DOES NOT SATISFY 1.LE.NDERIV.LE.K',&
-      2,1)
+    CALL XERMSG('SLATEC','BSPVD','NDERIV DOES NOT SATISFY 1.LE.NDERIV.LE.K',2,1)
     RETURN
   ELSEIF ( Ldvnik<K ) THEN
     CALL XERMSG('SLATEC','BSPVD','LDVNIK DOES NOT SATISFY LDVNIK.GE.K',2,1)

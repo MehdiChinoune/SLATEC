@@ -36,8 +36,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   INTEGER i, ideg, Idimq, ip, ip1, ipstor, irreg, Istag, j, jdeg, &
     jm1, jm2, jm3, jp1, jp2, jp3, jsh, jsp, jst, jstsav
   INTEGER kr, krpi, l, lr, m, Mr, n, nodd, noddpr, Nr, nun
-  COMPLEX Ba, Bb, Bc, Q, B, W, D, Tcos, P, t
-  DIMENSION Q(Idimq,*), Ba(*), Bb(*), Bc(*), Tcos(*), B(*), D(*), W(*), P(*)
+  COMPLEX Ba(*), Bb(*), Bc(*), Q(Idimq,*), B(*), W(*), D(*), Tcos(*), P(*), t
   !* FIRST EXECUTABLE STATEMENT  CMPOSD
   m = Mr
   n = Nr
@@ -198,8 +197,7 @@ SUBROUTINE CMPOSD(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
     ENDIF
     IF ( noddpr==2 ) THEN
       DO i = 1, m
-        B(i) = .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3)) + Q(i,jp2) - Q(i,jp1)&
-          + Q(i,j)
+        B(i) = .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3)) + Q(i,jp2) - Q(i,jp1) + Q(i,j)
       ENDDO
     ELSE
       DO i = 1, m

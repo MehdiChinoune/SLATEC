@@ -34,14 +34,13 @@ COMPLEX FUNCTION CATAN(Z)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  
+
   INTEGER i, nterms
   REAL pi2, r, R1MACH, r2, rmax, rmin, sqeps, twoi, x, xans, y, yans
   COMPLEX Z, z2
-  LOGICAL first
-  SAVE pi2, nterms, sqeps, rmin, rmax, first
+  SAVE pi2, nterms, sqeps, rmin, rmax
   DATA pi2/1.57079632679489661923E0/
-  DATA first/.TRUE./
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  CATAN
   IF ( first ) THEN
     ! NTERMS = LOG(EPS)/LOG(RBND) WHERE RBND = 0.1
@@ -49,8 +48,8 @@ COMPLEX FUNCTION CATAN(Z)
     sqeps = SQRT(R1MACH(4))
     rmin = SQRT(3.0*R1MACH(3))
     rmax = 1.0/R1MACH(3)
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   r = ABS(Z)
   IF ( r<=0.1 ) THEN
@@ -76,8 +75,7 @@ COMPLEX FUNCTION CATAN(Z)
     x = REAL(Z)
     y = AIMAG(Z)
     r2 = r*r
-    IF ( r2==1.0.AND.x==0.0 ) CALL XERMSG('SLATEC','CATAN','Z IS +I OR -I',&
-      2,2)
+    IF ( r2==1.0.AND.x==0.0 ) CALL XERMSG('SLATEC','CATAN','Z IS +I OR -I',2,2)
     IF ( ABS(r2-1.0)<=sqeps ) THEN
       IF ( ABS(CMPLX(1.0,0.0)+Z*Z)<sqeps ) CALL XERMSG('SLATEC','CATAN',&
         'ANSWER LT HALF PRECISION, Z**2 CLOSE TO -1',1,1)

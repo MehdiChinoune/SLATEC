@@ -37,21 +37,20 @@ REAL FUNCTION R9PAK(Y,N)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   901009  Routine used I1MACH(7) where it should use I1MACH(10),
   !           Corrected (RWC)
-  
+
   REAL a1n210, a1n2b, R1MACH, Y
   INTEGER I1MACH, N, nmax, nmin, nsum, ny
-  LOGICAL first
-  SAVE nmin, nmax, a1n210, first
+  SAVE nmin, nmax, a1n210
   DATA a1n210/3.321928094887362E0/
-  DATA first/.TRUE./
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9PAK
   IF ( first ) THEN
     a1n2b = 1.0
     IF ( I1MACH(10)/=2 ) a1n2b = R1MACH(5)*a1n210
     nmin = INT( a1n2b*I1MACH(12) )
     nmax = INT( a1n2b*I1MACH(13) )
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   CALL R9UPAK(Y,R9PAK,ny)
   !
@@ -62,8 +61,7 @@ REAL FUNCTION R9PAK(Y,N)
     R9PAK = 0.0
     RETURN
   ELSE
-    IF ( nsum>nmax ) CALL XERMSG('SLATEC','R9PAK','PACKED NUMBER OVERFLOWS',&
-      2,2)
+    IF ( nsum>nmax ) CALL XERMSG('SLATEC','R9PAK','PACKED NUMBER OVERFLOWS',2,2)
     !
     IF ( nsum==0 ) RETURN
     IF ( nsum>0 ) THEN

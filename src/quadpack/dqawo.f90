@@ -208,11 +208,9 @@ SUBROUTINE DQAWO(F,A,B,Omega,Integr,Epsabs,Epsrel,Result,Abserr,Neval,Ier,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
   !
-  REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Omega, Result, Work
-  INTEGER Ier, Integr, Iwork, Last, limit, Lenw, Leniw, lvl, l1, &
+  REAL(8) :: A, Abserr, B, Epsabs, Epsrel, Omega, Result, Work(*)
+  INTEGER Ier, Integr, Iwork(*), Last, limit, Lenw, Leniw, lvl, l1, &
     l2, l3, l4, Maxp1, momcom, Neval
-  !
-  DIMENSION Iwork(*), Work(*)
   !
   REAL(8), EXTERNAL :: F
   !

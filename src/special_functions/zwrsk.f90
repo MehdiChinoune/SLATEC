@@ -24,15 +24,13 @@ SUBROUTINE ZWRSK(Zrr,Zri,Fnu,Kode,N,Yr,Yi,Nz,Cwr,Cwi,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !     COMPLEX CINU,CSCL,CT,CW,C1,C2,RCT,ST,Y,ZR
-  REAL(8) :: act, acw, Alim, ascle, cinui, cinur, csclr, cti, &
-    ctr, Cwi, Cwr, c1i, c1r, c2i, c2r, Elim, Fnu, &
-    pti, ptr, ract, sti, str, Tol, Yi, Yr, Zri, &
-    Zrr, ZABS, D1MACH
   INTEGER i, Kode, N, nw, Nz
-  DIMENSION Yr(N), Yi(N), Cwr(2), Cwi(2)
-  EXTERNAL :: ZABS
+  REAL(8) :: act, acw, Alim, ascle, cinui, cinur, csclr, cti, &
+    ctr, Cwi(2), Cwr(2), c1i, c1r, c2i, c2r, Elim, Fnu, &
+    pti, ptr, ract, sti, str, Tol, Yi(N), Yr(N), Zri, Zrr
+  REAL(8), EXTERNAL :: ZABS, D1MACH
   !* FIRST EXECUTABLE STATEMENT  ZWRSK
   !-----------------------------------------------------------------------
   !     I(FNU+I-1,Z) BY BACKWARD RECURRENCE FOR RATIOS

@@ -170,10 +170,9 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
   !   900510  Fixed an error message.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL A, Ae, B, eps, R1MACH, Re, Rnorm, W
   INTEGER i, Info, it, Key, Krank, Ksure, Liw, Lw, M, Mda, Mdb, &
     Mode, N, n1, n2, n3, n4, n5, Nb, Np
-  DIMENSION A(Mda,*), B(Mdb,*), Re(*), Ae(*), Rnorm(*), W(*)
+  REAL A(Mda,*), Ae(*), B(Mdb,*), eps, R1MACH, Re(*), Rnorm(*), W(*)
   INTEGER Iwork(*)
   !
   !* FIRST EXECUTABLE STATEMENT  LLSIA
@@ -188,8 +187,7 @@ SUBROUTINE LLSIA(A,Mda,M,N,B,Mdb,Nb,Re,Ae,Key,Mode,Np,Krank,Ksure,Rnorm,W,&
       !     ERROR MESSAGES
       !
       CALL XERMSG('SLATEC','LLSIA',&
-        'SOLUTION ONLY (INFO=1) BUT NO RIGHT HAND SIDE (NB=0)',1,&
-        0)
+        'SOLUTION ONLY (INFO=1) BUT NO RIGHT HAND SIDE (NB=0)',1,0)
       RETURN
     ELSEIF ( M<1 ) THEN
       CALL XERMSG('SLATEC','LLSIA','M.LT.1',2,1)

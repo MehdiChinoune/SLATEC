@@ -401,13 +401,12 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   REAL enorm, fnorm, gam, rb, rn, rnmax, size, sn, snmax, srelpr, &
     t, tau, uj, up, vj, xnorm, xnrme
   INTEGER i, imax, j, jp1, k, key, kranke, last, lchk, link, m, &
-    mapke1, mdeqc, mend, mep1, n1, n2, next, nlink, nopt, &
-    np1, ntimes
-  LOGICAL cov, first
+    mapke1, mdeqc, mend, mep1, n1, n2, next, nlink, nopt, np1, ntimes
+  LOGICAL cov
   CHARACTER(8) :: xern1, xern2, xern3, xern4
-  SAVE first, srelpr
+  SAVE srelpr
   !
-  DATA first/.TRUE./
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  LSEI
   !
   !     Set the nominal tolerance used in the code for the equality
@@ -425,9 +424,9 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
     WRITE (xern2,'(I8)') Me
     WRITE (xern3,'(I8)') Ma
     WRITE (xern4,'(I8)') Mg
-    CALL XERMSG('SLATEC','LSEI','ALL OF THE VARIABLES N, ME, MA, MG MUST BE .GE. 0$$ENTERED ROUTINE WITH$$N  = '//&
-      xern1//'$$ME = '//xern2//'$$MA = '//xern3//'$$MG = '//xern4,&
-      2,1)
+    CALL XERMSG('SLATEC','LSEI', &
+      'ALL OF THE VARIABLES N, ME, MA, MG MUST BE .GE. 0$$ENTERED ROUTINE WITH$$N  = '//&
+      xern1//'$$ME = '//xern2//'$$MA = '//xern3//'$$MG = '//xern4,2,1)
     RETURN
   ENDIF
   !

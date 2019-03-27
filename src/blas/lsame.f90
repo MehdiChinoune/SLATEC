@@ -49,18 +49,17 @@ LOGICAL FUNCTION LSAME(Ca,Cb)
   !           lines were modified.  (BKS)
   !   910607  Modified to handle ASCII and EBCDIC codes.  (WRB)
   !   930201  Tests for equality and equivalence combined.  (RWC and WRB)
-  
+
   !     .. Scalar Arguments ..
   CHARACTER Ca*1, Cb*1
   !     .. Local Scalars ..
   INTEGER ioff
-  LOGICAL first
   !     .. Intrinsic Functions ..
   INTRINSIC ICHAR
   !     .. Save statement ..
-  SAVE first, ioff
+  SAVE ioff
   !     .. Data statements ..
-  DATA first/.TRUE./
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  LSAME
   IF ( first ) ioff = ICHAR('a') - ICHAR('A')
   !

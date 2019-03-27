@@ -412,13 +412,12 @@ SUBROUTINE SEPX4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920122  Minor corrections and modifications to prologue.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  REAL A, Alpha, B, Bda, Bdb, Bdc, Bdd, Beta, C, D, Grhs, Pertrb, Usol, W
+
   INTEGER i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
     i9, Idmn, Ierror, Iorder, k, l, length, linput
+  REAL A, Alpha, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), Beta, C, D, Grhs(Idmn,*), &
+    Pertrb, Usol(Idmn,*), W(*)
   INTEGER log2n, loutpt, M, Mbdcnd, N, Nbdcnd
-  DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
-  DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   EXTERNAL :: COFX
   !* FIRST EXECUTABLE STATEMENT  SEPX4
   CALL CHKPR4(Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,Idmn,Ierror)

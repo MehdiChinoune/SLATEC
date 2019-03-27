@@ -56,8 +56,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !   910408  Updated the AUTHOR section.  (WRB)
   
   !
-  INTEGER i, Is(*), iw, ix, j, l, M, Mda, Mode, modew, n, N1, &
-    N2, np1
+  INTEGER i, Is(*), iw, ix, j, l, M, Mda, Mode, modew, n, N1, N2, np1
   REAL(8) :: A(Mda,*), DDOT, DNRM2, fac, one, Prgopt(*), rnorm, &
     sc, Wnorm, Ws(*), X(*), ynorm, zero
   SAVE zero, one, fac
@@ -128,8 +127,7 @@ SUBROUTINE DLPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
       !              DWNNLS( ).
       Is(1) = 0
       Is(2) = 0
-      CALL DWNNLS(Ws,np1,N2,np1-N2,M,0,Prgopt,Ws(ix),rnorm,modew,Is,Ws(iw+1)&
-        )
+      CALL DWNNLS(Ws,np1,N2,np1-N2,M,0,Prgopt,Ws(ix),rnorm,modew,Is,Ws(iw+1))
       !
       !              COMPUTE THE COMPONENTS OF THE SOLN DENOTED ABOVE BY W.
       sc = one - DDOT(M,A(1,np1),1,Ws(ix),1)

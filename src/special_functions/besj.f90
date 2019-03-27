@@ -88,21 +88,19 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
     km, kt, N, nn, ns, Nz
   REAL ak, akm, Alpha, ans, ap, arg, coef, dalpha, dfn, dtm, &
     earg, elim1, etx, fidal, flgjy, fn, fnf, fni, fnp1, fnu, &
-    fnulim, gln, pdf, pidt, pp, rden, relb, rttp, rtwo, rtx, &
-    rzden, s, sa, sb, sxo2, s1, s2, t, ta, tau, tb, temp, &
-    tfn, tm, tol, tolln, trx, tx, t1, t2, wk, X, xo2, xo2l, &
-    Y, rtol, slim
-  SAVE rtwo, pdf, rttp, pidt, pp, inlim, fnulim
+    gln, pdf, pidt, rden, relb, rttp, rtwo, rtx, &
+    rzden, s, sa, sb, sxo2, s1, s2, t, ta, tau, tb, temp(3), &
+    tfn, tm, tol, tolln, trx, tx, t1, t2, wk(7), X, xo2, xo2l, Y(*), rtol, slim
+  SAVE rtwo, pdf, rttp, pidt, inlim
   INTEGER, EXTERNAL :: I1MACH
   REAL, EXTERNAL :: R1MACH, ALNGAM
   EXTERNAL :: JAIRY
-  DIMENSION Y(*), temp(3), fnulim(2), pp(4), wk(7)
   DATA rtwo, pdf, rttp, pidt/1.34839972492648E+00, &
     7.85398163397448E-01, 7.97884560802865E-01, 1.57079632679490E+00/
-  DATA pp(1), pp(2), pp(3), pp(4)/8.72909153935547E+00, &
-    2.65693932265030E-01, 1.24578576865586E-01, 7.70133747430388E-04/
+  REAL, PARAMETER :: pp(4) = [ 8.72909153935547E+00, 2.65693932265030E-01, &
+    1.24578576865586E-01, 7.70133747430388E-04 ]
   DATA inlim/150/
-  DATA fnulim(1), fnulim(2)/100.0E0, 60.0E0/
+  REAL, PARAMETER :: fnulim(2) = [ 100.0E0, 60.0E0 ]
   !* FIRST EXECUTABLE STATEMENT  BESJ
   Nz = 0
   kt = 1
@@ -257,8 +255,7 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
           gln = wk(3) + wk(2)
           IF ( wk(6)>30.0E0 ) THEN
             ta = 0.5E0*tolln/wk(4)
-            ta = ((0.0493827160E0*ta-0.1111111111E0)*ta+0.6666666667E0)&
-              *ta*wk(6)
+            ta = ((0.0493827160E0*ta-0.1111111111E0)*ta+0.6666666667E0)*ta*wk(6)
             IF ( wk(1)<0.10E0 ) THEN
               tb = (1.259921049E0+(0.1679894730E0+0.0887944358E0*wk(1))*wk(1))&
                 /wk(7)

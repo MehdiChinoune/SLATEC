@@ -30,8 +30,7 @@ REAL(8) FUNCTION DVNRMS(N,V,W)
   !   900328  Added TYPE section.  (WRB)
   
   INTEGER i, N
-  REAL(8) :: sum, V, W
-  DIMENSION V(*), W(*)
+  REAL(8) :: sum, V(*), W(*)
   !* FIRST EXECUTABLE STATEMENT  DVNRMS
   sum = 0.0D0
   DO i = 1, N

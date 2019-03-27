@@ -159,12 +159,10 @@ SUBROUTINE CBESJ(Z,Fnu,Kode,N,Cy,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
   
   !
-  COMPLEX ci, csgn, Cy, Z, zn
+  INTEGER i, Ierr, inu, inuh, ir, Kode, k1, k2, N, nl, Nz, I1MACH, k
+  COMPLEX ci, csgn, Cy(N), Z, zn
   REAL aa, alim, arg, dig, elim, Fnu, fnul, hpi, rl, r1, r1m5, &
     r2, tol, yy, R1MACH, az, fn, bb, ascle, rtol, atol
-  INTEGER i, Ierr, inu, inuh, ir, Kode, k1, k2, N, nl, Nz, &
-    I1MACH, k
-  DIMENSION Cy(N)
   DATA hpi/1.57079632679489662E0/
   !
   !* FIRST EXECUTABLE STATEMENT  CBESJ

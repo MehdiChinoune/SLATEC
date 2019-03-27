@@ -228,8 +228,7 @@ SUBROUTINE DPIGMR(N,R0,Sr,Sz,Jscal,Maxl,Maxlp1,Kmp,Nrsts,Jpre,MATVEC,&
     Maxlp1, N, Nelt, Nmsl, Nrmax, Nrsts
   !     .. Array Arguments ..
   REAL(8) :: A(Nelt), B(*), Dl(*), Hes(Maxlp1,*), Q(*), R0(*), &
-    Rpar(*), Sr(*), Sz(*), V(N,*), Wk(*), X(*), Xl(*), &
-    Z(*)
+    Rpar(*), Sr(*), Sz(*), V(N,*), Wk(*), X(*), Xl(*), Z(*)
   INTEGER Ia(Nelt), Ipar(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MATVEC, MSOLVE

@@ -44,14 +44,12 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     INTEGER Ipass, Kprint, nz
-    INTEGER i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, &
-      mm, n, ndel, nn
+    INTEGER i, ierr, iflg, ix, i1m12, j, k, kode, Lun, m, mdel, mm, n, ndel, nn
     INTEGER I1MACH
-    REAL(8) :: aix, er, tol, v, x, xinc, y
+    REAL(8) :: aix, er, tol, v(1), x, xinc, y(10)
     REAL(8) :: D1MACH
-    DIMENSION v(1), y(10)
     !* FIRST EXECUTABLE STATEMENT  DQCKIN
     tol = 1000.0D0*MAX(D1MACH(4),1.0D-18)
     iflg = 0
@@ -173,12 +171,11 @@ CONTAINS
     !   890911  Removed unnecessary intrinsics.  (WRB)
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     INTEGER Ipass, Kprint
     INTEGER i, ierr, iflg, ix, kode, Lun, m, n, nm, nn, nz
-    REAL(8) :: er, euler, psi1, psi2, r1m4, s, tol, x
+    REAL(8) :: er, euler, psi1(3), psi2(20), r1m4, s, tol, x
     REAL(8) :: D1MACH
-    DIMENSION psi1(3), psi2(20)
     DATA euler/0.5772156649015328606D0/
     !* FIRST EXECUTABLE STATEMENT  DQCPSI
     r1m4 = D1MACH(4)
@@ -203,8 +200,7 @@ CONTAINS
               IF ( Kprint>=2 ) WRITE (Lun,99004)
             ENDIF
             iflg = iflg + 1
-            IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), er, &
-              kode, n
+            IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), er, kode, n
             IF ( iflg>200 ) GOTO 100
           ENDIF
           s = s + 1.0D0/x
@@ -248,8 +244,7 @@ CONTAINS
                   IF ( Kprint>=2 ) WRITE (Lun,99004)
                 ENDIF
                 iflg = iflg + 1
-                IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), &
-                  er, kode, nm
+                IF ( Kprint>=2 ) WRITE (Lun,99005) x, psi1(1), psi2(i), er, kode, nm
               ENDIF
             ENDDO
           ENDDO
@@ -325,7 +320,7 @@ PROGRAM TEST08
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST08

@@ -69,9 +69,7 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   INTEGER i, Incx, Incy, kx, ky, N, nsteps
-  REAL(8) :: dflag, dh12, dh22, Dx, two, z, dh11, dh21, &
-    Dparam, Dy, w, zero
-  DIMENSION Dx(*), Dy(*), Dparam(5)
+  REAL(8) :: dflag, dh12, dh22, Dx(*), two, z, dh11, dh21, Dparam(5), Dy(*), w, zero
   SAVE zero, two
   DATA zero, two/0.0D0, 2.0D0/
   !* FIRST EXECUTABLE STATEMENT  DROTM

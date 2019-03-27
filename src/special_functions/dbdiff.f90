@@ -30,8 +30,7 @@ SUBROUTINE DBDIFF(L,V)
   
   !
   INTEGER i, j, k, L
-  REAL(8) :: V
-  DIMENSION V(*)
+  REAL(8) :: V(*)
   !* FIRST EXECUTABLE STATEMENT  DBDIFF
   IF ( L==1 ) RETURN
   DO j = 2, L

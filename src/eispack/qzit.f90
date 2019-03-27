@@ -108,12 +108,10 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   !
-  INTEGER i, j, k, l, N, en, k1, k2, ld, ll, l1, na, Nm, ish, &
-    itn, its, km1, lm1
+  INTEGER i, j, k, l, N, en, k1, k2, ld, ll, l1, na, Nm, ish, itn, its, km1, lm1
   INTEGER enm2, Ierr, lor1, enorn
   REAL A(Nm,*), B(Nm,*), Z(Nm,*)
-  REAL r, s, t, a1, a2, a3, ep, sh, u1, u2, u3, v1, v2, v3, &
-    ani
+  REAL r, s, t, a1, a2, a3, ep, sh, u1, u2, u3, v1, v2, v3, ani
   REAL a11, a12, a21, a22, a33, a34, a43, a44, bni, b11
   REAL b12, b22, b33, b34, b44, epsa, epsb, Eps1, anorm, bnorm
   LOGICAL Matz, notlas
@@ -227,8 +225,7 @@ SUBROUTINE QZIT(Nm,N,A,B,Eps1,Matz,Z,Ierr)
             a12 = A(l,l1)/b22
             a22 = A(l1,l1)/b22
             b12 = B(l,l1)/b22
-            a1 = ((a33-a11)*(a44-a11)-a34*a43+a43*b34*a11)/a21 + a12 - &
-              a11*b12
+            a1 = ((a33-a11)*(a44-a11)-a34*a43+a43*b34*a11)/a21 + a12 - a11*b12
             a2 = (a22-a11) - a21*b12 - (a33-a11) - (a44-a11) + a43*b34
             a3 = A(l1+1,l1)/b22
             EXIT

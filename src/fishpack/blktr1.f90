@@ -34,15 +34,14 @@ SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  REAL Am, An, B, Bm, Bn, Cm, Cn, CNV, dum, EPS, W1, W2, W3, Wd, Wu, Ww, Y
+
   INTEGER i, i1, i2, i3, i4, Idimy, idxa, idxc, if, ifd, IK, &
     im1, im2, im3, imi1, imi2, ip, ip1, ip2, ip3
+  REAL Am(*), An(*), B(*), Bm(*), Bn(*), Cm(*), Cn(*), CNV, dum, EPS, W1(*), &
+    W2(*), W3(*), Wd(*), Wu(*), Ww(*), Y(Idimy,*)
   INTEGER ipi1, ipi2, ipi3, ir, irm1, iz, izr, j, K, kdo, l, ll, &
     M, N, na, nc, NCMplx, NM, nm1, nm2
   INTEGER nm3, np, np1, np2, np3, NPP, nz
-  DIMENSION An(*), Bn(*), Cn(*), Am(*), Bm(*), Cm(*), B(*), W1(*), &
-    W2(*), W3(*), Wd(*), Ww(*), Wu(*), Y(Idimy,*)
   COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
   !* FIRST EXECUTABLE STATEMENT  BLKTR1
   kdo = K - 1
@@ -71,8 +70,7 @@ SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
           CALL INDXB(ipi2,ir,ip2,np2)
           CALL INDXB(ipi1,irm1,ip1,np1)
           CALL INDXB(ipi3,irm1,ip3,np3)
-          CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),W3,W1,M,Am,Bm,Cm,Wd,&
-            Ww,Wu)
+          CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),W3,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
           IF ( ipi2<=NM ) THEN
             CALL PRDCT(np2,B(ip2),np1,B(ip1),np3,B(ip3),0,dum,Y(1,ipi2),W3,&
               M,Am,Bm,Cm,Wd,Ww,Wu)
@@ -101,8 +99,7 @@ SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
     CALL INDXB(i-i1,K-2,im1,nm1)
     CALL INDXB(i+i1,K-2,ip1,np1)
     CALL INDXB(i,K-1,iz,nz)
-    CALL PRDCT(nz,B(iz),nm1,B(im1),np1,B(ip1),0,dum,Y(1,i),W1,M,Am,Bm,Cm,Wd,&
-      Ww,Wu)
+    CALL PRDCT(nz,B(iz),nm1,B(im1),np1,B(ip1),0,dum,Y(1,i),W1,M,Am,Bm,Cm,Wd,Ww,Wu)
     izr = i
     DO j = 1, M
       W2(j) = W1(j)
@@ -117,13 +114,11 @@ SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
       CALL INDXB(i,ir,iz,nz)
       CALL INDXB(i-i1,ir-1,im1,nm1)
       CALL INDXB(i+i1,ir-1,ip1,np1)
-      CALL PRDCT(np1,B(ip1),0,dum,0,dum,nc,Cn(idxc),W1,W1,M,Am,Bm,Cm,Wd,Ww,&
-        Wu)
+      CALL PRDCT(np1,B(ip1),0,dum,0,dum,nc,Cn(idxc),W1,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
       DO j = 1, M
         W1(j) = Y(j,i) + W1(j)
       ENDDO
-      CALL PRDCT(nz,B(iz),nm1,B(im1),np1,B(ip1),0,dum,W1,W1,M,Am,Bm,Cm,Wd,&
-        Ww,Wu)
+      CALL PRDCT(nz,B(iz),nm1,B(im1),np1,B(ip1),0,dum,W1,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
     ENDDO
     DO ll = 2, K
       l = K - ll + 1
@@ -139,8 +134,7 @@ SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
           CALL INDXB(i,ir,iz,nz)
           CALL INDXB(i-i1,ir-1,im1,nm1)
           CALL INDXB(i+i1,ir-1,ip1,np1)
-          CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),W2,W2,M,Am,Bm,Cm,Wd,&
-            Ww,Wu)
+          CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),W2,W2,M,Am,Bm,Cm,Wd,Ww,Wu)
           DO j = 1, M
             W2(j) = Y(j,i) + W2(j)
           ENDDO
@@ -180,10 +174,8 @@ SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
       CALL INDXB(i-i2,ir,im2,nm2)
       CALL INDXB(i-i2-i1,ir-1,im3,nm3)
       CALL INDXB(i-i1,ir-1,im1,nm1)
-      CALL PRDCT(nm2,B(im2),nm3,B(im3),nm1,B(im1),0,dum,W1,W1,M,Am,Bm,Cm,Wd,&
-        Ww,Wu)
-      CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),W1,W1,M,Am,Bm,Cm,Wd,Ww,&
-        Wu)
+      CALL PRDCT(nm2,B(im2),nm3,B(im3),nm1,B(im1),0,dum,W1,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
+      CALL PRDCT(nm1,B(im1),0,dum,0,dum,na,An(idxa),W1,W1,M,Am,Bm,Cm,Wd,Ww,Wu)
       DO j = 1, M
         Y(j,i) = Y(j,i) - W1(j)
       ENDDO
@@ -208,8 +200,7 @@ SUBROUTINE BLKTR1(N,An,Bn,Cn,M,Am,Bm,Cm,Idimy,Y,B,W1,W2,W3,Wd,Ww,Wu,PRDCT,CPRDCT
           CALL INDXB(ipi3,irm1,ip3,np3)
           CALL PRDCT(np2,B(ip2),np1,B(ip1),np3,B(ip3),0,dum,W2,W2,M,Am,Bm,&
             Cm,Wd,Ww,Wu)
-          CALL PRDCT(np1,B(ip1),0,dum,0,dum,nc,Cn(idxc),W2,W2,M,Am,Bm,Cm,Wd,&
-            Ww,Wu)
+          CALL PRDCT(np1,B(ip1),0,dum,0,dum,nc,Cn(idxc),W2,W2,M,Am,Bm,Cm,Wd,Ww,Wu)
           DO j = 1, M
             Y(j,i) = Y(j,i) - W2(j)
           ENDDO

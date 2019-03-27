@@ -406,10 +406,10 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL A, B, Bda, Bdb, Bdc, Bdd, C, D, dum, Elmbda, F, Pertrb, pi, PIMACH, W
   INTEGER Idimf, ierr1, Ierror, Intl, iwan, iwbm, iwbn, iwcm, iwcn, &
     iwrsq, iwsnth, iwwrk, M, Mbdcnd, N, Nbdcnd
-  DIMENSION F(Idimf,*), Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
+  REAL A, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, dum, Elmbda, F(Idimf,*), &
+    Pertrb, pi, PIMACH, W(*)
   !* FIRST EXECUTABLE STATEMENT  HSTCSP
   pi = PIMACH(dum)
   !
@@ -424,8 +424,7 @@ SUBROUTINE HSTCSP(Intl,A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   IF ( Nbdcnd<1.OR.Nbdcnd>6 ) Ierror = 6
   IF ( N<5 ) Ierror = 7
   IF ( (Nbdcnd==5.OR.Nbdcnd==6).AND.&
-    (Mbdcnd==1.OR.Mbdcnd==2.OR.Mbdcnd==4.OR.Mbdcnd==5.OR.Mbdcnd==7) )&
-    Ierror = 8
+    (Mbdcnd==1.OR.Mbdcnd==2.OR.Mbdcnd==4.OR.Mbdcnd==5.OR.Mbdcnd==7) ) Ierror = 8
   IF ( C>0..AND.Nbdcnd>=5 ) Ierror = 9
   IF ( Idimf<M ) Ierror = 11
   IF ( M<5 ) Ierror = 12

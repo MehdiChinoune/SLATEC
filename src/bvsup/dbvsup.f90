@@ -445,8 +445,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !         ARGUMENTS PREVALENT IN THIS MODULAR STRUCTURE
   !
   COMMON /DML18J/ AED, RED, TOL, NXPtsd, NICd, NOPg, MXNon, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivd, &
-    NUMort, NFCc, ICOco
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivd, NUMort, NFCc, ICOco
   COMMON /DML17B/ KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, &
     K7, K8, K9, K10, K11, L1, L2, KKKint, LLLint
   !
@@ -456,8 +455,8 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !         FOR THE ORTHONORMALIZATION TESTING PROCEDURE AND A BACKUP
   !         RESTARTING CAPABILITY.
   !
-  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
-    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
+  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15), &
+    ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
   !
   !     ******************************************************************
   !         THIS COMMON BLOCK CONTAINS THE MACHINE DEPENDENT PARAMETERS
@@ -605,8 +604,7 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   kkkws = MAX(kkksud,kkksvc,KKKint,kkkcof)
   llliws = MAX(lllsud,lllsvc,LLLint,lllcof)
   !
-  NEEdw = kkkyhp + kkku + kkkv + kkkcoe + kkks + kkksto + kkkg + KKKzpw +&
-    kkkws
+  NEEdw = kkkyhp + kkku + kkkv + kkkcoe + kkks + kkksto + kkkg + KKKzpw + kkkws
   NEEdiw = 17 + lllip + llliws
   !              *********************************************************
   !                  COMPUTE THE NUMBER OF POSSIBLE ORTHONORMALIZATIONS
@@ -658,10 +656,10 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     WRITE (xern2,'(I8)') KKKzpw
     WRITE (xern3,'(I8)') NEEdiw
     WRITE (xern4,'(I8)') lllip
-    CALL XERMSG('SLATEC','DBVSUP','REQUIRED STORAGE FOR WORK ARRAY IS '//&
-      xern1//' + '//xern2//&
-      '*(EXPECTED NUMBER OF ORTHONORMALIZATIONS) $$REQUIRED STORAGE FOR IWORK ARRAY IS '//xern3//' + '//&
-      xern4//'*(EXPECTED NUMBER OF ORTHONORMALIZATIONS)',1,0)
+    CALL XERMSG('SLATEC','DBVSUP','REQUIRED STORAGE FOR WORK ARRAY IS '&
+      //xern1//' + '//xern2//&
+      '*(EXPECTED NUMBER OF ORTHONORMALIZATIONS) $$REQUIRED STORAGE FOR IWORK ARRAY IS '&
+      //xern3//' + '//xern4//'*(EXPECTED NUMBER OF ORTHONORMALIZATIONS)',1,0)
   ELSE
     WRITE (xern1,'(I8)') NEEdw
     WRITE (xern2,'(I8)') NEEdiw

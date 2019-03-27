@@ -53,11 +53,9 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   
   !
   INTEGER i, ic, IER, Iflag, IOWnd, IOWns, j, jb, jb2, jj, jj1, &
-    jp1, JSTart, K, KFLag, L, MAXord, METh, MITer, N, NFE, &
-    NJE, NQ, NQU, NST, Nyh
-  REAL(8) :: c, Dky, EL0, H, HMIn, HMXi, HU, r, ROWnd, &
-    ROWns, s, T, TN, tp, UROund, Yh
-  DIMENSION Yh(Nyh,*), Dky(*)
+    jp1, JSTart, K, KFLag, L, MAXord, METh, MITer, N, NFE, NJE, NQ, NQU, NST, Nyh
+  REAL(8) :: c, Dky(*), EL0, H, HMIn, HMXi, HU, r, ROWnd, &
+    ROWns, s, T, TN, tp, UROund, Yh(Nyh,*)
   COMMON /DDEBD1/ ROWnd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
     UROund, IOWnd(14), IOWns(6), IER, JSTart, KFLag, L, &
     METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU

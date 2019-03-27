@@ -29,15 +29,14 @@ SUBROUTINE CACON(Z,Fnu,Kode,Mr,N,Y,Nz,Rl,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
-  COMPLEX ck, cone, cs, cscl, cscr, csgn, cspn, css, csr, c1, c2, &
-    rz, sc1, sc2, st, s1, s2, Y, Z, zn, cy
-  REAL Alim, arg, ascle, as2, bscle, bry, cpn, c1i, c1m, c1r, &
-    Elim, fmr, Fnu, Fnul, pi, Rl, sgn, spn, Tol, yy, R1MACH
+
   INTEGER i, inu, iuf, kflag, Kode, Mr, N, nn, nw, Nz
-  DIMENSION Y(N), cy(2), css(3), csr(3), bry(3)
-  DATA pi/3.14159265358979324E0/
-  DATA cone/(1.0E0,0.0E0)/
+  COMPLEX ck, cs, cscl, cscr, csgn, cspn, css(3), csr(3), c1, c2, &
+    rz, sc1, sc2, st, s1, s2, Y(N), Z, zn, cy(2)
+  REAL Alim, arg, ascle, as2, bscle, bry(3), cpn, c1i, c1m, c1r, &
+    Elim, fmr, Fnu, Fnul, pi, Rl, sgn, spn, Tol, yy, R1MACH
+  DATA pi /3.14159265358979324E0/
+  COMPLEX, PARAMETER :: cone = (1.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CACON
   Nz = 0
   zn = -Z

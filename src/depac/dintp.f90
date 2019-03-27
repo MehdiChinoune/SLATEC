@@ -63,16 +63,10 @@ SUBROUTINE DINTP(X,Y,Xout,Yout,Ypout,Neqn,Kold,Phi,Ivc,Iv,Kgi,Gi,Alpha,Og,&
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   !
-  INTEGER i, iq, Iv, Ivc, iw, j, jq, Kgi, Kold, kp1, kp2, l, m, &
-    Neqn
-  REAL(8) :: alp, Alpha, c, g, gdi, gdif, Gi, gamma, h, hi, &
-    hmu, Og, Ow, Ox, Oy, Phi, rmu, sigma, temp1, &
-    temp2, temp3, w, X, xi, xim1, xiq, Xout, Y, &
-    Yout, Ypout
-  !
-  DIMENSION Y(*), Yout(*), Ypout(*), Phi(Neqn,16), Oy(*)
-  DIMENSION g(13), c(13), w(13), Og(13), Ow(12), Alpha(12), Gi(11), &
-    Iv(10)
+  INTEGER i, iq, Iv(10), Ivc, iw, j, jq, Kgi, Kold, kp1, kp2, l, m, Neqn
+  REAL(8) :: alp, Alpha(12), c(13), g(13), gdi, gdif, Gi(11), gamma, h, hi, &
+    hmu, Og(13), Ow(12), Ox, Oy(*), Phi(Neqn,16), rmu, sigma, temp1, &
+    temp2, temp3, w(13), X, xi, xim1, xiq, Xout, Y(*), Yout(*), Ypout(*)
   !
   !* FIRST EXECUTABLE STATEMENT  DINTP
   kp1 = Kold + 1

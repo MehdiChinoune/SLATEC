@@ -66,11 +66,10 @@ SUBROUTINE PVALUE(L,Nder,X,Yfit,Yp,A)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL A, cc, dif, val, X, Yfit, Yp
+  REAL A(*), cc, dif, val, X, Yfit, Yp(*)
   INTEGER i, ic, ilo, in, inp1, iup, k1, k1i, k2, k3, k3p1, &
     k3pn, k4, k4p1, k4pn, kc, L, lm1, lp1, maxord
   INTEGER n, Nder, ndo, ndp1, nord
-  DIMENSION Yp(*), A(*)
   CHARACTER(8) :: xern1, xern2
   !* FIRST EXECUTABLE STATEMENT  PVALUE
   IF ( L<0 ) THEN

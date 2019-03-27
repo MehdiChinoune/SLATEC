@@ -288,30 +288,26 @@ CONTAINS
     REAL(8) :: D1MACH, DNRM2, rnorm, rnormc, sr
     INTEGER i, ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
-    REAL(8) :: d(6,5), w(11,11), bl(5,2), bu(5,2), x(30), rw(55), &
-      xtrue(9)
-    REAL(8) :: c(5,5)
-    REAL(8) :: bl1(10), bu1(10)
+    REAL(8) :: w(11,11), x(30), rw(55), bl1(10), bu1(10)
     INTEGER ind(10), iw(20), iopt(40)
-    REAL(8) :: rhs(6,2)
     CHARACTER(4) :: msg
     !
-    DATA ((c(i,j),i=1,5),j=1,5)/1.D0, 10.D0, 4.D0, 8.D0, 1.D0, 1.D0, &
-      10.D0, 2.D0, -1.D0, 1.D0, 1.D0, -3.D0, -3.D0, 2.D0, 1.D0, &
-      1.D0, 5.D0, 5.D0, 5.D0, 1.D0, 1.D0, 4.D0, -1.D0, -3.D0, &
-      1.D0/
-    DATA ((d(i,j),i=1,6),j=1,5)/ - 74.D0, 14.D0, 66.D0, -12.D0, 3.D0, &
-      4.D0, 80.D0, -69.D0, -72.D0, 66.D0, 8.D0, -12.D0, 18.D0, &
-      21.D0, -5.D0, -30.D0, -7.D0, 4.D0, -11.D0, 28.D0, 7.D0, &
-      -23.D0, -4.D0, 4.D0, -4.D0, 0.D0, 1.D0, 3.D0, 1.D0, 0.D0/
-    DATA ((bl(i,j),i=1,5),j=1,2)/1.D0, 0.D0, -1.D0, 1.D0, -4.D0, -1.D0, &
-      0.D0, -3.D0, 1.D0, -6.D0/
-    DATA ((bu(i,j),i=1,5),j=1,2)/3.D0, 2.D0, 1.D0, 3.D0, -2.D0, 3.D0, &
-      4.D0, 1.D0, 5.D0, -2.D0/
-    DATA ((rhs(i,j),i=1,6),j=1,2)/51.D0, -61.D0, -56.D0, 69.D0, 10.D0, &
-      -12.D0, -5.D0, -9.D0, 708.D0, 4165.D0, -13266.D0, 8409.D0/
-    DATA (xtrue(j),j=1,9)/1.D0, 2.D0, -1.D0, 3.D0, -4.D0, 1.D0, 32.D0, &
-      30.D0, 31.D0/
+    REAL(8), PARAMETER :: c(5,5) = RESHAPE( [ 1.D0, 10.D0, 4.D0, 8.D0, 1.D0, &
+      1.D0, 10.D0, 2.D0, -1.D0, 1.D0,  1.D0, -3.D0, -3.D0, 2.D0, 1.D0, &
+      1.D0, 5.D0, 5.D0, 5.D0, 1.D0,    1.D0, 4.D0, -1.D0, -3.D0, 1.D0 ], [5,5] )
+    REAL(8), PARAMETER :: d(6,5) = RESHAPE( [-74.D0, 14.D0, 66.D0,-12.D0, 3.D0, 4.D0, &
+      80.D0, -69.D0, -72.D0, 66.D0, 8.D0, -12.D0, &
+      18.D0, 21.D0, -5.D0, -30.D0, -7.D0, 4.D0, &
+      -11.D0, 28.D0, 7.D0, -23.D0, -4.D0, 4.D0, &
+      -4.D0, 0.D0, 1.D0, 3.D0, 1.D0, 0.D0 ], [6,5] )
+    REAL(8), PARAMETER :: bl(5,2) = RESHAPE( [ 1.D0, 0.D0, -1.D0, 1.D0, -4.D0, &
+      -1.D0, 0.D0, -3.D0, 1.D0, -6.D0 ], [5,2] )
+    REAL(8), PARAMETER :: bu(5,2) = RESHAPE( [ 3.D0, 2.D0, 1.D0, 3.D0, -2.D0, &
+      3.D0, 4.D0, 1.D0, 5.D0, -2.D0 ], [5,2] )
+    REAL(8), PARAMETER :: rhs(6,2) = RESHAPE( [ 51.D0,-61.D0,-56.D0, 69.D0, 10.D0,-12.D0, &
+      -5.D0, -9.D0, 708.D0, 4165.D0, -13266.D0, 8409.D0 ], [6,2] )
+    REAL(8), PARAMETER :: xtrue(9) = [ 1.D0, 2.D0, -1.D0, 3.D0, -4.D0, 1.D0, &
+      32.D0, 30.D0, 31.D0 ]
     !* FIRST EXECUTABLE STATEMENT  DBOCQX
     mdw = 11
     mrows = 6
@@ -417,8 +413,7 @@ CONTAINS
     !          THE VALUE OF IPASS=0 SAYS THAT DBOCLS HAS NOT PASSED.
     !
     IF ( Kprint>=3 ) WRITE (Lun,&
-      '('' IPASS VALUE. (A 1 IS GOOD, 0 IS BAD.)'',I4)')&
-      Ipass
+      '('' IPASS VALUE. (A 1 IS GOOD, 0 IS BAD.)'',I4)') Ipass
     IF ( Kprint>=2.AND.Ipass==0 ) WRITE (Lun,99002)
     !
     99002 FORMAT (' ERROR IN DBOCLS OR DBOLS')

@@ -37,21 +37,19 @@ REAL FUNCTION R9CHU(A,B,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  
-  REAL A, aa, ab, anbn, B, bb, bp, c2, ct1, ct2, ct3, d1z, eps, &
+
+  REAL A, aa(4), ab, anbn, B, bb(4), bp, c2, ct1, ct2, ct3, d1z, eps, &
     g1, g2, g3, R1MACH, sab, sqeps
   REAL x2i1, Z
   INTEGER i, j
-  DIMENSION aa(4), bb(4)
-  LOGICAL first
-  SAVE eps, sqeps, first
-  DATA first/.TRUE./
+  SAVE eps, sqeps
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9CHU
   IF ( first ) THEN
     eps = 4.0*R1MACH(4)
     sqeps = SQRT(R1MACH(4))
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   bp = 1.0 + A - B
   ab = A*bp

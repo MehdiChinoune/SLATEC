@@ -46,10 +46,8 @@ SUBROUTINE CDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,&
   !   900329  Initial submission to SLATEC.
 
   INTEGER i, iflag, Impl, info, Iswflg, Jstate, Jtask, Matdim, &
-    Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mu, N, Nde, &
-    Nfe, Nq, Nwait
-  COMPLEX A(Matdim,*), Fac(*), Save1(*), Save2(*), Y(*), Yh(N,*), &
-    Ywt(*)
+    Maxord, Mint, Miter, Ml, Mntold, Mtrold, Mu, N, Nde, Nfe, Nq, Nwait
+  COMPLEX A(Matdim,*), Fac(*), Save1(*), Save2(*), Y(*), Yh(N,*), Ywt(*)
   REAL El(13,12), Eps, H, Hmax, Hold, oldl0, Rc, Rh, Rmax, &
     SCNRM2, sum, T, Tq(3,12), Trend, Uround
   INTEGER Ipvt(*)

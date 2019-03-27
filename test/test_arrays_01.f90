@@ -32,9 +32,8 @@ CONTAINS
     INTEGER , PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL fail
-    INTEGER x(N,NTEST), xs(N,NTEST), y(N), yc(N)
-    INTEGER ix(N,NTEST), iy(N), kflag(NTEST), Kprint, Lun, Ipass, j, &
-      i, kabs, ier, nerr, NUMXER, nn, kkflag
+    INTEGER y(N), yc(N), iy(N)
+    INTEGER Kprint, Lun, Ipass, j, i, kabs, ier, nerr, NUMXER, nn, kkflag
     !
     !     ---------
     !     TEST DATA
@@ -44,26 +43,19 @@ CONTAINS
     !         XS  = TEST VECTOR IN SORTED ORDER
     !         IX  = PERMUTATION VECTOR, I.E.  X(IX(J)) = XS(J)
     !
-    DATA kflag(1)/2/
-    DATA (x(i,1),i=1,N)/36, 54, -1, 29, 1, 80, 98, 99, 55/
-    DATA (ix(i,1),i=1,N)/3, 5, 4, 1, 2, 9, 6, 7, 8/
-    DATA (xs(i,1),i=1,N)/ - 1, 1, 29, 36, 54, 55, 80, 98, 99/
-    !
-    DATA kflag(2)/ - 1/
-    DATA (x(i,2),i=1,N)/1, 2, 3, 4, 5, 6, 7, 8, 9/
-    DATA (ix(i,2),i=1,N)/9, 8, 7, 6, 5, 4, 3, 2, 1/
-    DATA (xs(i,2),i=1,N)/9, 8, 7, 6, 5, 4, 3, 2, 1/
-    !
-    DATA kflag(3)/ - 2/
-    DATA (x(i,3),i=1,N)/ - 9, -8, -7, -6, -5, -4, -3, -2, -1/
-    DATA (ix(i,3),i=1,N)/9, 8, 7, 6, 5, 4, 3, 2, 1/
-    DATA (xs(i,3),i=1,N)/ - 1, -2, -3, -4, -5, -6, -7, -8, -9/
-    !
-    DATA kflag(4)/1/
-    DATA (x(i,4),i=1,N)/36, 54, -1, 29, 1, 80, 98, 99, 55/
-    DATA (ix(i,4),i=1,N)/3, 5, 4, 1, 2, 9, 6, 7, 8/
-    DATA (xs(i,4),i=1,N)/ - 1, 1, 29, 36, 54, 55, 80, 98, 99/
-    !
+    INTEGER, PARAMETER :: kflag(NTEST) = [ 2, -1, -2, 1 ]
+    INTEGER, PARAMETER :: x(N,NTEST) = RESHAPE( [ 36, 54, -1, 29, 1, 80, 98, 99, 55, &
+      1, 2, 3, 4, 5, 6, 7, 8, 9, &
+      -9, -8, -7, -6, -5, -4, -3, -2, -1, &
+      36, 54, -1, 29, 1, 80, 98, 99, 55 ], [N,NTEST] )
+    INTEGER, PARAMETER :: ix(N,NTEST) = RESHAPE( [ 3, 5, 4, 1, 2, 9, 6, 7, 8, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      3, 5, 4, 1, 2, 9, 6, 7, 8], [N,NTEST] )
+    INTEGER, PARAMETER :: xs(N,NTEST) = RESHAPE( [ -1, 1, 29, 36, 54, 55, 80, 98, 99, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      -1, -2, -3, -4, -5, -6, -7, -8, -9, &
+      -1, 1, 29, 36, 54, 55, 80, 98, 99], [N,NTEST] )
     !* FIRST EXECUTABLE STATEMENT  ISRTQC
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001) '================='
@@ -344,9 +336,9 @@ CONTAINS
     !
     LOGICAL fail
     CHARACTER :: short
-    CHARACTER(2) :: x(N,NTEST), xs(N,NTEST), y(N), work(N)
-    INTEGER ix(N,NTEST), iy(N), kflag(NTEST), Kprint, Lun, Ipass, j, &
-      i, kabs, ier, nerr, NUMXER, nn, kkflag, strbeg, strend
+    CHARACTER(2) :: y(N), work(N)
+    INTEGER iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, NUMXER, nn, &
+      kkflag, strbeg, strend
     !
     !     ---------
     !     TEST DATA
@@ -356,33 +348,21 @@ CONTAINS
     !         XS  = TEST VECTOR IN SORTED ORDER
     !         IX  = PERMUTATION VECTOR, I.E.  X(IX(J)) = XS(J)
     !
-    DATA kflag(1)/2/
-    DATA (x(i,1),i=1,N)/'AC', 'AZ', 'AD', 'AA', 'AB', 'ZZ', 'ZA', &
-      'ZX', 'ZY'/
-    DATA (ix(i,1),i=1,N)/4, 5, 1, 3, 2, 7, 8, 9, 6/
-    DATA (xs(i,1),i=1,N)/'AA', 'AB', 'AC', 'AD', 'AZ', 'ZA', 'ZX', &
-      'ZY', 'ZZ'/
-    !
-    DATA kflag(2)/ - 1/
-    DATA (x(i,2),i=1,N)/'AA', 'BB', 'CC', 'DD', 'EE', 'FF', 'GG', &
-      'HH', 'II'/
-    DATA (ix(i,2),i=1,N)/9, 8, 7, 6, 5, 4, 3, 2, 1/
-    DATA (xs(i,2),i=1,N)/'II', 'HH', 'GG', 'FF', 'EE', 'DD', 'CC', &
-      'BB', 'AA'/
-    !
-    DATA kflag(3)/ - 2/
-    DATA (x(i,3),i=1,N)/'AA', 'BB', 'CC', 'DD', 'EE', 'FF', 'GG', &
-      'HH', 'II'/
-    DATA (ix(i,3),i=1,N)/9, 8, 7, 6, 5, 4, 3, 2, 1/
-    DATA (xs(i,3),i=1,N)/'II', 'HH', 'GG', 'FF', 'EE', 'DD', 'CC', &
-      'BB', 'AA'/
-    !
-    DATA kflag(4)/1/
-    DATA (x(i,4),i=1,N)/'AC', 'AZ', 'AD', 'AA', 'AB', 'ZZ', 'ZA', &
-      'ZX', 'ZY'/
-    DATA (ix(i,4),i=1,N)/4, 5, 1, 3, 2, 7, 8, 9, 6/
-    DATA (xs(i,4),i=1,N)/'AA', 'AB', 'AC', 'AD', 'AZ', 'ZA', 'ZX', &
-      'ZY', 'ZZ'/
+    INTEGER, PARAMETER :: kflag(NTEST) = [ 2, -1, -2, 1 ]
+    CHARACTER(2), PARAMETER :: x(N,NTEST) = RESHAPE( [ &
+      'AC', 'AZ', 'AD', 'AA', 'AB', 'ZZ', 'ZA', 'ZX', 'ZY', &
+      'AA', 'BB', 'CC', 'DD', 'EE', 'FF', 'GG', 'HH', 'II', &
+      'AA', 'BB', 'CC', 'DD', 'EE', 'FF', 'GG', 'HH', 'II', &
+      'AC', 'AZ', 'AD', 'AA', 'AB', 'ZZ', 'ZA', 'ZX', 'ZY' ], [N,NTEST] )
+    INTEGER, PARAMETER :: ix(N,NTEST) = RESHAPE( [ 4, 5, 1, 3, 2, 7, 8, 9, 6, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      4, 5, 1, 3, 2, 7, 8, 9, 6], [N,NTEST] )
+    CHARACTER(2), PARAMETER :: xs(N,NTEST) = RESHAPE( [ &
+      'AA', 'AB', 'AC', 'AD', 'AZ', 'ZA', 'ZX', 'ZY', 'ZZ', &
+      'II', 'HH', 'GG', 'FF', 'EE', 'DD', 'CC', 'BB', 'AA', &
+      'II', 'HH', 'GG', 'FF', 'EE', 'DD', 'CC', 'BB', 'AA', &
+      'AA', 'AB', 'AC', 'AD', 'AZ', 'ZA', 'ZX', 'ZY', 'ZZ'], [N,NTEST] )
     !
     !* FIRST EXECUTABLE STATEMENT  HSRTQC
     IF ( Kprint>=2 ) THEN
@@ -646,9 +626,8 @@ CONTAINS
     INTEGER , PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL fail
-    REAL x(N,NTEST), xs(N,NTEST), y(N), yc(N)
-    INTEGER ix(N,NTEST), iy(N), kflag(NTEST), Kprint, Lun, Ipass, j, &
-      i, kabs, ier, nerr, NUMXER, nn, kkflag
+    REAL y(N), yc(N)
+    INTEGER iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, NUMXER, nn, kkflag
     !
     !     ---------
     !     TEST DATA
@@ -658,26 +637,21 @@ CONTAINS
     !         XS  = TEST VECTOR IN SORTED ORDER
     !         IX  = PERMUTATION VECTOR, I.E.  X(IX(J)) = XS(J)
     !
-    DATA kflag(1)/2/
-    DATA (x(i,1),i=1,N)/36., 54., -1., 29., 1., 80., 98., 99., 55./
-    DATA (ix(i,1),i=1,N)/3, 5, 4, 1, 2, 9, 6, 7, 8/
-    DATA (xs(i,1),i=1,N)/ - 1., 1., 29., 36., 54., 55., 80., 98., 99./
-    !
-    DATA kflag(2)/ - 1/
-    DATA (x(i,2),i=1,N)/1., 2., 3., 4., 5., 6., 7., 8., 9./
-    DATA (ix(i,2),i=1,N)/9, 8, 7, 6, 5, 4, 3, 2, 1/
-    DATA (xs(i,2),i=1,N)/9., 8., 7., 6., 5., 4., 3., 2., 1./
-    !
-    DATA kflag(3)/ - 2/
-    DATA (x(i,3),i=1,N)/ - 9., -8., -7., -6., -5., -4., -3., -2., -1./
-    DATA (ix(i,3),i=1,N)/9, 8, 7, 6, 5, 4, 3, 2, 1/
-    DATA (xs(i,3),i=1,N)/ - 1., -2., -3., -4., -5., -6., -7., -8., &
-      -9./
-    !
-    DATA kflag(4)/1/
-    DATA (x(i,4),i=1,N)/36., 54., -1., 29., 1., 80., 98., 99., 55./
-    DATA (ix(i,4),i=1,N)/3, 5, 4, 1, 2, 9, 6, 7, 8/
-    DATA (xs(i,4),i=1,N)/ - 1., 1., 29., 36., 54., 55., 80., 98., 99./
+    INTEGER, PARAMETER :: kflag(NTEST) = [ 2, -1, -2, 1 ]
+    REAL, PARAMETER :: x(N,NTEST) = RESHAPE( [ &
+      36., 54., -1., 29., 1., 80., 98., 99., 55., &
+      1., 2., 3., 4., 5., 6., 7., 8., 9. ,&
+      -9., -8., -7., -6., -5., -4., -3., -2., -1., &
+      36., 54., -1., 29., 1., 80., 98., 99., 55. ], [N,NTEST] )
+    INTEGER, PARAMETER :: ix(N,NTEST) = RESHAPE( [ 3, 5, 4, 1, 2, 9, 6, 7, 8, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      3, 5, 4, 1, 2, 9, 6, 7, 8 ], [N,NTEST] )
+    REAL, PARAMETER :: xs(N,NTEST) = RESHAPE( [ &
+      -1., 1., 29., 36., 54., 55., 80., 98., 99., &
+      9., 8., 7., 6., 5., 4., 3., 2., 1., &
+      -1., -2., -3., -4., -5., -6., -7., -8., -9., &
+      -1., 1., 29., 36., 54., 55., 80., 98., 99. ], [N,NTEST] )
     !
     !* FIRST EXECUTABLE STATEMENT  SSRTQC
     IF ( Kprint>=2 ) THEN
@@ -958,9 +932,8 @@ CONTAINS
     INTEGER , PARAMETER :: N = 9, NTEST = 4
     !
     LOGICAL fail
-    REAL(8) :: x(N,NTEST), xs(N,NTEST), y(N), yc(N)
-    INTEGER ix(N,NTEST), iy(N), kflag(NTEST), Kprint, Lun, Ipass, j, &
-      i, kabs, ier, nerr, NUMXER, nn, kkflag
+    REAL(8) :: y(N), yc(N)
+    INTEGER iy(N), Kprint, Lun, Ipass, j, i, kabs, ier, nerr, NUMXER, nn, kkflag
     !
     !     ---------
     !     TEST DATA
@@ -970,31 +943,21 @@ CONTAINS
     !         XS  = TEST VECTOR IN SORTED ORDER
     !         IX  = PERMUTATION VECTOR, I.E.  X(IX(J)) = XS(J)
     !
-    DATA kflag(1)/2/
-    DATA (x(i,1),i=1,N)/36D0, 54D0, -1D0, 29D0, 1D0, 80D0, 98D0, 99D0, &
-      55D0/
-    DATA (ix(i,1),i=1,N)/3, 5, 4, 1, 2, 9, 6, 7, 8/
-    DATA (xs(i,1),i=1,N)/ - 1D0, 1D0, 29D0, 36D0, 54D0, 55D0, 80D0, &
-      98D0, 99D0/
-    !
-    DATA kflag(2)/ - 1/
-    DATA (x(i,2),i=1,N)/1D0, 2D0, 3D0, 4D0, 5D0, 6D0, 7D0, 8D0, 9D0/
-    DATA (ix(i,2),i=1,N)/9, 8, 7, 6, 5, 4, 3, 2, 1/
-    DATA (xs(i,2),i=1,N)/9D0, 8D0, 7D0, 6D0, 5D0, 4D0, 3D0, 2D0, 1D0/
-    !
-    DATA kflag(3)/ - 2/
-    DATA (x(i,3),i=1,N)/ - 9D0, -8D0, -7D0, -6D0, -5D0, -4D0, -3D0, &
-      -2D0, -1D0/
-    DATA (ix(i,3),i=1,N)/9, 8, 7, 6, 5, 4, 3, 2, 1/
-    DATA (xs(i,3),i=1,N)/ - 1D0, -2D0, -3D0, -4D0, -5D0, -6D0, -7D0, &
-      -8D0, -9D0/
-    !
-    DATA kflag(4)/1/
-    DATA (x(i,4),i=1,N)/36D0, 54D0, -1D0, 29D0, 1D0, 80D0, 98D0, 99D0, &
-      55D0/
-    DATA (ix(i,4),i=1,N)/3, 5, 4, 1, 2, 9, 6, 7, 8/
-    DATA (xs(i,4),i=1,N)/ - 1D0, 1D0, 29D0, 36D0, 54D0, 55D0, 80D0, &
-      98D0, 99D0/
+    INTEGER, PARAMETER :: kflag(NTEST) = [ 2, -1, -2, 1 ]
+    REAL(8), PARAMETER ::  x(N,NTEST) = RESHAPE( [ &
+      36D0, 54D0, -1D0, 29D0, 1D0, 80D0, 98D0, 99D0, 55D0, &
+      1D0, 2D0, 3D0, 4D0, 5D0, 6D0, 7D0, 8D0, 9D0, &
+      -9D0, -8D0, -7D0, -6D0, -5D0, -4D0, -3D0, -2D0, -1D0, &
+      36D0, 54D0, -1D0, 29D0, 1D0, 80D0, 98D0, 99D0, 55D0 ], [N,NTEST] )
+    INTEGER, PARAMETER :: ix(N,NTEST) = RESHAPE( [ 3, 5, 4, 1, 2, 9, 6, 7, 8, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      9, 8, 7, 6, 5, 4, 3, 2, 1, &
+      3, 5, 4, 1, 2, 9, 6, 7, 8 ], [N,NTEST] )
+    REAL(8), PARAMETER ::  xs(N,NTEST) = RESHAPE( [ &
+      -1D0, 1D0, 29D0, 36D0, 54D0, 55D0, 80D0, 98D0, 99D0, &
+      9D0, 8D0, 7D0, 6D0, 5D0, 4D0, 3D0, 2D0, 1D0, &
+      -1D0, -2D0, -3D0, -4D0, -5D0, -6D0, -7D0, -8D0, -9D0, &
+     -1D0, 1D0, 29D0, 36D0, 54D0, 55D0, 80D0, 98D0, 99D0 ], [N,NTEST] )
     !
     !* FIRST EXECUTABLE STATEMENT  DSRTQC
     IF ( Kprint>=2 ) THEN

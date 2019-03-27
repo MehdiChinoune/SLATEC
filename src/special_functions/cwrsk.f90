@@ -24,11 +24,10 @@ SUBROUTINE CWRSK(Zr,Fnu,Kode,N,Y,Nz,Cw,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
-  COMPLEX cinu, cscl, ct, Cw, c1, c2, rct, st, Y, Zr
-  REAL act, acw, Alim, ascle, Elim, Fnu, s1, s2, Tol, yy, R1MACH
+
   INTEGER i, Kode, N, nw, Nz
-  DIMENSION Y(N), Cw(2)
+  COMPLEX cinu, cscl, ct, Cw(2), c1, c2, rct, st, Y(N), Zr
+  REAL act, acw, Alim, ascle, Elim, Fnu, s1, s2, Tol, yy, R1MACH
   !* FIRST EXECUTABLE STATEMENT  CWRSK
   !-----------------------------------------------------------------------
   !     I(FNU+I-1,Z) BY BACKWARD RECURRENCE FOR RATIOS

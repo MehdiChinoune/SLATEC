@@ -166,14 +166,11 @@ SUBROUTINE QAGE(F,A,B,Epsabs,Epsrel,Key,Limit,Result,Abserr,Neval,Ier,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   !
-  REAL A, Abserr, Alist, area, area1, area12, area2, a1, a2, B, &
-    Blist, b1, b2, defabs, defab1, defab2, Elist, &
+  REAL A, Abserr, Alist(*), area, area1, area12, area2, a1, a2, B, &
+    Blist(*), b1, b2, defabs, defab1, defab2, Elist(*), &
     epmach, Epsabs, Epsrel, errbnd, errmax, error1, error2, &
-    erro12, errsum, resabs, Result, Rlist, uflow
-  INTEGER Ier, Iord, iroff1, iroff2, k, Key, keyf, Last, Limit, &
-    maxerr, Neval, nrmax
-  !
-  DIMENSION Alist(*), Blist(*), Elist(*), Iord(*), Rlist(*)
+    erro12, errsum, resabs, Result, Rlist(*), uflow
+  INTEGER Ier, Iord(*), iroff1, iroff2, k, Key, keyf, Last, Limit, maxerr, Neval, nrmax
   !
   REAL, EXTERNAL :: F
   REAL, EXTERNAL :: R1MACH

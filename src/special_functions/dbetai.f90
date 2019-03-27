@@ -43,21 +43,20 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  
+
   INTEGER i, ib, n
   REAL(8) :: X, Pin, Qin, alneps, alnsml, c, eps, finsum, p, &
     ps, q, sml, term, xb, xi, y, D1MACH, DLBETA, p1
-  LOGICAL first
-  SAVE eps, alneps, sml, alnsml, first
-  DATA first/.TRUE./
+  SAVE eps, alneps, sml, alnsml
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBETAI
   IF ( first ) THEN
     eps = D1MACH(3)
     alneps = LOG(eps)
     sml = D1MACH(1)
     alnsml = LOG(sml)
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   IF ( X<0.D0.OR.X>1.D0 )&
     CALL XERMSG('SLATEC','DBETAI','X IS NOT IN THE RANGE (0,1)',1,2)

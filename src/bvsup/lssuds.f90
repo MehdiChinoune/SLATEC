@@ -121,13 +121,11 @@ SUBROUTINE LSSUDS(A,X,B,N,M,Nrda,U,Nrdu,Iflag,Mlso,Irank,Iscale,Q,Diag,&
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL A, B, Diag, Div, gam, gamma, Q, R1MACH, res, S, Scales, &
-    SDOT, ss, Td, U, uro, X
-  INTEGER i, Iflag, Irank, irp, Iscale, Isflg, j, J4SAVE, jr, k, &
-    kp, Kpivot, l, M, maxmes, mj, Mlso, N, nfat, nfatal
   INTEGER nmir, Nrda, Nrdu, nu
-  DIMENSION A(Nrda,*), X(*), B(*), U(Nrdu,*), Q(Nrda,*), Diag(*), &
-    Kpivot(*), S(*), Div(*), Td(*), Scales(*)
+  REAL A(Nrda,*), B(*), Diag(*), Div(*), gam, gamma, Q(Nrda,*), R1MACH, res, &
+    S(*), Scales(*), SDOT, ss, Td(*), U(Nrdu,*), uro, X(*)
+  INTEGER i, Iflag, Irank, irp, Iscale, Isflg, j, J4SAVE, jr, k, &
+    kp, Kpivot(*), l, M, maxmes, mj, Mlso, N, nfat, nfatal
   !
   !- *********************************************************************
   !

@@ -226,14 +226,12 @@ SUBROUTINE SSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   INTEGER , PARAMETER :: LOCRB = 1, LOCIB = 11
   !     .. Scalar Arguments ..
   REAL Err, Tol
-  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, &
-    Nelt
+  INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, Leniw, Lenw, N, Nelt
   !     .. Array Arguments ..
   REAL A(N), B(N), Rwork(Lenw), X(N)
   INTEGER Ia(Nelt), Iwork(Leniw), Ja(Nelt)
   !     .. Local Scalars ..
-  INTEGER locdin, locdz, lociw, locp, locpp, locr, locrr, locw, &
-    locz, loczz
+  INTEGER locdin, locdz, lociw, locp, locpp, locr, locrr, locw, locz, loczz
   !     .. External Subroutines ..
   EXTERNAL :: SBCG, SCHKW, SS2Y, SSDI, SSDS, SSMTV, SSMV
   !* FIRST EXECUTABLE STATEMENT  SSDBCG
@@ -274,7 +272,6 @@ SUBROUTINE SSDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,Itol,Tol,Itmax,Iter,Err,Ierr,&
   !         Perform the Diagonally Scaled BiConjugate gradient algorithm.
   CALL SBCG(N,B,X,Nelt,Ia,Ja,A,Isym,SSMV,SSMTV,SSDI,SSDI,Itol,Tol,Itmax,&
     Iter,Err,Ierr,Iunit,Rwork(locr),Rwork(locz),Rwork(locp),&
-    Rwork(locrr),Rwork(loczz),Rwork(locpp),Rwork(locdz),Rwork(1),&
-    Iwork(1))
+    Rwork(locrr),Rwork(loczz),Rwork(locpp),Rwork(locdz),Rwork(1),Iwork(1))
   !------------- LAST LINE OF SSDBCG FOLLOWS ----------------------------
 END SUBROUTINE SSDBCG

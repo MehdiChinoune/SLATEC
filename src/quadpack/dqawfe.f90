@@ -218,15 +218,12 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   !
-  REAL(8) :: A, abseps, Abserr, Alist, Blist, Chebmo, correc, &
-    cycle, c1, c2, dl, drl, Elist, Erlst, &
+  INTEGER Ier, Ierlst(*), Integr, Iord(*), ktmin, l, last, Lst, Limit, &
+    Limlst, ll, Maxp1, momcom, nev, Neval, Nnlog(*), nres, numrl2
+  REAL(8) :: A, abseps, Abserr, Alist(*), Blist(*), Chebmo(Maxp1,25), correc, &
+    cycle, c1, c2, dl, drl, Elist(*), Erlst(*), &
     ep, eps, epsa, Epsabs, errsum, fact, Omega, &
-    p, pi, p1, psum, reseps, Result, res3la, Rlist, Rslst, uflow
-  INTEGER Ier, Ierlst, Integr, Iord, ktmin, l, last, Lst, Limit, &
-    Limlst, ll, Maxp1, momcom, nev, Neval, Nnlog, nres, numrl2
-  !
-  DIMENSION Alist(*), Blist(*), Chebmo(Maxp1,25), Elist(*), Erlst(*), &
-    Ierlst(*), Iord(*), Nnlog(*), psum(52), res3la(3), Rlist(*), Rslst(*)
+    p, pi, p1, psum(52), reseps, Result, res3la(3), Rlist(*), Rslst(*), uflow
   !
   REAL(8), EXTERNAL :: F
   REAL(8), EXTERNAL :: D1MACH
@@ -376,8 +373,7 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
       !           --------------------------------------
       !
       IF ( Integr==1 ) CALL DQAGIE(F,A,1,Epsabs,0.0D+00,Limit,Result,Abserr,&
-        Neval,Ier,Alist,Blist,Rlist,Elist,Iord,&
-        last)
+        Neval,Ier,Alist,Blist,Rlist,Elist,Iord,last)
       Rslst(1) = Result
       Erlst(1) = Abserr
       Ierlst(1) = Ier

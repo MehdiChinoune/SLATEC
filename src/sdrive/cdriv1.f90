@@ -308,7 +308,7 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
   REAL, EXTERNAL :: R1MACH
   INTEGER, PARAMETER :: NROOT = 0, IERROR = 2, MINT = 2, MITER = 2, IMPL = 0, &
     MXORD = 5, MXSTEP = 1000
-  DATA ewtcom(1)/1.E0/
+  DATA ewtcom /1.E0/
   !* FIRST EXECUTABLE STATEMENT  CDRIV1
   IF ( ABS(Mstate)==0.OR.ABS(Mstate)>7 ) THEN
     WRITE (intgr1,'(I8)') Mstate
@@ -358,8 +358,7 @@ SUBROUTINE CDRIV1(N,T,Y,F,Tout,Mstate,Eps,Work,Lenw,Ierflg)
     ENDDO
   ENDIF
   CALL CDRIV3(N,T,Y,F,nstate,Tout,ntask,NROOT,Eps,ewtcom,IERROR,MINT,MITER,&
-    IMPL,ml,mu,MXORD,hmax,Work,lenwcm,iwork,leniw,F,F,nde,MXSTEP,&
-    R1MACH,F,Ierflg)
+    IMPL,ml,mu,MXORD,hmax,Work,lenwcm,iwork,leniw,F,F,nde,MXSTEP,R1MACH,F,Ierflg)
   DO i = 1, leniw
     Work(i+lenwcm) = iwork(i)
   ENDDO

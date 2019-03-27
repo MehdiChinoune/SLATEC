@@ -34,11 +34,11 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   
-  REAL A, bb, Db, Eb, H, r2, rmin, SDOT, SNRM2, sum, t, temp, tn, tt, Ub, W
+  INTEGER Mda, mm, Mode, N, nmk, Np
+  REAL A(Mda,*), bb, Db(*), Eb(*), H(*), r2, rmin, SDOT, SNRM2, sum, t, temp, &
+    tn, tt, Ub(*), W(*)
   INTEGER i, ii, im1, imin, is, ISAMAX, j, jm1, jmax, jp1, kk, &
     km1, kmi, kp1, Krank, Ksure, kz, l, lm1, M
-  INTEGER Mda, mm, Mode, N, nmk, Np
-  DIMENSION A(Mda,*), Ub(*), Db(*), H(*), W(*), Eb(*)
   INTEGER Ic(*), Ir(*)
   !
   !        INITIALIZATION
@@ -185,8 +185,7 @@ SUBROUTINE U11LS(A,Mda,M,N,Ub,Db,Mode,Np,Krank,Ksure,H,W,Eb,Ic,Ir)
     IF ( j<=Krank ) GOTO 200
     GOTO 500
   ELSE
-    CALL XERMSG('SLATEC','U11LS','FIRST NP COLUMNS ARE LINEARLY DEPENDENT',&
-      8,0)
+    CALL XERMSG('SLATEC','U11LS','FIRST NP COLUMNS ARE LINEARLY DEPENDENT',8,0)
     Krank = j - 1
     RETURN
   ENDIF

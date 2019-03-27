@@ -253,7 +253,7 @@ REAL FUNCTION RF(X,Y,Z,Ier)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL R1MACH
   CHARACTER(16) :: xern3, xern4, xern5, xern6
   INTEGER Ier
@@ -261,9 +261,8 @@ REAL FUNCTION RF(X,Y,Z,Ier)
   REAL c1, c2, c3, e2, e3, lamda
   REAL mu, s, X, xn, xndev
   REAL xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, znroot
-  LOGICAL first
-  SAVE errtol, lolim, uplim, c1, c2, c3, first
-  DATA first/.TRUE./
+  SAVE errtol, lolim, uplim, c1, c2, c3
+  LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  RF
   !
@@ -275,8 +274,8 @@ REAL FUNCTION RF(X,Y,Z,Ier)
     c1 = 1.0E0/24.0E0
     c2 = 3.0E0/44.0E0
     c3 = 1.0E0/14.0E0
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   !         CALL ERROR HANDLER IF NECESSARY.
   !
@@ -309,8 +308,7 @@ REAL FUNCTION RF(X,Y,Z,Ier)
     WRITE (xern5,'(1PE15.6)') Z
     WRITE (xern6,'(1PE15.6)') lolim
     CALL XERMSG('SLATEC','RF','MIN(X+Y,X+Z,Y+Z).LT.LOLIM WHERE X = '//&
-      xern3//' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//&
-      xern6,2,1)
+      xern3//' Y = '//xern4//' Z = '//xern5//' AND LOLIM = '//xern6,2,1)
     RETURN
   ENDIF
   !

@@ -51,16 +51,16 @@ CONTAINS
     !   901009  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           fixed code to test all four routines.  (RWC)
-    
+
     INTEGER Kprint, Lun
-    REAL a(4,4), at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), &
+    REAL at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), &
       work(35), r, delx, delmax, sign, R1MACH
-    CHARACTER(4) :: list(4)
     INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
-    DATA a/5.0E0, 4.0E0, 1.0E0, 1.0E0, 4.0E0, 5.0E0, 1.0E0, 1.0E0, &
-      1.0E0, 1.0E0, 4.0E0, 2.0E0, 1.0E0, 1.0E0, 2.0E0, 4.0E0/
-    DATA list/'POFS', 'POIR', 'NBFS', 'NBIR'/
+    REAL, PARAMETER :: a(4,4) = RESHAPE( [ 5.0E0, 4.0E0, 1.0E0, 1.0E0, &
+      4.0E0, 5.0E0, 1.0E0, 1.0E0,    1.0E0, 1.0E0, 4.0E0, 2.0E0, &
+      1.0E0, 1.0E0, 2.0E0, 4.0E0 ], [4,4] )
+    CHARACTER(4), PARAMETER :: list(4) = [ 'POFS', 'POIR', 'NBFS', 'NBIR' ]
     !* FIRST EXECUTABLE STATEMENT  SQCK
     IF ( Kprint>=3 ) WRITE (Lun,99001)
     !
@@ -235,17 +235,17 @@ CONTAINS
     !   901009  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
-    
+
     INTEGER Kprint, Lun
-    REAL(8) :: a(4,4), at(5,4), abe(5,7), abet(5,7), b(4), bt(4), &
+    REAL(8) :: at(5,4), abe(5,7), abet(5,7), b(4), bt(4), &
       c(4), work(35), sign, D1MACH
     REAL r, delx, delmax
-    CHARACTER(4) :: list(2)
     INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
-    DATA a/5.0D0, 4.0D0, 1.0D0, 1.0D0, 4.0D0, 5.0D0, 1.0D0, 1.0D0, &
-      1.0D0, 1.0D0, 4.0D0, 2.0D0, 1.0D0, 1.0D0, 2.0D0, 4.0D0/
-    DATA list/'POFS', 'NBFS'/
+    REAL(8), PARAMETER :: a(4,4) = RESHAPE( [ 5.0D0, 4.0D0, 1.0D0, 1.0D0, &
+      4.0D0, 5.0D0, 1.0D0, 1.0D0,    1.0D0, 1.0D0, 4.0D0, 2.0D0, &
+      1.0D0, 1.0D0, 2.0D0, 4.0D0 ], [4,4] )
+    CHARACTER(4), PARAMETER :: list(2) = [ 'POFS', 'NBFS' ]
     !* FIRST EXECUTABLE STATEMENT  DQCK
     IF ( Kprint>=3 ) WRITE (Lun,99001)
     !
@@ -418,20 +418,20 @@ CONTAINS
     !   901009  Restructured using IF-THEN-ELSE-ENDIF, cleaned up FORMATs,
     !           including removing an illegal character from column 1, and
     !           editorial changes.  (RWC)
-    
+
     INTEGER Kprint, Lun
     REAL r, delx, delmax, R1MACH
-    COMPLEX a(4,4), at(5,4), abe(5,7), abet(5,7), b(4), bt(4), c(4), work(35)
-    CHARACTER(4) :: list(4)
+    COMPLEX at(5,4), abe(5,7), abet(5,7), bt(4), work(35)
     INTEGER lda, n, ml, mu, ind, iwork(4), Nerr, i, j, j1, j2, jd, &
       mlp, k, kcase, kprog
-    DATA a/(2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
-      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0)&
-      , (0.E0,-1.E0), (4.E0,0.E0)/
-    DATA c/(1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0)/
-    DATA b/(3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0)/
-    DATA list/'POFS', 'POIR', 'NBFS', 'NBIR'/
+    COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
+      (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,-1.E0), (2.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,1.E0), &
+      (0.E0,0.E0), (0.E0,0.E0), (0.E0,-1.E0), (4.E0,0.E0) ], [4,4] )
+    COMPLEX, PARAMETER :: c(4) = [ (1.E0,1.E0), (0.E0,1.E0), (0.E0,-1.E0), (1.E0,0.E0) ]
+    COMPLEX, PARAMETER :: b(4) = [ (3.E0,2.E0), (-1.E0,3.E0), (0.E0,-4.E0), (5.E0,0.E0) ]
+    CHARACTER(4), PARAMETER :: list(4) = [ 'POFS', 'POIR', 'NBFS', 'NBIR' ]
     !* FIRST EXECUTABLE STATEMENT  CQCK
     IF ( Kprint>=3 ) WRITE (Lun,99001)
     !
@@ -590,7 +590,7 @@ PROGRAM TEST22
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER kprint, lin, lun, nerr, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST22

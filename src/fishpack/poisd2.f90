@@ -31,12 +31,11 @@ SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
   !   900402  Added TYPE section.  (WRB)
   !   920130  Modified to use merge routine S1MERG rather than deleted
   !           routine MERGE.  (WRB)
-  
-  REAL B, Ba, Bb, Bc, D, fi, P, Q, t, Tcos, W
+
   INTEGER i, ideg, Idimq, ip, ip1, ipstor, irreg, Istag, j, jdeg, &
     jm1, jm2, jm3, jp1, jp2, jp3, jsh, jsp, jst, jstsav
+  REAL B(*), Ba(*), Bb(*), Bc(*), D(*), fi, P(*), Q(Idimq,*), t, Tcos(*), W(*)
   INTEGER kr, krpi, l, lr, m, Mr, n, nodd, noddpr, Nr, nun
-  DIMENSION Q(Idimq,*), Ba(*), Bb(*), Bc(*), Tcos(*), B(*), D(*), W(*), P(*)
   !* FIRST EXECUTABLE STATEMENT  POISD2
   m = Mr
   n = Nr
@@ -197,8 +196,7 @@ SUBROUTINE POISD2(Mr,Nr,Istag,Ba,Bb,Bc,Q,Idimq,B,W,D,Tcos,P)
     ENDIF
     IF ( noddpr==2 ) THEN
       DO i = 1, m
-        B(i) = .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3)) + Q(i,jp2) - Q(i,jp1)&
-          + Q(i,j)
+        B(i) = .5*(Q(i,jm2)-Q(i,jm1)-Q(i,jm3)) + Q(i,jp2) - Q(i,jp1) + Q(i,j)
       ENDDO
     ELSE
       DO i = 1, m

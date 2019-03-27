@@ -43,8 +43,7 @@ SUBROUTINE SPLPFE(Mrelas,Nvars,Lmx,Lbm,Ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,&
   INTEGER i, Ienter, ihi, il1, ilow, ipage, IPLOC, iu1, j, key, &
     Lbm, Lmx, lpg, Mrelas, n20002, n20050, Nvars
   REAL SASUM
-  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), &
-    Ibb(*)
+  INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
   REAL Amat(*), Basmat(*), Csc(*), Wr(*), Ww(*), Bl(*), Bu(*), &
     Rz(*), Rg(*), Colnrm(*), Duals(*), cnorm, Dirnrm, Dulnrm, &
     Eps, Erdnrm, Gg, one, ratio, rcost, rmax, zero

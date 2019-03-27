@@ -59,8 +59,7 @@ SUBROUTINE SVOUT(N,Sx,Ifmt,Idigit)
   !   900328  Added TYPE section.  (WRB)
   
   INTEGER i, I1MACH, Idigit, j, k1, k2, lout, N, ndigit
-  REAL Sx
-  DIMENSION Sx(*)
+  REAL Sx(*)
   CHARACTER Ifmt*(*)
   !
   !     GET THE UNIT NUMBER WHERE OUTPUT WILL BE WRITTEN.

@@ -406,8 +406,7 @@ SUBROUTINE DDRIV2(N,T,Y,F,Tout,Mstate,Nroot,Eps,Ewt,Mint,Work,Lenw,Iwork,&
   ENDIF
   hmax = 2.D0*ABS(Tout-T)
   CALL DDRIV3(N,T,Y,F,nstate,Tout,ntask,Nroot,Eps,ewtcom,ierror,Mint,miter,&
-    IMPL,ml,mu,mxord,hmax,Work,Lenw,Iwork,Leniw,F,F,nde,MXSTEP,G,&
-    F,Ierflg)
+    IMPL,ml,mu,mxord,hmax,Work,Lenw,Iwork,Leniw,F,F,nde,MXSTEP,G,F,Ierflg)
   IF ( nstate<=7 ) THEN
     Mstate = SIGN(nstate,Mstate)
   ELSEIF ( nstate==11 ) THEN

@@ -1,7 +1,6 @@
 !** FCMN
 SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
-    Yconst,Nderiv,Mode,Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,&
-    Work,Iwork)
+    Yconst,Nderiv,Mode,Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,Work,Iwork)
   IMPLICIT NONE
   !>
   !***
@@ -82,8 +81,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   IF ( iw1<nb ) THEN
     WRITE (xern1,'(I8)') nb
     CALL XERMSG('SLATEC','FCMN',&
-      'IN FC, INSUFFICIENT STORAGE FOR W(*).  CHECK NB = '//xern1,&
-      2,1)
+      'IN FC, INSUFFICIENT STORAGE FOR W(*).  CHECK NB = '//xern1,2,1)
     Mode = -1
     RETURN
   ENDIF
@@ -105,8 +103,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
     var = .TRUE.
     new = .FALSE.
   ELSE
-    CALL XERMSG('SLATEC','FCMN','IN FC, INPUT VALUE OF MODE MUST BE 1-4.',2,&
-      1)
+    CALL XERMSG('SLATEC','FCMN','IN FC, INPUT VALUE OF MODE MUST BE 1-4.',2,1)
     Mode = -1
     RETURN
   ENDIF
@@ -135,8 +132,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   n = Nbkpt - Nord
   np1 = n + 1
-  lw = nb + (np1+Nconst)*np1 + 2*(neqcon+np1) + (nincon+np1) + (nincon+2)&
-    *(np1+6)
+  lw = nb + (np1+Nconst)*np1 + 2*(neqcon+np1) + (nincon+np1) + (nincon+2)*(np1+6)
   intw1 = nincon + 2*np1
   !
   !     Save interval containing knots.
@@ -290,8 +286,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   IF ( iw1<lw ) THEN
     WRITE (xern1,'(I8)') lw
     CALL XERMSG('SLATEC','FCMN',&
-      'IN FC, INSUFFICIENT STORAGE FOR W(*).  CHECK LW = '//xern1,&
-      2,1)
+      'IN FC, INSUFFICIENT STORAGE FOR W(*).  CHECK LW = '//xern1,2,1)
     Mode = -1
     RETURN
   ENDIF
@@ -299,8 +294,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   IF ( iw2<intw1 ) THEN
     WRITE (xern1,'(I8)') intw1
     CALL XERMSG('SLATEC','FCMN',&
-      'IN FC, INSUFFICIENT STORAGE FOR IW(*).  CHECK IW1 = '//&
-      xern1,2,1)
+      'IN FC, INSUFFICIENT STORAGE FOR IW(*).  CHECK IW1 = '//xern1,2,1)
     Mode = -1
     RETURN
   ENDIF
@@ -385,6 +379,5 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   !     Solve constrained least squares equations.
   !
-  CALL LSEI(W,Mdw,neqcon,np1,nincon,n,prgopt,Coeff,rnorme,rnorml,Mode,Work,&
-    Iwork)
+  CALL LSEI(W,Mdw,neqcon,np1,nincon,n,prgopt,Coeff,rnorme,rnorml,Mode,Work,Iwork)
 END SUBROUTINE FCMN

@@ -98,8 +98,7 @@ SUBROUTINE DQRSLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   INTEGER Ipvt(*)
   REAL(8) :: R(Ldr,*), Diag(*), Qtb(*), X(*), Sigma(*), Wa(*)
   INTEGER i, j, jp1, k, kp1, l, nsing
-  REAL(8) :: cos, cotan, p5, p25, qtbpj, sin, sum, tan, temp, &
-    zero
+  REAL(8) :: cos, cotan, p5, p25, qtbpj, sin, sum, tan, temp, zero
   SAVE p5, p25, zero
   DATA p5, p25, zero/5.0D-1, 2.5D-1, 0.0D0/
   !* FIRST EXECUTABLE STATEMENT  DQRSLV

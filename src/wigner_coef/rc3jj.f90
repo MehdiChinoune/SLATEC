@@ -137,13 +137,11 @@ SUBROUTINE RC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   INTEGER Ndim, Ier
   REAL L2, L3, M2, M3, L1min, L1max, Thrcof(Ndim)
   !
-  INTEGER i, index, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, &
-    nstep2
+  INTEGER i, index, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
   REAL a1, a1s, a2, a2s, c1, c1old, c2, cnorm, R1MACH, denom, dv, &
     eps, huge, l1, m1, newfac, oldfac, one, ratio, sign1, &
     sign2, srhuge, srtiny, sum1, sum2, sumbac, sumfor, sumuni, &
-    three, thresh, tiny, two, x, x1, x2, x3, y, y1, y2, y3, &
-    zero
+    three, thresh, tiny, two, x, x1, x2, x3, y, y1, y2, y3, zero
   !
   DATA zero, eps, one, two, three/0.0, 0.01, 1.0, 2.0, 3.0/
   !

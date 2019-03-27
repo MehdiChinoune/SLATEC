@@ -79,10 +79,8 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
   
   !
   INTEGER i, Ideriv, iderp1, ihi, ihmkmj, ilo, imk, imkpj, Inbv, &
-    ipj, ip1, ip1mj, j, jj, j1, j2, K, kmider, kmj, km1, &
-    kpk, mflag, N
-  REAL(8) :: A, fkmj, T, Work, X
-  DIMENSION T(*), A(*), Work(*)
+    ipj, ip1, ip1mj, j, jj, j1, j2, K, kmider, kmj, km1, kpk, mflag, N
+  REAL(8) :: A(*), fkmj, T(*), Work(*), X
   !* FIRST EXECUTABLE STATEMENT  DBVALU
   DBVALU = 0.0D0
   IF ( K<1 ) THEN
@@ -119,8 +117,7 @@ REAL(8) FUNCTION DBVALU(T,A,N,K,Ideriv,X,Inbv,Work)
             IF ( X/=T(i) ) GOTO 20
           ENDDO
           CALL XERMSG('SLATEC','DBVALU',&
-            'A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)',2,&
-            1)
+            'A LEFT LIMITING VALUE CANNOT BE OBTAINED AT T(K)',2,1)
           RETURN
         ENDIF
       ENDIF

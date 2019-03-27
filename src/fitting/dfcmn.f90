@@ -1,7 +1,6 @@
 !** DFCMN
 SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
-    Yconst,Nderiv,Mode,Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,&
-    Work,Iwork)
+    Yconst,Nderiv,Mode,Coeff,Bf,Xtemp,Ptemp,Bkpt,G,Mdg,W,Mdw,Work,Iwork)
   IMPLICIT NONE
   !>
   !***
@@ -42,8 +41,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   EXTERNAL :: DAXPY, DBNDAC, DBNDSL, DCOPY, DFSPVD, DFSPVN, DLSEI, &
     DSCAL, DSORT, XERMSG
   !
-  REAL(8) :: dummy, prgopt(10), rnorm, rnorme, rnorml, xmax, &
-    xmin, xval, yval
+  REAL(8) :: dummy, prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, yval
   INTEGER i, idata, ideriv, ileft, intrvl, intw1, ip, ir, irow, &
     itype, iw1, iw2, l, lw, mt, n, nb, neqcon, nincon, nordm1, nordp1, np1
   LOGICAL band, new, var
@@ -69,8 +67,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   IF ( Ndata<0 ) THEN
     CALL XERMSG('SLATEC','DFCMN',&
-      'IN DFC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.',2,&
-      1)
+      'IN DFC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.',2,1)
     Mode = -1
     RETURN
   ENDIF
@@ -86,8 +83,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   IF ( iw1<nb ) THEN
     WRITE (xern1,'(I8)') nb
     CALL XERMSG('SLATEC','DFCMN',&
-      'IN DFC, INSUFFICIENT STORAGE FOR W(*).  CHECK NB = '//&
-      xern1,2,1)
+      'IN DFC, INSUFFICIENT STORAGE FOR W(*).  CHECK NB = '//xern1,2,1)
     Mode = -1
     RETURN
   ENDIF
@@ -138,8 +134,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !
   n = Nbkpt - Nord
   np1 = n + 1
-  lw = nb + (np1+Nconst)*np1 + 2*(neqcon+np1) + (nincon+np1) + (nincon+2)&
-    *(np1+6)
+  lw = nb + (np1+Nconst)*np1 + 2*(neqcon+np1) + (nincon+np1) + (nincon+2)*(np1+6)
   intw1 = nincon + 2*np1
   !
   !     Save interval containing knots.
@@ -293,8 +288,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   IF ( iw1<lw ) THEN
     WRITE (xern1,'(I8)') lw
     CALL XERMSG('SLATEC','DFCMN',&
-      'IN DFC, INSUFFICIENT STORAGE FOR W(*).  CHECK LW = '//&
-      xern1,2,1)
+      'IN DFC, INSUFFICIENT STORAGE FOR W(*).  CHECK LW = '//xern1,2,1)
     Mode = -1
     RETURN
   ENDIF
@@ -302,8 +296,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   IF ( iw2<intw1 ) THEN
     WRITE (xern1,'(I8)') intw1
     CALL XERMSG('SLATEC','DFCMN',&
-      'IN DFC, INSUFFICIENT STORAGE FOR IW(*).  CHECK IW1 = '//&
-      xern1,2,1)
+      'IN DFC, INSUFFICIENT STORAGE FOR IW(*).  CHECK IW1 = '//xern1,2,1)
     Mode = -1
     RETURN
   ENDIF

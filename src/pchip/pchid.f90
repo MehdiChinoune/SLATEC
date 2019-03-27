@@ -140,8 +140,7 @@ REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
       !
       !     N.LT.2 RETURN.
       Ierr = -1
-      CALL XERMSG('SLATEC','PCHID','NUMBER OF DATA POINTS LESS THAN TWO',&
-        Ierr,1)
+      CALL XERMSG('SLATEC','PCHID','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
       GOTO 100
     ELSEIF ( Incfd<1 ) THEN
       !

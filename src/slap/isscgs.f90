@@ -1,7 +1,6 @@
 !** ISSCGS
 INTEGER FUNCTION ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
-    Itmax,Iter,Err,Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,&
-    Iwork,Ak,Bk,Bnrm,Solnrm)
+    Itmax,Iter,Err,Ierr,Iunit,R,R0,P,Q,U,V1,V2,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
   IMPLICIT NONE
   !>
   !***
@@ -199,8 +198,7 @@ INTEGER FUNCTION ISSCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,&
   REAL Ak, Bk, Bnrm, Err, Solnrm, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt), B(N), P(N), Q(N), R(N), R0(N), Rwork(*), U(N), &
-    V1(N), V2(N), X(N)
+  REAL A(Nelt), B(N), P(N), Q(N), R(N), R0(N), Rwork(*), U(N), V1(N), V2(N), X(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MATVEC, MSOLVE

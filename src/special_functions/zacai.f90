@@ -32,15 +32,13 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !     COMPLEX CSGN,CSPN,C1,C2,Y,Z,ZN,CY
-  REAL(8) :: Alim, arg, ascle, az, csgnr, csgni, cspnr, cspni, &
-    c1r, c1i, c2r, c2i, cyr, cyi, dfnu, Elim, fmr, &
-    Fnu, pi, Rl, sgn, Tol, yy, Yr, Yi, Zr, Zi, &
-    znr, zni, D1MACH, ZABS
   INTEGER inu, iuf, Kode, Mr, N, nn, nw, Nz
-  DIMENSION Yr(N), Yi(N), cyr(2), cyi(2)
-  EXTERNAL :: ZABS
+  REAL(8) :: Alim, arg, ascle, az, csgnr, csgni, cspnr, cspni, &
+    c1r, c1i, c2r, c2i, cyr(2), cyi(2), dfnu, Elim, fmr, &
+    Fnu, pi, Rl, sgn, Tol, yy, Yr(N), Yi(N), Zr, Zi, znr, zni
+  REAL(8), EXTERNAL :: D1MACH, ZABS
   DATA pi/3.14159265358979324D0/
   !* FIRST EXECUTABLE STATEMENT  ZACAI
   Nz = 0

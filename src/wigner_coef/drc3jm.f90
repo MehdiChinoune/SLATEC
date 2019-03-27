@@ -139,13 +139,11 @@ SUBROUTINE DRC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   INTEGER Ndim, Ier
   REAL(8) :: L1, L2, L3, M1, M2min, M2max, Thrcof(Ndim)
   !
-  INTEGER i, index, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, &
-    nstep2
+  INTEGER i, index, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
   REAL(8) :: a1, a1s, c1, c1old, c2, cnorm, D1MACH, dv, eps, &
     huge, m2, m3, newfac, oldfac, one, ratio, sign1, &
     sign2, srhuge, srtiny, sum1, sum2, sumbac, sumfor, &
-    sumuni, thresh, tiny, two, x, x1, x2, x3, y, &
-    y1, y2, y3, zero
+    sumuni, thresh, tiny, two, x, x1, x2, x3, y, y1, y2, y3, zero
   !
   DATA zero, eps, one, two/0.0D0, 0.01D0, 1.0D0, 2.0D0/
   !

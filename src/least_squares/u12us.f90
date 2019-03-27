@@ -32,9 +32,8 @@ SUBROUTINE U12US(A,Mda,M,N,B,Mdb,Nb,Mode,Krank,Rnorm,H,W,Ir,Ic)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   
-  REAL A, B, bb, H, Rnorm, SDOT, SNRM2, tt, W
   INTEGER i, ij, ip1, j, jb, k, kp1, Krank, M, Mda, Mdb, mmk, Mode, N, Nb
-  DIMENSION A(Mda,*), B(Mdb,*), Rnorm(*), H(*), W(*)
+  REAL A(Mda,*), B(Mdb,*), bb, H(*), Rnorm(*), SDOT, SNRM2, tt, W(*)
   INTEGER Ic(*), Ir(*)
   !* FIRST EXECUTABLE STATEMENT  U12US
   k = Krank

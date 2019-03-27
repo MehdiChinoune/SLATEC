@@ -112,8 +112,7 @@ SUBROUTINE DCHKW(Name,Lociw,Leniw,Locw,Lenw,Ierr,Iter,Err)
     WRITE (xern2,'(I8)') Lenw
     CALL XERMSG('SLATEC','DCHKW',&
       'In '//xernam//', DOUBLE PRECISION work array too '//&
-      'short.  RWORK needs '//xern1//'; have allocated '//xern2,1,&
-      1)
+      'short.  RWORK needs '//xern1//'; have allocated '//xern2,1,1)
   ENDIF
   !------------- LAST LINE OF DCHKW FOLLOWS ----------------------------
 END SUBROUTINE DCHKW

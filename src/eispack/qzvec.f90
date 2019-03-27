@@ -105,8 +105,7 @@ SUBROUTINE QZVEC(Nm,N,A,B,Alfr,Alfi,Beta,Z)
   !
   INTEGER i, j, k, m, N, en, ii, jj, na, Nm, nn, isw, enm2
   REAL A(Nm,*), B(Nm,*), Alfr(*), Alfi(*), Beta(*), Z(Nm,*)
-  REAL d, q, r, s, t, w, x, y, di, dr, ra, rr, sa, ti, tr, &
-    t1, t2
+  REAL d, q, r, s, t, w, x, y, di, dr, ra, rr, sa, ti, tr, t1, t2
   REAL w1, x1, zz, z1, alfm, almi, almr, betm, epsb
   !
   !* FIRST EXECUTABLE STATEMENT  QZVEC

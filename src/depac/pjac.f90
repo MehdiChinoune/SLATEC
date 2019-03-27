@@ -31,18 +31,16 @@ SUBROUTINE PJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,F,JAC,Rpar,Ipar)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
 
-  INTEGER Ipar
-  REAL Rpar
+  INTEGER Ipar(*)
+  REAL Rpar(*)
   !
   !LLL. OPTIMIZE
-  INTEGER Neq, Nyh, Iwm, i, i1, i2, IER, ii, IOWnd, IOWns, j, &
+  INTEGER Neq, Nyh, Iwm(*), i, i1, i2, IER, ii, IOWnd, IOWns, j, &
     j1, jj, JSTart, KFLag, L, lenp, MAXord, mba, mband, &
     meb1, meband, METh, MITer, ml, ml3, mu, N, NFE, NJE, NQ, NQU, NST
   EXTERNAL :: F, JAC
-  REAL Y, Yh, Ewt, Ftem, Savf, Wm, ROWnd, ROWns, EL0, H, HMIn, &
+  REAL Y(*), Yh(Nyh,*), Ewt(*), Ftem(*), Savf(*), Wm(*), ROWnd, ROWns, EL0, H, HMIn, &
     HMXi, HU, TN, UROund, con, di, fac, hl0, r, r0, srur, yi, yj, yjj, VNWRMS
-  DIMENSION Y(*), Yh(Nyh,*), Ewt(*), Ftem(*), Savf(*), Wm(*), Iwm(*), &
-    Rpar(*), Ipar(*)
   COMMON /DEBDF1/ ROWnd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
     UROund, IOWnd(14), IOWns(6), IER, JSTart, KFLag, L, &
     METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU

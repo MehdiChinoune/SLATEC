@@ -98,13 +98,10 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   !
-  REAL(8) :: A, Abserr, Alfa, B, Beta, Bl, Br, centr, cheb12, &
-    cheb24, dc, factor, fix, fval, hlgth, resabs, &
-    Resasc, Result, res12, res24, Rg, Rh, Ri, Rj, u, x
+  REAL(8) :: A, Abserr, Alfa, B, Beta, Bl, Br, centr, cheb12(13), &
+    cheb24(25), dc, factor, fix, fval(25), hlgth, resabs, &
+    Resasc, Result, res12, res24, Rg(25), Rh(25), Ri(25), Rj(25), u
   INTEGER i, Integr, isym, Nev
-  !
-  DIMENSION cheb12(13), cheb24(25), fval(25), Rg(25), Rh(25), Ri(25), &
-    Rj(25), x(11)
   !
   REAL(8), EXTERNAL :: F
   REAL(8), EXTERNAL :: DQWGTS
@@ -113,14 +110,10 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
   !           K = 1, ..., 11, TO BE USED FOR THE COMPUTATION OF THE
   !           CHEBYSHEV SERIES EXPANSION OF F.
   !
-  SAVE x
-  DATA x(1), x(2), x(3), x(4), x(5), x(6), x(7), x(8), x(9), &
-    x(10), x(11)/0.9914448613738104D+00, 0.9659258262890683D+00, &
-    0.9238795325112868D+00, 0.8660254037844386D+00, &
-    0.7933533402912352D+00, 0.7071067811865475D+00, &
-    0.6087614290087206D+00, 0.5000000000000000D+00, &
-    0.3826834323650898D+00, 0.2588190451025208D+00, &
-    0.1305261922200516D+00/
+  REAL(8), PARAMETER :: x(11) = [ 0.9914448613738104D+00, 0.9659258262890683D+00, &
+    0.9238795325112868D+00, 0.8660254037844386D+00, 0.7933533402912352D+00, &
+    0.7071067811865475D+00, 0.6087614290087206D+00, 0.5000000000000000D+00, &
+    0.3826834323650898D+00, 0.2588190451025208D+00, 0.1305261922200516D+00 ]
   !
   !           LIST OF MAJOR VARIABLES
   !           -----------------------
@@ -353,8 +346,7 @@ SUBROUTINE DQC25S(F,A,B,Bl,Br,Alfa,Beta,Ri,Rj,Rg,Rh,Result,Abserr,Resasc,&
     !           SCHEME.
     !
     !
-    CALL DQK15W(F,DQWGTS,A,B,Alfa,Beta,Integr,Bl,Br,Result,Abserr,resabs,&
-      Resasc)
+    CALL DQK15W(F,DQWGTS,A,B,Alfa,Beta,Integr,Bl,Br,Result,Abserr,resabs,Resasc)
     Nev = 15
   ENDIF
 END SUBROUTINE DQC25S

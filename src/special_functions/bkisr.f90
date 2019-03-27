@@ -27,15 +27,12 @@ SUBROUTINE BKISR(X,N,Sum,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   INTEGER i, Ierr, k, kk, kkn, k1, N, np
-  REAL ak, atol, bk, c, fk, fn, hx, hxs, pol, pr, Sum, tkp, &
-    tol, trm, X, xln
+  REAL ak, atol, bk, fk, fn, hx, hxs, pol, pr, Sum, tkp, tol, trm, X, xln
   REAL PSIXN, R1MACH
-  DIMENSION c(2)
-  SAVE c
   !
-  DATA c(1), c(2)/1.57079632679489662E+00, 1.0E0/
+  REAL, PARAMETER :: c(2) = [ 1.57079632679489662E+00, 1.0E0 ]
   !* FIRST EXECUTABLE STATEMENT  BKISR
   Ierr = 0
   tol = MAX(R1MACH(4),1.0E-18)

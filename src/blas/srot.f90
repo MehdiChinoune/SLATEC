@@ -59,8 +59,7 @@ SUBROUTINE SROT(N,Sx,Incx,Sy,Incy,Sc,Ss)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
   INTEGER i, Incx, Incy, kx, ky, N, nsteps
-  REAL Sx, Sy, Sc, Ss, zero, one, w, z
-  DIMENSION Sx(*), Sy(*)
+  REAL Sx(*), Sy(*), Sc, Ss, zero, one, w, z
   SAVE zero, one
   DATA zero, one/0.0E0, 1.0E0/
   !* FIRST EXECUTABLE STATEMENT  SROT

@@ -117,25 +117,23 @@ CONTAINS
     LOGICAL same, tsterr, ftl, ftl1, ftl2
     CHARACTER :: trans
     !     .. Local Arrays ..
-    REAL(8) :: a(NMAX,NMAX), aa(NMAX*NMAX), alf(NALF), as(NMAX*NMAX), bet(NBET), &
+    REAL(8) :: a(NMAX,NMAX), aa(NMAX*NMAX), as(NMAX*NMAX), &
       g(NMAX), x(NMAX), xs(NMAX*INCMAX), xx(NMAX*INCMAX), y(NMAX), ys(NMAX*INCMAX), &
       yt(NMAX), yy(NMAX*INCMAX), z(2*NMAX)
-    INTEGER idim(NIDIM), inc(NINC), kb(NKB)
     LOGICAL ltest(NSUBS)
-    CHARACTER(6) :: snames(NSUBS)
     !     .. External Functions ..
     REAL, EXTERNAL :: R1MACH
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA snames/'DGEMV ', 'DGBMV ', 'DSYMV ', 'DSBMV ', 'DSPMV ', &
-      'DTRMV ', 'DTBMV ', 'DTPMV ', 'DTRSV ', 'DTBSV ', 'DTPSV ', &
-      'DGER  ', 'DSYR  ', 'DSPR  ', 'DSYR2 ', 'DSPR2 '/
-    DATA idim/0, 1, 2, 3, 5, 9/
-    DATA kb/0, 1, 2, 4/
-    DATA inc/1, 2, -1, -2/
-    DATA alf/0.0, 1.0, 0.7/
-    DATA bet/0.0, 1.0, 0.9/
+    CHARACTER(6), PARAMETER :: snames(NSUBS) = [ 'DGEMV ', 'DGBMV ', 'DSYMV ', &
+      'DSBMV ', 'DSPMV ', 'DTRMV ', 'DTBMV ', 'DTPMV ', 'DTRSV ', 'DTBSV ', &
+      'DTPSV ', 'DGER  ', 'DSYR  ', 'DSPR  ', 'DSYR2 ', 'DSPR2 ' ]
+    INTEGER, PARAMETER :: idim(NIDIM) = [ 0, 1, 2, 3, 5, 9 ]
+    INTEGER, PARAMETER :: kb(NKB) = [ 0, 1, 2, 4 ]
+    INTEGER, PARAMETER :: inc(NINC) = [ 1, 2, -1, -2 ]
+    REAL(8), PARAMETER :: alf(NALF) = [ 0.0, 1.0, 0.7 ]
+    REAL(8), PARAMETER :: bet(NBET) = [ 0.0, 1.0, 0.9 ]
     !* FIRST EXECUTABLE STATEMENT  DBLAT2
     !     Set the flag that indicates whether error exits are to be tested.
     tsterr = .TRUE.
@@ -231,18 +229,15 @@ CONTAINS
           CASE (12)
             !           Test DGER, 12.
             CALL DCHK42(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
-              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,&
-              yt,g,z)
+              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,yt,g,z)
           CASE (13,14)
             !           Test DSYR, 13, and DSPR, 14.
             CALL DCHK52(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
-              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,&
-              yt,g,z)
+              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,yt,g,z)
           CASE (15,16)
             !           Test DSYR2, 15, and DSPR2, 16.
             CALL DCHK62(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
-              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,&
-              yt,g,z)
+              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,yt,g,z)
           CASE DEFAULT
             !           Test DGEMV, 01, and DGBMV, 02.
             CALL DCHK12(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
@@ -267,8 +262,7 @@ CONTAINS
     99008 FORMAT (' ERROR IN DMVCH -  IN-LINE DOT PRODUCTS ARE BEING EVALU',&
       'ATED WRONGLY.',/' DMVCH WAS CALLED WITH TRANS = ',A1,&
       ' AND RETURNED SAME = ',L1,' AND ERR = ',F12.3,'.',&
-      /' THIS MAY BE DUE TO FAULTS IN THE ARITHMETIC OR THE',&
-      ' COMPILER.')
+      /' THIS MAY BE DUE TO FAULTS IN THE ARITHMETIC OR THE COMPILER.')
     99009 FORMAT (1X,A6,' WAS NOT TESTED')
     99010 FORMAT (' ERROR-EXITS WILL NOT BE TESTED')
     !
@@ -327,23 +321,19 @@ CONTAINS
     LOGICAL same, tsterr, ftl, ftl1, ftl2
     CHARACTER :: transa, transb
     !     .. Local Arrays ..
-    REAL(8) :: ab(NMAX,2*NMAX), aa(NMAX*NMAX), alf(NALF), &
-      as(NMAX*NMAX), bet(NBET), g(NMAX), bb(NMAX*NMAX), &
-      bs(NMAX*NMAX), c(NMAX,NMAX), cc(NMAX*NMAX), &
-      cs(NMAX*NMAX), ct(NMAX), w(2*NMAX)
-    INTEGER idim(NIDIM)
+    REAL(8) :: ab(NMAX,2*NMAX), aa(NMAX*NMAX), as(NMAX*NMAX), g(NMAX), bb(NMAX*NMAX), &
+      bs(NMAX*NMAX), c(NMAX,NMAX), cc(NMAX*NMAX), cs(NMAX*NMAX), ct(NMAX), w(2*NMAX)
     LOGICAL ltest(NSUBS)
-    CHARACTER(6) :: snames(NSUBS)
     !     .. External Functions ..
     REAL, EXTERNAL :: R1MACH
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA snames/'DGEMM ', 'DSYMM ', 'DTRMM ', 'DTRSM ', 'DSYRK ', &
-      'DSYR2K'/
-    DATA idim/0, 1, 2, 3, 5, 9/
-    DATA alf/0.0, 1.0, 0.7/
-    DATA bet/0.0, 1.0, 1.3/
+    CHARACTER(6), PARAMETER :: snames(NSUBS)  = [ 'DGEMM ', 'DSYMM ', 'DTRMM ', &
+      'DTRSM ', 'DSYRK ', 'DSYR2K' ]
+    INTEGER, PARAMETER :: idim(NIDIM) = [ 0, 1, 2, 3, 5, 9 ]
+    REAL(8), PARAMETER :: alf(NALF) = [ 0.0, 1.0, 0.7 ]
+    REAL(8), PARAMETER :: bet(NBET) = [ 0.0, 1.0, 1.3 ]
     !* FIRST EXECUTABLE STATEMENT  DBLAT3
     !     Set the flag that indicates whether error exits are to be tested.
     tsterr = .TRUE.
@@ -455,8 +445,7 @@ CONTAINS
           CASE (2)
             !           Test DSYMM, 02.
             CALL DCHK23(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
-              NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,&
-              cs,ct,g)
+              NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,cs,ct,g)
           CASE (3,4)
             !           Test DTRMM, 03, DTRSM, 04.
             CALL DCHK33(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
@@ -464,8 +453,7 @@ CONTAINS
           CASE (5)
             !           Test DSYRK, 05.
             CALL DCHK43(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
-              NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,&
-              cs,ct,g)
+              NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,cs,ct,g)
           CASE (6)
             !           Test DSYR2K, 06.
             CALL DCHK53(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
@@ -473,8 +461,7 @@ CONTAINS
           CASE DEFAULT
             !           Test DGEMM, 01.
             CALL DCHK13(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
-              NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,&
-              cs,ct,g)
+              NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,cs,ct,g)
         END SELECT
         !
         IF ( ftl1.OR.ftl2 ) Ipass = 0
@@ -839,8 +826,7 @@ CONTAINS
     LOGICAL Mv
     CHARACTER :: Transa, Transb
     !     .. Array Arguments ..
-    REAL(8) :: A(Lda,*), B(Ldb,*), C(Ldc,*), Cc(Ldcc,*), Ct(*), &
-      G(*)
+    REAL(8) :: A(Lda,*), B(Ldb,*), C(Ldc,*), Cc(Ldcc,*), Ct(*), G(*)
     !     .. Local Scalars ..
     REAL(8) :: erri
     INTEGER i, j, k
@@ -920,8 +906,7 @@ CONTAINS
     RETURN
     !
     99001 FORMAT (' ******* FATAL ERROR - COMPUTED RESULT IS LESS THAN HAL',&
-      'F ACCURATE *******',/'           EXPECTED RESULT   COMPU',&
-      'TED RESULT')
+      'F ACCURATE *******',/'           EXPECTED RESULT   COMPUTED RESULT')
     99002 FORMAT (1X,I7,2G18.6)
     !
     !     End of DMMCH.
@@ -1043,8 +1028,7 @@ CONTAINS
     RETURN
     !
     99001 FORMAT (' ******* FATAL ERROR - COMPUTED RESULT IS LESS THAN HAL',&
-      'F ACCURATE *******',/'           EXPECTED RESULT   COMPU',&
-      'TED RESULT')
+      'F ACCURATE *******',/'           EXPECTED RESULT   COMPUTED RESULT')
     99002 FORMAT (1X,I7,2G18.6)
     !
     !     End of DMVCH.
@@ -1167,8 +1151,7 @@ CONTAINS
   END FUNCTION LDERES
   !** DCHK12
   SUBROUTINE DCHK12(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
-      Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,&
-      Y,Yy,Ys,Yt,G)
+      Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
     IMPLICIT NONE
     !>
     !***
@@ -1203,10 +1186,9 @@ CONTAINS
     INTEGER Incmax, Kprint, Nalf, Nbet, Nidim, Ninc, Nkb, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax)&
-      , Bet(Nbet), G(Nmax), X(Nmax), Xs(Nmax*Incmax), &
-      Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), Yt(Nmax), &
-      Yy(Nmax*Incmax)
+    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+      Bet(Nbet), G(Nmax), X(Nmax), Xs(Nmax*Incmax), &
+      Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
     INTEGER Idim(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
     REAL(8) :: alpha, als, beta, bls, err, errmax, transl
@@ -1215,7 +1197,6 @@ CONTAINS
       ml, ms, n, nargs, nc, nd, nk, nl, ns, nerr
     LOGICAL banded, ftl, full, null, reset, tran
     CHARACTER :: trans, transs
-    CHARACTER(3) :: ich
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
@@ -1225,7 +1206,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA ich/'NTC'/
+    CHARACTER(3), PARAMETER :: ich = 'NTC'
     !* FIRST EXECUTABLE STATEMENT  DCHK12
     full = Sname(3:3)=='E'
     banded = Sname(3:3)=='B'
@@ -1276,8 +1257,7 @@ CONTAINS
             !              Generate the matrix A.
             !
             transl = ZERO
-            CALL DMAKE2(Sname(2:3),' ',' ',m,n,A,Nmax,Aa,lda,kl,ku,reset,&
-              transl)
+            CALL DMAKE2(Sname(2:3),' ',' ',m,n,A,Nmax,Aa,lda,kl,ku,reset,transl)
             !
             DO ic = 1, 3
               trans = ich(ic:ic)
@@ -1349,8 +1329,7 @@ CONTAINS
                       !                             Call the subroutine.
                       !
                       IF ( full ) THEN
-                        CALL DGEMV(trans,m,n,alpha,Aa,lda,Xx,incx,beta,Yy,&
-                          incy)
+                        CALL DGEMV(trans,m,n,alpha,Aa,lda,Xx,incx,beta,Yy,incy)
                       ELSEIF ( banded ) THEN
                         CALL DGBMV(trans,m,n,kl,ku,alpha,Aa,lda,Xx,incx,beta,&
                           Yy,incy)
@@ -1426,8 +1405,7 @@ CONTAINS
                               n, alpha, lda, incx, beta, incy
                           ELSEIF ( banded ) THEN
                             WRITE (Nout,FMT=99005) nc, Sname, trans, m, &
-                              n, kl, ku, alpha, lda, incx, beta, &
-                              incy
+                              n, kl, ku, alpha, lda, incx, beta, incy
                           ENDIF
                         ENDIF
                       ENDIF
@@ -1517,10 +1495,9 @@ CONTAINS
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax)&
-      , G(Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
-      C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax), &
-      B(Nmax,Nmax)
+    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+      G(Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
+      C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax), B(Nmax,Nmax)
     INTEGER Idim(Nidim)
     !     .. Local Scalars ..
     REAL(8) :: alpha, als, beta, bls, err, errmax
@@ -1529,7 +1506,6 @@ CONTAINS
       n, na, nargs, nb, nc, nerr, ns
     LOGICAL ftl, null, reset, trana, tranb
     CHARACTER :: tranas, tranbs, transa, transb
-    CHARACTER(3) :: ich
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
@@ -1539,7 +1515,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA ich/'NTC'/
+    CHARACTER(3), PARAMETER :: ich = 'NTC'
     !* FIRST EXECUTABLE STATEMENT  DCHK13
     nargs = 13
     nc = 0
@@ -1689,8 +1665,7 @@ CONTAINS
                           !                             Check the result.
                           !
                           CALL DMMCH(transa,transb,m,n,k,alpha,A,Nmax,B,Nmax,&
-                            beta,C,Nmax,Ct,G,Cc,ldc,Eps,err,ftl,Nout,&
-                            .TRUE.,Kprint)
+                            beta,C,Nmax,Ct,G,Cc,ldc,Eps,err,ftl,Nout,.TRUE.,Kprint)
                           errmax = MAX(errmax,err)
                         ENDIF
                         IF ( ftl ) THEN
@@ -1698,8 +1673,7 @@ CONTAINS
                           IF ( Kprint>=3 ) THEN
                             WRITE (Nout,FMT=99004) Sname
                             WRITE (Nout,FMT=99005) nc, Sname, transa, &
-                              transb, m, n, k, alpha, lda, ldb, &
-                              beta, ldc
+                              transb, m, n, k, alpha, lda, ldb, beta, ldc
                           ENDIF
                         ENDIF
                         !
@@ -1749,8 +1723,7 @@ CONTAINS
   END SUBROUTINE DCHK13
   !** DCHK22
   SUBROUTINE DCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
-      Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,&
-      Y,Yy,Ys,Yt,G)
+      Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
     IMPLICIT NONE
     !>
     !***
@@ -1786,19 +1759,16 @@ CONTAINS
     INTEGER Incmax, Kprint, Nalf, Nbet, Nidim, Ninc, Nkb, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax)&
-      , Bet(Nbet), G(Nmax), X(Nmax), Xs(Nmax*Incmax), &
-      Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), Yt(Nmax), &
-      Yy(Nmax*Incmax)
+    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+      Bet(Nbet), G(Nmax), X(Nmax), Xs(Nmax*Incmax), &
+      Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
     INTEGER Idim(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
     REAL(8) :: alpha, als, beta, bls, err, errmax, transl
     INTEGER i, ia, ib, ic, ik, in, incx, incxs, incy, incys, ix, &
-      iy, k, ks, laa, lda, ldas, lx, ly, n, nargs, nc, nk, &
-      ns, nerr
+      iy, k, ks, laa, lda, ldas, lx, ly, n, nargs, nc, nk, ns, nerr
     LOGICAL banded, ftl, full, null, packed, reset
     CHARACTER :: uplo, uplos
-    CHARACTER(2) :: ich
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
@@ -1808,7 +1778,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
-    DATA ich/'UL'/
+    CHARACTER(2), PARAMETER :: ich = 'UL'
     !* FIRST EXECUTABLE STATEMENT  DCHK22
     full = Sname(3:3)=='Y'
     banded = Sname(3:3)=='B'
@@ -1862,8 +1832,7 @@ CONTAINS
             !              Generate the matrix A.
             !
             transl = ZERO
-            CALL DMAKE2(Sname(2:3),uplo,' ',n,n,A,Nmax,Aa,lda,k,k,reset,&
-              transl)
+            CALL DMAKE2(Sname(2:3),uplo,' ',n,n,A,Nmax,Aa,lda,k,k,reset,transl)
             !
             DO ix = 1, Ninc
               incx = Inc(ix)
@@ -1872,8 +1841,7 @@ CONTAINS
               !                 Generate the vector X.
               !
               transl = HALF
-              CALL DMAKE2('GE',' ',' ',1,n,X,1,Xx,ABS(incx),0,n-1,reset,&
-                transl)
+              CALL DMAKE2('GE',' ',' ',1,n,X,1,Xx,ABS(incx),0,n-1,reset,transl)
               IF ( n>1 ) THEN
                 X(n/2) = ZERO
                 Xx(1+ABS(incx)*(n/2-1)) = ZERO
@@ -2101,10 +2069,9 @@ CONTAINS
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax)&
-      , G(Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
-      C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax), &
-      B(Nmax,Nmax)
+    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+      G(Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
+      C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax), B(Nmax,Nmax)
     INTEGER Idim(Nidim)
     !     .. Local Scalars ..
     REAL(8) :: alpha, als, beta, bls, err, errmax
@@ -2112,7 +2079,6 @@ CONTAINS
       ldb, ldbs, ldc, ldcs, m, ms, n, na, nargs, nc, nerr, ns
     LOGICAL ftl, left, null, reset
     CHARACTER :: side, sides, uplo, uplos
-    CHARACTER(2) :: ichs, ichu
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
@@ -2122,7 +2088,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA ichs/'LR'/, ichu/'UL'/
+    CHARACTER(2), PARAMETER :: ichs = 'LR', ichu = 'UL'
     !* FIRST EXECUTABLE STATEMENT  DCHK23
     nargs = 12
     nc = 0
@@ -2212,8 +2178,7 @@ CONTAINS
                       !
                       !                       Call the subroutine.
                       !
-                      CALL DSYMM(side,uplo,m,n,alpha,Aa,lda,Bb,ldb,beta,Cc,&
-                        ldc)
+                      CALL DSYMM(side,uplo,m,n,alpha,Aa,lda,Bb,ldb,beta,Cc,ldc)
                       !
                       !                       Check if error-exit was taken incorrectly.
                       !
@@ -2258,12 +2223,10 @@ CONTAINS
                         !
                         IF ( left ) THEN
                           CALL DMMCH('N','N',m,n,m,alpha,A,Nmax,B,Nmax,beta,C,&
-                            Nmax,Ct,G,Cc,ldc,Eps,err,ftl,Nout,.TRUE.,&
-                            Kprint)
+                            Nmax,Ct,G,Cc,ldc,Eps,err,ftl,Nout,.TRUE.,Kprint)
                         ELSE
                           CALL DMMCH('N','N',m,n,n,alpha,B,Nmax,A,Nmax,beta,C,&
-                            Nmax,Ct,G,Cc,ldc,Eps,err,ftl,Nout,.TRUE.,&
-                            Kprint)
+                            Nmax,Ct,G,Cc,ldc,Eps,err,ftl,Nout,.TRUE.,Kprint)
                         ENDIF
                         errmax = MAX(errmax,err)
                       ENDIF
@@ -2357,8 +2320,7 @@ CONTAINS
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
     REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), As(Nmax*Nmax), G(Nmax), &
-      X(Nmax), Xs(Nmax*Incmax), Xt(Nmax), Xx(Nmax*Incmax), &
-      Z(Nmax)
+      X(Nmax), Xs(Nmax*Incmax), Xt(Nmax), Xx(Nmax*Incmax), Z(Nmax)
     INTEGER Idim(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
     REAL(8) :: err, errmax, transl
@@ -2366,8 +2328,6 @@ CONTAINS
       lda, ldas, lx, n, nargs, nc, nk, ns, nerr
     LOGICAL banded, ftl, full, null, packed, reset
     CHARACTER :: diag, diags, trans, transs, uplo, uplos
-    CHARACTER(2) :: ichd, ichu
-    CHARACTER(3) :: icht
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
@@ -2377,7 +2337,8 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
-    DATA ichu/'UL'/, icht/'NTC'/, ichd/'UN'/
+    CHARACTER(2), PARAMETER :: ichu = 'UL', ichd = 'UN'
+    CHARACTER(3), PARAMETER :: icht = 'NTC'
     !* FIRST EXECUTABLE STATEMENT  DCHK32
     full = Sname(3:3)=='R'
     banded = Sname(3:3)=='B'
@@ -2669,9 +2630,9 @@ CONTAINS
     INTEGER Kprint, Nalf, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax)&
-      , G(Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), C(Nmax,Nmax)&
-      , Ct(Nmax), B(Nmax,Nmax)
+    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+      G(Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), C(Nmax,Nmax), &
+      Ct(Nmax), B(Nmax,Nmax)
     INTEGER Idim(Nidim)
     !     .. Local Scalars ..
     REAL(8) :: alpha, als, err, errmax
@@ -2679,8 +2640,6 @@ CONTAINS
       ldas, ldb, ldbs, m, ms, n, na, nargs, nc, nerr, ns
     LOGICAL ftl, left, null, reset
     CHARACTER :: diag, diags, side, sides, tranas, transa, uplo, uplos
-    CHARACTER(2) :: ichs, ichu, ichd
-    CHARACTER(3) :: icht
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
@@ -2690,7 +2649,8 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA ichu/'UL'/, icht/'NTC'/, ichd/'UN'/, ichs/'LR'/
+    CHARACTER(2), PARAMETER :: ichu = 'UL', ichd = 'UN', ichs = 'LR'
+    CHARACTER(3), PARAMETER :: icht = 'NTC'
     !* FIRST EXECUTABLE STATEMENT  DCHK33
     nargs = 11
     nc = 0
@@ -2775,11 +2735,9 @@ CONTAINS
                     !                          Call the subroutine.
                     !
                     IF ( Sname(4:5)=='MM' ) THEN
-                      CALL DTRMM(side,uplo,transa,diag,m,n,alpha,Aa,lda,Bb,&
-                        ldb)
+                      CALL DTRMM(side,uplo,transa,diag,m,n,alpha,Aa,lda,Bb,ldb)
                     ELSEIF ( Sname(4:5)=='SM' ) THEN
-                      CALL DTRSM(side,uplo,transa,diag,m,n,alpha,Aa,lda,Bb,&
-                        ldb)
+                      CALL DTRSM(side,uplo,transa,diag,m,n,alpha,Aa,lda,Bb,ldb)
                     ENDIF
                     !
                     !                          Check if error-exit was taken incorrectly.
@@ -2825,12 +2783,10 @@ CONTAINS
                         !
                         IF ( left ) THEN
                           CALL DMMCH(transa,'N',m,n,m,alpha,A,Nmax,B,Nmax,&
-                            ZERO,C,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,&
-                            .TRUE.,Kprint)
+                            ZERO,C,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,.TRUE.,Kprint)
                         ELSE
                           CALL DMMCH('N',transa,m,n,n,alpha,B,Nmax,A,Nmax,&
-                            ZERO,C,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,&
-                            .TRUE.,Kprint)
+                            ZERO,C,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,.TRUE.,Kprint)
                         ENDIF
                       ELSEIF ( Sname(4:5)=='SM' ) THEN
                         !
@@ -2846,12 +2802,10 @@ CONTAINS
                         !
                         IF ( left ) THEN
                           CALL DMMCH(transa,'N',m,n,m,ONE,A,Nmax,C,Nmax,ZERO,&
-                            B,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,&
-                            .FALSE.,Kprint)
+                            B,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,.FALSE.,Kprint)
                         ELSE
                           CALL DMMCH('N',transa,m,n,n,ONE,C,Nmax,A,Nmax,ZERO,&
-                            B,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,&
-                            .FALSE.,Kprint)
+                            B,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,.FALSE.,Kprint)
                         ENDIF
                       ENDIF
                       errmax = MAX(errmax,err)
@@ -2944,16 +2898,14 @@ CONTAINS
     INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax)&
-      , G(Nmax), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), &
-      Y(Nmax), Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax), &
-      Z(Nmax)
+    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+      G(Nmax), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), &
+      Y(Nmax), Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
     INTEGER Idim(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
     REAL(8) :: alpha, als, err, errmax, transl
     INTEGER i, ia, im, in, incx, incxs, incy, incys, ix, iy, j, &
-      laa, lda, ldas, lx, ly, m, ms, n, nargs, nc, nd, ns, &
-      nerr
+      laa, lda, ldas, lx, ly, m, ms, n, nargs, nc, nd, ns, nerr
     LOGICAL ftl, null, reset
     !     .. Local Arrays ..
     REAL(8) :: w(1)
@@ -3008,8 +2960,7 @@ CONTAINS
               !                 Generate the vector Y.
               !
               transl = ZERO
-              CALL DMAKE2('GE',' ',' ',1,n,Y,1,Yy,ABS(incy),0,n-1,reset,&
-                transl)
+              CALL DMAKE2('GE',' ',' ',1,n,Y,1,Yy,ABS(incy),0,n-1,reset,transl)
               IF ( n>1 ) THEN
                 Y(n/2) = ZERO
                 Yy(1+ABS(incy)*(n/2-1)) = ZERO
@@ -3110,8 +3061,7 @@ CONTAINS
                   IF ( Kprint>=3 ) THEN
                     WRITE (Nout,FMT=99005) j
                     WRITE (Nout,FMT=99004) Sname
-                    WRITE (Nout,FMT=99006) nc, Sname, m, n, alpha, incx, &
-                      incy, lda
+                    WRITE (Nout,FMT=99006) nc, Sname, m, n, alpha, incx, incy, lda
                   ENDIF
                 ENDIF
                 !
@@ -3193,20 +3143,16 @@ CONTAINS
     INTEGER Kprint, Nalf, Nbet, Nidim, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax)&
-      , G(Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
-      C(Nmax,Nmax), Cc(Nmax*Nmax), Ct(Nmax), B(Nmax,Nmax), &
-      Cs(Nmax*Nmax)
+    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+      G(Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
+      C(Nmax,Nmax), Cc(Nmax*Nmax), Ct(Nmax), B(Nmax,Nmax), Cs(Nmax*Nmax)
     INTEGER Idim(Nidim)
     !     .. Local Scalars ..
     REAL(8) :: alpha, als, beta, bets, err, errmax
     INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, k, ks, laa, &
-      lcc, lda, ldas, ldc, ldcs, lj, ma, n, na, nerr, ns, &
-      nargs, nc
+      lcc, lda, ldas, ldc, ldcs, lj, ma, n, na, nerr, ns, nargs, nc
     LOGICAL ftl, null, reset, tran, upper
     CHARACTER :: trans, transs, uplo, uplos
-    CHARACTER(2) :: ichu
-    CHARACTER(3) :: icht
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
@@ -3216,7 +3162,8 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA ichu/'UL'/, icht/'NTC'/
+    CHARACTER(2), PARAMETER :: ichu = 'UL'
+    CHARACTER(3), PARAMETER :: icht = 'NTC'
     !* FIRST EXECUTABLE STATEMENT  DCHK43
     nargs = 10
     nc = 0
@@ -3446,10 +3393,9 @@ CONTAINS
     INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax)&
-      , G(Nmax), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), &
-      Y(Nmax), Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax), &
-      Z(Nmax)
+    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+      G(Nmax), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), &
+      Y(Nmax), Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
     INTEGER Idim(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
     REAL(8) :: alpha, als, err, errmax, transl
@@ -3457,7 +3403,6 @@ CONTAINS
       ldas, lj, lx, n, nargs, nc, ns, nerr
     LOGICAL ftl, full, null, packed, reset, upper
     CHARACTER :: uplo, uplos
-    CHARACTER(2) :: ich
     !     .. Local Arrays ..
     REAL(8) :: w(1)
     LOGICAL isame(13)
@@ -3468,7 +3413,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
-    DATA ich/'UL'/
+    CHARACTER(2), PARAMETER :: ich = 'UL'
     !* FIRST EXECUTABLE STATEMENT  DCHK52
     full = Sname(3:3)=='Y'
     packed = Sname(3:3)=='P'
@@ -3620,11 +3565,9 @@ CONTAINS
                   WRITE (Nout,FMT=99005) j
                   WRITE (Nout,FMT=99004) Sname
                   IF ( full ) THEN
-                    WRITE (Nout,FMT=99007) nc, Sname, uplo, n, alpha, &
-                      incx, lda
+                    WRITE (Nout,FMT=99007) nc, Sname, uplo, n, alpha, incx, lda
                   ELSEIF ( packed ) THEN
-                    WRITE (Nout,FMT=99006) nc, Sname, uplo, n, alpha, &
-                      incx
+                    WRITE (Nout,FMT=99006) nc, Sname, uplo, n, alpha, incx
                   ENDIF
                 ENDIF
               ENDIF
@@ -3708,19 +3651,16 @@ CONTAINS
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
     REAL(8) :: Aa(Nmax*Nmax), Ab(2*Nmax*Nmax), Alf(Nalf), &
-      As(Nmax*Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax)&
-      , C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax)&
-      , G(Nmax), W(2*Nmax)
+      As(Nmax*Nmax), Bb(Nmax*Nmax), Bet(Nbet), Bs(Nmax*Nmax), &
+      C(Nmax,Nmax), Cc(Nmax*Nmax), Cs(Nmax*Nmax), Ct(Nmax), &
+      G(Nmax), W(2*Nmax)
     INTEGER Idim(Nidim)
     !     .. Local Scalars ..
     REAL(8) :: alpha, als, beta, bets, err, errmax
-    INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, jjab, k, ks, &
-      laa, lbb, lcc, lda, ldas, ldb, ldbs, ldc, ldcs, lj, ma, &
-      n, na, nargs, nc, nerr, ns
+    INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, jjab, k, ks, laa, lbb, lcc, &
+      lda, ldas, ldb, ldbs, ldc, ldcs, lj, ma, n, na, nargs, nc, nerr, ns
     LOGICAL ftl, null, reset, tran, upper
     CHARACTER :: trans, transs, uplo, uplos
-    CHARACTER(2) :: ichu
-    CHARACTER(3) :: icht
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
@@ -3730,7 +3670,8 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA ichu/'UL'/, icht/'NTC'/
+    CHARACTER(2), PARAMETER :: ichu = 'UL'
+    CHARACTER(3), PARAMETER :: icht = 'NTC'
     !* FIRST EXECUTABLE STATEMENT  DCHK53
     nargs = 12
     nc = 0
@@ -3780,8 +3721,7 @@ CONTAINS
               ldb = lda
               lbb = laa
               IF ( tran ) THEN
-                CALL DMAKE3('GE',' ',' ',ma,na,Ab(k+1),2*Nmax,Bb,ldb,reset,&
-                  ZERO)
+                CALL DMAKE3('GE',' ',' ',ma,na,Ab(k+1),2*Nmax,Bb,ldb,reset,ZERO)
               ELSE
                 CALL DMAKE3('GE',' ',' ',ma,na,Ab(k*Nmax+1),Nmax,Bb,ldb,reset,&
                   ZERO)
@@ -3826,8 +3766,7 @@ CONTAINS
                     !
                     !                       Call the subroutine.
                     !
-                    CALL DSYR2K(uplo,trans,n,k,alpha,Aa,lda,Bb,ldb,beta,Cc,&
-                      ldc)
+                    CALL DSYR2K(uplo,trans,n,k,alpha,Aa,lda,Bb,ldb,beta,Cc,ldc)
                     !
                     !                       Check if error-exit was taken incorrectly.
                     !
@@ -3993,19 +3932,16 @@ CONTAINS
     INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax)&
-      , G(Nmax), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), &
-      Y(Nmax), Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax), &
-      Z(Nmax,2)
+    REAL(8) :: A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
+      G(Nmax), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), &
+      Y(Nmax), Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax,2)
     INTEGER Idim(Nidim), Inc(Ninc)
     !     .. Local Scalars ..
     REAL(8) :: alpha, als, err, errmax, transl
     INTEGER i, ia, ic, in, incx, incxs, incy, incys, ix, iy, j, &
-      ja, jj, laa, lda, ldas, lj, lx, ly, n, nargs, nc, ns, &
-      nerr
+      ja, jj, laa, lda, ldas, lj, lx, ly, n, nargs, nc, ns, nerr
     LOGICAL ftl, full, null, packed, reset, upper
     CHARACTER :: uplo, uplos
-    CHARACTER(2) :: ich
     !     .. Local Arrays ..
     REAL(8) :: w(2)
     LOGICAL isame(13)
@@ -4016,7 +3952,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
-    DATA ich/'UL'/
+    CHARACTER(2), PARAMETER :: ich = 'UL'
     !* FIRST EXECUTABLE STATEMENT  DCHK62
     full = Sname(3:3)=='Y'
     packed = Sname(3:3)=='P'
@@ -4068,8 +4004,7 @@ CONTAINS
               !                 Generate the vector Y.
               !
               transl = ZERO
-              CALL DMAKE2('GE',' ',' ',1,n,Y,1,Yy,ABS(incy),0,n-1,reset,&
-                transl)
+              CALL DMAKE2('GE',' ',' ',1,n,Y,1,Yy,ABS(incy),0,n-1,reset,transl)
               IF ( n>1 ) THEN
                 Y(n/2) = ZERO
                 Yy(1+ABS(incy)*(n/2-1)) = ZERO
@@ -4288,8 +4223,7 @@ CONTAINS
     REAL(8) :: a(1,1), x(1), y(1)
     !     .. External Subroutines ..
     EXTERNAL :: CHKXER, DGBMV, DGEMV, DGER, DSBMV, DSPMV, DSPR, DSPR2, &
-      DSYMV, DSYR, DSYR2, DTBMV, DTBSV, DTPMV, DTPSV, DTRMV, &
-      DTRSV
+      DSYMV, DSYR, DSYR2, DTBMV, DTBSV, DTPMV, DTPSV, DTRMV, DTRSV
     !* FIRST EXECUTABLE STATEMENT  DCHKE2
     CALL XGETF(kontrl)
     IF ( Kprint<=2 ) THEN

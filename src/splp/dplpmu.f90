@@ -59,8 +59,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     two, Uu, wp, Xlamda, Rhsnrm, zero, Amat(*), &
     Basmat(*), Csc(*), Wr(*), Rprim(*), Ww(*), Bu(*), &
     Bl(*), Rhs(*), Erd(*), Erp(*), Rz(*), Rg(*), &
-    Costs(*), Primal(*), Duals(*), Colnrm(*), rcost, &
-    DASUM, DDOT, cnorm
+    Costs(*), Primal(*), Duals(*), Colnrm(*), rcost, DASUM, DDOT, cnorm
   LOGICAL Singlr, Redbas, pagepl, trans, Zerolv, Stpedg
   !
   !* FIRST EXECUTABLE STATEMENT  DPLPMU
@@ -176,8 +175,7 @@ SUBROUTINE DPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     !     LA05CD( ) IS NOTED.  THIS WILL PROBABLY BE DUE TO
     !     SPACE BEING EXHAUSTED, GG=-7.
     CALL DPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,Ipr,&
-      Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,&
-      Redbas)
+      Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,Redbas)
     IF ( .NOT.(Singlr) ) THEN
       !     PROCEDURE (COMPUTE NEW PRIMAL)
       !

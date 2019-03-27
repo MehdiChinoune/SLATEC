@@ -70,11 +70,9 @@ SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
   
   !
   REAL Abserr, delta1, delta2, delta3, R1MACH, epmach, epsinf, &
-    Epstab, error, err1, err2, err3, e0, e1, e1abs, e2, e3, &
-    oflow, res, Result, Res3la, ss, tol1, tol2, tol3
-  INTEGER i, ib, ib2, ie, indx, k1, k2, k3, limexp, N, newelm, &
-    Nres, num
-  DIMENSION Epstab(52), Res3la(3)
+    Epstab(52), error, err1, err2, err3, e0, e1, e1abs, e2, e3, &
+    oflow, res, Result, Res3la(3), ss, tol1, tol2, tol3
+  INTEGER i, ib, ib2, ie, indx, k1, k2, k3, limexp, N, newelm, Nres, num
   !
   !           LIST OF MAJOR VARIABLES
   !           -----------------------
@@ -200,8 +198,7 @@ SUBROUTINE QELG(N,Epstab,Result,Abserr,Res3la,Nres)
       !
       !           COMPUTE ERROR ESTIMATE
       !
-      Abserr = ABS(Result-Res3la(3)) + ABS(Result-Res3la(2))&
-        + ABS(Result-Res3la(1))
+      Abserr = ABS(Result-Res3la(3)) + ABS(Result-Res3la(2)) + ABS(Result-Res3la(1))
       Res3la(1) = Res3la(2)
       Res3la(2) = Res3la(3)
       Res3la(3) = Result

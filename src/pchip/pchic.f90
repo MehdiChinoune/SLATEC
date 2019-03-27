@@ -240,8 +240,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
     !
     !     N.LT.2 RETURN.
     Ierr = -1
-    CALL XERMSG('SLATEC','PCHIC','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,&
-      1)
+    CALL XERMSG('SLATEC','PCHIC','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
     RETURN
   ELSEIF ( Incfd<1 ) THEN
     !

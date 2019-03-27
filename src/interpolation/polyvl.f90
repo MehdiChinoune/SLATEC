@@ -84,10 +84,9 @@ SUBROUTINE POLYVL(Nder,Xx,Yfit,Yp,N,X,C,Work,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL C, fac, pione, pitwo, pone, ptwo, Work, X, xk, Xx, Yfit, Yp
+  REAL C(*), fac, pione, pitwo, pone, ptwo, Work(*), X(*), xk, Xx, Yfit, Yp(*)
   INTEGER i, Ierr, im1, izero, k, km1, km1pi, km2pn, km2pni, m, &
     mm, N, Nder, ndr, nmkp1, npkm1
-  DIMENSION Yp(*), X(*), C(*), Work(*)
   !* FIRST EXECUTABLE STATEMENT  POLYVL
   Ierr = 1
   IF ( Nder<=0 ) THEN

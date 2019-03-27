@@ -71,8 +71,7 @@ SUBROUTINE INTRV(Xt,Lxt,X,Ilo,Ileft,Mflag)
   
   !
   INTEGER ihi, Ileft, Ilo, istep, Lxt, Mflag, middle
-  REAL X, Xt
-  DIMENSION Xt(*)
+  REAL X, Xt(*)
   !* FIRST EXECUTABLE STATEMENT  INTRV
   ihi = Ilo + 1
   IF ( ihi>=Lxt ) THEN

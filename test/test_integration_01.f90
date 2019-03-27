@@ -27,9 +27,8 @@ CONTAINS
     !   920210  Code restructured and revised to test error returns for all
     !           values of KPRINT.  (WRB)
 
-    REAL a, ans, b, del, R1MACH, rn1, sqb, tol, tol1, x, xint, y
+    REAL a, ans, b, del, R1MACH, rn1, sqb, tol, tol1, x(501), xint, y(501)
     INTEGER i, ierr, Ipass, kontrl, Kprint, Lun, n
-    DIMENSION x(501), y(501)
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  AVNTST
     IF ( Kprint>=2 ) WRITE (Lun,99001)
@@ -263,12 +262,10 @@ CONTAINS
     CALL GAUS8(FQD1,a,b,err,ans,ierr)
     cor = 2.0E0
     IF ( ABS(ans-cor)<=tol.AND.ierr==1 ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, &
-        ierr
+      IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, ierr
     ELSE
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, &
-        ierr
+      IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, ierr
     ENDIF
     !
     !     Second accuracy test.
@@ -279,12 +276,10 @@ CONTAINS
     CALL GAUS8(FQD2,a,b,err,ans,ierr)
     cor = (EXP(b)-1.0E0)/101.0E0
     IF ( ABS(ans-cor)<=tol.AND.ierr==1 ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, &
-        ierr
+      IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, ierr
     ELSE
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, &
-        ierr
+      IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, ierr
     ENDIF
     !
     !     Test error returns.
@@ -311,11 +306,9 @@ CONTAINS
     !     See if test passed.
     !
     IF ( ierr==2 ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, &
-        err, cor
+      IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, err, cor
     ELSE
-      IF ( Kprint>=2 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, &
-        err, cor
+      IF ( Kprint>=2 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, err, cor
       Ipass = 0
       fatal = .TRUE.
     ENDIF
@@ -419,12 +412,10 @@ CONTAINS
     CALL QNC79(FQD1,a,b,err,ans,ierr,nfct)
     cor = 2.0E0
     IF ( ABS(ans-cor)<=tol.AND.ierr==1 ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, &
-        ierr, nfct
+      IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, ierr, nfct
     ELSE
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, &
-        ierr, nfct
+      IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, ierr, nfct
     ENDIF
     !
     !     Second accuracy test.
@@ -435,12 +426,10 @@ CONTAINS
     CALL QNC79(FQD2,a,b,err,ans,ierr,nfct)
     cor = (EXP(b)-1.0E0)/101.0E0
     IF ( ABS(ans-cor)<=tol.AND.ierr==1 ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, &
-        ierr, nfct
+      IF ( Kprint>=3 ) WRITE (Lun,99004) 'PASSED', a, b, ans, cor, err, ierr, nfct
     ELSE
       Ipass = 0
-      IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, &
-        ierr, nfct
+      IF ( Kprint>=2 ) WRITE (Lun,99004) 'FAILED', a, b, ans, cor, err, ierr, nfct
     ENDIF
     !
     !     Test error returns.
@@ -467,11 +456,9 @@ CONTAINS
     !     See if test passed.
     !
     IF ( ierr==2 ) THEN
-      IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, &
-        err, cor
+      IF ( Kprint>=3 ) WRITE (Lun,FMT=99006) 'PASSED', req, ans, ierr, err, cor
     ELSE
-      IF ( Kprint>=2 ) WRITE (Lun,FMT=99006) 'FAILED', req, ans, ierr, &
-        err, cor
+      IF ( Kprint>=2 ) WRITE (Lun,FMT=99006) 'FAILED', req, ans, ierr, err, cor
       Ipass = 0
       fatal = .TRUE.
     ENDIF

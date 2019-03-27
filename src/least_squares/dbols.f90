@@ -456,8 +456,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
     !     SEE THAT MDW IS .GT.0. GROSS CHECK ONLY.
     IF ( Mdw<=0 ) THEN
       WRITE (xern1,'(I8)') Mdw
-      CALL XERMSG('SLATEC','DBOLS','MDW = '//xern1//' MUST BE POSITIVE.',2,&
-        1)
+      CALL XERMSG('SLATEC','DBOLS','MDW = '//xern1//' MUST BE POSITIVE.',2,1)
       !     DO(RETURN TO USER PROGRAM UNIT)
       GOTO 100
     ENDIF
@@ -528,8 +527,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
             WRITE (xern1,'(I8)') lmdw
             WRITE (xern2,'(I8)') Mrows
             CALL XERMSG('SLATEC','DBOLS','THE ROW DIMENSION OF W(,) = '//&
-              xern1//' MUST BE .GE. THE NUMBER OF ROWS = '//xern2,&
-              11,1)
+              xern1//' MUST BE .GE. THE NUMBER OF ROWS = '//xern2,11,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           ENDIF
@@ -577,8 +575,7 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
             WRITE (xern1,'(I8)') liopt
             WRITE (xern2,'(I8)') lp + 1
             CALL XERMSG('SLATEC','DBOLS','THE DIMENSION OF IOPT() = '//&
-              xern1//' MUST BE .GE. THE REQUIRED LEN = '//xern2,&
-              17,1)
+              xern1//' MUST BE .GE. THE REQUIRED LEN = '//xern2,17,1)
             !     DO(RETURN TO USER PROGRAM UNIT)
             GOTO 100
           ENDIF
@@ -683,8 +680,8 @@ SUBROUTINE DBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
               WRITE (xern1,'(I8)') j
               WRITE (xern3,'(1PE15.6)') Rw(j)
               CALL XERMSG('SLATEC','DBOLS',&
-                'EACH PROVIDED COLUMN SCALE FACTOR MUST BE POSITIVE.$$COMPONENT '//xern1//&
-                ' NOW = '//xern3,9,1)
+                'EACH PROVIDED COLUMN SCALE FACTOR MUST BE POSITIVE.$$COMPONENT '&
+                //xern1//' NOW = '//xern3,9,1)
               GOTO 100
             ENDIF
           ENDDO

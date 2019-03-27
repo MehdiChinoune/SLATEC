@@ -59,7 +59,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  
+
   INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, &
     k, k1, k2, kc, kcost, kj, kk, kl
   INTEGER klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, LCOl, &
@@ -67,15 +67,13 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   INTEGER Nz, nzc
   INTEGER Ip(N,2)
   INTEGER Ind(Ia,2), Iw(N,8)
-  REAL(8) :: A(*), amax, au, am, D1MACH, eps, G, U, SMAll, &
-    W(*)
-  LOGICAL first
+  REAL(8) :: A(*), amax, au, am, D1MACH, eps, G, U, SMAll, W(*)
   CHARACTER(8) :: xern0, xern1, xern2
   !
   COMMON /LA05DD/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
   ! EPS IS THE RELATIVE ACCURACY OF FLOATING-POINT COMPUTATION
-  SAVE eps, first
-  DATA first/.TRUE./
+  SAVE eps
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  LA05AD
   IF ( first ) eps = 2.0D0*D1MACH(4)
   first = .FALSE.
@@ -89,8 +87,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   IF ( N<1 ) THEN
     !
     IF ( LP>0 ) CALL XERMSG('SLATEC','LA05AD',&
-      'THE ORDER OF THE SYSTEM, N, IS NOT POSITIVE.',&
-      -1,1)
+      'THE ORDER OF THE SYSTEM, N, IS NOT POSITIVE.',-1,1)
     G = -1.0D0
     RETURN
   ELSE
@@ -504,8 +501,7 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
     WRITE (xern1,'(I8)') i
     WRITE (xern2,'(I8)') j
     CALL XERMSG('SLATEC','LA05AD','ELEMENT K = '//xern0//&
-      ' IS OUT OF BOUNDS.$$HERE ROW = '//xern1//' AND COL = '//&
-      xern2,-3,1)
+      ' IS OUT OF BOUNDS.$$HERE ROW = '//xern1//' AND COL = '//xern2,-3,1)
   ENDIF
   G = -3.
   RETURN

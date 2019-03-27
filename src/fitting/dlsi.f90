@@ -72,10 +72,10 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   REAL(8) :: anorm, drelpr, fac, gam, rb, tau, tol, xnorm, temp(1)
   INTEGER i, j, k, key, krank, krm1, krp1, l, last, link, m, &
     map1, mdlpdp, minman, n1, n2, n3, next, np1
-  LOGICAL cov, first, sclcov
+  LOGICAL cov, sclcov
   !
-  SAVE drelpr, first
-  DATA first/.TRUE./
+  SAVE drelpr
+  LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  DLSI
   !
@@ -158,8 +158,7 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
           !
           IF ( krank>0.AND.krank<N ) THEN
             DO i = krank, 1, -1
-              CALL DH12(2,i,krank+1,N,W(i,1),Mdw,Ws(n1+i-1),W(map1,1),Mdw,1,&
-                Mg)
+              CALL DH12(2,i,krank+1,N,W(i,1),Mdw,Ws(n1+i-1),W(map1,1),Mdw,1,Mg)
             ENDDO
           ENDIF
           !

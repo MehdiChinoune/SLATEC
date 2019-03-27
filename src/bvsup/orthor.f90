@@ -81,10 +81,9 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL A, acc, akk, anorm, as, asave, Diag, diagk, dum, R1MACH, &
-    Rows, Rs, rss, sad, Scales, SDOT, sig, sigma, sruro, uro
-  INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot, l, M, mk, N, Nrda
-  DIMENSION A(Nrda,*), Diag(*), Kpivot(*), Rows(*), Rs(*), Scales(*)
+  INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot(*), l, M, mk, N, Nrda
+  REAL A(Nrda,*), acc, akk, anorm, as, asave, Diag(*), diagk, dum, R1MACH, &
+    Rows(*), Rs(*), rss, sad, Scales(*), SDOT, sig, sigma, sruro, uro
   !
   ! END OF ABSTRACT
   !

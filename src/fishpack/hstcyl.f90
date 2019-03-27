@@ -327,11 +327,9 @@ SUBROUTINE HSTCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL A, a1, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, deltht, &
-    dlrsq, dlthsq, Elmbda, F, Pertrb, W
-  INTEGER i, Idimf, ierr1, Ierror, iwb, iwc, iwr, j, k, lp, M, &
-    Mbdcnd, N, Nbdcnd, np
-  DIMENSION F(Idimf,*), Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
+  INTEGER i, Idimf, ierr1, Ierror, iwb, iwc, iwr, j, k, lp, M, Mbdcnd, N, Nbdcnd, np
+  REAL A, a1, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, deltar, deltht, &
+    dlrsq, dlthsq, Elmbda, F(Idimf,*), Pertrb, W(*)
   !* FIRST EXECUTABLE STATEMENT  HSTCYL
   Ierror = 0
   IF ( A<0. ) Ierror = 1

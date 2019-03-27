@@ -123,14 +123,12 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
   !   910408  Updated the REFERENCES section.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL A, acc, B, Diag, Div, gam, gamma, Q, R, R1MACH, Resnrm, &
-    Scales, SDOT, SDSDOT, Td, uro, X, Xnorm, Z, znorm
+  INTEGER nfatal, nmir, Nrda
+  REAL A(Nrda,*), acc, B(*), Diag(*), Div(*), gam, gamma, Q(Nrda,*), R(*), &
+    R1MACH, Resnrm, Scales(*), SDOT, SDSDOT, Td(*), uro, X(*), Xnorm, Z(*), znorm
   REAL znrm0
   INTEGER Iflag, Irank, irm, irp, Iscale, it, Iter, iterp, j, &
-    J4SAVE, k, kp, Kpivot, l, M, maxmes, mj, mmir, N, nfat
-  INTEGER nfatal, nmir, Nrda
-  DIMENSION A(Nrda,*), X(*), B(*), Q(Nrda,*), Diag(*), Z(*), Kpivot(*)&
-    , R(*), Div(*), Td(*), Scales(*)
+    J4SAVE, k, kp, Kpivot(*), l, M, maxmes, mj, mmir, N, nfat
   !
   !- *********************************************************************
   !
@@ -255,8 +253,7 @@ SUBROUTINE LSSODS(A,X,B,M,N,Nrda,Iflag,Irank,Iscale,Q,Diag,Kpivot,Iter,&
           Z(k) = 0.
         ENDDO
         DO k = 1, Irank
-          gam = ((Td(k)*Z(k))+SDOT(nmir,Q(k,irp),Nrda,Z(irp),1))&
-            /(Td(k)*Div(k))
+          gam = ((Td(k)*Z(k))+SDOT(nmir,Q(k,irp),Nrda,Z(irp),1))/(Td(k)*Div(k))
           Z(k) = Z(k) + gam*Td(k)
           DO j = irp, N
             Z(j) = Z(j) + gam*Q(k,j)

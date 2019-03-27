@@ -92,8 +92,7 @@ CONTAINS
     REAL(8) :: arg, arg1, arg2, dt, pi, sum, sum1, sum2
     REAL azero, azeroh, cf, cosqbt, cosqfb, cosqft, costfb, costt, &
       dcfb, dcfftb, dcfftf, dezb1, dezf1, dezfb, errmax, rftb, &
-      rftf, rftfb, sign, sinqbt, sinqfb, sinqft, sintfb, sintt, &
-      sqrt2, tpi
+      rftf, rftfb, sign, sinqbt, sinqfb, sinqft, sintfb, sintt, sqrt2, tpi
     INTEGER i, j, k, modn, n, nm1, nns, np1, ns2, ns2m, nz
     !     .. Local Arrays ..
     COMPLEX cx(200), cy(200)
@@ -107,8 +106,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, CABS, CMPLX, COS, MAX, MOD, SIN, SQRT
     !     .. Data statements ..
-    DATA nd(1), nd(2), nd(3), nd(4), nd(5), nd(6), nd(7)/120, 54, 49, &
-      32, 4, 3, 2/
+    DATA nd(1:7)/120, 54, 49, 32, 4, 3, 2/
     !* FIRST EXECUTABLE STATEMENT  FFTQX
     sqrt2 = SQRT(2.0)
     errmax = 2.0*SQRT(R1MACH(4))
@@ -624,8 +622,7 @@ CONTAINS
       IF ( Kprint>=3 ) THEN
         WRITE (Lun,99041) n, rftf, rftb, rftfb, sintt, sintfb, costt, &
           costfb, sinqft, sinqbt, sinqfb, cosqft, &
-          cosqbt, cosqfb, dezf1, dezb1, dezfb, dcfftf, &
-          dcfftb, dcfb
+          cosqbt, cosqfb, dezf1, dezb1, dezfb, dcfftf, dcfftb, dcfb
         99041 FORMAT ('0N',I5,'  RFFTF  ',E9.3,'  RFFTB  ',E9.3,'  RFFTFB ',E9.3/7X,&
           '  SINT   ',E9.3,'  SINTFB ',E9.3/7X,'  COST   ',E9.3,&
           '  COSTFB ',E9.3/7X,'  SINQF  ',E9.3,'  SINQB  ',E9.3,&

@@ -44,21 +44,20 @@ REAL FUNCTION BETAI(X,Pin,Qin)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  
+
   REAL ALBETA, alneps, alnsml, c, eps, finsum, p, p1, Pin, ps, q, &
     Qin, R1MACH, sml, term, X, xb, y
   INTEGER i, ib, n
-  LOGICAL first
-  SAVE eps, alneps, sml, alnsml, first
-  DATA first/.TRUE./
+  SAVE eps, alneps, sml, alnsml
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BETAI
   IF ( first ) THEN
     eps = R1MACH(3)
     alneps = LOG(eps)
     sml = R1MACH(1)
     alnsml = LOG(sml)
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   IF ( X<0..OR.X>1.0 ) CALL XERMSG('SLATEC','BETAI',&
     'X IS NOT IN THE RANGE (0,1)',1,2)

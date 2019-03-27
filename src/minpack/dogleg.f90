@@ -74,8 +74,7 @@ SUBROUTINE DOGLEG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   REAL Delta
   REAL R(Lr), Diag(*), Qtb(*), X(*), Wa1(*), Wa2(*)
   INTEGER i, j, jj, jp1, k, l
-  REAL alpha, bnorm, epsmch, gnorm, one, qnorm, sgnorm, sum, temp, &
-    zero
+  REAL alpha, bnorm, epsmch, gnorm, one, qnorm, sgnorm, sum, temp, zero
   REAL R1MACH, ENORM
   SAVE one, zero
   DATA one, zero/1.0E0, 0.0E0/

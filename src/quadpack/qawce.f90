@@ -159,13 +159,11 @@ SUBROUTINE QAWCE(F,A,B,C,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   REAL erro12
-  REAL A, aa, Abserr, Alist, area, area1, area12, area2, a1, a2, &
-    B, bb, Blist, b1, b2, C, Elist, epmach, Epsabs, &
-    Epsrel, errbnd, errmax, error1, error2, errsum, Result, Rlist, uflow
-  INTEGER Ier, Iord, iroff1, iroff2, k, krule, Last, Limit, maxerr, &
+  REAL A, aa, Abserr, Alist(*), area, area1, area12, area2, a1, a2, &
+    B, bb, Blist(*), b1, b2, C, Elist(*), epmach, Epsabs, &
+    Epsrel, errbnd, errmax, error1, error2, errsum, Result, Rlist(*), uflow
+  INTEGER Ier, Iord(*), iroff1, iroff2, k, krule, Last, Limit, maxerr, &
     nev, Neval, nrmax
-  !
-  DIMENSION Alist(*), Blist(*), Rlist(*), Elist(*), Iord(*)
   !
   REAL, EXTERNAL :: F
   REAL, EXTERNAL :: R1MACH

@@ -291,14 +291,12 @@ SUBROUTINE HWSCRT(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL A, a1, a2, B, Bda, Bdb, Bdc, Bdd, C, D, deltax, deltay, &
-    delxsq, delysq, Elmbda, F, Pertrb, s, s1, st2
-  REAL twdelx, twdely, W
   INTEGER i, id2, id3, id4, Idimf, ierr1, Ierror, j, M, Mbdcnd, &
     mp, mp1, mperod, mskip, msp1, mstart, mstm1, mstop, munk, N
+  REAL A, a1, a2, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, deltax, deltay, &
+    delxsq, delysq, Elmbda, F(Idimf,*), Pertrb, s, s1, st2
+  REAL twdelx, twdely, W(*)
   INTEGER Nbdcnd, np, np1, nperod, nskip, nsp1, nstart, nstm1, nstop, nunk
-  DIMENSION F(Idimf,*)
-  DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   !* FIRST EXECUTABLE STATEMENT  HWSCRT
   Ierror = 0
   IF ( A>=B ) Ierror = 1

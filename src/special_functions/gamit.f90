@@ -58,19 +58,18 @@ REAL FUNCTION GAMIT(A,X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
-  
+
   REAL A, aeps, ainta, algap1, alneps, alng, ALNGAM, alx, bot, &
     GAMR, h, R1MACH, R9GMIT, R9LGIC, R9LGIT, sga, sgngam, sqeps, t, X
-  LOGICAL first
-  SAVE alneps, sqeps, bot, first
-  DATA first/.TRUE./
+  SAVE alneps, sqeps, bot
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  GAMIT
   IF ( first ) THEN
     alneps = -LOG(R1MACH(3))
     sqeps = SQRT(R1MACH(4))
     bot = LOG(R1MACH(1))
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   IF ( X<0.0 ) CALL XERMSG('SLATEC','GAMIT','X IS NEGATIVE',2,2)
   !

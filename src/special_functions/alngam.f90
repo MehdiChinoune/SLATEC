@@ -38,19 +38,18 @@ REAL FUNCTION ALNGAM(X)
   !   900727  Added EXTERNAL statement.  (WRB)
 
   REAL dxrel, pi, sinpiy, sq2pil, sqpi2l, X, xmax, y
-  LOGICAL first
   REAL, EXTERNAL :: R1MACH, R9LGMC, GAMMA
-  SAVE sq2pil, sqpi2l, pi, xmax, dxrel, first
+  SAVE sq2pil, sqpi2l, pi, xmax, dxrel
   DATA sq2pil/0.91893853320467274E0/
   DATA sqpi2l/0.22579135264472743E0/
   DATA pi/3.14159265358979324E0/
-  DATA first/.TRUE./
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  ALNGAM
   IF ( first ) THEN
     xmax = R1MACH(2)/LOG(R1MACH(2))
     dxrel = SQRT(R1MACH(4))
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   y = ABS(X)
   IF ( y>10.0 ) THEN
@@ -70,8 +69,7 @@ REAL FUNCTION ALNGAM(X)
       'X IS A NEGATIVE INTEGER',3,2)
     !
     IF ( ABS((X-AINT(X-0.5))/X)<dxrel ) CALL XERMSG('SLATEC','ALNGAM',&
-      'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR NEGATIVE INTEGER',&
-      1,1)
+      'ANSWER LT HALF PRECISION BECAUSE X TOO NEAR NEGATIVE INTEGER',1,1)
     !
     ALNGAM = sqpi2l + (X-0.5)*LOG(y) - X - LOG(sinpiy) - R9LGMC(y)
     RETURN

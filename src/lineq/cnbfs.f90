@@ -245,8 +245,7 @@ SUBROUTINE CNBFS(Abe,Lda,N,Ml,Mu,V,Itask,Ind,Work,Iwork)
     Ind = INT( -LOG10(R1MACH(4)/rcond) )
     IF ( Ind<=0 ) THEN
       Ind = -10
-      CALL XERMSG('SLATEC','CNBFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,&
-        0)
+      CALL XERMSG('SLATEC','CNBFS','SOLUTION MAY HAVE NO SIGNIFICANCE',-10,0)
     ENDIF
   ENDIF
   !

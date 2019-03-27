@@ -271,14 +271,13 @@ REAL(8) FUNCTION DRC(X,Y,Ier)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   CHARACTER(16) :: xern3, xern4, xern5
   INTEGER Ier
   REAL(8) :: c1, c2, errtol, lamda, lolim, D1MACH
   REAL(8) :: mu, s, sn, uplim, X, xn, Y, yn
-  LOGICAL first
-  SAVE errtol, lolim, uplim, c1, c2, first
-  DATA first/.TRUE./
+  SAVE errtol, lolim, uplim, c1, c2
+  LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  DRC
   IF ( first ) THEN
@@ -288,8 +287,8 @@ REAL(8) FUNCTION DRC(X,Y,Ier)
     !
     c1 = 1.0D0/7.0D0
     c2 = 9.0D0/22.0D0
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   !         CALL ERROR HANDLER IF NECESSARY.
   !

@@ -149,8 +149,7 @@ REAL FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
       !
       !     N.LT.2 RETURN.
       Ierr = -1
-      CALL XERMSG('SLATEC','PCHIA','NUMBER OF DATA POINTS LESS THAN TWO',&
-        Ierr,1)
+      CALL XERMSG('SLATEC','PCHIA','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
       GOTO 100
     ELSEIF ( Incfd<1 ) THEN
       !

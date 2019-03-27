@@ -23,12 +23,11 @@ SUBROUTINE CBINU(Z,Fnu,Kode,N,Cy,Nz,Rl,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
-  COMPLEX cw, Cy, czero, Z
-  REAL Alim, az, dfnu, Elim, Fnu, Fnul, Rl, Tol
+
   INTEGER i, inw, Kode, N, nlast, nn, nui, nw, Nz
-  DIMENSION Cy(N), cw(2)
-  DATA czero/(0.0E0,0.0E0)/
+  COMPLEX cw(2), Cy(N), Z
+  REAL Alim, az, dfnu, Elim, Fnu, Fnul, Rl, Tol
+  COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CBINU
   Nz = 0
   az = ABS(Z)

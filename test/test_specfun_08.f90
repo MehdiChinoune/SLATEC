@@ -86,14 +86,13 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    COMPLEX con1, con2, con3, cv, cw, cy, w, y, z, zr
+    COMPLEX con1, con2, con3, cv, cw, cy, w(20), y(20), z, zr
     REAL aa, ab, acw, acy, alim, arg, arzr, atol, av, a1, a2, ct, &
       c23, dig, elim, eps, er, ertol, film, fnul, fpi, hpi, pi, &
       pi3, r, rl, rm, rpi, rtpi, rzr, r1m4, r1m5, slak, spi, &
-      st, t, tol, tpi, tpi3, ts
+      st, t(20), tol, tpi, tpi3, ts
     INTEGER i, icase, icl, ierr, il, ir, irb, irset, it, itl, k, &
-      kdo, keps, kode, k1, k2, lflg, nz1, nz2, nz3, nz4
-    DIMENSION kdo(20), keps(20), t(20), w(20), y(20)
+      kdo(20), keps(20), kode, k1, k2, lflg, nz1, nz2, nz3, nz4
     !
     !* FIRST EXECUTABLE STATEMENT  CQCAI
     IF ( Kprint>=2 ) THEN
@@ -460,21 +459,17 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    COMPLEX cv, cw, cy, w, y, z, zn
-    REAL aa, ab, acw, acy, aer, alim, atol, av, aw, ay, az, ct, &
+    COMPLEX cv, cw, cy, w(20), y(20), z, zn
+    REAL aa, ab, acw, acy, aer(20), alim, atol, av, aw, ay, az, ct, &
       dig, elim, eps, er, ertol, film, fnu, fnul, fpi, hpi, pi, &
-      r, rfpi, rl, rm, r1m4, r1m5, r2, slak, st, t, tol, ts, &
-      xnu
-    INTEGER i, icase, ierr, il, ir, irb, it, itl, k, kdo, keps, &
-      kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz1, &
-      nz2, n1
-    DIMENSION aer(20), kdo(20), keps(20), t(20), w(20), xnu(20), y(20)
+      r, rfpi, rl, rm, r1m4, r1m5, r2, slak, st, t(20), tol, ts, xnu(20)
+    INTEGER i, icase, ierr, il, ir, irb, it, itl, k, kdo(20), keps(20), &
+      kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz1, nz2, n1
     !
     !* FIRST EXECUTABLE STATEMENT  CQCBH
     IF ( Kprint>=2 ) THEN
       WRITE (Lun,99001)
-      99001 FORMAT (' QUICK CHECK ROUTINE FOR THE H BESSEL FUNCTIONS FROM ',&
-        'CBESH'/)
+      99001 FORMAT (' QUICK CHECK ROUTINE FOR THE H BESSEL FUNCTIONS FROM ','CBESH'/)
     ENDIF
     !-----------------------------------------------------------------------
     !     Set parameters related to machine constants.
@@ -710,8 +705,7 @@ CONTAINS
                         99012 FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2E12.4/11X,&
                           'NZ2=',I3,4X,'W(KK)=',2E12.4)
                         WRITE (Lun,99013) it, ir, icase
-                        99013 FORMAT ('    CASE:   IT=',I3,4X,'IR=',I3,4X,'ICASE=',&
-                          I3/)
+                        99013 FORMAT ('    CASE:   IT=',I3,4X,'IR=',I3,4X,'ICASE=',I3/)
                       ENDIF
                     ENDIF
                   ENDIF
@@ -827,15 +821,12 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    COMPLEX ck, cone, csgn, cw, cy, w, y, z, zn, zsc, zt, zz
-    REAL aa, ab, aer, alim, arg, atol, aw, carg, ct, dig, elim, &
+    COMPLEX ck(20), cone, csgn, cw, cy, w(20), y(20), z, zn, zsc, zt, zz
+    REAL aa, ab, aer(20), alim, arg, atol, aw, carg, ct, dig, elim, &
       eps, er, ertol, film, fnu, fnul, gnu, hpi, pi, r, rl, &
-      rlt, rm, r1, r1m4, r1m5, r2, sarg, slak, st, t, tol, ts, &
-      xx, yy
-    INTEGER i, icase, ierr, il, inu, iprnt, ir, it, itl, k, kdo, &
-      keps, kk, kode, k1, k2, lflg, mflg, n, nl, nzi, nzk, &
-      nz1, nz2, n1
-    DIMENSION aer(20), ck(2), kdo(20), keps(20), t(20), w(20), y(20)
+      rlt, rm, r1, r1m4, r1m5, r2, sarg, slak, st, t(20), tol, ts, xx, yy
+    INTEGER i, icase, ierr, il, inu, iprnt, ir, it, itl, k, kdo(20), &
+      keps(20), kk, kode, k1, k2, lflg, mflg, n, nl, nzi, nzk, nz1, nz2, n1
     !
     !* FIRST EXECUTABLE STATEMENT  CQCBI
     IF ( Kprint>=2 ) THEN
@@ -1332,15 +1323,12 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    COMPLEX chalf, coe1, coe2, cw, v, w, y, z
-    REAL aa, ab, aer, alim, atol, av, cc, ct, dd, dig, elim, eps, &
+    COMPLEX chalf, coe1, coe2, cw, v(20), w(20), y(20), z
+    REAL aa, ab, aer(20), alim, atol, av, cc, ct, dd, dig, elim, eps, &
       er, ertol, film, fnu, fnul, gnu, hpi, pi, r, rl, rm, &
-      r1m4, r1m5, r2, slak, st, t, tol, ts, xnu, xx, yy
-    INTEGER i, icase, ierr, il, ir, irb, it, itl, k, kdo, keps, &
-      kk, kode, k1, k2, lflg, m, mflg, n, nl, nu, nul, nz, &
-      nz1, nz2
-    DIMENSION aer(20), kdo(20), keps(20), t(20), v(20), w(20), xnu(20), &
-      y(20)
+      r1m4, r1m5, r2, slak, st, t(20), tol, ts, xnu(20), xx, yy
+    INTEGER i, icase, ierr, il, ir, irb, it, itl, k, kdo(20), keps(20), &
+      kk, kode, k1, k2, lflg, m, mflg, n, nl, nu, nul, nz, nz1, nz2
     !
     !* FIRST EXECUTABLE STATEMENT  CQCBJ
     IF ( Kprint>=2 ) THEN
@@ -1729,14 +1717,12 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    COMPLEX cone, csgn, cv, cw, cy, w, y, z, zn
-    REAL aa, ab, aer, alim, arg, atol, axx, ct, dig, elim, eps, &
+    COMPLEX cone, csgn, cv, cw, cy, w(20), y(20), z, zn
+    REAL aa, ab, aer(20), alim, arg, atol, axx, ct, dig, elim, eps, &
       er, ertol, ffnu, film, fnu, fnul, hpi, pi, r, rl, rm, &
-      r1m4, r1m5, r2, slak, st, t, tol, ts, xnu, xx
-    INTEGER i, icase, ierr, ifnu, il, ir, irb, it, itl, k, kdo, &
-      keps, kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, &
-      nz1, nz2, n1
-    DIMENSION aer(20), kdo(20), keps(20), t(20), w(20), xnu(20), y(20)
+      r1m4, r1m5, r2, slak, st, t(20), tol, ts, xnu(20), xx
+    INTEGER i, icase, ierr, ifnu, il, ir, irb, it, itl, k, kdo(20), &
+      keps(20), kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz1, nz2, n1
     !
     !* FIRST EXECUTABLE STATEMENT  CQCBK
     IF ( Kprint>=2 ) THEN
@@ -1986,8 +1972,7 @@ CONTAINS
                       99012 FORMAT (' RESULTS:  NZ1=',I3,4X,'Y(KK)=',2E12.4,/11X,&
                         'NZ2=',I3,4X,'W(KK)=',2E12.4)
                       WRITE (Lun,99013) it, ir, icase
-                      99013 FORMAT ('    CASE:   IT=',I3,4X,'IR=',I3,4X,'ICASE=',&
-                        I3/)
+                      99013 FORMAT ('    CASE:   IT=',I3,4X,'IR=',I3,4X,'ICASE=',I3/)
                     ENDIF
                   ENDIF
                 ENDIF
@@ -2106,19 +2091,14 @@ CONTAINS
     !
     !  Declare local variables.
     !
-    COMPLEX ci, cip, coe1, coe2, csgn, cspn, cw, cwrk, v, w, y, z, &
-      zn
-    REAL aa, ab, aer, alim, arg, atol, av, cc, ct, dig, elim, eps, &
+    COMPLEX ci, coe1, coe2, csgn, cspn, cw, cwrk(20), v(20), w(20), y(20), z, zn
+    REAL aa, ab, aer(20), alim, arg, atol, av, cc, ct, dig, elim, eps, &
       er, ertol, ffnu, film, fnu, fnul, hpi, pi, r, rhpi, rl, &
-      rm, r1m4, r1m5, r2, slak, st, t, tol, ts, xn, xnu, xx, &
-      yn, yy
+      rm, r1m4, r1m5, r2, slak, st, t(20), tol, ts, xn, xnu(20), xx, yn, yy
     INTEGER i, icase, ierr, ifnu, il, ir, irb, it, itl, i4, k, &
-      kdo, keps, kk, kode, k1, k2, lflg, mflg, n, nl, nu, &
-      nul, nz, nz1, nz2
-    DIMENSION aer(20), cip(4), cwrk(20), kdo(20), keps(20), t(20), &
-      v(20), w(20), xnu(20), y(20)
-    DATA cip(1), cip(2), cip(3), cip(4)/(1.0E0,0.0E0), (0.0E0,1.0E0), &
-      (-1.0E0,0.0E0), (0.0E0,-1.0E0)/
+      kdo(20), keps(20), kk, kode, k1, k2, lflg, mflg, n, nl, nu, nul, nz, nz1, nz2
+    COMPLEX, PARAMETER :: cip(4) = [ (1.0E0,0.0E0), (0.0E0,1.0E0), &
+      (-1.0E0,0.0E0), (0.0E0,-1.0E0) ]
     !
     !* FIRST EXECUTABLE STATEMENT  CQCBY
     IF ( Kprint>=2 ) THEN

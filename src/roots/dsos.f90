@@ -267,8 +267,7 @@ SUBROUTINE DSOS(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,Rw,Lrw,Iw,Liw)
     k6 = k5 + Neq
     !
     CALL DSOSEQ(FNC,Neq,X,Rtolx,Atolx,Tolf,Iflag,mxit,ncjs,nsrrc,nsri,&
-      iprint,Rw(1),Rw(2),nc,Rw(k1),Rw(k2),Rw(k3),Rw(k4),Rw(k5),&
-      Rw(k6),Iw(4))
+      iprint,Rw(1),Rw(2),nc,Rw(k1),Rw(k2),Rw(k3),Rw(k4),Rw(k5),Rw(k6),Iw(4))
     !
     Iw(3) = mxit
   ENDIF

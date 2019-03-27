@@ -41,8 +41,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   EXTERNAL :: DBNDAC, DBNDSL, DCOPY, DFSPVN, DSCAL, DSORT, XERMSG
   !
   REAL(8) :: dummy, rnorm, xmax, xmin, xval
-  INTEGER i, idata, ileft, intseq, ip, ir, irow, l, mt, n, nb, &
-    nordm1, nordp1, np1
+  INTEGER i, idata, ileft, intseq, ip, ir, irow, l, mt, n, nb, nordm1, nordp1, np1
   CHARACTER(8) :: xern1, xern2
   !
   !* FIRST EXECUTABLE STATEMENT  DEFCMN
@@ -70,8 +69,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   IF ( Ndata<0 ) THEN
     CALL XERMSG('SLATEC','DEFCMN',&
-      'IN DEFC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.',5,&
-      1)
+      'IN DEFC, THE NUMBER OF DATA POINTS MUST BE NONNEGATIVE.',5,1)
     RETURN
   ENDIF
   !
@@ -81,8 +79,8 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     WRITE (xern1,'(I8)') nb
     WRITE (xern2,'(I8)') Lw
     CALL XERMSG('SLATEC','DEFCMN',&
-      'IN DEFC, INSUFFICIENT STORAGE FOR W(*).  CHECK FORMULA THAT READS LW.GE. ... .  NEED = '//xern1//' GIVEN = '//&
-      xern2,6,1)
+      'IN DEFC, INSUFFICIENT STORAGE FOR W(*).  CHECK FORMULA THAT READS LW.GE. ... .  NEED = '&
+      //xern1//' GIVEN = '//xern2,6,1)
     Mdeout = -1
     RETURN
   ENDIF

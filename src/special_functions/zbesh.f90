@@ -166,17 +166,15 @@ SUBROUTINE ZBESH(Zr,Zi,Fnu,Kode,M,N,Cyr,Cyi,Nz,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  
+
   !
   !     COMPLEX CY,Z,ZN,ZT,CSGN
-  REAL(8) :: aa, alim, aln, arg, az, Cyi, Cyr, dig, elim, &
-    fmm, fn, Fnu, fnul, hpi, rhpi, rl, r1m5, sgn, &
-    str, tol, ufl, Zi, zni, znr, Zr, zti, D1MACH, &
-    ZABS, bb, ascle, rtol, atol, sti, csgnr, csgni
   INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, M, mm, mr, &
     N, nn, nuf, nw, Nz, I1MACH
-  DIMENSION Cyr(N), Cyi(N)
-  EXTERNAL :: ZABS
+  REAL(8) :: aa, alim, aln, arg, az, Cyi(N), Cyr(N), dig, elim, &
+    fmm, fn, Fnu, fnul, hpi, rhpi, rl, r1m5, sgn, &
+    str, tol, ufl, Zi, zni, znr, Zr, zti, bb, ascle, rtol, atol, sti, csgnr, csgni
+  REAL(8), EXTERNAL :: ZABS, D1MACH
   !
   DATA hpi/1.57079632679489662D0/
   !

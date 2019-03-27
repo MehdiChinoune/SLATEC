@@ -112,10 +112,9 @@ SUBROUTINE DBINT4(X,Y,Ndata,Ibcl,Ibcr,Fbcl,Fbcr,Kntopt,T,Bcoef,N,K,W)
   !
   INTEGER i, Ibcl, Ibcr, iflag, ilb, ileft, it, iub, iw, iwp, j, &
     jw, K, Kntopt, N, Ndata, ndm, np, nwrow
-  REAL(8) :: Bcoef, Fbcl, Fbcr, T, tol, txn, tx1, vnikx, W, &
-    wdtol, work, X, xl, Y
+  REAL(8) :: Bcoef(*), Fbcl, Fbcr, T(*), tol, txn, tx1, vnikx(4,4), W(5,*), &
+    wdtol, work(15), X(*), xl, Y(*)
   REAL(8) :: D1MACH
-  DIMENSION X(*), Y(*), T(*), Bcoef(*), W(5,*), vnikx(4,4), work(15)
   !* FIRST EXECUTABLE STATEMENT  DBINT4
   wdtol = D1MACH(4)
   tol = SQRT(wdtol)

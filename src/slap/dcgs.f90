@@ -267,8 +267,7 @@ SUBROUTINE DCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   !     .. Subroutine Arguments ..
   EXTERNAL :: MATVEC, MSOLVE
   !     .. Local Scalars ..
-  REAL(8) :: ak, akm, bk, bnrm, fuzz, rhon, rhonm1, sigma, &
-    solnrm, tolmin
+  REAL(8) :: ak, akm, bk, bnrm, fuzz, rhon, rhonm1, sigma, solnrm, tolmin
   INTEGER i, k
   !     .. External Functions ..
   REAL(8), EXTERNAL :: D1MACH, DDOT

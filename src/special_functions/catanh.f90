@@ -29,10 +29,9 @@ COMPLEX FUNCTION CATANH(Z)
   !   770401  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
-  COMPLEX Z, ci, CATAN
-  SAVE ci
-  DATA ci/(0.,1.)/
+
+  COMPLEX Z, CATAN
+  COMPLEX, PARAMETER :: ci = (0.,1.)
   !* FIRST EXECUTABLE STATEMENT  CATANH
   CATANH = -ci*CATAN(ci*Z)
   !

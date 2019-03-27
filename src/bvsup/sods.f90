@@ -105,9 +105,8 @@ SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL A, B, Work, X
-  INTEGER Iflag, ip, is, iter, Iwork, kc, kd, ks, kt, kv, kz, Neq, Nrda, Nuk
-  DIMENSION A(Nrda,*), X(*), B(*), Work(*), Iwork(*)
+  INTEGER Iflag, ip, is, iter, Iwork(*), kc, kd, ks, kt, kv, kz, Neq, Nrda, Nuk
+  REAL A(Nrda,*), B(*), Work(*), X(*)
   !
   !* FIRST EXECUTABLE STATEMENT  SODS
   iter = 0
@@ -121,7 +120,6 @@ SUBROUTINE SODS(A,X,B,Neq,Nuk,Nrda,Iflag,Work,Iwork)
   kc = kt + Nuk
   !
   CALL LSSODS(A,X,B,Neq,Nuk,Nrda,Iflag,Iwork(1),Iwork(is),A,Work(kd),&
-    Iwork(ip),iter,Work(1),Work(ks),Work(kz),B,Work(kv),Work(kt),&
-    Work(kc))
+    Iwork(ip),iter,Work(1),Work(ks),Work(kz),B,Work(kv),Work(kt),Work(kc))
   !
 END SUBROUTINE SODS

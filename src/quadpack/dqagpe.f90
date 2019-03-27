@@ -208,22 +208,18 @@ SUBROUTINE DQAGPE(F,A,B,Npts2,Points,Epsabs,Epsrel,Limit,Result,Abserr,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL(8) :: A, abseps, Abserr, Alist, area, area1, area12, &
-    area2, a1, a2, B, Blist, b1, b2, correc, defabs, &
-    defab1, defab2, dres, Elist, epmach, &
+  REAL(8) :: A, abseps, Abserr, Alist(*), area, area1, area12, &
+    area2, a1, a2, B, Blist(*), b1, b2, correc, defabs, &
+    defab1, defab2, dres, Elist(*), epmach, &
     Epsabs, Epsrel, erlarg, erlast, errbnd, errmax, &
     error1, erro12, error2, errsum, ertest, oflow, &
-    Points, Pts, resa, resabs, reseps, Result, res3la, &
-    Rlist, rlist2, sign, temp, uflow
-  INTEGER i, id, Ier, ierro, ind1, ind2, Iord, ip1, iroff1, &
+    Points(*), Pts(*), resa, resabs, reseps, Result, res3la(3), &
+    Rlist(*), rlist2(52), sign, temp, uflow
+  INTEGER i, id, Ier, ierro, ind1, ind2, Iord(*), ip1, iroff1, &
     iroff2, iroff3, j, jlow, jupbnd, k, ksgn, ktmin, Last, &
-    levcur, Level, levmax, Limit, maxerr, Ndin, Neval, nint, &
+    levcur, Level(*), levmax, Limit, maxerr, Ndin(*), Neval, nint, &
     nintp1, npts, Npts2, nres, nrmax, numrl2
   LOGICAL extrap, noext
-  !
-  !
-  DIMENSION Alist(*), Blist(*), Elist(*), Iord(*), Level(*), Ndin(*), &
-    Points(*), Pts(*), res3la(3), Rlist(*), rlist2(52)
   !
   REAL(8), EXTERNAL :: F
   REAL(8), EXTERNAL :: D1MACH

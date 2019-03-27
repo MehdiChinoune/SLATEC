@@ -135,9 +135,8 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
   
-  INTEGER i, Id, Ierror, Ipqa, l, Mu1, Mu2, Nudiff
-  REAL(8) :: Pqa, Dnu1, dnu2, sx, Theta, x, pi2
-  DIMENSION Pqa(*), Ipqa(*)
+  INTEGER i, Id, Ierror, Ipqa(*), l, Mu1, Mu2, Nudiff
+  REAL(8) :: Pqa(*), Dnu1, dnu2, sx, Theta, x, pi2
   !
   !* FIRST EXECUTABLE STATEMENT  DXLEGF
   Ierror = 0
@@ -192,8 +191,7 @@ SUBROUTINE DXLEGF(Dnu1,Nudiff,Mu1,Mu2,Theta,Id,Pqa,Ipqa,Ierror)
                   !        FIXED NU, VARIABLE MU
                   !        CALL DXPMU TO CALCULATE P(-MU1,NU,X),....,P(-MU2,NU,X)
                   !
-                  CALL DXPMU(Dnu1,dnu2,Mu1,Mu2,Theta,x,sx,Id,Pqa,Ipqa,&
-                    Ierror)
+                  CALL DXPMU(Dnu1,dnu2,Mu1,Mu2,Theta,x,sx,Id,Pqa,Ipqa,Ierror)
                   IF ( Ierror/=0 ) RETURN
                 ENDIF
                 !

@@ -60,8 +60,7 @@ SUBROUTINE HPPERM(Hx,N,Iperm,Work,Ier)
   IF ( LEN(Work)<LEN(Hx(1)) ) THEN
     Ier = 2
     CALL XERMSG('SLATEC','HPPERM',&
-      'The length of the work variable, WORK, is too short.',Ier,&
-      1)
+      'The length of the work variable, WORK, is too short.',Ier,1)
     RETURN
   ENDIF
   !

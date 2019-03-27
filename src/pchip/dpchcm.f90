@@ -170,8 +170,7 @@ SUBROUTINE DPCHCM(N,X,F,D,Incfd,Skip,Ismon,Ierr)
       !
       !     N.LT.2 RETURN.
       Ierr = -1
-      CALL XERMSG('SLATEC','DPCHCM','NUMBER OF DATA POINTS LESS THAN TWO',&
-        Ierr,1)
+      CALL XERMSG('SLATEC','DPCHCM','NUMBER OF DATA POINTS LESS THAN TWO',Ierr,1)
       RETURN
     ELSEIF ( Incfd<1 ) THEN
       !

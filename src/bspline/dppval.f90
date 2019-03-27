@@ -75,8 +75,7 @@ REAL(8) FUNCTION DPPVAL(Ldc,C,Xi,Lxi,K,Ideriv,X,Inppv)
   
   !
   INTEGER i, Ideriv, Inppv, j, K, Ldc, Lxi, ndummy, kk
-  REAL(8) :: C, dx, X, Xi
-  DIMENSION Xi(*), C(Ldc,*)
+  REAL(8) :: C(Ldc,*), dx, X, Xi(*)
   !* FIRST EXECUTABLE STATEMENT  DPPVAL
   DPPVAL = 0.0D0
   IF ( K<1 ) THEN

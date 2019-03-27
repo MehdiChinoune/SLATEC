@@ -259,8 +259,7 @@ SUBROUTINE SCGS(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MSOLVE,Itol,Tol,Itmax,Iter,&
   REAL Err, Tol
   INTEGER Ierr, Isym, Iter, Itmax, Itol, Iunit, N, Nelt
   !     .. Array Arguments ..
-  REAL A(Nelt), B(N), P(N), Q(N), R(N), R0(N), Rwork(*), U(N), &
-    V1(N), V2(N), X(N)
+  REAL A(Nelt), B(N), P(N), Q(N), R(N), R0(N), Rwork(*), U(N), V1(N), V2(N), X(N)
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MATVEC, MSOLVE

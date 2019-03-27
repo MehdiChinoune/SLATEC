@@ -106,8 +106,7 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, indx, k, nless1
-  REAL(8) :: del(3), dext, dfloc, dfmx, fact, fudge, one, &
-    slmax, wtave(2), zero
+  REAL(8) :: del(3), dext, dfloc, dfmx, fact, fudge, one, slmax, wtave(2), zero
   SAVE zero, one, fudge
   REAL(8) :: DPCHST
   !

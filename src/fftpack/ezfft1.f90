@@ -29,13 +29,11 @@ SUBROUTINE EZFFT1(N,Wa,Ifac)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  REAL arg1, argh, ch1, ch1h, dch1, dsh1, sh1, tpi, Wa
-  INTEGER i, ib, ido, Ifac, ii, ip, ipm, is, j, k1, l1, l2, N, &
-    nf, nfm1, nl, nq, nr, ntry, ntryh
-  DIMENSION Wa(*), Ifac(*), ntryh(4)
-  SAVE ntryh
-  DATA ntryh(1), ntryh(2), ntryh(3), ntryh(4)/4, 2, 3, 5/
+
+  REAL arg1, argh, ch1, ch1h, dch1, dsh1, sh1, tpi, Wa(*)
+  INTEGER i, ib, ido, Ifac(*), ii, ip, ipm, is, j, k1, l1, l2, N, &
+    nf, nfm1, nl, nq, nr, ntry
+  INTEGER, PARAMETER :: ntryh(4) = [ 4, 2, 3, 5 ]
   !* FIRST EXECUTABLE STATEMENT  EZFFT1
   tpi = 8.*ATAN(1.)
   nl = N

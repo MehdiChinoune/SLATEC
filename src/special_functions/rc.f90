@@ -274,15 +274,14 @@ REAL FUNCTION RC(X,Y,Ier)
   !   900510  Changed calls to XERMSG to standard form, and some
   !           editorial changes.  (RWC))
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL R1MACH
   CHARACTER(16) :: xern3, xern4, xern5
   INTEGER Ier
   REAL c1, c2, errtol, lamda, lolim
   REAL mu, s, sn, uplim, X, xn, Y, yn
-  LOGICAL first
-  SAVE errtol, lolim, uplim, c1, c2, first
-  DATA first/.TRUE./
+  SAVE errtol, lolim, uplim, c1, c2
+  LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  RC
   IF ( first ) THEN
@@ -292,8 +291,8 @@ REAL FUNCTION RC(X,Y,Ier)
     !
     c1 = 1.0E0/7.0E0
     c2 = 9.0E0/22.0E0
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   !         CALL ERROR HANDLER IF NECESSARY.
   !

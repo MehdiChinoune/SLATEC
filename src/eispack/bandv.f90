@@ -136,8 +136,7 @@ SUBROUTINE BANDV(Nm,N,Mbw,A,E21,M,W,Z,Ierr,Nv,Rv,Rv6)
     ij1, its, kj1, Mbw, m21
   INTEGER Ierr, maxj, maxk, group
   REAL A(Nm,*), W(*), Z(Nm,*), Rv(*), Rv6(*)
-  REAL u, v, uk, xu, x0, x1, E21, eps2, eps3, eps4, norm, order, &
-    s
+  REAL u, v, uk, xu, x0, x1, E21, eps2, eps3, eps4, norm, order, s
   !
   !* FIRST EXECUTABLE STATEMENT  BANDV
   Ierr = 0

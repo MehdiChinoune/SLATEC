@@ -57,30 +57,23 @@ REAL FUNCTION POCH1(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
 
-  REAL A, absa, absx, alneps, alnvar, b, bern, binv, bp, gbern, gbk, pi, poly1, &
+  REAL A, absa, absx, alneps, alnvar, b, binv, bp, gbern(10), gbk, pi, poly1, &
     q, rho, sinpx2, sinpxx, sqtbig, term, trig, var, var2, X
   INTEGER i, ii, incr, j, k, ndx, nterms
-  DIMENSION bern(9), gbern(10)
-  LOGICAL first
   REAL, EXTERNAL :: EXPREL, COT, POCH, PSI, R1MACH
-  SAVE bern, pi, sqtbig, alneps, first
-  DATA bern(1)/.83333333333333333E-01/
-  DATA bern(2)/ - .13888888888888889E-02/
-  DATA bern(3)/.33068783068783069E-04/
-  DATA bern(4)/ - .82671957671957672E-06/
-  DATA bern(5)/.20876756987868099E-07/
-  DATA bern(6)/ - .52841901386874932E-09/
-  DATA bern(7)/.13382536530684679E-10/
-  DATA bern(8)/ - .33896802963225829E-12/
-  DATA bern(9)/.85860620562778446E-14/
+  SAVE pi, sqtbig, alneps
+  REAL, PARAMETER :: bern(9) = [ .83333333333333333E-01,-.13888888888888889E-02, &
+    .33068783068783069E-04, -.82671957671957672E-06, .20876756987868099E-07, &
+    -.52841901386874932E-09, .13382536530684679E-10,-.33896802963225829E-12, &
+    .85860620562778446E-14 ]
   DATA pi/3.14159265358979324E0/
-  DATA first/.TRUE./
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  POCH1
   IF ( first ) THEN
     sqtbig = 1.0/SQRT(24.0*R1MACH(1))
     alneps = LOG(R1MACH(3))
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   IF ( X==0.0 ) THEN
     POCH1 = PSI(A)

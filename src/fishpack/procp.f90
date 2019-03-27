@@ -37,11 +37,9 @@ SUBROUTINE PROCP(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Y,M,A,B,C,D,U,W)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   
-  REAL Aa, Bd, Bm1, Bm2, rt
+  REAL Aa(*), Bd(*), Bm1(*), Bm2(*), rt
   INTEGER ia, ibr, id, j, k, M, m1, m2, mm, mm2, Na, Nd, Nm1, Nm2
-  DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), U(*), Bd(*), Bm1(*)&
-    , Bm2(*), Aa(*), W(*)
-  COMPLEX X, Y, A, B, C, D, U, W, den, ym, v, bh, am
+  COMPLEX X(*), Y(*), A(*), B(*), C(*), D(*), U(*), W(*), den, ym, v, bh, am
   !* FIRST EXECUTABLE STATEMENT  PROCP
   DO j = 1, M
     Y(j) = X(j)

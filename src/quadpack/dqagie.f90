@@ -169,15 +169,14 @@ SUBROUTINE DQAGIE(F,Bound,Inf,Epsabs,Epsrel,Limit,Result,Abserr,Neval,Ier,&
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL(8) :: abseps, Abserr, Alist, area, area1, area12, area2, a1, a2, Blist, &
-    boun, Bound, b1, b2, correc, defabs, defab1, defab2, dres, Elist, epmach, &
+  REAL(8) :: abseps, Abserr, Alist(*), area, area1, area12, area2, a1, a2, Blist(*), &
+    boun, Bound, b1, b2, correc, defabs, defab1, defab2, dres, Elist(*), epmach, &
     Epsabs, Epsrel, erlarg, erlast, errbnd, errmax, error1, error2, erro12, &
-    errsum, ertest, oflow, resabs, reseps, Result, res3la, Rlist, rlist2, small, uflow
-  INTEGER id, Ier, ierro, Inf, Iord, iroff1, iroff2, iroff3, jupbnd, k, ksgn, &
+    errsum, ertest, oflow, resabs, reseps, Result, res3la(3), Rlist(*), &
+    rlist2(52), small, uflow
+  INTEGER id, Ier, ierro, Inf, Iord(*), iroff1, iroff2, iroff3, jupbnd, k, ksgn, &
     ktmin, Last, Limit, maxerr, Neval, nres, nrmax, numrl2
   LOGICAL extrap, noext
-  !
-  DIMENSION Alist(*), Blist(*), Elist(*), Iord(*), res3la(3), Rlist(*), rlist2(52)
   !
   REAL(8), EXTERNAL :: F
   REAL(8), EXTERNAL :: D1MACH

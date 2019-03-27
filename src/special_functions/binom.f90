@@ -32,19 +32,18 @@ REAL FUNCTION BINOM(N,M)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  
+
   REAL ALNREL, bilnmx, corr, fintmx, R1MACH, R9LGMC, sq2pil, xk, xn, xnk
   INTEGER i, k, M, N
-  LOGICAL first
-  SAVE sq2pil, bilnmx, fintmx, first
+  SAVE sq2pil, bilnmx, fintmx
   DATA sq2pil/0.91893853320467274E0/
-  DATA first/.TRUE./
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BINOM
   IF ( first ) THEN
     bilnmx = LOG(R1MACH(2))
     fintmx = 0.9/R1MACH(3)
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   IF ( N<0.OR.M<0 ) CALL XERMSG('SLATEC','BINOM','N OR M LT ZERO',1,2)
   IF ( N<M ) CALL XERMSG('SLATEC','BINOM','N LT M',2,2)

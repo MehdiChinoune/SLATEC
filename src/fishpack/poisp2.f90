@@ -26,11 +26,10 @@ SUBROUTINE POISP2(M,N,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  REAL A, B, B2, B3, Bb, C, D, P, Q, s, t, Tcos, W, W2, W3
+
   INTEGER i, Idimq, ipstor, j, lh, M, mr, N, nr, nrm1, nrmj, nrpj
-  DIMENSION A(*), Bb(*), C(*), Q(Idimq,*), B(*), B2(*), B3(*), W(*), &
-    W2(*), W3(*), D(*), Tcos(*), P(*)
+  REAL A(*), B(*), B2(*), B3(*), Bb(*), C(*), D(*), P(*), Q(Idimq,*), s, t, &
+    Tcos(*), W(*), W2(*), W3(*)
   !* FIRST EXECUTABLE STATEMENT  POISP2
   mr = M
   nr = (N+1)/2

@@ -25,13 +25,11 @@ SUBROUTINE CKSCL(Zr,Fnu,N,Y,Nz,Rz,Ascle,Tol,Elim)
   !* REVISION HISTORY  (YYMMDD)
   !   ??????  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
-  COMPLEX ck, cs, cy, czero, Rz, s1, s2, Y, Zr, zd, celm
-  REAL aa, Ascle, acs, as, csi, csr, Elim, fn, Fnu, Tol, xx, &
-    zri, elm, alas, helim
+
   INTEGER i, ic, k, kk, N, nn, nw, Nz
-  DIMENSION Y(N), cy(2)
-  DATA czero/(0.0E0,0.0E0)/
+  COMPLEX ck, cs, cy(2), Rz, s1, s2, Y(N), Zr, zd, celm
+  REAL aa, Ascle, acs, as, csi, csr, Elim, fn, Fnu, Tol, xx, zri, elm, alas, helim
+  COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CUCHK
   Nz = 0
   ic = 0

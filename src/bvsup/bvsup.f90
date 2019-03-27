@@ -411,23 +411,19 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL A, Ae, AED, Alpha, B, Beta, C, EPS, FOUru, PWCnd, PX, Re, &
-    RED, SQOvfl, SRU, TND, TOL, TWOu, URO, Work
-  REAL X, XBEg, XENd, XOP, XOT, Xpts, XSAv, Y
+  INTEGER Ndw, NEEdiw, NEEdw, NEQ, NEQivd, Neqivp, Nfc, NFCc, NFCd, &
+    Nic, NICd, nitemp, non, NOPg, NPS, Nrowa, Nrowb, Nrowy, nrtemp, NSWot
+  REAL A(Nrowa,*), Ae, AED, Alpha(*), B(Nrowb,*), Beta(*), C, EPS, FOUru, PWCnd, PX, Re, &
+    RED, SQOvfl, SRU, TND, TOL, TWOu, URO, Work(*)
+  REAL X, XBEg, XENd, XOP, XOT, Xpts(*), XSAv, Y(Nrowy,*)
   INTEGER ICOco, Iflag, Igofx, IGOfxd, INDpvt, INFo, INHomo, INTeg, &
-    is, ISTkop, IVP, Iwork, j, k, K1, K10, K11, K2, K3, K4
+    is, ISTkop, IVP, Iwork(*), j, k, K1, K10, K11, K2, K3, K4
   INTEGER K5, K6, K7, K8, K9, kkkcoe, kkkcof, kkkg, KKKint, kkks, &
-    kkksto, kkksud, kkksvc, kkku, kkkv, kkkws, kkkyhp, KKKzpw, &
-    KNSwot, KOP
+    kkksto, kkksud, kkksvc, kkku, kkkv, kkkws, kkkyhp, KKKzpw, KNSwot, KOP
   INTEGER kpts, L1, L2, lllcof, LLLint, lllip, llliws, lllsud, &
     lllsvc, LOTjp, LPAr, MNSwot, MXNon, mxnoni, mxnonr, Ncomp, &
     NCOmpd, ndeq, NDIsk, Ndiw
-  INTEGER Ndw, NEEdiw, NEEdw, NEQ, NEQivd, Neqivp, Nfc, NFCc, NFCd, &
-    Nic, NICd, nitemp, non, NOPg, NPS, Nrowa, Nrowb, Nrowy, &
-    nrtemp, NSWot
   INTEGER NTApe, NTP, NUMort, Nxpts, NXPtsd, nxptsm
-  DIMENSION Y(Nrowy,*), A(Nrowa,*), Alpha(*), B(Nrowb,*), Beta(*), &
-    Work(*), Iwork(*), Xpts(*)
   CHARACTER(8) :: xern1, xern2, xern3, xern4
   !
   !- *********************************************************************
@@ -442,8 +438,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     ARGUMENTS PREVALENT IN THIS MODULAR STRUCTURE
   !
   COMMON /ML18JR/ AED, RED, TOL, NXPtsd, NICd, NOPg, MXNon, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivd, &
-    NUMort, NFCc, ICOco
+    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivd, NUMort, NFCc, ICOco
   COMMON /ML17BW/ KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, &
     K7, K8, K9, K10, K11, L1, L2, KKKint, LLLint
   !
@@ -453,8 +448,8 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !     FOR THE ORTHONORMALIZATION TESTING PROCEDURE AND A BACKUP
   !     RESTARTING CAPABILITY.
   !
-  COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15)&
-    , ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
+  COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15), &
+    ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
   !
   !- *********************************************************************
   !     THIS COMMON BLOCK CONTAINS THE MACHINE DEPENDENT PARAMETERS
@@ -592,8 +587,7 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   kkkws = MAX(kkksud,kkksvc,KKKint,kkkcof)
   llliws = MAX(lllsud,lllsvc,LLLint,lllcof)
   !
-  NEEdw = kkkyhp + kkku + kkkv + kkkcoe + kkks + kkksto + kkkg + KKKzpw +&
-    kkkws
+  NEEdw = kkkyhp + kkku + kkkv + kkkcoe + kkks + kkksto + kkkg + KKKzpw + kkkws
   NEEdiw = 17 + lllip + llliws
   !- *********************************************************************
   !     COMPUTE THE NUMBER OF POSSIBLE ORTHONORMALIZATIONS WITH THE
@@ -643,8 +637,8 @@ SUBROUTINE BVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     WRITE (xern4,'(I8)') lllip
     CALL XERMSG('SLATEC','BVSUP','REQUIRED STORAGE FOR WORK ARRAY IS '//&
       xern1//' + '//xern2//&
-      '*(EXPECTED NUMBER OF ORTHONORMALIZATIONS) $$REQUIRED STORAGE FOR IWORK ARRAY IS '//xern3//' + '//&
-      xern4//'*(EXPECTED NUMBER OF ORTHONORMALIZATIONS)',1,0)
+      '*(EXPECTED NUMBER OF ORTHONORMALIZATIONS) $$REQUIRED STORAGE FOR IWORK ARRAY IS '&
+      //xern3//' + '//xern4//'*(EXPECTED NUMBER OF ORTHONORMALIZATIONS)',1,0)
   ELSE
     WRITE (xern1,'(I8)') NEEdw
     WRITE (xern2,'(I8)') NEEdiw

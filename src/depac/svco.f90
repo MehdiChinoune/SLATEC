@@ -37,10 +37,9 @@ SUBROUTINE SVCO(Rsav,Isav)
   ! RSAV = REAL ARRAY OF LENGTH 218 OR MORE.
   ! ISAV = INTEGER ARRAY OF LENGTH 33 OR MORE.
   !-----------------------------------------------------------------------
-  INTEGER Isav, i, ILS, lenils, lenrls
-  REAL Rsav, RLS
-  DIMENSION Rsav(*), Isav(*)
-  COMMON /DEBDF1/ RLS(218), ILS(33)
+  INTEGER Isav(*), i, ILS(33), lenils, lenrls
+  REAL Rsav(*), RLS(218)
+  COMMON /DEBDF1/ RLS, ILS
   SAVE lenrls, lenils
   DATA lenrls/218/, lenils/33/
   !

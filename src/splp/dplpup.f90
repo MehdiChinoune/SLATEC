@@ -43,7 +43,7 @@ SUBROUTINE DPLPUP(DUSRMT,Mrelas,Nvars,Prgopt,Dattrv,Bl,Bu,Ind,Info,Amat,&
   !   900510  Convert XERRWV calls to XERMSG calls, changed do-it-yourself
   !           DO loops to DO loops.  (RWC)
   !   900602  Get rid of ASSIGNed GOTOs.  (RWC)
-  
+
   INTEGER i, indcat, index, Info, iplace, itcnt, itmax, j, Mrelas, Nvars
   REAL(8) :: Abig, aij, Amat(*), amn, amx, Asmall, Bl(*), &
     Bu(*), Dattrv(*), Prgopt(*), xval, zero

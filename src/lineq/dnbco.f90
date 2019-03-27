@@ -142,8 +142,7 @@ SUBROUTINE DNBCO(Abe,Lda,N,Ml,Mu,Ipvt,Rcond,Z)
   !
   REAL(8) :: DDOT, ek, t, wk, wkm
   REAL(8) :: anorm, s, DASUM, sm, ynorm
-  INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, &
-    mm, nl, nu
+  INTEGER i, info, j, ju, k, kb, kp1, l, ldb, lm, lz, m, ml1, mm, nl, nu
   !* FIRST EXECUTABLE STATEMENT  DNBCO
   ml1 = Ml + 1
   ldb = Lda - 1

@@ -73,7 +73,6 @@ SUBROUTINE MPCHK(I,J)
   WRITE (LUN,99005) I, J, mx, MXR, T
   99005 FORMAT (' *** MXR TOO SMALL OR NOT SET TO DIM(R) BEFORE CALL',&
     ' TO AN MP ROUTINE *** '/' *** MXR SHOULD BE AT LEAST',I3,'*T +',&
-    I4,' =',I6,'  ***'/' *** ACTUALLY MXR =',I10,', AND T =',I10,&
-    '  ***')
+    I4,' =',I6,'  ***'/' *** ACTUALLY MXR =',I10,', AND T =',I10,'  ***')
   CALL MPERR
 END SUBROUTINE MPCHK

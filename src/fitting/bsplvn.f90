@@ -26,10 +26,8 @@ SUBROUTINE BSPLVN(T,Jhigh,Index,X,Ileft,Vnikx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   
-  REAL deltam, deltap, T, vm, vmprev, Vnikx, X
+  REAL deltam(20), deltap(20), T(*), vm, vmprev, Vnikx(*), X
   INTEGER i, Ileft, imjp1, Index, ipj, j, Jhigh, jp1, jp1ml, l
-  DIMENSION T(*), Vnikx(*)
-  DIMENSION deltam(20), deltap(20)
   SAVE j, deltam, deltap
   DATA j/1/, (deltam(i),i=1,20), (deltap(i),i=1,20)/40*0./
   !* FIRST EXECUTABLE STATEMENT  BSPLVN

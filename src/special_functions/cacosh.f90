@@ -29,10 +29,9 @@ COMPLEX FUNCTION CACOSH(Z)
   !   770401  DATE WRITTEN
   !   861211  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
-  COMPLEX Z, ci, CACOS
-  SAVE ci
-  DATA ci/(0.,1.)/
+
+  COMPLEX Z, CACOS
+  COMPLEX, PARAMETER :: ci = (0.,1.)
   !* FIRST EXECUTABLE STATEMENT  CACOSH
   CACOSH = ci*CACOS(Z)
   !

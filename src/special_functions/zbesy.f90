@@ -165,15 +165,13 @@ SUBROUTINE ZBESY(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Cwrkr,Cwrki,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  
+
   !
   !     COMPLEX CWRK,CY,C1,C2,EX,HCI,Z,ZU,ZV
-  REAL(8) :: Cwrki, Cwrkr, Cyi, Cyr, c1i, c1r, c2i, c2r, &
-    elim, exi, exr, ey, Fnu, hcii, sti, str, tay, &
-    Zi, Zr, D1MACH, ascle, rtol, atol, aa, bb, tol, &
-    r1m5
   INTEGER i, Ierr, k, Kode, k1, k2, N, Nz, nz1, nz2, I1MACH
-  DIMENSION Cyr(N), Cyi(N), Cwrkr(N), Cwrki(N)
+  REAL(8) :: Cwrki(N), Cwrkr(N), Cyi(N), Cyr(N), c1i, c1r, c2i, c2r, &
+    elim, exi, exr, ey, Fnu, hcii, sti, str, tay, &
+    Zi, Zr, D1MACH, ascle, rtol, atol, aa, bb, tol, r1m5
   !* FIRST EXECUTABLE STATEMENT  ZBESY
   Ierr = 0
   Nz = 0

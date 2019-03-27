@@ -85,12 +85,11 @@ SUBROUTINE DBSPVD(T,K,Nderiv,X,Ileft,Ldvnik,Vnikx,Work)
   INTEGER iwork, Ldvnik
   INTEGER i, ideriv, Ileft, ipkmd, j, jj, jlow, jm, jp1mid, K, &
     kmd, kp1, l, ldummy, m, mhigh, Nderiv
-  REAL(8) :: factor, fkmd, T, v, Vnikx, Work, X
+  REAL(8) :: factor, fkmd, T(*), v, Vnikx(Ldvnik,*), Work(*), X
   !     DIMENSION T(ILEFT+K), WORK((K+1)*(K+2)/2)
   !     A(I,J) = WORK(I+J*(J+1)/2),  I=1,J+1  J=1,K-1
   !     A(I,K) = W0RK(I+K*(K-1)/2)  I=1.K
   !     WORK(1) AND WORK((K+1)*(K+2)/2) ARE NOT USED.
-  DIMENSION T(*), Vnikx(Ldvnik,*), Work(*)
   !* FIRST EXECUTABLE STATEMENT  DBSPVD
   IF ( K<1 ) THEN
     !

@@ -61,8 +61,7 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !                ANS is set to zero if IERR=2,3,4,or 5.
   !
   !     AVINT is documented completely in SC-M-69-335
-  !     Original program from "Numerical Integration" by Davis &
-    !     Rabinowitz.
+  !     Original program from "Numerical Integration" by Davis & Rabinowitz.
   !     Adaptation and modifications for Sandia Mathematical Program
   !     Library by Rondall E. Jones.
   !
@@ -83,12 +82,10 @@ SUBROUTINE AVINT(X,Y,N,Xlo,Xup,Ans,Ierr)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL Ans, fl, fr, slope, X, Xlo, Xup, Y
+  REAL Ans, fl, fr, slope, X(*), Xlo, Xup, Y(*)
   INTEGER i, Ierr, inlft, inrt, istart, istop, N
   REAL(8) :: r3, rp5, sum, syl, syl2, syl3, syu, syu2, syu3, &
-    x1, x2, x3, x12, x13, x23, term1, term2, term3, &
-    a, b, c, ca, cb, cc
-  DIMENSION X(*), Y(*)
+    x1, x2, x3, x12, x13, x23, term1, term2, term3, a, b, c, ca, cb, cc
   !* FIRST EXECUTABLE STATEMENT  AVINT
   Ierr = 1
   Ans = 0.0

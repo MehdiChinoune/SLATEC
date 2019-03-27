@@ -34,19 +34,18 @@ REAL(8) FUNCTION D9GMIT(A,X,Algap1,Sgngam,Alx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  
+
   INTEGER k, m, ma
   REAL(8) :: A, X, Algap1, Sgngam, Alx, ae, aeps, algs, alg2, &
     bot, eps, fk, s, sgng2, t, te, D1MACH, DLNGAM
-  LOGICAL first
-  SAVE eps, bot, first
-  DATA first/.TRUE./
+  SAVE eps, bot
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9GMIT
   IF ( first ) THEN
     eps = 0.5D0*D1MACH(3)
     bot = LOG(D1MACH(1))
+    first = .FALSE.
   ENDIF
-  first = .FALSE.
   !
   IF ( X<=0.D0 ) CALL XERMSG('SLATEC','D9GMIT','X SHOULD BE GT 0',1,2)
   !

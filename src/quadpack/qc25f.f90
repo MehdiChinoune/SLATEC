@@ -114,16 +114,13 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   !
-  REAL A, Abserr, ac, an, an2, as, asap, ass, B, centr, Chebmo, &
-    cheb12, cheb24, conc, cons, cospar, d, d1, &
-    d2, estc, ests, fval, hlgth, oflow, Omega, parint, par2, &
-    par22, p2, p3, p4, Resabs, Resasc, resc12, resc24, ress12, &
-    ress24, Result, sinpar, v, x
   INTEGER i, iers, Integr, isym, j, k, Ksave, m, Maxp1, Momcom, &
     Neval, noequ, noeq1, Nrmom
-  !
-  DIMENSION Chebmo(Maxp1,25), cheb12(13), cheb24(25), d(25), d1(25), &
-    d2(25), fval(25), v(28), x(11)
+  REAL A, Abserr, ac, an, an2, as, asap, ass, B, centr, Chebmo(Maxp1,25), &
+    cheb12(13), cheb24(25), conc, cons, cospar, d(25), d1(25), &
+    d2(25), estc, ests, fval(25), hlgth, oflow, Omega, parint, par2, &
+    par22, p2, p3, p4, Resabs, Resasc, resc12, resc24, ress12, &
+    ress24, Result, sinpar, v(28)
   !
   REAL, EXTERNAL :: F
   REAL, EXTERNAL :: R1MACH, QWGTF
@@ -131,14 +128,10 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
   !           THE VECTOR X CONTAINS THE VALUES COS(K*PI/24)
   !           K = 1, ...,11, TO BE USED FOR THE CHEBYSHEV EXPANSION OF F
   !
-  SAVE x
-  DATA x(1), x(2), x(3), x(4), x(5), x(6), x(7), x(8), x(9), &
-    x(10), x(11)/0.9914448613738104E+00, 0.9659258262890683E+00, &
-    0.9238795325112868E+00, 0.8660254037844386E+00, &
-    0.7933533402912352E+00, 0.7071067811865475E+00, &
-    0.6087614290087206E+00, 0.5000000000000000E+00, &
-    0.3826834323650898E+00, 0.2588190451025208E+00, &
-    0.1305261922200516E+00/
+  REAL, PARAMETER :: x(11) = [ 0.9914448613738104E+00, 0.9659258262890683E+00, &
+    0.9238795325112868E+00, 0.8660254037844386E+00, 0.7933533402912352E+00, &
+    0.7071067811865475E+00, 0.6087614290087206E+00, 0.5000000000000000E+00, &
+    0.3826834323650898E+00, 0.2588190451025208E+00, 0.1305261922200516E+00 ]
   !
   !           LIST OF MAJOR VARIABLES
   !           -----------------------
@@ -250,8 +243,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
         asap = (((((0.210E+03*par2-0.1E+01)*cospar-(0.105E+03*par2-0.63E+02)&
           *ass)/an2-(0.1E+01-0.15E+02*par2)*cospar+0.15E+02*ass)&
           /an2-cospar+0.3E+01*ass)/an2-cospar)/an2
-        v(noequ+3) = v(noequ+3) - 0.2E+01*asap*par2*(an-0.1E+01)&
-          *(an-0.2E+01)
+        v(noequ+3) = v(noequ+3) - 0.2E+01*asap*par2*(an-0.1E+01)*(an-0.2E+01)
         !
         !           SOLVE THE TRIDIAGONAL SYSTEM BY MEANS OF GAUSSIAN
         !           ELIMINATION WITH PARTIAL PIVOTING.
@@ -306,8 +298,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
         asap = (((((0.105E+03*par2-0.63E+02)*ass+(0.210E+03*par2-0.1E+01)*&
           sinpar)/an2+(0.15E+02*par2-0.1E+01)*sinpar-0.15E+02*ass)&
           /an2-0.3E+01*ass-sinpar)/an2-sinpar)/an2
-        v(noequ+2) = v(noequ+2) - 0.2E+01*asap*par2*(an-0.1E+01)&
-          *(an-0.2E+01)
+        v(noequ+2) = v(noequ+2) - 0.2E+01*asap*par2*(an-0.1E+01)*(an-0.2E+01)
         !
         !           SOLVE THE TRIDIAGONAL SYSTEM BY MEANS OF GAUSSIAN
         !           ELIMINATION WITH PARTIAL PIVOTING.
@@ -365,8 +356,7 @@ SUBROUTINE QC25F(F,A,B,Omega,Integr,Nrmom,Maxp1,Ksave,Result,Abserr,Neval,&
       Abserr = ABS(conc*estc) + ABS(cons*ests)
     ENDIF
   ELSE
-    CALL QK15W(F,QWGTF,Omega,p2,p3,p4,Integr,A,B,Result,Abserr,Resabs,&
-      Resasc)
+    CALL QK15W(F,QWGTF,Omega,p2,p3,p4,Integr,A,B,Result,Abserr,Resabs,Resasc)
     Neval = 15
   ENDIF
 END SUBROUTINE QC25F

@@ -45,18 +45,16 @@ REAL(8) FUNCTION DCSEVL(X,Cs,N)
   !   900329  Prologued revised extensively and code rewritten to allow
   !           X to be slightly outside interval (-1,+1).  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, N, ni
   REAL(8) :: b0, b1, b2, Cs(*), onepl, twox, X, D1MACH
-  LOGICAL first
-  SAVE first, onepl
-  DATA first/.TRUE./
+  SAVE onepl
+  LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DCSEVL
   IF ( first ) onepl = 1.0D0 + D1MACH(4)
   first = .FALSE.
   IF ( N<1 ) CALL XERMSG('SLATEC','DCSEVL','NUMBER OF TERMS .LE. 0',2,2)
-  IF ( N>1000 ) CALL XERMSG('SLATEC','DCSEVL','NUMBER OF TERMS .GT. 1000',3,&
-    2)
+  IF ( N>1000 ) CALL XERMSG('SLATEC','DCSEVL','NUMBER OF TERMS .GT. 1000',3,2)
   IF ( ABS(X)>onepl ) CALL XERMSG('SLATEC','DCSEVL',&
     'X OUTSIDE THE INTERVAL (-1,+1)',1,1)
   !

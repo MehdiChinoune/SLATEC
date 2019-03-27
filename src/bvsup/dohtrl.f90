@@ -36,8 +36,7 @@ SUBROUTINE DOHTRL(Q,N,Nrda,Diag,Irank,Div,Td)
   
   REAL(8) :: DDOT
   INTEGER Irank, irp, j, k, kir, kirm, l, N, nmir, Nrda
-  REAL(8) :: dd, Diag(*), diagk, Div(*), Q(Nrda,*), qs, sig, &
-    sqd, Td(*), tdv
+  REAL(8) :: dd, Diag(*), diagk, Div(*), Q(Nrda,*), qs, sig, sqd, Td(*), tdv
   !* FIRST EXECUTABLE STATEMENT  DOHTRL
   nmir = N - Irank
   irp = Irank + 1

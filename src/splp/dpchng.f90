@@ -61,9 +61,8 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
   
   INTEGER i, iend, Ii, il, ilast, iopt, ipl, Iplace, Ircx, istart, &
-    Ix, ixlast, j, jj, jstart, k, key, ll, lmx, lpg
+    Ix(*), ixlast, j, jj, jstart, k, key, ll, lmx, lpg
   INTEGER n20055, nerr, np
-  DIMENSION Ix(*)
   INTEGER IDLOC
   REAL(8) :: Sx(*), Xval, zero, one, sxlast, sxval
   SAVE zero, one

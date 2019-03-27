@@ -50,8 +50,7 @@ SUBROUTINE XGETUA(Iunita,N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  INTEGER i, index, Iunita, J4SAVE, N
-  DIMENSION Iunita(5)
+  INTEGER i, index, Iunita(5), J4SAVE, N
   !* FIRST EXECUTABLE STATEMENT  XGETUA
   N = J4SAVE(5,0,.FALSE.)
   DO i = 1, N

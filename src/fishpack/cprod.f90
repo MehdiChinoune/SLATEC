@@ -36,11 +36,9 @@ SUBROUTINE CPROD(Nd,Bd,Nm1,Bm1,Nm2,Bm2,Na,Aa,X,Yy,M,A,B,C,D,W,Y)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   
-  REAL A, Aa, B, Bm1, Bm2, C, rt, X, Yy
+  REAL A(*), Aa(*), B(*), Bm1(*), Bm2(*), C(*), rt, X(*), Yy(*)
   INTEGER ia, id, iflg, j, k, M, m1, m2, mm, Na, Nd, Nm1, Nm2
-  COMPLEX Y, D, W, Bd, crt, den, y1, y2
-  DIMENSION A(*), B(*), C(*), X(*), Y(*), D(*), W(*), Bd(*), Bm1(*)&
-    , Bm2(*), Aa(*), Yy(*)
+  COMPLEX Y(*), D(*), W(*), Bd(*), crt, den, y1, y2
   !* FIRST EXECUTABLE STATEMENT  CPROD
   DO j = 1, M
     Y(j) = CMPLX(X(j),0.)

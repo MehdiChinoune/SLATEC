@@ -101,8 +101,7 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   IF ( Jtask<=0 ) THEN
     CALL DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,Ml,Mu,&
       N,Nde,Save1,T,Uround,USERS,Y,Ywt,H,Mntold,Mtrold,Nfe,Rc,Yh,A,&
-      Convrg,El,Fac,ier,Ipvt,Nq,Nwait,rh,Rmax,Save2,Tq,Trend,&
-      Iswflg,Jstate)
+      Convrg,El,Fac,ier,Ipvt,Nq,Nwait,rh,Rmax,Save2,Tq,Trend,Iswflg,Jstate)
     IF ( N==0 ) GOTO 800
     IF ( H==0.D0 ) GOTO 500
     IF ( ier ) GOTO 600
@@ -116,8 +115,7 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   ELSE
     T = T + H
     CALL DDPSC(1,N,Nq,Yh)
-    evaljc = (((ABS(Rc-1.D0)>RCTEST).OR.(Nstep>=Jstepl+NDJSTP)).AND.&
-      (Miter/=0))
+    evaljc = (((ABS(Rc-1.D0)>RCTEST).OR.(Nstep>=Jstepl+NDJSTP)).AND.(Miter/=0))
     evalfa = .NOT.evaljc
   ENDIF
   !
@@ -133,8 +131,7 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   Nfe = Nfe + 1
   IF ( evaljc.OR.ier ) THEN
     CALL DDPST(El,F,FA,H,Impl,JACOBN,Matdim,Miter,Ml,Mu,N,Nde,Nq,Save2,T,&
-      USERS,Y,Yh,Ywt,Uround,Nfe,Nje,A,Dfdy,Fac,ier,Ipvt,Save1,&
-      Iswflg,bnd,Jstate)
+      USERS,Y,Yh,Ywt,Uround,Nfe,Nje,A,Dfdy,Fac,ier,Ipvt,Save1,Iswflg,bnd,Jstate)
     IF ( N==0 ) GOTO 700
     IF ( ier ) GOTO 300
     Convrg = .FALSE.
@@ -298,8 +295,7 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     ENDDO
     CALL DDNTL(Eps,F,FA,Hmax,Hold,Impl,Jtask,Matdim,Maxord,Mint,Miter,Ml,Mu,&
       N,Nde,Save1,T,Uround,USERS,Y,Ywt,H,Mntold,Mtrold,Nfe,Rc,Yh,A,&
-      Convrg,El,Fac,ier,Ipvt,Nq,Nwait,rh,Rmax,Save2,Tq,Trend,&
-      Iswflg,Jstate)
+      Convrg,El,Fac,ier,Ipvt,Nq,Nwait,rh,Rmax,Save2,Tq,Trend,Iswflg,Jstate)
     Rmax = RMNORM
     IF ( N==0 ) GOTO 800
     IF ( H==0.D0 ) GOTO 500

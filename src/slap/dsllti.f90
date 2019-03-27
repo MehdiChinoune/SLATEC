@@ -66,8 +66,7 @@ SUBROUTINE DSLLTI(N,B,X,Nelt,Ia,Ja,A,Isym,Rwork,Iwork)
   locjel = Iwork(2)
   locel = Iwork(4)
   locdin = Iwork(5)
-  CALL DLLTI2(N,B,X,nel,Iwork(lociel),Iwork(locjel),Rwork(locel),&
-    Rwork(locdin))
+  CALL DLLTI2(N,B,X,nel,Iwork(lociel),Iwork(locjel),Rwork(locel),Rwork(locdin))
   !
   !------------- LAST LINE OF DSLLTI FOLLOWS ----------------------------
 END SUBROUTINE DSLLTI

@@ -309,14 +309,12 @@ SUBROUTINE HWSCYL(A,B,M,Mbdcnd,Bda,Bdb,C,D,N,Nbdcnd,Bdc,Bdd,Elmbda,F,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL A, a1, a2, B, Bda, Bdb, Bdc, Bdd, C, D, deltar, deltht, &
-    dlrby2, dlrsq, dlthsq, Elmbda, F, Pertrb, r, s
-  REAL s1, s2, W
   INTEGER i, id2, id3, id4, id5, id6, Idimf, ierr1, Ierror, ij, &
     istart, j, k, l, M, Mbdcnd, mp1, mstart, mstop, munk
+  REAL A, a1, a2, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), C, D, deltar, deltht, &
+    dlrby2, dlrsq, dlthsq, Elmbda, F(Idimf,*), Pertrb, r, s
+  REAL s1, s2, W(*)
   INTEGER N, Nbdcnd, np, np1, nsp1, nstart, nstm1, nstop, nunk
-  DIMENSION F(Idimf,*)
-  DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   !* FIRST EXECUTABLE STATEMENT  HWSCYL
   Ierror = 0
   IF ( A<0. ) Ierror = 1

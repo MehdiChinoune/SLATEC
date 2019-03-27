@@ -25,9 +25,8 @@ SUBROUTINE USRMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   
-  REAL Aij, Dattrv, Prgopt
-  INTEGER I, Iflag, Indcat, J, l
-  DIMENSION Prgopt(*), Dattrv(*), Iflag(10)
+  REAL Aij, Dattrv(*), Prgopt(*)
+  INTEGER I, Iflag(10), Indcat, J, l
   !
   !* FIRST EXECUTABLE STATEMENT  USRMAT
   IF ( Iflag(1)==1 ) THEN

@@ -42,8 +42,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   
   INTEGER i, ibas, idg, ienter, ileave, Info, iopt, ipage, ipagef, &
-    iplace, isave, itbrc, itlp, j, jstrt, k, key, kprint, &
-    Lbm, LCOl
+    iplace, isave, itbrc, itlp, j, jstrt, k, key, kprint, Lbm, LCOl
   INTEGER LENl, LENu, Lmx, LP, lpg, lpr, lpr1, lprg, LROw, Mrelas, &
     mxitlp, n20046, n20058, n20080, n20098, n20119, n20172, &
     n20206, n20247, n20252
@@ -288,8 +287,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ELSE
     nerr = 23
     CALL XERMSG('SLATEC','SPLPMN',&
-      'IN SPLP,  A SINGULAR INITIAL BASIS WAS ENCOUNTERED.',nerr,&
-      iopt)
+      'IN SPLP,  A SINGULAR INITIAL BASIS WAS ENCOUNTERED.',nerr,iopt)
     Info = -nerr
     GOTO 4600
   ENDIF
@@ -305,8 +303,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   IF ( .NOT.feas ) THEN
     nerr = 24
     CALL XERMSG('SLATEC','SPLPMN',&
-      'IN SPLP, AN INFEASIBLE INITIAL BASIS WAS ENCOUNTERED.',&
-      nerr,iopt)
+      'IN SPLP, AN INFEASIBLE INITIAL BASIS WAS ENCOUNTERED.',nerr,iopt)
     Info = -nerr
     GOTO 4600
   ENDIF
@@ -391,8 +388,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ELSEIF ( feas.AND.unbnd ) THEN
     nerr = 2
     CALL XERMSG('SLATEC','SPLPMN',&
-      'IN SPLP, THE PROBLEM APPEARS TO HAVE NO FINITE SOLUTION.',&
-      nerr,iopt)
+      'IN SPLP, THE PROBLEM APPEARS TO HAVE NO FINITE SOLUTION.',nerr,iopt)
     Info = -nerr
   ELSEIF ( (.NOT.feas).AND.unbnd ) THEN
     nerr = 3
@@ -592,8 +588,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
         rdum(1) = theta
         CALL SVOUT(1,rdum,'('' LENGTH OF THE EXCHANGE STEP'')',idg)
         IF ( kprint>=3 ) THEN
-          CALL SVOUT(Mrelas,Rprim,'('' BASIC (INTERNAL) PRIMAL SOLN.'')',&
-            idg)
+          CALL SVOUT(Mrelas,Rprim,'('' BASIC (INTERNAL) PRIMAL SOLN.'')',idg)
           CALL IVOUT(Nvars+Mrelas,Ibasis,&
             '('' VARIABLE INDICES IN POSITIONS 1-MRELAS ARE BASIC.'')',idg)
           CALL IVOUT(Nvars+Mrelas,Ibb,'('' IBB ARRAY'')',idg)
@@ -710,8 +705,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   3000 CONTINUE
   IF ( (2-ntries)>=0 ) THEN
     CALL SPLPCE(Mrelas,Nvars,Lmx,Lbm,itlp,itbrc,Ibasis,Imat,Ibrc,Ipr,Iwr,&
-      Ind,Ibb,erdnrm,eps,tune,gg,Amat,Basmat,Csc,Wr,Ww,Primal,Erd,&
-      Erp,singlr,redbas)
+      Ind,Ibb,erdnrm,eps,tune,gg,Amat,Basmat,Csc,Wr,Ww,Primal,Erd,Erp,singlr,redbas)
     IF ( .NOT.singlr ) THEN
       !++  CODE FOR OUTPUT=YES IS ACTIVE
       IF ( kprint>=3 ) THEN
@@ -807,8 +801,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
   !     PROCEDURE (INITIALIZE REDUCED COSTS AND STEEPEST EDGE WEIGHTS)
   3200 CALL SPINCW(Mrelas,Nvars,Lmx,Lbm,npp,jstrt,Ibasis,Imat,Ibrc,Ipr,Iwr,Ind,&
-    Ibb,costsc,gg,erdnrm,dulnrm,Amat,Basmat,Csc,Wr,Ww,Rz,Rg,Costs,&
-    Colnrm,Duals,stpedg)
+    Ibb,costsc,gg,erdnrm,dulnrm,Amat,Basmat,Csc,Wr,Ww,Rz,Rg,Costs,Colnrm,Duals,stpedg)
   !
   SELECT CASE(npr014)
     CASE(2100)
@@ -903,8 +896,7 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   ! CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
   !     PROCEDURE (FIND VARIABLE TO ENTER BASIS AND GET SEARCH DIRECTION)
   4200 CALL SPLPFE(Mrelas,Nvars,Lmx,Lbm,ienter,Ibasis,Imat,Ibrc,Ipr,Iwr,Ind,Ibb,&
-    erdnrm,eps,gg,dulnrm,dirnrm,Amat,Basmat,Csc,Wr,Ww,Bl,Bu,Rz,Rg,&
-    Colnrm,Duals,found)
+    erdnrm,eps,gg,dulnrm,dirnrm,Amat,Basmat,Csc,Wr,Ww,Bl,Bu,Rz,Rg,Colnrm,Duals,found)
   SELECT CASE(npr015)
     CASE(2200)
       GOTO 2200

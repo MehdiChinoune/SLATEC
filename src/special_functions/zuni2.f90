@@ -31,27 +31,23 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !     COMPLEX AI,ARG,ASUM,BSUM,CFN,CI,CID,CIP,CONE,CRSC,CSCL,CSR,CSS,
   !    *CZERO,C1,C2,DAI,PHI,RZ,S1,S2,Y,Z,ZB,ZETA1,ZETA2,ZN
-  REAL(8) :: aarg, aic, aii, air, Alim, ang, aphi, argi, &
-    argr, ascle, asumi, asumr, bry, bsumi, bsumr, &
-    cidi, cipi, cipr, coner, crsc, cscl, csrr, cssr, &
-    c1r, c2i, c2m, c2r, daii, dair, Elim, fn, Fnu, &
-    Fnul, hpi, phii, phir, rast, raz, rs1, rzi, rzr, &
-    sti, str, s1i, s1r, s2i, s2r, Tol, Yi, Yr, zbi, &
-    zbr, zeroi, zeror, zeta1i, zeta1r, zeta2i, zeta2r, &
-    Zi, zni, znr, Zr, cyr, cyi, D1MACH, ZABS, car, &
-    sar
   INTEGER i, iflag, in, inu, j, k, Kode, N, nai, nd, ndai, &
     Nlast, nn, nuf, nw, Nz, idum
-  DIMENSION bry(3), Yr(N), Yi(N), cipr(4), cipi(4), cssr(3), csrr(3), &
-    cyr(2), cyi(2)
-  EXTERNAL :: ZABS
+  REAL(8) :: aarg, aic, aii, air, Alim, ang, aphi, argi, &
+    argr, ascle, asumi, asumr, bry(3), bsumi, bsumr, &
+    cidi, coner, crsc, cscl, csrr(3), cssr(3), &
+    c1r, c2i, c2m, c2r, daii, dair, Elim, fn, Fnu, &
+    Fnul, hpi, phii, phir, rast, raz, rs1, rzi, rzr, &
+    sti, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), zbi, &
+    zbr, zeroi, zeror, zeta1i, zeta1r, zeta2i, zeta2r, &
+    Zi, zni, znr, Zr, cyr(2), cyi(2), car, sar
+  REAL(8), EXTERNAL :: D1MACH, ZABS
   DATA zeror, zeroi, coner/0.0D0, 0.0D0, 1.0D0/
-  DATA cipr(1), cipi(1), cipr(2), cipi(2), cipr(3), cipi(3), cipr(4), &
-    cipi(4)/1.0D0, 0.0D0, 0.0D0, 1.0D0, -1.0D0, 0.0D0, 0.0D0, &
-    -1.0D0/
+  REAL(8), PARAMETER :: cipr(4) = [ 1.0D0, 0.0D0, -1.0D0, 0.0D0 ]
+  REAL(8), PARAMETER :: cipi(4) = [ 0.0D0, 1.0D0, 0.0D0, -1.0D0 ]
   DATA hpi, aic/1.57079632679489662D+00, 1.265512123484645396D+00/
   !* FIRST EXECUTABLE STATEMENT  ZUNI2
   Nz = 0

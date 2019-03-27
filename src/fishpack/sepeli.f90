@@ -475,14 +475,12 @@ SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  REAL A, Alpha, B, Bda, Bdb, Bdc, Bdd, Beta, C, D, &
-    Gama, Grhs, Pertrb, Usol, W, Xnu
+
   INTEGER i1, i10, i11, i12, i13, i2, i3, i4, i5, i6, i7, i8, &
     i9, Idmn, Ierror, Intl, Iorder, k, l, length
+  REAL A, Alpha, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), Beta, C, D, &
+    Gama, Grhs(Idmn,*), Pertrb, Usol(Idmn,*), W(*), Xnu
   INTEGER linput, ll, logb2n, loutpt, M, Mbdcnd, N, Nbdcnd
-  DIMENSION Grhs(Idmn,*), Usol(Idmn,*)
-  DIMENSION Bda(*), Bdb(*), Bdc(*), Bdd(*), W(*)
   EXTERNAL :: COFX, COFY
   !* FIRST EXECUTABLE STATEMENT  SEPELI
   CALL CHKPRM(Intl,Iorder,A,B,M,Mbdcnd,C,D,N,Nbdcnd,COFX,COFY,Idmn,Ierror)
@@ -522,6 +520,5 @@ SUBROUTINE SEPELI(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   i13 = 2
   CALL SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     Gama,Bdd,Xnu,COFX,COFY,W(i1),W(i2),W(i3),W(i4),W(i5),W(i6),&
-    W(i7),W(i8),W(i9),W(i10),W(i11),W(i12),Grhs,Usol,Idmn,W(i13),&
-    Pertrb,Ierror)
+    W(i7),W(i8),W(i9),W(i10),W(i11),W(i12),Grhs,Usol,Idmn,W(i13),Pertrb,Ierror)
 END SUBROUTINE SEPELI

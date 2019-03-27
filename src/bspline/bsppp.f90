@@ -71,10 +71,9 @@ SUBROUTINE BSPPP(T,A,N,K,Ldc,C,Xi,Lxi,Work)
   
   !
   INTEGER ileft, inev, K, Ldc, Lxi, N, nk
-  REAL A, C, T, Work, Xi
+  REAL A(*), C(Ldc,*), T(*), Work(*), Xi(*)
   !     DIMENSION T(N+K),XI(LXI+1),C(LDC,*)
   !     HERE, * = THE FINAL VALUE OF THE OUTPUT PARAMETER LXI.
-  DIMENSION T(*), A(*), Work(*), Xi(*), C(Ldc,*)
   !* FIRST EXECUTABLE STATEMENT  BSPPP
   IF ( K<1 ) THEN
     CALL XERMSG('SLATEC','BSPPP','K DOES NOT SATISFY K.GE.1',2,1)

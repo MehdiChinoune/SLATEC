@@ -45,8 +45,7 @@ SUBROUTINE CMPCSG(N,Ijump,Fnum,Fden,A)
   
   REAL dum, Fden, Fnum, pi, pibyn, PIMACH, x, y
   INTEGER i, Ijump, k, k1, k2, k3, k4, k5, N, np1
-  COMPLEX A
-  DIMENSION A(*)
+  COMPLEX A(*)
   !
   !
   !* FIRST EXECUTABLE STATEMENT  CMPCSG

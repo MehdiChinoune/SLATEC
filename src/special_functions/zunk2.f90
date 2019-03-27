@@ -30,38 +30,27 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   !     COMPLEX AI,ARG,ARGD,ASUM,ASUMD,BSUM,BSUMD,CFN,CI,CIP,CK,CONE,CRSC,
   !    *CR1,CR2,CS,CSCL,CSGN,CSPN,CSR,CSS,CY,CZERO,C1,C2,DAI,PHI,PHID,RZ,
   !    *S1,S2,Y,Z,ZB,ZETA1,ZETA1D,ZETA2,ZETA2D,ZN,ZR
-  REAL(8) :: aarg, aic, aii, air, Alim, ang, aphi, argdi, &
-    argdr, argi, argr, asc, ascle, asumdi, asumdr, &
-    asumi, asumr, bry, bsumdi, bsumdr, bsumi, bsumr, &
-    car, cipi, cipr, cki, ckr, coner, crsc, cr1i, &
-    cr1r, cr2i, cr2r, cscl, csgni, csi, cspni, cspnr, &
-    csr, csrr, cssr, cyi, cyr, c1i, c1r, c2i, c2m, &
-    c2r, daii, dair, Elim, fmr, fn, fnf, Fnu, hpi, &
-    phidi, phidr, phii, phir, pi, pti, ptr, rast, &
-    razr, rs1, rzi, rzr, sar, sgn, sti, str, s1i, &
-    s1r, s2i, s2r, Tol, Yi, Yr, yy, zbi, zbr, &
-    zeroi, zeror, zeta1i, zeta1r, zeta2i, zeta2r, &
-    zet1di, zet1dr, zet2di, zet2dr, Zi, zni, znr, Zr, &
-    zri, zrr, D1MACH, ZABS
   INTEGER i, ib, iflag, ifn, il, in, inu, iuf, k, kdflg, kflag, &
     kk, Kode, Mr, N, nai, ndai, nw, Nz, idum, j, ipard, ic
-  DIMENSION bry(3), Yr(N), Yi(N), asumr(2), asumi(2), bsumr(2), &
-    bsumi(2), phir(2), phii(2), argr(2), argi(2), zeta1r(2), &
-    zeta1i(2), zeta2r(2), zeta2i(2), cyr(2), cyi(2), cipr(4), &
-    cipi(4), cssr(3), csrr(3)
-  EXTERNAL :: ZABS
+  REAL(8) :: aarg, aic, aii, air, Alim, ang, aphi, argdi, argdr, argi(2), argr(2), &
+    asc, ascle, asumdi, asumdr, asumi(2), asumr(2), bry(3), bsumdi, bsumdr, bsumi(2), &
+    bsumr(2), car, cki, ckr, coner, crsc, cr1i, cr1r, cr2i, cr2r, cscl, csgni, csi, cspni, &
+    cspnr, csr, csrr(3), cssr(3), cyi(2), cyr(2), c1i, c1r, c2i, c2m, c2r, daii, dair, Elim, &
+    fmr, fn, fnf, Fnu, hpi, phidi, phidr, phii(2), phir(2), pi, pti, ptr, rast, razr, &
+    rs1, rzi, rzr, sar, sgn, sti, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), yy, zbi, &
+    zbr, zeroi, zeror, zeta1i(2), zeta1r(2), zeta2i(2), zeta2r(2), &
+    zet1di, zet1dr, zet2di, zet2dr, Zi, zni, znr, Zr, zri, zrr
+  REAL(8), EXTERNAL :: D1MACH, ZABS
   DATA zeror, zeroi, coner, cr1r, cr1i, cr2r, cr2i/0.0D0, 0.0D0, &
-    1.0D0, 1.0D0, 1.73205080756887729D0, -0.5D0, &
-    -8.66025403784438647D-01/
+    1.0D0, 1.0D0, 1.73205080756887729D0, -0.5D0, -8.66025403784438647D-01/
   DATA hpi, pi, aic/1.57079632679489662D+00, 3.14159265358979324D+00, &
     1.26551212348464539D+00/
-  DATA cipr(1), cipi(1), cipr(2), cipi(2), cipr(3), cipi(3), cipr(4), &
-    cipi(4)/1.0D0, 0.0D0, 0.0D0, -1.0D0, -1.0D0, 0.0D0, 0.0D0, &
-    1.0D0/
+  REAL(8), PARAMETER :: cipr(4) = [ 1.0D0, 0.0D0, -1.0D0, 0.0D0 ]
+  REAL(8), PARAMETER :: cipi(4) = [ 0.0D0, -1.0D0, 0.0D0, 1.0D0 ]
   !* FIRST EXECUTABLE STATEMENT  ZUNK2
   kdflg = 1
   Nz = 0
@@ -120,8 +109,7 @@ SUBROUTINE ZUNK2(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
     j = 3 - j
     fn = Fnu + (i-1)
     CALL ZUNHJ(znr,zni,fn,0,Tol,phir(j),phii(j),argr(j),argi(j),zeta1r(j),&
-      zeta1i(j),zeta2r(j),zeta2i(j),asumr(j),asumi(j),bsumr(j),&
-      bsumi(j))
+      zeta1i(j),zeta2r(j),zeta2i(j),asumr(j),asumi(j),bsumr(j),bsumi(j))
     IF ( Kode==1 ) THEN
       s1r = zeta1r(j) - zeta2r(j)
       s1i = zeta1i(j) - zeta2i(j)

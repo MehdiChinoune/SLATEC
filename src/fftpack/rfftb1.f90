@@ -93,9 +93,8 @@ SUBROUTINE RFFTB1(N,C,Ch,Wa,Ifac)
   !   900131  Routine changed from subsidiary to user-callable.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL C, Ch, Wa
-  INTEGER i, idl1, ido, Ifac, ip, iw, ix2, ix3, ix4, k1, l1, l2, N, na, nf
-  DIMENSION Ch(*), C(*), Wa(*), Ifac(*)
+  REAL C(*), Ch(*), Wa(*)
+  INTEGER i, idl1, ido, Ifac(*), ip, iw, ix2, ix3, ix4, k1, l1, l2, N, na, nf
   !* FIRST EXECUTABLE STATEMENT  RFFTB1
   nf = Ifac(2)
   na = 0

@@ -128,10 +128,8 @@ SUBROUTINE DGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   
-  REAL(8) :: A, ae, B, re, Rnorm, Work
-  INTEGER Info, key, krank, ksure, Liw, Lw, M, Mda, Mdb, mode, N, &
-    Nb, np
-  DIMENSION A(Mda,*), B(Mdb,*), Rnorm(*), Work(*)
+  INTEGER Info, key, krank, ksure, Liw, Lw, M, Mda, Mdb, mode, N, Nb, np
+  REAL(8) :: A(Mda,*), ae, B(Mdb,*), re, Rnorm(*), Work(*)
   INTEGER Iwork(*)
   !
   !* FIRST EXECUTABLE STATEMENT  DGLSS

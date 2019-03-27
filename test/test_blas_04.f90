@@ -122,26 +122,23 @@ CONTAINS
     LOGICAL same, tsterr, ftl, ftl1, ftl2
     CHARACTER :: trans
     !     .. Local Arrays ..
-    COMPLEX a(NMAX,NMAX), aa(NMAX*NMAX), alf(NALF), as(NMAX*NMAX), &
-      bet(NBET), x(NMAX), xs(NMAX*INCMAX), xx(NMAX*INCMAX), y(NMAX), &
-      ys(NMAX*INCMAX), yt(NMAX), yy(NMAX*INCMAX), z(2*NMAX)
+    COMPLEX a(NMAX,NMAX), aa(NMAX*NMAX), as(NMAX*NMAX), x(NMAX), xs(NMAX*INCMAX), &
+      xx(NMAX*INCMAX), y(NMAX), ys(NMAX*INCMAX), yt(NMAX), yy(NMAX*INCMAX), z(2*NMAX)
     REAL g(NMAX)
-    INTEGER idim(NIDIM), inc(NINC), kb(NKB)
     LOGICAL ltest(NSUBS)
-    CHARACTER(6) :: snames(NSUBS)
     !     .. External Functions ..
     REAL, EXTERNAL :: R1MACH
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA snames/'CGEMV ', 'CGBMV ', 'CHEMV ', 'CHBMV ', 'CHPMV ', &
-      'CTRMV ', 'CTBMV ', 'CTPMV ', 'CTRSV ', 'CTBSV ', 'CTPSV ', &
-      'CGERC ', 'CGERU ', 'CHER  ', 'CHPR  ', 'CHER2 ', 'CHPR2 '/
-    DATA idim/0, 1, 2, 3, 5, 9/
-    DATA kb/0, 1, 2, 4/
-    DATA inc/1, 2, -1, -2/
-    DATA alf/(0.0,0.0), (1.0,0.0), (0.7,-0.9)/
-    DATA bet/(0.0,0.0), (1.0,0.0), (1.3,-1.1)/
+    CHARACTER(6), PARAMETER :: snames(NSUBS) = [ 'CGEMV ', 'CGBMV ', 'CHEMV ', &
+      'CHBMV ', 'CHPMV ', 'CTRMV ', 'CTBMV ', 'CTPMV ', 'CTRSV ', 'CTBSV ', &
+      'CTPSV ', 'CGERC ', 'CGERU ', 'CHER  ', 'CHPR  ', 'CHER2 ', 'CHPR2 ' ]
+    INTEGER, PARAMETER :: idim(NIDIM) = [ 0, 1, 2, 3, 5, 9 ]
+    INTEGER, PARAMETER :: kb(NKB) = [ 0, 1, 2, 4 ]
+    INTEGER, PARAMETER :: inc(NINC) = [ 1, 2, -1, -2 ]
+    COMPLEX, PARAMETER :: alf(NALF) = [ (0.0,0.0), (1.0,0.0), (0.7,-0.9) ]
+    COMPLEX, PARAMETER :: bet(NBET) = [ (0.0,0.0), (1.0,0.0), (1.3,-1.1) ]
     !* FIRST EXECUTABLE STATEMENT  CBLAT2
     !
     !     Set the flag that indicates whether error exits are to be tested.
@@ -238,18 +235,15 @@ CONTAINS
           CASE (12,13)
             !           Test CGERC, 12, CGERU, 13.
             CALL CCHK42(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
-              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,&
-              yt,g,z)
+              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,yt,g,z)
           CASE (14,15)
             !           Test CHER, 14, and CHPR, 15.
             CALL CCHK52(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
-              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,&
-              yt,g,z)
+              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,yt,g,z)
           CASE (16,17)
             !           Test CHER2, 16, and CHPR2, 17.
             CALL CCHK62(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
-              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,&
-              yt,g,z)
+              NALF,alf,NINC,inc,NMAX,INCMAX,a,aa,as,x,xx,xs,y,yy,ys,yt,g,z)
           CASE DEFAULT
             !           Test CGEMV, 01, and CGBMV, 02.
             CALL CCHK12(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
@@ -333,23 +327,20 @@ CONTAINS
     LOGICAL same, tsterr, ftl, ftl1, ftl2
     CHARACTER :: transa, transb
     !     .. Local Arrays ..
-    COMPLEX aa(NMAX*NMAX), ab(NMAX,2*NMAX), alf(NALF), as(NMAX*NMAX), &
-      bb(NMAX*NMAX), bet(NBET), bs(NMAX*NMAX), c(NMAX,NMAX), &
-      cc(NMAX*NMAX), cs(NMAX*NMAX), ct(NMAX), w(2*NMAX)
+    COMPLEX aa(NMAX*NMAX), ab(NMAX,2*NMAX), as(NMAX*NMAX), bb(NMAX*NMAX), &
+      bs(NMAX*NMAX), c(NMAX,NMAX), cc(NMAX*NMAX), cs(NMAX*NMAX), ct(NMAX), w(2*NMAX)
     REAL g(NMAX)
-    INTEGER idim(NIDIM)
     LOGICAL ltest(NSUBS)
-    CHARACTER(6) :: snames(NSUBS)
     !     .. External Functions ..
     REAL, EXTERNAL :: R1MACH
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA snames/'CGEMM ', 'CHEMM ', 'CSYMM ', 'CTRMM ', 'CTRSM ', &
-      'CHERK ', 'CSYRK ', 'CHER2K', 'CSYR2K'/
-    DATA idim/0, 1, 2, 3, 5, 9/
-    DATA alf/(0.0,0.0), (1.0,0.0), (0.7,-0.9)/
-    DATA bet/(0.0,0.0), (1.0,0.0), (1.3,-1.1)/
+    CHARACTER(6), PARAMETER :: snames(NSUBS) = [ 'CGEMM ', 'CHEMM ', 'CSYMM ', &
+      'CTRMM ', 'CTRSM ', 'CHERK ', 'CSYRK ', 'CHER2K', 'CSYR2K' ]
+    INTEGER, PARAMETER :: idim(NIDIM) = [ 0, 1, 2, 3, 5, 9 ]
+    COMPLEX, PARAMETER :: alf(NALF) = [ (0.0,0.0), (1.0,0.0), (0.7,-0.9) ]
+    COMPLEX, PARAMETER :: bet(NBET) = [ (0.0,0.0), (1.0,0.0), (1.3,-1.1) ]
     !* FIRST EXECUTABLE STATEMENT  CBLAT3
     !
     !     Set the flag that indicates whether error exits are to be tested.
@@ -462,8 +453,7 @@ CONTAINS
           CASE (2,3)
             !           Test CHEMM, 02, CSYMM, 03.
             CALL CCHK23(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
-              NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,&
-              cs,ct,g)
+              NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,cs,ct,g)
           CASE (4,5)
             !           Test CTRMM, 04, CTRSM, 05.
             CALL CCHK33(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
@@ -471,8 +461,7 @@ CONTAINS
           CASE (6,7)
             !           Test CHERK, 06, CSYRK, 07.
             CALL CCHK43(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
-              NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,&
-              cs,ct,g)
+              NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,cs,ct,g)
           CASE (8,9)
             !           Test CHER2K, 08, CSYR2K, 09.
             CALL CCHK53(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
@@ -480,8 +469,7 @@ CONTAINS
           CASE DEFAULT
             !           Test CGEMM, 01.
             CALL CCHK13(snames(isnum),eps,thresh,Nout,Kprint,ftl2,NIDIM,idim,&
-              NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,&
-              cs,ct,g)
+              NALF,alf,NBET,bet,NMAX,ab,aa,as,ab(1,NMAX+1),bb,bs,c,cc,cs,ct,g)
         END SELECT
         !
         IF ( ftl1.OR.ftl2 ) Ipass = 0
@@ -1256,8 +1244,7 @@ CONTAINS
   END FUNCTION LCERES
   !** CCHK12
   SUBROUTINE CCHK12(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
-      Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,&
-      Y,Yy,Ys,Yt,G)
+      Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
     IMPLICIT NONE
     !>
     !***
@@ -1294,8 +1281,8 @@ CONTAINS
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
     COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
-      Bet(Nbet), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax)&
-      , Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
+      Bet(Nbet), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), &
+      Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
     REAL G(Nmax)
     INTEGER Idim(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
@@ -1306,7 +1293,6 @@ CONTAINS
       ml, ms, n, nargs, nc, nd, nk, nerr, nl, ns
     LOGICAL banded, ftl, full, null, reset, tran
     CHARACTER :: trans, transs
-    CHARACTER(3) :: ich
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
@@ -1316,7 +1302,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA ich/'NTC'/
+    CHARACTER(3), PARAMETER :: ich = 'NTC'
     !* FIRST EXECUTABLE STATEMENT  CCHK12
     full = Sname(3:3)=='E'
     banded = Sname(3:3)=='B'
@@ -1367,8 +1353,7 @@ CONTAINS
             !              Generate the matrix A.
             !
             transl = ZERO
-            CALL CMAKE2(Sname(2:3),' ',' ',m,n,A,Nmax,Aa,lda,kl,ku,reset,&
-              transl)
+            CALL CMAKE2(Sname(2:3),' ',' ',m,n,A,Nmax,Aa,lda,kl,ku,reset,transl)
             !
             DO ic = 1, 3
               trans = ich(ic:ic)
@@ -1440,8 +1425,7 @@ CONTAINS
                       !                             Call the subroutine.
                       !
                       IF ( full ) THEN
-                        CALL CGEMV(trans,m,n,alpha,Aa,lda,Xx,incx,beta,Yy,&
-                          incy)
+                        CALL CGEMV(trans,m,n,alpha,Aa,lda,Xx,incx,beta,Yy,incy)
                       ELSEIF ( banded ) THEN
                         CALL CGBMV(trans,m,n,kl,ku,alpha,Aa,lda,Xx,incx,beta,&
                           Yy,incy)
@@ -1517,8 +1501,7 @@ CONTAINS
                               n, alpha, lda, incx, beta, incy
                           ELSEIF ( banded ) THEN
                             WRITE (Nout,FMT=99005) nc, Sname, trans, m, &
-                              n, kl, ku, alpha, lda, incx, beta, &
-                              incy
+                              n, kl, ku, alpha, lda, incx, beta, incy
                           ENDIF
                         ENDIF
                       ENDIF
@@ -1622,7 +1605,6 @@ CONTAINS
       n, na, nargs, nb, nc, nerr, ns
     LOGICAL ftl, null, reset, trana, tranb
     CHARACTER :: tranas, tranbs, transa, transb
-    CHARACTER(3) :: ich
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
@@ -1632,7 +1614,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA ich/'NTC'/
+    CHARACTER(3), PARAMETER :: ich = 'NTC'
     !* FIRST EXECUTABLE STATEMENT  CCHK13
     nargs = 13
     nc = 0
@@ -1781,8 +1763,7 @@ CONTAINS
                           !                             Check the result.
                           !
                           CALL CMMCH(transa,transb,m,n,k,alpha,A,Nmax,B,Nmax,&
-                            beta,C,Nmax,Ct,G,Cc,ldc,Eps,err,ftl,Nout,&
-                            .TRUE.,Kprint)
+                            beta,C,Nmax,Ct,G,Cc,ldc,Eps,err,ftl,Nout,.TRUE.,Kprint)
                           errmax = MAX(errmax,err)
                         ENDIF
                         IF ( ftl ) THEN
@@ -1790,8 +1771,7 @@ CONTAINS
                           IF ( Kprint>=3 ) THEN
                             WRITE (Nout,FMT=99004) Sname
                             WRITE (Nout,FMT=99005) nc, Sname, transa, &
-                              transb, m, n, k, alpha, lda, ldb, &
-                              beta, ldc
+                              transb, m, n, k, alpha, lda, ldb, beta, ldc
                           ENDIF
                         ENDIF
                       ENDDO
@@ -1840,8 +1820,7 @@ CONTAINS
   END SUBROUTINE CCHK13
   !** CCHK22
   SUBROUTINE CCHK22(Sname,Eps,Thresh,Nout,Kprint,Fatal,Nidim,Idim,Nkb,Kb,&
-      Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,&
-      Y,Yy,Ys,Yt,G)
+      Nalf,Alf,Nbet,Bet,Ninc,Inc,Nmax,Incmax,A,Aa,As,X,Xx,Xs,Y,Yy,Ys,Yt,G)
     IMPLICIT NONE
     !>
     !***
@@ -1879,19 +1858,17 @@ CONTAINS
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
     COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
-      Bet(Nbet), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax)&
-      , Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
+      Bet(Nbet), X(Nmax), Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), &
+      Ys(Nmax*Incmax), Yt(Nmax), Yy(Nmax*Incmax)
     REAL G(Nmax)
     INTEGER Idim(Nidim), Inc(Ninc), Kb(Nkb)
     !     .. Local Scalars ..
     COMPLEX alpha, als, beta, bls, transl
     REAL err, errmax
     INTEGER i, ia, ib, ic, ik, in, incx, incxs, incy, incys, ix, &
-      iy, k, ks, laa, lda, ldas, lx, ly, n, nargs, nc, nerr, &
-      nk, ns
+      iy, k, ks, laa, lda, ldas, lx, ly, n, nargs, nc, nerr, nk, ns
     LOGICAL banded, ftl, full, null, packed, reset
     CHARACTER :: uplo, uplos
-    CHARACTER(2) :: ich
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
@@ -1901,7 +1878,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
-    DATA ich/'UL'/
+    CHARACTER(2), PARAMETER :: ich = 'UL'
     !* FIRST EXECUTABLE STATEMENT  CCHK22
     full = Sname(3:3)=='E'
     banded = Sname(3:3)=='B'
@@ -1955,8 +1932,7 @@ CONTAINS
             !              Generate the matrix A.
             !
             transl = ZERO
-            CALL CMAKE2(Sname(2:3),uplo,' ',n,n,A,Nmax,Aa,lda,k,k,reset,&
-              transl)
+            CALL CMAKE2(Sname(2:3),uplo,' ',n,n,A,Nmax,Aa,lda,k,k,reset,transl)
             !
             DO ix = 1, Ninc
               incx = Inc(ix)
@@ -1965,8 +1941,7 @@ CONTAINS
               !                 Generate the vector X.
               !
               transl = HALF
-              CALL CMAKE2('GE',' ',' ',1,n,X,1,Xx,ABS(incx),0,n-1,reset,&
-                transl)
+              CALL CMAKE2('GE',' ',' ',1,n,X,1,Xx,ABS(incx),0,n-1,reset,transl)
               IF ( n>1 ) THEN
                 X(n/2) = ZERO
                 Xx(1+ABS(incx)*(n/2-1)) = ZERO
@@ -2205,7 +2180,6 @@ CONTAINS
       ldb, ldbs, ldc, ldcs, m, ms, n, na, nargs, nc, nerr, ns
     LOGICAL conj, ftl, left, null, reset
     CHARACTER :: side, sides, uplo, uplos
-    CHARACTER(2) :: ichu, ichs
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
@@ -2215,7 +2189,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA ichs/'LR'/, ichu/'UL'/
+    CHARACTER(2), PARAMETER :: ichs = 'LR', ichu = 'UL'
     !* FIRST EXECUTABLE STATEMENT  CCHK23
     conj = Sname(2:3)=='HE'
     !
@@ -2268,8 +2242,7 @@ CONTAINS
                   !
                   !                 Generate the hermitian or symmetric matrix A.
                   !
-                  CALL CMAKE3(Sname(2:3),uplo,' ',na,na,A,Nmax,Aa,lda,reset,&
-                    ZERO)
+                  CALL CMAKE3(Sname(2:3),uplo,' ',na,na,A,Nmax,Aa,lda,reset,ZERO)
                   !
                   DO ia = 1, Nalf
                     alpha = Alf(ia)
@@ -2308,11 +2281,9 @@ CONTAINS
                       !                       Call the subroutine.
                       !
                       IF ( conj ) THEN
-                        CALL CHEMM(side,uplo,m,n,alpha,Aa,lda,Bb,ldb,beta,Cc,&
-                          ldc)
+                        CALL CHEMM(side,uplo,m,n,alpha,Aa,lda,Bb,ldb,beta,Cc,ldc)
                       ELSE
-                        CALL CSYMM(side,uplo,m,n,alpha,Aa,lda,Bb,ldb,beta,Cc,&
-                          ldc)
+                        CALL CSYMM(side,uplo,m,n,alpha,Aa,lda,Bb,ldb,beta,Cc,ldc)
                       ENDIF
                       !
                       !                       Check if error-exit was taken incorrectly.
@@ -2358,12 +2329,10 @@ CONTAINS
                         !
                         IF ( left ) THEN
                           CALL CMMCH('N','N',m,n,m,alpha,A,Nmax,B,Nmax,beta,C,&
-                            Nmax,Ct,G,Cc,ldc,Eps,err,ftl,Nout,.TRUE.,&
-                            Kprint)
+                            Nmax,Ct,G,Cc,ldc,Eps,err,ftl,Nout,.TRUE.,Kprint)
                         ELSE
                           CALL CMMCH('N','N',m,n,n,alpha,B,Nmax,A,Nmax,beta,C,&
-                            Nmax,Ct,G,Cc,ldc,Eps,err,ftl,Nout,.TRUE.,&
-                            Kprint)
+                            Nmax,Ct,G,Cc,ldc,Eps,err,ftl,Nout,.TRUE.,Kprint)
                         ENDIF
                         errmax = MAX(errmax,err)
                       ENDIF
@@ -2469,8 +2438,6 @@ CONTAINS
       lda, ldas, lx, n, nargs, nc, nerr, nk, ns
     LOGICAL banded, ftl, full, null, packed, reset
     CHARACTER :: diag, diags, trans, transs, uplo, uplos
-    CHARACTER(2) :: ichd, ichu
-    CHARACTER(3) :: icht
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
@@ -2480,7 +2447,8 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX
     !     .. Data statements ..
-    DATA ichu/'UL'/, icht/'NTC'/, ichd/'UN'/
+    CHARACTER(2), PARAMETER :: ichu = 'UL', ichd = 'UN'
+    CHARACTER(3), PARAMETER :: icht = 'NTC'
     !* FIRST EXECUTABLE STATEMENT  CCHK32
     full = Sname(3:3)=='R'
     banded = Sname(3:3)=='B'
@@ -2683,8 +2651,7 @@ CONTAINS
                         WRITE (Nout,FMT=99005) nc, Sname, uplo, trans, &
                           diag, n, k, lda, incx
                       ELSEIF ( packed ) THEN
-                        WRITE (Nout,FMT=99005) nc, Sname, uplo, trans, &
-                          diag, n, incx
+                        WRITE (Nout,FMT=99005) nc, Sname, uplo, trans, diag, n, incx
                       ENDIF
                     ENDIF
                   ENDIF
@@ -2772,8 +2739,7 @@ CONTAINS
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
     COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), &
-      B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), C(Nmax,Nmax), &
-      Ct(Nmax)
+      B(Nmax,Nmax), Bb(Nmax*Nmax), Bs(Nmax*Nmax), C(Nmax,Nmax), Ct(Nmax)
     REAL G(Nmax)
     INTEGER Idim(Nidim)
     !     .. Local Scalars ..
@@ -2783,8 +2749,6 @@ CONTAINS
       ldas, ldb, ldbs, m, ms, n, na, nargs, nc, nerr, ns
     LOGICAL ftl, left, null, reset
     CHARACTER :: diag, diags, side, sides, tranas, transa, uplo, uplos
-    CHARACTER(2) :: ichu, ichs, ichd
-    CHARACTER(3) :: icht
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
@@ -2794,7 +2758,8 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA ichs/'LR'/, ichu/'UL'/, icht/'NTC'/, ichd/'UN'/
+    CHARACTER(2), PARAMETER :: ichs = 'LR', ichu = 'UL', ichd = 'UN'
+    CHARACTER(3), PARAMETER :: icht = 'NTC'
     !* FIRST EXECUTABLE STATEMENT  CCHK33
     nargs = 11
     nc = 0
@@ -2879,11 +2844,9 @@ CONTAINS
                     !                          Call the subroutine.
                     !
                     IF ( Sname(4:5)=='MM' ) THEN
-                      CALL CTRMM(side,uplo,transa,diag,m,n,alpha,Aa,lda,Bb,&
-                        ldb)
+                      CALL CTRMM(side,uplo,transa,diag,m,n,alpha,Aa,lda,Bb,ldb)
                     ELSEIF ( Sname(4:5)=='SM' ) THEN
-                      CALL CTRSM(side,uplo,transa,diag,m,n,alpha,Aa,lda,Bb,&
-                        ldb)
+                      CALL CTRSM(side,uplo,transa,diag,m,n,alpha,Aa,lda,Bb,ldb)
                     ENDIF
                     !
                     !                          Check if error-exit was taken incorrectly.
@@ -2929,12 +2892,10 @@ CONTAINS
                         !
                         IF ( left ) THEN
                           CALL CMMCH(transa,'N',m,n,m,alpha,A,Nmax,B,Nmax,&
-                            ZERO,C,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,&
-                            .TRUE.,Kprint)
+                            ZERO,C,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,.TRUE.,Kprint)
                         ELSE
                           CALL CMMCH('N',transa,m,n,n,alpha,B,Nmax,A,Nmax,&
-                            ZERO,C,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,&
-                            .TRUE.,Kprint)
+                            ZERO,C,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,.TRUE.,Kprint)
                         ENDIF
                       ELSEIF ( Sname(4:5)=='SM' ) THEN
                         !
@@ -2950,12 +2911,10 @@ CONTAINS
                         !
                         IF ( left ) THEN
                           CALL CMMCH(transa,'N',m,n,m,ONE,A,Nmax,C,Nmax,ZERO,&
-                            B,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,&
-                            .FALSE.,Kprint)
+                            B,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,.FALSE.,Kprint)
                         ELSE
                           CALL CMMCH('N',transa,m,n,n,ONE,C,Nmax,A,Nmax,ZERO,&
-                            B,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,&
-                            .FALSE.,Kprint)
+                            B,Nmax,Ct,G,Bb,ldb,Eps,err,ftl,Nout,.FALSE.,Kprint)
                         ENDIF
                       ENDIF
                       errmax = MAX(errmax,err)
@@ -3049,8 +3008,8 @@ CONTAINS
     INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax)&
-      , Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), &
+    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax), &
+      Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), &
       Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
     REAL G(Nmax)
     INTEGER Idim(Nidim), Inc(Ninc)
@@ -3058,8 +3017,7 @@ CONTAINS
     COMPLEX alpha, als, transl
     REAL err, errmax
     INTEGER i, ia, im, in, incx, incxs, incy, incys, ix, iy, j, &
-      laa, lda, ldas, lx, ly, m, ms, n, nargs, nc, nd, nerr, &
-      ns
+      laa, lda, ldas, lx, ly, m, ms, n, nargs, nc, nd, nerr, ns
     LOGICAL conj, ftl, null, reset
     !     .. Local Arrays ..
     COMPLEX w(1)
@@ -3115,8 +3073,7 @@ CONTAINS
               !                 Generate the vector Y.
               !
               transl = ZERO
-              CALL CMAKE2('GE',' ',' ',1,n,Y,1,Yy,ABS(incy),0,n-1,reset,&
-                transl)
+              CALL CMAKE2('GE',' ',' ',1,n,Y,1,Yy,ABS(incy),0,n-1,reset,transl)
               IF ( n>1 ) THEN
                 Y(n/2) = ZERO
                 Yy(1+ABS(incy)*(n/2-1)) = ZERO
@@ -3222,8 +3179,7 @@ CONTAINS
                   IF ( Kprint>=3 ) THEN
                     WRITE (Nout,FMT=99005) j
                     WRITE (Nout,FMT=99004) Sname
-                    WRITE (Nout,FMT=99006) nc, Sname, m, n, alpha, incx, &
-                      incy, lda
+                    WRITE (Nout,FMT=99006) nc, Sname, m, n, alpha, incx, incy, lda
                   ENDIF
                 ENDIF
                 !
@@ -3315,11 +3271,9 @@ CONTAINS
     COMPLEX alpha, als, beta, bets
     REAL err, errmax, ralpha, rals, rbeta, rbets
     INTEGER i, ia, ib, ict, icu, ik, in, j, jc, jj, k, ks, laa, &
-      lcc, lda, ldas, ldc, ldcs, lj, ma, n, na, nargs, nc, &
-      nerr, ns
+      lcc, lda, ldas, ldc, ldcs, lj, ma, n, na, nargs, nc, nerr, ns
     LOGICAL conj, ftl, null, reset, tran, upper
     CHARACTER :: trans, transs, uplo, transt, uplos
-    CHARACTER(2) :: ichu, icht
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
@@ -3329,7 +3283,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA ichu/'UL'/, icht/'NC'/
+    CHARACTER(2), PARAMETER :: ichu = 'UL', icht = 'NC'
     !* FIRST EXECUTABLE STATEMENT  CCHK43
     conj = Sname(2:3)=='HE'
     !
@@ -3395,8 +3349,7 @@ CONTAINS
                     !
                     !                       Generate the matrix C.
                     !
-                    CALL CMAKE3(Sname(2:3),uplo,' ',n,n,C,Nmax,Cc,ldc,reset,&
-                      ZERO)
+                    CALL CMAKE3(Sname(2:3),uplo,' ',n,n,C,Nmax,Cc,ldc,reset,ZERO)
                     !
                     nc = nc + 1
                     !
@@ -3516,8 +3469,7 @@ CONTAINS
                             WRITE (Nout,FMT=99004) Sname
                             IF ( conj ) THEN
                               WRITE (Nout,FMT=99005) nc, Sname, uplo, &
-                                trans, n, k, ralpha, lda, rbeta, &
-                                ldc
+                                trans, n, k, ralpha, lda, rbeta, ldc
                             ELSE
                               WRITE (Nout,FMT=99006) nc, Sname, uplo, &
                                 trans, n, k, alpha, lda, beta, ldc
@@ -3608,8 +3560,8 @@ CONTAINS
     INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax)&
-      , Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), &
+    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax), &
+      Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), &
       Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax)
     REAL G(Nmax)
     INTEGER Idim(Nidim), Inc(Ninc)
@@ -3620,7 +3572,6 @@ CONTAINS
       ldas, lj, lx, n, nargs, nc, nerr, ns
     LOGICAL ftl, full, null, packed, reset, upper
     CHARACTER :: uplo, uplos
-    CHARACTER(2) :: ich
     !     .. Local Arrays ..
     COMPLEX w(1)
     LOGICAL isame(13)
@@ -3631,7 +3582,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, CMPLX, CONJG, MAX, REAL
     !     .. Data statements ..
-    DATA ich/'UL'/
+    CHARACTER(2), PARAMETER :: ich = 'UL'
     !* FIRST EXECUTABLE STATEMENT  CCHK52
     full = Sname(3:3)=='E'
     packed = Sname(3:3)=='P'
@@ -3782,11 +3733,9 @@ CONTAINS
                 IF ( Kprint>=3 ) THEN
                   WRITE (Nout,FMT=99004) Sname
                   IF ( full ) THEN
-                    WRITE (Nout,FMT=99006) nc, Sname, uplo, n, ralpha, &
-                      incx, lda
+                    WRITE (Nout,FMT=99006) nc, Sname, uplo, n, ralpha, incx, lda
                   ELSEIF ( packed ) THEN
-                    WRITE (Nout,FMT=99005) nc, Sname, uplo, n, ralpha, &
-                      incx
+                    WRITE (Nout,FMT=99005) nc, Sname, uplo, n, ralpha, incx
                   ENDIF
                 ENDIF
               ENDIF
@@ -3882,7 +3831,6 @@ CONTAINS
       n, na, nargs, nc, nerr, ns
     LOGICAL conj, ftl, null, reset, tran, upper
     CHARACTER :: trans, transs, uplo, transt, uplos
-    CHARACTER(2) :: ichu, icht
     !     .. Local Arrays ..
     LOGICAL isame(13)
     !     .. External Functions ..
@@ -3892,7 +3840,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, MAX, MIN
     !     .. Data statements ..
-    DATA ichu/'UL'/, icht/'NC'/
+    CHARACTER(2), PARAMETER :: ichu = 'UL', icht = 'NC'
     !* FIRST EXECUTABLE STATEMENT  CCHK53
     conj = Sname(2:3)=='HE'
     !
@@ -3944,8 +3892,7 @@ CONTAINS
               ldb = lda
               lbb = laa
               IF ( tran ) THEN
-                CALL CMAKE3('GE',' ',' ',ma,na,Ab(k+1),2*Nmax,Bb,ldb,reset,&
-                  ZERO)
+                CALL CMAKE3('GE',' ',' ',ma,na,Ab(k+1),2*Nmax,Bb,ldb,reset,ZERO)
               ELSE
                 CALL CMAKE3('GE',' ',' ',ma,na,Ab(k*Nmax+1),Nmax,Bb,ldb,reset,&
                   ZERO)
@@ -3970,8 +3917,7 @@ CONTAINS
                     !
                     !                       Generate the matrix C.
                     !
-                    CALL CMAKE3(Sname(2:3),uplo,' ',n,n,C,Nmax,Cc,ldc,reset,&
-                      ZERO)
+                    CALL CMAKE3(Sname(2:3),uplo,' ',n,n,C,Nmax,Cc,ldc,reset,ZERO)
                     !
                     nc = nc + 1
                     !
@@ -4003,11 +3949,9 @@ CONTAINS
                     !                       Call the subroutine.
                     !
                     IF ( conj ) THEN
-                      CALL CHER2K(uplo,trans,n,k,alpha,Aa,lda,Bb,ldb,rbeta,Cc,&
-                        ldc)
+                      CALL CHER2K(uplo,trans,n,k,alpha,Aa,lda,Bb,ldb,rbeta,Cc,ldc)
                     ELSE
-                      CALL CSYR2K(uplo,trans,n,k,alpha,Aa,lda,Bb,ldb,beta,Cc,&
-                        ldc)
+                      CALL CSYR2K(uplo,trans,n,k,alpha,Aa,lda,Bb,ldb,beta,Cc,ldc)
                     ENDIF
                     !
                     !                       Check if error-exit was taken incorrectly.
@@ -4110,12 +4054,10 @@ CONTAINS
                             WRITE (Nout,FMT=99004) Sname
                             IF ( conj ) THEN
                               WRITE (Nout,FMT=99005) nc, Sname, uplo, &
-                                trans, n, k, alpha, lda, ldb, &
-                                rbeta, ldc
+                                trans, n, k, alpha, lda, ldb, rbeta, ldc
                             ELSE
                               WRITE (Nout,FMT=99006) nc, Sname, uplo, &
-                                trans, n, k, alpha, lda, ldb, &
-                                beta, ldc
+                                trans, n, k, alpha, lda, ldb, beta, ldc
                             ENDIF
                           ENDIF
                         ENDIF
@@ -4203,8 +4145,8 @@ CONTAINS
     INTEGER Incmax, Kprint, Nalf, Nidim, Ninc, Nmax, Nout
     CHARACTER(6) :: Sname
     !     .. Array Arguments ..
-    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax)&
-      , Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), &
+    COMPLEX A(Nmax,Nmax), Aa(Nmax*Nmax), Alf(Nalf), As(Nmax*Nmax), X(Nmax), &
+      Xs(Nmax*Incmax), Xx(Nmax*Incmax), Y(Nmax), Ys(Nmax*Incmax), &
       Yt(Nmax), Yy(Nmax*Incmax), Z(Nmax,2)
     REAL G(Nmax)
     INTEGER Idim(Nidim), Inc(Ninc)
@@ -4212,11 +4154,9 @@ CONTAINS
     COMPLEX alpha, als, transl
     REAL err, errmax
     INTEGER i, ia, ic, in, incx, incxs, incy, incys, ix, iy, j, &
-      ja, jj, laa, lda, ldas, lj, lx, ly, n, nargs, nc, &
-      nerr, ns
+      ja, jj, laa, lda, ldas, lj, lx, ly, n, nargs, nc, nerr, ns
     LOGICAL ftl, full, null, packed, reset, upper
     CHARACTER :: uplo, uplos
-    CHARACTER(2) :: ich
     !     .. Local Arrays ..
     COMPLEX w(2)
     LOGICAL isame(13)
@@ -4227,7 +4167,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, CONJG, MAX
     !     .. Data statements ..
-    DATA ich/'UL'/
+    CHARACTER(2), PARAMETER :: ich = 'UL'
     !* FIRST EXECUTABLE STATEMENT  CCHK62
     full = Sname(3:3)=='E'
     packed = Sname(3:3)=='P'
@@ -4279,8 +4219,7 @@ CONTAINS
               !                 Generate the vector Y.
               !
               transl = ZERO
-              CALL CMAKE2('GE',' ',' ',1,n,Y,1,Yy,ABS(incy),0,n-1,reset,&
-                transl)
+              CALL CMAKE2('GE',' ',' ',1,n,Y,1,Yy,ABS(incy),0,n-1,reset,transl)
               IF ( n>1 ) THEN
                 Y(n/2) = ZERO
                 Yy(1+ABS(incy)*(n/2-1)) = ZERO
@@ -4411,8 +4350,7 @@ CONTAINS
                       WRITE (Nout,FMT=99007) nc, Sname, uplo, n, alpha, &
                         incx, incy, lda
                     ELSEIF ( packed ) THEN
-                      WRITE (Nout,FMT=99006) nc, Sname, uplo, n, alpha, &
-                        incx, incy
+                      WRITE (Nout,FMT=99006) nc, Sname, uplo, n, alpha, incx, incy
                     ENDIF
                   ENDIF
                 ENDIF
@@ -4502,8 +4440,7 @@ CONTAINS
     COMPLEX a(1,1), x(1), y(1)
     !     .. External Subroutines ..
     EXTERNAL :: CGBMV, CGEMV, CGERC, CGERU, CHBMV, CHEMV, CHER, CHER2, &
-      CHKXER, CHPMV, CHPR, CHPR2, CTBMV, CTBSV, CTPMV, CTPSV, &
-      CTRMV, CTRSV
+      CHKXER, CHPMV, CHPR, CHPR2, CTBMV, CTBSV, CTPMV, CTPSV, CTRMV, CTRSV
     !* FIRST EXECUTABLE STATEMENT  CCHKE2
     CALL XGETF(kontrl)
     IF ( Kprint<=2 ) THEN
