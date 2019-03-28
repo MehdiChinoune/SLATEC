@@ -104,8 +104,8 @@ CONTAINS
     ELSE
       WRITE (Lun,99006)
       IF ( ipass4==0 ) WRITE (Lun,99005) pi, trc, dif
-      99005 FORMAT (' CORRECT ANSWER =',1PD20.14/'COMPUTED ANSWER =',&
-        D20.14/'     DIFFERENCE =',D20.14)
+      99005 FORMAT (' CORRECT ANSWER =',1PD21.14/'COMPUTED ANSWER =',&
+        D21.14/'     DIFFERENCE =',D21.14)
     ENDIF
     CALL XSETF(contrl)
     99006 FORMAT (' DRC - FAILED')
@@ -214,8 +214,8 @@ CONTAINS
     ELSE
       WRITE (Lun,99006)
       IF ( ipass4==0 ) WRITE (Lun,99005) blem, trd, dif
-      99005 FORMAT (' CORRECT ANSWER =',1PD20.14/'COMPUTED ANSWER =',&
-        D20.14/'     DIFFERENCE =',D20.14)
+      99005 FORMAT (' CORRECT ANSWER =',1PD21.14/'COMPUTED ANSWER =',&
+        D21.14/'     DIFFERENCE =',D21.14)
     ENDIF
     CALL XSETF(contrl)
     99006 FORMAT (' DRD - FAILED')
@@ -324,8 +324,8 @@ CONTAINS
     ELSE
       WRITE (Lun,99006)
       IF ( ipass4==0 ) WRITE (Lun,99005) alem, trf, dif
-      99005 FORMAT (' CORRECT ANSWER =',1PD20.14/'COMPUTED ANSWER =',&
-        D20.14/'     DIFFERENCE =',D20.14)
+      99005 FORMAT (' CORRECT ANSWER =',1PD21.14/'COMPUTED ANSWER =',&
+        D21.14/'     DIFFERENCE =',D21.14)
     ENDIF
     CALL XSETF(contrl)
     99006 FORMAT (' DRF - FAILED')
@@ -433,8 +433,8 @@ CONTAINS
     ELSE
       WRITE (Lun,99006)
       IF ( ipass4==0 ) WRITE (Lun,99005) consj, trj, dif
-      99005 FORMAT (' CORRECT ANSWER =',1PD20.14/'COMPUTED ANSWER =',&
-        D20.14/'     DIFFERENCE =',D20.14)
+      99005 FORMAT (' CORRECT ANSWER =',1PD21.14/'COMPUTED ANSWER =',&
+        D21.14/'     DIFFERENCE =',D21.14)
     ENDIF
     CALL XSETF(contrl)
     99006 FORMAT (' DRJ - FAILED')

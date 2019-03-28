@@ -623,13 +623,13 @@ CONTAINS
         WRITE (Lun,99041) n, rftf, rftb, rftfb, sintt, sintfb, costt, &
           costfb, sinqft, sinqbt, sinqfb, cosqft, &
           cosqbt, cosqfb, dezf1, dezb1, dezfb, dcfftf, dcfftb, dcfb
-        99041 FORMAT ('0N',I5,'  RFFTF  ',E9.3,'  RFFTB  ',E9.3,'  RFFTFB ',E9.3/7X,&
-          '  SINT   ',E9.3,'  SINTFB ',E9.3/7X,'  COST   ',E9.3,&
-          '  COSTFB ',E9.3/7X,'  SINQF  ',E9.3,'  SINQB  ',E9.3,&
-          '  SINQFB ',E9.3/7X,'  COSQF  ',E9.3,'  COSQB  ',E9.3,&
-          '  COSQFB ',E9.3/7X,'  DEZF1  ',E9.3,'  DEZB1  ',E9.3,&
-          '  DEZFB  ',E9.3/7X,'  CFFTF  ',E9.3,'  CFFTB  ',E9.3,&
-          '  CFFTFB ',E9.3)
+        99041 FORMAT ('0N',I5,'  RFFTF  ',E10.3,'  RFFTB  ',E10.3,'  RFFTFB ',E10.3/7X,&
+          '  SINT   ',E10.3,'  SINTFB ',E10.3/7X,'  COST   ',E10.3,&
+          '  COSTFB ',E10.3/7X,'  SINQF  ',E10.3,'  SINQB  ',E10.3,&
+          '  SINQFB ',E10.3/7X,'  COSQF  ',E10.3,'  COSQB  ',E10.3,&
+          '  COSQFB ',E10.3/7X,'  DEZF1  ',E10.3,'  DEZB1  ',E10.3,&
+          '  DEZFB  ',E10.3/7X,'  CFFTF  ',E10.3,'  CFFTB  ',E10.3,&
+          '  CFFTFB ',E10.3)
       ENDIF
     ENDDO
     IF ( Kprint>=2.AND.Ipass==1 ) WRITE (Lun,99042)

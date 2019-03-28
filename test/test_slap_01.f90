@@ -518,7 +518,7 @@ CONTAINS
         99003 FORMAT (' ***************** PASSED ***********************'/' **** ',&
           A6,' Quick Test PASSED: IERR = ',I5,&
           ' ****'/' ***************** PASSED ***********************'/&
-          ' Iteration Count = ',I3,' Stop Test = ',1P,E12.6)
+          ' Iteration Count = ',I3,' Stop Test = ',1P,E13.6)
       ELSE
         WRITE (Istdo,99004) Method, Ierr, Iter, Err
       ENDIF
@@ -527,7 +527,7 @@ CONTAINS
     99004 FORMAT (' **************** WARNING ***********************'/' **** ',A6,&
       ' Quick Test FAILED: IERR = ',I5,&
       ' ****'/' **************** WARNING ***********************'/&
-      ' Iteration Count = ',I3,' Stop Test = ',1P,E12.6)
+      ' Iteration Count = ',I3,' Stop Test = ',1P,E13.6)
     !------------- LAST LINE OF OUTERR FOLLOWS ----------------------------
   END SUBROUTINE OUTERR
 END MODULE TEST25_MOD
