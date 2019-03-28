@@ -32,10 +32,10 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  
+
   !
   INTEGER IBAnd, IBEgin, Idid, IER, IINteg, IJAc, INIt, intflg, &
-    IOWns, Ipar, IQUit, ITOl, ITStop, Iwm(*), JSTart, k, KFLag, &
+    IOWns, Ipar(*), IQUit, ITOl, ITStop, Iwm(*), JSTart, k, KFLag, &
     KSTeps, l, LACor, LDUm, LEWt, LSAvf, ltol, LWM, LYH, &
     maxnum, MAXord, METh, MITer, N, natolp, Neq, NFE, NJE, NQ, NQU, nrtolp, NST
   REAL(8) :: absdel, Acor(*), Atol(*), big, D1MACH, del, Delsgn, dt, &
