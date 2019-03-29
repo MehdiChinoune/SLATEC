@@ -38,10 +38,9 @@ REAL FUNCTION BETA(A,B)
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
 
-  REAL A, alnsml, B, xmax, xmin
+  REAL A, B, xmin
   REAL, EXTERNAL :: ALBETA, GAMMA, R1MACH
-  SAVE xmax, alnsml
-  DATA xmax, alnsml/0., 0./
+  REAL :: xmax = 0., alnsml = 0.
   !* FIRST EXECUTABLE STATEMENT  BETA
   IF ( alnsml==0.0 ) THEN
     CALL GAMLIM(xmin,xmax)

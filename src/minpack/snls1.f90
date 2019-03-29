@@ -620,17 +620,15 @@ SUBROUTINE SNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   LOGICAL sing
   EXTERNAL :: FCN
   INTEGER i, iflag, iter, j, l, modech
-  REAL actred, delta, dirder, epsmch, fnorm, fnorm1, gnorm, one, &
-    par, pnorm, prered, p1, p5, p25, p75, p0001, ratio, sum, &
-    temp, temp1, temp2, xnorm, zero
-  REAL R1MACH, ENORM, err, chklim
+  REAL actred, delta, dirder, epsmch, fnorm, fnorm1, gnorm, par, pnorm, prered, &
+    ratio, sum, temp, temp1, temp2, xnorm, err
+  REAL R1MACH, ENORM
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
   !
-  SAVE chklim, one, p1, p5, p25, p75, p0001, zero
-  DATA chklim/.1E0/
-  DATA one, p1, p5, p25, p75, p0001, zero/1.0E0, 1.0E-1, 5.0E-1, &
-    2.5E-1, 7.5E-1, 1.0E-4, 0.0E0/
+  REAL, PARAMETER :: chklim = .1E0
+  REAL, PARAMETER :: one = 1.0E0, p1 = 1.0E-1, p5 = 5.0E-1, p25 = 2.5E-1, &
+    p75 = 7.5E-1, p0001 = 1.0E-4, zero = 0.0E0
   !
   !* FIRST EXECUTABLE STATEMENT  SNLS1
   epsmch = R1MACH(4)

@@ -40,10 +40,9 @@ REAL FUNCTION ALBETA(A,B)
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
 
-  REAL A, B, corr, p, q, sq2pil
+  REAL A, B, corr, p, q
   REAL, EXTERNAL :: ALNGAM, ALNREL, R9LGMC, GAMMA
-  SAVE sq2pil
-  DATA sq2pil/0.91893853320467274E0/
+  REAL, PARAMETER :: sq2pil = 0.91893853320467274E0
   !* FIRST EXECUTABLE STATEMENT  ALBETA
   p = MIN(A,B)
   q = MAX(A,B)

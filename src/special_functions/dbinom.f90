@@ -33,9 +33,9 @@ REAL(8) FUNCTION DBINOM(N,M)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
   INTEGER i, k, M, N
-  REAL(8) :: corr, fintmx, sq2pil, xk, xn, xnk, D9LGMC, DLNREL, D1MACH, bilnmx
-  SAVE sq2pil, bilnmx, fintmx
-  DATA sq2pil/0.91893853320467274178032973640562D0/
+  REAL(8) :: corr, fintmx, xk, xn, xnk, D9LGMC, DLNREL, D1MACH, bilnmx
+  SAVE bilnmx, fintmx
+  REAL(8), PARAMETER :: sq2pil = 0.91893853320467274178032973640562D0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBINOM
   IF ( first ) THEN

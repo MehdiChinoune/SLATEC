@@ -28,7 +28,7 @@ SUBROUTINE RSCO(Rsav,Isav)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   !
   !
   !-----------------------------------------------------------------------
@@ -37,11 +37,10 @@ SUBROUTINE RSCO(Rsav,Isav)
   ! PACKAGE.  THIS PRESUMES THAT RSAV AND ISAV WERE LOADED BY MEANS
   ! OF SUBROUTINE SVCO OR THE EQUIVALENT.
   !-----------------------------------------------------------------------
-  INTEGER Isav(*), i, ILS(33), lenils, lenrls
+  INTEGER Isav(*), i, ILS(33)
   REAL Rsav(*), RLS(218)
   COMMON /DEBDF1/ RLS, ILS
-  SAVE lenrls, lenils
-  DATA lenrls/218/, lenils/33/
+  INTEGER, PARAMETER :: lenrls = 218, lenils = 33
   !
   !* FIRST EXECUTABLE STATEMENT  RSCO
   DO i = 1, lenrls

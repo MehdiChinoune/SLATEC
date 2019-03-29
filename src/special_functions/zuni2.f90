@@ -34,21 +34,17 @@ SUBROUTINE ZUNI2(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Nlast,Fnul,Tol,Elim,Alim)
 
   !     COMPLEX AI,ARG,ASUM,BSUM,CFN,CI,CID,CIP,CONE,CRSC,CSCL,CSR,CSS,
   !    *CZERO,C1,C2,DAI,PHI,RZ,S1,S2,Y,Z,ZB,ZETA1,ZETA2,ZN
-  INTEGER i, iflag, in, inu, j, k, Kode, N, nai, nd, ndai, &
-    Nlast, nn, nuf, nw, Nz, idum
-  REAL(8) :: aarg, aic, aii, air, Alim, ang, aphi, argi, &
-    argr, ascle, asumi, asumr, bry(3), bsumi, bsumr, &
-    cidi, coner, crsc, cscl, csrr(3), cssr(3), &
-    c1r, c2i, c2m, c2r, daii, dair, Elim, fn, Fnu, &
-    Fnul, hpi, phii, phir, rast, raz, rs1, rzi, rzr, &
-    sti, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), zbi, &
-    zbr, zeroi, zeror, zeta1i, zeta1r, zeta2i, zeta2r, &
-    Zi, zni, znr, Zr, cyr(2), cyi(2), car, sar
+  INTEGER i, iflag, in, inu, j, k, Kode, N, nai, nd, ndai, Nlast, nn, nuf, nw, Nz, idum
+  REAL(8) :: aarg, aii, air, Alim, ang, aphi, argi, argr, ascle, asumi, asumr, &
+    bry(3), bsumi, bsumr, cidi, crsc, cscl, csrr(3), cssr(3), c1r, c2i, c2m, c2r, &
+    daii, dair, Elim, fn, Fnu, Fnul, phii, phir, rast, raz, rs1, rzi, rzr, &
+    sti, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), zbi, zbr, zeta1i, zeta1r, &
+    zeta2i, zeta2r, Zi, zni, znr, Zr, cyr(2), cyi(2), car, sar
   REAL(8), EXTERNAL :: D1MACH, ZABS
-  DATA zeror, zeroi, coner/0.0D0, 0.0D0, 1.0D0/
+  REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0
   REAL(8), PARAMETER :: cipr(4) = [ 1.0D0, 0.0D0, -1.0D0, 0.0D0 ]
   REAL(8), PARAMETER :: cipi(4) = [ 0.0D0, 1.0D0, 0.0D0, -1.0D0 ]
-  DATA hpi, aic/1.57079632679489662D+00, 1.265512123484645396D+00/
+  REAL(8), PARAMETER :: hpi = 1.57079632679489662D+00, aic = 1.265512123484645396D+00
   !* FIRST EXECUTABLE STATEMENT  ZUNI2
   Nz = 0
   nd = N

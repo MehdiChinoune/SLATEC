@@ -83,14 +83,11 @@ REAL(8) FUNCTION DNRM2(N,Dx,Incx)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  INTEGER i, Incx, j, N, nn
-  INTEGER next
-  REAL(8) :: Dx(*), cutlo, cuthi, hitest, sum, xmax, zero, one
-  SAVE cutlo, cuthi, zero, one
-  DATA zero, one/0.0D0, 1.0D0/
-  !
-  DATA cutlo, cuthi/8.232D-11, 1.304D19/
+
+  INTEGER i, Incx, j, N, nn, next
+  REAL(8) :: Dx(*), hitest, sum, xmax
+  REAL(8), PARAMETER :: zero = 0.0D0, one = 1.0D0
+  REAL(8), PARAMETER :: cutlo = 8.232D-11, cuthi = 1.304D19
   !* FIRST EXECUTABLE STATEMENT  DNRM2
   IF ( N>0 ) THEN
     !

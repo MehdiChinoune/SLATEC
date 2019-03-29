@@ -68,15 +68,15 @@ SUBROUTINE SDAINI(X,Y,Yprime,Neq,RES,JAC,H,Wt,Idid,Rpar,Ipar,Phi,Delta,E,&
   EXTERNAL :: SDAJAC, SDASLV
   REAL, EXTERNAL :: SDANRM
   !
-  INTEGER i, ier, ires, jcalc, m, maxit, mjac, ncf, nef, nsf
-  REAL cj, damp, delnrm, err, oldnrm, r, rate, s, xold, ynorm
+  INTEGER i, ier, ires, jcalc, m, ncf, nef, nsf
+  REAL cj, delnrm, err, oldnrm, r, rate, s, xold, ynorm
   LOGICAL convgd
   !
   INTEGER, PARAMETER :: LNRE = 12
   INTEGER, PARAMETER :: LNJE = 13
   !
-  DATA maxit/10/, mjac/5/
-  DATA damp/0.75E0/
+  INTEGER, PARAMETER :: maxit = 10, mjac = 5
+  REAL, PARAMETER :: damp = 0.75E0
   !
   !
   !---------------------------------------------------

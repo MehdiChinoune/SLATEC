@@ -44,10 +44,9 @@ SUBROUTINE CUOIK(Z,Fnu,Kode,Ikflg,N,Y,Nuf,Tol,Elim,Alim)
 
   INTEGER i, iform, Ikflg, init, Kode, N, nn, Nuf, nw
   COMPLEX arg, asum, bsum, cwrk(16), cz, phi, sum, Y(N), Z, zb, zeta1, zeta2, zn, zr
-  REAL aarg, aic, Alim, aphi, ascle, ax, ay, Elim, fnn, Fnu, gnn, &
-    gnu, rcz, Tol, x, yy, R1MACH
+  REAL aarg, Alim, aphi, ascle, ax, ay, Elim, fnn, Fnu, gnn, gnu, rcz, Tol, x, yy, R1MACH
   COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0)
-  DATA aic /1.265512123484645396E+00/
+  REAL, PARAMETER :: aic = 1.265512123484645396E+00
   !* FIRST EXECUTABLE STATEMENT  CUOIK
   Nuf = 0
   nn = N

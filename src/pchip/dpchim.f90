@@ -132,7 +132,7 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920429  Revised format and order of references.  (WRB,FNF)
-  
+
   !  Programming notes:
   !
   !     1. The function  DPCHST(ARG1,ARG2)  is assumed to return zero if
@@ -155,10 +155,9 @@ SUBROUTINE DPCHIM(N,X,F,D,Incfd,Ierr)
   !
   INTEGER i, nless1
   REAL(8) :: del1, del2, dmax, dmin, drat1, drat2, dsave, h1, &
-    h2, hsum, hsumt3, three, w1, w2, zero
-  SAVE zero, three
+    h2, hsum, hsumt3, w1, w2
   REAL(8) :: DPCHST
-  DATA zero/0.D0/, three/3.D0/
+  REAL(8), PARAMETER :: zero = 0.D0, three = 3.D0
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

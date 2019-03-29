@@ -57,16 +57,16 @@ REAL FUNCTION POCH1(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
 
-  REAL A, absa, absx, alneps, alnvar, b, binv, bp, gbern(10), gbk, pi, poly1, &
+  REAL A, absa, absx, alneps, alnvar, b, binv, bp, gbern(10), gbk, poly1, &
     q, rho, sinpx2, sinpxx, sqtbig, term, trig, var, var2, X
   INTEGER i, ii, incr, j, k, ndx, nterms
   REAL, EXTERNAL :: EXPREL, COT, POCH, PSI, R1MACH
-  SAVE pi, sqtbig, alneps
+  SAVE sqtbig, alneps
   REAL, PARAMETER :: bern(9) = [ .83333333333333333E-01,-.13888888888888889E-02, &
     .33068783068783069E-04, -.82671957671957672E-06, .20876756987868099E-07, &
     -.52841901386874932E-09, .13382536530684679E-10,-.33896802963225829E-12, &
     .85860620562778446E-14 ]
-  DATA pi/3.14159265358979324E0/
+  REAL, PARAMETER :: pi = 3.14159265358979324E0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  POCH1
   IF ( first ) THEN

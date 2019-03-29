@@ -129,7 +129,7 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920429  Revised format and order of references.  (WRB,FNF)
-  
+
   !  Programming notes:
   !
   !     1. The function  PCHST(ARG1,ARG2)  is assumed to return zero if
@@ -151,11 +151,9 @@ SUBROUTINE PCHIM(N,X,F,D,Incfd,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, nless1
-  REAL del1, del2, dmax, dmin, drat1, drat2, dsave, h1, h2, hsum, &
-    hsumt3, three, w1, w2, zero
-  SAVE zero, three
+  REAL del1, del2, dmax, dmin, drat1, drat2, dsave, h1, h2, hsum, hsumt3, w1, w2
   REAL PCHST
-  DATA zero/0./, three/3./
+  REAL, PARAMETER :: zero = 0., three = 3.
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

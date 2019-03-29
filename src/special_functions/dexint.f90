@@ -107,16 +107,14 @@ SUBROUTINE DEXINT(X,N,Kode,M,Tol,En,Nz,Ierr)
   !   920207  Updated with code with a revision date of 880811 from
   !           D. Amos.  Included correction of argument list.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  REAL(8) :: a(99), aa, aams, ah, ak, at, b(99), bk, bt, cc, cnorm, &
-    ct, em, emx, En(*), etol, fnm, fx, pt, p1, p2, s, &
-    Tol, tx, X, xcut, xlim, xtol, y(2), yt, y1, y2
+
+  REAL(8) :: a(99), aa, aams, ah, ak, at, b(99), bk, bt, cc, cnorm, ct, em, emx, &
+    En(*), etol, fnm, fx, pt, p1, p2, s, Tol, tx, X, xlim, xtol, y(2), yt, y1, y2
   REAL(8) :: D1MACH, DPSIXN
-  INTEGER i, ic, icase, ict, Ierr, ik, ind, ix, i1m, jset, k, &
-    kk, kn, Kode, ks, M, ml, mu, N, nd, nm, Nz
+  INTEGER i, ic, icase, ict, Ierr, ik, ind, ix, i1m, jset, k, kk, kn, Kode, ks, &
+    M, ml, mu, N, nd, nm, Nz
   INTEGER I1MACH
-  SAVE xcut
-  DATA xcut/2.0D0/
+  REAL(8), PARAMETER :: xcut = 2.0D0
   !* FIRST EXECUTABLE STATEMENT  DEXINT
   Ierr = 0
   Nz = 0

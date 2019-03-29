@@ -34,9 +34,9 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !   900510  Convert XERRWV calls to XERMSG calls, replace GOTOs with
   !           IF-THEN-ELSEs.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   INTEGER Idid, Info(15), Init, Ipar(*), Iquit, Iv(10), Ivc, k, Kgi, Kle4, &
-    Kold, Kord, Kprev, Ksteps, l, ltol, maxnum, natolp, Neq, nrtolp
+    Kold, Kord, Kprev, Ksteps, l, ltol, natolp, Neq, nrtolp
   REAL a, absdel, Alpha(12), Atol(*), Beta(12), del, Delsgn, dt, Eps, Fouru, &
     G(13), Gi(11), H, ha, Hold, P(*), Phi(Neq,16), Psi(12), R1MACH, Rpar(*)
   REAL Rtol(*), Sig(13), T, Told, Tout, Tstop, Twou, u, V(12), W(12), Wt(*), &
@@ -55,8 +55,7 @@ SUBROUTINE DES(F,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Ypout,Yp,Yy,Wt,P,Phi,&
   !  IS RESET TO ZERO AND THE USER IS INFORMED ABOUT POSSIBLE EXCESSIVE
   !  WORK.
   !
-  SAVE maxnum
-  DATA maxnum/500/
+  INTEGER, PARAMETER :: maxnum = 500
   !
   !.......................................................................
   !

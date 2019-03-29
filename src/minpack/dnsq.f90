@@ -429,19 +429,18 @@ SUBROUTINE DNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   REAL(8) :: D1MACH, DENORM
   INTEGER i, iflag, Info, Iopt, iter, iwa(1), j, jm1, l, Ldfjac, &
     Lr, Maxfev, Ml, Mode, Mu, N, ncfail, ncsuc, Nfev, Njev, &
     Nprint, nslow1, nslow2
-  REAL(8) :: actred, delta, Diag(*), Epsfcn, epsmch, Factor, &
-    Fjac(Ldfjac,*), fnorm, fnorm1, Fvec(*), one, p0001, &
-    p001, p1, p5, pnorm, prered, Qtf(*), R(*), ratio, &
-    sum, temp, Wa1(*), Wa2(*), Wa3(*), Wa4(*), X(*), xnorm, Xtol, zero
+  REAL(8) :: actred, delta, Diag(*), Epsfcn, epsmch, Factor, Fjac(Ldfjac,*), &
+    fnorm, fnorm1, Fvec(*), pnorm, prered, Qtf(*), R(*), ratio, sum, temp, &
+    Wa1(*), Wa2(*), Wa3(*), Wa4(*), X(*), xnorm, Xtol
   EXTERNAL :: FCN
   LOGICAL jeval, sing
-  SAVE one, p1, p5, p001, p0001, zero
-  DATA one, p1, p5, p001, p0001, zero/1.0D0, 1.0D-1, 5.0D-1, 1.0D-3, 1.0D-4, 0.0D0/
+  REAL(8), PARAMETER :: one = 1.0D0, p1 = 1.0D-1, p5 = 5.0D-1, p001 = 1.0D-3, &
+    p0001 = 1.0D-4, zero = 0.0D0
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 320
   !* FIRST EXECUTABLE STATEMENT  DNSQ

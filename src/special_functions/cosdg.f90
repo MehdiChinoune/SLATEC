@@ -30,12 +30,11 @@ REAL FUNCTION COSDG(X)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   ! JUNE 1977 EDITION.   W. FULLERTON, C3, LOS ALAMOS SCIENTIFIC LAB.
-  REAL raddeg, X
+  REAL X
   INTEGER n
-  SAVE raddeg
-  DATA raddeg/.017453292519943296E0/
+  REAL, PARAMETER :: raddeg = .017453292519943296E0
   !
   !* FIRST EXECUTABLE STATEMENT  COSDG
   COSDG = COS(raddeg*X)

@@ -163,9 +163,9 @@ SUBROUTINE CBESI(Z,Fnu,Kode,N,Cy,Nz,Ierr)
 
   INTEGER i, Ierr, inu, k, Kode, k1, k2, N, nn, Nz, I1MACH
   COMPLEX csgn, Cy(N), Z, zn
-  REAL aa, alim, arg, dig, elim, Fnu, fnul, pi, rl, r1m5, s1, &
+  REAL aa, alim, arg, dig, elim, Fnu, fnul, rl, r1m5, s1, &
     s2, tol, xx, yy, R1MACH, az, fn, bb, ascle, rtol, atol
-  DATA pi /3.14159265358979324E0/
+  REAL, PARAMETER :: pi = 3.14159265358979324E0
   COMPLEX, PARAMETER :: cone = (1.0E0,0.0E0)
   !
   !* FIRST EXECUTABLE STATEMENT  CBESI

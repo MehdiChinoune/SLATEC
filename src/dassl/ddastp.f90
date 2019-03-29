@@ -108,11 +108,10 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   EXTERNAL :: DDAJAC, DDASLV, DDATRP
   REAL(8), EXTERNAL :: DDANRM
   !
-  INTEGER i, ier, ires, j, j1, kdiff, km1, knew, kp1, kp2, m, maxit, ncf, nef, &
-    nsf, nsp1
+  INTEGER i, ier, ires, j, j1, kdiff, km1, knew, kp1, kp2, m, ncf, nef, nsf, nsp1
   REAL(8) :: alpha0, alphas, cjlast, ck, delnrm, enorm, erk, erkm1, erkm2, erkp1, &
     err, est, hnew, oldnrm, pnorm, r, rate, temp1, temp2, terk, terkm1, terkm2, &
-    terkp1, xold, xrate
+    terkp1, xold
   LOGICAL convgd
   !
   INTEGER, PARAMETER :: LMXORD = 3
@@ -122,8 +121,8 @@ SUBROUTINE DDASTP(X,Y,Yprime,Neq,RES,JAC,H,Wt,Jstart,Idid,Rpar,Ipar,Phi,&
   INTEGER, PARAMETER :: LETF = 14
   INTEGER, PARAMETER :: LCTF = 15
   !
-  DATA maxit/4/
-  DATA xrate/0.25D0/
+  INTEGER, PARAMETER :: maxit = 4
+  REAL(8), PARAMETER :: xrate = 0.25D0
   !
   !
   !

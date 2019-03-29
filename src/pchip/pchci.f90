@@ -87,7 +87,7 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
   !   930503  Improved purpose.  (FNF)
-  
+
   !
   !  Programming notes:
   !     1. The function  PCHST(ARG1,ARG2)  is assumed to return zero if
@@ -103,13 +103,12 @@ SUBROUTINE PCHCI(N,H,Slope,D,Incfd)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, nless1
-  REAL del1, del2, dmax, dmin, drat1, drat2, hsum, hsumt3, three, w1, w2, zero
-  SAVE zero, three
+  REAL del1, del2, dmax, dmin, drat1, drat2, hsum, hsumt3, w1, w2
   REAL PCHST
   !
   !  INITIALIZE.
   !
-  DATA zero/0./, three/3./
+  REAL, PARAMETER :: zero = 0., three = 3.
   !* FIRST EXECUTABLE STATEMENT  PCHCI
   nless1 = N - 1
   del1 = Slope(1)

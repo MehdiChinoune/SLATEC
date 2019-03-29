@@ -63,7 +63,7 @@ REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
   !   910408  Updated AUTHOR and DATE WRITTEN sections in prologue.  (WRB)
   !   920429  Revised format and order of references.  (WRB,FNF)
   !   930503  Improved purpose.  (FNF)
-  
+
   !
   !**End
   !
@@ -75,9 +75,8 @@ REAL(8) FUNCTION DPCHDF(K,X,S,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, j
-  REAL(8) :: value, zero
-  SAVE zero
-  DATA zero/0.D0/
+  REAL(8) :: value
+  REAL(8), PARAMETER :: zero = 0.D0
   !
   !  CHECK FOR LEGAL VALUE OF K.
   !

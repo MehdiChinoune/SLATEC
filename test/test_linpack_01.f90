@@ -44,7 +44,7 @@ CONTAINS
 
     INTEGER Kprint, Lun, Nerr
     COMPLEX work(4), at(5,4)
-    INTEGER lda, p, job, info, jpvtt(4), i, j, infoc
+    INTEGER lda, p, job, info, jpvtt(4), i, j
     INTEGER indx
     REAL delx
     COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
@@ -58,7 +58,7 @@ CONTAINS
       (0.E0,-.57735E0), (1.91485E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (1.41421E0,0.E0), (0.E0,1.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (0.E0,-.70711E0), (1.22475E0,0.E0) ], [4,4] )
-    DATA infoc/4/
+    INTEGER, PARAMETER :: infoc = 4
     INTEGER, PARAMETER :: jpvtc(4) = [ 3, 4, 1, 2 ]
     CHARACTER(20), PARAMETER :: kfail = 'FACTORING JPVT INFO '
     !* FIRST EXECUTABLE STATEMENT  CCHQC
@@ -159,7 +159,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(7,4), bt(4), det(2), z(4)
-    REAL r, rcond, rcnd, CABS1
+    REAL r, rcond, CABS1
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
     INTEGER ml, mu
     COMPLEX, PARAMETER :: abd(6,4) = RESHAPE( [ &
@@ -173,7 +173,7 @@ CONTAINS
     COMPLEX, PARAMETER :: dc(2) = [ (3.3E0,0.E0), (1.0E0,0.E0) ]
     CHARACTER(19), PARAMETER :: kprog = 'GBFA GBCO GBSL GBDI'
     CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
-    DATA rcnd/.24099E0/
+    REAL, PARAMETER :: rcnd = .24099E0
     !* FIRST EXECUTABLE STATEMENT  CGBQC
     lda = 7
     n = 4
@@ -303,7 +303,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(5,4), bt(4), det(2), z(4)
-    REAL r, rcond, rcnd, CABS1
+    REAL r, rcond, CABS1
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
     COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -320,7 +320,7 @@ CONTAINS
     COMPLEX, PARAMETER :: dc(2) = [ (3.3E0,0.E0), (1.0E0,0.E0) ]
     CHARACTER(19), PARAMETER :: kprog = 'GEFA GECO GESL GEDI'
     CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
-    DATA rcnd/.24099E0/
+    REAL, PARAMETER :: rcnd = .24099E0
     !* FIRST EXECUTABLE STATEMENT  CGECK
     lda = 5
     n = 4
@@ -543,7 +543,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(5,4), bt(4), z(4)
-    REAL r, rcond, rcnd, CABS1, det(2)
+    REAL r, rcond, CABS1, det(2)
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr, inert(3)
     COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -560,7 +560,7 @@ CONTAINS
     REAL, PARAMETER :: dc(2) = [ 3.3E0, 1.0E0 ]
     CHARACTER(19), PARAMETER :: kprog = 'HIFA HICO HISL HIDI'
     CHARACTER(47), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE INERTIA'
-    DATA rcnd /.24099E0/
+    REAL, PARAMETER :: rcnd  = .24099E0
     INTEGER, PARAMETER :: irt(3) = [ 4, 0, 0 ]
     !* FIRST EXECUTABLE STATEMENT  CHIQC
     lda = 5
@@ -697,7 +697,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(10), bt(4), z(4)
-    REAL r, rcond, rcnd, CABS1, det(2)
+    REAL r, rcond, CABS1, det(2)
     INTEGER n, ipvt(4), info, i, j, indx, Nerr, inert(3)
     COMPLEX, PARAMETER :: ap(10) = [ (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -710,7 +710,7 @@ CONTAINS
     REAL, PARAMETER :: dc(2) = [ 3.3E0, 1.0E0 ]
     CHARACTER(19), PARAMETER :: kprog = 'HPFA HPCO HPSL HPDI'
     CHARACTER(47), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE INERTIA'
-    DATA rcnd /.24099E0/
+    REAL, PARAMETER :: rcnd  = .24099E0
     INTEGER, PARAMETER :: irt(3) = [ 4, 0, 0 ]
     !* FIRST EXECUTABLE STATEMENT  CHPQC
     n = 4
@@ -842,7 +842,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(3,4), bt(4), z(4)
-    REAL r, rcond, rcnd, CABS1, det(2)
+    REAL r, rcond, CABS1, det(2)
     INTEGER lda, n, info, i, j, indx, Nerr, m
     COMPLEX, PARAMETER :: abd(2,4) = RESHAPE( [ (0.E0,0.E0), (2.E0,0.E0), &
       (0.E0,-1.E0), (2.E0,0.E0),   (0.E0,0.E0), (3.E0,0.E0), &
@@ -852,7 +852,7 @@ CONTAINS
     REAL, PARAMETER :: dc(2) = [ 3.3E0, 1.0E0 ]
     CHARACTER(19), PARAMETER :: kprog = 'PBFA PBCO PBSL PBDI'
     CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
-    DATA rcnd/.24099E0/
+    REAL, PARAMETER :: rcnd = .24099E0
     !* FIRST EXECUTABLE STATEMENT  CPBQC
     lda = 3
     n = 4
@@ -972,7 +972,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(5,4), bt(4), z(4)
-    REAL r, rcond, rcnd, CABS1, det(2)
+    REAL r, rcond, CABS1, det(2)
     INTEGER lda, n, info, i, j, indx, Nerr
     COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -989,7 +989,7 @@ CONTAINS
     REAL, PARAMETER :: dc(2) = [ 3.3E0, 1.0E0 ]
     CHARACTER(19), PARAMETER :: kprog = 'POFA POCO POSL PODI'
     CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
-    DATA rcnd/.24099E0/
+    REAL, PARAMETER :: rcnd = .24099E0
     !* FIRST EXECUTABLE STATEMENT  CPOQC
     lda = 5
     n = 4
@@ -1121,7 +1121,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(10), bt(4), z(4)
-    REAL r, rcond, rcnd, CABS1, det(2)
+    REAL r, rcond, CABS1, det(2)
     INTEGER n, info, i, j, indx, Nerr
     COMPLEX, PARAMETER :: ap(10) = [ (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -1134,7 +1134,7 @@ CONTAINS
     REAL, PARAMETER :: dc(2) = [ 3.3E0, 1.0E0 ]
     CHARACTER(19), PARAMETER :: kprog = 'PPFA PPCO PPSL PPDI'
     CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
-    DATA rcnd/.24099E0/
+    REAL, PARAMETER :: rcnd = .24099E0
     !* FIRST EXECUTABLE STATEMENT  CPPQC
     n = 4
     Nerr = 0
@@ -1488,7 +1488,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(5,4), bt(4), det(2), z(4)
-    REAL r, rcond, rcnd, CABS1
+    REAL r, rcond, CABS1
     INTEGER lda, n, ipvt(4), info, i, j, indx, Nerr
     COMPLEX, PARAMETER :: a(4,4) = RESHAPE( [ &
       (2.E0,0.E0), (0.E0,1.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -1505,7 +1505,7 @@ CONTAINS
     COMPLEX, PARAMETER :: dc(2) = [ (6.5E0,0.E0), (1.0E0,0.E0) ]
     CHARACTER(19), PARAMETER :: kprog = 'SIFA SICO SISL SIDI'
     CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
-    DATA rcnd/.58692E0/
+    REAL, PARAMETER :: rcnd = .58692E0
     !* FIRST EXECUTABLE STATEMENT  CSIQC
     lda = 5
     n = 4
@@ -1631,7 +1631,7 @@ CONTAINS
 
     INTEGER Kprint, Lun
     COMPLEX at(10), bt(4), det(2), z(4)
-    REAL r, rcond, rcnd, CABS1
+    REAL r, rcond, CABS1
     INTEGER n, ipvt(4), info, i, j, indx, Nerr
     COMPLEX, PARAMETER :: ap(10) = [ (2.E0,0.E0), (0.E0,-1.E0), (2.E0,0.E0), &
       (0.E0,0.E0), (0.E0,0.E0), (3.E0,0.E0), (0.E0,0.E0), (0.E0,0.E0), &
@@ -1644,7 +1644,7 @@ CONTAINS
     COMPLEX, PARAMETER :: dc(2) = [ (6.5E0,0.E0), (1.0E0,0.E0) ]
     CHARACTER(19), PARAMETER :: kprog = 'SPFA SPCO SPSL SPDI'
     CHARACTER(39), PARAMETER :: kfail = 'INFO RCOND SOLUTION DETERMINANT INVERSE'
-    DATA rcnd/.58692E0/
+    REAL, PARAMETER :: rcnd = .58692E0
     !* FIRST EXECUTABLE STATEMENT  CSPQC
     n = 4
     Nerr = 0

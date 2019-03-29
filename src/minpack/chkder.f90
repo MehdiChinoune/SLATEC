@@ -108,15 +108,13 @@ SUBROUTINE CHKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER M, N, Ldfjac, Mode
   REAL X(*), Fvec(*), Fjac(Ldfjac,*), Xp(*), Fvecp(*), Err(*)
   INTEGER i, j
-  REAL eps, epsf, epslog, epsmch, factor, one, temp, zero
+  REAL eps, epsf, epslog, epsmch, temp
   REAL R1MACH
-  SAVE factor, one, zero
-  !
-  DATA factor, one, zero/1.0E2, 1.0E0, 0.0E0/
+  REAL, PARAMETER :: factor = 1.0E2, one = 1.0E0, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  CHKDER
   epsmch = R1MACH(4)
   !

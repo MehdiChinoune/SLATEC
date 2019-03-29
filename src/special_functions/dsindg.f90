@@ -30,11 +30,10 @@ REAL(8) FUNCTION DSINDG(X)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   INTEGER n
-  REAL(8) :: X, raddeg
-  SAVE raddeg
-  DATA raddeg/0.017453292519943295769236907684886D0/
+  REAL(8) :: X
+  REAL(8), PARAMETER :: raddeg = 0.017453292519943295769236907684886D0
   !* FIRST EXECUTABLE STATEMENT  DSINDG
   DSINDG = SIN(raddeg*X)
   !

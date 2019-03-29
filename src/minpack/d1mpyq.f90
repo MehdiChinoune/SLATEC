@@ -63,11 +63,10 @@ SUBROUTINE D1MPYQ(M,N,A,Lda,V,W)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER i, j, Lda, M, N, nm1, nmj
-  REAL(8) :: A(Lda,*), cos, one, sin, temp, V(*), W(*)
-  SAVE one
-  DATA one/1.0D0/
+  REAL(8) :: A(Lda,*), cos, sin, temp, V(*), W(*)
+  REAL(8), PARAMETER :: one = 1.0D0
   !
   !     APPLY THE FIRST SET OF GIVENS ROTATIONS TO A.
   !

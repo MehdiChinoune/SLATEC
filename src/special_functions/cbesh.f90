@@ -161,16 +161,15 @@ SUBROUTINE CBESH(Z,Fnu,Kode,M,N,Cy,Nz,Ierr)
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   920128  Category corrected.  (WRB)
   !   920811  Prologue revised.  (DWL)
-  
+
   !
   INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, M, mm, mr, &
     N, nn, nuf, nw, Nz, I1MACH
   COMPLEX Cy(N), Z, zn, zt, csgn
-  REAL aa, alim, aln, arg, az, cpn, dig, elim, fmm, fn, Fnu, &
-    fnul, hpi, rhpi, rl, r1m5, sgn, spn, tol, ufl, xn, xx, &
-    yn, yy, R1MACH, bb, ascle, rtol, atol
+  REAL aa, alim, aln, arg, az, cpn, dig, elim, fmm, fn, Fnu, fnul, rhpi, rl, &
+    r1m5, sgn, spn, tol, ufl, xn, xx, yn, yy, R1MACH, bb, ascle, rtol, atol
   !
-  DATA hpi/1.57079632679489662E0/
+  REAL, PARAMETER :: hpi = 1.57079632679489662E0
   !
   !* FIRST EXECUTABLE STATEMENT  CBESH
   Nz = 0

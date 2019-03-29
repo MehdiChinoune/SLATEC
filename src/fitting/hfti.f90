@@ -144,15 +144,14 @@ SUBROUTINE HFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   901005  Replace usage of DIFF with usage of R1MACH.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, ii, iopt, ip1, j, jb, jj, k, kp1, Krank, l, ldiag, &
     lmax, M, Mda, Mdb, N, Nb, nerr
-  REAL A(Mda,*), B(Mdb,*), factor, G(*), H(*), hmax, R1MACH, releps, Rnorm(*), &
+  REAL A(Mda,*), B(Mdb,*), factor, G(*), H(*), hmax, R1MACH, Rnorm(*), &
     sm1, szero, Tau, tmp
   INTEGER Ip(*)
   REAL(8) :: sm, dzero
-  SAVE releps
-  DATA releps/0.E0/
+  REAL :: releps = 0.E0
   !* FIRST EXECUTABLE STATEMENT  HFTI
   IF ( releps==0 ) releps = R1MACH(4)
   szero = 0.

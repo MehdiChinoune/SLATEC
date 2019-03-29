@@ -143,12 +143,11 @@ SUBROUTINE CAIRY(Z,Id,Kode,Ai,Nz,Ierr)
   !   920811  Prologue revised.  (DWL)
 
   COMPLEX Ai, csq, cy(1), s1, s2, trm1, trm2, Z, zta, z3
-  REAL aa, ad, ak, alim, atrm, az, az3, bk, ck, coef, c1, c2, &
-    dig, dk, d1, d2, elim, fid, fnu, rl, r1m5, sfac, tol, &
-    tth, zi, zr, z3i, z3r, R1MACH, bb, alaz
+  REAL aa, ad, ak, alim, atrm, az, az3, bk, ck, dig, dk, d1, d2, elim, fid, fnu, &
+  rl, r1m5, sfac, tol, zi, zr, z3i, z3r, R1MACH, bb, alaz
   INTEGER Id, Ierr, iflag, k, Kode, k1, k2, mr, nn, Nz, I1MACH
-  DATA tth, c1, c2, coef /6.66666666666666667E-01, &
-    3.55028053887817240E-01, 2.58819403792806799E-01, 1.83776298473930683E-01/
+  REAL, PARAMETER :: tth = 6.66666666666666667E-01, c1 = 3.55028053887817240E-01, &
+    c2 = 2.58819403792806799E-01, coef = 1.83776298473930683E-01
   COMPLEX, PARAMETER :: cone = (1.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CAIRY
   Ierr = 0

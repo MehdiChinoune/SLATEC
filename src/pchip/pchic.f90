@@ -208,7 +208,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920429  Revised format and order of references.  (WRB,FNF)
-  
+
   !  Programming notes:
   !
   !     To produce a double precision version, simply:
@@ -227,9 +227,7 @@ SUBROUTINE PCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, ibeg, iend, nless1
-  REAL zero
-  SAVE zero
-  DATA zero/0./
+  REAL, PARAMETER :: zero = 0.
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

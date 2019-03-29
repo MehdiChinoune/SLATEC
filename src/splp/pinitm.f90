@@ -51,11 +51,10 @@ SUBROUTINE PINITM(M,N,Sx,Ix,Lmx,Ipagef)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  
+
   INTEGER i, iopt, Ipagef, Ix(*), Lmx, lp4, M, N, n20008, n20012, nerr
-  REAL Sx(Lmx), zero, one
-  SAVE zero, one
-  DATA zero, one/0.E0, 1.E0/
+  REAL Sx(Lmx)
+  REAL, PARAMETER :: zero = 0.E0, one = 1.E0
   !* FIRST EXECUTABLE STATEMENT  PINITM
   iopt = 1
   !

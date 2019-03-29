@@ -51,11 +51,10 @@ SUBROUTINE DQFORM(M,N,Q,Ldq,Wa)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER i, j, jm1, k, l, Ldq, M, minmn, N, np1
-  REAL(8) :: one, Q(Ldq,*), sum, temp, Wa(*), zero
-  SAVE one, zero
-  DATA one, zero/1.0D0, 0.0D0/
+  REAL(8) :: Q(Ldq,*), sum, temp, Wa(*)
+  REAL(8), PARAMETER :: one = 1.0D0, zero = 0.0D0
   !
   !     ZERO OUT UPPER TRIANGLE OF Q IN THE FIRST MIN(M,N) COLUMNS.
   !

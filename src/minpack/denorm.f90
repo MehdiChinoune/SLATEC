@@ -51,12 +51,10 @@ REAL(8) FUNCTION DENORM(N,X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER i, N
-  REAL(8) :: agiant, floatn, one, rdwarf, rgiant, s1, s2, s3, &
-    X(*), x1max, x3max, xabs, zero
-  SAVE one, zero, rdwarf, rgiant
-  DATA one, zero, rdwarf, rgiant/1.0D0, 0.0D0, 3.834D-20, 1.304D19/
+  REAL(8) :: agiant, floatn, s1, s2, s3, X(*), x1max, x3max, xabs
+  REAL(8), PARAMETER :: one = 1.0D0, zero = 0.0D0, rdwarf = 3.834D-20, rgiant = 1.304D19
   !* FIRST EXECUTABLE STATEMENT  DENORM
   s1 = zero
   s2 = zero

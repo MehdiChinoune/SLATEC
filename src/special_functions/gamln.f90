@@ -54,8 +54,7 @@ REAL FUNCTION GAMLN(Z,Ierr)
 
   !
   INTEGER i, i1m, k, mz, nz, Ierr, I1MACH
-  REAL con, fln, fz, rln, s, tlg, trm, tst, t1, wdtol, &
-    Z, zdmy, zinc, zm, zmin, zp, zsq
+  REAL fln, fz, rln, s, tlg, trm, tst, t1, wdtol, Z, zdmy, zinc, zm, zmin, zp, zsq
   REAL R1MACH
   !           LNGAMMA(N), N=1,100
   REAL, PARAMETER :: gln(100) = [ 0.00000000000000000E+00, 0.00000000000000000E+00, &
@@ -103,7 +102,7 @@ REAL FUNCTION GAMLN(Z,Ierr)
     4.88788064793079335E+14, -2.13203339609193739E+16 ]
   !
   !             LN(2*PI)
-  DATA con/1.83787706640934548E+00/
+  REAL, PARAMETER :: con = 1.83787706640934548E+00
   !
   !* FIRST EXECUTABLE STATEMENT  GAMLN
   Ierr = 0

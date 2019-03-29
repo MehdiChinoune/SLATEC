@@ -49,13 +49,12 @@ SUBROUTINE CPEVL(N,M,A,Z,C,B,Kbd)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  REAL d1, r, s
+
+  REAL r, s
   INTEGER i, I1MACH, j, M, mini, N, np1
   COMPLEX A(*), C(*), Z, ci, cim1, B(*), bi, bim1, t
   LOGICAL Kbd
-  SAVE d1
-  DATA d1/0.0/
+  REAL :: d1 = 0.0
   !* FIRST EXECUTABLE STATEMENT  CPEVL
   IF ( d1==0.0 ) d1 = REAL(I1MACH(10))**(1-I1MACH(11))
   np1 = N + 1

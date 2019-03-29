@@ -221,7 +221,7 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
     Maxp1, nev, Neval, Nnlog(*), nres, numrl2
   REAL A, abseps, Abserr, Alist(*), Blist(*), Chebmo(Maxp1,25), correc, cycle, &
     c1, c2, dl, drl, Elist(*), ep, eps, epsa, Epsabs, Erlst(*), errsum, fact, &
-    Omega, p, pi, p1, psum(52), reseps, Result, res3la(3), Rlist(*), Rslst(*), uflow
+    Omega, p1, psum(52), reseps, Result, res3la(3), Rlist(*), Rslst(*), uflow
   !
   REAL, EXTERNAL :: F
   REAL, EXTERNAL :: R1MACH
@@ -252,8 +252,7 @@ SUBROUTINE QAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,Abserr,&
   !           CHEBMO    - ARRAY CONTAINING THE MODIFIED CHEBYSHEV
   !                       MOMENTS (SEE ALSO ROUTINE QC25F)
   !
-  SAVE p, pi
-  DATA p/0.9E+00/, pi/0.31415926535897932E+01/
+  REAL, PARAMETER :: p = 0.9E+00, pi = 0.31415926535897932E+01
   !
   !           TEST ON VALIDITY OF PARAMETERS
   !           ------------------------------

@@ -72,13 +72,12 @@ REAL(8) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   930124  Increased Array sizes for SUN -r8.  (RWC)
-  
-  INTEGER i, i1, Incx, Incy, ix, iy, MPB, MPLun, MPM, MPMxr, MPR, MPT, N
+
+  INTEGER i, Incx, Incy, ix, iy, MPB, MPLun, MPM, MPMxr, MPR, MPT, N
   REAL(8) :: Dx(*), Dy(*), Db
   INTEGER Qc(30), qx(30), qy(30)
   COMMON /MPCOM / MPB, MPT, MPM, MPLun, MPMxr, MPR(30)
-  SAVE i1
-  DATA i1/0/
+  INTEGER :: i1 = 0
   !* FIRST EXECUTABLE STATEMENT  DQDOTA
   IF ( i1==0 ) CALL MPBLAS(i1)
   IF ( Db/=0.D0 ) THEN

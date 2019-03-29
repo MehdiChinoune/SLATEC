@@ -37,9 +37,9 @@ SUBROUTINE ZACAI(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
   INTEGER inu, iuf, Kode, Mr, N, nn, nw, Nz
   REAL(8) :: Alim, arg, ascle, az, csgnr, csgni, cspnr, cspni, &
     c1r, c1i, c2r, c2i, cyr(2), cyi(2), dfnu, Elim, fmr, &
-    Fnu, pi, Rl, sgn, Tol, yy, Yr(N), Yi(N), Zr, Zi, znr, zni
+    Fnu, Rl, sgn, Tol, yy, Yr(N), Yi(N), Zr, Zi, znr, zni
   REAL(8), EXTERNAL :: D1MACH, ZABS
-  DATA pi/3.14159265358979324D0/
+  REAL(8), PARAMETER :: pi = 3.14159265358979324D0
   !* FIRST EXECUTABLE STATEMENT  ZACAI
   Nz = 0
   znr = -Zr

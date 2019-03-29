@@ -51,11 +51,10 @@ SUBROUTINE DPINTM(M,N,Sx,Ix,Lmx,Ipagef)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  
+
   INTEGER i, iopt, Ipagef, Ix(*), Lmx, lp4, M, N, n20008, n20012, nerr
-  REAL(8) :: Sx(*), zero, one
-  SAVE zero, one
-  DATA zero, one/0.D0, 1.D0/
+  REAL(8) :: Sx(*)
+  REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
   !* FIRST EXECUTABLE STATEMENT  DPINTM
   iopt = 1
   !

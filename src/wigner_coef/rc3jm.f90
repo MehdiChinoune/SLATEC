@@ -134,18 +134,16 @@ SUBROUTINE RC3JM(L1,L2,L3,M1,M2min,M2max,Thrcof,Ndim,Ier)
   !   910415  Mixed type expressions eliminated; variable C1 initialized;
   !           description of THRCOF expanded. These changes were done by
   !           D. W. Lozier.
-  
+
   !
   INTEGER Ndim, Ier
   REAL L1, L2, L3, M1, M2min, M2max, Thrcof(Ndim)
   !
   INTEGER i, index, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
-  REAL a1, a1s, c1, c1old, c2, cnorm, R1MACH, dv, eps, huge, m2, &
-    m3, newfac, oldfac, one, ratio, sign1, sign2, srhuge, &
-    srtiny, sum1, sum2, sumbac, sumfor, sumuni, thresh, tiny, &
-    two, x, x1, x2, x3, y, y1, y2, y3, zero
-  !
-  DATA zero, eps, one, two/0.0, 0.01, 1.0, 2.0/
+  REAL a1, a1s, c1, c1old, c2, cnorm, R1MACH, dv, huge, m2, m3, newfac, oldfac, &
+    ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, sumbac, sumfor, sumuni, &
+    thresh, tiny, x, x1, x2, x3, y, y1, y2, y3
+  REAL, PARAMETER ::  zero = 0.0, eps = 0.01, one = 1.0, two = 2.0
   !
   !* FIRST EXECUTABLE STATEMENT  RC3JM
   Ier = 0

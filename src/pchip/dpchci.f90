@@ -88,7 +88,7 @@ SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
   !   930503  Improved purpose.  (FNF)
-  
+
   !
   !  Programming notes:
   !     1. The function  DPCHST(ARG1,ARG2)  is assumed to return zero if
@@ -104,14 +104,12 @@ SUBROUTINE DPCHCI(N,H,Slope,D,Incfd)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, nless1
-  REAL(8) :: del1, del2, dmax, dmin, drat1, drat2, hsum, &
-    hsumt3, three, w1, w2, zero
-  SAVE zero, three
+  REAL(8) :: del1, del2, dmax, dmin, drat1, drat2, hsum, hsumt3, w1, w2
   REAL(8) :: DPCHST
   !
   !  INITIALIZE.
   !
-  DATA zero/0.D0/, three/3.D0/
+  REAL(8), PARAMETER :: zero = 0.D0, three = 3.D0
   !* FIRST EXECUTABLE STATEMENT  DPCHCI
   nless1 = N - 1
   del1 = Slope(1)

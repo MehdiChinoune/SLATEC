@@ -416,7 +416,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
   !     SOLVE LINEAR LEAST SQUARES SYSTEM WITH BOUNDS ON
   !     SELECTED VARIABLES.
@@ -430,7 +430,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !     /SROTG/ TO /DROTG/, /SROT/ TO /DROT/, /E0/ TO /D0/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
-  INTEGER i, ibig, igo, inrows, ip, ISAMAX, iscale, j, jp, lds, &
+  INTEGER i, ibig, inrows, ip, ISAMAX, iscale, j, jp, lds, &
     lenx, liopt, llb, lliw, llrw, llx, lmdw, lndw, locacc, locdim
   INTEGER lopt, lp, Mdw, mnew, Mode, Mrows, Ncols, nerr
   REAL W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*)
@@ -441,8 +441,8 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   LOGICAL checkl
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
-  SAVE igo, locacc, lopt, iscale
-  DATA igo/0/
+  SAVE locacc, lopt, iscale
+  INTEGER :: igo = 0
   !* FIRST EXECUTABLE STATEMENT  SBOLS
   nerr = 0
   Mode = 0

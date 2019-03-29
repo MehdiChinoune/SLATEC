@@ -41,14 +41,12 @@ SUBROUTINE ZUNIK(Zrr,Zri,Fnu,Ikflg,Ipmtr,Tol,Init,Phir,Phii,Zeta1r,Zeta1i,&
 
   !     COMPLEX CFN,CON,CONE,CRFN,CWRK,CZERO,PHI,S,SR,SUM,T,T2,ZETA1,
   !    *ZETA2,ZN,ZR
-  REAL(8) :: ac, conei, coner, crfni, crfnr, Cwrki(16), &
-    Cwrkr(16), Fnu, Phii, Phir, rfn, si, sr, sri, srr, &
-    sti, str, Sumi, Sumr, test, ti, Tol, tr, t2i, &
-    t2r, zeroi, zeror, Zeta1i, Zeta1r, Zeta2i, Zeta2r, &
-    zni, znr, Zri, Zrr, D1MACH
+  REAL(8) :: ac, crfni, crfnr, Cwrki(16), Cwrkr(16), Fnu, Phii, Phir, rfn, si, sr, &
+    sri, srr, sti, str, Sumi, Sumr, test, ti, Tol, tr, t2i, t2r, Zeta1i, Zeta1r, &
+    Zeta2i, Zeta2r, zni, znr, Zri, Zrr, D1MACH
   INTEGER i, idum, Ikflg, Init, Ipmtr, j, k, l
   EXTERNAL :: ZLOG, ZSQRT
-  DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
+  REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0, conei = 0.0D0
   REAL(8), PARAMETER :: con(2) = [ 3.98942280401432678D-01, 1.25331413731550025D+00 ]
   REAL(8), PARAMETER :: c(120) = [ 1.00000000000000000D+00, -2.08333333333333333D-01, &
     1.25000000000000000D-01,  3.34201388888888889D-01,-4.01041666666666667D-01, &

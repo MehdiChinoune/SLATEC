@@ -144,13 +144,12 @@ SUBROUTINE DHFTI(A,Mda,M,N,B,Mdb,Nb,Tau,Krank,Rnorm,H,G,Ip)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   901005  Replace usage of DDIFF with usage of D1MACH.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, ii, iopt, Ip(*), ip1, j, jb, jj, k, kp1, Krank, l, &
     ldiag, lmax, M, Mda, Mdb, N, Nb, nerr
-  REAL(8) :: A(Mda,*), B(Mdb,*), D1MACH, dzero, factor, G(*), H(*), hmax, releps, &
+  REAL(8) :: A(Mda,*), B(Mdb,*), D1MACH, dzero, factor, G(*), H(*), hmax, &
     Rnorm(*), sm, sm1, szero, Tau, tmp
-  SAVE releps
-  DATA releps/0.D0/
+  REAL(8) :: releps = 0.D0
   !     BEGIN BLOCK PERMITTING ...EXITS TO 360
   !* FIRST EXECUTABLE STATEMENT  DHFTI
   IF ( releps==0.D0 ) releps = D1MACH(4)

@@ -24,13 +24,12 @@ SUBROUTINE ZLOG(Ar,Ai,Br,Bi,Ierr)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
-  REAL(8) :: Ar, Ai, Br, Bi, zm, dtheta, dpi, dhpi
-  REAL(8) :: ZABS
+
+  REAL(8) :: Ar, Ai, Br, Bi, zm, dtheta
   INTEGER Ierr
-  EXTERNAL :: ZABS
-  DATA dpi, dhpi/3.141592653589793238462643383D+0, &
-    1.570796326794896619231321696D+0/
+  REAL(8), EXTERNAL :: ZABS
+  REAL(8), PARAMETER :: dpi = 3.141592653589793238462643383D+0, &
+    dhpi = 1.570796326794896619231321696D+0
   !* FIRST EXECUTABLE STATEMENT  ZLOG
   Ierr = 0
   IF ( Ar==0.0D+0 ) THEN

@@ -38,10 +38,10 @@ REAL FUNCTION R9PAK(Y,N)
   !   901009  Routine used I1MACH(7) where it should use I1MACH(10),
   !           Corrected (RWC)
 
-  REAL a1n210, a1n2b, R1MACH, Y
+  REAL a1n2b, R1MACH, Y
   INTEGER I1MACH, N, nmax, nmin, nsum, ny
-  SAVE nmin, nmax, a1n210
-  DATA a1n210/3.321928094887362E0/
+  SAVE nmin, nmax
+  REAL, PARAMETER :: a1n210 = 3.321928094887362E0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9PAK
   IF ( first ) THEN

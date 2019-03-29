@@ -345,15 +345,14 @@ SUBROUTINE SNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Iopt, N, Nprint, Info, Lwa
   REAL Tol
   REAL X(*), Fvec(*), Wa(Lwa)
   EXTERNAL :: FCN, JAC
   INTEGER index, j, lr, maxfev, ml, mode, mu, nfev, njev
-  REAL epsfcn, factor, one, xtol, zero
-  SAVE factor, one, zero
-  DATA factor, one, zero/1.0E2, 1.0E0, 0.0E0/
+  REAL epsfcn, xtol
+  REAL, PARAMETER :: factor = 1.0E2, one = 1.0E0, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  SNSQE
   Info = 0
   !

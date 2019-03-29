@@ -33,11 +33,10 @@ REAL(8) FUNCTION DACOSH(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  
-  REAL(8) :: X, dln2, xmax, D1MACH
-  SAVE dln2, xmax
-  DATA dln2/0.69314718055994530941723212145818D0/
-  DATA xmax/0.D0/
+
+  REAL(8) :: X, D1MACH
+  REAL(8), PARAMETER :: dln2 = 0.69314718055994530941723212145818D0
+  REAL(8) :: xmax = 0.D0
   !* FIRST EXECUTABLE STATEMENT  DACOSH
   IF ( xmax==0.D0 ) xmax = 1.0D0/SQRT(D1MACH(3))
   !

@@ -83,14 +83,12 @@ REAL FUNCTION SNRM2(N,Sx,Incx)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Incx, j, N, nn
   INTEGER next
-  REAL Sx(*), cutlo, cuthi, hitest, sum, xmax, zero, one
-  SAVE cutlo, cuthi, zero, one
-  DATA zero, one/0.0E0, 1.0E0/
-  !
-  DATA cutlo, cuthi/4.441E-16, 1.304E19/
+  REAL Sx(*), hitest, sum, xmax
+  REAL, PARAMETER :: zero = 0.0E0, one = 1.0E0
+  REAL, PARAMETER :: cutlo = 4.441E-16, cuthi = 1.304E19
   !* FIRST EXECUTABLE STATEMENT  SNRM2
   IF ( N>0 ) THEN
     !

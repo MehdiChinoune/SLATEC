@@ -34,11 +34,10 @@ REAL(8) FUNCTION D9LGIC(A,X,Alx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  
+
   INTEGER k
-  REAL(8) :: A, X, Alx, eps, fk, p, r, s, t, xma, xpa, D1MACH
-  SAVE eps
-  DATA eps/0.D0/
+  REAL(8) :: A, X, Alx, fk, p, r, s, t, xma, xpa, D1MACH
+  REAL(8) :: eps = 0.D0
   !* FIRST EXECUTABLE STATEMENT  D9LGIC
   IF ( eps==0.D0 ) eps = 0.5D0*D1MACH(3)
   !

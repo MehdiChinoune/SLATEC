@@ -105,10 +105,9 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
   INTEGER i, icase, Ierr, il, i1m, k, kk, Kode, ktrms, M, m3, N, &
     ne, nflg, nl, nlim, nn, np, ns, nt, Nz
   INTEGER I1MACH
-  REAL enlim, exi(102), fn, gr, h(31), hn, hrtpi, ss, tol, t1, t2, w, &
+  REAL enlim, exi(102), fn, gr, h(31), hn, ss, tol, t1, t2, w, &
     X, xlim, xnlim, xp, Y(*), ys(3), yss(3)
   REAL GAMRN, R1MACH
-  SAVE hrtpi
   !-----------------------------------------------------------------------
   !             COEFFICIENTS IN SERIES OF EXPONENTIAL INTEGRALS
   !-----------------------------------------------------------------------
@@ -132,7 +131,7 @@ SUBROUTINE BSKIN(X,N,Kode,M,Y,Nz,Ierr)
   !-----------------------------------------------------------------------
   !             SQRT(PI)/2
   !-----------------------------------------------------------------------
-  DATA hrtpi/8.86226925452758014E-01/
+  REAL, PARAMETER :: hrtpi = 8.86226925452758014E-01
   !
   !* FIRST EXECUTABLE STATEMENT  BSKIN
   Ierr = 0

@@ -54,12 +54,12 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
   !    *RFN13,RTZTA,RZTH,SUMA,SUMB,TFN,T2,UP,W,W2,Z,ZA,ZB,ZC,ZETA,ZETA1,
   !    *ZETA2,ZTH
   REAL(8) :: ang, ap(30), Argi, Argr, Asumi, Asumr, atol, aw2, azth, Bsumi, Bsumr, &
-    btol, conei, coner, cri(14), crr(14), dri(14), drr(14), ex1, ex2, Fnu, fn13, &
-    fn23, gpi, hpi, Phii, Phir, pi(30), pp, pr(30), przthi, przthr, ptfni, ptfnr, &
+    btol, cri(14), crr(14), dri(14), drr(14), Fnu, fn13, &
+    fn23, Phii, Phir, pi(30), pp, pr(30), przthi, przthr, ptfni, ptfnr, &
     raw, raw2, razth, rfnu, rfnu2, rfn13, rtzti, rtztr, rzthi, rzthr, sti, str, &
-    sumai, sumar, sumbi, sumbr, test, tfni, tfnr, thpi, Tol, tzai, tzar, t2i, &
-    t2r, upi(14), upr(14), wi, wr, w2i, w2r, zai, zar, zbi, zbr, zci, zcr, zeroi, &
-    zeror, zetai, zetar, Zeta1i, Zeta1r, Zeta2i, Zeta2r, Zi, Zr, zthi, zthr, ac
+    sumai, sumar, sumbi, sumbr, test, tfni, tfnr, Tol, tzai, tzar, t2i, &
+    t2r, upi(14), upr(14), wi, wr, w2i, w2r, zai, zar, zbi, zbr, zci, zcr, &
+    zetai, zetar, Zeta1i, Zeta1r, Zeta2i, Zeta2r, Zi, Zr, zthi, zthr, ac
   INTEGER ias, ibs, Ipmtr, is, j, jr, ju, k, kmax, kp1, ks, l, &
     lr, lrp1, l1, l2, m, idum
   REAL(8), EXTERNAL :: ZABS, D1MACH
@@ -253,9 +253,10 @@ SUBROUTINE ZUNHJ(Zr,Zi,Fnu,Ipmtr,Tol,Phir,Phii,Argr,Argi,Zeta1r,Zeta1i,&
     1.50729501494095594D-02, 1.44193250839954639D-02, 1.38184805735341786D-02, &
     1.32643378994276568D-02, 1.27517121970498651D-02, 1.22761545318762767D-02, &
     1.18338262398482403D-02 ]
-  DATA ex1, ex2, hpi, gpi, thpi/3.33333333333333333D-01, &
-    6.66666666666666667D-01, 1.57079632679489662D+00, 3.14159265358979324D+00, 4.71238898038468986D+00/
-  DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
+  REAL(8), PARAMETER :: ex1 = 3.33333333333333333D-01, ex2 = 6.66666666666666667D-01, &
+    hpi = 1.57079632679489662D+00, gpi = 3.14159265358979324D+00, &
+    thpi = 4.71238898038468986D+00
+  REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0, conei = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  ZUNHJ
   rfnu = 1.0D0/Fnu
   !-----------------------------------------------------------------------

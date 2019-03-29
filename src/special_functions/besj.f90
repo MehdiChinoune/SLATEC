@@ -84,22 +84,19 @@ SUBROUTINE BESJ(X,Alpha,N,Y,Nz)
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  INTEGER i, ialp, idalp, iflw, in, inlim, is, i1, i2, k, kk, &
-    km, kt, N, nn, ns, Nz
-  REAL ak, akm, Alpha, ans, ap, arg, coef, dalpha, dfn, dtm, &
-    earg, elim1, etx, fidal, flgjy, fn, fnf, fni, fnp1, fnu, &
-    gln, pdf, pidt, rden, relb, rttp, rtwo, rtx, &
-    rzden, s, sa, sb, sxo2, s1, s2, t, ta, tau, tb, temp(3), &
-    tfn, tm, tol, tolln, trx, tx, t1, t2, wk(7), X, xo2, xo2l, Y(*), rtol, slim
-  SAVE rtwo, pdf, rttp, pidt, inlim
+  INTEGER i, ialp, idalp, iflw, in, is, i1, i2, k, kk, km, kt, N, nn, ns, Nz
+  REAL ak, akm, Alpha, ans, ap, arg, coef, dalpha, dfn, dtm, earg, elim1, etx, &
+    fidal, flgjy, fn, fnf, fni, fnp1, fnu, gln, rden, relb, rtx, rzden, s, sa, &
+    sb, sxo2, s1, s2, t, ta, tau, tb, temp(3), tfn, tm, tol, tolln, trx, tx, t1, &
+    t2, wk(7), X, xo2, xo2l, Y(*), rtol, slim
   INTEGER, EXTERNAL :: I1MACH
   REAL, EXTERNAL :: R1MACH, ALNGAM
   EXTERNAL :: JAIRY
-  DATA rtwo, pdf, rttp, pidt/1.34839972492648E+00, &
-    7.85398163397448E-01, 7.97884560802865E-01, 1.57079632679490E+00/
+  REAL, PARAMETER :: rtwo = 1.34839972492648E+00, pdf = 7.85398163397448E-01, &
+    rttp = 7.97884560802865E-01, pidt = 1.57079632679490E+00
   REAL, PARAMETER :: pp(4) = [ 8.72909153935547E+00, 2.65693932265030E-01, &
     1.24578576865586E-01, 7.70133747430388E-04 ]
-  DATA inlim/150/
+  INTEGER, PARAMETER :: inlim = 150
   REAL, PARAMETER :: fnulim(2) = [ 100.0E0, 60.0E0 ]
   !* FIRST EXECUTABLE STATEMENT  BESJ
   Nz = 0

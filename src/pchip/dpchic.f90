@@ -213,7 +213,7 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920429  Revised format and order of references.  (WRB,FNF)
-  
+
   !  Programming notes:
   !
   !     To produce a single precision version, simply:
@@ -232,9 +232,7 @@ SUBROUTINE DPCHIC(Ic,Vc,Switch,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, ibeg, iend, nless1
-  REAL(8) :: zero
-  SAVE zero
-  DATA zero/0.D0/
+  REAL(8), PARAMETER :: zero = 0.D0
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

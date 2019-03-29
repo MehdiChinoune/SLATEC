@@ -87,16 +87,15 @@ SUBROUTINE QRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER M, N, Lda, Lipvt
   INTEGER Ipvt(*)
   LOGICAL Pivot
   REAL A(Lda,*), Sigma(*), Acnorm(*), Wa(*)
   INTEGER i, j, jp1, k, kmax, minmn
-  REAL ajnorm, epsmch, one, p05, sum, temp, zero
+  REAL ajnorm, epsmch, sum, temp
   REAL R1MACH, ENORM
-  SAVE one, p05, zero
-  DATA one, p05, zero/1.0E0, 5.0E-2, 0.0E0/
+  REAL, PARAMETER :: one = 1.0E0, p05 = 5.0E-2, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  QRFAC
   epsmch = R1MACH(4)
   !

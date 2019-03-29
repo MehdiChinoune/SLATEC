@@ -147,7 +147,7 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920429  Revised format and order of references.  (WRB,FNF)
-  
+
   !  Programming notes:
   !
   !     To produce a double precision version, simply:
@@ -163,11 +163,10 @@ SUBROUTINE PCHSP(Ic,Vc,N,X,F,D,Incfd,Wk,Nwk,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER ibeg, iend, index, j, nm1
-  REAL g, half, one, stemp(3), three, two, xtemp(4), zero
-  SAVE zero, half, one, two, three
+  REAL g, stemp(3), xtemp(4)
   REAL PCHDF
   !
-  DATA zero/0./, half/0.5/, one/1./, two/2./, three/3./
+  REAL, PARAMETER :: zero = 0., half = 0.5, one = 1., two = 2., three = 3.
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

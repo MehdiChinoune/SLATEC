@@ -798,8 +798,7 @@ CONTAINS
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL(8) :: diff, one, t, tol, xval, zero
-    INTEGER kontrl, i, idigit, ii, j, l, last, mode, n, nbkpt, &
-      nconst, ndata, ndeg, nerr, nord, nval
+    INTEGER kontrl, i, idigit, ii, j, l, mode, n, nconst, ndeg, nerr, nval
     LOGICAL fatal
     !     .. Local Arrays ..
     REAL(8) :: coeff(9), v(51,5), w(529), work(12), xconst(11), yconst(11)
@@ -813,7 +812,7 @@ CONTAINS
     INTRINSIC ABS, REAL, SQRT
     !     .. Data statements ..
     !
-    DATA ndata/9/, nord/4/, nbkpt/13/, last/10/
+    INTEGER, PARAMETER :: ndata = 9, nord = 4, nbkpt = 13, last = 10
     REAL(8), PARAMETER :: xdata(9) = [ 0.15D0, 0.27D0, 0.33D0, 0.40D0, 0.43D0, &
       0.47D0, 0.53D0, 0.58D0, 0.63D0 ]
     REAL(8), PARAMETER :: ydata(9) = [ 0.025D0, 0.05D0, 0.13D0, 0.27D0, 0.37D0, &
@@ -1117,12 +1116,12 @@ CONTAINS
     !     .. Array Arguments ..
     REAL(8) :: Fvec(*), X(*)
     !     .. Local Scalars ..
-    REAL(8) :: temp, two
+    REAL(8) :: temp
     INTEGER i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
-    DATA two/2.0D0/
+    REAL(8), PARAMETER :: two = 2.0D0
     !* FIRST EXECUTABLE STATEMENT  DFCN1
     IF ( Iflag/=1 ) RETURN
     DO i = 1, M
@@ -1166,12 +1165,12 @@ CONTAINS
     !     .. Array Arguments ..
     REAL(8) :: Fjac(Ldfjac,*), Fvec(*), X(*)
     !     .. Local Scalars ..
-    REAL(8) :: temp, two
+    REAL(8) :: temp
     INTEGER i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
-    DATA two/2.0D0/
+    REAL(8), PARAMETER :: two = 2.0D0
     !* FIRST EXECUTABLE STATEMENT  DFCN2
     IF ( Iflag==0 ) RETURN
     !
@@ -1233,12 +1232,12 @@ CONTAINS
     !     .. Array Arguments ..
     REAL(8) :: Fjrow(*), Fvec(*), X(*)
     !     .. Local Scalars ..
-    REAL(8) :: temp, two
+    REAL(8) :: temp
     INTEGER i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
-    DATA two/2.0D0/
+    REAL(8), PARAMETER :: two = 2.0D0
     !* FIRST EXECUTABLE STATEMENT  DFCN3
     IF ( Iflag==0 ) RETURN
     !

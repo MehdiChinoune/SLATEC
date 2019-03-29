@@ -34,13 +34,11 @@ REAL FUNCTION R9GMIC(A,X,Alx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  
-  REAL A, alng, ALNGAM, Alx, bot, eps, euler, fk, fkp1, fm, &
-    R1MACH, s, sgng, t, te, X
+
+  REAL A, alng, ALNGAM, Alx, fk, fkp1, fm, R1MACH, s, sgng, t, te, X
   INTEGER k, m, ma, mm1
-  SAVE euler, eps, bot
-  DATA euler/.5772156649015329E0/
-  DATA eps, bot/2*0.0/
+  REAL, PARAMETER :: euler = .5772156649015329E0
+  REAL :: eps = 0., bot = 0.
   !* FIRST EXECUTABLE STATEMENT  R9GMIC
   IF ( eps==0.0 ) eps = 0.5*R1MACH(3)
   IF ( bot==0.0 ) bot = LOG(R1MACH(1))

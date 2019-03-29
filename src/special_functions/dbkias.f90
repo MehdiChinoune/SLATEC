@@ -31,10 +31,9 @@ SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
 
   INTEGER i, ii, Ind, j, jmi, jn, k, kk, km, Ktrms, mm, mp, Ms, N, Ierr
   REAL(8) :: Ans, den1, den2, den3, er, err, fj, fk, fln, fm1, Gmrn, g1, gs, &
-    H(*), hn, hrtpi, rat, rg1, rxp, rz, rzx, s(31), ss, sumi, sumj, T(50), &
+    H(*), hn, rat, rg1, rxp, rz, rzx, s(31), ss, sumi, sumj, T(50), &
     tol, v(52), w(52), X, xp(16), z
   REAL(8) :: DGAMRN, D1MACH
-  SAVE hrtpi
   !-----------------------------------------------------------------------
   !             COEFFICIENTS OF POLYNOMIAL P(J-1,X), J=1,15
   !-----------------------------------------------------------------------
@@ -84,7 +83,7 @@ SUBROUTINE DBKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !-----------------------------------------------------------------------
   REAL(8), PARAMETER :: bnd(15) = [ 1.0D0, 1.0D0, 1.0D0, 1.0D0, 3.10D0, 5.18D0, &
     11.7D0, 29.8D0, 90.4D0, 297.0D0, 1070.0D0, 4290.0D0, 18100.0D0, 84700.0D0, 408000.0D0 ]
-  DATA hrtpi/8.86226925452758014D-01/
+  REAL(8), PARAMETER :: hrtpi = 8.86226925452758014D-01
   !
   !* FIRST EXECUTABLE STATEMENT  DBKIAS
   Ierr = 0

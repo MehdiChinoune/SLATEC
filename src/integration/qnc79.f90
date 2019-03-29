@@ -84,12 +84,11 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   REAL A, Ans, B, Err
   INTEGER Ierr, K
   !     .. Function Arguments ..
-  REAL FUN
-  EXTERNAL :: FUN
+  REAL, EXTERNAL :: FUN
   !     .. Local Scalars ..
   REAL ae, area, bank, blocal, c, ce, ee, ef, eps, q13, q7, q7l, &
     sq2, test, tol, vr, w1, w2, w3, w4
-  INTEGER i, kml, kmx, l, lmn, lmx, nbits, nib, nlmn, nlmx
+  INTEGER i, l, lmn, lmx, nbits, nib, nlmx
   !     .. Local Arrays ..
   REAL aa(40), f(13), f1(40), f2(40), f3(40), f4(40), f5(40), f6(40), &
     f7(40), hh(40), q7r(40), vl(40)
@@ -104,7 +103,7 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   !     .. Save statement ..
   SAVE nbits, nlmx, sq2, w1, w2, w3, w4
   !     .. Data statements ..
-  DATA kml/7/, kmx/2000/, nlmn/2/
+  INTEGER, PARAMETER :: kml = 7, kmx = 2000, nlmn = 2
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  QNC79
   IF ( first ) THEN

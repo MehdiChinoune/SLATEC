@@ -69,27 +69,24 @@ SUBROUTINE BSGQ8(FUN,Xt,Bc,N,Kk,Id,A,B,Inbv,Err,Ans,Ierr,Work)
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  
+
   !
   INTERFACE
     REAL FUNCTION FUN(X)
       REAL, INTENT(IN) :: X
     END FUNCTION
   END INTERFACE
-  INTEGER Id, Ierr, Inbv, k, Kk, kml, kmx, l, lmn, lmx, lr(30), mxl, &
-    N, nbits, nib, nlmn, nlmx
+  INTEGER Id, Ierr, Inbv, k, Kk, l, lmn, lmx, lr(30), mxl, N, nbits, nib, nlmx
   INTEGER I1MACH
   REAL A, aa(30), ae, anib, Ans, area, B, Bc(*), c, ce, ee, ef, eps, &
-    Err, est, gl, glr, gr(30), hh(30), sq2, tol, vl(30), vr, Work(*), w1, &
-    w2, w3, w4, Xt(*), x1, x2, x3, x4
+    Err, est, gl, glr, gr(30), hh(30), tol, vl(30), vr, Work(*), Xt(*)
   REAL R1MACH
-  SAVE x1, x2, x3, x4, w1, w2, w3, w4, sq2, nlmn, kmx, kml
-  DATA x1, x2, x3, x4/1.83434642495649805E-01, 5.25532409916328986E-01, &
-    7.96666477413626740E-01, 9.60289856497536232E-01/
-  DATA w1, w2, w3, w4/3.62683783378361983E-01, 3.13706645877887287E-01, &
-    2.22381034453374471E-01, 1.01228536290376259E-01/
-  DATA sq2/1.41421356E0/
-  DATA nlmn/1/, kmx/5000/, kml/6/
+  REAL, PARAMETER :: x1 = 1.83434642495649805E-01, x2 = 5.25532409916328986E-01, &
+    x3 =7.96666477413626740E-01 , x4 = 9.60289856497536232E-01
+  REAL, PARAMETER ::  w1 =3.62683783378361983E-01 , w2 = 3.13706645877887287E-01, &
+    w3 = 2.22381034453374471E-01, w4 = 1.01228536290376259E-01
+  REAL, PARAMETER :: sq2 = 1.41421356E0
+  INTEGER, PARAMETER :: nlmn = 1, kmx = 5000, kml = 6
   !
   !     INITIALIZE
   !

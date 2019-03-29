@@ -87,12 +87,11 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   REAL(8) :: A, Ans, B, Err
   INTEGER Ierr, K
   !     .. Function Arguments ..
-  REAL(8) :: FUN
-  EXTERNAL :: FUN
+  REAL(8), EXTERNAL :: FUN
   !     .. Local Scalars ..
   REAL(8) :: ae, area, bank, blocal, c, ce, ee, ef, eps, &
     q13, q7, q7l, sq2, test, tol, vr, w1, w2, w3, w4
-  INTEGER i, kml, kmx, l, lmn, lmx, nbits, nib, nlmn, nlmx
+  INTEGER i, l, lmn, lmx, nbits, nib, nlmx
   !     .. Local Arrays ..
   REAL(8) :: aa(99), f(13), f1(99), f2(99), f3(99), f4(99), &
     f5(99), f6(99), f7(99), hh(99), q7r(99), vl(99)
@@ -107,7 +106,7 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !     .. Save statement ..
   SAVE nbits, nlmx, sq2, w1, w2, w3, w4
   !     .. Data statements ..
-  DATA kml/7/, kmx/5000/, nlmn/2/
+  INTEGER, PARAMETER :: kml = 7, kmx = 5000, nlmn = 2
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DQNC79
   IF ( first ) THEN

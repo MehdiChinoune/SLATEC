@@ -100,7 +100,7 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
   !   930503  Improved purpose.  (FNF)
-  
+
   !
   !  Programming notes:
   !     1. The function DPCHST(ARG1,ARG2)  is assumed to return zero if
@@ -124,13 +124,12 @@ SUBROUTINE DPCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER ibeg, iend, ierf, index, j, k
-  REAL(8) :: half, stemp(3), three, two, xtemp(4), zero
-  SAVE zero, half, two, three
+  REAL(8) :: stemp(3), xtemp(4)
   REAL(8) :: DPCHDF, DPCHST
   !
   !  INITIALIZE.
   !
-  DATA zero/0.D0/, half/.5D0/, two/2.D0/, three/3.D0/
+  REAL(8), PARAMETER :: zero = 0.D0, half = .5D0, two = 2.D0, three = 3.D0
   !
   !* FIRST EXECUTABLE STATEMENT  DPCHCE
   ibeg = Ic(1)

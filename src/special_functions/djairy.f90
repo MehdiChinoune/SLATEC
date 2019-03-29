@@ -43,17 +43,16 @@ SUBROUTINE DJAIRY(X,Rx,C,Ai,Dai)
   !   910408  Updated the AUTHOR section.  (WRB)
 
   !
-  INTEGER i, j, m1, m1d, m2, m2d, m3, m3d, m4, m4d, n1, n1d, &
-    n2, n2d, n3, n3d, n4, n4d
-  REAL(8) :: Ai, C, ccv, con2, con3, con4, con5, cv, Dai, ec, e1, e2, fpi12, &
-    f1, f2, rtrx, Rx, scv, t, temp1, temp2, tt, X
-  SAVE n1, n2, n3, n4, m1, m2, m3, m4, fpi12, con2, con3, con4, &
-    con5, n1d, n2d, n3d, n4d, m1d, m2d, m3d, m4d
-  DATA n1, n2, n3, n4/14, 23, 19, 15/
-  DATA m1, m2, m3, m4/12, 21, 17, 13/
-  DATA fpi12, con2, con3, con4, con5/1.30899693899575D+00, &
-    5.03154716196777D+00, 3.80004589867293D-01, 8.33333333333333D-01, &
-    8.66025403784439D-01/
+  INTEGER i, j
+  REAL(8) :: Ai, C, ccv, cv, Dai, ec, e1, e2, f1, f2, rtrx, Rx, scv, t, &
+  temp1, temp2, tt, X
+  INTEGER, PARAMETER :: n1 = 14, n2 = 23, n3 = 19, n4 = 15
+  INTEGER, PARAMETER :: m1 = 12, m2 = 21, m3 = 17, m4 = 13
+  INTEGER, PARAMETER :: n1d = 14, n2d = 24, n3d = 19, n4d = 15
+  INTEGER, PARAMETER :: m1d = 12, m2d = 22, m3d = 17, m4d = 13
+  REAL(8), PARAMETER :: fpi12 = 1.30899693899575D+00, con2 = 5.03154716196777D+00, &
+    con3 = 3.80004589867293D-01, con4 = 8.33333333333333D-01, &
+    con5 = 8.66025403784439D-01
   REAL(8), PARAMETER :: ak1(14) = [ 2.20423090987793D-01, -1.25290242787700D-01, &
     1.03881163359194D-02, 8.22844152006343D-04, -2.34614345891226D-04, &
     1.63824280172116D-05, 3.06902589573189D-07, -1.29621999359332D-07, &
@@ -98,8 +97,6 @@ SUBROUTINE DJAIRY(X,Rx,C,Ai,Dai)
     -3.50849978423875D-11, 5.83007187954202D-12, -2.04644828753326D-13, &
     -1.10529179476742D-13, 2.87724778038775D-14, -2.88205111009939D-15, &
     -3.32656311696166D-16 ]
-  DATA n1d, n2d, n3d, n4d/14, 24, 19, 15/
-  DATA m1d, m2d, m3d, m4d/12, 22, 17, 13/
   REAL(8), PARAMETER :: dak1(14) = [ 2.04567842307887D-01, -6.61322739905664D-02, &
     -8.49845800989287D-03, 3.12183491556289D-03, -2.70016489829432D-04, &
     -6.35636298679387D-06, 3.02397712409509D-06, -2.18311195330088D-07, &

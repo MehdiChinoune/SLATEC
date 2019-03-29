@@ -33,11 +33,10 @@ REAL FUNCTION ACOSH(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  
-  REAL aln2, R1MACH, X, xmax
-  SAVE aln2, xmax
-  DATA aln2/0.69314718055994530942E0/
-  DATA xmax/0./
+
+  REAL R1MACH, X
+  REAL, PARAMETER :: aln2 = 0.69314718055994530942E0
+  REAL :: xmax = 0.
   !* FIRST EXECUTABLE STATEMENT  ACOSH
   IF ( xmax==0. ) xmax = 1.0/SQRT(R1MACH(3))
   !

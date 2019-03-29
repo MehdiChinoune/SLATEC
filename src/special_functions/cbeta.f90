@@ -37,11 +37,10 @@ COMPLEX FUNCTION CBETA(A,B)
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
 
-  REAL xmax, xmaxt, xmin
+  REAL xmaxt, xmin
   COMPLEX A, B
   COMPLEX, EXTERNAL :: CGAMMA, CLBETA
-  SAVE xmax
-  DATA xmax/0.0/
+  REAL :: xmax = 0.0
   !* FIRST EXECUTABLE STATEMENT  CBETA
   IF ( xmax==0.0 ) THEN
     CALL GAMLIM(xmin,xmaxt)

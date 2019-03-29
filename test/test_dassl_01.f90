@@ -25,11 +25,12 @@ CONTAINS
     !           declarations explicit.  (FNF)
     !   901009  Changed AMAX1 to MAX.  (FNF)
     !   901030  Removed FLOAT's; made all local declarations explicit. (FNF)
-    
+
     REAL Y(*), T, Erm
-    INTEGER i, j, k, ng
-    REAL alph1, alph2, a1, a2, er, ex, yt
-    DATA alph1/1.0E0/, alph2/1.0E0/, ng/5/
+    INTEGER i, j, k
+    REAL a1, a2, er, ex, yt
+    REAL, PARAMETER :: alph1 = 1.0E0, alph2 = 1.0E0
+    INTEGER, PARAMETER :: ng = 5
     !* FIRST EXECUTABLE STATEMENT  EDIT2
     Erm = 0.0E0
     IF ( T==0.0E0 ) RETURN
@@ -96,16 +97,16 @@ CONTAINS
     !   901009  Corrected GAMS classification code.  (FNF)
     !   901009  Changed AMAX1 to MAX.  (FNF)
     !   901030  Made all declarations explicit; added 1P's to formats. (FNF)
-    
+
     !
     INTEGER Lun, Kprint, Ipass
     !
     INTEGER i, idid, info(15), iout, ipar(1), ires, iwork(45), j190, &
       j290, liw, lrw, ml, mu, neq, nerr, nfe, nje, nout, nqu, nst
-    REAL atol, delta(25), dtout, er, er1, er2, erm, ero, hu, rpar(1), &
-      rtol, rwork(550), t, tout, tout1, y(25), yprime(25), yt1, yt2
+    REAL atol, delta(25), er, er1, er2, erm, ero, hu, rpar(1), &
+      rtol, rwork(550), t, tout, y(25), yprime(25), yt1, yt2
     !
-    DATA tout1/1.0E0/, dtout/1.0E0/
+    REAL, PARAMETER :: tout1 = 1.0E0, dtout = 1.0E0
     !
     !* FIRST EXECUTABLE STATEMENT  SDASQC
     Ipass = 1
@@ -281,7 +282,7 @@ CONTAINS
     !   891013  DATE WRITTEN
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
-    
+
     INTEGER Ipar(*)
     REAL T, Y(*), Yprime(*), Pd(2,2), Cj, Rpar(*)
     !* FIRST EXECUTABLE STATEMENT  SDJAC1
@@ -314,13 +315,13 @@ CONTAINS
     !   901001  Eliminated 7-character variable names MBANDPn by explicitly
     !           including MBAND+n in expressions.  (FNF)
     !   901030  Made all local declarations explicit.  (FNF)
-    
+
     INTEGER Ipar(*)
     REAL T, Y(*), Yprime(*), Pd(11,25), Cj, Rpar(*)
-    INTEGER j, mband, ml, mu, neq, ng
-    REAL alph1, alph2
-    DATA alph1/1.0E0/, alph2/1.0E0/, ng/5/
-    DATA ml/5/, mu/0/, neq/25/
+    INTEGER j, mband
+    REAL, PARAMETER :: alph1 = 1.0E0, alph2 = 1.0E0
+    INTEGER, PARAMETER :: ng = 5
+    INTEGER, PARAMETER :: ml = 5, mu = 0, neq = 25
     !* FIRST EXECUTABLE STATEMENT  SDJAC2
     mband = ml + mu + 1
     DO j = 1, neq
@@ -356,7 +357,7 @@ CONTAINS
     !   891013  DATE WRITTEN
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
-    
+
     INTEGER Ires, Ipar(*)
     REAL T, Y(*), Yprime(*), Delta(*), Rpar(*)
     !* FIRST EXECUTABLE STATEMENT  SDRES1
@@ -385,12 +386,13 @@ CONTAINS
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
     !   901030  Made all local declarations explicit.  (FNF)
-    
+
     INTEGER Ires, Ipar(*)
     REAL T, Y(*), Yprime(*), Delta(*), Rpar(*)
-    INTEGER i, j, k, ng
-    REAL alph1, alph2, d
-    DATA alph1/1.0E0/, alph2/1.0E0/, ng/5/
+    INTEGER i, j, k
+    REAL d
+    REAL, PARAMETER :: alph1 = 1.0E0, alph2 = 1.0E0
+    INTEGER, PARAMETER :: ng = 5
     !* FIRST EXECUTABLE STATEMENT  SDRES2
     DO j = 1, ng
       DO i = 1, ng
@@ -454,7 +456,7 @@ PROGRAM TEST48
   !   891013  DATE WRITTEN
   !   901001  Converted prologue to 4.0 format.  (FNF)
   !   901009  Corrected GAMS classification code.  (FNF)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST48

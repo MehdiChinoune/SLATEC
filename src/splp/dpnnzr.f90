@@ -62,13 +62,12 @@ SUBROUTINE DPNNZR(I,Xval,Iplace,Sx,Ix,Ircx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  
+
   INTEGER I, i1, idiff, IDLOC, iend, ii, il, ilast, iopt, ipl, &
     Iplace, ipploc, Ircx, istart, Ix(*), j, l, ll, lmx, lpg
   INTEGER n20046, nerr, np
-  REAL(8) :: Xval, Sx(*), zero
-  SAVE zero
-  DATA zero/0.D0/
+  REAL(8) :: Xval, Sx(*)
+  REAL(8), PARAMETER :: zero = 0.D0
   !* FIRST EXECUTABLE STATEMENT  DPNNZR
   iopt = 1
   !

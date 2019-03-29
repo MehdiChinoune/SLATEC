@@ -51,13 +51,12 @@ SUBROUTINE QFORM(M,N,Q,Ldq,Wa)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER M, N, Ldq
   REAL Q(Ldq,*), Wa(*)
   INTEGER i, j, jm1, k, l, minmn, np1
-  REAL one, sum, temp, zero
-  SAVE one, zero
-  DATA one, zero/1.0E0, 0.0E0/
+  REAL sum, temp
+  REAL, PARAMETER :: one = 1.0E0, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  QFORM
   minmn = MIN(M,N)
   IF ( minmn>=2 ) THEN

@@ -27,16 +27,16 @@ SUBROUTINE CUNK1(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
   !* REVISION HISTORY  (YYMMDD)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   INTEGER i, ib, iflag, ifn, il, init(2), inu, iuf, k, kdflg, kflag, &
     kk, Kode, Mr, N, nw, Nz, j, ipard, initd, ic, m
   COMPLEX cfn, ck, crsc, cs, cscl, csgn, cspn, csr(3), css(3), &
     cwrk(16,3), cy(2), c1, c2, phi(2), rz, sum(2), s1, s2, Y(N), Z, &
     zeta1(2), zeta2(2), zr, phid, zeta1d, zeta2d, sumd
   REAL Alim, ang, aphi, asc, ascle, bry(3), cpn, c2i, c2m, c2r, &
-    Elim, fmr, fn, fnf, Fnu, pi, rs1, sgn, spn, Tol, x, R1MACH
+    Elim, fmr, fn, fnf, Fnu, rs1, sgn, spn, Tol, x, R1MACH
   COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
-  DATA pi/3.14159265358979324E0/
+  REAL, PARAMETER :: pi = 3.14159265358979324E0
   !* FIRST EXECUTABLE STATEMENT  CUNK1
   kdflg = 1
   Nz = 0

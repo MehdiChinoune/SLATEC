@@ -166,11 +166,10 @@ SUBROUTINE ZBESJ(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
   !
   !     COMPLEX CI,CSGN,CY,Z,ZN
   INTEGER i, Ierr, inu, inuh, ir, k, Kode, k1, k2, N, nl, Nz, I1MACH
-  REAL(8) :: aa, alim, arg, cii, csgni, csgnr, Cyi(N), Cyr(N), dig, &
-    elim, Fnu, fnul, hpi, rl, r1m5, str, tol, Zi, &
-    zni, znr, Zr, bb, fn, az, ascle, rtol, atol, sti
+  REAL(8) :: aa, alim, arg, cii, csgni, csgnr, Cyi(N), Cyr(N), dig, elim, Fnu, &
+    fnul, rl, r1m5, str, tol, Zi, zni, znr, Zr, bb, fn, az, ascle, rtol, atol, sti
   REAL(8), EXTERNAL :: ZABS, D1MACH
-  DATA hpi/1.57079632679489662D0/
+  REAL(8), PARAMETER :: hpi = 1.57079632679489662D0
   !
   !* FIRST EXECUTABLE STATEMENT  ZBESJ
   Ierr = 0

@@ -54,8 +54,8 @@ REAL(8) FUNCTION DGAMLN(Z,Ierr)
   !   920128  Category corrected.  (WRB)
   !   921215  DGAMLN defined for Z negative.  (WRB)
 
-  REAL(8) :: con, fln, fz, rln, s, tlg, trm, tst, &
-    t1, wdtol, Z, zdmy, zinc, zm, zmin, zp, zsq, D1MACH
+  REAL(8) :: fln, fz, rln, s, tlg, trm, tst, t1, wdtol, Z, zdmy, zinc, zm, &
+    zmin, zp, zsq, D1MACH
   INTEGER i, Ierr, i1m, k, mz, nz, I1MACH
   !           LNGAMMA(N), N=1,100
   REAL(8), PARAMETER :: gln(100) = [ 0.00000000000000000D+00, 0.00000000000000000D+00, &
@@ -103,7 +103,7 @@ REAL(8) FUNCTION DGAMLN(Z,Ierr)
     4.88788064793079335D+14, -2.13203339609193739D+16 ]
   !
   !             LN(2*PI)
-  DATA con/1.83787706640934548D+00/
+  REAL(8), PARAMETER :: con = 1.83787706640934548D+00
   !
   !* FIRST EXECUTABLE STATEMENT  DGAMLN
   Ierr = 0

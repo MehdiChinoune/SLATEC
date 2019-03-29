@@ -89,16 +89,15 @@ SUBROUTINE DQRFAC(M,N,A,Lda,Pivot,Ipvt,Lipvt,Sigma,Acnorm,Wa)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER M, N, Lda, Lipvt
   INTEGER Ipvt(*)
   LOGICAL Pivot
-  SAVE one, p05, zero
   REAL(8) :: A(Lda,*), Sigma(*), Acnorm(*), Wa(*)
   INTEGER i, j, jp1, k, kmax, minmn
-  REAL(8) :: ajnorm, epsmch, one, p05, sum, temp, zero
+  REAL(8) :: ajnorm, epsmch, sum, temp
   REAL(8) :: D1MACH, DENORM
-  DATA one, p05, zero/1.0D0, 5.0D-2, 0.0D0/
+  REAL(8), PARAMETER :: one = 1.0D0, p05 = 5.0D-2, zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DQRFAC
   epsmch = D1MACH(4)
   !

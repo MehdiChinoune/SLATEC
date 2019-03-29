@@ -116,7 +116,7 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   930503  Corrected to set VALUE=0 when IERR.lt.0.  (FNF)
   !   930504  Changed DCHFIV to DCHFIE.  (FNF)
-  
+
   !
   !  Programming notes:
   !  1. The error flag from DPCHID is tested, because a logic flaw
@@ -132,13 +132,12 @@ REAL(8) FUNCTION DPCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, ia, ib, ierd, il, ir
-  REAL(8) :: value, xa, xb, zero
-  SAVE zero
+  REAL(8) :: value, xa, xb
   REAL(8) :: DCHFIE, DPCHID
   !
   !  INITIALIZE.
   !
-  DATA zero/0.D0/
+  REAL(8), PARAMETER :: zero = 0.D0
   !* FIRST EXECUTABLE STATEMENT  DPCHIA
   value = zero
   !

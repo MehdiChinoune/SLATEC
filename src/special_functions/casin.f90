@@ -33,11 +33,11 @@ COMPLEX FUNCTION CASIN(Zinp)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   INTEGER i, nterms
-  REAL pi, pi2, r, R1MACH, rmin, twoi
+  REAL r, R1MACH, rmin, twoi
   COMPLEX Zinp, z, z2, sqzp1
-  SAVE pi2, pi, nterms, rmin
-  DATA pi2 /1.57079632679489661923E0/
-  DATA pi /3.14159265358979324E0/
+  SAVE nterms, rmin
+  REAL, PARAMETER :: pi2 = 1.57079632679489661923E0
+  REAL, PARAMETER :: pi = 3.14159265358979324E0
   COMPLEX, PARAMETER :: ci = (0.,1.)
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  CASIN

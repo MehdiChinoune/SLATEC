@@ -93,18 +93,16 @@ SUBROUTINE BESI(X,Alpha,Kode,N,Y,Nz)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
-  INTEGER i, ialp, in, inlim, is, i1, k, kk, km, Kode, kt, N, nn, ns, Nz
+  INTEGER i, ialp, in, is, i1, k, kk, km, Kode, kt, N, nn, ns, Nz
   INTEGER I1MACH
-  REAL ain, ak, akm, Alpha, ans, ap, arg, atol, tolln, dfn, dtm, &
-    dx, earg, elim, etx, flgik, fn, fnf, fni, fnp1, fnu, gln, &
-    ra, rttpi, s, sx, sxo2, s1, s2, t, ta, tb, temp(3), tfn, &
-    tm, tol, trx, t2, X, xo2, xo2l, Y(*), z
+  REAL ain, ak, akm, Alpha, ans, ap, arg, atol, tolln, dfn, dtm, dx, earg, elim, &
+    etx, flgik, fn, fnf, fni, fnp1, fnu, gln, ra, s, sx, sxo2, s1, s2, t, ta, tb, &
+    temp(3), tfn, tm, tol, trx, t2, X, xo2, xo2l, Y(*), z
   REAL R1MACH, ALNGAM
-  SAVE rttpi, inlim
-  DATA rttpi/3.98942280401433E-01/
-  DATA inlim/80/
+  REAL, PARAMETER :: rttpi = 3.98942280401433E-01
+  INTEGER, PARAMETER :: inlim = 80
   !* FIRST EXECUTABLE STATEMENT  BESI
   Nz = 0
   kt = 1

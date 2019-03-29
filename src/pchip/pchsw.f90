@@ -75,7 +75,7 @@ SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !   910408  Updated AUTHOR and DATE WRITTEN sections in prologue.  (WRB)
   !   920526  Eliminated possible divide by zero problem.  (FNF)
   !   930503  Improved purpose.  (FNF)
-  
+
   !
   !**End
   !
@@ -86,15 +86,12 @@ SUBROUTINE PCHSW(Dfmax,Iextrm,D1,D2,H,Slope,Ierr)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL cp, fact, hphi, lambda, nu, one, phi, radcal, rho, sigma, &
-    small, that, third, three, two, zero
-  SAVE zero, one, two, three, fact
-  SAVE third
+  REAL cp, hphi, lambda, nu, phi, radcal, rho, sigma, small, that
   REAL R1MACH
   !
-  DATA zero/0./, one/1./, two/2./, three/3./, fact/100./
+  REAL, PARAMETER :: zero = 0., one = 1., two = 2., three = 3., fact = 100.
   !        THIRD SHOULD BE SLIGHTLY LESS THAN 1/3.
-  DATA third/0.33333/
+  REAL, PARAMETER :: third = 0.33333
   !
   !  NOTATION AND GENERAL REMARKS.
   !

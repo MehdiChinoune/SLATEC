@@ -31,11 +31,10 @@ REAL FUNCTION CBRT(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   REAL cbrtsq, R1MACH, R9PAK, X, y
-  INTEGER irem, iter, ixpnt, n, niter
-  SAVE niter
+  INTEGER irem, iter, ixpnt, n
   REAL, PARAMETER :: cbrt2(5) = [ 0.62996052494743658E0,  0.79370052598409974E0, &
     1.0E0, 1.25992104989487316E0, 1.58740105196819947E0 ]
-  DATA niter/0/
+  INTEGER :: niter = 0
   !* FIRST EXECUTABLE STATEMENT  CBRT
   IF ( niter==0 ) niter = INT( 1.443*LOG(-.106*LOG(0.1*R1MACH(3))) ) + 1
   !

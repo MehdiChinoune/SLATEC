@@ -77,18 +77,18 @@ REAL FUNCTION R1MACH(I)
   !   920625  Added CONVEX -p8 and -pd8 compiler option constants.
   !           (BKS, WRB)
   !   930201  Added DEC Alpha and SGI constants.  (RWC and WRB)
-  
+
   INTEGER I
   REAL, SAVE :: rmach(5)
-  LOGICAL :: FIRST = .TRUE.
+  LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  D1MACH
   !IF ( I<1 .OR. I>5 ) CALL XERMSG('SLATEC','R1MACH','I OUT OF BOUNDS',1,2)
 
-  IF(FIRST) THEN
+  IF( first ) THEN
     rmach = (/ TINY(1.), HUGE(1.), SPACING(0.5), SPACING(1.), &
       LOG10( REAL(RADIX(1.),4) ) /)
-    FIRST = .FALSE.
+    first = .FALSE.
   END IF
 
   R1MACH = rmach(I)

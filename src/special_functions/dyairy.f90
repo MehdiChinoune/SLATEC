@@ -40,18 +40,16 @@ SUBROUTINE DYAIRY(X,Rx,C,Bi,Dbi)
   !   910408  Updated the AUTHOR section.  (WRB)
 
   !
-  INTEGER i, j, m1, m1d, m2, m2d, m3, m3d, m4d, n1, n1d, n2, n2d, n3, n3d, n4d
-  REAL(8) :: ax, Bi, C, con1, con2, con3, cv, Dbi, d1, d2, ex, e1, &
-    e2, fpi12, f1, f2, rtrx, Rx, spi12, s1, s2, t, tc, temp1, temp2, tt, X
-  SAVE n1, n2, n3, m1, m2, m3, n1d, n2d, n3d, n4d, m1d, m2d, &
-    m3d, m4d, fpi12, spi12, con1, con2, con3
-  DATA n1, n2, n3/20, 19, 14/
-  DATA m1, m2, m3/18, 17, 12/
-  DATA n1d, n2d, n3d, n4d/21, 20, 19, 14/
-  DATA m1d, m2d, m3d, m4d/19, 18, 17, 12/
-  DATA fpi12, spi12, con1, con2, con3/1.30899693899575D+00, &
-    1.83259571459405D+00, 6.66666666666667D-01, 7.74148278841779D+00, &
-    3.64766105490356D-01/
+  INTEGER i, j
+  REAL(8) :: ax, Bi, C, cv, Dbi, d1, d2, ex, e1, e2, f1, f2, rtrx, Rx, s1, s2, &
+    t, tc, temp1, temp2, tt, X
+  INTEGER, PARAMETER :: n1 = 20, n2 = 19, n3 = 14
+  INTEGER, PARAMETER :: m1 = 18, m2 = 17, m3 = 12
+  INTEGER, PARAMETER :: n1d = 21, n2d = 20, n3d = 19, n4d = 14
+  INTEGER, PARAMETER :: m1d = 19, m2d = 18, m3d = 17, m4d = 12
+  REAL(8), PARAMETER :: fpi12 = 1.30899693899575D+00, spi12 = 1.83259571459405D+00, &
+    con1 = 6.66666666666667D-01, con2 = 7.74148278841779D+00, &
+    con3 = 3.64766105490356D-01
   REAL(8), PARAMETER :: bk1(20) = [ 2.43202846447449D+00, 2.57132009754685D+00, &
     1.02802341258616D+00, 3.41958178205872D-01, 8.41978629889284D-02, &
     1.93877282587962D-02, 3.92687837130335D-03, 6.83302689948043D-04, &

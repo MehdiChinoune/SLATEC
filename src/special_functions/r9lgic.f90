@@ -34,11 +34,10 @@ REAL FUNCTION R9LGIC(A,X,Alx)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  
-  REAL A, Alx, eps, fk, p, r, R1MACH, s, t, X, xma, xpa
+
+  REAL A, Alx, fk, p, r, R1MACH, s, t, X, xma, xpa
   INTEGER k
-  SAVE eps
-  DATA eps/0.0/
+  REAL :: eps = 0.0
   !* FIRST EXECUTABLE STATEMENT  R9LGIC
   IF ( eps==0.0 ) eps = 0.5*R1MACH(3)
   !

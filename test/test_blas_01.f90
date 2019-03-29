@@ -34,12 +34,11 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
     INTEGER ICAse, INCx, INCy, Kprint, Lun, MODe, N, NPRint
-    REAL sdfac, sfac
     INTEGER Ipass
-    REAL(8) :: dfac, dqfac
     LOGICAL PASs
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
-    DATA sfac, sdfac, dfac, dqfac/.625E-1, .50, .625D-1, 0.625D-1/
+    REAL, PARAMETER :: sfac = .625E-1, sdfac = .50
+    REAL(8), PARAMETER :: dfac = .625D-1, dqfac = 0.625D-1
     INTEGER, PARAMETER :: jtest(38) = [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, &
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
     !* FIRST EXECUTABLE STATEMENT  BLACHK
@@ -153,12 +152,13 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
     INTEGER i, ICAse, INCx, INCy, jump, k, Kprint, MODe, N, NPRint
-    REAL sa, sb, sc, Sfac, ss, zero
+    REAL sa, sb, sc, Sfac, ss
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     LOGICAL PASs
     REAL strue(9), stemp(9)
-    REAL(8) :: dc, ds, da, dzero, Dfac, db, dtemp(9),  d12
-    DATA zero, dzero/0., 0.D0/
+    REAL(8) :: dc, ds, da, Dfac, db, dtemp(9)
+    REAL, PARAMETER :: zero = 0.
+    REAL(8), PARAMETER :: dzero = 0.D0
     REAL(8), PARAMETER :: da1(8) = [ .3D0, .4D0, -.3D0, -.4D0, -.3D0, 0.D0, 0.D0, 1.D0 ]
     REAL(8), PARAMETER :: db1(8) = [ .4D0, .3D0, .4D0, .3D0, -.4D0, 0.D0, 1.D0, 0.D0 ]
     REAL(8), PARAMETER :: dc1(8) = [ .6D0, .8D0, -.6D0, .8D0, .6D0, 1.D0, 0.D0, 1.D0 ]
@@ -185,7 +185,7 @@ CONTAINS
       0.D0, 0.D0, 0.D0, 15.D0, 10.D0, -1.D0, 5.D5, -4096.D0, 1.D0, &
       4096.D-6, 0.D0, 0.D0, 7.D0, 4.D0, 0.D0, 0.D0, -.5D0, -.25D0, 0.D0 ], [9,9] )
     !                   4096 = 2 ** 12
-    DATA d12/4096.D0/
+    REAL(8), PARAMETER :: d12 = 4096.D0
     !* FIRST EXECUTABLE STATEMENT  CHECK0
     !
     ! COMPUTE TRUE VALUES WHICH CANNOT BE PRESTORED
@@ -307,15 +307,17 @@ CONTAINS
 
     INTEGER i, ICAMAX, ICAse, IDAMAX, INCx, INCy, ISAMAX, jump, &
       Kprint, len, MODe, N, np1, NPRint
-    REAL sa, SASUM, SCASUM, SCNRM2, Sfac, SNRM2, stemp
+    REAL SASUM, SCASUM, SCNRM2, Sfac, SNRM2, stemp
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     LOGICAL PASs
-    REAL(8) :: da, dx(8), Dfac
+    REAL(8) :: dx(8), Dfac
     REAL(8) :: DNRM2, DASUM
     REAL strue(8), sx(8)
-    COMPLEX ca, cx(8)
+    COMPLEX cx(8)
     !
-    DATA sa, da, ca/.3, .3D0, (.4,-.7)/
+    REAL, PARAMETER :: sa = .3D0
+    REAL(8), PARAMETER :: da = .3D0
+    COMPLEX, PARAMETER :: ca = (.4,-.7)
     REAL(8), PARAMETER :: dv(8,5,2) = RESHAPE( [ &
       .1D0, 2.D0, 2.D0, 2.D0, 2.D0, 2.D0, 2.D0, 2.D0, .3D0, &
       3.D0, 3.D0, 3.D0, 3.D0, 3.D0, 3.D0, 3.D0, .3D0, -.4D0, &
@@ -493,23 +495,26 @@ CONTAINS
 
     INTEGER i, ICAse, INCx, INCy, j, ki, kn, kni, kpar, Kprint, &
       ksize, lenx, leny, MODe, mx, my, N, NPRint
-    REAL sa, sb, sc, Sdfac, SDOT, SDSDOT, Sfac, ss
+    REAL Sdfac, SDOT, SDSDOT, Sfac
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     !
     LOGICAL PASs
     REAL sx(7), sy(7), stx(7), sty(7)
     REAL ssize(7), qc(30), sparam(5)
-    REAL(8) :: dx(7), da, dy(7), dparam(5), db, dsize(7), dc, ds, dtx(7), dty(7)
+    REAL(8) :: dx(7), dy(7), dparam(5), dsize(7), dtx(7), dty(7)
     REAL(8) :: DSDOT, DDOT, DQDOTI, DQDOTA, Dfac, Dqfac
     !
-    COMPLEX cx(7), ca, cy(7)
+    COMPLEX cx(7), cy(7)
     COMPLEX CDOTC, CDOTU
-    DATA sa, da, ca, db, sb/.3, .3D0, (.4,-.7), .25D0, .1/
+    REAL, PARAMETER :: sa = .3, sb = .1
+    REAL(8), PARAMETER :: da = .3D0, db = .25D0
+    COMPLEX, PARAMETER :: ca = (.4,-.7)
     INTEGER, PARAMETER :: incxs(4) = [ 1, 2, -2, -1 ]
     INTEGER, PARAMETER :: incys(4) = [ 1, -2, 1, -2 ]
     INTEGER, PARAMETER :: lens(4,2) = RESHAPE( [1, 1, 2, 4, 1, 1, 3, 7], [4,2] )
     INTEGER, PARAMETER :: ns(4) = [ 0, 1, 2, 4 ]
-    DATA sc, ss, dc, ds/.8, .6, .8D0, .6D0/
+    REAL, PARAMETER :: sc = .8, ss = .6
+    REAL(8), PARAMETER :: dc = .8D0, ds = .6D0
     REAL(8), PARAMETER :: dx1(7) = [ .6D0, .1D0, -.5D0, .8D0, .9D0, -.3D0, -.4D0 ]
     REAL(8), PARAMETER :: dy1(7) = [ .5D0, -.9D0, .3D0, .7D0, -.6D0, .2D0, .8D0 ]
     REAL(8), PARAMETER :: dx2(7) = [ 1.D0, .01D0, .02D0, 1.D0, .06D0, 2.D0, 1.D0 ]
@@ -1193,11 +1198,10 @@ CONTAINS
     !           section.  (WRB)
 
     INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
-    REAL Scomp(*), Strue(*), Ssize(*), Sfac, sd, releps, R1MACH
+    REAL Scomp(*), Strue(*), Ssize(*), Sfac, sd, R1MACH
     LOGICAL PASs
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
-    SAVE releps
-    DATA releps/0.0E0/
+    REAL :: releps = 0.0E0
     !* FIRST EXECUTABLE STATEMENT  STEST
     IF ( releps==0.0E0 ) releps = R1MACH(4)
     DO i = 1, Len
@@ -1264,11 +1268,10 @@ CONTAINS
     !           section.  (WRB)
 
     INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
-    REAL(8) :: Dcomp(*), Dtrue(*), Dsize(*), Dfac, dd, releps, D1MACH
+    REAL(8) :: Dcomp(*), Dtrue(*), Dsize(*), Dfac, dd, D1MACH
     LOGICAL PASs
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
-    SAVE releps
-    DATA releps/0.0D0/
+    REAL(8) :: releps = 0.0D0
     !* FIRST EXECUTABLE STATEMENT  DTEST
     IF ( releps==0.0D0 ) releps = D1MACH(4)
     DO i = 1, Len
@@ -1336,11 +1339,10 @@ CONTAINS
 
     INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
     COMPLEX :: Ccomp(*), Ctrue(*), Csize(*)
-    REAL :: Cfac, dd, releps, R1MACH, CABS1
+    REAL :: Cfac, dd, R1MACH, CABS1
     LOGICAL PASs
     COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
-    SAVE releps
-    DATA releps/0.0/
+    REAL :: releps = 0.0
     !* FIRST EXECUTABLE STATEMENT  DTEST
     IF ( releps==0.0 ) releps = R1MACH(4)
     DO i = 1, Len

@@ -42,7 +42,7 @@ REAL(8) FUNCTION DPCHST(Arg1,Arg2)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR and DATE WRITTEN sections in prologue.  (WRB)
   !   930503  Improved purpose.  (FNF)
-  
+
   !
   !**End
   !
@@ -52,9 +52,7 @@ REAL(8) FUNCTION DPCHST(Arg1,Arg2)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL(8) :: one, zero
-  SAVE zero, one
-  DATA zero/0.D0/, one/1.D0/
+  REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
   !
   !  PERFORM THE TEST.
   !

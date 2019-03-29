@@ -34,11 +34,11 @@ CONTAINS
     INTEGER info
     REAL R1MACH
     INTEGER Kprint, Ipass, Lun
-    INTEGER lda, n, ldv, job, i, j, id
+    INTEGER job, i, j, id
     REAL w(9)
     REAL err, erri, relerr, recj
     COMPLEX ac(3,3), ec(3), vc(3,3)
-    DATA lda, n, ldv/3*3/
+    INTEGER, PARAMETER :: lda = 3, n = 3, ldv = 3
     REAL :: a(3,3) = RESHAPE( [ 1., -2., 6., -1., 0., -3., 2., 5., 6. ], [3,3] )
     REAL, PARAMETER :: ek(3) = [ -1., 3., 5. ]
     !* FIRST EXECUTABLE STATEMENT  EISQX1
@@ -126,12 +126,12 @@ CONTAINS
     INTEGER info
     REAL R1MACH
     INTEGER Kprint, Ipass, Lun
-    INTEGER lda, n, ldv, job, i, j, id
+    INTEGER job, i, j, id
     REAL a1(4,4), a2(10), e(4), v(4,4), w(16)
     REAL err, erri, relerr
     COMPLEX ac(4,4), vc(4,4)
     EQUIVALENCE (v,vc)
-    DATA lda, n, ldv/3*4/
+    INTEGER, PARAMETER :: lda = 4, n = 4, ldv = 4
     REAL, PARAMETER :: ap(10) = [ 5., 4., 5., 1., 1., 4., 1., 1., 2., 4. ]
     REAL, PARAMETER :: ek(4) = [ 1., 2., 5., 10. ]
     !* FIRST EXECUTABLE STATEMENT  EISQX2

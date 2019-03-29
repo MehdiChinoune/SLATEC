@@ -113,7 +113,7 @@ REAL FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   930503  Corrected to set VALUE=0 when IERR.lt.0.  (FNF)
   !   930504  Changed CHFIV to CHFIE.  (FNF)
-  
+
   !
   !  Programming notes:
   !  1. The error flag from PCHID is tested, because a logic flaw
@@ -129,13 +129,12 @@ REAL FUNCTION PCHIA(N,X,F,D,Incfd,Skip,A,B,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, ia, ib, ierd, il, ir
-  REAL value, xa, xb, zero
-  SAVE zero
+  REAL value, xa, xb
   REAL CHFIE, PCHID
   !
   !  INITIALIZE.
   !
-  DATA zero/0./
+  REAL, PARAMETER :: zero = 0.
   !* FIRST EXECUTABLE STATEMENT  PCHIA
   value = zero
   !

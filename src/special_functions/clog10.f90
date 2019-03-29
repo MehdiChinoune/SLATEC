@@ -31,11 +31,9 @@ COMPLEX FUNCTION CLOG10(Z)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
-  REAL aloge
+
   COMPLEX Z
-  SAVE aloge
-  DATA aloge/0.43429448190325182765E0/
+  REAL, PARAMETER :: aloge = 0.43429448190325182765E0
   !* FIRST EXECUTABLE STATEMENT  CLOG10
   CLOG10 = aloge*LOG(Z)
   !

@@ -28,14 +28,12 @@ SUBROUTINE ZMLRI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Tol)
 
   !     COMPLEX CK,CNORM,CONE,CTWO,CZERO,PT,P1,P2,RZ,SUM,Y,Z
   INTEGER i, iaz, idum, ifnu, inu, itime, k, kk, km, Kode, m, N, Nz
-  REAL(8) :: ack, ak, ap, at, az, bk, cki, ckr, cnormi, &
-    cnormr, conei, coner, fkap, fkk, flam, fnf, Fnu, &
-    pti, ptr, p1i, p1r, p2i, p2r, raz, rho, rho2, &
-    rzi, rzr, scle, sti, str, sumi, sumr, tfnf, Tol, &
-    tst, Yi(N), Yr(N), zeroi, zeror, Zi, Zr
+  REAL(8) :: ack, ak, ap, at, az, bk, cki, ckr, cnormi, cnormr, fkap, fkk, flam, &
+    fnf, Fnu, pti, ptr, p1i, p1r, p2i, p2r, raz, rho, rho2, rzi, rzr, scle, sti, &
+    str, sumi, sumr, tfnf, Tol, tst, Yi(N), Yr(N), Zi, Zr
   REAL(8), EXTERNAL :: DGAMLN, D1MACH, ZABS
   EXTERNAL :: ZEXP, ZLOG
-  DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
+  REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0, conei = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  ZMLRI
   scle = D1MACH(1)/Tol
   Nz = 0

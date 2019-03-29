@@ -43,9 +43,8 @@ SUBROUTINE DPRWVR(Key,Ipage,Lpg,Sx,Ix)
 
   INTEGER iaddr, Ipage, ipagef, istart, Ix(*), Key, Lpg
   LOGICAL :: first
-  REAL(8) :: Sx(*), zero, one
-  SAVE zero, one
-  DATA zero, one/0.D0, 1.D0/
+  REAL(8) :: Sx(*)
+  REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
   !* FIRST EXECUTABLE STATEMENT  DPRWVR
   !
   !     COMPUTE STARTING ADDRESS OF PAGE.

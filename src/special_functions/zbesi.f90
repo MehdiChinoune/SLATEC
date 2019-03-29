@@ -168,12 +168,11 @@ SUBROUTINE ZBESI(Zr,Zi,Fnu,Kode,N,Cyr,Cyi,Nz,Ierr)
 
   !     COMPLEX CONE,CSGN,CW,CY,CZERO,Z,ZN
   INTEGER i, Ierr, inu, k, Kode, k1, k2, N, Nz, nn, I1MACH
-  REAL(8) :: aa, alim, arg, conei, coner, csgni, csgnr, Cyi(N), &
-    Cyr(N), dig, elim, Fnu, fnul, pi, rl, r1m5, str, &
-    tol, Zi, zni, znr, Zr, az, bb, fn, ascle, rtol, atol, sti
+  REAL(8) :: aa, alim, arg, csgni, csgnr, Cyi(N), Cyr(N), dig, elim, Fnu, fnul, &
+    rl, r1m5, str, tol, Zi, zni, znr, Zr, az, bb, fn, ascle, rtol, atol, sti
   REAL(8), EXTERNAL :: ZABS, D1MACH
-  DATA pi/3.14159265358979324D0/
-  DATA coner, conei/1.0D0, 0.0D0/
+  REAL(8), PARAMETER :: pi = 3.14159265358979324D0
+  REAL(8), PARAMETER :: coner = 1.0D0, conei = 0.0D0
   !
   !* FIRST EXECUTABLE STATEMENT  ZBESI
   Ierr = 0

@@ -62,13 +62,12 @@ SUBROUTINE R1MPYQ(M,N,A,Lda,V,W)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER M, N, Lda
   REAL A(Lda,*), V(*), W(*)
   INTEGER i, j, nmj, nm1
-  REAL cos, one, sin, temp
-  SAVE one
-  DATA one/1.0E0/
+  REAL cos, sin, temp
+  REAL, PARAMETER :: one = 1.0E0
   !* FIRST EXECUTABLE STATEMENT  R1MPYQ
   nm1 = N - 1
   IF ( nm1>=1 ) THEN

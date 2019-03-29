@@ -37,11 +37,9 @@ COMPLEX FUNCTION CATAN2(Csn,Ccs)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  
-  REAL pi
+
   COMPLEX Csn, Ccs, CATAN
-  SAVE pi
-  DATA pi/3.14159265358979323846E0/
+  REAL, PARAMETER :: pi = 3.14159265358979323846E0
   !* FIRST EXECUTABLE STATEMENT  CATAN2
   IF ( ABS(Ccs)==0. ) THEN
     !

@@ -221,9 +221,8 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
   INTEGER Ier, Ierlst(*), Integr, Iord(*), ktmin, l, last, Lst, Limit, &
     Limlst, ll, Maxp1, momcom, nev, Neval, Nnlog(*), nres, numrl2
   REAL(8) :: A, abseps, Abserr, Alist(*), Blist(*), Chebmo(Maxp1,25), correc, &
-    cycle, c1, c2, dl, drl, Elist(*), Erlst(*), &
-    ep, eps, epsa, Epsabs, errsum, fact, Omega, &
-    p, pi, p1, psum(52), reseps, Result, res3la(3), Rlist(*), Rslst(*), uflow
+    cycle, c1, c2, dl, drl, Elist(*), Erlst(*), ep, eps, epsa, Epsabs, errsum, &
+    fact, Omega, p1, psum(52), reseps, Result, res3la(3), Rlist(*), Rslst(*), uflow
   !
   REAL(8), EXTERNAL :: F
   REAL(8), EXTERNAL :: D1MACH
@@ -252,9 +251,8 @@ SUBROUTINE DQAWFE(F,A,Omega,Integr,Epsabs,Limlst,Limit,Maxp1,Result,&
   !           CHEBMO    - ARRAY CONTAINING THE MODIFIED CHEBYSHEV
   !                       MOMENTS (SEE ALSO ROUTINE DQC25F)
   !
-  SAVE p, pi
-  DATA p/0.9D+00/
-  DATA pi/3.14159265358979323846264338327950D0/
+  REAL(8), PARAMETER :: p = 0.9D+00
+  REAL(8), PARAMETER :: pi = 3.14159265358979323846264338327950D0
   !
   !           TEST ON VALIDITY OF PARAMETERS
   !           ------------------------------

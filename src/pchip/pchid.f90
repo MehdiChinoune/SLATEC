@@ -103,7 +103,7 @@ REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   930504  Corrected to set VALUE=0 when IERR.ne.0.  (FNF)
-  
+
   !
   !  Programming notes:
   !  1. This routine uses a special formula that is valid only for
@@ -121,12 +121,11 @@ REAL FUNCTION PCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, iup, low
-  REAL h, half, six, sum, value, zero
-  SAVE zero, half, six
+  REAL h, sum, value
   !
   !  INITIALIZE.
   !
-  DATA zero/0./, half/0.5/, six/6./
+  REAL, PARAMETER :: zero = 0., half = 0.5, six = 6.
   !* FIRST EXECUTABLE STATEMENT  PCHID
   value = zero
   !

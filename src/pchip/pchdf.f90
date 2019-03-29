@@ -61,7 +61,7 @@ REAL FUNCTION PCHDF(K,X,S,Ierr)
   !   910408  Updated AUTHOR and DATE WRITTEN sections in prologue.  (WRB)
   !   920429  Revised format and order of references.  (WRB,FNF)
   !   930503  Improved purpose.  (FNF)
-  
+
   !
   !**End
   !
@@ -73,9 +73,8 @@ REAL FUNCTION PCHDF(K,X,S,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, j
-  REAL value, zero
-  SAVE zero
-  DATA zero/0./
+  REAL value
+  REAL, PARAMETER :: zero = 0.
   !
   !  CHECK FOR LEGAL VALUE OF K.
   !

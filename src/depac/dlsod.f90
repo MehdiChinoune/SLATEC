@@ -37,7 +37,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   INTEGER IBAnd, IBEgin, Idid, IER, IINteg, IJAc, INIt, intflg, &
     IOWns, Ipar(*), IQUit, ITOl, ITStop, Iwm(*), JSTart, k, KFLag, &
     KSTeps, l, LACor, LDUm, LEWt, LSAvf, ltol, LWM, LYH, &
-    maxnum, MAXord, METh, MITer, N, natolp, Neq, NFE, NJE, NQ, NQU, nrtolp, NST
+    MAXord, METh, MITer, N, natolp, Neq, NFE, NJE, NQ, NQU, nrtolp, NST
   REAL(8) :: absdel, Acor(*), Atol(*), big, D1MACH, del, Delsgn, dt, &
     DVNRMS, EL0, Ewt(*), H, ha, HMIn, HMXi, HU, ROWns, &
     Rpar(*), Rtol(*), Savf(*), T, tol, TOLd, Tolfac, Tout, &
@@ -59,9 +59,7 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !       NUMBER OF  STEPS ATTEMPTED. WHEN THIS EXCEEDS  MAXNUM, THE
   !       COUNTER IS RESET TO ZERO AND THE USER IS INFORMED ABOUT POSSIBLE
   !       EXCESSIVE WORK.
-  SAVE maxnum
-  !
-  DATA maxnum/500/
+  INTEGER, PARAMETER :: maxnum = 500
   !
   !     ..................................................................
   !

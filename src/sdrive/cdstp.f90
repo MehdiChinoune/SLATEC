@@ -84,13 +84,13 @@ SUBROUTINE CDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
   REAL Avgh, Avgord, bnd, ctest, d, denom, d1, El(13,12), Eps, erdn, erup, etest, &
     H, Hmax, hn, Hold, hs, Hused, numer, Rc, rh, rh1, rh2, rh3, Rmax, T, &
     told, Tq(3,12), Trend, Uround, y0nrm
-  LOGICAL Convrg, evalfa, evaljc, ier, switch
+  LOGICAL Convrg, evalfa, evaljc, switch
   REAL, EXTERNAL :: SCNRM2
   INTEGER, PARAMETER :: MXFAIL = 3, MXITER = 3, MXTRY = 50
   REAL, PARAMETER :: BIAS1 = 1.3E0, BIAS2 = 1.2E0, BIAS3 = 1.4E0, RCTEST = 0.3E0, &
     RMFAIL = 2.E0, RMNORM = 10.E0, TRSHLD = 1.E0
   INTEGER, PARAMETER :: NDJSTP = 10
-  DATA ier/.FALSE./
+  LOGICAL :: ier = .FALSE.
   !* FIRST EXECUTABLE STATEMENT  CDSTP
   nsv = N
   bnd = 0.E0

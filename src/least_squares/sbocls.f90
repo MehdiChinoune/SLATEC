@@ -564,7 +564,7 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !     /SSCAL/ TO /DSCAL/, /SASUM/ TO /DASUM/, /SBOLS/ TO /DBOLS/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
-  INTEGER i, icase, igo, iiw, inrows, ip, irw, iscale, j, jp, &
+  INTEGER i, icase, iiw, inrows, ip, irw, iscale, j, jp, &
     lbou, lboum, lds, lenx, liopt, liw, llb, lliw, llrw, llx
   INTEGER lmdw, lndw, locacc, locdim, lopt, lp, lrw, m, Mcon, Mdw, &
     mdwl, mnew, Mode, modec, mopt, mout, Mrows, Ncols, nerr
@@ -577,8 +577,8 @@ SUBROUTINE SBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   LOGICAL checkl, filter, accum, pretri
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
-  SAVE igo, accum, checkl
-  DATA igo/0/
+  SAVE accum, checkl
+  INTEGER :: igo = 0
   !* FIRST EXECUTABLE STATEMENT  SBOCLS
   nerr = 0
   Mode = 0

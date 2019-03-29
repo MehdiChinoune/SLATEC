@@ -30,16 +30,14 @@ SUBROUTINE ZASYI(Zr,Zi,Fnu,Kode,N,Yr,Yi,Nz,Rl,Tol,Elim,Alim)
 
   !     COMPLEX AK1,CK,CONE,CS1,CS2,CZ,CZERO,DK,EZ,P1,RZ,S2,Y,Z
   INTEGER i, ib, il, inu, j, jl, k, Kode, koded, m, N, nn, Nz
-  REAL(8) :: aa, aez, ak, ak1i, ak1r, Alim, arg, arm, atol, &
-    az, bb, bk, cki, ckr, conei, coner, cs1i, cs1r, &
-    cs2i, cs2r, czi, czr, dfnu, dki, dkr, dnu2, &
-    Elim, ezi, ezr, fdn, Fnu, pi, p1i, p1r, raz, &
-    Rl, rtpi, rtr1, rzi, rzr, s, sgn, sqk, sti, &
-    str, s2i, s2r, Tol, tzi, tzr, Yi(N), Yr(N), zeroi, zeror, Zi, Zr
+  REAL(8) :: aa, aez, ak, ak1i, ak1r, Alim, arg, arm, atol, az, bb, bk, cki, &
+    ckr, cs1i, cs1r, cs2i, cs2r, czi, czr, dfnu, dki, dkr, dnu2, Elim, ezi, &
+    ezr, fdn, Fnu, p1i, p1r, raz, Rl, rtr1, rzi, rzr, s, sgn, sqk, sti, str, &
+    s2i, s2r, Tol, tzi, tzr, Yi(N), Yr(N), Zi, Zr
   REAL(8), EXTERNAL :: ZABS, D1MACH
   EXTERNAL :: ZEXP, ZSQRT
-  DATA pi, rtpi/3.14159265358979324D0, 0.159154943091895336D0/
-  DATA zeror, zeroi, coner, conei/0.0D0, 0.0D0, 1.0D0, 0.0D0/
+  REAL(8), PARAMETER :: pi = 3.14159265358979324D0, rtpi = 0.159154943091895336D0
+  REAL(8), PARAMETER ::  zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0, conei = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  ZASYI
   Nz = 0
   az = ZABS(Zr,Zi)

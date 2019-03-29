@@ -33,18 +33,16 @@ SUBROUTINE CUNK2(Z,Fnu,Kode,Mr,N,Y,Nz,Tol,Elim,Alim)
 
   INTEGER i, ib, iflag, ifn, il, in, inu, iuf, k, kdflg, kflag, &
     kk, Kode, Mr, N, nai, ndai, nw, Nz, idum, j, ipard, ic
-  COMPLEX ai, arg(2), asum(2), bsum(2), cfn, ci, ck, cone, crsc, cr1, &
-    cr2, cs, cscl, csgn, cspn, csr(3), css(3), cy(2), czero, c1, c2, &
-    dai, phi(2), rz, s1, s2, Y(N), Z, zb, zeta1(2), zeta2(2), zn, zr, &
-    phid, argd, zeta1d, zeta2d, asumd, bsumd
-  REAL aarg, aic, Alim, ang, aphi, asc, ascle, bry(3), car, cpn, &
-    c2i, c2m, c2r, Elim, fmr, fn, fnf, Fnu, hpi, pi, rs1, &
-    sar, sgn, spn, Tol, x, yy, R1MACH
-  DATA czero, cone, ci, cr1, cr2/(0.0E0,0.0E0), (1.0E0,0.0E0), &
-    (0.0E0,1.0E0), (1.0E0,1.73205080756887729E0), &
-    (-0.5E0,-8.66025403784438647E-01)/
-  DATA hpi, pi, aic/1.57079632679489662E+00, 3.14159265358979324E+00, &
-    1.26551212348464539E+00/
+  COMPLEX ai, arg(2), asum(2), bsum(2), cfn, ck, crsc, cs, cscl, csgn, cspn, &
+    csr(3), css(3), cy(2), c1, c2, dai, phi(2), rz, s1, s2, Y(N), Z, zb, zeta1(2), &
+    zeta2(2), zn, zr, phid, argd, zeta1d, zeta2d, asumd, bsumd
+  REAL aarg, Alim, ang, aphi, asc, ascle, bry(3), car, cpn, c2i, c2m, c2r, Elim, &
+    fmr, fn, fnf, Fnu, rs1, sar, sgn, spn, Tol, x, yy, R1MACH
+  COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0), &
+    ci = (0.0E0,1.0E0), cr1 = (1.0E0,1.73205080756887729E0), &
+    cr2 = (-0.5E0,-8.66025403784438647E-01)
+  REAL, PARAMETER :: hpi = 1.57079632679489662E+00, pi = 3.14159265358979324E+00, &
+    aic = 1.26551212348464539E+00
   COMPLEX, PARAMETER :: cip(4) = [ (1.0E0,0.0E0), (0.0E0,-1.0E0), &
     (-1.0E0,0.0E0), (0.0E0,1.0E0) ]
   !* FIRST EXECUTABLE STATEMENT  CUNK2

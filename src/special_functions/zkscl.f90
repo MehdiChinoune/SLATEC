@@ -29,12 +29,12 @@ SUBROUTINE ZKSCL(Zrr,Zri,Fnu,N,Yr,Yi,Nz,Rzr,Rzi,Ascle,Tol,Elim)
 
   !     COMPLEX CK,CS,CY,CZERO,RZ,S1,S2,Y,ZR,ZD,CELM
   INTEGER i, ic, idum, kk, N, nn, nw, Nz
-  REAL(8) :: acs, as, Ascle, cki, ckr, csi, csr, cyi(2), cyr(2), &
-    Elim, fn, Fnu, Rzi, Rzr, str, s1i, s1r, s2i, &
-    s2r, Tol, Yi(N), Yr(N), zeroi, zeror, Zri, Zrr, zdr, zdi, celmr, elm, helim, alas
+  REAL(8) :: acs, as, Ascle, cki, ckr, csi, csr, cyi(2), cyr(2), Elim, fn, Fnu, &
+    Rzi, Rzr, str, s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), Zri, Zrr, zdr, zdi, &
+    celmr, elm, helim, alas
   REAL(8), EXTERNAL :: ZABS
   EXTERNAL :: ZLOG
-  DATA zeror, zeroi/0.0D0, 0.0D0/
+  REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  ZKSCL
   Nz = 0
   ic = 0

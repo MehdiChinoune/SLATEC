@@ -39,7 +39,7 @@ CONTAINS
     !   890405  DATE WRITTEN
     !   890405  Revised to meet SLATEC standards.
 
-    REAL eps, ewt(1), R1MACH, t, tout
+    REAL eps, R1MACH, t, tout
     INTEGER ierflg, Ipass, Kprint, leniw, leniwx, lenw, lenwx, &
       Lun, mint, mstate, nde, nfe, nje, nstate, nstep, nx
     REAL, PARAMETER :: ALFA = 1.E0, HMAX = 15.E0
@@ -47,7 +47,7 @@ CONTAINS
       MITER = 5, ML = 2, MU = 2, MXORD = 5, MXSTEP = 1000, N = 3, NROOT = 0, NTASK = 1
     REAL work(LENWMX), y(N+1)
     INTEGER iwork(LIWMX)
-    DATA ewt /.00001E0/
+    REAL, PARAMETER :: ewt(1) = .00001E0
     !* FIRST EXECUTABLE STATEMENT  SDQCK
     eps = R1MACH(4)**(1.E0/3.E0)
     Ipass = 1

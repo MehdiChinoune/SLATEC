@@ -67,14 +67,12 @@ SUBROUTINE DROTMG(Dd1,Dd2,Dx1,Dy1,Dparam)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920316  Prologue corrected.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER igo
-  REAL(8) :: gam, one, rgamsq, Dd1, Dd2, dh11, dh12, dh21, &
-    dh22, Dparam(5), dp1, dp2, dq1, dq2, du, Dy1, zero, &
-    gamsq, dflag, dtemp, Dx1, two
-  SAVE zero, one, two, gam, gamsq, rgamsq
-  DATA zero, one, two/0.0D0, 1.0D0, 2.0D0/
-  DATA gam, gamsq, rgamsq/4096.0D0, 16777216.D0, 5.9604645D-8/
+  REAL(8) :: Dd1, Dd2, dh11, dh12, dh21, dh22, Dparam(5), dp1, dp2, dq1, dq2, &
+    du, Dy1, dflag, dtemp, Dx1
+  REAL(8), PARAMETER :: zero = 0.0D0, one = 1.0D0, two = 2.0D0
+  REAL(8), PARAMETER :: gam = 4096.0D0, gamsq = 16777216.D0, rgamsq = 5.9604645D-8
   !* FIRST EXECUTABLE STATEMENT  DROTMG
   IF ( .NOT.Dd1<zero ) THEN
     !     CASE-DD1-NONNEGATIVE

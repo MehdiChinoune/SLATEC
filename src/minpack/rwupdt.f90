@@ -73,14 +73,13 @@ SUBROUTINE RWUPDT(N,R,Ldr,W,B,Alpha,Cos,Sin)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER N, Ldr
   REAL Alpha
   REAL R(Ldr,*), W(*), B(*), Cos(*), Sin(*)
   INTEGER i, j, jm1
-  REAL cotan, one, p5, p25, rowj, tan, temp, zero
-  SAVE one, p5, p25, zero
-  DATA one, p5, p25, zero/1.0E0, 5.0E-1, 2.5E-1, 0.0E0/
+  REAL cotan, rowj, tan, temp
+  REAL, PARAMETER :: one = 1.0E0, p5 = 5.0E-1, p25 = 2.5E-1, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  RWUPDT
   DO j = 1, N
     rowj = W(j)

@@ -46,7 +46,7 @@ CONTAINS
     !   900727  Added EXTERNAL statement.  (WRB)
 
     INTEGER i, Lun, Kprint, Ipass
-    REAL sqrt2, sqrt3, pi, errmax, errtol, abserr, relerr
+    REAL errmax, errtol, abserr, relerr
     REAL, EXTERNAL :: R1MACH
     COMPLEX w(48)
     COMPLEX, EXTERNAL :: C0LGMC, CACOS, CACOSH, CASIN, CASINH, CATAN, CATAN2, &
@@ -56,9 +56,9 @@ CONTAINS
     !     Constants to be used
     !
     COMPLEX, PARAMETER :: c1 = (1.E0,0.E0), ci = (0.E0,1.E0)
-    DATA sqrt2 /.14142135623730950488E1/
-    DATA sqrt3 /.17320508075688772935E1/
-    DATA pi /3.14159265358979323846E0/
+    REAL, PARAMETER :: sqrt2  = .14142135623730950488E1
+    REAL, PARAMETER :: sqrt3  = .17320508075688772935E1
+    REAL, PARAMETER :: pi = 3.14159265358979323846E0
     !
     !     Complex values through different calculations are stored in C(*)
     !

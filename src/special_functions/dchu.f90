@@ -39,12 +39,11 @@ REAL(8) FUNCTION DCHU(A,B,X)
   !   900727  Added EXTERNAL statement.  (WRB)
 
   INTEGER i, istrt, m, n
-  REAL(8) :: A, B, X, aintb, alnx, a0, beps, b0, c0, eps, factor, gamri1, gamrni, &
-    pch1ai, pch1i, pi, pochai, sum, t, xeps1, xi, xi1, xn, xtoeps
+  REAL(8) :: A, B, X, aintb, alnx, a0, beps, b0, c0, factor, gamri1, gamrni, &
+    pch1ai, pch1i, pochai, sum, t, xeps1, xi, xi1, xn, xtoeps
   REAL(8), EXTERNAL :: DGAMMA, D1MACH, DPOCH, DGAMR, DPOCH1, DEXPRL, D9CHU
-  SAVE pi, eps
-  DATA pi/3.141592653589793238462643383279503D0/
-  DATA eps/0.0D0/
+  REAL(8), PARAMETER :: pi = 3.141592653589793238462643383279503D0
+  REAL(8) :: eps = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DCHU
   IF ( eps==0.0D0 ) eps = D1MACH(3)
   !

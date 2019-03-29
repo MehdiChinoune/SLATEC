@@ -52,13 +52,13 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !   900510  Convert XERRWV calls to XERMSG calls, change GOTOs to
   !           IF-THEN-ELSEs.  (RWC)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   !
   INTEGER Idid, Info(15), Init, Ipar(*), Iquit, k, Kop, Ksteps, ktol, &
-    mxkop, mxstep, natolp, Neq, nrtolp, Nstifs, Ntstep
+    natolp, Neq, nrtolp, Nstifs, Ntstep
   REAL(8) :: a, Atol(*), big, D1MACH, dt, Dtsign, DHVNRM, dy, &
     ee, eeoet, es, estiff, esttol, et, F1(*), F2(*), F3(*), &
-    F4(*), F5(*), H, hmin, remin, Rer, Rpar(*), Rtol(*), s, T, &
+    F4(*), F5(*), H, hmin, Rer, Rpar(*), Rtol(*), s, T, &
     tol, Told, Tolfac, Tout, u, U26, ute, Y(*), yavg, Yp(*), Ys(*)
   LOGICAL hfaild, output, Stiff, Nonstf
   CHARACTER(8) :: xern1
@@ -75,8 +75,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !       TOLERANCE THRESHOLD REMIN IS ASSIGNED FOR THIS METHOD. THIS
   !       VALUE SHOULD NOT BE CHANGED ACROSS DIFFERENT MACHINES.
   !
-  SAVE remin, mxstep, mxkop
-  DATA remin/1.0D-12/
+  REAL(8), PARAMETER :: remin = 1.0D-12
   !
   !     ..................................................................
   !
@@ -85,7 +84,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !       COUNTER IS RESET TO ZERO AND THE USER IS INFORMED ABOUT POSSIBLE
   !       EXCESSIVE WORK.
   !
-  DATA mxstep/500/
+  INTEGER, PARAMETER :: mxstep = 500
   !
   !     ..................................................................
   !
@@ -95,7 +94,7 @@ SUBROUTINE DRKFS(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,H,Tolfac,Yp,F1,F2,F3,&
   !       ABUSES EXCEED MXKOP, THE COUNTER IS RESET TO ZERO AND THE USER
   !       IS INFORMED ABOUT POSSIBLE MISUSE OF THE CODE.
   !
-  DATA mxkop/100/
+  INTEGER, PARAMETER :: mxkop = 100
   !
   !     ..................................................................
   !

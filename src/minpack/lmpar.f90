@@ -106,16 +106,15 @@ SUBROUTINE LMPAR(N,R,Ldr,Ipvt,Diag,Qtb,Delta,Par,X,Sigma,Wa1,Wa2)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER N, Ldr
   INTEGER Ipvt(*)
   REAL Delta, Par
   REAL R(Ldr,*), Diag(*), Qtb(*), X(*), Sigma(*), Wa1(*), Wa2(*)
   INTEGER i, iter, j, jm1, jp1, k, l, nsing
-  REAL dxnorm, dwarf, fp, gnorm, parc, parl, paru, p1, p001, sum, temp, zero
+  REAL dxnorm, dwarf, fp, gnorm, parc, parl, paru, sum, temp
   REAL R1MACH, ENORM
-  SAVE p1, p001, zero
-  DATA p1, p001, zero/1.0E-1, 1.0E-3, 0.0E0/
+  REAL, PARAMETER :: p1 = 1.0E-1, p001 = 1.0E-3, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  LMPAR
   dwarf = R1MACH(1)
   !

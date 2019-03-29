@@ -33,10 +33,10 @@ REAL FUNCTION BINOM(N,M)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  REAL ALNREL, bilnmx, corr, fintmx, R1MACH, R9LGMC, sq2pil, xk, xn, xnk
+  REAL ALNREL, bilnmx, corr, fintmx, R1MACH, R9LGMC, xk, xn, xnk
   INTEGER i, k, M, N
-  SAVE sq2pil, bilnmx, fintmx
-  DATA sq2pil/0.91893853320467274E0/
+  SAVE bilnmx, fintmx
+  REAL, PARAMETER :: sq2pil = 0.91893853320467274E0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BINOM
   IF ( first ) THEN

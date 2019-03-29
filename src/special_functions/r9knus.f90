@@ -48,15 +48,13 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
-  REAL a(15), a0, aln2, alnbig, alneps, alnsml, alnz, alpha(15), an, b0, &
-    beta(15), Bknu, bknu0, Bknu1, bknud, bn, c0, CSEVL, euler
-  REAL expx, p1, p2, p3, qq, result, sqpi2, sqrtx, &
-    v, vlnz, X, x2n, x2tov, xi, xmu, Xnu, xnusml, xsml, z, ztov
+  REAL a(15), a0, alnbig, alneps, alnsml, alnz, alpha(15), an, b0, beta(15), &
+    Bknu, bknu0, Bknu1, bknud, bn, c0, CSEVL, expx, p1, p2, p3, qq, result, &
+    sqrtx, v, vlnz, X, x2n, x2tov, xi, xmu, Xnu, xnusml, xsml, z, ztov
   INTEGER i, ii, inu, Iswtch, n, ntc0k, nterms, ntznu1
   INTEGER, EXTERNAL :: INITS
   REAL, EXTERNAL :: GAMMA, R1MACH
-  SAVE euler, sqpi2, aln2, ntc0k, ntznu1, xnusml, &
-    xsml, alnsml, alnbig, alneps
+  SAVE ntc0k, ntznu1, xnusml, xsml, alnsml, alnbig, alneps
   REAL, PARAMETER :: c0kcs(16) = [ .060183057242626108E0,-.15364871433017286E0, &
     -.011751176008210492E0,-.000852487888919795E0,-.000061329838767496E0, &
     -.000004405228124551E0,-.000000316312467283E0,-.000000022710719382E0, &
@@ -68,9 +66,9 @@ SUBROUTINE R9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
     .000000339357570612E0, .000000008425941769E0, .000000000183336677E0, &
     .000000000003549698E0, .000000000000061903E0, .000000000000000981E0, &
     .000000000000000014E0 ]
-  DATA euler/0.57721566490153286E0/
-  DATA sqpi2/1.2533141373155003E0/
-  DATA aln2/0.69314718055994531E0/
+  REAL, PARAMETER :: euler = 0.57721566490153286E0
+  REAL, PARAMETER :: sqpi2 = 1.2533141373155003E0
+  REAL, PARAMETER :: aln2 = 0.69314718055994531E0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9KNUS
   IF ( first ) THEN

@@ -342,13 +342,12 @@ SUBROUTINE DNSQE(FCN,JAC,Iopt,N,X,Fvec,Tol,Nprint,Info,Wa,Lwa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER index, Info, Iopt, j, lr, Lwa, maxfev, ml, mode, mu, N, &
     nfev, njev, Nprint
-  REAL(8) :: epsfcn, factor, Fvec(*), one, Tol, Wa(*), X(*), xtol, zero
+  REAL(8) :: epsfcn, Fvec(*), Tol, Wa(*), X(*), xtol
   EXTERNAL :: FCN, JAC
-  SAVE factor, one, zero
-  DATA factor, one, zero/1.0D2, 1.0D0, 0.0D0/
+  REAL(8), PARAMETER :: factor = 1.0D2, one = 1.0D0, zero = 0.0D0
   !     BEGIN BLOCK PERMITTING ...EXITS TO 20
   !* FIRST EXECUTABLE STATEMENT  DNSQE
   Info = 0

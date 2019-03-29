@@ -36,11 +36,10 @@ COMPLEX FUNCTION CLNREL(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  
-  REAL ALNREL, CARG, R1MACH, rho, sqeps, x
+
+  REAL ALNREL, CARG, R1MACH, rho, x
   COMPLEX Z
-  SAVE sqeps
-  DATA sqeps/0.0/
+  REAL :: sqeps = 0.0
   !* FIRST EXECUTABLE STATEMENT  CLNREL
   IF ( sqeps==0. ) sqeps = SQRT(R1MACH(4))
   !

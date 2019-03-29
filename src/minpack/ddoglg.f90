@@ -69,13 +69,12 @@ SUBROUTINE DDOGLG(N,R,Lr,Diag,Qtb,Delta,X,Wa1,Wa2)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   REAL(8) :: D1MACH, DENORM
   INTEGER i, j, jj, jp1, k, l, Lr, N
-  REAL(8) :: alpha, bnorm, Delta, Diag(*), epsmch, gnorm, one, &
-    qnorm, Qtb(*), R(*), sgnorm, sum, temp, Wa1(*), Wa2(*), X(*), zero
-  SAVE one, zero
-  DATA one, zero/1.0D0, 0.0D0/
+  REAL(8) :: alpha, bnorm, Delta, Diag(*), epsmch, gnorm, qnorm, Qtb(*), R(*), &
+    sgnorm, sum, temp, Wa1(*), Wa2(*), X(*)
+  REAL(8), PARAMETER :: one = 1.0D0, zero = 0.0D0
   !
   !     EPSMCH IS THE MACHINE PRECISION.
   !

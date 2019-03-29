@@ -99,7 +99,7 @@ SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
   !   930503  Improved purpose.  (FNF)
-  
+
   !
   !  Programming notes:
   !     1. The function  PCHST(ARG1,ARG2)  is assumed to return zero if
@@ -123,13 +123,12 @@ SUBROUTINE PCHCE(Ic,Vc,N,X,H,Slope,D,Incfd,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER ibeg, iend, ierf, index, j, k
-  REAL half, stemp(3), three, two, xtemp(4), zero
-  SAVE zero, half, two, three
+  REAL stemp(3), xtemp(4)
   REAL PCHDF, PCHST
   !
   !  INITIALIZE.
   !
-  DATA zero/0./, half/0.5/, two/2./, three/3./
+  REAL, PARAMETER :: zero = 0., half = 0.5, two = 2., three = 3.
   !
   !* FIRST EXECUTABLE STATEMENT  PCHCE
   ibeg = Ic(1)

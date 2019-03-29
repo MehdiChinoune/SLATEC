@@ -47,8 +47,8 @@ SUBROUTINE DXCON(X,Ix,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  
-  INTEGER i, i1, icase, Ierror, ispace, itemp, j, j1, j2
+
+  INTEGER i, i1, icase, Ierror, itemp, j, j1, j2
   REAL(8) :: X
   INTEGER Ix
   !
@@ -64,11 +64,11 @@ SUBROUTINE DXCON(X,Ix,Ierror)
   REAL(8) :: RADix, RADixl, RAD2l, DLG10r
   INTEGER L, L2, KMAx
   COMMON /DXBLK2/ RADix, RADixl, RAD2l, DLG10r, L, L2, KMAx
-  SAVE /DXBLK2/ , ispace
+  SAVE /DXBLK2/
   !
   REAL(8) :: a, b, z
   !
-  DATA ispace/1/
+  INTEGER, PARAMETER :: ispace = 1
   !   THE PARAMETER ISPACE IS THE INCREMENT USED IN FORM-
   ! ING THE AUXILIARY INDEX OF THE DECIMAL EXTENDED-RANGE
   ! FORM. THE RETURNED VALUE OF IX WILL BE AN INTEGER MULT-

@@ -43,9 +43,8 @@ SUBROUTINE PRWVIR(Key,Ipage,Lpg,Sx,Ix)
 
   INTEGER iaddr, Ipage, ipagef, istart, Ix(*), Key, Lpg
   LOGICAL :: first
-  REAL Sx(*), zero, one
-  SAVE zero, one
-  DATA zero, one/0.E0, 1.E0/
+  REAL Sx(*)
+  REAL, PARAMETER :: zero = 0.E0, one = 1.E0
   !* FIRST EXECUTABLE STATEMENT  PRWVIR
   !
   !     COMPUTE STARTING ADDRESS OF PAGE.

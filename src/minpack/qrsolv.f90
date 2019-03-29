@@ -90,14 +90,13 @@ SUBROUTINE QRSOLV(N,R,Ldr,Ipvt,Diag,Qtb,X,Sigma,Wa)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER N, Ldr
   INTEGER Ipvt(*)
   REAL R(Ldr,*), Diag(*), Qtb(*), X(*), Sigma(*), Wa(*)
   INTEGER i, j, jp1, k, kp1, l, nsing
-  REAL cos, cotan, p5, p25, qtbpj, sin, sum, tan, temp, zero
-  SAVE p5, p25, zero
-  DATA p5, p25, zero/5.0E-1, 2.5E-1, 0.0E0/
+  REAL cos, cotan, qtbpj, sin, sum, tan, temp
+  REAL, PARAMETER :: p5 = 5.0E-1, p25 = 2.5E-1, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  QRSOLV
   DO j = 1, N
     DO i = j, N

@@ -32,18 +32,15 @@ SUBROUTINE ZUNK1(Zr,Zi,Fnu,Kode,Mr,N,Yr,Yi,Nz,Tol,Elim,Alim)
   !    *C1,C2,PHI,PHID,RZ,SUM,SUMD,S1,S2,Y,Z,ZETA1,ZETA1D,ZETA2,ZETA2D,ZR
   INTEGER i, ib, iflag, ifn, il, init(2), inu, iuf, k, kdflg, kflag, &
     kk, Kode, Mr, N, nw, Nz, initd, ic, ipard, j, m
-  REAL(8) :: Alim, ang, aphi, asc, ascle, bry(3), cki, ckr, &
-    coner, crsc, cscl, csgni, cspni, cspnr, csr, &
-    csrr(3), cssr(3), cwrki(16,3), cwrkr(16,3), cyi(2), cyr(2), c1i, c1r, &
-    c2i, c2m, c2r, Elim, fmr, fn, fnf, Fnu, phidi, &
-    phidr, phii(2), phir(2), pi, rast, razr, rs1, rzi, &
-    rzr, sgn, sti, str, sumdi, sumdr, sumi(2), sumr(2), &
-    s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), zeroi, zeror, &
-    zeta1i(2), zeta1r(2), zeta2i(2), zeta2r(2), zet1di, zet1dr, &
-    zet2di, zet2dr, Zi, Zr, zri, zrr
+  REAL(8) :: Alim, ang, aphi, asc, ascle, bry(3), cki, ckr, crsc, cscl, csgni, &
+    cspni, cspnr, csr, csrr(3), cssr(3), cwrki(16,3), cwrkr(16,3), cyi(2), cyr(2), &
+    c1i, c1r, c2i, c2m, c2r, Elim, fmr, fn, fnf, Fnu, phidi, phidr, phii(2), &
+    phir(2), rast, razr, rs1, rzi, rzr, sgn, sti, str, sumdi, sumdr, sumi(2), &
+    sumr(2), s1i, s1r, s2i, s2r, Tol, Yi(N), Yr(N), zeta1i(2), zeta1r(2), &
+    zeta2i(2), zeta2r(2), zet1di, zet1dr, zet2di, zet2dr, Zi, Zr, zri, zrr
   REAL(8), EXTERNAL :: ZABS, D1MACH
-  DATA zeror, zeroi, coner/0.0D0, 0.0D0, 1.0D0/
-  DATA pi/3.14159265358979324D0/
+  REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0, coner = 1.0D0
+  REAL(8), PARAMETER :: pi = 3.14159265358979324D0
   !* FIRST EXECUTABLE STATEMENT  ZUNK1
   kdflg = 1
   Nz = 0

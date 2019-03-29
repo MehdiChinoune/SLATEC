@@ -91,13 +91,11 @@ SUBROUTINE BESKNU(X,Fnu,Kode,N,Y,Nz)
   INTEGER i, iflag, inu, j, k, kk, Kode, koded, N, nn, Nz
   REAL a(160), ak, a1, a2, b(160), bk, ck, coef, cx, dk, dnu, dnu2, &
     elim, etest, ex, f, fc, fhs, fk, fks, flrx, fmu, Fnu, g1, &
-    g2, p, pi, pt, p1, p2, q, rthpi, rx, s, smu, sqk, st, &
-    s1, s2, tm, tol, t1, t2, X, x1, x2, Y(*)
+    g2, p, pt, p1, p2, q, rx, s, smu, sqk, st, s1, s2, tm, tol, t1, t2, X, Y(*)
   INTEGER, EXTERNAL :: I1MACH
   REAL, EXTERNAL :: GAMMA, R1MACH
-  SAVE x1, x2, pi, rthpi
-  DATA x1, x2/2.0E0, 17.0E0/
-  DATA pi, rthpi/3.14159265358979E+00, 1.25331413731550E+00/
+  REAL, PARAMETER :: x1 = 2.0E0, x2 = 17.0E0
+  REAL, PARAMETER :: pi = 3.14159265358979E+00, rthpi = 1.25331413731550E+00
   REAL, PARAMETER :: cc(8) = [ 5.77215664901533E-01, -4.20026350340952E-02, &
     -4.21977345555443E-02, 7.21894324666300E-03, -2.15241674114900E-04, &
     -2.01348547807000E-05, 1.13302723200000E-06, 6.11609500000000E-09 ]

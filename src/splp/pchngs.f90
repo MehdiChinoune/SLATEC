@@ -59,14 +59,13 @@ SUBROUTINE PCHNGS(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  
+
   INTEGER i, iend, Ii, il, ilast, iopt, ipl, Iplace, Ircx, istart, &
     Ix(*), ixlast, j, jj, jstart, k, key, ll, lmx, lpg
   INTEGER n20055, nerr, np
   INTEGER IPLOC
-  REAL Sx(*), Xval, zero, one, sxlast, sxval
-  SAVE zero, one
-  DATA zero, one/0.E0, 1.E0/
+  REAL Sx(*), Xval, sxlast, sxval
+  REAL, PARAMETER :: zero = 0.E0, one = 1.E0
   !* FIRST EXECUTABLE STATEMENT  PCHNGS
   iopt = 1
   !

@@ -78,15 +78,14 @@ SUBROUTINE R1UPDT(M,N,S,Ls,U,V,W,Sing)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER M, N, Ls
   LOGICAL Sing
   REAL S(*), U(*), V(*), W(*)
   INTEGER i, j, jj, l, nmj, nm1
-  REAL cos, cotan, giant, one, p5, p25, sin, tan, tau, temp, zero
+  REAL cos, cotan, giant, sin, tan, tau, temp
   REAL R1MACH
-  SAVE one, p5, p25, zero
-  DATA one, p5, p25, zero/1.0E0, 5.0E-1, 2.5E-1, 0.0E0/
+  REAL, PARAMETER :: one = 1.0E0, p5 = 5.0E-1, p25 = 2.5E-1, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  R1UPDT
   giant = R1MACH(2)
   !

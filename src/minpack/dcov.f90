@@ -165,10 +165,9 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   INTEGER i, idum, iflag, Info, Iopt, j, k, kp1, Ldr, M, N, nm1, nrow
   REAL(8) :: X(*), R(Ldr,*), Fvec(*), Wa1(*), Wa2(*), Wa3(*), Wa4(*)
   EXTERNAL :: FCN
-  REAL(8) :: one, sigma, temp, zero, DENORM
+  REAL(8) :: sigma, temp, DENORM
   LOGICAL sing
-  SAVE zero, one
-  DATA zero/0.D0/, one/1.D0/
+  REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
   !* FIRST EXECUTABLE STATEMENT  DCOV
   sing = .FALSE.
   iflag = 0

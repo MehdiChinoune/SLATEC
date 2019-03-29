@@ -87,16 +87,15 @@ SUBROUTINE DFDJC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   EXTERNAL :: FCN
   INTEGER M, N, Ldfjac, Iflag
   REAL(8) :: Epsfcn
   REAL(8) :: X(*), Fvec(*), Fjac(Ldfjac,*), Wa(*)
   INTEGER i, j
-  REAL(8) :: eps, epsmch, h, temp, zero
+  REAL(8) :: eps, epsmch, h, temp
   REAL(8) :: D1MACH
-  SAVE zero
-  DATA zero/0.0D0/
+  REAL(8), PARAMETER :: zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DFDJC3
   epsmch = D1MACH(4)
   !

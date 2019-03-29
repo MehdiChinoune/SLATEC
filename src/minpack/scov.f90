@@ -158,10 +158,9 @@ SUBROUTINE SCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   INTEGER i, idum, iflag, Info, Iopt, j, k, kp1, Ldr, M, N, nm1, nrow
   REAL X(*), R(Ldr,*), Fvec(*), Wa1(*), Wa2(*), Wa3(*), Wa4(*)
   EXTERNAL :: FCN
-  REAL one, sigma, temp, zero
+  REAL sigma, temp
   LOGICAL sing
-  SAVE zero, one
-  DATA zero/0.E0/, one/1.E0/
+  REAL, PARAMETER :: zero = 0.E0, one = 1.E0
   !* FIRST EXECUTABLE STATEMENT  SCOV
   sing = .FALSE.
   iflag = 0

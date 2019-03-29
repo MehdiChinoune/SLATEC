@@ -36,10 +36,10 @@ COMPLEX FUNCTION CATAN(Z)
   !           (WRB)
 
   INTEGER i, nterms
-  REAL pi2, r, R1MACH, r2, rmax, rmin, sqeps, twoi, x, xans, y, yans
+  REAL r, R1MACH, r2, rmax, rmin, sqeps, twoi, x, xans, y, yans
   COMPLEX Z, z2
-  SAVE pi2, nterms, sqeps, rmin, rmax
-  DATA pi2/1.57079632679489661923E0/
+  SAVE nterms, sqeps, rmin, rmax
+  REAL, PARAMETER :: pi2 = 1.57079632679489661923E0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  CATAN
   IF ( first ) THEN

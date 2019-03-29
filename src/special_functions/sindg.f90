@@ -30,12 +30,11 @@ REAL FUNCTION SINDG(X)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
+
   ! JUNE 1977 EDITION.   W. FULLERTON, C3, LOS ALAMOS SCIENTIFIC LAB.
   INTEGER n
-  REAL raddeg, X
-  SAVE raddeg
-  DATA raddeg/.017453292519943296E0/
+  REAL X
+  REAL, PARAMETER :: raddeg = .017453292519943296E0
   !
   !* FIRST EXECUTABLE STATEMENT  SINDG
   SINDG = SIN(raddeg*X)

@@ -35,12 +35,12 @@ COMPLEX FUNCTION CLNGAM(Zin)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
 
-  REAL argsum, bound, cabsz, CARG, dxrel, pi, R1MACH, sq2pil, x, y
+  REAL argsum, bound, cabsz, CARG, dxrel, R1MACH, x, y
   INTEGER i, n
   COMPLEX Zin, z, corr, CLNREL, C9LGMC
-  SAVE pi, sq2pil, bound, dxrel
-  DATA pi/3.14159265358979324E0/
-  DATA sq2pil/0.91893853320467274E0/
+  SAVE bound, dxrel
+  REAL, PARAMETER :: pi = 3.14159265358979324E0
+  REAL, PARAMETER :: sq2pil = 0.91893853320467274E0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  CLNGAM
   IF ( first ) THEN

@@ -86,25 +86,23 @@ SUBROUTINE DGAUS8(FUN,A,B,Err,Ans,Ierr)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  
+
   INTERFACE
     REAL(8) FUNCTION FUN(X)
       REAL(8), INTENT(IN) :: X
     END FUNCTION
   END INTERFACE
-  INTEGER Ierr, k, kml, kmx, l, lmn, lmx, lr(60), mxl, nbits, nib, nlmn, nlmx
+  INTEGER Ierr, k, l, lmn, lmx, lr(60), mxl, nbits, nib, nlmx
   INTEGER I1MACH
   REAL(8) :: A, aa(60), ae, anib, Ans, area, B, c, ce, ee, ef, &
-    eps, Err, est, gl, glr, gr(60), hh(60), sq2, tol, vl(60), &
-    vr, w1, w2, w3, w4, x1, x2, x3, x4
+    eps, Err, est, gl, glr, gr(60), hh(60), tol, vl(60), vr
   REAL(8) :: D1MACH
-  SAVE x1, x2, x3, x4, w1, w2, w3, w4, sq2, nlmn, kmx, kml
-  DATA x1, x2, x3, x4/1.83434642495649805D-01, 5.25532409916328986D-01, &
-    7.96666477413626740D-01, 9.60289856497536232D-01/
-  DATA w1, w2, w3, w4/3.62683783378361983D-01, 3.13706645877887287D-01, &
-    2.22381034453374471D-01, 1.01228536290376259D-01/
-  DATA sq2/1.41421356D0/
-  DATA nlmn/1/, kmx/5000/, kml/6/
+  REAL(8), PARAMETER :: x1 = 1.83434642495649805D-01, x2 = 5.25532409916328986D-01, &
+    x3 =7.96666477413626740D-01 , x4 = 9.60289856497536232D-01
+  REAL(8), PARAMETER :: w1 = 3.62683783378361983D-01, w2 = 3.13706645877887287D-01, &
+    w3 = 2.22381034453374471D-01, w4 = 1.01228536290376259D-01
+  REAL(8), PARAMETER :: sq2 = 1.41421356D0
+  INTEGER, PARAMETER :: nlmn = 1, kmx = 5000, kml = 6
   !* FIRST EXECUTABLE STATEMENT  DGAUS8
   !
   !     Initialize

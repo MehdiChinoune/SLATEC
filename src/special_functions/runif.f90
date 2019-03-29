@@ -63,12 +63,12 @@ REAL FUNCTION RUNIF(T,N)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   910819  Added EXTERNAL statement for RAND due to problem on IBM
   !           RS 6000.  (WRB)
-  
+
   REAL dummy, floatn, RAND, T(*)
-  INTEGER i, j, N, nold
+  INTEGER i, j, N
   EXTERNAL :: RAND
-  SAVE nold, floatn
-  DATA nold/-1/
+  SAVE floatn
+  INTEGER :: nold = -1
   !* FIRST EXECUTABLE STATEMENT  RUNIF
   IF ( N/=nold ) THEN
     !

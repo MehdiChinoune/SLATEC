@@ -29,11 +29,10 @@ SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !   910722  Updated AUTHOR section.  (ALS)
 
   INTEGER i, ii, Ind, j, jmi, jn, k, kk, km, Ktrms, mm, mp, Ms, N, Ierr
-  REAL Ans, den1, den2, den3, er, err, fj, fk, fln, fm1, &
-    Gmrn, g1, gs, H(*), hn, hrtpi, rat, rg1, rxp, rz, rzx, s(31), &
-    ss, sumi, sumj, T(50), tol, v(52), w(52), X, xp(16), z
+  REAL Ans, den1, den2, den3, er, err, fj, fk, fln, fm1, Gmrn, g1, gs, H(*), hn, &
+    rat, rg1, rxp, rz, rzx, s(31), ss, sumi, sumj, T(50), tol, v(52), w(52), &
+    X, xp(16), z
   REAL GAMRN, R1MACH
-  SAVE hrtpi
   !-----------------------------------------------------------------------
   !             COEFFICIENTS OF POLYNOMIAL P(J-1,X), J=1,15
   !-----------------------------------------------------------------------
@@ -83,7 +82,7 @@ SUBROUTINE BKIAS(X,N,Ktrms,T,Ans,Ind,Ms,Gmrn,H,Ierr)
   !-----------------------------------------------------------------------
   REAL, PARAMETER :: bnd(15) = [ 1.0E0, 1.0E0, 1.0E0, 1.0E0, 3.10E0, 5.18E0, 11.7E0, &
     29.8E0, 90.4E0, 297.0E0, 1070.0E0, 4290.0E0, 18100.0E0, 84700.0E0, 408000.0E0 ]
-  DATA hrtpi/8.86226925452758014E-01/
+  REAL, PARAMETER :: hrtpi = 8.86226925452758014E-01
   !
   !* FIRST EXECUTABLE STATEMENT  BKIAS
   Ierr = 0

@@ -58,7 +58,7 @@ REAL(8) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
   !   930503  Corrected to set VALUE=0 when IERR.ne.0.  (FNF)
   !   930504  Eliminated IERR and changed name DCHFIV to DCHFIE.  (FNF)
-  
+
   !
   !  Programming notes:
   !  1. There is no error return from this routine because zero is
@@ -71,14 +71,12 @@ REAL(8) FUNCTION DCHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL(8) :: dterm, four, fterm, h, half, phia1, phia2, phib1, &
-    phib2, psia1, psia2, psib1, psib2, six, ta1, ta2, &
-    tb1, tb2, three, two, ua1, ua2, ub1, ub2
-  SAVE half, two, three, four, six
+  REAL(8) :: dterm, fterm, h, phia1, phia2, phib1, phib2, psia1, psia2, psib1, &
+    psib2, ta1, ta2, tb1, tb2, ua1, ua2, ub1, ub2
   !
   !  INITIALIZE.
   !
-  DATA half/.5D0/, two/2.D0/, three/3.D0/, four/4.D0/, six/6.D0/
+  REAL(8), PARAMETER :: half = .5D0, two = 2.D0, three = 3.D0, four = 4.D0, six = 6.D0
   !
   !  VALIDITY CHECK INPUT.
   !

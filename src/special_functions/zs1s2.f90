@@ -30,13 +30,14 @@ SUBROUTINE ZS1S2(Zrr,Zri,S1r,S1i,S2r,S2i,Nz,Ascle,Alim,Iuf)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
   !   930122  Added ZEXP and ZLOG to EXTERNAL statement.  (RWC)
-  
+
   !     COMPLEX CZERO,C1,S1,S1D,S2,ZR
-  REAL(8) :: aa, Alim, aln, Ascle, as1, as2, c1i, c1r, s1di, &
-    s1dr, S1i, S1r, S2i, S2r, zeroi, zeror, Zri, Zrr, ZABS
+  REAL(8) :: aa, Alim, aln, Ascle, as1, as2, c1i, c1r, s1di, s1dr, S1i, S1r, &
+    S2i, S2r, Zri, Zrr
   INTEGER Iuf, idum, Nz
-  EXTERNAL :: ZABS, ZEXP, ZLOG
-  DATA zeror, zeroi/0.0D0, 0.0D0/
+  REAL(8), EXTERNAL :: ZABS
+  EXTERNAL :: ZEXP, ZLOG
+  REAL(8), PARAMETER :: zeror = 0.0D0, zeroi = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  ZS1S2
   Nz = 0
   as1 = ZABS(S1r,S1i)

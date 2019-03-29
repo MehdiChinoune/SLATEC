@@ -32,10 +32,10 @@ CONTAINS
 
     REAL R1MACH
     INTEGER Kprint, Ipass, Lun
-    INTEGER ideg, idegp1, info, i, j, id
+    INTEGER idegp1, info, i, j, id
     REAL err, erri, relerr
     COMPLEX ac(6), z(5), w(21)
-    DATA ideg/5/
+    INTEGER, PARAMETER :: ideg = 5
     REAL, PARAMETER :: a(6) = [ 1., -3.7, 7.4, -10.8, 10.8, -6.8 ]
     COMPLEX, PARAMETER :: zk(5) = [ (1.7,0.), (1.,1.), (1.,-1.), &
       (0.,1.4142135623730950488), (0.,-1.4142135623730950488) ]

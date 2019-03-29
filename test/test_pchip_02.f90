@@ -125,12 +125,12 @@ CONTAINS
     !
     !  DECLARATIONS.
     !
-    INTEGER i, ierr, iint, next(2), next2(2), nint
+    INTEGER i, ierr, iint, next(2), next2(2)
     REAL(8) :: aed, aed2, aedmax, aedmin, aef, aef2, aefmax, aefmin, check(2), &
       checkf(2), checkd(2), d1, d2, dermax, dtrue, dx, eps1, eps2, f1, f2, fact, &
-      fermax, floord, floorf, four, ftrue, machep, one, red, red2, redmax, redmin, &
-      ref, ref2, refmax, refmin, small, ten, tol1, tol2, x1, x2, xadmax, xadmin, &
-      xafmax, xafmin, xrdmax, xrdmin, xrfmax, xrfmin, zero
+      fermax, floord, floorf, ftrue, machep, red, red2, redmax, redmin, &
+      ref, ref2, refmax, refmin, tol1, tol2, x1, x2, xadmax, xadmin, &
+      xafmax, xafmin, xrdmax, xrdmin, xrfmax, xrfmin
     LOGICAL failoc, failnx
     !
     REAL(8) :: D1MACH
@@ -139,9 +139,9 @@ CONTAINS
     !
     !  INITIALIZE.
     !
-    DATA zero/0.D0/, one/1.D0/, four/4.D0/, ten/10.D0/
-    DATA small/1.0D-10/
-    DATA nint/3/
+    REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0, four = 4.D0, ten = 10.D0
+    REAL(8), PARAMETER :: small = 1.0D-10
+    INTEGER, PARAMETER :: nint = 3
     REAL(8), PARAMETER :: left(3) = [ -1.5D0, 2.0D-10, 1.0D0 ]
     REAL(8), PARAMETER :: right(3) = [ 2.5D0, 3.0D-10, 1.0D+8 ]
     !
@@ -640,15 +640,15 @@ CONTAINS
     !
     !  DECLARATIONS.
     !
-    INTEGER i, ier2, ierr, inc, j, k, ne, nerr, nmax, nx, ny
+    INTEGER i, ier2, ierr, inc, j, k, nerr
     LOGICAL faild, faile, failoc, skip
     REAL(8) :: dermax, derr, dtrue, dx, fdiff, fdifmx, fermax, &
-      ferr, ftrue, machep, tol, pdermx, pdifmx, pfermx, zero
+      ferr, ftrue, machep, tol, pdermx, pdifmx, pfermx
     REAL(8) :: D1MACH
     !
-    DATA nmax/10/, nx/4/, ny/6/
-    DATA ne/51/
-    DATA zero/0.D0/
+    INTEGER, PARAMETER :: nmax = 10, nx = 4, ny = 6
+    INTEGER, PARAMETER :: ne = 51
+    REAL(8), PARAMETER :: zero = 0.D0
     !
     !  INITIALIZE.
     !
@@ -1117,8 +1117,8 @@ CONTAINS
     !
     !  DECLARE VARIABLES.
     !
-    INTEGER i, ierr, ifail, n, npairs
-    REAL(8) :: calc, d(7), errmax, error, f(7), machep, one, three, thrqtr, tol, true, two
+    INTEGER i, ierr, ifail
+    REAL(8) :: calc, d(7), errmax, error, f(7), machep, tol, true
     LOGICAL fail, skip
     !
     !  DECLARE EXTERNALS.
@@ -1127,10 +1127,10 @@ CONTAINS
     !
     !  INITIALIZE.
     !
-    DATA thrqtr/0.75D0/, one/1.D0/, two/2.D0/, three/3.D0/
-    DATA n/7/
+    REAL(8), PARAMETER :: thrqtr = 0.75D0, one = 1.D0, two = 2.D0, three = 3.D0
+    INTEGER, PARAMETER :: n = 7
     REAL(8), PARAMETER :: x(7) = [ -4.D0, -2.D0, -0.9D0, 0.D0, 0.9D0, 2.D0, 4.D0 ]
-    DATA npairs/17/
+    INTEGER, PARAMETER :: npairs = 17
     REAL(8), PARAMETER :: a(17) = [ -3.0D0, 3.0D0, -0.5D0, -0.5D0, -0.5D0, -4.0D0, &
       -4.0D0, 3.0D0, -5.0D0, -5.0D0, -6.0D0, 6.0D0, -1.5D0, -1.5D0, -3.0D0, 3.0D0, 0.5D0 ]
     REAL(8), PARAMETER :: b(17) =  [ 3.0D0, -3.0D0, 1.0D0, 2.0D0, 5.0D0, -0.5D0, &
@@ -1340,8 +1340,7 @@ CONTAINS
     !
     INTEGER i, ierr, ifail, nbad, nbadz
     INTEGER, PARAMETER :: N = 9, NWK = 2*N
-    REAL(8) :: d(N), dc(N), dc5, dc6, err, f(N), &
-      tol, told, tolz, vc(2), wk(NWK)
+    REAL(8) :: d(N), dc(N), err, f(N), tol, told, tolz, vc(2), wk(NWK)
     REAL(8), PARAMETER :: ZERO = 0.0D0, MONE = -1.0D0
     CHARACTER(6) :: result
     !
@@ -1356,7 +1355,7 @@ CONTAINS
     REAL(8), PARAMETER :: dm(N) = [ 0.D0, 3.80027352D-01, 7.17253009D-01, &
       5.82014161D-01, 0.D0, -5.68208031D-01, -5.13501618D-01, -7.77910977D-02, &
       -2.45611117D-03 ]
-    DATA dc5, dc6/1.76950158D-02, -5.69579814D-01/
+    REAL(8), PARAMETER :: dc5 = 1.76950158D-02, dc6 = -5.69579814D-01
     REAL(8), PARAMETER :: ds(N) = [ -5.16830792D-02, 5.71455855D-01, 7.40530225D-01, &
       7.63864934D-01, 1.92614386D-02, -7.65324380D-01, -7.28209035D-01, &
       -7.98445427D-02, -2.85983446D-02 ]

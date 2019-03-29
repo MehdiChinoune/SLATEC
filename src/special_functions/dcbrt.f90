@@ -31,14 +31,13 @@ REAL(8) FUNCTION DCBRT(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER irem, iter, ixpnt, n, niter
+  INTEGER irem, iter, ixpnt, n
   REAL z
   REAL(8) :: X, y, cbrtsq, D9PAK, D1MACH
-  SAVE niter
   REAL(8), PARAMETER :: cbrt2(5) = [ 0.62996052494743658238360530363911D0, &
     0.79370052598409973737585281963615D0, 1.0D0, &
     1.25992104989487316476721060727823D0, 1.58740105196819947475170563927231D0 ]
-  DATA niter/0/
+  INTEGER :: niter = 0
   !* FIRST EXECUTABLE STATEMENT  DCBRT
   IF ( niter==0 ) niter = INT( 1.443*LOG(-.106*LOG(0.1*REAL(D1MACH(3)))) )
   !

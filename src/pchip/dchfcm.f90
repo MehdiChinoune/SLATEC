@@ -74,7 +74,7 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !   890407  Converted to new SLATEC format.
   !   890407  Modified DESCRIPTION to LDOC format.
   !   891214  Moved SAVE statements.  (WRB)
-  
+
   !
   !  Fortran intrinsics used:  DSIGN.
   !  Other routines used:  D1MACH.
@@ -98,13 +98,12 @@ INTEGER FUNCTION DCHFCM(D1,D2,Delta)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER ismon, itrue
-  REAL(8) :: a, b, eps, four, one, phi, ten, three, two, zero
-  SAVE zero, one, two, three, four
-  SAVE ten
+  REAL(8) :: a, b, eps, phi
   !
   !  INITIALIZE.
   !
-  DATA zero/0.D0/, one/1.D0/, two/2.D0/, three/3.D0/, four/4.D0/, ten/10.D0/
+  REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0, two = 2.D0, three = 3.D0, &
+    four = 4.D0, ten = 10.D0
   !
   !        MACHINE-DEPENDENT PARAMETER -- SHOULD BE ABOUT 10*UROUND.
   !* FIRST EXECUTABLE STATEMENT  DCHFCM

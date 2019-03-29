@@ -51,8 +51,6 @@ REAL FUNCTION ACOS(X)
 
   !     .. Scalar Arguments ..
   REAL X
-  !     .. Local Scalars ..
-  REAL pi2
   !     .. External Functions ..
   REAL, EXTERNAL :: ASIN
   !     .. External Subroutines ..
@@ -60,7 +58,7 @@ REAL FUNCTION ACOS(X)
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !     .. Data statements ..
-  DATA pi2/1.57079632679489661923E0/
+  REAL, PARAMETER :: pi2 = 1.57079632679489661923E0
   !* FIRST EXECUTABLE STATEMENT  ACOS
   IF ( ABS(X)>1.0E0 ) CALL XERMSG('SLATEC','ACOS','ABS(X) GREATER THAN 1',1,2)
   !
@@ -130,15 +128,13 @@ REAL FUNCTION ALOG(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL aln2, t, t2, xn, y
-  INTEGER n, nterms, ntrval
+  REAL t, t2, xn, y
+  INTEGER n, ntrval
   !     .. External Functions ..
   REAL, EXTERNAL :: CSEVL, R1MACH
   INTEGER, EXTERNAL :: INITS
   !     .. External Subroutines ..
   EXTERNAL :: R9UPAK, XERMSG
-  !     .. Save statement ..
-  SAVE nterms
   !     .. Data statements ..
   REAL, PARAMETER :: alncs(6) = [ 1.3347199877973882E0, .000693756283284112E0, &
     .000000429340390204E0, .000000000289338477E0, .000000000000205125E0, &
@@ -146,8 +142,8 @@ REAL FUNCTION ALOG(X)
   REAL, PARAMETER :: center(4) = [ 1.0, 1.25, 1.50, 1.75 ]
   REAL, PARAMETER :: alncen(5) = [ 0.0E0, +.223143551314209755E+0, +.405465108108164381E+0, &
     +.559615787935422686E+0, +.693147180559945309E+0 ]
-  DATA aln2/0.068147180559945309E0/
-  DATA nterms/0/
+  REAL, PARAMETER :: aln2 = 0.068147180559945309E0
+  INTEGER :: nterms = 0
   !* FIRST EXECUTABLE STATEMENT  ALOG
   IF ( nterms==0 ) nterms = INITS(alncs,6,28.9*R1MACH(3))
   !
@@ -220,12 +216,10 @@ REAL FUNCTION ALOG10(X)
 
   !     .. Scalar Arguments ..
   REAL X
-  !     .. Local Scalars ..
-  REAL aloge
   !     .. External Functions ..
   REAL, EXTERNAL :: ALOG
   !     .. Data statements ..
-  DATA aloge/0.43429448190325182765E0/
+  REAL, PARAMETER :: aloge = 0.43429448190325182765E0
   !* FIRST EXECUTABLE STATEMENT  ALOG10
   ALOG10 = aloge*ALOG(X)
   !
@@ -290,7 +284,7 @@ REAL FUNCTION ASIN(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL pi2, sqeps, y, z
+  REAL sqeps, y, z
   INTEGER nterms
   !     .. External Functions ..
   REAL, EXTERNAL :: CSEVL, R1MACH, SQRT
@@ -309,7 +303,7 @@ REAL FUNCTION ASIN(X)
     .000000000047855369E0, .000000000007225128E0, .000000000001101833E0, &
     .000000000000169476E0, .000000000000026261E0, .000000000000004095E0, &
     .000000000000000642E0, .000000000000000101E0, .000000000000000016E0 ]
-  DATA pi2/1.57079632679489661923E0/
+  REAL, PARAMETER :: pi2 = 1.57079632679489661923E0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  ASIN
   IF ( first ) THEN
@@ -394,7 +388,7 @@ REAL FUNCTION ATAN(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL sqeps, t, xbig, xbnd1, xbnd2, xbnd3, xbnd4, y
+  REAL sqeps, t, xbig, y
   INTEGER n, nterms
   !     .. External Functions ..
   REAL, EXTERNAL :: CSEVL, R1MACH, SQRT
@@ -408,10 +402,10 @@ REAL FUNCTION ATAN(X)
     .000038345828265245E0, -.000000268722128762E0, .000000002050093098E0, &
     -.000000000016450717E0, .000000000000136509E0, -.000000000000001160E0, &
     .000000000000000010E0 ]
-  DATA xbnd1/.198912367379658006E+0/
-  DATA xbnd2/.668178637919298919E+0/
-  DATA xbnd3/1.49660576266548901E+0/
-  DATA xbnd4/5.02733949212584810E+0/
+  REAL, PARAMETER :: xbnd1 = .198912367379658006E+0
+  REAL, PARAMETER :: xbnd2 = .668178637919298919E+0
+  REAL, PARAMETER :: xbnd3 = 1.49660576266548901E+0
+  REAL, PARAMETER :: xbnd4 = 5.02733949212584810E+0
   REAL, PARAMETER :: tanp8(3) = [ .414213562373095048E+0, 1.0E0, &
     2.41421356237309504E+0 ]
   REAL, PARAMETER :: conpi8(4) = [ 0.375E0, 0.75E0, 1.125E0, 1.5E0 ]
@@ -505,8 +499,6 @@ REAL FUNCTION ATAN2(Sn,Cs)
 
   !     .. Scalar Arguments ..
   REAL Cs, Sn
-  !     .. Local Scalars ..
-  REAL pi
   !     .. External Functions ..
   REAL, EXTERNAL :: ATAN
   !     .. External Subroutines ..
@@ -514,7 +506,7 @@ REAL FUNCTION ATAN2(Sn,Cs)
   !     .. Intrinsic Functions ..
   INTRINSIC SIGN
   !     .. Data statements ..
-  DATA pi/3.14159265358979323846E0/
+  REAL, PARAMETER :: pi = 3.14159265358979323846E0
   !* FIRST EXECUTABLE STATEMENT  ATAN2
   IF ( Cs/=0.0E0 ) THEN
     ATAN2 = ATAN(Sn/Cs)
@@ -866,7 +858,7 @@ REAL FUNCTION COS(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL ainty, ainty2, eta, pi4rec, xmax, xsml, xwarn, y, yrem, z
+  REAL ainty, ainty2, eta, xmax, xsml, xwarn, y, yrem, z
   INTEGER ifn, noctnt, ntcs, ntsn
   !     .. External Functions ..
   REAL, EXTERNAL :: CSEVL, R1MACH, SQRT
@@ -884,7 +876,7 @@ REAL FUNCTION COS(X)
   REAL, PARAMETER :: coscs(8) = [ .20326382740961603E0, -.14643664439083686E0, &
     .001921449311814646E0, -.000009964968489829E0, .000000027576595607E0, &
     -.000000000047399498E0, .000000000000055495E0, -.000000000000000047E0 ]
-  DATA pi4rec/+.273239544735162686E0/
+  REAL, PARAMETER ::  pi4rec = +.273239544735162686E0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  COS
   IF ( first ) THEN
@@ -985,13 +977,13 @@ REAL FUNCTION COSH(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL y, ymax
+  REAL y
   !     .. External Functions ..
   REAL, EXTERNAL :: EXP, R1MACH, SQRT
   !     .. Intrinsic Functions ..
   INTRINSIC ABS
   !     .. Data statements ..
-  DATA ymax/0.0/
+  REAL :: ymax = 0.0
   !* FIRST EXECUTABLE STATEMENT  COSH
   IF ( ymax==0.0E0 ) ymax = 1.0E0/SQRT(R1MACH(3))
   !
@@ -1201,8 +1193,6 @@ REAL(8) FUNCTION DACOS(X)
 
   !     .. Scalar Arguments ..
   REAL(8) :: X
-  !     .. Local Scalars ..
-  REAL(8) :: pi2
   !     .. External Functions ..
   REAL(8), EXTERNAL :: DASIN
   !     .. External Subroutines ..
@@ -1210,7 +1200,7 @@ REAL(8) FUNCTION DACOS(X)
   !     .. Intrinsic Functions ..
   INTRINSIC DABS
   !     .. Data statements ..
-  DATA pi2/1.57079632679489661923132169163975D0/
+  REAL(8), PARAMETER :: pi2 = 1.57079632679489661923132169163975D0
   !* FIRST EXECUTABLE STATEMENT  DACOS
   IF ( DABS(X)>1.0D0 ) CALL XERMSG('SLATEC','DACOS','DABS(X) GREATER THAN ',1,2)
   !
@@ -1279,7 +1269,7 @@ REAL(8) FUNCTION DASIN(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: pi2, sqeps, y, z
+  REAL(8) :: sqeps, y, z
   INTEGER nterms
   !     .. External Functions ..
   REAL(8), EXTERNAL :: D1MACH, DCSEVL, DSQRT
@@ -1311,7 +1301,7 @@ REAL(8) FUNCTION DASIN(X)
     +.13520032631020947208055466666666D-27, +.22184326876541720216644266666666D-28, &
     +.36442494054085079212578133333333D-29, +.59920218558643813307733333333333D-30, &
     +.98584812059573785810261333333333D-31, +.16222501166399014393173333333333D-31 ]
-  DATA pi2/1.57079632679489661923132169163975D0/
+  REAL(8), PARAMETER :: pi2 = 1.57079632679489661923132169163975D0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DASIN
   IF ( first ) THEN
@@ -1397,7 +1387,7 @@ REAL(8) FUNCTION DATAN(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: sqeps, t, xbig, xbnd1, xbnd2, xbnd3, xbnd4, y
+  REAL(8) :: sqeps, t, xbig, y
   INTEGER n, nterms
   !     .. External Functions ..
   REAL(8), EXTERNAL :: D1MACH, DCSEVL, DSQRT
@@ -1416,10 +1406,10 @@ REAL(8) FUNCTION DATAN(X)
     -.69954535148267456086613333333333D-23, +.63105905713702136004266666666666D-25, &
     -.57296075370213874346666666666666D-27, +.52274796280602282666666666666666D-29, &
     -.48327903911608320000000000000000D-31 ]
-  DATA xbnd1 /+.19891236737965800691159762264467D+0/
-  DATA xbnd2 /+.66817863791929891999775768652308D+0/
-  DATA xbnd3 /+1.4966057626654890176011351349424D+0/
-  DATA xbnd4 /+5.0273394921258481045149750710640D+0/
+  REAL(8), PARAMETER :: xbnd1 = +.19891236737965800691159762264467D+0
+  REAL(8), PARAMETER :: xbnd2 = +.66817863791929891999775768652308D+0
+  REAL(8), PARAMETER :: xbnd3 = +1.4966057626654890176011351349424D+0
+  REAL(8), PARAMETER :: xbnd4 = +5.0273394921258481045149750710640D+0
   REAL(8), PARAMETER :: tanp8(3) = [ +.41421356237309504880168872420969D+0, +1.0D0, &
     +2.4142135623730950488016887242096D+0 ]
   REAL(8), PARAMETER :: conpi8(4) = [ 0.375D0, 0.75D0, 1.125D0, 1.5D0 ]
@@ -1517,8 +1507,6 @@ REAL(8) FUNCTION DATAN2(Sn,Cs)
 
   !     .. Scalar Arguments ..
   REAL(8) :: Cs, Sn
-  !     .. Local Scalars ..
-  REAL(8) :: pi
   !     .. External Functions ..
   REAL(8), EXTERNAL :: DATAN
   !     .. External Subroutines ..
@@ -1526,7 +1514,7 @@ REAL(8) FUNCTION DATAN2(Sn,Cs)
   !     .. Intrinsic Functions ..
   INTRINSIC DSIGN
   !     .. Data statements ..
-  DATA pi/3.14159265358979323846264338327950D0/
+  REAL(8), PARAMETER :: pi = 3.14159265358979323846264338327950D0
   !* FIRST EXECUTABLE STATEMENT  DATAN2
   IF ( Cs/=0.0D0 ) THEN
     DATAN2 = DATAN(Sn/Cs)
@@ -1609,7 +1597,7 @@ REAL(8) FUNCTION DCOS(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: ainty, ainty2, pi4rec, xmax, xsml, xwarn, y, yrem, z
+  REAL(8) :: ainty, ainty2, xmax, xsml, xwarn, y, yrem, z
   REAL eta
   INTEGER ifn, noctnt, ntcs, ntsn
   !     .. External Functions ..
@@ -1636,7 +1624,7 @@ REAL(8) FUNCTION DCOS(X)
     -.470970490651755595660385183093333D-16, +.302989760807937313388574986666666D-19, &
     -.152841493421461533614912000000000D-22, +.620745154357827253973333333333333D-26, &
     -.207333072298361599999999999999999D-29, +.579538533367466666666666666666666D-33 ]
-  DATA pi4rec/+.27323954473516268615107010698011D0/
+  REAL(8), PARAMETER ::  pi4rec = +.27323954473516268615107010698011D0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DCOS
   IF ( first ) THEN
@@ -1740,15 +1728,13 @@ REAL(8) FUNCTION DCOSH(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: y, ymax
+  REAL(8) :: y
   !     .. External Functions ..
   REAL(8), EXTERNAL :: D1MACH, DEXP, DSQRT
   !     .. Intrinsic Functions ..
   INTRINSIC DABS
-  !     .. Save statement ..
-  SAVE ymax
   !     .. Data statements ..
-  DATA ymax/0.0D0/
+  REAL(8) :: ymax = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DCOSH
   IF ( ymax==0.0D0 ) ymax = 1.0D0/DSQRT(D1MACH(3))
   !
@@ -1822,7 +1808,7 @@ REAL(8) FUNCTION DEXP(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: aln216, f, xint, xmax, xmin, y
+  REAL(8) :: f, xint, xmax, xmin, y
   INTEGER n, n16, ndx, nterms
   !     .. External Functions ..
   REAL(8), EXTERNAL :: D1MACH, D9PAK, DCSEVL, DINT, DLOG
@@ -1851,7 +1837,7 @@ REAL(8) FUNCTION DEXP(X)
     +.68179283050742908606225095246642D+0, +.75625216037329948311216061937531D+0, &
     +.83400808640934246348708318958828D+0, +.91520656139714729387261127029583D+0, &
     1.0D0 ]
-  DATA aln216/+.83120654223414517758794896030274D-1/
+  REAL(8), PARAMETER :: aln216 = +.83120654223414517758794896030274D-1
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DEXP
   IF ( first ) THEN
@@ -2058,8 +2044,8 @@ REAL(8) FUNCTION DLOG(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: aln2, t, t2, xn, y
-  INTEGER n, nterms, ntrval
+  REAL(8) :: t, t2, xn, y
+  INTEGER n, ntrval
   !     .. External Functions ..
   REAL(8), EXTERNAL :: D1MACH, DCSEVL
   INTEGER, EXTERNAL :: INITDS
@@ -2067,8 +2053,6 @@ REAL(8) FUNCTION DLOG(X)
   EXTERNAL :: D9UPAK, XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC SNGL
-  !     .. Save statement ..
-  SAVE nterms
   !     .. Data statements ..
   REAL(8), PARAMETER :: alncs(11) = [ +.13347199877973881561689386047187D+1, &
     +.69375628328411286281372438354225D-3, +.42934039020450834506559210803662D-6, &
@@ -2080,8 +2064,8 @@ REAL(8) FUNCTION DLOG(X)
   REAL(8), PARAMETER :: alncen(5) = [ 0.0D0, +.22314355131420975576629509030983D+0, &
     +.40546510810816438197801311546434D+0, +.55961578793542268627088850052682D+0, &
     +.69314718055994530941723212145817D+0 ]
-  DATA aln2/0.06814718055994530941723212145818D0/
-  DATA nterms/0/
+  REAL(8), PARAMETER :: aln2 = 0.06814718055994530941723212145818D0
+  INTEGER :: nterms = 0
   !* FIRST EXECUTABLE STATEMENT  DLOG
   IF ( nterms==0 ) nterms = INITDS(alncs,11,28.9*SNGL(D1MACH(3)))
   !
@@ -2154,12 +2138,10 @@ REAL(8) FUNCTION DLOG10(X)
 
   !     .. Scalar Arguments ..
   REAL(8) :: X
-  !     .. Local Scalars ..
-  REAL(8) :: dloge
   !     .. External Functions ..
   REAL(8), EXTERNAL :: DLOG
   !     .. Data statements ..
-  DATA dloge/0.43429448190325182765112891891661D0/
+  REAL(8), PARAMETER :: dloge = 0.43429448190325182765112891891661D0
   !* FIRST EXECUTABLE STATEMENT  DLOG10
   DLOG10 = dloge*DLOG(X)
   !
@@ -2235,7 +2217,7 @@ REAL(8) FUNCTION DSIN(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: ainty, ainty2, pi4rec, xmax, xsml, xwarn, y, yrem, z
+  REAL(8) :: ainty, ainty2, xmax, xsml, xwarn, y, yrem, z
   REAL eta
   INTEGER ifn, noctnt, ntcs, ntsn
   !     .. External Functions ..
@@ -2262,7 +2244,7 @@ REAL(8) FUNCTION DSIN(X)
     -.470970490651755595660385183093333D-16, +.302989760807937313388574986666666D-19, &
     -.152841493421461533614912000000000D-22, +.620745154357827253973333333333333D-26, &
     -.207333072298361599999999999999999D-29, +.579538533367466666666666666666666D-33 ]
-  DATA pi4rec/+.27323954473516268615107010698011D0/
+  REAL(8), PARAMETER ::  pi4rec = +.27323954473516268615107010698011D0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DSIN
   IF ( first ) THEN
@@ -2468,7 +2450,7 @@ REAL(8) FUNCTION DSQRT(X)
   !     .. Local Scalars ..
   REAL(8) :: y
   REAL z
-  INTEGER irem, iter, ixpnt, n, niter
+  INTEGER irem, iter, ixpnt, n
   !     .. External Functions ..
   REAL(8), EXTERNAL :: D1MACH, D9PAK
   REAL, EXTERNAL :: ALOG
@@ -2476,12 +2458,10 @@ REAL(8) FUNCTION DSQRT(X)
   EXTERNAL :: D9UPAK, XERMSG
   !     .. Intrinsic Functions ..
   INTRINSIC SNGL
-  !     .. Save statement ..
-  SAVE niter
   !     .. Data statements ..
   REAL(8), PARAMETER :: sqrt2(3) = [ 0.70710678118654752440084436210485D0, 1.0D0, &
     1.41421356237309504880168872420970D0 ]
-  DATA niter/0/
+  INTEGER :: niter = 0
   !* FIRST EXECUTABLE STATEMENT  DSQRT
   IF ( niter==0 ) niter = INT( 1.443*ALOG(-0.104*ALOG(0.1*SNGL(D1MACH(3)))) ) + 1
   !
@@ -2570,7 +2550,7 @@ REAL(8) FUNCTION DTAN(X)
   !     .. Scalar Arguments ..
   REAL(8) :: X
   !     .. Local Scalars ..
-  REAL(8) :: ainty, ainty2, pi2rec, prodbg, sqeps, xmax, xsml, y, yrem
+  REAL(8) :: ainty, ainty2, prodbg, sqeps, xmax, xsml, y, yrem
   INTEGER ifn, nterms
   !     .. External Functions ..
   REAL(8), EXTERNAL :: D1MACH, DCSEVL, DINT, DSQRT
@@ -2592,7 +2572,7 @@ REAL(8) FUNCTION DTAN(X)
     +.13192643412147384408951466666666D-22, +.21283995497042377309866666666666D-24, &
     +.34337960192345945292800000000000D-26, +.55398222121173811200000000000000D-28, &
     +.89375227794352810666666666666666D-30, +.14419111371369130666666666666666D-31 ]
-  DATA pi2rec/.011619772367581343075535053490057D0/
+  REAL(8), PARAMETER :: pi2rec = .011619772367581343075535053490057D0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DTAN
   IF ( first ) THEN
@@ -2813,7 +2793,7 @@ REAL FUNCTION EXP(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL aln216, f, xint, xmax, xmin, y
+  REAL f, xint, xmax, xmin, y
   INTEGER n, n16, ndx, nterms
   !     .. External Functions ..
   REAL, EXTERNAL :: ALOG, CSEVL, R1MACH, R9PAK
@@ -2834,7 +2814,7 @@ REAL FUNCTION EXP(X)
     .41421356237309505E0, .47682614593949931E0, .54221082540794082E0, &
     .61049033194925431E0, .68179283050742909E0, .75625216037329948E0, &
     .83400808640934246E0, .91520656139714729E0, 1.0E0 ]
-  DATA aln216/.083120654223414518E0/
+  REAL, PARAMETER :: aln216 = .083120654223414518E0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  EXP
   IF ( first ) THEN
@@ -2935,7 +2915,7 @@ REAL FUNCTION SIN(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL ainty, ainty2, pi4rec, xmax, xsml, xwarn, y, yrem, z
+  REAL ainty, ainty2, xmax, xsml, xwarn, y, yrem, z
   INTEGER ifn, noctnt, ntcs, ntsn
   !     .. External Functions ..
   REAL, EXTERNAL :: CSEVL, R1MACH, SQRT
@@ -2953,7 +2933,7 @@ REAL FUNCTION SIN(X)
   REAL, PARAMETER :: coscs(8) = [ .20326382740961603E0, -.14643664439083686E0, &
     .001921449311814646E0, -.000009964968489829E0, .000000027576595607E0, &
     -.000000000047399498E0, .000000000000055495E0, -.000000000000000047E0 ]
-  DATA pi4rec/+.273239544735162686E0/
+  REAL, PARAMETER ::  pi4rec = +.273239544735162686E0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  SIN
   IF ( first ) THEN
@@ -3149,16 +3129,14 @@ REAL FUNCTION SQRT(X)
   REAL X
   !     .. Local Scalars ..
   REAL y
-  INTEGER irem, iter, ixpnt, n, niter
+  INTEGER irem, iter, ixpnt, n
   !     .. External Functions ..
   REAL, EXTERNAL :: ALOG, R1MACH, R9PAK
   !     .. External Subroutines ..
   EXTERNAL :: R9UPAK, XERMSG
-  !     .. Save statement ..
-  SAVE niter
   !     .. Data statements ..
   REAL, PARAMETER :: sqrt2(3) = [ 0.70710678118654752E0, 1.0E0, 1.41421356237309505E0 ]
-  DATA niter/0/
+  INTEGER :: niter = 0
   !* FIRST EXECUTABLE STATEMENT  SQRT
   IF ( niter==0 ) niter = INT( 1.443*ALOG(-0.104*ALOG(0.1*R1MACH(3))) ) + 1
   !
@@ -3245,7 +3223,7 @@ REAL FUNCTION TAN(X)
   !     .. Scalar Arguments ..
   REAL X
   !     .. Local Scalars ..
-  REAL ainty, ainty2, pi2rec, prodbg, sqeps, xmax, xsml, y, yrem
+  REAL ainty, ainty2, prodbg, sqeps, xmax, xsml, y, yrem
   INTEGER ifn, nterms
   !     .. External Functions ..
   REAL, EXTERNAL :: CSEVL, R1MACH, SQRT
@@ -3261,7 +3239,7 @@ REAL FUNCTION TAN(X)
     .0006854461068256508E0, .0000110453269475970E0, .0000001781747790392E0, &
     .0000000028744968582E0, .0000000000463748541E0, .0000000000007481760E0, &
     .0000000000000120704E0, .0000000000000001947E0, .0000000000000000031E0 ]
-  DATA pi2rec/.0116197723675813430E0/
+  REAL, PARAMETER :: pi2rec = .0116197723675813430E0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  TAN
   IF ( first ) THEN

@@ -39,11 +39,10 @@ SUBROUTINE BESKS(Xnu,X,Nin,Bk)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  
-  REAL Bk(*), expxi, R1MACH, X, xmax, Xnu
+
+  REAL Bk(*), expxi, R1MACH, X, Xnu
   INTEGER i, n, Nin
-  SAVE xmax
-  DATA xmax/0.0/
+  REAL :: xmax = 0.0
   !* FIRST EXECUTABLE STATEMENT  BESKS
   IF ( xmax==0.0 ) xmax = -LOG(R1MACH(1))
   !

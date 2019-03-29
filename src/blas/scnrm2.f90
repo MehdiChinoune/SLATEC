@@ -83,16 +83,13 @@ REAL FUNCTION SCNRM2(N,Cx,Incx)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  INTEGER i, Incx, N, nn
+
+  INTEGER i, Incx, N, nn, next
   LOGICAL imag, scale
-  INTEGER next
-  REAL cutlo, cuthi, hitest, sum, xmax, absx, zero, one
+  REAL hitest, sum, xmax, absx
   COMPLEX Cx(*)
-  SAVE cutlo, cuthi, zero, one
-  DATA zero, one/0.0E0, 1.0E0/
-  !
-  DATA cutlo, cuthi/4.441E-16, 1.304E19/
+  REAL, PARAMETER :: zero = 0.0E0, one = 1.0E0
+  REAL, PARAMETER :: cutlo = 4.441E-16, cuthi= 1.304E19
   !* FIRST EXECUTABLE STATEMENT  SCNRM2
   IF ( N>0 ) THEN
     !

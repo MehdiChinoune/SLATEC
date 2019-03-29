@@ -91,7 +91,7 @@ SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !   891006  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  
+
   !  Programming notes:
   !
   !     To produce a single precision version, simply:
@@ -107,9 +107,8 @@ SUBROUTINE DCHFEV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,Next,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i
-  REAL(8) :: c2, c3, del1, del2, delta, h, x, xmi, xma, zero
-  SAVE zero
-  DATA zero/0.D0/
+  REAL(8) :: c2, c3, del1, del2, delta, h, x, xmi, xma
+  REAL(8), PARAMETER :: zero = 0.D0
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

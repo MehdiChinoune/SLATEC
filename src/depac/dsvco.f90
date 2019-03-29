@@ -27,7 +27,7 @@ SUBROUTINE DSVCO(Rsav,Isav)
   !   820301  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   !-----------------------------------------------------------------------
   ! THIS ROUTINE STORES IN RSAV AND ISAV THE CONTENTS OF COMMON BLOCK
   ! DDEBD1 , WHICH IS USED INTERNALLY IN THE DDEBDF PACKAGE.
@@ -35,11 +35,10 @@ SUBROUTINE DSVCO(Rsav,Isav)
   ! RSAV = DOUBLE PRECISION ARRAY OF LENGTH 218 OR MORE.
   ! ISAV = INTEGER ARRAY OF LENGTH 33 OR MORE.
   !-----------------------------------------------------------------------
-  INTEGER i, ILS, Isav(*), lenils, lenrls
+  INTEGER i, ILS, Isav(*)
   REAL(8) :: RLS, Rsav(*)
-  SAVE lenrls, lenils
   COMMON /DDEBD1/ RLS(218), ILS(33)
-  DATA lenrls/218/, lenils/33/
+  INTEGER, PARAMETER :: lenrls = 218, lenils = 33
   !
   !* FIRST EXECUTABLE STATEMENT  DSVCO
   DO i = 1, lenrls

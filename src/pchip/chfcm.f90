@@ -74,7 +74,7 @@ INTEGER FUNCTION CHFCM(D1,D2,Delta)
   !   890407  Converted to new SLATEC format.
   !   890407  Modified DESCRIPTION to LDOC format.
   !   891214  Moved SAVE statements.  (WRB)
-  
+
   REAL R1MACH
   !  Fortran intrinsics used:  SIGN.
   !  Other routines used:  R1MACH.
@@ -91,11 +91,9 @@ INTEGER FUNCTION CHFCM(D1,D2,Delta)
   REAL D1, D2, Delta
   !  DECLARE LOCAL VARIABLES
   INTEGER ismon, itrue
-  REAL a, b, eps, four, one, phi, ten, three, two, zero
-  SAVE zero, one, two, three, four
-  SAVE ten
+  REAL a, b, eps, phi
   !  INITIALIZE.
-  DATA zero/0./, one/1.0/, two/2./, three/3./, four/4./, ten/10./
+  REAL, PARAMETER :: zero = 0., one = 1.0, two = 2., three = 3., four = 4., ten = 10.
   !  MACHINE-DEPENDENT PARAMETER -- SHOULD BE ABOUT 10*UROUND.
   !* FIRST EXECUTABLE STATEMENT  CHFCM
   eps = ten*R1MACH(4)

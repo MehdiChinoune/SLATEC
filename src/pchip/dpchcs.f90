@@ -90,7 +90,7 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
   !   930503  Improved purpose.  (FNF)
-  
+
   !
   !  Programming notes:
   !     1. The function  DPCHST(ARG1,ARG2)  is assumed to return zero if
@@ -106,14 +106,13 @@ SUBROUTINE DPCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, indx, k, nless1
-  REAL(8) :: del(3), dext, dfloc, dfmx, fact, fudge, one, slmax, wtave(2), zero
-  SAVE zero, one, fudge
+  REAL(8) :: del(3), dext, dfloc, dfmx, fact, slmax, wtave(2)
   REAL(8) :: DPCHST
   !
   !  INITIALIZE.
   !
-  DATA zero/0.D0/, one/1.D0/
-  DATA fudge/4.D0/
+  REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
+  REAL(8), PARAMETER :: fudge = 4.D0
   !* FIRST EXECUTABLE STATEMENT  DPCHCS
   Ierr = 0
   nless1 = N - 1

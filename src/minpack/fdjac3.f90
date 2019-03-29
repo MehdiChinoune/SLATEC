@@ -85,15 +85,14 @@ SUBROUTINE FDJAC3(FCN,M,N,X,Fvec,Fjac,Ldfjac,Iflag,Epsfcn,Wa)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER M, N, Ldfjac, Iflag
   REAL Epsfcn
   REAL X(*), Fvec(*), Fjac(Ldfjac,*), Wa(*)
   INTEGER i, j
-  REAL eps, epsmch, h, temp, zero
+  REAL eps, epsmch, h, temp
   REAL R1MACH
-  SAVE zero
-  DATA zero/0.0E0/
+  REAL, PARAMETER :: zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  FDJAC3
   epsmch = R1MACH(4)
   !

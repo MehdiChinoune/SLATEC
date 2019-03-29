@@ -67,11 +67,10 @@ SUBROUTINE SROTM(N,Sx,Incx,Sy,Incy,Sparam)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Incx, Incy, kx, ky, N, nsteps
-  REAL sflag, sh11, sh12, sh21, sh22, Sparam(5), Sx(*), Sy(*), two, w, z, zero
-  SAVE zero, two
-  DATA zero, two/0.0E0, 2.0E0/
+  REAL sflag, sh11, sh12, sh21, sh22, Sparam(5), Sx(*), Sy(*), w, z
+  REAL, PARAMETER :: zero = 0.0E0, two = 2.0E0
   !* FIRST EXECUTABLE STATEMENT  SROTM
   sflag = Sparam(1)
   IF ( N>0.AND.(sflag+two/=zero) ) THEN

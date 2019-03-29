@@ -32,16 +32,15 @@ SUBROUTINE CUNI2(Z,Fnu,Kode,N,Y,Nz,Nlast,Fnul,Tol,Elim,Alim)
   !   830501  DATE WRITTEN
   !   910415  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER i, iflag, in, inu, j, k, Kode, N, nai, nd, ndai, &
-    Nlast, nn, nuf, nw, Nz, idum
+  INTEGER i, iflag, in, inu, j, k, Kode, N, nai, nd, ndai, Nlast, nn, nuf, nw, Nz, idum
   COMPLEX ai, arg, asum, bsum, cfn, cid, crsc, cscl, csr(3), css(3), cy(2), c1, &
     c2, dai, phi, rz, s1, s2, Y(N), Z, zb, zeta1, zeta2, zn, zar
-  REAL aarg, aic, Alim, ang, aphi, ascle, ay, bry(3), car, c2i, c2m, &
-    c2r, Elim, fn, Fnu, Fnul, hpi, rs1, sar, Tol, yy, R1MACH
+  REAL aarg, Alim, ang, aphi, ascle, ay, bry(3), car, c2i, c2m, c2r, Elim, fn, &
+    Fnu, Fnul, rs1, sar, Tol, yy, R1MACH
   COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0), ci= (0.0E0,1.0E0)
   COMPLEX, PARAMETER :: cip(4) = [ (1.0E0,0.0E0), (0.0E0,1.0E0), &
     (-1.0E0,0.0E0), (0.0E0,-1.0E0) ]
-  DATA hpi, aic/1.57079632679489662E+00, 1.265512123484645396E+00/
+  REAL, PARAMETER :: hpi = 1.57079632679489662E+00, aic = 1.265512123484645396E+00
   !* FIRST EXECUTABLE STATEMENT  CUNI2
   Nz = 0
   nd = N

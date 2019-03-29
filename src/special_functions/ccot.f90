@@ -32,11 +32,10 @@ COMPLEX FUNCTION CCOT(Z)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
-  
-  REAL den, R1MACH, sn2x, sqeps, x2, y2
+
+  REAL den, R1MACH, sn2x, x2, y2
   COMPLEX Z
-  SAVE sqeps
-  DATA sqeps/0./
+  REAL :: sqeps = 0.
   !* FIRST EXECUTABLE STATEMENT  CCOT
   IF ( sqeps==0. ) sqeps = SQRT(R1MACH(4))
   !

@@ -40,7 +40,7 @@ REAL FUNCTION PCHST(Arg1,Arg2)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR and DATE WRITTEN sections in prologue.  (WRB)
   !   930503  Improved purpose.  (FNF)
-  
+
   !
   !**End
   !
@@ -50,9 +50,7 @@ REAL FUNCTION PCHST(Arg1,Arg2)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL one, zero
-  SAVE zero, one
-  DATA zero/0./, one/1./
+  REAL, PARAMETER :: zero = 0., one = 1.
   !
   !  PERFORM THE TEST.
   !

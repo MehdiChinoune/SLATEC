@@ -102,13 +102,12 @@ REAL FUNCTION RAND(R)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
-  INTEGER ia0, ia1, ia1ma0, ic, ix0, ix1, iy0, iy1
+
+  INTEGER iy0, iy1
   REAL R
-  SAVE ia1, ia0, ia1ma0, ic, ix1, ix0
-  DATA ia1, ia0, ia1ma0/1536, 1029, 507/
-  DATA ic/1731/
-  DATA ix1, ix0/0, 0/
+  INTEGER, PARAMETER :: ia1 = 1536, ia0 = 1029, ia1ma0 = 507
+  INTEGER, PARAMETER :: ic = 1731
+  INTEGER :: ix1 = 0, ix0 = 0
   !* FIRST EXECUTABLE STATEMENT  RAND
   IF ( R>=0. ) THEN
     IF ( R>0. ) THEN

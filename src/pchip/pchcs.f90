@@ -88,7 +88,7 @@ SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
   !   930503  Improved purpose.  (FNF)
-  
+
   !
   !  Programming notes:
   !     1. The function  PCHST(ARG1,ARG2)  is assumed to return zero if
@@ -104,14 +104,13 @@ SUBROUTINE PCHCS(Switch,N,H,Slope,D,Incfd,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, indx, k, nless1
-  REAL del(3), dext, dfloc, dfmx, fact, fudge, one, slmax, wtave(2), zero
-  SAVE zero, one, fudge
+  REAL del(3), dext, dfloc, dfmx, fact, slmax, wtave(2)
   REAL PCHST
   !
   !  INITIALIZE.
   !
-  DATA zero/0./, one/1./
-  DATA fudge/4./
+  REAL, PARAMETER :: zero = 0., one = 1.
+  REAL, PARAMETER :: fudge = 4.
   !* FIRST EXECUTABLE STATEMENT  PCHCS
   Ierr = 0
   nless1 = N - 1

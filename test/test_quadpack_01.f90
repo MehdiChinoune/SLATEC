@@ -23,17 +23,17 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    
+
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
-    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, exact1, &
-      exact2, exact3, pi, result, uflow, work(400)
+    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, &
+      result, uflow, work(400)
     INTEGER ier, ip, Ipass, iwork(100), key, Kprint, last, lenw, limit, neval
-    DATA pi/0.31415926535897932E+01/
-    DATA exact1/0.1154700538379252E+01/
-    DATA exact2/0.11780972450996172E+00/
-    DATA exact3/0.1855802E+02/
+    REAL, PARAMETER :: pi = 0.31415926535897932E+01
+    REAL, PARAMETER :: exact1 = 0.1154700538379252E+01
+    REAL, PARAMETER :: exact2 = 0.11780972450996172E+00
+    REAL, PARAMETER :: exact3 = 0.1855802E+02
     !* FIRST EXECUTABLE STATEMENT  CQAG
     IF ( Kprint>=2 ) WRITE (Lun,'(''1QAG QUICK CHECK''/)')
     !
@@ -138,17 +138,17 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    
+
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4), inf
-    REAL abserr, bound, R1MACH, epmach, epsabs, epsrel, error, exact0, &
-      exact1, exact2, exact3, exact4, oflow, result, uflow, work(800)
+    REAL abserr, bound, R1MACH, epmach, epsabs, epsrel, error, &
+      oflow, result, uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, Lun, neval
-    DATA exact0/2.0E+00/, exact1/0.115470066904E1/
-    DATA exact2/0.909864525656E-02/
-    DATA exact3/0.31415926535897932E+01/
-    DATA exact4/0.19984914554328673E+04/
+    REAL, PARAMETER :: exact0 = 2.0E+00, exact1 = 0.115470066904E1
+    REAL, PARAMETER :: exact2 = 0.909864525656E-02
+    REAL, PARAMETER :: exact3 = 0.31415926535897932E+01
+    REAL, PARAMETER :: exact4 = 0.19984914554328673E+04
     !* FIRST EXECUTABLE STATEMENT  CQAGI
     IF ( Kprint>=2 ) WRITE (Lun,'(''1QAGI QUICK CHECK''/)')
     !
@@ -270,19 +270,19 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    
+
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(4)
-    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, exact1, &
-      exact2, exact3, oflow, points(5), p1, p2, result, uflow, work(405)
+    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, &
+      oflow, points(5), result, uflow, work(405)
     INTEGER ier, ip, Ipass, iwork(205), Kprint, last, leniw, lenw, limit, &
       Lun, neval, npts2
-    DATA exact1/0.4285277667368085E+01/
-    DATA exact2/0.909864525656E-2/
-    DATA exact3/0.31415926535897932E+01/
-    DATA p1/0.1428571428571428E+00/
-    DATA p2/0.6666666666666667E+00/
+    REAL, PARAMETER :: exact1 = 0.4285277667368085E+01
+    REAL, PARAMETER :: exact2 = 0.909864525656E-2
+    REAL, PARAMETER :: exact3 = 0.31415926535897932E+01
+    REAL, PARAMETER :: p1 = 0.1428571428571428E+00
+    REAL, PARAMETER :: p2 = 0.6666666666666667E+00
     !* FIRST EXECUTABLE STATEMENT  CQAGP
     IF ( Kprint>=2 ) WRITE (Lun,'(''1QAGP QUICK CHECK''/)')
     !
@@ -417,18 +417,18 @@ CONTAINS
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   911114  Modified test on IER=4 to allow IER=5.  (WRB)
-    
+
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(5), Lun
-    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, exact0, &
-      exact1, exact2, exact3, exact4, oflow, result, uflow, work(800)
+    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, &
+      oflow, result, uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
-    DATA exact0/0.2E+01/
-    DATA exact1/0.115470066904E+01/
-    DATA exact2/0.909864525656E-02/
-    DATA exact3/0.31415926535897932E+01/
-    DATA exact4/0.19984914554328673E+04/
+    REAL, PARAMETER :: exact0 = 0.2E+01
+    REAL, PARAMETER :: exact1 = 0.115470066904E+01
+    REAL, PARAMETER :: exact2 = 0.909864525656E-02
+    REAL, PARAMETER :: exact3 = 0.31415926535897932E+01
+    REAL, PARAMETER :: exact4 = 0.19984914554328673E+04
     !* FIRST EXECUTABLE STATEMENT  CQAGS
     IF ( Kprint>=2 ) WRITE (Lun,'(''1QAGS QUICK CHECK''/)')
     !
@@ -557,15 +557,15 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    
+
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
-    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, exact0, &
-      exact1, c, result, uflow, work(800)
+    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, &
+      c, result, uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval
-    DATA exact0/-0.6284617285065624E+03/
-    DATA exact1/0.1855802E+01/
+    REAL, PARAMETER :: exact0 = -0.6284617285065624E+03
+    REAL, PARAMETER :: exact1 = 0.1855802E+01
     !* FIRST EXECUTABLE STATEMENT  CQAWC
     IF ( Kprint>=2 ) WRITE (Lun,'(''1QAWC QUICK CHECK''/)')
     !
@@ -662,15 +662,14 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    
+
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(3), integr, iwork(450), leniw, Lun, maxp1
-    REAL a, abserr, R1MACH, epsabs, epmach, error, exact0, &
-      omega, pi, result, uflow, work(1425)
+    REAL a, abserr, R1MACH, epsabs, epmach, error, omega, result, uflow, work(1425)
     INTEGER ier, ip, Ipass, Kprint, lenw, limit, limlst, lst, neval
-    DATA exact0/0.1422552162575912E+01/
-    DATA pi/0.31415926535897932E+01/
+    REAL, PARAMETER :: exact0 = 0.1422552162575912E+01
+    REAL, PARAMETER :: pi = 0.31415926535897932E+01
     !* FIRST EXECUTABLE STATEMENT  CQAWF
     IF ( Kprint>=2 ) WRITE (Lun,'(''1QAWF QUICK CHECK''/)')
     !
@@ -779,16 +778,16 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    
+
     !
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER leniw
-    REAL a, abserr, b, epmach, epsabs, epsrel, error, exact0, &
-      oflow, omega, pi, result, R1MACH, uflow, work(1325)
+    REAL a, abserr, b, epmach, epsabs, epsrel, error, &
+      oflow, omega, result, R1MACH, uflow, work(1325)
     INTEGER ier, ierv(4), integr, ip, Ipass, iwork(400), Kprint, last, lenw, &
       Lun, maxp1, neval
-    DATA exact0/0.1042872789432789E+05/
-    DATA pi/0.31415926535897932E+01/
+    REAL, PARAMETER :: exact0 = 0.1042872789432789E+05
+    REAL, PARAMETER :: pi = 0.31415926535897932E+01
     !* FIRST EXECUTABLE STATEMENT  CQAWO
     IF ( Kprint>=2 ) WRITE (Lun,'(''1QAWO QUICK CHECK''/)')
     !
@@ -909,15 +908,15 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    
+
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER ierv(2), Lun
-    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, exact0, &
-      exact1, alfa, beta, result, uflow, work(800)
+    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, &
+      alfa, beta, result, uflow, work(800)
     INTEGER ier, ip, Ipass, iwork(200), Kprint, last, lenw, limit, neval, integr
-    DATA exact0/0.5350190569223644E+00/
-    DATA exact1/0.1998491554328673E+04/
+    REAL, PARAMETER :: exact0 = 0.5350190569223644E+00
+    REAL, PARAMETER :: exact1 = 0.1998491554328673E+04
     !* FIRST EXECUTABLE STATEMENT  CQAWS
     IF ( Kprint>=2 ) WRITE (Lun,'(''1QAWS QUICK CHECK''/)')
     !
@@ -1016,15 +1015,14 @@ CONTAINS
     !   901205  Added PASS/FAIL message and changed the name of the first
     !           argument.  (RWC)
     !   910501  Added PURPOSE and TYPE records.  (WRB)
-    
+
 
     ! FOR FURTHER DOCUMENTATION SEE ROUTINE CQPDOC
     INTEGER Lun
-    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, exact1, error, &
-      exact2, result, uflow
+    REAL a, abserr, b, R1MACH, epmach, epsabs, epsrel, error, result, uflow
     INTEGER ier, ierv(1), ip, Ipass, Kprint, neval
-    DATA exact1/0.7281029132255818E+00/
-    DATA exact2/0.1E+02/
+    REAL, PARAMETER :: exact1 = 0.7281029132255818E+00
+    REAL, PARAMETER :: exact2 = 0.1E+02
     !* FIRST EXECUTABLE STATEMENT  CQNG
     IF ( Kprint>=2 ) WRITE (Lun,'(''1QNG QUICK CHECK''/)')
     !
@@ -1089,7 +1087,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F0C
     F0C = 1.E0/(X*X+1.E-4)
@@ -1110,7 +1108,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F0F
     F0F = 0.0
@@ -1132,7 +1130,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F0O
     F0O = (2.0E0*SIN(X))**14
@@ -1153,7 +1151,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F0S
     F0S = 0.0
@@ -1175,7 +1173,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F0WS
     F0WS = SIN(10.0*X)
@@ -1196,7 +1194,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F1C
     F1C = 0.0
@@ -1218,7 +1216,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X, x1, y
     !* FIRST EXECUTABLE STATEMENT  F1F
     x1 = X + 1.0
@@ -1242,9 +1240,9 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
-    REAL pi, X
-    DATA pi/3.1415926535897932/
+
+    REAL X
+    REAL, PARAMETER :: pi = 3.1415926535897932
     !* FIRST EXECUTABLE STATEMENT  F1G
     F1G = 2.0/(2.0+SIN(10.0*pi*X))
   END FUNCTION F1G
@@ -1264,7 +1262,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F1N
     F1N = 1.0E0/(X**4+X**2+1.0E0)
@@ -1285,7 +1283,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F1O
     F1O = 1.0
@@ -1307,11 +1305,11 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
-    REAL alfa1, alfa2, p1, p2, X, d1, d2
+
+    REAL alfa1, alfa2, X, d1, d2
     !  P1 = 1/7, P2 = 2/3
-    DATA p1/0.1428571428571428E+00/
-    DATA p2/0.6666666666666667E+00/
+    REAL, PARAMETER :: p1 = 0.1428571428571428E+00
+    REAL, PARAMETER :: p2 = 0.6666666666666667E+00
     !* FIRST EXECUTABLE STATEMENT  F1P
     alfa1 = -0.25E0
     alfa2 = -0.5E0
@@ -1336,7 +1334,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F1S
     F1S = 0.2E+01/(0.2E+01+SIN(0.314159E+02*X))
@@ -1357,7 +1355,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F1WS
     F1WS = ABS(X-0.33E+00)**(-0.999E+00)
@@ -1378,7 +1376,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F2G
     F2G = X*SIN(0.3E+02*X)*COS(0.5E+02*X)
@@ -1399,7 +1397,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F2N
     F2N = X**(-0.9E+00)
@@ -1420,7 +1418,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F2O
     F2O = 0.0E+00
@@ -1442,7 +1440,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F2P
     F2P = SIN(0.314159E+03*X)/(0.314159E+01*X)
@@ -1463,7 +1461,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F2S
     F2S = 100.0
@@ -1485,7 +1483,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F3G
     F3G = ABS(X-0.33E+00)**(-0.9E+00)
@@ -1506,7 +1504,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F3P
     F3P = 1.0
@@ -1528,7 +1526,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F3S
     F3S = 0.1E+01
@@ -1550,7 +1548,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F4P
     F4P = 0.0
@@ -1572,7 +1570,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F4S
     IF ( X==.33E+00 ) THEN
@@ -1599,7 +1597,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL X
     !* FIRST EXECUTABLE STATEMENT  F5S
     F5S = 0.0
@@ -1621,7 +1619,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T0
     a = 0.0E+00
@@ -1646,7 +1644,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T1
     a = 0.0E+00
@@ -1671,7 +1669,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T2
     a = 0.1E+00
@@ -1696,7 +1694,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T3
     a = 0.0E+00
@@ -1721,7 +1719,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T4
     a = 0.0E+00
@@ -1746,7 +1744,7 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
+
     REAL a, b, X, x1, y
     !* FIRST EXECUTABLE STATEMENT  T5
     a = 0.0E+00
@@ -1785,7 +1783,7 @@ CONTAINS
     !   890831  Modified array declarations.  (WRB)
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   910627  Code completely rewritten.  (WRB)
-    
+
     !     .. Scalar Arguments ..
     REAL Abserr, Exact, Result
     INTEGER Ip, Kprint, Lierv, Lun, Neval, Num1
@@ -1895,7 +1893,7 @@ PROGRAM TEST39
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST39

@@ -51,10 +51,9 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
   COMPLEX Arg, Asum, Bsum, cfnu, cr(14), dr(14), p(30), Phi, &
     przth, ptfn, rfn13, rtzta, rzth, suma, sumb, tfn, t2, &
     up(14), w, w2, Z, za, zb, zc, zeta, Zeta1, Zeta2, zth
-  REAL ang, ap(30), atol, aw2, azth, btol, &
-    ex1, ex2, Fnu, fn13, fn23, hpi, pi, pp, rfnu, rfnu2, &
-    thpi, Tol, wi, wr, zci, zcr, zetai, zetar, zthi, zthr, &
-    asumr, asumi, bsumr, bsumi, test, tstr, tsti, ac, R1MACH
+  REAL ang, ap(30), atol, aw2, azth, btol, Fnu, fn13, fn23, pp, rfnu, rfnu2, Tol, &
+    wi, wr, zci, zcr, zetai, zetar, zthi, zthr, asumr, asumi, bsumr, bsumi, test, &
+    tstr, tsti, ac, R1MACH
   INTEGER ias, ibs, Ipmtr, is, j, jr, ju, k, kmax, kp1, ks, l, &
     lr, lrp1, l1, l2, m
   REAL, PARAMETER :: ar(14) = [ 1.00000000000000000E+00, 1.04166666666666667E-01, &
@@ -246,9 +245,9 @@ SUBROUTINE CUNHJ(Z,Fnu,Ipmtr,Tol,Phi,Arg,Zeta1,Zeta2,Asum,Bsum)
     1.50729501494095594E-02, 1.44193250839954639E-02, 1.38184805735341786E-02, &
     1.32643378994276568E-02, 1.27517121970498651E-02, 1.22761545318762767E-02, &
     1.18338262398482403E-02 ]
-  DATA ex1, ex2, hpi, pi, thpi/3.33333333333333333E-01, &
-    6.66666666666666667E-01, 1.57079632679489662E+00, 3.14159265358979324E+00, &
-    4.71238898038468986E+00/
+  REAL, PARAMETER :: ex1 = 3.33333333333333333E-01, ex2 = 6.66666666666666667E-01, &
+    hpi = 1.57079632679489662E+00, pi = 3.14159265358979324E+00, &
+    thpi = 4.71238898038468986E+00
   COMPLEX, PARAMETER :: czero = (0.0E0,0.0E0), cone = (1.0E0,0.0E0)
   !* FIRST EXECUTABLE STATEMENT  CUNHJ
   rfnu = 1.0E0/Fnu

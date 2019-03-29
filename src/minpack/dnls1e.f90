@@ -501,16 +501,15 @@ SUBROUTINE DNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER M, N, Nprint, Info, Lwa, Iopt
   INTEGER index, Iw(*)
   REAL(8) :: Tol
   REAL(8) :: X(*), Fvec(*), Wa(*)
   EXTERNAL :: FCN
   INTEGER maxfev, mode, nfev, njev
-  REAL(8) :: factor, ftol, gtol, xtol, zero, epsfcn
-  SAVE factor, zero
-  DATA factor, zero/1.0D2, 0.0D0/
+  REAL(8) :: ftol, gtol, xtol, epsfcn
+  REAL(8), PARAMETER :: factor = 1.0D2, zero = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DNLS1E
   Info = 0
   !

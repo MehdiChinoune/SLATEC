@@ -174,9 +174,9 @@ CONTAINS
 
     INTEGER Ipass, Kprint
     INTEGER i, ierr, iflg, ix, kode, Lun, m, n, nm, nn, nz
-    REAL(8) :: er, euler, psi1(3), psi2(20), r1m4, s, tol, x
+    REAL(8) :: er, psi1(3), psi2(20), r1m4, s, tol, x
     REAL(8) :: D1MACH
-    DATA euler/0.5772156649015328606D0/
+    REAL(8), PARAMETER :: euler = 0.5772156649015328606D0
     !* FIRST EXECUTABLE STATEMENT  DQCPSI
     r1m4 = D1MACH(4)
     tol = 1000.0D0*MAX(r1m4,1.0D-18)

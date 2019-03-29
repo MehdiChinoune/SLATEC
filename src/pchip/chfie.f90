@@ -57,7 +57,7 @@ REAL FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !   910408  Updated AUTHOR section in prologue.  (WRB)
   !   930503  Corrected to set VALUE=0 when IERR.ne.0.  (FNF)
   !   930504  Eliminated IERR and changed name from CHFIV to CHFIE.  (FNF)
-  
+
   !
   !  Programming notes:
   !  1. There is no error return from this routine because zero is
@@ -70,14 +70,12 @@ REAL FUNCTION CHFIE(X1,X2,F1,F2,D1,D2,A,B)
   !
   !  DECLARE LOCAL VARIABLES.
   !
-  REAL dterm, four, fterm, h, half, phia1, phia2, phib1, phib2, &
-    psia1, psia2, psib1, psib2, six, ta1, ta2, tb1, tb2, three, &
-    two, ua1, ua2, ub1, ub2
-  SAVE half, two, three, four, six
+  REAL dterm, fterm, h, phia1, phia2, phib1, phib2, psia1, psia2, psib1, psib2, &
+    ta1, ta2, tb1, tb2, ua1, ua2, ub1, ub2
   !
   !  INITIALIZE.
   !
-  DATA half/0.5/, two/2./, three/3./, four/4./, six/6./
+  REAL, PARAMETER :: half = 0.5, two = 2., three = 3., four = 4., six = 6.
   !
   !  VALIDITY CHECK INPUT.
   !

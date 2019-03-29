@@ -47,8 +47,8 @@ SUBROUTINE XCON(X,Ix,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  
-  INTEGER i, i1, icase, Ierror, ispace, itemp, j, j1, j2
+
+  INTEGER i, i1, icase, Ierror, itemp, j, j1, j2
   REAL X
   INTEGER Ix
   !
@@ -69,7 +69,7 @@ SUBROUTINE XCON(X,Ix,Ierror)
   !
   REAL a, b, z
   !
-  DATA ispace/1/
+  INTEGER, PARAMETER :: ispace = 1
   !   THE PARAMETER ISPACE IS THE INCREMENT USED IN FORM-
   ! ING THE AUXILIARY INDEX OF THE DECIMAL EXTENDED-RANGE
   ! FORM. THE RETURNED VALUE OF IX WILL BE AN INTEGER MULT-

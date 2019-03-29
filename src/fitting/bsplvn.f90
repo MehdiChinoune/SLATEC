@@ -25,11 +25,11 @@ SUBROUTINE BSPLVN(T,Jhigh,Index,X,Ileft,Vnikx)
   !   780801  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
-  REAL deltam(20), deltap(20), T(*), vm, vmprev, Vnikx(*), X
-  INTEGER i, Ileft, imjp1, Index, ipj, j, Jhigh, jp1, jp1ml, l
-  SAVE j, deltam, deltap
-  DATA j/1/, (deltam(i),i=1,20), (deltap(i),i=1,20)/40*0./
+
+  REAL T(*), vm, vmprev, Vnikx(*), X
+  INTEGER i, Ileft, imjp1, Index, ipj, Jhigh, jp1, jp1ml, l
+  INTEGER :: j = 1
+  REAL :: deltam(20) = 0., deltap(20) = 0.
   !* FIRST EXECUTABLE STATEMENT  BSPLVN
   IF ( Index/=2 ) THEN
     j = 1

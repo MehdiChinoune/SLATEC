@@ -108,12 +108,11 @@ SUBROUTINE DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Xp,Fvecp,Mode,Err)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, j, Ldfjac, M, Mode, N
-  REAL(8) :: D1MACH, eps, epsf, epslog, epsmch, Err(*), factor, &
-    Fjac(Ldfjac,*), Fvec(*), Fvecp(*), one, temp, X(*), Xp(*), zero
-  SAVE factor, one, zero
-  DATA factor, one, zero/1.0D2, 1.0D0, 0.0D0/
+  REAL(8) :: D1MACH, eps, epsf, epslog, epsmch, Err(*), Fjac(Ldfjac,*), Fvec(*), &
+    Fvecp(*), temp, X(*), Xp(*)
+  REAL(8), PARAMETER :: factor = 1.0D2, one = 1.0D0, zero = 0.0D0
   !
   !     EPSMCH IS THE MACHINE PRECISION.
   !

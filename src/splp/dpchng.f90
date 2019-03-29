@@ -59,14 +59,13 @@ SUBROUTINE DPCHNG(Ii,Xval,Iplace,Sx,Ix,Ircx)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   910403  Updated AUTHOR and DESCRIPTION sections.  (WRB)
-  
+
   INTEGER i, iend, Ii, il, ilast, iopt, ipl, Iplace, Ircx, istart, &
     Ix(*), ixlast, j, jj, jstart, k, key, ll, lmx, lpg
   INTEGER n20055, nerr, np
   INTEGER IDLOC
-  REAL(8) :: Sx(*), Xval, zero, one, sxlast, sxval
-  SAVE zero, one
-  DATA zero, one/0.D0, 1.D0/
+  REAL(8) :: Sx(*), Xval, sxlast, sxval
+  REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
   !* FIRST EXECUTABLE STATEMENT  DPCHNG
   iopt = 1
   !

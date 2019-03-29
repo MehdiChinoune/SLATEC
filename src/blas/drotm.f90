@@ -67,11 +67,10 @@ SUBROUTINE DROTM(N,Dx,Incx,Dy,Incy,Dparam)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920310  Corrected definition of LX in DESCRIPTION.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER i, Incx, Incy, kx, ky, N, nsteps
-  REAL(8) :: dflag, dh12, dh22, Dx(*), two, z, dh11, dh21, Dparam(5), Dy(*), w, zero
-  SAVE zero, two
-  DATA zero, two/0.0D0, 2.0D0/
+  REAL(8) :: dflag, dh12, dh22, Dx(*), z, dh11, dh21, Dparam(5), Dy(*), w
+  REAL(8), PARAMETER :: zero = 0.0D0, two = 2.0D0
   !* FIRST EXECUTABLE STATEMENT  DROTM
   dflag = Dparam(1)
   IF ( N>0.AND.(dflag+two/=zero) ) THEN

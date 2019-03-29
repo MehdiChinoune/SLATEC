@@ -794,8 +794,7 @@ CONTAINS
     INTEGER Ipass, Kprint, Lun
     !     .. Local Scalars ..
     REAL diff, one, t, tol, xval, zero
-    INTEGER kontrl, i, idigit, ii, j, l, last, mode, n, nbkpt, &
-      nconst, ndata, ndeg, nerr, nord, nval
+    INTEGER kontrl, i, idigit, ii, j, l, mode, n, nconst, ndeg, nerr, nval
     LOGICAL fatal
     !     .. Local Arrays ..
     REAL coeff(9), v(51,5), w(529), work(12), xconst(11), yconst(11)
@@ -809,7 +808,7 @@ CONTAINS
     INTRINSIC ABS, REAL, SQRT
     !     .. Data statements ..
     !
-    DATA ndata/9/, nord/4/, nbkpt/13/, last/10/
+    INTEGER, PARAMETER :: ndata = 9, nord = 4, nbkpt = 13, last = 10
     REAL, PARAMETER :: xdata(9) = [ 0.15E0, 0.27E0, 0.33E0, 0.40E0, 0.43E0, 0.47E0, &
       0.53E0, 0.58E0, 0.63E0 ]
     REAL, PARAMETER :: ydata(9) = [ 0.025E0, 0.05E0, 0.13E0, 0.27E0, 0.37E0, 0.47E0, &
@@ -1112,12 +1111,12 @@ CONTAINS
     !     .. Array Arguments ..
     REAL Fvec(*), X(*)
     !     .. Local Scalars ..
-    REAL temp, two
+    REAL temp
     INTEGER i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
-    DATA two/2.0E0/
+    REAL, PARAMETER :: two = 2.0E0
     !* FIRST EXECUTABLE STATEMENT  FCN1
     IF ( Iflag/=1 ) RETURN
     DO i = 1, M
@@ -1161,12 +1160,12 @@ CONTAINS
     !     .. Array Arguments ..
     REAL Fjac(Ldfjac,*), Fvec(*), X(*)
     !     .. Local Scalars ..
-    REAL temp, two
+    REAL temp
     INTEGER i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
-    DATA two/2.0E0/
+    REAL, PARAMETER :: two = 2.0E0
     !* FIRST EXECUTABLE STATEMENT  FCN2
     IF ( Iflag==0 ) RETURN
     !
@@ -1228,12 +1227,12 @@ CONTAINS
     !     .. Array Arguments ..
     REAL Fjrow(*), Fvec(*), X(*)
     !     .. Local Scalars ..
-    REAL temp, two
+    REAL temp
     INTEGER i
     !     .. Intrinsic Functions ..
     INTRINSIC EXP
     !     .. Data statements ..
-    DATA two/2.0E0/
+    REAL, PARAMETER :: two = 2.0E0
     !* FIRST EXECUTABLE STATEMENT  FCN3
     IF ( Iflag==0 ) RETURN
     !

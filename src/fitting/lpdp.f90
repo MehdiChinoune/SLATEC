@@ -52,7 +52,7 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR section.  (WRB)
-  
+
   !
   !     SUBROUTINES CALLED
   !
@@ -68,10 +68,9 @@ SUBROUTINE LPDP(A,Mda,M,N1,N2,Prgopt,X,Wnorm,Mode,Ws,Is)
   INTEGER i, iw, ix, j, l, M, Mda, Mode, modew, n, N1, N2, np1
   REAL A(Mda,*), Prgopt(*), Ws(*), Wnorm, X(*)
   INTEGER Is(*)
-  REAL fac, one, rnorm, sc, ynorm, zero
+  REAL rnorm, sc, ynorm
   REAL SDOT, SNRM2
-  SAVE zero, one, fac
-  DATA zero, one/0.E0, 1.E0/, fac/0.1E0/
+  REAL, PARAMETER :: zero = 0.E0, one = 1.E0, fac = 0.1E0
   !* FIRST EXECUTABLE STATEMENT  LPDP
   n = N1 + N2
   Mode = 1

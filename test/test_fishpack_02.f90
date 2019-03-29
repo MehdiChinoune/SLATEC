@@ -97,7 +97,6 @@ CONTAINS
     !     .. Local Arrays ..
     COMPLEX cx(200), cy(200)
     REAL a(100), ah(100), b(100), bh(100), w(2000), x(200), xh(200), y(200)
-    INTEGER nd(10)
     !     .. External Functions ..
     REAL, EXTERNAL :: R1MACH
     !     .. External Subroutines ..
@@ -106,7 +105,7 @@ CONTAINS
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, CABS, CMPLX, COS, MAX, MOD, SIN, SQRT
     !     .. Data statements ..
-    DATA nd(1:7)/120, 54, 49, 32, 4, 3, 2/
+    INTEGER, PARAMETER :: nd(7) = [ 120, 54, 49, 32, 4, 3, 2 ]
     !* FIRST EXECUTABLE STATEMENT  FFTQX
     sqrt2 = SQRT(2.0)
     errmax = 2.0*SQRT(R1MACH(4))

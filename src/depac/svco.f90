@@ -27,7 +27,7 @@ SUBROUTINE SVCO(Rsav,Isav)
   !   800901  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   !
   !
   !-----------------------------------------------------------------------
@@ -37,11 +37,10 @@ SUBROUTINE SVCO(Rsav,Isav)
   ! RSAV = REAL ARRAY OF LENGTH 218 OR MORE.
   ! ISAV = INTEGER ARRAY OF LENGTH 33 OR MORE.
   !-----------------------------------------------------------------------
-  INTEGER Isav(*), i, ILS(33), lenils, lenrls
+  INTEGER Isav(*), i, ILS(33)
   REAL Rsav(*), RLS(218)
   COMMON /DEBDF1/ RLS, ILS
-  SAVE lenrls, lenils
-  DATA lenrls/218/, lenils/33/
+  INTEGER, PARAMETER :: lenrls = 218, lenils = 33
   !
   !* FIRST EXECUTABLE STATEMENT  SVCO
   DO i = 1, lenrls

@@ -428,7 +428,7 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Iopt, N, Maxfev, Ml, Mu, Mode, Nprint, Info, Nfev, Ldfjac, Lr, Njev
   REAL Xtol, Epsfcn, Factor
   REAL X(*), Fvec(*), Diag(*), Fjac(Ldfjac,*), R(Lr), Qtf(*), Wa1(*), &
@@ -437,11 +437,10 @@ SUBROUTINE SNSQ(FCN,JAC,Iopt,N,X,Fvec,Fjac,Ldfjac,Xtol,Maxfev,Ml,Mu,&
   INTEGER i, iflag, iter, j, jm1, l, ncfail, ncsuc, nslow1, nslow2
   INTEGER iwa(1)
   LOGICAL jeval, sing
-  REAL actred, delta, epsmch, fnorm, fnorm1, one, pnorm, prered, &
-    p1, p5, p001, p0001, ratio, sum, temp, xnorm, zero
+  REAL actred, delta, epsmch, fnorm, fnorm1, pnorm, prered, ratio, sum, temp, xnorm
   REAL R1MACH, ENORM
-  SAVE one, p1, p5, p001, p0001, zero
-  DATA one, p1, p5, p001, p0001, zero/1.0E0, 1.0E-1, 5.0E-1, 1.0E-3, 1.0E-4, 0.0E0/
+  REAL, PARAMETER ::one = 1.0E0, p1 = 1.0E-1, p5 = 5.0E-1, p001 = 1.0E-3, &
+    p0001 = 1.0E-4, zero = 0.0E0
   !
   !* FIRST EXECUTABLE STATEMENT  SNSQ
   epsmch = R1MACH(4)

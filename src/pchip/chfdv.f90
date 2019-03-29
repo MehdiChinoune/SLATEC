@@ -93,7 +93,7 @@ SUBROUTINE CHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
-  
+
   !  Programming notes:
   !
   !     To produce a double precision version, simply:
@@ -109,9 +109,8 @@ SUBROUTINE CHFDV(X1,X2,F1,F2,D1,D2,Ne,Xe,Fe,De,Next,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i
-  REAL c2, c2t2, c3, c3t3, del1, del2, delta, h, x, xmi, xma, zero
-  SAVE zero
-  DATA zero/0./
+  REAL c2, c2t2, c3, c3t3, del1, del2, delta, h, x, xmi, xma
+  REAL, PARAMETER :: zero = 0.
   !
   !  VALIDITY-CHECK ARGUMENTS.
   !

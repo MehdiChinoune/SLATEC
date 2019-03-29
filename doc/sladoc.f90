@@ -147,8 +147,7 @@ PROGRAM SLADOC
   !
   INTEGER, PARAMETER :: LU13 = 13, LU14 = 14, LU5 = 5, LU6 = 6, LU17 = 17, &
     LU18 = 18, LU19 = 19
-  CHARACTER(MXLFN) :: fname, fnamsv, fn
-  LOGICAL llu13, llu18, llu19, llu14
+  CHARACTER(MXLFN) :: fname, fn
   LOGICAL found, lexist
   !
   !     IS  - table of pointers to the record in file FDAF containing
@@ -189,13 +188,14 @@ PROGRAM SLADOC
   !
   !     DATA statement definitions.
   !
-  DATA llu13/.FALSE./, fnamsv/' '/
+  LOGICAL:: llu13 = .FALSE.
+  CHARACTER(MXLFN) :: fnamsv = ' '
   !
   !     These three variables indicate whether the information from
   !     the files FCAT, FTBL and FKWD have been read in.  The files
   !     are read only once and then only if the information is needed.
   !
-  DATA llu18, llu19, llu14/.FALSE., .FALSE., .FALSE./
+  LOGICAL :: llu18 = .FALSE., llu19 = .FALSE., llu14 = .FALSE.
   !
   CHARACTER(60) :: forma = '(/,1X,A,''category does not exist in this library.'',/)'
   !* FIRST EXECUTABLE STATEMENT  SLADOC

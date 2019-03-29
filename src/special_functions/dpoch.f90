@@ -39,10 +39,9 @@ REAL(8) FUNCTION DPOCH(A,X)
   !   900727  Added EXTERNAL statement.  (WRB)
 
   INTEGER i, ia, n
-  REAL(8) :: A, X, absa, absax, alnga, alngax, ax, b, pi, sgnga, sgngax
+  REAL(8) :: A, X, absa, absax, alnga, alngax, ax, b, sgnga, sgngax
   REAL(8), EXTERNAL :: DGAMMA, DFAC, DLNREL, D9LGMC, DGAMR, DCOT
-  SAVE pi
-  DATA pi/3.141592653589793238462643383279503D0/
+  REAL(8), PARAMETER :: pi = 3.141592653589793238462643383279503D0
   !* FIRST EXECUTABLE STATEMENT  DPOCH
   ax = A + X
   IF ( ax<=0.0D0 ) THEN

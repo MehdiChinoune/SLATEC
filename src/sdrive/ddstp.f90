@@ -84,13 +84,13 @@ SUBROUTINE DDSTP(Eps,F,FA,Hmax,Impl,Ierror,JACOBN,Matdim,Maxord,Mint,&
     El(13,12), Eps, erdn, erup, etest, Fac(*), H, Hmax, hn, Hold, hs, Hused, &
     numer, Rc, rh, rh1, rh2, rh3, Rmax, Save1(*), Save2(*), T, told, &
     Tq(3,12), Trend, Uround, Y(*), Yh(N,*), Ywt(*), y0nrm
-  LOGICAL Convrg, evalfa, evaljc, ier, switch
+  LOGICAL Convrg, evalfa, evaljc, switch
   REAL(8), EXTERNAL :: DNRM2
   INTEGER, PARAMETER :: MXFAIL = 3, MXITER = 3, MXTRY = 50
   REAL(8), PARAMETER :: BIAS1 = 1.3D0, BIAS2 = 1.2D0, BIAS3 = 1.4D0, RCTEST = 0.3D0, &
     RMFAIL = 2.D0, RMNORM = 10.D0, TRSHLD = 1.D0
   INTEGER, PARAMETER :: NDJSTP = 10
-  DATA ier/.FALSE./
+  LOGICAL :: ier = .FALSE.
   !* FIRST EXECUTABLE STATEMENT  DDSTP
   nsv = N
   bnd = 0.D0

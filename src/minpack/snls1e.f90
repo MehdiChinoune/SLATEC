@@ -510,16 +510,15 @@ SUBROUTINE SNLS1E(FCN,Iopt,M,N,X,Fvec,Tol,Nprint,Info,Iw,Wa,Lwa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER M, N, Nprint, Info, Lwa, Iopt
   INTEGER index, Iw(*)
   REAL Tol
   REAL X(*), Fvec(*), Wa(*)
   EXTERNAL :: FCN
   INTEGER maxfev, mode, nfev, njev
-  REAL factor, ftol, gtol, xtol, zero, epsfcn
-  SAVE factor, zero
-  DATA factor, zero/1.0E2, 0.0E0/
+  REAL ftol, gtol, xtol, epsfcn
+  REAL, PARAMETER :: factor = 1.0E2, zero = 0.0E0
   !* FIRST EXECUTABLE STATEMENT  SNLS1E
   Info = 0
   !

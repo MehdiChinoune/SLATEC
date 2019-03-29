@@ -33,7 +33,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
 
-  INTEGER LACor, LDUm, LEWt, LSAvf, ltol, LWM, LYH, maxnum, MAXord, &
+  INTEGER LACor, LDUm, LEWt, LSAvf, ltol, LWM, LYH, MAXord, &
     METh, MITer, N, natolp, Neq, NFE, NJE, NQ, NQU, nrtolp, NST
   REAL absdel, Acor(*), Atol(*), big, del, Delsgn, dt, EL0, Ewt(*), H, ha, &
     HMIn, HMXi, HU, R1MACH, ROWns, Rpar(*), Rtol(*), Savf(*), T
@@ -58,8 +58,7 @@ SUBROUTINE LSOD(F,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,Acor,&
   !  IS RESET TO ZERO AND THE USER IS INFORMED ABOUT POSSIBLE EXCESSIVE
   !  WORK.
   !
-  SAVE maxnum
-  DATA maxnum/500/
+  INTEGER, PARAMETER :: maxnum = 500
   !
   !.......................................................................
   !

@@ -132,19 +132,17 @@ SUBROUTINE DRC3JJ(L2,L3,M2,M3,L1min,L1max,Thrcof,Ndim,Ier)
   !   910415  Mixed type expressions eliminated; variable C1 initialized;
   !           description of THRCOF expanded. These changes were done by
   !           D. W. Lozier.
-  
+
   !
   INTEGER Ndim, Ier
   REAL(8) :: L2, L3, M2, M3, L1min, L1max, Thrcof(Ndim)
   !
   INTEGER i, index, lstep, n, nfin, nfinp1, nfinp2, nfinp3, nlim, nstep2
-  REAL(8) :: a1, a1s, a2, a2s, c1, c1old, c2, cnorm, D1MACH, &
-    denom, dv, eps, huge, l1, m1, newfac, oldfac, &
-    one, ratio, sign1, sign2, srhuge, srtiny, sum1, &
-    sum2, sumbac, sumfor, sumuni, three, thresh, tiny, &
-    two, x, x1, x2, x3, y, y1, y2, y3, zero
-  !
-  DATA zero, eps, one, two, three/0.0D0, 0.01D0, 1.0D0, 2.0D0, 3.0D0/
+  REAL(8) :: a1, a1s, a2, a2s, c1, c1old, c2, cnorm, D1MACH, denom, dv, huge, &
+    l1, m1, newfac, oldfac, ratio, sign1, sign2, srhuge, srtiny, sum1, sum2, &
+    sumbac, sumfor, sumuni, thresh, tiny, x, x1, x2, x3, y, y1, y2, y3
+  REAL(8), PARAMETER :: zero = 0.0D0, eps = 0.01D0, one = 1.0D0, two = 2.0D0, &
+    three = 3.0D0
   !
   !* FIRST EXECUTABLE STATEMENT  DRC3JJ
   Ier = 0

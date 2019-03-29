@@ -35,11 +35,10 @@ REAL FUNCTION R9LGIT(A,X,Algap1)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
-  
-  REAL A, a1x, Algap1, ax, eps, fk, hstar, p, r, R1MACH, s, sqeps, t, X
+
+  REAL A, a1x, Algap1, ax, fk, hstar, p, r, R1MACH, s, t, X
   INTEGER k
-  SAVE eps, sqeps
-  DATA eps, sqeps/2*0.0/
+  REAL :: eps = 0., sqeps = 0.
   !* FIRST EXECUTABLE STATEMENT  R9LGIT
   IF ( eps==0.0 ) eps = 0.5*R1MACH(3)
   IF ( sqeps==0.0 ) sqeps = SQRT(R1MACH(4))

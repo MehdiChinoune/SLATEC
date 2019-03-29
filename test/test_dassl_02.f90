@@ -25,11 +25,12 @@ CONTAINS
     !           declarations explicit.  (FNF)
     !   901009  Changed AMAX1 to MAX.  (FNF)
     !   901030  Removed FLOAT's; made all local declarations explicit. (FNF)
-    
+
     REAL(8) :: Y(*), T, Erm
-    INTEGER i, j, k, ng
-    REAL(8) :: alph1, alph2, a1, a2, er, ex, yt
-    DATA alph1/1.0D0/, alph2/1.0D0/, ng/5/
+    INTEGER i, j, k
+    REAL(8) :: a1, a2, er, ex, yt
+    REAL(8), PARAMETER :: alph1 = 1.0D0, alph2 = 1.0D0
+    INTEGER, PARAMETER :: ng = 5
     !* FIRST EXECUTABLE STATEMENT  DEDIT2
     Erm = 0.0D0
     IF ( T==0.0D0 ) RETURN
@@ -97,7 +98,7 @@ CONTAINS
     !   901009  Changed AMAX1 to MAX.  (FNF)
     !   901009  Constructed double precision version.  (FNF)
     !   901030  Made all declarations explicit; added 1P's to formats. (FNF)
-    
+
     !
     INTEGER Lun, Kprint, Ipass
     !
@@ -105,11 +106,10 @@ CONTAINS
     !
     INTEGER i, idid, info(15), iout, ipar(1), ires, iwork(45), j190, &
       j290, liw, lrw, ml, mu, neq, nerr, nfe, nje, nout, nqu, nst
-    REAL(8) :: atol, delta(25), dtout, er, er1, er2, erm, ero, &
-      hu, rpar(1), rtol, rwork(550), t, tout, tout1, &
-      y(25), yprime(25), yt1, yt2
+    REAL(8) :: atol, delta(25), er, er1, er2, erm, ero, hu, rpar(1), rtol, &
+      rwork(550), t, tout, y(25), yprime(25), yt1, yt2
     !
-    DATA tout1/1.0D0/, dtout/1.0D0/
+    REAL(8), PARAMETER :: tout1 = 1.0D0, dtout = 1.0D0
     !
     !* FIRST EXECUTABLE STATEMENT  DDASQC
     Ipass = 1
@@ -285,7 +285,7 @@ CONTAINS
     !   891013  DATE WRITTEN
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
-    
+
     INTEGER Ipar(*)
     REAL(8) :: T, Y(*), Yprime(*), Pd(2,2), Cj, Rpar(*)
     !* FIRST EXECUTABLE STATEMENT  DDJAC1
@@ -318,13 +318,13 @@ CONTAINS
     !   901001  Eliminated 7-character variable names MBANDPn by explicitly
     !           including MBAND+n in expressions.  (FNF)
     !   901030  Made all local declarations explicit.  (FNF)
-    
+
     INTEGER Ipar(*)
     REAL(8) :: T, Y(*), Yprime(*), Pd(11,25), Cj, Rpar(*)
-    INTEGER j, mband, ml, mu, neq, ng
-    REAL(8) :: alph1, alph2
-    DATA alph1/1.0D0/, alph2/1.0D0/, ng/5/
-    DATA ml/5/, mu/0/, neq/25/
+    INTEGER j, mband
+    REAL(8), PARAMETER :: alph1 = 1.0D0, alph2 = 1.0D0
+    INTEGER, PARAMETER :: ng = 5
+    INTEGER, PARAMETER :: ml = 5, mu = 0, neq = 25
     !* FIRST EXECUTABLE STATEMENT  DDJAC2
     mband = ml + mu + 1
     DO j = 1, neq
@@ -360,7 +360,7 @@ CONTAINS
     !   891013  DATE WRITTEN
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
-    
+
     INTEGER Ires, Ipar(*)
     REAL(8) :: T, Y(*), Yprime(*), Delta(*), Rpar(*)
     !* FIRST EXECUTABLE STATEMENT  DDRES1
@@ -389,12 +389,13 @@ CONTAINS
     !   901001  Converted prologue to 4.0 format and made all argument
     !           declarations explicit.  (FNF)
     !   901030  Made all local declarations explicit.  (FNF)
-    
+
     INTEGER Ires, Ipar(*)
     REAL(8) :: T, Y(*), Yprime(*), Delta(*), Rpar(*)
-    INTEGER i, j, k, ng
-    REAL(8) :: alph1, alph2, d
-    DATA alph1/1.0D0/, alph2/1.0D0/, ng/5/
+    INTEGER i, j, k
+    REAL(8) :: d
+    REAL(8), PARAMETER :: alph1 = 1.0D0, alph2 = 1.0D0
+    INTEGER, PARAMETER :: ng = 5
     !* FIRST EXECUTABLE STATEMENT  DDRES2
     DO j = 1, ng
       DO i = 1, ng
@@ -459,7 +460,7 @@ PROGRAM TEST49
   !   901001  Converted prologue to 4.0 format.  (FNF)
   !   901009  Corrected GAMS classification code.  (FNF)
   !   901009  Constructed double precision version.  (FNF)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST49

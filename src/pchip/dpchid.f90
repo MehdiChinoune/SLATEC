@@ -106,7 +106,7 @@ REAL(8) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   930504  Corrected to set VALUE=0 when IERR.ne.0.  (FNF)
-  
+
   !
   !  Programming notes:
   !  1. This routine uses a special formula that is valid only for
@@ -124,12 +124,11 @@ REAL(8) FUNCTION DPCHID(N,X,F,D,Incfd,Skip,Ia,Ib,Ierr)
   !  DECLARE LOCAL VARIABLES.
   !
   INTEGER i, iup, low
-  REAL(8) :: h, half, six, sum, value, zero
-  SAVE zero, half, six
+  REAL(8) :: h, sum, value
   !
   !  INITIALIZE.
   !
-  DATA zero/0.D0/, half/.5D0/, six/6.D0/
+  REAL(8), PARAMETER :: zero = 0.D0, half = .5D0, six = 6.D0
   !* FIRST EXECUTABLE STATEMENT  DPCHID
   value = zero
   !
