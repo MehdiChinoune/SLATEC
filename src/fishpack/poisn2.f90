@@ -34,17 +34,12 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   900402  Added TYPE section.  (WRB)
   !   920130  Modified to use merge routine S1MERG rather than deleted
   !           routine MERGE.  (WRB)
-  
-  INTEGER i, i1, i2, i2r, i2rby2, Idimq, ii, ip, ipstor, Istag, &
-    j, jm1, jm2, jm3, jp1, jp2, jp3, jr, jr2, jstart
+
+  INTEGER i, i1, i2, i2r, i2rby2, Idimq, ii, ip, ipstor, Istag, j, jm1, jm2, jm3, &
+    jp1, jp2, jp3, jr, jr2, jstart, jstep, jstop, k(4), kr, lr, M, Mixbnd, mr, N, &
+    nlast, nlastp, nr, nrod, nrodpr
   REAL A(*), B(*), B2(*), B3(*), Bb(*), C(*), D(*), fden, fi, fistag, fnum, &
     P(*), Q(Idimq,*), t, Tcos(*), W(*), W2(*), W3(*)
-  INTEGER jstep, jstop, k(4), k1, k2, k3, k4, kr, lr, M, Mixbnd, &
-    mr, N, nlast, nlastp, nr, nrod, nrodpr
-  EQUIVALENCE (k(1),k1)
-  EQUIVALENCE (k(2),k2)
-  EQUIVALENCE (k(3),k3)
-  EQUIVALENCE (k(4),k4)
   !* FIRST EXECUTABLE STATEMENT  POISN2
   fistag = 3 - Istag
   fnum = 1./Istag
@@ -277,19 +272,19 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
         Q(i,1) = .5*Q(i,1) - Q(i,jm1)
         B2(i) = 2.*(Q(i,1)+Q(i,nlast))
       ENDDO
-      k1 = kr + jr - 1
-      Tcos(k1+1) = -2.
-      k4 = k1 + 3 - Istag
-      CALL COSGEN(kr+Istag-2,1,0.0,fnum,Tcos(k4))
-      k4 = k1 + kr + 1
-      CALL COSGEN(jr-1,1,0.0,1.0,Tcos(k4))
-      CALL S1MERG(Tcos,k1,kr,k1+kr,jr-1,0)
-      CALL COSGEN(kr,1,0.5,fden,Tcos(k1+1))
-      k2 = kr
-      k4 = k1 + k2 + 1
-      CALL COSGEN(lr,1,0.5,fden,Tcos(k4))
-      k3 = lr
-      k4 = 0
+      k(1) = kr + jr - 1
+      Tcos(k(1)+1) = -2.
+      k(4) = k(1) + 3 - Istag
+      CALL COSGEN(kr+Istag-2,1,0.0,fnum,Tcos(k(4)))
+      k(4) = k(1) + kr + 1
+      CALL COSGEN(jr-1,1,0.0,1.0,Tcos(k(4)))
+      CALL S1MERG(Tcos,k(1),kr,k(1)+kr,jr-1,0)
+      CALL COSGEN(kr,1,0.5,fden,Tcos(k(1)+1))
+      k(2) = kr
+      k(4) = k(1) + k(2) + 1
+      CALL COSGEN(lr,1,0.5,fden,Tcos(k(4)))
+      k(3) = lr
+      k(4) = 0
       CALL TRI3(mr,A,Bb,C,k,B,B2,B3,Tcos,D,W,W2,W3)
       DO i = 1, mr
         B(i) = B(i) + B2(i)
@@ -423,26 +418,26 @@ SUBROUTINE POISN2(M,N,Istag,Mixbnd,A,Bb,C,Q,Idimq,B,B2,B3,W,W2,W3,D,Tcos,P)
       B3(i) = Q(i,1) + 2.*t
     ENDDO
   ENDIF
-  300  k1 = kr + 2*jr - 1
-  k2 = kr + jr
-  Tcos(k1+1) = -2.
-  k4 = k1 + 3 - Istag
-  CALL COSGEN(k2+Istag-2,1,0.0,fnum,Tcos(k4))
-  k4 = k1 + k2 + 1
-  CALL COSGEN(jr-1,1,0.0,1.0,Tcos(k4))
-  CALL S1MERG(Tcos,k1,k2,k1+k2,jr-1,0)
-  k3 = k1 + k2 + lr
-  CALL COSGEN(jr,1,0.5,0.0,Tcos(k3+1))
-  k4 = k3 + jr + 1
-  CALL COSGEN(kr,1,0.5,fden,Tcos(k4))
-  CALL S1MERG(Tcos,k3,jr,k3+jr,kr,k1)
+  300  k(1) = kr + 2*jr - 1
+  k(2) = kr + jr
+  Tcos(k(1)+1) = -2.
+  k(4) = k(1) + 3 - Istag
+  CALL COSGEN(k(2)+Istag-2,1,0.0,fnum,Tcos(k(4)))
+  k(4) = k(1) + k(2) + 1
+  CALL COSGEN(jr-1,1,0.0,1.0,Tcos(k(4)))
+  CALL S1MERG(Tcos,k(1),k(2),k(1)+k(2),jr-1,0)
+  k(3) = k(1) + k(2) + lr
+  CALL COSGEN(jr,1,0.5,0.0,Tcos(k(3)+1))
+  k(4) = k(3) + jr + 1
+  CALL COSGEN(kr,1,0.5,fden,Tcos(k(4)))
+  CALL S1MERG(Tcos,k(3),jr,k(3)+jr,kr,k(1))
   IF ( lr/=0 ) THEN
-    CALL COSGEN(lr,1,0.5,fden,Tcos(k4))
-    CALL S1MERG(Tcos,k3,jr,k3+jr,lr,k3-lr)
-    CALL COSGEN(kr,1,0.5,fden,Tcos(k4))
+    CALL COSGEN(lr,1,0.5,fden,Tcos(k(4)))
+    CALL S1MERG(Tcos,k(3),jr,k(3)+jr,lr,k(3)-lr)
+    CALL COSGEN(kr,1,0.5,fden,Tcos(k(4)))
   ENDIF
-  k3 = kr
-  k4 = kr
+  k(3) = kr
+  k(4) = kr
   CALL TRI3(mr,A,Bb,C,k,B,B2,B3,Tcos,D,W,W2,W3)
   DO i = 1, mr
     B(i) = B(i) + B2(i) + B3(i)

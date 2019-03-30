@@ -130,7 +130,6 @@ CONTAINS
     REAL a1(4,4), a2(10), e(4), v(4,4), w(16)
     REAL err, erri, relerr
     COMPLEX ac(4,4), vc(4,4)
-    EQUIVALENCE (v,vc)
     INTEGER, PARAMETER :: lda = 4, n = 4, ldv = 4
     REAL, PARAMETER :: ap(10) = [ 5., 4., 5., 1., 1., 4., 1., 1., 2., 4. ]
     REAL, PARAMETER :: ek(4) = [ 1., 2., 5., 10. ]

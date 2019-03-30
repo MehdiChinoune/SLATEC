@@ -40,27 +40,25 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  
-  INTEGER i, ibas, idg, ienter, ileave, Info, iopt, ipage, ipagef, &
-    iplace, isave, itbrc, itlp, j, jstrt, k, key, kprint, Lbm, LCOl
-  INTEGER LENl, LENu, Lmx, LP, lpg, lpr, lpr1, lprg, LROw, Mrelas, &
-    mxitlp, n20046, n20058, n20080, n20098, n20119, n20172, &
-    n20206, n20247, n20252
-  INTEGER n20271, n20276, n20283, n20290, NCP, nerr, np, nparm, &
-    npp, npr004, npr005, npr006, npr007, npr008, npr009, &
-    npr010, npr011, npr012, npr013, npr014
-  INTEGER npr015, nredc, ntries, Nvars, nx0066, nx0091, nx0106
+
+  INTEGER i, ibas, ienter, ileave, Info, iopt, ipage, iplace, itlp, j, jstrt, k, &
+    key, Lbm, LCOl, LENl, LENu, Lmx, LP, lpg, lpr, lpr1, LROw, Mrelas, n20046, &
+    n20058, n20080, n20098, n20119, n20172, n20206, n20247, n20252, n20271, n20276, &
+    n20283, n20290, NCP, nerr, np, nparm, npr004, npr005, npr006, npr007, npr008, &
+    npr009, npr010, npr011, npr012, npr013, npr014, npr015, nredc, ntries, Nvars, &
+    nx0066, nx0091, nx0106, Ibasis(*), Ibb(*), Ibrc(Lbm,2), Imat(*), Ind(*), &
+    Ipr(*), Iwr(*), idum(01)
+  INTEGER, TARGET :: intopt(08)
+  INTEGER, POINTER :: idg, ipagef, isave, mxitlp, kprint, itbrc, npp, lprg
   REAL SASUM, SDOT
-  REAL abig, aij, Amat(*), anorm, asmall, Basmat(*), Bl(*), Bu(*), &
-    Colnrm(*), Costs(*), costsc, Csc(*), Dattrv(*), dirnrm, &
-    Duals(*), dulnrm, eps, tune, Erd(*), erdnrm, Erp(*), factor, &
-    gg, one, Prgopt(*), Primal(*), resnrm, Rg(*), Rhs(*), rhsnrm, &
-    ropt(07), Rprim(*), rprnrm, Rz(*), rzj, scalr, scosts, size, &
-    SMAll, theta, tolls, upbnd, uu, Wr(*), Ww(*), xlamda, xval, &
-    zero, rdum(01), tolabs
+  REAL aij, Amat(*), anorm, Basmat(*), Bl(*), Bu(*), Colnrm(*), Costs(*), Csc(*), &
+    Dattrv(*), dirnrm, Duals(*), dulnrm, Erd(*), erdnrm, Erp(*), factor, gg, one, &
+    Prgopt(*), Primal(*), resnrm, Rg(*), Rhs(*), rhsnrm, Rprim(*), rprnrm, Rz(*), &
+    rzj, scalr, scosts, size, SMAll, theta, upbnd, uu, Wr(*), Ww(*), xlamda, xval, &
+    zero, rdum(01)
+  REAL, TARGET :: ropt(07)
+  REAL, POINTER :: eps, asmall, abig, costsc, tolls, tune, tolabs
   !
-  INTEGER Ibasis(*), Ibb(*), Ibrc(Lbm,2), Imat(*), Ind(*), Ipr(*), &
-    Iwr(*), intopt(08), idum(01)
   !
   !     ARRAY LOCAL VARIABLES
   !     NAME(LENGTH)          DESCRIPTION
@@ -155,37 +153,38 @@ SUBROUTINE SPLPMN(USRMAT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !                             IN PARTIAL PRICING
   !     JSTRT      INTEGER      STARTING PLACE FOR PARTIAL PRICING.
   !
-  LOGICAL colscp, savedt, contin, cstscp, unbnd, feas, finite, &
-    found, minprb, redbas, singlr, sizeup, stpedg, trans, &
-    usrbas, zerolv, lopt(08)
+  LOGICAL, TARGET :: lopt(8)
+  LOGICAL, POINTER :: colscp, savedt, contin, cstscp, minprb, sizeup, stpedg, usrbas
+  LOGICAL :: unbnd, feas, finite, found, redbas, singlr, trans, zerolv
   CHARACTER(8) :: xern1, xern2
-  EQUIVALENCE (contin,lopt(1))
-  EQUIVALENCE (usrbas,lopt(2))
-  EQUIVALENCE (sizeup,lopt(3))
-  EQUIVALENCE (savedt,lopt(4))
-  EQUIVALENCE (colscp,lopt(5))
-  EQUIVALENCE (cstscp,lopt(6))
-  EQUIVALENCE (minprb,lopt(7))
-  EQUIVALENCE (stpedg,lopt(8))
-  EQUIVALENCE (idg,intopt(1))
-  EQUIVALENCE (ipagef,intopt(2))
-  EQUIVALENCE (isave,intopt(3))
-  EQUIVALENCE (mxitlp,intopt(4))
-  EQUIVALENCE (kprint,intopt(5))
-  EQUIVALENCE (itbrc,intopt(6))
-  EQUIVALENCE (npp,intopt(7))
-  EQUIVALENCE (lprg,intopt(8))
-  EQUIVALENCE (eps,ropt(1))
-  EQUIVALENCE (asmall,ropt(2))
-  EQUIVALENCE (abig,ropt(3))
-  EQUIVALENCE (costsc,ropt(4))
-  EQUIVALENCE (tolls,ropt(5))
-  EQUIVALENCE (tune,ropt(6))
-  EQUIVALENCE (tolabs,ropt(7))
   !
   !     COMMON BLOCK USED BY LA05 () PACKAGE..
   COMMON /LA05DS/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
   EXTERNAL :: USRMAT
+
+  contin => lopt(1)
+  usrbas => lopt(2)
+  sizeup => lopt(3)
+  savedt => lopt(4)
+  colscp => lopt(5)
+  cstscp => lopt(6)
+  minprb => lopt(7)
+  stpedg => lopt(8)
+  idg => intopt(1)
+  ipagef => intopt(2)
+  isave => intopt(3)
+  mxitlp => intopt(4)
+  kprint => intopt(5)
+  itbrc => intopt(6)
+  npp => intopt(7)
+  lprg => intopt(8)
+  eps => ropt(1)
+  asmall => ropt(2)
+  abig => ropt(3)
+  costsc => ropt(4)
+  tolls => ropt(5)
+  tune => ropt(6)
+  tolabs => ropt(7)
   !
   !     SET LP=0 SO NO ERROR MESSAGES WILL PRINT WITHIN LA05 () PACKAGE.
   !* FIRST EXECUTABLE STATEMENT  SPLPMN

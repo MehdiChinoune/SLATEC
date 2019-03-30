@@ -28,15 +28,11 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
   !   920130  Modified to use merge routine S1MERG rather than deleted
   !           routine MERGE.  (WRB)
 
-  INTEGER k1, k2, k3, k4, kr, lr, M, mr, N, nlast, nlastp, np, Nperod, nr, nrod, nrodpr
-  INTEGER i, i2r, i2rby2, Idimq, ii, ijump, ip, ipstor, j, jm1, &
-    jm2, jm3, jp1, jp2, jp3, jr, jstart, jstep, jstop, k(4)
+  INTEGER kr, lr, M, mr, N, nlast, nlastp, np, Nperod, nr, nrod, nrodpr, i, i2r, &
+    i2rby2, Idimq, ii, ijump, ip, ipstor, j, jm1, jm2, jm3, jp1, jp2, jp3, jr, &
+    jstart, jstep, jstop, k(4)
   REAL A(*), B(*), B2(*), B3(*), Bb(*), C(*), D(*), fi, fnum, fnum2, P(*), &
     Q(Idimq,*), t, Tcos(*), W(*), W2(*), W3(*)
-  EQUIVALENCE (k(1),k1)
-  EQUIVALENCE (k(2),k2)
-  EQUIVALENCE (k(3),k3)
-  EQUIVALENCE (k(4),k4)
   !* FIRST EXECUTABLE STATEMENT  POSTG2
   np = Nperod
   fnum = 0.5*(np/3)
@@ -242,25 +238,25 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
       Q(i,1) = Q(i,1) - Q(i,jm1)
       B2(i) = Q(i,1) + Q(i,nlast)
     ENDDO
-    k1 = kr + jr
-    k2 = k1 + jr
-    CALL COSGEN(jr-1,1,0.0,1.0,Tcos(k1+1))
+    k(1) = kr + jr
+    k(2) = k(1) + jr
+    CALL COSGEN(jr-1,1,0.0,1.0,Tcos(k(1)+1))
     SELECT CASE (np)
       CASE (2)
-        CALL COSGEN(kr+1,1,0.5,0.0,Tcos(k2))
+        CALL COSGEN(kr+1,1,0.5,0.0,Tcos(k(2)))
       CASE DEFAULT
-        Tcos(k2) = 2*np - 4
-        CALL COSGEN(kr,1,0.0,1.0,Tcos(k2+1))
+        Tcos(k(2)) = 2*np - 4
+        CALL COSGEN(kr,1,0.0,1.0,Tcos(k(2)+1))
     END SELECT
-    k4 = 1 - np/3
-    CALL S1MERG(Tcos,k1,jr-k4,k2-k4,kr+k4,0)
-    IF ( np==3 ) k1 = k1 - 1
-    k2 = kr
-    CALL COSGEN(kr,1,fnum2,0.5,Tcos(k1+1))
-    k4 = k1 + kr
-    CALL COSGEN(lr,1,fnum2,0.5,Tcos(k4+1))
-    k3 = lr
-    k4 = 0
+    k(4) = 1 - np/3
+    CALL S1MERG(Tcos,k(1),jr-k(4),k(2)-k(4),kr+k(4),0)
+    IF ( np==3 ) k(1) = k(1) - 1
+    k(2) = kr
+    CALL COSGEN(kr,1,fnum2,0.5,Tcos(k(1)+1))
+    k(4) = k(1) + kr
+    CALL COSGEN(lr,1,fnum2,0.5,Tcos(k(4)+1))
+    k(3) = lr
+    k(4) = 0
     CALL TRI3(mr,A,Bb,C,k,B,B2,B3,Tcos,D,W,W2,W3)
     DO i = 1, mr
       B(i) = B(i) + B2(i)
@@ -295,28 +291,28 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
       B2(i) = Q(i,nlast) + t
       B3(i) = Q(i,1) + t
     ENDDO
-    k1 = kr + 2*jr
-    CALL COSGEN(jr-1,1,0.0,1.0,Tcos(k1+1))
-    k2 = k1 + jr
-    Tcos(k2) = 2*np - 4
-    k4 = (np-1)*(3-np)
-    k3 = k2 + 1 - k4
-    CALL COSGEN(kr+jr+k4,1,k4/2.,1.-k4,Tcos(k3))
-    k4 = 1 - np/3
-    CALL S1MERG(Tcos,k1,jr-k4,k2-k4,kr+jr+k4,0)
-    IF ( np==3 ) k1 = k1 - 1
-    k2 = kr + jr
-    k4 = k1 + k2
-    CALL COSGEN(kr,1,fnum2,0.5,Tcos(k4+1))
-    k3 = k4 + kr
-    CALL COSGEN(jr,1,fnum,0.5,Tcos(k3+1))
-    CALL S1MERG(Tcos,k4,kr,k3,jr,k1)
-    k4 = k3 + jr
-    CALL COSGEN(lr,1,fnum2,0.5,Tcos(k4+1))
-    CALL S1MERG(Tcos,k3,jr,k4,lr,k1+k2)
-    CALL COSGEN(kr,1,fnum2,0.5,Tcos(k3+1))
-    k3 = kr
-    k4 = kr
+    k(1) = kr + 2*jr
+    CALL COSGEN(jr-1,1,0.0,1.0,Tcos(k(1)+1))
+    k(2) = k(1) + jr
+    Tcos(k(2)) = 2*np - 4
+    k(4) = (np-1)*(3-np)
+    k(3) = k(2) + 1 - k(4)
+    CALL COSGEN(kr+jr+k(4),1,k(4)/2.,1.-k(4),Tcos(k(3)))
+    k(4) = 1 - np/3
+    CALL S1MERG(Tcos,k(1),jr-k(4),k(2)-k(4),kr+jr+k(4),0)
+    IF ( np==3 ) k(1) = k(1) - 1
+    k(2) = kr + jr
+    k(4) = k(1) + k(2)
+    CALL COSGEN(kr,1,fnum2,0.5,Tcos(k(4)+1))
+    k(3) = k(4) + kr
+    CALL COSGEN(jr,1,fnum,0.5,Tcos(k(3)+1))
+    CALL S1MERG(Tcos,k(4),kr,k(3),jr,k(1))
+    k(4) = k(3) + jr
+    CALL COSGEN(lr,1,fnum2,0.5,Tcos(k(4)+1))
+    CALL S1MERG(Tcos,k(3),jr,k(4),lr,k(1)+k(2))
+    CALL COSGEN(kr,1,fnum2,0.5,Tcos(k(3)+1))
+    k(3) = kr
+    k(4) = kr
     CALL TRI3(mr,A,Bb,C,k,B,B2,B3,Tcos,D,W,W2,W3)
     DO i = 1, mr
       B(i) = B(i) + B2(i) + B3(i)
@@ -354,36 +350,36 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
           B2(i) = Q(i,1) + fi
           B3(i) = Q(i,nlast) + fi
         ENDDO
-        k1 = nlast + jr - 1
-        k2 = k1 + jr - 1
-        CALL COSGEN(jr-1,1,0.0,1.0,Tcos(k1+1))
-        CALL COSGEN(nlast,1,0.5,0.0,Tcos(k2+1))
-        CALL S1MERG(Tcos,k1,jr-1,k2,nlast,0)
-        k3 = k1 + nlast - 1
-        k4 = k3 + jr
-        CALL COSGEN(jr,1,0.5,0.5,Tcos(k3+1))
-        CALL COSGEN(jr,1,0.0,0.5,Tcos(k4+1))
-        CALL S1MERG(Tcos,k3,jr,k4,jr,k1)
-        k2 = nlast - 1
-        k3 = jr
-        k4 = jr
+        k(1) = nlast + jr - 1
+        k(2) = k(1) + jr - 1
+        CALL COSGEN(jr-1,1,0.0,1.0,Tcos(k(1)+1))
+        CALL COSGEN(nlast,1,0.5,0.0,Tcos(k(2)+1))
+        CALL S1MERG(Tcos,k(1),jr-1,k(2),nlast,0)
+        k(3) = k(1) + nlast - 1
+        k(4) = k(3) + jr
+        CALL COSGEN(jr,1,0.5,0.5,Tcos(k(3)+1))
+        CALL COSGEN(jr,1,0.0,0.5,Tcos(k(4)+1))
+        CALL S1MERG(Tcos,k(3),jr,k(4),jr,k(1))
+        k(2) = nlast - 1
+        k(3) = jr
+        k(4) = jr
       CASE DEFAULT
         DO i = 1, mr
           B2(i) = Q(i,1) + Q(i,nlast) + Q(i,j) - Q(i,jm1) - Q(i,jp1)
           B3(i) = 0.
         ENDDO
-        k1 = nlast - 1
-        k2 = nlast + jr - 1
+        k(1) = nlast - 1
+        k(2) = nlast + jr - 1
         CALL COSGEN(jr-1,1,0.0,1.0,Tcos(nlast))
-        Tcos(k2) = 2*np - 4
-        CALL COSGEN(jr,1,0.5-fnum,0.5,Tcos(k2+1))
-        k3 = (3-np)/2
-        CALL S1MERG(Tcos,k1,jr-k3,k2-k3,jr+k3,0)
-        k1 = k1 - 1 + k3
-        CALL COSGEN(jr,1,fnum,0.5,Tcos(k1+1))
-        k2 = jr
-        k3 = 0
-        k4 = 0
+        Tcos(k(2)) = 2*np - 4
+        CALL COSGEN(jr,1,0.5-fnum,0.5,Tcos(k(2)+1))
+        k(3) = (3-np)/2
+        CALL S1MERG(Tcos,k(1),jr-k(3),k(2)-k(3),jr+k(3),0)
+        k(1) = k(1) - 1 + k(3)
+        CALL COSGEN(jr,1,fnum,0.5,Tcos(k(1)+1))
+        k(2) = jr
+        k(3) = 0
+        k(4) = 0
     END SELECT
     CALL TRI3(mr,A,Bb,C,k,B,B2,B3,Tcos,D,W,W2,W3)
     DO i = 1, mr
@@ -418,10 +414,10 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
         Tcos(5) = 1.
         Tcos(6) = -1.
         Tcos(7) = 1.
-        k1 = 3
-        k2 = 2
-        k3 = 1
-        k4 = 1
+        k(1) = 3
+        k(2) = 2
+        k(3) = 1
+        k(4) = 1
       CASE DEFAULT
         DO i = 1, mr
           B(i) = Q(i,2)
@@ -433,15 +429,15 @@ SUBROUTINE POSTG2(Nperod,N,M,A,Bb,C,Idimq,Q,B,B2,B3,W,W2,W3,D,Tcos,P)
             Tcos(1) = -2.
             Tcos(2) = 1.
             Tcos(3) = -1.
-            k1 = 2
+            k(1) = 2
           CASE DEFAULT
             Tcos(1) = -1.
             Tcos(2) = 1.
-            k1 = 1
+            k(1) = 1
         END SELECT
-        k2 = 1
-        k3 = 0
-        k4 = 0
+        k(2) = 1
+        k(3) = 0
+        k(4) = 0
     END SELECT
     CALL TRI3(mr,A,Bb,C,k,B,B2,B3,Tcos,D,W,W2,W3)
     DO i = 1, mr
