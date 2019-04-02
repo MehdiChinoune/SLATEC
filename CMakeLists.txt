@@ -16,7 +16,7 @@ endif()
 if ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "GNU" )
 
   set( CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS} -O3 -std=f2003 -fimplicit-none" )
-  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -Wall -Wno-maybe-uninitialized -fcheck=all -g -Og -std=f2018" )
+  set( CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS} -Wall -Wno-maybe-uninitialized -fcheck=all -g -O0 -std=f2018" )
   set ( CMAKE_Fortran_FLAGS_CODECOVERAGE "--coverage -g -O0" )
 
 elseif ( "${CMAKE_Fortran_COMPILER_ID}" MATCHES "Intel" )
@@ -47,4 +47,4 @@ add_executable(spfuntest spfun.f90 spfunchk.f90)
 target_link_libraries(spfuntest slatec)
 
 add_test(NAME spfuntest COMMAND ./spfuntest 1 WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
-set_tests_properties(spfuntest PROPERTIES FAIL_REGULAR_EXPRESSION "[^a-z]Error;ERROR;Failed;FAILED")
+set_tests_properties(spfuntest PROPERTIES FAIL_REGULAR_EXPRESSION "[^a-z]Failed;FAILED")
