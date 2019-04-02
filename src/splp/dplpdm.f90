@@ -1,6 +1,7 @@
 !** DPLPDM
 SUBROUTINE DPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
     Ipr,Iwr,Ind,Ibb,Anorm,Eps,Uu,Gg,Amat,Basmat,Csc,Wr,Singlr,Redbas)
+  USE LA05DD
   IMPLICIT NONE
   !>
   !***
@@ -36,17 +37,13 @@ SUBROUTINE DPLPDM(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Iopt,Ibasis,Imat,Ibrc,&
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls, convert do-it-yourself
   !           DO loops to DO loops.  (RWC)
-  
-  INTEGER i, Info, Iopt, iplace, j, k, Lbm, LCOl, LENl, LENu, &
-    Lmx, LP, LROw, Mrelas, NCP, Nredc, Nvars, nzbm
+
+  INTEGER i, Info, Iopt, iplace, j, k, Lbm, Lmx, Mrelas, Nredc, Nvars, nzbm
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
   REAL(8) :: aij, Amat(*), Basmat(*), Csc(*), Wr(*), Anorm, &
-    DASUM, Eps, Gg, one, SMAll, Uu, zero
+    DASUM, Eps, Gg, one, Uu, zero
   LOGICAL Singlr, Redbas
   CHARACTER(16) :: xern3
-  !
-  !     COMMON BLOCK USED BY LA05 () PACKAGE..
-  COMMON /LA05DD/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
   !
   !* FIRST EXECUTABLE STATEMENT  DPLPDM
   zero = 0.D0

@@ -1,5 +1,8 @@
 MODULE TEST53_MOD
   IMPLICIT NONE
+  REAL(8) :: EPS, RP, SVEps, TOL
+  INTEGER IERp, IERr, NORd, NORdp
+  REAL(8) :: R(11)
 
 CONTAINS
   !** DCMPAR
@@ -31,11 +34,6 @@ CONTAINS
     INTEGER Icnt
     !     .. Array Arguments ..
     INTEGER Itest(9)
-    !     .. Scalars in Common ..
-    REAL(8) :: EPS, RP, SVEps, TOL
-    INTEGER IERp, IERr, NORd, NORdp
-    !     .. Arrays in Common ..
-    REAL(8) :: R(11)
     !     .. Local Scalars ..
     REAL(8) :: rpp, ss
     INTEGER ierpp, nrdp
@@ -43,8 +41,6 @@ CONTAINS
     INTEGER itemp(4)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS
-    !     .. Common blocks ..
-    COMMON /DCHECK/ EPS, R, RP, SVEps, TOL, NORdp, NORd, IERp, IERr
     !* FIRST EXECUTABLE STATEMENT  DCMPAR
     Icnt = Icnt + 1
     itemp(1) = 0
@@ -102,11 +98,6 @@ CONTAINS
     INTEGER kontrl
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
-    !     .. Scalars in Common ..
-    REAL(8) :: EPS, RP, SVEps, TOL
-    INTEGER IERp, IERr, NORd, NORdp
-    !     .. Arrays in Common ..
-    REAL(8) :: R(11)
     !     .. Local Scalars ..
     REAL(8) :: yfit
     INTEGER i, icnt, m, maxord
@@ -119,8 +110,6 @@ CONTAINS
     EXTERNAL :: PASS, DPCOEF, DPOLFT, DP1VLU
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
-    !     .. Common blocks ..
-    COMMON /DCHECK/ EPS, R, RP, SVEps, TOL, NORdp, NORd, IERp, IERr
     !* FIRST EXECUTABLE STATEMENT  DPFITT
     IF ( Kprint>=2 ) WRITE (Lun,FMT=99002)
     !

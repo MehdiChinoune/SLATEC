@@ -1,5 +1,6 @@
 !** MINSO4
 SUBROUTINE MINSO4(Usol,Idmn,Zn,Zm,Pertb)
+  USE SPL4
   IMPLICIT NONE
   !>
   !***
@@ -31,13 +32,9 @@ SUBROUTINE MINSO4(Usol,Idmn,Zn,Zm,Pertb)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  INTEGER i, Idmn, ifnl, ii, IS, istr, j, jfnl, jj, JS, jstr, K, &
-    KSWx, KSWy, L, MIT, MS, NIT, NS
-  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, ete, Pertb, &
-    pertrb, TDLx3, TDLy3, Usol(Idmn,*), ute, Zm(*), Zn(*)
-  COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
-    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
+
+  INTEGER i, Idmn, ifnl, ii, istr, j, jfnl, jj, jstr
+  REAL ete, Pertb, pertrb, Usol(Idmn,*), ute, Zm(*), Zn(*)
   !* FIRST EXECUTABLE STATEMENT  MINSO4
   istr = 1
   ifnl = K

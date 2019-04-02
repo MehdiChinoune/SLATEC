@@ -1,5 +1,6 @@
 !** LA05BD
 SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
+  USE LA05DD
   IMPLICIT NONE
   !>
   !***
@@ -44,15 +45,11 @@ SUBROUTINE LA05BD(A,Ind,Ia,N,Ip,Iw,W,G,B,Trans)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900402  Added TYPE section.  (WRB)
   !   920410  Corrected second dimension on IW declaration.  (WRB)
-  
-  INTEGER i, Ia, ii, j, k, k2, kk, kl, kll, kp, kpc, l1, LCOl, &
-    LENl, LENu, LP, LROw, N, n1, NCP
-  INTEGER nz
-  REAL(8) :: A(*), B(*), am, W(*), G, SMAll
+
+  INTEGER i, Ia, ii, j, k, k2, kk, kl, kll, kp, kpc, l1, N, n1, nz
+  REAL(8) :: A(*), B(*), am, W(*), G
   LOGICAL Trans
-  INTEGER Ind(Ia,2), Iw(N,8)
-  INTEGER Ip(N,2)
-  COMMON /LA05DD/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
+  INTEGER Ind(Ia,2), Iw(N,8), Ip(N,2)
   !* FIRST EXECUTABLE STATEMENT  LA05BD
   IF ( G<0.D0 ) THEN
     !

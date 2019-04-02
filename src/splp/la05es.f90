@@ -1,5 +1,6 @@
 !** LA05ES
 SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Ia,Reals)
+  USE LA05DS
   IMPLICIT NONE
   !>
   !***
@@ -37,14 +38,11 @@ SUBROUTINE LA05ES(A,Irn,Ip,N,Iw,Ia,Reals)
   !   890831  Modified array declarations.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  INTEGER Ia, ipi, j, k, kl, kn, LCOl, LENl, LENu, LP, LROw, N, NCP, nz
-  REAL SMAll
+
+  INTEGER Ia, ipi, j, k, kl, kn, N, nz
   LOGICAL Reals
   REAL A(*)
-  INTEGER Irn(*), Iw(*)
-  INTEGER Ip(*)
-  COMMON /LA05DS/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
+  INTEGER Irn(*), Iw(*), Ip(*)
   !* FIRST EXECUTABLE STATEMENT  LA05ES
   NCP = NCP + 1
   !     COMPRESS FILE OF POSITIVE INTEGERS. ENTRY J STARTS AT IRN(IP(J))

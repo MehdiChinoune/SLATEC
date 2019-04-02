@@ -1,5 +1,12 @@
+MODULE SLADOC_MOD
+  IMPLICIT NONE
+  INTEGER, PARAMETER :: IALPHA = 26
+  INTEGER :: I1(IALPHA), I2(IALPHA), I3(IALPHA), LMSg(IALPHA)
+  CHARACTER(7) :: CLAss(IALPHA)
+END MODULE SLADOC_MOD
 !** SLADOC
 PROGRAM SLADOC
+  USE SLADOC_MOD
   IMPLICIT NONE
   !>
   !***
@@ -167,15 +174,10 @@ PROGRAM SLADOC
   CHARACTER(LUTIL+LLIB+54) :: fmt2
   CHARACTER(80) :: msg
   CHARACTER form*25
-  INTEGER, PARAMETER :: IALPHA = 26
-  INTEGER I1(IALPHA), I2(IALPHA), I3(IALPHA), LMSg(IALPHA)
-  CHARACTER(7) :: CLAss(IALPHA)
   !
   !     Variables used in the browsing mode.
   !
   INTEGER pgsz, low, high
-  COMMON /CATGRY/ I1, I2, I3, LMSg
-  COMMON /KLASS / CLAss
   !
   !     External functions.
   !
@@ -1687,6 +1689,7 @@ SUBROUTINE CHARIN(Cardin,Lcard,Iopt,Lb,Lt)
 END SUBROUTINE CHARIN
 !** MINOR
 INTEGER FUNCTION MINOR(Kat,Kats,Ncc,Tclass,Iptr,Jptr,Kptr,Ntry)
+  USE SLADOC_MOD
   IMPLICIT NONE
   !>
   !***
@@ -1711,26 +1714,18 @@ INTEGER FUNCTION MINOR(Kat,Kats,Ncc,Tclass,Iptr,Jptr,Kptr,Ntry)
   !   891208  Prologue converted to Version 4.0 format.  (BAB)
   !   920911  Declarations section restructured.  (WRB)
 
-  !     .. Parameters ..
-  INTEGER, PARAMETER :: IALPHA = 26
   !     .. Scalar Arguments ..
   INTEGER Ncc, Ntry
   CHARACTER*(*) Kat, Kats
   !     .. Array Arguments ..
   INTEGER Iptr(Ncc), Jptr(Ncc), Kptr(Ncc)
   CHARACTER*(*) Tclass(Ncc)
-  !     .. Arrays in Common ..
-  INTEGER I1(IALPHA), I2(IALPHA), I3(IALPHA), LMSg(IALPHA)
-  CHARACTER(7) :: CLAss(IALPHA)
   !     .. Local Scalars ..
   INTEGER ifind
   !     .. External Functions ..
   INTEGER, EXTERNAL :: FIND
   !     .. External Subroutines ..
   EXTERNAL :: UNDOCL
-  !     .. Common blocks ..
-  COMMON /CATGRY/ I1, I2, I3, LMSg
-  COMMON /KLASS / CLAss
   !* FIRST EXECUTABLE STATEMENT  MINOR
   MINOR = 0
   ifind = FIND(Tclass,Ncc,Kat)

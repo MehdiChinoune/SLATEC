@@ -1,5 +1,6 @@
 !** SSDSCL
 SUBROUTINE SSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
+  USE SSLBLK
   IMPLICIT NONE
   !>
   !***
@@ -147,21 +148,17 @@ SUBROUTINE SSDSCL(N,Nelt,Ia,Ja,A,Isym,X,B,Dinv,Job,Itol)
   !   920511  Added complete declaration section.  (WRB)
   !   921113  Corrected C***CATEGORY line.  (FNF)
   !   930701  Updated CATEGORY section.  (FNF, WRB)
-  
+
   !     .. Scalar Arguments ..
   INTEGER Isym, Itol, Job, N, Nelt
   !     .. Array Arguments ..
   REAL A(Nelt), B(N), Dinv(N), X(N)
   INTEGER Ia(Nelt), Ja(Nelt)
-  !     .. Arrays in Common ..
-  REAL SOLn(25)
   !     .. Local Scalars ..
   REAL di
   INTEGER icol, j, jbgn, jend
   !     .. Intrinsic Functions ..
   INTRINSIC SQRT
-  !     .. Common blocks ..
-  COMMON /SSLBLK/ SOLn
   !* FIRST EXECUTABLE STATEMENT  SSDSCL
   !
   !         SCALING...

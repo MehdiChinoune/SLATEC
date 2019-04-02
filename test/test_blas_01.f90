@@ -1,5 +1,7 @@
 MODULE TEST17_MOD
   IMPLICIT NONE
+  INTEGER :: NPRint, ICAse, N, INCx, INCy, MODe
+  LOGICAL :: PASs
 
 CONTAINS
   !** BLACHK
@@ -33,10 +35,7 @@ CONTAINS
     !   890618  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    INTEGER ICAse, INCx, INCy, Kprint, Lun, MODe, N, NPRint
-    INTEGER Ipass
-    LOGICAL PASs
-    COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
+    INTEGER Lun, Ipass, Kprint
     REAL, PARAMETER :: sfac = .625E-1, sdfac = .50
     REAL(8), PARAMETER :: dfac = .625D-1, dqfac = 0.625D-1
     INTEGER, PARAMETER :: jtest(38) = [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, &
@@ -103,10 +102,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   920210  Minor modifications to prologue and code.  (WRB)
 
-    INTEGER ICAse, INCx, INCy, Kprint, MODe, N, NPRint
-    COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
-    LOGICAL PASs
-    !
+    INTEGER :: Kprint
     CHARACTER(6), PARAMETER :: l(38)  = [ '  SDOT', ' DSDOT', 'SDSDOT', &
       '  DDOT', 'DQDOTI', 'DQDOTA', ' CDOTC', ' CDOTU', ' SAXPY', ' DAXPY', &
       ' CAXPY', ' SROTG', ' DROTG', '  SROT', '  DROT', 'SROTMG', 'DROTMG', &
@@ -151,10 +147,8 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    INTEGER i, ICAse, INCx, INCy, jump, k, Kprint, MODe, N, NPRint
+    INTEGER i, jump, k, Kprint
     REAL sa, sb, sc, Sfac, ss
-    COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
-    LOGICAL PASs
     REAL strue(9), stemp(9)
     REAL(8) :: dc, ds, da, Dfac, db, dtemp(9)
     REAL, PARAMETER :: zero = 0.
@@ -305,11 +299,8 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    INTEGER i, ICAMAX, ICAse, IDAMAX, INCx, INCy, ISAMAX, jump, &
-      Kprint, len, MODe, N, np1, NPRint
+    INTEGER i, ICAMAX, IDAMAX, ISAMAX, jump, len, np1, Kprint
     REAL SASUM, SCASUM, SCNRM2, Sfac, SNRM2, stemp
-    COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
-    LOGICAL PASs
     REAL(8) :: dx(8), Dfac
     REAL(8) :: DNRM2, DASUM
     REAL strue(8), sx(8)
@@ -493,12 +484,8 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    INTEGER i, ICAse, INCx, INCy, j, ki, kn, kni, kpar, Kprint, &
-      ksize, lenx, leny, MODe, mx, my, N, NPRint
+    INTEGER i, j, ki, kn, kni, kpar, ksize, lenx, leny, mx, my, Kprint
     REAL Sdfac, SDOT, SDSDOT, Sfac
-    COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
-    !
-    LOGICAL PASs
     REAL sx(7), sy(7), stx(7), sty(7)
     REAL ssize(7), qc(30), sparam(5)
     REAL(8) :: dx(7), dy(7), dparam(5), dsize(7), dtx(7), dty(7)
@@ -1126,10 +1113,8 @@ CONTAINS
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
 
-    INTEGER i, ICAse, id, INCx, INCy, Kprint, Len, MODe, N, NPRint
+    INTEGER i, Len, Kprint, id
     INTEGER Icomp(*), Itrue(*)
-    LOGICAL PASs
-    COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     !* FIRST EXECUTABLE STATEMENT  ITEST
     DO i = 1, Len
       IF ( Icomp(i)/=Itrue(i) ) THEN
@@ -1197,10 +1182,8 @@ CONTAINS
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
 
-    INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
+    INTEGER i, Len, Kprint
     REAL Scomp(*), Strue(*), Ssize(*), Sfac, sd, R1MACH
-    LOGICAL PASs
-    COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     REAL :: releps = 0.0E0
     !* FIRST EXECUTABLE STATEMENT  STEST
     IF ( releps==0.0E0 ) releps = R1MACH(4)
@@ -1267,10 +1250,8 @@ CONTAINS
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
 
-    INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
+    INTEGER i, Len, Kprint
     REAL(8) :: Dcomp(*), Dtrue(*), Dsize(*), Dfac, dd, D1MACH
-    LOGICAL PASs
-    COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     REAL(8) :: releps = 0.0D0
     !* FIRST EXECUTABLE STATEMENT  DTEST
     IF ( releps==0.0D0 ) releps = D1MACH(4)
@@ -1337,11 +1318,9 @@ CONTAINS
     !   920211  Code restructured and information added to the DESCRIPTION
     !           section.  (WRB)
 
-    INTEGER i, ICAse, INCx, INCy, Kprint, Len, MODe, N, NPRint
+    INTEGER i, Len, Kprint
     COMPLEX :: Ccomp(*), Ctrue(*), Csize(*)
     REAL :: Cfac, dd, R1MACH, CABS1
-    LOGICAL PASs
-    COMMON /COMBLA/ NPRint, ICAse, N, INCx, INCy, MODe, PASs
     REAL :: releps = 0.0
     !* FIRST EXECUTABLE STATEMENT  DTEST
     IF ( releps==0.0 ) releps = R1MACH(4)

@@ -2,6 +2,7 @@
 INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,&
     Rwork,Iwork,Ak,Bnrm,Solnrm)
+  USE SSLBLK
   IMPLICIT NONE
   !>
   !***
@@ -190,14 +191,10 @@ INTEGER FUNCTION ISSOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MSOLVE
-  !     .. Arrays in Common ..
-  REAL SOLn(25)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
   REAL, EXTERNAL :: R1MACH, SNRM2
-  !     .. Common blocks ..
-  COMMON /SSLBLK/ SOLn
   !* FIRST EXECUTABLE STATEMENT  ISSOMN
   ISSOMN = 0
   !

@@ -1,5 +1,6 @@
 MODULE TEST06_MOD
   IMPLICIT NONE
+  REAL(8) :: X, A, FKM
 
 CONTAINS
   !** DBIKCK
@@ -40,7 +41,7 @@ CONTAINS
     !   910801  Editorial changes, some restructing and modifications to
     !           obtain more information when there is failure of the
     !           Wronskian.  (WRB)
-    
+
     INTEGER Kprint, NUMXER
     INTEGER i, Ipass, ix, k, kode, kontrl, Lun, m, n, nerr, nu, nw, ny
     REAL(8) :: alp, del, er, fnu, fnup, rx, tol, x
@@ -310,7 +311,7 @@ CONTAINS
     !   910801  Editorial changes, some restructing and modifications to
     !           obtain more information when there is failure of the
     !           Wronskian.  (WRB)
-    
+
     INTEGER Kprint, NUMXER
     INTEGER i, Ipass, ix, k, kontrl, Lun, m, n, nerr, nu, ny
     REAL(8) :: alp, del, er, fnu, fnup, rhpi, rx, tol, x
@@ -541,12 +542,11 @@ CONTAINS
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
     !   920206  Corrected argument list in CALL to DEXINT.  (WRB)
-    
+
     INTEGER Kprint
-    COMMON /DFEINX/ X, A, FKM
     INTEGER i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
       kode, kx, Lun, m, n, nm, nz
-    REAL(8) :: A, ans, atol, bb, en(4), er, ex, FKM, sig, sum, tol, t1, t2, X, xx(5), y(4)
+    REAL(8) :: ans, atol, bb, en(4), er, ex, sig, sum, tol, t1, t2, xx(5), y(4)
     REAL(8) :: D1MACH
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  DEG8CK
@@ -712,9 +712,8 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
-    COMMON /DFEINX/ X, A, FKM
-    REAL(8) :: X, A, FKM, T, aln
+
+    REAL(8) :: T, aln
     !* FIRST EXECUTABLE STATEMENT  DFEIN
     aln = (FKM-T)*X - A*LOG(T)
     DFEIN = EXP(aln)
@@ -775,7 +774,7 @@ PROGRAM TEST06
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST06

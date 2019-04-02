@@ -1,5 +1,6 @@
 !** MACON
 SUBROUTINE MACON
+  USE ML, ONLY : URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
   IMPLICIT NONE
   !>
   !***
@@ -29,10 +30,9 @@ SUBROUTINE MACON
   !           (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
-  REAL dd, EPS, FOUru, R1MACH, SQOvfl, SRU, TWOu, URO
-  INTEGER ke, LPAr
-  COMMON /ML5MCO/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
+
+  REAL dd, R1MACH
+  INTEGER ke
   !* FIRST EXECUTABLE STATEMENT  MACON
   URO = R1MACH(4)
   SRU = SQRT(URO)

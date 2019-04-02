@@ -2,6 +2,7 @@
 SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
     Primal,Duals,Amat,Csc,Colnrm,Erd,Erp,Basmat,Wr,Rz,Rg,&
     Rprim,Rhs,Ww,Lmx,Lbm,Ibasis,Ibb,Imat,Ibrc,Ipr,Iwr)
+  USE LA05DD
   IMPLICIT NONE
   !>
   !***
@@ -40,18 +41,17 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
 
   INTEGER i, ibas, ienter, ileave, Info, iopt, ipage, iplace, itlp, j, jstrt, k, &
-    key, Lbm, LCOl, LENl, LENu, Lmx, LP, lpg, lpr, lpr1, LROw, Mrelas, n20046, &
-    n20058, n20080, n20098, n20119, n20172, n20206, n20247, n20252, n20271, n20276, &
-    n20283, n20290, NCP, nerr, np, nparm, npr004, npr005, npr006, npr007, npr008, &
-    npr009, npr010, npr011, npr012, npr013, npr014, npr015, nredc, ntries, Nvars, &
-    nx0066, nx0091, nx0106, Ibasis(*), Ibb(*), Ibrc(Lbm,2), Imat(*), Ind(*), &
-    Ipr(*), Iwr(*), idum(01)
+    key, Lbm, Lmx, lpg, lpr, lpr1, Mrelas, n20046, n20058, n20080, n20098, n20119, &
+    n20172, n20206, n20247, n20252, n20271, n20276, n20283, n20290, nerr, np, &
+    nparm, npr004, npr005, npr006, npr007, npr008, npr009, npr010, npr011, npr012, &
+    npr013, npr014, npr015, nredc, ntries, Nvars, nx0066, nx0091, nx0106, &
+    Ibasis(*), Ibb(*), Ibrc(Lbm,2), Imat(*), Ind(*), Ipr(*), Iwr(*), idum(01)
   INTEGER, TARGET :: intopt(08)
   INTEGER, POINTER :: idg, ipagef, isave, mxitlp, kprint, itbrc, npp, lprg
   REAL(8) :: aij, Amat(*), anorm, Basmat(*), Bl(*), Bu(*), Colnrm(*), Costs(*), &
     Csc(*), Dattrv(*), dirnrm, Duals(*), dulnrm, Erd(*), erdnrm, Erp(*), factor, &
     gg, one, Prgopt(*), Primal(*), resnrm, Rg(*), Rhs(*), rhsnrm, Rprim(*), &
-    rprnrm, Rz(*), rzj, scalr, scosts, size, SMAll, theta, upbnd, uu, Wr(*), &
+    rprnrm, Rz(*), rzj, scalr, scosts, size, theta, upbnd, uu, Wr(*), &
     Ww(*), xlamda, xval, zero, rdum(01)
   REAL(8), TARGET :: ropt(07)
   REAL(8), POINTER :: eps, asmall, abig, costsc, tolls, tune, tolabs
@@ -155,9 +155,6 @@ SUBROUTINE DPLPMN(DUSRMT,Mrelas,Nvars,Costs,Prgopt,Dattrv,Bl,Bu,Ind,Info,&
   LOGICAL, POINTER :: colscp, savedt, contin, cstscp, minprb, sizeup, stpedg, usrbas
   LOGICAL :: unbnd, feas, finite, found, redbas, singlr, trans, zerolv
   CHARACTER(8) :: xern1, xern2
-  !
-  !     COMMON BLOCK USED BY LA05 () PACKAGE..
-  COMMON /LA05DD/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
   EXTERNAL :: DUSRMT
 
   contin => lopt(1)

@@ -1,5 +1,6 @@
 !** CHKSNG
 SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
+  USE SPLPCM
   IMPLICIT NONE
   !>
   !***
@@ -28,13 +29,9 @@ SUBROUTINE CHKSNG(Mbdcnd,Nbdcnd,Alpha,Beta,Gama,Xnu,COFX,COFY,Singlr)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  REAL ai, AIT, Alpha, Beta, bi, BIT, ci, CIT, DIT, dj, DLX, &
-    DLX4, DLY, DLY4, ej, fj, Gama, TDLx3, TDLy3, xi
-  REAL Xnu, yj
-  INTEGER i, IS, j, JS, K, KSWx, KSWy, L, Mbdcnd, MIT, MS, Nbdcnd, NIT, NS
-  COMMON /SPLPCM/ KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
-    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
+
+  REAL ai, Alpha, Beta, bi, ci, dj, ej, fj, Gama, xi, Xnu, yj
+  INTEGER i, j, Mbdcnd, Nbdcnd
   LOGICAL Singlr
   !* FIRST EXECUTABLE STATEMENT  CHKSNG
   Singlr = .FALSE.

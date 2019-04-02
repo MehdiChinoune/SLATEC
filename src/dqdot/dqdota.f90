@@ -1,5 +1,6 @@
 !** DQDOTA
 REAL(8) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
+  USE MPCOM, MPB => B, MPT => T, MPM => M, MPLun => LUN, MPMxr => MXR, MPR => R
   IMPLICIT NONE
   !>
   !***
@@ -73,10 +74,9 @@ REAL(8) FUNCTION DQDOTA(N,Db,Qc,Dx,Incx,Dy,Incy)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   930124  Increased Array sizes for SUN -r8.  (RWC)
 
-  INTEGER i, Incx, Incy, ix, iy, MPB, MPLun, MPM, MPMxr, MPR, MPT, N
+  INTEGER i, Incx, Incy, ix, iy, N
   REAL(8) :: Dx(*), Dy(*), Db
   INTEGER Qc(30), qx(30), qy(30)
-  COMMON /MPCOM / MPB, MPT, MPM, MPLun, MPMxr, MPR(30)
   INTEGER :: i1 = 0
   !* FIRST EXECUTABLE STATEMENT  DQDOTA
   IF ( i1==0 ) CALL MPBLAS(i1)

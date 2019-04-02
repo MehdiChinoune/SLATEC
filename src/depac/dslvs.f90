@@ -1,5 +1,6 @@
 !** DSLVS
 SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
+  USE DDEBD1, ONLY : EL0, H, IER, MITer, N
   IMPLICIT NONE
   !>
   !***
@@ -30,15 +31,10 @@ SUBROUTINE DSLVS(Wm,Iwm,X,Tem)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-  
+
   !
-  INTEGER i, IER, IOWnd, IOWns, Iwm(*), JSTart, KFLag, L, MAXord, &
-    meband, METh, MITer, ml, mu, N, NFE, NJE, NQ, NQU, NST
-  REAL(8) :: di, EL0, H, hl0, HMIn, HMXi, HU, phl0, r, &
-    ROWnd, ROWns, Tem(*), TN, UROund, Wm(*), X(*)
-  COMMON /DDEBD1/ ROWnd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
-    UROund, IOWnd(14), IOWns(6), IER, JSTart, KFLag, L, &
-    METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
+  INTEGER i, Iwm(*), meband, ml, mu
+  REAL(8) :: di, hl0, phl0, r, Tem(*), Wm(*), X(*)
   !     ------------------------------------------------------------------
   !      THIS ROUTINE MANAGES THE SOLUTION OF THE LINEAR SYSTEM ARISING
   !      FROM A CHORD ITERATION.  IT IS CALLED BY DSTOD  IF MITER .NE. 0.

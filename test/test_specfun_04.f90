@@ -1,5 +1,6 @@
 MODULE TEST05_MOD
   IMPLICIT NONE
+  REAL X, A, FKM
 
 CONTAINS
   !** BIKCK
@@ -38,7 +39,7 @@ CONTAINS
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
-    
+
     INTEGER Ipass, Kprint, NUMXER
     INTEGER i, ix, k, kontrl, kode, Lun, m, n, nerr, nu, nw, ny
     REAL alp, del, er, fnu, fnup, rx, tol, x
@@ -307,7 +308,7 @@ CONTAINS
     !   910501  Added PURPOSE and TYPE records.  (WRB)
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
-    
+
     INTEGER Ipass, Kprint, NUMXER
     INTEGER i, ix, k, kontrl, Lun, m, n, nerr, nu, ny
     REAL alp, del, er, fnu, fnup, rhpi, rx, tol, x
@@ -541,12 +542,11 @@ CONTAINS
     !   910708  Code revised to test error returns for all values of
     !           KPRINT.  (WRB)
     !   920206  Corrected argument list in CALL to EXINT.  (WRB)
-    
+
     INTEGER Kprint
-    COMMON /FEINX / X, A, FKM
     INTEGER i, icase, ie, ierr, ii, ik, Ipass, ix, iy, k, ke, kk, &
       kode, kx, Lun, m, n, nm, nz
-    REAL A, ans, atol, bb, en(4), er, ex, FKM, sig, sum, tol, t1, t2, X, xx(5), y(4)
+    REAL ans, atol, bb, en(4), er, ex, sig, sum, tol, t1, t2, xx(5), y(4)
     REAL R1MACH
     LOGICAL fatal
     !* FIRST EXECUTABLE STATEMENT  EG8CK
@@ -712,9 +712,8 @@ CONTAINS
     !* REVISION HISTORY  (YYMMDD)
     !   ??????  DATE WRITTEN
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
-    
-    COMMON /FEINX / X, A, FKM
-    REAL X, A, FKM, T, aln
+
+    REAL T, aln
     !* FIRST EXECUTABLE STATEMENT  FEIN
     aln = (FKM-T)*X - A*LOG(T)
     FEIN = EXP(aln)
@@ -774,7 +773,7 @@ PROGRAM TEST05
   !   890618  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900524  Cosmetic changes to code.  (WRB)
-  
+
   INTEGER I1MACH
   INTEGER ipass, kprint, lin, lun, nfail
   !* FIRST EXECUTABLE STATEMENT  TEST05

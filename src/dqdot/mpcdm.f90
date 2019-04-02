@@ -1,5 +1,6 @@
 !** MPCDM
 SUBROUTINE MPCDM(Dx,Z)
+  USE MPCOM
   IMPLICIT NONE
   !>
   !***
@@ -39,11 +40,9 @@ SUBROUTINE MPCDM(Dx,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  
-  INTEGER i, i2, ib, ie, k, LUN, M, MXR
+
+  INTEGER i, i2, ib, ie, k, Z(*), rs, re, tp
   REAL(8) :: db, dj, Dx
-  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
-  INTEGER B, T, R, Z(*), rs, re, tp
   !* FIRST EXECUTABLE STATEMENT  MPCDM
   CALL MPCHK(1,4)
   i2 = T + 4

@@ -1,6 +1,8 @@
 !** RKFAB
 SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     W,S,Stowa,G,Work,Iwork,Nfcc)
+  USE ML, ONLY : C, INHomo, X, XBEg, XENd, XOP, INFo, KOP, AE, RE, NOPg, NDIsk, &
+    NTApe, NEQ, INTeg, NPS, NUMort, KKKint, LLLint
   IMPLICIT NONE
   !>
   !***
@@ -39,27 +41,10 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
 
-  INTEGER Ncomp, NCOmpd, NDIsk, NEEdiw, NEEdw, NEQ, NEQivp, Nfc, &
-    Nfcc, NFCcd, NFCd, nfcp1, NIC, Niv, non, NOPg, NPS, NSWot, NTApe, Ntp
-  REAL AE, C, G(*), P(Ntp,*), PWCnd, PX, RE, S(*), Stowa(*), TND, TOL, &
-    U(Ncomp,Nfc,*), V(Ncomp,*), W(Nfcc,*), Work(*), X, XBEg, XENd, XOP
-  REAL XOT, Xpts(*), XSAv, xxop, Yhp(Ncomp,*), Z(*)
-  INTEGER ICOco, idid, Iflag, IGOfx, INDpvt, INFo, INHomo, INTeg, &
-    Ip(Nfcc,*), ipar, ISTkop, IVP, Iwork(*), j, jflag, jon, K1, K10, K11, K2
-  INTEGER K3, K4, K5, K6, K7, K8, K9, KKKint, KKKzpw, KNSwot, &
-    kod, KOP, kopp, L1, L2, LLLint, LOTjp, MNSwot, Mxnon, MXNond
-  INTEGER NTPd, NUMort, Nxpts, NXPtsd
-  !
-  !- *********************************************************************
-  !
-  COMMON /ML8SZ / C, XSAv, IGOfx, INHomo, IVP, NCOmpd, NFCd
-  COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15), &
-    ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
-  COMMON /ML18JR/ AE, RE, TOL, NXPtsd, NIC, NOPg, MXNond, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTPd, NEQivp, NUMort, NFCcd, ICOco
-  COMMON /ML17BW/ KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, &
-    K7, K8, K9, K10, K11, L1, L2, KKKint, LLLint
-  !
+  INTEGER Ncomp, Nfc, Nfcc, nfcp1, Niv, non, Ntp, idid, Iflag, Ip(Nfcc,*), ipar, &
+    Iwork(*), j, jflag, jon, kod, kopp, Mxnon, Nxpts
+  REAL G(*), P(Ntp,*), S(*), Stowa(*), U(Ncomp,Nfc,*), V(Ncomp,*), W(Nfcc,*), &
+    Work(*), Xpts(*), xxop, Yhp(Ncomp,*), Z(*)
   EXTERNAL :: BVDER
   !
   !- *********************************************************************

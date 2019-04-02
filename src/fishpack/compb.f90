@@ -1,5 +1,6 @@
 !** COMPB
 SUBROUTINE COMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
+  USE CBLKT
   IMPLICIT NONE
   !>
   !***
@@ -30,13 +31,11 @@ SUBROUTINE COMPB(N,Ierror,An,Bn,Cn,B,Ah,Bh)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  REAL Ah(*), An(*), arg, B(*), Bh(*), Bn(*), bnorm, Cn(*), CNV, d1, d2, d3, EPS, R1MACH
-  INTEGER i, i2, i4, ib, Ierror, if, ifd, IK, ipl, ir, j, j1, &
-    j2, jf, js, K, kdo, l, l1, l2
-  INTEGER lh, ls, N, n2m2, nb, NCMplx, NM, nmp, NPP
+
+  REAL Ah(*), An(*), arg, B(*), Bh(*), Bn(*), bnorm, Cn(*), d1, d2, d3, R1MACH
+  INTEGER i, i2, i4, ib, Ierror, if, ifd, ipl, ir, j, j1, j2, jf, js, kdo, l, &
+    l1, l2, lh, ls, N, n2m2, nb, nmp
   COMPLEX :: Bc(500)
-  COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
   !* FIRST EXECUTABLE STATEMENT  COMPB
   EPS = R1MACH(4)
   bnorm = ABS(Bn(1))

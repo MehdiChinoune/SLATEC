@@ -1,5 +1,6 @@
 !** INXCB
 SUBROUTINE INXCB(I,Ir,Idx,Idp)
+  USE CCBLK
   IMPLICIT NONE
   !>
   !***
@@ -21,10 +22,8 @@ SUBROUTINE INXCB(I,Ir,Idx,Idp)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  REAL CNV, EPS
-  INTEGER I, id, Idp, Idx, IK, ipl, Ir, izh, K, NCMplx, NM, NPP
-  COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
+
+  INTEGER I, id, Idp, Idx, ipl, Ir, izh
   !* FIRST EXECUTABLE STATEMENT  INXCB
   Idp = 0
   IF ( Ir<0 ) RETURN

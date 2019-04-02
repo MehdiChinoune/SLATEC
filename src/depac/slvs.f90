@@ -1,5 +1,6 @@
 !** SLVS
 SUBROUTINE SLVS(Wm,Iwm,X,Tem)
+  USE DEBDF1, ONLY : EL0, H, IER, MITer, N
   IMPLICIT NONE
   !>
   !***
@@ -29,16 +30,11 @@ SUBROUTINE SLVS(Wm,Iwm,X,Tem)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-  
+
   !
   !LLL. OPTIMIZE
-  INTEGER Iwm(*), i, IER, IOWnd, IOWns, JSTart, KFLag, L, MAXord, &
-    meband, METh, MITer, ml, mu, N, NFE, NJE, NQ, NQU, NST
-  REAL Wm(*), X(*), Tem(*), ROWnd, ROWns, EL0, H, HMIn, HMXi, HU, TN, &
-    UROund, di, hl0, phl0, r
-  COMMON /DEBDF1/ ROWnd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
-    UROund, IOWnd(14), IOWns(6), IER, JSTart, KFLag, L, &
-    METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
+  INTEGER Iwm(*), i, meband, ml, mu
+  REAL Wm(*), X(*), Tem(*), di, hl0, phl0, r
   !-----------------------------------------------------------------------
   ! THIS ROUTINE MANAGES THE SOLUTION OF THE LINEAR SYSTEM ARISING FROM
   ! A CHORD ITERATION.  IT IS CALLED BY STOD  IF MITER .NE. 0.

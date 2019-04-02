@@ -1,5 +1,6 @@
 !** DINTYD
 SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
+  USE DDEBD1, ONLY : H, HU, TN, UROund, L, N, NQ
   IMPLICIT NONE
   !>
   !***
@@ -50,15 +51,10 @@ SUBROUTINE DINTYD(T,K,Yh,Nyh,Dky,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   !
-  INTEGER i, ic, IER, Iflag, IOWnd, IOWns, j, jb, jb2, jj, jj1, &
-    jp1, JSTart, K, KFLag, L, MAXord, METh, MITer, N, NFE, NJE, NQ, NQU, NST, Nyh
-  REAL(8) :: c, Dky(*), EL0, H, HMIn, HMXi, HU, r, ROWnd, &
-    ROWns, s, T, TN, tp, UROund, Yh(Nyh,*)
-  COMMON /DDEBD1/ ROWnd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
-    UROund, IOWnd(14), IOWns(6), IER, JSTart, KFLag, L, &
-    METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
+  INTEGER i, ic, Iflag, j, jb, jb2, jj, jj1, jp1, K, Nyh
+  REAL(8) :: c, Dky(*), r, s, T, tp, Yh(Nyh,*)
   !
   !     BEGIN BLOCK PERMITTING ...EXITS TO 130
   !* FIRST EXECUTABLE STATEMENT  DINTYD

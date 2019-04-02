@@ -1,5 +1,6 @@
 !** DMGSBV
 SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
+  USE DML, ONLY : SRU, EPS, INDpvt, NFCc
   IMPLICIT NONE
   !>
   !***
@@ -71,23 +72,13 @@ SUBROUTINE DMGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   !
   REAL(8) :: DDOT, DPRVEC
-  INTEGER i, Ia, ICOco, Iflag, INDpvt, Inhomo, INTeg, Ip(*), ip1, &
-    ix, iz, j, jk, jp, jq, jy, jz, k, kd, kj, kp, l, &
-    lix, LPAr, lr, M, m2, MXNon, N, NDIsk, NEQ, NEQivp, &
-    NFCc, NIC, Niv, nivn, nmnr, nn, NOPg, np1, NPS, nr, &
-    nrm1, NTApe, NTP, NUMort, NXPts
-  REAL(8) :: A(Ia,*), AE, dot, EPS, FOUru, P(*), pjp, psave, &
-    RE, ry, S(*), SQOvfl, SRU, sv, t, TOL, TWOu, &
-    URO, V(*), vl, vnorm, W(*), Wcnd, y
-  !
-  !
-  COMMON /DML18J/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, NUMort, NFCc, ICOco
-  !
-  COMMON /DML5MC/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
+  INTEGER i, Ia, Iflag, Inhomo, Ip(*), ip1, ix, iz, j, jk, jp, jq, jy, jz, k, kd, &
+    kj, kp, l, lix, lr, M, m2, N, Niv, nivn, nmnr, nn, np1, nr, nrm1
+  REAL(8) :: A(Ia,*), dot, P(*), pjp, psave, ry, S(*), sv, t, V(*), vl, vnorm, &
+    W(*), Wcnd, y
   !
   !* FIRST EXECUTABLE STATEMENT  DMGSBV
   IF ( M>0.AND.N>0.AND.Ia>=M ) THEN

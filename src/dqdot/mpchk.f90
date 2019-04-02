@@ -1,5 +1,6 @@
 !** MPCHK
 SUBROUTINE MPCHK(I,J)
+  USE MPCOM
   IMPLICIT NONE
   !>
   !***
@@ -33,10 +34,8 @@ SUBROUTINE MPCHK(I,J)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  
-  INTEGER I, I1MACH, ib, J, LUN, M, mx, MXR
-  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
-  INTEGER B, T, R
+
+  INTEGER I, I1MACH, ib, J, mx
   !* FIRST EXECUTABLE STATEMENT  MPCHK
   LUN = I1MACH(4)
   ! NOW CHECK LEGALITY OF B, T AND M

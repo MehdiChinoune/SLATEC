@@ -1,6 +1,11 @@
 !** DBVSUP
 SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Igofx,Re,Ae,Iflag,Work,Ndw,Iwork,Ndiw,Neqivp)
+  USE DML, ONLY : XSAv, IGOfxd => IGOfx, INHomo, NCOmpd => NCOmp, NFCd => NFC, &
+    KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, K7, K8, K9, K10, K11, L1, L2, &
+    KKKint, LLLint, XBEg, XENd, MNSwot, AED => AE, RED => RE, NXPtsd => NXPts, &
+    NICd => NIC, NOPg, MXNon, NDIsk, NTApe, INDpvt, INTeg, NPS, NTP, &
+    NEQivd => NEQivp, NFCc, ICOco
   IMPLICIT NONE
   !>
   !***
@@ -414,55 +419,16 @@ SUBROUTINE DBVSUP(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   900510  Convert XERRWV calls to XERMSG calls, remove some extraneous
   !           comments.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !- *********************************************************************
   !
-  INTEGER ICOco, Iflag, Igofx, IGOfxd, INDpvt, INFo, INHomo, INTeg, &
-    is, ISTkop, IVP, Iwork(*), j, k, K1, K10, K11, K2, K3, &
-    K4, K5, K6, K7, K8, K9, kkkcoe, kkkcof, kkkg, KKKint, &
-    kkks, kkksto, kkksud, kkksvc, kkku, kkkv, kkkws, kkkyhp, &
-    KKKzpw, KNSwot, KOP, kpts, L1, L2, lllcof, LLLint, lllip, &
-    llliws, lllsud, lllsvc, LOTjp, LPAr, MNSwot, MXNon, &
-    mxnoni, mxnonr, Ncomp, NCOmpd, ndeq, NDIsk, Ndiw, Ndw, &
-    NEEdiw, NEEdw, NEQ, NEQivd, Neqivp, Nfc, NFCc, NFCd, Nic, &
-    NICd, nitemp, non, NOPg, NPS, Nrowa, Nrowb, Nrowy, &
-    nrtemp, NSWot, NTApe, NTP, NUMort, Nxpts, NXPtsd, nxptsm
-  REAL(8) :: A(Nrowa,*), Ae, AED, Alpha(*), B(Nrowb,*), Beta(*), &
-    C, EPS, FOUru, PWCnd, PX, Re, RED, SQOvfl, SRU, &
-    TND, TOL, TWOu, URO, Work(Ndw), X, XBEg, XENd, &
-    XOP, XOT, Xpts(*), XSAv, Y(Nrowy,*)
+  INTEGER Iflag, Igofx, is, Iwork(*), j, k, kkkcoe, kkkcof, kkkg, kkks, kkksto, &
+    kkksud, kkksvc, kkku, kkkv, kkkws, kkkyhp, kpts, lllcof, lllip, llliws, &
+    lllsud, lllsvc, mxnoni, mxnonr, Ncomp, ndeq, Ndiw, Ndw, Neqivp, Nfc, Nic, &
+    nitemp, non, Nrowa, Nrowb, Nrowy, nrtemp, Nxpts, nxptsm
+  REAL(8) :: A(Nrowa,*), Ae, Alpha(*), B(Nrowb,*), Beta(*), Re, Work(Ndw), &
+    Xpts(*), Y(Nrowy,*)
   CHARACTER(8) :: xern1, xern2, xern3, xern4
-  !
-  !     ******************************************************************
-  !         THE COMMON BLOCK BELOW IS USED TO COMMUNICATE WITH SUBROUTINE
-  !         DBVDER.  THE USER SHOULD NOT ALTER OR USE THIS COMMON BLOCK IN
-  !         THE CALLING PROGRAM.
-  !
-  COMMON /DML8SZ/ C, XSAv, IGOfxd, INHomo, IVP, NCOmpd, NFCd
-  !
-  !     ******************************************************************
-  !         THESE COMMON BLOCKS AID IN REDUCING THE NUMBER OF SUBROUTINE
-  !         ARGUMENTS PREVALENT IN THIS MODULAR STRUCTURE
-  !
-  COMMON /DML18J/ AED, RED, TOL, NXPtsd, NICd, NOPg, MXNon, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivd, NUMort, NFCc, ICOco
-  COMMON /DML17B/ KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, &
-    K7, K8, K9, K10, K11, L1, L2, KKKint, LLLint
-  !
-  !     ******************************************************************
-  !         THIS COMMON BLOCK IS USED IN SUBROUTINES DBVSUP,DBVPOR,DRKFAB,
-  !         DREORT, AND DSTWAY. IT CONTAINS INFORMATION NECESSARY
-  !         FOR THE ORTHONORMALIZATION TESTING PROCEDURE AND A BACKUP
-  !         RESTARTING CAPABILITY.
-  !
-  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15), &
-    ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
-  !
-  !     ******************************************************************
-  !         THIS COMMON BLOCK CONTAINS THE MACHINE DEPENDENT PARAMETERS
-  !         USED BY THE CODE
-  !
-  COMMON /DML5MC/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
   !
   !      *****************************************************************
   !          SET UP MACHINE DEPENDENT CONSTANTS.

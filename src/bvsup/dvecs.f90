@@ -1,5 +1,6 @@
 !** DVECS
 SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
+  USE DML, ONLY : INDpvt, LNFcc => NFCc
   IMPLICIT NONE
   !>
   !***
@@ -35,14 +36,10 @@ SUBROUTINE DVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   !
-  INTEGER ICOco, idp, Iflag, INDpvt, Inhomo, INTeg, Iwork(*), k, &
-    kp, Lnfc, LNFcc, MXNon, Ncomp, NDIsk, NEQ, NEQivp, NIC, &
-    niv, NOPg, NPS, NTApe, NTP, NUMort, NXPts
-  REAL(8) :: AE, dum, RE, TOL, Work(*), Yhp(Ncomp,*)
-  COMMON /DML18J/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, NUMort, LNFcc, ICOco
+  INTEGER idp, Iflag, Inhomo, Iwork(*), k, kp, Lnfc, Ncomp, niv
+  REAL(8) :: dum, Work(*), Yhp(Ncomp,*)
   !* FIRST EXECUTABLE STATEMENT  DVECS
   IF ( Lnfc/=1 ) THEN
     niv = Lnfc

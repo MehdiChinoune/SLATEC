@@ -1,5 +1,8 @@
 !** STOD
 SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
+  USE DEBDF1, ONLY : CONit, CRAte, EL, ELCo, HOLd, RC, RMAx, TESco, EL0, H, HMIn, &
+    HMXi, HU, TN, KSTeps, IALth, IPUp, LMAx, MEO, NQNyh, NSTepj, IER, JSTart, &
+    KFLag, L, METh, MITer, MAXord, N, NQ, NST, NFE, NQU
   IMPLICIT NONE
   !>
   !***
@@ -93,25 +96,15 @@ SUBROUTINE STOD(Neq,Y,Yh,Nyh,Yh1,Ewt,Savf,Acor,Wm,Iwm,F,JAC,Rpar,Ipar)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-  
-  INTEGER IOD, Ipar(*), KSTeps
+
+  INTEGER Ipar(*)
   REAL Rpar(*)
   EXTERNAL :: F, JAC
   !
   !LLL. OPTIMIZE
-  INTEGER Neq, Nyh, Iwm(*), i, i1, IALth, IER, IOWnd, iredo, iret, &
-    IPUp, j, jb, JSTart, KFLag, L, LMAx, m, MAXord, MEO, &
-    METh, MITer, N, ncf, newq, NFE, NJE, NQ, NQNyh, NQU, NST, NSTepj
-  REAL Y(*), Yh(Nyh,*), Yh1(*), Ewt(*), Savf(*), Acor(*), Wm(*), &
-    ROWnd, CONit, CRAte, EL, &
-    ELCo, HOLd, RC, RMAx, TESco, EL0, H, HMIn, HMXi, HU, TN, &
-    UROund, dcon, ddn, del, delp, dsm, dup, exdn, exsm, exup, &
-    r, rh, rhdn, rhsm, rhup, told, VNWRMS
-  COMMON /DEBDF1/ ROWnd, CONit, CRAte, EL(13), ELCo(13,12), HOLd, RC, &
-    RMAx, TESco(3,12), EL0, H, HMIn, HMXi, HU, TN, &
-    UROund, IOWnd(7), KSTeps, IOD(6), IALth, IPUp, &
-    LMAx, MEO, NQNyh, NSTepj, IER, JSTart, KFLag, L, &
-    METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
+  INTEGER Neq, Nyh, Iwm(*), i, i1, iredo, iret, j, jb, m, ncf, newq
+  REAL Y(*), Yh(Nyh,*), Yh1(*), Ewt(*), Savf(*), Acor(*), Wm(*), dcon, ddn, del, &
+    delp, dsm, dup, exdn, exsm, exup, r, rh, rhdn, rhsm, rhup, told, VNWRMS
   !
   !
   !* FIRST EXECUTABLE STATEMENT  STOD

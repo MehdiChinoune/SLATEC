@@ -1,5 +1,10 @@
+MODULE DSAVEX
+  IMPLICIT NONE
+  REAL(8) :: XSAve, TERm
+END MODULE DSAVEX
 !** DFMAT
 SUBROUTINE DFMAT(X,Y,Yp)
+  USE DSAVEX
   IMPLICIT NONE
   !>
   !***
@@ -16,9 +21,8 @@ SUBROUTINE DFMAT(X,Y,Yp)
   !* REVISION HISTORY  (YYMMDD)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
-  REAL(8) :: X, Y(*), Yp(*), XSAve, TERm, tanx
-  COMMON /DSAVEX/ XSAve, TERm
+
+  REAL(8) :: X, Y(*), Yp(*), tanx
   !* FIRST EXECUTABLE STATEMENT  DFMAT
   Yp(1) = Y(2)
   IF ( X/=XSAve ) THEN

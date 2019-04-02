@@ -1,5 +1,6 @@
 !** INDXA
 SUBROUTINE INDXA(I,Ir,Idxa,Na)
+  USE CBLKT
   IMPLICIT NONE
   !>
   !***
@@ -21,10 +22,8 @@ SUBROUTINE INDXA(I,Ir,Idxa,Na)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  REAL CNV, EPS
-  INTEGER I, Idxa, IK, Ir, K, Na, NCMplx, NM, NPP
-  COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
+
+  INTEGER I, Idxa, Ir, Na
   !* FIRST EXECUTABLE STATEMENT  INDXA
   Na = 2**Ir
   Idxa = I - Na + 1

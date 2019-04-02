@@ -1,5 +1,6 @@
 !** XADD
 SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
+  USE XBLK ,ONLY: RADix, RADixl, RAD2l, L
   IMPLICIT NONE
   !>
   !***
@@ -46,15 +47,10 @@ SUBROUTINE XADD(X,Ix,Y,Iy,Z,Iz,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  
-  INTEGER i, i1, i2, Ierror, is, j
+
+  INTEGER i, i1, i2, Ierror, is, j, Ix, Iy, Iz
   REAL s, t
   REAL X, Y, Z
-  INTEGER Ix, Iy, Iz
-  REAL RADix, RADixl, RAD2l, DLG10r
-  INTEGER L, L2, KMAx
-  COMMON /XBLK2 / RADix, RADixl, RAD2l, DLG10r, L, L2, KMAx
-  SAVE /XBLK2 /
   !
   !
   !   THE CONDITIONS IMPOSED ON L AND KMAX BY THIS SUBROUTINE

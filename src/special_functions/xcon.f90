@@ -1,5 +1,6 @@
 !** XCON
 SUBROUTINE XCON(X,Ix,Ierror)
+  USE XBLK ,ONLY: RADix, RADixl, DLG10r, L
   IMPLICIT NONE
   !>
   !***
@@ -48,9 +49,8 @@ SUBROUTINE XCON(X,Ix,Ierror)
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
 
-  INTEGER i, i1, icase, Ierror, itemp, j, j1, j2
+  INTEGER i, i1, icase, Ierror, itemp, j, j1, j2, Ix
   REAL X
-  INTEGER Ix
   !
   !   THE CONDITIONS IMPOSED ON L AND KMAX BY THIS SUBROUTINE
   ! ARE
@@ -61,10 +61,6 @@ SUBROUTINE XCON(X,Ix,Ierror)
   ! THESE CONDITIONS MUST BE MET BY APPROPRIATE CODING
   ! IN SUBROUTINE XSET.
   !
-  REAL RADix, RADixl, RAD2l, DLG10r
-  INTEGER L, L2, KMAx
-  COMMON /XBLK2 / RADix, RADixl, RAD2l, DLG10r, L, L2, KMAx
-  SAVE /XBLK2 /
   INTEGER, EXTERNAL :: I1MACH
   !
   REAL a, b, z

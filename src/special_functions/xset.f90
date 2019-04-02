@@ -1,5 +1,6 @@
 !** XSET
 SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
+  USE XBLK
   IMPLICIT NONE
   !>
   !***
@@ -197,20 +198,9 @@ SUBROUTINE XSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
 
-  INTEGER i, I1MACH, ic, Ierror, ii, imaxex, iminex, iradx, it, j, &
-    k, kk, lg102x, lgtemp(20), log2r, lx, nb, NBItsf, nbitsx
-  INTEGER np1, nrdplc
-  INTEGER Irad, Nradpl, Nbits
+  INTEGER i, I1MACH, ic, Ierror, ii, imaxex, iminex, iradx, it, j, k, kk, lg102x, &
+    lgtemp(20), log2r, lx, nb, nbitsx, np1, nrdplc, Irad, Nradpl, Nbits
   REAL Dzero, dzerox
-  COMMON /XBLK1 / NBItsf
-  SAVE /XBLK1 /
-  REAL RADix, RADixl, RAD2l, DLG10r
-  INTEGER L, L2, KMAx
-  COMMON /XBLK2 / RADix, RADixl, RAD2l, DLG10r, L, L2, KMAx
-  SAVE /XBLK2 /
-  INTEGER NLG102, MLG102, LG102
-  COMMON /XBLK3 / NLG102, MLG102, LG102(21)
-  SAVE /XBLK3 /
   !
   !   LOG102 CONTAINS THE FIRST 60 DIGITS OF LOG10(2) FOR USE IN
   ! CONVERSION OF EXTENDED-RANGE NUMBERS TO BASE 10 .

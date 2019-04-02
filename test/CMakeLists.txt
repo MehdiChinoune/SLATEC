@@ -32,9 +32,11 @@ target_link_libraries(test_dassl_02 dassl )
 
 add_executable(test_depac_01 test_depac_01.f90 pass.f90)
 target_link_libraries(test_depac_01 depac bvsup)
+target_include_directories(test_depac_01 PRIVATE ${CMAKE_BINARY_DIR}/src/bvsup/ )
 
 add_executable(test_depac_02 test_depac_02.f90 pass.f90)
 target_link_libraries(test_depac_02 depac bvsup)
+target_include_directories(test_depac_02 PRIVATE ${CMAKE_BINARY_DIR}/src/bvsup/ )
 
 add_executable(test_eispack_01 test_eispack_01.f90)
 target_link_libraries(test_eispack_01 eispack lineq)

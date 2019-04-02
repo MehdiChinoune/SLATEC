@@ -1,5 +1,6 @@
 !** LA05AS
 SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
+  USE LA05DS
   IMPLICIT NONE
   !>
   !***
@@ -59,17 +60,12 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
 
   REAL eps, R1MACH
-  INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, &
-    k, k1, k2, kc, kcost, kj, kk, kl
-  INTEGER klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, LCOl, &
-    LENl, LENu, LP, LROw, mcp, N, nc, NCP
-  INTEGER Nz, nzc
-  INTEGER Ip(N,2)
-  INTEGER Ind(Ia,2), Iw(N,8)
-  REAL A(*), amax, au, am, G, U, SMAll, W(*)
+  INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, k, k1, k2, kc, &
+    kcost, kj, kk, kl, klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, mcp, N, &
+    nc, Nz, nzc
+  INTEGER Ip(N,2), Ind(Ia,2), Iw(N,8)
+  REAL A(*), amax, au, am, G, U, W(*)
   CHARACTER(8) :: xern0, xern1, xern2
-  !
-  COMMON /LA05DS/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
   ! EPS IS THE RELATIVE ACCURACY OF FLOATING-POINT COMPUTATION
   SAVE eps
   LOGICAL :: first = .TRUE.

@@ -1,6 +1,7 @@
 !** ISDIR
 INTEGER FUNCTION ISDIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,Dz,Rwork,Iwork,Bnrm,Solnrm)
+  USE DSLBLK
   IMPLICIT NONE
   !>
   !***
@@ -173,14 +174,10 @@ INTEGER FUNCTION ISDIR(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MSOLVE
-  !     .. Arrays in Common ..
-  REAL(8) :: SOLn(25)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
   REAL(8), EXTERNAL :: D1MACH, DNRM2
-  !     .. Common blocks ..
-  COMMON /DSLBLK/ SOLn
   !* FIRST EXECUTABLE STATEMENT  ISDIR
   ISDIR = 0
   IF ( Itol==1 ) THEN

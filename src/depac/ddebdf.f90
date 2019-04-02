@@ -1,6 +1,8 @@
 !** DDEBDF
 SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
     Rpar,Ipar,DJAC)
+  USE DDEBD1, ONLY : H, TN, IYH, IEWt, IACor, ISAvf, IWM, IBEgin, ITOl, IINteg, &
+    ITStop, IJAc, IBAnd
   IMPLICIT NONE
   !>
   !***
@@ -749,23 +751,13 @@ SUBROUTINE DDEBDF(DF,Neq,T,Y,Tout,Info,Rtol,Atol,Idid,Rwork,Lrw,Iwork,Liw,&
   !   900510  Convert XERRWV calls to XERMSG calls, make Prologue comments
   !           consistent with DEBDF.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
-  INTEGER IACor, IBAnd, IBEgin, icomi, icomr, idelsn, Idid, IER, &
-    IEWt, iinout, IINteg, IJAc, ilrw, Info(15), INIt, IOWns, &
-    Ipar(*), IQUit, ISAvf, ITOl, itstar, ITStop, IWM, Iwork(*), &
-    IYH, iypout, JSTart, KFLag, KSTeps, L, Liw, Lrw, MAXord, &
-    METh, MITer, ml, mu, N, Neq, NFE, NJE, NQ, NQU, NST
-  REAL(8) :: Atol(*), EL0, H, HMIn, HMXi, HU, ROWns, Rpar(*), Rtol(*), &
-    Rwork(*), T, TN, TOLd, Tout, UROund, Y(*)
+
+  INTEGER icomi, icomr, idelsn, Idid, iinout, ilrw, Info(15), Ipar(*), itstar, &
+    Iwork(*), iypout, Liw, Lrw, ml, mu, Neq
+  REAL(8) :: Atol(*), Rpar(*), Rtol(*), Rwork(*), T, Tout, Y(*)
   LOGICAL intout
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3
-  !
-  COMMON /DDEBD1/ TOLd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
-    UROund, IQUit, INIt, IYH, IEWt, IACor, ISAvf, IWM, &
-    KSTeps, IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, &
-    IOWns(6), IER, JSTart, KFLag, L, METh, MITer, &
-    MAXord, N, NQ, NST, NFE, NJE, NQU
   !
   EXTERNAL :: DF, DJAC
   !

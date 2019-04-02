@@ -1,5 +1,6 @@
 !** MGSBV
 SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
+  USE ML, ONLY : EPS, INDpvt, NFCc, SRU
   IMPLICIT NONE
   !>
   !***
@@ -69,22 +70,11 @@ SUBROUTINE MGSBV(M,N,A,Ia,Niv,Iflag,S,P,Ip,Inhomo,V,W,Wcnd)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
-  INTEGER i, Ia, ICOco, Iflag, INDpvt, Inhomo, INTeg, Ip(*), ip1, ix, &
-    iz, j, jk, jp, jq, jy, jz, k, kd, kj
-  REAL A(Ia,*), AE, dot, EPS, FOUru, P(*), pjp, PRVEC, psave, RE, ry, S(*), &
-    SDOT, SQOvfl, SRU, sv, t, TOL, TWOu, URO
-  REAL V(*), vl, vnorm, W(*), Wcnd, y
-  INTEGER kp, l, lix, LPAr, lr, M, m2, MXNon, N, NDIsk, NEQ, &
-    NEQivp, NFCc, NIC, Niv, nivn, nmnr, nn, NOPg, np1
-  INTEGER NPS, nr, nrm1, NTApe, NTP, NUMort, NXPts
-  !
-  !
-  COMMON /ML18JR/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, NUMort, NFCc, ICOco
-  !
-  COMMON /ML5MCO/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
-  !
+
+  INTEGER i, Ia, Iflag, Inhomo, Ip(*), ip1, ix, iz, j, jk, jp, jq, jy, jz, k, kd, &
+    kj, kp, l, lix, lr, M, m2, N, Niv, nivn, nmnr, nn, np1, nr, nrm1
+  REAL A(Ia,*), dot, P(*), pjp, PRVEC, psave, ry, S(*), SDOT, sv, t, V(*), vl, &
+    vnorm, W(*), Wcnd, y
   !* FIRST EXECUTABLE STATEMENT  MGSBV
   IF ( M>0.AND.N>0.AND.Ia>=M ) THEN
     !

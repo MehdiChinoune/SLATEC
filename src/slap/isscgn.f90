@@ -2,6 +2,7 @@
 INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
     Tol,Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Atp,Atz,Dz,&
     Atdz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
+  USE SSLBLK
   IMPLICIT NONE
   !>
   !***
@@ -214,14 +215,10 @@ INTEGER FUNCTION ISSCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MATVEC, MSOLVE, MTTVEC
-  !     .. Arrays in Common ..
-  REAL SOLn(25)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
   REAL, EXTERNAL :: R1MACH, SNRM2
-  !     .. Common blocks ..
-  COMMON /SSLBLK/ SOLn
   !* FIRST EXECUTABLE STATEMENT  ISSCGN
   ISSCGN = 0
   !

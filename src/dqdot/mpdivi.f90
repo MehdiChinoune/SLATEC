@@ -1,5 +1,6 @@
 !** MPDIVI
 SUBROUTINE MPDIVI(X,Iy,Z)
+  USE MPCOM
   IMPLICIT NONE
   !>
   !***
@@ -35,10 +36,9 @@ SUBROUTINE MPDIVI(X,Iy,Z)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  
-  INTEGER i, i2, iq, iqj, ir, Iy, j, j1, j11, j2, k, kh, LUN, M, MXR
-  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
-  INTEGER B, T, R, X(*), Z(*), rs, re, r1, c, c2, b2
+
+  INTEGER i, i2, iq, iqj, ir, Iy, j, j1, j11, j2, k, kh, X(*), Z(*), rs, re, r1, &
+    c, c2, b2
   !* FIRST EXECUTABLE STATEMENT  MPDIVI
   rs = X(1)
   j = Iy

@@ -1,5 +1,6 @@
 !** SRMGEN
 SUBROUTINE SRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Dsum,Itmp,Idiag)
+  USE SSLBLK
   IMPLICIT NONE
   !>
   !***
@@ -90,8 +91,6 @@ SUBROUTINE SRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Dsum,Itmp,Idiag)
   !     .. Array Arguments ..
   REAL A(Neltmx), Dsum(N), F(N)
   INTEGER Ia(Neltmx), Idiag(N), Itmp(N), Ja(Neltmx)
-  !     .. Arrays in Common ..
-  REAL SOLn(25)
   !     .. Local Scalars ..
   REAL dummy
   INTEGER i, icol, inum, irow, iseed, k, nl
@@ -101,8 +100,6 @@ SUBROUTINE SRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Dsum,Itmp,Idiag)
   EXTERNAL :: ISMPL
   !     .. Intrinsic Functions ..
   INTRINSIC INT
-  !     .. Common blocks ..
-  COMMON /SSLBLK/ SOLn
   !* FIRST EXECUTABLE STATEMENT  SRMGEN
   !
   !     Start by setting the random number generator seed.  This is done
@@ -113,6 +110,8 @@ SUBROUTINE SRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Dsum,Itmp,Idiag)
   !     Note:  Double precision version did not work properly with
   !            certain compilers with literal arguments to RAND.
   !
+  IF( ALLOCATED(SOLn) ) DEALLOCATE( SOLn )
+  ALLOCATE( SOLn(N) )
   dummy = 16381.0
   iseed = INT( RAND(dummy) )
   Ierr = 0

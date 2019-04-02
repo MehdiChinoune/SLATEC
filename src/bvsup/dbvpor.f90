@@ -1,6 +1,8 @@
 !** DBVPOR
 SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,W,Niv,Yhp,U,V,Coef,S,Stowa,G,Work,Iwork,Nfcc)
+  USE DML, ONLY : C, INHomo, IVP, PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, KNSwot, &
+    KOP, LOTjp, NSWot, AE, RE, TOL, NDIsk, NTApe, NEQ, NEQivp, NUMort, ICOco
   IMPLICIT NONE
   !>
   !***
@@ -135,29 +137,15 @@ SUBROUTINE DBVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   !
   REAL(8) :: DDOT
-  INTEGER i, i1, i2, ic, ICOco, Iflag, IGOfx, INDpvt, INFo, &
-    INHomo, INTeg, ira, isflg, ISTkop, IVP, j, k, KNSwot, &
-    kod, KOP, kpts, kwc, kwd, kws, kwt, l, LOTjp, m, &
-    MNSwot, Mxnon, MXNond, n, Ncomp, ncomp2, NCOmpd, NDIsk, &
-    ndw, NEQ, NEQivp, Nfc, Nfcc, NFCcd, NFCd, nfcp1, nfcp2, &
-    Nic, NICd, Niv, nn, non, NOPg, NPS, Nrowa, Nrowb, Nrowy, &
-    NSWot, NTApe, Ntp, NTPd, NUMort, Nxpts, NXPtsd, Ip(Nfcc,*), Iwork(*)
-  REAL(8) :: A(Nrowa,*), AE, Alpha(*), B(Nrowb,*), Beta(*), C, &
-    Coef(*), G(*), P(Ntp,*), PWCnd, PX, RE, S(*), &
-    Stowa(*), TND, TOL, U(Ncomp,Nfc,*), V(Ncomp,*), &
-    W(Nfcc,*), Work(*), X, XBEg, XENd, XOP, XOT, &
-    Xpts(*), XSAv, Y(Nrowy,*), Yhp(Ncomp,*), Z(*)
-  !
-  !     ******************************************************************
-  !
-  COMMON /DML8SZ/ C, XSAv, IGOfx, INHomo, IVP, NCOmpd, NFCd
-  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15), &
-    ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
-  COMMON /DML18J/ AE, RE, TOL, NXPtsd, NICd, NOPg, MXNond, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTPd, NEQivp, NUMort, NFCcd, ICOco
+  INTEGER i, i1, i2, ic, Iflag, ira, isflg, j, k, kod, kpts, kwc, kwd, kws, kwt, &
+    l, m, Mxnon, n, Ncomp, ncomp2, ndw, Nfc, Nfcc, nfcp1, nfcp2, Nic, Niv, nn, &
+    non, Nrowa, Nrowb, Nrowy, Ntp, Nxpts, Ip(Nfcc,*), Iwork(*)
+  REAL(8) :: A(Nrowa,*), Alpha(*), B(Nrowb,*), Beta(*), Coef(*), G(*), P(Ntp,*), &
+    S(*), Stowa(*), U(Ncomp,Nfc,*), V(Ncomp,*), W(Nfcc,*), Work(*), Xpts(*), &
+    Y(Nrowy,*), Yhp(Ncomp,*), Z(*)
   !
   !      *****************************************************************
   !

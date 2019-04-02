@@ -1,6 +1,9 @@
 !** DLSOD
 SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
     Acor,Wm,Iwm,DJAC,Intout,Tstop,Tolfac,Delsgn,Rpar,Ipar)
+  USE DDEBD1, ONLY : TOLd, H, HMIn, HMXi, X => TN, U => UROund, IQUit, INIt, &
+    KSTeps, IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, JSTart, KFLag, METh, &
+    MITer, MAXord, N, NQ, NST, NFE, NJE
   IMPLICIT NONE
   !>
   !***
@@ -34,22 +37,13 @@ SUBROUTINE DLSOD(DF,Neq,T,Y,Tout,Rtol,Atol,Idid,Ypout,Yh,Yh1,Ewt,Savf,&
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
 
   !
-  INTEGER IBAnd, IBEgin, Idid, IER, IINteg, IJAc, INIt, intflg, &
-    IOWns, Ipar(*), IQUit, ITOl, ITStop, Iwm(*), JSTart, k, KFLag, &
-    KSTeps, l, LACor, LDUm, LEWt, LSAvf, ltol, LWM, LYH, &
-    MAXord, METh, MITer, N, natolp, Neq, NFE, NJE, NQ, NQU, nrtolp, NST
-  REAL(8) :: absdel, Acor(*), Atol(*), big, D1MACH, del, Delsgn, dt, &
-    DVNRMS, EL0, Ewt(*), H, ha, HMIn, HMXi, HU, ROWns, &
-    Rpar(*), Rtol(*), Savf(*), T, tol, TOLd, Tolfac, Tout, &
-    Tstop, U, Wm(*), X, Y(*), Yh(Neq,6), Yh1(*), Ypout(*)
+  INTEGER Idid, intflg, Ipar(*), Iwm(*), k, l, ltol, natolp, Neq, nrtolp
+  REAL(8) :: absdel, Acor(*), Atol(*), big, D1MACH, del, Delsgn, dt, DVNRMS, &
+    Ewt(*), ha, Rpar(*), Rtol(*), Savf(*), T, tol, Tolfac, Tout, Tstop, Wm(*), &
+    Y(*), Yh(Neq,6), Yh1(*), Ypout(*)
   LOGICAL Intout
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3, xern4
-  !
-  COMMON /DDEBD1/ TOLd, ROWns(210), EL0, H, HMIn, HMXi, HU, X, U, &
-    IQUit, INIt, LYH, LEWt, LACor, LSAvf, LWM, KSTeps, &
-    IBEgin, ITOl, IINteg, ITStop, IJAc, IBAnd, IOWns(6), &
-    IER, JSTart, KFLag, LDUm, METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
   !
   EXTERNAL :: DF, DJAC
   !

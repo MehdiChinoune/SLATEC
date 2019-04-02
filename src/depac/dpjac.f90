@@ -1,5 +1,6 @@
 !** DPJAC
 SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
+  USE DDEBD1, ONLY : EL0, H, TN, UROund, IER, MITer, N, NFE, NJE
   IMPLICIT NONE
   !>
   !***
@@ -31,18 +32,13 @@ SUBROUTINE DPJAC(Neq,Y,Yh,Nyh,Ewt,Ftem,Savf,Wm,Iwm,DF,DJAC,Rpar,Ipar)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920422  Changed DIMENSION statement.  (WRB)
-  
+
   !
-  INTEGER i, i1, i2, IER, ii, IOWnd, IOWns, Ipar(*), Iwm(*), j, j1, &
-    jj, JSTart, KFLag, L, lenp, MAXord, mba, mband, meb1, &
-    meband, METh, MITer, ml, ml3, mu, N, Neq, NFE, NJE, NQ, NQU, NST, Nyh
-  REAL(8) :: con, di, DVNRMS, EL0, Ewt(*), fac, Ftem(*), H, hl0, &
-    HMIn, HMXi, HU, r, r0, ROWnd, ROWns, Rpar(*), Savf(*), &
-    srur, TN, UROund, Wm(*), Y(*), Yh(Nyh,*), yi, yj, yjj
+  INTEGER i, i1, i2, ii, Ipar(*), Iwm(*), j, j1, jj, lenp, mba, mband, meb1, &
+    meband, ml, ml3, mu, Neq, Nyh
+  REAL(8) :: con, di, DVNRMS, Ewt(*), fac, Ftem(*), hl0, r, r0, Rpar(*), Savf(*), &
+    srur, Wm(*), Y(*), Yh(Nyh,*), yi, yj, yjj
   EXTERNAL :: DF, DJAC
-  COMMON /DDEBD1/ ROWnd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
-    UROund, IOWnd(14), IOWns(6), IER, JSTart, KFLag, L, &
-    METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
   !     ------------------------------------------------------------------
   !      DPJAC IS CALLED BY DSTOD  TO COMPUTE AND PROCESS THE MATRIX
   !      P = I - H*EL(1)*J, WHERE J IS AN APPROXIMATION TO THE JACOBIAN.

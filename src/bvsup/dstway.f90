@@ -1,5 +1,6 @@
 !** DSTWAY
 SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
+  USE DML, ONLY : NCOmp, NFC, X, XOP, INFo, ISTkop, KOP, NDIsk, NTApe, NEQivp
   IMPLICIT NONE
   !>
   !***
@@ -32,21 +33,10 @@ SUBROUTINE DSTWAY(U,V,Yhp,Inout,Stowa)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   !
-  INTEGER ICOco, IGOfx, INDpvt, INFo, INHomo, Inout, INTeg, ISTkop, &
-    IVP, j, k, KNSwot, ko, KOP, ks, ksj, LOTjp, MNSwot, &
-    MXNon, NCOmp, NDIsk, NEQ, NEQivp, NFC, NFCc, NIC, NOPg, &
-    NPS, NSWot, NTApe, NTP, NUMort, NXPts
-  REAL(8) :: AE, C, PWCnd, PX, RE, Stowa(*), TND, TOL, U(*), &
-    V(*), X, XBEg, XENd, XOP, XOT, XSAv, Yhp(*)
-  !
-  COMMON /DML8SZ/ C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
-  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15), &
-    ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
-  COMMON /DML18J/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, NUMort, NFCc, ICOco
-  !
+  INTEGER Inout, j, k, ko, ks, ksj
+  REAL(8) :: Stowa(*), U(*), V(*), Yhp(*)
   !* FIRST EXECUTABLE STATEMENT  DSTWAY
   IF ( Inout==1 ) THEN
     !

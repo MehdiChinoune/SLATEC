@@ -1,5 +1,6 @@
 !** DEFE4
 SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
+  USE SPL4
   IMPLICIT NONE
   !>
   !***
@@ -40,13 +41,9 @@ SUBROUTINE DEFE4(COFX,Idmn,Usol,Grhs)
   !   890531  Changed all specific intrinsics to generic.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  INTEGER i, Idmn, IS, j, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
-  REAL ai, AIT, bi, BIT, ci, CIT, DIT, DLX, DLX4, DLY, DLY4, &
-    Grhs(Idmn,*), TDLx3, TDLy3, tx, ty, Usol(Idmn,*), uxxx, uxxxx, uyyy
-  REAL uyyyy, xi
-  COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
-    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
+
+  INTEGER i, Idmn, j
+  REAL ai, bi, ci, Grhs(Idmn,*), tx, ty, Usol(Idmn,*), uxxx, uxxxx, uyyy, uyyyy, xi
   EXTERNAL :: COFX
   !* FIRST EXECUTABLE STATEMENT  DEFE4
   DO i = IS, MS

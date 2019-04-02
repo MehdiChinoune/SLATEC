@@ -1,5 +1,6 @@
 !** ORTHOG
 SUBROUTINE ORTHOG(Usol,Idmn,Zn,Zm,Pertrb)
+  USE SPLPCM
   IMPLICIT NONE
   !>
   !***
@@ -28,12 +29,8 @@ SUBROUTINE ORTHOG(Usol,Idmn,Zn,Zm,Pertrb)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER i, Idmn, ifnl, ii, IS, istr, j, jfnl, jj, JS, jstr, K, &
-    KSWx, KSWy, L, MIT, MS, NIT, NS
-  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, ete, Pertrb, &
-    TDLx3, TDLy3, Usol(Idmn,*), ute, Zm(*), Zn(*)
-  COMMON /SPLPCM/ KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
-    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
+  INTEGER i, Idmn, ifnl, ii, istr, j, jfnl, jj, jstr
+  REAL ete, Pertrb, Usol(Idmn,*), ute, Zm(*), Zn(*)
   !* FIRST EXECUTABLE STATEMENT  ORTHOG
   istr = IS
   ifnl = MS

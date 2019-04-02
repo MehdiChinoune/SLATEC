@@ -1,5 +1,6 @@
 !** DXSET
 SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
+  USE DXBLK
   IMPLICIT NONE
   !>
   !***
@@ -198,19 +199,10 @@ SUBROUTINE DXSET(Irad,Nradpl,Dzero,Nbits,Ierror)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
 
   INTEGER i, I1MACH, ic, Ierror, ii, imaxex, iminex, iradx, it, j, &
-    k, kk, lg102x, lgtemp(20), log2r, lx, nb, NBItsf, nbitsx
+    k, kk, lg102x, lgtemp(20), log2r, lx, nb, nbitsx
   INTEGER np1, nrdplc
   INTEGER Irad, Nradpl, Nbits
   REAL(8) :: Dzero, dzerox
-  COMMON /DXBLK1/ NBItsf
-  SAVE /DXBLK1/
-  REAL(8) :: RADix, RADixl, RAD2l, DLG10r
-  INTEGER L, L2, KMAx
-  COMMON /DXBLK2/ RADix, RADixl, RAD2l, DLG10r, L, L2, KMAx
-  SAVE /DXBLK2/
-  INTEGER NLG102, MLG102, LG102
-  COMMON /DXBLK3/ NLG102, MLG102, LG102(21)
-  SAVE /DXBLK3/
   !
   !   LOG102 CONTAINS THE FIRST 60 DIGITS OF LOG10(2) FOR USE IN
   ! CONVERSION OF EXTENDED-RANGE NUMBERS TO BASE 10 .

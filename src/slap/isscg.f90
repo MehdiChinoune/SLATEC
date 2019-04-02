@@ -1,6 +1,7 @@
 !** ISSCG
 INTEGER FUNCTION ISSCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
     Err,Ierr,Iunit,R,Z,P,Dz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
+  USE SSLBLK
   IMPLICIT NONE
   !>
   !***
@@ -180,14 +181,10 @@ INTEGER FUNCTION ISSCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,Iter,&
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MSOLVE
-  !     .. Arrays in Common ..
-  REAL SOLn(25)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
   REAL, EXTERNAL :: R1MACH, SNRM2
-  !     .. Common blocks ..
-  COMMON /SSLBLK/ SOLn
   !* FIRST EXECUTABLE STATEMENT  ISSCG
   ISSCG = 0
   !

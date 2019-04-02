@@ -1,5 +1,6 @@
 !** DY
 SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
+  USE SPLPCM
   IMPLICIT NONE
   !>
   !***
@@ -28,11 +29,9 @@ SUBROUTINE DY(U,Idmn,I,J,Uyyy,Uyyyy)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  INTEGER I, Idmn, IS, J, JS, K, KSWx, KSWy, L, MIT, MS, NIT, NS
-  REAL AIT, BIT, CIT, DIT, DLX, DLX4, DLY, DLY4, TDLx3, TDLy3, U(Idmn,*), Uyyy, Uyyyy
-  COMMON /SPLPCM/ KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
-    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
+
+  INTEGER I, Idmn, J
+  REAL U(Idmn,*), Uyyy, Uyyyy
   !* FIRST EXECUTABLE STATEMENT  DY
   IF ( J>2.AND.J<(L-1) ) THEN
     !

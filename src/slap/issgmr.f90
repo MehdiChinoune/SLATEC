@@ -2,6 +2,7 @@
 INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
     Itmax,Iter,Err,Iunit,R,Z,Dz,Rwork,Iwork,Rnrm,Bnrm,&
     Sb,Sx,Jscal,Kmp,Lgmr,Maxl,Maxlp1,V,Q,Snormw,Prod,R0nrm,Hes,Jpre)
+  USE SSLBLK
   IMPLICIT NONE
   !>
   !***
@@ -277,8 +278,6 @@ INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   INTEGER Ia(*), Iwork(*), Ja(*)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MSOLVE
-  !     .. Arrays in Common ..
-  REAL SOLn(25)
   !     .. Local Scalars ..
   REAL dxnrm, fuzz, rat, ratmax, solnrm, tem
   INTEGER i, ielmax
@@ -288,8 +287,6 @@ INTEGER FUNCTION ISSGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   EXTERNAL :: SCOPY, SRLCAL, SSCAL, SXLCAL
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, MAX, SQRT
-  !     .. Common blocks ..
-  COMMON /SSLBLK/ SOLn
   !     .. Save statement ..
   SAVE solnrm
   !* FIRST EXECUTABLE STATEMENT  ISSGMR

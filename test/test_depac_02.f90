@@ -329,6 +329,7 @@ CONTAINS
   END SUBROUTINE QXDBDF
   !** QXDBVS
   SUBROUTINE QXDBVS(Lun,Kprint,Ipass)
+    USE DSAVEX
     IMPLICIT NONE
     !>
     !***
@@ -355,10 +356,9 @@ CONTAINS
       Lun, ncomp, ndiw, ndw, neqivp, nfc, nic, nrowa, nrowb, nrowy
     INTEGER numort, nxpts
     INTEGER itmp(9), iwork(100)
-    REAL(8) :: work(1000), ae, re, XSAve, sve, TERm, tol
+    REAL(8) :: work(1000), ae, re, sve, tol
     REAL(8) :: y(4,15), a(2,4), alpha(2), b(2,4), beta(2), reler, abser
     CHARACTER(4) :: msg
-    COMMON /DSAVEX/ XSAve, TERm
     REAL(8), PARAMETER :: yans(2,15) = RESHAPE( [ &
       5.000000000D+00, -6.888880126D-01,   8.609248635D+00, -1.083092311D+00, &
       1.674923836D+01, -2.072210073D+00,   3.351098494D+01, -4.479263780D+00, &

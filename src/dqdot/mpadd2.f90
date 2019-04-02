@@ -1,5 +1,6 @@
 !** MPADD2
 SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
+  USE MPCOM
   IMPLICIT NONE
   !>
   !***
@@ -54,11 +55,8 @@ SUBROUTINE MPADD2(X,Y,Z,Y1,Trunc)
   !   900402  Added TYPE section.  (WRB)
   !   920528  Added a REFERENCES section revised.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  
-  INTEGER j, LUN, M, med, MXR
-  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
-  INTEGER B, T, R, X(*), Y(*), Z(*), Y1(*), Trunc
-  INTEGER s, ed, rs, re
+
+  INTEGER j, med, X(*), Y(*), Z(*), Y1(*), Trunc, s, ed, rs, re
   !* FIRST EXECUTABLE STATEMENT  MPADD2
   IF ( X(1)/=0 ) THEN
     IF ( Y1(1)==0 ) GOTO 100

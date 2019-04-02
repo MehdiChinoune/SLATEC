@@ -1,5 +1,6 @@
 !** LA05AD
 SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
+  USE LA05DD
   IMPLICIT NONE
   !>
   !***
@@ -60,17 +61,12 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
 
-  INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, &
-    k, k1, k2, kc, kcost, kj, kk, kl
-  INTEGER klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, LCOl, &
-    LENl, LENu, LP, LROw, mcp, N, nc, NCP
-  INTEGER Nz, nzc
-  INTEGER Ip(N,2)
-  INTEGER Ind(Ia,2), Iw(N,8)
-  REAL(8) :: A(*), amax, au, am, D1MACH, eps, G, U, SMAll, W(*)
+  INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, k, k1, k2, kc, &
+    kcost, kj, kk, kl, klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, mcp, N, &
+    nc, Nz, nzc
+  INTEGER Ip(N,2), Ind(Ia,2), Iw(N,8)
+  REAL(8) :: A(*), amax, au, am, D1MACH, eps, G, U, W(*)
   CHARACTER(8) :: xern0, xern1, xern2
-  !
-  COMMON /LA05DD/ SMAll, LP, LENl, LENu, NCP, LROw, LCOl
   ! EPS IS THE RELATIVE ACCURACY OF FLOATING-POINT COMPUTATION
   SAVE eps
   LOGICAL :: first = .TRUE.

@@ -1,6 +1,7 @@
 !** SCOEF
 SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
     Cvec,Work,Iwork,Iflag,Nfcc)
+  USE ML, ONLY : EPS
   IMPLICIT NONE
   !>
   !***
@@ -79,13 +80,10 @@ SUBROUTINE SCOEF(Yh,Yp,Ncomp,Nrowb,Nfc,Nic,B,Beta,Coef,Inhomo,Re,Ae,By,&
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
 
-  INTEGER i, Iflag, Inhomo, Iwork(*), j, k, kflag, ki, l, LPAr, &
-    mlso, Ncomp, ncomp2, nf, Nfc, Nfcc, nfccm1, Nic, Nrowb
+  INTEGER i, Iflag, Inhomo, Iwork(*), j, k, kflag, ki, l, mlso, Ncomp, ncomp2, &
+    nf, Nfc, Nfcc, nfccm1, Nic, Nrowb
   REAL Ae, B(Nrowb,*), bbn, Beta(*), bn, brn, By(Nfcc,*), bykl, bys, Coef(*), cons, &
-    Cvec(*), EPS, FOUru, gam, Re, SDOT, SQOvfl, SRU, TWOu
-  REAL un, URO, Work(*), Yh(Ncomp,*), Yp(*), ypn
-  !
-  COMMON /ML5MCO/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
+    Cvec(*), gam, un, Work(*), Yh(Ncomp,*), Yp(*), ypn, SDOT, Re
   !
   !     SET UP MATRIX  B*YH  AND VECTOR  BETA - B*YP
   !

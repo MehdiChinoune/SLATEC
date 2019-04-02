@@ -1,5 +1,6 @@
 !** MPBLAS
 SUBROUTINE MPBLAS(I1)
+  USE MPCOM, MPB => B, MPT => T, MPM => M, MPLun => LUN, MPMxr => MXR, MPR => R
   IMPLICIT NONE
   !>
   !***
@@ -47,9 +48,8 @@ SUBROUTINE MPBLAS(I1)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8, and calculate
   !               size for Quad Precision for 2x DP.  (RWC)
-  
-  INTEGER I1, I1MACH, MPB, mpbexp, MPLun, MPM, MPMxr, MPR, MPT
-  COMMON /MPCOM / MPB, MPT, MPM, MPLun, MPMxr, MPR(30)
+
+  INTEGER I1, I1MACH, mpbexp
   !* FIRST EXECUTABLE STATEMENT  MPBLAS
   I1 = 1
   !

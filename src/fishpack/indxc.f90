@@ -1,5 +1,6 @@
 !** INDXC
 SUBROUTINE INDXC(I,Ir,Idxc,Nc)
+  USE CBLKT
   IMPLICIT NONE
   !>
   !***
@@ -21,10 +22,8 @@ SUBROUTINE INDXC(I,Ir,Idxc,Nc)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  REAL CNV, EPS
-  INTEGER I, Idxc, IK, Ir, K, Nc, NCMplx, NM, NPP
-  COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
+
+  INTEGER I, Idxc, Ir, Nc
   !* FIRST EXECUTABLE STATEMENT  INDXC
   Nc = 2**Ir
   Idxc = I

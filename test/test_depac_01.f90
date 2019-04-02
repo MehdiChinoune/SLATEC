@@ -425,6 +425,7 @@ CONTAINS
   END SUBROUTINE QXRKF
   !** QXBVSP
   SUBROUTINE QXBVSP(Lun,Kprint,Ipass)
+    USE SAVEX
     IMPLICIT NONE
     !>
     !***
@@ -448,13 +449,12 @@ CONTAINS
     !   910708  Minor modifications in use of KPRINT.  (WRB)
 
     INTEGER numort, nxpts
-    REAL a(2,4), abser, ae, alpha(2), b(2,4), beta(2), re, reler, sve, TERm, tol, &
-      work(1000), XSAve, y(4,15)
+    REAL a(2,4), abser, ae, alpha(2), b(2,4), beta(2), re, reler, sve, tol, &
+      work(1000), y(4,15)
     INTEGER i, iflag, igofx, Ipass, ipss, j, kont, kount, Kprint, l, &
       Lun, ncomp, ndiw, ndw, neqivp, nfc, nic, nrowa, nrowb, nrowy
     INTEGER itmp(9), iwork(100)
     CHARACTER(4) :: msg
-    COMMON /SAVEX / XSAve, TERm
     REAL, PARAMETER :: yans(2,15) = RESHAPE( [ 5.000000000E+00, -6.888880126E-01, &
       8.609248635E+00, -1.083092311E+00, 1.674923836E+01, -2.072210073E+00, &
       3.351098494E+01, -4.479263780E+00, 6.601103894E+01, -8.909222513E+00, &

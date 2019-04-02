@@ -1,5 +1,6 @@
 !** CBLKTR
 SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
+  USE CCBLK
   IMPLICIT NONE
   !>
   !***
@@ -206,18 +207,14 @@ SUBROUTINE CBLKTR(Iflg,Np,N,An,Bn,Cn,Mp,M,Am,Bm,Cm,Idimy,Y,Ierror,W)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   !
-  REAL CNV, EPS
-  INTEGER Idimy, Ierror, Iflg, IK, iw1, iw2, iw3, iwah, iwbh, iwd, &
-    iwu, iww, K, M, m2, Mp, N, NCMplx, nh, nl
-  INTEGER NM, Np, NPP
+  INTEGER Idimy, Ierror, Iflg, iw1, iw2, iw3, iwah, iwbh, iwd, i, iwu, iww, M, &
+    m2, Mp, N, nh, nl, Np
   REAL :: An(N), Bn(N), Cn(N), W(*)
   COMPLEX :: Am(M), Bm(M), Cm(M), Y(Idimy,N)
   COMPLEX :: WC(100)
-  INTEGER :: i
   EXTERNAL :: PROC, PROCP, CPROC, CPROCP
-  COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
   !* FIRST EXECUTABLE STATEMENT  CBLKTR
   WC = [ ( CMPLX(W(i),W(i+1)), i=1,199,2 ) ]
   NM = N

@@ -2,6 +2,7 @@
 INTEGER FUNCTION ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
     Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Ap,Emap,Dz,Csav,&
     Rwork,Iwork,Ak,Bnrm,Solnrm)
+  USE DSLBLK
   IMPLICIT NONE
   !>
   !***
@@ -192,14 +193,10 @@ INTEGER FUNCTION ISDOMN(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Nsave,Itol,Tol,&
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MSOLVE
-  !     .. Arrays in Common ..
-  REAL(8) :: SOLn(25)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
   REAL(8), EXTERNAL :: D1MACH, DNRM2
-  !     .. Common blocks ..
-  COMMON /DSLBLK/ SOLn
   !* FIRST EXECUTABLE STATEMENT  ISDOMN
   ISDOMN = 0
   !

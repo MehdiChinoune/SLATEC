@@ -1,6 +1,7 @@
 !** SPELI4
 SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
     Bdd,COFX,An,Bn,Cn,Dn,Un,Zn,Am,Bm,Cm,Dm,Um,Zm,Grhs,Usol,Idmn,W,Pertrb,Ierror)
+  USE SPL4
   IMPLICIT NONE
   !>
   !***
@@ -33,17 +34,11 @@ SUBROUTINE SPELI4(Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,Nbdcnd,Bdc,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER i, Idmn, ieror, Ierror, iord, Iorder, IS, j, JS, K, &
-    KSWx, KSWy, L, M, Mbdcnd, MIT, mp, MS, N, Nbdcnd
-  REAL A, ai, AIT, Alpha, Am(*), An(*), ax1, axi, B, Bda(*), Bdb(*), Bdc(*), &
-    Bdd(*), Beta, bi, BIT, Bm(*), Bn(*), bxi, C
-  REAL ci, CIT, Cm(*), Cn(*), cxi, cxm, D, DIT, DLX, DLX4, DLY, DLY4, &
-    Dm(*), Dn(*), dy1, dyj, eyj, fyj, fyn, gama
-  REAL Grhs(Idmn,*), Pertrb, prtrb, TDLx3, TDLy3, Um(*), Un(*), Usol(Idmn,*), &
-    W(*), xi, xnu, Zm(*), Zn(*)
-  INTEGER NIT, np, NS
-  COMMON /SPL4  / KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
-    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
+  INTEGER i, Idmn, ieror, Ierror, iord, Iorder, j, M, Mbdcnd, mp, N, Nbdcnd, np
+  REAL A, ai, Alpha, Am(*), An(*), ax1, axi, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), &
+    Beta, bi, Bm(*), Bn(*), bxi, C, ci, Cm(*), Cn(*), cxi, cxm, D, Dm(*), Dn(*), &
+    dy1, dyj, eyj, fyj, fyn, gama, Grhs(Idmn,*), Pertrb, prtrb, Um(*), Un(*), &
+    Usol(Idmn,*), W(*), xi, xnu, Zm(*), Zn(*)
   LOGICAL singlr
   EXTERNAL :: COFX
   !* FIRST EXECUTABLE STATEMENT  SPELI4

@@ -1,5 +1,6 @@
 !** DBVDER
 SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
+  USE DML, ONLY : NOFst, C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
   IMPLICIT NONE
   !>
   !***
@@ -63,20 +64,9 @@ SUBROUTINE DBVDER(X,Y,Yp,G,Ipar)
   !   910701  Corrected ROUTINES CALLED section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920618  Minor restructuring of code.  (RWC, WRB)
-  
-  INTEGER IGOfx, INHomo, Ipar, IVP, j, k, l, na, NCOmp, NFC, NOFst
-  REAL(8) :: C, G(*), X, XSAv, Y(*), Yp(*)
-  !
-  !- *********************************************************************
-  !
-  COMMON /DML8SZ/ C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
-  !
-  !- *********************************************************************
-  !     The COMMON block below is used to communicate with the user
-  !     supplied subroutine DFMAT.  The user should not alter this
-  !     COMMON block.
-  !
-  COMMON /DMLIVP/ NOFst
+
+  INTEGER Ipar, j, k, l, na
+  REAL(8) :: G(*), X, Y(*), Yp(*)
   !- *********************************************************************
   !
   !* FIRST EXECUTABLE STATEMENT  DBVDER

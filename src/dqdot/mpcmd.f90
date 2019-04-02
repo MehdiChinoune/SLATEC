@@ -1,5 +1,6 @@
 !** MPCMD
 SUBROUTINE MPCMD(X,Dz)
+  USE MPCOM
   IMPLICIT NONE
   !>
   !***
@@ -35,11 +36,9 @@ SUBROUTINE MPCMD(X,Dz)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  
-  INTEGER i, LUN, M, MXR
+
+  INTEGER i, X(*), tm
   REAL(8) :: db, Dz, dz2
-  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
-  INTEGER B, T, R, X(*), tm
   !* FIRST EXECUTABLE STATEMENT  MPCMD
   CALL MPCHK(1,4)
   Dz = 0D0

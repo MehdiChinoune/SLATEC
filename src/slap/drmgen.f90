@@ -1,5 +1,6 @@
 !** DRMGEN
 SUBROUTINE DRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Dsum,Itmp,Idiag)
+  USE DSLBLK
   IMPLICIT NONE
   !>
   !***
@@ -90,8 +91,6 @@ SUBROUTINE DRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Dsum,Itmp,Idiag)
   !     .. Array Arguments ..
   REAL(8) :: A(Neltmx), Dsum(N), F(N)
   INTEGER Ia(Neltmx), Idiag(N), Itmp(N), Ja(Neltmx)
-  !     .. Arrays in Common ..
-  REAL(8) :: SOLn(25)
   !     .. Local Scalars ..
   REAL dummy
   INTEGER i, icol, inum, irow, iseed, k, nl
@@ -101,8 +100,6 @@ SUBROUTINE DRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Dsum,Itmp,Idiag)
   EXTERNAL :: ISMPL
   !     .. Intrinsic Functions ..
   INTRINSIC INT
-  !     .. Common blocks ..
-  COMMON /DSLBLK/ SOLn
   !* FIRST EXECUTABLE STATEMENT  DRMGEN
   !
   !     Start by setting the random number generator seed.  This is done
@@ -113,6 +110,8 @@ SUBROUTINE DRMGEN(Neltmx,Factor,Ierr,N,Nelt,Isym,Ia,Ja,A,F,Dsum,Itmp,Idiag)
   !     Note:  Double precision version did not work properly with
   !            certain compilers with literal arguments to RAND.
   !
+  IF( ALLOCATED(SOLn) ) DEALLOCATE( SOLn )
+  ALLOCATE( SOLn(N) )
   dummy = 16381.0
   iseed = INT( RAND(dummy) )
   Ierr = 0

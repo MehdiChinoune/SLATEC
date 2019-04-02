@@ -1,5 +1,6 @@
 !** MPOVFL
 SUBROUTINE MPOVFL(X)
+  USE MPCOM
   IMPLICIT NONE
   !>
   !***
@@ -38,10 +39,8 @@ SUBROUTINE MPOVFL(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  
-  INTEGER LUN, M, MXR
-  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
-  INTEGER B, T, R, X(*)
+
+  INTEGER X(*)
   !* FIRST EXECUTABLE STATEMENT  MPOVFL
   CALL MPCHK(1,4)
   ! SET X TO LARGEST POSSIBLE POSITIVE NUMBER

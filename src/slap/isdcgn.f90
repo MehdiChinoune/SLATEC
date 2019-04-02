@@ -2,6 +2,7 @@
 INTEGER FUNCTION ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
     Tol,Itmax,Iter,Err,Ierr,Iunit,R,Z,P,Atp,Atz,Dz,&
     Atdz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
+  USE DSLBLK
   IMPLICIT NONE
   !>
   !***
@@ -216,14 +217,10 @@ INTEGER FUNCTION ISDCGN(N,B,X,Nelt,Ia,Ja,A,Isym,MATVEC,MTTVEC,MSOLVE,Itol,&
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MATVEC, MSOLVE, MTTVEC
-  !     .. Arrays in Common ..
-  REAL(8) :: SOLn(25)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
   REAL(8), EXTERNAL :: D1MACH, DNRM2
-  !     .. Common blocks ..
-  COMMON /DSLBLK/ SOLn
   !* FIRST EXECUTABLE STATEMENT  ISDCGN
   ISDCGN = 0
   !

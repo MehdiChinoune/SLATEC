@@ -1,5 +1,6 @@
 !** INDXB
 SUBROUTINE INDXB(I,Ir,Idx,Idp)
+  USE CBLKT
   IMPLICIT NONE
   !>
   !***
@@ -22,10 +23,8 @@ SUBROUTINE INDXB(I,Ir,Idx,Idp)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   920422  Added statement so IDX would always be defined.  (WRB)
-  
-  REAL CNV, EPS
-  INTEGER I, id, Idp, Idx, IK, ipl, Ir, izh, K, NCMplx, NM, NPP
-  COMMON /CBLKT / NPP, K, EPS, CNV, NM, NCMplx, IK
+
+  INTEGER I, id, Idp, Idx, ipl, Ir, izh
   !* FIRST EXECUTABLE STATEMENT  INDXB
   Idx = max(I,1)
   Idp = 0

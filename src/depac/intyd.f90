@@ -1,5 +1,6 @@
 !** INTYD
 SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
+  USE DEBDF1, ONLY : H, HU, TN, UROund, L, N, NQ
   IMPLICIT NONE
   !>
   !***
@@ -50,16 +51,11 @@ SUBROUTINE INTYD(T,K,Yh,Nyh,Dky,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   !
   !LLL. OPTIMIZE
-  INTEGER K, Nyh, Iflag, i, ic, IER, IOWnd, IOWns, j, jb, jb2, &
-    jj, jj1, jp1, JSTart, KFLag, L, MAXord, METh, MITer, N, &
-    NFE, NJE, NQ, NQU, NST
-  REAL T, Yh(Nyh,*), Dky(*), ROWnd, ROWns, EL0, H, HMIn, HMXi, HU, TN, UROund, c, r, s, tp
-  COMMON /DEBDF1/ ROWnd, ROWns(210), EL0, H, HMIn, HMXi, HU, TN, &
-    UROund, IOWnd(14), IOWns(6), IER, JSTart, KFLag, L, &
-    METh, MITer, MAXord, N, NQ, NST, NFE, NJE, NQU
+  INTEGER K, Nyh, Iflag, i, ic, j, jb, jb2, jj, jj1, jp1
+  REAL T, Yh(Nyh,*), Dky(*), c, r, s, tp
   !
   !* FIRST EXECUTABLE STATEMENT  INTYD
   Iflag = 0

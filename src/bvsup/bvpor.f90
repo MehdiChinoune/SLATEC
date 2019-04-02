@@ -1,6 +1,8 @@
 !** BVPOR
 SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
     Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,W,Niv,Yhp,U,V,Coef,S,Stowa,G,Work,Iwork,Nfcc)
+  USE ML, ONLY : C, INHomo, IVP, PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, KNSwot, &
+    KOP, LOTjp, NSWot, AE, RE, TOL, NDIsk, NTApe, NEQ, NEQivp, NUMort, ICOco
   IMPLICIT NONE
   !>
   !***
@@ -137,28 +139,12 @@ SUBROUTINE BVPOR(Y,Nrowy,Ncomp,Xpts,Nxpts,A,Nrowa,Alpha,Nic,B,Nrowb,Beta,&
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
 
-  INTEGER kod, KOP, kpts, kwc, kwd, kws, kwt, l, LOTjp, m, &
-    MNSwot, Mxnon, MXNond, n, Ncomp, ncomp2, NCOmpd, NDIsk, ndw, NEQ
-  INTEGER NEQivp, Nfc, Nfcc, NFCcd, NFCd, nfcp1, nfcp2, Nic, NICd, &
-    Niv, nn, non, NOPg, NPS, Nrowa, Nrowb, Nrowy, NSWot, NTApe, Ntp
-  REAL A(Nrowa,*), AE, Alpha(*), B(Nrowb,*), Beta(*), C, Coef(*), G(*), &
-    P(Ntp,*), PWCnd, PX, RE, S(*), SDOT, Stowa(*), TND, TOL, U(Ncomp,Nfc,*), &
-    V(Ncomp,*), W(Nfcc,*)
-  REAL Work(*), X, XBEg, XENd, XOP, XOT, Xpts(*), XSAv, Y(Nrowy,*), Yhp(Ncomp,*), Z(*)
-  INTEGER i, i1, i2, ic, ICOco, Iflag, IGOfx, INDpvt, INFo, &
-    INHomo, INTeg, Ip(Nfcc,*), ira, isflg, ISTkop, IVP, Iwork(*), j, k, KNSwot
-  INTEGER NTPd, NUMort, Nxpts, NXPtsd
-  !
-  !- *********************************************************************
-  !
-  COMMON /ML8SZ / C, XSAv, IGOfx, INHomo, IVP, NCOmpd, NFCd
-  COMMON /ML15TO/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15), &
-    ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
-  COMMON /ML18JR/ AE, RE, TOL, NXPtsd, NICd, NOPg, MXNond, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTPd, NEQivp, NUMort, NFCcd, ICOco
-  !
-  !- *********************************************************************
-  !
+  INTEGER kod, kpts, kwc, kwd, kws, kwt, l, m, Mxnon, n, Ncomp, ncomp2, ndw, Nfc, &
+    Nfcc, nfcp1, nfcp2, Nic, Niv, nn, non, Nrowa, Nrowb, Nrowy, Ntp, i, i1, i2, &
+    ic, Iflag, Ip(Nfcc,*), ira, isflg, Iwork(*), j, k, Nxpts
+  REAL A(Nrowa,*), Alpha(*), B(Nrowb,*), Beta(*), Coef(*), G(*), P(Ntp,*), S(*), &
+    SDOT, Stowa(*), U(Ncomp,Nfc,*), V(Ncomp,*), W(Nfcc,*), Work(*), Xpts(*), &
+    Y(Nrowy,*), Yhp(Ncomp,*), Z(*)
   !* FIRST EXECUTABLE STATEMENT  BVPOR
   nfcp1 = Nfc + 1
   NUMort = 0

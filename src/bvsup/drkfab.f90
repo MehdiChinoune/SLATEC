@@ -1,6 +1,8 @@
 !** DRKFAB
 SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     W,S,Stowa,G,Work,Iwork,Nfcc)
+  USE DML, ONLY : C, INHomo, KKKint, LLLint, X, XBEg, XENd, XOP, INFo, KOP, &
+    AE, RE, NOPg, NDIsk, NTApe, NEQ, INTeg, NPS, NUMort
   IMPLICIT NONE
   !>
   !***
@@ -39,27 +41,10 @@ SUBROUTINE DRKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
   !   910722  Updated AUTHOR section.  (ALS)
 
   !
-  INTEGER ICOco, idid, Iflag, IGOfx, INDpvt, INFo, INHomo, INTeg, &
-    ipar, ISTkop, IVP, j, jflag, jon, K1, K10, K11, K2, K3, &
-    K4, K5, K6, K7, K8, K9, KKKint, KKKzpw, KNSwot, kod, &
-    KOP, kopp, L1, L2, LLLint, LOTjp, MNSwot, Mxnon, MXNond, &
-    Ncomp, NCOmpd, NDIsk, NEEdiw, NEEdw, NEQ, NEQivp, Nfc, &
-    Nfcc, NFCcd, NFCd, nfcp1, NIC, Niv, non, NOPg, NPS, &
-    NSWot, NTApe, Ntp, NTPd, NUMort, Nxpts, NXPtsd, Ip(Nfcc,*), Iwork(*)
-  REAL(8) :: AE, C, G(*), P(Ntp,*), PWCnd, PX, RE, S(*), &
-    Stowa(*), TND, TOL, U(Ncomp,Nfc,*), V(Ncomp,*), &
-    W(Nfcc,*), Work(*), X, XBEg, XENd, XOP, XOT, &
-    Xpts(*), XSAv, xxop, Yhp(Ncomp,*), Z(*)
-  !
-  !     ******************************************************************
-  !
-  COMMON /DML8SZ/ C, XSAv, IGOfx, INHomo, IVP, NCOmpd, NFCd
-  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15), &
-    ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
-  COMMON /DML18J/ AE, RE, TOL, NXPtsd, NIC, NOPg, MXNond, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTPd, NEQivp, NUMort, NFCcd, ICOco
-  COMMON /DML17B/ KKKzpw, NEEdw, NEEdiw, K1, K2, K3, K4, K5, K6, &
-    K7, K8, K9, K10, K11, L1, L2, KKKint, LLLint
+  INTEGER idid, Iflag, ipar, j, jflag, jon, kod, kopp, Mxnon, Ncomp, Nfc, Nfcc, &
+    nfcp1, Niv, non, Ntp, Nxpts, Ip(Nfcc,*), Iwork(*)
+  REAL(8) :: G(*), P(Ntp,*), S(*), Stowa(*), U(Ncomp,Nfc,*), V(Ncomp,*), &
+    W(Nfcc,*), Work(*), Xpts(*), xxop, Yhp(Ncomp,*), Z(*)
   !
   EXTERNAL :: DBVDER
   !

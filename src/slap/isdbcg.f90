@@ -1,6 +1,7 @@
 !** ISDBCG
 INTEGER FUNCTION ISDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
     Iter,Err,Ierr,Iunit,R,Z,P,Rr,Zz,Pp,Dz,Rwork,Iwork,Ak,Bk,Bnrm,Solnrm)
+  USE DSLBLK
   IMPLICIT NONE
   !>
   !***
@@ -192,14 +193,10 @@ INTEGER FUNCTION ISDBCG(N,B,X,Nelt,Ia,Ja,A,Isym,MSOLVE,Itol,Tol,Itmax,&
   INTEGER Ia(Nelt), Iwork(*), Ja(Nelt)
   !     .. Subroutine Arguments ..
   EXTERNAL :: MSOLVE
-  !     .. Arrays in Common ..
-  REAL(8) :: SOLn(25)
   !     .. Local Scalars ..
   INTEGER i
   !     .. External Functions ..
   REAL(8), EXTERNAL :: D1MACH, DNRM2
-  !     .. Common blocks ..
-  COMMON /DSLBLK/ SOLn
   !* FIRST EXECUTABLE STATEMENT  ISDBCG
   ISDBCG = 0
   !

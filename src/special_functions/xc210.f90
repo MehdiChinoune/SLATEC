@@ -1,5 +1,6 @@
 !** XC210
 SUBROUTINE XC210(K,Z,J,Ierror)
+  USE XBLK ,ONLY: NLG102, MLG102, LG102
   IMPLICIT NONE
   !>
   !***
@@ -51,13 +52,9 @@ SUBROUTINE XC210(K,Z,J,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  
-  INTEGER i, ic, id, Ierror, ii, it, ja, ka, ka1, ka2, m, nm1, np1
-  INTEGER K, J
+
+  INTEGER i, ic, id, Ierror, ii, it, ja, ka, ka1, ka2, m, nm1, np1, K, J
   REAL Z
-  INTEGER NLG102, MLG102, LG102
-  COMMON /XBLK3 / NLG102, MLG102, LG102(21)
-  SAVE /XBLK3 /
   !
   !   THE CONDITIONS IMPOSED ON NLG102, MLG102, AND LG102 BY
   ! THIS SUBROUTINE ARE

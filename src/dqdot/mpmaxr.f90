@@ -1,5 +1,6 @@
 !** MPMAXR
 SUBROUTINE MPMAXR(X)
+  USE MPCOM
   IMPLICIT NONE
   !>
   !***
@@ -32,10 +33,8 @@ SUBROUTINE MPMAXR(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  
-  INTEGER i, it, LUN, M, MXR
-  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
-  INTEGER B, T, R, X(*)
+
+  INTEGER i, it, X(*)
   !* FIRST EXECUTABLE STATEMENT  MPMAXR
   CALL MPCHK(1,4)
   it = B - 1

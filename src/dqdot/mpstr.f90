@@ -1,5 +1,6 @@
 !** MPSTR
 SUBROUTINE MPSTR(X,Y)
+  USE MPCOM
   IMPLICIT NONE
   !>
   !***
@@ -33,10 +34,8 @@ SUBROUTINE MPSTR(X,Y)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  
-  INTEGER i, LUN, M, MXR
-  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
-  INTEGER B, T, R, X(*), Y(*)
+
+  INTEGER i, X(*), Y(*)
   !* FIRST EXECUTABLE STATEMENT  MPSTR
   DO i = 1, T + 2
     Y(i) = X(i)

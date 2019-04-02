@@ -1,5 +1,6 @@
 !** BVDER
 SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
+  USE ML, ONLY : NOFst, C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
   IMPLICIT NONE
   !>
   !***
@@ -62,22 +63,9 @@ SUBROUTINE BVDER(X,Y,Yp,G,Ipar)
   !   910701  Corrected ROUTINES CALLED section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
   !   920618  Minor restructuring of code.  (RWC, WRB)
-  
-  REAL C, G(*), X, XSAv, Y(*), Yp(*)
-  INTEGER IGOfx, INHomo, Ipar, IVP, j, k, l, na, NCOmp, NFC, NOFst
-  !
-  !- *********************************************************************
-  !
-  COMMON /ML8SZ / C, XSAv, IGOfx, INHomo, IVP, NCOmp, NFC
-  !
-  !- *********************************************************************
-  !     The COMMON block below is used to communicate with the user
-  !     supplied subroutine FMAT.  The user should not alter this
-  !     COMMON block.
-  !
-  COMMON /MLIVP / NOFst
-  !- *********************************************************************
-  !
+
+  REAL G(*), Y(*), Yp(*), X
+  INTEGER Ipar, j, k, l, na
   !* FIRST EXECUTABLE STATEMENT  BVDER
   IF ( IVP>0 ) CALL UIVP(X,Y(IVP+1),Yp(IVP+1))
   NOFst = IVP

@@ -2,6 +2,7 @@
 SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
     Nbdcnd,Bdc,Gama,Bdd,Xnu,COFX,COFY,An,Bn,Cn,Dn,Un,Zn,Am,&
     Bm,Cm,Dm,Um,Zm,Grhs,Usol,Idmn,W,Pertrb,Ierror)
+  USE SPLPCM
   IMPLICIT NONE
   !>
   !***
@@ -33,17 +34,11 @@ SUBROUTINE SPELIP(Intl,Iorder,A,B,M,Mbdcnd,Bda,Alpha,Bdb,Beta,C,D,N,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
 
-  INTEGER i, i1, Idmn, Ierror, Intl, iord, Iorder, IS, j, JS, K, &
-    KSWx, KSWy, L, M, Mbdcnd, MIT, mp, MS, N
-  REAL A, ai, AIT, Alpha, Am(*), An(*), ax1, axi, B, Bda(*), Bdb(*), Bdc(*), &
-    Bdd(*), Beta, bi, BIT, Bm(*), Bn(*), bxi, C
-  REAL ci, CIT, Cm(*), Cn(*), cxi, cxm, D, DIT, dj, DLX, DLX4, DLY, &
-    DLY4, Dm(*), Dn(*), dy1, dyj, ej, eyj, fj
-  REAL fyj, fyn, Gama, Grhs(Idmn,*), Pertrb, prtrb, TDLx3, TDLy3, Um(*), Un(*), &
-    Usol(Idmn,*), W(*), xi, Xnu, yj, Zm(*), Zn(*)
-  INTEGER Nbdcnd, NIT, np, NS
-  COMMON /SPLPCM/ KSWx, KSWy, K, L, AIT, BIT, CIT, DIT, MIT, NIT, &
-    IS, MS, JS, NS, DLX, DLY, TDLx3, TDLy3, DLX4, DLY4
+  INTEGER i, i1, Idmn, Ierror, Intl, iord, Iorder, j, M, Mbdcnd, mp, N, Nbdcnd, np
+  REAL A, ai, Alpha, Am(*), An(*), ax1, axi, B, Bda(*), Bdb(*), Bdc(*), Bdd(*), &
+    Beta, bi, Bm(*), Bn(*), bxi, C, ci, Cm(*), Cn(*), cxi, cxm, D, dj, Dm(*), &
+    Dn(*), dy1, dyj, ej, eyj, fj, fyj, fyn, Gama, Grhs(Idmn,*), Pertrb, prtrb, &
+    Um(*), Un(*), Usol(Idmn,*), W(*), xi, Xnu, yj, Zm(*), Zn(*)
   LOGICAL singlr
   EXTERNAL :: COFX, COFY
   !* FIRST EXECUTABLE STATEMENT  SPELIP

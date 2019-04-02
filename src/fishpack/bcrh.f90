@@ -1,5 +1,6 @@
 !** BCRH
 REAL FUNCTION BCRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
+  USE CCBLK
   IMPLICIT NONE
   !>
   !***
@@ -21,10 +22,9 @@ REAL FUNCTION BCRH(Xll,Xrr,Iz,C,A,Bh,F,Sgn)
   !   801001  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
-  
-  REAL A(*), Bh(*), C(*), CNV, dx, EPS, F, Sgn, x, xl, Xll, xr, Xrr
-  INTEGER IK, Iz, K, NCMplx, NM, NPP
-  COMMON /CCBLK / NPP, K, EPS, CNV, NM, NCMplx, IK
+
+  REAL A(*), Bh(*), C(*), dx, F, Sgn, x, xl, Xll, xr, Xrr
+  INTEGER Iz
   !* FIRST EXECUTABLE STATEMENT  BCRH
   xl = Xll
   xr = Xrr

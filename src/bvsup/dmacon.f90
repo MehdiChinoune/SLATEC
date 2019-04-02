@@ -1,5 +1,6 @@
 !** DMACON
 SUBROUTINE DMACON
+  USE DML, ONLY : URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
   IMPLICIT NONE
   !>
   !***
@@ -24,11 +25,10 @@ SUBROUTINE DMACON
   !           (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   REAL(8) :: D1MACH
-  INTEGER ke, LPAr
-  REAL(8) :: dd, EPS, FOUru, SQOvfl, SRU, TWOu, URO
-  COMMON /DML5MC/ URO, SRU, EPS, SQOvfl, TWOu, FOUru, LPAr
+  INTEGER ke
+  REAL(8) :: dd
   !* FIRST EXECUTABLE STATEMENT  DMACON
   URO = D1MACH(4)
   SRU = SQRT(URO)

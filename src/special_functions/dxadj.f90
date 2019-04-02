@@ -1,5 +1,6 @@
 !** DXADJ
 SUBROUTINE DXADJ(X,Ix,Ierror)
+  USE DXBLK ,ONLY: RADixl, RAD2l, L2, KMAx
   IMPLICIT NONE
   !>
   !***
@@ -45,14 +46,9 @@ SUBROUTINE DXADJ(X,Ix,Ierror)
   !           section.  (WRB)
   !           CALLs to XERROR changed to CALLs to XERMSG.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  
-  INTEGER Ierror
+
+  INTEGER Ierror, Ix
   REAL(8) :: X
-  INTEGER Ix
-  REAL(8) :: RADix, RADixl, RAD2l, DLG10r
-  INTEGER L, L2, KMAx
-  COMMON /DXBLK2/ RADix, RADixl, RAD2l, DLG10r, L, L2, KMAx
-  SAVE /DXBLK2/
   !
   !   THE CONDITION IMPOSED ON L AND KMAX BY THIS SUBROUTINE
   ! IS

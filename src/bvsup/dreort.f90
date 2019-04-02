@@ -1,5 +1,7 @@
 !** DREORT
 SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
+  USE DML, ONLY : C, INHomo, NFC, PX, PWCnd, TND, X, XENd, XOT, KNSwot, LOTjp, &
+    MNSwot, NSWot, TOL, NPS, NFCc
   IMPLICIT NONE
   !>
   !***
@@ -55,24 +57,12 @@ SUBROUTINE DREORT(Ncomp,Y,Yp,Yhp,Niv,W,S,P,Ip,Stowa,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
+
   !
   REAL(8) :: DDOT
-  INTEGER ICOco, Iflag, IGOfx, ijk, INDpvt, INFo, INHomo, INTeg, &
-    Ip(*), ISTkop, IVP, j, k, kk, KNSwot, KOP, l, LOTjp, &
-    mflag, MNSwot, MXNon, Ncomp, NCOmpd, NDIsk, NEQ, NEQivp, &
-    NFC, NFCc, nfcp, NIC, Niv, NOPg, NPS, NSWot, NTApe, NTP, NUMort, NXPts
-  REAL(8) :: AE, C, dnd, dndt, dx, P(*), PWCnd, PX, RE, &
-    S(*), srp, Stowa(*), TND, TOL, vnorm, W(*), wcnd, &
-    X, XBEg, XENd, XOP, XOT, XSAv, Y(Ncomp,*), Yhp(Ncomp,*), Yp(*), ypnm
-  !
-  !     ******************************************************************
-  !
-  COMMON /DML8SZ/ C, XSAv, IGOfx, INHomo, IVP, NCOmpd, NFC
-  COMMON /DML15T/ PX, PWCnd, TND, X, XBEg, XENd, XOT, XOP, INFo(15), &
-    ISTkop, KNSwot, KOP, LOTjp, MNSwot, NSWot
-  COMMON /DML18J/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, NUMort, NFCc, ICOco
+  INTEGER Iflag, ijk, Ip(*), j, k, kk, l, mflag, Ncomp, nfcp, Niv
+  REAL(8) :: dnd, dndt, dx, P(*), S(*), srp, Stowa(*), vnorm, W(*), wcnd, &
+    Y(Ncomp,*), Yhp(Ncomp,*), Yp(*), ypnm
   !
   !- *********************************************************************
   !     BEGIN BLOCK PERMITTING ...EXITS TO 210

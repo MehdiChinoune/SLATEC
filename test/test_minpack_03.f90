@@ -1,5 +1,8 @@
 MODULE TEST52_MOD
   IMPLICIT NONE
+  REAL EPS, RP, SVEps, TOL
+  INTEGER IERp, IERr, NORd, NORdp
+  REAL R(11)
 
 CONTAINS
   !** CMPARE
@@ -31,11 +34,6 @@ CONTAINS
     INTEGER Icnt
     !     .. Array Arguments ..
     INTEGER Itest(9)
-    !     .. Scalars in Common ..
-    REAL EPS, RP, SVEps, TOL
-    INTEGER IERp, IERr, NORd, NORdp
-    !     .. Arrays in Common ..
-    REAL R(11)
     !     .. Local Scalars ..
     REAL rpp, ss
     INTEGER ierpp, nrdp
@@ -43,8 +41,6 @@ CONTAINS
     INTEGER itemp(4)
     !     .. Intrinsic Functions ..
     INTRINSIC ABS
-    !     .. Common blocks ..
-    COMMON /CHECK / EPS, R, RP, SVEps, TOL, NORdp, NORd, IERp, IERr
     !* FIRST EXECUTABLE STATEMENT  CMPARE
     Icnt = Icnt + 1
     itemp(1) = 0
@@ -99,11 +95,6 @@ CONTAINS
     INTEGER kontrl
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint, Lun
-    !     .. Scalars in Common ..
-    REAL EPS, RP, SVEps, TOL
-    INTEGER IERp, IERr, NORd, NORdp
-    !     .. Arrays in Common ..
-    REAL R(11)
     !     .. Local Scalars ..
     REAL yfit
     INTEGER i, icnt, m, maxord
@@ -116,8 +107,6 @@ CONTAINS
     EXTERNAL :: PASS, PCOEF, POLFIT, PVALUE
     !     .. Intrinsic Functions ..
     INTRINSIC ABS, SQRT
-    !     .. Common blocks ..
-    COMMON /CHECK / EPS, R, RP, SVEps, TOL, NORdp, NORd, IERp, IERr
     !* FIRST EXECUTABLE STATEMENT  PFITQX
     IF ( Kprint>=2 ) WRITE (Lun,FMT=99002)
     !

@@ -1,5 +1,10 @@
+MODULE SAVEX
+  IMPLICIT NONE
+  REAL :: XSAve, TERm
+END MODULE SAVEX
 !** FMAT
 SUBROUTINE FMAT(X,Y,Yp)
+  USE SAVEX
   IMPLICIT NONE
   !>
   !***
@@ -16,9 +21,8 @@ SUBROUTINE FMAT(X,Y,Yp)
   !* REVISION HISTORY  (YYMMDD)
   !   ??????  DATE WRITTEN
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
-  
-  REAL tanx, TERm, X, XSAve, Y(*), Yp(*)
-  COMMON /SAVEX / XSAve, TERm
+
+  REAL tanx, X, Y(*), Yp(*)
   !* FIRST EXECUTABLE STATEMENT  FMAT
   Yp(1) = Y(2)
   IF ( X/=XSAve ) THEN

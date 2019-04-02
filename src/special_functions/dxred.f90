@@ -1,5 +1,6 @@
 !** DXRED
 SUBROUTINE DXRED(X,Ix,Ierror)
+  USE DXBLK ,ONLY: RADix, RAD2l, L2
   IMPLICIT NONE
   !>
   !***
@@ -48,14 +49,10 @@ SUBROUTINE DXRED(X,Ix,Ierror)
   !           Corrected order of sections in prologue and added TYPE
   !           section.  (WRB)
   !   920127  Revised PURPOSE section of prologue.  (DWL)
-  
-  INTEGER i, Ierror, ixa, ixa1, ixa2
+
+  INTEGER i, Ierror, ixa, ixa1, ixa2, Ix
   REAL(8) :: X
-  INTEGER Ix
-  REAL(8) :: RADix, RADixl, RAD2l, DLG10r, xa
-  INTEGER L, L2, KMAx
-  COMMON /DXBLK2/ RADix, RADixl, RAD2l, DLG10r, L, L2, KMAx
-  SAVE /DXBLK2/
+  REAL(8) :: xa
   !
   !* FIRST EXECUTABLE STATEMENT  DXRED
   Ierror = 0

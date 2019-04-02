@@ -1,5 +1,6 @@
 !** SVECS
 SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
+  USE ML, ONLY: INDpvt, LNFcc => NFCc
   IMPLICIT NONE
   !>
   !***
@@ -33,13 +34,9 @@ SUBROUTINE SVECS(Ncomp,Lnfc,Yhp,Work,Iwork,Inhomo,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
   !   910722  Updated AUTHOR section.  (ALS)
-  
-  INTEGER ICOco, idp, Iflag, INDpvt, Inhomo, INTeg, Iwork(*), k, kp, &
-    Lnfc, LNFcc, MXNon, Ncomp, NDIsk, NEQ, NEQivp, NIC, niv, NOPg, NPS
-  REAL AE, dum, RE, TOL, Work(*), Yhp(Ncomp,*)
-  INTEGER NTApe, NTP, NUMort, NXPts
-  COMMON /ML18JR/ AE, RE, TOL, NXPts, NIC, NOPg, MXNon, NDIsk, &
-    NTApe, NEQ, INDpvt, INTeg, NPS, NTP, NEQivp, NUMort, LNFcc, ICOco
+
+  INTEGER idp, Iflag, Inhomo, Iwork(*), k, kp, Lnfc, Ncomp, niv
+  REAL dum, Work(*), Yhp(Ncomp,*)
   !* FIRST EXECUTABLE STATEMENT  SVECS
   IF ( Lnfc/=1 ) THEN
     niv = Lnfc

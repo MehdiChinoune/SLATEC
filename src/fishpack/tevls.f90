@@ -1,5 +1,6 @@
 !** TEVLS
 SUBROUTINE TEVLS(N,D,E2,Ierr)
+  USE CBLKT, MAChep => EPS
   IMPLICIT NONE
   !>
   !***
@@ -56,14 +57,10 @@ SUBROUTINE TEVLS(N,D,E2,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   920528  DESCRIPTION revised and REFERENCES section added.  (WRB)
-  
-  REAL CNV, dhold
-  INTEGER IK, K, NCMplx, nhalf, NM, NPP, ntop
-  INTEGER i, j, l, m, N, ii, l1, mml, Ierr
+
+  REAL dhold, b, c, f, g, h, p, r, s
+  INTEGER nhalf, ntop, i, j, l, m, N, ii, l1, mml, Ierr
   REAL D(*), E2(*)
-  REAL b, c, f, g, h, p, r, s, MAChep
-  !
-  COMMON /CBLKT / NPP, K, MAChep, CNV, NM, NCMplx, IK
   !* FIRST EXECUTABLE STATEMENT  TEVLS
   Ierr = 0
   IF ( N/=1 ) THEN

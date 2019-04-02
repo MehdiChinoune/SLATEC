@@ -1,5 +1,6 @@
 !** MPNZR
 SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
+  USE MPCOM
   IMPLICIT NONE
   !>
   !***
@@ -35,10 +36,8 @@ SUBROUTINE MPNZR(Rs,Re,Z,Trunc)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900402  Added TYPE section.  (WRB)
   !   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
-  
-  INTEGER i, i2, i2m, i2p, is, it, j, k, LUN, M, MXR
-  COMMON /MPCOM / B, T, M, LUN, MXR, R(30)
-  INTEGER B, T, R, Z(*), Re, Rs, Trunc, b2
+
+  INTEGER i, i2, i2m, i2p, is, it, j, k, Z(*), Re, Rs, Trunc, b2
   !* FIRST EXECUTABLE STATEMENT  MPNZR
   i2 = T + 4
   IF ( Rs/=0 ) THEN
