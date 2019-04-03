@@ -64,9 +64,10 @@ REAL(8) FUNCTION DAIE(X)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
   REAL eta
-  INTEGER INITDS, naif, naig, naip1, naip2
-  REAL(8) :: X, sqrtx, theta, xbig, xm, x3sml, x32sml, z, D1MACH, DCSEVL
-  SAVE naif, naig, naip1, naip2, x3sml, x32sml, xbig
+  INTEGER INITDS
+  REAL(8) :: X, sqrtx, theta, xm, z, D1MACH, DCSEVL
+  INTEGER, SAVE :: naif, naig, naip1, naip2
+  REAL(8), SAVE :: x3sml, x32sml, xbig
   REAL(8), PARAMETER :: aifcs(13) = [ -.37971358496669997496197089469414D-1, &
     +.59191888537263638574319728013777D-1, +.98629280577279975365603891044060D-3, &
     +.68488438190765667554854830182412D-5, +.25942025962194713019489279081403D-7, &

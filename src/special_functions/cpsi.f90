@@ -33,12 +33,13 @@ COMPLEX FUNCTION CPSI(Zin)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900727  Added EXTERNAL statement.  (WRB)
 
-  REAL bound, cabsz, dxrel, rbig, rmin, x, y
-  INTEGER i, n, ndx, nterm
+  REAL cabsz, x, y
+  INTEGER i, n, ndx
   COMPLEX Zin, z, z2inv, corr
   REAL, EXTERNAL :: R1MACH
   COMPLEX, EXTERNAL :: CCOT
-  SAVE nterm, bound, dxrel, rmin, rbig
+  INTEGER, SAVE :: nterm
+  REAL, SAVE :: bound, dxrel, rmin, rbig
   REAL, PARAMETER :: bern(13) = [ .83333333333333333E-1,-.83333333333333333E-2, &
     .39682539682539683E-2, -.41666666666666667E-2, .75757575757575758E-2, &
     -.21092796092796093E-1, .83333333333333333E-1, -.44325980392156863E0, &

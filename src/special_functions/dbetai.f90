@@ -45,9 +45,8 @@ REAL(8) FUNCTION DBETAI(X,Pin,Qin)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
 
   INTEGER i, ib, n
-  REAL(8) :: X, Pin, Qin, alneps, alnsml, c, eps, finsum, p, &
-    ps, q, sml, term, xb, xi, y, D1MACH, DLBETA, p1
-  SAVE eps, alneps, sml, alnsml
+  REAL(8) :: X, Pin, Qin, c, finsum, p, ps, q, term, xb, xi, y, D1MACH, DLBETA, p1
+  REAL(8), SAVE :: eps, alneps, sml, alnsml
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DBETAI
   IF ( first ) THEN

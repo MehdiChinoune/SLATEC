@@ -59,9 +59,9 @@ REAL FUNCTION GAMIT(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
 
-  REAL A, aeps, ainta, algap1, alneps, alng, ALNGAM, alx, bot, &
-    GAMR, h, R1MACH, R9GMIT, R9LGIC, R9LGIT, sga, sgngam, sqeps, t, X
-  SAVE alneps, sqeps, bot
+  REAL :: A, aeps, ainta, algap1, alng, alx, h, sga, sgngam, t, X
+  REAL, EXTERNAL :: ALNGAM, GAMR, R1MACH, R9GMIT, R9LGIC, R9LGIT
+  REAL, SAVE :: alneps, sqeps, bot
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  GAMIT
   IF ( first ) THEN

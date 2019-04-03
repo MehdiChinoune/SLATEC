@@ -83,9 +83,10 @@ REAL FUNCTION E1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
-  REAL CSEVL, eta, R1MACH, X, xmax, xmaxt
-  INTEGER INITS, ntae11, ntae12, ntae13, ntae14, nte11, nte12
-  SAVE ntae11, ntae12, nte11, nte12, ntae13, ntae14, xmax
+  REAL CSEVL, eta, R1MACH, X, xmaxt
+  INTEGER INITS
+  INTEGER, SAVE :: ntae11, ntae12, nte11, nte12, ntae13, ntae14
+  REAL, SAVE :: xmax
   REAL, PARAMETER :: ae11cs(39) = [ .12150323971606579E0, -.065088778513550150E0, &
     .004897651357459670E0, -.000649237843027216E0, .000093840434587471E0, &
     .000000420236380882E0, -.000008113374735904E0, .000002804247688663E0, &

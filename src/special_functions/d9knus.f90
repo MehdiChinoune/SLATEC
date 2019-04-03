@@ -50,14 +50,15 @@ SUBROUTINE D9KNUS(Xnu,X,Bknu,Bknu1,Iswtch)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
   REAL an, bn, eta
-  INTEGER i, ii, inu, Iswtch, n, ntc0k, nterms, ntznu1
+  INTEGER i, ii, inu, Iswtch, n, nterms
   REAL(8) :: Xnu, X, Bknu, Bknu1, alpha(32), beta(32), a(32), alnz, a0, &
     bknud, bknu0, b0, c0, expx, p1, p2, p3, qq, result, sqrtx, v, &
-    vlnz, xi, xmu, xnusml, xsml, x2n, x2tov, z, ztov, alnsml, alnbig
-  REAL alneps
+    vlnz, xi, xmu, x2n, x2tov, z, ztov
   INTEGER, EXTERNAL :: INITDS
   REAL(8), EXTERNAL :: D1MACH, DCSEVL, DGAMMA
-  SAVE ntc0k, ntznu1, xnusml, xsml, alnsml, alnbig, alneps
+  INTEGER, SAVE :: ntc0k, ntznu1
+  REAL(8), SAVE :: xnusml, xsml, alnsml, alnbig
+  REAL, SAVE :: alneps
   REAL(8), PARAMETER :: c0kcs(29) = [ +.60183057242626108387577445180329D-1, &
     -.15364871433017286092959755943124D+0, -.11751176008210492040068229226213D-1, &
     -.85248788891979509827048401550987D-3, -.61329838767496791874098176922111D-4, &

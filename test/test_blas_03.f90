@@ -31,15 +31,13 @@ CONTAINS
     !     .. Scalar Arguments ..
     LOGICAL Reset
     !     .. Local Scalars ..
-    INTEGER i, ic, mi
-    !     .. Save statement ..
-    SAVE i, ic, mi
+    INTEGER, SAVE :: i, ic
+    INTEGER, PARAMETER :: mi = 891
     !     .. Intrinsic Functions ..
     INTRINSIC REAL
     !* FIRST EXECUTABLE STATEMENT  DBEG
     IF ( Reset ) THEN
       !        Initialize local variables.
-      mi = 891
       i = 7
       ic = 0
       Reset = .FALSE.

@@ -261,11 +261,10 @@ REAL(8) FUNCTION DRF(X,Y,Z,Ier)
 
   CHARACTER(16) :: xern3, xern4, xern5, xern6
   INTEGER Ier
-  REAL(8) :: lolim, uplim, epslon, errtol, D1MACH
-  REAL(8) :: c1, c2, c3, e2, e3, lamda
-  REAL(8) :: mu, s, X, xn, xndev
-  REAL(8) :: xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, znroot
-  SAVE errtol, lolim, uplim, c1, c2, c3
+  REAL(8) :: epslon, D1MACH, e2, e3, lamda, mu, s, X, xn, xndev, xnroot, Y, yn, &
+    yndev, ynroot, Z, zn, zndev, znroot
+  REAL(8), SAVE :: errtol, lolim, uplim
+  REAL(8), PARAMETER :: c1 = 1.0D0/24.0D0, c2 = 3.0D0/44.0D0, c3 = 1.0D0/14.0D0
   LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  DRF
@@ -274,10 +273,6 @@ REAL(8) FUNCTION DRF(X,Y,Z,Ier)
     errtol = (4.0D0*D1MACH(3))**(1.0D0/6.0D0)
     lolim = 5.0D0*D1MACH(1)
     uplim = D1MACH(2)/5.0D0
-    !
-    c1 = 1.0D0/24.0D0
-    c2 = 3.0D0/44.0D0
-    c3 = 1.0D0/14.0D0
     first = .FALSE.
   ENDIF
   !

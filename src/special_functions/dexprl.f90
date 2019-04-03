@@ -36,9 +36,10 @@ REAL(8) FUNCTION DEXPRL(X)
   !   890911  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER i, nterms
-  REAL(8) :: X, absx, alneps, xbnd, xln, xn, D1MACH
-  SAVE nterms, xbnd
+  INTEGER i
+  REAL(8) :: X, absx, alneps, xln, xn, D1MACH
+  INTEGER, SAVE :: nterms
+  REAL(8), SAVE :: xbnd
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DEXPRL
   IF ( first ) THEN

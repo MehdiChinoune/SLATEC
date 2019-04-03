@@ -55,9 +55,10 @@ SUBROUTINE R9AIMP(X,Ampl,Theta)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL Ampl, CSEVL, eta, R1MACH, sqrtx, Theta, X, xsml, z
-  INTEGER INITS, nam21, nam22, nath1, nath2
-  SAVE nam21, nath1, nam22, nath2, xsml
+  REAL Ampl, CSEVL, eta, R1MACH, sqrtx, Theta, X, z
+  INTEGER INITS
+  INTEGER, SAVE :: nam21, nath1, nam22, nath2
+  REAL, SAVE :: xsml
   REAL, PARAMETER :: am21cs(40) = [ .0065809191761485E0, .0023675984685722E0, &
     .0001324741670371E0, .0000157600904043E0, .0000027529702663E0, &
     .0000006102679017E0, .0000001595088468E0, .0000000471033947E0, &

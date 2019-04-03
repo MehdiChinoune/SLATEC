@@ -41,9 +41,10 @@ REAL(8) FUNCTION DBESJ1(X)
   !   910401  Corrected error in code which caused values to have the
   !           wrong sign for arguments less than 4.0.  (WRB)
 
-  INTEGER INITDS, ntj1
-  REAL(8) :: X, ampl, theta, xsml, xmin, y, D1MACH, DCSEVL
-  SAVE ntj1, xsml, xmin
+  INTEGER INITDS
+  REAL(8) :: X, ampl, theta, y, D1MACH, DCSEVL
+  INTEGER, SAVE ::  ntj1
+  REAL(8), SAVE ::xsml, xmin
   REAL(8), PARAMETER :: bj1cs(19) = [ -.117261415133327865606240574524003D+0, &
     -.253615218307906395623030884554698D+0, +.501270809844695685053656363203743D-1, &
     -.463151480962508191842619728789772D-2, +.247996229415914024539124064592364D-3, &

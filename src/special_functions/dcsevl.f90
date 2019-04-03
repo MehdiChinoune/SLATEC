@@ -47,8 +47,8 @@ REAL(8) FUNCTION DCSEVL(X,Cs,N)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER i, N, ni
-  REAL(8) :: b0, b1, b2, Cs(*), onepl, twox, X, D1MACH
-  SAVE onepl
+  REAL(8) :: b0, b1, b2, Cs(*), twox, X, D1MACH
+  REAL(8), SAVE :: onepl
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DCSEVL
   IF ( first ) onepl = 1.0D0 + D1MACH(4)

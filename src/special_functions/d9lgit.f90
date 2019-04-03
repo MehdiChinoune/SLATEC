@@ -37,8 +37,8 @@ REAL(8) FUNCTION D9LGIT(A,X,Algap1)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
   INTEGER k
-  REAL(8) :: A, X, Algap1, ax, a1x, eps, fk, hstar, p, r, s, sqeps, t, D1MACH
-  SAVE eps, sqeps
+  REAL(8) :: A, X, Algap1, ax, a1x, fk, hstar, p, r, s, t, D1MACH
+  REAL(8), SAVE :: eps, sqeps
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9LGIT
   IF ( first ) THEN

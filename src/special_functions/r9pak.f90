@@ -39,8 +39,8 @@ REAL FUNCTION R9PAK(Y,N)
   !           Corrected (RWC)
 
   REAL a1n2b, R1MACH, Y
-  INTEGER I1MACH, N, nmax, nmin, nsum, ny
-  SAVE nmin, nmax
+  INTEGER I1MACH, N, nsum, ny
+  INTEGER, SAVE :: nmin, nmax
   REAL, PARAMETER :: a1n210 = 3.321928094887362E0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9PAK

@@ -48,9 +48,10 @@ REAL(8) FUNCTION D9LN2R(X)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
   REAL eps, sqeps
-  INTEGER INITDS, ntln21, ntln22
-  REAL(8) :: X, xbig, txbig, xmax, txmax, xmin, DCSEVL, D1MACH
-  SAVE ntln21, ntln22, xmin, xbig, xmax
+  INTEGER INITDS
+  REAL(8) :: X, txbig, txmax, DCSEVL, D1MACH
+  INTEGER, SAVE :: ntln21, ntln22
+  REAL(8), SAVE :: xmin, xbig, xmax
   REAL(8), PARAMETER :: ln21cs(50) = [ +.18111962513478809875894953043071D+0, &
     -.15627123192872462669625155541078D+0, +.28676305361557275209540627102051D-1, &
     -.55586996559481398781157725126781D-2, +.11178976652299837657335666279727D-2, &

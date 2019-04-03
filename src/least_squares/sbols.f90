@@ -430,9 +430,8 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   !     /SROTG/ TO /DROTG/, /SROT/ TO /DROT/, /E0/ TO /D0/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
-  INTEGER i, ibig, inrows, ip, ISAMAX, iscale, j, jp, lds, &
-    lenx, liopt, llb, lliw, llrw, llx, lmdw, lndw, locacc, locdim
-  INTEGER lopt, lp, Mdw, mnew, Mode, Mrows, Ncols, nerr
+  INTEGER i, ibig, inrows, ip, ISAMAX, j, jp, lds, lenx, liopt, llb, lliw, llrw, &
+    llx, lmdw, lndw, locdim, lp, Mdw, mnew, Mode, Mrows, Ncols, nerr
   REAL W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*)
   REAL sc, ss, one, SNRM2, Rnorm, zero
   !
@@ -441,7 +440,7 @@ SUBROUTINE SBOLS(W,Mdw,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Iw)
   LOGICAL checkl
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
-  SAVE locacc, lopt, iscale
+  INTEGER, SAVE :: locacc, lopt, iscale
   INTEGER :: igo = 0
   !* FIRST EXECUTABLE STATEMENT  SBOLS
   nerr = 0

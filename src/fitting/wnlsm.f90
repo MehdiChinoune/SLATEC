@@ -80,14 +80,13 @@ SUBROUTINE WNLSM(W,Mdw,Mme,Ma,N,L,Prgopt,X,Rnorm,Mode,Ipivot,Itype,Wd,H,&
   REAL, EXTERNAL :: R1MACH, SASUM, SNRM2
   EXTERNAL :: H12, SAXPY, SCOPY, SROTM, SROTMG, SSCAL, SSWAP, WNLIT, XERMSG
   !
-  REAL alamda, alpha, alsq, amax, blowup, bnorm, dope(3), eanorm, &
-    fac, sm, sparam(5), srelpr, t, tau, wmax, z2, zz
-  INTEGER i, idope(3), imax, isol, itemp, iter, itmax, iwmax, j, &
-    jcon, jp, key, krank, l1, last, link, m, me, next, niv, &
-    nlink, nopt, nsoln, ntimes
+  REAL alamda, alpha, alsq, amax, blowup, bnorm, dope(3), eanorm, fac, sm, &
+    sparam(5), t, tau, wmax, z2, zz
+  INTEGER i, idope(3), imax, isol, itemp, iter, itmax, iwmax, j, jcon, jp, key, &
+    krank, l1, last, link, m, me, next, niv, nlink, nopt, nsoln, ntimes
   LOGICAL done, feasbl, hitcon, pos
   !
-  SAVE srelpr
+  REAL, SAVE :: srelpr
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  WNLSM
   !

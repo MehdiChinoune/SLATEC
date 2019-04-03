@@ -51,19 +51,12 @@ LOGICAL FUNCTION LSAME(Ca,Cb)
   !   930201  Tests for equality and equivalence combined.  (RWC and WRB)
 
   !     .. Scalar Arguments ..
-  CHARACTER Ca*1, Cb*1
-  !     .. Local Scalars ..
-  INTEGER ioff
+  CHARACTER :: Ca, Cb
   !     .. Intrinsic Functions ..
   INTRINSIC ICHAR
   !     .. Save statement ..
-  SAVE ioff
-  !     .. Data statements ..
-  LOGICAL :: first = .TRUE.
+  INTEGER, PARAMETER :: ioff = ICHAR('a') - ICHAR('A')
   !* FIRST EXECUTABLE STATEMENT  LSAME
-  IF ( first ) ioff = ICHAR('a') - ICHAR('A')
-  !
-  first = .FALSE.
   !
   !     Test if the characters are equal or equivalent.
   !

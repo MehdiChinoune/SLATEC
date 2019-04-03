@@ -59,7 +59,7 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   !   900402  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
 
-  REAL eps, R1MACH
+  REAL, EXTERNAL :: R1MACH
   INTEGER i, Ia, idummy, ii, il, in, ipp, ipv, ir, j, jcost, jp, k, k1, k2, kc, &
     kcost, kj, kk, kl, klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, mcp, N, &
     nc, Nz, nzc
@@ -67,11 +67,9 @@ SUBROUTINE LA05AS(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
   REAL A(*), amax, au, am, G, U, W(*)
   CHARACTER(8) :: xern0, xern1, xern2
   ! EPS IS THE RELATIVE ACCURACY OF FLOATING-POINT COMPUTATION
-  SAVE eps
-  LOGICAL :: first = .TRUE.
+  REAL :: eps = 0.
   !* FIRST EXECUTABLE STATEMENT  LA05AS
-  IF ( first ) eps = 2.0E0*R1MACH(4)
-  first = .FALSE.
+  IF ( eps == 0. ) eps = 2.0E0*R1MACH(4)
   !
   !     SET THE OUTPUT UNIT NUMBER FOR THE ERROR PROCESSOR.
   !     THE USAGE OF THIS ERROR PROCESSOR IS DOCUMENTED IN THE

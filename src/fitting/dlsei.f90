@@ -399,13 +399,13 @@ SUBROUTINE DLSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   EXTERNAL :: DAXPY, DCOPY, DH12, DLSI, DSCAL, DSWAP, XERMSG
   REAL(8), EXTERNAL :: D1MACH, DASUM, DDOT, DNRM2
   !
-  REAL(8) :: drelpr, enorm, fnorm, gam, rb, rn, rnmax, size, &
-    sn, snmax, t, tau, uj, up, vj, xnorm, xnrme
+  REAL(8) :: enorm, fnorm, gam, rb, rn, rnmax, size, sn, snmax, t, tau, uj, up, &
+    vj, xnorm, xnrme
   INTEGER i, imax, j, jp1, k, key, kranke, last, lchk, link, m, &
     mapke1, mdeqc, mend, mep1, n1, n2, next, nlink, nopt, np1, ntimes
   LOGICAL cov
   CHARACTER(8) :: xern1, xern2, xern3, xern4
-  SAVE drelpr
+  REAL(8), SAVE :: drelpr
   !
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DLSEI

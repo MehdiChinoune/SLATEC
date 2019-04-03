@@ -137,11 +137,11 @@ SUBROUTINE RATQR(N,Eps1,D,E,E2,M,W,Ind,Bd,Type,Idef,Ierr)
   REAL R1MACH
   INTEGER i, j, k, M, N, ii, jj, k1, Idef, Ierr, jdef
   REAL D(*), E(*), E2(*), W(*), Bd(*)
-  REAL f, p, q, r, s, ep, qp, err, tot, Eps1, delta, machep
+  REAL f, p, q, r, s, ep, qp, err, tot, Eps1, delta
   INTEGER Ind(*)
   LOGICAL :: Type
   !
-  SAVE machep
+  REAL, SAVE :: machep
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  RATQR
   IF ( first ) machep = R1MACH(4)

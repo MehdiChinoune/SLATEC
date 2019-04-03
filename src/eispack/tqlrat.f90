@@ -74,13 +74,12 @@ SUBROUTINE TQLRAT(N,D,E2,Ierr)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL R1MACH
   INTEGER i, j, l, m, N, ii, l1, mml, Ierr
   REAL D(*), E2(*)
-  REAL b, c, f, g, h, p, r, s, machep
-  REAL PYTHAG
+  REAL b, c, f, g, h, p, r, s
+  REAL PYTHAG, R1MACH
   !
-  SAVE machep
+  REAL, SAVE :: machep
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  TQLRAT
   IF ( first ) machep = R1MACH(4)

@@ -41,16 +41,15 @@ SUBROUTINE DFULMT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER I, Indcat, J, key, level, lp, nerr, next
-  REAL(8) :: Aij, zero, Dattrv(*), Prgopt(*)
+  REAL(8) :: Aij, Dattrv(*), Prgopt(*)
   INTEGER Iflag(10)
-  SAVE zero
+  REAL(8), PARAMETER :: zero = 0.D0
   !* FIRST EXECUTABLE STATEMENT  DFULMT
   IF ( Iflag(1)==1 ) THEN
     !     INITIALIZE POINTERS TO PROCESS FULL TWO-DIMENSIONAL FORTRAN
     !     ARRAYS.
-    zero = 0.D0
     lp = 1
     DO
       next = INT( Prgopt(lp) )

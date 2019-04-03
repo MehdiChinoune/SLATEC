@@ -69,12 +69,12 @@ SUBROUTINE DLSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   EXTERNAL :: DAXPY, DCOPY, DH12, DHFTI, DLPDP, DSCAL, DSWAP
   REAL(8), EXTERNAL :: D1MACH, DASUM, DDOT
   !
-  REAL(8) :: anorm, drelpr, fac, gam, rb, tau, tol, xnorm, temp(1)
-  INTEGER i, j, k, key, krank, krm1, krp1, l, last, link, m, &
-    map1, mdlpdp, minman, n1, n2, n3, next, np1
+  REAL(8) :: anorm, fac, gam, rb, tau, tol, xnorm, temp(1)
+  INTEGER i, j, k, key, krank, krm1, krp1, l, last, link, m, map1, mdlpdp, minman, &
+    n1, n2, n3, next, np1
   LOGICAL cov, sclcov
   !
-  SAVE drelpr
+  REAL(8), SAVE :: drelpr
   LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  DLSI

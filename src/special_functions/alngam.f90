@@ -37,9 +37,9 @@ REAL FUNCTION ALNGAM(X)
   !           (WRB)
   !   900727  Added EXTERNAL statement.  (WRB)
 
-  REAL dxrel, sinpiy, X, xmax, y
+  REAL sinpiy, X, y
   REAL, EXTERNAL :: R1MACH, R9LGMC, GAMMA
-  SAVE xmax, dxrel
+  REAL, SAVE :: xmax, dxrel
   REAL, PARAMETER :: sq2pil = 0.91893853320467274E0
   REAL, PARAMETER :: sqpi2l = 0.22579135264472743E0
   REAL, PARAMETER :: pi = 3.14159265358979324E0

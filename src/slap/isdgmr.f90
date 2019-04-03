@@ -281,7 +281,7 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   !     .. Subroutine Arguments ..
   EXTERNAL :: MSOLVE
   !     .. Local Scalars ..
-  REAL(8) :: dxnrm, fuzz, rat, ratmax, solnrm, tem
+  REAL(8) :: dxnrm, fuzz, rat, ratmax, tem
   INTEGER i, ielmax
   !     .. External Functions ..
   REAL(8), EXTERNAL :: D1MACH, DNRM2
@@ -290,7 +290,7 @@ INTEGER FUNCTION ISDGMR(N,B,X,Xl,Nelt,Ia,Ja,A,Isym,MSOLVE,Nmsl,Itol,Tol,&
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, MAX, SQRT
   !     .. Save statement ..
-  SAVE solnrm
+  REAL(8), SAVE :: solnrm
   !* FIRST EXECUTABLE STATEMENT  ISDGMR
   ISDGMR = 0
   !

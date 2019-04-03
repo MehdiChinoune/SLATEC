@@ -39,9 +39,10 @@ REAL FUNCTION COT(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
-  REAL ainty, ainty2, CSEVL, prodbg, R1MACH, sqeps, X, xmax, xmin, xsml, y, yrem
-  INTEGER ifn, INITS, nterms
-  SAVE nterms, xmax, xsml, xmin, sqeps
+  REAL ainty, ainty2, CSEVL, prodbg, R1MACH, X, y, yrem
+  INTEGER ifn, INITS
+  INTEGER, SAVE :: nterms
+  REAL, SAVE :: xmax, xsml, xmin, sqeps
   REAL, PARAMETER :: cotcs(8) = [ .24025916098295630E0,-.016533031601500228E0, &
     -.000042998391931724E0,-.000000159283223327E0,-.000000000619109313E0, &
     -.000000000002430197E0,-.000000000000009560E0,-.000000000000000037E0 ]

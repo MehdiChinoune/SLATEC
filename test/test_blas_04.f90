@@ -31,16 +31,13 @@ CONTAINS
     !     .. Scalar Arguments ..
     LOGICAL Reset
     !     .. Local Scalars ..
-    INTEGER i, ic, j, mi, mj
-    !     .. Save statement ..
-    SAVE i, ic, j, mi, mj
+    INTEGER, SAVE :: i, ic, j
+    INTEGER, PARAMETER :: mi = 891, mj = 457
     !     .. Intrinsic Functions ..
     INTRINSIC CMPLX
     !* FIRST EXECUTABLE STATEMENT  CBEG
     IF ( Reset ) THEN
       !        Initialize local variables.
-      mi = 891
-      mj = 457
       i = 7
       j = 7
       ic = 0

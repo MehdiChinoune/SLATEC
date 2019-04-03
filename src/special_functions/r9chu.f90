@@ -38,11 +38,11 @@ REAL FUNCTION R9CHU(A,B,Z)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL A, aa(4), ab, anbn, B, bb(4), bp, c2, ct1, ct2, ct3, d1z, eps, &
-    g1, g2, g3, R1MACH, sab, sqeps
+  REAL A, aa(4), ab, anbn, B, bb(4), bp, c2, ct1, ct2, ct3, d1z, &
+    g1, g2, g3, R1MACH, sab
   REAL x2i1, Z
   INTEGER i, j
-  SAVE eps, sqeps
+  REAL, SAVE :: eps, sqeps
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  R9CHU
   IF ( first ) THEN

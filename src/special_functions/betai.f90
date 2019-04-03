@@ -45,10 +45,9 @@ REAL FUNCTION BETAI(X,Pin,Qin)
   !           (WRB)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
 
-  REAL ALBETA, alneps, alnsml, c, eps, finsum, p, p1, Pin, ps, q, &
-    Qin, R1MACH, sml, term, X, xb, y
+  REAL ALBETA, c, finsum, p, p1, Pin, ps, q, Qin, R1MACH, term, X, xb, y
   INTEGER i, ib, n
-  SAVE eps, alneps, sml, alnsml
+  REAL, SAVE :: eps, alneps, sml, alnsml
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  BETAI
   IF ( first ) THEN

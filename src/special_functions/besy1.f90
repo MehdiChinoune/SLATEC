@@ -54,9 +54,10 @@ REAL FUNCTION BESY1(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  REAL ampl, BESJ1, CSEVL, R1MACH, theta, X, xmax, xmin, xsml, y, z
-  INTEGER INITS, ntm1, ntth1, nty1
-  SAVE nty1, ntm1, ntth1, xmin, xsml, xmax
+  REAL ampl, BESJ1, CSEVL, R1MACH, theta, X, y, z
+  INTEGER INITS
+  INTEGER, SAVE :: nty1, ntm1, ntth1
+  REAL, SAVE :: xmin, xsml, xmax
   REAL, PARAMETER :: by1cs(14) = [ .03208047100611908629E0, 1.262707897433500450E0, &
     .00649996189992317500E0, -.08936164528860504117E0, .01325088122175709545E0, &
     -.00089790591196483523E0, .00003647361487958306E0, -.00000100137438166600E0, &

@@ -34,10 +34,11 @@ COMPLEX FUNCTION CEXPRL(Z)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL alneps, r, R1MACH, rbnd, xln, xn
-  INTEGER i, nterms
+  REAL alneps, r, R1MACH, xln, xn
+  INTEGER i
   COMPLEX Z
-  SAVE nterms, rbnd
+  INTEGER, SAVE :: nterms
+  REAL, SAVE :: rbnd
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  CEXPRL
   IF ( first ) THEN

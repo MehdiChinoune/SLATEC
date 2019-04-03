@@ -37,9 +37,8 @@ REAL(8) FUNCTION D9GMIC(A,X,Alx)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
   INTEGER k, m, mm1
-  REAL(8) :: A, X, Alx, alng, bot, eps, fk, fkp1, fm, s, sgng, t, te, &
-    D1MACH, DLNGAM
-  SAVE eps, bot
+  REAL(8) :: A, X, Alx, alng, fk, fkp1, fm, s, sgng, t, te, D1MACH, DLNGAM
+  REAL(8), SAVE :: eps, bot
   REAL(8), PARAMETER :: euler = 0.57721566490153286060651209008240D0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9GMIC

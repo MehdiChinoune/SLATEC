@@ -50,9 +50,10 @@ REAL FUNCTION DAWS(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
-  REAL CSEVL, eps, R1MACH, X, xbig, xmax, xsml, y
-  INTEGER INITS, ntdaw, ntdaw2, ntdawa
-  SAVE ntdaw, ntdaw2, ntdawa, xsml, xbig, xmax
+  REAL CSEVL, eps, R1MACH, X, y
+  INTEGER INITS
+  INTEGER, SAVE :: ntdaw, ntdaw2, ntdawa
+  REAL, SAVE :: xsml, xbig, xmax
   REAL, PARAMETER :: dawcs(13) = [ -.006351734375145949E0,-.22940714796773869E0, &
     .022130500939084764E0, -.001549265453892985E0, .000084973277156849E0, &
     -.000003828266270972E0, .000000146285480625E0,-.000000004851982381E0, &

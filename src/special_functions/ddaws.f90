@@ -52,9 +52,10 @@ REAL(8) FUNCTION DDAWS(X)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
   REAL eps
-  INTEGER INITDS, ntdaw, ntdaw2, ntdawa
-  REAL(8) :: X, xbig, xmax, xsml, y, DCSEVL, D1MACH
-  SAVE ntdaw, ntdaw2, ntdawa, xsml, xbig, xmax
+  INTEGER INITDS
+  REAL(8) :: X, y, DCSEVL, D1MACH
+  INTEGER, SAVE :: ntdaw, ntdaw2, ntdawa
+  REAL(8), SAVE :: xsml, xbig, xmax
   REAL(8), PARAMETER :: dawcs(21) = [ -.6351734375145949201065127736293D-2, &
     -.2294071479677386939899824125866D+0, +.2213050093908476441683979161786D-1, &
     -.1549265453892985046743057753375D-2, +.8497327715684917456777542948066D-4, &

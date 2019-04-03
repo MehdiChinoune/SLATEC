@@ -35,10 +35,11 @@ COMPLEX FUNCTION CATAN(Z)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  INTEGER i, nterms
-  REAL r, R1MACH, r2, rmax, rmin, sqeps, twoi, x, xans, y, yans
+  INTEGER i
+  REAL r, R1MACH, r2, twoi, x, xans, y, yans
   COMPLEX Z, z2
-  SAVE nterms, sqeps, rmin, rmax
+  INTEGER, SAVE :: nterms
+  REAL, SAVE :: sqeps, rmin, rmax
   REAL, PARAMETER :: pi2 = 1.57079632679489661923E0
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  CATAN

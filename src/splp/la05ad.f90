@@ -65,14 +65,12 @@ SUBROUTINE LA05AD(A,Ind,Nz,Ia,N,Ip,Iw,W,G,U)
     kcost, kj, kk, kl, klc, kn, knp, kp, kpc, kpl, kq, kr, krl, ks, l, mcp, N, &
     nc, Nz, nzc
   INTEGER Ip(N,2), Ind(Ia,2), Iw(N,8)
-  REAL(8) :: A(*), amax, au, am, D1MACH, eps, G, U, W(*)
+  REAL(8) :: A(*), amax, au, am, D1MACH, G, U, W(*)
   CHARACTER(8) :: xern0, xern1, xern2
   ! EPS IS THE RELATIVE ACCURACY OF FLOATING-POINT COMPUTATION
-  SAVE eps
-  LOGICAL :: first = .TRUE.
+  REAL(8) :: eps = 0.D0
   !* FIRST EXECUTABLE STATEMENT  LA05AD
-  IF ( first ) eps = 2.0D0*D1MACH(4)
-  first = .FALSE.
+  IF ( eps == 0.D0 ) eps = 2.0D0*D1MACH(4)
   !
   !     SET THE OUTPUT UNIT NUMBER FOR THE ERROR PROCESSOR.
   !     THE USAGE OF THIS ERROR PROCESSOR IS DOCUMENTED IN THE

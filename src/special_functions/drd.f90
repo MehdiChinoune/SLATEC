@@ -322,11 +322,11 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
 
   CHARACTER(16) :: xern3, xern4, xern5, xern6
   INTEGER Ier
-  REAL(8) :: lolim, tuplim, uplim, epslon, errtol, D1MACH
-  REAL(8) :: c1, c2, c3, c4, ea, eb, ec, ed, ef, lamda
-  REAL(8) :: mu, power4, sigma, s1, s2, X, xn, xndev
-  REAL(8) :: xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, znroot
-  SAVE errtol, lolim, uplim, c1, c2, c3, c4
+  REAL(8) :: tuplim, epslon, D1MACH, ea, eb, ec, ed, ef, lamda, mu, power4, &
+    sigma, s1, s2, X, xn, xndev, xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, znroot
+  REAL(8), SAVE :: errtol, lolim, uplim
+  REAL(8), PARAMETER :: c1 = 3.0D0/14.0D0, c2 = 1.0D0/6.0D0, c3 = 9.0D0/22.0D0, &
+    c4 = 3.0D0/26.0D0
   LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  DRD
@@ -336,11 +336,6 @@ REAL(8) FUNCTION DRD(X,Y,Z,Ier)
     tuplim = D1MACH(1)**(1.0E0/3.0E0)
     tuplim = (0.10D0*errtol)**(1.0E0/3.0E0)/tuplim
     uplim = tuplim**2.0D0
-    !
-    c1 = 3.0D0/14.0D0
-    c2 = 1.0D0/6.0D0
-    c3 = 9.0D0/22.0D0
-    c4 = 3.0D0/26.0D0
     first = .FALSE.
   ENDIF
   !

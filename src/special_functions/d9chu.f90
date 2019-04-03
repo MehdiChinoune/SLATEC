@@ -41,8 +41,8 @@ REAL(8) FUNCTION D9CHU(A,B,Z)
 
   INTEGER i, j
   REAL(8) :: A, B, Z, aa(4), bb(4), ab, anbn, bp, ct1, ct2, &
-    ct3, c2, d1z, eps, g1, g2, g3, sab, sqeps, x2i1, D1MACH
-  SAVE eps, sqeps
+    ct3, c2, d1z, g1, g2, g3, sab, x2i1, D1MACH
+  REAL(8), SAVE :: eps, sqeps
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  D9CHU
   IF ( first ) THEN

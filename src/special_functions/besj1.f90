@@ -52,10 +52,11 @@ REAL FUNCTION BESJ1(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  REAL ampl, theta, X, xmax, xmin, xsml, y, z
+  REAL ampl, theta, X, y, z
   REAL, EXTERNAL :: CSEVL, R1MACH
-  INTEGER INITS, ntj1, ntm1, ntth1
-  SAVE ntj1, ntm1, ntth1, xsml, xmin, xmax
+  INTEGER INITS
+  INTEGER, SAVE :: ntj1, ntm1, ntth1
+  REAL, SAVE :: xsml, xmin, xmax
   REAL, PARAMETER :: bj1cs(12) = [ -.11726141513332787E0, -.25361521830790640E0, &
     .050127080984469569E0, -.004631514809625081E0, .000247996229415914E0, &
     -.000008678948686278E0, .000000214293917143E0,-.000000003936093079E0, &

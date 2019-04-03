@@ -35,9 +35,10 @@ REAL FUNCTION EXPREL(X)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL absx, alneps, R1MACH, X, xbnd, xln, xn
-  INTEGER i, nterms
-  SAVE nterms, xbnd
+  REAL absx, alneps, R1MACH, X, xln, xn
+  INTEGER i
+  INTEGER, SAVE :: nterms
+  REAL, SAVE :: xbnd
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  EXPREL
   IF ( first ) THEN

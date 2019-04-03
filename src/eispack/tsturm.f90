@@ -125,14 +125,13 @@ SUBROUTINE TSTURM(Nm,N,Eps1,D,E,E2,Lb,Ub,Mm,M,W,Z,Ierr,Rv1,Rv2,Rv3,Rv4,Rv5,Rv6)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   REAL R1MACH
-  INTEGER i, j, k, M, N, p, q, r, s, ii, ip, jj, Mm, m1, m2, Nm, its
-  INTEGER Ierr, group, isturm
-  REAL D(*), E(*), E2(*), W(*), Z(Nm,*)
-  REAL Rv1(*), Rv2(*), Rv3(*), Rv4(*), Rv5(*), Rv6(*)
-  REAL u, v, Lb, t1, t2, Ub, uk, xu, x0, x1, Eps1, eps2, eps3, eps4
-  REAL norm, machep, s1, s2
+  INTEGER :: i, j, k, M, N, p, q, r, s, ii, ip, jj, Mm, m1, m2, Nm, its, Ierr, &
+    group, isturm
+  REAL :: D(*), E(*), E2(*), W(*), Z(Nm,*), Rv1(*), Rv2(*), Rv3(*), Rv4(*), &
+    Rv5(*), Rv6(*)
+  REAL u, v, Lb, t1, t2, Ub, uk, xu, x0, x1, Eps1, eps2, eps3, eps4, norm, s1, s2
   !
-  SAVE machep
+  REAL, SAVE :: machep
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  TSTURM
   IF ( first ) machep = R1MACH(4)

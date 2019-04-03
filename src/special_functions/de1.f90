@@ -91,9 +91,10 @@ REAL(8) FUNCTION DE1(X)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
   REAL eta
-  INTEGER INITDS, ntae10, ntae11, ntae12, ntae13, ntae14, nte11, nte12
-  REAL(8) :: X, xmax, xmaxt, D1MACH, DCSEVL
-  SAVE ntae10, ntae11, ntae12, nte11, nte12, ntae13, ntae14, xmax
+  INTEGER INITDS
+  REAL(8) :: X, xmaxt, D1MACH, DCSEVL
+  INTEGER, SAVE :: ntae10, ntae11, ntae12, nte11, nte12, ntae13, ntae14
+  REAL(8), SAVE :: xmax
   REAL(8), PARAMETER :: ae10cs(50)  = [ +.3284394579616699087873844201881D-1, &
     -.1669920452031362851476184343387D-1, +.2845284724361346807424899853252D-3, &
     -.7563944358516206489487866938533D-5, +.2798971289450859157504843180879D-6, &

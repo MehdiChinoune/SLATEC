@@ -46,11 +46,12 @@ REAL FUNCTION PSI(X)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
-  REAL aux, dxrel, X, xbig, y
-  INTEGER i, n, ntapsi, ntpsi
+  REAL aux, X, y
+  INTEGER i, n
   INTEGER, EXTERNAL :: INITS
   REAL, EXTERNAL :: CSEVL, COT, R1MACH
-  SAVE ntpsi, ntapsi, xbig, dxrel
+  INTEGER, SAVE :: ntpsi, ntapsi
+  REAL, SAVE :: xbig, dxrel
   REAL, PARAMETER :: psics(23) = [ -.038057080835217922E0, .49141539302938713E0, &
     -.056815747821244730E0, .008357821225914313E0,-.001333232857994342E0, &
     .000220313287069308E0, -.000037040238178456E0, .000006283793654854E0, &

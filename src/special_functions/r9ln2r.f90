@@ -46,9 +46,10 @@ REAL FUNCTION R9LN2R(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL CSEVL, eps, R1MACH, sqeps, txbig, txmax, X, xbig, xmax, xmin
-  INTEGER INITS, ntln21, ntln22
-  SAVE ntln21, ntln22, xmin, xbig, xmax
+  REAL CSEVL, eps, R1MACH, sqeps, txbig, txmax, X
+  INTEGER INITS
+  INTEGER, SAVE :: ntln21, ntln22
+  REAL, SAVE :: xmin, xbig, xmax
   REAL, PARAMETER :: ln21cs(26) = [ .18111962513478810E0,-.15627123192872463E0, &
     .028676305361557275E0, -.005558699655948139E0, .001117897665229983E0, &
     -.000230805089823279E0, .000048598853341100E0,-.000010390127388903E0, &

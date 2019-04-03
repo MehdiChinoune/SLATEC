@@ -40,16 +40,15 @@ SUBROUTINE FULMAT(I,J,Aij,Indcat,Prgopt,Dattrv,Iflag)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER I, Indcat, J, key, level, lp, nerr, next
-  REAL Aij, zero, Dattrv(*), Prgopt(*)
+  REAL Aij, Dattrv(*), Prgopt(*)
   INTEGER Iflag(10)
-  SAVE zero
+  REAL, PARAMETER :: zero = 0.
   !* FIRST EXECUTABLE STATEMENT  FULMAT
   IF ( Iflag(1)==1 ) THEN
     !     INITIALIZE POINTERS TO PROCESS FULL TWO-DIMENSIONAL FORTRAN
     !     ARRAYS.
-    zero = 0.
     lp = 1
     DO
       next = INT( Prgopt(lp) )

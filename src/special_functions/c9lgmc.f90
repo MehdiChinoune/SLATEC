@@ -40,10 +40,11 @@ COMPLEX FUNCTION C9LGMC(Zin)
   !           (WRB)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL bound, cabsz, R1MACH, x, xbig, xmax, y
-  INTEGER i, ndx, nterm
+  REAL cabsz, R1MACH, x, y
+  INTEGER i, ndx
   COMPLEX Zin, z, z2inv
-  SAVE nterm, bound, xbig, xmax
+  INTEGER, SAVE :: nterm
+  REAL, SAVE :: bound, xbig, xmax
   REAL, PARAMETER :: bern(11) = [ .083333333333333333E0,-.0027777777777777778E0, &
     .00079365079365079365E0, -.00059523809523809524E0, .00084175084175084175E0, &
     -.0019175269175269175E0,  .0064102564102564103E0, -.029550653594771242E0, &

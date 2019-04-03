@@ -398,14 +398,14 @@ SUBROUTINE LSEI(W,Mdw,Me,Ma,Mg,N,Prgopt,X,Rnorme,Rnorml,Mode,Ws,Ip)
   REAL, EXTERNAL :: R1MACH, SASUM, SDOT, SNRM2
   EXTERNAL :: H12, LSI, SAXPY, SCOPY, SSCAL, SSWAP, XERMSG
   !
-  REAL enorm, fnorm, gam, rb, rn, rnmax, size, sn, snmax, srelpr, &
-    t, tau, uj, up, vj, xnorm, xnrme
-  INTEGER i, imax, j, jp1, k, key, kranke, last, lchk, link, m, &
-    mapke1, mdeqc, mend, mep1, n1, n2, next, nlink, nopt, np1, ntimes
+  REAL enorm, fnorm, gam, rb, rn, rnmax, size, sn, snmax, t, tau, uj, up, vj, &
+    xnorm, xnrme
+  INTEGER i, imax, j, jp1, k, key, kranke, last, lchk, link, m,  mapke1, mdeqc, &
+    mend, mep1, n1, n2, next, nlink, nopt, np1, ntimes
   LOGICAL cov
   CHARACTER(8) :: xern1, xern2, xern3, xern4
-  SAVE srelpr
   !
+  REAL, SAVE :: srelpr
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  LSEI
   !

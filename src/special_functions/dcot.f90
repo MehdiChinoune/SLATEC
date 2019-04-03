@@ -39,10 +39,10 @@ REAL(8) FUNCTION DCOT(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
-  INTEGER ifn, INITDS, nterms
-  REAL(8) :: X, ainty, ainty2, sqeps, xmax, &
-    xmin, xsml, y, yrem, prodbg, DCSEVL, D1MACH
-  SAVE nterms, xmax, xsml, xmin, sqeps
+  INTEGER ifn, INITDS
+  REAL(8) :: X, ainty, ainty2, y, yrem, prodbg, DCSEVL, D1MACH
+  INTEGER, SAVE :: nterms
+  REAL(8), SAVE :: xmax, xsml, xmin, sqeps
   REAL(8), PARAMETER :: cotcs(15) = [ +.240259160982956302509553617744970D+0, &
     -.165330316015002278454746025255758D-1, -.429983919317240189356476228239895D-4, &
     -.159283223327541046023490851122445D-6, -.619109313512934872588620579343187D-9, &

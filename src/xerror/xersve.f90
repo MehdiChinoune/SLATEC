@@ -67,13 +67,14 @@ SUBROUTINE XERSVE(Librar,Subrou,Messg,Kflag,Nerr,Level,Icount)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER, PARAMETER :: LENTAB = 10
-  INTEGER i, I1MACH, Icount, iunit, Kflag, kount(LENTAB), kunit, &
-    Level, levtab(LENTAB), Nerr, nertab(LENTAB), nunit
+  INTEGER i, I1MACH, Icount, iunit, Kflag, kunit, Level, Nerr, nunit
   INTEGER lun(5)
   CHARACTER*(*) Librar, Subrou, Messg
-  CHARACTER(8) :: libtab(LENTAB), subtab(LENTAB), lib, sub
-  CHARACTER(20) :: mestab(LENTAB), mes
-  SAVE libtab, subtab, mestab, nertab, levtab, kount
+  CHARACTER(8) :: lib, sub
+  CHARACTER(20) :: mes
+  CHARACTER(8), SAVE :: libtab(LENTAB), subtab(LENTAB)
+  CHARACTER(20), SAVE :: mestab(LENTAB)
+  INTEGER, SAVE :: nertab(LENTAB), levtab(LENTAB), kount(LENTAB)
   INTEGER :: kountx = 0, nmsg = 0
   !* FIRST EXECUTABLE STATEMENT  XERSVE
   !

@@ -89,12 +89,11 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !     .. Function Arguments ..
   REAL(8), EXTERNAL :: FUN
   !     .. Local Scalars ..
-  REAL(8) :: ae, area, bank, blocal, c, ce, ee, ef, eps, &
-    q13, q7, q7l, sq2, test, tol, vr, w1, w2, w3, w4
-  INTEGER i, l, lmn, lmx, nbits, nib, nlmx
+  REAL(8) :: ae, area, bank, blocal, c, ce, ee, ef, eps, q13, q7, q7l, test, tol, vr
+  INTEGER i, l, lmn, lmx, nib
   !     .. Local Arrays ..
-  REAL(8) :: aa(99), f(13), f1(99), f2(99), f3(99), f4(99), &
-    f5(99), f6(99), f7(99), hh(99), q7r(99), vl(99)
+  REAL(8) :: aa(99), f(13), f1(99), f2(99), f3(99), f4(99), f5(99), f6(99), &
+    f7(99), hh(99), q7r(99), vl(99)
   INTEGER lr(99)
   !     .. External Functions ..
   REAL(8), EXTERNAL :: D1MACH
@@ -104,7 +103,8 @@ SUBROUTINE DQNC79(FUN,A,B,Err,Ans,Ierr,K)
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, LOG, MAX, MIN, SIGN, SQRT
   !     .. Save statement ..
-  SAVE nbits, nlmx, sq2, w1, w2, w3, w4
+  INTEGER, SAVE :: nbits, nlmx
+  REAL(8), SAVE :: sq2, w1, w2, w3, w4
   !     .. Data statements ..
   INTEGER, PARAMETER :: kml = 7, kmx = 5000, nlmn = 2
   LOGICAL :: first = .TRUE.

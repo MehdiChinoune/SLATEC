@@ -32,10 +32,11 @@ COMPLEX FUNCTION CASIN(Zinp)
   !   890531  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  INTEGER i, nterms
-  REAL r, R1MACH, rmin, twoi
+  INTEGER i
+  REAL r, R1MACH, twoi
   COMPLEX Zinp, z, z2, sqzp1
-  SAVE nterms, rmin
+  INTEGER, SAVE :: nterms
+  REAL, SAVE :: rmin
   REAL, PARAMETER :: pi2 = 1.57079632679489661923E0
   REAL, PARAMETER :: pi = 3.14159265358979324E0
   COMPLEX, PARAMETER :: ci = (0.,1.)

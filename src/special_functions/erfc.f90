@@ -52,9 +52,10 @@ REAL FUNCTION ERFC(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
-  REAL CSEVL, eta, R1MACH, sqeps, txmax, X, xmax, xsml, y
-  INTEGER INITS, nterc2, nterf, nterfc
-  SAVE  nterf, nterfc, nterc2, xsml, xmax, sqeps
+  REAL CSEVL, eta, R1MACH, txmax, X, y
+  INTEGER INITS
+  INTEGER, SAVE :: nterf, nterfc, nterc2
+  REAL, SAVE :: xsml, xmax, sqeps
   REAL, PARAMETER :: erfcs(13) = [ -.049046121234691808E0, -.14226120510371364E0, &
     .010035582187599796E0, -.000576876469976748E0, .000027419931252196E0, &
     -.000001104317550734E0, .000000038488755420E0,-.000000001180858253E0, &

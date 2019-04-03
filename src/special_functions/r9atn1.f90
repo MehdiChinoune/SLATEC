@@ -41,9 +41,10 @@ REAL FUNCTION R9ATN1(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL CSEVL, eps, R1MACH, X, xbig, xmax, xsml, y
-  INTEGER INITS, ntatn1
-  SAVE ntatn1, xsml, xbig, xmax
+  REAL CSEVL, eps, R1MACH, X, y
+  INTEGER INITS
+  INTEGER, SAVE :: ntatn1
+  REAL, SAVE :: xsml, xbig, xmax
   REAL, PARAMETER :: atn1cs(21) = [ -.03283997535355202E0, .05833432343172412E0, &
     -.00740036969671964E0, .00100978419933728E0,-.00014397871635652E0, &
     .00002114512648992E0, -.00000317232107425E0, .00000048366203654E0, &

@@ -82,9 +82,10 @@ REAL(8) FUNCTION DBIE(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
   REAL eta
-  INTEGER INITDS, nbif, nbif2, nbig, nbig2, nbip1, nbip2
-  REAL(8) :: X, sqrtx, theta, xbig, xm, x3sml, x32sml, z, D1MACH, DCSEVL
-  SAVE nbif, nbig, nbif2, nbig2, nbip1, nbip2, x3sml, x32sml, xbig
+  INTEGER INITDS
+  REAL(8) :: X, sqrtx, theta, xm, z, D1MACH, DCSEVL
+  INTEGER, SAVE :: nbif, nbig, nbif2, nbig2, nbip1, nbip2
+  REAL(8), SAVE :: x3sml, x32sml, xbig
   REAL(8), PARAMETER :: bifcs(13) = [ -.16730216471986649483537423928176D-1, &
     +.10252335834249445611426362777757D+0, +.17083092507381516539429650242013D-2, &
     +.11862545467744681179216459210040D-4, +.44932907017792133694531887927242D-7, &

@@ -53,9 +53,10 @@ REAL(8) FUNCTION DERFC(X)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
   REAL eta
-  INTEGER INITDS, nterc2, nterf, nterfc
-  REAL(8) :: X, sqeps, xmax, txmax, xsml, y, D1MACH, DCSEVL
-  SAVE nterf, nterfc, nterc2, xsml, xmax, sqeps
+  INTEGER INITDS
+  REAL(8) :: X, txmax, y, D1MACH, DCSEVL
+  INTEGER, SAVE :: nterf, nterfc, nterc2
+  REAL(8), SAVE :: xsml, xmax, sqeps
   REAL(8), PARAMETER :: erfcs(21) = [ -.49046121234691808039984544033376D-1, &
     -.14226120510371364237824741899631D+0, +.10035582187599795575754676712933D-1, &
     -.57687646997674847650827025509167D-3, +.27419931252196061034422160791471D-4, &

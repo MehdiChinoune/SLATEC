@@ -278,9 +278,9 @@ REAL FUNCTION RC(X,Y,Ier)
   REAL R1MACH
   CHARACTER(16) :: xern3, xern4, xern5
   INTEGER Ier
-  REAL c1, c2, errtol, lamda, lolim
-  REAL mu, s, sn, uplim, X, xn, Y, yn
-  SAVE errtol, lolim, uplim, c1, c2
+  REAL lamda, mu, s, sn, X, xn, Y, yn
+  REAL, SAVE :: errtol, lolim, uplim
+  REAL, PARAMETER ::  c1 = 1.0E0/7.0E0, c2 = 9.0E0/22.0E0
   LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  RC
@@ -288,9 +288,6 @@ REAL FUNCTION RC(X,Y,Ier)
     errtol = (R1MACH(3)/16.0E0)**(1.0E0/6.0E0)
     lolim = 5.0E0*R1MACH(1)
     uplim = R1MACH(2)/5.0E0
-    !
-    c1 = 1.0E0/7.0E0
-    c2 = 9.0E0/22.0E0
     first = .FALSE.
   ENDIF
   !

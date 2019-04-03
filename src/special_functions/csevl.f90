@@ -48,8 +48,8 @@ REAL FUNCTION CSEVL(X,Cs,N)
 
   REAL R1MACH
   INTEGER i, N, ni
-  REAL b0, b1, b2, Cs(*), onepl, twox, X
-  SAVE onepl
+  REAL b0, b1, b2, Cs(*), twox, X
+  REAL, SAVE :: onepl
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  CSEVL
   IF ( first ) onepl = 1.0E0 + R1MACH(4)

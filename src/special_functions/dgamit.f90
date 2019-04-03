@@ -59,10 +59,9 @@ REAL(8) FUNCTION DGAMIT(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
 
-  REAL(8) :: A, X, aeps, ainta, algap1, alneps, alng, alx, &
-    bot, h, sga, sgngam, sqeps, t, D1MACH, DGAMR, &
-    D9GMIT, D9LGIT, DLNGAM, D9LGIC
-  SAVE alneps, sqeps, bot
+  REAL(8) :: A, X, aeps, ainta, algap1, alng, alx, h, sga, sgngam, t, D1MACH, &
+    DGAMR, D9GMIT, D9LGIT, DLNGAM, D9LGIC
+  REAL(8), SAVE :: alneps, sqeps, bot
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DGAMIT
   IF ( first ) THEN

@@ -53,9 +53,10 @@ REAL FUNCTION AIE(X)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920618  Removed space from variable names.  (RWC, WRB)
 
-  REAL CSEVL, eta, R1MACH, sqrtx, theta, X, x32sml, x3sml, xbig, xm, z
-  INTEGER INITS, naif, naig, naip
-  SAVE naif, naig, naip, x3sml, x32sml, xbig
+  REAL CSEVL, eta, R1MACH, sqrtx, theta, X, xm, z
+  INTEGER INITS
+  INTEGER, SAVE :: naif, naig, naip
+  REAL, SAVE :: x3sml, x32sml, xbig
   REAL, PARAMETER :: aifcs(9) = [ -.03797135849666999750E0, .05919188853726363857E0, &
     .00098629280577279975E0, .00000684884381907656E0, .00000002594202596219E0, &
     .00000000006176612774E0, .00000000000010092454E0, .00000000000000012014E0, &

@@ -69,9 +69,10 @@ SUBROUTINE D9AIMP(X,Ampl,Theta)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
   REAL eta
-  INTEGER INITDS, nam20, nam21, nam22, nath0, nath1, nath2
-  REAL(8) :: X, Ampl, Theta, sqrtx, xsml, z, D1MACH, DCSEVL
-  SAVE nam20, nath0, nam21, nath1, nam22, nath2, xsml
+  INTEGER INITDS
+  REAL(8) :: X, Ampl, Theta, sqrtx, z, D1MACH, DCSEVL
+  INTEGER, SAVE :: nam20, nath0, nam21, nath1, nam22, nath2
+  REAL(8), SAVE :: xsml
   REAL(8), PARAMETER :: am20cs(57) = [ +.108716749086561856615730588125D-1, &
     +.369489228982663555091728665146D-3, +.440680100484689563667507001327D-5, &
     +.143686762361911153929183952833D-6, +.824275552390078308670628855353D-8, &

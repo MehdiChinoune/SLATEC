@@ -318,14 +318,14 @@ REAL FUNCTION RD(X,Y,Z,Ier)
   !   900510  Modify calls to XERMSG to put in standard form.  (RWC)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
-  REAL R1MACH, tuplim
+  REAL R1MACH
   CHARACTER(16) :: xern3, xern4, xern5, xern6
   INTEGER Ier
-  REAL lolim, uplim, epslon, errtol
-  REAL c1, c2, c3, c4, ea, eb, ec, ed, ef, lamda
-  REAL mu, power4, sigma, s1, s2, X, xn, xndev
-  REAL xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, znroot
-  SAVE errtol, lolim, uplim, c1, c2, c3, c4
+  REAL epslon, ea, eb, ec, ed, ef, lamda, mu, power4, sigma, s1, s2, X, xn, &
+    xndev, xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, znroot, tuplim
+  REAL, SAVE :: errtol, lolim, uplim
+  REAL, PARAMETER :: c1 = 3.0E0/14.0E0, c2 = 1.0E0/6.0E0, c3 = 9.0E0/22.0E0, &
+    c4 = 3.0E0/26.0E0
   LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  RD
@@ -335,11 +335,6 @@ REAL FUNCTION RD(X,Y,Z,Ier)
     tuplim = R1MACH(1)**(1.0E0/3.0E0)
     tuplim = (0.10E0*errtol)**(1.0E0/3.0E0)/tuplim
     uplim = tuplim**2.0E0
-    !
-    c1 = 3.0E0/14.0E0
-    c2 = 1.0E0/6.0E0
-    c3 = 9.0E0/22.0E0
-    c4 = 3.0E0/26.0E0
     first = .FALSE.
   ENDIF
   !

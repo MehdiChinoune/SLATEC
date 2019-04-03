@@ -55,10 +55,9 @@ REAL(8) FUNCTION DGAMIC(A,X)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
 
   INTEGER izero
-  REAL(8) :: A, X, aeps, ainta, algap1, alneps, alngs, alx, &
-    bot, e, eps, gstar, h, sga, sgng, sgngam, sgngs, &
-    sqeps, t, D1MACH, DLNGAM, D9GMIC, D9GMIT, D9LGIC, D9LGIT
-  SAVE eps, sqeps, alneps, bot
+  REAL(8) :: A, X, aeps, ainta, algap1, alngs, alx, e, gstar, h, sga, sgng, &
+    sgngam, sgngs, t, D1MACH, DLNGAM, D9GMIC, D9GMIT, D9LGIC, D9LGIT
+  REAL(8), SAVE :: eps, sqeps, alneps, bot
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  DGAMIC
   IF ( first ) THEN

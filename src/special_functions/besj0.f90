@@ -53,9 +53,10 @@ REAL FUNCTION BESJ0(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  REAL ampl, CSEVL, R1MACH, theta, X, xmax, xsml, y, z
-  INTEGER INITS, ntj0, ntm0, ntth0
-  SAVE ntj0, ntm0, ntth0, xsml, xmax
+  REAL ampl, CSEVL, R1MACH, theta, X, y, z
+  INTEGER INITS
+  INTEGER, SAVE :: ntj0, ntm0, ntth0
+  REAL, SAVE :: xsml, xmax
   REAL, PARAMETER :: bj0cs(13) = [ .100254161968939137E0, -.665223007764405132E0, &
     .248983703498281314E0,  -.0332527231700357697E0, .0023114179304694015E0, &
     -.0000991127741995080E0, .0000028916708643998E0,-.0000000612108586630E0, &

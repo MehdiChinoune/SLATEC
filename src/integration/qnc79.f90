@@ -86,9 +86,8 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   !     .. Function Arguments ..
   REAL, EXTERNAL :: FUN
   !     .. Local Scalars ..
-  REAL ae, area, bank, blocal, c, ce, ee, ef, eps, q13, q7, q7l, &
-    sq2, test, tol, vr, w1, w2, w3, w4
-  INTEGER i, l, lmn, lmx, nbits, nib, nlmx
+  REAL ae, area, bank, blocal, c, ce, ee, ef, eps, q13, q7, q7l, test, tol, vr
+  INTEGER i, l, lmn, lmx, nib
   !     .. Local Arrays ..
   REAL aa(40), f(13), f1(40), f2(40), f3(40), f4(40), f5(40), f6(40), &
     f7(40), hh(40), q7r(40), vl(40)
@@ -101,7 +100,8 @@ SUBROUTINE QNC79(FUN,A,B,Err,Ans,Ierr,K)
   !     .. Intrinsic Functions ..
   INTRINSIC ABS, LOG, MAX, MIN, SIGN, SQRT
   !     .. Save statement ..
-  SAVE nbits, nlmx, sq2, w1, w2, w3, w4
+  INTEGER, SAVE :: nbits, nlmx
+  REAL, SAVE :: sq2, w1, w2, w3, w4
   !     .. Data statements ..
   INTEGER, PARAMETER :: kml = 7, kmx = 2000, nlmn = 2
   LOGICAL :: first = .TRUE.

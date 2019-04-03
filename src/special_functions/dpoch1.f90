@@ -60,10 +60,10 @@ REAL(8) FUNCTION DPOCH1(A,X)
   !   900727  Added EXTERNAL statement.  (WRB)
 
   INTEGER i, ii, incr, j, k, ndx, nterms
-  REAL(8) :: A, X, absa, absx, alneps, alnvar, b, binv, bp, gbern(21), &
-    gbk, poly1, q, rho, sinpxx, sinpx2, sqtbig, term, trig, var, var2
+  REAL(8) :: A, X, absa, absx, alnvar, b, binv, bp, gbern(21), &
+    gbk, poly1, q, rho, sinpxx, sinpx2, term, trig, var, var2
   REAL(8), EXTERNAL :: DCOT, D1MACH, DPSI, DEXPRL, DPOCH
-  SAVE sqtbig, alneps
+  REAL(8), SAVE :: sqtbig, alneps
   REAL(8), PARAMETER :: bern(20) = [ +.833333333333333333333333333333333D-1, &
     -.138888888888888888888888888888888D-2, +.330687830687830687830687830687830D-4, &
     -.826719576719576719576719576719576D-6, +.208767569878680989792100903212014D-7, &

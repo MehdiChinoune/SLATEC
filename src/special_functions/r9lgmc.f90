@@ -42,9 +42,10 @@ REAL FUNCTION R9LGMC(X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900720  Routine changed from user-callable to subsidiary.  (WRB)
 
-  REAL CSEVL, R1MACH, X, xbig, xmax
-  INTEGER INITS, nalgm
-  SAVE nalgm, xbig, xmax
+  REAL CSEVL, R1MACH, X
+  INTEGER INITS
+  INTEGER, SAVE :: nalgm
+  REAL, SAVE :: xbig, xmax
   REAL, PARAMETER :: algmcs(6) = [ .166638948045186E0,-.0000138494817606E0, &
     .0000000098108256E0,-.0000000000180912E0, .0000000000000622E0, &
     -.0000000000000003E0 ]

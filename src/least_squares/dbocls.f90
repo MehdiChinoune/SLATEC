@@ -566,20 +566,18 @@ SUBROUTINE DBOCLS(W,Mdw,Mcon,Mrows,Ncols,Bl,Bu,Ind,Iopt,X,Rnormc,Rnorm,&
   !     /SSCAL/ TO /DSCAL/, /SASUM/ TO /DASUM/, /SBOLS/ TO /DBOLS/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   ! ++
-  INTEGER i, icase, iiw, inrows, ip, irw, iscale, j, jp, &
-    lbou, lboum, lds, lenx, liopt, liw, llb, lliw, llrw, llx
-  INTEGER lmdw, lndw, locacc, locdim, lopt, lp, lrw, m, Mcon, Mdw, &
-    mdwl, mnew, Mode, modec, mopt, mout, Mrows, Ncols, nerr
+  INTEGER i, icase, iiw, inrows, ip, irw, iscale, j, jp, lbou, lboum, lds, lenx, &
+    liopt, liw, llb, lliw, llrw, llx, lmdw, lndw, locacc, locdim, lopt, lp, lrw, &
+    m, Mcon, Mdw, mdwl, mnew, Mode, modec, mopt, mout, Mrows, Ncols, nerr
   REAL(8) :: W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*)
-  REAL(8) :: anorm, cnorm, one, Rnorm, Rnormc, drelpr
-  REAL(8) :: t, t1, t2, DDOT, DNRM2, wt, zero
-  REAL(8) :: DASUM, D1MACH
+  REAL(8) :: anorm, cnorm, one, Rnorm, Rnormc, drelpr, t, t1, t2, DDOT, DNRM2, &
+    wt, zero, DASUM, D1MACH
   !     THIS VARIABLE REMAINS TYPED REAL.
   INTEGER Ind(*), Iopt(*), Iw(*), jopt(05)
-  LOGICAL checkl, filter, accum, pretri
+  LOGICAL filter, pretri
   CHARACTER(8) :: xern1, xern2
   CHARACTER(16) :: xern3, xern4
-  SAVE accum, checkl
+  LOGICAL, SAVE :: accum, checkl
   INTEGER :: igo = 0
   !* FIRST EXECUTABLE STATEMENT  DBOCLS
   nerr = 0

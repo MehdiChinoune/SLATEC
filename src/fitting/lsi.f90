@@ -68,12 +68,12 @@ SUBROUTINE LSI(W,Mdw,Ma,Mg,N,Prgopt,X,Rnorm,Mode,Ws,Ip)
   REAL, EXTERNAL :: R1MACH, SASUM, SDOT
   EXTERNAL :: H12, HFTI, LPDP, SAXPY, SCOPY, SSCAL, SSWAP
   !
-  REAL anorm, fac, gam, rb, srelpr, tau, tol, xnorm, temp(1)
-  INTEGER i, j, k, key, krank, krm1, krp1, l, last, link, m, &
-    map1, mdlpdp, minman, n1, n2, n3, next, np1
+  REAL anorm, fac, gam, rb,tau, tol, xnorm, temp(1)
+  INTEGER i, j, k, key, krank, krm1, krp1, l, last, link, m, map1, mdlpdp, minman, &
+    n1, n2, n3, next, np1
   LOGICAL cov, sclcov
   !
-  SAVE srelpr
+  REAL, SAVE :: srelpr
   LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  LSI

@@ -54,11 +54,10 @@ REAL FUNCTION GAMIC(A,X)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   920528  DESCRIPTION and REFERENCES sections revised.  (WRB)
 
-  REAL A, aeps, algap1, alneps, ALNGAM, alngs, alx, bot, e, eps, &
-    fm, gstar, h, R1MACH, R9GMIC, R9GMIT, R9LGIC, R9LGIT, sga, sgng
-  REAL sgngam, sgngs, sqeps, t, X
+  REAL A, aeps, algap1, alngs, alx, e, fm, gstar, h, sga, sgng,  sgngam, sgngs, t, &
+    X, ALNGAM, R1MACH, R9GMIC, R9GMIT, R9LGIC, R9LGIT
   INTEGER izero, ma
-  SAVE eps, sqeps, alneps, bot
+  REAL, SAVE :: eps, sqeps, alneps, bot
   LOGICAL :: first = .TRUE.
   !* FIRST EXECUTABLE STATEMENT  GAMIC
   IF ( first ) THEN

@@ -49,11 +49,12 @@ REAL(8) FUNCTION DPSI(X)
   !   900727  Added EXTERNAL statement.  (WRB)
   !   920618  Removed space from variable name.  (RWC, WRB)
 
-  INTEGER i, n, ntapsi, ntpsi
-  REAL(8) :: X, aux, dxrel, xbig, y
+  INTEGER i, n
+  REAL(8) :: X, aux, y
   INTEGER, EXTERNAL :: INITDS
   REAL(8), EXTERNAL :: DCOT, DCSEVL, D1MACH
-  SAVE ntpsi, ntapsi, xbig, dxrel
+  INTEGER, SAVE :: ntpsi, ntapsi
+  REAL(8), SAVE :: xbig, dxrel
   REAL(8), PARAMETER :: psics(42) = [ -.38057080835217921520437677667039D-1, &
     +.49141539302938712748204699654277D+0, -.56815747821244730242892064734081D-1, &
     +.83578212259143131362775650747862D-2, -.13332328579943425998079274172393D-2, &

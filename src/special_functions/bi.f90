@@ -59,9 +59,10 @@ REAL FUNCTION BI(X)
   !   900326  Removed duplicate information from DESCRIPTION section.
   !           (WRB)
 
-  REAL BIE, CSEVL, eta, R1MACH, theta, X, x3sml, xm, xmax, z
-  INTEGER INITS, nbif, nbif2, nbig, nbig2
-  SAVE nbif, nbig, nbif2, nbig2, x3sml, xmax
+  REAL BIE, CSEVL, eta, R1MACH, theta, X, xm, z
+  INTEGER INITS
+  INTEGER, SAVE :: nbif, nbig, nbif2, nbig2
+  REAL, SAVE :: x3sml, xmax
   REAL, PARAMETER :: bifcs(9) = [ -.01673021647198664948E0, .1025233583424944561E0, &
     .00170830925073815165E0, .00001186254546774468E0, .00000004493290701779E0, &
     .00000000010698207143E0, .00000000000017480643E0, .00000000000000020810E0, &

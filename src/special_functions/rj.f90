@@ -313,12 +313,12 @@ REAL FUNCTION RJ(X,Y,Z,P,Ier)
   REAL R1MACH
   CHARACTER(16) :: xern3, xern4, xern5, xern6, xern7
   INTEGER Ier
-  REAL alfa, beta, c1, c2, c3, c4, ea, eb, ec, e2, e3
-  REAL lolim, uplim, epslon, errtol
-  REAL lamda, mu, P, pn, pndev
-  REAL power4, RC, sigma, s1, s2, s3, X, xn, xndev
-  REAL xnroot, Y, yn, yndev, ynroot, Z, zn, zndev, znroot
-  SAVE errtol, lolim, uplim, c1, c2, c3, c4
+  REAL alfa, beta, ea, eb, ec, e2, e3, epslon, lamda, mu, P, pn, pndev, power4, &
+    RC, sigma, s1, s2, s3, X, xn, xndev, xnroot, Y, yn, yndev, ynroot, Z, zn, &
+    zndev, znroot
+  REAL, SAVE :: errtol, lolim, uplim
+  REAL, PARAMETER :: c1 = 3.0E0/14.0E0, c2 = 1.0E0/3.0E0, c3 = 3.0E0/22.0E0, &
+    c4 = 3.0E0/26.0E0
   LOGICAL :: first = .TRUE.
   !
   !* FIRST EXECUTABLE STATEMENT  RJ
@@ -326,11 +326,6 @@ REAL FUNCTION RJ(X,Y,Z,P,Ier)
     errtol = (R1MACH(3)/3.0E0)**(1.0E0/6.0E0)
     lolim = (5.0E0*R1MACH(1))**(1.0E0/3.0E0)
     uplim = 0.30E0*(R1MACH(2)/5.0E0)**(1.0E0/3.0E0)
-    !
-    c1 = 3.0E0/14.0E0
-    c2 = 1.0E0/3.0E0
-    c3 = 3.0E0/22.0E0
-    c4 = 3.0E0/26.0E0
     first = .FALSE.
   ENDIF
   !

@@ -69,9 +69,10 @@ REAL FUNCTION BIE(X)
   !   890206  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-  REAL CSEVL, eta, R1MACH, sqrtx, theta, X, x32sml, x3sml, xbig, xm, z
-  INTEGER INITS, nbif, nbif2, nbig, nbig2, nbip, nbip2
-  SAVE nbif, nbig, nbif2, nbig2, nbip, nbip2, x3sml, x32sml, xbig
+  REAL CSEVL, eta, R1MACH, sqrtx, theta, X, xm, z
+  INTEGER INITS
+  INTEGER, SAVE :: nbif, nbig, nbif2, nbig2, nbip, nbip2
+  REAL, SAVE :: x3sml, x32sml, xbig
   REAL, PARAMETER :: bifcs(9) = [ -.01673021647198664948E0, .1025233583424944561E0, &
     .00170830925073815165E0, .00001186254546774468E0, .00000004493290701779E0, &
     .00000000010698207143E0, .00000000000017480643E0, .00000000000000020810E0, &
