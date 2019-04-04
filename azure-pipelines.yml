@@ -7,9 +7,16 @@ pool:
 
 steps:
 - script: |
-    sudo apt -y install gfortran
+    sudo apt -y install gfortran-8
     mkdir build && cd build
     cmake ..
     make -j
     make test
-  displayName: 'gcc-5-Release'
+  displayName: 'gcc-8-Release'
+- script: |
+    sudo apt -y install gfortran-8
+    mkdir build && cd build
+    cmake .. -DCMAKE_BUILD_TYPE=Debug
+    make -j
+    make test
+  displayName: 'gcc-8-Debug'
