@@ -286,7 +286,7 @@ CONTAINS
     !   901010  Added PASS/FAIL message.  (RWC)
 
     REAL(8) :: D1MACH, DNRM2, rnorm, rnormc, sr
-    INTEGER i, ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
+    INTEGER ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
     REAL(8) :: w(11,11), x(30), rw(55), bl1(10), bu1(10)
     INTEGER ind(10), iw(20), iopt(40)

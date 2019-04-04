@@ -291,7 +291,7 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
     !   901013  Added PASS/FAIL message and cleaned up FORMATs.  (RWC)
 
-    INTEGER i, ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
+    INTEGER ib, Ipass, irhs, itest, j, Kprint, Lun, mcon, mdw, &
       mode, mpass, mrows, ncols
     REAL R1MACH, rnorm, rnormc, SNRM2, sr
     REAL w(11,11), x(30), rw(55), bl1(10), bu1(10)

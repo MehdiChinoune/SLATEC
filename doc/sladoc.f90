@@ -109,9 +109,8 @@ PROGRAM SLADOC
   !
   INTEGER, PARAMETER :: MXLFN = 32
   CHARACTER(MXLFN) :: temp
-  CHARACTER(MXLFN), PARAMETER :: FIN = '/dev/tty', FCAT = 'slacat', FDAF = 'sladaf', &
-    FKWD = 'slakwd', FTBL = 'slatbl', FLIS = 'slalis', FOUT = '/dev/tty', &
-    FERR ='/dev/tty'
+  CHARACTER(MXLFN), PARAMETER :: FCAT = 'slacat', FDAF = 'sladaf', FKWD = 'slakwd', &
+    FTBL = 'slatbl', FLIS = 'slalis'
   !
   !     Library dependent parameter definitions.
   !
@@ -135,7 +134,7 @@ PROGRAM SLADOC
   CHARACTER(MXLRN) :: rtname(MXNRN), rtnin
   CHARACTER(MXLRN) :: cname(MXNRN/2)
   !
-  INTEGER, PARAMETER :: LCAT = 6, LCATLS = 72, MLCAT = MXLCAT-LCAT, SEVEN = 7
+  INTEGER, PARAMETER :: LCAT = 6, MLCAT = MXLCAT-LCAT
   CHARACTER(MXLCAT) :: cat(MXNRN), kat
   CHARACTER(MXLKAT) :: kats
   !

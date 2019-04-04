@@ -27,7 +27,7 @@ SUBROUTINE BSPLVN(T,Jhigh,Index,X,Ileft,Vnikx)
   !   900328  Added TYPE section.  (WRB)
 
   REAL T(*), vm, vmprev, Vnikx(*), X
-  INTEGER i, Ileft, imjp1, Index, ipj, Jhigh, jp1, jp1ml, l
+  INTEGER Ileft, imjp1, Index, ipj, Jhigh, jp1, jp1ml, l
   INTEGER :: j = 1
   REAL :: deltam(20) = 0., deltap(20) = 0.
   !* FIRST EXECUTABLE STATEMENT  BSPLVN

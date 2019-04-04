@@ -315,7 +315,7 @@ CONTAINS
     !     .. Parameters ..
     INTEGER, PARAMETER :: NSUBS = 6
     REAL, PARAMETER :: ZERO = 0.0, ONE = 1.0
-    INTEGER, PARAMETER :: NMAX = 65, INCMAX = 2
+    INTEGER, PARAMETER :: NMAX = 65
     !     .. Scalar Arguments ..
     INTEGER Ipass, Kprint
     !     .. Local Scalars ..
@@ -3146,7 +3146,7 @@ CONTAINS
     !   910619  Modified to meet SLATEC code and prologue standards.  (BKS)
 
     !     .. Parameters ..
-    REAL, PARAMETER :: ZERO = 0.0, ONE = 1.0
+    REAL, PARAMETER :: ZERO = 0.0
     !     .. Scalar Arguments ..
     LOGICAL Fatal
     REAL Eps, Thresh

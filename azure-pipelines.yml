@@ -8,15 +8,20 @@ pool:
 steps:
 - script: |
     sudo apt -y install gfortran-8
+  displayName: 'Installing gfortran-8'
+  script: |
     mkdir build && cd build
     cmake .. -DCMAKE_Fortran_COMPILER=gfortran-8
     make -j
+  displayName: 'Build gfortran-8-Release'
+  script: |
     make test
-  displayName: 'gcc-8-Release'
+  displayName: 'Testing gfortran-8-Release'
 - script: |
-    sudo apt -y install gfortran-8
-    mkdir build && cd build
+    rm -r *
     cmake .. -DCMAKE_Fortran_COMPILER=gfortran-8 -DCMAKE_BUILD_TYPE=Debug
     make -j
+  displayName: 'Build gfortran-8-Debug'
+  script: |
     make test
-  displayName: 'gcc-8-Debug'
+  displayName: 'Testing gfortran-8-Debug'

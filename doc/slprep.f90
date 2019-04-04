@@ -120,7 +120,7 @@ PROGRAM SLPREP
   CHARACTER(MXLFN) :: finp, fclass, fcat, fdaf, fkwd, ftbl, flog
   CHARACTER(MXLFN), PARAMETER :: DFINP = 'slainp', DFCLAS = 'class', &
     DFCAT = 'slacat', DFDAF = 'sladaf', DFKWD = 'slakwd', DFTBL = 'slatbl', &
-    DFLOG = 'slalog', FOUT = '/dev/tty', FINPUT = '/dev/tty', FERR = '/dev/tty'
+    DFLOG = 'slalog', FOUT = '/dev/tty'
   !
   !     Library dependent parameter definitions.
   !

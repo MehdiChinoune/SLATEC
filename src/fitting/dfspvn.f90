@@ -29,7 +29,7 @@ SUBROUTINE DFSPVN(T,Jhigh,Index,X,Ileft,Vnikx)
   !   900328  Added TYPE section.  (WRB)
 
   REAL(8) :: T(*), vm, vmprev, Vnikx(*), X
-  INTEGER i, Ileft, imjp1, Index, ipj, Jhigh, jp1, jp1ml, l
+  INTEGER Ileft, imjp1, Index, ipj, Jhigh, jp1, jp1ml, l
   INTEGER :: j = 1
   REAL(8) :: deltam(20) = 0.0D0, deltap(20) = 0.0D0
   !* FIRST EXECUTABLE STATEMENT  DFSPVN
