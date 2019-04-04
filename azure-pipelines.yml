@@ -9,19 +9,19 @@ steps:
 - script: |
     sudo apt -y install gfortran-8
   displayName: 'Installing gfortran-8'
-  script: |
+- script: |
     mkdir build && cd build
     cmake .. -DCMAKE_Fortran_COMPILER=gfortran-8
     make -j
-  displayName: 'Build gfortran-8-Release'
-  script: |
+  displayName: 'Building gfortran-8-Release'
+- script: |
     make test
   displayName: 'Testing gfortran-8-Release'
 - script: |
     rm -r *
     cmake .. -DCMAKE_Fortran_COMPILER=gfortran-8 -DCMAKE_BUILD_TYPE=Debug
     make -j
-  displayName: 'Build gfortran-8-Debug'
-  script: |
+  displayName: 'Building gfortran-8-Debug'
+- script: |
     make test
   displayName: 'Testing gfortran-8-Debug'
