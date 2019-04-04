@@ -425,17 +425,13 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !     /SSWAP/ TO /DSWAP/, /E0/ TO /D0/,
   !     /REAL            / TO /DOUBLE PRECISION/.
   !++
-  INTEGER i, igopr, ioff, ip, iprint, itemp, iter, &
-    itmax, j, jbig, jcol, jdrop, jdrop1, jdrop2, jlarge, jmag, jp, lds
-  INTEGER lgopr, lp, Mdw, Minput, Mode, mrows, mval, Ncols, nsetb
-  REAL(8) :: W(Mdw,*), Bl(*), Bu(*)
-  REAL(8) :: X(*), Rw(*), Ww(*), Scl(*)
-  REAL(8) :: alpha, beta, bou, colabv, colblo
-  REAL(8) :: cl1, cl2, cl3, big
-  REAL(8) :: fac, Rnorm, sc, ss, t, tolind, wt
-  REAL(8) :: t1, t2, wbig, wlarge, wmag, xnew
-  REAL(8) :: DDOT, DNRM2
-  REAL(8) :: D1MACH, tolsze
+  INTEGER i, igopr, ioff, ip, iprint, itemp, iter, itmax, j, jbig, jcol, &
+    jdrop, jdrop1, jdrop2, jlarge, jmag, jp, lds, lgopr, lp, Mdw, Minput, Mode, &
+    mrows, mval, Ncols, nsetb
+  REAL(8) :: W(Mdw,*), Bl(*), Bu(*), X(*), Rw(*), Ww(*), Scl(*)
+  REAL(8) :: alpha, beta, bou, colabv, colblo, cl1, cl2, cl3, big, fac, Rnorm, &
+    sc, ss, t, tolind, wt, t1, t2, wbig, wlarge, wmag, xnew, tolsze
+  REAL(8) :: DDOT, DNRM2, D1MACH
   INTEGER Ibasis(*), Ibb(*), Ind(*), Iopt(*)
   LOGICAL found, constr
   CHARACTER(8) :: xern1, xern2
@@ -566,7 +562,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
       !
       !     Set the X(*) array to zero so all components are defined.
       !
-      CALL DCOPY(Ncols,[ZERO],0,X,1)
+      X(1:Ncols) = ZERO
       !
       !     The arrays IBASIS(*) and IBB(*) are initialized by the calling
       !     program and the column scaling is defined in the calling program.
@@ -781,7 +777,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !                                                 T
   !     Compute (negative) of gradient vector, W = E *(F-E*X).
   !
-  CALL DCOPY(Ncols,[ZERO],0,Ww,1)
+  Ww(1:Ncols) = ZERO
   DO j = nsetb + 1, Ncols
     jcol = ABS(Ibasis(j))
     Ww(j) = DDOT(mrows-nsetb,W(INEXT(nsetb),j),1,W(INEXT(nsetb),Ncols+1),1)&
@@ -848,14 +844,14 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     !
     IF ( jbig==0 ) THEN
       found = .FALSE.
-      IF ( iprint>0 ) CALL IVOUT(0,[i],'('' FOUND NO VARIABLE TO ENTER'')',-4)
+      IF ( iprint>0 ) CALL IVOUT(0,i,'('' FOUND NO VARIABLE TO ENTER'')',-4)
       GOTO 600
     ENDIF
     !
     !     See if the incoming column is sufficiently independent.  This
     !     test is made before an elimination is performed.
     !
-    IF ( iprint>0 ) CALL IVOUT(1,[jbig],'('' TRY TO BRING IN THIS COL.'')',-4)
+    IF ( iprint>0 ) CALL IVOUT(1,jbig,'('' TRY TO BRING IN THIS COL.'')',-4)
     !
     IF ( mval<=nsetb ) THEN
       cl1 = DNRM2(mval,W(1,jbig),1)
@@ -875,7 +871,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     !
     IF ( colblo<=tolind*colabv ) THEN
       Ww(jbig) = big
-      IF ( iprint>0 ) CALL IVOUT(0,[i],&
+      IF ( iprint>0 ) CALL IVOUT(0,i,&
         '('' VARIABLE IS DEPENDENT, NOT USED.'')',-4)
       CYCLE
     ENDIF
@@ -914,7 +910,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
     IF ( W(nsetb,nsetb)==ZERO ) THEN
       Ww(nsetb) = big
       nsetb = nsetb - 1
-      IF ( iprint>0 ) CALL IVOUT(0,[i],'('' PIVOT IS ZERO, NOT USED.'')',-4)
+      IF ( iprint>0 ) CALL IVOUT(0,i,'('' PIVOT IS ZERO, NOT USED.'')',-4)
       CYCLE
     ENDIF
     !
@@ -933,7 +929,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
         !
         Ww(nsetb) = big
         nsetb = nsetb - 1
-        IF ( iprint>0 ) CALL IVOUT(0,[i],&
+        IF ( iprint>0 ) CALL IVOUT(0,i,&
           '('' VARIABLE HAS BAD DIRECTION, NOT USED.'')',-4)
         CYCLE
       ENDIF
@@ -1162,7 +1158,7 @@ SUBROUTINE DBOLSM(W,Mdw,Minput,Ncols,Bl,Bu,Ind,Iopt,X,Rnorm,Mode,Rw,Ww,&
   !
   igopr = 2
   700  CALL DCOPY(nsetb,X,1,Rw,1)
-  CALL DCOPY(Ncols,[ZERO],0,X,1)
+  X(1:Ncols) = ZERO
   DO j = 1, nsetb
     jcol = ABS(Ibasis(j))
     X(jcol) = Rw(j)*ABS(Scl(jcol))

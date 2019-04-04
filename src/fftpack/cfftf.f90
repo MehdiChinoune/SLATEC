@@ -88,15 +88,15 @@ SUBROUTINE CFFTF(N,C,Wsave)
   !           because of non-standard Fortran 77 arguments in the
   !           call to CFFTB1.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER N
   REAL Wsave(*)
   COMPLEX C(*)
   REAL :: RC(2*N)
   INTEGER :: ifac(15), i
   !* FIRST EXECUTABLE STATEMENT  CFFTF
-  RC = [ ( [REAL(C(i)), AIMAG(C(i))], i=1,N ) ]
   IF ( N==1 ) RETURN
+  RC = [ ( [REAL(C(i)), AIMAG(C(i))], i=1,N ) ]
   ifac = INT( Wsave(4*N+1:4*N+15) )
   CALL CFFTF1(N,RC,Wsave,Wsave(2*N+1),ifac)
   C(1:N) = [ ( CMPLX(RC(i),RC(i+1)), i=1,2*N-1,2 ) ]

@@ -148,9 +148,9 @@ CONTAINS
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
     INTEGER i, jump, k, Kprint
-    REAL sa, sb, sc, Sfac, ss
-    REAL strue(9), stemp(9)
-    REAL(8) :: dc, ds, da, Dfac, db, dtemp(9)
+    REAL sa(1), sb(1), sc(1), Sfac, ss(1)
+    REAL strue(9), stemp(9), stmp(1)
+    REAL(8) :: dc(1), ds(1), da(10), Dfac, db(1), dtemp(9)
     REAL, PARAMETER :: zero = 0.
     REAL(8), PARAMETER :: dzero = 0.D0
     REAL(8), PARAMETER :: da1(8) = [ .3D0, .4D0, -.3D0, -.4D0, -.3D0, 0.D0, 0.D0, 1.D0 ]
@@ -219,10 +219,10 @@ CONTAINS
           da = da1(k)
           db = db1(k)
           CALL DROTG(da,db,dc,ds)
-          CALL DTEST(1,[da],[datrue(k)],datrue(k),Dfac,Kprint)
-          CALL DTEST(1,[db],[dbtrue(k)],dbtrue(k),Dfac,Kprint)
-          CALL DTEST(1,[dc],[dc1(k)],dc1(k),Dfac,Kprint)
-          CALL DTEST(1,[ds],[ds1(k)],ds1(k),Dfac,Kprint)
+          CALL DTEST(1,da,datrue(k),datrue(k),Dfac,Kprint)
+          CALL DTEST(1,db,dbtrue(k),dbtrue(k),Dfac,Kprint)
+          CALL DTEST(1,dc,dc1(k),dc1(k),Dfac,Kprint)
+          CALL DTEST(1,ds,ds1(k),ds1(k),Dfac,Kprint)
         CASE (3,4)
           GOTO 100
         CASE (5)
@@ -253,10 +253,14 @@ CONTAINS
           sa = REAL( da1(k), 4 )
           sb = REAL( db1(k), 4 )
           CALL SROTG(sa,sb,sc,ss)
-          CALL STEST(1,[sa],[REAL(datrue(k))],[REAL(datrue(k))],Sfac,Kprint)
-          CALL STEST(1,[sb],[REAL(dbtrue(k))],[REAL(dbtrue(k))],Sfac,Kprint)
-          CALL STEST(1,[sc],[REAL(dc1(k))],[REAL(dc1(k))],Sfac,Kprint)
-          CALL STEST(1,[ss],[REAL(ds1(k))],[REAL(ds1(k))],Sfac,Kprint)
+          stmp = REAL(datrue(k))
+          CALL STEST(1,sa,stmp,stmp,Sfac,Kprint)
+          stmp = REAL(dbtrue(k))
+          CALL STEST(1,sb,stmp,stmp,Sfac,Kprint)
+          stmp = REAL(dc1(k))
+          CALL STEST(1,sc,stmp,stmp,Sfac,Kprint)
+          stmp = REAL(ds1(k))
+          CALL STEST(1,ss,stmp,stmp,Sfac,Kprint)
       END SELECT
     ENDDO
     RETURN
@@ -299,14 +303,14 @@ CONTAINS
     !   890911  REVISION DATE from Version 3.2
     !   891214  Prologue converted to Version 4.0 format.  (BAB)
 
-    INTEGER i, ICAMAX, IDAMAX, ISAMAX, jump, len, np1, Kprint
-    REAL SASUM, SCASUM, SCNRM2, Sfac, SNRM2, stemp
-    REAL(8) :: dx(8), Dfac
+    INTEGER i, ICAMAX, IDAMAX, ISAMAX, jump, len, np1, Kprint, itmp(1)
+    REAL SASUM, SCASUM, SCNRM2, Sfac, SNRM2
+    REAL(8) :: dx(8), Dfac, dtmp(1)
     REAL(8) :: DNRM2, DASUM
-    REAL strue(8), sx(8)
+    REAL strue(8), sx(8), stmp(1), stmp2(1)
     COMPLEX cx(8)
     !
-    REAL, PARAMETER :: sa = .3D0
+    REAL, PARAMETER :: sa = .3
     REAL(8), PARAMETER :: da = .3D0
     COMPLEX, PARAMETER :: ca = (.4,-.7)
     REAL(8), PARAMETER :: dv(8,5,2) = RESHAPE( [ &
@@ -400,20 +404,25 @@ CONTAINS
         SELECT CASE (jump)
           CASE (2)
             ! 27. DNRM2
-            CALL DTEST(1,[DNRM2(N,dx,INCx)],dtrue1(np1),dtrue1(np1),Dfac,Kprint)
+            dtmp = DNRM2(N,dx,INCx)
+            CALL DTEST(1,dtmp,dtrue1(np1),dtrue1(np1),Dfac,Kprint)
           CASE (3)
             ! 28. SCNRM2
-            CALL STEST(1,[SCNRM2(N,cx,INCx)],strue2(np1),strue2(np1),Sfac,Kprint)
+            stmp = SCNRM2(N,cx,INCx)
+            CALL STEST(1,stmp,strue2(np1),strue2(np1),Sfac,Kprint)
           CASE (4)
             ! 29. SASUM
-            stemp = REAL( dtrue3(np1), 4 )
-            CALL STEST(1,[SASUM(N,sx,INCx)],[stemp],[stemp],Sfac,Kprint)
+            stmp = SASUM(N,sx,INCx)
+            stmp2 = REAL( dtrue3(np1), 4 )
+            CALL STEST(1,stmp,stmp2,stmp2,Sfac,Kprint)
           CASE (5)
             ! 30. DASUM
-            CALL DTEST(1,[DASUM(N,dx,INCx)],dtrue3(np1),dtrue3(np1),Dfac,Kprint)
+            dtmp = DASUM(N,dx,INCx)
+            CALL DTEST(1,dtmp,dtrue3(np1),dtrue3(np1),Dfac,Kprint)
           CASE (6)
             ! 31. SCASUM
-            CALL STEST(1,[SCASUM(N,cx,INCx)],strue4(np1),strue4(np1),Sfac,Kprint)
+            stmp = SCASUM(N,cx,INCx)
+            CALL STEST(1,stmp,strue4(np1),strue4(np1),Sfac,Kprint)
           CASE (7)
             ! 32. SSCALE
             CALL SSCAL(N,sa,sx,INCx)
@@ -435,17 +444,21 @@ CONTAINS
             CALL CTEST(len,cx,ctrue6(:,np1,INCx),ctrue6(:,np1,INCx),Sfac,Kprint)
           CASE (11)
             ! 36. ISAMAX
-            CALL ITEST(1,[ISAMAX(N,sx,INCx)],itrue2(np1),Kprint)
+            itmp = ISAMAX(N,sx,INCx)
+            CALL ITEST(1,itmp,itrue2(np1),Kprint)
           CASE (12)
             ! 37. IDAMAX
-            CALL ITEST(1,[IDAMAX(N,dx,INCx)],itrue2(np1),Kprint)
+            itmp = IDAMAX(N,dx,INCx)
+            CALL ITEST(1,itmp,itrue2(np1),Kprint)
           CASE (13)
             ! 38. ICAMAX
-            CALL ITEST(1,[ICAMAX(N,cx,INCx)],itrue3(np1),Kprint)
+            itmp = ICAMAX(N,cx,INCx)
+            CALL ITEST(1,itmp,itrue3(np1),Kprint)
           CASE DEFAULT
             ! 26. SNRM2
-            stemp = REAL( dtrue1(np1), 4 )
-            CALL STEST(1,[SNRM2(N,sx,INCx)],[stemp],[stemp],Sfac,Kprint)
+            stmp = SNRM2(N,sx,INCx)
+            stmp2 = REAL( dtrue1(np1), 4 )
+            CALL STEST(1,stmp,stmp2,stmp2,Sfac,Kprint)
         END SELECT
         !
       ENDDO
@@ -486,12 +499,11 @@ CONTAINS
 
     INTEGER i, j, ki, kn, kni, kpar, ksize, lenx, leny, mx, my, Kprint
     REAL Sdfac, SDOT, SDSDOT, Sfac
-    REAL sx(7), sy(7), stx(7), sty(7)
-    REAL ssize(7), qc(30), sparam(5)
-    REAL(8) :: dx(7), dy(7), dparam(5), dsize(7), dtx(7), dty(7)
+    REAL sx(7), sy(7), stx(7), sty(7), ssize(7), qc(30), sparam(5), stmp(1), stmp2(1)
+    REAL(8) :: dx(7), dy(7), dparam(5), dsize(7), dtx(7), dty(7), dtmp(1)
     REAL(8) :: DSDOT, DDOT, DQDOTI, DQDOTA, Dfac, Dqfac
     !
-    COMPLEX cx(7), cy(7)
+    COMPLEX cx(7), cy(7), ctmp(1), ctmp2(4)
     COMPLEX CDOTC, CDOTU
     REAL, PARAMETER :: sa = .3, sb = .1
     REAL(8), PARAMETER :: da = .3D0, db = .25D0
@@ -892,16 +904,17 @@ CONTAINS
         SELECT CASE (ICAse)
           CASE (2)
             ! 2. DSDOT
-            CALL STEST(1,[REAL(DSDOT(N,sx,INCx,sy,INCy))],[REAL(dt7(kn,ki))],&
-              ssize1(kn),Sfac,Kprint)
+            stmp = REAL(DSDOT(N,sx,INCx,sy,INCy))
+            stmp2 = REAL(dt7(kn,ki))
+            CALL STEST(1,stmp,stmp2,ssize1(kn),Sfac,Kprint)
           CASE (3)
             ! 3. SDSDOT
-            CALL STEST(1,[SDSDOT(N,sb,sx,INCx,sy,INCy)],st7b(kn,ki),ssize3(kn),&
-              Sfac,Kprint)
+            stmp = SDSDOT(N,sb,sx,INCx,sy,INCy)
+            CALL STEST(1,stmp,st7b(kn,ki),ssize3(kn),Sfac,Kprint)
           CASE (4)
             ! 4. DDOT
-            CALL DTEST(1,[DDOT(N,dx,INCx,dy,INCy)],dt7(kn,ki),dsize1(kn),Dfac,&
-              Kprint)
+            dtmp = DDOT(N,dx,INCx,dy,INCy)
+            CALL DTEST(1,dtmp,dt7(kn,ki),dsize1(kn),Dfac,Kprint)
           CASE (5)
             ! 5. DQDOTI
             !     DQDOTI AND DQDOTA ARE SUPPOSED TO USE EXTENDED
@@ -910,8 +923,8 @@ CONTAINS
             !     IN THE DIAGNOSTIC OUTPUT.
             !
             MODe = 1
-            CALL DTEST(1,[DQDOTI(N,db,qc,dx2,INCx,dy2,INCy)],dt2(kn,ki,1),&
-              dt2(kn,ki,1),Dqfac,Kprint)
+            dtmp = DQDOTI(N,db,qc,dx2,INCx,dy2,INCy)
+            CALL DTEST(1,dtmp,dt2(kn,ki,1),dt2(kn,ki,1),Dqfac,Kprint)
           CASE (6)
             ! 6. DQDOTA
             !     TO TEST DQDOTA WE ACTUALLY TEST BOTH DQDOTI AND DQDOTA.
@@ -922,17 +935,19 @@ CONTAINS
             !     DQDOTI OR DQDOTA IN THE DIAGNOSTIC OUTPUT.
             !
             MODe = 1
-            CALL DTEST(1,[DQDOTI(N,db,qc,dx2,INCx,dy2,INCy)],dt2(kn,ki,1),&
-              dt2(kn,ki,1),Dqfac,Kprint)
+            dtmp = DQDOTI(N,db,qc,dx2,INCx,dy2,INCy)
+            CALL DTEST(1,dtmp,dt2(kn,ki,1),dt2(kn,ki,1),Dqfac,Kprint)
             MODe = 2
-            CALL DTEST(1,[DQDOTA(N,-db,qc,dx2,INCx,dy2,INCy)],dt2(kn,ki,2),&
-              dt2(kn,ki,2),Dqfac,Kprint)
+            dtmp = DQDOTA(N,-db,qc,dx2,INCx,dy2,INCy)
+            CALL DTEST(1,dtmp,dt2(kn,ki,2),dt2(kn,ki,2),Dqfac,Kprint)
           CASE (7)
             ! 7. CDOTC
-            CALL CTEST(1,[CDOTC(N,cx,INCx,cy,INCy)],ct6(kn,ki),csize1(kn),Sfac,Kprint)
+            ctmp = CDOTC(N,cx,INCx,cy,INCy)
+            CALL CTEST(1,ctmp,ct6(kn,ki),csize1(kn),Sfac,Kprint)
           CASE (8)
             ! 8. CDOTU
-            CALL CTEST(1,[CDOTU(N,cx,INCx,cy,INCy)],ct7(kn,ki),csize1(kn),Sfac,Kprint)
+            ctmp = CDOTU(N,cx,INCx,cy,INCy)
+            CALL CTEST(1,ctmp,ct7(kn,ki),csize1(kn),Sfac,Kprint)
           CASE (9)
             ! 9. SAXPY
             CALL SAXPY(N,sa,sx,INCx,sy,INCy)
@@ -1045,7 +1060,8 @@ CONTAINS
           CASE (22)
             ! 22. CCOPY
             CALL CCOPY(N,cx,INCx,cy,INCy)
-            CALL CTEST(leny,cy,ct10y(:,kn,ki),CMPLX(ssize2(1:8:2,1),ssize2(2:8:2,1)),1.,Kprint)
+            ctmp2 = CMPLX(ssize2(1:8:2,1),ssize2(2:8:2,1))
+            CALL CTEST(leny,cy,ct10y(:,kn,ki),ctmp2,1.,Kprint)
           CASE (23)
             ! 23. SSWAP
             CALL SSWAP(N,sx,INCx,sy,INCy)
@@ -1063,12 +1079,14 @@ CONTAINS
           CASE (25)
             ! 25. CSWAP
             CALL CSWAP(N,cx,INCx,cy,INCy)
-            CALL CTEST(lenx,cx,ct10x(:,kn,ki),CMPLX(ssize2(1:8:2,1),ssize2(2:8:2,1)),1.,Kprint)
-            CALL CTEST(leny,cy,ct10y(:,kn,ki),CMPLX(ssize2(1:8:2,1),ssize2(2:8:2,1)),1.,Kprint)
+            ctmp2 = CMPLX(ssize2(1:8:2,1),ssize2(2:8:2,1))
+            CALL CTEST(lenx,cx,ct10x(:,kn,ki),ctmp2,1.,Kprint)
+            CALL CTEST(leny,cy,ct10y(:,kn,ki),ctmp2,1.,Kprint)
           CASE DEFAULT
             !                                                              1. SDOT
-            CALL STEST(1,[SDOT(N,sx,INCx,sy,INCy)],[REAL(dt7(kn,ki))],ssize1(kn),&
-              Sfac,Kprint)
+            stmp = SDOT(N,sx,INCx,sy,INCy)
+            stmp2 = REAL(dt7(kn,ki))
+            CALL STEST(1,stmp,stmp2,ssize1(kn),Sfac,Kprint)
         END SELECT
         !
         !

@@ -79,8 +79,8 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
 
   REAL(8) :: DDOT, D1MACH
   INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot(*), l, M, mk, N, Nrda
-  REAL(8) :: A(Nrda,*), acc, akk, anorm, as, asave, Diag(*), &
-    diagk, dum, Rows(*), Rs(*), rss, sad, Scales(*), sig, sigma, sruro, uro
+  REAL(8) :: A(Nrda,*), acc, akk, anorm, as, asave, Diag(*), diagk, dum(1), &
+    Rows(*), Rs(*), rss, sad, Scales(*), sig, sigma, sruro, uro
   !
   !     ******************************************************************
   !
@@ -112,7 +112,7 @@ SUBROUTINE DORTHR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
     !
     !        PERFORM COLUMN SCALING ON A WHEN SPECIFIED
     !
-    CALL DCSCAL(A,Nrda,N,M,Scales,[dum],Rows,Rs,anorm,Scales,Iscale,1)
+    CALL DCSCAL(A,Nrda,N,M,Scales,dum,Rows,Rs,anorm,Scales,Iscale,1)
     !
     anorm = SQRT(anorm)
     !

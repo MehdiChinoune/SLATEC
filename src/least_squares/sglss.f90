@@ -126,9 +126,9 @@ SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !   890831  REVISION DATE from Version 3.2
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Info, key, krank, ksure, Liw, Lw, M, Mda, Mdb, mode, N, Nb, np
-  REAL A(Mda,*), ae, B(Mdb,*), re, Rnorm(*), Work(*)
+  REAL A(Mda,*), ae(1), B(Mdb,*), re(1), Rnorm(*), Work(*)
   INTEGER Iwork(*)
   !
   !* FIRST EXECUTABLE STATEMENT  SGLSS
@@ -142,13 +142,13 @@ SUBROUTINE SGLSS(A,Mda,M,N,B,Mdb,Nb,Rnorm,Work,Lw,Iwork,Liw,Info)
   !     IF M.LT.N CALL ULSIA
   !
   IF ( M<N ) THEN
-    CALL ULSIA(A,Mda,M,N,B,Mdb,Nb,[re],[ae],key,mode,np,krank,ksure,Rnorm,Work,&
+    CALL ULSIA(A,Mda,M,N,B,Mdb,Nb,re,ae,key,mode,np,krank,ksure,Rnorm,Work,&
       Lw,Iwork,Liw,Info)
     IF ( Info==-1 ) RETURN
     Info = M - krank
     RETURN
   ENDIF
-  CALL LLSIA(A,Mda,M,N,B,Mdb,Nb,[re],[ae],key,mode,np,krank,ksure,Rnorm,Work,Lw,&
+  CALL LLSIA(A,Mda,M,N,B,Mdb,Nb,re,ae,key,mode,np,krank,ksure,Rnorm,Work,Lw,&
     Iwork,Liw,Info)
   IF ( Info==-1 ) RETURN
   Info = N - krank

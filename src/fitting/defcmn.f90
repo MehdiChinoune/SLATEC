@@ -40,7 +40,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   EXTERNAL :: DBNDAC, DBNDSL, DCOPY, DFSPVN, DSCAL, DSORT, XERMSG
   !
-  REAL(8) :: dummy, rnorm, xmax, xmin, xval
+  REAL(8) :: dummy(1), rnorm, xmax, xmin, xval
   INTEGER i, idata, ileft, intseq, ip, ir, irow, l, mt, n, nb, nordm1, nordp1, np1
   CHARACTER(8) :: xern1, xern2
   !
@@ -50,6 +50,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   n = Nbkpt - Nord
   np1 = n + 1
+  dummy = 0.D0
   !
   !     Initially set all output coefficients to zero.
   !
@@ -94,7 +95,7 @@ SUBROUTINE DEFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !     Sort the breakpoints.
   !
   CALL DCOPY(Nbkpt,Bkptin,1,Bkpt,1)
-  CALL DSORT(Bkpt,[dummy],Nbkpt,1)
+  CALL DSORT(Bkpt,dummy,Nbkpt,1)
   !
   !     Save interval containing knots.
   !

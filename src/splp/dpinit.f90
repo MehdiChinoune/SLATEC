@@ -36,19 +36,17 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
   !   891009  Removed unreferenced variable.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER i, Info, ip, iplace, j, Mrelas, n20007, n20019, n20028, &
     n20041, n20056, n20066, n20070, n20074, n20078, Nvars
-  REAL(8) :: aij, Amat(*), Anorm, Bl(*), Bu(*), cmax, Colnrm(*), &
-    Costs(*), Costsc, Csc(*), csum, one, Primal(*), &
-    Rhs(*), Rhsnrm, scalr, testsc, Xlamda, zero
+  REAL(8) :: aij, Amat(*), Anorm, Bl(*), Bu(*), cmax, Colnrm(*), Costs(*), &
+    Costsc, Csc(*), csum, Primal(*), Rhs(*), Rhsnrm, scalr, testsc, Xlamda
   REAL(8) :: DASUM
+  REAL(8), PARAMETER :: zero = 0.D0, one = 1.D0
   INTEGER Ibasis(*), Ibb(*), Imat(*), Ind(*)
   LOGICAL contin, usrbas, colscp, cstscp, minprb, Lopt(8)
   !
   !* FIRST EXECUTABLE STATEMENT  DPINIT
-  zero = 0.D0
-  one = 1.D0
   contin = Lopt(1)
   usrbas = Lopt(2)
   colscp = Lopt(5)
@@ -135,7 +133,7 @@ SUBROUTINE DPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
   !     PROCEDURE (INITIALIZE RHS(*),IBASIS(*), AND IBB(*))
   !
   !     INITIALLY SET RIGHT-HAND SIDE VECTOR TO ZERO.
-  CALL DCOPY(Mrelas,[zero],0,Rhs,1)
+  Rhs(1:Mrelas) = zero
   !
   !     TRANSLATE RHS ACCORDING TO CLASSIFICATION OF INDEPENDENT VARIABLES
   j = 1

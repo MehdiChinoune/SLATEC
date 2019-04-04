@@ -134,12 +134,10 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   !   920501  Reformatted the REFERENCES section.  (WRB)
   !   920527  Corrected erroneous statements in DESCRIPTION.  (WRB)
 
-  INTEGER N
-  INTEGER i, idegf, Ierr, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, &
+  INTEGER N, i, idegf, Ierr, j, jp1, jpas, k1, k1pj, k2, k2pj, k3, &
     k3pi, k4, k4pi, k5, k5pi, ksig, m, Maxdeg, mop1, Ndeg, nder, nfail
-  REAL(8) :: temd1, temd2
-  REAL(8) :: A(*), degf, den, Eps, etst, f, fcrit, R(*), sig, &
-    sigj, sigjm1, sigpas, temp, X(*), xm, Y(*), yp, W(*), w1, w11
+  REAL(8) :: temd1, temd2, A(*), degf, den, Eps, etst, f, fcrit, R(*), sig, &
+    sigj, sigjm1, sigpas, temp, X(*), xm, Y(*), yp(1), W(*), w1, w11
   REAL(8), PARAMETER :: co(4,3)= RESHAPE( [ &
     -13.086850D0, -2.4648165D0, -3.3846535D0, -1.2973162D0, &
     -3.3381146D0, -1.7812271D0, -3.2578406D0, -1.6589279D0, &
@@ -382,7 +380,7 @@ SUBROUTINE DPOLFT(N,X,Y,W,Maxdeg,Ndeg,Eps,R,Ierr,A)
   IF ( Eps<0.0.AND.Ndeg/=Maxdeg ) THEN
     nder = 0
     DO i = 1, m
-      CALL DP1VLU(Ndeg,nder,X(i),R(i),[yp],A)
+      CALL DP1VLU(Ndeg,nder,X(i),R(i),yp,A)
     ENDDO
   ENDIF
   Eps = SQRT(sig/xm)

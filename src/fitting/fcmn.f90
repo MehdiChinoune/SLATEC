@@ -39,7 +39,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   EXTERNAL :: BNDACC, BNDSOL, BSPLVD, BSPLVN, LSEI, SAXPY, SCOPY, &
     SSCAL, SSORT, XERMSG
   !
-  REAL dummy, prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, yval
+  REAL dummy(1), prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, yval
   INTEGER i, idata, ideriv, ileft, intrvl, intw1, ip, ir, irow, itype, iw1, iw2, &
     l, lw, mt, n, nb, neqcon, nincon, nordm1, nordp1, np1
   LOGICAL band, new, var
@@ -112,7 +112,7 @@ SUBROUTINE FCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !     Sort the breakpoints.
   !
   CALL SCOPY(Nbkpt,Bkptin,1,Bkpt,1)
-  CALL SSORT(Bkpt,[dummy],Nbkpt,1)
+  CALL SSORT(Bkpt,dummy,Nbkpt,1)
   !
   !     Initialize variables.
   !

@@ -616,7 +616,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
   EXTERNAL :: FCN
   INTEGER i, iflag, iter, j, l, modech
   REAL(8) :: actred, delta, dirder, epsmch, fnorm, fnorm1, gnorm, par, &
-    pnorm, prered, ratio, sum, temp, temp1, temp2, xnorm, err
+    pnorm, prered, ratio, sum, temp, temp1, temp2, xnorm, err(1)
   REAL(8) :: D1MACH, DENORM
   CHARACTER(8) :: xern1
   CHARACTER(16) :: xern3
@@ -700,7 +700,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         !            GET THE INCREMENTED X-VALUES INTO WA1(*).
         !
         modech = 1
-        CALL DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Wa1,Wa4,modech,[err])
+        CALL DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Wa1,Wa4,modech,err)
         !
         !            EVALUATE AT INCREMENTED VALUES, IF NOT ALREADY EVALUATED.
         !
@@ -714,8 +714,8 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
           IF ( iflag<0 ) GOTO 200
         ENDIF
         modech = 2
-        CALL DCKDER(1,N,X,Fvec(i),Wa3,1,Wa1,Wa4(i),modech,[err])
-        IF ( err<chklim ) THEN
+        CALL DCKDER(1,N,X,Fvec(i),Wa3,1,Wa1,Wa4(i),modech,err)
+        IF ( err(1)<chklim ) THEN
           WRITE (xern1,'(I8)') i
           WRITE (xern3,'(1PE15.6)') err
           CALL XERMSG('SLATEC','DNLS1','DERIVATIVE OF FUNCTION '//xern1//&
@@ -780,7 +780,7 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         !           GET THE INCREMENTED X-VALUES INTO WA1(*).
         !
         modech = 1
-        CALL DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Wa1,Wa4,modech,[err])
+        CALL DCKDER(M,N,X,Fvec,Fjac,Ldfjac,Wa1,Wa4,modech,err)
         !
         !           EVALUATE FUNCTION AT INCREMENTED VALUE AND PUT IN WA4(*).
         !
@@ -790,8 +790,8 @@ SUBROUTINE DNLS1(FCN,Iopt,M,N,X,Fvec,Fjac,Ldfjac,Ftol,Xtol,Gtol,Maxfev,&
         IF ( iflag<0 ) GOTO 200
         DO i = 1, M
           modech = 2
-          CALL DCKDER(1,N,X,Fvec(i),Fjac(i,1),Ldfjac,Wa1,Wa4(i),modech,[err])
-          IF ( err<chklim ) THEN
+          CALL DCKDER(1,N,X,Fvec(i),Fjac(i,1),Ldfjac,Wa1,Wa4(i),modech,err)
+          IF ( err(1)<chklim ) THEN
             WRITE (xern1,'(I8)') i
             WRITE (xern3,'(1PE15.6)') err
             CALL XERMSG('SLATEC','DNLS1','DERIVATIVE OF FUNCTION '//&

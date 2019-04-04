@@ -33,14 +33,14 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
   !   900510  Convert XERRWV calls to XERMSG calls.  (RWC)
-  
+
   INTEGER Lw, Mdein, Mdeout, Mdg, Mdw, Nbkpt, Ndata, Nord
   REAL Bf(Nord,*), Bkpt(*), Bkptin(*), Coeff(*), G(Mdg,*), Ptemp(*), &
     Sddata(*), W(Mdw,*), Xdata(*), Xtemp(*), Ydata(*)
   !
   EXTERNAL :: BNDACC, BNDSOL, BSPLVN, SCOPY, SSCAL, SSORT, XERMSG
   !
-  REAL dummy, rnorm, xmax, xmin, xval
+  REAL dummy(1), rnorm, xmax, xmin, xval
   INTEGER i, idata, ileft, intseq, ip, ir, irow, l, mt, n, nb, nordm1, nordp1, np1
   CHARACTER(8) :: xern1, xern2
   !
@@ -50,6 +50,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !
   n = Nbkpt - Nord
   np1 = n + 1
+  dummy = 0.
   !
   !     Initially set all output coefficients to zero.
   !
@@ -79,7 +80,8 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
     WRITE (xern1,'(I8)') nb
     WRITE (xern2,'(I8)') Lw
     CALL XERMSG('SLATEC','EFCMN',&
-      'IN EFC, INSUFFICIENT STORAGE FOR W(*).  CHECK FORMULA THAT READS LW.GE. ... .  NEED = '//xern1//' GIVEN = '//xern2,6,1)
+      'IN EFC, INSUFFICIENT STORAGE FOR W(*).  CHECK FORMULA THAT READS LW.GE. ... .  NEED = '&
+      //xern1//' GIVEN = '//xern2,6,1)
     Mdeout = -1
     RETURN
   ENDIF
@@ -92,7 +94,7 @@ SUBROUTINE EFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Mdein,Mdeout,&
   !     Sort the breakpoints.
   !
   CALL SCOPY(Nbkpt,Bkptin,1,Bkpt,1)
-  CALL SSORT(Bkpt,[dummy],Nbkpt,1)
+  CALL SSORT(Bkpt,dummy,Nbkpt,1)
   !
   !     Save interval containing knots.
   !

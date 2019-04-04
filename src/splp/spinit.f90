@@ -35,19 +35,17 @@ SUBROUTINE SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
   !   890605  Removed unreferenced labels.  (WRB)
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900328  Added TYPE section.  (WRB)
-  
+
   INTEGER i, Info, ip, iplace, j, Mrelas, n20007, n20019, n20028, &
     n20041, n20056, n20066, n20070, n20074, n20078, Nvars
   REAL SASUM
   REAL aij, Amat(*), Anorm, Bl(*), Bu(*), cmax, Colnrm(*), Costs(*), &
-    Costsc, Csc(*), csum, one, Primal(*), Rhs(*), Rhsnrm, scalr, &
-    testsc, Xlamda, zero
+    Costsc, Csc(*), csum, Primal(*), Rhs(*), Rhsnrm, scalr, testsc, Xlamda
+  REAL, PARAMETER :: zero = 0., one = 1.
   INTEGER Ibasis(*), Ibb(*), Imat(*), Ind(*)
   LOGICAL contin, usrbas, colscp, cstscp, minprb, Lopt(8)
   !
   !* FIRST EXECUTABLE STATEMENT  SPINIT
-  zero = 0.
-  one = 1.
   contin = Lopt(1)
   usrbas = Lopt(2)
   colscp = Lopt(5)
@@ -134,7 +132,7 @@ SUBROUTINE SPINIT(Mrelas,Nvars,Costs,Bl,Bu,Ind,Primal,Info,Amat,Csc,&
   !     PROCEDURE (INITIALIZE RHS(*),IBASIS(*), AND IBB(*))
   !
   !     INITIALLY SET RIGHT-HAND SIDE VECTOR TO ZERO.
-  CALL SCOPY(Mrelas,[zero],0,Rhs,1)
+  Rhs(1:Mrelas) = zero
   !
   !     TRANSLATE RHS ACCORDING TO CLASSIFICATION OF INDEPENDENT VARIABLES
   j = 1

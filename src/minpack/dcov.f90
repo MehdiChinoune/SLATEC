@@ -162,7 +162,7 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
   !     REVISED 850601-1100
   !     REVISED YYMMDD HHMM
   !
-  INTEGER i, idum, iflag, Info, Iopt, j, k, kp1, Ldr, M, N, nm1, nrow
+  INTEGER i, idum(1), iflag, Info, Iopt, j, k, kp1, Ldr, M, N, nm1, nrow
   REAL(8) :: X(*), R(Ldr,*), Fvec(*), Wa1(*), Wa2(*), Wa3(*), Wa4(*)
   EXTERNAL :: FCN
   REAL(8) :: sigma, temp, DENORM
@@ -218,7 +218,7 @@ SUBROUTINE DCOV(FCN,Iopt,M,N,X,Fvec,R,Ldr,Info,Wa1,Wa2,Wa3,Wa4)
         IF ( iflag<0 ) GOTO 100
         !
         !     COMPUTE THE QR DECOMPOSITION
-        CALL DQRFAC(M,N,R,Ldr,.FALSE.,[idum],1,Wa1,Wa1,Wa1)
+        CALL DQRFAC(M,N,R,Ldr,.FALSE.,idum,1,Wa1,Wa1,Wa1)
         DO i = 1, N
           R(i,i) = Wa1(i)
         ENDDO

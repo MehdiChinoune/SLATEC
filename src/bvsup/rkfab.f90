@@ -89,13 +89,13 @@ SUBROUTINE RKFAB(Ncomp,Xpts,Nxpts,Nfc,Iflag,Z,Mxnon,P,Ntp,Ip,Yhp,Niv,U,V,&
     150    IF ( INTeg==2 ) THEN
     !     DEABM INTEGRATOR
     !
-    CALL DEABM(BVDER,NEQ,X,Yhp,xxop,INFo,[RE],[AE],idid,Work,KKKint,Iwork,&
-      LLLint,G,[ipar])
+    CALL DEABM(BVDER,NEQ,X,Yhp,xxop,INFo,RE,AE,idid,Work,KKKint,Iwork,&
+      LLLint,G,ipar)
   ELSE
     !     DERKF INTEGRATOR
     !
-    CALL DERKF(BVDER,NEQ,X,Yhp,xxop,INFo,[RE],[AE],idid,Work,KKKint,Iwork,&
-      LLLint,G,[ipar])
+    CALL DERKF(BVDER,NEQ,X,Yhp,xxop,INFo,RE,AE,idid,Work,KKKint,Iwork,&
+      LLLint,G,ipar)
   ENDIF
   IF ( idid>=1 ) THEN
     !

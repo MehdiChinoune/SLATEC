@@ -80,10 +80,10 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   !   900402  Added TYPE section.  (WRB)
   !   910408  Updated the AUTHOR and REFERENCES sections.  (WRB)
   !   920501  Reformatted the REFERENCES section.  (WRB)
-  
+
   INTEGER Iflag, Irank, Iscale, j, jcol, k, kp, Kpivot(*), l, M, mk, N, Nrda
   REAL A(Nrda,*), acc, akk, anorm, as, asave, Cols(*), Cs(*), css, Diag(*), diagk, &
-    dum, R1MACH, sad, sc, Scales(*), SDOT, sig, sigma, sruro, uro
+    dum(1), R1MACH, sad, sc, Scales(*), SDOT, sig, sigma, sruro, uro
   !
   !- *********************************************************************
   !
@@ -92,6 +92,7 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
   !
   !* FIRST EXECUTABLE STATEMENT  ORTHOL
   uro = R1MACH(3)
+  dum = 0.
   !
   !- *********************************************************************
   !
@@ -115,7 +116,7 @@ SUBROUTINE ORTHOL(A,M,N,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Cols,Cs)
     !
     !     PERFORM COLUMN SCALING ON A WHEN SPECIFIED
     !
-    CALL CSCALE(A,Nrda,M,N,Cols,Cs,[dum],[dum],anorm,Scales,Iscale,0)
+    CALL CSCALE(A,Nrda,M,N,Cols,Cs,dum,dum,anorm,Scales,Iscale,0)
     !
     anorm = SQRT(anorm)
     !

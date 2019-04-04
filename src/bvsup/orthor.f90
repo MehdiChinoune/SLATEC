@@ -82,7 +82,7 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
   !   920501  Reformatted the REFERENCES section.  (WRB)
 
   INTEGER Iflag, Irank, Iscale, j, jrow, k, kp, Kpivot(*), l, M, mk, N, Nrda
-  REAL A(Nrda,*), acc, akk, anorm, as, asave, Diag(*), diagk, dum, R1MACH, &
+  REAL A(Nrda,*), acc, akk, anorm, as, asave, Diag(*), diagk, dum(1), R1MACH, &
     Rows(*), Rs(*), rss, sad, Scales(*), SDOT, sig, sigma, sruro, uro
   !
   ! END OF ABSTRACT
@@ -117,7 +117,7 @@ SUBROUTINE ORTHOR(A,N,M,Nrda,Iflag,Irank,Iscale,Diag,Kpivot,Scales,Rows,Rs)
     !
     !     PERFORM COLUMN SCALING ON A WHEN SPECIFIED
     !
-    CALL CSCALE(A,Nrda,N,M,Scales,[dum],Rows,Rs,anorm,Scales,Iscale,1)
+    CALL CSCALE(A,Nrda,N,M,Scales,dum,Rows,Rs,anorm,Scales,Iscale,1)
     !
     anorm = SQRT(anorm)
     !

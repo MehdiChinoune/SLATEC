@@ -47,24 +47,20 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !   891214  Prologue converted to Version 4.0 format.  (BAB)
   !   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
   !   900328  Added TYPE section.  (WRB)
-  
-  REAL cnorm
-  INTEGER i, ibas, Ienter, ihi, il1, Ileave, ilow, Info, Iopt, &
-    ipage, iplace, IPLOC, iu1, j, Jstrt, k, key, Lbm, Lmx, lpg
-  INTEGER Mrelas, n20002, n20018, n20121, nerr, nnegrc, Npp, npr001, &
-    npr003, Nredc, Nvars
+
+  INTEGER i, ibas, Ienter, ihi, il1, Ileave, ilow, Info, Iopt, ipage, iplace, &
+    IPLOC, iu1, j, Jstrt, k, key, Lbm, Lmx, lpg, Mrelas, n20002, n20018, n20121, &
+    nerr, nnegrc, Npp, npr001, npr003, Nredc, Nvars
   INTEGER Ibasis(*), Imat(*), Ibrc(Lbm,2), Ipr(*), Iwr(*), Ind(*), Ibb(*)
-  REAL aij, alpha, Anorm, Costsc, Erdnrm, Dulnrm, Eps, gamma, Gg, &
-    gq, one, Rprnrm, rzj, scalr, Theta, two, Uu, wp, Xlamda, &
-    Rhsnrm, zero, Amat(*), Basmat(*), Csc(*), Wr(*), Rprim(*), &
-    Ww(*), Bu(*), Bl(*), Rhs(*), Erd(*), Erp(*), Rz(*), Rg(*), &
-    Costs(*), Primal(*), Duals(*), Colnrm(*), rcost, SASUM, SDOT
+  REAL :: aij, alpha, Anorm, Costsc, Erdnrm, Dulnrm, Eps, gamma, Gg, &
+    gq, Rprnrm, rzj, scalr, Theta, Uu, wp, Xlamda, Rhsnrm, cnorm
+  REAL :: Amat(*), Basmat(*), Csc(*), Wr(*), Rprim(*), Ww(*), Bu(*), Bl(*), &
+    Rhs(*), Erd(*), Erp(*), Rz(*), Rg(*), Costs(*), Primal(*), Duals(*), &
+    Colnrm(*), rcost, SASUM, SDOT
+  REAL, PARAMETER :: zero = 0.E0, one = 1.E0, two = 2.E0
   LOGICAL Singlr, Redbas, pagepl, trans, Zerolv, Stpedg
   !
   !* FIRST EXECUTABLE STATEMENT  SPLPMU
-  zero = 0.E0
-  one = 1.E0
-  two = 2.E0
   lpg = Lmx - (Nvars+4)
   !
   !     UPDATE THE PRIMAL SOLUTION WITH A MULTIPLE OF THE SEARCH
@@ -211,7 +207,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
     !     COMPUTE COL. ABS(ILEAVE) OF THE NEW INVERSE (TRANSPOSE) MATRIX
     !     HERE ABS(ILEAVE) POINTS TO THE EJECTED COLUMN.
     !     USE ERD(*) FOR TEMP. STORAGE.
-    CALL SCOPY(Mrelas,[zero],0,Erd,1)
+    Erd(1:Mrelas) = zero
     Erd(ABS(Ileave)) = one
     trans = .TRUE.
     CALL LA05BS(Basmat,Ibrc,Lbm,Mrelas,Ipr,Iwr,Wr,Gg,Erd,trans)
@@ -227,7 +223,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !     SEARCH DIRECTION WITH EACH NON-BASIC COLUMN.
   !     RECOMPUTE REDUCED COSTS.
   1100 pagepl = .TRUE.
-  CALL SCOPY(Nvars+Mrelas,[zero],0,Rz,1)
+  Rz(1:Nvars+Mrelas) = zero
   nnegrc = 0
   j = Jstrt
   1200 CONTINUE
@@ -311,7 +307,7 @@ SUBROUTINE SPLPMU(Mrelas,Nvars,Lmx,Lbm,Nredc,Info,Ienter,Ileave,Iopt,Npp,&
   !     IF MINIMUM REDUCED COST (DANTZIG) PRICING IS USED,
   !     CALCULATE THE NEW REDUCED COSTS.
   GOTO 1700
-  1300 CALL SCOPY(Nvars+Mrelas,[zero],0,Rz,1)
+  1300 Rz(1:Nvars+Mrelas) = zero
   nnegrc = 0
   j = Jstrt
   pagepl = .TRUE.

@@ -41,7 +41,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   EXTERNAL :: DAXPY, DBNDAC, DBNDSL, DCOPY, DFSPVD, DFSPVN, DLSEI, &
     DSCAL, DSORT, XERMSG
   !
-  REAL(8) :: dummy, prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, yval
+  REAL(8) :: dummy(1), prgopt(10), rnorm, rnorme, rnorml, xmax, xmin, xval, yval
   INTEGER i, idata, ideriv, ileft, intrvl, intw1, ip, ir, irow, &
     itype, iw1, iw2, l, lw, mt, n, nb, neqcon, nincon, nordm1, nordp1, np1
   LOGICAL band, new, var
@@ -114,7 +114,7 @@ SUBROUTINE DFCMN(Ndata,Xdata,Ydata,Sddata,Nord,Nbkpt,Bkptin,Nconst,Xconst,&
   !     Sort the breakpoints.
   !
   CALL DCOPY(Nbkpt,Bkptin,1,Bkpt,1)
-  CALL DSORT(Bkpt,[dummy],Nbkpt,1)
+  CALL DSORT(Bkpt,dummy,Nbkpt,1)
   !
   !     Initialize variables.
   !
